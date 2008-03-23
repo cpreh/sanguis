@@ -26,7 +26,7 @@ sanguis::client::running_state::running_state(my_context ctx)
   drawer(context<machine>().sys.renderer),
   input(boost::bind(&running_state::handle_player_action, this, _1)),
   input_connection(
-  	context<machine>().sys.input_system->register_callback(
+  	context<machine>().con_wrapper.register_callback(
 		boost::bind(&input_handler::input_callback, &input, _1))),
   cursor_id(1337)
 {

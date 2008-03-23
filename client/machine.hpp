@@ -5,6 +5,7 @@
 #include "../net/client.hpp"
 #include "../draw/resource_factory.hpp"
 #include "../tick_event.hpp"
+#include "console_wrapper.hpp"
 
 #include <sge/font/font_metrics.hpp>
 #include <sge/font/font_system.hpp>
@@ -15,6 +16,7 @@
 #include <sge/texture/default_creator.hpp>
 #include <sge/texture/no_fragmented_texture.hpp>
 #include <sge/texture/manager.hpp>
+#include <sge/console/console_gfx.hpp>
 
 #include <boost/statechart/state_machine.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
@@ -39,9 +41,11 @@ struct machine
 	sge::systems &sys;
 	sge::font &font;
 	sge::key_state_tracker &ks;
+	sge::con::console_gfx &con;
+	console_wrapper con_wrapper;
 	draw::resource::connection resource;
 
-	machine(sge::systems &,sge::font &,sge::key_state_tracker &,const net::address_type &,const net::port_type);
+	machine(sge::systems &,sge::font &,sge::key_state_tracker &,sge::con::console_gfx &,const net::address_type &,const net::port_type);
 
 	void connect();
 	void push_back(messages::base *const);
