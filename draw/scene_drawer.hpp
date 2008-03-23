@@ -43,6 +43,7 @@ private:
 	void process_default_msg(const messages::base&);
 
 	sge::sprite_system ss;
+	player*            player_;
 
 	typedef boost::ptr_map<entity_id, entity> entity_map;
 	entity_map entities;

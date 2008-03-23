@@ -25,7 +25,8 @@
 #include <typeinfo>
 
 sanguis::draw::scene_drawer::scene_drawer(const sge::renderer_ptr rend)
-: ss(rend)
+: ss(rend),
+  player_(0)
 {}
 
 void sanguis::draw::scene_drawer::process_message(const messages::base& m)
@@ -58,22 +59,29 @@ void sanguis::draw::scene_drawer::draw(const tick_data &t)
 		std::copy(s.begin(), s.end(), std::back_inserter(sprites));
 	}
 
-	//if(!sprites.empty() && diff_time != 0)
-	//	sge::cout << "client (" << diff_time << ": " << sprites.front().pos() << '\n';
-
 	ss.render(sprites.begin(), sprites.end());
 }
 
 sanguis::draw::player const &
 sanguis::draw::scene_drawer::get_player() const
 {
-	return dynamic_cast<const player&>(get_entity(0));
+	if(!player_)
+		throw sge::exception(SGE_TEXT("scene_drawer::get_player(): no player available!"));
+	return *player_;
 }
 
 void sanguis::draw::scene_drawer::operator()(const messages::add& m)
 {
 	if(entities.insert(m.id(), factory::create_entity(m)).second == false)
 		throw sge::exception(SGE_TEXT("Object with id already in entity list!"));
+	if(m.type() == entity_type::player)
+	{
+		if(player_)
+			throw sge::exception(SGE_TEXT("Player already exists in scene_drawer!"));
+		const entity_map::iterator it(entities.find(m.id()));
+		// TODO: maybe take the address of the auto_ptr directly?
+		player_ = dynamic_cast<player*>(it->second);
+	}
 }
 
 void sanguis::draw::scene_drawer::operator()(const messages::move& m)

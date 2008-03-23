@@ -16,6 +16,11 @@
 
 namespace sanguis
 {
+namespace draw
+{
+class player;
+}
+
 namespace client
 {
 
@@ -38,6 +43,8 @@ struct running_state
 private:
 	boost::statechart::result handle_default_msg(const messages::base&);
 	void handle_player_action(const player_action&);
+	void handle_direction(const draw::player&, const player_action&);
+	void handle_rotation(const draw::player&, const player_action&);
 
 	draw::scene_drawer     drawer;
 	sge::math::vector2     direction;

@@ -14,9 +14,8 @@
 #include <sge/exception.hpp>
 #include <sge/renderer/scoped_renderblock.hpp>
 #include <sge/math/clamp.hpp>
-#include <sge/math/constants.hpp>
 #include <sge/math/vector.hpp>
-#include <sge/math/compare.hpp>
+#include <sge/math/angle.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
 #include <typeinfo>
@@ -101,57 +100,12 @@ sanguis::client::running_state::handle_default_msg(const messages::base& m)
 
 void sanguis::client::running_state::handle_player_action(const player_action& m)
 {
-	const sge::sprite::point last_cursor_pos(cursor_pos);
-	const sge::math::vector2 last_direction(direction);
 	// TODO: accumulate events!
-	switch(m.type()) {
-	case player_action::horizontal_move:
-		direction.x() += m.scale();
-		break;
-	case player_action::vertical_move:
-		direction.y() += m.scale();
-		break;
-	case player_action::horizontal_look:
-		cursor_pos.x() += static_cast<sge::sprite_unit>(m.scale());
-		break;
-	case player_action::vertical_look:
-		cursor_pos.y() += static_cast<sge::sprite_unit>(m.scale());
-		break;
-	default:
-		break;
-	}
-
-	const sge::renderer_ptr rend = context<machine>().sys.renderer;
-	cursor_pos.x() = sge::math::clamp(cursor_pos.x(), 0, static_cast<sge::sprite_unit>(rend->screen_width()));
-	cursor_pos.y() = sge::math::clamp(cursor_pos.y(), 0, static_cast<sge::sprite_unit>(rend->screen_height()));
-	
 	try
 	{
 		const draw::player& player(drawer.get_player());
-		if(last_direction != direction)
-		{
-	//		sge::clog << SGE_TEXT("client: sending direction ") << direction << SGE_TEXT('\n');
-			context<machine>().push_back(new messages::player_direction_event(player.id(),sge::math::structure_cast<messages::space_unit>(direction)));
-		}
-
-		if(last_cursor_pos == cursor_pos)
-			return;
-	
-		const sge::sprite_point d = player.center() - cursor_pos;
-		const sge::space_unit len = sge::math::structure_cast<sge::space_unit>(d).length();
-		if(sge::math::almost_zero(len))
-			return;
-		const sge::space_unit rad = std::asin(static_cast<sge::space_unit>(d.x()) / len);
-		const sge::space_unit rotation(d.y() >= 0 ? rad : -rad + sge::math::pi<sge::space_unit>());
-
-	//	sge::clog << SGE_TEXT("client: sending rotation ") << rotation << SGE_TEXT('\n');
-		context<machine>().push_back(new messages::player_rotation_event(player.id(), static_cast<messages::space_unit>(rotation)));
-
-		drawer.process_message(
-			messages::move(
-				cursor_id,
-				// FIXME: structure_truncation_cast
-				cursor_pos));
+		handle_direction(player, m);
+		handle_rotation(player, m);
 	}
 	catch(const sge::exception& e)
 	{
@@ -159,4 +113,63 @@ void sanguis::client::running_state::handle_player_action(const player_action& m
 		          << e.what()
 			  << SGE_TEXT("\"!\n");
 	}
+}
+
+void sanguis::client::running_state::handle_direction(
+	const draw::player& player,
+	const player_action& m)
+{
+	const sge::math::vector2 last_direction(direction);
+	
+	switch(m.type()) {
+	case player_action::horizontal_move:
+		direction.x() += m.scale();
+		break;
+	case player_action::vertical_move:
+		direction.y() += m.scale();
+		break;
+	default:
+		return;
+	}
+
+	if(last_direction != direction)
+		context<machine>().push_back(new messages::player_direction_event(player.id(),sge::math::structure_cast<messages::space_unit>(direction)));
+}
+
+void sanguis::client::running_state::handle_rotation(
+	const draw::player& player,
+	const player_action& m)
+{
+	const sge::sprite::point last_cursor_pos(cursor_pos);
+
+	switch(m.type()) {
+	case player_action::horizontal_look:
+		cursor_pos.x() += static_cast<sge::sprite_unit>(m.scale());
+		break;
+	case player_action::vertical_look:
+		cursor_pos.y() += static_cast<sge::sprite_unit>(m.scale());
+		break;
+	default:
+		return;
+	}
+
+	const sge::renderer_ptr rend = context<machine>().sys.renderer;
+	cursor_pos.x() = sge::math::clamp(cursor_pos.x(), 0, static_cast<sge::sprite_unit>(rend->screen_width()));
+	cursor_pos.y() = sge::math::clamp(cursor_pos.y(), 0, static_cast<sge::sprite_unit>(rend->screen_height()));
+	
+	if(last_cursor_pos == cursor_pos)
+		return;
+		
+	const boost::optional<sge::space_unit> rotation(sge::math::angle_to<sge::space_unit>(player.center(), cursor_pos));
+	if(!rotation)
+		return;
+
+	context<machine>().push_back(new messages::player_rotation_event(player.id(), static_cast<messages::space_unit>(*rotation)));
+
+	drawer.process_message(
+		messages::move(
+			cursor_id,
+			// FIXME: structure_truncation_cast
+			cursor_pos));
+
 }
