@@ -7,7 +7,6 @@
 #include "../messages/connect.hpp"
 #include "../messages/client_info.hpp"
 #include "../messages/types.hpp"
-#include <sge/renderer/scoped_renderblock.hpp>
 #include <sge/string.hpp>
 #include <sge/iostream.hpp>
 #include <sge/ostream.hpp>
@@ -66,8 +65,6 @@ boost::statechart::result sanguis::client::connecting_state::react(const tick_ev
 
 	machine &m = context<machine>();
 	m.sys.input_system->dispatch();
-
-	const sge::scoped_renderblock block_(m.sys.renderer);
 
 	const sge::string status = connected ? SGE_TEXT("waiting for gamestate") : SGE_TEXT("connecting");
 	
