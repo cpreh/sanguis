@@ -13,7 +13,6 @@
 #include <sge/iostream.hpp>
 #include <sge/string.hpp>
 #include <sge/exception.hpp>
-#include <sge/renderer/scoped_renderblock.hpp>
 #include <sge/math/clamp.hpp>
 #include <sge/math/vector.hpp>
 #include <sge/math/angle.hpp>
@@ -47,7 +46,6 @@ boost::statechart::result sanguis::client::running_state::react(const tick_event
 	sge::window::dispatch();
 	machine &m = context<machine>();
 	m.sys.input_system->dispatch();
-	const sge::scoped_renderblock block_(m.sys.renderer);
 	
 	// show text in the screen center (hopefully)
 	m.font.draw_text(SGE_TEXT("running"),
