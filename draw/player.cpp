@@ -17,14 +17,13 @@ sanguis::draw::player::player(
 {
 	sge::sprite skel_sprite(
 		sge::sprite(pos,
-		sge::virtual_texture_ptr(),
+		resource::texture(SGE_TEXT("player_up")),
 		sz,
 		sge::colors::white,
 		1,
 		angle));
 	add_sprite(skel_sprite);
 
-	skel_sprite.set_texture(resource::texture(SGE_TEXT("player_up")));
 	skel_sprite.z() = static_cast<sge::space_unit>(0);
 	add_sprite(skel_sprite);
 }
