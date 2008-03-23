@@ -1,0 +1,38 @@
+#ifndef DRAW_ENTITY_HPP_INCLUDED
+#define DRAW_ENTITY_HPP_INCLUDED
+
+#include <vector>
+#include <sge/sprite/sprite.hpp>
+#include <sge/math/vector.hpp>
+#include <sge/time.hpp>
+#include "../entity_id.hpp"
+
+namespace sanguis
+{
+namespace draw
+{
+
+class entity {
+public:
+	typedef std::vector<sge::sprite> sprite_vector;
+	typedef sge::space_unit time_type;
+
+	explicit entity(entity_id id);
+	virtual void update(time_type) = 0;
+	virtual sprite_vector to_sprites() const = 0;
+	entity_id id() const;
+	virtual void orientation(sge::space_unit) = 0;
+	virtual void speed(const sge::math::vector2&) = 0;
+	virtual void pos(const sge::sprite::point&) = 0;
+	virtual void dim(const sge::sprite::dim&) = 0;
+protected:
+	virtual const sge::math::vector2& speed() const = 0;
+	virtual sge::space_unit orientation() const = 0;
+private:
+	entity_id        id_;
+};
+
+}
+}
+
+#endif
