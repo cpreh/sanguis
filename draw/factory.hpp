@@ -15,7 +15,7 @@ namespace factory
 {
 
 typedef std::auto_ptr<entity> entity_ptr;
-entity_ptr create_entity(const messages::add&);
+entity_ptr create_entity(const messages::add&,const sge::screen_size_t &);
 
 }
 }

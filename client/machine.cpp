@@ -5,6 +5,7 @@
 #include "../open_bytes.hpp"
 #include "message_event.hpp"
 #include <sge/renderer/scoped_renderblock.hpp>
+#include <sge/renderer/scoped_state.hpp>
 #include <boost/spirit/phoenix.hpp>
 #include <boost/bind.hpp>
 #include <boost/lambda/bind.hpp>
@@ -60,6 +61,7 @@ bool sanguis::client::machine::process(const tick_event &t)
 
 	net_.process();
 
+	sys.renderer->set_state((sge::bool_state::clear_backbuffer=true));
 	process_event(t);
 
 	if (con.active())

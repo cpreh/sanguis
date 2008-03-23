@@ -2,6 +2,7 @@
 #include "player_action.hpp"
 #include "intermediate_state.hpp"
 #include "../dispatch_type.hpp"
+#include "../truncation_check_structure_cast.hpp"
 #include "../messages/add.hpp"
 #include "../messages/disconnect.hpp"
 #include "../messages/game_state.hpp"
@@ -36,8 +37,7 @@ sanguis::client::running_state::running_state(my_context ctx)
 		messages::add(
 			cursor_id,
 			entity_type::cursor,
-			// FIXME: truncation_structure_cast
-			cursor_pos,
+			truncation_check_structure_cast<messages::vector2>(cursor_pos),
 			static_cast<messages::space_unit>(0),
 			messages::vector2(static_cast<messages::space_unit>(0),static_cast<messages::space_unit>(0))));
 }
@@ -174,7 +174,6 @@ void sanguis::client::running_state::handle_rotation(
 	drawer.process_message(
 		messages::move(
 			cursor_id,
-			// FIXME: structure_truncation_cast
-			cursor_pos));
+			truncation_check_structure_cast<messages::vector2>(cursor_pos)));
 
 }

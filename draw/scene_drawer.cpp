@@ -1,6 +1,7 @@
 #include "scene_drawer.hpp"
 #include "factory.hpp"
 #include "player.hpp"
+#include "virtual_to_screen.hpp"
 #include "../dispatch_type.hpp"
 #include "../messages/base.hpp"
 #include "../messages/add.hpp"
@@ -72,7 +73,7 @@ sanguis::draw::scene_drawer::get_player() const
 
 void sanguis::draw::scene_drawer::operator()(const messages::add& m)
 {
-	if(entities.insert(m.id(), factory::create_entity(m)).second == false)
+	if(entities.insert(m.id(), factory::create_entity(m,ss.get_renderer()->screen_size())).second == false)
 		throw sge::exception(SGE_TEXT("Object with id already in entity list!"));
 	if(m.type() == entity_type::player)
 	{
@@ -86,7 +87,7 @@ void sanguis::draw::scene_drawer::operator()(const messages::add& m)
 
 void sanguis::draw::scene_drawer::operator()(const messages::move& m)
 {
-	get_entity(m.id()).pos(m.pos());
+	get_entity(m.id()).pos(virtual_to_screen(ss.get_renderer()->screen_size(),m.pos()));
 }
 
 void sanguis::draw::scene_drawer::operator()(const messages::player_state& m)

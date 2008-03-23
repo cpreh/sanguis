@@ -15,6 +15,7 @@
 #include "../game_state.hpp"
 #include "../dispatch_type.hpp"
 #include "../truncation_check_cast.hpp"
+#include "../truncation_check_structure_cast.hpp"
 #include "message_functor.hpp"
 
 #include <sge/iostream.hpp>
@@ -39,7 +40,7 @@ sanguis::server::running_state::running_state()
 
 sge::space_unit sanguis::server::running_state::set_message_freq(const sge::space_unit,const sge::space_unit newv)
 {
-	send_timer.interval(static_cast<sge::time_type>(newv*message_freq.value()));
+	send_timer.interval(static_cast<sge::time_type>(static_cast<sge::space_unit>(sge::second())*newv));
 	return newv;
 }
 
@@ -55,7 +56,7 @@ boost::statechart::result sanguis::server::running_state::react(const tick_event
 
 		if (update_pos)
 			context<machine>().push_back(
-				new messages::move(i->second.id,sge::math::structure_cast<boost::int32_t>(i->second.pos)));
+				new messages::move(i->second.id,sge::math::structure_cast<messages::space_unit>(i->second.pos)));
 	}
 
 	return discard_event();
@@ -79,8 +80,7 @@ void sanguis::server::running_state::create_game(const net::id_type id,const mes
 		new messages::add(player.id,
 			entity_type::player,
 			sge::math::structure_cast<messages::space_unit>(player.pos),
-			player.angle,m
-			essages::vector2()));
+			player.angle,messages::vector2()));
 	context<machine>().push_back(new messages::player_state(player.id,player_state(weapon_type::pistol,truncation_check_cast<boost::uint32_t>(0))));
 }
 

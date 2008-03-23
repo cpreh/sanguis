@@ -8,7 +8,7 @@ sanguis::client::console_wrapper::console_wrapper(sge::con::console_gfx &con,sge
 
 void sanguis::client::console_wrapper::input_callback(const sge::key_pair &k)
 {
-	if (k.key().code() == toggler)
+	if (k.key().code() == toggler && !sge::math::almost_zero(k.value()))
 	{
 		con.toggle();
 		return;
