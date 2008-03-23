@@ -36,7 +36,7 @@ boost::statechart::result sanguis::server::waiting_state::operator()(const net::
 
 boost::statechart::result sanguis::server::waiting_state::operator()(const net::id_type id,const messages::client_info &m)
 {
-	sge::clog << SGE_TEXT("server: received client info\n");
+	sge::clog << SGE_TEXT("server: received client info from id ") << id << SGE_TEXT("\n");
 	post_event(message_event(message_ptr(new messages::client_info(m)),id));
 	return transit<running_state>();
 }
@@ -49,6 +49,7 @@ boost::statechart::result sanguis::server::waiting_state::handle_default_msg(con
 
 boost::statechart::result sanguis::server::waiting_state::react(const message_event&m) 
 {
+	sge::clog << "server: react with " << m.id << "\n";
 	message_functor<waiting_state> mf(*this,m.id);
 	return dispatch_type<
 		boost::mpl::vector<

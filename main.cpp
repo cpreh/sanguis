@@ -112,8 +112,6 @@ try
 	bool running = true;
 	while (running)
 	{
-		sge::cout << "open_bytes: " << std::setw(6) << open_bytes << "\r";
-		
 		sanguis::tick_event t(sanguis::tick_data(frame_timer.reset()));
 
 		// get and send messages
