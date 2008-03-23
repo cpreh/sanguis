@@ -65,7 +65,7 @@ void sanguis::server::running_state::create_game(const messages::client_info &m)
 		new messages::add(player.id,entity_type::player,
 		// FIXME: truncation_structure_cast
 			sge::math::structure_cast<boost::int32_t>(player.pos),
-			sge::math::structure_cast<boost::int32_t>(player.dim),
+//			sge::math::structure_cast<boost::int32_t>(player.dim),
 			player.angle,messages::vector2()));
 	context<machine>().push_back(new messages::player_state(player.id,player_state(weapon_type::pistol,truncation_check_cast<boost::uint32_t>(0))));
 }

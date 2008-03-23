@@ -36,9 +36,8 @@ sanguis::client::running_state::running_state(my_context ctx)
 		messages::add(
 			cursor_id,
 			entity_type::cursor,
-			// FIXME: truncation_structure_cast (twice)
+			// FIXME: truncation_structure_cast
 			cursor_pos,
-			sge::sprite_texture_dim,
 			static_cast<messages::space_unit>(0),
 			messages::vector2(static_cast<messages::space_unit>(0),static_cast<messages::space_unit>(0))));
 }
@@ -136,6 +135,8 @@ void sanguis::client::running_state::handle_direction(
 		context<machine>().push_back(new messages::player_direction_event(player.id(),sge::math::structure_cast<messages::space_unit>(direction)));
 }
 
+#include <sge/math/constants.hpp>
+
 void sanguis::client::running_state::handle_rotation(
 	const draw::player& player,
 	const player_action& m)
@@ -164,7 +165,11 @@ void sanguis::client::running_state::handle_rotation(
 	if(!rotation)
 		return;
 
-	context<machine>().push_back(new messages::player_rotation_event(player.id(), static_cast<messages::space_unit>(*rotation)));
+	context<machine>().push_back(
+		new messages::player_rotation_event(
+			player.id(),
+			static_cast<messages::space_unit>(
+				*rotation + sge::math::pi<sge::space_unit>() / 2)));
 
 	drawer.process_message(
 		messages::move(

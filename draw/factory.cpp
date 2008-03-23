@@ -17,14 +17,14 @@ sanguis::draw::factory::create_entity(const messages::add& m)
 		return entity_ptr(new player(
 			m.id(),
 			m.pos(),
-			m.sz(),
+			sge::sprite_texture_dim,
 			m.angle(),
 			m.speed()));
 	case entity_type::cursor:
 		return entity_ptr(new sprite(
 			m.id(),
 			m.pos(),
-			m.sz(),
+			sge::sprite_texture_dim,
 			resource::texture(SGE_TEXT("cursor")),
 			m.angle(),
 			m.speed()));
