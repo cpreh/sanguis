@@ -5,6 +5,7 @@
 #include "client/start_state.hpp"
 #include "tick_event.hpp"
 #include "open_bytes.hpp"
+#include "media_path.hpp"
 
 // sge
 #include <sge/iostream.hpp>
@@ -16,6 +17,11 @@
 #include <sge/media.hpp>
 #include <sge/font/font_drawer_3d.hpp>
 #include <sge/font/font.hpp>
+#include <sge/texture/default_creator.hpp>
+#include <sge/texture/no_fragmented_texture.hpp>
+#include <sge/texture/default_creator_impl.hpp>
+#include <sge/texture/manager.hpp>
+#include <sge/texture/util.hpp>
 
 // boost
 #include <boost/program_options.hpp>
@@ -83,12 +89,21 @@ try
 	sge::font_metrics_ptr metrics = fs->create_font(sge::media_path() / SGE_TEXT("fonts/default.ttf"),15);
 	sge::font_drawer_ptr drawer(new sge::font_drawer_3d(sys.renderer));
 	sge::font font(metrics,drawer);
+	sge::texture_manager texman(sys.renderer,sge::default_texture_creator<sge::no_fragmented_texture>(sys.renderer,sge::linear_filter));
+	sge::font_ptr console_font(new sge::font(metrics,drawer));
+
+	sge::con::console_gfx console(sys.renderer,
+		sge::add_texture(texman,sys.image_loader->load_image(sanguis::media_path()/"console_back.jpg")),
+		console_font,
+		sys.input_system,
+		sge::sprite_point(0,0),
+		sge::sprite_dim(sys.renderer->screen_width(),static_cast<sge::sprite_unit>(sys.renderer->screen_height()/2)));
 	
 	sanguis::server::machine server(host_port);
 	server.initiate();
 	
 	// construct and initialize statemachine
-	sanguis::client::machine client(sys,font,ks,dest_server,dest_port);
+	sanguis::client::machine client(sys,font,ks,console,dest_server,dest_port);
 	// this should construct, among others, the renderer
 	client.initiate();
 

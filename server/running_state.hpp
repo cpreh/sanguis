@@ -21,6 +21,8 @@
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/function.hpp>
 
+#include <map>
+
 namespace sanguis
 {
 namespace server
@@ -38,15 +40,16 @@ struct running_state
 	{
 		sanguis::entity_id id;
 		sge::math::vector2 pos,speed;
-		sge::math::dim2 dim;
 		sge::space_unit angle;
 		sge::string name;
 	};
 
-	//::sanguis::entity_id id_counter;
-	player_type player;
-	sge::timer send_timer;
+	typedef std::map<net::id_type,player_type> player_map;
+
 	sge::con::var<sge::space_unit> player_speed;
+	player_map players;
+	sge::timer send_timer;
+	sge::con::action_var<sge::space_unit>::type message_freq;
 
 	running_state();
 	
@@ -62,7 +65,8 @@ struct running_state
 	boost::statechart::result operator()(const net::id_type,const messages::player_rotation_event &);
 
 	// game functions
-	void create_game(const messages::client_info &);
+	void create_game(const net::id_type,const messages::client_info &);
+	sge::space_unit set_message_freq(const sge::space_unit,const sge::space_unit);
 };
 
 }

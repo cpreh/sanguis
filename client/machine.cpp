@@ -4,18 +4,20 @@
 #include "../serialization.hpp"
 #include "../open_bytes.hpp"
 #include "message_event.hpp"
+#include <sge/renderer/scoped_renderblock.hpp>
 #include <boost/spirit/phoenix.hpp>
 #include <boost/bind.hpp>
 #include <boost/lambda/bind.hpp>
 #include <boost/lambda/construct.hpp>
 
-sanguis::client::machine::machine(sge::systems &sys,sge::font &font,sge::key_state_tracker &ks,const net::address_type &address_,const net::port_type port_) 
+sanguis::client::machine::machine(sge::systems &sys,sge::font &font,sge::key_state_tracker &ks,sge::con::console_gfx &con,
+	const net::address_type &address_,const net::port_type port_) 
 	: address_(address_),port_(port_),
 	  s_conn(net_.register_connect(boost::bind(&machine::connect_callback,this))),
 	  s_disconn(
 			net_.register_disconnect(boost::bind(&machine::disconnect_callback,this,_1))),
 		s_data(net_.register_data(boost::bind(&machine::data_callback,this,_1))),
-		sys(sys),font(font),ks(ks),resource(sys.image_loader,sys.renderer) {}
+		sys(sys),font(font),ks(ks),con(con),con_wrapper(con,sys.input_system,sge::kc::key_tab),resource(sys.image_loader,sys.renderer) {}
 
 void sanguis::client::machine::connect()
 {
@@ -59,5 +61,12 @@ bool sanguis::client::machine::process(const tick_event &t)
 	net_.process();
 
 	process_event(t);
+
+	if (con.active())
+	{
+		sge::scoped_renderblock block(sys.renderer);
+		con.draw();
+	}
+
 	return !ks[sge::kc::key_escape];
 }

@@ -22,15 +22,15 @@ boost::statechart::result sanguis::server::waiting_state::react(const tick_event
 	return discard_event();
 }
 
-boost::statechart::result sanguis::server::waiting_state::operator()(const net::id_type,const messages::connect &)
+boost::statechart::result sanguis::server::waiting_state::operator()(const net::id_type id,const messages::connect &)
 {
-	sge::clog << SGE_TEXT("server: received client\n");
+	sge::clog << SGE_TEXT("server: received client with id ") << id << SGE_TEXT("\n");
 	return discard_event();
 }
 
-boost::statechart::result sanguis::server::waiting_state::operator()(const net::id_type,const messages::disconnect &)
+boost::statechart::result sanguis::server::waiting_state::operator()(const net::id_type id,const messages::disconnect &)
 {
-	sge::clog << SGE_TEXT("server: disconnected again\n");
+	sge::clog << SGE_TEXT("server: client ") << id << SGE_TEXT("disconnected again\n");
 	return discard_event();
 }
 

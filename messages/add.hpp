@@ -20,20 +20,20 @@ public:
 	add();
 	add(const entity_id id,
 	    const entity_type::type type_,
-	    const ivector2_32& pos,
-	    const idim2_32& sz,
+	    const pos_type& pos,
+	    const dim_type& sz,
 	    const space_unit angle,
 	    const vector2& speed);
 
 	entity_type::type type() const;
-	const ivector2_32& pos() const;
-	const idim2_32& sz() const;
+	const pos_type& pos() const;
+	const dim_type& sz() const;
 	space_unit angle() const;
 	const vector2& speed() const;
 private:
 	entity_type::type  type_;
-	ivector2_32        pos_;
-	idim2_32           sz_;
+	pos_type           pos_;
+	dim_type           sz_;
 	space_unit         angle_;
 	vector2            speed_;
 

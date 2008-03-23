@@ -16,11 +16,11 @@ class move : public base {
 public:
 	move() {}
 	move(const entity_id id,
-	     const ivector2_32& pos);
+	     const pos_type& pos);
 	
-	const ivector2_32& pos() const;
+	const pos_type& pos() const;
 private:
-	ivector2_32 pos_;
+	pos_type pos_;
 
 	friend class boost::serialization::access;
 	template<class Archive>

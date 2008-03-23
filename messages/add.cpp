@@ -10,8 +10,8 @@ sanguis::messages::add::add()
 sanguis::messages::add::add(
 	const entity_id id,
 	const entity_type::type type_,
-	const ivector2_32& pos_,
-	const idim2_32& sz_,
+	const pos_type& pos_,
+	const dim_type& sz_,
 	const space_unit angle_,
 	const vector2& speed_)
 : base(id),
@@ -27,12 +27,12 @@ sanguis::entity_type::type sanguis::messages::add::type() const
 	return type_;
 }
 
-const sanguis::messages::ivector2_32& sanguis::messages::add::pos() const
+const sanguis::messages::pos_type& sanguis::messages::add::pos() const
 {
 	return pos_;
 }
 
-const sanguis::messages::idim2_32& sanguis::messages::add::sz() const
+const sanguis::messages::dim_type& sanguis::messages::add::sz() const
 {
 	return sz_;
 }
