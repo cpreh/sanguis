@@ -67,8 +67,6 @@ void sanguis::server::running_state::create_game(const net::id_type id,const mes
 {
 	assert(!players.size());
 
-	sge::clog << SGE_TEXT("adding player ") << id << SGE_TEXT(" with name ") << messages::net_to_host(m.name) << SGE_TEXT("\n");
-
 	player_type &player = players[id];
 
 	player.id =     get_unique_id();
