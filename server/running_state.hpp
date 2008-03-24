@@ -6,6 +6,7 @@
 #include "../tick_event.hpp"
 #include "../entity_id.hpp"
 #include "../messages/fwd.hpp"
+#include "../messages/types.hpp"
 
 #include <sge/string.hpp>
 #include <sge/timer.hpp>
@@ -39,14 +40,14 @@ struct running_state
 	struct player_type
 	{
 		sanguis::entity_id id;
-		sge::math::vector2 pos,speed;
-		sge::space_unit angle;
-		sge::string name;
+		messages::pos_type pos,speed;
+		messages::space_unit angle;
+		messages::string name;
 	};
 
 	typedef std::map<net::id_type,player_type> player_map;
 
-	sge::con::var<sge::space_unit> player_speed;
+	sge::con::var<messages::space_unit> player_speed;
 	player_map players;
 	sge::timer send_timer;
 	sge::con::action_var<sge::space_unit>::type message_freq;

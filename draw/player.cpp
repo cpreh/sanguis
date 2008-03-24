@@ -31,8 +31,12 @@ sanguis::draw::player::player(
 void sanguis::draw::player::update(const time_type time)
 {
 	sprite::update(time);
-	if(/*!speed().is_null() && */!walk_animation.process())
+	if(!speed().is_null() && !walk_animation.process())
+	{
 		walk_animation.reset(bottom_sprite());
+		// TODO
+		//bottom_sprite().rotation(sge::math::angle_to(sge::math::vector2(),speed()));
+	}
 }
 
 sge::sprite& sanguis::draw::player::bottom_sprite()

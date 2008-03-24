@@ -1,3 +1,4 @@
 -replace message_functor by something prettier
 -create id_message and assign cursor a custom id
 -add background sprite
+-make player look into direction speed()
