@@ -121,6 +121,7 @@ boost::statechart::result sanguis::server::running_state::operator()(const net::
 
 boost::statechart::result sanguis::server::running_state::operator()(const net::id_type id,const messages::client_info&m) 
 {
+	/*
 	if (players.size())
 	{
 		sge::clog << SGE_TEXT("server: got superfluous client info from id ") << id << SGE_TEXT("\n");
@@ -128,6 +129,9 @@ boost::statechart::result sanguis::server::running_state::operator()(const net::
 	}
 	sge::clog << SGE_TEXT("server: received client info from ") << id << SGE_TEXT("\n");
 	create_game(id,m);
+	return discard_event();
+	*/
+	sge::clog << SGE_TEXT("server: got superfluous client info from id ") << id << SGE_TEXT("\n");
 	return discard_event();
 }
 
@@ -146,6 +150,12 @@ boost::statechart::result sanguis::server::running_state::handle_default_msg(con
 {
 	sge::clog << SGE_TEXT("server: received unexpected message ") << typeid(m).name() << SGE_TEXT(" from id ") << id << SGE_TEXT("\n");
 	return discard_event();
+}
+
+void sanguis::server::running_state::process_client_info(const message_event &m)
+{
+	sge::clog << SGE_TEXT("server: received client info from ") << m.id << SGE_TEXT("\n");
+	create_game(m.id,dynamic_cast<messages::client_info &>(*m.message));
 }
 
 boost::statechart::result sanguis::server::running_state::react(const message_event&m) 
