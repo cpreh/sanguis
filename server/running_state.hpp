@@ -64,6 +64,8 @@ struct running_state
 	boost::statechart::result operator()(const net::id_type,const messages::player_direction_event &);
 	boost::statechart::result operator()(const net::id_type,const messages::player_rotation_event &);
 
+	void process_client_info(const message_event &);
+
 	// game functions
 	void create_game(const net::id_type,const messages::client_info &);
 	sge::space_unit set_message_freq(const sge::space_unit,const sge::space_unit);

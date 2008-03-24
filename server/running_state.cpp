@@ -74,7 +74,7 @@ void sanguis::server::running_state::create_game(const net::id_type id,const mes
 	player.angle =  sge::su(0);
 
 	// send player entity, game state and player state
-	sge::clog << "server: sending game messages\n";
+	sge::clog << SGE_TEXT("server: sending game messages\n");
 	context<machine>().push_back(new messages::game_state(game_state(truncation_check_cast<boost::uint32_t>(0))));
 	context<machine>().push_back(
 		new messages::add(player.id,
@@ -88,7 +88,7 @@ boost::statechart::result sanguis::server::running_state::operator()(const net::
 {
 	if (players.find(id) == players.end())
 	{
-		sge::clog << "got rotation_event from spectator\n";
+		sge::clog << SGE_TEXT("server: got rotation_event from spectator ") << id << SGE_TEXT("\n");
 		return discard_event();
 	}
 
@@ -102,7 +102,7 @@ boost::statechart::result sanguis::server::running_state::operator()(const net::
 {
 	if (players.find(id) == players.end())
 	{
-		sge::clog << SGE_TEXT("got direction_event from spectator\n");
+		sge::clog << SGE_TEXT("server: got direction_event from spectator ") << id << SGE_TEXT("\n");
 		return discard_event();
 	}
 
@@ -119,12 +119,17 @@ boost::statechart::result sanguis::server::running_state::operator()(const net::
 
 boost::statechart::result sanguis::server::running_state::operator()(const net::id_type id,const messages::client_info&m) 
 {
+	/*
 	if (players.size())
 	{
-		sge::clog << SGE_TEXT("got superfluous client info from id ") << id << SGE_TEXT("\n");
+		sge::clog << SGE_TEXT("server: got superfluous client info from id ") << id << SGE_TEXT("\n");
 		return discard_event();
 	}
+	sge::clog << SGE_TEXT("server: received client info from ") << id << SGE_TEXT("\n");
 	create_game(id,m);
+	return discard_event();
+	*/
+	sge::clog << SGE_TEXT("server: got superfluous client info from id ") << id << SGE_TEXT("\n");
 	return discard_event();
 }
 
@@ -145,8 +150,15 @@ boost::statechart::result sanguis::server::running_state::handle_default_msg(con
 	return discard_event();
 }
 
+void sanguis::server::running_state::process_client_info(const message_event &m)
+{
+	sge::clog << SGE_TEXT("server: received client info from ") << m.id << SGE_TEXT("\n");
+	create_game(m.id,dynamic_cast<messages::client_info &>(*m.message));
+}
+
 boost::statechart::result sanguis::server::running_state::react(const message_event&m) 
 {
+	sge::clog << "server: react with " << m.id << "\n";
 	message_functor<running_state> mf(*this,m.id);
 	
 	sge::clog << SGE_TEXT("server: react to message event with id ") << m.id << SGE_TEXT("\n");

@@ -10,8 +10,8 @@ namespace sanguis
 {
 struct message_event : public boost::statechart::event<message_event> 
 {
-	net::id_type id;
 	message_ptr message;
+	net::id_type id;
 
 	message_event(const message_ptr message,const net::id_type id) 
 		: id(id), message(message)
