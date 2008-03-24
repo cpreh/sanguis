@@ -1,8 +1,10 @@
 #include "add.hpp"
-#include "../archive.hpp"
+#include "instantiate_serialize.hpp"
+#include "../sge_serialization.hpp"
 #include <boost/serialization/export.hpp>
+#include <boost/serialization/base_object.hpp>
 
-BOOST_CLASS_EXPORT(sanguis::messages::add)
+BOOST_CLASS_EXPORT_GUID(sanguis::messages::add, "add")
 
 sanguis::messages::add::add()
 {}
@@ -13,7 +15,7 @@ sanguis::messages::add::add(
 	const pos_type& pos_,
 	const space_unit angle_,
 	const vector2& speed_)
-: base(id),
+: entity_message(id),
   type_(type_),
   pos_(pos_),
   angle_(angle_),
@@ -39,3 +41,17 @@ const sanguis::messages::vector2& sanguis::messages::add::speed() const
 {
 	return speed_;
 }
+
+template<typename Archive>
+void sanguis::messages::add::serialize(
+	Archive &ar,
+	unsigned)
+{
+	ar & boost::serialization::base_object<entity_message>(*this)
+	   & type_
+	   & pos_
+	   & angle_
+	   & speed_;
+}
+
+SANGUIS_MESSAGES_INSTANTIATE_SERIALIZE(add)

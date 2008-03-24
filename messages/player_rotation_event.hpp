@@ -1,17 +1,16 @@
 #ifndef SANGUIS_MESSAGES_PLAYER_ROTATION_EVENT_INCLUDED
 #define SANGUIS_MESSAGES_PLAYER_ROTATION_EVENT_INCLUDED
 
-#include "../sge_serialization.hpp"
-#include "base.hpp"
+#include "entity_message.hpp"
 #include "types.hpp"
-#include <boost/serialization/base_object.hpp>
+#include <boost/serialization/access.hpp>
 
 namespace sanguis
 {
 namespace messages
 {
 
-class player_rotation_event : public base {
+class player_rotation_event : public entity_message {
 public:
 	player_rotation_event();
 	player_rotation_event(
@@ -23,12 +22,8 @@ private:
 	space_unit angle_;
 
 	friend class boost::serialization::access;
-	template<class Archive>
-	void serialize(Archive &ar, const unsigned)
-	{
-		ar & boost::serialization::base_object<base>(*this);
-		ar & angle_;
-	}
+	template<typename Archive>
+	void serialize(Archive &ar, unsigned);
 };
 
 }

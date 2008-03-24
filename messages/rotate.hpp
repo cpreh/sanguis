@@ -1,19 +1,18 @@
 #ifndef SANGUIS_MESSAGES_ROTATE_HPP_INCLUDED
 #define SANGUIS_MESSAGES_ROTATE_HPP_INCLUDED
 
-#include "base.hpp"
+#include "entity_message.hpp"
 #include "types.hpp"
-#include <sge/types.hpp>
-#include <boost/serialization/base_object.hpp>
+#include <boost/serialization/access.hpp>
 
 namespace sanguis
 {
 namespace messages
 {
 
-class rotate : public base {
+class rotate : public entity_message {
 public:
-	rotate() {}
+	rotate();
 	rotate(const entity_id id,
 	       const space_unit rot);
 	
@@ -22,12 +21,8 @@ private:
 	space_unit rot_;
 
 	friend class boost::serialization::access;
-	template<class Archive>
-	void serialize(Archive &ar, const unsigned)
-	{
-		ar & boost::serialization::base_object<base>(*this);
-		ar & rot_;
-	}
+	template<typename Archive>
+	void serialize(Archive &ar, unsigned);
 };
 
 }

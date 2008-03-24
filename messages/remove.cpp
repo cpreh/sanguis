@@ -1,9 +1,24 @@
 #include "remove.hpp"
-#include "../archive.hpp"
+#include "instantiate_serialize.hpp"
 #include <boost/serialization/export.hpp>
+#include <boost/serialization/base_object.hpp>
 
-BOOST_CLASS_EXPORT(sanguis::messages::remove)
+BOOST_CLASS_EXPORT_GUID(sanguis::messages::remove, "remove")
 
-sanguis::messages::remove::remove(const entity_id id)
-: base(id)
+sanguis::messages::remove::remove()
 {}
+
+sanguis::messages::remove::remove(
+	const entity_id id)
+: entity_message(id)
+{}
+
+template<typename Archive>
+void sanguis::messages::remove::serialize(
+	Archive &ar,
+	unsigned)
+{
+	ar & boost::serialization::base_object<base>(*this);
+}
+
+SANGUIS_MESSAGES_INSTANTIATE_SERIALIZE(remove)

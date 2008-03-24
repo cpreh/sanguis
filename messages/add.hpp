@@ -1,21 +1,17 @@
 #ifndef SANGUIS_MESSAGES_ADD_HPP_INCLUDED
 #define SANGUIS_MESSAGES_ADD_HPP_INCLUDED
 
-#include "../entity_type.hpp"
-#include "../sge_serialization.hpp"
-#include "base.hpp"
+#include "entity_message.hpp"
 #include "types.hpp"
-#include <sge/types.hpp>
-#include <sge/math/vector.hpp>
-#include <sge/sprite/sprite.hpp>
-#include <boost/serialization/base_object.hpp>
+#include "../entity_type.hpp"
+#include <boost/serialization/access.hpp>
 
 namespace sanguis
 {
 namespace messages
 {
 
-class add : public base {
+class add : public entity_message {
 public:
 	add();
 	add(const entity_id id,
@@ -35,12 +31,8 @@ private:
 	vector2            speed_;
 
 	friend class boost::serialization::access;
-	template<class Archive>
-	void serialize(Archive &ar, const unsigned)
-	{
-		ar & boost::serialization::base_object<base>(*this);
-		ar & type_ & pos_ & angle_ & speed_;
-	}
+	template<typename Archive>
+	void serialize(Archive &ar, unsigned);
 };
 
 }

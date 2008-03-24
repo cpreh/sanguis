@@ -1,16 +1,19 @@
-#include <boost/serialization/export.hpp>
 #include "base.hpp"
+#include "instantiate_serialize.hpp"
+#include <boost/serialization/export.hpp>
 
-BOOST_CLASS_EXPORT(sanguis::messages::base)
+BOOST_CLASS_EXPORT_GUID(sanguis::messages::base, "base")
 
-sanguis::messages::base::base(const entity_id id_)
-: id_(id_)
+sanguis::messages::base::base()
 {}
-
-sanguis::entity_id sanguis::messages::base::id() const
-{
-	return id_;
-}
 
 sanguis::messages::base::~base()
 {}
+
+template<typename Archive>
+void sanguis::messages::base::serialize(
+	Archive &,
+	unsigned)
+{}
+
+SANGUIS_MESSAGES_INSTANTIATE_SERIALIZE(base)

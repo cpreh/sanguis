@@ -1,17 +1,16 @@
 #ifndef SANGUIS_MESSAGES_PLAYER_DIRECTION_EVENT_INCLUDED
 #define SANGUIS_MESSAGES_PLAYER_DIRECTION_EVENT_INCLUDED
 
-#include "../sge_serialization.hpp"
-#include "base.hpp"
+#include "entity_message.hpp"
 #include "types.hpp"
-#include <boost/serialization/base_object.hpp>
+#include <boost/serialization/access.hpp>
 
 namespace sanguis
 {
 namespace messages
 {
 
-class player_direction_event : public base {
+class player_direction_event : public entity_message {
 public:
 	player_direction_event();
 	player_direction_event(
@@ -24,11 +23,7 @@ private:
 
 	friend class boost::serialization::access;
 	template<class Archive>
-	void serialize(Archive &ar, const unsigned)
-	{
-		ar & boost::serialization::base_object<base>(*this);
-		ar & dir_;
-	}
+	void serialize(Archive &ar, unsigned);
 };
 
 }

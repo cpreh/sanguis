@@ -3,29 +3,26 @@
 
 #include "../game_state.hpp"
 #include "base.hpp"
-#include <sge/string.hpp>
-#include <boost/serialization/base_object.hpp>
+#include <boost/serialization/access.hpp>
 
 namespace sanguis
 {
 namespace messages
 {
 
+// TODO: this should probably carry an id as well
 class game_state : public base {
 public:
-	game_state() {}
-	game_state(const sanguis::game_state &);
+	game_state();
+	explicit game_state(const sanguis::game_state &);
 
+	const sanguis::game_state& state() const;
 private:
-	sanguis::game_state state;
+	sanguis::game_state state_;
 
 	friend class boost::serialization::access;
-	template<class Archive>
-	void serialize(Archive &ar, const unsigned)
-	{
-		ar & boost::serialization::base_object<base>(*this);
-		ar & state;
-	}
+	template<typename Archive>
+	void serialize(Archive &ar, unsigned);
 };
 
 }

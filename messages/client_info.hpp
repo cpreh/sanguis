@@ -3,27 +3,26 @@
 
 #include "types.hpp"
 #include "base.hpp"
-#include <boost/serialization/base_object.hpp>
+#include <boost/serialization/access.hpp>
 
 namespace sanguis
 {
 namespace messages
 {
 
+// TODO: this should probably carry an id as well
 class client_info : public base {
 public:
-	string name;
-
-	client_info() {}
+	client_info();
 	client_info(const string &);
 
+	const string& name() const;
+private:
+	string name_;
+
 	friend class boost::serialization::access;
-	template<class Archive>
-	void serialize(Archive &ar, const unsigned)
-	{
-		ar & boost::serialization::base_object<base>(*this);
-		ar & name;
-	}
+	template<typename Archive>
+	void serialize(Archive &ar, unsigned);
 };
 
 }

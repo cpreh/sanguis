@@ -55,9 +55,6 @@ void sanguis::client::input_handler::direction_event(const sge::key_pair& p)
 	post_message(player_action(to_send, scale));
 }
 
-#include <sge/iostream.hpp>
-#include <ostream>
-
 void sanguis::client::input_handler::rotation_event(const sge::key_pair& p)
 {
 	player_action::action_type to_send;

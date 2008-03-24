@@ -2,7 +2,7 @@
 #define SANGUIS_MESSAGES_DISCONNECT_HPP_INCLUDED
 
 #include "base.hpp"
-#include <boost/serialization/base_object.hpp>
+#include <boost/serialization/access.hpp>
 
 namespace sanguis
 {
@@ -12,14 +12,10 @@ namespace messages
 class disconnect : public base {
 public:
 	disconnect();
-
+private:
 	friend class boost::serialization::access;
-	template<class Archive>
-	void serialize(Archive &ar, const unsigned)
-	{
-		ar & boost::serialization::base_object<base>(*this);
-	}
-
+	template<typename Archive>
+	void serialize(Archive &ar, unsigned);
 };
 
 }

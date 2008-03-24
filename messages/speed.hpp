@@ -1,19 +1,18 @@
 #ifndef SANGUIS_MESSAGES_SPEED_HPP_INCLUDED
 #define SANGUIS_MESSAGES_SPEED_HPP_INCLUDED
 
-#include "base.hpp"
+#include "entity_message.hpp"
 #include "types.hpp"
-#include "../sge_serialization.hpp"
-#include <boost/serialization/base_object.hpp>
+#include <boost/serialization/access.hpp>
 
 namespace sanguis
 {
 namespace messages
 {
 
-class speed : public base {
+class speed : public entity_message {
 public:
-	speed() {}
+	speed();
 	speed(const entity_id id,
 	      const vector2&);
 	
@@ -22,12 +21,8 @@ private:
 	vector2 speed_;
 
 	friend class boost::serialization::access;
-	template<class Archive>
-	void serialize(Archive &ar, const unsigned)
-	{
-		ar & boost::serialization::base_object<base>(*this);
-		ar & speed_;
-	}
+	template<typename Archive>
+	void serialize(Archive &ar, unsigned);
 };
 
 }

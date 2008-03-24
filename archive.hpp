@@ -1,5 +1,5 @@
-#ifndef ARCHIVE_HPP_INCLUDED
-#define ARCHIVE_HPP_INCLUDED
+#ifndef SANGUIS_ARCHIVE_HPP_INCLUDED
+#define SANGUIS_ARCHIVE_HPP_INCLUDED
 
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>

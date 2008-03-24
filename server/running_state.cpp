@@ -70,7 +70,7 @@ void sanguis::server::running_state::create_game(const net::id_type id,const mes
 	player_type &player = players[id];
 
 	player.id =     get_unique_id();
-	player.name =   messages::net_to_host(m.name);
+	player.name =   messages::net_to_host(m.name());
 	player.pos =    sge::math::vector2(sge::su(0.5),sge::su(0.5));
 	player.angle =  sge::su(0);
 
