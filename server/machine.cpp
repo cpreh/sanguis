@@ -3,7 +3,6 @@
 #include "../serialization.hpp"
 #include "../messages/connect.hpp"
 #include "../messages/disconnect.hpp"
-#include "../open_bytes.hpp"
 #include "message_event.hpp"
 
 #include <sge/iostream.hpp>
@@ -20,6 +19,12 @@ sanguis::server::machine::machine(const net::port_type port_)
 
 void sanguis::server::machine::process(const tick_event &t)
 {
+	while (!message_events.empty())
+	{
+		process_event(message_events.front());
+		message_events.pop();
+	}
+
 	for (client_map::iterator i = clients.begin(); i != clients.end(); ++i)
 	{
 		net::data_type &buffer = i->second.out_buffer;
@@ -60,14 +65,18 @@ void sanguis::server::machine::process_message(const net::id_type id,const messa
 void sanguis::server::machine::data_callback(const net::id_type id,
 	const net::data_type &data)
 {
-	open_bytes -= data.size();
 	clients[id].in_buffer = deserialize(clients[id].in_buffer+data,boost::bind(&machine::process_message,this,id,_1));
 	// FIXME!
 	//	phoenix::bind(&machine::process_event,this,
 	//		phoenix::construct_<message_event>(id,phoenix::arg1)));
 }
 
-void sanguis::server::machine::push_back(messages::base* const m) 
+void sanguis::server::machine::queue_internal(const message_event &m) 
+{
+	message_events.push(m);
+}
+
+void sanguis::server::machine::send(messages::base* const m) 
 { 
 	const net::data_type m_str = serialize(message_ptr(m));
 	for (client_map::iterator i = clients.begin(); i != clients.end(); ++i)

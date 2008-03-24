@@ -4,7 +4,6 @@
 #include "client/machine.hpp"
 #include "client/start_state.hpp"
 #include "tick_event.hpp"
-#include "open_bytes.hpp"
 #include "media_path.hpp"
 
 // sge

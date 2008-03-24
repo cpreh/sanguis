@@ -2,7 +2,6 @@
 #include "../messages/connect.hpp"
 #include "../messages/disconnect.hpp"
 #include "../serialization.hpp"
-#include "../open_bytes.hpp"
 #include "message_event.hpp"
 #include <sge/renderer/scoped_renderblock.hpp>
 #include <sge/renderer/scoped_state.hpp>
@@ -45,16 +44,26 @@ void sanguis::client::machine::data_callback(const net::data_type &data)
 	in_buffer = deserialize(in_buffer+data,boost::bind(&machine::process_message,this,_1));
 }
 
-void sanguis::client::machine::push_back(messages::base *const m)
+void sanguis::client::machine::queue_internal(const message_event &m)
+{
+	message_events.push(m);
+}
+
+void sanguis::client::machine::send(messages::base *const m)
 {
 	out_buffer += serialize(message_ptr(m));
 }
 
 bool sanguis::client::machine::process(const tick_event &t)
 {
+	while (!message_events.empty())
+	{
+		process_event(message_events.front());
+		message_events.pop();
+	}
+	
 	if (out_buffer.size())
 	{
-		open_bytes += out_buffer.size();
 		net_.queue(out_buffer);
 		out_buffer.clear();
 	}

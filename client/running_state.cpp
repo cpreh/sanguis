@@ -130,7 +130,7 @@ void sanguis::client::running_state::handle_direction(
 	}
 
 	if(last_direction != direction)
-		context<machine>().push_back(new messages::player_direction_event(player.id(),sge::math::structure_cast<messages::space_unit>(direction)));
+		context<machine>().send(new messages::player_direction_event(player.id(),sge::math::structure_cast<messages::space_unit>(direction)));
 }
 
 #include <sge/math/constants.hpp>
@@ -163,7 +163,7 @@ void sanguis::client::running_state::handle_rotation(
 	if(!rotation)
 		return;
 
-	context<machine>().push_back(
+	context<machine>().send(
 		new messages::player_rotation_event(
 			player.id(),
 			static_cast<messages::space_unit>(

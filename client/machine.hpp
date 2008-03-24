@@ -5,6 +5,7 @@
 #include "../net/client.hpp"
 #include "../draw/resource_factory.hpp"
 #include "../tick_event.hpp"
+#include "message_event.hpp"
 #include "console_wrapper.hpp"
 
 #include <sge/font/font_metrics.hpp>
@@ -20,7 +21,9 @@
 
 #include <boost/statechart/state_machine.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
+
 #include <vector>
+#include <queue>
 
 namespace sanguis
 {
@@ -36,6 +39,7 @@ struct machine
 	net::client net_;
 	net::client::signal_connection s_conn,s_disconn,s_data;
 	net::data_type in_buffer,out_buffer;
+	std::queue<message_event> message_events;
 
 	public:
 	sge::systems &sys;
@@ -45,10 +49,12 @@ struct machine
 	console_wrapper con_wrapper;
 	draw::resource::connection resource;
 
-	machine(sge::systems &,sge::font &,sge::key_state_tracker &,sge::con::console_gfx &,const net::address_type &,const net::port_type);
+	machine(sge::systems &,sge::font &,sge::key_state_tracker &,
+		sge::con::console_gfx &,const net::address_type &,const net::port_type);
 
 	void connect();
-	void push_back(messages::base *const);
+	void send(messages::base *const);
+	void queue_internal(const message_event &);
 	void process_message(const message_ptr);
 	// callbacks
 	void connect_callback();

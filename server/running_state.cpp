@@ -33,7 +33,8 @@
 sanguis::server::running_state::running_state()
 	: player_speed(SGE_TEXT("player_speed"),sge::su(0.1)),
 	  send_timer(sge::second()),
-		message_freq(SGE_TEXT("message_freq"),boost::bind(&running_state::set_message_freq,this,_1,_2),sge::su(0.5))
+		message_freq(SGE_TEXT("message_freq"),
+			boost::bind(&running_state::set_message_freq,this,_1,_2),sge::su(0.5))
 {
 	sge::clog << SGE_TEXT("server: entering running state\n");
 }
@@ -55,7 +56,7 @@ boost::statechart::result sanguis::server::running_state::react(const tick_event
 		i->second.pos += i->second.speed * delta;
 
 		if (update_pos)
-			context<machine>().push_back(
+			context<machine>().send(
 				new messages::move(i->second.id,sge::math::structure_cast<messages::space_unit>(i->second.pos)));
 	}
 
@@ -77,13 +78,13 @@ void sanguis::server::running_state::create_game(const net::id_type id,const mes
 
 	// send player entity, game state and player state
 	sge::clog << SGE_TEXT("server: sending game messages\n");
-	context<machine>().push_back(new messages::game_state(game_state(truncation_check_cast<boost::uint32_t>(0))));
-	context<machine>().push_back(
+	context<machine>().send(new messages::game_state(game_state(truncation_check_cast<boost::uint32_t>(0))));
+	context<machine>().send(
 		new messages::add(player.id,
 			entity_type::player,
 			sge::math::structure_cast<messages::space_unit>(player.pos),
 			player.angle,messages::vector2()));
-	context<machine>().push_back(new messages::player_state(player.id,player_state(weapon_type::pistol,truncation_check_cast<boost::uint32_t>(0))));
+	context<machine>().send(new messages::player_state(player.id,player_state(weapon_type::pistol,truncation_check_cast<boost::uint32_t>(0))));
 }
 
 boost::statechart::result sanguis::server::running_state::operator()(const net::id_type id,const messages::player_rotation_event &e)
@@ -96,7 +97,7 @@ boost::statechart::result sanguis::server::running_state::operator()(const net::
 
 	player_type &player = players[id];
 	player.angle = e.angle();
-	context<machine>().push_back(new messages::rotate(player.id,static_cast<messages::space_unit>(player.angle)));
+	context<machine>().send(new messages::rotate(player.id,static_cast<messages::space_unit>(player.angle)));
 	return discard_event();
 }
 
@@ -115,13 +116,12 @@ boost::statechart::result sanguis::server::running_state::operator()(const net::
 	else
 		player.speed = sge::math::normalize(e.dir()) * player_speed.value();
 
-	context<machine>().push_back(new messages::speed(player.id,sge::math::structure_cast<messages::space_unit>(player.speed)));
+	context<machine>().send(new messages::speed(player.id,sge::math::structure_cast<messages::space_unit>(player.speed)));
 	return discard_event();
 }
 
 boost::statechart::result sanguis::server::running_state::operator()(const net::id_type id,const messages::client_info&m) 
 {
-	/*
 	if (players.size())
 	{
 		sge::clog << SGE_TEXT("server: got superfluous client info from id ") << id << SGE_TEXT("\n");
@@ -129,9 +129,6 @@ boost::statechart::result sanguis::server::running_state::operator()(const net::
 	}
 	sge::clog << SGE_TEXT("server: received client info from ") << id << SGE_TEXT("\n");
 	create_game(id,m);
-	return discard_event();
-	*/
-	sge::clog << SGE_TEXT("server: got superfluous client info from id ") << id << SGE_TEXT("\n");
 	return discard_event();
 }
 
@@ -152,15 +149,8 @@ boost::statechart::result sanguis::server::running_state::handle_default_msg(con
 	return discard_event();
 }
 
-void sanguis::server::running_state::process_client_info(const message_event &m)
-{
-	sge::clog << SGE_TEXT("server: received client info from ") << m.id << SGE_TEXT("\n");
-	create_game(m.id,dynamic_cast<messages::client_info &>(*m.message));
-}
-
 boost::statechart::result sanguis::server::running_state::react(const message_event&m) 
 {
-	sge::clog << "server: react with " << m.id << "\n";
 	message_functor<running_state> mf(*this,m.id);
 
 	return dispatch_type<

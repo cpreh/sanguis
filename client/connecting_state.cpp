@@ -48,14 +48,14 @@ boost::statechart::result sanguis::client::connecting_state::operator()(const me
 boost::statechart::result sanguis::client::connecting_state::operator()(const messages::game_state &m)
 {
 	sge::clog << SGE_TEXT("client: received game state\n");
-	post_event(message_event(message_ptr(new messages::game_state(m))));
+	context<machine>().queue_internal(message_event(message_ptr(new messages::game_state(m))));
 	return transit<running_state>();
 }
 
 boost::statechart::result sanguis::client::connecting_state::operator()(const messages::connect &)
 {
 	sge::clog << SGE_TEXT("client: sending client info\n");
-	context<machine>().push_back(new messages::client_info(MESSAGE_TEXT("player1")));
+	context<machine>().send(new messages::client_info(MESSAGE_TEXT("player1")));
 	return discard_event();
 }
 

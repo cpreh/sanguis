@@ -33,6 +33,8 @@ struct waiting_state
 	boost::statechart::result operator()(const net::id_type,const messages::disconnect &);
 	boost::statechart::result operator()(const net::id_type,const messages::client_info &);
 	boost::statechart::result handle_default_msg(const net::id_type,const messages::base &);
+
+	void process_message_event(const message_event &);
 };
 
 

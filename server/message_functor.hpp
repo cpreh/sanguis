@@ -13,17 +13,10 @@ struct message_functor
 	T &t;
 	net::id_type id;
 
-	message_functor(T &t,const net::id_type id) : t(t),id(id) 
-	{
-		sge::cout << SGE_TEXT("server: message functor id: ") << id << SGE_TEXT("\n");
-	}
+	message_functor(T &t,const net::id_type id) : t(t),id(id) {}
 
 	template<typename U>
-	boost::statechart::result operator()(U m)
-	{
-		sge::cout << SGE_TEXT("server: message functor call id: ") << id << SGE_TEXT("\n");
-		return t(id,m);
-	}
+	boost::statechart::result operator()(U m) { return t(id,m); }
 };
 
 #endif
