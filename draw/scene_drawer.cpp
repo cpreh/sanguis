@@ -1,7 +1,7 @@
 #include "scene_drawer.hpp"
 #include "factory.hpp"
 #include "player.hpp"
-#include "virtual_to_screen.hpp"
+#include "coord_transform.hpp"
 #include "../dispatch_type.hpp"
 #include "../messages/base.hpp"
 #include "../messages/add.hpp"
@@ -107,7 +107,7 @@ void sanguis::draw::scene_drawer::operator()(const messages::rotate& m)
 
 void sanguis::draw::scene_drawer::operator()(const messages::speed& m)
 {
-	get_entity(m.id()).speed(m.get());
+	get_entity(m.id()).speed(sge::math::structure_cast<sge::space_unit>(virtual_to_screen(ss.get_renderer()->screen_size(),m.get())));
 }
 
 sanguis::draw::entity& sanguis::draw::scene_drawer::get_entity(const entity_id id)

@@ -12,12 +12,19 @@
 
 sanguis::client::machine::machine(sge::systems &sys,sge::font &font,sge::key_state_tracker &ks,sge::con::console_gfx &con,
 	const net::address_type &address_,const net::port_type port_) 
-	: address_(address_),port_(port_),
+	: address_(address_),
+	  port_(port_),
 	  s_conn(net_.register_connect(boost::bind(&machine::connect_callback,this))),
 	  s_disconn(
 			net_.register_disconnect(boost::bind(&machine::disconnect_callback,this,_1))),
 		s_data(net_.register_data(boost::bind(&machine::data_callback,this,_1))),
-		sys(sys),font(font),ks(ks),con(con),con_wrapper(con,sys.input_system,sge::kc::key_tab),resource(sys.image_loader,sys.renderer) {}
+		sys(sys),
+		font(font),
+		ks(ks),
+		con(con),
+		con_stdlib(boost::bind(&sge::con::console_gfx::print,&con,_1)),
+		con_wrapper(con,sys.input_system,sge::kc::key_tab),
+		resource(sys.image_loader,sys.renderer) {}
 
 void sanguis::client::machine::connect()
 {

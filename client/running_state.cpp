@@ -10,6 +10,7 @@
 #include "../messages/player_direction_event.hpp"
 #include "../messages/player_rotation_event.hpp"
 #include "../draw/player.hpp"
+#include "../draw/coord_transform.hpp"
 #include <sge/iostream.hpp>
 #include <sge/string.hpp>
 #include <sge/exception.hpp>
@@ -172,6 +173,6 @@ void sanguis::client::running_state::handle_rotation(
 	drawer.process_message(
 		messages::move(
 			cursor_id,
-			truncation_check_structure_cast<messages::vector2>(cursor_pos)));
+			screen_to_virtual(rend->screen_size(),cursor_pos)));
 
 }

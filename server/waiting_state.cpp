@@ -40,6 +40,7 @@ boost::statechart::result sanguis::server::waiting_state::operator()(const net::
 
 	context<machine>().queue_internal(message_event(message_ptr(new messages::client_info(m)),id));
 	//post_event(message_event(message_ptr(new messages::client_info(m)),id));
+	//post_event(boost::intrusive_ptr<message_event>(new message_event(message_ptr(new messages::client_info(m)),id)));
 	return transit<running_state>();
 }
 
