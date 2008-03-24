@@ -66,11 +66,6 @@ void sanguis::server::running_state::create_game(const net::id_type id,const mes
 {
 	assert(!players.size());
 
-<<<<<<< HEAD:server/running_state.cpp
-	sge::clog << SGE_TEXT("adding player ") << id << SGE_TEXT(" with name ") << messages::net_to_host(m.name) << SGE_TEXT("\n");
-
-=======
->>>>>>> 7f77855a21cceeb5cffe423600debb1f08f164e9:server/running_state.cpp
 	player_type &player = players[id];
 
 	player.id =     get_unique_id();
@@ -79,11 +74,7 @@ void sanguis::server::running_state::create_game(const net::id_type id,const mes
 	player.angle =  sge::su(0);
 
 	// send player entity, game state and player state
-<<<<<<< HEAD:server/running_state.cpp
-	sge::clog << SGE_TEXT("server: sending game messages\n");
-=======
 	sge::clog << "server: sending game messages\n";
->>>>>>> 7f77855a21cceeb5cffe423600debb1f08f164e9:server/running_state.cpp
 	context<machine>().push_back(new messages::game_state(game_state(truncation_check_cast<boost::uint32_t>(0))));
 	context<machine>().push_back(
 		new messages::add(player.id,
@@ -97,11 +88,7 @@ boost::statechart::result sanguis::server::running_state::operator()(const net::
 {
 	if (players.find(id) == players.end())
 	{
-<<<<<<< HEAD:server/running_state.cpp
-		sge::clog << SGE_TEXT("server: got rotation_event from spectator ") << id << SGE_TEXT("\n");
-=======
 		sge::clog << "got rotation_event from spectator\n";
->>>>>>> 7f77855a21cceeb5cffe423600debb1f08f164e9:server/running_state.cpp
 		return discard_event();
 	}
 
@@ -115,11 +102,7 @@ boost::statechart::result sanguis::server::running_state::operator()(const net::
 {
 	if (players.find(id) == players.end())
 	{
-<<<<<<< HEAD:server/running_state.cpp
-		sge::clog << SGE_TEXT("server: got direction_event from spectator ") << id << SGE_TEXT("\n");
-=======
 		sge::clog << SGE_TEXT("got direction_event from spectator\n");
->>>>>>> 7f77855a21cceeb5cffe423600debb1f08f164e9:server/running_state.cpp
 		return discard_event();
 	}
 
@@ -138,17 +121,9 @@ boost::statechart::result sanguis::server::running_state::operator()(const net::
 {
 	if (players.size())
 	{
-<<<<<<< HEAD:server/running_state.cpp
-		sge::clog << SGE_TEXT("server: got superfluous client info from id ") << id << SGE_TEXT("\n");
-=======
 		sge::clog << SGE_TEXT("got superfluous client info from id ") << id << SGE_TEXT("\n");
->>>>>>> 7f77855a21cceeb5cffe423600debb1f08f164e9:server/running_state.cpp
 		return discard_event();
 	}
-<<<<<<< HEAD:server/running_state.cpp
-	sge::clog << SGE_TEXT("server: received client info from ") << id << SGE_TEXT("\n");
-=======
->>>>>>> 7f77855a21cceeb5cffe423600debb1f08f164e9:server/running_state.cpp
 	create_game(id,m);
 	return discard_event();
 }
@@ -172,12 +147,9 @@ boost::statechart::result sanguis::server::running_state::handle_default_msg(con
 
 boost::statechart::result sanguis::server::running_state::react(const message_event&m) 
 {
-<<<<<<< HEAD:server/running_state.cpp
-	sge::clog << "server: react with " << m.id << "\n";
-
-=======
->>>>>>> 7f77855a21cceeb5cffe423600debb1f08f164e9:server/running_state.cpp
 	message_functor<running_state> mf(*this,m.id);
+	
+	sge::clog << SGE_TEXT("server: react to message event with id ") << m.id << SGE_TEXT("\n");
 
 	return dispatch_type<
 		boost::mpl::vector<
