@@ -53,7 +53,7 @@ boost::statechart::result sanguis::server::running_state::react(const tick_event
 
 	for (player_map::iterator i = players.begin(); i != players.end(); ++i)
 	{
-		i->second.pos += i->second.speed * delta;
+		i->second.pos += i->second.speed * static_cast<messages::space_unit>(delta);
 
 		if (update_pos)
 			context<machine>().send(
@@ -70,9 +70,11 @@ void sanguis::server::running_state::create_game(const net::id_type id,const mes
 	player_type &player = players[id];
 
 	player.id =     get_unique_id();
-	player.name =   messages::net_to_host(m.name());
-	player.pos =    sge::math::vector2(sge::su(0.5),sge::su(0.5));
-	player.angle =  sge::su(0);
+	player.name =   m.name();
+	player.pos =    messages::pos_type(static_cast<messages::space_unit>(0.5),static_cast<messages::space_unit>(0.5));
+	player.angle =  static_cast<messages::space_unit>(0);
+
+	sge::cout << "server: player.pos=" << player.pos << "\n";
 
 	// send player entity, game state and player state
 	sge::clog << SGE_TEXT("server: sending game messages\n");
@@ -80,7 +82,7 @@ void sanguis::server::running_state::create_game(const net::id_type id,const mes
 	context<machine>().send(
 		new messages::add(player.id,
 			entity_type::player,
-			sge::math::structure_cast<messages::space_unit>(player.pos),
+			player.pos,
 			player.angle,messages::vector2()));
 	context<machine>().send(new messages::player_state(player.id,player_state(weapon_type::pistol,truncation_check_cast<boost::uint32_t>(0))));
 }
@@ -95,7 +97,7 @@ boost::statechart::result sanguis::server::running_state::operator()(const net::
 
 	player_type &player = players[id];
 	player.angle = e.angle();
-	context<machine>().send(new messages::rotate(player.id,static_cast<messages::space_unit>(player.angle)));
+	context<machine>().send(new messages::rotate(player.id,player.angle));
 	return discard_event();
 }
 
@@ -114,7 +116,7 @@ boost::statechart::result sanguis::server::running_state::operator()(const net::
 	else
 		player.speed = sge::math::normalize(e.dir()) * player_speed.value();
 
-	context<machine>().send(new messages::speed(player.id,sge::math::structure_cast<messages::space_unit>(player.speed)));
+	context<machine>().send(new messages::speed(player.id,player.speed));
 	return discard_event();
 }
 

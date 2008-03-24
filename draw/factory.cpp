@@ -4,9 +4,10 @@
 #include "player.hpp"
 #include "sprite.hpp"
 #include "resource_factory.hpp"
-#include "virtual_to_screen.hpp"
+#include "coord_transform.hpp"
 
 #include <sge/exception.hpp>
+#include <sge/iostream.hpp>
 #include <sge/string.hpp>
 
 sanguis::draw::factory::entity_ptr

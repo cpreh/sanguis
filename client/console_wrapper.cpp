@@ -1,4 +1,5 @@
 #include "console_wrapper.hpp"
+#include <sge/iostream.hpp>
 #include <boost/bind.hpp>
 
 sanguis::client::console_wrapper::console_wrapper(sge::con::console_gfx &con,sge::input_system_ptr is,const sge::key_code toggler)
@@ -14,9 +15,7 @@ void sanguis::client::console_wrapper::input_callback(const sge::key_pair &k)
 		return;
 	}
 
-	if (con.active())
-		con.key_callback(k);
-	else
+	if (!con.active())
 		callbacks(k);
 }
 

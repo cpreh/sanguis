@@ -18,6 +18,7 @@
 #include <sge/texture/no_fragmented_texture.hpp>
 #include <sge/texture/manager.hpp>
 #include <sge/console/console_gfx.hpp>
+#include <sge/console/stdlib.hpp>
 
 #include <boost/statechart/state_machine.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
@@ -46,6 +47,7 @@ struct machine
 	sge::font &font;
 	sge::key_state_tracker &ks;
 	sge::con::console_gfx &con;
+	sge::con::stdlib con_stdlib;
 	console_wrapper con_wrapper;
 	draw::resource::connection resource;
 
