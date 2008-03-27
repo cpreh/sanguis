@@ -1,4 +1,5 @@
 #include <sge/string.hpp>
+#include <sge/math/angle.hpp>
 #include "player.hpp"
 #include "resource_factory.hpp"
 
@@ -46,8 +47,12 @@ void sanguis::draw::player::update(const time_type time)
 	sprite::update(time);
 	if(!speed().is_null())
 		walk_animation.process();
-	// TODO
-	//	bottom_sprite().rotation(sge::math::angle_to(sge::math::vector2(),speed()));
+	const boost::optional<sge::space_unit> bottom_angle(
+		sge::math::angle_to<sge::space_unit>(
+			sge::math::vector2(0, 0),
+			speed()));
+	if(bottom_angle)
+		bottom_sprite().rotation(*bottom_angle);
 }
 
 sge::sprite& sanguis::draw::player::bottom_sprite()
