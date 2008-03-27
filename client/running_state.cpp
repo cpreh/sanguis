@@ -40,7 +40,6 @@ sanguis::client::running_state::running_state(my_context ctx)
 		boost::bind(&input_handler::input_callback, &input, _1)))
 {
 	sge::clog << SGE_TEXT("client: entering running state\n");
-
 	drawer.process_message(
 		messages::add(
 			::cursor_id,

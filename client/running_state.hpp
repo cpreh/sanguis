@@ -52,7 +52,6 @@ private:
 	sge::sprite::point     cursor_pos;
 	input_handler          input;
 	sge::scoped_connection input_connection;
-	entity_id              cursor_id;
 };
 }
 }

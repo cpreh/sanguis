@@ -27,6 +27,8 @@ sanguis::draw::player::player(
 
 	skel_sprite.z() = static_cast<sge::space_unit>(0);
 	add_sprite(skel_sprite);
+
+	walk_animation.bind(&bottom_sprite());
 }
 
 void sanguis::draw::player::orientation(sge::space_unit u)
@@ -37,12 +39,10 @@ void sanguis::draw::player::orientation(sge::space_unit u)
 void sanguis::draw::player::update(const time_type time)
 {
 	sprite::update(time);
-	if(!speed().is_null() && !walk_animation.process())
-	{
-		walk_animation.reset(bottom_sprite());
-		// TODO
+	if(!speed().is_null())
+		walk_animation.process();
+	// TODO
 	//	bottom_sprite().rotation(sge::math::angle_to(sge::math::vector2(),speed()));
-	}
 }
 
 sge::sprite& sanguis::draw::player::bottom_sprite()
