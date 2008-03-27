@@ -6,6 +6,7 @@
 #include "message_event.hpp"
 #include <sge/renderer/scoped_renderblock.hpp>
 #include <sge/renderer/scoped_state.hpp>
+#include <sge/iostream.hpp>
 #include <boost/spirit/phoenix.hpp>
 #include <boost/bind.hpp>
 #include <boost/lambda/bind.hpp>

@@ -13,8 +13,7 @@ sanguis::messages::speed::speed(
 	const entity_id id,
 	const vector2& speed_)
 : entity_message(id),
-  speed_(speed_)
-{}
+  speed_(speed_) {}
 
 const sanguis::messages::vector2& sanguis::messages::speed::get() const
 {

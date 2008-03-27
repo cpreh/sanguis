@@ -44,6 +44,7 @@ void sanguis::draw::player::orientation(sge::space_unit u)
 void sanguis::draw::player::update(const time_type time)
 {
 	sprite::update(time);
+	//bottom_sprite().rotation(sge::math::angle_to(sge::math::vector2(),speed()));
 	if(!speed().is_null())
 		walk_animation.process();
 	// TODO

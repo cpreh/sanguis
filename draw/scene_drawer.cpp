@@ -87,6 +87,7 @@ void sanguis::draw::scene_drawer::operator()(const messages::add& m)
 
 void sanguis::draw::scene_drawer::operator()(const messages::move& m)
 {
+	sge::clog << "moving entity " << m.id() << "\n";
 	get_entity(m.id()).pos(virtual_to_screen(ss.get_renderer()->screen_size(),m.pos()));
 }
 
@@ -102,11 +103,13 @@ void sanguis::draw::scene_drawer::operator()(const messages::remove& m)
 
 void sanguis::draw::scene_drawer::operator()(const messages::rotate& m)
 {
+	sge::clog << "rotating entity " << m.id() << "\n";
 	get_entity(m.id()).orientation(m.rot());
 }
 
 void sanguis::draw::scene_drawer::operator()(const messages::speed& m)
 {
+	sge::clog << "speeding entity " << m.id() << "\n";
 	get_entity(m.id()).speed(sge::math::structure_cast<sge::space_unit>(virtual_to_screen(ss.get_renderer()->screen_size(),m.get())));
 }
 

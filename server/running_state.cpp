@@ -74,8 +74,6 @@ void sanguis::server::running_state::create_game(const net::id_type id,const mes
 	player.pos =    messages::pos_type(static_cast<messages::space_unit>(0.5),static_cast<messages::space_unit>(0.5));
 	player.angle =  static_cast<messages::space_unit>(0);
 
-	sge::cout << "server: player.pos=" << player.pos << "\n";
-
 	// send player entity, game state and player state
 	sge::clog << SGE_TEXT("server: sending game messages\n");
 	context<machine>().send(new messages::game_state(game_state(truncation_check_cast<boost::uint32_t>(0))));
