@@ -98,7 +98,7 @@ void sanguis::draw::scene_drawer::operator()(const messages::player_state& m)
 void sanguis::draw::scene_drawer::operator()(const messages::remove& m)
 {
 	if(entities.erase(m.id()) == 0)
-		throw sge::exception(SGE_TEXT("Object with id not in entity list!"));
+		throw sge::exception(SGE_TEXT("Object not in entity map, can't remove it!"));
 }
 
 void sanguis::draw::scene_drawer::operator()(const messages::rotate& m)
