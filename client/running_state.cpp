@@ -2,6 +2,7 @@
 #include "player_action.hpp"
 #include "intermediate_state.hpp"
 #include "../dispatch_type.hpp"
+#include "../truncation_check_cast.hpp"
 #include "../truncation_check_structure_cast.hpp"
 #include "../messages/add.hpp"
 #include "../messages/disconnect.hpp"
@@ -9,6 +10,8 @@
 #include "../messages/move.hpp"
 #include "../messages/player_direction_event.hpp"
 #include "../messages/player_rotation_event.hpp"
+#include "../messages/request_unique_id.hpp"
+#include "../messages/send_unique_id.hpp"
 #include "../draw/player.hpp"
 #include "../draw/coord_transform.hpp"
 #include <sge/iostream.hpp>
@@ -22,24 +25,30 @@
 #include <typeinfo>
 #include <cmath>
 
+namespace
+{
+const sge::string cursor_name(SGE_TEXT("cursor"));
+}
+
 sanguis::client::running_state::running_state(my_context ctx)
 : my_base(ctx), 
   drawer(context<machine>().sys.renderer),
   input(boost::bind(&running_state::handle_player_action, this, _1)),
   input_connection(
   	context<machine>().con_wrapper.register_callback(
-		boost::bind(&input_handler::input_callback, &input, _1))),
-  cursor_id(1337)
+		boost::bind(&input_handler::input_callback, &input, _1)))
 {
-	sge::clog << SGE_TEXT("client: entering running state\n"); 
+	sge::clog << SGE_TEXT("client: entering running state\n");
 
-	drawer.process_message(
-		messages::add(
-			cursor_id,
-			entity_type::cursor,
-			truncation_check_structure_cast<messages::vector2>(cursor_pos),
-			static_cast<messages::space_unit>(0),
-			messages::vector2(static_cast<messages::space_unit>(0),static_cast<messages::space_unit>(0))));
+	unided_messages.defer(
+		unided_message_queue::message_ptr_in(
+			new messages::add(
+				invalid_id,
+				entity_type::cursor,
+				truncation_check_structure_cast<messages::vector2>(cursor_pos),
+				static_cast<messages::space_unit>(0),
+				messages::vector2(static_cast<messages::space_unit>(0),static_cast<messages::space_unit>(0)))),
+		cursor_name);
 }
 
 boost::statechart::result sanguis::client::running_state::react(const tick_event&t)
@@ -57,6 +66,11 @@ boost::statechart::result sanguis::client::running_state::react(const tick_event
 
 	drawer.draw(t.data);
 
+	if(const unided_message_queue::size_type unided = unided_messages.messages_to_defer())
+		context<machine>().send(
+			new messages::request_unique_id(
+				truncation_check_cast<messages::size_type>(unided)));
+
 	return discard_event();
 }
 
@@ -65,7 +79,8 @@ boost::statechart::result sanguis::client::running_state::react(const message_ev
 	return dispatch_type<
 		boost::mpl::vector<
 			messages::disconnect,
-			messages::game_state
+			messages::game_state,
+			messages::send_unique_id
 		>,
 		boost::statechart::result>(
 		*this,
@@ -90,6 +105,17 @@ sanguis::client::running_state::operator()(
 }
 
 boost::statechart::result
+sanguis::client::running_state::operator()(
+	const messages::send_unique_id& m)
+{
+	messages::send_unique_id::id_vector const &ids(m.ids());
+	
+	for(messages::size_type i = 0; i < ids.size(); ++i)
+		drawer.process_message(*unided_messages.next(ids[i]));
+	return discard_event();
+}
+
+boost::statechart::result
 sanguis::client::running_state::handle_default_msg(const messages::base& m)
 {
 	drawer.process_message(m);
@@ -107,9 +133,7 @@ void sanguis::client::running_state::handle_player_action(const player_action& m
 	}
 	catch(const sge::exception& e)
 	{
-		sge::clog << SGE_TEXT("player not found in scene_drawer: \"")
-		          << e.what()
-			  << SGE_TEXT("\"!\n");
+		sge::clog << e.what() << SGE_TEXT('\n');
 	}
 }
 
@@ -164,6 +188,7 @@ void sanguis::client::running_state::handle_rotation(
 	if(!rotation)
 		return;
 
+	// FIXME: why do we have to add pi / 2 here?
 	context<machine>().send(
 		new messages::player_rotation_event(
 			player.id(),
@@ -172,7 +197,8 @@ void sanguis::client::running_state::handle_rotation(
 
 	drawer.process_message(
 		messages::move(
-			cursor_id,
-			screen_to_virtual(rend->screen_size(),cursor_pos)));
+			unided_messages.get_id(cursor_name),
+			screen_to_virtual(rend->screen_size(),
+			cursor_pos)));
 
 }

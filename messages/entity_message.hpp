@@ -15,6 +15,7 @@ public:
 	entity_message();
 	explicit entity_message(entity_id id);
 	entity_id id() const;
+	void id(entity_id);
 private:
 	entity_id id_;
 

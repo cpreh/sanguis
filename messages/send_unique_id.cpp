@@ -14,6 +14,12 @@ sanguis::messages::send_unique_id::send_unique_id(
 : ids_(ids_)
 {}
 
+sanguis::messages::send_unique_id::id_vector const &
+sanguis::messages::send_unique_id::ids() const
+{
+	return ids_;
+}
+
 template<typename Archive>
 void sanguis::messages::send_unique_id::serialize(
 	Archive &ar,

@@ -19,6 +19,12 @@ sanguis::messages::entity_message::id() const
 	return id_;
 }
 
+void sanguis::messages::entity_message::id(
+	const entity_id nid)
+{
+	id_ = nid;
+}
+
 template<typename Archive>
 void sanguis::messages::entity_message::serialize(
 	Archive &ar,

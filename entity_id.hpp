@@ -8,6 +8,8 @@ namespace sanguis
 
 typedef boost::uint32_t entity_id;
 
+extern const entity_id invalid_id;
+
 }
 
 #endif
