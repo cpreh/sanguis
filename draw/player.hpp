@@ -20,7 +20,7 @@ public:
 private:
 	void update(time_type);
 	sge::sprite& bottom_sprite();
-	sge::sprite& up_sprite();
+	sge::sprite& top_sprite();
 	sge::sprite_texture_animation walk_animation;
 };
 
