@@ -29,8 +29,8 @@ protected:
 	sge::sprite& at(sprite_vector::size_type);
 	const sge::sprite& at(sprite_vector::size_type) const;
 	void add_sprite(const sge::sprite&);
-	void orientation(sge::space_unit);
-	void speed(const sge::math::vector2&);
+	virtual void orientation(sge::space_unit);
+	virtual void speed(const sge::math::vector2&);
 	void pos(const sge::sprite::point&);
 	void dim(const sge::sprite::dim&);
 	sge::space_unit orientation() const;

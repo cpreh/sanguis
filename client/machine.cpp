@@ -1,6 +1,7 @@
 #include "machine.hpp"
 #include "../messages/connect.hpp"
 #include "../messages/disconnect.hpp"
+#include "../messages/add.hpp"
 #include "../serialization.hpp"
 #include "message_event.hpp"
 #include <sge/renderer/scoped_renderblock.hpp>

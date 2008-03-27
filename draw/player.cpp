@@ -29,6 +29,11 @@ sanguis::draw::player::player(
 	add_sprite(skel_sprite);
 }
 
+void sanguis::draw::player::orientation(sge::space_unit u)
+{
+	up_sprite().rotation(u);
+}
+
 void sanguis::draw::player::update(const time_type time)
 {
 	sprite::update(time);
@@ -36,7 +41,7 @@ void sanguis::draw::player::update(const time_type time)
 	{
 		walk_animation.reset(bottom_sprite());
 		// TODO
-		//bottom_sprite().rotation(sge::math::angle_to(sge::math::vector2(),speed()));
+	//	bottom_sprite().rotation(sge::math::angle_to(sge::math::vector2(),speed()));
 	}
 }
 

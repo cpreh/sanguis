@@ -36,7 +36,7 @@ struct running_state
 		boost::statechart::custom_reaction<message_event>
 		> reactions;
 
-	running_state(my_context) ;
+	running_state(my_context);
 	boost::statechart::result react(const tick_event &);
 	boost::statechart::result react(const message_event &);
 	

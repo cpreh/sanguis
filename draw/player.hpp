@@ -16,6 +16,7 @@ public:
 	       const sge::sprite::dim& sz,
 	       sge::space_unit angle,
 	       const sge::math::vector2& speed);
+	void orientation(sge::space_unit);
 private:
 	void update(time_type);
 	sge::sprite& bottom_sprite();
