@@ -16,12 +16,13 @@ sanguis::draw::player::player(
 		SGE_TEXT("player_walk")))
 {
 	sge::sprite skel_sprite(
-		sge::sprite(pos,
-		resource::texture(SGE_TEXT("player_up")),
-		sz,
-		sge::colors::white,
-		1,
-		angle));
+		sge::sprite(
+			pos,
+			resource::texture(SGE_TEXT("player_up")),
+			sz,
+			sge::colors::white,
+			1,
+			angle));
 	add_sprite(skel_sprite);
 
 	skel_sprite.z() = static_cast<sge::space_unit>(0);
