@@ -1,5 +1,6 @@
 #include "serialization.hpp"
 #include "messages/base.hpp"
+#include "messages/add.hpp"
 
 #include "archive.hpp"
 #include <boost/serialization/export.hpp>
@@ -8,6 +9,7 @@
 #include <sstream>
 #include <iomanip>
 #include <cstddef>
+#include <typeinfo>
 
 namespace
 {
@@ -34,6 +36,8 @@ net::data_type sanguis::deserialize(const net::data_type &data,
 	iarchive ar(ass);
 	messages::base *unsafe_ptr;
 	ar >> unsafe_ptr;
+	if (typeid(*unsafe_ptr) == typeid(messages::add))
+		sge::cout << "client: received add with pos " << dynamic_cast<messages::add *>(unsafe_ptr)->pos() << "\n";
 	callback(message_ptr(unsafe_ptr));
 
 	return deserialize(data.substr(message_header_size+message_size),callback);
