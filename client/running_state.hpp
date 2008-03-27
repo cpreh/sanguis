@@ -48,10 +48,10 @@ private:
 	void handle_rotation(const draw::player&, const player_action&);
 
 	draw::scene_drawer     drawer;
-	sge::math::vector2     direction;
-	sge::sprite::point     cursor_pos;
 	input_handler          input;
 	sge::scoped_connection input_connection;
+	sge::math::vector2     direction;
+	sge::sprite::point     cursor_pos;
 };
 }
 }

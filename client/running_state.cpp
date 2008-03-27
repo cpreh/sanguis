@@ -36,8 +36,10 @@ sanguis::client::running_state::running_state(my_context ctx)
   drawer(context<machine>().sys.renderer),
   input(boost::bind(&running_state::handle_player_action, this, _1)),
   input_connection(
-  	context<machine>().con_wrapper.register_callback(
-		boost::bind(&input_handler::input_callback, &input, _1)))
+	context<machine>().con_wrapper.register_callback(
+		boost::bind(&input_handler::input_callback, &input, _1))),
+  direction(0, 0),
+  cursor_pos(0, 0)
 {
 	sge::clog << SGE_TEXT("client: entering running state\n");
 	drawer.process_message(
