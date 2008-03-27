@@ -1,6 +1,7 @@
 #include "running_state.hpp"
 #include "player_action.hpp"
 #include "intermediate_state.hpp"
+#include "client_id.hpp"
 #include "../dispatch_type.hpp"
 #include "../truncation_check_cast.hpp"
 #include "../truncation_check_structure_cast.hpp"
@@ -10,8 +11,6 @@
 #include "../messages/move.hpp"
 #include "../messages/player_direction_event.hpp"
 #include "../messages/player_rotation_event.hpp"
-#include "../messages/request_unique_id.hpp"
-#include "../messages/send_unique_id.hpp"
 #include "../draw/player.hpp"
 #include "../draw/coord_transform.hpp"
 #include <sge/iostream.hpp>
@@ -27,7 +26,9 @@
 
 namespace
 {
-const sge::string cursor_name(SGE_TEXT("cursor"));
+
+const sanguis::entity_id cursor_id(sanguis::client::next_client_id());
+
 }
 
 sanguis::client::running_state::running_state(my_context ctx)
@@ -40,15 +41,13 @@ sanguis::client::running_state::running_state(my_context ctx)
 {
 	sge::clog << SGE_TEXT("client: entering running state\n");
 
-	unided_messages.defer(
-		unided_message_queue::message_ptr_in(
-			new messages::add(
-				invalid_id,
-				entity_type::cursor,
-				truncation_check_structure_cast<messages::vector2>(cursor_pos),
-				static_cast<messages::space_unit>(0),
-				messages::vector2(static_cast<messages::space_unit>(0),static_cast<messages::space_unit>(0)))),
-		cursor_name);
+	drawer.process_message(
+		messages::add(
+			cursor_id,
+			entity_type::cursor,
+			truncation_check_structure_cast<messages::vector2>(cursor_pos),
+			static_cast<messages::space_unit>(0),
+			messages::vector2(static_cast<messages::space_unit>(0),static_cast<messages::space_unit>(0))));
 }
 
 boost::statechart::result sanguis::client::running_state::react(const tick_event&t)
@@ -65,12 +64,7 @@ boost::statechart::result sanguis::client::running_state::react(const tick_event
 		sge::font_align_h::center,sge::font_align_v::center);
 
 	drawer.draw(t.data);
-
-	if(const unided_message_queue::size_type unided = unided_messages.messages_to_defer())
-		context<machine>().send(
-			new messages::request_unique_id(
-				truncation_check_cast<messages::size_type>(unided)));
-
+	
 	return discard_event();
 }
 
@@ -79,8 +73,7 @@ boost::statechart::result sanguis::client::running_state::react(const message_ev
 	return dispatch_type<
 		boost::mpl::vector<
 			messages::disconnect,
-			messages::game_state,
-			messages::send_unique_id
+			messages::game_state
 		>,
 		boost::statechart::result>(
 		*this,
@@ -101,17 +94,6 @@ sanguis::client::running_state::operator()(
 	const messages::game_state&)
 {
 	sge::clog << SGE_TEXT("client: running: received game state\n");
-	return discard_event();
-}
-
-boost::statechart::result
-sanguis::client::running_state::operator()(
-	const messages::send_unique_id& m)
-{
-	messages::send_unique_id::id_vector const &ids(m.ids());
-	
-	for(messages::size_type i = 0; i < ids.size(); ++i)
-		drawer.process_message(*unided_messages.next(ids[i]));
 	return discard_event();
 }
 
@@ -197,7 +179,7 @@ void sanguis::client::running_state::handle_rotation(
 
 	drawer.process_message(
 		messages::move(
-			unided_messages.get_id(cursor_name),
+			cursor_id,
 			screen_to_virtual(rend->screen_size(),
 			cursor_pos)));
 

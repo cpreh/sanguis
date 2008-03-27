@@ -8,7 +8,6 @@
 #include "message_event.hpp"
 #include "machine.hpp"
 #include "input_handler.hpp"
-#include "unided_message_queue.hpp"
 #include <sge/math/vector.hpp>
 #include <sge/scoped_connection.hpp>
 #include <boost/statechart/state.hpp>
@@ -42,7 +41,6 @@ struct running_state
 	
 	boost::statechart::result operator()(const messages::disconnect&);
 	boost::statechart::result operator()(const messages::game_state&);
-	boost::statechart::result operator()(const messages::send_unique_id&);
 private:
 	boost::statechart::result handle_default_msg(const messages::base&);
 	void handle_player_action(const player_action&);
@@ -55,7 +53,6 @@ private:
 	input_handler          input;
 	sge::scoped_connection input_connection;
 	entity_id              cursor_id;
-	unided_message_queue   unided_messages;
 };
 }
 }
