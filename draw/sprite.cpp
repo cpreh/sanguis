@@ -20,6 +20,7 @@ sanguis::draw::sprite::sprite(
   speed_(speed_),
   pos_(0,0)
 {
+	//sge::cout << "adding sprite with id " << id << " and position " << spos << "\n";
 	add_sprite(
 		sge::sprite(
 			spos,

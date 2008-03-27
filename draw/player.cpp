@@ -4,7 +4,7 @@
 
 sanguis::draw::player::player(
 	const entity_id id,
-	const sge::sprite::point& pos,
+	const sge::sprite::point& pos_,
 	const sge::sprite::dim& sz,
 	const sge::space_unit angle,
 	const sge::math::vector2& speed)
@@ -15,9 +15,10 @@ sanguis::draw::player::player(
   	resource::animation(
 		SGE_TEXT("player_walk")))
 {
+	pos(pos_);
 	sge::sprite skel_sprite(
 		sge::sprite(
-			pos,
+			pos_,
 			resource::texture(SGE_TEXT("player_up")),
 			sz,
 			sge::colors::white,
