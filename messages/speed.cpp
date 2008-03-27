@@ -26,7 +26,7 @@ void sanguis::messages::speed::serialize(
 	Archive &ar,
 	unsigned)
 {
-	ar & boost::serialization::base_object<base>(*this)
+	ar & boost::serialization::base_object<entity_message>(*this)
 	   & speed_;
 }
 
