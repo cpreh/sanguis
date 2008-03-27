@@ -66,8 +66,11 @@ bool sanguis::client::machine::process(const tick_event &t)
 {
 	while (!message_events.empty())
 	{
+		std::cerr << "client: processing event\n";
 		process_event(message_events.front());
+		std::cerr << "client: popping event\n";
 		message_events.pop();
+		std::cerr << "client: popped event\n";
 	}
 	
 	if (out_buffer.size())

@@ -44,7 +44,7 @@ sanguis::client::running_state::running_state(my_context ctx)
 	sge::clog << SGE_TEXT("client: entering running state\n");
 	drawer.process_message(
 		messages::add(
-			cursor_id,
+			::cursor_id,
 			entity_type::cursor,
 			truncation_check_structure_cast<messages::vector2>(cursor_pos),
 			static_cast<messages::space_unit>(0),
