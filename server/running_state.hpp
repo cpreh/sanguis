@@ -9,9 +9,9 @@
 #include "../messages/types.hpp"
 
 #include <sge/string.hpp>
+#include <sge/su.hpp>
 #include <sge/timer.hpp>
 #include <sge/type_info.hpp>
-#include <sge/types.hpp>
 #include <sge/console/console.hpp>
 #include <sge/math/vector.hpp>
 #include <sge/math/dim.hpp>
