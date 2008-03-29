@@ -1,3 +1,4 @@
 player_up=upper.png
 cursor=cursor_simple.png
 background=grass_tile2.png
+bullet=player/bullet_tiny.png

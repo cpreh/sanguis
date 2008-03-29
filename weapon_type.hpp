@@ -3,7 +3,14 @@
 
 namespace sanguis
 {
-namespace weapon_type { enum type { pistol }; }
+namespace weapon_type
+{
+
+enum type {
+	pistol
+};
+
+}
 }
 
 #endif
