@@ -29,7 +29,8 @@
 namespace
 {
 
-const sanguis::entity_id cursor_id(sanguis::client::next_client_id());
+const sanguis::entity_id cursor_id(sanguis::client::next_client_id()),
+                         background_id(sanguis::client::next_client_id());
 
 }
 
@@ -44,13 +45,28 @@ sanguis::client::running_state::running_state(my_context ctx)
   cursor_pos(0, 0)
 {
 	sge::clog << SGE_TEXT("client: entering running state\n");
+	
+	// add the cursor
 	drawer.process_message(
 		messages::add(
 			::cursor_id,
 			entity_type::cursor,
 			truncation_check_structure_cast<messages::vector2>(cursor_pos),
 			static_cast<messages::space_unit>(0),
-			messages::vector2(static_cast<messages::space_unit>(0),static_cast<messages::space_unit>(0))));
+			messages::vector2(
+				static_cast<messages::space_unit>(0),
+				static_cast<messages::space_unit>(0))));
+
+	// add the background
+	drawer.process_message(
+		messages::add(
+			::background_id,
+			entity_type::background,
+			messages::vector2(0,0),
+			static_cast<messages::space_unit>(0),
+			messages::vector2(
+				static_cast<messages::space_unit>(0),
+				static_cast<messages::space_unit>(0))));
 }
 
 boost::statechart::result sanguis::client::running_state::react(const tick_event&t)

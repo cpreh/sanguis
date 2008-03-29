@@ -74,7 +74,6 @@ sanguis::draw::scene_drawer::get_player() const
 void sanguis::draw::scene_drawer::operator()(const messages::add& m)
 {
 	if(entities.insert(m.id(), factory::create_entity(m, ss.get_renderer()->screen_size())).second == false)
-	if(entities.insert(m.id(), factory::create_entity(m,ss.get_renderer()->screen_size())).second == false)
 		throw sge::exception(SGE_TEXT("Object with id already in entity list!"));
 	if(m.type() == entity_type::player)
 	{

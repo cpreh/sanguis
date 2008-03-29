@@ -18,7 +18,8 @@ sanguis::draw::factory::entity_ptr
 create_sprite(
 	const sanguis::messages::add& m,
 	const sge::string& s,
-	const sge::screen_size_t& screen_size);
+	const sge::screen_size_t& screen_size,
+	const sge::space_unit z);
 
 }
 
@@ -41,7 +42,17 @@ sanguis::draw::factory::create_entity(
 						screen_size,
 						m.speed()))));
 	case entity_type::cursor:
-		return create_sprite(m, SGE_TEXT("cursor"), screen_size);
+		return create_sprite(
+			m,
+			SGE_TEXT("cursor"),
+			screen_size,
+			static_cast<sge::space_unit>(-5));
+	case entity_type::background:
+		return create_sprite(
+			m,
+			SGE_TEXT("background"),
+			screen_size,
+			0);
 	case entity_type::bullet:
 		return entity_ptr(
 			new bullet(
@@ -64,7 +75,8 @@ sanguis::draw::factory::entity_ptr
 create_sprite(
 	const sanguis::messages::add& m,
 	const sge::string& s,
-	const sge::screen_size_t& screen_size)
+	const sge::screen_size_t& screen_size,
+	const sge::space_unit z)
 {
 	return sanguis::draw::factory::entity_ptr(
 		new sanguis::draw::sprite(
@@ -77,7 +89,8 @@ create_sprite(
 			sge::math::structure_cast<sge::space_unit>(
 				sanguis::virtual_to_screen(
 					screen_size,
-					m.speed()))));
+					m.speed())),
+			z));
 }
 
 }

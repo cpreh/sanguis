@@ -22,11 +22,11 @@ sanguis::draw::player::player(
 			resource::texture(SGE_TEXT("player_up")),
 			sge::sprite_texture_dim,
 			sge::colors::white,
-			1,
+			-1,
 			angle));
 	add_sprite(skel_sprite);
 
-	skel_sprite.z() = static_cast<sge::space_unit>(0);
+	skel_sprite.z() = static_cast<sge::space_unit>(-2);
 	add_sprite(skel_sprite);
 
 	walk_animation.bind(&bottom_sprite());
