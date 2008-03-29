@@ -3,24 +3,6 @@
 #include <sge/string.hpp>
 #include <sge/math/angle.hpp>
 #include <sge/math/point_rotate.hpp>
-#include <cmath>
-
-#if 0
-namespace
-{
-sge::math::vector2 point_rotate(const sge::math::vector2 &point,const sge::math::vector2 &around,const sge::space_unit rot)
-{
-	const sge::space_unit sinx = std::sin(rot),
-	                      cosx = std::cos(rot);
-
-	const sge::math::basic_matrix<sge::space_unit,2,2> mat_rot(
-		cosx, -sinx,
-		sinx,  cosx); 
-	
-	return (mat_rot * (point - around)) + around;
-}
-}
-#endif
 
 sanguis::draw::player::player(
 	const entity_id id,
@@ -69,10 +51,15 @@ void sanguis::draw::player::update(const time_type time)
 	const sge::math::vector2 leg_center(sge::su(64),sge::su(80));
 	const sge::math::vector2 body_center(sge::su(64),sge::su(80));
 
+	if (!speed().is_null())
+		last_speed = speed();
+	
+	const sge::math::vector2 local_speed = (speed().is_null()) ? last_speed : speed();
+
 	const boost::optional<sge::space_unit> bottom_angle(
 		sge::math::angle_to<sge::space_unit>(
 			sge::math::vector2(0, 0),
-			speed()));
+			local_speed));
 
 	if(bottom_angle)
 	{
@@ -89,8 +76,6 @@ void sanguis::draw::player::update(const time_type time)
 		const sge::math::vector2 top_pos = rot_abs - body_center;
 
 		top_sprite().pos() = sge::math::structure_cast<sge::sprite_unit>(top_pos);
-	//	top_sprite().set_center(
-	//		top_sprite().pos()+sge::math::structure_cast<sge::sprite_unit>(new_rotation));
 	}
 }
 
