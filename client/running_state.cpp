@@ -11,6 +11,8 @@
 #include "../messages/move.hpp"
 #include "../messages/player_direction_event.hpp"
 #include "../messages/player_rotation_event.hpp"
+#include "../messages/player_start_shooting.hpp"
+#include "../messages/player_stop_shooting.hpp"
 #include "../draw/player.hpp"
 #include "../draw/coord_transform.hpp"
 #include <sge/iostream.hpp>
@@ -110,9 +112,11 @@ void sanguis::client::running_state::handle_player_action(const player_action& m
 	// TODO: accumulate events!
 	try
 	{
+		// TODO: install handler logic for this
 		const draw::player& player(drawer.get_player());
 		handle_direction(player, m);
 		handle_rotation(player, m);
+		handle_shooting(player, m);
 	}
 	catch(const sge::exception& e)
 	{
@@ -138,7 +142,10 @@ void sanguis::client::running_state::handle_direction(
 	}
 
 	if(last_direction != direction)
-		context<machine>().send(new messages::player_direction_event(player.id(),sge::math::structure_cast<messages::space_unit>(direction)));
+		context<machine>().send(
+			new messages::player_direction_event(
+				player.id(),
+				sge::math::structure_cast<messages::space_unit>(direction)));
 }
 
 void sanguis::client::running_state::handle_rotation(
@@ -181,4 +188,19 @@ void sanguis::client::running_state::handle_rotation(
 			screen_to_virtual(rend->screen_size(),
 			cursor_pos)));
 
+}
+
+void sanguis::client::running_state::handle_shooting(
+	const draw::player& p,
+	const player_action& m)
+{
+	if(m.type() != player_action::shoot)
+		return;
+	
+	context<state_machine>().send(
+		sge::math::compare(static_cast<key_scale>(0), m.scale())
+		? new messages::player_stop_shooting(
+			player.id())
+		: new messages::player_start_shooting(
+			player.id()));
 }

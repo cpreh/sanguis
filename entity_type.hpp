@@ -8,7 +8,8 @@ namespace entity_type {
 enum type {
 	player,
 	jackal,
-	cursor
+	cursor,
+	simple_bullet
 };
 }
 
