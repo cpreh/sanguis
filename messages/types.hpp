@@ -1,6 +1,7 @@
 #ifndef SANGUIS_MESSAGES_TYPES_HPP_INCLUDED
 #define SANGUIS_MESSAGES_TYPES_HPP_INCLUDED
 
+#include <sge/config.h>
 #include <sge/math/vector.hpp>
 #include <sge/math/dim.hpp>
 #include <boost/cstdint.hpp>
@@ -26,11 +27,6 @@ sge::string net_to_host(const string &s);
 }
 }
 
-#ifdef SGE_NARROW_STRING
 #define MESSAGE_TEXT(a) L ## a
-#else
-#define MESSAGE_TEXT(a) a
-#endif
-
 
 #endif

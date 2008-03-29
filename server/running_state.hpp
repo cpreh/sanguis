@@ -9,6 +9,7 @@
 #include "../messages/types.hpp"
 
 #include <sge/string.hpp>
+#include <sge/su.hpp>
 #include <sge/timer.hpp>
 #include <sge/type_info.hpp>
 #include <sge/su.hpp>

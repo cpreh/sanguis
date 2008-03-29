@@ -141,8 +141,6 @@ void sanguis::client::running_state::handle_direction(
 		context<machine>().send(new messages::player_direction_event(player.id(),sge::math::structure_cast<messages::space_unit>(direction)));
 }
 
-#include <sge/math/constants.hpp>
-
 void sanguis::client::running_state::handle_rotation(
 	const draw::player& player,
 	const player_action& m)
@@ -171,12 +169,11 @@ void sanguis::client::running_state::handle_rotation(
 	if(!rotation)
 		return;
 
-	// FIXME: why do we have to add pi / 2 here?
 	context<machine>().send(
 		new messages::player_rotation_event(
 			player.id(),
 			static_cast<messages::space_unit>(
-				*rotation + sge::math::pi<sge::space_unit>() / 2)));
+				*rotation)));
 
 	drawer.process_message(
 		messages::move(
