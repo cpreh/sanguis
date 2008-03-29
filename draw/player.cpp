@@ -6,7 +6,6 @@
 sanguis::draw::player::player(
 	const entity_id id,
 	const sge::sprite::point& pos_,
-	const sge::sprite::dim& sz,
 	const sge::space_unit angle,
 	const sge::math::vector2& speed)
 : sprite(
@@ -21,7 +20,7 @@ sanguis::draw::player::player(
 		sge::sprite(
 			pos_,
 			resource::texture(SGE_TEXT("player_up")),
-			sz,
+			sge::sprite_texture_dim,
 			sge::colors::white,
 			1,
 			angle));

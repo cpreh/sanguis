@@ -1,5 +1,6 @@
 #include "../messages/add.hpp"
 #include "../entity_type.hpp"
+#include "bullet.hpp"
 #include "factory.hpp"
 #include "player.hpp"
 #include "sprite.hpp"
@@ -29,15 +30,28 @@ sanguis::draw::factory::create_entity(
 	// TODO: make this prettier and generate code for it using a template
 	switch(m.type()) {
 	case entity_type::player:
-		return entity_ptr(new player(
-			m.id(),
-			virtual_to_screen(screen_size, m.pos()),
-			sge::sprite_texture_dim,
-			static_cast<sge::space_unit>(m.angle()),
-			// double conversion here (deliberately)
-			sge::math::structure_cast<sge::space_unit>(virtual_to_screen(screen_size, m.speed()))));
+		return entity_ptr(
+			new player(
+				m.id(),
+				virtual_to_screen(screen_size, m.pos()),
+				static_cast<sge::space_unit>(m.angle()),
+				// double conversion here (deliberately)
+				sge::math::structure_cast<sge::space_unit>(
+					virtual_to_screen(
+						screen_size,
+						m.speed()))));
 	case entity_type::cursor:
 		return create_sprite(m, SGE_TEXT("cursor"), screen_size);
+	case entity_type::bullet:
+		return entity_ptr(
+			new bullet(
+				m.id(),
+				virtual_to_screen(screen_size, m.pos()),
+				static_cast<sge::space_unit>(m.angle()),
+				sge::math::structure_cast<sge::space_unit>(
+					virtual_to_screen(
+						screen_size,
+						m.speed()))));
 	default:
 		throw sge::exception(SGE_TEXT("draw::factory: missing loading code!"));
 	}
