@@ -14,12 +14,17 @@ namespace
 {
 
 sanguis::draw::factory::entity_ptr
-create_sprite(const sge::string& s);
+create_sprite(
+	const sanguis::messages::add& m,
+	const sge::string& s,
+	const sge::screen_size_t& screen_size);
 
 }
 
 sanguis::draw::factory::entity_ptr
-sanguis::draw::factory::create_entity(const messages::add& m,const sge::screen_size_t &screen_size)
+sanguis::draw::factory::create_entity(
+	const messages::add& m,
+	const sge::screen_size_t &screen_size)
 {
 	// TODO: make this prettier and generate code for it using a template
 	switch(m.type()) {
@@ -32,16 +37,22 @@ sanguis::draw::factory::create_entity(const messages::add& m,const sge::screen_s
 			// double conversion here (deliberately)
 			sge::math::structure_cast<sge::space_unit>(virtual_to_screen(screen_size, m.speed()))));
 	case entity_type::cursor:
-		return create_sprite(SGE_TEXT("cursor"));
+		return create_sprite(m, SGE_TEXT("cursor"), screen_size);
 	default:
 		throw sge::exception(SGE_TEXT("draw::factory: missing loading code!"));
 	}
 }
 
-sanguis::draw::factory::entity_ptr
-create_sprite(const sge::string& s)
+namespace
 {
-	return sanguis::entity_ptr(
+
+sanguis::draw::factory::entity_ptr
+create_sprite(
+	const sanguis::messages::add& m,
+	const sge::string& s,
+	const sge::screen_size_t& screen_size)
+{
+	return sanguis::draw::factory::entity_ptr(
 		new sanguis::draw::sprite(
 			m.id(),
 			sanguis::virtual_to_screen(screen_size, m.pos()),
@@ -50,7 +61,9 @@ create_sprite(const sge::string& s)
 			static_cast<sge::space_unit>(m.angle()),
 			// double conversion here (deliberately)
 			sge::math::structure_cast<sge::space_unit>(
-				sanguis::draw::virtual_to_screen(
+				sanguis::virtual_to_screen(
 					screen_size,
 					m.speed()))));
+}
+
 }

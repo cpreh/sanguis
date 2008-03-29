@@ -9,8 +9,7 @@ enum type {
 	player,
 	bullet,
 	jackal,
-	cursor,
-	simple_bullet
+	cursor
 };
 }
 

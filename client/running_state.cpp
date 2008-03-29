@@ -197,10 +197,12 @@ void sanguis::client::running_state::handle_shooting(
 	if(m.type() != player_action::shoot)
 		return;
 	
-	context<state_machine>().send(
+	context<machine>().send(
 		sge::math::compare(static_cast<key_scale>(0), m.scale())
-		? new messages::player_stop_shooting(
-			player.id())
-		: new messages::player_start_shooting(
-			player.id()));
+		? static_cast<messages::base*>(
+			new messages::player_stop_shooting(
+				p.id()))
+		: static_cast<messages::base*>(
+			new messages::player_start_shooting(
+				p.id())));
 }
