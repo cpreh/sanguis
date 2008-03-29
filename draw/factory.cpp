@@ -1,5 +1,6 @@
 #include "../messages/add.hpp"
 #include "../entity_type.hpp"
+#include "bullet.hpp"
 #include "factory.hpp"
 #include "player.hpp"
 #include "sprite.hpp"
@@ -10,29 +11,86 @@
 #include <sge/iostream.hpp>
 #include <sge/string.hpp>
 
+namespace
+{
+
 sanguis::draw::factory::entity_ptr
-sanguis::draw::factory::create_entity(const messages::add& m,const sge::screen_size_t &screen_size)
+create_sprite(
+	const sanguis::messages::add& m,
+	const sge::string& s,
+	const sge::screen_size_t& screen_size,
+	const sge::space_unit z);
+
+}
+
+sanguis::draw::factory::entity_ptr
+sanguis::draw::factory::create_entity(
+	const messages::add& m,
+	const sge::screen_size_t &screen_size)
 {
 	// TODO: make this prettier and generate code for it using a template
 	switch(m.type()) {
 	case entity_type::player:
-		return entity_ptr(new player(
-			m.id(),
-			virtual_to_screen(screen_size, m.pos()),
-			sge::sprite_texture_dim,
-			static_cast<sge::space_unit>(m.angle()),
-			// double conversion here (deliberately)
-			sge::math::structure_cast<sge::space_unit>(virtual_to_screen(screen_size, m.speed()))));
+		return entity_ptr(
+			new player(
+				m.id(),
+				virtual_to_screen(screen_size, m.pos()),
+				static_cast<sge::space_unit>(m.angle()),
+				// double conversion here (deliberately)
+				sge::math::structure_cast<sge::space_unit>(
+					virtual_to_screen(
+						screen_size,
+						m.speed()))));
 	case entity_type::cursor:
-		return entity_ptr(new sprite(
-			m.id(),
-			virtual_to_screen(screen_size, m.pos()),
-			sge::sprite_texture_dim,
-			resource::texture(SGE_TEXT("cursor")),
-			static_cast<sge::space_unit>(m.angle()),
-			// double conversion here (deliberately)
-			sge::math::structure_cast<sge::space_unit>(virtual_to_screen(screen_size, m.speed()))));
+		return create_sprite(
+			m,
+			SGE_TEXT("cursor"),
+			screen_size,
+			static_cast<sge::space_unit>(-5));
+	case entity_type::background:
+		return create_sprite(
+			m,
+			SGE_TEXT("background"),
+			screen_size,
+			0);
+	case entity_type::bullet:
+		return entity_ptr(
+			new bullet(
+				m.id(),
+				virtual_to_screen(screen_size, m.pos()),
+				static_cast<sge::space_unit>(m.angle()),
+				sge::math::structure_cast<sge::space_unit>(
+					virtual_to_screen(
+						screen_size,
+						m.speed()))));
 	default:
 		throw sge::exception(SGE_TEXT("draw::factory: missing loading code!"));
 	}
+}
+
+namespace
+{
+
+sanguis::draw::factory::entity_ptr
+create_sprite(
+	const sanguis::messages::add& m,
+	const sge::string& s,
+	const sge::screen_size_t& screen_size,
+	const sge::space_unit z)
+{
+	return sanguis::draw::factory::entity_ptr(
+		new sanguis::draw::sprite(
+			m.id(),
+			sanguis::virtual_to_screen(screen_size, m.pos()),
+			sge::sprite_texture_dim,
+			sanguis::draw::resource::texture(s),
+			static_cast<sge::space_unit>(m.angle()),
+			// double conversion here (deliberately)
+			sge::math::structure_cast<sge::space_unit>(
+				sanguis::virtual_to_screen(
+					screen_size,
+					m.speed())),
+			z));
+}
+
 }

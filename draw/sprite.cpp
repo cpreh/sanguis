@@ -15,7 +15,8 @@ sanguis::draw::sprite::sprite(
 	const sge::sprite::dim& sdim,
 	const sge::virtual_texture_ptr tex,
 	const sge::sprite::rotation_type angle,
-	const sge::math::vector2& speed_)
+	const sge::math::vector2& speed_,
+	const sge::space_unit z)
 : entity(id),
   speed_(speed_),
   pos_(0,0)
@@ -27,7 +28,7 @@ sanguis::draw::sprite::sprite(
 			tex,
 			sdim,
 			sge::colors::white,
-			0,
+			z,
 			angle));
 }
 

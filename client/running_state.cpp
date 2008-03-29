@@ -11,6 +11,8 @@
 #include "../messages/move.hpp"
 #include "../messages/player_direction_event.hpp"
 #include "../messages/player_rotation_event.hpp"
+#include "../messages/player_start_shooting.hpp"
+#include "../messages/player_stop_shooting.hpp"
 #include "../draw/player.hpp"
 #include "../draw/coord_transform.hpp"
 #include <sge/iostream.hpp>
@@ -27,7 +29,8 @@
 namespace
 {
 
-const sanguis::entity_id cursor_id(sanguis::client::next_client_id());
+const sanguis::entity_id cursor_id(sanguis::client::next_client_id()),
+                         background_id(sanguis::client::next_client_id());
 
 }
 
@@ -42,13 +45,28 @@ sanguis::client::running_state::running_state(my_context ctx)
   cursor_pos(0, 0)
 {
 	sge::clog << SGE_TEXT("client: entering running state\n");
+	
+	// add the cursor
 	drawer.process_message(
 		messages::add(
 			::cursor_id,
 			entity_type::cursor,
 			truncation_check_structure_cast<messages::vector2>(cursor_pos),
 			static_cast<messages::space_unit>(0),
-			messages::vector2(static_cast<messages::space_unit>(0),static_cast<messages::space_unit>(0))));
+			messages::vector2(
+				static_cast<messages::space_unit>(0),
+				static_cast<messages::space_unit>(0))));
+
+	// add the background
+	drawer.process_message(
+		messages::add(
+			::background_id,
+			entity_type::background,
+			messages::vector2(0,0),
+			static_cast<messages::space_unit>(0),
+			messages::vector2(
+				static_cast<messages::space_unit>(0),
+				static_cast<messages::space_unit>(0))));
 }
 
 boost::statechart::result sanguis::client::running_state::react(const tick_event&t)
@@ -110,9 +128,11 @@ void sanguis::client::running_state::handle_player_action(const player_action& m
 	// TODO: accumulate events!
 	try
 	{
+		// TODO: install handler logic for this
 		const draw::player& player(drawer.get_player());
 		handle_direction(player, m);
 		handle_rotation(player, m);
+		handle_shooting(player, m);
 	}
 	catch(const sge::exception& e)
 	{
@@ -138,7 +158,10 @@ void sanguis::client::running_state::handle_direction(
 	}
 
 	if(last_direction != direction)
-		context<machine>().send(new messages::player_direction_event(player.id(),sge::math::structure_cast<messages::space_unit>(direction)));
+		context<machine>().send(
+			new messages::player_direction_event(
+				player.id(),
+				sge::math::structure_cast<messages::space_unit>(direction)));
 }
 
 void sanguis::client::running_state::handle_rotation(
@@ -181,4 +204,21 @@ void sanguis::client::running_state::handle_rotation(
 			screen_to_virtual(rend->screen_size(),
 			cursor_pos)));
 
+}
+
+void sanguis::client::running_state::handle_shooting(
+	const draw::player& p,
+	const player_action& m)
+{
+	if(m.type() != player_action::shoot)
+		return;
+	
+	context<machine>().send(
+		sge::math::compare(static_cast<key_scale>(0), m.scale())
+		? static_cast<messages::base*>(
+			new messages::player_stop_shooting(
+				p.id()))
+		: static_cast<messages::base*>(
+			new messages::player_start_shooting(
+				p.id())));
 }

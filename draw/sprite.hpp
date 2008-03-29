@@ -21,7 +21,8 @@ public:
 		const sge::sprite::dim& dim,
 		sge::virtual_texture_ptr tex,
 		sge::sprite::rotation_type angle,
-		const sge::math::vector2& speed);
+		const sge::math::vector2& speed,
+		const sge::space_unit z);
 	sprite_vector to_sprites() const;
 	const sge::sprite::point center() const;
 protected:

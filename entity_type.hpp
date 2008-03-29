@@ -9,7 +9,8 @@ enum type {
 	player,
 	bullet,
 	jackal,
-	cursor
+	cursor,
+	background
 };
 }
 

@@ -26,6 +26,9 @@ void sanguis::client::input_handler::input_callback(const sge::key_pair& p)
 	case sge::kc::mouse_y_axis:
 		rotation_event(p);
 		break;
+	case sge::kc::mouse_l:
+		shooting_event(p);
+		break;
 	default:
 		break;
 	}
@@ -71,4 +74,9 @@ void sanguis::client::input_handler::rotation_event(const sge::key_pair& p)
 	}
 
 	post_message(player_action(to_send, static_cast<key_scale>(p.value())));
+}
+
+void sanguis::client::input_handler::shooting_event(const sge::key_pair& p)
+{
+	post_message(player_action(player_action::shoot, static_cast<key_scale>(p.value())));
 }
