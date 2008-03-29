@@ -15,6 +15,7 @@
 #include <boost/weak_ptr.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/optional.hpp>
 #include <map>
 #include <utility>
 #include <string>
@@ -83,13 +84,11 @@ const sge::sprite_texture_animation::animation_series environment::load_animatio
 	if (!std::getline(file,line))
 		throw sge::exception(SGE_TEXT("unexpected end of file \"")+framesfile.string());
 
-	sge::time_type const_delay;
-	bool has_const_delay = false;
+	boost::optional<sge::time_type> const_delay;
 	if (is_prefix(line,SGE_TEXT("frame_length ")))
 	{
-		has_const_delay = true;
-		const_delay = boost::lexical_cast<sge::time_type>(line.substr(sge::string("frame_length ").length()));
-		const_delay *= sge::second()/1000;
+		const_delay.reset(boost::lexical_cast<sge::time_type>(line.substr(sge::string("frame_length ").length())));
+		*const_delay *= sge::second()/1000;
 	}
 	else
 	{
@@ -98,7 +97,7 @@ const sge::sprite_texture_animation::animation_series environment::load_animatio
 	
 	sge::sprite_texture_animation::animation_series anim;
 
-	unsigned lineno = has_const_delay ? 2 : 1;
+	unsigned lineno = const_delay ? 2 : 1;
 	while (std::getline(file,line))
 	{
 		boost::algorithm::trim(line);
@@ -106,16 +105,20 @@ const sge::sprite_texture_animation::animation_series environment::load_animatio
 		if (line.empty())
 			continue;
 
-		sge::time_type delay = const_delay;
+		sge::time_type delay;
 		sge::string filename = line;
 
-		if (!has_const_delay)
+		if (!const_delay)
 		{
 			sge::text_istringstream ss(line);	
 			ss >> delay >> std::ws;
 			if (!ss)
 				throw sge::exception(SGE_TEXT("invalid line ")+boost::lexical_cast<sge::string>(lineno)+SGE_TEXT(" in animation ")+id);
 			filename = ss.str().substr(ss.tellg());
+		}
+		else
+		{
+			delay = *const_delay;
 		}
 
 		anim.push_back(sge::sprite_texture_animation::entity(delay,load_texture_inner(dir/filename)));

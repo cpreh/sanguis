@@ -16,6 +16,8 @@ class game_state;
 class move;
 class player_direction_event;
 class player_rotation_event;
+class player_start_shooting;
+class player_stop_shooting;
 class player_state;
 class remove;
 class rotate;
