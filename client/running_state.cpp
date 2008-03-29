@@ -74,13 +74,6 @@ boost::statechart::result sanguis::client::running_state::react(const tick_event
 	sge::window::dispatch();
 	machine &m = context<machine>();
 	m.sys.input_system->dispatch();
-	
-	// show text in the screen center (hopefully)
-	m.font.draw_text(SGE_TEXT("running"),
-		sge::font_pos(0,0),sge::font_dim(
-			m.sys.renderer->screen_width(),
-			m.sys.renderer->screen_height()),
-		sge::font_align_h::center,sge::font_align_v::center);
 
 	drawer.draw(t.data);
 	
