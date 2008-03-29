@@ -44,12 +44,24 @@ struct running_state
 		messages::pos_type pos,speed;
 		messages::space_unit angle;
 		messages::string name;
+		bool shooting;
+		sge::shared_ptr<sge::timer> shoot_timer;
+	};
+
+	struct bullet_type
+	{
+		messages::pos_type pos,speed;
+
+		bullet_type() {}
+		bullet_type(const messages::pos_type &pos,const messages::pos_type speed) : pos(pos),speed(speed) {}
 	};
 
 	typedef std::map<net::id_type,player_type> player_map;
+	typedef std::map<sanguis::entity_id,bullet_type> bullet_map;
 
-	sge::con::var<messages::space_unit> player_speed;
+	sge::con::var<messages::space_unit> player_speed,bullet_speed,bullet_freq;
 	player_map players;
+	bullet_map bullets;
 	sge::timer send_timer;
 	sge::con::action_var<sge::space_unit>::type message_freq;
 
@@ -66,10 +78,14 @@ struct running_state
 	boost::statechart::result operator()(const net::id_type,const messages::player_direction_event &);
 	boost::statechart::result operator()(const net::id_type,const messages::player_rotation_event &);
 
+	boost::statechart::result operator()(const net::id_type,const messages::player_start_shooting &);
+	boost::statechart::result operator()(const net::id_type,const messages::player_stop_shooting &);
+
 	void process_client_info(const message_event &);
 
 	// game functions
 	void create_game(const net::id_type,const messages::client_info &);
+	void add_bullet(const net::id_type);
 	sge::space_unit set_message_freq(const sge::space_unit,const sge::space_unit);
 };
 
