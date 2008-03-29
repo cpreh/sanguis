@@ -47,6 +47,7 @@ sanguis::draw::factory::create_entity(
 			SGE_TEXT("cursor"),
 			screen_size,
 			static_cast<sge::space_unit>(-5));
+	// TODO: do we have to tile the background?
 	case entity_type::background:
 		return create_sprite(
 			m,
