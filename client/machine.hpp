@@ -24,7 +24,6 @@
 #include <boost/ptr_container/ptr_vector.hpp>
 
 #include <vector>
-#include <queue>
 
 namespace sanguis
 {
@@ -40,7 +39,6 @@ struct machine
 	net::client net_;
 	net::client::signal_connection s_conn,s_disconn,s_data;
 	net::data_type in_buffer,out_buffer;
-	std::queue<message_event> message_events;
 
 	public:
 	sge::systems &sys;
@@ -56,7 +54,6 @@ struct machine
 
 	void connect();
 	void send(messages::base *const);
-	void queue_internal(const message_event &);
 	void process_message(const message_ptr);
 	// callbacks
 	void connect_callback();

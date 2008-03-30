@@ -7,7 +7,6 @@
 #include <sge/renderer/scoped_renderblock.hpp>
 #include <sge/renderer/scoped_state.hpp>
 #include <sge/iostream.hpp>
-#include <boost/spirit/phoenix.hpp>
 #include <boost/bind.hpp>
 #include <boost/lambda/bind.hpp>
 #include <boost/lambda/construct.hpp>
@@ -53,11 +52,6 @@ void sanguis::client::machine::data_callback(const net::data_type &data)
 	in_buffer = deserialize(in_buffer+data,boost::bind(&machine::process_message,this,_1));
 }
 
-void sanguis::client::machine::queue_internal(const message_event &m)
-{
-	message_events.push(m);
-}
-
 void sanguis::client::machine::send(messages::base *const m)
 {
 	out_buffer += serialize(message_ptr(m));
@@ -65,15 +59,6 @@ void sanguis::client::machine::send(messages::base *const m)
 
 bool sanguis::client::machine::process(const tick_event &t)
 {
-	while (!message_events.empty())
-	{
-		std::cerr << "client: processing event\n";
-		process_event(message_events.front());
-		std::cerr << "client: popping event\n";
-		message_events.pop();
-		std::cerr << "client: popped event\n";
-	}
-	
 	if (out_buffer.size())
 	{
 		net_.queue(out_buffer);

@@ -8,10 +8,8 @@ IF (${CMAKE_COMPILER_IS_GNUCXX})
 ENDIF ()
 
 IF (ENABLE_DEBUG AND CMAKE_COMPILER_IS_GNUCXX)
-	SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -ggdb -g3")
+	SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 ENDIF ()
-
-ADD_DEFINITIONS(-DSGE_NARROW_STRING=1)
 
 FILE (GLOB files *.cpp net/*.cpp client/*.cpp draw/*.cpp messages/*.cpp server/*.cpp)
 

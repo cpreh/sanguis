@@ -9,7 +9,6 @@
 #include <boost/statechart/state_machine.hpp>
 
 #include <map>
-#include <queue>
 
 namespace sanguis
 {
@@ -36,7 +35,6 @@ struct machine
 	void data_callback(const net::id_type,const net::data_type &);
 
 	void send(messages::base *const m);
-	void queue_internal(const message_event &);
 	net::port_type port() const { return port_; }
 	net::server &net() { return net_; }
 	void listen();
@@ -48,7 +46,6 @@ struct machine
 	net::server net_;
 	net::server::signal_connection s_conn,s_disconn,s_data;
 	client_map clients;
-	std::queue<message_event> message_events;
 };
 
 }
