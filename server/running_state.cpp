@@ -36,7 +36,7 @@ namespace
 {
 sge::math::vector2 angle_to_vector(const sge::space_unit angle)
 {
-	return sge::math::vector2(std::sin(angle),std::cos(angle));
+	return sge::math::vector2(std::cos(angle),std::sin(angle));
 }
 }
 
@@ -61,7 +61,7 @@ boost::statechart::result sanguis::server::running_state::react(const tick_event
 {
 	const sge::timer::frames_type delta = t.data.diff_time;
 
-	bool update_pos = send_timer.update_b();
+	const bool update_pos = send_timer.update_b();
 
 	for (player_map::iterator i = players.begin(); i != players.end(); ++i)
 	{
@@ -75,9 +75,12 @@ boost::statechart::result sanguis::server::running_state::react(const tick_event
 			add_bullet(i->first);
 	}
 
-	if (update_pos)
+	/*if (update_pos)
 		for (bullet_map::iterator i = bullets.begin(); i != bullets.end(); ++i)
+		{
+			i->second.pos += i->second.speed * static_cast<messages::space_unit>(delta);
 			context<machine>().send(new messages::move(i->first,i->second.pos));
+		}*/
 
 	return discard_event();
 }
@@ -128,7 +131,7 @@ boost::statechart::result sanguis::server::running_state::operator()(const net::
 void sanguis::server::running_state::add_bullet(const net::id_type id)
 {
 	const entity_id bullet_id = get_unique_id();
-	bullet_type &b = bullets[bullet_id] = bullet_type(angle_to_vector(players[id].angle) * bullet_speed.value(),players[id].pos);
+	bullet_type &b = bullets[bullet_id] = bullet_type(players[id].pos, angle_to_vector(players[id].angle) * bullet_speed.value());
 
 	context<machine>().send(
 		new messages::add(bullet_id,entity_type::bullet,b.pos,players[id].angle,b.speed));

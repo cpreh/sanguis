@@ -19,7 +19,7 @@ sanguis::draw::sprite::sprite(
 	const sge::space_unit z)
 : entity(id),
   speed_(speed_),
-  pos_(0,0)
+  pos_(sge::math::structure_cast<sge::space_unit>(spos))
 {
 	//sge::cout << "adding sprite with id " << id << " and position " << spos << "\n";
 	add_sprite(
