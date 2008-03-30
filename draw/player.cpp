@@ -1,8 +1,9 @@
 #include "player.hpp"
 #include "resource_factory.hpp"
 #include <sge/string.hpp>
-#include <sge/math/angle.hpp>
 #include <sge/math/abs.hpp>
+#include <sge/math/angle.hpp>
+#include <sge/math/constants.hpp>
 #include <sge/math/point_rotate.hpp>
 
 namespace
@@ -29,7 +30,8 @@ sanguis::draw::player::player(
   walk_animation(
   	resource::animation(
 		SGE_TEXT("player_walk"))),
-	angle_(sge::su(0)),target_angle(sge::su(0)),
+	angle_(sge::math::pi<sge::space_unit>()/sge::su(2)),
+	target_angle(angle_),
 	turning_speed(SGE_TEXT("player_turning_speed"),sge::su(2))
 {
 	pos(pos_);
@@ -64,7 +66,7 @@ void sanguis::draw::player::speed(const sge::math::vector2 &v)
 
 void sanguis::draw::player::orientation(sge::space_unit u)
 {
-	top_sprite().rotation(u);
+	top_sprite().rotation(u + sge::math::pi<sge::space_unit>() / static_cast<sge::space_unit>(2));
 }
 
 namespace
