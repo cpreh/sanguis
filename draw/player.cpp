@@ -2,6 +2,7 @@
 #include "resource_factory.hpp"
 #include <sge/string.hpp>
 #include <sge/math/angle.hpp>
+#include <sge/math/abs.hpp>
 #include <sge/math/point_rotate.hpp>
 
 namespace
@@ -78,9 +79,15 @@ void sanguis::draw::player::update(const time_type time)
 	const sge::math::vector2 leg_center(sge::su(64),sge::su(80));
 	const sge::math::vector2 body_center(sge::su(64),sge::su(80));
 
-	if (!sge::math::nearly_equals(angle_,target_angle))
-	//	sge::cout << "angle: " << angle_ << ", target_angle: " << target_angle-sge::su(0.5)*sge::math::pi<sge::space_unit>() << "\n";
+	//if (!sge::math::nearly_equals(angle_,target_angle))
+	if (sge::math::abs(angle_ - target_angle) < turning_speed.value()*time)
+		angle_ = target_angle;
+	else
 		angle_ += signum(target_angle - angle_) * (turning_speed.value() * time);
+	//{
+	//	sge::cout << "angle: " << angle_ << ", target_angle: " << target_angle-sge::su(0.5)*sge::math::pi<sge::space_unit>() << "\n";
+	//	angle_ += signum(target_angle - angle_) * (turning_speed.value() * time);
+	//}
 	
 	//const sge::math::vector2 local_speed = angle_to_vector(angle_);
 	//const sge::math::vector2 local_speed = (speed.is_null()) ? last_speed : speed();
