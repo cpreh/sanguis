@@ -14,7 +14,23 @@ struct message_event : public boost::statechart::event<message_event>
 	net::id_type id;
 
 	message_event(const message_ptr message,const net::id_type id) 
-		: message(message),id(id) {}
+		: message(message),id(id) 
+	{
+		sge::cerr << "server: message_event constructor\n";
+	}
+
+	message_event(const message_event &m)
+	{
+		sge::cerr << "server: message_event copyconstructor\n";
+		id = m.id;
+		message = m.message;
+	}
+
+	boost::intrusive_ptr<const boost::statechart::event_base> clone() const
+	{
+		sge::cerr << "server: in event::clone()\n";
+		return boost::intrusive_ptr<const boost::statechart::event_base>(new message_event(*this));
+	}
 };
 }
 

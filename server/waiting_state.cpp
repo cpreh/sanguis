@@ -38,6 +38,7 @@ boost::statechart::result sanguis::server::waiting_state::operator()(const net::
 {
 	sge::clog << SGE_TEXT("server: received client info from id ") << id << SGE_TEXT("\n");
 
+	//post_event(message_event(message_ptr(new messages::client_info(m)),id));
 	post_event(message_event(message_ptr(new messages::client_info(m)),id));
 	return transit<running_state>();
 }
