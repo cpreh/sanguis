@@ -1,7 +1,6 @@
 #ifndef SANGUIS_DRAW_BULLET_HPP_INCLUDED
 #define SANGUIS_DRAW_BULLET_HPP_INCLUDED
 
-#include <sge/sprite/texture_animation.hpp>
 #include "sprite.hpp"
 
 namespace sanguis

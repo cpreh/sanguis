@@ -1,4 +1,5 @@
 #include "types.hpp"
+#include <sge/config.h>
 #include <sge/codecvt.hpp>
 
 sanguis::messages::string sanguis::messages::host_to_net(const sge::string &s)

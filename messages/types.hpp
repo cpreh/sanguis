@@ -1,9 +1,9 @@
 #ifndef SANGUIS_MESSAGES_TYPES_HPP_INCLUDED
 #define SANGUIS_MESSAGES_TYPES_HPP_INCLUDED
 
-#include <sge/config.h>
 #include <sge/math/vector.hpp>
 #include <sge/math/dim.hpp>
+#include <sge/string.hpp>
 #include <boost/cstdint.hpp>
 #include <string>
 
