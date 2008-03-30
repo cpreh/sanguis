@@ -58,16 +58,38 @@ void sanguis::draw::player::speed(const sge::math::vector2 &v)
 {
 	sprite::speed(v);
 	if (!v.is_null())
-	{
 		target_angle = *sge::math::angle_to<sge::space_unit>(sge::math::vector2(),v);
-	//	sge::cout << "v: " << v << ", angle: " << target_angle-sge::su(0.5)*sge::math::pi<sge::space_unit>() << "\n";
-	}
 }
 
 
 void sanguis::draw::player::orientation(sge::space_unit u)
 {
 	top_sprite().rotation(u);
+}
+
+namespace
+{
+sge::space_unit rel_angle_to_abs(const sge::space_unit a)
+{
+	assert(a >= -sge::math::pi<sge::space_unit>() && a <= sge::math::pi<sge::space_unit>());
+
+	if (sge::math::almost_zero(a))
+		return sge::su(0);
+
+	return a > sge::su(0) ? a : sge::math::pi<sge::space_unit>()-a;
+}
+
+sge::space_unit abs_angle_to_rel(sge::space_unit a)
+{
+	a = sge::math::mod(a,sge::math::pi<sge::space_unit>());
+
+	if (sge::math::almost_zero(a))
+		return sge::su(0);
+
+	return a > sge::math::pi<sge::space_unit>() 
+		? a-sge::su(2)*sge::math::pi<sge::space_unit>() 
+		: a;
+}
 }
 
 void sanguis::draw::player::update(const time_type time)
@@ -79,11 +101,19 @@ void sanguis::draw::player::update(const time_type time)
 	const sge::math::vector2 leg_center(sge::su(64),sge::su(80));
 	const sge::math::vector2 body_center(sge::su(64),sge::su(80));
 
+	const sge::space_unit abs_angle = rel_angle_to_abs(angle_),
+	                      abs_target = rel_angle_to_abs(target_angle);
+
+	const sge::space_unit dir = signum(abs_target-abs_angle);
+
+	sge::cout << "angle: " << sge::math::rad_to_deg(abs_angle) << "/" << sge::math::rad_to_deg(angle_) << ", t: " << sge::math::rad_to_deg(abs_target) << "/" << sge::math::rad_to_deg(target_angle) << ", dir: " << dir << "\n";
+
 	//if (!sge::math::nearly_equals(angle_,target_angle))
-	if (sge::math::abs(angle_ - target_angle) < turning_speed.value()*time)
+	if (sge::math::abs(abs_angle - abs_target) < turning_speed.value()*time)
 		angle_ = target_angle;
 	else
-		angle_ += signum(target_angle - angle_) * (turning_speed.value() * time);
+		angle_ = abs_angle_to_rel(abs_angle + dir * (turning_speed.value() * time));
+
 	//{
 	//	sge::cout << "angle: " << angle_ << ", target_angle: " << target_angle-sge::su(0.5)*sge::math::pi<sge::space_unit>() << "\n";
 	//	angle_ += signum(target_angle - angle_) * (turning_speed.value() * time);
