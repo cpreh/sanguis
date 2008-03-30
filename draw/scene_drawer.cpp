@@ -73,15 +73,20 @@ sanguis::draw::scene_drawer::get_player() const
 
 void sanguis::draw::scene_drawer::operator()(const messages::add& m)
 {
-	if(entities.insert(m.id(), factory::create_entity(m, ss.get_renderer()->screen_size())).second == false)
+	const std::pair<entity_map::iterator, bool> ret(
+		entities.insert(
+			m.id(),
+			factory::create_entity(
+				m,
+				ss.get_renderer()->screen_size())));
+
+	if(ret.second == false)
 		throw sge::exception(SGE_TEXT("Object with id already in entity list!"));
 	if(m.type() == entity_type::player)
 	{
 		if(player_)
 			throw sge::exception(SGE_TEXT("Player already exists in scene_drawer!"));
-		const entity_map::iterator it(entities.find(m.id()));
-		// TODO: maybe take the address of the auto_ptr directly?
-		player_ = dynamic_cast<player*>(it->second);
+		player_ = dynamic_cast<player*>(ret.first->second);
 	}
 }
 
