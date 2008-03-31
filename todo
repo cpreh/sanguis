@@ -1,3 +1,2 @@
 -replace message_functor by something prettier
--add background sprite
--make player look into direction speed()
+-move console variable for player to somewhere else so it isn't instantiated twice
