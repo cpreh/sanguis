@@ -5,6 +5,7 @@
 #include <sge/math/angle.hpp>
 #include <sge/math/constants.hpp>
 #include <sge/math/point_rotate.hpp>
+#include <iomanip>
 
 namespace
 {
@@ -19,6 +20,37 @@ T signum(const T &t)
 }
 }
 
+namespace
+{
+template<typename T>
+bool is_between(const T &t,const T &l,const T &r)
+{
+	return t >= l && t <= r;
+}
+
+sge::space_unit rel_angle_to_abs(const sge::space_unit a)
+{
+	assert(a >= -sge::math::pi<sge::space_unit>() && a <= sge::math::pi<sge::space_unit>());
+
+	if (sge::math::almost_zero(a))
+		return sge::su(0);
+
+	return a > sge::su(0) ? a : sge::su(2)*sge::math::pi<sge::space_unit>()+a;
+}
+
+sge::space_unit abs_angle_to_rel(sge::space_unit a)
+{
+	a = sge::math::mod(a,sge::su(2)*sge::math::pi<sge::space_unit>());
+
+	if (is_between(a,-sge::math::pi<sge::space_unit>(),sge::math::pi<sge::space_unit>()))
+		return a;
+
+	return a > sge::math::pi<sge::space_unit>() 
+		? a-sge::su(2)*sge::math::pi<sge::space_unit>() 
+		: a;
+}
+}
+
 sanguis::draw::player::player(
 	const entity_id id,
 	const sge::sprite::point& pos_,
@@ -30,9 +62,9 @@ sanguis::draw::player::player(
   walk_animation(
   	resource::animation(
 		SGE_TEXT("player_walk"))),
-	angle_(sge::math::pi<sge::space_unit>()/sge::su(2)),
+	angle_(sge::su(0)),
 	target_angle(angle_),
-	turning_speed(SGE_TEXT("player_turning_speed"),sge::su(2))
+	turning_speed(SGE_TEXT("player_turning_speed"),sge::su(0.5))
 {
 	pos(pos_);
 	sge::sprite skel_sprite(
@@ -66,33 +98,9 @@ void sanguis::draw::player::speed(const sge::math::vector2 &v)
 
 void sanguis::draw::player::orientation(sge::space_unit u)
 {
-	top_sprite().rotation(u + sge::math::pi<sge::space_unit>() / static_cast<sge::space_unit>(2));
+	top_sprite().rotation(u + sge::math::pi<sge::space_unit>() / sge::su(2));
 }
 
-namespace
-{
-sge::space_unit rel_angle_to_abs(const sge::space_unit a)
-{
-	assert(a >= -sge::math::pi<sge::space_unit>() && a <= sge::math::pi<sge::space_unit>());
-
-	if (sge::math::almost_zero(a))
-		return sge::su(0);
-
-	return a > sge::su(0) ? a : sge::math::pi<sge::space_unit>()-a;
-}
-
-sge::space_unit abs_angle_to_rel(sge::space_unit a)
-{
-	a = sge::math::mod(a,sge::math::pi<sge::space_unit>());
-
-	if (sge::math::almost_zero(a))
-		return sge::su(0);
-
-	return a > sge::math::pi<sge::space_unit>() 
-		? a-sge::su(2)*sge::math::pi<sge::space_unit>() 
-		: a;
-}
-}
 
 void sanguis::draw::player::update(const time_type time)
 {
@@ -105,38 +113,48 @@ void sanguis::draw::player::update(const time_type time)
 
 	const sge::space_unit abs_angle = rel_angle_to_abs(angle_),
 	                      abs_target = rel_angle_to_abs(target_angle);
+	
+	const sge::space_unit twopi = sge::su(2)*sge::math::pi<sge::space_unit>();
 
-	const sge::space_unit dir = signum(abs_target-abs_angle);
+	assert(abs_angle >= sge::su(0) && abs_angle <= twopi);
+	assert(abs_target >= sge::su(0) && abs_target <= twopi);
 
-	sge::cout << "angle: " << sge::math::rad_to_deg(abs_angle) << "/" << sge::math::rad_to_deg(angle_) << ", t: " << sge::math::rad_to_deg(abs_target) << "/" << sge::math::rad_to_deg(target_angle) << ", dir: " << dir << "\n";
+	const sge::space_unit abs_dist = sge::math::abs(abs_target - abs_angle);
+	const sge::space_unit swap_dist = (abs_angle > abs_target) ? twopi-abs_angle+abs_target : twopi-abs_target+abs_angle;
+	const sge::space_unit min_dist = std::min(swap_dist,abs_dist);
 
-	//if (!sge::math::nearly_equals(angle_,target_angle))
-	if (sge::math::abs(abs_angle - abs_target) < turning_speed.value()*time)
+
+	assert(abs_dist >= sge::su(0) && swap_dist >= sge::su(0) && min_dist >= sge::su(0));
+
+	sge::space_unit dir;
+	if (abs_angle > abs_target)
+		dir = (swap_dist > abs_dist) ? sge::su(-1) : sge::su(1);
+	else
+		dir = (swap_dist > abs_dist) ? sge::su(1) : sge::su(-1);
+
+	/* DEBUG
+	if (!sge::math::nearly_equals(target_angle,angle_))
+	{
+		sge::cout << "a = " 
+		          << sge::math::rad_to_deg(abs_angle) << ", t = " 
+							<< sge::math::rad_to_deg(abs_target) << ", abs_dist = " 
+							<< sge::math::rad_to_deg(abs_dist) << ", swap_dist = " 
+							<< sge::math::rad_to_deg(swap_dist) << ", dir = " << dir << "\n";
+	} */
+
+	if (min_dist < time/turning_speed.value())
 		angle_ = target_angle;
 	else
-		angle_ = abs_angle_to_rel(abs_angle + dir * (turning_speed.value() * time));
+		angle_ = abs_angle_to_rel(abs_angle + dir * time/turning_speed.value());
 
-	//{
-	//	sge::cout << "angle: " << angle_ << ", target_angle: " << target_angle-sge::su(0.5)*sge::math::pi<sge::space_unit>() << "\n";
-	//	angle_ += signum(target_angle - angle_) * (turning_speed.value() * time);
-	//}
-	
-	//const sge::math::vector2 local_speed = angle_to_vector(angle_);
-	//const sge::math::vector2 local_speed = (speed.is_null()) ? last_speed : speed();
+	const sge::space_unit sprite_rotation = angle_ + sge::math::pi<sge::space_unit>()/sge::su(2);
 
-	/*
-	const boost::optional<sge::space_unit> bottom_angle(
-		sge::math::angle_to<sge::space_unit>(
-			sge::math::vector2(0, 0),
-			local_speed));
-	*/
-
-	bottom_sprite().rotation(angle_);
+	bottom_sprite().rotation(sprite_rotation);
 
 	const sge::math::vector2 new_rotation = sge::math::point_rotate(
 		leg_center,
 		sge::math::vector2(sge::su(bottom_sprite().w()/2),sge::su(bottom_sprite().h()/2)),
-		angle_);
+		sprite_rotation);
 
 	const sge::math::vector2 rot_abs = 
 		sge::math::structure_cast<sge::space_unit>(bottom_sprite().pos())+new_rotation;
