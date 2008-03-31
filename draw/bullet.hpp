@@ -17,7 +17,7 @@ public:
 		const sge::math::vector2& speed);
 private:
 	void update(time_type);
-	sge::space_unit tail_length;
+	sge::sprite::point origin;
 };
 
 }

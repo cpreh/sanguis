@@ -21,7 +21,6 @@ sanguis::draw::sprite::sprite(
   speed_(speed_),
   pos_(sge::math::structure_cast<sge::space_unit>(spos))
 {
-	//sge::cout << "adding sprite with id " << id << " and position " << spos << "\n";
 	add_sprite(
 		sge::sprite(
 			spos,
@@ -30,6 +29,8 @@ sanguis::draw::sprite::sprite(
 			sge::colors::white,
 			z,
 			angle));
+	
+	at(0).set_center(spos);
 }
 
 sanguis::draw::entity::sprite_vector sanguis::draw::sprite::to_sprites() const
@@ -100,5 +101,5 @@ const sge::math::vector2& sanguis::draw::sprite::speed() const
 void sanguis::draw::sprite::update_pos(const sge::sprite::point& p)
 {
 	BOOST_FOREACH(sge::sprite& s, sprites)
-		s.pos() = p;
+		s.set_center(p);
 }

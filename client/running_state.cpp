@@ -62,7 +62,7 @@ sanguis::client::running_state::running_state(my_context ctx)
 		messages::add(
 			::background_id,
 			entity_type::background,
-			messages::vector2(0,0),
+			messages::vector2(static_cast<messages::space_unit>(0.5),static_cast<messages::space_unit>(0.5)),
 			static_cast<messages::space_unit>(0),
 			messages::vector2(
 				static_cast<messages::space_unit>(0),
