@@ -1,5 +1,6 @@
 #include "player.hpp"
 #include "resource_factory.hpp"
+#include "z_ordering.hpp"
 #include <sge/string.hpp>
 #include <sge/math/abs.hpp>
 #include <sge/math/angle.hpp>
@@ -66,22 +67,26 @@ sanguis::draw::player::player(
 	target_angle(angle_),
 	turning_speed(SGE_TEXT("player_turning_speed"),sge::su(0.5))
 {
+	// this is neccessary to set the internal position right
+	// FIXME: fix this?
 	pos(pos_);
+
 	sge::sprite skel_sprite(
 		sge::sprite(
 			pos_,
 			resource::texture(SGE_TEXT("player_up")),
 			sge::sprite_texture_dim,
 			sge::colors::white,
-			-1,
+			z_ordering::player_lower,
 			angle));
 	add_sprite(skel_sprite);
 
-	skel_sprite.z() = static_cast<sge::space_unit>(-2);
+	skel_sprite.z() = z_ordering::player_upper;
 	add_sprite(skel_sprite);
 
 	walk_animation.bind(&bottom_sprite());
 
+	// FIXME: put the rotation point in a config file?
 	top_sprite().rotate_around(
 		sge::sprite::point(
 			64,80));
@@ -108,6 +113,7 @@ void sanguis::draw::player::update(const time_type time)
 	if(!sprite::speed().is_null())
 		walk_animation.process();
 
+	// FIXME: load rotation point (see above)
 	const sge::math::vector2 leg_center(sge::su(64),sge::su(80));
 	const sge::math::vector2 body_center(sge::su(64),sge::su(80));
 

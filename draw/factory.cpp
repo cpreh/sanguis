@@ -6,6 +6,7 @@
 #include "sprite.hpp"
 #include "resource_factory.hpp"
 #include "coord_transform.hpp"
+#include "z_ordering.hpp"
 
 #include <sge/exception.hpp>
 #include <sge/iostream.hpp>
@@ -46,14 +47,14 @@ sanguis::draw::factory::create_entity(
 			m,
 			SGE_TEXT("cursor"),
 			screen_size,
-			static_cast<sge::space_unit>(-5));
+			z_ordering::cursor);
 	// TODO: do we have to tile the background?
 	case entity_type::background:
 		return create_sprite(
 			m,
 			SGE_TEXT("background"),
 			screen_size,
-			0);
+			z_ordering::background);
 	case entity_type::bullet:
 		return entity_ptr(
 			new bullet(
