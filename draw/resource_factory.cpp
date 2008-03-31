@@ -142,11 +142,11 @@ sge::virtual_texture_ptr environment::load_texture(const sanguis::draw::resource
 
 void environment::load_textures()
 {
-	// look for .id files
+	// look for .tex files
 	for (boost::filesystem::basic_directory_iterator<sge::path> i(sanguis::media_path()),end; i != end; ++i)
 	{
 		const sge::path &p = i->path();
-		if (!boost::filesystem::is_regular(p) || !is_suffix(p.leaf(),SGE_TEXT(".id")))
+		if (!boost::filesystem::is_regular(p) || !is_suffix(p.leaf(),SGE_TEXT(".tex")))
 			continue;
 		
 		// and parse line by line
