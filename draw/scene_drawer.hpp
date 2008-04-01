@@ -1,5 +1,5 @@
-#ifndef DRAW_SCENE_DRAWER_HPP_INCLUDED
-#define DRAW_SCENE_DRAWER_HPP_INCLUDED
+#ifndef SANGUIS_DRAW_SCENE_DRAWER_HPP_INCLUDED
+#define SANGUIS_DRAW_SCENE_DRAWER_HPP_INCLUDED
 
 #include <vector>
 #include <map>
@@ -12,6 +12,7 @@
 #include "../entity_id.hpp"
 #include "../messages/fwd.hpp"
 #include "../tick_event.hpp"
+#include "../client_messages/fwd.hpp"
 #include "entity.hpp"
 
 namespace sanguis
@@ -28,7 +29,10 @@ public:
 	
 	void process_message(const messages::base&);
 
+	void process_message(const client_messages::base&);
+
 	void draw(const tick_data &);
+
 	const player& get_player() const;
 
 	void operator()(const messages::add&);
@@ -37,10 +41,13 @@ public:
 	void operator()(const messages::remove&);
 	void operator()(const messages::rotate&);
 	void operator()(const messages::speed&);
+
+	void operator()(const client_messages::add&);
 private:
 	entity& get_entity(entity_id);
 	const entity& get_entity(entity_id) const;
 	void process_default_msg(const messages::base&);
+	void process_default_client_msg(const client_messages::base&);
 
 	sge::sprite::system ss;
 	player*             player_;

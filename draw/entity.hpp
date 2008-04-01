@@ -1,5 +1,5 @@
-#ifndef DRAW_ENTITY_HPP_INCLUDED
-#define DRAW_ENTITY_HPP_INCLUDED
+#ifndef SANGUIS_DRAW_ENTITY_HPP_INCLUDED
+#define SANGUIS_DRAW_ENTITY_HPP_INCLUDED
 
 #include <vector>
 #include <sge/sprite/object.hpp>

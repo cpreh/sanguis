@@ -8,10 +8,7 @@ namespace entity_type {
 enum type {
 	player,
 	bullet,
-	jackal,
-	cursor,
-	background,
-	healthbar
+	jackal
 };
 }
 

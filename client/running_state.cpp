@@ -1,11 +1,12 @@
 #include "running_state.hpp"
 #include "player_action.hpp"
 #include "intermediate_state.hpp"
-#include "client_id.hpp"
+#include "next_id.hpp"
+#include "../client_entity_type.hpp"
 #include "../dispatch_type.hpp"
 #include "../truncation_check_cast.hpp"
 #include "../truncation_check_structure_cast.hpp"
-#include "../messages/add.hpp"
+#include "../client_messages/add.hpp"
 #include "../messages/disconnect.hpp"
 #include "../messages/game_state.hpp"
 #include "../messages/move.hpp"
@@ -29,9 +30,9 @@
 namespace
 {
 
-const sanguis::entity_id cursor_id(sanguis::client::next_client_id()),
-                         background_id(sanguis::client::next_client_id()),
-                         healthbar_id(sanguis::client::next_client_id());
+const sanguis::entity_id cursor_id(sanguis::client::next_id()),
+                         background_id(sanguis::client::next_id()),
+                         healthbar_id(sanguis::client::next_id());
 
 }
 
@@ -47,34 +48,18 @@ sanguis::client::running_state::running_state(my_context ctx)
 {
 	sge::clog << SGE_TEXT("client: entering running state\n");
 	
-	// add the cursor
 	drawer.process_message(
-		messages::add(
+		client_messages::add(
 			::cursor_id,
-			entity_type::cursor,
-			truncation_check_structure_cast<messages::vector2>(cursor_pos),
-			static_cast<messages::space_unit>(0),
-			messages::vector2(
-				static_cast<messages::space_unit>(0),
-				static_cast<messages::space_unit>(0)),
-			static_cast<messages::space_unit>(0)));
+			client_entity_type::cursor));
 
-	// add the background
 	drawer.process_message(
-		messages::add(
+		client_messages::add(
 			::background_id,
-			entity_type::background,
-			messages::vector2(
-				static_cast<messages::space_unit>(0.5),
-				static_cast<messages::space_unit>(0.5)),
-			static_cast<messages::space_unit>(0),
-			messages::vector2(
-				static_cast<messages::space_unit>(0),
-				static_cast<messages::space_unit>(0)),
-			static_cast<messages::space_unit>(0)));
+			client_entity_type::background));
 	
 	// add experimental healthbar
-	drawer.process_message(
+	/*drawer.process_message(
 		messages::add(
 			::healthbar_id,
 			entity_type::healthbar,
@@ -86,7 +71,7 @@ sanguis::client::running_state::running_state(my_context ctx)
 				static_cast<messages::space_unit>(0),
 				static_cast<messages::space_unit>(0)),
 			static_cast<messages::space_unit>(500),
-			static_cast<messages::space_unit>(1000)));
+			static_cast<messages::space_unit>(1000)));*/
 }
 
 boost::statechart::result sanguis::client::running_state::react(const tick_event&t)

@@ -11,7 +11,7 @@ IF (ENABLE_DEBUG AND CMAKE_COMPILER_IS_GNUCXX)
 	SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 ENDIF ()
 
-FILE (GLOB files *.cpp net/*.cpp client/*.cpp draw/*.cpp messages/*.cpp server/*.cpp)
+FILE (GLOB files *.cpp net/*.cpp client/*.cpp client_messages/*.cpp draw/*.cpp messages/*.cpp server/*.cpp)
 
 add_executable(main ${files})
 target_link_libraries(main boost_serialization boost_thread

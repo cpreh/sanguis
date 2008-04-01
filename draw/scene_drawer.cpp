@@ -1,4 +1,5 @@
 #include "scene_drawer.hpp"
+#include "client_factory.hpp"
 #include "factory.hpp"
 #include "player.hpp"
 #include "coord_transform.hpp"
@@ -10,6 +11,7 @@
 #include "../messages/remove.hpp"
 #include "../messages/rotate.hpp"
 #include "../messages/speed.hpp"
+#include "../client_messages/add.hpp"
 
 #include <sge/exception.hpp>
 #include <sge/iostream.hpp>
@@ -45,6 +47,18 @@ void sanguis::draw::scene_drawer::process_message(const messages::base& m)
 		*this,
 		m,
 		boost::bind(&scene_drawer::process_default_msg, this, _1));
+}
+
+void sanguis::draw::scene_drawer::process_message(const client_messages::base& m)
+{
+	dispatch_type<
+		boost::mpl::vector<
+			client_messages::add
+			>,
+		void>(
+		*this,
+		m,
+		boost::bind(&scene_drawer::process_default_client_msg, this, _1));
 }
 
 void sanguis::draw::scene_drawer::draw(const tick_data &t)
@@ -112,7 +126,20 @@ void sanguis::draw::scene_drawer::operator()(const messages::rotate& m)
 
 void sanguis::draw::scene_drawer::operator()(const messages::speed& m)
 {
-	get_entity(m.id()).speed(sge::math::structure_cast<sge::space_unit>(virtual_to_screen(ss.get_renderer()->screen_size(),m.get())));
+	get_entity(m.id()).speed(
+		sge::math::structure_cast<sge::space_unit>(
+			virtual_to_screen(ss.get_renderer()->screen_size(),
+			m.get())));
+}
+
+void sanguis::draw::scene_drawer::operator()(const client_messages::add& m)
+{
+	if(entities.insert(
+		m.id(),
+		client_factory::create_entity(
+			m,
+			ss.get_renderer()->screen_size())).second == false)
+		throw sge::exception(SGE_TEXT("Client object with id already in entity list!"));
 }
 
 sanguis::draw::entity& sanguis::draw::scene_drawer::get_entity(const entity_id id)
@@ -133,4 +160,9 @@ sanguis::draw::scene_drawer::get_entity(const entity_id id) const
 void sanguis::draw::scene_drawer::process_default_msg(const messages::base& m)
 {
 	sge::clog << SGE_TEXT("Invalid message event in scene_drawer: ") << sge::iconv(typeid(m).name()) << SGE_TEXT('\n');
+}
+
+void sanguis::draw::scene_drawer::process_default_client_msg(
+	const client_messages::base& m)
+{
 }
