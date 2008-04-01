@@ -1,7 +1,10 @@
 #include "healthbar.hpp"
 #include "resource_factory.hpp"
 #include "z_ordering.hpp"
+#include <sge/su.hpp>
+#include <sge/math/compare.hpp>
 #include <sge/renderer/color.hpp>
+#include <sge/renderer/colors.hpp>
 
 namespace
 {
@@ -21,14 +24,19 @@ sanguis::draw::healthbar::healthbar(
 	sge::math::vector2(0,0),
 	sge::sprite::object(
 		pos,
-		resource::texture(SGE_TEXT("healthbar_border")),
+		sge::virtual_texture_ptr(),
 		dim,
-		sge::colors::white,
+		sge::colors::darkgrey,
 		z_ordering::healthbar_lower,
 		static_cast<sge::sprite::rotation_type>(0))),
   health_(health_),
   max_health_(max_health_)
 {
+	if(health_ > max_health_)
+		throw sge::exception(SGE_TEXT("draw::healthbar: health > max_health!"));
+	if(sge::math::almost_zero(max_health_))
+		throw sge::exception(SGE_TEXT("draw::healthbar: max_health is 0!"));
+
 	add_sprite(
 		sge::sprite::object(
 			inner_pos(),
@@ -37,6 +45,7 @@ sanguis::draw::healthbar::healthbar(
 			sge::colors::green,
 			z_ordering::healthbar_upper,
 			static_cast<sge::sprite::rotation_type>(0)));
+	recalc_health();
 }
 
 void sanguis::draw::healthbar::health(
@@ -107,7 +116,7 @@ sanguis::draw::healthbar::inner() const
 sge::space_unit
 sanguis::draw::healthbar::remaining_health() const
 {
-	return max_health_ - health_;
+	return health_ / max_health_;
 }
 
 void sanguis::draw::healthbar::recalc_health()

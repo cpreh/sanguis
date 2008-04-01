@@ -14,24 +14,28 @@ namespace messages
 class add : public entity_message {
 public:
 	add();
-	add(const entity_id id,
-	    const entity_type::type type_,
-	    const pos_type& pos,
-	    const space_unit angle,
-	    const vector2& speed,
-			const space_unit health = static_cast<messages::space_unit>(0));
+	add(
+		entity_id id,
+		entity_type::type type_,
+		const pos_type& pos,
+		space_unit angle,
+		const vector2& speed,
+		space_unit health = static_cast<messages::space_unit>(0),
+		space_unit max_health = static_cast<messages::space_unit>(0));
 
 	entity_type::type type() const;
 	const pos_type& pos() const;
 	space_unit angle() const;
-	space_unit health() const;
 	const vector2& speed() const;
+	space_unit health() const;
+	space_unit max_health() const;
 private:
 	entity_type::type  type_;
 	pos_type           pos_;
 	space_unit         angle_;
 	vector2            speed_;
-	space_unit         health_;
+	space_unit         health_,
+	                   max_health_;
 
 	friend class boost::serialization::access;
 	template<typename Archive>

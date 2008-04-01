@@ -10,7 +10,8 @@ enum type {
 	bullet,
 	jackal,
 	cursor,
-	background
+	background,
+	healthbar
 };
 }
 

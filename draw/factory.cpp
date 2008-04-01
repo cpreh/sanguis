@@ -4,6 +4,7 @@
 #include "factory.hpp"
 #include "player.hpp"
 #include "sprite.hpp"
+#include "healthbar.hpp"
 #include "resource_factory.hpp"
 #include "coord_transform.hpp"
 #include "z_ordering.hpp"
@@ -56,6 +57,14 @@ sanguis::draw::factory::create_entity(
 			SGE_TEXT("background"),
 			screen_size,
 			z_ordering::background);
+	case entity_type::healthbar:
+		return entity_ptr(
+			new healthbar(
+				m.id(),
+				virtual_to_screen(screen_size, m.pos()),
+				sge::sprite::dim(30, 10), // FIXME
+				m.health(),
+				m.max_health()));
 	case entity_type::bullet:
 		return entity_ptr(
 			new bullet(
