@@ -52,7 +52,7 @@ struct environment
 	void load_textures();
 	sge::virtual_texture_ptr load_texture(const sanguis::draw::resource::identifier_type &);
 	sge::virtual_texture_ptr load_texture_inner(const sge::path &);
-	const sge::sprite_texture_animation::animation_series load_animation(const sanguis::draw::resource::identifier_type&);
+	const sge::sprite::texture_animation::animation_series load_animation(const sanguis::draw::resource::identifier_type&);
 };
 
 environment::environment(const sge::image_loader_ptr il,const sge::renderer_ptr r) 
@@ -62,7 +62,7 @@ environment::environment(const sge::image_loader_ptr il,const sge::renderer_ptr 
 	load_textures();
 }
 
-const sge::sprite_texture_animation::animation_series environment::load_animation(const sanguis::draw::resource::identifier_type& id)
+const sge::sprite::texture_animation::animation_series environment::load_animation(const sanguis::draw::resource::identifier_type& id)
 {
 	const sge::path dir = sanguis::media_path()/id;
 	if (!boost::filesystem::exists(dir) || !boost::filesystem::is_directory(dir))
@@ -95,7 +95,7 @@ const sge::sprite_texture_animation::animation_series environment::load_animatio
 		file.seekg(0,std::ios_base::beg);
 	}
 	
-	sge::sprite_texture_animation::animation_series anim;
+	sge::sprite::texture_animation::animation_series anim;
 
 	unsigned lineno = const_delay ? 2 : 1;
 	while (std::getline(file,line))
@@ -121,7 +121,7 @@ const sge::sprite_texture_animation::animation_series environment::load_animatio
 			delay = *const_delay;
 		}
 
-		anim.push_back(sge::sprite_texture_animation::entity(delay,load_texture_inner(dir/filename)));
+		anim.push_back(sge::sprite::texture_animation::entity(delay,load_texture_inner(dir/filename)));
 		++lineno;
 	}
 		
@@ -193,11 +193,11 @@ typedef std::map<sanguis::draw::resource::identifier_type,
 texture_map textures;
 
 typedef std::map<sanguis::draw::resource::identifier_type,
-                 sge::sprite_texture_animation::animation_series>
+                 sge::sprite::texture_animation::animation_series>
 	animation_map;
 animation_map animations;
 
-const sge::sprite_texture_animation::animation_series
+const sge::sprite::texture_animation::animation_series
 load_animation(const sanguis::draw::resource::identifier_type&);
 
 const sge::virtual_texture_ptr
@@ -206,7 +206,7 @@ load_texture(const sanguis::draw::resource::identifier_type&);
 environment *env = 0;
 }
 
-const sge::sprite_texture_animation::animation_series
+const sge::sprite::texture_animation::animation_series
 sanguis::draw::resource::animation(const identifier_type& id)
 {
 	return map_get_or_create(animations, id, load_animation);
@@ -251,7 +251,7 @@ load_texture(const sanguis::draw::resource::identifier_type& id)
 	return env->load_texture(id);
 }
 
-const sge::sprite_texture_animation::animation_series
+const sge::sprite::texture_animation::animation_series
 load_animation(const sanguis::draw::resource::identifier_type& id)
 {
 	check_env();

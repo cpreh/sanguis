@@ -42,8 +42,8 @@ private:
 	const entity& get_entity(entity_id) const;
 	void process_default_msg(const messages::base&);
 
-	sge::sprite_system ss;
-	player*            player_;
+	sge::sprite::system ss;
+	player*             player_;
 
 	typedef boost::ptr_map<entity_id, entity> entity_map;
 	entity_map entities;
@@ -52,7 +52,7 @@ private:
 	typedef std::map<sge::type_info, dispatch_fun> event_map;
 	event_map event_dispatcher;
 
-	std::vector<sge::sprite> sprites;
+	std::vector<sge::sprite::object> sprites;
 };
 
 }

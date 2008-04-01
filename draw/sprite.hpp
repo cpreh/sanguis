@@ -1,7 +1,7 @@
 #ifndef DRAW_SPRITE_HPP_INCLUDED
 #define DRAW_SPRITE_HPP_INCLUDED
 
-#include <sge/sprite/sprite.hpp>
+#include <sge/sprite/object.hpp>
 #include <sge/math/vector.hpp>
 #include "entity.hpp"
 
@@ -14,22 +14,17 @@ class sprite : public entity {
 public:
 	sprite(
 		entity_id id,
-		const sge::math::vector2& speed);
-	sprite(
-		entity_id id,
-		const sge::sprite::point& pos,
-		const sge::sprite::dim& dim,
-		sge::virtual_texture_ptr tex,
-		sge::sprite::rotation_type angle,
 		const sge::math::vector2& speed,
-		const sge::space_unit z);
+		const sge::sprite::object& master);
 	sprite_vector to_sprites() const;
 	const sge::sprite::point center() const;
 protected:
 	virtual void update(time_type);
-	sge::sprite& at(sprite_vector::size_type);
-	const sge::sprite& at(sprite_vector::size_type) const;
-	void add_sprite(const sge::sprite&);
+	sge::sprite::object& at(sprite_vector::size_type);
+	const sge::sprite::object& at(sprite_vector::size_type) const;
+	sge::sprite::object& master();
+	const sge::sprite::object& master() const;
+	void add_sprite(const sge::sprite::object&);
 	virtual void orientation(sge::space_unit);
 	virtual void speed(const sge::math::vector2&);
 	void pos(const sge::sprite::point&);

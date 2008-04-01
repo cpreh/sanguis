@@ -9,20 +9,27 @@ sanguis::draw::bullet::bullet(
 	const sge::math::vector2& speed)
 : sprite(
 	id,
-	pos_,
-	sge::sprite_texture_dim,
-	resource::texture(
-		SGE_TEXT("bullet")),
-	angle,
 	speed,
-	z_ordering::bullet),
-	origin(pos_)
+	sge::sprite::object(
+		pos_,
+		resource::texture(
+			SGE_TEXT("bullet")),
+		sge::sprite::texture_dim,
+		sge::colors::white,
+		z_ordering::bullet,
+		angle)),
+  origin(pos_)
 {
 	add_sprite(
-		sge::sprite(pos_,
-			resource::texture(SGE_TEXT("tail")),sge::sprite_texture_dim,sge::colors::white,z_ordering::bullet,angle));
+		sge::sprite::object(
+			pos_,
+			resource::texture(SGE_TEXT("tail")),
+			sge::sprite::texture_dim,
+			sge::colors::white,
+			z_ordering::bullet,
+			angle));
 	
-	at(1).size().w() = static_cast<sge::sprite_unit>(1);
+	at(1).size().w() = static_cast<sge::sprite::unit>(1);
 }
 
 void sanguis::draw::bullet::update(const time_type time)
@@ -38,7 +45,7 @@ void sanguis::draw::bullet::update(const time_type time)
 
 	const sge::math::vector2 newpos = pos - sge::math::normalize(speed())*sge::su(0.5)*newsize.length();
 
-	at(1).set_center(sge::math::structure_cast<sge::sprite_unit>(newpos));
+	at(1).set_center(sge::math::structure_cast<sge::sprite::unit>(newpos));
 
-	at(1).size() = sge::sprite_dim(static_cast<sge::sprite_unit>(newsize.x()),static_cast<sge::sprite_unit>(newsize.y()));
+	at(1).size() = sge::sprite::dim(static_cast<sge::sprite::unit>(newsize.x()),static_cast<sge::sprite::unit>(newsize.y()));
 }

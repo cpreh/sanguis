@@ -22,10 +22,11 @@ public:
 	void speed(const sge::math::vector2 &);
 private:
 	void update(time_type);
-	sge::sprite& bottom_sprite();
-	sge::sprite& top_sprite();
-	sge::sprite_texture_animation walk_animation;
-	sge::space_unit angle_,target_angle;
+	sge::sprite::object& bottom_sprite();
+	sge::sprite::object& top_sprite();
+	sge::sprite::texture_animation walk_animation;
+	sge::space_unit angle_,
+	                target_angle;
 	sge::con::var<sge::space_unit> turning_speed;
 	sge::space_unit health_;
 };

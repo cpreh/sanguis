@@ -7,6 +7,7 @@
 #include <sge/math/constants.hpp>
 #include <sge/math/point_rotate.hpp>
 #include <iomanip>
+#include <cassert>
 
 namespace
 {
@@ -59,7 +60,14 @@ sanguis::draw::player::player(
 	const sge::math::vector2& speed)
 : sprite(
 	id,
-	speed),
+	speed,
+	sge::sprite::object(
+		pos_,
+		resource::texture(SGE_TEXT("player_up")),
+		sge::sprite::texture_dim,
+		sge::colors::white,
+		z_ordering::player_lower,
+		angle)),
   walk_animation(
   	resource::animation(
 		SGE_TEXT("player_walk"))),
@@ -67,20 +75,7 @@ sanguis::draw::player::player(
 	target_angle(angle_),
 	turning_speed(SGE_TEXT("player_turning_speed"),sge::su(0.5))
 {
-	// this is neccessary to set the internal position right
-	// FIXME: fix this?
-	pos(pos_);
-
-	sge::sprite skel_sprite(
-		sge::sprite(
-			pos_,
-			resource::texture(SGE_TEXT("player_up")),
-			sge::sprite_texture_dim,
-			sge::colors::white,
-			z_ordering::player_lower,
-			angle));
-	add_sprite(skel_sprite);
-
+	sge::sprite::object skel_sprite(master());
 	skel_sprite.z() = z_ordering::player_upper;
 	add_sprite(skel_sprite);
 
@@ -99,7 +94,6 @@ void sanguis::draw::player::speed(const sge::math::vector2 &v)
 	if (!v.is_null())
 		target_angle = *sge::math::angle_to<sge::space_unit>(sge::math::vector2(),v);
 }
-
 
 void sanguis::draw::player::orientation(sge::space_unit u)
 {
@@ -167,15 +161,15 @@ void sanguis::draw::player::update(const time_type time)
 
 	const sge::math::vector2 top_pos = rot_abs - body_center;
 
-	top_sprite().pos() = sge::math::structure_cast<sge::sprite_unit>(top_pos);
+	top_sprite().pos() = sge::math::structure_cast<sge::sprite::unit>(top_pos);
 }
 
-sge::sprite& sanguis::draw::player::bottom_sprite()
+sge::sprite::object& sanguis::draw::player::bottom_sprite()
 {
 	return at(0);
 }
 
-sge::sprite& sanguis::draw::player::top_sprite()
+sge::sprite::object& sanguis::draw::player::top_sprite()
 {
 	return at(1);
 }

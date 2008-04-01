@@ -17,7 +17,7 @@ namespace resource
 
 typedef sge::string identifier_type;
 
-const sge::sprite_texture_animation::animation_series animation(const identifier_type&);
+const sge::sprite::texture_animation::animation_series animation(const identifier_type&);
 const sge::virtual_texture_ptr texture(const identifier_type&);
 
 struct connection : boost::noncopyable

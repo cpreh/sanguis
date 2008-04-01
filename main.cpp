@@ -95,8 +95,8 @@ try
 		sge::add_texture(texman,sys.image_loader->load_image(sanguis::media_path()/"console_back.jpg")),
 		console_font,
 		sys.input_system,
-		sge::sprite_point(0,0),
-		sge::sprite_dim(sys.renderer->screen_width(),static_cast<sge::sprite_unit>(sys.renderer->screen_height()/2)));
+		sge::sprite::point(0,0),
+		sge::sprite::dim(sys.renderer->screen_width(),static_cast<sge::sprite::unit>(sys.renderer->screen_height()/2)));
 	
 	sanguis::server::machine server(host_port);
 	server.initiate();

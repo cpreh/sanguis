@@ -84,16 +84,17 @@ create_sprite(
 	return sanguis::draw::factory::entity_ptr(
 		new sanguis::draw::sprite(
 			m.id(),
-			sanguis::virtual_to_screen(screen_size, m.pos()),
-			sge::sprite_texture_dim,
-			sanguis::draw::resource::texture(s),
-			static_cast<sge::space_unit>(m.angle()),
-			// double conversion here (deliberately)
 			sge::math::structure_cast<sge::space_unit>(
 				sanguis::virtual_to_screen(
 					screen_size,
 					m.speed())),
-			z));
+			sge::sprite::object(
+				sanguis::virtual_to_screen(screen_size, m.pos()),
+				sanguis::draw::resource::texture(s),
+				sge::sprite::texture_dim,
+				sge::colors::white,
+				z,
+				static_cast<sge::space_unit>(m.angle()))));
 }
 
 }

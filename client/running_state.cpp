@@ -167,18 +167,18 @@ void sanguis::client::running_state::handle_rotation(
 
 	switch(m.type()) {
 	case player_action::horizontal_look:
-		cursor_pos.x() += static_cast<sge::sprite_unit>(m.scale());
+		cursor_pos.x() += static_cast<sge::sprite::unit>(m.scale());
 		break;
 	case player_action::vertical_look:
-		cursor_pos.y() += static_cast<sge::sprite_unit>(m.scale());
+		cursor_pos.y() += static_cast<sge::sprite::unit>(m.scale());
 		break;
 	default:
 		return;
 	}
 
 	const sge::renderer_ptr rend = context<machine>().sys.renderer;
-	cursor_pos.x() = sge::math::clamp(cursor_pos.x(), 0, static_cast<sge::sprite_unit>(rend->screen_width()));
-	cursor_pos.y() = sge::math::clamp(cursor_pos.y(), 0, static_cast<sge::sprite_unit>(rend->screen_height()));
+	cursor_pos.x() = sge::math::clamp(cursor_pos.x(), 0, static_cast<sge::sprite::unit>(rend->screen_width()));
+	cursor_pos.y() = sge::math::clamp(cursor_pos.y(), 0, static_cast<sge::sprite::unit>(rend->screen_height()));
 	
 	if(last_cursor_pos == cursor_pos)
 		return;

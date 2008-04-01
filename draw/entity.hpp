@@ -2,7 +2,7 @@
 #define DRAW_ENTITY_HPP_INCLUDED
 
 #include <vector>
-#include <sge/sprite/sprite.hpp>
+#include <sge/sprite/object.hpp>
 #include <sge/math/vector.hpp>
 #include <sge/time.hpp>
 #include "../entity_id.hpp"
@@ -14,7 +14,7 @@ namespace draw
 
 class entity {
 public:
-	typedef std::vector<sge::sprite> sprite_vector;
+	typedef std::vector<sge::sprite::object> sprite_vector;
 	typedef sge::space_unit time_type;
 
 	explicit entity(entity_id id);
@@ -25,6 +25,7 @@ public:
 	virtual void speed(const sge::math::vector2&) = 0;
 	virtual void pos(const sge::sprite::point&) = 0;
 	virtual void dim(const sge::sprite::dim&) = 0;
+	virtual void health(sge::space_unit);
 protected:
 	virtual const sge::math::vector2& speed() const = 0;
 	virtual sge::space_unit orientation() const = 0;

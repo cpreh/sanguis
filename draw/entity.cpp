@@ -8,3 +8,6 @@ sanguis::entity_id sanguis::draw::entity::id() const
 {
 	return id_;
 }
+
+void sanguis::draw::entity::health(sge::space_unit)
+{}
