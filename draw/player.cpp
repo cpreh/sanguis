@@ -55,14 +55,14 @@ sge::space_unit abs_angle_to_rel(sge::space_unit a)
 
 sanguis::draw::player::player(
 	const entity_id id,
-	const sge::sprite::point& pos_,
+	const sge::sprite::point& pos,
 	const sge::space_unit angle,
 	const sge::math::vector2& speed)
 : sprite(
 	id,
 	speed,
 	sge::sprite::object(
-		pos_,
+		pos,
 		resource::texture(SGE_TEXT("player_up")),
 		sge::sprite::texture_dim,
 		sge::colors::white,

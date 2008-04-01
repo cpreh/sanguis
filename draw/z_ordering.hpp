@@ -7,7 +7,17 @@ namespace draw
 {
 namespace z_ordering
 {
-enum type { cursor,player_upper,bullet,player_lower,background };
+
+enum type {
+	cursor,
+	healthbar_upper,
+	healthbar_lower,
+	player_upper,
+	bullet,
+	player_lower,
+	background
+};
+
 }
 }
 }
