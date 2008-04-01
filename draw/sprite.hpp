@@ -1,5 +1,5 @@
-#ifndef DRAW_SPRITE_HPP_INCLUDED
-#define DRAW_SPRITE_HPP_INCLUDED
+#ifndef SANGUIS_DRAW_SPRITE_HPP_INCLUDED
+#define SANGUIS_DRAW_SPRITE_HPP_INCLUDED
 
 #include <sge/sprite/object.hpp>
 #include <sge/math/vector.hpp>
