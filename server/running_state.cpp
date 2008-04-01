@@ -102,6 +102,7 @@ void sanguis::server::running_state::create_game(const net::id_type id,const mes
 	player.shoot_timer.reset(new sge::timer(static_cast<sge::timer::interval_type>(sge::su(sge::second())*bullet_freq.value())));
 	player.pos =    messages::pos_type(static_cast<messages::space_unit>(0.5),static_cast<messages::space_unit>(0.5));
 	player.angle =  static_cast<messages::space_unit>(0);
+	player.health = static_cast<messages::space_unit>(1);
 
 	// send player entity, game state and player state
 	sge::clog << SGE_TEXT("server: sending game messages\n");
@@ -110,7 +111,9 @@ void sanguis::server::running_state::create_game(const net::id_type id,const mes
 		new messages::add(player.id,
 			entity_type::player,
 			player.pos,
-			player.angle,messages::vector2()));
+			player.angle,
+			messages::vector2(),
+			static_cast<messages::space_unit>(1)));
 	context<machine>().send(new messages::player_state(player.id,player_state(weapon_type::pistol,truncation_check_cast<boost::uint32_t>(0))));
 }
 

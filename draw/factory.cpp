@@ -41,7 +41,8 @@ sanguis::draw::factory::create_entity(
 				sge::math::structure_cast<sge::space_unit>(
 					virtual_to_screen(
 						screen_size,
-						m.speed()))));
+						m.speed()))
+				));
 	case entity_type::cursor:
 		return create_sprite(
 			m,

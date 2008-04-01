@@ -55,7 +55,8 @@ sanguis::client::running_state::running_state(my_context ctx)
 			static_cast<messages::space_unit>(0),
 			messages::vector2(
 				static_cast<messages::space_unit>(0),
-				static_cast<messages::space_unit>(0))));
+				static_cast<messages::space_unit>(0)),
+			static_cast<messages::space_unit>(0)));
 
 	// add the background
 	drawer.process_message(
@@ -66,7 +67,8 @@ sanguis::client::running_state::running_state(my_context ctx)
 			static_cast<messages::space_unit>(0),
 			messages::vector2(
 				static_cast<messages::space_unit>(0),
-				static_cast<messages::space_unit>(0))));
+				static_cast<messages::space_unit>(0)),
+			static_cast<messages::space_unit>(0)));
 }
 
 boost::statechart::result sanguis::client::running_state::react(const tick_event&t)

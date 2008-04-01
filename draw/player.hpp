@@ -27,6 +27,7 @@ private:
 	sge::sprite_texture_animation walk_animation;
 	sge::space_unit angle_,target_angle;
 	sge::con::var<sge::space_unit> turning_speed;
+	sge::space_unit health_;
 };
 
 

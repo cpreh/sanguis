@@ -42,7 +42,7 @@ struct running_state
 	{
 		sanguis::entity_id id;
 		messages::pos_type pos,speed;
-		messages::space_unit angle;
+		messages::space_unit angle,health;
 		messages::string name;
 		bool shooting;
 		sge::shared_ptr<sge::timer> shoot_timer;
