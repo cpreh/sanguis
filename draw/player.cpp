@@ -12,19 +12,6 @@
 namespace
 {
 template<typename T>
-T signum(const T &t)
-{
-	if (t > static_cast<T>(0)) 
-		return static_cast<T>(1);
-	if (t < static_cast<T>(0))
-		return static_cast<T>(-1);
-	return static_cast<T>(0);
-}
-}
-
-namespace
-{
-template<typename T>
 bool is_between(const T &t,const T &l,const T &r)
 {
 	return t >= l && t <= r;
@@ -32,7 +19,7 @@ bool is_between(const T &t,const T &l,const T &r)
 
 sge::space_unit rel_angle_to_abs(const sge::space_unit a)
 {
-	assert(a >= -sge::math::pi<sge::space_unit>() && a <= sge::math::pi<sge::space_unit>());
+	assert(is_between(a,-sge::math::pi<sge::space_unit>(),sge::math::pi<sge::space_unit>()));
 
 	if (sge::math::almost_zero(a))
 		return sge::su(0);

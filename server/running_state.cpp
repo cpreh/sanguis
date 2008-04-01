@@ -6,6 +6,7 @@
 #include "../messages/player_start_shooting.hpp"
 #include "../messages/player_stop_shooting.hpp"
 #include "../messages/add.hpp"
+#include "../messages/remove.hpp"
 #include "../messages/game_state.hpp"
 #include "../messages/player_state.hpp"
 #include "../messages/client_info.hpp"
@@ -24,6 +25,9 @@
 #include <sge/su.hpp>
 #include <sge/string.hpp>
 #include <sge/math/vector.hpp>
+#include <sge/math/rect.hpp>
+#include <sge/math/rect_impl.hpp>
+#include <sge/math/rect_util.hpp>
 #include <sge/math/atan2.hpp>
 
 #include <boost/bind.hpp>
@@ -75,12 +79,31 @@ boost::statechart::result sanguis::server::running_state::react(const tick_event
 			add_bullet(i->first);
 	}
 
-	/*if (update_pos)
-		for (bullet_map::iterator i = bullets.begin(); i != bullets.end(); ++i)
+	bool deletion = false;
+	for (bullet_map::iterator i = bullets.begin(); i != bullets.end(); ++i)
+	{
+		if (deletion)
 		{
-			i->second.pos += i->second.speed * static_cast<messages::space_unit>(delta);
-			context<machine>().send(new messages::move(i->first,i->second.pos));
-		}*/
+			--i;
+			deletion = false;
+		}
+
+		i->second.pos += i->second.speed * static_cast<messages::space_unit>(delta);
+
+		// bullet not visible anymore?
+		if (!sge::math::intersects(
+			sge::math::rect(sge::su(-0.5),sge::su(-0.5),sge::su(1.5),sge::su(1.5)),
+			i->second.pos))
+		{
+			context<machine>().send(new messages::remove(i->first));
+			bullet_map::iterator d = i++;
+			bullets.erase(d);
+			deletion = true;
+
+			if (i == bullets.end())
+				break;
+		}
+	}
 
 	return discard_event();
 }
