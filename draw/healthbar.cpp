@@ -1,6 +1,7 @@
 #include "healthbar.hpp"
 #include "resource_factory.hpp"
 #include "z_ordering.hpp"
+#include <sge/renderer/color.hpp>
 
 namespace
 {
@@ -103,8 +104,19 @@ sanguis::draw::healthbar::inner() const
 	return at(1);
 }
 
+sge::space_unit
+sanguis::draw::healthbar::remaining_health() const
+{
+	return max_health_ - health_;
+}
+
 void sanguis::draw::healthbar::recalc_health()
 {
 	inner().w() = static_cast<sge::sprite::unit>(
-		static_cast<sge::space_unit>(inner_dim().w()) * (max_health_ - health_));
+		static_cast<sge::space_unit>(inner_dim().w()) * remaining_health());
+	inner().set_color(sge::make_color(
+		static_cast<sge::color_element>((sge::su(1) - remaining_health()) * sge::color_element_max),
+		static_cast<sge::color_element>(remaining_health() * sge::color_element_max),
+		0,
+		sge::color_element_max));
 }

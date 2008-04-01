@@ -27,6 +27,7 @@ private:
 	const sge::sprite::object& border() const;
 	sge::sprite::object& inner();
 	const sge::sprite::object& inner() const;
+	sge::space_unit remaining_health() const;
 	void recalc_health();
 
 	sge::space_unit health_,
