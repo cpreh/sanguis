@@ -14,6 +14,7 @@
 #include <boost/filesystem.hpp>
 #include <boost/weak_ptr.hpp>
 #include <boost/algorithm/string/trim.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/optional.hpp>
 #include <map>
@@ -26,20 +27,6 @@
 
 namespace
 {
-
-bool is_suffix(const sge::string &s,const sge::string &t)
-{
-	if(t.length() > s.length())
-		return false;
-	return s.substr(s.length()-t.length()) == t;
-}
-
-bool is_prefix(const sge::string &s,const sge::string &t)
-{
-	if(t.length() > s.length())
-		return false;
-	return s.substr(0,t.length()) == t;
-}
 
 struct environment
 {
@@ -85,7 +72,7 @@ const sge::sprite::texture_animation::animation_series environment::load_animati
 		throw sge::exception(SGE_TEXT("unexpected end of file \"")+framesfile.string());
 
 	boost::optional<sge::time_type> const_delay;
-	if (is_prefix(line,SGE_TEXT("frame_length ")))
+	if (boost::algorithm::starts_with(line,SGE_TEXT("frame_length ")))
 	{
 		const_delay.reset(boost::lexical_cast<sge::time_type>(line.substr(sge::string("frame_length ").length())));
 		*const_delay *= sge::second()/1000;
@@ -146,7 +133,7 @@ void environment::load_textures()
 	for (boost::filesystem::basic_directory_iterator<sge::path> i(sanguis::media_path()),end; i != end; ++i)
 	{
 		const sge::path &p = i->path();
-		if (!boost::filesystem::is_regular(p) || !is_suffix(p.leaf(),SGE_TEXT(".tex")))
+		if (!boost::filesystem::is_regular(p) || !boost::algorithm::ends_with(p.leaf(),SGE_TEXT(".tex")))
 			continue;
 		
 		// and parse line by line
