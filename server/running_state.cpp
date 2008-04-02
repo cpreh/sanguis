@@ -20,6 +20,8 @@
 #include "../truncation_check_cast.hpp"
 #include "../truncation_check_structure_cast.hpp"
 #include "message_functor.hpp"
+#include "player.hpp"
+#include "bullet.hpp"
 
 #include <sge/iostream.hpp>
 #include <sge/su.hpp>
@@ -45,10 +47,7 @@ sge::math::vector2 angle_to_vector(const sge::space_unit angle)
 }
 
 sanguis::server::running_state::running_state()
-	: player_speed(SGE_TEXT("player_speed"),sge::su(0.1)),
-	  bullet_speed(SGE_TEXT("bullet_speed"),sge::su(0.4)),
-		bullet_freq(SGE_TEXT("bullet_freq"),sge::su(0.25)),
-	  send_timer(sge::second()),
+	: send_timer(sge::second()),
 		message_freq(SGE_TEXT("message_freq"),
 			boost::bind(&running_state::set_message_freq,this,_1,_2),sge::su(0.5))
 {
@@ -67,20 +66,8 @@ boost::statechart::result sanguis::server::running_state::react(const tick_event
 
 	const bool update_pos = send_timer.update_b();
 
-	for (player_map::iterator i = players.begin(); i != players.end(); ++i)
-	{
-		i->second.pos += i->second.speed * static_cast<messages::space_unit>(delta);
-
-		if (update_pos)
-			context<machine>().send(
-				new messages::move(i->second.id,i->second.pos));
-
-		if (i->second.shooting && i->second.shoot_timer->update_b())
-			add_bullet(i->first);
-	}
-
 	bool deletion = false;
-	for (bullet_map::iterator i = bullets.begin(); i != bullets.end(); ++i)
+	for (entity_map::iterator i = entities.begin(); i != entities.end(); ++i)
 	{
 		if (deletion)
 		{
@@ -88,129 +75,135 @@ boost::statechart::result sanguis::server::running_state::react(const tick_event
 			deletion = false;
 		}
 
-		i->second.pos += i->second.speed * static_cast<messages::space_unit>(delta);
+		i->second->update(delta);
 
-		// bullet not visible anymore?
-		if (!sge::math::intersects(
-			sge::math::rect(sge::su(-0.5),sge::su(-0.5),sge::su(1.5),sge::su(1.5)),
-			i->second.pos))
+		if (i->second->type() == entity_type::player && dynamic_cast<server::player &>(*i->second).spawn_bullet())
+			add_bullet();
+
+		if (i->second->type() == entity_type::bullet && !dynamic_cast<server::bullet &>(*i->second).visible())
 		{
 			context<machine>().send(new messages::remove(i->first));
-			bullet_map::iterator d = i++;
-			bullets.erase(d);
+			entity_map::iterator d = i++;
+			entities.erase(d);
 			deletion = true;
 
-			if (i == bullets.end())
+			if (i == entities.end())
 				break;
 		}
+
+		if (update_pos && i->second->type() != entity_type::bullet)
+			context<machine>().send(new messages::move(i->first,i->second->center()));
 	}
 
 	return discard_event();
 }
 
-void sanguis::server::running_state::create_game(const net::id_type id,const messages::client_info &m)
+void sanguis::server::running_state::create_game(const net::id_type net_id,const messages::client_info &m)
 {
-	assert(!players.size());
+	assert(!entities.size());
 
-	/*
-	player p(get_unique_id(),m.name(),bullet_freq.value(),
-		messages::pos_type(static_cast<messages::space_unit>(0.5),static_cast<messages::space_unit>(0.5)));
-	*/
+	const entity_id player_id = get_unique_id();
 
-	player_type &player = players[id];
+	entity &raw_player = insert_entity(player_id,new server::player(
+			player_id,
+			net_id,
+			messages::pos_type(static_cast<messages::space_unit>(0.5),static_cast<messages::space_unit>(0.5)),
+			messages::pos_type(),
+			static_cast<messages::space_unit>(0),
+			static_cast<messages::space_unit>(1),
+			static_cast<messages::space_unit>(1),
+			m.name()));
+	
+	player_ = &dynamic_cast<player &>(raw_player);
 
-	player.id =     get_unique_id();
-	player.name =   m.name();
-	player.shooting = false;
-	player.shoot_timer.reset(new sge::timer(static_cast<sge::timer::interval_type>(sge::su(sge::second())*bullet_freq.value())));
-	player.pos =    messages::pos_type(static_cast<messages::space_unit>(0.5),static_cast<messages::space_unit>(0.5));
-	player.angle =  static_cast<messages::space_unit>(0);
-	player.health = static_cast<messages::space_unit>(1);
-
-	// send player entity, game state and player state
 	sge::clog << SGE_TEXT("server: sending game messages\n");
+
 	context<machine>().send(new messages::game_state(game_state(truncation_check_cast<boost::uint32_t>(0))));
+
 	context<machine>().send(
-		new messages::add(player.id,
-			entity_type::player,
-			player.pos,
-			player.angle,
-			messages::vector2(),
-			static_cast<messages::space_unit>(1)));
-	context<machine>().send(new messages::player_state(player.id,player_state(weapon_type::pistol,truncation_check_cast<boost::uint32_t>(0))));
+		new messages::add(player_->id(),
+			player_->type(),
+			player_->center(),
+			player_->angle(),
+			player_->speed(),
+			player_->health(),
+			player_->max_health()));
+
+	context<machine>().send(new messages::player_state(player_->id(),player_state(weapon_type::pistol,truncation_check_cast<boost::uint32_t>(0))));
 }
 
 boost::statechart::result sanguis::server::running_state::operator()(const net::id_type id,const messages::player_rotation_event &e)
 {
-	if (players.find(id) == players.end())
+	if (player_->net_id() != id)
 	{
 		sge::clog << SGE_TEXT("server: got rotation_event from spectator ") << id << SGE_TEXT("\n");
 		return discard_event();
 	}
 
-	player_type &player = players[id];
-	player.angle = e.angle();
-	context<machine>().send(new messages::rotate(player.id,player.angle));
+	player_->angle(e.angle());
+	context<machine>().send(new messages::rotate(player_->id(),player_->angle()));
 	return discard_event();
 }
 
-void sanguis::server::running_state::add_bullet(const net::id_type id)
+sanguis::server::entity &sanguis::server::running_state::insert_entity(const entity_id id,entity *ptr)
+{
+	return *(entities.insert(id,entity_ptr(ptr)).first->second);
+}
+
+void sanguis::server::running_state::add_bullet()
 {
 	const entity_id bullet_id = get_unique_id();
-	bullet_type &b = bullets[bullet_id] = bullet_type(players[id].pos, angle_to_vector(players[id].angle) * bullet_speed.value());
+
+	bullet &b = dynamic_cast<bullet &>(
+		insert_entity(
+			bullet_id,
+			new bullet(bullet_id,player_->center(),angle_to_vector(player_->angle()),player_->angle())));
 
 	context<machine>().send(
-		new messages::add(bullet_id,entity_type::bullet,b.pos,players[id].angle,b.speed));
+		new messages::add(b.id(),b.type(),b.center(),b.angle(),b.speed(),b.health(),b.max_health()));
 }
 
 boost::statechart::result sanguis::server::running_state::operator()(const net::id_type id,const messages::player_start_shooting &)
 {
-	if (players.find(id) == players.end())
+	if (player_->net_id() != id)
 	{
 		sge::clog << SGE_TEXT("server: got shooting event from spectator ") << id << SGE_TEXT("\n");
 		return discard_event();
 	}
 
-	players[id].shooting = true;
-	add_bullet(id);
+	player_->shooting(true);
+	add_bullet();
 	return discard_event();
 }
 
 boost::statechart::result sanguis::server::running_state::operator()(const net::id_type id,const messages::player_stop_shooting &)
 {
-	if (players.find(id) == players.end())
+	if (player_->net_id() != id)
 		return discard_event();
 
-	players[id].shooting = false;
+	player_->shooting(false);
 	return discard_event();
 }
 
 boost::statechart::result sanguis::server::running_state::operator()(const net::id_type id,const messages::player_direction_event &e)
 {
-	if (players.find(id) == players.end())
+	if (player_->id() != id)
 	{
 		sge::clog << SGE_TEXT("server: got direction_event from spectator ") << id << SGE_TEXT("\n");
 		return discard_event();
 	}
 
-	player_type &player = players[id];
-
 	if (e.dir().is_null())
-		player.speed = sge::math::vector2();
+		player_->direction(sge::math::vector2());
 	else
-		player.speed = sge::math::normalize(e.dir()) * player_speed.value();
+		player_->direction(sge::math::normalize(e.dir()));
 
-	context<machine>().send(new messages::speed(player.id,player.speed));
+	context<machine>().send(new messages::speed(player_->id(),player_->speed()));
 	return discard_event();
 }
 
 boost::statechart::result sanguis::server::running_state::operator()(const net::id_type id,const messages::client_info&m) 
 {
-	if (players.size())
-	{
-		sge::clog << SGE_TEXT("server: got superfluous client info from id ") << id << SGE_TEXT("\n");
-		return discard_event();
-	}
 	sge::clog << SGE_TEXT("server: received client info from ") << id << SGE_TEXT("\n");
 	create_game(id,m);
 	return discard_event();
@@ -218,7 +211,7 @@ boost::statechart::result sanguis::server::running_state::operator()(const net::
 
 boost::statechart::result sanguis::server::running_state::operator()(const net::id_type id,const messages::disconnect&) 
 {
-	if (players.find(id) == players.end())
+	if (player_->id() != id)
 	{
 		sge::clog << SGE_TEXT("spectator ") << id << SGE_TEXT(" disconnected\n");
 		return discard_event();

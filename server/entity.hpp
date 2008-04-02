@@ -3,6 +3,8 @@
 
 #include "../messages/types.hpp"
 #include "../entity_id.hpp"
+#include "../entity_type.hpp"
+#include <memory>
 
 namespace sanguis
 {
@@ -13,7 +15,7 @@ class entity
 	public:
 	typedef messages::space_unit time_type;
 
-	// haha, no cpp file for this small functions!
+	// haha, no cpp file for these small functions!
 	entity(const entity_id id_) : id_(id_) {}
 	entity_id id() const { return id_; }
 
@@ -22,10 +24,14 @@ class entity
 	virtual messages::pos_type speed() const = 0;
 	virtual messages::space_unit angle() const = 0;
 	virtual messages::space_unit health() const = 0;
+	virtual messages::space_unit max_health() const = 0;
+	virtual entity_type::type type() const = 0;
 	virtual void update(const time_type) = 0;
 	private:
 	entity_id id_;
 };
+
+typedef std::auto_ptr<entity> entity_ptr;
 }
 }
 
