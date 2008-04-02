@@ -20,8 +20,8 @@ public:
 		const pos_type& pos,
 		space_unit angle,
 		const vector2& speed,
-		space_unit health = static_cast<messages::space_unit>(0),
-		space_unit max_health = static_cast<messages::space_unit>(0));
+		space_unit health,
+		space_unit max_health);
 
 	entity_type::type type() const;
 	const pos_type& pos() const;

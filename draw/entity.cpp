@@ -11,3 +11,6 @@ sanguis::entity_id sanguis::draw::entity::id() const
 
 void sanguis::draw::entity::health(sge::space_unit)
 {}
+
+void sanguis::draw::entity::max_health(sge::space_unit)
+{}

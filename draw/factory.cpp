@@ -58,7 +58,9 @@ sanguis::draw::factory::create_entity(
 						screen_size,
 						m.speed())),
 				static_cast<sge::space_unit>(m.angle()),
-				animation_pack(get_animations(m.type()))));
+				animation_pack(get_animations(m.type())),
+				m.health(),
+				m.max_health()));
 	default:
 		throw sge::exception(SGE_TEXT("draw::factory: missing loading code!"));
 	}

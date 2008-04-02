@@ -8,8 +8,10 @@ sanguis::draw::simple_creep::simple_creep(
 	sge::sprite::point const& pos,
 	sge::math::vector2 const& speed,
 	const sge::sprite::rotation_type rot,
-	animation_pack const& animations)
-: sprite(
+	animation_pack const& animations,
+	const sge::space_unit health,
+	const sge::space_unit max_health)
+: sprite_with_healthbar(
 	id,
 	speed,
 	sge::sprite::object(
@@ -19,7 +21,9 @@ sanguis::draw::simple_creep::simple_creep(
 		boost::none,
 		z_ordering::player_upper, // FIXME
 		rot),
-	relative_pos::center),
+	relative_pos::center,
+	health,
+	max_health),
   walk_animation(
   	resource::animation(
 		animations.walk()),

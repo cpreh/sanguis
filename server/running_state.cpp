@@ -136,7 +136,8 @@ void sanguis::server::running_state::create_game(const net::id_type id,const mes
 			player.pos,
 			player.angle,
 			messages::vector2(),
-			static_cast<messages::space_unit>(1)));
+			static_cast<messages::space_unit>(1000),
+			static_cast<messages::space_unit>(1000)));
 	context<machine>().send(new messages::player_state(player.id,player_state(weapon_type::pistol,truncation_check_cast<boost::uint32_t>(0))));
 }
 
@@ -160,7 +161,7 @@ void sanguis::server::running_state::add_bullet(const net::id_type id)
 	bullet_type &b = bullets[bullet_id] = bullet_type(players[id].pos, angle_to_vector(players[id].angle) * bullet_speed.value());
 
 	context<machine>().send(
-		new messages::add(bullet_id,entity_type::bullet,b.pos,players[id].angle,b.speed));
+		new messages::add(bullet_id,entity_type::bullet,b.pos,players[id].angle,b.speed, 0, 0));
 }
 
 boost::statechart::result sanguis::server::running_state::operator()(const net::id_type id,const messages::player_start_shooting &)
