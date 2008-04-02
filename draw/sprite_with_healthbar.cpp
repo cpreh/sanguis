@@ -1,6 +1,13 @@
 #include "sprite_with_healthbar.hpp"
 #include "../client/id_dont_care.hpp"
 
+namespace
+{
+
+const sge::sprite::unit healthbar_height(20);
+
+}
+
 sanguis::draw::sprite_with_healthbar::sprite_with_healthbar(
 	const entity_id id,
 	const sge::math::vector2& speed,
@@ -15,8 +22,8 @@ sanguis::draw::sprite_with_healthbar::sprite_with_healthbar(
 	relative),
   healthbar_(
   	client::id_dont_care(),	
-	master().pos(),
-	master().size(),
+	sge::sprite::point(master().x(), master().y() - healthbar_height),
+	sge::sprite::dim(master().w(), healthbar_height),
   	health,
 	max_health)
 {}
