@@ -1,8 +1,13 @@
 #ifndef IO_SERVICE_WRAPPER_HPP_INCLUDED
 #define IO_SERVICE_WRAPPER_HPP_INCLUDED
 
-#include <asio.hpp>
+#include <boost/asio/io_service.hpp>
 
-asio::io_service &io_service_wrapper();
+namespace net
+{
+
+boost::asio::io_service &io_service_wrapper();
+
+}
 
 #endif

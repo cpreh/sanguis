@@ -4,7 +4,9 @@
 #include "types.hpp"
 #include "output_buffer.hpp"
 
-#include <asio.hpp>
+#include <boost/asio/io_service.hpp>
+#include <boost/asio/ip/tcp.hpp>
+#include <boost/system/error_code.hpp>
 
 #include <boost/function.hpp>
 #include <boost/signal.hpp>
@@ -25,12 +27,12 @@ struct connection : boost::noncopyable
 	typedef boost::array<data_type::value_type,4096> static_buffer;
 
 	const id_type id;
-	asio::ip::tcp::socket socket;
+	boost::asio::ip::tcp::socket socket;
 	static_buffer new_data;
 	output_buffer<data_type::value_type> output;
 	bool connected,sending;
 
-	connection(const id_type id,asio::io_service &io_service) 
+	connection(const id_type id,boost::asio::io_service &io_service) 
 		: id(id),socket(io_service),connected(false),sending(false) {}
 };
 
@@ -58,8 +60,8 @@ class server : boost::noncopyable
 	typedef boost::ptr_vector<connection> connection_container;
 
 	// asio vars
-	asio::io_service &io_service;
-	asio::ip::tcp::acceptor acceptor;
+	boost::asio::io_service &io_service;
+	boost::asio::ip::tcp::acceptor acceptor;
 
 	// vars
 	id_type id_counter;
@@ -73,11 +75,11 @@ class server : boost::noncopyable
 
 	// private functions
 	void accept();
-	void read_handler(const asio::error_code &,const std::size_t,connection &);
-	void write_handler(const asio::error_code &,const std::size_t,connection &);
-	void accept_handler(const asio::error_code &,connection &);
-	void handle_disconnect(const asio::error_code &,connection &);
-	void handle_error(const string_type &,const asio::error_code &,const connection &);
+	void read_handler(const boost::system::error_code &,const std::size_t,connection &);
+	void write_handler(const boost::system::error_code &,const std::size_t,connection &);
+	void accept_handler(const boost::system::error_code &,connection &);
+	void handle_disconnect(const boost::system::error_code &,connection &);
+	void handle_error(const string_type &,const boost::system::error_code &,const connection &);
 };
 }
 

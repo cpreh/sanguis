@@ -1,7 +1,7 @@
 #include "io_service_wrapper.hpp"
 
-asio::io_service &io_service_wrapper()
+boost::asio::io_service &net::io_service_wrapper()
 {
-	static asio::io_service io;
+	static boost::asio::io_service io;
 	return io;
 }

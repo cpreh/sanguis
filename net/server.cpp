@@ -2,6 +2,7 @@
 #include "exception.hpp"
 #include "is_disconnect.hpp"
 #include "io_service_wrapper.hpp"
+#include <boost/asio/buffer.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/bind.hpp>
 #include <boost/lambda/lambda.hpp>
@@ -32,9 +33,9 @@ void net::server::listen(const port_type port)
 	std::cerr << "net_server: listening on port " << port << "\n";
 #endif
 
-	asio::ip::tcp::endpoint endpoint(asio::ip::tcp::v4(), port);
+	boost::asio::ip::tcp::endpoint endpoint(boost::asio::ip::tcp::v4(), port);
 	acceptor.open(endpoint.protocol());
-	acceptor.set_option(asio::ip::tcp::acceptor::reuse_address(true));
+	acceptor.set_option(boost::asio::ip::tcp::acceptor::reuse_address(true));
 	acceptor.bind(endpoint);
 	acceptor.listen();
 
@@ -51,7 +52,7 @@ void net::server::accept()
 	handlers++;
 }
 
-void net::server::accept_handler(const asio::error_code &e,connection &c)
+void net::server::accept_handler(const boost::system::error_code &e,connection &c)
 {
 	handlers--;
 
@@ -85,14 +86,14 @@ void net::server::accept_handler(const asio::error_code &e,connection &c)
 	// send signal to handlers
 	connect_signal(c.id);
 
-	c.socket.async_receive(asio::buffer(c.new_data),
+	c.socket.async_receive(boost::asio::buffer(c.new_data),
 		boost::bind(&server::read_handler,this,_1,_2,boost::ref(c)));
 	handlers++;
 	accept();
 }
 
 void net::server::handle_error(const string_type &message,
-	const asio::error_code &e,const connection &c)
+	const boost::system::error_code &e,const connection &c)
 {
 	// do we have an error or a disconnect...
 	if (!is_disconnect(e))
@@ -107,7 +108,7 @@ void net::server::handle_error(const string_type &message,
 	connections.erase_if(connections.begin(),connections.end(),&boost::lambda::_1 == &c);
 }
 
-void net::server::write_handler(const asio::error_code &e,
+void net::server::write_handler(const boost::system::error_code &e,
 	const std::size_t bytes,connection &c)
 {
 	handlers--;
@@ -125,7 +126,7 @@ void net::server::write_handler(const asio::error_code &e,
 	// are there bytes left to send?
 	if (c.output.finished(bytes).to_send())
 	{
-		c.socket.async_send(asio::buffer(c.output.buffer()),
+		c.socket.async_send(boost::asio::buffer(c.output.buffer()),
 			boost::bind(&server::write_handler,this,_1,_2,boost::ref(c)));
 		handlers++;
 	}
@@ -136,7 +137,7 @@ void net::server::write_handler(const asio::error_code &e,
 	}
 }
 
-void net::server::read_handler(const asio::error_code &e,
+void net::server::read_handler(const boost::system::error_code &e,
 	const std::size_t bytes,connection &c)
 {
 	handlers--;
@@ -154,7 +155,7 @@ void net::server::read_handler(const asio::error_code &e,
 	data_signal(c.id,data_type(c.new_data.begin(),c.new_data.begin() + bytes));
 
 	// receive some more
-	c.socket.async_receive(asio::buffer(c.new_data),
+	c.socket.async_receive(boost::asio::buffer(c.new_data),
 		boost::bind(&net::server::read_handler,this,_1,_2,boost::ref(c)));
 	handlers++;
 }
@@ -200,14 +201,14 @@ void net::server::process()
 			continue;
 
 		i->sending = true;
-		i->socket.async_send(asio::buffer(i->output.buffer()),
+		i->socket.async_send(boost::asio::buffer(i->output.buffer()),
 			boost::bind(&net::server::write_handler,this,_1,_2,boost::ref(*i)));
 		handlers++;
 	}
 
 	if (handlers)
 	{
-		asio::error_code e;
+		boost::system::error_code e;
 		io_service.poll(e);
 		if (e)
 			throw exception("poll error: "+e.message());

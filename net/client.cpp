@@ -2,6 +2,7 @@
 #include "client.hpp"
 #include "exception.hpp"
 #include "io_service_wrapper.hpp"
+#include <boost/asio/buffer.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/bind.hpp>
 
@@ -23,12 +24,12 @@ void net::client::connect(const address_type &s,const port_type port)
 	std::clog << "net_client: resolving hostname " << s << " on port " << port << "\n";
 #endif
 	
-	asio::ip::tcp::resolver::query query(s,boost::lexical_cast<std::string>(port));
+	boost::asio::ip::tcp::resolver::query query(s,boost::lexical_cast<std::string>(port));
 	resolver.async_resolve(query,boost::bind(&client::resolve_handler,this,_1,_2));
 	handlers++;
 }
 
-void net::client::resolve_handler(const asio::error_code &e,asio::ip::tcp::resolver::iterator i)
+void net::client::resolve_handler(const boost::system::error_code &e,boost::asio::ip::tcp::resolver::iterator i)
 {
 	if (e)
 		throw exception("net_client: error resolving address: "+e.message());
@@ -37,25 +38,25 @@ void net::client::resolve_handler(const asio::error_code &e,asio::ip::tcp::resol
 	std::clog << "net_client: resolved domain, trying to connect...\n";
 #endif
 	
-	asio::ip::tcp::endpoint endpoint = *i;
+	boost::asio::ip::tcp::endpoint endpoint = *i;
 	socket.async_connect(endpoint,boost::bind(&client::connect_handler,this,_1,++i));
 	handlers++;
 }
 
-void net::client::connect_handler(const asio::error_code &e,asio::ip::tcp::resolver::iterator i)
+void net::client::connect_handler(const boost::system::error_code &e,boost::asio::ip::tcp::resolver::iterator i)
 {
 	handlers--;
 	if (e)
 	{
 		// are we at the end of the endpoint list?
-		if (i == asio::ip::tcp::resolver::iterator())
+		if (i == boost::asio::ip::tcp::resolver::iterator())
 			throw exception("net_client: exhausted endpoints: "+e.message());
 
 #ifdef NET_LOG
 		std::clog << "net_client: resolving next endpoint\n";
 #endif
 		
-		asio::ip::tcp::endpoint endpoint = *i;
+		boost::asio::ip::tcp::endpoint endpoint = *i;
 		socket.async_connect(endpoint,boost::bind(&client::connect_handler,this,_1,++i));
 		handlers++;
 		return;
@@ -76,11 +77,11 @@ void net::client::connect_handler(const asio::error_code &e,asio::ip::tcp::resol
 	// first connect to true, _then_ call signal
 	connected = true;
 	connect_signal();
-	socket.async_receive(asio::buffer(new_data),boost::bind(&client::read_handler,this,_1,_2));
+	socket.async_receive(boost::asio::buffer(new_data),boost::bind(&client::read_handler,this,_1,_2));
 	handlers++;
 }
 
-void net::client::handle_error(const string_type &s,const asio::error_code &e)
+void net::client::handle_error(const string_type &s,const boost::system::error_code &e)
 {
 	if (is_disconnect(e))
 	{
@@ -95,7 +96,7 @@ void net::client::handle_error(const string_type &s,const asio::error_code &e)
 	throw exception("error in "+s+": "+e.message());
 }
 
-void net::client::read_handler(const asio::error_code &e,const std::size_t bytes)
+void net::client::read_handler(const boost::system::error_code &e,const std::size_t bytes)
 {
 	handlers--;
 	
@@ -110,7 +111,7 @@ void net::client::read_handler(const asio::error_code &e,const std::size_t bytes
 #endif
 
 	data_signal(data_type(new_data.begin(),new_data.begin()+bytes));
-	socket.async_receive(asio::buffer(new_data),boost::bind(&client::read_handler,this,_1,_2));
+	socket.async_receive(boost::asio::buffer(new_data),boost::bind(&client::read_handler,this,_1,_2));
 	handlers++;
 }
 
@@ -119,7 +120,7 @@ void net::client::queue(const data_type &data)
 	output.push_back(data);
 }
 
-void net::client::write_handler(const asio::error_code &e,const std::size_t bytes)
+void net::client::write_handler(const boost::system::error_code &e,const std::size_t bytes)
 {
 	handlers--;
 
@@ -136,7 +137,7 @@ void net::client::write_handler(const asio::error_code &e,const std::size_t byte
 	// are there bytes left to send?
 	if (output.finished(bytes).to_send())
 	{
-		socket.async_send(asio::buffer(output.buffer()),
+		socket.async_send(boost::asio::buffer(output.buffer()),
 			boost::bind(&client::write_handler,this,_1,_2));
 		handlers++;
 	}
@@ -152,14 +153,14 @@ void net::client::process()
 	if (connected && !sending && output.to_send())
 	{
 		sending = true;
-		socket.async_send(asio::buffer(output.buffer()),
+		socket.async_send(boost::asio::buffer(output.buffer()),
 			boost::bind(&net::client::write_handler,this,_1,_2));
 		handlers++;
 	}
 
 	if (handlers)
 	{
-		asio::error_code e;
+		boost::system::error_code e;
 		io_service.poll(e);
 		if (e)
 			throw exception("poll error: "+e.message());

@@ -4,7 +4,9 @@
 #include "types.hpp"
 #include "output_buffer.hpp"
 
-#include <asio.hpp>
+#include <boost/asio/io_service.hpp>
+#include <boost/asio/ip/tcp.hpp>
+#include <boost/system/error_code.hpp>
 
 #include <boost/function.hpp>
 #include <boost/signal.hpp>
@@ -39,9 +41,9 @@ struct client
 	typedef boost::array<data_type::value_type,4096> static_buffer;
 
 	// asio vars
-	asio::io_service &io_service;
-	asio::ip::tcp::socket socket;
-	asio::ip::tcp::resolver resolver;
+	boost::asio::io_service &io_service;
+	boost::asio::ip::tcp::socket socket;
+	boost::asio::ip::tcp::resolver resolver;
 
 	// vars
 	std::size_t handlers;
@@ -55,11 +57,11 @@ struct client
 	boost::signal<data_fun> data_signal;
 
 	// handlers
-	void handle_error(const string_type &,const asio::error_code &);
-	void read_handler(const asio::error_code &,const std::size_t);
-	void write_handler(const asio::error_code &,const std::size_t);
-	void resolve_handler(const asio::error_code &,asio::ip::tcp::resolver::iterator);
-	void connect_handler(const asio::error_code &,asio::ip::tcp::resolver::iterator);
+	void handle_error(const string_type &,const boost::system::error_code &);
+	void read_handler(const boost::system::error_code &,const std::size_t);
+	void write_handler(const boost::system::error_code &,const std::size_t);
+	void resolve_handler(const boost::system::error_code &,boost::asio::ip::tcp::resolver::iterator);
+	void connect_handler(const boost::system::error_code &,boost::asio::ip::tcp::resolver::iterator);
 };
 }
 
