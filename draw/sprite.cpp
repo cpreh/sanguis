@@ -13,7 +13,7 @@ sanguis::draw::sprite::sprite(
   	sge::math::structure_cast<sge::space_unit>(
 		relative == relative_pos::topleft
 		? master_.pos()
-		: master_.center() - master_.size()))
+		: master_.center() - master_.size() / 2))
 {
 	add_sprite(
 		master_);
