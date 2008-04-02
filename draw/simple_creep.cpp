@@ -37,3 +37,11 @@ sanguis::draw::simple_creep::simple_creep(
 		animations.die()),
 	&at(0))
 {}
+
+void sanguis::draw::simple_creep::update(
+	const time_type tm)
+{
+	sprite::update(tm);
+	if(!speed().is_null())
+		walk_animation.process();
+}

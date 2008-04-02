@@ -24,6 +24,8 @@ public:
 		sge::space_unit max_health
 	);
 private:
+	void update(time_type);
+
 	sge::sprite::texture_animation
 		walk_animation,
 		attack_animation,
