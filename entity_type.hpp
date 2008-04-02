@@ -8,7 +8,8 @@ namespace entity_type {
 enum type {
 	player,
 	bullet,
-	jackal
+	wolf_white,
+	wolf_black
 };
 }
 

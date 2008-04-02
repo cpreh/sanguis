@@ -1,12 +1,12 @@
 #ifndef SANGUIS_DRAW_RESOURCE_FACTORY_HPP_INCLUDED
 #define SANGUIS_DRAW_RESOURCE_FACTORY_HPP_INCLUDED
 
-#include <boost/noncopyable.hpp>
 #include <sge/string.hpp>
 #include <sge/sprite/texture_animation.hpp>
 #include <sge/texture/virtual_texture.hpp>
 #include <sge/renderer/renderer.hpp>
 #include <sge/image/image_loader.hpp>
+#include <boost/noncopyable.hpp>
 
 namespace sanguis
 {

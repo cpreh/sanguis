@@ -73,7 +73,7 @@ sanguis::draw::player::player(
 	// FIXME: put the rotation point in a config file?
 	top_sprite().rotate_around(
 		sge::sprite::point(
-			64,80));
+			16,20));
 }
 
 
@@ -97,8 +97,8 @@ void sanguis::draw::player::update(const time_type time)
 		walk_animation.process();
 
 	// FIXME: load rotation point (see above)
-	const sge::math::vector2 leg_center(sge::su(64),sge::su(80));
-	const sge::math::vector2 body_center(sge::su(64),sge::su(80));
+	const sge::math::vector2 leg_center(sge::su(16),sge::su(20));
+	const sge::math::vector2 body_center(sge::su(16),sge::su(20));
 
 	const sge::space_unit abs_angle = rel_angle_to_abs(angle_),
 	                      abs_target = rel_angle_to_abs(target_angle);
