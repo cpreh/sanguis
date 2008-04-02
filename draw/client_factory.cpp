@@ -7,6 +7,7 @@
 #include <sge/exception.hpp>
 #include <sge/string.hpp>
 #include <sge/su.hpp>
+#include <sge/renderer/colors.hpp>
 #include <sge/sprite/object.hpp>
 
 namespace
@@ -68,7 +69,8 @@ create_sprite(
 				sge::sprite::texture_dim,
 				sge::colors::white,
 				z,
-				sge::su(0))));
+				sge::su(0)),
+			sanguis::draw::relative_pos::topleft));
 }
 
 }

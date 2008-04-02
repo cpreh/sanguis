@@ -1,17 +1,24 @@
-#include <boost/foreach.hpp>
 #include "sprite.hpp"
+#include <sge/math/vec_dim.hpp>
+#include <boost/foreach.hpp>
 
 sanguis::draw::sprite::sprite(
 	const entity_id id,
 	const sge::math::vector2& speed_,
-	const sge::sprite::object& master_)
+	const sge::sprite::object& master_,
+	const relative_pos::type relative)
 : entity(id),
   speed_(speed_),
-  pos_(sge::math::structure_cast<sge::space_unit>(master_.pos()))
+  pos_(
+  	sge::math::structure_cast<sge::space_unit>(
+		relative == relative_pos::topleft
+		? master_.pos()
+		: master_.center() - master_.size()))
 {
 	add_sprite(
 		master_);
-	master().set_center(master_.pos()); // FIXME
+	if(relative == relative_pos::center)
+		master().set_center(master_.pos());
 }
 
 sanguis::draw::entity::sprite_vector sanguis::draw::sprite::to_sprites() const

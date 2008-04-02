@@ -6,6 +6,7 @@
 #include <sge/math/angle.hpp>
 #include <sge/math/constants.hpp>
 #include <sge/math/point_rotate.hpp>
+#include <boost/none.hpp>
 #include <iomanip>
 #include <cassert>
 
@@ -50,14 +51,15 @@ sanguis::draw::player::player(
 	speed,
 	sge::sprite::object(
 		pos,
-		resource::texture(SGE_TEXT("player_up")),
+		resource::texture(SGE_TEXT("player_upper_pistol")),
 		sge::sprite::texture_dim,
-		sge::colors::white,
+		boost::none,
 		z_ordering::player_lower,
-		angle)),
+		angle),
+	relative_pos::center),
   walk_animation(
   	resource::animation(
-		SGE_TEXT("player_walk"))),
+		SGE_TEXT("player/lower"))),
 	angle_(sge::su(0)),
 	target_angle(angle_),
 	turning_speed(SGE_TEXT("player_turning_speed"),sge::su(0.5))
