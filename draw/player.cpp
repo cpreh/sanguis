@@ -6,6 +6,7 @@
 #include <sge/math/angle.hpp>
 #include <sge/math/constants.hpp>
 #include <sge/math/point_rotate.hpp>
+#include <boost/none.hpp>
 #include <iomanip>
 #include <cassert>
 
@@ -50,14 +51,15 @@ sanguis::draw::player::player(
 	speed,
 	sge::sprite::object(
 		pos,
-		resource::texture(SGE_TEXT("player_up")),
+		resource::texture(SGE_TEXT("player_upper_pistol")),
 		sge::sprite::texture_dim,
-		sge::colors::white,
+		boost::none,
 		z_ordering::player_lower,
-		angle)),
+		angle),
+	relative_pos::center),
   walk_animation(
   	resource::animation(
-		SGE_TEXT("player_walk"))),
+		SGE_TEXT("player/lower"))),
 	angle_(sge::su(0)),
 	target_angle(angle_),
 	turning_speed(SGE_TEXT("player_turning_speed"),sge::su(0.5))
@@ -71,7 +73,7 @@ sanguis::draw::player::player(
 	// FIXME: put the rotation point in a config file?
 	top_sprite().rotate_around(
 		sge::sprite::point(
-			64,80));
+			16,20));
 }
 
 
@@ -95,8 +97,8 @@ void sanguis::draw::player::update(const time_type time)
 		walk_animation.process();
 
 	// FIXME: load rotation point (see above)
-	const sge::math::vector2 leg_center(sge::su(64),sge::su(80));
-	const sge::math::vector2 body_center(sge::su(64),sge::su(80));
+	const sge::math::vector2 leg_center(sge::su(16),sge::su(20));
+	const sge::math::vector2 body_center(sge::su(16),sge::su(20));
 
 	const sge::space_unit abs_angle = rel_angle_to_abs(angle_),
 	                      abs_target = rel_angle_to_abs(target_angle);

@@ -1,6 +1,7 @@
 #include "bullet.hpp"
 #include "resource_factory.hpp"
 #include "z_ordering.hpp"
+#include <boost/none.hpp>
 
 sanguis::draw::bullet::bullet(
 	const entity_id id,
@@ -15,9 +16,10 @@ sanguis::draw::bullet::bullet(
 		resource::texture(
 			SGE_TEXT("bullet")),
 		sge::sprite::texture_dim,
-		sge::colors::white,
+		boost::none,
 		z_ordering::bullet,
-		angle)),
+		angle),
+	relative_pos::center),
   origin(pos_)
 {
 	add_sprite(
@@ -25,7 +27,7 @@ sanguis::draw::bullet::bullet(
 			pos_,
 			resource::texture(SGE_TEXT("tail")),
 			sge::sprite::texture_dim,
-			sge::colors::white,
+			boost::none,
 			z_ordering::bullet,
 			angle));
 	

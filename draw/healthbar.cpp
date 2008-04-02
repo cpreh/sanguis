@@ -28,7 +28,8 @@ sanguis::draw::healthbar::healthbar(
 		dim,
 		sge::colors::darkgrey,
 		z_ordering::healthbar_lower,
-		static_cast<sge::sprite::rotation_type>(0))),
+		static_cast<sge::sprite::rotation_type>(0)),
+	relative_pos::topleft),
   health_(health_),
   max_health_(max_health_)
 {

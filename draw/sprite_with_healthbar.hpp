@@ -13,16 +13,16 @@ class sprite_with_healthbar : public sprite {
 public:
 	sprite_with_healthbar(
 		entity_id,
-		const sge::sprite::point& pos,
-		const sge::sprite::dim& dim,
-		sge::virtual_texture_ptr tex,
-		sge::sprite::rotation_type angle,
 		const sge::math::vector2& speed,
-		const sge::space_unit z,
-		sge::space_unit health);
-	void health(sge::space_unit);	
+		const sge::sprite::object& master,
+		relative_pos::type,
+		sge::space_unit health,
+		sge::space_unit max_health);
 private:
-	healthbar health_;
+	void health(sge::space_unit);
+	void max_health(sge::space_unit);
+
+	healthbar healthbar_;
 };
 
 }

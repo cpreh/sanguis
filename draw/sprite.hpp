@@ -9,13 +9,21 @@ namespace sanguis
 {
 namespace draw
 {
+namespace relative_pos
+{
+enum type {
+	topleft,
+	center
+};
+}
 
 class sprite : public entity {
 public:
 	sprite(
 		entity_id id,
 		const sge::math::vector2& speed,
-		const sge::sprite::object& master);
+		const sge::sprite::object& master,
+		relative_pos::type);
 	sprite_vector to_sprites() const;
 	const sge::sprite::point center() const;
 protected:
