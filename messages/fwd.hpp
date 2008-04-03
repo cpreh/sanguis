@@ -14,6 +14,7 @@ class disconnect;
 class entity_message;
 class game_state;
 class move;
+class health;
 class player_direction_event;
 class player_rotation_event;
 class player_start_shooting;

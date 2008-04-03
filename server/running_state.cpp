@@ -22,6 +22,7 @@
 #include "message_functor.hpp"
 #include "player.hpp"
 #include "bullet.hpp"
+#include "converter.hpp"
 
 #include <sge/iostream.hpp>
 #include <sge/su.hpp>
@@ -82,7 +83,7 @@ boost::statechart::result sanguis::server::running_state::react(const tick_event
 
 		if (i->second->type() == entity_type::bullet && !dynamic_cast<server::bullet &>(*i->second).visible())
 		{
-			context<machine>().send(new messages::remove(i->first));
+			context<machine>().send(message_convert<messages::remove>(*i->second));
 			entity_map::iterator d = i++;
 			entities.erase(d);
 			deletion = true;
@@ -92,7 +93,7 @@ boost::statechart::result sanguis::server::running_state::react(const tick_event
 		}
 
 		if (update_pos && i->second->type() != entity_type::bullet)
-			context<machine>().send(new messages::move(i->first,i->second->center()));
+			context<machine>().send(message_convert<messages::move>(*i->second));
 	}
 
 	return discard_event();
@@ -119,16 +120,7 @@ void sanguis::server::running_state::create_game(const net::id_type net_id,const
 	sge::clog << SGE_TEXT("server: sending game messages\n");
 
 	context<machine>().send(new messages::game_state(game_state(truncation_check_cast<boost::uint32_t>(0))));
-
-	context<machine>().send(
-		new messages::add(player_->id(),
-			player_->type(),
-			player_->center(),
-			player_->angle(),
-			player_->speed(),
-			player_->health(),
-			player_->max_health()));
-
+	context<machine>().send(message_convert<messages::add>(*player_));
 	context<machine>().send(new messages::player_state(player_->id(),player_state(weapon_type::pistol,truncation_check_cast<boost::uint32_t>(0))));
 }
 
@@ -141,7 +133,7 @@ boost::statechart::result sanguis::server::running_state::operator()(const net::
 	}
 
 	player_->angle(e.angle());
-	context<machine>().send(new messages::rotate(player_->id(),player_->angle()));
+	context<machine>().send(message_convert<messages::rotate>(*player_));
 	return discard_event();
 }
 
@@ -159,8 +151,7 @@ void sanguis::server::running_state::add_bullet()
 			bullet_id,
 			new bullet(bullet_id,player_->center(),angle_to_vector(player_->angle()),player_->angle())));
 
-	context<machine>().send(
-		new messages::add(b.id(),b.type(),b.center(),b.angle(),b.speed(),b.health(),b.max_health()));
+	context<machine>().send(message_convert<messages::add>(b));
 }
 
 boost::statechart::result sanguis::server::running_state::operator()(const net::id_type id,const messages::player_start_shooting &)
@@ -198,7 +189,7 @@ boost::statechart::result sanguis::server::running_state::operator()(const net::
 	else
 		player_->direction(sge::math::normalize(e.dir()));
 
-	context<machine>().send(new messages::speed(player_->id(),player_->speed()));
+	context<machine>().send(message_convert<messages::speed>(*player_));
 	return discard_event();
 }
 
