@@ -24,7 +24,7 @@ sanguis::client::machine::machine(sge::systems &sys,sge::font &font,sge::key_sta
 		ks(ks),
 		con(con),
 		con_stdlib(boost::bind(&sge::con::console_gfx::print,&con,_1)),
-		con_wrapper(con,sys.input_system,sge::kc::key_tab),
+		con_wrapper(con,sys.input_system,sge::kc::key_grave),
 		resource(sys.image_loader,sys.renderer) {}
 
 void sanguis::client::machine::connect()
