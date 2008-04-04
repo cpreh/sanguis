@@ -45,7 +45,7 @@ private:
 	sge::math::vector2 speed_;
 	sprite_vector      sprites;
 	sge::math::vector2 pos_;
-	sge::space_unit    health_;
+	relative_pos::type relative;
 };
 
 }

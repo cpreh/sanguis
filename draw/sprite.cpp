@@ -13,7 +13,8 @@ sanguis::draw::sprite::sprite(
   	sge::math::structure_cast<sge::space_unit>(
 		relative == relative_pos::topleft
 		? master_.pos()
-		: master_.center() - master_.size() / 2))
+		: master_.center() - master_.size() / 2)),
+  relative(relative)
 {
 	add_sprite(
 		master_);
@@ -99,5 +100,14 @@ const sge::math::vector2& sanguis::draw::sprite::speed() const
 void sanguis::draw::sprite::update_pos(const sge::sprite::point& p)
 {
 	BOOST_FOREACH(sge::sprite::object& s, sprites)
-		s.set_center(p);
+		switch(relative) {
+		case relative_pos::topleft:
+			s.pos() = p;
+			break;
+		case relative_pos::center:
+			s.set_center(p);
+			break;
+		default:
+			throw sge::exception(SGE_TEXT("Invalid relative_pos in sprite!"));
+		}
 }
