@@ -9,7 +9,7 @@ sanguis::load::model::part::part(
 	typedef boost::array<sge::string, weapon_type::size + 1> weapon_type_array;
 	const weapon_type_array weapon_types = {
 	{
-		SGE_TEXT("default"),
+		SGE_TEXT("none"),
 		SGE_TEXT("pistol")
 	} };
 
@@ -28,4 +28,22 @@ sanguis::load::model::part::part(
 						it)),
 				weapon_category(weapon_path)));
 	}
+}
+
+sanguis::load::model::weapon_category const&
+sanguis::load::model::part::operator[](const weapon_type::type t) const
+{
+	const category_map::const_iterator it(categories.find(t));
+	if(it == categories.end())
+		throw sge::exception(SGE_TEXT("Weapon model missing!")); // TODO: maybe use unarmed here?
+	return it->second;
+}
+
+sanguis::load::model::weapon_category const&
+sanguis::load::model::part::unarmed() const
+{
+	const category_map::const_iterator it(categories.find(weapon_type::none));
+	if(it == categories.end())
+		throw sge::exception(SGE_TEXT("Unarmed weapon model missing!"));
+	return it->second;
 }

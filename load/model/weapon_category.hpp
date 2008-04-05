@@ -16,10 +16,7 @@ namespace model
 class weapon_category {
 public:
 	explicit weapon_category(sge::path const&);
-	animation const& none() const;
-	animation const& attacking() const;
-	animation const& walking() const;
-	animation const& dying() const;
+	animation const& operator[](animation_type::type) const;
 private:
 	typedef std::map<animation_type::type, animation> animation_map;
 	animation_map animations;

@@ -17,7 +17,7 @@ class part {
 public:
 	explicit part(sge::path const&);
 	weapon_category const& operator[](weapon_type::type) const;
-	weapon_category const& default_weapon() const;
+	weapon_category const& unarmed() const;
 private:
 	typedef std::map<weapon_type::type, weapon_category> category_map;
 	category_map categories;

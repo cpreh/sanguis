@@ -7,6 +7,7 @@ namespace weapon_type
 {
 
 enum type {
+	none,
 	pistol,
 	size
 };

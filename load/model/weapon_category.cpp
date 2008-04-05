@@ -6,7 +6,10 @@
 sanguis::load::model::weapon_category::weapon_category(
 	sge::path const& path)
 {
-	typedef boost::array<sge::string, animation_type::size> animation_type_array;
+	typedef boost::array<
+		sge::string,
+		sanguis::animation_type::size> animation_type_array;
+
 	const animation_type_array animation_types = {
 	{
 		SGE_TEXT("none"),
@@ -31,4 +34,14 @@ sanguis::load::model::weapon_category::weapon_category(
 				animation(
 					animation_path)));
 	}
+}
+
+sanguis::load::model::animation const&
+sanguis::load::model::weapon_category::operator[](
+	const animation_type::type anim) const
+{
+	const animation_map::const_iterator it(animations.find(anim));
+	if(it == animations.end())
+		throw sge::exception(SGE_TEXT("Animation not found in model!"));
+	return it->second;
 }
