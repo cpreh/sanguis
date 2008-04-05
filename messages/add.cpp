@@ -36,6 +36,11 @@ const sanguis::messages::pos_type& sanguis::messages::add::pos() const
 	return pos_;
 }
 
+const sanguis::messages::dim_type& sanguis::messages::add::dim() const
+{
+	return dim_;
+}
+
 sanguis::messages::space_unit sanguis::messages::add::angle() const
 {
 	return angle_;

@@ -28,6 +28,7 @@ public:
 	space_unit angle() const;
 	const vector2& speed() const;
 	space_unit health() const;
+	const dim_type &dim() const;
 	space_unit max_health() const;
 private:
 	entity_type::type  type_;
@@ -36,6 +37,7 @@ private:
 	vector2            speed_;
 	space_unit         health_,
 	                   max_health_;
+	dim_type           dim_;
 
 	friend class boost::serialization::access;
 	template<typename Archive>
