@@ -15,7 +15,7 @@ namespace model
 
 class model {
 public:
-	model(sge::path const&);
+	explicit model(sge::path const&);
 	part const& operator[](sge::string const&) const;
 private:
 	typedef std::map<sge::string, part> part_map;

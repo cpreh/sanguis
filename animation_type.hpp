@@ -10,7 +10,8 @@ enum type {
 	none,
 	attacking,
 	walking,
-	dying
+	dying,
+	size
 };
 
 }

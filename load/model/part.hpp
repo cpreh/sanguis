@@ -15,7 +15,7 @@ namespace model
 
 class part {
 public:
-	part(sge::path const&);
+	explicit part(sge::path const&);
 	weapon_category const& operator[](weapon_type::type) const;
 	weapon_category const& default_weapon() const;
 private:

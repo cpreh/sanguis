@@ -15,7 +15,7 @@ namespace model
 
 class weapon_category {
 public:
-	weapon_category(sge::path const&);
+	explicit weapon_category(sge::path const&);
 	animation const& none() const;
 	animation const& attacking() const;
 	animation const& walking() const;

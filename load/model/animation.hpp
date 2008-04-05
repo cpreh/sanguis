@@ -13,10 +13,10 @@ namespace model
 
 class animation {
 public:
-	animation(sge::path const&);
+	explicit animation(sge::path const&);
 	sge::sprite::texture_animation const& get() const;
 private:
-	sge::sprite::texture_animation anim;
+	//sge::sprite::texture_animation anim;
 };
 
 }
