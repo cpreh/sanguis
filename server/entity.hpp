@@ -15,9 +15,8 @@ class entity
 	public:
 	typedef messages::space_unit time_type;
 
-	// haha, no cpp file for these small functions!
-	entity(const entity_id id_) : id_(id_) {}
-	entity_id id() const { return id_; }
+	entity(const entity_id id_);
+	entity_id id() const;
 
 	// pure virtuals
 	virtual messages::pos_type center() const = 0;
@@ -27,6 +26,7 @@ class entity
 	virtual messages::space_unit max_health() const = 0;
 	virtual entity_type::type type() const = 0;
 	virtual void update(const time_type) = 0;
+	virtual ~entity();
 	private:
 	entity_id id_;
 };

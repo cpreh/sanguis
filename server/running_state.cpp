@@ -105,7 +105,8 @@ void sanguis::server::running_state::create_game(const net::id_type net_id,const
 
 	const entity_id player_id = get_unique_id();
 
-	entity &raw_player = insert_entity(player_id,new server::player(
+	entity &raw_player = insert_entity(player_id,
+		new server::player(
 			player_id,
 			net_id,
 			messages::pos_type(static_cast<messages::space_unit>(0.5),static_cast<messages::space_unit>(0.5)),
