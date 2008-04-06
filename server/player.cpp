@@ -1,4 +1,6 @@
 #include "player.hpp"
+#include "../load/model/collection.hpp"
+#include <sge/math/vec_dim.hpp>
 
 sge::con::var<sanguis::messages::space_unit> sanguis::server::player::bullet_frequency(SGE_TEXT("player_bullet_freq"),static_cast<messages::space_unit>(0.5));
 sge::con::var<sanguis::messages::space_unit> sanguis::server::player::running_speed(SGE_TEXT("player_speed"),static_cast<messages::space_unit>(0.1));
@@ -10,7 +12,7 @@ sanguis::server::player::player(const entity_id id,const net::id_type net_id_,
 	: entity(id),
 	  shooting_timer(static_cast<sge::timer::interval_type>(static_cast<messages::space_unit>(sge::second())*bullet_frequency.value())),
 		direction_(direction_),
-		center_(center_),
+		pos_(center_ - dim()/static_cast<messages::space_unit>(2)),
 		angle_(angle_),
 		net_id_(net_id_),
 		shooting_(false),
@@ -22,6 +24,11 @@ sanguis::server::player::player(const entity_id id,const net::id_type net_id_,
 bool sanguis::server::player::spawn_bullet() const
 {
 	return shooting_ && shooting_timer.update_b();
+}
+
+sanguis::messages::dim_type sanguis::server::player::dim() const
+{
+	return sge::math::structure_cast<messages::space_unit>(load::model::singleton()["player"]["bottom"][weapon_type::pistol][animation_type::walking].get().dim());
 }
 
 sanguis::messages::pos_type sanguis::server::player::speed() const
@@ -42,5 +49,5 @@ void sanguis::server::player::shooting(const bool n)
 
 void sanguis::server::player::update(const time_type delta)
 {
-	center_ += speed() * delta;
+	pos_ += speed() * delta;
 }

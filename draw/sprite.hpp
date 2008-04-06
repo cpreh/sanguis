@@ -3,6 +3,7 @@
 
 #include <sge/sprite/object.hpp>
 #include <sge/math/vector.hpp>
+#include <sge/console/console.hpp>
 #include "entity.hpp"
 
 namespace sanguis

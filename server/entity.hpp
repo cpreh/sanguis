@@ -18,8 +18,11 @@ class entity
 	entity(const entity_id id_);
 	entity_id id() const;
 
+	messages::pos_type center() const;
+
 	// pure virtuals
-	virtual messages::pos_type center() const = 0;
+	virtual messages::pos_type pos() const = 0;
+	virtual messages::dim_type dim() const = 0;
 	virtual messages::pos_type speed() const = 0;
 	virtual messages::space_unit angle() const = 0;
 	virtual messages::space_unit health() const = 0;

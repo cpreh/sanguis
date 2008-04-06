@@ -14,7 +14,8 @@ class bullet : public entity
 	bullet(const entity_id,const messages::pos_type &center,const messages::pos_type &direction,const messages::space_unit angle);
 
 	// virtual functions
-	messages::pos_type center() const { return center_; }
+	messages::pos_type pos() const { return pos_; }
+	messages::dim_type dim() const;
 	messages::pos_type speed() const;
 	messages::space_unit angle() const { return angle_; }
 	messages::space_unit health() const { return static_cast<messages::space_unit>(1); }
@@ -28,7 +29,7 @@ class bullet : public entity
 	private:
 	static sge::con::var<messages::space_unit> bullet_speed;
 
-	messages::pos_type center_,direction_;
+	messages::pos_type pos_,direction_;
 	messages::space_unit angle_;
 	bool visible_;
 };

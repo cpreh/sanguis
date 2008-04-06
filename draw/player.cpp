@@ -9,8 +9,6 @@
 #include <iomanip>
 #include <cassert>
 
-#if 0
-
 namespace
 {
 template<typename T>
@@ -45,37 +43,26 @@ sge::space_unit abs_angle_to_rel(sge::space_unit a)
 
 const sge::sprite::point player_body_center(25,32);
 const sge::sprite::point player_leg_center(32,32);
+
+sge::con::var<sge::space_unit> turning_speed(SGE_TEXT("player_turning_speed"),sge::su(0.4));
 }
 
-sanguis::draw::player::player(
-	const entity_id id,
-	const sge::sprite::point& pos,
-	const sge::space_unit angle,
-	const sge::math::vector2& speed)
-: sprite(
-	id,
-	speed,
-	sge::sprite::object(
-		pos,
-		resource::texture(SGE_TEXT("player_upper_pistol")),
-		sge::sprite::texture_dim,
+sanguis::draw::player::player(const entity_id id)
+: sprite(id,2),
+	angle_(sge::su(0)),
+	target_angle(angle_)
+{
+	bottom_sprite() = sge::sprite::object(
+		sge::sprite::point(0,0),
+		sge::virtual_texture_ptr(),
+		sge::sprite::dim(0,0),
 		boost::none,
 		z_ordering::player_lower,
-		angle),
-	relative_pos::center),
-  walk_animation(
-  	resource::animation(
-		SGE_TEXT("player/lower"))),
-	angle_(sge::su(0)),
-	target_angle(angle_),
-	turning_speed(SGE_TEXT("player_turning_speed"),sge::su(0.5))
-{
-	sge::sprite::object skel_sprite(master());
-	skel_sprite.z() = z_ordering::player_upper;
-	add_sprite(skel_sprite);
-
-	walk_animation.bind(&bottom_sprite());
-
+		angle_);
+	
+	top_sprite() = bottom_sprite();
+	top_sprite().z() = z_ordering::player_upper;
+	
 	// FIXME: put the rotation point in a config file?
 	top_sprite().rotate_around(
 		player_body_center);
@@ -100,8 +87,6 @@ void sanguis::draw::player::orientation(sge::space_unit u)
 void sanguis::draw::player::update(const time_type time)
 {
 	sprite::update(time);
-	if(!sprite::speed().is_null())
-		walk_animation.process();
 
 	// FIXME: load rotation point (see above)
 	const sge::math::vector2 leg_center(sge::math::structure_cast<sge::space_unit>(player_leg_center));
@@ -171,5 +156,3 @@ sge::sprite::object& sanguis::draw::player::top_sprite()
 {
 	return at(1);
 }
-
-#endif

@@ -17,7 +17,8 @@ class player : public entity
 		const messages::space_unit angle,const messages::space_unit health,const messages::space_unit max_health,
 		const messages::string &name);
 	// virtual functions
-	messages::pos_type center() const { return center_; } 
+	messages::pos_type pos() const { return pos_; } 
+	messages::dim_type dim() const;
 	messages::pos_type speed() const;
 	messages::space_unit angle() const { return angle_; }
 	void angle(const messages::space_unit nangle) { angle_ = nangle; }
@@ -39,7 +40,7 @@ class player : public entity
 
 	mutable sge::timer shooting_timer;
 	messages::pos_type direction_;
-	messages::pos_type center_;
+	messages::pos_type pos_;
 	messages::space_unit angle_;
 	net::id_type net_id_;
 	bool shooting_;
