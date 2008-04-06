@@ -3,6 +3,7 @@
 
 #include <sge/path.hpp>
 #include <sge/sprite/texture_animation.hpp>
+#include <boost/shared_ptr.hpp>
 
 namespace sanguis
 {
@@ -16,7 +17,8 @@ public:
 	explicit animation(sge::path const&);
 	sge::sprite::texture_animation const& get() const;
 private:
-	//sge::sprite::texture_animation anim;
+	sge::path path;
+	boost::shared_ptr<sge::sprite::texture_animation> anim;
 };
 
 }
