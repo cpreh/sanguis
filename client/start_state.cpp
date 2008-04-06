@@ -1,7 +1,6 @@
 #include "start_state.hpp"
 #include "machine.hpp"
 #include "intermediate_state.hpp"
-#include "../draw/resource_factory.hpp"
 #include <sge/iostream.hpp>
 #include <sge/string.hpp>
 #include <sge/media.hpp>

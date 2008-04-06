@@ -1,26 +1,26 @@
 #include "sprite.hpp"
 #include <sge/math/vec_dim.hpp>
 #include <boost/foreach.hpp>
+#include <boost/none.hpp>
 
 sanguis::draw::sprite::sprite(
 	const entity_id id,
 	const sge::math::vector2& speed_,
-	const sge::sprite::object& master_,
-	const relative_pos::type relative)
+	const sprite_vector::size_type sz)
 : entity(id),
   speed_(speed_),
-  pos_(
-  	sge::math::structure_cast<sge::space_unit>(
-		relative == relative_pos::topleft
-		? master_.pos()
-		: master_.pos() - master_.size() / 2)),
-  relative(relative)
+  pos_() // FIXME
+//  	sge::math::structure_cast<sge::space_unit>(
+//		master_.pos()))
 {
-	add_sprite(
-		master_);
-		
-	if(relative == relative_pos::center)
-		master().set_center(master_.pos());
+	sprites.reserve(sz);
+	for(sprite_vector::size_type i = 0; i < sz; ++i)
+		sprites.push_back(
+			sge::sprite::object(
+				boost::none,
+				boost::none,
+				boost::none,
+				boost::none));
 }
 
 sanguis::draw::entity::sprite_vector sanguis::draw::sprite::to_sprites() const
@@ -60,11 +60,6 @@ const sge::sprite::object& sanguis::draw::sprite::master() const
 	return at(0);
 }
 
-void sanguis::draw::sprite::add_sprite(const sge::sprite::object& s)
-{
-	sprites.push_back(s);
-}
-
 void sanguis::draw::sprite::orientation(const sge::space_unit o)
 {
 	BOOST_FOREACH(sge::sprite::object& s, sprites)
@@ -90,7 +85,7 @@ void sanguis::draw::sprite::dim(const sge::sprite::dim& d)
 
 sge::space_unit sanguis::draw::sprite::orientation() const
 {
-	return at(0).rotation();
+	return master().rotation();
 }
 
 const sge::math::vector2& sanguis::draw::sprite::speed() const
@@ -101,14 +96,5 @@ const sge::math::vector2& sanguis::draw::sprite::speed() const
 void sanguis::draw::sprite::update_pos(const sge::sprite::point& p)
 {
 	BOOST_FOREACH(sge::sprite::object& s, sprites)
-		switch(relative) {
-		case relative_pos::topleft:
-			s.pos() = p;
-			break;
-		case relative_pos::center:
-			s.set_center(p);
-			break;
-		default:
-			throw sge::exception(SGE_TEXT("Invalid relative_pos in sprite!"));
-		}
+		s.pos() = p;
 }

@@ -17,3 +17,15 @@ sanguis::load::model::model::operator[](sge::string const& name) const
 		throw sge::exception(name + SGE_TEXT(" not found in model!"));
 	return it->second;
 }
+
+sanguis::load::model::model::const_iterator
+sanguis::load::model::model::begin() const
+{
+	return parts.begin();
+}
+
+sanguis::load::model::model::const_iterator
+sanguis::load::model::model::end() const
+{
+	return parts.end();
+}

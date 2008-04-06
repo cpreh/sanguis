@@ -15,9 +15,12 @@ namespace model
 
 class weapon_category {
 public:
-	explicit weapon_category(sge::path const&);
 	animation const& operator[](animation_type::type) const;
 private:
+	explicit weapon_category(sge::path const&);
+
+	friend class part;
+
 	typedef std::map<animation_type::type, animation> animation_map;
 	animation_map animations;
 };

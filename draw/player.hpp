@@ -1,17 +1,17 @@
 #ifndef SANGUIS_DRAW_PLAYER_HPP_INCLUDED
 #define SANGUIS_DRAW_PLAYER_HPP_INCLUDED
 
+#include "model.hpp"
 #include <sge/sprite/texture_animation.hpp>
 #include <sge/math/vector.hpp>
 #include <sge/console/console.hpp>
-#include "sprite.hpp"
 
 namespace sanguis
 {
 namespace draw
 {
 
-class player : public sprite {
+class player : public model {
 public:
 	player(
 		entity_id id,

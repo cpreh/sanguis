@@ -1,6 +1,6 @@
 #include "bullet.hpp"
-#include "resource_factory.hpp"
 #include "z_ordering.hpp"
+#include "../load/resource_factory.hpp"
 #include <boost/none.hpp>
 
 sanguis::draw::bullet::bullet(
@@ -11,25 +11,25 @@ sanguis::draw::bullet::bullet(
 : sprite(
 	id,
 	speed,
-	sge::sprite::object(
+	2),
+  origin(pos_)
+{
+	at(0) = sge::sprite::object(
 		pos_,
-		resource::texture(
+		load::resource::texture(
 			SGE_TEXT("bullet")),
 		sge::sprite::texture_dim,
 		boost::none,
 		z_ordering::bullet,
-		angle),
-	relative_pos::center),
-  origin(pos_)
-{
-	add_sprite(
-		sge::sprite::object(
-			pos_,
-			resource::texture(SGE_TEXT("tail")),
-			sge::sprite::texture_dim,
-			boost::none,
-			z_ordering::bullet,
-			angle));
+		angle);
+
+	at(1) = sge::sprite::object(
+		pos_,
+		load::resource::texture(SGE_TEXT("tail")),
+		sge::sprite::texture_dim,
+		boost::none,
+		z_ordering::bullet,
+		angle);
 	
 	at(1).size().w() = static_cast<sge::sprite::unit>(1);
 }

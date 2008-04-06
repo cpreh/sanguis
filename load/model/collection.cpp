@@ -21,3 +21,13 @@ sanguis::load::model::collection::operator[](
 	}
 	return it->second;	
 }
+
+sanguis::load::model::collection::collection()
+{}
+
+sanguis::load::model::collection const&
+sanguis::load::model::singleton()
+{
+	static collection c;
+	return c;
+}

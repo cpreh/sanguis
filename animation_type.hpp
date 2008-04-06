@@ -11,6 +11,7 @@ enum type {
 	attacking,
 	walking,
 	dying,
+	deploying,
 	size
 };
 

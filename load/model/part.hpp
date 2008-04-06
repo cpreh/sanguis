@@ -15,10 +15,13 @@ namespace model
 
 class part {
 public:
-	explicit part(sge::path const&);
 	weapon_category const& operator[](weapon_type::type) const;
 	weapon_category const& unarmed() const;
 private:
+	explicit part(sge::path const&);
+
+	friend class model;
+
 	typedef std::map<weapon_type::type, weapon_category> category_map;
 	category_map categories;
 };

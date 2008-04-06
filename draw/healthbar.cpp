@@ -1,5 +1,4 @@
 #include "healthbar.hpp"
-#include "resource_factory.hpp"
 #include "z_ordering.hpp"
 #include <sge/su.hpp>
 #include <sge/math/compare.hpp>
@@ -22,14 +21,7 @@ sanguis::draw::healthbar::healthbar(
 : sprite(
 	id,
 	sge::math::vector2(0,0),
-	sge::sprite::object(
-		pos,
-		sge::virtual_texture_ptr(),
-		dim,
-		sge::colors::darkgrey,
-		z_ordering::healthbar_lower,
-		static_cast<sge::sprite::rotation_type>(0)),
-	relative_pos::topleft),
+	2),
   health_(health_),
   max_health_(max_health_)
 {
@@ -37,15 +29,23 @@ sanguis::draw::healthbar::healthbar(
 		throw sge::exception(SGE_TEXT("draw::healthbar: health > max_health!"));
 	if(sge::math::almost_zero(max_health_))
 		throw sge::exception(SGE_TEXT("draw::healthbar: max_health is 0!"));
+	
+	at(0) = sge::sprite::object(
+		pos,
+		sge::virtual_texture_ptr(),
+		dim,
+		sge::colors::darkgrey,
+		z_ordering::healthbar_lower,
+		static_cast<sge::sprite::rotation_type>(0)),
 
-	add_sprite(
-		sge::sprite::object(
-			inner_pos(),
-			sge::virtual_texture_ptr(),
-			inner_dim(),
-			sge::colors::green,
-			z_ordering::healthbar_upper,
-			static_cast<sge::sprite::rotation_type>(0)));
+	at(1) = sge::sprite::object(
+		inner_pos(),
+		sge::virtual_texture_ptr(),
+		inner_dim(),
+		sge::colors::green,
+		z_ordering::healthbar_upper,
+		static_cast<sge::sprite::rotation_type>(0));
+
 	recalc_health();
 }
 
@@ -125,8 +125,10 @@ void sanguis::draw::healthbar::recalc_health()
 	inner().w() = static_cast<sge::sprite::unit>(
 		static_cast<sge::space_unit>(inner_dim().w()) * remaining_health());
 	inner().set_color(sge::make_color(
-		static_cast<sge::color_element>((sge::su(1) - remaining_health()) * sge::color_element_max),
-		static_cast<sge::color_element>(remaining_health() * sge::color_element_max),
+		static_cast<sge::color_element>(
+			(sge::su(1) - remaining_health()) * sge::color_element_max),
+		static_cast<sge::color_element>(
+			remaining_health() * sge::color_element_max),
 		0,
 		sge::color_element_max));
 }

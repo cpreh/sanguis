@@ -1,5 +1,4 @@
 #include "player.hpp"
-#include "resource_factory.hpp"
 #include "z_ordering.hpp"
 #include <sge/string.hpp>
 #include <sge/math/abs.hpp>
@@ -9,6 +8,8 @@
 #include <boost/none.hpp>
 #include <iomanip>
 #include <cassert>
+
+#if 0
 
 namespace
 {
@@ -170,3 +171,5 @@ sge::sprite::object& sanguis::draw::player::top_sprite()
 {
 	return at(1);
 }
+
+#endif

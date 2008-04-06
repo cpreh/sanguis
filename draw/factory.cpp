@@ -1,8 +1,6 @@
 #include "bullet.hpp"
 #include "factory.hpp"
 #include "player.hpp"
-#include "simple_creep.hpp"
-#include "resource_factory.hpp"
 #include "coord_transform.hpp"
 #include "z_ordering.hpp"
 #include "animation_pack.hpp"
@@ -11,12 +9,15 @@
 #include <sge/exception.hpp>
 #include <sge/string.hpp>
 
+#if 0
+
 namespace
 {
 
 sge::string const get_animations(sanguis::entity_type::type);
 
 }
+
 
 sanguis::draw::factory::entity_ptr
 sanguis::draw::factory::create_entity(
@@ -82,3 +83,5 @@ sge::string const get_animations(sanguis::entity_type::type const type)
 }
 
 }
+
+#endif

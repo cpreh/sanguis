@@ -3,7 +3,7 @@
 
 #include "../messages/base.hpp"
 #include "../net/client.hpp"
-#include "../draw/resource_factory.hpp"
+#include "../load/resource_factory.hpp"
 #include "../tick_event.hpp"
 #include "message_event.hpp"
 #include "console_wrapper.hpp"
@@ -47,7 +47,7 @@ struct machine
 	sge::con::console_gfx &con;
 	sge::con::stdlib con_stdlib;
 	console_wrapper con_wrapper;
-	draw::resource::connection resource;
+	load::resource::connection resource;
 
 	machine(sge::systems &,sge::font &,sge::key_state_tracker &,
 		sge::con::console_gfx &,const net::address_type &,const net::port_type);

@@ -1,8 +1,8 @@
 #include "client_factory.hpp"
 #include "coord_transform.hpp"
-#include "resource_factory.hpp"
 #include "sprite.hpp"
 #include "z_ordering.hpp"
+#include "../load/resource_factory.hpp"
 #include "../client_messages/add.hpp"
 #include <sge/exception.hpp>
 #include <sge/string.hpp>
@@ -51,6 +51,8 @@ sanguis::draw::client_factory::create_entity(
 namespace
 {
 
+#if 0
+
 sanguis::draw::client_factory::entity_ptr
 create_sprite(
 	const sanguis::client_messages::add& m,
@@ -65,12 +67,13 @@ create_sprite(
 			sge::sprite::object(
 				sge::sprite::point(0,0), //FIXME
 				//sanguis::virtual_to_screen(screen_size, m.pos()),
-				sanguis::draw::resource::texture(s),
+				sanguis::load::resource::texture(s),
 				sge::sprite::texture_dim,
 				sge::colors::white,
 				z,
-				sge::su(0)),
-			sanguis::draw::relative_pos::topleft));
+				sge::su(0))));
 }
+
+#endif
 
 }
