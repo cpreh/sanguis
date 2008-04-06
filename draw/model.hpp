@@ -21,7 +21,6 @@ public:
 	model(
 		entity_id id,
 		sge::string const& name);
-	sprite_vector to_sprites() const;
 protected:	
 private:
 	void health(sge::space_unit);

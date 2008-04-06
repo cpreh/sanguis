@@ -1,14 +1,12 @@
 #include "client_factory.hpp"
 #include "coord_transform.hpp"
-#include "sprite.hpp"
+#include "simple_sprite.hpp"
 #include "z_ordering.hpp"
 #include "../load/resource_factory.hpp"
 #include "../client_messages/add.hpp"
 #include <sge/exception.hpp>
 #include <sge/string.hpp>
 #include <sge/su.hpp>
-#include <sge/renderer/colors.hpp>
-#include <sge/sprite/object.hpp>
 
 namespace
 {
@@ -51,8 +49,6 @@ sanguis::draw::client_factory::create_entity(
 namespace
 {
 
-#if 0
-
 sanguis::draw::client_factory::entity_ptr
 create_sprite(
 	const sanguis::client_messages::add& m,
@@ -61,19 +57,14 @@ create_sprite(
 	const sge::space_unit z)
 {
 	return sanguis::draw::client_factory::entity_ptr(
-		new sanguis::draw::sprite(
+		new sanguis::draw::simple_sprite(
 			m.id(),
-			sge::math::vector2(),
-			sge::sprite::object(
-				sge::sprite::point(0,0), //FIXME
-				//sanguis::virtual_to_screen(screen_size, m.pos()),
-				sanguis::load::resource::texture(s),
-				sge::sprite::texture_dim,
-				sge::colors::white,
-				z,
-				sge::su(0))));
+			sge::sprite::point(0,0), //FIXME
+			sge::sprite::texture_dim,
+			z,
+			//sanguis::virtual_to_screen(screen_size, m.pos()),
+			sge::su(0),
+			sanguis::load::resource::texture(s)));
 }
-
-#endif
 
 }
