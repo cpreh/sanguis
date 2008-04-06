@@ -5,26 +5,10 @@
 
 sanguis::draw::model::model(
 	const entity_id id,
-	sge::string const& name,
-	sge::sprite::point const& pos,
-	sge::sprite::dim const& dim,
-	const sge::sprite::rotation_type angle,
-	sge::math::vector2 const& speed,
-	const sge::space_unit health,
-	const sge::space_unit max_health)
+	sge::string const& name)
 : sprite(
 	id,
-	speed,
-	load::model::singleton()[name].size()),
-healthbar_(
-  	client::id_dont_care(),	
-	sge::sprite::point(),
-	sge::sprite::dim(),
-//	sge::sprite::point(master().x(), master().y() - healthbar_height),
-//	sge::sprite::dim(master().w(), healthbar_height),
-  	health,
-	max_health)
-
+	load::model::singleton()[name].size())
 {
 	part_vector::size_type i(0);
 	BOOST_FOREACH(

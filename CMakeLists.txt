@@ -19,6 +19,7 @@ FILE (GLOB files
 	draw/*.cpp
 	messages/*.cpp
 	server/*.cpp
+	load/*.cpp
 	load/model/*.cpp)
 
 add_executable(main ${files})

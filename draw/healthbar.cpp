@@ -1,26 +1,23 @@
 #include "healthbar.hpp"
 #include "z_ordering.hpp"
+#include "../client/id_dont_care.hpp"
 #include <sge/su.hpp>
 #include <sge/math/compare.hpp>
 #include <sge/renderer/color.hpp>
 #include <sge/renderer/colors.hpp>
+#include <boost/none.hpp>
 
 namespace
 {
 
-const sge::sprite::unit border_size = 2;
+const sge::sprite::unit border_size = 2,
+                        bar_height = 20;
 
 }
 
-sanguis::draw::healthbar::healthbar(
-	const entity_id id,
-	const sge::sprite::point& pos,
-	const sge::sprite::dim& dim,
-	const sge::space_unit health_,
-	const sge::space_unit max_health_)
+sanguis::draw::healthbar::healthbar()
 : sprite(
-	id,
-	sge::math::vector2(0,0),
+	client::id_dont_care(),
 	2),
   health_(health_),
   max_health_(max_health_)
@@ -31,18 +28,18 @@ sanguis::draw::healthbar::healthbar(
 		throw sge::exception(SGE_TEXT("draw::healthbar: max_health is 0!"));
 	
 	at(0) = sge::sprite::object(
-		pos,
-		sge::virtual_texture_ptr(),
-		dim,
+		boost::none,
+		boost::none,
+		boost::none,
 		sge::colors::darkgrey,
 		z_ordering::healthbar_lower,
 		static_cast<sge::sprite::rotation_type>(0)),
 
 	at(1) = sge::sprite::object(
-		inner_pos(),
-		sge::virtual_texture_ptr(),
-		inner_dim(),
-		sge::colors::green,
+		boost::none,
+		boost::none,
+		boost::none,
+		boost::none,
 		z_ordering::healthbar_upper,
 		static_cast<sge::sprite::rotation_type>(0));
 

@@ -11,10 +11,7 @@ namespace draw
 class bullet : public sprite {
 public:
 	bullet(
-		entity_id id,
-		const sge::sprite::point& pos,
-		sge::space_unit angle,
-		const sge::math::vector2& speed);
+		entity_id id);
 private:
 	void update(time_type);
 	sge::sprite::point origin;

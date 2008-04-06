@@ -4,32 +4,26 @@
 #include <boost/none.hpp>
 
 sanguis::draw::bullet::bullet(
-	const entity_id id,
-	const sge::sprite::point& pos_,
-	const sge::space_unit angle,
-	const sge::math::vector2& speed)
+	const entity_id id)
 : sprite(
 	id,
-	speed,
 	2),
-  origin(pos_)
+  origin()
 {
 	at(0) = sge::sprite::object(
-		pos_,
+		boost::none,
 		load::resource::texture(
 			SGE_TEXT("bullet")),
 		sge::sprite::texture_dim,
 		boost::none,
-		z_ordering::bullet,
-		angle);
+		z_ordering::bullet);
 
 	at(1) = sge::sprite::object(
-		pos_,
+		boost::none,
 		load::resource::texture(SGE_TEXT("tail")),
 		sge::sprite::texture_dim,
 		boost::none,
-		z_ordering::bullet,
-		angle);
+		z_ordering::bullet);
 	
 	at(1).size().w() = static_cast<sge::sprite::unit>(1);
 }

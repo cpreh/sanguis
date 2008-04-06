@@ -29,3 +29,9 @@ sanguis::load::model::model::end() const
 {
 	return parts.end();
 }
+
+sanguis::load::model::model::size_type
+sanguis::load::model::model::size() const
+{
+	return parts.size();
+}

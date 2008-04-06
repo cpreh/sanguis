@@ -10,12 +10,7 @@ namespace draw
 
 class healthbar : public sprite {
 public:
-	healthbar(
-		entity_id id,
-		const sge::sprite::point& pos,
-		const sge::sprite::dim& dim,
-		sge::space_unit health,
-		sge::space_unit max_health);
+	healthbar();
 	void health(sge::space_unit);
 	void max_health(sge::space_unit);
 private:

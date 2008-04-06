@@ -2,7 +2,8 @@
 #define SANGUIS_DRAW_FACTORY_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "../messages/fwd.hpp"
+#include "../entity_id.hpp"
+#include "../entity_type.hpp"
 #include <sge/renderer/types.hpp>
 #include <memory>
 
@@ -15,8 +16,8 @@ namespace factory
 
 typedef std::auto_ptr<entity> entity_ptr;
 entity_ptr create_entity(
-	const messages::add&,
-	const sge::screen_size_t &);
+	entity_id,
+	entity_type::type);
 
 }
 }

@@ -20,13 +20,7 @@ class model : public sprite {
 public:
 	model(
 		entity_id id,
-		sge::string const& name,
-		sge::sprite::point const&,
-		sge::sprite::dim const&,
-		sge::sprite::rotation_type angle,
-		sge::math::vector2 const& speed,
-		sge::space_unit health,
-		sge::space_unit max_health);
+		sge::string const& name);
 	sprite_vector to_sprites() const;
 protected:	
 private:

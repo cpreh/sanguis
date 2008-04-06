@@ -14,7 +14,6 @@ class sprite : public entity {
 public:
 	sprite(
 		entity_id id,
-		const sge::math::vector2& speed,
 		sprite_vector::size_type init_sprites);
 	sprite_vector to_sprites() const;
 	const sge::sprite::point center() const;
@@ -36,8 +35,8 @@ private:
 	void update_pos(const sge::sprite::point&);
 
 	sge::math::vector2 speed_;
-	sprite_vector      sprites;
 	sge::math::vector2 pos_;
+	sprite_vector      sprites;
 };
 
 }

@@ -39,7 +39,8 @@ struct environment
 	void load_textures();
 	sge::virtual_texture_ptr load_texture(const sanguis::load::resource::identifier_type &);
 	sge::virtual_texture_ptr load_texture_inner(const sge::path &);
-	const sge::sprite::texture_animation::animation_series load_animation(const sanguis::load::resource::identifier_type&);
+	const sge::sprite::texture_animation::animation_series load_animation(
+		sge::path const&);
 };
 
 environment::environment(const sge::image_loader_ptr il,const sge::renderer_ptr r) 
@@ -60,7 +61,7 @@ environment::load_animation(
 
 	// look for frames file inside directory
 	if (!boost::filesystem::exists(framesfile) || !boost::filesystem::is_regular(framesfile))
-		throw sge::exception(SGE_TEXT("animation \"")+id+SGE_TEXT("\" has no frames file inside"));
+		throw sge::exception(SGE_TEXT("animation \"") + dir.string() + SGE_TEXT("\" has no frames file inside"));
 	
 	// and parse line by line
 	sge::text_ifstream file(framesfile);
@@ -101,7 +102,7 @@ environment::load_animation(
 			sge::text_istringstream ss(line);	
 			ss >> delay >> std::ws;
 			if (!ss)
-				throw sge::exception(SGE_TEXT("invalid line ")+boost::lexical_cast<sge::string>(lineno)+SGE_TEXT(" in animation ")+id);
+				throw sge::exception(SGE_TEXT("invalid line ")+boost::lexical_cast<sge::string>(lineno)+SGE_TEXT(" in animation ")+dir.string());
 			filename = ss.str().substr(ss.tellg());
 		}
 		else
@@ -180,13 +181,14 @@ typedef std::map<sanguis::load::resource::identifier_type,
 	texture_map;
 texture_map textures;
 
-typedef std::map<sanguis::load::resource::identifier_type,
+typedef std::map<sge::path,
                  sge::sprite::texture_animation::animation_series>
 	animation_map;
 animation_map animations;
 
 const sge::sprite::texture_animation::animation_series
-load_animation(const sanguis::load::resource::identifier_type&);
+load_animation(
+	sge::path const&);
 
 const sge::virtual_texture_ptr
 load_texture(const sanguis::load::resource::identifier_type&);
@@ -197,7 +199,7 @@ environment *env = 0;
 const sge::sprite::texture_animation::animation_series
 sanguis::load::resource::animation(sge::path const& path)
 {
-	return map_get_or_create(animations, id, load_animation);
+	return map_get_or_create(animations, path, load_animation);
 }
 
 const sge::virtual_texture_ptr
@@ -240,10 +242,11 @@ load_texture(const sanguis::load::resource::identifier_type& id)
 }
 
 const sge::sprite::texture_animation::animation_series
-load_animation(const sanguis::load::resource::identifier_type& id)
+load_animation(
+	sge::path const& p)
 {
 	check_env();
-	return env->load_animation(id);
+	return env->load_animation(p);
 }
 
 }

@@ -5,13 +5,8 @@
 
 sanguis::draw::sprite::sprite(
 	const entity_id id,
-	const sge::math::vector2& speed_,
 	const sprite_vector::size_type sz)
-: entity(id),
-  speed_(speed_),
-  pos_() // FIXME
-//  	sge::math::structure_cast<sge::space_unit>(
-//		master_.pos()))
+: entity(id)
 {
 	sprites.reserve(sz);
 	for(sprite_vector::size_type i = 0; i < sz; ++i)

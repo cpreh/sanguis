@@ -13,11 +13,7 @@ namespace draw
 
 class player : public model {
 public:
-	player(
-		entity_id id,
-		const sge::sprite::point& pos,
-		sge::space_unit angle,
-		const sge::math::vector2& speed);
+	player(entity_id id);
 	void orientation(sge::space_unit);
 	void speed(const sge::math::vector2 &);
 private:

@@ -91,8 +91,9 @@ void sanguis::draw::scene_drawer::operator()(const messages::add& m)
 		entities.insert(
 			m.id(),
 			factory::create_entity(
-				m,
-				ss.get_renderer()->screen_size())));
+				m.id(),
+				m.type())));
+//				ss.get_renderer()->screen_size())));
 
 	if(ret.second == false)
 		throw sge::exception(SGE_TEXT("Object with id already in entity list!"));
@@ -102,6 +103,12 @@ void sanguis::draw::scene_drawer::operator()(const messages::add& m)
 			throw sge::exception(SGE_TEXT("Player already exists in scene_drawer!"));
 		player_ = dynamic_cast<player*>(ret.first->second);
 	}
+
+	// configure the object
+	process_message(messages::move(m.id(), m.pos()));
+	process_message(messages::rotate(m.id(), m.angle()));
+	process_message(messages::speed(m.id(), m.speed()));
+
 }
 
 void sanguis::draw::scene_drawer::operator()(const messages::move& m)
