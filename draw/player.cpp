@@ -40,8 +40,10 @@ sge::space_unit abs_angle_to_rel(sge::space_unit a)
 		: a;
 }
 
-const sge::sprite::point rotation_point(0,0);
+//const sge::sprite::point rotation_point(0,0);
 
+const sge::sprite::point player_body_center(25,32);
+const sge::sprite::point player_leg_center(32,32);
 }
 
 sanguis::draw::player::player(
@@ -75,7 +77,7 @@ sanguis::draw::player::player(
 
 	// FIXME: put the rotation point in a config file?
 	top_sprite().rotate_around(
-		rotation_point);
+		player_body_center);
 }
 
 
@@ -101,8 +103,8 @@ void sanguis::draw::player::update(const time_type time)
 		walk_animation.process();
 
 	// FIXME: load rotation point (see above)
-	const sge::math::vector2 leg_center(sge::math::structure_cast<sge::space_unit>(rotation_point));
-	const sge::math::vector2 body_center(leg_center);
+	const sge::math::vector2 leg_center(sge::math::structure_cast<sge::space_unit>(player_leg_center));
+	const sge::math::vector2 body_center(sge::math::structure_cast<sge::space_unit>(player_body_center));
 
 	const sge::space_unit abs_angle = rel_angle_to_abs(angle_),
 	                      abs_target = rel_angle_to_abs(target_angle);
