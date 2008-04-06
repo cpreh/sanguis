@@ -34,16 +34,9 @@ sanguis::load::model::weapon_category const&
 sanguis::load::model::part::operator[](const weapon_type::type t) const
 {
 	const category_map::const_iterator it(categories.find(t));
-	if(it == categories.end())
-		throw sge::exception(SGE_TEXT("Weapon model missing!")); // TODO: maybe use unarmed here?
-	return it->second;
-}
-
-sanguis::load::model::weapon_category const&
-sanguis::load::model::part::unarmed() const
-{
-	const category_map::const_iterator it(categories.find(weapon_type::none));
-	if(it == categories.end())
+	if(it != categories.end())
+		return it->second;
+	if(t == weapon_type::none)
 		throw sge::exception(SGE_TEXT("Unarmed weapon model missing!"));
-	return it->second;
+	return (*this)[weapon_type::none];
 }

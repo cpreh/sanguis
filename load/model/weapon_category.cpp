@@ -41,7 +41,9 @@ sanguis::load::model::weapon_category::operator[](
 	const animation_type::type anim) const
 {
 	const animation_map::const_iterator it(animations.find(anim));
-	if(it == animations.end())
-		throw sge::exception(SGE_TEXT("Animation not found in model!"));
-	return it->second;
+	if(it != animations.end())
+		return it->second;
+	if(anim == animation_type::none)
+		throw sge::exception(SGE_TEXT("Default animation not found in model!"));
+	return (*this)[animation_type::none];
 }

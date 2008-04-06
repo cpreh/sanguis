@@ -20,6 +20,9 @@ sanguis::draw::model_part::model_part(
 void sanguis::draw::model_part::animation(
 	const animation_type::type anim_type)
 {
+	// don't restart an animation unecessarly
+	if(animation_type_ == anim_type)
+		return;
 	animation_type_ = anim_type;
 	update_animation();
 }

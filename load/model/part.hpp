@@ -16,7 +16,6 @@ namespace model
 class part {
 public:
 	weapon_category const& operator[](weapon_type::type) const;
-	weapon_category const& unarmed() const;
 private:
 	explicit part(sge::path const&);
 

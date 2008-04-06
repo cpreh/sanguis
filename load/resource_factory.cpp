@@ -24,6 +24,7 @@
 #include <iosfwd>
 #include <ostream>
 #include <map>
+#include <limits>
 
 namespace
 {
@@ -61,8 +62,19 @@ environment::load_animation(
 
 	// look for frames file inside directory
 	if (!boost::filesystem::exists(framesfile) || !boost::filesystem::is_regular(framesfile))
-		throw sge::exception(SGE_TEXT("animation \"") + dir.string() + SGE_TEXT("\" has no frames file inside"));
-	
+	{
+		// there is no animation here so just take the first image you can find
+		const sge::directory_iterator it(dir);
+		if(it == sge::directory_iterator())
+			throw sge::exception(dir.string() + " is empty!");
+		sge::sprite::texture_animation::animation_series ret;
+		ret.push_back(
+			sge::sprite::texture_animation::entity(
+				std::numeric_limits<sge::time_type>::max(),
+				load_texture_inner(*it)));
+		return ret; // TODO: can we do this with boost::assign?
+	}
+
 	// and parse line by line
 	sge::text_ifstream file(framesfile);
 	if (!file.is_open())

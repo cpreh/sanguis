@@ -22,6 +22,21 @@ sanguis::draw::model::model(
 	}
 }
 
+void sanguis::draw::model::update(
+	const time_type time)
+{
+	sprite::update(time);
+
+	BOOST_FOREACH(model_part &p, parts)
+	{
+		p.animation(
+			speed().is_null()
+			? animation_type::none
+			: animation_type::walking);
+		p.update();
+	}
+}
+
 void sanguis::draw::model::health(
 	const sge::space_unit health)
 {
