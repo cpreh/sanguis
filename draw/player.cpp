@@ -88,7 +88,9 @@ void sanguis::draw::player::speed(const sge::math::vector2 &v)
 
 void sanguis::draw::player::orientation(sge::space_unit u)
 {
-	top_sprite().rotation(u + sge::math::pi<sge::space_unit>() / sge::su(2));
+	//top_sprite().rotation(u + sge::math::pi<sge::space_unit>() / sge::su(2));
+	// player image is now rotated correctly
+	top_sprite().rotation(u);
 }
 
 
@@ -100,7 +102,7 @@ void sanguis::draw::player::update(const time_type time)
 
 	// FIXME: load rotation point (see above)
 	const sge::math::vector2 leg_center(sge::math::structure_cast<sge::space_unit>(rotation_point));
-	const sge::math::vector2 body_center(leg_center);;
+	const sge::math::vector2 body_center(leg_center);
 
 	const sge::space_unit abs_angle = rel_angle_to_abs(angle_),
 	                      abs_target = rel_angle_to_abs(target_angle);
@@ -138,7 +140,9 @@ void sanguis::draw::player::update(const time_type time)
 	else
 		angle_ = abs_angle_to_rel(abs_angle + dir * time/turning_speed.value());
 
-	const sge::space_unit sprite_rotation = angle_ + sge::math::pi<sge::space_unit>()/sge::su(2);
+	// player image is now rotated correctly
+	//const sge::space_unit sprite_rotation = angle_ + sge::math::pi<sge::space_unit>()/sge::su(2);
+	const sge::space_unit sprite_rotation = angle_;
 
 	bottom_sprite().rotation(sprite_rotation);
 

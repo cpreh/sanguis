@@ -44,7 +44,8 @@ sanguis::client::running_state::running_state(my_context ctx)
 	context<machine>().con_wrapper.register_callback(
 		boost::bind(&input_handler::input_callback, &input, _1))),
   direction(0, 0),
-  cursor_pos(0, 0)
+// cursor_pos(0, 0)
+ cursor_pos(32, 32)
 {
 	sge::clog << SGE_TEXT("client: entering running state\n");
 	
@@ -185,7 +186,7 @@ void sanguis::client::running_state::handle_rotation(
 	
 	if(last_cursor_pos == cursor_pos)
 		return;
-		
+
 	const boost::optional<sge::space_unit> rotation(sge::math::angle_to<sge::space_unit>(player.center(), cursor_pos));
 	if(!rotation)
 		return;
@@ -199,8 +200,7 @@ void sanguis::client::running_state::handle_rotation(
 	drawer.process_message(
 		messages::move(
 			cursor_id,
-			screen_to_virtual(rend->screen_size(),
-			cursor_pos)));
+			screen_to_virtual(rend->screen_size(),cursor_pos-sge::sprite::point(32,32))));
 
 }
 
