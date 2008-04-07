@@ -11,7 +11,7 @@ namespace sanguis
 namespace draw
 {
 
-class player : public sprite {
+class player : public model {
 public:
 	player(entity_id id);
 	void orientation(sge::space_unit);
