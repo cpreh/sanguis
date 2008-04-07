@@ -4,8 +4,10 @@
 #include "player.hpp"
 #include "coord_transform.hpp"
 #include "../dispatch_type.hpp"
-#include "../messages/base.hpp"
 #include "../messages/add.hpp"
+#include "../messages/base.hpp"
+#include "../messages/health.hpp"
+#include "../messages/max_health.hpp"
 #include "../messages/move.hpp"
 #include "../messages/player_state.hpp"
 #include "../messages/remove.hpp"
@@ -37,6 +39,8 @@ void sanguis::draw::scene_drawer::process_message(const messages::base& m)
 	dispatch_type<
 		boost::mpl::vector<
 			messages::add,
+			messages::health,
+			messages::max_health,
 			messages::move,
 			messages::player_state,
 			messages::remove,
@@ -105,10 +109,20 @@ void sanguis::draw::scene_drawer::operator()(const messages::add& m)
 	}
 
 	// configure the object
+	process_message(messages::health(m.id(), m.health()));
 	process_message(messages::move(m.id(), m.pos()));
 	process_message(messages::rotate(m.id(), m.angle()));
 	process_message(messages::speed(m.id(), m.speed()));
+}
 
+void sanguis::draw::scene_drawer::operator()(const messages::health& m)
+{
+	get_entity(m.id()).health(m.value());
+}
+
+void sanguis::draw::scene_drawer::operator()(const messages::max_health& m)
+{
+	get_entity(m.id()).max_health(m.value());
 }
 
 void sanguis::draw::scene_drawer::operator()(const messages::move& m)

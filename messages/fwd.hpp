@@ -13,6 +13,7 @@ class connect;
 class disconnect;
 class entity_message;
 class game_state;
+class max_health;
 class move;
 class health;
 class player_direction_event;
