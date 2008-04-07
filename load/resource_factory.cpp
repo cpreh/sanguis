@@ -25,6 +25,7 @@
 #include <ostream>
 #include <map>
 #include <limits>
+#include <cstddef>
 
 namespace
 {
@@ -45,8 +46,13 @@ struct environment
 };
 
 environment::environment(const sge::image_loader_ptr il,const sge::renderer_ptr r) 
-	: rend(r),il(il),
-		texman(rend,sge::default_texture_creator<sge::no_fragmented_texture>(rend,sge::linear_filter))
+: rend(r),
+  il(il),
+  texman(
+  	rend,
+	sge::default_texture_creator<sge::no_fragmented_texture>(
+		rend,
+		sge::linear_filter))
 {
 	load_textures();
 }
@@ -206,6 +212,8 @@ const sge::virtual_texture_ptr
 load_texture(const sanguis::load::resource::identifier_type&);
 
 environment *env = 0;
+std::size_t refcount = 0;
+
 }
 
 const sge::sprite::texture_animation::animation_series
@@ -222,19 +230,17 @@ sanguis::load::resource::texture(const identifier_type& id)
 
 sanguis::load::resource::connection::connection(const sge::image_loader_ptr pm,const sge::renderer_ptr rend) 
 {
-	if (env)
-		throw sge::exception(SGE_TEXT("double resource connection"));
-		
-	env = new environment(pm,rend);
+	if (refcount++ == 0)
+		env = new environment(pm,rend);
 }
 
 sanguis::load::resource::connection::~connection() 
 { 
-	if (!env)
-		throw sge::exception(SGE_TEXT("trying to double-free environment"));
-
-	delete env;
-	env = 0;
+	if (--refcount == 0)
+	{
+		delete env;
+		env = 0;
+	}
 }
 
 namespace

@@ -3,8 +3,12 @@
 
 #include "../messages/base.hpp"
 #include "../net/server.hpp"
+#include "../load/model/singleton.hpp"
+#include "../load/resource_factory.hpp"
 #include "../tick_event.hpp"
 #include "message_event.hpp"
+
+#include <sge/systems_fwd.hpp>
 
 #include <boost/statechart/state_machine.hpp>
 
@@ -26,7 +30,9 @@ struct machine
 	: public boost::statechart::state_machine<machine, start_state>
 {
 	public:
-	machine(const net::port_type);
+	machine(
+		sge::systems &,
+		net::port_type);
 	void process(const tick_event &);
 	void process_message(const net::id_type,const message_ptr);
 
@@ -44,7 +50,11 @@ struct machine
 
 	net::port_type port_;
 	net::server net_;
-	net::server::signal_connection s_conn,s_disconn,s_data;
+	net::server::signal_connection s_conn,
+	                               s_disconn,
+	                               s_data;
+	load::resource::connection resource_connection;
+	load::model::connection model_connection;
 	client_map clients;
 };
 

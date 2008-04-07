@@ -1,13 +1,12 @@
 #include "singleton.hpp"
 #include "collection.hpp"
-#include <boost/scoped_ptr.hpp>
 #include <cstddef>
 
 namespace
 {
 
 std::size_t refcount = 0;
-boost::scoped_ptr<sanguis::load::model::collection> singleton_;
+sanguis::load::model::collection* singleton_ = 0;
 
 }
 
@@ -22,11 +21,14 @@ sanguis::load::model::singleton()
 sanguis::load::model::connection::connection()
 {
 	if(refcount++ == 0)
-		singleton_.reset(new collection());
+		singleton_ = new collection();
 }
 
 sanguis::load::model::connection::~connection()
 {
 	if(--refcount == 0)
-		singleton_.reset();
+	{
+		delete singleton_;
+		singleton_ = 0;
+	}
 }

@@ -4,6 +4,7 @@
 #include "../messages/base.hpp"
 #include "../net/client.hpp"
 #include "../load/resource_factory.hpp"
+#include "../load/model/singleton.hpp"
 #include "../tick_event.hpp"
 #include "message_event.hpp"
 #include "console_wrapper.hpp"
@@ -47,10 +48,16 @@ struct machine
 	sge::con::console_gfx &con;
 	sge::con::stdlib con_stdlib;
 	console_wrapper con_wrapper;
-	load::resource::connection resource;
+	load::resource::connection resource_connection;
+	load::model::connection model_connection;
 
-	machine(sge::systems &,sge::font &,sge::key_state_tracker &,
-		sge::con::console_gfx &,const net::address_type &,const net::port_type);
+	machine(
+		sge::systems &,
+		sge::font &,
+		sge::key_state_tracker &,
+		sge::con::console_gfx &,
+		const net::address_type &,
+		net::port_type);
 
 	void connect();
 	void send(messages::base *const);

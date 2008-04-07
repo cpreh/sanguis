@@ -5,16 +5,22 @@
 #include "../messages/disconnect.hpp"
 #include "message_event.hpp"
 
-#include <sge/iostream.hpp>
+#include <sge/systems.hpp>
 
 #include <boost/bind.hpp>
 
-sanguis::server::machine::machine(const net::port_type port_)
-	: port_(port_),
-	  s_conn(net_.register_connect(boost::bind(&machine::connect_callback,this,_1))),
-	  s_disconn(
-			net_.register_disconnect(boost::bind(&machine::disconnect_callback,this,_1,_2))),
-		s_data(net_.register_data(boost::bind(&machine::data_callback,this,_1,_2))) {}
+sanguis::server::machine::machine(
+	sge::systems &sys,
+	const net::port_type port_)
+: port_(port_),
+  s_conn(net_.register_connect(boost::bind(&machine::connect_callback,this,_1))),
+  s_disconn(
+  	net_.register_disconnect(boost::bind(&machine::disconnect_callback,this,_1,_2))),
+  s_data(net_.register_data(boost::bind(&machine::data_callback,this,_1,_2))),
+  resource_connection(
+  	sys.image_loader,
+	sys.renderer)
+{}
 
 void sanguis::server::machine::process(const tick_event &t)
 {
@@ -50,7 +56,6 @@ void sanguis::server::machine::disconnect_callback(const net::id_type id,
 
 void sanguis::server::machine::process_message(const net::id_type id,const message_ptr m)
 {
-	//sge::cout << sge::time() << "got message " << typeid(*m).name() << "!\n";
 	process_event(message_event(m,id));
 }
 
