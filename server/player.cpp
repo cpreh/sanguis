@@ -1,5 +1,6 @@
 #include "player.hpp"
 #include "../load/model/collection.hpp"
+#include "../load/model/singleton.hpp"
 #include <sge/math/vec_dim.hpp>
 
 sge::con::var<sanguis::messages::space_unit> sanguis::server::player::bullet_frequency(SGE_TEXT("player_bullet_freq"),static_cast<messages::space_unit>(0.5));

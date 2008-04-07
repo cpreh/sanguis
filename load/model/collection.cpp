@@ -24,10 +24,3 @@ sanguis::load::model::collection::operator[](
 
 sanguis::load::model::collection::collection()
 {}
-
-sanguis::load::model::collection const&
-sanguis::load::model::singleton()
-{
-	static collection c;
-	return c;
-}

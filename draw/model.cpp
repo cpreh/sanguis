@@ -1,5 +1,6 @@
 #include "model.hpp"
 #include "../load/model/collection.hpp"
+#include "../load/model/singleton.hpp"
 #include "../client/id_dont_care.hpp"
 #include <boost/foreach.hpp>
 

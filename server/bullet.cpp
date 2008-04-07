@@ -1,5 +1,6 @@
 #include "bullet.hpp"
 #include "../load/model/collection.hpp"
+#include "../load/model/singleton.hpp"
 #include <sge/math/rect_impl.hpp>
 #include <sge/math/vec_dim.hpp>
 #include <sge/math/rect_util.hpp>
