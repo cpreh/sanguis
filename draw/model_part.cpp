@@ -12,7 +12,8 @@ sanguis::draw::model_part::model_part(
   animation_(
   	info[weapon_type_]
 		[animation_type_]
-			.get())
+			.get(),
+	sge::sprite::texture_animation::loop_method::repeat) // FIXME
 {
 	animation_.bind(&ref);
 }
@@ -41,9 +42,12 @@ void sanguis::draw::model_part::update()
 
 void sanguis::draw::model_part::update_animation()
 {
+	const sge::sprite::texture_animation::loop_method::type method(
+		sge::sprite::texture_animation::loop_method::repeat); // FIXME
 	animation_ = sge::sprite::texture_animation(
 		(*info)[weapon_type_]
 			[animation_type_]
-				.get());
+				.get(),
+		method);
 	animation_.bind(ref);
 }

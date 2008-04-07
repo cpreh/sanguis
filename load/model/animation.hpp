@@ -14,14 +14,15 @@ namespace model
 
 class animation {
 public:
-	sge::sprite::texture_animation const& get() const;
+	sge::sprite::texture_animation::animation_series const& get() const;
 private:
 	explicit animation(sge::path const&);
 
 	friend class weapon_category;
 
 	sge::path path;
-	mutable boost::shared_ptr<sge::sprite::texture_animation> anim;
+	mutable boost::shared_ptr<
+		sge::sprite::texture_animation::animation_series> anim;
 };
 
 }

@@ -19,14 +19,9 @@ sanguis::draw::healthbar::healthbar()
 : sprite(
 	client::id_dont_care(),
 	2),
-  health_(health_),
-  max_health_(max_health_)
+  health_(0),
+  max_health_(0)
 {
-	if(health_ > max_health_)
-		throw sge::exception(SGE_TEXT("draw::healthbar: health > max_health!"));
-	if(sge::math::almost_zero(max_health_))
-		throw sge::exception(SGE_TEXT("draw::healthbar: max_health is 0!"));
-	
 	at(0) = sge::sprite::object(
 		boost::none,
 		boost::none,
@@ -119,6 +114,12 @@ sanguis::draw::healthbar::remaining_health() const
 
 void sanguis::draw::healthbar::recalc_health()
 {
+	if(health_ > max_health_)
+		throw sge::exception(SGE_TEXT("draw::healthbar: health > max_health!"));
+
+	if(sge::math::almost_zero(max_health_)) // TODO:
+		return;
+	
 	inner().w() = static_cast<sge::sprite::unit>(
 		static_cast<sge::space_unit>(inner_dim().w()) * remaining_health());
 	inner().set_color(sge::make_color(

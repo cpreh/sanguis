@@ -1,14 +1,15 @@
 #ifndef SANGUIS_DRAW_BULLET_HPP_INCLUDED
 #define SANGUIS_DRAW_BULLET_HPP_INCLUDED
 
-#include "sprite.hpp"
+#include "model.hpp"
+#include <sge/sprite/types.hpp>
 
 namespace sanguis
 {
 namespace draw
 {
 
-class bullet : public sprite {
+class bullet : public model {
 public:
 	bullet(
 		entity_id id);

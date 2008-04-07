@@ -1,30 +1,16 @@
 #include "bullet.hpp"
 #include "z_ordering.hpp"
-#include "../load/resource_factory.hpp"
 #include <boost/none.hpp>
 
 sanguis::draw::bullet::bullet(
 	const entity_id id)
-: sprite(
+: model(
 	id,
-	2),
+	SGE_TEXT("bullet")),
   origin()
 {
-	at(0) = sge::sprite::object(
-		boost::none,
-		load::resource::texture(
-			SGE_TEXT("bullet")),
-		sge::sprite::texture_dim,
-		boost::none,
-		z_ordering::bullet);
-
-	at(1) = sge::sprite::object(
-		boost::none,
-		load::resource::texture(SGE_TEXT("tail")),
-		sge::sprite::texture_dim,
-		boost::none,
-		z_ordering::bullet);
-	
+	at(0).z() = at(0).z() = z_ordering::bullet;
+		
 	at(1).size().w() = static_cast<sge::sprite::unit>(1);
 }
 
