@@ -238,6 +238,8 @@ sanguis::load::resource::connection::~connection()
 { 
 	if (--refcount == 0)
 	{
+		animations.clear();
+		textures.clear(); // TODO: this should really be part of environment
 		delete env;
 		env = 0;
 	}
