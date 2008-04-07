@@ -109,8 +109,8 @@ void sanguis::draw::scene_drawer::operator()(const messages::add& m)
 	}
 
 	// configure the object
-	process_message(messages::health(m.id(), m.health()));
 	process_message(messages::max_health(m.id(), m.max_health()));
+	process_message(messages::health(m.id(), m.health()));
 	process_message(messages::move(m.id(), m.pos()));
 	process_message(messages::rotate(m.id(), m.angle()));
 	process_message(messages::speed(m.id(), m.speed()));

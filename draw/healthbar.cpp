@@ -2,6 +2,7 @@
 #include "z_ordering.hpp"
 #include "../client/id_dont_care.hpp"
 #include <sge/su.hpp>
+#include <sge/format.hpp>
 #include <sge/math/compare.hpp>
 #include <sge/renderer/color.hpp>
 #include <sge/renderer/colors.hpp>
@@ -115,7 +116,10 @@ sanguis::draw::healthbar::remaining_health() const
 void sanguis::draw::healthbar::recalc_health()
 {
 	if(health_ > max_health_)
-		throw sge::exception(SGE_TEXT("draw::healthbar: health > max_health!"));
+		throw sge::exception(
+			(sge::format(SGE_TEXT("draw::healthbar: health (%1%) > max_health (%2%)!"))
+			% health_
+			% max_health_).str());
 
 	if(sge::math::almost_zero(max_health_)) // TODO:
 		return;
