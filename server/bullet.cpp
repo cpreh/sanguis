@@ -16,7 +16,7 @@ sanguis::server::bullet::bullet(const entity_id id,const messages::pos_type &cen
 
 sanguis::messages::dim_type sanguis::server::bullet::dim() const
 {
-	return sge::math::structure_cast<messages::space_unit>(load::model::singleton()["bullet"]["default"][weapon_type::none][animation_type::none].get().at(0).dim());
+	return sge::math::structure_cast<messages::space_unit>(load::model::singleton()["bullet"]["default"][weapon_type::none][animation_type::none].get().dim());
 }
 
 sanguis::messages::pos_type sanguis::server::bullet::speed() const

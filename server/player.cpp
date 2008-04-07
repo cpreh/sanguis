@@ -29,7 +29,7 @@ bool sanguis::server::player::spawn_bullet() const
 
 sanguis::messages::dim_type sanguis::server::player::dim() const
 {
-	return sge::math::structure_cast<messages::space_unit>(load::model::singleton()["player"]["bottom"][weapon_type::pistol][animation_type::walking].get().at(0).dim());
+	return sge::math::structure_cast<messages::space_unit>(load::model::singleton()["player"]["bottom"][weapon_type::pistol][animation_type::walking].get().dim());
 }
 
 sanguis::messages::pos_type sanguis::server::player::speed() const

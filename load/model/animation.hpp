@@ -2,7 +2,7 @@
 #define SANGUIS_LOAD_MODEL_ANIMATION_HPP_INCLUDED
 
 #include <sge/path.hpp>
-#include <sge/sprite/texture_animation.hpp>
+#include <sge/sprite/animation_series.hpp>
 #include <boost/shared_ptr.hpp>
 
 namespace sanguis
@@ -14,7 +14,7 @@ namespace model
 
 class animation {
 public:
-	sge::sprite::texture_animation::animation_series const& get() const;
+	sge::sprite::animation_series const& get() const;
 private:
 	explicit animation(sge::path const&);
 
@@ -22,7 +22,7 @@ private:
 
 	sge::path path;
 	mutable boost::shared_ptr<
-		sge::sprite::texture_animation::animation_series> anim;
+		sge::sprite::animation_series> anim;
 };
 
 }

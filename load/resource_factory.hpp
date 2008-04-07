@@ -2,7 +2,7 @@
 #define SANGUIS_DRAW_RESOURCE_FACTORY_HPP_INCLUDED
 
 #include <sge/string.hpp>
-#include <sge/sprite/texture_animation.hpp>
+#include <sge/sprite/animation_series.hpp>
 #include <sge/texture/virtual_texture.hpp>
 #include <sge/renderer/renderer.hpp>
 #include <sge/image/image_loader.hpp>
@@ -17,7 +17,7 @@ namespace resource
 
 typedef sge::string identifier_type;
 
-const sge::sprite::texture_animation::animation_series animation(
+const sge::sprite::animation_series animation(
 	sge::path const&);
 const sge::virtual_texture_ptr texture(const identifier_type&);
 

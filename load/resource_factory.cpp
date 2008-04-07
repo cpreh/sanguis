@@ -41,7 +41,7 @@ struct environment
 	void load_textures();
 	sge::virtual_texture_ptr load_texture(const sanguis::load::resource::identifier_type &);
 	sge::virtual_texture_ptr load_texture_inner(const sge::path &);
-	const sge::sprite::texture_animation::animation_series load_animation(
+	const sge::sprite::animation_series load_animation(
 		sge::path const&);
 };
 
@@ -57,7 +57,7 @@ environment::environment(const sge::image_loader_ptr il,const sge::renderer_ptr 
 	load_textures();
 }
 
-const sge::sprite::texture_animation::animation_series
+const sge::sprite::animation_series
 environment::load_animation(
 	sge::path const& dir)
 {
@@ -73,9 +73,9 @@ environment::load_animation(
 		const sge::directory_iterator it(dir);
 		if(it == sge::directory_iterator())
 			throw sge::exception(dir.string() + " is empty!");
-		sge::sprite::texture_animation::animation_series ret;
+		sge::sprite::animation_series ret;
 		ret.push_back(
-			sge::sprite::texture_animation::entity(
+			sge::sprite::animation_entity(
 				std::numeric_limits<sge::time_type>::max(),
 				load_texture_inner(*it)));
 		return ret; // TODO: can we do this with boost::assign?
@@ -102,7 +102,7 @@ environment::load_animation(
 		file.seekg(0,std::ios_base::beg);
 	}
 	
-	sge::sprite::texture_animation::animation_series anim;
+	sge::sprite::animation_series anim;
 
 	unsigned lineno = const_delay ? 2 : 1;
 	while (std::getline(file,line))
@@ -128,7 +128,7 @@ environment::load_animation(
 			delay = *const_delay;
 		}
 
-		anim.push_back(sge::sprite::texture_animation::entity(delay,load_texture_inner(dir/filename)));
+		anim.push_back(sge::sprite::animation_entity(delay,load_texture_inner(dir/filename)));
 		++lineno;
 	}
 		
@@ -200,11 +200,11 @@ typedef std::map<sanguis::load::resource::identifier_type,
 texture_map textures;
 
 typedef std::map<sge::path,
-                 sge::sprite::texture_animation::animation_series>
+                 sge::sprite::animation_series>
 	animation_map;
 animation_map animations;
 
-const sge::sprite::texture_animation::animation_series
+const sge::sprite::animation_series
 load_animation(
 	sge::path const&);
 
@@ -216,7 +216,7 @@ std::size_t refcount = 0;
 
 }
 
-const sge::sprite::texture_animation::animation_series
+const sge::sprite::animation_series
 sanguis::load::resource::animation(sge::path const& path)
 {
 	return map_get_or_create(animations, path, load_animation);
@@ -261,7 +261,7 @@ load_texture(const sanguis::load::resource::identifier_type& id)
 	return env->load_texture(id);
 }
 
-const sge::sprite::texture_animation::animation_series
+const sge::sprite::animation_series
 load_animation(
 	sge::path const& p)
 {

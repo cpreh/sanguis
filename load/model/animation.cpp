@@ -6,12 +6,12 @@ sanguis::load::model::animation::animation(
 : path(path)
 {}
 
-sge::sprite::texture_animation::animation_series const&
+sge::sprite::animation_series const&
 sanguis::load::model::animation::get() const
 {
 	if(!anim)
 		anim.reset(
-			new sge::sprite::texture_animation::animation_series(
+			new sge::sprite::animation_series(
 				resource::animation(path)));
 	
 	return *anim;
