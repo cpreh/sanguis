@@ -16,14 +16,16 @@ sanguis::messages::add::add(
 	const space_unit angle_,
 	const vector2& speed_,
 	const space_unit health_,
-	const space_unit max_health_)
+	const space_unit max_health_,
+	const dim_type& dim_)
 : entity_message(id),
   type_(type_),
   pos_(pos_),
   angle_(angle_),
   speed_(speed_),
   health_(health_),
-  max_health_(max_health_)
+  max_health_(max_health_),
+  dim_(dim_)
 {}
 	
 sanguis::entity_type::type sanguis::messages::add::type() const
@@ -72,7 +74,8 @@ void sanguis::messages::add::serialize(
 	   & angle_
 	   & speed_
 	   & health_
-	   & max_health_;
+	   & max_health_
+	   & dim_;
 }
 
 SANGUIS_MESSAGES_INSTANTIATE_SERIALIZE(add)

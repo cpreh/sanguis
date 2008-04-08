@@ -146,7 +146,8 @@ void sanguis::draw::scene_drawer::operator()(const messages::remove& m)
 
 void sanguis::draw::scene_drawer::operator()(const messages::resize& m)
 {
-	get_entity(m.id()).dim(virtual_to_screen(ss.get_renderer()->screen_size(), m.dim()));	
+	//get_entity(m.id()).dim(virtual_to_screen(ss.get_renderer()->screen_size(), m.dim()));	
+	get_entity(m.id()).dim(sge::math::structure_cast<sge::sprite::unit>(m.dim()));
 }
 
 void sanguis::draw::scene_drawer::operator()(const messages::rotate& m)

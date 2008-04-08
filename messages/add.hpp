@@ -21,7 +21,8 @@ public:
 		space_unit angle,
 		const vector2& speed,
 		space_unit health,
-		space_unit max_health);
+		space_unit max_health,
+		const dim_type& dim);
 
 	entity_type::type type() const;
 	const pos_type& pos() const;
