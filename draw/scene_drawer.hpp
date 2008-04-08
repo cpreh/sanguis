@@ -41,6 +41,7 @@ public:
 	void operator()(const messages::move&);
 	void operator()(const messages::player_state&);
 	void operator()(const messages::remove&);
+	void operator()(const messages::resize&);
 	void operator()(const messages::rotate&);
 	void operator()(const messages::speed&);
 

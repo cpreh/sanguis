@@ -5,6 +5,7 @@
 
 sanguis::load::model::part::part(
 	sge::path const& path)
+: path(path)
 {
 	typedef boost::array<sge::string, weapon_type::size + 1> weapon_type_array;
 	const weapon_type_array weapon_types = {
@@ -37,6 +38,8 @@ sanguis::load::model::part::operator[](const weapon_type::type t) const
 	if(it != categories.end())
 		return it->second;
 	if(t == weapon_type::none)
-		throw sge::exception(SGE_TEXT("Unarmed weapon model missing!"));
+		throw sge::exception(
+			SGE_TEXT("Unarmed weapon model missing in ")
+			+ path.string());
 	return (*this)[weapon_type::none];
 }

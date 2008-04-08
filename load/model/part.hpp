@@ -17,6 +17,8 @@ class part {
 public:
 	weapon_category const& operator[](weapon_type::type) const;
 private:
+	sge::path path;
+
 	explicit part(sge::path const&);
 
 	friend class model;

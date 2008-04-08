@@ -1,5 +1,7 @@
 #include "model_part.hpp"
 #include "../load/model/part.hpp"
+#include <sge/exception.hpp>
+#include <sge/string.hpp>
 #include <boost/none.hpp>
 
 sanguis::draw::model_part::model_part(
@@ -13,7 +15,7 @@ sanguis::draw::model_part::model_part(
   	info[weapon_type_]
 		[animation_type_]
 			.get(),
-	sge::sprite::texture_animation::loop_method::repeat) // FIXME
+	loop_method())
 {
 	animation_.bind(&ref);
 }
@@ -42,12 +44,26 @@ void sanguis::draw::model_part::update()
 
 void sanguis::draw::model_part::update_animation()
 {
-	const sge::sprite::texture_animation::loop_method::type method(
-		sge::sprite::texture_animation::loop_method::repeat); // FIXME
 	animation_ = sge::sprite::texture_animation(
 		(*info)[weapon_type_]
 			[animation_type_]
 				.get(),
-		method);
+		loop_method());
 	animation_.bind(ref);
+}
+
+sge::sprite::texture_animation::loop_method::type
+sanguis::draw::model_part::loop_method() const
+{
+	switch(animation_type_) {
+	case animation_type::none:
+	case animation_type::walking:
+		return sge::sprite::texture_animation::loop_method::repeat;
+	case animation_type::attacking:
+		return sge::sprite::texture_animation::loop_method::stop_after_end;
+	case animation_type::dying:
+		return sge::sprite::texture_animation::loop_method::stop_at_end;
+	default:
+		throw sge::exception(SGE_TEXT("Invalid animation_type in model_part!"));
+	}
 }

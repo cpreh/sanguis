@@ -17,6 +17,8 @@ class weapon_category {
 public:
 	animation const& operator[](animation_type::type) const;
 private:
+	sge::path path;
+	
 	explicit weapon_category(sge::path const&);
 
 	friend class part;

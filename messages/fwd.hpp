@@ -22,6 +22,7 @@ class player_start_shooting;
 class player_stop_shooting;
 class player_state;
 class remove;
+class resize;
 class rotate;
 class speed;
 

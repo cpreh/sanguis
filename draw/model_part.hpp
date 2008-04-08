@@ -22,6 +22,7 @@ public:
 	void update();
 private:
 	void update_animation();
+	sge::sprite::texture_animation::loop_method::type loop_method() const;
 
 	load::model::part const*       info;
 	sge::sprite::object*           ref;

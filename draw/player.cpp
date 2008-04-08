@@ -79,11 +79,8 @@ void sanguis::draw::player::speed(const sge::math::vector2 &v)
 
 void sanguis::draw::player::orientation(sge::space_unit u)
 {
-	//top_sprite().rotation(u + sge::math::pi<sge::space_unit>() / sge::su(2));
-	// player image is now rotated correctly
 	top_sprite().rotation(u);
 }
-
 
 void sanguis::draw::player::update(const time_type time)
 {

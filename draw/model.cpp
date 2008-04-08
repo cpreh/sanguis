@@ -42,6 +42,10 @@ void sanguis::draw::model::health(
 	const sge::space_unit health)
 {
 	healthbar_.health(health);
+	/*if(sge::math::almost_zero(health))
+		BOOST_FOREACH(model_part &p, parts)
+			p.animation(
+				animation_type::dying);*/
 }
 
 void sanguis::draw::model::max_health(

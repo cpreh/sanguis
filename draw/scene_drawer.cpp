@@ -11,6 +11,7 @@
 #include "../messages/move.hpp"
 #include "../messages/player_state.hpp"
 #include "../messages/remove.hpp"
+#include "../messages/resize.hpp"
 #include "../messages/rotate.hpp"
 #include "../messages/speed.hpp"
 #include "../client_messages/add.hpp"
@@ -44,6 +45,7 @@ void sanguis::draw::scene_drawer::process_message(const messages::base& m)
 			messages::move,
 			messages::player_state,
 			messages::remove,
+			messages::resize,
 			messages::rotate,
 			messages::speed
 			>,
@@ -112,6 +114,7 @@ void sanguis::draw::scene_drawer::operator()(const messages::add& m)
 	process_message(messages::max_health(m.id(), m.max_health()));
 	process_message(messages::health(m.id(), m.health()));
 	process_message(messages::move(m.id(), m.pos()));
+	process_message(messages::resize(m.id(), m.dim()));
 	process_message(messages::rotate(m.id(), m.angle()));
 	process_message(messages::speed(m.id(), m.speed()));
 }
@@ -128,7 +131,7 @@ void sanguis::draw::scene_drawer::operator()(const messages::max_health& m)
 
 void sanguis::draw::scene_drawer::operator()(const messages::move& m)
 {
-	get_entity(m.id()).pos(virtual_to_screen(ss.get_renderer()->screen_size(),m.pos()));
+	get_entity(m.id()).pos(virtual_to_screen(ss.get_renderer()->screen_size(), m.pos()));
 }
 
 void sanguis::draw::scene_drawer::operator()(const messages::player_state&)
@@ -139,6 +142,11 @@ void sanguis::draw::scene_drawer::operator()(const messages::remove& m)
 {
 	if(entities.erase(m.id()) == 0)
 		throw sge::exception(SGE_TEXT("Object not in entity map, can't remove it!"));
+}
+
+void sanguis::draw::scene_drawer::operator()(const messages::resize& m)
+{
+	get_entity(m.id()).dim(virtual_to_screen(ss.get_renderer()->screen_size(), m.dim()));	
 }
 
 void sanguis::draw::scene_drawer::operator()(const messages::rotate& m)
