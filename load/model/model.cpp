@@ -1,12 +1,21 @@
 #include "model.hpp"
 #include <sge/exception.hpp>
+#include <sge/iostream.hpp>
+#include <ostream>
 #include <utility>
 
 sanguis::load::model::model::model(
 	sge::path const& path)
 {
 	for(sge::directory_iterator beg(path), end; beg != end; ++beg)
+	{
+		if(!boost::filesystem::is_directory(*beg))
+		{
+			sge::clog << SGE_TEXT("warning: ") << *beg << SGE_TEXT(" is not a directory!\n");
+			continue;
+		}
 		parts.insert(std::make_pair(beg->leaf(), part(*beg)));
+	}
 }
 
 sanguis::load::model::part const&
