@@ -15,12 +15,10 @@ sanguis::draw::model::model(
 	BOOST_FOREACH(
 		load::model::model::value_type const& p,
 		load::model::singleton()[name])
-	{
 		parts.push_back(
 			model_part(
 				p.second,
 				at(i++)));
-	}
 }
 
 void sanguis::draw::model::update(
