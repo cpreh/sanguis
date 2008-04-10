@@ -4,7 +4,7 @@
 #include <sge/math/vec_dim.hpp>
 
 sge::con::var<sanguis::messages::space_unit> sanguis::server::player::bullet_frequency(SGE_TEXT("player_bullet_freq"),static_cast<messages::space_unit>(0.5));
-sge::con::var<sanguis::messages::space_unit> sanguis::server::player::running_speed(SGE_TEXT("player_speed"),static_cast<messages::space_unit>(0.1));
+sge::con::var<sanguis::messages::space_unit> sanguis::server::player::running_speed(SGE_TEXT("player_speed"),static_cast<messages::space_unit>(60));
 
 sanguis::server::player::player(const entity_id id,const net::id_type net_id_,
 	const messages::pos_type center_,const messages::pos_type direction_,

@@ -12,7 +12,7 @@ sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::add
 {
 	return new messages::add(e.id(),
 			e.type(),
-			e.center(),
+			e.pos(),
 			e.angle(),
 			e.speed(),
 			e.health(),

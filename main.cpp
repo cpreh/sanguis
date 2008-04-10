@@ -5,6 +5,7 @@
 #include "client/start_state.hpp"
 #include "tick_event.hpp"
 #include "media_path.hpp"
+#include "resolution.hpp"
 
 // sge
 #include <sge/iostream.hpp>
@@ -75,7 +76,7 @@ try
 
 	// basic stuff
 	sys.init<sge::init::core>();
-	sys.init<sge::init::renderer>(640, 480);
+	sys.init<sge::init::renderer>(sanguis::resolution().w(), sanguis::resolution().h());
 	sys.init<sge::init::input>();
 	sys.init<sge::init::image_loader>();
 

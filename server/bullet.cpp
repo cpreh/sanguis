@@ -1,11 +1,12 @@
 #include "bullet.hpp"
 #include "../load/model/collection.hpp"
 #include "../load/model/singleton.hpp"
+#include "../resolution.hpp"
 #include <sge/math/rect_impl.hpp>
 #include <sge/math/vec_dim.hpp>
 #include <sge/math/rect_util.hpp>
 
-sge::con::var<sanguis::messages::space_unit> sanguis::server::bullet::bullet_speed(SGE_TEXT("bullet_speed"),static_cast<sanguis::messages::space_unit>(0.4));
+sge::con::var<sanguis::messages::space_unit> sanguis::server::bullet::bullet_speed(SGE_TEXT("bullet_speed"),static_cast<sanguis::messages::space_unit>(200));
 
 sanguis::server::bullet::bullet(const entity_id id,const messages::pos_type &center_,const messages::pos_type &direction_,const messages::space_unit angle_) 
 	: entity(id),
@@ -30,7 +31,12 @@ void sanguis::server::bullet::update(const time_type delta)
 	
 	// bullet not visible anymore?
 	visible_ = sge::math::intersects(
-		sge::math::rect(sge::su(-0.5),sge::su(-0.5),sge::su(1.5),sge::su(1.5)),
+	//	sge::math::rect(sge::su(-0.5),sge::su(-0.5),sge::su(1.5),sge::su(1.5)),
+		sge::math::rect(
+			sge::su(-0.5)*sge::su(resolution().w()),
+			sge::su(-0.5)*sge::su(resolution().h()),
+			sge::su(1.5)*sge::su(resolution().w()),
+			sge::su(1.5)*sge::su(resolution().h())),
 		center());
 
 }

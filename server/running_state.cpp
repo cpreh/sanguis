@@ -18,6 +18,7 @@
 #include "../game_state.hpp"
 #include "../dispatch_type.hpp"
 #include "../truncation_check_cast.hpp"
+#include "../resolution.hpp"
 #include "../truncation_check_structure_cast.hpp"
 #include "message_functor.hpp"
 #include "player.hpp"
@@ -109,7 +110,9 @@ void sanguis::server::running_state::create_game(const net::id_type net_id,const
 		new server::player(
 			player_id,
 			net_id,
-			messages::pos_type(static_cast<messages::space_unit>(0.5),static_cast<messages::space_unit>(0.5)),
+			messages::pos_type(
+				static_cast<messages::space_unit>(resolution().w()/2),
+				static_cast<messages::space_unit>(resolution().h()/2)),
 			messages::pos_type(),
 			static_cast<messages::space_unit>(0),
 			static_cast<messages::space_unit>(1),
