@@ -53,15 +53,9 @@ sanguis::draw::player::player(const entity_id id)
 	angle_(sge::su(0)),
 	target_angle(angle_)
 {
-	bottom_sprite() = sge::sprite::object(
-		sge::sprite::point(0,0),
-		sge::virtual_texture_ptr(),
-		sge::sprite::dim(0,0),
-		boost::none,
-		z_ordering::player_lower,
-		angle_);
+	bottom_sprite().z() = z_ordering::player_lower;
 	
-	top_sprite() = bottom_sprite();
+	//top_sprite() = bottom_sprite();
 	top_sprite().z() = z_ordering::player_upper;
 	
 	// FIXME: put the rotation point in a config file?

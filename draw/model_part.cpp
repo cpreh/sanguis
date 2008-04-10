@@ -17,7 +17,7 @@ sanguis::draw::model_part::model_part(
 			.get(),
 	loop_method())
 {
-	animation_.bind(&ref);
+	update_animation();
 }
 
 void sanguis::draw::model_part::animation(
