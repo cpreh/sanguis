@@ -17,7 +17,9 @@ struct player_action {
 		vertical_move,
 		horizontal_look,
 		vertical_look,
-		shoot
+		shoot,
+		switch_weapon_forwards,
+		switch_weapon_backwards
 		// TODO: more
 	};
 

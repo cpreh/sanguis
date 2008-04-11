@@ -47,6 +47,7 @@ private:
 	void handle_direction(const draw::player&, const player_action&);
 	void handle_rotation(const draw::player&, const player_action&);
 	void handle_shooting(const draw::player&, const player_action&);
+	void handle_switch_weapon(const draw::player&, const player_action&);
 
 	draw::scene_drawer     drawer;
 	input_handler          input;
