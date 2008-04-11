@@ -8,6 +8,7 @@
 #include "../entity_id.hpp"
 #include "../messages/fwd.hpp"
 #include "../messages/types.hpp"
+#include "../console_timer.hpp"
 
 #include <sge/string.hpp>
 #include <sge/su.hpp>
@@ -64,15 +65,15 @@ class running_state
 	// game functions
 	void create_game(const net::id_type,const messages::client_info &);
 	void add_bullet();
-	sge::space_unit set_message_freq(const sge::space_unit,const sge::space_unit);
+	void ai_hook(entity &,const entity::time_type);
 	entity &insert_entity(const entity_id,entity *);
 
 	entity_map entities;
 
 	player *player_;
 
-	sge::timer send_timer;
-	sge::con::action_var<sge::space_unit>::type message_freq;
+	console_timer send_timer;
+	console_timer enemy_timer;
 };
 
 }

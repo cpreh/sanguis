@@ -4,6 +4,7 @@
 #include "../messages/types.hpp"
 #include "../entity_id.hpp"
 #include "../entity_type.hpp"
+#include "ai_type.hpp"
 #include <memory>
 
 namespace sanguis
@@ -15,23 +16,39 @@ class entity
 	public:
 	typedef messages::space_unit time_type;
 
-	entity(const entity_id id_);
+	entity(const entity_id id_,
+		const messages::pos_type &pos,
+		const messages::space_unit angle,
+		const messages::space_unit direction,
+		const messages::space_unit speed = static_cast<messages::space_unit>(0));
+
 	entity_id id() const;
 
-	messages::pos_type center() const;
+	messages::pos_type pos() const;
+	void pos(const messages::pos_type);
+	messages::space_unit speed() const;
+	void speed(const messages::space_unit);
+	messages::space_unit angle() const;
+	void angle(const messages::space_unit);
+	messages::space_unit direction() const;
+	void direction(const messages::space_unit);
 
-	// pure virtuals
-	virtual messages::pos_type pos() const = 0;
+	// is calculated from the above
+	messages::pos_type center() const;
+	messages::pos_type abs_speed() const;
+
 	virtual messages::dim_type dim() const = 0;
-	virtual messages::pos_type speed() const = 0;
-	virtual messages::space_unit angle() const = 0;
+	virtual messages::space_unit max_speed() const = 0;
 	virtual messages::space_unit health() const = 0;
 	virtual messages::space_unit max_health() const = 0;
 	virtual entity_type::type type() const = 0;
+	virtual ai_type::type ai_type() const = 0;
 	virtual void update(const time_type) = 0;
 	virtual ~entity();
 	private:
 	entity_id id_;
+	messages::pos_type pos_;
+	messages::space_unit speed_,angle_,direction_;
 };
 
 typedef std::auto_ptr<entity> entity_ptr;

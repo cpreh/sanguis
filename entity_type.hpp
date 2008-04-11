@@ -8,6 +8,7 @@ namespace entity_type {
 enum type {
 	player,
 	bullet,
+	zombie,
 	wolf_white,
 	wolf_black
 };

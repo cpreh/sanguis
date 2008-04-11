@@ -20,6 +20,7 @@
 #include "../truncation_check_cast.hpp"
 #include "../resolution.hpp"
 #include "../truncation_check_structure_cast.hpp"
+#include "../angle_vector.hpp"
 #include "message_functor.hpp"
 #include "player.hpp"
 #include "bullet.hpp"
@@ -32,7 +33,7 @@
 #include <sge/math/rect.hpp>
 #include <sge/math/rect_impl.hpp>
 #include <sge/math/rect_util.hpp>
-#include <sge/math/atan2.hpp>
+#include <sge/math/angle.hpp>
 
 #include <boost/bind.hpp>
 #include <boost/mpl/vector.hpp>
@@ -40,33 +41,26 @@
 #include <cmath>
 #include <cassert>
 
-namespace
-{
-sge::math::vector2 angle_to_vector(const sge::space_unit angle)
-{
-	return sge::math::vector2(std::cos(angle),std::sin(angle));
-}
-}
 
 sanguis::server::running_state::running_state()
-	: send_timer(sge::second()),
-		message_freq(SGE_TEXT("message_freq"),
-			boost::bind(&running_state::set_message_freq,this,_1,_2),sge::su(0.5))
+	: send_timer(SGE_TEXT("message_freq"),sge::su(0.5)),
+		enemy_timer(SGE_TEXT("enemy_timer"),sge::su(20))
 {
 	sge::clog << SGE_TEXT("server: entering running state\n");
 }
 
-sge::space_unit sanguis::server::running_state::set_message_freq(const sge::space_unit,const sge::space_unit newv)
+void sanguis::server::running_state::ai_hook(entity &e,const entity::time_type diff)
 {
-	send_timer.interval(static_cast<sge::time_type>(static_cast<sge::space_unit>(sge::second())*newv));
-	return newv;
+	//if (e.ai_type() == ai_type::none)
+		e.pos(e.pos() + e.abs_speed() * diff);
+	
 }
 
 boost::statechart::result sanguis::server::running_state::react(const tick_event&t) 
 {
 	const sge::timer::frames_type delta = t.data.diff_time;
 
-	const bool update_pos = send_timer.update_b();
+	const bool update_pos = send_timer.v().update_b();
 
 	bool deletion = false;
 	for (entity_map::iterator i = entities.begin(); i != entities.end(); ++i)
@@ -77,7 +71,8 @@ boost::statechart::result sanguis::server::running_state::react(const tick_event
 			deletion = false;
 		}
 
-		i->second->update(delta);
+		ai_hook(*(i->second),delta);
+		//i->second->update(delta);
 
 		if (i->second->type() == entity_type::player && dynamic_cast<server::player &>(*i->second).spawn_bullet())
 			add_bullet();
@@ -113,7 +108,8 @@ void sanguis::server::running_state::create_game(const net::id_type net_id,const
 			messages::pos_type(
 				static_cast<messages::space_unit>(resolution().w()/2),
 				static_cast<messages::space_unit>(resolution().h()/2)),
-			messages::pos_type(),
+			static_cast<messages::space_unit>(0),
+			static_cast<messages::space_unit>(0),
 			static_cast<messages::space_unit>(0),
 			static_cast<messages::space_unit>(1),
 			static_cast<messages::space_unit>(1),
@@ -153,7 +149,7 @@ void sanguis::server::running_state::add_bullet()
 	bullet &b = dynamic_cast<bullet &>(
 		insert_entity(
 			bullet_id,
-			new bullet(bullet_id,player_->center(),angle_to_vector(player_->angle()),player_->angle())));
+			new bullet(bullet_id,player_->center(),player_->angle(),player_->angle())));
 
 	context<machine>().send(message_convert<messages::add>(b));
 }
@@ -189,9 +185,14 @@ boost::statechart::result sanguis::server::running_state::operator()(const net::
 	}
 
 	if (e.dir().is_null())
-		player_->direction(sge::math::vector2());
+	{
+		player_->speed(static_cast<messages::space_unit>(0));
+	}
 	else
-		player_->direction(sge::math::normalize(e.dir()));
+	{
+		player_->speed(static_cast<messages::space_unit>(1));
+		player_->direction(*sge::math::angle_to<messages::space_unit>(e.dir()));
+	}
 
 	context<machine>().send(message_convert<messages::speed>(*player_));
 	return discard_event();

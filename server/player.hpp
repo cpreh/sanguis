@@ -13,24 +13,28 @@ namespace server
 class player : public entity
 {
 	public:
-	player(const entity_id,const net::id_type net_id,const messages::pos_type center,const messages::pos_type direction,
-		const messages::space_unit angle,const messages::space_unit health,const messages::space_unit max_health,
+	player(
+		const entity_id,
+		const net::id_type net_id,
+		const messages::pos_type &center,
+		const messages::space_unit direction,
+		const messages::space_unit speed,
+		const messages::space_unit angle,
+		const messages::space_unit health,
+		const messages::space_unit max_health,
 		const messages::string &name);
 	// virtual functions
-	messages::pos_type pos() const { return pos_; } 
 	messages::dim_type dim() const;
-	messages::pos_type speed() const;
-	messages::space_unit angle() const { return angle_; }
-	void angle(const messages::space_unit nangle) { angle_ = nangle; }
+	messages::space_unit max_speed() const;
 	messages::space_unit health() const { return health_; }
 	messages::space_unit max_health() const { return max_health_; }
 	entity_type::type type() const { return entity_type::player; }
+	ai_type::type ai_type() const { return ai_type::simple; }
 	void update(const time_type);
 
 	// own functions
 	void shooting(const bool);
 	bool spawn_bullet() const;
-	void direction(const messages::pos_type dir) { direction_ = dir; }
 	net::id_type net_id() const { return net_id_; }
 	messages::string name() const { return name_; }
 
@@ -39,9 +43,6 @@ class player : public entity
 	static sge::con::var<messages::space_unit> running_speed;
 
 	mutable sge::timer shooting_timer;
-	messages::pos_type direction_;
-	messages::pos_type pos_;
-	messages::space_unit angle_;
 	net::id_type net_id_;
 	bool shooting_;
 	messages::space_unit health_,max_health_;

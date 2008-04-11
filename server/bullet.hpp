@@ -11,16 +11,14 @@ namespace server
 class bullet : public entity
 {
 	public:
-	bullet(const entity_id,const messages::pos_type &center,const messages::pos_type &direction,const messages::space_unit angle);
+	bullet(const entity_id,const messages::pos_type &center,const messages::space_unit direction,const messages::space_unit angle);
 
-	// virtual functions
-	messages::pos_type pos() const { return pos_; }
 	messages::dim_type dim() const;
-	messages::pos_type speed() const;
-	messages::space_unit angle() const { return angle_; }
+	messages::space_unit max_speed() const;
 	messages::space_unit health() const { return static_cast<messages::space_unit>(1); }
 	messages::space_unit max_health() const { return static_cast<messages::space_unit>(1); }
 	entity_type::type type() const { return entity_type::bullet; }
+	ai_type::type ai_type() const { return ai_type::none; }
 	void update(const time_type);
 
 	// own functions
@@ -29,8 +27,6 @@ class bullet : public entity
 	private:
 	static sge::con::var<messages::space_unit> bullet_speed;
 
-	messages::pos_type pos_,direction_;
-	messages::space_unit angle_;
 	bool visible_;
 };
 }

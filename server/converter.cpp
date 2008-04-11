@@ -14,7 +14,7 @@ sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::add
 			e.type(),
 			e.pos(),
 			e.angle(),
-			e.speed(),
+			e.abs_speed(),
 			e.health(),
 			e.max_health(),
 			e.dim());
@@ -23,7 +23,7 @@ sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::add
 template<>
 sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::speed>(const entity &e)
 {
-	return new messages::speed(e.id(),e.speed());
+	return new messages::speed(e.id(),e.abs_speed());
 }
 
 template<>
