@@ -68,7 +68,7 @@ class running_state
 	void add_bullet();
 	void add_enemy();
 	void ai_hook(entity &,const entity::time_type);
-	entity &insert_entity(const entity_id,entity *);
+	entity &insert_entity(entity *);
 
 	entity_container entities;
 

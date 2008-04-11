@@ -48,7 +48,7 @@
 
 sanguis::server::running_state::running_state()
 	: send_timer(SGE_TEXT("message_freq"),sge::su(0.5)),
-		enemy_timer(SGE_TEXT("enemy_timer"),sge::su(20))
+		enemy_timer(SGE_TEXT("enemy_timer"),sge::su(2))
 {
 	sge::clog << SGE_TEXT("server: entering running state\n");
 }
@@ -76,7 +76,7 @@ boost::statechart::result sanguis::server::running_state::react(const tick_event
 
 	const bool update_pos = send_timer.v().update_b();
 
-	for (entity_container::iterator i = entities.begin(); i != entities.end(); ++i)
+	for (entity_container::iterator i = entities.begin(); i != entities.end();)
 	{
 		ai_hook(*i,delta);
 
@@ -86,11 +86,14 @@ boost::statechart::result sanguis::server::running_state::react(const tick_event
 		if (i->type() == entity_type::bullet && !dynamic_cast<server::bullet &>(*i).visible())
 		{
 			context<machine>().send(message_convert<messages::remove>(*i));
-			i = boost::prior(entities.erase(i));
+			i = entities.erase(i);
+			continue;
 		}
 
 		if (update_pos && i->type() != entity_type::bullet)
 			context<machine>().send(message_convert<messages::move>(*i));
+
+		++i;
 	}
 
 	return discard_event();
@@ -102,8 +105,7 @@ void sanguis::server::running_state::create_game(const net::id_type net_id,const
 
 	const entity_id player_id = get_unique_id();
 
-	entity &raw_player = insert_entity(player_id,
-		new server::player(
+	entity &raw_player = insert_entity(new server::player(
 			player_id,
 			net_id,
 			messages::pos_type(
@@ -146,9 +148,8 @@ boost::statechart::result sanguis::server::running_state::operator()(const net::
 	return discard_event();
 }
 
-sanguis::server::entity &sanguis::server::running_state::insert_entity(const entity_id id,entity *ptr)
+sanguis::server::entity &sanguis::server::running_state::insert_entity(entity *ptr)
 {
-	//return *(entities.insert(id,entity_ptr(ptr)).first->second);
 	entities.push_back(ptr);
 	return entities.back();
 }
@@ -167,9 +168,7 @@ void sanguis::server::running_state::add_enemy()
 	const messages::space_unit angle = *sge::math::angle_to<messages::space_unit>(player_->center() - center);
 
 	zombie &b = dynamic_cast<zombie &>(
-		insert_entity(
-			id,
-			new zombie(id,center,angle,messages::mu(1),angle,messages::mu(1),messages::mu(1))));
+		insert_entity(new zombie(id,center,angle,messages::mu(1),angle,messages::mu(1),messages::mu(1))));
 
 	context<machine>().send(message_convert<messages::add>(b));
 }
@@ -179,9 +178,7 @@ void sanguis::server::running_state::add_bullet()
 	const entity_id bullet_id = get_unique_id();
 
 	bullet &b = dynamic_cast<bullet &>(
-		insert_entity(
-			bullet_id,
-			new bullet(bullet_id,player_->center(),player_->angle(),player_->angle())));
+		insert_entity(new bullet(bullet_id,player_->center(),player_->angle(),player_->angle())));
 
 	context<machine>().send(message_convert<messages::add>(b));
 }
@@ -241,7 +238,7 @@ boost::statechart::result sanguis::server::running_state::operator()(const net::
 {
 	if (player_->id() != id)
 	{
-		sge::clog << SGE_TEXT("spectator ") << id << SGE_TEXT(" disconnected\n");
+		sge::clog << SGE_TEXT("server: spectator ") << id << SGE_TEXT(" disconnected\n");
 		return discard_event();
 	}
 	sge::clog << SGE_TEXT("server: disconnected\n");

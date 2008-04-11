@@ -20,7 +20,7 @@ sanguis::server::zombie::zombie(
 
 sanguis::messages::dim_type sanguis::server::zombie::dim() const
 {
-	return sge::math::structure_cast<messages::space_unit>(load::model::singleton()["zombie"]["bottom"][weapon_type::none][animation_type::none].get().dim());
+	return sge::math::structure_cast<messages::space_unit>(load::model::singleton()["zombie00"]["default"][weapon_type::none][animation_type::walking].get().dim());
 }
 
 sanguis::messages::space_unit sanguis::server::zombie::max_speed() const

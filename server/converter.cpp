@@ -6,6 +6,7 @@
 #include "../messages/remove.hpp"
 #include "../messages/health.hpp"
 #include "../messages/rotate.hpp"
+#include <sge/iostream.hpp>
 
 template<>
 sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::add>(const entity &e)
