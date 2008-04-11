@@ -56,6 +56,12 @@ void sanguis::draw::healthbar::max_health(
 	recalc_health();
 }
 
+sge::space_unit
+sanguis::draw::healthbar::health() const
+{
+	return health_;
+}
+
 void sanguis::draw::healthbar::pos(
 	const sge::sprite::point& p)
 {

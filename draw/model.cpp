@@ -76,9 +76,11 @@ void sanguis::draw::model::stop_attacking()
 sanguis::animation_type::type
 sanguis::draw::model::animation() const
 {
-	return attacking
-	? animation_type::attacking
-	: speed().is_null()
-		? animation_type::none
-		: animation_type::walking;
+	return sge::math::almost_zero(healthbar_.health())
+	? animation_type::dying
+	: attacking
+		? animation_type::attacking
+		: speed().is_null()
+			? animation_type::none
+			: animation_type::walking;
 }

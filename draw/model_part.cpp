@@ -42,6 +42,9 @@ void sanguis::draw::model_part::animation(
 void sanguis::draw::model_part::weapon(
 	const weapon_type::type weap_type)
 {
+	// don't restart an animation unecessarly
+	if(weapon_type_ == weap_type)
+		return;
 	weapon_type_ = weap_type;
 	update_animation();
 }
