@@ -29,7 +29,7 @@ sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::spe
 template<>
 sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::move>(const entity &e)
 {
-	return new messages::move(e.id(),e.center());
+	return new messages::move(e.id(),e.pos());
 }
 
 template<>

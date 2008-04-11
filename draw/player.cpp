@@ -80,6 +80,8 @@ void sanguis::draw::player::update(const time_type time)
 {
 	model::update(time);
 
+	//sge::clog << "draw: player position: " << pos_ << "\n";
+
 	// FIXME: load rotation point (see above)
 	const sge::math::vector2 leg_center(sge::math::structure_cast<sge::space_unit>(player_leg_center));
 	const sge::math::vector2 body_center(sge::math::structure_cast<sge::space_unit>(player_body_center));

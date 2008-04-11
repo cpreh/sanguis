@@ -3,6 +3,7 @@
 
 #include "model.hpp"
 #include <sge/sprite/types.hpp>
+#include <boost/optional.hpp>
 
 namespace sanguis
 {
@@ -15,7 +16,7 @@ public:
 		entity_id id);
 private:
 	void update(time_type);
-	sge::sprite::point origin;
+	boost::optional<sge::sprite::point> origin;
 };
 
 }

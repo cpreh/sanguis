@@ -16,11 +16,14 @@ sanguis::draw::bullet::bullet(
 
 void sanguis::draw::bullet::update(const time_type time)
 {
+	if (!origin)
+		origin = center();
+
 	sprite::update(time);
 
 	const sge::space_unit max_tail_length = static_cast<sge::space_unit>(160);
 	const sge::space_unit tail_length = 
-		std::min(static_cast<sge::space_unit>((origin - center()).length()),max_tail_length);
+		std::min(static_cast<sge::space_unit>(((*origin) - center()).length()),max_tail_length);
 
 	const sge::math::vector2 newsize(tail_length,sge::su(at(1).size().h()));
 	const sge::math::vector2 pos = sge::math::structure_cast<sge::space_unit>(center());
