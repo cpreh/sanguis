@@ -44,6 +44,8 @@ public:
 	void operator()(const messages::remove&);
 	void operator()(const messages::resize&);
 	void operator()(const messages::rotate&);
+	void operator()(const messages::start_attacking&);
+	void operator()(const messages::stop_attacking&);
 	void operator()(const messages::speed&);
 
 	void operator()(const client_messages::add&);

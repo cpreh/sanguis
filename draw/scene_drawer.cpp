@@ -14,6 +14,8 @@
 #include "../messages/remove.hpp"
 #include "../messages/resize.hpp"
 #include "../messages/rotate.hpp"
+#include "../messages/start_attacking.hpp"
+#include "../messages/stop_attacking.hpp"
 #include "../messages/speed.hpp"
 #include "../client_messages/add.hpp"
 
@@ -49,6 +51,8 @@ void sanguis::draw::scene_drawer::process_message(const messages::base& m)
 			messages::remove,
 			messages::resize,
 			messages::rotate,
+			messages::start_attacking,
+			messages::stop_attacking,
 			messages::speed
 			>,
 		void>(
@@ -175,6 +179,16 @@ void sanguis::draw::scene_drawer::operator()(const messages::speed& m)
 		sge::math::structure_cast<sge::space_unit>(
 			virtual_to_screen(ss.get_renderer()->screen_size(),
 			m.get())));
+}
+
+void sanguis::draw::scene_drawer::operator()(const messages::start_attacking& m)
+{
+	get_entity(m.id()).start_attacking();
+}
+
+void sanguis::draw::scene_drawer::operator()(const messages::stop_attacking& m)
+{
+	get_entity(m.id()).stop_attacking();
 }
 
 void sanguis::draw::scene_drawer::operator()(const client_messages::add& m)

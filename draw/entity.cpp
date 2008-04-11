@@ -21,3 +21,13 @@ void sanguis::draw::entity::weapon(weapon_type::type)
 {
 	sge::clog << SGE_TEXT("warning: entity got a weapon message that can't have a weapon!\n");
 }
+
+void sanguis::draw::entity::start_attacking()
+{
+	sge::clog << SGE_TEXT("warning: entity got a start attacking message!\n");
+}
+
+void sanguis::draw::entity::stop_attacking()
+{
+	sge::clog << SGE_TEXT("warning: entity got a stop attacking message!\n");
+}

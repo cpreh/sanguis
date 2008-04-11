@@ -27,11 +27,14 @@ private:
 	void health(sge::space_unit);
 	void max_health(sge::space_unit);
 	void weapon(weapon_type::type);
+	void start_attacking();
+	void stop_attacking();
 
+	bool attacking;
+	healthbar healthbar_;
+	
 	typedef std::vector<model_part> part_vector;
 	part_vector parts;
-	
-	healthbar healthbar_;
 };
 
 }
