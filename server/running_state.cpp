@@ -47,7 +47,7 @@
 
 
 sanguis::server::running_state::running_state()
-	: send_timer(SGE_TEXT("message_freq"),sge::su(0.01)),
+	: send_timer(SGE_TEXT("message_freq"),sge::su(0.5)),
 		enemy_timer(SGE_TEXT("enemy_timer"),sge::su(2))
 {
 	sge::clog << SGE_TEXT("server: entering running state\n");
@@ -61,8 +61,16 @@ void sanguis::server::running_state::ai_hook(entity &e,const entity::time_type d
 			e.pos(e.pos() + e.abs_speed() * diff);
 		break;
 		case ai_type::simple:
-			if (!(e.center() - player_->center()).is_null())
-				e.pos(e.pos() + sge::math::normalize(player_->center() - e.center()) * e.max_speed() * diff);
+		{
+			const messages::pos_type diffvec = (player_->center() - e.center());
+			if (!diffvec.is_null())
+			{
+				const messages::space_unit angle = *sge::math::angle_to<messages::space_unit>(diffvec);
+				e.pos(e.pos() + sge::math::normalize(diffvec) * e.max_speed() * diff);
+				e.angle(angle);
+				e.direction(angle);
+			}
+		}
 		break;
 	}
 }
@@ -92,7 +100,11 @@ boost::statechart::result sanguis::server::running_state::react(const tick_event
 		}
 
 		if (update_pos && i->type() != entity_type::bullet)
+		{
 			context<machine>().send(message_convert<messages::move>(*i));
+			context<machine>().send(message_convert<messages::speed>(*i));
+			context<machine>().send(message_convert<messages::rotate>(*i));
+		}
 
 		++i;
 	}
