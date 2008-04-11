@@ -28,12 +28,22 @@ void sanguis::draw::model::update(
 	const time_type time)
 {
 	sprite::update(time);
+	healthbar_.update(time);
 
 	BOOST_FOREACH(model_part &p, parts)
 	{
 		p.animation(animation());
 		p.update();
 	}
+}
+
+sanguis::draw::entity::sprite_vector
+sanguis::draw::model::to_sprites() const
+{
+	sprite_vector sprites(sprite::to_sprites());
+	sprite_vector const& healthbar_sprites(healthbar_.to_sprites());
+	sprites.insert(sprites.end(), healthbar_sprites.begin(), healthbar_sprites.end());
+	return sprites;
 }
 
 void sanguis::draw::model::health(

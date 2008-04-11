@@ -16,8 +16,8 @@ public:
 	sprite(
 		entity_id id,
 		sprite_vector::size_type init_sprites);
-	sprite_vector to_sprites() const;
 	const sge::sprite::point center() const;
+	virtual sprite_vector to_sprites() const;
 protected:
 	virtual void update(time_type);
 	sge::sprite::object& at(sprite_vector::size_type);

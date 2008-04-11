@@ -14,6 +14,7 @@ public:
 	void health(sge::space_unit);
 	void max_health(sge::space_unit);
 	sge::space_unit health() const;
+	void update(time_type);
 private:
 	void pos(const sge::sprite::point&);
 	void dim(const sge::sprite::dim&);

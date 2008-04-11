@@ -62,6 +62,12 @@ sanguis::draw::healthbar::health() const
 	return health_;
 }
 
+void sanguis::draw::healthbar::update(
+	const time_type time)
+{
+	sprite::update(time);
+}
+
 void sanguis::draw::healthbar::pos(
 	const sge::sprite::point& p)
 {

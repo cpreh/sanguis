@@ -18,15 +18,15 @@ sanguis::draw::sprite::sprite(
 				boost::none));
 }
 
-sanguis::draw::entity::sprite_vector sanguis::draw::sprite::to_sprites() const
-{
-	return sprites;
-}
-
 const sge::sprite::point
 sanguis::draw::sprite::center() const
 {
 	return master().center();
+}
+
+sanguis::draw::entity::sprite_vector sanguis::draw::sprite::to_sprites() const
+{
+	return sprites;
 }
 
 void sanguis::draw::sprite::update(const time_type time)

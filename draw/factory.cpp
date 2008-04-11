@@ -30,6 +30,11 @@ sanguis::draw::factory::create_entity(
 			new model(
 				id,
 				SGE_TEXT("wolf_black")));
+	case entity_type::zombie:
+		return entity_ptr(
+			new model(
+				id,
+				SGE_TEXT("zombie00"))); // FIXME
 	default:
 		throw sge::exception(SGE_TEXT("draw::factory: missing loading code!"));
 	}

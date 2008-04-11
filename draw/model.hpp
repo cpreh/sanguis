@@ -24,6 +24,7 @@ public:
 		sge::string const& name);
 protected:
 	virtual void update(time_type);
+	virtual sprite_vector to_sprites() const;
 private:
 	void health(sge::space_unit);
 	void max_health(sge::space_unit);
