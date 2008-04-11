@@ -3,7 +3,7 @@
 #include "../load/model/singleton.hpp"
 #include <sge/math/vec_dim.hpp>
 
-sge::con::var<sanguis::messages::space_unit> sanguis::server::zombie::running_speed(SGE_TEXT("zombie_speed"),messages::mu(60));
+sge::con::var<sanguis::messages::space_unit> sanguis::server::zombie::running_speed(SGE_TEXT("zombie_speed"),messages::mu(40));
 
 sanguis::server::zombie::zombie(
 	const entity_id id,

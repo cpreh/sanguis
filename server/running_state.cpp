@@ -47,7 +47,7 @@
 
 
 sanguis::server::running_state::running_state()
-	: send_timer(SGE_TEXT("message_freq"),sge::su(0.5)),
+	: send_timer(SGE_TEXT("message_freq"),sge::su(0.01)),
 		enemy_timer(SGE_TEXT("enemy_timer"),sge::su(2))
 {
 	sge::clog << SGE_TEXT("server: entering running state\n");
@@ -61,7 +61,8 @@ void sanguis::server::running_state::ai_hook(entity &e,const entity::time_type d
 			e.pos(e.pos() + e.abs_speed() * diff);
 		break;
 		case ai_type::simple:
-			e.pos(e.pos() + sge::math::normalize(player_->center() - e.center()) * e.max_speed() * diff);
+			if (!(e.center() - player_->center()).is_null())
+				e.pos(e.pos() + sge::math::normalize(player_->center() - e.center()) * e.max_speed() * diff);
 		break;
 	}
 }
@@ -158,17 +159,21 @@ void sanguis::server::running_state::add_enemy()
 {
 	const entity_id id = get_unique_id();
 
-	const messages::pos_type center = 
-		messages::mu(std::max(resolution().w(),resolution().h()))*messages::mu(1.5)*
-			angle_to_vector(
-				sge::math::random(
-					messages::mu(0),
-					messages::mu(2)*sge::math::pi<messages::space_unit>()));
+	const messages::space_unit rand_angle = sge::math::random(messages::mu(0),
+					messages::mu(2)*sge::math::pi<messages::space_unit>());
+	const messages::space_unit radius = messages::mu(std::max(resolution().w(),resolution().h()))/messages::mu(2);
+	const messages::space_unit scale = messages::mu(1.5);
+
+	const messages::pos_type screen_center = messages::pos_type(messages::mu(resolution().w()),messages::mu(resolution().h()))/messages::mu(2);
+	const messages::pos_type center = scale * radius * angle_to_vector(rand_angle);
 	
-	const messages::space_unit angle = *sge::math::angle_to<messages::space_unit>(player_->center() - center);
+	boost::optional<messages::space_unit> oa = sge::math::angle_to<messages::space_unit>(player_->center() - center);
+	const messages::space_unit angle = oa ? *oa : messages::mu(0);
+
+	const messages::pos_type pos = center + screen_center;
 
 	zombie &b = dynamic_cast<zombie &>(
-		insert_entity(new zombie(id,center,angle,messages::mu(1),angle,messages::mu(1),messages::mu(1))));
+		insert_entity(new zombie(id,pos,angle,messages::mu(1),angle,messages::mu(1),messages::mu(1))));
 
 	context<machine>().send(message_convert<messages::add>(b));
 }
