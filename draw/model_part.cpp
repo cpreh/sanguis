@@ -15,7 +15,8 @@ sanguis::draw::model_part::model_part(
   	info[weapon_type_]
 		[animation_type_]
 			.get(),
-	loop_method())
+	loop_method()),
+  ended(false)
 {
 	update_animation();
 }
@@ -26,8 +27,16 @@ void sanguis::draw::model_part::animation(
 	// don't restart an animation unecessarly
 	if(animation_type_ == anim_type)
 		return;
-	animation_type_ = anim_type;
-	update_animation();
+	switch(animation_type_) {
+	case animation_type::attacking:
+		if(!ended)
+			return;
+	case animation_type::dying:
+		return;
+	default:
+		animation_type_ = anim_type;
+		update_animation();
+	}
 }
 
 void sanguis::draw::model_part::weapon(
@@ -39,7 +48,7 @@ void sanguis::draw::model_part::weapon(
 
 void sanguis::draw::model_part::update()
 {
-	animation_.process();
+	ended = animation_.process();
 }
 
 void sanguis::draw::model_part::update_animation()

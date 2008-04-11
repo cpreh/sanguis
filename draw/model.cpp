@@ -31,12 +31,7 @@ void sanguis::draw::model::update(
 
 	BOOST_FOREACH(model_part &p, parts)
 	{
-		p.animation(
-			attacking
-				? animation_type::attacking
-				: speed().is_null()
-					? animation_type::none
-					: animation_type::walking);
+		p.animation(animation());
 		p.update();
 	}
 }
@@ -76,4 +71,14 @@ void sanguis::draw::model::stop_attacking()
 	if(!attacking)
 		sge::clog << SGE_TEXT("warning: model::stop_attacking(): already not attacking!\n");
 	attacking = false;
+}
+
+sanguis::animation_type::type
+sanguis::draw::model::animation() const
+{
+	return attacking
+	? animation_type::attacking
+	: speed().is_null()
+		? animation_type::none
+		: animation_type::walking;
 }
