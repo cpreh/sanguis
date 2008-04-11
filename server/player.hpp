@@ -3,6 +3,7 @@
 
 #include "entity.hpp"
 #include "../net/types.hpp"
+#include "../console_timer.hpp"
 #include <sge/timer.hpp>
 #include <sge/console/console.hpp>
 
@@ -42,7 +43,7 @@ class player : public entity
 	static sge::con::var<messages::space_unit> bullet_frequency;
 	static sge::con::var<messages::space_unit> running_speed;
 
-	mutable sge::timer shooting_timer;
+	mutable console_timer shooting_timer;
 	net::id_type net_id_;
 	bool shooting_;
 	messages::space_unit health_,max_health_;
