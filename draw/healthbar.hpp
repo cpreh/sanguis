@@ -13,6 +13,7 @@ public:
 	healthbar();
 	void health(sge::space_unit);
 	void max_health(sge::space_unit);
+	sge::space_unit health() const;
 private:
 	void pos(const sge::sprite::point&);
 	void dim(const sge::sprite::dim&);
