@@ -14,7 +14,7 @@ class change_weapon : public entity_message {
 public:
 	change_weapon();
 	change_weapon(
-		entity_id i,
+		entity_id id,
 		enum_type weapon);
 	enum_type weapon() const;
 private:

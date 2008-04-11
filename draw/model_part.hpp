@@ -29,6 +29,7 @@ private:
 	animation_type::type           animation_type_;
 	weapon_type::type              weapon_type_;
 	sge::sprite::texture_animation animation_;
+	bool                           ended;
 };
 
 }

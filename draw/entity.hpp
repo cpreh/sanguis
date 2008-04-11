@@ -29,6 +29,8 @@ public:
 	virtual void health(sge::space_unit);
 	virtual void max_health(sge::space_unit);
 	virtual void weapon(weapon_type::type);
+	virtual void start_attacking();
+	virtual void stop_attacking();
 protected:
 	virtual const sge::math::vector2& speed() const = 0;
 	virtual sge::space_unit orientation() const = 0;

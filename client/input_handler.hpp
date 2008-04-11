@@ -20,6 +20,7 @@ private:
 	void direction_event(const sge::key_pair&);
 	void rotation_event(const sge::key_pair&);
 	void shooting_event(const sge::key_pair&);
+	void weapon_switch_event(const sge::key_pair&);
 
 	const post_fun     post_message;
 	sge::key_state     last_x,

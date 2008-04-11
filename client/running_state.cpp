@@ -10,6 +10,7 @@
 #include "../messages/disconnect.hpp"
 #include "../messages/game_state.hpp"
 #include "../messages/move.hpp"
+#include "../messages/player_change_weapon.hpp"
 #include "../messages/player_direction_event.hpp"
 #include "../messages/player_rotation_event.hpp"
 #include "../messages/player_start_shooting.hpp"
@@ -132,6 +133,7 @@ void sanguis::client::running_state::handle_player_action(const player_action& m
 		handle_direction(player, m);
 		handle_rotation(player, m);
 		handle_shooting(player, m);
+		handle_switch_weapon(player, m);
 	}
 	catch(const sge::exception& e)
 	{
@@ -219,4 +221,28 @@ void sanguis::client::running_state::handle_shooting(
 		: static_cast<messages::base*>(
 			new messages::player_start_shooting(
 				p.id())));
+}
+
+void sanguis::client::running_state::handle_switch_weapon(
+	const draw::player& p,
+	const player_action& m)
+{
+	// FIXME: this is just for testing
+	weapon_type::type wanted_weapon;
+	switch(m.type()) {
+	case player_action::switch_weapon_forwards:
+		wanted_weapon = weapon_type::none;
+		break;
+	case player_action::switch_weapon_backwards:
+		wanted_weapon = weapon_type::pistol;
+		break;
+	default:
+		return;
+	}
+
+	context<machine>().send(
+		new messages::player_change_weapon(
+			p.id(),
+			wanted_weapon));
+
 }

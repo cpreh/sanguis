@@ -2,14 +2,17 @@
 #include "../load/model/collection.hpp"
 #include "../load/model/singleton.hpp"
 #include "../client/id_dont_care.hpp"
+#include <sge/iostream.hpp>
 #include <boost/foreach.hpp>
+#include <ostream>
 
 sanguis::draw::model::model(
 	const entity_id id,
 	sge::string const& name)
 : sprite(
 	id,
-	load::model::singleton()[name].size())
+	load::model::singleton()[name].size()),
+  attacking(false)
 {
 	part_vector::size_type i(0);
 	BOOST_FOREACH(
@@ -28,10 +31,7 @@ void sanguis::draw::model::update(
 
 	BOOST_FOREACH(model_part &p, parts)
 	{
-		p.animation(
-			speed().is_null()
-			? animation_type::none
-			: animation_type::walking);
+		p.animation(animation());
 		p.update();
 	}
 }
@@ -57,4 +57,28 @@ void sanguis::draw::model::weapon(
 {
 	BOOST_FOREACH(model_part &p, parts)
 		p.weapon(weapon_);
+}
+
+void sanguis::draw::model::start_attacking()
+{
+	if(attacking)
+		sge::clog << SGE_TEXT("warning: model::start_attacking(): already attacking!\n");
+	attacking = true;
+}
+
+void sanguis::draw::model::stop_attacking()
+{
+	if(!attacking)
+		sge::clog << SGE_TEXT("warning: model::stop_attacking(): already not attacking!\n");
+	attacking = false;
+}
+
+sanguis::animation_type::type
+sanguis::draw::model::animation() const
+{
+	return attacking
+	? animation_type::attacking
+	: speed().is_null()
+		? animation_type::none
+		: animation_type::walking;
 }
