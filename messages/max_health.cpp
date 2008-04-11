@@ -1,6 +1,5 @@
 #include "max_health.hpp"
 #include "instantiate_serialize.hpp"
-#include "../sge_serialization.hpp"
 #include <boost/serialization/export.hpp>
 #include <boost/serialization/base_object.hpp>
 

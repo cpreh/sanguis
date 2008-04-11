@@ -36,6 +36,7 @@ public:
 	const player& get_player() const;
 
 	void operator()(const messages::add&);
+	void operator()(const messages::change_weapon&);
 	void operator()(const messages::health&);
 	void operator()(const messages::max_health&);
 	void operator()(const messages::move&);

@@ -6,6 +6,7 @@
 #include "../dispatch_type.hpp"
 #include "../messages/add.hpp"
 #include "../messages/base.hpp"
+#include "../messages/change_weapon.hpp"
 #include "../messages/health.hpp"
 #include "../messages/max_health.hpp"
 #include "../messages/move.hpp"
@@ -40,6 +41,7 @@ void sanguis::draw::scene_drawer::process_message(const messages::base& m)
 	dispatch_type<
 		boost::mpl::vector<
 			messages::add,
+			messages::change_weapon,
 			messages::health,
 			messages::max_health,
 			messages::move,
@@ -117,6 +119,18 @@ void sanguis::draw::scene_drawer::operator()(const messages::add& m)
 	process_message(messages::resize(m.id(), m.dim()));
 	process_message(messages::rotate(m.id(), m.angle()));
 	process_message(messages::speed(m.id(), m.speed()));
+}
+
+void sanguis::draw::scene_drawer::operator()(const messages::change_weapon& m)
+{
+	const messages::enum_type value(m.weapon());
+	if(value >= static_cast<messages::enum_type>(weapon_type::size))
+	{
+		sge::clog << SGE_TEXT("Invalid change_weapon message: Value out of range!\n");
+		return;
+	}
+		
+	get_entity(m.id()).weapon(static_cast<weapon_type::type>(m.weapon()));
 }
 
 void sanguis::draw::scene_drawer::operator()(const messages::health& m)

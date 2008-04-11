@@ -6,6 +6,7 @@
 #include <sge/math/vector.hpp>
 #include <sge/time.hpp>
 #include "../entity_id.hpp"
+#include "../weapon_type.hpp"
 
 namespace sanguis
 {
@@ -27,6 +28,7 @@ public:
 	virtual void dim(const sge::sprite::dim&) = 0;
 	virtual void health(sge::space_unit);
 	virtual void max_health(sge::space_unit);
+	virtual void weapon(weapon_type::type);
 protected:
 	virtual const sge::math::vector2& speed() const = 0;
 	virtual sge::space_unit orientation() const = 0;

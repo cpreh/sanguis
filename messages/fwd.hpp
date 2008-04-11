@@ -8,6 +8,7 @@ namespace messages
 
 class add;
 class base;
+class change_weapon;
 class client_info;
 class connect;
 class disconnect;
@@ -16,6 +17,7 @@ class game_state;
 class max_health;
 class move;
 class health;
+class player_change_weapon;
 class player_direction_event;
 class player_rotation_event;
 class player_start_shooting;

@@ -51,3 +51,10 @@ void sanguis::draw::model::max_health(
 {
 	healthbar_.max_health(max_health);
 }
+
+void sanguis::draw::model::weapon(
+	const weapon_type::type weapon_)
+{
+	BOOST_FOREACH(model_part &p, parts)
+		p.weapon(weapon_);
+}
