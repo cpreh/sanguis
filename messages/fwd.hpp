@@ -22,7 +22,6 @@ class player_direction_event;
 class player_rotation_event;
 class player_start_shooting;
 class player_stop_shooting;
-class player_state;
 class start_attacking;
 class stop_attacking;
 class remove;

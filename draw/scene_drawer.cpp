@@ -10,7 +10,6 @@
 #include "../messages/health.hpp"
 #include "../messages/max_health.hpp"
 #include "../messages/move.hpp"
-#include "../messages/player_state.hpp"
 #include "../messages/remove.hpp"
 #include "../messages/resize.hpp"
 #include "../messages/rotate.hpp"
@@ -47,7 +46,6 @@ void sanguis::draw::scene_drawer::process_message(const messages::base& m)
 			messages::health,
 			messages::max_health,
 			messages::move,
-			messages::player_state,
 			messages::remove,
 			messages::resize,
 			messages::rotate,
@@ -152,10 +150,6 @@ void sanguis::draw::scene_drawer::operator()(const messages::move& m)
 	get_entity(m.id()).pos(virtual_to_screen(ss.get_renderer()->screen_size(), m.pos()));
 }
 
-void sanguis::draw::scene_drawer::operator()(const messages::player_state&)
-{
-}
-
 void sanguis::draw::scene_drawer::operator()(const messages::remove& m)
 {
 	if(entities.erase(m.id()) == 0)
@@ -222,6 +216,6 @@ void sanguis::draw::scene_drawer::process_default_msg(const messages::base& m)
 }
 
 void sanguis::draw::scene_drawer::process_default_client_msg(
-	const client_messages::base& m)
+	const client_messages::base&)
 {
 }

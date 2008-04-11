@@ -5,10 +5,11 @@
 #include "../messages/player_direction_event.hpp"
 #include "../messages/player_start_shooting.hpp"
 #include "../messages/player_stop_shooting.hpp"
+#include "../messages/player_change_weapon.hpp"
 #include "../messages/add.hpp"
+#include "../messages/change_weapon.hpp"
 #include "../messages/remove.hpp"
 #include "../messages/game_state.hpp"
-#include "../messages/player_state.hpp"
 #include "../messages/client_info.hpp"
 #include "../messages/rotate.hpp"
 #include "../messages/disconnect.hpp"
@@ -119,9 +120,15 @@ void sanguis::server::running_state::create_game(const net::id_type net_id,const
 
 	sge::clog << SGE_TEXT("server: sending game messages\n");
 
+	//context<machine>().send(new messages::change_weapon(player_id,static_cast<messages::enum_type>(weapon_type::pistol)));
 	context<machine>().send(new messages::game_state(game_state(truncation_check_cast<boost::uint32_t>(0))));
 	context<machine>().send(message_convert<messages::add>(*player_));
-	context<machine>().send(new messages::player_state(player_->id(),player_state(weapon_type::pistol,truncation_check_cast<boost::uint32_t>(0))));
+}
+
+boost::statechart::result sanguis::server::running_state::operator()(const net::id_type,const messages::player_change_weapon &e)
+{
+	context<machine>().send(new messages::change_weapon(player_->id(),e.weapon()));
+	return discard_event();
 }
 
 boost::statechart::result sanguis::server::running_state::operator()(const net::id_type id,const messages::player_rotation_event &e)
@@ -233,6 +240,7 @@ boost::statechart::result sanguis::server::running_state::react(const message_ev
 			messages::player_rotation_event,
 			messages::player_start_shooting,
 			messages::player_stop_shooting,
+			messages::player_change_weapon,
 			messages::player_direction_event
 		>,
 		boost::statechart::result>(

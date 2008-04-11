@@ -58,6 +58,7 @@ class running_state
 
 	boost::statechart::result operator()(const net::id_type,const messages::player_start_shooting &);
 	boost::statechart::result operator()(const net::id_type,const messages::player_stop_shooting &);
+	boost::statechart::result operator()(const net::id_type,const messages::player_change_weapon &);
 
 	private:
 	typedef boost::ptr_map<entity_id,server::entity> entity_map;
