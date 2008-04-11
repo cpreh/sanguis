@@ -20,7 +20,7 @@ class entity
 		const messages::pos_type &pos,
 		const messages::space_unit angle,
 		const messages::space_unit direction,
-		const messages::space_unit speed = static_cast<messages::space_unit>(0));
+		const messages::space_unit speed = messages::mu(0));
 
 	entity_id id() const;
 
@@ -43,7 +43,7 @@ class entity
 	virtual messages::space_unit max_health() const = 0;
 	virtual entity_type::type type() const = 0;
 	virtual ai_type::type ai_type() const = 0;
-	virtual void update(const time_type) = 0;
+	virtual void update(const time_type);
 	virtual ~entity();
 	private:
 	entity_id id_;

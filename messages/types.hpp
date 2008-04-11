@@ -27,6 +27,12 @@ typedef boost::uint32_t enum_type;
 string host_to_net(const sge::string &s);
 sge::string net_to_host(const string &s);
 
+template<typename T>
+messages::space_unit mu(const T &t)
+{
+	return static_cast<messages::space_unit>(t);
+}
+
 }
 }
 

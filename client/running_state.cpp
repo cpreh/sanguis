@@ -66,14 +66,14 @@ sanguis::client::running_state::running_state(my_context ctx)
 			::healthbar_id,
 			entity_type::healthbar,
 			messages::vector2(
-				static_cast<messages::space_unit>(0.9),
-				static_cast<messages::space_unit>(0.7)),
-			static_cast<messages::space_unit>(0),
+				messages::mu(0.9),
+				messages::mu(0.7)),
+			messages::mu(0),
 			messages::vector2(
-				static_cast<messages::space_unit>(0),
-				static_cast<messages::space_unit>(0)),
-			static_cast<messages::space_unit>(500),
-			static_cast<messages::space_unit>(1000)));*/
+				messages::mu(0),
+				messages::mu(0)),
+			messages::mu(500),
+			messages::mu(1000)));*/
 }
 
 boost::statechart::result sanguis::client::running_state::react(const tick_event&t)
@@ -196,7 +196,7 @@ void sanguis::client::running_state::handle_rotation(
 	context<machine>().send(
 		new messages::player_rotation_event(
 			player.id(),
-			static_cast<messages::space_unit>(
+			messages::mu(
 				*rotation)));
 
 	drawer.process_message(

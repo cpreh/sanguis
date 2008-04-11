@@ -3,8 +3,8 @@
 #include "../load/model/singleton.hpp"
 #include <sge/math/vec_dim.hpp>
 
-//sge::con::var<sanguis::messages::space_unit> sanguis::server::player::bullet_frequency(SGE_TEXT("player_bullet_freq"),static_cast<messages::space_unit>(0.5));
-sge::con::var<sanguis::messages::space_unit> sanguis::server::player::running_speed(SGE_TEXT("player_speed"),static_cast<messages::space_unit>(60));
+//sge::con::var<sanguis::messages::space_unit> sanguis::server::player::bullet_frequency(SGE_TEXT("player_bullet_freq"),messages::mu(0.5));
+sge::con::var<sanguis::messages::space_unit> sanguis::server::player::running_speed(SGE_TEXT("player_speed"),messages::mu(60));
 
 sanguis::server::player::player(
 	const entity_id id,
@@ -16,7 +16,7 @@ sanguis::server::player::player(
 	const messages::space_unit health_,
 	const messages::space_unit max_health_,
 	const messages::string &name_)
-	: entity(id,center_ - dim()/static_cast<messages::space_unit>(2),angle_,direction_,speed_),
+	: entity(id,center_ - dim()/messages::mu(2),angle_,direction_,speed_),
 	  shooting_timer(SGE_TEXT("player_bullet_freq"),sge::su(0.5)),
 		net_id_(net_id_),
 		shooting_(false),
@@ -50,6 +50,3 @@ void sanguis::server::player::shooting(const bool n)
 	if (n)
 		shooting_timer.v().reset();
 }
-
-void sanguis::server::player::update(const time_type) 
-{}

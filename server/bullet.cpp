@@ -11,10 +11,10 @@ sge::con::var<sanguis::messages::space_unit> sanguis::server::bullet::bullet_spe
 sanguis::server::bullet::bullet(const entity_id id,const messages::pos_type &center_,const messages::space_unit direction_,const messages::space_unit angle_) 
 	: entity(
 			id,
-			center_ - dim()/static_cast<messages::space_unit>(2),
+			center_ - dim()/messages::mu(2),
 			angle_,
 			direction_,
-			static_cast<messages::space_unit>(1)),
+			messages::mu(1)),
 		visible_(true) 
 {}
 

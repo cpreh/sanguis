@@ -25,7 +25,7 @@
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/function.hpp>
 
-#include <boost/ptr_container/ptr_map.hpp>
+#include <boost/ptr_container/ptr_list.hpp>
 
 namespace sanguis
 {
@@ -61,15 +61,16 @@ class running_state
 	boost::statechart::result operator()(const net::id_type,const messages::player_change_weapon &);
 
 	private:
-	typedef boost::ptr_map<entity_id,server::entity> entity_map;
+	typedef boost::ptr_list<server::entity> entity_container;
 
 	// game functions
 	void create_game(const net::id_type,const messages::client_info &);
 	void add_bullet();
+	void add_enemy();
 	void ai_hook(entity &,const entity::time_type);
 	entity &insert_entity(const entity_id,entity *);
 
-	entity_map entities;
+	entity_container entities;
 
 	player *player_;
 

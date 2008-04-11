@@ -16,13 +16,13 @@ sge::sprite::dim sanguis::virtual_to_screen(const sge::screen_size_t &ss,const m
 sanguis::messages::pos_type sanguis::screen_to_virtual(const sge::screen_size_t &ss,const sge::sprite::point &pos)
 {
 	return messages::pos_type(
-		static_cast<messages::space_unit>(pos.x()),
-		static_cast<messages::space_unit>(pos.y()));
+		messages::mu(pos.x()),
+		messages::mu(pos.y()));
 }
 
 sanguis::messages::dim_type sanguis::screen_to_virtual(const sge::screen_size_t &ss,const sge::sprite::dim &dim)
 {
 	return messages::dim_type(
-		static_cast<messages::space_unit>(dim.w()),
-		static_cast<messages::space_unit>(dim.h()));
+		messages::mu(dim.w()),
+		messages::mu(dim.h()));
 }

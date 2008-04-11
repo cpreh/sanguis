@@ -24,6 +24,7 @@
 #include "../angle_vector.hpp"
 #include "message_functor.hpp"
 #include "player.hpp"
+#include "zombie.hpp"
 #include "bullet.hpp"
 #include "converter.hpp"
 
@@ -35,6 +36,8 @@
 #include <sge/math/rect_impl.hpp>
 #include <sge/math/rect_util.hpp>
 #include <sge/math/angle.hpp>
+#include <sge/math/random.hpp>
+#include <sge/math/constants.hpp>
 
 #include <boost/bind.hpp>
 #include <boost/mpl/vector.hpp>
@@ -52,45 +55,42 @@ sanguis::server::running_state::running_state()
 
 void sanguis::server::running_state::ai_hook(entity &e,const entity::time_type diff)
 {
-	//if (e.ai_type() == ai_type::none)
-		e.pos(e.pos() + e.abs_speed() * diff);
-	
+	switch (e.ai_type())
+	{
+		case ai_type::none:
+			e.pos(e.pos() + e.abs_speed() * diff);
+		break;
+		case ai_type::simple:
+			e.pos(e.pos() + sge::math::normalize(player_->center() - e.center()) * e.max_speed() * diff);
+		break;
+	}
 }
+
 
 boost::statechart::result sanguis::server::running_state::react(const tick_event&t) 
 {
 	const sge::timer::frames_type delta = t.data.diff_time;
 
+	if (enemy_timer.v().update_b())
+		add_enemy();
+
 	const bool update_pos = send_timer.v().update_b();
 
-	bool deletion = false;
-	for (entity_map::iterator i = entities.begin(); i != entities.end(); ++i)
+	for (entity_container::iterator i = entities.begin(); i != entities.end(); ++i)
 	{
-		if (deletion)
-		{
-			--i;
-			deletion = false;
-		}
+		ai_hook(*i,delta);
 
-		ai_hook(*(i->second),delta);
-		//i->second->update(delta);
-
-		if (i->second->type() == entity_type::player && dynamic_cast<server::player &>(*i->second).spawn_bullet())
+		if (i->type() == entity_type::player && dynamic_cast<server::player &>(*i).spawn_bullet())
 			add_bullet();
 
-		if (i->second->type() == entity_type::bullet && !dynamic_cast<server::bullet &>(*i->second).visible())
+		if (i->type() == entity_type::bullet && !dynamic_cast<server::bullet &>(*i).visible())
 		{
-			context<machine>().send(message_convert<messages::remove>(*i->second));
-			entity_map::iterator d = i++;
-			entities.erase(d);
-			deletion = true;
-
-			if (i == entities.end())
-				break;
+			context<machine>().send(message_convert<messages::remove>(*i));
+			i = boost::prior(entities.erase(i));
 		}
 
-		if (update_pos && i->second->type() != entity_type::bullet)
-			context<machine>().send(message_convert<messages::move>(*i->second));
+		if (update_pos && i->type() != entity_type::bullet)
+			context<machine>().send(message_convert<messages::move>(*i));
 	}
 
 	return discard_event();
@@ -107,13 +107,13 @@ void sanguis::server::running_state::create_game(const net::id_type net_id,const
 			player_id,
 			net_id,
 			messages::pos_type(
-				static_cast<messages::space_unit>(resolution().w()/2),
-				static_cast<messages::space_unit>(resolution().h()/2)),
-			static_cast<messages::space_unit>(0),
-			static_cast<messages::space_unit>(0),
-			static_cast<messages::space_unit>(0),
-			static_cast<messages::space_unit>(1),
-			static_cast<messages::space_unit>(1),
+				messages::mu(resolution().w()/2),
+				messages::mu(resolution().h()/2)),
+			messages::mu(0),
+			messages::mu(0),
+			messages::mu(0),
+			messages::mu(1),
+			messages::mu(1),
 			m.name()));
 	
 	player_ = &dynamic_cast<player &>(raw_player);
@@ -123,6 +123,8 @@ void sanguis::server::running_state::create_game(const net::id_type net_id,const
 	//context<machine>().send(new messages::change_weapon(player_id,static_cast<messages::enum_type>(weapon_type::pistol)));
 	context<machine>().send(new messages::game_state(game_state(truncation_check_cast<boost::uint32_t>(0))));
 	context<machine>().send(message_convert<messages::add>(*player_));
+
+	enemy_timer.v().reset();
 }
 
 boost::statechart::result sanguis::server::running_state::operator()(const net::id_type,const messages::player_change_weapon &e)
@@ -146,7 +148,30 @@ boost::statechart::result sanguis::server::running_state::operator()(const net::
 
 sanguis::server::entity &sanguis::server::running_state::insert_entity(const entity_id id,entity *ptr)
 {
-	return *(entities.insert(id,entity_ptr(ptr)).first->second);
+	//return *(entities.insert(id,entity_ptr(ptr)).first->second);
+	entities.push_back(ptr);
+	return entities.back();
+}
+
+void sanguis::server::running_state::add_enemy()
+{
+	const entity_id id = get_unique_id();
+
+	const messages::pos_type center = 
+		messages::mu(std::max(resolution().w(),resolution().h()))*messages::mu(1.5)*
+			angle_to_vector(
+				sge::math::random(
+					messages::mu(0),
+					messages::mu(2)*sge::math::pi<messages::space_unit>()));
+	
+	const messages::space_unit angle = *sge::math::angle_to<messages::space_unit>(player_->center() - center);
+
+	zombie &b = dynamic_cast<zombie &>(
+		insert_entity(
+			id,
+			new zombie(id,center,angle,messages::mu(1),angle,messages::mu(1),messages::mu(1))));
+
+	context<machine>().send(message_convert<messages::add>(b));
 }
 
 void sanguis::server::running_state::add_bullet()
@@ -193,11 +218,11 @@ boost::statechart::result sanguis::server::running_state::operator()(const net::
 
 	if (e.dir().is_null())
 	{
-		player_->speed(static_cast<messages::space_unit>(0));
+		player_->speed(messages::mu(0));
 	}
 	else
 	{
-		player_->speed(static_cast<messages::space_unit>(1));
+		player_->speed(messages::mu(1));
 		player_->direction(*sge::math::angle_to<messages::space_unit>(e.dir()));
 	}
 

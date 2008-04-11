@@ -18,7 +18,7 @@ sanguis::entity_id sanguis::server::entity::id() const
 
 sanguis::messages::pos_type sanguis::server::entity::center() const
 {
-	return pos() + dim()/static_cast<messages::space_unit>(2);
+	return pos() + dim()/messages::mu(2);
 }
 
 void sanguis::server::entity::pos(const messages::pos_type _pos) 
@@ -60,6 +60,8 @@ sanguis::messages::space_unit sanguis::server::entity::direction() const
 {
 	return direction_;
 }
+
+void sanguis::server::entity::update(const time_type) {}
 
 void sanguis::server::entity::direction(const messages::space_unit _direction)
 {
