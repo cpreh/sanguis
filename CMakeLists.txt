@@ -19,8 +19,8 @@ FILE (GLOB files
 	draw/*.cpp
 	messages/*.cpp
 	server/*.cpp
-	load/*.cpp
-	load/model/*.cpp)
+	load/model/*.cpp
+	load/resource/*.cpp)
 
 add_executable(main ${files})
 target_link_libraries(main boost_serialization boost_thread

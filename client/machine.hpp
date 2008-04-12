@@ -3,7 +3,7 @@
 
 #include "../messages/base.hpp"
 #include "../net/client.hpp"
-#include "../load/resource_factory.hpp"
+#include "../load/resource/factory.hpp"
 #include "../load/model/singleton.hpp"
 #include "../tick_event.hpp"
 #include "message_event.hpp"

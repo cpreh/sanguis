@@ -1,5 +1,5 @@
 #include "animation.hpp"
-#include "../resource_factory.hpp"
+#include "../resource/factory.hpp"
 
 sanguis::load::model::animation::animation(
 	sge::path const& path)

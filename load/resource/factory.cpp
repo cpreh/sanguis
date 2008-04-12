@@ -1,5 +1,5 @@
-#include "../media_path.hpp"
-#include "resource_factory.hpp"
+#include "../../media_path.hpp"
+#include "factory.hpp"
 #include <sge/fstream.hpp>
 #include <sge/sstream.hpp>
 #include <sge/iostream.hpp>

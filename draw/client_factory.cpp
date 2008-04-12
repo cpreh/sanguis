@@ -2,7 +2,7 @@
 #include "coord_transform.hpp"
 #include "simple_sprite.hpp"
 #include "z_ordering.hpp"
-#include "../load/resource_factory.hpp"
+#include "../load/resource/factory.hpp"
 #include "../client_messages/add.hpp"
 #include <sge/exception.hpp>
 #include <sge/string.hpp>
