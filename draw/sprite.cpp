@@ -55,6 +55,30 @@ const sge::sprite::object& sanguis::draw::sprite::master() const
 	return at(0);
 }
 
+sanguis::draw::sprite::iterator
+sanguis::draw::sprite::begin()
+{
+	return sprites.begin();
+}
+
+sanguis::draw::sprite::iterator
+sanguis::draw::sprite::end()
+{
+	return sprites.end();
+}
+
+sanguis::draw::sprite::const_iterator
+sanguis::draw::sprite::begin() const
+{
+	return sprites.begin();
+}
+
+sanguis::draw::sprite::const_iterator
+sanguis::draw::sprite::end() const
+{
+	return sprites.end();
+}
+
 void sanguis::draw::sprite::orientation(const sge::space_unit o)
 {
 	BOOST_FOREACH(sge::sprite::object& s, sprites)

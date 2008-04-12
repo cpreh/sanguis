@@ -19,11 +19,18 @@ public:
 	const sge::sprite::point center() const;
 	virtual sprite_vector to_sprites() const;
 protected:
+	typedef sprite_vector::iterator iterator;
+	typedef sprite_vector::const_iterator const_iterator;
+
 	virtual void update(time_type);
 	sge::sprite::object& at(sprite_vector::size_type);
 	const sge::sprite::object& at(sprite_vector::size_type) const;
 	sge::sprite::object& master();
 	const sge::sprite::object& master() const;
+	iterator begin();
+	iterator end();
+	const_iterator begin() const;
+	const_iterator end() const;
 
 	virtual void orientation(sge::space_unit);
 	virtual void speed(const sge::math::vector2&);

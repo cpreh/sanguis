@@ -1,4 +1,5 @@
 #include "model.hpp"
+#include "z_ordering.hpp"
 #include "../load/model/collection.hpp"
 #include "../load/model/singleton.hpp"
 #include "../client/id_dont_care.hpp"
@@ -22,6 +23,9 @@ sanguis::draw::model::model(
 			model_part(
 				p.second,
 				at(i++)));
+	// we can't use BOOST_FOREACH here because it needs access to the class
+	for(iterator it(begin()); it != end(); ++it)
+		it->z() = z_ordering::model_generic;
 }
 
 void sanguis::draw::model::update(

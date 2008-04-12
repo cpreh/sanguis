@@ -15,6 +15,7 @@ enum type {
 	player_upper,
 	bullet,
 	player_lower,
+	model_generic,
 	background
 };
 
