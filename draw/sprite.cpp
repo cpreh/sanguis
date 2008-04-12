@@ -1,7 +1,6 @@
 #include "sprite.hpp"
 #include <sge/math/vec_dim.hpp>
 #include <sge/math/constants.hpp>
-#include <sge/math/abs.hpp>
 #include <boost/foreach.hpp>
 #include <boost/none.hpp>
 #include <algorithm>
@@ -48,7 +47,7 @@ void sanguis::draw::sprite::update(const time_type time)
 	update_pos(sge::math::structure_cast<sge::sprite::unit>(pos_));
 
 	update_orientation(
-		sge::math::abs(desired_orientation - orientation()) < sge::math::pi<sge::sprite::rotation_type>()
+		desired_orientation - orientation() < sge::math::pi<sge::sprite::rotation_type>()
 		? std::min(
 			orientation() + time * angle_speed,
 			desired_orientation)
