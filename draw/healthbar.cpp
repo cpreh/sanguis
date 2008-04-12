@@ -12,7 +12,7 @@ namespace
 {
 
 const sge::sprite::unit border_size = 2,
-                        bar_height = 20;
+                        bar_height = 8;
 
 }
 
@@ -62,10 +62,18 @@ sanguis::draw::healthbar::health() const
 	return health_;
 }
 
-void sanguis::draw::healthbar::update(
-	const time_type time)
+void sanguis::draw::healthbar::attach_to(
+	const sge::sprite::point& p,
+	const sge::sprite::dim& d)
 {
-	sprite::update(time);
+	pos(
+		sge::sprite::point(
+			p.x(),
+			p.y() - bar_height));
+	dim(
+		sge::sprite::dim(
+			d.w(),
+			bar_height));
 }
 
 void sanguis::draw::healthbar::pos(

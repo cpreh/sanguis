@@ -28,7 +28,9 @@ void sanguis::draw::model::update(
 	const time_type time)
 {
 	sprite::update(time);
-	healthbar_.update(time);
+	healthbar_.attach_to(
+		master().pos(),
+		master().size());
 
 	BOOST_FOREACH(model_part &p, parts)
 	{
