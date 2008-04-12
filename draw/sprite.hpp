@@ -37,14 +37,16 @@ protected:
 	virtual void pos(const sge::sprite::point&);
 	virtual void dim(const sge::sprite::dim&);
 
-	sge::space_unit orientation() const;
+	sge::sprite::rotation_type orientation() const;
 	const sge::math::vector2& speed() const;
 private:
 	void update_pos(const sge::sprite::point&);
+	void update_orientation(sge::sprite::rotation_type);
 
-	sge::math::vector2 speed_;
-	sge::math::vector2 pos_;
-	sprite_vector      sprites;
+	sge::sprite::rotation_type desired_orientation;
+	sge::math::vector2         speed_,
+	                           pos_;
+	sprite_vector              sprites;
 };
 
 }
