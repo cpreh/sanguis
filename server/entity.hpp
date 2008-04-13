@@ -42,6 +42,9 @@ class entity
 	void max_health(const messages::space_unit);
 	team::type team() const;
 
+	bool attacking() const;
+	void attacking(const bool);
+
 	// is calculated from the above
 	messages::pos_type center() const;
 	messages::pos_type abs_speed() const;
@@ -59,6 +62,7 @@ class entity
 	messages::pos_type pos_;
 	messages::space_unit speed_,angle_,direction_,health_,max_health_;
 	team::type team_;
+	bool attacking_;
 };
 
 typedef std::auto_ptr<entity> entity_ptr;

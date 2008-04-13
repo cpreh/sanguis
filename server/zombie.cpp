@@ -41,6 +41,8 @@ void sanguis::server::zombie::attack(entity &e)
 	// don't attack invulnerable entities (makes no sense ;))
 	if (e.invulnerable())
 		return;
+	
+	attacking(true);
 
 	if (!cooldown.update_b())
 		return;

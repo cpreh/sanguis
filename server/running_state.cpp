@@ -89,16 +89,33 @@ boost::statechart::result sanguis::server::running_state::react(const tick_event
 	{
 		ai_hook(*i,delta);
 
+		bool colliding = false;
+		const bool attacking_prior_i = i->attacking();
 		for (entity_container::iterator j = boost::next(i); j != entities.end(); ++j)
 		{
 			if (collides(*i,*j))
 			{
+				colliding = true;
 				i->attack(*j);
+
+				bool attacking_prior_j = j->attacking();
 				j->attack(*i);
+				if (j->attacking() != attacking_prior_j && j->attacking())
+					context<machine>().send(message_convert<messages::remove>(*i));
 
 				context<machine>().send(message_convert<messages::health>(*i));
 				context<machine>().send(message_convert<messages::health>(*j));
 			}
+		}
+
+		if (i->attacking() && !colliding)
+		{
+			context<machine>().send(message_convert<messages::stop_attacking>(*i));
+			i->attacking(false);
+		}
+		else if (!attacking_prior_i && i->attacking())
+		{
+			context<machine>().send(message_convert<messages::start_attacking>(*i));
 		}
 
 		if (i->type() == entity_type::player && dynamic_cast<server::player &>(*i).spawn_bullet())

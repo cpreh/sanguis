@@ -11,8 +11,18 @@ sanguis::server::entity::entity(
 	const messages::space_unit max_health_,
 	const team::type team_,
 	const messages::space_unit speed_)
-: id_(id_),pos_(pos_),speed_(speed_),angle_(angle_),direction_(direction_),health_(health_),max_health_(max_health_),team_(team_)
+: id_(id_),pos_(pos_),speed_(speed_),angle_(angle_),direction_(direction_),health_(health_),max_health_(max_health_),team_(team_),attacking_(false)
 {}
+
+bool sanguis::server::entity::attacking() const
+{
+	return attacking_;
+}
+
+void sanguis::server::entity::attacking(const bool n)
+{
+	attacking_ = n;
+}
 
 sanguis::entity_id sanguis::server::entity::id() const
 {
