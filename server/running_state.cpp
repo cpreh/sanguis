@@ -27,6 +27,7 @@
 #include "zombie.hpp"
 #include "bullet.hpp"
 #include "converter.hpp"
+#include "collision.hpp"
 
 #include <sge/iostream.hpp>
 #include <sge/su.hpp>
@@ -84,19 +85,35 @@ boost::statechart::result sanguis::server::running_state::react(const tick_event
 		add_enemy();
 
 	const bool update_pos = send_timer.v().update_b();
-
 	for (entity_container::iterator i = entities.begin(); i != entities.end();)
 	{
 		ai_hook(*i,delta);
 
+		for (entity_container::iterator j = boost::next(i); j != entities.end(); ++j)
+		{
+			if (collides(*i,*j))
+			{
+				i->attack(*j);
+				j->attack(*i);
+			}
+		}
+
 		if (i->type() == entity_type::player && dynamic_cast<server::player &>(*i).spawn_bullet())
 			add_bullet();
 
-		if (i->type() == entity_type::bullet && !dynamic_cast<server::bullet &>(*i).visible())
+		if (i->health() <= messages::mu(0))
 		{
-			context<machine>().send(message_convert<messages::remove>(*i));
-			i = entities.erase(i);
-			continue;
+			if (i->type() == entity_type::player)
+			{
+				sge::cout << "server: player's dead!\n";
+			}
+			else
+			{
+				sge::cout << "server: removing entity id " << i->id() << "\n";
+				context<machine>().send(message_convert<messages::remove>(*i));
+				i = entities.erase(i);
+				continue;
+			}
 		}
 
 		if (update_pos && i->type() != entity_type::bullet)
@@ -127,8 +144,8 @@ void sanguis::server::running_state::create_game(const net::id_type net_id,const
 			messages::mu(0),
 			messages::mu(0),
 			messages::mu(0),
-			messages::mu(1),
-			messages::mu(1),
+			messages::mu(100),
+			messages::mu(100),
 			m.name()));
 	
 	player_ = &dynamic_cast<player &>(raw_player);
@@ -185,7 +202,7 @@ void sanguis::server::running_state::add_enemy()
 	const messages::pos_type pos = center + screen_center;
 
 	zombie &b = dynamic_cast<zombie &>(
-		insert_entity(new zombie(id,pos,angle,messages::mu(1),angle,messages::mu(1),messages::mu(1))));
+		insert_entity(new zombie(id,pos,angle,messages::mu(1),angle,messages::mu(50),messages::mu(50))));
 
 	context<machine>().send(message_convert<messages::add>(b));
 }

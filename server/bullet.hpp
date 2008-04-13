@@ -18,14 +18,8 @@ class bullet : public entity
 	entity_type::type type() const { return entity_type::bullet; }
 	ai_type::type ai_type() const { return ai_type::none; }
 	void update(const time_type);
-
-	// own functions
-	bool visible() const { return visible_; }
-
-	private:
-	static sge::con::var<messages::space_unit> bullet_speed;
-
-	bool visible_;
+	void attack(entity &);
+	bool invulnerable() const;
 };
 }
 }

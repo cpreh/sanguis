@@ -34,7 +34,9 @@ class player : public entity
 
 	// own functions
 	void shooting(const bool);
+	void attack(entity &);
 	bool spawn_bullet() const;
+	bool invulnerable() const;
 	net::id_type net_id() const { return net_id_; }
 	messages::string name() const { return name_; }
 

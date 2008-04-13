@@ -9,13 +9,19 @@ sanguis::server::entity::entity(
 	const messages::space_unit direction_,
 	const messages::space_unit health_,
 	const messages::space_unit max_health_,
+	const team::type team_,
 	const messages::space_unit speed_)
-: id_(id_),pos_(pos_),speed_(speed_),angle_(angle_),direction_(direction_),health_(health_),max_health_(max_health_)
+: id_(id_),pos_(pos_),speed_(speed_),angle_(angle_),direction_(direction_),health_(health_),max_health_(max_health_),team_(team_)
 {}
 
 sanguis::entity_id sanguis::server::entity::id() const
 {
 	return id_;
+}
+
+sanguis::server::team::type sanguis::server::entity::team() const
+{
+	return team_;
 }
 
 sanguis::messages::pos_type sanguis::server::entity::center() const

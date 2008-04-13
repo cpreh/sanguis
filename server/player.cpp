@@ -20,8 +20,9 @@ sanguis::server::player::player(
 			center_ - dim()/messages::mu(2),
 			angle_,
 			direction_,
-			messages::mu(1),
-			messages::mu(1),
+			health_,
+			max_health_,
+			team::players,
 			speed_),
 	  shooting_timer(SGE_TEXT("player_bullet_freq"),sge::su(0.5)),
 		net_id_(net_id_),
@@ -30,6 +31,13 @@ sanguis::server::player::player(
 		max_health_(max_health_),
 		name_(name_)
 {}
+
+void sanguis::server::player::attack(entity &) {}
+
+bool sanguis::server::player::invulnerable() const
+{
+	return false;
+}
 
 bool sanguis::server::player::spawn_bullet() const
 {

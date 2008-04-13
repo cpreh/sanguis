@@ -6,7 +6,11 @@
 #include <sge/math/vec_dim.hpp>
 #include <sge/math/rect_util.hpp>
 
-sge::con::var<sanguis::messages::space_unit> sanguis::server::bullet::bullet_speed(SGE_TEXT("bullet_speed"),static_cast<sanguis::messages::space_unit>(200));
+namespace
+{
+sge::con::var<sanguis::messages::space_unit> bullet_speed(SGE_TEXT("bullet_speed"),sanguis::messages::mu(200));
+sge::con::var<sanguis::messages::space_unit> bullet_damage(SGE_TEXT("bullet_damage"),sanguis::messages::mu(2));
+}
 
 sanguis::server::bullet::bullet(const entity_id id,const messages::pos_type &center_,const messages::space_unit direction_,const messages::space_unit angle_) 
 	: entity(
@@ -16,9 +20,21 @@ sanguis::server::bullet::bullet(const entity_id id,const messages::pos_type &cen
 			direction_,
 			messages::mu(1),
 			messages::mu(1),
-			messages::mu(1)),
-		visible_(true) 
+			team::players,
+			messages::mu(1))
 {}
+
+bool sanguis::server::bullet::invulnerable() const { return true; }
+
+void sanguis::server::bullet::attack(entity &e)
+{
+	// don't attack same team
+	if (team() == e.team())
+		return;
+	
+	e.health(e.health() - bullet_damage.value());
+	health(messages::mu(-1));
+}
 
 sanguis::messages::dim_type sanguis::server::bullet::dim() const
 {
@@ -33,11 +49,12 @@ sanguis::messages::space_unit sanguis::server::bullet::max_speed() const
 void sanguis::server::bullet::update(const time_type)
 {
 	// bullet not visible anymore?
-	visible_ = sge::math::intersects(
+	if (!sge::math::intersects(
 		sge::math::rect(
 			sge::su(-0.5)*sge::su(resolution().w()),
 			sge::su(-0.5)*sge::su(resolution().h()),
 			sge::su(1.5)*sge::su(resolution().w()),
 			sge::su(1.5)*sge::su(resolution().h())),
-		sge::math::structure_cast<sge::space_unit>(center()));
+		sge::math::structure_cast<sge::space_unit>(center())))
+		health(messages::mu(-1));
 }

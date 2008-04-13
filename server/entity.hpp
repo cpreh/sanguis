@@ -5,6 +5,7 @@
 #include "../entity_id.hpp"
 #include "../entity_type.hpp"
 #include "ai_type.hpp"
+#include "teams.hpp"
 #include <memory>
 
 namespace sanguis
@@ -22,6 +23,7 @@ class entity
 		const messages::space_unit direction,
 		const messages::space_unit health,
 		const messages::space_unit max_health,
+		const team::type team,
 		const messages::space_unit speed = messages::mu(0));
 
 	entity_id id() const;
@@ -38,21 +40,25 @@ class entity
 	void health(const messages::space_unit);
 	messages::space_unit max_health() const;
 	void max_health(const messages::space_unit);
+	team::type team() const;
 
 	// is calculated from the above
 	messages::pos_type center() const;
 	messages::pos_type abs_speed() const;
 
+	virtual void attack(entity &) = 0;
 	virtual messages::dim_type dim() const = 0;
 	virtual messages::space_unit max_speed() const = 0;
 	virtual entity_type::type type() const = 0;
 	virtual ai_type::type ai_type() const = 0;
+	virtual bool invulnerable() const = 0;
 	virtual void update(const time_type);
 	virtual ~entity();
 	private:
 	entity_id id_;
 	messages::pos_type pos_;
 	messages::space_unit speed_,angle_,direction_,health_,max_health_;
+	team::type team_;
 };
 
 typedef std::auto_ptr<entity> entity_ptr;
