@@ -27,7 +27,7 @@ sanguis::draw::healthbar::healthbar()
 		boost::none,
 		boost::none,
 		boost::none,
-		sge::colors::darkgrey,
+		sge::colors::black,
 		z_ordering::healthbar_lower,
 		static_cast<sge::sprite::rotation_type>(0)),
 
@@ -100,7 +100,7 @@ sanguis::draw::healthbar::inner_pos() const
 const sge::sprite::dim
 sanguis::draw::healthbar::inner_dim() const
 {
-	return border().size() - sge::sprite::dim(border_size, border_size);
+	return border().size() - sge::sprite::dim(2 * border_size, 2 * border_size);
 }
 
 sge::sprite::object&

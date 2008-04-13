@@ -44,7 +44,7 @@ void sanguis::draw::player::speed(const sge::math::vector2 &v)
 		target_angle = *sge::math::angle_to<sge::space_unit>(sge::math::vector2(),v);
 }
 
-void sanguis::draw::player::orientation(sge::space_unit u)
+void sanguis::draw::player::orientation(const sge::sprite::rotation_type u)
 {
 	top_sprite().rotation(u);
 }
