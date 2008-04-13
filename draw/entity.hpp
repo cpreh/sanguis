@@ -26,6 +26,7 @@ public:
 	virtual void speed(const sge::math::vector2&) = 0;
 	virtual void pos(const sge::sprite::point&) = 0;
 	virtual void dim(const sge::sprite::dim&) = 0;
+	virtual void visible(bool) = 0;
 	virtual void health(sge::space_unit);
 	virtual void max_health(sge::space_unit);
 	virtual void weapon(weapon_type::type);
