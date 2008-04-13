@@ -18,7 +18,7 @@ bool sanguis::server::collides(
 {
 	const sge::math::circle ca(bounding_circle(a)),
 	                        cb(bounding_circle(b));
-	return cb.origin().length_quad() - ca.origin().length_quad()
+	return (cb.origin() - ca.origin()).length_quad()
 	   < ca.radius() + cb.radius();
 }
 
