@@ -14,7 +14,7 @@ namespace draw
 class player : public model {
 public:
 	player(entity_id id);
-	void orientation(sge::space_unit);
+	void orientation(sge::sprite::rotation_type);
 	void speed(const sge::math::vector2 &);
 private:
 	void update(time_type);
