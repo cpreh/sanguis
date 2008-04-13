@@ -16,11 +16,9 @@ namespace
 const sge::sprite::rotation_type invalid_rotation(
 	std::numeric_limits<sge::sprite::rotation_type>::max());
 
-const sge::sprite::rotation_type angle_speed 
-	= sge::math::pi<sge::sprite::rotation_type>()
-	  * static_cast<sge::sprite::rotation_type>(2);
-
-sge::con::var<sge::space_unit> rotation_speed(SGE_TEXT("sprite_rot_speed"),sge::su(sge::math::pi<sge::space_unit>()/sge::su(2)));
+sge::con::var<sge::space_unit> rotation_speed(
+	SGE_TEXT("sprite_rot_speed"),
+	sge::su(sge::math::pi<sge::space_unit>() * sge::su(2)));
 
 }
 
@@ -106,7 +104,7 @@ void sanguis::draw::model_part::update(
 	if (min_dist < time/turning_speed)
 		new_angle = desired_orientation;
 	else
-		new_angle = sge::math::abs_angle_to_rel(abs_angle + dir * time/turning_speed);
+		new_angle = sge::math::abs_angle_to_rel(abs_angle + dir * time * turning_speed);
 
 	update_orientation(new_angle);
 }
