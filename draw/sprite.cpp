@@ -43,12 +43,6 @@ sanguis::draw::entity::sprite_vector sanguis::draw::sprite::to_sprites() const
 	return sprites;
 }
 
-void sanguis::draw::sprite::update_orientation(sge::sprite::rotation_type o)
-{
-	BOOST_FOREACH(sge::sprite::object& s, sprites)
-		s.rotation(o);
-}
-
 void sanguis::draw::sprite::update(const time_type time)
 {
 	pos_ += time * speed();
@@ -154,6 +148,12 @@ void sanguis::draw::sprite::dim(const sge::sprite::dim& d)
 		s.size() = d;
 }
 
+void sanguis::draw::sprite::visible(const bool v)
+{
+	BOOST_FOREACH(sge::sprite::object& s, sprites)
+		s.visible(v);
+}
+
 sge::sprite::rotation_type
 sanguis::draw::sprite::orientation() const
 {
@@ -169,4 +169,10 @@ void sanguis::draw::sprite::update_pos(const sge::sprite::point& p)
 {
 	BOOST_FOREACH(sge::sprite::object& s, sprites)
 		s.pos() = p;
+}
+
+void sanguis::draw::sprite::update_orientation(sge::sprite::rotation_type o)
+{
+	BOOST_FOREACH(sge::sprite::object& s, sprites)
+		s.rotation(o);
 }

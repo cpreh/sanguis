@@ -76,6 +76,11 @@ void sanguis::draw::healthbar::attach_to(
 			bar_height));
 }
 
+bool sanguis::draw::healthbar::dead() const
+{
+	return health() <= 0;
+}
+
 void sanguis::draw::healthbar::pos(
 	const sge::sprite::point& p)
 {
@@ -140,6 +145,13 @@ void sanguis::draw::healthbar::recalc_health()
 			(sge::format(SGE_TEXT("draw::healthbar: health (%1%) > max_health (%2%)!"))
 			% health_
 			% max_health_).str());
+
+	if(dead())
+	{
+		visible(false);
+		return;
+	}
+	visible(true);
 
 	if(sge::math::almost_zero(max_health_)) // TODO:
 		return;

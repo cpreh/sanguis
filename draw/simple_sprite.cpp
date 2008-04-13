@@ -54,6 +54,12 @@ void sanguis::draw::simple_sprite::dim(
 	get().size() = dim_;
 }
 
+void sanguis::draw::simple_sprite::visible(
+	const bool v)
+{
+	get().visible(v);
+}
+
 sge::math::vector2 const&
 sanguis::draw::simple_sprite::speed() const
 {
