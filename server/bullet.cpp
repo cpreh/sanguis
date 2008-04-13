@@ -14,6 +14,8 @@ sanguis::server::bullet::bullet(const entity_id id,const messages::pos_type &cen
 			center_ - dim()/messages::mu(2),
 			angle_,
 			direction_,
+			messages::mu(1),
+			messages::mu(1),
 			messages::mu(1)),
 		visible_(true) 
 {}

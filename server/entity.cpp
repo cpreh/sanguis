@@ -7,8 +7,10 @@ sanguis::server::entity::entity(
 	const messages::pos_type &pos_,
 	const messages::space_unit angle_,
 	const messages::space_unit direction_,
+	const messages::space_unit health_,
+	const messages::space_unit max_health_,
 	const messages::space_unit speed_)
-: id_(id_),pos_(pos_),speed_(speed_),angle_(angle_),direction_(direction_)
+: id_(id_),pos_(pos_),speed_(speed_),angle_(angle_),direction_(direction_),health_(health_),max_health_(max_health_)
 {}
 
 sanguis::entity_id sanguis::server::entity::id() const
@@ -54,6 +56,26 @@ sanguis::messages::space_unit sanguis::server::entity::angle() const
 void sanguis::server::entity::angle(const messages::space_unit _angle)
 {
 	angle_ = _angle;
+}
+
+sanguis::messages::space_unit sanguis::server::entity::max_health() const
+{
+	return max_health_;
+}
+
+void sanguis::server::entity::max_health(const messages::space_unit _max_health)
+{
+	max_health_ = _max_health;
+}
+
+sanguis::messages::space_unit sanguis::server::entity::health() const
+{
+	return health_;
+}
+
+void sanguis::server::entity::health(const messages::space_unit _health)
+{
+	health_ = _health;
 }
 
 sanguis::messages::space_unit sanguis::server::entity::direction() const

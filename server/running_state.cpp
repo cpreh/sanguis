@@ -47,7 +47,7 @@
 
 
 sanguis::server::running_state::running_state()
-	: send_timer(SGE_TEXT("message_freq"),sge::su(0.5)),
+	: send_timer(SGE_TEXT("message_freq"),sge::su(0.1)),
 		enemy_timer(SGE_TEXT("enemy_timer"),sge::su(2))
 {
 	sge::clog << SGE_TEXT("server: entering running state\n");

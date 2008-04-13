@@ -13,9 +13,13 @@ sanguis::server::zombie::zombie(
 	const messages::space_unit angle_,
 	const messages::space_unit health_,
 	const messages::space_unit max_health_)
-	: entity(id,center_ - dim()/messages::mu(2),angle_,direction_,speed_),
-		health_(health_),
-		max_health_(max_health_)
+	: entity(
+			id,center_ - dim()/messages::mu(2),
+			angle_,
+			direction_,
+			health_,
+			max_health_,
+			speed_)
 {}
 
 sanguis::messages::dim_type sanguis::server::zombie::dim() const

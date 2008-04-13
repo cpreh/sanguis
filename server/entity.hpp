@@ -20,6 +20,8 @@ class entity
 		const messages::pos_type &pos,
 		const messages::space_unit angle,
 		const messages::space_unit direction,
+		const messages::space_unit health,
+		const messages::space_unit max_health,
 		const messages::space_unit speed = messages::mu(0));
 
 	entity_id id() const;
@@ -32,6 +34,10 @@ class entity
 	void angle(const messages::space_unit);
 	messages::space_unit direction() const;
 	void direction(const messages::space_unit);
+	messages::space_unit health() const;
+	void health(const messages::space_unit);
+	messages::space_unit max_health() const;
+	void max_health(const messages::space_unit);
 
 	// is calculated from the above
 	messages::pos_type center() const;
@@ -39,8 +45,6 @@ class entity
 
 	virtual messages::dim_type dim() const = 0;
 	virtual messages::space_unit max_speed() const = 0;
-	virtual messages::space_unit health() const = 0;
-	virtual messages::space_unit max_health() const = 0;
 	virtual entity_type::type type() const = 0;
 	virtual ai_type::type ai_type() const = 0;
 	virtual void update(const time_type);
@@ -48,7 +52,7 @@ class entity
 	private:
 	entity_id id_;
 	messages::pos_type pos_;
-	messages::space_unit speed_,angle_,direction_;
+	messages::space_unit speed_,angle_,direction_,health_,max_health_;
 };
 
 typedef std::auto_ptr<entity> entity_ptr;

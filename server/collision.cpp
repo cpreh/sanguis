@@ -1,4 +1,4 @@
-#include "collission.hpp"
+#include "collision.hpp"
 #include "entity.hpp"
 #include <sge/math/circle_impl.hpp>
 #include <sge/math/power.hpp>
