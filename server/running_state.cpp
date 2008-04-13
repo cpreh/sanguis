@@ -95,6 +95,9 @@ boost::statechart::result sanguis::server::running_state::react(const tick_event
 			{
 				i->attack(*j);
 				j->attack(*i);
+
+				context<machine>().send(message_convert<messages::health>(*i));
+				context<machine>().send(message_convert<messages::health>(*j));
 			}
 		}
 
@@ -109,7 +112,6 @@ boost::statechart::result sanguis::server::running_state::react(const tick_event
 			}
 			else
 			{
-				sge::cout << "server: removing entity id " << i->id() << "\n";
 				context<machine>().send(message_convert<messages::remove>(*i));
 				i = entities.erase(i);
 				continue;
