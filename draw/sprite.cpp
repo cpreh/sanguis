@@ -17,8 +17,7 @@ const sge::sprite::rotation_type angle_speed
 sanguis::draw::sprite::sprite(
 	const entity_id id,
 	const sprite_vector::size_type sz)
-: entity(id),
-  desired_orientation(0)
+: entity(id)
 {
 	sprites.reserve(sz);
 	for(sprite_vector::size_type i = 0; i < sz; ++i)
@@ -45,15 +44,6 @@ void sanguis::draw::sprite::update(const time_type time)
 {
 	pos_ += time * speed();
 	update_pos(sge::math::structure_cast<sge::sprite::unit>(pos_));
-
-	update_orientation(
-		desired_orientation - orientation() < sge::math::pi<sge::sprite::rotation_type>()
-		? std::min(
-			orientation() + time * angle_speed,
-			desired_orientation)
-		: std::max(
-			orientation() - time * angle_speed,
-			desired_orientation));
 }
 
 sge::sprite::object& sanguis::draw::sprite::at(const sprite_vector::size_type i)
@@ -102,7 +92,8 @@ sanguis::draw::sprite::end() const
 
 void sanguis::draw::sprite::orientation(const sge::space_unit o)
 {
-	desired_orientation = o;
+	BOOST_FOREACH(sge::sprite::object& s, sprites)
+		s.rotation(o);
 }
 
 void sanguis::draw::sprite::speed(const sge::math::vector2& s)
@@ -137,11 +128,4 @@ void sanguis::draw::sprite::update_pos(const sge::sprite::point& p)
 {
 	BOOST_FOREACH(sge::sprite::object& s, sprites)
 		s.pos() = p;
-}
-
-void sanguis::draw::sprite::update_orientation(
-	const sge::sprite::rotation_type o)
-{
-	BOOST_FOREACH(sge::sprite::object& s, sprites)
-		s.rotation(o);
 }
