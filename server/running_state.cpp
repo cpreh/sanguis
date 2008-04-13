@@ -101,7 +101,7 @@ boost::statechart::result sanguis::server::running_state::react(const tick_event
 				bool attacking_prior_j = j->attacking();
 				j->attack(*i);
 				if (j->attacking() != attacking_prior_j && j->attacking())
-					context<machine>().send(message_convert<messages::start_attacking>(*i));
+					context<machine>().send(message_convert<messages::start_attacking>(*j));
 
 				context<machine>().send(message_convert<messages::health>(*i));
 				context<machine>().send(message_convert<messages::health>(*j));
