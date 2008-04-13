@@ -112,7 +112,7 @@ boost::statechart::result sanguis::server::running_state::react(const tick_event
 			}
 			else
 			{
-				context<machine>().send(message_convert<messages::remove>(*i));
+				//context<machine>().send(message_convert<messages::remove>(*i));
 				i = entities.erase(i);
 				continue;
 			}
