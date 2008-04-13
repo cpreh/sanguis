@@ -41,6 +41,10 @@ void sanguis::draw::model::update(
 		p.animation(animation());
 		p.update(time);
 	}
+
+	// TODO: fix this
+	if(healthbar_.dead())
+		speed(sge::math::vector2(0,0));
 }
 
 sanguis::draw::entity::sprite_vector
