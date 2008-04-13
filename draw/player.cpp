@@ -59,6 +59,8 @@ void sanguis::draw::player::update(const time_type time)
 	const sge::math::vector2 leg_center(sge::math::structure_cast<sge::space_unit>(player_leg_center));
 	const sge::math::vector2 body_center(sge::math::structure_cast<sge::space_unit>(player_body_center));
 
+	//sge::cout << "angle_ = " << angle_ << ", target_angle=" << target_angle << "\n";
+
 	const sge::space_unit abs_angle = sge::math::rel_angle_to_abs(angle_),
 	                      abs_target = sge::math::rel_angle_to_abs(target_angle);
 	

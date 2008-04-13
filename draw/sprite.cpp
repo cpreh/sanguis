@@ -2,6 +2,7 @@
 #include <sge/math/vec_dim.hpp>
 #include <sge/math/constants.hpp>
 #include <sge/math/angle.hpp>
+#include <sge/console/console.hpp>
 #include <boost/foreach.hpp>
 #include <boost/none.hpp>
 #include <algorithm>
@@ -13,13 +14,13 @@ const sge::sprite::rotation_type angle_speed
 	= sge::math::pi<sge::sprite::rotation_type>()
 	  * static_cast<sge::sprite::rotation_type>(2);
 
+sge::con::var<sge::space_unit> rotation_speed(SGE_TEXT("sprite_rot_speed"),sge::su(sge::math::pi<sge::space_unit>()/sge::su(2)));
 }
 
 sanguis::draw::sprite::sprite(
 	const entity_id id,
 	const sprite_vector::size_type sz)
-: entity(id),
-  desired_orientation(0)
+: entity(id),desired_orientation(static_cast<sge::sprite::rotation_type>(0))
 {
 	sprites.reserve(sz);
 	for(sprite_vector::size_type i = 0; i < sz; ++i)
@@ -42,10 +43,18 @@ sanguis::draw::entity::sprite_vector sanguis::draw::sprite::to_sprites() const
 	return sprites;
 }
 
+void sanguis::draw::sprite::update_orientation(sge::sprite::rotation_type o)
+{
+	BOOST_FOREACH(sge::sprite::object& s, sprites)
+		s.rotation(o);
+}
+
 void sanguis::draw::sprite::update(const time_type time)
 {
 	pos_ += time * speed();
 	update_pos(sge::math::structure_cast<sge::sprite::unit>(pos_));
+
+	//sge::cout << "orientation() = " << orientation() << ", desired=" << desired_orientation << "\n";
 
 	const sge::space_unit abs_angle = sge::math::rel_angle_to_abs(orientation()),
 	                      abs_target = sge::math::rel_angle_to_abs(desired_orientation);
@@ -67,7 +76,7 @@ void sanguis::draw::sprite::update(const time_type time)
 	else
 		dir = (swap_dist > abs_dist) ? sge::su(1) : sge::su(-1);
 
-	const sge::space_unit turning_speed = sge::math::pi<sge::space_unit>();
+	const sge::space_unit turning_speed = rotation_speed.value();
 
 	sge::space_unit new_angle;
 
@@ -160,11 +169,4 @@ void sanguis::draw::sprite::update_pos(const sge::sprite::point& p)
 {
 	BOOST_FOREACH(sge::sprite::object& s, sprites)
 		s.pos() = p;
-}
-
-void sanguis::draw::sprite::update_orientation(
-	const sge::sprite::rotation_type o)
-{
-	BOOST_FOREACH(sge::sprite::object& s, sprites)
-		s.rotation(o);
 }
