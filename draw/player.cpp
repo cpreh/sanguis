@@ -11,33 +11,6 @@
 
 namespace
 {
-template<typename T>
-bool is_between(const T &t,const T &l,const T &r)
-{
-	return t >= l && t <= r;
-}
-
-sge::space_unit rel_angle_to_abs(const sge::space_unit a)
-{
-	assert(is_between(a,-sge::math::pi<sge::space_unit>(),sge::math::pi<sge::space_unit>()));
-
-	if (sge::math::almost_zero(a))
-		return sge::su(0);
-
-	return a > sge::su(0) ? a : sge::su(2)*sge::math::pi<sge::space_unit>()+a;
-}
-
-sge::space_unit abs_angle_to_rel(sge::space_unit a)
-{
-	a = sge::math::mod(a,sge::su(2)*sge::math::pi<sge::space_unit>());
-
-	if (is_between(a,-sge::math::pi<sge::space_unit>(),sge::math::pi<sge::space_unit>()))
-		return a;
-
-	return a > sge::math::pi<sge::space_unit>() 
-		? a-sge::su(2)*sge::math::pi<sge::space_unit>() 
-		: a;
-}
 
 //const sge::sprite::point rotation_point(0,0);
 
@@ -86,8 +59,8 @@ void sanguis::draw::player::update(const time_type time)
 	const sge::math::vector2 leg_center(sge::math::structure_cast<sge::space_unit>(player_leg_center));
 	const sge::math::vector2 body_center(sge::math::structure_cast<sge::space_unit>(player_body_center));
 
-	const sge::space_unit abs_angle = rel_angle_to_abs(angle_),
-	                      abs_target = rel_angle_to_abs(target_angle);
+	const sge::space_unit abs_angle = sge::math::rel_angle_to_abs(angle_),
+	                      abs_target = sge::math::rel_angle_to_abs(target_angle);
 	
 	const sge::space_unit twopi = sge::su(2)*sge::math::pi<sge::space_unit>();
 
@@ -120,7 +93,7 @@ void sanguis::draw::player::update(const time_type time)
 	if (min_dist < time/turning_speed.value())
 		angle_ = target_angle;
 	else
-		angle_ = abs_angle_to_rel(abs_angle + dir * time/turning_speed.value());
+		angle_ = sge::math::abs_angle_to_rel(abs_angle + dir * time/turning_speed.value());
 
 	// player image is now rotated correctly
 	//const sge::space_unit sprite_rotation = angle_ + sge::math::pi<sge::space_unit>()/sge::su(2);
