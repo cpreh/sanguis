@@ -59,21 +59,6 @@ sanguis::client::running_state::running_state(my_context ctx)
 		client_messages::add(
 			::background_id,
 			client_entity_type::background));
-	
-	// add experimental healthbar
-	/*drawer.process_message(
-		messages::add(
-			::healthbar_id,
-			entity_type::healthbar,
-			messages::vector2(
-				messages::mu(0.9),
-				messages::mu(0.7)),
-			messages::mu(0),
-			messages::vector2(
-				messages::mu(0),
-				messages::mu(0)),
-			messages::mu(500),
-			messages::mu(1000)));*/
 }
 
 boost::statechart::result sanguis::client::running_state::react(const tick_event&t)

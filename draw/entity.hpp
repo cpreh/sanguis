@@ -7,6 +7,7 @@
 #include <sge/time.hpp>
 #include "../entity_id.hpp"
 #include "../weapon_type.hpp"
+#include "../time_type.hpp"
 
 namespace sanguis
 {
@@ -16,7 +17,6 @@ namespace draw
 class entity {
 public:
 	typedef std::vector<sge::sprite::object> sprite_vector;
-	typedef sge::space_unit time_type;
 
 	explicit entity(entity_id id);
 	virtual void update(time_type) = 0;

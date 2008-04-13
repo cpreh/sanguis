@@ -3,8 +3,10 @@
 
 #include "../animation_type.hpp"
 #include "../weapon_type.hpp"
+#include "../time_type.hpp"
 #include "../load/model/fwd.hpp"
 #include <sge/sprite/fwd.hpp>
+#include <sge/sprite/types.hpp>
 #include <sge/sprite/texture_animation.hpp>
 
 namespace sanguis
@@ -19,11 +21,16 @@ public:
 		sge::sprite::object &ref);
 	void animation(animation_type::type);
 	void weapon(weapon_type::type);
-	void update();
+	void update(time_type time);
+	void orientation(sge::sprite::rotation_type);
 private:
 	void update_animation();
+	void update_orientation(
+		sge::sprite::rotation_type);
 	sge::sprite::texture_animation::loop_method::type loop_method() const;
+	sge::sprite::rotation_type orientation() const;
 
+	sge::sprite::rotation_type     desired_orientation;
 	load::model::part const*       info;
 	sge::sprite::object*           ref;
 	animation_type::type           animation_type_;

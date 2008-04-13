@@ -44,7 +44,6 @@ private:
 	void update_pos(const sge::sprite::point&);
 	void update_orientation(sge::sprite::rotation_type);
 
-	sge::sprite::rotation_type desired_orientation;
 	sge::math::vector2         speed_,
 	                           pos_;
 	sprite_vector              sprites;

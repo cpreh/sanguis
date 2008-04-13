@@ -39,7 +39,7 @@ void sanguis::draw::model::update(
 	BOOST_FOREACH(model_part &p, parts)
 	{
 		p.animation(animation());
-		p.update();
+		p.update(time);
 	}
 }
 
@@ -50,6 +50,20 @@ sanguis::draw::model::to_sprites() const
 	sprite_vector const& healthbar_sprites(healthbar_.to_sprites());
 	sprites.insert(sprites.end(), healthbar_sprites.begin(), healthbar_sprites.end());
 	return sprites;
+}
+
+void sanguis::draw::model::orientation(
+	const sge::sprite::rotation_type rot)
+{
+	BOOST_FOREACH(model_part &p, parts)
+		p.orientation(rot);
+}
+
+void sanguis::draw::model::orientation(
+	const sge::sprite::rotation_type rot,
+	const sprite_vector::size_type index)
+{
+	parts.at(index).orientation(rot);	
 }
 
 void sanguis::draw::model::health(

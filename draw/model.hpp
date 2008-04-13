@@ -25,6 +25,11 @@ public:
 protected:
 	virtual void update(time_type);
 	virtual sprite_vector to_sprites() const;
+	virtual void orientation(
+		sge::sprite::rotation_type);
+	void orientation(
+		sge::sprite::rotation_type,
+		sprite_vector::size_type index);
 private:
 	void health(sge::space_unit);
 	void max_health(sge::space_unit);

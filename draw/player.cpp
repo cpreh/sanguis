@@ -46,7 +46,9 @@ void sanguis::draw::player::speed(const sge::math::vector2 &v)
 
 void sanguis::draw::player::orientation(const sge::sprite::rotation_type u)
 {
-	top_sprite().rotation(u);
+	model::orientation(u, 1); // TODO: better interface for this in model
+	//model::orientation(u);
+//	top_sprite().rotation(u);
 }
 
 void sanguis::draw::player::update(const time_type time)
@@ -101,7 +103,8 @@ void sanguis::draw::player::update(const time_type time)
 	//const sge::space_unit sprite_rotation = angle_ + sge::math::pi<sge::space_unit>()/sge::su(2);
 	const sge::space_unit sprite_rotation = angle_;
 
-	bottom_sprite().rotation(sprite_rotation);
+	model::orientation(sprite_rotation, 0); // TODO: better interface for this in model
+	//bottom_sprite().rotation(sprite_rotation);
 
 	const sge::math::vector2 new_rotation = sge::math::point_rotate(
 		leg_center,
