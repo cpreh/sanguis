@@ -6,6 +6,8 @@
 #include "../messages/remove.hpp"
 #include "../messages/health.hpp"
 #include "../messages/rotate.hpp"
+#include "../messages/start_attacking.hpp"
+#include "../messages/stop_attacking.hpp"
 #include <sge/iostream.hpp>
 
 template<>
@@ -49,4 +51,16 @@ template<>
 sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::rotate>(const entity &e)
 {
 	return new messages::rotate(e.id(),e.angle());
+}
+
+template<>
+sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::stop_attacking>(const entity &e)
+{
+	return new messages::stop_attacking(e.id());
+}
+
+template<>
+sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::start_attacking>(const entity &e)
+{
+	return new messages::stop_attacking(e.id());
 }

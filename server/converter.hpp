@@ -24,6 +24,10 @@ template<>
 messages::base *message_convert<messages::remove>(const entity &e);
 template<>
 messages::base *message_convert<messages::rotate>(const entity &e);
+template<>
+messages::base *message_convert<messages::stop_attacking>(const entity &e);
+template<>
+messages::base *message_convert<messages::start_attacking>(const entity &e);
 }
 }
 
