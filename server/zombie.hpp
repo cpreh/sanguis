@@ -33,6 +33,7 @@ class zombie : public entity
 
 	private:
 	messages::space_unit health_,max_health_;
+	sge::timer cooldown;
 };
 }
 }

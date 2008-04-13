@@ -6,7 +6,9 @@
 namespace
 {
 sge::con::var<sanguis::messages::space_unit> running_speed(SGE_TEXT("zombie_speed"),sanguis::messages::mu(40));
-sge::con::var<sanguis::messages::space_unit> zombie_damage(SGE_TEXT("zombie_damage"),sanguis::messages::mu(10));
+sge::con::var<sanguis::messages::space_unit> zombie_damage(SGE_TEXT("zombie_damage"),sanguis::messages::mu(5));
+
+const sge::space_unit cooldown_time = sge::su(1);
 }
 
 sanguis::server::zombie::zombie(
@@ -25,7 +27,8 @@ sanguis::server::zombie::zombie(
 			health_,
 			max_health_,
 			team::monsters,
-			speed_)
+			speed_),
+			cooldown(static_cast<sge::time_type>(cooldown_time*sge::su(sge::second())))
 {}
 
 bool sanguis::server::zombie::invulnerable() const
@@ -38,7 +41,10 @@ void sanguis::server::zombie::attack(entity &e)
 	// don't attack invulnerable entities (makes no sense ;))
 	if (e.invulnerable())
 		return;
-	
+
+	if (!cooldown.update_b())
+		return;
+
 	e.health(e.health() - zombie_damage.value());
 }
 
