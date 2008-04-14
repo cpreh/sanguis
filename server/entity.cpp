@@ -24,6 +24,16 @@ void sanguis::server::entity::attacking(const bool n)
 	attacking_ = n;
 }
 
+bool sanguis::server::entity::colliding() const
+{
+	return colliding_;
+}
+
+void sanguis::server::entity::colliding(const bool n)
+{
+	colliding_ = n;
+}
+
 sanguis::entity_id sanguis::server::entity::id() const
 {
 	return id_;

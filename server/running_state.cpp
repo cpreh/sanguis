@@ -84,23 +84,29 @@ boost::statechart::result sanguis::server::running_state::react(const tick_event
 	if (enemy_timer.v().update_b())
 		add_enemy();
 
+	for (entity_container::iterator i = entities.begin(); i != entities.end(); ++i)
+		i->colliding(false);
+
 	const bool update_pos = send_timer.v().update_b();
 	for (entity_container::iterator i = entities.begin(); i != entities.end();)
 	{
 		ai_hook(*i,delta);
 
-		bool colliding = false;
-		const bool attacking_prior_i = i->attacking();
 		for (entity_container::iterator j = boost::next(i); j != entities.end(); ++j)
 		{
 			if (collides(*i,*j))
 			{
-				colliding = true;
-				i->attack(*j);
+				i->colliding(true);
+				j->colliding(true);
 
-				bool attacking_prior_j = j->attacking();
+				const bool attacking_prior_i = i->attacking();
+				i->attack(*j);
+				if (!attacking_prior_i && i->attacking())
+					context<machine>().send(message_convert<messages::start_attacking>(*i));
+
+				const bool attacking_prior_j = j->attacking();
 				j->attack(*i);
-				if (j->attacking() != attacking_prior_j && j->attacking())
+				if (!attacking_prior_j && j->attacking())
 					context<machine>().send(message_convert<messages::start_attacking>(*j));
 
 				context<machine>().send(message_convert<messages::health>(*i));
@@ -108,16 +114,12 @@ boost::statechart::result sanguis::server::running_state::react(const tick_event
 			}
 		}
 
-		if (i->attacking() && !colliding)
+		if (i->attacking() && !i->colliding())
 		{
 			context<machine>().send(message_convert<messages::stop_attacking>(*i));
 			i->attacking(false);
 		}
-		else if (!attacking_prior_i && i->attacking())
-		{
-			context<machine>().send(message_convert<messages::start_attacking>(*i));
-		}
-
+			
 		if (i->type() == entity_type::player && dynamic_cast<server::player &>(*i).spawn_bullet())
 			add_bullet();
 

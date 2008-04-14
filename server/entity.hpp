@@ -45,6 +45,9 @@ class entity
 	bool attacking() const;
 	void attacking(const bool);
 
+	bool colliding() const;
+	void colliding(const bool);
+
 	// is calculated from the above
 	messages::pos_type center() const;
 	messages::pos_type abs_speed() const;
@@ -62,7 +65,7 @@ class entity
 	messages::pos_type pos_;
 	messages::space_unit speed_,angle_,direction_,health_,max_health_;
 	team::type team_;
-	bool attacking_;
+	bool attacking_,colliding_;
 };
 
 typedef std::auto_ptr<entity> entity_ptr;
