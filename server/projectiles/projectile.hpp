@@ -23,6 +23,7 @@ protected:
 		messages::space_unit speed,
 		time_type lifetime);
 private:
+	virtual bool invulnerable() const;
 	void update(time_type);
 	virtual void do_hit(entity &target) = 0;
 	virtual void die();

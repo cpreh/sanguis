@@ -1,11 +1,11 @@
 #include "entity.hpp"
+#include "get_unique_id.hpp"
 #include "../angle_vector.hpp"
 #include <sge/math/vec_dim.hpp>
 #include <sge/math/power.hpp>
 #include <cmath>
 
 sanguis::server::entity::entity(
-	const entity_id id_,
 	const messages::pos_type &pos_,
 	const messages::space_unit angle_,
 	const messages::space_unit direction_,
@@ -13,7 +13,7 @@ sanguis::server::entity::entity(
 	const messages::space_unit max_health_,
 	const team::type team_,
 	const messages::space_unit speed_)
-: id_(id_),
+: id_(get_unique_id()),
   pos_(pos_),
   speed_(speed_),
   angle_(angle_),

@@ -14,7 +14,6 @@ class zombie : public entity
 {
 	public:
 	zombie(
-		const entity_id,
 		const messages::pos_type &center,
 		const messages::space_unit direction,
 		const messages::space_unit speed,

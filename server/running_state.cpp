@@ -1,6 +1,5 @@
 #include "running_state.hpp"
 #include "waiting_state.hpp"
-#include "get_unique_id.hpp"
 #include "../messages/player_rotation_event.hpp"
 #include "../messages/player_direction_event.hpp"
 #include "../messages/player_start_shooting.hpp"
@@ -147,8 +146,7 @@ void sanguis::server::running_state::create_game(const net::id_type net_id,const
 {
 	assert(!entities.size());
 
-	const entity_id player_id = get_unique_id(); entity &raw_player = insert_entity(new server::player(
-			player_id,
+	entity &raw_player = insert_entity(new server::player(
 			net_id,
 			messages::pos_type(
 				messages::mu(resolution().w()/2),
@@ -198,8 +196,6 @@ sanguis::server::entity &sanguis::server::running_state::insert_entity(entity *p
 
 void sanguis::server::running_state::add_enemy()
 {
-	const entity_id id = get_unique_id();
-
 	const messages::space_unit rand_angle = sge::math::random(messages::mu(0),
 					messages::mu(2)*sge::math::pi<messages::space_unit>());
 	const messages::space_unit radius = messages::mu(std::max(resolution().w(),resolution().h()))/messages::mu(2);
@@ -214,17 +210,15 @@ void sanguis::server::running_state::add_enemy()
 	const messages::pos_type pos = center + screen_center;
 
 	zombie &b = dynamic_cast<zombie &>(
-		insert_entity(new zombie(id,pos,angle,messages::mu(1),angle,messages::mu(50),messages::mu(50))));
+		insert_entity(new zombie(pos,angle,messages::mu(1),angle,messages::mu(50),messages::mu(50))));
 
 	context<machine>().send(message_convert<messages::add>(b));
 }
 
 void sanguis::server::running_state::add_bullet()
 {
-	const entity_id bullet_id = get_unique_id();
-
 	bullet &b = dynamic_cast<bullet &>(
-		insert_entity(new bullet(bullet_id,player_->center(),player_->angle(),player_->angle())));
+		insert_entity(new bullet(player_->center(),player_->angle(),player_->angle())));
 
 	context<machine>().send(message_convert<messages::add>(b));
 }

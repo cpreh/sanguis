@@ -13,9 +13,8 @@ sge::con::var<sanguis::messages::space_unit> bullet_speed(SGE_TEXT("bullet_speed
 sge::con::var<sanguis::messages::space_unit> bullet_damage(SGE_TEXT("bullet_damage"),sanguis::messages::mu(2));
 }
 
-sanguis::server::bullet::bullet(const entity_id id,const messages::pos_type &center_,const messages::space_unit direction_,const messages::space_unit angle_) 
+sanguis::server::bullet::bullet(const messages::pos_type &center_,const messages::space_unit direction_,const messages::space_unit angle_) 
 	: entity(
-			id,
 			center_ - dim()/messages::mu(2),
 			angle_,
 			direction_,

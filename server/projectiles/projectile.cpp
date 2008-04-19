@@ -8,7 +8,6 @@ sanguis::server::projectiles::projectile::projectile(
 	const messages::space_unit speed,
 	const time_type lifetime)
 : entity(
-	0, // FIXME
 	pos,
 	angle,
 	angle,
@@ -18,6 +17,11 @@ sanguis::server::projectiles::projectile::projectile(
 	speed),
   lifetime(lifetime)
 {}
+
+bool sanguis::server::projectiles::projectile::invulnerable() const
+{
+	return true; // most bullets will be invulnerable
+}
 
 void sanguis::server::projectiles::projectile::update(
 	const time_type time)
