@@ -5,7 +5,8 @@ sanguis::server::weapons::pistol::pistol(
 	const insert_callback insert)
 : weapon(
 	1000, // FIXME
-	base_cooldown,insert)
+	base_cooldown,
+	insert)
 {}
 
 void sanguis::server::weapons::pistol::do_attack(

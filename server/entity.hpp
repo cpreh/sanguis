@@ -4,7 +4,6 @@
 #include "../messages/types.hpp"
 #include "../entity_id.hpp"
 #include "../entity_type.hpp"
-#include "ai_type.hpp"
 #include "teams.hpp"
 #include <boost/ptr_container/ptr_list.hpp>
 #include <memory>
@@ -59,11 +58,9 @@ class entity
 	messages::pos_type abs_speed() const;
 	messages::space_unit radius() const;
 
-	virtual void attack(entity &) = 0;
 	virtual messages::dim_type dim() const = 0;
 	virtual messages::space_unit max_speed() const = 0;
 	virtual entity_type::type type() const = 0;
-	virtual ai_type::type ai_type() const = 0;
 	virtual bool invulnerable() const = 0;
 	virtual void update(const time_type);
 	virtual ~entity();

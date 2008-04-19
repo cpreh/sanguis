@@ -31,7 +31,6 @@ class player : public entity_with_weapon
 	messages::space_unit health() const { return health_; }
 	messages::space_unit max_health() const { return max_health_; }
 	entity_type::type type() const { return entity_type::player; }
-	ai_type::type ai_type() const { return ai_type::none; }
 
 	// own functions
 	void shooting(const bool);
