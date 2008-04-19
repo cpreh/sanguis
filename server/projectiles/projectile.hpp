@@ -27,6 +27,7 @@ private:
 	virtual bool invulnerable() const;
 	void update(time_type);
 	messages::space_unit max_speed() const;
+	messages::dim_type dim() const;
 
 	virtual void do_hit(entity &target) = 0;
 	void die();

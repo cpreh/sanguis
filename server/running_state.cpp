@@ -24,7 +24,6 @@
 #include "message_functor.hpp"
 #include "player.hpp"
 #include "zombie.hpp"
-#include "bullet.hpp"
 #include "converter.hpp"
 #include "collision.hpp"
 
@@ -217,10 +216,10 @@ void sanguis::server::running_state::add_enemy()
 
 void sanguis::server::running_state::add_bullet()
 {
-	bullet &b = dynamic_cast<bullet &>(
-		insert_entity(new bullet(player_->center(),player_->angle(),player_->angle())));
+//	bullet &b = dynamic_cast<bullet &>(
+//		insert_entity(new bullet(player_->center(),player_->angle(),player_->angle())));
 
-	context<machine>().send(message_convert<messages::add>(b));
+//	context<machine>().send(message_convert<messages::add>(b));
 }
 
 boost::statechart::result sanguis::server::running_state::operator()(const net::id_type id,const messages::player_start_shooting &)
