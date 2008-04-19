@@ -26,11 +26,9 @@ sanguis::server::entities::player::player(
 			team::players,
 			speed_,
 			weapons::weapon_ptr()),
-	  shooting_timer(SGE_TEXT("player_bullet_freq"),sge::su(0.5)),
+		shooting_timer(SGE_TEXT("player_bullet_freq"),sge::su(0.5)),
 		net_id_(net_id_),
 		shooting_(false),
-		health_(health_),
-		max_health_(max_health_),
 		name_(name_)
 {}
 

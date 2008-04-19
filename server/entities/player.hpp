@@ -28,8 +28,6 @@ class player : public entity_with_weapon
 	// virtual functions
 	messages::dim_type dim() const;
 	messages::space_unit max_speed() const;
-	messages::space_unit health() const { return health_; }
-	messages::space_unit max_health() const { return max_health_; }
 	entity_type::type type() const { return entity_type::player; }
 
 	// own functions
@@ -45,7 +43,6 @@ class player : public entity_with_weapon
 	mutable console_timer shooting_timer;
 	net::id_type net_id_;
 	bool shooting_;
-	messages::space_unit health_,max_health_;
 	messages::string name_;
 };
 }

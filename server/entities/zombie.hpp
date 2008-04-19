@@ -25,14 +25,11 @@ class zombie : public entity_with_weapon
 
 	messages::dim_type dim() const;
 	messages::space_unit max_speed() const;
-	messages::space_unit health() const { return health_; }
-	messages::space_unit max_health() const { return max_health_; }
 	entity_type::type type() const { return entity_type::zombie; }
 	bool invulnerable() const;
 	void attack(entity &);
 
 	private:
-	messages::space_unit health_,max_health_;
 	sge::timer cooldown;
 };
 }
