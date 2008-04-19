@@ -12,7 +12,6 @@ const sge::space_unit cooldown_time = sge::su(1);
 }
 
 sanguis::server::zombie::zombie(
-	const entity_id id,
 	const messages::pos_type &center_,
 	const messages::space_unit direction_,
 	const messages::space_unit speed_,
@@ -20,7 +19,6 @@ sanguis::server::zombie::zombie(
 	const messages::space_unit health_,
 	const messages::space_unit max_health_)
 	: entity(
-			id,
 			center_ - dim()/messages::mu(2),
 			angle_,
 			direction_,

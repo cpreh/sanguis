@@ -15,7 +15,6 @@ class player : public entity
 {
 	public:
 	player(
-		const entity_id,
 		const net::id_type net_id,
 		const messages::pos_type &center,
 		const messages::space_unit direction,

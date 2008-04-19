@@ -15,7 +15,6 @@
 #include "message_functor.hpp"
 #include "game_logic.hpp"
 #include "player.hpp"
-#include "bullet.hpp"
 #include "converter.hpp"
 #include "zombie.hpp"
 
@@ -108,7 +107,6 @@ void sanguis::server::game_logic::create_game(const net::id_type net_id,const me
 	assert(!entities.size());
 
 	entity &raw_player = insert_entity(new server::player(
-			get_unique_id(),
 			net_id,
 			messages::pos_type(
 				messages::mu(resolution().w()/2),
@@ -156,8 +154,6 @@ sanguis::server::entity &sanguis::server::game_logic::insert_entity(entity *ptr)
 
 void sanguis::server::game_logic::add_enemy()
 {
-	const entity_id id = get_unique_id();
-
 	const messages::space_unit rand_angle = sge::math::random(messages::mu(0),
 					messages::mu(2)*sge::math::pi<messages::space_unit>());
 	const messages::space_unit radius = messages::mu(std::max(resolution().w(),resolution().h()))/messages::mu(2);
@@ -166,13 +162,14 @@ void sanguis::server::game_logic::add_enemy()
 	const messages::pos_type screen_center = messages::pos_type(messages::mu(resolution().w()),messages::mu(resolution().h()))/messages::mu(2);
 	const messages::pos_type center = scale * radius * angle_to_vector(rand_angle);
 	
-	boost::optional<messages::space_unit> oa = sge::math::angle_to<messages::space_unit>(players[id]->center() - center);
+	// TODO: take the nearest player here instead of the first
+	boost::optional<messages::space_unit> oa = sge::math::angle_to<messages::space_unit>(players.begin()->second->center() - center);
 	const messages::space_unit angle = oa ? *oa : messages::mu(0);
 
 	const messages::pos_type pos = center + screen_center;
 
 	zombie &b = dynamic_cast<zombie &>(
-		insert_entity(new zombie(id,pos,angle,messages::mu(1),angle,messages::mu(50),messages::mu(50))));
+		insert_entity(new zombie(pos,angle,messages::mu(1),angle,messages::mu(50),messages::mu(50))));
 
 	send(message_convert<messages::add>(b));
 }
@@ -180,7 +177,7 @@ void sanguis::server::game_logic::add_enemy()
 void sanguis::server::game_logic::add_bullet(const net::id_type id)
 {
 	bullet &b = dynamic_cast<bullet &>(
-		insert_entity(new bullet(get_unique_id(),players[id]->center(),players[id]->angle(),players[id]->angle())));
+		insert_entity(new bullet(players[id]->center(),players[id]->angle(),players[id]->angle())));
 
 	send(message_convert<messages::add>(b));
 }

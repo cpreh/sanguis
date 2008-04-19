@@ -6,7 +6,6 @@
 sge::con::var<sanguis::messages::space_unit> sanguis::server::player::running_speed(SGE_TEXT("player_speed"),messages::mu(60));
 
 sanguis::server::player::player(
-	const entity_id id,
 	const net::id_type net_id_,
 	const messages::pos_type &center_,
 	const messages::space_unit direction_,
@@ -16,7 +15,6 @@ sanguis::server::player::player(
 	const messages::space_unit max_health_,
 	const messages::string &name_)
 	: entity(
-			id,
 			center_ - dim()/messages::mu(2),
 			angle_,
 			direction_,
