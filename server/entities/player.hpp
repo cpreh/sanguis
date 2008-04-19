@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PLAYER_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PLAYER_HPP_INCLUDED
 
-#include "../entity.hpp"
+#include "../entity_with_weapon.hpp"
 #include "../../net/types.hpp"
 #include "../../console_timer.hpp"
 #include <sge/timer.hpp>
@@ -13,7 +13,7 @@ namespace server
 {
 namespace entities
 {
-class player : public entity
+class player : public entity_with_weapon
 {
 	public:
 	player(

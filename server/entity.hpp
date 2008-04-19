@@ -6,7 +6,6 @@
 #include "../entity_type.hpp"
 #include "ai_type.hpp"
 #include "teams.hpp"
-#include "weapons/weapon.hpp"
 #include <boost/ptr_container/ptr_list.hpp>
 #include <memory>
 
@@ -28,8 +27,7 @@ class entity
 		const messages::space_unit health,
 		const messages::space_unit max_health,
 		const team::type team,
-		const messages::space_unit speed,
-		weapons::weapon_ptr);
+		const messages::space_unit speed);
 
 	entity_id id() const;
 
@@ -49,8 +47,6 @@ class entity
 	void damage(messages::space_unit);
 	bool dead() const;
 	virtual void die();
-
-	void change_weapon(weapons::weapon_ptr);
 
 	bool attacking() const;
 	void attacking(const bool);
@@ -82,8 +78,6 @@ class entity
 	team::type team_;
 	bool attacking_,
 	     colliding_;
-	entity *target_;
-	weapons::weapon_ptr weapon_;
 };
 
 typedef std::auto_ptr<entity> entity_ptr;

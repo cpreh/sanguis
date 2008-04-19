@@ -12,8 +12,7 @@ sanguis::server::entity::entity(
 	const messages::space_unit health_,
 	const messages::space_unit max_health_,
 	const team::type team_,
-	const messages::space_unit speed_,
-	weapons::weapon_ptr weapon_)
+	const messages::space_unit speed_)
 : id_(get_unique_id()),
   pos_(pos_),
   speed_(speed_),
@@ -23,9 +22,7 @@ sanguis::server::entity::entity(
   max_health_(max_health_),
   team_(team_),
   attacking_(false),
-  colliding_(false),
-  target_(0),
-  weapon_(weapon_)
+  colliding_(false)
 {}
 
 bool sanguis::server::entity::attacking() const
@@ -148,18 +145,8 @@ void sanguis::server::entity::die()
 	health(messages::mu(0));
 }
 
-void sanguis::server::entity::change_weapon(
-	const weapons::weapon_ptr nweapon)
-{
-	weapon_ = nweapon;
-}
-
 void sanguis::server::entity::update(const time_type delta)
 {
-	if(weapon_ && target_ && attacking())
-		weapon_->attack(*this, target_->pos());
-	// TODO: start_attacking goes here
-	
 	pos_ += abs_speed() * delta;
 }
 

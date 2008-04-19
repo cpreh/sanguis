@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_ZOMBIE_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_ZOMBIE_HPP_INCLUDED
 
-#include "../entity.hpp"
+#include "../entity_with_weapon.hpp"
 #include "../../net/types.hpp"
 #include <sge/timer.hpp>
 #include <sge/console/console.hpp>
@@ -12,7 +12,7 @@ namespace server
 {
 namespace entities
 {
-class zombie : public entity
+class zombie : public entity_with_weapon
 {
 	public:
 	zombie(

@@ -17,7 +17,7 @@ sanguis::server::entities::player::player(
 	const messages::space_unit health_,
 	const messages::space_unit max_health_,
 	const messages::string &name_)
-	: entity(
+	: entity_with_weapon(
 			center_ - dim()/messages::mu(2),
 			angle_,
 			direction_,

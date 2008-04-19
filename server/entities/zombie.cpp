@@ -18,7 +18,7 @@ sanguis::server::entities::zombie::zombie(
 	const messages::space_unit angle_,
 	const messages::space_unit health_,
 	const messages::space_unit max_health_)
-	: entity(
+	: entity_with_weapon(
 			center_ - dim()/messages::mu(2),
 			angle_,
 			direction_,
