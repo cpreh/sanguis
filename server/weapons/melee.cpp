@@ -12,13 +12,9 @@ sanguis::server::weapons::melee::melee(
   damage(damage)
 {}
 
-bool sanguis::server::weapons::melee::attack(
-	entity const &from, messages::pos_type const& to)
+void sanguis::server::weapons::melee::do_attack(
+	entity const &from,
+	messages::pos_type const& to)
 {
-//	if(in_range(from, to, range()))
-	{
-		//to.attack(damage);
-		return true;
-	}
-	return false;
+	// TODO: spawn melee bullet here
 }

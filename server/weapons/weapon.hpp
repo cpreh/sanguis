@@ -3,6 +3,7 @@
 
 #include "../../time_type.hpp"
 #include "../../messages/types.hpp"
+#include <sge/timer.hpp>
 
 namespace sanguis
 {
@@ -20,13 +21,20 @@ public:
 		messages::space_unit range,
 		time_type base_cooldown);
 	messages::space_unit range() const;
-	time_type base_cooldown() const;
-	virtual bool attack(
+	bool attack(
+		entity const &from,
+		messages::pos_type const& to);
+protected:
+	virtual void do_attack(
 		entity const &from,
 		messages::pos_type const& to) = 0;
 private:
+	bool in_range(
+		entity const& from,
+		messages::pos_type const& to) const;
+
 	messages::space_unit range_;
-	time_type            base_cooldown_;
+	sge::timer           cooldown_timer;
 };
 
 }

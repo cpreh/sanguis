@@ -18,8 +18,10 @@ public:
 		messages::space_unit range,
 		time_type base_cooldown,
 		messages::space_unit damage);
-	bool attack(entity const &from, messages::pos_type const&);
 private:
+	void do_attack(
+		entity const &from,
+		messages::pos_type const&);
 	messages::space_unit damage;
 };
 
