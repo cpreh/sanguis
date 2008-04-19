@@ -1,6 +1,6 @@
 #include "player.hpp"
-#include "../load/model/collection.hpp"
-#include "../load/model/singleton.hpp"
+#include "../../load/model/collection.hpp"
+#include "../../load/model/singleton.hpp"
 #include <sge/math/vec_dim.hpp>
 
 namespace
@@ -40,7 +40,7 @@ bool sanguis::server::entities::player::invulnerable() const
 	return false;
 }
 
-sanguis::messages::dim_type sanguis::server::player::dim() const
+sanguis::messages::dim_type sanguis::server::entities::player::dim() const
 {
 	return sge::math::structure_cast<messages::space_unit>(load::model::singleton()["player"]["bottom"][weapon_type::pistol][animation_type::walking].get().dim());
 }
@@ -55,7 +55,7 @@ void sanguis::server::entities::player::shooting(const bool n)
 	shooting_ = n;
 }
 
-void sanguis::server::player::update(
+void sanguis::server::entities::player::update(
 	const time_type time)
 {
 	

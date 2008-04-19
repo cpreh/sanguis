@@ -1,6 +1,6 @@
 #include "zombie.hpp"
-#include "../load/model/collection.hpp"
-#include "../load/model/singleton.hpp"
+#include "../../load/model/collection.hpp"
+#include "../../load/model/singleton.hpp"
 #include <sge/math/vec_dim.hpp>
 
 namespace
