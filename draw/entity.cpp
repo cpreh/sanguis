@@ -2,10 +2,6 @@
 #include <sge/iostream.hpp>
 #include <ostream>
 	
-sanguis::draw::entity::entity(const entity_id id_)
-: id_(id_)
-{}
-
 sanguis::entity_id sanguis::draw::entity::id() const
 {
 	return id_;
@@ -31,3 +27,7 @@ void sanguis::draw::entity::stop_attacking()
 {
 	sge::clog << SGE_TEXT("warning: entity got a stop attacking message!\n");
 }
+
+sanguis::draw::entity::entity(const entity_id id_)
+: id_(id_)
+{}
