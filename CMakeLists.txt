@@ -19,6 +19,7 @@ FILE (GLOB files
 	draw/*.cpp
 	messages/*.cpp
 	server/*.cpp
+	server/weapons/*.cpp
 	load/model/*.cpp
 	load/resource/*.cpp)
 

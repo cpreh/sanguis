@@ -22,7 +22,6 @@ bool sanguis::server::collides(
 	   < ca.radius() + cb.radius();
 }
 
-
 namespace
 {
 

@@ -3,7 +3,7 @@
 
 #include <sge/su.hpp>
 
-namespace
+namespace sanguis
 {
 
 typedef sge::space_unit time_type;

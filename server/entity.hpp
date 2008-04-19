@@ -6,20 +6,22 @@
 #include "../entity_type.hpp"
 #include "ai_type.hpp"
 #include "teams.hpp"
+#include "weapons/weapon.hpp"
+#include <boost/scoped_ptr.hpp>
 #include <memory>
 
 namespace sanguis
 {
 namespace server
 {
+
 class entity
 {
 	public:
 	typedef messages::space_unit time_type;
 
 	entity(const entity_id id_,
-		const messages::pos_type &pos,
-		const messages::space_unit angle,
+		const messages::pos_type &pos, const messages::space_unit angle,
 		const messages::space_unit direction,
 		const messages::space_unit health,
 		const messages::space_unit max_health,
@@ -63,6 +65,7 @@ class entity
 	messages::space_unit speed_,angle_,direction_,health_,max_health_;
 	team::type team_;
 	bool attacking_;
+	boost::scoped_ptr<weapons::weapon> weapon_;
 };
 
 typedef std::auto_ptr<entity> entity_ptr;
