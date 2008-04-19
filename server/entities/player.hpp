@@ -41,9 +41,6 @@ class player : public entity
 	messages::string name() const { return name_; }
 
 	private:
-	static sge::con::var<messages::space_unit> bullet_frequency;
-	static sge::con::var<messages::space_unit> running_speed;
-
 	void update(time_type);
 
 	mutable console_timer shooting_timer;
