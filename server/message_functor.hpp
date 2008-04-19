@@ -3,11 +3,9 @@
 
 #include "../net/types.hpp"
 #include "../messages/base.hpp"
-#include <boost/statechart/result.hpp>
 #include <functional>
 
-template<typename T>
-//struct message_functor : public std::unary_function<boost::statechart::result,sanguis::messages::base>
+template<typename T,typename R>
 struct message_functor
 {
 	T &t;
@@ -16,7 +14,7 @@ struct message_functor
 	message_functor(T &t,const net::id_type id) : t(t),id(id) {}
 
 	template<typename U>
-	boost::statechart::result operator()(U m) { return t(id,m); }
+	R operator()(U m) { return t(id,m); }
 };
 
 #endif

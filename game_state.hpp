@@ -7,10 +7,12 @@ namespace sanguis
 {
 struct game_state
 {
-	boost::uint32_t score;
+	typedef boost::uint32_t score_type;
+
+	score_type score;
 
 	game_state() {}
-	game_state(const boost::uint32_t score) : score(score) {}
+	game_state(const score_type score) : score(score) {}
 };
 
 template<class Archive> 

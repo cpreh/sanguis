@@ -52,7 +52,7 @@ boost::statechart::result sanguis::server::waiting_state::handle_default_msg(con
 boost::statechart::result sanguis::server::waiting_state::react(const message_event&m) 
 {
 	sge::clog << "server: react with " << m.id << "\n";
-	message_functor<waiting_state> mf(*this,m.id);
+	message_functor<waiting_state,boost::statechart::result> mf(*this,m.id);
 	return dispatch_type<
 		boost::mpl::vector<
 			messages::connect,

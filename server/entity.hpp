@@ -19,6 +19,7 @@ class entity
 {
 	public:
 	typedef messages::space_unit time_type;
+	typedef messages::space_unit health_type;
 
 	entity(const entity_id id_,
 		const messages::pos_type &pos, const messages::space_unit angle,
