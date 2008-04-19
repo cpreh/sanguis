@@ -25,6 +25,7 @@ sanguis::server::entities::zombie::zombie(
 			health_,
 			max_health_,
 			team::monsters,
+			weapon_type::melee,
 			speed_),
 			cooldown(static_cast<sge::time_type>(cooldown_time*sge::su(sge::second())))
 {}

@@ -8,6 +8,7 @@ namespace weapon_type
 
 enum type {
 	none,
+	melee,
 	pistol,
 	size
 };

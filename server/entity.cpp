@@ -1,6 +1,6 @@
 #include "entity.hpp"
 #include "get_unique_id.hpp"
-#include "weapons/pistol.hpp"
+#include "weapons/factory.hpp"
 #include "../angle_vector.hpp"
 #include <sge/math/vec_dim.hpp>
 #include <sge/math/power.hpp>
@@ -13,6 +13,7 @@ sanguis::server::entity::entity(
 	const messages::space_unit health_,
 	const messages::space_unit max_health_,
 	const team::type team_,
+	const weapon_type::type weapon_,
 	const messages::space_unit speed_)
 : id_(get_unique_id()),
   pos_(pos_),
@@ -26,8 +27,7 @@ sanguis::server::entity::entity(
   colliding_(false),
   target_(0),
   weapon_(
-  	new weapons::pistol(
-		static_cast<time_type>(0.5)))	
+  	weapons::create(weapon_))
 {}
 
 bool sanguis::server::entity::attacking() const

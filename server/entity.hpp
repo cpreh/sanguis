@@ -4,6 +4,7 @@
 #include "../messages/types.hpp"
 #include "../entity_id.hpp"
 #include "../entity_type.hpp"
+#include "../weapon_type.hpp"
 #include "ai_type.hpp"
 #include "teams.hpp"
 #include "weapons/weapon.hpp"
@@ -28,6 +29,7 @@ class entity
 		const messages::space_unit health,
 		const messages::space_unit max_health,
 		const team::type team,
+		const weapon_type::type weapon = weapon_type::none,
 		const messages::space_unit speed = messages::mu(0));
 
 	entity_id id() const;
