@@ -130,7 +130,19 @@ sanguis::messages::space_unit sanguis::server::entity::direction() const
 void sanguis::server::entity::damage(
 	const messages::space_unit d)
 {
-	health_ -= d; // TODO: check for a dying entity here
+	health_ -= d;
+	if(dead())
+		die();
+}
+
+bool sanguis::server::entity::dead() const
+{
+	return health() <= messages::mu(0);
+}
+
+void sanguis::server::entity::die()
+{
+	health(messages::mu(0));
 }
 
 void sanguis::server::entity::update(const time_type) {}

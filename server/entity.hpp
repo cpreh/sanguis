@@ -45,6 +45,8 @@ class entity
 	void max_health(const messages::space_unit);
 	team::type team() const;
 	void damage(messages::space_unit);
+	bool dead() const;
+	virtual void die();
 
 	bool attacking() const;
 	void attacking(const bool);

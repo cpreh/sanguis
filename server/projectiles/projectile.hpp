@@ -26,7 +26,8 @@ private:
 	virtual bool invulnerable() const;
 	void update(time_type);
 	virtual void do_hit(entity &target) = 0;
-	virtual void die();
+	void die();
+	virtual void do_die();
 
 	sge::timer lifetime;
 };

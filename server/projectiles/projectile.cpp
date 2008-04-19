@@ -32,4 +32,10 @@ void sanguis::server::projectiles::projectile::update(
 }
 
 void sanguis::server::projectiles::projectile::die()
+{
+	entity::die();
+	do_die();
+}
+
+void sanguis::server::projectiles::projectile::do_die()
 {}
