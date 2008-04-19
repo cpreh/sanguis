@@ -112,7 +112,7 @@ try
 	bool running = true;
 	while (running)
 	{
-		sanguis::tick_event t(sanguis::tick_data(frame_timer.reset()));
+		sanguis::tick_event t(static_cast<sanguis::time_diff>(frame_timer.reset()));
 
 		// get and send messages
 		server.process(t);

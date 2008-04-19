@@ -19,7 +19,6 @@ class player;
 class game_logic
 {
 	public:
-	typedef sge::timer::frames_type time_type;
 	typedef boost::function<void (messages::base *const)> send_callback;
 
 	game_logic(send_callback);
@@ -31,7 +30,7 @@ class game_logic
 	bool aborted() const { return aborted_; }
 
 	// reactions
-	void update(const time_type);
+	void update(const time_diff);
 	void operator()(const net::id_type,const messages::client_info &);
 	void operator()(const net::id_type,const messages::player_direction &);
 	void operator()(const net::id_type,const messages::player_rotation &);

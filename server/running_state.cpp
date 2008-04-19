@@ -13,7 +13,7 @@ sanguis::server::running_state::running_state(my_context ctx)
 
 boost::statechart::result sanguis::server::running_state::react(const tick_event&t) 
 {
-	logic.update(static_cast<game_logic::time_type>(t.data.diff_time));
+	logic.update(t.delta());
 	return discard_event();
 }
 
