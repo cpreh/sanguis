@@ -2,12 +2,12 @@
 #define SANGUIS_SERVER_BULLET_HPP_INCLUDED
 
 #include "entity.hpp"
-#include <sge/console/console.hpp>
 
 namespace sanguis
 {
 namespace server
 {
+
 class bullet : public entity
 {
 	public:
@@ -21,6 +21,7 @@ class bullet : public entity
 	void attack(entity &);
 	bool invulnerable() const;
 };
+
 }
 }
 
