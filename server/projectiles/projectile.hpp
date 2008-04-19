@@ -21,15 +21,19 @@ protected:
 		messages::space_unit max_health,
 		team::type team,
 		messages::space_unit speed,
+		messages::space_unit max_speed,
 		time_type lifetime);
 private:
 	virtual bool invulnerable() const;
 	void update(time_type);
+	messages::space_unit max_speed() const;
+
 	virtual void do_hit(entity &target) = 0;
 	void die();
 	virtual void do_die();
 
-	sge::timer lifetime;
+	messages::space_unit max_speed_;
+	sge::timer           lifetime;
 };
 
 }

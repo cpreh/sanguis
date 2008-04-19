@@ -11,6 +11,7 @@ sanguis::server::projectiles::simple_bullet::simple_bullet(
 	1,
 	team_,
 	0.1, // FIXME
+	0.1,
 	10),
   damage(damage)
 {}

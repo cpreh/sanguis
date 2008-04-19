@@ -6,6 +6,7 @@ sanguis::server::projectiles::projectile::projectile(
 	const messages::space_unit max_health,
 	const team::type team_,
 	const messages::space_unit speed,
+	const messages::space_unit max_speed_,
 	const time_type lifetime)
 : entity(
 	pos,
@@ -15,6 +16,7 @@ sanguis::server::projectiles::projectile::projectile(
 	max_health,
 	team_,
 	speed),
+  max_speed_(max_speed_),
   lifetime(lifetime)
 {}
 
@@ -29,6 +31,12 @@ void sanguis::server::projectiles::projectile::update(
 	if(lifetime.expired())
 		die();
 	// TODO: check for colissions with other teams here
+}
+
+sanguis::messages::space_unit
+sanguis::server::projectiles::projectile::max_speed() const
+{
+	return max_speed_;	
 }
 
 void sanguis::server::projectiles::projectile::die()

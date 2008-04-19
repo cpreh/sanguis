@@ -11,6 +11,7 @@ sanguis::server::projectiles::melee::melee(
 	1, // some arbitrary value
 	team_,
 	0,
+	0,
 	0.1), // short lifetime
   damage(damage)
 {}
