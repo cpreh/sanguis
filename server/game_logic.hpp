@@ -8,7 +8,6 @@
 #include "entity.hpp"
 #include <sge/timer.hpp>
 #include <boost/function.hpp>
-#include <boost/ptr_container/ptr_list.hpp>
 
 namespace sanguis
 {
@@ -43,7 +42,6 @@ class game_logic
 	void handle_default_msg(const net::id_type,const messages::base &);
 	
 	private:
-	typedef boost::ptr_list<server::entity> entity_container;
 	typedef std::map<net::id_type,entities::player*> player_map;
 
 	send_callback send;

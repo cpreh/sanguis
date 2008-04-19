@@ -70,15 +70,18 @@ environment::load_animation(
 	if (!boost::filesystem::exists(framesfile) || !boost::filesystem::is_regular(framesfile))
 	{
 		// there is no animation here so just take the first image you can find
-		const sge::directory_iterator it(dir);
-		if(it == sge::directory_iterator())
-			throw sge::exception(dir.string() + " is empty!");
-		sge::sprite::animation_series ret;
-		ret.push_back(
-			sge::sprite::animation_entity(
-				std::numeric_limits<sge::time_type>::max(),
-				load_texture_inner(*it)));
-		return ret; // TODO: can we do this with boost::assign?
+		for(sge::directory_iterator it(dir), end; it != end; ++it)
+		{
+			if(boost::filesystem::is_directory(*it))
+				continue;
+			sge::sprite::animation_series ret;
+			ret.push_back(
+				sge::sprite::animation_entity(
+					std::numeric_limits<sge::time_type>::max(),
+					load_texture_inner(*it)));
+			return ret; // TODO: can we do this with boost::assign?
+		}
+		throw sge::exception(dir.string() + " is empty!");
 	}
 
 	// and parse line by line

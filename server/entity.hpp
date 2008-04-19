@@ -9,6 +9,7 @@
 #include "teams.hpp"
 #include "weapons/weapon.hpp"
 #include <boost/scoped_ptr.hpp>
+#include <boost/ptr_container/ptr_list.hpp>
 #include <memory>
 
 namespace sanguis
@@ -86,6 +87,8 @@ class entity
 };
 
 typedef std::auto_ptr<entity> entity_ptr;
+typedef boost::ptr_list<server::entity> entity_container;
+
 }
 }
 
