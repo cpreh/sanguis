@@ -18,7 +18,6 @@ class entity {
 public:
 	typedef std::vector<sge::sprite::object> sprite_vector;
 
-	explicit entity(entity_id id);
 	virtual void update(time_type) = 0;
 	virtual sprite_vector to_sprites() const = 0;
 	entity_id id() const;
@@ -33,6 +32,7 @@ public:
 	virtual void start_attacking();
 	virtual void stop_attacking();
 protected:
+	explicit entity(entity_id id);
 	virtual const sge::math::vector2& speed() const = 0;
 	virtual sge::space_unit orientation() const = 0;
 private:
