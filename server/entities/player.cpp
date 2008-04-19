@@ -59,3 +59,21 @@ void sanguis::server::entities::player::update(
 {
 	entity::update(delta);
 }
+
+sanguis::entity_type::type
+sanguis::server::entities::player::type() const
+{
+	return entity_type::player;
+}
+
+net::id_type
+sanguis::server::entities::player::net_id() const
+{
+	return net_id_;
+}
+
+sanguis::messages::string
+sanguis::server::entities::player::name() const
+{
+	return name_;
+}

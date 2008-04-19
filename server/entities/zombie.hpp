@@ -25,7 +25,7 @@ class zombie : public entity_with_weapon
 
 	messages::dim_type dim() const;
 	messages::space_unit max_speed() const;
-	entity_type::type type() const { return entity_type::zombie; }
+	entity_type::type type() const;
 	bool invulnerable() const;
 	void attack(entity &);
 

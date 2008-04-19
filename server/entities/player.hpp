@@ -28,14 +28,14 @@ class player : public entity_with_weapon
 	// virtual functions
 	messages::dim_type dim() const;
 	messages::space_unit max_speed() const;
-	entity_type::type type() const { return entity_type::player; }
+	entity_type::type type() const;
 
 	// own functions
 	void shooting(const bool);
 	void attack(entity &);
 	bool invulnerable() const;
-	net::id_type net_id() const { return net_id_; }
-	messages::string name() const { return name_; }
+	net::id_type net_id() const;
+	messages::string name() const;
 
 	private:
 	void update(time_type);

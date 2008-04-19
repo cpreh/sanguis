@@ -58,3 +58,9 @@ sanguis::messages::space_unit sanguis::server::entities::zombie::max_speed() con
 {
 	return running_speed.value();
 }
+
+sanguis::entity_type::type
+sanguis::server::entities::zombie::type() const
+{
+	return entity_type::zombie;
+}
