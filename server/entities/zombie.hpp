@@ -1,14 +1,16 @@
-#ifndef SANGUIS_SERVER_ZOMBIE_HPP_INCLUDED
-#define SANGUIS_SERVER_ZOMBIE_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_ENTITIES_ZOMBIE_HPP_INCLUDED
+#define SANGUIS_SERVER_ENTITIES_ZOMBIE_HPP_INCLUDED
 
-#include "entity.hpp"
-#include "../net/types.hpp"
+#include "../entity.hpp"
+#include "../../net/types.hpp"
 #include <sge/timer.hpp>
 #include <sge/console/console.hpp>
 
 namespace sanguis
 {
 namespace server
+{
+namespace entities
 {
 class zombie : public entity
 {
@@ -34,6 +36,7 @@ class zombie : public entity
 	messages::space_unit health_,max_health_;
 	sge::timer cooldown;
 };
+}
 }
 }
 

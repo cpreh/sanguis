@@ -14,7 +14,10 @@ namespace sanguis
 {
 namespace server
 {
+namespace entities
+{
 class player;
+}
 
 class game_logic
 {
@@ -41,7 +44,7 @@ class game_logic
 	
 	private:
 	typedef boost::ptr_list<server::entity> entity_container;
-	typedef std::map<net::id_type,player*> player_map;
+	typedef std::map<net::id_type,entities::player*> player_map;
 
 	send_callback send;
 	entity_container entities;

@@ -1,5 +1,6 @@
 #include "entity.hpp"
 #include "get_unique_id.hpp"
+#include "weapons/pistol.hpp"
 #include "../angle_vector.hpp"
 #include <sge/math/vec_dim.hpp>
 #include <sge/math/power.hpp>
@@ -23,7 +24,10 @@ sanguis::server::entity::entity(
   team_(team_),
   attacking_(false),
   colliding_(false),
-  target_(0)
+  target_(0),
+  weapon_(
+  	new weapons::pistol(
+		static_cast<time_type>(0.5)))	
 {}
 
 bool sanguis::server::entity::attacking() const

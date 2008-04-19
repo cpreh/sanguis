@@ -14,9 +14,9 @@
 #include "../resolution.hpp"
 #include "message_functor.hpp"
 #include "game_logic.hpp"
-#include "player.hpp"
 #include "converter.hpp"
-#include "zombie.hpp"
+#include "entities/player.hpp"
+#include "entities/zombie.hpp"
 
 #include <sge/iostream.hpp>
 #include <sge/math/random.hpp>
@@ -99,7 +99,7 @@ void sanguis::server::game_logic::create_game(const net::id_type net_id,const me
 {
 	assert(!entities.size());
 
-	entity &raw_player = insert_entity(new server::player(
+	entity &raw_player = insert_entity(new entities::player(
 			net_id,
 			messages::pos_type(
 				messages::mu(resolution().w()/2),
@@ -111,7 +111,7 @@ void sanguis::server::game_logic::create_game(const net::id_type net_id,const me
 			messages::mu(100),
 			m.name()));
 	
-	players[net_id] = &dynamic_cast<player &>(raw_player);
+	players[net_id] = &dynamic_cast<entities::player &>(raw_player);
 
 	sge::clog << SGE_TEXT("server: sending game messages\n");
 
@@ -161,8 +161,8 @@ void sanguis::server::game_logic::add_enemy()
 
 	const messages::pos_type pos = center + screen_center;
 
-	zombie &b = dynamic_cast<zombie &>(
-		insert_entity(new zombie(pos,angle,messages::mu(1),angle,messages::mu(50),messages::mu(50))));
+	entities::zombie &b = dynamic_cast<entities::zombie &>(
+		insert_entity(new entities::zombie(pos,angle,messages::mu(1),angle,messages::mu(50),messages::mu(50))));
 
 	send(message_convert<messages::add>(b));
 }

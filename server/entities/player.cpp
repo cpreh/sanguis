@@ -3,9 +3,12 @@
 #include "../load/model/singleton.hpp"
 #include <sge/math/vec_dim.hpp>
 
-sge::con::var<sanguis::messages::space_unit> sanguis::server::player::running_speed(SGE_TEXT("player_speed"),messages::mu(60));
+namespace
+{
+sge::con::var<sanguis::messages::space_unit> running_speed(SGE_TEXT("player_speed"),sanguis::messages::mu(60));
+}
 
-sanguis::server::player::player(
+sanguis::server::entities::player::player(
 	const net::id_type net_id_,
 	const messages::pos_type &center_,
 	const messages::space_unit direction_,
@@ -30,9 +33,9 @@ sanguis::server::player::player(
 		name_(name_)
 {}
 
-void sanguis::server::player::attack(entity &) {}
+void sanguis::server::entities::player::attack(entity &) {}
 
-bool sanguis::server::player::invulnerable() const
+bool sanguis::server::entities::player::invulnerable() const
 {
 	return false;
 }
@@ -42,12 +45,12 @@ sanguis::messages::dim_type sanguis::server::player::dim() const
 	return sge::math::structure_cast<messages::space_unit>(load::model::singleton()["player"]["bottom"][weapon_type::pistol][animation_type::walking].get().dim());
 }
 
-sanguis::messages::space_unit sanguis::server::player::max_speed() const
+sanguis::messages::space_unit sanguis::server::entities::player::max_speed() const
 {
 	return running_speed.value();
 }
 
-void sanguis::server::player::shooting(const bool n)
+void sanguis::server::entities::player::shooting(const bool n)
 {
 	shooting_ = n;
 }

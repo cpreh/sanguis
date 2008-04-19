@@ -1,15 +1,17 @@
-#ifndef SANGUIS_SERVER_PLAYER_HPP_INCLUDED
-#define SANGUIS_SERVER_PLAYER_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_ENTITIES_PLAYER_HPP_INCLUDED
+#define SANGUIS_SERVER_ENTITIES_PLAYER_HPP_INCLUDED
 
-#include "entity.hpp"
-#include "../net/types.hpp"
-#include "../console_timer.hpp"
+#include "../entity.hpp"
+#include "../../net/types.hpp"
+#include "../../console_timer.hpp"
 #include <sge/timer.hpp>
 #include <sge/console/console.hpp>
 
 namespace sanguis
 {
 namespace server
+{
+namespace entities
 {
 class player : public entity
 {
@@ -50,6 +52,7 @@ class player : public entity
 	messages::space_unit health_,max_health_;
 	messages::string name_;
 };
+}
 }
 }
 
