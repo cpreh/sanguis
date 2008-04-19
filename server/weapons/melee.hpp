@@ -21,7 +21,7 @@ public:
 private:
 	void do_attack(
 		entity const &from,
-		messages::pos_type const&);
+		messages::pos_type const& to);
 	messages::space_unit damage;
 };
 

@@ -1,0 +1,15 @@
+#include "pistol.hpp"
+
+sanguis::server::weapons::pistol::pistol(
+	const time_type base_cooldown)
+: weapon(
+	1000, // FIXME
+	base_cooldown)
+{}
+
+void sanguis::server::weapons::pistol::do_attack(
+	entity const &from,
+	messages::pos_type const &to)
+{
+	// TODO: spawn melee bullet here
+}
