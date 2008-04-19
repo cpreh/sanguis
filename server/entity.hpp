@@ -47,6 +47,9 @@ class entity
 	bool attacking() const;
 	void attacking(const bool);
 
+	bool colliding() const;
+	void colliding(const bool);
+
 	// is calculated from the above
 	messages::pos_type center() const;
 	messages::pos_type abs_speed() const;

@@ -84,6 +84,9 @@ boost::statechart::result sanguis::server::running_state::react(const tick_event
 	if (enemy_timer.v().update_b())
 		add_enemy();
 
+	for (entity_container::iterator i = entities.begin(); i != entities.end(); ++i)
+		i->colliding(false);
+
 	const bool update_pos = send_timer.v().update_b();
 	for (entity_container::iterator i = entities.begin(); i != entities.end();)
 	{
@@ -109,8 +112,6 @@ boost::statechart::result sanguis::server::running_state::react(const tick_event
 				context<machine>().send(message_convert<messages::stop_attacking>(*i));
 				i->attacking(false);
 			}*/
-		}
-
 		if (i->type() == entity_type::player && dynamic_cast<server::player &>(*i).spawn_bullet())
 			add_bullet();
 
@@ -145,9 +146,7 @@ void sanguis::server::running_state::create_game(const net::id_type net_id,const
 {
 	assert(!entities.size());
 
-	const entity_id player_id = get_unique_id();
-
-	entity &raw_player = insert_entity(new server::player(
+	const entity_id player_id = get_unique_id(); entity &raw_player = insert_entity(new server::player(
 			player_id,
 			net_id,
 			messages::pos_type(
