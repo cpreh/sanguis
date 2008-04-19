@@ -79,6 +79,7 @@ class entity
 	team::type team_;
 	bool attacking_,
 	     colliding_;
+	entity *target_;
 	boost::scoped_ptr<weapons::weapon> weapon_;
 };
 

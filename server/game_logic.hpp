@@ -23,7 +23,6 @@ class game_logic
 	typedef boost::function<void (messages::base *const)> send_callback;
 
 	game_logic(send_callback);
-	void add_bullet(const net::id_type);
 	void add_enemy();
 	void create_game(const net::id_type,const messages::client_info &);
 	void process(const net::id_type,const messages::base &);

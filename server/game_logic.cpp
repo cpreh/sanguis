@@ -82,13 +82,6 @@ void sanguis::server::game_logic::update(const time_type delta)
 			}
 		}
 
-		if (i->type() == entity_type::player)
-		{
-			player &p = dynamic_cast<server::player &>(*i);
-			if (p.spawn_bullet())
-				add_bullet(p.net_id());
-		}
-
 		i->update(static_cast<entity::time_type>(delta));
 
 		if (update_pos)
@@ -174,14 +167,6 @@ void sanguis::server::game_logic::add_enemy()
 	send(message_convert<messages::add>(b));
 }
 
-void sanguis::server::game_logic::add_bullet(const net::id_type id)
-{
-	bullet &b = dynamic_cast<bullet &>(
-		insert_entity(new bullet(players[id]->center(),players[id]->angle(),players[id]->angle())));
-
-	send(message_convert<messages::add>(b));
-}
-
 void sanguis::server::game_logic::operator()(const net::id_type id,const messages::player_start_shooting &)
 {
 	if (players.find(id) == players.end())
@@ -191,7 +176,6 @@ void sanguis::server::game_logic::operator()(const net::id_type id,const message
 	}
 
 	players[id]->shooting(true);
-	add_bullet(id);
 }
 
 void sanguis::server::game_logic::operator()(const net::id_type id,const messages::player_stop_shooting &)

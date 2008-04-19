@@ -22,7 +22,8 @@ sanguis::server::entity::entity(
   max_health_(max_health_),
   team_(team_),
   attacking_(false),
-  colliding_(false)
+  colliding_(false),
+  target_(0)
 {}
 
 bool sanguis::server::entity::attacking() const
@@ -145,7 +146,12 @@ void sanguis::server::entity::die()
 	health(messages::mu(0));
 }
 
-void sanguis::server::entity::update(const time_type) {}
+void sanguis::server::entity::update(const time_type)
+{
+	if(weapon_ && target_ && attacking())
+		weapon_->attack(*this, target_->pos());
+	// TODO: start_attacking goes here
+}
 
 void sanguis::server::entity::direction(const messages::space_unit _direction)
 {

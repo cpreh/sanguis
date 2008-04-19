@@ -37,11 +37,6 @@ bool sanguis::server::player::invulnerable() const
 	return false;
 }
 
-bool sanguis::server::player::spawn_bullet() const
-{
-	return shooting_ && shooting_timer.v().update_b();
-}
-
 sanguis::messages::dim_type sanguis::server::player::dim() const
 {
 	return sge::math::structure_cast<messages::space_unit>(load::model::singleton()["player"]["bottom"][weapon_type::pistol][animation_type::walking].get().dim());
@@ -54,11 +49,11 @@ sanguis::messages::space_unit sanguis::server::player::max_speed() const
 
 void sanguis::server::player::shooting(const bool n)
 {
-	if (shooting_ == n)
-		return;
-	
 	shooting_ = n;
+}
+
+void sanguis::server::player::update(
+	const time_type time)
+{
 	
-	if (n)
-		shooting_timer.v().reset();
 }

@@ -17,14 +17,15 @@ namespace weapons
 
 class weapon {
 public:
-	weapon(
-		messages::space_unit range,
-		time_type base_cooldown);
 	messages::space_unit range() const;
 	bool attack(
 		entity const &from,
 		messages::pos_type const& to);
 protected:
+	weapon(
+		messages::space_unit range,
+		time_type base_cooldown);
+
 	virtual void do_attack(
 		entity const &from,
 		messages::pos_type const& to) = 0;

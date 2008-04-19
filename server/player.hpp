@@ -34,7 +34,6 @@ class player : public entity
 	// own functions
 	void shooting(const bool);
 	void attack(entity &);
-	bool spawn_bullet() const;
 	bool invulnerable() const;
 	net::id_type net_id() const { return net_id_; }
 	messages::string name() const { return name_; }
@@ -42,6 +41,8 @@ class player : public entity
 	private:
 	static sge::con::var<messages::space_unit> bullet_frequency;
 	static sge::con::var<messages::space_unit> running_speed;
+
+	void update(time_type);
 
 	mutable console_timer shooting_timer;
 	net::id_type net_id_;
