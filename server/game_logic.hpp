@@ -27,7 +27,7 @@ class game_logic
 	void add_enemy();
 	void create_game(const net::id_type,const messages::client_info &);
 	void process(const net::id_type,const messages::base &);
-	entity &insert_entity(entity *);
+	entity &insert_entity(entity_ptr);
 	bool aborted() const { return aborted_; }
 
 	// reactions

@@ -99,7 +99,7 @@ void sanguis::server::game_logic::create_game(const net::id_type net_id,const me
 {
 	assert(!entities.size());
 
-	entity &raw_player = insert_entity(new entities::player(
+	entity &raw_player = insert_entity(entity_ptr(new entities::player(
 			net_id,
 			messages::pos_type(
 				messages::mu(resolution().w()/2),
@@ -109,7 +109,7 @@ void sanguis::server::game_logic::create_game(const net::id_type net_id,const me
 			messages::mu(0),
 			messages::mu(100),
 			messages::mu(100),
-			m.name()));
+			m.name())));
 	
 	players[net_id] = &dynamic_cast<entities::player &>(raw_player);
 
@@ -139,14 +139,16 @@ void sanguis::server::game_logic::operator()(const net::id_type id,const message
 	send(message_convert<messages::rotate>(*players[id]));
 }
 
-sanguis::server::entity &sanguis::server::game_logic::insert_entity(entity *ptr)
+sanguis::server::entity &sanguis::server::game_logic::insert_entity(entity_ptr e)
 {
-	entities.push_back(ptr);
+	entities.push_back(e);
 	return entities.back();
 }
 
 void sanguis::server::game_logic::add_enemy()
 {
+	sge::clog << SGE_TEXT("server: adding enemy\n");
+	
 	const messages::space_unit rand_angle = sge::math::random(messages::mu(0),
 					messages::mu(2)*sge::math::pi<messages::space_unit>());
 	const messages::space_unit radius = messages::mu(std::max(resolution().w(),resolution().h()))/messages::mu(2);
@@ -162,7 +164,7 @@ void sanguis::server::game_logic::add_enemy()
 	const messages::pos_type pos = center + screen_center;
 
 	entities::zombie &b = dynamic_cast<entities::zombie &>(
-		insert_entity(new entities::zombie(pos,angle,messages::mu(1),angle,messages::mu(50),messages::mu(50))));
+		insert_entity(entity_ptr(new entities::zombie(pos,angle,messages::mu(1),angle,messages::mu(50),messages::mu(50)))));
 
 	send(message_convert<messages::add>(b));
 }
