@@ -28,6 +28,8 @@ bool sanguis::server::projectiles::projectile::invulnerable() const
 void sanguis::server::projectiles::projectile::update(
 	const time_type time)
 {
+	entity::update(time);
+
 	if(lifetime.expired())
 		die();
 	// TODO: check for collisions with other teams here
