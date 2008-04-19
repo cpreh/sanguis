@@ -5,10 +5,12 @@
 sanguis::server::weapons::melee::melee(
 	const messages::space_unit range,
 	const time_type base_cooldown,
+	const insert_callback insert,
 	const messages::space_unit damage)
 : weapon(
-	range,
-	base_cooldown),
+		range,
+		base_cooldown,
+		insert),
   damage(damage)
 {}
 

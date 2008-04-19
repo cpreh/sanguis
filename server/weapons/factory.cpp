@@ -6,7 +6,7 @@
 
 sanguis::server::weapons::weapon_ptr
 sanguis::server::weapons::create(
-	const weapon_type::type type)
+	const weapon_type::type type,weapon::insert_callback insert)
 {
 	switch(type) {
 	case weapon_type::melee:
@@ -14,11 +14,13 @@ sanguis::server::weapons::create(
 			new melee(
 				messages::mu(0.1),
 				static_cast<time_type>(2),
-				messages::mu(2)));
+				insert,
+				messages::mu(2)
+				));
 	case weapon_type::pistol:
 		return weapon_ptr(
 			new pistol(
-				static_cast<time_type>(0.5)));
+				static_cast<time_type>(0.5),insert));
 	default:
 		throw sge::exception(SGE_TEXT("Cannot create weapon for given weapon type!"));
 	}

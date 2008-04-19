@@ -18,10 +18,17 @@ bool sanguis::server::weapons::weapon::attack(
 }
 sanguis::server::weapons::weapon::weapon(
 	const messages::space_unit range_,
-	const time_type base_cooldown_)
+	const time_type base_cooldown_,
+	const insert_callback insert_)
 : range_(range_),
-  cooldown_timer(base_cooldown_)
+  cooldown_timer(base_cooldown_),
+	insert_(insert_)
 {}
+
+sanguis::server::entity &sanguis::server::weapons::weapon::insert(entity_ptr e)
+{
+	return insert_(e);
+}
 
 bool sanguis::server::weapons::weapon::in_range(
 	entity const& from,

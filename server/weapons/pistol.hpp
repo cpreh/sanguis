@@ -14,7 +14,7 @@ namespace weapons
 class pistol : public weapon {
 public:
 	pistol(
-		time_type base_cooldown);
+		time_type base_cooldown,insert_callback);
 private:
 	void do_attack(
 		entity const &from,

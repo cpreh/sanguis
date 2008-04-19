@@ -11,7 +11,7 @@ namespace server
 namespace weapons
 {
 
-weapon_ptr create(weapon_type::type);
+weapon_ptr create(weapon_type::type,weapon::insert_callback);
 
 }
 }

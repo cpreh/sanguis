@@ -17,6 +17,7 @@ public:
 	melee(
 		messages::space_unit range,
 		time_type base_cooldown,
+		insert_callback,
 		messages::space_unit damage);
 private:
 	void do_attack(
