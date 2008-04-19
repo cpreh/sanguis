@@ -18,8 +18,10 @@ public:
 		team::type team,
 		messages::space_unit damage);
 private:
+	entity_type::type type() const;
 	void do_hit(
 		entity &target);
+
 	messages::space_unit damage;
 };
 

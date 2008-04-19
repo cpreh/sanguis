@@ -16,6 +16,12 @@ sanguis::server::projectiles::simple_bullet::simple_bullet(
   damage(damage)
 {}
 
+sanguis::entity_type::type
+sanguis::server::projectiles::simple_bullet::type() const
+{
+	return entity_type::bullet;
+}
+
 void sanguis::server::projectiles::simple_bullet::do_hit(
 	entity &target)
 {

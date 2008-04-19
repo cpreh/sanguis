@@ -6,6 +6,7 @@ namespace sanguis
 
 namespace entity_type {
 enum type {
+	indeterminate,
 	player,
 	bullet,
 	zombie,

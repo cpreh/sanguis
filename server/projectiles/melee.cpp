@@ -16,6 +16,12 @@ sanguis::server::projectiles::melee::melee(
   damage(damage)
 {}
 
+sanguis::entity_type::type
+sanguis::server::projectiles::melee::type() const
+{
+	return entity_type::indeterminate;
+}
+
 void sanguis::server::projectiles::melee::do_hit(
 	entity &target)
 {
