@@ -150,11 +150,13 @@ void sanguis::server::entity::die()
 	health(messages::mu(0));
 }
 
-void sanguis::server::entity::update(const time_type)
+void sanguis::server::entity::update(const time_type delta)
 {
 	if(weapon_ && target_ && attacking())
 		weapon_->attack(*this, target_->pos());
 	// TODO: start_attacking goes here
+	
+	pos_ += abs_speed() * delta;
 }
 
 void sanguis::server::entity::direction(const messages::space_unit _direction)

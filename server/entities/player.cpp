@@ -57,7 +57,7 @@ void sanguis::server::entities::player::shooting(const bool n)
 }
 
 void sanguis::server::entities::player::update(
-	const time_type time)
+	const time_type delta)
 {
-	
+	entity::update(delta);
 }
