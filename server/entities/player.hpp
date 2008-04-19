@@ -1,15 +1,17 @@
-#ifndef SANGUIS_SERVER_PLAYER_HPP_INCLUDED
-#define SANGUIS_SERVER_PLAYER_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_ENTITIES_PLAYER_HPP_INCLUDED
+#define SANGUIS_SERVER_ENTITIES_PLAYER_HPP_INCLUDED
 
-#include "entity.hpp"
-#include "../net/types.hpp"
-#include "../console_timer.hpp"
+#include "../entity.hpp"
+#include "../../net/types.hpp"
+#include "../../console_timer.hpp"
 #include <sge/timer.hpp>
 #include <sge/console/console.hpp>
 
 namespace sanguis
 {
 namespace server
+{
+namespace entities
 {
 class player : public entity
 {
@@ -40,15 +42,13 @@ class player : public entity
 	messages::string name() const { return name_; }
 
 	private:
-	static sge::con::var<messages::space_unit> bullet_frequency;
-	static sge::con::var<messages::space_unit> running_speed;
-
 	mutable console_timer shooting_timer;
 	net::id_type net_id_;
 	bool shooting_;
 	messages::space_unit health_,max_health_;
 	messages::string name_;
 };
+}
 }
 }
 
