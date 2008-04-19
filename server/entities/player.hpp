@@ -3,9 +3,7 @@
 
 #include "../entity_with_weapon.hpp"
 #include "../../net/types.hpp"
-#include "../../console_timer.hpp"
 #include <sge/timer.hpp>
-#include <sge/console/console.hpp>
 
 namespace sanguis
 {
@@ -40,7 +38,6 @@ class player : public entity_with_weapon
 	private:
 	void update(time_type);
 
-	mutable console_timer shooting_timer;
 	net::id_type net_id_;
 	bool shooting_;
 	messages::string name_;

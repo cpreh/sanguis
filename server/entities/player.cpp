@@ -2,6 +2,7 @@
 #include "../../load/model/collection.hpp"
 #include "../../load/model/singleton.hpp"
 #include <sge/math/vec_dim.hpp>
+#include <sge/console/console.hpp>
 
 namespace
 {
@@ -26,7 +27,6 @@ sanguis::server::entities::player::player(
 			team::players,
 			speed_,
 			weapons::weapon_ptr()),
-		shooting_timer(SGE_TEXT("player_bullet_freq"),sge::su(0.5)),
 		net_id_(net_id_),
 		shooting_(false),
 		name_(name_)
