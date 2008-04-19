@@ -15,8 +15,8 @@ sanguis::server::projectiles::projectile::projectile(
 	max_health,
 	max_health,
 	team_,
-	weapon_type::none,
-	speed),
+	speed,
+	weapons::weapon_ptr()),
   max_speed_(max_speed_),
   lifetime(lifetime)
 {}

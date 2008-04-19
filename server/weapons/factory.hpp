@@ -3,7 +3,6 @@
 
 #include "../../weapon_type.hpp"
 #include "weapon.hpp"
-#include <memory>
 
 namespace sanguis
 {
@@ -11,8 +10,6 @@ namespace server
 {
 namespace weapons
 {
-
-typedef std::auto_ptr<weapon> weapon_ptr;
 
 weapon_ptr create(weapon_type::type);
 

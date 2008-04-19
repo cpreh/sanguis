@@ -14,8 +14,6 @@ enum type {
 };
 }
 
-entity_type::type get_unique_id();
-
 }
 
 #endif

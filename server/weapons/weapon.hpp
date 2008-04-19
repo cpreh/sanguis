@@ -4,6 +4,7 @@
 #include "../../time_type.hpp"
 #include "../../messages/types.hpp"
 #include <sge/timer.hpp>
+#include <boost/shared_ptr.hpp>
 
 namespace sanguis
 {
@@ -37,6 +38,8 @@ private:
 	messages::space_unit range_;
 	sge::timer           cooldown_timer;
 };
+
+typedef boost::shared_ptr<weapon> weapon_ptr;
 
 }
 }
