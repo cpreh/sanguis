@@ -127,6 +127,12 @@ sanguis::messages::space_unit sanguis::server::entity::direction() const
 	return direction_;
 }
 
+void sanguis::server::entity::damage(
+	const messages::space_unit d)
+{
+	health_ -= d; // TODO: check for a dying entity here
+}
+
 void sanguis::server::entity::update(const time_type) {}
 
 void sanguis::server::entity::direction(const messages::space_unit _direction)

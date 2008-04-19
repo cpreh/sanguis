@@ -1,6 +1,6 @@
-#include "melee.hpp"
+#include "simple_bullet.hpp"
 
-sanguis::server::projectiles::melee::melee(
+sanguis::server::projectiles::simple_bullet::simple_bullet(
 	messages::pos_type const& pos,
 	const messages::space_unit angle,
 	const team::type team_,
@@ -8,15 +8,15 @@ sanguis::server::projectiles::melee::melee(
 : projectile(
 	pos,
 	angle,
-	1, // some arbitrary value
+	1,
 	team_,
-	0,
-	0.1), // short lifetime
+	0.1, // FIXME
+	10),
   damage(damage)
 {}
 
-void sanguis::server::projectiles::melee::do_hit(
+void sanguis::server::projectiles::simple_bullet::do_hit(
 	entity &target)
 {
-	target.damage(damage);
+	target.damage(damage);	
 }

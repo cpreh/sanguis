@@ -45,6 +45,7 @@ class entity
 	messages::space_unit max_health() const;
 	void max_health(const messages::space_unit);
 	team::type team() const;
+	void damage(messages::space_unit);
 
 	bool attacking() const;
 	void attacking(const bool);
@@ -68,7 +69,11 @@ class entity
 	private:
 	entity_id id_;
 	messages::pos_type pos_;
-	messages::space_unit speed_,angle_,direction_,health_,max_health_;
+	messages::space_unit speed_,
+	                     angle_,
+	                     direction_,
+	                     health_,
+	                     max_health_;
 	team::type team_;
 	bool attacking_,
 	     colliding_;
