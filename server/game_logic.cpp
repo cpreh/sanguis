@@ -1,6 +1,6 @@
 #include "../messages/client_info.hpp"
-#include "../messages/player_direction_event.hpp"
-#include "../messages/player_rotation_event.hpp"
+#include "../messages/player_direction.hpp"
+#include "../messages/player_rotation.hpp"
 #include "../messages/player_start_shooting.hpp"
 #include "../messages/player_stop_shooting.hpp"
 #include "../messages/disconnect.hpp"
@@ -41,11 +41,11 @@ void sanguis::server::game_logic::process(const net::id_type id,const messages::
 		boost::mpl::vector<
 			messages::disconnect,
 			messages::client_info,
-			messages::player_rotation_event,
+			messages::player_rotation,
 			messages::player_start_shooting,
 			messages::player_stop_shooting,
 			messages::player_change_weapon,
-			messages::player_direction_event
+			messages::player_direction
 		>,
 		void>(
 		mf,
@@ -134,7 +134,7 @@ void sanguis::server::game_logic::operator()(const net::id_type id,const message
 	send(new messages::change_weapon(players[id]->id(),e.weapon()));
 }
 
-void sanguis::server::game_logic::operator()(const net::id_type id,const messages::player_rotation_event &e)
+void sanguis::server::game_logic::operator()(const net::id_type id,const messages::player_rotation &e)
 {
 	if (players.find(id) == players.end())
 	{
@@ -205,7 +205,7 @@ void sanguis::server::game_logic::operator()(const net::id_type id,const message
 	players[id]->shooting(false);
 }
 
-void sanguis::server::game_logic::operator()(const net::id_type id,const messages::player_direction_event &e)
+void sanguis::server::game_logic::operator()(const net::id_type id,const messages::player_direction &e)
 {
 	if (players.find(id) == players.end())
 	{

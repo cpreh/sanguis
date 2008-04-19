@@ -33,8 +33,8 @@ class game_logic
 	// reactions
 	void update(const time_type);
 	void operator()(const net::id_type,const messages::client_info &);
-	void operator()(const net::id_type,const messages::player_direction_event &);
-	void operator()(const net::id_type,const messages::player_rotation_event &);
+	void operator()(const net::id_type,const messages::player_direction &);
+	void operator()(const net::id_type,const messages::player_rotation &);
 	void operator()(const net::id_type,const messages::player_start_shooting &);
 	void operator()(const net::id_type,const messages::player_stop_shooting &);
 	void operator()(const net::id_type,const messages::player_change_weapon &);

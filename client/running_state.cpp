@@ -11,8 +11,8 @@
 #include "../messages/game_state.hpp"
 #include "../messages/move.hpp"
 #include "../messages/player_change_weapon.hpp"
-#include "../messages/player_direction_event.hpp"
-#include "../messages/player_rotation_event.hpp"
+#include "../messages/player_direction.hpp"
+#include "../messages/player_rotation.hpp"
 #include "../messages/player_start_shooting.hpp"
 #include "../messages/player_stop_shooting.hpp"
 #include "../draw/player.hpp"
@@ -145,7 +145,7 @@ void sanguis::client::running_state::handle_direction(
 
 	if(last_direction != direction)
 		context<machine>().send(
-			new messages::player_direction_event(
+			new messages::player_direction(
 				player.id(),
 				sge::math::structure_cast<messages::space_unit>(direction)));
 }
@@ -179,7 +179,7 @@ void sanguis::client::running_state::handle_rotation(
 		return;
 
 	context<machine>().send(
-		new messages::player_rotation_event(
+		new messages::player_rotation(
 			player.id(),
 			messages::mu(
 				*rotation)));

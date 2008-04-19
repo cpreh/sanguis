@@ -1,5 +1,5 @@
-#ifndef SANGUIS_MESSAGES_PLAYER_DIRECTION_EVENT_HPP_INCLUDED
-#define SANGUIS_MESSAGES_PLAYER_DIRECTION_EVENT_HPP_INCLUDED
+#ifndef SANGUIS_MESSAGES_PLAYER_DIRECTION_HPP_INCLUDED
+#define SANGUIS_MESSAGES_PLAYER_DIRECTION_HPP_INCLUDED
 
 #include "entity_message.hpp"
 #include "types.hpp"
@@ -10,10 +10,10 @@ namespace sanguis
 namespace messages
 {
 
-class player_direction_event : public entity_message {
+class player_direction : public entity_message {
 public:
-	player_direction_event();
-	player_direction_event(
+	player_direction();
+	player_direction(
 		const entity_id,
 		const vector2 &);
 

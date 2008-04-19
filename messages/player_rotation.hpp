@@ -1,5 +1,5 @@
-#ifndef SANGUIS_MESSAGES_PLAYER_ROTATION_EVENT_INCLUDED
-#define SANGUIS_MESSAGES_PLAYER_ROTATION_EVENT_INCLUDED
+#ifndef SANGUIS_MESSAGES_PLAYER_ROTATION_INCLUDED
+#define SANGUIS_MESSAGES_PLAYER_ROTATION_INCLUDED
 
 #include "entity_message.hpp"
 #include "types.hpp"
@@ -10,10 +10,10 @@ namespace sanguis
 namespace messages
 {
 
-class player_rotation_event : public entity_message {
+class player_rotation : public entity_message {
 public:
-	player_rotation_event();
-	player_rotation_event(
+	player_rotation();
+	player_rotation(
 		const entity_id,
 		const space_unit angle);
 
