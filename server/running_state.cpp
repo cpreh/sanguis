@@ -112,6 +112,7 @@ boost::statechart::result sanguis::server::running_state::react(const tick_event
 				context<machine>().send(message_convert<messages::stop_attacking>(*i));
 				i->attacking(false);
 			}*/
+		}
 		if (i->type() == entity_type::player && dynamic_cast<server::player &>(*i).spawn_bullet())
 			add_bullet();
 

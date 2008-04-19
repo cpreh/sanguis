@@ -1,6 +1,8 @@
 #include "entity.hpp"
 #include "../angle_vector.hpp"
 #include <sge/math/vec_dim.hpp>
+#include <sge/math/power.hpp>
+#include <cmath>
 
 sanguis::server::entity::entity(
 	const entity_id id_,
@@ -11,7 +13,16 @@ sanguis::server::entity::entity(
 	const messages::space_unit max_health_,
 	const team::type team_,
 	const messages::space_unit speed_)
-: id_(id_),pos_(pos_),speed_(speed_),angle_(angle_),direction_(direction_),health_(health_),max_health_(max_health_),team_(team_),attacking_(false)
+: id_(id_),
+  pos_(pos_),
+  speed_(speed_),
+  angle_(angle_),
+  direction_(direction_),
+  health_(health_),
+  max_health_(max_health_),
+  team_(team_),
+  attacking_(false),
+  colliding_(false)
 {}
 
 bool sanguis::server::entity::attacking() const
@@ -62,6 +73,13 @@ sanguis::messages::pos_type sanguis::server::entity::pos() const
 sanguis::messages::pos_type sanguis::server::entity::abs_speed() const
 {
 	return angle_to_vector(direction_) * speed_ * max_speed();
+}
+
+sanguis::messages::space_unit sanguis::server::entity::radius() const
+{
+	return std::sqrt(
+		sge::math::quad(center().x() - pos().x())
+		+ sge::math::quad(center().y() - pos().y()));
 }
 
 sanguis::messages::space_unit sanguis::server::entity::speed() const
