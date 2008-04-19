@@ -71,15 +71,14 @@ void sanguis::draw::scene_drawer::process_message(const client_messages::base& m
 		boost::bind(&scene_drawer::process_default_client_msg, this, _1));
 }
 
-void sanguis::draw::scene_drawer::draw(const tick_data &t)
+void sanguis::draw::scene_drawer::draw(const time_type delta)
 {
 	sprites.clear();
 
-	const sge::timer::frames_type diff_time = t.diff_time;
 	BOOST_FOREACH(entity_map::value_type val, entities)
 	{
 		entity& e = *val.second;
-		e.update(diff_time);
+		e.update(delta);
 		const entity::sprite_vector& s(e.to_sprites());
 		std::copy(s.begin(), s.end(), std::back_inserter(sprites));
 	}

@@ -30,7 +30,7 @@ void sanguis::server::projectiles::projectile::update(
 {
 	if(lifetime.expired())
 		die();
-	// TODO: check for colissions with other teams here
+	// TODO: check for collisions with other teams here
 }
 
 sanguis::messages::space_unit

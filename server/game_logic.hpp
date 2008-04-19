@@ -19,7 +19,6 @@ class player;
 class game_logic
 {
 	public:
-	typedef sge::timer::frames_type time_type;
 	typedef boost::function<void (messages::base *const)> send_callback;
 
 	game_logic(send_callback);

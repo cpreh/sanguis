@@ -1,19 +1,21 @@
 #ifndef SANGUIS_SERVER_TICK_EVENT_HPP_INCLUDED
 #define SANGUIS_SERVER_TICK_EVENT_HPP_INCLUDED
 
-#include "data_event.hpp"
-#include <sge/timer.hpp>
+#include "time_type.hpp"
+#include <boost/statechart/event.hpp>
 
 namespace sanguis
 {
-struct tick_data 
+class tick_event : public boost::statechart::event<tick_event>
 {
-	sge::timer::frames_type diff_time;
+	public:
+	tick_event(const time_type);
+	time_type delta() const;
 
-	tick_data(const sge::timer::frames_type diff_time) : diff_time(diff_time) {}
+	private:
+	time_type delta_;
 };
 
-typedef data_event<tick_data> tick_event;
 }
 
 #endif

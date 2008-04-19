@@ -67,7 +67,7 @@ boost::statechart::result sanguis::client::running_state::react(const tick_event
 	machine &m = context<machine>();
 	m.sys.input_system->dispatch();
 
-	drawer.draw(t.data);
+	drawer.draw(t.delta());
 	
 	return discard_event();
 }
