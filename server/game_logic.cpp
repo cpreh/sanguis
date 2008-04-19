@@ -84,7 +84,7 @@ void sanguis::server::game_logic::update(const time_type delta)
 
 		i->update(static_cast<entity::time_type>(delta));
 
-		if (update_pos)
+		if (i->type() != entity_type::indeterminate && update_pos)
 		{
 			send(message_convert<messages::move>(*i));
 			send(message_convert<messages::speed>(*i));
@@ -99,6 +99,10 @@ void sanguis::server::game_logic::create_game(const net::id_type net_id,const me
 {
 	assert(!entities.size());
 
+	sge::clog << SGE_TEXT("server: sending game messages\n");
+
+	send(new messages::game_state(game_state(truncation_check_cast<game_state::score_type>(0))));
+
 	entity &raw_player = insert_entity(entity_ptr(new entities::player(
 			net_id,
 			messages::pos_type(
@@ -112,11 +116,6 @@ void sanguis::server::game_logic::create_game(const net::id_type net_id,const me
 			m.name())));
 	
 	players[net_id] = &dynamic_cast<entities::player &>(raw_player);
-
-	sge::clog << SGE_TEXT("server: sending game messages\n");
-
-	send(new messages::game_state(game_state(truncation_check_cast<game_state::score_type>(0))));
-	send(message_convert<messages::add>(*players[net_id]));
 
 	enemy_timer.v().reset();
 }
@@ -142,7 +141,10 @@ void sanguis::server::game_logic::operator()(const net::id_type id,const message
 sanguis::server::entity &sanguis::server::game_logic::insert_entity(entity_ptr e)
 {
 	entities.push_back(e);
-	return entities.back();
+	entity &ref = entities.back();
+	if (ref.type() != entity_type::indeterminate)
+		send(message_convert<messages::add>(ref));
+	return ref;
 }
 
 void sanguis::server::game_logic::add_enemy()
@@ -163,10 +165,7 @@ void sanguis::server::game_logic::add_enemy()
 
 	const messages::pos_type pos = center + screen_center;
 
-	entities::zombie &b = dynamic_cast<entities::zombie &>(
-		insert_entity(entity_ptr(new entities::zombie(pos,angle,messages::mu(1),angle,messages::mu(50),messages::mu(50)))));
-
-	send(message_convert<messages::add>(b));
+	insert_entity(entity_ptr(new entities::zombie(pos,angle,messages::mu(1),angle,messages::mu(50),messages::mu(50))));
 }
 
 void sanguis::server::game_logic::operator()(const net::id_type id,const messages::player_start_shooting &)
