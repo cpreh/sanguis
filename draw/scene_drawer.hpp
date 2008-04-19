@@ -11,7 +11,7 @@
 #include <sge/timer.hpp>
 #include "../entity_id.hpp"
 #include "../messages/fwd.hpp"
-#include "../time_diff.hpp"
+#include "../time_type.hpp"
 #include "../client_messages/fwd.hpp"
 #include "entity.hpp"
 
@@ -31,7 +31,7 @@ public:
 
 	void process_message(const client_messages::base&);
 
-	void draw(const time_diff);
+	void draw(const time_type);
 
 	const player& get_player() const;
 

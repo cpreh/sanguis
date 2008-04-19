@@ -58,7 +58,7 @@ void sanguis::server::game_logic::handle_default_msg(const net::id_type id,const
 	sge::clog << SGE_TEXT("server: received unexpected message from id ") << id << SGE_TEXT(" of type ") << typeid(m).name() << SGE_TEXT("\n");
 }
 
-void sanguis::server::game_logic::update(const time_diff delta)
+void sanguis::server::game_logic::update(const time_type delta)
 {
 	if (enemy_timer.v().update_b())
 		add_enemy();

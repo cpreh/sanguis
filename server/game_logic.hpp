@@ -30,7 +30,7 @@ class game_logic
 	bool aborted() const { return aborted_; }
 
 	// reactions
-	void update(const time_diff);
+	void update(const time_type);
 	void operator()(const net::id_type,const messages::client_info &);
 	void operator()(const net::id_type,const messages::player_direction &);
 	void operator()(const net::id_type,const messages::player_rotation &);

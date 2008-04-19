@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_TICK_EVENT_HPP_INCLUDED
 #define SANGUIS_SERVER_TICK_EVENT_HPP_INCLUDED
 
-#include "time_diff.hpp"
+#include "time_type.hpp"
 #include <boost/statechart/event.hpp>
 
 namespace sanguis
@@ -9,11 +9,11 @@ namespace sanguis
 class tick_event : public boost::statechart::event<tick_event>
 {
 	public:
-	tick_event(const time_diff);
-	time_diff delta() const;
+	tick_event(const time_type);
+	time_type delta() const;
 
 	private:
-	time_diff delta_;
+	time_type delta_;
 };
 
 }

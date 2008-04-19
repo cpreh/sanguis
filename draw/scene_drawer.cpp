@@ -71,7 +71,7 @@ void sanguis::draw::scene_drawer::process_message(const client_messages::base& m
 		boost::bind(&scene_drawer::process_default_client_msg, this, _1));
 }
 
-void sanguis::draw::scene_drawer::draw(const time_diff delta)
+void sanguis::draw::scene_drawer::draw(const time_type delta)
 {
 	sprites.clear();
 
