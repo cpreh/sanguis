@@ -1,5 +1,6 @@
 #include "model.hpp"
 #include <sge/exception.hpp>
+#include <sge/string.hpp>
 #include <sge/iostream.hpp>
 #include <ostream>
 #include <utility>
@@ -14,7 +15,13 @@ sanguis::load::model::model::model(
 			sge::clog << SGE_TEXT("warning: ") << *beg << SGE_TEXT(" is not a directory!\n");
 			continue;
 		}
-		parts.insert(std::make_pair(beg->leaf(), part(*beg)));
+		
+		if(parts.insert(
+			std::make_pair(
+				beg->leaf(),
+				part(*beg)))
+		.second == false)
+			throw sge::exception(SGE_TEXT("Double insert in model::model: ") + beg->string());
 	}
 }
 
@@ -37,8 +44,7 @@ sanguis::load::model::model::const_iterator
 sanguis::load::model::model::end() const
 {
 	return parts.end();
-}
-
+} 
 sanguis::load::model::model::size_type
 sanguis::load::model::model::size() const
 {

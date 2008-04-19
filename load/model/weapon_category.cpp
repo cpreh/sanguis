@@ -1,4 +1,6 @@
 #include "weapon_category.hpp"
+#include <sge/exception.hpp>
+#include <sge/string.hpp>
 #include <boost/array.hpp>
 #include <utility>
 #include <iterator>
@@ -26,14 +28,17 @@ sanguis::load::model::weapon_category::weapon_category(
 		const sge::path animation_path(path / *it);
 		if(!boost::filesystem::exists(animation_path))
 			continue;
-		animations.insert(
+		
+		if(animations.insert(
 			std::make_pair(
 				static_cast<animation_type::type>(
 					std::distance(
 						static_cast<animation_type_array const&>(animation_types).begin(),
 						it)),
 				animation(
-					animation_path)));
+					animation_path)))
+		.second == false)
+			throw sge::exception(SGE_TEXT("Double insert in model::weapon_category: ") + animation_path.string());
 	}
 }
 

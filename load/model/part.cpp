@@ -1,4 +1,6 @@
 #include "part.hpp"
+#include <sge/exception.hpp>
+#include <sge/string.hpp>
 #include <boost/array.hpp>
 #include <utility>
 #include <iterator>
@@ -7,10 +9,11 @@ sanguis::load::model::part::part(
 	sge::path const& path)
 : path(path)
 {
-	typedef boost::array<sge::string, weapon_type::size + 1> weapon_type_array;
+	typedef boost::array<sge::string, weapon_type::size> weapon_type_array;
 	const weapon_type_array weapon_types = {
 	{
 		SGE_TEXT("none"),
+		SGE_TEXT("melee"),
 		SGE_TEXT("pistol")
 	} };
 
@@ -21,13 +24,16 @@ sanguis::load::model::part::part(
 		const sge::path weapon_path(path / *it);
 		if(!boost::filesystem::exists(weapon_path))
 			continue;
-		categories.insert(
+
+		if(categories.insert(
 			std::make_pair(
 				static_cast<weapon_type::type>(
 					std::distance(
 						static_cast<weapon_type_array const &>(weapon_types).begin(),
 						it)),
-				weapon_category(weapon_path)));
+				weapon_category(weapon_path)))
+		.second == false)
+			throw sge::exception(SGE_TEXT("Double insert in model::part: ") + weapon_path.string());
 	}
 }
 
