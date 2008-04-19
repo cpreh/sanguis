@@ -3,10 +3,10 @@
 #include "../entity.hpp"
 
 sanguis::server::weapons::melee::melee(
-	messages::space_unit range,
-	time_type base_cooldown,
-	insert_callback insert,
-	messages::space_unit damage)
+	const messages::space_unit range,
+	const time_type base_cooldown,
+	const insert_callback insert,
+	const messages::space_unit damage)
 : weapon(
 		range,
 		base_cooldown,

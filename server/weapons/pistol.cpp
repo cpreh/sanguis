@@ -1,7 +1,8 @@
 #include "pistol.hpp"
 
 sanguis::server::weapons::pistol::pistol(
-	const time_type base_cooldown,insert_callback insert)
+	const time_type base_cooldown,
+	const insert_callback insert)
 : weapon(
 	1000, // FIXME
 	base_cooldown,insert)

@@ -19,7 +19,7 @@ bool sanguis::server::weapons::weapon::attack(
 sanguis::server::weapons::weapon::weapon(
 	const messages::space_unit range_,
 	const time_type base_cooldown_,
-	insert_callback insert_)
+	const insert_callback insert_)
 : range_(range_),
   cooldown_timer(base_cooldown_),
 	insert_(insert_)
