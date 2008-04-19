@@ -68,14 +68,7 @@ void sanguis::server::game_logic::update(const time_type delta)
 
 	for (entity_container::iterator i = entities.begin(); i != entities.end();)
 	{
-		if (i->type() == entity_type::player)
-		{
-			player &p = dynamic_cast<server::player &>(*i);
-			if (p.spawn_bullet())
-				add_bullet(p.net_id());
-		}
-
-		if (i->health() <= static_cast<entity::health_type>(0))
+		if (i->dead())
 		{
 			if (i->type() == entity_type::player)
 			{
@@ -87,6 +80,13 @@ void sanguis::server::game_logic::update(const time_type delta)
 				i = entities.erase(i);
 				continue;
 			}
+		}
+
+		if (i->type() == entity_type::player)
+		{
+			player &p = dynamic_cast<server::player &>(*i);
+			if (p.spawn_bullet())
+				add_bullet(p.net_id());
 		}
 
 		i->update(static_cast<entity::time_type>(delta));
