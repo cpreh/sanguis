@@ -1,4 +1,5 @@
 #include "simple_bullet.hpp"
+#include "../get_dim.hpp"
 
 namespace
 {
@@ -28,6 +29,12 @@ sanguis::entity_type::type
 sanguis::server::projectiles::simple_bullet::type() const
 {
 	return entity_type::bullet;
+}
+
+sanguis::messages::dim_type
+sanguis::server::projectiles::simple_bullet::dim() const
+{
+	return get_dim(SGE_TEXT("bullet"), SGE_TEXT("default"));
 }
 
 void sanguis::server::projectiles::simple_bullet::do_hit(

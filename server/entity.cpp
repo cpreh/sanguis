@@ -133,6 +133,7 @@ void sanguis::server::entity::damage(
 	health_ -= d;
 	if(dead())
 		die();
+	// TODO: send health here!
 }
 
 bool sanguis::server::entity::dead() const
