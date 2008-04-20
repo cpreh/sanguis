@@ -26,6 +26,7 @@ public:
 	bool attack(
 		entity const &from,
 		messages::pos_type const& to);
+	virtual ~weapon();
 protected:
 	weapon(
 		messages::space_unit range,

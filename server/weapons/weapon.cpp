@@ -19,6 +19,9 @@ bool sanguis::server::weapons::weapon::attack(
 	return true;
 }
 
+sanguis::server::weapons::weapon::~weapon()
+{}
+
 sanguis::server::weapons::weapon::weapon(
 	const messages::space_unit range_,
 	const time_type base_cooldown_,
