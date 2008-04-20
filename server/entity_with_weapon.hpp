@@ -12,7 +12,7 @@ namespace server
 class entity_with_weapon : public entity {
 protected:
 	entity_with_weapon(
-		const messages::pos_type &pos,
+		messages::pos_type const &pos,
 		const messages::space_unit angle,
 		const messages::space_unit direction,
 		const messages::space_unit health,
@@ -23,9 +23,12 @@ protected:
 	virtual void update(const time_type);
 public:
 	void change_weapon(weapons::weapon_ptr);
+	void target(
+		messages::pos_type const&);
+	messages::pos_type const &target() const;
 private:
 	weapons::weapon_ptr weapon_;
-	entity *target_;
+	messages::pos_type  target_;
 };
 
 }

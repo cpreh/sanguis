@@ -1,4 +1,14 @@
 #include "entity_with_weapon.hpp"
+#include <limits>
+
+namespace
+{
+
+const sanguis::messages::pos_type target_undefined(
+	std::numeric_limits<sanguis::messages::space_unit>::max(),
+	std::numeric_limits<sanguis::messages::space_unit>::max());
+
+}
 
 sanguis::server::entity_with_weapon::entity_with_weapon(
 	const messages::pos_type &pos_,
@@ -18,7 +28,7 @@ sanguis::server::entity_with_weapon::entity_with_weapon(
 	team_,
 	speed_),
   weapon_(weapon_),
-  target_(0)
+  target_(target_undefined)
 {}
 
 void sanguis::server::entity_with_weapon::update(
@@ -26,8 +36,8 @@ void sanguis::server::entity_with_weapon::update(
 {
 	entity::update(time);
 
-	if(weapon_ && target_ && attacking())
-		weapon_->attack(*this, target_->pos());
+	if(weapon_ && target() != target_undefined && attacking())
+		weapon_->attack(*this, target());
 	// TODO: start_attacking goes here
 }
 
@@ -35,4 +45,16 @@ void sanguis::server::entity_with_weapon::change_weapon(
 	const weapons::weapon_ptr nweapon)
 {
 	weapon_ = nweapon;
+}
+
+void sanguis::server::entity_with_weapon::target(
+	messages::pos_type const &ntarget)
+{
+	target_ = ntarget;
+}
+
+sanguis::messages::pos_type const &
+sanguis::server::entity_with_weapon::target() const
+{
+	return target_;
 }
