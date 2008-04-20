@@ -17,7 +17,7 @@ void sanguis::server::weapons::pistol::do_attack(
 	insert(
 		entity_ptr(
 			new projectiles::simple_bullet(
-				from.pos(),
+				from.center(),
 				from.angle(),
 				from.team(),
 				messages::mu(5))));
