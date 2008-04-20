@@ -145,7 +145,9 @@ void sanguis::server::entity::die()
 	health(messages::mu(0));
 }
 
-void sanguis::server::entity::update(const time_type delta)
+void sanguis::server::entity::update(
+	const time_type delta,
+	entity_container &)
 {
 	pos_ += abs_speed() * delta;
 }

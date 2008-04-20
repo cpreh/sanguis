@@ -25,7 +25,9 @@ protected:
 		time_type lifetime);
 private:
 	virtual bool invulnerable() const;
-	void update(time_type);
+	void update(
+		time_type,
+		entity_container &entities);
 	messages::space_unit max_speed() const;
 	messages::dim_type dim() const;
 

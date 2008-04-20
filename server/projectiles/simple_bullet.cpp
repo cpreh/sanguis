@@ -33,5 +33,6 @@ sanguis::server::projectiles::simple_bullet::type() const
 void sanguis::server::projectiles::simple_bullet::do_hit(
 	entity &target)
 {
-	target.damage(damage);	
+	target.damage(damage);
+	entity::die();
 }

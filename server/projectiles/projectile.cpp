@@ -1,6 +1,8 @@
 #include "projectile.hpp"
+#include "../collision.hpp"
 #include "../../time_util.hpp"
 #include <sge/time.hpp>
+#include <boost/foreach.hpp>
 
 sanguis::server::projectiles::projectile::projectile(
 	messages::pos_type const& pos,
@@ -30,13 +32,31 @@ bool sanguis::server::projectiles::projectile::invulnerable() const
 }
 
 void sanguis::server::projectiles::projectile::update(
-	const time_type time)
+	const time_type time,
+	entity_container &entities)
 {
-	entity::update(time);
+	entity::update(
+		time,
+		entities);
 
-//	if(lifetime.expired())
-//		die();
-	// TODO: check for collisions with other teams here
+	if(lifetime.expired())
+	{
+		die();
+		return;
+	}
+
+	BOOST_FOREACH(
+		entity &e,
+		entities)
+	{
+		if(e.team() != team()
+		&& collides(
+			e,
+			*this))
+			do_hit(e);
+		if(dead())
+			return;
+	}
 }
 
 sanguis::messages::space_unit

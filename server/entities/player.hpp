@@ -35,7 +35,6 @@ class player : public entity_with_weapon
 	messages::string name() const;
 
 	private:
-	void update(time_type);
 
 	net::id_type net_id_;
 	messages::string name_;

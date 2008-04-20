@@ -48,13 +48,6 @@ sanguis::messages::space_unit sanguis::server::entities::player::max_speed() con
 	return running_speed.value();
 }
 
-void sanguis::server::entities::player::update(
-	const time_type delta)
-{
-	entity_with_weapon::update(delta);
-	// TODO: extra logic here or remove this function?
-}
-
 sanguis::entity_type::type
 sanguis::server::entities::player::type() const
 {

@@ -13,6 +13,9 @@ namespace sanguis
 namespace server
 {
 
+class entity;
+typedef boost::ptr_list<entity> entity_container;
+
 class entity
 {
 	public:
@@ -62,7 +65,9 @@ class entity
 	virtual messages::space_unit max_speed() const = 0;
 	virtual entity_type::type type() const = 0;
 	virtual bool invulnerable() const = 0;
-	virtual void update(const time_type);
+	virtual void update(
+		const time_type,
+		entity_container &entities);
 	virtual ~entity();
 	private:
 	entity_id id_;
@@ -78,7 +83,6 @@ class entity
 };
 
 typedef std::auto_ptr<entity> entity_ptr;
-typedef boost::ptr_list<server::entity> entity_container;
 
 }
 }

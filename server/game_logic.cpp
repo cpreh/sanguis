@@ -83,7 +83,9 @@ void sanguis::server::game_logic::update(const time_type delta)
 			}
 		}
 
-		i->update(static_cast<entity::time_type>(delta));
+		i->update(
+			static_cast<entity::time_type>(delta),
+			entities);
 
 		if (i->type() != entity_type::indeterminate && update_pos)
 		{
@@ -179,8 +181,6 @@ sanguis::server::entity &sanguis::server::game_logic::insert_entity(entity_ptr e
 
 void sanguis::server::game_logic::add_enemy()
 {
-	sge::clog << SGE_TEXT("server: adding enemy\n");
-	
 	const messages::space_unit rand_angle = sge::math::random(messages::mu(0),
 					messages::mu(2)*sge::math::pi<messages::space_unit>());
 	const messages::space_unit radius = messages::mu(std::max(resolution().w(),resolution().h()))/messages::mu(2);

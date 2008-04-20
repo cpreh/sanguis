@@ -32,9 +32,12 @@ sanguis::server::entity_with_weapon::entity_with_weapon(
 {}
 
 void sanguis::server::entity_with_weapon::update(
-	const time_type time)
+	const time_type time,
+	entity_container &entities)
 {
-	entity::update(time);
+	entity::update(
+		time,
+		entities);
 
 	if(weapon_ && target() != target_undefined && attacking())
 		weapon_->attack(*this, target());

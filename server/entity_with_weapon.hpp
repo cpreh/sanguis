@@ -20,9 +20,12 @@ protected:
 		const team::type team,
 		const messages::space_unit speed,
 		weapons::weapon_ptr);
-	virtual void update(const time_type);
+	virtual void update(
+		const time_type,
+		entity_container &entities);
 public:
-	void change_weapon(weapons::weapon_ptr);
+	void change_weapon(
+		weapons::weapon_ptr);
 	void target(
 		messages::pos_type const&);
 	messages::pos_type const &target() const;
