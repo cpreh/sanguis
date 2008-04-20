@@ -12,7 +12,7 @@ sanguis::server::weapons::create(
 	case weapon_type::melee:
 		return weapon_ptr(
 			new melee(
-				messages::mu(0.1),
+				messages::mu(10),
 				static_cast<time_type>(2),
 				insert,
 				messages::mu(2)
@@ -20,7 +20,8 @@ sanguis::server::weapons::create(
 	case weapon_type::pistol:
 		return weapon_ptr(
 			new pistol(
-				static_cast<time_type>(0.5),insert));
+				static_cast<time_type>(0.5),
+				insert));
 	default:
 		throw sge::exception(SGE_TEXT("Cannot create weapon for given weapon type!"));
 	}

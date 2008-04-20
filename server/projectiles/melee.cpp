@@ -2,17 +2,16 @@
 
 sanguis::server::projectiles::melee::melee(
 	messages::pos_type const& pos,
-	const messages::space_unit angle,
 	const team::type team_,
 	const messages::space_unit damage)
 : projectile(
 	pos,
-	angle,
-	1, // some arbitrary value
+	messages::mu(0),
+	messages::mu(1), // some arbitrary health value
 	team_,
-	0,
-	0,
-	0.1), // short lifetime
+	messages::mu(0),
+	messages::mu(0),
+	static_cast<time_type>(1)), // short lifetime
   damage(damage)
 {}
 
@@ -32,4 +31,5 @@ void sanguis::server::projectiles::melee::do_hit(
 	entity &target)
 {
 	target.damage(damage);
+	die();
 }

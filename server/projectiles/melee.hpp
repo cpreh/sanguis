@@ -14,7 +14,6 @@ class melee : public projectile {
 public:
 	melee(
 		messages::pos_type const& pos,
-		messages::space_unit angle,
 		team::type team,
 		messages::space_unit damage);
 private:

@@ -26,6 +26,12 @@ sanguis::server::projectiles::projectile::projectile(
 		lifetime))
 {}
 
+void sanguis::server::projectiles::projectile::die()
+{
+	entity::die();
+	do_die();
+}
+
 bool sanguis::server::projectiles::projectile::invulnerable() const
 {
 	return true; // most bullets will be invulnerable
@@ -63,12 +69,6 @@ sanguis::messages::space_unit
 sanguis::server::projectiles::projectile::max_speed() const
 {
 	return max_speed_;	
-}
-
-void sanguis::server::projectiles::projectile::die()
-{
-	entity::die();
-	do_die();
 }
 
 void sanguis::server::projectiles::projectile::do_die()

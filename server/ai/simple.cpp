@@ -1,10 +1,11 @@
 #include "simple.hpp"
 #include "../entity.hpp"
+#include "../entities/enemy.hpp"
 #include <sge/math/angle.hpp>
 #include <boost/foreach.hpp>
 
 sanguis::server::ai::simple::simple(
-	entity &me)
+	entities::enemy &me)
 : me(me),
   target(0)
 {}
@@ -36,4 +37,7 @@ void sanguis::server::ai::simple::update(
 		me.angle(*angle);
 	}
 	me.speed(messages::mu(1));
+	me.target(
+		target->center());
+	me.attacking(true);
 }

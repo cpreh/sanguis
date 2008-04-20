@@ -1,4 +1,5 @@
 #include "pistol.hpp"
+#include "../entity.hpp"
 #include "../projectiles/simple_bullet.hpp"
 
 sanguis::server::weapons::pistol::pistol(

@@ -27,7 +27,8 @@
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
 
-sanguis::server::game_logic::game_logic(send_callback send) 
+sanguis::server::game_logic::game_logic(
+	const send_callback send) 
 	: send(send),
 	  aborted_(false),
 	  send_timer(SGE_TEXT("message_freq"),sge::su(0.1)),
@@ -92,6 +93,8 @@ void sanguis::server::game_logic::update(const time_type delta)
 			send(message_convert<messages::move>(*i));
 			send(message_convert<messages::speed>(*i));
 			send(message_convert<messages::rotate>(*i));
+
+			send(message_convert<messages::health>(*i)); // FIXME: this should be elsewhere
 		}
 
 		++i;
@@ -177,6 +180,11 @@ sanguis::server::entity &sanguis::server::game_logic::insert_entity(entity_ptr e
 	if (ref.type() != entity_type::indeterminate)
 		send(message_convert<messages::add>(ref));
 	return ref;
+}
+
+bool sanguis::server::game_logic::aborted() const
+{
+	return aborted_;
 }
 
 void sanguis::server::game_logic::add_enemy()

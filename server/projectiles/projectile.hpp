@@ -23,6 +23,7 @@ protected:
 		messages::space_unit speed,
 		messages::space_unit max_speed,
 		time_type lifetime);
+	void die();
 private:
 	virtual bool invulnerable() const;
 	void update(
@@ -31,7 +32,6 @@ private:
 	messages::space_unit max_speed() const;
 
 	virtual void do_hit(entity &target) = 0;
-	void die();
 	virtual void do_die();
 
 	messages::space_unit max_speed_;

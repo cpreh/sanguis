@@ -1,22 +1,18 @@
-#ifndef GAME_LOGIC_HPP_INCLUDED
-#define GAME_LOGIC_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_GAME_LOGIC_HPP_INCLUDED
+#define SANGUIS_SERVER_GAME_LOGIC_HPP_INCLUDED
 
 #include "../messages/fwd.hpp"
 #include "../net/types.hpp"
 #include "../console_timer.hpp"
-#include "../tick_event.hpp"
+#include "../time_type.hpp"
+#include "entities/fwd.hpp"
 #include "entity.hpp"
-#include <sge/timer.hpp>
 #include <boost/function.hpp>
 
 namespace sanguis
 {
 namespace server
 {
-namespace entities
-{
-class player;
-}
 
 class game_logic
 {
@@ -28,7 +24,7 @@ class game_logic
 	void create_game(const net::id_type,const messages::client_info &);
 	void process(const net::id_type,const messages::base &);
 	entity &insert_entity(entity_ptr);
-	bool aborted() const { return aborted_; }
+	bool aborted() const;
 
 	// reactions
 	void update(const time_type);

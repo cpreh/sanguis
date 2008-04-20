@@ -1,6 +1,6 @@
 #include "melee.hpp"
-#include "../collision.hpp"
 #include "../entity.hpp"
+#include "../projectiles/melee.hpp"
 
 sanguis::server::weapons::melee::melee(
 	const messages::space_unit range,
@@ -18,5 +18,10 @@ void sanguis::server::weapons::melee::do_attack(
 	entity const &from,
 	messages::pos_type const& to)
 {
-	// TODO: spawn melee bullet here
+	insert(
+		entity_ptr(
+			new projectiles::melee(
+				to,
+				from.team(),
+				damage)));
 }

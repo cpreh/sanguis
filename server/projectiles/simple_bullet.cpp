@@ -41,5 +41,5 @@ void sanguis::server::projectiles::simple_bullet::do_hit(
 	entity &target)
 {
 	target.damage(damage);
-	entity::die();
+	die();
 }

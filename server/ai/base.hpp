@@ -9,6 +9,7 @@ namespace sanguis
 {
 namespace server
 {
+
 namespace ai
 {
 
