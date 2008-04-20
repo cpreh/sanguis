@@ -13,15 +13,15 @@ class entity_with_weapon : public entity {
 protected:
 	entity_with_weapon(
 		messages::pos_type const &pos,
-		const messages::space_unit angle,
-		const messages::space_unit direction,
-		const messages::space_unit health,
-		const messages::space_unit max_health,
-		const team::type team,
-		const messages::space_unit speed,
+		messages::space_unit angle,
+		messages::space_unit direction,
+		messages::space_unit health,
+		messages::space_unit max_health,
+		team::type team,
+		messages::space_unit speed,
 		weapons::weapon_ptr);
 	virtual void update(
-		const time_type,
+		time_type,
 		entity_container &entities);
 public:
 	void change_weapon(

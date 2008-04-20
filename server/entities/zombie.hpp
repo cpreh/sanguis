@@ -1,10 +1,8 @@
 #ifndef SANGUIS_SERVER_ENTITIES_ZOMBIE_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_ZOMBIE_HPP_INCLUDED
 
-#include "../entity_with_weapon.hpp"
+#include "enemy.hpp"
 #include "../../net/types.hpp"
-#include <sge/timer.hpp>
-#include <sge/console/console.hpp>
 
 namespace sanguis
 {
@@ -12,7 +10,7 @@ namespace server
 {
 namespace entities
 {
-class zombie : public entity_with_weapon
+class zombie : public enemy
 {
 	public:
 	zombie(
@@ -27,13 +25,8 @@ class zombie : public entity_with_weapon
 	messages::space_unit max_speed() const;
 	entity_type::type type() const;
 	bool invulnerable() const;
-	void attack(entity &);
-
-	private:
-	sge::timer cooldown;
 };
 }
 }
 }
-
 #endif

@@ -163,7 +163,7 @@ void sanguis::server::game_logic::operator()(const net::id_type id,const message
 	// FIXME: we should really transport the target point over the network
 	player_.target(
 		player_.pos()
-		+ player_.direction() * 100);
+		+ angle_to_vector(player_.direction()) * 100);
 
 	player_.angle(e.angle());
 	send(message_convert<messages::rotate>(player_));

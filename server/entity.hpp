@@ -1,20 +1,16 @@
 #ifndef SANGUIS_SERVER_ENTITY_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITY_HPP_INCLUDED
 
+#include "entity_fwd.hpp"
+#include "teams.hpp"
 #include "../messages/types.hpp"
 #include "../entity_id.hpp"
 #include "../entity_type.hpp"
-#include "teams.hpp"
-#include <boost/ptr_container/ptr_list.hpp>
-#include <memory>
 
 namespace sanguis
 {
 namespace server
 {
-
-class entity;
-typedef boost::ptr_list<entity> entity_container;
 
 class entity
 {
@@ -81,8 +77,6 @@ class entity
 	bool attacking_,
 	     colliding_;
 };
-
-typedef std::auto_ptr<entity> entity_ptr;
 
 }
 }
