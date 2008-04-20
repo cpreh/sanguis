@@ -1,4 +1,6 @@
 #include "projectile.hpp"
+#include "../../time_util.hpp"
+#include <sge/time.hpp>
 
 sanguis::server::projectiles::projectile::projectile(
 	messages::pos_type const& pos,
@@ -17,7 +19,9 @@ sanguis::server::projectiles::projectile::projectile(
 	team_,
 	speed),
   max_speed_(max_speed_),
-  lifetime(lifetime)
+  lifetime(
+  	to_sge_time(
+		lifetime))
 {}
 
 bool sanguis::server::projectiles::projectile::invulnerable() const
@@ -30,8 +34,8 @@ void sanguis::server::projectiles::projectile::update(
 {
 	entity::update(time);
 
-	if(lifetime.expired())
-		die();
+//	if(lifetime.expired())
+//		die();
 	// TODO: check for collisions with other teams here
 }
 
