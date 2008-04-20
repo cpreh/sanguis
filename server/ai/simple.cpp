@@ -31,6 +31,9 @@ void sanguis::server::ai::simple::update(
 			me.center(),
 			target->center()));
 	if(angle)
+	{
+		me.direction(*angle);
 		me.angle(*angle);
+	}
 	me.speed(messages::mu(1));
 }
