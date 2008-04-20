@@ -17,6 +17,7 @@
 #include "converter.hpp"
 #include "entities/player.hpp"
 #include "entities/zombie.hpp"
+#include "weapons/factory.hpp"
 
 #include <sge/iostream.hpp>
 #include <sge/math/random.hpp>
@@ -123,25 +124,54 @@ void sanguis::server::game_logic::create_game(const net::id_type net_id,const me
 void sanguis::server::game_logic::operator()(const net::id_type id,const messages::player_change_weapon &e)
 {
 	// TODO: check if the player _has_ this weapon before assigning it
-	send(new messages::change_weapon(players[id]->id(),e.weapon()));
+	
+	const player_map::iterator it(players.find(id));
+	if (it == players.end())
+	{
+		sge::clog << SGE_TEXT("server: got player_change_weapon from spectator ") << id << SGE_TEXT('\n');
+		return;
+	}
+	entities::player &player_(*it->second);
+
+	const weapon_type::type type(static_cast<weapon_type::type>(e.weapon())); // FIXME
+
+	if(type != weapon_type::none)
+		player_.change_weapon(
+			weapons::create(
+				type,
+				boost::bind(
+					&game_logic::insert_entity,
+					this,
+					_1)));
+
+	send(new messages::change_weapon(player_.id(), e.weapon()));
 }
 
 void sanguis::server::game_logic::operator()(const net::id_type id,const messages::player_rotation &e)
 {
-	if (players.find(id) == players.end())
+	const player_map::iterator it(players.find(id));
+	if (it == players.end())
 	{
-		sge::clog << SGE_TEXT("server: got rotation_event from spectator ") << id << SGE_TEXT("\n");
+		sge::clog << SGE_TEXT("server: got rotation_event from spectator ") << id << SGE_TEXT('\n');
 		return;
 	}
 
-	players[id]->angle(e.angle());
-	send(message_convert<messages::rotate>(*players[id]));
+	entities::player &player_(*it->second);
+
+	// FIXME: we should really transport the target point over the network
+	player_.target(
+		player_.pos()
+		+ player_.direction() * 100);
+
+	player_.angle(e.angle());
+	send(message_convert<messages::rotate>(player_));
 }
 
 sanguis::server::entity &sanguis::server::game_logic::insert_entity(entity_ptr e)
 {
 	entities.push_back(e);
 	entity &ref = entities.back();
+
 	if (ref.type() != entity_type::indeterminate)
 		send(message_convert<messages::add>(ref));
 	return ref;
@@ -176,7 +206,7 @@ void sanguis::server::game_logic::operator()(const net::id_type id,const message
 		return;
 	}
 
-	players[id]->shooting(true);
+	players[id]->attacking(true);
 }
 
 void sanguis::server::game_logic::operator()(const net::id_type id,const messages::player_stop_shooting &)
@@ -187,28 +217,31 @@ void sanguis::server::game_logic::operator()(const net::id_type id,const message
 		return;
 	}
 
-	players[id]->shooting(false);
+	players[id]->attacking(false);
 }
 
 void sanguis::server::game_logic::operator()(const net::id_type id,const messages::player_direction &e)
 {
-	if (players.find(id) == players.end())
+	const player_map::iterator it(players.find(id));
+	if (it == players.end())
 	{
 		sge::clog << SGE_TEXT("server: got direction_event from spectator ") << id << SGE_TEXT("\n");
 		return;
 	}
 
+	entities::player &player_(*it->second);
+
 	if (e.dir().is_null())
 	{
-		players[id]->speed(messages::mu(0));
+		player_.speed(messages::mu(0));
 	}
 	else
 	{
-		players[id]->speed(messages::mu(1));
-		players[id]->direction(*sge::math::angle_to<messages::space_unit>(e.dir()));
+		player_.speed(messages::mu(1));
+		player_.direction(*sge::math::angle_to<messages::space_unit>(e.dir()));
 	}
 
-	send(message_convert<messages::speed>(*players[id]));
+	send(message_convert<messages::speed>(player_));
 }
 
 void sanguis::server::game_logic::operator()(const net::id_type id,const messages::client_info&m) 

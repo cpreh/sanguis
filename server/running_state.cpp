@@ -2,11 +2,13 @@
 #include "waiting_state.hpp"
 
 #include <sge/iostream.hpp>
+#include <ostream>
 
 #include <boost/bind.hpp>
 
 sanguis::server::running_state::running_state(my_context ctx)
-	: my_base(ctx),logic(boost::bind(&server::machine::send,&(context<machine>()),_1))
+	: my_base(ctx),
+	logic(boost::bind(&server::machine::send,&(context<machine>()),_1))
 {
 	sge::clog << SGE_TEXT("server: entering running state\n");
 }
@@ -20,7 +22,7 @@ boost::statechart::result sanguis::server::running_state::react(const tick_event
 boost::statechart::result sanguis::server::running_state::react(const message_event&m) 
 {
 	logic.process(m.id,*m.message);
-	if (logic.aborted())
-		return transit<waiting_state>();
-	return discard_event();
+	return logic.aborted()
+		? transit<waiting_state>()
+		: discard_event();
 }

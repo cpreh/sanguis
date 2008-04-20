@@ -1,5 +1,13 @@
 #include "simple_bullet.hpp"
 
+namespace
+{
+
+const sanguis::messages::space_unit bullet_speed(
+	sanguis::messages::mu(0.1));
+
+}
+
 sanguis::server::projectiles::simple_bullet::simple_bullet(
 	messages::pos_type const& pos,
 	const messages::space_unit angle,
@@ -8,11 +16,11 @@ sanguis::server::projectiles::simple_bullet::simple_bullet(
 : projectile(
 	pos,
 	angle,
-	1,
+	messages::mu(1),
 	team_,
-	0.1, // FIXME
-	0.1,
-	10),
+	bullet_speed,
+	bullet_speed,
+	static_cast<time_type>(10)),
   damage(damage)
 {}
 

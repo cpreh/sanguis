@@ -44,7 +44,7 @@ sanguis::server::projectiles::projectile::max_speed() const
 sanguis::messages::dim_type
 sanguis::server::projectiles::projectile::dim() const
 {
-	return messages::dim_type(1,1); // FIXME
+	return messages::dim_type(5,5); // FIXME
 }
 
 void sanguis::server::projectiles::projectile::die()

@@ -29,7 +29,6 @@ class player : public entity_with_weapon
 	entity_type::type type() const;
 
 	// own functions
-	void shooting(const bool);
 	void attack(entity &);
 	bool invulnerable() const;
 	net::id_type net_id() const;
@@ -39,7 +38,6 @@ class player : public entity_with_weapon
 	void update(time_type);
 
 	net::id_type net_id_;
-	bool shooting_;
 	messages::string name_;
 };
 }

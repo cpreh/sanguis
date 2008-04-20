@@ -28,7 +28,6 @@ sanguis::server::entities::player::player(
 			speed_,
 			weapons::weapon_ptr()),
 		net_id_(net_id_),
-		shooting_(false),
 		name_(name_)
 {}
 
@@ -49,15 +48,11 @@ sanguis::messages::space_unit sanguis::server::entities::player::max_speed() con
 	return running_speed.value();
 }
 
-void sanguis::server::entities::player::shooting(const bool n)
-{
-	shooting_ = n;
-}
-
 void sanguis::server::entities::player::update(
 	const time_type delta)
 {
-	entity::update(delta);
+	entity_with_weapon::update(delta);
+	// TODO: extra logic here or remove this function?
 }
 
 sanguis::entity_type::type
