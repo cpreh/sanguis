@@ -18,7 +18,7 @@ CHECK_CXX_SOURCE_RUNS(
 	 HAVE_VARIADIC_TEMPLATES)
 
 IF (${CMAKE_COMPILER_IS_GNUCXX})
-	SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ansi -pedantic -Wall -Wextra -Wconversion -Wfloat-equal")
+	SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ansi -pedantic-errors -Wall -Wextra -Wconversion -Wfloat-equal")
 ENDIF ()
 
 IF (ENABLE_DEBUG AND CMAKE_COMPILER_IS_GNUCXX)
