@@ -3,6 +3,7 @@
 
 #include "entity_fwd.hpp"
 #include "teams.hpp"
+#include "send_callback.hpp"
 #include "../messages/types.hpp"
 #include "../entity_id.hpp"
 #include "../entity_type.hpp"
@@ -14,11 +15,12 @@ namespace server
 
 class entity
 {
-	public:
+public:
 	typedef messages::space_unit time_type;
 	typedef messages::space_unit health_type;
-
+protected:
 	entity(
+		const send_callback &,
 		const messages::pos_type &pos,
 		const messages::space_unit angle,
 		const messages::space_unit direction,
@@ -26,7 +28,7 @@ class entity
 		const messages::space_unit max_health,
 		const team::type team,
 		const messages::space_unit speed);
-
+public:
 	entity_id id() const;
 
 	messages::pos_type pos() const;
@@ -65,8 +67,11 @@ class entity
 		const time_type,
 		entity_container &entities);
 	virtual ~entity();
-	private:
+protected:
+	void send(messages::base *); // TODO: this should be an auto_ptr
+private:
 	entity_id id_;
+	send_callback send_callback_;
 	messages::pos_type pos_;
 	messages::space_unit speed_,
 	                     angle_,

@@ -14,6 +14,7 @@ class zombie : public enemy
 {
 	public:
 	zombie(
+		const send_callback&,
 		const messages::pos_type &center,
 		const messages::space_unit direction,
 		const messages::space_unit speed,

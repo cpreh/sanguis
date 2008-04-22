@@ -7,7 +7,7 @@
 #include "../time_type.hpp"
 #include "entities/fwd.hpp"
 #include "entity.hpp"
-#include <boost/function.hpp>
+#include "send_callback.hpp"
 
 namespace sanguis
 {
@@ -17,8 +17,6 @@ namespace server
 class game_logic
 {
 	public:
-	typedef boost::function<void (messages::base *const)> send_callback;
-
 	game_logic(send_callback);
 	void add_enemy();
 	void create_game(const net::id_type,const messages::client_info &);

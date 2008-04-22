@@ -1,6 +1,7 @@
 #include "enemy.hpp"
 
 sanguis::server::entities::enemy::enemy(
+	send_callback const &send_callback_,
 	messages::pos_type const &pos,
 	const messages::space_unit angle,
 	const messages::space_unit direction,
@@ -11,6 +12,7 @@ sanguis::server::entities::enemy::enemy(
 	weapons::weapon_ptr weapon_,
 	const ai::ai_ptr ai_)
 : entity_with_weapon(
+	send_callback_,
 	pos,
 	angle,
 	direction,

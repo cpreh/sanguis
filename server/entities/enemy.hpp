@@ -14,6 +14,7 @@ namespace entities
 class enemy : public entity_with_weapon {
 protected:
 	enemy(
+		send_callback const &,
 		messages::pos_type const &pos,
 		messages::space_unit angle,
 		messages::space_unit direction,

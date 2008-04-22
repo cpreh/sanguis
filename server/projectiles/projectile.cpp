@@ -13,6 +13,7 @@ sanguis::server::projectiles::projectile::projectile(
 	const messages::space_unit max_speed_,
 	const time_type lifetime)
 : entity(
+	send_callback(), // FIXME
 	pos,
 	angle,
 	angle,

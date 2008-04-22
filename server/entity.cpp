@@ -6,6 +6,7 @@
 #include <cmath>
 
 sanguis::server::entity::entity(
+	const send_callback &send_callback_,
 	const messages::pos_type &pos_,
 	const messages::space_unit angle_,
 	const messages::space_unit direction_,
@@ -14,6 +15,7 @@ sanguis::server::entity::entity(
 	const team::type team_,
 	const messages::space_unit speed_)
 : id_(get_unique_id()),
+  send_callback_(send_callback_),
   pos_(pos_),
   speed_(speed_),
   angle_(angle_),
@@ -160,3 +162,9 @@ void sanguis::server::entity::direction(const messages::space_unit _direction)
 
 sanguis::server::entity::~entity()
 {}
+
+void sanguis::server::entity::send(
+	messages::base *const message)
+{
+	send_callback_(message);
+}

@@ -10,6 +10,7 @@ sge::con::var<sanguis::messages::space_unit> running_speed(SGE_TEXT("player_spee
 }
 
 sanguis::server::entities::player::player(
+	const send_callback &send_callback_,
 	const net::id_type net_id_,
 	const messages::pos_type &center_,
 	const messages::space_unit direction_,
@@ -19,16 +20,17 @@ sanguis::server::entities::player::player(
 	const messages::space_unit max_health_,
 	const messages::string &name_)
 	: entity_with_weapon(
-			center_ - dim()/messages::mu(2),
-			angle_,
-			direction_,
-			health_,
-			max_health_,
-			team::players,
-			speed_,
-			weapons::weapon_ptr()),
-		net_id_(net_id_),
-		name_(name_)
+		send_callback_,
+		center_ - dim()/messages::mu(2),
+		angle_,
+		direction_,
+		health_,
+		max_health_,
+		team::players,
+		speed_,
+		weapons::weapon_ptr()),
+	net_id_(net_id_),
+	name_(name_)
 {}
 
 void sanguis::server::entities::player::attack(entity &) {}

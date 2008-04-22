@@ -109,17 +109,20 @@ void sanguis::server::game_logic::create_game(const net::id_type net_id,const me
 
 	send(new messages::game_state(game_state(truncation_check_cast<game_state::score_type>(0))));
 
-	entity &raw_player = insert_entity(entity_ptr(new entities::player(
-			net_id,
-			messages::pos_type(
-				messages::mu(resolution().w()/2),
-				messages::mu(resolution().h()/2)),
-			messages::mu(0),
-			messages::mu(0),
-			messages::mu(0),
-			messages::mu(100),
-			messages::mu(100),
-			m.name())));
+	entity &raw_player = insert_entity(
+		entity_ptr(
+			new entities::player(
+				send,
+				net_id,
+				messages::pos_type(
+					messages::mu(resolution().w()/2),
+					messages::mu(resolution().h()/2)),
+				messages::mu(0),
+				messages::mu(0),
+				messages::mu(0),
+				messages::mu(100),
+				messages::mu(100),
+				m.name())));
 	
 	players[net_id] = &dynamic_cast<entities::player &>(raw_player);
 
@@ -203,7 +206,14 @@ void sanguis::server::game_logic::add_enemy()
 
 	const messages::pos_type pos = center + screen_center;
 
-	insert_entity(entity_ptr(new entities::zombie(pos,angle,messages::mu(1),angle,messages::mu(50),messages::mu(50))));
+	insert_entity(
+		entity_ptr(
+			new entities::zombie(
+				send,
+				pos,angle,
+				messages::mu(1),
+				angle,messages::mu(50),
+				messages::mu(50))));
 }
 
 void sanguis::server::game_logic::operator()(const net::id_type id,const messages::player_start_shooting &)
