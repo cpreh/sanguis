@@ -8,6 +8,7 @@
 #include "entities/fwd.hpp"
 #include "entity.hpp"
 #include "send_callback.hpp"
+#include "insert_callback.hpp"
 
 namespace sanguis
 {
@@ -36,6 +37,8 @@ class game_logic
 	void handle_default_msg(const net::id_type,const messages::base &);
 	
 	private:
+	insert_callback get_insert_callback();
+
 	typedef std::map<net::id_type,entities::player*> player_map;
 
 	send_callback send;

@@ -78,7 +78,8 @@ void sanguis::server::game_logic::update(const time_type delta)
 			}
 			else
 			{
-				send(message_convert<messages::remove>(*i));
+				if(i->type() != entity_type::indeterminate)
+					send(message_convert<messages::remove>(*i));
 				i = entities.erase(i);
 				continue;
 			}
@@ -147,10 +148,7 @@ void sanguis::server::game_logic::operator()(const net::id_type id,const message
 		player_.change_weapon(
 			weapons::create(
 				type,
-				boost::bind(
-					&game_logic::insert_entity,
-					this,
-					_1)));
+				get_insert_callback()));
 
 	send(new messages::change_weapon(player_.id(), e.weapon()));
 }
@@ -210,6 +208,7 @@ void sanguis::server::game_logic::add_enemy()
 		entity_ptr(
 			new entities::zombie(
 				send,
+				get_insert_callback(),
 				pos,angle,
 				messages::mu(1),
 				angle,messages::mu(50),
@@ -278,6 +277,15 @@ void sanguis::server::game_logic::operator()(const net::id_type id,const message
 
 	sge::clog << SGE_TEXT("server: disconnected\n");
 	aborted_ = true;
+}
+
+sanguis::server::insert_callback
+sanguis::server::game_logic::get_insert_callback()
+{
+	return boost::bind(
+		&game_logic::insert_entity,
+		this,
+		_1);
 }
 
 #if 0

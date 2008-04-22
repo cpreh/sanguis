@@ -1,6 +1,7 @@
 #include "zombie.hpp"
 #include "../get_dim.hpp"
 #include "../ai/simple.hpp"
+#include "../weapons/factory.hpp"
 #include <sge/math/vec_dim.hpp>
 #include <sge/console/console.hpp>
 
@@ -12,6 +13,7 @@ sge::con::var<sanguis::messages::space_unit> zombie_damage(SGE_TEXT("zombie_dama
 
 sanguis::server::entities::zombie::zombie(
 	const send_callback& send_callback_,
+	const insert_callback& insert_callback_,
 	const messages::pos_type &center_,
 	const messages::space_unit direction_,
 	const messages::space_unit speed_,
@@ -27,7 +29,9 @@ sanguis::server::entities::zombie::zombie(
 			max_health_,
 			team::monsters,
 			speed_,
-			weapons::weapon_ptr(),
+			weapons::create(
+				weapon_type::melee,
+				insert_callback_),
 			ai::ai_ptr(
 				new ai::simple(
 					*this)))

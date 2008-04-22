@@ -3,6 +3,7 @@
 
 #include "../../time_type.hpp"
 #include "../../messages/types.hpp"
+#include "../insert_callback.hpp"
 #include <sge/timer.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
@@ -20,8 +21,6 @@ namespace weapons
 
 class weapon {
 public:
-	typedef boost::function<entity & (entity_ptr)> insert_callback;
-
 	messages::space_unit range() const;
 	bool attack(
 		entity const &from,

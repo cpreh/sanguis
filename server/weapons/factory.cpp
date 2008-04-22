@@ -6,13 +6,14 @@
 
 sanguis::server::weapons::weapon_ptr
 sanguis::server::weapons::create(
-	const weapon_type::type type,weapon::insert_callback insert)
+	const weapon_type::type type,
+	const insert_callback insert)
 {
 	switch(type) {
 	case weapon_type::melee:
 		return weapon_ptr(
 			new melee(
-				messages::mu(10),
+				messages::mu(20),
 				static_cast<time_type>(2),
 				insert,
 				messages::mu(2)
