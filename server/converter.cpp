@@ -61,5 +61,5 @@ sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::sto
 template<>
 sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::start_attacking>(const entity &e)
 {
-	return new messages::stop_attacking(e.id());
+	return new messages::start_attacking(e.id());
 }

@@ -14,6 +14,7 @@
 #include "../resolution.hpp"
 #include "message_functor.hpp"
 #include "game_logic.hpp"
+#include "collision.hpp"
 #include "converter.hpp"
 #include "entities/player.hpp"
 #include "entities/zombie.hpp"
@@ -70,6 +71,36 @@ void sanguis::server::game_logic::update(const time_type delta)
 
 	for (entity_container::iterator i = entities.begin(); i != entities.end();)
 	{
+		bool collides_with_something = false;
+		for (entity_container::const_iterator j = entities.begin(); j != entities.end(); ++j)
+		{
+			if (i == j)
+				continue;
+
+			if (collides(*i,*j))
+			{
+				collides_with_something = true;
+				break;
+			}
+		}
+
+		if (collides_with_something)
+		{
+			if (!i->attacking())
+			{
+				i->attacking(true);
+				send(message_convert<messages::start_attacking>(*i));
+			}
+		}
+		else
+		{
+			if (i->attacking())
+			{
+				i->attacking(false);
+				send(message_convert<messages::stop_attacking>(*i));
+			}
+		}
+
 		if (i->dead())
 		{
 			if (i->type() == entity_type::player)
