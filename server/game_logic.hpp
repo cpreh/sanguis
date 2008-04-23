@@ -38,6 +38,7 @@ class game_logic
 	
 	private:
 	insert_callback get_insert_callback();
+	send_callback get_send_callback();
 
 	typedef std::map<net::id_type,entities::player*> player_map;
 

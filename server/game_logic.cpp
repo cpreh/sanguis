@@ -117,6 +117,7 @@ void sanguis::server::game_logic::create_game(const net::id_type net_id,const me
 		entity_ptr(
 			new entities::player(
 				send,
+				boost::bind(&game_logic::insert_entity,this,_1),
 				net_id,
 				messages::pos_type(
 					messages::mu(resolution().w()/2),
@@ -151,6 +152,7 @@ void sanguis::server::game_logic::operator()(const net::id_type id,const message
 		player_.change_weapon(
 			weapons::create(
 				type,
+				get_send_callback(),
 				get_insert_callback()));
 
 	send(new messages::change_weapon(player_.id(), e.weapon()));
@@ -291,26 +293,8 @@ sanguis::server::game_logic::get_insert_callback()
 		_1);
 }
 
-#if 0
-void sanguis::server::running_state::ai_hook(entity &e,const entity::time_type diff)
+sanguis::server::send_callback
+sanguis::server::game_logic::get_send_callback()
 {
-	switch (e.ai_type())
-	{
-		case ai_type::none:
-			e.pos(e.pos() + e.abs_speed() * diff);
-		break;
-		case ai_type::simple:
-		{
-			const messages::pos_type diffvec = (player_->center() - e.center());
-			if (!diffvec.is_null())
-			{
-				const messages::space_unit angle = *sge::math::angle_to<messages::space_unit>(diffvec);
-				e.pos(e.pos() + sge::math::normalize(diffvec) * e.max_speed() * diff);
-				e.angle(angle);
-				e.direction(angle);
-			}
-		}
-		break;
-	}
+	return send;
 }
-#endif

@@ -13,6 +13,7 @@ class entity_with_weapon : public entity {
 protected:
 	entity_with_weapon(
 		send_callback const &,
+		insert_callback const &,
 		messages::pos_type const &pos,
 		messages::space_unit angle,
 		messages::space_unit direction,

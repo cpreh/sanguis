@@ -16,6 +16,8 @@ namespace projectiles
 class projectile : public entity {
 protected:
 	projectile(
+		const send_callback &,
+		const insert_callback &,
 		messages::pos_type const& pos,
 		messages::space_unit angle,
 		messages::space_unit max_health,

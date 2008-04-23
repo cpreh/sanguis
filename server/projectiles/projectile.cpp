@@ -5,6 +5,8 @@
 #include <boost/foreach.hpp>
 
 sanguis::server::projectiles::projectile::projectile(
+	const send_callback &send_callback_,
+	const insert_callback &insert_callback_,
 	messages::pos_type const& pos,
 	const messages::space_unit angle,
 	const messages::space_unit max_health,
@@ -13,7 +15,8 @@ sanguis::server::projectiles::projectile::projectile(
 	const messages::space_unit max_speed_,
 	const time_type lifetime)
 : entity(
-	send_callback(), // FIXME
+	send_callback_,
+	insert_callback_,
 	pos,
 	angle,
 	angle,

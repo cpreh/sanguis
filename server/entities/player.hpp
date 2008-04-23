@@ -16,6 +16,7 @@ class player : public entity_with_weapon
 	public:
 	player(
 		const send_callback &,
+		const insert_callback &,
 		const net::id_type net_id,
 		const messages::pos_type &center,
 		const messages::space_unit direction,

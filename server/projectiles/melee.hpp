@@ -13,6 +13,8 @@ namespace projectiles
 class melee : public projectile {
 public:
 	melee(
+		const send_callback &,
+		const insert_callback &,
 		messages::pos_type const& pos,
 		team::type team,
 		messages::space_unit damage);

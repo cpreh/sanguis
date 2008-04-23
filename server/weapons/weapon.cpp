@@ -23,20 +23,37 @@ sanguis::server::weapons::weapon::~weapon()
 {}
 
 sanguis::server::weapons::weapon::weapon(
+	const send_callback &send_callback_,
+	const insert_callback &insert_callback_,
 	const messages::space_unit range_,
-	const time_type base_cooldown_,
-	const insert_callback insert_)
+	const time_type base_cooldown_)
 : range_(range_),
   cooldown_timer(
 	to_sge_time(
 		base_cooldown_)),
-  insert_(insert_)
+  send_callback_(send_callback_),
+  insert_callback_(insert_callback_)
 {}
+
+void sanguis::server::weapons::weapon::send(messages::base *m)
+{
+	send_callback_(m);
+}
+
+sanguis::server::insert_callback sanguis::server::weapons::weapon::get_insert_callback() const
+{
+	return insert_callback_;
+}
+
+sanguis::server::send_callback sanguis::server::weapons::weapon::get_send_callback() const
+{
+	return send_callback_;
+}
 
 sanguis::server::entity &
 sanguis::server::weapons::weapon::insert(entity_ptr e)
 {
-	return insert_(e);
+	return insert_callback_(e);
 }
 
 bool sanguis::server::weapons::weapon::in_range(

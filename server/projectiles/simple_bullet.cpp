@@ -10,11 +10,15 @@ const sanguis::messages::space_unit bullet_speed(
 }
 
 sanguis::server::projectiles::simple_bullet::simple_bullet(
+	const send_callback &send_callback_,
+	const insert_callback &insert_callback_,
 	messages::pos_type const& pos,
 	const messages::space_unit angle,
 	const team::type team_,
 	const messages::space_unit damage)
 : projectile(
+	send_callback_,
+	insert_callback_,
 	pos,
 	angle,
 	messages::mu(1),

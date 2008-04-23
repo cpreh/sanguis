@@ -4,6 +4,7 @@
 #include "entity_fwd.hpp"
 #include "teams.hpp"
 #include "send_callback.hpp"
+#include "insert_callback.hpp"
 #include "../messages/types.hpp"
 #include "../entity_id.hpp"
 #include "../entity_type.hpp"
@@ -21,6 +22,7 @@ public:
 protected:
 	entity(
 		const send_callback &,
+		const insert_callback &,
 		const messages::pos_type &pos,
 		const messages::space_unit angle,
 		const messages::space_unit direction,
@@ -69,9 +71,12 @@ public:
 	virtual ~entity();
 protected:
 	void send(messages::base *); // TODO: this should be an auto_ptr
+	entity &insert(entity_ptr); 
+	insert_callback get_insert_callback() const;
 private:
 	entity_id id_;
 	send_callback send_callback_;
+	insert_callback insert_callback_;
 	messages::pos_type pos_;
 	messages::space_unit speed_,
 	                     angle_,

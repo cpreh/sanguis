@@ -22,6 +22,7 @@ sanguis::server::entities::zombie::zombie(
 	const messages::space_unit max_health_)
 	: enemy(
 			send_callback_,
+			insert_callback_,
 			center_ - dim()/messages::mu(2),
 			angle_,
 			direction_,
@@ -31,6 +32,7 @@ sanguis::server::entities::zombie::zombie(
 			speed_,
 			weapons::create(
 				weapon_type::melee,
+				send_callback_,
 				insert_callback_),
 			ai::ai_ptr(
 				new ai::simple(

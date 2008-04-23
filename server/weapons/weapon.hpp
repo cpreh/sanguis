@@ -4,6 +4,8 @@
 #include "../../time_type.hpp"
 #include "../../messages/types.hpp"
 #include "../insert_callback.hpp"
+#include "../send_callback.hpp"
+#include "../entity_fwd.hpp"
 #include <sge/timer.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
@@ -12,9 +14,6 @@ namespace sanguis
 {
 namespace server
 {
-
-class entity;
-typedef std::auto_ptr<entity> entity_ptr;
 
 namespace weapons
 {
@@ -28,15 +27,19 @@ public:
 	virtual ~weapon();
 protected:
 	weapon(
+		const send_callback &,
+		const insert_callback &,
 		messages::space_unit range,
-		time_type base_cooldown,
-		insert_callback);
+		time_type base_cooldown);
 
 	virtual void do_attack(
 		entity const &from,
 		messages::pos_type const& to) = 0;
 	
 	entity &insert(entity_ptr);
+	void send(messages::base *);
+	insert_callback get_insert_callback() const;
+	send_callback get_send_callback() const;
 private:
 	bool in_range(
 		entity const& from,
@@ -44,7 +47,8 @@ private:
 
 	messages::space_unit range_;
 	sge::timer           cooldown_timer;
-	insert_callback      insert_;
+	send_callback        send_callback_;
+	insert_callback      insert_callback_;
 };
 
 typedef boost::shared_ptr<weapon> weapon_ptr;

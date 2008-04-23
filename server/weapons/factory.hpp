@@ -3,6 +3,7 @@
 
 #include "../../weapon_type.hpp"
 #include "../insert_callback.hpp"
+#include "../send_callback.hpp"
 #include "weapon.hpp"
 
 namespace sanguis
@@ -14,6 +15,7 @@ namespace weapons
 
 weapon_ptr create(
 	weapon_type::type,
+	send_callback,
 	insert_callback);
 
 }

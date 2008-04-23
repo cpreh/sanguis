@@ -12,6 +12,7 @@ const sanguis::messages::pos_type target_undefined(
 
 sanguis::server::entity_with_weapon::entity_with_weapon(
 	send_callback const &send_callback_,
+	insert_callback const &insert_callback_,
 	messages::pos_type const &pos_,
 	const messages::space_unit angle_,
 	const messages::space_unit direction_,
@@ -22,6 +23,7 @@ sanguis::server::entity_with_weapon::entity_with_weapon(
 	weapons::weapon_ptr weapon_)
 : entity(
 	send_callback_,
+	insert_callback_,
 	pos_,
 	angle_,
 	direction_,

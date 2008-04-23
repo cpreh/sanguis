@@ -3,12 +3,14 @@
 #include "../projectiles/simple_bullet.hpp"
 
 sanguis::server::weapons::pistol::pistol(
-	const time_type base_cooldown,
-	const insert_callback insert)
+	const send_callback &send_callback_,
+	const insert_callback &insert_callback_,
+	const time_type base_cooldown)
 : weapon(
+	send_callback_,
+	insert_callback_,
 	1000, // FIXME
-	base_cooldown,
-	insert)
+	base_cooldown)
 {}
 
 void sanguis::server::weapons::pistol::do_attack(
@@ -18,6 +20,8 @@ void sanguis::server::weapons::pistol::do_attack(
 	insert(
 		entity_ptr(
 			new projectiles::simple_bullet(
+				get_send_callback(),
+				get_insert_callback(),
 				from.center(),
 				from.angle(),
 				from.team(),

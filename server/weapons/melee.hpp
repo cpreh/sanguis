@@ -15,9 +15,10 @@ namespace weapons
 class melee : public weapon {
 public:
 	melee(
+		const send_callback &,
+		const insert_callback &,
 		messages::space_unit range,
 		time_type base_cooldown,
-		insert_callback,
 		messages::space_unit damage);
 private:
 	void do_attack(
