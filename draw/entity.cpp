@@ -7,6 +7,16 @@ sanguis::entity_id sanguis::draw::entity::id() const
 	return id_;
 }
 
+void sanguis::draw::entity::dead()
+{
+		
+}
+
+bool sanguis::draw::entity::may_be_removed() const
+{
+	return false;
+}
+
 void sanguis::draw::entity::health(sge::space_unit)
 {}
 

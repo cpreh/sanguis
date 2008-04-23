@@ -78,6 +78,12 @@ void sanguis::draw::scene_drawer::draw(const time_type delta)
 	BOOST_FOREACH(entity_map::value_type val, entities)
 	{
 		entity& e = *val.second;
+		if(e.may_be_removed())
+		{
+			entities.erase(val.first); // TODO:
+			continue;
+		}
+
 		e.update(delta);
 		const entity::sprite_vector& s(e.to_sprites());
 		std::copy(s.begin(), s.end(), std::back_inserter(sprites));
@@ -151,8 +157,13 @@ void sanguis::draw::scene_drawer::operator()(const messages::move& m)
 
 void sanguis::draw::scene_drawer::operator()(const messages::remove& m)
 {
-	if(entities.erase(m.id()) == 0)
+	const entity_map::iterator it(entities.find(m.id()));
+	if(it == entities.end())
 		throw sge::exception(SGE_TEXT("Object not in entity map, can't remove it!"));
+	entity &e(*it->second);
+	if(typeid(e) == typeid(player)) // TODO: this is plain ugly
+		player_ = 0;
+	e.dead();	
 }
 
 void sanguis::draw::scene_drawer::operator()(const messages::resize& m)

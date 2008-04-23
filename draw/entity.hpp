@@ -21,6 +21,8 @@ public:
 	virtual void update(time_type) = 0;
 	virtual sprite_vector to_sprites() const = 0;
 	entity_id id() const;
+	void dead();
+	bool may_be_removed() const;
 	virtual void orientation(sge::sprite::rotation_type) = 0;
 	virtual void speed(const sge::math::vector2&) = 0;
 	virtual void pos(const sge::sprite::point&) = 0;

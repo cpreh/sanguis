@@ -79,7 +79,10 @@ void sanguis::server::game_logic::update(const time_type delta)
 			else
 			{
 				if(i->type() != entity_type::indeterminate)
+				{
+					send(message_convert<messages::health>(*i));
 					send(message_convert<messages::remove>(*i));
+				}
 				i = entities.erase(i);
 				continue;
 			}
