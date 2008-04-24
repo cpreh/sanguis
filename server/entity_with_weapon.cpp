@@ -46,7 +46,7 @@ void sanguis::server::entity_with_weapon::update(
 		entities);
 	
 	// entity lost it's target and/or weapon or aggression or didn't have any of these
-	if (!weapon_ == weapon_type::none || target() == target_undefined || !aggressive())
+	if (weapon_ == weapon_type::none || target() == target_undefined || !aggressive())
 	{
 		// previously attacking
 		if (attacking())
@@ -85,7 +85,7 @@ void sanguis::server::entity_with_weapon::update(
 
 void sanguis::server::entity_with_weapon::change_weapon(const weapon_type::type nweapon)
 {
-	if (weapons_.find(nweapon) == weapons_.end())
+	if (nweapon != weapon_type::none && weapons_.find(nweapon) == weapons_.end())
 		throw sge::exception(SGE_TEXT("tried to change to non-owned weapon"));
 
 	weapon_ = nweapon;
