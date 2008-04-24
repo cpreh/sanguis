@@ -27,5 +27,5 @@ void sanguis::server::weapons::pistol::do_attack(
 				from.center(),
 				from.angle(),
 				from.team(),
-				messages::mu(5))));
+				messages::mu(15))));
 }
