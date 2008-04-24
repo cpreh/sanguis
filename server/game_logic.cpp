@@ -15,7 +15,7 @@
 #include "message_functor.hpp"
 #include "game_logic.hpp"
 #include "collision.hpp"
-#include "converter.hpp"
+#include "message_converter.hpp"
 #include "entities/player.hpp"
 #include "entities/zombie.hpp"
 #include "weapons/factory.hpp"

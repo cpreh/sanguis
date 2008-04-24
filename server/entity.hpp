@@ -53,8 +53,8 @@ public:
 	bool attacking() const;
 	void attacking(const bool);
 
-	bool colliding() const;
-	void colliding(const bool);
+	bool aggressive() const;
+	void aggressive(const bool);
 
 	// is calculated from the above
 	messages::pos_type center() const;
@@ -84,8 +84,7 @@ private:
 	                     health_,
 	                     max_health_;
 	team::type team_;
-	bool attacking_,
-	     colliding_;
+	bool attacking_,aggressive_;
 };
 
 }
