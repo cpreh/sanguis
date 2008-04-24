@@ -7,14 +7,21 @@ sanguis::entity_id sanguis::draw::entity::id() const
 	return id_;
 }
 
-void sanguis::draw::entity::dead()
+void sanguis::draw::entity::decay()
 {
-		
+	decay_timer.activate();
+}
+
+void sanguis::draw::entity::decay_time(
+	const time_type diff)
+{
+	decay_timer.interval(
+		diff * sge::second()); // FIXME: put this functionality in sge
 }
 
 bool sanguis::draw::entity::may_be_removed() const
 {
-	return false;
+	return decay_timer.expired();
 }
 
 void sanguis::draw::entity::health(sge::space_unit)
@@ -39,5 +46,8 @@ void sanguis::draw::entity::stop_attacking()
 }
 
 sanguis::draw::entity::entity(const entity_id id_)
-: id_(id_)
+: id_(id_),
+  decay_timer(
+	0,
+	false)
 {}

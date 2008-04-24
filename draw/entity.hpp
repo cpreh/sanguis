@@ -4,7 +4,7 @@
 #include <vector>
 #include <sge/sprite/object.hpp>
 #include <sge/math/vector.hpp>
-#include <sge/time.hpp>
+#include <sge/timer.hpp>
 #include "../entity_id.hpp"
 #include "../weapon_type.hpp"
 #include "../time_type.hpp"
@@ -21,7 +21,9 @@ public:
 	virtual void update(time_type) = 0;
 	virtual sprite_vector to_sprites() const = 0;
 	entity_id id() const;
-	void dead();
+	void decay();
+	void decay_time(
+		time_type);
 	bool may_be_removed() const;
 	virtual void orientation(sge::sprite::rotation_type) = 0;
 	virtual void speed(const sge::math::vector2&) = 0;
@@ -39,6 +41,7 @@ protected:
 	virtual sge::space_unit orientation() const = 0;
 private:
 	entity_id        id_;
+	sge::timer       decay_timer;
 };
 
 }

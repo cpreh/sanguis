@@ -39,5 +39,5 @@ void sanguis::server::ai::simple::update(
 	me.speed(messages::mu(1));
 	me.target(
 		target->center());
-	//me.attacking(true);
+	me.attacking(true);
 }

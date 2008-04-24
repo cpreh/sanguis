@@ -3,6 +3,7 @@
 #include "factory.hpp"
 #include "player.hpp"
 #include "coord_transform.hpp"
+#include "decay_time.hpp"
 #include "../dispatch_type.hpp"
 #include "../messages/add.hpp"
 #include "../messages/base.hpp"
@@ -110,13 +111,15 @@ void sanguis::draw::scene_drawer::operator()(const messages::add& m)
 				m.type())));
 //				ss.get_renderer()->screen_size())));
 
+	entity& e(*ret.first->second);
+
 	if(ret.second == false)
 		throw sge::exception(SGE_TEXT("Object with id already in entity list!"));
 	if(m.type() == entity_type::player)
 	{
 		if(player_)
 			throw sge::exception(SGE_TEXT("Player already exists in scene_drawer!"));
-		player_ = dynamic_cast<player*>(ret.first->second);
+		player_ = dynamic_cast<player*>(&e);
 	}
 
 	// configure the object
@@ -126,6 +129,10 @@ void sanguis::draw::scene_drawer::operator()(const messages::add& m)
 	process_message(messages::resize(m.id(), m.dim()));
 	process_message(messages::rotate(m.id(), m.angle()));
 	process_message(messages::speed(m.id(), m.speed()));
+
+	e.decay_time(
+		decay_time(
+			m.type()));
 }
 
 void sanguis::draw::scene_drawer::operator()(const messages::change_weapon& m)
@@ -163,7 +170,7 @@ void sanguis::draw::scene_drawer::operator()(const messages::remove& m)
 	entity &e(*it->second);
 	if(typeid(e) == typeid(player)) // TODO: this is plain ugly
 		player_ = 0;
-	e.dead();	
+	e.decay();
 }
 
 void sanguis::draw::scene_drawer::operator()(const messages::resize& m)
