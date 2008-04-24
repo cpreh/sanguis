@@ -16,7 +16,7 @@ sanguis::server::weapons::create(
 			new melee(
 				send,
 				insert,
-				messages::mu(20),
+				messages::mu(100),
 				static_cast<time_type>(2),
 				messages::mu(2)
 				));
