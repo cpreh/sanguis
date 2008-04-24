@@ -225,7 +225,7 @@ void sanguis::server::game_logic::add_enemy()
 
 	const messages::pos_type pos = center + screen_center;
 
-	insert_entity(
+	entities::zombie &z = dynamic_cast<entities::zombie &>(insert_entity(
 		entity_ptr(
 			new entities::zombie(
 				send,
@@ -235,7 +235,9 @@ void sanguis::server::game_logic::add_enemy()
 				speed,
 				angle,
 				health,
-				max_health)));
+				max_health))));
+	
+	//z.add_weapon(weapons::create(weapon_type::melee,get_send_callback(),get_insert_callback()));
 }
 
 void sanguis::server::game_logic::operator()(const net::id_type id,const messages::player_start_shooting &)

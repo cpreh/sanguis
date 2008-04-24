@@ -38,6 +38,8 @@ sanguis::server::entities::zombie::zombie(
 				weapon_type::melee,
 				send_callback_,
 				insert_callback_));
+	
+	change_weapon(weapon_type::melee);
 }
 
 bool sanguis::server::entities::zombie::invulnerable() const
