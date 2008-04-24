@@ -22,6 +22,7 @@ protected:
 		team::type team,
 		messages::space_unit speed,
 		weapons::weapon_ptr);
+
 	virtual void update(
 		time_type,
 		entity_container &entities);

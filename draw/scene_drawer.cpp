@@ -25,7 +25,6 @@
 #include <sge/string.hpp>
 #include <sge/sprite/system_impl.hpp>
 
-#include <boost/foreach.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
 
@@ -76,16 +75,18 @@ void sanguis::draw::scene_drawer::draw(const time_type delta)
 {
 	sprites.clear();
 
-	BOOST_FOREACH(entity_map::value_type val, entities)
+	for(entity_map::iterator it(entities.begin()); it != entities.end(); ++it)
 	{
-		entity& e = *val.second;
+		entity& e = *it->second;
+		
+		e.update(delta);
+
 		if(e.may_be_removed())
 		{
-			entities.erase(val.first); // TODO:
+			entities.erase(it);
 			continue;
 		}
 
-		e.update(delta);
 		const entity::sprite_vector& s(e.to_sprites());
 		std::copy(s.begin(), s.end(), std::back_inserter(sprites));
 	}

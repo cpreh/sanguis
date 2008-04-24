@@ -26,7 +26,7 @@ sanguis::server::entity::entity(
   max_health_(max_health_),
   team_(team_),
   attacking_(false),
-  colliding_(false)
+	aggressive_(false)
 {}
 
 bool sanguis::server::entity::attacking() const
@@ -39,14 +39,14 @@ void sanguis::server::entity::attacking(const bool n)
 	attacking_ = n;
 }
 
-bool sanguis::server::entity::colliding() const
+bool sanguis::server::entity::aggressive() const
 {
-	return colliding_;
+	return aggressive_;
 }
 
-void sanguis::server::entity::colliding(const bool n)
+void sanguis::server::entity::aggressive(const bool n)
 {
-	colliding_ = n;
+	aggressive_ = n;
 }
 
 sanguis::entity_id sanguis::server::entity::id() const

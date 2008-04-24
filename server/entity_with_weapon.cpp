@@ -1,4 +1,6 @@
 #include "entity_with_weapon.hpp"
+#include "message_converter.hpp"
+#include <sge/iostream.hpp>
 #include <limits>
 
 namespace
@@ -42,10 +44,44 @@ void sanguis::server::entity_with_weapon::update(
 	entity::update(
 		time,
 		entities);
+	
+	// entity lost it's target and/or weapon or aggression or didn't have any of these
+	if (!weapon_ || target() == target_undefined || !aggressive())
+	{
+		// previously attacking
+		if (attacking())
+		{
+			send(message_convert<messages::stop_attacking>(*this));
+			attacking(false);
+		}
 
-	if(weapon_ && target() != target_undefined && attacking())
-		weapon_->attack(*this, target());
-	// TODO: start_attacking goes here
+		return;
+	}
+
+	// all requirements for an attack are met?
+	// -has a weapon
+	// -has a target
+	// -is aggressive
+	if (weapon_ && target() != target_undefined && aggressive())
+	{
+		if (weapon_->attack(*this,target()))
+		{
+			sge::cout << SGE_TEXT("server: attacking returned true\n");
+			if (!attacking())
+			{
+				send(message_convert<messages::start_attacking>(*this));
+				attacking(true);
+			}
+		}
+		else
+		{
+			if (attacking())
+			{
+				send(message_convert<messages::stop_attacking>(*this));
+				attacking(false);
+			}
+		}
+	}
 }
 
 void sanguis::server::entity_with_weapon::change_weapon(
