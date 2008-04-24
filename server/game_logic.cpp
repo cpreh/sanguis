@@ -73,11 +73,11 @@ void sanguis::server::game_logic::update(const time_type delta)
 	{
 		if (i->dead())
 		{
-			if (i->type() == entity_type::player)
+			/*if (i->type() == entity_type::player)
 			{
 				sge::cout << "server: player's dead!\n";
 			}
-			else
+			else*/
 			{
 				if(i->type() != entity_type::indeterminate)
 				{

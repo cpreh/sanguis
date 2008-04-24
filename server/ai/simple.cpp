@@ -24,6 +24,15 @@ void sanguis::server::ai::simple::update(
 				target = &e;
 		}
 	}
+	else
+	{
+		// TODO: why can't we use std::find here?
+		for(entity_container::const_iterator it(entities.begin()); it != entities.end(); ++it)
+			if(&*it == target)
+				break;
+		target = 0;
+	}
+
 	if(!target)
 		return;
 
