@@ -4,6 +4,7 @@
 #include "../messages/player_start_shooting.hpp"
 #include "../messages/player_stop_shooting.hpp"
 #include "../messages/disconnect.hpp"
+#include "../messages/add_weapon.hpp"
 #include "../messages/player_change_weapon.hpp"
 #include "../messages/change_weapon.hpp"
 #include "../messages/game_state.hpp"
@@ -131,6 +132,9 @@ void sanguis::server::game_logic::create_game(const net::id_type net_id,const me
 				m.name())));
 	
 	players[net_id] = &dynamic_cast<entities::player &>(raw_player);
+
+	send(new messages::add_weapon(raw_player.id(),weapon_type::melee));
+	send(new messages::add_weapon(raw_player.id(),weapon_type::pistol));
 
 	enemy_timer.v().reset();
 }

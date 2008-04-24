@@ -40,6 +40,7 @@ public:
 	void operator()(const messages::health&);
 	void operator()(const messages::max_health&);
 	void operator()(const messages::move&);
+	void operator()(const messages::add_weapon&);
 	void operator()(const messages::remove&);
 	void operator()(const messages::resize&);
 	void operator()(const messages::rotate&);

@@ -6,6 +6,7 @@
 #include "decay_time.hpp"
 #include "../dispatch_type.hpp"
 #include "../messages/add.hpp"
+#include "../messages/add_weapon.hpp"
 #include "../messages/base.hpp"
 #include "../messages/change_weapon.hpp"
 #include "../messages/health.hpp"
@@ -51,7 +52,8 @@ void sanguis::draw::scene_drawer::process_message(const messages::base& m)
 			messages::rotate,
 			messages::start_attacking,
 			messages::stop_attacking,
-			messages::speed
+			messages::speed,
+			messages::add_weapon
 			>,
 		void>(
 		*this,
@@ -134,6 +136,11 @@ void sanguis::draw::scene_drawer::operator()(const messages::add& m)
 	e.decay_time(
 		decay_time(
 			m.type()));
+}
+
+void sanguis::draw::scene_drawer::operator()(const messages::add_weapon& m)
+{
+	sge::cout << SGE_TEXT("client: got new weapon!\n");
 }
 
 void sanguis::draw::scene_drawer::operator()(const messages::change_weapon& m)
