@@ -23,7 +23,6 @@ protected:
 		messages::space_unit max_health,
 		team::type team,
 		messages::space_unit speed,
-		weapons::weapon_ptr,
 		ai::ai_ptr);
 
 	void update(

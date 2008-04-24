@@ -9,6 +9,11 @@ sanguis::server::weapons::weapon::range() const
 	return range_;
 }
 
+sanguis::weapon_type::type sanguis::server::weapons::weapon::type() const
+{
+	return type_;
+}
+
 bool sanguis::server::weapons::weapon::attack(
 	entity const &from,
 	messages::pos_type const& to)
@@ -25,9 +30,11 @@ sanguis::server::weapons::weapon::~weapon()
 sanguis::server::weapons::weapon::weapon(
 	const send_callback &send_callback_,
 	const insert_callback &insert_callback_,
+	const weapon_type::type type_,
 	const messages::space_unit range_,
 	const time_type base_cooldown_)
-: range_(range_),
+: type_(type_),
+	range_(range_),
   cooldown_timer(
 	to_sge_time(
 		base_cooldown_)),

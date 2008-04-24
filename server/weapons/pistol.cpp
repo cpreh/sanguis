@@ -5,10 +5,12 @@
 sanguis::server::weapons::pistol::pistol(
 	const send_callback &send_callback_,
 	const insert_callback &insert_callback_,
+	const weapon_type::type type_,
 	const time_type base_cooldown)
 : weapon(
 	send_callback_,
 	insert_callback_,
+	type_,
 	1000, // FIXME
 	base_cooldown)
 {}

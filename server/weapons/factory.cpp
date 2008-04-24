@@ -3,6 +3,7 @@
 #include "pistol.hpp"
 #include <sge/exception.hpp>
 #include <sge/string.hpp>
+#include <sge/iostream.hpp>
 
 sanguis::server::weapons::weapon_ptr
 sanguis::server::weapons::create(
@@ -16,6 +17,7 @@ sanguis::server::weapons::create(
 			new melee(
 				send,
 				insert,
+				type,
 				messages::mu(100),
 				static_cast<time_type>(2),
 				messages::mu(2)
@@ -25,6 +27,7 @@ sanguis::server::weapons::create(
 			new pistol(
 				send,
 				insert,
+				type,
 				static_cast<time_type>(0.5)
 				));
 	default:

@@ -17,6 +17,7 @@ public:
 	melee(
 		const send_callback &,
 		const insert_callback &,
+		const weapon_type::type,
 		messages::space_unit range,
 		time_type base_cooldown,
 		messages::space_unit damage);

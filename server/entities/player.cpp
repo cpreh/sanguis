@@ -29,8 +29,7 @@ sanguis::server::entities::player::player(
 		health_,
 		max_health_,
 		team::players,
-		speed_,
-		weapons::weapon_ptr()),
+		speed_),
 	net_id_(net_id_),
 	name_(name_)
 {}

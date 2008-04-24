@@ -10,7 +10,6 @@ sanguis::server::entities::enemy::enemy(
 	const messages::space_unit max_health,
 	const team::type team,
 	const messages::space_unit speed,
-	weapons::weapon_ptr weapon_,
 	const ai::ai_ptr ai_)
 : entity_with_weapon(
 	send_callback_,
@@ -21,8 +20,7 @@ sanguis::server::entities::enemy::enemy(
 	health,
 	max_health,
 	team,
-	speed,
-	weapon_),
+	speed),
   ai_(ai_)
 {}
 

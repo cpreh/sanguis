@@ -30,14 +30,15 @@ sanguis::server::entities::zombie::zombie(
 			max_health_,
 			team::monsters,
 			speed_,
-			weapons::create(
-				weapon_type::melee,
-				send_callback_,
-				insert_callback_),
 			ai::ai_ptr(
 				new ai::simple(
 					*this)))
-{}
+{
+	add_weapon(weapons::create(
+				weapon_type::melee,
+				send_callback_,
+				insert_callback_));
+}
 
 bool sanguis::server::entities::zombie::invulnerable() const
 {

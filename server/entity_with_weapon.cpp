@@ -21,8 +21,7 @@ sanguis::server::entity_with_weapon::entity_with_weapon(
 	const messages::space_unit health_,
 	const messages::space_unit max_health_,
 	const team::type team_,
-	const messages::space_unit speed_,
-	weapons::weapon_ptr weapon_)
+	const messages::space_unit speed_)
 : entity(
 	send_callback_,
 	insert_callback_,
@@ -33,9 +32,10 @@ sanguis::server::entity_with_weapon::entity_with_weapon(
 	max_health_,
 	team_,
 	speed_),
-  weapon_(weapon_),
+	weapon_(weapon_type::none),
   target_(target_undefined)
-{}
+{
+}
 
 void sanguis::server::entity_with_weapon::update(
 	const time_type time,
@@ -46,7 +46,7 @@ void sanguis::server::entity_with_weapon::update(
 		entities);
 	
 	// entity lost it's target and/or weapon or aggression or didn't have any of these
-	if (!weapon_ || target() == target_undefined || !aggressive())
+	if (!weapon_ == weapon_type::none || target() == target_undefined || !aggressive())
 	{
 		// previously attacking
 		if (attacking())
@@ -62,9 +62,9 @@ void sanguis::server::entity_with_weapon::update(
 	// -has a weapon
 	// -has a target
 	// -is aggressive
-	if (weapon_ && target() != target_undefined && aggressive())
+	if (weapon_ != weapon_type::none && target() != target_undefined && aggressive())
 	{
-		if (weapon_->attack(*this,target()))
+		if (weapons_.find(weapon_)->second->attack(*this,target()))
 		{
 			if (!attacking())
 			{
@@ -83,10 +83,30 @@ void sanguis::server::entity_with_weapon::update(
 	}
 }
 
-void sanguis::server::entity_with_weapon::change_weapon(
-	const weapons::weapon_ptr nweapon)
+void sanguis::server::entity_with_weapon::change_weapon(const weapon_type::type nweapon)
 {
+	if (weapons_.find(nweapon) == weapons_.end())
+		throw sge::exception(SGE_TEXT("tried to change to non-owned weapon"));
+
 	weapon_ = nweapon;
+}
+
+void sanguis::server::entity_with_weapon::add_weapon(weapons::weapon_ptr ptr)
+{
+	if (weapons_.find(ptr->type()) != weapons_.end())
+		throw sge::exception(SGE_TEXT("weapon of specified type already registered"));
+
+	const weapon_type::type wt = ptr->type();
+	if (!weapons_.insert(wt,ptr).second)
+		throw sge::exception(SGE_TEXT("couldn't insert weapon"));
+}
+
+void sanguis::server::entity_with_weapon::remove_weapon(const weapon_type::type type_)
+{
+	if (weapons_.find(type_) == weapons_.end())
+		throw sge::exception(SGE_TEXT("tried to remove non-owned weapon"));
+	
+	weapons_.erase(type_);
 }
 
 void sanguis::server::entity_with_weapon::target(

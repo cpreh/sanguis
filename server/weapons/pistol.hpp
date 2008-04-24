@@ -16,6 +16,7 @@ public:
 	pistol(
 		const send_callback &,
 		const insert_callback &,
+		const weapon_type::type,
 		time_type base_cooldown);
 private:
 	void do_attack(

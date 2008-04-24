@@ -133,7 +133,9 @@ void sanguis::server::game_logic::create_game(const net::id_type net_id,const me
 	
 	players[net_id] = &dynamic_cast<entities::player &>(raw_player);
 
+	players[net_id]->add_weapon(weapons::create(weapon_type::melee,get_send_callback(),get_insert_callback()));
 	send(new messages::add_weapon(raw_player.id(),weapon_type::melee));
+	players[net_id]->add_weapon(weapons::create(weapon_type::pistol,get_send_callback(),get_insert_callback()));
 	send(new messages::add_weapon(raw_player.id(),weapon_type::pistol));
 
 	enemy_timer.v().reset();
@@ -141,8 +143,6 @@ void sanguis::server::game_logic::create_game(const net::id_type net_id,const me
 
 void sanguis::server::game_logic::operator()(const net::id_type id,const messages::player_change_weapon &e)
 {
-	// TODO: check if the player _has_ this weapon before assigning it
-	
 	const player_map::iterator it(players.find(id));
 	if (it == players.end())
 	{
@@ -151,14 +151,20 @@ void sanguis::server::game_logic::operator()(const net::id_type id,const message
 	}
 	entities::player &player_(*it->second);
 
-	const weapon_type::type type(static_cast<weapon_type::type>(e.weapon())); // FIXME
+	if (e.weapon() > weapon_type::size)
+		throw sge::exception("got invalid weapon type in player_change_weapon");
 
+	const weapon_type::type type(static_cast<weapon_type::type>(e.weapon()));
+
+	player_.change_weapon(type);
+	/*
 	if(type != weapon_type::none)
 		player_.change_weapon(
 			weapons::create(
 				type,
 				get_send_callback(),
 				get_insert_callback()));
+	*/
 
 	send(new messages::change_weapon(player_.id(), e.weapon()));
 }

@@ -3,6 +3,7 @@
 
 #include "entity.hpp"
 #include "weapons/weapon.hpp"
+#include <boost/ptr_container/ptr_map.hpp>
 
 namespace sanguis
 {
@@ -11,6 +12,8 @@ namespace server
 
 class entity_with_weapon : public entity {
 protected:
+	typedef boost::ptr_map<weapon_type::type,weapons::weapon> weapon_container;
+
 	entity_with_weapon(
 		send_callback const &,
 		insert_callback const &,
@@ -20,20 +23,21 @@ protected:
 		messages::space_unit health,
 		messages::space_unit max_health,
 		team::type team,
-		messages::space_unit speed,
-		weapons::weapon_ptr);
+		messages::space_unit speed);
 
 	virtual void update(
 		time_type,
 		entity_container &entities);
 public:
-	void change_weapon(
-		weapons::weapon_ptr);
-	void target(
-		messages::pos_type const&);
+	void change_weapon(const weapon_type::type);
+	void add_weapon(weapons::weapon_ptr);
+	void remove_weapon(const weapon_type::type);
+
+	void target(messages::pos_type const&);
 	messages::pos_type const &target() const;
 private:
-	weapons::weapon_ptr weapon_;
+	weapon_container    weapons_;
+	weapon_type::type   weapon_;
 	messages::pos_type  target_;
 };
 

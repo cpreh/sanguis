@@ -3,12 +3,13 @@
 
 #include "../../time_type.hpp"
 #include "../../messages/types.hpp"
+#include "../../weapon_type.hpp"
 #include "../insert_callback.hpp"
 #include "../send_callback.hpp"
 #include "../entity_fwd.hpp"
 #include <sge/timer.hpp>
-#include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
+#include <memory>
 
 namespace sanguis
 {
@@ -24,11 +25,13 @@ public:
 	bool attack(
 		entity const &from,
 		messages::pos_type const& to);
+	weapon_type::type type() const;
 	virtual ~weapon();
 protected:
 	weapon(
 		const send_callback &,
 		const insert_callback &,
+		const weapon_type::type,
 		messages::space_unit range,
 		time_type base_cooldown);
 
@@ -45,13 +48,14 @@ private:
 		entity const& from,
 		messages::pos_type const& to) const;
 
+	weapon_type::type    type_;
 	messages::space_unit range_;
 	sge::timer           cooldown_timer;
 	send_callback        send_callback_;
 	insert_callback      insert_callback_;
 };
 
-typedef boost::shared_ptr<weapon> weapon_ptr;
+typedef std::auto_ptr<weapon> weapon_ptr;
 
 }
 }
