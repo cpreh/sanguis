@@ -229,7 +229,7 @@ void sanguis::server::game_logic::operator()(const net::id_type id,const message
 		return;
 	}
 
-	players[id]->attacking(true);
+	players[id]->aggressive(true);
 }
 
 void sanguis::server::game_logic::operator()(const net::id_type id,const messages::player_stop_shooting &)
@@ -240,7 +240,7 @@ void sanguis::server::game_logic::operator()(const net::id_type id,const message
 		return;
 	}
 
-	players[id]->attacking(false);
+	players[id]->aggressive(false);
 }
 
 void sanguis::server::game_logic::operator()(const net::id_type id,const messages::player_direction &e)
