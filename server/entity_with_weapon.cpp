@@ -66,7 +66,6 @@ void sanguis::server::entity_with_weapon::update(
 	{
 		if (weapon_->attack(*this,target()))
 		{
-			sge::cout << SGE_TEXT("server: attacking returned true\n");
 			if (!attacking())
 			{
 				send(message_convert<messages::start_attacking>(*this));

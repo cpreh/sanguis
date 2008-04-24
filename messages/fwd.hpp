@@ -28,6 +28,7 @@ class remove;
 class resize;
 class rotate;
 class speed;
+class add_weapon;
 
 }
 }
