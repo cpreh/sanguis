@@ -183,6 +183,7 @@ sanguis::server::entity &sanguis::server::game_logic::insert_entity(entity_ptr e
 {
 	entities.push_back(e);
 	entity &ref = entities.back();
+	ref.update(time_type(),entities);
 
 	if (ref.type() != entity_type::indeterminate)
 		send(message_convert<messages::add>(ref));
@@ -205,8 +206,12 @@ void sanguis::server::game_logic::add_enemy()
 	const messages::pos_type center = scale * radius * angle_to_vector(rand_angle);
 	
 	// TODO: take the nearest player here instead of the first
-	boost::optional<messages::space_unit> oa = sge::math::angle_to<messages::space_unit>(players.begin()->second->center() - center);
-	const messages::space_unit angle = oa ? *oa : messages::mu(0);
+	//boost::optional<messages::space_unit> oa = sge::math::angle_to<messages::space_unit>(players.begin()->second->center() - center);
+	//const messages::space_unit angle = oa ? *oa : messages::mu(0);
+	const messages::space_unit angle = messages::mu(0),
+	                           speed = messages::mu(0),
+				                     health = messages::mu(50),
+				                     max_health = messages::mu(50);
 
 	const messages::pos_type pos = center + screen_center;
 
@@ -215,10 +220,12 @@ void sanguis::server::game_logic::add_enemy()
 			new entities::zombie(
 				send,
 				get_insert_callback(),
-				pos,angle,
-				messages::mu(1),
-				angle,messages::mu(50),
-				messages::mu(50))));
+				pos,
+				angle,
+				speed,
+				angle,
+				health,
+				max_health)));
 }
 
 void sanguis::server::game_logic::operator()(const net::id_type id,const messages::player_start_shooting &)
