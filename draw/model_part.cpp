@@ -48,11 +48,11 @@ void sanguis::draw::model_part::animation(
 	if(animation_type_ == anim_type)
 		return;
 	switch(animation_type_) {
+	case animation_type::dying:
+		return;
 	case animation_type::attacking:
 		if(!ended)
 			return;
-	case animation_type::dying:
-		return;
 	default:
 		animation_type_ = anim_type;
 		update_animation();
@@ -141,7 +141,7 @@ sanguis::draw::model_part::loop_method() const
 	case animation_type::walking:
 		return sge::sprite::texture_animation::loop_method::repeat;
 	case animation_type::attacking:
-		return sge::sprite::texture_animation::loop_method::stop_after_end;
+		return sge::sprite::texture_animation::loop_method::stop_at_end;
 	case animation_type::dying:
 		return sge::sprite::texture_animation::loop_method::stop_at_end;
 	default:
