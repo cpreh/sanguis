@@ -220,8 +220,8 @@ void sanguis::server::game_logic::add_enemy()
 	//const messages::space_unit angle = oa ? *oa : messages::mu(0);
 	const messages::space_unit angle = messages::mu(0),
 	                           speed = messages::mu(0),
-				                     health = messages::mu(50),
-				                     max_health = messages::mu(50);
+	                           health = messages::mu(3),
+	                           max_health = health;
 
 	const messages::pos_type pos = center + screen_center;
 
