@@ -3,8 +3,7 @@
 
 #include "entity_fwd.hpp"
 #include "teams.hpp"
-#include "send_callback.hpp"
-#include "insert_callback.hpp"
+#include "environment.hpp"
 #include "../messages/types.hpp"
 #include "../entity_id.hpp"
 #include "../entity_type.hpp"
@@ -21,8 +20,7 @@ public:
 	typedef messages::space_unit health_type;
 protected:
 	entity(
-		const send_callback &,
-		const insert_callback &,
+		const environment &,
 		const messages::pos_type &pos,
 		const messages::space_unit angle,
 		const messages::space_unit direction,
@@ -72,7 +70,7 @@ public:
 protected:
 	void send(messages::base *); // TODO: this should be an auto_ptr
 	entity &insert(entity_ptr); 
-	insert_callback get_insert_callback() const;
+	environment get_environment() const;
 private:
 	entity_id id_;
 	send_callback send_callback_;

@@ -3,15 +3,13 @@
 #include "../projectiles/melee.hpp"
 
 sanguis::server::weapons::melee::melee(
-	const send_callback &send_callback_,
-	const insert_callback &insert_callback_,
+	const environment &env,
 	const weapon_type::type type_,
 	const messages::space_unit range,
 	const time_type base_cooldown,
 	const messages::space_unit damage)
 : weapon(
-		send_callback_,
-		insert_callback_,
+		env,
 		type_,
 		range,
 		base_cooldown),
@@ -25,8 +23,7 @@ void sanguis::server::weapons::melee::do_attack(
 	insert(
 		entity_ptr(
 			new projectiles::melee(
-				get_send_callback(),
-				get_insert_callback(),
+				get_environment(),
 				to,
 				from.team(),
 				damage)));

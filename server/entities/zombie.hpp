@@ -2,8 +2,6 @@
 #define SANGUIS_SERVER_ENTITIES_ZOMBIE_HPP_INCLUDED
 
 #include "enemy.hpp"
-#include "../send_callback.hpp"
-#include "../insert_callback.hpp"
 #include "../../net/types.hpp"
 
 namespace sanguis
@@ -16,8 +14,7 @@ class zombie : public enemy
 {
 	public:
 	zombie(
-		const send_callback&,
-		const insert_callback&,
+		const environment&,
 		const messages::pos_type &center,
 		const messages::space_unit direction,
 		const messages::space_unit speed,

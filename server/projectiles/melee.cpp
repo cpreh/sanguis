@@ -1,14 +1,12 @@
 #include "melee.hpp"
 
 sanguis::server::projectiles::melee::melee(
-	const send_callback &send_callback_,
-	const insert_callback &insert_callback_,
+	const environment &env,
 	messages::pos_type const& pos,
 	const team::type team_,
 	const messages::space_unit damage)
 : projectile(
-	send_callback_,
-	insert_callback_,
+	env,
 	pos,
 	messages::mu(0),
 	messages::mu(1), // some arbitrary health value

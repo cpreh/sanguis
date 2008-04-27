@@ -37,8 +37,7 @@ class game_logic
 	void handle_default_msg(const net::id_type,const messages::base &);
 	
 	private:
-	insert_callback get_insert_callback();
-	send_callback get_send_callback();
+	environment get_environment();
 
 	typedef std::map<net::id_type,entities::player*> player_map;
 

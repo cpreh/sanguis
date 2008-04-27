@@ -14,8 +14,7 @@ namespace weapons
 class pistol : public weapon {
 public:
 	pistol(
-		const send_callback &,
-		const insert_callback &,
+		const environment &,
 		const weapon_type::type,
 		time_type base_cooldown);
 private:

@@ -12,8 +12,7 @@ sge::con::var<sanguis::messages::space_unit> zombie_damage(SGE_TEXT("zombie_dama
 }
 
 sanguis::server::entities::zombie::zombie(
-	const send_callback& send_callback_,
-	const insert_callback& insert_callback_,
+	const environment& env,
 	const messages::pos_type &center_,
 	const messages::space_unit direction_,
 	const messages::space_unit speed_,
@@ -21,8 +20,7 @@ sanguis::server::entities::zombie::zombie(
 	const messages::space_unit health_,
 	const messages::space_unit max_health_)
 	: enemy(
-			send_callback_,
-			insert_callback_,
+			env,
 			center_ - dim()/messages::mu(2),
 			angle_,
 			direction_,
@@ -36,8 +34,7 @@ sanguis::server::entities::zombie::zombie(
 {
 	add_weapon(weapons::create(
 				weapon_type::melee,
-				send_callback_,
-				insert_callback_));
+				get_environment()));
 	
 	change_weapon(weapon_type::melee);
 }

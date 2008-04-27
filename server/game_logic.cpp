@@ -118,8 +118,7 @@ void sanguis::server::game_logic::create_game(const net::id_type net_id,const me
 	entity &raw_player = insert_entity(
 		entity_ptr(
 			new entities::player(
-				send,
-				boost::bind(&game_logic::insert_entity,this,_1),
+				get_environment(),
 				net_id,
 				messages::pos_type(
 					messages::mu(resolution().w()/2),
@@ -133,9 +132,9 @@ void sanguis::server::game_logic::create_game(const net::id_type net_id,const me
 	
 	players[net_id] = &dynamic_cast<entities::player &>(raw_player);
 
-	players[net_id]->add_weapon(weapons::create(weapon_type::melee,get_send_callback(),get_insert_callback()));
+	players[net_id]->add_weapon(weapons::create(weapon_type::melee,get_environment()));
 	send(new messages::add_weapon(raw_player.id(),weapon_type::melee));
-	players[net_id]->add_weapon(weapons::create(weapon_type::pistol,get_send_callback(),get_insert_callback()));
+	players[net_id]->add_weapon(weapons::create(weapon_type::pistol,get_environment()));
 	send(new messages::add_weapon(raw_player.id(),weapon_type::pistol));
 
 	enemy_timer.v().reset();
@@ -228,8 +227,7 @@ void sanguis::server::game_logic::add_enemy()
 	entities::zombie &z = dynamic_cast<entities::zombie &>(insert_entity(
 		entity_ptr(
 			new entities::zombie(
-				send,
-				get_insert_callback(),
+				get_environment(),
 				pos,
 				angle,
 				speed,
@@ -304,17 +302,12 @@ void sanguis::server::game_logic::operator()(const net::id_type id,const message
 	aborted_ = true;
 }
 
-sanguis::server::insert_callback
-sanguis::server::game_logic::get_insert_callback()
+sanguis::server::environment sanguis::server::game_logic::get_environment()
 {
-	return boost::bind(
-		&game_logic::insert_entity,
-		this,
-		_1);
-}
-
-sanguis::server::send_callback
-sanguis::server::game_logic::get_send_callback()
-{
-	return send;
+	return environment(
+		send,
+		boost::bind(
+			&game_logic::insert_entity,
+			this,
+			_1));
 }
