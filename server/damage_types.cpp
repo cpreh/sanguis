@@ -7,6 +7,10 @@ const sanguis::server::damage::wrapper sanguis::server::damage::normal(sanguis::
                                        sanguis::server::damage::ice(sanguis::damage_type::ice),
                                        sanguis::server::damage::pure(sanguis::damage_type::pure);
 
+sanguis::server::damage::wrapper::wrapper(const damage_type::type e) : e(e) {}
+
+sanguis::server::damage::meta::meta(const damage_type::type e,const damage_array::value_type d) : e(e),d(d) {}
+
 sanguis::server::damage::meta sanguis::server::damage::wrapper::operator=(const damage_array::value_type c) const
 {
 	return damage::meta(e,c);
