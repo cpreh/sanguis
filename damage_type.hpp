@@ -6,9 +6,9 @@
 
 namespace sanguis
 {
+
 namespace damage_type
 {
-
 enum type {
 	normal,
 	piercing,
@@ -17,6 +17,7 @@ enum type {
 	pure,
 	size
 };
+}
 
 typedef boost::array<
 	messages::space_unit,
@@ -24,7 +25,6 @@ typedef boost::array<
 
 typedef damage_array armor_array;
 
-}
 }
 
 #endif

@@ -1,5 +1,6 @@
 #include "simple_bullet.hpp"
 #include "../get_dim.hpp"
+#include <boost/assign/list_of.hpp>
 
 namespace
 {
@@ -44,6 +45,17 @@ sanguis::server::projectiles::simple_bullet::dim() const
 void sanguis::server::projectiles::simple_bullet::do_hit(
 	entity &target)
 {
-	target.damage(damage);
+	const damage_array damage_values =
+		boost::assign::list_of
+		(messages::mu(0))
+		(messages::mu(1))
+		(messages::mu(0))
+		(messages::mu(0))
+		(messages::mu(0));
+			
+	target.damage(
+		damage,
+		damage_values);
+
 	die();
 }

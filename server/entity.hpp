@@ -48,8 +48,8 @@ public:
 	void max_health(const messages::space_unit);
 	team::type team() const;
 	void damage(
-		messages::space_unit);//,
-//		damage_array const&);
+		messages::space_unit,
+		damage_array const&);
 	bool dead() const;
 	virtual void die();
 

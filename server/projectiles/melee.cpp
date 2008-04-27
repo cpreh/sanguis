@@ -1,4 +1,5 @@
 #include "melee.hpp"
+#include <boost/assign/list_of.hpp>
 
 sanguis::server::projectiles::melee::melee(
 	const send_callback &send_callback_,
@@ -34,6 +35,16 @@ sanguis::server::projectiles::melee::dim() const
 void sanguis::server::projectiles::melee::do_hit(
 	entity &target)
 {
-	target.damage(damage);
+	const damage_array damage_values =
+		boost::assign::list_of
+		(messages::mu(1))
+		(messages::mu(0))
+		(messages::mu(0))
+		(messages::mu(0))
+		(messages::mu(0));
+			
+	target.damage(
+		damage,
+		damage_values);
 	die();
 }

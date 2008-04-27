@@ -132,7 +132,8 @@ sanguis::messages::space_unit sanguis::server::entity::direction() const
 }
 
 void sanguis::server::entity::damage(
-	const messages::space_unit d)
+	const messages::space_unit d,
+	damage_array const& damages)
 {
 	health_ -= d;
 	if(dead())
