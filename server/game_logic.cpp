@@ -8,6 +8,7 @@
 #include "../messages/player_change_weapon.hpp"
 #include "../messages/change_weapon.hpp"
 #include "../messages/game_state.hpp"
+#include "../messages/experience.hpp"
 #include "../truncation_check_cast.hpp"
 #include "../game_state.hpp"
 #include "../dispatch_type.hpp"
@@ -132,12 +133,17 @@ void sanguis::server::game_logic::create_game(const net::id_type net_id,const me
 				messages::mu(100),
 				m.name())));
 	
-	players[net_id] = &dynamic_cast<entities::player &>(raw_player);
+	entities::player &p = dynamic_cast<entities::player &>(raw_player);
+	
+	players[net_id] = &p;
 
-	players[net_id]->add_weapon(weapons::create(weapon_type::melee,get_environment()));
-	send(new messages::add_weapon(raw_player.id(),weapon_type::melee));
-	players[net_id]->add_weapon(weapons::create(weapon_type::pistol,get_environment()));
-	send(new messages::add_weapon(raw_player.id(),weapon_type::pistol));
+	p.add_weapon(weapons::create(weapon_type::melee,get_environment()));
+	send(new messages::add_weapon(p.id(),weapon_type::melee));
+	p.add_weapon(weapons::create(weapon_type::pistol,get_environment()));
+	send(new messages::add_weapon(p.id(),weapon_type::pistol));
+
+	// send start experience
+	send(new messages::experience(p.id(),p.exp()));
 
 	enemy_timer.v().reset();
 }
@@ -230,7 +236,7 @@ void sanguis::server::game_logic::add_enemy()
 		entity_ptr(
 			new entities::zombie(
 				get_environment(),
-				(damage::normal=messages::mu(1)),
+				(damage::all=messages::mu(0.5)),
 				pos,
 				angle,
 				speed,

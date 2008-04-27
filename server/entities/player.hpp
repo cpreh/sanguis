@@ -35,11 +35,13 @@ class player : public entity_with_weapon
 	bool invulnerable() const;
 	net::id_type net_id() const;
 	messages::string name() const;
+	messages::exp_type exp() const;
 
 	private:
 
 	net::id_type net_id_;
 	messages::string name_;
+	messages::exp_type exp_;
 };
 }
 }

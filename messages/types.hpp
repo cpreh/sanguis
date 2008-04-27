@@ -22,6 +22,7 @@ typedef vector2 pos_type;
 typedef sge::math::basic_dim<space_unit,2u> dim_type;
 typedef boost::uint32_t size_type;
 typedef space_unit health_type;
+typedef boost::uint32_t exp_type;
 typedef boost::uint32_t enum_type;
 
 string host_to_net(const sge::string &s);

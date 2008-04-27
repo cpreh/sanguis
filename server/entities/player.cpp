@@ -51,6 +51,11 @@ sanguis::messages::space_unit sanguis::server::entities::player::max_speed() con
 	return running_speed.value();
 }
 
+sanguis::messages::exp_type sanguis::server::entities::player::exp() const
+{
+	return exp_;
+}
+
 sanguis::entity_type::type
 sanguis::server::entities::player::type() const
 {

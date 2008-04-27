@@ -28,13 +28,28 @@ struct meta
 	operator damage_array() const;
 };
 
+struct all_meta;
+struct all_wrapper
+{
+	all_meta operator=(const damage_array::value_type) const;
+};
+
+struct all_meta 
+{
+	damage_array::value_type d;
+
+	all_meta(const damage_array::value_type);
+	operator damage_array() const;
+};
 
 extern const wrapper normal,piercing,fire,ice,pure;
+extern const all_wrapper all;
 }
 }
 }
 
 sanguis::damage_array operator,(sanguis::damage_array,const sanguis::server::damage::meta &);
 sanguis::damage_array operator,(const sanguis::server::damage::meta &,const sanguis::server::damage::meta &);
+sanguis::damage_array operator,(const sanguis::server::damage::all_meta &,const sanguis::server::damage::meta &);
 
 #endif
