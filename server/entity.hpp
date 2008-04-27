@@ -8,6 +8,7 @@
 #include "../messages/types.hpp"
 #include "../entity_id.hpp"
 #include "../entity_type.hpp"
+#include "../damage_type.hpp"
 
 namespace sanguis
 {
@@ -46,7 +47,9 @@ public:
 	messages::space_unit max_health() const;
 	void max_health(const messages::space_unit);
 	team::type team() const;
-	void damage(messages::space_unit);
+	void damage(
+		messages::space_unit);//,
+//		damage_array const&);
 	bool dead() const;
 	virtual void die();
 
