@@ -62,11 +62,13 @@ public:
 	bool aggressive() const;
 	void aggressive(const bool);
 
+
 	// is calculated from the above
 	messages::pos_type center() const;
 	messages::pos_type abs_speed() const;
 	messages::space_unit radius() const;
 
+	virtual messages::exp_type exp() const;
 	virtual messages::dim_type dim() const = 0;
 	virtual messages::space_unit max_speed() const = 0;
 	virtual entity_type::type type() const = 0;
@@ -78,11 +80,10 @@ public:
 protected:
 	void send(messages::base *); // TODO: this should be an auto_ptr
 	entity &insert(entity_ptr); 
-	environment get_environment() const;
+	const environment &get_environment() const;
 private:
 	entity_id id_;
-	send_callback send_callback_;
-	insert_callback insert_callback_;
+	environment env_;
 	messages::pos_type pos_;
 	messages::space_unit speed_,
 	                     angle_,

@@ -57,6 +57,11 @@ sanguis::messages::exp_type sanguis::server::entities::player::exp() const
 	return exp_;
 }
 
+void sanguis::server::entities::player::exp(const messages::exp_type e)
+{
+	exp_ = e;
+}
+
 sanguis::entity_type::type
 sanguis::server::entities::player::type() const
 {

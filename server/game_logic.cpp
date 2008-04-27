@@ -32,12 +32,16 @@
 #include <boost/bind.hpp>
 
 sanguis::server::game_logic::game_logic(
-	const send_callback send) 
+	const send_callback send,
+	const console_print_callback console_print) 
 	: send(send),
+		console_print(console_print),
 	  aborted_(false),
 	  send_timer(SGE_TEXT("message_freq"),sge::su(0.1)),
 		enemy_timer(SGE_TEXT("enemy_timer"),sge::su(2))
-{}
+{
+	sge::con::add(SGE_TEXT("player_exp"),boost::bind(&game_logic::get_player_exp,this,_1));
+}
 
 void sanguis::server::game_logic::process(const net::id_type id,const messages::base &m)
 {
@@ -232,7 +236,7 @@ void sanguis::server::game_logic::add_enemy()
 
 	const messages::pos_type pos = center + screen_center;
 
-	entities::zombie &z = dynamic_cast<entities::zombie &>(insert_entity(
+	insert_entity(
 		entity_ptr(
 			new entities::zombie(
 				get_environment(),
@@ -242,9 +246,7 @@ void sanguis::server::game_logic::add_enemy()
 				speed,
 				angle,
 				health,
-				max_health))));
-	
-	//z.add_weapon(weapons::create(weapon_type::melee,get_send_callback(),get_insert_callback()));
+				max_health)));
 }
 
 void sanguis::server::game_logic::operator()(const net::id_type id,const messages::player_start_shooting &)
@@ -318,5 +320,27 @@ sanguis::server::environment sanguis::server::game_logic::get_environment()
 		boost::bind(
 			&game_logic::insert_entity,
 			this,
+			_1),
+		boost::bind(
+			&game_logic::divide_exp,
+			this,
 			_1));
+}
+
+void sanguis::server::game_logic::divide_exp(const messages::exp_type exp)
+{
+	if (exp == static_cast<messages::exp_type>(0))
+		return;
+
+	for (player_map::iterator i = players.begin(); i != players.end(); ++i)
+	{
+		entities::player &p = *(i->second);
+		p.exp(p.exp()+exp);
+		send(new messages::experience(p.id(),p.exp()));
+	}
+}
+
+void sanguis::server::game_logic::get_player_exp(const sge::con::arg_list &)
+{
+	console_print(SGE_TEXT("player experience is: ")+boost::lexical_cast<sge::string>(players.begin()->second->exp()));
 }

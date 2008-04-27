@@ -10,7 +10,7 @@
 #include <cmath>
 
 sanguis::server::entity::entity(
-	const environment &env,
+	const environment &env_,
 	const armor_array &armor_,
 	const messages::pos_type &pos_,
 	const messages::space_unit angle_,
@@ -20,8 +20,7 @@ sanguis::server::entity::entity(
 	const team::type team_,
 	const messages::space_unit speed_)
 : id_(get_unique_id()),
-  send_callback_(env.send),
-  insert_callback_(env.insert),
+	env_(env_),
   pos_(pos_),
   speed_(speed_),
   angle_(angle_),
@@ -179,6 +178,7 @@ bool sanguis::server::entity::dead() const
 void sanguis::server::entity::die()
 {
 	health(messages::mu(0));
+	get_environment().exp(exp());
 }
 
 void sanguis::server::entity::update(
@@ -199,16 +199,21 @@ sanguis::server::entity::~entity()
 void sanguis::server::entity::send(
 	messages::base *const message)
 {
-	send_callback_(message);
+	get_environment().send(message);
 }
 
-sanguis::server::environment sanguis::server::entity::get_environment() const
+const sanguis::server::environment &sanguis::server::entity::get_environment() const
 {
-	return environment(send_callback_,insert_callback_);
+	return env_;
 }
 
 sanguis::server::entity &sanguis::server::entity::insert(
 	entity_ptr e)
 {
-	return insert_callback_(e);
+	return get_environment().insert(e);
+}
+
+sanguis::messages::exp_type sanguis::server::entity::exp() const
+{
+	return static_cast<messages::exp_type>(0);
 }

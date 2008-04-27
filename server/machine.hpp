@@ -9,6 +9,7 @@
 #include "message_event.hpp"
 
 #include <sge/systems_fwd.hpp>
+#include <sge/console/console_gfx.hpp>
 
 #include <boost/statechart/state_machine.hpp>
 
@@ -32,6 +33,7 @@ struct machine
 	public:
 	machine(
 		sge::systems &,
+		sge::con::console_gfx &,
 		net::port_type);
 	void process(const tick_event &);
 	void process_message(const net::id_type,const message_ptr);
@@ -41,6 +43,7 @@ struct machine
 	void data_callback(const net::id_type,const net::data_type &);
 
 	void send(messages::base *const m);
+	void console_print(const sge::string &);
 	net::port_type port() const { return port_; }
 	net::server &net() { return net_; }
 	void listen();
@@ -56,6 +59,7 @@ struct machine
 	load::resource::connection resource_connection;
 	load::model::connection model_connection;
 	client_map clients;
+	sge::con::console_gfx &con;
 };
 
 }
