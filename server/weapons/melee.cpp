@@ -1,4 +1,5 @@
 #include "melee.hpp"
+#include "../damage_types.hpp"
 #include "../entity.hpp"
 #include "../projectiles/melee.hpp"
 
@@ -24,6 +25,7 @@ void sanguis::server::weapons::melee::do_attack(
 		entity_ptr(
 			new projectiles::melee(
 				get_environment(),
+				(damage::normal=messages::mu(0.5)),
 				to,
 				from.team(),
 				damage)));

@@ -2,12 +2,14 @@
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::projectiles::melee::melee(
-	const environment &env,
+	environment const &env,
+	armor_array const &armor,
 	messages::pos_type const& pos,
-	const team::type team_,
-	const messages::space_unit damage)
+	team::type const team_,
+	messages::space_unit const damage)
 : projectile(
 	env,
+	armor,
 	pos,
 	messages::mu(0),
 	messages::mu(1), // some arbitrary health value

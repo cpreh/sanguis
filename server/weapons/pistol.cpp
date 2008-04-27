@@ -1,4 +1,5 @@
 #include "pistol.hpp"
+#include "../damage_types.hpp"
 #include "../entity.hpp"
 #include "../projectiles/simple_bullet.hpp"
 
@@ -21,6 +22,7 @@ void sanguis::server::weapons::pistol::do_attack(
 		entity_ptr(
 			new projectiles::simple_bullet(
 				get_environment(),
+				(damage::normal=messages::mu(1)),
 				from.center(),
 				from.angle(),
 				from.team(),

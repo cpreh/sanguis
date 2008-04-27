@@ -2,16 +2,18 @@
 
 sanguis::server::entities::enemy::enemy(
 	environment const &env,
+	armor_array const &armor,
 	messages::pos_type const &pos,
-	const messages::space_unit angle,
-	const messages::space_unit direction,
-	const messages::space_unit health,
-	const messages::space_unit max_health,
-	const team::type team,
-	const messages::space_unit speed,
-	const ai::ai_ptr ai_)
+	messages::space_unit const angle,
+	messages::space_unit const direction,
+	messages::space_unit const health,
+	messages::space_unit const max_health,
+	team::type const team,
+	messages::space_unit const speed,
+	ai::ai_ptr const ai_)
 : entity_with_weapon(
 	env,
+	armor,
 	pos,
 	angle,
 	direction,

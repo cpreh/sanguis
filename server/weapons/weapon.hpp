@@ -28,7 +28,7 @@ public:
 	virtual ~weapon();
 protected:
 	weapon(
-		const environment &,
+		const sanguis::server::environment &,
 		const weapon_type::type,
 		messages::space_unit range,
 		time_type base_cooldown);

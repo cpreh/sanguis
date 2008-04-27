@@ -5,16 +5,18 @@
 #include <boost/foreach.hpp>
 
 sanguis::server::projectiles::projectile::projectile(
-	const environment &env,
+	environment const &env,
+	armor_array const &armor,
 	messages::pos_type const& pos,
-	const messages::space_unit angle,
-	const messages::space_unit max_health,
-	const team::type team_,
-	const messages::space_unit speed,
-	const messages::space_unit max_speed_,
-	const time_type lifetime)
+	messages::space_unit const angle,
+	messages::space_unit const max_health,
+	team::type const team_,
+	messages::space_unit const speed,
+	messages::space_unit const max_speed_,
+	time_type const lifetime)
 : entity(
 	env,
+	armor,
 	pos,
 	angle,
 	angle,

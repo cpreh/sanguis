@@ -10,17 +10,19 @@ sge::con::var<sanguis::messages::space_unit> running_speed(SGE_TEXT("player_spee
 }
 
 sanguis::server::entities::player::player(
-	const environment &env,
-	const net::id_type net_id_,
-	const messages::pos_type &center_,
-	const messages::space_unit direction_,
-	const messages::space_unit speed_,
-	const messages::space_unit angle_,
-	const messages::space_unit health_,
-	const messages::space_unit max_health_,
-	const messages::string &name_)
+	environment const &env,
+	armor_array const &armor,
+	net::id_type const net_id_,
+	messages::pos_type const &center_,
+	messages::space_unit const direction_,
+	messages::space_unit const speed_,
+	messages::space_unit const angle_,
+	messages::space_unit const health_,
+	messages::space_unit const max_health_,
+	messages::string const &name_)
 	: entity_with_weapon(
 		env,
+		armor,
 		center_ - dim()/messages::mu(2),
 		angle_,
 		direction_,

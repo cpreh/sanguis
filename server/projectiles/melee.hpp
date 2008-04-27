@@ -13,7 +13,8 @@ namespace projectiles
 class melee : public projectile {
 public:
 	melee(
-		const environment &,
+		environment const &,
+		armor_array const &,
 		messages::pos_type const& pos,
 		team::type team,
 		messages::space_unit damage);

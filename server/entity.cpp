@@ -11,6 +11,7 @@
 
 sanguis::server::entity::entity(
 	const environment &env,
+	const armor_array &armor_,
 	const messages::pos_type &pos_,
 	const messages::space_unit angle_,
 	const messages::space_unit direction_,
@@ -28,10 +29,25 @@ sanguis::server::entity::entity(
   health_(health_),
   max_health_(max_health_),
   team_(team_),
-  // TODO: insert armor initialization
+	armor_(armor_),
   attacking_(false),
   aggressive_(false)
 {}
+
+const sanguis::armor_array &sanguis::server::entity::armor() const
+{
+	return armor_;
+}
+
+const sanguis::armor_array &sanguis::server::entity::armor_diff() const
+{
+	return armor_diff_;
+}
+
+sanguis::armor_array &sanguis::server::entity::armor_diff()
+{
+	return armor_diff_;
+}
 
 bool sanguis::server::entity::attacking() const
 {

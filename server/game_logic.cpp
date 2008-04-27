@@ -15,6 +15,7 @@
 #include "../resolution.hpp"
 #include "message_functor.hpp"
 #include "game_logic.hpp"
+#include "damage_types.hpp"
 #include "collision.hpp"
 #include "message_converter.hpp"
 #include "entities/player.hpp"
@@ -119,6 +120,7 @@ void sanguis::server::game_logic::create_game(const net::id_type net_id,const me
 		entity_ptr(
 			new entities::player(
 				get_environment(),
+				(damage::normal=messages::mu(0.5),damage::piercing=messages::mu(0.5),damage::fire=messages::mu(0.5),damage::ice=messages::mu(0.5)),
 				net_id,
 				messages::pos_type(
 					messages::mu(resolution().w()/2),
@@ -228,6 +230,7 @@ void sanguis::server::game_logic::add_enemy()
 		entity_ptr(
 			new entities::zombie(
 				get_environment(),
+				(damage::normal=messages::mu(1)),
 				pos,
 				angle,
 				speed,

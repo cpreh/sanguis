@@ -15,15 +15,16 @@ class player : public entity_with_weapon
 {
 	public:
 	player(
-		const environment &,
-		const net::id_type net_id,
-		const messages::pos_type &center,
-		const messages::space_unit direction,
-		const messages::space_unit speed,
-		const messages::space_unit angle,
-		const messages::space_unit health,
-		const messages::space_unit max_health,
-		const messages::string &name);
+		environment const &,
+		armor_array const &,
+		net::id_type const net_id,
+		messages::pos_type const &center,
+		messages::space_unit const direction,
+		messages::space_unit const speed,
+		messages::space_unit const angle,
+		messages::space_unit const health,
+		messages::space_unit const max_health,
+		messages::string const &name);
 	// virtual functions
 	messages::dim_type dim() const;
 	messages::space_unit max_speed() const;

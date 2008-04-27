@@ -22,6 +22,7 @@ public:
 protected:
 	entity(
 		const environment &,
+		const armor_array &,
 		const messages::pos_type &pos,
 		const messages::space_unit angle,
 		const messages::space_unit direction,
@@ -50,6 +51,10 @@ public:
 		damage_array const&);
 	bool dead() const;
 	virtual void die();
+
+	const armor_array &armor() const;
+	const armor_array &armor_diff() const;
+	armor_array &armor_diff();
 
 	bool attacking() const;
 	void attacking(const bool);
@@ -85,7 +90,7 @@ private:
 	                     health_,
 	                     max_health_;
 	team::type team_;
-	armor_array          armor_;
+	armor_array          armor_,armor_diff_;
 	bool attacking_,
 	     aggressive_;
 };

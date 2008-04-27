@@ -16,6 +16,7 @@ protected:
 
 	entity_with_weapon(
 		environment const &,
+		armor_array const &,
 		messages::pos_type const &pos,
 		messages::space_unit angle,
 		messages::space_unit direction,

@@ -16,7 +16,8 @@ namespace projectiles
 class projectile : public entity {
 protected:
 	projectile(
-		const environment &,
+		environment const &,
+		armor_array const &,
 		messages::pos_type const& pos,
 		messages::space_unit angle,
 		messages::space_unit max_health,

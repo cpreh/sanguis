@@ -11,13 +11,15 @@ const sanguis::messages::space_unit bullet_speed(
 }
 
 sanguis::server::projectiles::simple_bullet::simple_bullet(
-	const environment &env,
+	environment const & env,
+	armor_array const &armor,
 	messages::pos_type const& pos,
-	const messages::space_unit angle,
-	const team::type team_,
-	const messages::space_unit damage)
+	messages::space_unit const  angle,
+	team::type const  team_,
+	messages::space_unit const  damage)
 : projectile(
 	env,
+	armor,
 	pos,
 	angle,
 	messages::mu(1),
