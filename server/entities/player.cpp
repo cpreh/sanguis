@@ -31,7 +31,8 @@ sanguis::server::entities::player::player(
 		team::players,
 		speed_),
 	net_id_(net_id_),
-	name_(name_)
+	name_(name_),
+	exp_(static_cast<messages::exp_type>(1337))
 {}
 
 void sanguis::server::entities::player::attack(entity &) {}
@@ -54,6 +55,11 @@ sanguis::messages::space_unit sanguis::server::entities::player::max_speed() con
 sanguis::messages::exp_type sanguis::server::entities::player::exp() const
 {
 	return exp_;
+}
+
+void sanguis::server::entities::player::exp(const messages::exp_type e)
+{
+	exp_ = e;
 }
 
 sanguis::entity_type::type

@@ -11,6 +11,7 @@
 
 sanguis::server::machine::machine(
 	sge::systems &sys,
+	sge::con::console_gfx &con,
 	const net::port_type port_)
 : port_(port_),
   s_conn(net_.register_connect(boost::bind(&machine::connect_callback,this,_1))),
@@ -19,8 +20,14 @@ sanguis::server::machine::machine(
   s_data(net_.register_data(boost::bind(&machine::data_callback,this,_1,_2))),
   resource_connection(
   	sys.image_loader,
-	sys.renderer)
+	sys.renderer),
+	con(con)
 {}
+
+void sanguis::server::machine::console_print(const sge::string &s)
+{
+	con.print(s);
+}
 
 void sanguis::server::machine::process(const tick_event &t)
 {

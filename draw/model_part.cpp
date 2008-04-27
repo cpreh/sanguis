@@ -47,6 +47,7 @@ void sanguis::draw::model_part::animation(
 	// don't restart an animation unecessarly
 	if(animation_type_ == anim_type)
 		return;
+	
 	switch(animation_type_) {
 	case animation_type::dying:
 		return;
@@ -72,7 +73,7 @@ void sanguis::draw::model_part::weapon(
 void sanguis::draw::model_part::update(
 	const time_type time)
 {
-	ended = animation_.process();
+	ended = animation_.process() || ended;
 
 	if(sge::math::compare(desired_orientation, invalid_rotation))
 		return;
@@ -125,6 +126,8 @@ void sanguis::draw::model_part::update_animation()
 				.get(),
 		loop_method());
 	animation_.bind(ref);
+
+	ended = false;
 }
 
 void sanguis::draw::model_part::update_orientation(
@@ -139,9 +142,8 @@ sanguis::draw::model_part::loop_method() const
 	switch(animation_type_) {
 	case animation_type::none:
 	case animation_type::walking:
-		return sge::sprite::texture_animation::loop_method::repeat;
 	case animation_type::attacking:
-		return sge::sprite::texture_animation::loop_method::stop_at_end;
+		return sge::sprite::texture_animation::loop_method::repeat;
 	case animation_type::dying:
 		return sge::sprite::texture_animation::loop_method::stop_at_end;
 	default:

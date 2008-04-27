@@ -8,6 +8,7 @@
 #include "entities/fwd.hpp"
 #include "entity.hpp"
 #include "send_callback.hpp"
+#include "console_print_callback.hpp"
 #include "insert_callback.hpp"
 
 namespace sanguis
@@ -18,7 +19,7 @@ namespace server
 class game_logic
 {
 	public:
-	game_logic(send_callback);
+	game_logic(send_callback,console_print_callback);
 	void add_enemy();
 	void create_game(const net::id_type,const messages::client_info &);
 	void process(const net::id_type,const messages::base &);
@@ -35,6 +36,10 @@ class game_logic
 	void operator()(const net::id_type,const messages::player_change_weapon &);
 	void operator()(const net::id_type,const messages::disconnect &);
 	void handle_default_msg(const net::id_type,const messages::base &);
+
+	void divide_exp(const messages::exp_type);
+
+	void get_player_exp(const sge::con::arg_list &);
 	
 	private:
 	environment get_environment();
@@ -42,6 +47,7 @@ class game_logic
 	typedef std::map<net::id_type,entities::player*> player_map;
 
 	send_callback send;
+	console_print_callback console_print;
 	entity_container entities;
 	player_map players;
 	bool aborted_;

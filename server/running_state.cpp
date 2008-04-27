@@ -8,7 +8,8 @@
 
 sanguis::server::running_state::running_state(my_context ctx)
 	: my_base(ctx),
-	logic(boost::bind(&server::machine::send,&(context<machine>()),_1))
+	  logic(boost::bind(&server::machine::send,&(context<machine>()),_1),
+	  	boost::bind(&server::machine::console_print,&(context<machine>()),_1))
 {
 	sge::clog << SGE_TEXT("server: entering running state\n");
 }

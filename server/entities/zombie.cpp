@@ -64,3 +64,8 @@ sanguis::server::entities::zombie::type() const
 {
 	return entity_type::zombie;
 }
+
+sanguis::messages::exp_type sanguis::server::entities::zombie::exp() const
+{
+	return static_cast<messages::exp_type>(10);
+}

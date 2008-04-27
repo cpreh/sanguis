@@ -36,6 +36,7 @@ class player : public entity_with_weapon
 	net::id_type net_id() const;
 	messages::string name() const;
 	messages::exp_type exp() const;
+	void exp(const messages::exp_type);
 
 	private:
 

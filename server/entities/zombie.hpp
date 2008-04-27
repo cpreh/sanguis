@@ -24,6 +24,7 @@ class zombie : public enemy
 		messages::space_unit const max_health);
 
 	messages::dim_type dim() const;
+	messages::exp_type exp() const;
 	messages::space_unit max_speed() const;
 	entity_type::type type() const;
 	bool invulnerable() const;
