@@ -1,4 +1,14 @@
 -replace message_functor by something prettier
 -add sounds
--make player change its animation according to shooting status and weapon
+//-make player change its animation according to shooting status and weapon
 -add bullet spawn point
+-add experience system
+-add music
+-add HUD
+-add weapon pickups
+-add way more creeps!
+-add functionality to pick up items
+-add blood animations
+-non-sprite gfx/animations? (for stuff like lightning, light/shadow, ...)
+-make creeps stop flickering between Z-positions
+-improve this todo list
