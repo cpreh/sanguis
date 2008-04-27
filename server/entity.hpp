@@ -87,7 +87,9 @@ private:
 	                     health_,
 	                     max_health_;
 	team::type team_;
-	bool attacking_,aggressive_;
+	armor_array          armor_;
+	bool attacking_,
+	     aggressive_;
 };
 
 }

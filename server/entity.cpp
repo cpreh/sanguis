@@ -3,6 +3,10 @@
 #include "../angle_vector.hpp"
 #include <sge/math/vec_dim.hpp>
 #include <sge/math/power.hpp>
+#include <sge/math/compare.hpp>
+#include <sge/iostream.hpp>
+#include <algorithm>
+#include <ostream>
 #include <cmath>
 
 sanguis::server::entity::entity(
@@ -25,8 +29,9 @@ sanguis::server::entity::entity(
   health_(health_),
   max_health_(max_health_),
   team_(team_),
+  // TODO: insert armor initialization
   attacking_(false),
-	aggressive_(false)
+  aggressive_(false)
 {}
 
 bool sanguis::server::entity::attacking() const
@@ -135,7 +140,17 @@ void sanguis::server::entity::damage(
 	const messages::space_unit d,
 	damage_array const& damages)
 {
-	health_ -= d;
+	if(!sge::math::compare(
+		std::accumulate(
+			damages.begin(),
+			damages.end(),
+			messages::mu(0)),
+		messages::mu(1))
+	)
+		sge::clog << SGE_TEXT("Damage values don't equal 1. Check this!\n");
+	for(damage_array::size_type i = 0; i < damages.size(); ++i)
+		health_ -= d * damages[i] * (1 - armor_[i]);
+
 	if(dead())
 		die();
 	// TODO: send health here!
