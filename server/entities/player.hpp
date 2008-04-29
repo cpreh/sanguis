@@ -37,12 +37,15 @@ class player : public entity_with_weapon
 	messages::string name() const;
 	messages::exp_type exp() const;
 	void exp(const messages::exp_type);
+	messages::level_type level() const;
+	messages::level_type level_delta() const;
 
 	private:
 
 	net::id_type net_id_;
 	messages::string name_;
 	messages::exp_type exp_;
+	messages::level_type level_,level_delta_;
 };
 }
 }

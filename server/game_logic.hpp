@@ -38,6 +38,7 @@ class game_logic
 	void handle_default_msg(const net::id_type,const messages::base &);
 
 	void divide_exp(const messages::exp_type);
+	void level_callback(entities::player &,const messages::level_type);
 
 	void get_player_exp(const sge::con::arg_list &);
 	

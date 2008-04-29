@@ -30,6 +30,7 @@ class rotate;
 class speed;
 class add_weapon;
 class experience;
+class level_change;
 
 }
 }

@@ -7,6 +7,7 @@
 #include "../messages/add_weapon.hpp"
 #include "../messages/player_change_weapon.hpp"
 #include "../messages/change_weapon.hpp"
+#include "../messages/level_change.hpp"
 #include "../messages/game_state.hpp"
 #include "../messages/experience.hpp"
 #include "../truncation_check_cast.hpp"
@@ -41,6 +42,12 @@ sanguis::server::game_logic::game_logic(
 		enemy_timer(SGE_TEXT("enemy_timer"),sge::su(2))
 {
 	sge::con::add(SGE_TEXT("player_exp"),boost::bind(&game_logic::get_player_exp,this,_1));
+}
+
+void sanguis::server::game_logic::level_callback(entities::player &p,const messages::level_type)
+{
+	// no message_converter here because it operates on a _specific_ entity type
+	send(new messages::level_change(p.id(),p.level()));
 }
 
 void sanguis::server::game_logic::process(const net::id_type id,const messages::base &m)
@@ -147,7 +154,9 @@ void sanguis::server::game_logic::create_game(const net::id_type net_id,const me
 	send(new messages::add_weapon(p.id(),weapon_type::pistol));
 
 	// send start experience
+	// no message_converter here because it operates on a _specific_ entity type
 	send(new messages::experience(p.id(),p.exp()));
+	send(new messages::level_change(p.id(),p.level()));
 
 	enemy_timer.v().reset();
 }
@@ -324,7 +333,11 @@ sanguis::server::environment sanguis::server::game_logic::get_environment()
 		boost::bind(
 			&game_logic::divide_exp,
 			this,
-			_1));
+			_1),
+		boost::bind(
+			&game_logic::level_callback,
+			this,
+			_1,_2));
 }
 
 void sanguis::server::game_logic::divide_exp(const messages::exp_type exp)

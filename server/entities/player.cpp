@@ -1,6 +1,7 @@
 #include "player.hpp"
 #include "../../load/model/collection.hpp"
 #include "../../load/model/singleton.hpp"
+#include "../level_calculate.hpp"
 #include <sge/math/vec_dim.hpp>
 #include <sge/console/console.hpp>
 
@@ -32,7 +33,9 @@ sanguis::server::entities::player::player(
 		speed_),
 	net_id_(net_id_),
 	name_(name_),
-	exp_(static_cast<messages::exp_type>(1337))
+	exp_(static_cast<messages::exp_type>(0)),
+	level_(static_cast<messages::level_type>(0)),
+	level_delta_(static_cast<messages::level_type>(0))
 {}
 
 void sanguis::server::entities::player::attack(entity &) {}
@@ -60,6 +63,13 @@ sanguis::messages::exp_type sanguis::server::entities::player::exp() const
 void sanguis::server::entities::player::exp(const messages::exp_type e)
 {
 	exp_ = e;
+	const messages::level_type old_level = level(),new_level = level_calculate(exp(),old_level);
+	if (new_level > old_level)
+	{
+		level_delta_ += new_level - old_level;
+		level_ = new_level;
+		get_environment().level(*this,old_level);
+	}
 }
 
 sanguis::entity_type::type
@@ -78,4 +88,14 @@ sanguis::messages::string
 sanguis::server::entities::player::name() const
 {
 	return name_;
+}
+
+sanguis::messages::level_type sanguis::server::entities::player::level() const
+{
+	return level_;
+}
+
+sanguis::messages::level_type sanguis::server::entities::player::level_delta() const
+{
+	return level_delta_;
 }
