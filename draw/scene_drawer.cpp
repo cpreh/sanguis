@@ -9,6 +9,7 @@
 #include "../messages/add_weapon.hpp"
 #include "../messages/base.hpp"
 #include "../messages/change_weapon.hpp"
+#include "../messages/experience.hpp"
 #include "../messages/health.hpp"
 #include "../messages/max_health.hpp"
 #include "../messages/move.hpp"
@@ -33,8 +34,11 @@
 #include <functional>
 #include <typeinfo>
 
-sanguis::draw::scene_drawer::scene_drawer(const sge::renderer_ptr rend)
+sanguis::draw::scene_drawer::scene_drawer(
+	const sge::renderer_ptr rend,
+	sge::font &font)
 : ss(rend),
+  hud_(font),
   player_(0)
 {}
 
@@ -44,6 +48,7 @@ void sanguis::draw::scene_drawer::process_message(const messages::base& m)
 		boost::mpl::vector<
 			messages::add,
 			messages::change_weapon,
+			messages::experience,
 			messages::health,
 			messages::max_health,
 			messages::move,
@@ -94,6 +99,8 @@ void sanguis::draw::scene_drawer::draw(const time_type delta)
 	}
 
 	ss.render(sprites.begin(), sprites.end());
+
+	hud_.update(delta);
 }
 
 sanguis::draw::player const &
@@ -153,6 +160,11 @@ void sanguis::draw::scene_drawer::operator()(const messages::change_weapon& m)
 	}
 		
 	get_entity(m.id()).weapon(static_cast<weapon_type::type>(m.weapon()));
+}
+
+void sanguis::draw::scene_drawer::operator()(const messages::experience& m)
+{
+	hud_.experience(m.exp());
 }
 
 void sanguis::draw::scene_drawer::operator()(const messages::health& m)

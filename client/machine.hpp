@@ -12,7 +12,7 @@
 #include <sge/font/font_metrics.hpp>
 #include <sge/font/font_system.hpp>
 #include <sge/font/font_drawer.hpp>
-#include <sge/font/font.hpp>
+#include <sge/font/fwd.hpp>
 #include <sge/input/key_state_tracker.hpp>
 #include <sge/systems.hpp>
 #include <sge/texture/default_creator.hpp>

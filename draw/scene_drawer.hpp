@@ -1,31 +1,35 @@
 #ifndef SANGUIS_DRAW_SCENE_DRAWER_HPP_INCLUDED
 #define SANGUIS_DRAW_SCENE_DRAWER_HPP_INCLUDED
 
-#include <vector>
-#include <map>
-#include <boost/function.hpp>
-#include <boost/ptr_container/ptr_map.hpp>
-#include <sge/renderer/renderer.hpp>
-#include <sge/sprite/system.hpp>
-#include <sge/type_info.hpp>
-#include <sge/timer.hpp>
+#include "entity.hpp"
+#include "hud.hpp"
 #include "../entity_id.hpp"
 #include "../messages/fwd.hpp"
 #include "../time_type.hpp"
 #include "../client_messages/fwd.hpp"
-#include "entity.hpp"
+#include <sge/renderer/renderer.hpp>
+#include <sge/sprite/system.hpp>
+#include <sge/font/fwd.hpp>
+#include <sge/type_info.hpp>
+#include <sge/timer.hpp>
+#include <boost/function.hpp>
+#include <boost/noncopyable.hpp>
+#include <boost/ptr_container/ptr_map.hpp>
+#include <vector>
+#include <map>
 
 namespace sanguis
 {
-
 namespace draw
 {
 
 class player;
 
-class scene_drawer {
+class scene_drawer : boost::noncopyable {
 public:
-	scene_drawer(sge::renderer_ptr);
+	scene_drawer(
+		sge::renderer_ptr,
+		sge::font &);
 	
 	void process_message(const messages::base&);
 
@@ -37,6 +41,7 @@ public:
 
 	void operator()(const messages::add&);
 	void operator()(const messages::change_weapon&);
+	void operator()(const messages::experience&);
 	void operator()(const messages::health&);
 	void operator()(const messages::max_health&);
 	void operator()(const messages::move&);
@@ -56,6 +61,7 @@ private:
 	void process_default_client_msg(const client_messages::base&);
 
 	sge::sprite::system ss;
+	hud                 hud_;
 	player*             player_;
 
 	typedef boost::ptr_map<entity_id, entity> entity_map;

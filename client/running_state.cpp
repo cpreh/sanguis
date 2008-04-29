@@ -39,7 +39,9 @@ const sanguis::entity_id cursor_id(sanguis::client::next_id()),
 
 sanguis::client::running_state::running_state(my_context ctx)
 : my_base(ctx), 
-  drawer(context<machine>().sys.renderer),
+  drawer(
+	context<machine>().sys.renderer,
+	context<machine>().font),
   input(boost::bind(&running_state::handle_player_action, this, _1)),
   input_connection(
 	context<machine>().con_wrapper.register_callback(
