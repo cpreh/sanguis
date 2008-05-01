@@ -7,19 +7,14 @@ sanguis::server::perks::perk::perk()
   level_(0)
 {}
 
-void sanguis::server::perks::perk::bind(entity &e)
-{
-	entity_ = &e;
-}
-
 void sanguis::server::perks::perk::raise_level()
 {
 	if(!can_raise_level())
 		throw sge::exception(
 			SGE_TEXT("Can't raise perk level!"));
-	deactivate();
+	do_deactivate();
 	++level_;
-	activate();
+	do_activate();
 }
 
 sanguis::server::perks::perk::~perk()
@@ -38,4 +33,22 @@ sanguis::server::perks::perk::get_entity() const
 		throw sge::exception(
 			SGE_TEXT("perk has no entity!"));
 	return *entity_;
+}
+
+void sanguis::server::perks::perk::activate(
+	entity &e)
+{
+	if(entity_)
+		throw sge::exception(
+			SGE_TEXT("perk already activated!"));
+	entity_ = &e;
+	do_activate();
+}
+
+void sanguis::server::perks::perk::deactivate()
+{
+	if(!entity_)
+		throw sge::exception(
+			SGE_TEXT("perk already deactivated!"));
+	do_deactivate();
 }

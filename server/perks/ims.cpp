@@ -1,13 +1,13 @@
 #include "ims.hpp"
 #include "../entity.hpp"
 
-void sanguis::server::perks::ims::activate()
+void sanguis::server::perks::ims::do_activate()
 {
 	entity &e(get_entity());
 //	e.max_speed(e.max_speed() * factor());
 }
 
-void sanguis::server::perks::ims::deactivate()
+void sanguis::server::perks::ims::do_deactivate()
 {
 	entity &e(get_entity());
 //	e.max_speed(e.max_speed() / factor());
