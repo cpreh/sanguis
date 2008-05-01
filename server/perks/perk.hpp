@@ -1,6 +1,8 @@
 #ifndef SANGUIS_SERVER_PERKS_PERK_HPP_INCLUDED
 #define SANGUIS_SERVER_PERKS_PERK_HPP_INCLUDED
 
+#include <memory>
+
 namespace sanguis
 {
 namespace server
@@ -28,6 +30,7 @@ private:
 	entity    *entity_;
 	level_type level_;
 };
+typedef std::auto_ptr<perk> perk_auto_ptr;
 
 }
 }

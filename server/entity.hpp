@@ -4,10 +4,12 @@
 #include "entity_fwd.hpp"
 #include "teams.hpp"
 #include "environment.hpp"
+#include "perks/perk.hpp"
 #include "../messages/types.hpp"
 #include "../entity_id.hpp"
 #include "../entity_type.hpp"
 #include "../damage_type.hpp"
+#include <boost/ptr_container/ptr_list.hpp>
 
 namespace sanguis
 {
@@ -78,6 +80,10 @@ public:
 	virtual void update(
 		const time_type,
 		entity_container &entities);
+
+	void add_perk(
+		perks::perk_auto_ptr); 
+	
 	virtual ~entity();
 protected:
 	void send(messages::base *); // TODO: this should be an auto_ptr
@@ -94,9 +100,13 @@ private:
 	                     health_,
 	                     max_health_;
 	team::type team_;
-	armor_array          armor_,armor_diff_;
+	armor_array          armor_,
+	                     armor_diff_;
 	bool attacking_,
 	     aggressive_;
+
+	typedef boost::ptr_list<perks::perk> perk_container;
+	perk_container perks_;
 };
 
 }

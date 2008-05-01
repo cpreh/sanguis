@@ -205,6 +205,15 @@ void sanguis::server::entity::direction(const messages::space_unit _direction)
 	direction_ = _direction;
 }
 
+void sanguis::server::entity::add_perk(
+	perks::perk_auto_ptr p)
+{
+	perks_.push_back(p);
+	perks::perk &cur(perks_.back());
+	cur.bind(*this);
+	cur.activate();
+}
+
 sanguis::server::entity::~entity()
 {}
 

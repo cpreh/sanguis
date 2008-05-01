@@ -8,6 +8,7 @@ namespace perk_type
 {
 
 enum type {
+	ims,
 	size
 };
 
