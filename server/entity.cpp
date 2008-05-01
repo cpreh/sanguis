@@ -5,8 +5,10 @@
 #include <sge/math/power.hpp>
 #include <sge/math/compare.hpp>
 #include <sge/iostream.hpp>
+#include <boost/foreach.hpp>
 #include <algorithm>
 #include <ostream>
+#include <typeinfo>
 #include <cmath>
 
 sanguis::server::entity::entity(
@@ -208,6 +210,15 @@ void sanguis::server::entity::direction(const messages::space_unit _direction)
 void sanguis::server::entity::add_perk(
 	perks::perk_auto_ptr p)
 {
+	// check, if we already have such a perk
+	BOOST_FOREACH(perks::perk &i, perks_)
+	{
+		if(typeid(i) == typeid(p))
+		{
+			i.raise_level();
+			return;
+		}
+	}
 	perks_.push_back(p);
 	perks::perk &cur(perks_.back());
 	cur.bind(*this);
