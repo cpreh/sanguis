@@ -18,11 +18,13 @@ sanguis::server::entity::entity(
 	const messages::space_unit health_,
 	const messages::space_unit max_health_,
 	const team::type team_,
-	const messages::space_unit speed_)
+	const messages::space_unit speed_,
+	const messages::space_unit max_speed_)
 : id_(get_unique_id()),
 	env_(env_),
   pos_(pos_),
   speed_(speed_),
+  max_speed_(max_speed_),
   angle_(angle_),
   direction_(direction_),
   health_(health_),
@@ -123,6 +125,16 @@ sanguis::messages::space_unit sanguis::server::entity::angle() const
 void sanguis::server::entity::angle(const messages::space_unit _angle)
 {
 	angle_ = _angle;
+}
+
+sanguis::messages::space_unit sanguis::server::entity::max_speed() const
+{
+	return max_speed_;
+}
+
+void sanguis::server::entity::max_speed(const messages::space_unit _max_speed)
+{
+	max_speed_ = _max_speed;
 }
 
 sanguis::messages::space_unit sanguis::server::entity::max_health() const

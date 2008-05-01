@@ -27,7 +27,6 @@ class player : public entity_with_weapon
 		messages::string const &name);
 	// virtual functions
 	messages::dim_type dim() const;
-	messages::space_unit max_speed() const;
 	entity_type::type type() const;
 
 	// own functions

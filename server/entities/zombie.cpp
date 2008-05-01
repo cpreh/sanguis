@@ -7,7 +7,6 @@
 
 namespace
 {
-sge::con::var<sanguis::messages::space_unit> running_speed(SGE_TEXT("zombie_speed"),sanguis::messages::mu(40));
 sge::con::var<sanguis::messages::space_unit> zombie_damage(SGE_TEXT("zombie_damage"),sanguis::messages::mu(5));
 }
 
@@ -30,6 +29,7 @@ sanguis::server::entities::zombie::zombie(
 			max_health_,
 			team::monsters,
 			speed_,
+			messages::mu(40),
 			ai::ai_ptr(
 				new ai::simple(
 					*this)))
@@ -52,11 +52,6 @@ sanguis::messages::dim_type sanguis::server::entities::zombie::dim() const
 		SGE_TEXT("zombie00"),
 		SGE_TEXT("default")
 		);
-}
-
-sanguis::messages::space_unit sanguis::server::entities::zombie::max_speed() const
-{
-	return running_speed.value();
 }
 
 sanguis::entity_type::type

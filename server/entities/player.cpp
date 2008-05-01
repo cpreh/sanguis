@@ -5,11 +5,6 @@
 #include <sge/math/vec_dim.hpp>
 #include <sge/console/console.hpp>
 
-namespace
-{
-sge::con::var<sanguis::messages::space_unit> running_speed(SGE_TEXT("player_speed"),sanguis::messages::mu(60));
-}
-
 sanguis::server::entities::player::player(
 	environment const &env,
 	armor_array const &armor,
@@ -30,7 +25,8 @@ sanguis::server::entities::player::player(
 		health_,
 		max_health_,
 		team::players,
-		speed_),
+		speed_,
+		messages::mu(60)),
 	net_id_(net_id_),
 	name_(name_),
 	exp_(static_cast<messages::exp_type>(0)),
@@ -48,11 +44,6 @@ bool sanguis::server::entities::player::invulnerable() const
 sanguis::messages::dim_type sanguis::server::entities::player::dim() const
 {
 	return sge::math::structure_cast<messages::space_unit>(load::model::singleton()["player"]["bottom"][weapon_type::pistol][animation_type::walking].get().dim());
-}
-
-sanguis::messages::space_unit sanguis::server::entities::player::max_speed() const
-{
-	return running_speed.value();
 }
 
 sanguis::messages::exp_type sanguis::server::entities::player::exp() const

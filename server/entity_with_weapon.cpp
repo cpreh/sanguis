@@ -21,7 +21,8 @@ sanguis::server::entity_with_weapon::entity_with_weapon(
 	const messages::space_unit health_,
 	const messages::space_unit max_health_,
 	const team::type team_,
-	const messages::space_unit speed_)
+	const messages::space_unit speed_,
+	const messages::space_unit max_speed_)
 : entity(
 	env,
 	armor,
@@ -31,7 +32,8 @@ sanguis::server::entity_with_weapon::entity_with_weapon(
 	health_,
 	max_health_,
 	team_,
-	speed_),
+	speed_,
+	max_speed_),
 	weapon_(weapon_type::none),
   target_(target_undefined)
 {

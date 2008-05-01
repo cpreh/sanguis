@@ -29,7 +29,8 @@ protected:
 		const messages::space_unit health,
 		const messages::space_unit max_health,
 		const team::type team,
-		const messages::space_unit speed);
+		const messages::space_unit speed,
+		const messages::space_unit max_speed);
 public:
 	entity_id id() const;
 
@@ -45,6 +46,8 @@ public:
 	void health(const messages::space_unit);
 	messages::space_unit max_health() const;
 	void max_health(const messages::space_unit);
+	messages::space_unit max_speed() const;
+	void max_speed(const messages::space_unit);
 	team::type team() const;
 	void damage(
 		messages::space_unit,
@@ -70,7 +73,6 @@ public:
 
 	virtual messages::exp_type exp() const;
 	virtual messages::dim_type dim() const = 0;
-	virtual messages::space_unit max_speed() const = 0;
 	virtual entity_type::type type() const = 0;
 	virtual bool invulnerable() const = 0;
 	virtual void update(
@@ -86,6 +88,7 @@ private:
 	environment env_;
 	messages::pos_type pos_;
 	messages::space_unit speed_,
+	                     max_speed_,
 	                     angle_,
 	                     direction_,
 	                     health_,

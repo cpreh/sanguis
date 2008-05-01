@@ -15,16 +15,16 @@ sanguis::server::projectiles::projectile::projectile(
 	messages::space_unit const max_speed_,
 	time_type const lifetime)
 : entity(
-	env,
-	armor,
-	pos,
-	angle,
-	angle,
-	max_health,
-	max_health,
-	team_,
-	speed),
-  max_speed_(max_speed_),
+		env,
+		armor,
+		pos,
+		angle,
+		angle,
+		max_health,
+		max_health,
+		team_,
+		speed,
+		max_speed_),
   lifetime(
   	to_sge_time(
 		lifetime))
