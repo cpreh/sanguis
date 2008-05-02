@@ -82,6 +82,16 @@ void sanguis::draw::model::max_health(
 	healthbar_.max_health(max_health);
 }
 
+sge::space_unit sanguis::draw::model::max_health() const
+{
+	return healthbar_.max_health();
+}
+
+sge::space_unit sanguis::draw::model::health() const
+{
+	return healthbar_.health();
+}
+
 void sanguis::draw::model::weapon(
 	const weapon_type::type weapon_)
 {

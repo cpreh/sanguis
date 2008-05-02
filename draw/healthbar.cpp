@@ -62,6 +62,12 @@ sanguis::draw::healthbar::health() const
 	return health_;
 }
 
+sge::space_unit
+sanguis::draw::healthbar::max_health() const
+{
+	return max_health_;
+}
+
 void sanguis::draw::healthbar::attach_to(
 	const sge::sprite::point& p,
 	const sge::sprite::dim& d)

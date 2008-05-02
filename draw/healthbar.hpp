@@ -13,6 +13,7 @@ public:
 	healthbar();
 	void health(sge::space_unit);
 	void max_health(sge::space_unit);
+	sge::space_unit max_health() const;
 	sge::space_unit health() const;
 	void attach_to(
 		const sge::sprite::point&,

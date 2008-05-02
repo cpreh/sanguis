@@ -30,6 +30,9 @@ protected:
 	void orientation(
 		sge::sprite::rotation_type,
 		sprite_vector::size_type index);
+
+	sge::space_unit max_health() const;
+	sge::space_unit health() const;
 private:
 	void health(sge::space_unit);
 	void max_health(sge::space_unit);

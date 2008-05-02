@@ -90,6 +90,11 @@ void sanguis::draw::sprite::speed(const sge::math::vector2& s)
 	speed_ = s;
 }
 
+sge::math::vector2 sanguis::draw::sprite::pos() const
+{
+	return pos_;
+}
+
 void sanguis::draw::sprite::pos(const sge::sprite::point& p)
 {
 	pos_ = sge::math::structure_cast<sge::space_unit>(p);

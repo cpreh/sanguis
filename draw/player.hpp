@@ -16,13 +16,15 @@ public:
 	player(entity_id id);
 	void orientation(sge::sprite::rotation_type);
 	void speed(const sge::math::vector2 &);
+	sge::space_unit health() const;
+	sge::space_unit max_health() const;
+	sge::sprite::point pos() const;
 private:
 	void update(time_type);
 	sge::sprite::object& bottom_sprite();
 	sge::sprite::object& top_sprite();
 	sge::space_unit angle_,
 	                target_angle;
-	sge::space_unit health_;
 };
 
 

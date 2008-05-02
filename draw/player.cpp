@@ -128,3 +128,18 @@ sge::sprite::object& sanguis::draw::player::top_sprite()
 {
 	return at(1);
 }
+
+sge::space_unit sanguis::draw::player::health() const
+{
+	return model::health();
+}
+
+sge::space_unit sanguis::draw::player::max_health() const
+{
+	return model::max_health();
+}
+
+sge::sprite::point sanguis::draw::player::pos() const
+{
+	return sge::math::structure_cast<sge::sprite::unit>(model::pos());
+}

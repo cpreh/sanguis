@@ -12,6 +12,7 @@ enum type {
 	cursor,
 	healthbar_upper,
 	healthbar_lower,
+	reaper,
 	player_upper,
 	bullet,
 	player_lower,
