@@ -142,6 +142,8 @@ void sanguis::draw::scene_drawer::operator()(const messages::add& m)
 				factory::entity_ptr(new reaper(reaper_id,*player_))));
 
 		process_message(messages::resize(reaper_id, server::get_dim("reaper","default")));
+		process_message(messages::max_health(reaper_id, messages::mu(1)));
+		process_message(messages::health(reaper_id, messages::mu(1)));
 
 		if (reaper_ret.second == false)
 			throw sge::exception(SGE_TEXT("couldn't insert reaper"));

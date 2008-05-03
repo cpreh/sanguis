@@ -42,6 +42,8 @@ void sanguis::draw::reaper::update(time_type const t)
 	// reset speed if target is reached
 	if (sge::math::nearly_equals(current_health,target_health))
 		speed(sge::math::vector2());
+	else
+		speed(sge::math::vector2(sge::su(1),sge::su(0)));
 	
 	model::update(t);
 
