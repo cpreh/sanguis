@@ -17,6 +17,7 @@ private:
 	const player &p;
 	sge::space_unit current_health;
 	sge::space_unit target_health;
+	bool inited;
 };
 
 }

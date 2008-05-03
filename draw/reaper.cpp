@@ -11,14 +11,15 @@
 
 namespace
 {
-const sge::space_unit health_regain = sge::su(20);
+const sge::space_unit health_regain = sge::su(5);
 }
 
 sanguis::draw::reaper::reaper(entity_id id,player const &p)
 	: model(id,SGE_TEXT("reaper")),
 	  p(p),
 		current_health(p.health()),
-		target_health(p.health())
+		target_health(p.health()),
+		inited(false)
 {
 	for (iterator i = begin(); i != end(); ++i)
 	{
@@ -35,9 +36,17 @@ void sanguis::draw::reaper::update(time_type const t)
 
 	if (!sge::math::nearly_equals(target_health,p.health()))
 	{
-		target_health = p.health();
-		// just set some speed so the walking animation is played
-		speed(sge::math::vector2(sge::su(1),sge::su(0)));
+		if (!inited)
+		{
+			target_health = current_health = p.health();
+			inited = true;
+		}
+		else
+		{
+			target_health = p.health();
+			// just set some speed so the walking animation is played
+			speed(sge::math::vector2(sge::su(1),sge::su(0)));
+		}
 	}
 
 	const bool regain = sge::math::abs(current_health - target_health) > health_regain * t;
