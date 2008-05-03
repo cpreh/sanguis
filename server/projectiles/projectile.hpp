@@ -4,7 +4,7 @@
 #include "../../time_type.hpp"
 #include "../../messages/types.hpp"
 #include "../entity.hpp"
-#include <sge/timer.hpp>
+#include <sge/time/timer.hpp>
 
 namespace sanguis
 {
@@ -37,7 +37,7 @@ private:
 	virtual void do_die();
 
 	messages::space_unit max_speed_;
-	sge::timer           lifetime;
+	sge::time::timer     lifetime;
 };
 
 }

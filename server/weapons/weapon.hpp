@@ -6,7 +6,7 @@
 #include "../../weapon_type.hpp"
 #include "../environment.hpp"
 #include "../entity_fwd.hpp"
-#include <sge/timer.hpp>
+#include <sge/time/timer.hpp>
 #include <boost/function.hpp>
 #include <memory>
 
@@ -48,7 +48,7 @@ private:
 	environment          env_;
 	weapon_type::type    type_;
 	messages::space_unit range_;
-	sge::timer           cooldown_timer;
+	sge::time::timer     cooldown_timer;
 };
 
 typedef std::auto_ptr<weapon> weapon_ptr;

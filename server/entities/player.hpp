@@ -2,8 +2,8 @@
 #define SANGUIS_SERVER_ENTITIES_PLAYER_HPP_INCLUDED
 
 #include "../entity_with_weapon.hpp"
+#include "../../messages/types.hpp"
 #include "../../net/types.hpp"
-#include <sge/timer.hpp>
 
 namespace sanguis
 {

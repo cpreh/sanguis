@@ -1,7 +1,6 @@
 #include "projectile.hpp"
 #include "../collision.hpp"
-#include "../../time_util.hpp"
-#include <sge/time.hpp>
+#include <sge/time/second.hpp>
 #include <boost/foreach.hpp>
 
 sanguis::server::projectiles::projectile::projectile(
@@ -26,7 +25,7 @@ sanguis::server::projectiles::projectile::projectile(
 		speed,
 		max_speed_),
   lifetime(
-  	to_sge_time(
+  	sge::time::second(
 		lifetime))
 {}
 
