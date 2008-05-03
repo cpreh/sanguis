@@ -5,6 +5,7 @@
 #include "coord_transform.hpp"
 #include "decay_time.hpp"
 #include "reaper.hpp"
+#include "../server/get_dim.hpp"
 #include "../dispatch_type.hpp"
 #include "../messages/add.hpp"
 #include "../messages/add_weapon.hpp"
@@ -134,10 +135,13 @@ void sanguis::draw::scene_drawer::operator()(const messages::add& m)
 		player_ = dynamic_cast<player*>(&e);
 
 		const entity_id reaper_id = client::next_id();
+
 		const std::pair<entity_map::iterator, bool> reaper_ret(
 			entities.insert(
 				reaper_id,
 				factory::entity_ptr(new reaper(reaper_id,*player_))));
+
+		process_message(messages::resize(reaper_id, server::get_dim("reaper","default")));
 
 		if (reaper_ret.second == false)
 			throw sge::exception(SGE_TEXT("couldn't insert reaper"));

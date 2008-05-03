@@ -22,7 +22,7 @@ sge::con::var<sge::space_unit> turning_speed(SGE_TEXT("player_turning_speed"),sg
 
 sanguis::draw::player::player(const entity_id id)
 : model(id,
-	SGE_TEXT("player")),
+		SGE_TEXT("player")),
 	angle_(sge::su(0)),
 	target_angle(angle_)
 {
@@ -54,8 +54,6 @@ void sanguis::draw::player::orientation(const sge::sprite::rotation_type u)
 void sanguis::draw::player::update(const time_type time)
 {
 	model::update(time);
-
-	//sge::clog << "draw: player position: " << pos_ << "\n";
 
 	// FIXME: load rotation point (see above)
 	const sge::math::vector2 leg_center(sge::math::structure_cast<sge::space_unit>(player_leg_center));
