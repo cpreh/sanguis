@@ -1,7 +1,6 @@
 #include "weapon.hpp"
 #include "../entity.hpp"
-#include "../../time_util.hpp"
-#include <sge/time.hpp>
+#include <sge/time/second.hpp>
 
 sanguis::messages::space_unit
 sanguis::server::weapons::weapon::range() const
@@ -36,8 +35,7 @@ sanguis::server::weapons::weapon::weapon(
 	type_(type_),
 	range_(range_),
   cooldown_timer(
-	to_sge_time(
-		base_cooldown_))
+  	sge::time::second(base_cooldown_))
 {}
 
 void sanguis::server::weapons::weapon::send(messages::base *m)

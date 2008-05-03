@@ -4,7 +4,7 @@
 #include <vector>
 #include <sge/sprite/object.hpp>
 #include <sge/math/vector.hpp>
-#include <sge/timer.hpp>
+#include <sge/time/timer.hpp>
 #include "../entity_id.hpp"
 #include "../weapon_type.hpp"
 #include "../time_type.hpp"
@@ -41,7 +41,7 @@ protected:
 	virtual sge::space_unit orientation() const = 0;
 private:
 	entity_id        id_;
-	sge::timer       decay_timer;
+	sge::time::timer decay_timer;
 };
 
 }

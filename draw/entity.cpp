@@ -1,4 +1,6 @@
 #include "entity.hpp"
+#include <sge/time/second.hpp>
+#include <sge/time/resolution.hpp>
 #include <sge/iostream.hpp>
 #include <ostream>
 	
@@ -16,7 +18,7 @@ void sanguis::draw::entity::decay_time(
 	const time_type diff)
 {
 	decay_timer.interval(
-		diff * sge::second()); // FIXME: put this functionality in sge
+		sge::time::second(diff));
 }
 
 bool sanguis::draw::entity::may_be_removed() const
@@ -45,9 +47,10 @@ void sanguis::draw::entity::stop_attacking()
 	sge::clog << SGE_TEXT("warning: entity got a stop attacking message!\n");
 }
 
-sanguis::draw::entity::entity(const entity_id id_)
+sanguis::draw::entity::entity(
+	const entity_id id_)
 : id_(id_),
   decay_timer(
-	0,
+  	sge::time::resolution(0),
 	false)
 {}

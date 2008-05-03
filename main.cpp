@@ -22,6 +22,7 @@
 #include <sge/texture/default_creator_impl.hpp>
 #include <sge/texture/manager.hpp>
 #include <sge/texture/util.hpp>
+#include <sge/time/second.hpp>
 
 // boost
 #include <boost/program_options.hpp>
@@ -107,7 +108,8 @@ try
 	// this should construct, among others, the renderer
 	client.initiate();
 
-	sge::timer frame_timer(sge::second());
+	sge::time::timer frame_timer(
+		sge::time::second(sge::su(1)));
 
 	bool running = true;
 	while (running)

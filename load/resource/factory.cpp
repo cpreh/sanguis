@@ -11,6 +11,8 @@
 #include <sge/texture/default_creator_impl.hpp>
 #include <sge/texture/manager.hpp>
 #include <sge/texture/util.hpp>
+#include <sge/time/millisecond.hpp>
+#include <sge/time/resolution.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/weak_ptr.hpp>
 #include <boost/algorithm/string/trim.hpp>
@@ -77,7 +79,8 @@ environment::load_animation(
 			sge::sprite::animation_series ret;
 			ret.push_back(
 				sge::sprite::animation_entity(
-					std::numeric_limits<sge::time_type>::max(),
+					sge::time::resolution(
+						std::numeric_limits<sge::time::unit>::max()),
 					load_texture_inner(*it)));
 			return ret; // TODO: can we do this with boost::assign?
 		}
@@ -94,16 +97,14 @@ environment::load_animation(
 	if (!std::getline(file,line))
 		throw sge::exception(SGE_TEXT("unexpected end of file \"")+framesfile.string());
 
-	boost::optional<sge::time_type> const_delay;
+	boost::optional<sge::time::millisecond> const_delay;
 	if (boost::algorithm::starts_with(line,SGE_TEXT("frame_length ")))
-	{
-		const_delay.reset(boost::lexical_cast<sge::time_type>(line.substr(sge::string("frame_length ").length())));
-		*const_delay *= sge::second()/1000;
-	}
+		const_delay.reset(
+			sge::time::millisecond(
+				boost::lexical_cast<sge::time::unit>(
+					line.substr(sge::string("frame_length ").length()))));
 	else
-	{
 		file.seekg(0,std::ios_base::beg);
-	}
 	
 	sge::sprite::animation_series anim;
 
@@ -115,23 +116,28 @@ environment::load_animation(
 		if (line.empty())
 			continue;
 
-		sge::time_type delay;
+		sge::time::millisecond delay(sge::su(0));
 		sge::string filename = line;
 
 		if (!const_delay)
 		{
-			sge::text_istringstream ss(line);	
-			ss >> delay >> std::ws;
+			sge::text_istringstream ss(line);
+			sge::time::unit temp_delay;
+			ss >> temp_delay >> std::ws;
 			if (!ss)
 				throw sge::exception(SGE_TEXT("invalid line ")+boost::lexical_cast<sge::string>(lineno)+SGE_TEXT(" in animation ")+dir.string());
 			filename = ss.str().substr(ss.tellg());
+			delay = sge::time::millisecond(temp_delay);
 		}
 		else
 		{
 			delay = *const_delay;
 		}
 
-		anim.push_back(sge::sprite::animation_entity(delay,load_texture_inner(dir/filename)));
+		anim.push_back(
+			sge::sprite::animation_entity(
+				delay,
+				load_texture_inner(dir/filename)));
 		++lineno;
 	}
 		

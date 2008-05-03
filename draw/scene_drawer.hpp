@@ -11,7 +11,6 @@
 #include <sge/sprite/system.hpp>
 #include <sge/font/fwd.hpp>
 #include <sge/type_info.hpp>
-#include <sge/timer.hpp>
 #include <boost/function.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
