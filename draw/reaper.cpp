@@ -2,6 +2,7 @@
 #include "z_ordering.hpp"
 #include "../resolution.hpp"
 #include <sge/math/compare.hpp>
+#include <sge/math/abs.hpp>
 #include <sge/math/signum.hpp>
 #include <sge/sprite/types.hpp>
 #include <sge/su.hpp>
@@ -39,8 +40,10 @@ void sanguis::draw::reaper::update(time_type const t)
 		speed(sge::math::vector2(sge::su(1),sge::su(0)));
 	}
 
+	const bool regain = sge::math::abs(current_health - target_health) > health_regain * t;
+
 	// reset speed if target is reached
-	if (sge::math::nearly_equals(current_health,target_health))
+	if (!regain)
 		speed(sge::math::vector2());
 	else
 		speed(sge::math::vector2(sge::su(1),sge::su(0)));
@@ -54,5 +57,6 @@ void sanguis::draw::reaper::update(time_type const t)
 				static_cast<sge::sprite::unit>(sge::su(current_health)/sge::su(p.max_health())*sge::su(resolution().w()/4)),
 				static_cast<sge::sprite::unit>(0)));
 	
-	current_health += sge::math::signum(target_health - current_health) * health_regain * sge::su(t);
+	if (regain)
+		current_health += sge::math::signum(target_health - current_health) * health_regain * sge::su(t);
 }
