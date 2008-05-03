@@ -74,7 +74,10 @@ bool sanguis::client::machine::process(const tick_event &t)
 	net_.process();
 
 	const sge::scoped_renderblock block_(sys.renderer);
-	sys.renderer->set_state((sge::bool_state::clear_backbuffer=true));
+	sys.renderer->set_state(
+		sge::renderer_state_list
+			(sge::bool_state::clear_backbuffer=true)
+	);
 	process_event(t);
 
 	if (con.active())
