@@ -15,21 +15,16 @@ sanguis::server::entities::zombie::zombie(
 	armor_array const &armor,
 	messages::pos_type const &center_,
 	messages::space_unit const direction_,
-	messages::space_unit const speed_,
 	messages::space_unit const angle_,
-	messages::space_unit const health_,
-	messages::space_unit const max_health_)
+	property_map const &properties)
 	: enemy(
 			env,
 			armor,
 			center_ - dim()/messages::mu(2),
 			angle_,
 			direction_,
-			health_,
-			max_health_,
 			team::monsters,
-			speed_,
-			messages::mu(40),
+			properties,
 			ai::ai_ptr(
 				new ai::simple(
 					*this)))

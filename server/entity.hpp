@@ -10,6 +10,7 @@
 #include "../entity_type.hpp"
 #include "../damage_type.hpp"
 #include <boost/ptr_container/ptr_list.hpp>
+#include <map>
 
 namespace sanguis
 {
@@ -19,8 +20,41 @@ namespace server
 class entity
 {
 public:
+	class property
+	{
+		public:
+			struct type
+			{
+				enum enum_type { health,speed,size };
+			};
+
+			typedef messages::space_unit value_type;
+
+			property(
+				value_type min,
+				value_type max,
+				value_type base,
+				value_type current);
+
+			value_type min() const;
+			value_type max() const;
+			value_type base() const;
+			value_type current() const;
+			value_type abs_current() const;
+			value_type abs_base() const;
+
+			void min(value_type);
+			void max(value_type);
+			void current(value_type);
+		private:
+			value_type min_,max_;
+			value_type base_,current_;
+	};
+
 	typedef messages::space_unit time_type;
 	typedef messages::space_unit health_type;
+
+	typedef std::map<property::type::enum_type,property> property_map;
 protected:
 	entity(
 		const environment &,
@@ -28,28 +62,17 @@ protected:
 		const messages::pos_type &pos,
 		const messages::space_unit angle,
 		const messages::space_unit direction,
-		const messages::space_unit health,
-		const messages::space_unit max_health,
 		const team::type team,
-		const messages::space_unit speed,
-		const messages::space_unit max_speed);
+		const property_map properties);
 public:
 	entity_id id() const;
 
 	messages::pos_type pos() const;
 	void pos(const messages::pos_type);
-	messages::space_unit speed() const;
-	void speed(const messages::space_unit);
 	messages::space_unit angle() const;
 	void angle(const messages::space_unit);
 	messages::space_unit direction() const;
 	void direction(const messages::space_unit);
-	messages::space_unit health() const;
-	void health(const messages::space_unit);
-	messages::space_unit max_health() const;
-	void max_health(const messages::space_unit);
-	messages::space_unit max_speed() const;
-	void max_speed(const messages::space_unit);
 	team::type team() const;
 	void damage(
 		messages::space_unit,
@@ -65,8 +88,10 @@ public:
 	void attacking(const bool);
 
 	bool aggressive() const;
-	void aggressive(const bool);
+	void aggressive(bool);
 
+	const property &get_property(property::type::enum_type) const;
+	property &get_property(property::type::enum_type);
 
 	// is calculated from the above
 	messages::pos_type center() const;
@@ -93,12 +118,8 @@ private:
 	entity_id id_;
 	environment env_;
 	messages::pos_type pos_;
-	messages::space_unit speed_,
-	                     max_speed_,
-	                     angle_,
-	                     direction_,
-	                     health_,
-	                     max_health_;
+	messages::space_unit angle_,
+	                     direction_;
 	team::type team_;
 	armor_array          armor_,
 	                     armor_diff_;
@@ -107,6 +128,8 @@ private:
 
 	typedef boost::ptr_list<perks::perk> perk_container;
 	perk_container perks_;
+
+	property_map properties;
 };
 
 }

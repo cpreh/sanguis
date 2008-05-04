@@ -18,15 +18,15 @@ sanguis::server::projectiles::simple_bullet::simple_bullet(
 	team::type const  team_,
 	messages::space_unit const  damage)
 : projectile(
-	env,
-	armor,
-	pos,
-	angle,
-	messages::mu(1),
-	team_,
-	messages::mu(1),
-	bullet_speed,
-	static_cast<time_type>(10)),
+		env,
+		armor,
+		pos,
+		angle,
+		team_,
+		boost::assign::map_list_of
+			(entity::property::type::health,entity::property(messages::mu(0),messages::mu(1),messages::mu(1),messages::mu(1)))
+			(entity::property::type::speed,entity::property(messages::mu(0),bullet_speed,messages::mu(1),messages::mu(1))),
+		static_cast<time_type>(10)),
   damage(damage)
 {}
 

@@ -4,13 +4,13 @@
 void sanguis::server::perks::ims::do_activate()
 {
 	entity &e(get_entity());
-	e.max_speed(e.max_speed() * factor());
+	e.get_property(entity::property::type::speed).max(e.get_property(entity::property::type::speed).max() * factor());
 }
 
 void sanguis::server::perks::ims::do_deactivate()
 {
 	entity &e(get_entity());
-	e.max_speed(e.max_speed() / factor());
+	e.get_property(entity::property::type::speed).max(e.get_property(entity::property::type::speed).max() / factor());
 }
 
 bool sanguis::server::perks::ims::can_raise_level() const

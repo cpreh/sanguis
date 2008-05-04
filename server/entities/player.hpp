@@ -20,10 +20,8 @@ class player : public entity_with_weapon
 		net::id_type const net_id,
 		messages::pos_type const &center,
 		messages::space_unit const direction,
-		messages::space_unit const speed,
 		messages::space_unit const angle,
-		messages::space_unit const health,
-		messages::space_unit const max_health,
+		property_map const &,
 		messages::string const &name);
 	// virtual functions
 	messages::dim_type dim() const;

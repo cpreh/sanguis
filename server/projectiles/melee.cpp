@@ -8,15 +8,15 @@ sanguis::server::projectiles::melee::melee(
 	team::type const team_,
 	messages::space_unit const damage)
 : projectile(
-	env,
-	armor,
-	pos,
-	messages::mu(0),
-	messages::mu(1), // some arbitrary health value
-	team_,
-	messages::mu(0),
-	messages::mu(0),
-	static_cast<time_type>(1)), // short lifetime
+		env,
+		armor,
+		pos,
+		messages::mu(0), // angle doesn't matter here
+		team_,
+		boost::assign::map_list_of
+			(entity::property::type::health,entity::property(messages::mu(0),messages::mu(1),messages::mu(1),messages::mu(1)))
+			(entity::property::type::speed,entity::property(messages::mu(0),messages::mu(0),messages::mu(1),messages::mu(1))),
+		static_cast<time_type>(1)), // short lifetime
   damage(damage)
 {}
 

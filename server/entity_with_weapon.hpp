@@ -20,11 +20,8 @@ protected:
 		messages::pos_type const &pos,
 		messages::space_unit angle,
 		messages::space_unit direction,
-		messages::space_unit health,
-		messages::space_unit max_health,
 		team::type team,
-		messages::space_unit speed,
-		messages::space_unit max_speed);
+		entity::property_map const &);
 
 	virtual void update(
 		time_type,

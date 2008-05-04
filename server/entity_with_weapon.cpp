@@ -18,22 +18,17 @@ sanguis::server::entity_with_weapon::entity_with_weapon(
 	messages::pos_type const &pos_,
 	const messages::space_unit angle_,
 	const messages::space_unit direction_,
-	const messages::space_unit health_,
-	const messages::space_unit max_health_,
 	const team::type team_,
-	const messages::space_unit speed_,
-	const messages::space_unit max_speed_)
+	const entity::property_map &properties)
 : entity(
 	env,
 	armor,
 	pos_,
 	angle_,
 	direction_,
-	health_,
-	max_health_,
 	team_,
-	speed_,
-	max_speed_),
+	properties
+	),
 	weapon_(weapon_type::none),
   target_(target_undefined)
 {

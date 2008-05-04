@@ -6,11 +6,8 @@ sanguis::server::entities::enemy::enemy(
 	messages::pos_type const &pos,
 	messages::space_unit const angle,
 	messages::space_unit const direction,
-	messages::space_unit const health,
-	messages::space_unit const max_health,
 	team::type const team,
-	messages::space_unit const speed,
-	messages::space_unit const max_speed,
+	const property_map &properties,
 	ai::ai_ptr const ai_)
 : entity_with_weapon(
 	env,
@@ -18,11 +15,8 @@ sanguis::server::entities::enemy::enemy(
 	pos,
 	angle,
 	direction,
-	health,
-	max_health,
 	team,
-	speed,
-	max_speed),
+	properties),
   ai_(ai_)
 {}
 

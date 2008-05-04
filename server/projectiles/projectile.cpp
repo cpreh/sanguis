@@ -8,10 +8,8 @@ sanguis::server::projectiles::projectile::projectile(
 	armor_array const &armor,
 	messages::pos_type const& pos,
 	messages::space_unit const angle,
-	messages::space_unit const max_health,
 	team::type const team_,
-	messages::space_unit const speed,
-	messages::space_unit const max_speed_,
+	property_map const &properties,
 	time_type const lifetime)
 : entity(
 		env,
@@ -19,11 +17,8 @@ sanguis::server::projectiles::projectile::projectile(
 		pos,
 		angle,
 		angle,
-		max_health,
-		max_health,
 		team_,
-		speed,
-		max_speed_),
+		properties),
   lifetime(
   	sge::time::second(
 		lifetime))

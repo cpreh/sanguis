@@ -31,6 +31,7 @@
 
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
+#include <boost/assign/list_of.hpp>
 
 sanguis::server::game_logic::game_logic(
 	const send_callback send,
@@ -132,16 +133,20 @@ void sanguis::server::game_logic::create_game(const net::id_type net_id,const me
 		entity_ptr(
 			new entities::player(
 				get_environment(),
-				(damage::normal=messages::mu(0.5),damage::piercing=messages::mu(0.5),damage::fire=messages::mu(0.5),damage::ice=messages::mu(0.5)),
+				(
+					damage::all=messages::mu(0)
+				),
 				net_id,
 				messages::pos_type(
 					messages::mu(resolution().w()/2),
 					messages::mu(resolution().h()/2)),
 				messages::mu(0),
 				messages::mu(0),
-				messages::mu(0),
-				messages::mu(100),
-				messages::mu(100),
+				
+				boost::assign::map_list_of
+					(entity::property::type::health,entity::property(messages::mu(0),messages::mu(100),messages::mu(1),messages::mu(1)))
+					(entity::property::type::speed,entity::property(messages::mu(0),messages::mu(100),messages::mu(0),messages::mu(0))),
+
 				m.name())));
 	
 	entities::player &p = dynamic_cast<entities::player &>(raw_player);
@@ -238,24 +243,25 @@ void sanguis::server::game_logic::add_enemy()
 	// TODO: take the nearest player here instead of the first
 	//boost::optional<messages::space_unit> oa = sge::math::angle_to<messages::space_unit>(players.begin()->second->center() - center);
 	//const messages::space_unit angle = oa ? *oa : messages::mu(0);
-	const messages::space_unit angle = messages::mu(0),
-	                           speed = messages::mu(0),
-	                           health = messages::mu(3),
-	                           max_health = health;
-
 	const messages::pos_type pos = center + screen_center;
+	const messages::space_unit angle = messages::mu(0);
 
 	insert_entity(
 		entity_ptr(
 			new entities::zombie(
 				get_environment(),
-				(damage::all=messages::mu(0.5)),
+				(
+					damage::all=messages::mu(0)
+				),
 				pos,
+				angle, // angle and direction (are the same here)
 				angle,
-				speed,
-				angle,
-				health,
-				max_health)));
+				
+				boost::assign::map_list_of
+					(entity::property::type::health,entity::property(messages::mu(0),messages::mu(3),messages::mu(1),messages::mu(1)))
+					(entity::property::type::speed,entity::property(messages::mu(0),messages::mu(50),messages::mu(0),messages::mu(0)))
+
+				)));
 }
 
 void sanguis::server::game_logic::operator()(const net::id_type id,const messages::player_start_shooting &)
@@ -293,11 +299,11 @@ void sanguis::server::game_logic::operator()(const net::id_type id,const message
 
 	if (e.dir().is_null())
 	{
-		player_.speed(messages::mu(0));
+		player_.get_property(entity::property::type::speed).current(messages::mu(0));
 	}
 	else
 	{
-		player_.speed(messages::mu(1));
+		player_.get_property(entity::property::type::speed).current(messages::mu(1));
 		player_.direction(*sge::math::angle_to<messages::space_unit>(e.dir()));
 	}
 
