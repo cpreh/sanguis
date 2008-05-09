@@ -255,6 +255,11 @@ void sanguis::server::entity::property::max(const value_type _max)
 	max_ = _max;
 }
 
+void sanguis::server::entity::property::base(const value_type _base)
+{
+	base_ = _base;
+}
+
 void sanguis::server::entity::property::current(const value_type _current)
 {
 	current_ = _current;

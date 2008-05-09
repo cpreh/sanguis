@@ -26,9 +26,13 @@ struct client_data
 	net::data_type out_buffer;
 };
 
-struct start_state;
+namespace states
+{
+struct start;
+}
+
 struct machine
-	: public boost::statechart::state_machine<machine, start_state>
+	: public boost::statechart::state_machine<machine, states::start>
 {
 	public:
 	machine(

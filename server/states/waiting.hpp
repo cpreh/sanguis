@@ -1,11 +1,11 @@
-#ifndef SANGUIS_SERVER_WAITING_STATE_HPP_INCLUDED
-#define SANGUIS_SERVER_WAITING_STATE_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_STATES_WAITING_HPP_INCLUDED
+#define SANGUIS_SERVER_STATES_WAITING_HPP_INCLUDED
 
-#include "machine.hpp"
-#include "message_event.hpp"
-#include "../tick_event.hpp"
+#include "../machine.hpp"
+#include "../message_event.hpp"
+#include "../../tick_event.hpp"
 
-#include "../messages/fwd.hpp"
+#include "../../messages/fwd.hpp"
 
 #include <boost/mpl/list.hpp>
 #include <boost/statechart/simple_state.hpp>
@@ -16,16 +16,17 @@ namespace sanguis
 {
 namespace server
 {
-
-struct waiting_state
-	: public boost::statechart::simple_state<waiting_state,machine>
+namespace states
+{
+struct waiting
+	: public boost::statechart::simple_state<waiting,machine>
 {
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<tick_event>,
 		boost::statechart::custom_reaction<message_event> 
 		> reactions;
 
-	waiting_state();
+	waiting();
 	boost::statechart::result react(const tick_event&);
 	boost::statechart::result react(const message_event&);
 
@@ -37,7 +38,7 @@ struct waiting_state
 	void process_message_event(const message_event &);
 };
 
-
+}
 }
 }
 

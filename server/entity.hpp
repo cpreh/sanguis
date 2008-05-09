@@ -43,6 +43,7 @@ public:
 			value_type abs_current() const;
 			value_type abs_base() const;
 
+			void base(value_type);
 			void min(value_type);
 			void max(value_type);
 			void current(value_type);

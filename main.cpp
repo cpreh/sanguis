@@ -1,6 +1,6 @@
 // own
 #include "server/machine.hpp"
-#include "server/start_state.hpp"
+#include "server/states/start.hpp"
 #include "client/machine.hpp"
 #include "client/start_state.hpp"
 #include "tick_event.hpp"
