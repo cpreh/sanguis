@@ -145,7 +145,7 @@ void sanguis::server::game_logic::create_game(const net::id_type net_id,const me
 				
 				boost::assign::map_list_of
 					(entity::property::type::health, entity::property(messages::mu(100)))
-					(entity::property::type::movement_speed, entity::property(messages::mu(100))),
+					(entity::property::type::movement_speed, entity::property(messages::mu(0), messages::mu(100))),
 
 				m.name())));
 	
@@ -303,7 +303,7 @@ void sanguis::server::game_logic::operator()(const net::id_type id,const message
 	}
 	else
 	{
-		player_.get_property(entity::property::type::movement_speed).current(messages::mu(1));
+		player_.get_property(entity::property::type::movement_speed).set_current_to_max();
 		player_.direction(*sge::math::angle_to<messages::space_unit>(e.dir()));
 	}
 

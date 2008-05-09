@@ -43,6 +43,7 @@ public:
 
 		value_type current() const;
 		void current(value_type);
+		void set_current_to_max();
 
 		value_type max() const;
 

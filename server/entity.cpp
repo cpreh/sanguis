@@ -256,6 +256,11 @@ void sanguis::server::entity::property::current(
 	current_ = std::min(max(), c);
 }
 
+void sanguis::server::entity::property::set_current_to_max()
+{
+	current_ = max();
+}
+
 sanguis::server::entity::property::value_type
 sanguis::server::entity::property::max() const
 {
