@@ -45,7 +45,8 @@ void sanguis::server::ai::simple::update(
 		me.direction(*angle);
 		me.angle(*angle);
 	}
-	me.get_property(sanguis::server::entity::property::type::speed).current(messages::mu(1));
+	// TODO: movement speed is always at full speed by default
+	//me.get_property(sanguis::server::entity::property::type::speed).current(messages::mu(1));
 	me.target(
 		target->center());
 	me.aggressive(true);

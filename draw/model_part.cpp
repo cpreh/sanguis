@@ -9,6 +9,7 @@
 #include <sge/math/compare.hpp>
 #include <sge/sprite/object.hpp>
 #include <limits>
+#include <cmath>
 
 namespace
 {
@@ -86,7 +87,7 @@ void sanguis::draw::model_part::update(
 	assert(abs_angle >= sge::su(0) && abs_angle <= twopi);
 	assert(abs_target >= sge::su(0) && abs_target <= twopi);
 
-	const sge::space_unit abs_dist = sge::math::abs(abs_target - abs_angle);
+	const sge::space_unit abs_dist = std::abs(abs_target - abs_angle);
 	const sge::space_unit swap_dist = (abs_angle > abs_target) ? twopi-abs_angle+abs_target : twopi-abs_target+abs_angle;
 	const sge::space_unit min_dist = std::min(swap_dist,abs_dist);
 

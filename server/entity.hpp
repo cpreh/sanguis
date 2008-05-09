@@ -22,34 +22,38 @@ class entity
 public:
 	class property
 	{
-		public:
-			struct type
-			{
-				enum enum_type { health,speed,size };
+	public:
+		struct type
+		{
+			enum enum_type {
+				health,
+				attack_speed,
+				movement_speed,
+				size
 			};
+		};
 
-			typedef messages::space_unit value_type;
+		typedef messages::space_unit value_type;
 
-			property(
-				value_type min,
-				value_type max,
-				value_type base,
-				value_type current);
+		property(
+			value_type current,
+			value_type base);
+		property(
+			value_type base);
 
-			value_type min() const;
-			value_type max() const;
-			value_type base() const;
-			value_type current() const;
-			value_type abs_current() const;
-			value_type abs_base() const;
+		value_type current() const;
+		void current(value_type);
+		void set_current_to_max();
 
-			void base(value_type);
-			void min(value_type);
-			void max(value_type);
-			void current(value_type);
-		private:
-			value_type min_,max_;
-			value_type base_,current_;
+		value_type max() const;
+
+		void reset_max_to_base();
+		void add_to_max(value_type);
+		void multiply_max_with_base(value_type);
+	private:
+		value_type base_,
+		           max_,
+		           current_;
 	};
 
 	typedef messages::space_unit time_type;
@@ -91,6 +95,12 @@ public:
 	bool aggressive() const;
 	void aggressive(bool);
 
+	health_type health() const;
+	void health(health_type);
+	health_type max_health() const;
+
+	messages::space_unit speed() const;
+
 	const property &get_property(property::type::enum_type) const;
 	property &get_property(property::type::enum_type);
 
@@ -116,16 +126,16 @@ protected:
 	entity &insert(entity_ptr); 
 	const environment &get_environment() const;
 private:
-	entity_id id_;
-	environment env_;
-	messages::pos_type pos_;
+	entity_id            id_;
+	environment          env_;
+	messages::pos_type   pos_;
 	messages::space_unit angle_,
 	                     direction_;
-	team::type team_;
+	team::type           team_;
 	armor_array          armor_,
 	                     armor_diff_;
-	bool attacking_,
-	     aggressive_;
+	bool                 attacking_,
+	                     aggressive_;
 
 	typedef boost::ptr_list<perks::perk> perk_container;
 	perk_container perks_;
