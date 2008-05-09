@@ -17,8 +17,8 @@ sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::add
 			e.pos(),
 			e.angle(),
 			e.abs_speed(),
-			e.get_property(entity::property::type::health).abs_current(),
-			e.get_property(entity::property::type::health).max(),
+			e.health(),
+			e.max_health(),
 			e.dim());
 }
 
@@ -37,7 +37,7 @@ sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::mov
 template<>
 sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::health>(const entity &e)
 {
-	return new messages::health(e.id(),e.get_property(entity::property::type::health).current());
+	return new messages::health(e.id(),e.health());
 }
 
 template<>

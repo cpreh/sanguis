@@ -20,15 +20,15 @@ sanguis::server::entity::entity(
 	const team::type team_,
 	const property_map properties)
 : id_(get_unique_id()),
-	env_(env_),
+  env_(env_),
   pos_(pos_),
   angle_(angle_),
   direction_(direction_),
   team_(team_),
-	armor_(armor_),
+  armor_(armor_),
   attacking_(false),
   aggressive_(false),
-	properties(properties)
+  properties(properties)
 {}
 
 const sanguis::armor_array &sanguis::server::entity::armor() const
@@ -66,6 +66,30 @@ void sanguis::server::entity::aggressive(const bool n)
 	aggressive_ = n;
 }
 
+sanguis::server::entity::health_type
+sanguis::server::entity::health() const
+{
+	return get_property(property::type::health).current();
+}
+
+void sanguis::server::entity::health(
+	const health_type nhealth)
+{
+	get_property(property::type::health).current(nhealth);
+}
+
+sanguis::server::entity::health_type
+sanguis::server::entity::max_health() const
+{
+	return get_property(property::type::health).max();
+}
+
+sanguis::messages::space_unit
+sanguis::server::entity::speed() const
+{
+	return get_property(property::type::movement_speed).current();
+}
+
 sanguis::entity_id sanguis::server::entity::id() const
 {
 	return id_;
@@ -93,7 +117,7 @@ sanguis::messages::pos_type sanguis::server::entity::pos() const
 
 sanguis::messages::pos_type sanguis::server::entity::abs_speed() const
 {
-	return angle_to_vector(direction_) * get_property(property::type::speed).abs_current();
+	return angle_to_vector(direction_) * speed();
 }
 
 sanguis::messages::space_unit sanguis::server::entity::radius() const
@@ -131,9 +155,8 @@ void sanguis::server::entity::damage(
 	)
 		sge::clog << SGE_TEXT("Damage values don't equal 1. Check this!\n");
 	
-	property &health = get_property(property::type::health);
 	for(damage_array::size_type i = 0; i < damages.size(); ++i)
-		health.current(health.current() - d * damages[i] * (1 - armor_[i]));
+		health(health() - d * damages[i] * (1 - armor_[i]));
 
 	if(dead())
 		die();
@@ -142,12 +165,12 @@ void sanguis::server::entity::damage(
 
 bool sanguis::server::entity::dead() const
 {
-	return get_property(property::type::health).current() <= messages::mu(0);
+	return health() <= messages::mu(0);
 }
 
 void sanguis::server::entity::die()
 {
-	get_property(property::type::health).current(messages::mu(0));
+	health(messages::mu(0));
 	get_environment().exp(exp());
 }
 
@@ -205,59 +228,57 @@ sanguis::messages::exp_type sanguis::server::entity::exp() const
 }
 
 sanguis::server::entity::property::property(
-	const value_type min_,
-	const value_type max_,
-	const value_type base_,
-	const value_type current_)
-	: min_(min_),
-	  max_(max_),
-		base_(base_),
-		current_(current_)
+	const value_type ncurrent,
+	const value_type base_)
+	: base_(base_),
+	  max_(base_),
+	  current_(static_cast<value_type>(0))
+{
+	current(ncurrent);
+}
+
+sanguis::server::entity::property::property(
+	const value_type base_)
+	: base_(base_),
+	  max_(base_),
+	  current_(base_)
 {}
 
-sanguis::server::entity::property::value_type sanguis::server::entity::property::min() const
-{
-	return min_;
-}
-
-sanguis::server::entity::property::value_type sanguis::server::entity::property::max() const
-{
-	return max_;
-}
-
-sanguis::server::entity::property::value_type sanguis::server::entity::property::base() const
-{
-	return base_;
-}
-
-sanguis::server::entity::property::value_type sanguis::server::entity::property::current() const
+sanguis::server::entity::property::value_type
+sanguis::server::entity::property::current() const
 {
 	return current_;
 }
 
-sanguis::server::entity::property::value_type sanguis::server::entity::property::abs_current() const
+void sanguis::server::entity::property::current(
+	const value_type c)
 {
-	return min() + (max() - min()) * current();
+	current_ = std::min(max(), c);
 }
 
-sanguis::server::entity::property::value_type sanguis::server::entity::property::abs_base() const
+sanguis::server::entity::property::value_type
+sanguis::server::entity::property::max() const
 {
-	return min() + (max() - min()) * base();
+	return max_;
 }
 
-void sanguis::server::entity::property::min(const value_type _min)
+void sanguis::server::entity::property::reset_max_to_base()
 {
-	min_ = _min;
+	max_ = base_;
 }
 
-void sanguis::server::entity::property::max(const value_type _max)
+void sanguis::server::entity::property::add_to_max(
+	const value_type n)
 {
-	max_ = _max;
+	max_ += n;
+	// TODO: trim current here
 }
 
-void sanguis::server::entity::property::current(const value_type _current)
+void sanguis::server::entity::property::multiply_max_with_base(
+	const value_type factor)
 {
-	current_ = _current;
+	max_ += base_ * factor;
+	// TODO: trim current here
 }
 
 const sanguis::server::entity::property &sanguis::server::entity::get_property(const property::type::enum_type e) const

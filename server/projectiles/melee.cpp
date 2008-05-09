@@ -14,8 +14,8 @@ sanguis::server::projectiles::melee::melee(
 		messages::mu(0), // angle doesn't matter here
 		team_,
 		boost::assign::map_list_of
-			(entity::property::type::health,entity::property(messages::mu(0),messages::mu(1),messages::mu(1),messages::mu(1)))
-			(entity::property::type::speed,entity::property(messages::mu(0),messages::mu(0),messages::mu(1),messages::mu(1))),
+			(entity::property::type::health, entity::property(messages::mu(1)))
+			(entity::property::type::movement_speed, entity::property(messages::mu(0))),
 		static_cast<time_type>(1)), // short lifetime
   damage(damage)
 {}

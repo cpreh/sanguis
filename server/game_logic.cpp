@@ -144,8 +144,8 @@ void sanguis::server::game_logic::create_game(const net::id_type net_id,const me
 				messages::mu(0),
 				
 				boost::assign::map_list_of
-					(entity::property::type::health,entity::property(messages::mu(0),messages::mu(100),messages::mu(1),messages::mu(1)))
-					(entity::property::type::speed,entity::property(messages::mu(0),messages::mu(100),messages::mu(0),messages::mu(0))),
+					(entity::property::type::health, entity::property(messages::mu(100)))
+					(entity::property::type::movement_speed, entity::property(messages::mu(100))),
 
 				m.name())));
 	
@@ -258,8 +258,8 @@ void sanguis::server::game_logic::add_enemy()
 				angle,
 				
 				boost::assign::map_list_of
-					(entity::property::type::health,entity::property(messages::mu(0),messages::mu(3),messages::mu(1),messages::mu(1)))
-					(entity::property::type::speed,entity::property(messages::mu(0),messages::mu(50),messages::mu(0),messages::mu(0)))
+					(entity::property::type::health, entity::property(messages::mu(3)))
+					(entity::property::type::movement_speed, entity::property(messages::mu(50)))
 
 				)));
 }
@@ -299,11 +299,11 @@ void sanguis::server::game_logic::operator()(const net::id_type id,const message
 
 	if (e.dir().is_null())
 	{
-		player_.get_property(entity::property::type::speed).current(messages::mu(0));
+		player_.get_property(entity::property::type::movement_speed).current(messages::mu(0));
 	}
 	else
 	{
-		player_.get_property(entity::property::type::speed).current(messages::mu(1));
+		player_.get_property(entity::property::type::movement_speed).current(messages::mu(1));
 		player_.direction(*sge::math::angle_to<messages::space_unit>(e.dir()));
 	}
 
