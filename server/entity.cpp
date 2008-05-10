@@ -199,7 +199,6 @@ void sanguis::server::entity::add_perk(
 		}
 	}
 	perks_.push_back(p);
-	perks_.back().activate(*this);
 }
 
 sanguis::server::entity::~entity()

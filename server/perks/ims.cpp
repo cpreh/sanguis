@@ -1,18 +1,11 @@
 #include "ims.hpp"
 #include "../entity.hpp"
 
-// TODO: perk system needs fixing anyway
-
-void sanguis::server::perks::ims::do_activate()
+void sanguis::server::perks::ims::do_apply(entity &e)
 {
-	//entity &e(get_entity());
-	//e.get_property(entity::property::type::speed).max(e.get_property(entity::property::type::speed).max() * factor());
-}
-
-void sanguis::server::perks::ims::do_deactivate()
-{
-	//entity &e(get_entity());
-	//e.get_property(entity::property::type::speed).max(e.get_property(entity::property::type::speed).max() / factor());
+	e.get_property(
+		entity::property::type::movement_speed)
+		.multiply_max_with_base(factor());
 }
 
 bool sanguis::server::perks::ims::can_raise_level() const

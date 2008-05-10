@@ -16,22 +16,19 @@ namespace perks
 class perk {
 public:
 	perk();
-	void activate(entity &);
-	void deactivate();
+	void apply(entity &);
 	virtual bool can_raise_level() const = 0;
 	void raise_level();
 	virtual ~perk();
 protected:
 	typedef unsigned level_type;
 	level_type level() const;
-	entity &get_entity() const;
 private:
-	virtual void do_activate() = 0;
-	virtual void do_deactivate() = 0;
+	virtual void do_apply(entity &) = 0;
 
-	entity    *entity_;
 	level_type level_;
 };
+
 typedef std::auto_ptr<perk> perk_auto_ptr;
 
 }

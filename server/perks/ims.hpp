@@ -13,8 +13,7 @@ namespace perks
 
 class ims : public perk {
 private:
-	void do_activate();
-	void do_deactivate();
+	void do_apply(entity &);
 	bool can_raise_level() const;
 	messages::space_unit factor() const;
 };
