@@ -37,7 +37,7 @@ bool sanguis::server::entities::projectiles::projectile::invulnerable() const
 
 void sanguis::server::entities::projectiles::projectile::update(
 	const time_type time,
-	entity_container &entities)
+	container &entities)
 {
 	entity::update(
 		time,

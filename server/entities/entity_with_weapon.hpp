@@ -27,7 +27,7 @@ protected:
 
 	virtual void update(
 		time_type,
-		entity_container &entities);
+		container &entities);
 public:
 	void change_weapon(const weapon_type::type);
 	void add_weapon(weapons::weapon_ptr);

@@ -9,7 +9,7 @@ namespace sanguis
 namespace server
 {
 
-typedef boost::function<entities::entity & (entities::entity_ptr)> insert_callback;
+typedef boost::function<entities::entity & (entities::auto_ptr)> insert_callback;
 
 }
 }

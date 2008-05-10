@@ -12,8 +12,8 @@ namespace entities
 {
 
 class entity;
-typedef boost::ptr_list<entity> entity_container;
-typedef std::auto_ptr<entity> entity_ptr;
+typedef boost::ptr_list<entity> container;
+typedef std::auto_ptr<entity> auto_ptr;
 
 }
 }

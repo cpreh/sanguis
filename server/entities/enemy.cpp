@@ -22,7 +22,7 @@ sanguis::server::entities::enemy::enemy(
 
 void sanguis::server::entities::enemy::update(
 	const time_type time,
-	entity_container &entities)
+	container &entities)
 {
 	entity_with_weapon::update(
 		time,

@@ -25,7 +25,7 @@ protected:
 
 	void update(
 		time_type,
-		entity_container &);
+		container &);
 private:
 	ai::ai_ptr ai_;
 };

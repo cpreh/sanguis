@@ -12,7 +12,7 @@ sanguis::server::ai::simple::simple(
 
 void sanguis::server::ai::simple::update(
 	time_type,
-	entities::entity_container const &entities)
+	entities::container const &entities)
 {
 	if(!target)
 	{
@@ -27,7 +27,7 @@ void sanguis::server::ai::simple::update(
 	else
 	{
 		// TODO: why can't we use std::find here?
-		for(entities::entity_container::const_iterator it(entities.begin()); it != entities.end(); ++it)
+		for(entities::container::const_iterator it(entities.begin()); it != entities.end(); ++it)
 			if(&*it == target)
 				break;
 		target = 0;

@@ -18,7 +18,7 @@ public:
 private:
 	void update(
 		time_type,
-		entities::entity_container const &);
+		entities::container const &);
 
 	entities::enemy &me;
 	entities::entity const *target;

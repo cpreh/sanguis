@@ -30,7 +30,7 @@ private:
 	virtual bool invulnerable() const;
 	void update(
 		time_type,
-		entity_container &entities);
+		container &entities);
 	messages::space_unit max_speed() const;
 
 	virtual void do_hit(entity &target) = 0;

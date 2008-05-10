@@ -29,7 +29,7 @@ class unpaused;
 class running
 	: public boost::statechart::state<running,machine,unpaused>
 {
-	public:
+public:
 	typedef std::map<net::id_type, entities::player*> player_map;
 
 	// callbacks (can be public so one thinks that they are a member function)
@@ -38,14 +38,14 @@ class running
 
 	running(my_context);
 	sge::time::timer &enemy_timer();
-	entities::entity_container &entities();
-	const entities::entity_container &entities() const;
-	entities::entity &insert_entity(entities::entity_ptr);
+	entities::container &entities();
+	const entities::container &entities() const;
+	entities::entity &insert_entity(entities::auto_ptr);
 	player_map &players();
 	const player_map &players() const;
-	private:
+private:
 
-	entities::entity_container entities_;
+	entities::container entities_;
 	player_map players_;
 	
 	// this is better suited here so it isn't out of sync after unpausing

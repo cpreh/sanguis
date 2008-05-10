@@ -49,7 +49,8 @@ sanguis::server::environment sanguis::server::weapons::weapon::get_environment()
 }
 
 sanguis::server::entities::entity &
-sanguis::server::weapons::weapon::insert(entities::entity_ptr e)
+sanguis::server::weapons::weapon::insert(
+	entities::auto_ptr e)
 {
 	return env_.insert(e);
 }

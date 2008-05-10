@@ -176,7 +176,7 @@ void sanguis::server::entities::entity::die()
 
 void sanguis::server::entities::entity::update(
 	const time_type delta,
-	entity_container &)
+	container &)
 {
 	pos_ += abs_speed() * delta;
 }
@@ -216,7 +216,7 @@ const sanguis::server::environment &sanguis::server::entities::entity::get_envir
 }
 
 sanguis::server::entities::entity &sanguis::server::entities::entity::insert(
-	entity_ptr e)
+	auto_ptr e)
 {
 	return get_environment().insert(e);
 }

@@ -55,7 +55,7 @@ void sanguis::server::states::unpaused::create_game(const net::id_type net_id,co
 	context<running>().send(new messages::game_state(game_state(truncation_check_cast<game_state::score_type>(0))));
 
 	entities::entity &raw_player = context<running>().insert_entity(
-		entities::entity_ptr(
+		entities::auto_ptr(
 			new entities::player(
 				get_environment(),
 				(
@@ -150,7 +150,7 @@ void sanguis::server::states::unpaused::add_enemy()
 	const messages::space_unit angle = messages::mu(0);
 
 	context<running>().insert_entity(
-		entities::entity_ptr(
+		entities::auto_ptr(
 			new entities::zombie(
 				get_environment(),
 				(
@@ -275,9 +275,9 @@ boost::statechart::result sanguis::server::states::unpaused::react(const tick_ev
 	// should we send position updates?
 	const bool update_pos = send_timer.v().update_b();
 
-	entities::entity_container &entities = context<running>().entities();
+	entities::container &entities = context<running>().entities();
 
-	for (entities::entity_container::iterator i = entities.begin(); i != entities.end();)
+	for (entities::container::iterator i = entities.begin(); i != entities.end();)
 	{
 		if (i->dead())
 		{

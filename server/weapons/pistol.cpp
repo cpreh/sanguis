@@ -19,7 +19,7 @@ void sanguis::server::weapons::pistol::do_attack(
 	messages::pos_type const &to)
 {
 	insert(
-		entities::entity_ptr(
+		entities::auto_ptr(
 			new entities::projectiles::simple_bullet(
 				get_environment(),
 				(damage::normal=messages::mu(1)),

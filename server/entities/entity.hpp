@@ -81,7 +81,7 @@ public:
 	virtual bool invulnerable() const = 0;
 	virtual void update(
 		const time_type,
-		entity_container &entities);
+		container &entities);
 
 	void add_perk(
 		perks::perk_auto_ptr); 
@@ -89,7 +89,7 @@ public:
 	virtual ~entity();
 protected:
 	void send(messages::base *); // TODO: this should be an auto_ptr
-	entity &insert(entity_ptr); 
+	entity &insert(auto_ptr); 
 	const environment &get_environment() const;
 private:
 	entity_id            id_;

@@ -36,7 +36,7 @@ protected:
 		entities::entity const &from,
 		messages::pos_type const& to) = 0;
 	
-	entities::entity &insert(entities::entity_ptr);
+	entities::entity &insert(entities::auto_ptr);
 	void send(messages::base *);
 	environment get_environment() const;
 private:

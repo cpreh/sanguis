@@ -17,7 +17,7 @@ class base {
 public:
 	virtual void update(
 		time_type,
-		entities::entity_container const &) = 0;
+		entities::container const &) = 0;
 	virtual ~base();
 };
 
