@@ -179,6 +179,11 @@ void sanguis::server::entities::entity::update(
 	container &)
 {
 	pos_ += abs_speed() * delta;
+
+	BOOST_FOREACH(property_map::value_type &p, properties)
+		p.second.reset_max_to_base();
+	BOOST_FOREACH(perks::perk &p, perks_)
+		p.apply(*this);
 }
 
 void sanguis::server::entities::entity::direction(const messages::space_unit _direction)
