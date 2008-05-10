@@ -54,8 +54,8 @@ void sanguis::server::states::unpaused::create_game(const net::id_type net_id,co
 
 	context<running>().send(new messages::game_state(game_state(truncation_check_cast<game_state::score_type>(0))));
 
-	entity &raw_player = context<running>().insert_entity(
-		entity_ptr(
+	entities::entity &raw_player = context<running>().insert_entity(
+		entities::entity_ptr(
 			new entities::player(
 				get_environment(),
 				(
@@ -69,8 +69,8 @@ void sanguis::server::states::unpaused::create_game(const net::id_type net_id,co
 				messages::mu(0),
 				
 				boost::assign::map_list_of
-					(entity::property::type::health,entity::property(messages::mu(100),messages::mu(100)))
-					(entity::property::type::movement_speed,entity::property(messages::mu(0),messages::mu(0))),
+					(entities::property::type::health, entities::property(messages::mu(100),messages::mu(100)))
+					(entities::property::type::movement_speed, entities::property(messages::mu(0),messages::mu(0))),
 
 				m.name())));
 	
@@ -150,7 +150,7 @@ void sanguis::server::states::unpaused::add_enemy()
 	const messages::space_unit angle = messages::mu(0);
 
 	context<running>().insert_entity(
-		entity_ptr(
+		entities::entity_ptr(
 			new entities::zombie(
 				get_environment(),
 				(
@@ -161,8 +161,8 @@ void sanguis::server::states::unpaused::add_enemy()
 				angle,
 				
 				boost::assign::map_list_of
-					(entity::property::type::health,entity::property(messages::mu(20),messages::mu(20)))
-					(entity::property::type::movement_speed,entity::property(messages::mu(50),messages::mu(50)))
+					(entities::property::type::health, entities::property(messages::mu(20),messages::mu(20)))
+					(entities::property::type::movement_speed, entities::property(messages::mu(50),messages::mu(50)))
 
 				)));
 }
@@ -204,11 +204,11 @@ boost::statechart::result sanguis::server::states::unpaused::operator()(const ne
 
 	if (e.dir().is_null())
 	{
-		player_.get_property(entity::property::type::movement_speed).current(messages::mu(0));
+		player_.get_property(entities::property::type::movement_speed).current(messages::mu(0));
 	}
 	else
 	{
-		player_.get_property(entity::property::type::movement_speed).current(messages::mu(1));
+		player_.get_property(entities::property::type::movement_speed).current(messages::mu(1));
 		player_.direction(*sge::math::angle_to<messages::space_unit>(e.dir()));
 	}
 
@@ -275,9 +275,9 @@ boost::statechart::result sanguis::server::states::unpaused::react(const tick_ev
 	// should we send position updates?
 	const bool update_pos = send_timer.v().update_b();
 
-	entity_container &entities = context<running>().entities();
+	entities::entity_container &entities = context<running>().entities();
 
-	for (entity_container::iterator i = entities.begin(); i != entities.end();)
+	for (entities::entity_container::iterator i = entities.begin(); i != entities.end();)
 	{
 		if (i->dead())
 		{
@@ -298,7 +298,7 @@ boost::statechart::result sanguis::server::states::unpaused::react(const tick_ev
 		}
 
 		i->update(
-			static_cast<entity::time_type>(delta),
+			static_cast<entities::entity::time_type>(delta),
 			entities);
 
 		if (i->type() != entity_type::indeterminate && update_pos)

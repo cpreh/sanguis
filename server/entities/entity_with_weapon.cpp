@@ -1,6 +1,5 @@
 #include "entity_with_weapon.hpp"
-#include "message_converter.hpp"
-#include <sge/iostream.hpp>
+#include "../message_converter.hpp"
 #include <limits>
 
 namespace
@@ -12,7 +11,7 @@ const sanguis::messages::pos_type target_undefined(
 
 }
 
-sanguis::server::entity_with_weapon::entity_with_weapon(
+sanguis::server::entities::entity_with_weapon::entity_with_weapon(
 	environment const &env,
 	armor_array const &armor,
 	messages::pos_type const &pos_,
@@ -34,7 +33,7 @@ sanguis::server::entity_with_weapon::entity_with_weapon(
 {
 }
 
-void sanguis::server::entity_with_weapon::update(
+void sanguis::server::entities::entity_with_weapon::update(
 	const time_type time,
 	entity_container &entities)
 {
@@ -42,7 +41,7 @@ void sanguis::server::entity_with_weapon::update(
 		time,
 		entities);
 	
-	// entity lost it's target and/or weapon or aggression or didn't have any of these
+	// entity lost its target and/or weapon or aggression or didn't have any of these
 	if (weapon_ == weapon_type::none || target() == target_undefined || !aggressive())
 	{
 		// previously attacking
@@ -80,7 +79,7 @@ void sanguis::server::entity_with_weapon::update(
 	}
 }
 
-void sanguis::server::entity_with_weapon::change_weapon(const weapon_type::type nweapon)
+void sanguis::server::entities::entity_with_weapon::change_weapon(const weapon_type::type nweapon)
 {
 	if (nweapon != weapon_type::none && weapons_.find(nweapon) == weapons_.end())
 		throw sge::exception(SGE_TEXT("tried to change to non-owned weapon"));
@@ -88,7 +87,7 @@ void sanguis::server::entity_with_weapon::change_weapon(const weapon_type::type 
 	weapon_ = nweapon;
 }
 
-void sanguis::server::entity_with_weapon::add_weapon(weapons::weapon_ptr ptr)
+void sanguis::server::entities::entity_with_weapon::add_weapon(weapons::weapon_ptr ptr)
 {
 	if (weapons_.find(ptr->type()) != weapons_.end())
 		throw sge::exception(SGE_TEXT("weapon of specified type already registered"));
@@ -98,7 +97,7 @@ void sanguis::server::entity_with_weapon::add_weapon(weapons::weapon_ptr ptr)
 		throw sge::exception(SGE_TEXT("couldn't insert weapon"));
 }
 
-void sanguis::server::entity_with_weapon::remove_weapon(const weapon_type::type type_)
+void sanguis::server::entities::entity_with_weapon::remove_weapon(const weapon_type::type type_)
 {
 	if (weapons_.find(type_) == weapons_.end())
 		throw sge::exception(SGE_TEXT("tried to remove non-owned weapon"));
@@ -106,14 +105,14 @@ void sanguis::server::entity_with_weapon::remove_weapon(const weapon_type::type 
 	weapons_.erase(type_);
 }
 
-void sanguis::server::entity_with_weapon::target(
+void sanguis::server::entities::entity_with_weapon::target(
 	messages::pos_type const &ntarget)
 {
 	target_ = ntarget;
 }
 
 sanguis::messages::pos_type const &
-sanguis::server::entity_with_weapon::target() const
+sanguis::server::entities::entity_with_weapon::target() const
 {
 	return target_;
 }

@@ -5,7 +5,7 @@
 #include "../../messages/types.hpp"
 #include "../../weapon_type.hpp"
 #include "../environment.hpp"
-#include "../entity_fwd.hpp"
+#include "../entities/entity_fwd.hpp"
 #include <sge/time/timer.hpp>
 #include <boost/function.hpp>
 #include <memory>
@@ -22,27 +22,26 @@ class weapon {
 public:
 	messages::space_unit range() const;
 	bool attack(
-		entity const &from,
+		entities::entity const &from,
 		messages::pos_type const& to);
 	weapon_type::type type() const;
 	virtual ~weapon();
 protected:
-	weapon(
-		const sanguis::server::environment &,
+	weapon( const sanguis::server::environment &,
 		const weapon_type::type,
 		messages::space_unit range,
 		time_type base_cooldown);
 
 	virtual void do_attack(
-		entity const &from,
+		entities::entity const &from,
 		messages::pos_type const& to) = 0;
 	
-	entity &insert(entity_ptr);
+	entities::entity &insert(entities::entity_ptr);
 	void send(messages::base *);
 	environment get_environment() const;
 private:
 	bool in_range(
-		entity const& from,
+		entities::entity const& from,
 		messages::pos_type const& to) const;
 
 	environment          env_;

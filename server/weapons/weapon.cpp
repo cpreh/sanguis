@@ -1,5 +1,5 @@
 #include "weapon.hpp"
-#include "../entity.hpp"
+#include "../entities/entity.hpp"
 #include <sge/time/second.hpp>
 
 sanguis::messages::space_unit
@@ -14,7 +14,7 @@ sanguis::weapon_type::type sanguis::server::weapons::weapon::type() const
 }
 
 bool sanguis::server::weapons::weapon::attack(
-	entity const &from,
+	entities::entity const &from,
 	messages::pos_type const& to)
 {
 	if(!cooldown_timer.update_b() || !in_range(from, to))
@@ -48,14 +48,14 @@ sanguis::server::environment sanguis::server::weapons::weapon::get_environment()
 	return env_;
 }
 
-sanguis::server::entity &
-sanguis::server::weapons::weapon::insert(entity_ptr e)
+sanguis::server::entities::entity &
+sanguis::server::weapons::weapon::insert(entities::entity_ptr e)
 {
 	return env_.insert(e);
 }
 
 bool sanguis::server::weapons::weapon::in_range(
-	entity const& from,
+	entities::entity const& from,
 	messages::pos_type const& to) const
 {
 	return (from.center() - to).length() < range();

@@ -4,7 +4,8 @@
 #include "../machine.hpp"
 #include "../send_callback.hpp"
 #include "../console_print_callback.hpp"
-#include "../entity.hpp"
+#include "../entities/entity_fwd.hpp"
+#include "../entities/fwd.hpp"
 #include "../../console_timer.hpp"
 
 #include <sge/time/timer.hpp>
@@ -29,7 +30,7 @@ class running
 	: public boost::statechart::state<running,machine,unpaused>
 {
 	public:
-	typedef std::map<net::id_type,entities::player*> player_map;
+	typedef std::map<net::id_type, entities::player*> player_map;
 
 	// callbacks (can be public so one thinks that they are a member function)
 	send_callback send;
@@ -37,14 +38,14 @@ class running
 
 	running(my_context);
 	sge::time::timer &enemy_timer();
-	entity_container &entities();
-	const entity_container &entities() const;
-	entity &insert_entity(entity_ptr);
+	entities::entity_container &entities();
+	const entities::entity_container &entities() const;
+	entities::entity &insert_entity(entities::entity_ptr);
 	player_map &players();
 	const player_map &players() const;
 	private:
 
-	entity_container entities_;
+	entities::entity_container entities_;
 	player_map players_;
 	
 	// this is better suited here so it isn't out of sync after unpausing

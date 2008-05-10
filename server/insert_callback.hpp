@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_INSERT_CALLBACK_HPP_INCLUDED
 #define SANGUIS_SERVER_INSERT_CALLBACK_HPP_INCLUDED
 
-#include "entity_fwd.hpp"
+#include "entities/entity_fwd.hpp"
 #include <boost/function.hpp>
 
 namespace sanguis
@@ -9,7 +9,7 @@ namespace sanguis
 namespace server
 {
 
-typedef boost::function<entity & (entity_ptr)> insert_callback;
+typedef boost::function<entities::entity & (entities::entity_ptr)> insert_callback;
 
 }
 }

@@ -18,10 +18,10 @@ public:
 private:
 	void update(
 		time_type,
-		entity_container const &);
+		entities::entity_container const &);
 
 	entities::enemy &me;
-	entity const *target;
+	entities::entity const *target;
 };
 
 }

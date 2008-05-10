@@ -24,7 +24,7 @@ sanguis::server::perks::perk::level() const
 }
 
 void sanguis::server::perks::perk::apply(
-	entity &e)
+	entities::entity &e)
 {
 	do_apply(e);
 }

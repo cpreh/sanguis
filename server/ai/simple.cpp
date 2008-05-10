@@ -1,5 +1,5 @@
 #include "simple.hpp"
-#include "../entity.hpp"
+#include "../entities/entity.hpp"
 #include "../entities/enemy.hpp"
 #include <sge/math/angle.hpp>
 #include <boost/foreach.hpp>
@@ -12,12 +12,12 @@ sanguis::server::ai::simple::simple(
 
 void sanguis::server::ai::simple::update(
 	time_type,
-	entity_container const &entities)
+	entities::entity_container const &entities)
 {
 	if(!target)
 	{
 		BOOST_FOREACH(
-			entity const &e,
+			entities::entity const &e,
 			entities)
 		{
 			if(e.type() == entity_type::player)
@@ -27,7 +27,7 @@ void sanguis::server::ai::simple::update(
 	else
 	{
 		// TODO: why can't we use std::find here?
-		for(entity_container::const_iterator it(entities.begin()); it != entities.end(); ++it)
+		for(entities::entity_container::const_iterator it(entities.begin()); it != entities.end(); ++it)
 			if(&*it == target)
 				break;
 		target = 0;

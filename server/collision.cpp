@@ -1,5 +1,5 @@
 #include "collision.hpp"
-#include "entity.hpp"
+#include "entities/entity.hpp"
 #include <sge/math/circle_impl.hpp>
 #include <sge/math/power.hpp>
 #include <algorithm>
@@ -8,13 +8,13 @@ namespace
 {
 
 sge::math::circle bounding_circle(
-	sanguis::server::entity const&);
+	sanguis::server::entities::entity const&);
 
 }
 
 bool sanguis::server::collides(
-	entity const& a,
-	entity const& b)
+	entities::entity const& a,
+	entities::entity const& b)
 {
 	const sge::math::circle ca(bounding_circle(a)),
 	                        cb(bounding_circle(b));
@@ -26,7 +26,7 @@ namespace
 {
 
 sge::math::circle bounding_circle(
-	sanguis::server::entity const& e)
+	sanguis::server::entities::entity const& e)
 {
 	const sanguis::messages::pos_type center(e.center()),
 	                                  pos(e.pos());

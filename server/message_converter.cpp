@@ -8,9 +8,10 @@
 #include "../messages/rotate.hpp"
 #include "../messages/start_attacking.hpp"
 #include "../messages/stop_attacking.hpp"
+#include "entities/entity.hpp"
 
 template<>
-sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::add>(const entity &e)
+sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::add>(const entities::entity &e)
 {
 	return new messages::add(e.id(),
 			e.type(),
@@ -23,43 +24,43 @@ sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::add
 }
 
 template<>
-sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::speed>(const entity &e)
+sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::speed>(const entities::entity &e)
 {
 	return new messages::speed(e.id(),e.abs_speed());
 }
 
 template<>
-sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::move>(const entity &e)
+sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::move>(const entities::entity &e)
 {
 	return new messages::move(e.id(),e.pos());
 }
 
 template<>
-sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::health>(const entity &e)
+sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::health>(const entities::entity &e)
 {
 	return new messages::health(e.id(),e.health());
 }
 
 template<>
-sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::remove>(const entity &e)
+sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::remove>(const entities::entity &e)
 {
 	return new messages::remove(e.id());
 }
 
 template<>
-sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::rotate>(const entity &e)
+sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::rotate>(const entities::entity &e)
 {
 	return new messages::rotate(e.id(),e.angle());
 }
 
 template<>
-sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::stop_attacking>(const entity &e)
+sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::stop_attacking>(const entities::entity &e)
 {
 	return new messages::stop_attacking(e.id());
 }
 
 template<>
-sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::start_attacking>(const entity &e)
+sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::start_attacking>(const entities::entity &e)
 {
 	return new messages::start_attacking(e.id());
 }

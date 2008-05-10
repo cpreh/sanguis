@@ -1,11 +1,13 @@
-#ifndef SANGUIS_SERVER_PROJECTILES_SIMPLE_BULLET_HPP_INCLUDED
-#define SANGUIS_SERVER_PROJECTILES_SIMPLE_BULLET_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_ENTITIES_PROJECTILES_SIMPLE_BULLET_HPP_INCLUDED
+#define SANGUIS_SERVER_ENTITIES_PROJECTILES_SIMPLE_BULLET_HPP_INCLUDED
 
 #include "projectile.hpp"
 
 namespace sanguis
 {
 namespace server
+{
+namespace entities
 {
 namespace projectiles
 {
@@ -29,6 +31,7 @@ private:
 	messages::space_unit damage;
 };
 
+}
 }
 }
 }
