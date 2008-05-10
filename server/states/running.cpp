@@ -1,5 +1,6 @@
 #include "running.hpp"
 #include "waiting.hpp"
+#include "../entities/entity.hpp"
 #include "../message_converter.hpp"
 
 #include <sge/iostream.hpp>
@@ -21,20 +22,20 @@ sge::time::timer &sanguis::server::states::running::enemy_timer()
 	return enemy_timer_.v();
 }
 
-sanguis::server::entity_container &sanguis::server::states::running::entities()
+sanguis::server::entities::container &sanguis::server::states::running::entities()
 {
 	return entities_;
 }
 
-const sanguis::server::entity_container &sanguis::server::states::running::entities() const
+const sanguis::server::entities::container &sanguis::server::states::running::entities() const
 {
 	return entities_;
 }
 
-sanguis::server::entity &sanguis::server::states::running::insert_entity(entity_ptr e)
+sanguis::server::entities::entity &sanguis::server::states::running::insert_entity(entities::auto_ptr e)
 {
 	entities_.push_back(e);
-	entity &ref = entities_.back();
+	entities::entity &ref = entities_.back();
 	ref.update(time_type(),entities_);
 
 	if (ref.type() != entity_type::indeterminate)

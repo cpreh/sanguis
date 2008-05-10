@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_STATES_UNPAUSED_HPP_INCLUDED
 
 #include "running.hpp"
+#include "../../messages/types.hpp"
 
 #include <boost/mpl/list.hpp>
 #include <boost/statechart/simple_state.hpp>
@@ -12,6 +13,9 @@ namespace sanguis
 {
 namespace server
 {
+
+class environment;
+
 namespace states
 {
 

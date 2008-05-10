@@ -3,8 +3,7 @@
 #include <sge/string.hpp>
 
 sanguis::server::perks::perk::perk()
-: entity_(0),
-  level_(0)
+: level_(0)
 {}
 
 void sanguis::server::perks::perk::raise_level()
@@ -12,9 +11,7 @@ void sanguis::server::perks::perk::raise_level()
 	if(!can_raise_level())
 		throw sge::exception(
 			SGE_TEXT("Can't raise perk level!"));
-	do_deactivate();
 	++level_;
-	do_activate();
 }
 
 sanguis::server::perks::perk::~perk()
@@ -26,29 +23,8 @@ sanguis::server::perks::perk::level() const
 	return level_;
 }
 
-sanguis::server::entity &
-sanguis::server::perks::perk::get_entity() const
+void sanguis::server::perks::perk::apply(
+	entities::entity &e)
 {
-	if(!entity_)
-		throw sge::exception(
-			SGE_TEXT("perk has no entity!"));
-	return *entity_;
-}
-
-void sanguis::server::perks::perk::activate(
-	entity &e)
-{
-	if(entity_)
-		throw sge::exception(
-			SGE_TEXT("perk already activated!"));
-	entity_ = &e;
-	do_activate();
-}
-
-void sanguis::server::perks::perk::deactivate()
-{
-	if(!entity_)
-		throw sge::exception(
-			SGE_TEXT("perk already deactivated!"));
-	do_deactivate();
+	do_apply(e);
 }

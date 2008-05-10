@@ -39,8 +39,8 @@ FILE (GLOB files
 	server/*.cpp
 	server/ai/*.cpp
 	server/entities/*.cpp
+	server/entities/projectiles/*.cpp
 	server/perks/*.cpp
-	server/projectiles/*.cpp
 	server/states/*.cpp
 	server/weapons/*.cpp
 	load/model/*.cpp

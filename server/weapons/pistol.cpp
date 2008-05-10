@@ -1,7 +1,7 @@
 #include "pistol.hpp"
 #include "../damage_types.hpp"
-#include "../entity.hpp"
-#include "../projectiles/simple_bullet.hpp"
+#include "../entities/entity.hpp"
+#include "../entities/projectiles/simple_bullet.hpp"
 
 sanguis::server::weapons::pistol::pistol(
 	const environment &env,
@@ -15,16 +15,16 @@ sanguis::server::weapons::pistol::pistol(
 {}
 
 void sanguis::server::weapons::pistol::do_attack(
-	entity const &from,
+	entities::entity const &from,
 	messages::pos_type const &to)
 {
 	insert(
-		entity_ptr(
-			new projectiles::simple_bullet(
+		entities::auto_ptr(
+			new entities::projectiles::simple_bullet(
 				get_environment(),
 				(damage::normal=messages::mu(1)),
 				from.center(),
 				from.angle(),
 				from.team(),
-				messages::mu(1))));
+				messages::mu(5))));
 }

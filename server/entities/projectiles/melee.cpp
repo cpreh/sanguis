@@ -1,7 +1,7 @@
 #include "melee.hpp"
 #include <boost/assign/list_of.hpp>
 
-sanguis::server::projectiles::melee::melee(
+sanguis::server::entities::projectiles::melee::melee(
 	environment const &env,
 	armor_array const &armor,
 	messages::pos_type const& pos,
@@ -14,25 +14,25 @@ sanguis::server::projectiles::melee::melee(
 		messages::mu(0), // angle doesn't matter here
 		team_,
 		boost::assign::map_list_of
-			(entity::property::type::health, entity::property(messages::mu(1)))
-			(entity::property::type::movement_speed, entity::property(messages::mu(0))),
+			(property::type::health, property(messages::mu(1)))
+			(property::type::movement_speed, property(messages::mu(0))),
 		static_cast<time_type>(1)), // short lifetime
   damage(damage)
 {}
 
 sanguis::entity_type::type
-sanguis::server::projectiles::melee::type() const
+sanguis::server::entities::projectiles::melee::type() const
 {
 	return entity_type::indeterminate;
 }
 
 sanguis::messages::dim_type
-sanguis::server::projectiles::melee::dim() const
+sanguis::server::entities::projectiles::melee::dim() const
 {
 	return messages::dim_type(1,1); // TODO: maybe allow cleaving attacks?
 }
 
-void sanguis::server::projectiles::melee::do_hit(
+void sanguis::server::entities::projectiles::melee::do_hit(
 	entity &target)
 {
 	const damage_array damage_values =

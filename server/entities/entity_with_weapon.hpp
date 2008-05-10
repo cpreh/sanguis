@@ -2,12 +2,14 @@
 #define SANGUIS_SERVER_ENTITY_WITH_WEAPON_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "weapons/weapon.hpp"
+#include "../weapons/weapon.hpp"
 #include <boost/ptr_container/ptr_map.hpp>
 
 namespace sanguis
 {
 namespace server
+{
+namespace entities
 {
 
 class entity_with_weapon : public entity {
@@ -25,7 +27,7 @@ protected:
 
 	virtual void update(
 		time_type,
-		entity_container &entities);
+		container &entities);
 public:
 	void change_weapon(const weapon_type::type);
 	void add_weapon(weapons::weapon_ptr);
@@ -39,6 +41,7 @@ private:
 	messages::pos_type  target_;
 };
 
+}
 }
 }
 

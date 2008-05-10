@@ -1,9 +1,9 @@
 #include "projectile.hpp"
-#include "../collision.hpp"
+#include "../../collision.hpp"
 #include <sge/time/second.hpp>
 #include <boost/foreach.hpp>
 
-sanguis::server::projectiles::projectile::projectile(
+sanguis::server::entities::projectiles::projectile::projectile(
 	environment const &env,
 	armor_array const &armor,
 	messages::pos_type const& pos,
@@ -24,20 +24,20 @@ sanguis::server::projectiles::projectile::projectile(
 		lifetime))
 {}
 
-void sanguis::server::projectiles::projectile::die()
+void sanguis::server::entities::projectiles::projectile::die()
 {
 	entity::die();
 	do_die();
 }
 
-bool sanguis::server::projectiles::projectile::invulnerable() const
+bool sanguis::server::entities::projectiles::projectile::invulnerable() const
 {
 	return true; // most bullets will be invulnerable
 }
 
-void sanguis::server::projectiles::projectile::update(
+void sanguis::server::entities::projectiles::projectile::update(
 	const time_type time,
-	entity_container &entities)
+	container &entities)
 {
 	entity::update(
 		time,
@@ -64,10 +64,10 @@ void sanguis::server::projectiles::projectile::update(
 }
 
 sanguis::messages::space_unit
-sanguis::server::projectiles::projectile::max_speed() const
+sanguis::server::entities::projectiles::projectile::max_speed() const
 {
 	return max_speed_;	
 }
 
-void sanguis::server::projectiles::projectile::do_die()
+void sanguis::server::entities::projectiles::projectile::do_die()
 {}

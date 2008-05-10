@@ -1,7 +1,7 @@
 #include "melee.hpp"
 #include "../damage_types.hpp"
-#include "../entity.hpp"
-#include "../projectiles/melee.hpp"
+#include "../entities/entity.hpp"
+#include "../entities/projectiles/melee.hpp"
 
 sanguis::server::weapons::melee::melee(
 	const environment &env,
@@ -18,12 +18,12 @@ sanguis::server::weapons::melee::melee(
 {}
 
 void sanguis::server::weapons::melee::do_attack(
-	entity const &from,
+	entities::entity const &from,
 	messages::pos_type const& to)
 {
 	insert(
-		entity_ptr(
-			new projectiles::melee(
+		entities::auto_ptr(
+			new entities::projectiles::melee(
 				get_environment(),
 				(damage::normal=messages::mu(0.5)),
 				to,

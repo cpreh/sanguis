@@ -3,31 +3,31 @@
 
 #include "../messages/base.hpp"
 #include "../messages/fwd.hpp"
-#include "entity.hpp"
+#include "entities/entity_fwd.hpp"
 
 namespace sanguis
 {
 namespace server
 {
 template<typename T>
-messages::base *message_convert(const entity &);
+messages::base *message_convert(const entities::entity &);
 
 template<>
-messages::base *message_convert<messages::add>(const entity &e);
+messages::base *message_convert<messages::add>(const entities::entity &e);
 template<>
-messages::base *message_convert<messages::speed>(const entity &e);
+messages::base *message_convert<messages::speed>(const entities::entity &e);
 template<>
-messages::base *message_convert<messages::move>(const entity &e);
+messages::base *message_convert<messages::move>(const entities::entity &e);
 template<>
-messages::base *message_convert<messages::health>(const entity &e);
+messages::base *message_convert<messages::health>(const entities::entity &e);
 template<>
-messages::base *message_convert<messages::remove>(const entity &e);
+messages::base *message_convert<messages::remove>(const entities::entity &e);
 template<>
-messages::base *message_convert<messages::rotate>(const entity &e);
+messages::base *message_convert<messages::rotate>(const entities::entity &e);
 template<>
-messages::base *message_convert<messages::stop_attacking>(const entity &e);
+messages::base *message_convert<messages::stop_attacking>(const entities::entity &e);
 template<>
-messages::base *message_convert<messages::start_attacking>(const entity &e);
+messages::base *message_convert<messages::start_attacking>(const entities::entity &e);
 }
 }
 

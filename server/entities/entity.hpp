@@ -1,14 +1,15 @@
-#ifndef SANGUIS_SERVER_ENTITY_HPP_INCLUDED
-#define SANGUIS_SERVER_ENTITY_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_ENTITIES_ENTITY_HPP_INCLUDED
+#define SANGUIS_SERVER_ENTITIES_ENTITY_HPP_INCLUDED
 
 #include "entity_fwd.hpp"
-#include "teams.hpp"
-#include "environment.hpp"
-#include "perks/perk.hpp"
-#include "../messages/types.hpp"
-#include "../entity_id.hpp"
-#include "../entity_type.hpp"
-#include "../damage_type.hpp"
+#include "property.hpp"
+#include "../teams.hpp"
+#include "../environment.hpp"
+#include "../perks/perk.hpp"
+#include "../../messages/types.hpp"
+#include "../../entity_id.hpp"
+#include "../../entity_type.hpp"
+#include "../../damage_type.hpp"
 #include <boost/ptr_container/ptr_list.hpp>
 #include <map>
 
@@ -16,46 +17,11 @@ namespace sanguis
 {
 namespace server
 {
-
-class entity
+namespace entities
 {
+
+class entity {
 public:
-	class property
-	{
-	public:
-		struct type
-		{
-			enum enum_type {
-				health,
-				attack_speed,
-				movement_speed,
-				size
-			};
-		};
-
-		typedef messages::space_unit value_type;
-
-		property(
-			value_type current,
-			value_type base);
-		property(
-			value_type base);
-
-		value_type current() const;
-		void current(value_type);
-		void set_current_to_max();
-
-		value_type max() const;
-
-		void reset_max_to_base();
-		void add_to_max(value_type);
-		void multiply_max_with_base(value_type);
-	private:
-		value_type base_,
-		           max_,
-		           current_;
-	};
-
 	typedef messages::space_unit time_type;
 	typedef messages::space_unit health_type;
 
@@ -115,7 +81,7 @@ public:
 	virtual bool invulnerable() const = 0;
 	virtual void update(
 		const time_type,
-		entity_container &entities);
+		container &entities);
 
 	void add_perk(
 		perks::perk_auto_ptr); 
@@ -123,7 +89,7 @@ public:
 	virtual ~entity();
 protected:
 	void send(messages::base *); // TODO: this should be an auto_ptr
-	entity &insert(entity_ptr); 
+	entity &insert(auto_ptr); 
 	const environment &get_environment() const;
 private:
 	entity_id            id_;
@@ -143,6 +109,7 @@ private:
 	property_map properties;
 };
 
+}
 }
 }
 

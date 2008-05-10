@@ -6,6 +6,7 @@
 #include "../../messages/disconnect.hpp"
 #include "../../dispatch_type.hpp"
 #include "../message_functor.hpp"
+#include "../entities/entity.hpp"
 
 #include <sge/iostream.hpp>
 #include <sge/string.hpp>

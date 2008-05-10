@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_ENEMY_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_ENEMY_HPP_INCLUDED
 
-#include "../entity_with_weapon.hpp"
+#include "entity_with_weapon.hpp"
 #include "../ai/base.hpp"
 
 namespace sanguis
@@ -25,7 +25,7 @@ protected:
 
 	void update(
 		time_type,
-		entity_container &);
+		container &);
 private:
 	ai::ai_ptr ai_;
 };

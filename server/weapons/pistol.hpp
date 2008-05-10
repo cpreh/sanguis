@@ -19,7 +19,7 @@ public:
 		time_type base_cooldown);
 private:
 	void do_attack(
-		entity const &from,
+		entities::entity const &from,
 		messages::pos_type const& to);
 };
 
