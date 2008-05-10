@@ -25,6 +25,7 @@
 #include <sge/math/random.hpp>
 #include <sge/math/constants.hpp>
 #include <sge/math/angle.hpp>
+#include <sge/iostream.hpp>
 
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
@@ -70,7 +71,7 @@ void sanguis::server::states::unpaused::create_game(const net::id_type net_id,co
 				
 				boost::assign::map_list_of
 					(entity::property::type::health,entity::property(messages::mu(100),messages::mu(100)))
-					(entity::property::type::movement_speed,entity::property(messages::mu(0),messages::mu(0))),
+					(entity::property::type::movement_speed,entity::property(messages::mu(0),messages::mu(100))),
 
 				m.name())));
 	
@@ -161,8 +162,8 @@ void sanguis::server::states::unpaused::add_enemy()
 				angle,
 				
 				boost::assign::map_list_of
-					(entity::property::type::health,entity::property(messages::mu(20),messages::mu(20)))
-					(entity::property::type::movement_speed,entity::property(messages::mu(50),messages::mu(50)))
+					(entity::property::type::health,entity::property(messages::mu(3)))
+					(entity::property::type::movement_speed,entity::property(messages::mu(50)))
 
 				)));
 }
@@ -208,7 +209,7 @@ boost::statechart::result sanguis::server::states::unpaused::operator()(const ne
 	}
 	else
 	{
-		player_.get_property(entity::property::type::movement_speed).current(messages::mu(1));
+		player_.get_property(entity::property::type::movement_speed).set_current_to_max();
 		player_.direction(*sge::math::angle_to<messages::space_unit>(e.dir()));
 	}
 
