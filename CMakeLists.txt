@@ -39,6 +39,7 @@ FILE (GLOB files
 	server/*.cpp
 	server/ai/*.cpp
 	server/entities/*.cpp
+	server/entities/auras/*.cpp
 	server/entities/projectiles/*.cpp
 	server/perks/*.cpp
 	server/states/*.cpp
