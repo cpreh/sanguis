@@ -23,6 +23,9 @@ public:
 			debuff
 		};
 	};
+
+	void pos(
+		messages::pos_type const&);
 protected:
 	aura(
 		messages::circle_type const&,
