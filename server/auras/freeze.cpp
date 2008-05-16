@@ -4,12 +4,11 @@
 
 sanguis::server::auras::freeze::freeze(
 	messages::circle_type const &circle_,
-	const team::type team,
-	const influence::type influence_)
+	const team::type team)
 : aura(
 	circle_,
 	team,
-	influence_)
+	influence::debuff)
 {}
 
 void sanguis::server::auras::freeze::do_effect(

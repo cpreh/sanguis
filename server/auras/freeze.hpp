@@ -14,8 +14,7 @@ class freeze : public aura {
 public:
 	freeze(
 		messages::circle_type const &,
-		team::type team,
-		influence::type);
+		team::type team);
 private:
 	void do_effect(
 		entities::entity &target);
