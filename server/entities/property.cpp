@@ -49,13 +49,32 @@ void sanguis::server::entities::property::reset_max_to_base()
 void sanguis::server::entities::property::add_to_max(
 	const value_type n)
 {
+	const value_type old = max();
 	max_ += n;
-	// TODO: trim current here
+	adjust_current(old);
 }
 
 void sanguis::server::entities::property::multiply_max_with_base(
 	const value_type factor)
 {
+	const value_type old = max();
 	max_ += base_ * factor;
-	// TODO: trim current here
+	adjust_current(old);
+}
+
+void sanguis::server::entities::property::max(
+	const value_type n)
+{
+	const value_type old = max();
+	max_ = n;
+	adjust_current(old);
+}
+
+void sanguis::server::entities::property::adjust_current(
+	const value_type old_max)
+{
+	if(old_max < max())
+		current_ += max() - old_max;
+	else if(old_max > max())
+		current(current()); // reset current to clamp it
 }

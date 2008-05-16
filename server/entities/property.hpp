@@ -38,7 +38,11 @@ public:
 	void reset_max_to_base();
 	void add_to_max(value_type);
 	void multiply_max_with_base(value_type);
+	void max(value_type);
 private:
+	void adjust_current(
+		value_type old_max);
+	
 	value_type base_,
 	           max_,
 	           current_;
