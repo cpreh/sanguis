@@ -25,31 +25,21 @@ struct meta
 	damage_array::value_type d;
 
 	meta(const damage_type::type,const damage_array::value_type);
-	operator damage_array() const;
 };
 
-struct all_meta;
-struct all_wrapper
+struct list
 {
-	all_meta operator=(const damage_array::value_type) const;
-};
+	damage_array array;
 
-struct all_meta 
-{
-	damage_array::value_type d;
-
-	all_meta(const damage_array::value_type);
+	list(meta const &);
+	list(damage_array::value_type);
+	list &operator()(meta const &);
 	operator damage_array() const;
 };
 
 extern const wrapper normal,piercing,fire,ice,pure;
-extern const all_wrapper all;
 }
 }
 }
-
-sanguis::damage_array operator,(sanguis::damage_array,const sanguis::server::damage::meta &);
-sanguis::damage_array operator,(const sanguis::server::damage::meta &,const sanguis::server::damage::meta &);
-sanguis::damage_array operator,(const sanguis::server::damage::all_meta &,const sanguis::server::damage::meta &);
 
 #endif

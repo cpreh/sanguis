@@ -25,7 +25,7 @@ void sanguis::server::weapons::melee::do_attack(
 		entities::auto_ptr(
 			new entities::projectiles::melee(
 				get_environment(),
-				(damage::normal=messages::mu(0.5)),
+				damage::list(messages::mu(0)),
 				to,
 				from.team(),
 				damage)));

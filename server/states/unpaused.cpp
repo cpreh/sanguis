@@ -66,9 +66,7 @@ void sanguis::server::states::unpaused::create_game(const net::id_type net_id,co
 		entities::auto_ptr(
 			new entities::player(
 				get_environment(),
-				(
-					damage::all=messages::mu(0)
-				),
+				damage::list(messages::mu(0)),
 				net_id,
 				messages::pos_type(
 					messages::mu(resolution().w()/2),
@@ -161,9 +159,7 @@ void sanguis::server::states::unpaused::add_enemy()
 		entities::auto_ptr(
 			new entities::zombie(
 				get_environment(),
-				(
-					damage::all=messages::mu(0)
-				),
+				damage::list(messages::mu(0)),
 				pos,
 				angle, // angle and direction (are the same here)
 				angle,

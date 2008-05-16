@@ -22,7 +22,7 @@ void sanguis::server::weapons::pistol::do_attack(
 		entities::auto_ptr(
 			new entities::projectiles::simple_bullet(
 				get_environment(),
-				(damage::normal=messages::mu(1)),
+				damage::list(messages::mu(0)),
 				from.center(),
 				from.angle(),
 				from.team(),
