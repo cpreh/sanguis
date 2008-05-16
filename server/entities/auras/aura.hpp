@@ -23,9 +23,10 @@ private:
 	void update(
 		time_type,
 		container &entities);
-	bool invulnerable() const;
 
+	bool invulnerable() const;
 	messages::space_unit max_speed() const;
+	messages::dim_type dim() const;
 
 	virtual void do_effect(entity &target) = 0;
 

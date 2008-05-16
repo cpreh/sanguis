@@ -36,3 +36,9 @@ sanguis::server::entities::auras::aura::max_speed() const
 {
 	return messages::mu(0);
 }
+
+sanguis::messages::dim_type
+sanguis::server::entities::auras::aura::dim() const
+{
+	return messages::dim_type(0,0); // FIXME
+}
