@@ -38,8 +38,8 @@ FILE (GLOB files
 	messages/*.cpp
 	server/*.cpp
 	server/ai/*.cpp
+	server/auras/*.cpp
 	server/entities/*.cpp
-	server/entities/auras/*.cpp
 	server/entities/projectiles/*.cpp
 	server/perks/*.cpp
 	server/states/*.cpp
