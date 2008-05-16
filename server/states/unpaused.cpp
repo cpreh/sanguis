@@ -1,4 +1,6 @@
 #include "unpaused.hpp"
+#include "paused.hpp"
+#include "waiting.hpp"
 #include "../entities/player.hpp"
 #include "../message_functor.hpp"
 #include "../../truncation_check_cast.hpp"
@@ -11,10 +13,14 @@
 #include "../../messages/player_stop_shooting.hpp"
 #include "../../messages/player_change_weapon.hpp"
 #include "../../messages/player_direction.hpp"
+#include "../../messages/player_pause.hpp"
+#include "../../messages/player_unpause.hpp"
 #include "../../messages/game_state.hpp"
 #include "../../messages/add_weapon.hpp"
+#include "../../messages/speed.hpp"
 #include "../../messages/change_weapon.hpp"
 #include "../../messages/experience.hpp"
+#include "../../messages/pause.hpp"
 #include "../message_converter.hpp"
 #include "../damage_types.hpp"
 #include "../../resolution.hpp"
@@ -224,6 +230,28 @@ boost::statechart::result sanguis::server::states::unpaused::operator()(const ne
 	return discard_event();
 }
 
+boost::statechart::result sanguis::server::states::unpaused::operator()(const net::id_type,const messages::player_unpause&) 
+{
+	sge::cerr << SGE_TEXT("server: received superfluous unpause!\n");
+	return discard_event();
+}
+
+boost::statechart::result sanguis::server::states::unpaused::operator()(const net::id_type,const messages::player_pause&) 
+{
+	sge::cout << SGE_TEXT("server: pausing\n");
+
+	context<running>().send(new messages::pause());
+	entities::container &entities = context<running>().entities();
+
+	for (entities::container::const_iterator i = entities.begin(); i != entities.end(); ++i)
+	{
+		context<running>().send(new messages::speed(i->id(),messages::vector2()));
+		context<running>().send(message_convert<messages::move>(*i));
+	}
+
+	return transit<paused>();
+}
+
 boost::statechart::result sanguis::server::states::unpaused::operator()(const net::id_type id,const messages::disconnect&) 
 {
 	if (context<running>().players().find(id) == context<running>().players().end())
@@ -233,7 +261,7 @@ boost::statechart::result sanguis::server::states::unpaused::operator()(const ne
 	}
 
 	sge::clog << SGE_TEXT("server: disconnected\n");
-	return discard_event();
+	return transit<waiting>();
 }
 
 void sanguis::server::states::unpaused::divide_exp(const messages::exp_type exp)
@@ -327,6 +355,8 @@ boost::statechart::result sanguis::server::states::unpaused::react(const message
 			messages::player_start_shooting,
 			messages::player_stop_shooting,
 			messages::player_change_weapon,
+			messages::player_unpause,
+			messages::player_pause,
 			messages::player_direction
 		>,
 		boost::statechart::result>(

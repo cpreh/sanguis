@@ -32,7 +32,6 @@ class unpaused
 
 	void add_enemy();
 	void create_game(const net::id_type,const messages::client_info &);
-	bool aborted() const;
 
 	// reactions
 	boost::statechart::result react(const tick_event&);
@@ -44,6 +43,8 @@ class unpaused
 	boost::statechart::result operator()(const net::id_type,const messages::player_start_shooting &);
 	boost::statechart::result operator()(const net::id_type,const messages::player_stop_shooting &);
 	boost::statechart::result operator()(const net::id_type,const messages::player_change_weapon &);
+	boost::statechart::result operator()(const net::id_type,const messages::player_unpause &);
+	boost::statechart::result operator()(const net::id_type,const messages::player_pause &);
 	boost::statechart::result operator()(const net::id_type,const messages::disconnect &);
 	boost::statechart::result handle_default_msg(const net::id_type,const messages::base &);
 
