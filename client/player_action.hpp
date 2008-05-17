@@ -19,7 +19,8 @@ struct player_action {
 		vertical_look,
 		shoot,
 		switch_weapon_forwards,
-		switch_weapon_backwards
+		switch_weapon_backwards,
+		pause_unpause
 		// TODO: more
 	};
 

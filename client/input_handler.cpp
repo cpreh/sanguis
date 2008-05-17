@@ -32,6 +32,9 @@ void sanguis::client::input_handler::input_callback(const sge::key_pair& p)
 	case sge::kc::key_c:
 		weapon_switch_event(p);
 		break;
+	case sge::kc::key_p:
+		pause_unpause_event(p);
+		break;
 	default:
 		break;
 	}
@@ -91,5 +94,13 @@ void sanguis::client::input_handler::weapon_switch_event(const sge::key_pair& p)
 			p.key().code() == sge::kc::key_x
 			? player_action::switch_weapon_backwards
 			: player_action::switch_weapon_forwards,
+			static_cast<key_scale>(p.value())));
+}
+
+void sanguis::client::input_handler::pause_unpause_event(const sge::key_pair& p)
+{
+	post_message(
+		player_action(
+			player_action::pause_unpause,
 			static_cast<key_scale>(p.value())));
 }
