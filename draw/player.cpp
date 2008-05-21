@@ -1,12 +1,12 @@
 #include "player.hpp"
 #include "z_ordering.hpp"
 #include <sge/string.hpp>
-#include <sge/math/abs.hpp>
 #include <sge/math/angle.hpp>
 #include <sge/math/constants.hpp>
 #include <sge/math/point_rotate.hpp>
 #include <boost/none.hpp>
 #include <iomanip>
+#include <cmath>
 #include <cassert>
 
 namespace
@@ -69,7 +69,7 @@ void sanguis::draw::player::update(const time_type time)
 	assert(abs_angle >= sge::su(0) && abs_angle <= twopi);
 	assert(abs_target >= sge::su(0) && abs_target <= twopi);
 
-	const sge::space_unit abs_dist = sge::math::abs(abs_target - abs_angle);
+	const sge::space_unit abs_dist = std::abs(abs_target - abs_angle);
 	const sge::space_unit swap_dist = (abs_angle > abs_target) ? twopi-abs_angle+abs_target : twopi-abs_target+abs_angle;
 	const sge::space_unit min_dist = std::min(swap_dist,abs_dist);
 

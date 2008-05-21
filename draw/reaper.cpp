@@ -2,11 +2,11 @@
 #include "z_ordering.hpp"
 #include "../resolution.hpp"
 #include <sge/math/compare.hpp>
-#include <sge/math/abs.hpp>
 #include <sge/math/signum.hpp>
 #include <sge/sprite/types.hpp>
 #include <sge/su.hpp>
 #include <sge/iostream.hpp>
+#include <cmath>
 #include <cassert>
 
 namespace
@@ -49,7 +49,7 @@ void sanguis::draw::reaper::update(time_type const t)
 		}
 	}
 
-	const bool regain = sge::math::abs(current_health - target_health) > health_regain * t;
+	const bool regain = std::abs(current_health - target_health) > health_regain * t;
 
 	// reset speed if target is reached
 	if (!regain)
