@@ -4,11 +4,10 @@
 #include <sge/sstream.hpp>
 #include <sge/iostream.hpp>
 #include <sge/string.hpp>
-#include <sge/renderer/renderer.hpp>
-#include <sge/image/image_loader.hpp>
-#include <sge/texture/default_creator.hpp>
-#include <sge/texture/no_fragmented_texture.hpp>
+#include <sge/renderer/device.hpp>
+#include <sge/image/loader.hpp>
 #include <sge/texture/default_creator_impl.hpp>
+#include <sge/texture/no_fragmented.hpp>
 #include <sge/texture/manager.hpp>
 #include <sge/texture/util.hpp>
 #include <sge/time/millisecond.hpp>
@@ -34,27 +33,27 @@ namespace
 
 struct environment
 {
-	const sge::renderer_ptr rend;
-	const sge::image_loader_ptr il;
-	sge::texture_manager texman;
-	std::map<sge::string,sge::string> textures;
+	const sge::renderer::device_ptr rend;
+	const sge::image::loader_ptr il;
+	sge::texture::manager texman;
+	std::map<sge::string, sge::string> textures;
 
-	environment(const sge::image_loader_ptr,const sge::renderer_ptr);
+	environment(sge::image::loader_ptr, sge::renderer::device_ptr);
 	void load_textures();
-	sge::virtual_texture_ptr load_texture(const sanguis::load::resource::identifier_type &);
-	sge::virtual_texture_ptr load_texture_inner(const sge::path &);
+	sge::texture::part_ptr const load_texture(const sanguis::load::resource::identifier_type &);
+	sge::texture::part_ptr const load_texture_inner(const sge::path &);
 	const sge::sprite::animation_series load_animation(
 		sge::path const&);
 };
 
-environment::environment(const sge::image_loader_ptr il,const sge::renderer_ptr r) 
+environment::environment(const sge::image::loader_ptr il,const sge::renderer::device_ptr r) 
 : rend(r),
   il(il),
   texman(
   	rend,
-	sge::default_texture_creator<sge::no_fragmented_texture>(
+	sge::texture::default_creator<sge::texture::no_fragmented>(
 		rend,
-		sge::linear_filter))
+		sge::renderer::linear_filter))
 {
 	load_textures();
 }
@@ -144,12 +143,12 @@ environment::load_animation(
 	return anim;
 }
 
-sge::virtual_texture_ptr environment::load_texture_inner(const sge::path& p)
+sge::texture::part_ptr const environment::load_texture_inner(const sge::path& p)
 {
-	return sge::add_texture(texman,il->load_image(p));
+	return sge::texture::add(texman,il->load_image(p));
 }
 
-sge::virtual_texture_ptr environment::load_texture(const sanguis::load::resource::identifier_type& id)
+sge::texture::part_ptr const environment::load_texture(const sanguis::load::resource::identifier_type& id)
 {
 	if (textures.find(id) == textures.end())
 		throw sge::exception(SGE_TEXT("no texture for id \"")+id+SGE_TEXT("\" found"));
@@ -204,7 +203,7 @@ const Mapped& map_get_or_create(std::map<Key, Mapped, Comp, Alloc>& map, const K
 }
 
 typedef std::map<sanguis::load::resource::identifier_type,
-                 sge::virtual_texture_ptr>
+                 sge::texture::part_ptr>
 	texture_map;
 texture_map textures;
 
@@ -217,7 +216,7 @@ const sge::sprite::animation_series
 load_animation(
 	sge::path const&);
 
-const sge::virtual_texture_ptr
+const sge::texture::part_ptr
 load_texture(const sanguis::load::resource::identifier_type&);
 
 environment *env = 0;
@@ -231,13 +230,13 @@ sanguis::load::resource::animation(sge::path const& path)
 	return map_get_or_create(animations, path, load_animation);
 }
 
-const sge::virtual_texture_ptr
+const sge::texture::part_ptr
 sanguis::load::resource::texture(const identifier_type& id)
 {
 	return map_get_or_create(textures, id, load_texture);
 }
 
-sanguis::load::resource::connection::connection(const sge::image_loader_ptr pm,const sge::renderer_ptr rend) 
+sanguis::load::resource::connection::connection(const sge::image::loader_ptr pm,const sge::renderer::device_ptr rend) 
 {
 	if (refcount++ == 0)
 		env = new environment(pm,rend);
@@ -263,7 +262,7 @@ void check_env()
 		throw sge::exception(SGE_TEXT("no resource connection found"));
 }
 
-const sge::virtual_texture_ptr
+const sge::texture::part_ptr
 load_texture(const sanguis::load::resource::identifier_type& id)
 {
 	check_env();

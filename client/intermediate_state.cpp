@@ -4,6 +4,7 @@
 #include <sge/iostream.hpp>
 #include <sge/ostream.hpp>
 #include <sge/string.hpp>
+#include <ostream>
 
 sanguis::client::intermediate_state::intermediate_state(my_context ctx) 
   : my_base(ctx)
@@ -26,12 +27,14 @@ boost::statechart::result sanguis::client::intermediate_state::react(const tick_
 	
 	// show text in the screen center (hopefully)
 	m.font.draw_text(SGE_TEXT("waiting for connect"),
-		sge::font_pos(0,0),
-		sge::font_dim(m.sys.renderer->screen_width(),
+		sge::font::pos(0,0),
+		sge::font::dim(
+			m.sys.renderer->screen_width(),
 			m.sys.renderer->screen_height()),
-		sge::font_align_h::center,sge::font_align_v::center);
+		sge::font::align_h::center,
+		sge::font::align_v::center);
 	
-	if (m.ks[sge::kc::key_space])
+	if (m.ks[sge::input::kc::key_space])
 	{
 		m.connect();
 		return transit<connecting_state>();

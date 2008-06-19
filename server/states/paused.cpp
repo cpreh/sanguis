@@ -9,10 +9,13 @@
 #include "../../messages/disconnect.hpp"
 #include "../entities/entity.hpp"
 
+#include <sge/iostream.hpp>
+
 #include <boost/bind.hpp>
 #include <boost/mpl/vector.hpp>
 
 #include <typeinfo>
+#include <ostream>
 
 // reactions
 boost::statechart::result sanguis::server::states::paused::react(const tick_event&)

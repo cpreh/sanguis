@@ -193,7 +193,7 @@ void sanguis::client::running_state::handle_rotation(
 		return;
 	}
 
-	const sge::renderer_ptr rend = context<machine>().sys.renderer;
+	const sge::renderer::device_ptr rend = context<machine>().sys.renderer;
 	cursor_pos.x() = sge::math::clamp(cursor_pos.x(), 0, static_cast<sge::sprite::unit>(rend->screen_width()));
 	cursor_pos.y() = sge::math::clamp(cursor_pos.y(), 0, static_cast<sge::sprite::unit>(rend->screen_height()));
 	

@@ -24,7 +24,12 @@ sanguis::draw::reaper::reaper(entity_id id,player const &p)
 	for (iterator i = begin(); i != end(); ++i)
 	{
 		i->z() = z_ordering::reaper;
-		i->set_color(sge::make_color(static_cast<sge::color_element>(255),static_cast<sge::color_element>(255),static_cast<sge::color_element>(255),static_cast<sge::color_element>(128)));
+		i->set_color(
+			sge::renderer::make_color_rgba(
+				static_cast<sge::renderer::pixel_channel_8>(255),
+				static_cast<sge::renderer::pixel_channel_8>(255),
+				static_cast<sge::renderer::pixel_channel_8>(255),
+				static_cast<sge::renderer::pixel_channel_8>(128)));
 	}
 }
 

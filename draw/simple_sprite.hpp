@@ -18,7 +18,7 @@ public:
 		sge::sprite::dim const&,
 		sge::sprite::depth_type,
 		sge::sprite::rotation_type,
-		sge::virtual_texture_ptr);
+		sge::texture::part_ptr);
 private:
 	void update(time_type);
 	sprite_vector to_sprites() const;

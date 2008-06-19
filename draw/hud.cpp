@@ -4,7 +4,7 @@
 #include <sge/string.hpp>
 
 sanguis::draw::hud::hud(
-	sge::font &font)
+	sge::font::font &font)
 : font(font),
   experience_(0)
 {}
@@ -23,8 +23,8 @@ void sanguis::draw::hud::update(
 			SGE_TEXT("exp: %1%"))
 			% experience_)
 			.str(),
-		sge::font_pos(0, 0),
-		sge::font_dim(100, 100), // FIXME
-		sge::font_align_h::left,
-		sge::font_align_v::top);
+		sge::font::pos(0, 0),
+		sge::font::dim(100, 100), // FIXME
+		sge::font::align_h::left,
+		sge::font::align_v::top);
 }

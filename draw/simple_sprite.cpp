@@ -7,7 +7,7 @@ sanguis::draw::simple_sprite::simple_sprite(
 	sge::sprite::dim const& dim_,
 	const sge::sprite::depth_type depth,
 	const sge::sprite::rotation_type angle,
-	const sge::virtual_texture_ptr tex)
+	const sge::texture::part_ptr tex)
 : entity(
 	id)
 {
@@ -16,7 +16,7 @@ sanguis::draw::simple_sprite::simple_sprite(
 			pos_,
 			tex,
 			dim_,
-			sge::colors::white,
+			sge::renderer::colors::white,
 			depth,
 			angle));
 }

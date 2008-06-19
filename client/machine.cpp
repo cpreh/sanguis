@@ -4,7 +4,7 @@
 #include "../messages/add.hpp"
 #include "../serialization.hpp"
 #include "message_event.hpp"
-#include <sge/renderer/scoped_renderblock.hpp>
+#include <sge/renderer/scoped_block.hpp>
 #include <sge/renderer/scoped_state.hpp>
 #include <sge/iostream.hpp>
 #include <boost/bind.hpp>
@@ -13,8 +13,8 @@
 
 sanguis::client::machine::machine(
 	sge::systems &sys,
-	sge::font &font,
-	sge::key_state_tracker &ks,
+	sge::font::font &font,
+	sge::input::key_state_tracker &ks,
 	sge::con::console_gfx &con,
 	const net::address_type &address_,
 	const net::port_type port_) 
@@ -29,7 +29,7 @@ sanguis::client::machine::machine(
   ks(ks),
   con(con),
   con_stdlib(boost::bind(&sge::con::console_gfx::print,&con,_1)),
-  con_wrapper(con,sys.input_system,sge::kc::key_f1),
+  con_wrapper(con,sys.input_system,sge::input::kc::key_f1),
   resource_connection(sys.image_loader,sys.renderer)
 {}
 
@@ -73,15 +73,15 @@ bool sanguis::client::machine::process(const tick_event &t)
 
 	net_.process();
 
-	const sge::scoped_renderblock block_(sys.renderer);
+	const sge::renderer::scoped_block block_(sys.renderer);
 	sys.renderer->set_state(
-		sge::renderer_state_list
-			(sge::bool_state::clear_backbuffer=true)
+		sge::renderer::state_list
+			(sge::renderer::bool_state::clear_backbuffer=true)
 	);
 	process_event(t);
 
 	if (con.active())
 		con.draw();
 
-	return !ks[sge::kc::key_escape];
+	return !ks[sge::input::kc::key_escape];
 }

@@ -70,10 +70,12 @@ boost::statechart::result sanguis::client::connecting_state::react(const tick_ev
 	
 	// show text in the screen center (hopefully)
 	m.font.draw_text(status,
-		sge::font_pos(0,0),sge::font_dim(
+		sge::font::pos(0,0),
+		sge::font::dim(
 			m.sys.renderer->screen_width(),
 			m.sys.renderer->screen_height()),
-		sge::font_align_h::center,sge::font_align_v::center);
+		sge::font::align_h::center,
+		sge::font::align_v::center);
 
 	return discard_event();
 }

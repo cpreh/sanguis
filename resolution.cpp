@@ -1,6 +1,6 @@
 #include "resolution.hpp"
 
-sge::screen_size_t sanguis::resolution()
+sge::renderer::screen_size_t const sanguis::resolution()
 {
-	return sge::screen_size_t(1024,768);
+	return sge::renderer::screen_size_t(1024,768);
 }
