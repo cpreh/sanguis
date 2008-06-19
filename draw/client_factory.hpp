@@ -16,7 +16,7 @@ namespace client_factory
 typedef std::auto_ptr<entity> entity_ptr;
 entity_ptr create_entity(
 	const client_messages::add &,
-	const sge::screen_size_t &);
+	const sge::renderer::screen_size_t &);
 }
 }
 }

@@ -15,10 +15,10 @@
 #include <sge/systems.hpp>
 #include <sge/init.hpp>
 #include <sge/media.hpp>
-#include <sge/font/font_drawer_3d.hpp>
+#include <sge/font/drawer_3d.hpp>
 #include <sge/font/font.hpp>
 #include <sge/texture/default_creator.hpp>
-#include <sge/texture/no_fragmented_texture.hpp>
+#include <sge/texture/no_fragmented.hpp>
 #include <sge/texture/default_creator_impl.hpp>
 #include <sge/texture/manager.hpp>
 #include <sge/texture/util.hpp>
@@ -82,19 +82,23 @@ try
 	sys.init<sge::init::image_loader>();
 
 	// input stuff
-	sge::key_state_tracker ks(sys.input_system);
+	sge::input::key_state_tracker ks(sys.input_system);
 
 	// font stuff
-	sge::plugin<sge::font_system>::ptr_type font_plugin = sys.plugin_manager.get_plugin<sge::font_system>().load();
-	sge::font_system_ptr fs(font_plugin->get()());
-	sge::font_metrics_ptr metrics = fs->create_font(sge::media_path() / SGE_TEXT("fonts/default.ttf"),15);
-	sge::font_drawer_ptr drawer(new sge::font_drawer_3d(sys.renderer));
-	sge::font font(metrics,drawer);
-	sge::texture_manager texman(sys.renderer,sge::default_texture_creator<sge::no_fragmented_texture>(sys.renderer,sge::linear_filter));
-	sge::font_ptr console_font(new sge::font(metrics,drawer));
+	const sge::plugin<sge::font::system>::ptr_type font_plugin = sys.plugin_manager.get_plugin<sge::font::system>().load();
+	const sge::font::system_ptr fs(font_plugin->get()());
+	const sge::font::metrics_ptr metrics = fs->create_font(sge::media_path() / SGE_TEXT("fonts/default.ttf"),15);
+	const sge::font::drawer_ptr drawer(new sge::font::drawer_3d(sys.renderer));
+	sge::font::font font(metrics,drawer);
+	sge::texture::manager texman(
+		sys.renderer,
+		sge::texture::default_creator<sge::texture::no_fragmented>(
+			sys.renderer,
+			sge::renderer::linear_filter));
+	const sge::font::font_ptr console_font(new sge::font::font(metrics,drawer));
 
 	sge::con::console_gfx console(sys.renderer,
-		sge::add_texture(texman,sys.image_loader->load_image(sanguis::media_path()/"console_back.jpg")),
+		sge::texture::add(texman,sys.image_loader->load_image(sanguis::media_path()/"console_back.jpg")),
 		console_font,
 		sys.input_system,
 		sge::sprite::point(0,0),

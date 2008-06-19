@@ -8,10 +8,10 @@
 namespace sanguis
 {
 
-sge::sprite::point virtual_to_screen(const sge::screen_size_t &,const messages::pos_type &);
-sge::sprite::dim virtual_to_screen(const sge::screen_size_t &,const messages::dim_type &);
-messages::pos_type screen_to_virtual(const sge::screen_size_t &,const sge::sprite::point &);
-messages::dim_type screen_to_virtual(const sge::screen_size_t &,const sge::sprite::dim &);
+sge::sprite::point const virtual_to_screen(const sge::renderer::screen_size_t &,const messages::pos_type &);
+sge::sprite::dim const virtual_to_screen(const sge::renderer::screen_size_t &,const messages::dim_type &);
+messages::pos_type const screen_to_virtual(const sge::renderer::screen_size_t &,const sge::sprite::point &);
+messages::dim_type const screen_to_virtual(const sge::renderer::screen_size_t &,const sge::sprite::dim &);
 
 }
 

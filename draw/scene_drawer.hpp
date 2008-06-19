@@ -7,7 +7,7 @@
 #include "../messages/fwd.hpp"
 #include "../time_type.hpp"
 #include "../client_messages/fwd.hpp"
-#include <sge/renderer/renderer.hpp>
+#include <sge/renderer/device.hpp>
 #include <sge/sprite/system.hpp>
 #include <sge/font/fwd.hpp>
 #include <sge/type_info.hpp>
@@ -27,8 +27,8 @@ class player;
 class scene_drawer : boost::noncopyable {
 public:
 	scene_drawer(
-		sge::renderer_ptr,
-		sge::font &);
+		sge::renderer::device_ptr,
+		sge::font::font &);
 	
 	void process_message(const messages::base&);
 

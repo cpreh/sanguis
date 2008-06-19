@@ -15,7 +15,7 @@ sanguis::draw::client_factory::entity_ptr
 create_sprite(
 	const sanguis::client_messages::add& m,
 	const sge::string& s,
-	const sge::screen_size_t& screen_size,
+	const sge::renderer::screen_size_t& screen_size,
 	const sge::space_unit z);
 
 }
@@ -24,7 +24,7 @@ create_sprite(
 sanguis::draw::client_factory::entity_ptr
 sanguis::draw::client_factory::create_entity(
 	const client_messages::add &m,
-	const sge::screen_size_t &screen_size)
+	const sge::renderer::screen_size_t &screen_size)
 {
 
 	switch(m.type()) {
@@ -53,7 +53,7 @@ sanguis::draw::client_factory::entity_ptr
 create_sprite(
 	const sanguis::client_messages::add& m,
 	const sge::string& s,
-	const sge::screen_size_t& screen_size,
+	const sge::renderer::screen_size_t& screen_size,
 	const sge::space_unit z)
 {
 	return sanguis::draw::client_factory::entity_ptr(

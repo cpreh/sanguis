@@ -5,7 +5,7 @@
 
 namespace sanguis
 {
-sge::screen_size_t resolution();
+sge::renderer::screen_size_t const resolution();
 }
 
 #endif

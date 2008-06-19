@@ -41,6 +41,8 @@ struct running_state
 	
 	boost::statechart::result operator()(const messages::disconnect&);
 	boost::statechart::result operator()(const messages::game_state&);
+	boost::statechart::result operator()(const messages::pause&);
+	boost::statechart::result operator()(const messages::unpause&);
 private:
 	boost::statechart::result handle_default_msg(const messages::base&);
 	void handle_player_action(const player_action&);
@@ -48,12 +50,14 @@ private:
 	void handle_rotation(const draw::player&, const player_action&);
 	void handle_shooting(const draw::player&, const player_action&);
 	void handle_switch_weapon(const draw::player&, const player_action&);
+	void handle_pause_unpause(const draw::player&, const player_action&);
 
 	draw::scene_drawer     drawer;
 	input_handler          input;
 	sge::scoped_connection input_connection;
 	sge::math::vector2     direction;
 	sge::sprite::point     cursor_pos;
+	bool                   paused; // TODO: create a different state for this!
 };
 }
 }

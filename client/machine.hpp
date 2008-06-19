@@ -9,14 +9,14 @@
 #include "message_event.hpp"
 #include "console_wrapper.hpp"
 
-#include <sge/font/font_metrics.hpp>
-#include <sge/font/font_system.hpp>
-#include <sge/font/font_drawer.hpp>
+#include <sge/font/metrics.hpp>
+#include <sge/font/system.hpp>
+#include <sge/font/drawer.hpp>
 #include <sge/font/fwd.hpp>
 #include <sge/input/key_state_tracker.hpp>
 #include <sge/systems.hpp>
 #include <sge/texture/default_creator.hpp>
-#include <sge/texture/no_fragmented_texture.hpp>
+#include <sge/texture/no_fragmented.hpp>
 #include <sge/texture/manager.hpp>
 #include <sge/console/console_gfx.hpp>
 #include <sge/console/stdlib.hpp>
@@ -43,8 +43,8 @@ struct machine
 
 	public:
 	sge::systems &sys;
-	sge::font &font;
-	sge::key_state_tracker &ks;
+	sge::font::font &font;
+	sge::input::key_state_tracker &ks;
 	sge::con::console_gfx &con;
 	sge::con::stdlib con_stdlib;
 	console_wrapper con_wrapper;
@@ -53,8 +53,8 @@ struct machine
 
 	machine(
 		sge::systems &,
-		sge::font &,
-		sge::key_state_tracker &,
+		sge::font::font &,
+		sge::input::key_state_tracker &,
 		sge::con::console_gfx &,
 		const net::address_type &,
 		net::port_type);

@@ -14,13 +14,13 @@ namespace draw
 class hud : boost::noncopyable {
 public:
 	hud(
-		sge::font&);
+		sge::font::font&);
 	void experience(
 		messages::exp_type);
 	void update(
 		time_type);
 private:
-	sge::font          &font;
+	sge::font::font    &font;
 	messages::exp_type experience_;
 };
 

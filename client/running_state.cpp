@@ -10,11 +10,15 @@
 #include "../messages/disconnect.hpp"
 #include "../messages/game_state.hpp"
 #include "../messages/move.hpp"
+#include "../messages/pause.hpp"
 #include "../messages/player_change_weapon.hpp"
 #include "../messages/player_direction.hpp"
+#include "../messages/player_pause.hpp"
 #include "../messages/player_rotation.hpp"
 #include "../messages/player_start_shooting.hpp"
 #include "../messages/player_stop_shooting.hpp"
+#include "../messages/player_unpause.hpp"
+#include "../messages/unpause.hpp"
 #include "../draw/player.hpp"
 #include "../draw/coord_transform.hpp"
 #include <sge/iostream.hpp>
@@ -48,7 +52,8 @@ sanguis::client::running_state::running_state(my_context ctx)
 		boost::bind(&input_handler::input_callback, &input, _1))),
   direction(0, 0),
 // cursor_pos(0, 0)
- cursor_pos(32, 32)
+ cursor_pos(32, 32),
+ paused(false)
 {
 	sge::clog << SGE_TEXT("client: entering running state\n");
 	
@@ -79,7 +84,9 @@ boost::statechart::result sanguis::client::running_state::react(const message_ev
 	return dispatch_type<
 		boost::mpl::vector<
 			messages::disconnect,
-			messages::game_state
+			messages::game_state,
+			messages::pause,
+			messages::unpause
 		>,
 		boost::statechart::result>(
 		*this,
@@ -104,6 +111,22 @@ sanguis::client::running_state::operator()(
 }
 
 boost::statechart::result
+sanguis::client::running_state::operator()(
+	const messages::pause&)
+{
+	paused = true;
+	return discard_event();
+}
+
+boost::statechart::result
+sanguis::client::running_state::operator()(
+	const messages::unpause&)
+{
+	paused = false;
+	return discard_event();
+}
+
+boost::statechart::result
 sanguis::client::running_state::handle_default_msg(const messages::base& m)
 {
 	drawer.process_message(m);
@@ -121,6 +144,7 @@ void sanguis::client::running_state::handle_player_action(const player_action& m
 		handle_rotation(player, m);
 		handle_shooting(player, m);
 		handle_switch_weapon(player, m);
+		handle_pause_unpause(player, m);
 	}
 	catch(const sge::exception& e)
 	{
@@ -169,7 +193,7 @@ void sanguis::client::running_state::handle_rotation(
 		return;
 	}
 
-	const sge::renderer_ptr rend = context<machine>().sys.renderer;
+	const sge::renderer::device_ptr rend = context<machine>().sys.renderer;
 	cursor_pos.x() = sge::math::clamp(cursor_pos.x(), 0, static_cast<sge::sprite::unit>(rend->screen_width()));
 	cursor_pos.y() = sge::math::clamp(cursor_pos.y(), 0, static_cast<sge::sprite::unit>(rend->screen_height()));
 	
@@ -232,4 +256,20 @@ void sanguis::client::running_state::handle_switch_weapon(
 			p.id(),
 			wanted_weapon));
 
+}
+
+void sanguis::client::running_state::handle_pause_unpause(
+	const draw::player& p,
+	const player_action& m)
+{
+	if(m.type() != player_action::pause_unpause)
+		return;
+	context<machine>().send(
+		paused
+		? static_cast<messages::base*>(
+			new messages::player_pause(
+				p.id()))
+		: static_cast<messages::base*>(
+			new messages::player_unpause(
+				p.id())));
 }

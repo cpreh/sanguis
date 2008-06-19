@@ -5,7 +5,7 @@
 #include <sge/string.hpp>
 #include <sge/media.hpp>
 #include <sge/init.hpp>
-#include <sge/font/font_drawer_3d.hpp>
+#include <ostream>
 
 sanguis::client::start_state::start_state()
 {
@@ -18,8 +18,8 @@ boost::statechart::result sanguis::client::start_state::react(const tick_event&)
 
 	// set renderer options
 	context<machine>().sys.renderer->set_state(
-		sge::renderer_state_list
-			(sge::bool_state::clear_backbuffer = true)
+		sge::renderer::state_list
+			(sge::renderer::bool_state::clear_backbuffer = true)
 	);
 
 	return transit<intermediate_state>();

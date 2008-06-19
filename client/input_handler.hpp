@@ -15,16 +15,17 @@ class input_handler {
 public:
 	typedef boost::function<void (const player_action&)> post_fun;
 	input_handler(const post_fun&);
-	void input_callback(const sge::key_pair&);
+	void input_callback(const sge::input::key_pair&);
 private:
-	void direction_event(const sge::key_pair&);
-	void rotation_event(const sge::key_pair&);
-	void shooting_event(const sge::key_pair&);
-	void weapon_switch_event(const sge::key_pair&);
+	void direction_event(const sge::input::key_pair&);
+	void rotation_event(const sge::input::key_pair&);
+	void shooting_event(const sge::input::key_pair&);
+	void weapon_switch_event(const sge::input::key_pair&);
+	void pause_unpause_event(const sge::input::key_pair&);
 
-	const post_fun     post_message;
-	sge::key_state     last_x,
-	                   last_y;
+	const post_fun         post_message;
+	sge::input::key_state  last_x,
+	                       last_y;
 };
 
 }

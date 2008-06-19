@@ -36,10 +36,11 @@
 #include <algorithm>
 #include <functional>
 #include <typeinfo>
+#include <ostream>
 
 sanguis::draw::scene_drawer::scene_drawer(
-	const sge::renderer_ptr rend,
-	sge::font &font)
+	const sge::renderer::device_ptr rend,
+	sge::font::font &font)
 : ss(rend),
   hud_(font),
   player_(0)
