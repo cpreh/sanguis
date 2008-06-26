@@ -76,7 +76,7 @@ public:
 	messages::space_unit radius() const;
 
 	virtual messages::exp_type exp() const;
-	virtual messages::dim_type dim() const = 0;
+	virtual messages::dim_type const dim() const = 0;
 	virtual entity_type::type type() const = 0;
 	virtual bool invulnerable() const = 0;
 	virtual void update(

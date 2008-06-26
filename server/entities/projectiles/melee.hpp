@@ -22,7 +22,7 @@ public:
 		messages::space_unit damage);
 private:
 	entity_type::type type() const;
-	messages::dim_type dim() const;
+	messages::dim_type const dim() const;
 
 	void do_hit(
 		entity &target);

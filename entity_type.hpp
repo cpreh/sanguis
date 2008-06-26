@@ -9,6 +9,7 @@ enum type {
 	indeterminate,
 	player,
 	bullet,
+	pickup,
 	zombie,
 	wolf_white,
 	wolf_black

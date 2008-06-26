@@ -21,7 +21,7 @@ class zombie : public enemy
 		messages::space_unit const angle,
 		property_map const &);
 
-	messages::dim_type dim() const;
+	messages::dim_type const dim() const;
 	messages::exp_type exp() const;
 	entity_type::type type() const;
 	bool invulnerable() const;

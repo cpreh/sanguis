@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_PICKUPS_PICKUP_HPP_INCLUDED
 
 #include "../entity.hpp"
+#include "../fwd.hpp"
 
 namespace sanguis
 {
@@ -25,7 +26,11 @@ private:
 		time_type time,
 		container &entities);
 	virtual void do_pickup(
-		entity &receiver) = 0;
+		entity_with_weapon &receiver) = 0;
+
+	messages::dim_type const dim() const;
+	entity_type::type type() const;
+	bool invulnerable() const;
 };
 
 }

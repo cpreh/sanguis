@@ -36,7 +36,7 @@ sanguis::server::entities::projectiles::simple_bullet::type() const
 	return entity_type::bullet;
 }
 
-sanguis::messages::dim_type
+sanguis::messages::dim_type const
 sanguis::server::entities::projectiles::simple_bullet::dim() const
 {
 	return get_dim(SGE_TEXT("bullet"), SGE_TEXT("default"));

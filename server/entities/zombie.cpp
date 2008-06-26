@@ -41,7 +41,7 @@ bool sanguis::server::entities::zombie::invulnerable() const
 	return false;
 }
 
-sanguis::messages::dim_type sanguis::server::entities::zombie::dim() const
+sanguis::messages::dim_type const sanguis::server::entities::zombie::dim() const
 {
 	return get_dim(
 		SGE_TEXT("zombie00"),

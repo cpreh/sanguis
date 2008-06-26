@@ -36,9 +36,15 @@ bool sanguis::server::entities::player::invulnerable() const
 	return false;
 }
 
-sanguis::messages::dim_type sanguis::server::entities::player::dim() const
+sanguis::messages::dim_type const
+sanguis::server::entities::player::dim() const
 {
-	return sge::math::structure_cast<messages::space_unit>(load::model::singleton()["player"]["bottom"][weapon_type::pistol][animation_type::walking].get().dim());
+	return sge::math::structure_cast<messages::space_unit>(
+		load::model::singleton()
+			["player"]
+				["bottom"]
+					[weapon_type::pistol]
+						[animation_type::walking].get().dim());
 }
 
 sanguis::messages::exp_type sanguis::server::entities::player::exp() const
