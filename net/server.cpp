@@ -69,7 +69,7 @@ void net::server::accept_handler(const boost::system::error_code &e,connection &
 #endif
 
 	int flag = 1;
-	setsockopt(c.socket.native(),IPPROTO_TCP, TCP_NODELAY, (char *) &flag, sizeof(int));
+	setsockopt(c.socket.native(), IPPROTO_TCP, TCP_NODELAY, &flag, sizeof(int));
 	
 	/*
 	asio::socket_base::receive_buffer_size option(1);

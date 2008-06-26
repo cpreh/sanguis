@@ -18,7 +18,7 @@ CHECK_CXX_SOURCE_RUNS(
 	 HAVE_VARIADIC_TEMPLATES)
 
 IF (${CMAKE_COMPILER_IS_GNUCXX})
-	SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ansi -pedantic-errors -Wall -Wextra -Wconversion -Wfloat-equal")
+	SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ansi -pedantic-errors -Wall -Wextra -Wconversion -Wfloat-equal -Winit-self -Wold-style-cast")
 ENDIF ()
 
 IF (ENABLE_DEBUG AND CMAKE_COMPILER_IS_GNUCXX)
@@ -40,6 +40,7 @@ FILE (GLOB files
 	server/ai/*.cpp
 	server/auras/*.cpp
 	server/entities/*.cpp
+	server/entities/pickups/*.cpp
 	server/entities/projectiles/*.cpp
 	server/perks/*.cpp
 	server/states/*.cpp
