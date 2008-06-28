@@ -3,6 +3,7 @@
 
 #include "../entity.hpp"
 #include "../fwd.hpp"
+#include "../../../pickup_type.hpp"
 
 namespace sanguis
 {
@@ -14,8 +15,11 @@ namespace pickups
 {
 
 class pickup : public entity {
+public:
+	pickup_type::type ptype() const;
 protected:
 	pickup(
+		pickup_type::type,
 		environment const &,
 		messages::pos_type const &,
 		messages::space_unit angle,
@@ -31,6 +35,8 @@ private:
 	messages::dim_type const dim() const;
 	entity_type::type type() const;
 	bool invulnerable() const;
+
+	pickup_type::type ptype_;
 };
 
 }

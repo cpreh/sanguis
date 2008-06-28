@@ -21,6 +21,25 @@ sanguis::draw::simple_sprite::simple_sprite(
 			angle));
 }
 
+sanguis::draw::simple_sprite::simple_sprite(
+	entity_id const id,
+	sge::sprite::depth_type const depth,
+	sge::texture::part_ptr const tex)
+: entity(
+	id)
+{
+	sprite.push_back(
+		sge::sprite::object(
+			sge::sprite::point(
+				sge::su(0),
+				sge::su(0)),
+			tex,
+			sge::sprite::texture_dim,
+			sge::renderer::colors::white,
+			depth,
+			sge::su(0)));
+}
+
 void sanguis::draw::simple_sprite::update(time_type)
 {}
 

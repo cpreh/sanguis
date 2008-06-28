@@ -1,14 +1,14 @@
-#include "level_change.hpp"
+#include "level_up.hpp"
 #include "instantiate_serialize.hpp"
 #include <boost/serialization/export.hpp>
 #include <boost/serialization/base_object.hpp>
 
-BOOST_CLASS_EXPORT_GUID(sanguis::messages::level_change, "level_change")
+BOOST_CLASS_EXPORT_GUID(sanguis::messages::level_up, "level_up")
 
-sanguis::messages::level_change::level_change()
+sanguis::messages::level_up::level_up()
 {}
 
-sanguis::messages::level_change::level_change(
+sanguis::messages::level_up::level_up(
 	const entity_id id,
 	const level_type level_)
 : entity_message(id),
@@ -16,13 +16,13 @@ sanguis::messages::level_change::level_change(
 {}
 
 sanguis::messages::level_type
-sanguis::messages::level_change::level() const
+sanguis::messages::level_up::level() const
 {
 	return level_;
 }
 
 template<typename Archive>
-void sanguis::messages::level_change::serialize(
+void sanguis::messages::level_up::serialize(
 	Archive &ar,
 	unsigned)
 {
@@ -30,4 +30,4 @@ void sanguis::messages::level_change::serialize(
 	   & level_;
 }
 
-SANGUIS_MESSAGES_INSTANTIATE_SERIALIZE(level_change)
+SANGUIS_MESSAGES_INSTANTIATE_SERIALIZE(level_up)

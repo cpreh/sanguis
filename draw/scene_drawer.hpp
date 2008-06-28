@@ -41,12 +41,14 @@ public:
 
 	void operator()(const messages::add&);
 	void operator()(const messages::add_enemy&);
+	void operator()(const messages::add_pickup&);
+	void operator()(const messages::add_weapon_pickup&);
 	void operator()(const messages::change_weapon&);
 	void operator()(const messages::experience&);
+	void operator()(const messages::give_weapon&);
 	void operator()(const messages::health&);
 	void operator()(const messages::max_health&);
 	void operator()(const messages::move&);
-	void operator()(const messages::add_weapon&);
 	void operator()(const messages::remove&);
 	void operator()(const messages::resize&);
 	void operator()(const messages::rotate&);

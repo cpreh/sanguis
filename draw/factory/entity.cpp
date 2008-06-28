@@ -1,11 +1,11 @@
-#include "create_entity.hpp"
+#include "entity.hpp"
 #include "../bullet.hpp"
 #include "../player.hpp"
 #include <sge/exception.hpp>
 #include <sge/string.hpp>
 
 sanguis::draw::factory::entity_ptr
-sanguis::draw::factory::create_entity(
+sanguis::draw::factory::entity(
 	const entity_id id,
 	const entity_type::type type)
 {
@@ -19,9 +19,9 @@ sanguis::draw::factory::create_entity(
 			new bullet(id));
 	case entity_type::enemy:
 		throw sge::exception(
-			SGE_TEXT("entity_type::enemy cannot be created using create_entity!"));
+			SGE_TEXT("entity_type::enemy cannot be created using entity!"));
 	default:
 		throw sge::exception(
-			SGE_TEXT("draw::factory::create_entity: missing loading code!"));
+			SGE_TEXT("draw::factory::entity: missing loading code!"));
 	}
 }

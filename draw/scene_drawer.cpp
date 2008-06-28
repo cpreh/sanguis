@@ -1,7 +1,9 @@
 #include "scene_drawer.hpp"
-#include "client_factory.hpp"
-#include "factory/create_enemy.hpp"
-#include "factory/create_entity.hpp"
+#include "factory/client.hpp"
+#include "factory/enemy.hpp"
+#include "factory/entity.hpp"
+#include "factory/pickup.hpp"
+#include "factory/weapon_pickup.hpp"
 #include "player.hpp"
 #include "coord_transform.hpp"
 #include "decay_time.hpp"
@@ -10,10 +12,12 @@
 #include "../dispatch_type.hpp"
 #include "../messages/add.hpp"
 #include "../messages/add_enemy.hpp"
-#include "../messages/add_weapon.hpp"
+#include "../messages/add_pickup.hpp"
+#include "../messages/add_weapon_pickup.hpp"
 #include "../messages/base.hpp"
 #include "../messages/change_weapon.hpp"
 #include "../messages/experience.hpp"
+#include "../messages/give_weapon.hpp"
 #include "../messages/health.hpp"
 #include "../messages/max_health.hpp"
 #include "../messages/move.hpp"
@@ -54,8 +58,11 @@ void sanguis::draw::scene_drawer::process_message(const messages::base& m)
 		boost::mpl::vector<
 			messages::add,
 			messages::add_enemy,
+			messages::add_pickup,
+			messages::add_weapon_pickup,
 			messages::change_weapon,
 			messages::experience,
+			messages::give_weapon,
 			messages::health,
 			messages::max_health,
 			messages::move,
@@ -64,8 +71,7 @@ void sanguis::draw::scene_drawer::process_message(const messages::base& m)
 			messages::rotate,
 			messages::start_attacking,
 			messages::stop_attacking,
-			messages::speed,
-			messages::add_weapon
+			messages::speed
 			>,
 		void>(
 		*this,
@@ -121,7 +127,7 @@ sanguis::draw::scene_drawer::get_player() const
 void sanguis::draw::scene_drawer::operator()(const messages::add& m)
 {
 	configure_new_object(
-		factory::create_entity(
+		factory::entity(
 			m.id(),
 			m.type()),
 		m);
@@ -130,15 +136,28 @@ void sanguis::draw::scene_drawer::operator()(const messages::add& m)
 void sanguis::draw::scene_drawer::operator()(const messages::add_enemy& m)
 {
 	configure_new_object(
-		factory::create_enemy(
+		factory::enemy(
 			m.id(),
 			m.etype()),
 		m);
 }
 
-void sanguis::draw::scene_drawer::operator()(const messages::add_weapon& m)
+void sanguis::draw::scene_drawer::operator()(const messages::add_pickup& m)
 {
-	sge::cout << SGE_TEXT("client: got new weapon!\n");
+	configure_new_object(
+		factory::pickup(
+			m.id(),
+			m.ptype()),
+		m);
+}
+
+void sanguis::draw::scene_drawer::operator()(const messages::add_weapon_pickup& m)
+{
+	configure_new_object(
+		factory::weapon_pickup(
+			m.id(),
+			m.wtype()),
+		m);
 }
 
 void sanguis::draw::scene_drawer::operator()(const messages::change_weapon& m)
@@ -156,6 +175,11 @@ void sanguis::draw::scene_drawer::operator()(const messages::change_weapon& m)
 void sanguis::draw::scene_drawer::operator()(const messages::experience& m)
 {
 	hud_.experience(m.exp());
+}
+
+void sanguis::draw::scene_drawer::operator()(const messages::give_weapon& m)
+{
+	sge::cout << SGE_TEXT("client: got new weapon!\n");
 }
 
 void sanguis::draw::scene_drawer::operator()(const messages::health& m)
@@ -217,10 +241,11 @@ void sanguis::draw::scene_drawer::operator()(const client_messages::add& m)
 {
 	if(entities.insert(
 		m.id(),
-		client_factory::create_entity(
+		factory::client(
 			m,
 			ss.get_renderer()->screen_size())).second == false)
 		throw sge::exception(SGE_TEXT("Client object with id already in entity list!"));
+	// FIXME: configure the object here, too!
 }
 
 void sanguis::draw::scene_drawer::configure_new_object(

@@ -19,6 +19,10 @@ public:
 		sge::sprite::depth_type,
 		sge::sprite::rotation_type,
 		sge::texture::part_ptr);
+	simple_sprite(
+		entity_id,
+		sge::sprite::depth_type,
+		sge::texture::part_ptr);
 private:
 	void update(time_type);
 	sprite_vector to_sprites() const;

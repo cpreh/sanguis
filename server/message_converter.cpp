@@ -2,6 +2,7 @@
 #include "../messages/base.hpp"
 #include "../messages/add.hpp"
 #include "../messages/add_enemy.hpp"
+#include "../messages/add_pickup.hpp"
 #include "../messages/speed.hpp"
 #include "../messages/move.hpp"
 #include "../messages/remove.hpp"
@@ -11,6 +12,7 @@
 #include "../messages/stop_attacking.hpp"
 #include "entities/entity.hpp"
 #include "entities/enemy.hpp"
+#include "entities/pickups/pickup.hpp"
 
 template<>
 sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::add>(const entities::entity &e)
@@ -37,6 +39,17 @@ sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::add
 		e.health(),
 		e.max_health(),
 		e.dim());
+}
+
+template<>
+sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::add_pickup>(const entities::entity &e)
+{
+	return new messages::add_pickup(
+		e.id(),
+		dynamic_cast<entities::pickups::pickup const &>(e).ptype(),
+		e.pos(),
+		e.angle(),
+		e.dim()); // FIXME: should we care about speed and health though?
 }
 
 template<>

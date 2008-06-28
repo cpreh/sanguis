@@ -8,7 +8,8 @@ namespace messages
 
 class add;
 class add_enemy;
-class add_weapon;
+class add_pickup;
+class add_weapon_pickup;
 class base;
 class change_weapon;
 class client_info;
@@ -17,7 +18,8 @@ class disconnect;
 class entity_message;
 class experience;
 class game_state;
-class level_change;
+class give_weapon;
+class level_up;
 class max_health;
 class move;
 class health;

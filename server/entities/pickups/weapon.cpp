@@ -10,6 +10,7 @@ sanguis::server::entities::pickups::weapon::weapon(
 	team::type const team_,
 	weapon_type::type const weapon_type_)
 : pickup(
+	pickup_type::weapon,
 	env,
 	pos,
 	angle,

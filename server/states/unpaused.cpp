@@ -5,7 +5,7 @@
 #include "../message_functor.hpp"
 #include "../../truncation_check_cast.hpp"
 #include "../../dispatch_type.hpp"
-#include "../../messages/level_change.hpp"
+#include "../../messages/level_up.hpp"
 #include "../../messages/client_info.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../messages/player_rotation.hpp"
@@ -16,7 +16,7 @@
 #include "../../messages/player_pause.hpp"
 #include "../../messages/player_unpause.hpp"
 #include "../../messages/game_state.hpp"
-#include "../../messages/add_weapon.hpp"
+#include "../../messages/give_weapon.hpp"
 #include "../../messages/speed.hpp"
 #include "../../messages/change_weapon.hpp"
 #include "../../messages/experience.hpp"
@@ -45,7 +45,7 @@ sanguis::server::states::unpaused::unpaused()
 void sanguis::server::states::unpaused::level_callback(entities::player &p,const messages::level_type)
 {
 	// no message_converter here because it operates on a _specific_ entity type
-	context<running>().send(new messages::level_change(p.id(),p.level()));
+	context<running>().send(new messages::level_up(p.id(),p.level()));
 }
 
 boost::statechart::result sanguis::server::states::unpaused::handle_default_msg(const net::id_type id,const messages::base &m)
@@ -87,14 +87,14 @@ void sanguis::server::states::unpaused::create_game(const net::id_type net_id,co
 	context<running>().players()[net_id] = &p;
 
 	p.add_weapon(weapons::create(weapon_type::melee,get_environment()));
-	context<running>().send(new messages::add_weapon(p.id(),weapon_type::melee));
+	context<running>().send(new messages::give_weapon(p.id(),weapon_type::melee));
 	p.add_weapon(weapons::create(weapon_type::pistol,get_environment()));
-	context<running>().send(new messages::add_weapon(p.id(),weapon_type::pistol));
+	context<running>().send(new messages::give_weapon(p.id(),weapon_type::pistol));
 
 	// send start experience
 	// no message_converter here because it operates on a _specific_ entity type
 	context<running>().send(new messages::experience(p.id(),p.exp()));
-	context<running>().send(new messages::level_change(p.id(),p.level()));
+	context<running>().send(new messages::level_up(p.id(),p.level()));
 
 	context<running>().enemy_timer().reset();
 }

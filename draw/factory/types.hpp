@@ -11,7 +11,7 @@ namespace draw
 namespace factory
 {
 
-typedef std::auto_ptr<entity> entity_ptr;
+typedef std::auto_ptr<draw::entity> entity_ptr;
 
 }
 }

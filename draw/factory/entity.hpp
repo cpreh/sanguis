@@ -1,5 +1,5 @@
-#ifndef SANGUIS_DRAW_FACTORY_CREATE_ENTITY_HPP_INCLUDED
-#define SANGUIS_DRAW_FACTORY_CREATE_ENTITY_HPP_INCLUDED
+#ifndef SANGUIS_DRAW_FACTORY_ENTITY_HPP_INCLUDED
+#define SANGUIS_DRAW_FACTORY_ENTITY_HPP_INCLUDED
 
 #include "../../entity_id.hpp"
 #include "../../entity_type.hpp"
@@ -12,7 +12,7 @@ namespace draw
 namespace factory
 {
 
-entity_ptr create_entity(
+entity_ptr entity(
 	entity_id,
 	entity_type::type);
 

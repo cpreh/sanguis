@@ -1,5 +1,5 @@
-#ifndef SANGUIS_MESSAGES_ADD_WEAPON_HPP_INCLUDED
-#define SANGUIS_MESSAGES_ADD_WEAPON_HPP_INCLUDED
+#ifndef SANGUIS_MESSAGES_LEVEL_UP_HPP_INCLUDED
+#define SANGUIS_MESSAGES_LEVEL_UP_HPP_INCLUDED
 
 #include "entity_message.hpp"
 #include "types.hpp"
@@ -10,15 +10,15 @@ namespace sanguis
 namespace messages
 {
 
-class add_weapon : public entity_message {
+class level_up : public entity_message {
 public:
-	add_weapon();
-	add_weapon(
+	level_up();
+	level_up(
 		entity_id id,
-		enum_type weapon);
-	enum_type weapon() const;
+		level_type level);
+	level_type level() const;
 private:
-	enum_type weapon_;
+	level_type level_;
 
 	friend class boost::serialization::access;
 	template<typename Archive>

@@ -3,7 +3,14 @@
 #include "../entity_with_weapon.hpp"
 #include <boost/foreach.hpp>
 
+sanguis::pickup_type::type
+sanguis::server::entities::pickups::pickup::ptype() const
+{
+	return ptype_;
+}
+
 sanguis::server::entities::pickups::pickup::pickup(
+	pickup_type::type const ptype_,
 	environment const &env,
 	messages::pos_type const &pos,
 	messages::space_unit const angle,
@@ -16,7 +23,8 @@ sanguis::server::entities::pickups::pickup::pickup(
 	angle,
 	direction,
 	team_,
-	property_map()) // FIXME
+	property_map()), // FIXME
+  ptype_(ptype_)
 {}
 
 void sanguis::server::entities::pickups::pickup::update(

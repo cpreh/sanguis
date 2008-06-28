@@ -1,4 +1,4 @@
-#include "create_enemy.hpp"
+#include "enemy.hpp"
 #include "../model.hpp"
 #include "../../enemy_type.hpp"
 #include <sge/exception.hpp>
@@ -14,7 +14,7 @@ get_model_name(
 }
 
 sanguis::draw::factory::entity_ptr
-sanguis::draw::factory::create_enemy(
+sanguis::draw::factory::enemy(
 	entity_id const id,
 	enemy_type::type const etype)
 {
@@ -41,7 +41,7 @@ get_model_name(
 		return SGE_TEXT("zombie00");
 	default:
 		throw sge::exception(
-			SGE_TEXT("draw::factory::create_enemy: missing loading code!"));
+			SGE_TEXT("draw::factory::enemy: missing loading code!"));
 	}
 }
 
