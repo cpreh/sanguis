@@ -3,6 +3,7 @@
 
 #include "entity_with_weapon.hpp"
 #include "../ai/base.hpp"
+#include "../../enemy_type.hpp"
 
 namespace sanguis
 {
@@ -12,8 +13,11 @@ namespace entities
 {
 
 class enemy : public entity_with_weapon {
+public:	
+	enemy_type::type etype() const;
 protected:
 	enemy(
+		enemy_type::type,
 		environment const &,
 		armor_array const &,
 		messages::pos_type const &pos,
@@ -27,7 +31,10 @@ protected:
 		time_type,
 		container &);
 private:
-	ai::ai_ptr ai_;
+	entity_type::type type() const;
+
+	ai::ai_ptr       ai_;
+	enemy_type::type etype_;
 };
 
 }

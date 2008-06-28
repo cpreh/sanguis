@@ -7,6 +7,7 @@ namespace messages
 {
 
 class add;
+class add_enemy;
 class add_weapon;
 class base;
 class change_weapon;

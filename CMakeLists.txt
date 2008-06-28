@@ -35,6 +35,7 @@ FILE (GLOB files
 	client/*.cpp
 	client_messages/*.cpp
 	draw/*.cpp
+	draw/factory/*.cpp
 	messages/*.cpp
 	server/*.cpp
 	server/ai/*.cpp

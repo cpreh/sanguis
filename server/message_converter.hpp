@@ -15,6 +15,8 @@ messages::base *message_convert(const entities::entity &);
 template<>
 messages::base *message_convert<messages::add>(const entities::entity &e);
 template<>
+messages::base *message_convert<messages::add_enemy>(const entities::entity &e);
+template<>
 messages::base *message_convert<messages::speed>(const entities::entity &e);
 template<>
 messages::base *message_convert<messages::move>(const entities::entity &e);

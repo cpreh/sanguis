@@ -12,7 +12,7 @@ namespace entities
 {
 class zombie : public enemy
 {
-	public:
+public:
 	zombie(
 		environment const &,
 		armor_array const &,
@@ -20,10 +20,9 @@ class zombie : public enemy
 		messages::space_unit const direction,
 		messages::space_unit const angle,
 		property_map const &);
-
+private:
 	messages::dim_type const dim() const;
 	messages::exp_type exp() const;
-	entity_type::type type() const;
 	bool invulnerable() const;
 };
 }

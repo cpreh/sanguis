@@ -1,6 +1,7 @@
 #include "message_converter.hpp"
 #include "../messages/base.hpp"
 #include "../messages/add.hpp"
+#include "../messages/add_enemy.hpp"
 #include "../messages/speed.hpp"
 #include "../messages/move.hpp"
 #include "../messages/remove.hpp"
@@ -9,6 +10,7 @@
 #include "../messages/start_attacking.hpp"
 #include "../messages/stop_attacking.hpp"
 #include "entities/entity.hpp"
+#include "entities/enemy.hpp"
 
 template<>
 sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::add>(const entities::entity &e)
@@ -21,6 +23,20 @@ sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::add
 			e.health(),
 			e.max_health(),
 			e.dim());
+}
+
+template<>
+sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::add_enemy>(const entities::entity &e)
+{
+	return new messages::add_enemy(
+		e.id(),
+		dynamic_cast<entities::enemy const &>(e).etype(),
+		e.pos(),
+		e.angle(),
+		e.abs_speed(),
+		e.health(),
+		e.max_health(),
+		e.dim());
 }
 
 template<>

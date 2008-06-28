@@ -38,8 +38,18 @@ sanguis::server::entities::entity &sanguis::server::states::running::insert_enti
 	entities::entity &ref = entities_.back();
 	ref.update(time_type(),entities_);
 
-	if (ref.type() != entity_type::indeterminate)
+	// TODO: maybe avoid the typeswitch and add a virtual function to entity that knowns which message to send
+	
+	switch(ref.type()) {
+	case entity_type::indeterminate:
+		break;
+	case entity_type::enemy:
+		send(message_convert<messages::add_enemy>(ref));
+		break;
+	default:
 		send(message_convert<messages::add>(ref));
+	}
+
 	return ref;
 }
 

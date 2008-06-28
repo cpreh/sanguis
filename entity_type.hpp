@@ -7,12 +7,10 @@ namespace sanguis
 namespace entity_type {
 enum type {
 	indeterminate,
-	player,
 	bullet,
+	enemy,
 	pickup,
-	zombie,
-	wolf_white,
-	wolf_black
+	player
 };
 }
 
