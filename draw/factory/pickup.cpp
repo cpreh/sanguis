@@ -33,7 +33,7 @@ sge::string const get_texture(
 {
 	switch(ptype) {
 	case sanguis::pickup_type::health:
-		return SGE_TEXT("icons/health02");
+		return SGE_TEXT("health_pickup");
 	case sanguis::pickup_type::weapon:
 		throw sge::exception(
 			SGE_TEXT("draw::factory::pickup: weapon pickup cannot be created using pickup!"));

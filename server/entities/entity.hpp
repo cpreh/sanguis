@@ -7,6 +7,7 @@
 #include "../environment.hpp"
 #include "../perks/perk.hpp"
 #include "../../messages/types.hpp"
+#include "../../messages/base.hpp"
 #include "../../entity_id.hpp"
 #include "../../entity_type.hpp"
 #include "../../damage_type.hpp"
@@ -80,17 +81,22 @@ public:
 	virtual entity_type::type type() const = 0;
 	virtual bool invulnerable() const = 0;
 	virtual void update(
-		const time_type,
+		time_type,
 		container &entities);
 
 	void add_perk(
 		perks::perk_auto_ptr); 
 	
+	// TODO: this should be an auto_ptr to a const message
+	virtual messages::base *add_message() const;
+
 	virtual ~entity();
 protected:
 	void send(messages::base *); // TODO: this should be an auto_ptr
 	entity &insert(auto_ptr); 
 	const environment &get_environment() const;
+
+	virtual void on_die();
 private:
 	entity_id            id_;
 	environment          env_;

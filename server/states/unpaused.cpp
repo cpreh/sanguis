@@ -141,6 +141,8 @@ boost::statechart::result sanguis::server::states::unpaused::operator()(const ne
 	return discard_event();
 }
 
+#include "../entities/pickups/weapon.hpp"
+
 void sanguis::server::states::unpaused::add_enemy()
 {
 	const messages::space_unit rand_angle = sge::math::random(messages::mu(0),
@@ -169,9 +171,17 @@ void sanguis::server::states::unpaused::add_enemy()
 				angle,
 				
 				boost::assign::map_list_of
-					(entities::property::type::health,entities::property(messages::mu(3)))
-					(entities::property::type::movement_speed,entities::property(messages::mu(50)))
+					(entities::property::type::health, entities::property(messages::mu(3)))
+					(entities::property::type::movement_speed, entities::property(messages::mu(50)))
 				)));
+	
+	context<running>().insert_entity(
+		entities::auto_ptr(
+			new entities::pickups::weapon(
+				get_environment(),
+				messages::pos_type(0, 0),
+				team::players,
+				weapon_type::pistol)));
 }
 
 boost::statechart::result sanguis::server::states::unpaused::operator()(const net::id_type id,const messages::player_start_shooting &)

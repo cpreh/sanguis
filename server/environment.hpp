@@ -17,7 +17,11 @@ struct environment
 	exp_callback exp;
 	level_callback level;
 
-	environment(const send_callback &,const insert_callback &,const exp_callback &,const level_callback &);
+	environment(
+		const send_callback &,
+		const insert_callback &,
+		const exp_callback &,
+		const level_callback &);
 };
 }
 }

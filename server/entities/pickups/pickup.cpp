@@ -1,7 +1,12 @@
 #include "pickup.hpp"
-#include "../../collision.hpp"
 #include "../entity_with_weapon.hpp"
+#include "../../collision.hpp"
+#include "../../message_converter.hpp"
+#include "../../../messages/add_pickup.hpp"
 #include <boost/foreach.hpp>
+
+#include <boost/assign/list_of.hpp>
+#include "../../damage_types.hpp"
 
 sanguis::pickup_type::type
 sanguis::server::entities::pickups::pickup::ptype() const
@@ -13,17 +18,20 @@ sanguis::server::entities::pickups::pickup::pickup(
 	pickup_type::type const ptype_,
 	environment const &env,
 	messages::pos_type const &pos,
-	messages::space_unit const angle,
-	messages::space_unit const direction,
 	team::type const team_)
 : entity(
 	env,
-	armor_array(), // FIXME
+	(
+		damage::all = messages::mu(1) // FIXME: create default values for this
+	),
 	pos,
-	angle,
-	direction,
+	messages::mu(0), //angle
+	messages::mu(0), //direction,
 	team_,
-	property_map()), // FIXME
+	boost::assign::map_list_of
+		(entities::property::type::health, entities::property(messages::mu(100)))
+		(entities::property::type::movement_speed, entities::property(messages::mu(0)))
+	), // FIXME: create default values for this
   ptype_(ptype_)
 {}
 
@@ -47,6 +55,7 @@ void sanguis::server::entities::pickups::pickup::update(
 				*this))
 			{
 				do_pickup(*ew);
+				die();
 				return;
 			}
 		}
@@ -57,7 +66,7 @@ void sanguis::server::entities::pickups::pickup::update(
 sanguis::messages::dim_type const
 sanguis::server::entities::pickups::pickup::dim() const
 {
-	return messages::dim_type(10,10); // FIXME
+	return messages::dim_type(50,50); // FIXME
 }
 
 sanguis::entity_type::type
@@ -69,4 +78,10 @@ sanguis::server::entities::pickups::pickup::type() const
 bool sanguis::server::entities::pickups::pickup::invulnerable() const
 {
 	return true;
+}
+
+sanguis::messages::base *
+sanguis::server::entities::pickups::pickup::add_message() const
+{
+	return message_convert<messages::add_pickup>(*this);
 }

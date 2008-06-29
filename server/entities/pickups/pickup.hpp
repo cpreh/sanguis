@@ -22,19 +22,20 @@ protected:
 		pickup_type::type,
 		environment const &,
 		messages::pos_type const &,
-		messages::space_unit angle,
-		messages::space_unit direction,
 		team::type team);
 private:
 	void update(
 		time_type time,
 		container &entities);
+	// TODO: is it ok that pickups are limited to entities with weapons?
 	virtual void do_pickup(
 		entity_with_weapon &receiver) = 0;
 
 	messages::dim_type const dim() const;
 	entity_type::type type() const;
 	bool invulnerable() const;
+
+	messages::base *add_message() const;
 
 	pickup_type::type ptype_;
 };

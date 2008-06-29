@@ -31,7 +31,11 @@ protected:
 		time_type,
 		container &);
 private:
+	messages::base *add_message() const;
+
 	entity_type::type type() const;
+
+	void on_die();
 
 	ai::ai_ptr       ai_;
 	enemy_type::type etype_;

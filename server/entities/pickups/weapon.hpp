@@ -18,11 +18,13 @@ public:
 	weapon(
 		environment const &,
 		messages::pos_type const &,
-		messages::space_unit angle,
-		messages::space_unit direction,
 		team::type team,
 		weapon_type::type);
+	
+	weapon_type::type wtype() const;
 private:
+	messages::base *add_message() const;
+
 	void do_pickup(
 		entity_with_weapon &receiver);
 	weapon_type::type weapon_type_;

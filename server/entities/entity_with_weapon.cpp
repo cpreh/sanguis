@@ -90,9 +90,15 @@ void sanguis::server::entities::entity_with_weapon::change_weapon(const weapon_t
 void sanguis::server::entities::entity_with_weapon::add_weapon(weapons::weapon_ptr ptr)
 {
 	if (weapons_.find(ptr->type()) != weapons_.end())
-		throw sge::exception(SGE_TEXT("weapon of specified type already registered"));
+		return;
+		//throw sge::exception(SGE_TEXT("weapon of specified type already registered"));
 
 	const weapon_type::type wt = ptr->type();
+
+	// TODO: special case for dual pistols
+//	if(wt == weapon_type::pistol && weapons_.count(weapon_type::pistol))
+//		return add_weapon(
+
 	if (!weapons_.insert(wt,ptr).second)
 		throw sge::exception(SGE_TEXT("couldn't insert weapon"));
 }

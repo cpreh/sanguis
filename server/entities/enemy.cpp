@@ -1,4 +1,9 @@
 #include "enemy.hpp"
+#include "../message_converter.hpp"
+#include "../spawn_pickup.hpp"
+#include "../../messages/add_enemy.hpp"
+
+#include <cstdlib>
 
 sanguis::enemy_type::type
 sanguis::server::entities::enemy::etype() const
@@ -40,8 +45,23 @@ void sanguis::server::entities::enemy::update(
 		entities);
 }
 
+sanguis::messages::base *
+sanguis::server::entities::enemy::add_message() const
+{
+	return message_convert<messages::add_enemy>(*this);
+}
+
 sanguis::entity_type::type
 sanguis::server::entities::enemy::type() const
 {
 	return entity_type::enemy;
+}
+
+void sanguis::server::entities::enemy::on_die()
+{
+	get_environment().exp(exp());
+
+	// TODO: use a random function from tr1?
+	if(std::rand() % 10)
+		spawn_pickup(center(), get_environment());
 }
