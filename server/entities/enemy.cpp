@@ -62,6 +62,6 @@ void sanguis::server::entities::enemy::on_die()
 	get_environment().exp(exp());
 
 	// TODO: use a random function from tr1?
-	if(std::rand() % 10)
+	if(std::rand() % 10 == 0)
 		spawn_pickup(center(), get_environment());
 }
