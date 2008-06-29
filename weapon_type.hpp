@@ -11,6 +11,7 @@ enum type {
 	melee,
 	pistol,
 	dual_pistol,
+	shotgun,
 	size
 };
 

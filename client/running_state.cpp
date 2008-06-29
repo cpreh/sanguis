@@ -3,12 +3,14 @@
 #include "intermediate_state.hpp"
 #include "next_id.hpp"
 #include "../client_entity_type.hpp"
+#include "../cyclic_iterator.hpp"
 #include "../dispatch_type.hpp"
 #include "../truncation_check_cast.hpp"
 #include "../truncation_check_structure_cast.hpp"
 #include "../client_messages/add.hpp"
 #include "../messages/disconnect.hpp"
 #include "../messages/game_state.hpp"
+#include "../messages/give_weapon.hpp"
 #include "../messages/move.hpp"
 #include "../messages/pause.hpp"
 #include "../messages/player_change_weapon.hpp"
@@ -27,9 +29,10 @@
 #include <sge/math/clamp.hpp>
 #include <sge/math/vector.hpp>
 #include <sge/math/angle.hpp>
+#include <sge/time/millisecond.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
-#include <typeinfo>
+#include <algorithm>
 #include <cmath>
 
 namespace
@@ -52,11 +55,18 @@ sanguis::client::running_state::running_state(my_context ctx)
 		boost::bind(&input_handler::input_callback, &input, _1))),
   direction(0, 0),
 // cursor_pos(0, 0)
- cursor_pos(32, 32),
- paused(false)
+  cursor_pos(32, 32),
+  paused(false),
+  current_weapon(weapon_type::size),
+  change_weapon_timer(
+  	sge::time::millisecond(
+		static_cast<sge::time::unit>(
+			1500)))
 {
 	sge::clog << SGE_TEXT("client: entering running state\n");
 	
+	std::fill(owned_weapons.begin(), owned_weapons.end(), false); // TODO: boost::array doesn't initialize by default?
+
 	drawer.process_message(
 		client_messages::add(
 			::cursor_id,
@@ -85,6 +95,7 @@ boost::statechart::result sanguis::client::running_state::react(const message_ev
 		boost::mpl::vector<
 			messages::disconnect,
 			messages::game_state,
+			messages::give_weapon,
 			messages::pause,
 			messages::unpause
 		>,
@@ -107,6 +118,25 @@ sanguis::client::running_state::operator()(
 	const messages::game_state&)
 {
 	sge::clog << SGE_TEXT("client: running: received game state\n");
+	return discard_event();
+}
+
+boost::statechart::result
+sanguis::client::running_state::operator()(
+	const messages::give_weapon& m)
+{
+	if(m.id() != drawer.get_player().id())
+		return discard_event(); // FIXME
+	sge::clog << SGE_TEXT("client: got new weapon\n");	
+	owned_weapons[m.weapon()] = true;
+
+	// we don't own any weapon so take this one
+	if(current_weapon == weapon_type::size)
+		change_weapon(
+			m.id(),
+			static_cast<weapon_type::type>(
+				m.weapon()));
+
 	return discard_event();
 }
 
@@ -238,24 +268,40 @@ void sanguis::client::running_state::handle_switch_weapon(
 	const draw::player& p,
 	const player_action& m)
 {
-	// FIXME: this is just for testing
-	weapon_type::type wanted_weapon;
+	// we don't own any weapon or the time hasn't elasped yet
+	if(current_weapon == weapon_type::size || change_weapon_timer.update_b())
+		return;
+
+	owned_weapons_array::size_type const weapon_index(
+		static_cast<owned_weapons_array::size_type>(
+			current_weapon));
+
+	assert(weapon_index < owned_weapons.size());
+
+	cyclic_iterator<owned_weapons_array::const_iterator> it(
+		owned_weapons.begin()
+		+ static_cast<owned_weapons_array::size_type>(current_weapon),
+		owned_weapons.begin(),
+		owned_weapons.end());
+
 	switch(m.type()) {
 	case player_action::switch_weapon_forwards:
-		wanted_weapon = weapon_type::none;
+		while(!*++it) ;
 		break;
 	case player_action::switch_weapon_backwards:
-		wanted_weapon = weapon_type::pistol;
+		while(!*--it) ;
 		break;
 	default:
 		return;
 	}
 
-	context<machine>().send(
-		new messages::player_change_weapon(
-			p.id(),
-			wanted_weapon));
-
+	change_weapon(
+		p.id(),
+		static_cast<weapon_type::type>(
+			std::distance(
+				static_cast<owned_weapons_array const &>(
+					owned_weapons).begin(),
+				it.get())));
 }
 
 void sanguis::client::running_state::handle_pause_unpause(
@@ -272,4 +318,16 @@ void sanguis::client::running_state::handle_pause_unpause(
 		: static_cast<messages::base*>(
 			new messages::player_unpause(
 				p.id())));
+}
+
+void sanguis::client::running_state::change_weapon(
+	entity_id const id,
+	weapon_type::type const w)
+{
+	current_weapon = w;
+
+	context<machine>().send(
+		new messages::player_change_weapon(
+			id,
+			current_weapon));
 }

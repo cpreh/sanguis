@@ -27,6 +27,13 @@ sanguis::server::weapons::create(
 				type,
 				static_cast<time_type>(0.5)
 				));
+	case weapon_type::dual_pistol:
+		return weapon_ptr(
+			new pistol(
+				env,
+				type,
+				static_cast<time_type>(0.25)
+				));
 	default:
 		throw sge::exception(SGE_TEXT("Cannot create weapon for given weapon type!"));
 	}

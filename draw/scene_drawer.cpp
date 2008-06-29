@@ -17,7 +17,6 @@
 #include "../messages/base.hpp"
 #include "../messages/change_weapon.hpp"
 #include "../messages/experience.hpp"
-#include "../messages/give_weapon.hpp"
 #include "../messages/health.hpp"
 #include "../messages/max_health.hpp"
 #include "../messages/move.hpp"
@@ -62,7 +61,6 @@ void sanguis::draw::scene_drawer::process_message(const messages::base& m)
 			messages::add_weapon_pickup,
 			messages::change_weapon,
 			messages::experience,
-			messages::give_weapon,
 			messages::health,
 			messages::max_health,
 			messages::move,
@@ -175,11 +173,6 @@ void sanguis::draw::scene_drawer::operator()(const messages::change_weapon& m)
 void sanguis::draw::scene_drawer::operator()(const messages::experience& m)
 {
 	hud_.experience(m.exp());
-}
-
-void sanguis::draw::scene_drawer::operator()(const messages::give_weapon& m)
-{
-	sge::cout << SGE_TEXT("client: got new weapon!\n");
 }
 
 void sanguis::draw::scene_drawer::operator()(const messages::health& m)

@@ -1,5 +1,7 @@
 #include "entity_with_weapon.hpp"
 #include "../message_converter.hpp"
+#include "../weapons/factory.hpp"
+#include "../../messages/give_weapon.hpp"
 #include <limits>
 
 namespace
@@ -81,7 +83,7 @@ void sanguis::server::entities::entity_with_weapon::update(
 
 void sanguis::server::entities::entity_with_weapon::change_weapon(const weapon_type::type nweapon)
 {
-	if (nweapon != weapon_type::none && weapons_.find(nweapon) == weapons_.end())
+	if (nweapon != weapon_type::none && !weapons_.count(nweapon))
 		throw sge::exception(SGE_TEXT("tried to change to non-owned weapon"));
 
 	weapon_ = nweapon;
@@ -89,18 +91,24 @@ void sanguis::server::entities::entity_with_weapon::change_weapon(const weapon_t
 
 void sanguis::server::entities::entity_with_weapon::add_weapon(weapons::weapon_ptr ptr)
 {
-	if (weapons_.find(ptr->type()) != weapons_.end())
-		return;
-		//throw sge::exception(SGE_TEXT("weapon of specified type already registered"));
-
 	const weapon_type::type wt = ptr->type();
 
-	// TODO: special case for dual pistols
-//	if(wt == weapon_type::pistol && weapons_.count(weapon_type::pistol))
-//		return add_weapon(
+	if(wt == weapon_type::pistol && weapons_.count(weapon_type::pistol))
+		return add_weapon(
+			weapons::create(
+				weapon_type::dual_pistol,
+				get_environment()));
+
+	if (weapons_.count(wt))
+		return;
 
 	if (!weapons_.insert(wt,ptr).second)
 		throw sge::exception(SGE_TEXT("couldn't insert weapon"));
+
+	get_environment().send(
+		new messages::give_weapon(
+			id(),
+			wt));
 }
 
 void sanguis::server::entities::entity_with_weapon::remove_weapon(const weapon_type::type type_)

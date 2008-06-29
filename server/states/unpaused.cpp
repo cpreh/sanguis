@@ -87,9 +87,9 @@ void sanguis::server::states::unpaused::create_game(const net::id_type net_id,co
 	context<running>().players()[net_id] = &p;
 
 	p.add_weapon(weapons::create(weapon_type::melee,get_environment()));
-	context<running>().send(new messages::give_weapon(p.id(),weapon_type::melee));
+	//context<running>().send(new messages::give_weapon(p.id(),weapon_type::melee));
 	p.add_weapon(weapons::create(weapon_type::pistol,get_environment()));
-	context<running>().send(new messages::give_weapon(p.id(),weapon_type::pistol));
+	//context<running>().send(new messages::give_weapon(p.id(),weapon_type::pistol));
 
 	// send start experience
 	// no message_converter here because it operates on a _specific_ entity type
