@@ -11,7 +11,6 @@
 #include "input_handler.hpp"
 #include <sge/math/vector.hpp>
 #include <sge/scoped_connection.hpp>
-#include <sge/time/timer.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/result.hpp>
@@ -67,7 +66,6 @@ private:
 	sge::sprite::point         cursor_pos;
 	bool                       paused; // TODO: create a different state for this!
 	weapon_type::type          current_weapon;
-	sge::time::timer           change_weapon_timer;
 	// TODO: this is just a quick hack, don't handle a player's weapons here!
 	typedef boost::array<
 		bool,

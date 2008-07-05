@@ -29,7 +29,6 @@
 #include <sge/math/clamp.hpp>
 #include <sge/math/vector.hpp>
 #include <sge/math/angle.hpp>
-#include <sge/time/millisecond.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
 #include <algorithm>
@@ -57,11 +56,7 @@ sanguis::client::running_state::running_state(my_context ctx)
 // cursor_pos(0, 0)
   cursor_pos(32, 32),
   paused(false),
-  current_weapon(weapon_type::size),
-  change_weapon_timer(
-  	sge::time::millisecond(
-		static_cast<sge::time::unit>(
-			1500)))
+  current_weapon(weapon_type::size)
 {
 	sge::clog << SGE_TEXT("client: entering running state\n");
 	
@@ -268,8 +263,8 @@ void sanguis::client::running_state::handle_switch_weapon(
 	const draw::player& p,
 	const player_action& m)
 {
-	// we don't own any weapon or the time hasn't elasped yet
-	if(current_weapon == weapon_type::size || change_weapon_timer.update_b())
+	// we don't own any weapon
+	if(current_weapon == weapon_type::size)
 		return;
 
 	owned_weapons_array::size_type const weapon_index(

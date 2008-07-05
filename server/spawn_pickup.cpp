@@ -12,6 +12,9 @@ void add_pickup(
 	sanguis::server::environment const &,
 	sanguis::server::entities::auto_ptr);
 
+sanguis::weapon_type::type
+draw_random_weapon();
+
 }
 
 void sanguis::server::spawn_pickup(
@@ -39,7 +42,8 @@ void sanguis::server::spawn_pickup(
 					env,
 					pos,
 					team::players,
-					weapon_type::pistol))); // FIXME: use different weapon types!
+					draw_random_weapon()
+			)));
 }
 
 namespace
@@ -49,7 +53,20 @@ void add_pickup(
 	sanguis::server::environment const &env,
 	sanguis::server::entities::auto_ptr e)
 {
+	// TODO: maybe we don't need this?
 	env.insert(e);
+}
+
+sanguis::weapon_type::type
+draw_random_weapon()
+{
+	// FIXME: use std::tr1
+	switch(rand() % 2) {
+	case 0:
+		return sanguis::weapon_type::pistol;
+	default:
+		return sanguis::weapon_type::shotgun;
+	}
 }
 
 }

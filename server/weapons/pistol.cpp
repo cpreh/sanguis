@@ -6,12 +6,14 @@
 sanguis::server::weapons::pistol::pistol(
 	const environment &env,
 	const weapon_type::type type_,
-	const time_type base_cooldown)
+	const time_type base_cooldown,
+	const messages::space_unit damage)
 : weapon(
 	env,
 	type_,
 	1000, // FIXME
-	base_cooldown)
+	base_cooldown),
+  damage(damage)
 {}
 
 void sanguis::server::weapons::pistol::do_attack(
@@ -26,5 +28,5 @@ void sanguis::server::weapons::pistol::do_attack(
 				from.center(),
 				from.angle(),
 				from.team(),
-				messages::mu(5))));
+				damage)));
 }

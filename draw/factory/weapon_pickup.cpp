@@ -34,6 +34,8 @@ sge::string const get_texture(
 	switch(wtype) {
 	case sanguis::weapon_type::pistol:
 		return SGE_TEXT("pistol_pickup");
+	case sanguis::weapon_type::shotgun:
+		return SGE_TEXT("shotgun_pickup");
 	default:
 		throw sge::exception(
 			SGE_TEXT("draw::factory::weapon_pickup: missing loading code!"));

@@ -89,6 +89,8 @@ void sanguis::client::input_handler::shooting_event(const sge::input::key_pair& 
 	
 void sanguis::client::input_handler::weapon_switch_event(const sge::input::key_pair& p)
 {
+	if(!p.value())
+		return;
 	post_message(
 		player_action(
 			p.key().code() == sge::input::kc::key_x
