@@ -1,9 +1,9 @@
 #include "enemy.hpp"
 #include "../message_converter.hpp"
 #include "../spawn_pickup.hpp"
+#include "../../random.hpp"
 #include "../../messages/add_enemy.hpp"
-
-#include <cstdlib>
+#include <boost/tr1/random.hpp>
 
 sanguis::enemy_type::type
 sanguis::server::entities::enemy::etype() const
@@ -61,7 +61,22 @@ void sanguis::server::entities::enemy::on_die()
 {
 	get_environment().exp(exp());
 
-	// TODO: use a random function from tr1?
-	if(std::rand() % 3 == 0)
+	typedef std::tr1::uniform_int<
+		unsigned
+	> uniform_ui;
+
+	typedef std::tr1::variate_generator<
+		rand_gen_type,
+		uniform_ui
+	> rng_type;
+
+	static rng_type rng(
+		create_seeded_randgen(),
+		uniform_ui(
+			0,
+			4
+		));
+
+	if(rng() == 0)
 		spawn_pickup(center(), get_environment());
 }
