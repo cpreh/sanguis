@@ -1,7 +1,7 @@
 #include "zombie.hpp"
-#include "../get_dim.hpp"
-#include "../ai/simple.hpp"
-#include "../weapons/factory.hpp"
+#include "../../get_dim.hpp"
+#include "../../ai/simple.hpp"
+#include "../../weapons/factory.hpp"
 #include <sge/math/vec_dim.hpp>
 #include <sge/console/console.hpp>
 
@@ -10,7 +10,7 @@ namespace
 sge::con::var<sanguis::messages::space_unit> zombie_damage(SGE_TEXT("zombie_damage"),sanguis::messages::mu(5));
 }
 
-sanguis::server::entities::zombie::zombie(
+sanguis::server::entities::enemies::zombie::zombie(
 	environment const &env,
 	armor_array const &armor,
 	messages::pos_type const &center_,
@@ -37,12 +37,12 @@ sanguis::server::entities::zombie::zombie(
 	change_weapon(weapon_type::melee);
 }
 
-bool sanguis::server::entities::zombie::invulnerable() const
+bool sanguis::server::entities::enemies::zombie::invulnerable() const
 {
 	return false;
 }
 
-sanguis::messages::dim_type const sanguis::server::entities::zombie::dim() const
+sanguis::messages::dim_type const sanguis::server::entities::enemies::zombie::dim() const
 {
 	return get_dim(
 		SGE_TEXT("zombie00"),
@@ -50,7 +50,7 @@ sanguis::messages::dim_type const sanguis::server::entities::zombie::dim() const
 		);
 }
 
-sanguis::messages::exp_type sanguis::server::entities::zombie::exp() const
+sanguis::messages::exp_type sanguis::server::entities::enemies::zombie::exp() const
 {
 	return static_cast<messages::exp_type>(10);
 }

@@ -1,17 +1,17 @@
 #include "enemy.hpp"
-#include "../message_converter.hpp"
-#include "../spawn_pickup.hpp"
-#include "../../random.hpp"
-#include "../../messages/add_enemy.hpp"
+#include "../../message_converter.hpp"
+#include "../../spawn_pickup.hpp"
+#include "../../../random.hpp"
+#include "../../../messages/add_enemy.hpp"
 #include <boost/tr1/random.hpp>
 
 sanguis::enemy_type::type
-sanguis::server::entities::enemy::etype() const
+sanguis::server::entities::enemies::enemy::etype() const
 {
 	return etype_;
 }
 
-sanguis::server::entities::enemy::enemy(
+sanguis::server::entities::enemies::enemy::enemy(
 	enemy_type::type const etype_,
 	environment const &env,
 	armor_array const &armor,
@@ -33,7 +33,7 @@ sanguis::server::entities::enemy::enemy(
   etype_(etype_)
 {}
 
-void sanguis::server::entities::enemy::update(
+void sanguis::server::entities::enemies::enemy::update(
 	time_type const time,
 	container &entities)
 {
@@ -46,18 +46,18 @@ void sanguis::server::entities::enemy::update(
 }
 
 sanguis::messages::base *
-sanguis::server::entities::enemy::add_message() const
+sanguis::server::entities::enemies::enemy::add_message() const
 {
 	return message_convert<messages::add_enemy>(*this);
 }
 
 sanguis::entity_type::type
-sanguis::server::entities::enemy::type() const
+sanguis::server::entities::enemies::enemy::type() const
 {
 	return entity_type::enemy;
 }
 
-void sanguis::server::entities::enemy::on_die()
+void sanguis::server::entities::enemies::enemy::on_die()
 {
 	get_environment().exp(exp());
 

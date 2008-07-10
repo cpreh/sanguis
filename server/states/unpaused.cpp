@@ -24,7 +24,7 @@
 #include "../message_converter.hpp"
 #include "../damage_types.hpp"
 #include "../weapons/factory.hpp"
-#include "../entities/zombie.hpp"
+#include "../entities/enemies/zombie.hpp"
 #include "../entities/entity.hpp"
 #include "../../resolution.hpp"
 #include "../../angle_vector.hpp"
@@ -177,7 +177,7 @@ void sanguis::server::states::unpaused::add_enemy()
 
 	context<running>().insert_entity(
 		entities::auto_ptr(
-			new entities::zombie(
+			new entities::enemies::zombie(
 				get_environment(),
 				(
 					damage::all=messages::mu(0)

@@ -12,7 +12,7 @@
 #include "../messages/start_attacking.hpp"
 #include "../messages/stop_attacking.hpp"
 #include "entities/entity.hpp"
-#include "entities/enemy.hpp"
+#include "entities/enemies/enemy.hpp"
 #include "entities/pickups/pickup.hpp"
 #include "entities/pickups/weapon.hpp"
 
@@ -34,7 +34,7 @@ sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::add
 {
 	return new messages::add_enemy(
 		e.id(),
-		dynamic_cast<entities::enemy const &>(e).etype(),
+		dynamic_cast<entities::enemies::enemy const &>(e).etype(),
 		e.pos(),
 		e.angle(),
 		e.abs_speed(),

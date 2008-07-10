@@ -1,15 +1,17 @@
-#ifndef SANGUIS_SERVER_ENTITIES_ENEMY_HPP_INCLUDED
-#define SANGUIS_SERVER_ENTITIES_ENEMY_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_ENTITIES_ENEMIES_ENEMY_HPP_INCLUDED
+#define SANGUIS_SERVER_ENTITIES_ENEMIES_ENEMY_HPP_INCLUDED
 
-#include "entity_with_weapon.hpp"
-#include "../ai/base.hpp"
-#include "../../enemy_type.hpp"
+#include "../entity_with_weapon.hpp"
+#include "../../ai/base.hpp"
+#include "../../../enemy_type.hpp"
 
 namespace sanguis
 {
 namespace server
 {
 namespace entities
+{
+namespace enemies
 {
 
 class enemy : public entity_with_weapon {
@@ -41,6 +43,7 @@ private:
 	enemy_type::type etype_;
 };
 
+}
 }
 }
 }
