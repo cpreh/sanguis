@@ -8,21 +8,31 @@
 namespace sanguis
 {
 
-// TODO: break this up in an impl header
+template<typename>
+class cyclic_iterator;
+
+namespace detail
+{
 
 template<typename ContainerIterator>
-class cyclic_iterator
-: public boost::iterator_facade<
-	cyclic_iterator<ContainerIterator>,
-	typename std::iterator_traits<ContainerIterator>::value_type,
-	boost::bidirectional_traversal_tag,
-	typename std::iterator_traits<ContainerIterator>::reference> {
-public:
+struct cyclic_iterator_helper {
 	typedef boost::iterator_facade<
 		cyclic_iterator<ContainerIterator>,
 		typename std::iterator_traits<ContainerIterator>::value_type,
 		boost::bidirectional_traversal_tag,
-		typename std::iterator_traits<ContainerIterator>::reference> base_type;
+		typename std::iterator_traits<ContainerIterator>::reference
+	> base_type;
+};
+
+}
+
+template<typename ContainerIterator>
+class cyclic_iterator
+: public detail::cyclic_iterator_helper<ContainerIterator>::base_type {
+public:
+	typedef typename detail::cyclic_iterator_helper<
+		ContainerIterator>::base_type
+	base_type;
 
 	typedef ContainerIterator container_iterator_type;
 	typedef typename base_type::value_type value_type;
@@ -30,62 +40,48 @@ public:
 	typedef typename base_type::pointer pointer;
 	typedef typename base_type::difference_type difference_type;
 
-	// Default-Konstruktor (fuer bidirectional noetig)
-	cyclic_iterator() {}
+	cyclic_iterator();
 
-	// Initialisierung mit einem anderen cyclic_iterator
-	template <class OtherIterator>
-	explicit cyclic_iterator(const cyclic_iterator<OtherIterator> &other)
-		: it(other.it),begin_(other.begin_),end_(other.end_) {}
+	template<typename OtherIterator>
+	explicit cyclic_iterator(
+		cyclic_iterator<OtherIterator> const &other);
 
-	// Initialisierung mit einem Container-Iterator und einem Container
-	cyclic_iterator(const container_iterator_type &it,const container_iterator_type &begin_, const container_iterator_type &end_)
-		: it(it),begin_(begin_),end_(end_) {}
+	cyclic_iterator(
+		container_iterator_type const &it,
+		container_iterator_type const &begin_,
+		container_iterator_type const &end_);
 		
-	// operator= mit einem anderen Container
-	template <class OtherIterator>
-	cyclic_iterator<ContainerIterator> &operator=(const cyclic_iterator<OtherIterator> &r)
-	{
-		it = r.it;
-		begin_ = r.begin_;
-		end_ = r.end_;
-		return *this;
-	}
+	template<typename OtherIterator>
+	cyclic_iterator<ContainerIterator> &
+	operator=(
+		cyclic_iterator<OtherIterator> const &r);
 
-	void begin(const container_iterator_type _begin) { begin_ = _begin; }
-	void end(const container_iterator_type _end) { end_ = _end; }
+	void begin(container_iterator_type const &);
+	void end(container_iterator_type const &);
 
-	container_iterator_type begin() const { return begin_; }
-	container_iterator_type end() const { return end_; }
+	container_iterator_type begin() const;
+	container_iterator_type end() const;
 
-	container_iterator_type get() const
-	{
-		return it;
-	}
+	container_iterator_type get() const;
 private:
 
 	friend class boost::iterator_core_access;
-	void increment()
-	{
-		if (begin_ != end_ && ++it == end_)
-			it = begin_;
-	}
+	void increment();
 
-	void decrement()
-	{
-		if (begin_ != end_ && it == begin_)
-			it = boost::prior(end_);
-	}
+	void decrement();
 
-	template <class OtherIterator>
-	bool equal(const cyclic_iterator<OtherIterator> & r) const { return it == r.it; }
+	template<typename OtherIterator>
+	bool equal(cyclic_iterator<OtherIterator> const &r) const;
 
-	reference dereference() const { return *it; }
+	reference dereference() const;
 
-	template <class OtherIterator>
-	difference_type distance_to(const cyclic_iterator<OtherIterator> &r) const { return r.it - it; }
+	template<typename OtherIterator>
+	difference_type distance_to(
+		cyclic_iterator<OtherIterator> const &r) const;
 private:
-	container_iterator_type it,begin_,end_;
+	container_iterator_type it,
+	                        begin_,
+	                        end_;
 };
 
 }

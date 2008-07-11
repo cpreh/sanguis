@@ -3,7 +3,7 @@
 #include "intermediate_state.hpp"
 #include "next_id.hpp"
 #include "../client_entity_type.hpp"
-#include "../cyclic_iterator.hpp"
+#include "../cyclic_iterator_impl.hpp"
 #include "../dispatch_type.hpp"
 #include "../truncation_check_cast.hpp"
 #include "../truncation_check_structure_cast.hpp"
