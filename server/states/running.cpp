@@ -9,7 +9,7 @@ sanguis::server::states::running::running(my_context ctx)
 	: my_base(ctx),
 		send(boost::bind(&server::machine::send,&(context<machine>()),_1)),
 		console_print(boost::bind(&server::machine::console_print,&(context<machine>()),_1)),
-		enemy_timer_(SGE_TEXT("enemy_timer"),sge::su(0.1))
+		enemy_timer_(SGE_TEXT("enemy_timer"),sge::su(2))
 {
 	sge::clog << SGE_TEXT("server: entering running state\n");
 }
