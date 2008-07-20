@@ -21,6 +21,7 @@ class model : public sprite {
 public:
 	model(
 		entity_id id,
+		system &,
 		sge::string const& name);
 protected:
 	virtual void update(time_type);

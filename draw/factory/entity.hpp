@@ -14,6 +14,7 @@ namespace factory
 
 entity_ptr entity(
 	entity_id,
+	system &,
 	entity_type::type);
 
 }

@@ -16,11 +16,13 @@ get_model_name(
 sanguis::draw::factory::entity_ptr
 sanguis::draw::factory::enemy(
 	entity_id const id,
+	system &sys,
 	enemy_type::type const etype)
 {
 	return entity_ptr(
 		new model(
 			id,
+			sys,
 			get_model_name(
 				etype)));
 }

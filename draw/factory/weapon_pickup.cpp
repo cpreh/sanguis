@@ -16,10 +16,12 @@ sge::string const get_texture(
 sanguis::draw::factory::entity_ptr
 sanguis::draw::factory::weapon_pickup(
 	entity_id const id,
+	system &sys,
 	weapon_type::type const wtype)
 {
 	return simple_sprite(
 		id,
+		sys,
 		z_ordering::pickup,
 			get_texture(
 				wtype));

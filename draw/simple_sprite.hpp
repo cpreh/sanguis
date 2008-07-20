@@ -14,6 +14,7 @@ class simple_sprite : public entity {
 public:
 	simple_sprite(
 		entity_id,
+		system &,
 		sge::sprite::point const&,
 		sge::sprite::dim const&,
 		sge::sprite::depth_type,
@@ -21,6 +22,7 @@ public:
 		sge::texture::part_ptr);
 	simple_sprite(
 		entity_id,
+		system &,
 		sge::sprite::depth_type,
 		sge::texture::part_ptr);
 private:

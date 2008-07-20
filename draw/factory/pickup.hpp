@@ -3,6 +3,7 @@
 
 #include "../../entity_id.hpp"
 #include "../../pickup_type.hpp"
+#include "../types.hpp"
 #include "types.hpp"
 
 namespace sanguis
@@ -14,6 +15,7 @@ namespace factory
 
 entity_ptr pickup(
 	entity_id,
+	system &,
 	pickup_type::type);
 
 }

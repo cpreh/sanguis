@@ -17,9 +17,11 @@ const sge::sprite::unit border_size = 2,
 
 }
 
-sanguis::draw::healthbar::healthbar()
+sanguis::draw::healthbar::healthbar(
+	system &sys)
 : sprite(
 	client::id_dont_care(),
+	sys,
 	2),
   health_(0),
   max_health_(0)

@@ -66,9 +66,9 @@ private:
 	void process_default_msg(const messages::base&);
 	void process_default_client_msg(const client_messages::base&);
 
-	sge::sprite::system ss;
-	hud                 hud_;
-	player*             player_;
+	sge::sprite::intrusive_system ss;
+	hud                           hud_;
+	player*                       player_;
 
 	typedef boost::ptr_map<entity_id, entity> entity_map;
 	entity_map entities;
@@ -77,7 +77,7 @@ private:
 	typedef std::map<sge::type_info, dispatch_fun> event_map;
 	event_map event_dispatcher;
 
-	std::vector<sge::sprite::object> sprites;
+	//std::vector<sge::sprite::object> sprites;
 };
 
 }

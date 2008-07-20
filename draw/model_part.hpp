@@ -17,7 +17,7 @@ namespace draw
 class model_part {
 public:
 	model_part(
-		load::model::part const&,
+		load::model::part const &,
 		sge::sprite::object &ref);
 	void animation(animation_type::type);
 	void weapon(weapon_type::type);

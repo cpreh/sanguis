@@ -9,9 +9,11 @@
 
 sanguis::draw::model::model(
 	const entity_id id,
+	system &sys,
 	sge::string const& name)
 : sprite(
 	id,
+	sys
 	load::model::singleton()[name].size()),
   attacking(false)
 {

@@ -1,13 +1,13 @@
 #ifndef SANGUIS_DRAW_ENTITY_HPP_INCLUDED
 #define SANGUIS_DRAW_ENTITY_HPP_INCLUDED
 
-#include <vector>
-#include <sge/sprite/object.hpp>
-#include <sge/math/vector.hpp>
-#include <sge/time/timer.hpp>
+#include "types.hpp"
 #include "../entity_id.hpp"
 #include "../weapon_type.hpp"
 #include "../time_type.hpp"
+#include <sge/math/vector.hpp>
+#include <sge/time/timer.hpp>
+#include <vector>
 
 namespace sanguis
 {
@@ -16,10 +16,11 @@ namespace draw
 
 class entity {
 public:
-	typedef std::vector<sge::sprite::object> sprite_vector;
+	typedef std::vector<
+		object> sprite_vector;
 
 	virtual void update(time_type) = 0;
-	virtual sprite_vector to_sprites() const = 0;
+	//virtual sprite_vector to_sprites() const = 0;
 	entity_id id() const;
 	void decay();
 	void decay_time(
@@ -36,11 +37,16 @@ public:
 	virtual void start_attacking();
 	virtual void stop_attacking();
 protected:
-	explicit entity(entity_id id);
+	entity(
+		entity_id id,
+		system &);
 	virtual const sge::math::vector2& speed() const = 0;
 	virtual sge::space_unit orientation() const = 0;
+
+	system &get_system();
 private:
 	entity_id        id_;
+	system          &sys;
 	sge::time::timer decay_timer;
 };
 

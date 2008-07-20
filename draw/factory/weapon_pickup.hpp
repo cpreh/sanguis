@@ -3,6 +3,7 @@
 
 #include "../../entity_id.hpp"
 #include "../../weapon_type.hpp"
+#include "../types.hpp"
 #include "types.hpp"
 
 namespace sanguis
@@ -14,6 +15,7 @@ namespace factory
 
 entity_ptr weapon_pickup(
 	entity_id,
+	system &,
 	weapon_type::type);
 
 }

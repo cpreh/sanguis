@@ -91,7 +91,7 @@ void sanguis::draw::scene_drawer::process_message(const client_messages::base& m
 
 void sanguis::draw::scene_drawer::draw(const time_type delta)
 {
-	sprites.clear();
+	//sprites.clear();
 
 	for(entity_map::iterator it(entities.begin()); it != entities.end(); ++it)
 	{
@@ -100,16 +100,14 @@ void sanguis::draw::scene_drawer::draw(const time_type delta)
 		e.update(delta);
 
 		if(e.may_be_removed())
-		{
 			entities.erase(it);
-			continue;
-		}
 
-		const entity::sprite_vector& s(e.to_sprites());
-		std::copy(s.begin(), s.end(), std::back_inserter(sprites));
+		//const entity::sprite_vector& s(e.to_sprites());
+		//std::copy(s.begin(), s.end(), std::back_inserter(sprites));
 	}
 
-	ss.render(sprites.begin(), sprites.end());
+	ss.render();
+	//ss.render(sprites.begin(), sprites.end());
 
 	hud_.update(delta);
 }
