@@ -3,6 +3,7 @@
 
 #include "entity.hpp"
 #include "hud.hpp"
+#include "factory/types.hpp"
 #include "../entity_id.hpp"
 #include "../messages/fwd.hpp"
 #include "../time_type.hpp"
@@ -39,12 +40,14 @@ public:
 	const player& get_player() const;
 
 	void operator()(const messages::add&);
+	void operator()(const messages::add_enemy&);
+	void operator()(const messages::add_pickup&);
+	void operator()(const messages::add_weapon_pickup&);
 	void operator()(const messages::change_weapon&);
 	void operator()(const messages::experience&);
 	void operator()(const messages::health&);
 	void operator()(const messages::max_health&);
 	void operator()(const messages::move&);
-	void operator()(const messages::add_weapon&);
 	void operator()(const messages::remove&);
 	void operator()(const messages::resize&);
 	void operator()(const messages::rotate&);
@@ -54,6 +57,10 @@ public:
 
 	void operator()(const client_messages::add&);
 private:
+	void configure_new_object(
+		factory::entity_ptr,
+		messages::add const &);
+	
 	entity& get_entity(entity_id);
 	const entity& get_entity(entity_id) const;
 	void process_default_msg(const messages::base&);

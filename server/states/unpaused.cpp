@@ -5,7 +5,7 @@
 #include "../message_functor.hpp"
 #include "../../truncation_check_cast.hpp"
 #include "../../dispatch_type.hpp"
-#include "../../messages/level_change.hpp"
+#include "../../messages/level_up.hpp"
 #include "../../messages/client_info.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../messages/player_rotation.hpp"
@@ -16,20 +16,20 @@
 #include "../../messages/player_pause.hpp"
 #include "../../messages/player_unpause.hpp"
 #include "../../messages/game_state.hpp"
-#include "../../messages/add_weapon.hpp"
+#include "../../messages/give_weapon.hpp"
 #include "../../messages/speed.hpp"
 #include "../../messages/change_weapon.hpp"
 #include "../../messages/experience.hpp"
 #include "../../messages/pause.hpp"
 #include "../message_converter.hpp"
 #include "../damage_types.hpp"
-#include "../../resolution.hpp"
 #include "../weapons/factory.hpp"
-#include "../../angle_vector.hpp"
-#include "../entities/zombie.hpp"
+#include "../entities/enemies/zombie.hpp"
 #include "../entities/entity.hpp"
+#include "../../resolution.hpp"
+#include "../../angle_vector.hpp"
+#include "../../random.hpp"
 
-#include <sge/math/random.hpp>
 #include <sge/math/constants.hpp>
 #include <sge/math/angle.hpp>
 #include <sge/iostream.hpp>
@@ -37,6 +37,9 @@
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
 #include <boost/assign/list_of.hpp>
+#include <boost/tr1/random.hpp>
+
+#include <ostream>
 
 sanguis::server::states::unpaused::unpaused()
 	: send_timer(SGE_TEXT("send_timer"),sge::su(0.1))
@@ -45,7 +48,7 @@ sanguis::server::states::unpaused::unpaused()
 void sanguis::server::states::unpaused::level_callback(entities::player &p,const messages::level_type)
 {
 	// no message_converter here because it operates on a _specific_ entity type
-	context<running>().send(new messages::level_change(p.id(),p.level()));
+	context<running>().send(new messages::level_up(p.id(),p.level()));
 }
 
 boost::statechart::result sanguis::server::states::unpaused::handle_default_msg(const net::id_type id,const messages::base &m)
@@ -85,14 +88,14 @@ void sanguis::server::states::unpaused::create_game(const net::id_type net_id,co
 	context<running>().players()[net_id] = &p;
 
 	p.add_weapon(weapons::create(weapon_type::melee,get_environment()));
-	context<running>().send(new messages::add_weapon(p.id(),weapon_type::melee));
+	//context<running>().send(new messages::give_weapon(p.id(),weapon_type::melee));
 	p.add_weapon(weapons::create(weapon_type::pistol,get_environment()));
-	context<running>().send(new messages::add_weapon(p.id(),weapon_type::pistol));
+	//context<running>().send(new messages::give_weapon(p.id(),weapon_type::pistol));
 
 	// send start experience
 	// no message_converter here because it operates on a _specific_ entity type
 	context<running>().send(new messages::experience(p.id(),p.exp()));
-	context<running>().send(new messages::level_change(p.id(),p.level()));
+	context<running>().send(new messages::level_up(p.id(),p.level()));
 
 	context<running>().enemy_timer().reset();
 }
@@ -141,8 +144,23 @@ boost::statechart::result sanguis::server::states::unpaused::operator()(const ne
 
 void sanguis::server::states::unpaused::add_enemy()
 {
-	const messages::space_unit rand_angle = sge::math::random(messages::mu(0),
-					messages::mu(2)*sge::math::pi<messages::space_unit>());
+	typedef std::tr1::uniform_real<
+		messages::space_unit
+	> uniform_su;
+
+	typedef std::tr1::variate_generator<
+		rand_gen_type,
+		uniform_su
+	> rng_type;
+
+	static rng_type rng(
+		create_seeded_randgen(),
+		uniform_su(
+			messages::mu(0),
+			messages::mu(2) * sge::math::pi<messages::space_unit>()
+		));
+
+	const messages::space_unit rand_angle(rng());
 	const messages::space_unit radius = messages::mu(std::max(resolution().w(),resolution().h()))/messages::mu(2);
 	const messages::space_unit scale = messages::mu(1.5);
 
@@ -157,7 +175,7 @@ void sanguis::server::states::unpaused::add_enemy()
 
 	context<running>().insert_entity(
 		entities::auto_ptr(
-			new entities::zombie(
+			new entities::enemies::zombie(
 				get_environment(),
 				damage::list(messages::mu(0)),
 				pos,
@@ -165,8 +183,8 @@ void sanguis::server::states::unpaused::add_enemy()
 				angle,
 				
 				boost::assign::map_list_of
-					(entities::property::type::health,entities::property(messages::mu(3)))
-					(entities::property::type::movement_speed,entities::property(messages::mu(50)))
+					(entities::property::type::health, entities::property(messages::mu(3)))
+					(entities::property::type::movement_speed, entities::property(messages::mu(50)))
 				)));
 }
 

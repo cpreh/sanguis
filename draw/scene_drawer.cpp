@@ -1,6 +1,9 @@
 #include "scene_drawer.hpp"
-#include "client_factory.hpp"
-#include "factory.hpp"
+#include "factory/client.hpp"
+#include "factory/enemy.hpp"
+#include "factory/entity.hpp"
+#include "factory/pickup.hpp"
+#include "factory/weapon_pickup.hpp"
 #include "player.hpp"
 #include "coord_transform.hpp"
 #include "decay_time.hpp"
@@ -8,7 +11,9 @@
 #include "../server/get_dim.hpp"
 #include "../dispatch_type.hpp"
 #include "../messages/add.hpp"
-#include "../messages/add_weapon.hpp"
+#include "../messages/add_enemy.hpp"
+#include "../messages/add_pickup.hpp"
+#include "../messages/add_weapon_pickup.hpp"
 #include "../messages/base.hpp"
 #include "../messages/change_weapon.hpp"
 #include "../messages/experience.hpp"
@@ -51,6 +56,9 @@ void sanguis::draw::scene_drawer::process_message(const messages::base& m)
 	dispatch_type<
 		boost::mpl::vector<
 			messages::add,
+			messages::add_enemy,
+			messages::add_pickup,
+			messages::add_weapon_pickup,
 			messages::change_weapon,
 			messages::experience,
 			messages::health,
@@ -61,8 +69,7 @@ void sanguis::draw::scene_drawer::process_message(const messages::base& m)
 			messages::rotate,
 			messages::start_attacking,
 			messages::stop_attacking,
-			messages::speed,
-			messages::add_weapon
+			messages::speed
 			>,
 		void>(
 		*this,
@@ -117,55 +124,38 @@ sanguis::draw::scene_drawer::get_player() const
 
 void sanguis::draw::scene_drawer::operator()(const messages::add& m)
 {
-	const std::pair<entity_map::iterator, bool> ret(
-		entities.insert(
+	configure_new_object(
+		factory::entity(
 			m.id(),
-			factory::create_entity(
-				m.id(),
-				m.type())));
-//				ss.get_renderer()->screen_size())));
-
-	entity& e(*ret.first->second);
-
-	if(ret.second == false)
-		throw sge::exception(SGE_TEXT("Object with id already in entity list!"));
-	if(m.type() == entity_type::player)
-	{
-		if(player_)
-			throw sge::exception(SGE_TEXT("Player already exists in scene_drawer!"));
-		player_ = dynamic_cast<player*>(&e);
-
-		const entity_id reaper_id = client::next_id();
-
-		const std::pair<entity_map::iterator, bool> reaper_ret(
-			entities.insert(
-				reaper_id,
-				factory::entity_ptr(new reaper(reaper_id,*player_))));
-
-		process_message(messages::resize(reaper_id, server::get_dim("reaper","default")));
-		process_message(messages::max_health(reaper_id, messages::mu(1)));
-		process_message(messages::health(reaper_id, messages::mu(1)));
-
-		if (reaper_ret.second == false)
-			throw sge::exception(SGE_TEXT("couldn't insert reaper"));
-	}
-
-	// configure the object
-	process_message(messages::max_health(m.id(), m.max_health()));
-	process_message(messages::health(m.id(), m.health()));
-	process_message(messages::move(m.id(), m.pos()));
-	process_message(messages::resize(m.id(), m.dim()));
-	process_message(messages::rotate(m.id(), m.angle()));
-	process_message(messages::speed(m.id(), m.speed()));
-
-	e.decay_time(
-		decay_time(
-			m.type()));
+			m.type()),
+		m);
 }
 
-void sanguis::draw::scene_drawer::operator()(const messages::add_weapon& m)
+void sanguis::draw::scene_drawer::operator()(const messages::add_enemy& m)
 {
-	sge::cout << SGE_TEXT("client: got new weapon!\n");
+	configure_new_object(
+		factory::enemy(
+			m.id(),
+			m.etype()),
+		m);
+}
+
+void sanguis::draw::scene_drawer::operator()(const messages::add_pickup& m)
+{
+	configure_new_object(
+		factory::pickup(
+			m.id(),
+			m.ptype()),
+		m);
+}
+
+void sanguis::draw::scene_drawer::operator()(const messages::add_weapon_pickup& m)
+{
+	configure_new_object(
+		factory::weapon_pickup(
+			m.id(),
+			m.wtype()),
+		m);
 }
 
 void sanguis::draw::scene_drawer::operator()(const messages::change_weapon& m)
@@ -244,10 +234,61 @@ void sanguis::draw::scene_drawer::operator()(const client_messages::add& m)
 {
 	if(entities.insert(
 		m.id(),
-		client_factory::create_entity(
+		factory::client(
 			m,
 			ss.get_renderer()->screen_size())).second == false)
 		throw sge::exception(SGE_TEXT("Client object with id already in entity list!"));
+	// FIXME: configure the object here, too!
+}
+
+void sanguis::draw::scene_drawer::configure_new_object(
+	factory::entity_ptr e_ptr,
+	messages::add const &m)
+{
+	const std::pair<entity_map::iterator, bool> ret(
+		entities.insert(
+			m.id(),
+			e_ptr));
+
+	entity& e(*ret.first->second);
+
+	if(ret.second == false)
+		throw sge::exception(SGE_TEXT("Object with id already in entity list!"));
+
+	// TODO: this does not belong here!
+	if(m.type() == entity_type::player)
+	{
+		if(player_)
+			throw sge::exception(SGE_TEXT("Player already exists in scene_drawer!"));
+		player_ = dynamic_cast<player*>(&e);
+
+		const entity_id reaper_id = client::next_id();
+
+		const std::pair<entity_map::iterator, bool> reaper_ret(
+			entities.insert(
+				reaper_id,
+				factory::entity_ptr(new reaper(reaper_id,*player_))));
+
+		process_message(messages::resize(reaper_id, server::get_dim("reaper","default")));
+		process_message(messages::max_health(reaper_id, messages::mu(1)));
+		process_message(messages::health(reaper_id, messages::mu(1)));
+
+		if (reaper_ret.second == false)
+			throw sge::exception(SGE_TEXT("couldn't insert reaper"));
+	}
+
+	// configure the object
+	process_message(messages::max_health(m.id(), m.max_health()));
+	process_message(messages::health(m.id(), m.health()));
+	process_message(messages::move(m.id(), m.pos()));
+	process_message(messages::resize(m.id(), m.dim()));
+	process_message(messages::rotate(m.id(), m.angle()));
+	process_message(messages::speed(m.id(), m.speed()));
+
+	e.decay_time(
+		decay_time(
+			m.type()));
+
 }
 
 sanguis::draw::entity& sanguis::draw::scene_drawer::get_entity(const entity_id id)

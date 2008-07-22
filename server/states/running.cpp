@@ -1,12 +1,9 @@
 #include "running.hpp"
 #include "waiting.hpp"
 #include "../entities/entity.hpp"
-#include "../message_converter.hpp"
-
 #include <sge/iostream.hpp>
-#include <ostream>
-
 #include <boost/bind.hpp>
+#include <ostream>
 
 sanguis::server::states::running::running(my_context ctx)
 	: my_base(ctx),
@@ -38,8 +35,12 @@ sanguis::server::entities::entity &sanguis::server::states::running::insert_enti
 	entities::entity &ref = entities_.back();
 	ref.update(time_type(),entities_);
 
-	if (ref.type() != entity_type::indeterminate)
-		send(message_convert<messages::add>(ref));
+	if(ref.type() == entity_type::indeterminate)
+		return ref;
+	
+	// TODO: sanity check the message (needs smart pointer as well)
+	send(ref.add_message());
+
 	return ref;
 }
 

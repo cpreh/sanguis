@@ -1,11 +1,11 @@
 #include "simple.hpp"
 #include "../entities/entity.hpp"
-#include "../entities/enemy.hpp"
+#include "../entities/enemies/enemy.hpp"
 #include <sge/math/angle.hpp>
 #include <boost/foreach.hpp>
 
 sanguis::server::ai::simple::simple(
-	entities::enemy &me)
+	entities::enemies::enemy &me)
 : me(me),
   target(0)
 {}

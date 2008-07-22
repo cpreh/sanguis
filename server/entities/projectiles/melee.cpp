@@ -26,7 +26,7 @@ sanguis::server::entities::projectiles::melee::type() const
 	return entity_type::indeterminate;
 }
 
-sanguis::messages::dim_type
+sanguis::messages::dim_type const
 sanguis::server::entities::projectiles::melee::dim() const
 {
 	return messages::dim_type(1,1); // TODO: maybe allow cleaving attacks?

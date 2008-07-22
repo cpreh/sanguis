@@ -8,11 +8,9 @@ namespace server
 namespace entities
 {
 
-class enemy;
 class entity;
 class entity_with_weapon;
 class player;
-class zombie;
 
 }
 }

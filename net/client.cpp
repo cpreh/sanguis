@@ -10,8 +10,9 @@ net::client::client()
 	: io_service(io_service_wrapper()),socket(io_service),
 	  resolver(io_service),connected(false),sending(false) 
 {
+	// TODO: put this in a single function
 	int flag = 1;
-	setsockopt(socket.native(),IPPROTO_TCP, TCP_NODELAY, (char *) &flag, sizeof(int));
+	setsockopt(socket.native(),IPPROTO_TCP, TCP_NODELAY, &flag, sizeof(int));
 }
 
 void net::client::connect(const address_type &s,const port_type port)

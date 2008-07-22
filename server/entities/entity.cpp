@@ -1,5 +1,7 @@
 #include "entity.hpp"
 #include "../get_unique_id.hpp"
+#include "../message_converter.hpp"
+#include "../../messages/add.hpp"
 #include "../../angle_vector.hpp"
 #include <sge/math/vec_dim.hpp>
 #include <sge/math/power.hpp>
@@ -171,7 +173,7 @@ bool sanguis::server::entities::entity::dead() const
 void sanguis::server::entities::entity::die()
 {
 	health(messages::mu(0));
-	get_environment().exp(exp());
+	on_die();
 }
 
 void sanguis::server::entities::entity::update(
@@ -186,7 +188,8 @@ void sanguis::server::entities::entity::update(
 		p.apply(*this);
 }
 
-void sanguis::server::entities::entity::direction(const messages::space_unit _direction)
+void sanguis::server::entities::entity::direction(
+	const messages::space_unit _direction)
 {
 	direction_ = _direction;
 }
@@ -204,6 +207,12 @@ void sanguis::server::entities::entity::add_perk(
 		}
 	}
 	perks_.push_back(p);
+}
+
+sanguis::messages::base *
+sanguis::server::entities::entity::add_message() const
+{
+	return message_convert<messages::add>(*this);
 }
 
 sanguis::server::entities::entity::~entity()
@@ -225,6 +234,9 @@ sanguis::server::entities::entity &sanguis::server::entities::entity::insert(
 {
 	return get_environment().insert(e);
 }
+
+void sanguis::server::entities::entity::on_die()
+{}
 
 sanguis::messages::exp_type sanguis::server::entities::entity::exp() const
 {

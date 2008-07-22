@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_RUNNING_STATE_HPP_INCLUDED
 
 #include "../tick_event.hpp"
+#include "../weapon_type.hpp"
 #include "../messages/fwd.hpp"
 #include "../messages/entity_message.hpp"
 #include "../draw/scene_drawer.hpp"
@@ -14,6 +15,7 @@
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/result.hpp>
 #include <boost/mpl/list.hpp>
+#include <boost/array.hpp>
 
 namespace sanguis
 {
@@ -41,6 +43,7 @@ struct running_state
 	
 	boost::statechart::result operator()(const messages::disconnect&);
 	boost::statechart::result operator()(const messages::game_state&);
+	boost::statechart::result operator()(const messages::give_weapon&);
 	boost::statechart::result operator()(const messages::pause&);
 	boost::statechart::result operator()(const messages::unpause&);
 private:
@@ -52,12 +55,22 @@ private:
 	void handle_switch_weapon(const draw::player&, const player_action&);
 	void handle_pause_unpause(const draw::player&, const player_action&);
 
-	draw::scene_drawer     drawer;
-	input_handler          input;
-	sge::scoped_connection input_connection;
-	sge::math::vector2     direction;
-	sge::sprite::point     cursor_pos;
-	bool                   paused; // TODO: create a different state for this!
+	void change_weapon(
+		entity_id id,
+		weapon_type::type);
+
+	draw::scene_drawer         drawer;
+	input_handler              input;
+	sge::scoped_connection     input_connection;
+	sge::math::vector2         direction;
+	sge::sprite::point         cursor_pos;
+	bool                       paused; // TODO: create a different state for this!
+	weapon_type::type          current_weapon;
+	// TODO: this is just a quick hack, don't handle a player's weapons here!
+	typedef boost::array<
+		bool,
+		weapon_type::size> owned_weapons_array;
+	owned_weapons_array        owned_weapons;
 };
 }
 }

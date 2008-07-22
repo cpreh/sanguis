@@ -9,11 +9,19 @@ namespace sanguis
 {
 namespace server
 {
+// FIXME: this should return an auto_ptr to messages::base
+
 template<typename T>
 messages::base *message_convert(const entities::entity &);
 
 template<>
 messages::base *message_convert<messages::add>(const entities::entity &e);
+template<>
+messages::base *message_convert<messages::add_enemy>(const entities::entity &e);
+template<>
+messages::base *message_convert<messages::add_pickup>(const entities::entity &e);
+template<>
+messages::base *message_convert<messages::add_weapon_pickup>(const entities::entity &e);
 template<>
 messages::base *message_convert<messages::speed>(const entities::entity &e);
 template<>

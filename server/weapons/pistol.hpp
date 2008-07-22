@@ -15,12 +15,15 @@ class pistol : public weapon {
 public:
 	pistol(
 		const environment &,
-		const weapon_type::type,
-		time_type base_cooldown);
+		weapon_type::type,
+		time_type base_cooldown,
+		messages::space_unit damage);
 private:
 	void do_attack(
 		entities::entity const &from,
-		messages::pos_type const& to);
+		messages::pos_type const &to);
+
+	messages::space_unit damage;
 };
 
 }

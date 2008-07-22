@@ -24,7 +24,7 @@ public:
 		property_map const &,
 		messages::string const &name);
 	// virtual functions
-	messages::dim_type dim() const;
+	messages::dim_type const dim() const;
 	entity_type::type type() const;
 
 	// own functions

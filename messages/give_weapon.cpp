@@ -1,14 +1,14 @@
-#include "add_weapon.hpp"
+#include "give_weapon.hpp"
 #include "instantiate_serialize.hpp"
 #include <boost/serialization/export.hpp>
 #include <boost/serialization/base_object.hpp>
 
-BOOST_CLASS_EXPORT_GUID(sanguis::messages::add_weapon, "add_weapon")
+BOOST_CLASS_EXPORT_GUID(sanguis::messages::give_weapon, "give_weapon")
 
-sanguis::messages::add_weapon::add_weapon()
+sanguis::messages::give_weapon::give_weapon()
 {}
 
-sanguis::messages::add_weapon::add_weapon(
+sanguis::messages::give_weapon::give_weapon(
 	const entity_id id,
 	const enum_type weapon_)
 : entity_message(id),
@@ -16,13 +16,13 @@ sanguis::messages::add_weapon::add_weapon(
 {}
 
 sanguis::messages::enum_type
-sanguis::messages::add_weapon::weapon() const
+sanguis::messages::give_weapon::weapon() const
 {
 	return weapon_;
 }
 
 template<typename Archive>
-void sanguis::messages::add_weapon::serialize(
+void sanguis::messages::give_weapon::serialize(
 	Archive &ar,
 	unsigned)
 {
@@ -30,4 +30,4 @@ void sanguis::messages::add_weapon::serialize(
 	   & weapon_;
 }
 
-SANGUIS_MESSAGES_INSTANTIATE_SERIALIZE(add_weapon)
+SANGUIS_MESSAGES_INSTANTIATE_SERIALIZE(give_weapon)

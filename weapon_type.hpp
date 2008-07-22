@@ -10,6 +10,8 @@ enum type {
 	none,
 	melee,
 	pistol,
+	dual_pistol,
+	shotgun,
 	size
 };
 

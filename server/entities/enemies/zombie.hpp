@@ -1,8 +1,8 @@
-#ifndef SANGUIS_SERVER_ENTITIES_ZOMBIE_HPP_INCLUDED
-#define SANGUIS_SERVER_ENTITIES_ZOMBIE_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_ENTITIES_ENEMIES_ZOMBIE_HPP_INCLUDED
+#define SANGUIS_SERVER_ENTITIES_ENEMIES_ZOMBIE_HPP_INCLUDED
 
 #include "enemy.hpp"
-#include "../../net/types.hpp"
+#include "../../../net/types.hpp"
 
 namespace sanguis
 {
@@ -10,9 +10,12 @@ namespace server
 {
 namespace entities
 {
+namespace enemies
+{
+
 class zombie : public enemy
 {
-	public:
+public:
 	zombie(
 		environment const &,
 		armor_array const &,
@@ -20,13 +23,15 @@ class zombie : public enemy
 		messages::space_unit const direction,
 		messages::space_unit const angle,
 		property_map const &);
-
-	messages::dim_type dim() const;
+private:
+	messages::dim_type const dim() const;
 	messages::exp_type exp() const;
-	entity_type::type type() const;
 	bool invulnerable() const;
 };
+
 }
 }
 }
+}
+
 #endif

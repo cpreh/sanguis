@@ -3,6 +3,7 @@
 
 #include "base.hpp"
 #include "../entities/fwd.hpp"
+#include "../entities/enemies/fwd.hpp"
 
 namespace sanguis
 {
@@ -14,13 +15,13 @@ namespace ai
 class simple : public base {
 public:
 	simple(
-		entities::enemy& me);
+		entities::enemies::enemy& me);
 private:
 	void update(
 		time_type,
 		entities::container const &);
 
-	entities::enemy &me;
+	entities::enemies::enemy &me;
 	entities::entity const *target;
 };
 

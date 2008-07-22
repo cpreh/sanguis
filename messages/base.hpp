@@ -22,6 +22,7 @@ private:
 }
 
 typedef sge::shared_ptr<messages::base> message_ptr;
+
 }
 
 #endif
