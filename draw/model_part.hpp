@@ -9,6 +9,7 @@
 #include <sge/sprite/fwd.hpp>
 #include <sge/sprite/types.hpp>
 #include <sge/sprite/texture_animation.hpp>
+#include <boost/scoped_ptr.hpp>
 
 namespace sanguis
 {
@@ -36,7 +37,8 @@ private:
 	object*                        ref;
 	animation_type::type           animation_type_;
 	weapon_type::type              weapon_type_;
-	sge::sprite::texture_animation animation_;
+	boost::scoped_ptr<
+		sge::sprite::texture_animation> animation_;
 	bool                           ended;
 };
 

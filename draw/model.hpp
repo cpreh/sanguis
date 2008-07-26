@@ -10,7 +10,7 @@
 #include <sge/math/vector.hpp>
 #include <sge/su.hpp>
 #include <sge/string.hpp>
-#include <vector>
+#include <boost/ptr_container/ptr_vector.hpp>
 
 namespace sanguis
 {
@@ -44,7 +44,7 @@ private:
 	bool attacking;
 	healthbar healthbar_;
 	
-	typedef std::vector<model_part> part_vector;
+	typedef boost::ptr_vector<model_part> part_vector;
 	part_vector parts;
 };
 

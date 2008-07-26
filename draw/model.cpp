@@ -23,7 +23,7 @@ sanguis::draw::model::model(
 		load::model::model::value_type const& p,
 		load::model::singleton()[name])
 			parts.push_back(
-			model_part(
+			new model_part(
 				p.second,
 				at(i++)));
 	// we can't use BOOST_FOREACH here because it needs access to the class

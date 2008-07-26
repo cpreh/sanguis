@@ -2,7 +2,7 @@
 #include "player_action.hpp"
 
 #include <sge/exception.hpp>
-#include <sge/string.hpp>
+#include <sge/text.hpp>
 
 sanguis::client::input_handler::input_handler(
 	const post_fun& post_message)

@@ -32,11 +32,7 @@ sanguis::draw::model_part::model_part(
   ref(&ref),
   animation_type_(animation_type::none),
   weapon_type_(weapon_type::none),
-  animation_(
-  	info[weapon_type_]
-		[animation_type_]
-			.get(),
-	loop_method()),
+  animation_(),
   ended(false)
 {
 	update_animation();
@@ -74,7 +70,7 @@ void sanguis::draw::model_part::weapon(
 void sanguis::draw::model_part::update(
 	const time_type time)
 {
-	ended = animation_.process() || ended;
+	ended = animation_->process() || ended;
 
 	if(sge::math::compare(desired_orientation, invalid_rotation))
 		return;
@@ -121,13 +117,13 @@ void sanguis::draw::model_part::orientation(
 
 void sanguis::draw::model_part::update_animation()
 {
-	animation_ = sge::sprite::texture_animation(
-		(*info)[weapon_type_]
-			[animation_type_]
-				.get(),
-		loop_method());
-//		&ref->explicit_upcast());
-	animation_.bind(&ref->explicit_upcast());
+	animation_.reset(
+		new sge::sprite::texture_animation(
+			(*info)[weapon_type_]
+				[animation_type_]
+					.get(),
+			loop_method(),
+			ref->explicit_upcast()));
 	ended = false;
 }
 

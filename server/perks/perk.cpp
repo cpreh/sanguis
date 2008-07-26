@@ -1,6 +1,6 @@
 #include "perk.hpp"
 #include <sge/exception.hpp>
-#include <sge/string.hpp>
+#include <sge/text.hpp>
 
 sanguis::server::perks::perk::perk()
 : level_(0)
