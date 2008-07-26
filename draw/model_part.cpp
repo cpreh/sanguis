@@ -25,7 +25,7 @@ sge::con::var<sge::space_unit> rotation_speed(
 
 sanguis::draw::model_part::model_part(
 	load::model::part const& info,
-	sge::sprite::object &ref)
+	object &ref)
 : desired_orientation(
 	invalid_rotation),
   info(&info),
@@ -126,8 +126,8 @@ void sanguis::draw::model_part::update_animation()
 			[animation_type_]
 				.get(),
 		loop_method());
-	animation_.bind(ref);
-
+//		&ref->explicit_upcast());
+	animation_.bind(&ref->explicit_upcast());
 	ended = false;
 }
 

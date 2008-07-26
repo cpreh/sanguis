@@ -27,7 +27,6 @@ public:
 		sge::texture::part_ptr);
 private:
 	void update(time_type);
-	sprite_vector to_sprites() const;
 	void orientation(sge::sprite::rotation_type);
 	void speed(sge::math::vector2 const&);
 	void pos(sge::sprite::point const&);
@@ -35,10 +34,10 @@ private:
 	void visible(bool);
 	sge::math::vector2 const& speed() const;
 	sge::sprite::rotation_type orientation() const;
-	sge::sprite::object& get();
-	sge::sprite::object const& get() const;
+	object &get();
+	object const &get() const;
 
-	sprite_vector sprite;
+	object sprite;
 };
 
 }

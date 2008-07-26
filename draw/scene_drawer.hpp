@@ -4,6 +4,7 @@
 #include "entity.hpp"
 #include "hud.hpp"
 #include "factory/types.hpp"
+#include "types.hpp"
 #include "../entity_id.hpp"
 #include "../messages/fwd.hpp"
 #include "../time_type.hpp"
@@ -65,8 +66,9 @@ private:
 	const entity& get_entity(entity_id) const;
 	void process_default_msg(const messages::base&);
 	void process_default_client_msg(const client_messages::base&);
+	system &get_system();
 
-	sge::sprite::intrusive_system ss;
+	system                        ss;
 	hud                           hud_;
 	player*                       player_;
 

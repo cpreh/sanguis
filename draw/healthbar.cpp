@@ -26,7 +26,9 @@ sanguis::draw::healthbar::healthbar(
   health_(0),
   max_health_(0)
 {
-	at(0) = sge::sprite::object(
+	at(0) = object(
+		sys,
+		0, // FIXME
 		boost::none,
 		boost::none,
 		boost::none,
@@ -34,7 +36,9 @@ sanguis::draw::healthbar::healthbar(
 		z_ordering::healthbar_lower,
 		static_cast<sge::sprite::rotation_type>(0)),
 
-	at(1) = sge::sprite::object(
+	at(1) = object(
+		sys,
+		0, // FIXME
 		boost::none,
 		boost::none,
 		boost::none,
@@ -117,25 +121,25 @@ sanguis::draw::healthbar::inner_dim() const
 	return border().size() - sge::sprite::dim(2 * border_size, 2 * border_size);
 }
 
-sge::sprite::object&
+sanguis::draw::object&
 sanguis::draw::healthbar::border()
 {
 	return at(0);
 }
 
-const sge::sprite::object&
+const sanguis::draw::object&
 sanguis::draw::healthbar::border() const
 {
 	return at(0);
 }
 
-sge::sprite::object&
+sanguis::draw::object&
 sanguis::draw::healthbar::inner()
 {
 	return at(1);
 }
 
-const sge::sprite::object&
+const sanguis::draw::object&
 sanguis::draw::healthbar::inner() const
 {
 	return at(1);

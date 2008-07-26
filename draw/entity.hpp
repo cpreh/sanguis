@@ -20,7 +20,6 @@ public:
 		object> sprite_vector;
 
 	virtual void update(time_type) = 0;
-	//virtual sprite_vector to_sprites() const = 0;
 	entity_id id() const;
 	void decay();
 	void decay_time(
@@ -36,6 +35,7 @@ public:
 	virtual void weapon(weapon_type::type);
 	virtual void start_attacking();
 	virtual void stop_attacking();
+	virtual ~entity();
 protected:
 	entity(
 		entity_id id,

@@ -3,6 +3,7 @@
 #include <sge/string.hpp>
 #include <sge/math/angle.hpp>
 #include <sge/math/constants.hpp>
+#include <sge/console/console.hpp>
 #include <sge/math/point_rotate.hpp>
 #include <boost/none.hpp>
 #include <iomanip>
@@ -121,7 +122,7 @@ void sanguis::draw::player::update(const time_type time)
 	top_sprite().pos() = sge::math::structure_cast<sge::sprite::unit>(top_pos);
 }
 
-sanguis::draw:object& sanguis::draw::player::bottom_sprite()
+sanguis::draw::object& sanguis::draw::player::bottom_sprite()
 {
 	return at(0);
 }

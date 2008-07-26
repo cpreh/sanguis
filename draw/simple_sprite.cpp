@@ -21,7 +21,7 @@ sanguis::draw::simple_sprite::simple_sprite(
 	sge::renderer::colors::white,
 	depth,
 	angle)
-}
+{}
 
 sanguis::draw::simple_sprite::simple_sprite(
 	entity_id const id,
@@ -46,12 +46,6 @@ sanguis::draw::simple_sprite::simple_sprite(
 
 void sanguis::draw::simple_sprite::update(time_type)
 {}
-
-sanguis::draw::entity::sprite_vector
-sanguis::draw::simple_sprite::to_sprites() const
-{
-	return sprite;
-}
 
 void sanguis::draw::simple_sprite::orientation(
 	const sge::sprite::rotation_type angle)
@@ -96,15 +90,15 @@ sanguis::draw::simple_sprite::orientation() const
 	return get().rotation();
 }
 
-sge::sprite::object&
+sanguis::draw::object&
 sanguis::draw::simple_sprite::get()
 {
-	return sprite.at(0);
+	return sprite;
 }
 
-sge::sprite::object const&
+sanguis::draw::object const &
 sanguis::draw::simple_sprite::get() const
 {
-	return sprite.at(0);
+	return sprite;
 }
 

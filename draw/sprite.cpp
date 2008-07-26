@@ -5,8 +5,8 @@
 
 sanguis::draw::sprite::sprite(
 	entity_id const id,
-	sprite_vector::size_type const sz,
-	system &sys)
+	system &sys,
+	sprite_vector::size_type const sz)
 : entity(
 	id,
 	sys)
@@ -14,9 +14,9 @@ sanguis::draw::sprite::sprite(
 	sprites.reserve(sz);
 	for(sprite_vector::size_type i = 0; i < sz; ++i)
 		sprites.push_back(
-			sge::sprite::object(
+			object(
 				get_system(),
-				0, // FIXME
+				1, // FIXME
 				boost::none,
 				boost::none,
 				boost::none,

@@ -2,14 +2,6 @@
 #include "../../get_dim.hpp"
 #include <boost/assign/list_of.hpp>
 
-namespace
-{
-
-const sanguis::messages::space_unit bullet_speed(
-	sanguis::messages::mu(200));
-
-}
-
 sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 	environment const & env,
 	armor_array const &armor,
@@ -26,7 +18,7 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 		boost::assign::map_list_of
 			(property::type::health, property(messages::mu(1)))
 			(property::type::movement_speed, property(messages::mu(300))),
-		static_cast<time_type>(10)),
+		static_cast<time_type>(1)),
   damage(damage)
 {}
 

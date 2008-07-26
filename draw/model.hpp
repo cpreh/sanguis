@@ -25,7 +25,6 @@ public:
 		sge::string const& name);
 protected:
 	virtual void update(time_type);
-	virtual sprite_vector to_sprites() const;
 	virtual void orientation(
 		sge::sprite::rotation_type);
 	void orientation(

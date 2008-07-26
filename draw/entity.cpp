@@ -47,6 +47,9 @@ void sanguis::draw::entity::stop_attacking()
 	sge::clog << SGE_TEXT("warning: entity got a stop attacking message!\n");
 }
 
+sanguis::draw::entity::~entity()
+{}
+
 sanguis::draw::entity::entity(
 	entity_id const id_,
 	system &sys)
@@ -56,3 +59,9 @@ sanguis::draw::entity::entity(
   	sge::time::resolution(0),
 	false)
 {}
+
+sanguis::draw::system &
+sanguis::draw::entity::get_system()
+{
+	return sys;
+}
