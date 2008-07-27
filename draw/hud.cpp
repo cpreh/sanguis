@@ -1,7 +1,7 @@
 #include "hud.hpp"
 #include <sge/font/font.hpp>
 #include <sge/format.hpp>
-#include <sge/string.hpp>
+#include <sge/text.hpp>
 
 sanguis::draw::hud::hud(
 	sge::font::font &font)

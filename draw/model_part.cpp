@@ -8,6 +8,7 @@
 #include <sge/math/vec_dim.hpp>
 #include <sge/math/compare.hpp>
 #include <sge/sprite/object.hpp>
+#include <algorithm>
 #include <limits>
 #include <cmath>
 
