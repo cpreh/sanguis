@@ -38,3 +38,10 @@ sanguis::server::damage::list::operator damage_array() const
 {
 	return array;
 }
+
+sanguis::server::damage::list const
+sanguis::server::damage::all(
+	damage_array::value_type const v)
+{
+	return list(v);
+}

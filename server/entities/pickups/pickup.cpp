@@ -21,9 +21,7 @@ sanguis::server::entities::pickups::pickup::pickup(
 	team::type const team_)
 : entity(
 	env,
-	(
-		damage::all = messages::mu(1) // FIXME: create default values for this
-	),
+	damage::all(messages::mu(1)), // FIXME: create default values for this
 	pos,
 	messages::mu(0), //angle
 	messages::mu(0), //direction,

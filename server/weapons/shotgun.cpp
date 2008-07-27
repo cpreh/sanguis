@@ -47,7 +47,7 @@ void sanguis::server::weapons::shotgun::do_attack(
 			entities::auto_ptr(
 				new entities::projectiles::simple_bullet(
 					get_environment(),
-					(damage::normal = messages::mu(1)),
+					damage::list(damage::normal = messages::mu(1)),
 					from.center(),
 					rng(),
 					from.team(),

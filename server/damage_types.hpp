@@ -38,6 +38,9 @@ struct list
 };
 
 extern const wrapper normal,piercing,fire,ice,pure;
+
+list const all(damage_array::value_type);
+
 }
 }
 }
