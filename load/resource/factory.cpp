@@ -28,6 +28,8 @@
 #include <limits>
 #include <cstddef>
 
+//#include <sge/texture/rect_fragmented.hpp>
+
 namespace
 {
 
@@ -52,6 +54,7 @@ environment::environment(const sge::image::loader_ptr il,const sge::renderer::de
   texman(
   	rend,
 	sge::texture::default_creator<sge::texture::no_fragmented>(
+	//sge::texture::default_creator<sge::texture::rect_fragmented>(
 		rend,
 		sge::renderer::linear_filter))
 {

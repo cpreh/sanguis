@@ -18,7 +18,7 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 		boost::assign::map_list_of
 			(property::type::health, property(messages::mu(1)))
 			(property::type::movement_speed, property(messages::mu(300))),
-		static_cast<time_type>(1)),
+		static_cast<time_type>(10)),
   damage(damage)
 {}
 
