@@ -91,8 +91,6 @@ void sanguis::draw::scene_drawer::process_message(const client_messages::base& m
 
 void sanguis::draw::scene_drawer::draw(const time_type delta)
 {
-	sprites.clear();
-
 	for(entity_map::iterator it(entities.begin()); it != entities.end(); ++it)
 	{
 		entity& e = *it->second;
@@ -100,16 +98,10 @@ void sanguis::draw::scene_drawer::draw(const time_type delta)
 		e.update(delta);
 
 		if(e.may_be_removed())
-		{
 			entities.erase(it);
-			continue;
-		}
-
-		const entity::sprite_vector& s(e.to_sprites());
-		std::copy(s.begin(), s.end(), std::back_inserter(sprites));
 	}
 
-	ss.render(sprites.begin(), sprites.end());
+	ss.render();
 
 	hud_.update(delta);
 }
@@ -127,6 +119,7 @@ void sanguis::draw::scene_drawer::operator()(const messages::add& m)
 	configure_new_object(
 		factory::entity(
 			m.id(),
+			get_system(),	
 			m.type()),
 		m);
 }
@@ -136,6 +129,7 @@ void sanguis::draw::scene_drawer::operator()(const messages::add_enemy& m)
 	configure_new_object(
 		factory::enemy(
 			m.id(),
+			get_system(),
 			m.etype()),
 		m);
 }
@@ -145,6 +139,7 @@ void sanguis::draw::scene_drawer::operator()(const messages::add_pickup& m)
 	configure_new_object(
 		factory::pickup(
 			m.id(),
+			get_system(),
 			m.ptype()),
 		m);
 }
@@ -154,6 +149,7 @@ void sanguis::draw::scene_drawer::operator()(const messages::add_weapon_pickup& 
 	configure_new_object(
 		factory::weapon_pickup(
 			m.id(),
+			get_system(),
 			m.wtype()),
 		m);
 }
@@ -236,7 +232,8 @@ void sanguis::draw::scene_drawer::operator()(const client_messages::add& m)
 		m.id(),
 		factory::client(
 			m,
-			ss.get_renderer()->screen_size())).second == false)
+			get_system(),
+			get_system().get_renderer()->screen_size())).second == false)
 		throw sge::exception(SGE_TEXT("Client object with id already in entity list!"));
 	// FIXME: configure the object here, too!
 }
@@ -267,7 +264,11 @@ void sanguis::draw::scene_drawer::configure_new_object(
 		const std::pair<entity_map::iterator, bool> reaper_ret(
 			entities.insert(
 				reaper_id,
-				factory::entity_ptr(new reaper(reaper_id,*player_))));
+				factory::entity_ptr(
+					new reaper(
+						reaper_id,
+						get_system(),
+						*player_))));
 
 		process_message(messages::resize(reaper_id, server::get_dim("reaper","default")));
 		process_message(messages::max_health(reaper_id, messages::mu(1)));
@@ -314,4 +315,10 @@ void sanguis::draw::scene_drawer::process_default_msg(const messages::base& m)
 void sanguis::draw::scene_drawer::process_default_client_msg(
 	const client_messages::base&)
 {
+}
+
+sanguis::draw::system &
+sanguis::draw::scene_drawer::get_system()
+{
+	return ss;
 }

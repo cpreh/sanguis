@@ -4,6 +4,7 @@
 #include "entity.hpp"
 #include "hud.hpp"
 #include "factory/types.hpp"
+#include "types.hpp"
 #include "../entity_id.hpp"
 #include "../messages/fwd.hpp"
 #include "../time_type.hpp"
@@ -65,10 +66,11 @@ private:
 	const entity& get_entity(entity_id) const;
 	void process_default_msg(const messages::base&);
 	void process_default_client_msg(const client_messages::base&);
+	system &get_system();
 
-	sge::sprite::system ss;
-	hud                 hud_;
-	player*             player_;
+	system                        ss;
+	hud                           hud_;
+	player*                       player_;
 
 	typedef boost::ptr_map<entity_id, entity> entity_map;
 	entity_map entities;
@@ -77,7 +79,7 @@ private:
 	typedef std::map<sge::type_info, dispatch_fun> event_map;
 	event_map event_dispatcher;
 
-	std::vector<sge::sprite::object> sprites;
+	//std::vector<sge::sprite::object> sprites;
 };
 
 }

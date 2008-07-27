@@ -4,6 +4,7 @@
 #include "types.hpp"
 #include "../entity.hpp"
 #include "../z_ordering.hpp"
+#include "../types.hpp"
 #include <sge/string.hpp>
 
 namespace sanguis
@@ -15,6 +16,7 @@ namespace factory
 
 entity_ptr simple_sprite(
 	entity_id,
+	system &,
 	z_ordering::type,
 	sge::string const &texture_name);
 

@@ -3,7 +3,7 @@
 
 #include <sge/iconv.hpp>
 #include <sge/exception.hpp>
-#include <sge/string.hpp>
+#include <sge/text.hpp>
 
 #include <typeinfo>
 

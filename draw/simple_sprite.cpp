@@ -3,51 +3,49 @@
 
 sanguis::draw::simple_sprite::simple_sprite(
 	const entity_id id,
+	system &sys,
 	sge::sprite::point const& pos_,
 	sge::sprite::dim const& dim_,
 	const sge::sprite::depth_type depth,
 	const sge::sprite::rotation_type angle,
 	const sge::texture::part_ptr tex)
 : entity(
-	id)
-{
-	sprite.push_back(
-		sge::sprite::object(
-			pos_,
-			tex,
-			dim_,
-			sge::renderer::colors::white,
-			depth,
-			angle));
-}
+	id,
+	sys),
+  sprite(
+  	sys,
+	0, // FIXME
+  	pos_,
+	tex,
+	dim_,
+	sge::renderer::colors::white,
+	depth,
+	angle)
+{}
 
 sanguis::draw::simple_sprite::simple_sprite(
 	entity_id const id,
+	system &sys,
 	sge::sprite::depth_type const depth,
 	sge::texture::part_ptr const tex)
 : entity(
-	id)
-{
-	sprite.push_back(
-		sge::sprite::object(
-			sge::sprite::point(
-				sge::su(0),
-				sge::su(0)),
-			tex,
-			sge::sprite::texture_dim,
-			sge::renderer::colors::white,
-			depth,
-			sge::su(0)));
-}
+	id,
+	sys),
+  sprite(
+  	sys,
+	0, // FIXME
+  	sge::sprite::point(
+		sge::su(0),
+		sge::su(0)),
+	tex,
+	sge::sprite::texture_dim,
+	sge::renderer::colors::white,
+	depth,
+	sge::su(0))
+{}
 
 void sanguis::draw::simple_sprite::update(time_type)
 {}
-
-sanguis::draw::entity::sprite_vector
-sanguis::draw::simple_sprite::to_sprites() const
-{
-	return sprite;
-}
 
 void sanguis::draw::simple_sprite::orientation(
 	const sge::sprite::rotation_type angle)
@@ -92,15 +90,15 @@ sanguis::draw::simple_sprite::orientation() const
 	return get().rotation();
 }
 
-sge::sprite::object&
+sanguis::draw::object&
 sanguis::draw::simple_sprite::get()
 {
-	return sprite.at(0);
+	return sprite;
 }
 
-sge::sprite::object const&
+sanguis::draw::object const &
 sanguis::draw::simple_sprite::get() const
 {
-	return sprite.at(0);
+	return sprite;
 }
 

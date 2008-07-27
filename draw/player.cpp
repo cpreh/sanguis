@@ -3,6 +3,7 @@
 #include <sge/string.hpp>
 #include <sge/math/angle.hpp>
 #include <sge/math/constants.hpp>
+#include <sge/console/console.hpp>
 #include <sge/math/point_rotate.hpp>
 #include <boost/none.hpp>
 #include <iomanip>
@@ -20,11 +21,15 @@ const sge::sprite::point player_leg_center(32,32);
 sge::con::var<sge::space_unit> turning_speed(SGE_TEXT("player_turning_speed"),sge::su(0.4));
 }
 
-sanguis::draw::player::player(const entity_id id)
-: model(id,
-		SGE_TEXT("player")),
-	angle_(sge::su(0)),
-	target_angle(angle_)
+sanguis::draw::player::player(
+	entity_id const id,
+	system &sys)
+: model(
+	id,
+	sys,
+	SGE_TEXT("player")),
+  angle_(sge::su(0)),
+  target_angle(angle_)
 {
 	bottom_sprite().z() = z_ordering::player_lower;
 	
@@ -117,12 +122,12 @@ void sanguis::draw::player::update(const time_type time)
 	top_sprite().pos() = sge::math::structure_cast<sge::sprite::unit>(top_pos);
 }
 
-sge::sprite::object& sanguis::draw::player::bottom_sprite()
+sanguis::draw::object& sanguis::draw::player::bottom_sprite()
 {
 	return at(0);
 }
 
-sge::sprite::object& sanguis::draw::player::top_sprite()
+sanguis::draw::object& sanguis::draw::player::top_sprite()
 {
 	return at(1);
 }

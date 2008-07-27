@@ -1,4 +1,5 @@
 #include "reaper.hpp"
+#include "player.hpp"
 #include "z_ordering.hpp"
 #include "../resolution.hpp"
 #include <sge/math/compare.hpp>
@@ -14,12 +15,18 @@ namespace
 const sge::space_unit health_regain = sge::su(5);
 }
 
-sanguis::draw::reaper::reaper(entity_id id,player const &p)
-	: model(id,SGE_TEXT("reaper")),
-	  p(p),
-		current_health(p.health()),
-		target_health(p.health()),
-		inited(false)
+sanguis::draw::reaper::reaper(
+	entity_id const id,
+	system &sys,
+	player const &p)
+: model(
+	id,
+	sys,
+	SGE_TEXT("reaper")),
+  p(p),
+  current_health(p.health()),
+  target_health(p.health()),
+  inited(false)
 {
 	for (iterator i = begin(); i != end(); ++i)
 	{

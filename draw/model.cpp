@@ -9,18 +9,21 @@
 
 sanguis::draw::model::model(
 	const entity_id id,
+	system &sys,
 	sge::string const& name)
 : sprite(
 	id,
+	sys,
 	load::model::singleton()[name].size()),
-  attacking(false)
+  attacking(false),
+  healthbar_(sys)
 {
 	part_vector::size_type i(0);
 	BOOST_FOREACH(
 		load::model::model::value_type const& p,
 		load::model::singleton()[name])
-		parts.push_back(
-			model_part(
+			parts.push_back(
+			new model_part(
 				p.second,
 				at(i++)));
 	// we can't use BOOST_FOREACH here because it needs access to the class
@@ -45,15 +48,6 @@ void sanguis::draw::model::update(
 	// TODO: fix this
 	if(healthbar_.dead())
 		speed(sge::math::vector2(0,0));
-}
-
-sanguis::draw::entity::sprite_vector
-sanguis::draw::model::to_sprites() const
-{
-	sprite_vector sprites(sprite::to_sprites());
-	sprite_vector const& healthbar_sprites(healthbar_.to_sprites());
-	sprites.insert(sprites.end(), healthbar_sprites.begin(), healthbar_sprites.end());
-	return sprites;
 }
 
 void sanguis::draw::model::orientation(

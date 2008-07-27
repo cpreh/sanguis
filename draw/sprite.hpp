@@ -1,10 +1,9 @@
 #ifndef SANGUIS_DRAW_SPRITE_HPP_INCLUDED
 #define SANGUIS_DRAW_SPRITE_HPP_INCLUDED
 
-#include <sge/sprite/object.hpp>
-#include <sge/math/vector.hpp>
-#include <sge/console/console.hpp>
+#include "types.hpp"
 #include "entity.hpp"
+#include <sge/math/vector.hpp>
 
 namespace sanguis
 {
@@ -15,18 +14,18 @@ class sprite : public entity {
 public:
 	sprite(
 		entity_id id,
+		system &sys,
 		sprite_vector::size_type init_sprites);
-	const sge::sprite::point center() const;
-	virtual sprite_vector to_sprites() const;
+	sge::sprite::point const center() const;
 protected:
 	typedef sprite_vector::iterator iterator;
 	typedef sprite_vector::const_iterator const_iterator;
 
 	virtual void update(time_type);
-	sge::sprite::object& at(sprite_vector::size_type);
-	const sge::sprite::object& at(sprite_vector::size_type) const;
-	sge::sprite::object& master();
-	const sge::sprite::object& master() const;
+	object &at(sprite_vector::size_type);
+	object const &at(sprite_vector::size_type) const;
+	object &master();
+	object const &master() const;
 	iterator begin();
 	iterator end();
 	const_iterator begin() const;

@@ -13,7 +13,8 @@ namespace draw
 class bullet : public model {
 public:
 	bullet(
-		entity_id id);
+		entity_id id,
+		system &);
 private:
 	void update(time_type);
 	boost::optional<sge::sprite::point> origin;

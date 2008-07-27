@@ -3,9 +3,11 @@
 #include <boost/none.hpp>
 
 sanguis::draw::bullet::bullet(
-	const entity_id id)
+	const entity_id id,
+	system &sys)
 : model(
 	id,
+	sys,
 	SGE_TEXT("bullet")),
   origin()
 {

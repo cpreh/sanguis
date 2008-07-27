@@ -5,12 +5,14 @@
 sanguis::draw::factory::entity_ptr
 sanguis::draw::factory::simple_sprite(
 	entity_id const id,
+	system &sys,
 	z_ordering::type const z,
 	sge::string const &texture_name)
 {
 	return entity_ptr(
 		new draw::simple_sprite(
 			id,
+			sys,
 			z,
 			load::resource::texture(
 				texture_name)));

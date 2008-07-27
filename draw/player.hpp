@@ -2,9 +2,9 @@
 #define SANGUIS_DRAW_PLAYER_HPP_INCLUDED
 
 #include "model.hpp"
+#include "types.hpp"
 #include <sge/sprite/texture_animation.hpp>
 #include <sge/math/vector.hpp>
-#include <sge/console/console.hpp>
 
 namespace sanguis
 {
@@ -13,7 +13,9 @@ namespace draw
 
 class player : public model {
 public:
-	player(entity_id id);
+	player(
+		entity_id id,
+		system &);
 	void orientation(sge::sprite::rotation_type);
 	void speed(const sge::math::vector2 &);
 	sge::space_unit health() const;
@@ -21,8 +23,8 @@ public:
 	sge::sprite::point pos() const;
 private:
 	void update(time_type);
-	sge::sprite::object& bottom_sprite();
-	sge::sprite::object& top_sprite();
+	object& bottom_sprite();
+	object& top_sprite();
 	sge::space_unit angle_,
 	                target_angle;
 };

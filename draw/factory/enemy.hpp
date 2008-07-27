@@ -3,6 +3,7 @@
 
 #include "../../entity_id.hpp"
 #include "../../enemy_type.hpp" 
+#include "../types.hpp"
 #include "types.hpp"
 
 namespace sanguis
@@ -14,6 +15,7 @@ namespace factory
 
 entity_ptr enemy(
 	entity_id,
+	system &,
 	enemy_type::type);
 
 }
