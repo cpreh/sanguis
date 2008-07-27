@@ -7,6 +7,7 @@
 #include "../time_type.hpp"
 #include <sge/math/vector.hpp>
 #include <sge/time/timer.hpp>
+#include <boost/noncopyable.hpp>
 #include <vector>
 
 namespace sanguis
@@ -14,7 +15,7 @@ namespace sanguis
 namespace draw
 {
 
-class entity {
+class entity : boost::noncopyable {
 public:
 	typedef std::vector<
 		object> sprite_vector;
