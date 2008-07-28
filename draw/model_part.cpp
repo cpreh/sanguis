@@ -1,7 +1,7 @@
 #include "model_part.hpp"
 #include "../load/model/part.hpp"
 #include <sge/exception.hpp>
-#include <sge/string.hpp>
+#include <sge/text.hpp>
 #include <sge/console/console.hpp>
 #include <sge/math/angle.hpp>
 #include <sge/math/constants.hpp>

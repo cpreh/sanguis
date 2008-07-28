@@ -31,10 +31,10 @@ sanguis::draw::player::player(
   angle_(sge::su(0)),
   target_angle(angle_)
 {
-	bottom_sprite().z() = z_ordering::player_lower;
+	bottom_sprite().order(z_ordering::player_lower);
 	
 	//top_sprite() = bottom_sprite();
-	top_sprite().z() = z_ordering::player_upper;
+	top_sprite().order(z_ordering::player_upper);
 	
 	// FIXME: put the rotation point in a config file?
 	top_sprite().rotate_around(

@@ -9,16 +9,16 @@ namespace z_ordering
 {
 
 enum type {
-	cursor,
-	healthbar_upper,
-	healthbar_lower,
-	player_upper,
-	reaper,
-	pickup,
-	bullet,
-	player_lower,
+	background,
 	model_generic,
-	background
+	player_lower,
+	bullet,
+	pickup,
+	reaper,
+	player_upper,
+	healthbar_lower,
+	healthbar_upper,
+	cursor
 };
 
 }

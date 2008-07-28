@@ -14,7 +14,8 @@ sanguis::draw::model::model(
 : sprite(
 	id,
 	sys,
-	load::model::singleton()[name].size()),
+	load::model::singleton()[name].size(),
+	z_ordering::model_generic),
   attacking(false),
   healthbar_(sys)
 {
@@ -26,9 +27,6 @@ sanguis::draw::model::model(
 			new model_part(
 				p.second,
 				at(i++)));
-	// we can't use BOOST_FOREACH here because it needs access to the class
-	for(iterator it(begin()); it != end(); ++it)
-		it->z() = z_ordering::model_generic;
 }
 
 void sanguis::draw::model::update(

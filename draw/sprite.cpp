@@ -1,12 +1,12 @@
 #include "sprite.hpp"
 #include <boost/foreach.hpp>
 #include <boost/none.hpp>
-#include <algorithm>
 
 sanguis::draw::sprite::sprite(
 	entity_id const id,
 	system &sys,
-	sprite_vector::size_type const sz)
+	sprite_vector::size_type const sz,
+	object::order_type const order)
 : entity(
 	id,
 	sys)
@@ -16,7 +16,7 @@ sanguis::draw::sprite::sprite(
 		sprites.push_back(
 			object(
 				get_system(),
-				1, // FIXME
+				order,
 				boost::none,
 				boost::none,
 				boost::none,

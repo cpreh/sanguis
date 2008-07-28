@@ -2,45 +2,23 @@
 #include <sge/renderer/colors.hpp>
 
 sanguis::draw::simple_sprite::simple_sprite(
-	const entity_id id,
-	system &sys,
-	sge::sprite::point const& pos_,
-	sge::sprite::dim const& dim_,
-	const sge::sprite::depth_type depth,
-	const sge::sprite::rotation_type angle,
-	const sge::texture::part_ptr tex)
-: entity(
-	id,
-	sys),
-  sprite(
-  	sys,
-	0, // FIXME
-  	pos_,
-	tex,
-	dim_,
-	sge::renderer::colors::white,
-	depth,
-	angle)
-{}
-
-sanguis::draw::simple_sprite::simple_sprite(
 	entity_id const id,
 	system &sys,
-	sge::sprite::depth_type const depth,
+	object::order_type const order,
 	sge::texture::part_ptr const tex)
 : entity(
 	id,
 	sys),
   sprite(
   	sys,
-	0, // FIXME
+	order,
   	sge::sprite::point(
 		sge::su(0),
 		sge::su(0)),
 	tex,
 	sge::sprite::texture_dim,
 	sge::renderer::colors::white,
-	depth,
+	static_cast<sge::sprite::depth_type>(0),
 	sge::su(0))
 {}
 

@@ -28,23 +28,20 @@ sanguis::draw::healthbar::healthbar(
 {
 	at(0) = object(
 		sys,
-		0, // FIXME
-		boost::none,
-		boost::none,
-		boost::none,
-		sge::renderer::colors::black,
 		z_ordering::healthbar_lower,
-		static_cast<sge::sprite::rotation_type>(0)),
+		boost::none,
+		boost::none,
+		boost::none,
+		sge::renderer::colors::black);
 
 	at(1) = object(
 		sys,
-		0, // FIXME
+		z_ordering::healthbar_upper);/*,
 		boost::none,
 		boost::none,
 		boost::none,
 		boost::none,
-		z_ordering::healthbar_upper,
-		static_cast<sge::sprite::rotation_type>(0));
+		static_cast<sge::sprite::rotation_type>(0));*/
 
 	recalc_health();
 }
