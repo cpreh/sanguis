@@ -173,9 +173,9 @@ void sanguis::draw::healthbar::recalc_health()
 		static_cast<sge::space_unit>(inner_dim().w()) * remaining_health());
 	inner().set_color(sge::renderer::make_color_rgba(
 		static_cast<sge::renderer::pixel_channel_8>(
-			(sge::su(1) - remaining_health()) * pixel_channel_max),
+			(sge::su(1) - remaining_health()) * sge::su(pixel_channel_max)),
 		static_cast<sge::renderer::pixel_channel_8>(
-			remaining_health() * pixel_channel_max),
+			remaining_health() * sge::su(pixel_channel_max)),
 		0,
 		pixel_channel_max));
 }
