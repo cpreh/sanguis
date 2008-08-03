@@ -2,7 +2,7 @@
 #include "../load/model/part.hpp"
 #include <sge/exception.hpp>
 #include <sge/text.hpp>
-#include <sge/console/console.hpp>
+#include <sge/console/var_impl.hpp>
 #include <sge/math/angle.hpp>
 #include <sge/math/constants.hpp>
 #include <sge/math/vec_dim.hpp>

@@ -34,6 +34,7 @@
 #include <sge/math/angle.hpp>
 #include <sge/iostream.hpp>
 
+#include <boost/lexical_cast.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
 #include <boost/assign/list_of.hpp>

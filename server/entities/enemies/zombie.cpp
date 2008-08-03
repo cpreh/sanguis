@@ -3,12 +3,6 @@
 #include "../../ai/simple.hpp"
 #include "../../weapons/factory.hpp"
 #include <sge/math/vec_dim.hpp>
-#include <sge/console/console.hpp>
-
-namespace
-{
-sge::con::var<sanguis::messages::space_unit> zombie_damage(SGE_TEXT("zombie_damage"),sanguis::messages::mu(5));
-}
 
 sanguis::server::entities::enemies::zombie::zombie(
 	environment const &env,

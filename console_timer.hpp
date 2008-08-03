@@ -1,12 +1,13 @@
-#ifndef CONSOLE_TIMER_HPP_INCLUDED
-#define CONSOLE_TIMER_HPP_INCLUDED
+#ifndef SANGUIS_CONSOLE_TIMER_HPP_INCLUDED
+#define SANGUIS_CONSOLE_TIMER_HPP_INCLUDED
 
 #include <sge/time/timer.hpp>
 #include <sge/string.hpp>
 #include <sge/su.hpp>
-#include <sge/console/console.hpp>
+#include <sge/console/action_var.hpp>
+#include <boost/noncopyable.hpp>
 
-class console_timer
+class console_timer : boost::noncopyable
 {
 	public:
 	console_timer(const sge::string &,const sge::space_unit);

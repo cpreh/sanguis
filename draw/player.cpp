@@ -3,7 +3,7 @@
 #include <sge/string.hpp>
 #include <sge/math/angle.hpp>
 #include <sge/math/constants.hpp>
-#include <sge/console/console.hpp>
+#include <sge/console/var_impl.hpp>
 #include <sge/math/point_rotate.hpp>
 #include <boost/none.hpp>
 #include <iomanip>

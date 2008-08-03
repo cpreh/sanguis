@@ -1,5 +1,6 @@
 #include "console_timer.hpp"
 #include <sge/time/second.hpp>
+#include <sge/console/action_var_impl.hpp>
 #include <boost/bind.hpp>
 
 console_timer::console_timer(const sge::string &name,const sge::space_unit defval)
