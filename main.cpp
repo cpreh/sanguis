@@ -85,7 +85,7 @@ try
 	sge::input::key_state_tracker ks(sys.input_system);
 
 	// font stuff
-	const sge::plugin<sge::font::system>::ptr_type font_plugin = sys.plugin_manager.get_plugin<sge::font::system>().load();
+	const sge::plugin::plugin<sge::font::system>::ptr_type font_plugin = sys.plugin_manager.get_plugin<sge::font::system>().load();
 	const sge::font::system_ptr fs(font_plugin->get()());
 	const sge::font::metrics_ptr metrics = fs->create_font(sge::media_path() / SGE_TEXT("fonts/default.ttf"),15);
 	const sge::font::drawer_ptr drawer(new sge::font::drawer_3d(sys.renderer));

@@ -48,7 +48,8 @@ sanguis::draw::scene_drawer::scene_drawer(
 	sge::font::font &font)
 : ss(rend),
   hud_(font),
-  player_(0)
+  player_(0),
+  paused(false)
 {}
 
 void sanguis::draw::scene_drawer::process_message(const messages::base& m)
@@ -95,7 +96,10 @@ void sanguis::draw::scene_drawer::draw(const time_type delta)
 	{
 		entity& e = *it->second;
 		
-		e.update(delta);
+		e.update(
+			paused
+			? 0
+			: delta);
 
 		if(e.may_be_removed())
 			entities.erase(it);
@@ -104,6 +108,13 @@ void sanguis::draw::scene_drawer::draw(const time_type delta)
 	ss.render();
 
 	hud_.update(delta);
+}
+
+void sanguis::draw::scene_drawer::pause(
+	bool const p)
+{
+	sge::clog << SGE_TEXT("drawer::pause: ") << p << SGE_TEXT('\n');
+	paused = p;	
 }
 
 sanguis::draw::player const &

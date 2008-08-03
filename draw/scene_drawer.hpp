@@ -38,6 +38,8 @@ public:
 
 	void draw(const time_type);
 
+	void pause(bool);
+
 	const player& get_player() const;
 
 	void operator()(const messages::add&);
@@ -71,6 +73,7 @@ private:
 	system                        ss;
 	hud                           hud_;
 	player*                       player_;
+	bool                          paused;
 
 	typedef boost::ptr_map<entity_id, entity> entity_map;
 	entity_map entities;

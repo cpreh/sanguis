@@ -101,6 +101,8 @@ void sanguis::client::input_handler::weapon_switch_event(const sge::input::key_p
 
 void sanguis::client::input_handler::pause_unpause_event(const sge::input::key_pair& p)
 {
+	if(!p.value())
+		return;
 	post_message(
 		player_action(
 			player_action::pause_unpause,

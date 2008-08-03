@@ -140,6 +140,7 @@ sanguis::client::running_state::operator()(
 	const messages::pause&)
 {
 	paused = true;
+	drawer.pause(paused);
 	return discard_event();
 }
 
@@ -148,6 +149,7 @@ sanguis::client::running_state::operator()(
 	const messages::unpause&)
 {
 	paused = false;
+	drawer.pause(paused);
 	return discard_event();
 }
 
@@ -308,10 +310,10 @@ void sanguis::client::running_state::handle_pause_unpause(
 	context<machine>().send(
 		paused
 		? static_cast<messages::base*>(
-			new messages::player_pause(
+			new messages::player_unpause(
 				p.id()))
 		: static_cast<messages::base*>(
-			new messages::player_unpause(
+			new messages::player_pause(
 				p.id())));
 }
 
