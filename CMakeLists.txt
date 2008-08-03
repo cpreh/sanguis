@@ -37,6 +37,9 @@ FILE (GLOB files
 	draw/*.cpp
 	draw/factory/*.cpp
 	messages/*.cpp
+	load/*.cpp
+	load/model/*.cpp
+	load/resource/*.cpp
 	server/*.cpp
 	server/ai/*.cpp
 	server/auras/*.cpp
@@ -46,9 +49,7 @@ FILE (GLOB files
 	server/entities/projectiles/*.cpp
 	server/perks/*.cpp
 	server/states/*.cpp
-	server/weapons/*.cpp
-	load/model/*.cpp
-	load/resource/*.cpp)
+	server/weapons/*.cpp)
 
 add_executable(main ${files})
 target_link_libraries(main boost_serialization boost_thread

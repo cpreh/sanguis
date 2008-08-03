@@ -1,5 +1,6 @@
 #include "health.hpp"
 #include "../entity_with_weapon.hpp"
+#include "../../get_dim.hpp"
 
 sanguis::server::entities::pickups::health::health(
 	environment const &env,
@@ -18,4 +19,13 @@ void sanguis::server::entities::pickups::health::do_pickup(
 	entity_with_weapon &receiver)
 {
 	receiver.health(receiver.health() + amount);	
+}
+
+sanguis::messages::dim_type const
+sanguis::server::entities::pickups::health::dim() const
+{
+	return get_dim(
+		SGE_TEXT("pickup_hp"),
+		SGE_TEXT("default")
+		);
 }

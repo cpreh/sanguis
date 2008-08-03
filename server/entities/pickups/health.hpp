@@ -23,6 +23,8 @@ private:
 	void do_pickup(
 		entity_with_weapon &receiver);
 	
+	messages::dim_type const dim() const;
+
 	messages::space_unit amount;
 };
 

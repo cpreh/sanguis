@@ -27,6 +27,9 @@ private:
 
 	void do_pickup(
 		entity_with_weapon &receiver);
+	
+	messages::dim_type const dim() const;
+
 	weapon_type::type weapon_type_;
 };
 

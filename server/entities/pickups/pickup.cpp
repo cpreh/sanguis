@@ -27,7 +27,7 @@ sanguis::server::entities::pickups::pickup::pickup(
 	messages::mu(0), //direction,
 	team_,
 	boost::assign::map_list_of
-		(entities::property::type::health, entities::property(messages::mu(100)))
+		(entities::property::type::health, entities::property(messages::mu(1)))
 		(entities::property::type::movement_speed, entities::property(messages::mu(0)))
 	), // FIXME: create default values for this
   ptype_(ptype_)
@@ -59,12 +59,6 @@ void sanguis::server::entities::pickups::pickup::update(
 		}
 	}
 
-}
-
-sanguis::messages::dim_type const
-sanguis::server::entities::pickups::pickup::dim() const
-{
-	return messages::dim_type(50,50); // FIXME
 }
 
 sanguis::entity_type::type

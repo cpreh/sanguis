@@ -19,6 +19,8 @@ public:
 		weapon_type::type,
 		pos_type const &,
 		space_unit angle,
+		space_unit health,
+		space_unit max_health,
 		dim_type const &);
 	
 	weapon_type::type wtype() const;

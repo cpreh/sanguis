@@ -1,17 +1,7 @@
 #include "weapon_pickup.hpp"
-#include "simple_sprite.hpp"
-#include "../z_ordering.hpp"
-#include "../../weapon_type.hpp"
-#include <sge/exception.hpp>
-#include <sge/string.hpp>
-
-namespace
-{
-
-sge::string const get_texture(
-	sanguis::weapon_type::type);
-
-}
+#include "../model.hpp"
+//#include "../z_ordering.hpp"
+#include "../../load/weapon_pickup_name.hpp"
 
 sanguis::draw::factory::entity_ptr
 sanguis::draw::factory::weapon_pickup(
@@ -19,29 +9,11 @@ sanguis::draw::factory::weapon_pickup(
 	system &sys,
 	weapon_type::type const wtype)
 {
-	return simple_sprite(
-		id,
-		sys,
-		z_ordering::pickup,
-			get_texture(
-				wtype));
-}
-
-namespace
-{
-
-sge::string const get_texture(
-	sanguis::weapon_type::type const wtype)
-{
-	switch(wtype) {
-	case sanguis::weapon_type::pistol:
-		return SGE_TEXT("pistol_pickup");
-	case sanguis::weapon_type::shotgun:
-		return SGE_TEXT("shotgun_pickup");
-	default:
-		throw sge::exception(
-			SGE_TEXT("draw::factory::weapon_pickup: missing loading code!"));
-	}
-}
-
+	return entity_ptr(
+		new model(
+			id,
+			sys,
+			//z_ordering::pickup,
+			load::weapon_pickup_name(
+				wtype)));
 }

@@ -19,6 +19,8 @@ public:
 		pickup_type::type,
 		pos_type const &,
 		space_unit angle,
+		space_unit health,
+		space_unit max_health,
 		dim_type const &);
 	
 	pickup_type::type ptype() const;

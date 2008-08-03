@@ -31,7 +31,6 @@ private:
 	virtual void do_pickup(
 		entity_with_weapon &receiver) = 0;
 
-	messages::dim_type const dim() const;
 	entity_type::type type() const;
 	bool invulnerable() const;
 

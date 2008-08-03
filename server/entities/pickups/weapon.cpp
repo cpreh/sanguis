@@ -1,7 +1,9 @@
 #include "weapon.hpp"
 #include "../entity_with_weapon.hpp"
+#include "../../get_dim.hpp"
 #include "../../message_converter.hpp"
 #include "../../weapons/factory.hpp"
+#include "../../../load/weapon_pickup_name.hpp"
 #include "../../../messages/add_weapon_pickup.hpp"
 
 sanguis::server::entities::pickups::weapon::weapon(
@@ -36,4 +38,14 @@ void sanguis::server::entities::pickups::weapon::do_pickup(
 		weapons::create(
 			weapon_type_,
 			get_environment()));
+}
+
+sanguis::messages::dim_type const
+sanguis::server::entities::pickups::weapon::dim() const
+{
+	return get_dim(
+		load::weapon_pickup_name(
+			wtype()),
+		SGE_TEXT("default")
+		);
 }

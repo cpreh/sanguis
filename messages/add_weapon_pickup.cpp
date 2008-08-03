@@ -14,6 +14,8 @@ sanguis::messages::add_weapon_pickup::add_weapon_pickup(
 	weapon_type::type const wtype_,
 	pos_type const &pos_,
 	space_unit const angle_,
+	space_unit const health_,
+	space_unit const max_health_,
 	dim_type const &dim_)
 : add(
 	id,
@@ -21,8 +23,8 @@ sanguis::messages::add_weapon_pickup::add_weapon_pickup(
 	pos_,
 	angle_,
 	vector2(mu(0), mu(0)), // speed
-	mu(0), // health
-	mu(0), // max_health
+	health_,
+	max_health_,
 	dim_),
   wtype_(wtype_)
 {}

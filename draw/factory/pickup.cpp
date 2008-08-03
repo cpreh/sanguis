@@ -1,5 +1,5 @@
 #include "pickup.hpp"
-#include "simple_sprite.hpp"
+#include "../model.hpp"
 #include "../z_ordering.hpp"
 #include "../../pickup_type.hpp"
 #include <sge/exception.hpp>
@@ -19,12 +19,13 @@ sanguis::draw::factory::pickup(
 	system &sys,
 	pickup_type::type const ptype)
 {
-	return simple_sprite(
-		id,
-		sys,
-		z_ordering::pickup,
-		get_texture(
-			ptype));
+	return entity_ptr(
+		new model(
+			id,
+			sys,
+			//z_ordering::pickup,
+			get_texture(
+				ptype)));
 }
 
 namespace
@@ -35,7 +36,7 @@ sge::string const get_texture(
 {
 	switch(ptype) {
 	case sanguis::pickup_type::health:
-		return SGE_TEXT("health_pickup");
+		return SGE_TEXT("pickup_hp");
 	case sanguis::pickup_type::weapon:
 		throw sge::exception(
 			SGE_TEXT("draw::factory::pickup: weapon pickup cannot be created using pickup!"));

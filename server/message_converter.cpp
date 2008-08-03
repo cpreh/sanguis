@@ -51,7 +51,9 @@ sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::add
 		dynamic_cast<entities::pickups::pickup const &>(e).ptype(),
 		e.pos(),
 		e.angle(),
-		e.dim()); // FIXME: should we care about speed and health though?
+		e.health(),
+		e.max_health(),
+		e.dim()); // FIXME: should we care about speed though?
 }
 
 template<>
@@ -62,6 +64,8 @@ sanguis::messages::base *sanguis::server::message_convert<sanguis::messages::add
 		dynamic_cast<entities::pickups::weapon const &>(e).wtype(),
 		e.pos(),
 		e.angle(),
+		e.health(),
+		e.max_health(),
 		e.dim());
 }
 
