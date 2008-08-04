@@ -8,14 +8,15 @@
 #include <ostream>
 
 sanguis::draw::model::model(
-	const entity_id id,
+	entity_id const id,
 	system &sys,
-	sge::string const& name)
+	sge::string const &name,
+	object::order_type const order)
 : sprite(
 	id,
 	sys,
 	load::model::singleton()[name].size(),
-	z_ordering::model_generic),
+	order),
   attacking(false),
   healthbar_(sys)
 {

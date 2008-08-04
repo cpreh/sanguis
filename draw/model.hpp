@@ -22,7 +22,8 @@ public:
 	model(
 		entity_id id,
 		system &,
-		sge::string const& name);
+		sge::string const& name,
+		object::order_type order);
 protected:
 	virtual void update(time_type);
 	virtual void orientation(

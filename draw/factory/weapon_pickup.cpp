@@ -1,6 +1,6 @@
 #include "weapon_pickup.hpp"
 #include "../model.hpp"
-//#include "../z_ordering.hpp"
+#include "../z_ordering.hpp"
 #include "../../load/weapon_pickup_name.hpp"
 
 sanguis::draw::factory::entity_ptr
@@ -13,7 +13,7 @@ sanguis::draw::factory::weapon_pickup(
 		new model(
 			id,
 			sys,
-			//z_ordering::pickup,
 			load::weapon_pickup_name(
-				wtype)));
+				wtype),
+			z_ordering::pickup));
 }

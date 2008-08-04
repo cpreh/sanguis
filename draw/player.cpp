@@ -27,7 +27,8 @@ sanguis::draw::player::player(
 : model(
 	id,
 	sys,
-	SGE_TEXT("player")),
+	SGE_TEXT("player"),
+	z_ordering::model_generic),
   angle_(sge::su(0)),
   target_angle(angle_)
 {

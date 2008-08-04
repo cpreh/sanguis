@@ -22,7 +22,8 @@ sanguis::draw::healthbar::healthbar(
 : sprite(
 	client::id_dont_care(),
 	sys,
-	2),
+	2,
+	z_ordering::model_generic),
   health_(0),
   max_health_(0)
 {

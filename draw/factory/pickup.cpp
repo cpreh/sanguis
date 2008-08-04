@@ -23,9 +23,9 @@ sanguis::draw::factory::pickup(
 		new model(
 			id,
 			sys,
-			//z_ordering::pickup,
 			get_texture(
-				ptype)));
+				ptype),
+			z_ordering::pickup));
 }
 
 namespace
