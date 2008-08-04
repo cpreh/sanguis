@@ -11,6 +11,7 @@
 #include <sge/su.hpp>
 #include <sge/string.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
+#include <boost/scoped_ptr.hpp>
 
 namespace sanguis
 {
@@ -23,7 +24,8 @@ public:
 		entity_id id,
 		system &,
 		sge::string const& name,
-		object::order_type order);
+		object::order_type order,
+		bool needs_healthbar = true);
 protected:
 	virtual void update(time_type);
 	virtual void orientation(
@@ -41,9 +43,13 @@ private:
 	void start_attacking();
 	void stop_attacking();
 	animation_type::type animation() const;
+	bool dead() const;
+	void update_healthbar();
 
-	bool attacking;
-	healthbar healthbar_;
+	bool            attacking;
+	sge::space_unit health_,
+	                max_health_;
+	boost::scoped_ptr<healthbar> healthbar_;
 	
 	typedef boost::ptr_vector<model_part> part_vector;
 	part_vector parts;

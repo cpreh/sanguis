@@ -19,7 +19,6 @@ public:
 	void attach_to(
 		sge::sprite::point const &,
 		sge::sprite::dim const &);
-	bool dead() const;
 private:
 	void pos(sge::sprite::point const &);
 	void dim(sge::sprite::dim const &);

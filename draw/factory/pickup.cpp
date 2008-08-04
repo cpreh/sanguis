@@ -25,7 +25,8 @@ sanguis::draw::factory::pickup(
 			sys,
 			get_texture(
 				ptype),
-			z_ordering::pickup));
+			z_ordering::pickup,
+			false));
 }
 
 namespace
