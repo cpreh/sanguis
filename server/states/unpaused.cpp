@@ -252,17 +252,7 @@ boost::statechart::result sanguis::server::states::unpaused::operator()(const ne
 	sge::cout << SGE_TEXT("server: pausing\n");
 
 	context<running>().send(new messages::pause());
-	entities::container &entities = context<running>().entities();
-
-	for (entities::container::const_iterator i = entities.begin(); i != entities.end(); ++i)
-	{
-		if (i->type() == entity_type::indeterminate)
-			continue;
-
-		context<running>().send(new messages::speed(i->id(),messages::vector2()));
-		context<running>().send(message_convert<messages::move>(*i));
-	}
-
+	
 	return transit<paused>();
 }
 
