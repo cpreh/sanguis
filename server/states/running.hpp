@@ -6,6 +6,7 @@
 #include "../console_print_callback.hpp"
 #include "../entities/entity_fwd.hpp"
 #include "../entities/fwd.hpp"
+#include "../../messages/types.hpp"
 #include "../../console_timer.hpp"
 
 #include <sge/time/timer.hpp>
@@ -43,8 +44,10 @@ public:
 	entities::entity &insert_entity(entities::auto_ptr);
 	player_map &players();
 	const player_map &players() const;
-private:
 
+	void divide_exp(const messages::exp_type);
+	void level_callback(entities::player &,const messages::level_type);
+private:
 	entities::container entities_;
 	player_map players_;
 	

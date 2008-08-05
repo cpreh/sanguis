@@ -1,6 +1,9 @@
 #include "running.hpp"
 #include "waiting.hpp"
 #include "../entities/entity.hpp"
+#include "../entities/player.hpp"
+#include "../../messages/experience.hpp"
+#include "../../messages/level_up.hpp"
 #include <sge/iostream.hpp>
 #include <boost/bind.hpp>
 #include <ostream>
@@ -57,4 +60,23 @@ sanguis::server::states::running::player_map &sanguis::server::states::running::
 sanguis::server::states::running::player_map const &sanguis::server::states::running::players() const
 {
 	return players_;
+}
+
+void sanguis::server::states::running::divide_exp(const messages::exp_type exp)
+{
+	if (exp == static_cast<messages::exp_type>(0))
+		return;
+
+	for (running::player_map::iterator i = context<running>().players().begin(); i != context<running>().players().end(); ++i)
+	{
+		entities::player &p = *(i->second);
+		p.exp(p.exp()+exp);
+		context<running>().send(new messages::experience(p.id(),p.exp()));
+	}
+}
+
+void sanguis::server::states::running::level_callback(entities::player &p,const messages::level_type)
+{
+	// no message_converter here because it operates on a _specific_ entity type
+	context<running>().send(new messages::level_up(p.id(),p.level()));
 }

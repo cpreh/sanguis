@@ -5,9 +5,10 @@
 #include "../message_functor.hpp"
 #include "../../truncation_check_cast.hpp"
 #include "../../dispatch_type.hpp"
-#include "../../messages/level_up.hpp"
 #include "../../messages/client_info.hpp"
 #include "../../messages/disconnect.hpp"
+#include "../../messages/experience.hpp"
+#include "../../messages/level_up.hpp"
 #include "../../messages/player_rotation.hpp"
 #include "../../messages/player_start_shooting.hpp"
 #include "../../messages/player_stop_shooting.hpp"
@@ -19,7 +20,6 @@
 #include "../../messages/give_weapon.hpp"
 #include "../../messages/speed.hpp"
 #include "../../messages/change_weapon.hpp"
-#include "../../messages/experience.hpp"
 #include "../../messages/pause.hpp"
 #include "../message_converter.hpp"
 #include "../damage_types.hpp"
@@ -39,18 +39,11 @@
 #include <boost/bind.hpp>
 #include <boost/assign/list_of.hpp>
 #include <boost/tr1/random.hpp>
-
 #include <ostream>
 
 sanguis::server::states::unpaused::unpaused()
 	: send_timer(SGE_TEXT("send_timer"),sge::su(0.1))
 {}
-
-void sanguis::server::states::unpaused::level_callback(entities::player &p,const messages::level_type)
-{
-	// no message_converter here because it operates on a _specific_ entity type
-	context<running>().send(new messages::level_up(p.id(),p.level()));
-}
 
 boost::statechart::result sanguis::server::states::unpaused::handle_default_msg(const net::id_type id,const messages::base &m)
 {
@@ -285,19 +278,6 @@ boost::statechart::result sanguis::server::states::unpaused::operator()(const ne
 	return transit<waiting>();
 }
 
-void sanguis::server::states::unpaused::divide_exp(const messages::exp_type exp)
-{
-	if (exp == static_cast<messages::exp_type>(0))
-		return;
-
-	for (running::player_map::iterator i = context<running>().players().begin(); i != context<running>().players().end(); ++i)
-	{
-		entities::player &p = *(i->second);
-		p.exp(p.exp()+exp);
-		context<running>().send(new messages::experience(p.id(),p.exp()));
-	}
-}
-
 void sanguis::server::states::unpaused::get_player_exp(const sge::con::arg_list &)
 {
 	context<running>().console_print(
@@ -311,8 +291,8 @@ sanguis::server::environment sanguis::server::states::unpaused::get_environment(
 	return environment(
 		context<running>().send,
 		boost::bind(&running::insert_entity,&context<running>(),_1),
-		boost::bind(&unpaused::divide_exp,this,_1),
-		boost::bind(&unpaused::level_callback,this,_1,_2));
+		boost::bind(&running::divide_exp,&context<running>(),_1),
+		boost::bind(&running::level_callback,&context<running>(),_1,_2));
 }
 
 boost::statechart::result sanguis::server::states::unpaused::react(const tick_event &t)
