@@ -66,6 +66,7 @@ void sanguis::server::states::unpaused::create_game(const net::id_type net_id,co
 
 	context<running>().send(new messages::game_state(game_state(truncation_check_cast<game_state::score_type>(0))));
 
+	sge::cerr << "server: inserting player\n";
 	entities::entity &raw_player = context<running>().insert_entity(
 		entities::auto_ptr(
 			new entities::player(
@@ -174,6 +175,8 @@ void sanguis::server::states::unpaused::add_enemy()
 	const messages::pos_type pos = center + screen_center;
 	const messages::space_unit angle = messages::mu(0);
 
+	sge::cerr << "server: inserting entity\n";
+
 	context<running>().insert_entity(
 		entities::auto_ptr(
 			new entities::enemies::zombie(
@@ -260,6 +263,9 @@ boost::statechart::result sanguis::server::states::unpaused::operator()(const ne
 
 	for (entities::container::const_iterator i = entities.begin(); i != entities.end(); ++i)
 	{
+		if (i->type() == entity_type::indeterminate)
+			continue;
+
 		context<running>().send(new messages::speed(i->id(),messages::vector2()));
 		context<running>().send(message_convert<messages::move>(*i));
 	}
@@ -314,7 +320,10 @@ boost::statechart::result sanguis::server::states::unpaused::react(const tick_ev
 	const time_type delta = t.delta();
 
 	if (context<running>().enemy_timer().update_b())
+	{
+		sge::cerr << "server: enemy timer expired, adding enemy\n";
 		add_enemy();
+	}
 
 	// should we send position updates?
 	const bool update_pos = send_timer.v().update_b();

@@ -102,7 +102,10 @@ void sanguis::draw::scene_drawer::draw(const time_type delta)
 			: delta);
 
 		if(e.may_be_removed())
+		{
+			sge::cerr << "ERASING\n";
 			entities.erase(it);
+		}
 	}
 
 	ss.render();
@@ -113,7 +116,7 @@ void sanguis::draw::scene_drawer::draw(const time_type delta)
 void sanguis::draw::scene_drawer::pause(
 	bool const p)
 {
-	sge::clog << SGE_TEXT("drawer::pause: ") << p << SGE_TEXT('\n');
+	sge::clog << SGE_TEXT("client: drawer::pause: ") << p << SGE_TEXT('\n');
 	paused = p;	
 }
 
@@ -137,6 +140,7 @@ void sanguis::draw::scene_drawer::operator()(const messages::add& m)
 
 void sanguis::draw::scene_drawer::operator()(const messages::add_enemy& m)
 {
+	sge::cerr << "client: messages::add_enemy, id: " << m.id() << "\n";
 	configure_new_object(
 		factory::enemy(
 			m.id(),
@@ -174,6 +178,7 @@ void sanguis::draw::scene_drawer::operator()(const messages::change_weapon& m)
 		return;
 	}
 		
+	//sge::cerr << "in change_weapon\n";
 	get_entity(m.id()).weapon(static_cast<weapon_type::type>(m.weapon()));
 }
 
@@ -184,16 +189,19 @@ void sanguis::draw::scene_drawer::operator()(const messages::experience& m)
 
 void sanguis::draw::scene_drawer::operator()(const messages::health& m)
 {
+	//sge::cerr << "in max_health\n";
 	get_entity(m.id()).health(m.value());
 }
 
 void sanguis::draw::scene_drawer::operator()(const messages::max_health& m)
 {
+	//sge::cerr << "in max_health\n";
 	get_entity(m.id()).max_health(m.value());
 }
 
 void sanguis::draw::scene_drawer::operator()(const messages::move& m)
 {
+	//sge::cerr << "in move\n";
 	get_entity(m.id()).pos(virtual_to_screen(ss.get_renderer()->screen_size(), m.pos()));
 }
 
@@ -210,17 +218,20 @@ void sanguis::draw::scene_drawer::operator()(const messages::remove& m)
 
 void sanguis::draw::scene_drawer::operator()(const messages::resize& m)
 {
+	//sge::cerr << "in resize\n";
 	//get_entity(m.id()).dim(virtual_to_screen(ss.get_renderer()->screen_size(), m.dim()));	
 	get_entity(m.id()).dim(sge::math::structure_cast<sge::sprite::unit>(m.dim()));
 }
 
 void sanguis::draw::scene_drawer::operator()(const messages::rotate& m)
 {
+	//sge::cerr << "in rotate\n";
 	get_entity(m.id()).orientation(m.rot());
 }
 
 void sanguis::draw::scene_drawer::operator()(const messages::speed& m)
 {
+	//sge::cerr << "in speed\n";
 	get_entity(m.id()).speed(
 		sge::math::structure_cast<sge::space_unit>(
 			virtual_to_screen(ss.get_renderer()->screen_size(),
@@ -229,16 +240,19 @@ void sanguis::draw::scene_drawer::operator()(const messages::speed& m)
 
 void sanguis::draw::scene_drawer::operator()(const messages::start_attacking& m)
 {
+	//sge::cerr << "in start_attacking\n";
 	get_entity(m.id()).start_attacking();
 }
 
 void sanguis::draw::scene_drawer::operator()(const messages::stop_attacking& m)
 {
+	//sge::cerr << "in stop_attacking\n";
 	get_entity(m.id()).stop_attacking();
 }
 
 void sanguis::draw::scene_drawer::operator()(const client_messages::add& m)
 {
+	sge::cerr << "client: in client_messages::add\n";
 	if(entities.insert(
 		m.id(),
 		factory::client(
@@ -253,6 +267,7 @@ void sanguis::draw::scene_drawer::configure_new_object(
 	factory::entity_ptr e_ptr,
 	messages::add const &m)
 {
+	sge::cerr << "client: in configure_new_object\n";
 	const std::pair<entity_map::iterator, bool> ret(
 		entities.insert(
 			m.id(),
@@ -307,7 +322,10 @@ sanguis::draw::entity& sanguis::draw::scene_drawer::get_entity(const entity_id i
 {
 	const entity_map::iterator it = entities.find(id);
 	if(it == entities.end())
+	{
+		sge::cerr << "client: called get_entity with object id " << id << "\n";
 		throw sge::exception(SGE_TEXT("Object not in entity map!"));
+	}
 	return *it->second;
 }
 

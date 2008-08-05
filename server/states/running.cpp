@@ -31,14 +31,19 @@ const sanguis::server::entities::container &sanguis::server::states::running::en
 
 sanguis::server::entities::entity &sanguis::server::states::running::insert_entity(entities::auto_ptr e)
 {
+	sge::cerr << "server: in running::insert_entity\n";
 	entities_.push_back(e);
 	entities::entity &ref = entities_.back();
 	ref.update(time_type(),entities_);
 
 	if(ref.type() == entity_type::indeterminate)
+	{
+		sge::cerr << "server: entity_type is indeterminate, returning?\n";
 		return ref;
+	}
 	
 	// TODO: sanity check the message (needs smart pointer as well)
+	sge::cerr << "server: sending add message?\n";
 	send(ref.add_message());
 
 	return ref;

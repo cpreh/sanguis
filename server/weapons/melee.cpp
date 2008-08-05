@@ -2,6 +2,7 @@
 #include "../damage_types.hpp"
 #include "../entities/entity.hpp"
 #include "../entities/projectiles/melee.hpp"
+#include <sge/iostream.hpp>
 
 sanguis::server::weapons::melee::melee(
 	const environment &env,
@@ -21,6 +22,7 @@ void sanguis::server::weapons::melee::do_attack(
 	entities::entity const &from,
 	messages::pos_type const& to)
 {
+	sge::cerr << "server: in weapons::melee::do_attack, inserting melee projectile\n";
 	insert(
 		entities::auto_ptr(
 			new entities::projectiles::melee(
