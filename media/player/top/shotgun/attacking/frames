@@ -1,4 +1,8 @@
+<<<<<<< HEAD:media/player/top/shotgun/attacking/frames
 frame_length 20
+=======
+frame_length 40
+>>>>>>> 805570e990e2c4b239f45cffec298925dca456bd:media/player/top/shotgun/attacking/frames
 shotgun_shoot0001.png
 shotgun_shoot0002.png
 shotgun_shoot0003.png

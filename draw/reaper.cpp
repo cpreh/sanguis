@@ -22,22 +22,21 @@ sanguis::draw::reaper::reaper(
 : model(
 	id,
 	sys,
-	SGE_TEXT("reaper")),
+	SGE_TEXT("reaper"),
+	z_ordering::reaper,
+	false),
   p(p),
   current_health(p.health()),
   target_health(p.health()),
   inited(false)
 {
 	for (iterator i = begin(); i != end(); ++i)
-	{
-		i->z() = z_ordering::reaper;
 		i->set_color(
 			sge::renderer::make_color_rgba(
 				static_cast<sge::renderer::pixel_channel_8>(255),
 				static_cast<sge::renderer::pixel_channel_8>(255),
 				static_cast<sge::renderer::pixel_channel_8>(255),
 				static_cast<sge::renderer::pixel_channel_8>(128)));
-	}
 }
 
 void sanguis::draw::reaper::update(time_type const t)

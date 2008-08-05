@@ -2,7 +2,7 @@
 #define SANGUIS_TRUNCATION_CHECK_CAST_IMPL_HPP_INCLUDED
 
 #include <sge/exception.hpp>
-#include <sge/string.hpp>
+#include <sge/text.hpp>
 #include <sge/format.hpp>
 
 #include <typeinfo>

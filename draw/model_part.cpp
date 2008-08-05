@@ -8,6 +8,8 @@
 #include <sge/math/vec_dim.hpp>
 #include <sge/math/compare.hpp>
 #include <sge/sprite/object.hpp>
+#include <sge/time/time.hpp>
+#include <boost/bind.hpp>
 #include <algorithm>
 #include <limits>
 #include <cmath>
@@ -34,7 +36,8 @@ sanguis::draw::model_part::model_part(
   animation_type_(animation_type::none),
   weapon_type_(weapon_type::none),
   animation_(),
-  ended(false)
+  ended(false),
+  total_time(0)
 {
 	update_animation();
 }
@@ -69,8 +72,11 @@ void sanguis::draw::model_part::weapon(
 }
 
 void sanguis::draw::model_part::update(
-	const time_type time)
+	time_type const time)
 {
+	total_time += static_cast<sge::time::unit>(
+		time * static_cast<time_type>(sge::time::hz()));
+
 	ended = animation_->process() || ended;
 
 	if(sge::math::compare(desired_orientation, invalid_rotation))
@@ -124,7 +130,8 @@ void sanguis::draw::model_part::update_animation()
 				[animation_type_]
 					.get(),
 			loop_method(),
-			ref->explicit_upcast()));
+			ref->explicit_upcast(),
+			boost::bind(&model_part::animation_time, this)));
 	ended = false;
 }
 
@@ -153,4 +160,10 @@ sge::sprite::rotation_type
 sanguis::draw::model_part::orientation() const
 {
 	return ref->rotation();
+}
+
+sge::time::unit
+sanguis::draw::model_part::animation_time() const
+{
+	return total_time;
 }

@@ -31,7 +31,8 @@ sanguis::server::entities::entity::entity(
   attacking_(false),
   aggressive_(false),
   properties(properties)
-{}
+{
+}
 
 const sanguis::armor_array &sanguis::server::entities::entity::armor() const
 {

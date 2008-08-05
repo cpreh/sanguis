@@ -2,7 +2,6 @@
 #define SANGUIS_SERVER_STATES_UNPAUSED_HPP_INCLUDED
 
 #include "running.hpp"
-#include "../../messages/types.hpp"
 
 #include <boost/mpl/list.hpp>
 #include <boost/statechart/simple_state.hpp>
@@ -47,9 +46,6 @@ class unpaused
 	boost::statechart::result operator()(const net::id_type,const messages::player_pause &);
 	boost::statechart::result operator()(const net::id_type,const messages::disconnect &);
 	boost::statechart::result handle_default_msg(const net::id_type,const messages::base &);
-
-	void divide_exp(const messages::exp_type);
-	void level_callback(entities::player &,const messages::level_type);
 
 	void get_player_exp(const sge::con::arg_list &);
 

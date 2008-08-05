@@ -16,7 +16,7 @@ public:
 		entity_id id,
 		system &sys,
 		sprite_vector::size_type init_sprites,
-		object::order_type order = 0);
+		object::order_type order);
 	sge::sprite::point const center() const;
 protected:
 	typedef sprite_vector::iterator iterator;

@@ -8,16 +8,24 @@
 #include <ostream>
 
 sanguis::draw::model::model(
-	const entity_id id,
+	entity_id const id,
 	system &sys,
-	sge::string const& name)
+	sge::string const &name,
+	object::order_type const order,
+	bool const show_healthbar)
 : sprite(
 	id,
 	sys,
 	load::model::singleton()[name].size(),
-	z_ordering::model_generic),
+	order),
   attacking(false),
-  healthbar_(sys)
+  health_(sge::su(0)),
+  max_health_(sge::su(0)),
+  healthbar_(
+	show_healthbar
+	? new healthbar(
+		sys)
+	: 0)
 {
 	part_vector::size_type i(0);
 	BOOST_FOREACH(
@@ -33,9 +41,11 @@ void sanguis::draw::model::update(
 	const time_type time)
 {
 	sprite::update(time);
-	healthbar_.attach_to(
-		master().pos(),
-		master().size());
+
+	if(healthbar_)
+		healthbar_->attach_to(
+			master().pos(),
+			master().size());
 
 	BOOST_FOREACH(model_part &p, parts)
 	{
@@ -44,8 +54,11 @@ void sanguis::draw::model::update(
 	}
 
 	// TODO: fix this
-	if(healthbar_.dead())
+	if(dead())
+	{
+		healthbar_.reset();
 		speed(sge::math::vector2(0,0));
+	}
 }
 
 void sanguis::draw::model::orientation(
@@ -65,23 +78,25 @@ void sanguis::draw::model::orientation(
 void sanguis::draw::model::health(
 	const sge::space_unit health)
 {
-	healthbar_.health(health);
+	health_ = health;
+	update_healthbar();
 }
 
 void sanguis::draw::model::max_health(
 	const sge::space_unit max_health)
 {
-	healthbar_.max_health(max_health);
+	max_health_ = max_health;
+	update_healthbar();
 }
 
 sge::space_unit sanguis::draw::model::max_health() const
 {
-	return healthbar_.max_health();
+	return max_health_;
 }
 
 sge::space_unit sanguis::draw::model::health() const
 {
-	return healthbar_.health();
+	return health_;
 }
 
 void sanguis::draw::model::weapon(
@@ -108,11 +123,24 @@ void sanguis::draw::model::stop_attacking()
 sanguis::animation_type::type
 sanguis::draw::model::animation() const
 {
-	return healthbar_.dead()
+	return dead()
 	? animation_type::dying
 	: attacking
 		? animation_type::attacking
 		: speed().is_null()
 			? animation_type::none
 			: animation_type::walking;
+}
+
+bool sanguis::draw::model::dead() const
+{
+	return health() <= 0;
+}
+
+void sanguis::draw::model::update_healthbar()
+{
+	if(!healthbar_)
+		return;
+	healthbar_->health(health());
+	healthbar_->max_health(max_health());
 }

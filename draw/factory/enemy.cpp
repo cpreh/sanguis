@@ -1,5 +1,6 @@
 #include "enemy.hpp"
 #include "../model.hpp"
+#include "../z_ordering.hpp"
 #include "../../enemy_type.hpp"
 #include <sge/exception.hpp>
 #include <sge/string.hpp>
@@ -24,7 +25,8 @@ sanguis::draw::factory::enemy(
 			id,
 			sys,
 			get_model_name(
-				etype)));
+				etype),
+			z_ordering::model_generic));
 }
 
 namespace

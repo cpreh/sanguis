@@ -8,11 +8,10 @@ sanguis::draw::bullet::bullet(
 : model(
 	id,
 	sys,
-	SGE_TEXT("bullet")),
+	SGE_TEXT("bullet"),
+	z_ordering::bullet),
   origin()
 {
-	at(0).z() = at(0).z() = z_ordering::bullet;
-		
 	at(1).size().w() = static_cast<sge::sprite::unit>(1);
 }
 

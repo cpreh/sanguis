@@ -22,7 +22,8 @@ sanguis::draw::healthbar::healthbar(
 : sprite(
 	client::id_dont_care(),
 	sys,
-	2),
+	2,
+	z_ordering::model_generic),
   health_(0),
   max_health_(0)
 {
@@ -36,12 +37,7 @@ sanguis::draw::healthbar::healthbar(
 
 	at(1) = object(
 		sys,
-		z_ordering::healthbar_upper);/*,
-		boost::none,
-		boost::none,
-		boost::none,
-		boost::none,
-		static_cast<sge::sprite::rotation_type>(0));*/
+		z_ordering::healthbar_upper);
 
 	recalc_health();
 }
@@ -84,11 +80,6 @@ void sanguis::draw::healthbar::attach_to(
 		sge::sprite::dim(
 			d.w(),
 			bar_height));
-}
-
-bool sanguis::draw::healthbar::dead() const
-{
-	return health() <= 0;
 }
 
 void sanguis::draw::healthbar::pos(
@@ -155,13 +146,6 @@ void sanguis::draw::healthbar::recalc_health()
 			(sge::format(SGE_TEXT("draw::healthbar: health (%1%) > max_health (%2%)!"))
 			% health_
 			% max_health_).str());
-
-	if(dead())
-	{
-		visible(false);
-		return;
-	}
-	visible(true);
 
 	if(sge::math::almost_zero(max_health_)) // TODO:
 		return;
