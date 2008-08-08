@@ -5,6 +5,7 @@
 #include "../animation_type.hpp"
 #include "../weapon_type.hpp"
 #include "../time_type.hpp"
+#include "../diff_clock.hpp"
 #include "../load/model/fwd.hpp"
 #include <sge/sprite/fwd.hpp>
 #include <sge/sprite/types.hpp>
@@ -33,8 +34,7 @@ private:
 	sge::sprite::texture_animation::loop_method::type loop_method() const;
 	sge::sprite::rotation_type orientation() const;
 
-	sge::time::unit animation_time() const;
-
+	diff_clock                              anim_diff_clock;
 	sge::sprite::rotation_type              desired_orientation;
 	load::model::part const*                info;
 	object*                                 ref;
@@ -43,7 +43,6 @@ private:
 	boost::scoped_ptr<
 		sge::sprite::texture_animation> animation_;
 	bool                                    ended;
-	sge::time::unit                         total_time;
 };
 
 }

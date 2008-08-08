@@ -29,15 +29,15 @@ sge::con::var<sge::space_unit> rotation_speed(
 sanguis::draw::model_part::model_part(
 	load::model::part const& info,
 	object &ref)
-: desired_orientation(
+: anim_diff_clock(),
+  desired_orientation(
 	invalid_rotation),
   info(&info),
   ref(&ref),
   animation_type_(animation_type::none),
   weapon_type_(weapon_type::none),
   animation_(),
-  ended(false),
-  total_time(0)
+  ended(false)
 {
 	update_animation();
 }
@@ -74,8 +74,8 @@ void sanguis::draw::model_part::weapon(
 void sanguis::draw::model_part::update(
 	time_type const time)
 {
-	total_time += static_cast<sge::time::unit>(
-		time * static_cast<time_type>(sge::time::hz()));
+	anim_diff_clock.update(
+		time);
 
 	ended = animation_->process() || ended;
 
@@ -131,7 +131,7 @@ void sanguis::draw::model_part::update_animation()
 					.get(),
 			loop_method(),
 			ref->explicit_upcast(),
-			boost::bind(&model_part::animation_time, this)));
+			anim_diff_clock.callback()));
 	ended = false;
 }
 
@@ -160,10 +160,4 @@ sge::sprite::rotation_type
 sanguis::draw::model_part::orientation() const
 {
 	return ref->rotation();
-}
-
-sge::time::unit
-sanguis::draw::model_part::animation_time() const
-{
-	return total_time;
 }
