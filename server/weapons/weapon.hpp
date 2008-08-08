@@ -4,6 +4,7 @@
 #include "../../time_type.hpp"
 #include "../../messages/types.hpp"
 #include "../../weapon_type.hpp"
+#include "../../diff_clock.hpp"
 #include "../environment.hpp"
 #include "../entities/entity_fwd.hpp"
 #include <sge/time/timer.hpp>
@@ -25,12 +26,16 @@ public:
 		entities::entity const &from,
 		messages::pos_type const& to);
 	weapon_type::type type() const;
+	void update(
+		time_type);
 	virtual ~weapon();
 protected:
-	weapon( const sanguis::server::environment &,
+	weapon(
+		const sanguis::server::environment &,
 		const weapon_type::type,
 		messages::space_unit range,
-		time_type base_cooldown);
+		time_type base_cooldown,
+		time_type cast_point = 0);
 
 	virtual void do_attack(
 		entities::entity const &from,
@@ -44,10 +49,12 @@ private:
 		entities::entity const& from,
 		messages::pos_type const& to) const;
 
+	diff_clock           diff;
 	environment          env_;
 	weapon_type::type    type_;
 	messages::space_unit range_;
-	sge::time::timer     cooldown_timer;
+	sge::time::timer     cooldown_timer,
+	                     cast_point_timer;
 };
 
 typedef std::auto_ptr<weapon> weapon_ptr;

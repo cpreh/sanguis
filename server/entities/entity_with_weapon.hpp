@@ -36,6 +36,9 @@ public:
 	void target(messages::pos_type const&);
 	messages::pos_type const &target() const;
 private:
+	bool has_weapon() const;
+	weapons::weapon &active_weapon();
+
 	weapon_container    weapons_;
 	weapon_type::type   weapon_;
 	messages::pos_type  target_;

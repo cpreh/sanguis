@@ -13,6 +13,12 @@ sanguis::weapon_type::type sanguis::server::weapons::weapon::type() const
 	return type_;
 }
 
+void sanguis::server::weapons::weapon::update(
+	time_type const tm)
+{
+	diff.update(tm);
+}
+
 bool sanguis::server::weapons::weapon::attack(
 	entities::entity const &from,
 	messages::pos_type const& to)
@@ -27,15 +33,23 @@ sanguis::server::weapons::weapon::~weapon()
 {}
 
 sanguis::server::weapons::weapon::weapon(
-	const environment &env_,
-	const weapon_type::type type_,
-	const messages::space_unit range_,
-	const time_type base_cooldown_)
-: env_(env_),
-	type_(type_),
-	range_(range_),
+	environment const &env_,
+	weapon_type::type const type_,
+	messages::space_unit const range_,
+	time_type const base_cooldown_,
+	time_type const cast_point_)
+: diff(),
+  env_(env_),
+  type_(type_),
+  range_(range_),
   cooldown_timer(
-  	sge::time::second(base_cooldown_))
+  	sge::time::second(base_cooldown_),
+	true,
+	diff.callback()),
+  cast_point_timer(
+	sge::time::second(cast_point_),
+	false,
+	diff.callback())
 {}
 
 void sanguis::server::weapons::weapon::send(messages::base *m)

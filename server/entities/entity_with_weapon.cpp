@@ -2,6 +2,8 @@
 #include "../message_converter.hpp"
 #include "../weapons/factory.hpp"
 #include "../../messages/give_weapon.hpp"
+#include <sge/exception.hpp>
+#include <sge/text.hpp>
 #include <limits>
 
 namespace
@@ -30,7 +32,7 @@ sanguis::server::entities::entity_with_weapon::entity_with_weapon(
 	team_,
 	properties
 	),
-	weapon_(weapon_type::none),
+  weapon_(weapon_type::none),
   target_(target_undefined)
 {
 }
@@ -43,6 +45,10 @@ void sanguis::server::entities::entity_with_weapon::update(
 		time,
 		entities);
 	
+	if(has_weapon())
+		active_weapon().update(
+			time);
+
 	// entity lost its target and/or weapon or aggression or didn't have any of these
 	if (weapon_ == weapon_type::none || target() == target_undefined || !aggressive())
 	{
@@ -60,23 +66,24 @@ void sanguis::server::entities::entity_with_weapon::update(
 	// -has a weapon
 	// -has a target
 	// -is aggressive
-	if (weapon_ != weapon_type::none && target() != target_undefined && aggressive())
+	if (!has_weapon() || target() == target_undefined || !aggressive())
+		return;
+
+	weapons::weapon &wep(active_weapon());
+	if (wep.attack(*this, target()))
 	{
-		if (weapons_.find(weapon_)->second->attack(*this,target()))
+		if (!attacking())
 		{
-			if (!attacking())
-			{
-				send(message_convert<messages::start_attacking>(*this));
-				attacking(true);
-			}
+			send(message_convert<messages::start_attacking>(*this));
+			attacking(true);
 		}
-		else
+	}
+	else
+	{
+		if (attacking())
 		{
-			if (attacking())
-			{
-				send(message_convert<messages::stop_attacking>(*this));
-				attacking(false);
-			}
+			send(message_convert<messages::stop_attacking>(*this));
+			attacking(false);
 		}
 	}
 }
@@ -129,4 +136,19 @@ sanguis::messages::pos_type const &
 sanguis::server::entities::entity_with_weapon::target() const
 {
 	return target_;
+}
+
+bool sanguis::server::entities::entity_with_weapon::has_weapon() const
+{
+	return weapon_ != weapon_type::none;	
+}
+
+sanguis::server::weapons::weapon &
+sanguis::server::entities::entity_with_weapon::active_weapon()
+{
+	weapon_container::iterator const it(weapons_.find(weapon_));
+	if(it == weapons_.end())
+		throw sge::exception(
+			SGE_TEXT("No weapon active in entity_with_weapon!"));
+	return *it->second;
 }
