@@ -7,6 +7,7 @@
 #include <sge/renderer/color.hpp>
 #include <sge/renderer/colors.hpp>
 #include <boost/none.hpp>
+#include <algorithm>
 #include <limits>
 
 namespace
@@ -78,7 +79,7 @@ void sanguis::draw::healthbar::attach_to(
 			p.y() - bar_height));
 	dim(
 		sge::sprite::dim(
-			d.w(),
+			std::max(d.w(), 2 * border_size),
 			bar_height));
 }
 

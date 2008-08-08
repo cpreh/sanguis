@@ -21,7 +21,7 @@ void sanguis::draw::bullet::update(const time_type time)
 	if (!origin)
 		origin = center();
 
-	sprite::update(time);
+	model::update(time);
 
 	const sge::space_unit max_tail_length = static_cast<sge::space_unit>(160);
 	const sge::space_unit tail_length = 
