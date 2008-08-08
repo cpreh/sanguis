@@ -70,21 +70,15 @@ void sanguis::server::entities::entity_with_weapon::update(
 		return;
 
 	weapons::weapon &wep(active_weapon());
-	if (wep.attack(*this, target()))
+	if (wep.attack(*this, target()) && !attacking())
 	{
-		if (!attacking())
-		{
-			send(message_convert<messages::start_attacking>(*this));
-			attacking(true);
-		}
+		send(message_convert<messages::start_attacking>(*this));
+		attacking(true);
 	}
-	else
+	else if (attacking())
 	{
-		if (attacking())
-		{
-			send(message_convert<messages::stop_attacking>(*this));
-			attacking(false);
-		}
+		send(message_convert<messages::stop_attacking>(*this));
+		attacking(false);
 	}
 }
 
