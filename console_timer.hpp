@@ -12,6 +12,7 @@ class console_timer : boost::noncopyable
 	public:
 	console_timer(const sge::string &,const sge::space_unit);
 	sge::time::timer &v();
+	void dummy_function();
 	private:
 	sge::time::timer t;
 	sge::con::action_var<sge::space_unit>::type var;
