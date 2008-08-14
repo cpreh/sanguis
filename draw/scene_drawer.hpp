@@ -81,8 +81,6 @@ private:
 	typedef boost::function<void (const messages::base&)> dispatch_fun;
 	typedef std::map<sge::type_info, dispatch_fun> event_map;
 	event_map event_dispatcher;
-
-	//std::vector<sge::sprite::object> sprites;
 };
 
 }

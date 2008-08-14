@@ -77,7 +77,7 @@ try
 
 	// basic stuff
 	sys.init<sge::init::core>();
-	sys.init<sge::init::renderer>(sanguis::resolution().w(), sanguis::resolution().h());
+	sys.init<sge::init::renderer>(sanguis::resolution());
 	sys.init<sge::init::input>();
 	sys.init<sge::init::image_loader>();
 

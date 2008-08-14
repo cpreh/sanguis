@@ -37,6 +37,7 @@
 
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
+#include <boost/next_prior.hpp>
 
 #include <algorithm>
 #include <functional>
@@ -92,7 +93,7 @@ void sanguis::draw::scene_drawer::process_message(const client_messages::base& m
 
 void sanguis::draw::scene_drawer::draw(const time_type delta)
 {
-	for(entity_map::iterator it(entities.begin()); it != entities.end(); ++it)
+	for(entity_map::iterator it(entities.begin()); it != entities.end(); )
 	{
 		entity& e = *it->second;
 		
@@ -103,9 +104,13 @@ void sanguis::draw::scene_drawer::draw(const time_type delta)
 
 		if(e.may_be_removed())
 		{
+			entity_map::iterator const next(boost::next(it));
 			sge::cerr << "ERASING\n";
 			entities.erase(it);
+			it = next;
 		}
+		else
+			++it;
 	}
 
 	ss.render();
