@@ -17,6 +17,12 @@ CHECK_CXX_SOURCE_RUNS(
 	 }"
 	 HAVE_VARIADIC_TEMPLATES)
 
+FIND_PACKAGE(Boost 1.36.0 COMPONENTS
+	filesystem
+	serialization
+	thread,
+	program_options)
+
 IF (${CMAKE_COMPILER_IS_GNUCXX})
 	SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ansi -pedantic-errors -Wall -Wextra -Wconversion -Wfloat-equal -Winit-self -Wold-style-cast")
 ENDIF ()

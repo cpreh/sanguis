@@ -20,7 +20,7 @@ void sanguis::draw::bullet::update(const time_type time)
 {
 	if (!origin)
 		origin = center();
-
+	
 	model::update(time);
 
 	const sge::space_unit max_tail_length = static_cast<sge::space_unit>(160);
@@ -30,7 +30,10 @@ void sanguis::draw::bullet::update(const time_type time)
 	const sge::math::vector2 newsize(tail_length,sge::su(at(1).size().h()));
 	const sge::math::vector2 pos = sge::math::structure_cast<sge::space_unit>(center());
 
-	const sge::math::vector2 newpos = pos - sge::math::normalize(speed())*sge::su(0.5)*newsize.length();
+	const sge::math::vector2 newpos = 
+		speed().is_null()
+		? pos
+		: pos - sge::math::normalize(speed())*sge::su(0.5)*newsize.length();
 
 	at(1).set_center(sge::math::structure_cast<sge::sprite::unit>(newpos));
 
