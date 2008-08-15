@@ -118,7 +118,7 @@ void sanguis::draw::scene_drawer::pause(
 	bool const p)
 {
 	sge::clog << SGE_TEXT("client: drawer::pause: ") << p << SGE_TEXT('\n');
-	paused = p;	
+	paused = p;
 }
 
 sanguis::draw::player const &
@@ -134,7 +134,7 @@ void sanguis::draw::scene_drawer::operator()(const messages::add& m)
 	configure_new_object(
 		factory::entity(
 			m.id(),
-			get_system(),	
+			get_system(),
 			m.type()),
 		m);
 }
@@ -220,7 +220,7 @@ void sanguis::draw::scene_drawer::operator()(const messages::remove& m)
 void sanguis::draw::scene_drawer::operator()(const messages::resize& m)
 {
 	//sge::cerr << "in resize\n";
-	//get_entity(m.id()).dim(virtual_to_screen(ss.get_renderer()->screen_size(), m.dim()));	
+	//get_entity(m.id()).dim(virtual_to_screen(ss.get_renderer()->screen_size(), m.dim()));
 	get_entity(m.id()).dim(sge::math::structure_cast<sge::sprite::unit>(m.dim()));
 }
 

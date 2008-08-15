@@ -6,7 +6,7 @@
 #include <sge/console/var_impl.hpp>
 #include <sge/math/point_rotate.hpp>
 #include <boost/none.hpp>
-#include <iomanip>
+#include <algorithm>
 #include <cmath>
 #include <cassert>
 

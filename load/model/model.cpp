@@ -2,6 +2,7 @@
 #include <sge/exception.hpp>
 #include <sge/string.hpp>
 #include <sge/iostream.hpp>
+#include <boost/filesystem/convenience.hpp>
 #include <ostream>
 #include <utility>
 
@@ -18,7 +19,7 @@ sanguis::load::model::model::model(
 		
 		if(parts.insert(
 			std::make_pair(
-				beg->leaf(),
+				boost::filesystem::basename(*beg),
 				part(*beg)))
 		.second == false)
 			throw sge::exception(SGE_TEXT("Double insert in model::model: ") + beg->string());
