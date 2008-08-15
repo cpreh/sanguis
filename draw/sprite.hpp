@@ -38,6 +38,7 @@ protected:
 	virtual void speed(const sge::math::vector2&);
 	virtual void pos(const sge::sprite::point&);
 	virtual void dim(const sge::sprite::dim&);
+	virtual void color(sge::sprite::color);
 	virtual void visible(bool);
 
 	sge::sprite::rotation_type orientation() const;
