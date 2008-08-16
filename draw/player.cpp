@@ -47,7 +47,8 @@ void sanguis::draw::player::speed(const sge::math::vector2 &v)
 {
 	sprite::speed(v);
 	if (!v.is_null())
-		target_angle = *sge::math::angle_to<sge::space_unit>(sge::math::vector2(),v);
+		model::orientation(*sge::math::angle_to<sge::space_unit>(sge::math::vector2(),v),0);
+	//	target_angle = *sge::math::angle_to<sge::space_unit>(sge::math::vector2(),v);
 }
 
 void sanguis::draw::player::orientation(const sge::sprite::rotation_type u)
@@ -61,9 +62,9 @@ void sanguis::draw::player::update(const time_type time)
 {
 	// this rotates all sprites, so we have to back up the upper player's
 	// rotation
-	sge::sprite::rotation_type upper_backup = top_sprite().rotation();
+	//sge::sprite::rotation_type upper_backup = top_sprite().rotation();
 	model::update(time);
-	top_sprite().rotation(upper_backup);
+	//top_sprite().rotation(upper_backup);
 
 
 	/*
