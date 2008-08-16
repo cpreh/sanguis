@@ -85,7 +85,7 @@ void sanguis::draw::model_part::update(
 	const sge::space_unit abs_angle = sge::math::rel_angle_to_abs(orientation()),
 	                      abs_target = sge::math::rel_angle_to_abs(desired_orientation);
 	
-	const sge::space_unit twopi = sge::su(2)*sge::math::pi<sge::space_unit>();
+	const sge::space_unit twopi = sge::math::twopi<sge::space_unit>();
 
 	assert(abs_angle >= sge::su(0) && abs_angle <= twopi);
 	assert(abs_target >= sge::su(0) && abs_target <= twopi);
@@ -115,8 +115,12 @@ void sanguis::draw::model_part::update(
 }
 
 void sanguis::draw::model_part::orientation(
-	const sge::sprite::rotation_type rot)
+	sge::sprite::rotation_type rot)
 {
+	// FIXME: is this ok?
+	if(!sge::math::is_rel_angle(rot))
+		rot = sge::math::abs_angle_to_rel(rot);
+
 	if(sge::math::compare(desired_orientation, invalid_rotation))
 		update_orientation(rot);
 	desired_orientation = rot;

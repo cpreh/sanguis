@@ -4,7 +4,6 @@
 #include "entities/pickups/weapon.hpp"
 #include "../random.hpp"
 #include <boost/tr1/random.hpp>
-#include <sge/iostream.hpp>
 
 namespace
 {
@@ -73,7 +72,6 @@ void add_pickup(
 	sanguis::server::environment const &env,
 	sanguis::server::entities::auto_ptr e)
 {
-	sge::cerr << "server: inserting pickup\n";
 	env.insert(e);
 }
 

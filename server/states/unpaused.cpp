@@ -184,8 +184,6 @@ void sanguis::server::states::unpaused::add_enemy()
 	const messages::pos_type pos = center + screen_center;
 	const messages::space_unit angle = messages::mu(0);
 
-	sge::cerr << "server: inserting entity\n";
-
 	context<running>().insert_entity(
 		entities::auto_ptr(
 			new entities::enemies::zombie(
@@ -308,10 +306,7 @@ boost::statechart::result sanguis::server::states::unpaused::react(const tick_ev
 	const time_type delta = t.delta();
 
 	if (context<running>().enemy_timer().update_b())
-	{
-		sge::cerr << "server: enemy timer expired, adding enemy\n";
 		add_enemy();
-	}
 
 	// should we send position updates?
 	const bool update_pos = send_timer.v().update_b();
