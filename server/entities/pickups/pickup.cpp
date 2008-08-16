@@ -72,7 +72,7 @@ bool sanguis::server::entities::pickups::pickup::invulnerable() const
 	return true;
 }
 
-sanguis::messages::base *
+sanguis::messages::auto_ptr
 sanguis::server::entities::pickups::pickup::add_message() const
 {
 	return message_convert<messages::add_pickup>(*this);

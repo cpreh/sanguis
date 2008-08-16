@@ -12,7 +12,8 @@ namespace messages
 class remove : public entity_message {
 public:
 	remove();
-	explicit remove(const entity_id);
+	explicit remove(
+		entity_id);
 private:
 	friend class boost::serialization::access;
 	template<typename Archive>

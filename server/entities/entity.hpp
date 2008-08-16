@@ -29,13 +29,13 @@ public:
 	typedef std::map<property::type::enum_type,property> property_map;
 protected:
 	entity(
-		const environment &,
-		const armor_array &,
-		const messages::pos_type &pos,
-		const messages::space_unit angle,
-		const messages::space_unit direction,
-		const team::type team,
-		const property_map properties);
+		environment const &,
+		armor_array const &,
+		messages::pos_type const &pos,
+		messages::space_unit angle,
+		messages::space_unit direction,
+		team::type team,
+		property_map properties);
 public:
 	entity_id id() const;
 
@@ -87,12 +87,11 @@ public:
 	void add_perk(
 		perks::perk_auto_ptr); 
 	
-	// TODO: this should be an auto_ptr to a const message
-	virtual messages::base *add_message() const;
+	virtual messages::auto_ptr add_message() const;
 
 	virtual ~entity();
 protected:
-	void send(messages::base *); // TODO: this should be an auto_ptr
+	void send(messages::auto_ptr);
 	entity &insert(auto_ptr); 
 	const environment &get_environment() const;
 

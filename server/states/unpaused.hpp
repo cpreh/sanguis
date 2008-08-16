@@ -2,7 +2,8 @@
 #define SANGUIS_SERVER_STATES_UNPAUSED_HPP_INCLUDED
 
 #include "running.hpp"
-
+#include "../../messages/fwd.hpp"
+#include "../../net/types.hpp"
 #include <boost/mpl/list.hpp>
 #include <boost/statechart/simple_state.hpp>
 #include <boost/statechart/result.hpp>
@@ -30,7 +31,9 @@ class unpaused
 	unpaused();
 
 	void add_enemy();
-	void create_game(const net::id_type,const messages::client_info &);
+	void create_game(
+		net::id_type,
+		messages::client_info const &);
 
 	// reactions
 	boost::statechart::result react(const tick_event&);

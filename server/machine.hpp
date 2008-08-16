@@ -46,10 +46,10 @@ struct machine
 	void disconnect_callback(const net::id_type,const net::string_type &);
 	void data_callback(const net::id_type,const net::data_type &);
 
-	void send(messages::base *const m);
+	void send(messages::auto_ptr m);
 	void console_print(const sge::string &);
-	net::port_type port() const { return port_; }
-	net::server &net() { return net_; }
+	net::port_type port() const;
+	net::server &net();
 	void listen();
 
 	private:

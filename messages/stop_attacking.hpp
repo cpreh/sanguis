@@ -12,7 +12,7 @@ namespace messages
 class stop_attacking : public entity_message {
 public:
 	stop_attacking();
-	stop_attacking(
+	explicit stop_attacking(
 		entity_id id);
 private:
 	friend class boost::serialization::access;

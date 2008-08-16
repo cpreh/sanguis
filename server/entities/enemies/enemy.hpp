@@ -33,7 +33,7 @@ protected:
 		time_type,
 		container &);
 private:
-	messages::base *add_message() const;
+	messages::auto_ptr add_message() const;
 
 	entity_type::type type() const;
 

@@ -23,7 +23,7 @@ public:
 	
 	weapon_type::type wtype() const;
 private:
-	messages::base *add_message() const;
+	messages::auto_ptr add_message() const;
 
 	void do_pickup(
 		entity_with_weapon &receiver);

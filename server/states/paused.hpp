@@ -2,7 +2,8 @@
 #define SANGUIS_SERVER_STATES_PAUSED_HPP_INCLUDED
 
 #include "running.hpp"
-#include "../../messages/types.hpp"
+#include "../../messages/fwd.hpp"
+#include "../../net/types.hpp"
 
 #include <boost/mpl/list.hpp>
 #include <boost/statechart/simple_state.hpp>

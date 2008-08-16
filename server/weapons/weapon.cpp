@@ -55,12 +55,14 @@ sanguis::server::weapons::weapon::weapon(
 	diff.callback())
 {}
 
-void sanguis::server::weapons::weapon::send(messages::base *m)
+void sanguis::server::weapons::weapon::send(
+	messages::auto_ptr m)
 {
 	env_.send(m);
 }
 
-sanguis::server::environment sanguis::server::weapons::weapon::get_environment() const
+sanguis::server::environment
+sanguis::server::weapons::weapon::get_environment() const
 {
 	return env_;
 }

@@ -34,7 +34,7 @@ private:
 	entity_type::type type() const;
 	bool invulnerable() const;
 
-	messages::base *add_message() const;
+	messages::auto_ptr add_message() const;
 
 	pickup_type::type ptype_;
 };

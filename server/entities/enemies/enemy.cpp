@@ -45,7 +45,7 @@ void sanguis::server::entities::enemies::enemy::update(
 		entities);
 }
 
-sanguis::messages::base *
+sanguis::messages::auto_ptr
 sanguis::server::entities::enemies::enemy::add_message() const
 {
 	return message_convert<messages::add_enemy>(*this);

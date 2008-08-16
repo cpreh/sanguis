@@ -5,6 +5,7 @@
 #include "../../messages/experience.hpp"
 #include "../../messages/level_up.hpp"
 #include <sge/iostream.hpp>
+#include <boost/foreach.hpp>
 #include <boost/bind.hpp>
 #include <ostream>
 
@@ -67,16 +68,24 @@ void sanguis::server::states::running::divide_exp(const messages::exp_type exp)
 	if (exp == static_cast<messages::exp_type>(0))
 		return;
 
-	for (running::player_map::iterator i = context<running>().players().begin(); i != context<running>().players().end(); ++i)
+	BOOST_FOREACH(running::player_map::reference ref, context<running>().players())
 	{
-		entities::player &p = *(i->second);
-		p.exp(p.exp()+exp);
-		context<running>().send(new messages::experience(p.id(),p.exp()));
+		entities::player &p = *ref.second;
+		p.exp(p.exp() + exp);
+		context<running>().send(
+			messages::auto_ptr(
+				new messages::experience(
+					p.id(),
+					p.exp())));
 	}
 }
 
 void sanguis::server::states::running::level_callback(entities::player &p,const messages::level_type)
 {
 	// no message_converter here because it operates on a _specific_ entity type
-	context<running>().send(new messages::level_up(p.id(),p.level()));
+	context<running>().send(
+		messages::auto_ptr(
+			new messages::level_up(
+				p.id(),
+				p.level())));
 }

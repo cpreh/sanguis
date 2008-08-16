@@ -210,7 +210,7 @@ void sanguis::server::entities::entity::add_perk(
 	perks_.push_back(p);
 }
 
-sanguis::messages::base *
+sanguis::messages::auto_ptr
 sanguis::server::entities::entity::add_message() const
 {
 	return message_convert<messages::add>(*this);
@@ -220,9 +220,11 @@ sanguis::server::entities::entity::~entity()
 {}
 
 void sanguis::server::entities::entity::send(
-	messages::base *const message)
+	messages::auto_ptr message)
 {
-	get_environment().send(message);
+	get_environment().send(
+		messages::auto_ptr(
+			message));
 }
 
 const sanguis::server::environment &sanguis::server::entities::entity::get_environment() const

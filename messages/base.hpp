@@ -3,6 +3,7 @@
 
 #include <sge/shared_ptr.hpp>
 #include <boost/serialization/access.hpp>
+#include <memory>
 
 namespace sanguis
 {
@@ -18,6 +19,8 @@ private:
 	template<typename Archive>
 	void serialize(Archive &ar, unsigned);
 };
+
+typedef std::auto_ptr<messages::base> auto_ptr;
 
 }
 

@@ -25,7 +25,7 @@ sanguis::server::entities::pickups::weapon::wtype() const
 	return weapon_type_;
 }
 
-sanguis::messages::base *
+sanguis::messages::auto_ptr
 sanguis::server::entities::pickups::weapon::add_message() const
 {
 	return message_convert<messages::add_weapon_pickup>(*this);

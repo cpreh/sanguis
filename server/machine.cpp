@@ -72,9 +72,21 @@ void sanguis::server::machine::data_callback(const net::id_type id,
 	clients[id].in_buffer = deserialize(clients[id].in_buffer+data,boost::bind(&machine::process_message,this,id,_1));
 }
 
-void sanguis::server::machine::send(messages::base* const m) 
+void sanguis::server::machine::send(messages::auto_ptr m) 
 { 
 	const net::data_type m_str = serialize(message_ptr(m));
 	for (client_map::iterator i = clients.begin(); i != clients.end(); ++i)
 		i->second.out_buffer += m_str;
+}
+
+net::port_type
+sanguis::server::machine::port() const
+{
+	return port_;
+}
+
+net::server &
+sanguis::server::machine::net()
+{
+	return net_;
 }

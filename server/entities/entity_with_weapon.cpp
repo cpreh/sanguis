@@ -107,9 +107,10 @@ void sanguis::server::entities::entity_with_weapon::add_weapon(weapons::weapon_p
 		throw sge::exception(SGE_TEXT("couldn't insert weapon"));
 
 	get_environment().send(
-		new messages::give_weapon(
-			id(),
-			wt));
+		messages::auto_ptr(
+			new messages::give_weapon(
+				id(),
+				wt)));
 }
 
 void sanguis::server::entities::entity_with_weapon::remove_weapon(const weapon_type::type type_)

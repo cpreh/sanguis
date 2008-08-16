@@ -3,6 +3,7 @@
 
 #include "../../time_type.hpp"
 #include "../../messages/types.hpp"
+#include "../../messages/base.hpp"
 #include "../../weapon_type.hpp"
 #include "../../diff_clock.hpp"
 #include "../environment.hpp"
@@ -42,7 +43,8 @@ protected:
 		messages::pos_type const& to) = 0;
 	
 	entities::entity &insert(entities::auto_ptr);
-	void send(messages::base *);
+	void send(
+		messages::auto_ptr);
 	environment get_environment() const;
 private:
 	bool in_range(

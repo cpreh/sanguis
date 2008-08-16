@@ -57,7 +57,11 @@ void sanguis::server::states::unpaused::create_game(const net::id_type net_id,co
 
 	sge::clog << SGE_TEXT("server: sending game messages\n");
 
-	context<running>().send(new messages::game_state(game_state(truncation_check_cast<game_state::score_type>(0))));
+	context<running>().send(
+		messages::auto_ptr(
+			new messages::game_state(
+				game_state(
+					truncation_check_cast<game_state::score_type>(0)))));
 
 	sge::cerr << "server: inserting player\n";
 	entities::entity &raw_player = context<running>().insert_entity(
@@ -89,8 +93,16 @@ void sanguis::server::states::unpaused::create_game(const net::id_type net_id,co
 
 	// send start experience
 	// no message_converter here because it operates on a _specific_ entity type
-	context<running>().send(new messages::experience(p.id(),p.exp()));
-	context<running>().send(new messages::level_up(p.id(),p.level()));
+	context<running>().send(
+		messages::auto_ptr(
+			new messages::experience(
+				p.id(),
+				p.exp())));
+	context<running>().send(
+		messages::auto_ptr(
+			new messages::level_up(
+				p.id(),
+				p.level())));
 
 	context<running>().enemy_timer().reset();
 }
@@ -112,7 +124,11 @@ boost::statechart::result sanguis::server::states::unpaused::operator()(const ne
 
 	player_.change_weapon(type);
 
-	context<running>().send(new messages::change_weapon(player_.id(), e.weapon()));
+	context<running>().send(
+		messages::auto_ptr(
+			new messages::change_weapon(
+				player_.id(),
+				e.weapon())));
 	return discard_event();
 }
 
@@ -251,7 +267,9 @@ boost::statechart::result sanguis::server::states::unpaused::operator()(const ne
 {
 	sge::cout << SGE_TEXT("server: pausing\n");
 
-	context<running>().send(new messages::pause());
+	context<running>().send(
+		messages::auto_ptr(
+			new messages::pause()));
 	
 	return transit<paused>();
 }
@@ -337,9 +355,13 @@ boost::statechart::result sanguis::server::states::unpaused::react(const tick_ev
 	return discard_event();
 }
 
-boost::statechart::result sanguis::server::states::unpaused::react(const message_event &m)
+boost::statechart::result
+sanguis::server::states::unpaused::react(
+	message_event const &m)
 {
-	message_functor<unpaused,boost::statechart::result> mf(*this,m.id);
+	message_functor<unpaused,boost::statechart::result> mf(
+		*this,
+		m.id);
 
 	return dispatch_type<
 		boost::mpl::vector<

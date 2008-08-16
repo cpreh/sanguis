@@ -54,7 +54,9 @@ boost::statechart::result sanguis::server::states::paused::operator()(const net:
 boost::statechart::result sanguis::server::states::paused::operator()(const net::id_type,const messages::player_unpause &)
 {
 	sge::cout << SGE_TEXT("server: unpausing\n");
-	context<running>().send(new messages::unpause());
+	context<running>().send(
+		messages::auto_ptr(
+			new messages::unpause()));
 	return transit<unpaused>();
 }
 
