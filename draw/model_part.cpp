@@ -90,28 +90,23 @@ void sanguis::draw::model_part::update(
 	assert(abs_angle >= sge::su(0) && abs_angle <= twopi);
 	assert(abs_target >= sge::su(0) && abs_target <= twopi);
 
-	const sge::space_unit abs_dist = std::abs(abs_target - abs_angle);
-	const sge::space_unit swap_dist = (abs_angle > abs_target) ? twopi-abs_angle+abs_target : twopi-abs_target+abs_angle;
-	const sge::space_unit min_dist = std::min(swap_dist,abs_dist);
+	const sge::space_unit abs_dist = std::abs(abs_target - abs_angle),
+	                      swap_dist = (abs_angle > abs_target) ? twopi-abs_angle+abs_target : twopi-abs_target+abs_angle,
+	                      min_dist = std::min(swap_dist,abs_dist);
 
 	assert(abs_dist >= sge::su(0) && swap_dist >= sge::su(0) && min_dist >= sge::su(0));
 
-	sge::space_unit dir;
-	if (abs_angle > abs_target)
-		dir = (swap_dist > abs_dist) ? sge::su(-1) : sge::su(1);
-	else
-		dir = (swap_dist > abs_dist) ? sge::su(1) : sge::su(-1);
+	sge::space_unit const dir
+		= abs_angle > abs_target
+		? ((swap_dist > abs_dist) ? sge::su(-1) : sge::su(1))
+		: ((swap_dist > abs_dist) ? sge::su(1) : sge::su(-1));
 
-	const sge::space_unit turning_speed = rotation_speed.value();
+	sge::space_unit const turning_speed = rotation_speed.value();
 
-	sge::space_unit new_angle;
-
-	if (min_dist < time/turning_speed)
-		new_angle = desired_orientation;
-	else
-		new_angle = sge::math::abs_angle_to_rel(abs_angle + dir * time * turning_speed);
-
-	update_orientation(new_angle);
+	update_orientation(
+		min_dist < time / turning_speed
+		? desired_orientation
+		: sge::math::abs_angle_to_rel(abs_angle + dir * time * turning_speed));
 }
 
 void sanguis::draw::model_part::orientation(
