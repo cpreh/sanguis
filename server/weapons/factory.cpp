@@ -34,7 +34,7 @@ sanguis::server::weapons::create(
 			new pistol(
 				env,
 				type,
-				static_cast<time_type>(0.25),
+				static_cast<time_type>(0.33),
 				messages::mu(5),
 				static_cast<time_type>(0.2)
 				));
@@ -43,7 +43,7 @@ sanguis::server::weapons::create(
 			new shotgun(
 				env,
 				type,
-				static_cast<time_type>(2), // cooldown
+				static_cast<time_type>(1), // cooldown
 				messages::mu(0.2), // spread radius
 				10, // shells
 				messages::mu(1) // damage
