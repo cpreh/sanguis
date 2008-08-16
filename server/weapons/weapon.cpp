@@ -25,6 +25,9 @@ bool sanguis::server::weapons::weapon::attack(
 {
 	if(!cooldown_timer.update_b() || !in_range(from, to))
 		return false;
+	
+	cast_point_timer.activate();
+
 	do_attack(from, to);
 	return true;
 }

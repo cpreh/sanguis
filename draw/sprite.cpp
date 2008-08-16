@@ -108,7 +108,13 @@ void sanguis::draw::sprite::pos(const sge::sprite::point& p)
 void sanguis::draw::sprite::dim(const sge::sprite::dim& d)
 {
 	BOOST_FOREACH(object &s, sprites)
-		s.size() = d;
+		s.size(d);
+}
+
+void sanguis::draw::sprite::color(sge::sprite::color const c)
+{
+	BOOST_FOREACH(object &s, sprites)
+		s.set_color(c);
 }
 
 void sanguis::draw::sprite::visible(const bool v)

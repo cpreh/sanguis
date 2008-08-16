@@ -92,10 +92,11 @@ void sanguis::draw::scene_drawer::process_message(const client_messages::base& m
 
 void sanguis::draw::scene_drawer::draw(const time_type delta)
 {
-	for(entity_map::iterator it(entities.begin()); it != entities.end(); ++it)
+	for(entity_map::iterator it(entities.begin()), next(it); it != entities.end(); it = next)
 	{
 		entity& e = *it->second;
-		
+		++next;
+
 		e.update(
 			paused
 			? 0
@@ -103,8 +104,8 @@ void sanguis::draw::scene_drawer::draw(const time_type delta)
 
 		if(e.may_be_removed())
 		{
-			sge::cerr << "ERASING\n";
 			entities.erase(it);
+			sge::cerr << "ERASING\n";
 		}
 	}
 
@@ -117,7 +118,7 @@ void sanguis::draw::scene_drawer::pause(
 	bool const p)
 {
 	sge::clog << SGE_TEXT("client: drawer::pause: ") << p << SGE_TEXT('\n');
-	paused = p;	
+	paused = p;
 }
 
 sanguis::draw::player const &
@@ -133,7 +134,7 @@ void sanguis::draw::scene_drawer::operator()(const messages::add& m)
 	configure_new_object(
 		factory::entity(
 			m.id(),
-			get_system(),	
+			get_system(),
 			m.type()),
 		m);
 }
@@ -219,7 +220,7 @@ void sanguis::draw::scene_drawer::operator()(const messages::remove& m)
 void sanguis::draw::scene_drawer::operator()(const messages::resize& m)
 {
 	//sge::cerr << "in resize\n";
-	//get_entity(m.id()).dim(virtual_to_screen(ss.get_renderer()->screen_size(), m.dim()));	
+	//get_entity(m.id()).dim(virtual_to_screen(ss.get_renderer()->screen_size(), m.dim()));
 	get_entity(m.id()).dim(sge::math::structure_cast<sge::sprite::unit>(m.dim()));
 }
 
