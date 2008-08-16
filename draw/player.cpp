@@ -59,8 +59,14 @@ void sanguis::draw::player::orientation(const sge::sprite::rotation_type u)
 
 void sanguis::draw::player::update(const time_type time)
 {
+	// this rotates all sprites, so we have to back up the upper player's
+	// rotation
+	sge::sprite::rotation_type upper_backup = top_sprite().rotation();
 	model::update(time);
+	top_sprite().rotation(upper_backup);
 
+
+	/*
 	// FIXME: load rotation point (see above)
 	const sge::math::vector2 leg_center(sge::math::structure_cast<sge::space_unit>(player_leg_center));
 	const sge::math::vector2 body_center(sge::math::structure_cast<sge::space_unit>(player_body_center));
@@ -88,7 +94,8 @@ void sanguis::draw::player::update(const time_type time)
 	else
 		dir = (swap_dist > abs_dist) ? sge::su(1) : sge::su(-1);
 
-	/* DEBUG
+	#if 0
+	DEBUG
 	if (!sge::math::nearly_equals(target_angle,angle_))
 	{
 		sge::cout << "a = " 
@@ -96,7 +103,8 @@ void sanguis::draw::player::update(const time_type time)
 							<< sge::math::rad_to_deg(abs_target) << ", abs_dist = " 
 							<< sge::math::rad_to_deg(abs_dist) << ", swap_dist = " 
 							<< sge::math::rad_to_deg(swap_dist) << ", dir = " << dir << "\n";
-	} */
+	}
+	#endif
 
 	if (min_dist < time/turning_speed.value())
 		angle_ = target_angle;
@@ -121,6 +129,7 @@ void sanguis::draw::player::update(const time_type time)
 	const sge::math::vector2 top_pos = rot_abs - body_center;
 
 	top_sprite().pos() = sge::math::structure_cast<sge::sprite::unit>(top_pos);
+	*/
 }
 
 sanguis::draw::object& sanguis::draw::player::bottom_sprite()
