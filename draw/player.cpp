@@ -48,25 +48,33 @@ void sanguis::draw::player::speed(const sge::math::vector2 &v)
 	sprite::speed(v);
 	if (!v.is_null())
 		model::orientation(*sge::math::angle_to<sge::space_unit>(sge::math::vector2(),v),0);
-	//	target_angle = *sge::math::angle_to<sge::space_unit>(sge::math::vector2(),v);
 }
 
 void sanguis::draw::player::orientation(const sge::sprite::rotation_type u)
 {
 	model::orientation(u, 1); // TODO: better interface for this in model
-	//model::orientation(u);
-//	top_sprite().rotation(u);
 }
 
 void sanguis::draw::player::update(const time_type time)
 {
-	// this rotates all sprites, so we have to back up the upper player's
-	// rotation
-	//sge::sprite::rotation_type upper_backup = top_sprite().rotation();
 	model::update(time);
-	//top_sprite().rotation(upper_backup);
 
+	sge::math::vector2 const leg_center(sge::math::structure_cast<sge::space_unit>(player_leg_center));
+	sge::math::vector2 const body_center(sge::math::structure_cast<sge::space_unit>(player_body_center));
 
+	sge::sprite::rotation_type const sprite_rotation = bottom_sprite().rotation();
+
+	sge::math::vector2 const new_rotation = sge::math::point_rotate(
+		leg_center,
+		sge::math::vector2(sge::su(bottom_sprite().w()/2),sge::su(bottom_sprite().h()/2)),
+		sprite_rotation);
+
+	sge::math::vector2 const rot_abs = 
+		sge::math::structure_cast<sge::space_unit>(bottom_sprite().pos())+new_rotation;
+
+	sge::math::vector2 const top_pos = rot_abs - body_center;
+
+	top_sprite().pos() = sge::math::structure_cast<sge::sprite::unit>(top_pos);
 	/*
 	// FIXME: load rotation point (see above)
 	const sge::math::vector2 leg_center(sge::math::structure_cast<sge::space_unit>(player_leg_center));
