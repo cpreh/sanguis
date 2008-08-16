@@ -12,18 +12,19 @@ namespace server
 namespace weapons
 {
 
+class delayed_attack;
+
 class melee : public weapon {
 public:
 	melee(
-		const environment &,
-		const weapon_type::type,
+		environment const &,
+		weapon_type::type,
 		messages::space_unit range,
 		time_type base_cooldown,
 		messages::space_unit damage);
 private:
 	void do_attack(
-		entities::entity const &from,
-		messages::pos_type const& to);
+		delayed_attack const &);
 	messages::space_unit damage;
 };
 

@@ -11,6 +11,8 @@ namespace server
 namespace weapons
 {
 
+class delayed_attack;
+
 class shotgun : public weapon {
 public:
 	shotgun(
@@ -22,8 +24,7 @@ public:
 		messages::space_unit damage);
 private:
 	void do_attack(
-		entities::entity const &from,
-		messages::pos_type const &to);
+		delayed_attack const &);
 	
 	messages::space_unit spread_radius;
 	unsigned             shells;

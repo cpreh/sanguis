@@ -17,6 +17,13 @@ void sanguis::server::weapons::weapon::update(
 	time_type const tm)
 {
 	diff.update(tm);
+	if(cast_point_timer.update_b())
+	{
+		do_attack(
+			*delayed_attack_);
+		cast_point_timer.deactivate();
+		delayed_attack_.reset();
+	}
 }
 
 bool sanguis::server::weapons::weapon::attack(
@@ -27,8 +34,12 @@ bool sanguis::server::weapons::weapon::attack(
 		return false;
 	
 	cast_point_timer.activate();
-
-	do_attack(from, to);
+	delayed_attack_.reset(
+		delayed_attack(
+			from.center(),
+			from.angle(),
+			from.team(),
+			to));
 	return true;
 }
 

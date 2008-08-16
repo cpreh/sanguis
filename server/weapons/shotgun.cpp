@@ -1,4 +1,5 @@
 #include "shotgun.hpp"
+#include "delayed_attack.hpp"
 #include "../damage_types.hpp"
 #include "../entities/entity.hpp"
 #include "../entities/projectiles/simple_bullet.hpp"
@@ -16,15 +17,16 @@ sanguis::server::weapons::shotgun::shotgun(
 	env,
 	type_,
 	1000, // FIXME
-	base_cooldown),
+	base_cooldown,
+	static_cast<time_type>(
+		0.5)), // FIXME
   spread_radius(spread_radius),
   shells(shells),
   damage(damage)
 {}
 
 void sanguis::server::weapons::shotgun::do_attack(
-	entities::entity const &from,
-	messages::pos_type const &)
+	delayed_attack const &a)
 {
 	typedef std::tr1::normal_distribution<
 		messages::space_unit
@@ -38,8 +40,8 @@ void sanguis::server::weapons::shotgun::do_attack(
 	rng_type rng(
 		create_seeded_randgen(),
 		normal_distribution_su(
-			from.angle(), // mean value
-			spread_radius // sigma, TODO: find a good sigma with a given spread_radius!
+			a.angle(), // mean value
+			spread_radius // sigma
 		));
 
 	for(unsigned i = 0; i < shells; ++i)
@@ -48,8 +50,8 @@ void sanguis::server::weapons::shotgun::do_attack(
 				new entities::projectiles::simple_bullet(
 					get_environment(),
 					damage::list(damage::normal = messages::mu(1)),
-					from.center(),
+					a.spawn_point(),
 					rng(),
-					from.team(),
+					a.team(),
 					damage)));
 }

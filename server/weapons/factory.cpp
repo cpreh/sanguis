@@ -3,12 +3,12 @@
 #include "pistol.hpp"
 #include "shotgun.hpp"
 #include <sge/exception.hpp>
-#include <sge/string.hpp>
+#include <sge/text.hpp>
 
 sanguis::server::weapons::weapon_ptr
 sanguis::server::weapons::create(
-	const weapon_type::type type,
-	const environment &env)
+	weapon_type::type const type,
+	environment const &env)
 {
 	switch(type) {
 	case weapon_type::melee:
@@ -26,7 +26,8 @@ sanguis::server::weapons::create(
 				env,
 				type,
 				static_cast<time_type>(0.5),
-				messages::mu(5)
+				messages::mu(5),
+				static_cast<time_type>(0.2)
 				));
 	case weapon_type::dual_pistol:
 		return weapon_ptr(
@@ -34,7 +35,8 @@ sanguis::server::weapons::create(
 				env,
 				type,
 				static_cast<time_type>(0.25),
-				messages::mu(5)
+				messages::mu(5),
+				static_cast<time_type>(0.2)
 				));
 	case weapon_type::shotgun:
 		return weapon_ptr(
@@ -47,6 +49,7 @@ sanguis::server::weapons::create(
 				messages::mu(1) // damage
 				));
 	default:
-		throw sge::exception(SGE_TEXT("Cannot create weapon for given weapon type!"));
+		throw sge::exception(
+			SGE_TEXT("Cannot create weapon for given weapon type!"));
 	}
 }

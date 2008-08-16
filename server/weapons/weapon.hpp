@@ -8,8 +8,9 @@
 #include "../../diff_clock.hpp"
 #include "../environment.hpp"
 #include "../entities/entity_fwd.hpp"
+#include "delayed_attack.hpp"
 #include <sge/time/timer.hpp>
-#include <boost/function.hpp>
+#include <boost/optional.hpp>
 #include <memory>
 
 namespace sanguis
@@ -36,11 +37,10 @@ protected:
 		const weapon_type::type,
 		messages::space_unit range,
 		time_type base_cooldown,
-		time_type cast_point = 0);
+		time_type cast_point);
 
 	virtual void do_attack(
-		entities::entity const &from,
-		messages::pos_type const& to) = 0;
+		delayed_attack const &) = 0;
 	
 	entities::entity &insert(entities::auto_ptr);
 	void send(
@@ -51,12 +51,14 @@ private:
 		entities::entity const& from,
 		messages::pos_type const& to) const;
 
-	diff_clock           diff;
-	environment          env_;
-	weapon_type::type    type_;
-	messages::space_unit range_;
-	sge::time::timer     cooldown_timer,
-	                     cast_point_timer;
+	diff_clock              diff;
+	environment             env_;
+	weapon_type::type       type_;
+	messages::space_unit    range_;
+	sge::time::timer        cooldown_timer,
+	                        cast_point_timer;
+	boost::optional<
+		delayed_attack> delayed_attack_;
 };
 
 typedef std::auto_ptr<weapon> weapon_ptr;
