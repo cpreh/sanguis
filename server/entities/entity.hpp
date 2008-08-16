@@ -23,6 +23,10 @@ namespace entities
 
 class entity {
 public:
+	// TODO: fix all occurences of messages:: in entities!
+	typedef messages::space_unit space_unit;
+	typedef messages::pos_type   pos_type;
+	typedef messages::dim_type   dim_type;
 	typedef messages::space_unit time_type;
 	typedef messages::space_unit health_type;
 

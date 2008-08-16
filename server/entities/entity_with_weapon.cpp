@@ -47,7 +47,8 @@ void sanguis::server::entities::entity_with_weapon::update(
 	
 	if(has_weapon())
 		active_weapon().update(
-			time);
+			time,
+			*this);
 
 	// entity lost its target and/or weapon or aggression or didn't have any of these
 	if (weapon_ == weapon_type::none || target() == target_undefined || !aggressive())

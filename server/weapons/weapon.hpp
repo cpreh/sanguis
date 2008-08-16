@@ -8,7 +8,6 @@
 #include "../../diff_clock.hpp"
 #include "../environment.hpp"
 #include "../entities/entity_fwd.hpp"
-#include "delayed_attack.hpp"
 #include <sge/time/timer.hpp>
 #include <boost/optional.hpp>
 #include <memory>
@@ -21,21 +20,27 @@ namespace server
 namespace weapons
 {
 
+class delayed_attack;
+
 class weapon {
 public:
-	messages::space_unit range() const;
+	typedef messages::space_unit space_unit;
+	typedef messages::pos_type   pos_type;
+
+	space_unit range() const;
 	bool attack(
 		entities::entity const &from,
-		messages::pos_type const& to);
+		pos_type const& to);
 	weapon_type::type type() const;
 	void update(
-		time_type);
+		time_type,
+		entities::entity const &owner);
 	virtual ~weapon();
 protected:
 	weapon(
 		const sanguis::server::environment &,
 		const weapon_type::type,
-		messages::space_unit range,
+		space_unit range,
 		time_type base_cooldown,
 		time_type cast_point);
 
@@ -49,16 +54,16 @@ protected:
 private:
 	bool in_range(
 		entities::entity const& from,
-		messages::pos_type const& to) const;
+		pos_type const& to) const;
 
 	diff_clock              diff;
 	environment             env_;
 	weapon_type::type       type_;
-	messages::space_unit    range_;
+	space_unit              range_;
 	sge::time::timer        cooldown_timer,
 	                        cast_point_timer;
 	boost::optional<
-		delayed_attack> delayed_attack_;
+		pos_type>       attack_dest;
 };
 
 typedef std::auto_ptr<weapon> weapon_ptr;

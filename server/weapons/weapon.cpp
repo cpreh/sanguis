@@ -1,4 +1,5 @@
 #include "weapon.hpp"
+#include "delayed_attack.hpp"
 #include "../entities/entity.hpp"
 #include <sge/time/second.hpp>
 
@@ -14,15 +15,20 @@ sanguis::weapon_type::type sanguis::server::weapons::weapon::type() const
 }
 
 void sanguis::server::weapons::weapon::update(
-	time_type const tm)
+	time_type const tm,
+	entities::entity const &owner)
 {
 	diff.update(tm);
 	if(cast_point_timer.update_b())
 	{
 		do_attack(
-			*delayed_attack_);
+			delayed_attack(
+				owner.center(),
+				owner.angle(),
+				owner.team(),
+				*attack_dest));
 		cast_point_timer.deactivate();
-		delayed_attack_.reset();
+		attack_dest.reset();
 	}
 }
 
@@ -34,12 +40,8 @@ bool sanguis::server::weapons::weapon::attack(
 		return false;
 	
 	cast_point_timer.activate();
-	delayed_attack_.reset(
-		delayed_attack(
-			from.center(),
-			from.angle(),
-			from.team(),
-			to));
+	attack_dest.reset(
+		to);
 	return true;
 }
 
