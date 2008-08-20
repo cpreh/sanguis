@@ -90,7 +90,7 @@ environment::load_animation(
 	}
 
 	// and parse line by line
-	sge::text_ifstream file(framesfile);
+	sge::ifstream file(framesfile);
 	if (!file.is_open())
 		throw sge::exception(SGE_TEXT("error opening file \"")+framesfile.string()+SGE_TEXT("\""));
 	
@@ -123,7 +123,7 @@ environment::load_animation(
 
 		if (!const_delay)
 		{
-			sge::text_istringstream ss(line);
+			sge::istringstream ss(line);
 			sge::time::unit temp_delay;
 			ss >> temp_delay >> std::ws;
 			if (!ss)
@@ -168,7 +168,7 @@ void environment::load_textures()
 			continue;
 		
 		// and parse line by line
-		sge::text_ifstream file(p);
+		sge::ifstream file(p);
 		if (!file.is_open())
 			throw sge::exception(SGE_TEXT("error opening id file \"")+p.string()+SGE_TEXT("\""));
 
