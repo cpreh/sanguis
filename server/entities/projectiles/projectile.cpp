@@ -54,6 +54,7 @@ void sanguis::server::entities::projectiles::projectile::update(
 		entities)
 	{
 		if(e.team() != team()
+		&& !e.dead()
 		&& collides(
 			e,
 			*this))
