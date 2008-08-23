@@ -51,9 +51,11 @@ class unpaused
 	boost::statechart::result handle_default_msg(const net::id_type,const messages::base &);
 
 	void get_player_exp(const sge::con::arg_list &);
+private:
+	environment const get_environment();
+	void send(
+		messages::auto_ptr);
 
-	environment get_environment();
-	private:
 	console_timer send_timer;
 };
 

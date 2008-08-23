@@ -31,6 +31,7 @@ private:
 	sge::time::timer spawn_timer;
 	unsigned         total_spawn_count;
 	enemy_type::type etype;
+	unsigned         spawn_count;
 };
 
 }

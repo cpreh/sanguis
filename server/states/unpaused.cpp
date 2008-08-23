@@ -56,7 +56,7 @@ void sanguis::server::states::unpaused::create_game(const net::id_type net_id,co
 
 	sge::clog << SGE_TEXT("server: sending game messages\n");
 
-	context<running>().send(
+	send(
 		messages::auto_ptr(
 			new messages::game_state(
 				game_state(
@@ -86,18 +86,18 @@ void sanguis::server::states::unpaused::create_game(const net::id_type net_id,co
 	context<running>().players()[net_id] = &p;
 
 	p.add_weapon(weapons::create(weapon_type::melee,get_environment()));
-	//context<running>().send(new messages::give_weapon(p.id(),weapon_type::melee));
+	//send(new messages::give_weapon(p.id(),weapon_type::melee));
 	p.add_weapon(weapons::create(weapon_type::pistol,get_environment()));
-	//context<running>().send(new messages::give_weapon(p.id(),weapon_type::pistol));
+	//send(new messages::give_weapon(p.id(),weapon_type::pistol));
 
 	// send start experience
 	// no message_converter here because it operates on a _specific_ entity type
-	context<running>().send(
+	send(
 		messages::auto_ptr(
 			new messages::experience(
 				p.id(),
 				p.exp())));
-	context<running>().send(
+	send(
 		messages::auto_ptr(
 			new messages::level_up(
 				p.id(),
@@ -123,7 +123,7 @@ boost::statechart::result sanguis::server::states::unpaused::operator()(const ne
 
 	player_.change_weapon(type);
 
-	context<running>().send(
+	send(
 		messages::auto_ptr(
 			new messages::change_weapon(
 				player_.id(),
@@ -148,7 +148,7 @@ boost::statechart::result sanguis::server::states::unpaused::operator()(const ne
 		+ angle_to_vector(player_.direction()) * 100);
 
 	player_.angle(e.angle());
-	context<running>().send(message_convert<messages::rotate>(player_));
+	send(message_convert<messages::rotate>(player_));
 	return discard_event();
 }
 
@@ -197,7 +197,7 @@ boost::statechart::result sanguis::server::states::unpaused::operator()(const ne
 		player_.direction(*sge::math::angle_to<messages::space_unit>(e.dir()));
 	}
 
-	context<running>().send(message_convert<messages::speed>(player_));
+	send(message_convert<messages::speed>(player_));
 	return discard_event();
 }
 
@@ -218,7 +218,7 @@ boost::statechart::result sanguis::server::states::unpaused::operator()(const ne
 {
 	sge::cout << SGE_TEXT("server: pausing\n");
 
-	context<running>().send(
+	send(
 		messages::auto_ptr(
 			new messages::pause()));
 	
@@ -239,32 +239,17 @@ boost::statechart::result sanguis::server::states::unpaused::operator()(const ne
 
 void sanguis::server::states::unpaused::get_player_exp(const sge::con::arg_list &)
 {
-	context<running>().console_print(
+	/*context<running>().console_print(
 		SGE_TEXT("player experience is: ")+
 			boost::lexical_cast<sge::string>(
-				context<running>().players().begin()->second->exp()));
-}
-
-sanguis::server::environment sanguis::server::states::unpaused::get_environment()
-{
-	return environment(
-		context<running>().send,
-		boost::bind(&running::insert_entity,&context<running>(),_1),
-		boost::bind(&running::divide_exp,&context<running>(),_1),
-		boost::bind(&running::level_callback,&context<running>(),_1,_2));
+				context<running>().players().begin()->second->exp()));*/
 }
 
 boost::statechart::result sanguis::server::states::unpaused::react(const tick_event &t)
 {
 	time_type const delta = t.delta();
 
-	waves::wave *const wave_(
-		context<running>().wave_.get());
-
-	if(wave_)
-		wave_->process(
-		delta,
-		get_environment());
+	context<running>().process(delta);
 
 	// should we send position updates?
 	bool const update_pos = send_timer.v().update_b();
@@ -283,8 +268,8 @@ boost::statechart::result sanguis::server::states::unpaused::react(const tick_ev
 			{
 				if(i->type() != entity_type::indeterminate)
 				{
-					context<running>().send(message_convert<messages::health>(*i));
-					context<running>().send(message_convert<messages::remove>(*i));
+					send(message_convert<messages::health>(*i));
+					send(message_convert<messages::remove>(*i));
 				}
 				i = entities.erase(i);
 				continue;
@@ -297,10 +282,10 @@ boost::statechart::result sanguis::server::states::unpaused::react(const tick_ev
 
 		if (i->type() != entity_type::indeterminate && update_pos)
 		{
-			context<running>().send(message_convert<messages::move>(*i));
-			context<running>().send(message_convert<messages::speed>(*i));
-			context<running>().send(message_convert<messages::rotate>(*i));
-			context<running>().send(message_convert<messages::health>(*i)); // FIXME: this should be elsewhere
+			send(message_convert<messages::move>(*i));
+			send(message_convert<messages::speed>(*i));
+			send(message_convert<messages::rotate>(*i));
+			send(message_convert<messages::health>(*i)); // FIXME: this should be elsewhere
 		}
 
 		++i;
@@ -332,4 +317,16 @@ sanguis::server::states::unpaused::react(
 			mf,
 			*m.message,
 			boost::bind(&unpaused::handle_default_msg, this, m.id, _1));
+}
+
+sanguis::server::environment const
+sanguis::server::states::unpaused::get_environment()
+{
+	return context<running>().get_environment();
+}
+
+void sanguis::server::states::unpaused::send(
+	messages::auto_ptr m)
+{
+	get_environment().send(m);
 }

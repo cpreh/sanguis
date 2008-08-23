@@ -1,5 +1,6 @@
 #include "running.hpp"
 #include "waiting.hpp"
+#include "../environment.hpp"
 #include "../entities/entity.hpp"
 #include "../entities/player.hpp"
 #include "../../messages/experience.hpp"
@@ -92,4 +93,23 @@ void sanguis::server::states::running::level_callback(entities::player &p,const 
 			new messages::level_up(
 				p.id(),
 				p.level())));
+}
+
+void sanguis::server::states::running::process(
+	time_type const time)
+{
+	if(wave_)
+		wave_->process(
+			time,
+			get_environment());
+}
+
+sanguis::server::environment const
+sanguis::server::states::running::get_environment()
+{
+	return environment(
+		send,
+		boost::bind(&running::insert_entity, this, _1),
+		boost::bind(&running::divide_exp, this, _1),
+		boost::bind(&running::level_callback, this, _1, _2));
 }

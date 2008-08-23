@@ -20,7 +20,8 @@ sanguis::server::waves::simple::simple(
 	true,
 	diff_.callback()),
   total_spawn_count(total_spawn_count),
-  etype(etype)
+  etype(etype),
+  spawn_count(0)
 {}
 
 void sanguis::server::waves::simple::process(
@@ -30,7 +31,11 @@ void sanguis::server::waves::simple::process(
 	diff_.update(diff);
 	if(!spawn_timer.update_b())
 		return;
-	
+
+	if(spawn_count == total_spawn_count)
+		return;
+	++spawn_count;
+
 	typedef std::tr1::uniform_real<
 		messages::space_unit
 	> uniform_su;
@@ -76,7 +81,7 @@ void sanguis::server::waves::simple::process(
 		entities::enemies::create(
 			etype,
 			env,
-			center,
+			pos,
 			angle,
 			angle));
 }

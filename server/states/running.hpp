@@ -9,6 +9,7 @@
 #include "../waves/wave.hpp"
 #include "../../messages/types.hpp"
 #include "../../console_timer.hpp"
+#include "../../time_type.hpp"
 
 #include <sge/time/timer.hpp>
 
@@ -35,10 +36,6 @@ class running
 public:
 	typedef std::map<net::id_type, entities::player*> player_map;
 
-	// callbacks (can be public so one thinks that they are a member function)
-	send_callback send;
-	console_print_callback console_print;
-
 	running(my_context);
 	sge::time::timer &enemy_timer();
 	entities::container &entities();
@@ -50,13 +47,19 @@ public:
 	void divide_exp(const messages::exp_type);
 	void level_callback(entities::player &,const messages::level_type);
 
-	boost::scoped_ptr<waves::wave> wave_; // FIXME
+	void process(
+		time_type);
+	environment const get_environment();
 private:
+	send_callback send;
+	console_print_callback console_print;
+
 	entities::container entities_;
 	player_map players_;
 	
 	// this is better suited here so it isn't out of sync after unpausing
 	console_timer enemy_timer_;
+	boost::scoped_ptr<waves::wave> wave_;
 };
 
 }
