@@ -6,6 +6,7 @@
 #include "../console_print_callback.hpp"
 #include "../entities/entity_fwd.hpp"
 #include "../entities/fwd.hpp"
+#include "../waves/wave.hpp"
 #include "../../messages/types.hpp"
 #include "../../console_timer.hpp"
 
@@ -15,6 +16,7 @@
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/result.hpp>
 #include <boost/statechart/custom_reaction.hpp>
+#include <boost/scoped_ptr.hpp>
 
 #include <map>
 
@@ -47,6 +49,8 @@ public:
 
 	void divide_exp(const messages::exp_type);
 	void level_callback(entities::player &,const messages::level_type);
+
+	boost::scoped_ptr<waves::wave> wave_; // FIXME
 private:
 	entities::container entities_;
 	player_map players_;

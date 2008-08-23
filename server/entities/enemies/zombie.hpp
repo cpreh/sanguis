@@ -13,8 +13,7 @@ namespace entities
 namespace enemies
 {
 
-class zombie : public enemy
-{
+class zombie : public enemy {
 public:
 	zombie(
 		environment const &,

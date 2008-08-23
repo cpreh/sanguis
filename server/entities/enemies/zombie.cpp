@@ -11,20 +11,21 @@ sanguis::server::entities::enemies::zombie::zombie(
 	messages::space_unit const direction_,
 	messages::space_unit const angle_,
 	property_map const &properties)
-	: enemy(
-		enemy_type::zombie,
-		env,
-		armor,
-		center_ - dim()/messages::mu(2),
-		angle_,
-		direction_,
-		team::monsters,
-		properties,
-		ai::ai_ptr(
-			new ai::simple(
-				*this)))
+: enemy(
+	enemy_type::zombie,
+	env,
+	armor,
+	center_ - dim() / messages::mu(2),
+	angle_,
+	direction_,
+	team::monsters,
+	properties,
+	ai::ai_ptr(
+		new ai::simple(
+			*this)))
 {
-	add_weapon(weapons::create(
+	add_weapon(
+		weapons::create(
 			weapon_type::melee,
 			get_environment()));
 	

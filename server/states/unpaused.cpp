@@ -38,7 +38,6 @@
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
 #include <boost/assign/list_of.hpp>
-#include <boost/tr1/random.hpp>
 #include <ostream>
 
 sanguis::server::states::unpaused::unpaused()
@@ -153,52 +152,6 @@ boost::statechart::result sanguis::server::states::unpaused::operator()(const ne
 	return discard_event();
 }
 
-void sanguis::server::states::unpaused::add_enemy()
-{
-	typedef std::tr1::uniform_real<
-		messages::space_unit
-	> uniform_su;
-
-	typedef std::tr1::variate_generator<
-		rand_gen_type,
-		uniform_su
-	> rng_type;
-
-	static rng_type rng(
-		create_seeded_randgen(),
-		uniform_su(
-			messages::mu(0),
-			messages::mu(2) * sge::math::pi<messages::space_unit>()
-		));
-
-	const messages::space_unit rand_angle(rng());
-	const messages::space_unit radius = messages::mu(std::max(resolution().w(),resolution().h()))/messages::mu(2);
-	const messages::space_unit scale = messages::mu(1.5);
-
-	const messages::pos_type screen_center = messages::pos_type(messages::mu(resolution().w()),messages::mu(resolution().h()))/messages::mu(2);
-	const messages::pos_type center = scale * radius * angle_to_vector(rand_angle);
-	
-	// TODO: take the nearest player here instead of the first
-	//boost::optional<messages::space_unit> oa = sge::math::angle_to<messages::space_unit>(context<running>().players().begin()->second->center() - center);
-	//const messages::space_unit angle = oa ? *oa : messages::mu(0);
-	const messages::pos_type pos = center + screen_center;
-	const messages::space_unit angle = messages::mu(0);
-
-	context<running>().insert_entity(
-		entities::auto_ptr(
-			new entities::enemies::zombie(
-				get_environment(),
-				damage::list(messages::mu(0)),
-				pos,
-				angle, // angle and direction (are the same here)
-				angle,
-				
-				boost::assign::map_list_of
-					(entities::property::type::health, entities::property(messages::mu(3)))
-					(entities::property::type::movement_speed, entities::property(messages::mu(50)))
-				)));
-}
-
 boost::statechart::result sanguis::server::states::unpaused::operator()(const net::id_type id,const messages::player_start_shooting &)
 {
 	if (context<running>().players().find(id) == context<running>().players().end())
@@ -303,13 +256,18 @@ sanguis::server::environment sanguis::server::states::unpaused::get_environment(
 
 boost::statechart::result sanguis::server::states::unpaused::react(const tick_event &t)
 {
-	const time_type delta = t.delta();
+	time_type const delta = t.delta();
 
-	if (context<running>().enemy_timer().update_b())
-		add_enemy();
+	waves::wave *const wave_(
+		context<running>().wave_.get());
+
+	if(wave_)
+		wave_->process(
+		delta,
+		get_environment());
 
 	// should we send position updates?
-	const bool update_pos = send_timer.v().update_b();
+	bool const update_pos = send_timer.v().update_b();
 
 	entities::container &entities = context<running>().entities();
 

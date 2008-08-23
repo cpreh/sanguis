@@ -55,6 +55,7 @@ FILE (GLOB files
 	server/entities/projectiles/*.cpp
 	server/perks/*.cpp
 	server/states/*.cpp
+	server/waves/*.cpp
 	server/weapons/*.cpp)
 
 add_executable(main ${files})
