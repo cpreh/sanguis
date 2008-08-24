@@ -39,6 +39,30 @@ sanguis::server::entities::enemies::create(
 				1,
 				static_cast<messages::exp_type>(10)
 				));
+	case enemy_type::wolf_black:
+	case enemy_type::wolf_brown:
+	case enemy_type::wolf_white:
+		return auto_ptr(
+			new enemy(
+				etype,
+				env,
+				damage::list(messages::mu(0)),
+				center,
+				angle,
+				direction,
+				boost::assign::map_list_of
+					(entities::property::type::health,
+					 entities::property(messages::mu(1)))
+					(entities::property::type::movement_speed,
+					 entities::property(messages::mu(80))),
+				ai::ai_ptr(
+					new ai::simple()),
+				weapons::create(
+					weapon_type::melee,
+					env), // TODO
+				1,
+				static_cast<messages::exp_type>(5)
+				));
 	default:
 		throw sge::exception(
 			SGE_TEXT("Invalid enemy_type in factory!"));
