@@ -9,6 +9,13 @@ sanguis::server::waves::generator::generator()
 			static_cast<time_type>(0.5),
 			100,
 			enemy_type::zombie00));
+	
+	waves.push_back(
+		new waves::simple(
+			static_cast<time_type>(1),
+			50,
+			enemy_type::zombie01));
+
 }
 
 void sanguis::server::waves::generator::process(
