@@ -25,7 +25,7 @@ sanguis::server::states::running::running(my_context ctx)
 		new waves::simple(
 			static_cast<time_type>(0.5),
 			100,
-			enemy_type::zombie));
+			enemy_type::zombie00));
 }
 
 sge::time::timer &sanguis::server::states::running::enemy_timer()

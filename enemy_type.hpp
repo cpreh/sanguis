@@ -6,9 +6,11 @@ namespace sanguis
 
 namespace enemy_type {
 enum type {
-	zombie,
+	wolf_black,
+	wolf_brown,
 	wolf_white,
-	wolf_black
+	zombie00,
+	zombie01
 };
 }
 

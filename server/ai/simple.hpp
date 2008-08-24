@@ -14,14 +14,13 @@ namespace ai
 
 class simple : public base {
 public:
-	simple(
-		entities::enemies::enemy& me);
+	simple();
 private:
 	void update(
+		entities::enemies::enemy &me,
 		time_type,
 		entities::container const &);
 
-	entities::enemies::enemy &me;
 	entities::entity const *target;
 };
 

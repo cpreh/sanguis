@@ -4,13 +4,12 @@
 #include <sge/math/angle.hpp>
 #include <boost/foreach.hpp>
 
-sanguis::server::ai::simple::simple(
-	entities::enemies::enemy &me)
-: me(me),
-  target(0)
+sanguis::server::ai::simple::simple()
+: target(0)
 {}
 
 void sanguis::server::ai::simple::update(
+	entities::enemies::enemy &me,
 	time_type,
 	entities::container const &entities)
 {

@@ -2,7 +2,8 @@
 #include <sge/exception.hpp>
 #include <sge/text.hpp>
 
-sge::string const sanguis::load::weapon_pickup_name(
+sge::string const
+sanguis::load::weapon_pickup_name(
 	weapon_type::type const wtype)
 {
 	switch(wtype) {

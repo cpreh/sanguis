@@ -3,7 +3,7 @@
 #include "../z_ordering.hpp"
 #include "../../enemy_type.hpp"
 #include <sge/exception.hpp>
-#include <sge/string.hpp>
+#include <sge/text.hpp>
 
 namespace
 {
@@ -39,10 +39,14 @@ get_model_name(
 	switch(etype) {
 	case sanguis::enemy_type::wolf_black:
 		return SGE_TEXT("wolf_black");
+	case sanguis::enemy_type::wolf_brown:
+		return SGE_TEXT("wolf_brown");
 	case sanguis::enemy_type::wolf_white:
 		return SGE_TEXT("wolf_white");
-	case sanguis::enemy_type::zombie:
+	case sanguis::enemy_type::zombie00:
 		return SGE_TEXT("zombie00");
+	case sanguis::enemy_type::zombie01:
+		return SGE_TEXT("zombie01");
 	default:
 		throw sge::exception(
 			SGE_TEXT("draw::factory::enemy: missing loading code!"));

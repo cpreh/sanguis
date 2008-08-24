@@ -7,6 +7,5 @@
 -add way more creeps!
 -add blood animations
 -non-sprite gfx/animations? (for stuff like lightning, light/shadow, ...)
--make creeps stop flickering between Z-positions
 -improve this todo list
 -replace damage list with damage_list()()() construct

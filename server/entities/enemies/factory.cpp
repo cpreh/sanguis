@@ -1,6 +1,8 @@
 #include "factory.hpp"
-#include "zombie.hpp"
+#include "enemy.hpp"
 #include "../../damage_types.hpp"
+#include "../../ai/simple.hpp"
+#include "../../weapons/factory.hpp"
 #include <sge/exception.hpp>
 #include <sge/text.hpp>
 #include <boost/assign/list_of.hpp>
@@ -14,19 +16,28 @@ sanguis::server::entities::enemies::create(
 	messages::space_unit const angle)
 {
 	switch(etype) {
-	case enemy_type::zombie:
+	case enemy_type::zombie00:
+	case enemy_type::zombie01:
 		return auto_ptr(
-			new zombie(
+			new enemy(
+				etype,
 				env,
 				damage::list(messages::mu(0)),
 				center,
-				direction,
 				angle,
+				direction,
 				boost::assign::map_list_of
 					(entities::property::type::health,
 					 entities::property(messages::mu(3)))
 					(entities::property::type::movement_speed,
-					 entities::property(messages::mu(50)))
+					 entities::property(messages::mu(50))),
+				ai::ai_ptr(
+					new ai::simple()),
+				weapons::create(
+					weapon_type::melee,
+					env), // TODO
+				1,
+				static_cast<messages::exp_type>(10)
 				));
 	default:
 		throw sge::exception(
