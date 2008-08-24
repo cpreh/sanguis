@@ -4,6 +4,7 @@
 #include "running.hpp"
 #include "../../messages/fwd.hpp"
 #include "../../net/types.hpp"
+#include "../../console_timer.hpp"
 #include <boost/mpl/list.hpp>
 #include <boost/statechart/simple_state.hpp>
 #include <boost/statechart/result.hpp>

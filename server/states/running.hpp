@@ -6,18 +6,14 @@
 #include "../console_print_callback.hpp"
 #include "../entities/entity_fwd.hpp"
 #include "../entities/fwd.hpp"
-#include "../waves/wave.hpp"
+#include "../waves/generator.hpp"
 #include "../../messages/types.hpp"
-#include "../../console_timer.hpp"
 #include "../../time_type.hpp"
-
-#include <sge/time/timer.hpp>
 
 #include <boost/mpl/list.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/result.hpp>
 #include <boost/statechart/custom_reaction.hpp>
-#include <boost/scoped_ptr.hpp>
 
 #include <map>
 
@@ -37,7 +33,6 @@ public:
 	typedef std::map<net::id_type, entities::player*> player_map;
 
 	running(my_context);
-	sge::time::timer &enemy_timer();
 	entities::container &entities();
 	const entities::container &entities() const;
 	entities::entity &insert_entity(entities::auto_ptr);
@@ -58,8 +53,7 @@ private:
 	player_map players_;
 	
 	// this is better suited here so it isn't out of sync after unpausing
-	console_timer enemy_timer_;
-	boost::scoped_ptr<waves::wave> wave_;
+	waves::generator wave_generator;
 };
 
 }

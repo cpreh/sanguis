@@ -24,7 +24,6 @@
 #include "../message_converter.hpp"
 #include "../damage_types.hpp"
 #include "../weapons/factory.hpp"
-#include "../entities/enemies/zombie.hpp"
 #include "../entities/entity.hpp"
 #include "../../resolution.hpp"
 #include "../../angle_vector.hpp"
@@ -102,8 +101,6 @@ void sanguis::server::states::unpaused::create_game(const net::id_type net_id,co
 			new messages::level_up(
 				p.id(),
 				p.level())));
-
-	context<running>().enemy_timer().reset();
 }
 
 boost::statechart::result sanguis::server::states::unpaused::operator()(const net::id_type id,const messages::player_change_weapon &e)

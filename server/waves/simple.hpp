@@ -26,6 +26,7 @@ public:
 	void process(
 		time_type diff,
 		environment const &);
+	bool ended() const;
 private:
 	diff_clock       diff_;
 	sge::time::timer spawn_timer;

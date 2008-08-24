@@ -85,3 +85,8 @@ void sanguis::server::waves::simple::process(
 			angle,
 			angle));
 }
+
+bool sanguis::server::waves::simple::ended() const
+{
+	return spawn_count == total_spawn_count;
+}

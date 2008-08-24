@@ -10,27 +10,13 @@
 #include <boost/bind.hpp>
 #include <ostream>
 
-
-#include "../waves/simple.hpp"
-
 sanguis::server::states::running::running(my_context ctx)
 : my_base(ctx),
   send(boost::bind(&server::machine::send,&(context<machine>()),_1)),
   console_print(boost::bind(&server::machine::console_print,&(context<machine>()),_1)),
-  enemy_timer_(SGE_TEXT("enemy_timer"),sge::su(0.5))
+  wave_generator()
 {
 	sge::clog << SGE_TEXT("server: entering running state\n");
-	// FIXME:
-	wave_.reset(
-		new waves::simple(
-			static_cast<time_type>(0.5),
-			100,
-			enemy_type::zombie00));
-}
-
-sge::time::timer &sanguis::server::states::running::enemy_timer()
-{
-	return enemy_timer_.v();
 }
 
 sanguis::server::entities::container &sanguis::server::states::running::entities()
@@ -98,10 +84,9 @@ void sanguis::server::states::running::level_callback(entities::player &p,const 
 void sanguis::server::states::running::process(
 	time_type const time)
 {
-	if(wave_)
-		wave_->process(
-			time,
-			get_environment());
+	wave_generator.process(
+		time,
+		get_environment());
 }
 
 sanguis::server::environment const
