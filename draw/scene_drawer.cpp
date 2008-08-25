@@ -37,8 +37,7 @@
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
 
-#include <algorithm>
-#include <functional>
+#include <utility>
 #include <typeinfo>
 #include <ostream>
 
