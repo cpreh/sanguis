@@ -32,8 +32,7 @@
 #include <sge/exception.hpp>
 #include <sge/iostream.hpp>
 #include <sge/iconv.hpp>
-#include <sge/string.hpp>
-#include <sge/sprite/system_impl.hpp>
+#include <sge/text.hpp>
 
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
