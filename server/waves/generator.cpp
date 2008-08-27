@@ -54,7 +54,7 @@ void sanguis::server::waves::generator::process(
 					20,
 					enemy_type::wolf_brown));
 		}
-		if(wave_counter < 3)
+		if(wave_counter < 4)
 			++wave_counter;
 	}
 
