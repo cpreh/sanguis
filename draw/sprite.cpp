@@ -29,10 +29,14 @@ sanguis::draw::sprite::center() const
 	return master().center();
 }
 
-void sanguis::draw::sprite::update(const time_type time)
+void sanguis::draw::sprite::update(
+	time_type const time)
 {
+	entity::update(time);
 	pos_ += time * speed();
-	update_pos(sge::math::structure_cast<sge::sprite::unit>(pos_));
+	update_pos(
+		sge::math::structure_cast<sge::sprite::unit>(
+			pos_));
 }
 
 sanguis::draw::object &

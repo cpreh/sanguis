@@ -3,7 +3,13 @@
 #include <sge/time/resolution.hpp>
 #include <sge/iostream.hpp>
 #include <ostream>
-	
+
+void sanguis::draw::entity::update(
+	time_type const time)
+{
+	diff_clock_.update(time);
+}
+
 sanguis::entity_id sanguis::draw::entity::id() const
 {
 	return id_;
@@ -55,9 +61,11 @@ sanguis::draw::entity::entity(
 	system &sys)
 : id_(id_),
   sys(sys),
+  diff_clock_(),
   decay_timer(
   	sge::time::resolution(0),
-	false)
+	false,
+	diff_clock_.callback())
 {}
 
 sanguis::draw::system &

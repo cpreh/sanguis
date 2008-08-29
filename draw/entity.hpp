@@ -5,6 +5,7 @@
 #include "../entity_id.hpp"
 #include "../weapon_type.hpp"
 #include "../time_type.hpp"
+#include "../diff_clock.hpp"
 #include <sge/math/vector.hpp>
 #include <sge/time/timer.hpp>
 #include <boost/noncopyable.hpp>
@@ -20,7 +21,7 @@ public:
 	typedef std::vector<
 		object> sprite_vector;
 
-	virtual void update(time_type) = 0;
+	virtual void update(time_type);
 	entity_id id() const;
 	void decay();
 	void decay_time(
@@ -48,6 +49,7 @@ protected:
 private:
 	entity_id        id_;
 	system          &sys;
+	diff_clock       diff_clock_;
 	sge::time::timer decay_timer;
 };
 

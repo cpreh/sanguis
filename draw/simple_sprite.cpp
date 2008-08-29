@@ -22,8 +22,11 @@ sanguis::draw::simple_sprite::simple_sprite(
 	sge::su(0))
 {}
 
-void sanguis::draw::simple_sprite::update(time_type)
-{}
+void sanguis::draw::simple_sprite::update(
+	time_type const time)
+{
+	entity::update(time);
+}
 
 void sanguis::draw::simple_sprite::orientation(
 	const sge::sprite::rotation_type angle)
