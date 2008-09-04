@@ -11,7 +11,6 @@
 #include <sge/texture/manager.hpp>
 #include <sge/texture/util.hpp>
 #include <sge/time/millisecond.hpp>
-#include <sge/time/resolution.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/weak_ptr.hpp>
 #include <boost/algorithm/string/trim.hpp>
@@ -81,8 +80,8 @@ environment::load_animation(
 			sge::sprite::animation_series ret;
 			ret.push_back(
 				sge::sprite::animation_entity(
-					sge::time::resolution(
-						std::numeric_limits<sge::time::unit>::max()),
+					sge::time::millisecond(
+						static_cast<sge::time::unit>(1)),
 					load_texture_inner(*it)));
 			return ret; // TODO: can we do this with boost::assign?
 		}

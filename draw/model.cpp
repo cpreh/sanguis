@@ -38,7 +38,7 @@ sanguis::draw::model::model(
 }
 
 void sanguis::draw::model::update(
-	const time_type time)
+	time_type const time)
 {
 	sprite::update(time);
 

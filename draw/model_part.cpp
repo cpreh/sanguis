@@ -34,7 +34,7 @@ sanguis::draw::model_part::model_part(
 	invalid_rotation),
   info(&info),
   ref(&ref),
-  animation_type_(animation_type::none),
+  animation_type_(animation_type::deploying),
   weapon_type_(weapon_type::none),
   animation_(),
   ended(false)
@@ -43,7 +43,7 @@ sanguis::draw::model_part::model_part(
 }
 
 void sanguis::draw::model_part::animation(
-	const animation_type::type anim_type)
+	animation_type::type const anim_type)
 {
 	// don't restart an animation unecessarly
 	if(animation_type_ == anim_type)
@@ -52,7 +52,9 @@ void sanguis::draw::model_part::animation(
 	switch(animation_type_) {
 	case animation_type::dying:
 		return;
+	// play attacking and deploying to the end
 	case animation_type::attacking:
+	case animation_type::deploying:
 		if(!ended)
 			return;
 	default:
@@ -62,7 +64,7 @@ void sanguis::draw::model_part::animation(
 }
 
 void sanguis::draw::model_part::weapon(
-	const weapon_type::type weap_type)
+	weapon_type::type const weap_type)
 {
 	// don't restart an animation unecessarly
 	if(weapon_type_ == weap_type)
@@ -149,6 +151,7 @@ sanguis::draw::model_part::loop_method() const
 	case animation_type::attacking:
 		return sge::sprite::texture_animation::loop_method::repeat;
 	case animation_type::dying:
+	case animation_type::deploying:
 		return sge::sprite::texture_animation::loop_method::stop_at_end;
 	default:
 		throw sge::exception(SGE_TEXT("Invalid animation_type in model_part!"));
