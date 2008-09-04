@@ -24,7 +24,6 @@
 #include <iosfwd>
 #include <ostream>
 #include <map>
-#include <limits>
 #include <cstddef>
 
 //#include <sge/texture/rect_fragmented.hpp>

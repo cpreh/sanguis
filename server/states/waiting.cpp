@@ -36,12 +36,19 @@ boost::statechart::result sanguis::server::states::waiting::operator()(const net
 	return discard_event();
 }
 
-boost::statechart::result sanguis::server::states::waiting::operator()(const net::id_type id,const messages::client_info &m)
+boost::statechart::result
+sanguis::server::states::waiting::operator()(
+	net::id_type const id,
+	messages::client_info const &m)
 {
 	sge::clog << SGE_TEXT("server: received client info from id ") << id << SGE_TEXT("\n");
 
 	//post_event(message_event(message_ptr(new messages::client_info(m)),id));
-	post_event(message_event(message_ptr(new messages::client_info(m)),id));
+	post_event(
+		message_event(
+			messages::auto_ptr(
+				new messages::client_info(m)),
+			id));
 	return transit<running>();
 }
 

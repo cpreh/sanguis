@@ -40,7 +40,9 @@ struct machine
 		sge::con::console_gfx &,
 		net::port_type);
 	void process(const tick_event &);
-	void process_message(const net::id_type,const message_ptr);
+	void process_message(
+		net::id_type,
+		messages::auto_ptr);
 
 	void connect_callback(const net::id_type);
 	void disconnect_callback(const net::id_type,const net::string_type &);

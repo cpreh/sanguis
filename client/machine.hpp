@@ -6,72 +6,72 @@
 #include "../load/resource/factory.hpp"
 #include "../load/model/singleton.hpp"
 #include "../tick_event.hpp"
-#include "message_event.hpp"
 #include "console_wrapper.hpp"
 
-#include <sge/font/metrics.hpp>
-#include <sge/font/system.hpp>
-#include <sge/font/drawer.hpp>
 #include <sge/font/fwd.hpp>
-#include <sge/input/key_state_tracker.hpp>
+#include <sge/input/key_state_tracker.hpp> // TODO: remove me!
 #include <sge/systems.hpp>
-#include <sge/texture/default_creator.hpp>
-#include <sge/texture/no_fragmented.hpp>
-#include <sge/texture/manager.hpp>
 #include <sge/console/console_gfx.hpp>
 #include <sge/console/stdlib.hpp>
 
 #include <boost/statechart/state_machine.hpp>
-#include <boost/ptr_container/ptr_vector.hpp>
-
-#include <vector>
 
 namespace sanguis
 {
 namespace client
 {
+
 struct start_state;
+
 struct machine
 	: public boost::statechart::state_machine<machine, start_state>
 {
-	private:
-	net::address_type address_;
-	net::port_type port_;
-	net::client net_;
-	net::client::signal_connection s_conn,s_disconn,s_data;
-	net::data_type in_buffer,out_buffer;
-
-	public:
-	sge::systems &sys;
-	sge::font::font &font;
-	sge::input::key_state_tracker &ks;
-	sge::con::console_gfx &con;
-	sge::con::stdlib con_stdlib;
-	console_wrapper con_wrapper;
-	load::resource::connection resource_connection;
-	load::model::connection model_connection;
-
+public:
 	machine(
 		sge::systems &,
 		sge::font::font &,
 		sge::input::key_state_tracker &,
 		sge::con::console_gfx &,
-		const net::address_type &,
+		net::address_type const &,
 		net::port_type);
 
 	void connect();
-	void send(messages::base *const);
-	void process_message(const message_ptr);
+	void send(messages::auto_ptr);
+	void process_message(messages::auto_ptr);
 	// callbacks
 	void connect_callback();
-	void disconnect_callback(const net::string_type &);
-	void data_callback(const net::data_type &);
+	void disconnect_callback(net::string_type const &);
+	void data_callback(net::data_type const &);
 
-	net::address_type address() const { return address_; }
-	net::port_type port() const { return port_; }
-	net::client &net() { return net_; }
+	net::address_type address() const;
+	net::port_type port() const;
+	net::client &net();
 
-	bool process(const tick_event &);
+	bool process(tick_event const &);
+
+	void dispatch();
+	sge::renderer::device_ptr const renderer() const;
+	sge::font::font &font();
+	bool key_pressed(
+		sge::input::key_code) const;
+	console_wrapper &con_wrapper();
+private:
+	net::address_type address_;
+	net::port_type port_;
+	net::client net_;
+	net::client::signal_connection s_conn,
+	                               s_disconn,
+	                               s_data;
+	net::data_type in_buffer,
+	               out_buffer;
+	sge::systems &sys;
+	sge::font::font &font_;
+	sge::input::key_state_tracker &ks;
+	sge::con::console_gfx &con;
+	sge::con::stdlib con_stdlib;
+	console_wrapper con_wrapper_;
+	load::resource::connection resource_connection;
+	load::model::connection model_connection;
 };
 
 }

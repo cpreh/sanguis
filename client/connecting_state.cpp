@@ -48,14 +48,21 @@ boost::statechart::result sanguis::client::connecting_state::operator()(const me
 boost::statechart::result sanguis::client::connecting_state::operator()(const messages::game_state &m)
 {
 	sge::clog << SGE_TEXT("client: received game state\n");
-	post_event(message_event(message_ptr(new messages::game_state(m))));
+	post_event(
+		message_event(
+			messages::auto_ptr(
+				new messages::game_state(
+					m))));
 	return transit<running_state>();
 }
 
 boost::statechart::result sanguis::client::connecting_state::operator()(const messages::connect &)
 {
 	sge::clog << SGE_TEXT("client: sending client info\n");
-	context<machine>().send(new messages::client_info(MESSAGE_TEXT("player1")));
+	context<machine>().send(
+		messages::auto_ptr(
+			new messages::client_info(
+				MESSAGE_TEXT("player1"))));
 	return discard_event();
 }
 
@@ -64,16 +71,15 @@ boost::statechart::result sanguis::client::connecting_state::react(const tick_ev
 	sge::window::dispatch();
 
 	machine &m = context<machine>();
-	m.sys.input_system->dispatch();
+	m.dispatch();
 
-	const sge::string status = connected ? SGE_TEXT("waiting for gamestate") : SGE_TEXT("connecting");
+	sge::string const status = connected ? SGE_TEXT("waiting for gamestate") : SGE_TEXT("connecting");
 	
-	// show text in the screen center (hopefully)
-	m.font.draw_text(status,
+	m.font().draw_text(
+		status,
 		sge::font::pos(0,0),
-		sge::font::dim(
-			m.sys.renderer->screen_width(),
-			m.sys.renderer->screen_height()),
+		sge::math::structure_cast<sge::font::size_type>(
+			m.renderer()->screen_size()),
 		sge::font::align_h::center,
 		sge::font::align_v::center);
 

@@ -1,23 +1,22 @@
 #include "serialization.hpp"
 #include "messages/base.hpp"
-#include "messages/add.hpp"
 
 #include "archive.hpp"
 #include <boost/serialization/export.hpp>
 
-#include <sge/iostream.hpp>
 #include <sstream>
 #include <iomanip>
 #include <cstddef>
-#include <typeinfo>
+#include <ostream>
 
 namespace
 {
 const std::size_t message_header_size = 4;
 }
 
-net::data_type sanguis::deserialize(const net::data_type &data,
-	boost::function<void (const message_ptr)> callback)
+net::data_type sanguis::deserialize(
+	net::data_type const &data,
+	deserialize_callback const &callback)
 {
 	if (data.size() < message_header_size)
 		return data;
@@ -34,14 +33,16 @@ net::data_type sanguis::deserialize(const net::data_type &data,
 		data.substr(message_header_size,message_size));
 	
 	iarchive ar(ass);
+	// FIXME: can this be fixed?
 	messages::base *unsafe_ptr;
 	ar >> unsafe_ptr;
-	callback(message_ptr(unsafe_ptr));
+	callback(messages::auto_ptr(unsafe_ptr));
 
 	return deserialize(data.substr(message_header_size+message_size),callback);
 }
 
-net::data_type sanguis::serialize(const message_ptr m)
+net::data_type sanguis::serialize(
+	messages::auto_ptr m)
 {
 	typedef std::basic_ostringstream<net::data_type::value_type> sstream;
 

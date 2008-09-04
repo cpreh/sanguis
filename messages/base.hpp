@@ -21,11 +21,9 @@ private:
 };
 
 typedef std::auto_ptr<messages::base> auto_ptr;
+typedef sge::shared_ptr<messages::base> shared_ptr;
 
 }
-
-typedef sge::shared_ptr<messages::base> message_ptr;
-
 }
 
 #endif

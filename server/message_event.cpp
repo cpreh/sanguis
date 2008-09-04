@@ -1,8 +1,8 @@
 #include "message_event.hpp"
 
 sanguis::server::message_event::message_event(
-	const message_ptr message,
-	const net::id_type id) 
+	messages::auto_ptr message,
+	net::id_type const id) 
 : message(message),
   id(id) 
 {}

@@ -46,11 +46,11 @@ const sanguis::entity_id cursor_id(sanguis::client::next_id()),
 sanguis::client::running_state::running_state(my_context ctx)
 : my_base(ctx), 
   drawer(
-	context<machine>().sys.renderer,
-	context<machine>().font),
+	context<machine>().renderer(),
+	context<machine>().font()),
   input(boost::bind(&running_state::handle_player_action, this, _1)),
   input_connection(
-	context<machine>().con_wrapper.register_callback(
+	context<machine>().con_wrapper().register_callback(
 		boost::bind(&input_handler::input_callback, &input, _1))),
   direction(0, 0),
 // cursor_pos(0, 0)
@@ -75,9 +75,7 @@ sanguis::client::running_state::running_state(my_context ctx)
 
 boost::statechart::result sanguis::client::running_state::react(const tick_event&t)
 {
-	sge::window::dispatch();
-	machine &m = context<machine>();
-	m.sys.input_system->dispatch();
+	context<machine>().dispatch();
 
 	drawer.draw(t.delta());
 	
@@ -198,9 +196,10 @@ void sanguis::client::running_state::handle_direction(
 
 	if(last_direction != direction)
 		context<machine>().send(
-			new messages::player_direction(
-				player.id(),
-				sge::math::structure_cast<messages::space_unit>(direction)));
+			messages::auto_ptr(
+				new messages::player_direction(
+					player.id(),
+					sge::math::structure_cast<messages::space_unit>(direction))));
 }
 
 void sanguis::client::running_state::handle_rotation(
@@ -220,7 +219,7 @@ void sanguis::client::running_state::handle_rotation(
 		return;
 	}
 
-	const sge::renderer::device_ptr rend = context<machine>().sys.renderer;
+	sge::renderer::device_ptr const rend = context<machine>().renderer();
 	cursor_pos.x() = sge::math::clamp(cursor_pos.x(), 0, static_cast<sge::sprite::unit>(rend->screen_width()));
 	cursor_pos.y() = sge::math::clamp(cursor_pos.y(), 0, static_cast<sge::sprite::unit>(rend->screen_height()));
 	
@@ -232,10 +231,11 @@ void sanguis::client::running_state::handle_rotation(
 		return;
 
 	context<machine>().send(
-		new messages::player_rotation(
-			player.id(),
-			messages::mu(
-				*rotation)));
+		messages::auto_ptr(
+			new messages::player_rotation(
+				player.id(),
+				messages::mu(
+					*rotation))));
 
 	drawer.process_message(
 		messages::move(
@@ -252,13 +252,14 @@ void sanguis::client::running_state::handle_shooting(
 		return;
 	
 	context<machine>().send(
-		sge::math::compare(static_cast<key_scale>(0), m.scale())
-		? static_cast<messages::base*>(
-			new messages::player_stop_shooting(
-				p.id()))
-		: static_cast<messages::base*>(
-			new messages::player_start_shooting(
-				p.id())));
+		messages::auto_ptr(
+			sge::math::compare(static_cast<key_scale>(0), m.scale())
+			? static_cast<messages::base*>(
+				new messages::player_stop_shooting(
+					p.id()))
+			: static_cast<messages::base*>(
+				new messages::player_start_shooting(
+					p.id()))));
 }
 
 void sanguis::client::running_state::handle_switch_weapon(
@@ -308,13 +309,14 @@ void sanguis::client::running_state::handle_pause_unpause(
 	if(m.type() != player_action::pause_unpause)
 		return;
 	context<machine>().send(
-		paused
-		? static_cast<messages::base*>(
-			new messages::player_unpause(
-				p.id()))
-		: static_cast<messages::base*>(
-			new messages::player_pause(
-				p.id())));
+		messages::auto_ptr(
+			paused
+			? static_cast<messages::base*>(
+				new messages::player_unpause(
+					p.id()))
+			: static_cast<messages::base*>(
+				new messages::player_pause(
+					p.id()))));
 }
 
 void sanguis::client::running_state::change_weapon(
@@ -324,7 +326,8 @@ void sanguis::client::running_state::change_weapon(
 	current_weapon = w;
 
 	context<machine>().send(
-		new messages::player_change_weapon(
-			id,
-			current_weapon));
+		messages::auto_ptr(
+			new messages::player_change_weapon(
+				id,
+				current_weapon)));
 }

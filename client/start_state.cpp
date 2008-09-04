@@ -17,7 +17,7 @@ boost::statechart::result sanguis::client::start_state::react(const tick_event&)
 	sge::clog << SGE_TEXT("client: constructing persistent client data\n");
 
 	// set renderer options
-	context<machine>().sys.renderer->set_state(
+	context<machine>().renderer()->set_state(
 		sge::renderer::state_list
 			(sge::renderer::bool_state::clear_backbuffer = true)
 	);

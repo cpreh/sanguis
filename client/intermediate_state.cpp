@@ -23,18 +23,18 @@ boost::statechart::result sanguis::client::intermediate_state::react(const tick_
 	sge::window::dispatch();
 	
 	machine &m = context<machine>();
-	m.sys.input_system->dispatch();
+	m.dispatch();
 	
 	// show text in the screen center (hopefully)
-	m.font.draw_text(SGE_TEXT("waiting for connect"),
+	m.font().draw_text(
+		SGE_TEXT("waiting for connect"),
 		sge::font::pos(0,0),
-		sge::font::dim(
-			m.sys.renderer->screen_width(),
-			m.sys.renderer->screen_height()),
+		sge::math::structure_cast<sge::font::size_type>(
+			m.renderer()->screen_size()),
 		sge::font::align_h::center,
 		sge::font::align_v::center);
 	
-	if (m.ks[sge::input::kc::key_space])
+	if (m.key_pressed(sge::input::kc::key_space))
 	{
 		m.connect();
 		return transit<connecting_state>();

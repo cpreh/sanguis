@@ -12,10 +12,12 @@ namespace server
 
 struct message_event : public boost::statechart::event<message_event> 
 {
-	const message_ptr message;
-	const net::id_type id;
+	messages::shared_ptr const message;
+	net::id_type const id;
 
-	message_event(message_ptr message, net::id_type id);
+	message_event(
+		messages::auto_ptr message,
+		net::id_type id);
 };
 }
 }

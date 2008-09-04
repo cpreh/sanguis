@@ -13,11 +13,11 @@
 
 sanguis::client::machine::machine(
 	sge::systems &sys,
-	sge::font::font &font,
+	sge::font::font &font_,
 	sge::input::key_state_tracker &ks,
 	sge::con::console_gfx &con,
-	const net::address_type &address_,
-	const net::port_type port_) 
+	net::address_type const &address_,
+	net::port_type const port_) 
 : address_(address_),
   port_(port_),
   s_conn(net_.register_connect(boost::bind(&machine::connect_callback,this))),
@@ -25,11 +25,11 @@ sanguis::client::machine::machine(
 	net_.register_disconnect(boost::bind(&machine::disconnect_callback,this,_1))),
   s_data(net_.register_data(boost::bind(&machine::data_callback,this,_1))),
   sys(sys),
-  font(font),
+  font_(font_),
   ks(ks),
   con(con),
   con_stdlib(boost::bind(&sge::con::console_gfx::print,&con,_1)),
-  con_wrapper(con,sys.input_system,sge::input::kc::key_f1),
+  con_wrapper_(con,sys.input_system,sge::input::kc::key_f1),
   resource_connection(sys.image_loader,sys.renderer)
 {}
 
@@ -40,17 +40,27 @@ void sanguis::client::machine::connect()
 
 void sanguis::client::machine::connect_callback()
 {
-	process_event(message_event(message_ptr(new messages::connect)));
+	process_event(
+		message_event(
+			messages::auto_ptr(
+				new messages::connect)));
 }
 
-void sanguis::client::machine::disconnect_callback(const net::string_type &)
+void sanguis::client::machine::disconnect_callback(
+	net::string_type const &)
 {
-	process_event(message_event(message_ptr(new messages::disconnect)));
+	process_event(
+		message_event(
+			messages::auto_ptr(
+				new messages::disconnect)));
 }
 
-void sanguis::client::machine::process_message(const message_ptr ptr)
+void sanguis::client::machine::process_message(
+	messages::auto_ptr ptr)
 {
-	process_event(message_event(ptr));
+	process_event(
+		message_event(
+			ptr));
 }
 
 void sanguis::client::machine::data_callback(const net::data_type &data)
@@ -58,12 +68,31 @@ void sanguis::client::machine::data_callback(const net::data_type &data)
 	in_buffer = deserialize(in_buffer+data,boost::bind(&machine::process_message,this,_1));
 }
 
-void sanguis::client::machine::send(messages::base *const m)
+void sanguis::client::machine::send(messages::auto_ptr m)
 {
-	out_buffer += serialize(message_ptr(m));
+	out_buffer += serialize(m);
 }
 
-bool sanguis::client::machine::process(const tick_event &t)
+net::address_type
+sanguis::client::machine::address() const
+{
+	return address_;
+}
+
+net::port_type
+sanguis::client::machine::port() const
+{
+	return port_;
+}
+
+net::client &
+sanguis::client::machine::net()
+{
+	return net_;
+}
+
+bool sanguis::client::machine::process(
+	tick_event const &t)
 {
 	if (out_buffer.size())
 	{
@@ -84,4 +113,35 @@ bool sanguis::client::machine::process(const tick_event &t)
 		con.draw();
 
 	return !ks[sge::input::kc::key_escape];
+}
+
+void sanguis::client::machine::dispatch()
+{
+	sge::window::dispatch();
+
+	sys.input_system->dispatch();
+}
+
+sge::renderer::device_ptr const
+sanguis::client::machine::renderer() const
+{
+	return sys.renderer;
+}
+
+sge::font::font &
+sanguis::client::machine::font()
+{
+	return font_;
+}
+
+bool sanguis::client::machine::key_pressed(
+	sge::input::key_code const key) const
+{
+	return ks[key];
+}
+
+sanguis::client::console_wrapper &
+sanguis::client::machine::con_wrapper()
+{
+	return con_wrapper_;
 }
