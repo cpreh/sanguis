@@ -1,4 +1,4 @@
-#include "scene_drawer.hpp"
+#include "scene.hpp"
 #include "factory/client.hpp"
 #include "factory/enemy.hpp"
 #include "factory/entity.hpp"
@@ -41,16 +41,15 @@
 #include <typeinfo>
 #include <ostream>
 
-sanguis::draw::scene_drawer::scene_drawer(
+sanguis::draw::scene::scene(
 	const sge::renderer::device_ptr rend,
 	sge::font::font &font)
 : ss(rend),
   hud_(font),
-  player_(0),
   paused(false)
 {}
 
-void sanguis::draw::scene_drawer::process_message(const messages::base& m)
+void sanguis::draw::scene::process_message(const messages::base& m)
 {
 	dispatch_type<
 		boost::mpl::vector<
@@ -73,10 +72,10 @@ void sanguis::draw::scene_drawer::process_message(const messages::base& m)
 		void>(
 		*this,
 		m,
-		boost::bind(&scene_drawer::process_default_msg, this, _1));
+		boost::bind(&scene::process_default_msg, this, _1));
 }
 
-void sanguis::draw::scene_drawer::process_message(const client_messages::base& m)
+void sanguis::draw::scene::process_message(const client_messages::base& m)
 {
 	dispatch_type<
 		boost::mpl::vector<
@@ -85,10 +84,10 @@ void sanguis::draw::scene_drawer::process_message(const client_messages::base& m
 		void>(
 		*this,
 		m,
-		boost::bind(&scene_drawer::process_default_client_msg, this, _1));
+		boost::bind(&scene::process_default_client_msg, this, _1));
 }
 
-void sanguis::draw::scene_drawer::draw(const time_type delta)
+void sanguis::draw::scene::draw(const time_type delta)
 {
 	for(entity_map::iterator it(entities.begin()), next(it); it != entities.end(); it = next)
 	{
@@ -109,22 +108,14 @@ void sanguis::draw::scene_drawer::draw(const time_type delta)
 	hud_.update(delta);
 }
 
-void sanguis::draw::scene_drawer::pause(
+void sanguis::draw::scene::pause(
 	bool const p)
 {
 	sge::clog << SGE_TEXT("client: drawer::pause: ") << p << SGE_TEXT('\n');
 	paused = p;
 }
 
-sanguis::draw::player const &
-sanguis::draw::scene_drawer::get_player() const
-{
-	if(!player_)
-		throw sge::exception(SGE_TEXT("scene_drawer::get_player(): no player available!"));
-	return *player_;
-}
-
-void sanguis::draw::scene_drawer::operator()(const messages::add& m)
+void sanguis::draw::scene::operator()(const messages::add& m)
 {
 	configure_new_object(
 		factory::entity(
@@ -134,7 +125,7 @@ void sanguis::draw::scene_drawer::operator()(const messages::add& m)
 		m);
 }
 
-void sanguis::draw::scene_drawer::operator()(const messages::add_enemy& m)
+void sanguis::draw::scene::operator()(const messages::add_enemy& m)
 {
 	configure_new_object(
 		factory::enemy(
@@ -144,7 +135,7 @@ void sanguis::draw::scene_drawer::operator()(const messages::add_enemy& m)
 		m);
 }
 
-void sanguis::draw::scene_drawer::operator()(const messages::add_pickup& m)
+void sanguis::draw::scene::operator()(const messages::add_pickup& m)
 {
 	configure_new_object(
 		factory::pickup(
@@ -154,7 +145,7 @@ void sanguis::draw::scene_drawer::operator()(const messages::add_pickup& m)
 		m);
 }
 
-void sanguis::draw::scene_drawer::operator()(const messages::add_weapon_pickup& m)
+void sanguis::draw::scene::operator()(const messages::add_weapon_pickup& m)
 {
 	configure_new_object(
 		factory::weapon_pickup(
@@ -164,7 +155,7 @@ void sanguis::draw::scene_drawer::operator()(const messages::add_weapon_pickup& 
 		m);
 }
 
-void sanguis::draw::scene_drawer::operator()(const messages::change_weapon& m)
+void sanguis::draw::scene::operator()(const messages::change_weapon& m)
 {
 	const messages::enum_type value(m.weapon());
 	if(value >= static_cast<messages::enum_type>(weapon_type::size))
@@ -176,49 +167,47 @@ void sanguis::draw::scene_drawer::operator()(const messages::change_weapon& m)
 	get_entity(m.id()).weapon(static_cast<weapon_type::type>(m.weapon()));
 }
 
-void sanguis::draw::scene_drawer::operator()(const messages::experience& m)
+void sanguis::draw::scene::operator()(const messages::experience& m)
 {
 	hud_.experience(m.exp());
 }
 
-void sanguis::draw::scene_drawer::operator()(const messages::health& m)
+void sanguis::draw::scene::operator()(const messages::health& m)
 {
 	get_entity(m.id()).health(m.value());
 }
 
-void sanguis::draw::scene_drawer::operator()(const messages::max_health& m)
+void sanguis::draw::scene::operator()(const messages::max_health& m)
 {
 	get_entity(m.id()).max_health(m.value());
 }
 
-void sanguis::draw::scene_drawer::operator()(const messages::move& m)
+void sanguis::draw::scene::operator()(const messages::move& m)
 {
 	get_entity(m.id()).pos(virtual_to_screen(ss.get_renderer()->screen_size(), m.pos()));
 }
 
-void sanguis::draw::scene_drawer::operator()(const messages::remove& m)
+void sanguis::draw::scene::operator()(const messages::remove& m)
 {
 	const entity_map::iterator it(entities.find(m.id()));
 	if(it == entities.end())
 		throw sge::exception(SGE_TEXT("Object not in entity map, can't remove it!"));
 	entity &e(*it->second);
-	if(typeid(e) == typeid(player)) // TODO: this is plain ugly
-		player_ = 0;
 	e.decay();
 }
 
-void sanguis::draw::scene_drawer::operator()(const messages::resize& m)
+void sanguis::draw::scene::operator()(const messages::resize& m)
 {
 	//get_entity(m.id()).dim(virtual_to_screen(ss.get_renderer()->screen_size(), m.dim()));
 	get_entity(m.id()).dim(sge::math::structure_cast<sge::sprite::unit>(m.dim()));
 }
 
-void sanguis::draw::scene_drawer::operator()(const messages::rotate& m)
+void sanguis::draw::scene::operator()(const messages::rotate& m)
 {
 	get_entity(m.id()).orientation(m.rot());
 }
 
-void sanguis::draw::scene_drawer::operator()(const messages::speed& m)
+void sanguis::draw::scene::operator()(const messages::speed& m)
 {
 	get_entity(m.id()).speed(
 		sge::math::structure_cast<sge::space_unit>(
@@ -226,17 +215,17 @@ void sanguis::draw::scene_drawer::operator()(const messages::speed& m)
 			m.get())));
 }
 
-void sanguis::draw::scene_drawer::operator()(const messages::start_attacking& m)
+void sanguis::draw::scene::operator()(const messages::start_attacking& m)
 {
 	get_entity(m.id()).start_attacking();
 }
 
-void sanguis::draw::scene_drawer::operator()(const messages::stop_attacking& m)
+void sanguis::draw::scene::operator()(const messages::stop_attacking& m)
 {
 	get_entity(m.id()).stop_attacking();
 }
 
-void sanguis::draw::scene_drawer::operator()(const client_messages::add& m)
+void sanguis::draw::scene::operator()(const client_messages::add& m)
 {
 	if(entities.insert(
 		m.id(),
@@ -248,7 +237,7 @@ void sanguis::draw::scene_drawer::operator()(const client_messages::add& m)
 	// FIXME: configure the object here, too!
 }
 
-void sanguis::draw::scene_drawer::configure_new_object(
+void sanguis::draw::scene::configure_new_object(
 	factory::entity_ptr e_ptr,
 	messages::add const &m)
 {
@@ -265,10 +254,6 @@ void sanguis::draw::scene_drawer::configure_new_object(
 	// TODO: this does not belong here!
 	if(m.type() == entity_type::player)
 	{
-		if(player_)
-			throw sge::exception(SGE_TEXT("Player already exists in scene_drawer!"));
-		player_ = dynamic_cast<player*>(&e);
-
 		const entity_id reaper_id = client::next_id();
 
 		const std::pair<entity_map::iterator, bool> reaper_ret(
@@ -278,7 +263,7 @@ void sanguis::draw::scene_drawer::configure_new_object(
 					new reaper(
 						reaper_id,
 						get_system(),
-						*player_))));
+						e))));
 
 		process_message(messages::resize(reaper_id, server::get_dim("reaper","default")));
 		process_message(messages::max_health(reaper_id, messages::mu(1)));
@@ -302,7 +287,7 @@ void sanguis::draw::scene_drawer::configure_new_object(
 
 }
 
-sanguis::draw::entity& sanguis::draw::scene_drawer::get_entity(const entity_id id)
+sanguis::draw::entity& sanguis::draw::scene::get_entity(const entity_id id)
 {
 	const entity_map::iterator it = entities.find(id);
 	if(it == entities.end())
@@ -314,24 +299,24 @@ sanguis::draw::entity& sanguis::draw::scene_drawer::get_entity(const entity_id i
 }
 
 sanguis::draw::entity const &
-sanguis::draw::scene_drawer::get_entity(const entity_id id) const
+sanguis::draw::scene::get_entity(const entity_id id) const
 {
 	return const_cast<entity const&>(
-		const_cast<scene_drawer&>(*this).get_entity(id));
+		const_cast<scene&>(*this).get_entity(id));
 }
 
-void sanguis::draw::scene_drawer::process_default_msg(const messages::base& m)
+void sanguis::draw::scene::process_default_msg(const messages::base& m)
 {
-	sge::clog << SGE_TEXT("Invalid message event in scene_drawer: ") << sge::iconv(typeid(m).name()) << SGE_TEXT('\n');
+	sge::clog << SGE_TEXT("Invalid message event in scene: ") << sge::iconv(typeid(m).name()) << SGE_TEXT('\n');
 }
 
-void sanguis::draw::scene_drawer::process_default_client_msg(
+void sanguis::draw::scene::process_default_client_msg(
 	const client_messages::base&)
 {
 }
 
 sanguis::draw::system &
-sanguis::draw::scene_drawer::get_system()
+sanguis::draw::scene::get_system()
 {
 	return ss;
 }

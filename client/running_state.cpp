@@ -48,20 +48,13 @@ sanguis::client::running_state::running_state(my_context ctx)
   drawer(
 	context<machine>().renderer(),
 	context<machine>().font()),
+  logic_(boost::bind(&running_state::send_message, this, _1)),
   input(boost::bind(&running_state::handle_player_action, this, _1)),
   input_connection(
 	context<machine>().con_wrapper().register_callback(
 		boost::bind(&input_handler::input_callback, &input, _1))),
-  direction(0, 0),
-// cursor_pos(0, 0)
-  cursor_pos(32, 32),
-  paused(false),
   current_weapon(weapon_type::size)
 {
-	sge::clog << SGE_TEXT("client: entering running state\n");
-	
-	std::fill(owned_weapons.begin(), owned_weapons.end(), false); // TODO: boost::array doesn't initialize by default?
-
 	drawer.process_message(
 		client_messages::add(
 			::cursor_id,
@@ -73,7 +66,9 @@ sanguis::client::running_state::running_state(my_context ctx)
 			client_entity_type::background));
 }
 
-boost::statechart::result sanguis::client::running_state::react(const tick_event&t)
+boost::statechart::result
+sanguis::client::running_state::react(
+	tick_event const &t)
 {
 	context<machine>().dispatch();
 
@@ -82,7 +77,9 @@ boost::statechart::result sanguis::client::running_state::react(const tick_event
 	return discard_event();
 }
 
-boost::statechart::result sanguis::client::running_state::react(const message_event &m)
+boost::statechart::result
+sanguis::client::running_state::react(
+	message_event const &m)
 {
 	return dispatch_type<
 		boost::mpl::vector<
@@ -100,7 +97,7 @@ boost::statechart::result sanguis::client::running_state::react(const message_ev
 
 boost::statechart::result
 sanguis::client::running_state::operator()(
-	const messages::disconnect&)
+	messages::disconnect const &)
 {
 	sge::clog << SGE_TEXT("client: disconnected\n");
 	return transit<intermediate_state>();
@@ -108,7 +105,7 @@ sanguis::client::running_state::operator()(
 
 boost::statechart::result
 sanguis::client::running_state::operator()(
-	const messages::game_state&)
+	messages::game_state const &)
 {
 	sge::clog << SGE_TEXT("client: running: received game state\n");
 	return discard_event();
@@ -116,218 +113,41 @@ sanguis::client::running_state::operator()(
 
 boost::statechart::result
 sanguis::client::running_state::operator()(
-	const messages::give_weapon& m)
+	messages::give_weapon const &m)
 {
-	if(m.id() != drawer.get_player().id())
-		return discard_event(); // FIXME
-	sge::clog << SGE_TEXT("client: got new weapon\n");	
-	owned_weapons[m.weapon()] = true;
-
-	// we don't own any weapon so take this one
-	if(current_weapon == weapon_type::size)
-		change_weapon(
-			m.id(),
-			static_cast<weapon_type::type>(
-				m.weapon()));
-
+	logic.give_weapon(
+		m);
 	return discard_event();
 }
 
 boost::statechart::result
 sanguis::client::running_state::operator()(
-	const messages::pause&)
+	messages::pause const &)
 {
-	paused = true;
-	drawer.pause(paused);
+	logic.pause(true);
+	drawer.pause(true);
 	return discard_event();
 }
 
 boost::statechart::result
 sanguis::client::running_state::operator()(
-	const messages::unpause&)
+	messages::unpause const &)
 {
-	paused = false;
-	drawer.pause(paused);
+	logic.pause(false);
+	drawer.pause(false);
 	return discard_event();
 }
 
 boost::statechart::result
-sanguis::client::running_state::handle_default_msg(const messages::base& m)
+sanguis::client::running_state::handle_default_msg(
+	messages::base const &m)
 {
 	drawer.process_message(m);
 	return discard_event();
 }
 
-void sanguis::client::running_state::handle_player_action(const player_action& m)
+void sanguis::client::running_state::send_message(
+	messages::auto_ptr m)
 {
-	// TODO: accumulate events!
-	try
-	{
-		// TODO: install handler logic for this
-		const draw::player& player(drawer.get_player());
-		handle_direction(player, m);
-		handle_rotation(player, m);
-		handle_shooting(player, m);
-		handle_switch_weapon(player, m);
-		handle_pause_unpause(player, m);
-	}
-	catch(const sge::exception& e)
-	{
-		sge::clog << e.what() << SGE_TEXT('\n');
-	}
-}
-
-void sanguis::client::running_state::handle_direction(
-	const draw::player& player,
-	const player_action& m)
-{
-	const sge::math::vector2 last_direction(direction);
 	
-	switch(m.type()) {
-	case player_action::horizontal_move:
-		direction.x() += m.scale();
-		break;
-	case player_action::vertical_move:
-		direction.y() += m.scale();
-		break;
-	default:
-		return;
-	}
-
-	if(last_direction != direction)
-		context<machine>().send(
-			messages::auto_ptr(
-				new messages::player_direction(
-					player.id(),
-					sge::math::structure_cast<messages::space_unit>(direction))));
-}
-
-void sanguis::client::running_state::handle_rotation(
-	const draw::player& player,
-	const player_action& m)
-{
-	const sge::sprite::point last_cursor_pos(cursor_pos);
-
-	switch(m.type()) {
-	case player_action::horizontal_look:
-		cursor_pos.x() += static_cast<sge::sprite::unit>(m.scale());
-		break;
-	case player_action::vertical_look:
-		cursor_pos.y() += static_cast<sge::sprite::unit>(m.scale());
-		break;
-	default:
-		return;
-	}
-
-	sge::renderer::device_ptr const rend = context<machine>().renderer();
-	cursor_pos.x() = sge::math::clamp(cursor_pos.x(), 0, static_cast<sge::sprite::unit>(rend->screen_width()));
-	cursor_pos.y() = sge::math::clamp(cursor_pos.y(), 0, static_cast<sge::sprite::unit>(rend->screen_height()));
-	
-	if(last_cursor_pos == cursor_pos)
-		return;
-
-	const boost::optional<sge::space_unit> rotation(sge::math::angle_to<sge::space_unit>(player.center(), cursor_pos));
-	if(!rotation)
-		return;
-
-	context<machine>().send(
-		messages::auto_ptr(
-			new messages::player_rotation(
-				player.id(),
-				messages::mu(
-					*rotation))));
-
-	drawer.process_message(
-		messages::move(
-			cursor_id,
-			screen_to_virtual(rend->screen_size(),cursor_pos-sge::sprite::point(32,32))));
-
-}
-
-void sanguis::client::running_state::handle_shooting(
-	const draw::player& p,
-	const player_action& m)
-{
-	if(m.type() != player_action::shoot)
-		return;
-	
-	context<machine>().send(
-		messages::auto_ptr(
-			sge::math::compare(static_cast<key_scale>(0), m.scale())
-			? static_cast<messages::base*>(
-				new messages::player_stop_shooting(
-					p.id()))
-			: static_cast<messages::base*>(
-				new messages::player_start_shooting(
-					p.id()))));
-}
-
-void sanguis::client::running_state::handle_switch_weapon(
-	const draw::player& p,
-	const player_action& m)
-{
-	// we don't own any weapon
-	if(current_weapon == weapon_type::size)
-		return;
-
-	owned_weapons_array::size_type const weapon_index(
-		static_cast<owned_weapons_array::size_type>(
-			current_weapon));
-
-	assert(weapon_index < owned_weapons.size());
-
-	cyclic_iterator<owned_weapons_array::const_iterator> it(
-		owned_weapons.begin()
-		+ static_cast<owned_weapons_array::size_type>(current_weapon),
-		owned_weapons.begin(),
-		owned_weapons.end());
-
-	switch(m.type()) {
-	case player_action::switch_weapon_forwards:
-		while(!*++it) ;
-		break;
-	case player_action::switch_weapon_backwards:
-		while(!*--it) ;
-		break;
-	default:
-		return;
-	}
-
-	change_weapon(
-		p.id(),
-		static_cast<weapon_type::type>(
-			std::distance(
-				static_cast<owned_weapons_array const &>(
-					owned_weapons).begin(),
-				it.get())));
-}
-
-void sanguis::client::running_state::handle_pause_unpause(
-	const draw::player& p,
-	const player_action& m)
-{
-	if(m.type() != player_action::pause_unpause)
-		return;
-	context<machine>().send(
-		messages::auto_ptr(
-			paused
-			? static_cast<messages::base*>(
-				new messages::player_unpause(
-					p.id()))
-			: static_cast<messages::base*>(
-				new messages::player_pause(
-					p.id()))));
-}
-
-void sanguis::client::running_state::change_weapon(
-	entity_id const id,
-	weapon_type::type const w)
-{
-	current_weapon = w;
-
-	context<machine>().send(
-		messages::auto_ptr(
-			new messages::player_change_weapon(
-				id,
-				current_weapon)));
 }

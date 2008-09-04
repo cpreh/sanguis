@@ -24,11 +24,9 @@ namespace sanguis
 namespace draw
 {
 
-class player;
-
-class scene_drawer : boost::noncopyable {
+class scene : boost::noncopyable {
 public:
-	scene_drawer(
+	scene(
 		sge::renderer::device_ptr,
 		sge::font::font &);
 	
@@ -39,8 +37,6 @@ public:
 	void draw(const time_type);
 
 	void pause(bool);
-
-	const player& get_player() const;
 
 	void operator()(const messages::add&);
 	void operator()(const messages::add_enemy&);
@@ -72,7 +68,6 @@ private:
 
 	system                        ss;
 	hud                           hud_;
-	player*                       player_;
 	bool                          paused;
 
 	typedef boost::ptr_map<entity_id, entity> entity_map;

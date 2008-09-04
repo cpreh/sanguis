@@ -1,0 +1,73 @@
+#ifndef SANGUIS_CLIENT_LOGIC_HPP_INCLUDED
+#define SANGUIS_CLIENT_LOGIC_HPP_INCLUDED
+
+#include "player_action.hpp"
+#include "send_callback.hpp"
+#include "../weapon_type.hpp"
+#include "../entity_id.hpp"
+#include <boost/noncopyable.hpp>
+#include <boost/function.hpp>
+#include <vector>
+
+namespace sanguis
+{
+namespace client
+{
+
+class logic : boost::noncopyable {
+public:
+	explicit logic(
+		send_callback const &);	
+	void handle_player_action(
+		player_action const &);
+private:
+	void handle_move_x(
+		key_scale);
+	void handle_move_y(
+		key_scale);
+	void update_direction();
+
+	void handle_rotation_x(
+		key_scale);
+	void handle_rotation_y(
+		key_scale);
+	void handle_shooting(
+		key_scale);
+	void handle_switch_weapon_forwards(
+		key_scale);
+	void handle_switch_weapon_backwards(
+		key_scale);
+	void handle_pause_unpause(
+		key_scale);
+
+	void change_weapon(
+		weapon_type::type);
+
+	send_callback const        send;
+
+	typedef boost::function<
+		void (key_scale)
+	> action_handler;
+
+	typedef std::vector<
+		action_handler
+		>                  action_handlers;
+	action_handlers            actions;
+		
+	entity_id                  player_id;
+	sge::math::vector2         direction;
+	sge::sprite::point         cursor_pos;
+	weapon_type::type          current_weapon;
+	bool                       paused;
+
+	typedef boost::array<
+		bool,
+		weapon_type::size> owned_weapons_array;
+	
+	owned_weapons_array        owned_weapons;
+};
+
+}
+}
+
+#endif
