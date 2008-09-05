@@ -5,6 +5,7 @@
 #include "send_callback.hpp"
 #include "../weapon_type.hpp"
 #include "../entity_id.hpp"
+#include "../messages/fwd.hpp"
 #include <sge/sprite/types.hpp>
 #include <sge/math/vector.hpp>
 #include <sge/renderer/device.hpp>
@@ -25,9 +26,14 @@ public:
 	void handle_player_action(
 		player_action const &);
 	void give_weapon(
-		weapon_type::type);
+		messages::give_weapon const &);
+	void move(
+		messages::move const &);
 	void pause(
 		bool);
+
+	sge::sprite::point const
+	cursor_pos() const;
 private:
 	void handle_move_x(
 		key_scale);
@@ -67,7 +73,7 @@ private:
 		
 	entity_id                       player_id;
 	sge::math::vector2              direction;
-	sge::sprite::point              cursor_pos,
+	sge::sprite::point              cursor_pos_,
 	                                player_center;
 	weapon_type::type               current_weapon;
 	bool                            paused;

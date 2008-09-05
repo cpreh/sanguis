@@ -10,13 +10,13 @@ namespace sanguis
 namespace messages
 {
 
-// TODO: this should probably carry an id as well
 class client_info : public base {
 public:
 	client_info();
-	client_info(const string &);
+	client_info(
+		string const &);
 
-	const string& name() const;
+	string const &name() const;
 private:
 	string name_;
 

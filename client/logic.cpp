@@ -1,4 +1,6 @@
 #include "logic.hpp"
+#include "../messages/give_weapon.hpp"
+#include "../messages/move.hpp"
 #include "../messages/player_direction.hpp"
 #include "../messages/player_rotation.hpp"
 #include "../messages/player_start_shooting.hpp"
@@ -33,7 +35,8 @@ sanguis::client::logic::logic(
 			(boost::bind(&logic::handle_pause_unpause, this, _1)).to_container(actions)),
 	player_id(0),
 	direction(0,0),
-	cursor_pos(0,0),
+	cursor_pos_(0,0),
+	player_center(0,0),
 	current_weapon(weapon_type::size),
 	paused(false)
 {
@@ -49,21 +52,39 @@ void sanguis::client::logic::handle_player_action(
 }
 
 void sanguis::client::logic::give_weapon(
-	weapon_type::type const t)
+	messages::give_weapon const &m)
 {
-	owned_weapons[t] = true;
+	if(m.id() != player_id)
+		return;
+	
+	owned_weapons.at(m.weapon()) = true;
 
 	// we don't own any weapon so take this one
 	if(current_weapon == weapon_type::size)
 		change_weapon(
 			static_cast<weapon_type::type>(
-				t));
+				m.weapon()));
+}
+
+void sanguis::client::logic::move(
+	messages::move const &m)
+{
+	if(m.id() == player_id)
+		player_center = sge::math::structure_cast<
+			sge::sprite::unit>(
+				m.pos()); // FIXME
 }
 
 void sanguis::client::logic::pause(
 	bool const p)
 {
 	paused = p;
+}
+
+sge::sprite::point const
+sanguis::client::logic::cursor_pos() const
+{
+	return cursor_pos_;
 }
 
 void sanguis::client::logic::handle_move_x(
@@ -93,9 +114,9 @@ void sanguis::client::logic::update_direction()
 void sanguis::client::logic::handle_rotation_x(
 	key_scale const s)
 {
-	cursor_pos.x() += static_cast<sge::sprite::unit>(s);
-	cursor_pos.x() = sge::math::clamp(
-		cursor_pos.x(),
+	cursor_pos_.x() += static_cast<sge::sprite::unit>(s);
+	cursor_pos_.x() = sge::math::clamp(
+		cursor_pos_.x(),
 		0,
 		static_cast<sge::sprite::unit>(
 			rend->screen_width()));
@@ -106,9 +127,9 @@ void sanguis::client::logic::handle_rotation_x(
 void sanguis::client::logic::handle_rotation_y(
 	key_scale const s)
 {
-	cursor_pos.y() += static_cast<sge::sprite::unit>(s);
-	cursor_pos.y() = sge::math::clamp(
-		cursor_pos.y(),
+	cursor_pos_.y() += static_cast<sge::sprite::unit>(s);
+	cursor_pos_.y() = sge::math::clamp(
+		cursor_pos_.y(),
 		0,
 		static_cast<sge::sprite::unit>(
 			rend->screen_height()));
@@ -121,7 +142,7 @@ void sanguis::client::logic::update_rotation()
 	boost::optional<sge::space_unit> const rotation(
 		sge::math::angle_to<sge::space_unit>(
 			player_center,
-			cursor_pos));
+			cursor_pos_));
 	if(!rotation)
 		return;
 
@@ -131,12 +152,6 @@ void sanguis::client::logic::update_rotation()
 				player_id,
 				messages::mu(
 					*rotation))));
-
-	/*drawer.process_message(
-		messages::move(
-			cursor_id,
-			screen_to_virtual(rend->screen_size(),cursor_pos-sge::sprite::point(32,32))));*/
-
 }
 
 void sanguis::client::logic::handle_shooting(

@@ -1,45 +1,30 @@
 #include "running_state.hpp"
-#include "player_action.hpp"
 #include "intermediate_state.hpp"
 #include "next_id.hpp"
 #include "../client_entity_type.hpp"
-#include "../cyclic_iterator_impl.hpp"
 #include "../dispatch_type.hpp"
-#include "../truncation_check_cast.hpp"
-#include "../truncation_check_structure_cast.hpp"
 #include "../client_messages/add.hpp"
 #include "../messages/disconnect.hpp"
 #include "../messages/game_state.hpp"
 #include "../messages/give_weapon.hpp"
 #include "../messages/move.hpp"
 #include "../messages/pause.hpp"
-#include "../messages/player_change_weapon.hpp"
-#include "../messages/player_direction.hpp"
-#include "../messages/player_pause.hpp"
-#include "../messages/player_rotation.hpp"
-#include "../messages/player_start_shooting.hpp"
-#include "../messages/player_stop_shooting.hpp"
-#include "../messages/player_unpause.hpp"
 #include "../messages/unpause.hpp"
 #include "../draw/player.hpp"
 #include "../draw/coord_transform.hpp"
 #include <sge/iostream.hpp>
 #include <sge/string.hpp>
 #include <sge/exception.hpp>
-#include <sge/math/clamp.hpp>
-#include <sge/math/vector.hpp>
-#include <sge/math/angle.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
-#include <algorithm>
-#include <cmath>
 
 namespace
 {
 
-const sanguis::entity_id cursor_id(sanguis::client::next_id()),
-                         background_id(sanguis::client::next_id()),
-                         healthbar_id(sanguis::client::next_id());
+sanguis::entity_id const
+	cursor_id(sanguis::client::next_id()),
+	background_id(sanguis::client::next_id()),
+	healthbar_id(sanguis::client::next_id());
 
 }
 
@@ -75,6 +60,14 @@ sanguis::client::running_state::react(
 {
 	context<machine>().dispatch();
 
+	// update: cursor pos (TODO: this should be done in a better way)
+	drawer.process_message(
+		messages::move(
+			cursor_id,
+			screen_to_virtual(
+				context<machine>().renderer()->screen_size(),
+				logic_.cursor_pos())));
+
 	drawer.draw(t.delta());
 	
 	return discard_event();
@@ -89,6 +82,7 @@ sanguis::client::running_state::react(
 			messages::disconnect,
 			messages::game_state,
 			messages::give_weapon,
+			messages::move,
 			messages::pause,
 			messages::unpause
 		>,
@@ -119,8 +113,18 @@ sanguis::client::running_state::operator()(
 	messages::give_weapon const &m)
 {
 	logic_.give_weapon(
-		static_cast<weapon_type::type>(
-			m.weapon()));
+			m);
+	return discard_event();
+}
+
+boost::statechart::result
+sanguis::client::running_state::operator()(
+	messages::move const &m)
+{
+	logic_.move(
+		m);
+	drawer.process_message(
+		m);
 	return discard_event();
 }
 

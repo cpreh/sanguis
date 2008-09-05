@@ -13,10 +13,11 @@ namespace messages
 class move : public entity_message {
 public:
 	move();
-	move(const entity_id id,
-	     const pos_type& pos);
+	move(
+		entity_id id,
+	    	pos_type const &pos);
 	
-	const pos_type& pos() const;
+	pos_type const &pos() const;
 private:
 	pos_type pos_;
 

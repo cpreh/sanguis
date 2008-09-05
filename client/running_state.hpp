@@ -46,6 +46,7 @@ struct running_state
 	boost::statechart::result operator()(const messages::disconnect&);
 	boost::statechart::result operator()(const messages::game_state&);
 	boost::statechart::result operator()(const messages::give_weapon&);
+	boost::statechart::result operator()(messages::move const &);
 	boost::statechart::result operator()(const messages::pause&);
 	boost::statechart::result operator()(const messages::unpause&);
 private:
