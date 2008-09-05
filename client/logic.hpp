@@ -5,6 +5,9 @@
 #include "send_callback.hpp"
 #include "../weapon_type.hpp"
 #include "../entity_id.hpp"
+#include <sge/sprite/types.hpp>
+#include <sge/math/vector.hpp>
+#include <sge/renderer/device.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/function.hpp>
 #include <vector>
@@ -17,9 +20,14 @@ namespace client
 class logic : boost::noncopyable {
 public:
 	explicit logic(
-		send_callback const &);	
+		send_callback const &,
+		sge::renderer::device_ptr device);	
 	void handle_player_action(
 		player_action const &);
+	void give_weapon(
+		weapon_type::type);
+	void pause(
+		bool);
 private:
 	void handle_move_x(
 		key_scale);
@@ -31,6 +39,8 @@ private:
 		key_scale);
 	void handle_rotation_y(
 		key_scale);
+	void update_rotation();
+
 	void handle_shooting(
 		key_scale);
 	void handle_switch_weapon_forwards(
@@ -43,7 +53,8 @@ private:
 	void change_weapon(
 		weapon_type::type);
 
-	send_callback const        send;
+	send_callback const             send;
+	sge::renderer::device_ptr const rend;
 
 	typedef boost::function<
 		void (key_scale)
@@ -51,20 +62,21 @@ private:
 
 	typedef std::vector<
 		action_handler
-		>                  action_handlers;
-	action_handlers            actions;
+		>                       action_handlers;
+	action_handlers                 actions;
 		
-	entity_id                  player_id;
-	sge::math::vector2         direction;
-	sge::sprite::point         cursor_pos;
-	weapon_type::type          current_weapon;
-	bool                       paused;
+	entity_id                       player_id;
+	sge::math::vector2              direction;
+	sge::sprite::point              cursor_pos,
+	                                player_center;
+	weapon_type::type               current_weapon;
+	bool                            paused;
 
 	typedef boost::array<
 		bool,
-		weapon_type::size> owned_weapons_array;
+		weapon_type::size>      owned_weapons_array;
 	
-	owned_weapons_array        owned_weapons;
+	owned_weapons_array             owned_weapons;
 };
 
 }

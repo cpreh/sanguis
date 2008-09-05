@@ -252,7 +252,7 @@ void sanguis::draw::scene::configure_new_object(
 		throw sge::exception(SGE_TEXT("Object with id already in entity list!"));
 
 	// TODO: this does not belong here!
-	if(m.type() == entity_type::player)
+	/*if(m.type() == entity_type::player)
 	{
 		const entity_id reaper_id = client::next_id();
 
@@ -271,7 +271,7 @@ void sanguis::draw::scene::configure_new_object(
 
 		if (reaper_ret.second == false)
 			throw sge::exception(SGE_TEXT("couldn't insert reaper"));
-	}
+	}*/
 
 	// configure the object
 	process_message(messages::max_health(m.id(), m.max_health()));

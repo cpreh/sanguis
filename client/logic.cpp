@@ -1,25 +1,40 @@
 #include "logic.hpp"
+#include "../messages/player_direction.hpp"
+#include "../messages/player_rotation.hpp"
+#include "../messages/player_start_shooting.hpp"
+#include "../messages/player_stop_shooting.hpp"
+#include "../messages/player_pause.hpp"
+#include "../messages/player_unpause.hpp"
+#include "../messages/player_change_weapon.hpp"
+#include "../cyclic_iterator_impl.hpp"
+#include <sge/math/clamp.hpp>
+#include <sge/math/angle.hpp>
 #include <boost/bind.hpp>
+#include <boost/assign/list_of.hpp>
+#include <boost/optional.hpp>
 #include <algorithm>
 #include <cassert>
 
 sanguis::client::logic::logic(
-	send_callback const &send)
+	send_callback const &send,
+	sge::renderer::device_ptr const rend)
 :
 	send(send),
+	rend(rend),
 	actions(
-		boost::bind(&logic::handle_move_x, this, _1),
-		boost::bind(&logic::handle_move_y, this, _1),
-		boost::bind(&logic::handle_rotation_x, this, _1),
-		boost::bind(&logic::handle_rotation_y, this, _1),
-		boost::bind(&logic::handle_shooting, this, _1),
-		boost::bind(&logic::handle_switch_weapon_fowards, this, _1),
-		boost::bind(&logic::handle_switch_weapon_backwards, this, _1),
-		boost::bind(&logic::handle_pause_unpause, this, _1)),
+		boost::assign::list_of
+			(boost::bind(&logic::handle_move_x, this, _1))
+			(boost::bind(&logic::handle_move_y, this, _1))
+			(boost::bind(&logic::handle_rotation_x, this, _1))
+			(boost::bind(&logic::handle_rotation_y, this, _1))
+			(boost::bind(&logic::handle_shooting, this, _1))
+			(boost::bind(&logic::handle_switch_weapon_forwards, this, _1))
+			(boost::bind(&logic::handle_switch_weapon_backwards, this, _1))
+			(boost::bind(&logic::handle_pause_unpause, this, _1)).to_container(actions)),
 	player_id(0),
 	direction(0,0),
 	cursor_pos(0,0),
-	current_weapon(weapons::size),
+	current_weapon(weapon_type::size),
 	paused(false)
 {
 	std::fill(owned_weapons.begin(), owned_weapons.end(), false); // TODO: boost::array doesn't initialize by default?
@@ -34,29 +49,31 @@ void sanguis::client::logic::handle_player_action(
 }
 
 void sanguis::client::logic::give_weapon(
-	messages::give_weapon const &m)
+	weapon_type::type const t)
 {
-	if(m.id() != player_id)
-		return; // FIXME
-	
-	owned_weapons[m.weapon()] = true;
+	owned_weapons[t] = true;
 
 	// we don't own any weapon so take this one
 	if(current_weapon == weapon_type::size)
 		change_weapon(
-			m.id(),
 			static_cast<weapon_type::type>(
-				m.weapon()));
+				t));
 }
 
-void sanguis::client::running_state::handle_move_x(
+void sanguis::client::logic::pause(
+	bool const p)
+{
+	paused = p;
+}
+
+void sanguis::client::logic::handle_move_x(
 	key_scale const s)
 {
 	direction.x() += s;
 	update_direction();
 }
 
-void sanguis::client::running_state::handle_move_y(
+void sanguis::client::logic::handle_move_y(
 	key_scale const s)
 {
 	direction.y() += s;
@@ -68,7 +85,7 @@ void sanguis::client::logic::update_direction()
 	send(
 		messages::auto_ptr(
 			new messages::player_direction(
-				player.id(),
+				player_id,
 				sge::math::structure_cast<messages::space_unit>(
 					direction))));
 }
@@ -80,7 +97,8 @@ void sanguis::client::logic::handle_rotation_x(
 	cursor_pos.x() = sge::math::clamp(
 		cursor_pos.x(),
 		0,
-		screen_sz.w());
+		static_cast<sge::sprite::unit>(
+			rend->screen_width()));
 	
 	update_rotation();
 }
@@ -88,11 +106,12 @@ void sanguis::client::logic::handle_rotation_x(
 void sanguis::client::logic::handle_rotation_y(
 	key_scale const s)
 {
-	cursor_pos.y() += static_cast<sge::sprite::unit>(m.scale());
+	cursor_pos.y() += static_cast<sge::sprite::unit>(s);
 	cursor_pos.y() = sge::math::clamp(
 		cursor_pos.y(),
 		0,
-		screen_sz.h());
+		static_cast<sge::sprite::unit>(
+			rend->screen_height()));
 
 	update_rotation();
 }
@@ -120,7 +139,7 @@ void sanguis::client::logic::update_rotation()
 
 }
 
-void sanguis::client::running_state::handle_shooting(
+void sanguis::client::logic::handle_shooting(
 	key_scale const s)
 {
 	send(
@@ -130,13 +149,13 @@ void sanguis::client::running_state::handle_shooting(
 				s)
 			? static_cast<messages::base*>(
 				new messages::player_stop_shooting(
-					p.id()))
+					player_id))
 			: static_cast<messages::base*>(
 				new messages::player_start_shooting(
-					p.id()))));
+					player_id))));
 }
 
-void sanguis::client::running_state::handle_switch_weapon_forwards(
+void sanguis::client::logic::handle_switch_weapon_forwards(
 	key_scale)
 {
 	// we don't own any weapon
@@ -155,19 +174,18 @@ void sanguis::client::running_state::handle_switch_weapon_forwards(
 		owned_weapons.begin(),
 		owned_weapons.end());
 
-	switch(m.type()) {
-	case player_action::switch_weapon_forwards:
+	//switch(m.type()) {
+	//case player_action::switch_weapon_forwards:
 		while(!*++it) ;
-		break;
-	case player_action::switch_weapon_backwards:
+	//	break;
+	/*case player_action::switch_weapon_backwards:
 		while(!*--it) ;
 		break;
 	default:
 		return;
-	}
+	}*/
 
 	change_weapon(
-		player_id,
 		static_cast<weapon_type::type>(
 			std::distance(
 				static_cast<owned_weapons_array const &>(
@@ -179,10 +197,10 @@ void sanguis::client::logic::handle_switch_weapon_backwards(
 	key_scale)
 {}
 
-void sanguis::client::running_state::handle_pause_unpause(
+void sanguis::client::logic::handle_pause_unpause(
 	key_scale)
 {
-	context<machine>().send(
+	send(
 		messages::auto_ptr(
 			paused
 			? static_cast<messages::base*>(
@@ -193,12 +211,12 @@ void sanguis::client::running_state::handle_pause_unpause(
 					player_id))));
 }
 
-void sanguis::client::running_state::change_weapon(
+void sanguis::client::logic::change_weapon(
 	weapon_type::type const w)
 {
 	current_weapon = w;
 
-	context<machine>().send(
+	send(
 		messages::auto_ptr(
 			new messages::player_change_weapon(
 				player_id,

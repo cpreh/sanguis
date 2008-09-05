@@ -44,16 +44,19 @@ const sanguis::entity_id cursor_id(sanguis::client::next_id()),
 }
 
 sanguis::client::running_state::running_state(my_context ctx)
-: my_base(ctx), 
-  drawer(
-	context<machine>().renderer(),
-	context<machine>().font()),
-  logic_(boost::bind(&running_state::send_message, this, _1)),
-  input(boost::bind(&running_state::handle_player_action, this, _1)),
-  input_connection(
-	context<machine>().con_wrapper().register_callback(
-		boost::bind(&input_handler::input_callback, &input, _1))),
-  current_weapon(weapon_type::size)
+:
+	my_base(ctx), 
+	drawer(
+		context<machine>().renderer(),
+		context<machine>().font()),
+	logic_(
+		boost::bind(&running_state::send_message, this, _1),
+		context<machine>().renderer()),
+	input(
+		boost::bind(&logic::handle_player_action, &logic_, _1)),
+	input_connection(
+		context<machine>().con_wrapper().register_callback(
+			boost::bind(&input_handler::input_callback, &input, _1)))
 {
 	drawer.process_message(
 		client_messages::add(
@@ -115,8 +118,9 @@ boost::statechart::result
 sanguis::client::running_state::operator()(
 	messages::give_weapon const &m)
 {
-	logic.give_weapon(
-		m);
+	logic_.give_weapon(
+		static_cast<weapon_type::type>(
+			m.weapon()));
 	return discard_event();
 }
 
@@ -124,7 +128,7 @@ boost::statechart::result
 sanguis::client::running_state::operator()(
 	messages::pause const &)
 {
-	logic.pause(true);
+	logic_.pause(true);
 	drawer.pause(true);
 	return discard_event();
 }
@@ -133,7 +137,7 @@ boost::statechart::result
 sanguis::client::running_state::operator()(
 	messages::unpause const &)
 {
-	logic.pause(false);
+	logic_.pause(false);
 	drawer.pause(false);
 	return discard_event();
 }
@@ -149,5 +153,6 @@ sanguis::client::running_state::handle_default_msg(
 void sanguis::client::running_state::send_message(
 	messages::auto_ptr m)
 {
-	
+	context<machine>().send(
+		m);
 }
