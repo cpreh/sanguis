@@ -1,5 +1,4 @@
 #include "reaper.hpp"
-#include "player.hpp"
 #include "z_ordering.hpp"
 #include "../resolution.hpp"
 #include <sge/math/compare.hpp>
@@ -18,13 +17,14 @@ const sge::space_unit health_regain = sge::su(5);
 sanguis::draw::reaper::reaper(
 	entity_id const id,
 	system &sys,
-	player const &p)
+	model const &p)
 : model(
 	id,
 	sys,
 	SGE_TEXT("reaper"),
 	z_ordering::reaper,
-	false),
+	false,
+	sge::su(1)),
   p(p),
   current_health(p.health()),
   target_health(p.health()),
@@ -71,9 +71,10 @@ void sanguis::draw::reaper::update(time_type const t)
 
 	// use own positioning system, not the one from model::update
 	pos(
-		p.pos()-
+		p.pos() -
 			sge::sprite::point(
-				static_cast<sge::sprite::unit>(sge::su(current_health)/sge::su(p.max_health())*sge::su(resolution().w()/4)),
+				static_cast<sge::sprite::unit>(
+					sge::su(current_health)/sge::su(p.max_health())*sge::su(resolution().w()/4)),
 				static_cast<sge::sprite::unit>(0)));
 	
 	if (regain)

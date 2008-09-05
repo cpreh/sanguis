@@ -42,7 +42,7 @@
 #include <ostream>
 
 sanguis::draw::scene::scene(
-	const sge::renderer::device_ptr rend,
+	sge::renderer::device_ptr const rend,
 	sge::font::font &font)
 : ss(rend),
   hud_(font),
@@ -75,7 +75,8 @@ void sanguis::draw::scene::process_message(const messages::base& m)
 		boost::bind(&scene::process_default_msg, this, _1));
 }
 
-void sanguis::draw::scene::process_message(const client_messages::base& m)
+void sanguis::draw::scene::process_message(
+	client_messages::base const &m)
 {
 	dispatch_type<
 		boost::mpl::vector<
@@ -225,7 +226,8 @@ void sanguis::draw::scene::operator()(const messages::stop_attacking& m)
 	get_entity(m.id()).stop_attacking();
 }
 
-void sanguis::draw::scene::operator()(const client_messages::add& m)
+void sanguis::draw::scene::operator()(
+	client_messages::add const &m)
 {
 	if(entities.insert(
 		m.id(),
@@ -241,37 +243,16 @@ void sanguis::draw::scene::configure_new_object(
 	factory::entity_ptr e_ptr,
 	messages::add const &m)
 {
-	const std::pair<entity_map::iterator, bool> ret(
+	std::pair<entity_map::iterator, bool> const ret(
 		entities.insert(
 			m.id(),
 			e_ptr));
 
-	entity& e(*ret.first->second);
-
 	if(ret.second == false)
-		throw sge::exception(SGE_TEXT("Object with id already in entity list!"));
+		throw sge::exception(
+			SGE_TEXT("Object with id already in entity list!"));
 
-	// TODO: this does not belong here!
-	/*if(m.type() == entity_type::player)
-	{
-		const entity_id reaper_id = client::next_id();
-
-		const std::pair<entity_map::iterator, bool> reaper_ret(
-			entities.insert(
-				reaper_id,
-				factory::entity_ptr(
-					new reaper(
-						reaper_id,
-						get_system(),
-						e))));
-
-		process_message(messages::resize(reaper_id, server::get_dim("reaper","default")));
-		process_message(messages::max_health(reaper_id, messages::mu(1)));
-		process_message(messages::health(reaper_id, messages::mu(1)));
-
-		if (reaper_ret.second == false)
-			throw sge::exception(SGE_TEXT("couldn't insert reaper"));
-	}*/
+	entity& e(*ret.first->second);
 
 	// configure the object
 	process_message(messages::max_health(m.id(), m.max_health()));
@@ -284,12 +265,13 @@ void sanguis::draw::scene::configure_new_object(
 	e.decay_time(
 		decay_time(
 			m.type()));
-
 }
 
-sanguis::draw::entity& sanguis::draw::scene::get_entity(const entity_id id)
+sanguis::draw::entity &
+sanguis::draw::scene::get_entity(
+	entity_id const id)
 {
-	const entity_map::iterator it = entities.find(id);
+	entity_map::iterator const it = entities.find(id);
 	if(it == entities.end())
 	{
 		sge::cerr << "client: called get_entity with object id " << id << "\n";
@@ -299,15 +281,19 @@ sanguis::draw::entity& sanguis::draw::scene::get_entity(const entity_id id)
 }
 
 sanguis::draw::entity const &
-sanguis::draw::scene::get_entity(const entity_id id) const
+sanguis::draw::scene::get_entity(
+	entity_id const id) const
 {
-	return const_cast<entity const&>(
-		const_cast<scene&>(*this).get_entity(id));
+	return const_cast<entity const &>(
+		const_cast<scene &>(*this).get_entity(id));
 }
 
-void sanguis::draw::scene::process_default_msg(const messages::base& m)
+void sanguis::draw::scene::process_default_msg(
+	messages::base const &m)
 {
-	sge::clog << SGE_TEXT("Invalid message event in scene: ") << sge::iconv(typeid(m).name()) << SGE_TEXT('\n');
+	sge::clog << SGE_TEXT("Invalid message event in scene: ")
+	          << sge::iconv(typeid(m).name())
+		  << SGE_TEXT('\n');
 }
 
 void sanguis::draw::scene::process_default_client_msg(

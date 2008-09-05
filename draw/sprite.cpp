@@ -23,10 +23,16 @@ sanguis::draw::sprite::sprite(
 				boost::none));
 }
 
-const sge::sprite::point
+sge::sprite::point const
 sanguis::draw::sprite::center() const
 {
 	return master().center();
+}
+
+sge::sprite::point const
+sanguis::draw::sprite::pos() const
+{
+	return master().pos();
 }
 
 void sanguis::draw::sprite::update(
@@ -96,11 +102,6 @@ void sanguis::draw::sprite::orientation(const sge::space_unit o)
 void sanguis::draw::sprite::speed(const sge::math::vector2& s)
 {
 	speed_ = s;
-}
-
-sge::math::vector2 sanguis::draw::sprite::pos() const
-{
-	return pos_;
 }
 
 void sanguis::draw::sprite::pos(const sge::sprite::point& p)

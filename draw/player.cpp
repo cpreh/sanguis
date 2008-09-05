@@ -1,5 +1,6 @@
 #include "player.hpp"
 #include "z_ordering.hpp"
+#include "../client/next_id.hpp"
 #include <sge/string.hpp>
 #include <sge/math/angle.hpp>
 #include <sge/math/constants.hpp>
@@ -12,8 +13,6 @@
 
 namespace
 {
-
-//const sge::sprite::point rotation_point(0,0);
 
 const sge::sprite::point player_body_center(25,32);
 const sge::sprite::point player_leg_center(32,32);
@@ -30,7 +29,11 @@ sanguis::draw::player::player(
 	SGE_TEXT("player"),
 	z_ordering::model_generic),
   angle_(sge::su(0)),
-  target_angle(angle_)
+  target_angle(angle_),
+  reaper_(
+  	client::next_id(),
+	sys,
+	*this)
 {
 	bottom_sprite().order(z_ordering::player_lower);
 	
@@ -75,70 +78,6 @@ void sanguis::draw::player::update(const time_type time)
 	sge::math::vector2 const top_pos = rot_abs - body_center;
 
 	top_sprite().pos() = sge::math::structure_cast<sge::sprite::unit>(top_pos);
-	/*
-	// FIXME: load rotation point (see above)
-	const sge::math::vector2 leg_center(sge::math::structure_cast<sge::space_unit>(player_leg_center));
-	const sge::math::vector2 body_center(sge::math::structure_cast<sge::space_unit>(player_body_center));
-
-	//sge::cout << "angle_ = " << angle_ << ", target_angle=" << target_angle << "\n";
-
-	const sge::space_unit abs_angle = sge::math::rel_angle_to_abs(angle_),
-	                      abs_target = sge::math::rel_angle_to_abs(target_angle);
-	
-	const sge::space_unit twopi = sge::su(2)*sge::math::pi<sge::space_unit>();
-
-	assert(abs_angle >= sge::su(0) && abs_angle <= twopi);
-	assert(abs_target >= sge::su(0) && abs_target <= twopi);
-
-	const sge::space_unit abs_dist = std::abs(abs_target - abs_angle);
-	const sge::space_unit swap_dist = (abs_angle > abs_target) ? twopi-abs_angle+abs_target : twopi-abs_target+abs_angle;
-	const sge::space_unit min_dist = std::min(swap_dist,abs_dist);
-
-
-	assert(abs_dist >= sge::su(0) && swap_dist >= sge::su(0) && min_dist >= sge::su(0));
-
-	sge::space_unit dir;
-	if (abs_angle > abs_target)
-		dir = (swap_dist > abs_dist) ? sge::su(-1) : sge::su(1);
-	else
-		dir = (swap_dist > abs_dist) ? sge::su(1) : sge::su(-1);
-
-	#if 0
-	DEBUG
-	if (!sge::math::nearly_equals(target_angle,angle_))
-	{
-		sge::cout << "a = " 
-		          << sge::math::rad_to_deg(abs_angle) << ", t = " 
-							<< sge::math::rad_to_deg(abs_target) << ", abs_dist = " 
-							<< sge::math::rad_to_deg(abs_dist) << ", swap_dist = " 
-							<< sge::math::rad_to_deg(swap_dist) << ", dir = " << dir << "\n";
-	}
-	#endif
-
-	if (min_dist < time/turning_speed.value())
-		angle_ = target_angle;
-	else
-		angle_ = sge::math::abs_angle_to_rel(abs_angle + dir * time/turning_speed.value());
-
-	// player image is now rotated correctly
-	//const sge::space_unit sprite_rotation = angle_ + sge::math::pi<sge::space_unit>()/sge::su(2);
-	const sge::space_unit sprite_rotation = angle_;
-
-	model::orientation(sprite_rotation, 0); // TODO: better interface for this in model
-	//bottom_sprite().rotation(sprite_rotation);
-
-	const sge::math::vector2 new_rotation = sge::math::point_rotate(
-		leg_center,
-		sge::math::vector2(sge::su(bottom_sprite().w()/2),sge::su(bottom_sprite().h()/2)),
-		sprite_rotation);
-
-	const sge::math::vector2 rot_abs = 
-		sge::math::structure_cast<sge::space_unit>(bottom_sprite().pos())+new_rotation;
-
-	const sge::math::vector2 top_pos = rot_abs - body_center;
-
-	top_sprite().pos() = sge::math::structure_cast<sge::sprite::unit>(top_pos);
-	*/
 }
 
 sanguis::draw::object& sanguis::draw::player::bottom_sprite()
@@ -149,19 +88,4 @@ sanguis::draw::object& sanguis::draw::player::bottom_sprite()
 sanguis::draw::object& sanguis::draw::player::top_sprite()
 {
 	return at(1);
-}
-
-sge::space_unit sanguis::draw::player::health() const
-{
-	return model::health();
-}
-
-sge::space_unit sanguis::draw::player::max_health() const
-{
-	return model::max_health();
-}
-
-sge::sprite::point sanguis::draw::player::pos() const
-{
-	return sge::math::structure_cast<sge::sprite::unit>(model::pos());
 }

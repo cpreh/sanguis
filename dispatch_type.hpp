@@ -22,11 +22,11 @@ struct dispatch_type_impl {
 		>
 	static Result
 	execute(
-		Iterator*,
-		LastIterator*,
-		Fun&,
-		const Type& t,
-		const Handler& def_handler)
+		Iterator *,
+		LastIterator *,
+		Fun &,
+		Type const &t,
+		Handler const &def_handler)
 	{
 		return def_handler(t);
 	}
@@ -43,23 +43,23 @@ struct dispatch_type_impl<Result, false> {
 		>
 	static Result
 	execute(
-		Iterator*,
-		LastIterator*,
-		Fun& f,
-		const Type& t,
-		const Handler& def_handler)
+		Iterator *,
+		LastIterator *,
+		Fun &f,
+		Type const &t,
+		Handler const &def_handler)
 	{
 		typedef typename boost::mpl::deref<Iterator>::type item;
 		typedef typename boost::mpl::next<Iterator>::type iter;
 
 		return typeid(t) == typeid(item)
-			? f(static_cast<const item&>(t))
+			? f(static_cast<item const &>(t))
 			: dispatch_type_impl<
 				Result,
 				boost::is_same<iter, LastIterator>::value
 				>::execute
-				(static_cast<iter*>(0),
-				 static_cast<LastIterator*>(0),
+				(static_cast<iter *>(0),
+				 static_cast<LastIterator *>(0),
 				 f,
 				 t,
 				 def_handler);
@@ -75,9 +75,9 @@ template<
 	>
 Result
 dispatch_type(
-	Fun& f,
-	const Type& t,
-	const Handler& def_handler)
+	Fun &f,
+	Type const &t,
+	Handler const &def_handler)
 {
 	typedef typename boost::mpl::begin<Sequence>::type first;
 	typedef typename boost::mpl::end<Sequence>::type last;
@@ -86,8 +86,8 @@ dispatch_type(
 		Result,
 		boost::is_same<first, last>::value >
 		::execute(
-			static_cast<first*>(0),
-			static_cast<last*>(0),
+			static_cast<first *>(0),
+			static_cast<last *>(0),
 			f,
 			t,
 			def_handler);

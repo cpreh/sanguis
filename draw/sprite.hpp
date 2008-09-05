@@ -17,7 +17,9 @@ public:
 		system &sys,
 		sprite_vector::size_type init_sprites,
 		object::order_type order);
+	
 	sge::sprite::point const center() const;
+	sge::sprite::point const pos() const;
 protected:
 	typedef sprite_vector::iterator iterator;
 	typedef sprite_vector::const_iterator const_iterator;
@@ -31,8 +33,6 @@ protected:
 	iterator end();
 	const_iterator begin() const;
 	const_iterator end() const;
-
-	sge::math::vector2 pos() const;
 
 	virtual void orientation(sge::space_unit);
 	virtual void speed(const sge::math::vector2&);

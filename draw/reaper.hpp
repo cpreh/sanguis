@@ -8,20 +8,18 @@ namespace sanguis
 namespace draw
 {
 
-class player;
-
 class reaper : public model {
 public:
 	reaper(
 		entity_id id,
 		system &,
-		player const &);
+		model const &);
 private:
 	void update(time_type);
-	player const &p;
-	sge::space_unit current_health;
-	sge::space_unit target_health;
-	bool inited;
+	model const     &p;
+	sge::space_unit current_health,
+	                target_health;
+	bool            inited;
 };
 
 }

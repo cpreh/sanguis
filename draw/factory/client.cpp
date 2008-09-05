@@ -3,7 +3,7 @@
 #include "../z_ordering.hpp"
 #include "../../client_messages/add.hpp"
 #include <sge/exception.hpp>
-#include <sge/string.hpp>
+#include <sge/text.hpp>
 
 sanguis::draw::factory::entity_ptr
 sanguis::draw::factory::client(

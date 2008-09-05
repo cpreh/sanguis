@@ -12,15 +12,16 @@ sanguis::draw::model::model(
 	system &sys,
 	sge::string const &name,
 	object::order_type const order,
-	bool const show_healthbar)
+	bool const show_healthbar,
+	sge::space_unit const start_health)
 : sprite(
 	id,
 	sys,
 	load::model::singleton()[name].size(),
 	order),
   attacking(false),
-  health_(sge::su(0)),
-  max_health_(sge::su(0)),
+  health_(start_health),
+  max_health_(start_health),
   healthbar_(
 	show_healthbar
 	? new healthbar(
@@ -35,6 +36,18 @@ sanguis::draw::model::model(
 			new model_part(
 				p.second,
 				at(i++)));
+}
+
+sge::space_unit
+sanguis::draw::model::max_health() const
+{
+	return max_health_;
+}
+
+sge::space_unit
+sanguis::draw::model::health() const
+{
+	return health_;
 }
 
 void sanguis::draw::model::update(
@@ -87,16 +100,6 @@ void sanguis::draw::model::max_health(
 {
 	max_health_ = max_health;
 	update_healthbar();
-}
-
-sge::space_unit sanguis::draw::model::max_health() const
-{
-	return max_health_;
-}
-
-sge::space_unit sanguis::draw::model::health() const
-{
-	return health_;
 }
 
 void sanguis::draw::model::weapon(

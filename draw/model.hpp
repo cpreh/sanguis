@@ -25,7 +25,11 @@ public:
 		system &,
 		sge::string const& name,
 		object::order_type order,
-		bool needs_healthbar = true);
+		bool needs_healthbar = true,
+		sge::space_unit start_health = sge::su(0));
+
+	sge::space_unit max_health() const;
+	sge::space_unit health() const;
 protected:
 	virtual void update(time_type);
 	virtual void orientation(
@@ -33,9 +37,6 @@ protected:
 	void orientation(
 		sge::sprite::rotation_type,
 		sprite_vector::size_type index);
-
-	sge::space_unit max_health() const;
-	sge::space_unit health() const;
 private:
 	void health(sge::space_unit);
 	void max_health(sge::space_unit);
