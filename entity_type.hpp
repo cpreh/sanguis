@@ -10,7 +10,8 @@ enum type {
 	bullet,
 	enemy,
 	pickup,
-	player
+	player,
+	sentry
 };
 }
 

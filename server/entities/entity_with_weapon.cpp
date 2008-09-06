@@ -9,7 +9,7 @@
 namespace
 {
 
-const sanguis::messages::pos_type target_undefined(
+sanguis::messages::pos_type const target_undefined(
 	std::numeric_limits<sanguis::messages::space_unit>::max(),
 	std::numeric_limits<sanguis::messages::space_unit>::max());
 
@@ -19,10 +19,11 @@ sanguis::server::entities::entity_with_weapon::entity_with_weapon(
 	environment const &env,
 	armor_array const &armor,
 	messages::pos_type const &pos_,
-	const messages::space_unit angle_,
-	const messages::space_unit direction_,
-	const team::type team_,
-	const entity::property_map &properties)
+	messages::space_unit const angle_,
+	messages::space_unit const direction_,
+	team::type const team_,
+	entity::property_map const &properties,
+	weapons::weapon_ptr start_weapon)
 : entity(
 	env,
 	armor,
@@ -35,6 +36,15 @@ sanguis::server::entities::entity_with_weapon::entity_with_weapon(
   weapon_(weapon_type::none),
   target_(target_undefined)
 {
+	if(!start_weapon.get())
+		return;
+	
+	weapon_type::type const wtype(
+		start_weapon->type());
+	add_weapon(
+		start_weapon);
+	change_weapon(
+		wtype);
 }
 
 void sanguis::server::entities::entity_with_weapon::update(

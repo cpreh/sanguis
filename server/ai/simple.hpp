@@ -3,7 +3,6 @@
 
 #include "base.hpp"
 #include "../entities/fwd.hpp"
-#include "../entities/enemies/fwd.hpp"
 
 namespace sanguis
 {
@@ -17,7 +16,7 @@ public:
 	simple();
 private:
 	void update(
-		entities::enemies::enemy &me,
+		entities::entity_with_weapon &me,
 		time_type,
 		entities::container const &);
 

@@ -19,39 +19,20 @@ sanguis::server::entities::enemies::enemy::enemy(
 	weapons::weapon_ptr weapon_,
 	unsigned const spawn_chance,
 	messages::exp_type const exp_)
-: entity_with_weapon(
+: entity_with_ai(
 	env,
 	armor,
 	pos,
 	angle,
 	direction,
 	team::monsters,
-	properties),
-  ai_(ai_),
+	properties,
+	ai_,
+	weapon_),
   etype_(etype_),
   spawn_chance(spawn_chance),
   exp_(exp_)
-{
-	weapon_type::type const wtype(
-		weapon_->type());
-	add_weapon(
-		weapon_);
-	change_weapon(
-		wtype);
-}
-
-void sanguis::server::entities::enemies::enemy::update(
-	time_type const time,
-	container &entities)
-{
-	entity_with_weapon::update(
-		time,
-		entities);
-	ai_->update(
-		*this,
-		time,
-		entities);
-}
+{}
 
 sanguis::enemy_type::type
 sanguis::server::entities::enemies::enemy::etype() const

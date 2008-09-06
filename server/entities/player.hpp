@@ -28,7 +28,6 @@ public:
 	entity_type::type type() const;
 
 	// own functions
-	void attack(entity &);
 	bool invulnerable() const;
 	net::id_type net_id() const;
 	messages::string name() const;

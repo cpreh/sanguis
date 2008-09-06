@@ -12,6 +12,7 @@ namespace entities
 {
 
 class entity;
+class entity_with_weapon;
 typedef boost::ptr_list<entity> container;
 typedef std::auto_ptr<entity> auto_ptr;
 

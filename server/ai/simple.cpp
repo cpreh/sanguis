@@ -1,6 +1,5 @@
 #include "simple.hpp"
-#include "../entities/entity.hpp"
-#include "../entities/enemies/enemy.hpp"
+#include "../entities/entity_with_weapon.hpp"
 #include <sge/math/angle.hpp>
 #include <boost/foreach.hpp>
 
@@ -9,7 +8,7 @@ sanguis::server::ai::simple::simple()
 {}
 
 void sanguis::server::ai::simple::update(
-	entities::enemies::enemy &me,
+	entities::entity_with_weapon &me,
 	time_type,
 	entities::container const &entities)
 {

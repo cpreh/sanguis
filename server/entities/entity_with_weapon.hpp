@@ -14,7 +14,10 @@ namespace entities
 
 class entity_with_weapon : public entity {
 protected:
-	typedef boost::ptr_map<weapon_type::type,weapons::weapon> weapon_container;
+	typedef boost::ptr_map<
+		weapon_type::type,
+		weapons::weapon
+	> weapon_container;
 
 	entity_with_weapon(
 		environment const &,
@@ -22,16 +25,18 @@ protected:
 		messages::pos_type const &pos,
 		messages::space_unit angle,
 		messages::space_unit direction,
-		team::type team,
-		entity::property_map const &);
+		team::type team_,
+		entity::property_map const &,
+		weapons::weapon_ptr start_weapon
+			= weapons::weapon_ptr());
 
 	virtual void update(
 		time_type,
 		container &entities);
 public:
-	void change_weapon(const weapon_type::type);
+	void change_weapon(weapon_type::type);
 	void add_weapon(weapons::weapon_ptr);
-	void remove_weapon(const weapon_type::type);
+	void remove_weapon(weapon_type::type);
 
 	void target(messages::pos_type const&);
 	messages::pos_type const &target() const;

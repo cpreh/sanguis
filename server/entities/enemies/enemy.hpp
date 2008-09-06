@@ -1,9 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_ENEMIES_ENEMY_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_ENEMIES_ENEMY_HPP_INCLUDED
 
-#include "../entity_with_weapon.hpp"
-#include "../../ai/base.hpp"
-#include "../../weapons/weapon.hpp"
+#include "../entity_with_ai.hpp"
 #include "../../../enemy_type.hpp"
 
 namespace sanguis
@@ -15,7 +13,7 @@ namespace entities
 namespace enemies
 {
 
-class enemy : public entity_with_weapon {
+class enemy : public entity_with_ai {
 public:	
 	enemy(
 		enemy_type::type,
@@ -29,10 +27,6 @@ public:
 		weapons::weapon_ptr weapon,
 		unsigned spawn_chance,
 		messages::exp_type exp);
-
-	void update(
-		time_type,
-		container &);
 
 	enemy_type::type etype() const;
 private:

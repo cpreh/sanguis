@@ -29,8 +29,6 @@ sanguis::server::entities::player::player(
 	level_delta_(static_cast<messages::level_type>(0))
 {}
 
-void sanguis::server::entities::player::attack(entity &) {}
-
 bool sanguis::server::entities::player::invulnerable() const
 {
 	return false;
