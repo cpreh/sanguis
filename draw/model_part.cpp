@@ -40,6 +40,11 @@ sanguis::draw::model_part::model_part(
   ended(false)
 {
 	update_animation();
+	ref.size() = sge::math::structure_cast<sge::sprite::unit>(
+		info
+		[weapon_type::none]
+		[animation_type::none]
+		.get().dim());
 }
 
 void sanguis::draw::model_part::animation(

@@ -14,8 +14,8 @@ public:
 		entity_id id,
 		system &,
 		model const &);
-private:
 	void update(time_type);
+private:
 	model const     &p;
 	sge::space_unit current_health,
 	                target_health;

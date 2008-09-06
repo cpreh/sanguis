@@ -58,12 +58,18 @@ void sanguis::draw::player::orientation(const sge::sprite::rotation_type u)
 	model::orientation(u, 1); // TODO: better interface for this in model
 }
 
-void sanguis::draw::player::update(const time_type time)
+void sanguis::draw::player::update(
+	time_type const time)
 {
 	model::update(time);
 
-	sge::math::vector2 const leg_center(sge::math::structure_cast<sge::space_unit>(player_leg_center));
-	sge::math::vector2 const body_center(sge::math::structure_cast<sge::space_unit>(player_body_center));
+	sge::math::vector2 const
+		leg_center(
+			sge::math::structure_cast<sge::space_unit>(
+				player_leg_center)),
+		body_center(
+			sge::math::structure_cast<sge::space_unit>(
+				player_body_center));
 
 	sge::sprite::rotation_type const sprite_rotation = bottom_sprite().rotation();
 
@@ -78,6 +84,8 @@ void sanguis::draw::player::update(const time_type time)
 	sge::math::vector2 const top_pos = rot_abs - body_center;
 
 	top_sprite().pos() = sge::math::structure_cast<sge::sprite::unit>(top_pos);
+
+	reaper_.update(time);
 }
 
 sanguis::draw::object& sanguis::draw::player::bottom_sprite()
