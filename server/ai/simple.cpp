@@ -19,7 +19,7 @@ void sanguis::server::ai::simple::update(
 			entities::entity const &e,
 			entities)
 		{
-			if(e.type() == entity_type::player)
+			if(!e.invulnerable() && e.team() != me.team())
 				target = &e;
 		}
 	}
