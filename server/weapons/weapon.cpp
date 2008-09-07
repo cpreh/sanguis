@@ -3,7 +3,7 @@
 #include "../entities/entity.hpp"
 #include <sge/time/second.hpp>
 
-sanguis::messages::space_unit
+sanguis::server::space_unit
 sanguis::server::weapons::weapon::range() const
 {
 	return range_;
@@ -34,7 +34,7 @@ void sanguis::server::weapons::weapon::update(
 
 bool sanguis::server::weapons::weapon::attack(
 	entities::entity const &from,
-	messages::pos_type const& to)
+	pos_type const& to)
 {
 	if(!cooldown_timer.update_b() || !in_range(from, to))
 		return false;
@@ -51,7 +51,7 @@ sanguis::server::weapons::weapon::~weapon()
 sanguis::server::weapons::weapon::weapon(
 	environment const &env_,
 	weapon_type::type const type_,
-	messages::space_unit const range_,
+	space_unit const range_,
 	time_type const base_cooldown_,
 	time_type const cast_point_)
 : diff(),
@@ -89,7 +89,7 @@ sanguis::server::weapons::weapon::insert(
 
 bool sanguis::server::weapons::weapon::in_range(
 	entities::entity const& from,
-	messages::pos_type const& to) const
+	pos_type const& to) const
 {
 	return (from.center() - to).length() < range();
 }

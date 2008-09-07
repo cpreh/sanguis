@@ -19,13 +19,15 @@ public:
 		pos_type const &center,
 		space_unit angle,
 		team::type team,
-		space_unit damage);
+		space_unit damage,
+		space_unit aoe);
 private:
 	void do_hit(
-		entity &target);
+		hit_vector const &target);
 	void do_die();
 	
-	space_unit damage;
+	space_unit damage,
+	           aoe;
 };
 
 }

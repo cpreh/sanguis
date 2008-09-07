@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_WEAPONS_PISTOL_HPP_INCLUDED
 
 #include "weapon.hpp"
-#include "../../messages/types.hpp"
+#include "../types.hpp"
 
 namespace sanguis
 {
@@ -19,13 +19,13 @@ public:
 		environment const &,
 		weapon_type::type,
 		time_type base_cooldown,
-		messages::space_unit damage,
+		space_unit damage,
 		time_type cast_point);
 private:
 	void do_attack(
 		delayed_attack const &);
 
-	messages::space_unit damage;
+	space_unit damage;
 };
 
 }

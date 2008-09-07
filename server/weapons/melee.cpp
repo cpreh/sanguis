@@ -6,9 +6,9 @@
 sanguis::server::weapons::melee::melee(
 	environment const &env,
 	weapon_type::type const type_,
-	messages::space_unit const range,
+	space_unit const range,
 	time_type const base_cooldown,
-	messages::space_unit const damage)
+	space_unit const damage)
 : weapon(
 	env,
 	type_,

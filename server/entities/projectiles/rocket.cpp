@@ -8,7 +8,8 @@ sanguis::server::entities::projectiles::rocket::rocket(
 	pos_type const &center,
 	space_unit const angle,
 	team::type const team_,
-	space_unit const damage)
+	space_unit const damage,
+	space_unit const aoe)
 :
 	projectile(
 		projectile_type::rocket,
@@ -22,11 +23,12 @@ sanguis::server::entities::projectiles::rocket::rocket(
 		default_dim(
 			SGE_TEXT("rocket")),
 		static_cast<time_type>(10)),
-	damage(damage)
+	damage(damage),
+	aoe(aoe)
 {}
 
 void sanguis::server::entities::projectiles::rocket::do_hit(
-	entity &)
+	hit_vector const &)
 {
 	die();
 }
@@ -47,7 +49,7 @@ void sanguis::server::entities::projectiles::rocket::do_die()
 				get_environment(),
 				center(),
 				team(),
-				messages::mu(20),
+				aoe,
 				damage,
 				1,
 				static_cast<time_type>(0),

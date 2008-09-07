@@ -11,6 +11,8 @@ sanguis::load::weapon_pickup_name(
 		return SGE_TEXT("pickup_pistol");
 	case weapon_type::shotgun:
 		return SGE_TEXT("pickup_shotgun");
+	case weapon_type::rocket_launcher:
+		return SGE_TEXT("pickup_rocket_launcher");
 	default:
 		throw sge::exception(
 			SGE_TEXT("load::weapon_pickup_name: missing loading code!"));

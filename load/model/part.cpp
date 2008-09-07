@@ -16,7 +16,8 @@ sanguis::load::model::part::part(
 		SGE_TEXT("melee"),
 		SGE_TEXT("pistol"),
 		SGE_TEXT("dual_pistols"),
-		SGE_TEXT("shotgun")
+		SGE_TEXT("shotgun"),
+		SGE_TEXT("rocket_launcher")
 	} };
 
 	for(weapon_type_array::const_iterator it(weapon_types.begin());

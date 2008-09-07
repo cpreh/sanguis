@@ -8,7 +8,7 @@ sanguis::server::weapons::pistol::pistol(
 	environment const &env,
 	weapon_type::type const type_,
 	time_type const base_cooldown,
-	messages::space_unit const damage,
+	space_unit const damage,
 	time_type const cast_point)
 : weapon(
 	env,

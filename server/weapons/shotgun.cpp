@@ -28,7 +28,7 @@ void sanguis::server::weapons::shotgun::do_attack(
 	delayed_attack const &a)
 {
 	typedef std::tr1::normal_distribution<
-		messages::space_unit
+		space_unit
 	> normal_distribution_su;
 
 	typedef std::tr1::variate_generator<

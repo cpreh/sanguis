@@ -2,10 +2,10 @@
 #define SANGUIS_SERVER_WEAPONS_WEAPON_HPP_INCLUDED
 
 #include "../../time_type.hpp"
-#include "../../messages/types.hpp"
 #include "../../messages/base.hpp"
 #include "../../weapon_type.hpp"
 #include "../../diff_clock.hpp"
+#include "../types.hpp"
 #include "../environment.hpp"
 #include "../entities/entity_fwd.hpp"
 #include <sge/time/timer.hpp>
@@ -16,7 +16,6 @@ namespace sanguis
 {
 namespace server
 {
-
 namespace weapons
 {
 
@@ -24,9 +23,6 @@ class delayed_attack;
 
 class weapon {
 public:
-	typedef messages::space_unit space_unit;
-	typedef messages::pos_type   pos_type;
-
 	space_unit range() const;
 	bool attack(
 		entities::entity const &from,
@@ -38,8 +34,8 @@ public:
 	virtual ~weapon();
 protected:
 	weapon(
-		const sanguis::server::environment &,
-		const weapon_type::type,
+		environment const &,
+		weapon_type::type,
 		space_unit range,
 		time_type base_cooldown,
 		time_type cast_point);

@@ -2,6 +2,7 @@
 #include "melee.hpp"
 #include "pistol.hpp"
 #include "shotgun.hpp"
+#include "rocket_launcher.hpp"
 #include <sge/exception.hpp>
 #include <sge/text.hpp>
 
@@ -47,6 +48,15 @@ sanguis::server::weapons::create(
 				messages::mu(0.2), // spread radius
 				10, // shells
 				messages::mu(1) // damage
+				));
+	case weapon_type::rocket_launcher:
+		return weapon_ptr(
+			new rocket_launcher(
+				env,
+				type,
+				static_cast<time_type>(3), // cooldown
+				messages::mu(10), // damage
+				messages::mu(50) // aoe
 				));
 	default:
 		throw sge::exception(
