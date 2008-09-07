@@ -1,8 +1,7 @@
 #include "entity.hpp"
-#include "../bullet.hpp"
 #include "../player.hpp"
 #include <sge/exception.hpp>
-#include <sge/string.hpp>
+#include <sge/text.hpp>
 
 sanguis::draw::factory::entity_ptr
 sanguis::draw::factory::entity(
@@ -17,14 +16,12 @@ sanguis::draw::factory::entity(
 			new player(
 				id,
 				sys));
-	case entity_type::bullet:
-		return entity_ptr(
-			new bullet(
-				id,
-				sys));
 	case entity_type::enemy:
 		throw sge::exception(
 			SGE_TEXT("entity_type::enemy cannot be created using entity!"));
+	case entity_type::projectile:
+		throw sge::exception(
+			SGE_TEXT("entity_type::projectile cannot be created using entity!"));
 	default:
 		throw sge::exception(
 			SGE_TEXT("draw::factory::entity: missing loading code!"));

@@ -32,7 +32,7 @@ sanguis::server::entities::pickups::weapon::wtype() const
 sanguis::messages::auto_ptr
 sanguis::server::entities::pickups::weapon::add_message() const
 {
-	return message_convert<messages::add_weapon_pickup>(*this);
+	return message_convert(*this);
 }
 
 void sanguis::server::entities::pickups::weapon::do_pickup(

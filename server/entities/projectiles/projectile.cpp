@@ -2,10 +2,18 @@
 #include "../base_parameters.hpp"
 #include "../../collision.hpp"
 #include "../../damage_types.hpp"
+#include "../../message_converter.hpp"
 #include <sge/time/second.hpp>
 #include <boost/foreach.hpp>
 
+sanguis::projectile_type::type
+sanguis::server::entities::projectiles::projectile::ptype() const
+{
+	return ptype_;
+}
+
 sanguis::server::entities::projectiles::projectile::projectile(
+	projectile_type::type const ptype_,
 	environment const &env,
 	pos_type const& center,
 	space_unit const angle,
@@ -24,9 +32,10 @@ sanguis::server::entities::projectiles::projectile::projectile(
 			angle,
 			team_,
 			properties,
-			entity_type::bullet,
+			entity_type::projectile,
 			true,
 			dim)),
+	ptype_(ptype_),
 	lifetime(
 		sge::time::second(
 			lifetime))
@@ -70,11 +79,11 @@ void sanguis::server::entities::projectiles::projectile::update(
 		do_hit(hits);
 }
 
-sanguis::messages::space_unit
-sanguis::server::entities::projectiles::projectile::max_speed() const
-{
-	return max_speed_;	
-}
-
 void sanguis::server::entities::projectiles::projectile::do_die()
 {}
+
+sanguis::messages::auto_ptr
+sanguis::server::entities::projectiles::projectile::add_message() const
+{
+	return message_convert(*this);	
+}

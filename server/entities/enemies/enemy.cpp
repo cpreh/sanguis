@@ -51,7 +51,7 @@ sanguis::server::entities::enemies::enemy::etype() const
 sanguis::messages::auto_ptr
 sanguis::server::entities::enemies::enemy::add_message() const
 {
-	return message_convert<messages::add_enemy>(*this);
+	return message_convert(*this);
 }
 
 sanguis::messages::exp_type

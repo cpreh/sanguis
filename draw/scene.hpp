@@ -30,17 +30,20 @@ public:
 		sge::renderer::device_ptr,
 		sge::font::font &);
 	
-	void process_message(const messages::base&);
+	void process_message(
+		messages::base const &);
 
-	void process_message(const client_messages::base&);
+	void process_message(
+		client_messages::base const &);
 
-	void draw(const time_type);
+	void draw(time_type);
 
 	void pause(bool);
 
 	void operator()(const messages::add&);
 	void operator()(const messages::add_enemy&);
 	void operator()(const messages::add_pickup&);
+	void operator()(messages::add_projectile const &);
 	void operator()(const messages::add_weapon_pickup&);
 	void operator()(const messages::change_weapon&);
 	void operator()(const messages::experience&);

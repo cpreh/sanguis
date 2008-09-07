@@ -38,7 +38,7 @@ sanguis::server::entities::pickups::pickup::pickup(
 				entities::property(messages::mu(1)))
 				(entities::property::type::movement_speed,
 				entities::property(messages::mu(0))),
-			entity_type::bullet,
+			entity_type::pickup,
 			true,
 			dim_
 			? *dim_
@@ -78,5 +78,5 @@ void sanguis::server::entities::pickups::pickup::update(
 sanguis::messages::auto_ptr
 sanguis::server::entities::pickups::pickup::add_message() const
 {
-	return message_convert<messages::add_pickup>(*this);
+	return message_convert(*this);
 }

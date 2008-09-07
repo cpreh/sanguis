@@ -3,6 +3,7 @@
 #include "factory/enemy.hpp"
 #include "factory/entity.hpp"
 #include "factory/pickup.hpp"
+#include "factory/projectile.hpp"
 #include "factory/weapon_pickup.hpp"
 #include "player.hpp"
 #include "coord_transform.hpp"
@@ -13,6 +14,7 @@
 #include "../messages/add.hpp"
 #include "../messages/add_enemy.hpp"
 #include "../messages/add_pickup.hpp"
+#include "../messages/add_projectile.hpp"
 #include "../messages/add_weapon_pickup.hpp"
 #include "../messages/base.hpp"
 #include "../messages/change_weapon.hpp"
@@ -56,6 +58,7 @@ void sanguis::draw::scene::process_message(const messages::base& m)
 			messages::add,
 			messages::add_enemy,
 			messages::add_pickup,
+			messages::add_projectile,
 			messages::add_weapon_pickup,
 			messages::change_weapon,
 			messages::experience,
@@ -140,6 +143,17 @@ void sanguis::draw::scene::operator()(const messages::add_pickup& m)
 {
 	configure_new_object(
 		factory::pickup(
+			m.id(),
+			get_system(),
+			m.ptype()),
+		m);
+}
+
+void sanguis::draw::scene::operator()(
+	messages::add_projectile const &m)
+{
+	configure_new_object(
+		factory::projectile(
 			m.id(),
 			get_system(),
 			m.ptype()),

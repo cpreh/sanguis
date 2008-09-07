@@ -20,8 +20,6 @@ public:
 		team::type team,
 		space_unit damage);
 private:
-	entity_type::type type() const;
-
 	void do_hit(
 		hit_vector const &target);
 

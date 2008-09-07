@@ -1,8 +1,9 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PROJECTILES_PROJECTILE_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PROJECTILES_PROJECTILE_HPP_INCLUDED
 
+#include "../../../projectile_type.hpp"
 #include "../../../time_type.hpp"
-#include "../../../messages/types.hpp"
+#include "../../../messages/base.hpp"
 #include "../entity.hpp"
 #include <sge/time/timer.hpp>
 #include <boost/tr1/functional.hpp>
@@ -18,8 +19,11 @@ namespace projectiles
 {
 
 class projectile : public entity {
+public:
+	projectile_type::type ptype() const;
 protected:
 	projectile(
+		projectile_type::type,
 		environment const &,
 		pos_type const &center,
 		space_unit angle,
@@ -35,17 +39,18 @@ protected:
 		>
 	> hit_vector;
 private:
-	void update(
+	virtual void update(
 		time_type,
 		container &entities);
-	messages::space_unit max_speed() const;
 
 	virtual void do_hit(
 		hit_vector const &) = 0;
 	virtual void do_die();
 
-	space_unit          max_speed_;
-	sge::time::timer    lifetime;
+	messages::auto_ptr add_message() const;
+
+	projectile_type::type ptype_;
+	sge::time::timer      lifetime;
 };
 
 }

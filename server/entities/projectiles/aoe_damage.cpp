@@ -13,6 +13,7 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 	damage_array const &damage_values)
 :
 	projectile(
+		projectile_type::aoe_damage,
 		env,
 		center,
 		messages::mu(0),

@@ -11,6 +11,7 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 	messages::space_unit const damage)
 :
 	projectile(
+		projectile_type::simple_bullet,
 		env,
 		center,
 		angle,
@@ -23,12 +24,6 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 		static_cast<time_type>(10)),
 	damage(damage)
 {}
-
-sanguis::entity_type::type
-sanguis::server::entities::projectiles::simple_bullet::type() const
-{
-	return entity_type::bullet;
-}
 
 void sanguis::server::entities::projectiles::simple_bullet::do_hit(
 	hit_vector const &hits)

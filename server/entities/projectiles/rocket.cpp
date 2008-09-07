@@ -11,6 +11,7 @@ sanguis::server::entities::projectiles::rocket::rocket(
 	space_unit const damage)
 :
 	projectile(
+		projectile_type::rocket,
 		env,
 		center,
 		angle,

@@ -9,6 +9,7 @@ namespace messages
 class add;
 class add_enemy;
 class add_pickup;
+class add_projectile;
 class add_weapon_pickup;
 class base;
 class change_weapon;

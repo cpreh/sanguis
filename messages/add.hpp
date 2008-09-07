@@ -17,19 +17,19 @@ public:
 	add(
 		entity_id id,
 		entity_type::type type_,
-		const pos_type& pos,
+		pos_type const &pos,
 		space_unit angle,
-		const vector2& speed,
+		vector2 const &speed,
 		space_unit health,
 		space_unit max_health,
-		const dim_type& dim);
+		dim_type const &dim);
 
 	entity_type::type type() const;
-	const pos_type& pos() const;
+	pos_type const &pos() const;
 	space_unit angle() const;
-	const vector2& speed() const;
+	vector2 const &speed() const;
 	space_unit health() const;
-	const dim_type &dim() const;
+	dim_type const &dim() const;
 	space_unit max_health() const;
 private:
 	entity_type::type  type_;

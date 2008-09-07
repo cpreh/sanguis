@@ -7,7 +7,9 @@ sanguis::server::entities::projectiles::melee::melee(
 	messages::pos_type const& center,
 	team::type const team_,
 	messages::space_unit const damage)
-: projectile(
+:
+	projectile(
+		projectile_type::melee,
 		env,
 		center,
 		messages::mu(0), // angle doesn't matter here
@@ -17,14 +19,8 @@ sanguis::server::entities::projectiles::melee::melee(
 			(property::type::movement_speed, property(messages::mu(0))),
 		dim_type(1, 1),
 		static_cast<time_type>(1)), // short lifetime
-  damage(damage)
+	damage(damage)
 {}
-
-sanguis::entity_type::type
-sanguis::server::entities::projectiles::melee::type() const
-{
-	return entity_type::indeterminate;
-}
 
 void sanguis::server::entities::projectiles::melee::do_hit(
 	hit_vector const &hits)
