@@ -20,7 +20,7 @@ sanguis::server::entities::entity::entity(
 	id_(get_unique_id()),
 	env_(param.env()),
 	armor_(param.armor()),
-	pos_(param.pos()),
+	center_(param.center()),
 	angle_(param.angle()),
 	direction_(param.direction()),
 	team_(param.team()),
@@ -32,122 +32,89 @@ sanguis::server::entities::entity::entity(
 	aggressive_(false)
 {}
 
-sanguis::armor_array const &
-sanguis::server::entities::entity::armor() const
+sanguis::entity_id
+sanguis::server::entities::entity::id() const
 {
-	return armor_;
+	return id_;
 }
 
-sanguis::armor_array const &
-sanguis::server::entities::entity::armor_diff() const
+sanguis::server::pos_type const
+sanguis::server::entities::entity::pos() const
 {
-	return armor_diff_;
+	return center() - dim() / messages::mu(2);
 }
 
-sanguis::armor_array &
-sanguis::server::entities::entity::armor_diff()
-{
-	return armor_diff_;
+void sanguis::server::entities::entity::pos(
+	pos_type const &p) 
+{ 
+	center(
+		p + dim() / messages::mu(2));
 }
 
-bool sanguis::server::entities::entity::attacking() const
+sanguis::server::space_unit
+sanguis::server::entities::entity::angle() const
 {
-	return attacking_;
+	return angle_;
 }
 
-void sanguis::server::entities::entity::attacking(const bool n)
+void sanguis::server::entities::entity::angle(
+	space_unit const _angle)
 {
-	attacking_ = n;
+	angle_ = _angle;
 }
 
-bool sanguis::server::entities::entity::aggressive() const
+sanguis::server::space_unit
+sanguis::server::entities::entity::direction() const
 {
-	return aggressive_;
+	return direction_;
 }
 
-void sanguis::server::entities::entity::aggressive(const bool n)
+void sanguis::server::entities::entity::direction(
+	space_unit const _direction)
 {
-	aggressive_ = n;
+	direction_ = _direction;
 }
 
-sanguis::server::health_type
-sanguis::server::entities::entity::health() const
+sanguis::server::pos_type const
+sanguis::server::entities::entity::center() const
 {
-	return get_property(property::type::health).current();
+	return center_;
 }
 
-void sanguis::server::entities::entity::health(
-	health_type const nhealth)
+void sanguis::server::entities::entity::center(
+	pos_type const &_center)
 {
-	get_property(property::type::health).current(nhealth);
+	center_ = _center;
 }
 
-sanguis::server::health_type
-sanguis::server::entities::entity::max_health() const
+sanguis::server::pos_type const
+sanguis::server::entities::entity::abs_speed() const
 {
-	return get_property(property::type::health).max();
+	return angle_to_vector(direction_) * speed();
 }
 
-sanguis::messages::space_unit
+sanguis::server::space_unit
 sanguis::server::entities::entity::speed() const
 {
 	return get_property(property::type::movement_speed).current();
 }
 
-sanguis::entity_id sanguis::server::entities::entity::id() const
-{
-	return id_;
-}
-
-sanguis::server::team::type sanguis::server::entities::entity::team() const
-{
-	return team_;
-}
-
-sanguis::messages::pos_type sanguis::server::entities::entity::center() const
-{
-	return pos() + dim()/messages::mu(2);
-}
-
-void sanguis::server::entities::entity::pos(const messages::pos_type _pos) 
-{ 
-	pos_ = _pos;
-}
-
-sanguis::messages::pos_type sanguis::server::entities::entity::pos() const
-{
-	return pos_;
-}
-
-sanguis::messages::pos_type sanguis::server::entities::entity::abs_speed() const
-{
-	return angle_to_vector(direction_) * speed();
-}
-
-sanguis::messages::space_unit sanguis::server::entities::entity::radius() const
+sanguis::server::space_unit
+sanguis::server::entities::entity::radius() const
 {
 	return std::sqrt(
 		sge::math::quad(center().x() - pos().x())
 		+ sge::math::quad(center().y() - pos().y()));
 }
 
-sanguis::messages::space_unit sanguis::server::entities::entity::angle() const
+sanguis::server::team::type
+sanguis::server::entities::entity::team() const
 {
-	return angle_;
-}
-
-void sanguis::server::entities::entity::angle(const messages::space_unit _angle)
-{
-	angle_ = _angle;
-}
-
-sanguis::messages::space_unit sanguis::server::entities::entity::direction() const
-{
-	return direction_;
+	return team_;
 }
 
 void sanguis::server::entities::entity::damage(
-	const messages::space_unit d,
+	space_unit const d,
 	damage_array const& damages)
 {
 	if(!sge::math::compare(
@@ -178,22 +145,118 @@ void sanguis::server::entities::entity::die()
 	on_die();
 }
 
+sanguis::armor_array const &
+sanguis::server::entities::entity::armor() const
+{
+	return armor_;
+}
+
+sanguis::armor_array const &
+sanguis::server::entities::entity::armor_diff() const
+{
+	return armor_diff_;
+}
+
+sanguis::armor_array &
+sanguis::server::entities::entity::armor_diff()
+{
+	return armor_diff_;
+}
+
+bool sanguis::server::entities::entity::attacking() const
+{
+	return attacking_;
+}
+
+void sanguis::server::entities::entity::attacking(
+	bool const n)
+{
+	attacking_ = n;
+}
+
+bool sanguis::server::entities::entity::aggressive() const
+{
+	return aggressive_;
+}
+
+void sanguis::server::entities::entity::aggressive(
+	bool const n)
+{
+	aggressive_ = n;
+}
+
+sanguis::server::health_type
+sanguis::server::entities::entity::health() const
+{
+	return get_property(property::type::health).current();
+}
+
+void sanguis::server::entities::entity::health(
+	health_type const nhealth)
+{
+	get_property(property::type::health).current(nhealth);
+}
+
+sanguis::server::health_type
+sanguis::server::entities::entity::max_health() const
+{
+	return get_property(property::type::health).max();
+}
+
+sanguis::server::entities::property const &
+sanguis::server::entities::entity::get_property(
+	property::type::enum_type const e) const
+{
+	return const_cast<entity &>(*this).get_property(e);
+}
+
+sanguis::server::entities::property &
+sanguis::server::entities::entity::get_property(
+	property::type::enum_type const e)
+{
+	property_map::iterator const it = properties.find(e);
+
+	if (it == properties.end())
+		throw sge::exception(
+			SGE_TEXT("couldn't find specified entity property"));
+	
+	return it->second;
+}
+
+sanguis::server::exp_type
+sanguis::server::entities::entity::exp() const
+{
+	return static_cast<exp_type>(0);
+}
+
+sanguis::server::dim_type const
+sanguis::server::entities::entity::dim() const
+{
+	return collision_dim;
+}
+
+sanguis::entity_type::type
+sanguis::server::entities::entity::type() const
+{
+	return type_;
+}
+
+bool sanguis::server::entities::entity::invulnerable() const
+{
+	return invulnerable_;
+}
+
 void sanguis::server::entities::entity::update(
-	const time_type delta,
+	time_type const delta,
 	container &)
 {
-	pos_ += abs_speed() * delta;
+	center_ += abs_speed() * delta;
 
 	BOOST_FOREACH(property_map::value_type &p, properties)
 		p.second.reset_max_to_base();
+
 	BOOST_FOREACH(perks::perk &p, perks_)
 		p.apply(*this);
-}
-
-void sanguis::server::entities::entity::direction(
-	const messages::space_unit _direction)
-{
-	direction_ = _direction;
 }
 
 void sanguis::server::entities::entity::add_perk(
@@ -228,12 +291,14 @@ void sanguis::server::entities::entity::send(
 			message));
 }
 
-const sanguis::server::environment &sanguis::server::entities::entity::get_environment() const
+sanguis::server::environment const &
+sanguis::server::entities::entity::get_environment() const
 {
 	return env_;
 }
 
-sanguis::server::entities::entity &sanguis::server::entities::entity::insert(
+sanguis::server::entities::entity &
+sanguis::server::entities::entity::insert(
 	auto_ptr e)
 {
 	return get_environment().insert(e);
@@ -241,43 +306,3 @@ sanguis::server::entities::entity &sanguis::server::entities::entity::insert(
 
 void sanguis::server::entities::entity::on_die()
 {}
-
-sanguis::messages::exp_type sanguis::server::entities::entity::exp() const
-{
-	return static_cast<messages::exp_type>(0);
-}
-
-sanguis::messages::dim_type const
-sanguis::server::entities::entity::dim() const
-{
-	return collision_dim;
-}
-
-sanguis::entity_type::type
-sanguis::server::entities::entity::type() const
-{
-	return type_;
-}
-
-bool sanguis::server::entities::entity::invulnerable() const
-{
-	return invulnerable_;
-}
-
-sanguis::server::entities::property const &
-sanguis::server::entities::entity::get_property(
-	property::type::enum_type const e) const
-{
-	return const_cast<entity &>(*this).get_property(e);
-}
-
-sanguis::server::entities::property &
-sanguis::server::entities::entity::get_property(const property::type::enum_type e)
-{
-	property_map::iterator it = properties.find(e);
-
-	if (it == properties.end())
-		throw sge::exception(SGE_TEXT("couldn't find specified entity property"));
-	
-	return it->second;
-}

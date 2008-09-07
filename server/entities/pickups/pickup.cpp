@@ -20,7 +20,7 @@ sanguis::server::entities::pickups::pickup::ptype() const
 sanguis::server::entities::pickups::pickup::pickup(
 	pickup_type::type const ptype_,
 	environment const &env,
-	messages::pos_type const &pos,
+	pos_type const &center,
 	team::type const team_,
 	optional_dim const &dim_)
 :
@@ -29,7 +29,7 @@ sanguis::server::entities::pickups::pickup::pickup(
 			env,
 			damage::all(
 				messages::mu(1)), // FIXME: create default values for this
-			pos,
+			center,
 			messages::mu(0), //angle
 			messages::mu(0), //direction,
 			team_,

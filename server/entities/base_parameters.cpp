@@ -3,7 +3,7 @@
 sanguis::server::entities::base_parameters::base_parameters(
 	environment const &env_,
 	armor_array const &armor_,
-	pos_type const &pos_,
+	pos_type const &center_,
 	space_unit const angle_,
 	space_unit const direction_,
 	team::type const team_,
@@ -14,7 +14,7 @@ sanguis::server::entities::base_parameters::base_parameters(
 :
 	env_(env_),
 	armor_(armor_),
-	pos_(pos_),
+	center_(center_),
 	angle_(angle_),
 	direction_(direction_),
 	team_(team_),
@@ -37,9 +37,9 @@ sanguis::server::entities::base_parameters::armor() const
 }
 
 sanguis::server::pos_type const &
-sanguis::server::entities::base_parameters::pos() const
+sanguis::server::entities::base_parameters::center() const
 {
-	return pos_;
+	return center_;
 }
 
 sanguis::server::space_unit

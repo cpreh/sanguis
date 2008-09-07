@@ -24,7 +24,7 @@ protected:
 	pickup(
 		pickup_type::type,
 		environment const &,
-		messages::pos_type const &,
+		pos_type const &center,
 		team::type team,
 		optional_dim const &dim
 			= optional_dim());

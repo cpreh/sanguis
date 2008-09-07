@@ -12,7 +12,7 @@ sanguis::server::entities::enemies::enemy::enemy(
 	enemy_type::type const etype_,
 	environment const &env,
 	armor_array const &armor,
-	messages::pos_type const &pos,
+	messages::pos_type const &center,
 	messages::space_unit const angle,
 	messages::space_unit const direction,
 	property_map const &properties,
@@ -25,7 +25,7 @@ sanguis::server::entities::enemies::enemy::enemy(
 		base_parameters(
 			env,
 			armor,
-			pos,
+			center,
 			angle,
 			direction,
 			team::monsters,

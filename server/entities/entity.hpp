@@ -31,15 +31,23 @@ protected:
 public:
 	entity_id id() const;
 
-	messages::pos_type pos() const;
-	void pos(const messages::pos_type);
-	messages::space_unit angle() const;
-	void angle(const messages::space_unit);
-	messages::space_unit direction() const;
-	void direction(const messages::space_unit);
+	pos_type const pos() const;
+	void pos(pos_type const &);
+	space_unit angle() const;
+	void angle(space_unit);
+	space_unit direction() const;
+	void direction(space_unit);
+	
+	pos_type const center() const;
+	void center(pos_type const &);
+	pos_type const abs_speed() const;
+	space_unit speed() const;
+	space_unit radius() const;
+
 	team::type team() const;
+
 	void damage(
-		messages::space_unit,
+		space_unit,
 		damage_array const&);
 	bool dead() const;
 	virtual void die();
@@ -58,20 +66,16 @@ public:
 	void health(health_type);
 	health_type max_health() const;
 
-	messages::space_unit speed() const;
+	property const &get_property(
+		property::type::enum_type) const;
+	property &get_property(
+		property::type::enum_type);
 
-	const property &get_property(property::type::enum_type) const;
-	property &get_property(property::type::enum_type);
+	virtual exp_type exp() const;
+	dim_type const dim() const;
+	entity_type::type type() const;
+	bool invulnerable() const;
 
-	// is calculated from the above
-	messages::pos_type center() const;
-	messages::pos_type abs_speed() const;
-	messages::space_unit radius() const;
-
-	virtual messages::exp_type exp() const;
-	virtual messages::dim_type const dim() const;
-	virtual entity_type::type type() const;
-	virtual bool invulnerable() const;
 	virtual void update(
 		time_type,
 		container &entities);
@@ -84,30 +88,30 @@ public:
 	virtual ~entity();
 protected:
 	void send(messages::auto_ptr);
+	environment const &get_environment() const;
 	entity &insert(auto_ptr); 
-	const environment &get_environment() const;
 
 	virtual void on_die();
 private:
-	entity_id            id_;
-	environment          env_;
-	armor_array          armor_;
-	messages::pos_type   pos_;
-	messages::space_unit angle_,
-	                     direction_;
-	team::type           team_;
-	property_map         properties;
-	entity_type::type    type_;
-	bool                 invulnerable_;
-	messages::dim_type   collision_dim;
-	bool                 attacking_,
-	                     aggressive_;
-	armor_array          armor_diff_;
+	entity_id const         id_;
+	environment             env_;
+	armor_array             armor_;
+	pos_type                center_;
+	space_unit              angle_,
+	                        direction_;
+	team::type              team_;
+	property_map            properties;
+	entity_type::type const type_;
+	bool                    invulnerable_;
+	dim_type                collision_dim;
+	bool                    attacking_,
+	                        aggressive_;
+	armor_array             armor_diff_;
 
 	typedef boost::ptr_list<
 		perks::perk
-	>                    perk_container;
-	perk_container       perks_;
+	>                       perk_container;
+	perk_container          perks_;
 };
 
 }

@@ -9,9 +9,9 @@
 namespace
 {
 
-sanguis::messages::pos_type const target_undefined(
-	std::numeric_limits<sanguis::messages::space_unit>::max(),
-	std::numeric_limits<sanguis::messages::space_unit>::max());
+sanguis::server::pos_type const target_undefined(
+	std::numeric_limits<sanguis::server::space_unit>::max(),
+	std::numeric_limits<sanguis::server::space_unit>::max());
 
 }
 
@@ -119,12 +119,12 @@ void sanguis::server::entities::entity_with_weapon::remove_weapon(const weapon_t
 }
 
 void sanguis::server::entities::entity_with_weapon::target(
-	messages::pos_type const &ntarget)
+	pos_type const &ntarget)
 {
 	target_ = ntarget;
 }
 
-sanguis::messages::pos_type const &
+sanguis::server::pos_type const &
 sanguis::server::entities::entity_with_weapon::target() const
 {
 	return target_;

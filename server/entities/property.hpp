@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PROPERTY_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PROPERTY_HPP_INCLUDED
 
-#include "../../messages/types.hpp"
+#include "../types.hpp"
 
 namespace sanguis
 {
@@ -21,7 +21,7 @@ public:
 		};
 	};
 
-	typedef messages::space_unit value_type;
+	typedef space_unit value_type;
 
 	property(
 		value_type current,

@@ -7,7 +7,7 @@
 sanguis::server::entities::projectiles::projectile::projectile(
 	environment const &env,
 	armor_array const &armor,
-	messages::pos_type const& pos,
+	messages::pos_type const& center,
 	messages::space_unit const angle,
 	team::type const team_,
 	property_map const &properties,
@@ -17,7 +17,7 @@ sanguis::server::entities::projectiles::projectile::projectile(
 		base_parameters(
 			env,
 			armor,
-			pos,
+			center,
 			angle,
 			angle,
 			team_,

@@ -32,15 +32,15 @@ public:
 	void add_weapon(weapons::weapon_ptr);
 	void remove_weapon(weapon_type::type);
 
-	void target(messages::pos_type const&);
-	messages::pos_type const &target() const;
+	void target(pos_type const&);
+	pos_type const &target() const;
 private:
 	bool has_weapon() const;
 	weapons::weapon &active_weapon();
 
 	weapon_container    weapons_;
 	weapon_type::type   weapon_;
-	messages::pos_type  target_;
+	pos_type            target_;
 };
 
 }

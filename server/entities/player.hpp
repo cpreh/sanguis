@@ -18,26 +18,25 @@ public:
 		environment const &,
 		armor_array const &,
 		net::id_type net_id,
-		messages::pos_type const &center,
-		messages::space_unit direction,
-		messages::space_unit angle,
+		pos_type const &center,
+		space_unit direction,
+		space_unit angle,
 		property_map const &,
-		messages::string const &name);
+		string const &name);
 
 	// own functions
 	net::id_type net_id() const;
-	messages::string name() const;
-	messages::exp_type exp() const;
-	void exp(messages::exp_type);
-	messages::level_type level() const;
-	messages::level_type level_delta() const;
-
+	string const name() const;
+	exp_type exp() const;
+	void exp(exp_type);
+	level_type level() const;
+	level_type level_delta() const;
 private:
-	net::id_type net_id_;
-	messages::string name_;
-	messages::exp_type exp_;
-	messages::level_type level_,
-	                     level_delta_;
+	net::id_type const net_id_;
+	string       const name_;
+	exp_type           exp_;
+	level_type         level_,
+	                   level_delta_;
 };
 
 }

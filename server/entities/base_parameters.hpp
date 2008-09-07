@@ -24,7 +24,7 @@ public:
 	base_parameters(
 		environment const &,
 		armor_array const &,
-		pos_type const &pos,
+		pos_type const &center,
 		space_unit angle,
 		space_unit direction,
 		team::type team_,
@@ -35,7 +35,7 @@ public:
 	
 	environment const &env() const;
 	armor_array const &armor() const;
-	pos_type const &pos() const;
+	pos_type const &center() const;
 	space_unit angle() const;
 	space_unit direction() const;
 	team::type team() const;
@@ -46,14 +46,14 @@ public:
 private:
 	environment const          &env_;
 	armor_array const          &armor_;
-	pos_type const   pos_;
-	space_unit const angle_,
+	pos_type const             center_;
+	space_unit const           angle_,
 	                           direction_;
 	team::type const           team_;
 	property_map const         &properties_;
 	entity_type::type const    type_;
 	bool const                 invulnerable_;
-	dim_type const   collision_dim_;
+	dim_type const             collision_dim_;
 };
 
 }

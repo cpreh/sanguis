@@ -20,7 +20,7 @@ protected:
 	projectile(
 		environment const &,
 		armor_array const &,
-		messages::pos_type const& pos,
+		messages::pos_type const& center,
 		messages::space_unit angle,
 		team::type team,
 		property_map const &,

@@ -11,17 +11,17 @@ sanguis::server::entities::player::player(
 	environment const &env,
 	armor_array const &armor,
 	net::id_type const net_id_,
-	messages::pos_type const &center_,
-	messages::space_unit const direction_,
-	messages::space_unit const angle_,
+	pos_type const &center_,
+	space_unit const direction_,
+	space_unit const angle_,
 	property_map const &properties,
-	messages::string const &name_)
+	string const &name_)
 :
 	entity_with_weapon(
 		base_parameters(
 			env,
 			armor,
-			center_ - dim()/messages::mu(2),
+			center_,
 			angle_,
 			direction_,
 			team::players,
@@ -33,22 +33,22 @@ sanguis::server::entities::player::player(
 				SGE_TEXT("bottom")))),
 	net_id_(net_id_),
 	name_(name_),
-	exp_(static_cast<messages::exp_type>(0)),
-	level_(static_cast<messages::level_type>(0)),
-	level_delta_(static_cast<messages::level_type>(0))
+	exp_(static_cast<exp_type>(0)),
+	level_(static_cast<level_type>(0)),
+	level_delta_(static_cast<level_type>(0))
 {}
 
-sanguis::messages::exp_type
+sanguis::server::exp_type
 sanguis::server::entities::player::exp() const
 {
 	return exp_;
 }
 
 void sanguis::server::entities::player::exp(
-	messages::exp_type const e)
+	exp_type const e)
 {
 	exp_ = e;
-	messages::level_type const
+	level_type const
 		old_level = level(),
 		new_level = level_calculate(exp(), old_level);
 	if (new_level > old_level)
@@ -65,18 +65,20 @@ sanguis::server::entities::player::net_id() const
 	return net_id_;
 }
 
-sanguis::messages::string
+sanguis::server::string const
 sanguis::server::entities::player::name() const
 {
 	return name_;
 }
 
-sanguis::messages::level_type sanguis::server::entities::player::level() const
+sanguis::server::level_type
+sanguis::server::entities::player::level() const
 {
 	return level_;
 }
 
-sanguis::messages::level_type sanguis::server::entities::player::level_delta() const
+sanguis::server::level_type
+sanguis::server::entities::player::level_delta() const
 {
 	return level_delta_;
 }
