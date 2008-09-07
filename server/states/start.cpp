@@ -1,21 +1,28 @@
 #include "start.hpp"
 #include "waiting.hpp"
-
-#include <sge/iostream.hpp>
-#include <sge/string.hpp>
+#include "../../log_headers.hpp"
+#include <sge/iconv.hpp>
+#include <ostream>
 
 sanguis::server::states::start::start()
-{
-	sge::clog << SGE_TEXT("server: entering start state\n");
-}
+{}
 
-boost::statechart::result sanguis::server::states::start::react(const message_event&m)
+boost::statechart::result
+sanguis::server::states::start::react(
+	message_event const &m)
 {
-	sge::clog << SGE_TEXT("server: got unexpected message: ") << typeid(*m.message).name() << SGE_TEXT("\n");
+	// FIXME: handle this once and not in every state!
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1
+			<< SGE_TEXT("server: got unexpected message: ")
+			<< sge::iconv(typeid(*m.message).name()));
 	return forward_event();
 }
 
-boost::statechart::result sanguis::server::states::start::react(const tick_event&)
+boost::statechart::result
+sanguis::server::states::start::react(
+	tick_event const &)
 {
 	context<machine>().listen();
 	return transit<waiting>(); 

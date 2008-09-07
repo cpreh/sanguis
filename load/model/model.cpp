@@ -1,7 +1,7 @@
 #include "model.hpp"
+#include "../../log_headers.hpp"
 #include <sge/exception.hpp>
-#include <sge/string.hpp>
-#include <sge/iostream.hpp>
+#include <sge/text.hpp>
 #include <boost/filesystem/convenience.hpp>
 #include <ostream>
 #include <utility>
@@ -13,7 +13,12 @@ sanguis::load::model::model::model(
 	{
 		if(!boost::filesystem::is_directory(*beg))
 		{
-			sge::clog << SGE_TEXT("warning: ") << *beg << SGE_TEXT(" is not a directory!\n");
+			SGE_LOG_WARNING(
+				log(),
+				sge::log::_1
+					<< SGE_TEXT("warning: ")
+					<< *beg
+					<< SGE_TEXT(" is not a directory!"));
 			continue;
 		}
 		
@@ -22,14 +27,17 @@ sanguis::load::model::model::model(
 				boost::filesystem::basename(*beg),
 				part(*beg)))
 		.second == false)
-			throw sge::exception(SGE_TEXT("Double insert in model::model: ") + beg->string());
+			throw sge::exception(
+				SGE_TEXT("Double insert in model::model: ")
+				+ beg->string());
 	}
 }
 
 sanguis::load::model::part const&
-sanguis::load::model::model::operator[](sge::string const& name) const
+sanguis::load::model::model::operator[](
+	sge::string const& name) const
 {
-	const part_map::const_iterator it(parts.find(name));
+	part_map::const_iterator const it(parts.find(name));
 	if(it == parts.end())
 		throw sge::exception(name + SGE_TEXT(" not found in model!"));
 	return it->second;

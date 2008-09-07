@@ -1,27 +1,32 @@
 #include "intermediate_state.hpp"
 #include "connecting_state.hpp"
 #include "machine.hpp"
-#include <sge/iostream.hpp>
-#include <sge/ostream.hpp>
-#include <sge/string.hpp>
+#include "../log_headers.hpp"
+#include <sge/text.hpp>
+#include <sge/iconv.hpp>
 #include <ostream>
 
-sanguis::client::intermediate_state::intermediate_state(my_context ctx) 
+sanguis::client::intermediate_state::intermediate_state(
+	my_context ctx) 
   : my_base(ctx)
-{ 
-	sge::clog << SGE_TEXT("client: entering intermediate state\n"); 
-}
+{}
 
-boost::statechart::result sanguis::client::intermediate_state::react(const message_event&m)
+boost::statechart::result
+sanguis::client::intermediate_state::react(
+	message_event const &m)
 {
-	sge::clog << SGE_TEXT("got unexpected event ") << typeid(*m.message).name() << SGE_TEXT("\n");
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1
+			<< SGE_TEXT("got unexpected event ")
+			<< sge::iconv(typeid(*m.message).name()));
 	return defer_event();
 }
 
-boost::statechart::result sanguis::client::intermediate_state::react(const tick_event&)
+boost::statechart::result
+sanguis::client::intermediate_state::react(
+	tick_event const &)
 {
-	sge::window::dispatch();
-	
 	machine &m = context<machine>();
 	m.dispatch();
 	

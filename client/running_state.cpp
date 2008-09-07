@@ -10,11 +10,7 @@
 #include "../messages/move.hpp"
 #include "../messages/pause.hpp"
 #include "../messages/unpause.hpp"
-#include "../draw/player.hpp"
 #include "../draw/coord_transform.hpp"
-#include <sge/iostream.hpp>
-#include <sge/string.hpp>
-#include <sge/exception.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
 
@@ -96,7 +92,6 @@ boost::statechart::result
 sanguis::client::running_state::operator()(
 	messages::disconnect const &)
 {
-	sge::clog << SGE_TEXT("client: disconnected\n");
 	return transit<intermediate_state>();
 }
 
@@ -104,7 +99,6 @@ boost::statechart::result
 sanguis::client::running_state::operator()(
 	messages::game_state const &)
 {
-	sge::clog << SGE_TEXT("client: running: received game state\n");
 	return discard_event();
 }
 

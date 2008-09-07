@@ -1,4 +1,5 @@
 #include "../../media_path.hpp"
+#include "../../log_headers.hpp"
 #include "factory.hpp"
 #include <sge/fstream.hpp>
 #include <sge/sstream.hpp>
@@ -66,7 +67,7 @@ environment::load_animation(
 	if (!boost::filesystem::exists(dir) || !boost::filesystem::is_directory(dir))
 		throw sge::exception(SGE_TEXT("directory for animation \"")+dir.string()+SGE_TEXT("\" doesn't exist"));
 
-	const sge::path framesfile = dir/SGE_TEXT("frames");
+	const sge::path framesfile = dir / SGE_TEXT("frames");
 
 	// look for frames file inside directory
 	if (!boost::filesystem::exists(framesfile) || !boost::filesystem::is_regular(framesfile))
@@ -84,7 +85,7 @@ environment::load_animation(
 					load_texture_inner(*it)));
 			return ret; // TODO: can we do this with boost::assign?
 		}
-		throw sge::exception(dir.string() + " is empty!");
+		throw sge::exception(dir.string() + SGE_TEXT(" is empty!"));
 	}
 
 	// and parse line by line
@@ -184,11 +185,14 @@ void environment::load_textures()
 			const sge::string::size_type equal = line.find(SGE_TEXT("="));
 			if(equal == sge::string::npos)
 			{
-				sge::cerr << SGE_TEXT("Error in .id file \")")
-				          << p.string()
-				          << SGE_TEXT("\" in line ")
-					  << line_num
-					  << SGE_TEXT("!\n");
+				SGE_LOG_WARNING(
+					sanguis::log(),
+					sge::log::_1
+						<< SGE_TEXT("Error in .id file \")")
+						<< p.string()
+						<< SGE_TEXT("\" in line ")
+						<< line_num
+						<< SGE_TEXT('!'));
 				continue;
 			}
 			textures[line.substr(0,equal)] = line.substr(equal+1);

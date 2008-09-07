@@ -9,7 +9,7 @@
 
 // sge
 #include <sge/iostream.hpp>
-#include <sge/string.hpp>
+#include <sge/text.hpp>
 #include <sge/exception.hpp>
 #include <sge/console/console.hpp>
 #include <sge/systems.hpp>
@@ -31,8 +31,8 @@
 // c++
 #include <exception>
 #include <iostream>
-#include <iomanip>
 #include <fstream>
+#include <ostream>
 
 // c
 #include <cstdlib>
@@ -124,11 +124,10 @@ try
 		server.process(t);
 		running = client.process(t);
 	}
-	sge::clog << SGE_TEXT("exiting...\n");
-} catch (const sge::exception &e) {
-	std::cerr << "caught sge exception: " << e.what() << "\n";
+} catch (sge::exception const &e) {
+	sge::cerr << SGE_TEXT("caught sge exception: ") << e.what() << SGE_TEXT('\n');
 	return EXIT_FAILURE;
-} catch (const std::exception &e) {
-	std::cerr << "caught standard exception: " << e.what() << "\n";
+} catch (std::exception const &e) {
+	std::cerr << "caught standard exception: " << e.what() << SGE_TEXT('\n');
 	return EXIT_FAILURE;
 }

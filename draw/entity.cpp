@@ -1,8 +1,7 @@
 #include "entity.hpp"
+#include "../log_headers.hpp"
 #include <sge/time/second.hpp>
 #include <sge/time/resolution.hpp>
-#include <sge/iostream.hpp>
-#include <ostream>
 
 void sanguis::draw::entity::update(
 	time_type const time)
@@ -21,7 +20,7 @@ void sanguis::draw::entity::decay()
 }
 
 void sanguis::draw::entity::decay_time(
-	const time_type diff)
+	time_type const diff)
 {
 	decay_timer.interval(
 		sge::time::second(diff));
@@ -40,17 +39,23 @@ void sanguis::draw::entity::max_health(sge::space_unit)
 
 void sanguis::draw::entity::weapon(weapon_type::type)
 {
-	sge::clog << SGE_TEXT("warning: entity got a weapon message that can't have a weapon!\n");
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1 << SGE_TEXT("warning: entity got a weapon message that can't have a weapon!"));
 }
 
 void sanguis::draw::entity::start_attacking()
 {
-	sge::clog << SGE_TEXT("warning: entity got a start attacking message!\n");
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1 << SGE_TEXT("warning: entity got a start attacking message!"));
 }
 
 void sanguis::draw::entity::stop_attacking()
 {
-	sge::clog << SGE_TEXT("warning: entity got a stop attacking message!\n");
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1 << SGE_TEXT("warning: entity got a stop attacking message!"));
 }
 
 sanguis::draw::entity::~entity()
@@ -59,13 +64,14 @@ sanguis::draw::entity::~entity()
 sanguis::draw::entity::entity(
 	entity_id const id_,
 	system &sys)
-: id_(id_),
-  sys(sys),
-  diff_clock_(),
-  decay_timer(
-  	sge::time::resolution(0),
-	false,
-	diff_clock_.callback())
+:
+	id_(id_),
+	sys(sys),
+	diff_clock_(),
+	decay_timer(
+		sge::time::resolution(0),
+		false,
+		diff_clock_.callback())
 {}
 
 sanguis::draw::system &

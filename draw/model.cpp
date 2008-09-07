@@ -1,9 +1,9 @@
 #include "model.hpp"
 #include "z_ordering.hpp"
+#include "../log_headers.hpp"
 #include "../load/model/collection.hpp"
 #include "../load/model/singleton.hpp"
 #include "../client/id_dont_care.hpp"
-#include <sge/iostream.hpp>
 #include <boost/foreach.hpp>
 #include <ostream>
 
@@ -112,14 +112,18 @@ void sanguis::draw::model::weapon(
 void sanguis::draw::model::start_attacking()
 {
 	if(attacking)
-		sge::clog << SGE_TEXT("warning: model::start_attacking(): already attacking!\n");
+		SGE_LOG_WARNING(
+			log(),
+			sge::log::_1 << SGE_TEXT("warning: model::start_attacking(): already attacking!"));
 	attacking = true;
 }
 
 void sanguis::draw::model::stop_attacking()
 {
 	if(!attacking)
-		sge::clog << SGE_TEXT("warning: model::stop_attacking(): already not attacking!\n");
+		SGE_LOG_WARNING(
+			log(),
+			sge::log::_1 << SGE_TEXT("warning: model::stop_attacking(): already not attacking!"));
 	attacking = false;
 }
 

@@ -5,19 +5,15 @@
 #include "../entities/player.hpp"
 #include "../../messages/experience.hpp"
 #include "../../messages/level_up.hpp"
-#include <sge/iostream.hpp>
 #include <boost/foreach.hpp>
 #include <boost/bind.hpp>
-#include <ostream>
 
 sanguis::server::states::running::running(my_context ctx)
 : my_base(ctx),
   send(boost::bind(&server::machine::send,&(context<machine>()),_1)),
   console_print(boost::bind(&server::machine::console_print,&(context<machine>()),_1)),
   wave_generator()
-{
-	sge::clog << SGE_TEXT("server: entering running state\n");
-}
+{}
 
 sanguis::server::entities::container &sanguis::server::states::running::entities()
 {

@@ -6,11 +6,7 @@
 #include "../../angle_vector.hpp"
 #include <sge/math/vec_dim.hpp>
 #include <sge/math/power.hpp>
-#include <sge/math/compare.hpp>
-#include <sge/iostream.hpp>
 #include <boost/foreach.hpp>
-#include <algorithm>
-#include <ostream>
 #include <typeinfo>
 #include <cmath>
 
@@ -117,15 +113,6 @@ void sanguis::server::entities::entity::damage(
 	space_unit const d,
 	damage_array const& damages)
 {
-	if(!sge::math::compare(
-		std::accumulate(
-			damages.begin(),
-			damages.end(),
-			messages::mu(0)),
-		messages::mu(1))
-	)
-		sge::clog << SGE_TEXT("Damage values don't equal 1. Check this!\n");
-	
 	for(damage_array::size_type i = 0; i < damages.size(); ++i)
 		health(health() - d * damages[i] * (1 - armor_[i]));
 

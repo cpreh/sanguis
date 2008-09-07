@@ -7,19 +7,21 @@
 #include "../messages/connect.hpp"
 #include "../messages/client_info.hpp"
 #include "../messages/types.hpp"
-#include <sge/string.hpp>
-#include <sge/iostream.hpp>
-#include <sge/ostream.hpp>
+#include "../log_headers.hpp"
+#include <sge/iconv.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
 #include <typeinfo>
+#include <ostream>
 
-sanguis::client::connecting_state::connecting_state() : connected(false)
+sanguis::client::connecting_state::connecting_state()
+: connected(false)
 { 
-	sge::clog << SGE_TEXT("client: entering connecting_state\n"); 
 }
 
-boost::statechart::result sanguis::client::connecting_state::react(const message_event &m)
+boost::statechart::result
+sanguis::client::connecting_state::react(
+	message_event const &m)
 {
 	return dispatch_type<
 		boost::mpl::vector<
@@ -33,21 +35,29 @@ boost::statechart::result sanguis::client::connecting_state::react(const message
 		boost::bind(&connecting_state::handle_default_msg, this, _1));
 }
 
-boost::statechart::result sanguis::client::connecting_state::handle_default_msg(const messages::base &m)
+boost::statechart::result
+sanguis::client::connecting_state::handle_default_msg(
+	messages::base const &m)
 {
-	sge::cerr << SGE_TEXT("received unexpected message ") << typeid(m).name() << SGE_TEXT("\n");
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1
+			<< SGE_TEXT("received unexpected message ")
+			<< sge::iconv(typeid(m).name()));
 	return discard_event();
 }
 
-boost::statechart::result sanguis::client::connecting_state::operator()(const messages::disconnect &)
+boost::statechart::result
+sanguis::client::connecting_state::operator()(
+	messages::disconnect const &)
 {
-	sge::clog << SGE_TEXT("client: disconnected\n");
 	return transit<intermediate_state>();
 }
 
-boost::statechart::result sanguis::client::connecting_state::operator()(const messages::game_state &m)
+boost::statechart::result
+sanguis::client::connecting_state::operator()(
+	messages::game_state const &m)
 {
-	sge::clog << SGE_TEXT("client: received game state\n");
 	post_event(
 		message_event(
 			messages::auto_ptr(
@@ -56,24 +66,28 @@ boost::statechart::result sanguis::client::connecting_state::operator()(const me
 	return transit<running_state>();
 }
 
-boost::statechart::result sanguis::client::connecting_state::operator()(const messages::connect &)
+boost::statechart::result
+sanguis::client::connecting_state::operator()(
+	messages::connect const &)
 {
-	sge::clog << SGE_TEXT("client: sending client info\n");
 	context<machine>().send(
 		messages::auto_ptr(
 			new messages::client_info(
-				MESSAGE_TEXT("player1"))));
+				MESSAGE_TEXT("player1")))); // FIXME
 	return discard_event();
 }
 
-boost::statechart::result sanguis::client::connecting_state::react(const tick_event&)
+boost::statechart::result
+sanguis::client::connecting_state::react(
+	tick_event const &)
 {
-	sge::window::dispatch();
-
 	machine &m = context<machine>();
 	m.dispatch();
 
-	sge::string const status = connected ? SGE_TEXT("waiting for gamestate") : SGE_TEXT("connecting");
+	sge::string const status
+		= connected
+		? SGE_TEXT("waiting for gamestate")
+		: SGE_TEXT("connecting");
 	
 	m.font().draw_text(
 		status,

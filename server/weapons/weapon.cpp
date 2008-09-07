@@ -1,10 +1,10 @@
 #include "weapon.hpp"
 #include "delayed_attack.hpp"
 #include "../entities/entity.hpp"
+#include "../../log_headers.hpp"
 #include <sge/time/second.hpp>
 #include <sge/exception.hpp>
 #include <sge/text.hpp>
-#include <sge/iostream.hpp>
 #include <ostream>
 
 sanguis::server::space_unit
@@ -124,7 +124,10 @@ sanguis::server::weapons::weapon::weapon(
 	state_(state::ready)
 {
 	if(magazine_size == 0)
-		sge::cerr << SGE_TEXT("magazine sizes of 0 are meaningless and will be threated as 1.\n");
+		SGE_LOG_WARNING(
+			log(),
+			sge::log::_1
+				<< SGE_TEXT("magazine sizes of 0 are meaningless and will be threated as 1."));
 }
 
 unsigned const

@@ -3,8 +3,16 @@
 #include "waiting.hpp"
 #include "../entities/player.hpp"
 #include "../message_functor.hpp"
+#include "../message_converter.hpp"
+#include "../damage_types.hpp"
+#include "../weapons/factory.hpp"
+#include "../entities/entity.hpp"
 #include "../../truncation_check_cast.hpp"
 #include "../../dispatch_type.hpp"
+#include "../../log_headers.hpp"
+#include "../../resolution.hpp"
+#include "../../angle_vector.hpp"
+#include "../../random.hpp"
 #include "../../messages/client_info.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../messages/experience.hpp"
@@ -21,17 +29,10 @@
 #include "../../messages/speed.hpp"
 #include "../../messages/change_weapon.hpp"
 #include "../../messages/pause.hpp"
-#include "../message_converter.hpp"
-#include "../damage_types.hpp"
-#include "../weapons/factory.hpp"
-#include "../entities/entity.hpp"
-#include "../../resolution.hpp"
-#include "../../angle_vector.hpp"
-#include "../../random.hpp"
 
 #include <sge/math/constants.hpp>
 #include <sge/math/angle.hpp>
-#include <sge/iostream.hpp>
+#include <sge/iconv.hpp>
 
 #include <boost/lexical_cast.hpp>
 #include <boost/mpl/vector.hpp>
@@ -40,20 +41,32 @@
 #include <ostream>
 
 sanguis::server::states::unpaused::unpaused()
-	: send_timer(SGE_TEXT("send_timer"),sge::su(0.1))
+:
+	send_timer(
+		SGE_TEXT("send_timer"),
+		sge::su(0.1))
 {}
 
-boost::statechart::result sanguis::server::states::unpaused::handle_default_msg(const net::id_type id,const messages::base &m)
+boost::statechart::result
+sanguis::server::states::unpaused::handle_default_msg(
+	net::id_type id,
+	messages::base const &m)
 {
-	sge::clog << SGE_TEXT("server: received unexpected message from id ") << id << SGE_TEXT(" of type ") << typeid(m).name() << SGE_TEXT("\n");
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1
+			<< SGE_TEXT("server: received unexpected message from id ")
+			<< id
+			<< SGE_TEXT(" of type ")
+			<< sge::iconv(typeid(m).name()));
 	return discard_event();
 }
 
-void sanguis::server::states::unpaused::create_game(const net::id_type net_id,const messages::client_info &m)
+void sanguis::server::states::unpaused::create_game(
+	net::id_type const net_id,
+	messages::client_info const &m)
 {
 	assert(!context<running>().entities().size());
-
-	sge::clog << SGE_TEXT("server: sending game messages\n");
 
 	send(
 		messages::auto_ptr(
@@ -61,7 +74,6 @@ void sanguis::server::states::unpaused::create_game(const net::id_type net_id,co
 				game_state(
 					truncation_check_cast<game_state::score_type>(0)))));
 
-	sge::cerr << "server: inserting player\n";
 	entities::entity &raw_player = context<running>().insert_entity(
 		entities::auto_ptr(
 			new entities::player(
@@ -103,14 +115,22 @@ void sanguis::server::states::unpaused::create_game(const net::id_type net_id,co
 				p.level())));
 }
 
-boost::statechart::result sanguis::server::states::unpaused::operator()(const net::id_type id,const messages::player_change_weapon &e)
+boost::statechart::result
+sanguis::server::states::unpaused::operator()(
+	net::id_type const id,
+	messages::player_change_weapon const &e)
 {
-	const running::player_map::iterator it(context<running>().players().find(id));
+	running::player_map::iterator const it(context<running>().players().find(id));
 	if (it == context<running>().players().end())
 	{
-		sge::clog << SGE_TEXT("server: got player_change_weapon from spectator ") << id << SGE_TEXT('\n');
+		SGE_LOG_WARNING(
+			log(),
+			sge::log::_1
+				<< SGE_TEXT("server: got player_change_weapon from spectator ")
+				<< id);
 		return discard_event();
 	}
+
 	entities::player &player_(*it->second);
 
 	if (e.weapon() > weapon_type::size)
@@ -128,12 +148,19 @@ boost::statechart::result sanguis::server::states::unpaused::operator()(const ne
 	return discard_event();
 }
 
-boost::statechart::result sanguis::server::states::unpaused::operator()(const net::id_type id,const messages::player_rotation &e)
+boost::statechart::result
+sanguis::server::states::unpaused::operator()(
+	net::id_type const id,
+	messages::player_rotation const &e)
 {
-	const running::player_map::iterator it(context<running>().players().find(id));
+	running::player_map::iterator const it(context<running>().players().find(id));
 	if (it == context<running>().players().end())
 	{
-		sge::clog << SGE_TEXT("server: got rotation_event from spectator ") << id << SGE_TEXT('\n');
+		SGE_LOG_WARNING(
+			log(),
+			sge::log::_1
+				<< SGE_TEXT("server: got rotation_event from spectator ")
+				<< id);
 		return discard_event();
 	}
 
@@ -149,11 +176,18 @@ boost::statechart::result sanguis::server::states::unpaused::operator()(const ne
 	return discard_event();
 }
 
-boost::statechart::result sanguis::server::states::unpaused::operator()(const net::id_type id,const messages::player_start_shooting &)
+boost::statechart::result
+sanguis::server::states::unpaused::operator()(
+	net::id_type const id,
+	messages::player_start_shooting const &)
 {
 	if (context<running>().players().find(id) == context<running>().players().end())
 	{
-		sge::clog << SGE_TEXT("server: got shooting event from spectator ") << id << SGE_TEXT("\n");
+		SGE_LOG_WARNING(
+			log(),
+			sge::log::_1
+				<< SGE_TEXT("server: got shooting event from spectator ")
+				<< id);
 		return discard_event();
 	}
 
@@ -161,11 +195,18 @@ boost::statechart::result sanguis::server::states::unpaused::operator()(const ne
 	return discard_event();
 }
 
-boost::statechart::result sanguis::server::states::unpaused::operator()(const net::id_type id,const messages::player_stop_shooting &)
+boost::statechart::result
+sanguis::server::states::unpaused::operator()(
+	net::id_type const id,
+	messages::player_stop_shooting const &)
 {
 	if (context<running>().players().find(id) == context<running>().players().end())
 	{
-		sge::clog << SGE_TEXT("server: got player_stop_shooting from spectator ") << id << SGE_TEXT("\n");
+		SGE_LOG_WARNING(
+			log(),
+			sge::log::_1
+				<< SGE_TEXT("server: got player_stop_shooting from spectator ")
+				<< id);
 		return discard_event();
 	}
 
@@ -173,12 +214,19 @@ boost::statechart::result sanguis::server::states::unpaused::operator()(const ne
 	return discard_event();
 }
 
-boost::statechart::result sanguis::server::states::unpaused::operator()(const net::id_type id,const messages::player_direction &e)
+boost::statechart::result
+sanguis::server::states::unpaused::operator()(
+	net::id_type const id,
+	messages::player_direction const &e)
 {
-	const running::player_map::iterator it(context<running>().players().find(id));
+	running::player_map::iterator const it(context<running>().players().find(id));
 	if (it == context<running>().players().end())
 	{
-		sge::clog << SGE_TEXT("server: got direction_event from spectator ") << id << SGE_TEXT("\n");
+		SGE_LOG_WARNING(
+			log(),
+			sge::log::_1
+				<< SGE_TEXT("server: got direction_event from spectator ")
+				<< id);
 		return discard_event();
 	}
 
@@ -198,23 +246,32 @@ boost::statechart::result sanguis::server::states::unpaused::operator()(const ne
 	return discard_event();
 }
 
-boost::statechart::result sanguis::server::states::unpaused::operator()(const net::id_type id,const messages::client_info&m) 
+boost::statechart::result
+sanguis::server::states::unpaused::operator()(
+	net::id_type const id,
+	messages::client_info const &m) 
 {
-	sge::clog << SGE_TEXT("server: received client info from ") << id << SGE_TEXT("\n");
-	create_game(id,m);
+	create_game(id, m);
 	return discard_event();
 }
 
-boost::statechart::result sanguis::server::states::unpaused::operator()(const net::id_type,const messages::player_unpause&) 
+boost::statechart::result
+sanguis::server::states::unpaused::operator()(
+	net::id_type,
+	messages::player_unpause const &) 
 {
-	sge::cerr << SGE_TEXT("server: received superfluous unpause!\n");
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1 
+			<< SGE_TEXT("server: received superfluous unpause!"));
 	return discard_event();
 }
 
-boost::statechart::result sanguis::server::states::unpaused::operator()(const net::id_type,const messages::player_pause&) 
+boost::statechart::result
+sanguis::server::states::unpaused::operator()(
+	net::id_type,
+	messages::player_pause const &)
 {
-	sge::cout << SGE_TEXT("server: pausing\n");
-
 	send(
 		messages::auto_ptr(
 			new messages::pause()));
@@ -222,20 +279,34 @@ boost::statechart::result sanguis::server::states::unpaused::operator()(const ne
 	return transit<paused>();
 }
 
-boost::statechart::result sanguis::server::states::unpaused::operator()(const net::id_type id,const messages::disconnect&) 
+boost::statechart::result
+sanguis::server::states::unpaused::operator()(
+	net::id_type const id,
+	messages::disconnect const &) 
 {
+	// FIXME: this should be handled once and not in every state
 	if (context<running>().players().find(id) == context<running>().players().end())
 	{
-		sge::clog << SGE_TEXT("server: spectator ") << id << SGE_TEXT(" disconnected\n");
+		SGE_LOG_WARNING(
+			log(),
+			sge::log::_1
+				<< SGE_TEXT("server: spectator ")
+				<< id
+				<< SGE_TEXT(" disconnected"));
 		return discard_event();
 	}
 
-	sge::clog << SGE_TEXT("server: disconnected\n");
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1
+			<< SGE_TEXT("server: disconnected"));
+	
 	return transit<waiting>();
 }
 
 void sanguis::server::states::unpaused::get_player_exp(const sge::con::arg_list &)
 {
+	// FIXME
 	/*context<running>().console_print(
 		SGE_TEXT("player experience is: ")+
 			boost::lexical_cast<sge::string>(
@@ -257,20 +328,13 @@ boost::statechart::result sanguis::server::states::unpaused::react(const tick_ev
 	{
 		if (i->dead())
 		{
-			/*if (i->type() == entity_type::player)
+			if(i->type() != entity_type::indeterminate)
 			{
-				sge::cout << "server: player's dead!\n";
+				send(message_convert<messages::health>(*i));
+				send(message_convert<messages::remove>(*i));
 			}
-			else*/
-			{
-				if(i->type() != entity_type::indeterminate)
-				{
-					send(message_convert<messages::health>(*i));
-					send(message_convert<messages::remove>(*i));
-				}
-				i = entities.erase(i);
-				continue;
-			}
+			i = entities.erase(i);
+			continue;
 		}
 
 		i->update(
