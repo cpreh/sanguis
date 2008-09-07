@@ -1,4 +1,5 @@
 #include "rocket.hpp"
+#include "aoe_damage.hpp"
 #include "../../get_dim.hpp"
 #include <boost/assign/list_of.hpp>
 
@@ -39,12 +40,15 @@ void sanguis::server::entities::projectiles::rocket::do_die()
 		(messages::mu(0))
 		(messages::mu(0));
 	
-	/*insert(
-		new aoe_damage(
-			env,
-			center(),
-			team(),
-			messages::mu(20),
-			damage,
-			damage_values));*/
+	insert(
+		auto_ptr(
+			new aoe_damage(
+				get_environment(),
+				center(),
+				team(),
+				messages::mu(20),
+				damage,
+				1,
+				static_cast<time_type>(0),
+				damage_values)));
 }
