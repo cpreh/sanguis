@@ -16,23 +16,9 @@ sanguis::messages::pos_type const target_undefined(
 }
 
 sanguis::server::entities::entity_with_weapon::entity_with_weapon(
-	environment const &env,
-	armor_array const &armor,
-	messages::pos_type const &pos_,
-	messages::space_unit const angle_,
-	messages::space_unit const direction_,
-	team::type const team_,
-	entity::property_map const &properties,
+	base_parameters const &param,
 	weapons::weapon_ptr start_weapon)
-: entity(
-	env,
-	armor,
-	pos_,
-	angle_,
-	direction_,
-	team_,
-	properties
-	),
+: entity(param),
   weapon_(weapon_type::none),
   target_(target_undefined)
 {

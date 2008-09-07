@@ -27,7 +27,6 @@ protected:
 		time_type lifetime);
 	void die();
 private:
-	virtual bool invulnerable() const;
 	void update(
 		time_type,
 		container &entities);

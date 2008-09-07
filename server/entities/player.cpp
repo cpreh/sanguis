@@ -1,4 +1,6 @@
 #include "player.hpp"
+#include "base_parameters.hpp"
+#include "../get_dim.hpp"
 #include "../../load/model/collection.hpp"
 #include "../../load/model/singleton.hpp"
 #include "../level_calculate.hpp"
@@ -14,14 +16,21 @@ sanguis::server::entities::player::player(
 	messages::space_unit const angle_,
 	property_map const &properties,
 	messages::string const &name_)
-	: entity_with_weapon(
-		env,
-		armor,
-		center_ - dim()/messages::mu(2),
-		angle_,
-		direction_,
-		team::players,
-		properties),
+:
+	entity_with_weapon(
+		base_parameters(
+			env,
+			armor,
+			center_ - dim()/messages::mu(2),
+			angle_,
+			direction_,
+			team::players,
+			properties,
+			entity_type::player,
+			false,
+			get_dim(
+				SGE_TEXT("player"),
+				SGE_TEXT("bottom")))),
 	net_id_(net_id_),
 	name_(name_),
 	exp_(static_cast<messages::exp_type>(0)),
@@ -29,43 +38,25 @@ sanguis::server::entities::player::player(
 	level_delta_(static_cast<messages::level_type>(0))
 {}
 
-bool sanguis::server::entities::player::invulnerable() const
-{
-	return false;
-}
-
-sanguis::messages::dim_type const
-sanguis::server::entities::player::dim() const
-{
-	return sge::math::structure_cast<messages::space_unit>(
-		load::model::singleton()
-			["player"]
-				["bottom"]
-					[weapon_type::pistol]
-						[animation_type::walking].get().dim());
-}
-
-sanguis::messages::exp_type sanguis::server::entities::player::exp() const
+sanguis::messages::exp_type
+sanguis::server::entities::player::exp() const
 {
 	return exp_;
 }
 
-void sanguis::server::entities::player::exp(const messages::exp_type e)
+void sanguis::server::entities::player::exp(
+	messages::exp_type const e)
 {
 	exp_ = e;
-	const messages::level_type old_level = level(),new_level = level_calculate(exp(),old_level);
+	messages::level_type const
+		old_level = level(),
+		new_level = level_calculate(exp(), old_level);
 	if (new_level > old_level)
 	{
 		level_delta_ += new_level - old_level;
 		level_ = new_level;
-		get_environment().level(*this,old_level);
+		get_environment().level(*this, old_level);
 	}
-}
-
-sanguis::entity_type::type
-sanguis::server::entities::player::type() const
-{
-	return entity_type::player;
 }
 
 net::id_type

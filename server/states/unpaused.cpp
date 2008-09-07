@@ -274,7 +274,7 @@ boost::statechart::result sanguis::server::states::unpaused::react(const tick_ev
 		}
 
 		i->update(
-			static_cast<entities::entity::time_type>(delta),
+			static_cast<time_type>(delta),
 			entities);
 
 		if (i->type() != entity_type::indeterminate && update_pos)

@@ -1,4 +1,5 @@
 #include "entity.hpp"
+#include "base_parameters.hpp"
 #include "../get_unique_id.hpp"
 #include "../message_converter.hpp"
 #include "../../messages/add.hpp"
@@ -14,37 +15,37 @@
 #include <cmath>
 
 sanguis::server::entities::entity::entity(
-	const environment &env_,
-	const armor_array &armor_,
-	const messages::pos_type &pos_,
-	const messages::space_unit angle_,
-	const messages::space_unit direction_,
-	const team::type team_,
-	const property_map properties)
-: id_(get_unique_id()),
-  env_(env_),
-  pos_(pos_),
-  angle_(angle_),
-  direction_(direction_),
-  team_(team_),
-  armor_(armor_),
-  attacking_(false),
-  aggressive_(false),
-  properties(properties)
-{
-}
+	base_parameters const &param)
+:
+	id_(get_unique_id()),
+	env_(param.env()),
+	armor_(param.armor()),
+	pos_(param.pos()),
+	angle_(param.angle()),
+	direction_(param.direction()),
+	team_(param.team()),
+	properties(param.properties()),
+	type_(param.type()),
+	invulnerable_(param.invulnerable()),
+	collision_dim(param.collision_dim()),
+	attacking_(false),
+	aggressive_(false)
+{}
 
-const sanguis::armor_array &sanguis::server::entities::entity::armor() const
+sanguis::armor_array const &
+sanguis::server::entities::entity::armor() const
 {
 	return armor_;
 }
 
-const sanguis::armor_array &sanguis::server::entities::entity::armor_diff() const
+sanguis::armor_array const &
+sanguis::server::entities::entity::armor_diff() const
 {
 	return armor_diff_;
 }
 
-sanguis::armor_array &sanguis::server::entities::entity::armor_diff()
+sanguis::armor_array &
+sanguis::server::entities::entity::armor_diff()
 {
 	return armor_diff_;
 }
@@ -69,19 +70,19 @@ void sanguis::server::entities::entity::aggressive(const bool n)
 	aggressive_ = n;
 }
 
-sanguis::server::entities::entity::health_type
+sanguis::server::health_type
 sanguis::server::entities::entity::health() const
 {
 	return get_property(property::type::health).current();
 }
 
 void sanguis::server::entities::entity::health(
-	const health_type nhealth)
+	health_type const nhealth)
 {
 	get_property(property::type::health).current(nhealth);
 }
 
-sanguis::server::entities::entity::health_type
+sanguis::server::health_type
 sanguis::server::entities::entity::max_health() const
 {
 	return get_property(property::type::health).max();
@@ -246,8 +247,26 @@ sanguis::messages::exp_type sanguis::server::entities::entity::exp() const
 	return static_cast<messages::exp_type>(0);
 }
 
-const sanguis::server::entities::property &
-sanguis::server::entities::entity::get_property(const property::type::enum_type e) const
+sanguis::messages::dim_type const
+sanguis::server::entities::entity::dim() const
+{
+	return collision_dim;
+}
+
+sanguis::entity_type::type
+sanguis::server::entities::entity::type() const
+{
+	return type_;
+}
+
+bool sanguis::server::entities::entity::invulnerable() const
+{
+	return invulnerable_;
+}
+
+sanguis::server::entities::property const &
+sanguis::server::entities::entity::get_property(
+	property::type::enum_type const e) const
 {
 	return const_cast<entity &>(*this).get_property(e);
 }

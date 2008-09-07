@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_GET_DIM_HPP_INCLUDED
 #define SANGUIS_SERVER_GET_DIM_HPP_INCLUDED
 
-#include "../messages/types.hpp"
+#include "types.hpp"
 #include <sge/string.hpp>
 
 namespace sanguis
@@ -9,9 +9,14 @@ namespace sanguis
 namespace server
 {
 
-messages::dim_type get_dim(
+dim_type const
+get_dim(
 	sge::string const &model,
 	sge::string const &part);
+
+dim_type const
+default_dim(
+	sge::string const &model);
 
 }
 }

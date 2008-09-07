@@ -1,4 +1,5 @@
 #include "enemy.hpp"
+#include "../base_parameters.hpp"
 #include "../../message_converter.hpp"
 #include "../../spawn_pickup.hpp"
 #include "../../get_dim.hpp"
@@ -19,19 +20,26 @@ sanguis::server::entities::enemies::enemy::enemy(
 	weapons::weapon_ptr weapon_,
 	unsigned const spawn_chance,
 	messages::exp_type const exp_)
-: entity_with_ai(
-	env,
-	armor,
-	pos,
-	angle,
-	direction,
-	team::monsters,
-	properties,
-	ai_,
-	weapon_),
-  etype_(etype_),
-  spawn_chance(spawn_chance),
-  exp_(exp_)
+:
+	entity_with_ai(
+		base_parameters(
+			env,
+			armor,
+			pos,
+			angle,
+			direction,
+			team::monsters,
+			properties,
+			entity_type::enemy,
+			false,
+			default_dim(
+				load::enemy_name(
+					etype_))),
+		ai_,
+		weapon_),
+	  etype_(etype_),
+	  spawn_chance(spawn_chance),
+	  exp_(exp_)
 {}
 
 sanguis::enemy_type::type
@@ -46,30 +54,10 @@ sanguis::server::entities::enemies::enemy::add_message() const
 	return message_convert<messages::add_enemy>(*this);
 }
 
-sanguis::entity_type::type
-sanguis::server::entities::enemies::enemy::type() const
-{
-	return entity_type::enemy;
-}
-
-sanguis::messages::dim_type const
-sanguis::server::entities::enemies::enemy::dim() const
-{
-	return get_dim(
-		load::enemy_name(
-			etype()),
-		SGE_TEXT("default"));
-}
-
 sanguis::messages::exp_type
 sanguis::server::entities::enemies::enemy::exp() const
 {
 	return exp_;
-}
-
-bool sanguis::server::entities::enemies::enemy::invulnerable() const
-{
-	return false;
 }
 
 void sanguis::server::entities::enemies::enemy::on_die()

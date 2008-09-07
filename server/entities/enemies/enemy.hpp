@@ -31,10 +31,7 @@ public:
 	enemy_type::type etype() const;
 private:
 	messages::auto_ptr add_message() const;
-	entity_type::type type() const;
-	messages::dim_type const dim() const;
 	messages::exp_type exp() const;
-	bool invulnerable() const;
 	void on_die();
 
 	ai::ai_ptr         ai_;

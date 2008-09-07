@@ -20,13 +20,7 @@ protected:
 	> weapon_container;
 
 	entity_with_weapon(
-		environment const &,
-		armor_array const &,
-		messages::pos_type const &pos,
-		messages::space_unit angle,
-		messages::space_unit direction,
-		team::type team_,
-		entity::property_map const &,
+		base_parameters const &,
 		weapons::weapon_ptr start_weapon
 			= weapons::weapon_ptr());
 

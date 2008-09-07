@@ -2,8 +2,9 @@
 #include "../model.hpp"
 #include "../z_ordering.hpp"
 #include "../../pickup_type.hpp"
+#include "../../load/pickup_name.hpp"
 #include <sge/exception.hpp>
-#include <sge/string.hpp>
+#include <sge/text.hpp>
 
 namespace
 {
@@ -37,7 +38,7 @@ sge::string const get_texture(
 {
 	switch(ptype) {
 	case sanguis::pickup_type::health:
-		return SGE_TEXT("pickup_hp");
+		return *sanguis::load::pickup_name(ptype);
 	case sanguis::pickup_type::weapon:
 		throw sge::exception(
 			SGE_TEXT("draw::factory::pickup: weapon pickup cannot be created using pickup!"));

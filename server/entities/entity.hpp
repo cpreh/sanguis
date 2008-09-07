@@ -3,16 +3,17 @@
 
 #include "entity_fwd.hpp"
 #include "property.hpp"
+#include "property_map.hpp"
 #include "../teams.hpp"
+#include "../types.hpp"
 #include "../environment.hpp"
 #include "../perks/perk.hpp"
-#include "../../messages/types.hpp"
 #include "../../messages/base.hpp"
 #include "../../entity_id.hpp"
 #include "../../entity_type.hpp"
 #include "../../damage_type.hpp"
+#include "../../time_type.hpp"
 #include <boost/ptr_container/ptr_list.hpp>
-#include <map>
 
 namespace sanguis
 {
@@ -21,25 +22,12 @@ namespace server
 namespace entities
 {
 
-class entity {
-public:
-	// TODO: fix all occurences of messages:: in entities!
-	typedef messages::space_unit space_unit;
-	typedef messages::pos_type   pos_type;
-	typedef messages::dim_type   dim_type;
-	typedef messages::space_unit time_type;
-	typedef messages::space_unit health_type;
+class base_parameters;
 
-	typedef std::map<property::type::enum_type,property> property_map;
+class entity {
 protected:
-	entity(
-		environment const &,
-		armor_array const &,
-		messages::pos_type const &pos,
-		messages::space_unit angle,
-		messages::space_unit direction,
-		team::type team,
-		property_map properties);
+	explicit entity(
+		base_parameters const &);
 public:
 	entity_id id() const;
 
@@ -56,8 +44,8 @@ public:
 	bool dead() const;
 	virtual void die();
 
-	const armor_array &armor() const;
-	const armor_array &armor_diff() const;
+	armor_array const &armor() const;
+	armor_array const &armor_diff() const;
 	armor_array &armor_diff();
 
 	bool attacking() const;
@@ -81,9 +69,9 @@ public:
 	messages::space_unit radius() const;
 
 	virtual messages::exp_type exp() const;
-	virtual messages::dim_type const dim() const = 0;
-	virtual entity_type::type type() const = 0;
-	virtual bool invulnerable() const = 0;
+	virtual messages::dim_type const dim() const;
+	virtual entity_type::type type() const;
+	virtual bool invulnerable() const;
 	virtual void update(
 		time_type,
 		container &entities);
@@ -103,19 +91,23 @@ protected:
 private:
 	entity_id            id_;
 	environment          env_;
+	armor_array          armor_;
 	messages::pos_type   pos_;
 	messages::space_unit angle_,
 	                     direction_;
 	team::type           team_;
-	armor_array          armor_,
-	                     armor_diff_;
+	property_map         properties;
+	entity_type::type    type_;
+	bool                 invulnerable_;
+	messages::dim_type   collision_dim;
 	bool                 attacking_,
 	                     aggressive_;
+	armor_array          armor_diff_;
 
-	typedef boost::ptr_list<perks::perk> perk_container;
-	perk_container perks_;
-
-	property_map properties;
+	typedef boost::ptr_list<
+		perks::perk
+	>                    perk_container;
+	perk_container       perks_;
 };
 
 }

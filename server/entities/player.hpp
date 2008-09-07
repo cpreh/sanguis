@@ -17,22 +17,18 @@ public:
 	player(
 		environment const &,
 		armor_array const &,
-		net::id_type const net_id,
+		net::id_type net_id,
 		messages::pos_type const &center,
-		messages::space_unit const direction,
-		messages::space_unit const angle,
+		messages::space_unit direction,
+		messages::space_unit angle,
 		property_map const &,
 		messages::string const &name);
-	// virtual functions
-	messages::dim_type const dim() const;
-	entity_type::type type() const;
 
 	// own functions
-	bool invulnerable() const;
 	net::id_type net_id() const;
 	messages::string name() const;
 	messages::exp_type exp() const;
-	void exp(const messages::exp_type);
+	void exp(messages::exp_type);
 	messages::level_type level() const;
 	messages::level_type level_delta() const;
 
@@ -40,7 +36,8 @@ private:
 	net::id_type net_id_;
 	messages::string name_;
 	messages::exp_type exp_;
-	messages::level_type level_,level_delta_;
+	messages::level_type level_,
+	                     level_delta_;
 };
 
 }
