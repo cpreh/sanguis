@@ -1,18 +1,17 @@
 #include "shotgun.hpp"
 #include "delayed_attack.hpp"
-#include "../damage_types.hpp"
 #include "../entities/entity.hpp"
 #include "../entities/projectiles/simple_bullet.hpp"
 #include "../../random.hpp"
 #include <boost/tr1/random.hpp>
 
 sanguis::server::weapons::shotgun::shotgun(
-	const environment &env,
-	const weapon_type::type type_,
-	const time_type base_cooldown,
-	const messages::space_unit spread_radius,
-	const unsigned shells,
-	const messages::space_unit damage)
+	environment const &env,
+	weapon_type::type const type_,
+	time_type const base_cooldown,
+	space_unit const spread_radius,
+	unsigned const shells,
+	space_unit const damage)
 : weapon(
 	env,
 	type_,
@@ -49,7 +48,6 @@ void sanguis::server::weapons::shotgun::do_attack(
 			entities::auto_ptr(
 				new entities::projectiles::simple_bullet(
 					get_environment(),
-					damage::list(damage::normal = messages::mu(1)),
 					a.spawn_point(),
 					rng(),
 					a.team(),

@@ -26,7 +26,6 @@ void sanguis::server::weapons::pistol::do_attack(
 		entities::auto_ptr(
 			new entities::projectiles::simple_bullet(
 				get_environment(),
-				damage::list(messages::mu(0)),
 				a.spawn_point(),
 				a.angle(),
 				a.team(),

@@ -31,8 +31,8 @@ struct list
 {
 	damage_array array;
 
-	list(meta const &);
-	list(damage_array::value_type);
+	explicit list(meta const &);
+	explicit list(damage_array::value_type);
 	list &operator()(meta const &);
 	operator damage_array() const;
 };

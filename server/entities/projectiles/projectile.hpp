@@ -5,6 +5,8 @@
 #include "../../../messages/types.hpp"
 #include "../entity.hpp"
 #include <sge/time/timer.hpp>
+#include <boost/tr1/functional.hpp>
+#include <vector>
 
 namespace sanguis
 {
@@ -19,7 +21,6 @@ class projectile : public entity {
 protected:
 	projectile(
 		environment const &,
-		armor_array const &,
 		pos_type const &center,
 		space_unit angle,
 		team::type team,
@@ -27,13 +28,20 @@ protected:
 		dim_type const &dim,
 		time_type lifetime);
 	void die();
+
+	typedef std::vector<
+		std::tr1::reference_wrapper<
+			entity
+		>
+	> hit_vector;
 private:
 	void update(
 		time_type,
 		container &entities);
 	messages::space_unit max_speed() const;
 
-	virtual void do_hit(entity &target) = 0;
+	virtual void do_hit(
+		hit_vector const &) = 0;
 	virtual void do_die();
 
 	space_unit          max_speed_;

@@ -1,10 +1,10 @@
 #include "simple_bullet.hpp"
 #include "../../get_dim.hpp"
 #include <boost/assign/list_of.hpp>
+#include <cassert>
 
 sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 	environment const &env,
-	armor_array const &armor,
 	messages::pos_type const &center,
 	messages::space_unit const angle,
 	team::type const team_,
@@ -12,7 +12,6 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 :
 	projectile(
 		env,
-		armor,
 		center,
 		angle,
 		team_,
@@ -22,7 +21,7 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 		default_dim(
 			SGE_TEXT("bullet")),
 		static_cast<time_type>(10)),
-  damage(damage)
+	damage(damage)
 {}
 
 sanguis::entity_type::type
@@ -32,7 +31,7 @@ sanguis::server::entities::projectiles::simple_bullet::type() const
 }
 
 void sanguis::server::entities::projectiles::simple_bullet::do_hit(
-	entity &target)
+	hit_vector const &hits)
 {
 	damage_array const damage_values =
 		boost::assign::list_of
@@ -42,7 +41,9 @@ void sanguis::server::entities::projectiles::simple_bullet::do_hit(
 		(messages::mu(0))
 		(messages::mu(0));
 			
-	target.damage(
+	assert(!hits.empty());
+
+	hits[0].get().damage(
 		damage,
 		damage_values);
 

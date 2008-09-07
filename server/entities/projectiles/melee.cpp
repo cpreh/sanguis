@@ -1,15 +1,14 @@
 #include "melee.hpp"
 #include <boost/assign/list_of.hpp>
+#include <cassert>
 
 sanguis::server::entities::projectiles::melee::melee(
 	environment const &env,
-	armor_array const &armor,
 	messages::pos_type const& center,
 	team::type const team_,
 	messages::space_unit const damage)
 : projectile(
 		env,
-		armor,
 		center,
 		messages::mu(0), // angle doesn't matter here
 		team_,
@@ -28,17 +27,19 @@ sanguis::server::entities::projectiles::melee::type() const
 }
 
 void sanguis::server::entities::projectiles::melee::do_hit(
-	entity &target)
+	hit_vector const &hits)
 {
-	const damage_array damage_values =
+	damage_array const damage_values =
 		boost::assign::list_of
 		(messages::mu(1))
 		(messages::mu(0))
 		(messages::mu(0))
 		(messages::mu(0))
 		(messages::mu(0));
-			
-	target.damage(
+	
+	assert(!hits.empty());
+
+	hits[0].get().damage(
 		damage,
 		damage_values);
 	die();

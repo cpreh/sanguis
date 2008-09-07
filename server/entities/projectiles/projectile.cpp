@@ -1,12 +1,12 @@
 #include "projectile.hpp"
 #include "../base_parameters.hpp"
 #include "../../collision.hpp"
+#include "../../damage_types.hpp"
 #include <sge/time/second.hpp>
 #include <boost/foreach.hpp>
 
 sanguis::server::entities::projectiles::projectile::projectile(
 	environment const &env,
-	armor_array const &armor,
 	pos_type const& center,
 	space_unit const angle,
 	team::type const team_,
@@ -17,7 +17,8 @@ sanguis::server::entities::projectiles::projectile::projectile(
 	entity(
 		base_parameters(
 			env,
-			armor,
+			damage::list(
+				messages::mu(0)),
 			center,
 			angle,
 			angle,
@@ -38,7 +39,7 @@ void sanguis::server::entities::projectiles::projectile::die()
 }
 
 void sanguis::server::entities::projectiles::projectile::update(
-	const time_type time,
+	time_type const time,
 	container &entities)
 {
 	entity::update(
@@ -51,6 +52,8 @@ void sanguis::server::entities::projectiles::projectile::update(
 		return;
 	}
 
+	hit_vector hits;
+
 	BOOST_FOREACH(
 		entity &e,
 		entities)
@@ -60,10 +63,11 @@ void sanguis::server::entities::projectiles::projectile::update(
 		&& collides(
 			e,
 			*this))
-			do_hit(e);
-		if(dead())
-			return;
+			hits.push_back(e);
 	}
+
+	if(!hits.empty())
+		do_hit(hits);
 }
 
 sanguis::messages::space_unit

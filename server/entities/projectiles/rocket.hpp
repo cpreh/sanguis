@@ -1,5 +1,5 @@
-#ifndef SANGUIS_SERVER_ENTITIES_PROJECTILES_SIMPLE_BULLET_HPP_INCLUDED
-#define SANGUIS_SERVER_ENTITIES_PROJECTILES_SIMPLE_BULLET_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_ENTITIES_PROJECTILES_ROCKET_HPP_INCLUDED
+#define SANGUIS_SERVER_ENTITIES_PROJECTILES_ROCKET_HPP_INCLUDED
 
 #include "projectile.hpp"
 
@@ -12,9 +12,9 @@ namespace entities
 namespace projectiles
 {
 
-class simple_bullet : public projectile {
+class rocket : public projectile {
 public:
-	simple_bullet(
+	rocket(
 		environment const &,
 		pos_type const &center,
 		space_unit angle,
@@ -22,10 +22,11 @@ public:
 		space_unit damage);
 private:
 	entity_type::type type() const;
-
+		
 	void do_hit(
-		hit_vector const &target);
-
+		entity &target);
+	void do_die();
+	
 	space_unit damage;
 };
 

@@ -1,6 +1,5 @@
 #include "melee.hpp"
 #include "delayed_attack.hpp"
-#include "../damage_types.hpp"
 #include "../entities/entity.hpp"
 #include "../entities/projectiles/melee.hpp"
 
@@ -27,7 +26,6 @@ void sanguis::server::weapons::melee::do_attack(
 		entities::auto_ptr(
 			new entities::projectiles::melee(
 				get_environment(),
-				damage::list(messages::mu(0)),
 				a.dest(),
 				a.team(),
 				damage)));

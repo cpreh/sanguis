@@ -16,7 +16,6 @@ class melee : public projectile {
 public:
 	melee(
 		environment const &,
-		armor_array const &,
 		pos_type const& center,
 		team::type team,
 		space_unit damage);
@@ -24,7 +23,7 @@ private:
 	entity_type::type type() const;
 
 	void do_hit(
-		entity &target);
+		hit_vector const &target);
 
 	messages::space_unit damage;
 };
