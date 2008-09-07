@@ -17,12 +17,11 @@ public:
 	melee(
 		environment const &,
 		armor_array const &,
-		messages::pos_type const& pos,
+		pos_type const& center,
 		team::type team,
-		messages::space_unit damage);
+		space_unit damage);
 private:
 	entity_type::type type() const;
-	messages::dim_type const dim() const;
 
 	void do_hit(
 		entity &target);

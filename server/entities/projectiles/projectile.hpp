@@ -20,10 +20,11 @@ protected:
 	projectile(
 		environment const &,
 		armor_array const &,
-		messages::pos_type const& center,
-		messages::space_unit angle,
+		pos_type const &center,
+		space_unit angle,
 		team::type team,
 		property_map const &,
+		dim_type const &dim,
 		time_type lifetime);
 	void die();
 private:
@@ -35,8 +36,8 @@ private:
 	virtual void do_hit(entity &target) = 0;
 	virtual void do_die();
 
-	messages::space_unit max_speed_;
-	sge::time::timer     lifetime;
+	space_unit          max_speed_;
+	sge::time::timer    lifetime;
 };
 
 }

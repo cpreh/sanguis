@@ -17,18 +17,17 @@ public:
 	simple_bullet(
 		environment const &,
 		armor_array const &,
-		messages::pos_type const& pos,
-		messages::space_unit angle,
+		pos_type const &center,
+		space_unit angle,
 		team::type team,
-		messages::space_unit damage);
+		space_unit damage);
 private:
 	entity_type::type type() const;
-	messages::dim_type const dim() const;
 
 	void do_hit(
 		entity &target);
 
-	messages::space_unit damage;
+	space_unit damage;
 };
 
 }

@@ -4,13 +4,13 @@
 
 sanguis::server::entities::pickups::health::health(
 	environment const &env,
-	messages::pos_type const &pos,
+	pos_type const &center,
 	team::type const team_,
-	messages::space_unit const amount)
+	space_unit const amount)
 : pickup(
 	pickup_type::health,
 	env,
-	pos,
+	center,
 	team_),
   amount(amount)
 {}
@@ -19,13 +19,4 @@ void sanguis::server::entities::pickups::health::do_pickup(
 	entity_with_weapon &receiver)
 {
 	receiver.health(receiver.health() + amount);	
-}
-
-sanguis::messages::dim_type const
-sanguis::server::entities::pickups::health::dim() const
-{
-	return get_dim(
-		SGE_TEXT("pickup_hp"),
-		SGE_TEXT("default")
-		);
 }

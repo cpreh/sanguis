@@ -7,10 +7,11 @@
 sanguis::server::entities::projectiles::projectile::projectile(
 	environment const &env,
 	armor_array const &armor,
-	messages::pos_type const& center,
-	messages::space_unit const angle,
+	pos_type const& center,
+	space_unit const angle,
 	team::type const team_,
 	property_map const &properties,
+	dim_type const &dim,
 	time_type const lifetime)
 :
 	entity(
@@ -24,10 +25,10 @@ sanguis::server::entities::projectiles::projectile::projectile(
 			properties,
 			entity_type::bullet,
 			true,
-			dim_type(1,1))), // FIXME
-  lifetime(
-  	sge::time::second(
-		lifetime))
+			dim)),
+	lifetime(
+		sge::time::second(
+			lifetime))
 {}
 
 void sanguis::server::entities::projectiles::projectile::die()

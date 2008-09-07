@@ -8,14 +8,14 @@
 
 sanguis::server::entities::pickups::weapon::weapon(
 	environment const &env,
-	messages::pos_type const &pos,
+	messages::pos_type const &center,
 	team::type const team_,
 	weapon_type::type const weapon_type_)
 :
 	pickup(
 		pickup_type::weapon,
 		env,
-		pos,
+		center,
 		team_,
 		default_dim(
 			load::weapon_pickup_name(

@@ -17,7 +17,7 @@ class weapon : public pickup {
 public:
 	weapon(
 		environment const &,
-		messages::pos_type const &,
+		messages::pos_type const &center,
 		team::type team,
 		weapon_type::type);
 	

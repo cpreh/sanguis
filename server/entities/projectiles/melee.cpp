@@ -4,18 +4,19 @@
 sanguis::server::entities::projectiles::melee::melee(
 	environment const &env,
 	armor_array const &armor,
-	messages::pos_type const& pos,
+	messages::pos_type const& center,
 	team::type const team_,
 	messages::space_unit const damage)
 : projectile(
 		env,
 		armor,
-		pos,
+		center,
 		messages::mu(0), // angle doesn't matter here
 		team_,
 		boost::assign::map_list_of
 			(property::type::health, property(messages::mu(1)))
 			(property::type::movement_speed, property(messages::mu(0))),
+		dim_type(1, 1),
 		static_cast<time_type>(1)), // short lifetime
   damage(damage)
 {}
@@ -24,12 +25,6 @@ sanguis::entity_type::type
 sanguis::server::entities::projectiles::melee::type() const
 {
 	return entity_type::indeterminate;
-}
-
-sanguis::messages::dim_type const
-sanguis::server::entities::projectiles::melee::dim() const
-{
-	return messages::dim_type(1,1); // TODO: maybe allow cleaving attacks?
 }
 
 void sanguis::server::entities::projectiles::melee::do_hit(
