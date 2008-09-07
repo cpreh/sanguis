@@ -4,7 +4,7 @@
 
 sanguis::server::auras::freeze::freeze(
 	messages::circle_type const &circle_,
-	const team::type team)
+	team::type const team)
 : aura(
 	circle_,
 	team,

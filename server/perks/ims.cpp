@@ -16,5 +16,5 @@ bool sanguis::server::perks::ims::can_raise_level() const
 sanguis::messages::space_unit
 sanguis::server::perks::ims::factor() const
 {
-	return static_cast<messages::space_unit>(level()) / messages::mu(0.1); // TODO: make this nonlinear	
+	return static_cast<messages::space_unit>(level()) / messages::mu(0.1); // TODO: make this nonlinear
 }

@@ -21,7 +21,8 @@ sanguis::server::entities::pickups::pickup::pickup(
 	pickup_type::type const ptype_,
 	environment const &env,
 	messages::pos_type const &pos,
-	team::type const team_)
+	team::type const team_,
+	optional_dim const &dim_)
 :
 	entity(
 		base_parameters(
@@ -39,12 +40,11 @@ sanguis::server::entities::pickups::pickup::pickup(
 				entities::property(messages::mu(0))),
 			entity_type::bullet,
 			true,
-			load::pickup_name(
-				ptype_)
-				? default_dim(
-					*load::pickup_name(
-						ptype_))
-				: dim_type(0, 0))),
+			dim_
+			? *dim_
+			: default_dim(
+				load::pickup_name(
+					ptype_)))),
 	ptype_(ptype_)
 {}
 

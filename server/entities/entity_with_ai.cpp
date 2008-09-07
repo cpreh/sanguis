@@ -2,7 +2,7 @@
 
 sanguis::server::entities::entity_with_ai::entity_with_ai(
 	base_parameters const &param,
-	ai::ai_ptr ai_,
+	ai::ai_ptr const ai_,
 	weapons::weapon_ptr start_weapon)
 :
 	entity_with_weapon(

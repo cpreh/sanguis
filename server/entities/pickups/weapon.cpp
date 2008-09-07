@@ -11,12 +11,16 @@ sanguis::server::entities::pickups::weapon::weapon(
 	messages::pos_type const &pos,
 	team::type const team_,
 	weapon_type::type const weapon_type_)
-: pickup(
-	pickup_type::weapon,
-	env,
-	pos,
-	team_),
-  weapon_type_(weapon_type_)
+:
+	pickup(
+		pickup_type::weapon,
+		env,
+		pos,
+		team_,
+		default_dim(
+			load::weapon_pickup_name(
+				weapon_type_))),
+	weapon_type_(weapon_type_)
 {}
 
 sanguis::weapon_type::type
@@ -38,14 +42,4 @@ void sanguis::server::entities::pickups::weapon::do_pickup(
 		weapons::create(
 			weapon_type_,
 			get_environment()));
-}
-
-sanguis::messages::dim_type const
-sanguis::server::entities::pickups::weapon::dim() const
-{
-	return get_dim(
-		load::weapon_pickup_name(
-			wtype()),
-		SGE_TEXT("default")
-		);
 }

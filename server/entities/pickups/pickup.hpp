@@ -4,6 +4,7 @@
 #include "../entity.hpp"
 #include "../fwd.hpp"
 #include "../../../pickup_type.hpp"
+#include <boost/optional.hpp>
 
 namespace sanguis
 {
@@ -18,11 +19,15 @@ class pickup : public entity {
 public:
 	pickup_type::type ptype() const;
 protected:
+	typedef boost::optional<dim_type> optional_dim;
+
 	pickup(
 		pickup_type::type,
 		environment const &,
 		messages::pos_type const &,
-		team::type team);
+		team::type team,
+		optional_dim const &dim
+			= optional_dim());
 private:
 	void update(
 		time_type time,
