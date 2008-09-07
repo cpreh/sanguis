@@ -4,7 +4,18 @@
 #include "../../damage_types.hpp"
 #include "../../message_converter.hpp"
 #include <sge/time/second.hpp>
+#include <sge/exception.hpp>
+#include <sge/text.hpp>
 #include <boost/foreach.hpp>
+
+namespace
+{
+
+sanguis::entity_type::type
+to_entity_type(
+	sanguis::projectile_type::type);
+
+}
 
 sanguis::projectile_type::type
 sanguis::server::entities::projectiles::projectile::ptype() const
@@ -13,7 +24,7 @@ sanguis::server::entities::projectiles::projectile::ptype() const
 }
 
 sanguis::server::entities::projectiles::projectile::projectile(
-	projectile_type::type const ptype_,
+	projectile_type::type const nptype,
 	environment const &env,
 	pos_type const& center,
 	space_unit const angle,
@@ -32,10 +43,10 @@ sanguis::server::entities::projectiles::projectile::projectile(
 			angle,
 			team_,
 			properties,
-			entity_type::projectile,
+			to_entity_type(nptype),
 			true,
 			dim)),
-	ptype_(ptype_),
+	ptype_(nptype),
 	lifetime(
 		sge::time::second(
 			lifetime))
@@ -87,3 +98,28 @@ sanguis::server::entities::projectiles::projectile::add_message() const
 {
 	return message_convert(*this);	
 }
+
+namespace
+{
+
+sanguis::entity_type::type
+to_entity_type(
+	sanguis::projectile_type::type const p)
+{
+	// TODO: maybe this is not the best way to do this
+	switch(p) {
+	case sanguis::projectile_type::rocket:
+	case sanguis::projectile_type::simple_bullet:
+		return sanguis::entity_type::projectile;
+	case sanguis::projectile_type::aoe_damage:
+	case sanguis::projectile_type::melee:
+		return sanguis::entity_type::indeterminate;
+	default:
+		throw sge::exception(
+			SGE_TEXT("Invalid projectile type in to_entity_type()!"));
+	}
+}
+
+}
+
+
