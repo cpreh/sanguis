@@ -13,7 +13,10 @@ sanguis::server::weapons::melee::melee(
 	env,
 	type_,
 	range,
+	unlimited_magazine,
 	base_cooldown,
+	static_cast<time_type>(
+		0),
 	static_cast<time_type>(
 		0)),
   damage(damage)

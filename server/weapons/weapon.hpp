@@ -10,6 +10,7 @@
 #include "../entities/entity_fwd.hpp"
 #include <sge/time/timer.hpp>
 #include <boost/optional.hpp>
+#include <boost/noncopyable.hpp>
 #include <memory>
 
 namespace sanguis
@@ -21,7 +22,7 @@ namespace weapons
 
 class delayed_attack;
 
-class weapon {
+class weapon : boost::noncopyable {
 public:
 	space_unit range() const;
 	bool attack(
@@ -37,8 +38,12 @@ protected:
 		environment const &,
 		weapon_type::type,
 		space_unit range,
+		unsigned magazine_size,
 		time_type base_cooldown,
-		time_type cast_point);
+		time_type cast_point,
+		time_type reload_time);
+
+	static unsigned const unlimited_magazine;
 
 	virtual void do_attack(
 		delayed_attack const &) = 0;
@@ -52,12 +57,26 @@ private:
 		entities::entity const& from,
 		pos_type const& to) const;
 
+	struct state {
+		enum type {
+			ready,
+			castpoint,
+			backswing,
+			reload
+		};
+	};
+
 	diff_clock              diff;
 	environment             env_;
 	weapon_type::type       type_;
 	space_unit              range_;
+	unsigned                magazine_used,
+	                        magazine_size;
 	sge::time::timer        cooldown_timer,
-	                        cast_point_timer;
+	                        cast_point_timer,
+	                        reload_timer;
+	state::type             state_;
+
 	boost::optional<
 		pos_type>       attack_dest;
 };

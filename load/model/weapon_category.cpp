@@ -19,7 +19,8 @@ sanguis::load::model::weapon_category::weapon_category(
 		SGE_TEXT("attacking"),
 		SGE_TEXT("walking"),
 		SGE_TEXT("dying"),
-		SGE_TEXT("deploying")
+		SGE_TEXT("deploying"),
+		SGE_TEXT("reloading")
 	} };
 
 	for(animation_type_array::const_iterator it(animation_types.begin());

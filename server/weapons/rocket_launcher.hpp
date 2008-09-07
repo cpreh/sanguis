@@ -20,7 +20,9 @@ public:
 		weapon_type::type,
 		time_type base_cooldown,
 		space_unit rocket_damage,
-		space_unit rocket_aoe);
+		space_unit rocket_aoe,
+		unsigned magazine_size,
+		time_type cooldown);
 private:
 	void do_attack(
 		delayed_attack const &);

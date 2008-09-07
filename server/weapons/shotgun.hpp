@@ -20,7 +20,9 @@ public:
 		time_type base_cooldown,
 		space_unit spread_radius,
 		unsigned shells,
-		space_unit damage);
+		space_unit damage,
+		unsigned magazine_size,
+		time_type reload_time);
 private:
 	void do_attack(
 		delayed_attack const &);

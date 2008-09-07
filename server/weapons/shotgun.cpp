@@ -11,14 +11,18 @@ sanguis::server::weapons::shotgun::shotgun(
 	time_type const base_cooldown,
 	space_unit const spread_radius,
 	unsigned const shells,
-	space_unit const damage)
+	space_unit const damage,
+	unsigned const magazine_size,
+	time_type const reload_time)
 : weapon(
 	env,
 	type_,
 	1000, // FIXME
+	magazine_size,
 	base_cooldown,
 	static_cast<time_type>(
-		0.5)), // FIXME
+		0.5), // FIXME
+	reload_time),
   spread_radius(spread_radius),
   shells(shells),
   damage(damage)
