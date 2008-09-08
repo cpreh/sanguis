@@ -3,21 +3,10 @@
 #include "entities/pickups/health.hpp"
 #include "entities/pickups/weapon.hpp"
 #include "../random.hpp"
+#include <sge/exception.hpp>
+#include <sge/text.hpp>
 #include <boost/tr1/random.hpp>
-
-namespace
-{
-
-void add_pickup(
-	sanguis::server::environment const &,
-	sanguis::server::entities::auto_ptr);
-
-void add_weapon_pickup(
-	sanguis::server::environment const &,
-	sanguis::messages::pos_type const &,
-	sanguis::weapon_type::type);
-
-}
+#include <boost/array.hpp>
 
 void sanguis::server::spawn_pickup(
 	messages::pos_type const &pos,
@@ -32,17 +21,42 @@ void sanguis::server::spawn_pickup(
 		uniform_ui
 	> rng_type;
 
+	unsigned const weapon_pickup_count(3);
+	boost::array<
+		weapon_type::type,
+		weapon_pickup_count
+	> const weapon_pickups = {
+	{
+		weapon_type::pistol,
+		weapon_type::rocket_launcher,
+		weapon_type::shotgun
+	}};
+
 	static rng_type rng(
 		create_seeded_randgen(),
 		uniform_ui(
 			0,
-			2  // health + 2 weapons, TODO: maybe calculate this instead of a magic number?
-		));
+			0 + weapon_pickup_count)  // health + 3 weapons
+		);
 
-	switch(rng()) {
-	case 0:
-		add_pickup(
-			env,
+	unsigned const rand_val(rng());
+
+	if(rand_val < weapon_pickups.size())
+	{
+		env.insert(
+			entities::auto_ptr(
+				new entities::pickups::weapon(
+					env,
+					pos,
+					team::players,
+					weapon_pickups[rand_val])));
+		return;
+	}
+
+	// TODO: more non weapon pickups
+	switch(rand_val) {
+	case weapon_pickup_count:
+		env.insert(
 			entities::auto_ptr(
 				new entities::pickups::health(
 					env,
@@ -50,45 +64,8 @@ void sanguis::server::spawn_pickup(
 					team::players,
 					10))); // FIXME: which health value to use?
 		break;
-	case 1:
-		add_weapon_pickup(
-			env,
-			pos,
-			weapon_type::pistol);
-		break;
 	default:
-		add_weapon_pickup(
-			env,
-			pos,
-			weapon_type::shotgun);
-		break;
+		throw sge::exception(
+			SGE_TEXT("Invalid random number for pickup generated!"));
 	}
-}
-
-namespace
-{
-
-void add_pickup(
-	sanguis::server::environment const &env,
-	sanguis::server::entities::auto_ptr e)
-{
-	env.insert(e);
-}
-
-void add_weapon_pickup(
-	sanguis::server::environment const &env,
-	sanguis::messages::pos_type const &pos,
-	sanguis::weapon_type::type const wt)
-{
-	add_pickup(
-		env,
-		sanguis::server::entities::auto_ptr(
-			new sanguis::server::entities::pickups::weapon(
-				env,
-				pos,
-				sanguis::server::team::players,
-				wt
-		)));
-}
-
 }
