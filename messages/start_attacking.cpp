@@ -9,7 +9,7 @@ sanguis::messages::start_attacking::start_attacking()
 {}
 
 sanguis::messages::start_attacking::start_attacking(
-	const entity_id id)
+	entity_id const id)
 : entity_message(id)
 {}
 
