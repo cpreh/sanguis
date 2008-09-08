@@ -47,6 +47,9 @@ sanguis::client::logic::logic(
 void sanguis::client::logic::handle_player_action(
 	player_action const &action)
 {
+	if(player_id_ == invalid_id)
+		return;
+	
 	actions.at(
 		action.type())(
 			action.scale());
