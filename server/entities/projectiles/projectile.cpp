@@ -83,7 +83,8 @@ void sanguis::server::entities::projectiles::projectile::update(
 		&& collides(
 			e,
 			*this))
-			hits.push_back(e);
+			hits.push_back(
+				hit_vector::value_type(e));
 	}
 
 	if(!hits.empty())
