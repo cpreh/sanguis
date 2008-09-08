@@ -50,7 +50,11 @@ class unpaused
 		net::id_type,
 		messages::player_rotation const &);
 	
-	boost::statechart::result operator()(const net::id_type,const messages::player_start_shooting &);
+	boost::statechart::result
+	operator()(
+		net::id_type,
+		messages::player_start_shooting const &);
+	
 	boost::statechart::result operator()(const net::id_type,const messages::player_stop_shooting &);
 	boost::statechart::result operator()(const net::id_type,const messages::player_change_weapon &);
 	boost::statechart::result operator()(const net::id_type,const messages::player_unpause &);

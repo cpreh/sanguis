@@ -1,4 +1,5 @@
 #include "logic.hpp"
+#include "invalid_id.hpp"
 #include "../messages/give_weapon.hpp"
 #include "../messages/move.hpp"
 #include "../messages/player_direction.hpp"
@@ -33,7 +34,7 @@ sanguis::client::logic::logic(
 			(boost::bind(&logic::handle_switch_weapon_forwards, this, _1))
 			(boost::bind(&logic::handle_switch_weapon_backwards, this, _1))
 			(boost::bind(&logic::handle_pause_unpause, this, _1)).to_container(actions)),
-	player_id_(0),
+	player_id_(invalid_id),
 	direction(0,0),
 	cursor_pos_(0,0),
 	player_center(0,0),

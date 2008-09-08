@@ -13,10 +13,13 @@
 #include "../../messages/level_up.hpp"
 #include "../../resolution.hpp"
 #include "../../dispatch_type.hpp"
+#include "../../log_headers.hpp"
+#include <sge/iconv.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/assign/list_of.hpp>
 #include <boost/foreach.hpp>
 #include <boost/bind.hpp>
+#include <ostream>
 
 sanguis::server::states::running::running(my_context ctx)
 : my_base(ctx),
@@ -76,7 +79,8 @@ void sanguis::server::states::running::divide_exp(
 	{
 		entities::player &p = *ref.second;
 		p.exp(p.exp() + exp);
-		context<running>().send(
+
+		send(
 			messages::auto_ptr(
 				new messages::experience(
 					p.id(),
@@ -89,7 +93,7 @@ void sanguis::server::states::running::level_callback(
 	messages::level_type)
 {
 	// no message_converter here because it operates on a _specific_ entity type
-	context<running>().send(
+	send(
 		messages::auto_ptr(
 			new messages::level_up(
 				p.id(),
@@ -137,38 +141,51 @@ boost::statechart::result
 sanguis::server::states::running::operator()(
 	net::id_type const net_id,
 	messages::client_info const &m)
-{		
-	entities::entity &raw_player = context<running>().insert_entity(
-		entities::auto_ptr(
-			new entities::player(
-				get_environment(),
-				damage::list(messages::mu(0)),
-				net_id,
-				messages::pos_type(
-					messages::mu(resolution().w()/2),
-					messages::mu(resolution().h()/2)),
-				messages::mu(0),
-				messages::mu(0),
-				
-				boost::assign::map_list_of
-					(entities::property::type::health,entities::property(messages::mu(100)))
-					(entities::property::type::movement_speed,entities::property(messages::mu(0),messages::mu(100))),
+{
+	// TODO: this should be cleaned up somehow
+	// 1) create the player
+	// 2) tell the client the player's id _before_ doing anything else
+	// 3) add the player
+	entities::auto_ptr new_player(
+		new entities::player(
+			get_environment(),
+			damage::list(messages::mu(0)),
+			net_id,
+			messages::pos_type(
+				messages::mu(resolution().w()/2),
+				messages::mu(resolution().h()/2)),
+			messages::mu(0),
+			messages::mu(0),
+			boost::assign::map_list_of
+				(entities::property::type::health,
+				entities::property(messages::mu(100)))
+				(entities::property::type::movement_speed,
+				entities::property(messages::mu(0),messages::mu(100))),
+			m.name()));
 
-				m.name())));
-	
-	entities::player &p = dynamic_cast<entities::player &>(raw_player);
-	
-	context<running>().players()[net_id] = &p;
+	players()[net_id] = dynamic_cast<entities::player *>(
+		new_player.get());
 
 	context<machine>().send(
 		messages::auto_ptr(
 			new messages::assign_id(
-				p.id())),
+				new_player->id())),
 		net_id);
-				
 
-	p.add_weapon(weapons::create(weapon_type::melee,get_environment()));
-	p.add_weapon(weapons::create(weapon_type::pistol,get_environment()));
+	entities::player &p(
+		dynamic_cast<entities::player &>(
+			insert_entity(
+				new_player)));
+
+	// TODO: some defaults here
+	p.add_weapon(
+		weapons::create(
+			weapon_type::melee,
+			get_environment()));
+	p.add_weapon(
+		weapons::create(
+			weapon_type::pistol,
+			get_environment()));
 
 	// send start experience
 	// no message_converter here because it operates on a _specific_ entity type
@@ -198,8 +215,16 @@ sanguis::server::states::running::operator()(
 
 boost::statechart::result
 sanguis::server::states::running::handle_default_msg(
-	net::id_type,
-	messages::base const &)
+	net::id_type const id,
+	messages::base const &m)
 {
-	return forward_event();
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1
+			<< SGE_TEXT("server: running: received unexpected message from id ")
+			<< id
+			<< SGE_TEXT(" of type ")
+			<< sge::iconv(typeid(m).name()));
+
+	return discard_event();
 }

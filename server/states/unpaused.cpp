@@ -28,7 +28,6 @@
 
 #include <sge/math/constants.hpp>
 #include <sge/math/angle.hpp>
-#include <sge/iconv.hpp>
 
 #include <boost/lexical_cast.hpp>
 #include <boost/mpl/vector.hpp>
@@ -44,17 +43,10 @@ sanguis::server::states::unpaused::unpaused()
 
 boost::statechart::result
 sanguis::server::states::unpaused::handle_default_msg(
-	net::id_type id,
-	messages::base const &m)
+	net::id_type,
+	messages::base const &)
 {
-	SGE_LOG_WARNING(
-		log(),
-		sge::log::_1
-			<< SGE_TEXT("server: received unexpected message from id ")
-			<< id
-			<< SGE_TEXT(" of type ")
-			<< sge::iconv(typeid(m).name()));
-	return discard_event();
+	return forward_event();
 }
 
 boost::statechart::result
@@ -62,7 +54,9 @@ sanguis::server::states::unpaused::operator()(
 	net::id_type const id,
 	messages::player_change_weapon const &e)
 {
-	running::player_map::iterator const it(context<running>().players().find(id));
+	running::player_map::iterator const it(
+		context<running>().players().find(id));
+	
 	if (it == context<running>().players().end())
 	{
 		SGE_LOG_WARNING(
@@ -76,9 +70,10 @@ sanguis::server::states::unpaused::operator()(
 	entities::player &player_(*it->second);
 
 	if (e.weapon() > weapon_type::size)
-		throw sge::exception("got invalid weapon type in player_change_weapon");
+		throw sge::exception(
+			SGE_TEXT("got invalid weapon type in player_change_weapon"));
 
-	const weapon_type::type type(static_cast<weapon_type::type>(e.weapon()));
+	weapon_type::type const type(static_cast<weapon_type::type>(e.weapon()));
 
 	player_.change_weapon(type);
 
