@@ -20,7 +20,9 @@ sanguis::server::entities::entity_with_weapon::entity_with_weapon(
 	weapons::weapon_ptr start_weapon)
 : entity(param),
   weapon_(weapon_type::none),
-  target_(target_undefined)
+  target_(target_undefined),
+  attacking(false),
+  reloading(false)
 {
 	if(!start_weapon.get())
 		return;
@@ -42,18 +44,31 @@ void sanguis::server::entities::entity_with_weapon::update(
 		entities);
 	
 	if(has_weapon())
+	{
 		active_weapon().update(
 			time,
 			*this);
+
+		if(active_weapon().reloading() && !reloading)
+		{
+			send(message_convert<messages::start_reloading>(*this));
+			reloading = true;
+		}
+		else if(reloading)
+		{
+			send(message_convert<messages::stop_reloading>(*this));
+			reloading = false;
+		}
+	}
 
 	// entity lost its target and/or weapon or aggression or didn't have any of these
 	if (weapon_ == weapon_type::none || target() == target_undefined || !aggressive())
 	{
 		// previously attacking
-		if (attacking())
+		if (attacking)
 		{
 			send(message_convert<messages::stop_attacking>(*this));
-			attacking(false);
+			attacking = false;
 		}
 
 		return;
@@ -67,15 +82,15 @@ void sanguis::server::entities::entity_with_weapon::update(
 		return;
 
 	weapons::weapon &wep(active_weapon());
-	if (wep.attack(*this, target()) && !attacking())
+	if (wep.attack(*this, target()) && !attacking)
 	{
 		send(message_convert<messages::start_attacking>(*this));
-		attacking(true);
+		attacking = true;
 	}
-	else if (attacking())
+	else if (attacking)
 	{
 		send(message_convert<messages::stop_attacking>(*this));
-		attacking(false);
+		attacking = false;
 	}
 }
 

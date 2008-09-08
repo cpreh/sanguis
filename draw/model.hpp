@@ -43,11 +43,14 @@ private:
 	void weapon(weapon_type::type);
 	void start_attacking();
 	void stop_attacking();
+	void start_reloading();
+	void stop_reloading();
 	animation_type::type animation() const;
 	bool dead() const;
 	void update_healthbar();
 
-	bool            attacking;
+	bool            attacking,
+	                reloading;
 	sge::space_unit health_,
 	                max_health_;
 	boost::scoped_ptr<healthbar> healthbar_;

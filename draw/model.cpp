@@ -20,6 +20,7 @@ sanguis::draw::model::model(
 	load::model::singleton()[name].size(),
 	order),
   attacking(false),
+  reloading(false),
   health_(start_health),
   max_health_(start_health),
   healthbar_(
@@ -114,7 +115,7 @@ void sanguis::draw::model::start_attacking()
 	if(attacking)
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_1 << SGE_TEXT("warning: model::start_attacking(): already attacking!"));
+			sge::log::_1 << SGE_TEXT("model::start_attacking(): already attacking!"));
 	attacking = true;
 }
 
@@ -123,20 +124,42 @@ void sanguis::draw::model::stop_attacking()
 	if(!attacking)
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_1 << SGE_TEXT("warning: model::stop_attacking(): already not attacking!"));
+			sge::log::_1 << SGE_TEXT("model::stop_attacking(): already not attacking!"));
 	attacking = false;
+}
+
+void sanguis::draw::model::start_reloading()
+{
+	if(reloading)
+		SGE_LOG_WARNING(
+			log(),
+			sge::log::_1 << SGE_TEXT("model::start_reloading(): already reloading!"));
+	reloading = true;
+}
+
+void sanguis::draw::model::stop_reloading()
+{
+	if(!reloading)
+		SGE_LOG_WARNING(
+			log(),
+			sge::log::_1 << SGE_TEXT("model::stop_reloading(): already not reloading!"));
+	reloading = false;
 }
 
 sanguis::animation_type::type
 sanguis::draw::model::animation() const
 {
+	// deploying should be handled in model_part
+	// because the start of the animation type is set to it
 	return dead()
 	? animation_type::dying
-	: attacking
-		? animation_type::attacking
-		: speed().is_null()
-			? animation_type::none
-			: animation_type::walking;
+	: reloading
+		? animation_type::reloading
+		: attacking
+			? animation_type::attacking
+			: speed().is_null()
+				? animation_type::none
+				: animation_type::walking;
 }
 
 bool sanguis::draw::model::dead() const

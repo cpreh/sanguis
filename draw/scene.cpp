@@ -23,6 +23,8 @@
 #include "../messages/rotate.hpp"
 #include "../messages/start_attacking.hpp"
 #include "../messages/stop_attacking.hpp"
+#include "../messages/start_reloading.hpp"
+#include "../messages/stop_reloading.hpp"
 #include "../messages/speed.hpp"
 #include "../client_messages/add.hpp"
 #include "../log_headers.hpp"
@@ -68,6 +70,8 @@ void sanguis::draw::scene::process_message(
 			messages::rotate,
 			messages::start_attacking,
 			messages::stop_attacking,
+			messages::start_reloading,
+			messages::stop_reloading,
 			messages::speed
 			>,
 		void>(
@@ -261,6 +265,18 @@ void sanguis::draw::scene::operator()(
 	messages::stop_attacking const &m)
 {
 	get_entity(m.id()).stop_attacking();
+}
+
+void sanguis::draw::scene::operator()(
+	messages::start_reloading const &m)
+{
+	get_entity(m.id()).start_reloading();
+}
+
+void sanguis::draw::scene::operator()(
+	messages::stop_reloading const &m)
+{
+	get_entity(m.id()).stop_reloading();
 }
 
 void sanguis::draw::scene::operator()(

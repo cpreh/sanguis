@@ -56,9 +56,6 @@ public:
 	armor_array const &armor_diff() const;
 	armor_array &armor_diff();
 
-	bool attacking() const;
-	void attacking(const bool);
-
 	bool aggressive() const;
 	void aggressive(bool);
 
@@ -104,8 +101,7 @@ private:
 	entity_type::type const type_;
 	bool                    invulnerable_;
 	dim_type                collision_dim;
-	bool                    attacking_,
-	                        aggressive_;
+	bool                    aggressive_;
 	armor_array             armor_diff_;
 
 	typedef boost::ptr_list<

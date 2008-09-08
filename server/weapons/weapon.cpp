@@ -1,6 +1,6 @@
 #include "weapon.hpp"
 #include "delayed_attack.hpp"
-#include "../entities/entity.hpp"
+#include "../entities/entity_with_weapon.hpp"
 #include "../../log_headers.hpp"
 #include <sge/time/second.hpp>
 #include <sge/exception.hpp>
@@ -21,7 +21,7 @@ sanguis::server::weapons::weapon::type() const
 
 void sanguis::server::weapons::weapon::update(
 	time_type const tm,
-	entities::entity const &owner)
+	entities::entity_with_weapon const &owner)
 {
 	diff.update(tm);
 
@@ -71,7 +71,6 @@ void sanguis::server::weapons::weapon::update(
 		throw sge::exception(
 			SGE_TEXT("Invalid state in weapon!"));
 	}
-
 }
 
 bool sanguis::server::weapons::weapon::attack(
@@ -89,6 +88,11 @@ bool sanguis::server::weapons::weapon::attack(
 	
 	state_ = state::castpoint;
 	return true;
+}
+
+bool sanguis::server::weapons::weapon::reloading() const
+{
+	return reload_timer.active();	
 }
 
 sanguis::server::weapons::weapon::~weapon()

@@ -41,6 +41,8 @@ private:
 	weapon_container    weapons_;
 	weapon_type::type   weapon_;
 	pos_type            target_;
+	bool                attacking,
+	                    reloading;
 };
 
 }

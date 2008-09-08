@@ -38,19 +38,49 @@ message_convert<messages::add>(
 	entities::entity const &e);
 
 template<>
-messages::auto_ptr message_convert<messages::speed>(const entities::entity &e);
+messages::auto_ptr
+message_convert<messages::speed>(
+	entities::entity const &e);
+
 template<>
-messages::auto_ptr message_convert<messages::move>(const entities::entity &e);
+messages::auto_ptr
+message_convert<messages::move>(
+	entities::entity const &e);
+
 template<>
-messages::auto_ptr message_convert<messages::health>(const entities::entity &e);
+messages::auto_ptr
+message_convert<messages::health>(
+	entities::entity const &e);
+
 template<>
-messages::auto_ptr message_convert<messages::remove>(const entities::entity &e);
+messages::auto_ptr
+message_convert<messages::remove>(
+	entities::entity const &e);
+
 template<>
-messages::auto_ptr message_convert<messages::rotate>(const entities::entity &e);
+messages::auto_ptr
+message_convert<messages::rotate>(
+	entities::entity const &e);
+
 template<>
-messages::auto_ptr message_convert<messages::stop_attacking>(const entities::entity &e);
+messages::auto_ptr
+message_convert<messages::stop_attacking>(
+	entities::entity const &e);
+
 template<>
-messages::auto_ptr message_convert<messages::start_attacking>(const entities::entity &e);
+messages::auto_ptr
+message_convert<messages::start_attacking>(
+	entities::entity const &e);
+
+template<>
+messages::auto_ptr
+message_convert<messages::start_reloading>(
+	entities::entity const &e);
+
+template<>
+messages::auto_ptr
+message_convert<messages::stop_reloading>(
+	entities::entity const &e);
 
 }
 }

@@ -24,7 +24,6 @@ sanguis::server::entities::entity::entity(
 	type_(param.type()),
 	invulnerable_(param.invulnerable()),
 	collision_dim(param.collision_dim()),
-	attacking_(false),
 	aggressive_(false)
 {}
 
@@ -148,17 +147,6 @@ sanguis::armor_array &
 sanguis::server::entities::entity::armor_diff()
 {
 	return armor_diff_;
-}
-
-bool sanguis::server::entities::entity::attacking() const
-{
-	return attacking_;
-}
-
-void sanguis::server::entities::entity::attacking(
-	bool const n)
-{
-	attacking_ = n;
 }
 
 bool sanguis::server::entities::entity::aggressive() const

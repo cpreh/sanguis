@@ -31,7 +31,8 @@ public:
 	weapon_type::type type() const;
 	void update(
 		time_type,
-		entities::entity const &owner);
+		entities::entity_with_weapon const &owner);
+	bool reloading() const;
 	virtual ~weapon();
 protected:
 	weapon(

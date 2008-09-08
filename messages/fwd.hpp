@@ -34,6 +34,8 @@ class player_stop_shooting;
 class player_unpause;
 class start_attacking;
 class stop_attacking;
+class start_reloading;
+class stop_reloading;
 class remove;
 class resize;
 class rotate;

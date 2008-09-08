@@ -57,9 +57,10 @@ void sanguis::draw::model_part::animation(
 	switch(animation_type_) {
 	case animation_type::dying:
 		return;
-	// play attacking and deploying to the end
+	// play those animations to the end
 	case animation_type::attacking:
 	case animation_type::deploying:
+	case animation_type::reloading:
 		if(!ended)
 			return;
 	default:
@@ -154,6 +155,7 @@ sanguis::draw::model_part::loop_method() const
 	case animation_type::none:
 	case animation_type::walking:
 	case animation_type::attacking:
+	case animation_type::reloading:
 		return sge::sprite::texture_animation::loop_method::repeat;
 	case animation_type::dying:
 	case animation_type::deploying:

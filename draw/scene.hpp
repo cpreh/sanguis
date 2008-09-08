@@ -40,33 +40,35 @@ public:
 
 	void pause(bool);
 
-	void operator()(const messages::add&);
-	void operator()(const messages::add_enemy&);
-	void operator()(const messages::add_pickup&);
+	void operator()(messages::add const &);
+	void operator()(messages::add_enemy const &);
+	void operator()(messages::add_pickup const &);
 	void operator()(messages::add_projectile const &);
-	void operator()(const messages::add_weapon_pickup&);
-	void operator()(const messages::change_weapon&);
-	void operator()(const messages::experience&);
-	void operator()(const messages::health&);
-	void operator()(const messages::max_health&);
-	void operator()(const messages::move&);
-	void operator()(const messages::remove&);
-	void operator()(const messages::resize&);
-	void operator()(const messages::rotate&);
-	void operator()(const messages::start_attacking&);
-	void operator()(const messages::stop_attacking&);
-	void operator()(const messages::speed&);
+	void operator()(messages::add_weapon_pickup const &);
+	void operator()(messages::change_weapon const &);
+	void operator()(messages::experience const &);
+	void operator()(messages::health const &);
+	void operator()(messages::max_health const &);
+	void operator()(messages::move const &);
+	void operator()(messages::remove const &);
+	void operator()(messages::resize const &);
+	void operator()(messages::rotate const &);
+	void operator()(messages::start_attacking const &);
+	void operator()(messages::stop_attacking const &);
+	void operator()(messages::start_reloading const &);
+	void operator()(messages::stop_reloading const &);
+	void operator()(messages::speed const &);
 
-	void operator()(const client_messages::add&);
+	void operator()(client_messages::add const &);
 private:
 	void configure_new_object(
 		factory::entity_ptr,
 		messages::add const &);
 	
-	entity& get_entity(entity_id);
-	const entity& get_entity(entity_id) const;
-	void process_default_msg(const messages::base&);
-	void process_default_client_msg(const client_messages::base&);
+	entity &get_entity(entity_id);
+	entity const &get_entity(entity_id) const;
+	void process_default_msg(messages::base const &);
+	void process_default_client_msg(client_messages::base const &);
 	system &get_system();
 
 	system                        ss;
@@ -76,7 +78,7 @@ private:
 	typedef boost::ptr_map<entity_id, entity> entity_map;
 	entity_map entities;
 
-	typedef boost::function<void (const messages::base&)> dispatch_fun;
+	typedef boost::function<void (messages::base const &)> dispatch_fun;
 	typedef std::map<sge::type_info, dispatch_fun> event_map;
 	event_map event_dispatcher;
 };

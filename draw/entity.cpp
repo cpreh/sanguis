@@ -41,21 +41,35 @@ void sanguis::draw::entity::weapon(weapon_type::type)
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_1 << SGE_TEXT("warning: entity got a weapon message that can't have a weapon!"));
+		sge::log::_1 << SGE_TEXT("entity got a weapon message that can't have a weapon!"));
 }
 
 void sanguis::draw::entity::start_attacking()
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_1 << SGE_TEXT("warning: entity got a start attacking message!"));
+		sge::log::_1 << SGE_TEXT("entity got a start attacking message!"));
 }
 
 void sanguis::draw::entity::stop_attacking()
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_1 << SGE_TEXT("warning: entity got a stop attacking message!"));
+		sge::log::_1 << SGE_TEXT("entity got a stop attacking message!"));
+}
+
+void sanguis::draw::entity::start_reloading()
+{
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1 << SGE_TEXT("entity got a start reloading message!"));
+}
+
+void sanguis::draw::entity::stop_reloading()
+{
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1 << SGE_TEXT("entity got a stop reloading message!"));
 }
 
 sanguis::draw::entity::~entity()

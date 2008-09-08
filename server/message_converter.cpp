@@ -12,6 +12,8 @@
 #include "../messages/rotate.hpp"
 #include "../messages/start_attacking.hpp"
 #include "../messages/stop_attacking.hpp"
+#include "../messages/start_reloading.hpp"
+#include "../messages/stop_reloading.hpp"
 #include "entities/entity.hpp"
 #include "entities/enemies/enemy.hpp"
 #include "entities/pickups/pickup.hpp"
@@ -167,5 +169,25 @@ sanguis::server::message_convert<sanguis::messages::start_attacking>(
 {
 	return messages::auto_ptr(
 		new messages::start_attacking(
+			e.id()));
+}
+
+template<>
+sanguis::messages::auto_ptr
+sanguis::server::message_convert<sanguis::messages::stop_reloading>(
+	entities::entity const &e)
+{
+	return messages::auto_ptr(
+		new messages::stop_reloading(
+			e.id()));
+}
+
+template<>
+sanguis::messages::auto_ptr
+sanguis::server::message_convert<sanguis::messages::start_reloading>(
+	entities::entity const &e)
+{
+	return messages::auto_ptr(
+		new messages::start_reloading(
 			e.id()));
 }
