@@ -34,28 +34,42 @@ struct start;
 struct machine
 	: public boost::statechart::state_machine<machine, states::start>
 {
-	public:
+public:
 	machine(
 		sge::systems &,
 		sge::con::console_gfx &,
 		net::port_type);
-	void process(const tick_event &);
+	void process(tick_event const &);
 	void process_message(
 		net::id_type,
 		messages::auto_ptr);
 
-	void connect_callback(const net::id_type);
-	void disconnect_callback(const net::id_type,const net::string_type &);
-	void data_callback(const net::id_type,const net::data_type &);
+	void connect_callback(
+		net::id_type);
+	void disconnect_callback(
+		net::id_type,
+		net::string_type const &);
+	void data_callback(
+		net::id_type,
+		net::data_type const &);
 
-	void send(messages::auto_ptr m);
-	void console_print(const sge::string &);
+	void send(
+		messages::auto_ptr m);
+
+	void send(
+		messages::auto_ptr,
+		net::id_type dest);
+
+	void console_print(
+		sge::string const &);
 	net::port_type port() const;
 	net::server &net();
 	void listen();
-
-	private:
-	typedef std::map<net::id_type,client_data> client_map;
+private:
+	typedef std::map<
+		net::id_type,
+		client_data
+	> client_map;
 
 	net::port_type port_;
 	net::server net_;

@@ -2,8 +2,6 @@
 #define MESSAGE_FUNCTOR_HPP_INCLUDED
 
 #include "../net/types.hpp"
-#include "../messages/base.hpp"
-#include <functional>
 
 template<typename T,typename R>
 struct message_functor

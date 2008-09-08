@@ -10,13 +10,13 @@ sanguis::draw::hud::hud(
 {}
 
 void sanguis::draw::hud::experience(
-	const messages::exp_type nexperience)
+	messages::exp_type const nexperience)
 {
 	experience_ = nexperience;
 }
 
 void sanguis::draw::hud::update(
-	const time_type)
+	time_type)
 {
 	font.draw_text((
 		sge::format(

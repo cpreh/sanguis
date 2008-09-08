@@ -8,6 +8,7 @@
 #include "../entities/fwd.hpp"
 #include "../waves/generator.hpp"
 #include "../../messages/types.hpp"
+#include "../../messages/fwd.hpp"
 #include "../../time_type.hpp"
 
 #include <boost/mpl/list.hpp>
@@ -21,6 +22,9 @@ namespace sanguis
 {
 namespace server
 {
+
+struct message_event;
+
 namespace states
 {
 
@@ -30,29 +34,59 @@ class running
 	: public boost::statechart::state<running,machine,unpaused>
 {
 public:
-	typedef std::map<net::id_type, entities::player*> player_map;
+	typedef boost::statechart::custom_reaction<
+		message_event
+	> reactions;
 
-	running(my_context);
+	typedef std::map<
+		net::id_type,
+		entities::player*>
+	player_map;
+
+	running(
+		my_context);
+	
 	entities::container &entities();
-	const entities::container &entities() const;
-	entities::entity &insert_entity(entities::auto_ptr);
-	player_map &players();
-	const player_map &players() const;
+	entities::container const &entities() const;
 
-	void divide_exp(const messages::exp_type);
-	void level_callback(entities::player &,const messages::level_type);
+	entities::entity &insert_entity(
+		entities::auto_ptr);
+	
+	player_map &players();
+	player_map const &players() const;
+
+	void divide_exp(
+		messages::exp_type);
+
+	void level_callback(
+		entities::player &,
+		messages::level_type);
 
 	void process(
 		time_type);
+
 	environment const get_environment();
+
+	boost::statechart::result react(
+		message_event const &);
+	
+	boost::statechart::result operator()(
+		net::id_type,
+		messages::connect const &);
+	boost::statechart::result operator()(
+		net::id_type,
+		messages::client_info const &);
 private:
+	boost::statechart::result handle_default_msg(
+		net::id_type,
+		messages::base const &);
+
 	send_callback send;
 	console_print_callback console_print;
 
 	entities::container entities_;
 	player_map players_;
 	
-	// this is better suited here so it isn't out of sync after unpausing
 	waves::generator wave_generator;
 };
 

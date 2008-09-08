@@ -15,6 +15,7 @@ namespace sanguis
 namespace server
 {
 
+struct message_event;
 class environment;
 
 namespace states
@@ -32,17 +33,23 @@ class unpaused
 	unpaused();
 
 	void add_enemy();
-	void create_game(
-		net::id_type,
-		messages::client_info const &);
 
 	// reactions
-	boost::statechart::result react(const tick_event&);
-	boost::statechart::result react(const message_event&);
+	boost::statechart::result react(
+		tick_event const &);
+	boost::statechart::result react(
+		message_event const &);
 
-	boost::statechart::result operator()(const net::id_type,const messages::client_info &);
-	boost::statechart::result operator()(const net::id_type,const messages::player_direction &);
-	boost::statechart::result operator()(const net::id_type,const messages::player_rotation &);
+	boost::statechart::result
+	operator()(
+		net::id_type,
+		messages::player_direction const &);
+	
+	boost::statechart::result
+	operator()(
+		net::id_type,
+		messages::player_rotation const &);
+	
 	boost::statechart::result operator()(const net::id_type,const messages::player_start_shooting &);
 	boost::statechart::result operator()(const net::id_type,const messages::player_stop_shooting &);
 	boost::statechart::result operator()(const net::id_type,const messages::player_change_weapon &);

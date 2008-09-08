@@ -4,17 +4,13 @@
 #include "../entities/player.hpp"
 #include "../message_functor.hpp"
 #include "../message_converter.hpp"
-#include "../damage_types.hpp"
-#include "../weapons/factory.hpp"
 #include "../entities/entity.hpp"
 #include "../../truncation_check_cast.hpp"
 #include "../../dispatch_type.hpp"
 #include "../../log_headers.hpp"
-#include "../../resolution.hpp"
 #include "../../angle_vector.hpp"
 #include "../../random.hpp"
 #include "../../messages/assign_id.hpp"
-#include "../../messages/client_info.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../messages/experience.hpp"
 #include "../../messages/level_up.hpp"
@@ -37,7 +33,6 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
-#include <boost/assign/list_of.hpp>
 #include <ostream>
 
 sanguis::server::states::unpaused::unpaused()
@@ -60,59 +55,6 @@ sanguis::server::states::unpaused::handle_default_msg(
 			<< SGE_TEXT(" of type ")
 			<< sge::iconv(typeid(m).name()));
 	return discard_event();
-}
-
-void sanguis::server::states::unpaused::create_game(
-	net::id_type const net_id,
-	messages::client_info const &m)
-{
-	assert(!context<running>().entities().size());
-
-	/*send(
-		messages::auto_ptr(
-			new messages::game_state(
-				game_state(
-					truncation_check_cast<game_state::score_type>(0)))));*/
-
-	entities::entity &raw_player = context<running>().insert_entity(
-		entities::auto_ptr(
-			new entities::player(
-				get_environment(),
-				damage::list(messages::mu(0)),
-				net_id,
-				messages::pos_type(
-					messages::mu(resolution().w()/2),
-					messages::mu(resolution().h()/2)),
-				messages::mu(0),
-				messages::mu(0),
-				
-				boost::assign::map_list_of
-					(entities::property::type::health,entities::property(messages::mu(100)))
-					(entities::property::type::movement_speed,entities::property(messages::mu(0),messages::mu(100))),
-
-				m.name())));
-	
-	entities::player &p = dynamic_cast<entities::player &>(raw_player);
-	
-	context<running>().players()[net_id] = &p;
-
-	p.add_weapon(weapons::create(weapon_type::melee,get_environment()));
-	//send(new messages::give_weapon(p.id(),weapon_type::melee));
-	p.add_weapon(weapons::create(weapon_type::pistol,get_environment()));
-	//send(new messages::give_weapon(p.id(),weapon_type::pistol));
-
-	// send start experience
-	// no message_converter here because it operates on a _specific_ entity type
-	send(
-		messages::auto_ptr(
-			new messages::experience(
-				p.id(),
-				p.exp())));
-	send(
-		messages::auto_ptr(
-			new messages::level_up(
-				p.id(),
-				p.level())));
 }
 
 boost::statechart::result
@@ -233,9 +175,7 @@ sanguis::server::states::unpaused::operator()(
 	entities::player &player_(*it->second);
 
 	if (e.dir().is_null())
-	{
 		player_.get_property(entities::property::type::movement_speed).current(messages::mu(0));
-	}
 	else
 	{
 		player_.get_property(entities::property::type::movement_speed).set_current_to_max();
@@ -243,15 +183,6 @@ sanguis::server::states::unpaused::operator()(
 	}
 
 	send(message_convert<messages::speed>(player_));
-	return discard_event();
-}
-
-boost::statechart::result
-sanguis::server::states::unpaused::operator()(
-	net::id_type const id,
-	messages::client_info const &m) 
-{
-	create_game(id, m);
 	return discard_event();
 }
 
@@ -365,7 +296,6 @@ sanguis::server::states::unpaused::react(
 	return dispatch_type<
 		boost::mpl::vector<
 			messages::disconnect,
-			messages::client_info,
 			messages::player_rotation,
 			messages::player_start_shooting,
 			messages::player_stop_shooting,

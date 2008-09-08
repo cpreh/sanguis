@@ -29,7 +29,7 @@ sanguis::server::states::waiting::react(
 boost::statechart::result
 sanguis::server::states::waiting::operator()(
 	net::id_type const id,
-	messages::connect const &)
+	messages::connect const &m)
 {
 	SGE_LOG_INFO(
 		log(),
@@ -58,7 +58,6 @@ sanguis::server::states::waiting::operator()(
 	net::id_type const id,
 	messages::client_info const &m)
 {
-	//post_event(message_event(message_ptr(new messages::client_info(m)),id));
 	post_event(
 		message_event(
 			messages::auto_ptr(

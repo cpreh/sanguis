@@ -6,37 +6,49 @@
 #include "message_event.hpp"
 
 #include <sge/systems.hpp>
+#include <sge/exception.hpp>
+#include <sge/text.hpp>
 
 #include <boost/bind.hpp>
+#include <boost/foreach.hpp>
 
 sanguis::server::machine::machine(
 	sge::systems &sys,
 	sge::con::console_gfx &con,
-	const net::port_type port_)
-: port_(port_),
-  s_conn(net_.register_connect(boost::bind(&machine::connect_callback,this,_1))),
-  s_disconn(
-  	net_.register_disconnect(boost::bind(&machine::disconnect_callback,this,_1,_2))),
-  s_data(net_.register_data(boost::bind(&machine::data_callback,this,_1,_2))),
-  resource_connection(
-  	sys.image_loader,
-	sys.renderer),
+	net::port_type const port_)
+:
+	port_(
+		port_),
+	s_conn(
+		net_.register_connect(
+			boost::bind(&machine::connect_callback,this,_1))),
+	s_disconn(
+		net_.register_disconnect(
+			boost::bind(&machine::disconnect_callback,this,_1,_2))),
+	s_data(
+		net_.register_data(
+			boost::bind(&machine::data_callback,this,_1,_2))),
+	resource_connection(
+		sys.image_loader,
+		sys.renderer),
 	con(con)
 {}
 
-void sanguis::server::machine::console_print(const sge::string &s)
+void sanguis::server::machine::console_print(
+	sge::string const &s)
 {
 	con.print(s);
 }
 
-void sanguis::server::machine::process(const tick_event &t)
+void sanguis::server::machine::process(
+	tick_event const &t)
 {
-	for (client_map::iterator i = clients.begin(); i != clients.end(); ++i)
+	BOOST_FOREACH(client_map::reference ref, clients)
 	{
-		net::data_type &buffer = i->second.out_buffer;
+		net::data_type &buffer = ref.second.out_buffer;
 		if (buffer.size())
 		{
-			net_.queue(i->first,buffer);
+			net_.queue(ref.first, buffer);
 			buffer.clear();
 		}
 	}
@@ -50,7 +62,8 @@ void sanguis::server::machine::listen()
 	net_.listen(port_);
 }
 
-void sanguis::server::machine::connect_callback(const net::id_type id)
+void sanguis::server::machine::connect_callback(
+	net::id_type const id)
 {
 	process_event(
 		message_event(
@@ -59,8 +72,9 @@ void sanguis::server::machine::connect_callback(const net::id_type id)
 			id));
 }
 
-void sanguis::server::machine::disconnect_callback(const net::id_type id,
-	const net::string_type &)
+void sanguis::server::machine::disconnect_callback(
+	net::id_type const id,
+	net::string_type const &)
 {
 	process_event(
 		message_event(
@@ -79,18 +93,39 @@ void sanguis::server::machine::process_message(
 			id));
 }
 
-void sanguis::server::machine::data_callback(const net::id_type id,
-	const net::data_type &data)
+void sanguis::server::machine::data_callback(
+	net::id_type const id,
+	net::data_type const &data)
 {
-	clients[id].in_buffer = deserialize(clients[id].in_buffer+data,boost::bind(&machine::process_message,this,id,_1));
+	clients[id].in_buffer
+		= deserialize(
+			clients[id].in_buffer + data,
+			boost::bind(
+				&machine::process_message,
+				this,
+				id,
+				_1));
 }
 
 void sanguis::server::machine::send(
 	messages::auto_ptr m) 
 { 
-	const net::data_type m_str = serialize(m);
-	for (client_map::iterator i = clients.begin(); i != clients.end(); ++i)
-		i->second.out_buffer += m_str;
+	net::data_type const m_str = serialize(m);
+
+	BOOST_FOREACH(client_map::reference ref, clients)
+		ref.second.out_buffer += m_str;
+}
+
+void sanguis::server::machine::send(
+	messages::auto_ptr m,
+	net::id_type const dest)
+{
+	client_map::iterator const it(clients.find(dest));
+	if(it == clients.end())
+		throw sge::exception(
+			SGE_TEXT("machine::send: client id not found!"));
+	
+	it->second.out_buffer += serialize(m);
 }
 
 net::port_type
