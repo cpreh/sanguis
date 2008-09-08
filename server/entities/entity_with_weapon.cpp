@@ -1,6 +1,7 @@
 #include "entity_with_weapon.hpp"
 #include "../message_converter.hpp"
 #include "../weapons/factory.hpp"
+#include "../../truncation_check_cast.hpp"
 #include "../../messages/give_weapon.hpp"
 #include <sge/exception.hpp>
 #include <sge/text.hpp>
@@ -102,9 +103,11 @@ void sanguis::server::entities::entity_with_weapon::change_weapon(const weapon_t
 	weapon_ = nweapon;
 }
 
-void sanguis::server::entities::entity_with_weapon::add_weapon(weapons::weapon_ptr ptr)
+void sanguis::server::entities::entity_with_weapon::add_weapon(
+	weapons::weapon_ptr ptr)
 {
-	const weapon_type::type wt = ptr->type();
+	weapon_type::type const wt = ptr->type();
+	unsigned const magazine_size = ptr->magazine_size();
 
 	if(wt == weapon_type::pistol && weapons_.count(weapon_type::pistol))
 		return add_weapon(
@@ -122,7 +125,9 @@ void sanguis::server::entities::entity_with_weapon::add_weapon(weapons::weapon_p
 		messages::auto_ptr(
 			new messages::give_weapon(
 				id(),
-				wt)));
+				wt,
+				truncation_check_cast<messages::size_type>(
+					magazine_size))));
 }
 
 void sanguis::server::entities::entity_with_weapon::remove_weapon(const weapon_type::type type_)

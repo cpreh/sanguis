@@ -33,6 +33,7 @@ public:
 		time_type,
 		entities::entity_with_weapon const &owner);
 	bool reloading() const;
+	unsigned magazine_size() const;
 	virtual ~weapon();
 protected:
 	weapon(
@@ -72,7 +73,7 @@ private:
 	weapon_type::type       type_;
 	space_unit              range_;
 	unsigned                magazine_used,
-	                        magazine_size;
+	                        magazine_size_;
 	sge::time::timer        cooldown_timer,
 	                        cast_point_timer,
 	                        reload_timer;

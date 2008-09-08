@@ -48,7 +48,7 @@ void sanguis::server::weapons::weapon::update(
 		if(!cooldown_timer.expired())
 			return;
 
-		if(magazine_used == magazine_size)
+		if(magazine_used == magazine_size())
 		{
 			reload_timer.activate();
 			state_ = state::reload;
@@ -95,6 +95,11 @@ bool sanguis::server::weapons::weapon::reloading() const
 	return reload_timer.active();	
 }
 
+unsigned sanguis::server::weapons::weapon::magazine_size() const
+{
+	return magazine_size_;
+}
+
 sanguis::server::weapons::weapon::~weapon()
 {}
 
@@ -102,7 +107,7 @@ sanguis::server::weapons::weapon::weapon(
 	environment const &env_,
 	weapon_type::type const type_,
 	space_unit const range_,
-	unsigned const magazine_size,
+	unsigned const magazine_size_,
 	time_type const base_cooldown_,
 	time_type const cast_point_,
 	time_type const reload_time_)
@@ -112,7 +117,7 @@ sanguis::server::weapons::weapon::weapon(
 	type_(type_),
 	range_(range_),
 	magazine_used(0),
-	magazine_size(magazine_size),
+	magazine_size_(magazine_size_),
 	cooldown_timer(
 		sge::time::second(base_cooldown_),
 		true,
@@ -127,7 +132,7 @@ sanguis::server::weapons::weapon::weapon(
 		diff.callback()),
 	state_(state::ready)
 {
-	if(magazine_size == 0)
+	if(magazine_size() == 0)
 		SGE_LOG_WARNING(
 			log(),
 			sge::log::_1

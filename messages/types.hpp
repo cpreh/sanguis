@@ -12,6 +12,7 @@ namespace sanguis
 {
 namespace messages
 {
+
 typedef float space_unit;
 typedef sge::math::basic_vector<space_unit,2u> vector2;
 typedef sge::math::basic_vector<space_unit,3u> vector3;

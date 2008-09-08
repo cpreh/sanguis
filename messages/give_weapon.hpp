@@ -15,10 +15,13 @@ public:
 	give_weapon();
 	give_weapon(
 		entity_id id,
-		enum_type weapon);
+		enum_type weapon,
+		size_type magazine_size);
 	enum_type weapon() const;
+	size_type magazine_size() const;
 private:
 	enum_type weapon_;
+	size_type magazine_size_;
 
 	friend class boost::serialization::access;
 	template<typename Archive>
