@@ -33,7 +33,7 @@ sanguis::client::logic::logic(
 			(boost::bind(&logic::handle_switch_weapon_forwards, this, _1))
 			(boost::bind(&logic::handle_switch_weapon_backwards, this, _1))
 			(boost::bind(&logic::handle_pause_unpause, this, _1)).to_container(actions)),
-	player_id(0),
+	player_id_(0),
 	direction(0,0),
 	cursor_pos_(0,0),
 	player_center(0,0),
@@ -54,7 +54,7 @@ void sanguis::client::logic::handle_player_action(
 void sanguis::client::logic::give_weapon(
 	messages::give_weapon const &m)
 {
-	if(m.id() != player_id)
+	if(m.id() != player_id_)
 		return;
 	
 	owned_weapons.at(m.weapon()) = true;
@@ -69,7 +69,7 @@ void sanguis::client::logic::give_weapon(
 void sanguis::client::logic::move(
 	messages::move const &m)
 {
-	if(m.id() == player_id)
+	if(m.id() == player_id_)
 		player_center = sge::math::structure_cast<
 			sge::sprite::unit>(
 				m.pos()); // FIXME
@@ -79,6 +79,12 @@ void sanguis::client::logic::pause(
 	bool const p)
 {
 	paused = p;
+}
+
+void sanguis::client::logic::player_id(
+	entity_id const id)
+{
+	player_id_ = id;
 }
 
 sge::sprite::point const
@@ -106,7 +112,7 @@ void sanguis::client::logic::update_direction()
 	send(
 		messages::auto_ptr(
 			new messages::player_direction(
-				player_id,
+				player_id_,
 				sge::math::structure_cast<messages::space_unit>(
 					direction))));
 }
@@ -149,7 +155,7 @@ void sanguis::client::logic::update_rotation()
 	send(
 		messages::auto_ptr(
 			new messages::player_rotation(
-				player_id,
+				player_id_,
 				messages::mu(
 					*rotation))));
 }
@@ -164,10 +170,10 @@ void sanguis::client::logic::handle_shooting(
 				s)
 			? static_cast<messages::base*>(
 				new messages::player_stop_shooting(
-					player_id))
+					player_id_))
 			: static_cast<messages::base*>(
 				new messages::player_start_shooting(
-					player_id))));
+					player_id_))));
 }
 
 void sanguis::client::logic::handle_switch_weapon_forwards(
@@ -220,10 +226,10 @@ void sanguis::client::logic::handle_pause_unpause(
 			paused
 			? static_cast<messages::base*>(
 				new messages::player_unpause(
-					player_id))
+					player_id_))
 			: static_cast<messages::base*>(
 				new messages::player_pause(
-					player_id))));
+					player_id_))));
 }
 
 void sanguis::client::logic::change_weapon(
@@ -234,6 +240,6 @@ void sanguis::client::logic::change_weapon(
 	send(
 		messages::auto_ptr(
 			new messages::player_change_weapon(
-				player_id,
+				player_id_,
 				current_weapon)));
 }

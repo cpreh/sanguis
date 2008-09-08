@@ -13,10 +13,11 @@ namespace messages
 class speed : public entity_message {
 public:
 	speed();
-	speed(const entity_id id,
-	      const vector2&);
+	speed(
+		entity_id id,
+		vector2 const &);
 	
-	const vector2& get() const;
+	vector2 const &get() const;
 private:
 	vector2 speed_;
 

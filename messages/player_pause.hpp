@@ -13,7 +13,7 @@ namespace messages
 class player_pause : public entity_message {
 public:
 	player_pause();
-	player_pause(
+	explicit player_pause(
 		entity_id);
 private:
 	friend class boost::serialization::access;

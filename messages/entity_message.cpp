@@ -9,7 +9,7 @@ sanguis::messages::entity_message::entity_message()
 {}
 
 sanguis::messages::entity_message::entity_message(
-	const entity_id id_)
+	entity_id const id_)
 : id_(id_)
 {}
 
@@ -20,7 +20,7 @@ sanguis::messages::entity_message::id() const
 }
 
 void sanguis::messages::entity_message::id(
-	const entity_id nid)
+	entity_id const nid)
 {
 	id_ = nid;
 }

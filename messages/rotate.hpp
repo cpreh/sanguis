@@ -13,8 +13,9 @@ namespace messages
 class rotate : public entity_message {
 public:
 	rotate();
-	rotate(const entity_id id,
-	       const space_unit rot);
+	rotate(
+		entity_id id,
+		space_unit rot);
 	
 	space_unit rot() const;
 private:

@@ -1,5 +1,5 @@
-#ifndef SANGUIS_MESSAGES_ENTITY_MESSAGE_HPP_INCLUDED
-#define SANGUIS_MESSAGES_ENTITY_MESSAGE_HPP_INCLUDED
+#ifndef SANGUIS_MESSAGES_ASSIGN_ID_HPP_INCLUDED
+#define SANGUIS_MESSAGES_ASSIGN_ID_HPP_INCLUDED
 
 #include "../entity_id.hpp"
 #include "base.hpp"
@@ -10,16 +10,16 @@ namespace sanguis
 namespace messages
 {
 
-class entity_message : public base {
+class assign_id : public base {
 public:
-	entity_message();
-	explicit entity_message(
-		entity_id id);
-	entity_id id() const;
-	void id(entity_id);
+	assign_id();
+	explicit assign_id(
+		entity_id player_id_);
+	
+	entity_id player_id() const;
 private:
-	entity_id id_;
-
+	entity_id player_id_;
+	
 	friend class boost::serialization::access;
 	template<typename Archive>
 	void serialize(Archive &ar, unsigned);

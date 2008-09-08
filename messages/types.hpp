@@ -19,7 +19,7 @@ typedef sge::math::basic_vector<space_unit,3u> vector3;
 typedef sge::math::basic_vector<boost::int32_t,2u> ivector2_32;
 typedef sge::math::basic_vector<boost::int32_t,3u> ivector3_32;
 typedef sge::math::basic_dim<boost::int32_t,2u> idim2_32;
-typedef std::wstring string;
+typedef std::wstring string; // FIXME
 typedef vector2 pos_type;
 typedef sge::math::basic_dim<space_unit,2u> dim_type;
 typedef sge::math::basic_circle<space_unit> circle_type;
@@ -41,6 +41,6 @@ messages::space_unit mu(const T &t)
 }
 }
 
-#define MESSAGE_TEXT(a) L ## a
+#define MESSAGE_TEXT(a) L ## a // FIXME
 
 #endif

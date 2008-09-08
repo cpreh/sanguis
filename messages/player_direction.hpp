@@ -14,10 +14,10 @@ class player_direction : public entity_message {
 public:
 	player_direction();
 	player_direction(
-		const entity_id,
-		const vector2 &);
+		entity_id,
+		vector2 const &);
 
-	vector2 dir() const;
+	vector2 const &dir() const;
 private:
 	vector2 dir_;
 

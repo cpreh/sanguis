@@ -31,6 +31,8 @@ public:
 		messages::move const &);
 	void pause(
 		bool);
+	void player_id(
+		entity_id);
 
 	sge::sprite::point const
 	cursor_pos() const;
@@ -71,7 +73,7 @@ private:
 		>                       action_handlers;
 	action_handlers                 actions;
 		
-	entity_id                       player_id;
+	entity_id                       player_id_;
 	sge::math::vector2              direction;
 	sge::sprite::point              cursor_pos_,
 	                                player_center;

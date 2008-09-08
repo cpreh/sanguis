@@ -2,10 +2,10 @@
 #include "connecting_state.hpp"
 #include "running_state.hpp"
 #include "../dispatch_type.hpp"
-#include "../messages/game_state.hpp"
-#include "../messages/disconnect.hpp"
-#include "../messages/connect.hpp"
+#include "../messages/assign_id.hpp"
 #include "../messages/client_info.hpp"
+#include "../messages/connect.hpp"
+#include "../messages/disconnect.hpp"
 #include "../messages/types.hpp"
 #include "../log_headers.hpp"
 #include <sge/iconv.hpp>
@@ -25,9 +25,9 @@ sanguis::client::connecting_state::react(
 {
 	return dispatch_type<
 		boost::mpl::vector<
-			messages::disconnect,
+			messages::assign_id,
 			messages::connect,
-			messages::game_state
+			messages::disconnect
 		>,
 		boost::statechart::result>(
 		*this,
@@ -56,12 +56,12 @@ sanguis::client::connecting_state::operator()(
 
 boost::statechart::result
 sanguis::client::connecting_state::operator()(
-	messages::game_state const &m)
+	messages::assign_id const &m)
 {
 	post_event(
 		message_event(
 			messages::auto_ptr(
-				new messages::game_state(
+				new messages::assign_id(
 					m))));
 	return transit<running_state>();
 }

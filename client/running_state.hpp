@@ -43,8 +43,8 @@ struct running_state
 	boost::statechart::result react(tick_event const &);
 	boost::statechart::result react(message_event const &);
 	
+	boost::statechart::result operator()(messages::assign_id const &);
 	boost::statechart::result operator()(const messages::disconnect&);
-	boost::statechart::result operator()(const messages::game_state&);
 	boost::statechart::result operator()(const messages::give_weapon&);
 	boost::statechart::result operator()(messages::move const &);
 	boost::statechart::result operator()(const messages::pause&);

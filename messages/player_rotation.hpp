@@ -14,8 +14,8 @@ class player_rotation : public entity_message {
 public:
 	player_rotation();
 	player_rotation(
-		const entity_id,
-		const space_unit angle);
+		entity_id,
+		space_unit angle);
 
 	space_unit angle() const;
 private:

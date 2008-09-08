@@ -4,8 +4,8 @@
 #include "../client_entity_type.hpp"
 #include "../dispatch_type.hpp"
 #include "../client_messages/add.hpp"
+#include "../messages/assign_id.hpp"
 #include "../messages/disconnect.hpp"
-#include "../messages/game_state.hpp"
 #include "../messages/give_weapon.hpp"
 #include "../messages/move.hpp"
 #include "../messages/pause.hpp"
@@ -24,7 +24,8 @@ sanguis::entity_id const
 
 }
 
-sanguis::client::running_state::running_state(my_context ctx)
+sanguis::client::running_state::running_state(
+	my_context ctx)
 :
 	my_base(ctx), 
 	drawer(
@@ -75,8 +76,8 @@ sanguis::client::running_state::react(
 {
 	return dispatch_type<
 		boost::mpl::vector<
+			messages::assign_id,
 			messages::disconnect,
-			messages::game_state,
 			messages::give_weapon,
 			messages::move,
 			messages::pause,
@@ -97,8 +98,10 @@ sanguis::client::running_state::operator()(
 
 boost::statechart::result
 sanguis::client::running_state::operator()(
-	messages::game_state const &)
+	messages::assign_id const &m)
 {
+	logic_.player_id(
+		m.player_id());
 	return discard_event();
 }
 

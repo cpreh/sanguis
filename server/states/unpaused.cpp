@@ -13,6 +13,7 @@
 #include "../../resolution.hpp"
 #include "../../angle_vector.hpp"
 #include "../../random.hpp"
+#include "../../messages/assign_id.hpp"
 #include "../../messages/client_info.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../messages/experience.hpp"
@@ -24,7 +25,6 @@
 #include "../../messages/player_direction.hpp"
 #include "../../messages/player_pause.hpp"
 #include "../../messages/player_unpause.hpp"
-#include "../../messages/game_state.hpp"
 #include "../../messages/give_weapon.hpp"
 #include "../../messages/speed.hpp"
 #include "../../messages/change_weapon.hpp"
@@ -68,11 +68,11 @@ void sanguis::server::states::unpaused::create_game(
 {
 	assert(!context<running>().entities().size());
 
-	send(
+	/*send(
 		messages::auto_ptr(
 			new messages::game_state(
 				game_state(
-					truncation_check_cast<game_state::score_type>(0)))));
+					truncation_check_cast<game_state::score_type>(0)))));*/
 
 	entities::entity &raw_player = context<running>().insert_entity(
 		entities::auto_ptr(

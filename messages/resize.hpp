@@ -15,9 +15,9 @@ public:
 	resize();
 	resize(
 		entity_id,
-		dim_type const&);
+		dim_type const &);
 	
-	dim_type const& dim() const;
+	dim_type const &dim() const;
 private:
 	dim_type dim_;
 

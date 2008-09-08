@@ -12,7 +12,8 @@ namespace messages
 class player_start_shooting : public entity_message {
 public:
 	player_start_shooting();
-	player_start_shooting(const entity_id);
+	explicit player_start_shooting(
+		entity_id);
 private:
 	friend class boost::serialization::access;
 	template<typename Archive>

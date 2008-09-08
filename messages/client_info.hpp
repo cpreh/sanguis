@@ -13,7 +13,7 @@ namespace messages
 class client_info : public base {
 public:
 	client_info();
-	client_info(
+	explicit client_info(
 		string const &);
 
 	string const &name() const;

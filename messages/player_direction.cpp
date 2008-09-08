@@ -10,13 +10,14 @@ sanguis::messages::player_direction::player_direction()
 {}
 
 sanguis::messages::player_direction::player_direction(
-	const entity_id id,
-	const vector2 &dir_)
+	entity_id const id,
+	vector2 const &dir_)
 : entity_message(id),
   dir_(dir_)
 {}
 	
-sanguis::messages::vector2 sanguis::messages::player_direction::dir() const
+sanguis::messages::vector2 const &
+sanguis::messages::player_direction::dir() const
 {
 	return dir_;
 }
