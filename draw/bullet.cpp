@@ -14,7 +14,7 @@ sanguis::draw::bullet::bullet(
 	false),
   origin()
 {
-	at(1).size().w() = static_cast<sge::sprite::unit>(1);
+	at(1).size().w() = static_cast<sge::sprite::unit>(3); // TODO: which value is best here?
 }
 
 void sanguis::draw::bullet::update(const time_type time)
@@ -47,8 +47,7 @@ void sanguis::draw::bullet::update(const time_type time)
 		sge::math::structure_cast<sge::sprite::unit>(
 			newpos));
 
-	at(1).size() =
-		sge::sprite::dim(
-			static_cast<sge::sprite::unit>(newsize.x()),
-			static_cast<sge::sprite::unit>(newsize.y()));
+	at(1).w() =
+		static_cast<sge::sprite::unit>(
+			tail_length);
 }
