@@ -3,6 +3,7 @@
 
 #include "model.hpp"
 #include <sge/sprite/types.hpp>
+#include <sge/string.hpp>
 #include <boost/optional.hpp>
 
 namespace sanguis
@@ -14,7 +15,8 @@ class bullet : public model {
 public:
 	bullet(
 		entity_id id,
-		system &);
+		system &,
+		sge::string const &name);
 private:
 	void update(time_type);
 	boost::optional<sge::sprite::point> origin;

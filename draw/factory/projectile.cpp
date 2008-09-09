@@ -14,12 +14,14 @@ sanguis::draw::factory::projectile(
 		return entity_ptr(
 			new bullet(
 				id,
-				sys));
+				sys,
+				SGE_TEXT("bullet")));
 	case projectile_type::rocket:
-		return entity_ptr( // FIXME
+		return entity_ptr(
 			new bullet(
 				id,
-				sys));
+				sys,
+				SGE_TEXT("rocket")));
 	default:
 		throw sge::exception(
 			SGE_TEXT("draw::factory::projectile: missing loading code!"));
