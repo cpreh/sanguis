@@ -14,6 +14,7 @@ enum type {
 	player_lower,
 	bullet,
 	pickup,
+	decoration,
 	reaper,
 	player_upper,
 	healthbar_lower,

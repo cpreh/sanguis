@@ -26,7 +26,12 @@ sanguis::server::states::running::running(my_context ctx)
   send(boost::bind(&server::machine::send,&(context<machine>()),_1)),
   console_print(boost::bind(&server::machine::console_print,&(context<machine>()),_1)),
   wave_generator()
-{}
+{
+	for (int i = 0; i < 10; ++i)
+	{
+		// TODO: generate decos here
+	}
+}
 
 sanguis::server::entities::container &
 sanguis::server::states::running::entities()

@@ -11,7 +11,8 @@ enum type {
 	pickup,
 	player,
 	projectile,
-	sentry
+	sentry,
+	decoration
 };
 }
 

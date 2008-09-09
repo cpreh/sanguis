@@ -5,6 +5,7 @@
 #include "../messages/fwd.hpp"
 #include "entities/entity_fwd.hpp"
 #include "entities/enemies/fwd.hpp"
+#include "entities/decoration_fwd.hpp"
 #include "entities/pickups/fwd.hpp"
 #include "entities/projectiles/fwd.hpp"
 
@@ -20,6 +21,10 @@ message_convert(
 messages::auto_ptr
 message_convert(
 	entities::pickups::pickup const &e);
+
+messages::auto_ptr
+message_convert(
+	entities::decoration const &e);
 
 messages::auto_ptr
 message_convert(

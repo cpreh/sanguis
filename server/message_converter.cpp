@@ -3,6 +3,7 @@
 #include "../messages/add.hpp"
 #include "../messages/add_enemy.hpp"
 #include "../messages/add_pickup.hpp"
+#include "../messages/add_decoration.hpp"
 #include "../messages/add_projectile.hpp"
 #include "../messages/add_weapon_pickup.hpp"
 #include "../messages/speed.hpp"
@@ -15,6 +16,7 @@
 #include "../messages/start_reloading.hpp"
 #include "../messages/stop_reloading.hpp"
 #include "entities/entity.hpp"
+#include "entities/decoration.hpp"
 #include "entities/enemies/enemy.hpp"
 #include "entities/pickups/pickup.hpp"
 #include "entities/pickups/weapon.hpp"
@@ -49,6 +51,21 @@ sanguis::server::message_convert(
 			e.health(),
 			e.max_health(),
 			e.dim())); // FIXME: should we care about speed though?
+}
+
+sanguis::messages::auto_ptr
+sanguis::server::message_convert(
+	entities::decoration const &e)
+{
+	return messages::auto_ptr(
+		new messages::add_decoration(
+			e.id(),
+			e.type(),
+			e.pos(),
+			e.angle(),
+			e.health(),
+			e.max_health(),
+			e.dim()));
 }
 
 sanguis::messages::auto_ptr
