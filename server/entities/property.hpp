@@ -23,6 +23,7 @@ public:
 
 	typedef space_unit value_type;
 
+	property();
 	property(
 		value_type current,
 		value_type base);

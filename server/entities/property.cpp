@@ -1,21 +1,30 @@
 #include "property.hpp"
 #include <algorithm>
 
+sanguis::server::entities::property::property()
+:
+	base_(static_cast<value_type>(0)),
+	max_(base_),
+	current_(base_)
+{}
+
 sanguis::server::entities::property::property(
-	const value_type ncurrent,
-	const value_type base_)
-	: base_(base_),
-	  max_(base_),
-	  current_(static_cast<value_type>(0))
+	value_type const ncurrent,
+	value_type const base_)
+:
+	base_(base_),
+	max_(base_),
+	current_(static_cast<value_type>(0))
 {
 	current(ncurrent);
 }
 
 sanguis::server::entities::property::property(
-	const value_type base_)
-	: base_(base_),
-	  max_(base_),
-	  current_(base_)
+	value_type const base_)
+:
+	base_(base_),
+	max_(base_),
+	current_(base_)
 {}
 
 sanguis::server::entities::property::value_type

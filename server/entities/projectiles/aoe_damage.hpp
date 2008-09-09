@@ -26,6 +26,10 @@ public:
 		time_type pulse_diff,
 		damage_array const &damage_values);
 private:
+	void update(
+		time_type,
+		container &);
+	
 	void do_hit(
 		hit_vector const &);	
 	

@@ -52,6 +52,6 @@ void sanguis::server::entities::projectiles::rocket::do_die()
 				aoe,
 				damage,
 				1,
-				static_cast<time_type>(0),
+				static_cast<time_type>(0.1),
 				damage_values)));
 }

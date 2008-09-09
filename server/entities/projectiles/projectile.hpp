@@ -38,11 +38,11 @@ protected:
 			entity
 		>
 	> hit_vector;
-private:
+
 	virtual void update(
 		time_type,
 		container &entities);
-
+private:
 	virtual void do_hit(
 		hit_vector const &) = 0;
 	virtual void do_die();

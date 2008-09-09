@@ -60,9 +60,9 @@ sanguis::server::weapons::create(
 			new rocket_launcher(
 				env,
 				type,
-				static_cast<time_type>(3), // cooldown
+				static_cast<time_type>(1), // cooldown
 				messages::mu(10), // damage
-				messages::mu(50), // aoe
+				messages::mu(100), // aoe
 				1, // magazine size
 				static_cast<time_type>(2) // reload time
 				));

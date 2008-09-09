@@ -1,6 +1,7 @@
 #include "aoe_damage.hpp"
 #include <sge/time/second.hpp>
 #include <boost/foreach.hpp>
+#include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 	environment const &env,
@@ -18,7 +19,8 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 		center,
 		messages::mu(0),
 		team_,
-		property_map(),
+		boost::assign::map_list_of
+			(property::type::health, property(messages::mu(1))),
 		dim_type(
 			radius * messages::mu(2),
 			radius * messages::mu(2)),
@@ -36,6 +38,18 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 	damage_values(damage_values)
 {}
 
+void sanguis::server::entities::projectiles::aoe_damage::update(
+	time_type const time,
+	container &entities)
+{
+	diff_clock_.update(
+		time);
+
+	projectile::update(
+		time,
+		entities);
+}
+
 void sanguis::server::entities::projectiles::aoe_damage::do_hit(
 	hit_vector const &hits)
 {
@@ -49,6 +63,6 @@ void sanguis::server::entities::projectiles::aoe_damage::do_hit(
 		e.get().damage(
 			damage_per_pulse,
 			damage_values);
-	
+
 	++pulses;
 }

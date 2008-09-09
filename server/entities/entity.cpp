@@ -189,13 +189,17 @@ sanguis::server::entities::property &
 sanguis::server::entities::entity::get_property(
 	property::type::enum_type const e)
 {
-	property_map::iterator const it = properties.find(e);
+	return properties[e];
+	// TODO: should this signal an error because it might be
+	// rather error prone to default initialise properties
+	// for example if health == 0 the entity is dead immedeately
+	/*property_map::iterator const it = properties.find(e);
 
 	if (it == properties.end())
 		throw sge::exception(
 			SGE_TEXT("couldn't find specified entity property"));
 	
-	return it->second;
+	return it->second;*/
 }
 
 sanguis::server::exp_type
