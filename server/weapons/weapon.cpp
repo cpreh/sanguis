@@ -6,6 +6,7 @@
 #include <sge/exception.hpp>
 #include <sge/text.hpp>
 #include <ostream>
+#include <cassert>
 
 sanguis::server::space_unit
 sanguis::server::weapons::weapon::range() const
@@ -23,6 +24,8 @@ void sanguis::server::weapons::weapon::update(
 	time_type const tm,
 	entities::entity_with_weapon const &owner)
 {
+	assert(magazine_used <= magazine_size());
+
 	diff.update(tm);
 
 	switch(state_) {
@@ -43,22 +46,25 @@ void sanguis::server::weapons::weapon::update(
 		attack_dest.reset();
 
 		state_ = state::backswing;
-	//	return; // fall through
+		// fall through
 	case state::backswing:
 		if(!cooldown_timer.expired())
 			return;
 
-		if(magazine_used == magazine_size())
-		{
-			reload_timer.activate();
-			state_ = state::reload;
-		}
-		else
-		{
+		if(magazine_size() != unlimited_magazine)
 			++magazine_used;
+
+		if(magazine_used < magazine_size())
+		{
 			state_ = state::ready;
+			return;
 		}
-		return;
+
+		assert(magazine_size() != unlimited_magazine);
+
+		reload_timer.activate();
+		state_ = state::reload;
+		// fall through
 	case state::reload:
 		if(reload_timer.update_b())
 		{
@@ -132,11 +138,15 @@ sanguis::server::weapons::weapon::weapon(
 		diff.callback()),
 	state_(state::ready)
 {
-	if(magazine_size() == 0)
+	if(cast_point_timer.interval() > cooldown_timer.interval())
 		SGE_LOG_WARNING(
 			log(),
 			sge::log::_1
-				<< SGE_TEXT("magazine sizes of 0 are meaningless and will be threated as 1."));
+				<< SGE_TEXT("A weapon's cast point interval is bigger than its cooldown!"));
+
+	if(magazine_size() == 0)
+		throw sge::exception(
+			SGE_TEXT("magazine size of 0 is invalid!"));
 }
 
 unsigned const
