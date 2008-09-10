@@ -6,6 +6,7 @@
 #include "tick_event.hpp"
 #include "media_path.hpp"
 #include "resolution.hpp"
+#include "log.hpp"
 
 // sge
 #include <sge/iostream.hpp>
@@ -14,6 +15,9 @@
 #include <sge/console/console.hpp>
 #include <sge/systems.hpp>
 #include <sge/init.hpp>
+#include <sge/log/level.hpp>
+#include <sge/log/logger.hpp>
+#include <sge/log/level_string.hpp>
 #include <sge/media.hpp>
 #include <sge/font/drawer_3d.hpp>
 #include <sge/font/font.hpp>
@@ -45,13 +49,24 @@ try
 
 	net::address_type dest_server;
 	net::port_type host_port,dest_port;
+	sge::string log_level;
 
 	desc.add_options()
-	    ("help","produce help message")
-			("dest-server",po::value<net::address_type>(&dest_server)->default_value("localhost"),"sets the server (ip/hostname) to connect to when hitting space")
-			("dest-port",po::value<net::port_type>(&dest_port)->default_value(1337),"sets the server port to connect to")
-			("host-port",po::value<net::port_type>(&host_port)->default_value(1337),"sets the port to listen to for games");
-
+	    ("help",
+				"produce help message")
+			("dest-server",
+				po::value<net::address_type>(&dest_server)->default_value("localhost"),
+				"sets the server (ip/hostname) to connect to when hitting space")
+			("dest-port",
+				po::value<net::port_type>(&dest_port)->default_value(1337),
+				"sets the server port to connect to")
+			("host-port",
+				po::value<net::port_type>(&host_port)->default_value(1337),
+				"sets the port to listen to for games")
+			("log",
+				po::value<sge::string>(&log_level)->default_value(sge::string(SGE_TEXT("warning"))),
+				"sets the maximum logging level (one of debug, info, warning, error, fatal in that order)");
+	
 	po::variables_map vm;
 	po::store(po::parse_command_line(argc,argv,desc),vm);
 	if (boost::filesystem::exists("config"))
@@ -72,6 +87,9 @@ try
 		std::cout << desc << "\n";
 		return EXIT_SUCCESS;
 	}
+
+	sge::cerr << "activating level " << sge::log::level_from_string(log_level) << "\n";
+	sanguis::log().activate_hierarchy(sge::log::level_from_string(log_level));
 
 	sge::systems sys;
 
