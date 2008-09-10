@@ -10,7 +10,7 @@
 #include "../../messages/types.hpp"
 #include "../../messages/fwd.hpp"
 #include "../../time_type.hpp"
-
+#include <sge/log/fwd.hpp>
 #include <boost/mpl/list.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/result.hpp>
@@ -80,8 +80,8 @@ private:
 	boost::statechart::result handle_default_msg(
 		net::id_type,
 		messages::base const &);
-
 	void create_decorations();
+	static sge::log::logger &log();
 
 	send_callback send;
 	console_print_callback console_print;

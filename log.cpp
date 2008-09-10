@@ -30,8 +30,8 @@ void configure(
 {
 	SGE_FUNCTION_ONCE
 
-	l.activate_hierarchie(
-		sge::log::level::warning);
+	l.activate_hierarchy(
+		sge::log::level::debug);
 }
 
 }

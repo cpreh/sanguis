@@ -3,7 +3,6 @@
 
 // TODO: what to do about this convenience heeader?
 
-#include "log.hpp"
 #include <sge/log/logger.hpp>
 #include <sge/log/output_helper.hpp>
 #include <sge/log/temporary_output.hpp>

@@ -1,6 +1,7 @@
 #include "intermediate_state.hpp"
 #include "connecting_state.hpp"
 #include "running_state.hpp"
+#include "log.hpp"
 #include "../dispatch_type.hpp"
 #include "../messages/assign_id.hpp"
 #include "../messages/client_info.hpp"
@@ -9,6 +10,7 @@
 #include "../messages/types.hpp"
 #include "../log_headers.hpp"
 #include <sge/iconv.hpp>
+#include <sge/text.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
 #include <typeinfo>
@@ -58,6 +60,10 @@ boost::statechart::result
 sanguis::client::connecting_state::operator()(
 	messages::assign_id const &m)
 {
+	SGE_LOG_DEBUG(
+		log(),
+		sge::log::_1
+			<< SGE_TEXT("received id"));
 	post_event(
 		message_event(
 			messages::auto_ptr(
@@ -98,4 +104,13 @@ sanguis::client::connecting_state::react(
 		sge::font::align_v::center);
 
 	return discard_event();
+}
+
+sge::log::logger &
+sanguis::client::connecting_state::log()
+{
+	static sge::log::logger log_(
+		client::log(),
+		SGE_TEXT("connecting_state: "));
+	return log_;
 }

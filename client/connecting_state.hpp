@@ -5,6 +5,7 @@
 #include "machine.hpp"
 #include "../tick_event.hpp"
 #include "../messages/fwd.hpp"
+#include <sge/log/fwd.hpp>
 #include <boost/statechart/simple_state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/mpl/list.hpp>
@@ -30,7 +31,9 @@ struct connecting_state
 	boost::statechart::result operator()(messages::disconnect const &);
 	boost::statechart::result operator()(messages::assign_id const &);
 	boost::statechart::result operator()(messages::connect const &);
+private:
 	boost::statechart::result handle_default_msg(messages::base const &);
+	static sge::log::logger &log();
 };
 }
 }

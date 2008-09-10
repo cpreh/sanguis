@@ -2,12 +2,14 @@
 #define SANGUIS_DRAW_ENTITY_HPP_INCLUDED
 
 #include "types.hpp"
+#include "log.hpp"
 #include "../entity_id.hpp"
 #include "../weapon_type.hpp"
 #include "../time_type.hpp"
 #include "../diff_clock.hpp"
 #include <sge/math/vector.hpp>
 #include <sge/time/timer.hpp>
+#include <sge/log/fwd.hpp>
 #include <boost/noncopyable.hpp>
 #include <vector>
 
@@ -49,6 +51,8 @@ protected:
 
 	system &get_system();
 private:
+	static sge::log::logger &log();
+
 	entity_id        id_;
 	system          &sys;
 	diff_clock       diff_clock_;

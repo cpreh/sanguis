@@ -4,7 +4,7 @@
 #include "machine.hpp"
 #include "../tick_event.hpp"
 #include "message_event.hpp"
-
+#include <sge/log/fwd.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/mpl/list.hpp>
@@ -22,8 +22,10 @@ struct intermediate_state
 		> reactions;
 
 	intermediate_state(my_context); 
-	boost::statechart::result react(const tick_event&);
-	boost::statechart::result react(const message_event&);
+	boost::statechart::result react(tick_event const &);
+	boost::statechart::result react(message_event const &);
+private:
+	sge::log::logger &log();
 };
 }
 }

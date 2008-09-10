@@ -8,6 +8,7 @@
 #include "../animation_type.hpp"
 #include <sge/sprite/types.hpp>
 #include <sge/math/vector.hpp>
+#include <sge/log/fwd.hpp>
 #include <sge/su.hpp>
 #include <sge/string.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
@@ -48,6 +49,8 @@ private:
 	animation_type::type animation() const;
 	bool dead() const;
 	void update_healthbar();
+
+	static sge::log::logger &log();
 
 	bool            attacking,
 	                reloading;

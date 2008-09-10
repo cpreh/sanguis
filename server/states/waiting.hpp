@@ -4,9 +4,8 @@
 #include "../machine.hpp"
 #include "../message_event.hpp"
 #include "../../tick_event.hpp"
-
 #include "../../messages/fwd.hpp"
-
+#include <sge/log/fwd.hpp>
 #include <boost/mpl/list.hpp>
 #include <boost/statechart/simple_state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
@@ -33,9 +32,10 @@ struct waiting
 	boost::statechart::result operator()(const net::id_type,const messages::connect &);
 	boost::statechart::result operator()(const net::id_type,const messages::disconnect &);
 	boost::statechart::result operator()(const net::id_type,const messages::client_info &);
+private:
 	boost::statechart::result handle_default_msg(const net::id_type,const messages::base &);
 
-	void process_message_event(const message_event &);
+	static sge::log::logger &log();
 };
 
 }

@@ -8,6 +8,7 @@
 #include "../entities/player.hpp"
 #include "../entities/decoration.hpp"
 #include "../weapons/factory.hpp"
+#include "../log.hpp"
 #include "../../messages/assign_id.hpp"
 #include "../../messages/client_info.hpp"
 #include "../../messages/connect.hpp"
@@ -19,6 +20,7 @@
 #include "../../random.hpp"
 #include <sge/iconv.hpp>
 #include <sge/math/constants.hpp>
+#include <sge/text.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/assign/list_of.hpp>
 #include <boost/foreach.hpp>
@@ -32,6 +34,10 @@ sanguis::server::states::running::running(my_context ctx)
   console_print(boost::bind(&server::machine::console_print,&(context<machine>()),_1)),
   wave_generator()
 {
+	SGE_LOG_DEBUG(
+		log(),
+		sge::log::_1
+			<< SGE_TEXT("constructor"));
 	create_decorations();
 }
 
@@ -223,6 +229,10 @@ sanguis::server::states::running::operator()(
 	net::id_type const net_id,
 	messages::client_info const &m)
 {
+	SGE_LOG_DEBUG(
+		log(),
+		sge::log::_1
+			<< SGE_TEXT("sending player's id"));
 	// TODO: this should be cleaned up somehow
 	// 1) create the player
 	// 2) tell the client the player's id _before_ doing anything else
@@ -311,10 +321,19 @@ sanguis::server::states::running::handle_default_msg(
 	SGE_LOG_WARNING(
 		log(),
 		sge::log::_1
-			<< SGE_TEXT("server: running: received unexpected message from id ")
+			<< SGE_TEXT("received unexpected message from id ")
 			<< id
 			<< SGE_TEXT(" of type ")
 			<< sge::iconv(typeid(m).name()));
 
 	return discard_event();
+}
+
+sge::log::logger &
+sanguis::server::states::running::log()
+{
+	static sge::log::logger log_(
+		server::log(),
+		SGE_TEXT("running: "));
+	return log_;
 }

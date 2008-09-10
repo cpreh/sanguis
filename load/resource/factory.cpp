@@ -1,5 +1,6 @@
 #include "../../media_path.hpp"
 #include "../../log_headers.hpp"
+#include "../log.hpp"
 #include "factory.hpp"
 #include <sge/fstream.hpp>
 #include <sge/sstream.hpp>
@@ -186,7 +187,7 @@ void environment::load_textures()
 			if(equal == sge::string::npos)
 			{
 				SGE_LOG_WARNING(
-					sanguis::log(),
+					sanguis::load::log(),
 					sge::log::_1
 						<< SGE_TEXT("Error in .id file \")")
 						<< p.string()

@@ -2,6 +2,7 @@
 #include "running.hpp"
 #include "unpaused.hpp"
 #include "../message_functor.hpp"
+#include "../log.hpp"
 #include "../entities/entity.hpp"
 #include "../../messages/connect.hpp"
 #include "../../messages/client_info.hpp"
@@ -10,6 +11,7 @@
 #include "../../log_headers.hpp"
 
 #include <sge/iconv.hpp>
+#include <sge/log/logger.hpp>
 
 #include <boost/bind.hpp>
 #include <boost/mpl/vector.hpp>
@@ -17,7 +19,12 @@
 #include <ostream>
 
 sanguis::server::states::waiting::waiting()
-{}
+{
+	SGE_LOG_DEBUG(
+		log(),
+		sge::log::_1
+			<< SGE_TEXT("constructor"));
+}
 
 boost::statechart::result
 sanguis::server::states::waiting::react(
@@ -34,7 +41,7 @@ sanguis::server::states::waiting::operator()(
 	SGE_LOG_INFO(
 		log(),
 		sge::log::_1
-			<< SGE_TEXT("server: received client with id ")
+			<< SGE_TEXT("received client with id ")
 			<< id);
 	return discard_event();
 }
@@ -47,7 +54,7 @@ sanguis::server::states::waiting::operator()(
 	SGE_LOG_INFO(
 		log(),
 		sge::log::_1
-			<< SGE_TEXT("server: client ")
+			<< SGE_TEXT("client ")
 			<< id
 			<< SGE_TEXT(" disconnected"));
 	return discard_event();
@@ -74,7 +81,7 @@ sanguis::server::states::waiting::handle_default_msg(
 	SGE_LOG_WARNING(
 		log(),
 		sge::log::_1
-			<< SGE_TEXT("server: got unexpected message ")
+			<< SGE_TEXT("got unexpected message ")
 			<< sge::iconv(typeid(m).name()));
 	return discard_event();
 }
@@ -94,4 +101,13 @@ sanguis::server::states::waiting::react(
 		mf,
 		*m.message,
 		boost::bind(&waiting::handle_default_msg,this,m.id,_1));
+}
+
+sge::log::logger &
+sanguis::server::states::waiting::log()
+{
+	static sge::log::logger log_(
+		server::log(),
+		SGE_TEXT("waiting: "));
+	return log_;
 }

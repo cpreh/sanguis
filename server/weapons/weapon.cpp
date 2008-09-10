@@ -1,10 +1,12 @@
 #include "weapon.hpp"
 #include "delayed_attack.hpp"
+#include "log.hpp"
 #include "../entities/entity_with_weapon.hpp"
 #include "../../log_headers.hpp"
 #include <sge/time/second.hpp>
 #include <sge/exception.hpp>
 #include <sge/text.hpp>
+#include <sge/log/logger.hpp>
 #include <ostream>
 #include <cassert>
 
@@ -177,4 +179,13 @@ bool sanguis::server::weapons::weapon::in_range(
 	pos_type const& to) const
 {
 	return (from.center() - to).length() < range();
+}
+
+sge::log::logger &
+sanguis::server::weapons::weapon::log()
+{
+	static sge::log::logger log_(
+		weapons::log(),
+		SGE_TEXT("weapon: "));
+	return log_;
 }

@@ -2,9 +2,10 @@
 #include "paused.hpp"
 #include "waiting.hpp"
 #include "../entities/player.hpp"
+#include "../entities/entity.hpp"
 #include "../message_functor.hpp"
 #include "../message_converter.hpp"
-#include "../entities/entity.hpp"
+#include "../log.hpp"
 #include "../../truncation_check_cast.hpp"
 #include "../../dispatch_type.hpp"
 #include "../../log_headers.hpp"
@@ -28,6 +29,7 @@
 
 #include <sge/math/constants.hpp>
 #include <sge/math/angle.hpp>
+#include <sge/log/logger.hpp>
 
 #include <boost/lexical_cast.hpp>
 #include <boost/mpl/vector.hpp>
@@ -39,7 +41,12 @@ sanguis::server::states::unpaused::unpaused()
 	send_timer(
 		SGE_TEXT("send_timer"),
 		sge::su(0.1))
-{}
+{
+	SGE_LOG_DEBUG(
+		log(),
+		sge::log::_1
+			<< SGE_TEXT("constructor"));
+}
 
 boost::statechart::result
 sanguis::server::states::unpaused::handle_default_msg(
@@ -62,7 +69,7 @@ sanguis::server::states::unpaused::operator()(
 		SGE_LOG_WARNING(
 			log(),
 			sge::log::_1
-				<< SGE_TEXT("server: got player_change_weapon from spectator ")
+				<< SGE_TEXT("got player_change_weapon from spectator ")
 				<< id);
 		return discard_event();
 	}
@@ -96,7 +103,7 @@ sanguis::server::states::unpaused::operator()(
 		SGE_LOG_WARNING(
 			log(),
 			sge::log::_1
-				<< SGE_TEXT("server: got rotation_event from spectator ")
+				<< SGE_TEXT("got rotation_event from spectator ")
 				<< id);
 		return discard_event();
 	}
@@ -123,7 +130,7 @@ sanguis::server::states::unpaused::operator()(
 		SGE_LOG_WARNING(
 			log(),
 			sge::log::_1
-				<< SGE_TEXT("server: got shooting event from spectator ")
+				<< SGE_TEXT("got shooting event from spectator ")
 				<< id);
 		return discard_event();
 	}
@@ -142,7 +149,7 @@ sanguis::server::states::unpaused::operator()(
 		SGE_LOG_WARNING(
 			log(),
 			sge::log::_1
-				<< SGE_TEXT("server: got player_stop_shooting from spectator ")
+				<< SGE_TEXT("got player_stop_shooting from spectator ")
 				<< id);
 		return discard_event();
 	}
@@ -162,7 +169,7 @@ sanguis::server::states::unpaused::operator()(
 		SGE_LOG_WARNING(
 			log(),
 			sge::log::_1
-				<< SGE_TEXT("server: got direction_event from spectator ")
+				<< SGE_TEXT("got direction_event from spectator ")
 				<< id);
 		return discard_event();
 	}
@@ -189,7 +196,7 @@ sanguis::server::states::unpaused::operator()(
 	SGE_LOG_WARNING(
 		log(),
 		sge::log::_1 
-			<< SGE_TEXT("server: received superfluous unpause!"));
+			<< SGE_TEXT("received superfluous unpause!"));
 	return discard_event();
 }
 
@@ -216,7 +223,7 @@ sanguis::server::states::unpaused::operator()(
 		SGE_LOG_WARNING(
 			log(),
 			sge::log::_1
-				<< SGE_TEXT("server: spectator ")
+				<< SGE_TEXT("spectator ")
 				<< id
 				<< SGE_TEXT(" disconnected"));
 		return discard_event();
@@ -225,8 +232,9 @@ sanguis::server::states::unpaused::operator()(
 	SGE_LOG_WARNING(
 		log(),
 		sge::log::_1
-			<< SGE_TEXT("server: disconnected"));
+			<< SGE_TEXT("disconnected"));
 	
+	// FIXME
 	return transit<waiting>();
 }
 
@@ -315,4 +323,13 @@ void sanguis::server::states::unpaused::send(
 	messages::auto_ptr m)
 {
 	get_environment().send(m);
+}
+
+sge::log::logger &
+sanguis::server::states::unpaused::log()
+{
+	static sge::log::logger log_(
+		server::log(),
+		SGE_TEXT("unpaused: "));
+	return log_;
 }

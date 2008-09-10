@@ -8,6 +8,7 @@
 #include "factory/weapon_pickup.hpp"
 #include "coord_transform.hpp"
 #include "decay_time.hpp"
+#include "log.hpp"
 #include "../messages/add.hpp"
 #include "../messages/add_enemy.hpp"
 #include "../messages/add_pickup.hpp"
@@ -36,6 +37,7 @@
 #include <sge/iconv.hpp>
 #include <sge/text.hpp>
 #include <sge/format.hpp>
+#include <sge/log/logger.hpp>
 
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
@@ -45,11 +47,12 @@
 #include <ostream>
 
 sanguis::draw::scene::scene(
-sge::renderer::device_ptr const rend,
-sge::font::font &font)
-: ss(rend),
-hud_(font),
-paused(false)
+	sge::renderer::device_ptr const rend,
+	sge::font::font &font)
+:
+	ss(rend),
+	hud_(font),
+	paused(false)
 {}
 
 void sanguis::draw::scene::process_message(
@@ -379,4 +382,13 @@ sanguis::draw::system &
 sanguis::draw::scene::get_system()
 {
 	return ss;
+}
+
+sge::log::logger &
+sanguis::draw::scene::log()
+{
+	static sge::log::logger log_(
+		draw::log(),
+		SGE_TEXT("scene: "));
+	return log_;
 }
