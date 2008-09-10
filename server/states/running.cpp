@@ -86,7 +86,7 @@ void sanguis::server::states::running::create_decorations()
 		create_seeded_randgen(),
 		uniform_int(
 			static_cast<unsigned>(0),
-			static_cast<unsigned>(decoration_type::size)
+			static_cast<unsigned>(decoration_type::size-1)
 		));
 
 	for (unsigned i = 0; i < 10; ++i)
@@ -94,6 +94,13 @@ void sanguis::server::states::running::create_decorations()
 		pos_type const position(rng_x(),rng_y());
 		space_unit const angle = rng_angle();
 		decoration_type::type type = static_cast<decoration_type::type>(rng_deco_type());
+
+		SGE_LOG_DEBUG(
+			log(),
+			sge::log::_1
+				<< SGE_TEXT("created decoration type ") << type 
+				<< SGE_TEXT(", position: ") << position << SGE_TEXT(", angle: ")
+				<< angle);
 		
 		entities_.push_back(entities::auto_ptr(
 			new entities::decoration(
