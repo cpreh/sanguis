@@ -41,7 +41,12 @@ sanguis::server::states::unpaused::unpaused()
 	send_timer(
 		SGE_TEXT("send_timer"),
 		sge::su(0.1))
-{}
+{
+	SGE_LOG_DEBUG(
+		log(),
+		sge::log::_1
+			<< SGE_TEXT("constructor"));
+}
 
 boost::statechart::result
 sanguis::server::states::unpaused::handle_default_msg(
@@ -64,7 +69,7 @@ sanguis::server::states::unpaused::operator()(
 		SGE_LOG_WARNING(
 			log(),
 			sge::log::_1
-				<< SGE_TEXT("server: got player_change_weapon from spectator ")
+				<< SGE_TEXT("got player_change_weapon from spectator ")
 				<< id);
 		return discard_event();
 	}
@@ -98,7 +103,7 @@ sanguis::server::states::unpaused::operator()(
 		SGE_LOG_WARNING(
 			log(),
 			sge::log::_1
-				<< SGE_TEXT("server: got rotation_event from spectator ")
+				<< SGE_TEXT("got rotation_event from spectator ")
 				<< id);
 		return discard_event();
 	}
@@ -125,7 +130,7 @@ sanguis::server::states::unpaused::operator()(
 		SGE_LOG_WARNING(
 			log(),
 			sge::log::_1
-				<< SGE_TEXT("server: got shooting event from spectator ")
+				<< SGE_TEXT("got shooting event from spectator ")
 				<< id);
 		return discard_event();
 	}
@@ -144,7 +149,7 @@ sanguis::server::states::unpaused::operator()(
 		SGE_LOG_WARNING(
 			log(),
 			sge::log::_1
-				<< SGE_TEXT("server: got player_stop_shooting from spectator ")
+				<< SGE_TEXT("got player_stop_shooting from spectator ")
 				<< id);
 		return discard_event();
 	}
@@ -164,7 +169,7 @@ sanguis::server::states::unpaused::operator()(
 		SGE_LOG_WARNING(
 			log(),
 			sge::log::_1
-				<< SGE_TEXT("server: got direction_event from spectator ")
+				<< SGE_TEXT("got direction_event from spectator ")
 				<< id);
 		return discard_event();
 	}
@@ -191,7 +196,7 @@ sanguis::server::states::unpaused::operator()(
 	SGE_LOG_WARNING(
 		log(),
 		sge::log::_1 
-			<< SGE_TEXT("server: received superfluous unpause!"));
+			<< SGE_TEXT("received superfluous unpause!"));
 	return discard_event();
 }
 
@@ -218,7 +223,7 @@ sanguis::server::states::unpaused::operator()(
 		SGE_LOG_WARNING(
 			log(),
 			sge::log::_1
-				<< SGE_TEXT("server: spectator ")
+				<< SGE_TEXT("spectator ")
 				<< id
 				<< SGE_TEXT(" disconnected"));
 		return discard_event();
@@ -227,8 +232,9 @@ sanguis::server::states::unpaused::operator()(
 	SGE_LOG_WARNING(
 		log(),
 		sge::log::_1
-			<< SGE_TEXT("server: disconnected"));
+			<< SGE_TEXT("disconnected"));
 	
+	// FIXME
 	return transit<waiting>();
 }
 

@@ -86,7 +86,7 @@ sanguis::server::states::paused::operator()(
 	SGE_LOG_WARNING(
 		log(),
 		sge::log::_1
-			<< SGE_TEXT("server: got superfluous pause"));;
+			<< SGE_TEXT("got superfluous pause"));;
 	return discard_event();
 }
 
@@ -98,7 +98,7 @@ sanguis::server::states::paused::handle_default_msg(
 	SGE_LOG_WARNING(
 		log(),
 		sge::log::_1
-			<< SGE_TEXT("server: got invalid event ")
+			<< SGE_TEXT("got invalid event ")
 			<< sge::iconv(typeid(m).name()));
 	return discard_event();
 }

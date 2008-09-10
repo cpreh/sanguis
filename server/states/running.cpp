@@ -16,6 +16,7 @@
 #include "../../dispatch_type.hpp"
 #include "../../log_headers.hpp"
 #include <sge/iconv.hpp>
+#include <sge/text.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/assign/list_of.hpp>
 #include <boost/foreach.hpp>
@@ -28,6 +29,11 @@ sanguis::server::states::running::running(my_context ctx)
   console_print(boost::bind(&server::machine::console_print,&(context<machine>()),_1)),
   wave_generator()
 {
+	SGE_LOG_DEBUG(
+		log(),
+		sge::log::_1
+			<< SGE_TEXT("constructor"));
+	
 	for (int i = 0; i < 10; ++i)
 	{
 		// TODO: generate decos here
@@ -148,6 +154,10 @@ sanguis::server::states::running::operator()(
 	net::id_type const net_id,
 	messages::client_info const &m)
 {
+	SGE_LOG_DEBUG(
+		log(),
+		sge::log::_1
+			<< SGE_TEXT("sending player's id"));
 	// TODO: this should be cleaned up somehow
 	// 1) create the player
 	// 2) tell the client the player's id _before_ doing anything else
@@ -227,7 +237,7 @@ sanguis::server::states::running::handle_default_msg(
 	SGE_LOG_WARNING(
 		log(),
 		sge::log::_1
-			<< SGE_TEXT("server: running: received unexpected message from id ")
+			<< SGE_TEXT("received unexpected message from id ")
 			<< id
 			<< SGE_TEXT(" of type ")
 			<< sge::iconv(typeid(m).name()));

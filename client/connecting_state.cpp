@@ -10,6 +10,7 @@
 #include "../messages/types.hpp"
 #include "../log_headers.hpp"
 #include <sge/iconv.hpp>
+#include <sge/text.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
 #include <typeinfo>
@@ -59,6 +60,10 @@ boost::statechart::result
 sanguis::client::connecting_state::operator()(
 	messages::assign_id const &m)
 {
+	SGE_LOG_DEBUG(
+		log(),
+		sge::log::_1
+			<< SGE_TEXT("received id"));
 	post_event(
 		message_event(
 			messages::auto_ptr(

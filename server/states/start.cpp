@@ -8,7 +8,12 @@
 #include <ostream>
 
 sanguis::server::states::start::start()
-{}
+{
+	SGE_LOG_DEBUG(
+		log(),
+		sge::log::_1
+			<< SGE_TEXT("constructor"));
+}
 
 boost::statechart::result
 sanguis::server::states::start::react(
@@ -18,7 +23,7 @@ sanguis::server::states::start::react(
 	SGE_LOG_WARNING(
 		log(),
 		sge::log::_1
-			<< SGE_TEXT("server: got unexpected message: ")
+			<< SGE_TEXT("got unexpected message: ")
 			<< sge::iconv(typeid(*m.message).name()));
 	return forward_event();
 }
