@@ -129,6 +129,11 @@ void sanguis::draw::model_part::orientation(
 	desired_orientation = rot;
 }
 
+bool sanguis::draw::model_part::animation_ended() const
+{
+	return ended;
+}
+
 void sanguis::draw::model_part::update_animation()
 {
 	animation_.reset(

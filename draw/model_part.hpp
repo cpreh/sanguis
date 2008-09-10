@@ -27,6 +27,7 @@ public:
 	void weapon(weapon_type::type);
 	void update(time_type time);
 	void orientation(sge::sprite::rotation_type);
+	bool animation_ended() const;
 private:
 	void update_animation();
 	void update_orientation(

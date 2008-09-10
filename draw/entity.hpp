@@ -28,7 +28,7 @@ public:
 	void decay();
 	void decay_time(
 		time_type);
-	bool may_be_removed() const;
+	virtual bool may_be_removed() const;
 	virtual void orientation(sge::sprite::rotation_type) = 0;
 	virtual void speed(sge::math::vector2 const &) = 0;
 	virtual void pos(sge::sprite::point const &) = 0;

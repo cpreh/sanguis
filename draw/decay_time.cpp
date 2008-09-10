@@ -2,7 +2,7 @@
 
 sanguis::time_type
 sanguis::draw::decay_time(
-	const entity_type::type type)
+	entity_type::type const type)
 {
 	switch(type) {
 	case entity_type::projectile:

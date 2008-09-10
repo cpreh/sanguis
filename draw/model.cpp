@@ -79,21 +79,27 @@ void sanguis::draw::model::update(
 }
 
 void sanguis::draw::model::orientation(
-	const sge::sprite::rotation_type rot)
+	sge::sprite::rotation_type const rot)
 {
 	BOOST_FOREACH(model_part &p, parts)
 		p.orientation(rot);
 }
 
 void sanguis::draw::model::orientation(
-	const sge::sprite::rotation_type rot,
-	const sprite_vector::size_type index)
+	sge::sprite::rotation_type const rot,
+	sprite_vector::size_type const index)
 {
 	parts.at(index).orientation(rot);	
 }
 
+bool sanguis::draw::model::may_be_removed() const
+{
+	return entity::may_be_removed()
+		&& animations_ended();   
+}
+
 void sanguis::draw::model::health(
-	const sge::space_unit health)
+	sge::space_unit const health)
 {
 	health_ = health;
 	update_healthbar();
@@ -176,6 +182,14 @@ void sanguis::draw::model::update_healthbar()
 		return;
 	healthbar_->health(health());
 	healthbar_->max_health(max_health());
+}
+
+bool sanguis::draw::model::animations_ended() const
+{
+	BOOST_FOREACH(part_vector::const_reference part, parts)
+		if(!part.animation_ended())
+			return false;
+	return true;
 }
 
 sge::log::logger &

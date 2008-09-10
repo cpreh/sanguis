@@ -38,6 +38,7 @@ protected:
 	void orientation(
 		sge::sprite::rotation_type,
 		sprite_vector::size_type index);
+	bool may_be_removed() const;
 private:
 	void health(sge::space_unit);
 	void max_health(sge::space_unit);
@@ -49,6 +50,7 @@ private:
 	animation_type::type animation() const;
 	bool dead() const;
 	void update_healthbar();
+	bool animations_ended() const;
 
 	static sge::log::logger &log();
 
@@ -58,7 +60,9 @@ private:
 	                max_health_;
 	boost::scoped_ptr<healthbar> healthbar_;
 	
-	typedef boost::ptr_vector<model_part> part_vector;
+	typedef boost::ptr_vector<
+		model_part
+	> part_vector;
 	part_vector parts;
 };
 
