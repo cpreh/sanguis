@@ -10,9 +10,9 @@
 #include "decay_time.hpp"
 #include "log.hpp"
 #include "../messages/add.hpp"
+#include "../messages/add_decoration.hpp"
 #include "../messages/add_enemy.hpp"
 #include "../messages/add_pickup.hpp"
-#include "../messages/add_decoration.hpp"
 #include "../messages/add_projectile.hpp"
 #include "../messages/add_weapon_pickup.hpp"
 #include "../messages/base.hpp"
@@ -61,10 +61,10 @@ void sanguis::draw::scene::process_message(
 	dispatch_type<
 		boost::mpl::vector<
 			messages::add,
+			messages::add_decoration,
 			messages::add_enemy,
 			messages::add_pickup,
 			messages::add_projectile,
-			messages::add_decoration,
 			messages::add_weapon_pickup,
 			messages::change_weapon,
 			messages::experience,

@@ -3,7 +3,7 @@
 #include <boost/serialization/export.hpp>
 #include <boost/serialization/base_object.hpp>
 
-BOOST_CLASS_EXPORT(sanguis::messages::disconnect)
+BOOST_CLASS_EXPORT_GUID(sanguis::messages::disconnect, "disconnect")
 
 sanguis::messages::disconnect::disconnect() {}
 
