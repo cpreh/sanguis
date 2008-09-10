@@ -1,5 +1,8 @@
 #include "entity.hpp"
+#include "log.hpp"
 #include "../log_headers.hpp"
+#include <sge/log/logger.hpp>
+#include <sge/text.hpp>
 #include <sge/time/second.hpp>
 #include <sge/time/resolution.hpp>
 
@@ -41,35 +44,35 @@ void sanguis::draw::entity::weapon(weapon_type::type)
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_1 << SGE_TEXT("entity got a weapon message that can't have a weapon!"));
+		sge::log::_1 << SGE_TEXT("got a weapon message that can't have a weapon!"));
 }
 
 void sanguis::draw::entity::start_attacking()
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_1 << SGE_TEXT("entity got a start attacking message!"));
+		sge::log::_1 << SGE_TEXT("got a start attacking message!"));
 }
 
 void sanguis::draw::entity::stop_attacking()
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_1 << SGE_TEXT("entity got a stop attacking message!"));
+		sge::log::_1 << SGE_TEXT("got a stop attacking message!"));
 }
 
 void sanguis::draw::entity::start_reloading()
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_1 << SGE_TEXT("entity got a start reloading message!"));
+		sge::log::_1 << SGE_TEXT("got a start reloading message!"));
 }
 
 void sanguis::draw::entity::stop_reloading()
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_1 << SGE_TEXT("entity got a stop reloading message!"));
+		sge::log::_1 << SGE_TEXT("got a stop reloading message!"));
 }
 
 sanguis::draw::entity::~entity()
@@ -92,4 +95,13 @@ sanguis::draw::system &
 sanguis::draw::entity::get_system()
 {
 	return sys;
+}
+
+sge::log::logger &
+sanguis::draw::entity::log()
+{
+	static sge::log::logger log_(
+		draw::log(),
+		SGE_TEXT("entity: "));
+	return log_;
 }

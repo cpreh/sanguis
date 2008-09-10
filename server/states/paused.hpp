@@ -4,7 +4,7 @@
 #include "running.hpp"
 #include "../../messages/fwd.hpp"
 #include "../../net/types.hpp"
-
+#include <sge/log/fwd.hpp>
 #include <boost/mpl/list.hpp>
 #include <boost/statechart/simple_state.hpp>
 #include <boost/statechart/result.hpp>
@@ -36,7 +36,12 @@ class paused
 	boost::statechart::result operator()(const net::id_type,const messages::disconnect &);
 	boost::statechart::result operator()(const net::id_type,const messages::player_unpause &);
 	boost::statechart::result operator()(const net::id_type,const messages::player_pause &);
-	boost::statechart::result handle_default_msg(const net::id_type,const messages::base &);
+private:
+	boost::statechart::result handle_default_msg(
+		net::id_type,
+		messages::base const &);
+
+	static sge::log::logger &log();
 };
 
 }

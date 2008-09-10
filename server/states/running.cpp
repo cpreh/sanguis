@@ -6,6 +6,7 @@
 #include "../entities/entity.hpp"
 #include "../entities/player.hpp"
 #include "../weapons/factory.hpp"
+#include "../log.hpp"
 #include "../../messages/assign_id.hpp"
 #include "../../messages/client_info.hpp"
 #include "../../messages/connect.hpp"
@@ -232,4 +233,13 @@ sanguis::server::states::running::handle_default_msg(
 			<< sge::iconv(typeid(m).name()));
 
 	return discard_event();
+}
+
+sge::log::logger &
+sanguis::server::states::running::log()
+{
+	static sge::log::logger log_(
+		server::log(),
+		SGE_TEXT("running: "));
+	return log_;
 }

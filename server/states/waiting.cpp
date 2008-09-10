@@ -2,6 +2,7 @@
 #include "running.hpp"
 #include "unpaused.hpp"
 #include "../message_functor.hpp"
+#include "../log.hpp"
 #include "../entities/entity.hpp"
 #include "../../messages/connect.hpp"
 #include "../../messages/client_info.hpp"
@@ -10,6 +11,7 @@
 #include "../../log_headers.hpp"
 
 #include <sge/iconv.hpp>
+#include <sge/log/logger.hpp>
 
 #include <boost/bind.hpp>
 #include <boost/mpl/vector.hpp>
@@ -94,4 +96,13 @@ sanguis::server::states::waiting::react(
 		mf,
 		*m.message,
 		boost::bind(&waiting::handle_default_msg,this,m.id,_1));
+}
+
+sge::log::logger &
+sanguis::server::states::waiting::log()
+{
+	static sge::log::logger log_(
+		server::log(),
+		SGE_TEXT("waiting: "));
+	return log_;
 }

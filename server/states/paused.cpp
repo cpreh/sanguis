@@ -2,6 +2,7 @@
 #include "unpaused.hpp"
 #include "waiting.hpp"
 #include "../message_functor.hpp"
+#include "../log.hpp"
 #include "../entities/entity.hpp"
 #include "../../log_headers.hpp"
 #include "../../dispatch_type.hpp"
@@ -11,6 +12,7 @@
 #include "../../messages/disconnect.hpp"
 
 #include <sge/iconv.hpp>
+#include <sge/log/logger.hpp>
 
 #include <boost/bind.hpp>
 #include <boost/mpl/vector.hpp>
@@ -88,7 +90,10 @@ sanguis::server::states::paused::operator()(
 	return discard_event();
 }
 
-boost::statechart::result sanguis::server::states::paused::handle_default_msg(const net::id_type,const messages::base &m)
+boost::statechart::result
+sanguis::server::states::paused::handle_default_msg(
+	net::id_type,
+	messages::base const &m)
 {
 	SGE_LOG_WARNING(
 		log(),
@@ -96,4 +101,13 @@ boost::statechart::result sanguis::server::states::paused::handle_default_msg(co
 			<< SGE_TEXT("server: got invalid event ")
 			<< sge::iconv(typeid(m).name()));
 	return discard_event();
+}
+
+sge::log::logger &
+sanguis::server::states::paused::log()
+{
+	static sge::log::logger log_(
+		server::log(),
+		SGE_TEXT("paused: "));
+	return log_;
 }

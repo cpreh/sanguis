@@ -1,5 +1,6 @@
 #include "model.hpp"
 #include "../../log_headers.hpp"
+#include "../log.hpp"
 #include <sge/exception.hpp>
 #include <sge/text.hpp>
 #include <boost/filesystem/convenience.hpp>
@@ -16,7 +17,6 @@ sanguis::load::model::model::model(
 			SGE_LOG_WARNING(
 				log(),
 				sge::log::_1
-					<< SGE_TEXT("warning: ")
 					<< *beg
 					<< SGE_TEXT(" is not a directory!"));
 			continue;

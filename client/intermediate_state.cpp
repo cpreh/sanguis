@@ -1,7 +1,9 @@
 #include "intermediate_state.hpp"
 #include "connecting_state.hpp"
 #include "machine.hpp"
+#include "log.hpp"
 #include "../log_headers.hpp"
+#include <sge/log/logger.hpp>
 #include <sge/text.hpp>
 #include <sge/iconv.hpp>
 #include <ostream>
@@ -46,4 +48,13 @@ sanguis::client::intermediate_state::react(
 	}
 
 	return discard_event();
+}
+
+sge::log::logger &
+sanguis::client::intermediate_state::log()
+{
+	static sge::log::logger log_(
+		client::log(),
+		SGE_TEXT("intermediate_state: "));
+	return log_;
 }

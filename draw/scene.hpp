@@ -13,6 +13,7 @@
 #include <sge/sprite/system.hpp>
 #include <sge/font/fwd.hpp>
 #include <sge/type_info.hpp>
+#include <sge/log/fwd.hpp>
 #include <boost/function.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
@@ -65,11 +66,17 @@ private:
 		factory::entity_ptr,
 		messages::add const &);
 	
-	entity &get_entity(entity_id);
-	entity const &get_entity(entity_id) const;
-	void process_default_msg(messages::base const &);
-	void process_default_client_msg(client_messages::base const &);
+	entity &get_entity(
+		entity_id);
+	entity const &get_entity(
+		entity_id) const;
+	void process_default_msg(
+		messages::base const &);
+	void process_default_client_msg(
+		client_messages::base const &);
 	system &get_system();
+	
+	static sge::log::logger &log();
 
 	system                        ss;
 	hud                           hud_;

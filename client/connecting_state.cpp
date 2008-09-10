@@ -1,6 +1,7 @@
 #include "intermediate_state.hpp"
 #include "connecting_state.hpp"
 #include "running_state.hpp"
+#include "log.hpp"
 #include "../dispatch_type.hpp"
 #include "../messages/assign_id.hpp"
 #include "../messages/client_info.hpp"
@@ -98,4 +99,13 @@ sanguis::client::connecting_state::react(
 		sge::font::align_v::center);
 
 	return discard_event();
+}
+
+sge::log::logger &
+sanguis::client::connecting_state::log()
+{
+	static sge::log::logger log_(
+		client::log(),
+		SGE_TEXT("connecting_state: "));
+	return log_;
 }

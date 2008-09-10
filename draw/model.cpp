@@ -1,9 +1,12 @@
 #include "model.hpp"
 #include "z_ordering.hpp"
+#include "log.hpp"
 #include "../log_headers.hpp"
 #include "../load/model/collection.hpp"
 #include "../load/model/singleton.hpp"
 #include "../client/id_dont_care.hpp"
+#include <sge/log/logger.hpp>
+#include <sge/text.hpp>
 #include <boost/foreach.hpp>
 #include <ostream>
 
@@ -173,4 +176,13 @@ void sanguis::draw::model::update_healthbar()
 		return;
 	healthbar_->health(health());
 	healthbar_->max_health(max_health());
+}
+
+sge::log::logger &
+sanguis::draw::model::log()
+{
+	static sge::log::logger log_(
+		draw::log(),
+		SGE_TEXT("model: "));
+	return log_;
 }

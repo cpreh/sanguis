@@ -67,6 +67,8 @@ private:
 	environment const get_environment();
 	void send(
 		messages::auto_ptr);
+	
+	static sge::log::logger &log();
 
 	console_timer send_timer;
 };

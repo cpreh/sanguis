@@ -2,9 +2,10 @@
 #include "paused.hpp"
 #include "waiting.hpp"
 #include "../entities/player.hpp"
+#include "../entities/entity.hpp"
 #include "../message_functor.hpp"
 #include "../message_converter.hpp"
-#include "../entities/entity.hpp"
+#include "../log.hpp"
 #include "../../truncation_check_cast.hpp"
 #include "../../dispatch_type.hpp"
 #include "../../log_headers.hpp"
@@ -28,6 +29,7 @@
 
 #include <sge/math/constants.hpp>
 #include <sge/math/angle.hpp>
+#include <sge/log/logger.hpp>
 
 #include <boost/lexical_cast.hpp>
 #include <boost/mpl/vector.hpp>
@@ -315,4 +317,13 @@ void sanguis::server::states::unpaused::send(
 	messages::auto_ptr m)
 {
 	get_environment().send(m);
+}
+
+sge::log::logger &
+sanguis::server::states::unpaused::log()
+{
+	static sge::log::logger log_(
+		server::log(),
+		SGE_TEXT("unpaused: "));
+	return log_;
 }

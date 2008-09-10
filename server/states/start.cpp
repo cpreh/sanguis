@@ -1,7 +1,10 @@
 #include "start.hpp"
 #include "waiting.hpp"
+#include "../log.hpp"
 #include "../../log_headers.hpp"
+#include <sge/log/logger.hpp>
 #include <sge/iconv.hpp>
+#include <sge/text.hpp>
 #include <ostream>
 
 sanguis::server::states::start::start()
@@ -26,4 +29,13 @@ sanguis::server::states::start::react(
 {
 	context<machine>().listen();
 	return transit<waiting>(); 
+}
+
+sge::log::logger &
+sanguis::server::states::start::log()
+{
+	static sge::log::logger log_(
+		server::log(),
+		SGE_TEXT("start: "));
+	return log_;
 }

@@ -9,6 +9,7 @@
 #include "../environment.hpp"
 #include "../entities/entity_fwd.hpp"
 #include <sge/time/timer.hpp>
+#include <sge/log/logger.hpp>
 #include <boost/optional.hpp>
 #include <boost/noncopyable.hpp>
 #include <memory>
@@ -58,6 +59,8 @@ private:
 	bool in_range(
 		entities::entity const& from,
 		pos_type const& to) const;
+
+	static sge::log::logger &log();
 
 	struct state {
 		enum type {
