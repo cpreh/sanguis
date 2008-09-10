@@ -10,15 +10,22 @@ namespace server
 {
 namespace entities
 {
+
 class decoration : public entity
 {
 public:
-decoration(base_parameters const &,decoration_type::type);
-decoration_type::type type() const;
-messages::auto_ptr add_message() const;
+	decoration(
+		environment const &,
+		pos_type const &pos,
+		space_unit angle,
+		decoration_type::type);
+	
+	decoration_type::type dtype() const;
+	messages::auto_ptr add_message() const;
 private:
-decoration_type::type type_;
+	decoration_type::type const type_;
 };
+
 }
 }
 }

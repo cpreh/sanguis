@@ -10,11 +10,11 @@ namespace z_ordering
 
 enum type {
 	background,
+	decoration,
 	model_generic,
 	player_lower,
 	bullet,
 	pickup,
-	decoration,
 	reaper,
 	player_upper,
 	healthbar_lower,

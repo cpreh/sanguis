@@ -60,7 +60,7 @@ sanguis::server::message_convert(
 	return messages::auto_ptr(
 		new messages::add_decoration(
 			e.id(),
-			e.type(),
+			e.dtype(),
 			e.pos(),
 			e.angle(),
 			e.health(),

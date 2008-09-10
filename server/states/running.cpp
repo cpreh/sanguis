@@ -102,20 +102,12 @@ void sanguis::server::states::running::create_decorations()
 				<< SGE_TEXT(", position: ") << position << SGE_TEXT(", angle: ")
 				<< angle);
 		
-		entities_.push_back(entities::auto_ptr(
-			new entities::decoration(
-					entities::base_parameters(
-						get_environment(),
-						damage::all(messages::mu(1)),
-						position,
-						angle,
-						angle,
-						team::neutral,
-						entities::property_map(),
-						entity_type::decoration,
-						true,
-						dim_type()
-					),
+		entities_.push_back(
+			entities::auto_ptr(
+				new entities::decoration(
+					get_environment(),
+					position,
+					angle,
 					type)));
 
 		entities_.back().update(time_type(),entities_);
