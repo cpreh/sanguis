@@ -1,7 +1,6 @@
 #include "log.hpp"
 #include <sge/iostream.hpp>
 #include <sge/text.hpp>
-#include <sge/once.hpp>
 #include <sge/log/logger.hpp>
 
 sge::log::logger &

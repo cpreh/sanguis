@@ -3,7 +3,7 @@
 #include <boost/serialization/base_object.hpp>
 #include <boost/serialization/export.hpp>
 
-BOOST_CLASS_EXPORT_GUID(sanguis::messages::assign_id, "entity_id")
+BOOST_CLASS_EXPORT_GUID(sanguis::messages::assign_id, "assign_id")
 
 sanguis::messages::assign_id::assign_id()
 {}
