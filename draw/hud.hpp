@@ -4,6 +4,7 @@
 #include "../time_type.hpp"
 #include "../messages/types.hpp"
 #include <sge/font/fwd.hpp>
+#include <sge/time/frames_counter.hpp>
 #include <boost/noncopyable.hpp>
 
 namespace sanguis
@@ -20,8 +21,9 @@ public:
 	void update(
 		time_type);
 private:
-	sge::font::font    &font;
-	messages::exp_type experience_;
+	sge::font::font           &font;
+	messages::exp_type        experience_;
+	sge::time::frames_counter frames_counter;
 };
 
 }
