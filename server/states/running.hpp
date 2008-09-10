@@ -81,6 +81,8 @@ private:
 		net::id_type,
 		messages::base const &);
 
+	void create_decorations();
+
 	send_callback send;
 	console_print_callback console_print;
 

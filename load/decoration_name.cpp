@@ -8,11 +8,11 @@ sanguis::load::decoration_name(
 {
 	switch(etype) {
 	case decoration_type::barrel:
-		return SGE_TEXT("deco_barrel");
+		return SGE_TEXT("decoration/barrel");
 	case decoration_type::rock:
-		return SGE_TEXT("deco_rock");
+		return SGE_TEXT("decoration/rock");
 	case decoration_type::crate:
-		return SGE_TEXT("deco_crate");
+		return SGE_TEXT("decoration/crate");
 	default:
 		throw sge::exception(
 			SGE_TEXT("load::decoration_name: missing loading code!"));

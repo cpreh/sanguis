@@ -43,6 +43,7 @@ public:
 	void operator()(messages::add const &);
 	void operator()(messages::add_enemy const &);
 	void operator()(messages::add_pickup const &);
+	void operator()(messages::add_decoration const &);
 	void operator()(messages::add_projectile const &);
 	void operator()(messages::add_weapon_pickup const &);
 	void operator()(messages::change_weapon const &);

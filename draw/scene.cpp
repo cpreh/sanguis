@@ -4,12 +4,14 @@
 #include "factory/entity.hpp"
 #include "factory/pickup.hpp"
 #include "factory/projectile.hpp"
+#include "factory/decoration.hpp"
 #include "factory/weapon_pickup.hpp"
 #include "coord_transform.hpp"
 #include "decay_time.hpp"
 #include "../messages/add.hpp"
 #include "../messages/add_enemy.hpp"
 #include "../messages/add_pickup.hpp"
+#include "../messages/add_decoration.hpp"
 #include "../messages/add_projectile.hpp"
 #include "../messages/add_weapon_pickup.hpp"
 #include "../messages/base.hpp"
@@ -59,6 +61,7 @@ void sanguis::draw::scene::process_message(
 			messages::add_enemy,
 			messages::add_pickup,
 			messages::add_projectile,
+			messages::add_decoration,
 			messages::add_weapon_pickup,
 			messages::change_weapon,
 			messages::experience,
@@ -142,6 +145,17 @@ void sanguis::draw::scene::operator()(
 			m.id(),
 			get_system(),
 			m.etype()),
+		m);
+}
+
+void sanguis::draw::scene::operator()(
+	messages::add_decoration const &m)
+{
+	configure_new_object(
+		factory::decoration(
+			m.id(),
+			get_system(),
+			m.ptype()),
 		m);
 }
 

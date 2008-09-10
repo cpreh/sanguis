@@ -1,10 +1,12 @@
 #include "running.hpp"
 #include "waiting.hpp"
+#include "../entities/base_parameters.hpp"
 #include "../environment.hpp"
 #include "../damage_types.hpp"
 #include "../message_functor.hpp"
 #include "../entities/entity.hpp"
 #include "../entities/player.hpp"
+#include "../entities/decoration.hpp"
 #include "../weapons/factory.hpp"
 #include "../../messages/assign_id.hpp"
 #include "../../messages/client_info.hpp"
@@ -14,11 +16,14 @@
 #include "../../resolution.hpp"
 #include "../../dispatch_type.hpp"
 #include "../../log_headers.hpp"
+#include "../../random.hpp"
 #include <sge/iconv.hpp>
+#include <sge/math/constants.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/assign/list_of.hpp>
 #include <boost/foreach.hpp>
 #include <boost/bind.hpp>
+#include <boost/tr1/random.hpp>
 #include <ostream>
 
 sanguis::server::states::running::running(my_context ctx)
@@ -27,9 +32,80 @@ sanguis::server::states::running::running(my_context ctx)
   console_print(boost::bind(&server::machine::console_print,&(context<machine>()),_1)),
   wave_generator()
 {
-	for (int i = 0; i < 10; ++i)
+	create_decorations();
+}
+
+void sanguis::server::states::running::create_decorations()
+{
+	typedef std::tr1::uniform_real<
+		messages::space_unit
+	> uniform_su;
+
+	typedef std::tr1::uniform_int<
+		unsigned
+	> uniform_int;
+
+	typedef std::tr1::variate_generator<
+		rand_gen_type,
+		uniform_su
+	> rng_type;
+
+	typedef std::tr1::variate_generator<
+		rand_gen_type,
+		uniform_int
+	> rng_int_type;
+
+	rng_type rng_x(
+		create_seeded_randgen(),
+		uniform_su(
+			messages::mu(0),
+			messages::mu(resolution().w())
+		));
+
+	rng_type rng_y(
+		create_seeded_randgen(),
+		uniform_su(
+			messages::mu(0),
+			messages::mu(resolution().h())
+		));
+
+	rng_type rng_angle(
+		create_seeded_randgen(),
+		uniform_su(
+			messages::mu(0),
+			sge::math::twopi<messages::space_unit>()
+		));
+
+	rng_int_type rng_deco_type(
+		create_seeded_randgen(),
+		uniform_int(
+			static_cast<unsigned>(0),
+			static_cast<unsigned>(decoration_type::size)
+		));
+
+	for (unsigned i = 0; i < 10; ++i)
 	{
-		// TODO: generate decos here
+		pos_type const position(rng_x(),rng_y());
+		space_unit const angle = rng_angle();
+		decoration_type::type type = static_cast<decoration_type::type>(rng_deco_type());
+		
+		entities_.push_back(entities::auto_ptr(
+			new entities::decoration(
+					entities::base_parameters(
+						get_environment(),
+						damage::all(messages::mu(1)),
+						position,
+						angle,
+						angle,
+						team::neutral,
+						entities::property_map(),
+						entity_type::decoration,
+						true,
+						dim_type()
+					),
+					type)));
+
+		entities_.back().update(time_type(),entities_);
 	}
 }
 
@@ -204,6 +280,15 @@ sanguis::server::states::running::operator()(
 			new messages::level_up(
 				p.id(),
 				p.level())));
+	
+	// send decorations
+	BOOST_FOREACH(entities::entity &e,entities_)
+	{
+		if (e.type() != entity_type::decoration)
+			continue;
+
+		send(e.add_message());
+	}
 
 	return discard_event();
 }

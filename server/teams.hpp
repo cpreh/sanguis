@@ -7,7 +7,7 @@ namespace server
 {
 namespace team
 {
-	enum type { players,monsters };
+	enum type { players,monsters,neutral };
 }
 }
 }
