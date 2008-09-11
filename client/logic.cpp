@@ -85,6 +85,13 @@ void sanguis::client::logic::pause(
 	paused = p;
 }
 
+void sanguis::client::logic::remove(
+	entity_id const id)
+{
+	if(id == player_id_)
+		player_id_ = invalid_id;
+}
+
 void sanguis::client::logic::player_id(
 	entity_id const id)
 {

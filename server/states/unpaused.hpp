@@ -60,10 +60,8 @@ class unpaused
 	boost::statechart::result operator()(const net::id_type,const messages::player_unpause &);
 	boost::statechart::result operator()(const net::id_type,const messages::player_pause &);
 	boost::statechart::result operator()(const net::id_type,const messages::disconnect &);
-	boost::statechart::result handle_default_msg(const net::id_type,const messages::base &);
-
-	void get_player_exp(const sge::con::arg_list &);
 private:
+	boost::statechart::result handle_default_msg(const net::id_type,const messages::base &);
 	environment const get_environment();
 	void send(
 		messages::auto_ptr);
