@@ -7,9 +7,11 @@
 #include <sge/renderer/texture_filter.hpp>
 #include <sge/renderer/image_view_impl.hpp>
 #include <sge/renderer/scoped_lock.hpp>
+#include <sge/renderer/scoped_state.hpp>
 #include <sge/renderer/scoped_vertex_lock.hpp>
 #include <sge/renderer/scoped_index_lock.hpp>
 #include <sge/input/key_type.hpp>
+#include <sge/math/matrix_util.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/math/rect_impl.hpp>
 #include <sge/exception.hpp>
@@ -43,6 +45,7 @@ class quad
 {
 	public:
 	quad(sge::renderer::device_ptr rend,sge::math::rect const &,sge::renderer::pos3::value_type z);
+	void render();
 	public:
 	sge::math::rect const &r;
 	sge::renderer::device_ptr const rend;
@@ -50,11 +53,17 @@ class quad
 	sge::renderer::index_buffer_ptr const ib;
 };
 
+void quad::render()
+{
+	rend->render(vb,ib,0,4,sge::renderer::indexed_primitive_type::triangle,2,0);
+}
+
 quad::quad(
 	sge::renderer::device_ptr const rend,
 	sge::math::rect const &r,
 	sge::renderer::pos3::value_type const z)
 	: r(r),
+		rend(rend),
 	  vb(
 			rend->create_vertex_buffer(
 				sge::renderer::vertex_format()
@@ -159,7 +168,7 @@ try
 		sys.renderer->set_glsl_program(shader);
 
 		sge::renderer::glsl::uniform_variable_ptr expl_center_var = shader->uniform("expl_center");
-		expl_center_var->set(expl_center);
+		expl_center_var->set(sge::math::vector2(expl_center.x(),expl_center.y()));
 
 		sge::renderer::glsl::uniform_variable_ptr grass_sampler = shader->uniform("grasstex");
 		grass_sampler->set(static_cast<int>(0));
@@ -167,18 +176,36 @@ try
 		sge::renderer::glsl::uniform_variable_ptr expl_sampler = shader->uniform("expltex");
 		expl_sampler->set(static_cast<int>(1));
 
+		sys.renderer->set_glsl_program(sge::renderer::device::no_program);
+		sys.renderer->projection(sge::math::matrix_orthogonal_xy());
+		sys.renderer->transform(sge::math::matrix_identity());
+		sge::renderer::scoped_state const state_(
+			sys.renderer,
+			sge::renderer::state_list
+				(sge::renderer::bool_state::enable_lighting = false)
+				(sge::renderer::bool_state::enable_alpha_blending = true)
+				(sge::renderer::source_blend_func::src_alpha)
+				(sge::renderer::dest_blend_func::inv_src_alpha)
+				(sge::renderer::cull_mode::off)
+				(sge::renderer::depth_func::off)
+				(sge::renderer::stencil_func::off)
+				(sge::renderer::draw_mode::fill)
+		);
+
     while (running)
     {
 			sge::window::dispatch();
 			sge::renderer::scoped_block block_(sys.renderer);
 
 			sys.renderer->set_texture(background_tex);
-			sys.renderer->render(background.vb,background.ib,0,4,sge::renderer::indexed_primitive_type::triangle,2,0);
-
+			background.render();
+			/*
+			sys.renderer->set_glsl_program(shader);
 			sys.renderer->set_texture(sw_tex,0);
 			sys.renderer->set_texture(background_tex,1);
 
 			sys.renderer->render(shockwave.vb,shockwave.ib,0,4,sge::renderer::indexed_primitive_type::triangle,2,0);
+			*/
 
 			//sys.renderer->set_glsl_program(sge::renderer::device::no_program);
     }
