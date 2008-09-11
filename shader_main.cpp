@@ -4,6 +4,7 @@
 #include <sge/sprite/system.hpp>
 #include <sge/sprite/object.hpp>
 #include <sge/renderer/scoped_block.hpp>
+#include <sge/renderer/transform.hpp>
 #include <sge/renderer/texture_filter.hpp>
 #include <sge/renderer/image_view_impl.hpp>
 #include <sge/renderer/scoped_lock.hpp>
@@ -178,7 +179,7 @@ try
 
 		sys.renderer->set_glsl_program(sge::renderer::device::no_program);
 		sys.renderer->projection(sge::math::matrix_orthogonal_xy());
-		sys.renderer->transform(sge::math::matrix_identity());
+		sys.renderer->transform(sge::renderer::matrix_pixel_to_space(sys.renderer->screen_size()));
 		sge::renderer::scoped_state const state_(
 			sys.renderer,
 			sge::renderer::state_list
@@ -197,17 +198,14 @@ try
 			sge::window::dispatch();
 			sge::renderer::scoped_block block_(sys.renderer);
 
+			sys.renderer->set_glsl_program(sge::renderer::device::no_program);
 			sys.renderer->set_texture(background_tex);
 			background.render();
-			/*
+
 			sys.renderer->set_glsl_program(shader);
 			sys.renderer->set_texture(sw_tex,0);
 			sys.renderer->set_texture(background_tex,1);
-
-			sys.renderer->render(shockwave.vb,shockwave.ib,0,4,sge::renderer::indexed_primitive_type::triangle,2,0);
-			*/
-
-			//sys.renderer->set_glsl_program(sge::renderer::device::no_program);
+			shockwave.render();
     }
 } 
 catch (sge::exception const &e)
