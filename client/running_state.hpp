@@ -48,6 +48,7 @@ struct running_state
 	boost::statechart::result operator()(const messages::give_weapon&);
 	boost::statechart::result operator()(messages::move const &);
 	boost::statechart::result operator()(const messages::pause&);
+	boost::statechart::result operator()(messages::remove const &);
 	boost::statechart::result operator()(const messages::unpause&);
 private:
 	boost::statechart::result handle_default_msg(messages::base const &);

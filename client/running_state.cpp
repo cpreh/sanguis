@@ -9,6 +9,7 @@
 #include "../messages/give_weapon.hpp"
 #include "../messages/move.hpp"
 #include "../messages/pause.hpp"
+#include "../messages/remove.hpp"
 #include "../messages/unpause.hpp"
 #include "../draw/coord_transform.hpp"
 #include <boost/mpl/vector.hpp>
@@ -81,6 +82,7 @@ sanguis::client::running_state::react(
 			messages::give_weapon,
 			messages::move,
 			messages::pause,
+			messages::remove,
 			messages::unpause
 		>,
 		boost::statechart::result>(
@@ -91,18 +93,18 @@ sanguis::client::running_state::react(
 
 boost::statechart::result
 sanguis::client::running_state::operator()(
-	messages::disconnect const &)
-{
-	return transit<intermediate_state>();
-}
-
-boost::statechart::result
-sanguis::client::running_state::operator()(
 	messages::assign_id const &m)
 {
 	logic_.player_id(
 		m.player_id());
 	return discard_event();
+}
+
+boost::statechart::result
+sanguis::client::running_state::operator()(
+	messages::disconnect const &)
+{
+	return transit<intermediate_state>();
 }
 
 boost::statechart::result
@@ -131,6 +133,18 @@ sanguis::client::running_state::operator()(
 {
 	logic_.pause(true);
 	drawer.pause(true);
+	return discard_event();
+}
+
+boost::statechart::result
+sanguis::client::running_state::operator()(
+	messages::remove const &m)
+{
+	logic_.remove(
+		m.id());
+	drawer.process_message(
+		m);
+	// TODO: check the logic if we died
 	return discard_event();
 }
 

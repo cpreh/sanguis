@@ -31,6 +31,8 @@ public:
 		messages::move const &);
 	void pause(
 		bool);
+	void remove(
+		entity_id);
 	void player_id(
 		entity_id);
 
