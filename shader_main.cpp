@@ -16,6 +16,9 @@
 #include <sge/texture/part_raw.hpp>
 #include <sge/math/rect_impl.hpp>
 #include <sge/exception.hpp>
+#include <sge/time/second.hpp>
+#include <sge/time/time.hpp>
+#include <sge/time/timer.hpp>
 #include <sge/iostream.hpp>
 #include <sge/text.hpp>
 #include <sge/scoped_connection.hpp>
@@ -45,18 +48,40 @@ class input_functor
 class quad
 {
 	public:
-	quad(sge::renderer::device_ptr rend,sge::math::rect const &,sge::renderer::pos3::value_type z);
+	quad(sge::renderer::device_ptr rend,sge::math::rect const &,sge::space_unit z);
 	void render();
+	void expand_pixels(sge::space_unit);
 	public:
 	sge::math::rect const &r;
 	sge::renderer::device_ptr const rend;
 	sge::renderer::vertex_buffer_ptr const vb;
 	sge::renderer::index_buffer_ptr const ib;
+	sge::space_unit const z;
 };
 
 void quad::render()
 {
 	rend->render(vb,ib,0,4,sge::renderer::indexed_primitive_type::triangle,2,0);
+}
+
+void quad::expand_pixels(sge::space_unit const f)
+{
+	sge::renderer::scoped_vertex_lock const vblock(
+			sge::renderer::make_scoped_lock(
+				vb,
+				sge::renderer::lock_flags::readwrite));
+
+	sge::renderer::vertex_buffer::view_type vview = 
+		boost::get<sge::renderer::vertex_buffer::view_type>(vblock.value());
+
+	sge::renderer::vertex_buffer::view_type::iterator i = vview.begin();
+	i->pos() = sge::renderer::pos3(i->pos().x()-f,i->pos().y()-f,z);
+	++i;
+	i->pos() = sge::renderer::pos3(i->pos().x()-f,i->pos().y()+f,z);
+	++i;
+	i->pos() = sge::renderer::pos3(i->pos().x()+f,i->pos().y()+f,z);
+	++i;
+	i->pos() = sge::renderer::pos3(i->pos().x()+f,i->pos().y()-f,z);
 }
 
 quad::quad(
@@ -71,12 +96,13 @@ quad::quad(
 					.add(sge::renderer::vertex_usage::pos)
 					.add(sge::renderer::vertex_usage::tex),
 				static_cast<sge::renderer::vertex_buffer::size_type>(4),
-				sge::renderer::resource_flags::dynamic)),
+				sge::renderer::resource_flags::readable)),
 		ib(
 			rend->create_index_buffer(
 				sge::renderer::index_format::index16,
 				static_cast<sge::renderer::index_buffer::size_type>(6),
-				sge::renderer::resource_flags::dynamic))
+				sge::renderer::resource_flags::dynamic)),
+		z(z)
 {
 	sge::renderer::scoped_vertex_lock const vblock(
 			sge::renderer::make_scoped_lock(
@@ -168,6 +194,9 @@ try
 
 		sys.renderer->set_glsl_program(shader);
 
+		sge::renderer::glsl::uniform_variable_ptr intensity_var = shader->uniform("intensity");
+		intensity_var->set(sge::su(200));
+
 		sge::renderer::glsl::uniform_variable_ptr expl_center_var = shader->uniform("expl_center");
 		expl_center_var->set(sge::math::vector2(expl_center.x(),expl_center.y()));
 
@@ -195,8 +224,17 @@ try
 				(sge::renderer::draw_mode::fill)
 		);
 
+		sge::time::timer frame_timer(
+			sge::time::second(sge::su(1)));
+
+		shockwave.expand_pixels(100);
+		
     while (running)
     {
+			sge::space_unit const addition = sge::su(frame_timer.reset())*sge::su(50);
+			//sge::cout << "adding " << addition << " pixels\n";
+			shockwave.expand_pixels(addition);
+
 			sge::window::dispatch();
 			sge::renderer::scoped_block block_(sys.renderer);
 
