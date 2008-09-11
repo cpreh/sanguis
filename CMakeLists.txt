@@ -58,8 +58,6 @@ FILE (GLOB files
 	server/waves/*.cpp
 	server/weapons/*.cpp)
 
-#add_executable(main ${files})
-add_executable(shader_main shader_main.cpp file_to_string.cpp file_size.cpp)
-target_link_libraries(shader_main sgecore)
-#target_link_libraries(main boost_serialization boost_thread
-#	boost_program_options sgecore)
+add_executable(main ${files})
+target_link_libraries(main boost_serialization boost_thread
+	boost_program_options sgecore)
