@@ -30,6 +30,9 @@
 #include <sge/math/constants.hpp>
 #include <sge/math/angle.hpp>
 #include <sge/log/logger.hpp>
+#include <sge/format.hpp>
+#include <sge/text.hpp>
+#include <sge/exception.hpp>
 
 #include <boost/lexical_cast.hpp>
 #include <boost/mpl/vector.hpp>
@@ -238,16 +241,9 @@ sanguis::server::states::unpaused::operator()(
 	return transit<waiting>();
 }
 
-void sanguis::server::states::unpaused::get_player_exp(const sge::con::arg_list &)
-{
-	// FIXME
-	/*context<running>().console_print(
-		SGE_TEXT("player experience is: ")+
-			boost::lexical_cast<sge::string>(
-				context<running>().players().begin()->second->exp()));*/
-}
-
-boost::statechart::result sanguis::server::states::unpaused::react(const tick_event &t)
+boost::statechart::result
+sanguis::server::states::unpaused::react(
+	tick_event const &t)
 {
 	time_type const delta = t.delta();
 
@@ -267,6 +263,27 @@ boost::statechart::result sanguis::server::states::unpaused::react(const tick_ev
 				send(message_convert<messages::health>(*i));
 				send(message_convert<messages::remove>(*i));
 			}
+			
+			// we have to remove the player link as well
+			if(i->type() == entity_type::player)
+			{
+				bool found = false;
+				running::player_map &players_(context<running>().players());
+				for(running::player_map::iterator it = players_.begin(); it != players_.end(); ++it)
+					if(it->second->id() == i->id())
+					{
+						players_.erase(it);
+						found = true;
+						break;
+					}
+
+				if(!found)
+					throw sge::exception(
+						(sge::format(
+							SGE_TEXT("Player with id %1% not in player map when erasing!"))
+						% i->id()).str());
+			}
+
 			i = entities.erase(i);
 			continue;
 		}
