@@ -171,11 +171,13 @@ try
 		sge::renderer::glsl::uniform_variable_ptr expl_center_var = shader->uniform("expl_center");
 		expl_center_var->set(sge::math::vector2(expl_center.x(),expl_center.y()));
 
-		sge::renderer::glsl::uniform_variable_ptr grass_sampler = shader->uniform("grasstex");
-		grass_sampler->set(static_cast<int>(0));
+		static const int grass_id = 0;
+		static const int expl_id = 1;
 
+		sge::renderer::glsl::uniform_variable_ptr grass_sampler = shader->uniform("grasstex");
 		sge::renderer::glsl::uniform_variable_ptr expl_sampler = shader->uniform("expltex");
-		expl_sampler->set(static_cast<int>(1));
+		grass_sampler->set(grass_id);
+		expl_sampler->set(expl_id);
 
 		sys.renderer->set_glsl_program(sge::renderer::device::no_program);
 		sys.renderer->projection(sge::math::matrix_orthogonal_xy());
@@ -199,12 +201,13 @@ try
 			sge::renderer::scoped_block block_(sys.renderer);
 
 			sys.renderer->set_glsl_program(sge::renderer::device::no_program);
-			sys.renderer->set_texture(background_tex);
+			sys.renderer->set_texture(background_tex,grass_id);
+			sys.renderer->set_texture(sge::renderer::device::no_texture,expl_id);
 			background.render();
 
 			sys.renderer->set_glsl_program(shader);
-			sys.renderer->set_texture(sw_tex,0);
-			sys.renderer->set_texture(background_tex,1);
+			sys.renderer->set_texture(background_tex,grass_id);
+			sys.renderer->set_texture(sw_tex,expl_id);
 			shockwave.render();
     }
 } 
