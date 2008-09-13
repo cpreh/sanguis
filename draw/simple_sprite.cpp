@@ -17,7 +17,7 @@ sanguis::draw::simple_sprite::simple_sprite(
 		sge::su(0)),
 	tex,
 	sge::sprite::texture_dim,
-	sge::renderer::colors::white,
+	sge::renderer::colors::white(),
 	static_cast<sge::sprite::depth_type>(0),
 	sge::su(0))
 {}

@@ -13,8 +13,9 @@
 namespace
 {
 
-const sge::sprite::unit border_size = 2,
-                        bar_height = 8;
+sge::sprite::unit const
+	border_size = 2,
+	bar_height = 8;
 
 }
 
@@ -34,7 +35,7 @@ sanguis::draw::healthbar::healthbar(
 		boost::none,
 		boost::none,
 		boost::none,
-		sge::renderer::colors::black);
+		sge::renderer::colors::black());
 
 	at(1) = object(
 		sys,
@@ -151,15 +152,15 @@ void sanguis::draw::healthbar::recalc_health()
 	if(sge::math::almost_zero(max_health_)) // TODO:
 		return;
 	
-	const sge::renderer::pixel_channel_8 pixel_channel_max(
-		std::numeric_limits<sge::renderer::pixel_channel_8>::max());
+	sge::renderer::color_channel_8 const pixel_channel_max(
+		std::numeric_limits<sge::renderer::color_channel_8>::max());
 
 	inner().w() = static_cast<sge::sprite::unit>(
 		static_cast<sge::space_unit>(inner_dim().w()) * remaining_health());
-	inner().set_color(sge::renderer::make_color_rgba(
-		static_cast<sge::renderer::pixel_channel_8>(
+	inner().set_color(sge::renderer::rgba8_color(
+		static_cast<sge::renderer::color_channel_8>(
 			(sge::su(1) - remaining_health()) * sge::su(pixel_channel_max)),
-		static_cast<sge::renderer::pixel_channel_8>(
+		static_cast<sge::renderer::color_channel_8>(
 			remaining_health() * sge::su(pixel_channel_max)),
 		0,
 		pixel_channel_max));
