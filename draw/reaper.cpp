@@ -31,11 +31,11 @@ sanguis::draw::reaper::reaper(
   inited(false)
 {
 	color(
-		sge::renderer::make_color_rgba(
-			static_cast<sge::renderer::pixel_channel_8>(255),
-			static_cast<sge::renderer::pixel_channel_8>(255),
-			static_cast<sge::renderer::pixel_channel_8>(255),
-			static_cast<sge::renderer::pixel_channel_8>(128)));
+		sge::renderer::rgba8_color(
+			static_cast<sge::renderer::color_channel_8>(255),
+			static_cast<sge::renderer::color_channel_8>(255),
+			static_cast<sge::renderer::color_channel_8>(255),
+			static_cast<sge::renderer::color_channel_8>(128)));
 }
 
 void sanguis::draw::reaper::update(time_type const t)
