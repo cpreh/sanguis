@@ -1,5 +1,6 @@
 #include "model_part.hpp"
 #include "../load/model/part.hpp"
+#include "../load/model/base_animation_not_found.hpp"
 #include <sge/exception.hpp>
 #include <sge/text.hpp>
 #include <sge/console/var_impl.hpp>
@@ -136,14 +137,27 @@ bool sanguis::draw::model_part::animation_ended() const
 
 void sanguis::draw::model_part::update_animation()
 {
-	animation_.reset(
-		new sge::sprite::texture_animation(
-			(*info)[weapon_type_]
-				[animation_type_]
-					.get(),
-			loop_method(),
-			ref->explicit_upcast(),
-			anim_diff_clock.callback()));
+	try
+	{
+		animation_.reset(
+			new sge::sprite::texture_animation(
+				(*info)[weapon_type_]
+					[animation_type_]
+						.get(),
+				loop_method(),
+				ref->explicit_upcast(),
+				anim_diff_clock.callback()));
+	}
+	catch(load::model::base_animation_not_found const &e)
+	{
+		if(e.anim_type() == animation_type::none)
+			throw;
+		if(animation_)
+			return;
+		animation_type_ = animation_type::none;
+		update_animation();
+		return;
+	}
 	ended = false;
 }
 
