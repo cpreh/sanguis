@@ -60,11 +60,11 @@ sanguis::server::weapons::create(
 			new rocket_launcher(
 				env,
 				type,
-				static_cast<time_type>(1), // cooldown
+				static_cast<time_type>(0.8), // cooldown
 				messages::mu(10), // damage
 				messages::mu(100), // aoe
 				1, // magazine size
-				static_cast<time_type>(2) // reload time
+				static_cast<time_type>(1.6) // reload time
 				));
 	default:
 		throw sge::exception(
