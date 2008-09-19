@@ -29,7 +29,8 @@ public:
 	void orientation(sge::sprite::rotation_type);
 	bool animation_ended() const;
 private:
-	void update_animation();
+	void update_animation(
+		bool force);
 	void update_orientation(
 		sge::sprite::rotation_type);
 	sge::sprite::texture_animation::loop_method::type loop_method() const;

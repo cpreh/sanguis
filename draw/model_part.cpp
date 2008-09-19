@@ -40,7 +40,7 @@ sanguis::draw::model_part::model_part(
   animation_(),
   ended(false)
 {
-	update_animation();
+	update_animation(true);
 	ref.size() = sge::math::structure_cast<sge::sprite::unit>(
 		info
 		[weapon_type::none]
@@ -66,7 +66,8 @@ void sanguis::draw::model_part::animation(
 			return;
 	default:
 		animation_type_ = anim_type;
-		update_animation();
+		update_animation(
+			false);
 	}
 }
 
@@ -77,7 +78,8 @@ void sanguis::draw::model_part::weapon(
 	if(weapon_type_ == weap_type)
 		return;
 	weapon_type_ = weap_type;
-	update_animation();
+	update_animation(
+		true);
 }
 
 void sanguis::draw::model_part::update(
@@ -135,7 +137,8 @@ bool sanguis::draw::model_part::animation_ended() const
 	return ended;
 }
 
-void sanguis::draw::model_part::update_animation()
+void sanguis::draw::model_part::update_animation(
+	bool const force)
 {
 	try
 	{
@@ -152,10 +155,10 @@ void sanguis::draw::model_part::update_animation()
 	{
 		if(e.anim_type() == animation_type::none)
 			throw;
-		if(animation_)
+		if(animation_ && !force)
 			return;
 		animation_type_ = animation_type::none;
-		update_animation();
+		update_animation(force);
 		return;
 	}
 	ended = false;
