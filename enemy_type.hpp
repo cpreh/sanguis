@@ -10,7 +10,8 @@ enum type {
 	wolf_brown,
 	wolf_white,
 	zombie00,
-	zombie01
+	zombie01,
+  spider
 };
 }
 

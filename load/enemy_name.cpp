@@ -17,6 +17,8 @@ sanguis::load::enemy_name(
 		return SGE_TEXT("zombie00");
 	case enemy_type::zombie01:
 		return SGE_TEXT("zombie01");
+	case enemy_type::spider:
+		return SGE_TEXT("spider");
 	default:
 		throw sge::exception(
 			SGE_TEXT("load::enemy_name: missing loading code!"));
