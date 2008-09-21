@@ -20,6 +20,7 @@ namespace waves
 class simple : public wave {
 public:
 	simple(
+		time_type delay,
 		time_type spawn_interval,
 		unsigned total_spawn_count,
 		enemy_type::type);
@@ -29,7 +30,8 @@ public:
 	bool ended() const;
 private:
 	diff_clock       diff_;
-	sge::time::timer spawn_timer;
+	sge::time::timer delay_timer,
+	                 spawn_timer;
 	unsigned         total_spawn_count;
 	enemy_type::type etype;
 	unsigned         spawn_count;

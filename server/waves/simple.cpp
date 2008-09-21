@@ -10,18 +10,25 @@
 #include <algorithm>
 
 sanguis::server::waves::simple::simple(
+	time_type const delay,
 	time_type const spawn_interval,
 	unsigned const total_spawn_count,
 	enemy_type::type const etype)
-: diff_(),
-  spawn_timer(
-  	sge::time::second(
-		spawn_interval),
-	true,
-	diff_.callback()),
-  total_spawn_count(total_spawn_count),
-  etype(etype),
-  spawn_count(0)
+:
+	diff_(),
+	delay_timer(
+		sge::time::second(
+			delay),
+		true,
+		diff_.callback()),
+	spawn_timer(
+		sge::time::second(
+			spawn_interval),
+		true,
+		diff_.callback()),
+	total_spawn_count(total_spawn_count),
+	etype(etype),
+	spawn_count(0)
 {}
 
 void sanguis::server::waves::simple::process(
@@ -29,6 +36,10 @@ void sanguis::server::waves::simple::process(
 	environment const &env)
 {
 	diff_.update(diff);
+
+	if(!delay_timer.update_b())
+		return;
+
 	if(!spawn_timer.update_b())
 		return;
 
