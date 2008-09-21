@@ -40,6 +40,7 @@ sanguis::draw::model::model(
 			new model_part(
 				p.second,
 				at(i++)));
+	
 }
 
 sge::space_unit
@@ -65,17 +66,7 @@ void sanguis::draw::model::update(
 			master().size());
 
 	BOOST_FOREACH(model_part &p, parts)
-	{
-		p.animation(animation());
 		p.update(time);
-	}
-
-	// TODO: fix this
-	if(dead())
-	{
-		healthbar_.reset();
-		speed(sge::math::vector2(0,0));
-	}
 }
 
 void sanguis::draw::model::orientation(
@@ -98,22 +89,41 @@ bool sanguis::draw::model::may_be_removed() const
 		&& animations_ended();   
 }
 
+void sanguis::draw::model::speed(
+	sge::math::vector2 const &s)
+{
+	animation_type::type const old_anim(
+		animation());
+	
+	sprite::speed(s);
+
+	if(old_anim != animation())
+		change_animation();
+}
+
 void sanguis::draw::model::health(
 	sge::space_unit const health)
 {
 	health_ = health;
 	update_healthbar();
+	
+	if(!dead())
+		return;
+	
+	healthbar_.reset();
+	change_animation();
+	speed(sge::math::vector2(0, 0)); // FIXME
 }
 
 void sanguis::draw::model::max_health(
-	const sge::space_unit max_health)
+	sge::space_unit const max_health)
 {
 	max_health_ = max_health;
 	update_healthbar();
 }
 
 void sanguis::draw::model::weapon(
-	const weapon_type::type weapon_)
+	weapon_type::type const weapon_)
 {
 	BOOST_FOREACH(model_part &p, parts)
 		p.weapon(weapon_);
@@ -126,6 +136,8 @@ void sanguis::draw::model::start_attacking()
 			log(),
 			sge::log::_1 << SGE_TEXT("model::start_attacking(): already attacking!"));
 	attacking = true;
+
+	change_animation();
 }
 
 void sanguis::draw::model::stop_attacking()
@@ -135,6 +147,8 @@ void sanguis::draw::model::stop_attacking()
 			log(),
 			sge::log::_1 << SGE_TEXT("model::stop_attacking(): already not attacking!"));
 	attacking = false;
+
+	change_animation();
 }
 
 void sanguis::draw::model::start_reloading()
@@ -144,6 +158,8 @@ void sanguis::draw::model::start_reloading()
 			log(),
 			sge::log::_1 << SGE_TEXT("model::start_reloading(): already reloading!"));
 	reloading = true;
+
+	change_animation();
 }
 
 void sanguis::draw::model::stop_reloading()
@@ -153,20 +169,28 @@ void sanguis::draw::model::stop_reloading()
 			log(),
 			sge::log::_1 << SGE_TEXT("model::stop_reloading(): already not reloading!"));
 	reloading = false;
+
+	change_animation();
+}
+
+void sanguis::draw::model::change_animation()
+{
+	animation_type::type const nanim(
+		animation());
+	BOOST_FOREACH(model_part &p, parts)
+		p.animation(nanim);
 }
 
 sanguis::animation_type::type
 sanguis::draw::model::animation() const
 {
-	// deploying should be handled in model_part
-	// because the start of the animation type is set to it
 	return dead()
 	? animation_type::dying
 	: reloading
 		? animation_type::reloading
 		: attacking
 			? animation_type::attacking
-			: speed().is_null()
+			: sprite::speed().is_null()
 				? animation_type::none
 				: animation_type::walking;
 }

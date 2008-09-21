@@ -48,9 +48,13 @@ sanguis::draw::player::player(
 
 void sanguis::draw::player::speed(const sge::math::vector2 &v)
 {
-	sprite::speed(v);
+	model::speed(v);
 	if (!v.is_null())
-		model::orientation(*sge::math::angle_to<sge::space_unit>(sge::math::vector2(),v),0);
+		model::orientation(
+			*sge::math::angle_to<sge::space_unit>(
+				sge::math::vector2(),
+				v),
+			0);
 }
 
 void sanguis::draw::player::orientation(const sge::sprite::rotation_type u)

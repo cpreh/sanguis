@@ -34,6 +34,7 @@ public:
 		time_type,
 		entities::entity_with_weapon const &owner);
 	bool reloading() const;
+	bool ready() const;
 	unsigned magazine_size() const;
 	virtual ~weapon();
 protected:

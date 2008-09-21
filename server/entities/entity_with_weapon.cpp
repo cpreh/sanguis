@@ -55,7 +55,7 @@ void sanguis::server::entities::entity_with_weapon::update(
 			send(message_convert<messages::start_reloading>(*this));
 			reloading = true;
 		}
-		else if(reloading)
+		else if(reloading && !active_weapon().reloading())
 		{
 			send(message_convert<messages::stop_reloading>(*this));
 			reloading = false;
@@ -88,7 +88,7 @@ void sanguis::server::entities::entity_with_weapon::update(
 		send(message_convert<messages::start_attacking>(*this));
 		attacking = true;
 	}
-	else if (attacking)
+	else if (attacking && wep.ready())
 	{
 		send(message_convert<messages::stop_attacking>(*this));
 		attacking = false;

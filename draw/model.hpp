@@ -39,6 +39,9 @@ protected:
 		sge::sprite::rotation_type,
 		sprite_vector::size_type index);
 	bool may_be_removed() const;
+	virtual void speed(
+		sge::math::vector2 const &);
+	using sprite::speed;
 private:
 	void health(sge::space_unit);
 	void max_health(sge::space_unit);
@@ -47,6 +50,7 @@ private:
 	void stop_attacking();
 	void start_reloading();
 	void stop_reloading();
+	void change_animation();
 	animation_type::type animation() const;
 	bool dead() const;
 	void update_healthbar();

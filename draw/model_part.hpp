@@ -12,6 +12,7 @@
 #include <sge/sprite/texture_animation.hpp>
 #include <sge/time/types.hpp>
 #include <boost/scoped_ptr.hpp>
+#include <memory>
 
 namespace sanguis
 {
@@ -29,8 +30,18 @@ public:
 	void orientation(sge::sprite::rotation_type);
 	bool animation_ended() const;
 private:
-	void update_animation(
-		bool force);
+	typedef std::auto_ptr<
+		sge::sprite::texture_animation
+	> animation_auto_ptr;
+
+	bool try_animation(
+		weapon_type::type,
+		animation_type::type);
+	
+	animation_auto_ptr get_animation(
+		weapon_type::type,
+		animation_type::type);
+	
 	void update_orientation(
 		sge::sprite::rotation_type);
 	sge::sprite::texture_animation::loop_method::type loop_method() const;
@@ -42,8 +53,10 @@ private:
 	object*                                 ref;
 	animation_type::type                    animation_type_;
 	weapon_type::type                       weapon_type_;
-	boost::scoped_ptr<
-		sge::sprite::texture_animation> animation_;
+	typedef boost::scoped_ptr<
+		sge::sprite::texture_animation
+	> scoped_texture_animation;
+	scoped_texture_animation                animation_;
 	bool                                    ended;
 };
 

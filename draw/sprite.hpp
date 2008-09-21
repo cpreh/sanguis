@@ -35,7 +35,7 @@ protected:
 	const_iterator end() const;
 
 	virtual void orientation(sge::space_unit);
-	virtual void speed(const sge::math::vector2&);
+	virtual void speed(sge::math::vector2 const &);
 	virtual void pos(const sge::sprite::point&);
 	virtual void dim(const sge::sprite::dim&);
 	virtual void color(sge::sprite::color);

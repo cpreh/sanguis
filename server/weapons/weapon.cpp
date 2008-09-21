@@ -98,6 +98,11 @@ bool sanguis::server::weapons::weapon::attack(
 	return true;
 }
 
+bool sanguis::server::weapons::weapon::ready() const
+{
+	return state_ == state::ready;
+}
+
 bool sanguis::server::weapons::weapon::reloading() const
 {
 	return reload_timer.active();	

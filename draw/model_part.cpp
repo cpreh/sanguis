@@ -40,7 +40,9 @@ sanguis::draw::model_part::model_part(
   animation_(),
   ended(false)
 {
-	update_animation(true);
+	animation(animation_type_);
+	weapon(weapon_type_);
+	
 	ref.size() = sge::math::structure_cast<sge::sprite::unit>(
 		info
 		[weapon_type::none]
@@ -51,35 +53,31 @@ sanguis::draw::model_part::model_part(
 void sanguis::draw::model_part::animation(
 	animation_type::type const anim_type)
 {
-	// don't restart an animation unecessarly
-	if(animation_type_ == anim_type)
+	if(try_animation(
+		weapon_type_,
+		anim_type))
 		return;
 	
+	// fallback animations
 	switch(animation_type_) {
-	case animation_type::dying:
+	case animation_type::walking:
 		return;
-	// play those animations to the end
-	case animation_type::attacking:
-	case animation_type::deploying:
-	case animation_type::reloading:
-		if(!ended)
-			return;
 	default:
-		animation_type_ = anim_type;
-		update_animation(
-			false);
+		try_animation(
+			weapon_type_,
+			animation_type::none);
 	}
 }
 
 void sanguis::draw::model_part::weapon(
 	weapon_type::type const weap_type)
 {
-	// don't restart an animation unecessarly
-	if(weapon_type_ == weap_type)
-		return;
-	weapon_type_ = weap_type;
-	update_animation(
-		true);
+	if(!try_animation(
+		weap_type,
+		animation_type_))
+		try_animation(
+			weap_type,
+			animation_type::none);
 }
 
 void sanguis::draw::model_part::update(
@@ -88,20 +86,21 @@ void sanguis::draw::model_part::update(
 	anim_diff_clock.update(
 		time);
 
-	ended = animation_->process() || ended;
+	if(animation_)
+		ended = animation_->process() || ended;
 
 	if(sge::math::compare(desired_orientation, invalid_rotation))
 		return;
 
-	const sge::space_unit abs_angle = sge::math::rel_angle_to_abs(orientation()),
+	sge::space_unit const abs_angle = sge::math::rel_angle_to_abs(orientation()),
 	                      abs_target = sge::math::rel_angle_to_abs(desired_orientation);
 	
-	const sge::space_unit twopi = sge::math::twopi<sge::space_unit>();
+	sge::space_unit const twopi = sge::math::twopi<sge::space_unit>();
 
 	assert(abs_angle >= sge::su(0) && abs_angle <= twopi);
 	assert(abs_target >= sge::su(0) && abs_target <= twopi);
 
-	const sge::space_unit abs_dist = std::abs(abs_target - abs_angle),
+	sge::space_unit const abs_dist = std::abs(abs_target - abs_angle),
 	                      swap_dist = (abs_angle > abs_target) ? twopi-abs_angle+abs_target : twopi-abs_target+abs_angle,
 	                      min_dist = std::min(swap_dist,abs_dist);
 
@@ -137,35 +136,45 @@ bool sanguis::draw::model_part::animation_ended() const
 	return ended;
 }
 
-void sanguis::draw::model_part::update_animation(
-	bool const force)
+bool sanguis::draw::model_part::try_animation(
+	weapon_type::type const wtype,
+	animation_type::type const atype)
 {
 	try
 	{
-		animation_.reset(
-			new sge::sprite::texture_animation(
-				(*info)[weapon_type_]
-					[animation_type_]
-						.get(),
-				loop_method(),
-				ref->explicit_upcast(),
-				anim_diff_clock.callback()));
+		scoped_texture_animation nanim(	
+			get_animation(
+				wtype,
+				atype));
+		animation_.swap(nanim);
 	}
-	catch(load::model::base_animation_not_found const &e)
+	catch(load::model::base_animation_not_found const &)
 	{
-		if(e.anim_type() == animation_type::none)
-			throw;
-		if(animation_ && !force)
-			return;
-		animation_type_ = animation_type::none;
-		update_animation(force);
-		return;
+		return false;
 	}
-	ended = false;
+
+	animation_type_ = atype;
+	weapon_type_ = wtype;
+	return true;
+}
+
+sanguis::draw::model_part::animation_auto_ptr
+sanguis::draw::model_part::get_animation(
+	weapon_type::type const wtype,
+	animation_type::type const atype)
+{
+	return animation_auto_ptr(
+		new sge::sprite::texture_animation(
+			(*info)[wtype]
+				[atype]
+					.get(),
+			loop_method(),
+			ref->explicit_upcast(),
+			anim_diff_clock.callback()));
 }
 
 void sanguis::draw::model_part::update_orientation(
-	const sge::sprite::rotation_type rot)
+	sge::sprite::rotation_type const rot)
 {
 	ref->rotation(rot);
 }
@@ -183,7 +192,8 @@ sanguis::draw::model_part::loop_method() const
 	case animation_type::deploying:
 		return sge::sprite::texture_animation::loop_method::stop_at_end;
 	default:
-		throw sge::exception(SGE_TEXT("Invalid animation_type in model_part!"));
+		throw sge::exception(
+			SGE_TEXT("Invalid animation_type in model_part!"));
 	}
 }
 
