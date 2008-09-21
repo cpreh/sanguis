@@ -268,10 +268,10 @@ sanguis::server::states::running::operator()(
 				new_player)));
 
 	// TODO: some defaults here
-	p.add_weapon(
+	/*p.add_weapon(
 		weapons::create(
 			weapon_type::melee,
-			get_environment()));
+			get_environment()));*/
 	p.add_weapon(
 		weapons::create(
 			weapon_type::pistol,

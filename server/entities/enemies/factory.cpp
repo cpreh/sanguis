@@ -2,7 +2,7 @@
 #include "enemy.hpp"
 #include "../../damage_types.hpp"
 #include "../../ai/simple.hpp"
-#include "../../weapons/factory.hpp"
+#include "../../weapons/melee.hpp"
 #include <sge/exception.hpp>
 #include <sge/text.hpp>
 #include <boost/assign/list_of.hpp>
@@ -33,9 +33,13 @@ sanguis::server::entities::enemies::create(
 					 entities::property(messages::mu(50))),
 				ai::ai_ptr(
 					new ai::simple()),
-				weapons::create(
-					weapon_type::melee,
-					env), // TODO
+				weapons::weapon_ptr(
+					new weapons::melee(
+						env,
+						messages::mu(100), // range
+						static_cast<time_type>(2), // cd
+						messages::mu(4) // damage
+					)),
 				1,
 				static_cast<messages::exp_type>(10)
 				));
@@ -57,9 +61,13 @@ sanguis::server::entities::enemies::create(
 					 entities::property(messages::mu(80))),
 				ai::ai_ptr(
 					new ai::simple()),
-				weapons::create(
-					weapon_type::melee,
-					env), // TODO
+				weapons::weapon_ptr(
+					new weapons::melee(
+						env,
+						messages::mu(50), // range
+						static_cast<time_type>(1), // cd
+						messages::mu(1) // damage
+					)),
 				1,
 				static_cast<messages::exp_type>(5)
 				));

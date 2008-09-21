@@ -1,5 +1,4 @@
 #include "factory.hpp"
-#include "melee.hpp"
 #include "pistol.hpp"
 #include "shotgun.hpp"
 #include "rocket_launcher.hpp"
@@ -13,14 +12,8 @@ sanguis::server::weapons::create(
 {
 	switch(type) {
 	case weapon_type::melee:
-		return weapon_ptr(
-			new melee(
-				env,
-				type,
-				messages::mu(100),
-				static_cast<time_type>(2),
-				messages::mu(2)
-				));
+		throw sge::exception(
+			SGE_TEXT("Please create melee weapons directly, not through the weapon factory!"));
 	case weapon_type::pistol:
 		return weapon_ptr(
 			new pistol(
