@@ -24,7 +24,7 @@ public:
 	model_part(
 		load::model::part const &,
 		object &ref);
-	void animation(animation_type::type);
+	bool animation(animation_type::type);
 	void weapon(weapon_type::type);
 	void update(time_type time);
 	void orientation(sge::sprite::rotation_type);
@@ -35,7 +35,6 @@ private:
 	> animation_auto_ptr;
 
 	bool try_animation(
-		weapon_type::type,
 		animation_type::type);
 	
 	animation_auto_ptr get_animation(

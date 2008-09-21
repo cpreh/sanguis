@@ -7,6 +7,7 @@
 #include "../client/id_dont_care.hpp"
 #include <sge/log/logger.hpp>
 #include <sge/text.hpp>
+#include <sge/exception.hpp>
 #include <boost/foreach.hpp>
 #include <ostream>
 
@@ -40,7 +41,8 @@ sanguis::draw::model::model(
 			new model_part(
 				p.second,
 				at(i++)));
-	
+	change_animation(
+		animation_type::deploying);
 }
 
 sge::space_unit
@@ -92,12 +94,12 @@ bool sanguis::draw::model::may_be_removed() const
 void sanguis::draw::model::speed(
 	sge::math::vector2 const &s)
 {
-	animation_type::type const old_anim(
-		animation());
+	sge::math::vector2 const old_speed(
+		speed());
 	
 	sprite::speed(s);
 
-	if(old_anim != animation())
+	if(s.is_null() != old_speed.is_null())
 		change_animation();
 }
 
@@ -127,6 +129,7 @@ void sanguis::draw::model::weapon(
 {
 	BOOST_FOREACH(model_part &p, parts)
 		p.weapon(weapon_);
+	change_animation();
 }
 
 void sanguis::draw::model::start_attacking()
@@ -175,10 +178,42 @@ void sanguis::draw::model::stop_reloading()
 
 void sanguis::draw::model::change_animation()
 {
-	animation_type::type const nanim(
+	change_animation(
 		animation());
+}
+
+void sanguis::draw::model::change_animation(
+	animation_type::type const nanim)
+{
 	BOOST_FOREACH(model_part &p, parts)
-		p.animation(nanim);
+	{
+		animation_type::type part_anim(
+			nanim);
+		while(!p.animation(part_anim))
+			part_anim = fallback_anim(part_anim);
+	}
+}
+
+sanguis::animation_type::type
+sanguis::draw::model::fallback_anim(
+	animation_type::type const anim) const
+{
+	switch(anim) {
+	case animation_type::none:
+		return animation_type::size;
+	case animation_type::attacking:
+	case animation_type::reloading:
+		return speed().is_null()
+		? animation_type::none
+		: animation_type::walking;
+	case animation_type::deploying:
+	case animation_type::walking:
+	case animation_type::dying:
+		return animation_type::none;
+	default:
+		throw sge::exception(
+			SGE_TEXT("Invalid animation in fallback_anim!"));
+	}
 }
 
 sanguis::animation_type::type

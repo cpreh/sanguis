@@ -35,14 +35,11 @@ sanguis::draw::model_part::model_part(
 	invalid_rotation),
   info(&info),
   ref(&ref),
-  animation_type_(animation_type::deploying),
-  weapon_type_(weapon_type::none),
+  animation_type_(animation_type::size),
+  weapon_type_(weapon_type::size),
   animation_(),
   ended(false)
 {
-	animation(animation_type_);
-	weapon(weapon_type_);
-	
 	ref.size() = sge::math::structure_cast<sge::sprite::unit>(
 		info
 		[weapon_type::none]
@@ -50,34 +47,22 @@ sanguis::draw::model_part::model_part(
 		.get().dim());
 }
 
-void sanguis::draw::model_part::animation(
-	animation_type::type const anim_type)
+bool sanguis::draw::model_part::animation(
+	animation_type::type const atype)
 {
-	if(try_animation(
-		weapon_type_,
-		anim_type))
-		return;
-	
-	// fallback animations
-	switch(animation_type_) {
-	case animation_type::walking:
-		return;
-	default:
-		try_animation(
-			weapon_type_,
-			animation_type::none);
-	}
+	return atype == animation_type_
+	? true
+	: try_animation(
+		atype);
 }
 
 void sanguis::draw::model_part::weapon(
-	weapon_type::type const weap_type)
+	weapon_type::type const wtype)
 {
-	if(!try_animation(
-		weap_type,
-		animation_type_))
-		try_animation(
-			weap_type,
-			animation_type::none);
+	// we lose the animation here
+	// which model has to reset
+	weapon_type_ = wtype;
+	animation_type_ = animation_type::size;
 }
 
 void sanguis::draw::model_part::update(
@@ -92,17 +77,23 @@ void sanguis::draw::model_part::update(
 	if(sge::math::compare(desired_orientation, invalid_rotation))
 		return;
 
-	sge::space_unit const abs_angle = sge::math::rel_angle_to_abs(orientation()),
-	                      abs_target = sge::math::rel_angle_to_abs(desired_orientation);
+	sge::space_unit const
+		abs_angle(
+			sge::math::rel_angle_to_abs(
+				orientation())),
+		abs_target(
+			sge::math::rel_angle_to_abs(
+				desired_orientation));
 	
 	sge::space_unit const twopi = sge::math::twopi<sge::space_unit>();
 
 	assert(abs_angle >= sge::su(0) && abs_angle <= twopi);
 	assert(abs_target >= sge::su(0) && abs_target <= twopi);
 
-	sge::space_unit const abs_dist = std::abs(abs_target - abs_angle),
-	                      swap_dist = (abs_angle > abs_target) ? twopi-abs_angle+abs_target : twopi-abs_target+abs_angle,
-	                      min_dist = std::min(swap_dist,abs_dist);
+	sge::space_unit const
+		abs_dist = std::abs(abs_target - abs_angle),
+		swap_dist = (abs_angle > abs_target) ? twopi-abs_angle+abs_target : twopi-abs_target+abs_angle,
+		min_dist = std::min(swap_dist,abs_dist);
 
 	assert(abs_dist >= sge::su(0) && swap_dist >= sge::su(0) && min_dist >= sge::su(0));
 
@@ -137,14 +128,13 @@ bool sanguis::draw::model_part::animation_ended() const
 }
 
 bool sanguis::draw::model_part::try_animation(
-	weapon_type::type const wtype,
 	animation_type::type const atype)
 {
 	try
 	{
 		scoped_texture_animation nanim(	
 			get_animation(
-				wtype,
+				weapon_type_,
 				atype));
 		animation_.swap(nanim);
 	}
@@ -154,7 +144,6 @@ bool sanguis::draw::model_part::try_animation(
 	}
 
 	animation_type_ = atype;
-	weapon_type_ = wtype;
 	return true;
 }
 

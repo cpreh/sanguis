@@ -51,7 +51,11 @@ private:
 	void start_reloading();
 	void stop_reloading();
 	void change_animation();
+	void change_animation(
+		animation_type::type);
 	animation_type::type animation() const;
+	animation_type::type fallback_anim(
+		animation_type::type) const;
 	bool dead() const;
 	void update_healthbar();
 	bool animations_ended() const;
