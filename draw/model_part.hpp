@@ -44,7 +44,10 @@ private:
 	
 	void update_orientation(
 		sge::sprite::rotation_type);
-	sge::sprite::texture_animation::loop_method::type loop_method() const;
+
+	static sge::sprite::texture_animation::loop_method::type
+	loop_method(
+		animation_type::type);
 	sge::sprite::rotation_type orientation() const;
 
 	diff_clock                              anim_diff_clock;

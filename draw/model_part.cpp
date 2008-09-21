@@ -168,7 +168,8 @@ sanguis::draw::model_part::get_animation(
 			(*info)[wtype]
 				[atype]
 					.get(),
-			loop_method(),
+			loop_method(
+				atype),
 			ref->explicit_upcast(),
 			anim_diff_clock.callback()));
 }
@@ -180,9 +181,10 @@ void sanguis::draw::model_part::update_orientation(
 }
 
 sge::sprite::texture_animation::loop_method::type
-sanguis::draw::model_part::loop_method() const
+sanguis::draw::model_part::loop_method(
+	animation_type::type const atype)
 {
-	switch(animation_type_) {
+	switch(atype) {
 	case animation_type::none:
 	case animation_type::walking:
 	case animation_type::attacking:
