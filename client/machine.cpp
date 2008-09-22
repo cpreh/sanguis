@@ -5,7 +5,6 @@
 #include "../serialization.hpp"
 #include "message_event.hpp"
 #include <sge/renderer/scoped_block.hpp>
-#include <sge/renderer/scoped_state.hpp>
 #include <sge/iostream.hpp>
 #include <boost/bind.hpp>
 #include <boost/lambda/bind.hpp>
@@ -102,11 +101,7 @@ bool sanguis::client::machine::process(
 
 	net_.process();
 
-	const sge::renderer::scoped_block block_(sys.renderer);
-	sys.renderer->set_state(
-		sge::renderer::state_list
-			(sge::renderer::bool_state::clear_backbuffer=true)
-	);
+	sge::renderer::scoped_block const block_(sys.renderer);
 	process_event(t);
 
 	if (con.active())

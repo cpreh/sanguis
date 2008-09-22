@@ -71,7 +71,7 @@ sanguis::server::entities::enemies::create(
 				1,
 				static_cast<messages::exp_type>(5)
 				));
-  case enemy_type::spider:
+	case enemy_type::spider:
 		return auto_ptr(
 			new enemy(
 				etype,

@@ -6,7 +6,7 @@
 sanguis::server::waves::generator::generator()
 {
 	boost::assign::ptr_push_back<waves::simple>(waves)
-  (
+	(
 		static_cast<time_type>(0),
 		static_cast<time_type>(5),
 		50,
