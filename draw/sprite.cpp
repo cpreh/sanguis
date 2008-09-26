@@ -16,11 +16,7 @@ sanguis::draw::sprite::sprite(
 		sprites.push_back(
 			object(
 				get_system(),
-				order,
-				boost::none,
-				boost::none,
-				boost::none,
-				boost::none));
+				order));
 }
 
 sge::sprite::point const

@@ -12,11 +12,11 @@ boost::statechart::result
 sanguis::client::start_state::react(
 	tick_event const &)
 {
+	
 	context<machine>().renderer()->set_state(
 		sge::renderer::state::list
-			(sge::renderer::state::bool_::clear_backbuffer = true)
-			(sge::renderer::state::bool_::clear_zbuffer = true)
-			(sge::renderer::state::float_::zbuffer_clear_val = 0)
+			(sge::renderer::state::bool_::clear_backbuffer = false)
+			(sge::renderer::state::bool_::clear_zbuffer = false)
 	);
 
 	return transit<intermediate_state>();

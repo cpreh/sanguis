@@ -61,7 +61,7 @@ FILE (GLOB files
 ADD_EXECUTABLE(sanguis ${files})
 TARGET_LINK_LIBRARIES(sanguis sgecore)
 
-IF(NOT ${MSVC})
+IF(NOT MSVC)
 	TARGET_LINK_LIBRARIES(sanguis boost_serialization boost_thread
 		boost_program_options sgecore)
 ENDIF()
