@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_PROPERTY_HPP_INCLUDED
 
 #include "../types.hpp"
+#undef max // TODO: find out where windows.h comes from!
 
 namespace sanguis
 {

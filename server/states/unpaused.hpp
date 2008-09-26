@@ -16,7 +16,7 @@ namespace server
 {
 
 struct message_event;
-class environment;
+struct environment;
 
 namespace states
 {

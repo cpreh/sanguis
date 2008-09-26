@@ -15,6 +15,7 @@
 #include <sge/console/console.hpp>
 #include <sge/systems.hpp>
 #include <sge/init.hpp>
+#include <sge/iconv.hpp>
 #include <sge/log/level.hpp>
 #include <sge/log/logger.hpp>
 #include <sge/log/level_string.hpp>
@@ -49,7 +50,7 @@ try
 
 	net::address_type dest_server;
 	net::port_type host_port,dest_port;
-	sge::string log_level;
+	std::string log_level;
 
 	desc.add_options()
 	    ("help",
@@ -64,7 +65,7 @@ try
 				po::value<net::port_type>(&host_port)->default_value(1337),
 				"sets the port to listen to for games")
 			("log",
-				po::value<sge::string>(&log_level)->default_value(sge::string(SGE_TEXT("warning"))),
+				po::value<std::string>(&log_level)->default_value(std::string("warning")),
 				"sets the maximum logging level (one of debug, info, warning, error, fatal in that order)");
 	
 	po::variables_map vm;
@@ -84,12 +85,13 @@ try
 
 	if (vm.count("help"))
 	{
-		std::cout << desc << "\n";
+		std::cout << desc << '\n';
 		return EXIT_SUCCESS;
 	}
 
-	sge::cerr << "activating level " << sge::log::level_from_string(log_level) << "\n";
-	sanguis::log().activate_hierarchy(sge::log::level_from_string(log_level));
+	sanguis::log().activate_hierarchy(
+		sge::log::level_from_string(
+			sge::iconv(log_level)));
 
 	sge::systems sys;
 
@@ -116,7 +118,9 @@ try
 	const sge::font::font_ptr console_font(new sge::font::font(metrics,drawer));
 
 	sge::con::console_gfx console(sys.renderer,
-		sge::texture::add(texman,sys.image_loader->load_image(sanguis::media_path()/"console_back.jpg")),
+		sge::texture::add(
+			texman,sys.image_loader->load_image(
+				sanguis::media_path() / SGE_TEXT("console_back.jpg"))),
 		console_font,
 		sys.input_system,
 		sge::sprite::point(0,0),
@@ -146,6 +150,6 @@ try
 	sge::cerr << SGE_TEXT("caught sge exception: ") << e.what() << SGE_TEXT('\n');
 	return EXIT_FAILURE;
 } catch (std::exception const &e) {
-	std::cerr << "caught standard exception: " << e.what() << SGE_TEXT('\n');
+	std::cerr << "caught standard exception: " << e.what() << '\n';
 	return EXIT_FAILURE;
 }

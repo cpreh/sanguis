@@ -68,8 +68,9 @@ void net::server::accept_handler(const boost::system::error_code &e,connection &
 	std::clog << "net_server: accepting a connection\n";
 #endif
 
-	int flag = 1;
-	setsockopt(c.socket.native(), IPPROTO_TCP, TCP_NODELAY, &flag, sizeof(int));
+	// FIXME
+	//int flag = 1;
+	//setsockopt(c.socket.native(), IPPROTO_TCP, TCP_NODELAY, &flag, sizeof(int));
 	
 	/*
 	asio::socket_base::receive_buffer_size option(1);

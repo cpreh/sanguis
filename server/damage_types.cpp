@@ -34,7 +34,7 @@ sanguis::server::damage::list &sanguis::server::damage::list::operator()(meta co
 	return *this;
 }
 
-sanguis::server::damage::list::operator damage_array() const
+sanguis::server::damage::list::operator sanguis::damage_array() const
 {
 	return array;
 }

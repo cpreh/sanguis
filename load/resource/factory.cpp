@@ -104,7 +104,7 @@ environment::load_animation(
 		const_delay.reset(
 			sge::time::millisecond(
 				boost::lexical_cast<sge::time::unit>(
-					line.substr(sge::string("frame_length ").length()))));
+					line.substr(sge::string(SGE_TEXT("frame_length ")).length()))));
 	else
 		file.seekg(0,std::ios_base::beg);
 	

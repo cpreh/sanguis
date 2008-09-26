@@ -13,8 +13,8 @@ sanguis::draw::simple_sprite::simple_sprite(
   	sys,
 	order,
   	sge::sprite::point(
-		sge::su(0),
-		sge::su(0)),
+		0,
+		0),
 	tex,
 	sge::sprite::texture_dim)
 {}
