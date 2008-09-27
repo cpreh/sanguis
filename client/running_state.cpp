@@ -12,6 +12,9 @@
 #include "../messages/remove.hpp"
 #include "../messages/unpause.hpp"
 #include "../draw/coord_transform.hpp"
+#include <sge/renderer/state/list.hpp>
+#include <sge/renderer/state/var.hpp>
+#include <sge/renderer/state/states.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
 
@@ -41,6 +44,12 @@ sanguis::client::running_state::running_state(
 		context<machine>().con_wrapper().register_callback(
 			boost::bind(&input_handler::input_callback, &input, _1)))
 {
+	context<machine>().renderer()->set_state(
+		sge::renderer::state::list
+			(sge::renderer::state::bool_::clear_backbuffer = false)
+			(sge::renderer::state::bool_::clear_zbuffer = false)
+	);
+
 	drawer.process_message(
 		client_messages::add(
 			::cursor_id,
