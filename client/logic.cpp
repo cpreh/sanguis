@@ -136,7 +136,7 @@ void sanguis::client::logic::handle_rotation_x(
 		cursor_pos_.x(),
 		0,
 		static_cast<sge::sprite::unit>(
-			rend->screen_width()));
+			rend->screen_size().w()));
 	
 	update_rotation();
 }
@@ -149,7 +149,7 @@ void sanguis::client::logic::handle_rotation_y(
 		cursor_pos_.y(),
 		0,
 		static_cast<sge::sprite::unit>(
-			rend->screen_height()));
+			rend->screen_size().h()));
 
 	update_rotation();
 }

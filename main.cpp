@@ -124,7 +124,10 @@ try
 		console_font,
 		sys.input_system,
 		sge::sprite::point(0,0),
-		sge::sprite::dim(sys.renderer->screen_width(),static_cast<sge::sprite::unit>(sys.renderer->screen_height()/2)));
+		sge::sprite::dim(
+			sys.renderer->screen_size().w(),
+			static_cast<sge::sprite::unit>(
+				sys.renderer->screen_size().h() / 2)));
 	
 	sanguis::server::machine server(sys, console, host_port);
 	server.initiate();
