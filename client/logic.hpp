@@ -8,7 +8,7 @@
 #include "../messages/fwd.hpp"
 #include <sge/sprite/types.hpp>
 #include <sge/math/vector.hpp>
-#include <sge/renderer/device.hpp>
+#include <sge/renderer/device_fwd.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/function.hpp>
 #include <vector>

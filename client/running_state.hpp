@@ -11,7 +11,6 @@
 #include "machine.hpp"
 #include "input_handler.hpp"
 #include "logic.hpp"
-#include <sge/math/vector.hpp>
 #include <sge/scoped_connection.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>

@@ -2,10 +2,11 @@
 #define SANGUIS_DRAW_RESOURCE_FACTORY_HPP_INCLUDED
 
 #include <sge/string.hpp>
+#include <sge/path.hpp>
 #include <sge/sprite/animation_series.hpp>
-#include <sge/texture/part.hpp>
-#include <sge/renderer/device.hpp>
-#include <sge/image/loader.hpp>
+#include <sge/texture/part_fwd.hpp>
+#include <sge/renderer/device_fwd.hpp>
+#include <sge/image/loader_fwd.hpp>
 #include <boost/noncopyable.hpp>
 
 namespace sanguis

@@ -12,6 +12,7 @@
 #include "../cyclic_iterator_impl.hpp"
 #include <sge/math/clamp.hpp>
 #include <sge/math/angle.hpp>
+#include <sge/renderer/device.hpp>
 #include <boost/bind.hpp>
 #include <boost/assign/list_of.hpp>
 #include <boost/optional.hpp>

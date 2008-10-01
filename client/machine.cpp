@@ -4,14 +4,16 @@
 #include "../messages/add.hpp"
 #include "../serialization.hpp"
 #include "message_event.hpp"
+#include <sge/systems/instance.hpp>
 #include <sge/renderer/scoped_block.hpp>
 #include <sge/iostream.hpp>
+#include <sge/window.hpp>
 #include <boost/bind.hpp>
 #include <boost/lambda/bind.hpp>
 #include <boost/lambda/construct.hpp>
 
 sanguis::client::machine::machine(
-	sge::systems &sys,
+	sge::systems::instance &sys,
 	sge::font::font &font_,
 	sge::input::key_state_tracker &ks,
 	sge::con::console_gfx &con,
@@ -27,9 +29,9 @@ sanguis::client::machine::machine(
   font_(font_),
   ks(ks),
   con(con),
-  con_stdlib(boost::bind(&sge::con::console_gfx::print,&con,_1)),
-  con_wrapper_(con,sys.input_system,sge::input::kc::key_f1),
-  resource_connection(sys.image_loader,sys.renderer)
+  con_stdlib(boost::bind(&sge::con::console_gfx::print, &con, _1)),
+  con_wrapper_(con, sys.input_system(), sge::input::kc::key_f1),
+  resource_connection(sys.image_loader(), sys.renderer())
 {}
 
 void sanguis::client::machine::connect()
@@ -101,7 +103,7 @@ bool sanguis::client::machine::process(
 
 	net_.process();
 
-	sge::renderer::scoped_block const block_(sys.renderer);
+	sge::renderer::scoped_block const block_(sys.renderer());
 	process_event(t);
 
 	if (con.active())
@@ -114,13 +116,13 @@ void sanguis::client::machine::dispatch()
 {
 	sge::window::dispatch();
 
-	sys.input_system->dispatch();
+	sys.input_system()->dispatch();
 }
 
 sge::renderer::device_ptr const
 sanguis::client::machine::renderer() const
 {
-	return sys.renderer;
+	return sys.renderer();
 }
 
 sge::font::font &

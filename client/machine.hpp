@@ -9,10 +9,12 @@
 #include "console_wrapper.hpp"
 
 #include <sge/font/fwd.hpp>
+#include <sge/input/key_type.hpp>
 #include <sge/input/key_state_tracker.hpp> // TODO: remove me!
-#include <sge/systems.hpp>
-#include <sge/console/console_gfx.hpp>
+#include <sge/systems/instance_fwd.hpp>
+#include <sge/console/console_gfx.hpp> // TODO: remove me!
 #include <sge/console/stdlib.hpp>
+#include <sge/renderer/device_fwd.hpp>
 
 #include <boost/statechart/state_machine.hpp>
 
@@ -28,7 +30,7 @@ struct machine
 {
 public:
 	machine(
-		sge::systems &,
+		sge::systems::instance &,
 		sge::font::font &,
 		sge::input::key_state_tracker &,
 		sge::con::console_gfx &,
@@ -64,7 +66,7 @@ private:
 	                               s_data;
 	net::data_type in_buffer,
 	               out_buffer;
-	sge::systems &sys;
+	sge::systems::instance &sys;
 	sge::font::font &font_;
 	sge::input::key_state_tracker &ks;
 	sge::con::console_gfx &con;

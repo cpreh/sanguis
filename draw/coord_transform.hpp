@@ -3,7 +3,7 @@
 
 #include "../messages/types.hpp"
 #include <sge/sprite/types.hpp>
-#include <sge/renderer/types.hpp>
+#include <sge/renderer/screen_types.hpp>
 
 namespace sanguis
 {

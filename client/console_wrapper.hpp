@@ -1,8 +1,11 @@
 #ifndef SANGUIS_CLIENT_MACHINE_CONSOLE_WRAPPER_HPP_INCLUDED
 #define SANGUIS_CLIENT_MACHINE_CONSOLE_WRAPPER_HPP_INCLUDED
 
-#include <sge/console/console_gfx.hpp>
+#include <sge/console/console_gfx.hpp> // TODO: use a declaration!
+#include <sge/input/system_fwd.hpp>
 #include <sge/input/system.hpp>
+#include <sge/input/key_type.hpp>
+#include <sge/scoped_connection.hpp>
 
 #include <boost/signals.hpp>
 

@@ -148,7 +148,7 @@ environment::load_animation(
 
 sge::texture::part_ptr const environment::load_texture_inner(const sge::path& p)
 {
-	return sge::texture::add(texman,il->load_image(p));
+	return sge::texture::add(texman,il->load(p));
 }
 
 sge::texture::part_ptr const environment::load_texture(const sanguis::load::resource::identifier_type& id)
