@@ -113,6 +113,13 @@ unsigned sanguis::server::weapons::weapon::magazine_size() const
 	return magazine_size_;
 }
 
+bool sanguis::server::weapons::weapon::in_range(
+	entities::entity const& from,
+	pos_type const& to) const
+{
+	return (from.center() - to).length() < range();
+}
+
 sanguis::server::weapons::weapon::~weapon()
 {}
 
@@ -177,13 +184,6 @@ sanguis::server::weapons::weapon::insert(
 	entities::auto_ptr e)
 {
 	return env_.insert(e);
-}
-
-bool sanguis::server::weapons::weapon::in_range(
-	entities::entity const& from,
-	pos_type const& to) const
-{
-	return (from.center() - to).length() < range();
 }
 
 sge::log::logger &
