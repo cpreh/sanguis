@@ -80,6 +80,7 @@ void sanguis::server::entities::projectiles::projectile::update(
 	{
 		if(e.team() != team()
 		&& !e.dead()
+		&& !e.invulnerable()
 		&& collides(
 			e,
 			*this))
