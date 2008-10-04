@@ -1,7 +1,8 @@
 #ifndef SANGUIS_CLIENT_INPUT_HANDLER_HPP_INCLUDED
 #define SANGUIS_CLIENT_INPUT_HANDLER_HPP_INCLUDED
 
-#include <sge/input/key_type.hpp>
+#include <sge/input/key_pair.hpp> // TODO: declaration
+#include <sge/input/key_state.hpp>
 #include <boost/function.hpp>
 
 namespace sanguis
@@ -13,7 +14,7 @@ struct player_action;
 
 class input_handler {
 public:
-	typedef boost::function<void (const player_action&)> post_fun;
+	typedef boost::function<void (player_action const &)> post_fun;
 	input_handler(const post_fun&);
 	void input_callback(const sge::input::key_pair&);
 private:
