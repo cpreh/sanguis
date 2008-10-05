@@ -19,7 +19,7 @@ class connection : boost::noncopyable
 	connection(
 		sge::image::loader_ptr,
 		sge::renderer::device_ptr,
-		sge::audio::multi_loader,
+		sge::audio::multi_loader &,
 		sge::audio::player_ptr);
 	~connection();
 };

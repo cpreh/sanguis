@@ -1,5 +1,21 @@
 #include "environment.hpp"
+#include "../../media_path.hpp"
+#include "../../log_headers.hpp"
+#include "../../exception.hpp"
+#include "../log.hpp"
+#include <sge/texture/default_creator.hpp>
+#include <sge/fstream.hpp>
+#include <sge/sstream.hpp>
+#include <sge/media.hpp>
+#include <sge/texture/no_fragmented.hpp>
+#include <sge/texture/util.hpp>
+#include <sge/image/loader.hpp>
+#include <sge/time/millisecond.hpp>
+#include <boost/optional.hpp>
 #include <boost/bind.hpp>
+#include <boost/lexical_cast.hpp>
+#include <boost/algorithm/string/predicate.hpp>
+#include <boost/algorithm/string/trim.hpp>
 
 namespace
 {
@@ -11,10 +27,16 @@ Mapped const& map_get_or_create(std::map<Key, Mapped, Comp, Alloc>& map, Key con
 }
 }
 
+sanguis::load::resource::environment *&sanguis::load::resource::global_env()
+{
+	static environment *ptr = 0;
+	return ptr;
+}
+
 sanguis::load::resource::environment::environment(
 	sge::image::loader_ptr const il,
 	sge::renderer::device_ptr const r,
-	sge::audio::multi_loader const ml,
+	sge::audio::multi_loader &ml,
 	sge::audio::player_ptr const player) 
 : rend(r),
   il(il),
@@ -33,7 +55,10 @@ sge::sprite::animation_series const
 sanguis::load::resource::environment::load_animation(
 	sge::path const& dir)
 {
-	return map_get_or_create(animations, path, boost::bind(&enviroment::do_load_animation,this));
+	return map_get_or_create(
+		animations, 
+		dir, 
+		boost::bind(&environment::do_load_animation,this,_1));
 }
 
 sge::sprite::animation_series const
@@ -124,35 +149,39 @@ sanguis::load::resource::environment::do_load_animation(
 sge::texture::part_ptr const sanguis::load::resource::environment::do_load_texture_inner(
 	sge::path const &p)
 {
-	return sge::texture::add(texman,il->load_image(p));
+	return sge::texture::add(texman,il->load(p));
 }
 
 sge::audio::sound_ptr const sanguis::load::resource::environment::load_sound(
 	sge::path const &dir)
 {
-	return map_get_or_create(sounds, p, boost::bind(&environment::do_load_sound,this));
+	return map_get_or_create(
+		sounds, 
+		dir, 
+		boost::bind(&environment::do_load_sound,this,_1));
 }
 
 sge::audio::sound_ptr const sanguis::load::resource::environment::do_load_sound(
 	sge::path const &dir)
 {
 	return sge::audio::sound_ptr();
-	//if (!boost::filesystem::exists(dir) || !boost::filesystem::is_directory(dir))
-	//	throw exception(SGE_TEXT("directory for sound \"")+dir.string()+SGE_TEXT("\" doesn't exist"));
 }
 
 sge::texture::part_ptr const sanguis::load::resource::environment::load_texture(
 	sanguis::load::resource::identifier_type const&id)
 {
-	return map_get_or_create(textures, id, boost::bind(&environment::do_load_texture,this));
+	return map_get_or_create(
+		textures, 
+		id, 
+		boost::bind(&environment::do_load_texture,this,_1));
 }
 
 sge::texture::part_ptr const sanguis::load::resource::environment::do_load_texture(
 	sanguis::load::resource::identifier_type const&id)
 {
-	if (textures.find(id) == textures.end())
+	if (texture_names.find(id) == texture_names.end())
 		throw exception(SGE_TEXT("no texture for id \"")+id+SGE_TEXT("\" found"));
-	return do_load_texture_inner(sanguis::media_path()/textures[id]);
+	return do_load_texture_inner(sanguis::media_path()/texture_names[id]);
 }
 
 void sanguis::load::resource::environment::load_textures()
@@ -193,7 +222,7 @@ void sanguis::load::resource::environment::load_textures()
 						<< SGE_TEXT('!'));
 				continue;
 			}
-			textures[line.substr(0,equal)] = line.substr(equal+1);
+			texture_names[line.substr(0,equal)] = line.substr(equal+1);
 		}
 	}
 }

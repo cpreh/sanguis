@@ -13,7 +13,6 @@
 #include <boost/foreach.hpp>
 
 sanguis::server::machine::machine(
-	sge::systems::instance &sys,
 	sge::con::console_gfx &con,
 	net::port_type const port_)
 :
@@ -28,9 +27,6 @@ sanguis::server::machine::machine(
 	s_data(
 		net_.register_data(
 			boost::bind(&machine::data_callback,this,_1,_2))),
-	resource_connection(
-		sys.image_loader(),
-		sys.renderer()),
 	con(con)
 {}
 

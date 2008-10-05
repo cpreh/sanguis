@@ -3,7 +3,6 @@
 
 #include "../messages/base.hpp"
 #include "../net/client.hpp"
-#include "../load/resource/factory.hpp"
 #include "../load/model/singleton.hpp"
 #include "../tick_event.hpp"
 #include "console_wrapper.hpp"
@@ -72,7 +71,6 @@ private:
 	sge::con::console_gfx &con;
 	sge::con::stdlib con_stdlib;
 	console_wrapper con_wrapper_;
-	load::resource::connection resource_connection;
 	load::model::connection model_connection;
 };
 

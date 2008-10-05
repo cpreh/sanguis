@@ -7,6 +7,7 @@
 #include <sge/texture/part_fwd.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image/loader_fwd.hpp>
+#include <sge/audio/sound_fwd.hpp>
 #include <boost/noncopyable.hpp>
 
 namespace sanguis

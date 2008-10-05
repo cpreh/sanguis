@@ -1,4 +1,6 @@
 #include "console_wrapper.hpp"
+#include <sge/math/compare.hpp>
+#include <sge/console/console_gfx.hpp>
 #include <sge/input/system.hpp>
 #include <boost/bind.hpp>
 

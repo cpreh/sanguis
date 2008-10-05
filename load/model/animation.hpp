@@ -3,6 +3,7 @@
 
 #include <sge/path.hpp>
 #include <sge/sprite/animation_series.hpp>
+#include <sge/audio/sound_fwd.hpp>
 #include <boost/shared_ptr.hpp>
 
 namespace sanguis

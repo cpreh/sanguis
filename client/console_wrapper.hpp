@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_MACHINE_CONSOLE_WRAPPER_HPP_INCLUDED
 #define SANGUIS_CLIENT_MACHINE_CONSOLE_WRAPPER_HPP_INCLUDED
 
-#include <sge/console/console_gfx.hpp> // TODO: use a declaration!
+#include <sge/console/console_gfx_fwd.hpp>
 #include <sge/input/system_fwd.hpp>
 #include <sge/input/key_code.hpp> // TODO: declaration
 #include <sge/input/key_pair.hpp> // TODO: declaration

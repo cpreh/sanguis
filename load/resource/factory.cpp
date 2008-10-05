@@ -4,10 +4,10 @@
 
 namespace
 {
-environment &get_env()
+sanguis::load::resource::environment &get_env()
 {
 	if (!sanguis::load::resource::global_env())
-		throw exception(SGE_TEXT("no resource connection found"));
+		throw sanguis::exception(SGE_TEXT("no resource connection found"));
 	return *sanguis::load::resource::global_env();
 }
 }
@@ -21,7 +21,7 @@ sanguis::load::resource::animation(sge::path const& path)
 sge::audio::sound_ptr const
 sanguis::load::resource::sound(sge::path const &p)
 {
-	return get_env().load_sound(path);
+	return get_env().load_sound(p);
 }
 
 const sge::texture::part_ptr

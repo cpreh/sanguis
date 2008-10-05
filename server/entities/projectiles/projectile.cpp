@@ -117,7 +117,7 @@ to_entity_type(
 	case sanguis::projectile_type::melee:
 		return sanguis::entity_type::indeterminate;
 	default:
-		throw exception(
+		throw sanguis::exception(
 			SGE_TEXT("Invalid projectile type in to_entity_type()!"));
 	}
 }

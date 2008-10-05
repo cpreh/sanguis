@@ -30,8 +30,7 @@ sanguis::client::machine::machine(
   ks(ks),
   con(con),
   con_stdlib(boost::bind(&sge::con::console_gfx::print, &con, _1)),
-  con_wrapper_(con, sys.input_system(), sge::input::kc::key_f1),
-  resource_connection(sys.image_loader(), sys.renderer())
+  con_wrapper_(con, sys.input_system(), sge::input::kc::key_f1)
 {}
 
 void sanguis::client::machine::connect()

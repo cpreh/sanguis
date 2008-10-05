@@ -3,6 +3,7 @@
 #include "server/states/start.hpp"
 #include "client/machine.hpp"
 #include "client/start_state.hpp"
+#include "load/resource/connection.hpp"
 #include "tick_event.hpp"
 #include "media_path.hpp"
 #include "resolution.hpp"
@@ -30,6 +31,8 @@
 #include <sge/texture/manager.hpp>
 #include <sge/texture/util.hpp>
 #include <sge/image/loader.hpp>
+#include <sge/audio/player.hpp>
+#include <sge/audio/multi_loader.hpp>
 #include <sge/time/second.hpp>
 
 // boost
@@ -107,6 +110,7 @@ try
 			sge::renderer::window_mode::windowed,
 			sge::renderer::vsync::on))
 		(sge::systems::parameterless::input)
+		(sge::systems::parameterless::audio_player)
 		(sge::systems::parameterless::image)
 		(sge::systems::parameterless::font));
 
@@ -138,11 +142,27 @@ try
 			static_cast<sge::sprite::unit>(
 				sys.renderer()->screen_size().h() / 2)));
 	
-	sanguis::server::machine server(sys, console, host_port);
+	sge::audio::multi_loader audio_loader(sys.plugin_manager());
+
+	sanguis::load::resource::connection resources(
+		sys.image_loader(),
+		sys.renderer(),
+		audio_loader,
+		sys.audio_player());
+	
+	sanguis::server::machine server(
+		console, 
+		host_port);
 	server.initiate();
 	
 	// construct and initialize statemachine
-	sanguis::client::machine client(sys,font,ks,console,dest_server,dest_port);
+	sanguis::client::machine client(
+		sys,
+		font,
+		ks,
+		console,
+		dest_server,
+		dest_port);
 	// this should construct, among others, the renderer
 	client.initiate();
 

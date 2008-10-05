@@ -4,11 +4,9 @@
 #include "../messages/base.hpp"
 #include "../net/server.hpp"
 #include "../load/model/singleton.hpp"
-#include "../load/resource/connection.hpp"
 #include "../tick_event.hpp"
 #include "message_event.hpp"
 
-#include <sge/systems/instance_fwd.hpp>
 #include <sge/console/console_gfx.hpp>
 
 #include <boost/statechart/state_machine.hpp>
@@ -36,7 +34,6 @@ struct machine
 {
 public:
 	machine(
-		sge::systems::instance &,
 		sge::con::console_gfx &,
 		net::port_type);
 	void process(tick_event const &);
@@ -76,7 +73,6 @@ private:
 	net::server::signal_connection s_conn,
 	                               s_disconn,
 	                               s_data;
-	load::resource::connection resource_connection;
 	load::model::connection model_connection;
 	client_map clients;
 	sge::con::console_gfx &con;
