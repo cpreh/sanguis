@@ -118,8 +118,9 @@ try
 	sge::input::key_state_tracker ks(sys.input_system());
 
 	// font stuff
-	sge::font::system_ptr const fs(sys.font_system());
-	sge::font::metrics_ptr const metrics = fs->create_font(sge::media_path() / SGE_TEXT("fonts") / SGE_TEXT("default.ttf"),15);
+	sge::font::metrics_ptr const metrics = sys.font_system()->create_font(
+		sge::media_path() / SGE_TEXT("fonts") / SGE_TEXT("default.ttf"),
+		static_cast<sge::font::size_type>(15));
 	sge::font::drawer_ptr const drawer(new sge::font::drawer_3d(sys.renderer()));
 	sge::font::font font(metrics,drawer);
 	sge::texture::manager texman(
@@ -127,7 +128,7 @@ try
 		sge::texture::default_creator<sge::texture::no_fragmented>(
 			sys.renderer(),
 			sge::renderer::linear_filter));
-	const sge::font::font_ptr console_font(new sge::font::font(metrics,drawer));
+	sge::font::font_ptr const console_font(new sge::font::font(metrics,drawer));
 
 	sge::con::console_gfx console(sys.renderer(),
 		sge::texture::add(
