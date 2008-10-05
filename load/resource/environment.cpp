@@ -3,7 +3,7 @@
 #include "../../log_headers.hpp"
 #include "../../exception.hpp"
 #include "../log.hpp"
-#include <sge/texture/default_creator.hpp>
+#include <sge/texture/default_creator_impl.hpp>
 #include <sge/fstream.hpp>
 #include <sge/sstream.hpp>
 #include <sge/media.hpp>
