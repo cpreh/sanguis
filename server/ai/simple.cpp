@@ -34,7 +34,7 @@ void sanguis::server::ai::simple::update(
 	if(!target)
 		return;
 
-	const boost::optional<messages::space_unit> angle(
+	boost::optional<messages::space_unit> const angle(
 		sge::math::angle_to<messages::space_unit>(
 			me.center(),
 			target->center()));
@@ -43,8 +43,20 @@ void sanguis::server::ai::simple::update(
 		me.direction(*angle);
 		me.angle(*angle);
 	}
-	// TODO: movement speed is always at full speed by default
-	//me.get_property(sanguis::server::entity::property::type::speed).current(messages::mu(1));
+	
+
+	entities::property::value_type const max_speed(
+		me.get_property(
+			entities::property::type::movement_speed)
+				.max());
+
+	me.get_property(
+		entities::property::type::movement_speed)
+			.current(
+				me.has_weapon() && me.in_range(target->center())
+				? messages::mu(0)
+				: max_speed);
+	
 	me.target(
 		target->center());
 	me.aggressive(true);

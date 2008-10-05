@@ -12,14 +12,16 @@
 #include <sge/iostream.hpp>
 #include <sge/text.hpp>
 #include <sge/exception.hpp>
-#include <sge/console/console.hpp>
-#include <sge/systems.hpp>
-#include <sge/init.hpp>
 #include <sge/iconv.hpp>
+#include <sge/media.hpp>
+#include <sge/console/console.hpp>
+#include <sge/systems/instance.hpp>
+#include <sge/systems/list.hpp>
 #include <sge/log/level.hpp>
 #include <sge/log/logger.hpp>
 #include <sge/log/level_string.hpp>
-#include <sge/media.hpp>
+#include <sge/font/system.hpp>
+#include <sge/font/metrics.hpp>
 #include <sge/font/drawer_3d.hpp>
 #include <sge/font/font.hpp>
 #include <sge/texture/default_creator.hpp>
@@ -27,6 +29,7 @@
 #include <sge/texture/default_creator_impl.hpp>
 #include <sge/texture/manager.hpp>
 #include <sge/texture/util.hpp>
+#include <sge/image/loader.hpp>
 #include <sge/time/second.hpp>
 
 // boost
@@ -53,7 +56,7 @@ try
 	std::string log_level;
 
 	desc.add_options()
-	    ("help",
+			("help",
 				"produce help message")
 			("dest-server",
 				po::value<net::address_type>(&dest_server)->default_value("localhost"),
@@ -93,41 +96,47 @@ try
 		sge::log::level_from_string(
 			sge::iconv(log_level)));
 
-	sge::systems sys;
-
-	// basic stuff
-	sys.init<sge::init::core>();
-	sys.init<sge::init::renderer>(sanguis::resolution());
-	sys.init<sge::init::input>();
-	sys.init<sge::init::image_loader>();
+	sge::systems::instance sys(
+		sge::systems::list()
+		(sge::renderer::parameters(
+			sge::renderer::display_mode(
+				sanguis::resolution(),
+				sge::renderer::bit_depth::depth32),
+			sge::renderer::depth_buffer::off,
+			sge::renderer::stencil_buffer::off,
+			sge::renderer::window_mode::windowed,
+			sge::renderer::vsync::on))
+		(sge::systems::parameterless::input)
+		(sge::systems::parameterless::image)
+		(sge::systems::parameterless::font));
 
 	// input stuff
-	sge::input::key_state_tracker ks(sys.input_system);
+	sge::input::key_state_tracker ks(sys.input_system());
 
 	// font stuff
-	const sge::plugin::plugin<sge::font::system>::ptr_type font_plugin = sys.plugin_manager.get_plugin<sge::font::system>().load();
-	const sge::font::system_ptr fs(font_plugin->get()());
-	const sge::font::metrics_ptr metrics = fs->create_font(sge::media_path() / SGE_TEXT("fonts/default.ttf"),15);
-	const sge::font::drawer_ptr drawer(new sge::font::drawer_3d(sys.renderer));
+	sge::font::system_ptr const fs(sys.font_system());
+	sge::font::metrics_ptr const metrics = fs->create_font(sge::media_path() / SGE_TEXT("fonts") / SGE_TEXT("default.ttf"),15);
+	sge::font::drawer_ptr const drawer(new sge::font::drawer_3d(sys.renderer()));
 	sge::font::font font(metrics,drawer);
 	sge::texture::manager texman(
-		sys.renderer,
+		sys.renderer(),
 		sge::texture::default_creator<sge::texture::no_fragmented>(
-			sys.renderer,
+			sys.renderer(),
 			sge::renderer::linear_filter));
 	const sge::font::font_ptr console_font(new sge::font::font(metrics,drawer));
 
-	sge::con::console_gfx console(sys.renderer,
+	sge::con::console_gfx console(sys.renderer(),
 		sge::texture::add(
-			texman,sys.image_loader->load_image(
+			texman,
+			sys.image_loader()->load(
 				sanguis::media_path() / SGE_TEXT("console_back.jpg"))),
 		console_font,
-		sys.input_system,
+		sys.input_system(),
 		sge::sprite::point(0,0),
 		sge::sprite::dim(
-			sys.renderer->screen_size().w(),
+			sys.renderer()->screen_size().w(),
 			static_cast<sge::sprite::unit>(
-				sys.renderer->screen_size().h() / 2)));
+				sys.renderer()->screen_size().h() / 2)));
 	
 	sanguis::server::machine server(sys, console, host_port);
 	server.initiate();

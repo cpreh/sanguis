@@ -13,7 +13,9 @@
 #include "../../entity_type.hpp"
 #include "../../damage_type.hpp"
 #include "../../time_type.hpp"
+#include <sge/linear_set.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
+#include <boost/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -23,8 +25,9 @@ namespace entities
 {
 
 class base_parameters;
+class auto_weak_link;
 
-class entity {
+class entity : boost::noncopyable {
 protected:
 	explicit entity(
 		base_parameters const &);
@@ -88,8 +91,19 @@ protected:
 	environment const &get_environment() const;
 	entity &insert(auto_ptr); 
 
+	auto_weak_link
+	link(
+		entity &);
+
 	virtual void on_die();
 private:
+	friend class auto_weak_link;
+
+	void unlink(
+		entity *);
+	bool has_ref(
+		entity *) const;
+	
 	entity_id const         id_;
 	environment             env_;
 	armor_array             armor_;
@@ -108,6 +122,12 @@ private:
 		perks::perk
 	>                       perk_container;
 	perk_container          perks_;
+
+	typedef sge::linear_set<
+		entity *
+	>                       link_container;
+	link_container          links,
+	                        backlinks;
 };
 
 }

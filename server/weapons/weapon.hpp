@@ -36,6 +36,11 @@ public:
 	bool reloading() const;
 	bool ready() const;
 	unsigned magazine_size() const;
+
+	bool in_range(
+		entities::entity const &from,
+		pos_type const& to) const;
+
 	virtual ~weapon();
 protected:
 	weapon(
@@ -57,10 +62,6 @@ protected:
 		messages::auto_ptr);
 	environment get_environment() const;
 private:
-	bool in_range(
-		entities::entity const& from,
-		pos_type const& to) const;
-
 	static sge::log::logger &log();
 
 	struct state {

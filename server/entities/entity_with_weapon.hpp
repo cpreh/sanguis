@@ -32,12 +32,16 @@ public:
 	void add_weapon(weapons::weapon_ptr);
 	void remove_weapon(weapon_type::type);
 
-	void target(pos_type const&);
+	void target(pos_type const &);
 	pos_type const &target() const;
-private:
+
+	bool in_range(
+		pos_type const &) const;
+
 	bool has_weapon() const;
 	weapons::weapon &active_weapon();
-
+	weapons::weapon const &active_weapon() const;
+private:
 	weapon_container    weapons_;
 	weapon_type::type   weapon_;
 	pos_type            target_;

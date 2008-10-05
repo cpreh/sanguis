@@ -1,11 +1,13 @@
 #include "entity.hpp"
 #include "base_parameters.hpp"
+#include "weak_link.hpp"
 #include "../get_unique_id.hpp"
 #include "../message_converter.hpp"
 #include "../../messages/add.hpp"
 #include "../../angle_vector.hpp"
 #include <sge/math/vec_dim.hpp>
 #include <sge/math/power.hpp>
+#include <sge/linear_set_impl.hpp>
 #include <boost/foreach.hpp>
 #include <typeinfo>
 #include <cmath>
@@ -260,7 +262,13 @@ sanguis::server::entities::entity::add_message() const
 }
 
 sanguis::server::entities::entity::~entity()
-{}
+{
+	BOOST_FOREACH(entity *e, links)
+		e->backlinks.erase(this);
+
+	BOOST_FOREACH(entity *e, backlinks)
+		e->links.erase(this);
+}
 
 void sanguis::server::entities::entity::send(
 	messages::auto_ptr message)
@@ -283,5 +291,29 @@ sanguis::server::entities::entity::insert(
 	return get_environment().insert(e);
 }
 
+sanguis::server::entities::auto_weak_link
+sanguis::server::entities::entity::link(
+	entity &e)
+{
+	// TODO: why do we have to do this?
+	auto_weak_link w(*this, e);
+	return w;
+}
+
 void sanguis::server::entities::entity::on_die()
 {}
+
+void sanguis::server::entities::entity::unlink(
+	entity * const e)
+{
+	if(!has_ref(e))
+		return;
+	e->backlinks.erase(this);
+	links.erase(e);
+}
+
+bool sanguis::server::entities::entity::has_ref(
+	entity *const e) const
+{
+	return links.find(e) != links.end();
+}

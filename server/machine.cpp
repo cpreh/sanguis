@@ -6,14 +6,14 @@
 #include "../exception.hpp"
 #include "message_event.hpp"
 
-#include <sge/systems.hpp>
+#include <sge/systems/instance.hpp>
 #include <sge/text.hpp>
 
 #include <boost/bind.hpp>
 #include <boost/foreach.hpp>
 
 sanguis::server::machine::machine(
-	sge::systems &sys,
+	sge::systems::instance &sys,
 	sge::con::console_gfx &con,
 	net::port_type const port_)
 :
@@ -29,8 +29,8 @@ sanguis::server::machine::machine(
 		net_.register_data(
 			boost::bind(&machine::data_callback,this,_1,_2))),
 	resource_connection(
-		sys.image_loader,
-		sys.renderer),
+		sys.image_loader(),
+		sys.renderer()),
 	con(con)
 {}
 

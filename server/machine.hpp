@@ -8,7 +8,7 @@
 #include "../tick_event.hpp"
 #include "message_event.hpp"
 
-#include <sge/systems_fwd.hpp>
+#include <sge/systems/instance_fwd.hpp>
 #include <sge/console/console_gfx.hpp>
 
 #include <boost/statechart/state_machine.hpp>
@@ -36,7 +36,7 @@ struct machine
 {
 public:
 	machine(
-		sge::systems &,
+		sge::systems::instance &,
 		sge::con::console_gfx &,
 		net::port_type);
 	void process(tick_event const &);

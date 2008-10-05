@@ -4,7 +4,7 @@
 #include "types.hpp"
 #include "../types.hpp"
 #include "../../client_messages/fwd.hpp"
-#include <sge/renderer/types.hpp>
+#include <sge/renderer/screen_types.hpp>
 
 namespace sanguis
 {

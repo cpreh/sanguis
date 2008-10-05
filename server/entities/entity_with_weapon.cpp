@@ -130,7 +130,8 @@ void sanguis::server::entities::entity_with_weapon::add_weapon(
 					magazine_size))));
 }
 
-void sanguis::server::entities::entity_with_weapon::remove_weapon(const weapon_type::type type_)
+void sanguis::server::entities::entity_with_weapon::remove_weapon(
+	weapon_type::type const type_)
 {
 	if (weapons_.find(type_) == weapons_.end())
 		throw exception(SGE_TEXT("tried to remove non-owned weapon"));
@@ -150,6 +151,12 @@ sanguis::server::entities::entity_with_weapon::target() const
 	return target_;
 }
 
+bool sanguis::server::entities::entity_with_weapon::in_range(
+	pos_type const &center) const
+{
+	return has_weapon() && active_weapon().in_range(*this, center);
+}
+
 bool sanguis::server::entities::entity_with_weapon::has_weapon() const
 {
 	return weapon_ != weapon_type::none;	
@@ -163,4 +170,10 @@ sanguis::server::entities::entity_with_weapon::active_weapon()
 		throw exception(
 			SGE_TEXT("No weapon active in entity_with_weapon!"));
 	return *it->second;
+}
+
+sanguis::server::weapons::weapon const &
+sanguis::server::entities::entity_with_weapon::active_weapon() const
+{
+	return const_cast<entity_with_weapon &>(*this).active_weapon();
 }
