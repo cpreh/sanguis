@@ -1,6 +1,6 @@
 #include "projectile.hpp"
 #include "../bullet.hpp"
-#include <sge/exception.hpp>
+#include "../../exception.hpp"
 #include <sge/text.hpp>
 
 sanguis::draw::factory::entity_ptr
@@ -23,7 +23,7 @@ sanguis::draw::factory::projectile(
 				sys,
 				SGE_TEXT("rocket")));
 	default:
-		throw sge::exception(
+		throw exception(
 			SGE_TEXT("draw::factory::projectile: missing loading code!"));
 	}
 }

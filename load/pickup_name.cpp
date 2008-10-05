@@ -1,6 +1,6 @@
 #include "pickup_name.hpp"
+#include "../exception.hpp"
 #include <sge/text.hpp>
-#include <sge/exception.hpp>
 
 sge::string const
 sanguis::load::pickup_name(
@@ -11,7 +11,7 @@ sanguis::load::pickup_name(
 		return sge::string(
 			SGE_TEXT("pickup_hp"));
 	default:
-		throw sge::exception(
+		throw exception(
 			SGE_TEXT("load::pickup_name: missing loading code!"));
 	}
 }

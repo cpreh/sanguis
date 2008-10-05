@@ -1,6 +1,6 @@
 #include "weapon_category.hpp"
 #include "base_animation_not_found.hpp"
-#include <sge/exception.hpp>
+#include "../../exception.hpp"
 #include <sge/string.hpp>
 #include <sge/text.hpp>
 #include <boost/array.hpp>
@@ -43,7 +43,7 @@ sanguis::load::model::weapon_category::weapon_category(
 				animation(
 					animation_path)))
 		.second == false)
-			throw sge::exception(
+			throw exception(
 				SGE_TEXT("Double insert in model::weapon_category: ")
 				+ animation_path.string());
 	}
@@ -58,7 +58,7 @@ sanguis::load::model::weapon_category::operator[](
 		return it->second;
 
 	if(anim == animation_type::none)
-		throw sge::exception(
+		throw exception(
 			SGE_TEXT("Default animation not found in model in ")
 			+ path.string());
 	throw base_animation_not_found(

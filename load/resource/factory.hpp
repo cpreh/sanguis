@@ -5,8 +5,10 @@
 #include <sge/sprite/animation_series.hpp>
 #include <sge/texture/part.hpp>
 #include <sge/renderer/device.hpp>
+#include <sge/audio/multi_loader.hpp>
+#include <sge/audio/player_fwd.hpp>
+#include <sge/audio/sound_fwd.hpp>
 #include <sge/image/loader.hpp>
-#include <boost/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -25,14 +27,9 @@ sge::texture::part_ptr const
 texture(
 	identifier_type const &);
 
-struct connection : boost::noncopyable
-{
-	connection(
-		sge::image::loader_ptr,
-		sge::renderer::device_ptr);
-	~connection();
-};
-
+sge::audio::sound_ptr const 
+sound(
+	sge::path const &);
 }
 }
 }

@@ -1,7 +1,7 @@
 #include "model.hpp"
 #include "../../log_headers.hpp"
+#include "../../exception.hpp"
 #include "../log.hpp"
-#include <sge/exception.hpp>
 #include <sge/text.hpp>
 #include <boost/filesystem/convenience.hpp>
 #include <ostream>
@@ -27,7 +27,7 @@ sanguis::load::model::model::model(
 				boost::filesystem::basename(*beg),
 				part(*beg)))
 		.second == false)
-			throw sge::exception(
+			throw exception(
 				SGE_TEXT("Double insert in model::model: ")
 				+ beg->string());
 	}
@@ -39,7 +39,7 @@ sanguis::load::model::model::operator[](
 {
 	part_map::const_iterator const it(parts.find(name));
 	if(it == parts.end())
-		throw sge::exception(name + SGE_TEXT(" not found in model!"));
+		throw exception(name + SGE_TEXT(" not found in model!"));
 	return it->second;
 }
 

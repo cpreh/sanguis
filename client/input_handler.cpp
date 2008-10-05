@@ -1,7 +1,7 @@
 #include "input_handler.hpp"
 #include "player_action.hpp"
 
-#include <sge/exception.hpp>
+#include "../exception.hpp"
 #include <sge/text.hpp>
 
 sanguis::client::input_handler::input_handler(
@@ -59,7 +59,7 @@ void sanguis::client::input_handler::direction_event(const sge::input::key_pair&
 		to_send = player_action::vertical_move;
 		break;
 	default:
-		throw sge::exception(SGE_TEXT("direction_event: impossible!"));
+		throw exception(SGE_TEXT("direction_event: impossible!"));
 	}
 	post_message(player_action(to_send, scale));
 }
@@ -76,7 +76,7 @@ void sanguis::client::input_handler::rotation_event(const sge::input::key_pair& 
 		to_send = player_action::vertical_look;
 		break;
 	default:
-		throw sge::exception(SGE_TEXT("rotation_event: impossible!"));
+		throw exception(SGE_TEXT("rotation_event: impossible!"));
 	}
 
 	post_message(player_action(to_send, static_cast<key_scale>(p.value())));

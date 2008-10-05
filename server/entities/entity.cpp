@@ -196,7 +196,7 @@ sanguis::server::entities::entity::get_property(
 	/*property_map::iterator const it = properties.find(e);
 
 	if (it == properties.end())
-		throw sge::exception(
+		throw exception(
 			SGE_TEXT("couldn't find specified entity property"));
 	
 	return it->second;*/

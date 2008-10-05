@@ -3,7 +3,7 @@
 #include "../z_ordering.hpp"
 #include "../../pickup_type.hpp"
 #include "../../load/pickup_name.hpp"
-#include <sge/exception.hpp>
+#include "../../exception.hpp"
 #include <sge/text.hpp>
 
 namespace
@@ -40,10 +40,10 @@ sge::string const get_texture(
 	case sanguis::pickup_type::health:
 		return sanguis::load::pickup_name(ptype);
 	case sanguis::pickup_type::weapon:
-		throw sge::exception(
+		throw exception(
 			SGE_TEXT("draw::factory::pickup: weapon pickup cannot be created using pickup!"));
 	default:
-		throw sge::exception(
+		throw exception(
 			SGE_TEXT("draw::factory::pickup: missing loading code!"));
 	}
 }

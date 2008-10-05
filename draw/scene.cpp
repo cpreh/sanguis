@@ -32,8 +32,8 @@
 #include "../client_messages/add.hpp"
 #include "../log_headers.hpp"
 #include "../dispatch_type.hpp"
+#include "../exception.hpp"
 
-#include <sge/exception.hpp>
 #include <sge/iconv.hpp>
 #include <sge/text.hpp>
 #include <sge/format.hpp>
@@ -247,7 +247,7 @@ void sanguis::draw::scene::operator()(
 {
 	entity_map::iterator const it(entities.find(m.id()));
 	if(it == entities.end())
-		throw sge::exception(
+		throw exception(
 			SGE_TEXT("Object not in entity map, can't remove it!"));
 	entity &e(*it->second);
 	e.decay();
@@ -309,7 +309,7 @@ void sanguis::draw::scene::operator()(
 			m,
 			get_system(),
 			get_system().get_renderer()->screen_size())).second == false)
-		throw sge::exception(SGE_TEXT("Client object with id already in entity list!"));
+		throw exception(SGE_TEXT("Client object with id already in entity list!"));
 	// FIXME: configure the object here, too!
 }
 
@@ -323,7 +323,7 @@ void sanguis::draw::scene::configure_new_object(
 			e_ptr));
 
 	if(ret.second == false)
-		throw sge::exception(
+		throw exception(
 			SGE_TEXT("Object with id already in entity list!"));
 
 	entity& e(*ret.first->second);
@@ -347,7 +347,7 @@ sanguis::draw::scene::get_entity(
 {
 	entity_map::iterator const it = entities.find(id);
 	if(it == entities.end())
-		throw sge::exception(
+		throw exception(
 			(sge::format(
 				SGE_TEXT("Object with id %1% not in entity map!"))
 				% id).str());

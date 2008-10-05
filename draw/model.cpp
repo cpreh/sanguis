@@ -5,9 +5,9 @@
 #include "../load/model/collection.hpp"
 #include "../load/model/singleton.hpp"
 #include "../client/id_dont_care.hpp"
+#include "../exception.hpp"
 #include <sge/log/logger.hpp>
 #include <sge/text.hpp>
-#include <sge/exception.hpp>
 #include <boost/foreach.hpp>
 #include <ostream>
 
@@ -211,7 +211,7 @@ sanguis::draw::model::fallback_anim(
 	case animation_type::dying:
 		return animation_type::none;
 	default:
-		throw sge::exception(
+		throw exception(
 			SGE_TEXT("Invalid animation in fallback_anim!"));
 	}
 }

@@ -3,7 +3,6 @@
 #include "../z_ordering.hpp"
 #include "../../decoration_type.hpp"
 #include "../../load/decoration_name.hpp"
-#include <sge/exception.hpp>
 #include <sge/text.hpp>
 
 namespace

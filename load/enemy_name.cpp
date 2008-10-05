@@ -1,5 +1,5 @@
 #include "enemy_name.hpp"
-#include <sge/exception.hpp>
+#include "../exception.hpp"
 #include <sge/text.hpp>
 
 sge::string const
@@ -20,7 +20,7 @@ sanguis::load::enemy_name(
 	case enemy_type::spider:
 		return SGE_TEXT("spider");
 	default:
-		throw sge::exception(
+		throw exception(
 			SGE_TEXT("load::enemy_name: missing loading code!"));
 	}
 }

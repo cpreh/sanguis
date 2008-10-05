@@ -4,7 +4,7 @@
 #include "../messages/base.hpp"
 #include "../net/server.hpp"
 #include "../load/model/singleton.hpp"
-#include "../load/resource/factory.hpp"
+#include "../load/resource/connection.hpp"
 #include "../tick_event.hpp"
 #include "message_event.hpp"
 

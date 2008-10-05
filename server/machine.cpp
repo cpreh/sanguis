@@ -3,10 +3,10 @@
 #include "../serialization.hpp"
 #include "../messages/connect.hpp"
 #include "../messages/disconnect.hpp"
+#include "../exception.hpp"
 #include "message_event.hpp"
 
 #include <sge/systems.hpp>
-#include <sge/exception.hpp>
 #include <sge/text.hpp>
 
 #include <boost/bind.hpp>
@@ -122,7 +122,7 @@ void sanguis::server::machine::send(
 {
 	client_map::iterator const it(clients.find(dest));
 	if(it == clients.end())
-		throw sge::exception(
+		throw exception(
 			SGE_TEXT("machine::send: client id not found!"));
 	
 	it->second.out_buffer += serialize(m);

@@ -1,11 +1,8 @@
--replace message_functor by something prettier
--add sounds
--add bullet spawn point
--add experience system
--add music
--add HUD
--add way more creeps!
--add blood animations
--non-sprite gfx/animations? (for stuff like lightning, light/shadow, ...)
--improve this todo list
--replace damage list with damage_list()()() construct
+-add sounds on the state transition of a model using a directories "start",
+"end" and "running" from which sounds are randomly chosen. the "running" sound
+should be played in a loop, the other sounds just once
+-add a directory media/music where custom music is placed
+-add a game variable which measures the "calmness" or "actionness" of the
+current game on a discrete scale. the use can specify his own music files and
+attach an action number to it so the music is played only when the game is at a
+specific state

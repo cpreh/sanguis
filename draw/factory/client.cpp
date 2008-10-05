@@ -2,7 +2,7 @@
 #include "simple_sprite.hpp"
 #include "../z_ordering.hpp"
 #include "../../client_messages/add.hpp"
-#include <sge/exception.hpp>
+#include "../../exception.hpp"
 #include <sge/text.hpp>
 
 sanguis::draw::factory::entity_ptr
@@ -26,7 +26,7 @@ sanguis::draw::factory::client(
 			z_ordering::background,
 			SGE_TEXT("background"));
 	default:
-		throw sge::exception(
+		throw exception(
 			SGE_TEXT("draw::factory::client: missing loading code!"));
 	}
 }

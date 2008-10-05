@@ -3,7 +3,7 @@
 #include "../../damage_types.hpp"
 #include "../../ai/simple.hpp"
 #include "../../weapons/melee.hpp"
-#include <sge/exception.hpp>
+#include "../../../exception.hpp"
 #include <sge/text.hpp>
 #include <boost/assign/list_of.hpp>
 
@@ -98,7 +98,7 @@ sanguis::server::entities::enemies::create(
 				static_cast<messages::exp_type>(15)
 				));
 	default:
-		throw sge::exception(
+		throw exception(
 			SGE_TEXT("Invalid enemy_type in factory!"));
 	}
 }

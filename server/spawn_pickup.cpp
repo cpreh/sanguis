@@ -3,7 +3,7 @@
 #include "entities/pickups/health.hpp"
 #include "entities/pickups/weapon.hpp"
 #include "../random.hpp"
-#include <sge/exception.hpp>
+#include "../exception.hpp"
 #include <sge/text.hpp>
 #include <boost/tr1/random.hpp>
 #include <boost/array.hpp>
@@ -65,7 +65,7 @@ void sanguis::server::spawn_pickup(
 					10))); // FIXME: which health value to use?
 		break;
 	default:
-		throw sge::exception(
+		throw exception(
 			SGE_TEXT("Invalid random number for pickup generated!"));
 	}
 }

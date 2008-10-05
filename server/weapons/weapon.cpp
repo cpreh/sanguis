@@ -3,8 +3,8 @@
 #include "log.hpp"
 #include "../entities/entity_with_weapon.hpp"
 #include "../../log_headers.hpp"
+#include "../../exception.hpp"
 #include <sge/time/second.hpp>
-#include <sge/exception.hpp>
 #include <sge/text.hpp>
 #include <sge/log/logger.hpp>
 #include <ostream>
@@ -76,7 +76,7 @@ void sanguis::server::weapons::weapon::update(
 		}
 		return;
 	default:
-		throw sge::exception(
+		throw exception(
 			SGE_TEXT("Invalid state in weapon!"));
 	}
 }
@@ -152,7 +152,7 @@ sanguis::server::weapons::weapon::weapon(
 				<< SGE_TEXT("A weapon's cast point interval is bigger than its cooldown!"));
 
 	if(magazine_size() == 0)
-		throw sge::exception(
+		throw exception(
 			SGE_TEXT("magazine size of 0 is invalid!"));
 }
 

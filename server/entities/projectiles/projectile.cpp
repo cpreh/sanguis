@@ -3,8 +3,8 @@
 #include "../../collision.hpp"
 #include "../../damage_types.hpp"
 #include "../../message_converter.hpp"
+#include "../../../exception.hpp"
 #include <sge/time/second.hpp>
-#include <sge/exception.hpp>
 #include <sge/text.hpp>
 #include <boost/foreach.hpp>
 
@@ -116,7 +116,7 @@ to_entity_type(
 	case sanguis::projectile_type::melee:
 		return sanguis::entity_type::indeterminate;
 	default:
-		throw sge::exception(
+		throw exception(
 			SGE_TEXT("Invalid projectile type in to_entity_type()!"));
 	}
 }

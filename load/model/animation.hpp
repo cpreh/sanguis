@@ -15,6 +15,9 @@ namespace model
 class animation {
 public:
 	sge::sprite::animation_series const& get() const;
+	sge::audio::sound_ptr const start_sound() const;
+	sge::audio::sound_ptr const running_sound() const;
+	sge::audio::sound_ptr const end_sound() const;
 private:
 	explicit animation(sge::path const&);
 

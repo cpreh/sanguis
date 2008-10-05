@@ -1,7 +1,7 @@
 #include "model_part.hpp"
 #include "../load/model/part.hpp"
 #include "../load/model/base_animation_not_found.hpp"
-#include <sge/exception.hpp>
+#include "../exception.hpp"
 #include <sge/text.hpp>
 #include <sge/console/var_impl.hpp>
 #include <sge/math/angle.hpp>

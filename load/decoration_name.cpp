@@ -1,5 +1,5 @@
 #include "decoration_name.hpp"
-#include <sge/exception.hpp>
+#include "../exception.hpp"
 #include <sge/text.hpp>
 
 sge::string const
@@ -14,7 +14,7 @@ sanguis::load::decoration_name(
 	case decoration_type::crate:
 		return SGE_TEXT("decoration/crate");
 	default:
-		throw sge::exception(
+		throw exception(
 			SGE_TEXT("load::decoration_name: missing loading code!"));
 	}
 }

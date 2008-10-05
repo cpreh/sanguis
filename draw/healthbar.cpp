@@ -1,6 +1,7 @@
 #include "healthbar.hpp"
 #include "z_ordering.hpp"
 #include "../client/id_dont_care.hpp"
+#include "../exception.hpp"
 #include <sge/su.hpp>
 #include <sge/format.hpp>
 #include <sge/math/compare.hpp>
@@ -144,7 +145,7 @@ sanguis::draw::healthbar::remaining_health() const
 void sanguis::draw::healthbar::recalc_health()
 {
 	if(health_ > max_health_)
-		throw sge::exception(
+		throw exception(
 			(sge::format(SGE_TEXT("draw::healthbar: health (%1%) > max_health (%2%)!"))
 			% health_
 			% max_health_).str());

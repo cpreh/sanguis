@@ -3,7 +3,7 @@
 #include "../weapons/factory.hpp"
 #include "../../truncation_check_cast.hpp"
 #include "../../messages/give_weapon.hpp"
-#include <sge/exception.hpp>
+#include "../../exception.hpp"
 #include <sge/text.hpp>
 #include <limits>
 
@@ -98,7 +98,7 @@ void sanguis::server::entities::entity_with_weapon::update(
 void sanguis::server::entities::entity_with_weapon::change_weapon(const weapon_type::type nweapon)
 {
 	if (nweapon != weapon_type::none && !weapons_.count(nweapon))
-		throw sge::exception(SGE_TEXT("tried to change to non-owned weapon"));
+		throw exception(SGE_TEXT("tried to change to non-owned weapon"));
 
 	weapon_ = nweapon;
 }
@@ -119,7 +119,7 @@ void sanguis::server::entities::entity_with_weapon::add_weapon(
 		return;
 
 	if (!weapons_.insert(wt,ptr).second)
-		throw sge::exception(SGE_TEXT("couldn't insert weapon"));
+		throw exception(SGE_TEXT("couldn't insert weapon"));
 
 	get_environment().send(
 		messages::auto_ptr(
@@ -133,7 +133,7 @@ void sanguis::server::entities::entity_with_weapon::add_weapon(
 void sanguis::server::entities::entity_with_weapon::remove_weapon(const weapon_type::type type_)
 {
 	if (weapons_.find(type_) == weapons_.end())
-		throw sge::exception(SGE_TEXT("tried to remove non-owned weapon"));
+		throw exception(SGE_TEXT("tried to remove non-owned weapon"));
 	
 	weapons_.erase(type_);
 }
@@ -160,7 +160,7 @@ sanguis::server::entities::entity_with_weapon::active_weapon()
 {
 	weapon_container::iterator const it(weapons_.find(weapon_));
 	if(it == weapons_.end())
-		throw sge::exception(
+		throw exception(
 			SGE_TEXT("No weapon active in entity_with_weapon!"));
 	return *it->second;
 }

@@ -1,6 +1,6 @@
 #include "collection.hpp"
 #include "../../media_path.hpp"
-#include <sge/exception.hpp>
+#include "../../exception.hpp"
 #include <utility>
 
 sanguis::load::model::model const&
@@ -12,7 +12,7 @@ sanguis::load::model::collection::operator[](
 	{
 		const sge::path path(media_path() / name);
 		if(!boost::filesystem::exists(path))
-			throw sge::exception(SGE_TEXT("Model ") + name + SGE_TEXT(" not found!"));
+			throw exception(SGE_TEXT("Model ") + name + SGE_TEXT(" not found!"));
 		models.insert(
 			std::make_pair(
 				name,

@@ -1,5 +1,5 @@
 #include "part.hpp"
-#include <sge/exception.hpp>
+#include "../../exception.hpp"
 #include <sge/string.hpp>
 #include <boost/array.hpp>
 #include <utility>
@@ -36,7 +36,7 @@ sanguis::load::model::part::part(
 						it)),
 				weapon_category(weapon_path)))
 		.second == false)
-			throw sge::exception(SGE_TEXT("Double insert in model::part: ") + weapon_path.string());
+			throw exception(SGE_TEXT("Double insert in model::part: ") + weapon_path.string());
 	}
 }
 
@@ -47,7 +47,7 @@ sanguis::load::model::part::operator[](const weapon_type::type t) const
 	if(it != categories.end())
 		return it->second;
 	if(t == weapon_type::none)
-		throw sge::exception(
+		throw exception(
 			SGE_TEXT("Unarmed weapon model missing in ")
 			+ path.string());
 	return (*this)[weapon_type::none];

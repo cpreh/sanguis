@@ -2,7 +2,7 @@
 #include "pistol.hpp"
 #include "shotgun.hpp"
 #include "rocket_launcher.hpp"
-#include <sge/exception.hpp>
+#include "../../exception.hpp"
 #include <sge/text.hpp>
 
 sanguis::server::weapons::weapon_ptr
@@ -12,7 +12,7 @@ sanguis::server::weapons::create(
 {
 	switch(type) {
 	case weapon_type::melee:
-		throw sge::exception(
+		throw exception(
 			SGE_TEXT("Please create melee weapons directly, not through the weapon factory!"));
 	case weapon_type::pistol:
 		return weapon_ptr(
@@ -60,7 +60,7 @@ sanguis::server::weapons::create(
 				static_cast<time_type>(1.6) // reload time
 				));
 	default:
-		throw sge::exception(
+		throw exception(
 			SGE_TEXT("Cannot create weapon for given weapon type!"));
 	}
 }

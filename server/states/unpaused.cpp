@@ -26,13 +26,13 @@
 #include "../../messages/speed.hpp"
 #include "../../messages/change_weapon.hpp"
 #include "../../messages/pause.hpp"
+#include "../../exception.hpp"
 
 #include <sge/math/constants.hpp>
 #include <sge/math/angle.hpp>
 #include <sge/log/logger.hpp>
 #include <sge/format.hpp>
 #include <sge/text.hpp>
-#include <sge/exception.hpp>
 
 #include <boost/lexical_cast.hpp>
 #include <boost/mpl/vector.hpp>
@@ -80,7 +80,7 @@ sanguis::server::states::unpaused::operator()(
 	entities::player &player_(*it->second);
 
 	if (e.weapon() > weapon_type::size)
-		throw sge::exception(
+		throw exception(
 			SGE_TEXT("got invalid weapon type in player_change_weapon"));
 
 	weapon_type::type const type(static_cast<weapon_type::type>(e.weapon()));
@@ -278,7 +278,7 @@ sanguis::server::states::unpaused::react(
 					}
 
 				if(!found)
-					throw sge::exception(
+					throw exception(
 						(sge::format(
 							SGE_TEXT("Player with id %1% not in player map when erasing!"))
 						% i->id()).str());

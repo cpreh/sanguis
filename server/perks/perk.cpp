@@ -1,5 +1,5 @@
 #include "perk.hpp"
-#include <sge/exception.hpp>
+#include "../../exception.hpp"
 #include <sge/text.hpp>
 
 sanguis::server::perks::perk::perk()
@@ -9,7 +9,7 @@ sanguis::server::perks::perk::perk()
 void sanguis::server::perks::perk::raise_level()
 {
 	if(!can_raise_level())
-		throw sge::exception(
+		throw exception(
 			SGE_TEXT("Can't raise perk level!"));
 	++level_;
 }
