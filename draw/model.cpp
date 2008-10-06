@@ -1,12 +1,11 @@
 #include "model.hpp"
 #include "z_ordering.hpp"
 #include "log.hpp"
-#include "../log_headers.hpp"
 #include "../load/model/collection.hpp"
 #include "../load/model/singleton.hpp"
 #include "../client/id_dont_care.hpp"
 #include "../exception.hpp"
-#include <sge/log/logger.hpp>
+#include <sge/log/headers.hpp>
 #include <sge/text.hpp>
 #include <boost/foreach.hpp>
 #include <ostream>

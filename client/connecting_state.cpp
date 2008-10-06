@@ -8,7 +8,7 @@
 #include "../messages/connect.hpp"
 #include "../messages/disconnect.hpp"
 #include "../messages/types.hpp"
-#include "../log_headers.hpp"
+#include <sge/log/headers.hpp>
 #include <sge/iconv.hpp>
 #include <sge/text.hpp>
 #include <boost/mpl/vector.hpp>

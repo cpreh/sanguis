@@ -1,7 +1,6 @@
 #include "entity.hpp"
 #include "log.hpp"
-#include "../log_headers.hpp"
-#include <sge/log/logger.hpp>
+#include <sge/log/headers.hpp>
 #include <sge/text.hpp>
 #include <sge/time/second.hpp>
 #include <sge/time/resolution.hpp>

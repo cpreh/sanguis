@@ -59,9 +59,11 @@ class environment : boost::noncopyable
 	typedef std::map<sge::path,
 									 sge::sprite::animation_series>
 		animation_map;
+	
+	typedef std::vector<sge::audio::sound_ptr> sound_container;
 
 	typedef std::map<sge::path,
-									 sge::audio::sound_ptr>
+									 sound_container>
 		sound_map;
 	
 	texture_map textures;
@@ -71,7 +73,7 @@ class environment : boost::noncopyable
 	// internal functions
 	sge::texture::part_ptr const do_load_texture(
 		sanguis::load::resource::identifier_type const &);
-	sge::audio::sound_ptr const do_load_sound(
+	sound_container const do_load_sound(
 		sge::path const &);
 	sge::sprite::animation_series const do_load_animation(
 		sge::path const &);

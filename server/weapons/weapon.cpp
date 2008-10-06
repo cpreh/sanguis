@@ -2,11 +2,10 @@
 #include "delayed_attack.hpp"
 #include "log.hpp"
 #include "../entities/entity_with_weapon.hpp"
-#include "../../log_headers.hpp"
 #include "../../exception.hpp"
 #include <sge/time/second.hpp>
 #include <sge/text.hpp>
-#include <sge/log/logger.hpp>
+#include <sge/log/headers.hpp>
 #include <ostream>
 #include <cassert>
 

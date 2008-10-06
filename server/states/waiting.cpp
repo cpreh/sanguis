@@ -8,10 +8,9 @@
 #include "../../messages/client_info.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../dispatch_type.hpp"
-#include "../../log_headers.hpp"
 
 #include <sge/iconv.hpp>
-#include <sge/log/logger.hpp>
+#include <sge/log/headers.hpp>
 
 #include <boost/bind.hpp>
 #include <boost/mpl/vector.hpp>

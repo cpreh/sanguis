@@ -4,7 +4,6 @@
 #include "../message_functor.hpp"
 #include "../log.hpp"
 #include "../entities/entity.hpp"
-#include "../../log_headers.hpp"
 #include "../../dispatch_type.hpp"
 #include "../../messages/unpause.hpp"
 #include "../../messages/player_pause.hpp"
@@ -12,7 +11,7 @@
 #include "../../messages/disconnect.hpp"
 
 #include <sge/iconv.hpp>
-#include <sge/log/logger.hpp>
+#include <sge/log/headers.hpp>
 
 #include <boost/bind.hpp>
 #include <boost/mpl/vector.hpp>

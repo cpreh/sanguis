@@ -16,10 +16,10 @@
 #include "../../messages/level_up.hpp"
 #include "../../resolution.hpp"
 #include "../../dispatch_type.hpp"
-#include "../../log_headers.hpp"
 #include "../../random.hpp"
 #include <sge/iconv.hpp>
 #include <sge/math/constants.hpp>
+#include <sge/log/headers.hpp>
 #include <sge/text.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/assign/list_of.hpp>

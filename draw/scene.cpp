@@ -30,14 +30,13 @@
 #include "../messages/stop_reloading.hpp"
 #include "../messages/speed.hpp"
 #include "../client_messages/add.hpp"
-#include "../log_headers.hpp"
 #include "../dispatch_type.hpp"
 #include "../exception.hpp"
 
 #include <sge/iconv.hpp>
 #include <sge/text.hpp>
 #include <sge/format.hpp>
-#include <sge/log/logger.hpp>
+#include <sge/log/headers.hpp>
 
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>

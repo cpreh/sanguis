@@ -8,7 +8,6 @@
 #include "../log.hpp"
 #include "../../truncation_check_cast.hpp"
 #include "../../dispatch_type.hpp"
-#include "../../log_headers.hpp"
 #include "../../angle_vector.hpp"
 #include "../../random.hpp"
 #include "../../messages/assign_id.hpp"
@@ -30,7 +29,7 @@
 
 #include <sge/math/constants.hpp>
 #include <sge/math/angle.hpp>
-#include <sge/log/logger.hpp>
+#include <sge/log/headers.hpp>
 #include <sge/format.hpp>
 #include <sge/text.hpp>
 

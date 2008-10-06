@@ -1,8 +1,8 @@
 #include "model.hpp"
-#include "../../log_headers.hpp"
 #include "../../exception.hpp"
 #include "../log.hpp"
 #include <sge/text.hpp>
+#include <sge/log/headers.hpp>
 #include <boost/filesystem/convenience.hpp>
 #include <ostream>
 #include <utility>

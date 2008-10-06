@@ -2,8 +2,7 @@
 #include "connecting_state.hpp"
 #include "machine.hpp"
 #include "log.hpp"
-#include "../log_headers.hpp"
-#include <sge/log/logger.hpp>
+#include <sge/log/headers.hpp>
 #include <sge/text.hpp>
 #include <sge/iconv.hpp>
 #include <ostream>

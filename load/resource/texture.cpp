@@ -2,10 +2,10 @@
 #include "../log.hpp"
 #include "../../media_path.hpp"
 #include "../../exception.hpp"
-#include "../../log_headers.hpp"
 #include <sge/fstream.hpp>
 #include <sge/texture/util.hpp>
 #include <sge/image/loader.hpp>
+#include <sge/log/headers.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/trim.hpp>
