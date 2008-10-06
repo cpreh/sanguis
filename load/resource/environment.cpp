@@ -1,21 +1,7 @@
 #include "environment.hpp"
-#include "../../media_path.hpp"
-#include "../../log_headers.hpp"
-#include "../../exception.hpp"
-#include "../log.hpp"
 #include <sge/texture/default_creator_impl.hpp>
-#include <sge/fstream.hpp>
-#include <sge/sstream.hpp>
-#include <sge/media.hpp>
 #include <sge/texture/no_fragmented.hpp>
-#include <sge/texture/util.hpp>
-#include <sge/image/loader.hpp>
-#include <sge/time/millisecond.hpp>
-#include <boost/optional.hpp>
 #include <boost/bind.hpp>
-#include <boost/lexical_cast.hpp>
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/algorithm/string/trim.hpp>
 
 namespace
 {
@@ -61,96 +47,6 @@ sanguis::load::resource::environment::load_animation(
 		boost::bind(&environment::do_load_animation,this,_1));
 }
 
-sge::sprite::animation_series const
-sanguis::load::resource::environment::do_load_animation(
-	sge::path const& dir)
-{
-	if (!boost::filesystem::exists(dir) || !boost::filesystem::is_directory(dir))
-		throw exception(SGE_TEXT("directory for animation \"")+dir.string()+SGE_TEXT("\" doesn't exist"));
-
-	const sge::path framesfile = dir / SGE_TEXT("frames");
-
-	// look for frames file inside directory
-	if (!boost::filesystem::exists(framesfile) || !boost::filesystem::is_regular(framesfile))
-	{
-		// there is no animation here so just take the first image you can find
-		for(sge::directory_iterator it(dir), end; it != end; ++it)
-		{
-			if(boost::filesystem::is_directory(*it))
-				continue;
-			sge::sprite::animation_series ret;
-			ret.push_back(
-				sge::sprite::animation_entity(
-					sge::time::millisecond(
-						static_cast<sge::time::unit>(1)),
-					do_load_texture_inner(*it)));
-			return ret; // TODO: can we do this with boost::assign?
-		}
-		throw exception(dir.string() + SGE_TEXT(" is empty!"));
-	}
-
-	// and parse line by line
-	sge::ifstream file(framesfile);
-	if (!file.is_open())
-		throw exception(SGE_TEXT("error opening file \"")+framesfile.string()+SGE_TEXT("\""));
-	
-	// read first line, determine if it has constant frame time
-	sge::string line;
-	if (!std::getline(file,line))
-		throw exception(SGE_TEXT("unexpected end of file \"")+framesfile.string());
-
-	boost::optional<sge::time::millisecond> const_delay;
-	if (boost::algorithm::starts_with(line,SGE_TEXT("frame_length ")))
-		const_delay.reset(
-			sge::time::millisecond(
-				boost::lexical_cast<sge::time::unit>(
-					line.substr(sge::string(SGE_TEXT("frame_length ")).length()))));
-	else
-		file.seekg(0,std::ios_base::beg);
-	
-	sge::sprite::animation_series anim;
-
-	unsigned lineno = const_delay ? 2 : 1;
-	while (std::getline(file,line))
-	{
-		boost::algorithm::trim(line);
-
-		if (line.empty())
-			continue;
-
-		sge::time::millisecond delay(sge::su(0));
-		sge::string filename = line;
-
-		if (!const_delay)
-		{
-			sge::istringstream ss(line);
-			sge::time::unit temp_delay;
-			ss >> temp_delay >> std::ws;
-			if (!ss)
-				throw exception(SGE_TEXT("invalid line ")+boost::lexical_cast<sge::string>(lineno)+SGE_TEXT(" in animation ")+dir.string());
-			filename = ss.str().substr(ss.tellg());
-			delay = sge::time::millisecond(temp_delay);
-		}
-		else
-		{
-			delay = *const_delay;
-		}
-
-		anim.push_back(
-			sge::sprite::animation_entity(
-				delay,
-				do_load_texture_inner(dir/filename)));
-		++lineno;
-	}
-		
-	return anim;
-}
-
-sge::texture::part_ptr const sanguis::load::resource::environment::do_load_texture_inner(
-	sge::path const &p)
-{
-	return sge::texture::add(texman,il->load(p));
-}
 
 sge::audio::sound_ptr const sanguis::load::resource::environment::load_sound(
 	sge::path const &dir)
@@ -161,12 +57,6 @@ sge::audio::sound_ptr const sanguis::load::resource::environment::load_sound(
 		boost::bind(&environment::do_load_sound,this,_1));
 }
 
-sge::audio::sound_ptr const sanguis::load::resource::environment::do_load_sound(
-	sge::path const &dir)
-{
-	return sge::audio::sound_ptr();
-}
-
 sge::texture::part_ptr const sanguis::load::resource::environment::load_texture(
 	sanguis::load::resource::identifier_type const&id)
 {
@@ -174,55 +64,4 @@ sge::texture::part_ptr const sanguis::load::resource::environment::load_texture(
 		textures, 
 		id, 
 		boost::bind(&environment::do_load_texture,this,_1));
-}
-
-sge::texture::part_ptr const sanguis::load::resource::environment::do_load_texture(
-	sanguis::load::resource::identifier_type const&id)
-{
-	if (texture_names.find(id) == texture_names.end())
-		throw exception(SGE_TEXT("no texture for id \"")+id+SGE_TEXT("\" found"));
-	return do_load_texture_inner(sanguis::media_path()/texture_names[id]);
-}
-
-void sanguis::load::resource::environment::load_textures()
-{
-	// look for .tex files
-	for (boost::filesystem::basic_directory_iterator<sge::path> i(sanguis::media_path()),end; i != end; ++i)
-	{
-		const sge::path &p = i->path();
-		if (!boost::filesystem::is_regular(p) || !boost::algorithm::ends_with(p.leaf(),SGE_TEXT(".tex")))
-			continue;
-		
-		// and parse line by line
-		sge::ifstream file(p);
-		if (!file.is_open())
-			throw exception(SGE_TEXT("error opening id file \"")+p.string()+SGE_TEXT("\""));
-
-		std::streamsize line_num(0);
-		sge::string line;
-		while (std::getline(file,line))
-		{
-			++line_num;
-
-			boost::algorithm::trim(line);
-
-			if (line.empty())
-				continue;
-
-			const sge::string::size_type equal = line.find(SGE_TEXT("="));
-			if(equal == sge::string::npos)
-			{
-				SGE_LOG_WARNING(
-					sanguis::load::log(),
-					sge::log::_1
-						<< SGE_TEXT("Error in .id file \")")
-						<< p.string()
-						<< SGE_TEXT("\" in line ")
-						<< line_num
-						<< SGE_TEXT('!'));
-				continue;
-			}
-			texture_names[line.substr(0,equal)] = line.substr(equal+1);
-		}
-	}
 }
