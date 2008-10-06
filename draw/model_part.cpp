@@ -159,7 +159,7 @@ sanguis::draw::model_part::get_animation(
 					.get(),
 			loop_method(
 				atype),
-			ref->explicit_upcast(),
+			*ref,
 			anim_diff_clock.callback()));
 }
 
