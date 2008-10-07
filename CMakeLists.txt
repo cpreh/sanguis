@@ -35,28 +35,7 @@ IF (HAVE_VARIADIC_TEMPLATES)
 	SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 ENDIF ()
 
-FILE (GLOB files 
-	*.cpp
-	net/*.cpp
-	client/*.cpp
-	client_messages/*.cpp
-	draw/*.cpp
-	draw/factory/*.cpp
-	messages/*.cpp
-	load/*.cpp
-	load/model/*.cpp
-	load/resource/*.cpp
-	server/*.cpp
-	server/ai/*.cpp
-	server/auras/*.cpp
-	server/entities/*.cpp
-	server/entities/enemies/*.cpp
-	server/entities/pickups/*.cpp
-	server/entities/projectiles/*.cpp
-	server/perks/*.cpp
-	server/states/*.cpp
-	server/waves/*.cpp
-	server/weapons/*.cpp)
+FILE (GLOB files main.cpp)
 
 ADD_EXECUTABLE(sanguis ${files})
 TARGET_LINK_LIBRARIES(sanguis sgecore)
