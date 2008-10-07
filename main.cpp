@@ -61,13 +61,16 @@ try
         (sge::systems::parameterless::image));
 
     sge::sprite::system ss(sys.renderer());
+
     sge::image::object_ptr const image = 
         sys.image_loader()->load(SGE_TEXT("media/dirt_tile.jpg"));
+
     sge::renderer::texture_ptr const image_texture = 
         sys.renderer()->create_texture(
             image->view(),
             sge::renderer::linear_filter,
             sge::renderer::resource_flags::readable);
+
     sge::sprite::object my_object(
             sge::sprite::point(0,0),
             sge::texture::part_ptr(new sge::texture::part_raw(image_texture)),
