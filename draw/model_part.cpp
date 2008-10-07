@@ -1,13 +1,16 @@
 #include "model_part.hpp"
 #include "../load/model/part.hpp"
 #include "../load/model/base_animation_not_found.hpp"
+#include "../log.hpp"
 #include "../exception.hpp"
 #include <sge/text.hpp>
 #include <sge/console/var_impl.hpp>
 #include <sge/math/angle.hpp>
 #include <sge/math/constants.hpp>
 #include <sge/math/vec_dim.hpp>
+#include <sge/log/headers.hpp>
 #include <sge/math/compare.hpp>
+#include <sge/audio/sound.hpp>
 #include <sge/sprite/object.hpp>
 #include <sge/time/time.hpp>
 #include <boost/bind.hpp>
@@ -35,11 +38,15 @@ sanguis::draw::model_part::model_part(
 	invalid_rotation),
   info(&info),
   ref(&ref),
-  animation_type_(animation_type::size),
-  weapon_type_(weapon_type::size),
+	weapon_(weapon_type::none),
+	state(),
   animation_(),
   ended(false)
 {
+	SGE_LOG_DEBUG(
+		log(),
+		sge::log::_1 << SGE_TEXT("constructing new model"));
+
 	ref.size() = sge::math::structure_cast<sge::sprite::unit>(
 		info
 		[weapon_type::none]
@@ -50,7 +57,7 @@ sanguis::draw::model_part::model_part(
 bool sanguis::draw::model_part::animation(
 	animation_type::type const atype)
 {
-	return atype == animation_type_
+	return state && state->animation_type() == atype
 	? true
 	: try_animation(
 		atype);
@@ -61,8 +68,9 @@ void sanguis::draw::model_part::weapon(
 {
 	// we lose the animation here
 	// which model has to reset
-	weapon_type_ = wtype;
-	animation_type_ = animation_type::size;
+	//state.reset(new model_part_state(*info,animation_type::size,wtype));
+	weapon_ = wtype;
+	state.reset();
 }
 
 void sanguis::draw::model_part::update(
@@ -70,6 +78,9 @@ void sanguis::draw::model_part::update(
 {
 	anim_diff_clock.update(
 		time);
+	
+	if (state)
+		state->update();
 
 	if(animation_)
 		ended = animation_->process() || ended;
@@ -113,7 +124,6 @@ void sanguis::draw::model_part::update(
 void sanguis::draw::model_part::orientation(
 	sge::sprite::rotation_type rot)
 {
-	// FIXME: is this ok?
 	if(!sge::math::is_rel_angle(rot))
 		rot = sge::math::abs_angle_to_rel(rot);
 
@@ -132,18 +142,29 @@ bool sanguis::draw::model_part::try_animation(
 {
 	try
 	{
+		if (weapon_ == weapon_type::size)
+			weapon_ = weapon_type::none;
+
 		scoped_texture_animation nanim(	
 			get_animation(
-				weapon_type_,
+				state ? state->weapon_type() : weapon_,
 				atype));
+
 		animation_.swap(nanim);
 	}
 	catch(load::model::base_animation_not_found const &)
 	{
+		SGE_LOG_DEBUG(
+			log(),
+			sge::log::_1 << SGE_TEXT("didn't work"));
 		return false;
 	}
 
-	animation_type_ = atype;
+	SGE_LOG_DEBUG(
+		log(),
+		sge::log::_1 << SGE_TEXT("that worked"));
+	
+	state.reset(new model_part_state(*info,atype,state ? state->weapon_type() : weapon_));
 	return true;
 }
 

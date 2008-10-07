@@ -19,7 +19,7 @@ sanguis::load::resource::animation(sge::path const& path)
 }
 
 sge::audio::sound_ptr const
-sanguis::load::resource::sound(sge::path const &p)
+sanguis::load::resource::random_sound(sge::path const &p)
 {
 	return get_env().load_sound(p);
 }

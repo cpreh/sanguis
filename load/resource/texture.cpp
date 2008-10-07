@@ -1,4 +1,5 @@
 #include "environment.hpp"
+#include "map_get_or_create.hpp"
 #include "../log.hpp"
 #include "../../media_path.hpp"
 #include "../../exception.hpp"
@@ -6,9 +7,19 @@
 #include <sge/texture/util.hpp>
 #include <sge/image/loader.hpp>
 #include <sge/log/headers.hpp>
+#include <boost/bind.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/trim.hpp>
+
+sge::texture::part_ptr const sanguis::load::resource::environment::load_texture(
+	sanguis::load::resource::identifier_type const&id)
+{
+	return map_get_or_create(
+		textures, 
+		id, 
+		boost::bind(&environment::do_load_texture,this,_1));
+}
 
 sge::texture::part_ptr const sanguis::load::resource::environment::do_load_texture(
 	sanguis::load::resource::identifier_type const&id)

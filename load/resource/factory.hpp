@@ -28,7 +28,7 @@ texture(
 	identifier_type const &);
 
 sge::audio::sound_ptr const 
-sound(
+random_sound(
 	sge::path const &);
 }
 }

@@ -5,6 +5,7 @@
 #include "../serialization.hpp"
 #include "message_event.hpp"
 #include <sge/systems/instance.hpp>
+#include <sge/audio/player.hpp>
 #include <sge/renderer/scoped_block.hpp>
 #include <sge/iostream.hpp>
 #include <sge/window.hpp>
@@ -122,6 +123,12 @@ sge::renderer::device_ptr const
 sanguis::client::machine::renderer() const
 {
 	return sys.renderer();
+}
+
+sge::audio::player_ptr const
+sanguis::client::machine::audio_player() const
+{
+	return sys.audio_player();
 }
 
 sge::font::font &

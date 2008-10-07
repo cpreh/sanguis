@@ -8,17 +8,17 @@ sanguis::load::model::animation::animation(
 
 sge::audio::sound_ptr const sanguis::load::model::animation::start_sound() const
 {
-	return resource::sound(path/SGE_TEXT("start"));
+	return resource::random_sound(path/SGE_TEXT("start"));
 }
 
 sge::audio::sound_ptr const sanguis::load::model::animation::running_sound() const
 {
-	return resource::sound(path/SGE_TEXT("running"));
+	return resource::random_sound(path/SGE_TEXT("running"));
 }
 
 sge::audio::sound_ptr const sanguis::load::model::animation::end_sound() const
 {
-	return resource::sound(path/SGE_TEXT("end"));
+	return resource::random_sound(path/SGE_TEXT("end"));
 }
 
 sge::sprite::animation_series const&

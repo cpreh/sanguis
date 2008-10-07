@@ -13,6 +13,7 @@
 #include "../messages/unpause.hpp"
 #include "../draw/coord_transform.hpp"
 #include <sge/renderer/state/list.hpp>
+#include <sge/audio/player.hpp>
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/state/states.hpp>
 #include <boost/mpl/vector.hpp>
@@ -66,6 +67,8 @@ sanguis::client::running_state::react(
 	tick_event const &t)
 {
 	context<machine>().dispatch();
+
+	context<machine>().audio_player()->update();
 
 	// update: cursor pos (TODO: this should be done in a better way)
 	drawer.process_message(

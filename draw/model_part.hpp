@@ -2,6 +2,8 @@
 #define SANGUIS_DRAW_MODEL_PART_HPP_INCLUDED
 
 #include "types.hpp"
+// TODO: forward this, I'm not in the mood right now
+#include "model_part_state.hpp"
 #include "../animation_type.hpp"
 #include "../weapon_type.hpp"
 #include "../time_type.hpp"
@@ -53,8 +55,10 @@ private:
 	sge::sprite::rotation_type              desired_orientation;
 	load::model::part const*                info;
 	object*                                 ref;
-	animation_type::type                    animation_type_;
-	weapon_type::type                       weapon_type_;
+
+	weapon_type::type                       weapon_;
+	boost::scoped_ptr<model_part_state>     state;
+	
 	typedef boost::scoped_ptr<
 		sge::sprite::texture_animation
 	> scoped_texture_animation;

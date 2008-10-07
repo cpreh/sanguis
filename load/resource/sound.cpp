@@ -1,18 +1,52 @@
 #include "environment.hpp"
 #include "../log.hpp"
 #include "../../exception.hpp"
-#include <sge/audio/player.hpp>
+#include "map_get_or_create.hpp"
 #include <sge/log/headers.hpp>
+#include <sge/audio/player.hpp>
+#include <sge/random/uniform.hpp>
+#include <boost/bind.hpp>
 #include <boost/filesystem/operations.hpp>
+
+sge::audio::sound_ptr const sanguis::load::resource::environment::load_sound(
+	sge::path const &dir)
+{
+	SGE_LOG_DEBUG(
+		log(),
+		sge::log::_1 << SGE_TEXT(" loading sounds in ") 
+		             << dir.string());
+
+	sound_container &s = map_get_or_create(
+		sounds, 
+		dir, 
+		boost::bind(&environment::do_load_sound,this,_1));
+
+	if (s.size() > static_cast<sound_container::size_type>(0))
+	{
+		SGE_LOG_DEBUG(
+			log(),
+			sge::log::_1 << SGE_TEXT(" loaded ") << s.size() 
+									 << SGE_TEXT(" sounds, choosing one randomly"));
+	}
+	
+	static sge::random::uniform<sound_container::size_type> 
+		rng(
+			static_cast<sound_container::size_type>(0),
+			s.size());
+
+	if (s.size())
+		return player->create_nonstream_sound(s[rng()]);
+	return sge::audio::sound_ptr();
+}
 
 sanguis::load::resource::environment::sound_container const
 	sanguis::load::resource::environment::do_load_sound(
 		sge::path const &dir)
 {
+	// a missing directory is valid
 	if (!boost::filesystem::exists(dir) || 
 	    !boost::filesystem::is_directory(dir))
-		throw exception(
-			SGE_TEXT("directory for sounds \"")+dir.string()+SGE_TEXT("\" doesn't exist"));
+		return sound_container();
 
 	sound_container container;
 	
@@ -28,7 +62,7 @@ sanguis::load::resource::environment::sound_container const
 			continue;
 		}
 
-		container.push_back(player->create_nonstream_sound(ml.load(dir)));
+		container.push_back(ml.load(*it));
 	}
 
 	return container;

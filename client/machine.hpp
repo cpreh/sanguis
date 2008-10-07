@@ -11,6 +11,7 @@
 #include <sge/input/key_type.hpp>
 #include <sge/input/key_state_tracker.hpp> // TODO: remove me!
 #include <sge/systems/instance_fwd.hpp>
+#include <sge/audio/player_fwd.hpp>
 #include <sge/console/console_gfx.hpp> // TODO: remove me!
 #include <sge/console/stdlib.hpp>
 #include <sge/renderer/device_fwd.hpp>
@@ -52,6 +53,7 @@ public:
 
 	void dispatch();
 	sge::renderer::device_ptr const renderer() const;
+	sge::audio::player_ptr const audio_player() const;
 	sge::font::font &font();
 	bool key_pressed(
 		sge::input::key_code) const;

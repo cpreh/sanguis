@@ -60,7 +60,7 @@ class environment : boost::noncopyable
 									 sge::sprite::animation_series>
 		animation_map;
 	
-	typedef std::vector<sge::audio::sound_ptr> sound_container;
+	typedef std::vector<sge::audio::file_ptr> sound_container;
 
 	typedef std::map<sge::path,
 									 sound_container>

@@ -71,7 +71,7 @@ try
 				po::value<net::port_type>(&host_port)->default_value(1337),
 				"sets the port to listen to for games")
 			("log",
-				po::value<std::string>(&log_level)->default_value(std::string("warning")),
+				po::value<std::string>(&log_level)->default_value(std::string("debug")),
 				"sets the maximum logging level (one of debug, info, warning, error, fatal in that order)");
 	
 	po::variables_map vm;
