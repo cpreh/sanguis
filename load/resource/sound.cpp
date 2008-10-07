@@ -37,7 +37,7 @@ sge::audio::sound_ptr const sanguis::load::resource::environment::load_sound(
 	static sge::random::uniform<sound_container::size_type> 
 		rng(
 			static_cast<sound_container::size_type>(0),
-			s.size());
+			s.size()+1);
 
 	if (s.size())
 	{
