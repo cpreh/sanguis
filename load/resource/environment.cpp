@@ -15,7 +15,8 @@ sanguis::load::resource::environment::environment(
 	sge::image::loader_ptr const il,
 	sge::renderer::device_ptr const r,
 	sge::audio::multi_loader &ml,
-	sge::audio::player_ptr const player) 
+	sge::audio::player_ptr const player,
+	sge::audio::pool_ptr const sound_pool) 
 : rend(r),
   il(il),
 	ml(ml),
@@ -24,7 +25,8 @@ sanguis::load::resource::environment::environment(
   	rend,
 	sge::texture::default_creator<sge::texture::no_fragmented>(
 		rend,
-		sge::renderer::linear_filter))
+		sge::renderer::linear_filter)),
+	sound_pool(sound_pool)
 {
 	load_textures();
 }

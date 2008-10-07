@@ -20,6 +20,7 @@
 #include <sge/systems/list.hpp>
 #include <sge/log/level.hpp>
 #include <sge/log/logger.hpp>
+#include <sge/log/global.hpp>
 #include <sge/log/level_string.hpp>
 #include <sge/font/system.hpp>
 #include <sge/font/metrics.hpp>
@@ -95,6 +96,10 @@ try
 		return EXIT_SUCCESS;
 	}
 
+	sge::log::global().activate_hierarchy(
+		sge::log::level_from_string(
+			sge::iconv(log_level)));
+
 	sanguis::log().activate_hierarchy(
 		sge::log::level_from_string(
 			sge::iconv(log_level)));
@@ -144,12 +149,14 @@ try
 				sys.renderer()->screen_size().h() / 2)));
 	
 	sge::audio::multi_loader audio_loader(sys.plugin_manager());
+	sge::audio::pool_ptr sound_pool = sys.audio_player()->create_pool();
 
 	sanguis::load::resource::connection resources(
 		sys.image_loader(),
 		sys.renderer(),
 		audio_loader,
-		sys.audio_player());
+		sys.audio_player(),
+		sound_pool);
 	
 	sanguis::server::machine server(
 		console, 
@@ -159,6 +166,7 @@ try
 	// construct and initialize statemachine
 	sanguis::client::machine client(
 		sys,
+		sound_pool,
 		font,
 		ks,
 		console,

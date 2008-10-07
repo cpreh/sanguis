@@ -12,6 +12,7 @@
 #include <sge/input/key_state_tracker.hpp> // TODO: remove me!
 #include <sge/systems/instance_fwd.hpp>
 #include <sge/audio/player_fwd.hpp>
+#include <sge/audio/pool_fwd.hpp>
 #include <sge/console/console_gfx.hpp> // TODO: remove me!
 #include <sge/console/stdlib.hpp>
 #include <sge/renderer/device_fwd.hpp>
@@ -31,6 +32,7 @@ struct machine
 public:
 	machine(
 		sge::systems::instance &,
+		sge::audio::pool_ptr,
 		sge::font::font &,
 		sge::input::key_state_tracker &,
 		sge::con::console_gfx &,
@@ -54,6 +56,7 @@ public:
 	void dispatch();
 	sge::renderer::device_ptr const renderer() const;
 	sge::audio::player_ptr const audio_player() const;
+	sge::audio::pool_ptr const sound_pool() const;
 	sge::font::font &font();
 	bool key_pressed(
 		sge::input::key_code) const;
@@ -68,6 +71,7 @@ private:
 	net::data_type in_buffer,
 	               out_buffer;
 	sge::systems::instance &sys;
+	sge::audio::pool_ptr const sound_pool_;
 	sge::font::font &font_;
 	sge::input::key_state_tracker &ks;
 	sge::con::console_gfx &con;

@@ -5,6 +5,7 @@
 #include <sge/image/loader_fwd.hpp>
 #include <sge/audio/multi_loader.hpp>
 #include <sge/audio/player_fwd.hpp>
+#include <sge/audio/pool_fwd.hpp>
 #include <boost/noncopyable.hpp>
 
 namespace sanguis
@@ -20,7 +21,8 @@ class connection : boost::noncopyable
 		sge::image::loader_ptr,
 		sge::renderer::device_ptr,
 		sge::audio::multi_loader &,
-		sge::audio::player_ptr);
+		sge::audio::player_ptr,
+		sge::audio::pool_ptr);
 	~connection();
 };
 }

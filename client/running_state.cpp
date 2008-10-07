@@ -14,6 +14,7 @@
 #include "../draw/coord_transform.hpp"
 #include <sge/renderer/state/list.hpp>
 #include <sge/audio/player.hpp>
+#include <sge/audio/pool.hpp>
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/state/states.hpp>
 #include <boost/mpl/vector.hpp>
@@ -68,7 +69,7 @@ sanguis::client::running_state::react(
 {
 	context<machine>().dispatch();
 
-	context<machine>().audio_player()->update();
+	context<machine>().sound_pool()->update();
 
 	// update: cursor pos (TODO: this should be done in a better way)
 	drawer.process_message(

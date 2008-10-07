@@ -6,6 +6,7 @@
 #include "message_event.hpp"
 #include <sge/systems/instance.hpp>
 #include <sge/audio/player.hpp>
+#include <sge/audio/pool.hpp>
 #include <sge/renderer/scoped_block.hpp>
 #include <sge/iostream.hpp>
 #include <sge/window.hpp>
@@ -15,6 +16,7 @@
 
 sanguis::client::machine::machine(
 	sge::systems::instance &sys,
+	sge::audio::pool_ptr const sound_pool_,
 	sge::font::font &font_,
 	sge::input::key_state_tracker &ks,
 	sge::con::console_gfx &con,
@@ -27,6 +29,7 @@ sanguis::client::machine::machine(
 	net_.register_disconnect(boost::bind(&machine::disconnect_callback,this,_1))),
   s_data(net_.register_data(boost::bind(&machine::data_callback,this,_1))),
   sys(sys),
+	sound_pool_(sound_pool_),
   font_(font_),
   ks(ks),
   con(con),
@@ -129,6 +132,12 @@ sge::audio::player_ptr const
 sanguis::client::machine::audio_player() const
 {
 	return sys.audio_player();
+}
+
+sge::audio::pool_ptr const
+sanguis::client::machine::sound_pool() const
+{
+	return sound_pool_;
 }
 
 sge::font::font &

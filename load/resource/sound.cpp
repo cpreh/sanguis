@@ -4,6 +4,7 @@
 #include "map_get_or_create.hpp"
 #include <sge/log/headers.hpp>
 #include <sge/audio/player.hpp>
+#include <sge/audio/pool.hpp>
 #include <sge/random/uniform.hpp>
 #include <boost/bind.hpp>
 #include <boost/filesystem/operations.hpp>
@@ -11,10 +12,12 @@
 sge::audio::sound_ptr const sanguis::load::resource::environment::load_sound(
 	sge::path const &dir)
 {
+	/*
 	SGE_LOG_DEBUG(
 		log(),
 		sge::log::_1 << SGE_TEXT(" loading sounds in ") 
 		             << dir.string());
+	*/
 
 	sound_container &s = map_get_or_create(
 		sounds, 
@@ -23,10 +26,12 @@ sge::audio::sound_ptr const sanguis::load::resource::environment::load_sound(
 
 	if (s.size() > static_cast<sound_container::size_type>(0))
 	{
+		/*
 		SGE_LOG_DEBUG(
 			log(),
 			sge::log::_1 << SGE_TEXT(" loaded ") << s.size() 
 									 << SGE_TEXT(" sounds, choosing one randomly"));
+										*/
 	}
 	
 	static sge::random::uniform<sound_container::size_type> 
@@ -35,7 +40,12 @@ sge::audio::sound_ptr const sanguis::load::resource::environment::load_sound(
 			s.size());
 
 	if (s.size())
-		return player->create_nonstream_sound(s[rng()]);
+	{
+		sge::audio::sound_ptr const ss = player->create_nonstream_sound(s[rng()]);
+		sound_pool->add(ss);
+		return ss;
+	}
+
 	return sge::audio::sound_ptr();
 }
 

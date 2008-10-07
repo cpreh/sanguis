@@ -43,10 +43,6 @@ sanguis::draw::model_part::model_part(
   animation_(),
   ended(false)
 {
-	SGE_LOG_DEBUG(
-		log(),
-		sge::log::_1 << SGE_TEXT("constructing new model"));
-
 	ref.size() = sge::math::structure_cast<sge::sprite::unit>(
 		info
 		[weapon_type::none]
@@ -154,15 +150,19 @@ bool sanguis::draw::model_part::try_animation(
 	}
 	catch(load::model::base_animation_not_found const &)
 	{
+		/*
 		SGE_LOG_DEBUG(
 			log(),
 			sge::log::_1 << SGE_TEXT("didn't work"));
+			*/
 		return false;
 	}
 
+	/*
 	SGE_LOG_DEBUG(
 		log(),
 		sge::log::_1 << SGE_TEXT("that worked"));
+			*/
 	
 	state.reset(new model_part_state(*info,atype,state ? state->weapon_type() : weapon_));
 	return true;

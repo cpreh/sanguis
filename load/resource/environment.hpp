@@ -6,6 +6,7 @@
 #include <sge/image/loader_fwd.hpp>
 #include <sge/audio/multi_loader.hpp>
 #include <sge/audio/player_fwd.hpp>
+#include <sge/audio/pool_fwd.hpp>
 #include <sge/texture/manager.hpp>
 #include <sge/string.hpp>
 #include <sge/path.hpp>
@@ -35,7 +36,8 @@ class environment : boost::noncopyable
 		sge::image::loader_ptr,
 		sge::renderer::device_ptr,
 		sge::audio::multi_loader &,
-		sge::audio::player_ptr);
+		sge::audio::player_ptr,
+		sge::audio::pool_ptr);
 
 	sge::texture::part_ptr const load_texture(
 		sanguis::load::resource::identifier_type const &);
@@ -50,6 +52,7 @@ class environment : boost::noncopyable
 	sge::audio::multi_loader &ml;
 	sge::audio::player_ptr const player;
 	sge::texture::manager texman;
+	sge::audio::pool_ptr sound_pool;
 	std::map<identifier_type,identifier_type> texture_names;
 
 	typedef std::map<sanguis::load::resource::identifier_type,
