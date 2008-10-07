@@ -34,6 +34,9 @@ sge::audio::sound_ptr const sanguis::load::resource::environment::load_sound(
 									 << SGE_TEXT(" sounds, choosing one randomly"));
 										*/
 	}
+
+	if(s.empty())
+		return sge::audio::sound_ptr();
 	
 	static sge::random::uniform<sound_container::size_type> 
 		rng(
@@ -41,15 +44,9 @@ sge::audio::sound_ptr const sanguis::load::resource::environment::load_sound(
 				static_cast<sound_container::size_type>(0),
 				s.size()));
 
-//
-	if (s.size())
-	{
-		sge::audio::sound_ptr const ss = player->create_nonstream_sound(s[rng()]);
-		sound_pool->add(ss);
-		return ss;
-	}
-
-	return sge::audio::sound_ptr();
+	sge::audio::sound_ptr const ss = player->create_nonstream_sound(s[rng()]);
+	sound_pool->add(ss);
+	return ss;
 }
 
 sanguis::load::resource::environment::sound_container const
