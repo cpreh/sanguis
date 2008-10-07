@@ -6,6 +6,7 @@
 #include <sge/audio/player.hpp>
 #include <sge/audio/pool.hpp>
 #include <sge/random/uniform.hpp>
+#include <sge/random/last_exclusive_range.hpp>
 #include <boost/bind.hpp>
 #include <boost/filesystem/operations.hpp>
 
@@ -36,9 +37,11 @@ sge::audio::sound_ptr const sanguis::load::resource::environment::load_sound(
 	
 	static sge::random::uniform<sound_container::size_type> 
 		rng(
-			static_cast<sound_container::size_type>(0),
-			s.size());
+			sge::random::last_exclusive_range<sound_container::size_type>(
+				static_cast<sound_container::size_type>(0),
+				s.size()));
 
+//
 	if (s.size())
 	{
 		sge::audio::sound_ptr const ss = player->create_nonstream_sound(s[rng()]);
