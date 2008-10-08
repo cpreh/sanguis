@@ -3,7 +3,6 @@
 #include <sge/sprite/system.hpp>
 #include <sge/sprite/object.hpp>
 #include <sge/random/uniform.hpp>
-#include <sge/random/inclusive_range.hpp>
 #include <sge/renderer/scoped_block.hpp>
 #include <sge/renderer/texture_filter.hpp>
 #include <sge/time/timer.hpp>
@@ -105,14 +104,12 @@ try
     	sge::renderer::scoped_block const block_(sys.renderer());
 			if (frame_timer.update_b())
 			{
-				static sge::random::uniform<sge::space_unit>
-					rng(
-						sge::random::inclusive_range<sge::space_unit>(
-							sge::su(-0.1f),
-							sge::su( 0.1f)));
+				static sge::random::uniform<sge::space_unit> rngf(
+					sge::su(-0.1f),
+					sge::su( 0.1f));
 
-				add.x() = rng();
-				add.y() = rng();
+				add.x() = rngf();
+				add.y() = rngf();
 
 				ss.projection(sge::math::matrix_orthogonal_xy(-1+add.x(),1+add.x(),1+add.y(),-1+add.y(),1,-1));
 			}
