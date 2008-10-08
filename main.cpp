@@ -2,18 +2,10 @@
 #include <sge/systems/list.hpp>
 #include <sge/sprite/system.hpp>
 #include <sge/sprite/object.hpp>
-#include <sge/random/uniform.hpp>
 #include <sge/renderer/scoped_block.hpp>
 #include <sge/renderer/texture_filter.hpp>
-#include <sge/time/timer.hpp>
-#include <sge/time/second.hpp>
-#include <sge/math/matrix_util.hpp>
 #include <sge/renderer/image_view_impl.hpp>
 #include <sge/renderer/device.hpp>
-#include <sge/renderer/state/list.hpp>
-#include <sge/renderer/state/var.hpp>
-#include <sge/renderer/state/states.hpp>
-#include <sge/renderer/state/scoped.hpp>
 #include <sge/renderer/texture.hpp>
 #include <sge/input/key_type.hpp>
 #include <sge/input/key_pair.hpp>
@@ -89,31 +81,11 @@ try
     sge::scoped_connection const conn = 
         sys.input_system()->register_callback(input_functor(running));
 
-		sge::time::timer frame_timer(sge::time::second(static_cast<sge::space_unit>(0.05)));
-
-		sys.renderer()->set_state(
-			sge::renderer::state::list
-				(sge::renderer::state::bool_::clear_backbuffer = true)
-				(sge::renderer::state::color_::clear_color = sge::renderer::rgba8_color(0, 0, 0, 0))
-			);
-
-		sge::math::vector2 add(0,0);
     while (running)
     {
-    	sge::window::dispatch();
-    	sge::renderer::scoped_block const block_(sys.renderer());
-			if (frame_timer.update_b())
-			{
-				static sge::random::uniform<sge::space_unit> rngf(
-					sge::su(-0.1f),
-					sge::su( 0.1f));
-
-				add.x() = rngf();
-				add.y() = rngf();
-
-				ss.projection(sge::math::matrix_orthogonal_xy(-1+add.x(),1+add.x(),1+add.y(),-1+add.y(),1,-1));
-			}
-			ss.render(my_object);
+            sge::window::dispatch();
+            sge::renderer::scoped_block const block_(sys.renderer());
+            ss.render(my_object);
     }
 } 
 catch (sge::exception const &e)
