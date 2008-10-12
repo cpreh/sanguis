@@ -59,7 +59,7 @@ private:
 	void start_reloading();
 	void stop_reloading();
 	void change_animation();
-	virtual void change_animation(
+	void change_animation(
 		animation_type::type);
 	animation_type::type animation() const;
 	animation_type::type fallback_anim(

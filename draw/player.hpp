@@ -21,8 +21,6 @@ public:
 	void speed(sge::math::vector2 const &);
 private:
 	void update(time_type);
-	void change_animation(
-		animation_type::type);
 	sge::space_unit angle_,
 	                target_angle;
 	reaper          reaper_;

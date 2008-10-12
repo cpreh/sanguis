@@ -96,15 +96,3 @@ void sanguis::draw::player::update(
 
 	reaper_.update(time);
 }
-
-void sanguis::draw::player::change_animation(
-	animation_type::type const anim)
-{
-	part(bottom).animation(
-		walking()
-		? animation_type::walking
-		: animation_type::none);
-	
-	part(top).animation(
-		anim);
-}

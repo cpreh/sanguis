@@ -221,8 +221,8 @@ sanguis::draw::model::fallback_anim(
 	case animation_type::attacking:
 	case animation_type::reloading:
 		return walking()
-		? animation_type::none
-		: animation_type::walking;
+		? animation_type::walking
+		: animation_type::none;
 	case animation_type::deploying:
 	case animation_type::walking:
 	case animation_type::dying:
