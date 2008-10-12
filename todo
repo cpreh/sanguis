@@ -6,6 +6,7 @@ specific state
 *medium: remove reaper, replace with (maybe amusing) health bar
 *medium: add a directory media/music where custom music is placed
 *medium: implement atlasing for all sprites
+*medium: implement loading screen where all sounds and models are pre-loaded before the game begins
 *high: set sound rolloff factors, attach sounds to entities by setting current
 position and velocity
 *high: render background with decals and corpses into texture and delete named
