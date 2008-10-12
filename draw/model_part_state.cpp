@@ -1,4 +1,6 @@
 #include "model_part_state.hpp"
+#include "../load/model/animation_sound.hpp"
+#include "../animation_sound_type.hpp"
 #include <sge/audio/sound.hpp>
 
 sanguis::draw::model_part_state::model_part_state(
@@ -7,9 +9,9 @@ sanguis::draw::model_part_state::model_part_state(
 	weapon_type::type const weapon_type_)
 :
 	anim_(part_[weapon_type_][animation_type_]),
-	sstart(anim_.start_sound()),
-	srunning(anim_.running_sound()),
-	send(anim_.end_sound()),
+	sstart(anim_.sounds()[animation_sound_type::start]),
+	srunning(anim_.sounds()[animation_sound_type::running]),
+	send(anim_.sounds()[animation_sound_type::end]),
 	animation_type_(animation_type_),
 	weapon_type_(weapon_type_),
 	start_played_(false)

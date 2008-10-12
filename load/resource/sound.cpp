@@ -10,53 +10,29 @@
 #include <boost/bind.hpp>
 #include <boost/filesystem/operations.hpp>
 
-sge::audio::sound_ptr const sanguis::load::resource::environment::load_sound(
+sanguis::load::sound_collection const &
+sanguis::load::resource::environment::load_sound(
 	sge::path const &dir)
 {
-	/*
-	SGE_LOG_DEBUG(
-		log(),
-		sge::log::_1 << SGE_TEXT(" loading sounds in ") 
-		             << dir.string());
-	*/
-
-	sound_container &s = map_get_or_create(
+	return map_get_or_create(
 		sounds, 
 		dir, 
-		boost::bind(&environment::do_load_sound,this,_1));
-
-	if (s.size() > static_cast<sound_container::size_type>(0))
-	{
-		/*
-		SGE_LOG_DEBUG(
-			log(),
-			sge::log::_1 << SGE_TEXT(" loaded ") << s.size() 
-									 << SGE_TEXT(" sounds, choosing one randomly"));
-										*/
-	}
-
-	if(s.empty())
-		return sge::audio::sound_ptr();
-	
-	static sge::random::uniform<sound_container::size_type> 
-		rng(
-			sge::random::last_exclusive_range<sound_container::size_type>(
-				static_cast<sound_container::size_type>(0),
-				s.size()));
-
-	sge::audio::sound_ptr const ss = player->create_nonstream_sound(s[rng()]);
-	sound_pool->add(ss);
-	return ss;
+		boost::bind(
+			&environment::do_load_sound,
+			this,
+			_1));
 }
 
-sanguis::load::resource::environment::sound_container const
-	sanguis::load::resource::environment::do_load_sound(
-		sge::path const &dir)
+sanguis::load::sound_collection const
+sanguis::load::resource::environment::do_load_sound(
+	sge::path const &dir)
 {
 	// a missing directory is valid
 	if (!boost::filesystem::exists(dir) || 
 	    !boost::filesystem::is_directory(dir))
-		return sound_container();
+		return sound_collection(
+			sound_container(),
+			sge::su(0));
 
 	sound_container container;
 	
@@ -75,5 +51,17 @@ sanguis::load::resource::environment::sound_container const
 		container.push_back(ml.load(*it));
 	}
 
-	return container;
+	return sound_collection(
+		container,
+		sge::su(1)); // TODO: 100% for now
+}
+
+sge::audio::sound_ptr const
+sanguis::load::resource::environment::make_sound(
+	sge::audio::file_ptr const snd) const
+{
+	sge::audio::sound_ptr const ss = player->create_nonstream_sound(
+		snd);
+	sound_pool->add(ss);
+	return ss;
 }

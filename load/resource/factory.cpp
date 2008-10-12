@@ -13,19 +13,29 @@ sanguis::load::resource::environment &get_env()
 }
 
 sge::sprite::animation_series const 
-sanguis::load::resource::animation(sge::path const& path)
+sanguis::load::resource::animation(
+	sge::path const &path)
 {
 	return get_env().load_animation(path);
 }
 
-sge::audio::sound_ptr const
-sanguis::load::resource::random_sound(sge::path const &p)
+sanguis::load::sound_collection const &
+sanguis::load::resource::sound(
+	sge::path const &p)
 {
 	return get_env().load_sound(p);
 }
 
-const sge::texture::part_ptr
-sanguis::load::resource::texture(identifier_type const& id)
+sge::texture::part_ptr const
+sanguis::load::resource::texture(
+	identifier_type const &id)
 {
 	return get_env().load_texture(id);
+}
+
+sge::audio::sound_ptr const
+sanguis::load::resource::make_sound(
+	sge::audio::file_ptr const f)
+{
+	return get_env().make_sound(f);
 }
