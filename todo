@@ -1,8 +1,20 @@
--add sounds on the state transition of a model using a directories "start",
-"end" and "running" from which sounds are randomly chosen. the "running" sound
-should be played in a loop, the other sounds just once
--add a directory media/music where custom music is placed
--add a game variable which measures the "calmness" or "actionness" of the
+*low: add a game variable which measures the "calmness" or "actionness" of the
 current game on a discrete scale. the use can specify his own music files and
 attach an action number to it so the music is played only when the game is at a
 specific state
+*low: add experience bar with level display
+*medium: remove reaper, replace with (maybe amusing) health bar
+*medium: add a directory media/music where custom music is placed
+*medium: implement atlasing for all sprites
+*high: set sound rolloff factors, attach sounds to entities by setting current
+position and velocity
+*high: render background with decals and corpses into texture and delete named
+entities to save performance and ram (either use the count of lying entities as
+threshold or the time)
+*high: add some perks as well as a perk choosing screen where the game is
+paused and one can choose his perks
+*high: add probabilities to sounds which can add up to less than one so not
+always a sound is played
+*high: add good collision detection algorithm, maybe using bullet as backend
+*high: add lifetime-limited particles for use in - for example - the rocket
+explosion
