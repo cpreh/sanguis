@@ -21,8 +21,8 @@ const sge::sprite::point player_leg_center(32,32);
 sge::con::var<sge::space_unit> turning_speed(SGE_TEXT("player_turning_speed"),sge::su(0.4));
 
 sanguis::draw::sprite_part_index const
-	top(0),
-	bottom(1);
+	top(1),
+	bottom(0);
 
 }
 

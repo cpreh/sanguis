@@ -164,7 +164,13 @@ bool sanguis::draw::model_part::try_animation(
 		sge::log::_1 << SGE_TEXT("that worked"));
 			*/
 	
-	state.reset(new model_part_state(*info,atype,state ? state->weapon_type() : weapon_));
+	state.reset(
+		new model_part_state(
+			*info,
+			atype,
+			state
+			? state->weapon_type()
+			: weapon_));
 	return true;
 }
 
