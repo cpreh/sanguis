@@ -53,6 +53,10 @@ sanguis::load::resource::environment::do_load_sound(
 
 		if(boost::filesystem::basename(*it) == SGE_TEXT("probability"))
 		{
+			sge::string const dirname(
+				boost::filesystem::basename(
+					dir));
+
 			sge::ifstream file(*it);
 			if(!file.is_open() || !(file >> probability))
 			{
@@ -60,18 +64,33 @@ sanguis::load::resource::environment::do_load_sound(
 					log(),
 					sge::log::_1
 						<< SGE_TEXT("Failed reading probability file in \"")
-						<< boost::filesystem::basename(dir)
+						<< dirname
 						<< SGE_TEXT("\"!"));
 			}
 			else
+			{
 				SGE_LOG_DEBUG(
 					log(),
 					sge::log::_1
 						<< SGE_TEXT("Loaded sound probability ")
 						<< probability
 						<< SGE_TEXT(" in \"")
-						<< boost::filesystem::basename(dir)
+						<< dirname
 						<< SGE_TEXT("\"!"));
+
+				if(probability < sge::su(0) || probability > sge::su(1))
+				{
+					SGE_LOG_WARNING(
+						log(),
+						sge::log::_1
+							<< SGE_TEXT("Invalid probability ")
+							<< probability
+							<< SGE_TEXT(" in \"")
+							<< dirname
+							<< SGE_TEXT("\"!"));
+					probability = sge::su(1);
+				}
+			}
 			
 			continue;
 		}
