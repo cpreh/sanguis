@@ -35,7 +35,7 @@ sanguis::draw::model::model(
 {
 	part_vector::size_type i(0);
 	BOOST_FOREACH(
-		load::model::model::value_type const& p,
+		load::model::model::value_type const &p,
 		load::model::singleton()[name])
 			parts.push_back(
 			new model_part(
@@ -220,7 +220,7 @@ sanguis::draw::model::fallback_anim(
 		return animation_type::size;
 	case animation_type::attacking:
 	case animation_type::reloading:
-		return speed().is_null()
+		return walking()
 		? animation_type::none
 		: animation_type::walking;
 	case animation_type::deploying:

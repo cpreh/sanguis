@@ -59,13 +59,13 @@ sanguis::draw::sprite::at(
 sanguis::draw::object &
 sanguis::draw::sprite::master()
 {
-	return const_cast<sprite &>(*this).master();
+	return at(sprite_part_index(0));
 }
 
 sanguis::draw::object const &
 sanguis::draw::sprite::master() const
 {
-	return at(sprite_part_index(0));
+	return const_cast<sprite &>(*this).master();
 }
 
 sanguis::draw::sprite::iterator
