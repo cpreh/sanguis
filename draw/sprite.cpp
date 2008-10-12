@@ -1,4 +1,5 @@
 #include "sprite.hpp"
+#include "sprite_part_index.hpp"
 #include <boost/foreach.hpp>
 #include <boost/none.hpp>
 
@@ -42,27 +43,29 @@ void sanguis::draw::sprite::update(
 }
 
 sanguis::draw::object &
-sanguis::draw::sprite::at(const sprite_vector::size_type i)
+sanguis::draw::sprite::at(
+	sprite_part_index const &i)
 {
-	return sprites.at(i);
+	return sprites.at(i.get());
 }
 
 sanguis::draw::object const &
-sanguis::draw::sprite::at(const sprite_vector::size_type i) const
+sanguis::draw::sprite::at(
+	sprite_part_index const &i) const
 {
-	return sprites.at(i);
+	return sprites.at(i.get());
 }
 
 sanguis::draw::object &
 sanguis::draw::sprite::master()
 {
-	return at(0);
+	return const_cast<sprite &>(*this).master();
 }
 
 sanguis::draw::object const &
 sanguis::draw::sprite::master() const
 {
-	return at(0);
+	return at(sprite_part_index(0));
 }
 
 sanguis::draw::sprite::iterator

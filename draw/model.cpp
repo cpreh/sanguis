@@ -1,6 +1,7 @@
 #include "model.hpp"
 #include "z_ordering.hpp"
 #include "log.hpp"
+#include "sprite_part_index.hpp"
 #include "../load/model/collection.hpp"
 #include "../load/model/singleton.hpp"
 #include "../client/id_dont_care.hpp"
@@ -39,7 +40,7 @@ sanguis::draw::model::model(
 			parts.push_back(
 			new model_part(
 				p.second,
-				at(i++)));
+				at(sprite_part_index(i++))));
 	change_animation(
 		animation_type::deploying);
 }
@@ -100,6 +101,23 @@ void sanguis::draw::model::speed(
 
 	if(s.is_null() != old_speed.is_null())
 		change_animation();
+}
+
+sanguis::draw::model_part &
+sanguis::draw::model::part(
+	sprite_part_index const &idx)
+{
+	return parts.at(idx.get());
+}
+
+bool sanguis::draw::model::dead() const
+{
+	return health() <= 0;
+}
+
+bool sanguis::draw::model::walking() const
+{
+	return !speed().is_null();
 }
 
 void sanguis::draw::model::health(
@@ -227,11 +245,6 @@ sanguis::draw::model::animation() const
 			: sprite::speed().is_null()
 				? animation_type::none
 				: animation_type::walking;
-}
-
-bool sanguis::draw::model::dead() const
-{
-	return health() <= 0;
 }
 
 void sanguis::draw::model::update_healthbar()

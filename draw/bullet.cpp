@@ -1,6 +1,15 @@
 #include "bullet.hpp"
 #include "z_ordering.hpp"
+#include "sprite_part_index.hpp"
 #include <boost/none.hpp>
+
+namespace
+{
+
+sanguis::draw::sprite_part_index const
+	tail(1);
+
+}
 
 sanguis::draw::bullet::bullet(
 	entity_id id,
@@ -14,7 +23,7 @@ sanguis::draw::bullet::bullet(
 	false),
   origin()
 {
-	at(1).size().w() = static_cast<sge::sprite::unit>(3); // TODO: which value is best here?
+	at(tail).size().w() = static_cast<sge::sprite::unit>(3); // TODO: which value is best here?
 }
 
 void sanguis::draw::bullet::update(const time_type time)
@@ -35,7 +44,7 @@ void sanguis::draw::bullet::update(const time_type time)
 	sge::math::vector2 const
 		newsize(
 			tail_length,
-			sge::su(at(1).size().h())),
+			sge::su(at(tail).size().h())),
 		pos(
 			sge::math::structure_cast<sge::space_unit>(center())),
 		newpos( 
@@ -43,11 +52,11 @@ void sanguis::draw::bullet::update(const time_type time)
 			? pos
 			: pos - sge::math::normalize(speed())*sge::su(0.5)*newsize.length());
 
-	at(1).set_center(
+	at(tail).set_center(
 		sge::math::structure_cast<sge::sprite::unit>(
 			newpos));
 
-	at(1).w() =
+	at(tail).w() =
 		static_cast<sge::sprite::unit>(
 			tail_length);
 }

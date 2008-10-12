@@ -19,6 +19,8 @@ namespace sanguis
 namespace draw
 {
 
+class sprite_part_index;
+
 class model : public sprite {
 public:
 	model(
@@ -42,6 +44,12 @@ protected:
 	virtual void speed(
 		sge::math::vector2 const &);
 	using sprite::speed;
+	model_part &part(
+		sprite_part_index const &);
+	model_part const &part(
+		sprite_part_index const &) const;
+	bool dead() const;
+	bool walking() const;
 private:
 	void health(sge::space_unit);
 	void max_health(sge::space_unit);
@@ -51,12 +59,11 @@ private:
 	void start_reloading();
 	void stop_reloading();
 	void change_animation();
-	void change_animation(
+	virtual void change_animation(
 		animation_type::type);
 	animation_type::type animation() const;
 	animation_type::type fallback_anim(
 		animation_type::type) const;
-	bool dead() const;
 	void update_healthbar();
 	bool animations_ended() const;
 

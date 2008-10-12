@@ -18,11 +18,11 @@ public:
 		entity_id id,
 		system &);
 	void orientation(sge::sprite::rotation_type);
-	void speed(const sge::math::vector2 &);
+	void speed(sge::math::vector2 const &);
 private:
 	void update(time_type);
-	object& bottom_sprite();
-	object& top_sprite();
+	void change_animation(
+		animation_type::type);
 	sge::space_unit angle_,
 	                target_angle;
 	reaper          reaper_;
