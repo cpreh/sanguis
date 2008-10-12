@@ -136,7 +136,7 @@ void sanguis::draw::model::start_attacking()
 	if(attacking)
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_1 << SGE_TEXT("model::start_attacking(): already attacking!"));
+			sge::log::_1 << SGE_TEXT("start_attacking(): already attacking!"));
 	attacking = true;
 
 	change_animation();
@@ -147,7 +147,7 @@ void sanguis::draw::model::stop_attacking()
 	if(!attacking)
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_1 << SGE_TEXT("model::stop_attacking(): already not attacking!"));
+			sge::log::_1 << SGE_TEXT("stop_attacking(): already not attacking!"));
 	attacking = false;
 
 	change_animation();
@@ -158,7 +158,7 @@ void sanguis::draw::model::start_reloading()
 	if(reloading)
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_1 << SGE_TEXT("model::start_reloading(): already reloading!"));
+			sge::log::_1 << SGE_TEXT("start_reloading(): already reloading!"));
 	reloading = true;
 
 	change_animation();
@@ -169,7 +169,7 @@ void sanguis::draw::model::stop_reloading()
 	if(!reloading)
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_1 << SGE_TEXT("model::stop_reloading(): already not reloading!"));
+			sge::log::_1 << SGE_TEXT("stop_reloading(): already not reloading!"));
 	reloading = false;
 
 	change_animation();
