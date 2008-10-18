@@ -8,9 +8,12 @@ sanguis::draw::sprite::sprite(
 	system &sys,
 	sprite_vector::size_type const sz,
 	object::order_type const order)
-: entity(
-	id,
-	sys)
+:
+	entity(
+		id,
+		sys),
+	speed_(sge::math::vector2::null()),
+	pos_(sge::math::vector2::null())
 {
 	sprites.reserve(sz);
 	for(sprite_vector::size_type i = 0; i < sz; ++i)

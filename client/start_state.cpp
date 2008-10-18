@@ -5,6 +5,7 @@
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/state/states.hpp>
 #include <sge/renderer/colors.hpp>
+#include <sge/renderer/device.hpp>
 
 sanguis::client::start_state::start_state()
 {}

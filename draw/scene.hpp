@@ -11,7 +11,7 @@
 #include "../client_messages/fwd.hpp"
 #include <sge/renderer/device.hpp>
 #include <sge/sprite/system.hpp>
-#include <sge/font/fwd.hpp>
+#include <sge/font/font_fwd.hpp>
 #include <sge/type_info.hpp>
 #include <sge/log/fwd.hpp>
 #include <boost/function.hpp>

@@ -84,7 +84,8 @@ private:
 
 	typedef boost::array<
 		bool,
-		weapon_type::size>      owned_weapons_array;
+		weapon_type::size
+	>                               owned_weapons_array;
 	
 	owned_weapons_array             owned_weapons;
 };

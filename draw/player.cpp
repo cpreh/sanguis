@@ -57,7 +57,7 @@ void sanguis::draw::player::speed(const sge::math::vector2 &v)
 	if (!v.is_null())
 		model::orientation(
 			*sge::math::angle_to<sge::space_unit>(
-				sge::math::vector2(),
+				sge::math::vector2::null(),
 				v),
 			0);
 }

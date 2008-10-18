@@ -7,15 +7,20 @@
 BOOST_CLASS_EXPORT_GUID(sanguis::messages::speed, "speed")
 
 sanguis::messages::speed::speed()
+:
+	speed_(sge::no_initialization_tag())
 {}
 
 sanguis::messages::speed::speed(
-	const entity_id id,
-	const vector2& speed_)
-: entity_message(id),
-  speed_(speed_) {}
+	entity_id const id,
+	vector2 const &speed_)
+:
+	entity_message(id),
+	speed_(speed_)
+{}
 
-const sanguis::messages::vector2& sanguis::messages::speed::get() const
+sanguis::messages::vector2 const &
+sanguis::messages::speed::get() const
 {
 	return speed_;
 }

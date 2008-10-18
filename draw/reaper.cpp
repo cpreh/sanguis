@@ -63,7 +63,7 @@ void sanguis::draw::reaper::update(time_type const t)
 
 	// reset speed if target is reached
 	if (!regain)
-		speed(sge::math::vector2());
+		speed(sge::math::vector2::null());
 	else
 		speed(sge::math::vector2(sge::su(1),sge::su(0)));
 	

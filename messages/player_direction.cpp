@@ -7,13 +7,16 @@
 BOOST_CLASS_EXPORT_GUID(sanguis::messages::player_direction, "player_direction")
 
 sanguis::messages::player_direction::player_direction()
+:
+	dir_(sge::no_initialization_tag())
 {}
 
 sanguis::messages::player_direction::player_direction(
 	entity_id const id,
 	vector2 const &dir_)
-: entity_message(id),
-  dir_(dir_)
+:
+	entity_message(id),
+	dir_(dir_)
 {}
 	
 sanguis::messages::vector2 const &
