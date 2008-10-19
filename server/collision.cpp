@@ -38,7 +38,7 @@ sanguis::messages::circle_type bounding_circle(
 {
 	return sanguis::messages::circle_type(
 		e.center(),
-		e.radius());
+		e.radius() * sanguis::messages::mu(0.7));
 }
 
 }
