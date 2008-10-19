@@ -3,6 +3,7 @@
 
 #include "weapon.hpp"
 #include "../types.hpp"
+#include <boost/optional.hpp>
 
 namespace sanguis
 {
@@ -23,7 +24,15 @@ public:
 private:
 	void do_attack(
 		delayed_attack const &);
+	
+	void on_init_attack(
+		entities::entity_with_weapon &owner);
+	void on_castpoint(
+		entities::entity_with_weapon &owner);
+
 	space_unit damage;
+
+	boost::optional<space_unit> old_speed;
 };
 
 }

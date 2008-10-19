@@ -3,6 +3,7 @@
 
 #include "base.hpp"
 #include "../entities/fwd.hpp"
+#include "../entities/auto_weak_link.hpp"
 
 namespace sanguis
 {
@@ -15,12 +16,15 @@ class simple : public base {
 public:
 	simple();
 private:
+	void bind(
+		entities::entity_with_weapon &me);
+	
 	void update(
-		entities::entity_with_weapon &me,
 		time_type,
-		entities::container const &);
+		entities::container &);
 
-	entities::entity const *target;
+	entities::entity_with_weapon *me_;
+	entities::auto_weak_link target;
 };
 
 }

@@ -27,12 +27,12 @@ class weapon : boost::noncopyable {
 public:
 	space_unit range() const;
 	bool attack(
-		entities::entity const &from,
+		entities::entity_with_weapon &from,
 		pos_type const& to);
 	weapon_type::type type() const;
 	void update(
 		time_type,
-		entities::entity_with_weapon const &owner);
+		entities::entity_with_weapon &owner);
 	bool reloading() const;
 	bool ready() const;
 	unsigned magazine_size() const;
@@ -60,8 +60,13 @@ protected:
 	entities::entity &insert(entities::auto_ptr);
 	void send(
 		messages::auto_ptr);
-	environment get_environment() const;
+	environment const &get_environment() const;
 private:
+	virtual void on_init_attack(
+		entities::entity_with_weapon &owner);
+	virtual void on_castpoint(
+		entities::entity_with_weapon &owner);
+
 	static sge::log::logger &log();
 
 	struct state {

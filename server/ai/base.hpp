@@ -16,10 +16,13 @@ namespace ai
 
 class base : boost::noncopyable {
 public:
+	virtual void bind(
+		entities::entity_with_weapon &me) = 0;
+	
 	virtual void update(
-		entities::entity_with_weapon &me,
 		time_type,
-		entities::container const &) = 0;
+		entities::container &) = 0;
+	
 	virtual ~base();
 };
 

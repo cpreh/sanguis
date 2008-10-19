@@ -85,15 +85,15 @@ public:
 	
 	virtual messages::auto_ptr add_message() const;
 
+	auto_weak_link
+	link(
+		entity &);
+
 	virtual ~entity();
 protected:
 	void send(messages::auto_ptr);
 	environment const &get_environment() const;
 	entity &insert(auto_ptr); 
-
-	auto_weak_link
-	link(
-		entity &);
 
 	virtual void on_die();
 private:
