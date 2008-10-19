@@ -163,7 +163,7 @@ void sanguis::draw::healthbar::recalc_health()
 
 	inner().w() = static_cast<sge::sprite::unit>(
 		static_cast<sge::space_unit>(inner_dim().w()) * remaining_health());
-	inner().set_color(sge::renderer::rgba8_color(
+	inner().color(sge::renderer::rgba8_color(
 		static_cast<sge::renderer::color_channel_8>(
 			(sge::su(1) - remaining_health()) * sge::su(pixel_channel_max)),
 		static_cast<sge::renderer::color_channel_8>(

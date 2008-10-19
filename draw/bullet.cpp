@@ -52,7 +52,7 @@ void sanguis::draw::bullet::update(const time_type time)
 			? pos
 			: pos - sge::math::normalize(speed())*sge::su(0.5)*newsize.length());
 
-	at(tail).set_center(
+	at(tail).center(
 		sge::math::structure_cast<sge::sprite::unit>(
 			newpos));
 
