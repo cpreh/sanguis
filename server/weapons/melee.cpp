@@ -3,8 +3,6 @@
 #include "../entities/entity.hpp"
 #include "../entities/entity_with_weapon.hpp"
 #include "../entities/projectiles/melee.hpp"
-#include "../../exception.hpp"
-#include <sge/text.hpp>
 
 sanguis::server::weapons::melee::melee(
 	environment const &env,
@@ -40,25 +38,16 @@ void sanguis::server::weapons::melee::do_attack(
 void sanguis::server::weapons::melee::on_init_attack(
 	entities::entity_with_weapon &owner)
 {
-	entities::property &speed(
-		owner.get_property(
-			entities::property::type::movement_speed));
-	
-	old_speed = speed.current();
-
-	speed.current(
-		messages::mu(0));
+	owner.get_property(
+		entities::property::type::movement_speed)
+			.restrict(
+				messages::mu(0));
 }
 
 void sanguis::server::weapons::melee::on_castpoint(
 	entities::entity_with_weapon &owner)
 {
-	if(!old_speed)
-		throw exception(
-			SGE_TEXT("old_speed not set in weapons::melee!"));
 	owner.get_property(
 		entities::property::type::movement_speed)
-			.current(
-				*old_speed);
-	old_speed.reset();
+			.unrestrict();
 }

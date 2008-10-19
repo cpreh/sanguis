@@ -40,9 +40,11 @@ private:
 	struct unspecified {};
 public:
 	operator unspecified *() const;
+	entity &operator*() const;
 	entity *operator->() const;
 private:
 	entity *real_ref() const;
+	entity &checked_ref() const;
 	weak_link_pair const release();
 
 	weak_link_pair data;

@@ -1,5 +1,6 @@
 #include "simple.hpp"
 #include "../entities/entity_with_weapon.hpp"
+#include "../collision.hpp"
 #include <sge/math/angle.hpp>
 #include <boost/foreach.hpp>
 
@@ -43,9 +44,6 @@ void sanguis::server::ai::simple::update(
 			return;
 		}
 
-		me.get_property(
-		entities::property::type::movement_speed)
-			.set_current_to_max();
 		me.aggressive(true);
 	}
 
@@ -59,6 +57,15 @@ void sanguis::server::ai::simple::update(
 		me.angle(*angle);
 	}
 	
+	entities::property &speed(
+		me.get_property(
+			entities::property::type::movement_speed));
+	
+	if(collides(*target, me))
+		speed.current(
+			messages::mu(0));
+	else
+		speed.set_current_to_max();
 
 	me.target(
 		target->center());

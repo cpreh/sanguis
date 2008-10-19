@@ -3,7 +3,6 @@
 
 #include "weapon.hpp"
 #include "../types.hpp"
-#include <boost/optional.hpp>
 
 namespace sanguis
 {
@@ -31,8 +30,6 @@ private:
 		entities::entity_with_weapon &owner);
 
 	space_unit damage;
-
-	boost::optional<space_unit> old_speed;
 };
 
 }

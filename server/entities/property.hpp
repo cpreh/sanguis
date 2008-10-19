@@ -41,13 +41,20 @@ public:
 	void add_to_max(value_type);
 	void multiply_max_with_base(value_type);
 	void max(value_type);
+
+	void restrict(
+		value_type);
+	void unrestrict();
 private:
 	void adjust_current(
 		value_type old_max);
+	void clamp();
 	
-	value_type base_,
-	           max_,
-	           current_;
+	value_type
+		base_,
+		max_,
+		current_,
+		restrict_;
 };
 
 }

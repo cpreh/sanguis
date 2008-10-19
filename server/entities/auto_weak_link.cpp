@@ -84,15 +84,16 @@ sanguis::server::entities::auto_weak_link::operator sanguis::server::entities::a
 		: 0;
 }
 
+sanguis::server::entities::entity &
+sanguis::server::entities::auto_weak_link::operator*() const
+{
+	return checked_ref();
+}
+
 sanguis::server::entities::entity *
 sanguis::server::entities::auto_weak_link::operator->() const
 {
-	entity *const r(
-		real_ref());
-	if(!r)
-		throw sge::exception(
-			SGE_TEXT("Tried to dereference a weak link that is dead!"));
-	return r;
+	return &checked_ref();
 }
 
 sanguis::server::entities::entity *
@@ -101,6 +102,18 @@ sanguis::server::entities::auto_weak_link::real_ref() const
 	return data.me && data.me->has_ref(data.ref)
 		? data.ref
 		: 0;
+}
+
+sanguis::server::entities::entity &
+sanguis::server::entities::auto_weak_link::checked_ref() const
+{
+	entity *const r(
+		real_ref());
+	if(!r)
+		throw sge::exception(
+			SGE_TEXT("Tried to dereference a weak link that is dead!"));
+	return *r;
+
 }
 
 sanguis::server::entities::weak_link_pair const
