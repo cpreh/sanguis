@@ -25,6 +25,10 @@ void sanguis::server::ai::simple::update(
 	entities::entity_with_weapon &me(
 		*me_);
 
+	entities::property &speed(
+		me.get_property(
+			entities::property::type::movement_speed));
+
 	if(!target)
 	{
 		BOOST_FOREACH(
@@ -41,6 +45,8 @@ void sanguis::server::ai::simple::update(
 		if(!target)
 		{
 			me.aggressive(false);
+			speed.current(
+				messages::mu(0));
 			return;
 		}
 
@@ -56,10 +62,6 @@ void sanguis::server::ai::simple::update(
 		me.direction(*angle);
 		me.angle(*angle);
 	}
-	
-	entities::property &speed(
-		me.get_property(
-			entities::property::type::movement_speed));
 	
 	if(collides(*target, me))
 		speed.current(
