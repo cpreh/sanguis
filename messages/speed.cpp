@@ -7,8 +7,6 @@
 BOOST_CLASS_EXPORT_GUID(sanguis::messages::speed, "speed")
 
 sanguis::messages::speed::speed()
-:
-	speed_(sge::no_initialization_tag())
 {}
 
 sanguis::messages::speed::speed(

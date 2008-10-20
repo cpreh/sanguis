@@ -7,10 +7,6 @@
 BOOST_CLASS_EXPORT_GUID(sanguis::messages::add, "add")
 
 sanguis::messages::add::add()
-:
-	pos_(sge::no_initialization_tag()),
-	speed_(sge::no_initialization_tag()),
-	dim_(sge::no_initialization_tag())
 {}
 
 sanguis::messages::add::add(

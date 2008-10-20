@@ -7,8 +7,6 @@
 BOOST_CLASS_EXPORT_GUID(sanguis::messages::move, "move")
 
 sanguis::messages::move::move()
-:
-	pos_(sge::no_initialization_tag())
 {}
 
 sanguis::messages::move::move(

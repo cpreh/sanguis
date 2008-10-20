@@ -7,8 +7,6 @@
 BOOST_CLASS_EXPORT_GUID(sanguis::messages::resize, "resize")
 
 sanguis::messages::resize::resize()
-:
-	dim_(sge::no_initialization_tag())
 {}
 
 sanguis::messages::resize::resize(

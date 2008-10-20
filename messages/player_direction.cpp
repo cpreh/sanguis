@@ -7,8 +7,6 @@
 BOOST_CLASS_EXPORT_GUID(sanguis::messages::player_direction, "player_direction")
 
 sanguis::messages::player_direction::player_direction()
-:
-	dir_(sge::no_initialization_tag())
 {}
 
 sanguis::messages::player_direction::player_direction(

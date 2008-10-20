@@ -11,6 +11,7 @@
 #include <sge/renderer/device_fwd.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/function.hpp>
+#include <boost/array.hpp>
 #include <vector>
 
 namespace sanguis
