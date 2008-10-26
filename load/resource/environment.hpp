@@ -2,11 +2,14 @@
 #define SANGUIS_LOAD_RESOURCE_ENVIRONMENT_HPP_INCLUDED
 
 #include "factory.hpp"
+#include "../sound_collection.hpp"
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image/loader_fwd.hpp>
 #include <sge/audio/multi_loader.hpp>
 #include <sge/audio/player_fwd.hpp>
 #include <sge/audio/pool_fwd.hpp>
+#include <sge/audio/sound_fwd.hpp>
+#include <sge/audio/file_fwd.hpp>
 #include <sge/texture/manager.hpp>
 #include <sge/string.hpp>
 #include <sge/path.hpp>
@@ -40,12 +43,15 @@ class environment : boost::noncopyable
 		sge::audio::pool_ptr);
 
 	sge::texture::part_ptr const load_texture(
-		sanguis::load::resource::identifier_type const &);
-	sge::audio::sound_ptr const load_sound(
+		identifier_type const &);
+	sound_collection const &load_sound(
 		sge::path const &);
 	sge::sprite::animation_series const load_animation(
 		sge::path const &);
 
+	sge::audio::sound_ptr const make_sound(
+		sge::audio::file_ptr) const;
+	
 	private:
 	sge::renderer::device_ptr const rend;
 	sge::image::loader_ptr const il;
@@ -55,19 +61,20 @@ class environment : boost::noncopyable
 	sge::audio::pool_ptr sound_pool;
 	std::map<identifier_type,identifier_type> texture_names;
 
-	typedef std::map<sanguis::load::resource::identifier_type,
-									 sge::texture::part_ptr>
-		texture_map;
+	typedef std::map<
+		sanguis::load::resource::identifier_type,
+		sge::texture::part_ptr
+	> texture_map;
 
-	typedef std::map<sge::path,
-									 sge::sprite::animation_series>
-		animation_map;
+	typedef std::map<
+		sge::path,
+		sge::sprite::animation_series
+	> animation_map;
 	
-	typedef std::vector<sge::audio::file_ptr> sound_container;
-
-	typedef std::map<sge::path,
-									 sound_container>
-		sound_map;
+	typedef std::map<
+		sge::path,
+		sound_collection
+	> sound_map;
 	
 	texture_map textures;
 	animation_map animations;
@@ -76,7 +83,7 @@ class environment : boost::noncopyable
 	// internal functions
 	sge::texture::part_ptr const do_load_texture(
 		sanguis::load::resource::identifier_type const &);
-	sound_container const do_load_sound(
+	sound_collection const do_load_sound(
 		sge::path const &);
 	sge::sprite::animation_series const do_load_animation(
 		sge::path const &);

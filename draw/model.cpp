@@ -1,6 +1,7 @@
 #include "model.hpp"
 #include "z_ordering.hpp"
 #include "log.hpp"
+#include "sprite_part_index.hpp"
 #include "../load/model/collection.hpp"
 #include "../load/model/singleton.hpp"
 #include "../client/id_dont_care.hpp"
@@ -34,12 +35,12 @@ sanguis::draw::model::model(
 {
 	part_vector::size_type i(0);
 	BOOST_FOREACH(
-		load::model::model::value_type const& p,
+		load::model::model::value_type const &p,
 		load::model::singleton()[name])
 			parts.push_back(
 			new model_part(
 				p.second,
-				at(i++)));
+				at(sprite_part_index(i++))));
 	change_animation(
 		animation_type::deploying);
 }
@@ -102,6 +103,23 @@ void sanguis::draw::model::speed(
 		change_animation();
 }
 
+sanguis::draw::model_part &
+sanguis::draw::model::part(
+	sprite_part_index const &idx)
+{
+	return parts.at(idx.get());
+}
+
+bool sanguis::draw::model::dead() const
+{
+	return health() <= 0;
+}
+
+bool sanguis::draw::model::walking() const
+{
+	return !speed().is_null();
+}
+
 void sanguis::draw::model::health(
 	sge::space_unit const health)
 {
@@ -136,7 +154,7 @@ void sanguis::draw::model::start_attacking()
 	if(attacking)
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_1 << SGE_TEXT("model::start_attacking(): already attacking!"));
+			sge::log::_1 << SGE_TEXT("start_attacking(): already attacking!"));
 	attacking = true;
 
 	change_animation();
@@ -147,7 +165,7 @@ void sanguis::draw::model::stop_attacking()
 	if(!attacking)
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_1 << SGE_TEXT("model::stop_attacking(): already not attacking!"));
+			sge::log::_1 << SGE_TEXT("stop_attacking(): already not attacking!"));
 	attacking = false;
 
 	change_animation();
@@ -158,7 +176,7 @@ void sanguis::draw::model::start_reloading()
 	if(reloading)
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_1 << SGE_TEXT("model::start_reloading(): already reloading!"));
+			sge::log::_1 << SGE_TEXT("start_reloading(): already reloading!"));
 	reloading = true;
 
 	change_animation();
@@ -169,7 +187,7 @@ void sanguis::draw::model::stop_reloading()
 	if(!reloading)
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_1 << SGE_TEXT("model::stop_reloading(): already not reloading!"));
+			sge::log::_1 << SGE_TEXT("stop_reloading(): already not reloading!"));
 	reloading = false;
 
 	change_animation();
@@ -202,9 +220,9 @@ sanguis::draw::model::fallback_anim(
 		return animation_type::size;
 	case animation_type::attacking:
 	case animation_type::reloading:
-		return speed().is_null()
-		? animation_type::none
-		: animation_type::walking;
+		return walking()
+		? animation_type::walking
+		: animation_type::none;
 	case animation_type::deploying:
 	case animation_type::walking:
 	case animation_type::dying:
@@ -227,11 +245,6 @@ sanguis::draw::model::animation() const
 			: sprite::speed().is_null()
 				? animation_type::none
 				: animation_type::walking;
-}
-
-bool sanguis::draw::model::dead() const
-{
-	return health() <= 0;
 }
 
 void sanguis::draw::model::update_healthbar()

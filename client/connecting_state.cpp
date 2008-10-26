@@ -11,6 +11,7 @@
 #include <sge/log/headers.hpp>
 #include <sge/iconv.hpp>
 #include <sge/text.hpp>
+#include <sge/font/font.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
 #include <typeinfo>

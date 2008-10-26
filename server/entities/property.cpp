@@ -1,11 +1,24 @@
 #include "property.hpp"
 #include <algorithm>
+#include <limits>
+
+namespace
+{
+
+sanguis::server::entities::property::value_type const
+value_max(
+	std::numeric_limits<
+		sanguis::server::entities::property::value_type
+	>::max());
+
+}
 
 sanguis::server::entities::property::property()
 :
 	base_(static_cast<value_type>(0)),
 	max_(base_),
-	current_(base_)
+	current_(base_),
+	restrict_(value_max)
 {}
 
 sanguis::server::entities::property::property(
@@ -14,7 +27,8 @@ sanguis::server::entities::property::property(
 :
 	base_(base_),
 	max_(base_),
-	current_(static_cast<value_type>(0))
+	current_(static_cast<value_type>(0)),
+	restrict_(value_max)
 {
 	current(ncurrent);
 }
@@ -24,7 +38,8 @@ sanguis::server::entities::property::property(
 :
 	base_(base_),
 	max_(base_),
-	current_(base_)
+	current_(base_),
+	restrict_(value_max)
 {}
 
 sanguis::server::entities::property::value_type
@@ -34,9 +49,13 @@ sanguis::server::entities::property::current() const
 }
 
 void sanguis::server::entities::property::current(
-	const value_type c)
+	value_type const c)
 {
-	current_ = std::min(max(), c);
+	current_ = std::min(
+		std::min(
+			restrict_,
+			max()),
+		c);
 }
 
 void sanguis::server::entities::property::set_current_to_max()
@@ -79,11 +98,29 @@ void sanguis::server::entities::property::max(
 	adjust_current(old);
 }
 
+void sanguis::server::entities::property::restrict(
+	value_type const r)
+{
+	restrict_ = r;
+	clamp();
+}
+
+void sanguis::server::entities::property::unrestrict()
+{
+	restrict_ = value_max;
+}
+
 void sanguis::server::entities::property::adjust_current(
-	const value_type old_max)
+	value_type const old_max)
 {
 	if(old_max < max())
 		current_ += max() - old_max;
 	else if(old_max > max())
-		current(current()); // reset current to clamp it
+		clamp();
+
+}
+
+void sanguis::server::entities::property::clamp()
+{
+	current(current_);
 }

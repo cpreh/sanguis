@@ -10,6 +10,8 @@ namespace sanguis
 namespace draw
 {
 
+class sprite_part_index;
+
 class sprite : public entity {
 public:
 	sprite(
@@ -25,8 +27,8 @@ protected:
 	typedef sprite_vector::const_iterator const_iterator;
 
 	virtual void update(time_type);
-	object &at(sprite_vector::size_type);
-	object const &at(sprite_vector::size_type) const;
+	object &at(sprite_part_index const &);
+	object const &at(sprite_part_index const &) const;
 	object &master();
 	object const &master() const;
 	iterator begin();

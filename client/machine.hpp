@@ -7,7 +7,7 @@
 #include "../tick_event.hpp"
 #include "console_wrapper.hpp"
 
-#include <sge/font/fwd.hpp>
+#include <sge/font/font_fwd.hpp>
 #include <sge/input/key_type.hpp>
 #include <sge/input/key_state_tracker.hpp> // TODO: remove me!
 #include <sge/systems/instance_fwd.hpp>

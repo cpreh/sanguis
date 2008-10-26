@@ -23,7 +23,7 @@ sanguis::server::weapons::weapon::type() const
 
 void sanguis::server::weapons::weapon::update(
 	time_type const tm,
-	entities::entity_with_weapon const &owner)
+	entities::entity_with_weapon &owner)
 {
 	assert(magazine_used <= magazine_size());
 
@@ -46,6 +46,9 @@ void sanguis::server::weapons::weapon::update(
 		cast_point_timer.deactivate();
 		attack_dest.reset();
 
+		on_castpoint(
+			owner);
+		
 		state_ = state::backswing;
 		// fall through
 	case state::backswing:
@@ -81,7 +84,7 @@ void sanguis::server::weapons::weapon::update(
 }
 
 bool sanguis::server::weapons::weapon::attack(
-	entities::entity const &from,
+	entities::entity_with_weapon &from,
 	pos_type const& to)
 {
 	if(state_ != state::ready
@@ -93,6 +96,9 @@ bool sanguis::server::weapons::weapon::attack(
 	attack_dest.reset(
 		to);
 	
+	on_init_attack(
+		from);
+
 	state_ = state::castpoint;
 	return true;
 }
@@ -172,7 +178,7 @@ void sanguis::server::weapons::weapon::send(
 	env_.send(m);
 }
 
-sanguis::server::environment
+sanguis::server::environment const &
 sanguis::server::weapons::weapon::get_environment() const
 {
 	return env_;
@@ -184,6 +190,14 @@ sanguis::server::weapons::weapon::insert(
 {
 	return env_.insert(e);
 }
+
+void sanguis::server::weapons::weapon::on_init_attack(
+	entities::entity_with_weapon &)
+{}
+
+void sanguis::server::weapons::weapon::on_castpoint(
+	entities::entity_with_weapon &)
+{}
 
 sge::log::logger &
 sanguis::server::weapons::weapon::log()

@@ -3,17 +3,18 @@
 
 #include <sge/string.hpp>
 #include <sge/path.hpp>
-#include <sge/sprite/animation_series.hpp>
+#include <sge/sprite/animation_series.hpp> // TODO: fwd this
 #include <sge/texture/part_fwd.hpp>
-#include <sge/renderer/device_fwd.hpp>
-#include <sge/image/loader_fwd.hpp>
+#include <sge/audio/file_fwd.hpp>
 #include <sge/audio/sound_fwd.hpp>
-#include <boost/noncopyable.hpp>
 
 namespace sanguis
 {
 namespace load
 {
+
+class sound_collection;
+
 namespace resource
 {
 
@@ -27,9 +28,14 @@ sge::texture::part_ptr const
 texture(
 	identifier_type const &);
 
-sge::audio::sound_ptr const 
-random_sound(
+sound_collection const &
+sound(
 	sge::path const &);
+
+sge::audio::sound_ptr const
+make_sound(
+	sge::audio::file_ptr);
+
 }
 }
 }

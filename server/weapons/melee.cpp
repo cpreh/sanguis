@@ -1,6 +1,7 @@
 #include "melee.hpp"
 #include "delayed_attack.hpp"
 #include "../entities/entity.hpp"
+#include "../entities/entity_with_weapon.hpp"
 #include "../entities/projectiles/melee.hpp"
 
 sanguis::server::weapons::melee::melee(
@@ -8,17 +9,18 @@ sanguis::server::weapons::melee::melee(
 	space_unit const range,
 	time_type const base_cooldown,
 	space_unit const damage)
-: weapon(
-	env,
-	weapon_type::melee,
-	range,
-	unlimited_magazine,
-	base_cooldown,
-	static_cast<time_type>(
-		0),
-	static_cast<time_type>(
-		0)),
-  damage(damage)
+:
+	weapon(
+		env,
+		weapon_type::melee,
+		range,
+		unlimited_magazine,
+		base_cooldown,
+		static_cast<time_type>(
+			0),
+		static_cast<time_type>(
+			0)),
+	damage(damage)
 {}
 
 void sanguis::server::weapons::melee::do_attack(
@@ -31,4 +33,21 @@ void sanguis::server::weapons::melee::do_attack(
 				a.dest(),
 				a.team(),
 				damage)));
+}
+
+void sanguis::server::weapons::melee::on_init_attack(
+	entities::entity_with_weapon &owner)
+{
+	owner.get_property(
+		entities::property::type::movement_speed)
+			.restrict(
+				messages::mu(0));
+}
+
+void sanguis::server::weapons::melee::on_castpoint(
+	entities::entity_with_weapon &owner)
+{
+	owner.get_property(
+		entities::property::type::movement_speed)
+			.unrestrict();
 }

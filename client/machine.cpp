@@ -8,6 +8,7 @@
 #include <sge/audio/player.hpp>
 #include <sge/audio/pool.hpp>
 #include <sge/renderer/scoped_block.hpp>
+#include <sge/input/system.hpp>
 #include <sge/iostream.hpp>
 #include <sge/window.hpp>
 #include <boost/bind.hpp>

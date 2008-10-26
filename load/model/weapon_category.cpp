@@ -9,21 +9,22 @@
 
 sanguis::load::model::weapon_category::weapon_category(
 	sge::path const &path)
-: path(path)
+:
+	path(path)
 {
 	typedef boost::array<
 		sge::string,
-		sanguis::animation_type::size> animation_type_array;
+		sanguis::animation_type::size
+	> animation_type_array;
 
-	animation_type_array const animation_types = {
-	{
+	animation_type_array const animation_types = {{
 		SGE_TEXT("none"),
 		SGE_TEXT("attacking"),
 		SGE_TEXT("walking"),
 		SGE_TEXT("dying"),
 		SGE_TEXT("deploying"),
 		SGE_TEXT("reloading")
-	} };
+	}};
 
 	for(animation_type_array::const_iterator it(animation_types.begin());
 	    it != animation_types.end();

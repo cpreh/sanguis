@@ -1,5 +1,6 @@
 #include "healthbar.hpp"
 #include "z_ordering.hpp"
+#include "sprite_part_index.hpp"
 #include "../client/id_dont_care.hpp"
 #include "../exception.hpp"
 #include <sge/su.hpp>
@@ -18,6 +19,10 @@ sge::sprite::unit const
 	border_size = 2,
 	bar_height = 8;
 
+sanguis::draw::sprite_part_index const
+	background(0),
+	foreground(1);
+
 }
 
 sanguis::draw::healthbar::healthbar(
@@ -30,7 +35,7 @@ sanguis::draw::healthbar::healthbar(
   health_(0),
   max_health_(0)
 {
-	at(0) = object(
+	at(background) = object(
 		sys,
 		z_ordering::healthbar_lower,
 		boost::none,
@@ -38,7 +43,7 @@ sanguis::draw::healthbar::healthbar(
 		boost::none,
 		sge::renderer::colors::black());
 
-	at(1) = object(
+	at(foreground) = object(
 		sys,
 		z_ordering::healthbar_upper);
 
@@ -115,25 +120,25 @@ sanguis::draw::healthbar::inner_dim() const
 sanguis::draw::object&
 sanguis::draw::healthbar::border()
 {
-	return at(0);
+	return at(background);
 }
 
 const sanguis::draw::object&
 sanguis::draw::healthbar::border() const
 {
-	return at(0);
+	return at(background);
 }
 
 sanguis::draw::object&
 sanguis::draw::healthbar::inner()
 {
-	return at(1);
+	return at(foreground);
 }
 
 const sanguis::draw::object&
 sanguis::draw::healthbar::inner() const
 {
-	return at(1);
+	return at(foreground);
 }
 
 sge::space_unit
@@ -158,7 +163,7 @@ void sanguis::draw::healthbar::recalc_health()
 
 	inner().w() = static_cast<sge::sprite::unit>(
 		static_cast<sge::space_unit>(inner_dim().w()) * remaining_health());
-	inner().set_color(sge::renderer::rgba8_color(
+	inner().color(sge::renderer::rgba8_color(
 		static_cast<sge::renderer::color_channel_8>(
 			(sge::su(1) - remaining_health()) * sge::su(pixel_channel_max)),
 		static_cast<sge::renderer::color_channel_8>(

@@ -1,13 +1,15 @@
 #include "entity.hpp"
 #include "base_parameters.hpp"
-#include "weak_link.hpp"
+#include "auto_weak_link.hpp"
 #include "../get_unique_id.hpp"
 #include "../message_converter.hpp"
 #include "../../messages/add.hpp"
 #include "../../angle_vector.hpp"
+#include "../../exception.hpp"
 #include <sge/math/vec_dim.hpp>
 #include <sge/math/power.hpp>
 #include <sge/linear_set_impl.hpp>
+#include <sge/text.hpp>
 #include <boost/foreach.hpp>
 #include <typeinfo>
 #include <cmath>
@@ -261,6 +263,32 @@ sanguis::server::entities::entity::add_message() const
 	return message_convert<messages::add>(*this);
 }
 
+sanguis::server::entities::auto_weak_link
+sanguis::server::entities::entity::link(
+	entity &e)
+{
+	if(!links.insert(&e).second)
+		throw exception(
+			SGE_TEXT("Double link insert in entity!"));
+	
+	try
+	{
+		if(!e.backlinks.insert(this).second)
+			throw exception(
+				SGE_TEXT("Double backlink insert in entity!"));
+	}
+	catch(...)
+	{
+		// TODO: can we wrap this in a RAII class somehow?
+		links.erase(&e);
+		throw;
+	}
+
+	return auto_weak_link(
+		*this,
+		e);
+}
+
 sanguis::server::entities::entity::~entity()
 {
 	BOOST_FOREACH(entity *e, links)
@@ -289,15 +317,6 @@ sanguis::server::entities::entity::insert(
 	auto_ptr e)
 {
 	return get_environment().insert(e);
-}
-
-sanguis::server::entities::auto_weak_link
-sanguis::server::entities::entity::link(
-	entity &e)
-{
-	// TODO: why do we have to do this?
-	auto_weak_link w(*this, e);
-	return w;
 }
 
 void sanguis::server::entities::entity::on_die()

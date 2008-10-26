@@ -1,4 +1,5 @@
 #include "sprite.hpp"
+#include "sprite_part_index.hpp"
 #include <boost/foreach.hpp>
 #include <boost/none.hpp>
 
@@ -7,9 +8,12 @@ sanguis::draw::sprite::sprite(
 	system &sys,
 	sprite_vector::size_type const sz,
 	object::order_type const order)
-: entity(
-	id,
-	sys)
+:
+	entity(
+		id,
+		sys),
+	speed_(sge::math::vector2::null()),
+	pos_(sge::math::vector2::null())
 {
 	sprites.reserve(sz);
 	for(sprite_vector::size_type i = 0; i < sz; ++i)
@@ -42,27 +46,29 @@ void sanguis::draw::sprite::update(
 }
 
 sanguis::draw::object &
-sanguis::draw::sprite::at(const sprite_vector::size_type i)
+sanguis::draw::sprite::at(
+	sprite_part_index const &i)
 {
-	return sprites.at(i);
+	return sprites.at(i.get());
 }
 
 sanguis::draw::object const &
-sanguis::draw::sprite::at(const sprite_vector::size_type i) const
+sanguis::draw::sprite::at(
+	sprite_part_index const &i) const
 {
-	return sprites.at(i);
+	return sprites.at(i.get());
 }
 
 sanguis::draw::object &
 sanguis::draw::sprite::master()
 {
-	return at(0);
+	return at(sprite_part_index(0));
 }
 
 sanguis::draw::object const &
 sanguis::draw::sprite::master() const
 {
-	return at(0);
+	return const_cast<sprite &>(*this).master();
 }
 
 sanguis::draw::sprite::iterator
@@ -115,7 +121,7 @@ void sanguis::draw::sprite::dim(const sge::sprite::dim& d)
 void sanguis::draw::sprite::color(sge::sprite::color const c)
 {
 	BOOST_FOREACH(object &s, sprites)
-		s.set_color(c);
+		s.color(c);
 }
 
 void sanguis::draw::sprite::visible(const bool v)

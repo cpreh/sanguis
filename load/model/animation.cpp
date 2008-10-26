@@ -1,25 +1,12 @@
 #include "animation.hpp"
+#include "animation_sound.hpp"
 #include "../resource/factory.hpp"
 
 sanguis::load::model::animation::animation(
-	sge::path const& path)
-: path(path)
+	sge::path const &path)
+:
+	path(path)
 {}
-
-sge::audio::sound_ptr const sanguis::load::model::animation::start_sound() const
-{
-	return resource::random_sound(path/SGE_TEXT("start"));
-}
-
-sge::audio::sound_ptr const sanguis::load::model::animation::running_sound() const
-{
-	return resource::random_sound(path/SGE_TEXT("running"));
-}
-
-sge::audio::sound_ptr const sanguis::load::model::animation::end_sound() const
-{
-	return resource::random_sound(path/SGE_TEXT("end"));
-}
 
 sge::sprite::animation_series const&
 sanguis::load::model::animation::get() const
@@ -30,4 +17,14 @@ sanguis::load::model::animation::get() const
 				resource::animation(path)));
 	
 	return *anim;
+}
+
+sanguis::load::model::animation_sound const &
+sanguis::load::model::animation::sounds() const
+{
+	if(!sounds_)
+		sounds_.reset(
+			new animation_sound(
+				path));
+	return *sounds_;
 }

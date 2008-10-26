@@ -3,6 +3,8 @@
 #include "machine.hpp"
 #include "log.hpp"
 #include <sge/log/headers.hpp>
+#include <sge/font/font.hpp>
+#include <sge/renderer/device.hpp>
 #include <sge/text.hpp>
 #include <sge/iconv.hpp>
 #include <ostream>

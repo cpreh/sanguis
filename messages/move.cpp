@@ -10,13 +10,15 @@ sanguis::messages::move::move()
 {}
 
 sanguis::messages::move::move(
-	const entity_id id,
-	const pos_type& pos_)
-: entity_message(id),
-  pos_(pos_)
+	entity_id const id,
+	pos_type const &pos_)
+:
+	entity_message(id),
+	pos_(pos_)
 {}
 
-const sanguis::messages::pos_type& sanguis::messages::move::pos() const
+sanguis::messages::pos_type const &
+sanguis::messages::move::pos() const
 {
 	return pos_;
 }

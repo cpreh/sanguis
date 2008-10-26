@@ -11,7 +11,7 @@
 #include "machine.hpp"
 #include "input_handler.hpp"
 #include "logic.hpp"
-#include <sge/scoped_connection.hpp>
+#include <sge/signals/scoped_connection.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/result.hpp>
@@ -55,11 +55,11 @@ private:
 	void send_message(
 		messages::auto_ptr);
 
-	draw::scene                drawer;
-	logic                      logic_;
-	input_handler              input;
-	sge::scoped_connection     input_connection;
-	bool                       paused;
+	draw::scene                     drawer;
+	logic                           logic_;
+	input_handler                   input;
+	sge::signals::scoped_connection input_connection;
+	bool                            paused;
 };
 
 }

@@ -10,13 +10,15 @@ sanguis::messages::resize::resize()
 {}
 
 sanguis::messages::resize::resize(
-	const entity_id id,
-	dim_type const& dim_)
-: entity_message(id),
-  dim_(dim_)
+	entity_id const id,
+	dim_type const &dim_)
+:
+	entity_message(id),
+	dim_(dim_)
 {}
 
-sanguis::messages::dim_type const& sanguis::messages::resize::dim() const
+sanguis::messages::dim_type const &
+sanguis::messages::resize::dim() const
 {
 	return dim_;
 }

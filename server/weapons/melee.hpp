@@ -23,6 +23,12 @@ public:
 private:
 	void do_attack(
 		delayed_attack const &);
+	
+	void on_init_attack(
+		entities::entity_with_weapon &owner);
+	void on_castpoint(
+		entities::entity_with_weapon &owner);
+
 	space_unit damage;
 };
 

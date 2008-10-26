@@ -58,7 +58,8 @@ void sanguis::draw::simple_sprite::visible(
 sge::math::vector2 const&
 sanguis::draw::simple_sprite::speed() const
 {
-	static const sge::math::vector2 r;
+	static const sge::math::vector2 r(
+		sge::math::vector2::null());
 	return r; // stub
 }
 

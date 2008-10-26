@@ -1,5 +1,6 @@
 #include "player.hpp"
 #include "z_ordering.hpp"
+#include "sprite_part_index.hpp"
 #include "../client/next_id.hpp"
 #include <sge/string.hpp>
 #include <sge/math/angle.hpp>
@@ -18,6 +19,11 @@ const sge::sprite::point player_body_center(25,32);
 const sge::sprite::point player_leg_center(32,32);
 
 sge::con::var<sge::space_unit> turning_speed(SGE_TEXT("player_turning_speed"),sge::su(0.4));
+
+sanguis::draw::sprite_part_index const
+	top(1),
+	bottom(0);
+
 }
 
 sanguis::draw::player::player(
@@ -35,13 +41,12 @@ sanguis::draw::player::player(
 	sys,
 	*this)
 {
-	bottom_sprite().order(z_ordering::player_lower);
+	at(bottom).order(z_ordering::player_lower);
 	
-	//top_sprite() = bottom_sprite();
-	top_sprite().order(z_ordering::player_upper);
+	at(top).order(z_ordering::player_upper);
 	
 	// FIXME: put the rotation point in a config file?
-	top_sprite().rotate_around(
+	at(top).rotate_around(
 		player_body_center);
 }
 
@@ -52,7 +57,7 @@ void sanguis::draw::player::speed(const sge::math::vector2 &v)
 	if (!v.is_null())
 		model::orientation(
 			*sge::math::angle_to<sge::space_unit>(
-				sge::math::vector2(),
+				sge::math::vector2::null(),
 				v),
 			0);
 }
@@ -75,29 +80,19 @@ void sanguis::draw::player::update(
 			sge::math::structure_cast<sge::space_unit>(
 				player_body_center));
 
-	sge::sprite::rotation_type const sprite_rotation = bottom_sprite().rotation();
+	sge::sprite::rotation_type const sprite_rotation = at(bottom).rotation();
 
 	sge::math::vector2 const new_rotation = sge::math::point_rotate(
 		leg_center,
-		sge::math::vector2(sge::su(bottom_sprite().w()/2),sge::su(bottom_sprite().h()/2)),
+		sge::math::vector2(sge::su(at(bottom).w()/2),sge::su(at(bottom).h()/2)),
 		sprite_rotation);
 
 	sge::math::vector2 const rot_abs = 
-		sge::math::structure_cast<sge::space_unit>(bottom_sprite().pos())+new_rotation;
+		sge::math::structure_cast<sge::space_unit>(at(bottom).pos())+new_rotation;
 
 	sge::math::vector2 const top_pos = rot_abs - body_center;
 
-	top_sprite().pos() = sge::math::structure_cast<sge::sprite::unit>(top_pos);
+	at(top).pos() = sge::math::structure_cast<sge::sprite::unit>(top_pos);
 
 	reaper_.update(time);
-}
-
-sanguis::draw::object& sanguis::draw::player::bottom_sprite()
-{
-	return at(0);
-}
-
-sanguis::draw::object& sanguis::draw::player::top_sprite()
-{
-	return at(1);
 }

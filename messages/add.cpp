@@ -10,22 +10,23 @@ sanguis::messages::add::add()
 {}
 
 sanguis::messages::add::add(
-	const entity_id id,
-	const entity_type::type type_,
-	const pos_type& pos_,
-	const space_unit angle_,
-	const vector2& speed_,
-	const space_unit health_,
-	const space_unit max_health_,
-	const dim_type& dim_)
-: entity_message(id),
-  type_(type_),
-  pos_(pos_),
-  angle_(angle_),
-  speed_(speed_),
-  health_(health_),
-  max_health_(max_health_),
-  dim_(dim_)
+	entity_id const id,
+	entity_type::type const type_,
+	pos_type const &pos_,
+	space_unit const angle_,
+	vector2 const &speed_,
+	space_unit const health_,
+	space_unit const max_health_,
+	dim_type const &dim_)
+:
+	entity_message(id),
+	type_(type_),
+	pos_(pos_),
+	angle_(angle_),
+	speed_(speed_),
+	health_(health_),
+	max_health_(max_health_),
+	dim_(dim_)
 {}
 	
 sanguis::entity_type::type sanguis::messages::add::type() const
