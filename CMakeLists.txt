@@ -24,15 +24,11 @@ FIND_PACKAGE(Boost 1.36.0 COMPONENTS
 	program_options)
 
 IF (${CMAKE_COMPILER_IS_GNUCXX})
-	SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -ansi -pedantic-errors -Wall -Wextra -Wconversion -Wfloat-equal -Wredundant-decls -Wstrict-null-sentinel -Winit-self -Woverloaded-virtual -Wold-style-cast")
-ENDIF ()
-
-IF (ENABLE_DEBUG AND CMAKE_COMPILER_IS_GNUCXX)
-	SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
+	ADD_DEFINITIONS("-fvisibility=hidden -ansi -pedantic-errors -Wall -Wextra -Wconversion -Wfloat-equal -Wredundant-decls -Wstrict-null-sentinel -Winit-self -Woverloaded-virtual -Wold-style-cast")
 ENDIF ()
 
 IF (HAVE_VARIADIC_TEMPLATES)
-	SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+	ADD_DEFINITIONS("-std=c++0x")
 ENDIF ()
 
 FILE (GLOB files 
