@@ -2,7 +2,7 @@
 #include "log.hpp"
 #include <sge/log/headers.hpp>
 #include <sge/text.hpp>
-#include <sge/time/second.hpp>
+#include <sge/time/second_f.hpp>
 #include <sge/time/resolution.hpp>
 
 void sanguis::draw::entity::update(
@@ -25,7 +25,7 @@ void sanguis::draw::entity::decay_time(
 	time_type const diff)
 {
 	decay_timer.interval(
-		sge::time::second(diff));
+		sge::time::second_f(diff));
 }
 
 bool sanguis::draw::entity::may_be_removed() const

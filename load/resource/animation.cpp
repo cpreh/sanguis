@@ -78,7 +78,7 @@ sanguis::load::resource::environment::do_load_animation(
 		if (line.empty())
 			continue;
 
-		sge::time::millisecond delay(sge::su(0));
+		sge::time::millisecond delay(0);
 		sge::string filename = line;
 
 		if (!const_delay)

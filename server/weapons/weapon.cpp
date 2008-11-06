@@ -3,7 +3,7 @@
 #include "log.hpp"
 #include "../entities/entity_with_weapon.hpp"
 #include "../../exception.hpp"
-#include <sge/time/second.hpp>
+#include <sge/time/second_f.hpp>
 #include <sge/text.hpp>
 #include <sge/log/headers.hpp>
 #include <ostream>
@@ -144,15 +144,18 @@ sanguis::server::weapons::weapon::weapon(
 	magazine_used(0),
 	magazine_size_(magazine_size_),
 	cooldown_timer(
-		sge::time::second(base_cooldown_),
+		sge::time::second_f(
+			base_cooldown_),
 		true,
 		diff.callback()),
 	cast_point_timer(
-		sge::time::second(cast_point_),
+		sge::time::second_f(
+			cast_point_),
 		false,
 		diff.callback()),
 	reload_timer(
-		sge::time::second(reload_time_),
+		sge::time::second_f(
+			reload_time_),
 		false,
 		diff.callback()),
 	state_(state::ready)

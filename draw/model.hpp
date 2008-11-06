@@ -35,6 +35,7 @@ public:
 	sge::space_unit health() const;
 protected:
 	virtual void update(time_type);
+	using sprite::orientation;
 	virtual void orientation(
 		sge::sprite::rotation_type);
 	void orientation(

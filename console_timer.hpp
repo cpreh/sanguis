@@ -2,21 +2,25 @@
 #define SANGUIS_CONSOLE_TIMER_HPP_INCLUDED
 
 #include <sge/time/timer.hpp>
+#include <sge/time/types.hpp>
 #include <sge/string.hpp>
-#include <sge/su.hpp>
 #include <sge/console/action_var.hpp>
 #include <boost/noncopyable.hpp>
 
-class console_timer : boost::noncopyable
-{
-	public:
-	console_timer(const sge::string &,const sge::space_unit);
+class console_timer : boost::noncopyable {
+public:
+	console_timer(
+		sge::string const &,
+		sge::time::funit);
 	sge::time::timer &v();
-	private:
+private:
 	sge::time::timer t;
-	sge::con::action_var<sge::space_unit>::type var;
+	sge::con::action_var<sge::time::funit>::type var;
 
-	sge::space_unit callback(const sge::space_unit,const sge::space_unit);
+	sge::time::funit
+	callback(
+		sge::time::funit,
+		sge::time::funit);
 };
 
 #endif

@@ -4,7 +4,7 @@
 #include "../../damage_types.hpp"
 #include "../../message_converter.hpp"
 #include "../../../exception.hpp"
-#include <sge/time/second.hpp>
+#include <sge/time/second_f.hpp>
 #include <sge/text.hpp>
 #include <boost/foreach.hpp>
 
@@ -48,7 +48,7 @@ sanguis::server::entities::projectiles::projectile::projectile(
 			dim)),
 	ptype_(nptype),
 	lifetime(
-		sge::time::second(
+		sge::time::second_f(
 			lifetime))
 {}
 

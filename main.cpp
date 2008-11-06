@@ -176,7 +176,7 @@ try
 	client.initiate();
 
 	sge::time::timer frame_timer(
-		sge::time::second(sge::su(1)));
+		sge::time::second(1));
 
 	bool running = true;
 	while (running)
