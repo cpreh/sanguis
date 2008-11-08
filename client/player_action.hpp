@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_PLAYER_ACTION_HPP_INCLUDED
 #define SANGUIS_CLIENT_PLAYER_ACTION_HPP_INCLUDED
 
-#include <sge/su.hpp>
+#include "../messages/types.hpp"
 #include <boost/statechart/event.hpp>
 
 namespace sanguis
@@ -9,7 +9,7 @@ namespace sanguis
 namespace client
 {
 
-typedef sge::space_unit key_scale;
+typedef messages::space_unit key_scale;
 
 struct player_action {
 	enum action_type {

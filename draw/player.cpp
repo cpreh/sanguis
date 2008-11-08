@@ -15,10 +15,13 @@
 namespace
 {
 
-const sge::sprite::point player_body_center(25,32);
-const sge::sprite::point player_leg_center(32,32);
+sge::sprite::point const
+	player_body_center(25,32),
+	player_leg_center(32,32);
 
-sge::con::var<sge::space_unit> turning_speed(SGE_TEXT("player_turning_speed"),sge::su(0.4));
+sge::con::var<sanguis::draw::funit> turning_speed(
+	SGE_TEXT("player_turning_speed"),
+	static_cast<sanguis::draw::funit>(0.4));
 
 sanguis::draw::sprite_part_index const
 	top(1),
@@ -34,7 +37,7 @@ sanguis::draw::player::player(
 	sys,
 	SGE_TEXT("player"),
 	z_ordering::model_generic),
-  angle_(sge::su(0)),
+  angle_(static_cast<funit>(0)),
   target_angle(angle_),
   reaper_(
   	client::next_id(),
@@ -51,13 +54,14 @@ sanguis::draw::player::player(
 }
 
 
-void sanguis::draw::player::speed(const sge::math::vector2 &v)
+void sanguis::draw::player::speed(
+	vector2 const &v)
 {
 	model::speed(v);
 	if (!v.is_null())
 		model::orientation(
-			*sge::math::angle_to<sge::space_unit>(
-				sge::math::vector2::null(),
+			*sge::math::angle_to<funit>(
+				vector2::null(),
 				v),
 			0);
 }
@@ -72,25 +76,26 @@ void sanguis::draw::player::update(
 {
 	model::update(time);
 
-	sge::math::vector2 const
+	vector2 const
 		leg_center(
-			sge::math::structure_cast<sge::space_unit>(
+			sge::math::structure_cast<funit>(
 				player_leg_center)),
 		body_center(
-			sge::math::structure_cast<sge::space_unit>(
+			sge::math::structure_cast<funit>(
 				player_body_center));
 
 	sge::sprite::rotation_type const sprite_rotation = at(bottom).rotation();
 
-	sge::math::vector2 const new_rotation = sge::math::point_rotate(
+	vector2 const new_rotation = sge::math::point_rotate(
 		leg_center,
-		sge::math::vector2(sge::su(at(bottom).w()/2),sge::su(at(bottom).h()/2)),
+		vector2(
+			static_cast<funit>(at(bottom).w()/2),
+			static_cast<funit>(at(bottom).h()/2)),
 		sprite_rotation);
 
-	sge::math::vector2 const rot_abs = 
-		sge::math::structure_cast<sge::space_unit>(at(bottom).pos())+new_rotation;
-
-	sge::math::vector2 const top_pos = rot_abs - body_center;
+	vector2 const
+		rot_abs = sge::math::structure_cast<funit>(at(bottom).pos())+new_rotation,
+		top_pos = rot_abs - body_center;
 
 	at(top).pos() = sge::math::structure_cast<sge::sprite::unit>(top_pos);
 

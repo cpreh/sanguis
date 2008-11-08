@@ -34,10 +34,11 @@ sanguis::load::resource::environment::do_load_sound(
 	    !boost::filesystem::is_directory(dir))
 		return sound_collection(
 			sound_container(),
-			sge::su(0));
+			static_cast<probability_type>(0));
 
 	sound_container container;
-	sge::space_unit probability(sge::su(1));
+	probability_type probability(
+		static_cast<probability_type>(1));
 
 	for(sge::directory_iterator it(dir), end; it != end; ++it)
 	{
@@ -78,7 +79,7 @@ sanguis::load::resource::environment::do_load_sound(
 						<< dirname
 						<< SGE_TEXT("\"!"));
 
-				if(probability < sge::su(0) || probability > sge::su(1))
+				if(probability < static_cast<probability_type>(0) || probability > static_cast<probability_type>(1))
 				{
 					SGE_LOG_WARNING(
 						log(),
@@ -88,7 +89,7 @@ sanguis::load::resource::environment::do_load_sound(
 							<< SGE_TEXT(" in \"")
 							<< dirname
 							<< SGE_TEXT("\"!"));
-					probability = sge::su(1);
+					probability = static_cast<probability_type>(1);
 				}
 			}
 			

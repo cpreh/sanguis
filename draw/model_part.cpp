@@ -21,27 +21,31 @@
 namespace
 {
 
-const sge::sprite::rotation_type invalid_rotation(
+sge::sprite::rotation_type const
+invalid_rotation(
 	std::numeric_limits<sge::sprite::rotation_type>::max());
 
-sge::con::var<sge::space_unit> rotation_speed(
+sge::con::var<sanguis::draw::funit>
+rotation_speed(
 	SGE_TEXT("sprite_rot_speed"),
-	sge::su(sge::math::pi<sge::space_unit>() * sge::su(2)));
+	static_cast<sanguis::draw::funit>(
+		sge::math::twopi<sanguis::draw::funit>()));
 
 }
 
 sanguis::draw::model_part::model_part(
 	load::model::part const& info,
 	object &ref)
-: anim_diff_clock(),
-  desired_orientation(
-	invalid_rotation),
-  info(&info),
-  ref(&ref),
+:
+	anim_diff_clock(),
+	desired_orientation(
+		invalid_rotation),
+	info(&info),
+	ref(&ref),
 	weapon_(weapon_type::none),
 	state(),
-  animation_(),
-  ended(false)
+	animation_(),
+	ended(false)
 {
 	ref.size() = sge::math::structure_cast<sge::sprite::unit>(
 		info
@@ -84,7 +88,7 @@ void sanguis::draw::model_part::update(
 	if(sge::math::compare(desired_orientation, invalid_rotation))
 		return;
 
-	sge::space_unit const
+	funit const
 		abs_angle(
 			sge::math::rel_angle_to_abs(
 				orientation())),
@@ -92,24 +96,24 @@ void sanguis::draw::model_part::update(
 			sge::math::rel_angle_to_abs(
 				desired_orientation));
 	
-	sge::space_unit const twopi = sge::math::twopi<sge::space_unit>();
+	funit const twopi = sge::math::twopi<funit>();
 
-	assert(abs_angle >= sge::su(0) && abs_angle <= twopi);
-	assert(abs_target >= sge::su(0) && abs_target <= twopi);
+	assert(abs_angle >= static_cast<funit>(0) && abs_angle <= twopi);
+	assert(abs_target >= static_cast<funit>(0) && abs_target <= twopi);
 
-	sge::space_unit const
+	funit const
 		abs_dist = std::abs(abs_target - abs_angle),
 		swap_dist = (abs_angle > abs_target) ? twopi-abs_angle+abs_target : twopi-abs_target+abs_angle,
 		min_dist = std::min(swap_dist,abs_dist);
 
-	assert(abs_dist >= sge::su(0) && swap_dist >= sge::su(0) && min_dist >= sge::su(0));
+	assert(abs_dist >= static_cast<funit>(0) && swap_dist >= static_cast<funit>(0) && min_dist >= static_cast<funit>(0));
 
-	sge::space_unit const dir
+	funit const dir
 		= abs_angle > abs_target
-		? ((swap_dist > abs_dist) ? sge::su(-1) : sge::su(1))
-		: ((swap_dist > abs_dist) ? sge::su(1) : sge::su(-1));
+		? ((swap_dist > abs_dist) ? static_cast<funit>(-1) : static_cast<funit>(1))
+		: ((swap_dist > abs_dist) ? static_cast<funit>(1) : static_cast<funit>(-1));
 
-	sge::space_unit const turning_speed = rotation_speed.value();
+	funit const turning_speed = rotation_speed.value();
 
 	update_orientation(
 		min_dist < time / turning_speed

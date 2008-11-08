@@ -17,7 +17,7 @@ sanguis::draw::model::model(
 	sge::string const &name,
 	object::order_type const order,
 	bool const show_healthbar,
-	sge::space_unit const start_health)
+	funit const start_health)
 : sprite(
 	id,
 	sys,
@@ -45,13 +45,13 @@ sanguis::draw::model::model(
 		animation_type::deploying);
 }
 
-sge::space_unit
+sanguis::draw::funit
 sanguis::draw::model::max_health() const
 {
 	return max_health_;
 }
 
-sge::space_unit
+sanguis::draw::funit
 sanguis::draw::model::health() const
 {
 	return health_;
@@ -92,9 +92,9 @@ bool sanguis::draw::model::may_be_removed() const
 }
 
 void sanguis::draw::model::speed(
-	sge::math::vector2 const &s)
+	vector2 const &s)
 {
-	sge::math::vector2 const old_speed(
+	vector2 const old_speed(
 		speed());
 	
 	sprite::speed(s);
@@ -121,7 +121,7 @@ bool sanguis::draw::model::walking() const
 }
 
 void sanguis::draw::model::health(
-	sge::space_unit const health)
+	funit const health)
 {
 	health_ = health;
 	update_healthbar();
@@ -131,11 +131,11 @@ void sanguis::draw::model::health(
 	
 	healthbar_.reset();
 	change_animation();
-	speed(sge::math::vector2(0, 0)); // FIXME
+	speed(vector2::null()); // FIXME
 }
 
 void sanguis::draw::model::max_health(
-	sge::space_unit const max_health)
+	funit const max_health)
 {
 	max_health_ = max_health;
 	update_healthbar();

@@ -6,17 +6,16 @@ sanguis::draw::simple_sprite::simple_sprite(
 	system &sys,
 	object::order_type const order,
 	sge::texture::part_ptr const tex)
-: entity(
-	id,
-	sys),
-  sprite(
-  	sys,
-	order,
-  	sge::sprite::point(
-		0,
-		0),
-	tex,
-	sge::sprite::texture_dim)
+:
+	entity(
+		id,
+		sys),
+	sprite(
+		sys,
+		order,
+		sge::sprite::point::null(),
+		tex,
+		sge::sprite::texture_dim)
 {}
 
 void sanguis::draw::simple_sprite::update(
@@ -26,13 +25,13 @@ void sanguis::draw::simple_sprite::update(
 }
 
 void sanguis::draw::simple_sprite::orientation(
-	const sge::sprite::rotation_type angle)
+	sge::sprite::rotation_type const angle)
 {
 	get().rotation(angle);
 }
 
 void sanguis::draw::simple_sprite::speed(
-	sge::math::vector2 const& speed_)
+	vector2 const &speed_)
 {
 	// stub
 }
@@ -55,11 +54,11 @@ void sanguis::draw::simple_sprite::visible(
 	get().visible(v);
 }
 
-sge::math::vector2 const&
+sanguis::draw::vector2 const &
 sanguis::draw::simple_sprite::speed() const
 {
-	static const sge::math::vector2 r(
-		sge::math::vector2::null());
+	static const vector2 r(
+		vector2::null());
 	return r; // stub
 }
 

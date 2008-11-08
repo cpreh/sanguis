@@ -33,10 +33,10 @@ bool sanguis::draw::entity::may_be_removed() const
 	return decay_timer.expired();
 }
 
-void sanguis::draw::entity::health(sge::space_unit)
+void sanguis::draw::entity::health(funit)
 {}
 
-void sanguis::draw::entity::max_health(sge::space_unit)
+void sanguis::draw::entity::max_health(funit)
 {}
 
 void sanguis::draw::entity::weapon(weapon_type::type)

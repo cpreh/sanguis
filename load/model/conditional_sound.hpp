@@ -2,9 +2,9 @@
 #define SANGUIS_LOAD_MODEL_CONDITIONAL_SOUND_HPP_INCLUDED
 
 #include "random_sound.hpp"
+#include "../probability_type.hpp"
 #include <sge/audio/sound_fwd.hpp>
 #include <sge/random/uniform.hpp>
-#include <sge/su.hpp>
 
 namespace sanguis
 {
@@ -24,9 +24,9 @@ public:
 	sge::audio::sound_ptr const
 	random() const;
 private:
-	sge::space_unit range;
+	probability_type range;
 	mutable sge::random::uniform<
-		sge::space_unit
+		probability_type
 	> rng;
 
 	random_sound random_sound_;
