@@ -1,21 +1,14 @@
-project (HELLO)
+project (sanguis)
 
-INCLUDE (CheckCXXSourceRuns)
+INCLUDE (FindPkgConfig)
 
 SET (CMAKE_VERBOSE_MAKEFILE ON)
 SET (CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS ON)
 
-CHECK_CXX_SOURCE_RUNS(
-	"#include <sge/config.h>
-	 #include <cstdlib>
-	 int main() {
-	 #ifdef SGE_HAVE_VARIADIC_TEMPLATES
-	 	return 0;
-	 #else
-	 	return EXIT_FAILURE;
-	 #endif
-	 }"
-	 HAVE_VARIADIC_TEMPLATES)
+pkg_check_modules (SGE spacegameengine)
+
+ADD_DEFINITIONS(${SGE_CFLAGS})
+LINK_DIRECTORIES(${SGE_LIBRARY_DIRS})
 
 FIND_PACKAGE(Boost 1.36.0 COMPONENTS
 	filesystem
@@ -25,10 +18,6 @@ FIND_PACKAGE(Boost 1.36.0 COMPONENTS
 
 IF (${CMAKE_COMPILER_IS_GNUCXX})
 	ADD_DEFINITIONS("-fvisibility=hidden -ansi -pedantic-errors -Wall -Wextra -Wconversion -Wfloat-equal -Wredundant-decls -Wstrict-null-sentinel -Winit-self -Woverloaded-virtual -Wold-style-cast")
-ENDIF ()
-
-IF (HAVE_VARIADIC_TEMPLATES)
-	ADD_DEFINITIONS("-std=c++0x")
 ENDIF ()
 
 FILE (GLOB files 
