@@ -132,6 +132,7 @@ try
 		sys.renderer(),
 		sge::texture::default_creator<sge::texture::no_fragmented>(
 			sys.renderer(),
+			sge::renderer::color_format::rgba8, // TODO: what do we want to use here?
 			sge::renderer::linear_filter));
 	sge::font::font_ptr const console_font(new sge::font::font(metrics,drawer));
 

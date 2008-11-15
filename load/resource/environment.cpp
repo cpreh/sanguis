@@ -17,15 +17,17 @@ sanguis::load::resource::environment::environment(
 	sge::audio::multi_loader &ml,
 	sge::audio::player_ptr const player,
 	sge::audio::pool_ptr const sound_pool) 
-: rend(r),
-  il(il),
+:
+	rend(r),
+	il(il),
 	ml(ml),
 	player(player),
-  texman(
-  	rend,
-	sge::texture::default_creator<sge::texture::no_fragmented>(
+	texman(
 		rend,
-		sge::renderer::linear_filter)),
+		sge::texture::default_creator<sge::texture::no_fragmented>(
+			rend,
+			sge::renderer::color_format::rgba8, // TODO: what to use here?
+			sge::renderer::linear_filter)),
 	sound_pool(sound_pool)
 {
 	load_textures();
