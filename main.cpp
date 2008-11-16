@@ -106,14 +106,16 @@ try
 
 	sge::systems::instance sys(
 		sge::systems::list()
-		(sge::renderer::parameters(
-			sge::renderer::display_mode(
-				sanguis::resolution(),
-				sge::renderer::bit_depth::depth32),
-			sge::renderer::depth_buffer::off,
-			sge::renderer::stencil_buffer::off,
-			sge::renderer::window_mode::windowed,
-			sge::renderer::vsync::on))
+		(sge::window::parameters(
+			SGE_TEXT("sanguis"),
+			sge::renderer::parameters(
+				sge::renderer::display_mode(
+					sanguis::resolution(),
+					sge::renderer::bit_depth::depth32),
+				sge::renderer::depth_buffer::off,
+				sge::renderer::stencil_buffer::off,
+				sge::renderer::window_mode::windowed,
+				sge::renderer::vsync::on)))
 		(sge::systems::parameterless::input)
 		(sge::systems::parameterless::audio_player)
 		(sge::systems::parameterless::image)
