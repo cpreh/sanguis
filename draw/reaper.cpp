@@ -4,31 +4,33 @@
 #include <sge/math/compare.hpp>
 #include <sge/math/signum.hpp>
 #include <sge/sprite/types.hpp>
-#include <sge/su.hpp>
-#include <sge/iostream.hpp>
 #include <cmath>
 #include <cassert>
 
 namespace
 {
-const sge::space_unit health_regain = sge::su(5);
+
+sanguis::draw::funit const
+	health_regain = static_cast<sanguis::draw::funit>(5);
+
 }
 
 sanguis::draw::reaper::reaper(
 	entity_id const id,
 	system &sys,
 	model const &p)
-: model(
-	id,
-	sys,
-	SGE_TEXT("reaper"),
-	z_ordering::reaper,
-	false,
-	sge::su(1)),
-  p(p),
-  current_health(p.health()),
-  target_health(p.health()),
-  inited(false)
+:
+	model(
+		id,
+		sys,
+		SGE_TEXT("reaper"),
+		z_ordering::reaper,
+		false,
+		static_cast<funit>(1)),
+	p(p),
+	current_health(p.health()),
+	target_health(p.health()),
+	inited(false)
 {
 	color(
 		sge::renderer::rgba8_color(
@@ -42,7 +44,7 @@ void sanguis::draw::reaper::update(time_type const t)
 {
 	assert(!sge::math::almost_zero(p.max_health()));
 
-	orientation(sge::su(0));
+	orientation(static_cast<funit>(0));
 
 	if (!sge::math::nearly_equals(target_health,p.health()))
 	{
@@ -55,7 +57,7 @@ void sanguis::draw::reaper::update(time_type const t)
 		{
 			target_health = p.health();
 			// just set some speed so the walking animation is played
-			speed(sge::math::vector2(sge::su(1),sge::su(0)));
+			speed(vector2(static_cast<funit>(1),static_cast<funit>(0)));
 		}
 	}
 
@@ -63,9 +65,9 @@ void sanguis::draw::reaper::update(time_type const t)
 
 	// reset speed if target is reached
 	if (!regain)
-		speed(sge::math::vector2::null());
+		speed(vector2::null());
 	else
-		speed(sge::math::vector2(sge::su(1),sge::su(0)));
+		speed(vector2(static_cast<funit>(1), static_cast<funit>(0)));
 	
 	model::update(t);
 
@@ -74,9 +76,9 @@ void sanguis::draw::reaper::update(time_type const t)
 		p.pos() -
 			sge::sprite::point(
 				static_cast<sge::sprite::unit>(
-					sge::su(current_health)/sge::su(p.max_health())*sge::su(resolution().w()/4)),
+					static_cast<funit>(current_health)/static_cast<funit>(p.max_health())*static_cast<funit>(resolution().w()/4)),
 				static_cast<sge::sprite::unit>(0)));
 	
 	if (regain)
-		current_health += sge::math::signum(target_health - current_health) * health_regain * sge::su(t);
+		current_health += sge::math::signum(target_health - current_health) * health_regain * static_cast<funit>(t);
 }

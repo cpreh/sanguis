@@ -9,9 +9,9 @@ sanguis::load::model::conditional_sound::conditional_sound(
 	range(
 		col.probability()),
 	rng(
-		sge::random::inclusive_range<sge::space_unit>(
-			sge::su(0),
-			sge::su(1))),
+		sge::random::inclusive_range<probability_type>(
+			static_cast<probability_type>(0),
+			static_cast<probability_type>(1))),
 	random_sound_(
 		col.sounds())
 {}
@@ -20,7 +20,7 @@ sge::audio::sound_ptr const
 sanguis::load::model::conditional_sound::random() const
 {
 	// avoid the corner case in which the probability is 1
-	return sge::math::compare(range, sge::su(1)) || rng() < range
+	return sge::math::compare(range, static_cast<probability_type>(1)) || rng() < range
 		? random_sound_.random()
 		: sge::audio::sound_ptr();
 }

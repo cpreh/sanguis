@@ -9,7 +9,6 @@
 #include <sge/sprite/types.hpp>
 #include <sge/math/vector.hpp>
 #include <sge/log/fwd.hpp>
-#include <sge/su.hpp>
 #include <sge/string.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
 #include <boost/scoped_ptr.hpp>
@@ -29,12 +28,13 @@ public:
 		sge::string const& name,
 		object::order_type order,
 		bool needs_healthbar = true,
-		sge::space_unit start_health = sge::su(0));
+		funit start_health = static_cast<funit>(0));
 
-	sge::space_unit max_health() const;
-	sge::space_unit health() const;
+	funit max_health() const;
+	funit health() const;
 protected:
 	virtual void update(time_type);
+	using sprite::orientation;
 	virtual void orientation(
 		sge::sprite::rotation_type);
 	void orientation(
@@ -42,7 +42,7 @@ protected:
 		sprite_vector::size_type index);
 	bool may_be_removed() const;
 	virtual void speed(
-		sge::math::vector2 const &);
+		vector2 const &);
 	using sprite::speed;
 	model_part &part(
 		sprite_part_index const &);
@@ -51,8 +51,8 @@ protected:
 	bool dead() const;
 	bool walking() const;
 private:
-	void health(sge::space_unit);
-	void max_health(sge::space_unit);
+	void health(funit);
+	void max_health(funit);
 	void weapon(weapon_type::type);
 	void start_attacking();
 	void stop_attacking();
@@ -71,7 +71,7 @@ private:
 
 	bool            attacking,
 	                reloading;
-	sge::space_unit health_,
+	funit health_,
 	                max_health_;
 	boost::scoped_ptr<healthbar> healthbar_;
 	

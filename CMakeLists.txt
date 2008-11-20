@@ -1,21 +1,20 @@
-project (HELLO)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
 
-INCLUDE (CheckCXXSourceRuns)
+project (sanguis)
+
+IF(${CMAKE_BINARY_DIR} STREQUAL ${CMAKE_SOURCE_DIR})
+	message(FATAL_ERROR "In-source builds are not permitted. Make a separate folder for building:\nmkdir build; cd build; cmake ..\nBefore that, remove the files that cmake just created:\nrm -rf CMakeCache.txt CMakeFiles")
+ENDIF(${CMAKE_BINARY_DIR} STREQUAL ${CMAKE_SOURCE_DIR})
+
+INCLUDE (FindPkgConfig)
 
 SET (CMAKE_VERBOSE_MAKEFILE ON)
 SET (CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS ON)
 
-CHECK_CXX_SOURCE_RUNS(
-	"#include <sge/config.h>
-	 #include <cstdlib>
-	 int main() {
-	 #ifdef SGE_HAVE_VARIADIC_TEMPLATES
-	 	return 0;
-	 #else
-	 	return EXIT_FAILURE;
-	 #endif
-	 }"
-	 HAVE_VARIADIC_TEMPLATES)
+pkg_check_modules (SGE spacegameengine)
+
+ADD_DEFINITIONS(${SGE_CFLAGS})
+LINK_DIRECTORIES(${SGE_LIBRARY_DIRS})
 
 FIND_PACKAGE(Boost 1.36.0 COMPONENTS
 	filesystem
@@ -24,15 +23,7 @@ FIND_PACKAGE(Boost 1.36.0 COMPONENTS
 	program_options)
 
 IF (${CMAKE_COMPILER_IS_GNUCXX})
-	SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -ansi -pedantic-errors -Wall -Wextra -Wconversion -Wfloat-equal -Winit-self -Wold-style-cast")
-ENDIF ()
-
-IF (ENABLE_DEBUG AND CMAKE_COMPILER_IS_GNUCXX)
-	SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
-ENDIF ()
-
-IF (HAVE_VARIADIC_TEMPLATES)
-	SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+	ADD_DEFINITIONS("-fvisibility=hidden -ansi -pedantic-errors -Wall -Wextra -Wconversion -Wfloat-equal -Wredundant-decls -Wstrict-null-sentinel -Winit-self -Woverloaded-virtual -Wold-style-cast")
 ENDIF ()
 
 FILE (GLOB files 

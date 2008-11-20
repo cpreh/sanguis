@@ -4,7 +4,7 @@
 #include "../../random.hpp"
 #include "../../angle_vector.hpp"
 #include "../../resolution.hpp"
-#include <sge/time/second.hpp>
+#include <sge/time/second_f.hpp>
 #include <sge/math/constants.hpp>
 #include <boost/tr1/random.hpp>
 #include <algorithm>
@@ -17,12 +17,12 @@ sanguis::server::waves::simple::simple(
 :
 	diff_(),
 	delay_timer(
-		sge::time::second(
+		sge::time::second_f(
 			delay),
 		true,
 		diff_.callback()),
 	spawn_timer(
-		sge::time::second(
+		sge::time::second_f(
 			spawn_interval),
 		true,
 		diff_.callback()),

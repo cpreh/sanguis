@@ -2,7 +2,7 @@
 #define SANGUIS_LOAD_SOUND_COLLECTION_HPP_INCLUDED
 
 #include "sound_container.hpp"
-#include <sge/su.hpp>
+#include "probability_type.hpp"
 
 namespace sanguis
 {
@@ -13,13 +13,13 @@ class sound_collection {
 public:
 	sound_collection(
 		sound_container const &,
-		sge::space_unit probability);
+		probability_type probability);
 
 	sound_container const &sounds() const;
-	sge::space_unit probability() const;
+	probability_type probability() const;
 private:
-	sound_container sounds_;
-	sge::space_unit probability_;
+	sound_container  sounds_;
+	probability_type probability_;
 };
 
 }

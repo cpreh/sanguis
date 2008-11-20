@@ -1,5 +1,5 @@
 #include "aoe_damage.hpp"
-#include <sge/time/second.hpp>
+#include <sge/time/second_f.hpp>
 #include <boost/foreach.hpp>
 #include <boost/assign/list_of.hpp>
 
@@ -31,7 +31,7 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 	pulses(0),
 	max_pulses(max_pulses),
 	pulse_timer(
-		sge::time::second(
+		sge::time::second_f(
 			pulse_diff),
 		true,
 		diff_clock_.callback()),

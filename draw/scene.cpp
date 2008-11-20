@@ -269,7 +269,7 @@ void sanguis::draw::scene::operator()(
 	messages::speed const &m)
 {
 	get_entity(m.id()).speed(
-		sge::math::structure_cast<sge::space_unit>(
+		sge::math::structure_cast<funit>(
 			virtual_to_screen(
 				ss.get_renderer()->screen_size(),
 				m.get())));

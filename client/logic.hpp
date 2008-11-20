@@ -77,7 +77,7 @@ private:
 	action_handlers                 actions;
 		
 	entity_id                       player_id_;
-	sge::math::vector2              direction;
+	sge::math::vector<float, 2>     direction;
 	sge::sprite::point              cursor_pos_,
 	                                player_center;
 	weapon_type::type               current_weapon;

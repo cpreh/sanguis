@@ -12,10 +12,10 @@ class healthbar : public sprite {
 public:
 	explicit healthbar(
 		system &);
-	void health(sge::space_unit);
-	void max_health(sge::space_unit);
-	sge::space_unit max_health() const;
-	sge::space_unit health() const;
+	void health(funit);
+	void max_health(funit);
+	funit max_health() const;
+	funit health() const;
 	void attach_to(
 		sge::sprite::point const &,
 		sge::sprite::dim const &);
@@ -28,10 +28,10 @@ private:
 	object const &border() const;
 	object &inner();
 	object const &inner() const;
-	sge::space_unit remaining_health() const;
+	funit remaining_health() const;
 	void recalc_health();
 
-	sge::space_unit health_,
+	funit health_,
 	                max_health_;
 };
 

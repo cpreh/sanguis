@@ -9,8 +9,8 @@
 #include <sge/audio/pool.hpp>
 #include <sge/renderer/scoped_block.hpp>
 #include <sge/input/system.hpp>
+#include <sge/mainloop/dispatch.hpp>
 #include <sge/iostream.hpp>
-#include <sge/window.hpp>
 #include <boost/bind.hpp>
 #include <boost/lambda/bind.hpp>
 #include <boost/lambda/construct.hpp>
@@ -23,19 +23,40 @@ sanguis::client::machine::machine(
 	sge::con::console_gfx &con,
 	net::address_type const &address_,
 	net::port_type const port_) 
-: address_(address_),
-  port_(port_),
-  s_conn(net_.register_connect(boost::bind(&machine::connect_callback,this))),
-  s_disconn(
-	net_.register_disconnect(boost::bind(&machine::disconnect_callback,this,_1))),
-  s_data(net_.register_data(boost::bind(&machine::data_callback,this,_1))),
-  sys(sys),
+:
+	address_(address_),
+	port_(port_),
+	s_conn(
+		net_.register_connect(
+			boost::bind(
+				&machine::connect_callback,
+				this))),
+	s_disconn(
+		net_.register_disconnect(
+			boost::bind(
+				&machine::disconnect_callback,
+				this,
+				_1))),
+	s_data(
+		net_.register_data(
+			boost::bind(
+				&machine::data_callback,
+				this,
+				_1))),
+	sys(sys),
 	sound_pool_(sound_pool_),
-  font_(font_),
-  ks(ks),
-  con(con),
-  con_stdlib(boost::bind(&sge::con::console_gfx::print, &con, _1)),
-  con_wrapper_(con, sys.input_system(), sge::input::kc::key_f1)
+	font_(font_),
+	ks(ks),
+	con(con),
+	con_stdlib(
+		boost::bind(
+			&sge::con::console_gfx::print,
+			&con,
+			_1)),
+	con_wrapper_(
+		con,
+		sys.input_system(),
+		sge::input::kc::key_f1)
 {}
 
 void sanguis::client::machine::connect()
@@ -118,9 +139,7 @@ bool sanguis::client::machine::process(
 
 void sanguis::client::machine::dispatch()
 {
-	sge::window::dispatch();
-
-	sys.input_system()->dispatch();
+	sge::mainloop::dispatch();
 }
 
 sge::renderer::device_ptr const

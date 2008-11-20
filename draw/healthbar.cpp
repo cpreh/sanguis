@@ -3,7 +3,6 @@
 #include "sprite_part_index.hpp"
 #include "../client/id_dont_care.hpp"
 #include "../exception.hpp"
-#include <sge/su.hpp>
 #include <sge/format.hpp>
 #include <sge/math/compare.hpp>
 #include <sge/renderer/color.hpp>
@@ -51,26 +50,26 @@ sanguis::draw::healthbar::healthbar(
 }
 
 void sanguis::draw::healthbar::health(
-	const sge::space_unit nhealth)
+	const funit nhealth)
 {
 	health_ = nhealth;
 	recalc_health();
 }
 
 void sanguis::draw::healthbar::max_health(
-	const sge::space_unit nmax_health)
+	const funit nmax_health)
 {
 	max_health_ = nmax_health;
 	recalc_health();
 }
 
-sge::space_unit
+sanguis::draw::funit
 sanguis::draw::healthbar::health() const
 {
 	return health_;
 }
 
-sge::space_unit
+sanguis::draw::funit
 sanguis::draw::healthbar::max_health() const
 {
 	return max_health_;
@@ -141,7 +140,7 @@ sanguis::draw::healthbar::inner() const
 	return at(foreground);
 }
 
-sge::space_unit
+sanguis::draw::funit
 sanguis::draw::healthbar::remaining_health() const
 {
 	return health_ / max_health_;
@@ -162,12 +161,12 @@ void sanguis::draw::healthbar::recalc_health()
 		std::numeric_limits<sge::renderer::color_channel_8>::max());
 
 	inner().w() = static_cast<sge::sprite::unit>(
-		static_cast<sge::space_unit>(inner_dim().w()) * remaining_health());
+		static_cast<funit>(inner_dim().w()) * remaining_health());
 	inner().color(sge::renderer::rgba8_color(
 		static_cast<sge::renderer::color_channel_8>(
-			(sge::su(1) - remaining_health()) * sge::su(pixel_channel_max)),
+			(static_cast<funit>(1) - remaining_health()) * static_cast<funit>(pixel_channel_max)),
 		static_cast<sge::renderer::color_channel_8>(
-			remaining_health() * sge::su(pixel_channel_max)),
+			remaining_health() * static_cast<funit>(pixel_channel_max)),
 		0,
 		pixel_channel_max));
 }

@@ -14,15 +14,15 @@ namespace messages
 {
 
 typedef float space_unit;
-typedef sge::math::basic_vector<space_unit,2u> vector2;
-typedef sge::math::basic_vector<space_unit,3u> vector3;
-typedef sge::math::basic_vector<boost::int32_t,2u> ivector2_32;
-typedef sge::math::basic_vector<boost::int32_t,3u> ivector3_32;
-typedef sge::math::basic_dim<boost::int32_t,2u> idim2_32;
+typedef sge::math::vector<space_unit,2u> vector2;
+typedef sge::math::vector<space_unit,3u> vector3;
+typedef sge::math::vector<boost::int32_t,2u> ivector2_32;
+typedef sge::math::vector<boost::int32_t,3u> ivector3_32;
+typedef sge::math::dim<boost::int32_t,2u> idim2_32;
 typedef std::wstring string; // FIXME
 typedef vector2 pos_type;
-typedef sge::math::basic_dim<space_unit,2u> dim_type;
-typedef sge::math::basic_circle<space_unit> circle_type;
+typedef sge::math::dim<space_unit,2u> dim_type;
+typedef sge::math::circle<space_unit> circle_type;
 typedef boost::uint32_t size_type;
 typedef space_unit health_type;
 typedef boost::uint32_t exp_type;

@@ -30,12 +30,12 @@ public:
 		time_type);
 	virtual bool may_be_removed() const;
 	virtual void orientation(sge::sprite::rotation_type) = 0;
-	virtual void speed(sge::math::vector2 const &) = 0;
+	virtual void speed(vector2 const &) = 0;
 	virtual void pos(sge::sprite::point const &) = 0;
 	virtual void dim(sge::sprite::dim const &) = 0;
 	virtual void visible(bool) = 0;
-	virtual void health(sge::space_unit);
-	virtual void max_health(sge::space_unit);
+	virtual void health(funit);
+	virtual void max_health(funit);
 	virtual void weapon(weapon_type::type);
 	virtual void start_attacking();
 	virtual void stop_attacking();
@@ -46,8 +46,8 @@ protected:
 	entity(
 		entity_id id,
 		system &);
-	virtual sge::math::vector2 const &speed() const = 0;
-	virtual sge::space_unit orientation() const = 0;
+	virtual vector2 const &speed() const = 0;
+	virtual funit orientation() const = 0;
 
 	system &get_system();
 private:

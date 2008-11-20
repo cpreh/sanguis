@@ -17,7 +17,7 @@ public:
 	void update(time_type);
 private:
 	model const     &p;
-	sge::space_unit current_health,
+	funit current_health,
 	                target_health;
 	bool            inited;
 };

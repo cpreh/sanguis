@@ -157,8 +157,8 @@ void sanguis::client::logic::handle_rotation_y(
 
 void sanguis::client::logic::update_rotation()
 {
-	boost::optional<sge::space_unit> const rotation(
-		sge::math::angle_to<sge::space_unit>(
+	boost::optional<messages::space_unit> const rotation(
+		sge::math::angle_to<messages::space_unit>(
 			player_center,
 			cursor_pos_));
 	if(!rotation)

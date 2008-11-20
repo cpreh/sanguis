@@ -42,7 +42,7 @@ sanguis::server::states::unpaused::unpaused()
 :
 	send_timer(
 		SGE_TEXT("send_timer"),
-		sge::su(0.1))
+		static_cast<sge::time::funit>(0.1))
 {
 	SGE_LOG_DEBUG(
 		log(),

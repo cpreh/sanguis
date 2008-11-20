@@ -1,6 +1,5 @@
 #include "generator.hpp"
 #include "simple.hpp"
-#include <sge/time/second.hpp>
 #include <boost/assign/ptr_list_inserter.hpp>
 
 sanguis::server::waves::generator::generator()

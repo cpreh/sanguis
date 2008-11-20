@@ -12,8 +12,8 @@ sanguis::draw::sprite::sprite(
 	entity(
 		id,
 		sys),
-	speed_(sge::math::vector2::null()),
-	pos_(sge::math::vector2::null())
+	speed_(vector2::null()),
+	pos_(vector2::null())
 {
 	sprites.reserve(sz);
 	for(sprite_vector::size_type i = 0; i < sz; ++i)
@@ -95,20 +95,21 @@ sanguis::draw::sprite::end() const
 	return sprites.end();
 }
 
-void sanguis::draw::sprite::orientation(const sge::space_unit o)
+void sanguis::draw::sprite::orientation(const funit o)
 {
 	BOOST_FOREACH(object &s, sprites)
 		s.rotation(o);
 }
 
-void sanguis::draw::sprite::speed(const sge::math::vector2& s)
+void sanguis::draw::sprite::speed(
+	vector2 const &s)
 {
 	speed_ = s;
 }
 
 void sanguis::draw::sprite::pos(const sge::sprite::point& p)
 {
-	pos_ = sge::math::structure_cast<sge::space_unit>(p);
+	pos_ = sge::math::structure_cast<funit>(p);
 	update_pos(p);
 }
 
@@ -136,7 +137,8 @@ sanguis::draw::sprite::orientation() const
 	return master().rotation();
 }
 
-const sge::math::vector2& sanguis::draw::sprite::speed() const
+sanguis::draw::vector2 const &
+sanguis::draw::sprite::speed() const
 {
 	return speed_;
 }

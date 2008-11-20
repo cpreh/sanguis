@@ -36,22 +36,22 @@ protected:
 	const_iterator begin() const;
 	const_iterator end() const;
 
-	virtual void orientation(sge::space_unit);
-	virtual void speed(sge::math::vector2 const &);
+	virtual void orientation(funit);
+	virtual void speed(vector2 const &);
 	virtual void pos(const sge::sprite::point&);
 	virtual void dim(const sge::sprite::dim&);
 	virtual void color(sge::sprite::color);
 	virtual void visible(bool);
 
 	sge::sprite::rotation_type orientation() const;
-	const sge::math::vector2& speed() const;
+	vector2 const &speed() const;
 private:
 	void update_pos(const sge::sprite::point&);
 	void update_orientation(sge::sprite::rotation_type);
 
-	sge::math::vector2         speed_,
-	                           pos_;
-	sprite_vector              sprites;
+	vector2         speed_,
+	                pos_;
+	sprite_vector   sprites;
 };
 
 }
