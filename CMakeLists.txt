@@ -23,7 +23,10 @@ FIND_PACKAGE(Boost 1.36.0 COMPONENTS
 	program_options)
 
 IF (${CMAKE_COMPILER_IS_GNUCXX})
-	ADD_DEFINITIONS("-fvisibility=hidden -ansi -pedantic-errors -Wall -Wextra -Wconversion -Wfloat-equal -Wredundant-decls -Wstrict-null-sentinel -Winit-self -Woverloaded-virtual -Wold-style-cast")
+	ADD_DEFINITIONS("-fvisibility=hidden -ansi -pedantic-errors -Wall"
+	"-Wextra -Wconversion -Wfloat-equal -Wredundant-decls"
+	"-Wstrict-null-sentinel -Winit-self -Woverloaded-virtual"
+	"-Wold-style-cast -Wnon-virtual-dtor -Wctor-dtor-privacy -Wsign-promo")
 ENDIF ()
 
 FILE (GLOB files 
