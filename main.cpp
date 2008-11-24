@@ -15,6 +15,7 @@
 #include <sge/exception.hpp>
 #include <sge/iconv.hpp>
 #include <sge/media.hpp>
+#include <sge/make_shared_ptr.hpp>
 #include <sge/console/console.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/systems/list.hpp>
@@ -35,6 +36,7 @@
 #include <sge/audio/player.hpp>
 #include <sge/audio/multi_loader.hpp>
 #include <sge/time/second.hpp>
+#include <sge/renderer/colors.hpp>
 
 // boost
 #include <boost/program_options.hpp>
@@ -111,7 +113,8 @@ try
 			sge::renderer::parameters(
 				sge::renderer::display_mode(
 					sanguis::resolution(),
-					sge::renderer::bit_depth::depth32),
+					sge::renderer::bit_depth::depth32,
+					sge::renderer::refresh_rate_dont_care),
 				sge::renderer::depth_buffer::off,
 				sge::renderer::stencil_buffer::off,
 				sge::renderer::window_mode::windowed,
@@ -128,7 +131,10 @@ try
 	sge::font::metrics_ptr const metrics = sys.font_system()->create_font(
 		sge::media_path() / SGE_TEXT("fonts") / SGE_TEXT("default.ttf"),
 		static_cast<sge::font::size_type>(15));
-	sge::font::drawer_ptr const drawer(new sge::font::drawer_3d(sys.renderer()));
+	sge::font::drawer_ptr const drawer(
+		sge::make_shared_ptr<sge::font::drawer_3d>(
+			sys.renderer(),
+			sge::renderer::colors::white()));
 	sge::font::font font(metrics,drawer);
 	sge::texture::manager texman(
 		sys.renderer(),

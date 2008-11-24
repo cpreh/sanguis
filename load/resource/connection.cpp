@@ -2,7 +2,6 @@
 #include "environment.hpp"
 #include "../../exception.hpp"
 #include <sge/audio/pool.hpp>
-#include <sge/texture/fragmented.hpp> // FIXME: just a quick hack, I shouldn't have to include this
 
 sanguis::load::resource::connection::connection(
 	sge::image::loader_ptr const pm,
