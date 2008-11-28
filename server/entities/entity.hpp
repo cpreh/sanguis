@@ -47,7 +47,7 @@ public:
 	space_unit speed() const;
 	space_unit radius() const;
 
-	team::type team() const;
+	server::team::type team() const;
 
 	void damage(
 		space_unit,

@@ -40,17 +40,18 @@ public:
 
 	typedef std::map<
 		net::id_type,
-		entities::player*>
+		server::entities::player*>
 	player_map;
 
 	running(
 		my_context);
 	
-	entities::container &entities();
-	entities::container const &entities() const;
+	server::entities::container &entities();
+	server::entities::container const &entities() const;
 
-	entities::entity &insert_entity(
-		entities::auto_ptr);
+	server::entities::entity &
+	insert_entity(
+		server::entities::auto_ptr);
 	
 	player_map &players();
 	player_map const &players() const;
@@ -59,7 +60,7 @@ public:
 		messages::exp_type);
 
 	void level_callback(
-		entities::player &,
+		server::entities::player &,
 		messages::level_type);
 
 	void process(
@@ -86,7 +87,7 @@ private:
 	send_callback send;
 	console_print_callback console_print;
 
-	entities::container entities_;
+	server::entities::container entities_;
 	player_map players_;
 	
 	waves::generator wave_generator;

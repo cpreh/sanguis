@@ -38,7 +38,7 @@ public:
 	pos_type const &center() const;
 	space_unit angle() const;
 	space_unit direction() const;
-	team::type team() const;
+	server::team::type team() const;
 	property_map const &properties() const;
 	entity_type::type type() const;
 	bool invulnerable() const;
@@ -49,7 +49,7 @@ private:
 	pos_type const             center_;
 	space_unit const           angle_,
 	                           direction_;
-	team::type const           team_;
+	server::team::type const   team_;
 	property_map const         &properties_;
 	entity_type::type const    type_;
 	bool const                 invulnerable_;
