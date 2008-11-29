@@ -15,7 +15,7 @@ sanguis::client::start_state::react(
 	tick_event const &)
 {
 	
-	context<machine>().renderer()->set_state(
+	context<machine>().renderer()->state(
 		sge::renderer::state::list
 			(sge::renderer::state::bool_::clear_backbuffer = true)
 			(sge::renderer::state::bool_::clear_zbuffer = false)

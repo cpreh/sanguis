@@ -46,7 +46,7 @@ sanguis::client::running_state::running_state(
 		context<machine>().con_wrapper().register_callback(
 			boost::bind(&input_handler::input_callback, &input, _1)))
 {
-	context<machine>().renderer()->set_state(
+	context<machine>().renderer()->state(
 		sge::renderer::state::list
 			(sge::renderer::state::bool_::clear_backbuffer = false)
 			(sge::renderer::state::bool_::clear_zbuffer = false)
