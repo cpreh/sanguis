@@ -16,6 +16,7 @@
 
 #include <string>
 #include <iostream>
+#include <fstream>
 
 #include <cstddef>
 
@@ -72,6 +73,8 @@ class server : boost::noncopyable
 	boost::signal<connect_fun> connect_signal;
 	boost::signal<disconnect_fun> disconnect_signal;
 	boost::signal<data_fun> data_signal;
+
+	std::ofstream logstream;
 
 	// private functions
 	void accept();
