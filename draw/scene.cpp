@@ -238,7 +238,7 @@ void sanguis::draw::scene::operator()(
 {
 	get_entity(m.id()).pos(
 		virtual_to_screen(
-			ss.get_renderer()->screen_size(), m.pos()));
+			ss.renderer()->screen_size(), m.pos()));
 }
 
 void sanguis::draw::scene::operator()(
@@ -255,7 +255,7 @@ void sanguis::draw::scene::operator()(
 void sanguis::draw::scene::operator()(
 	messages::resize const &m)
 {
-	//get_entity(m.id()).dim(virtual_to_screen(ss.get_renderer()->screen_size(), m.dim()));
+	//get_entity(m.id()).dim(virtual_to_screen(ss.renderer()->screen_size(), m.dim()));
 	get_entity(m.id()).dim(sge::math::structure_cast<sge::sprite::unit>(m.dim()));
 }
 
@@ -271,7 +271,7 @@ void sanguis::draw::scene::operator()(
 	get_entity(m.id()).speed(
 		sge::math::structure_cast<funit>(
 			virtual_to_screen(
-				ss.get_renderer()->screen_size(),
+				ss.renderer()->screen_size(),
 				m.get())));
 }
 
@@ -307,7 +307,7 @@ void sanguis::draw::scene::operator()(
 		factory::client(
 			m,
 			get_system(),
-			get_system().get_renderer()->screen_size())).second == false)
+			get_system().renderer()->screen_size())).second == false)
 		throw exception(SGE_TEXT("Client object with id already in entity list!"));
 	// FIXME: configure the object here, too!
 }

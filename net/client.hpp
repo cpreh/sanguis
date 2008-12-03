@@ -13,6 +13,7 @@
 
 #include <string>
 #include <iostream>
+#include <fstream>
 
 #include <cstddef>
 
@@ -55,6 +56,8 @@ struct client
 	boost::signal<connect_fun> connect_signal;
 	boost::signal<disconnect_fun> disconnect_signal;
 	boost::signal<data_fun> data_signal;
+
+	std::ofstream logstream;
 
 	// handlers
 	void handle_error(const string_type &,const boost::system::error_code &);

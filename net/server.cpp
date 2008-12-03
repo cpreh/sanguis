@@ -10,7 +10,7 @@
 #include <iostream>
 
 net::server::server()
-	: io_service(io_service_wrapper()),acceptor(io_service),id_counter(0),handlers(0) {}
+	: io_service(io_service_wrapper()),acceptor(io_service),id_counter(0),handlers(0),logstream("server.log") {}
 
 net::server::signal_connection net::server::register_connect(connect_function f)
 {
@@ -163,6 +163,8 @@ void net::server::read_handler(const boost::system::error_code &e,
 
 void net::server::queue(const data_type &s)
 {
+	logstream << s << "\n";
+	
 	// send to all clients
 	for (connection_container::iterator i = connections.begin(); 
 		i != connections.end(); ++i)
@@ -176,6 +178,8 @@ void net::server::queue(const data_type &s)
 
 void net::server::queue(const id_type id,const data_type &s)
 {
+	logstream << s << "\n";
+
 	for (connection_container::iterator i = connections.begin(); 
 		i != connections.end(); ++i)
 	{

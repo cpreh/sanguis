@@ -20,8 +20,8 @@ class model_part_state
 		load::model::part const &,
 		animation_type::type,
 		weapon_type::type);
-	animation_type::type animation_type() const;
-	weapon_type::type weapon_type() const;
+	sanguis::animation_type::type animation_type() const;
+	sanguis::weapon_type::type weapon_type() const;
 	void update();
 	~model_part_state();
 	private:

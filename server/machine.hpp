@@ -35,44 +35,45 @@ struct machine
 public:
 	machine(
 		sge::con::console_gfx &,
-		net::port_type);
+		::net::port_type);
 	void process(tick_event const &);
 	void process_message(
-		net::id_type,
+		::net::id_type,
 		messages::auto_ptr);
 
 	void connect_callback(
-		net::id_type);
+		::net::id_type);
 	void disconnect_callback(
-		net::id_type,
-		net::string_type const &);
+		::net::id_type,
+		::net::string_type const &);
 	void data_callback(
-		net::id_type,
-		net::data_type const &);
+		::net::id_type,
+		::net::data_type const &);
 
 	void send(
 		messages::auto_ptr m);
 
 	void send(
 		messages::auto_ptr,
-		net::id_type dest);
+		::net::id_type dest);
 
 	void console_print(
 		sge::string const &);
-	net::port_type port() const;
-	net::server &net();
+	::net::port_type port() const;
+	::net::server &net();
 	void listen();
 private:
 	typedef std::map<
-		net::id_type,
+		::net::id_type,
 		client_data
 	> client_map;
 
-	net::port_type port_;
-	net::server net_;
-	net::server::signal_connection s_conn,
-	                               s_disconn,
-	                               s_data;
+	::net::port_type port_;
+	::net::server net_;
+	::net::server::signal_connection
+		s_conn,
+		s_disconn,
+		s_data;
 	load::model::connection model_connection;
 	client_map clients;
 	sge::con::console_gfx &con;

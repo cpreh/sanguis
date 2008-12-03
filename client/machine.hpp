@@ -36,8 +36,8 @@ public:
 		sge::font::font &,
 		sge::input::key_state_tracker &,
 		sge::con::console_gfx &,
-		net::address_type const &,
-		net::port_type);
+		::net::address_type const &,
+		::net::port_type);
 
 	void connect();
 	void send(messages::auto_ptr);
@@ -47,9 +47,9 @@ public:
 	void disconnect_callback(net::string_type const &);
 	void data_callback(net::data_type const &);
 
-	net::address_type address() const;
-	net::port_type port() const;
-	net::client &net();
+	::net::address_type address() const;
+	::net::port_type port() const;
+	::net::client &net();
 
 	bool process(tick_event const &);
 
@@ -62,14 +62,16 @@ public:
 		sge::input::key_code) const;
 	console_wrapper &con_wrapper();
 private:
-	net::address_type address_;
-	net::port_type port_;
-	net::client net_;
-	net::client::signal_connection s_conn,
-	                               s_disconn,
-	                               s_data;
-	net::data_type in_buffer,
-	               out_buffer;
+	::net::address_type address_;
+	::net::port_type port_;
+	::net::client net_;
+	::net::client::signal_connection
+		s_conn,
+		s_disconn,
+		s_data;
+	::net::data_type
+		in_buffer,
+		out_buffer;
 	sge::systems::instance &sys;
 	sge::audio::pool_ptr const sound_pool_;
 	sge::font::font &font_;
