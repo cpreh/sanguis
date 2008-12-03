@@ -7,7 +7,6 @@
 #include "../types.hpp"
 #include "../../damage_type.hpp"
 #include "../../entity_type.hpp"
-#include <boost/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -19,7 +18,7 @@ struct environment;
 namespace entities
 {
 
-class base_parameters : boost::noncopyable {
+class base_parameters {
 public:
 	base_parameters(
 		environment const &,
