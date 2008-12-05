@@ -11,6 +11,30 @@ INCLUDE (FindPkgConfig)
 SET (CMAKE_VERBOSE_MAKEFILE ON)
 SET (CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS ON)
 
+FIND_PACKAGE(Boost 1.36.0 COMPONENTS
+	filesystem
+	program_options
+	serialization
+	signals
+	system
+	thread)
+
+IF(NOT Boost_FOUND)
+	MESSAGE(STATUS "Boost not found!")
+ENDIF()
+
+IF(Boost_INCLUDE_DIR)
+	INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIR})
+ELSE()
+	MESSAGE(STATUS "Boost headers not found. You will have to specify them in your build environment or you can use -DBOOST_ROOT= to tell cmake where your boost installation is.")
+ENDIF()
+
+IF(Boost_LIBRARY_DIRS)
+	LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
+ELSE()
+	MESSAGE(STATUS "Boost libraries not found.")
+ENDIF()
+
 pkg_check_modules (SGE spacegameengine)
 
 ADD_DEFINITIONS(${SGE_CFLAGS})
