@@ -322,8 +322,17 @@ void sanguis::draw::scene::configure_new_object(
 			e_ptr));
 
 	if(ret.second == false)
-		throw exception(
-			SGE_TEXT("Object with id already in entity list!"));
+	{
+		SGE_LOG_WARNING(
+			log(),
+			sge::log::_1
+				<< SGE_TEXT("Object with id ")
+				<< m.id()
+				<< SGE_TEXT(" already in entity list!"));
+		return;
+	//	throw exception(
+	//		SGE_TEXT("Object with id already in entity list!"));
+	}
 
 	entity& e(*ret.first->second);
 
