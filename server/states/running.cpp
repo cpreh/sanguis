@@ -289,15 +289,15 @@ sanguis::server::states::running::operator()(
 			new messages::level_up(
 				p.id(),
 				p.level())));
-	
-	// send decorations
+
 	BOOST_FOREACH(entities::entity &e,entities_)
 	{
-		if (e.type() != entity_type::decoration)
+		if (e.id() == p.id())
 			continue;
 
 		send(e.add_message());
 	}
+
 
 	return discard_event();
 }
