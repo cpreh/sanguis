@@ -39,6 +39,7 @@
 #include <sge/renderer/colors.hpp>
 
 // boost
+#include <boost/scoped_ptr.hpp>
 #include <boost/program_options.hpp>
 #include <boost/filesystem.hpp>
 
@@ -47,9 +48,25 @@
 #include <iostream>
 #include <fstream>
 #include <ostream>
+#include <memory>
 
 // c
 #include <cstdlib>
+
+namespace
+{
+
+typedef std::auto_ptr<
+	sanguis::server::machine
+> server_auto_ptr;
+
+server_auto_ptr
+create_server(
+	sge::con::console_gfx &,
+	::net::port_type,
+	bool client_only);
+
+}
 
 int main(int argc,char *argv[])
 try
@@ -60,22 +77,26 @@ try
 	net::address_type dest_server;
 	net::port_type host_port,dest_port;
 	std::string log_level;
+	bool client_only;
 
 	desc.add_options()
-			("help",
-				"produce help message")
-			("dest-server",
-				po::value<net::address_type>(&dest_server)->default_value("localhost"),
-				"sets the server (ip/hostname) to connect to when hitting space")
-			("dest-port",
-				po::value<net::port_type>(&dest_port)->default_value(1337),
-				"sets the server port to connect to")
-			("host-port",
-				po::value<net::port_type>(&host_port)->default_value(1337),
-				"sets the port to listen to for games")
-			("log",
-				po::value<std::string>(&log_level)->default_value(std::string("debug")),
-				"sets the maximum logging level (one of debug, info, warning, error, fatal in that order)");
+		("help",
+			"produce help message")
+		("dest-server",
+			po::value<net::address_type>(&dest_server)->default_value("localhost"),
+			"sets the server (ip/hostname) to connect to when hitting space")
+		("dest-port",
+			po::value<net::port_type>(&dest_port)->default_value(1337),
+			"sets the server port to connect to")
+		("host-port",
+			po::value<net::port_type>(&host_port)->default_value(1337),
+			"sets the port to listen to for games")
+		("client-only",
+			po::value<bool>(&client_only)->default_value(false),
+			"tells if we want to create a server or not")
+		("log",
+			po::value<std::string>(&log_level)->default_value(std::string("debug")),
+			"sets the maximum logging level (one of debug, info, warning, error, fatal in that order)");
 	
 	po::variables_map vm;
 	po::store(po::parse_command_line(argc,argv,desc),vm);
@@ -167,10 +188,21 @@ try
 		sys.audio_player(),
 		sound_pool);
 	
+	boost::scoped_ptr<
+		sanguis::server::machine
+	> server(
+		create_server(
+			console,
+			host_port,
+			client_only));
+
+	if(server)
+		server->initiate();
+	/*
 	sanguis::server::machine server(
 		console, 
 		host_port);
-	server.initiate();
+	server.initiate();*/
 	
 	// construct and initialize statemachine
 	sanguis::client::machine client(
@@ -193,7 +225,9 @@ try
 		sanguis::tick_event t(static_cast<sanguis::time_type>(frame_timer.reset()));
 
 		// get and send messages
-		server.process(t);
+		if(server)
+			server->process(t);
+		//server.process(t);
 		running = client.process(t);
 	}
 } catch (sge::exception const &e) {
@@ -202,4 +236,24 @@ try
 } catch (std::exception const &e) {
 	std::cerr << "caught standard exception: " << e.what() << '\n';
 	return EXIT_FAILURE;
+}
+
+namespace
+{
+
+server_auto_ptr
+create_server(
+	sge::con::console_gfx &con,
+	::net::port_type const host_port,
+	bool const client_only)
+{
+	return !client_only
+		? server_auto_ptr(
+			new sanguis::server::machine(
+				con, 
+				host_port))
+		: server_auto_ptr();
+
+}
+
 }
