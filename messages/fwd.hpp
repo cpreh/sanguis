@@ -27,6 +27,7 @@ class move;
 class health;
 class pause;
 class player_change_weapon;
+class player_choose_perk;
 class player_direction;
 class player_pause;
 class player_rotation;

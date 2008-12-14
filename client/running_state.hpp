@@ -43,12 +43,12 @@ struct running_state
 	boost::statechart::result react(message_event const &);
 	
 	boost::statechart::result operator()(messages::assign_id const &);
-	boost::statechart::result operator()(const messages::disconnect&);
-	boost::statechart::result operator()(const messages::give_weapon&);
+	boost::statechart::result operator()(messages::disconnect const &);
+	boost::statechart::result operator()(messages::give_weapon const &);
 	boost::statechart::result operator()(messages::move const &);
-	boost::statechart::result operator()(const messages::pause&);
+	boost::statechart::result operator()(messages::pause const &);
 	boost::statechart::result operator()(messages::remove const &);
-	boost::statechart::result operator()(const messages::unpause&);
+	boost::statechart::result operator()(messages::unpause const &);
 private:
 	boost::statechart::result handle_default_msg(messages::base const &);
 

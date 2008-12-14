@@ -50,8 +50,8 @@ private:
 		value_type old_max);
 	void clamp();
 	
+	value_type const base_;
 	value_type
-		base_,
 		max_,
 		current_,
 		restrict_;

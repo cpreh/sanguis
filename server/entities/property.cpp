@@ -75,25 +75,25 @@ void sanguis::server::entities::property::reset_max_to_base()
 }
 
 void sanguis::server::entities::property::add_to_max(
-	const value_type n)
+	value_type const n)
 {
-	const value_type old = max();
+	value_type const old = max();
 	max_ += n;
 	adjust_current(old);
 }
 
 void sanguis::server::entities::property::multiply_max_with_base(
-	const value_type factor)
+	value_type const factor)
 {
-	const value_type old = max();
-	max_ += base_ * factor;
+	value_type const old = max();
+	max_ = base_ * factor;
 	adjust_current(old);
 }
 
 void sanguis::server::entities::property::max(
-	const value_type n)
+	value_type const n)
 {
-	const value_type old = max();
+	value_type const old = max();
 	max_ = n;
 	adjust_current(old);
 }
@@ -113,11 +113,12 @@ void sanguis::server::entities::property::unrestrict()
 void sanguis::server::entities::property::adjust_current(
 	value_type const old_max)
 {
+	/*
 	if(old_max < max())
 		current_ += max() - old_max;
 	else if(old_max > max())
-		clamp();
-
+		clamp();*/
+	clamp(); // TODO: what to do here?
 }
 
 void sanguis::server::entities::property::clamp()

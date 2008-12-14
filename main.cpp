@@ -165,7 +165,8 @@ try
 			sge::renderer::linear_filter));
 	sge::font::font_ptr const console_font(new sge::font::font(metrics,drawer));
 
-	sge::con::console_gfx console(sys.renderer(),
+	sge::con::console_gfx console(
+		sys.renderer(),
 		sge::texture::add(
 			texman,
 			sys.image_loader()->load(
@@ -179,7 +180,7 @@ try
 				sys.renderer()->screen_size().h() / 2)));
 	
 	sge::audio::multi_loader audio_loader(sys.plugin_manager());
-	sge::audio::pool_ptr sound_pool = sys.audio_player()->create_pool();
+	sge::audio::pool_ptr const sound_pool = sys.audio_player()->create_pool();
 
 	sanguis::load::resource::connection resources(
 		sys.image_loader(),

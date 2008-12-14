@@ -3,7 +3,8 @@
 #include <sge/text.hpp>
 
 sanguis::server::perks::perk::perk()
-: level_(0)
+:
+	level_(1)
 {}
 
 void sanguis::server::perks::perk::raise_level()

@@ -77,6 +77,9 @@ public:
 	boost::statechart::result operator()(
 		net::id_type,
 		messages::client_info const &);
+	boost::statechart::result operator()(
+		net::id_type,
+		messages::player_choose_perk const &);
 private:
 	boost::statechart::result handle_default_msg(
 		net::id_type,

@@ -9,10 +9,13 @@
 #include "../messages/player_pause.hpp"
 #include "../messages/player_unpause.hpp"
 #include "../messages/player_change_weapon.hpp"
+#include "../messages/player_choose_perk.hpp"
 #include "../cyclic_iterator_impl.hpp"
+#include "../perk_type.hpp"
 #include <sge/math/clamp.hpp>
 #include <sge/math/angle.hpp>
 #include <sge/renderer/device.hpp>
+#include <sge/console/console.hpp>
 #include <boost/bind.hpp>
 #include <boost/assign/list_of.hpp>
 #include <boost/optional.hpp>
@@ -42,7 +45,18 @@ sanguis::client::logic::logic(
 	current_weapon(weapon_type::size),
 	paused(false)
 {
-	std::fill(owned_weapons.begin(), owned_weapons.end(), false); // TODO: boost::array doesn't initialize by default?
+	// FIXME: this needs some sort of RAII connection class
+	sge::con::add(
+		SGE_TEXT("giveperk"),
+		boost::bind(
+			&logic::give_perk,
+			this,
+			_1));
+
+	std::fill(
+		owned_weapons.begin(),
+		owned_weapons.end(),
+		false);
 }
 
 void sanguis::client::logic::handle_player_action(
@@ -254,4 +268,37 @@ void sanguis::client::logic::change_weapon(
 			new messages::player_change_weapon(
 				player_id_,
 				current_weapon)));
+}
+
+// TODO: this is only here temporary
+namespace
+{
+
+sanguis::perk_type::type
+to_perk_type(
+	sge::string const &s)
+{
+	if(s == SGE_TEXT("ims"))
+		return sanguis::perk_type::ims;
+	return sanguis::perk_type::size;
+}
+
+}
+
+void sanguis::client::logic::give_perk(
+	sge::con::arg_list const &args)
+{
+	if(args.size() != 2)
+		return;
+	
+	perk_type::type const pt(
+		to_perk_type(
+			args[1]));
+	if(pt != perk_type::size)
+		send(
+			messages::auto_ptr(
+				new messages::player_choose_perk(
+					player_id_,
+					pt)));
+
 }

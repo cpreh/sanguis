@@ -21,8 +21,8 @@ struct console_wrapper
 	sge::input::key_code const toggler;
 	boost::signal<sge::input::key_pair_fun> callbacks;
 
-	console_wrapper(sge::con::console_gfx &,sge::input::system_ptr is,const sge::input::key_code);
-	void input_callback(const sge::input::key_pair &);
+	console_wrapper(sge::con::console_gfx &,sge::input::system_ptr is, sge::input::key_code);
+	void input_callback(sge::input::key_pair const &);
 	sge::signals::scoped_connection register_callback(sge::input::callback);
 };
 }
