@@ -7,6 +7,7 @@
 #include "../entity_id.hpp"
 #include "../messages/fwd.hpp"
 #include <sge/sprite/types.hpp>
+#include <sge/time/timer.hpp>
 #include <sge/math/vector.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/console/arg_list.hpp>
@@ -86,6 +87,7 @@ private:
 	                                player_center;
 	weapon_type::type               current_weapon;
 	bool                            paused;
+	sge::time::timer                rotation_timer;
 
 	typedef boost::array<
 		bool,

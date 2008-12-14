@@ -16,6 +16,7 @@
 #include <sge/math/angle.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/console/console.hpp>
+#include <sge/time/millisecond.hpp>
 #include <boost/bind.hpp>
 #include <boost/assign/list_of.hpp>
 #include <boost/optional.hpp>
@@ -43,7 +44,10 @@ sanguis::client::logic::logic(
 	cursor_pos_(0,0),
 	player_center(0,0),
 	current_weapon(weapon_type::size),
-	paused(false)
+	paused(false),
+	rotation_timer(
+		sge::time::millisecond(
+			100))
 {
 	// FIXME: this needs some sort of RAII connection class
 	sge::con::add(
@@ -175,9 +179,10 @@ void sanguis::client::logic::update_rotation()
 		sge::math::angle_to<messages::space_unit>(
 			player_center,
 			cursor_pos_));
-	if(!rotation)
-		return;
 
+	if(!rotation || !rotation_timer.update_b())
+		return;
+	
 	send(
 		messages::auto_ptr(
 			new messages::player_rotation(
