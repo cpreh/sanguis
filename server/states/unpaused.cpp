@@ -326,7 +326,11 @@ sanguis::server::states::unpaused::react(
 		boost::statechart::result>(
 			mf,
 			*m.message,
-			boost::bind(&unpaused::handle_default_msg, this, m.id, _1));
+			boost::bind(
+				&unpaused::handle_default_msg,
+				this,
+				m.id,
+				_1));
 }
 
 sanguis::server::environment const

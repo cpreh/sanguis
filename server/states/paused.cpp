@@ -94,12 +94,7 @@ sanguis::server::states::paused::handle_default_msg(
 	net::id_type,
 	messages::base const &m)
 {
-	SGE_LOG_WARNING(
-		log(),
-		sge::log::_1
-			<< SGE_TEXT("got invalid event ")
-			<< sge::iconv(typeid(m).name()));
-	return discard_event();
+	return forward_event();
 }
 
 sge::log::logger &
