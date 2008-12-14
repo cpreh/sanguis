@@ -31,7 +31,7 @@ sanguis::server::entities::projectiles::projectile::projectile(
 	team::type const team_,
 	property_map const &properties,
 	dim_type const &dim,
-	time_type const lifetime)
+	optional_life_time const &lifetime)
 :
 	entity(
 		base_parameters(
@@ -48,8 +48,14 @@ sanguis::server::entities::projectiles::projectile::projectile(
 			dim)),
 	ptype_(nptype),
 	lifetime(
-		sge::time::second_f(
-			lifetime))
+		lifetime
+			? sge::time::timer(
+				sge::time::second_f(
+					*lifetime))
+			: sge::time::timer(
+				sge::time::second_f(
+					0.f),
+				false))
 {}
 
 void sanguis::server::entities::projectiles::projectile::die()
