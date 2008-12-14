@@ -33,25 +33,29 @@ public:
 
 	value_type current() const;
 	void current(value_type);
-	void set_current_to_max();
+
+	void current_to_max();
+
+	void reset();
 
 	value_type max() const;
 
-	void reset_max_to_base();
 	void add_to_max(value_type);
-	void multiply_max_with_base(value_type);
+	void multiply_max(value_type);
 	void max(value_type);
+
+	void apply();
 
 	void restrict(
 		value_type);
 	void unrestrict();
 private:
-	void adjust_current(
-		value_type old_max);
 	void clamp();
 	
 	value_type const base_;
 	value_type
+		max_linear_,
+		max_constant_,
 		max_,
 		current_,
 		restrict_;

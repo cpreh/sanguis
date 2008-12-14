@@ -237,10 +237,13 @@ void sanguis::server::entities::entity::update(
 	center_ += abs_speed() * delta;
 
 	BOOST_FOREACH(property_map::value_type &p, properties)
-		p.second.reset_max_to_base();
+		p.second.reset();
 
 	BOOST_FOREACH(perks::perk &p, perks_)
 		p.apply(*this);
+
+	BOOST_FOREACH(property_map::value_type &p, properties)
+		p.second.apply();
 }
 
 void sanguis::server::entities::entity::add_perk(

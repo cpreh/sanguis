@@ -16,6 +16,8 @@ value_max(
 sanguis::server::entities::property::property()
 :
 	base_(static_cast<value_type>(0)),
+	max_linear_(static_cast<value_type>(1)),
+	max_constant_(static_cast<value_type>(0)),
 	max_(base_),
 	current_(base_),
 	restrict_(value_max)
@@ -26,6 +28,8 @@ sanguis::server::entities::property::property(
 	value_type const base_)
 :
 	base_(base_),
+	max_linear_(static_cast<value_type>(1)),
+	max_constant_(static_cast<value_type>(0)),
 	max_(base_),
 	current_(static_cast<value_type>(0)),
 	restrict_(value_max)
@@ -37,6 +41,8 @@ sanguis::server::entities::property::property(
 	value_type const base_)
 :
 	base_(base_),
+	max_linear_(static_cast<value_type>(1)),
+	max_constant_(static_cast<value_type>(0)),
 	max_(base_),
 	current_(base_),
 	restrict_(value_max)
@@ -58,9 +64,16 @@ void sanguis::server::entities::property::current(
 		c);
 }
 
-void sanguis::server::entities::property::set_current_to_max()
+void sanguis::server::entities::property::current_to_max()
 {
 	current_ = max();
+}
+
+void sanguis::server::entities::property::reset()
+{
+	max_ = base_;	
+	max_linear_ = static_cast<value_type>(1);
+	max_constant_ = static_cast<value_type>(0);
 }
 
 sanguis::server::entities::property::value_type
@@ -69,33 +82,22 @@ sanguis::server::entities::property::max() const
 	return max_;
 }
 
-void sanguis::server::entities::property::reset_max_to_base()
-{
-	max_ = base_;
-}
-
 void sanguis::server::entities::property::add_to_max(
 	value_type const n)
 {
-	value_type const old = max();
-	max_ += n;
-	adjust_current(old);
+	max_constant_ += n;
 }
 
-void sanguis::server::entities::property::multiply_max_with_base(
+void sanguis::server::entities::property::multiply_max(
 	value_type const factor)
 {
-	value_type const old = max();
-	max_ = base_ * factor;
-	adjust_current(old);
+	max_linear_ += factor;
 }
 
 void sanguis::server::entities::property::max(
 	value_type const n)
 {
-	value_type const old = max();
 	max_ = n;
-	adjust_current(old);
 }
 
 void sanguis::server::entities::property::restrict(
@@ -105,20 +107,15 @@ void sanguis::server::entities::property::restrict(
 	clamp();
 }
 
+void sanguis::server::entities::property::apply()
+{
+	max_ = (base_ + max_constant_) * max_linear_;
+	clamp();
+}
+
 void sanguis::server::entities::property::unrestrict()
 {
 	restrict_ = value_max;
-}
-
-void sanguis::server::entities::property::adjust_current(
-	value_type const old_max)
-{
-	/*
-	if(old_max < max())
-		current_ += max() - old_max;
-	else if(old_max > max())
-		clamp();*/
-	clamp(); // TODO: what to do here?
 }
 
 void sanguis::server::entities::property::clamp()

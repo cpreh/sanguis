@@ -67,7 +67,7 @@ void sanguis::server::ai::simple::update(
 		speed.current(
 			messages::mu(0));
 	else
-		speed.set_current_to_max();
+		speed.current_to_max();
 
 	me.target(
 		target->center());
