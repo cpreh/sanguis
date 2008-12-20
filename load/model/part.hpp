@@ -26,7 +26,11 @@ private:
 
 	friend class model;
 
-	typedef std::map<weapon_type::type, weapon_category> category_map;
+	typedef std::map<
+		weapon_type::type,
+		weapon_category
+	> category_map;
+
 	category_map categories;
 };
 

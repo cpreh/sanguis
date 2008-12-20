@@ -12,7 +12,6 @@ namespace sanguis
 namespace draw
 {
 
-typedef sge::sprite::unit unit;
 typedef sge::math::vector<funit, 2> vector2;
 typedef sge::sprite::intrusive_object object;
 typedef sge::sprite::intrusive_system system;

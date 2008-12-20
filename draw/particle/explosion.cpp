@@ -1,17 +1,18 @@
 #include "explosion.hpp"
 #include "generator.hpp"
-#include "../settings/object.hpp"
-#include "../depth_values.hpp"
+#include "z_ordering.hpp"
+#include "properties.hpp"
+#include <sge/make_auto_ptr.hpp>
 #include <boost/bind.hpp>
 
 sanguis::draw::particle::explosion::explosion(
-	settings::object const &set,
+	properties const &prop,
 	callback const callback,
 	point const &p,
 	point const &s,
-	depth_type d,
-	rotation_type r,
-	rotation_type rv)
+	depth_type const d,
+	rotation_type const r,
+	rotation_type const rv)
 :
 	container(
 		p,
@@ -23,29 +24,31 @@ sanguis::draw::particle::explosion::explosion(
 	for (unsigned mt = 0; mt < particle_type::size; ++mt)
 	{
 		particle_type::type const t = static_cast<particle_type::type>(mt);
-		settings::model const &curmodel = set.model(t);
 
 		base_ptr ptr(
+			//sge::make_auto_ptr<
+			//	particle::generator
+			//>(
 			new particle::generator(
-				boost::bind(callback,t),
+				boost::bind(callback, t),
 				point::null(),
-				curmodel.gen_life_time,
-				curmodel.gen_frequency,
-				curmodel.spawn_initial,
-				curmodel.align,
-				depth_values::from_model(t),
+				prop.gen_life_time,
+				prop.gen_frequency,
+				prop.spawn_initial,
+				prop.align,
+				z_ordering(t),
 				dispersion_range(
 					static_cast<dispersion_range::value_type>(
-						curmodel.dispersion_min),
+						prop.dispersion_min),
 					static_cast<dispersion_range::value_type>(
-						curmodel.dispersion_max)),
+						prop.dispersion_max)),
 				velocity_range(
-					curmodel.speed_min,
-					curmodel.speed_max),
+					prop.speed_min,
+					prop.speed_max),
 				rotation_velocity_range(
-					curmodel.rot_speed_min,
-					curmodel.rot_speed_max),
-				curmodel.movement));
+					prop.rot_speed_min,
+					prop.rot_speed_max),
+				prop.movement));
 		add(ptr);
 	}
 }

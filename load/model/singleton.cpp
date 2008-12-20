@@ -15,7 +15,8 @@ sanguis::load::model::collection const&
 sanguis::load::model::singleton()
 {
 	if(!singleton_)
-		throw exception(SGE_TEXT("No connection to load::model::singleton made!"));
+		throw exception(
+			SGE_TEXT("No connection to load::model::singleton made!"));
 	return *singleton_;
 }
 

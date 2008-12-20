@@ -64,6 +64,7 @@ FILE (GLOB files
 	messages/*.cpp
 	load/*.cpp
 	load/model/*.cpp
+	load/particle/*.cpp
 	load/resource/*.cpp
 	server/*.cpp
 	server/ai/*.cpp

@@ -12,21 +12,31 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/trim.hpp>
 
-sge::texture::part_ptr const sanguis::load::resource::environment::load_texture(
-	sanguis::load::resource::identifier_type const&id)
+sge::texture::part_ptr const
+sanguis::load::resource::environment::load_texture(
+	identifier_type const &id)
 {
 	return map_get_or_create(
 		textures, 
 		id, 
-		boost::bind(&environment::do_load_texture,this,_1));
+		boost::bind(
+			&environment::do_load_texture,
+			this,
+			_1));
 }
 
-sge::texture::part_ptr const sanguis::load::resource::environment::do_load_texture(
-	sanguis::load::resource::identifier_type const&id)
+sge::texture::part_ptr const
+sanguis::load::resource::environment::do_load_texture(
+	identifier_type const &id)
 {
 	if (texture_names.find(id) == texture_names.end())
-		throw exception(SGE_TEXT("no texture for id \"")+id+SGE_TEXT("\" found"));
-	return do_load_texture_inner(sanguis::media_path()/texture_names[id]);
+		throw exception(
+			SGE_TEXT("no texture for id \"")
+			+id
+			+SGE_TEXT("\" found"));
+	return do_load_texture_inner(
+		sanguis::media_path()
+		/ texture_names[id]);
 }
 
 void sanguis::load::resource::environment::load_textures()
@@ -72,8 +82,11 @@ void sanguis::load::resource::environment::load_textures()
 	}
 }
 
-sge::texture::part_ptr const sanguis::load::resource::environment::do_load_texture_inner(
+sge::texture::part_ptr const
+sanguis::load::resource::environment::do_load_texture_inner(
 	sge::path const &p)
 {
-	return sge::texture::add(texman,il->load(p));
+	return sge::texture::add(
+		texman,
+		il->load(p));
 }

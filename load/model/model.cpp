@@ -8,7 +8,7 @@
 #include <utility>
 
 sanguis::load::model::model::model(
-	sge::path const& path)
+	sge::path const &path)
 {
 	for(sge::directory_iterator beg(path), end; beg != end; ++beg)
 	{

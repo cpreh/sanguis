@@ -14,7 +14,9 @@ namespace model
 
 class collection {
 public:
-	model const& operator[](sge::string const&) const;
+	model const &
+	operator[](
+		sge::string const &) const;
 private:
 	collection();
 

@@ -2,7 +2,6 @@
 #define SANGUIS_DRAW_PARTICLE_EXPLOSION_HPP_INCLUDED
 
 #include "container.hpp"
-#include "../settings/fwd.hpp"
 #include "../../particle_type.hpp"
 
 namespace sanguis
@@ -11,6 +10,9 @@ namespace draw
 {
 namespace particle
 {
+
+struct properties;
+
 // explosion is a container spawning three generators
 class explosion : public container
 {
@@ -20,13 +22,13 @@ class explosion : public container
 	> callback;
 
 	explicit explosion(
-		settings::object const &,
+		properties const &,
 		callback,
-		point const &pos = point::null(),
-		point const &speed = point::null(),
-		depth_type = depth_type(),
-		rotation_type = rotation_type(),
-		rotation_type = rotation_type());
+		point const &pos,
+		point const &speed,
+		depth_type,
+		rotation_type,
+		rotation_type);
 };
 
 }

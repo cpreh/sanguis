@@ -3,16 +3,17 @@
 #include "../../exception.hpp"
 #include <utility>
 
-sanguis::load::model::model const&
+sanguis::load::model::model const &
 sanguis::load::model::collection::operator[](
-	sge::string const& name) const
+	sge::string const &name) const
 {
 	model_map::const_iterator it(models.find(name));
 	if(it == models.end())
 	{
-		const sge::path path(media_path() / name);
+		sge::path const path(media_path() / name);
 		if(!boost::filesystem::exists(path))
-			throw exception(SGE_TEXT("Model ") + name + SGE_TEXT(" not found!"));
+			throw exception(
+				SGE_TEXT("Model ") + name + SGE_TEXT(" not found!"));
 		models.insert(
 			std::make_pair(
 				name,

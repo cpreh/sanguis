@@ -12,7 +12,7 @@ namespace model
 
 class collection;
 
-collection const& singleton();
+collection const &singleton();
 
 struct connection : boost::noncopyable {
 	connection();

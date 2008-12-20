@@ -1,6 +1,7 @@
 #include "animation.hpp"
 #include "animation_sound.hpp"
 #include "../resource/factory.hpp"
+#include <sge/make_shared_ptr.hpp>
 
 sanguis::load::model::animation::animation(
 	sge::path const &path)
@@ -8,13 +9,14 @@ sanguis::load::model::animation::animation(
 	path(path)
 {}
 
-sge::sprite::animation_series const&
+sge::sprite::animation_series const &
 sanguis::load::model::animation::get() const
 {
 	if(!anim)
-		anim.reset(
-			new sge::sprite::animation_series(
-				resource::animation(path)));
+		anim = 	sge::make_shared_ptr<
+				sge::sprite::animation_series
+			>(
+				resource::animation(path));
 	
 	return *anim;
 }

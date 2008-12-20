@@ -1,7 +1,7 @@
 #ifndef SANGUIS_DRAW_PARTICLE_FWD_HPP_INCLUDED
 #define SANGUIS_DRAW_PARTICLE_FWD_HPP_INCLUDED
 
-#include <memory>
+#include <sge/auto_ptr.hpp>
 
 namespace sanguis
 {
@@ -14,7 +14,7 @@ class base;
 class container;
 class generator;
 class object;
-typedef std::auto_ptr<base> base_ptr;
+typedef sge::auto_ptr<base> base_ptr;
 
 }
 }
