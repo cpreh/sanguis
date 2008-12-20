@@ -2,7 +2,6 @@
 #include "generator.hpp"
 #include "../settings/object.hpp"
 #include "../depth_values.hpp"
-#include <sge/iostream.hpp>
 #include <boost/bind.hpp>
 
 sanguis::draw::particle::explosion::explosion(
@@ -21,9 +20,9 @@ sanguis::draw::particle::explosion::explosion(
 		r,
 		rv)
 {
-	for (unsigned mt = 0; mt < model_type::size; ++mt)
+	for (unsigned mt = 0; mt < particle_type::size; ++mt)
 	{
-		model_type::type const t = static_cast<model_type::type>(mt);
+		particle_type::type const t = static_cast<particle_type::type>(mt);
 		settings::model const &curmodel = set.model(t);
 
 		base_ptr ptr(
@@ -41,8 +40,8 @@ sanguis::draw::particle::explosion::explosion(
 					static_cast<dispersion_range::value_type>(
 						curmodel.dispersion_max)),
 				velocity_range(
-					curmodel.speed_min
-					,curmodel.speed_max),
+					curmodel.speed_min,
+					curmodel.speed_max),
 				rotation_velocity_range(
 					curmodel.rot_speed_min,
 					curmodel.rot_speed_max),

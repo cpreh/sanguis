@@ -15,6 +15,9 @@ sanguis::draw::particle::base::base(
 {
 }
 
+sanguis::draw::particle::base::~base()
+{}
+
 bool sanguis::draw::particle::base::update(
 	time_type const delta)
 {

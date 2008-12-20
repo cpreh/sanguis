@@ -18,13 +18,14 @@ class base
 	typedef particle::depth depth_type;
 	typedef particle::rotation rotation_type;
 	protected:
-	explicit base(
+	base(
 		point const &,
 		point const &,
 		depth_type,
 		rotation_type,
 		rotation_type);
 	public:
+	virtual ~base();
 	virtual bool update(time_type);
 	virtual void pos(point const &p) { pos_ = p; }
 	virtual void vel(point const &p) { vel_ = p; }

@@ -4,7 +4,6 @@
 #include <sge/time/second_f.hpp>
 #include <sge/math/constants.hpp>
 #include <sge/math/angle.hpp>
-#include <sge/iostream.hpp>
 
 sanguis::draw::particle::generator::generator(
 	generation_callback const generate_object,
@@ -32,17 +31,17 @@ sanguis::draw::particle::generator::generator(
 	dispersion_angle(
 		sge::random::inclusive_range<rotation_type>(
 			static_cast<rotation_type>(0),
-			static_cast<rotation_type>(2)*sge::math::pi<rotation_type>())),
+			sge::math::twopi<rotation_type>())),
 	dispersion_value(dispersion_value),
 	velocity_angle(
 		sge::random::inclusive_range<rotation_type>(
 			static_cast<rotation_type>(0),
-			static_cast<rotation_type>(2)*sge::math::pi<rotation_type>())),
+			sge::math::twopi<rotation_type>())),
 	velocity_value(velocity),
 	rot_angle(
 		sge::random::inclusive_range<rotation_type>(
 			static_cast<rotation_type>(0),
-			static_cast<rotation_type>(2)*sge::math::pi<rotation_type>())),
+			sge::math::twopi<rotation_type>())),
 	rot_direction(
 		sge::random::inclusive_range<rotation_type>(
 			static_cast<rotation_type>(0),
@@ -87,8 +86,9 @@ void sanguis::draw::particle::generator::generate()
 		case movement_type::expanding:
 			velocity = sge::math::normalize(-refpoint);
 		break;
-		case movement_type::size:
-			throw sge::exception(SGE_TEXT("invalid movement type"));
+		default:
+			throw sge::exception(
+				SGE_TEXT("invalid movement type"));
 	}
 	
 	rotation_type rot;
@@ -105,8 +105,9 @@ void sanguis::draw::particle::generator::generate()
 		case align_type::random:
 			rot = rot_angle();
 		break;
-		case align_type::size:
-			throw sge::exception(SGE_TEXT("invalid align type"));
+		default:
+			throw sge::exception(
+				SGE_TEXT("invalid align type"));
 	}
 
 	base_ptr object = generate_object();

@@ -3,7 +3,7 @@
 
 #include "container.hpp"
 #include "../settings/fwd.hpp"
-#include "../model_type.hpp"
+#include "../../particle_type.hpp"
 
 namespace sanguis
 {
@@ -15,7 +15,9 @@ namespace particle
 class explosion : public container
 {
 	public:
-	typedef boost::function<base_ptr (model_type::type)> callback;
+	typedef boost::function<
+		base_ptr (particle_type::type)
+	> callback;
 
 	explicit explosion(
 		settings::object const &,
