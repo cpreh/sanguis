@@ -20,7 +20,7 @@ public:
 private:
 	collection();
 
-	friend struct connection;
+	friend struct context;
 
 	typedef std::map<sge::string, model> model_map;
 	mutable model_map models;

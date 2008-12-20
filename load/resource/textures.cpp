@@ -1,32 +1,33 @@
-#include "environment.hpp"
+#include "textures.hpp"
 #include "map_get_or_create.hpp"
 #include "../log.hpp"
-#include "../../media_path.hpp"
 #include "../../exception.hpp"
-#include <sge/fstream.hpp>
-#include <sge/texture/util.hpp>
-#include <sge/image/loader.hpp>
+#include "../../media_path.hpp"
 #include <sge/log/headers.hpp>
-#include <boost/bind.hpp>
-#include <boost/filesystem/operations.hpp>
+#include <sge/texture/util.hpp>
+#include <sge/text.hpp>
+#include <sge/fstream.hpp>
+#include <sge/string.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/trim.hpp>
+#include <boost/filesystem/operations.hpp>
+#include <boost/bind.hpp>
 
 sge::texture::part_ptr const
-sanguis::load::resource::environment::load_texture(
-	identifier_type const &id)
+sanguis::load::resource::textures::load(
+	texture_identifier const &id)
 {
 	return map_get_or_create(
 		textures, 
 		id, 
 		boost::bind(
-			&environment::do_load,
+			&environment::do_load_texture,
 			this,
 			_1));
 }
 
 sge::texture::part_ptr const
-sanguis::load::resource::environment::do_load_texture(
+sanguis::load::resource::environment::do_load(
 	identifier_type const &id)
 {
 	if (texture_names.find(id) == texture_names.end())
@@ -39,19 +40,36 @@ sanguis::load::resource::environment::do_load_texture(
 		/ texture_names[id]);
 }
 
-void sanguis::load::resource::environment::load_textures()
+sge::texture::part_ptr const
+sanguis::load::resource::environment::do_load_inner(
+	sge::path const &p)
+{
+	return sge::texture::add(
+		texman,
+		il->load(p));
+}
+
+sanguis::load::resource::textures::textures(
+	sge::renderer::device_ptr const rend,
+	sge::image::loader_ptr const il)
+:
+	texman(rend),
+	il(il)
 {
 	// look for .tex files
 	for (boost::filesystem::basic_directory_iterator<sge::path> i(sanguis::media_path()),end; i != end; ++i)
 	{
-		const sge::path &p = i->path();
+		sge::path const &p = i->path();
 		if (!boost::filesystem::is_regular(p) || !boost::algorithm::ends_with(p.leaf(),SGE_TEXT(".tex")))
 			continue;
 		
 		// and parse line by line
 		sge::ifstream file(p);
 		if (!file.is_open())
-			throw exception(SGE_TEXT("error opening id file \"")+p.string()+SGE_TEXT("\""));
+			throw exception(
+				SGE_TEXT("error opening id file \"")
+				+ p.string()
+				+ SGE_TEXT('"'));
 
 		std::streamsize line_num(0);
 		sge::string line;
@@ -64,7 +82,10 @@ void sanguis::load::resource::environment::load_textures()
 			if (line.empty())
 				continue;
 
-			const sge::string::size_type equal = line.find(SGE_TEXT("="));
+			sge::string::size_type const equal
+				= line.find(
+					SGE_TEXT("="));
+
 			if(equal == sge::string::npos)
 			{
 				SGE_LOG_WARNING(
@@ -82,11 +103,4 @@ void sanguis::load::resource::environment::load_textures()
 	}
 }
 
-sge::texture::part_ptr const
-sanguis::load::resource::environment::do_load_texture_inner(
-	sge::path const &p)
-{
-	return sge::texture::add(
-		texman,
-		il->load(p));
-}
+
