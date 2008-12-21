@@ -8,12 +8,18 @@
 
 namespace sanguis
 {
+namespace load
+{
+class context;
+}
 namespace draw
 {
 namespace factory
 {
 
-entity_ptr enemy(
+entity_ptr
+enemy(
+	load::context const &,
 	entity_id,
 	system &,
 	enemy_type::type);

@@ -9,19 +9,22 @@
 namespace
 {
 
-sge::string const get_texture(
+sge::string const
+get_texture(
 	sanguis::pickup_type::type);
 
 }
 
 sanguis::draw::factory::entity_ptr
 sanguis::draw::factory::pickup(
+	load::context const &ctx,
 	entity_id const id,
 	system &sys,
 	pickup_type::type const ptype)
 {
 	return entity_ptr(
 		new model(
+			ctx,
 			id,
 			sys,
 			get_texture(
@@ -33,7 +36,8 @@ sanguis::draw::factory::pickup(
 namespace
 {
 
-sge::string const get_texture(
+sge::string const
+get_texture(
 	sanguis::pickup_type::type const ptype)
 {
 	switch(ptype) {

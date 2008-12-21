@@ -15,7 +15,7 @@
 
 sge::sprite::animation_series const
 sanguis::load::resource::animations::load(
-	sge::path const &dir)
+	sge::path const &dir) const
 {
 	return map_get_or_create(
 		animations_,
@@ -28,7 +28,7 @@ sanguis::load::resource::animations::load(
 
 sge::sprite::animation_series const
 sanguis::load::resource::animations::do_load(
-	sge::path const &dir)
+	sge::path const &dir) const
 {
 	if (!boost::filesystem::exists(dir) || !boost::filesystem::is_directory(dir))
 		throw exception(

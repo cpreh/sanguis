@@ -6,11 +6,15 @@ sanguis::load::model::context::operator()() const
 {
 	if(!col)
 		col.reset(
-			new collection());
+			new collection(
+				ctx));
 	return *col;
 }
 
-sanguis::load::model::context::context()
+sanguis::load::model::context::context(
+	resource::context const &ctx)
+:
+	ctx(ctx)
 {}
 
 sanguis::load::model::context::~context()

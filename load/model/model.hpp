@@ -10,6 +10,10 @@ namespace sanguis
 {
 namespace load
 {
+namespace resource
+{
+class context;
+}
 namespace model
 {
 
@@ -20,12 +24,16 @@ public:
 	typedef part_map::const_iterator const_iterator;
 	typedef part_map::size_type      size_type;
 
-	part const &operator[](sge::string const &) const;
+	part const &
+	operator[](
+		sge::string const &) const;
 	const_iterator begin() const;
 	const_iterator end() const;
 	size_type size() const;
 private:
-	explicit model(sge::path const &);
+	model(
+		sge::path const &,
+		resource::context const &);
 
 	friend class collection;
 

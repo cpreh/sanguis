@@ -13,11 +13,13 @@ sanguis::draw::sprite_part_index const
 }
 
 sanguis::draw::bullet::bullet(
+	load::context const &ctx,
 	entity_id id,
 	system &sys,
 	sge::string const &name)
 :
 	model(
+		ctx,
 		id,
 		sys,
 		name,

@@ -5,7 +5,7 @@ sanguis::draw::simple_sprite::simple_sprite(
 	entity_id const id,
 	system &sys,
 	object::order_type const order,
-	sge::texture::part_ptr const tex)
+	sge::texture::const_part_ptr const tex)
 :
 	entity(
 		id,

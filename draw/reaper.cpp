@@ -16,11 +16,13 @@ sanguis::draw::funit const
 }
 
 sanguis::draw::reaper::reaper(
+	load::context const &ctx,
 	entity_id const id,
 	system &sys,
 	model const &p)
 :
 	model(
+		ctx,
 		id,
 		sys,
 		SGE_TEXT("reaper"),

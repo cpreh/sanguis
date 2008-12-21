@@ -24,7 +24,7 @@ class sounds : boost::noncopyable {
 public:
 	sound_collection const &
 	load(
-		sge::path const &);
+		sge::path const &) const;
 	
 	sge::audio::sound_ptr const
 	make(
@@ -34,7 +34,7 @@ public:
 private:
 	sound_collection const
 	do_load(
-		sge::path const &);
+		sge::path const &) const;
 
 	sounds(
 		sge::audio::multi_loader &,
@@ -51,7 +51,7 @@ private:
 	sge::audio::multi_loader &ml;
 	sge::audio::player_ptr const player;
 	sge::audio::pool_ptr const pool;
-	sound_map sounds_;
+	mutable sound_map sounds_;
 };
 
 }

@@ -5,6 +5,7 @@
 
 sanguis::draw::factory::entity_ptr
 sanguis::draw::factory::entity(
+	load::context const &ctx,
 	entity_id const id,
 	system &sys,
 	entity_type::type const type)
@@ -14,6 +15,7 @@ sanguis::draw::factory::entity(
 	case entity_type::player:
 		return entity_ptr(
 			new player(
+				ctx,
 				id,
 				sys));
 	case entity_type::enemy:

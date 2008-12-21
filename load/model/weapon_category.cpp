@@ -8,7 +8,8 @@
 #include <iterator>
 
 sanguis::load::model::weapon_category::weapon_category(
-	sge::path const &path)
+	sge::path const &path,
+	resource::context const &ctx)
 :
 	path(path)
 {
@@ -42,7 +43,8 @@ sanguis::load::model::weapon_category::weapon_category(
 							animation_types).begin(),
 						it)),
 				animation(
-					animation_path)))
+					animation_path,
+					ctx)))
 		.second == false)
 			throw exception(
 				SGE_TEXT("Double insert in model::weapon_category: ")

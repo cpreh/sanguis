@@ -19,7 +19,7 @@
 
 sge::texture::const_part_ptr const
 sanguis::load::resource::textures::load(
-	texture_identifier const &id)
+	texture_identifier const &id) const
 {
 	return map_get_or_create(
 		textures_,
@@ -35,7 +35,7 @@ sanguis::load::resource::textures::~textures()
 
 sge::texture::const_part_ptr const
 sanguis::load::resource::textures::do_load(
-	texture_identifier const &id)
+	texture_identifier const &id) const
 {
 	if (texture_names.find(id) == texture_names.end())
 		throw exception(
@@ -49,7 +49,7 @@ sanguis::load::resource::textures::do_load(
 
 sge::texture::const_part_ptr const
 sanguis::load::resource::textures::do_load_inner(
-	sge::path const &p)
+	sge::path const &p) const
 {
 	return sge::texture::add(
 		texman,

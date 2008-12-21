@@ -35,16 +35,26 @@ sanguis::client::running_state::running_state(
 :
 	my_base(ctx), 
 	drawer(
+		context<machine>().resources(),
 		context<machine>().renderer(),
 		context<machine>().font()),
 	logic_(
-		boost::bind(&running_state::send_message, this, _1),
+		boost::bind(
+			&running_state::send_message,
+			this,
+			_1),
 		context<machine>().renderer()),
 	input(
-		boost::bind(&logic::handle_player_action, &logic_, _1)),
+		boost::bind(
+			&logic::handle_player_action,
+			&logic_,
+			_1)),
 	input_connection(
 		context<machine>().con_wrapper().register_callback(
-			boost::bind(&input_handler::input_callback, &input, _1)))
+			boost::bind(
+				&input_handler::input_callback,
+				&input,
+				_1)))
 {
 	context<machine>().renderer()->state(
 		sge::renderer::state::list

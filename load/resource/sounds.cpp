@@ -17,7 +17,7 @@
 
 sanguis::load::sound_collection const &
 sanguis::load::resource::sounds::load(
-	sge::path const &dir)
+	sge::path const &dir) const
 {
 	return map_get_or_create(
 		sounds_,
@@ -33,7 +33,7 @@ sanguis::load::resource::sounds::~sounds()
 
 sanguis::load::sound_collection const
 sanguis::load::resource::sounds::do_load(
-	sge::path const &dir)
+	sge::path const &dir) const
 {
 	// a missing directory is valid
 	if (!boost::filesystem::exists(dir) || 

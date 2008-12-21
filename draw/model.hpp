@@ -15,6 +15,10 @@
 
 namespace sanguis
 {
+namespace load
+{
+class context;
+}
 namespace draw
 {
 
@@ -23,6 +27,7 @@ class sprite_part_index;
 class model : public sprite {
 public:
 	model(
+		load::context const &,
 		entity_id id,
 		system &,
 		sge::string const& name,

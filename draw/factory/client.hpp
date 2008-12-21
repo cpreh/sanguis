@@ -8,12 +8,18 @@
 
 namespace sanguis
 {
+namespace load
+{
+class context;
+}
 namespace draw
 {
 namespace factory
 {
 
-entity_ptr client(
+entity_ptr
+client(
+	load::context const &,
 	client_messages::add const &,
 	system &,
 	sge::renderer::screen_size_t const &);

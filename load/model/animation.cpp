@@ -1,22 +1,25 @@
 #include "animation.hpp"
 #include "animation_sound.hpp"
-#include "../resource/factory.hpp"
+#include "../resource/animations.hpp"
+#include "../resource/context.hpp"
 #include <sge/make_shared_ptr.hpp>
 
 sanguis::load::model::animation::animation(
-	sge::path const &path)
+	sge::path const &path,
+	load::resource::context const &ctx)
 :
-	path(path)
+	path(path),
+	ctx(ctx)
 {}
 
 sge::sprite::animation_series const &
 sanguis::load::model::animation::get() const
 {
 	if(!anim)
-		anim = 	sge::make_shared_ptr<
+		anim = sge::make_shared_ptr<
 				sge::sprite::animation_series
 			>(
-				resource::animation(path));
+				ctx.animations().load(path));
 	
 	return *anim;
 }
@@ -27,6 +30,7 @@ sanguis::load::model::animation::sounds() const
 	if(!sounds_)
 		sounds_.reset(
 			new animation_sound(
-				path));
+				path,
+				ctx));
 	return *sounds_;
 }

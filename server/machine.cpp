@@ -6,6 +6,7 @@
 #include "../exception.hpp"
 #include "message_event.hpp"
 
+#include <sge/console/console_gfx.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/text.hpp>
 
@@ -13,9 +14,12 @@
 #include <boost/foreach.hpp>
 
 sanguis::server::machine::machine(
+	load::context const &resources,
 	sge::con::console_gfx &con,
 	net::port_type const port_)
 :
+	resources(
+		resources),
 	port_(
 		port_),
 	s_conn(

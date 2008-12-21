@@ -21,7 +21,7 @@ class textures : boost::noncopyable {
 public:
 	sge::texture::const_part_ptr const
 	load(
-		texture_identifier const &);
+		texture_identifier const &) const;
 
 	~textures();
 private:
@@ -30,11 +30,11 @@ private:
 
 	sge::texture::const_part_ptr const
 	do_load(
-		texture_identifier const &);
+		texture_identifier const &) const;
 
 	sge::texture::const_part_ptr const
 	do_load_inner(
-		sge::path const &);
+		sge::path const &) const;
 
 	textures(
 		sge::renderer::device_ptr,
@@ -50,10 +50,10 @@ private:
 		texture_identifier
 	> texture_name_map;
 
-	sge::texture::manager texman;
+	mutable sge::texture::manager texman;
 	sge::image::loader_ptr const il;
-	texture_map textures_;
-	texture_name_map texture_names;
+	mutable texture_map textures_;
+	mutable texture_name_map texture_names;
 };
 
 }

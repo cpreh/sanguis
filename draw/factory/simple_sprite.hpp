@@ -9,12 +9,18 @@
 
 namespace sanguis
 {
+namespace load
+{
+class context;
+}
 namespace draw
 {
 namespace factory
 {
 
-entity_ptr simple_sprite(
+entity_ptr
+simple_sprite(
+	load::context const &,
 	entity_id,
 	system &,
 	z_ordering::type,

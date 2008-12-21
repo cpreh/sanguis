@@ -3,7 +3,6 @@
 
 #include "../messages/base.hpp"
 #include "../net/client.hpp"
-#include "../load/model/singleton.hpp"
 #include "../tick_event.hpp"
 #include "console_wrapper.hpp"
 
@@ -21,6 +20,11 @@
 
 namespace sanguis
 {
+namespace load
+{
+class context;
+}
+
 namespace client
 {
 
@@ -31,6 +35,7 @@ struct machine
 {
 public:
 	machine(
+		load::context const &,
 		sge::systems::instance &,
 		sge::audio::pool_ptr,
 		sge::font::font &,
@@ -60,8 +65,14 @@ public:
 	sge::font::font &font();
 	bool key_pressed(
 		sge::input::key_code) const;
-	console_wrapper &con_wrapper();
+	
+	console_wrapper &
+	con_wrapper();
+	
+	load::context const &
+	resources() const;
 private:
+	load::context const &resources_;
 	::net::address_type address_;
 	::net::port_type port_;
 	::net::client net_;
@@ -79,7 +90,6 @@ private:
 	sge::con::console_gfx &con;
 	sge::con::stdlib con_stdlib;
 	console_wrapper con_wrapper_;
-	load::model::connection model_connection;
 };
 
 }

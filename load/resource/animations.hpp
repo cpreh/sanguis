@@ -20,11 +20,11 @@ class animations : boost::noncopyable {
 public:
 	sge::sprite::animation_series const
 	load(
-		sge::path const &);
+		sge::path const &) const;
 private:
 	sge::sprite::animation_series const
 	do_load(
-		sge::path const &);
+		sge::path const &) const;
 
 	sge::texture::const_part_ptr const
 	load_texture(
@@ -41,7 +41,7 @@ private:
 	> animation_map;
 	
 	textures     &textures_;
-	animation_map animations_;
+	mutable animation_map animations_;
 };
 
 }

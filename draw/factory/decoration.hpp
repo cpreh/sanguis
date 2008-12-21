@@ -8,12 +8,18 @@
 
 namespace sanguis
 {
+namespace load
+{
+class context;
+}
 namespace draw
 {
 namespace factory
 {
 
-entity_ptr decoration(
+entity_ptr
+decoration(
+	load::context const &,
 	entity_id,
 	system &,
 	decoration_type::type);

@@ -11,6 +11,10 @@ namespace load
 
 class context;
 
+namespace resource
+{
+class context;
+}
 namespace model
 {
 
@@ -23,8 +27,11 @@ public:
 private:
 	friend class load::context;
 
-	context();
+	explicit context(
+		resource::context const &);
 	~context();
+
+	resource::context const &ctx;
 
 	mutable boost::scoped_ptr<
 		collection

@@ -2,6 +2,7 @@
 #define SANGUIS_LOAD_CONTEXT_HPP_INCLUDED
 
 #include "model/context.hpp"
+#include "resource/context.hpp"
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image/loader_fwd.hpp>
 #include <sge/audio/multi_loader_fwd.hpp>
@@ -24,6 +25,9 @@ public:
 		sge::audio::pool_ptr);
 	~context();
 
+	resource::context const &
+	resources() const;
+
 	model::context const &
 	models() const;
 private:
@@ -33,6 +37,7 @@ private:
 	sge::audio::player_ptr const ap;
 	sge::audio::pool_ptr const pool;
 
+	resource::context const resource_ctx;
 	model::context const model_ctx;
 };
 

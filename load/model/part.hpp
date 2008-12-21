@@ -10,6 +10,10 @@ namespace sanguis
 {
 namespace load
 {
+namespace resource
+{
+class context;
+}
 namespace model
 {
 
@@ -21,8 +25,9 @@ public:
 private:
 	sge::path path;
 
-	explicit part(
-		sge::path const &);
+	part(
+		sge::path const &,
+		resource::context const &);
 
 	friend class model;
 

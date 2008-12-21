@@ -11,6 +11,10 @@ namespace sanguis
 {
 namespace load
 {
+namespace resource
+{
+class context;
+}
 namespace model
 {
 
@@ -22,8 +26,9 @@ public:
 private:
 	sge::path path;
 	
-	explicit weapon_category(
-		sge::path const &);
+	weapon_category(
+		sge::path const &,
+		resource::context const &);
 
 	friend class part;
 
@@ -31,6 +36,7 @@ private:
 		animation_type::type,
 		animation
 	> animation_map;
+
 	animation_map animations;
 };
 

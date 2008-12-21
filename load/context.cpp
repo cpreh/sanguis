@@ -11,8 +11,28 @@ sanguis::load::context::context(
 	rend(rend),
 	ml(ml),
 	ap(ap),
-	pool(pool)
+	pool(pool),
+	resource_ctx(
+		rend,
+		il,
+		ml,
+		ap,
+		pool),
+	model_ctx(
+		resource_ctx)
 {}
 
 sanguis::load::context::~context()
 {}
+
+sanguis::load::resource::context const &
+sanguis::load::context::resources() const
+{
+	return resource_ctx;
+}
+
+sanguis::load::model::context const &
+sanguis::load::context::models() const
+{
+	return model_ctx;
+}

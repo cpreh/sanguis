@@ -10,18 +10,28 @@ sanguis::load::model::collection::operator[](
 	model_map::const_iterator it(models.find(name));
 	if(it == models.end())
 	{
-		sge::path const path(media_path() / name);
+		sge::path const path(
+			media_path() / name);
+		
 		if(!boost::filesystem::exists(path))
 			throw exception(
-				SGE_TEXT("Model ") + name + SGE_TEXT(" not found!"));
-		models.insert(
+				SGE_TEXT("Model ")
+				+ name
+				+ SGE_TEXT(" not found!"));
+
+		it = models.insert(
 			std::make_pair(
 				name,
-				model(path))); // FIXME: why can't we assign the return value of insert to it?
-		it = models.find(name);
+				model(
+					path,
+					ctx))
+			).first;
 	}
 	return it->second;	
 }
 
-sanguis::load::model::collection::collection()
+sanguis::load::model::collection::collection(
+	resource::context const &ctx)
+:
+	ctx(ctx)
 {}

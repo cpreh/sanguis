@@ -3,18 +3,19 @@
 
 #include "../messages/base.hpp"
 #include "../net/server.hpp"
-#include "../load/model/singleton.hpp"
 #include "../tick_event.hpp"
 #include "message_event.hpp"
-
-#include <sge/console/console_gfx.hpp>
-
+#include <sge/console/console_gfx_fwd.hpp>
+#include <sge/string.hpp>
 #include <boost/statechart/state_machine.hpp>
-
 #include <map>
 
 namespace sanguis
 {
+namespace load
+{
+class context;
+}
 namespace server
 {
 
@@ -34,6 +35,7 @@ struct machine
 {
 public:
 	machine(
+		load::context const &,
 		sge::con::console_gfx &,
 		::net::port_type);
 	void process(tick_event const &);
@@ -68,13 +70,13 @@ private:
 		client_data
 	> client_map;
 
+	load::context const &resources;
 	::net::port_type port_;
 	::net::server net_;
 	::net::server::signal_connection
 		s_conn,
 		s_disconn,
 		s_data;
-	load::model::connection model_connection;
 	client_map clients;
 	sge::con::console_gfx &con;
 };
