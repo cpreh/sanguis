@@ -8,12 +8,15 @@
 #include "../entities/player.hpp"
 #include "../entities/decoration.hpp"
 #include "../weapons/factory.hpp"
+#include "../perks/factory.hpp"
+#include "../perks/perk.hpp"
 #include "../log.hpp"
 #include "../../messages/assign_id.hpp"
 #include "../../messages/client_info.hpp"
 #include "../../messages/connect.hpp"
 #include "../../messages/experience.hpp"
 #include "../../messages/level_up.hpp"
+#include "../../messages/player_choose_perk.hpp"
 #include "../../resolution.hpp"
 #include "../../dispatch_type.hpp"
 #include "../../random.hpp"
@@ -29,10 +32,19 @@
 #include <ostream>
 
 sanguis::server::states::running::running(my_context ctx)
-: my_base(ctx),
-  send(boost::bind(&server::machine::send,&(context<machine>()),_1)),
-  console_print(boost::bind(&server::machine::console_print,&(context<machine>()),_1)),
-  wave_generator()
+:
+	my_base(ctx),
+	send(
+		boost::bind(
+			&server::machine::send,
+			&(context<machine>()),
+			_1)),
+	console_print(
+		boost::bind(
+			&server::machine::console_print,
+			&(context<machine>()),
+			_1)),
+	wave_generator()
 {
 	SGE_LOG_DEBUG(
 		log(),
@@ -186,6 +198,12 @@ void sanguis::server::states::running::level_callback(
 				p.level())));
 }
 
+sanguis::load::context const &
+sanguis::server::states::running::load_callback() const
+{
+	return context<machine>().resources();
+}
+
 void sanguis::server::states::running::process(
 	time_type const time)
 {
@@ -201,7 +219,8 @@ sanguis::server::states::running::get_environment()
 		send,
 		boost::bind(&running::insert_entity, this, _1),
 		boost::bind(&running::divide_exp, this, _1),
-		boost::bind(&running::level_callback, this, _1, _2));
+		boost::bind(&running::level_callback, this, _1, _2),
+		boost::bind(&running::load_callback, this));
 }
 
 boost::statechart::result
@@ -215,7 +234,8 @@ sanguis::server::states::running::react(
 	return dispatch_type<
 		boost::mpl::vector<
 			messages::client_info,
-			messages::connect
+			messages::connect,
+			messages::player_choose_perk
 		>,
 		boost::statechart::result>(
 			mf,
@@ -309,6 +329,21 @@ sanguis::server::states::running::operator()(
 {
 	
 	// FIXME
+	return discard_event();
+}
+
+boost::statechart::result
+sanguis::server::states::running::operator()(
+	net::id_type const id,
+	messages::player_choose_perk const &p)
+{
+	// TODO: check if the player really can do this!
+	
+	players()[id]->add_perk(
+		perks::create(
+			static_cast<perk_type::type>(
+				p.perk())));
+
 	return discard_event();
 }
 

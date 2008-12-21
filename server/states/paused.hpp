@@ -33,7 +33,10 @@ class paused
 	boost::statechart::result react(const tick_event&);
 	boost::statechart::result react(const message_event&);
 
-	boost::statechart::result operator()(const net::id_type,const messages::disconnect &);
+	boost::statechart::result
+	operator()(
+		net::id_type,
+		messages::disconnect const &);
 	boost::statechart::result operator()(const net::id_type,const messages::player_unpause &);
 	boost::statechart::result operator()(const net::id_type,const messages::player_pause &);
 private:

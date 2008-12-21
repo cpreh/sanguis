@@ -22,12 +22,17 @@
 
 namespace sanguis
 {
+namespace load
+{
+class context;
+}
 namespace draw
 {
 
 class scene : boost::noncopyable {
 public:
 	scene(
+		load::context const &,
 		sge::renderer::device_ptr,
 		sge::font::font &);
 	
@@ -79,6 +84,7 @@ private:
 	
 	static sge::log::logger &log();
 
+	load::context const          &resources_;
 	system                        ss;
 	hud                           hud_;
 	bool                          paused;

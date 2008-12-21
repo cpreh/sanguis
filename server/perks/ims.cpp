@@ -1,11 +1,12 @@
 #include "ims.hpp"
 #include "../entities/entity.hpp"
 
-void sanguis::server::perks::ims::do_apply(entities::entity &e)
+void sanguis::server::perks::ims::do_apply(
+	entities::entity &e)
 {
 	e.get_property(
 		entities::property::type::movement_speed)
-		.multiply_max_with_base(factor());
+		.multiply_max(factor());
 }
 
 bool sanguis::server::perks::ims::can_raise_level() const
@@ -16,5 +17,6 @@ bool sanguis::server::perks::ims::can_raise_level() const
 sanguis::messages::space_unit
 sanguis::server::perks::ims::factor() const
 {
-	return static_cast<messages::space_unit>(level()) / messages::mu(0.1); // TODO: make this nonlinear
+	return static_cast<messages::space_unit>(level())
+		* messages::mu(0.1);
 }

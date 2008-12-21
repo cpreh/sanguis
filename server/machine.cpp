@@ -6,6 +6,7 @@
 #include "../exception.hpp"
 #include "message_event.hpp"
 
+#include <sge/console/console_gfx.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/text.hpp>
 
@@ -13,20 +14,34 @@
 #include <boost/foreach.hpp>
 
 sanguis::server::machine::machine(
+	load::context const &resources_,
 	sge::con::console_gfx &con,
 	net::port_type const port_)
 :
+	resources_(
+		resources_),
 	port_(
 		port_),
 	s_conn(
 		net_.register_connect(
-			boost::bind(&machine::connect_callback,this,_1))),
+			boost::bind(
+				&machine::connect_callback,
+				this,
+				_1))),
 	s_disconn(
 		net_.register_disconnect(
-			boost::bind(&machine::disconnect_callback,this,_1,_2))),
+			boost::bind(
+				&machine::disconnect_callback,
+				this,
+				_1,
+				_2))),
 	s_data(
 		net_.register_data(
-			boost::bind(&machine::data_callback,this,_1,_2))),
+			boost::bind(
+				&machine::data_callback,
+				this,
+				_1,
+				_2))),
 	con(con)
 {}
 
@@ -134,4 +149,10 @@ net::server &
 sanguis::server::machine::net()
 {
 	return net_;
+}
+
+sanguis::load::context const &
+sanguis::server::machine::resources() const
+{
+	return resources_;
 }

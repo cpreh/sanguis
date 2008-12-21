@@ -9,18 +9,31 @@ namespace sanguis
 {
 namespace load
 {
+namespace resource
+{
+class context;
+}
 namespace model
 {
 
 class collection {
 public:
-	model const& operator[](sge::string const&) const;
+	model const &
+	operator[](
+		sge::string const &) const;
 private:
-	collection();
+	explicit collection(
+		resource::context const &);
 
-	friend struct connection;
+	friend struct context;
 
-	typedef std::map<sge::string, model> model_map;
+	resource::context const &ctx;
+
+	typedef std::map<
+		sge::string,
+		model
+	> model_map;
+
 	mutable model_map models;
 };
 

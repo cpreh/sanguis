@@ -7,8 +7,10 @@
 #include "../entity_id.hpp"
 #include "../messages/fwd.hpp"
 #include <sge/sprite/types.hpp>
+#include <sge/time/timer.hpp>
 #include <sge/math/vector.hpp>
 #include <sge/renderer/device_fwd.hpp>
+#include <sge/console/arg_list.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/function.hpp>
 #include <boost/array.hpp>
@@ -64,6 +66,9 @@ private:
 	void change_weapon(
 		weapon_type::type);
 
+	void give_perk(
+		sge::con::arg_list const &);
+
 	send_callback const             send;
 	sge::renderer::device_ptr const rend;
 
@@ -82,6 +87,7 @@ private:
 	                                player_center;
 	weapon_type::type               current_weapon;
 	bool                            paused;
+	sge::time::timer                rotation_timer;
 
 	typedef boost::array<
 		bool,

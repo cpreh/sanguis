@@ -1,6 +1,7 @@
 #include "rocket.hpp"
 #include "aoe_damage.hpp"
 #include "../../get_dim.hpp"
+#include "../../../load/context.hpp"
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::projectiles::rocket::rocket(
@@ -21,6 +22,7 @@ sanguis::server::entities::projectiles::rocket::rocket(
 			(property::type::health, property(messages::mu(1)))
 			(property::type::movement_speed, property(messages::mu(300))),
 		default_dim(
+			env.load().models(),
 			SGE_TEXT("rocket")),
 		static_cast<time_type>(10)),
 	damage(damage),

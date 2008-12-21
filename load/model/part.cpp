@@ -6,11 +6,17 @@
 #include <iterator>
 
 sanguis::load::model::part::part(
-	sge::path const& path)
-: path(path)
+	sge::path const &path,
+	resource::context const &ctx)
+:
+	path(path)
 {
-	typedef boost::array<sge::string, weapon_type::size> weapon_type_array;
-	const weapon_type_array weapon_types = {
+	typedef boost::array<
+		sge::string,
+		weapon_type::size
+	> weapon_type_array;
+
+	weapon_type_array const weapon_types = {
 	{
 		SGE_TEXT("none"),
 		SGE_TEXT("melee"),
@@ -24,7 +30,7 @@ sanguis::load::model::part::part(
 	    it != weapon_types.end();
 	    ++it)
 	{
-		const sge::path weapon_path(path / *it);
+		sge::path const weapon_path(path / *it);
 		if(!boost::filesystem::exists(weapon_path))
 			continue;
 
@@ -34,16 +40,20 @@ sanguis::load::model::part::part(
 					std::distance(
 						static_cast<weapon_type_array const &>(weapon_types).begin(),
 						it)),
-				weapon_category(weapon_path)))
+				weapon_category(
+					weapon_path,
+					ctx)))
 		.second == false)
 			throw exception(SGE_TEXT("Double insert in model::part: ") + weapon_path.string());
 	}
 }
 
-sanguis::load::model::weapon_category const&
-sanguis::load::model::part::operator[](const weapon_type::type t) const
+sanguis::load::model::weapon_category const &
+sanguis::load::model::part::operator[](
+	weapon_type::type const t) const
 {
-	const category_map::const_iterator it(categories.find(t));
+	category_map::const_iterator const it(
+		categories.find(t));
 	if(it != categories.end())
 		return it->second;
 	if(t == weapon_type::none)

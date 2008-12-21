@@ -8,12 +8,18 @@
 
 namespace sanguis
 {
+namespace load
+{
+class context;
+}
 namespace draw
 {
 namespace factory
 {
 
-entity_ptr pickup(
+entity_ptr
+pickup(
+	load::context const &,
 	entity_id,
 	system &,
 	pickup_type::type);

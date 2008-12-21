@@ -7,7 +7,7 @@
 #include "../teams.hpp"
 #include "../types.hpp"
 #include "../environment.hpp"
-#include "../perks/perk.hpp"
+#include "../perks/auto_ptr.hpp"
 #include "../../messages/base.hpp"
 #include "../../entity_id.hpp"
 #include "../../entity_type.hpp"
@@ -81,7 +81,7 @@ public:
 		container &entities);
 
 	void add_perk(
-		perks::perk_auto_ptr); 
+		perks::auto_ptr); 
 	
 	virtual messages::auto_ptr add_message() const;
 

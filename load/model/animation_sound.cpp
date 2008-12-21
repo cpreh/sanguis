@@ -1,5 +1,6 @@
 #include "animation_sound.hpp"
-#include "../resource/factory.hpp"
+#include "../resource/context.hpp"
+#include "../resource/sounds.hpp"
 #include "../../exception.hpp"
 #include <sge/random/exclusive_range_error.hpp>
 #include <sge/text.hpp>
@@ -22,7 +23,8 @@ sanguis::load::model::animation_sound::operator[](
 }
 
 sanguis::load::model::animation_sound::animation_sound(
-	sge::path const &path)
+	sge::path const &path,
+	resource::context const &ctx)
 {
 	typedef boost::array<
 		sge::string,
@@ -50,8 +52,9 @@ sanguis::load::model::animation_sound::animation_sound(
 							animation_sounds.begin(),
 							it)),
 					conditional_sound(
-						resource::sound(
-							sound_path))))
+						ctx.sounds().load(
+							sound_path),
+						ctx)))
 			.second == false)
 				throw exception(
 					SGE_TEXT("Double insert in model::animation_sound: ")

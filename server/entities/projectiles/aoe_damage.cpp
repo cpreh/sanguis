@@ -2,6 +2,7 @@
 #include <sge/time/second_f.hpp>
 #include <boost/foreach.hpp>
 #include <boost/assign/list_of.hpp>
+#include <limits>
 
 sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 	environment const &env,
@@ -24,8 +25,7 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 		dim_type(
 			radius * messages::mu(2),
 			radius * messages::mu(2)),
-		static_cast<time_type>(
-			max_pulses) * pulse_diff),
+		optional_life_time()),
 	diff_clock_(),
 	damage_per_pulse(damage_per_pulse),
 	pulses(0),
@@ -57,7 +57,10 @@ void sanguis::server::entities::projectiles::aoe_damage::do_hit(
 		return;
 	
 	if(pulses == max_pulses)
+	{
 		die();
+		return;
+	}
 	
 	BOOST_FOREACH(hit_vector::value_type e, hits)
 		e.get().damage(

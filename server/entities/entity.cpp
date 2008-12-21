@@ -1,6 +1,7 @@
 #include "entity.hpp"
 #include "base_parameters.hpp"
 #include "auto_weak_link.hpp"
+#include "../perks/perk.hpp"
 #include "../get_unique_id.hpp"
 #include "../message_converter.hpp"
 #include "../../messages/add.hpp"
@@ -236,19 +237,22 @@ void sanguis::server::entities::entity::update(
 	center_ += abs_speed() * delta;
 
 	BOOST_FOREACH(property_map::value_type &p, properties)
-		p.second.reset_max_to_base();
+		p.second.reset();
 
 	BOOST_FOREACH(perks::perk &p, perks_)
 		p.apply(*this);
+
+	BOOST_FOREACH(property_map::value_type &p, properties)
+		p.second.apply();
 }
 
 void sanguis::server::entities::entity::add_perk(
-	perks::perk_auto_ptr p)
+	perks::auto_ptr p)
 {
 	// check, if we already have such a perk
 	BOOST_FOREACH(perks::perk &i, perks_)
 	{
-		if(typeid(i) == typeid(p))
+		if(typeid(i) == typeid(*p))
 		{
 			i.raise_level();
 			return;

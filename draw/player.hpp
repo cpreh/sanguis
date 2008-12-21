@@ -9,12 +9,17 @@
 
 namespace sanguis
 {
+namespace load
+{
+class context;
+}
 namespace draw
 {
 
 class player : public model {
 public:
 	player(
+		load::context const &,
 		entity_id id,
 		system &);
 	void orientation(sge::sprite::rotation_type);

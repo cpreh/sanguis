@@ -6,12 +6,14 @@
 
 sanguis::draw::factory::entity_ptr
 sanguis::draw::factory::enemy(
+	load::context const &ctx,
 	entity_id const id,
 	system &sys,
 	enemy_type::type const etype)
 {
 	return entity_ptr(
 		new model(
+			ctx,
 			id,
 			sys,
 			load::enemy_name(

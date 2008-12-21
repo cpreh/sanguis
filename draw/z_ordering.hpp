@@ -19,6 +19,9 @@ enum type {
 	player_upper,
 	healthbar_lower,
 	healthbar_upper,
+	smoke,
+	flare,
+	rubble,
 	cursor
 };
 

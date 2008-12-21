@@ -3,7 +3,7 @@
 #include "server/states/start.hpp"
 #include "client/machine.hpp"
 #include "client/start_state.hpp"
-#include "load/resource/connection.hpp"
+#include "load/context.hpp"
 #include "tick_event.hpp"
 #include "media_path.hpp"
 #include "resolution.hpp"
@@ -62,6 +62,7 @@ typedef std::auto_ptr<
 
 server_auto_ptr
 create_server(
+	sanguis::load::context const &,
 	sge::con::console_gfx &,
 	::net::port_type,
 	bool client_only);
@@ -165,7 +166,8 @@ try
 			sge::renderer::linear_filter));
 	sge::font::font_ptr const console_font(new sge::font::font(metrics,drawer));
 
-	sge::con::console_gfx console(sys.renderer(),
+	sge::con::console_gfx console(
+		sys.renderer(),
 		sge::texture::add(
 			texman,
 			sys.image_loader()->load(
@@ -179,9 +181,9 @@ try
 				sys.renderer()->screen_size().h() / 2)));
 	
 	sge::audio::multi_loader audio_loader(sys.plugin_manager());
-	sge::audio::pool_ptr sound_pool = sys.audio_player()->create_pool();
+	sge::audio::pool_ptr const sound_pool = sys.audio_player()->create_pool();
 
-	sanguis::load::resource::connection resources(
+	sanguis::load::context resources(
 		sys.image_loader(),
 		sys.renderer(),
 		audio_loader,
@@ -192,6 +194,7 @@ try
 		sanguis::server::machine
 	> server(
 		create_server(
+			resources,
 			console,
 			host_port,
 			client_only));
@@ -206,6 +209,7 @@ try
 	
 	// construct and initialize statemachine
 	sanguis::client::machine client(
+		resources,
 		sys,
 		sound_pool,
 		font,
@@ -243,6 +247,7 @@ namespace
 
 server_auto_ptr
 create_server(
+	sanguis::load::context const &resources,
 	sge::con::console_gfx &con,
 	::net::port_type const host_port,
 	bool const client_only)
@@ -250,6 +255,7 @@ create_server(
 	return !client_only
 		? server_auto_ptr(
 			new sanguis::server::machine(
+				resources,
 				con, 
 				host_port))
 		: server_auto_ptr();

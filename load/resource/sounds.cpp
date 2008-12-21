@@ -1,11 +1,14 @@
-#include "environment.hpp"
+#include "sounds.hpp"
+#include "map_get_or_create.hpp"
+#include "../sound_collection.hpp"
 #include "../log.hpp"
 #include "../../exception.hpp"
-#include "map_get_or_create.hpp"
 #include <sge/log/headers.hpp>
 #include <sge/audio/player.hpp>
 #include <sge/audio/pool.hpp>
+#include <sge/audio/multi_loader.hpp>
 #include <sge/fstream.hpp>
+#include <sge/text.hpp>
 #include <boost/bind.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/convenience.hpp>
@@ -13,21 +16,24 @@
 #include <ostream>
 
 sanguis::load::sound_collection const &
-sanguis::load::resource::environment::load_sound(
-	sge::path const &dir)
+sanguis::load::resource::sounds::load(
+	sge::path const &dir) const
 {
 	return map_get_or_create(
-		sounds, 
+		sounds_,
 		dir, 
 		boost::bind(
-			&environment::do_load_sound,
+			&sounds::do_load,
 			this,
 			_1));
 }
 
+sanguis::load::resource::sounds::~sounds()
+{}
+
 sanguis::load::sound_collection const
-sanguis::load::resource::environment::do_load_sound(
-	sge::path const &dir)
+sanguis::load::resource::sounds::do_load(
+	sge::path const &dir) const
 {
 	// a missing directory is valid
 	if (!boost::filesystem::exists(dir) || 
@@ -43,7 +49,7 @@ sanguis::load::resource::environment::do_load_sound(
 	for(sge::directory_iterator it(dir), end; it != end; ++it)
 	{
 		if(boost::filesystem::is_directory(*it))
-		{ // needed because SGE_LOG_WARNING has its own if()
+		{ 
 			SGE_LOG_WARNING(
 				log(),
 				sge::log::_1
@@ -104,11 +110,22 @@ sanguis::load::resource::environment::do_load_sound(
 }
 
 sge::audio::sound_ptr const
-sanguis::load::resource::environment::make_sound(
+sanguis::load::resource::sounds::make(
 	sge::audio::file_ptr const snd) const
 {
-	sge::audio::sound_ptr const ss = player->create_nonstream_sound(
-		snd);
-	sound_pool->add(ss);
+	sge::audio::sound_ptr const ss
+		= player->create_nonstream_sound(
+			snd);
+	pool->add(ss);
 	return ss;
 }
+
+sanguis::load::resource::sounds::sounds(
+	sge::audio::multi_loader &ml,
+	sge::audio::player_ptr const player,
+	sge::audio::pool_ptr const pool)
+:
+	ml(ml),
+	player(player),
+	pool(pool)
+{}

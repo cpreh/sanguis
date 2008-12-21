@@ -8,7 +8,8 @@
 #include <utility>
 
 sanguis::load::model::model::model(
-	sge::path const& path)
+	sge::path const &path,
+	resource::context const &ctx)
 {
 	for(sge::directory_iterator beg(path), end; beg != end; ++beg)
 	{
@@ -25,7 +26,9 @@ sanguis::load::model::model::model(
 		if(parts.insert(
 			std::make_pair(
 				boost::filesystem::basename(*beg),
-				part(*beg)))
+				part(
+					*beg,
+					ctx)))
 		.second == false)
 			throw exception(
 				SGE_TEXT("Double insert in model::model: ")
@@ -33,9 +36,9 @@ sanguis::load::model::model::model(
 	}
 }
 
-sanguis::load::model::part const&
+sanguis::load::model::part const &
 sanguis::load::model::model::operator[](
-	sge::string const& name) const
+	sge::string const &name) const
 {
 	part_map::const_iterator const it(parts.find(name));
 	if(it == parts.end())

@@ -11,6 +11,10 @@ namespace sanguis
 {
 namespace load
 {
+namespace resource
+{
+class context;
+}
 namespace model
 {
 
@@ -20,8 +24,9 @@ public:
 	operator[](
 		animation_sound_type::type) const;
 private:
-	explicit animation_sound(
-		sge::path const &);
+	animation_sound(
+		sge::path const &,
+		resource::context const &);
 	
 	friend class animation;
 

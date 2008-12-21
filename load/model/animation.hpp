@@ -9,6 +9,10 @@ namespace sanguis
 {
 namespace load
 {
+namespace resource
+{
+class context;
+}
 namespace model
 {
 
@@ -16,15 +20,21 @@ class animation_sound;
 
 class animation {
 public:
-	sge::sprite::animation_series const &get() const;
-	animation_sound const &sounds() const;
+	sge::sprite::animation_series const &
+	get() const;
+
+	animation_sound const &
+	sounds() const;
 private:
-	explicit animation(
-		sge::path const &);
+	animation(
+		sge::path const &,
+		resource::context const &);
 
 	friend class weapon_category;
 
 	sge::path path;
+	resource::context const &ctx;
+
 	mutable sge::shared_ptr<
 		sge::sprite::animation_series
 	> anim;

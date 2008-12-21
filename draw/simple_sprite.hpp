@@ -4,6 +4,7 @@
 #include "entity.hpp"
 #include "types.hpp"
 #include <sge/sprite/types.hpp>
+#include <sge/texture/part_fwd.hpp>
 
 namespace sanguis
 {
@@ -16,7 +17,7 @@ public:
 		entity_id,
 		system &,
 		object::order_type,
-		sge::texture::part_ptr);
+		sge::texture::const_part_ptr);
 private:
 	void update(time_type);
 	void orientation(sge::sprite::rotation_type);

@@ -16,6 +16,7 @@
 #include <boost/lambda/construct.hpp>
 
 sanguis::client::machine::machine(
+	load::context const &resources_,
 	sge::systems::instance &sys,
 	sge::audio::pool_ptr const sound_pool_,
 	sge::font::font &font_,
@@ -24,6 +25,7 @@ sanguis::client::machine::machine(
 	net::address_type const &address_,
 	net::port_type const port_) 
 :
+	resources_(resources_),
 	address_(address_),
 	port_(port_),
 	s_conn(
@@ -176,4 +178,10 @@ sanguis::client::console_wrapper &
 sanguis::client::machine::con_wrapper()
 {
 	return con_wrapper_;
+}
+
+sanguis::load::context const &
+sanguis::client::machine::resources() const
+{
+	return resources_;
 }

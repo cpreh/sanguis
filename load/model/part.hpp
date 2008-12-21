@@ -10,6 +10,10 @@ namespace sanguis
 {
 namespace load
 {
+namespace resource
+{
+class context;
+}
 namespace model
 {
 
@@ -21,12 +25,17 @@ public:
 private:
 	sge::path path;
 
-	explicit part(
-		sge::path const &);
+	part(
+		sge::path const &,
+		resource::context const &);
 
 	friend class model;
 
-	typedef std::map<weapon_type::type, weapon_category> category_map;
+	typedef std::map<
+		weapon_type::type,
+		weapon_category
+	> category_map;
+
 	category_map categories;
 };
 

@@ -5,6 +5,7 @@
 
 sanguis::draw::factory::entity_ptr
 sanguis::draw::factory::projectile(
+	load::context const &ctx,
 	entity_id const id,
 	system &sys,
 	projectile_type::type const ptype)
@@ -13,12 +14,14 @@ sanguis::draw::factory::projectile(
 	case projectile_type::simple_bullet:
 		return entity_ptr(
 			new bullet(
+				ctx,
 				id,
 				sys,
 				SGE_TEXT("bullet")));
 	case projectile_type::rocket:
 		return entity_ptr(
 			new bullet(
+				ctx,
 				id,
 				sys,
 				SGE_TEXT("rocket")));

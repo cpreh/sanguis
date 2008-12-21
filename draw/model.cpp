@@ -3,7 +3,8 @@
 #include "log.hpp"
 #include "sprite_part_index.hpp"
 #include "../load/model/collection.hpp"
-#include "../load/model/singleton.hpp"
+#include "../load/model/context.hpp"
+#include "../load/context.hpp"
 #include "../client/id_dont_care.hpp"
 #include "../exception.hpp"
 #include <sge/log/headers.hpp>
@@ -12,32 +13,35 @@
 #include <ostream>
 
 sanguis::draw::model::model(
+	load::context const &ctx,
 	entity_id const id,
 	system &sys,
 	sge::string const &name,
 	object::order_type const order,
 	bool const show_healthbar,
 	funit const start_health)
-: sprite(
-	id,
-	sys,
-	load::model::singleton()[name].size(),
-	order),
-  attacking(false),
-  reloading(false),
-  health_(start_health),
-  max_health_(start_health),
-  healthbar_(
-	show_healthbar
-	? new healthbar(
-		sys)
-	: 0)
+:
+	sprite(
+		id,
+		sys,
+		ctx.models()()[name].size(),
+		order),
+	attacking(false),
+	reloading(false),
+	health_(start_health),
+	max_health_(start_health),
+	healthbar_(
+		show_healthbar
+		? new healthbar(
+			sys)
+		: 0)
 {
 	part_vector::size_type i(0);
 	BOOST_FOREACH(
 		load::model::model::value_type const &p,
-		load::model::singleton()[name])
-			parts.push_back(
+		ctx.models()()[name]
+	)
+		parts.push_back(
 			new model_part(
 				p.second,
 				at(sprite_part_index(i++))));

@@ -60,9 +60,11 @@ FILE (GLOB files
 	client_messages/*.cpp
 	draw/*.cpp
 	draw/factory/*.cpp
+	draw/particle/*.cpp
 	messages/*.cpp
 	load/*.cpp
 	load/model/*.cpp
+	load/particle/*.cpp
 	load/resource/*.cpp
 	server/*.cpp
 	server/ai/*.cpp

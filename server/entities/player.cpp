@@ -1,8 +1,7 @@
 #include "player.hpp"
 #include "base_parameters.hpp"
 #include "../get_dim.hpp"
-#include "../../load/model/collection.hpp"
-#include "../../load/model/singleton.hpp"
+#include "../../load/context.hpp"
 #include "../level_calculate.hpp"
 #include <sge/math/vec_dim.hpp>
 #include <sge/console/console.hpp>
@@ -29,6 +28,7 @@ sanguis::server::entities::player::player(
 			entity_type::player,
 			false,
 			get_dim(
+				env.load().models(),
 				SGE_TEXT("player"),
 				SGE_TEXT("bottom")))),
 	net_id_(net_id_),

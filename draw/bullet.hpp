@@ -8,12 +8,17 @@
 
 namespace sanguis
 {
+namespace load
+{
+class context;
+}
 namespace draw
 {
 
 class bullet : public model {
 public:
 	bullet(
+		load::context const &,
 		entity_id id,
 		system &,
 		sge::string const &name);

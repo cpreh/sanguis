@@ -46,9 +46,11 @@
 #include <ostream>
 
 sanguis::draw::scene::scene(
+	load::context const &resources_,
 	sge::renderer::device_ptr const rend,
 	sge::font::font &font)
 :
+	resources_(resources_),
 	ss(rend),
 	hud_(font),
 	paused(false)
@@ -78,12 +80,15 @@ void sanguis::draw::scene::process_message(
 			messages::start_reloading,
 			messages::stop_reloading,
 			messages::speed
-			>,
-		void>(
+		>,
+		void
+	>(
 		*this,
 		m,
 		boost::bind(
-			&scene::process_default_msg, this, _1));
+			&scene::process_default_msg,
+			this,
+			_1));
 }
 
 void sanguis::draw::scene::process_message(
@@ -92,12 +97,15 @@ void sanguis::draw::scene::process_message(
 	dispatch_type<
 		boost::mpl::vector<
 			client_messages::add
-			>,
-		void>(
+		>,
+		void
+	>(
 		*this,
 		m,
 		boost::bind(
-			&scene::process_default_client_msg, this, _1));
+			&scene::process_default_client_msg,
+			this,
+			_1));
 }
 
 void sanguis::draw::scene::draw(
@@ -105,7 +113,7 @@ void sanguis::draw::scene::draw(
 {
 	for(entity_map::iterator it(entities.begin()), next(it); it != entities.end(); it = next)
 	{
-		entity& e = *it->second;
+		entity &e = *it->second;
 		++next;
 
 		e.update(
@@ -133,6 +141,7 @@ void sanguis::draw::scene::operator()(
 {
 	configure_new_object(
 		factory::entity(
+			resources_,
 			m.id(),
 			get_system(),
 			m.type()),
@@ -144,6 +153,7 @@ void sanguis::draw::scene::operator()(
 {
 	configure_new_object(
 		factory::enemy(
+			resources_,
 			m.id(),
 			get_system(),
 			m.etype()),
@@ -159,6 +169,7 @@ void sanguis::draw::scene::operator()(
 	
 	configure_new_object(
 		factory::decoration(
+			resources_,
 			m.id(),
 			get_system(),
 			m.ptype()),
@@ -170,6 +181,7 @@ void sanguis::draw::scene::operator()(
 {
 	configure_new_object(
 		factory::pickup(
+			resources_,
 			m.id(),
 			get_system(),
 			m.ptype()),
@@ -181,6 +193,7 @@ void sanguis::draw::scene::operator()(
 {
 	configure_new_object(
 		factory::projectile(
+			resources_,
 			m.id(),
 			get_system(),
 			m.ptype()),
@@ -192,6 +205,7 @@ void sanguis::draw::scene::operator()(
 {
 	configure_new_object(
 		factory::weapon_pickup(
+			resources_,
 			m.id(),
 			get_system(),
 			m.wtype()),
@@ -212,7 +226,9 @@ void sanguis::draw::scene::operator()(
 		return;
 	}
 	
-	get_entity(m.id()).weapon(static_cast<weapon_type::type>(m.weapon()));
+	get_entity(m.id()).weapon(
+		static_cast<weapon_type::type>(
+			m.weapon()));
 }
 
 void sanguis::draw::scene::operator()(
@@ -305,9 +321,11 @@ void sanguis::draw::scene::operator()(
 	if(entities.insert(
 		m.id(),
 		factory::client(
+			resources_,
 			m,
 			get_system(),
-			get_system().renderer()->screen_size())).second == false)
+			get_system().renderer()->screen_size())).second
+	== false)
 		throw exception(SGE_TEXT("Client object with id already in entity list!"));
 	// FIXME: configure the object here, too!
 }

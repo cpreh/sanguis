@@ -1,4 +1,5 @@
 #include "bullet.hpp"
+#include "unit.hpp"
 #include "z_ordering.hpp"
 #include "sprite_part_index.hpp"
 #include <boost/none.hpp>
@@ -12,11 +13,13 @@ sanguis::draw::sprite_part_index const
 }
 
 sanguis::draw::bullet::bullet(
+	load::context const &ctx,
 	entity_id id,
 	system &sys,
 	sge::string const &name)
 :
 	model(
+		ctx,
 		id,
 		sys,
 		name,
@@ -27,7 +30,8 @@ sanguis::draw::bullet::bullet(
 	at(tail).size().w() = static_cast<unit>(3); // TODO: which value is best here?
 }
 
-void sanguis::draw::bullet::update(const time_type time)
+void sanguis::draw::bullet::update(
+	time_type const time)
 {
 	if (!origin)
 		origin = center();

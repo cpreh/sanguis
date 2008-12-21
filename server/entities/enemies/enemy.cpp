@@ -5,6 +5,7 @@
 #include "../../get_dim.hpp"
 #include "../../../random.hpp"
 #include "../../../load/enemy_name.hpp"
+#include "../../../load/context.hpp"
 #include "../../../messages/add_enemy.hpp"
 #include <boost/tr1/random.hpp>
 
@@ -33,6 +34,7 @@ sanguis::server::entities::enemies::enemy::enemy(
 			entity_type::enemy,
 			false,
 			default_dim(
+				env.load().models(),
 				load::enemy_name(
 					etype_))),
 		ai_,

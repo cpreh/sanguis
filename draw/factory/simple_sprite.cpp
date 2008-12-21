@@ -1,9 +1,12 @@
 #include "simple_sprite.hpp"
 #include "../simple_sprite.hpp"
-#include "../../load/resource/factory.hpp"
+#include "../../load/context.hpp"
+#include "../../load/resource/context.hpp"
+#include "../../load/resource/textures.hpp"
 
 sanguis::draw::factory::entity_ptr
 sanguis::draw::factory::simple_sprite(
+	load::context const &ctx,
 	entity_id const id,
 	system &sys,
 	z_ordering::type const z,
@@ -14,6 +17,6 @@ sanguis::draw::factory::simple_sprite(
 			id,
 			sys,
 			z,
-			load::resource::texture(
+			ctx.resources().textures().load(
 				texture_name)));
 }

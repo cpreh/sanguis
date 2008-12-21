@@ -6,6 +6,7 @@
 #include "../../../messages/base.hpp"
 #include "../entity.hpp"
 #include <sge/time/timer.hpp>
+#include <boost/optional.hpp>
 #include <boost/tr1/functional.hpp>
 #include <vector>
 
@@ -22,6 +23,10 @@ class projectile : public entity {
 public:
 	projectile_type::type ptype() const;
 protected:
+	typedef boost::optional<
+		time_type
+	> optional_life_time;
+
 	projectile(
 		projectile_type::type,
 		environment const &,
@@ -30,7 +35,7 @@ protected:
 		team::type team,
 		property_map const &,
 		dim_type const &dim,
-		time_type lifetime);
+		optional_life_time const &);
 	void die();
 
 	typedef std::vector<
