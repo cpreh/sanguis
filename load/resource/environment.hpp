@@ -59,26 +59,7 @@ class environment : boost::noncopyable
 	sge::audio::player_ptr const player;
 	sge::texture::manager texman;
 	sge::audio::pool_ptr sound_pool;
-	std::map<identifier_type,identifier_type> texture_names;
 
-	typedef std::map<
-		sanguis::load::resource::identifier_type,
-		sge::texture::part_ptr
-	> texture_map;
-
-	typedef std::map<
-		sge::path,
-		sge::sprite::animation_series
-	> animation_map;
-	
-	typedef std::map<
-		sge::path,
-		sound_collection
-	> sound_map;
-	
-	texture_map textures;
-	animation_map animations;
-	sound_map sounds;
 
 	// internal functions
 	sge::texture::part_ptr const do_load_texture(

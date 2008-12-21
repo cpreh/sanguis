@@ -1,12 +1,27 @@
+#include "animations.hpp"
+#include "textures.hpp"
+#include "map_get_or_create.hpp"
+#include "../../exception.hpp"
+#include <sge/time/millisecond.hpp>
+#include <sge/fstream.hpp>
+#include <sge/sstream.hpp>
+#include <sge/text.hpp>
+#include <boost/algorithm/string/trim.hpp>
+#include <boost/algorithm/string/predicate.hpp>
+#include <boost/filesystem/operations.hpp>
+#include <boost/optional.hpp>
+#include <boost/bind.hpp>
+#include <boost/lexical_cast.hpp>
+
 sge::sprite::animation_series const
 sanguis::load::resource::animations::load(
 	sge::path const &dir)
 {
 	return map_get_or_create(
-		animations, 
+		animations_,
 		dir, 
 		boost::bind(
-			&environment::do_load,
+			&animations::do_load,
 			this,
 			_1));
 }
@@ -36,7 +51,7 @@ sanguis::load::resource::animations::do_load(
 				sge::sprite::animation_entity(
 					sge::time::millisecond(
 						static_cast<sge::time::unit>(1)),
-					do_load_texture_inner(*it)));
+					load_texture(*it)));
 			return ret; // TODO: can we do this with boost::assign?
 		}
 		throw exception(dir.string() + SGE_TEXT(" is empty!"));
@@ -64,7 +79,8 @@ sanguis::load::resource::animations::do_load(
 				boost::lexical_cast<sge::time::unit>(
 					line.substr(
 						sge::string(
-							SGE_TEXT("frame_length ")).length()))));
+							SGE_TEXT("frame_length "))
+						.length()))));
 	else
 		file.seekg(0,std::ios_base::beg);
 	
@@ -103,9 +119,23 @@ sanguis::load::resource::animations::do_load(
 		anim.push_back(
 			sge::sprite::animation_entity(
 				delay,
-				do_load_texture_inner(dir/filename)));
+				load_texture(
+					dir / filename)));
 		++lineno;
 	}
 		
 	return anim;
 }
+
+sge::texture::const_part_ptr const
+sanguis::load::resource::animations::load_texture(
+	sge::path const &p) const
+{
+	return textures_.do_load_inner(p);	
+}
+
+sanguis::load::resource::animations::animations(
+	textures &textures_)
+:
+	textures_(textures_)
+{}

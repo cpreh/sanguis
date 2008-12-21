@@ -45,15 +45,15 @@ private:
 	~context();
 
 	boost::scoped_ptr<
-		textures
-	>textures_;
+		resource::textures
+	> textures_;
 
 	boost::scoped_ptr<
-		sounds
-	>sounds_;
+		resource::sounds
+	> sounds_;
 
 	boost::scoped_ptr<
-		animations
+		resource::animations
 	> animations_;
 };
 

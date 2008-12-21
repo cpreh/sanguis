@@ -5,6 +5,10 @@
 #include "../../media_path.hpp"
 #include <sge/log/headers.hpp>
 #include <sge/texture/util.hpp>
+#include <sge/texture/default_creator_impl.hpp>
+#include <sge/texture/no_fragmented.hpp>
+#include <sge/renderer/texture_filter.hpp>
+#include <sge/image/loader.hpp>
 #include <sge/text.hpp>
 #include <sge/fstream.hpp>
 #include <sge/string.hpp>
@@ -13,22 +17,25 @@
 #include <boost/filesystem/operations.hpp>
 #include <boost/bind.hpp>
 
-sge::texture::part_ptr const
+sge::texture::const_part_ptr const
 sanguis::load::resource::textures::load(
 	texture_identifier const &id)
 {
 	return map_get_or_create(
-		textures, 
+		textures_,
 		id, 
 		boost::bind(
-			&environment::do_load_texture,
+			&textures::do_load,
 			this,
 			_1));
 }
 
-sge::texture::part_ptr const
-sanguis::load::resource::environment::do_load(
-	identifier_type const &id)
+sanguis::load::resource::textures::~textures()
+{}
+
+sge::texture::const_part_ptr const
+sanguis::load::resource::textures::do_load(
+	texture_identifier const &id)
 {
 	if (texture_names.find(id) == texture_names.end())
 		throw exception(
@@ -40,8 +47,8 @@ sanguis::load::resource::environment::do_load(
 		/ texture_names[id]);
 }
 
-sge::texture::part_ptr const
-sanguis::load::resource::environment::do_load_inner(
+sge::texture::const_part_ptr const
+sanguis::load::resource::textures::do_load_inner(
 	sge::path const &p)
 {
 	return sge::texture::add(
@@ -53,7 +60,14 @@ sanguis::load::resource::textures::textures(
 	sge::renderer::device_ptr const rend,
 	sge::image::loader_ptr const il)
 :
-	texman(rend),
+	texman(
+		rend,
+		sge::texture::default_creator<
+			sge::texture::no_fragmented
+		>(
+			rend,
+			sge::renderer::color_format::rgba8,
+			sge::renderer::linear_filter)),
 	il(il)
 {
 	// look for .tex files
@@ -102,5 +116,3 @@ sanguis::load::resource::textures::textures(
 		}
 	}
 }
-
-

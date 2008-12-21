@@ -6,19 +6,19 @@
 sanguis::load::resource::textures const &
 sanguis::load::resource::context::textures() const
 {
-	return *textures;
+	return *textures_;
 }
 
 sanguis::load::resource::sounds const &
 sanguis::load::resource::context::sounds() const
 {
-	return *sounds;
+	return *sounds_;
 }
 
 sanguis::load::resource::animations const &
 sanguis::load::resource::context::animations() const
 {
-	return *animations;	
+	return *animations_;
 }
 
 sanguis::load::resource::context::context(
@@ -29,11 +29,17 @@ sanguis::load::resource::context::context(
 	sge::audio::pool_ptr const pool)
 :
 	textures_(
-		new resource::textures()),
+		new resource::textures(
+			rend,
+			il)),
 	sounds_(
-		new resource::sounds()),
+		new resource::sounds(
+			ml,
+			ap,
+			pool)),
 	animations_(
-		new resource::animations())
+		new resource::animations(
+			*textures_))
 {}
 
 sanguis::load::resource::context::~context()

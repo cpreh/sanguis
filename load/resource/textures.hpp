@@ -19,33 +19,41 @@ namespace resource
 
 class textures : boost::noncopyable {
 public:
-	sge::texture::part_ptr const
+	sge::texture::const_part_ptr const
 	load(
 		texture_identifier const &);
+
+	~textures();
 private:
 	friend class context;
+	friend class animations;
 
-	sge::texture::part_ptr const
-	do_load_texture(
+	sge::texture::const_part_ptr const
+	do_load(
 		texture_identifier const &);
 
-	sge::texture::part_ptr const
+	sge::texture::const_part_ptr const
 	do_load_inner(
 		sge::path const &);
 
 	textures(
 		sge::renderer::device_ptr,
 		sge::image::loader_ptr);
-	~textures();
 
 	typedef std::map<
 		texture_identifier,
-		sge::texture::part_ptr
+		sge::texture::const_part_ptr
 	> texture_map;
+
+	typedef std::map<
+		texture_identifier,
+		texture_identifier
+	> texture_name_map;
 
 	sge::texture::manager texman;
 	sge::image::loader_ptr const il;
-	texture_map textures;
+	texture_map textures_;
+	texture_name_map texture_names;
 };
 
 }
