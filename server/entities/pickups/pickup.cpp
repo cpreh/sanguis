@@ -6,6 +6,7 @@
 #include "../../collision.hpp"
 #include "../../message_converter.hpp"
 #include "../../../load/pickup_name.hpp"
+#include "../../../load/context.hpp"
 #include "../../../messages/add_pickup.hpp"
 #include <sge/text.hpp>
 #include <boost/foreach.hpp>
@@ -43,6 +44,7 @@ sanguis::server::entities::pickups::pickup::pickup(
 			dim_
 			? *dim_
 			: default_dim(
+				env.load().models(),
 				load::pickup_name(
 					ptype_)))),
 	ptype_(ptype_)

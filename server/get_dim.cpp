@@ -20,9 +20,11 @@ sanguis::server::get_dim(
 
 sanguis::server::dim_type const
 sanguis::server::default_dim(
+	load::model::context const &ctx,
 	sge::string const &model)
 {
 	return get_dim(
+		ctx,
 		model,
 		SGE_TEXT("default"));
 }

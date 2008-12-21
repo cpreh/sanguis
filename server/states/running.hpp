@@ -15,11 +15,14 @@
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/result.hpp>
 #include <boost/statechart/custom_reaction.hpp>
-
 #include <map>
 
 namespace sanguis
 {
+namespace load
+{
+class context;
+}
 namespace server
 {
 
@@ -62,6 +65,9 @@ public:
 	void level_callback(
 		server::entities::player &,
 		messages::level_type);
+
+	load::context const &
+	load_callback() const;
 
 	void process(
 		time_type);

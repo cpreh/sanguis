@@ -9,18 +9,24 @@ namespace sanguis
 {
 namespace load
 {
+namespace resource
+{
+class context;
+}
 namespace particle
 {
 
 class animation {
 public:
-	explicit animation(
-		sge::path const &);
+	animation(
+		sge::path const &,
+		resource::context const &);
 
 	sge::sprite::animation_series const &
 	get() const;
 private:
-	sge::path path;
+	sge::path const path;
+	resource::context const &ctx;
 
 	mutable sge::shared_ptr<
 		sge::sprite::animation_series

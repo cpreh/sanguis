@@ -198,6 +198,12 @@ void sanguis::server::states::running::level_callback(
 				p.level())));
 }
 
+sanguis::load::context const &
+sanguis::server::states::running::load_callback() const
+{
+	return context<machine>().resources();
+}
+
 void sanguis::server::states::running::process(
 	time_type const time)
 {
@@ -213,7 +219,8 @@ sanguis::server::states::running::get_environment()
 		send,
 		boost::bind(&running::insert_entity, this, _1),
 		boost::bind(&running::divide_exp, this, _1),
-		boost::bind(&running::level_callback, this, _1, _2));
+		boost::bind(&running::level_callback, this, _1, _2),
+		boost::bind(&running::load_callback, this));
 }
 
 boost::statechart::result

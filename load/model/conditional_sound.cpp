@@ -4,7 +4,8 @@
 #include <sge/math/compare.hpp>
 
 sanguis::load::model::conditional_sound::conditional_sound(
-	sound_collection const &col)
+	sound_collection const &col,
+	resource::context const &ctx)
 :
 	range(
 		col.probability()),
@@ -13,7 +14,8 @@ sanguis::load::model::conditional_sound::conditional_sound(
 			static_cast<probability_type>(0),
 			static_cast<probability_type>(1))),
 	random_sound_(
-		col.sounds())
+		col.sounds(),
+		ctx)
 {}
 
 sge::audio::sound_ptr const

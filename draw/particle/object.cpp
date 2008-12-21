@@ -5,27 +5,29 @@
 sanguis::draw::particle::object::object(
 	sge::sprite::animation_series const &images,
 	boost::optional<time_type> const fade_total)
-	: base(point::null(),
-	       point::null(),
-				 depth_type(0),
-				 rotation_type(0),
-				 rotation_type(0)),
-	  sprite_(
-			sge::sprite::defaults::pos_,
-			sge::texture::part_ptr(),
-			sge::math::structure_cast<sge::sprite::unit>(images.dim())),
-		anim(
-			images,
-			fade_total 
-				? sge::sprite::texture_animation::loop_method::repeat
-				: sge::sprite::texture_animation::loop_method::stop_at_end,
-			sprite_),
-		fade_total(fade_total),
-	  fade_remaining(fade_total 
+:
+	base(
+		point::null(),
+		point::null(),
+		depth_type(0),
+		rotation_type(0),
+		rotation_type(0)),
+	sprite_(
+		sge::sprite::defaults::pos_,
+		sge::sprite::defaults::texture_,
+		sge::math::structure_cast<sge::sprite::unit>(images.dim())),
+	anim(
+		images,
+		fade_total 
+			? sge::sprite::texture_animation::loop_method::repeat
+			: sge::sprite::texture_animation::loop_method::stop_at_end,
+		sprite_),
+	fade_total(fade_total),
+	fade_remaining(
+		fade_total 
 			? *fade_total 
 			: static_cast<time_type>(0))
-{
-}
+{}
 
 void sanguis::draw::particle::object::gather(
 	point const &p,

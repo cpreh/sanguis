@@ -1,5 +1,6 @@
 #include "simple_bullet.hpp"
 #include "../../get_dim.hpp"
+#include "../../../load/context.hpp"
 #include <boost/assign/list_of.hpp>
 #include <cassert>
 
@@ -20,6 +21,7 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 			(property::type::health, property(messages::mu(1)))
 			(property::type::movement_speed, property(messages::mu(300))),
 		default_dim(
+			env.load().models(),
 			SGE_TEXT("bullet")),
 		static_cast<time_type>(10)),
 	damage(damage)

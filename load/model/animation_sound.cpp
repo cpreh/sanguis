@@ -53,7 +53,8 @@ sanguis::load::model::animation_sound::animation_sound(
 							it)),
 					conditional_sound(
 						ctx.sounds().load(
-							sound_path))))
+							sound_path),
+						ctx)))
 			.second == false)
 				throw exception(
 					SGE_TEXT("Double insert in model::animation_sound: ")

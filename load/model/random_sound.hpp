@@ -9,18 +9,24 @@ namespace sanguis
 {
 namespace load
 {
+namespace resource
+{
+class context;
+}
 namespace model
 {
 
 class random_sound {
 public:
-	explicit random_sound(
-		sound_container const &);
+	random_sound(
+		sound_container const &,
+		resource::context const &);
 
 	sge::audio::sound_ptr const
 	random() const;
 private:
 	sound_container const &sounds;
+	resource::context const &ctx;
 	mutable sge::random::uniform<
 		sound_container::size_type
 	> rng; 

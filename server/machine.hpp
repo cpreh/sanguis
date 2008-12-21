@@ -64,13 +64,16 @@ public:
 	::net::port_type port() const;
 	::net::server &net();
 	void listen();
+
+	load::context const &
+	resources() const;
 private:
 	typedef std::map<
 		::net::id_type,
 		client_data
 	> client_map;
 
-	load::context const &resources;
+	load::context const &resources_;
 	::net::port_type port_;
 	::net::server net_;
 	::net::server::signal_connection

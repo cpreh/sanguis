@@ -4,6 +4,7 @@
 #include "../../message_converter.hpp"
 #include "../../weapons/factory.hpp"
 #include "../../../load/weapon_pickup_name.hpp"
+#include "../../../load/context.hpp"
 #include "../../../messages/add_weapon_pickup.hpp"
 
 sanguis::server::entities::pickups::weapon::weapon(
@@ -18,6 +19,7 @@ sanguis::server::entities::pickups::weapon::weapon(
 		center,
 		team_,
 		default_dim(
+			env.load().models(),
 			load::weapon_pickup_name(
 				weapon_type_))),
 	weapon_type_(weapon_type_)

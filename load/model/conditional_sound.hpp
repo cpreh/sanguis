@@ -13,13 +13,18 @@ namespace load
 
 class sound_collection;
 
+namespace resource
+{
+class context;
+}
 namespace model
 {
 
 class conditional_sound {
 public:
-	explicit conditional_sound(
-		sound_collection const &);
+	conditional_sound(
+		sound_collection const &,
+		resource::context const &);
 	
 	sge::audio::sound_ptr const
 	random() const;

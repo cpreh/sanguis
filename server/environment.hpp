@@ -5,6 +5,7 @@
 #include "insert_callback.hpp"
 #include "exp_callback.hpp"
 #include "level_callback.hpp"
+#include "load_callback.hpp"
 
 namespace sanguis
 {
@@ -16,12 +17,14 @@ struct environment
 	insert_callback insert;
 	exp_callback exp;
 	level_callback level;
+	load_callback load;
 
 	environment(
 		send_callback const &,
 		insert_callback const &,
 		exp_callback const &,
-		level_callback const &);
+		level_callback const &,
+		load_callback const &);
 };
 }
 }

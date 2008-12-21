@@ -4,6 +4,7 @@
 #include "../message_converter.hpp"
 #include "../get_dim.hpp"
 #include "../../load/decoration_name.hpp"
+#include "../../load/context.hpp"
 
 sanguis::server::entities::decoration::decoration(
 	environment const &env,
@@ -23,6 +24,7 @@ sanguis::server::entities::decoration::decoration(
 			entity_type::decoration,
 			true,
 			default_dim(
+				env.load().models(),
 				load::decoration_name(
 					dtype)))),
 	type_(dtype)
