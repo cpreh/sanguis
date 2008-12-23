@@ -79,6 +79,7 @@ try
 	net::port_type host_port,dest_port;
 	std::string log_level;
 	bool client_only;
+	unsigned screen_width, screen_height;
 
 	desc.add_options()
 		("help",
@@ -97,7 +98,12 @@ try
 			"tells if we want to create a server or not")
 		("log",
 			po::value<std::string>(&log_level)->default_value(std::string("debug")),
-			"sets the maximum logging level (one of debug, info, warning, error, fatal in that order)");
+			"sets the maximum logging level (one of debug, info, warning, error, fatal in that order)")
+		("width",
+			po::value<unsigned>(&screen_width)->default_value(1024),
+			"sets the display width")
+		("height",
+			po::value<unsigned>(&screen_height)->default_value(768));
 	
 	po::variables_map vm;
 	po::store(po::parse_command_line(argc,argv,desc),vm);
@@ -119,6 +125,11 @@ try
 		std::cout << desc << '\n';
 		return EXIT_SUCCESS;
 	}
+
+	sanguis::resolution(
+		sge::renderer::screen_size_t(
+			screen_width,
+			screen_height));
 
 	sge::log::global().activate_hierarchy(
 		sge::log::level_from_string(

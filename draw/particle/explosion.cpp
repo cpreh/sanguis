@@ -2,7 +2,7 @@
 #include "generator.hpp"
 #include "z_ordering.hpp"
 #include "properties.hpp"
-#include <sge/make_auto_ptr.hpp>
+//#include <sge/make_auto_ptr.hpp>
 #include <boost/bind.hpp>
 
 sanguis::draw::particle::explosion::explosion(
