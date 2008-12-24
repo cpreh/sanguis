@@ -1,9 +1,10 @@
 #ifndef SANGUIS_LOAD_PARTICLE_ANIMATION_HPP_INCLUDED
 #define SANGUIS_LOAD_PARTICLE_ANIMATION_HPP_INCLUDED
 
-#include <sge/sprite/animation_series.hpp>
+#include <sge/sprite/animation_series_fwd.hpp>
 #include <sge/path.hpp>
-#include <sge/shared_ptr.hpp>
+#include <sge/scoped_ptr.hpp>
+#include <boost/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -16,19 +17,20 @@ class context;
 namespace particle
 {
 
-class animation {
+class animation : boost::noncopyable {
 public:
+	sge::sprite::animation_series const &
+	get() const;
+
 	animation(
 		sge::path const &,
 		resource::context const &);
-
-	sge::sprite::animation_series const &
-	get() const;
+	~animation();
 private:
 	sge::path const path;
 	resource::context const &ctx;
 
-	mutable sge::shared_ptr<
+	mutable sge::scoped_ptr<
 		sge::sprite::animation_series
 	> anim;
 };
