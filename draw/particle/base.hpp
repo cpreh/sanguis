@@ -3,7 +3,7 @@
 
 #include "types.hpp"
 #include "fwd.hpp"
-#include <sge/sprite/system.hpp>
+#include <sge/sprite/container.hpp>
 
 namespace sanguis
 {
@@ -36,7 +36,7 @@ class base
 		point const &,
 		rotation_type,
 		depth_type,
-		sge::sprite::system::container &) const = 0;
+		sge::sprite::container &) const = 0;
 	point const &pos() const;
 	point &pos();
 	point const &vel() const;

@@ -21,16 +21,16 @@ class container : public base
 		depth_type,
 		rotation_type,
 		rotation_type);
-	children_container const &children() const { return children_; }
-	children_container &children() { return children_; }
+	children_container const &children() const;
+	children_container &children();
 	void add(base_ptr ptr);
 
-	bool update(time_type);
 	void gather(
 		point const &,
 		rotation_type,
 		depth_type,
-		sge::sprite::system::container &) const;
+		sge::sprite::container &) const;
+	bool update(time_type);
 
 	using base::pos;
 	using base::vel;

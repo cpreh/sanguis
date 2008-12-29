@@ -4,6 +4,7 @@
 #include "base.hpp"
 #include <sge/sprite/texture_animation.hpp>
 #include <sge/sprite/object.hpp>
+#include <sge/sprite/container.hpp>
 #include <boost/optional.hpp>
 
 namespace sanguis
@@ -24,7 +25,7 @@ class object : public base
 		point const &,
 		rotation_type,
 		depth_type,
-		sge::sprite::system::container &) const;
+		sge::sprite::container &) const;
 	private:
 	sge::sprite::object sprite_;
 	sge::sprite::texture_animation anim;

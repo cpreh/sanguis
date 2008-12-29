@@ -33,7 +33,7 @@ void sanguis::draw::particle::object::gather(
 	point const &p,
 	rotation_type const r,
 	depth_type const d,
-	sge::sprite::system::container &c) const
+	sge::sprite::container &c) const
 {
 	sge::sprite::object temp = sprite_;
 	temp.z() = d+base::depth();
