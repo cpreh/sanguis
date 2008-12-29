@@ -25,7 +25,6 @@ public:
 	model(
 		draw::environment const &,
 		entity_id id,
-		draw::system &,
 		sge::string const &name,
 		sge::sprite::intrusive_order order,
 		bool needs_healthbar = true,

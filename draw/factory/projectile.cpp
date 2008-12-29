@@ -7,7 +7,6 @@ sanguis::draw::entity_auto_ptr
 sanguis::draw::factory::projectile(
 	environment const &env,
 	entity_id const id,
-	system &sys,
 	projectile_type::type const ptype)
 {
 	switch(ptype) {
@@ -16,14 +15,12 @@ sanguis::draw::factory::projectile(
 			new bullet(
 				env,
 				id,
-				sys,
 				SGE_TEXT("bullet")));
 	case projectile_type::rocket:
 		return entity_auto_ptr(
 			new bullet(
 				env,
 				id,
-				sys,
 				SGE_TEXT("rocket")));
 	default:
 		throw exception(

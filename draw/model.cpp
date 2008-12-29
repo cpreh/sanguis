@@ -17,7 +17,6 @@
 sanguis::draw::model::model(
 	draw::environment const &env,
 	entity_id const id,
-	draw::system &sys,
 	sge::string const &name,
 	sge::sprite::intrusive_order const order,
 	bool const show_healthbar,
@@ -26,7 +25,6 @@ sanguis::draw::model::model(
 	sprite(
 		env,
 		id,
-		sys,
 		env.context().models()()[name].size(),
 		order),
 	attacking(false),
@@ -36,8 +34,7 @@ sanguis::draw::model::model(
 	healthbar_(
 		show_healthbar
 		? new healthbar(
-			env,
-			sys)
+			env)
 		: 0)
 {
 	part_vector::size_type i(0);

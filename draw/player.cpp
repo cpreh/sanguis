@@ -32,13 +32,11 @@ sanguis::draw::sprite_part_index const
 
 sanguis::draw::player::player(
 	draw::environment const &env,
-	entity_id const id,
-	draw::system &sys)
+	entity_id const id)
 :
 	model(
 		env,
 		id,
-		sys,
 		SGE_TEXT("player"),
 		z_ordering::model_generic),
 	angle_(static_cast<funit>(0)),
@@ -46,7 +44,6 @@ sanguis::draw::player::player(
 	reaper_(
 		env,
 		client::next_id(),
-		sys,
 		*this)
 {
 	at(bottom).order(z_ordering::player_lower);

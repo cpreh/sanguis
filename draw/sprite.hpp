@@ -3,7 +3,6 @@
 
 #include "entity.hpp"
 #include "vector2.hpp"
-#include "system_fwd.hpp"
 #include <sge/sprite/point.hpp>
 #include <sge/sprite/dim.hpp>
 #include <sge/sprite/color.hpp>
@@ -22,7 +21,6 @@ public:
 	sprite(
 		draw::environment const &env,
 		entity_id id,
-		draw::system &sys,
 		sprite_vector::size_type init_sprites,
 		sge::sprite::intrusive_order order);
 	

@@ -18,13 +18,11 @@ sanguis::draw::funit const
 sanguis::draw::reaper::reaper(
 	draw::environment const &env,
 	entity_id const id,
-	draw::system &sys,
 	model const &p)
 :
 	model(
 		env,
 		id,
-		sys,
 		SGE_TEXT("reaper"),
 		z_ordering::reaper,
 		false,

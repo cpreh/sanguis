@@ -3,7 +3,6 @@
 
 #include "model.hpp"
 #include "reaper.hpp"
-#include "system_fwd.hpp"
 #include "vector2.hpp"
 #include <sge/sprite/texture_animation.hpp>
 
@@ -18,8 +17,7 @@ class player : public model {
 public:
 	player(
 		draw::environment const &,
-		entity_id id,
-		draw::system &);
+		entity_id id);
 
 	void orientation(
 		sge::sprite::rotation_type);

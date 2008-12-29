@@ -12,9 +12,8 @@ class environment;
 
 class healthbar : public sprite {
 public:
-	healthbar(
-		draw::environment const &,
-		draw::system &);
+	explicit healthbar(
+		draw::environment const &);
 	void health(funit);
 	void max_health(funit);
 	funit max_health() const;

@@ -19,14 +19,12 @@ sanguis::draw::entity_auto_ptr
 sanguis::draw::factory::pickup(
 	environment const &env,
 	entity_id const id,
-	system &sys,
 	pickup_type::type const ptype)
 {
 	return entity_auto_ptr(
 		new model(
 			env,
 			id,
-			sys,
 			get_texture(
 				ptype),
 			z_ordering::pickup,

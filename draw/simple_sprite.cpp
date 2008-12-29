@@ -1,19 +1,18 @@
 #include "simple_sprite.hpp"
+#include "environment.hpp"
 #include <sge/renderer/colors.hpp>
 
 sanguis::draw::simple_sprite::simple_sprite(
 	draw::environment const &env,
 	entity_id const id,
-	draw::system &sys,
 	sge::sprite::intrusive_order const order,
 	sge::texture::const_part_ptr const tex)
 :
 	entity(
 		env,
-		id,
-		sys),
+		id),
 	sprite_(
-		sys,
+		env.system(),
 		order,
 		sge::sprite::point::null(),
 		tex,

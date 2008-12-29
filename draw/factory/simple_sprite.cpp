@@ -9,7 +9,6 @@ sanguis::draw::entity_auto_ptr
 sanguis::draw::factory::simple_sprite(
 	environment const &env,
 	entity_id const id,
-	system &sys,
 	z_ordering::type const z,
 	sge::string const &texture_name)
 {
@@ -17,7 +16,6 @@ sanguis::draw::factory::simple_sprite(
 		new draw::simple_sprite(
 			env,
 			id,
-			sys,
 			z,
 			env.context().resources().textures().load(
 				texture_name)));

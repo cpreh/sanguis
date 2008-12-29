@@ -1,5 +1,6 @@
 #include "entity.hpp"
 #include "log.hpp"
+#include "environment.hpp"
 #include <sge/log/headers.hpp>
 #include <sge/text.hpp>
 #include <sge/time/second_f.hpp>
@@ -79,12 +80,10 @@ sanguis::draw::entity::~entity()
 
 sanguis::draw::entity::entity(
 	draw::environment const &env_,
-	entity_id const id_,
-	draw::system &sys)
+	entity_id const id_)
 :
 	env_(env_),
 	id_(id_),
-	sys(sys),
 	diff_clock_(),
 	decay_timer(
 		sge::time::resolution(0),
@@ -101,7 +100,7 @@ sanguis::draw::entity::environment() const
 sanguis::draw::system &
 sanguis::draw::entity::system()
 {
-	return sys;
+	return env_.system();
 }
 
 sge::log::logger &

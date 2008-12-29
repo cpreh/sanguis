@@ -7,7 +7,6 @@ sanguis::draw::entity_auto_ptr
 sanguis::draw::factory::entity(
 	environment const &env,
 	entity_id const id,
-	system &sys,
 	entity_type::type const type)
 {
 	// TODO: make this prettier and generate code for it using a template
@@ -16,8 +15,7 @@ sanguis::draw::factory::entity(
 		return entity_auto_ptr(
 			new player(
 				env,
-				id,
-				sys));
+				id));
 	case entity_type::enemy:
 		throw exception(
 			SGE_TEXT("entity_type::enemy cannot be created using entity!"));

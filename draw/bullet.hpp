@@ -17,7 +17,6 @@ public:
 	bullet(
 		draw::environment const &,
 		entity_id id,
-		draw::system &,
 		sge::string const &name);
 private:
 	void update(time_type);

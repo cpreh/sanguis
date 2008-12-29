@@ -15,7 +15,6 @@ public:
 	reaper(
 		draw::environment const &,
 		entity_id id,
-		draw::system &,
 		model const &);
 	void update(time_type);
 private:

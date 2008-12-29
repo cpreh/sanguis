@@ -2,7 +2,6 @@
 #define SANGUIS_DRAW_SIMPLE_SPRITE_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "system_fwd.hpp"
 #include "object.hpp"
 #include <sge/texture/part_fwd.hpp>
 #include <sge/sprite/intrusive_order.hpp>
@@ -19,7 +18,6 @@ public:
 	simple_sprite(
 		draw::environment const &,
 		entity_id,
-		draw::system &,
 		sge::sprite::intrusive_order,
 		sge::texture::const_part_ptr);
 private:

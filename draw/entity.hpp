@@ -51,8 +51,7 @@ public:
 protected:
 	entity(
 		draw::environment const &,
-		entity_id id,
-		draw::system &);
+		entity_id id);
 	virtual vector2 const &speed() const = 0;
 	virtual funit orientation() const = 0;
 
@@ -66,7 +65,6 @@ private:
 
 	draw::environment const &env_;
 	entity_id               id_;
-	draw::system           &sys;
 	diff_clock              diff_clock_;
 	sge::time::timer        decay_timer;
 };

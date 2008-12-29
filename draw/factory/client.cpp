@@ -9,7 +9,6 @@ sanguis::draw::entity_auto_ptr
 sanguis::draw::factory::client(
 	environment const &env,
 	client_messages::add const &m,
-	system &sys,
 	sge::renderer::screen_size_t const &screen_size)
 {
 	switch(m.type()) {
@@ -17,7 +16,6 @@ sanguis::draw::factory::client(
 		return simple_sprite(
 			env,
 			m.id(),
-			sys,
 			z_ordering::cursor,
 			SGE_TEXT("cursor"));
 	// TODO: do we have to tile the background?
@@ -25,7 +23,6 @@ sanguis::draw::factory::client(
 		return simple_sprite(
 			env,
 			m.id(),
-			sys,
 			z_ordering::background,
 			SGE_TEXT("background"));
 	default:

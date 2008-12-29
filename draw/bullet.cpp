@@ -16,13 +16,11 @@ sanguis::draw::sprite_part_index const
 sanguis::draw::bullet::bullet(
 	draw::environment const &env,
 	entity_id id,
-	draw::system &sys,
 	sge::string const &name)
 :
 	model(
 		env,
 		id,
-		sys,
 		name,
 		z_ordering::bullet,
 		false),

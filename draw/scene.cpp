@@ -150,7 +150,6 @@ void sanguis::draw::scene::operator()(
 		factory::entity(
 			environment(),
 			m.id(),
-			system(),
 			m.type()),
 		m);
 }
@@ -162,7 +161,6 @@ void sanguis::draw::scene::operator()(
 		factory::enemy(
 			environment(),
 			m.id(),
-			system(),
 			m.etype()),
 		m);
 }
@@ -178,7 +176,6 @@ void sanguis::draw::scene::operator()(
 		factory::decoration(
 			environment(),
 			m.id(),
-			system(),
 			m.ptype()),
 		m);
 }
@@ -190,7 +187,6 @@ void sanguis::draw::scene::operator()(
 		factory::pickup(
 			environment(),
 			m.id(),
-			system(),
 			m.ptype()),
 		m);
 }
@@ -202,7 +198,6 @@ void sanguis::draw::scene::operator()(
 		factory::projectile(
 			environment(),
 			m.id(),
-			system(),
 			m.ptype()),
 		m);
 }
@@ -214,7 +209,6 @@ void sanguis::draw::scene::operator()(
 		factory::weapon_pickup(
 			environment(),
 			m.id(),
-			system(),
 			m.wtype()),
 		m);
 }
@@ -330,7 +324,6 @@ void sanguis::draw::scene::operator()(
 		factory::client(
 			environment(),
 			m,
-			system(),
 			system().renderer()->screen_size())).second
 	== false)
 		throw exception(SGE_TEXT("Client object with id already in entity list!"));
@@ -382,7 +375,8 @@ sanguis::draw::scene::environment()
 			&scene::insert,
 			this,
 			_1),
-		resources_);
+		resources_,
+		system());
 }
 
 void sanguis::draw::scene::insert(
