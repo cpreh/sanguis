@@ -26,6 +26,9 @@ public:
 		sge::sprite::point const &pos);
 	~explosion();
 private:
+	void update(
+		time_type);
+
 	particle::base_ptr
 	generate_explosion();
 

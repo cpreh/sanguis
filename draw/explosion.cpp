@@ -177,6 +177,12 @@ sanguis::draw::explosion::explosion(
 sanguis::draw::explosion::~explosion()
 {}
 
+void sanguis::draw::explosion::update(
+	time_type)
+{
+	
+}
+
 sanguis::draw::particle::base_ptr
 sanguis::draw::explosion::generate_explosion()
 {
@@ -237,5 +243,5 @@ sanguis::draw::explosion::generate_particle(
 
 bool sanguis::draw::explosion::may_be_removed() const
 {
-	return true; // TODO
+	return false; // TODO
 }
