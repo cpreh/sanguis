@@ -1,8 +1,7 @@
 #ifndef SANGUIS_LOAD_PARTICLE_CONTEXT_HPP_INCLUDED
 #define SANGUIS_LOAD_PARTICLE_CONTEXT_HPP_INCLUDED
 
-#include "collection.hpp"
-#include <sge/path.hpp>
+#include <boost/scoped_ptr.hpp>
 #include <boost/noncopyable.hpp>
 
 namespace sanguis
@@ -19,6 +18,8 @@ class context;
 namespace particle
 {
 
+class collection;
+
 class context : boost::noncopyable {
 public:
 	collection const &
@@ -26,10 +27,15 @@ public:
 private:
 	explicit context(
 		resource::context const &);
+	~context();
 
 	friend class load::context;
 
-	collection col;
+	resource::context const &ctx;
+
+	mutable boost::scoped_ptr<
+		collection
+	> col;
 };
 
 }

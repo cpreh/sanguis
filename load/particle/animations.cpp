@@ -39,7 +39,7 @@ sanguis::load::particle::animations::animations(
 			sge::make_auto_ptr<
 				animation
 			>(
-				p,
+				*it,
 				ctx));
 
 		animations_.push_back(

@@ -66,6 +66,9 @@ sanguis::load::particle::collection::collection(
 	}
 }
 
+sanguis::load::particle::collection::~collection()
+{}
+
 namespace
 {
 

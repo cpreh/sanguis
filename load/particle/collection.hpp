@@ -25,14 +25,12 @@ public:
 	animations const &
 	operator[](
 		particle_type::type) const;
-private:
+	
 	collection(
 		sge::path const &,
 		resource::context const &);
 	~collection();
-
-	friend class context;
-	
+private:
 	typedef boost::ptr_map<
 		particle_type::type,
 		animations

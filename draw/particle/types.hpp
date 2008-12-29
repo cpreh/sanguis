@@ -1,6 +1,9 @@
 #ifndef SANGUIS_DRAW_PARTICLE_TYPES_HPP_INCLUDED
 #define SANGUIS_DRAW_PARTICLE_TYPES_HPP_INCLUDED
 
+// TODO: split this!
+
+#include "base_ptr.hpp"
 #include "../funit.hpp"
 #include <sge/random/inclusive_range.hpp>
 #include <sge/math/vector.hpp>
