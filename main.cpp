@@ -97,7 +97,7 @@ try
 			po::value<bool>(&client_only)->default_value(false),
 			"tells if we want to create a server or not")
 		("log",
-			po::value<std::string>(&log_level)->default_value(std::string("debug")),
+			po::value<std::string>(&log_level)->default_value(std::string("warning")),
 			"sets the maximum logging level (one of debug, info, warning, error, fatal in that order)")
 		("width",
 			po::value<unsigned>(&screen_width)->default_value(1024),
