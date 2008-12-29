@@ -8,9 +8,12 @@ namespace sanguis
 namespace draw
 {
 
+class environment;
+
 class healthbar : public sprite {
 public:
-	explicit healthbar(
+	healthbar(
+		draw::environment const &,
 		draw::system &);
 	void health(funit);
 	void max_health(funit);

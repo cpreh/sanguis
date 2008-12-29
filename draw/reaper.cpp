@@ -16,7 +16,7 @@ sanguis::draw::funit const
 }
 
 sanguis::draw::reaper::reaper(
-	environment const &env,
+	draw::environment const &env,
 	entity_id const id,
 	draw::system &sys,
 	model const &p)

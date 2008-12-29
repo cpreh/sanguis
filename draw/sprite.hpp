@@ -15,10 +15,12 @@ namespace draw
 {
 
 class sprite_part_index;
+class environment;
 
 class sprite : public entity {
 public:
 	sprite(
+		draw::environment const &env,
 		entity_id id,
 		draw::system &sys,
 		sprite_vector::size_type init_sprites,

@@ -14,7 +14,7 @@ sanguis::draw::sprite_part_index const
 }
 
 sanguis::draw::bullet::bullet(
-	environment const &env,
+	draw::environment const &env,
 	entity_id id,
 	draw::system &sys,
 	sge::string const &name)

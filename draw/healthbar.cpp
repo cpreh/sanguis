@@ -26,9 +26,11 @@ sanguis::draw::sprite_part_index const
 }
 
 sanguis::draw::healthbar::healthbar(
+	draw::environment const &env,
 	draw::system &sys)
 :
 	sprite(
+		env,
 		client::id_dont_care(),
 		sys,
 		2,

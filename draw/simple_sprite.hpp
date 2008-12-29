@@ -12,9 +12,12 @@ namespace sanguis
 namespace draw
 {
 
+class environment;
+
 class simple_sprite : public entity {
 public:
 	simple_sprite(
+		draw::environment const &,
 		entity_id,
 		draw::system &,
 		sge::sprite::intrusive_order,
@@ -31,7 +34,7 @@ private:
 	object &get();
 	object const &get() const;
 
-	object sprite;
+	object sprite_;
 };
 
 }

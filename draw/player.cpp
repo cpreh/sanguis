@@ -31,7 +31,7 @@ sanguis::draw::sprite_part_index const
 }
 
 sanguis::draw::player::player(
-	environment const &env,
+	draw::environment const &env,
 	entity_id const id,
 	draw::system &sys)
 :

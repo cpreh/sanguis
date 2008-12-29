@@ -5,12 +5,14 @@
 #include <boost/none.hpp>
 
 sanguis::draw::sprite::sprite(
+	draw::environment const &env,
 	entity_id const id,
 	draw::system &sys,
 	sprite_vector::size_type const sz,
 	sge::sprite::intrusive_order const order)
 :
 	entity(
+		env,
 		id,
 		sys),
 	speed_(vector2::null()),

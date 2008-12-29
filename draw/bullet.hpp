@@ -15,13 +15,16 @@ class environment;
 class bullet : public model {
 public:
 	bullet(
-		environment const &,
+		draw::environment const &,
 		entity_id id,
 		draw::system &,
 		sge::string const &name);
 private:
 	void update(time_type);
-	boost::optional<sge::sprite::point> origin;
+
+	boost::optional<
+		sge::sprite::point
+	> origin;
 };
 
 }

@@ -78,9 +78,11 @@ sanguis::draw::entity::~entity()
 {}
 
 sanguis::draw::entity::entity(
+	draw::environment const &env_,
 	entity_id const id_,
 	draw::system &sys)
 :
+	env_(env_),
 	id_(id_),
 	sys(sys),
 	diff_clock_(),
@@ -89,6 +91,12 @@ sanguis::draw::entity::entity(
 		false,
 		diff_clock_.callback())
 {}
+
+sanguis::draw::environment const &
+sanguis::draw::entity::environment() const
+{
+	return env_;
+}
 
 sanguis::draw::system &
 sanguis::draw::entity::system()

@@ -15,6 +15,7 @@ sanguis::draw::factory::simple_sprite(
 {
 	return entity_auto_ptr(
 		new draw::simple_sprite(
+			env,
 			id,
 			sys,
 			z,

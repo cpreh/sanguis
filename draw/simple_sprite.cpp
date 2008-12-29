@@ -2,15 +2,17 @@
 #include <sge/renderer/colors.hpp>
 
 sanguis::draw::simple_sprite::simple_sprite(
+	draw::environment const &env,
 	entity_id const id,
 	draw::system &sys,
-	object::order_type const order,
+	sge::sprite::intrusive_order const order,
 	sge::texture::const_part_ptr const tex)
 :
 	entity(
+		env,
 		id,
 		sys),
-	sprite(
+	sprite_(
 		sys,
 		order,
 		sge::sprite::point::null(),
@@ -71,12 +73,12 @@ sanguis::draw::simple_sprite::orientation() const
 sanguis::draw::object&
 sanguis::draw::simple_sprite::get()
 {
-	return sprite;
+	return sprite_;
 }
 
 sanguis::draw::object const &
 sanguis::draw::simple_sprite::get() const
 {
-	return sprite;
+	return sprite_;
 }
 

@@ -23,7 +23,7 @@ class environment;
 class model : public sprite {
 public:
 	model(
-		environment const &,
+		draw::environment const &,
 		entity_id id,
 		draw::system &,
 		sge::string const &name,

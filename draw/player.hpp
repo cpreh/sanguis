@@ -17,7 +17,7 @@ class environment;
 class player : public model {
 public:
 	player(
-		environment const &,
+		draw::environment const &,
 		entity_id id,
 		draw::system &);
 

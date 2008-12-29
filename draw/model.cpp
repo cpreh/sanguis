@@ -15,7 +15,7 @@
 #include <ostream>
 
 sanguis::draw::model::model(
-	environment const &env,
+	draw::environment const &env,
 	entity_id const id,
 	draw::system &sys,
 	sge::string const &name,
@@ -24,6 +24,7 @@ sanguis::draw::model::model(
 	funit const start_health)
 :
 	sprite(
+		env,
 		id,
 		sys,
 		env.context().models()()[name].size(),
@@ -35,6 +36,7 @@ sanguis::draw::model::model(
 	healthbar_(
 		show_healthbar
 		? new healthbar(
+			env,
 			sys)
 		: 0)
 {

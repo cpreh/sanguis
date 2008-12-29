@@ -21,6 +21,8 @@ namespace sanguis
 namespace draw
 {
 
+class environment;
+
 class entity : boost::noncopyable {
 public:
 	typedef std::vector<
@@ -48,19 +50,25 @@ public:
 	virtual ~entity();
 protected:
 	entity(
+		draw::environment const &,
 		entity_id id,
 		draw::system &);
 	virtual vector2 const &speed() const = 0;
 	virtual funit orientation() const = 0;
 
-	draw::system &system();
+	draw::environment const &
+	environment() const;
+
+	draw::system &
+	system();
 private:
 	static sge::log::logger &log();
 
-	entity_id        id_;
-	draw::system     &sys;
-	diff_clock       diff_clock_;
-	sge::time::timer decay_timer;
+	draw::environment const &env_;
+	entity_id               id_;
+	draw::system           &sys;
+	diff_clock              diff_clock_;
+	sge::time::timer        decay_timer;
 };
 
 }

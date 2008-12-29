@@ -13,7 +13,7 @@ class environment;
 class reaper : public model {
 public:
 	reaper(
-		environment const &,
+		draw::environment const &,
 		entity_id id,
 		draw::system &,
 		model const &);
