@@ -37,7 +37,6 @@ ENDIF()
 
 pkg_check_modules (SGE spacegameengine)
 
-ADD_DEFINITIONS(${SGE_CFLAGS})
 LINK_DIRECTORIES(${SGE_LIBRARY_DIRS})
 
 FIND_PACKAGE(Boost 1.36.0 COMPONENTS
@@ -52,6 +51,8 @@ IF (${CMAKE_COMPILER_IS_GNUCXX})
 	"-Wstrict-null-sentinel -Winit-self -Woverloaded-virtual"
 	"-Wold-style-cast -Wnon-virtual-dtor -Wctor-dtor-privacy -Wsign-promo")
 ENDIF ()
+
+ADD_DEFINITIONS(${SGE_CFLAGS})
 
 FILE (GLOB files 
 	*.cpp

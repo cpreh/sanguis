@@ -12,7 +12,7 @@ enum type {
 	zombie00,
 	zombie01,
 	spider,
-  skeleton
+	skeleton
 };
 }
 
