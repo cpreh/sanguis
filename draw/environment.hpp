@@ -29,7 +29,7 @@ public:
 	draw::system &
 	system() const;
 private:
-	insert_callback const &insert_;
+	insert_callback const insert_;
 	load::context const   &context_;
 	draw::system          &system_;
 };

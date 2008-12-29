@@ -3,10 +3,12 @@
 
 #include "entity.hpp"
 #include "vector2.hpp"
+#include "object_fwd.hpp"
 #include <sge/sprite/point.hpp>
 #include <sge/sprite/dim.hpp>
 #include <sge/sprite/color.hpp>
 #include <sge/sprite/intrusive_order.hpp>
+#include <vector>
 
 namespace sanguis
 {
@@ -17,11 +19,16 @@ class sprite_part_index;
 class environment;
 
 class sprite : public entity {
+	typedef std::vector<
+		object
+	> sprite_vector;
 public:
+	typedef sprite_vector::size_type size_type;
+
 	sprite(
 		draw::environment const &env,
 		entity_id id,
-		sprite_vector::size_type init_sprites,
+		size_type,
 		sge::sprite::intrusive_order order);
 	
 	sge::sprite::point const center() const;
@@ -48,7 +55,7 @@ protected:
 	virtual void visible(bool);
 
 	sge::sprite::rotation_type orientation() const;
-	vector2 const &speed() const;
+	vector2 const speed() const;
 private:
 	void update_pos(sge::sprite::point const &);
 	void update_orientation(sge::sprite::rotation_type);

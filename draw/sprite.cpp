@@ -7,7 +7,7 @@
 sanguis::draw::sprite::sprite(
 	draw::environment const &env,
 	entity_id const id,
-	sprite_vector::size_type const sz,
+	size_type const sz,
 	sge::sprite::intrusive_order const order)
 :
 	entity(
@@ -17,7 +17,7 @@ sanguis::draw::sprite::sprite(
 	pos_(vector2::null())
 {
 	sprites.reserve(sz);
-	for(sprite_vector::size_type i = 0; i < sz; ++i)
+	for(size_type i = 0; i < sz; ++i)
 		sprites.push_back(
 			object(
 				system(),
@@ -138,7 +138,7 @@ sanguis::draw::sprite::orientation() const
 	return master().rotation();
 }
 
-sanguis::draw::vector2 const &
+sanguis::draw::vector2 const
 sanguis::draw::sprite::speed() const
 {
 	return speed_;

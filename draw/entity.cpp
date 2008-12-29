@@ -12,7 +12,8 @@ void sanguis::draw::entity::update(
 	diff_clock_.update(time);
 }
 
-sanguis::entity_id sanguis::draw::entity::id() const
+sanguis::entity_id
+sanguis::draw::entity::id() const
 {
 	return id_;
 }
@@ -20,6 +21,7 @@ sanguis::entity_id sanguis::draw::entity::id() const
 void sanguis::draw::entity::decay()
 {
 	decay_timer.activate();
+	on_decay();
 }
 
 void sanguis::draw::entity::decay_time(
@@ -34,11 +36,54 @@ bool sanguis::draw::entity::may_be_removed() const
 	return decay_timer.expired();
 }
 
+
+void sanguis::draw::entity::orientation(
+	sge::sprite::rotation_type)
+{
+		
+}
+
+void sanguis::draw::entity::speed(vector2 const &)
+{
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1 << SGE_TEXT("Invalid speed call!"));
+}
+
+void sanguis::draw::entity::pos(sge::sprite::point const &)
+{
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1 << SGE_TEXT("Invalid pos call!"));
+}
+
+void sanguis::draw::entity::dim(sge::sprite::dim const &)
+{
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1 << SGE_TEXT("Invalid dim call!"));
+}
+
+void sanguis::draw::entity::visible(bool)
+{
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1 << SGE_TEXT("Invalid visible call!"));
+}
+
 void sanguis::draw::entity::health(funit)
-{}
+{
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1 << SGE_TEXT("Invalid health call!"));
+}
 
 void sanguis::draw::entity::max_health(funit)
-{}
+{
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1 << SGE_TEXT("Invalid max_health call!"));
+}
 
 void sanguis::draw::entity::weapon(weapon_type::type)
 {
@@ -91,6 +136,26 @@ sanguis::draw::entity::entity(
 		diff_clock_.callback())
 {}
 
+sanguis::draw::vector2 const
+sanguis::draw::entity::speed() const
+{
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1
+			<< SGE_TEXT("Invalid speed getter!"));
+	return vector2::null();
+}
+
+sanguis::draw::funit
+sanguis::draw::entity::orientation() const
+{
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1
+			<< SGE_TEXT("Invalid orientation getter!"));
+	return static_cast<funit>(0);
+}
+
 sanguis::draw::environment const &
 sanguis::draw::entity::environment() const
 {
@@ -102,6 +167,9 @@ sanguis::draw::entity::system()
 {
 	return env_.system();
 }
+
+void sanguis::draw::entity::on_decay()
+{}
 
 sge::log::logger &
 sanguis::draw::entity::log()

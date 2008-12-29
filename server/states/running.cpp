@@ -297,6 +297,11 @@ sanguis::server::states::running::operator()(
 			weapon_type::pistol,
 			get_environment()));
 
+	p.add_weapon(
+		weapons::create(
+			weapon_type::rocket_launcher,
+			get_environment()));
+
 	// send start experience
 	// no message_converter here because it operates on a _specific_ entity type
 	send(

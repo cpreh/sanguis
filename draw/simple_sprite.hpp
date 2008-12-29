@@ -23,11 +23,9 @@ public:
 private:
 	void update(time_type);
 	void orientation(sge::sprite::rotation_type);
-	void speed(vector2 const &);
 	void pos(sge::sprite::point const &);
 	void dim(sge::sprite::dim const &);
 	void visible(bool);
-	vector2 const &speed() const;
 	sge::sprite::rotation_type orientation() const;
 	object &get();
 	object const &get() const;

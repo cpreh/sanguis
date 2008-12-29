@@ -1,4 +1,5 @@
 #include "model.hpp"
+#include "model_part.hpp"
 #include "z_ordering.hpp"
 #include "log.hpp"
 #include "sprite_part_index.hpp"
@@ -50,6 +51,9 @@ sanguis::draw::model::model(
 		animation_type::deploying);
 }
 
+sanguis::draw::model::~model()
+{}
+
 sanguis::draw::funit
 sanguis::draw::model::max_health() const
 {
@@ -85,7 +89,7 @@ void sanguis::draw::model::orientation(
 
 void sanguis::draw::model::orientation(
 	sge::sprite::rotation_type const rot,
-	sprite_vector::size_type const index)
+	size_type const index)
 {
 	parts.at(index).orientation(rot);	
 }

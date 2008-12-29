@@ -31,12 +31,6 @@ void sanguis::draw::simple_sprite::orientation(
 	get().rotation(angle);
 }
 
-void sanguis::draw::simple_sprite::speed(
-	vector2 const &speed_)
-{
-	// stub
-}
-
 void sanguis::draw::simple_sprite::pos(
 	sge::sprite::point const& pos_)
 {
@@ -53,14 +47,6 @@ void sanguis::draw::simple_sprite::visible(
 	const bool v)
 {
 	get().visible(v);
-}
-
-sanguis::draw::vector2 const &
-sanguis::draw::simple_sprite::speed() const
-{
-	static const vector2 r(
-		vector2::null());
-	return r; // stub
 }
 
 sge::sprite::rotation_type

@@ -1,5 +1,6 @@
 #include "projectile.hpp"
 #include "../bullet.hpp"
+#include "../rocket.hpp"
 #include "../../exception.hpp"
 #include <sge/text.hpp>
 
@@ -18,7 +19,7 @@ sanguis::draw::factory::projectile(
 				SGE_TEXT("bullet")));
 	case projectile_type::rocket:
 		return entity_auto_ptr(
-			new bullet(
+			new rocket(
 				env,
 				id,
 				SGE_TEXT("rocket")));

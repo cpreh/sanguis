@@ -32,7 +32,6 @@
 #include "../messages/stop_reloading.hpp"
 #include "../messages/speed.hpp"
 #include "../client_messages/add.hpp"
-#include "../client/id_dont_care.hpp"
 #include "../dispatch_type.hpp"
 #include "../exception.hpp"
 
@@ -54,10 +53,16 @@ sanguis::draw::scene::scene(
 	sge::renderer::device_ptr const rend,
 	sge::font::font &font)
 :
-	resources_(resources_),
 	ss(rend),
 	hud_(font),
-	paused(false)
+	paused(false),
+	env(
+		boost::bind(
+			&scene::insert,
+			this,
+			_1),
+		resources_,
+		system())
 {}
 
 sanguis::draw::scene::~scene()
@@ -367,23 +372,20 @@ void sanguis::draw::scene::configure_new_object(
 			m.type()));
 }
 
-sanguis::draw::environment const
+sanguis::draw::environment const &
 sanguis::draw::scene::environment()
 {
-	return draw::environment(
-		boost::bind(
-			&scene::insert,
-			this,
-			_1),
-		resources_,
-		system());
+	return env;
 }
 
 void sanguis::draw::scene::insert(
 	entity_auto_ptr e)
 {
+	entity_id const id(
+		e->id());
+	
 	if(!entities.insert(
-		client::id_dont_care(),
+		id,
 		e).second
 	)
 		throw exception(

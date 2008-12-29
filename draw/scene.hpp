@@ -4,6 +4,7 @@
 #include "entity_auto_ptr.hpp"
 #include "hud.hpp"
 #include "system.hpp"
+#include "environment.hpp"
 #include "../entity_id.hpp"
 #include "../messages/fwd.hpp"
 #include "../time_type.hpp"
@@ -28,7 +29,6 @@ namespace draw
 {
 
 class entity;
-class environment;
 
 class scene {
 	SGE_NONCOPYABLE(scene)
@@ -75,7 +75,7 @@ private:
 		entity_auto_ptr,
 		messages::add const &);
 	
-	draw::environment const
+	draw::environment const &
 	environment();
 
 	void insert(
@@ -96,10 +96,10 @@ private:
 	
 	static sge::log::logger &log();
 
-	load::context const          &resources_;
 	draw::system                  ss;
 	hud                           hud_;
 	bool                          paused;
+	draw::environment             env;
 
 	typedef boost::ptr_map<
 		entity_id,

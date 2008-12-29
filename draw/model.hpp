@@ -1,7 +1,6 @@
 #ifndef SANGUIS_DRAW_MODEL_HPP_INCLUDED
 #define SANGUIS_DRAW_MODEL_HPP_INCLUDED
 
-#include "model_part.hpp"
 #include "sprite.hpp"
 #include "healthbar.hpp"
 #include "../entity_id.hpp"
@@ -18,6 +17,7 @@ namespace draw
 {
 
 class sprite_part_index;
+class model_part;
 class environment;
 
 class model : public sprite {
@@ -29,6 +29,7 @@ public:
 		sge::sprite::intrusive_order order,
 		bool needs_healthbar = true,
 		funit start_health = static_cast<funit>(0));
+	~model();
 
 	funit max_health() const;
 	funit health() const;
@@ -39,7 +40,7 @@ protected:
 		sge::sprite::rotation_type);
 	void orientation(
 		sge::sprite::rotation_type,
-		sprite_vector::size_type index);
+		size_type index);
 	bool may_be_removed() const;
 	virtual void speed(
 		vector2 const &);
@@ -71,9 +72,11 @@ private:
 
 	bool            attacking,
 	                reloading;
-	funit health_,
+	funit           health_,
 	                max_health_;
-	boost::scoped_ptr<healthbar> healthbar_;
+	boost::scoped_ptr<
+		healthbar
+	> healthbar_;
 	
 	typedef boost::ptr_vector<
 		model_part
