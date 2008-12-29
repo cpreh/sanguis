@@ -3,7 +3,7 @@
 
 sanguis::draw::simple_sprite::simple_sprite(
 	entity_id const id,
-	system &sys,
+	draw::system &sys,
 	object::order_type const order,
 	sge::texture::const_part_ptr const tex)
 :

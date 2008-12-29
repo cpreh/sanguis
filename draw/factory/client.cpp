@@ -5,9 +5,9 @@
 #include "../../exception.hpp"
 #include <sge/text.hpp>
 
-sanguis::draw::factory::entity_ptr
+sanguis::draw::entity_auto_ptr
 sanguis::draw::factory::client(
-	load::context const &ctx,
+	environment const &env,
 	client_messages::add const &m,
 	system &sys,
 	sge::renderer::screen_size_t const &screen_size)
@@ -15,7 +15,7 @@ sanguis::draw::factory::client(
 	switch(m.type()) {
 	case client_entity_type::cursor:
 		return simple_sprite(
-			ctx,
+			env,
 			m.id(),
 			sys,
 			z_ordering::cursor,
@@ -23,7 +23,7 @@ sanguis::draw::factory::client(
 	// TODO: do we have to tile the background?
 	case client_entity_type::background:
 		return simple_sprite(
-			ctx,
+			env,
 			m.id(),
 			sys,
 			z_ordering::background,

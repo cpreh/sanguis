@@ -1,4 +1,6 @@
 #include "model_part.hpp"
+#include "model_part_state.hpp"
+#include "object.hpp"
 #include "../load/model/part.hpp"
 #include "../load/model/base_animation_not_found.hpp"
 #include "../log.hpp"
@@ -53,6 +55,9 @@ sanguis::draw::model_part::model_part(
 		[animation_type::none]
 		.get().dim());
 }
+
+sanguis::draw::model_part::~model_part()
+{}
 
 bool sanguis::draw::model_part::animation(
 	animation_type::type const atype)

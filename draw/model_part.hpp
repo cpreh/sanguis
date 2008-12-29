@@ -1,17 +1,15 @@
 #ifndef SANGUIS_DRAW_MODEL_PART_HPP_INCLUDED
 #define SANGUIS_DRAW_MODEL_PART_HPP_INCLUDED
 
-#include "types.hpp"
-// TODO: forward this, I'm not in the mood right now
-#include "model_part_state.hpp"
+#include "object_fwd.hpp"
+#include "funit.hpp"
 #include "../animation_type.hpp"
 #include "../weapon_type.hpp"
 #include "../time_type.hpp"
 #include "../diff_clock.hpp"
 #include "../load/model/fwd.hpp"
-#include <sge/sprite/fwd.hpp>
-#include <sge/sprite/types.hpp>
-#include <sge/sprite/texture_animation.hpp>
+#include <sge/sprite/texture_animation.hpp> // TODO: fwd this too!
+#include <sge/sprite/rotation_type.hpp>
 #include <sge/time/types.hpp>
 #include <boost/scoped_ptr.hpp>
 #include <memory>
@@ -21,11 +19,15 @@ namespace sanguis
 namespace draw
 {
 
+class model_part_state;
+
 class model_part {
 public:
 	model_part(
 		load::model::part const &,
 		object &ref);
+	~model_part();
+
 	bool animation(animation_type::type);
 	void weapon(weapon_type::type);
 	void update(time_type time);

@@ -1,4 +1,5 @@
 #include "scene.hpp"
+#include "entity.hpp"
 #include "factory/client.hpp"
 #include "factory/enemy.hpp"
 #include "factory/entity.hpp"
@@ -9,6 +10,7 @@
 #include "coord_transform.hpp"
 #include "decay_time.hpp"
 #include "log.hpp"
+#include "environment.hpp"
 #include "../messages/add.hpp"
 #include "../messages/add_decoration.hpp"
 #include "../messages/add_enemy.hpp"
@@ -30,6 +32,7 @@
 #include "../messages/stop_reloading.hpp"
 #include "../messages/speed.hpp"
 #include "../client_messages/add.hpp"
+#include "../client/id_dont_care.hpp"
 #include "../dispatch_type.hpp"
 #include "../exception.hpp"
 
@@ -37,6 +40,7 @@
 #include <sge/text.hpp>
 #include <sge/format.hpp>
 #include <sge/log/headers.hpp>
+#include <sge/renderer/device.hpp>
 
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
@@ -54,6 +58,9 @@ sanguis::draw::scene::scene(
 	ss(rend),
 	hud_(font),
 	paused(false)
+{}
+
+sanguis::draw::scene::~scene()
 {}
 
 void sanguis::draw::scene::process_message(
@@ -113,7 +120,7 @@ void sanguis::draw::scene::draw(
 {
 	for(entity_map::iterator it(entities.begin()), next(it); it != entities.end(); it = next)
 	{
-		entity &e = *it->second;
+		draw::entity &e = *it->second;
 		++next;
 
 		e.update(
@@ -141,9 +148,9 @@ void sanguis::draw::scene::operator()(
 {
 	configure_new_object(
 		factory::entity(
-			resources_,
+			environment(),
 			m.id(),
-			get_system(),
+			system(),
 			m.type()),
 		m);
 }
@@ -153,9 +160,9 @@ void sanguis::draw::scene::operator()(
 {
 	configure_new_object(
 		factory::enemy(
-			resources_,
+			environment(),
 			m.id(),
-			get_system(),
+			system(),
 			m.etype()),
 		m);
 }
@@ -169,9 +176,9 @@ void sanguis::draw::scene::operator()(
 	
 	configure_new_object(
 		factory::decoration(
-			resources_,
+			environment(),
 			m.id(),
-			get_system(),
+			system(),
 			m.ptype()),
 		m);
 }
@@ -181,9 +188,9 @@ void sanguis::draw::scene::operator()(
 {
 	configure_new_object(
 		factory::pickup(
-			resources_,
+			environment(),
 			m.id(),
-			get_system(),
+			system(),
 			m.ptype()),
 		m);
 }
@@ -193,9 +200,9 @@ void sanguis::draw::scene::operator()(
 {
 	configure_new_object(
 		factory::projectile(
-			resources_,
+			environment(),
 			m.id(),
-			get_system(),
+			system(),
 			m.ptype()),
 		m);
 }
@@ -205,9 +212,9 @@ void sanguis::draw::scene::operator()(
 {
 	configure_new_object(
 		factory::weapon_pickup(
-			resources_,
+			environment(),
 			m.id(),
-			get_system(),
+			system(),
 			m.wtype()),
 		m);
 }
@@ -226,7 +233,7 @@ void sanguis::draw::scene::operator()(
 		return;
 	}
 	
-	get_entity(m.id()).weapon(
+	entity(m.id()).weapon(
 		static_cast<weapon_type::type>(
 			m.weapon()));
 }
@@ -240,19 +247,19 @@ void sanguis::draw::scene::operator()(
 void sanguis::draw::scene::operator()(
 	messages::health const &m)
 {
-	get_entity(m.id()).health(m.value());
+	entity(m.id()).health(m.value());
 }
 
 void sanguis::draw::scene::operator()(
 	messages::max_health const &m)
 {
-	get_entity(m.id()).max_health(m.value());
+	entity(m.id()).max_health(m.value());
 }
 
 void sanguis::draw::scene::operator()(
 	messages::move const &m)
 {
-	get_entity(m.id()).pos(
+	entity(m.id()).pos(
 		virtual_to_screen(
 			ss.renderer()->screen_size(), m.pos()));
 }
@@ -264,27 +271,27 @@ void sanguis::draw::scene::operator()(
 	if(it == entities.end())
 		throw exception(
 			SGE_TEXT("Object not in entity map, can't remove it!"));
-	entity &e(*it->second);
+	draw::entity &e(*it->second);
 	e.decay();
 }
 
 void sanguis::draw::scene::operator()(
 	messages::resize const &m)
 {
-	//get_entity(m.id()).dim(virtual_to_screen(ss.renderer()->screen_size(), m.dim()));
-	get_entity(m.id()).dim(sge::math::structure_cast<sge::sprite::unit>(m.dim()));
+	//entity(m.id()).dim(virtual_to_screen(ss.renderer()->screen_size(), m.dim()));
+	entity(m.id()).dim(sge::math::structure_cast<sge::sprite::unit>(m.dim()));
 }
 
 void sanguis::draw::scene::operator()(
 	messages::rotate const &m)
 {
-	get_entity(m.id()).orientation(m.rot());
+	entity(m.id()).orientation(m.rot());
 }
 
 void sanguis::draw::scene::operator()(
 	messages::speed const &m)
 {
-	get_entity(m.id()).speed(
+	entity(m.id()).speed(
 		sge::math::structure_cast<funit>(
 			virtual_to_screen(
 				ss.renderer()->screen_size(),
@@ -294,25 +301,25 @@ void sanguis::draw::scene::operator()(
 void sanguis::draw::scene::operator()(
 	messages::start_attacking const &m)
 {
-	get_entity(m.id()).start_attacking();
+	entity(m.id()).start_attacking();
 }
 
 void sanguis::draw::scene::operator()(
 	messages::stop_attacking const &m)
 {
-	get_entity(m.id()).stop_attacking();
+	entity(m.id()).stop_attacking();
 }
 
 void sanguis::draw::scene::operator()(
 	messages::start_reloading const &m)
 {
-	get_entity(m.id()).start_reloading();
+	entity(m.id()).start_reloading();
 }
 
 void sanguis::draw::scene::operator()(
 	messages::stop_reloading const &m)
 {
-	get_entity(m.id()).stop_reloading();
+	entity(m.id()).stop_reloading();
 }
 
 void sanguis::draw::scene::operator()(
@@ -321,17 +328,17 @@ void sanguis::draw::scene::operator()(
 	if(entities.insert(
 		m.id(),
 		factory::client(
-			resources_,
+			environment(),
 			m,
-			get_system(),
-			get_system().renderer()->screen_size())).second
+			system(),
+			system().renderer()->screen_size())).second
 	== false)
 		throw exception(SGE_TEXT("Client object with id already in entity list!"));
 	// FIXME: configure the object here, too!
 }
 
 void sanguis::draw::scene::configure_new_object(
-	factory::entity_ptr e_ptr,
+	entity_auto_ptr e_ptr,
 	messages::add const &m)
 {
 	std::pair<entity_map::iterator, bool> const ret(
@@ -352,7 +359,7 @@ void sanguis::draw::scene::configure_new_object(
 	//		SGE_TEXT("Object with id already in entity list!"));
 	}
 
-	entity& e(*ret.first->second);
+	draw::entity &e(*ret.first->second);
 
 	// configure the object
 	process_message(messages::max_health(m.id(), m.max_health()));
@@ -367,8 +374,31 @@ void sanguis::draw::scene::configure_new_object(
 			m.type()));
 }
 
+sanguis::draw::environment const
+sanguis::draw::scene::environment()
+{
+	return draw::environment(
+		boost::bind(
+			&scene::insert,
+			this,
+			_1),
+		resources_);
+}
+
+void sanguis::draw::scene::insert(
+	entity_auto_ptr e)
+{
+	if(!entities.insert(
+		client::id_dont_care(),
+		e).second
+	)
+		throw exception(
+			SGE_TEXT("scene::insert(): failed to insert!"));
+	
+}
+
 sanguis::draw::entity &
-sanguis::draw::scene::get_entity(
+sanguis::draw::scene::entity(
 	entity_id const id)
 {
 	entity_map::iterator const it = entities.find(id);
@@ -381,11 +411,11 @@ sanguis::draw::scene::get_entity(
 }
 
 sanguis::draw::entity const &
-sanguis::draw::scene::get_entity(
+sanguis::draw::scene::entity(
 	entity_id const id) const
 {
-	return const_cast<entity const &>(
-		const_cast<scene &>(*this).get_entity(id));
+	return const_cast<draw::entity const &>(
+		const_cast<scene &>(*this).entity(id));
 }
 
 void sanguis::draw::scene::process_default_msg(
@@ -409,7 +439,7 @@ void sanguis::draw::scene::process_default_client_msg(
 }
 
 sanguis::draw::system &
-sanguis::draw::scene::get_system()
+sanguis::draw::scene::system()
 {
 	return ss;
 }

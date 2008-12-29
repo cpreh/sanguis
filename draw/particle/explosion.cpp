@@ -2,7 +2,7 @@
 #include "generator.hpp"
 #include "z_ordering.hpp"
 #include "properties.hpp"
-//#include <sge/make_auto_ptr.hpp>
+#include <sge/make_auto_ptr.hpp>
 #include <boost/bind.hpp>
 
 sanguis::draw::particle::explosion::explosion(
@@ -26,10 +26,9 @@ sanguis::draw::particle::explosion::explosion(
 		particle_type::type const t = static_cast<particle_type::type>(mt);
 
 		base_ptr ptr(
-			//sge::make_auto_ptr<
-			//	particle::generator
-			//>(
-			new particle::generator(
+			sge::make_auto_ptr<
+				particle::generator
+			>(
 				boost::bind(callback, t),
 				point::null(),
 				prop.gen_life_time,

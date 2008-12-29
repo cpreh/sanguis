@@ -1,15 +1,18 @@
 #ifndef SANGUIS_DRAW_ENTITY_HPP_INCLUDED
 #define SANGUIS_DRAW_ENTITY_HPP_INCLUDED
 
-#include "types.hpp"
-#include "log.hpp"
+#include "system_fwd.hpp"
+#include "vector2.hpp"
+#include "object_fwd.hpp"
 #include "../entity_id.hpp"
 #include "../weapon_type.hpp"
 #include "../time_type.hpp"
 #include "../diff_clock.hpp"
-#include <sge/math/vector.hpp>
 #include <sge/time/timer.hpp>
 #include <sge/log/fwd.hpp>
+#include <sge/sprite/rotation_type.hpp>
+#include <sge/sprite/point.hpp>
+#include <sge/sprite/dim.hpp>
 #include <boost/noncopyable.hpp>
 #include <vector>
 
@@ -21,7 +24,8 @@ namespace draw
 class entity : boost::noncopyable {
 public:
 	typedef std::vector<
-		object> sprite_vector;
+		object
+	> sprite_vector;
 
 	virtual void update(time_type);
 	entity_id id() const;
@@ -45,16 +49,16 @@ public:
 protected:
 	entity(
 		entity_id id,
-		system &);
+		draw::system &);
 	virtual vector2 const &speed() const = 0;
 	virtual funit orientation() const = 0;
 
-	system &get_system();
+	draw::system &system();
 private:
 	static sge::log::logger &log();
 
 	entity_id        id_;
-	system          &sys;
+	draw::system     &sys;
 	diff_clock       diff_clock_;
 	sge::time::timer decay_timer;
 };

@@ -1,6 +1,7 @@
 #include "healthbar.hpp"
 #include "z_ordering.hpp"
 #include "sprite_part_index.hpp"
+#include "object.hpp"
 #include "../client/id_dont_care.hpp"
 #include "../exception.hpp"
 #include <sge/format.hpp>
@@ -25,14 +26,15 @@ sanguis::draw::sprite_part_index const
 }
 
 sanguis::draw::healthbar::healthbar(
-	system &sys)
-: sprite(
-	client::id_dont_care(),
-	sys,
-	2,
-	z_ordering::model_generic),
-  health_(0),
-  max_health_(0)
+	draw::system &sys)
+:
+	sprite(
+		client::id_dont_care(),
+		sys,
+		2,
+		z_ordering::model_generic),
+	health_(0),
+	max_health_(0)
 {
 	at(background) = object(
 		sys,

@@ -2,6 +2,7 @@
 #include "unit.hpp"
 #include "z_ordering.hpp"
 #include "sprite_part_index.hpp"
+#include "object.hpp"
 #include <boost/none.hpp>
 
 namespace
@@ -13,13 +14,13 @@ sanguis::draw::sprite_part_index const
 }
 
 sanguis::draw::bullet::bullet(
-	load::context const &ctx,
+	environment const &env,
 	entity_id id,
-	system &sys,
+	draw::system &sys,
 	sge::string const &name)
 :
 	model(
-		ctx,
+		env,
 		id,
 		sys,
 		name,

@@ -15,16 +15,16 @@ get_texture(
 
 }
 
-sanguis::draw::factory::entity_ptr
+sanguis::draw::entity_auto_ptr
 sanguis::draw::factory::pickup(
-	load::context const &ctx,
+	environment const &env,
 	entity_id const id,
 	system &sys,
 	pickup_type::type const ptype)
 {
-	return entity_ptr(
+	return entity_auto_ptr(
 		new model(
-			ctx,
+			env,
 			id,
 			sys,
 			get_texture(

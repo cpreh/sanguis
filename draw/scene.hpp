@@ -1,21 +1,19 @@
 #ifndef SANGUIS_DRAW_SCENE_DRAWER_HPP_INCLUDED
 #define SANGUIS_DRAW_SCENE_DRAWER_HPP_INCLUDED
 
-#include "entity.hpp"
+#include "entity_auto_ptr.hpp"
 #include "hud.hpp"
-#include "factory/types.hpp"
-#include "types.hpp"
+#include "system.hpp"
 #include "../entity_id.hpp"
 #include "../messages/fwd.hpp"
 #include "../time_type.hpp"
 #include "../client_messages/fwd.hpp"
-#include <sge/renderer/device.hpp>
-#include <sge/sprite/system.hpp>
+#include <sge/renderer/device_fwd.hpp>
 #include <sge/font/font_fwd.hpp>
 #include <sge/type_info.hpp>
 #include <sge/log/fwd.hpp>
+#include <sge/noncopyable.hpp>
 #include <boost/function.hpp>
-#include <boost/noncopyable.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
 #include <vector>
 #include <map>
@@ -29,12 +27,17 @@ class context;
 namespace draw
 {
 
-class scene : boost::noncopyable {
+class entity;
+class environment;
+
+class scene {
+	SGE_NONCOPYABLE(scene)
 public:
 	scene(
 		load::context const &,
 		sge::renderer::device_ptr,
 		sge::font::font &);
+	~scene();
 	
 	void process_message(
 		messages::base const &);
@@ -69,31 +72,50 @@ public:
 	void operator()(client_messages::add const &);
 private:
 	void configure_new_object(
-		factory::entity_ptr,
+		entity_auto_ptr,
 		messages::add const &);
 	
-	entity &get_entity(
+	draw::environment const
+	environment();
+
+	void insert(
+		entity_auto_ptr);
+
+	draw::entity &
+	entity(
 		entity_id);
-	entity const &get_entity(
+	
+	draw::entity const &
+	entity(
 		entity_id) const;
 	void process_default_msg(
 		messages::base const &);
 	void process_default_client_msg(
 		client_messages::base const &);
-	system &get_system();
+	draw::system &system();
 	
 	static sge::log::logger &log();
 
 	load::context const          &resources_;
-	system                        ss;
+	draw::system                  ss;
 	hud                           hud_;
 	bool                          paused;
 
-	typedef boost::ptr_map<entity_id, entity> entity_map;
+	typedef boost::ptr_map<
+		entity_id,
+		draw::entity
+	> entity_map;
 	entity_map entities;
 
-	typedef boost::function<void (messages::base const &)> dispatch_fun;
-	typedef std::map<sge::type_info, dispatch_fun> event_map;
+	typedef boost::function<
+		void (
+			messages::base const &)
+	> dispatch_fun;
+
+	typedef std::map<
+		sge::type_info,
+		dispatch_fun
+	> event_map;
 	event_map event_dispatcher;
 };
 

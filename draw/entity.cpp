@@ -79,7 +79,7 @@ sanguis::draw::entity::~entity()
 
 sanguis::draw::entity::entity(
 	entity_id const id_,
-	system &sys)
+	draw::system &sys)
 :
 	id_(id_),
 	sys(sys),
@@ -91,7 +91,7 @@ sanguis::draw::entity::entity(
 {}
 
 sanguis::draw::system &
-sanguis::draw::entity::get_system()
+sanguis::draw::entity::system()
 {
 	return sys;
 }

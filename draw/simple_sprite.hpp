@@ -2,9 +2,10 @@
 #define SANGUIS_DRAW_SIMPLE_SPRITE_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "types.hpp"
-#include <sge/sprite/types.hpp>
+#include "system_fwd.hpp"
+#include "object.hpp"
 #include <sge/texture/part_fwd.hpp>
+#include <sge/sprite/intrusive_order.hpp>
 
 namespace sanguis
 {
@@ -15,8 +16,8 @@ class simple_sprite : public entity {
 public:
 	simple_sprite(
 		entity_id,
-		system &,
-		object::order_type,
+		draw::system &,
+		sge::sprite::intrusive_order,
 		sge::texture::const_part_ptr);
 private:
 	void update(time_type);

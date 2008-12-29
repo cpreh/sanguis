@@ -1,13 +1,14 @@
 #include "sprite.hpp"
 #include "sprite_part_index.hpp"
+#include "object.hpp"
 #include <boost/foreach.hpp>
 #include <boost/none.hpp>
 
 sanguis::draw::sprite::sprite(
 	entity_id const id,
-	system &sys,
+	draw::system &sys,
 	sprite_vector::size_type const sz,
-	object::order_type const order)
+	sge::sprite::intrusive_order const order)
 :
 	entity(
 		id,
@@ -19,7 +20,7 @@ sanguis::draw::sprite::sprite(
 	for(sprite_vector::size_type i = 0; i < sz; ++i)
 		sprites.push_back(
 			object(
-				get_system(),
+				system(),
 				order));
 }
 

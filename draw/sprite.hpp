@@ -1,9 +1,13 @@
 #ifndef SANGUIS_DRAW_SPRITE_HPP_INCLUDED
 #define SANGUIS_DRAW_SPRITE_HPP_INCLUDED
 
-#include "types.hpp"
 #include "entity.hpp"
-#include <sge/math/vector.hpp>
+#include "vector2.hpp"
+#include "system_fwd.hpp"
+#include <sge/sprite/point.hpp>
+#include <sge/sprite/dim.hpp>
+#include <sge/sprite/color.hpp>
+#include <sge/sprite/intrusive_order.hpp>
 
 namespace sanguis
 {
@@ -16,9 +20,9 @@ class sprite : public entity {
 public:
 	sprite(
 		entity_id id,
-		system &sys,
+		draw::system &sys,
 		sprite_vector::size_type init_sprites,
-		object::order_type order);
+		sge::sprite::intrusive_order order);
 	
 	sge::sprite::point const center() const;
 	sge::sprite::point const pos() const;
@@ -38,15 +42,15 @@ protected:
 
 	virtual void orientation(funit);
 	virtual void speed(vector2 const &);
-	virtual void pos(const sge::sprite::point&);
-	virtual void dim(const sge::sprite::dim&);
+	virtual void pos(sge::sprite::point const &);
+	virtual void dim(sge::sprite::dim const &);
 	virtual void color(sge::sprite::color);
 	virtual void visible(bool);
 
 	sge::sprite::rotation_type orientation() const;
 	vector2 const &speed() const;
 private:
-	void update_pos(const sge::sprite::point&);
+	void update_pos(sge::sprite::point const &);
 	void update_orientation(sge::sprite::rotation_type);
 
 	vector2         speed_,

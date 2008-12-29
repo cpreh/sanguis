@@ -4,16 +4,16 @@
 #include "../../load/enemy_name.hpp"
 #include "../../enemy_type.hpp"
 
-sanguis::draw::factory::entity_ptr
+sanguis::draw::entity_auto_ptr
 sanguis::draw::factory::enemy(
-	load::context const &ctx,
+	environment const &env,
 	entity_id const id,
 	system &sys,
 	enemy_type::type const etype)
 {
-	return entity_ptr(
+	return entity_auto_ptr(
 		new model(
-			ctx,
+			env,
 			id,
 			sys,
 			load::enemy_name(

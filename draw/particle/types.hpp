@@ -4,7 +4,6 @@
 #include "../funit.hpp"
 #include <sge/random/inclusive_range.hpp>
 #include <sge/math/vector.hpp>
-#include <sge/sprite/types.hpp>
 #include <boost/function.hpp>
 #include <boost/optional.hpp>
 #include "fwd.hpp"

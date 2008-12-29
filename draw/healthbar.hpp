@@ -11,7 +11,7 @@ namespace draw
 class healthbar : public sprite {
 public:
 	explicit healthbar(
-		system &);
+		draw::system &);
 	void health(funit);
 	void max_health(funit);
 	funit max_health() const;
@@ -31,8 +31,9 @@ private:
 	funit remaining_health() const;
 	void recalc_health();
 
-	funit health_,
-	                max_health_;
+	funit
+		health_,
+		max_health_;
 };
 
 }

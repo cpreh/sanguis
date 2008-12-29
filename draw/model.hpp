@@ -6,7 +6,6 @@
 #include "healthbar.hpp"
 #include "../entity_id.hpp"
 #include "../animation_type.hpp"
-#include <sge/sprite/types.hpp>
 #include <sge/math/vector.hpp>
 #include <sge/log/fwd.hpp>
 #include <sge/string.hpp>
@@ -15,23 +14,20 @@
 
 namespace sanguis
 {
-namespace load
-{
-class context;
-}
 namespace draw
 {
 
 class sprite_part_index;
+class environment;
 
 class model : public sprite {
 public:
 	model(
-		load::context const &,
+		environment const &,
 		entity_id id,
-		system &,
-		sge::string const& name,
-		object::order_type order,
+		draw::system &,
+		sge::string const &name,
+		sge::sprite::intrusive_order order,
 		bool needs_healthbar = true,
 		funit start_health = static_cast<funit>(0));
 
