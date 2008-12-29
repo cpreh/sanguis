@@ -3,6 +3,7 @@
 
 #include "model/context.hpp"
 #include "resource/context.hpp"
+#include "particle/context.hpp"
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image/loader_fwd.hpp>
 #include <sge/audio/multi_loader_fwd.hpp>
@@ -30,6 +31,9 @@ public:
 
 	model::context const &
 	models() const;
+
+	particle::context const &
+	particles() const;
 private:
 	sge::image::loader_ptr const il;
 	sge::renderer::device_ptr const rend;
@@ -39,6 +43,7 @@ private:
 
 	resource::context const resource_ctx;
 	model::context const model_ctx;
+	particle::context const particle_ctx;
 };
 
 }

@@ -1,7 +1,7 @@
 #ifndef SANGUIS_DRAW_UNIT_HPP_INCLUDED
 #define SANGUIS_DRAW_UNIT_HPP_INCLUDED
 
-#include <sge/sprite/types.hpp>
+#include <sge/sprite/unit.hpp>
 
 namespace sanguis
 {

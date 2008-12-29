@@ -5,19 +5,16 @@
 
 namespace sanguis
 {
-namespace load
-{
-class context;
-}
 namespace draw
 {
+
+class environment;
 
 class reaper : public model {
 public:
 	reaper(
-		load::context const &ctx,
+		draw::environment const &,
 		entity_id id,
-		system &,
 		model const &);
 	void update(time_type);
 private:

@@ -1,25 +1,26 @@
 #include "sprite.hpp"
 #include "sprite_part_index.hpp"
+#include "object.hpp"
 #include <boost/foreach.hpp>
 #include <boost/none.hpp>
 
 sanguis::draw::sprite::sprite(
+	draw::environment const &env,
 	entity_id const id,
-	system &sys,
-	sprite_vector::size_type const sz,
-	object::order_type const order)
+	size_type const sz,
+	sge::sprite::intrusive_order const order)
 :
 	entity(
-		id,
-		sys),
+		env,
+		id),
 	speed_(vector2::null()),
 	pos_(vector2::null())
 {
 	sprites.reserve(sz);
-	for(sprite_vector::size_type i = 0; i < sz; ++i)
+	for(size_type i = 0; i < sz; ++i)
 		sprites.push_back(
 			object(
-				get_system(),
+				system(),
 				order));
 }
 
@@ -137,7 +138,7 @@ sanguis::draw::sprite::orientation() const
 	return master().rotation();
 }
 
-sanguis::draw::vector2 const &
+sanguis::draw::vector2 const
 sanguis::draw::sprite::speed() const
 {
 	return speed_;

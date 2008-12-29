@@ -1,22 +1,22 @@
 #include "simple_sprite.hpp"
 #include "../simple_sprite.hpp"
+#include "../environment.hpp"
 #include "../../load/context.hpp"
 #include "../../load/resource/context.hpp"
 #include "../../load/resource/textures.hpp"
 
-sanguis::draw::factory::entity_ptr
+sanguis::draw::entity_auto_ptr
 sanguis::draw::factory::simple_sprite(
-	load::context const &ctx,
+	environment const &env,
 	entity_id const id,
-	system &sys,
 	z_ordering::type const z,
 	sge::string const &texture_name)
 {
-	return entity_ptr(
+	return entity_auto_ptr(
 		new draw::simple_sprite(
+			env,
 			id,
-			sys,
 			z,
-			ctx.resources().textures().load(
+			env.context().resources().textures().load(
 				texture_name)));
 }

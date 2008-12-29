@@ -18,6 +18,18 @@ sanguis::draw::particle::container::container(
 		rot_vel_)
 {}
 
+sanguis::draw::particle::container::children_container const &
+sanguis::draw::particle::container::children() const
+{
+	return children_;
+}
+
+sanguis::draw::particle::container::children_container &
+sanguis::draw::particle::container::children()
+{
+	return children_;
+}
+
 void sanguis::draw::particle::container::add(
 	base_ptr ptr)
 {
@@ -28,7 +40,7 @@ void sanguis::draw::particle::container::gather(
 	point const &p,
 	rotation_type const r,
 	depth_type const d,
-	sge::sprite::system::container &sprites) const
+	sge::sprite::container &sprites) const
 {
 	point const thispos = sge::math::point_rotate(
 		p+base::pos(),

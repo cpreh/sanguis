@@ -1,29 +1,27 @@
 #include "projectile.hpp"
 #include "../bullet.hpp"
+#include "../rocket.hpp"
 #include "../../exception.hpp"
 #include <sge/text.hpp>
 
-sanguis::draw::factory::entity_ptr
+sanguis::draw::entity_auto_ptr
 sanguis::draw::factory::projectile(
-	load::context const &ctx,
+	environment const &env,
 	entity_id const id,
-	system &sys,
 	projectile_type::type const ptype)
 {
 	switch(ptype) {
 	case projectile_type::simple_bullet:
-		return entity_ptr(
+		return entity_auto_ptr(
 			new bullet(
-				ctx,
+				env,
 				id,
-				sys,
 				SGE_TEXT("bullet")));
 	case projectile_type::rocket:
-		return entity_ptr(
-			new bullet(
-				ctx,
+		return entity_auto_ptr(
+			new rocket(
+				env,
 				id,
-				sys,
 				SGE_TEXT("rocket")));
 	default:
 		throw exception(

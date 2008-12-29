@@ -1,17 +1,18 @@
 #include "simple_sprite.hpp"
+#include "environment.hpp"
 #include <sge/renderer/colors.hpp>
 
 sanguis::draw::simple_sprite::simple_sprite(
+	draw::environment const &env,
 	entity_id const id,
-	system &sys,
-	object::order_type const order,
+	sge::sprite::intrusive_order const order,
 	sge::texture::const_part_ptr const tex)
 :
 	entity(
-		id,
-		sys),
-	sprite(
-		sys,
+		env,
+		id),
+	sprite_(
+		env.system(),
 		order,
 		sge::sprite::point::null(),
 		tex,
@@ -28,12 +29,6 @@ void sanguis::draw::simple_sprite::orientation(
 	sge::sprite::rotation_type const angle)
 {
 	get().rotation(angle);
-}
-
-void sanguis::draw::simple_sprite::speed(
-	vector2 const &speed_)
-{
-	// stub
 }
 
 void sanguis::draw::simple_sprite::pos(
@@ -54,14 +49,6 @@ void sanguis::draw::simple_sprite::visible(
 	get().visible(v);
 }
 
-sanguis::draw::vector2 const &
-sanguis::draw::simple_sprite::speed() const
-{
-	static const vector2 r(
-		vector2::null());
-	return r; // stub
-}
-
 sge::sprite::rotation_type
 sanguis::draw::simple_sprite::orientation() const
 {
@@ -71,12 +58,12 @@ sanguis::draw::simple_sprite::orientation() const
 sanguis::draw::object&
 sanguis::draw::simple_sprite::get()
 {
-	return sprite;
+	return sprite_;
 }
 
 sanguis::draw::object const &
 sanguis::draw::simple_sprite::get() const
 {
-	return sprite;
+	return sprite_;
 }
 

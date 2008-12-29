@@ -1,6 +1,7 @@
 #include "player.hpp"
 #include "z_ordering.hpp"
 #include "sprite_part_index.hpp"
+#include "object.hpp"
 #include "../client/next_id.hpp"
 #include <sge/string.hpp>
 #include <sge/math/angle.hpp>
@@ -30,22 +31,19 @@ sanguis::draw::sprite_part_index const
 }
 
 sanguis::draw::player::player(
-	load::context const &ctx,
-	entity_id const id,
-	system &sys)
+	draw::environment const &env,
+	entity_id const id)
 :
 	model(
-		ctx,
+		env,
 		id,
-		sys,
 		SGE_TEXT("player"),
 		z_ordering::model_generic),
 	angle_(static_cast<funit>(0)),
 	target_angle(angle_),
 	reaper_(
-		ctx,
+		env,
 		client::next_id(),
-		sys,
 		*this)
 {
 	at(bottom).order(z_ordering::player_lower);

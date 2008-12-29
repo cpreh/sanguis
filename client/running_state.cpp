@@ -13,6 +13,7 @@
 #include "../messages/unpause.hpp"
 #include "../draw/coord_transform.hpp"
 #include <sge/renderer/state/list.hpp>
+#include <sge/renderer/device.hpp>
 #include <sge/audio/player.hpp>
 #include <sge/audio/pool.hpp>
 #include <sge/renderer/state/var.hpp>

@@ -3,10 +3,11 @@
 #include "z_ordering.hpp"
 #include "properties.hpp"
 #include <sge/make_auto_ptr.hpp>
+#include <sge/minmax_pair_impl.hpp>
 #include <boost/bind.hpp>
 
 sanguis::draw::particle::explosion::explosion(
-	properties const &prop,
+	property_map const &properties_,
 	callback const callback,
 	point const &p,
 	point const &s,
@@ -25,30 +26,33 @@ sanguis::draw::particle::explosion::explosion(
 	{
 		particle_type::type const t = static_cast<particle_type::type>(mt);
 
+		properties const &prop(
+			properties_[t]);	
+
 		base_ptr ptr(
-			//sge::make_auto_ptr<
-			//	particle::generator
-			//>(
-			new particle::generator(
+			sge::make_auto_ptr<
+				particle::generator
+			>(
 				boost::bind(callback, t),
 				point::null(),
-				prop.gen_life_time,
-				prop.gen_frequency,
-				prop.spawn_initial,
-				prop.align,
+				prop.gen_life_time(),
+				prop.gen_frequency(),
+				prop.spawn_initial(),
+				prop.align(),
 				z_ordering(t),
+				// TODO: make this less explicit (needs to be done in sge)!
 				dispersion_range(
 					static_cast<dispersion_range::value_type>(
-						prop.dispersion_min),
+						prop.dispersion().min()),
 					static_cast<dispersion_range::value_type>(
-						prop.dispersion_max)),
+						prop.dispersion().max())),
 				velocity_range(
-					prop.speed_min,
-					prop.speed_max),
+					prop.speed().min(),
+					prop.speed().max()),
 				rotation_velocity_range(
-					prop.rot_speed_min,
-					prop.rot_speed_max),
-				prop.movement));
+					prop.rot_speed().min(),
+					prop.rot_speed().max()),
+				prop.movement()));
 		add(ptr);
 	}
 }

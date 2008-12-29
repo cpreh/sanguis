@@ -1,7 +1,10 @@
 #include "model.hpp"
+#include "model_part.hpp"
 #include "z_ordering.hpp"
 #include "log.hpp"
 #include "sprite_part_index.hpp"
+#include "object.hpp"
+#include "environment.hpp"
 #include "../load/model/collection.hpp"
 #include "../load/model/context.hpp"
 #include "../load/context.hpp"
@@ -13,18 +16,17 @@
 #include <ostream>
 
 sanguis::draw::model::model(
-	load::context const &ctx,
+	draw::environment const &env,
 	entity_id const id,
-	system &sys,
 	sge::string const &name,
-	object::order_type const order,
+	sge::sprite::intrusive_order const order,
 	bool const show_healthbar,
 	funit const start_health)
 :
 	sprite(
+		env,
 		id,
-		sys,
-		ctx.models()()[name].size(),
+		env.context().models()()[name].size(),
 		order),
 	attacking(false),
 	reloading(false),
@@ -33,13 +35,13 @@ sanguis::draw::model::model(
 	healthbar_(
 		show_healthbar
 		? new healthbar(
-			sys)
+			env)
 		: 0)
 {
 	part_vector::size_type i(0);
 	BOOST_FOREACH(
 		load::model::model::value_type const &p,
-		ctx.models()()[name]
+		env.context().models()()[name]
 	)
 		parts.push_back(
 			new model_part(
@@ -48,6 +50,9 @@ sanguis::draw::model::model(
 	change_animation(
 		animation_type::deploying);
 }
+
+sanguis::draw::model::~model()
+{}
 
 sanguis::draw::funit
 sanguis::draw::model::max_health() const
@@ -84,7 +89,7 @@ void sanguis::draw::model::orientation(
 
 void sanguis::draw::model::orientation(
 	sge::sprite::rotation_type const rot,
-	sprite_vector::size_type const index)
+	size_type const index)
 {
 	parts.at(index).orientation(rot);	
 }

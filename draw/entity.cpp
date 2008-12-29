@@ -1,5 +1,6 @@
 #include "entity.hpp"
 #include "log.hpp"
+#include "environment.hpp"
 #include <sge/log/headers.hpp>
 #include <sge/text.hpp>
 #include <sge/time/second_f.hpp>
@@ -11,7 +12,8 @@ void sanguis::draw::entity::update(
 	diff_clock_.update(time);
 }
 
-sanguis::entity_id sanguis::draw::entity::id() const
+sanguis::entity_id
+sanguis::draw::entity::id() const
 {
 	return id_;
 }
@@ -19,6 +21,7 @@ sanguis::entity_id sanguis::draw::entity::id() const
 void sanguis::draw::entity::decay()
 {
 	decay_timer.activate();
+	on_decay();
 }
 
 void sanguis::draw::entity::decay_time(
@@ -33,11 +36,54 @@ bool sanguis::draw::entity::may_be_removed() const
 	return decay_timer.expired();
 }
 
+
+void sanguis::draw::entity::orientation(
+	sge::sprite::rotation_type)
+{
+		
+}
+
+void sanguis::draw::entity::speed(vector2 const &)
+{
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1 << SGE_TEXT("Invalid speed call!"));
+}
+
+void sanguis::draw::entity::pos(sge::sprite::point const &)
+{
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1 << SGE_TEXT("Invalid pos call!"));
+}
+
+void sanguis::draw::entity::dim(sge::sprite::dim const &)
+{
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1 << SGE_TEXT("Invalid dim call!"));
+}
+
+void sanguis::draw::entity::visible(bool)
+{
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1 << SGE_TEXT("Invalid visible call!"));
+}
+
 void sanguis::draw::entity::health(funit)
-{}
+{
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1 << SGE_TEXT("Invalid health call!"));
+}
 
 void sanguis::draw::entity::max_health(funit)
-{}
+{
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1 << SGE_TEXT("Invalid max_health call!"));
+}
 
 void sanguis::draw::entity::weapon(weapon_type::type)
 {
@@ -78,11 +124,11 @@ sanguis::draw::entity::~entity()
 {}
 
 sanguis::draw::entity::entity(
-	entity_id const id_,
-	system &sys)
+	draw::environment const &env_,
+	entity_id const id_)
 :
+	env_(env_),
 	id_(id_),
-	sys(sys),
 	diff_clock_(),
 	decay_timer(
 		sge::time::resolution(0),
@@ -90,11 +136,40 @@ sanguis::draw::entity::entity(
 		diff_clock_.callback())
 {}
 
-sanguis::draw::system &
-sanguis::draw::entity::get_system()
+sanguis::draw::vector2 const
+sanguis::draw::entity::speed() const
 {
-	return sys;
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1
+			<< SGE_TEXT("Invalid speed getter!"));
+	return vector2::null();
 }
+
+sanguis::draw::funit
+sanguis::draw::entity::orientation() const
+{
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1
+			<< SGE_TEXT("Invalid orientation getter!"));
+	return static_cast<funit>(0);
+}
+
+sanguis::draw::environment const &
+sanguis::draw::entity::environment() const
+{
+	return env_;
+}
+
+sanguis::draw::system &
+sanguis::draw::entity::system()
+{
+	return env_.system();
+}
+
+void sanguis::draw::entity::on_decay()
+{}
 
 sge::log::logger &
 sanguis::draw::entity::log()

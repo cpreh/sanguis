@@ -6,11 +6,11 @@
 #include "../weapon_type.hpp"
 #include "../entity_id.hpp"
 #include "../messages/fwd.hpp"
-#include <sge/sprite/types.hpp>
 #include <sge/time/timer.hpp>
 #include <sge/math/vector.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/console/arg_list.hpp>
+#include <sge/sprite/point.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/function.hpp>
 #include <boost/array.hpp>

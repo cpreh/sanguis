@@ -11,7 +11,9 @@ sanguis::load::model::random_sound::random_sound(
 	sounds(sounds),
 	ctx(ctx),
 	rng(
-		sge::random::last_exclusive_range<sound_container::size_type>(
+		sge::random::last_exclusive_range<
+			sound_container::size_type
+		>(
 			0,
 			sounds.size()))
 {}

@@ -5,7 +5,6 @@
 #include "align_type.hpp"
 #include "movement_type.hpp"
 #include "../../diff_clock.hpp"
-#include <sge/sprite/types.hpp>
 #include <sge/sprite/animation_series.hpp>
 #include <sge/random/uniform.hpp>
 #include <sge/time/timer.hpp>

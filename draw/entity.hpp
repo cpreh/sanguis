@@ -1,39 +1,39 @@
 #ifndef SANGUIS_DRAW_ENTITY_HPP_INCLUDED
 #define SANGUIS_DRAW_ENTITY_HPP_INCLUDED
 
-#include "types.hpp"
-#include "log.hpp"
+#include "system_fwd.hpp"
+#include "vector2.hpp"
 #include "../entity_id.hpp"
 #include "../weapon_type.hpp"
 #include "../time_type.hpp"
 #include "../diff_clock.hpp"
-#include <sge/math/vector.hpp>
 #include <sge/time/timer.hpp>
 #include <sge/log/fwd.hpp>
+#include <sge/sprite/rotation_type.hpp>
+#include <sge/sprite/point.hpp>
+#include <sge/sprite/dim.hpp>
 #include <boost/noncopyable.hpp>
-#include <vector>
 
 namespace sanguis
 {
 namespace draw
 {
 
+class environment;
+
 class entity : boost::noncopyable {
 public:
-	typedef std::vector<
-		object> sprite_vector;
-
 	virtual void update(time_type);
 	entity_id id() const;
 	void decay();
 	void decay_time(
 		time_type);
 	virtual bool may_be_removed() const;
-	virtual void orientation(sge::sprite::rotation_type) = 0;
-	virtual void speed(vector2 const &) = 0;
-	virtual void pos(sge::sprite::point const &) = 0;
-	virtual void dim(sge::sprite::dim const &) = 0;
-	virtual void visible(bool) = 0;
+	virtual void orientation(sge::sprite::rotation_type);
+	virtual void speed(vector2 const &);
+	virtual void pos(sge::sprite::point const &);
+	virtual void dim(sge::sprite::dim const &);
+	virtual void visible(bool);
 	virtual void health(funit);
 	virtual void max_health(funit);
 	virtual void weapon(weapon_type::type);
@@ -44,19 +44,29 @@ public:
 	virtual ~entity();
 protected:
 	entity(
-		entity_id id,
-		system &);
-	virtual vector2 const &speed() const = 0;
-	virtual funit orientation() const = 0;
+		draw::environment const &,
+		entity_id id);
+	
+	virtual vector2 const
+	speed() const;
 
-	system &get_system();
+	virtual funit
+	orientation() const;
+
+	draw::environment const &
+	environment() const;
+
+	draw::system &
+	system();
 private:
+	virtual void on_decay();
+
 	static sge::log::logger &log();
 
-	entity_id        id_;
-	system          &sys;
-	diff_clock       diff_clock_;
-	sge::time::timer decay_timer;
+	draw::environment const &env_;
+	entity_id               id_;
+	diff_clock              diff_clock_;
+	sge::time::timer        decay_timer;
 };
 
 }

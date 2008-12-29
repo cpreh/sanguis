@@ -1,9 +1,9 @@
 #include "reaper.hpp"
 #include "z_ordering.hpp"
+#include "object.hpp"
 #include "../resolution.hpp"
 #include <sge/math/compare.hpp>
 #include <sge/math/signum.hpp>
-#include <sge/sprite/types.hpp>
 #include <cmath>
 #include <cassert>
 
@@ -16,15 +16,13 @@ sanguis::draw::funit const
 }
 
 sanguis::draw::reaper::reaper(
-	load::context const &ctx,
+	draw::environment const &env,
 	entity_id const id,
-	system &sys,
 	model const &p)
 :
 	model(
-		ctx,
+		env,
 		id,
-		sys,
 		SGE_TEXT("reaper"),
 		z_ordering::reaper,
 		false,

@@ -3,21 +3,19 @@
 #include "../../exception.hpp"
 #include <sge/text.hpp>
 
-sanguis::draw::factory::entity_ptr
+sanguis::draw::entity_auto_ptr
 sanguis::draw::factory::entity(
-	load::context const &ctx,
+	environment const &env,
 	entity_id const id,
-	system &sys,
 	entity_type::type const type)
 {
 	// TODO: make this prettier and generate code for it using a template
 	switch(type) {
 	case entity_type::player:
-		return entity_ptr(
+		return entity_auto_ptr(
 			new player(
-				ctx,
-				id,
-				sys));
+				env,
+				id));
 	case entity_type::enemy:
 		throw exception(
 			SGE_TEXT("entity_type::enemy cannot be created using entity!"));
