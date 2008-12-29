@@ -17,6 +17,11 @@ sanguis::server::waves::generator::generator()
 		enemy_type::spider
 	)(
 		static_cast<time_type>(0),
+		static_cast<time_type>(1),
+		10,
+		enemy_type::skeleton
+	)(
+		static_cast<time_type>(0),
 		static_cast<time_type>(0.7),
 		200,
 		enemy_type::zombie00

@@ -11,7 +11,8 @@ enum type {
 	wolf_white,
 	zombie00,
 	zombie01,
-	spider
+	spider,
+  skeleton
 };
 }
 
