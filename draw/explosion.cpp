@@ -232,13 +232,6 @@ sanguis::draw::explosion::generate_particle(
 	particle::properties const &prop(
 		properties_[t]);
 
-	ptr.reset(
-		new particle::object(
-			t,
-			anim,
-			boost::none,
-			environment()));
-	/*
 	if (!prop.do_fade())
 		ptr.reset(
 			new particle::object(
@@ -264,7 +257,6 @@ sanguis::draw::explosion::generate_particle(
 				rng(),
 				environment()));
 	}
-	*/
 
 	/*
 	ptr->depth(

@@ -47,22 +47,18 @@ bool sanguis::draw::particle::object::update(
 {
 	base::update(delta,p,r,d);
 
-	clock.update(delta);
-	bool const ret = anim.process();
-
 	sprite_.z() = d+base::depth();
 	sprite_.rotation(base::rot()+r);
 	sprite_.pos() = 
 		sge::math::structure_cast<sge::sprite::unit>(
 			sge::math::point_rotate(p+base::pos(),p,r+base::rot()));
 
-	return false;
+	clock.update(delta);
+
+	bool const ret = anim.process();
 
 	if (!fade_total)
-	{
-		sge::cerr << SGE_TEXT("fading disabled, return value is ") << ret << SGE_TEXT("\n");
 		return ret;
-	}
 	
 	fade_remaining -= delta;
 	// UGLY ALERT!
@@ -76,12 +72,6 @@ bool sanguis::draw::particle::object::update(
 			max,
 			static_cast<sge::renderer::color_channel_8>(
 				static_cast<funit>(max)*ratio)));
-
-	sprite_.z() = d+base::depth();
-	sprite_.rotation(base::rot()+r);
-	sprite_.pos() = 
-		sge::math::structure_cast<sge::sprite::unit>(
-			sge::math::point_rotate(p+base::pos(),p,r+base::rot()));
 
 	return fade_remaining < static_cast<funit>(0);
 }
