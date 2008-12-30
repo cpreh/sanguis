@@ -16,14 +16,16 @@ sanguis::draw::particle::generator::generator(
 	dispersion_range const &dispersion_value,
 	velocity_range const &velocity,
 	rotation_velocity_range const &rot_velocity,
-	movement_type::type const mt)
+	movement_type::type const mt,
+	draw::environment const &e)
 :
 	container(
 		pos,
 		point::null(),
 		depth,
 		rotation_type(0),
-		rotation_type(0)),
+		rotation_type(0),
+		e),
 	generate_object(generate_object),
 	frequency_timer(sge::time::second_f(frequency)),
 	life_timer(sge::time::second_f(life_time)),
@@ -127,11 +129,15 @@ void sanguis::draw::particle::generator::generate()
 	add(object);
 }
 
-bool sanguis::draw::particle::generator::update(funit const delta)
+bool sanguis::draw::particle::generator::update(
+	time_type const delta,
+	point const &p,
+	rotation_type const r,
+	depth_type const d)
 {
 	clock.update(delta);
 
-	bool const delete_now = container::update(delta);
+	bool const delete_now = container::update(delta,p,r,d);
 
 	if (!life_timer.expired())
 	{

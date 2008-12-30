@@ -3,7 +3,7 @@
 
 #include "base.hpp"
 #include <sge/sprite/texture_animation.hpp>
-#include <sge/sprite/object.hpp>
+#include <sge/sprite/intrusive_object.hpp>
 #include <sge/sprite/container.hpp>
 #include <boost/optional.hpp>
 
@@ -19,15 +19,15 @@ class object : public base
 	public:
 	object(
 		sge::sprite::animation_series const &,
-		boost::optional<time_type> fade_time);
-	bool update(time_type);
-	void gather(
+		boost::optional<time_type> fade_time,
+		draw::environment const &);
+	bool update(
+		time_type,
 		point const &,
 		rotation_type,
-		depth_type,
-		sge::sprite::container &) const;
+		depth_type);
 	private:
-	sge::sprite::object sprite_;
+	sge::sprite::intrusive_object sprite_;
 	sge::sprite::texture_animation anim;
 	boost::optional<time_type> fade_total;
 	time_type fade_remaining;

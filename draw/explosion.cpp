@@ -118,7 +118,8 @@ sanguis::draw::explosion::explosion(
 		particle::point::null(),
 		particle::depth(0),
 		particle::rotation(0),
-		particle::rotation(0)),
+		particle::rotation(0),
+		environment()),
 	properties_(
 		prop_)
 {
@@ -144,7 +145,8 @@ sanguis::draw::explosion::explosion(
 			particle::dispersion_range(0,100),
 			particle::velocity_range(0,30),
 			particle::rotation_velocity_range(0,0),
-			particle::movement_type::expanding
+			particle::movement_type::expanding,
+			environment()
 		));
 
 	particles.add(n);
@@ -178,9 +180,13 @@ sanguis::draw::explosion::~explosion()
 {}
 
 void sanguis::draw::explosion::update(
-	time_type)
+	time_type const delta)
 {
-	
+	particles.update(
+		delta,
+		particle::point::null(),
+		static_cast<particle::rotation>(0),
+		static_cast<particle::depth>(0));
 }
 
 sanguis::draw::particle::base_ptr
@@ -197,8 +203,8 @@ sanguis::draw::explosion::generate_explosion()
 			particle::point::null(), // speed
 			static_cast<particle::depth>(0),
 			static_cast<particle::rotation>(0), // no rotation and...
-			static_cast<particle::rotation>(0) // ...no rotation speed
-			));
+			static_cast<particle::rotation>(0), // ...no rotation speed
+			environment()));
 }
 
 sanguis::draw::particle::base_ptr
@@ -217,7 +223,8 @@ sanguis::draw::explosion::generate_particle(
 		ptr.reset(
 			new particle::object(
 				anim,
-				boost::none));
+				boost::none,
+				environment()));
 	else
 	{
 		// FIXME: this should not be here!
@@ -232,7 +239,8 @@ sanguis::draw::explosion::generate_particle(
 		ptr.reset(
 			new particle::object(
 				anim,
-				rng()));
+				rng(),
+				environment()));
 	}
 
 	ptr->depth(

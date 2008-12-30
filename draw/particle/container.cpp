@@ -8,14 +8,16 @@ sanguis::draw::particle::container::container(
 	point const &v,
 	depth_type const depth_,
 	rotation_type const rot_,
-	rotation_type const rot_vel_)
+	rotation_type const rot_vel_,
+	draw::environment const &e)
 :
 	base(
 		p,
 		v,
 		depth_,
 		rot_,
-		rot_vel_)
+		rot_vel_,
+		e)
 {}
 
 sanguis::draw::particle::container::children_container const &
@@ -36,35 +38,28 @@ void sanguis::draw::particle::container::add(
 	children_.push_back(ptr);
 }
 
-void sanguis::draw::particle::container::gather(
+bool sanguis::draw::particle::container::update(
+	time_type const delta,
 	point const &p,
 	rotation_type const r,
-	depth_type const d,
-	sge::sprite::container &sprites) const
+	depth_type const d)
 {
+	base::update(delta,p,r,d);
+
 	point const thispos = sge::math::point_rotate(
 		p+base::pos(),
 		p,
 		r+base::rot());
 
-	BOOST_FOREACH(base const &b,children())
-		b.gather(
-			thispos,
-			r+base::rot(),
-			d+base::depth(),
-			sprites);
-}
-
-bool sanguis::draw::particle::container::update(
-	time_type const delta)
-{
-	base::update(delta);
-
 	for (children_container::iterator i = children().begin(); 
 	     i != children().end(); 
 		 )
 	{
-		if (i->update(delta))
+		if (i->update(
+		    	delta,
+					thispos,
+					r+base::rot(),
+					d+base::depth()))
 		{
 			i = children().erase(i);
 			continue;

@@ -3,6 +3,7 @@
 
 #include "types.hpp"
 #include "fwd.hpp"
+#include "../environment.hpp"
 #include <sge/sprite/container.hpp>
 
 namespace sanguis
@@ -23,20 +24,20 @@ class base
 		point const &,
 		depth_type,
 		rotation_type,
-		rotation_type);
+		rotation_type,
+		draw::environment const &);
 	public:
 	virtual ~base();
-	virtual bool update(time_type);
 	virtual void pos(point const &);
 	virtual void vel(point const &);
 	virtual void depth(depth_type);
 	virtual void rot(rotation_type);
 	virtual void rot_vel(rotation_type);
-	virtual void gather(
+	virtual bool update(
+		time_type,
 		point const &,
 		rotation_type,
-		depth_type,
-		sge::sprite::container &) const = 0;
+		depth_type);
 	point const &pos() const;
 	point &pos();
 	point const &vel() const;
@@ -47,12 +48,14 @@ class base
 	rotation_type &rot();
 	rotation_type const &rot_vel() const;
 	rotation_type &rot_vel();
+	draw::environment const &environment() const;
 	private:
 	point pos_;
 	point vel_;
 	depth_type depth_;
 	rotation_type rot_;
 	rotation_type rot_vel_;
+	draw::environment const &e;
 };
 
 }

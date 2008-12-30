@@ -4,15 +4,19 @@
 
 sanguis::draw::particle::object::object(
 	sge::sprite::animation_series const &images,
-	boost::optional<time_type> const fade_total)
+	boost::optional<time_type> const fade_total,
+	draw::environment const &e)
 :
 	base(
 		point::null(),
 		point::null(),
 		depth_type(0),
 		rotation_type(0),
-		rotation_type(0)),
+		rotation_type(0),
+		e),
 	sprite_(
+		e.system(),
+		static_cast<sge::sprite::intrusive_order>(0), // FIXME
 		sge::sprite::defaults::pos_,
 		sge::sprite::defaults::texture_,
 		sge::math::structure_cast<sge::sprite::unit>(images.dim())),
@@ -29,24 +33,13 @@ sanguis::draw::particle::object::object(
 			: static_cast<time_type>(0))
 {}
 
-void sanguis::draw::particle::object::gather(
+bool sanguis::draw::particle::object::update(
+	time_type const delta,
 	point const &p,
 	rotation_type const r,
-	depth_type const d,
-	sge::sprite::container &c) const
+	depth_type const d)
 {
-	sge::sprite::object temp = sprite_;
-	temp.z() = d+base::depth();
-	temp.rotation(base::rot()+r);
-	temp.pos() = 
-		sge::math::structure_cast<sge::sprite::unit>(
-			sge::math::point_rotate(p+base::pos(),p,r+base::rot()));
-	c.push_back(temp);
-}
-
-bool sanguis::draw::particle::object::update(time_type const delta)
-{
-	base::update(delta);
+	base::update(delta,p,r,d);
 
 	bool const ret = anim.process();
 
@@ -65,6 +58,12 @@ bool sanguis::draw::particle::object::update(time_type const delta)
 			max,
 			static_cast<sge::renderer::color_channel_8>(
 				static_cast<funit>(max)*ratio)));
+
+	sprite_.z() = d+base::depth();
+	sprite_.rotation(base::rot()+r);
+	sprite_.pos() = 
+		sge::math::structure_cast<sge::sprite::unit>(
+			sge::math::point_rotate(p+base::pos(),p,r+base::rot()));
 
 	return fade_remaining < static_cast<funit>(0);
 }

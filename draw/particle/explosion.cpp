@@ -13,14 +13,16 @@ sanguis::draw::particle::explosion::explosion(
 	point const &s,
 	depth_type const d,
 	rotation_type const r,
-	rotation_type const rv)
+	rotation_type const rv,
+	draw::environment const &e)
 :
 	container(
 		p,
 		s,
 		d,
 		r,
-		rv)
+		rv,
+		e)
 {
 	for (unsigned mt = 0; mt < particle_type::size; ++mt)
 	{
@@ -52,7 +54,8 @@ sanguis::draw::particle::explosion::explosion(
 				rotation_velocity_range(
 					prop.rot_speed().min(),
 					prop.rot_speed().max()),
-				prop.movement()));
+				prop.movement(),
+				environment()));
 		add(ptr);
 	}
 }

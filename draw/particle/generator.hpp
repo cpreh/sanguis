@@ -19,7 +19,7 @@ namespace particle
 class generator : public container
 {
 	public:
-	explicit generator(
+	generator(
 		generation_callback,
 		point const &,
 		time_type life_time,
@@ -30,8 +30,13 @@ class generator : public container
 		dispersion_range const &,
 		velocity_range const &,
 		rotation_velocity_range const &,
-		movement_type::type);
-	bool update(time_type);
+		movement_type::type,
+		draw::environment const &);
+	bool update(
+		time_type,
+		point const &,
+		rotation_type,
+		depth_type);
 	private:
 	diff_clock clock;
 	generation_callback generate_object;

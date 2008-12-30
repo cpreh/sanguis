@@ -20,14 +20,15 @@ class explosion : public container
 		base_ptr (particle_type::type)
 	> callback;
 
-	explicit explosion(
+	explosion(
 		property_map const &,
 		callback,
 		point const &pos,
 		point const &speed,
 		depth_type,
 		rotation_type,
-		rotation_type);
+		rotation_type,
+		draw::environment const &);
 };
 
 }

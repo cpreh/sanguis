@@ -5,20 +5,25 @@ sanguis::draw::particle::base::base(
 	point const &vel_,
 	depth_type depth_,
 	rotation_type rot_,
-	rotation_type rot_vel_)
+	rotation_type rot_vel_,
+	draw::environment const &e)
 :
 	pos_(pos_),
 	vel_(vel_),
 	depth_(depth_),
 	rot_(rot_),
-	rot_vel_(rot_vel_)
+	rot_vel_(rot_vel_),
+	e(e)
 {}
 
 sanguis::draw::particle::base::~base()
 {}
 
 bool sanguis::draw::particle::base::update(
-	time_type const delta)
+	time_type const delta,
+	point const &,
+	rotation_type,
+	depth_type)
 {
 	pos(pos() + vel()*delta);
 	rot(rot() + rot_vel()*delta);
@@ -113,4 +118,9 @@ sanguis::draw::particle::base::rotation_type &
 sanguis::draw::particle::base::rot_vel()
 {
 	return rot_vel_;
+}
+
+sanguis::draw::environment const &sanguis::draw::particle::base::environment() const
+{
+	return e;
 }
