@@ -44,3 +44,8 @@ sanguis::load::context::particles() const
 {
 	return particle_ctx;
 }
+
+void sanguis::load::context::preload() const
+{
+	particle_ctx.preload();
+}

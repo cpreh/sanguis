@@ -201,6 +201,8 @@ try
 		sys.audio_player(),
 		sound_pool);
 	
+	resources.preload();
+
 	boost::scoped_ptr<
 		sanguis::server::machine
 	> server(

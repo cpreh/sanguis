@@ -7,6 +7,7 @@
 #include <sge/text.hpp>
 #include <sge/auto_ptr.hpp>
 #include <sge/make_auto_ptr.hpp>
+#include <boost/foreach.hpp>
 
 sanguis::load::particle::random_animation const &
 sanguis::load::particle::animations::random() const
@@ -65,3 +66,9 @@ sanguis::load::particle::animations::animations(
 
 sanguis::load::particle::animations::~animations()
 {}
+
+void sanguis::load::particle::animations::preload() const
+{
+	BOOST_FOREACH(animation_container::const_reference r, animations_)
+		r.get();
+}

@@ -117,6 +117,14 @@ void sanguis::draw::entity::stop_reloading()
 		sge::log::_1 << SGE_TEXT("got a stop reloading message!"));
 }
 
+void sanguis::draw::entity::transfer(
+	draw::system &)
+{
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1 << SGE_TEXT("Invalid transfer!"));
+}
+
 sanguis::draw::entity::~entity()
 {}
 

@@ -69,6 +69,16 @@ sanguis::load::particle::collection::collection(
 sanguis::load::particle::collection::~collection()
 {}
 
+void sanguis::load::particle::collection::preload() const
+{	
+	for(unsigned i = 0; i < particle_type::size; ++i)
+		(*this)[
+			static_cast<
+				particle_type::type
+			>(
+				i)].preload();
+}
+
 namespace
 {
 

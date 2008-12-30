@@ -30,6 +30,8 @@ public:
 		sge::path const &,
 		resource::context const &);
 	~collection();
+
+	void preload() const;
 private:
 	typedef boost::ptr_map<
 		particle_type::type,

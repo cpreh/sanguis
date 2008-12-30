@@ -143,8 +143,16 @@ sanguis::draw::sprite::speed() const
 	return speed_;
 }
 
-void sanguis::draw::sprite::update_pos(const sge::sprite::point& p)
+void sanguis::draw::sprite::update_pos(
+	sge::sprite::point const &p)
 {
 	BOOST_FOREACH(object &s, sprites)
 		s.pos() = p;
+}
+
+void sanguis::draw::sprite::transfer(
+	draw::system &sys)
+{
+	BOOST_FOREACH(object &s, sprites)
+		s.transfer(sys);
 }

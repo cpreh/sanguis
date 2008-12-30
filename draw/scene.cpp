@@ -384,7 +384,18 @@ void sanguis::draw::scene::configure_new_object(
 
 void sanguis::draw::scene::render_dead()
 {
-	// TODO
+	sge::renderer::device_ptr const rend(
+		system().renderer());
+
+	draw::system temp_sys(rend);
+	
+	BOOST_FOREACH(entity_map::reference r, dead_list)
+		r.second->transfer(
+			temp_sys);
+	
+	// TODO: turn render to texture on!
+	temp_sys.render();
+	
 	dead_list.clear();
 }
 

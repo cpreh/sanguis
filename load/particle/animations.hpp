@@ -29,6 +29,8 @@ public:
 		sge::path const &,
 		resource::context const &);
 	~animations();
+
+	void preload() const;
 private:
 	animation_container animations_;
 

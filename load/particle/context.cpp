@@ -22,3 +22,8 @@ sanguis::load::particle::context::context(
 
 sanguis::load::particle::context::~context()
 {}
+
+void sanguis::load::particle::context::preload() const
+{
+	(*this)().preload();
+}

@@ -44,6 +44,10 @@ public:
 	virtual void stop_attacking();
 	virtual void start_reloading();
 	virtual void stop_reloading();
+
+	virtual void transfer(
+		draw::system &);
+	
 	virtual ~entity();
 protected:
 	entity(

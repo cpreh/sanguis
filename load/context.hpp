@@ -34,6 +34,8 @@ public:
 
 	particle::context const &
 	particles() const;
+
+	void preload() const;
 private:
 	sge::image::loader_ptr const il;
 	sge::renderer::device_ptr const rend;

@@ -59,6 +59,8 @@ protected:
 private:
 	void update_pos(sge::sprite::point const &);
 	void update_orientation(sge::sprite::rotation_type);
+	void transfer(
+		draw::system &);
 
 	vector2         speed_,
 	                pos_;

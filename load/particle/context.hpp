@@ -29,6 +29,8 @@ private:
 		resource::context const &);
 	~context();
 
+	void preload() const;
+
 	friend class load::context;
 
 	resource::context const &ctx;
