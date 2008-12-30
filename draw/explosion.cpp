@@ -112,9 +112,7 @@ sanguis::draw::explosion::explosion(
 		env,
 		client::next_id()),
 	particles(
-		particle::point(
-			resolution().w() / 2,
-			resolution().h() / 2),
+		particle::point::null(),
 		particle::point::null(),
 		particle::depth(0),
 		particle::rotation(0),
@@ -126,6 +124,7 @@ sanguis::draw::explosion::explosion(
 	sge::renderer::screen_size_t const screen_sz(
 		resolution());
 
+	/*
 	particle::base_ptr n(
 		new particle::generator(
 			boost::bind(
@@ -133,10 +132,7 @@ sanguis::draw::explosion::explosion(
 				this),
 			sge::math::structure_cast<
 				particle::point::value_type
-			>(
-				pos - sge::sprite::point(
-					screen_sz.w() / 2,
-					screen_sz.h() / 2)),
+			>(pos),
 			static_cast<particle::time_type>(10),
 			static_cast<particle::time_type>(1),
 			1,
@@ -148,6 +144,23 @@ sanguis::draw::explosion::explosion(
 			particle::movement_type::expanding,
 			environment()
 		));
+		*/
+
+	particle::base_ptr n(
+		new particle::explosion(
+			properties_,
+			boost::bind(
+				&explosion::generate_particle,
+				this,
+				_1),
+			sge::math::structure_cast<
+				particle::point::value_type
+			>(pos), // position
+			particle::point::null(), // speed
+			static_cast<particle::depth>(0),
+			static_cast<particle::rotation>(0), // no rotation and...
+			static_cast<particle::rotation>(0), // ...no rotation speed
+			environment()));
 
 	particles.add(n);
 
@@ -219,9 +232,17 @@ sanguis::draw::explosion::generate_particle(
 	particle::properties const &prop(
 		properties_[t]);
 
+	ptr.reset(
+		new particle::object(
+			t,
+			anim,
+			boost::none,
+			environment()));
+	/*
 	if (!prop.do_fade())
 		ptr.reset(
 			new particle::object(
+				t,
 				anim,
 				boost::none,
 				environment()));
@@ -238,13 +259,17 @@ sanguis::draw::explosion::generate_particle(
 		
 		ptr.reset(
 			new particle::object(
+				t,
 				anim,
 				rng(),
 				environment()));
 	}
+	*/
 
+	/*
 	ptr->depth(
 		particle::z_ordering(t));
+		*/
 
 	return ptr;
 }

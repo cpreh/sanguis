@@ -2,6 +2,8 @@
 #define SANGUIS_DRAW_PARTICLE_OBJECT_HPP_INCLUDED
 
 #include "base.hpp"
+#include "../../particle_type.hpp"
+#include "../../diff_clock.hpp"
 #include <sge/sprite/texture_animation.hpp>
 #include <sge/sprite/intrusive_object.hpp>
 #include <sge/sprite/container.hpp>
@@ -18,6 +20,7 @@ class object : public base
 {
 	public:
 	object(
+		particle_type::type,
 		sge::sprite::animation_series const &,
 		boost::optional<time_type> fade_time,
 		draw::environment const &);
@@ -28,6 +31,7 @@ class object : public base
 		depth_type);
 	private:
 	sge::sprite::intrusive_object sprite_;
+	diff_clock clock;
 	sge::sprite::texture_animation anim;
 	boost::optional<time_type> fade_total;
 	time_type fade_remaining;

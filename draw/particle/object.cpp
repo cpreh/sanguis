@@ -1,14 +1,18 @@
 #include "object.hpp"
+#include "z_ordering.hpp"
 #include <sge/iostream.hpp>
 #include <sge/math/point_rotate.hpp>
 
 sanguis::draw::particle::object::object(
+	particle_type::type const t,
 	sge::sprite::animation_series const &images,
 	boost::optional<time_type> const fade_total,
 	draw::environment const &e)
 :
 	base(
-		point::null(),
+		point(
+			static_cast<funit>(-images.dim().w()/2),
+			static_cast<funit>(-images.dim().h()/2)),
 		point::null(),
 		depth_type(0),
 		rotation_type(0),
@@ -16,7 +20,7 @@ sanguis::draw::particle::object::object(
 		e),
 	sprite_(
 		e.system(),
-		static_cast<sge::sprite::intrusive_order>(0), // FIXME
+		z_ordering(t),
 		sge::sprite::defaults::pos_,
 		sge::sprite::defaults::texture_,
 		sge::math::structure_cast<sge::sprite::unit>(images.dim())),
@@ -25,13 +29,15 @@ sanguis::draw::particle::object::object(
 		fade_total 
 			? sge::sprite::texture_animation::loop_method::repeat
 			: sge::sprite::texture_animation::loop_method::stop_at_end,
-		sprite_),
+		sprite_,
+		clock.callback()),
 	fade_total(fade_total),
 	fade_remaining(
 		fade_total 
 			? *fade_total 
 			: static_cast<time_type>(0))
-{}
+{
+}
 
 bool sanguis::draw::particle::object::update(
 	time_type const delta,
@@ -41,10 +47,22 @@ bool sanguis::draw::particle::object::update(
 {
 	base::update(delta,p,r,d);
 
+	clock.update(delta);
 	bool const ret = anim.process();
 
+	sprite_.z() = d+base::depth();
+	sprite_.rotation(base::rot()+r);
+	sprite_.pos() = 
+		sge::math::structure_cast<sge::sprite::unit>(
+			sge::math::point_rotate(p+base::pos(),p,r+base::rot()));
+
+	return false;
+
 	if (!fade_total)
+	{
+		sge::cerr << SGE_TEXT("fading disabled, return value is ") << ret << SGE_TEXT("\n");
 		return ret;
+	}
 	
 	fade_remaining -= delta;
 	// UGLY ALERT!
