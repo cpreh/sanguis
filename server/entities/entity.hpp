@@ -13,7 +13,7 @@
 #include "../../entity_type.hpp"
 #include "../../damage_type.hpp"
 #include "../../time_type.hpp"
-#include <sge/linear_set.hpp>
+#include <sge/container/linear_set.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
 #include <boost/noncopyable.hpp>
 
@@ -123,7 +123,7 @@ private:
 	>                       perk_container;
 	perk_container          perks_;
 
-	typedef sge::linear_set<
+	typedef sge::container::linear_set<
 		entity *
 	>                       link_container;
 	link_container          links,
