@@ -9,7 +9,7 @@
 #include "../../exception.hpp"
 #include <sge/math/vec_dim.hpp>
 #include <sge/math/power.hpp>
-#include <sge/linear_set_impl.hpp>
+#include <sge/container/linear_set_impl.hpp>
 #include <sge/text.hpp>
 #include <boost/foreach.hpp>
 #include <typeinfo>
