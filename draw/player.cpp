@@ -38,7 +38,9 @@ sanguis::draw::player::player(
 		env,
 		id,
 		SGE_TEXT("player"),
-		z_ordering::model_generic),
+		z_ordering::model_generic,
+		true,
+		draw::remove_action::render_dead),
 	angle_(static_cast<funit>(0)),
 	target_angle(angle_),
 	reaper_(

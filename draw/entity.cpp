@@ -6,12 +6,6 @@
 #include <sge/time/second_f.hpp>
 #include <sge/time/resolution.hpp>
 
-void sanguis::draw::entity::update(
-	time_type const time)
-{
-	diff_clock_.update(time);
-}
-
 sanguis::entity_id
 sanguis::draw::entity::id() const
 {
@@ -20,27 +14,30 @@ sanguis::draw::entity::id() const
 
 void sanguis::draw::entity::decay()
 {
-	decay_timer.activate();
+	may_be_removed_ = true;
 	on_decay();
-}
-
-void sanguis::draw::entity::decay_time(
-	time_type const diff)
-{
-	decay_timer.interval(
-		sge::time::second_f(diff));
 }
 
 bool sanguis::draw::entity::may_be_removed() const
 {
-	return decay_timer.expired();
+	return may_be_removed_;
 }
 
+sanguis::draw::remove_action::type
+sanguis::draw::entity::remove_action() const
+{
+	return remove_action::remove;
+}
+
+void sanguis::draw::entity::on_remove()
+{}
 
 void sanguis::draw::entity::orientation(
 	sge::sprite::rotation_type)
 {
-		
+	SGE_LOG_WARNING(
+		log(),
+		sge::log::_1 << SGE_TEXT("Invalid orientation call!"));
 }
 
 void sanguis::draw::entity::speed(vector2 const &)
@@ -129,11 +126,7 @@ sanguis::draw::entity::entity(
 :
 	env_(env_),
 	id_(id_),
-	diff_clock_(),
-	decay_timer(
-		sge::time::resolution(0),
-		false,
-		diff_clock_.callback())
+	may_be_removed_(false)
 {}
 
 sanguis::draw::vector2 const

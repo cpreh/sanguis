@@ -75,6 +75,8 @@ private:
 		entity_auto_ptr,
 		messages::add const &);
 	
+	void render_dead();
+
 	draw::environment const &
 	environment();
 
@@ -105,7 +107,10 @@ private:
 		entity_id,
 		draw::entity
 	> entity_map;
-	entity_map entities;
+
+	entity_map
+		entities,
+		dead_list;
 
 	typedef boost::function<
 		void (

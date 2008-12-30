@@ -26,7 +26,7 @@ sanguis::draw::reaper::reaper(
 		SGE_TEXT("reaper"),
 		z_ordering::reaper,
 		false,
-		static_cast<funit>(1)),
+		draw::remove_action::render_dead),
 	p(p),
 	current_health(p.health()),
 	target_health(p.health()),

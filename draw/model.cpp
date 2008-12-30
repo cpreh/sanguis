@@ -21,7 +21,7 @@ sanguis::draw::model::model(
 	sge::string const &name,
 	sge::sprite::intrusive_order const order,
 	bool const show_healthbar,
-	funit const start_health)
+	draw::remove_action::type const remove_action_)
 :
 	sprite(
 		env,
@@ -30,13 +30,14 @@ sanguis::draw::model::model(
 		order),
 	attacking(false),
 	reloading(false),
-	health_(start_health),
-	max_health_(start_health),
+	health_(0),
+	max_health_(0),
 	healthbar_(
 		show_healthbar
 		? new healthbar(
 			env)
-		: 0)
+		: 0),
+	remove_action_(remove_action_)
 {
 	part_vector::size_type i(0);
 	BOOST_FOREACH(
@@ -97,7 +98,13 @@ void sanguis::draw::model::orientation(
 bool sanguis::draw::model::may_be_removed() const
 {
 	return entity::may_be_removed()
-		&& animations_ended();   
+		&& animations_ended();
+}
+
+sanguis::draw::remove_action::type
+sanguis::draw::model::remove_action() const
+{
+	return remove_action_; 
 }
 
 void sanguis::draw::model::speed(
