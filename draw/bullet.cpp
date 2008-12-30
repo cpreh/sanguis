@@ -23,7 +23,8 @@ sanguis::draw::bullet::bullet(
 		id,
 		name,
 		z_ordering::bullet,
-		false),
+		false,
+		draw::remove_action::remove),
 	origin()
 {
 	at(tail).size().w() = static_cast<unit>(3); // TODO: which value is best here?

@@ -18,5 +18,6 @@ sanguis::draw::factory::decoration(
 			load::decoration_name(
 				ptype),
 			z_ordering::decoration,
-			false));
+			false,
+			remove_action::remove));
 }

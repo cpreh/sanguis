@@ -3,6 +3,7 @@
 
 #include "sprite.hpp"
 #include "healthbar.hpp"
+#include "remove_action.hpp"
 #include "../entity_id.hpp"
 #include "../animation_type.hpp"
 #include <sge/math/vector.hpp>
@@ -27,8 +28,8 @@ public:
 		entity_id id,
 		sge::string const &name,
 		sge::sprite::intrusive_order order,
-		bool needs_healthbar = true,
-		funit start_health = static_cast<funit>(0));
+		bool needs_healthbar,
+		draw::remove_action::type);
 	~model();
 
 	funit max_health() const;
@@ -41,7 +42,12 @@ protected:
 	void orientation(
 		sge::sprite::rotation_type,
 		size_type index);
+	
 	bool may_be_removed() const;
+	
+	draw::remove_action::type
+	remove_action() const;
+
 	virtual void speed(
 		vector2 const &);
 	using sprite::speed;
@@ -77,6 +83,8 @@ private:
 	boost::scoped_ptr<
 		healthbar
 	> healthbar_;
+
+	draw::remove_action::type remove_action_;
 	
 	typedef boost::ptr_vector<
 		model_part

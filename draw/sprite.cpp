@@ -39,7 +39,6 @@ sanguis::draw::sprite::pos() const
 void sanguis::draw::sprite::update(
 	time_type const time)
 {
-	entity::update(time);
 	pos_ += time * speed();
 	update_pos(
 		sge::math::structure_cast<sge::sprite::unit>(

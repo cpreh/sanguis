@@ -3,11 +3,10 @@
 
 #include "system_fwd.hpp"
 #include "vector2.hpp"
+#include "remove_action.hpp"
 #include "../entity_id.hpp"
 #include "../weapon_type.hpp"
 #include "../time_type.hpp"
-#include "../diff_clock.hpp"
-#include <sge/time/timer.hpp>
 #include <sge/log/fwd.hpp>
 #include <sge/sprite/rotation_type.hpp>
 #include <sge/sprite/point.hpp>
@@ -23,12 +22,16 @@ class environment;
 
 class entity : boost::noncopyable {
 public:
-	virtual void update(time_type);
+	virtual void update(time_type) = 0;
 	entity_id id() const;
 	void decay();
-	void decay_time(
-		time_type);
+
 	virtual bool may_be_removed() const;
+	
+	virtual draw::remove_action::type
+	remove_action() const;
+
+	virtual void on_remove();
 	virtual void orientation(sge::sprite::rotation_type);
 	virtual void speed(vector2 const &);
 	virtual void pos(sge::sprite::point const &);
@@ -65,8 +68,7 @@ private:
 
 	draw::environment const &env_;
 	entity_id               id_;
-	diff_clock              diff_clock_;
-	sge::time::timer        decay_timer;
+	bool                    may_be_removed_;
 };
 
 }

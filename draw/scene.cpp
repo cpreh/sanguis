@@ -8,7 +8,6 @@
 #include "factory/decoration.hpp"
 #include "factory/weapon_pickup.hpp"
 #include "coord_transform.hpp"
-#include "decay_time.hpp"
 #include "log.hpp"
 #include "environment.hpp"
 #include "../messages/add.hpp"
@@ -43,6 +42,7 @@
 
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
+#include <boost/foreach.hpp>
 
 #include <utility>
 #include <typeinfo>
@@ -123,19 +123,35 @@ void sanguis::draw::scene::process_message(
 void sanguis::draw::scene::draw(
 	time_type const delta)
 {
+	time_type const real_delta =
+		paused
+		? 0
+		: delta;
+	
 	for(entity_map::iterator it(entities.begin()), next(it); it != entities.end(); it = next)
 	{
 		draw::entity &e = *it->second;
 		++next;
 
-		e.update(
-			paused
-			? 0
-			: delta);
+		e.update(real_delta);
 
 		if(e.may_be_removed())
-			entities.erase(it);
+		{
+			e.on_remove();
+			if(e.remove_action() == draw::remove_action::render_dead)
+				dead_list.transfer(
+					it,
+					entities);
+			else
+				entities.erase(it);
+		}
 	}
+
+	BOOST_FOREACH(entity_map::reference r, dead_list)
+		r.second->update(real_delta);
+	
+	if(dead_list.size() > 50)
+		render_dead();
 
 	ss.render();
 
@@ -357,8 +373,6 @@ void sanguis::draw::scene::configure_new_object(
 	//		SGE_TEXT("Object with id already in entity list!"));
 	}
 
-	draw::entity &e(*ret.first->second);
-
 	// configure the object
 	process_message(messages::max_health(m.id(), m.max_health()));
 	process_message(messages::health(m.id(), m.health()));
@@ -366,10 +380,12 @@ void sanguis::draw::scene::configure_new_object(
 	process_message(messages::resize(m.id(), m.dim()));
 	process_message(messages::rotate(m.id(), m.angle()));
 	process_message(messages::speed(m.id(), m.speed()));
+}
 
-	e.decay_time(
-		decay_time(
-			m.type()));
+void sanguis::draw::scene::render_dead()
+{
+	// TODO
+	dead_list.clear();
 }
 
 sanguis::draw::environment const &

@@ -1,8 +1,10 @@
 #include "animations.hpp"
 #include "textures.hpp"
 #include "map_get_or_create.hpp"
+#include "../log.hpp"
 #include "../../exception.hpp"
 #include <sge/time/millisecond.hpp>
+#include <sge/log/headers.hpp>
 #include <sge/fstream.hpp>
 #include <sge/sstream.hpp>
 #include <sge/text.hpp>
@@ -41,6 +43,13 @@ sanguis::load::resource::animations::do_load(
 	// look for frames file inside directory
 	if (!boost::filesystem::exists(framesfile) || !boost::filesystem::is_regular(framesfile))
 	{
+		SGE_LOG_WARNING(
+			log(),
+			sge::log::_1
+				<< SGE_TEXT("No frames file found in \"")
+				<< dir
+				<< SGE_TEXT("\". Just taking the first image."));
+
 		// there is no animation here so just take the first image you can find
 		for(sge::directory_iterator it(dir), end; it != end; ++it)
 		{
