@@ -37,7 +37,7 @@ void sanguis::server::waves::simple::process(
 {
 	diff_.update(diff);
 
-	if(!delay_timer.update_b())
+	if(!delay_timer.expired())
 		return;
 
 	if(!spawn_timer.update_b())
