@@ -38,7 +38,7 @@ sanguis::server::entities::enemies::create(
 						env,
 						messages::mu(100), // range
 						static_cast<time_type>(2), // cd
-						messages::mu(4) // damage
+						messages::mu(2) // damage
 					)),
 				1,
 				static_cast<messages::exp_type>(10)
@@ -64,9 +64,9 @@ sanguis::server::entities::enemies::create(
 				weapons::weapon_ptr(
 					new weapons::melee(
 						env,
-						messages::mu(50), // range
+						messages::mu(100), // range
 						static_cast<time_type>(1), // cd
-						messages::mu(1) // damage
+						messages::mu(4) // damage
 					)),
 				1,
 				static_cast<messages::exp_type>(5)
@@ -82,7 +82,7 @@ sanguis::server::entities::enemies::create(
 			 direction,
 			 boost::assign::map_list_of
 				(entities::property::type::health,
-				entities::property(messages::mu(30)))
+				entities::property(messages::mu(300)))
 				(entities::property::type::movement_speed,
 				entities::property(messages::mu(40))),
 			ai::ai_ptr(
@@ -92,10 +92,36 @@ sanguis::server::entities::enemies::create(
 					env,
 					messages::mu(100), // range
 					static_cast<time_type>(1), // cd
-					messages::mu(7) // damage
+					messages::mu(10) // damage
 				)),
 			 1,
-			 static_cast<messages::exp_type>(20)
+			 static_cast<messages::exp_type>(300)
+			 ));
+	case enemy_type::maggot:
+		return auto_ptr(
+			new enemy(
+			 etype,
+			 env,
+			 damage::list(messages::mu(0)),
+			 center,
+			 angle,
+			 direction,
+			 boost::assign::map_list_of
+				(entities::property::type::health,
+				entities::property(messages::mu(1)))
+				(entities::property::type::movement_speed,
+				entities::property(messages::mu(40))),
+			ai::ai_ptr(
+				new ai::simple()),
+			weapons::weapon_ptr(
+				new weapons::melee(
+				env,
+				messages::mu(100), // range
+				static_cast<time_type>(1), // cd
+				messages::mu(0.5) // damage
+				)),
+			 1,
+			 static_cast<messages::exp_type>(1)
 			 ));
 	case enemy_type::spider:
 		return auto_ptr(
