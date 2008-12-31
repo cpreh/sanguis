@@ -6,57 +6,57 @@ sanguis::server::waves::generator::generator()
 {
 	boost::assign::ptr_push_back<waves::simple>(waves)
 	(
-		static_cast<time_type>(0),
-		static_cast<time_type>(2),
+		static_cast<time_type>(60),
+		static_cast<time_type>(4),
 		30,
 		1,
 		enemy_type::spider
 	)(
 		static_cast<time_type>(0),
-		static_cast<time_type>(0),
-		50,
-		1,
+		static_cast<time_type>(.5),
+		10,
+		5,
 		enemy_type::maggot
 	)(
 		static_cast<time_type>(0),
-		static_cast<time_type>(1.5),
-		40,
+		static_cast<time_type>(3),
+		20,
 		1,
 		enemy_type::zombie01
 	)(
 		static_cast<time_type>(0),
-		static_cast<time_type>(1.5),
-		40,
+		static_cast<time_type>(2),
+		30,
 		1,
 		enemy_type::zombie00
 	)(
 		static_cast<time_type>(90),
-		static_cast<time_type>(1.5),
-		40,
+		static_cast<time_type>(2),
+		30,
 		1,
 		enemy_type::zombie01
 	)(
 		static_cast<time_type>(90),
-		static_cast<time_type>(1.5),
-		40,
+		static_cast<time_type>(3),
+		20,
 		1,
 		enemy_type::zombie00
 	)(
-		static_cast<time_type>(30),
+		static_cast<time_type>(45),
 		static_cast<time_type>(1),
-		12,
+		8,
 		1,
 		enemy_type::wolf_brown
 	)(
-		static_cast<time_type>(60),
+		static_cast<time_type>(80),
 		static_cast<time_type>(1),
-		12,
+		8,
 		1,
 		enemy_type::wolf_white
 	)(
-		static_cast<time_type>(90),
+		static_cast<time_type>(120),
 		static_cast<time_type>(1),
-		12,
+		8,
 		1,
 		enemy_type::wolf_black
 	)(

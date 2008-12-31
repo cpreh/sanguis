@@ -29,13 +29,13 @@ sanguis::draw::particle::property_container const prop_ = boost::assign::map_lis
 			sanguis::draw::funit
 		>(
 			0.03),
-		10,
+		5,
 		0,
 		0,
 		sanguis::draw::particle::align_type::random,
 		sanguis::draw::particle::properties::dispersion_range(
 			0,
-			100),
+			50),
 		sanguis::draw::particle::properties::speed_range(
 			0,
 			10),
@@ -61,7 +61,7 @@ sanguis::draw::particle::property_container const prop_ = boost::assign::map_lis
 		sanguis::draw::particle::align_type::to_center,
 		sanguis::draw::particle::properties::dispersion_range(
 			0,
-			100),
+			50),
 		sanguis::draw::particle::properties::speed_range(
 			0,
 			0),
@@ -81,7 +81,7 @@ sanguis::draw::particle::property_container const prop_ = boost::assign::map_lis
 			sanguis::draw::funit
 		>(
 			0.03),
-		9,
+		0,
 		0,
 		0,
 		sanguis::draw::particle::align_type::random,
