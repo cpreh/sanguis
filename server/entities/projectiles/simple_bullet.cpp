@@ -19,7 +19,7 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 		team_,
 		boost::assign::map_list_of
 			(property::type::health, property(messages::mu(1)))
-			(property::type::movement_speed, property(messages::mu(300))),
+			(property::type::movement_speed, property(messages::mu(500))),
 		default_dim(
 			env.load().models(),
 			SGE_TEXT("bullet")),

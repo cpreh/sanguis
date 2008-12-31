@@ -120,7 +120,8 @@ sanguis::draw::particle::base::rot_vel()
 	return rot_vel_;
 }
 
-sanguis::draw::environment const &sanguis::draw::particle::base::environment() const
+sanguis::draw::environment const &
+sanguis::draw::particle::base::environment() const
 {
 	return e;
 }

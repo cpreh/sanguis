@@ -12,15 +12,16 @@ sanguis::server::weapons::pistol::pistol(
 	time_type const cast_point,
 	unsigned const magazine_size,
 	time_type const reload_time)
-: weapon(
-	env,
-	type_,
-	1000, // FIXME
-	magazine_size,
-	base_cooldown,
-	cast_point,
-	reload_time),
-  damage(damage)
+:
+	weapon(
+		env,
+		type_,
+		1000, // FIXME
+		magazine_size,
+		base_cooldown,
+		cast_point,
+		reload_time),
+	damage(damage)
 {}
 
 void sanguis::server::weapons::pistol::do_attack(
