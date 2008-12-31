@@ -4,6 +4,7 @@
 #include "environment.hpp"
 #include "z_ordering.hpp"
 #include "../client/next_id.hpp"
+#include "../resolution.hpp"
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/scoped_target.hpp>
 #include <sge/renderer/fill_pixels.hpp>
@@ -22,9 +23,10 @@ sanguis::draw::background::background(
 		client::next_id()),
 	tex(
 		env.system().renderer()->create_texture(
-			sge::renderer::dim_type(
-				1024,
-				1024),
+			sge::math::structure_cast<
+				sge::renderer::size_type
+			>(
+				resolution()),
 			sge::renderer::color_format::rgba8,
 			sge::renderer::linear_filter,
 			sge::renderer::resource_flags::none
