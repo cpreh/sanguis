@@ -1,5 +1,6 @@
 #include "scene.hpp"
 #include "entity.hpp"
+#include "background.hpp"
 #include "factory/client.hpp"
 #include "factory/enemy.hpp"
 #include "factory/entity.hpp"
@@ -31,9 +32,11 @@
 #include "../messages/stop_reloading.hpp"
 #include "../messages/speed.hpp"
 #include "../client_messages/add.hpp"
+#include "../client/invalid_id.hpp"
 #include "../dispatch_type.hpp"
 #include "../exception.hpp"
 
+#include <sge/make_auto_ptr.hpp>
 #include <sge/iconv.hpp>
 #include <sge/text.hpp>
 #include <sge/format.hpp>
@@ -62,8 +65,19 @@ sanguis::draw::scene::scene(
 			this,
 			_1),
 		resources_,
-		system())
-{}
+		system()),
+	background_id(
+		client::invalid_id)
+{
+	/*
+	entity_auto_ptr p(
+		sge::make_auto_ptr<
+			draw::background
+		>(
+			environment()));
+	background_id = p->id();
+	insert(p);*/
+}
 
 sanguis::draw::scene::~scene()
 {}
@@ -150,10 +164,10 @@ void sanguis::draw::scene::draw(
 	BOOST_FOREACH(entity_map::reference r, dead_list)
 		r.second->update(real_delta);
 	
-	if(dead_list.size() > 50)
+	if(dead_list.size() > 5)
 		render_dead();
-
-	ss.render();
+	
+	system().render();
 
 	hud_.update(delta);
 }
@@ -393,10 +407,21 @@ void sanguis::draw::scene::render_dead()
 		r.second->transfer(
 			temp_sys);
 	
-	// TODO: turn render to texture on!
-	temp_sys.render();
+	/*
+	background().paint_dead(
+		temp_sys);*/
 	
 	dead_list.clear();
+}
+
+sanguis::draw::background &
+sanguis::draw::scene::background()
+{
+	return dynamic_cast<
+		draw::background &
+	>(
+		entity(
+			background_id));
 }
 
 sanguis::draw::environment const &

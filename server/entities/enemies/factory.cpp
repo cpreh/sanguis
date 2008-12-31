@@ -89,10 +89,10 @@ sanguis::server::entities::enemies::create(
 				new ai::simple()),
 			weapons::weapon_ptr(
 				new weapons::melee(
-				env,
-				messages::mu(50), // range
-				static_cast<time_type>(1), // cd
-				messages::mu(7) // damage
+					env,
+					messages::mu(100), // range
+					static_cast<time_type>(1), // cd
+					messages::mu(7) // damage
 				)),
 			 1,
 			 static_cast<messages::exp_type>(20)

@@ -29,6 +29,7 @@ namespace draw
 {
 
 class entity;
+class background;
 
 class scene {
 	SGE_NONCOPYABLE(scene)
@@ -77,6 +78,9 @@ private:
 	
 	void render_dead();
 
+	draw::background &
+	background();
+
 	draw::environment const &
 	environment();
 
@@ -102,6 +106,7 @@ private:
 	hud                           hud_;
 	bool                          paused;
 	draw::environment             env;
+	entity_id                     background_id;
 
 	typedef boost::ptr_map<
 		entity_id,
