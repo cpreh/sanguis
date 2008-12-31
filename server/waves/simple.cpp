@@ -5,7 +5,8 @@
 sanguis::server::waves::simple::simple(
 	time_type const delay,
 	time_type const spawn_interval,
-	unsigned const total_spawn_count,
+	unsigned const waves,
+	unsigned const spawns_per_wave,
 	enemy_type::type const etype)
 :
 	diff_(),
@@ -19,9 +20,10 @@ sanguis::server::waves::simple::simple(
 			spawn_interval),
 		true,
 		diff_.callback()),
-	total_spawn_count(total_spawn_count),
+	waves(waves),
+	spawns_per_wave(spawns_per_wave),
 	etype(etype),
-	spawn_count(0)
+	waves_spawned(0)
 {}
 
 void sanguis::server::waves::simple::process(
@@ -36,16 +38,18 @@ void sanguis::server::waves::simple::process(
 	if(!spawn_timer.update_b())
 		return;
 
-	if(spawn_count == total_spawn_count)
+	if(waves_spawned == waves)
 		return;
-	++spawn_count;
+	
+	++waves_spawned;
 
-	spawn(
-		env,
-		etype);
+	for(unsigned i = 0; i < spawns_per_wave; ++i)
+		spawn(
+			env,
+			etype);
 }
 
 bool sanguis::server::waves::simple::ended() const
 {
-	return spawn_count == total_spawn_count;
+	return waves_spawned == waves;
 }

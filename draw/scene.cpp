@@ -51,6 +51,13 @@
 #include <typeinfo>
 #include <ostream>
 
+namespace
+{
+
+unsigned const render_dead_amount = 20;
+
+}
+
 sanguis::draw::scene::scene(
 	load::context const &resources_,
 	sge::renderer::device_ptr const rend,
@@ -163,7 +170,7 @@ void sanguis::draw::scene::draw(
 	BOOST_FOREACH(entity_map::reference r, dead_list)
 		r.second->update(real_delta);
 	
-	if(dead_list.size() > 5)
+	if(dead_list.size() >= render_dead_amount)
 		render_dead();
 	
 	system().render();

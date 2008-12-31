@@ -22,7 +22,8 @@ public:
 	simple(
 		time_type delay,
 		time_type spawn_interval,
-		unsigned total_spawn_count,
+		unsigned waves,
+		unsigned spawns_per_wave,
 		enemy_type::type);
 	void process(
 		time_type diff,
@@ -32,9 +33,10 @@ private:
 	diff_clock       diff_;
 	sge::time::timer delay_timer,
 	                 spawn_timer;
-	unsigned         total_spawn_count;
+	unsigned         waves,
+	                 spawns_per_wave;
 	enemy_type::type etype;
-	unsigned         spawn_count;
+	unsigned         waves_spawned;
 };
 
 }

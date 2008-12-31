@@ -9,56 +9,67 @@ sanguis::server::waves::generator::generator()
 		static_cast<time_type>(0),
 		static_cast<time_type>(2),
 		30,
+		1,
 		enemy_type::spider
 	)(
 		static_cast<time_type>(0),
 		static_cast<time_type>(0),
 		50,
+		1,
 		enemy_type::maggot
 	)(
 		static_cast<time_type>(0),
 		static_cast<time_type>(1.5),
 		40,
+		1,
 		enemy_type::zombie01
 	)(
 		static_cast<time_type>(0),
 		static_cast<time_type>(1.5),
 		40,
+		1,
 		enemy_type::zombie00
 	)(
 		static_cast<time_type>(90),
 		static_cast<time_type>(1.5),
 		40,
+		1,
 		enemy_type::zombie01
 	)(
 		static_cast<time_type>(90),
 		static_cast<time_type>(1.5),
 		40,
+		1,
 		enemy_type::zombie00
 	)(
 		static_cast<time_type>(30),
 		static_cast<time_type>(1),
 		12,
+		1,
 		enemy_type::wolf_brown
 	)(
 		static_cast<time_type>(60),
 		static_cast<time_type>(1),
 		12,
+		1,
 		enemy_type::wolf_white
 	)(
 		static_cast<time_type>(90),
 		static_cast<time_type>(1),
 		12,
+		1,
 		enemy_type::wolf_black
 	)(
 		static_cast<time_type>(160),
 		static_cast<time_type>(0),
 		40,
+		1,
 		enemy_type::maggot
 	)(
 		static_cast<time_type>(180),
 		static_cast<time_type>(1),
 		2,
+		1,
 		enemy_type::skeleton
 	);
 }
