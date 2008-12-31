@@ -15,6 +15,7 @@ typedef messages::health_type health_type;
 typedef messages::exp_type    exp_type;
 typedef messages::level_type  level_type;
 typedef messages::string      string;
+typedef messages::circle_type circle_type;
 
 }
 }

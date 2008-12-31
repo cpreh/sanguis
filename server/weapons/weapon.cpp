@@ -2,8 +2,11 @@
 #include "delayed_attack.hpp"
 #include "log.hpp"
 #include "../entities/entity_with_weapon.hpp"
+#include "../distance.hpp"
+#include "../bounding_circle.hpp"
 #include "../../exception.hpp"
 #include <sge/time/second_f.hpp>
+#include <sge/math/circle_impl.hpp>
 #include <sge/text.hpp>
 #include <sge/log/headers.hpp>
 #include <ostream>
@@ -119,10 +122,10 @@ unsigned sanguis::server::weapons::weapon::magazine_size() const
 }
 
 bool sanguis::server::weapons::weapon::in_range(
-	entities::entity const& from,
-	pos_type const& to) const
+	entities::entity const &from,
+	pos_type const &to) const
 {
-	return (from.center() - to).length() < range();
+	return distance(from, to) - bounding_circle(from).radius() < range();
 }
 
 sanguis::server::weapons::weapon::~weapon()

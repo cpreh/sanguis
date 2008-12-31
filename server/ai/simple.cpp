@@ -1,8 +1,10 @@
 #include "simple.hpp"
 #include "../entities/entity_with_weapon.hpp"
 #include "../collision.hpp"
+#include "../distance.hpp"
 #include <sge/math/angle.hpp>
 #include <boost/foreach.hpp>
+#include <limits>
 
 sanguis::server::ai::simple::simple()
 :
@@ -31,15 +33,28 @@ void sanguis::server::ai::simple::update(
 
 	if(!target)
 	{
+		space_unit distance(
+			std::numeric_limits<
+				space_unit
+			>::max());
+
 		BOOST_FOREACH(
 			entities::entity &e,
 			entities)
 		{
-			if(!e.invulnerable() && e.team() != me.team())
-			{
-				target = me.link(e);
-				break;
-			}
+			if(e.invulnerable() || e.team() == me.team())
+				continue;
+
+			space_unit const new_distance(
+				server::distance(
+					me,
+					e));
+
+			if(new_distance >= distance)
+				continue;
+
+			distance = new_distance;
+			target = me.link(e);
 		}
 
 		if(!target)
