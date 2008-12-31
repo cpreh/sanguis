@@ -172,7 +172,7 @@ bool sanguis::draw::model_part::try_animation(
 		log(),
 		sge::log::_1 << SGE_TEXT("that worked"));
 			*/
-	
+	ended = false;
 	state.reset(
 		new model_part_state(
 			*info,
