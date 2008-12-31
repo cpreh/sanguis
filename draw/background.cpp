@@ -6,9 +6,12 @@
 #include "../client/next_id.hpp"
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/scoped_target.hpp>
+#include <sge/renderer/fill_pixels.hpp>
+#include <sge/renderer/scoped_texture_lock.hpp>
+#include <sge/renderer/colors.hpp>
+#include <sge/renderer/texture_filter.hpp>
 #include <sge/texture/part.hpp>
 #include <sge/texture/part_raw.hpp>
-#include <sge/renderer/texture_filter.hpp>
 #include <sge/make_shared_ptr.hpp>
 
 sanguis::draw::background::background(
@@ -36,7 +39,15 @@ sanguis::draw::background::background(
 			>(
 				tex)),
 		sge::sprite::texture_dim)
-{}
+{
+	sge::renderer::fill_pixels(
+		sge::renderer::scoped_texture_lock(
+			sge::renderer::make_scoped_lock(
+				tex,
+				sge::renderer::lock_flags::writeonly))
+		.value(),
+		sge::renderer::colors::transparent());
+}
 
 void sanguis::draw::background::paint_dead(
 	draw::system &sys)

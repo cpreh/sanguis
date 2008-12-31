@@ -69,14 +69,13 @@ sanguis::draw::scene::scene(
 	background_id(
 		client::invalid_id)
 {
-	/*
 	entity_auto_ptr p(
 		sge::make_auto_ptr<
 			draw::background
 		>(
 			environment()));
 	background_id = p->id();
-	insert(p);*/
+	insert(p);
 }
 
 sanguis::draw::scene::~scene()
@@ -407,9 +406,8 @@ void sanguis::draw::scene::render_dead()
 		r.second->transfer(
 			temp_sys);
 	
-	/*
 	background().paint_dead(
-		temp_sys);*/
+		temp_sys);
 	
 	dead_list.clear();
 }
