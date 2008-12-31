@@ -119,7 +119,8 @@ sanguis::draw::explosion::explosion(
 		particle::rotation(0),
 		environment()),
 	properties_(
-		prop_)
+		prop_),
+	ended(false)
 {
 	sge::renderer::screen_size_t const screen_sz(
 		resolution());
@@ -195,7 +196,7 @@ sanguis::draw::explosion::~explosion()
 void sanguis::draw::explosion::update(
 	time_type const delta)
 {
-	particles.update(
+	ended = particles.update(
 		delta,
 		particle::point::null(),
 		static_cast<particle::rotation>(0),
@@ -268,5 +269,5 @@ sanguis::draw::explosion::generate_particle(
 
 bool sanguis::draw::explosion::may_be_removed() const
 {
-	return false; // TODO
+	return ended;
 }

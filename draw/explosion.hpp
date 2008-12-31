@@ -44,6 +44,7 @@ private:
 
 	particle::container particles;
 	particle::property_map properties_;
+	bool ended;
 };
 
 }
