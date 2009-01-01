@@ -25,7 +25,7 @@ sanguis::server::entities::projectiles::projectile::ptype() const
 
 sanguis::server::entities::projectiles::projectile::projectile(
 	projectile_type::type const nptype,
-	environment const &env,
+	server::environment const &env,
 	pos_type const& center,
 	space_unit const angle,
 	team::type const team_,

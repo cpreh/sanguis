@@ -15,7 +15,7 @@ class decoration : public entity
 {
 public:
 	decoration(
-		environment const &,
+		server::environment const &,
 		pos_type const &pos,
 		space_unit angle,
 		decoration_type::type);

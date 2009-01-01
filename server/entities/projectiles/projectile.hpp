@@ -29,7 +29,7 @@ protected:
 
 	projectile(
 		projectile_type::type,
-		environment const &,
+		server::environment const &,
 		pos_type const &center,
 		space_unit angle,
 		team::type team,

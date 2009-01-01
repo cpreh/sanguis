@@ -17,7 +17,7 @@ class enemy : public entity_with_ai {
 public:	
 	enemy(
 		enemy_type::type,
-		environment const &,
+		server::environment const &,
 		armor_array const &,
 		messages::pos_type const &center,
 		messages::space_unit angle,

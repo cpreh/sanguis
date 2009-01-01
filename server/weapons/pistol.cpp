@@ -5,7 +5,7 @@
 #include "../entities/projectiles/simple_bullet.hpp"
 
 sanguis::server::weapons::pistol::pistol(
-	environment const &env,
+	server::environment const &env,
 	weapon_type::type const type_,
 	time_type const base_cooldown,
 	space_unit const damage,
@@ -30,7 +30,7 @@ void sanguis::server::weapons::pistol::do_attack(
 	insert(
 		entities::auto_ptr(
 			new entities::projectiles::simple_bullet(
-				get_environment(),
+				environment(),
 				a.spawn_point(),
 				a.angle(),
 				a.team(),

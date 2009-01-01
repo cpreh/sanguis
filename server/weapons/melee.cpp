@@ -5,7 +5,7 @@
 #include "../entities/projectiles/melee.hpp"
 
 sanguis::server::weapons::melee::melee(
-	environment const &env,
+	server::environment const &env,
 	space_unit const range,
 	time_type const base_cooldown,
 	space_unit const damage)
@@ -29,7 +29,7 @@ void sanguis::server::weapons::melee::do_attack(
 	insert(
 		entities::auto_ptr(
 			new entities::projectiles::melee(
-				get_environment(),
+				environment(),
 				a.dest(),
 				a.team(),
 				damage)));
@@ -38,7 +38,7 @@ void sanguis::server::weapons::melee::do_attack(
 void sanguis::server::weapons::melee::on_init_attack(
 	entities::entity_with_weapon &owner)
 {
-	owner.get_property(
+	owner.property(
 		entities::property::type::movement_speed)
 			.restrict(
 				messages::mu(0));
@@ -47,7 +47,7 @@ void sanguis::server::weapons::melee::on_init_attack(
 void sanguis::server::weapons::melee::on_castpoint(
 	entities::entity_with_weapon &owner)
 {
-	owner.get_property(
+	owner.property(
 		entities::property::type::movement_speed)
 			.unrestrict();
 }

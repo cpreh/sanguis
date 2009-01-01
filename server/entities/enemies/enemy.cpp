@@ -11,7 +11,7 @@
 
 sanguis::server::entities::enemies::enemy::enemy(
 	enemy_type::type const etype_,
-	environment const &env,
+	server::environment const &env,
 	armor_array const &armor,
 	messages::pos_type const &center,
 	messages::space_unit const angle,
@@ -64,7 +64,7 @@ sanguis::server::entities::enemies::enemy::exp() const
 
 void sanguis::server::entities::enemies::enemy::on_die()
 {
-	get_environment().exp(exp());
+	environment().exp(exp());
 
 	typedef std::tr1::uniform_int<
 		unsigned
@@ -83,5 +83,5 @@ void sanguis::server::entities::enemies::enemy::on_die()
 		));
 
 	if(rng() <= spawn_chance)
-		spawn_pickup(center(), get_environment());
+		spawn_pickup(center(), environment());
 }

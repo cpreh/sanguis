@@ -28,7 +28,7 @@ void sanguis::server::ai::simple::update(
 		*me_);
 
 	entities::property &speed(
-		me.get_property(
+		me.property(
 			entities::property::type::movement_speed));
 
 	if(!target)

@@ -4,7 +4,7 @@
 void sanguis::server::perks::ims::do_apply(
 	entities::entity &e)
 {
-	e.get_property(
+	e.property(
 		entities::property::type::movement_speed)
 		.multiply_max(factor());
 }

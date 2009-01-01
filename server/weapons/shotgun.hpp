@@ -15,7 +15,7 @@ class delayed_attack;
 class shotgun : public weapon {
 public:
 	shotgun(
-		environment const &,
+		server::environment const &,
 		weapon_type::type,
 		time_type base_cooldown,
 		space_unit spread_radius,

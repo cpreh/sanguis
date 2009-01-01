@@ -5,7 +5,7 @@
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::projectiles::rocket::rocket(
-	environment const &env,
+	server::environment const &env,
 	pos_type const &center,
 	space_unit const angle,
 	team::type const team_,
@@ -19,8 +19,14 @@ sanguis::server::entities::projectiles::rocket::rocket(
 		angle,
 		team_,
 		boost::assign::map_list_of
-			(property::type::health, property(messages::mu(1)))
-			(property::type::movement_speed, property(messages::mu(300))),
+			(
+				entities::property::type::health,
+				entities::property(messages::mu(1))
+			)
+			(
+				entities::property::type::movement_speed,
+				entities::property(messages::mu(300))
+			),
 		default_dim(
 			env.load().models(),
 			SGE_TEXT("rocket")),
@@ -48,7 +54,7 @@ void sanguis::server::entities::projectiles::rocket::do_die()
 	insert(
 		auto_ptr(
 			new aoe_damage(
-				get_environment(),
+				environment(),
 				center(),
 				team(),
 				aoe,

@@ -15,7 +15,7 @@ namespace projectiles
 class simple_bullet : public projectile {
 public:
 	simple_bullet(
-		environment const &,
+		server::environment const &,
 		pos_type const &center,
 		space_unit angle,
 		team::type team,

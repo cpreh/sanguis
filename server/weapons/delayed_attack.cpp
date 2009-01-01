@@ -5,10 +5,11 @@ sanguis::server::weapons::delayed_attack::delayed_attack(
 	space_unit const angle_,
 	team::type const team_,
 	pos_type const &dest_)
-: spawn_point_(spawn_point_),
-  angle_(angle_),
-  team_(team_),
-  dest_(dest_)
+:
+	spawn_point_(spawn_point_),
+	angle_(angle_),
+	team_(team_),
+	dest_(dest_)
 {}
 
 sanguis::server::pos_type const &

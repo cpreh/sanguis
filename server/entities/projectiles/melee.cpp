@@ -3,7 +3,7 @@
 #include <cassert>
 
 sanguis::server::entities::projectiles::melee::melee(
-	environment const &env,
+	server::environment const &env,
 	messages::pos_type const& center,
 	team::type const team_,
 	messages::space_unit const damage)
@@ -15,8 +15,14 @@ sanguis::server::entities::projectiles::melee::melee(
 		messages::mu(0), // angle doesn't matter here
 		team_,
 		boost::assign::map_list_of
-			(property::type::health, property(messages::mu(1)))
-			(property::type::movement_speed, property(messages::mu(0))),
+			(
+				entities::property::type::health,
+				entities::property(messages::mu(1))
+			)
+			(
+				entities::property::type::movement_speed,
+				entities::property(messages::mu(0))
+			),
 		dim_type(1, 1),
 		static_cast<time_type>(1)), // short lifetime
 	damage(damage)

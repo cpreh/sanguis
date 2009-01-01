@@ -3,6 +3,7 @@
 #include "../weapons/factory.hpp"
 #include "../../truncation_check_cast.hpp"
 #include "../../messages/give_weapon.hpp"
+#include "../../messages/change_weapon.hpp"
 #include "../../exception.hpp"
 #include <sge/text.hpp>
 #include <limits>
@@ -19,31 +20,34 @@ sanguis::server::pos_type const target_undefined(
 sanguis::server::entities::entity_with_weapon::entity_with_weapon(
 	base_parameters const &param,
 	weapons::weapon_ptr start_weapon)
-: entity(param),
-  weapon_(weapon_type::none),
-  target_(target_undefined),
-  attacking(false),
-  reloading(false)
+:
+	entity(param),
+	weapon_(weapon_type::none),
+	target_(target_undefined),
+	attacking(false),
+	reloading(false)
 {
 	if(!start_weapon.get())
 		return;
 	
-	weapon_type::type const wtype(
-		start_weapon->type());
 	add_weapon(
 		start_weapon);
-	change_weapon(
-		wtype);
 }
 
 void sanguis::server::entities::entity_with_weapon::update(
-	const time_type time,
+	time_type const time,
 	container &entities)
 {
 	entity::update(
 		time,
 		entities);
-	
+
+	// change to the first weapon if we have any
+	if(weapon_ == weapon_type::none && !weapons_.empty())
+		change_weapon(
+			weapons_.begin()->second->type());
+
+
 	if(has_weapon())
 	{
 		active_weapon().update(
@@ -95,12 +99,20 @@ void sanguis::server::entities::entity_with_weapon::update(
 	}
 }
 
-void sanguis::server::entities::entity_with_weapon::change_weapon(const weapon_type::type nweapon)
+void sanguis::server::entities::entity_with_weapon::change_weapon(
+	weapon_type::type const nweapon)
 {
 	if (nweapon != weapon_type::none && !weapons_.count(nweapon))
-		throw exception(SGE_TEXT("tried to change to non-owned weapon"));
-
+		throw exception(
+			SGE_TEXT("tried to change to non-owned weapon"));
+	
 	weapon_ = nweapon;
+
+	send(
+		messages::auto_ptr(
+			new messages::change_weapon(
+				id(),
+				weapon_)));
 }
 
 void sanguis::server::entities::entity_with_weapon::add_weapon(
@@ -113,7 +125,7 @@ void sanguis::server::entities::entity_with_weapon::add_weapon(
 		return add_weapon(
 			weapons::create(
 				weapon_type::dual_pistol,
-				get_environment()));
+				environment()));
 
 	if (weapons_.count(wt))
 		return;
@@ -121,7 +133,7 @@ void sanguis::server::entities::entity_with_weapon::add_weapon(
 	if (!weapons_.insert(wt,ptr).second)
 		throw exception(SGE_TEXT("couldn't insert weapon"));
 
-	get_environment().send(
+	send(
 		messages::auto_ptr(
 			new messages::give_weapon(
 				id(),

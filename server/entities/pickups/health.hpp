@@ -15,7 +15,7 @@ namespace pickups
 class health : public pickup {
 public:
 	health(
-		environment const &,
+		server::environment const &,
 		messages::pos_type const &center,
 		team::type team,
 		messages::space_unit amount);

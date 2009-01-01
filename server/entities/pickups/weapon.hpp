@@ -16,7 +16,7 @@ namespace pickups
 class weapon : public pickup {
 public:
 	weapon(
-		environment const &,
+		server::environment const &,
 		messages::pos_type const &center,
 		team::type team,
 		weapon_type::type);

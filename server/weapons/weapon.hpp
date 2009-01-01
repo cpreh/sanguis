@@ -44,7 +44,7 @@ public:
 	virtual ~weapon();
 protected:
 	weapon(
-		environment const &,
+		server::environment const &,
 		weapon_type::type,
 		space_unit range,
 		unsigned magazine_size,
@@ -60,7 +60,8 @@ protected:
 	entities::entity &insert(entities::auto_ptr);
 	void send(
 		messages::auto_ptr);
-	environment const &get_environment() const;
+	server::environment const &
+	environment() const;
 private:
 	virtual void on_init_attack(
 		entities::entity_with_weapon &owner);
@@ -79,7 +80,7 @@ private:
 	};
 
 	diff_clock              diff;
-	environment             env_;
+	server::environment     env_;
 	weapon_type::type       type_;
 	space_unit              range_;
 	unsigned                magazine_used,

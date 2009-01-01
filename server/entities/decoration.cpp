@@ -7,7 +7,7 @@
 #include "../../load/context.hpp"
 
 sanguis::server::entities::decoration::decoration(
-	environment const &env,
+	server::environment const &env,
 	pos_type const &pos,
 	space_unit const angle,
 	decoration_type::type const dtype)

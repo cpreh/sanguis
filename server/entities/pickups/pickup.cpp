@@ -20,7 +20,7 @@ sanguis::server::entities::pickups::pickup::ptype() const
 
 sanguis::server::entities::pickups::pickup::pickup(
 	pickup_type::type const ptype_,
-	environment const &env,
+	server::environment const &env,
 	pos_type const &center,
 	team::type const team_,
 	optional_dim const &dim_)

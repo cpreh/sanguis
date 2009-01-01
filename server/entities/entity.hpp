@@ -66,9 +66,12 @@ public:
 	void health(health_type);
 	health_type max_health() const;
 
-	property const &get_property(
+	entities::property const &
+	property(
 		property::type::enum_type) const;
-	property &get_property(
+	
+	entities::property &
+	property(
 		property::type::enum_type);
 
 	virtual exp_type exp() const;
@@ -92,7 +95,8 @@ public:
 	virtual ~entity();
 protected:
 	void send(messages::auto_ptr);
-	environment const &get_environment() const;
+	server::environment const &
+	environment() const;
 	entity &insert(auto_ptr); 
 
 	virtual void on_die();
@@ -105,7 +109,7 @@ private:
 		entity *) const;
 	
 	entity_id const         id_;
-	environment             env_;
+	server::environment     env_;
 	armor_array             armor_;
 	pos_type                center_;
 	space_unit              angle_,

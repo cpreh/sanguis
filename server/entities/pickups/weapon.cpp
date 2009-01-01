@@ -8,7 +8,7 @@
 #include "../../../messages/add_weapon_pickup.hpp"
 
 sanguis::server::entities::pickups::weapon::weapon(
-	environment const &env,
+	server::environment const &env,
 	messages::pos_type const &center,
 	team::type const team_,
 	weapon_type::type const weapon_type_)
@@ -43,5 +43,5 @@ void sanguis::server::entities::pickups::weapon::do_pickup(
 	receiver.add_weapon(
 		weapons::create(
 			weapon_type_,
-			get_environment()));
+			environment()));
 }

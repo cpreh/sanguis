@@ -15,7 +15,7 @@ namespace projectiles
 class rocket : public projectile {
 public:
 	rocket(
-		environment const &,
+		server::environment const &,
 		pos_type const &center,
 		space_unit angle,
 		team::type team,

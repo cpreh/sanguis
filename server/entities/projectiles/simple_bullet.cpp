@@ -5,7 +5,7 @@
 #include <cassert>
 
 sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
-	environment const &env,
+	server::environment const &env,
 	messages::pos_type const &center,
 	messages::space_unit const angle,
 	team::type const team_,
@@ -18,8 +18,14 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 		angle,
 		team_,
 		boost::assign::map_list_of
-			(property::type::health, property(messages::mu(1)))
-			(property::type::movement_speed, property(messages::mu(500))),
+			(
+				entities::property::type::health,
+				entities::property(messages::mu(1))
+			)
+			(
+				entities::property::type::movement_speed,
+				entities::property(messages::mu(500))
+			),
 		default_dim(
 			env.load().models(),
 			SGE_TEXT("bullet")),

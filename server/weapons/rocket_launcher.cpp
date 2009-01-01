@@ -3,7 +3,7 @@
 #include "../entities/projectiles/rocket.hpp"
 
 sanguis::server::weapons::rocket_launcher::rocket_launcher(
-	environment const &env,
+	server::environment const &env,
 	weapon_type::type const type_,
 	time_type const base_cooldown,
 	space_unit const rocket_damage,
@@ -30,7 +30,7 @@ void sanguis::server::weapons::rocket_launcher::do_attack(
 	insert(
 		entities::auto_ptr(
 			new entities::projectiles::rocket(
-				get_environment(),
+				environment(),
 				a.spawn_point(),
 				a.angle(),
 				a.team(),

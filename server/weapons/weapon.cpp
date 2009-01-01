@@ -132,7 +132,7 @@ sanguis::server::weapons::weapon::~weapon()
 {}
 
 sanguis::server::weapons::weapon::weapon(
-	environment const &env_,
+	server::environment const &env_,
 	weapon_type::type const type_,
 	space_unit const range_,
 	unsigned const magazine_size_,
@@ -185,7 +185,7 @@ void sanguis::server::weapons::weapon::send(
 }
 
 sanguis::server::environment const &
-sanguis::server::weapons::weapon::get_environment() const
+sanguis::server::weapons::weapon::environment() const
 {
 	return env_;
 }

@@ -96,7 +96,8 @@ sanguis::server::entities::entity::abs_speed() const
 sanguis::server::space_unit
 sanguis::server::entities::entity::speed() const
 {
-	return get_property(property::type::movement_speed).current();
+	return property(
+		property::type::movement_speed).current();
 }
 
 sanguis::server::space_unit
@@ -168,31 +169,31 @@ void sanguis::server::entities::entity::aggressive(
 sanguis::server::health_type
 sanguis::server::entities::entity::health() const
 {
-	return get_property(property::type::health).current();
+	return property(entities::property::type::health).current();
 }
 
 void sanguis::server::entities::entity::health(
 	health_type const nhealth)
 {
-	get_property(property::type::health).current(nhealth);
+	property(entities::property::type::health).current(nhealth);
 }
 
 sanguis::server::health_type
 sanguis::server::entities::entity::max_health() const
 {
-	return get_property(property::type::health).max();
+	return property(entities::property::type::health).max();
 }
 
 sanguis::server::entities::property const &
-sanguis::server::entities::entity::get_property(
+sanguis::server::entities::entity::property(
 	property::type::enum_type const e) const
 {
-	return const_cast<entity &>(*this).get_property(e);
+	return const_cast<entity &>(*this).property(e);
 }
 
 sanguis::server::entities::property &
-sanguis::server::entities::entity::get_property(
-	property::type::enum_type const e)
+sanguis::server::entities::entity::property(
+	entities::property::type::enum_type const e)
 {
 	return properties[e];
 	// TODO: should this signal an error because it might be
@@ -305,13 +306,13 @@ sanguis::server::entities::entity::~entity()
 void sanguis::server::entities::entity::send(
 	messages::auto_ptr message)
 {
-	get_environment().send(
+	environment().send(
 		messages::auto_ptr(
 			message));
 }
 
 sanguis::server::environment const &
-sanguis::server::entities::entity::get_environment() const
+sanguis::server::entities::entity::environment() const
 {
 	return env_;
 }
@@ -320,7 +321,7 @@ sanguis::server::entities::entity &
 sanguis::server::entities::entity::insert(
 	auto_ptr e)
 {
-	return get_environment().insert(e);
+	return environment().insert(e);
 }
 
 void sanguis::server::entities::entity::on_die()

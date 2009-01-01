@@ -14,10 +14,10 @@ sanguis::server::auras::freeze::freeze(
 void sanguis::server::auras::freeze::do_effect(
 	entities::entity &target)
 {
-	target.get_property(
+	target.property(
 		entities::property::type::movement_speed).max(
 			messages::mu(0));
-	target.get_property(
+	target.property(
 		entities::property::type::attack_speed).max(
 			messages::mu(0));
 }

@@ -15,7 +15,7 @@ namespace entities
 class player : public entity_with_weapon {
 public:
 	player(
-		environment const &,
+		server::environment const &,
 		armor_array const &,
 		net::id_type net_id,
 		pos_type const &center,

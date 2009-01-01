@@ -144,12 +144,10 @@ sanguis::server::states::running::insert_entity(
 {
 	entities_.push_back(e);
 	entities::entity &ref = entities_.back();
-	ref.update(time_type(),entities_);
 
 	if(ref.type() == entity_type::indeterminate)
 		return ref;
 	
-	// TODO: sanity check the message (needs smart pointer as well)
 	send(ref.add_message());
 
 	return ref;

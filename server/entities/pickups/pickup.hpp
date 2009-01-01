@@ -23,7 +23,7 @@ protected:
 
 	pickup(
 		pickup_type::type,
-		environment const &,
+		server::environment const &,
 		pos_type const &center,
 		team::type team,
 		optional_dim const &dim

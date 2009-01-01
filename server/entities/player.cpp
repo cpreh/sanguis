@@ -7,7 +7,7 @@
 #include <sge/console/console.hpp>
 
 sanguis::server::entities::player::player(
-	environment const &env,
+	server::environment const &env,
 	armor_array const &armor,
 	net::id_type const net_id_,
 	pos_type const &center_,
@@ -55,7 +55,7 @@ void sanguis::server::entities::player::exp(
 	{
 		level_delta_ += new_level - old_level;
 		level_ = new_level;
-		get_environment().level(*this, old_level);
+		environment().level(*this, old_level);
 	}
 }
 

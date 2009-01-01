@@ -15,7 +15,7 @@ namespace projectiles
 class melee : public projectile {
 public:
 	melee(
-		environment const &,
+		server::environment const &,
 		pos_type const& center,
 		team::type team,
 		space_unit damage);

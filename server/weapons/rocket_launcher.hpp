@@ -16,7 +16,7 @@ class delayed_attack;
 class rocket_launcher : public weapon {
 public:
 	rocket_launcher(
-		environment const &,
+		server::environment const &,
 		weapon_type::type,
 		time_type base_cooldown,
 		space_unit rocket_damage,

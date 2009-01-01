@@ -23,7 +23,6 @@
 #include "../../messages/player_unpause.hpp"
 #include "../../messages/give_weapon.hpp"
 #include "../../messages/speed.hpp"
-#include "../../messages/change_weapon.hpp"
 #include "../../messages/pause.hpp"
 #include "../../exception.hpp"
 
@@ -86,11 +85,6 @@ sanguis::server::states::unpaused::operator()(
 
 	player_.change_weapon(type);
 
-	send(
-		messages::auto_ptr(
-			new messages::change_weapon(
-				player_.id(),
-				e.weapon())));
 	return discard_event();
 }
 
@@ -179,10 +173,12 @@ sanguis::server::states::unpaused::operator()(
 	entities::player &player_(*it->second);
 
 	if (e.dir().is_null())
-		player_.get_property(entities::property::type::movement_speed).current(messages::mu(0));
+		player_.property(
+			entities::property::type::movement_speed).current(messages::mu(0));
 	else
 	{
-		player_.get_property(entities::property::type::movement_speed).current_to_max();
+		player_.property(
+			entities::property::type::movement_speed).current_to_max();
 		player_.direction(*sge::math::angle_to<messages::space_unit>(e.dir()));
 	}
 

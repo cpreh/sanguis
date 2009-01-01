@@ -16,7 +16,7 @@ class delayed_attack;
 class melee : public weapon {
 public:
 	melee(
-		environment const &,
+		server::environment const &,
 		space_unit range,
 		time_type base_cooldown,
 		space_unit damage);

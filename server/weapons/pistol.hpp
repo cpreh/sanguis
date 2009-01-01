@@ -16,7 +16,7 @@ class delayed_attack;
 class pistol : public weapon {
 public:
 	pistol(
-		environment const &,
+		server::environment const &,
 		weapon_type::type,
 		time_type base_cooldown,
 		space_unit damage,

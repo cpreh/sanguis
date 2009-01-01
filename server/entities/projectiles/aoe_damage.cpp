@@ -5,7 +5,7 @@
 #include <limits>
 
 sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
-	environment const &env,
+	server::environment const &env,
 	pos_type const &center,
 	team::type const team_,
 	space_unit const radius,
@@ -21,7 +21,10 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 		messages::mu(0),
 		team_,
 		boost::assign::map_list_of
-			(property::type::health, property(messages::mu(1))),
+			(	
+				entities::property::type::health,
+				entities::property(messages::mu(1))
+			),
 		dim_type(
 			radius * messages::mu(2),
 			radius * messages::mu(2)),
