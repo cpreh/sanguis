@@ -17,9 +17,10 @@ void sanguis::draw::hud::experience(
 	experience_ = nexperience;
 }
 
-void sanguis::draw::hud::level_up()
+void sanguis::draw::hud::level(
+	messages::level_type const nlevel)
 {
-	++level_;
+	level_ = nlevel;
 }
 
 void sanguis::draw::hud::update(

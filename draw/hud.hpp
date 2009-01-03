@@ -18,7 +18,8 @@ public:
 		sge::font::font &);
 	void experience(
 		messages::exp_type);
-	void level_up();
+	void level(
+		messages::level_type);
 	void update(
 		time_type);
 private:

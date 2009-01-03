@@ -288,9 +288,9 @@ void sanguis::draw::scene::operator()(
 }
 
 void sanguis::draw::scene::operator()(
-	messages::level_up const &)
+	messages::level_up const &m)
 {
-	hud_.level_up();
+	hud_.level(m.level());
 }
 
 void sanguis::draw::scene::operator()(
