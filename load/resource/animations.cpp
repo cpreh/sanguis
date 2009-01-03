@@ -136,9 +136,10 @@ sanguis::load::resource::animations::load_without_frames_file(
 	if(first_file == sge::filesystem::directory_iterator())
 		throw exception(dir.string() + SGE_TEXT(" is empty!"));
 	
-	// only warn if the directory contains more than one file
-	// FIXME: boost filesystem::directory_iterator is so broken, so we can't copy and modify it
-	if(sge::filesystem::next_file(sge::filesystem::first_file(dir)) != sge::filesystem::directory_iterator())
+	boost::filesystem::path const first_path(
+		*first_file);
+
+	if(sge::filesystem::next_file(first_file) != sge::filesystem::directory_iterator())
 		SGE_LOG_WARNING(
 			log(),
 			sge::log::_1
@@ -152,7 +153,7 @@ sanguis::load::resource::animations::load_without_frames_file(
 		sge::sprite::animation_entity(
 			sge::time::millisecond(
 				static_cast<sge::time::unit>(1)),
-			load_texture(*first_file)));
+			load_texture(first_path)));
 	return ret; // TODO: can we do this with boost::assign?
 }
 
