@@ -49,9 +49,14 @@ bool sanguis::draw::particle::object::update(
 
 	sprite_.z() = d+base::depth();
 	sprite_.rotation(base::rot()+r);
-	sprite_.pos() = 
-		sge::math::structure_cast<sge::sprite::unit>(
-			sge::math::point_rotate(p+base::pos(),p,r+base::rot()));
+	sprite_.center( 
+		sge::math::structure_cast<
+			sge::sprite::unit
+		>(
+			sge::math::point_rotate(
+				p + base::pos(),
+				p,
+				r + base::rot())));
 
 	clock.update(delta);
 

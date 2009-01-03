@@ -106,11 +106,12 @@ sanguis::draw::particle::property_container const prop_ = boost::assign::map_lis
 
 sanguis::draw::explosion::explosion(
 	draw::environment const &env,
-	sge::sprite::point const &pos)
+	sge::sprite::point const &pos_)
 :
 	entity(
 		env,
 		client::next_id()),
+	pos_(pos_),
 	particles(
 		particle::point::null(),
 		particle::point::null(),
@@ -154,9 +155,10 @@ sanguis::draw::explosion::explosion(
 				&explosion::generate_particle,
 				this,
 				_1),
-			sge::math::structure_cast<
-				particle::point::value_type
-			>(pos), // position
+			particle::point::null(), // pos
+			//sge::math::structure_cast<
+			//	particle::point::value_type
+			//>(pos), // position
 			particle::point::null(), // speed
 			static_cast<particle::depth>(0),
 			static_cast<particle::rotation>(0), // no rotation and...
@@ -198,7 +200,10 @@ void sanguis::draw::explosion::update(
 {
 	ended = particles.update(
 		delta,
-		particle::point::null(),
+		sge::math::structure_cast<
+			particle::point::value_type
+		>(pos_),
+		//particle::point::null(),
 		static_cast<particle::rotation>(0),
 		static_cast<particle::depth>(0));
 }

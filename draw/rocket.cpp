@@ -1,6 +1,7 @@
 #include "rocket.hpp"
 #include "explosion.hpp"
 #include "environment.hpp"
+#include <sge/make_auto_ptr.hpp>
 
 sanguis::draw::rocket::rocket(
 	draw::environment const &env,
@@ -16,10 +17,14 @@ sanguis::draw::rocket::rocket(
 void sanguis::draw::rocket::on_decay()
 {
 	entity_auto_ptr explo(
-		new explosion(
+		sge::make_auto_ptr<
+			explosion
+		>(
 			environment(),
 			pos()));
 	
 	environment().insert()(
 		explo);	
+	
+	model::on_decay();
 }

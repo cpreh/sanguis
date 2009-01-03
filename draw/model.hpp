@@ -57,6 +57,10 @@ protected:
 		sprite_part_index const &) const;
 	bool dead() const;
 	bool walking() const;
+
+	bool has_health() const;
+
+	virtual void on_decay();
 private:
 	void health(funit);
 	void max_health(funit);

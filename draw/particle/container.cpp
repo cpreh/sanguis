@@ -44,12 +44,12 @@ bool sanguis::draw::particle::container::update(
 	rotation_type const r,
 	depth_type const d)
 {
-	base::update(delta,p,r,d);
+	base::update(delta, p, r, d);
 
 	point const thispos = sge::math::point_rotate(
-		p+base::pos(),
+		p + base::pos(),
 		p,
-		r+base::rot());
+		r + base::rot());
 
 	for (children_container::iterator i = children().begin(); 
 	     i != children().end(); 
@@ -57,9 +57,9 @@ bool sanguis::draw::particle::container::update(
 	{
 		if (i->update(
 		    	delta,
-					thispos,
-					r+base::rot(),
-					d+base::depth()))
+			thispos,
+			r + base::rot(),
+			d + base::depth()))
 		{
 			i = children().erase(i);
 			continue;

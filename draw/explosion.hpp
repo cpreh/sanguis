@@ -42,6 +42,7 @@ private:
 	
 	bool may_be_removed() const;
 
+	sge::sprite::point pos_;
 	particle::container particles;
 	particle::property_map properties_;
 	bool ended;

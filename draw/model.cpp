@@ -12,6 +12,7 @@
 #include "../exception.hpp"
 #include <sge/log/headers.hpp>
 #include <sge/text.hpp>
+#include <sge/make_auto_ptr.hpp>
 #include <boost/foreach.hpp>
 #include <ostream>
 
@@ -134,6 +135,25 @@ bool sanguis::draw::model::dead() const
 bool sanguis::draw::model::walking() const
 {
 	return !speed().is_null();
+}
+
+bool sanguis::draw::model::has_health() const
+{
+	return max_health() > 0;
+}
+
+void sanguis::draw::model::on_decay()
+{
+	/*
+	if(!has_health())
+		return;
+	
+	entity_auto_ptr blood_(
+		sge::make_auto_ptr<
+			blood
+		>(
+			environment(),
+			pos()));*/
 }
 
 void sanguis::draw::model::health(

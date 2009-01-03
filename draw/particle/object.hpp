@@ -2,10 +2,10 @@
 #define SANGUIS_DRAW_PARTICLE_OBJECT_HPP_INCLUDED
 
 #include "base.hpp"
+#include "../object.hpp"
 #include "../../particle_type.hpp"
 #include "../../diff_clock.hpp"
 #include <sge/sprite/texture_animation.hpp>
-#include <sge/sprite/intrusive_object.hpp>
 #include <sge/sprite/container.hpp>
 #include <boost/optional.hpp>
 
@@ -30,7 +30,7 @@ class object : public base
 		rotation_type,
 		depth_type);
 	private:
-	sge::sprite::intrusive_object sprite_;
+	draw::object sprite_;
 	diff_clock clock;
 	sge::sprite::texture_animation anim;
 	boost::optional<time_type> fade_total;
