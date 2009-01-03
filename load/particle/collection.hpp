@@ -2,7 +2,7 @@
 #define SANGUIS_LOAD_PARTICLE_COLLECTION_HPP_INCLUDED
 
 #include "../../particle_type.hpp"
-#include <sge/path.hpp>
+#include <sge/filesystem/path.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
 #include <boost/noncopyable.hpp>
 
@@ -27,7 +27,7 @@ public:
 		particle_type::type) const;
 	
 	collection(
-		sge::path const &,
+		sge::filesystem::path const &,
 		resource::context const &);
 	~collection();
 

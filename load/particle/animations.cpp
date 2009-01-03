@@ -3,6 +3,8 @@
 #include "animation.hpp"
 #include "../log.hpp"
 #include "../../exception.hpp"
+#include <sge/filesystem/directory_iterator.hpp>
+#include <sge/filesystem/is_directory.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/text.hpp>
 #include <sge/auto_ptr.hpp>
@@ -16,15 +18,15 @@ sanguis::load::particle::animations::random() const
 }
 
 sanguis::load::particle::animations::animations(
-	sge::path const &p,
+	sge::filesystem::path const &p,
 	resource::context const &ctx)
 {
 	for(
-		sge::directory_iterator it(p), end;
+		sge::filesystem::directory_iterator it(p), end;
 		it != end;
 		++it)
 	{
-		if(!boost::filesystem::is_directory(*it))
+		if(!sge::filesystem::is_directory(*it))
 		{
 			SGE_LOG_WARNING(
 				log(),

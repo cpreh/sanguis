@@ -2,18 +2,20 @@
 #include "../../exception.hpp"
 #include "../log.hpp"
 #include <sge/text.hpp>
+#include <sge/filesystem/directory_iterator.hpp>
+#include <sge/filesystem/is_directory.hpp>
+#include <sge/filesystem/basename.hpp>
 #include <sge/log/headers.hpp>
-#include <boost/filesystem/convenience.hpp>
 #include <ostream>
 #include <utility>
 
 sanguis::load::model::model::model(
-	sge::path const &path,
+	sge::filesystem::path const &path,
 	resource::context const &ctx)
 {
-	for(sge::directory_iterator beg(path), end; beg != end; ++beg)
+	for(sge::filesystem::directory_iterator beg(path), end; beg != end; ++beg)
 	{
-		if(!boost::filesystem::is_directory(*beg))
+		if(!sge::filesystem::is_directory(*beg))
 		{
 			SGE_LOG_WARNING(
 				log(),
@@ -25,7 +27,7 @@ sanguis::load::model::model::model(
 		
 		if(parts.insert(
 			std::make_pair(
-				boost::filesystem::basename(*beg),
+				sge::filesystem::basename(*beg),
 				part(
 					*beg,
 					ctx)))

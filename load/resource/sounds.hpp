@@ -6,7 +6,7 @@
 #include <sge/audio/pool_fwd.hpp>
 #include <sge/audio/player_fwd.hpp>
 #include <sge/audio/file_fwd.hpp>
-#include <sge/path.hpp>
+#include <sge/filesystem/path.hpp>
 #include <boost/noncopyable.hpp>
 #include <map>
 
@@ -24,7 +24,7 @@ class sounds : boost::noncopyable {
 public:
 	sound_collection const &
 	load(
-		sge::path const &) const;
+		sge::filesystem::path const &) const;
 	
 	sge::audio::sound_ptr const
 	make(
@@ -34,7 +34,7 @@ public:
 private:
 	sound_collection const
 	do_load(
-		sge::path const &) const;
+		sge::filesystem::path const &) const;
 
 	sounds(
 		sge::audio::multi_loader &,
@@ -44,7 +44,7 @@ private:
 	friend class context;
 
 	typedef std::map<
-		sge::path,
+		sge::filesystem::path,
 		sound_collection
 	> sound_map;
 

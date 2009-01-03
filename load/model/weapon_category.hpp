@@ -4,7 +4,7 @@
 #include "animation.hpp"
 #include "base_animation_not_found.hpp"
 #include "../../animation_type.hpp"
-#include <sge/path.hpp>
+#include <sge/filesystem/path.hpp>
 #include <map>
 
 namespace sanguis
@@ -24,10 +24,10 @@ public:
 	operator[](
 		animation_type::type) const;
 private:
-	sge::path path;
+	sge::filesystem::path path;
 	
 	weapon_category(
-		sge::path const &,
+		sge::filesystem::path const &,
 		resource::context const &);
 
 	friend class part;

@@ -8,13 +8,14 @@
 #include <sge/texture/default_creator_impl.hpp>
 #include <sge/texture/no_fragmented.hpp>
 #include <sge/renderer/texture_filter.hpp>
+#include <sge/filesystem/directory_iterator.hpp>
+#include <sge/filesystem/extension.hpp>
+#include <sge/filesystem/is_regular.hpp>
 #include <sge/image/loader.hpp>
 #include <sge/text.hpp>
 #include <sge/fstream.hpp>
 #include <sge/string.hpp>
-#include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/trim.hpp>
-#include <boost/filesystem/operations.hpp>
 #include <boost/bind.hpp>
 
 sge::texture::const_part_ptr const
@@ -49,7 +50,7 @@ sanguis::load::resource::textures::do_load(
 
 sge::texture::const_part_ptr const
 sanguis::load::resource::textures::do_load_inner(
-	sge::path const &p) const
+	sge::filesystem::path const &p) const
 {
 	return sge::texture::add(
 		texman,
@@ -71,10 +72,10 @@ sanguis::load::resource::textures::textures(
 	il(il)
 {
 	// look for .tex files
-	for (boost::filesystem::basic_directory_iterator<sge::path> i(sanguis::media_path()),end; i != end; ++i)
+	for (sge::filesystem::directory_iterator i(sanguis::media_path()), end; i != end; ++i)
 	{
-		sge::path const &p = i->path();
-		if (!boost::filesystem::is_regular(p) || !boost::algorithm::ends_with(p.leaf(),SGE_TEXT(".tex")))
+		sge::filesystem::path const &p = i->path();
+		if (!sge::filesystem::is_regular(p) || sge::filesystem::extension(p) != SGE_TEXT(".tex"))
 			continue;
 		
 		// and parse line by line

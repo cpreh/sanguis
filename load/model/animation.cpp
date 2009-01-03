@@ -5,7 +5,7 @@
 #include <sge/make_shared_ptr.hpp>
 
 sanguis::load::model::animation::animation(
-	sge::path const &path,
+	sge::filesystem::path const &path,
 	load::resource::context const &ctx)
 :
 	path(path),

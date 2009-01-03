@@ -2,7 +2,7 @@
 #define SANGUIS_LOAD_PARTICLE_ANIMATIONS_HPP_INCLUDED
 
 #include "animation_container.hpp"
-#include <sge/path.hpp>
+#include <sge/filesystem/path.hpp>
 #include <sge/scoped_ptr.hpp>
 #include <boost/noncopyable.hpp>
 
@@ -26,7 +26,7 @@ public:
 	random() const;
 
 	animations(
-		sge::path const &,
+		sge::filesystem::path const &,
 		resource::context const &);
 	~animations();
 

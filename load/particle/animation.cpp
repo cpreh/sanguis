@@ -5,7 +5,7 @@
 #include <sge/make_auto_ptr.hpp>
 
 sanguis::load::particle::animation::animation(
-	sge::path const &path,
+	sge::filesystem::path const &path,
 	resource::context const &ctx)
 :
 	path(path),

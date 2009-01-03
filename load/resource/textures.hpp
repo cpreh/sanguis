@@ -6,7 +6,7 @@
 #include <sge/texture/manager.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image/loader_fwd.hpp>
-#include <sge/path.hpp>
+#include <sge/filesystem/path.hpp>
 #include <boost/noncopyable.hpp>
 #include <map>
 
@@ -34,7 +34,7 @@ private:
 
 	sge::texture::const_part_ptr const
 	do_load_inner(
-		sge::path const &) const;
+		sge::filesystem::path const &) const;
 
 	textures(
 		sge::renderer::device_ptr,

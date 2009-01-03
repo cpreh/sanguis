@@ -23,7 +23,7 @@ sanguis::load::model::animation_sound::operator[](
 }
 
 sanguis::load::model::animation_sound::animation_sound(
-	sge::path const &path,
+	sge::filesystem::path const &path,
 	resource::context const &ctx)
 {
 	typedef boost::array<
@@ -41,7 +41,7 @@ sanguis::load::model::animation_sound::animation_sound(
 	    it != animation_sounds.end();
 	    ++it)
 	{
-		sge::path const sound_path(path / *it);
+		sge::filesystem::path const sound_path(path / *it);
 		
 		try
 		{

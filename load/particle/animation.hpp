@@ -2,7 +2,7 @@
 #define SANGUIS_LOAD_PARTICLE_ANIMATION_HPP_INCLUDED
 
 #include <sge/sprite/animation_series_fwd.hpp>
-#include <sge/path.hpp>
+#include <sge/filesystem/path.hpp>
 #include <sge/scoped_ptr.hpp>
 #include <boost/noncopyable.hpp>
 
@@ -23,11 +23,11 @@ public:
 	get() const;
 
 	animation(
-		sge::path const &,
+		sge::filesystem::path const &,
 		resource::context const &);
 	~animation();
 private:
-	sge::path const path;
+	sge::filesystem::path const path;
 	resource::context const &ctx;
 
 	mutable sge::scoped_ptr<

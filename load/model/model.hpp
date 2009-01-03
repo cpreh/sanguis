@@ -2,7 +2,7 @@
 #define SANGUIS_LOAD_MODEL_MODEL_HPP_INCLUDED
 
 #include "part.hpp"
-#include <sge/path.hpp>
+#include <sge/filesystem/path.hpp>
 #include <sge/string.hpp>
 #include <map>
 
@@ -32,7 +32,7 @@ public:
 	size_type size() const;
 private:
 	model(
-		sge::path const &,
+		sge::filesystem::path const &,
 		resource::context const &);
 
 	friend class collection;

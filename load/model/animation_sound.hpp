@@ -4,7 +4,7 @@
 #include "conditional_sound.hpp"
 #include "../../animation_sound_type.hpp"
 #include <sge/audio/sound_fwd.hpp>
-#include <sge/path.hpp>
+#include <sge/filesystem/path.hpp>
 #include <map>
 
 namespace sanguis
@@ -25,7 +25,7 @@ public:
 		animation_sound_type::type) const;
 private:
 	animation_sound(
-		sge::path const &,
+		sge::filesystem::path const &,
 		resource::context const &);
 	
 	friend class animation;

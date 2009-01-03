@@ -1,12 +1,13 @@
 #include "part.hpp"
 #include "../../exception.hpp"
 #include <sge/string.hpp>
+#include <sge/filesystem/exists.hpp>
 #include <boost/array.hpp>
 #include <utility>
 #include <iterator>
 
 sanguis::load::model::part::part(
-	sge::path const &path,
+	sge::filesystem::path const &path,
 	resource::context const &ctx)
 :
 	path(path)
@@ -30,8 +31,8 @@ sanguis::load::model::part::part(
 	    it != weapon_types.end();
 	    ++it)
 	{
-		sge::path const weapon_path(path / *it);
-		if(!boost::filesystem::exists(weapon_path))
+		sge::filesystem::path const weapon_path(path / *it);
+		if(!sge::filesystem::exists(weapon_path))
 			continue;
 
 		if(categories.insert(

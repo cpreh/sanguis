@@ -1,6 +1,7 @@
 #include "collection.hpp"
 #include "../../media_path.hpp"
 #include "../../exception.hpp"
+#include <sge/filesystem/exists.hpp>
 #include <utility>
 
 sanguis::load::model::model const &
@@ -10,10 +11,10 @@ sanguis::load::model::collection::operator[](
 	model_map::const_iterator it(models.find(name));
 	if(it == models.end())
 	{
-		sge::path const path(
+		sge::filesystem::path const path(
 			media_path() / name);
 		
-		if(!boost::filesystem::exists(path))
+		if(!sge::filesystem::exists(path))
 			throw exception(
 				SGE_TEXT("Model ")
 				+ name

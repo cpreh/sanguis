@@ -1,6 +1,7 @@
 #include "weapon_category.hpp"
 #include "base_animation_not_found.hpp"
 #include "../../exception.hpp"
+#include <sge/filesystem/exists.hpp>
 #include <sge/string.hpp>
 #include <sge/text.hpp>
 #include <boost/array.hpp>
@@ -8,7 +9,7 @@
 #include <iterator>
 
 sanguis::load::model::weapon_category::weapon_category(
-	sge::path const &path,
+	sge::filesystem::path const &path,
 	resource::context const &ctx)
 :
 	path(path)
@@ -31,8 +32,8 @@ sanguis::load::model::weapon_category::weapon_category(
 	    it != animation_types.end();
 	    ++it)
 	{
-		sge::path const animation_path(path / *it);
-		if(!boost::filesystem::exists(animation_path))
+		sge::filesystem::path const animation_path(path / *it);
+		if(!sge::filesystem::exists(animation_path))
 			continue;
 		
 		if(animations.insert(
