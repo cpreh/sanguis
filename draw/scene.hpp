@@ -59,6 +59,7 @@ public:
 	void operator()(messages::change_weapon const &);
 	void operator()(messages::experience const &);
 	void operator()(messages::health const &);
+	void operator()(messages::level_up const &);
 	void operator()(messages::max_health const &);
 	void operator()(messages::move const &);
 	void operator()(messages::remove const &);

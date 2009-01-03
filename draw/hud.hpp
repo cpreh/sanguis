@@ -18,11 +18,13 @@ public:
 		sge::font::font &);
 	void experience(
 		messages::exp_type);
+	void level_up();
 	void update(
 		time_type);
 private:
 	sge::font::font           &font;
 	messages::exp_type        experience_;
+	messages::level_type      level_;
 	sge::time::frames_counter frames_counter;
 };
 

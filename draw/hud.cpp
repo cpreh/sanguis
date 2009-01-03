@@ -5,14 +5,21 @@
 
 sanguis::draw::hud::hud(
 	sge::font::font &font)
-: font(font),
-  experience_(0)
+:
+	font(font),
+	experience_(0),
+	level_(0)
 {}
 
 void sanguis::draw::hud::experience(
 	messages::exp_type const nexperience)
 {
 	experience_ = nexperience;
+}
+
+void sanguis::draw::hud::level_up()
+{
+	++level_;
 }
 
 void sanguis::draw::hud::update(
@@ -22,8 +29,9 @@ void sanguis::draw::hud::update(
 
 	font.draw_text((
 		sge::format(
-			SGE_TEXT("exp: %1%, fps: %2%"))
+			SGE_TEXT("exp: %1%, level: %2%, fps: %3%"))
 			% experience_
+			% level_
 			% frames_counter.frames_str())
 			.str(),
 		sge::font::pos(0, 0),

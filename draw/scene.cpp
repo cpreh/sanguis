@@ -21,6 +21,7 @@
 #include "../messages/change_weapon.hpp"
 #include "../messages/experience.hpp"
 #include "../messages/health.hpp"
+#include "../messages/level_up.hpp"
 #include "../messages/max_health.hpp"
 #include "../messages/move.hpp"
 #include "../messages/remove.hpp"
@@ -102,6 +103,7 @@ void sanguis::draw::scene::process_message(
 			messages::change_weapon,
 			messages::experience,
 			messages::health,
+			messages::level_up,
 			messages::max_health,
 			messages::move,
 			messages::remove,
@@ -283,6 +285,12 @@ void sanguis::draw::scene::operator()(
 	messages::health const &m)
 {
 	entity(m.id()).health(m.value());
+}
+
+void sanguis::draw::scene::operator()(
+	messages::level_up const &)
+{
+	hud_.level_up();
 }
 
 void sanguis::draw::scene::operator()(
