@@ -286,18 +286,9 @@ sanguis::server::states::running::operator()(
 				new_player)));
 
 	// TODO: some defaults here
-	/*p.add_weapon(
-		weapons::create(
-			weapon_type::melee,
-			get_environment()));*/
 	p.add_weapon(
 		weapons::create(
 			weapon_type::pistol,
-			get_environment()));
-
-	p.add_weapon(
-		weapons::create(
-			weapon_type::rocket_launcher,
 			get_environment()));
 
 	// send start experience
