@@ -38,7 +38,7 @@ sanguis::draw::particle::property_container const prop_ = boost::assign::map_lis
 			50),
 		sanguis::draw::particle::properties::speed_range(
 			0,
-			10),
+			0),
 		sanguis::draw::particle::properties::rot_speed_range(
 			0,
 			10),
@@ -54,24 +54,24 @@ sanguis::draw::particle::property_container const prop_ = boost::assign::map_lis
 		static_cast<
 			sanguis::draw::funit
 		>(
-			0.03),
-		8,
+			0.04),
+		9,
 		0,
 		0,
 		sanguis::draw::particle::align_type::to_center,
 		sanguis::draw::particle::properties::dispersion_range(
 			0,
-			50),
+			80),
 		sanguis::draw::particle::properties::speed_range(
 			0,
-			0),
+			10),
 		sanguis::draw::particle::properties::rot_speed_range(
 			0,
-			1),
+			0),
 		true,
 		sanguis::draw::particle::properties::fade_range(
-			4,
-			6),
+			1,
+			4),
 		sanguis::draw::particle::movement_type::expanding)
 )
 (
