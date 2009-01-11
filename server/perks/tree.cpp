@@ -26,6 +26,8 @@ sanguis::server::perks::tree::tree()
 			perk_type::size,
 			true))
 {
+	impl.push_back(
+		perk_type::ims);
 }
 
 sanguis::server::perks::tree::~tree()
