@@ -3,6 +3,7 @@
 
 #include "entity_with_weapon.hpp"
 #include "../perks/tree.hpp"
+#include "../perks/list.hpp"
 #include "../../messages/types.hpp"
 #include "../../net/types.hpp"
 #include "../../perk_type.hpp"
@@ -39,6 +40,9 @@ public:
 	
 	void add_perk(
 		perks::auto_ptr);
+	
+	perks::list const
+	available_perks() const;
 private:
 	net::id_type const net_id_;
 	string       const name_;

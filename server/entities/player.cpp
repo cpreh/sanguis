@@ -101,3 +101,9 @@ sanguis::server::entities::player::add_perk(
 		p);
 	--skill_points_;
 }
+
+sanguis::server::perks::list const
+sanguis::server::entities::player::available_perks() const
+{
+	return perk_tree_.choosables();
+}

@@ -11,6 +11,7 @@
 #include "../perks/factory.hpp"
 #include "../perks/perk.hpp"
 #include "../log.hpp"
+#include "../send_available_perks.hpp"
 #include "../../messages/assign_id.hpp"
 #include "../../messages/client_info.hpp"
 #include "../../messages/connect.hpp"
@@ -317,6 +318,10 @@ sanguis::server::states::running::operator()(
 			new messages::level_up(
 				p.id(),
 				p.level())));
+	
+	send_available_perks(
+		p,
+		send);
 
 	BOOST_FOREACH(entities::entity &e,entities_)
 	{
@@ -369,7 +374,11 @@ sanguis::server::states::running::operator()(
 	player_.add_perk(
 		perks::create(
 			perk));
-
+	
+	send_available_perks(
+		player_,
+		send);
+	
 	return discard_event();
 }
 
