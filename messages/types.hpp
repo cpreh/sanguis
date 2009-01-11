@@ -27,7 +27,6 @@ typedef boost::uint32_t size_type;
 typedef space_unit health_type;
 typedef boost::uint32_t exp_type;
 typedef boost::uint32_t level_type;
-typedef boost::uint32_t enum_type;
 
 string host_to_net(const sge::string &s);
 sge::string net_to_host(const string &s);

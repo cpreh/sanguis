@@ -3,6 +3,7 @@
 
 #include "entity_message.hpp"
 #include "types.hpp"
+#include "enum_type.hpp"
 #include <boost/serialization/access.hpp>
 
 namespace sanguis

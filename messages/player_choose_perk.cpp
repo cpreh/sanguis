@@ -9,10 +9,11 @@ sanguis::messages::player_choose_perk::player_choose_perk()
 {}
 
 sanguis::messages::player_choose_perk::player_choose_perk(
-	const entity_id id,
-	const enum_type perk_)
-: entity_message(id),
-  perk_(perk_)
+	entity_id const id,
+	enum_type const perk_)
+:
+	entity_message(id),
+	perk_(perk_)
 {}
 
 sanguis::messages::enum_type

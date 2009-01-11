@@ -13,6 +13,7 @@ class add_decoration;
 class add_projectile;
 class add_weapon_pickup;
 class assign_id;
+class available_perks;
 class base;
 class change_weapon;
 class client_info;
