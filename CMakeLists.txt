@@ -50,6 +50,8 @@ IF (${CMAKE_COMPILER_IS_GNUCXX})
 	"-Wextra -Wconversion -Wfloat-equal -Wredundant-decls"
 	"-Wstrict-null-sentinel -Winit-self -Woverloaded-virtual"
 	"-Wold-style-cast -Wnon-virtual-dtor -Wctor-dtor-privacy -Wsign-promo")
+
+#	ADD_DEFINITIONS(-D BOOST_FILESYSTEM_NO_DEPRECATED)
 ENDIF ()
 
 ADD_DEFINITIONS(${SGE_CFLAGS})

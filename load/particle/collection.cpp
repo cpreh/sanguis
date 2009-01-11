@@ -4,11 +4,11 @@
 #include "../../exception.hpp"
 #include <sge/filesystem/directory_iterator.hpp>
 #include <sge/filesystem/is_directory.hpp>
+#include <sge/filesystem/stem.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/text.hpp>
 #include <sge/auto_ptr.hpp>
 #include <sge/make_auto_ptr.hpp>
-#include <boost/filesystem/convenience.hpp>
 
 namespace
 {
@@ -62,7 +62,7 @@ sanguis::load::particle::collection::collection(
 		
 		animations_.insert(
 			from_name(
-				boost::filesystem::basename(
+				sge::filesystem::stem(
 					*it)),
 			anim);
 	}

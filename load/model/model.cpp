@@ -4,7 +4,7 @@
 #include <sge/text.hpp>
 #include <sge/filesystem/directory_iterator.hpp>
 #include <sge/filesystem/is_directory.hpp>
-#include <sge/filesystem/basename.hpp>
+#include <sge/filesystem/stem.hpp>
 #include <sge/log/headers.hpp>
 #include <ostream>
 #include <utility>
@@ -27,7 +27,7 @@ sanguis::load::model::model::model(
 		
 		if(parts.insert(
 			std::make_pair(
-				sge::filesystem::basename(*beg),
+				sge::filesystem::stem(*beg),
 				part(
 					*beg,
 					ctx)))

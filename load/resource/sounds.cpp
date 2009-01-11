@@ -6,7 +6,7 @@
 #include <sge/filesystem/exists.hpp>
 #include <sge/filesystem/is_directory.hpp>
 #include <sge/filesystem/directory_iterator.hpp>
-#include <sge/filesystem/basename.hpp>
+#include <sge/filesystem/stem.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/audio/player.hpp>
 #include <sge/audio/pool.hpp>
@@ -60,10 +60,10 @@ sanguis::load::resource::sounds::do_load(
 			continue;
 		}
 
-		if(sge::filesystem::basename(*it) == SGE_TEXT("probability"))
+		if(sge::filesystem::stem(*it) == SGE_TEXT("probability"))
 		{
 			sge::string const dirname(
-				sge::filesystem::basename(
+				sge::filesystem::stem(
 					dir));
 
 			sge::ifstream file(*it);
