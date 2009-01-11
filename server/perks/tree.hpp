@@ -27,11 +27,12 @@ public:
 	
 	list const
 	choosables() const;
-private:
+
+	// public for helper functions
 	typedef sge::container::tree<
 		status
 	> tree_type;
-
+private:
 	tree_type impl;
 };
 

@@ -13,6 +13,9 @@ namespace perks
 struct status {
 	status(
 		perk_type::type);
+	status(
+		perk_type::type,
+		bool chosen);
 	
 	bool chosen() const;
 	void choose();
