@@ -55,7 +55,7 @@ sanguis::load::resource::sounds::do_load(
 			SGE_LOG_WARNING(
 				log(),
 				sge::log::_1
-					<< *it
+					<< it->path().string()
 					<< SGE_TEXT(" is a directory!"));
 			continue;
 		}

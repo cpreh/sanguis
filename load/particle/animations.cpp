@@ -31,7 +31,7 @@ sanguis::load::particle::animations::animations(
 			SGE_LOG_WARNING(
 				log(),
 				sge::log::_1
-					<< *it
+					<< it->path().string()
 					<< SGE_TEXT(" is not a directory!"));
 			continue;
 		}

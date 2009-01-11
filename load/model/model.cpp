@@ -20,7 +20,7 @@ sanguis::load::model::model::model(
 			SGE_LOG_WARNING(
 				log(),
 				sge::log::_1
-					<< *beg
+					<< beg->path().string()
 					<< SGE_TEXT(" is not a directory!"));
 			continue;
 		}
@@ -34,7 +34,7 @@ sanguis::load::model::model::model(
 		.second == false)
 			throw exception(
 				SGE_TEXT("Double insert in model::model: ")
-				+ beg->string());
+				+ beg->path().string());
 	}
 }
 
