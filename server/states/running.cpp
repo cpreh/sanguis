@@ -353,7 +353,7 @@ sanguis::server::states::running::operator()(
 	
 	entities::player &player_(
 		player(id));
-
+	
 	if(!player_.perk_choosable(perk))
 	{
 		SGE_LOG_WARNING(
@@ -361,7 +361,8 @@ sanguis::server::states::running::operator()(
 			sge::log::_1
 				<< SGE_TEXT("Player with id ")
 				<< id
-				<< SGE_TEXT(" tried to take an invalid perk!"));
+				<< SGE_TEXT(" tried to take an invalid perk")
+				<< SGE_TEXT(" or has no skillpoints left!"));
 		return discard_event();
 	}
 

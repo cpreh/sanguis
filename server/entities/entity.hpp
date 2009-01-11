@@ -83,7 +83,7 @@ public:
 		time_type,
 		container &entities);
 
-	void add_perk(
+	virtual void add_perk(
 		perks::auto_ptr); 
 	
 	virtual messages::auto_ptr add_message() const;

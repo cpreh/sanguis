@@ -36,12 +36,16 @@ public:
 
 	bool perk_choosable(
 		perk_type::type) const;
+	
+	void add_perk(
+		perks::auto_ptr);
 private:
 	net::id_type const net_id_;
 	string       const name_;
 	exp_type           exp_;
 	level_type         level_,
 	                   level_delta_;
+	unsigned           skill_points_;
 	perks::tree        perk_tree_;
 };
 

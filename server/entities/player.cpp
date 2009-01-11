@@ -1,6 +1,7 @@
 #include "player.hpp"
 #include "base_parameters.hpp"
 #include "../get_dim.hpp"
+#include "../perks/perk.hpp"
 #include "../../load/context.hpp"
 #include "../level_calculate.hpp"
 #include <sge/math/vec_dim.hpp>
@@ -35,7 +36,8 @@ sanguis::server::entities::player::player(
 	name_(name_),
 	exp_(static_cast<exp_type>(0)),
 	level_(static_cast<level_type>(0)),
-	level_delta_(static_cast<level_type>(0))
+	level_delta_(static_cast<level_type>(0)),
+	skill_points_(0)
 {}
 
 sanguis::server::exp_type
@@ -55,6 +57,7 @@ void sanguis::server::entities::player::exp(
 	{
 		level_delta_ += new_level - old_level;
 		level_ = new_level;
+		++skill_points_;
 		environment().level(*this, old_level);
 	}
 }
@@ -87,5 +90,14 @@ bool
 sanguis::server::entities::player::perk_choosable(
 	perk_type::type const p) const
 {
-	return perk_tree_.choosable(p);
+	return skill_points_ && perk_tree_.choosable(p);
+}
+
+void
+sanguis::server::entities::player::add_perk(
+	perks::auto_ptr p)
+{
+	entity::add_perk(
+		p);
+	--skill_points_;
 }
