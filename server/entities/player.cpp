@@ -82,3 +82,10 @@ sanguis::server::entities::player::level_delta() const
 {
 	return level_delta_;
 }
+
+bool
+sanguis::server::entities::player::perk_choosable(
+	perk_type::type const p) const
+{
+	return perk_tree_.choosable(p);
+}

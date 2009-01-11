@@ -71,7 +71,7 @@ sanguis::server::states::paused::operator()(
 	net::id_type,
 	messages::player_unpause const &)
 {
-	context<running>().get_environment().send(
+	context<running>().environment().send(
 		messages::auto_ptr(
 			new messages::unpause()));
 	return transit<unpaused>();

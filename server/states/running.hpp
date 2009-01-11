@@ -43,8 +43,8 @@ public:
 
 	typedef std::map<
 		net::id_type,
-		server::entities::player*>
-	player_map;
+		server::entities::player *
+	> player_map;
 
 	running(
 		my_context);
@@ -59,6 +59,10 @@ public:
 	player_map &players();
 	player_map const &players() const;
 
+	entities::player &
+	player(
+		net::id_type);
+
 	void divide_exp(
 		messages::exp_type);
 
@@ -72,7 +76,7 @@ public:
 	void process(
 		time_type);
 
-	environment const get_environment();
+	server::environment const environment();
 
 	boost::statechart::result react(
 		message_event const &);

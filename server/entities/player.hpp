@@ -2,8 +2,10 @@
 #define SANGUIS_SERVER_ENTITIES_PLAYER_HPP_INCLUDED
 
 #include "entity_with_weapon.hpp"
+#include "../perks/tree.hpp"
 #include "../../messages/types.hpp"
 #include "../../net/types.hpp"
+#include "../../perk_type.hpp"
 
 namespace sanguis
 {
@@ -31,12 +33,16 @@ public:
 	void exp(exp_type);
 	level_type level() const;
 	level_type level_delta() const;
+
+	bool perk_choosable(
+		perk_type::type) const;
 private:
 	net::id_type const net_id_;
 	string       const name_;
 	exp_type           exp_;
 	level_type         level_,
 	                   level_delta_;
+	perks::tree        perk_tree_;
 };
 
 }

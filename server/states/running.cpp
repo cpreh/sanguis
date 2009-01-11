@@ -20,6 +20,7 @@
 #include "../../resolution.hpp"
 #include "../../dispatch_type.hpp"
 #include "../../random.hpp"
+#include "../../exception.hpp"
 #include <sge/iconv.hpp>
 #include <sge/math/constants.hpp>
 #include <sge/log/headers.hpp>
@@ -117,7 +118,7 @@ void sanguis::server::states::running::create_decorations()
 		entities_.push_back(
 			entities::auto_ptr(
 				new entities::decoration(
-					get_environment(),
+					environment(),
 					position,
 					angle,
 					type)));
@@ -165,6 +166,19 @@ sanguis::server::states::running::players() const
 	return players_;
 }
 
+sanguis::server::entities::player &
+sanguis::server::states::running::player(
+	net::id_type const id)
+{
+	player_map::iterator const it(
+		players().find(
+			id));
+	if(it == players().end())
+		throw exception(
+			SGE_TEXT("Player not found!"));
+	return *it->second;
+}
+
 void sanguis::server::states::running::divide_exp(
 	messages::exp_type const exp)
 {
@@ -207,13 +221,13 @@ void sanguis::server::states::running::process(
 {
 	wave_generator.process(
 		time,
-		get_environment());
+		environment());
 }
 
 sanguis::server::environment const
-sanguis::server::states::running::get_environment()
+sanguis::server::states::running::environment()
 {
-	return environment(
+	return server::environment(
 		send,
 		boost::bind(&running::insert_entity, this, _1),
 		boost::bind(&running::divide_exp, this, _1),
@@ -256,7 +270,7 @@ sanguis::server::states::running::operator()(
 	// 3) add the player
 	entities::auto_ptr new_player(
 		new entities::player(
-			get_environment(),
+			environment(),
 			damage::list(messages::mu(0)),
 			net_id,
 			messages::pos_type(
@@ -289,7 +303,7 @@ sanguis::server::states::running::operator()(
 	p.add_weapon(
 		weapons::create(
 			weapon_type::pistol,
-			get_environment()));
+			environment()));
 
 	// send start experience
 	// no message_converter here because it operates on a _specific_ entity type
@@ -331,12 +345,29 @@ sanguis::server::states::running::operator()(
 	net::id_type const id,
 	messages::player_choose_perk const &p)
 {
-	// TODO: check if the player really can do this!
+	perk_type::type const perk(
+		static_cast<
+			perk_type::type
+		>(
+			p.perk()));
 	
-	players()[id]->add_perk(
+	entities::player &player_(
+		player(id));
+
+	if(!player_.perk_choosable(perk))
+	{
+		SGE_LOG_WARNING(
+			log(),
+			sge::log::_1
+				<< SGE_TEXT("Player with id ")
+				<< id
+				<< SGE_TEXT(" tried to take an invalid perk!"));
+		return discard_event();
+	}
+
+	player_.add_perk(
 		perks::create(
-			static_cast<perk_type::type>(
-				p.perk())));
+			perk));
 
 	return discard_event();
 }

@@ -330,15 +330,15 @@ sanguis::server::states::unpaused::react(
 }
 
 sanguis::server::environment const
-sanguis::server::states::unpaused::get_environment()
+sanguis::server::states::unpaused::environment()
 {
-	return context<running>().get_environment();
+	return context<running>().environment();
 }
 
 void sanguis::server::states::unpaused::send(
 	messages::auto_ptr m)
 {
-	get_environment().send(m);
+	environment().send(m);
 }
 
 sge::log::logger &

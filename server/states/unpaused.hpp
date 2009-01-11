@@ -26,18 +26,24 @@ class unpaused
 {
 	public:
 	typedef boost::mpl::list<
-		boost::statechart::custom_reaction<tick_event>,
-		boost::statechart::custom_reaction<message_event> 
-		> reactions;
+		boost::statechart::custom_reaction<
+			tick_event
+		>,
+		boost::statechart::custom_reaction<
+			message_event
+		> 
+	> reactions;
 	
 	unpaused();
 
 	void add_enemy();
 
-	// reactions
-	boost::statechart::result react(
+	boost::statechart::result
+	react(
 		tick_event const &);
-	boost::statechart::result react(
+
+	boost::statechart::result
+	react(
 		message_event const &);
 
 	boost::statechart::result
@@ -55,14 +61,37 @@ class unpaused
 		net::id_type,
 		messages::player_start_shooting const &);
 	
-	boost::statechart::result operator()(const net::id_type,const messages::player_stop_shooting &);
-	boost::statechart::result operator()(const net::id_type,const messages::player_change_weapon &);
-	boost::statechart::result operator()(const net::id_type,const messages::player_unpause &);
-	boost::statechart::result operator()(const net::id_type,const messages::player_pause &);
-	boost::statechart::result operator()(const net::id_type,const messages::disconnect &);
+	boost::statechart::result
+	operator()(
+		net::id_type,
+		messages::player_stop_shooting const &);
+	
+	boost::statechart::result
+	operator()(
+		net::id_type,
+		messages::player_change_weapon const &);
+
+	boost::statechart::result
+	operator()(
+		net::id_type,
+		messages::player_unpause const &);
+
+	boost::statechart::result
+	operator()(
+		net::id_type,
+		messages::player_pause const &);
+
+	boost::statechart::result
+	operator()(
+		net::id_type,
+		messages::disconnect const &);
 private:
-	boost::statechart::result handle_default_msg(const net::id_type,const messages::base &);
-	environment const get_environment();
+	boost::statechart::result
+	handle_default_msg(
+		net::id_type,
+		messages::base const &);
+	
+	server::environment const environment();
 	void send(
 		messages::auto_ptr);
 	
