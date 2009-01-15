@@ -9,13 +9,10 @@ specific state
 *medium: implement loading screen where all sounds and models are pre-loaded before the game begins
 *high: set sound rolloff factors, attach sounds to entities by setting current
 position and velocity
-*high: render background with decals and corpses into texture and delete named
-entities to save performance and ram (either use the count of lying entities as
-threshold or the time)
 *high: add some perks as well as a perk choosing screen where the game is
 paused and one can choose his perks
-*high: add probabilities to sounds which can add up to less than one so not
 always a sound is played
 *high: add good collision detection algorithm, maybe using bullet as backend
 *high: add lifetime-limited particles for use in - for example - the rocket
 explosion
+*high: introduce console connections

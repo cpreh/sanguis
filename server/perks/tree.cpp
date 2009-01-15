@@ -87,7 +87,6 @@ sanguis::server::perks::tree::take(
 		throw exception(
 			SGE_TEXT("Perk von found in the tree!"));
 	
-	// TODO: check for chosen, maybe increment the perk's level instead?
 	(*it).value().choose();
 }
 
