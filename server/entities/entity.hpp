@@ -2,8 +2,8 @@
 #define SANGUIS_SERVER_ENTITIES_ENTITY_HPP_INCLUDED
 
 #include "entity_fwd.hpp"
-#include "property.hpp"
 #include "property_map.hpp"
+#include "property_type.hpp"
 #include "../teams.hpp"
 #include "../types.hpp"
 #include "../environment.hpp"
@@ -68,11 +68,11 @@ public:
 
 	entities::property const &
 	property(
-		property::type::enum_type) const;
+		property_type::type) const;
 	
 	entities::property &
 	property(
-		property::type::enum_type);
+		property_type::type);
 
 	virtual exp_type exp() const;
 	dim_type const dim() const;

@@ -1,6 +1,7 @@
 #include "pickup.hpp"
 #include "../entity_with_weapon.hpp"
 #include "../base_parameters.hpp"
+#include "../property.hpp"
 #include "../../get_dim.hpp"
 #include "../../damage_types.hpp"
 #include "../../collision.hpp"
@@ -35,9 +36,9 @@ sanguis::server::entities::pickups::pickup::pickup(
 			messages::mu(0), //direction,
 			team_,
 			boost::assign::map_list_of
-				(entities::property::type::health,
+				(entities::property_type::health,
 				entities::property(messages::mu(1)))
-				(entities::property::type::movement_speed,
+				(entities::property_type::movement_speed,
 				entities::property(messages::mu(0))),
 			entity_type::pickup,
 			true,

@@ -1,6 +1,7 @@
 #include "entity.hpp"
 #include "base_parameters.hpp"
 #include "auto_weak_link.hpp"
+#include "property.hpp"
 #include "../perks/perk.hpp"
 #include "../get_unique_id.hpp"
 #include "../message_converter.hpp"
@@ -97,7 +98,7 @@ sanguis::server::space_unit
 sanguis::server::entities::entity::speed() const
 {
 	return property(
-		property::type::movement_speed).current();
+		property_type::movement_speed).current();
 }
 
 sanguis::server::space_unit
@@ -169,31 +170,31 @@ void sanguis::server::entities::entity::aggressive(
 sanguis::server::health_type
 sanguis::server::entities::entity::health() const
 {
-	return property(entities::property::type::health).current();
+	return property(property_type::health).current();
 }
 
 void sanguis::server::entities::entity::health(
 	health_type const nhealth)
 {
-	property(entities::property::type::health).current(nhealth);
+	property(property_type::health).current(nhealth);
 }
 
 sanguis::server::health_type
 sanguis::server::entities::entity::max_health() const
 {
-	return property(entities::property::type::health).max();
+	return property(property_type::health).max();
 }
 
 sanguis::server::entities::property const &
 sanguis::server::entities::entity::property(
-	property::type::enum_type const e) const
+	property_type::type const e) const
 {
 	return const_cast<entity &>(*this).property(e);
 }
 
 sanguis::server::entities::property &
 sanguis::server::entities::entity::property(
-	entities::property::type::enum_type const e)
+	property_type::type const e)
 {
 	return properties[e];
 	// TODO: should this signal an error because it might be
@@ -238,13 +239,13 @@ void sanguis::server::entities::entity::update(
 	center_ += abs_speed() * delta;
 
 	BOOST_FOREACH(property_map::reference p, properties)
-		p.second->reset();
+		p.second.reset();
 
 	BOOST_FOREACH(perks::perk &p, perks_)
 		p.apply(*this);
 
 	BOOST_FOREACH(property_map::reference p, properties)
-		p.second->apply();
+		p.second.apply();
 }
 
 void sanguis::server::entities::entity::add_perk(

@@ -1,5 +1,6 @@
 #include "simple.hpp"
 #include "../entities/entity_with_weapon.hpp"
+#include "../entities/property.hpp"
 #include "../collision.hpp"
 #include "../distance.hpp"
 #include <sge/math/angle.hpp>
@@ -29,7 +30,7 @@ void sanguis::server::ai::simple::update(
 
 	entities::property &speed(
 		me.property(
-			entities::property::type::movement_speed));
+			entities::property_type::movement_speed));
 
 	if(!target)
 	{

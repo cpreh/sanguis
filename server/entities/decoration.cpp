@@ -1,5 +1,6 @@
 #include "decoration.hpp"
 #include "base_parameters.hpp"
+#include "property.hpp"
 #include "../damage_types.hpp"
 #include "../message_converter.hpp"
 #include "../get_dim.hpp"

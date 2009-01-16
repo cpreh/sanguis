@@ -5,6 +5,7 @@
 #undef max // TODO: find out where windows.h comes from!
 #include <sge/signals/signal.hpp>
 #include <sge/signals/connection.hpp>
+#include <sge/shared_ptr.hpp>
 #include <boost/function.hpp>
 
 namespace sanguis
@@ -16,18 +17,14 @@ namespace entities
 
 class property {
 public:
-	struct type {
-		enum enum_type {
-			health,
-			attack_speed,
-			movement_speed,
-			size
-		};
-	};
-
 	typedef space_unit value_type;
-	typedef void change_callback_fn(value_type const &);
-	typedef boost::function<change_callback_fn> change_callback;
+
+	typedef void change_callback_fn(
+		value_type const &);
+
+	typedef boost::function<
+		change_callback_fn
+	> change_callback;
 
 	property();
 	property(
@@ -55,7 +52,8 @@ public:
 		value_type);
 	void unrestrict();
 
-	sge::signals::connection const register_change_callback(
+	sge::signals::connection const
+	register_change_callback(
 		change_callback const &);
 private:
 	void clamp();
@@ -68,7 +66,13 @@ private:
 		current_,
 		restrict_;
 	
-	sge::signals::signal<change_callback_fn> change_signal;
+	typedef sge::signals::signal<
+		change_callback_fn
+	> change_signal_type;
+
+	sge::shared_ptr<
+		change_signal_type
+	> change_signal;
 };
 
 }

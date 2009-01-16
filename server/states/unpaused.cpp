@@ -3,6 +3,7 @@
 #include "waiting.hpp"
 #include "../entities/player.hpp"
 #include "../entities/entity.hpp"
+#include "../entities/property.hpp"
 #include "../message_functor.hpp"
 #include "../message_converter.hpp"
 #include "../log.hpp"
@@ -174,11 +175,11 @@ sanguis::server::states::unpaused::operator()(
 
 	if (e.dir().is_null())
 		player_.property(
-			entities::property::type::movement_speed).current(messages::mu(0));
+			entities::property_type::movement_speed).current(messages::mu(0));
 	else
 	{
 		player_.property(
-			entities::property::type::movement_speed).current_to_max();
+			entities::property_type::movement_speed).current_to_max();
 		player_.direction(*sge::math::angle_to<messages::space_unit>(e.dir()));
 	}
 

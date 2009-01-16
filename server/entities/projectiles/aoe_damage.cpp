@@ -1,4 +1,5 @@
 #include "aoe_damage.hpp"
+#include "../property.hpp"
 #include <sge/time/second_f.hpp>
 #include <boost/foreach.hpp>
 #include <boost/assign/list_of.hpp>
@@ -22,7 +23,7 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 		team_,
 		boost::assign::map_list_of
 			(	
-				entities::property::type::health,
+				entities::property_type::health,
 				entities::property(messages::mu(1))
 			),
 		dim_type(
