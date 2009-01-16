@@ -66,7 +66,7 @@ void sanguis::server::entities::property::current(
 
 void sanguis::server::entities::property::current_to_max()
 {
-	current_ = max();
+	current(max());
 }
 
 void sanguis::server::entities::property::reset()
