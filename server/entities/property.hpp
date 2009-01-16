@@ -3,6 +3,9 @@
 
 #include "../types.hpp"
 #undef max // TODO: find out where windows.h comes from!
+#include <sge/signals/signal.hpp>
+#include <sge/signals/connection.hpp>
+#include <boost/function.hpp>
 
 namespace sanguis
 {
@@ -23,6 +26,8 @@ public:
 	};
 
 	typedef space_unit value_type;
+	typedef void change_callback_fn(value_type const &);
+	typedef boost::function<change_callback_fn> change_callback;
 
 	property();
 	property(
@@ -49,6 +54,9 @@ public:
 	void restrict(
 		value_type);
 	void unrestrict();
+
+	sge::signals::connection const register_change_callback(
+		change_callback const &);
 private:
 	void clamp();
 	
@@ -59,6 +67,8 @@ private:
 		max_,
 		current_,
 		restrict_;
+	
+	sge::signals::signal<change_callback_fn> change_signal;
 };
 
 }

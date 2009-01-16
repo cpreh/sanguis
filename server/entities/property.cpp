@@ -62,6 +62,8 @@ void sanguis::server::entities::property::current(
 			restrict_,
 			max()),
 		c);
+	
+	change_signal(current());
 }
 
 void sanguis::server::entities::property::current_to_max()
@@ -116,6 +118,13 @@ void sanguis::server::entities::property::apply()
 void sanguis::server::entities::property::unrestrict()
 {
 	restrict_ = value_max;
+}
+
+sge::signals::connection const 
+	sanguis::server::entities::property::register_change_callback(
+	change_callback const &cb)
+{
+	return change_signal.connect(cb);
 }
 
 void sanguis::server::entities::property::clamp()
