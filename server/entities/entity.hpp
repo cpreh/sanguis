@@ -91,6 +91,9 @@ public:
 	auto_weak_link
 	link(
 		entity &);
+	
+	virtual bool can_collide_with(entity const &) const;
+	virtual void collision(entity &);
 
 	virtual ~entity();
 protected:

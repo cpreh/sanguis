@@ -32,6 +32,7 @@
 #include <sge/texture/default_creator_impl.hpp>
 #include <sge/texture/manager.hpp>
 #include <sge/texture/util.hpp>
+#include <sge/collision/system.hpp>
 #include <sge/image/loader.hpp>
 #include <sge/audio/player.hpp>
 #include <sge/audio/multi_loader.hpp>
@@ -156,6 +157,7 @@ try
 		(sge::systems::parameterless::input)
 		(sge::systems::parameterless::audio_player)
 		(sge::systems::parameterless::image)
+		(sge::systems::parameterless::collision_system)
 		(sge::systems::parameterless::font));
 
 	// input stuff

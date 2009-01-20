@@ -25,6 +25,7 @@
 #include <sge/iconv.hpp>
 #include <sge/math/constants.hpp>
 #include <sge/log/headers.hpp>
+#include <sge/collision/sattelite.hpp>
 #include <sge/text.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/assign/list_of.hpp>
@@ -209,6 +210,15 @@ void sanguis::server::states::running::level_callback(
 			new messages::level_up(
 				p.id(),
 				p.level())));
+}
+
+bool sanguis::server::states::running::collision_callback(
+	collision::sattelite const &a,
+	collision::sattelite const &b)
+{
+	entities::entity const &e0 = dynamic_cast<sattelite &>(a).entity();
+	entities::entity const &e1 = dynamic_cast<sattelite &>(b).entity();
+
 }
 
 sanguis::load::context const &

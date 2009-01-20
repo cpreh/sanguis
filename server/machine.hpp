@@ -36,6 +36,7 @@ struct machine
 public:
 	machine(
 		load::context const &,
+		sge::collision::
 		sge::con::console_gfx &,
 		::net::port_type);
 	void process(tick_event const &);

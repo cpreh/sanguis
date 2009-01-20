@@ -294,6 +294,17 @@ sanguis::server::entities::entity::link(
 		e);
 }
 
+bool sanguis::server::entities::entity::can_collide_with(
+	entity const &) const
+{
+	return false;
+}
+
+void sanguis::server::entities::entity::collision(
+	entity &)
+{
+}
+
 sanguis::server::entities::entity::~entity()
 {
 	BOOST_FOREACH(entity *e, links)

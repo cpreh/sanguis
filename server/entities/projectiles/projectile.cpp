@@ -23,6 +23,19 @@ sanguis::server::entities::projectiles::projectile::ptype() const
 	return ptype_;
 }
 
+bool sanguis::server::entities::projectiles::projectile::can_collide_with(
+	entity const &e) const
+{
+	return e.team() != team()
+		&& !e.dead()
+		&& !e.invulnerable();
+}
+
+void sanguis::server::entities::projectiles::projectile::collision(entity &e)
+{
+	
+}
+
 sanguis::server::entities::projectiles::projectile::projectile(
 	projectile_type::type const nptype,
 	server::environment const &env,

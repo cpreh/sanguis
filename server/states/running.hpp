@@ -11,6 +11,7 @@
 #include "../../messages/fwd.hpp"
 #include "../../time_type.hpp"
 #include <sge/log/fwd.hpp>
+#include <sge/collision/sattelite_fwd.hpp>
 #include <boost/mpl/list.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/result.hpp>
@@ -69,6 +70,10 @@ public:
 	void level_callback(
 		server::entities::player &,
 		messages::level_type);
+	
+	bool collision_test_callback(
+		collision::sattelite const &,
+		collision::sattelite const &);
 
 	load::context const &
 	load_callback() const;

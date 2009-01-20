@@ -22,6 +22,9 @@ namespace projectiles
 class projectile : public entity {
 public:
 	projectile_type::type ptype() const;
+
+	bool can_collide_with(entity const &) const;
+	void collision(entity &);
 protected:
 	typedef boost::optional<
 		time_type
