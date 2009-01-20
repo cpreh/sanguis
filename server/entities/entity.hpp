@@ -110,6 +110,7 @@ private:
 		entity *);
 	bool has_ref(
 		entity *) const;
+	void speed_change(property::value_type);
 	
 	entity_id const         id_;
 	server::environment     env_;
@@ -135,6 +136,9 @@ private:
 	>                       link_container;
 	link_container          links,
 	                        backlinks;
+	
+	sge::collision::object_ptr collision_;
+	sge::signals::connection speed_change_;
 };
 
 }

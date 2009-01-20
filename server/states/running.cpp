@@ -1,5 +1,6 @@
 #include "running.hpp"
 #include "waiting.hpp"
+#include "../entities/sattelite.hpp"
 #include "../entities/base_parameters.hpp"
 #include "../entities/property.hpp"
 #include "../environment.hpp"
@@ -38,6 +39,9 @@
 sanguis::server::states::running::running(my_context ctx)
 :
 	my_base(ctx),
+	coll_connection(
+		context<machine>().collision()->register_callback(
+			boost::bind(&running::collision,this,_1,_2))),
 	send(
 		boost::bind(
 			&server::machine::send,
@@ -55,6 +59,8 @@ sanguis::server::states::running::running(my_context ctx)
 		sge::log::_1
 			<< SGE_TEXT("constructor"));
 	create_decorations();
+	context<machine>().collision()->test_callback(
+		boost::bind(&running::collision_test,this,_1,_2));
 }
 
 void sanguis::server::states::running::create_decorations()
@@ -213,13 +219,27 @@ void sanguis::server::states::running::level_callback(
 				p.level())));
 }
 
-bool sanguis::server::states::running::collision_callback(
+bool sanguis::server::states::running::collision_test(
 	collision::sattelite const &a,
 	collision::sattelite const &b)
 {
-	entities::entity const &e0 = dynamic_cast<sattelite &>(a).entity();
-	entities::entity const &e1 = dynamic_cast<sattelite &>(b).entity();
+	entities::entity const &e0 = 
+		dynamic_cast<sattelite &>(a).entity();
+	entities::entity const &e1 = 
+		dynamic_cast<sattelite &>(b).entity();
+	return e0.can_collide_with(e1) && e1.can_collide_with(e0);
+}
 
+void sanguis::server::states::running::collision(
+	collision::sattelite &a,
+	collision::sattelite &b)
+{
+	entities::entity &e0 = 
+		dynamic_cast<sattelite &>(a).entity();
+	entities::entity &e1 = 
+		dynamic_cast<sattelite &>(b).entity();
+	e0.collision(e1);
+	e1.collision(e0);
 }
 
 sanguis::load::context const &
@@ -244,7 +264,8 @@ sanguis::server::states::running::environment()
 		boost::bind(&running::insert_entity, this, _1),
 		boost::bind(&running::divide_exp, this, _1),
 		boost::bind(&running::level_callback, this, _1, _2),
-		boost::bind(&running::load_callback, this));
+		boost::bind(&running::load_callback, this),
+		context<machine>().collision());
 }
 
 boost::statechart::result

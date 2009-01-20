@@ -64,6 +64,7 @@ typedef std::auto_ptr<
 server_auto_ptr
 create_server(
 	sanguis::load::context const &,
+	sge::collision::system_ptr const,
 	sge::con::console_gfx &,
 	::net::port_type,
 	bool client_only);
@@ -211,6 +212,7 @@ try
 	> server(
 		create_server(
 			resources,
+			sys.collision_system(),
 			console,
 			host_port,
 			client_only));
@@ -264,6 +266,7 @@ namespace
 server_auto_ptr
 create_server(
 	sanguis::load::context const &resources,
+	sge::collision::system_ptr const coll,
 	sge::con::console_gfx &con,
 	::net::port_type const host_port,
 	bool const client_only)
@@ -272,6 +275,7 @@ create_server(
 		? server_auto_ptr(
 			new sanguis::server::machine(
 				resources,
+				coll,
 				con, 
 				host_port))
 		: server_auto_ptr();

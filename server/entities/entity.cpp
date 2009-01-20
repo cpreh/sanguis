@@ -1,4 +1,5 @@
 #include "entity.hpp"
+#include "sattelite.hpp"
 #include "base_parameters.hpp"
 #include "auto_weak_link.hpp"
 #include "property.hpp"
@@ -30,7 +31,17 @@ sanguis::server::entities::entity::entity(
 	type_(param.type()),
 	invulnerable_(param.invulnerable()),
 	collision_dim(param.collision_dim()),
-	aggressive_(false)
+	aggressive_(false),
+	collision_(
+		environment().collision->create_circle(
+			sge::collision::sattelite_ptr(
+				new sattelite(*this)),
+			static_cast<sge::collision::unit>(
+				radius()))),
+	speed_change_(
+		property(
+			property_type::movement_speed).register_change_callback(
+				boost::bind(entity::speed_change,this,_1)))
 {}
 
 sanguis::entity_id
@@ -74,6 +85,9 @@ void sanguis::server::entities::entity::direction(
 	space_unit const _direction)
 {
 	direction_ = _direction;
+	collision_->speed(
+		sge::math::structure_cast<sge::collision::unit>(
+			abs_speed()));
 }
 
 sanguis::server::pos_type const
@@ -236,7 +250,7 @@ void sanguis::server::entities::entity::update(
 	time_type const delta,
 	container &)
 {
-	center_ += abs_speed() * delta;
+	//center_ += abs_speed() * delta;
 
 	BOOST_FOREACH(property_map::reference p, properties)
 		p.second.reset();
@@ -352,4 +366,10 @@ bool sanguis::server::entities::entity::has_ref(
 	entity *const e) const
 {
 	return links.find(e) != links.end();
+}
+
+void sanguis::server::entities::entity::speed_change(
+	property::value_type const v)
+{
+	direction(direction());
 }

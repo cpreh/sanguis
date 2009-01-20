@@ -250,6 +250,8 @@ sanguis::server::states::unpaused::react(
 
 	entities::container &entities = context<running>().entities();
 
+	context<machine>().collision().step(static_cast<sge::time::funit>(delta));
+
 	for (entities::container::iterator i = entities.begin(); i != entities.end();)
 	{
 		if (i->dead())
