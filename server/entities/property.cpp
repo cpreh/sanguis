@@ -1,4 +1,5 @@
 #include "property.hpp"
+#include <sge/make_shared_ptr.hpp>
 #include <algorithm>
 #include <limits>
 
@@ -13,6 +14,8 @@ value_max(
 
 }
 
+// TODO: somehow unify these ctors
+
 sanguis::server::entities::property::property()
 :
 	base_(static_cast<value_type>(0)),
@@ -20,7 +23,11 @@ sanguis::server::entities::property::property()
 	max_constant_(static_cast<value_type>(0)),
 	max_(base_),
 	current_(base_),
-	restrict_(value_max)
+	restrict_(value_max),
+	change_signal(
+		sge::make_shared_ptr<
+			change_signal_type
+		>())
 {}
 
 sanguis::server::entities::property::property(
@@ -32,7 +39,12 @@ sanguis::server::entities::property::property(
 	max_constant_(static_cast<value_type>(0)),
 	max_(base_),
 	current_(static_cast<value_type>(0)),
-	restrict_(value_max)
+	restrict_(value_max),
+	change_signal(
+		sge::make_shared_ptr<
+			change_signal_type
+		>())
+
 {
 	current(ncurrent);
 }
@@ -45,7 +57,12 @@ sanguis::server::entities::property::property(
 	max_constant_(static_cast<value_type>(0)),
 	max_(base_),
 	current_(base_),
-	restrict_(value_max)
+	restrict_(value_max),
+	change_signal(
+		sge::make_shared_ptr<
+			change_signal_type
+		>())
+
 {}
 
 sanguis::server::entities::property::value_type
@@ -63,7 +80,7 @@ void sanguis::server::entities::property::current(
 			max()),
 		c);
 	
-	change_signal(current());
+	(*change_signal)(current());
 }
 
 void sanguis::server::entities::property::current_to_max()
@@ -124,7 +141,7 @@ sge::signals::connection const
 	sanguis::server::entities::property::register_change_callback(
 	change_callback const &cb)
 {
-	return change_signal.connect(cb);
+	return change_signal->connect(cb);
 }
 
 void sanguis::server::entities::property::clamp()

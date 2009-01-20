@@ -1,6 +1,7 @@
 #include "running.hpp"
 #include "waiting.hpp"
 #include "../entities/base_parameters.hpp"
+#include "../entities/property.hpp"
 #include "../environment.hpp"
 #include "../damage_types.hpp"
 #include "../message_functor.hpp"
@@ -290,9 +291,9 @@ sanguis::server::states::running::operator()(
 			messages::mu(0),
 			messages::mu(0),
 			boost::assign::map_list_of
-				(entities::property::type::health,
+				(entities::property_type::health,
 				entities::property(messages::mu(100)))
-				(entities::property::type::movement_speed,
+				(entities::property_type::movement_speed,
 				entities::property(messages::mu(0),messages::mu(100))),
 			m.name()));
 

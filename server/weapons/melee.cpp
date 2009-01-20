@@ -2,6 +2,7 @@
 #include "delayed_attack.hpp"
 #include "../entities/entity.hpp"
 #include "../entities/entity_with_weapon.hpp"
+#include "../entities/property.hpp"
 #include "../entities/projectiles/melee.hpp"
 
 sanguis::server::weapons::melee::melee(
@@ -39,7 +40,7 @@ void sanguis::server::weapons::melee::on_init_attack(
 	entities::entity_with_weapon &owner)
 {
 	owner.property(
-		entities::property::type::movement_speed)
+		entities::property_type::movement_speed)
 			.restrict(
 				messages::mu(0));
 }
@@ -48,6 +49,6 @@ void sanguis::server::weapons::melee::on_castpoint(
 	entities::entity_with_weapon &owner)
 {
 	owner.property(
-		entities::property::type::movement_speed)
+		entities::property_type::movement_speed)
 			.unrestrict();
 }

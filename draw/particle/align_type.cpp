@@ -12,7 +12,7 @@ sanguis::draw::particle::operator<<(
 	return s << static_cast<unsigned>(t);
 }
 
-std::istream &
+sge::istream &
 sanguis::draw::particle::operator>>(
 	sge::istream &s,
 	align_type::type &t)

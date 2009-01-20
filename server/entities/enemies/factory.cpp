@@ -1,5 +1,6 @@
 #include "factory.hpp"
 #include "enemy.hpp"
+#include "../property.hpp"
 #include "../../damage_types.hpp"
 #include "../../ai/simple.hpp"
 #include "../../weapons/melee.hpp"
@@ -27,9 +28,9 @@ sanguis::server::entities::enemies::create(
 				angle,
 				direction,
 				boost::assign::map_list_of
-					(entities::property::type::health,
+					(entities::property_type::health,
 					 entities::property(messages::mu(3)))
-					(entities::property::type::movement_speed,
+					(entities::property_type::movement_speed,
 					 entities::property(messages::mu(20))),
 				ai::ai_ptr(
 					new ai::simple()),
@@ -56,9 +57,9 @@ sanguis::server::entities::enemies::create(
 				angle,
 				direction,
 				boost::assign::map_list_of
-					(entities::property::type::health,
+					(entities::property_type::health,
 					 entities::property(messages::mu(3)))
-					(entities::property::type::movement_speed,
+					(entities::property_type::movement_speed,
 					 entities::property(messages::mu(20))),
 				ai::ai_ptr(
 					new ai::simple()),
@@ -84,9 +85,9 @@ sanguis::server::entities::enemies::create(
 				angle,
 				direction,
 				boost::assign::map_list_of
-					(entities::property::type::health,
+					(entities::property_type::health,
 					 entities::property(messages::mu(1)))
-					(entities::property::type::movement_speed,
+					(entities::property_type::movement_speed,
 					 entities::property(messages::mu(80))),
 				ai::ai_ptr(
 					new ai::simple()),
@@ -110,9 +111,9 @@ sanguis::server::entities::enemies::create(
 			 angle,
 			 direction,
 			 boost::assign::map_list_of
-				(entities::property::type::health,
+				(entities::property_type::health,
 				entities::property(messages::mu(300)))
-				(entities::property::type::movement_speed,
+				(entities::property_type::movement_speed,
 				entities::property(messages::mu(40))),
 			ai::ai_ptr(
 				new ai::simple()),
@@ -136,9 +137,9 @@ sanguis::server::entities::enemies::create(
 			 angle,
 			 direction,
 			 boost::assign::map_list_of
-				(entities::property::type::health,
+				(entities::property_type::health,
 				entities::property(messages::mu(1)))
-				(entities::property::type::movement_speed,
+				(entities::property_type::movement_speed,
 				entities::property(messages::mu(40))),
 			ai::ai_ptr(
 				new ai::simple()),
@@ -162,9 +163,9 @@ sanguis::server::entities::enemies::create(
 				angle,
 				direction,
 				boost::assign::map_list_of
-					(entities::property::type::health,
+					(entities::property_type::health,
 					 entities::property(messages::mu(10)))
-					(entities::property::type::movement_speed,
+					(entities::property_type::movement_speed,
 					 entities::property(messages::mu(70))),
 				ai::ai_ptr(
 					new ai::simple()),

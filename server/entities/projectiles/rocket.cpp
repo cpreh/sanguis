@@ -1,5 +1,6 @@
 #include "rocket.hpp"
 #include "aoe_damage.hpp"
+#include "../property.hpp"
 #include "../../get_dim.hpp"
 #include "../../../load/context.hpp"
 #include <boost/assign/list_of.hpp>
@@ -20,11 +21,11 @@ sanguis::server::entities::projectiles::rocket::rocket(
 		team_,
 		boost::assign::map_list_of
 			(
-				entities::property::type::health,
+				entities::property_type::health,
 				entities::property(messages::mu(1))
 			)
 			(
-				entities::property::type::movement_speed,
+				entities::property_type::movement_speed,
 				entities::property(messages::mu(300))
 			),
 		default_dim(

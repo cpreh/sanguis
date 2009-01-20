@@ -1,11 +1,12 @@
 #include "ims.hpp"
+#include "../entities/property.hpp"
 #include "../entities/entity.hpp"
 
 void sanguis::server::perks::ims::do_apply(
 	entities::entity &e)
 {
 	e.property(
-		entities::property::type::movement_speed)
+		entities::property_type::movement_speed)
 		.multiply_max(factor());
 }
 
