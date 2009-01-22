@@ -11,7 +11,7 @@ sanguis::server::entities::sattelite::sattelite(
 void sanguis::server::entities::sattelite::position_change(
 	sge::collision::point const &p)
 {
-	e.center(
+	e.collision_update(
 		pos_type(
 			static_cast<pos_type::value_type>(p.x()),
 			static_cast<pos_type::value_type>(p.y())));

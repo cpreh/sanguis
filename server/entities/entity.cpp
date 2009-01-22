@@ -45,7 +45,9 @@ sanguis::server::entities::entity::entity(
 		property(
 			property_type::movement_speed).register_change_callback(
 				boost::bind(&entity::speed_change,this,_1)))
-{}
+{
+	center(center_);
+}
 
 sanguis::entity_id
 sanguis::server::entities::entity::id() const
@@ -100,6 +102,13 @@ sanguis::server::entities::entity::center() const
 }
 
 void sanguis::server::entities::entity::center(
+	pos_type const &_center)
+{
+	center_ = _center;
+	collision_->pos(sge::math::structure_cast<sge::collision::unit>(_center));
+}
+
+void sanguis::server::entities::entity::collision_update(
 	pos_type const &_center)
 {
 	center_ = _center;

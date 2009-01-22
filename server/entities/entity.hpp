@@ -108,12 +108,14 @@ protected:
 	virtual void on_die();
 private:
 	friend class auto_weak_link;
+	friend class sattelite;
 
 	void unlink(
 		entity *);
 	bool has_ref(
 		entity *) const;
 	void speed_change(property::value_type);
+	void collision_update(pos_type const &);
 	
 	entity_id const         id_;
 	server::environment     env_;
