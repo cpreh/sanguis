@@ -15,7 +15,7 @@
 
 sanguis::server::machine::machine(
 	load::context const &resources_,
-	sge::collision::system_ptr const collision_,
+	sge::collision::system_ptr const _collision,
 	sge::con::console_gfx &con,
 	net::port_type const port_)
 :
@@ -43,6 +43,7 @@ sanguis::server::machine::machine(
 				this,
 				_1,
 				_2))),
+	collision_(_collision),
 	con(con)
 {}
 

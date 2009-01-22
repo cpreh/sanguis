@@ -18,7 +18,7 @@
 sanguis::client::machine::machine(
 	load::context const &resources_,
 	sge::systems::instance &sys,
-	sge::audio::pool_ptr const sound_pool_,
+	sge::audio::pool &sound_pool_,
 	sge::font::font &font_,
 	sge::input::key_state_tracker &ks,
 	sge::con::console_gfx &con,
@@ -156,8 +156,8 @@ sanguis::client::machine::audio_player() const
 	return sys.audio_player();
 }
 
-sge::audio::pool_ptr const
-sanguis::client::machine::sound_pool() const
+sge::audio::pool &
+sanguis::client::machine::sound_pool()
 {
 	return sound_pool_;
 }

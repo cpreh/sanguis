@@ -5,7 +5,7 @@ sanguis::load::context::context(
 	sge::renderer::device_ptr const rend,
 	sge::audio::multi_loader &ml,
 	sge::audio::player_ptr const ap,
-	sge::audio::pool_ptr const pool)
+	sge::audio::pool &pool)
 :
 	il(il),
 	rend(rend),

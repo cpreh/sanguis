@@ -11,9 +11,12 @@
 #include "../../exception.hpp"
 #include <sge/math/vec_dim.hpp>
 #include <sge/math/power.hpp>
+#include <sge/collision/system.hpp>
+#include <sge/collision/object.hpp>
 #include <sge/container/linear_set_impl.hpp>
 #include <sge/text.hpp>
 #include <boost/foreach.hpp>
+#include <boost/bind.hpp>
 #include <typeinfo>
 #include <cmath>
 
@@ -41,7 +44,7 @@ sanguis::server::entities::entity::entity(
 	speed_change_(
 		property(
 			property_type::movement_speed).register_change_callback(
-				boost::bind(entity::speed_change,this,_1)))
+				boost::bind(&entity::speed_change,this,_1)))
 {}
 
 sanguis::entity_id

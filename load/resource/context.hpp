@@ -41,7 +41,7 @@ private:
 		sge::image::loader_ptr,
 		sge::audio::multi_loader &,
 		sge::audio::player_ptr,
-		sge::audio::pool_ptr);
+		sge::audio::pool &);
 	~context();
 
 	boost::scoped_ptr<

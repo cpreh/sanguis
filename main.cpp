@@ -196,7 +196,7 @@ try
 				sys.renderer()->screen_size().h() / 2)));
 	
 	sge::audio::multi_loader audio_loader(sys.plugin_manager());
-	sge::audio::pool_ptr const sound_pool = sys.audio_player()->create_pool();
+	sge::audio::pool sound_pool;
 
 	sanguis::load::context resources(
 		sys.image_loader(),

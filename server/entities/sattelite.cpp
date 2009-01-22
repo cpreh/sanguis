@@ -1,17 +1,20 @@
 #include "sattelite.hpp"
+#include "entity.hpp"
+#include "../types.hpp"
 
 sanguis::server::entities::sattelite::sattelite(
-	entity &_e)
+	sanguis::server::entities::entity &_e)
 	: e(_e)
 {
 }
 
 void sanguis::server::entities::sattelite::position_change(
-	collision::point const &p)
+	sge::collision::point const &p)
 {
-	entity.center(
-		sge::math::structure_cast<pos_type::value_type>(
-			p));
+	e.center(
+		pos_type(
+			static_cast<pos_type::value_type>(p.x()),
+			static_cast<pos_type::value_type>(p.y())));
 }
 
 sanguis::server::entities::entity &sanguis::server::entities::sattelite::entity()

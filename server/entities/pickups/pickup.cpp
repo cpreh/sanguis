@@ -22,7 +22,7 @@ sanguis::server::entities::pickups::pickup::ptype() const
 bool sanguis::server::entities::pickups::pickup::can_collide_with(
 	entity const &e) const
 {
-	return dynamic_cast<entity_with_weapon *>(&e) && e.team() == team();
+	return dynamic_cast<entity_with_weapon const * const>(&e) && e.team() == team();
 }
 
 void sanguis::server::entities::pickups::pickup::collision(

@@ -28,6 +28,7 @@
 #include "../../exception.hpp"
 
 #include <sge/math/constants.hpp>
+#include <sge/collision/system.hpp>
 #include <sge/math/angle.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/format.hpp>
@@ -250,7 +251,7 @@ sanguis::server::states::unpaused::react(
 
 	entities::container &entities = context<running>().entities();
 
-	context<machine>().collision().step(static_cast<sge::time::funit>(delta));
+	context<machine>().collision()->update(static_cast<sge::time::funit>(delta));
 
 	for (entities::container::iterator i = entities.begin(); i != entities.end();)
 	{

@@ -23,7 +23,7 @@ public:
 		sge::renderer::device_ptr,
 		sge::audio::multi_loader &,
 		sge::audio::player_ptr,
-		sge::audio::pool_ptr);
+		sge::audio::pool &);
 	~context();
 
 	resource::context const &
@@ -41,7 +41,7 @@ private:
 	sge::renderer::device_ptr const rend;
 	sge::audio::multi_loader &ml;
 	sge::audio::player_ptr const ap;
-	sge::audio::pool_ptr const pool;
+	sge::audio::pool &pool;
 
 	resource::context const resource_ctx;
 	model::context const model_ctx;

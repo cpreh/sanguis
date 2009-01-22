@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_ENTITY_HPP_INCLUDED
 
 #include "entity_fwd.hpp"
+#include "property.hpp"
 #include "property_map.hpp"
 #include "property_type.hpp"
 #include "../teams.hpp"
@@ -14,6 +15,8 @@
 #include "../../damage_type.hpp"
 #include "../../time_type.hpp"
 #include <sge/container/linear_set.hpp>
+#include <sge/collision/object_fwd.hpp>
+#include <sge/signals/connection.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
 #include <boost/noncopyable.hpp>
 

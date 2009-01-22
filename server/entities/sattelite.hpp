@@ -13,12 +13,12 @@ namespace entities
 class sattelite : public sge::collision::sattelite
 {
 	public:
-	sattelite(entity &);
-	void position_change(collision::point const &);
-	sanguis::server::entity &entity();
-	sanguis::server::entity const &entity() const;
+	sattelite(sanguis::server::entities::entity &);
+	void position_change(sge::collision::point const &);
+	sanguis::server::entities::entity &entity();
+	sanguis::server::entities::entity const &entity() const;
 	private:
-	entity &e;
+	sanguis::server::entities::entity &e;
 };
 }
 }

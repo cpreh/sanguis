@@ -80,7 +80,7 @@ sanguis::client::running_state::react(
 {
 	context<machine>().dispatch();
 
-	context<machine>().sound_pool()->update();
+	context<machine>().sound_pool().update();
 
 	// update: cursor pos (TODO: this should be done in a better way)
 	drawer.process_message(

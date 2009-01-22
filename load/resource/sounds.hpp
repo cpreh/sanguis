@@ -39,7 +39,7 @@ private:
 	sounds(
 		sge::audio::multi_loader &,
 		sge::audio::player_ptr,
-		sge::audio::pool_ptr);
+		sge::audio::pool &);
 
 	friend class context;
 
@@ -50,7 +50,7 @@ private:
 
 	sge::audio::multi_loader &ml;
 	sge::audio::player_ptr const player;
-	sge::audio::pool_ptr const pool;
+	sge::audio::pool &pool;
 	mutable sound_map sounds_;
 };
 

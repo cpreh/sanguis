@@ -118,14 +118,14 @@ sanguis::load::resource::sounds::make(
 	sge::audio::sound_ptr const ss
 		= player->create_nonstream_sound(
 			snd);
-	pool->add(ss);
+	pool.add(ss,sge::audio::stop_mode::continue_playing);
 	return ss;
 }
 
 sanguis::load::resource::sounds::sounds(
 	sge::audio::multi_loader &ml,
 	sge::audio::player_ptr const player,
-	sge::audio::pool_ptr const pool)
+	sge::audio::pool &pool)
 :
 	ml(ml),
 	player(player),

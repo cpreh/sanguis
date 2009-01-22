@@ -26,7 +26,7 @@ sanguis::load::resource::context::context(
 	sge::image::loader_ptr const il,
 	sge::audio::multi_loader &ml,
 	sge::audio::player_ptr const ap,
-	sge::audio::pool_ptr const pool)
+	sge::audio::pool &pool)
 :
 	textures_(
 		new resource::textures(
