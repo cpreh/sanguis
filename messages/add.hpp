@@ -4,6 +4,8 @@
 #include "entity_message.hpp"
 #include "types.hpp"
 #include "../entity_type.hpp"
+#include <sge/math/vector/basic_decl.hpp>
+#include <sge/math/dim/basic_decl.hpp>
 #include <boost/serialization/access.hpp>
 
 namespace sanguis

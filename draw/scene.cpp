@@ -41,6 +41,7 @@
 #include <sge/iconv.hpp>
 #include <sge/text.hpp>
 #include <sge/format.hpp>
+#include <sge/structure_cast.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/renderer/device.hpp>
 
@@ -322,7 +323,11 @@ void sanguis::draw::scene::operator()(
 	messages::resize const &m)
 {
 	//entity(m.id()).dim(virtual_to_screen(ss.renderer()->screen_size(), m.dim()));
-	entity(m.id()).dim(sge::math::structure_cast<sge::sprite::unit>(m.dim()));
+	entity(m.id()).dim(
+		sge::structure_cast<
+			sge::sprite::dim
+		>(
+			m.dim()));
 }
 
 void sanguis::draw::scene::operator()(
@@ -335,7 +340,9 @@ void sanguis::draw::scene::operator()(
 	messages::speed const &m)
 {
 	entity(m.id()).speed(
-		sge::math::structure_cast<funit>(
+		sge::structure_cast<
+			vector2
+		>(
 			virtual_to_screen(
 				ss.renderer()->screen_size(),
 				m.get())));

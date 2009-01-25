@@ -6,6 +6,10 @@
 #include "../exception.hpp"
 #include <sge/format.hpp>
 #include <sge/math/compare.hpp>
+#include <sge/math/vector/arithmetic.hpp>
+#include <sge/math/vector/basic_impl.hpp>
+#include <sge/math/dim/basic_impl.hpp>
+#include <sge/math/dim/arithmetic.hpp>
 #include <sge/renderer/color.hpp>
 #include <sge/renderer/colors.hpp>
 #include <boost/none.hpp>

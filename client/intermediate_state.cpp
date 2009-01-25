@@ -4,14 +4,17 @@
 #include "log.hpp"
 #include <sge/log/headers.hpp>
 #include <sge/font/font.hpp>
+#include <sge/font/text_size_t.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/text.hpp>
 #include <sge/iconv.hpp>
+#include <sge/structure_cast.hpp>
 #include <ostream>
 
 sanguis::client::intermediate_state::intermediate_state(
 	my_context ctx) 
-  : my_base(ctx)
+:
+	my_base(ctx)
 {}
 
 boost::statechart::result
@@ -36,8 +39,10 @@ sanguis::client::intermediate_state::react(
 	// show text in the screen center (hopefully)
 	m.font().draw_text(
 		SGE_TEXT("waiting for connect"),
-		sge::font::pos(0,0),
-		sge::math::structure_cast<sge::font::size_type>(
+		sge::font::pos::null(),
+		sge::structure_cast<
+			sge::font::dim
+		>(
 			m.renderer()->screen_size()),
 		sge::font::align_h::center,
 		sge::font::align_v::center);

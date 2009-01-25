@@ -1,7 +1,8 @@
 #ifndef SANGUIS_ANGLE_VECTOR_HPP_INCLUDED
 #define SANGUIS_ANGLE_VECTOR_HPP_INCLUDED
 
-#include <sge/math/vector.hpp>
+#include <sge/math/vector/basic_impl.hpp>
+#include <sge/math/vector/static.hpp>
 #include <boost/utility/enable_if.hpp>
 #include <boost/type_traits/is_floating_point.hpp>
 #include <cmath>
@@ -9,14 +10,22 @@
 namespace sanguis
 {
 
-template<typename T>
+template<
+	typename T
+>
 typename boost::enable_if<
 	boost::is_floating_point<T>,
-	sge::math::vector<T, 2>
+	typename sge::math::vector::static_<T, 2>::type
 >::type
-	angle_to_vector(T const angle)
+	angle_to_vector(
+		T const angle)
 {
-	return sge::math::vector<T,2>(std::cos(angle),std::sin(angle));
+	return typename sge::math::vector::static_<
+		T,
+		2
+	>::type(
+		std::cos(angle),
+		std::sin(angle));
 }
 
 }

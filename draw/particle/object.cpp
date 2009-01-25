@@ -1,7 +1,7 @@
 #include "object.hpp"
 #include "z_ordering.hpp"
-#include <sge/iostream.hpp>
 #include <sge/math/point_rotate.hpp>
+#include <sge/structure_cast.hpp>
 
 sanguis::draw::particle::object::object(
 	particle_type::type const t,
@@ -23,7 +23,10 @@ sanguis::draw::particle::object::object(
 		z_ordering(t),
 		sge::sprite::defaults::pos_,
 		sge::sprite::defaults::texture_,
-		sge::math::structure_cast<sge::sprite::unit>(images.dim())),
+		sge::structure_cast<
+			sge::sprite::dim
+		>(
+			images.dim())),
 	anim(
 		images,
 		fade_total 
@@ -50,8 +53,8 @@ bool sanguis::draw::particle::object::update(
 	sprite_.z() = d+base::depth();
 	sprite_.rotation(base::rot()+r);
 	sprite_.center( 
-		sge::math::structure_cast<
-			sge::sprite::unit
+		sge::structure_cast<
+			sge::sprite::point
 		>(
 			sge::math::point_rotate(
 				p + base::pos(),

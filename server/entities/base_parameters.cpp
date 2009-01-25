@@ -1,4 +1,6 @@
 #include "base_parameters.hpp"
+#include <sge/math/vector/basic_impl.hpp>
+#include <sge/math/dim/basic_impl.hpp>
 
 sanguis::server::entities::base_parameters::base_parameters(
 	environment const &env_,

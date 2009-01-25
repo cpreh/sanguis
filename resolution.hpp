@@ -1,7 +1,7 @@
 #ifndef SANGUIS_RESOLUTION_HPP_INCLUDED
 #define SANGUIS_RESOLUTION_HPP_INCLUDED
 
-#include <sge/renderer/screen_types.hpp>
+#include <sge/renderer/screen_size_t.hpp>
 
 namespace sanguis
 {

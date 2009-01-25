@@ -3,7 +3,7 @@
 
 #include "../entity_auto_ptr.hpp"
 #include "../../client_messages/fwd.hpp"
-#include <sge/renderer/screen_types.hpp>
+#include <sge/renderer/screen_size_t.hpp>
 
 namespace sanguis
 {

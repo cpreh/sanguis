@@ -4,7 +4,7 @@
 #include "../messages/types.hpp"
 #include <sge/sprite/point.hpp>
 #include <sge/sprite/dim.hpp>
-#include <sge/renderer/screen_types.hpp>
+#include <sge/renderer/screen_size_t.hpp>
 
 namespace sanguis
 {

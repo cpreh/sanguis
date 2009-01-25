@@ -3,6 +3,12 @@
 #include "z_ordering.hpp"
 #include "sprite_part_index.hpp"
 #include "object.hpp"
+#include <sge/math/vector/basic_impl.hpp>
+#include <sge/math/vector/arithmetic.hpp>
+#include <sge/math/vector/is_null.hpp>
+#include <sge/math/vector/normalize.hpp>
+#include <sge/math/vector/length.hpp>
+#include <sge/structure_cast.hpp>
 #include <boost/none.hpp>
 
 namespace
@@ -43,7 +49,7 @@ void sanguis::draw::bullet::update(
 			static_cast<funit>(160),
 		tail_length = 
 			std::min(
-				static_cast<funit>(((*origin) - center()).length()),
+				static_cast<funit>(length((*origin) - center())),
 				max_tail_length);
 
 	vector2 const
@@ -51,14 +57,19 @@ void sanguis::draw::bullet::update(
 			tail_length,
 			static_cast<funit>(at(tail).size().h())),
 		pos(
-			sge::math::structure_cast<funit>(center())),
+			sge::structure_cast<
+				vector2
+			>(
+				center())),
 		newpos( 
-			speed().is_null()
+			is_null(speed())
 			? pos
-			: pos - sge::math::normalize(speed())*static_cast<funit>(0.5)*newsize.length());
+			: pos - normalize(speed())*static_cast<funit>(0.5) * length(newsize));
 
 	at(tail).center(
-		sge::math::structure_cast<sge::sprite::unit>(
+		sge::structure_cast<
+			sge::sprite::point
+		>(
 			newpos));
 
 	at(tail).w() =

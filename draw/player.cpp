@@ -3,9 +3,12 @@
 #include "sprite_part_index.hpp"
 #include "object.hpp"
 #include "../client/next_id.hpp"
-#include <sge/string.hpp>
+#include <sge/text.hpp>
+#include <sge/structure_cast.hpp>
 #include <sge/math/angle.hpp>
 #include <sge/math/constants.hpp>
+#include <sge/math/vector/is_null.hpp>
+#include <sge/math/vector/basic_impl.hpp>
 #include <sge/console/var_impl.hpp>
 #include <sge/math/point_rotate.hpp>
 #include <boost/none.hpp>
@@ -62,7 +65,7 @@ void sanguis::draw::player::speed(
 	vector2 const &v)
 {
 	model::speed(v);
-	if (!v.is_null())
+	if (!is_null(v))
 		model::orientation(
 			*sge::math::angle_to<funit>(
 				vector2::null(),
@@ -70,7 +73,8 @@ void sanguis::draw::player::speed(
 			0);
 }
 
-void sanguis::draw::player::orientation(const sge::sprite::rotation_type u)
+void sanguis::draw::player::orientation(
+	sge::sprite::rotation_type const u)
 {
 	model::orientation(u, 1); // TODO: better interface for this in model
 }
@@ -82,10 +86,14 @@ void sanguis::draw::player::update(
 
 	vector2 const
 		leg_center(
-			sge::math::structure_cast<funit>(
+			sge::structure_cast<
+				vector2
+			>(
 				player_leg_center)),
 		body_center(
-			sge::math::structure_cast<funit>(
+			sge::structure_cast<
+				vector2
+			>(
 				player_body_center));
 
 	sge::sprite::rotation_type const sprite_rotation = at(bottom).rotation();
@@ -98,10 +106,16 @@ void sanguis::draw::player::update(
 		sprite_rotation);
 
 	vector2 const
-		rot_abs = sge::math::structure_cast<funit>(at(bottom).pos())+new_rotation,
+		rot_abs = sge::structure_cast<
+			vector2
+		>(
+			at(bottom).pos())+new_rotation,
 		top_pos = rot_abs - body_center;
 
-	at(top).pos() = sge::math::structure_cast<sge::sprite::unit>(top_pos);
+	at(top).pos() = sge::structure_cast<
+		sge::sprite::point
+	>(
+		top_pos);
 
 	reaper_.update(time);
 }

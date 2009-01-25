@@ -4,6 +4,8 @@
 #include "../resolution.hpp"
 #include <sge/math/compare.hpp>
 #include <sge/math/signum.hpp>
+#include <sge/math/vector/arithmetic.hpp>
+#include <sge/math/vector/basic_impl.hpp>
 #include <cmath>
 #include <cassert>
 

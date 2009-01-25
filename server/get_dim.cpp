@@ -1,6 +1,8 @@
 #include "get_dim.hpp"
 #include "../load/model/context.hpp"
 #include "../load/model/collection.hpp"
+#include <sge/math/dim/basic_impl.hpp>
+#include <sge/structure_cast.hpp>
 #include <sge/text.hpp>
 
 sanguis::server::dim_type const
@@ -9,7 +11,7 @@ sanguis::server::get_dim(
 	sge::string const &model,
 	sge::string const &part)
 {
-	return sge::math::structure_cast<space_unit>(
+	return sge::structure_cast<dim_type>(
 		ctx()
 			[model]
 			[part]

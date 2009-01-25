@@ -9,12 +9,17 @@
 #include "../../messages/add.hpp"
 #include "../../angle_vector.hpp"
 #include "../../exception.hpp"
-#include <sge/math/vec_dim.hpp>
+#include <sge/math/vector/basic_impl.hpp>
+#include <sge/math/vector/arithmetic.hpp>
+#include <sge/math/vector/dim.hpp>
+#include <sge/math/dim/basic_impl.hpp>
+#include <sge/math/dim/arithmetic.hpp>
 #include <sge/math/power.hpp>
 #include <sge/collision/system.hpp>
 #include <sge/collision/objects/circle.hpp>
 #include <sge/container/linear_set_impl.hpp>
 #include <sge/text.hpp>
+#include <sge/structure_cast.hpp>
 #include <boost/foreach.hpp>
 #include <boost/bind.hpp>
 #include <typeinfo>
@@ -91,7 +96,9 @@ void sanguis::server::entities::entity::direction(
 {
 	direction_ = _direction;
 	collision_->speed(
-		sge::math::structure_cast<sge::collision::unit>(
+		sge::structure_cast<
+			sge::collision::point
+		>(
 			abs_speed()));
 }
 
@@ -105,7 +112,11 @@ void sanguis::server::entities::entity::center(
 	pos_type const &_center)
 {
 	center_ = _center;
-	collision_->center(sge::math::structure_cast<sge::collision::unit>(_center));
+	collision_->center(
+		sge::structure_cast<
+			sge::collision::point
+		>(
+			_center));
 }
 
 void sanguis::server::entities::entity::collision_update(

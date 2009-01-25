@@ -1,6 +1,7 @@
 #include "player_direction.hpp"
 #include "instantiate_serialize.hpp"
-#include "../sge_serialization.hpp"
+#include <sge/math/vector/serialize.hpp>
+#include <sge/math/vector/basic_impl.hpp>
 #include <boost/serialization/export.hpp>
 #include <boost/serialization/base_object.hpp>
 

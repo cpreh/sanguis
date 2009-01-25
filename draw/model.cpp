@@ -11,6 +11,8 @@
 #include "../client/id_dont_care.hpp"
 #include "../exception.hpp"
 #include <sge/log/headers.hpp>
+#include <sge/math/vector/is_null.hpp>
+#include <sge/math/vector/basic_impl.hpp>
 #include <sge/text.hpp>
 #include <sge/make_auto_ptr.hpp>
 #include <boost/foreach.hpp>
@@ -116,7 +118,7 @@ void sanguis::draw::model::speed(
 	
 	sprite::speed(s);
 
-	if(s.is_null() != old_speed.is_null())
+	if(is_null(s) != is_null(old_speed))
 		change_animation();
 }
 
@@ -134,7 +136,7 @@ bool sanguis::draw::model::dead() const
 
 bool sanguis::draw::model::walking() const
 {
-	return !speed().is_null();
+	return !is_null(speed());
 }
 
 bool sanguis::draw::model::has_health() const
@@ -278,7 +280,7 @@ sanguis::draw::model::animation() const
 		? animation_type::reloading
 		: attacking
 			? animation_type::attacking
-			: sprite::speed().is_null()
+			: is_null(sprite::speed())
 				? animation_type::none
 				: animation_type::walking;
 }

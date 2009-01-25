@@ -5,6 +5,7 @@
 #include "../../messages/give_weapon.hpp"
 #include "../../messages/change_weapon.hpp"
 #include "../../exception.hpp"
+#include <sge/math/vector/basic_impl.hpp>
 #include <sge/text.hpp>
 #include <limits>
 

@@ -7,7 +7,8 @@
 #include "../entity_id.hpp"
 #include "../messages/fwd.hpp"
 #include <sge/time/timer.hpp>
-#include <sge/math/vector.hpp>
+#include <sge/math/vector/static.hpp>
+#include <sge/math/vector/basic_decl.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/sprite/point.hpp>
@@ -82,7 +83,10 @@ private:
 	action_handlers                 actions;
 		
 	entity_id                       player_id_;
-	sge::math::vector<float, 2>     direction;
+	sge::math::vector::static_<
+		float,
+		2
+	>::type                         direction;
 	sge::sprite::point              cursor_pos_,
 	                                player_center;
 	weapon_type::type               current_weapon;

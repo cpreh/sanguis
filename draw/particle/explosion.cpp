@@ -2,6 +2,7 @@
 #include "generator.hpp"
 #include "z_ordering.hpp"
 #include "properties.hpp"
+#include <sge/math/vector/basic_impl.hpp>
 #include <sge/make_auto_ptr.hpp>
 #include <sge/minmax_pair_impl.hpp>
 #include <boost/bind.hpp>

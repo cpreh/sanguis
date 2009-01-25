@@ -1,5 +1,8 @@
 #include "distance.hpp"
 #include "entities/entity.hpp"
+#include <sge/math/vector/basic_impl.hpp>
+#include <sge/math/vector/arithmetic.hpp>
+#include <sge/math/vector/length.hpp>
 
 sanguis::server::space_unit
 sanguis::server::distance(
@@ -14,5 +17,5 @@ sanguis::server::distance(
 	entities::entity const &a,
 	pos_type const &b)
 {
-	return (a.center() - b).length();
+	return length(a.center() - b);
 }
