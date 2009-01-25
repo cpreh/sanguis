@@ -26,6 +26,9 @@
 #include "../../exception.hpp"
 #include <sge/iconv.hpp>
 #include <sge/math/constants.hpp>
+#include <sge/math/vector/io.hpp>
+#include <sge/math/vector/basic_impl.hpp>
+#include <sge/math/dim/basic_impl.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/collision/sattelite.hpp>
 #include <sge/collision/system.hpp>

@@ -11,6 +11,7 @@
 #include "../../messages/disconnect.hpp"
 
 #include <sge/iconv.hpp>
+#include <sge/text.hpp>
 #include <sge/log/headers.hpp>
 
 #include <boost/bind.hpp>

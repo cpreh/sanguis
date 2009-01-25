@@ -2,6 +2,7 @@
 #include <sge/font/font.hpp>
 #include <sge/font/text_size_t.hpp>
 #include <sge/math/dim/basic_impl.hpp>
+#include <sge/math/vector/basic_impl.hpp>
 #include <sge/format.hpp>
 #include <sge/text.hpp>
 

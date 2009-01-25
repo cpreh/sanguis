@@ -7,6 +7,8 @@
 #include "../types.hpp"
 #include "../../damage_type.hpp"
 #include "../../entity_type.hpp"
+#include <sge/math/vector/basic_decl.hpp>
+#include <sge/math/dim/basic_decl.hpp>
 
 namespace sanguis
 {

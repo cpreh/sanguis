@@ -144,7 +144,7 @@ private:
 	link_container          links,
 	                        backlinks;
 	
-	sge::collision::object_ptr collision_;
+	sge::collision::objects::circle_ptr collision_;
 	sge::signals::connection speed_change_;
 };
 

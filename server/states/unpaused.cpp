@@ -28,8 +28,11 @@
 #include "../../exception.hpp"
 
 #include <sge/math/constants.hpp>
-#include <sge/collision/system.hpp>
 #include <sge/math/angle.hpp>
+#include <sge/math/vector/arithmetic.hpp>
+#include <sge/math/vector/basic_impl.hpp>
+#include <sge/math/vector/is_null.hpp>
+#include <sge/collision/system.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/format.hpp>
 #include <sge/text.hpp>
@@ -111,7 +114,7 @@ sanguis::server::states::unpaused::operator()(
 	// FIXME: we should really transport the target point over the network
 	player_.target(
 		player_.pos()
-		+ angle_to_vector(player_.direction()) * 100);
+		+ angle_to_vector(player_.direction()) * static_cast<space_unit>(100));
 
 	player_.angle(e.angle());
 	send(message_convert<messages::rotate>(player_));
@@ -174,7 +177,7 @@ sanguis::server::states::unpaused::operator()(
 
 	entities::player &player_(*it->second);
 
-	if (e.dir().is_null())
+	if (is_null(e.dir()))
 		player_.property(
 			entities::property_type::movement_speed).current(messages::mu(0));
 	else
