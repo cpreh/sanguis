@@ -1,6 +1,7 @@
 #include "resize.hpp"
 #include "instantiate_serialize.hpp"
-#include "../sge_serialization.hpp"
+#include <sge/math/dim/basic_impl.hpp>
+#include <sge/math/dim/serialize.hpp>
 #include <boost/serialization/export.hpp>
 #include <boost/serialization/base_object.hpp>
 

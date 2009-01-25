@@ -1,5 +1,7 @@
 #include "hud.hpp"
 #include <sge/font/font.hpp>
+#include <sge/font/text_size_t.hpp>
+#include <sge/math/dim/basic_impl.hpp>
 #include <sge/format.hpp>
 #include <sge/text.hpp>
 
@@ -35,7 +37,7 @@ void sanguis::draw::hud::update(
 			% level_
 			% frames_counter.frames_str())
 			.str(),
-		sge::font::pos(0, 0),
+		sge::font::pos::null(),
 		sge::font::dim(200, 100), // FIXME
 		sge::font::align_h::left,
 		sge::font::align_v::top);

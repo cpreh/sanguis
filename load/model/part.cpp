@@ -1,6 +1,7 @@
 #include "part.hpp"
 #include "../../exception.hpp"
 #include <sge/string.hpp>
+#include <sge/text.hpp>
 #include <sge/filesystem/exists.hpp>
 #include <boost/array.hpp>
 #include <utility>

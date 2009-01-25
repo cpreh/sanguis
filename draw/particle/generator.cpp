@@ -4,6 +4,10 @@
 #include <sge/time/second_f.hpp>
 #include <sge/math/constants.hpp>
 #include <sge/math/angle.hpp>
+#include <sge/math/vector/basic_impl.hpp>
+#include <sge/math/vector/is_null.hpp>
+#include <sge/math/vector/normalize.hpp>
+#include <sge/math/vector/arithmetic.hpp>
 
 sanguis::draw::particle::generator::generator(
 	generation_callback const generate_object,
@@ -67,7 +71,7 @@ void sanguis::draw::particle::generator::generate()
 	point const &diff = object_pos;
 
 	point const refpoint = 
-		diff.is_null() 
+		is_null(diff) 
 			? point(
 				static_cast<point::value_type>(rot_angle()),
 				static_cast<point::value_type>(rot_angle()))
@@ -83,10 +87,10 @@ void sanguis::draw::particle::generator::generate()
 		}
 		break;
 		case movement_type::shrinking:
-			velocity = sge::math::normalize(refpoint);
+			velocity = normalize(refpoint);
 		break;
 		case movement_type::expanding:
-			velocity = sge::math::normalize(-refpoint);
+			velocity = normalize(-refpoint);
 		break;
 		default:
 			throw sge::exception(

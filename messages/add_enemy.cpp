@@ -1,6 +1,7 @@
 #include "add_enemy.hpp"
 #include "instantiate_serialize.hpp"
-#include "../sge_serialization.hpp"
+#include <sge/math/vector/basic_impl.hpp>
+#include <sge/math/dim/basic_impl.hpp>
 #include <boost/serialization/export.hpp>
 #include <boost/serialization/base_object.hpp>
 
@@ -18,16 +19,17 @@ sanguis::messages::add_enemy::add_enemy(
 	space_unit const health_,
 	space_unit const max_health_,
 	dim_type const &dim_)
-: add(
-	id,
-	entity_type::enemy,
-	pos_,
-	angle_,
-	speed_,
-	health_,
-	max_health_,
-	dim_),
-  etype_(etype_)
+:
+	add(
+		id,
+		entity_type::enemy,
+		pos_,
+		angle_,
+		speed_,
+		health_,
+		max_health_,
+		dim_),
+	etype_(etype_)
 {}
 
 sanguis::enemy_type::type

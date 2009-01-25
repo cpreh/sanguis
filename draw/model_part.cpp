@@ -5,16 +5,17 @@
 #include "../load/model/base_animation_not_found.hpp"
 #include "../log.hpp"
 #include "../exception.hpp"
-#include <sge/text.hpp>
 #include <sge/console/var_impl.hpp>
 #include <sge/math/angle.hpp>
 #include <sge/math/constants.hpp>
-#include <sge/math/vec_dim.hpp>
+#include <sge/math/vector/dim.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/math/compare.hpp>
 #include <sge/audio/sound.hpp>
 #include <sge/sprite/object.hpp>
 #include <sge/time/time.hpp>
+#include <sge/structure_cast.hpp>
+#include <sge/text.hpp>
 #include <boost/bind.hpp>
 #include <algorithm>
 #include <limits>
@@ -49,7 +50,9 @@ sanguis::draw::model_part::model_part(
 	animation_(),
 	ended(false)
 {
-	ref.size() = sge::math::structure_cast<sge::sprite::unit>(
+	ref.size() = sge::structure_cast<
+		sge::sprite::dim
+	>(
 		info
 		[weapon_type::none]
 		[animation_type::none]

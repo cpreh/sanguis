@@ -1,6 +1,9 @@
 #include "sprite.hpp"
 #include "sprite_part_index.hpp"
 #include "object.hpp"
+#include <sge/math/vector/basic_impl.hpp>
+#include <sge/math/vector/arithmetic.hpp>
+#include <sge/structure_cast.hpp>
 #include <boost/foreach.hpp>
 #include <boost/none.hpp>
 
@@ -41,7 +44,9 @@ void sanguis::draw::sprite::update(
 {
 	pos_ += time * speed();
 	update_pos(
-		sge::math::structure_cast<sge::sprite::unit>(
+		sge::structure_cast<
+			sge::sprite::point
+		>(
 			pos_));
 }
 
@@ -107,9 +112,13 @@ void sanguis::draw::sprite::speed(
 	speed_ = s;
 }
 
-void sanguis::draw::sprite::pos(const sge::sprite::point& p)
+void sanguis::draw::sprite::pos(
+	sge::sprite::point const &p)
 {
-	pos_ = sge::math::structure_cast<funit>(p);
+	pos_ = sge::structure_cast<
+		vector2
+	>(
+		p);
 	update_pos(p);
 }
 

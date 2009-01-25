@@ -14,9 +14,11 @@
 #include "../perk_type.hpp"
 #include <sge/math/clamp.hpp>
 #include <sge/math/angle.hpp>
+#include <sge/math/dim/basic_impl.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/console/console.hpp>
 #include <sge/time/millisecond.hpp>
+#include <sge/structure_cast.hpp>
 #include <boost/bind.hpp>
 #include <boost/assign/list_of.hpp>
 #include <boost/optional.hpp>
@@ -93,9 +95,10 @@ void sanguis::client::logic::move(
 	messages::move const &m)
 {
 	if(m.id() == player_id_)
-		player_center = sge::math::structure_cast<
-			sge::sprite::unit>(
-				m.pos()); // FIXME
+		player_center = sge::structure_cast<
+			sge::sprite::point
+		>(
+			m.pos()); // FIXME
 }
 
 void sanguis::client::logic::pause(
@@ -143,7 +146,9 @@ void sanguis::client::logic::update_direction()
 		messages::auto_ptr(
 			new messages::player_direction(
 				player_id_,
-				sge::math::structure_cast<messages::space_unit>(
+				sge::structure_cast<
+					messages::vector2
+				>(
 					direction))));
 }
 

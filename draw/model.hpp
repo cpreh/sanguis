@@ -6,7 +6,6 @@
 #include "remove_action.hpp"
 #include "../entity_id.hpp"
 #include "../animation_type.hpp"
-#include <sge/math/vector.hpp>
 #include <sge/log/fwd.hpp>
 #include <sge/string.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>

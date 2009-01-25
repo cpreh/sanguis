@@ -9,7 +9,9 @@
 #include "../../messages/add.hpp"
 #include "../../angle_vector.hpp"
 #include "../../exception.hpp"
-#include <sge/math/vec_dim.hpp>
+#include <sge/math/vector/basic_impl.hpp>
+#include <sge/math/dim/basic_impl.hpp>
+#include <sge/math/dim/arithmetic.hpp>
 #include <sge/math/power.hpp>
 #include <sge/collision/system.hpp>
 #include <sge/collision/object.hpp>

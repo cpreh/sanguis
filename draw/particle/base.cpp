@@ -1,4 +1,6 @@
 #include "base.hpp"
+#include <sge/math/vector/basic_impl.hpp>
+#include <sge/math/vector/arithmetic.hpp>
 
 sanguis::draw::particle::base::base(
 	point const &pos_,
@@ -25,8 +27,8 @@ bool sanguis::draw::particle::base::update(
 	rotation_type,
 	depth_type)
 {
-	pos(pos() + vel()*delta);
-	rot(rot() + rot_vel()*delta);
+	pos(pos() + vel() * delta);
+	rot(rot() + rot_vel() * delta);
 	return false;
 }
 

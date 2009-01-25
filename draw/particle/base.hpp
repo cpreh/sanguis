@@ -5,6 +5,7 @@
 #include "fwd.hpp"
 #include "../environment.hpp"
 #include <sge/sprite/container.hpp>
+#include <sge/math/vector/basic_decl.hpp>
 
 namespace sanguis
 {

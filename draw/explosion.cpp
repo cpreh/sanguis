@@ -14,6 +14,7 @@
 #include "../client/next_id.hpp"
 #include "../resolution.hpp"
 #include <sge/minmax_pair_impl.hpp>
+#include <sge/structure_cast.hpp>
 #include <boost/bind.hpp>
 #include <boost/assign/list_of.hpp>
 
@@ -200,8 +201,8 @@ void sanguis::draw::explosion::update(
 {
 	ended = particles.update(
 		delta,
-		sge::math::structure_cast<
-			particle::point::value_type
+		sge::structure_cast<
+			particle::point
 		>(pos_),
 		//particle::point::null(),
 		static_cast<particle::rotation>(0),

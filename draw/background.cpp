@@ -15,6 +15,7 @@
 #include <sge/texture/part.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/make_shared_ptr.hpp>
+#include <sge/structure_cast.hpp>
 
 sanguis::draw::background::background(
 	draw::environment const &env)
@@ -24,8 +25,8 @@ sanguis::draw::background::background(
 		client::next_id()),
 	tex(
 		env.system().renderer()->create_texture(
-			sge::math::structure_cast<
-				sge::renderer::size_type
+			sge::structure_cast<
+				sge::renderer::dim_type
 			>(
 				resolution()),
 			sge::renderer::color_format::rgba8,

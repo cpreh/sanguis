@@ -8,6 +8,7 @@
 #include <sge/sprite/dim.hpp>
 #include <sge/sprite/color.hpp>
 #include <sge/sprite/intrusive_order.hpp>
+#include <sge/math/vector/basic_decl.hpp>
 #include <vector>
 
 namespace sanguis

@@ -1,6 +1,7 @@
 #include "add_pickup.hpp"
 #include "instantiate_serialize.hpp"
-#include "../sge_serialization.hpp"
+#include <sge/math/vector/basic_impl.hpp>
+#include <sge/math/dim/basic_impl.hpp>
 #include <boost/serialization/export.hpp>
 #include <boost/serialization/base_object.hpp>
 
@@ -17,16 +18,17 @@ sanguis::messages::add_pickup::add_pickup(
 	space_unit const health_,
 	space_unit const max_health_,
 	dim_type const &dim_)
-: add(
-	id,
-	entity_type::pickup,
-	pos_,
-	angle_,
-	vector2(mu(0), mu(0)), // speed
-	health_,
-	max_health_,
-	dim_),
-  ptype_(ptype_)
+:
+	add(
+		id,
+		entity_type::pickup,
+		pos_,
+		angle_,
+		vector2::null(), // speed
+		health_,
+		max_health_,
+		dim_),
+	ptype_(ptype_)
 {}
 
 sanguis::pickup_type::type
