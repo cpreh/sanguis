@@ -15,7 +15,7 @@
 #include "../../damage_type.hpp"
 #include "../../time_type.hpp"
 #include <sge/container/linear_set.hpp>
-#include <sge/collision/object_fwd.hpp>
+#include <sge/collision/objects/fwd.hpp>
 #include <sge/signals/connection.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
 #include <boost/noncopyable.hpp>
@@ -142,8 +142,8 @@ private:
 	link_container          links,
 	                        backlinks;
 	
-	sge::collision::object_ptr collision_;
-	sge::signals::connection speed_change_;
+	sge::collision::objects::circle_ptr collision_;
+	sge::signals::connection            speed_change_;
 };
 
 }

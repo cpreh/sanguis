@@ -25,7 +25,7 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 			)
 			(
 				entities::property_type::movement_speed,
-				entities::property(messages::mu(500))
+				entities::property(messages::mu(10000))
 			),
 		default_dim(
 			env.load().models(),

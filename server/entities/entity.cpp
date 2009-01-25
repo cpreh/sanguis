@@ -12,7 +12,7 @@
 #include <sge/math/vec_dim.hpp>
 #include <sge/math/power.hpp>
 #include <sge/collision/system.hpp>
-#include <sge/collision/object.hpp>
+#include <sge/collision/objects/circle.hpp>
 #include <sge/container/linear_set_impl.hpp>
 #include <sge/text.hpp>
 #include <boost/foreach.hpp>
@@ -105,7 +105,7 @@ void sanguis::server::entities::entity::center(
 	pos_type const &_center)
 {
 	center_ = _center;
-	collision_->pos(sge::math::structure_cast<sge::collision::unit>(_center));
+	collision_->center(sge::math::structure_cast<sge::collision::unit>(_center));
 }
 
 void sanguis::server::entities::entity::collision_update(
