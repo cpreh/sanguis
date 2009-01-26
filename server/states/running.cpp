@@ -223,6 +223,10 @@ void sanguis::server::states::running::level_callback(
 				p.level())));
 }
 
+#include <sge/iostream.hpp>
+#include <sge/text.hpp>
+#include <typeinfo>
+
 bool sanguis::server::states::running::collision_test(
 	sge::collision::sattelite const &a,
 	sge::collision::sattelite const &b)
@@ -231,6 +235,15 @@ bool sanguis::server::states::running::collision_test(
 		dynamic_cast<entities::sattelite const &>(a).entity();
 	entities::entity const &e1 = 
 		dynamic_cast<entities::sattelite const &>(b).entity();
+	
+	/*
+	sge::cerr << "checking " 
+	          << typeid(e0).name() << " and " << typeid(e1).name() 
+						<< " for collision: " 
+						<< (e0.can_collide_with(e1) && e1.can_collide_with(e0))
+						<< "\n";
+						*/
+	
 	return e0.can_collide_with(e1) && e1.can_collide_with(e0);
 }
 
@@ -244,6 +257,11 @@ void sanguis::server::states::running::collision(
 		dynamic_cast<entities::sattelite &>(b).entity();
 	e0.collision(e1);
 	e1.collision(e0);
+
+	/*
+	sge::cerr << "collision between " 
+	          << typeid(e0).name() << " and " << typeid(e1).name() << "\n";
+						*/
 }
 
 sanguis::load::context const &

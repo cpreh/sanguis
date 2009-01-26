@@ -156,7 +156,6 @@ try
 			sge::renderer::window_mode::windowed,
 			sge::renderer::vsync::on))
 		(sge::systems::parameterless::input)
-		(sge::systems::parameterless::audio_player)
 		(sge::systems::parameterless::image)
 		(sge::systems::parameterless::collision_system)
 		(sge::systems::parameterless::font));

@@ -51,6 +51,6 @@ void sanguis::draw::model_part_state::play(
 	sge::audio::sound_ptr const s,
 	sge::audio::play_mode::type const ss)
 {
-	if (s)
-		s->play(ss);
+	//if (s)
+	//	s->play(ss);
 }
