@@ -4,7 +4,7 @@
 #include "../../exception.hpp"
 #include "../../media_path.hpp"
 #include <sge/log/headers.hpp>
-#include <sge/texture/util.hpp>
+#include <sge/texture/add_image.hpp>
 #include <sge/texture/default_creator_impl.hpp>
 #include <sge/texture/no_fragmented.hpp>
 #include <sge/renderer/texture_filter.hpp>
@@ -52,7 +52,7 @@ sge::texture::const_part_ptr const
 sanguis::load::resource::textures::do_load_inner(
 	sge::filesystem::path const &p) const
 {
-	return sge::texture::add(
+	return sge::texture::add_image(
 		texman,
 		il->load(p));
 }

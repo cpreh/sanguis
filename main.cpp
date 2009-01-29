@@ -31,7 +31,7 @@
 #include <sge/texture/no_fragmented.hpp>
 #include <sge/texture/default_creator_impl.hpp>
 #include <sge/texture/manager.hpp>
-#include <sge/texture/util.hpp>
+#include <sge/texture/add_image.hpp>
 #include <sge/collision/system.hpp>
 #include <sge/image/loader.hpp>
 #include <sge/audio/player.hpp>
@@ -182,7 +182,7 @@ try
 
 	sge::con::console_gfx console(
 		sys.renderer(),
-		sge::texture::add(
+		sge::texture::add_image(
 			texman,
 			sys.image_loader()->load(
 				sanguis::media_path() / SGE_TEXT("console_back.jpg"))),
