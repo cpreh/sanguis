@@ -39,12 +39,6 @@ pkg_check_modules (SGE spacegameengine)
 
 LINK_DIRECTORIES(${SGE_LIBRARY_DIRS})
 
-FIND_PACKAGE(Boost 1.36.0 COMPONENTS
-	filesystem
-	serialization
-	thread,
-	program_options)
-
 IF (${CMAKE_COMPILER_IS_GNUCXX})
 	ADD_DEFINITIONS("-fvisibility=hidden -ansi -pedantic-errors -Wall"
 	"-Wextra -Wconversion -Wfloat-equal -Wredundant-decls"
