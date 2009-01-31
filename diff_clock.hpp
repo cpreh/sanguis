@@ -2,7 +2,7 @@
 #define SANGUIS_DIFF_CLOCK_HPP_INCLUDED
 
 #include "time_type.hpp"
-#include <sge/time/types.hpp>
+#include <sge/time/unit.hpp>
 #include <sge/time/fun.hpp>
 #include <boost/noncopyable.hpp>
 

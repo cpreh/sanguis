@@ -2,6 +2,7 @@
 #include "object.hpp"
 #include <boost/bind.hpp>
 #include <sge/time/second_f.hpp>
+#include <sge/time/resolution.hpp>
 #include <sge/math/constants.hpp>
 #include <sge/math/angle.hpp>
 #include <sge/math/vector/basic_impl.hpp>

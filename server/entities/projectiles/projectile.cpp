@@ -5,6 +5,7 @@
 #include "../../message_converter.hpp"
 #include "../../../exception.hpp"
 #include <sge/time/second_f.hpp>
+#include <sge/time/resolution.hpp>
 #include <sge/text.hpp>
 #include <boost/foreach.hpp>
 

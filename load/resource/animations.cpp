@@ -4,6 +4,7 @@
 #include "../log.hpp"
 #include "../../exception.hpp"
 #include <sge/time/millisecond.hpp>
+#include <sge/time/resolution.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/fstream.hpp>
 #include <sge/sstream.hpp>
@@ -63,7 +64,7 @@ sanguis::load::resource::animations::do_load(
 			SGE_TEXT("unexpected end of file \"")
 			+ framesfile.string());
 
-	boost::optional<sge::time::millisecond> const_delay;
+	boost::optional<sge::time::resolution> const_delay;
 	if (boost::algorithm::starts_with(line,SGE_TEXT("frame_length ")))
 		const_delay.reset(
 			sge::time::millisecond(
@@ -85,7 +86,7 @@ sanguis::load::resource::animations::do_load(
 		if (line.empty())
 			continue;
 
-		sge::time::millisecond delay(0);
+		sge::time::resolution delay(0);
 		sge::string filename = line;
 
 		if (!const_delay)

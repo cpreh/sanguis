@@ -1,6 +1,7 @@
 #include "aoe_damage.hpp"
 #include "../property.hpp"
 #include <sge/time/second_f.hpp>
+#include <sge/time/resolution.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <boost/foreach.hpp>

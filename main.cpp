@@ -37,6 +37,7 @@
 #include <sge/audio/player.hpp>
 #include <sge/audio/multi_loader.hpp>
 #include <sge/time/second.hpp>
+#include <sge/time/resolution.hpp>
 #include <sge/renderer/colors.hpp>
 
 // boost

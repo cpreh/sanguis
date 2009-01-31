@@ -18,6 +18,7 @@
 #include <sge/renderer/device.hpp>
 #include <sge/console/console.hpp>
 #include <sge/time/millisecond.hpp>
+#include <sge/time/resolution.hpp>
 #include <sge/structure_cast.hpp>
 #include <boost/bind.hpp>
 #include <boost/assign/list_of.hpp>

@@ -6,6 +6,7 @@
 #include "../bounding_circle.hpp"
 #include "../../exception.hpp"
 #include <sge/time/second_f.hpp>
+#include <sge/time/resolution.hpp>
 #include <sge/math/circle_impl.hpp>
 #include <sge/text.hpp>
 #include <sge/log/headers.hpp>

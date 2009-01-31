@@ -1,6 +1,7 @@
 #include "simple.hpp"
 #include "spawn.hpp"
 #include <sge/time/second_f.hpp>
+#include <sge/time/resolution.hpp>
 
 sanguis::server::waves::simple::simple(
 	time_type const delay,

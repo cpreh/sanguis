@@ -10,7 +10,6 @@
 #include "../load/model/fwd.hpp"
 #include <sge/sprite/texture_animation.hpp> // TODO: fwd this too!
 #include <sge/sprite/rotation_type.hpp>
-#include <sge/time/types.hpp>
 #include <boost/scoped_ptr.hpp>
 #include <memory>
 

@@ -2,7 +2,7 @@
 #define SANGUIS_CONSOLE_TIMER_HPP_INCLUDED
 
 #include <sge/time/timer.hpp>
-#include <sge/time/types.hpp>
+#include <sge/time/funit.hpp>
 #include <sge/string.hpp>
 #include <sge/console/action_var.hpp>
 #include <boost/noncopyable.hpp>
