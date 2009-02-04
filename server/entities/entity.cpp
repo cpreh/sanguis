@@ -52,6 +52,7 @@ sanguis::server::entities::entity::entity(
 				boost::bind(&entity::speed_change,this,_1)))
 {
 	center(center_);
+	direction(direction());
 }
 
 sanguis::entity_id
@@ -91,15 +92,10 @@ sanguis::server::entities::entity::direction() const
 	return direction_;
 }
 
-#include <sge/iostream.hpp>
-#include <sge/math/vector/io.hpp>
-#include "player.hpp"
-
 void sanguis::server::entities::entity::direction(
 	space_unit const _direction)
 {
 	direction_ = _direction;
-	//sge::cerr << SGE_TEXT("server: entities: id ") << id() << SGE_TEXT(", type ") << typeid(*this).name() << SGE_TEXT(": setting new speed to ") << (angle_to_vector(_direction) * speed()) << SGE_TEXT("\n");
 	collision_->speed(
 		sge::structure_cast<
 			sge::collision::point
@@ -118,7 +114,6 @@ void sanguis::server::entities::entity::center(
 	pos_type const &_center)
 {
 	center_ = _center;
-	//sge::cerr << SGE_TEXT("server: entities: id ") << id() << SGE_TEXT(", type ") << typeid(*this).name() << SGE_TEXT(": setting new center to ") << _center << SGE_TEXT("\n");
 	collision_->center(
 		sge::structure_cast<
 			sge::collision::point
@@ -129,8 +124,6 @@ void sanguis::server::entities::entity::center(
 void sanguis::server::entities::entity::collision_update(
 	pos_type const &_center)
 {
-	//if (typeid(*this) == typeid(player))
-	//	sge::cerr << SGE_TEXT("server: entities: id ") << id() << SGE_TEXT(", type ") << typeid(*this).name() << SGE_TEXT(": bullet sets collision to ") << _center << SGE_TEXT("\n");
 	center_ = _center;
 }
 
@@ -403,6 +396,5 @@ bool sanguis::server::entities::entity::has_ref(
 void sanguis::server::entities::entity::speed_change(
 	property::value_type const v)
 {
-	//sge::cerr << SGE_TEXT("server: entities: id ") << id() << SGE_TEXT(", type ") << typeid(*this).name() << SGE_TEXT(": setting new speed to ") << (angle_to_vector(direction_) * v) << SGE_TEXT("\n");
 	direction(direction());
 }

@@ -244,7 +244,7 @@ bool sanguis::server::states::running::collision_test(
 						<< "\n";
 						*/
 	
-	return e0.can_collide_with(e1) && e1.can_collide_with(e0);
+	return e0.can_collide_with(e1) || e1.can_collide_with(e0);
 }
 
 void sanguis::server::states::running::collision(
