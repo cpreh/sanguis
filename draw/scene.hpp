@@ -10,7 +10,7 @@
 #include "../time_type.hpp"
 #include "../client_messages/fwd.hpp"
 #include <sge/renderer/device_fwd.hpp>
-#include <sge/font/font_fwd.hpp>
+#include <sge/font/object_fwd.hpp>
 #include <sge/type_info.hpp>
 #include <sge/log/fwd.hpp>
 #include <sge/noncopyable.hpp>
@@ -37,7 +37,7 @@ public:
 	scene(
 		load::context const &,
 		sge::renderer::device_ptr,
-		sge::font::font &);
+		sge::font::object &);
 	~scene();
 	
 	void process_message(

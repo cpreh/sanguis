@@ -9,6 +9,7 @@
 #include <sge/audio/pool.hpp>
 #include <sge/renderer/scoped_block.hpp>
 #include <sge/input/system.hpp>
+#include <sge/input/key_state_tracker.hpp>
 #include <sge/mainloop/dispatch.hpp>
 #include <sge/iostream.hpp>
 #include <boost/bind.hpp>
@@ -19,7 +20,7 @@ sanguis::client::machine::machine(
 	load::context const &resources_,
 	sge::systems::instance &sys,
 	sge::audio::pool &sound_pool_,
-	sge::font::font &font_,
+	sge::font::object &font_,
 	sge::input::key_state_tracker &ks,
 	sge::con::console_gfx &con,
 	net::address_type const &address_,
@@ -162,7 +163,7 @@ sanguis::client::machine::sound_pool()
 	return sound_pool_;
 }
 
-sge::font::font &
+sge::font::object &
 sanguis::client::machine::font()
 {
 	return font_;

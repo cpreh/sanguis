@@ -3,7 +3,7 @@
 #include "machine.hpp"
 #include "log.hpp"
 #include <sge/log/headers.hpp>
-#include <sge/font/font.hpp>
+#include <sge/font/object.hpp>
 #include <sge/font/text_size_t.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/text.hpp>

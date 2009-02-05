@@ -3,7 +3,7 @@
 
 #include "../time_type.hpp"
 #include "../messages/types.hpp"
-#include <sge/font/font_fwd.hpp>
+#include <sge/font/object_fwd.hpp>
 #include <sge/time/frames_counter.hpp>
 #include <boost/noncopyable.hpp>
 
@@ -15,7 +15,7 @@ namespace draw
 class hud : boost::noncopyable {
 public:
 	explicit hud(
-		sge::font::font &);
+		sge::font::object &);
 	void experience(
 		messages::exp_type);
 	void level(
@@ -23,7 +23,7 @@ public:
 	void update(
 		time_type);
 private:
-	sge::font::font           &font;
+	sge::font::object        &font;
 	messages::exp_type        experience_;
 	messages::level_type      level_;
 	sge::time::frames_counter frames_counter;

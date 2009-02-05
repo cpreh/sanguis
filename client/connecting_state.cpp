@@ -13,7 +13,7 @@
 #include <sge/iconv.hpp>
 #include <sge/text.hpp>
 #include <sge/structure_cast.hpp>
-#include <sge/font/font.hpp>
+#include <sge/font/object.hpp>
 #include <sge/font/text_size_t.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>

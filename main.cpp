@@ -26,7 +26,7 @@
 #include <sge/font/system.hpp>
 #include <sge/font/metrics.hpp>
 #include <sge/font/drawer_3d.hpp>
-#include <sge/font/font.hpp>
+#include <sge/font/object.hpp>
 #include <sge/texture/default_creator.hpp>
 #include <sge/texture/no_fragmented.hpp>
 #include <sge/texture/default_creator_impl.hpp>
@@ -39,6 +39,7 @@
 #include <sge/time/second.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/renderer/colors.hpp>
+#include <sge/input/key_state_tracker.hpp>
 
 // boost
 #include <boost/scoped_ptr.hpp>
@@ -172,14 +173,14 @@ try
 		sge::make_shared_ptr<sge::font::drawer_3d>(
 			sys.renderer(),
 			sge::renderer::colors::white()));
-	sge::font::font font(metrics,drawer);
+	sge::font::object font(metrics,drawer);
 	sge::texture::manager texman(
 		sys.renderer(),
 		sge::texture::default_creator<sge::texture::no_fragmented>(
 			sys.renderer(),
 			sge::renderer::color_format::rgba8, // TODO: what do we want to use here?
 			sge::renderer::linear_filter));
-	sge::font::font_ptr const console_font(new sge::font::font(metrics,drawer));
+	sge::font::object_ptr const console_font(new sge::font::object(metrics,drawer));
 
 	sge::con::console_gfx console(
 		sys.renderer(),

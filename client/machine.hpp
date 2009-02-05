@@ -6,9 +6,9 @@
 #include "../tick_event.hpp"
 #include "console_wrapper.hpp"
 
-#include <sge/font/font_fwd.hpp>
+#include <sge/font/object_fwd.hpp>
 #include <sge/input/key_type.hpp>
-#include <sge/input/key_state_tracker.hpp> // TODO: remove me!
+#include <sge/input/key_state_tracker_fwd.hpp> // TODO: remove me!
 #include <sge/systems/instance_fwd.hpp>
 #include <sge/audio/player_fwd.hpp>
 #include <sge/audio/pool.hpp>
@@ -38,7 +38,7 @@ public:
 		load::context const &,
 		sge::systems::instance &,
 		sge::audio::pool &,
-		sge::font::font &,
+		sge::font::object &,
 		sge::input::key_state_tracker &,
 		sge::con::console_gfx &,
 		::net::address_type const &,
@@ -62,7 +62,7 @@ public:
 	sge::renderer::device_ptr const renderer() const;
 	sge::audio::player_ptr const audio_player() const;
 	sge::audio::pool &sound_pool();
-	sge::font::font &font();
+	sge::font::object &font();
 	bool key_pressed(
 		sge::input::key_code) const;
 	
@@ -85,7 +85,7 @@ private:
 		out_buffer;
 	sge::systems::instance &sys;
 	sge::audio::pool &sound_pool_;
-	sge::font::font &font_;
+	sge::font::object &font_;
 	sge::input::key_state_tracker &ks;
 	sge::con::console_gfx &con;
 	sge::con::stdlib con_stdlib;

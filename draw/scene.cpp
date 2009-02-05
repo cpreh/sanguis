@@ -63,7 +63,7 @@ unsigned const render_dead_amount = 20;
 sanguis::draw::scene::scene(
 	load::context const &resources_,
 	sge::renderer::device_ptr const rend,
-	sge::font::font &font)
+	sge::font::object &font)
 :
 	ss(rend),
 	hud_(font),
