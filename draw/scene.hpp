@@ -108,6 +108,7 @@ private:
 	bool                          paused;
 	draw::environment             env;
 	entity_id                     background_id;
+	bool                          paint_background;
 
 	typedef boost::ptr_map<
 		entity_id,

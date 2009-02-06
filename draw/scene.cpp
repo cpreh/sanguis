@@ -44,6 +44,7 @@
 #include <sge/structure_cast.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/renderer/device.hpp>
+#include <sge/renderer/caps.hpp>
 
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
@@ -76,8 +77,13 @@ sanguis::draw::scene::scene(
 		resources_,
 		system()),
 	background_id(
-		client::invalid_id)
+		client::invalid_id),
+	paint_background(
+		rend->caps().render_target_supported())
 {
+	if(!paint_background)
+		return;
+	
 	entity_auto_ptr p(
 		sge::make_auto_ptr<
 			draw::background
@@ -428,8 +434,10 @@ void sanguis::draw::scene::render_dead()
 		r.second->transfer(
 			temp_sys);
 	
-	background().paint_dead(
-		temp_sys);
+	if(paint_background)
+		background().paint_dead(
+			temp_sys);
+	// else TODO: create a fallback!
 	
 	dead_list.clear();
 }

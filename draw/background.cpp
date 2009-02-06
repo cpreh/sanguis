@@ -6,7 +6,6 @@
 #include "../client/next_id.hpp"
 #include "../resolution.hpp"
 #include <sge/renderer/device.hpp>
-#include <sge/renderer/caps.hpp>
 #include <sge/renderer/scoped_target.hpp>
 #include <sge/renderer/fill_pixels.hpp>
 #include <sge/renderer/scoped_texture_lock.hpp>
@@ -59,9 +58,6 @@ void sanguis::draw::background::paint_dead(
 	sge::renderer::device_ptr const rend(
 		sys.renderer());
 	
-	if(!rend->caps().render_target_supported())
-		return;
-
 	sge::renderer::scoped_target const scoped_(
 		rend,
 		tex);
