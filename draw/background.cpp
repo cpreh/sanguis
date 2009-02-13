@@ -45,9 +45,8 @@ sanguis::draw::background::background(
 {
 	sge::renderer::fill_pixels(
 		sge::renderer::scoped_texture_lock(
-			sge::renderer::make_scoped_lock(
-				tex,
-				sge::renderer::lock_flags::writeonly))
+			tex,
+			sge::renderer::lock_flags::writeonly)
 		.value(),
 		sge::renderer::colors::transparent());
 }
