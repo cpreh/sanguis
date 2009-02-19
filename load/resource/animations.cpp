@@ -137,7 +137,7 @@ sanguis::load::resource::animations::load_without_frames_file(
 	if(first_file == sge::filesystem::directory_iterator())
 		throw exception(dir.string() + SGE_TEXT(" is empty!"));
 	
-	boost::filesystem::path const first_path(
+	sge::filesystem::path const first_path(
 		*first_file);
 
 	if(sge::filesystem::next_file(first_file) != sge::filesystem::directory_iterator())
@@ -146,8 +146,8 @@ sanguis::load::resource::animations::load_without_frames_file(
 			sge::log::_1
 				<< SGE_TEXT("No frames file found in \"")
 				<< dir
-				<< SGE_TEXT("\" although there is more than one file!"
-				<< SGE_TEXT(" Just taking the first image.")));
+				<< SGE_TEXT("\" although there is more than one file!")
+				<< SGE_TEXT(" Just taking the first image."));
 
 	sge::sprite::animation_series ret;
 	ret.push_back(
