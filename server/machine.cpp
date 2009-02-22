@@ -6,7 +6,7 @@
 #include "../exception.hpp"
 #include "message_event.hpp"
 
-#include <sge/console/console_gfx.hpp>
+#include <sge/console/gfx.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/text.hpp>
 
@@ -16,7 +16,7 @@
 sanguis::server::machine::machine(
 	load::context const &resources_,
 	sge::collision::system_ptr const _collision,
-	sge::con::console_gfx &con,
+	sge::console::gfx &con,
 	net::port_type const port_)
 :
 	resources_(

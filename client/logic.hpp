@@ -11,6 +11,8 @@
 #include <sge/math/vector/basic_decl.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/console/arg_list.hpp>
+#include <sge/console/gfx_fwd.hpp>
+#include <sge/signals/connection.hpp>
 #include <sge/sprite/point.hpp>
 #include <sge/noncopyable.hpp>
 #include <boost/tr1/array.hpp>
@@ -27,7 +29,8 @@ class logic {
 public:
 	explicit logic(
 		send_callback const &,
-		sge::renderer::device_ptr device);	
+		sge::renderer::device_ptr device,
+		sge::console::gfx &);	
 	void handle_player_action(
 		player_action const &);
 	void give_weapon(
@@ -69,10 +72,11 @@ private:
 		weapon_type::type);
 
 	void give_perk(
-		sge::con::arg_list const &);
+		sge::console::arg_list const &);
 
 	send_callback const             send;
 	sge::renderer::device_ptr const rend;
+	sge::signals::connection const  give_perk_connection;
 
 	typedef boost::function<
 		void (key_scale)

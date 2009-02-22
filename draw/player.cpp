@@ -23,10 +23,6 @@ sge::sprite::point const
 	player_body_center(25,32),
 	player_leg_center(32,32);
 
-sge::con::var<sanguis::draw::funit> turning_speed(
-	SGE_TEXT("player_turning_speed"),
-	static_cast<sanguis::draw::funit>(0.4));
-
 sanguis::draw::sprite_part_index const
 	top(1),
 	bottom(0);

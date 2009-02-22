@@ -5,7 +5,7 @@
 #include "../net/server.hpp"
 #include "../tick_event.hpp"
 #include "message_event.hpp"
-#include <sge/console/console_gfx_fwd.hpp>
+#include <sge/console/gfx_fwd.hpp>
 #include <sge/collision/system_fwd.hpp>
 #include <sge/string.hpp>
 #include <boost/statechart/state_machine.hpp>
@@ -38,7 +38,7 @@ public:
 	machine(
 		load::context const &,
 		sge::collision::system_ptr,
-		sge::con::console_gfx &,
+		sge::console::gfx &,
 		::net::port_type);
 	void process(tick_event const &);
 	void process_message(
@@ -86,7 +86,7 @@ private:
 		s_data;
 	client_map clients;
 	sge::collision::system_ptr collision_;
-	sge::con::console_gfx &con;
+	sge::console::gfx &con;
 };
 
 }

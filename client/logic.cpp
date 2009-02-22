@@ -16,7 +16,8 @@
 #include <sge/math/angle.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/renderer/device.hpp>
-#include <sge/console/console.hpp>
+#include <sge/console/gfx.hpp>
+#include <sge/console/object.hpp>
 #include <sge/time/millisecond.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/structure_cast.hpp>
@@ -28,10 +29,19 @@
 
 sanguis::client::logic::logic(
 	send_callback const &send,
-	sge::renderer::device_ptr const rend)
+	sge::renderer::device_ptr const rend,
+	sge::console::gfx &console_gfx)
 :
 	send(send),
 	rend(rend),
+	give_perk_connection(
+		console_gfx.object().insert(
+			SGE_TEXT("giveperk"),
+			boost::bind(
+				&logic::give_perk,
+				this,
+				_1),
+			SGE_TEXT("giveperk <perk> - gives you a random perk"))),
 	actions(
 		boost::assign::list_of
 			(boost::bind(&logic::handle_move_x, this, _1))
@@ -52,14 +62,6 @@ sanguis::client::logic::logic(
 		sge::time::millisecond(
 			100))
 {
-	// FIXME: this needs some sort of RAII connection class
-	sge::con::add(
-		SGE_TEXT("giveperk"),
-		boost::bind(
-			&logic::give_perk,
-			this,
-			_1));
-
 	std::fill(
 		owned_weapons.begin(),
 		owned_weapons.end(),
@@ -297,7 +299,7 @@ to_perk_type(
 }
 
 void sanguis::client::logic::give_perk(
-	sge::con::arg_list const &args)
+	sge::console::arg_list const &args)
 {
 	if(args.size() != 2)
 		return;
@@ -311,5 +313,4 @@ void sanguis::client::logic::give_perk(
 				new messages::player_choose_perk(
 					player_id_,
 					pt)));
-
 }

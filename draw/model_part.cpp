@@ -27,13 +27,6 @@ namespace
 sge::sprite::rotation_type const
 invalid_rotation(
 	std::numeric_limits<sge::sprite::rotation_type>::max());
-
-sge::con::var<sanguis::draw::funit>
-rotation_speed(
-	SGE_TEXT("sprite_rot_speed"),
-	static_cast<sanguis::draw::funit>(
-		sge::math::twopi<sanguis::draw::funit>()));
-
 }
 
 sanguis::draw::model_part::model_part(
@@ -121,7 +114,7 @@ void sanguis::draw::model_part::update(
 		? ((swap_dist > abs_dist) ? static_cast<funit>(-1) : static_cast<funit>(1))
 		: ((swap_dist > abs_dist) ? static_cast<funit>(1) : static_cast<funit>(-1));
 
-	funit const turning_speed = rotation_speed.value();
+	funit const turning_speed = sge::math::twopi<sanguis::draw::funit>();
 
 	update_orientation(
 		min_dist < time / turning_speed

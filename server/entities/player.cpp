@@ -4,7 +4,6 @@
 #include "../perks/perk.hpp"
 #include "../../load/context.hpp"
 #include "../level_calculate.hpp"
-#include <sge/console/console.hpp>
 #include <sge/text.hpp>
 
 sanguis::server::entities::player::player(

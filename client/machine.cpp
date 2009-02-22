@@ -22,7 +22,7 @@ sanguis::client::machine::machine(
 	sge::audio::pool &sound_pool_,
 	sge::font::object &font_,
 	sge::input::key_state_tracker &ks,
-	sge::con::console_gfx &con,
+	sge::console::gfx &console,
 	net::address_type const &address_,
 	net::port_type const port_) 
 :
@@ -50,14 +50,19 @@ sanguis::client::machine::machine(
 	sound_pool_(sound_pool_),
 	font_(font_),
 	ks(ks),
-	con(con),
-	con_stdlib(
+	console(console),
+	console_stdlib(
+		console.object(),
 		boost::bind(
-			&sge::con::console_gfx::print,
-			&con,
+			&sge::console::gfx::print,
+			&console,
+			_1),
+		boost::bind(
+			&sge::console::gfx::print,
+			&console,
 			_1)),
-	con_wrapper_(
-		con,
+	console_wrapper_(
+		console,
 		sys.input_system(),
 		sge::input::kc::key_f1)
 {}
@@ -134,8 +139,8 @@ bool sanguis::client::machine::process(
 	sge::renderer::scoped_block const block_(sys.renderer());
 	process_event(t);
 
-	if (con.active())
-		con.draw();
+	if (console.active())
+		console.draw();
 
 	return !ks[sge::input::kc::key_escape];
 }
@@ -176,9 +181,9 @@ bool sanguis::client::machine::key_pressed(
 }
 
 sanguis::client::console_wrapper &
-sanguis::client::machine::con_wrapper()
+sanguis::client::machine::console_wrapper()
 {
-	return con_wrapper_;
+	return console_wrapper_;
 }
 
 sanguis::load::context const &
