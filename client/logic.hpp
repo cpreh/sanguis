@@ -12,9 +12,9 @@
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/sprite/point.hpp>
-#include <boost/noncopyable.hpp>
+#include <sge/noncopyable.hpp>
+#include <boost/tr1/array.hpp>
 #include <boost/function.hpp>
-#include <boost/array.hpp>
 #include <vector>
 
 namespace sanguis
@@ -22,7 +22,8 @@ namespace sanguis
 namespace client
 {
 
-class logic : boost::noncopyable {
+class logic {
+	SGE_NONCOPYABLE(logic)
 public:
 	explicit logic(
 		send_callback const &,
@@ -93,7 +94,7 @@ private:
 	bool                            paused;
 	sge::time::timer                rotation_timer;
 
-	typedef boost::array<
+	typedef std::tr1::array<
 		bool,
 		weapon_type::size
 	>                               owned_weapons_array;
