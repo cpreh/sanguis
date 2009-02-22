@@ -36,6 +36,8 @@
 #include <sge/log/headers.hpp>
 #include <sge/format.hpp>
 #include <sge/text.hpp>
+#include <sge/time/resolution.hpp>
+#include <sge/time/second_f.hpp>
 
 #include <boost/lexical_cast.hpp>
 #include <boost/mpl/vector.hpp>
@@ -45,8 +47,7 @@
 sanguis::server::states::unpaused::unpaused()
 :
 	send_timer(
-		SGE_TEXT("send_timer"),
-		static_cast<sge::time::funit>(0.1))
+		sge::time::second_f(static_cast<sge::time::funit>(0.1)))
 {
 	SGE_LOG_DEBUG(
 		log(),
@@ -250,7 +251,7 @@ sanguis::server::states::unpaused::react(
 	context<running>().process(delta);
 
 	// should we send position updates?
-	bool const update_pos = send_timer.v().update_b();
+	bool const update_pos = send_timer.update_b();
 
 	entities::container &entities = context<running>().entities();
 

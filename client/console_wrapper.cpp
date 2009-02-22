@@ -1,11 +1,11 @@
 #include "console_wrapper.hpp"
 #include <sge/math/compare.hpp>
-#include <sge/console/console_gfx.hpp>
+#include <sge/console/gfx.hpp>
 #include <sge/input/system.hpp>
 #include <boost/bind.hpp>
 
 sanguis::client::console_wrapper::console_wrapper(
-	sge::con::console_gfx &con,
+	sge::console::gfx &con,
 	sge::input::system_ptr const is,
 	sge::input::key_code const toggler)
 :
@@ -24,7 +24,7 @@ void sanguis::client::console_wrapper::input_callback(
 {
 	if (k.key().code() == toggler && !sge::math::almost_zero(k.value()))
 	{
-		con.toggle();
+		con.active(!con.active());
 		return;
 	}
 

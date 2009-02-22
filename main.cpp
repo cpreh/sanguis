@@ -16,7 +16,7 @@
 #include <sge/iconv.hpp>
 #include <sge/media.hpp>
 #include <sge/make_shared_ptr.hpp>
-#include <sge/console/console.hpp>
+#include <sge/console/object.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/systems/list.hpp>
 #include <sge/log/level.hpp>
@@ -67,7 +67,7 @@ server_auto_ptr
 create_server(
 	sanguis::load::context const &,
 	sge::collision::system_ptr const,
-	sge::con::console_gfx &,
+	sge::console::gfx &,
 	::net::port_type,
 	bool client_only);
 
@@ -180,21 +180,28 @@ try
 			sys.renderer(),
 			sge::renderer::color_format::rgba8, // TODO: what do we want to use here?
 			sge::renderer::linear_filter));
-	sge::font::object_ptr const console_font(new sge::font::object(metrics,drawer));
 
-	sge::con::console_gfx console(
+	sge::console::object console(SGE_TEXT('/'));
+
+	sge::console::gfx console_gfx(
+		console,
 		sys.renderer(),
-		sge::texture::add_image(
-			texman,
-			sys.image_loader()->load(
-				sanguis::media_path() / SGE_TEXT("console_back.jpg"))),
-		console_font,
+		sge::renderer::rgba8_color(255,255,255,255),
+		metrics,
 		sys.input_system(),
-		sge::sprite::point(0,0),
-		sge::sprite::dim(
-			sys.renderer()->screen_size().w(),
-			static_cast<sge::sprite::unit>(
-				sys.renderer()->screen_size().h() / 2)));
+		sge::sprite::object(
+			sge::sprite::point(0,0),
+			sge::texture::const_part_ptr(
+				sge::texture::add_image(
+					texman,
+					sys.image_loader()->load(
+						sanguis::media_path() / SGE_TEXT("console_back.jpg")))),
+			sge::sprite::dim(
+				sys.renderer()->screen_size().w(),
+				static_cast<sge::sprite::unit>(
+					sys.renderer()->screen_size().h() / 2))
+			)
+		);
 	
 	sge::audio::multi_loader audio_loader(sys.plugin_manager());
 	sge::audio::pool sound_pool;
@@ -214,7 +221,7 @@ try
 		create_server(
 			resources,
 			sys.collision_system(),
-			console,
+			console_gfx,
 			host_port,
 			client_only));
 
@@ -233,7 +240,7 @@ try
 		sound_pool,
 		font,
 		ks,
-		console,
+		console_gfx,
 		dest_server,
 		dest_port);
 	// this should construct, among others, the renderer
@@ -268,7 +275,7 @@ server_auto_ptr
 create_server(
 	sanguis::load::context const &resources,
 	sge::collision::system_ptr const coll,
-	sge::con::console_gfx &con,
+	sge::console::gfx &con,
 	::net::port_type const host_port,
 	bool const client_only)
 {

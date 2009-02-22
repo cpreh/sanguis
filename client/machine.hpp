@@ -12,7 +12,7 @@
 #include <sge/systems/instance_fwd.hpp>
 #include <sge/audio/player_fwd.hpp>
 #include <sge/audio/pool.hpp>
-#include <sge/console/console_gfx.hpp> // TODO: remove me!
+#include <sge/console/gfx.hpp>
 #include <sge/console/stdlib.hpp>
 #include <sge/renderer/device_fwd.hpp>
 
@@ -40,7 +40,7 @@ public:
 		sge::audio::pool &,
 		sge::font::object &,
 		sge::input::key_state_tracker &,
-		sge::con::console_gfx &,
+		sge::console::gfx &,
 		::net::address_type const &,
 		::net::port_type);
 
@@ -66,8 +66,8 @@ public:
 	bool key_pressed(
 		sge::input::key_code) const;
 	
-	console_wrapper &
-	con_wrapper();
+	sanguis::client::console_wrapper &
+	console_wrapper();
 	
 	load::context const &
 	resources() const;
@@ -87,9 +87,9 @@ private:
 	sge::audio::pool &sound_pool_;
 	sge::font::object &font_;
 	sge::input::key_state_tracker &ks;
-	sge::con::console_gfx &con;
-	sge::con::stdlib con_stdlib;
-	console_wrapper con_wrapper_;
+	sge::console::gfx &console;
+	sge::console::stdlib console_stdlib;
+	sanguis::client::console_wrapper console_wrapper_;
 };
 
 }

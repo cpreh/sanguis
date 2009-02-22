@@ -44,14 +44,15 @@ sanguis::client::running_state::running_state(
 			&running_state::send_message,
 			this,
 			_1),
-		context<machine>().renderer()),
+		context<machine>().renderer(),
+		context<machine>().console_wrapper().con),
 	input(
 		boost::bind(
 			&logic::handle_player_action,
 			&logic_,
 			_1)),
 	input_connection(
-		context<machine>().con_wrapper().register_callback(
+		context<machine>().console_wrapper().register_callback(
 			boost::bind(
 				&input_handler::input_callback,
 				&input,

@@ -4,7 +4,7 @@
 #include "running.hpp"
 #include "../../messages/fwd.hpp"
 #include "../../net/types.hpp"
-#include "../../console_timer.hpp"
+#include <sge/time/timer.hpp>
 #include <boost/mpl/list.hpp>
 #include <boost/statechart/simple_state.hpp>
 #include <boost/statechart/result.hpp>
@@ -97,7 +97,7 @@ private:
 	
 	static sge::log::logger &log();
 
-	console_timer send_timer;
+	sge::time::timer send_timer;
 };
 
 }
