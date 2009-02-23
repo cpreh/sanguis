@@ -32,6 +32,7 @@
 #include <sge/texture/default_creator_impl.hpp>
 #include <sge/texture/manager.hpp>
 #include <sge/texture/add_image.hpp>
+#include <sge/renderer/filter/linear.hpp>
 #include <sge/collision/system.hpp>
 #include <sge/image/loader.hpp>
 #include <sge/audio/player.hpp>
@@ -179,7 +180,7 @@ try
 		sge::texture::default_creator<sge::texture::no_fragmented>(
 			sys.renderer(),
 			sge::renderer::color_format::rgba8, // TODO: what do we want to use here?
-			sge::renderer::linear_filter));
+			sge::renderer::filter::linear));
 
 	sge::console::object console(SGE_TEXT('/'));
 

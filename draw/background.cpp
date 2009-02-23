@@ -10,7 +10,7 @@
 #include <sge/renderer/fill_pixels.hpp>
 #include <sge/renderer/scoped_texture_lock.hpp>
 #include <sge/renderer/colors.hpp>
-#include <sge/renderer/texture_filter.hpp>
+#include <sge/renderer/filter/linear.hpp>
 #include <sge/texture/part.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/make_shared_ptr.hpp>
@@ -29,7 +29,7 @@ sanguis::draw::background::background(
 			>(
 				resolution()),
 			sge::renderer::color_format::rgba8,
-			sge::renderer::linear_filter,
+			sge::renderer::filter::linear,
 			sge::renderer::resource_flags::none
 			)),
 	sprite(

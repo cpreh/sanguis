@@ -7,7 +7,7 @@
 #include <sge/texture/add_image.hpp>
 #include <sge/texture/default_creator_impl.hpp>
 #include <sge/texture/no_fragmented.hpp>
-#include <sge/renderer/texture_filter.hpp>
+#include <sge/renderer/filter/linear.hpp>
 #include <sge/filesystem/directory_iterator.hpp>
 #include <sge/filesystem/extension.hpp>
 #include <sge/filesystem/is_regular.hpp>
@@ -68,7 +68,7 @@ sanguis::load::resource::textures::textures(
 		>(
 			rend,
 			sge::renderer::color_format::rgba8,
-			sge::renderer::linear_filter)),
+			sge::renderer::filter::linear)),
 	il(il)
 {
 	// look for .tex files
