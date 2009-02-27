@@ -11,7 +11,6 @@
 #include <sge/input/system.hpp>
 #include <sge/input/key_state_tracker.hpp>
 #include <sge/mainloop/dispatch.hpp>
-#include <sge/iostream.hpp>
 #include <boost/bind.hpp>
 #include <boost/lambda/bind.hpp>
 #include <boost/lambda/construct.hpp>

@@ -45,7 +45,7 @@ IF (${CMAKE_COMPILER_IS_GNUCXX})
 	"-Wextra -Wconversion -Wfloat-equal -Wredundant-decls"
 	"-Wstrict-null-sentinel -Winit-self -Woverloaded-virtual"
 	"-Wold-style-cast -Wnon-virtual-dtor -Wctor-dtor-privacy -Wsign-promo"
-	" -Wstrict-aliasing=1 -Wmissing-declarations")
+	"-Wstrict-aliasing=1 -Wmissing-declarations")
 
 	ADD_DEFINITIONS(-D BOOST_FILESYSTEM_NO_DEPRECATED)
 ENDIF ()

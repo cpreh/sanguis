@@ -10,7 +10,7 @@
 #include "log.hpp"
 
 // sge
-#include <sge/iostream.hpp>
+#include <sge/cerr.hpp>
 #include <sge/text.hpp>
 #include <sge/exception.hpp>
 #include <sge/iconv.hpp>

@@ -1,5 +1,5 @@
 #include "log.hpp"
-#include <sge/iostream.hpp>
+#include <sge/cerr.hpp>
 #include <sge/text.hpp>
 #include <sge/log/logger.hpp>
 
