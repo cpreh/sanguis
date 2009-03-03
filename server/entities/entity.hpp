@@ -122,7 +122,8 @@ private:
 	server::environment     env_;
 	armor_array             armor_;
 	pos_type                center_;
-	space_unit              angle_;
+	space_unit              angle_,
+	                        direction_;
 	team::type              team_;
 	property_map            properties;
 	entity_type::type const type_;

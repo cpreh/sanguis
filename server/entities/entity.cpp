@@ -33,6 +33,7 @@ sanguis::server::entities::entity::entity(
 	env_(param.env()),
 	armor_(param.armor()),
 	angle_(param.angle()),
+	direction_(param.direction()),
 	team_(param.team()),
 	properties(param.properties()),
 	type_(param.type()),
@@ -112,16 +113,13 @@ void sanguis::server::entities::entity::angle(
 sanguis::server::space_unit
 sanguis::server::entities::entity::direction() const
 {
+	return direction_;
 }
 
 void sanguis::server::entities::entity::direction(
 	space_unit const _direction)
 {
-	collision_->speed(
-		sge::structure_cast<
-			sge::collision::point
-		>(
-			abs_speed()));
+	direction_ = _direction;
 }
 
 sanguis::server::pos_type const
@@ -293,7 +291,7 @@ bool sanguis::server::entities::entity::invulnerable() const
 }
 
 void sanguis::server::entities::entity::update(
-	time_type const delta,
+	time_type,
 	container &)
 {
 	BOOST_FOREACH(property_map::reference p, properties)
@@ -413,7 +411,13 @@ bool sanguis::server::entities::entity::has_ref(
 }
 
 void sanguis::server::entities::entity::speed_change(
-	property::value_type const v)
+	property::value_type)
 {
-	direction(direction());
+	collision_->speed(
+		sge::structure_cast<
+			sge::collision::point
+		>(
+			abs_speed()
+		)
+	);
 }
