@@ -15,7 +15,8 @@ sanguis::load::model::conditional_sound::conditional_sound(
 			static_cast<probability_type>(1))),
 	random_sound_(
 		col.sounds(),
-		ctx)
+		ctx,
+		sound_type::nonstream) // NOTE: we can safely assume no one wants to play music depending on a probability
 {}
 
 sge::audio::sound_ptr const

@@ -113,12 +113,24 @@ sanguis::load::resource::sounds::do_load(
 
 sge::audio::sound_ptr const
 sanguis::load::resource::sounds::make(
-	sge::audio::file_ptr const snd) const
+	sge::audio::file_ptr const snd,
+	sound_type::type const t) const
 {
-	sge::audio::sound_ptr const ss
-		= player->create_nonstream_sound(
-			snd);
-	pool.add(ss,sge::audio::stop_mode::continue_playing);
+	sge::audio::sound_ptr ss;
+	switch (t)
+	{
+		case sound_type::stream:
+			ss = player->create_stream_sound(
+				snd);
+		break;
+		case sound_type::nonstream:
+			ss = player->create_nonstream_sound(
+				snd);
+		break;
+	}
+	pool.add(
+		ss,
+		sge::audio::stop_mode::continue_playing);
 	return ss;
 }
 

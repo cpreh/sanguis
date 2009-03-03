@@ -6,10 +6,12 @@
 
 sanguis::load::model::random_sound::random_sound(
 	sound_container const &sounds,
-	resource::context const &ctx)
+	resource::context const &ctx,
+	sound_type::type const _type)
 :
 	sounds(sounds),
 	ctx(ctx),
+	type_(_type),
 	rng(
 		sge::random::last_exclusive_range<
 			sound_container::size_type
@@ -23,5 +25,6 @@ sanguis::load::model::random_sound::random() const
 {
 	return ctx.sounds().make(
 		sounds.at(
-			rng()));
+			rng()),
+		type_);
 }

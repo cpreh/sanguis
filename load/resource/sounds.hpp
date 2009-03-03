@@ -1,6 +1,7 @@
 #ifndef SANGUIS_LOAD_RESOURCE_SOUNDS_HPP_INCLUDED
 #define SANGUIS_LOAD_RESOURCE_SOUNDS_HPP_INCLUDED
 
+#include "../sound_type.hpp"
 #include <sge/audio/sound_fwd.hpp>
 #include <sge/audio/multi_loader_fwd.hpp>
 #include <sge/audio/pool_fwd.hpp>
@@ -28,7 +29,8 @@ public:
 	
 	sge::audio::sound_ptr const
 	make(
-		sge::audio::file_ptr) const;
+		sge::audio::file_ptr,
+		sound_type::type) const;
 
 	~sounds();
 private:
