@@ -53,7 +53,9 @@ sanguis::server::entities::entity::entity(
 			sge::math::vector::construct(
 				angle_to_vector(
 					angle() // TODO: is this right?
-				), // * speed TODO
+				) * property(
+					property_type::movement_speed
+				).current(),
 				static_cast<
 					space_unit
 				>(0)
@@ -125,7 +127,10 @@ void sanguis::server::entities::entity::direction(
 sanguis::server::pos_type const
 sanguis::server::entities::entity::center() const
 {
-	return collision_->center();
+	return pos_type(
+		collision_->center().x(),
+		collision_->center().y()
+	);
 }
 
 
@@ -142,7 +147,10 @@ void sanguis::server::entities::entity::center(
 sanguis::server::pos_type const
 sanguis::server::entities::entity::abs_speed() const
 {
-	return collision_->speed();
+	return pos_type(
+		collision_->speed().x(),
+		collision_->speed().y()
+	);
 }
 
 sanguis::server::space_unit
