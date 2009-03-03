@@ -36,7 +36,9 @@ sanguis::client::states::running::running(
 	my_context ctx)
 :
 	my_base(ctx), 
-	music_(context<machine>().resources().resources()),
+	music_(
+		context<machine>().console_wrapper().con,
+		context<machine>().resources().resources()),
 	drawer(
 		context<machine>().resources(),
 		context<machine>().renderer(),

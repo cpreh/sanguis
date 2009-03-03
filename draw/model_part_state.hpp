@@ -13,11 +13,13 @@ namespace sanguis
 {
 namespace draw
 {
+class model_part;
 class model_part_state
 {
 	public:
 	model_part_state(
 		load::model::part const &,
+		model_part const &,
 		animation_type::type,
 		weapon_type::type);
 	sanguis::animation_type::type animation_type() const;
@@ -25,6 +27,7 @@ class model_part_state
 	void update();
 	~model_part_state();
 	private:
+	model_part const &ref_;
 	load::model::animation const &anim_;
 	sge::audio::sound_ptr const sstart,srunning,send;
 	animation_type::type const animation_type_;
@@ -34,6 +37,10 @@ class model_part_state
 	void play(
 		sge::audio::sound_ptr,
 		sge::audio::play_mode::type = sge::audio::play_mode::once);
+	
+	void update_sound(sge::audio::sound_ptr);
+	void init_sound(sge::audio::sound_ptr);
+	void update_sounds();
 };
 }
 }

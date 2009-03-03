@@ -24,7 +24,7 @@ class model_part {
 public:
 	model_part(
 		load::model::part const &,
-		object &ref);
+		sanguis::draw::object &ref);
 	~model_part();
 
 	bool animation(animation_type::type);
@@ -32,6 +32,8 @@ public:
 	void update(time_type time);
 	void orientation(sge::sprite::rotation_type);
 	bool animation_ended() const;
+	sanguis::draw::object &object();
+	sanguis::draw::object const &object() const;
 private:
 	typedef std::auto_ptr<
 		sge::sprite::texture_animation
@@ -55,7 +57,7 @@ private:
 	diff_clock                              anim_diff_clock;
 	sge::sprite::rotation_type              desired_orientation;
 	load::model::part const*                info;
-	object*                                 ref;
+	sanguis::draw::object*                  ref;
 
 	weapon_type::type                       weapon_;
 	boost::scoped_ptr<model_part_state>     state;

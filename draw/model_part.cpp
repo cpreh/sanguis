@@ -31,7 +31,7 @@ invalid_rotation(
 
 sanguis::draw::model_part::model_part(
 	load::model::part const& info,
-	object &ref)
+	sanguis::draw::object &ref)
 :
 	anim_diff_clock(),
 	desired_orientation(
@@ -138,6 +138,16 @@ bool sanguis::draw::model_part::animation_ended() const
 	return ended;
 }
 
+sanguis::draw::object &sanguis::draw::model_part::object()
+{
+	return *ref;
+}
+
+sanguis::draw::object const &sanguis::draw::model_part::object() const
+{
+	return *ref;
+}
+
 bool sanguis::draw::model_part::try_animation(
 	animation_type::type const atype)
 {
@@ -172,6 +182,7 @@ bool sanguis::draw::model_part::try_animation(
 	state.reset(
 		new model_part_state(
 			*info,
+			*this,
 			atype,
 			state
 			? state->weapon_type()

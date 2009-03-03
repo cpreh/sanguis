@@ -20,6 +20,7 @@
 #include <sge/collision/objects/circle.hpp>
 #include <sge/container/linear_set_impl.hpp>
 #include <sge/text.hpp>
+#include <sge/math/vector/output.hpp>
 #include <boost/foreach.hpp>
 #include <boost/bind.hpp>
 #include <typeinfo>

@@ -4,6 +4,10 @@
 #include "../load/resource/context.hpp"
 #include "../load/model/random_sound.hpp"
 #include <sge/audio/sound_fwd.hpp>
+#include <sge/audio/unit.hpp>
+#include <sge/console/arg_list.hpp>
+#include <sge/console/gfx_fwd.hpp>
+#include <sge/signals/connection.hpp>
 #include <boost/scoped_ptr.hpp>
 
 namespace sanguis
@@ -14,13 +18,17 @@ class music_handler
 {
 	public:
 	music_handler(
+		sge::console::gfx &,
 		load::resource::context const &);
 	void update();
 	private:
+	sge::console::gfx &console_;
+	sge::signals::connection volume_connection_;
 	boost::scoped_ptr<load::model::random_sound> sounds_;
 	sge::audio::sound_ptr current_;
 
 	void next_title();
+	void volume(sge::console::arg_list const &);
 };
 }
 }
