@@ -1,17 +1,17 @@
-#include "running_state.hpp"
-#include "intermediate_state.hpp"
-#include "next_id.hpp"
-#include "../client_entity_type.hpp"
-#include "../dispatch_type.hpp"
-#include "../client_messages/add.hpp"
-#include "../messages/assign_id.hpp"
-#include "../messages/disconnect.hpp"
-#include "../messages/give_weapon.hpp"
-#include "../messages/move.hpp"
-#include "../messages/pause.hpp"
-#include "../messages/remove.hpp"
-#include "../messages/unpause.hpp"
-#include "../draw/coord_transform.hpp"
+#include "running.hpp"
+#include "intermediate.hpp"
+#include "../next_id.hpp"
+#include "../../client_entity_type.hpp"
+#include "../../dispatch_type.hpp"
+#include "../../client_messages/add.hpp"
+#include "../../messages/assign_id.hpp"
+#include "../../messages/disconnect.hpp"
+#include "../../messages/give_weapon.hpp"
+#include "../../messages/move.hpp"
+#include "../../messages/pause.hpp"
+#include "../../messages/remove.hpp"
+#include "../../messages/unpause.hpp"
+#include "../../draw/coord_transform.hpp"
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/audio/player.hpp>
@@ -31,7 +31,7 @@ sanguis::entity_id const
 
 }
 
-sanguis::client::running_state::running_state(
+sanguis::client::states::running::running(
 	my_context ctx)
 :
 	my_base(ctx), 
@@ -41,7 +41,7 @@ sanguis::client::running_state::running_state(
 		context<machine>().font()),
 	logic_(
 		boost::bind(
-			&running_state::send_message,
+			&running::send_message,
 			this,
 			_1),
 		context<machine>().renderer(),
@@ -76,7 +76,7 @@ sanguis::client::running_state::running_state(
 }
 
 boost::statechart::result
-sanguis::client::running_state::react(
+sanguis::client::states::running::react(
 	tick_event const &t)
 {
 	context<machine>().dispatch();
@@ -97,7 +97,7 @@ sanguis::client::running_state::react(
 }
 
 boost::statechart::result
-sanguis::client::running_state::react(
+sanguis::client::states::running::react(
 	message_event const &m)
 {
 	return dispatch_type<
@@ -113,11 +113,11 @@ sanguis::client::running_state::react(
 		boost::statechart::result>(
 		*this,
 		*m.message,
-		boost::bind(&running_state::handle_default_msg, this, _1));
+		boost::bind(&running::handle_default_msg, this, _1));
 }
 
 boost::statechart::result
-sanguis::client::running_state::operator()(
+sanguis::client::states::running::operator()(
 	messages::assign_id const &m)
 {
 	logic_.player_id(
@@ -126,14 +126,14 @@ sanguis::client::running_state::operator()(
 }
 
 boost::statechart::result
-sanguis::client::running_state::operator()(
+sanguis::client::states::running::operator()(
 	messages::disconnect const &)
 {
-	return transit<intermediate_state>();
+	return transit<intermediate>();
 }
 
 boost::statechart::result
-sanguis::client::running_state::operator()(
+sanguis::client::states::running::operator()(
 	messages::give_weapon const &m)
 {
 	logic_.give_weapon(
@@ -142,7 +142,7 @@ sanguis::client::running_state::operator()(
 }
 
 boost::statechart::result
-sanguis::client::running_state::operator()(
+sanguis::client::states::running::operator()(
 	messages::move const &m)
 {
 	logic_.move(
@@ -153,7 +153,7 @@ sanguis::client::running_state::operator()(
 }
 
 boost::statechart::result
-sanguis::client::running_state::operator()(
+sanguis::client::states::running::operator()(
 	messages::pause const &)
 {
 	logic_.pause(true);
@@ -162,7 +162,7 @@ sanguis::client::running_state::operator()(
 }
 
 boost::statechart::result
-sanguis::client::running_state::operator()(
+sanguis::client::states::running::operator()(
 	messages::remove const &m)
 {
 	logic_.remove(
@@ -174,7 +174,7 @@ sanguis::client::running_state::operator()(
 }
 
 boost::statechart::result
-sanguis::client::running_state::operator()(
+sanguis::client::states::running::operator()(
 	messages::unpause const &)
 {
 	logic_.pause(false);
@@ -183,14 +183,14 @@ sanguis::client::running_state::operator()(
 }
 
 boost::statechart::result
-sanguis::client::running_state::handle_default_msg(
+sanguis::client::states::running::handle_default_msg(
 	messages::base const &m)
 {
 	drawer.process_message(m);
 	return discard_event();
 }
 
-void sanguis::client::running_state::send_message(
+void sanguis::client::states::running::send_message(
 	messages::auto_ptr m)
 {
 	context<machine>().send(

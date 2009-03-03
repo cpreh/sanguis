@@ -56,6 +56,7 @@ FILE (GLOB files
 	*.cpp
 	net/*.cpp
 	client/*.cpp
+	client/states/*.cpp
 	client_messages/*.cpp
 	draw/*.cpp
 	draw/factory/*.cpp

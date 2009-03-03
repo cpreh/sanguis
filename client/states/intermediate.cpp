@@ -1,7 +1,7 @@
-#include "intermediate_state.hpp"
-#include "connecting_state.hpp"
-#include "machine.hpp"
-#include "log.hpp"
+#include "intermediate.hpp"
+#include "connecting.hpp"
+#include "../machine.hpp"
+#include "../log.hpp"
 #include <sge/log/headers.hpp>
 #include <sge/font/object.hpp>
 #include <sge/font/text_size_t.hpp>
@@ -11,14 +11,14 @@
 #include <sge/structure_cast.hpp>
 #include <ostream>
 
-sanguis::client::intermediate_state::intermediate_state(
+sanguis::client::states::intermediate::intermediate(
 	my_context ctx) 
 :
 	my_base(ctx)
 {}
 
 boost::statechart::result
-sanguis::client::intermediate_state::react(
+sanguis::client::states::intermediate::react(
 	message_event const &m)
 {
 	SGE_LOG_WARNING(
@@ -30,7 +30,7 @@ sanguis::client::intermediate_state::react(
 }
 
 boost::statechart::result
-sanguis::client::intermediate_state::react(
+sanguis::client::states::intermediate::react(
 	tick_event const &)
 {
 	machine &m = context<machine>();
@@ -50,17 +50,17 @@ sanguis::client::intermediate_state::react(
 	if (m.key_pressed(sge::input::kc::key_space))
 	{
 		m.connect();
-		return transit<connecting_state>();
+		return transit<connecting>();
 	}
 
 	return discard_event();
 }
 
 sge::log::logger &
-sanguis::client::intermediate_state::log()
+sanguis::client::states::intermediate::log()
 {
 	static sge::log::logger log_(
 		client::log(),
-		SGE_TEXT("intermediate_state: "));
+		SGE_TEXT("states::intermediate: "));
 	return log_;
 }

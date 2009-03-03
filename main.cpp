@@ -2,7 +2,7 @@
 #include "server/machine.hpp"
 #include "server/states/start.hpp"
 #include "client/machine.hpp"
-#include "client/start_state.hpp"
+#include "client/states/start.hpp"
 #include "load/context.hpp"
 #include "tick_event.hpp"
 #include "media_path.hpp"

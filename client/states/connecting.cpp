@@ -1,13 +1,13 @@
-#include "intermediate_state.hpp"
-#include "connecting_state.hpp"
-#include "running_state.hpp"
-#include "log.hpp"
-#include "../dispatch_type.hpp"
-#include "../messages/assign_id.hpp"
-#include "../messages/client_info.hpp"
-#include "../messages/connect.hpp"
-#include "../messages/disconnect.hpp"
-#include "../messages/types.hpp"
+#include "intermediate.hpp"
+#include "connecting.hpp"
+#include "running.hpp"
+#include "../log.hpp"
+#include "../../dispatch_type.hpp"
+#include "../../messages/assign_id.hpp"
+#include "../../messages/client_info.hpp"
+#include "../../messages/connect.hpp"
+#include "../../messages/disconnect.hpp"
+#include "../../messages/types.hpp"
 #include <sge/renderer/device.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/iconv.hpp>
@@ -20,14 +20,14 @@
 #include <typeinfo>
 #include <ostream>
 
-sanguis::client::connecting_state::connecting_state()
+sanguis::client::states::connecting::connecting()
 :
 	connected(false)
 { 
 }
 
 boost::statechart::result
-sanguis::client::connecting_state::react(
+sanguis::client::states::connecting::react(
 	message_event const &m)
 {
 	return dispatch_type<
@@ -39,11 +39,11 @@ sanguis::client::connecting_state::react(
 		boost::statechart::result>(
 		*this,
 		*m.message,
-		boost::bind(&connecting_state::handle_default_msg, this, _1));
+		boost::bind(&connecting::handle_default_msg, this, _1));
 }
 
 boost::statechart::result
-sanguis::client::connecting_state::handle_default_msg(
+sanguis::client::states::connecting::handle_default_msg(
 	messages::base const &m)
 {
 	SGE_LOG_WARNING(
@@ -55,14 +55,14 @@ sanguis::client::connecting_state::handle_default_msg(
 }
 
 boost::statechart::result
-sanguis::client::connecting_state::operator()(
+sanguis::client::states::connecting::operator()(
 	messages::disconnect const &)
 {
-	return transit<intermediate_state>();
+	return transit<intermediate>();
 }
 
 boost::statechart::result
-sanguis::client::connecting_state::operator()(
+sanguis::client::states::connecting::operator()(
 	messages::assign_id const &m)
 {
 	SGE_LOG_DEBUG(
@@ -74,11 +74,11 @@ sanguis::client::connecting_state::operator()(
 			messages::auto_ptr(
 				new messages::assign_id(
 					m))));
-	return transit<running_state>();
+	return transit<running>();
 }
 
 boost::statechart::result
-sanguis::client::connecting_state::operator()(
+sanguis::client::states::connecting::operator()(
 	messages::connect const &)
 {
 	context<machine>().send(
@@ -89,7 +89,7 @@ sanguis::client::connecting_state::operator()(
 }
 
 boost::statechart::result
-sanguis::client::connecting_state::react(
+sanguis::client::states::connecting::react(
 	tick_event const &)
 {
 	machine &m = context<machine>();
@@ -114,10 +114,10 @@ sanguis::client::connecting_state::react(
 }
 
 sge::log::logger &
-sanguis::client::connecting_state::log()
+sanguis::client::states::connecting::log()
 {
 	static sge::log::logger log_(
 		client::log(),
-		SGE_TEXT("connecting_state: "));
+		SGE_TEXT("states::connecting: "));
 	return log_;
 }
