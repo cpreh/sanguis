@@ -20,7 +20,6 @@
 #include <sge/collision/objects/circle.hpp>
 #include <sge/container/linear_set_impl.hpp>
 #include <sge/text.hpp>
-#include <sge/structure_cast.hpp>
 #include <boost/foreach.hpp>
 #include <boost/bind.hpp>
 #include <typeinfo>
@@ -136,10 +135,13 @@ void sanguis::server::entities::entity::center(
 	pos_type const &_center)
 {
 	collision_->center(
-		sge::structure_cast<
-			sge::collision::point
-		>(
-			_center));
+		sge::math::vector::construct(
+			_center,
+			static_cast<
+				space_unit
+			>(0)
+		)
+	);
 }
 
 sanguis::server::pos_type const
@@ -414,10 +416,11 @@ void sanguis::server::entities::entity::speed_change(
 	property::value_type)
 {
 	collision_->speed(
-		sge::structure_cast<
-			sge::collision::point
-		>(
-			abs_speed()
+		sge::math::vector::construct(
+			abs_speed(),
+			static_cast<
+				space_unit
+			>(0)
 		)
 	);
 }
