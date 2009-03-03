@@ -31,9 +31,7 @@ sanguis::server::entities::entity::entity(
 	id_(get_unique_id()),
 	env_(param.env()),
 	armor_(param.armor()),
-	center_(param.center()),
 	angle_(param.angle()),
-	direction_(param.direction()),
 	team_(param.team()),
 	properties(param.properties()),
 	type_(param.type()),
@@ -43,17 +41,29 @@ sanguis::server::entities::entity::entity(
 	collision_(
 		environment().collision->create_circle(
 			sge::collision::sattelite_ptr(
-				new sattelite(*this)),
+				new sattelite(*this)
+			),
+			param.center(),
+			angle_to_vector(
+				angle() // TODO: is this right?
+			), // * speed TODO
 			static_cast<sge::collision::unit>(
-				radius()))),
+				radius()
+			)
+		)
+	),
 	speed_change_(
 		property(
-			property_type::movement_speed).register_change_callback(
-				boost::bind(&entity::speed_change,this,_1)))
-{
-	center(center_);
-	direction(direction());
-}
+			property_type::movement_speed
+		).register_change_callback(
+			boost::bind(
+				&entity::speed_change,
+				this,
+				_1
+			)
+		)
+	)
+{}
 
 sanguis::entity_id
 sanguis::server::entities::entity::id() const
@@ -89,13 +99,11 @@ void sanguis::server::entities::entity::angle(
 sanguis::server::space_unit
 sanguis::server::entities::entity::direction() const
 {
-	return direction_;
 }
 
 void sanguis::server::entities::entity::direction(
 	space_unit const _direction)
 {
-	direction_ = _direction;
 	collision_->speed(
 		sge::structure_cast<
 			sge::collision::point
@@ -106,14 +114,13 @@ void sanguis::server::entities::entity::direction(
 sanguis::server::pos_type const
 sanguis::server::entities::entity::center() const
 {
-	return center_;
+	return collision_->center();
 }
 
 
 void sanguis::server::entities::entity::center(
 	pos_type const &_center)
 {
-	center_ = _center;
 	collision_->center(
 		sge::structure_cast<
 			sge::collision::point
@@ -121,16 +128,10 @@ void sanguis::server::entities::entity::center(
 			_center));
 }
 
-void sanguis::server::entities::entity::collision_update(
-	pos_type const &_center)
-{
-	center_ = _center;
-}
-
 sanguis::server::pos_type const
 sanguis::server::entities::entity::abs_speed() const
 {
-	return angle_to_vector(direction_) * speed();
+	return collision_->speed();
 }
 
 sanguis::server::space_unit
@@ -144,8 +145,9 @@ sanguis::server::space_unit
 sanguis::server::entities::entity::radius() const
 {
 	return std::sqrt(
-		sge::math::quad(center().x() - pos().x())
-		+ sge::math::quad(center().y() - pos().y()));
+		sge::math::quad(dim().w() / 2)
+		+ sge::math::quad(dim().h() / 2)
+	);
 }
 
 sanguis::server::team::type
@@ -156,7 +158,7 @@ sanguis::server::entities::entity::team() const
 
 void sanguis::server::entities::entity::damage(
 	space_unit const d,
-	damage_array const& damages)
+	damage_array const &damages)
 {
 	for(damage_array::size_type i = 0; i < damages.size(); ++i)
 		health(health() - d * damages[i] * (1 - armor_[i]));
@@ -275,8 +277,6 @@ void sanguis::server::entities::entity::update(
 	time_type const delta,
 	container &)
 {
-	//center_ += abs_speed() * delta;
-
 	BOOST_FOREACH(property_map::reference p, properties)
 		p.second.reset();
 

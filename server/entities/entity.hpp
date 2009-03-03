@@ -117,14 +117,12 @@ private:
 	bool has_ref(
 		entity *) const;
 	void speed_change(property::value_type);
-	void collision_update(pos_type const &);
 	
 	entity_id const         id_;
 	server::environment     env_;
 	armor_array             armor_;
 	pos_type                center_;
-	space_unit              angle_,
-	                        direction_;
+	space_unit              angle_;
 	team::type              team_;
 	property_map            properties;
 	entity_type::type const type_;

@@ -13,12 +13,8 @@ sanguis::server::entities::sattelite::sattelite(
 
 void
 sanguis::server::entities::sattelite::position_change(
-	sge::collision::point const &p)
+	sge::collision::point const &)
 {
-	e.collision_update(
-		pos_type(
-			static_cast<pos_type::value_type>(p.x()),
-			static_cast<pos_type::value_type>(p.y())));
 }
 
 sanguis::server::entities::entity &
