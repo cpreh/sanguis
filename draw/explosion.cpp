@@ -6,6 +6,9 @@
 #include "particle/object.hpp"
 #include "particle/z_ordering.hpp"
 #include "../load/context.hpp"
+#include "../load/resource/sounds.hpp"
+#include "../load/sound_type.hpp"
+#include "../load/sound_collection.hpp"
 #include "../load/particle/context.hpp"
 #include "../load/particle/collection.hpp"
 #include "../load/particle/animations.hpp"
@@ -13,8 +16,10 @@
 #include "../load/particle/animation.hpp"
 #include "../client/next_id.hpp"
 #include "../resolution.hpp"
+#include "../media_path.hpp"
 #include <sge/minmax_pair_impl.hpp>
 #include <sge/structure_cast.hpp>
+#include <sge/audio/sound.hpp>
 #include <boost/bind.hpp>
 #include <boost/assign/list_of.hpp>
 
@@ -122,7 +127,13 @@ sanguis::draw::explosion::explosion(
 		environment()),
 	properties_(
 		prop_),
-	ended(false)
+	ended(false),
+	sounds_(
+		environment().context().resources().sounds().load(
+			media_path()/SGE_TEXT("explosion")).sounds(),
+		environment().context().resources(),
+		load::sound_type::nonstream),
+	current_(sounds_.random())
 {
 	sge::renderer::screen_size_t const screen_sz(
 		resolution());
@@ -140,7 +151,7 @@ sanguis::draw::explosion::explosion(
 			static_cast<particle::time_type>(1),
 			1,
 			particle::align_type::random,
-			0,
+			0
 			particle::dispersion_range(0,100),
 			particle::velocity_range(0,30),
 			particle::rotation_velocity_range(0,0),
@@ -168,29 +179,19 @@ sanguis::draw::explosion::explosion(
 
 	particles.add(n);
 
-/*
-	sge::audio::sound_ptr const s = 
-		environment().context().resource().sounds().make(sys.audio_player()->create_nonstream_sound(
-			sounds.random_file());
-	
-	s->positional(true);
-	s->pos(
+	current_->positional(true);
+	current_->pos(
 		sge::audio::point(
-			pos.x(),
+			pos_.x(),
 			0,
-			pos.y()));
+			pos_.y()));
 	
-	s->rolloff(
+	current_->rolloff(
 		static_cast<sge::audio::unit>(1)
 		/ static_cast<sge::audio::unit>(
-			set.screen_size().h()));
+			resolution().h()));
 
-	sound_pool->add(s);
-
-	s->play(sge::audio::play_mode::once);*/
-
-	//epilepsy_timer.reset();
-
+	current_->play(sge::audio::play_mode::once);
 }
 
 sanguis::draw::explosion::~explosion()

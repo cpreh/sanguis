@@ -6,7 +6,9 @@
 #include "particle/container.hpp"
 #include "particle/property_map.hpp"
 #include "../particle_type.hpp"
+#include "../load/model/random_sound.hpp"
 #include <sge/sprite/point.hpp>
+#include <sge/audio/sound_fwd.hpp>
 
 namespace sanguis
 {
@@ -46,6 +48,9 @@ private:
 	particle::container particles;
 	particle::property_map properties_;
 	bool ended;
+
+	load::model::random_sound sounds_;
+	sge::audio::sound_ptr current_;
 };
 
 }
