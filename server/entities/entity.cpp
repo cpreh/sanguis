@@ -12,6 +12,7 @@
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/vector/arithmetic.hpp>
 #include <sge/math/vector/dim.hpp>
+#include <sge/math/vector/construct.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/math/dim/arithmetic.hpp>
 #include <sge/math/power.hpp>
@@ -43,10 +44,20 @@ sanguis::server::entities::entity::entity(
 			sge::collision::sattelite_ptr(
 				new sattelite(*this)
 			),
-			param.center(),
-			angle_to_vector(
-				angle() // TODO: is this right?
-			), // * speed TODO
+			sge::math::vector::construct(
+				param.center(),
+				static_cast<
+					space_unit
+				>(0)
+			),
+			sge::math::vector::construct(
+				angle_to_vector(
+					angle() // TODO: is this right?
+				), // * speed TODO
+				static_cast<
+					space_unit
+				>(0)
+			),
 			static_cast<sge::collision::unit>(
 				radius()
 			)
