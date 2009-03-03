@@ -47,7 +47,7 @@
 sanguis::server::states::unpaused::unpaused()
 :
 	send_timer(
-		sge::time::second_f(static_cast<sge::time::funit>(0.1)))
+		sge::time::second_f(static_cast<sge::time::funit>(0.5)))
 {
 	SGE_LOG_DEBUG(
 		log(),
