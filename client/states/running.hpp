@@ -1,16 +1,17 @@
 #ifndef SANGUIS_CLIENT_STATES_RUNNING_HPP_INCLUDED
 #define SANGUIS_CLIENT_STATES_RUNNING_HPP_INCLUDED
 
+#include "../music_handler.hpp"
+#include "../message_event.hpp"
+#include "../machine.hpp"
+#include "../input_handler.hpp"
+#include "../logic.hpp"
 #include "../../tick_event.hpp"
 #include "../../weapon_type.hpp"
 #include "../../messages/fwd.hpp"
 #include "../../messages/base.hpp"
 #include "../../messages/entity_message.hpp"
 #include "../../draw/scene.hpp"
-#include "../message_event.hpp"
-#include "../machine.hpp"
-#include "../input_handler.hpp"
-#include "../logic.hpp"
 #include <sge/signals/scoped_connection.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
@@ -58,6 +59,7 @@ class running
 	void send_message(
 		messages::auto_ptr);
 
+	music_handler                   music_;
 	draw::scene                     drawer;
 	logic                           logic_;
 	input_handler                   input;

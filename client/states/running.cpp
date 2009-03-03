@@ -12,6 +12,7 @@
 #include "../../messages/remove.hpp"
 #include "../../messages/unpause.hpp"
 #include "../../draw/coord_transform.hpp"
+#include "../../load/context.hpp"
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/audio/player.hpp>
@@ -35,6 +36,7 @@ sanguis::client::states::running::running(
 	my_context ctx)
 :
 	my_base(ctx), 
+	music_(context<machine>().resources().resources()),
 	drawer(
 		context<machine>().resources(),
 		context<machine>().renderer(),
@@ -82,6 +84,8 @@ sanguis::client::states::running::react(
 	context<machine>().dispatch();
 
 	context<machine>().sound_pool().update();
+
+	music_.update();
 
 	// update: cursor pos (TODO: this should be done in a better way)
 	drawer.process_message(
