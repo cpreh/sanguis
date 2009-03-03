@@ -43,9 +43,9 @@
 #include <sge/input/key_state_tracker.hpp>
 
 // boost
+#include <boost/filesystem.hpp>
 #include <boost/scoped_ptr.hpp>
 #include <boost/program_options.hpp>
-#include <boost/filesystem.hpp>
 
 // c++
 #include <exception>
@@ -112,8 +112,9 @@ try
 	
 	po::variables_map vm;
 	po::store(po::parse_command_line(argc,argv,desc),vm);
-	if (boost::filesystem::exists("config"))
+	if (boost::filesystem::exists(SGE_TEXT("config")))
 	{
+		// NOTE: this has to be a std::ifstream since boost::po only handels those cases
 		std::ifstream config_file("config");
 		// highly unlikely to happen
 		if (!config_file.is_open())
@@ -160,6 +161,7 @@ try
 			sge::renderer::vsync::on))
 		(sge::systems::parameterless::input)
 		(sge::systems::parameterless::image)
+		(sge::systems::parameterless::audio_player)
 		(sge::systems::parameterless::collision_system)
 		(sge::systems::parameterless::font));
 

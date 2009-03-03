@@ -2,6 +2,7 @@
 #include "../load/model/animation_sound.hpp"
 #include "../animation_sound_type.hpp"
 #include <sge/audio/sound.hpp>
+#include <sge/cerr.hpp>
 
 sanguis::draw::model_part_state::model_part_state(
 	load::model::part const &part_,
@@ -51,6 +52,6 @@ void sanguis::draw::model_part_state::play(
 	sge::audio::sound_ptr const s,
 	sge::audio::play_mode::type const ss)
 {
-	//if (s)
-	//	s->play(ss);
+	if (s)
+		s->play(ss);
 }
