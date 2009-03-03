@@ -53,7 +53,7 @@ sanguis::server::entities::entity::entity(
 			),
 			sge::math::vector::construct(
 				angle_to_vector(
-					angle() // TODO: is this right?
+					direction() // TODO: is this right?
 				) * property(
 					property_type::movement_speed
 				).current(),
@@ -120,6 +120,11 @@ void sanguis::server::entities::entity::direction(
 	space_unit const _direction)
 {
 	direction_ = _direction;
+	speed_change(
+		property(
+			property_type::movement_speed
+		).current()
+	);
 }
 
 sanguis::server::pos_type const
@@ -414,11 +419,13 @@ bool sanguis::server::entities::entity::has_ref(
 }
 
 void sanguis::server::entities::entity::speed_change(
-	property::value_type)
+	property::value_type const s)
 {
 	collision_->speed(
 		sge::math::vector::construct(
-			abs_speed(),
+			angle_to_vector(
+				direction()
+			) * s,
 			static_cast<
 				space_unit
 			>(0)
