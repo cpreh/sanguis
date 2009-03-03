@@ -4,6 +4,7 @@
 #include "../load/resource/context.hpp"
 #include "../load/model/random_sound.hpp"
 #include <sge/audio/sound_fwd.hpp>
+#include <boost/scoped_ptr.hpp>
 
 namespace sanguis
 {
@@ -16,8 +17,10 @@ class music_handler
 		load::resource::context const &);
 	void update();
 	private:
-	load::model::random_sound sounds_;
+	boost::scoped_ptr<load::model::random_sound> sounds_;
 	sge::audio::sound_ptr current_;
+
+	void next_title();
 };
 }
 }
