@@ -31,7 +31,7 @@
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/collision/sattelite.hpp>
-#include <sge/collision/system.hpp>
+#include <sge/collision/world.hpp>
 #include <sge/text.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/assign/list_of.hpp>

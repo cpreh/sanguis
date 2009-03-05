@@ -16,7 +16,7 @@
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/math/dim/arithmetic.hpp>
 #include <sge/math/power.hpp>
-#include <sge/collision/system.hpp>
+#include <sge/collision/world.hpp>
 #include <sge/collision/objects/circle.hpp>
 #include <sge/container/linear_set_impl.hpp>
 #include <sge/text.hpp>

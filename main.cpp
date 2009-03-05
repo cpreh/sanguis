@@ -67,7 +67,7 @@ typedef std::auto_ptr<
 server_auto_ptr
 create_server(
 	sanguis::load::context const &,
-	sge::collision::system_ptr const,
+	sge::collision::world_ptr const,
 	sge::console::gfx &,
 	::net::port_type,
 	bool client_only);
@@ -206,6 +206,14 @@ try
 			)
 		);
 	
+	sge::collision::world_ptr const world = 
+		sys.collision_system()->create_world(
+			sge::collision::rect(
+				-4096,
+				-4096,
+				4096,
+				4096));
+	
 	sge::audio::multi_loader audio_loader(sys.plugin_manager());
 	sge::audio::pool sound_pool;
 
@@ -223,7 +231,7 @@ try
 	> server(
 		create_server(
 			resources,
-			sys.collision_system(),
+			world,
 			console_gfx,
 			host_port,
 			client_only));
@@ -277,7 +285,7 @@ namespace
 server_auto_ptr
 create_server(
 	sanguis::load::context const &resources,
-	sge::collision::system_ptr const coll,
+	sge::collision::world_ptr const coll,
 	sge::console::gfx &con,
 	::net::port_type const host_port,
 	bool const client_only)

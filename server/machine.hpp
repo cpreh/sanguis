@@ -6,7 +6,7 @@
 #include "../tick_event.hpp"
 #include "message_event.hpp"
 #include <sge/console/gfx_fwd.hpp>
-#include <sge/collision/system_fwd.hpp>
+#include <sge/collision/world_fwd.hpp>
 #include <sge/string.hpp>
 #include <boost/statechart/state_machine.hpp>
 #include <map>
@@ -37,7 +37,7 @@ struct machine
 public:
 	machine(
 		load::context const &,
-		sge::collision::system_ptr,
+		sge::collision::world_ptr,
 		sge::console::gfx &,
 		::net::port_type);
 	void process(tick_event const &);
@@ -70,7 +70,7 @@ public:
 	load::context const &
 	resources() const;
 
-	sge::collision::system_ptr const collision();
+	sge::collision::world_ptr const collision();
 private:
 	typedef std::map<
 		::net::id_type,
@@ -85,7 +85,7 @@ private:
 		s_disconn,
 		s_data;
 	client_map clients;
-	sge::collision::system_ptr collision_;
+	sge::collision::world_ptr collision_;
 	sge::console::gfx &con;
 };
 

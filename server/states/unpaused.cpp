@@ -32,7 +32,7 @@
 #include <sge/math/vector/arithmetic.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/vector/is_null.hpp>
-#include <sge/collision/system.hpp>
+#include <sge/collision/world.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/format.hpp>
 #include <sge/text.hpp>
@@ -47,7 +47,7 @@
 sanguis::server::states::unpaused::unpaused()
 :
 	send_timer(
-		sge::time::second_f(static_cast<sge::time::funit>(0.01)))
+		sge::time::second_f(static_cast<sge::time::funit>(0.5)))
 {
 	SGE_LOG_DEBUG(
 		log(),
