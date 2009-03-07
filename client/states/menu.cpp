@@ -17,6 +17,7 @@
 #include <sge/structure_cast.hpp>
 #include <boost/ref.hpp>
 #include <boost/bind.hpp>
+#include <boost/lexical_cast.hpp>
 #include <ostream>
 
 sanguis::client::states::menu::menu(
@@ -171,6 +172,11 @@ sanguis::client::states::menu::log()
 
 void sanguis::client::states::menu::connect()
 {
+	context<machine>().address(
+		connect_host_edit.text());
+	context<machine>().port(
+		boost::lexical_cast<net::port_type>(
+			connect_port_edit.text()));
 	connect_now = true;
 }
 

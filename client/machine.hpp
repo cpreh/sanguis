@@ -60,6 +60,9 @@ public:
 	::net::port_type port() const;
 	::net::client &net();
 
+	void address(::net::address_type const &);
+	void port(::net::port_type);
+
 	bool process(tick_event const &);
 
 	void quit();
