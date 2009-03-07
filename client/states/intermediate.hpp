@@ -38,25 +38,29 @@ class intermediate
 	sge::log::logger &log();
 	
 	sge::gui::manager m;
-	sge::gui::widget top;
-	sge::gui::widget host;
-	sge::gui::widgets::label host_label;
-	sge::gui::widgets::edit host_edit;
-	sge::gui::widget port;
-	sge::gui::widgets::label port_label;
-	sge::gui::widgets::edit port_edit;
-	sge::gui::widgets::button connect_;
-	sge::gui::widgets::button return_menu;
+
 	sge::gui::widget main_menu;
-	sge::gui::widgets::button menu_connect;
-	sge::gui::widgets::button menu_start;
-	sge::gui::widgets::button menu_exit;
+		sge::gui::widgets::button main_connect;
+		sge::gui::widgets::button main_start;
+		sge::gui::widgets::button main_exit;
+
+	sge::gui::widget connect_menu;
+		sge::gui::widget connect_host;
+			sge::gui::widgets::label connect_host_label;
+			sge::gui::widgets::edit connect_host_edit;
+		sge::gui::widget connect_port;
+			sge::gui::widgets::label connect_port_label;
+			sge::gui::widgets::edit connect_port_edit;
+		sge::gui::widgets::button connect_connect;
+		sge::gui::widgets::button connect_return;
+
 	menu_mover mover_;
-	sge::signals::scoped_connection connect_to_server_menu;
-	sge::signals::scoped_connection return_to_main_menu;
-	sge::signals::scoped_connection connect_clicked;
-	sge::signals::scoped_connection start_server_clicked;
-	sge::signals::scoped_connection menu_exit_clicked;
+
+	sge::signals::scoped_connection main_connect_conn;
+	sge::signals::scoped_connection main_start_conn;
+	sge::signals::scoped_connection main_exit_conn;
+	sge::signals::scoped_connection connect_connect_conn;
+	sge::signals::scoped_connection connect_return_conn;
 
 	bool connect_now;
 	// FIXME: replace by boost::lambda expression or something completely different
