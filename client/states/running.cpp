@@ -1,5 +1,5 @@
 #include "running.hpp"
-#include "intermediate.hpp"
+#include "menu.hpp"
 #include "../next_id.hpp"
 #include "../../client_entity_type.hpp"
 #include "../../dispatch_type.hpp"
@@ -135,7 +135,7 @@ boost::statechart::result
 sanguis::client::states::running::operator()(
 	messages::disconnect const &)
 {
-	return transit<intermediate>();
+	return transit<menu>();
 }
 
 boost::statechart::result

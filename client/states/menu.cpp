@@ -1,4 +1,4 @@
-#include "intermediate.hpp"
+#include "menu.hpp"
 #include "connecting.hpp"
 #include "../machine.hpp"
 #include "../log.hpp"
@@ -19,7 +19,7 @@
 #include <boost/bind.hpp>
 #include <ostream>
 
-sanguis::client::states::intermediate::intermediate(
+sanguis::client::states::menu::menu(
 	my_context ctx) 
 :
 	my_base(ctx),
@@ -114,7 +114,7 @@ sanguis::client::states::intermediate::intermediate(
 
 	main_start_conn(
 		main_start.register_clicked(
-			boost::bind(&intermediate::start_server,this))),
+			boost::bind(&menu::start_server,this))),
 
 	main_exit_conn(
 		main_exit.register_clicked(
@@ -122,7 +122,7 @@ sanguis::client::states::intermediate::intermediate(
 
 	connect_connect_conn(
 		connect_connect.register_clicked(
-			boost::bind(&intermediate::connect,this))),
+			boost::bind(&menu::connect,this))),
 
 	connect_return_conn(
 		connect_return.register_clicked(
@@ -132,7 +132,7 @@ sanguis::client::states::intermediate::intermediate(
 {}
 
 boost::statechart::result
-sanguis::client::states::intermediate::react(
+sanguis::client::states::menu::react(
 	message_event const &m)
 {
 	SGE_LOG_WARNING(
@@ -144,7 +144,7 @@ sanguis::client::states::intermediate::react(
 }
 
 boost::statechart::result
-sanguis::client::states::intermediate::react(
+sanguis::client::states::menu::react(
 	tick_event const &t)
 {
 	if (connect_now)
@@ -161,20 +161,20 @@ sanguis::client::states::intermediate::react(
 }
 
 sge::log::logger &
-sanguis::client::states::intermediate::log()
+sanguis::client::states::menu::log()
 {
 	static sge::log::logger log_(
 		client::log(),
-		SGE_TEXT("states::intermediate: "));
+		SGE_TEXT("states::menu: "));
 	return log_;
 }
 
-void sanguis::client::states::intermediate::connect()
+void sanguis::client::states::menu::connect()
 {
 	connect_now = true;
 }
 
-void sanguis::client::states::intermediate::start_server()
+void sanguis::client::states::menu::start_server()
 {
 	connect_now = true;
 }

@@ -1,5 +1,5 @@
-#ifndef SANGUIS_CLIENT_STATES_INTERMEDIATE_HPP_INCLUDED
-#define SANGUIS_CLIENT_STATES_INTERMEDIATE_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_STATES_MENU_HPP_INCLUDED
+#define SANGUIS_CLIENT_STATES_MENU_HPP_INCLUDED
 
 #include "menu_mover.hpp"
 #include "../machine.hpp"
@@ -22,8 +22,8 @@ namespace client
 {
 namespace states
 {
-class intermediate 
-	: public boost::statechart::state<intermediate,machine>
+class menu 
+	: public boost::statechart::state<menu,machine>
 {
 	public:
 	typedef boost::mpl::list<
@@ -31,7 +31,7 @@ class intermediate
 		boost::statechart::custom_reaction<message_event>
 		> reactions;
 
-	intermediate(my_context); 
+	menu(my_context); 
 	boost::statechart::result react(tick_event const &);
 	boost::statechart::result react(message_event const &);
 	private:
