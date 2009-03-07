@@ -11,7 +11,7 @@
 #include <sge/gui/widgets/label.hpp>
 #include <sge/gui/widgets/edit.hpp>
 #include <sge/gui/widgets/button.hpp>
-#include <sge/signals/connection.hpp>
+#include <sge/signals/scoped_connection.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/mpl/list.hpp>
@@ -52,11 +52,11 @@ class intermediate
 	sge::gui::widgets::button menu_start;
 	sge::gui::widgets::button menu_exit;
 	menu_mover mover_;
-	sge::signals::connection connect_to_server_menu;
-	sge::signals::connection return_to_main_menu;
-	sge::signals::connection connect_clicked;
-	sge::signals::connection start_server_clicked;
-	sge::signals::connection menu_exit_clicked;
+	sge::signals::scoped_connection connect_to_server_menu;
+	sge::signals::scoped_connection return_to_main_menu;
+	sge::signals::scoped_connection connect_clicked;
+	sge::signals::scoped_connection start_server_clicked;
+	sge::signals::scoped_connection menu_exit_clicked;
 
 	bool connect_now;
 	// FIXME: replace by boost::lambda expression or something completely different

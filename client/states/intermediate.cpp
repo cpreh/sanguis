@@ -141,7 +141,10 @@ sanguis::client::states::intermediate::react(
 	tick_event const &t)
 {
 	if (connect_now)
+	{
+		context<machine>().connect();
 		return transit<connecting>();
+	}
 
 	context<machine>().dispatch();
 	mover_.update(t.delta());
