@@ -110,7 +110,7 @@ protected:
 	virtual void on_die();
 private:
 	friend class auto_weak_link;
-	friend class sattelite;
+	friend class satellite;
 
 	void unlink(
 		entity *);

@@ -42,8 +42,8 @@ sanguis::server::entities::entity::entity(
 	aggressive_(false),
 	collision_(
 		environment().collision->create_circle(
-			sge::collision::sattelite_ptr(
-				new sattelite(*this)
+			sge::collision::satellite_ptr(
+				new satellite(*this)
 			),
 			sge::math::vector::construct(
 				param.center(),

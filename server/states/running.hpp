@@ -12,7 +12,7 @@
 #include "../../time_type.hpp"
 #include <sge/log/fwd.hpp>
 #include <sge/signals/connection.hpp>
-#include <sge/collision/sattelite_fwd.hpp>
+#include <sge/collision/satellite_fwd.hpp>
 #include <boost/mpl/list.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/result.hpp>
@@ -73,12 +73,12 @@ public:
 		messages::level_type);
 	
 	bool collision_test(
-		sge::collision::sattelite const &,
-		sge::collision::sattelite const &);
+		sge::collision::satellite const &,
+		sge::collision::satellite const &);
 
 	void collision(
-		sge::collision::sattelite &,
-		sge::collision::sattelite &);
+		sge::collision::satellite &,
+		sge::collision::satellite &);
 
 	load::context const &
 	load_callback() const;

@@ -9,6 +9,7 @@
 #include <sge/font/object_fwd.hpp>
 #include <sge/input/key_type.hpp>
 #include <sge/input/key_state_tracker_fwd.hpp> // TODO: remove me!
+#include <sge/image/loader_fwd.hpp>
 #include <sge/systems/instance_fwd.hpp>
 #include <sge/audio/player_fwd.hpp>
 #include <sge/audio/pool.hpp>
@@ -61,8 +62,10 @@ public:
 
 	bool process(tick_event const &);
 
+	void quit();
 	void dispatch();
 	sge::renderer::device_ptr const renderer() const;
+	sge::systems::instance &sys() const;
 	sge::audio::player_ptr const audio_player() const;
 	sge::audio::pool &sound_pool();
 	sge::font::object &font();
@@ -86,13 +89,14 @@ private:
 	::net::data_type
 		in_buffer,
 		out_buffer;
-	sge::systems::instance &sys;
+	sge::systems::instance &sys_;
 	sge::audio::pool &sound_pool_;
 	sge::font::object &font_;
 	sge::input::key_state_tracker &ks;
 	sge::console::gfx &console;
 	sge::console::stdlib console_stdlib;
 	sanguis::client::console_wrapper console_wrapper_;
+	bool running_;
 };
 
 }

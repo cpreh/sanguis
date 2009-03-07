@@ -17,7 +17,7 @@
 
 sanguis::client::machine::machine(
 	load::context const &resources_,
-	sge::systems::instance &sys,
+	sge::systems::instance &sys_,
 	sge::audio::pool &sound_pool_,
 	sge::font::object &font_,
 	sge::input::key_state_tracker &ks,
@@ -45,7 +45,7 @@ sanguis::client::machine::machine(
 				&machine::data_callback,
 				this,
 				_1))),
-	sys(sys),
+	sys_(sys_),
 	sound_pool_(sound_pool_),
 	font_(font_),
 	ks(ks),
@@ -62,8 +62,9 @@ sanguis::client::machine::machine(
 			_1)),
 	console_wrapper_(
 		console,
-		sys.input_system(),
-		sge::input::kc::key_f1)
+		sys_.input_system(),
+		sge::input::kc::key_f1),
+	running_(true)
 {}
 
 void sanguis::client::machine::connect()
@@ -135,13 +136,21 @@ bool sanguis::client::machine::process(
 
 	net_.process();
 
-	sge::renderer::scoped_block const block_(sys.renderer());
+	sge::renderer::scoped_block const block_(sys_.renderer());
 	process_event(t);
 
 	if (console.active())
 		console.draw();
 
-	return !ks[sge::input::kc::key_escape];
+	if (ks[sge::input::kc::key_escape])
+		quit();
+	
+	return running_;
+}
+
+void sanguis::client::machine::quit()
+{
+	running_ = false;
 }
 
 void sanguis::client::machine::dispatch()
@@ -152,13 +161,19 @@ void sanguis::client::machine::dispatch()
 sge::renderer::device_ptr const
 sanguis::client::machine::renderer() const
 {
-	return sys.renderer();
+	return sys_.renderer();
+}
+
+sge::systems::instance &
+sanguis::client::machine::sys() const
+{
+	return sys_;
 }
 
 sge::audio::player_ptr const
 sanguis::client::machine::audio_player() const
 {
-	return sys.audio_player();
+	return sys_.audio_player();
 }
 
 sge::audio::pool &

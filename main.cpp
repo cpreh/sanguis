@@ -202,9 +202,7 @@ try
 			sge::sprite::dim(
 				sys.renderer()->screen_size().w(),
 				static_cast<sge::sprite::unit>(
-					sys.renderer()->screen_size().h() / 2))
-			)
-		);
+					sys.renderer()->screen_size().h() / 2))));
 	
 	sge::collision::world_ptr const world = 
 		sys.collision_system()->create_world(
@@ -238,11 +236,6 @@ try
 
 	if(server)
 		server->initiate();
-	/*
-	sanguis::server::machine server(
-		console, 
-		host_port);
-	server.initiate();*/
 	
 	// construct and initialize statemachine
 	sanguis::client::machine client(
@@ -268,7 +261,6 @@ try
 		// get and send messages
 		if(server)
 			server->process(t);
-		//server.process(t);
 		running = client.process(t);
 	}
 } catch (sge::exception const &e) {

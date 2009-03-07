@@ -30,7 +30,7 @@
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/log/headers.hpp>
-#include <sge/collision/sattelite.hpp>
+#include <sge/collision/satellite.hpp>
 #include <sge/collision/world.hpp>
 #include <sge/text.hpp>
 #include <boost/mpl/vector.hpp>
@@ -224,25 +224,25 @@ void sanguis::server::states::running::level_callback(
 }
 
 bool sanguis::server::states::running::collision_test(
-	sge::collision::sattelite const &a,
-	sge::collision::sattelite const &b)
+	sge::collision::satellite const &a,
+	sge::collision::satellite const &b)
 {
 	entities::entity const &e0 = 
-		dynamic_cast<entities::sattelite const &>(a).entity();
+		dynamic_cast<entities::satellite const &>(a).entity();
 	entities::entity const &e1 = 
-		dynamic_cast<entities::sattelite const &>(b).entity();
+		dynamic_cast<entities::satellite const &>(b).entity();
 	
 	return e0.can_collide_with(e1) || e1.can_collide_with(e0);
 }
 
 void sanguis::server::states::running::collision(
-	sge::collision::sattelite &a,
-	sge::collision::sattelite &b)
+	sge::collision::satellite &a,
+	sge::collision::satellite &b)
 {
 	entities::entity &e0 = 
-		dynamic_cast<entities::sattelite &>(a).entity();
+		dynamic_cast<entities::satellite &>(a).entity();
 	entities::entity &e1 = 
-		dynamic_cast<entities::sattelite &>(b).entity();
+		dynamic_cast<entities::satellite &>(b).entity();
 	e0.collision(e1);
 	e1.collision(e0);
 }
