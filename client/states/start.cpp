@@ -1,5 +1,5 @@
 #include "start.hpp"
-#include "intermediate.hpp"
+#include "menu.hpp"
 #include "../machine.hpp"
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/var.hpp>
@@ -21,5 +21,5 @@ sanguis::client::states::start::react(
 			(sge::renderer::state::color_::clear_color = sge::renderer::colors::black())
 	);
 
-	return transit<intermediate>();
+	return transit<menu>();
 }

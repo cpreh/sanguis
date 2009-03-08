@@ -125,6 +125,16 @@ sanguis::client::machine::net()
 	return net_;
 }
 
+void sanguis::client::machine::address(::net::address_type const &_address)
+{
+	address_ = _address;
+}
+
+void sanguis::client::machine::port(::net::port_type const _port)
+{
+	port_ = _port;
+}
+
 bool sanguis::client::machine::process(
 	tick_event const &t)
 {

@@ -1,4 +1,4 @@
-#include "intermediate.hpp"
+#include "menu.hpp"
 #include "connecting.hpp"
 #include "running.hpp"
 #include "../log.hpp"
@@ -58,7 +58,7 @@ boost::statechart::result
 sanguis::client::states::connecting::operator()(
 	messages::disconnect const &)
 {
-	return transit<intermediate>();
+	return transit<menu>();
 }
 
 boost::statechart::result

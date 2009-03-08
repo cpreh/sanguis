@@ -1,4 +1,4 @@
-#include "intermediate.hpp"
+#include "menu.hpp"
 #include "connecting.hpp"
 #include "../machine.hpp"
 #include "../log.hpp"
@@ -17,9 +17,10 @@
 #include <sge/structure_cast.hpp>
 #include <boost/ref.hpp>
 #include <boost/bind.hpp>
+#include <boost/lexical_cast.hpp>
 #include <ostream>
 
-sanguis::client::states::intermediate::intermediate(
+sanguis::client::states::menu::menu(
 	my_context ctx) 
 :
 	my_base(ctx),
@@ -29,57 +30,6 @@ sanguis::client::states::intermediate::intermediate(
 		context<machine>().sys().input_system(),
 		context<machine>().sys().font_system(),
 		sge::gui::skin_ptr(new sge::gui::skins::standard())),
-	top(
-		m,
-		sge::gui::widget::parameters()
-			.pos(
-				sge::gui::point(100,100))
-			.size(
-				sge::gui::dim(500,300))
-			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::vertical>(
-					boost::ref(top)))),
-
-	host(
-		top,
-		sge::gui::widget::parameters()
-			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::horizontal>(
-					boost::ref(host)))),
-	host_label(
-		host,
-		sge::gui::widget::parameters(),
-		SGE_TEXT("Hostname:")),
-	host_edit(
-		host,
-		sge::gui::widget::parameters(),
-		sge::gui::widgets::edit::single_line,
-		sge::gui::dim(30,1)),
-
-	port(
-		top,
-		sge::gui::widget::parameters()
-			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::horizontal>(
-					boost::ref(port)))),
-	port_label(
-		port,
-		sge::gui::widget::parameters(),
-		SGE_TEXT("Port:")),
-	port_edit(
-		port,
-		sge::gui::widget::parameters(),
-		sge::gui::widgets::edit::single_line,
-		sge::gui::dim(5,1)),
-
-	connect_(
-		top,
-		sge::gui::widget::parameters(),
-		SGE_TEXT("Connect")),
-	return_menu(
-		top,
-		sge::gui::widget::parameters(),
-		SGE_TEXT("Return")),
 
 	main_menu(
 		m,
@@ -89,43 +39,101 @@ sanguis::client::states::intermediate::intermediate(
 			.layout(
 				sge::make_shared_ptr<sge::gui::layouts::vertical>(
 					boost::ref(main_menu)))),
-	menu_connect(
+	main_connect(
 		main_menu,
 		sge::gui::widget::parameters(),
 		SGE_TEXT("Connect to server")),
-	menu_start(
+	main_start(
 		main_menu,
 		sge::gui::widget::parameters(),
 		SGE_TEXT("Start server")),
-	menu_exit(
+	main_exit(
 		main_menu,
 		sge::gui::widget::parameters(),
 		SGE_TEXT("Exit")),
 
+	connect_menu(
+		m,
+		sge::gui::widget::parameters()
+			.pos(
+				sge::gui::point(100,100))
+			.size(
+				sge::gui::dim(500,300))
+			.layout(
+				sge::make_shared_ptr<sge::gui::layouts::vertical>(
+					boost::ref(connect_menu)))),
+
+	connect_host(
+		connect_menu,
+		sge::gui::widget::parameters()
+			.layout(
+				sge::make_shared_ptr<sge::gui::layouts::horizontal>(
+					boost::ref(connect_host)))),
+	connect_host_label(
+		connect_host,
+		sge::gui::widget::parameters(),
+		SGE_TEXT("connect_hostname:")),
+	connect_host_edit(
+		connect_host,
+		sge::gui::widget::parameters(),
+		sge::gui::widgets::edit::single_line,
+		sge::gui::dim(30,1)),
+
+	connect_port(
+		connect_menu,
+		sge::gui::widget::parameters()
+			.layout(
+				sge::make_shared_ptr<sge::gui::layouts::horizontal>(
+					boost::ref(connect_port)))),
+	connect_port_label(
+		connect_port,
+		sge::gui::widget::parameters(),
+		SGE_TEXT("Port:")),
+	connect_port_edit(
+		connect_port,
+		sge::gui::widget::parameters(),
+		sge::gui::widgets::edit::single_line,
+		sge::gui::dim(5,1)),
+
+	connect_connect(
+		connect_menu,
+		sge::gui::widget::parameters(),
+		SGE_TEXT("Connect")),
+	connect_return(
+		connect_menu,
+		sge::gui::widget::parameters(),
+		SGE_TEXT("Return")),
+
+
 	mover_(
-		top,
+		connect_menu,
 		main_menu),
-	connect_to_server_menu(
-		menu_connect.clicked.connect(
+
+	main_connect_conn(
+		main_connect.register_clicked(
 			boost::bind(&menu_mover::connect_to_server,&mover_))),
-	return_to_main_menu(
-		return_menu.clicked.connect(
-			boost::bind(&menu_mover::return_to_menu,&mover_))),
-	connect_clicked(
-		connect_.clicked.connect(
-			boost::bind(&intermediate::connect,this))),
-	start_server_clicked(
-		menu_start.clicked.connect(
-			boost::bind(&intermediate::start_server,this))),
-	menu_exit_clicked(
-		menu_exit.clicked.connect(
+
+	main_start_conn(
+		main_start.register_clicked(
+			boost::bind(&menu::start_server,this))),
+
+	main_exit_conn(
+		main_exit.register_clicked(
 			boost::bind(&machine::quit,&(context<machine>())))),
+
+	connect_connect_conn(
+		connect_connect.register_clicked(
+			boost::bind(&menu::connect,this))),
+
+	connect_return_conn(
+		connect_return.register_clicked(
+			boost::bind(&menu_mover::return_to_menu,&mover_))),
 
 	connect_now(false)
 {}
 
 boost::statechart::result
-sanguis::client::states::intermediate::react(
+sanguis::client::states::menu::react(
 	message_event const &m)
 {
 	SGE_LOG_WARNING(
@@ -137,7 +145,7 @@ sanguis::client::states::intermediate::react(
 }
 
 boost::statechart::result
-sanguis::client::states::intermediate::react(
+sanguis::client::states::menu::react(
 	tick_event const &t)
 {
 	if (connect_now)
@@ -154,20 +162,25 @@ sanguis::client::states::intermediate::react(
 }
 
 sge::log::logger &
-sanguis::client::states::intermediate::log()
+sanguis::client::states::menu::log()
 {
 	static sge::log::logger log_(
 		client::log(),
-		SGE_TEXT("states::intermediate: "));
+		SGE_TEXT("states::menu: "));
 	return log_;
 }
 
-void sanguis::client::states::intermediate::connect()
+void sanguis::client::states::menu::connect()
 {
+	context<machine>().address(
+		connect_host_edit.text());
+	context<machine>().port(
+		boost::lexical_cast<net::port_type>(
+			connect_port_edit.text()));
 	connect_now = true;
 }
 
-void sanguis::client::states::intermediate::start_server()
+void sanguis::client::states::menu::start_server()
 {
 	connect_now = true;
 }
