@@ -10,14 +10,14 @@ sanguis::client::menu_mover::menu_mover(
 	connect_menu_(_connect_menu),
 	main_menu_(_main_menu),
 	pos_connect(
-		static_cast<sge::time::funit>(50),
-		static_cast<sge::time::funit>(50)),
+		static_cast<sge::time::funit>(0),
+		static_cast<sge::time::funit>(0)),
 	vantage_connect(
 		static_cast<sge::time::funit>(-2000),
 		static_cast<sge::time::funit>(200)),
 	pos_main(
-		static_cast<sge::time::funit>(50),
-		static_cast<sge::time::funit>(50)),
+		static_cast<sge::time::funit>(0),
+		static_cast<sge::time::funit>(0)),
 	vantage_main(
 		static_cast<sge::time::funit>(200),
 		static_cast<sge::time::funit>(-2000)),
