@@ -4,19 +4,20 @@
 namespace
 {
 
-sge::renderer::screen_size_t resolution_(
-	0, 0);
+sge::renderer::screen_size resolution_(
+	sge::renderer::screen_size::null()
+);
 
 }
 
-sge::renderer::screen_size_t const
+sge::renderer::screen_size const
 sanguis::resolution()
 {
 	return resolution_;
 }
 
 void sanguis::resolution(
-	sge::renderer::screen_size_t const &nres)
+	sge::renderer::screen_size const &nres)
 {
 	resolution_ = nres;
 }

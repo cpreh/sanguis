@@ -1,6 +1,6 @@
 #include "hud.hpp"
 #include <sge/font/object.hpp>
-#include <sge/font/text_size_t.hpp>
+#include <sge/font/text_size.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/format.hpp>

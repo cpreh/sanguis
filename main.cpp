@@ -133,7 +133,7 @@ try
 	}
 
 	sanguis::resolution(
-		sge::renderer::screen_size_t(
+		sge::renderer::screen_size(
 			screen_width,
 			screen_height));
 

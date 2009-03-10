@@ -9,7 +9,7 @@ sanguis::draw::entity_auto_ptr
 sanguis::draw::factory::client(
 	environment const &env,
 	client_messages::add const &m,
-	sge::renderer::screen_size_t const &screen_size)
+	sge::renderer::screen_size const &screen_size)
 {
 	switch(m.type()) {
 	case client_entity_type::cursor:

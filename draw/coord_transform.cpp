@@ -4,7 +4,7 @@
 
 sge::sprite::point const
 sanguis::virtual_to_screen(
-	sge::renderer::screen_size_t const &ss,
+	sge::renderer::screen_size const &ss,
 	messages::pos_type const &pos)
 {
 	return sge::sprite::point(
@@ -14,7 +14,7 @@ sanguis::virtual_to_screen(
 
 sge::sprite::dim const
 sanguis::virtual_to_screen(
-	sge::renderer::screen_size_t const &ss,
+	sge::renderer::screen_size const &ss,
 	messages::dim_type const &dim)
 {
 	return sge::sprite::dim(static_cast<sge::sprite::unit>(dim.w()),
@@ -23,7 +23,7 @@ sanguis::virtual_to_screen(
 
 sanguis::messages::pos_type const
 sanguis::screen_to_virtual(
-	sge::renderer::screen_size_t const &ss,
+	sge::renderer::screen_size const &ss,
 	sge::sprite::point const &pos)
 {
 	return messages::pos_type(
@@ -33,7 +33,7 @@ sanguis::screen_to_virtual(
 
 sanguis::messages::dim_type const
 sanguis::screen_to_virtual(
-	sge::renderer::screen_size_t const &ss,
+	sge::renderer::screen_size const &ss,
 	sge::sprite::dim const &dim)
 {
 	return messages::dim_type(
