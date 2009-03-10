@@ -135,7 +135,7 @@ sanguis::draw::explosion::explosion(
 		load::sound_type::nonstream),
 	current_(sounds_.random())
 {
-	sge::renderer::screen_size_t const screen_sz(
+	sge::renderer::screen_size const screen_sz(
 		resolution());
 
 	/*

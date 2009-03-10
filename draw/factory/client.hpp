@@ -3,7 +3,7 @@
 
 #include "../entity_auto_ptr.hpp"
 #include "../../client_messages/fwd.hpp"
-#include <sge/renderer/screen_size_t.hpp>
+#include <sge/renderer/screen_size.hpp>
 
 namespace sanguis
 {
@@ -17,7 +17,7 @@ entity_auto_ptr
 client(
 	environment const &,
 	client_messages::add const &,
-	sge::renderer::screen_size_t const &);
+	sge::renderer::screen_size const &);
 }
 }
 }

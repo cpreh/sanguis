@@ -4,7 +4,7 @@
 #include "../log.hpp"
 #include <sge/log/headers.hpp>
 #include <sge/font/object.hpp>
-#include <sge/font/text_size_t.hpp>
+#include <sge/font/text_size.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/gui/skins/standard.hpp>
 #include <sge/gui/layouts/vertical.hpp>

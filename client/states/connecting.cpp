@@ -14,7 +14,7 @@
 #include <sge/text.hpp>
 #include <sge/structure_cast.hpp>
 #include <sge/font/object.hpp>
-#include <sge/font/text_size_t.hpp>
+#include <sge/font/text_size.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
 #include <typeinfo>

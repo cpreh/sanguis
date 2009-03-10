@@ -31,7 +31,7 @@ void sanguis::server::waves::spawn(
 			sge::math::twopi<messages::space_unit>()
 		));
 
-	sge::renderer::screen_size_t const res(
+	sge::renderer::screen_size const res(
 		resolution());
 
 	messages::space_unit const

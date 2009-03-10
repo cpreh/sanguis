@@ -4,7 +4,6 @@
 #include "../load/model/animation_sound.hpp"
 #include "../animation_sound_type.hpp"
 #include "../resolution.hpp"
-#include <sge/renderer/screen_size_t.hpp>
 #include <sge/audio/sound.hpp>
 #include <sge/cerr.hpp>
 
