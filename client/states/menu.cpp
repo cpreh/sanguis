@@ -34,8 +34,8 @@ sanguis::client::states::menu::menu(
 	main_menu(
 		m,
 		sge::gui::widget::parameters()
-			.pos(sge::gui::point(100,100))
-			.size(sge::gui::dim(300,400))
+			.pos(sge::gui::point(0,0))
+			.size(sge::gui::dim(1024,768))
 			.layout(
 				sge::make_shared_ptr<sge::gui::layouts::vertical>(
 					boost::ref(main_menu)))),
@@ -56,9 +56,9 @@ sanguis::client::states::menu::menu(
 		m,
 		sge::gui::widget::parameters()
 			.pos(
-				sge::gui::point(100,100))
+				sge::gui::point(0,0))
 			.size(
-				sge::gui::dim(500,300))
+				sge::gui::dim(1024,768))
 			.layout(
 				sge::make_shared_ptr<sge::gui::layouts::vertical>(
 					boost::ref(connect_menu)))),
@@ -72,7 +72,7 @@ sanguis::client::states::menu::menu(
 	connect_host_label(
 		connect_host,
 		sge::gui::widget::parameters(),
-		SGE_TEXT("connect_hostname:")),
+		SGE_TEXT("Host: ")),
 	connect_host_edit(
 		connect_host,
 		sge::gui::widget::parameters(),
@@ -88,22 +88,33 @@ sanguis::client::states::menu::menu(
 	connect_port_label(
 		connect_port,
 		sge::gui::widget::parameters(),
-		SGE_TEXT("Port:")),
+		SGE_TEXT("Port: ")),
 	connect_port_edit(
 		connect_port,
 		sge::gui::widget::parameters(),
 		sge::gui::widgets::edit::single_line,
 		sge::gui::dim(5,1)),
 
-	connect_connect(
+	connect_connect_wrapper(
 		connect_menu,
+		sge::gui::widget::parameters()
+			.layout(
+				sge::make_shared_ptr<sge::gui::layouts::horizontal>(
+					boost::ref(connect_connect_wrapper)))),
+	connect_connect(
+		connect_connect_wrapper,
 		sge::gui::widget::parameters(),
 		SGE_TEXT("Connect")),
-	connect_return(
+	connect_return_wrapper(
 		connect_menu,
+		sge::gui::widget::parameters()
+			.layout(
+				sge::make_shared_ptr<sge::gui::layouts::horizontal>(
+					boost::ref(connect_return_wrapper)))),
+	connect_return(
+		connect_return_wrapper,
 		sge::gui::widget::parameters(),
 		SGE_TEXT("Return")),
-
 
 	mover_(
 		connect_menu,
