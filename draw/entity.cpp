@@ -178,6 +178,8 @@ sanguis::draw::entity::log()
 {
 	static sge::log::logger log_(
 		draw::log(),
-		SGE_TEXT("entity: "));
+		SGE_TEXT("entity: "),
+		true
+	);
 	return log_;
 }

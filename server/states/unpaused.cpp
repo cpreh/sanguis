@@ -354,6 +354,8 @@ sanguis::server::states::unpaused::log()
 {
 	static sge::log::logger log_(
 		server::log(),
-		SGE_TEXT("unpaused: "));
+		SGE_TEXT("unpaused: "),
+		true
+	);
 	return log_;
 }

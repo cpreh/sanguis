@@ -40,6 +40,8 @@ sanguis::server::states::start::log()
 {
 	static sge::log::logger log_(
 		server::log(),
-		SGE_TEXT("start: "));
+		SGE_TEXT("start: "),
+		true
+	);
 	return log_;
 }

@@ -306,6 +306,8 @@ sanguis::draw::model::log()
 {
 	static sge::log::logger log_(
 		draw::log(),
-		SGE_TEXT("model: "));
+		SGE_TEXT("model: "),
+		true
+	);
 	return log_;
 }

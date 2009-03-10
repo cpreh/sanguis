@@ -118,6 +118,8 @@ sanguis::client::states::connecting::log()
 {
 	static sge::log::logger log_(
 		client::log(),
-		SGE_TEXT("states::connecting: "));
+		SGE_TEXT("states::connecting: "),
+		true
+	);
 	return log_;
 }

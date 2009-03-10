@@ -525,6 +525,8 @@ sanguis::draw::scene::log()
 {
 	static sge::log::logger log_(
 		draw::log(),
-		SGE_TEXT("scene: "));
+		SGE_TEXT("scene: "),
+		true
+	);
 	return log_;
 }

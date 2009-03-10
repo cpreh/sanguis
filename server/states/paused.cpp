@@ -103,6 +103,8 @@ sanguis::server::states::paused::log()
 {
 	static sge::log::logger log_(
 		server::log(),
-		SGE_TEXT("paused: "));
+		SGE_TEXT("paused: "),
+		true
+	);
 	return log_;
 }

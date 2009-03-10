@@ -8,6 +8,8 @@ sanguis::load::log()
 {
 	static sge::log::logger log_(
 		sanguis::log(),
-		SGE_TEXT("load: "));
+		SGE_TEXT("load: "),
+		true
+	);
 	return log_;
 }

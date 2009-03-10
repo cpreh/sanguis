@@ -8,6 +8,8 @@ sanguis::server::weapons::log()
 {
 	static sge::log::logger log_(
 		server::log(),
-		SGE_TEXT("weapons: "));
+		SGE_TEXT("weapons: "),
+		true
+	);
 	return log_;
 }

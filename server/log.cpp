@@ -8,6 +8,8 @@ sanguis::server::log()
 {
 	static sge::log::logger log_(
 		sanguis::log(),
-		SGE_TEXT("server: "));
+		SGE_TEXT("server: "),
+		true
+	);
 	return log_;
 }
