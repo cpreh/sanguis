@@ -48,7 +48,8 @@ class menu
 
 	sge::gui::widgets::backdrop connect_menu;
 		sge::gui::widget connect_host;
-			sge::gui::widgets::label connect_host_label;
+	//		sge::gui::widgets::label connect_host_label;
+			sge::gui::widgets::image_label connect_host_label;
 			sge::gui::widgets::edit connect_host_edit;
 		sge::gui::widget connect_port;
 			sge::gui::widgets::label connect_port_label;

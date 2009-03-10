@@ -1,11 +1,13 @@
 #include "menu.hpp"
 #include "connecting.hpp"
+#include "../../media_path.hpp"
 #include "../machine.hpp"
 #include "../log.hpp"
 #include <sge/log/headers.hpp>
 #include <sge/font/object.hpp>
 #include <sge/font/text_size_t.hpp>
 #include <sge/renderer/device.hpp>
+#include <sge/image/loader.hpp>
 #include <sge/gui/skins/standard.hpp>
 #include <sge/gui/layouts/vertical.hpp>
 #include <sge/gui/layouts/horizontal.hpp>
@@ -69,10 +71,17 @@ sanguis::client::states::menu::menu(
 			.layout(
 				sge::make_shared_ptr<sge::gui::layouts::horizontal>(
 					boost::ref(connect_host)))),
+					/*
 	connect_host_label(
 		connect_host,
 		sge::gui::widget::parameters(),
 		SGE_TEXT("Host: ")),
+		*/
+	connect_host_label(
+		connect_host,
+		sge::gui::widget::parameters(),
+		context<machine>().sys().image_loader()->load(
+			media_path()/SGE_TEXT("menu")/SGE_TEXT("test.png"))),
 	connect_host_edit(
 		connect_host,
 		sge::gui::widget::parameters(),
