@@ -8,10 +8,9 @@
 #include <sge/log/fwd.hpp>
 #include <sge/gui/widget.hpp>
 #include <sge/gui/manager.hpp>
-#include <sge/gui/widgets/label.hpp>
 #include <sge/gui/widgets/image_label.hpp>
+#include <sge/gui/widgets/buttons/image.hpp>
 #include <sge/gui/widgets/edit.hpp>
-#include <sge/gui/widgets/button.hpp>
 #include <sge/gui/widgets/backdrop.hpp>
 #include <sge/signals/scoped_connection.hpp>
 #include <boost/statechart/state.hpp>
@@ -42,22 +41,21 @@ class menu
 	sge::gui::manager m;
 
 	sge::gui::widget main_menu;
-		sge::gui::widgets::button main_connect;
-		sge::gui::widgets::button main_start;
-		sge::gui::widgets::button main_exit;
+		sge::gui::widgets::buttons::image main_connect;
+		sge::gui::widgets::buttons::image main_start;
+		sge::gui::widgets::buttons::image main_exit;
 
 	sge::gui::widgets::backdrop connect_menu;
 		sge::gui::widget connect_host;
-	//		sge::gui::widgets::label connect_host_label;
 			sge::gui::widgets::image_label connect_host_label;
 			sge::gui::widgets::edit connect_host_edit;
 		sge::gui::widget connect_port;
-			sge::gui::widgets::label connect_port_label;
+			sge::gui::widgets::image_label connect_port_label;
 			sge::gui::widgets::edit connect_port_edit;
 		sge::gui::widget connect_connect_wrapper;
-			sge::gui::widgets::button connect_connect;
+			sge::gui::widgets::buttons::image connect_connect;
 		sge::gui::widget connect_return_wrapper;
-			sge::gui::widgets::button connect_return;
+			sge::gui::widgets::buttons::image connect_return;
 
 	menu_mover mover_;
 
