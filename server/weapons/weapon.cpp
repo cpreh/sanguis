@@ -211,6 +211,8 @@ sanguis::server::weapons::weapon::log()
 {
 	static sge::log::logger log_(
 		weapons::log(),
-		SGE_TEXT("weapon: "));
+		SGE_TEXT("weapon: "),
+		true
+	);
 	return log_;
 }

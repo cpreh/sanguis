@@ -8,6 +8,9 @@ sanguis::log()
 {
 	static sge::log::logger log_(
 		sge::cerr,
-		SGE_TEXT("sanguis: "));
+		SGE_TEXT("sanguis: "),
+		true,
+		sge::log::level::debug
+	);
 	return log_;
 }

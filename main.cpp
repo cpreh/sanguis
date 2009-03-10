@@ -204,13 +204,23 @@ try
 				static_cast<sge::sprite::unit>(
 					sys.renderer()->screen_size().h() / 2))));
 	
+	sge::collision::unit const additional_size(
+		500
+	);
+
 	sge::collision::world_ptr const world = 
 		sys.collision_system()->create_world(
 			sge::collision::rect(
-				-4096,
-				-4096,
-				4096,
-				4096));
+				-additional_size,
+				-additional_size,
+				static_cast<sge::collision::unit>(
+					sanguis::resolution().w()
+				)+ additional_size,
+				static_cast<sge::collision::unit>(
+					sanguis::resolution().h()
+				) + additional_size
+			)
+		);
 	
 	sge::audio::multi_loader audio_loader(sys.plugin_manager());
 	sge::audio::pool sound_pool;

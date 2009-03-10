@@ -440,6 +440,8 @@ sanguis::server::states::running::log()
 {
 	static sge::log::logger log_(
 		server::log(),
-		SGE_TEXT("running: "));
+		SGE_TEXT("running: "),
+		true
+	);
 	return log_;
 }

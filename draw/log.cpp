@@ -8,6 +8,8 @@ sanguis::draw::log()
 {
 	static sge::log::logger log_(
 		sanguis::log(),
-		SGE_TEXT("draw: "));
+		SGE_TEXT("draw: "),
+		true
+	);
 	return log_;
 }

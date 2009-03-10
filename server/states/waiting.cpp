@@ -108,6 +108,8 @@ sanguis::server::states::waiting::log()
 {
 	static sge::log::logger log_(
 		server::log(),
-		SGE_TEXT("waiting: "));
+		SGE_TEXT("waiting: "),
+		true
+	);
 	return log_;
 }

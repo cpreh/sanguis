@@ -13,15 +13,25 @@
 sanguis::client::music_handler::music_handler(
 	sge::console::gfx &_console,
 	load::resource::context const &_resource)
-	: console_(_console),
-		volume_connection_(
-			console_.object().insert(
-				SGE_TEXT("music_volume"),
-				boost::bind(&music_handler::volume,this,_1),
-				SGE_TEXT("takes values from 0 to 100, changes the music volume in percent")))
+:
+	console_(_console),
+	volume_connection_(
+		console_.object().insert(
+			SGE_TEXT("music_volume"),
+			boost::bind(
+				&music_handler::volume,
+				this,
+				_1
+			),
+			SGE_TEXT("takes values from 0 to 100, changes the music volume in percent")
+		)
+	)
 {
-	load::sound_container const &s = _resource.sounds().load(
-					SGE_TEXT(media_path()/SGE_TEXT("music"))).sounds();
+	load::sound_container const &s(
+		_resource.sounds().load(
+			media_path() / SGE_TEXT("music")
+		).sounds()
+	);
 	
 	if (s.empty())
 		return;

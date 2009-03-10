@@ -186,14 +186,19 @@ sanguis::client::states::menu::log()
 {
 	static sge::log::logger log_(
 		client::log(),
-		SGE_TEXT("states::menu: "));
+		SGE_TEXT("states::menu: "),
+		true
+	);
 	return log_;
 }
 
 void sanguis::client::states::menu::connect()
 {
 	context<machine>().address(
-		connect_host_edit.text());
+		sge::iconv(
+			connect_host_edit.text()
+		)
+	);
 	context<machine>().port(
 		boost::lexical_cast<net::port_type>(
 			connect_port_edit.text()));
