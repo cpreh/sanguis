@@ -183,6 +183,7 @@ sanguis::client::states::menu::menu(
 				buttons_path/SGE_TEXT("return")/SGE_TEXT("hover_keyboard.png")))),
 
 	mover_(
+		m,
 		connect_menu,
 		main_menu),
 
