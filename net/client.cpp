@@ -7,9 +7,18 @@
 #include <boost/bind.hpp>
 
 net::client::client() 
-	: io_service(io_service_wrapper()),socket(io_service),
-	  resolver(io_service),connected(false),sending(false),
-		logstream("client.log")
+:
+	io_service(
+		io_service_wrapper()
+	),
+	socket(
+		io_service
+	),
+	resolver(
+		io_service
+	),
+	connected(false),
+	sending(false)
 {
 	// TODO: put this in a single function
 	//int flag = 1;
@@ -119,7 +128,6 @@ void net::client::read_handler(const boost::system::error_code &e,const std::siz
 
 void net::client::queue(const data_type &data)
 {
-	logstream << data << "\n";
 	output.push_back(data);
 }
 
