@@ -37,8 +37,8 @@ sanguis::server::entities::projectiles::rocket::rocket(
 	aoe(aoe)
 {}
 
-void sanguis::server::entities::projectiles::rocket::do_hit(
-	hit_vector const &)
+void sanguis::server::entities::projectiles::rocket::collision(
+	entity &)
 {
 	die();
 }
@@ -63,5 +63,8 @@ void sanguis::server::entities::projectiles::rocket::do_die()
 				damage,
 				1,
 				static_cast<time_type>(0.1),
-				damage_values)));
+				damage_values
+			)
+		)
+	);
 }

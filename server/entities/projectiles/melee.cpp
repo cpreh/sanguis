@@ -2,7 +2,6 @@
 #include "../property.hpp"
 #include <sge/math/dim/basic_impl.hpp>
 #include <boost/assign/list_of.hpp>
-#include <cassert>
 
 sanguis::server::entities::projectiles::melee::melee(
 	server::environment const &env,
@@ -30,8 +29,8 @@ sanguis::server::entities::projectiles::melee::melee(
 	damage(damage)
 {}
 
-void sanguis::server::entities::projectiles::melee::do_hit(
-	hit_vector const &hits)
+void sanguis::server::entities::projectiles::melee::collision(
+	entity &e)
 {
 	damage_array const damage_values =
 		boost::assign::list_of
@@ -41,9 +40,7 @@ void sanguis::server::entities::projectiles::melee::do_hit(
 		(messages::mu(0))
 		(messages::mu(0));
 	
-	assert(!hits.empty());
-
-	hits[0].get().damage(
+	e.damage(
 		damage,
 		damage_values);
 	die();

@@ -4,7 +4,6 @@
 #include "../../../load/context.hpp"
 #include <sge/text.hpp>
 #include <boost/assign/list_of.hpp>
-#include <cassert>
 
 sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 	server::environment const &env,
@@ -35,8 +34,8 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 	damage(damage)
 {}
 
-void sanguis::server::entities::projectiles::simple_bullet::do_hit(
-	hit_vector const &hits)
+void sanguis::server::entities::projectiles::simple_bullet::collision(
+	entity &e)
 {
 	damage_array const damage_values =
 		boost::assign::list_of
@@ -46,9 +45,7 @@ void sanguis::server::entities::projectiles::simple_bullet::do_hit(
 		(messages::mu(0))
 		(messages::mu(0));
 			
-	assert(!hits.empty());
-
-	hits[0].get().damage(
+	e.damage(
 		damage,
 		damage_values);
 

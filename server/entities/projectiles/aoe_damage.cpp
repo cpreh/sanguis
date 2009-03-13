@@ -32,47 +32,17 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 		dim_type(
 			radius * messages::mu(2),
 			radius * messages::mu(2)),
-		optional_life_time()),
-	diff_clock_(),
+		pulse_diff * max_pulses),
 	damage_per_pulse(damage_per_pulse),
-	pulses(0),
-	max_pulses(max_pulses),
-	pulse_timer(
-		sge::time::second_f(
-			pulse_diff),
-		true,
-		diff_clock_.callback()),
 	damage_values(damage_values)
 {}
 
-void sanguis::server::entities::projectiles::aoe_damage::update(
-	time_type const time,
-	container &entities)
+void sanguis::server::entities::projectiles::aoe_damage::collision(
+	entity &)
 {
-	diff_clock_.update(
-		time);
-
-	projectile::update(
-		time,
-		entities);
-}
-
-void sanguis::server::entities::projectiles::aoe_damage::do_hit(
-	hit_vector const &hits)
-{
-	if(!pulse_timer.update_b())
-		return;
-	
-	if(pulses == max_pulses)
-	{
-		die();
-		return;
-	}
-	
+	/*
 	BOOST_FOREACH(hit_vector::value_type e, hits)
 		e.get().damage(
 			damage_per_pulse,
-			damage_values);
-
-	++pulses;
+			damage_values);*/
 }

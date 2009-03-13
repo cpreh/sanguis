@@ -22,12 +22,13 @@ public:
 		space_unit damage,
 		space_unit aoe);
 private:
-	void do_hit(
-		hit_vector const &target);
+	void collision(
+		entity &);
 	void do_die();
 	
-	space_unit damage,
-	           aoe;
+	space_unit const
+		damage,
+		aoe;
 };
 
 }

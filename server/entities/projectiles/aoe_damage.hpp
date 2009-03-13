@@ -2,8 +2,6 @@
 #define SANGUIS_SERVER_ENTITIES_PROJECTILES_AOE_DAMAGE_HPP_INCLUDED
 
 #include "projectile.hpp"
-#include "../../../diff_clock.hpp"
-#include <sge/time/timer.hpp>
 
 namespace sanguis
 {
@@ -26,19 +24,11 @@ public:
 		time_type pulse_diff,
 		damage_array const &damage_values);
 private:
-	void update(
-		time_type,
-		container &);
+	void collision(
+		entity &);	
 	
-	void do_hit(
-		hit_vector const &);	
-	
-	diff_clock       diff_clock_;
-	space_unit       damage_per_pulse;
-	unsigned         pulses;
-	unsigned const   max_pulses;
-	sge::time::timer pulse_timer;
-	damage_array     damage_values;
+	space_unit const damage_per_pulse;
+	damage_array const damage_values;
 };
 
 }

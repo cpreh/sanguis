@@ -21,10 +21,10 @@ public:
 		team::type team,
 		space_unit damage);
 private:
-	void do_hit(
-		hit_vector const &target);
+	void collision(
+		entity &);
 
-	space_unit damage;
+	space_unit const damage;
 };
 
 }

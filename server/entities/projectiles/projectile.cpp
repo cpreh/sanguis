@@ -7,7 +7,6 @@
 #include <sge/time/second_f.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/text.hpp>
-#include <boost/foreach.hpp>
 
 namespace
 {
@@ -22,19 +21,6 @@ sanguis::projectile_type::type
 sanguis::server::entities::projectiles::projectile::ptype() const
 {
 	return ptype_;
-}
-
-bool sanguis::server::entities::projectiles::projectile::can_collide_with(
-	entity const &e) const
-{
-	return e.team() != team()
-		&& !e.dead()
-		&& !e.invulnerable();
-}
-
-void sanguis::server::entities::projectiles::projectile::collision(entity &e)
-{
-	
 }
 
 sanguis::server::entities::projectiles::projectile::projectile(
@@ -87,29 +73,15 @@ void sanguis::server::entities::projectiles::projectile::update(
 		entities);
 
 	if(lifetime.expired())
-	{
 		die();
-		return;
-	}
+}
 
-	hit_vector hits;
-
-	BOOST_FOREACH(
-		entity &e,
-		entities)
-	{
-		if(e.team() != team()
+bool sanguis::server::entities::projectiles::projectile::can_collide_with(
+	entity const &e) const
+{
+	return e.team() != team()
 		&& !e.dead()
-		&& !e.invulnerable()
-		&& collides(
-			e,
-			*this))
-			hits.push_back(
-				hit_vector::value_type(e));
-	}
-
-	if(!hits.empty())
-		do_hit(hits);
+		&& !e.invulnerable();
 }
 
 void sanguis::server::entities::projectiles::projectile::do_die()

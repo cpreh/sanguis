@@ -7,8 +7,6 @@
 #include "../entity.hpp"
 #include <sge/time/timer.hpp>
 #include <boost/optional.hpp>
-#include <boost/tr1/functional.hpp>
-#include <vector>
 
 namespace sanguis
 {
@@ -22,9 +20,6 @@ namespace projectiles
 class projectile : public entity {
 public:
 	projectile_type::type ptype() const;
-
-	bool can_collide_with(entity const &) const;
-	void collision(entity &);
 protected:
 	typedef boost::optional<
 		time_type
@@ -39,20 +34,17 @@ protected:
 		property_map const &,
 		dim_type const &dim,
 		optional_life_time const &);
+	
 	void die();
 
-	typedef std::vector<
-		std::tr1::reference_wrapper<
-			entity
-		>
-	> hit_vector;
-
-	virtual void update(
+	void update(
 		time_type,
-		container &entities);
+		container &);
 private:
-	virtual void do_hit(
-		hit_vector const &) = 0;
+	virtual bool
+	can_collide_with(
+		entity const &) const;
+	
 	virtual void do_die();
 
 	messages::auto_ptr add_message() const;
