@@ -4,6 +4,7 @@
 #include "auto_weak_link.hpp"
 #include "property.hpp"
 #include "../perks/perk.hpp"
+#include "../buffs/buff.hpp"
 #include "../get_unique_id.hpp"
 #include "../message_converter.hpp"
 #include "../../messages/add.hpp"
@@ -299,7 +300,7 @@ bool sanguis::server::entities::entity::invulnerable() const
 }
 
 void sanguis::server::entities::entity::update(
-	time_type,
+	time_type const time,
 	container &)
 {
 	BOOST_FOREACH(property_map::reference p, properties)
@@ -310,6 +311,22 @@ void sanguis::server::entities::entity::update(
 
 	BOOST_FOREACH(property_map::reference p, properties)
 		p.second.apply();
+
+	for(
+		buff_container::iterator it(buffs_.begin());
+		it != buffs_.end();
+	)
+	{
+		it->update(
+			*this,
+			time
+		);
+
+		if(it->expired())
+			it = buffs_.erase(it);
+		else
+			++it;
+	}
 }
 
 void sanguis::server::entities::entity::add_perk(
@@ -368,6 +385,20 @@ bool sanguis::server::entities::entity::can_collide_with(
 void sanguis::server::entities::entity::collision(
 	entity &)
 {
+}
+
+void
+sanguis::server::entities::entity::add_buff(
+	buffs::auto_ptr b)
+{
+	BOOST_FOREACH(
+		buff_container::const_reference r,
+		buffs_
+	)
+		if(!r.stacks(*b) || b->stacks(r))
+			return;
+	
+	buffs_.push_back(b);
 }
 
 sanguis::server::entities::entity::~entity()

@@ -9,6 +9,7 @@
 #include "../types.hpp"
 #include "../environment.hpp"
 #include "../perks/auto_ptr.hpp"
+#include "../buffs/auto_ptr.hpp"
 #include "../../messages/base.hpp"
 #include "../../entity_id.hpp"
 #include "../../entity_type.hpp"
@@ -19,8 +20,8 @@
 #include <sge/container/linear_set.hpp>
 #include <sge/collision/objects/circle_fwd.hpp>
 #include <sge/signals/connection.hpp>
+#include <sge/noncopyable.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
-#include <boost/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -32,7 +33,8 @@ namespace entities
 class base_parameters;
 class auto_weak_link;
 
-class entity : boost::noncopyable {
+class entity {
+	SGE_NONCOPYABLE(entity)
 protected:
 	explicit entity(
 		base_parameters const &);
@@ -100,6 +102,9 @@ public:
 	virtual bool can_collide_with(entity const &) const;
 	virtual void collision(entity &);
 
+	virtual void add_buff(
+		buffs::auto_ptr);
+
 	virtual ~entity();
 protected:
 	void send(messages::auto_ptr);
@@ -136,6 +141,11 @@ private:
 		perks::perk
 	>                       perk_container;
 	perk_container          perks_;
+
+	typedef boost::ptr_list<
+		buffs::buff
+	>                       buff_container;
+	buff_container          buffs_;
 
 	typedef sge::container::linear_set<
 		entity *

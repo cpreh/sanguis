@@ -1,12 +1,9 @@
 #include "aoe_damage.hpp"
 #include "../property.hpp"
-#include <sge/time/second_f.hpp>
-#include <sge/time/resolution.hpp>
+#include "../../buffs/burn.hpp"
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>
-#include <boost/foreach.hpp>
 #include <boost/assign/list_of.hpp>
-#include <limits>
 
 sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 	server::environment const &env,
@@ -32,17 +29,24 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 		dim_type(
 			radius * messages::mu(2),
 			radius * messages::mu(2)),
-		pulse_diff * max_pulses),
+		pulse_diff * static_cast<time_type>(max_pulses)),
+	pulse_diff(pulse_diff),
 	damage_per_pulse(damage_per_pulse),
 	damage_values(damage_values)
 {}
 
 void sanguis::server::entities::projectiles::aoe_damage::collision(
-	entity &)
+	entity &e)
 {
-	/*
-	BOOST_FOREACH(hit_vector::value_type e, hits)
-		e.get().damage(
-			damage_per_pulse,
-			damage_values);*/
+	e.add_buff(
+		buffs::auto_ptr(
+			new buffs::burn(
+				id(),
+				damage_per_pulse,
+				pulse_diff,
+				1,
+				damage_values
+			)
+		)
+	);
 }

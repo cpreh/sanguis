@@ -21,7 +21,8 @@ enum type {
 
 typedef boost::array<
 	messages::space_unit,
-	damage_type::size> damage_array;
+	damage_type::size
+> damage_array;
 
 typedef damage_array armor_array;
 

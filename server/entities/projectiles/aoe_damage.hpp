@@ -27,6 +27,7 @@ private:
 	void collision(
 		entity &);	
 	
+	time_type const pulse_diff;
 	space_unit const damage_per_pulse;
 	damage_array const damage_values;
 };
