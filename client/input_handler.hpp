@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_INPUT_HANDLER_HPP_INCLUDED
 #define SANGUIS_CLIENT_INPUT_HANDLER_HPP_INCLUDED
 
-#include <sge/input/key_pair.hpp> // TODO: declaration
+#include <sge/input/key_pair_fwd.hpp>
 #include <sge/input/key_state.hpp>
 #include <boost/function.hpp>
 
@@ -14,19 +14,26 @@ struct player_action;
 
 class input_handler {
 public:
-	typedef boost::function<void (player_action const &)> post_fun;
-	input_handler(const post_fun&);
-	void input_callback(const sge::input::key_pair&);
-private:
-	void direction_event(const sge::input::key_pair&);
-	void rotation_event(const sge::input::key_pair&);
-	void shooting_event(const sge::input::key_pair&);
-	void weapon_switch_event(const sge::input::key_pair&);
-	void pause_unpause_event(const sge::input::key_pair&);
+	typedef boost::function<
+		void (player_action const &)
+	> post_fun;
 
-	const post_fun         post_message;
-	sge::input::key_state  last_x,
-	                       last_y;
+	explicit input_handler(
+		post_fun const &);
+	
+	void input_callback(
+		sge::input::key_pair const &);
+private:
+	void direction_event(sge::input::key_pair const &);
+	void rotation_event(sge::input::key_pair const &);
+	void shooting_event(sge::input::key_pair const &);
+	void weapon_switch_event(sge::input::key_pair const &);
+	void pause_unpause_event(sge::input::key_pair const &);
+
+	post_fun const post_message;
+	sge::input::key_state
+		last_x,
+		last_y;
 };
 
 }
