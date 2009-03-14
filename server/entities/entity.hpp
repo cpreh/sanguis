@@ -154,7 +154,7 @@ private:
 	                        backlinks;
 	
 	sge::collision::objects::circle_ptr collision_;
-	sge::signals::connection            speed_change_;
+	sge::signals::auto_connection       speed_change_;
 };
 
 }

@@ -182,9 +182,9 @@ sanguis::draw::explosion::explosion(
 	current_->positional(true);
 	current_->pos(
 		sge::audio::point(
-			pos_.x(),
-			0,
-			pos_.y()));
+			static_cast<sge::audio::unit>(pos_.x()),
+			static_cast<sge::audio::unit>(0),
+			static_cast<sge::audio::unit>(pos_.y())));
 	
 	current_->rolloff(
 		static_cast<sge::audio::unit>(1)

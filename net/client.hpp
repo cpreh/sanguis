@@ -4,12 +4,14 @@
 #include "types.hpp"
 #include "output_buffer.hpp"
 
+#include <sge/signals/signal.hpp>
+#include <sge/signals/connection.hpp>
+
 #include <boost/asio/io_service.hpp>
 #include <boost/asio/ip/tcp.hpp>
 #include <boost/system/error_code.hpp>
 
 #include <boost/function.hpp>
-#include <boost/signal.hpp>
 
 #include <cstddef>
 
@@ -24,7 +26,7 @@ struct client
 	typedef boost::function<connect_fun> connect_function;
 	typedef boost::function<disconnect_fun> disconnect_function;
 	typedef boost::function<data_fun> data_function;
-	typedef boost::signals::scoped_connection signal_connection;
+	typedef sge::signals::auto_connection signal_connection;
 
 	client();
 	void connect(const address_type &,const port_type);
@@ -49,9 +51,9 @@ struct client
 	bool connected,sending;
 
 	// signals
-	boost::signal<connect_fun> connect_signal;
-	boost::signal<disconnect_fun> disconnect_signal;
-	boost::signal<data_fun> data_signal;
+	sge::signals::signal<connect_fun> connect_signal;
+	sge::signals::signal<disconnect_fun> disconnect_signal;
+	sge::signals::signal<data_fun> data_signal;
 
 	// handlers
 	void handle_error(const string_type &,const boost::system::error_code &);

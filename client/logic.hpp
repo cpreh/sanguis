@@ -76,7 +76,7 @@ private:
 
 	send_callback const             send;
 	sge::renderer::device_ptr const rend;
-	sge::signals::connection const  give_perk_connection;
+	sge::signals::auto_connection give_perk_connection;
 
 	typedef boost::function<
 		void (key_scale)

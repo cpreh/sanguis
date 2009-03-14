@@ -26,7 +26,7 @@ sanguis::client::menu_mover::menu_mover(
 		static_cast<sge::time::funit>(5000)),
 	real_main(time_vector::null()),
 	real_connect(time_vector::null()),
-	speed(static_cast<sge::time::funit>(1))
+	speed(static_cast<sge::time::funit>(8))
 {
 	main_menu_.activation(
 		sge::gui::activation_state::active);
