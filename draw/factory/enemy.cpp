@@ -17,6 +17,6 @@ sanguis::draw::factory::enemy(
 			load::enemy_name(
 				etype),
 			z_ordering::model_generic,
-			true,
+			false,
 			remove_action::render_dead));
 }

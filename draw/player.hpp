@@ -2,7 +2,6 @@
 #define SANGUIS_DRAW_PLAYER_HPP_INCLUDED
 
 #include "model.hpp"
-#include "reaper.hpp"
 #include "vector2.hpp"
 #include <sge/sprite/texture_animation.hpp>
 
@@ -30,7 +29,6 @@ private:
 	void update(time_type);
 	funit  angle_,
 	       target_angle;
-	reaper reaper_;
 };
 
 

@@ -41,11 +41,7 @@ sanguis::draw::player::player(
 		true,
 		draw::remove_action::render_dead),
 	angle_(static_cast<funit>(0)),
-	target_angle(angle_),
-	reaper_(
-		env,
-		client::next_id(),
-		*this)
+	target_angle(angle_)
 {
 	at(bottom).order(z_ordering::player_lower);
 	
@@ -112,6 +108,4 @@ void sanguis::draw::player::update(
 		sge::sprite::point
 	>(
 		top_pos);
-
-	reaper_.update(time);
 }
