@@ -1,53 +1,31 @@
 #include "part.hpp"
+#include "split_first_slash.hpp"
 #include "../../exception.hpp"
 #include <sge/string.hpp>
 #include <sge/text.hpp>
 #include <sge/filesystem/exists.hpp>
-#include <boost/array.hpp>
+#include <boost/tr1/array.hpp>
 #include <utility>
 #include <iterator>
 
-sanguis::load::model::part::part(
-	sge::filesystem::path const &path,
-	resource::context const &ctx)
-:
-	path(path)
+namespace
 {
-	typedef boost::array<
-		sge::string,
-		weapon_type::size
-	> weapon_type_array;
 
-	weapon_type_array const weapon_types = {
-	{
-		SGE_TEXT("none"),
-		SGE_TEXT("melee"),
-		SGE_TEXT("pistol"),
-		SGE_TEXT("dual_pistols"),
-		SGE_TEXT("shotgun"),
-		SGE_TEXT("rocket_launcher")
-	} };
+typedef std::tr1::array<
+	sge::string,
+	sanguis::weapon_type::size
+> weapon_type_array;
 
-	for(weapon_type_array::const_iterator it(weapon_types.begin());
-	    it != weapon_types.end();
-	    ++it)
-	{
-		sge::filesystem::path const weapon_path(path / *it);
-		if(!sge::filesystem::exists(weapon_path))
-			continue;
+weapon_type_array const weapon_types = {
+{
+	SGE_TEXT("none"),
+	SGE_TEXT("melee"),
+	SGE_TEXT("pistol"),
+	SGE_TEXT("dual_pistols"),
+	SGE_TEXT("shotgun"),
+	SGE_TEXT("rocket_launcher")
+} };
 
-		if(categories.insert(
-			std::make_pair(
-				static_cast<weapon_type::type>(
-					std::distance(
-						static_cast<weapon_type_array const &>(weapon_types).begin(),
-						it)),
-				weapon_category(
-					weapon_path,
-					ctx)))
-		.second == false)
-			throw exception(SGE_TEXT("Double insert in model::part: ") + weapon_path.string());
-	}
 }
 
 sanguis::load::model::weapon_category const &
@@ -60,7 +38,80 @@ sanguis::load::model::part::operator[](
 		return it->second;
 	if(t == weapon_type::none)
 		throw exception(
-			SGE_TEXT("Unarmed weapon model missing in ")
-			+ path.string());
+			SGE_TEXT("Unarmed weapon model missing in TODO")
+		);
 	return (*this)[weapon_type::none];
+}
+
+sanguis::load::model::part::part(
+	sge::texture::part_ptr const tex,
+	sge::renderer::dim_type const &cell_size)
+:
+	tex(tex),
+	cell_size(cell_size)
+{}
+
+void
+sanguis::load::model::part::add(
+	sge::parse::ini::entry_vector const &entries,
+	sge::string const &header)
+{
+	split_pair const names(
+		split_first_slash(
+			header
+		)
+	);
+
+	weapon_type_array::const_iterator const weapon_index(
+		std::find(
+			weapon_types.begin(),
+			weapon_types.end(),
+			names.first
+		)
+	);
+
+	if(weapon_index == weapon_types.end())
+		throw exception(
+			SGE_TEXT("Invalid weapon_category ")
+			+ names.first
+		);
+
+	weapon_type::type const type(
+		static_cast<
+			weapon_type::type
+		>(
+			std::distance(
+				weapon_types.begin(),
+				weapon_index
+			)
+		)
+	);
+
+	category_map::iterator it(
+		categories.find(
+			type
+		)
+	);
+
+	if(it == categories.end())
+	{
+		std::pair<category_map::iterator, bool> const ret(
+			categories.insert(
+				std::make_pair(
+					type,		
+					weapon_category(
+						tex,
+						cell_size
+					)
+				)
+			)
+		);
+
+		it = ret.first;
+	}
+	
+	it->second.add(
+		entries,
+		names.second
+	);
 }

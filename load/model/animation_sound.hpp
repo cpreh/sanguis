@@ -24,7 +24,7 @@ public:
 	operator[](
 		animation_sound_type::type) const;
 private:
-	animation_sound(
+/*	animation_sound(
 		sge::filesystem::path const &,
 		resource::context const &);
 	
@@ -35,7 +35,7 @@ private:
 		conditional_sound
 	> animation_sound_map;
 
-	animation_sound_map sounds;
+	animation_sound_map sounds;*/
 };
 
 }

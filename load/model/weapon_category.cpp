@@ -4,53 +4,27 @@
 #include <sge/filesystem/exists.hpp>
 #include <sge/string.hpp>
 #include <sge/text.hpp>
-#include <boost/array.hpp>
+#include <boost/tr1/array.hpp>
 #include <utility>
 #include <iterator>
 
-sanguis::load::model::weapon_category::weapon_category(
-	sge::filesystem::path const &path,
-	resource::context const &ctx)
-:
-	path(path)
+namespace
 {
-	typedef boost::array<
-		sge::string,
-		sanguis::animation_type::size
-	> animation_type_array;
 
-	animation_type_array const animation_types = {{
-		SGE_TEXT("none"),
-		SGE_TEXT("attacking"),
-		SGE_TEXT("walking"),
-		SGE_TEXT("dying"),
-		SGE_TEXT("deploying"),
-		SGE_TEXT("reloading")
-	}};
+typedef std::tr1::array<
+	sge::string,
+	sanguis::animation_type::size
+> animation_type_array;
 
-	for(animation_type_array::const_iterator it(animation_types.begin());
-	    it != animation_types.end();
-	    ++it)
-	{
-		sge::filesystem::path const animation_path(path / *it);
-		if(!sge::filesystem::exists(animation_path))
-			continue;
-		
-		if(animations.insert(
-			std::make_pair(
-				static_cast<animation_type::type>(
-					std::distance(
-						static_cast<animation_type_array const &>(
-							animation_types).begin(),
-						it)),
-				animation(
-					animation_path,
-					ctx)))
-		.second == false)
-			throw exception(
-				SGE_TEXT("Double insert in model::weapon_category: ")
-				+ animation_path.string());
-	}
+animation_type_array const animation_types = {{
+	SGE_TEXT("none"),
+	SGE_TEXT("attacking"),
+	SGE_TEXT("walking"),
+	SGE_TEXT("dying"),
+	SGE_TEXT("deploying"),
+	SGE_TEXT("reloading")
+}};
+
 }
 
 sanguis::load::model::animation const &
@@ -67,4 +41,59 @@ sanguis::load::model::weapon_category::operator[](
 			+ path.string());
 	throw base_animation_not_found(
 		anim);
+}
+
+sanguis::load::model::weapon_category::weapon_category(
+	sge::texture::part_ptr const tex,
+	sge::renderer::dim_type const &cell_size)
+:
+	tex(tex),
+	cell_size(cell_size)
+{}
+
+void
+sanguis::load::model::weapon_category::add(
+	sge::parse::ini::entry_vector const &entries,
+	sge::string const &header)
+{
+	animation_type_array::const_iterator const weapon_index(
+		std::find(
+			animation_types.begin(),
+			animation_types.end(),
+			header	
+		)
+	);
+
+	if(weapon_index == animation_types.end())
+		throw exception(
+			SGE_TEXT("Invalid animation ")
+			+ header
+		);
+
+	animation_type::type const type(
+		static_cast<
+			animation_type::type
+		>(
+			std::distance(
+				animation_types.begin(),
+				weapon_index
+			)
+		)
+	);
+
+	if(
+		animations.insert(
+			std::make_pair(
+				type,		
+				animation(
+					tex,
+					cell_size,
+					entries
+				)
+			)
+		).second == false
+	)
+		throw exception(
+			SGE_TEXT("Double insert in load!")
+		);
 }

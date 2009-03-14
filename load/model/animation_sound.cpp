@@ -13,15 +13,17 @@ sge::audio::sound_ptr const
 sanguis::load::model::animation_sound::operator[](
 	animation_sound_type::type const stype) const
 {
+	/*
 	animation_sound_map::const_iterator const it(
 		sounds.find(stype));
 	
-	if(it == sounds.end())
+	if(it == sounds.end())*/
 		return sge::audio::sound_ptr();
 	
-	return it->second.random();
+	//return it->second.random();
 }
 
+/*
 sanguis::load::model::animation_sound::animation_sound(
 	sge::filesystem::path const &path,
 	resource::context const &ctx)
@@ -66,3 +68,4 @@ sanguis::load::model::animation_sound::animation_sound(
 		}
 	}
 }
+*/

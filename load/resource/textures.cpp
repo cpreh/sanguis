@@ -18,7 +18,7 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/bind.hpp>
 
-sge::texture::const_part_ptr const
+sge::texture::part_ptr const
 sanguis::load::resource::textures::load(
 	texture_identifier const &id) const
 {
@@ -34,7 +34,7 @@ sanguis::load::resource::textures::load(
 sanguis::load::resource::textures::~textures()
 {}
 
-sge::texture::const_part_ptr const
+sge::texture::part_ptr const
 sanguis::load::resource::textures::do_load(
 	texture_identifier const &id) const
 {
@@ -48,7 +48,7 @@ sanguis::load::resource::textures::do_load(
 		/ texture_names[id]);
 }
 
-sge::texture::const_part_ptr const
+sge::texture::part_ptr const
 sanguis::load::resource::textures::do_load_inner(
 	sge::filesystem::path const &p) const
 {

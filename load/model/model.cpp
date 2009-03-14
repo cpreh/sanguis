@@ -1,13 +1,40 @@
 #include "model.hpp"
+#include "split_first_slash.hpp"
 #include "../../exception.hpp"
+#include "../resource/context.hpp"
+#include "../resource/textures.hpp"
 #include "../log.hpp"
-#include <sge/text.hpp>
 #include <sge/filesystem/directory_iterator.hpp>
 #include <sge/filesystem/is_directory.hpp>
 #include <sge/filesystem/stem.hpp>
+#include <sge/filesystem/extension.hpp>
+#include <sge/math/dim/basic_impl.hpp>
 #include <sge/log/headers.hpp>
-#include <ostream>
+#include <sge/parse/ini/parse.hpp>
+#include <sge/fstream.hpp>
+#include <sge/text.hpp>
+#include <boost/foreach.hpp>
 #include <utility>
+#include <iterator>
+#include <functional>
+#include <algorithm>
+
+// TODO: split this stuff!
+
+namespace
+{
+
+sge::string const header_name(
+	SGE_TEXT("header")
+);
+
+bool header_equal(
+	sge::parse::ini::section const &seq)
+{
+	return seq.header == header_name;
+}
+
+}
 
 sanguis::load::model::model::model(
 	sge::filesystem::path const &path,
@@ -15,26 +42,147 @@ sanguis::load::model::model::model(
 {
 	for(sge::filesystem::directory_iterator beg(path), end; beg != end; ++beg)
 	{
-		if(!sge::filesystem::is_directory(*beg))
+		sge::filesystem::path const &file(
+			beg->path()
+		);
+
+		if(sge::filesystem::is_directory(*beg))
 		{
 			SGE_LOG_WARNING(
 				log(),
 				sge::log::_1
-					<< beg->path().string()
-					<< SGE_TEXT(" is not a directory!"));
+					<< file.string()
+					<< SGE_TEXT(" is a directory!"));
 			continue;
 		}
 		
-		if(parts.insert(
-			std::make_pair(
-				sge::filesystem::stem(*beg),
-				part(
-					*beg,
-					ctx)))
-		.second == false)
+		if(sge::filesystem::extension(*beg) == SGE_TEXT("ini"))
+			continue;
+
+		sge::texture::part_ptr const tex(
+			ctx.textures().load(
+				file.string()
+			)
+		);
+
+		// FIXME: make this work with wide strings, too!
+		typedef sge::ifstream ifstream;
+
+		sge::filesystem::path const ini_file(
+			path / sge::filesystem::stem(file) / SGE_TEXT(".ini")
+		);
+
+		ifstream ifs(
+			ini_file
+		);
+
+		typedef std::istream_iterator<
+			ifstream::char_type
+		> iterator;
+
+		sge::parse::ini::grammar<
+			iterator
+		> parser;
+
+			
+		iterator beg(
+			ifs
+		);
+
+		sge::parse::ini::section_vector sections;
+
+		if(
+			!sge::parse::ini::parse(
+				beg,
+				iterator(),
+				sections
+			)
+		)
+		{
+			SGE_LOG_WARNING(
+				log(),
+				sge::log::_1
+					<< ini_file.string()
+					<< SGE_TEXT(" contains errors!")
+				);
+		}
+
+		sge::parse::ini::section_vector::const_iterator const header_it(
+			std::find_if(
+				sections.begin(),
+				sections.end(),
+				std::ptr_fun(
+					header_equal
+				)
+			)
+		);
+
+		if(header_it == sections.end())
 			throw exception(
-				SGE_TEXT("Double insert in model::model: ")
-				+ beg->path().string());
+				SGE_TEXT("header subsection not found!")
+			);
+
+		sge::parse::ini::section const header(
+			*header_it
+		);
+
+		sge::renderer::dim_type cell_size(
+			sge::renderer::dim_type::null()
+		);
+		
+		BOOST_FOREACH(
+			sge::parse::ini::entry_vector::const_reference entry,
+			header.entries
+		)
+		{
+			if(entry.name == SGE_TEXT("cell_width"))
+				cell_size.w() = boost::get<int>(entry.value_);
+			else if(entry.name == SGE_TEXT("cell_height"))
+				cell_size.h() = boost::get<int>(entry.value_);
+		}
+
+		BOOST_FOREACH(
+			sge::parse::ini::section_vector::const_reference section,
+			sections
+		)
+		{	
+			if(section.header == header_name)
+				continue;
+
+			split_pair const names(
+				split_first_slash(
+					section.header
+				)
+			);
+
+			part_map::iterator it(
+				parts.find(
+					names.first
+				)
+			);
+
+			if(it == parts.end())
+			{
+				std::pair<part_map::iterator, bool> const ret(
+					parts.insert(
+						std::make_pair(
+							names.first,	
+							part(
+								tex,
+								cell_size
+							)
+						)
+					)
+				);
+				
+				it = ret.first;
+			}
+
+			it->second.add(
+				section.entries,
+				names.second
+			);
+		}
 	}
 }
 

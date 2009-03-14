@@ -3,7 +3,11 @@
 
 #include "weapon_category.hpp"
 #include "../../weapon_type.hpp"
-#include <sge/filesystem/path.hpp>
+#include <sge/parse/ini/entry_vector.hpp>
+#include <sge/texture/part_fwd.hpp>
+#include <sge/renderer/dim_type.hpp>
+#include <sge/math/dim/basic_decl.hpp>
+#include <sge/string.hpp>
 #include <map>
 
 namespace sanguis
@@ -23,11 +27,13 @@ public:
 	operator[](
 		weapon_type::type) const;
 private:
-	sge::filesystem::path path;
-
 	part(
-		sge::filesystem::path const &,
-		resource::context const &);
+		sge::texture::part_ptr,
+		sge::renderer::dim_type const &cell_size);
+
+	void add(
+		sge::parse::ini::entry_vector const &,
+		sge::string const &header);
 
 	friend class model;
 
@@ -35,6 +41,9 @@ private:
 		weapon_type::type,
 		weapon_category
 	> category_map;
+
+	sge::texture::part_ptr const tex;
+	sge::renderer::dim_type const cell_size;
 
 	category_map categories;
 };

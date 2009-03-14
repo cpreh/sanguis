@@ -2,9 +2,12 @@
 #define SANGUIS_LOAD_MODEL_WEAPON_CATEGORY_HPP_INCLUDED
 
 #include "animation.hpp"
-#include "base_animation_not_found.hpp"
 #include "../../animation_type.hpp"
-#include <sge/filesystem/path.hpp>
+#include <sge/parse/ini/entry_vector.hpp>
+#include <sge/texture/part_fwd.hpp>
+#include <sge/renderer/dim_type.hpp>
+#include <sge/math/dim/basic_decl.hpp>
+#include <sge/string.hpp>
 #include <map>
 
 namespace sanguis
@@ -27,8 +30,12 @@ private:
 	sge::filesystem::path path;
 	
 	weapon_category(
-		sge::filesystem::path const &,
-		resource::context const &);
+		sge::texture::part_ptr,
+		sge::renderer::dim_type const &);
+	
+	void add(
+		sge::parse::ini::entry_vector const &,
+		sge::string const &header);
 
 	friend class part;
 
@@ -36,6 +43,9 @@ private:
 		animation_type::type,
 		animation
 	> animation_map;
+
+	sge::texture::part_ptr const tex;
+	sge::renderer::dim_type const cell_size;
 
 	animation_map animations;
 };

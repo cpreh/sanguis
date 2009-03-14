@@ -19,7 +19,7 @@ namespace resource
 
 class textures : boost::noncopyable {
 public:
-	sge::texture::const_part_ptr const
+	sge::texture::part_ptr const
 	load(
 		texture_identifier const &) const;
 
@@ -28,11 +28,11 @@ private:
 	friend class context;
 	friend class animations;
 
-	sge::texture::const_part_ptr const
+	sge::texture::part_ptr const
 	do_load(
 		texture_identifier const &) const;
 
-	sge::texture::const_part_ptr const
+	sge::texture::part_ptr const
 	do_load_inner(
 		sge::filesystem::path const &) const;
 
@@ -42,7 +42,7 @@ private:
 
 	typedef std::map<
 		texture_identifier,
-		sge::texture::const_part_ptr
+		sge::texture::part_ptr
 	> texture_map;
 
 	typedef std::map<
