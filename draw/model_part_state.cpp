@@ -72,9 +72,9 @@ void sanguis::draw::model_part_state::update_sound(sge::audio::sound_ptr const s
 	if (s)
 		s->pos(
 			sge::audio::point(
-				ref_.object().pos().x(),
-				0,
-				ref_.object().pos().y()));
+				static_cast<sge::audio::unit>(ref_.object().pos().x()),
+				static_cast<sge::audio::unit>(0),
+				static_cast<sge::audio::unit>(ref_.object().pos().y())));
 }
 
 void sanguis::draw::model_part_state::init_sound(sge::audio::sound_ptr const s)

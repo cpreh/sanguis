@@ -12,7 +12,7 @@
 #include "../../messages/base.hpp"
 #include "../../messages/entity_message.hpp"
 #include "../../draw/scene.hpp"
-#include <sge/signals/connection.hpp>
+#include <sge/signal/auto_connection.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/result.hpp>
@@ -63,7 +63,7 @@ class running
 	draw::scene                     drawer;
 	logic                           logic_;
 	input_handler                   input;
-	sge::signals::auto_connection   input_connection;
+	sge::signal::auto_connection    input_connection;
 	bool                            paused;
 };
 }

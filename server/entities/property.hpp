@@ -3,8 +3,8 @@
 
 #include "../types.hpp"
 #undef max // TODO: find out where windows.h comes from!
-#include <sge/signals/signal.hpp>
-#include <sge/signals/connection.hpp>
+#include <sge/signal/object.hpp>
+#include <sge/signal/auto_connection.hpp>
 #include <sge/shared_ptr.hpp>
 #include <boost/function.hpp>
 
@@ -52,7 +52,7 @@ public:
 		value_type);
 	void unrestrict();
 
-	sge::signals::auto_connection
+	sge::signal::auto_connection
 	register_change_callback(
 		change_callback const &);
 private:
@@ -66,7 +66,7 @@ private:
 		current_,
 		restrict_;
 	
-	typedef sge::signals::signal<
+	typedef sge::signal::object<
 		change_callback_fn
 	> change_signal_type;
 

@@ -137,7 +137,7 @@ void sanguis::server::entities::property::unrestrict()
 	restrict_ = value_max;
 }
 
-sge::signals::auto_connection
+sge::signal::auto_connection
 	sanguis::server::entities::property::register_change_callback(
 	change_callback const &cb)
 {

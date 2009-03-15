@@ -11,7 +11,7 @@
 #include "../../messages/fwd.hpp"
 #include "../../time_type.hpp"
 #include <sge/log/fwd.hpp>
-#include <sge/signals/connection.hpp>
+#include <sge/signal/auto_connection.hpp>
 #include <sge/collision/satellite_fwd.hpp>
 #include <boost/mpl/list.hpp>
 #include <boost/statechart/state.hpp>
@@ -107,7 +107,7 @@ private:
 	void create_decorations();
 	static sge::log::logger &log();
 
-	sge::signals::auto_connection coll_connection;
+	sge::signal::auto_connection coll_connection;
 
 	send_callback send;
 	console_print_callback console_print;
