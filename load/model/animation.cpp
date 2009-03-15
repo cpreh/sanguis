@@ -1,6 +1,5 @@
 #include "animation.hpp"
 #include "animation_sound.hpp"
-#include "../../exception.hpp"
 #include "../resource/animations.hpp"
 #include "../resource/context.hpp"
 #include <sge/parse/ini/entry.hpp>
@@ -14,31 +13,10 @@
 #include <sge/math/rect_impl.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <sge/text.hpp>
-#include <boost/variant/get.hpp>
 #include <boost/foreach.hpp>
 
 namespace
 {
-
-template<
-	typename T
->
-T entry(
-	sge::parse::ini::entry_vector const &e,
-	sge::string const &name)
-{
-	BOOST_FOREACH(
-		sge::parse::ini::entry_vector::const_reference r,
-		e
-	)
-		if(r.name == name)
-			return boost::get<T>(r.value_);
-	throw sanguis::exception(
-		SGE_TEXT("entry ")
-		+ name
-		+ SGE_TEXT(" not found")
-	);
-}
 
 sge::renderer::lock_rect const
 calc_rect(
@@ -74,7 +52,7 @@ sanguis::load::model::animation::animation(
 {
 	sge::renderer::size_type const
 		begin(
-			entry<
+			get_entry<
 				sge::renderer::size_type
 			>(
 				entries,
@@ -82,7 +60,7 @@ sanguis::load::model::animation::animation(
 			)
 		),
 		end(
-			entry<
+			get_entry<
 				sge::renderer::size_type
 			>(
 				entries,

@@ -1,5 +1,6 @@
 #include "model.hpp"
 #include "split_first_slash.hpp"
+#include "get_entry.hpp"
 #include "../../exception.hpp"
 #include "../resource/context.hpp"
 #include "../resource/textures.hpp"
@@ -126,20 +127,17 @@ sanguis::load::model::model::model(
 			*header_it
 		);
 
-		sge::renderer::dim_type cell_size(
-			sge::renderer::dim_type::null()
+		sge::renderer::dim_type const cell_size(
+			get_entry<int>(
+				header.entries,
+				SGE_TEXT("cell_width")
+			),
+			get_entry<int>(
+				header.entries,
+				SGE_TEXT("cell_height")
+			)
 		);
 		
-		BOOST_FOREACH(
-			sge::parse::ini::entry_vector::const_reference entry,
-			header.entries
-		)
-		{
-			if(entry.name == SGE_TEXT("cell_width"))
-				cell_size.w() = boost::get<int>(entry.value_);
-			else if(entry.name == SGE_TEXT("cell_height"))
-				cell_size.h() = boost::get<int>(entry.value_);
-		}
 
 		BOOST_FOREACH(
 			sge::parse::ini::section_vector::const_reference section,
