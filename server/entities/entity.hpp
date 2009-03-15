@@ -19,7 +19,7 @@
 #include <sge/math/dim/basic_decl.hpp>
 #include <sge/container/linear_set.hpp>
 #include <sge/collision/objects/circle_fwd.hpp>
-#include <sge/signals/connection.hpp>
+#include <sge/signal/auto_connection.hpp>
 #include <sge/noncopyable.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
 
@@ -154,7 +154,7 @@ private:
 	                        backlinks;
 	
 	sge::collision::objects::circle_ptr collision_;
-	sge::signals::auto_connection       speed_change_;
+	sge::signal::auto_connection       speed_change_;
 };
 
 }

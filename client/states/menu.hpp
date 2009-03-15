@@ -13,7 +13,7 @@
 #include <sge/gui/widgets/edit.hpp>
 #include <sge/gui/widgets/backdrop.hpp>
 #include <sge/filesystem/path.hpp>
-#include <sge/signals/connection.hpp>
+#include <sge/signal/auto_connection.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/mpl/list.hpp>
@@ -64,12 +64,12 @@ class menu
 
 	menu_mover mover_;
 
-	sge::signals::auto_connection main_connect_conn;
-	sge::signals::auto_connection main_start_conn;
-	sge::signals::auto_connection main_exit_conn;
+	sge::signal::auto_connection main_connect_conn;
+	sge::signal::auto_connection main_start_conn;
+	sge::signal::auto_connection main_exit_conn;
 
-	sge::signals::auto_connection connect_connect_conn;
-	sge::signals::auto_connection connect_return_conn;
+	sge::signal::auto_connection connect_connect_conn;
+	sge::signal::auto_connection connect_return_conn;
 #endif
 
 	bool connect_now;

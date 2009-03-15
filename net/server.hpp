@@ -4,7 +4,7 @@
 #include "types.hpp"
 #include "output_buffer.hpp"
 
-#include <sge/signals/signal.hpp>
+#include <sge/signal/object.hpp>
 
 #include <boost/asio/io_service.hpp>
 #include <boost/asio/ip/tcp.hpp>
@@ -42,7 +42,7 @@ class server : boost::noncopyable
 	typedef boost::function<connect_fun> connect_function;
 	typedef boost::function<disconnect_fun> disconnect_function;
 	typedef boost::function<data_fun> data_function;
-	typedef sge::signals::auto_connection signal_connection;
+	typedef sge::signal::auto_connection signal_connection;
 
 	server();
 	void listen(const port_type);
@@ -66,9 +66,9 @@ class server : boost::noncopyable
 	std::size_t handlers;
 
 	// signals
-	sge::signals::signal<connect_fun> connect_signal;
-	sge::signals::signal<disconnect_fun> disconnect_signal;
-	sge::signals::signal<data_fun> data_signal;
+	sge::signal::object<connect_fun> connect_signal;
+	sge::signal::object<disconnect_fun> disconnect_signal;
+	sge::signal::object<data_fun> data_signal;
 
 	// private functions
 	void accept();
