@@ -24,7 +24,9 @@ sanguis::draw::factory::client(
 			env,
 			m.id(),
 			z_ordering::background,
-			SGE_TEXT("background"));
+			SGE_TEXT("background"),
+			static_cast<sge::sprite::repetition_type>(
+				2));
 	default:
 		throw exception(
 			SGE_TEXT("draw::factory::client: missing loading code!"));
