@@ -1,4 +1,5 @@
 #include "animation.hpp"
+#include "get_entry.hpp"
 #include "animation_sound.hpp"
 #include "../resource/animations.hpp"
 #include "../resource/context.hpp"
@@ -69,7 +70,7 @@ sanguis::load::model::animation::animation(
 		);
 	
 	sge::time::unit const delay(
-		entry<
+		get_entry<
 			sge::time::unit
 		>(
 			entries,

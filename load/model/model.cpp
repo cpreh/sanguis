@@ -77,6 +77,18 @@ sanguis::load::model::model::model(
 			ini_file
 		);
 
+		if(!ifs.is_open())
+		{
+			SGE_LOG_WARNING(
+				log(),
+				sge::log::_1
+					<< SGE_TEXT("Failed to open ini file: ")
+					<< ini_file.string()
+			);
+
+			continue;
+		}
+
 		typedef std::istream_iterator<
 			ifstream::char_type
 		> iterator;
@@ -119,9 +131,16 @@ sanguis::load::model::model::model(
 		);
 
 		if(header_it == sections.end())
-			throw exception(
-				SGE_TEXT("header subsection not found!")
+		{
+			SGE_LOG_WARNING(
+				log(),
+				sge::log::_1
+					<< SGE_TEXT("header subsection not found in ")
+					<< ini_file
 			);
+			
+			continue;
+		}
 
 		sge::parse::ini::section const header(
 			*header_it
@@ -188,9 +207,18 @@ sanguis::load::model::part const &
 sanguis::load::model::model::operator[](
 	sge::string const &name) const
 {
-	part_map::const_iterator const it(parts.find(name));
+	part_map::const_iterator const it(
+		parts.find(
+			name
+		)
+	);
+
 	if(it == parts.end())
-		throw exception(name + SGE_TEXT(" not found in model!"));
+		throw exception(
+			name
+			+ SGE_TEXT(" not found in model!")
+		);
+	
 	return it->second;
 }
 
