@@ -32,7 +32,7 @@ void sanguis::client::console_wrapper::input_callback(
 		callbacks(k);
 }
 
-sge::signals::scoped_connection
+sge::signals::auto_connection
 sanguis::client::console_wrapper::register_callback(
 	sge::input::callback const c)
 {

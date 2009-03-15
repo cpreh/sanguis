@@ -23,7 +23,7 @@ class music_handler
 	void update();
 	private:
 	sge::console::gfx &console_;
-	sge::signals::connection volume_connection_;
+	sge::signals::auto_connection volume_connection_;
 	boost::scoped_ptr<load::model::random_sound> sounds_;
 	sge::audio::sound_ptr current_;
 

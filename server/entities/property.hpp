@@ -52,7 +52,7 @@ public:
 		value_type);
 	void unrestrict();
 
-	sge::signals::connection const
+	sge::signals::auto_connection
 	register_change_callback(
 		change_callback const &);
 private:

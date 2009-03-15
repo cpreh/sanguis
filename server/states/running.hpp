@@ -107,7 +107,7 @@ private:
 	void create_decorations();
 	static sge::log::logger &log();
 
-	sge::signals::connection coll_connection;
+	sge::signals::auto_connection coll_connection;
 
 	send_callback send;
 	console_print_callback console_print;
