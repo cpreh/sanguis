@@ -19,7 +19,8 @@ public:
 		draw::environment const &,
 		entity_id,
 		sge::sprite::intrusive_order,
-		sge::texture::const_part_ptr);
+		sge::texture::const_part_ptr,
+		sge::sprite::repetition_type);
 private:
 	void update(time_type);
 	void orientation(sge::sprite::rotation_type);

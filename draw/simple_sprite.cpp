@@ -1,12 +1,14 @@
 #include "simple_sprite.hpp"
 #include "environment.hpp"
 #include <sge/renderer/colors.hpp>
+#include <sge/math/compare.hpp>
 
 sanguis::draw::simple_sprite::simple_sprite(
 	draw::environment const &env,
 	entity_id const id,
 	sge::sprite::intrusive_order const order,
-	sge::texture::const_part_ptr const tex)
+	sge::texture::const_part_ptr const tex,
+	sge::sprite::repetition_type const _repeat)
 :
 	entity(
 		env,
@@ -17,7 +19,10 @@ sanguis::draw::simple_sprite::simple_sprite(
 		sge::sprite::point::null(),
 		tex,
 		sge::sprite::texture_dim)
-{}
+{
+	if (!sge::math::compare(_repeat,static_cast<sge::sprite::repetition_type>(1)))
+		sprite_.repeat(_repeat);
+}
 
 void sanguis::draw::simple_sprite::update(
 	time_type)
