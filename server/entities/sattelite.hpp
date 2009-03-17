@@ -13,7 +13,7 @@ namespace entities
 class satellite : public sge::collision::satellite
 {
 	public:
-	satellite(sanguis::server::entities::entity &);
+	explicit satellite(sanguis::server::entities::entity &);
 	void position_change(sge::collision::point const &);
 	sanguis::server::entities::entity &entity();
 	sanguis::server::entities::entity const &entity() const;
