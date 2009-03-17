@@ -106,17 +106,46 @@ load_dim(
 		*header_it
 	);
 
+	BOOST_FOREACH(
+		sge::parse::ini::entry_vector::const_reference r,
+		header.entries
+	)
+		SGE_LOG_DEBUG(
+			sanguis::load::log(),
+			sge::log::_1
+				<< r.name
+		);
 
-	return sge::renderer::dim_type(
-		sanguis::load::model::get_entry<int>(
-			header.entries,
-			SGE_TEXT("cell_width")
-		),
-		sanguis::load::model::get_entry<int>(
-			header.entries,
-			SGE_TEXT("cell_height")
-		)
-	);
+
+	try
+	{
+		return sge::renderer::dim_type(
+			static_cast<sge::renderer::size_type>(
+				sanguis::load::model::get_entry<int>(
+					header.entries,
+					SGE_TEXT("cell_width")
+				)
+			),
+			static_cast<sge::renderer::size_type>(
+				sanguis::load::model::get_entry<int>(
+					header.entries,
+					SGE_TEXT("cell_height")
+				)
+			)
+		);
+	}
+	catch(sanguis::exception const &e)
+	{
+		SGE_LOG_ERROR(
+			sanguis::load::log(),
+			sge::log::_1
+				<< SGE_TEXT("In ")
+				<< path
+				<< SGE_TEXT(": ")
+				<< e.what()
+		);
+		throw;
+	}
 }
 
 }

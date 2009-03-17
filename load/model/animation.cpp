@@ -54,7 +54,7 @@ sanguis::load::model::animation::animation(
 	sge::renderer::size_type const
 		begin(
 			get_entry<
-				sge::renderer::size_type
+				int	
 			>(
 				entries,
 				SGE_TEXT("begin")
@@ -62,7 +62,7 @@ sanguis::load::model::animation::animation(
 		),
 		end(
 			get_entry<
-				sge::renderer::size_type
+				int	
 			>(
 				entries,
 				SGE_TEXT("end")
@@ -71,7 +71,7 @@ sanguis::load::model::animation::animation(
 	
 	sge::time::unit const delay(
 		get_entry<
-			sge::time::unit
+			int	
 		>(
 			entries,
 			SGE_TEXT("delay")

@@ -8,12 +8,27 @@
 #include <boost/variant/get.hpp>
 #include <boost/foreach.hpp>
 
+#include <boost/variant/static_visitor.hpp>
+#include <boost/variant/apply_visitor.hpp>
+#include <typeinfo>
+#include <iostream>
+
 namespace sanguis
 {
 namespace load
 {
 namespace model
 {
+
+struct temp_visitor : boost::static_visitor<> {
+	template<
+		typename T
+	>
+	void operator()(T const &) const
+	{
+		std::cerr << typeid(T).name() << '\n';
+	}
+};
 
 template<
 	typename T
@@ -27,8 +42,15 @@ get_entry(
 		sge::parse::ini::entry_vector::const_reference r,
 		e
 	)
+	{
+		boost::apply_visitor(
+			temp_visitor(),
+			r.value_
+		);
+
 		if(r.name == name)
 			return boost::get<T>(r.value_);
+	}
 
 	throw exception(
 		SGE_TEXT("entry ")
