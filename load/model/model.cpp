@@ -64,8 +64,24 @@ load_dim(
 			+ ini_file.string()
 		);
 
-	iterator beg(
-		ifs
+	typedef std::vector<
+		ifstream::char_type
+	> vector_type;
+
+	vector_type vec;
+
+	std::copy(
+		iterator(
+			ifs
+		),
+		iterator(),
+		std::back_inserter(
+			vec
+		)
+	);
+
+	vector_type::const_iterator beg(
+		vec.begin()
 	);
 
 	sge::parse::ini::section_vector sections;
@@ -73,7 +89,7 @@ load_dim(
 	if(
 		!sge::parse::ini::parse(
 			beg,
-			iterator(),
+			static_cast<vector_type const &>(vec).end(),
 			sections
 		)
 	)

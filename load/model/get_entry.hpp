@@ -49,7 +49,7 @@ get_entry(
 		);
 
 		if(r.name == name)
-			return boost::get<T>(r.value_);
+			return boost::get<double>(r.value_);
 	}
 
 	throw exception(
