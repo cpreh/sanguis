@@ -16,9 +16,9 @@
 #include <sge/text.hpp>
 #include <boost/foreach.hpp>
 #include <utility>
-#include <iterator>
 #include <functional>
 #include <algorithm>
+#include <string>
 
 // TODO: split this stuff!
 
@@ -32,19 +32,36 @@ sge::string const header_name(
 bool header_equal(
 	sge::parse::ini::section const &seq)
 {
+	SGE_LOG_DEBUG(
+		sanguis::load::log(),
+		sge::log::_1
+			<< seq.header
+	);
 	return seq.header == header_name;
 }
 
 // FIXME: make this work with wide strings, too!
 typedef sge::ifstream ifstream;
 
-typedef std::istream_iterator<
+typedef std::basic_string<
 	ifstream::char_type
-> iterator;
+> string;
 
 sge::parse::ini::grammar<
-	iterator
+	string::const_iterator
 > parser;
+
+string const
+read_file(
+	ifstream &ifs)
+{
+	string ret;
+
+	string::value_type ch;
+	while(ifs.get(ch))
+		ret.push_back(ch);
+	return ret;
+}
 
 sge::renderer::dim_type const
 load_dim(
@@ -55,7 +72,8 @@ load_dim(
 	);
 
 	ifstream ifs(
-		ini_file
+		ini_file,
+		std::ios_base::binary
 	);
 
 	if(!ifs.is_open())
@@ -64,24 +82,14 @@ load_dim(
 			+ ini_file.string()
 		);
 
-	typedef std::vector<
-		ifstream::char_type
-	> vector_type;
-
-	vector_type vec;
-
-	std::copy(
-		iterator(
+	string const ret(
+		read_file(
 			ifs
-		),
-		iterator(),
-		std::back_inserter(
-			vec
 		)
 	);
 
-	vector_type::const_iterator beg(
-		vec.begin()
+	string::const_iterator beg(
+		ret.begin()
 	);
 
 	sge::parse::ini::section_vector sections;
@@ -89,7 +97,7 @@ load_dim(
 	if(
 		!sge::parse::ini::parse(
 			beg,
-			static_cast<vector_type const &>(vec).end(),
+			ret.end(),	
 			sections
 		)
 	)
@@ -207,7 +215,8 @@ sanguis::load::model::model::model(
 		);
 
 		ifstream ifs(
-			ini_file
+			ini_file,
+			std::ios_base::binary
 		);
 
 		if(!ifs.is_open())
@@ -222,8 +231,14 @@ sanguis::load::model::model::model(
 			continue;
 		}
 
-		iterator beg(
-			ifs
+		string const ret(
+			read_file(
+				ifs
+			)
+		);
+
+		string::const_iterator beg(
+			ret.begin()
 		);
 
 		sge::parse::ini::section_vector sections;
@@ -231,7 +246,7 @@ sanguis::load::model::model::model(
 		if(
 			!sge::parse::ini::parse(
 				beg,
-				iterator(),
+				ret.end(),
 				sections
 			)
 		)
