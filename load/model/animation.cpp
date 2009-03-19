@@ -13,10 +13,12 @@
 #include <sge/math/vector/arithmetic.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>
+#include <sge/math/dim/output.hpp>
 #include <sge/math/rect_impl.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/text.hpp>
+#include <sge/cerr.hpp>
 #include <boost/foreach.hpp>
 
 namespace
@@ -28,15 +30,34 @@ calc_rect(
 	sge::renderer::dim_type const &cell_size,
 	sge::renderer::size_type const index)
 {
+	if (area.dim().w() == cell_size.w())
+	{
+		SGE_ASSERT(index == static_cast<sge::renderer::size_type>(0));
+		return sge::renderer::lock_rect(
+			sge::renderer::lock_rect::point_type::null(),
+			cell_size);
+	}
+
+	sge::renderer::dim_type const cell_size_edited(
+		cell_size.w()+1,
+		cell_size.h()+1);
+
 	sge::renderer::size_type const cells_per_row(
-		area.dim().w() / cell_size.w() 
-	);
+		std::max(
+			static_cast<sge::renderer::size_type>(
+				area.dim().w() / cell_size.w() - 1),
+			static_cast<sge::renderer::size_type>(1)));
+
+	sge::cerr << "area.dim(): " << area.dim() 
+	          << ", cell size: " << cell_size 
+	          << ", cells per row: " << cells_per_row 
+						<< "\n";
 
 	return sge::renderer::lock_rect(
 		sge::renderer::lock_rect::point_type(
 			index % cells_per_row,
 			index / cells_per_row
-		) * cell_size + area.pos(),
+		) * cell_size_edited + area.pos(),
 		cell_size
 	);
 }
