@@ -119,13 +119,7 @@ sanguis::load::model::animation::animation(
 				SGE_TEXT("end")
 			)
 		);
-	
-	SGE_LOG_DEBUG(
-		log(),
-		sge::log::_1
-			<< begin << ' ' << end
-	);
-	
+
 	sge::time::unit const delay(
 		load_delay(
 			entries,
