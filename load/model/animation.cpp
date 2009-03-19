@@ -5,6 +5,7 @@
 #include "../resource/animations.hpp"
 #include "../resource/context.hpp"
 #include "../log.hpp"
+#include "../../exception.hpp"
 #include <sge/parse/ini/entry.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/time/resolution.hpp>
@@ -15,11 +16,12 @@
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/math/dim/output.hpp>
 #include <sge/math/rect_impl.hpp>
+#include <sge/math/rect_util.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/text.hpp>
-#include <sge/cerr.hpp>
 #include <boost/foreach.hpp>
+#include <boost/lexical_cast.hpp>
 
 namespace
 {
@@ -47,11 +49,6 @@ calc_rect(
 			static_cast<sge::renderer::size_type>(
 				area.dim().w() / cell_size.w() - 1),
 			static_cast<sge::renderer::size_type>(1)));
-
-	sge::cerr << "area.dim(): " << area.dim() 
-	          << ", cell size: " << cell_size 
-	          << ", cells per row: " << cells_per_row 
-						<< "\n";
 
 	return sge::renderer::lock_rect(
 		sge::renderer::lock_rect::point_type(
@@ -136,6 +133,44 @@ sanguis::load::model::animation::animation(
 	);
 
 	for(sge::renderer::size_type i = begin; i != end; ++i)
+	{
+		sge::renderer::lock_rect const cur_area(
+			calc_rect(
+				area,
+				param.cell_size(),
+				i
+			)
+		);
+
+		if(
+			!sge::math::contains(
+				area,
+				cur_area
+			)
+		)
+			throw exception(
+				SGE_TEXT("Rect out of bounds in ")
+				+ param.path().string()
+				+ SGE_TEXT(". Whole area of texture is ")
+				+ boost::lexical_cast<
+					sge::string
+				>(
+					area
+				)
+				+ SGE_TEXT(" but the inner area is ")
+				+ boost::lexical_cast<
+					sge::string
+				>(
+					cur_area
+				)
+				+ SGE_TEXT(". This happened when trying to load index ")
+				+ boost::lexical_cast<
+					sge::string
+				>(
+					begin
+				)
+			);
+
 		anim->push_back(
 			sge::sprite::animation_entity(
 				sge::time::millisecond(
@@ -146,15 +181,12 @@ sanguis::load::model::animation::animation(
 						sge::texture::part_raw
 					>(
 						param.tex()->texture(),
-						calc_rect(
-							area,
-							param.cell_size(),
-							i
-						)
+						cur_area
 					)
 				)
 			)
 		);
+	}
 }
 
 sge::sprite::animation_series const &
