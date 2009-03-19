@@ -47,9 +47,6 @@ load_delay(
 	sanguis::load::model::optional_delay const &opt_delay,
 	sge::filesystem::path const &path)
 {
-	if(opt_delay)
-		return *opt_delay;
-	
 	try
 	{
 		return sanguis::load::model::get_entry<
@@ -61,6 +58,9 @@ load_delay(
 	}
 	catch(sanguis::exception const &)
 	{
+		if(opt_delay)
+			return *opt_delay;
+	
 		SGE_LOG_ERROR(
 			sanguis::load::log(),
 			sge::log::_1
