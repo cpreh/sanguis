@@ -46,9 +46,10 @@ calc_rect(
 
 	sge::renderer::size_type const cells_per_row(
 		std::max(
-			static_cast<sge::renderer::size_type>(
-				area.dim().w() / cell_size.w() - 1),
-			static_cast<sge::renderer::size_type>(1)));
+			area.dim().w() / cell_size_edited.w(),
+			static_cast<sge::renderer::size_type>(1)
+		)
+	);
 
 	return sge::renderer::lock_rect(
 		sge::renderer::lock_rect::point_type(
@@ -152,23 +153,11 @@ sanguis::load::model::animation::animation(
 				SGE_TEXT("Rect out of bounds in ")
 				+ param.path().string()
 				+ SGE_TEXT(". Whole area of texture is ")
-				+ boost::lexical_cast<
-					sge::string
-				>(
-					area
-				)
+				+ boost::lexical_cast<sge::string>(area	)
 				+ SGE_TEXT(" but the inner area is ")
-				+ boost::lexical_cast<
-					sge::string
-				>(
-					cur_area
-				)
+				+ boost::lexical_cast<sge::string>(cur_area)
 				+ SGE_TEXT(". This happened when trying to load index ")
-				+ boost::lexical_cast<
-					sge::string
-				>(
-					begin
-				)
+				+ boost::lexical_cast<sge::string>(begin)
 			);
 
 		anim->push_back(
