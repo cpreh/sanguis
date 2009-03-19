@@ -1,6 +1,7 @@
 #ifndef SANGUIS_LOAD_MODEL_ANIMATION_HPP_INCLUDED
 #define SANGUIS_LOAD_MODEL_ANIMATION_HPP_INCLUDED
 
+#include "optional_delay.hpp"
 #include <sge/filesystem/path.hpp>
 #include <sge/sprite/animation_series.hpp>
 #include <sge/parse/ini/entry_vector.hpp>
@@ -30,7 +31,8 @@ private:
 	animation(
 		sge::texture::part_ptr,
 		sge::renderer::dim_type const &cell_size,
-		sge::parse::ini::entry_vector const &entries);
+		sge::parse::ini::entry_vector const &entries,
+		optional_delay const &);
 
 	friend class weapon_category;
 

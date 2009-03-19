@@ -37,18 +37,20 @@ sanguis::load::model::weapon_category::operator[](
 
 	if(anim == animation_type::none)
 		throw exception(
-			SGE_TEXT("Default animation not found in model in ")
-			+ path.string());
+			SGE_TEXT("Default animation not found in model!")
+		);
 	throw base_animation_not_found(
 		anim);
 }
 
 sanguis::load::model::weapon_category::weapon_category(
 	sge::texture::part_ptr const tex,
-	sge::renderer::dim_type const &cell_size)
+	sge::renderer::dim_type const &cell_size,
+	optional_delay const &opt_delay)
 :
 	tex(tex),
-	cell_size(cell_size)
+	cell_size(cell_size),
+	opt_delay(opt_delay)
 {}
 
 void
@@ -88,7 +90,8 @@ sanguis::load::model::weapon_category::add(
 				animation(
 					tex,
 					cell_size,
-					entries
+					entries,
+					opt_delay
 				)
 			)
 		).second == false

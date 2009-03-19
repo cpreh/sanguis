@@ -3,6 +3,7 @@
 #include "animation_sound.hpp"
 #include "../resource/animations.hpp"
 #include "../resource/context.hpp"
+#include "../log.hpp"
 #include <sge/parse/ini/entry.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/time/resolution.hpp>
@@ -13,6 +14,7 @@
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/math/rect_impl.hpp>
 #include <sge/make_shared_ptr.hpp>
+#include <sge/log/headers.hpp>
 #include <sge/text.hpp>
 #include <boost/foreach.hpp>
 
@@ -38,12 +40,42 @@ calc_rect(
 	);
 }
 
+sge::time::unit
+load_delay(
+	sge::parse::ini::entry_vector const &entries,
+	sanguis::load::model::optional_delay const &opt_delay)
+{
+	if(opt_delay)
+		return *opt_delay;
+	
+	try
+	{
+		return sanguis::load::model::get_entry<
+			int	
+		>(
+			entries,
+			SGE_TEXT("delay")
+		);
+	}
+	catch(sanguis::exception const &)
+	{
+		SGE_LOG_ERROR(
+			sanguis::load::log(),
+			sge::log::_1
+				<< SGE_TEXT("delay not in global.ini but not in specific ini either!")
+		);
+
+		throw;
+	}
+}
+
 }
 
 sanguis::load::model::animation::animation(
 	sge::texture::part_ptr const tex,
 	sge::renderer::dim_type const &cell_size,
-	sge::parse::ini::entry_vector const &entries)
+	sge::parse::ini::entry_vector const &entries,
+	optional_delay const &opt_delay)
 :
 	anim(
 		sge::make_shared_ptr<
@@ -70,14 +102,11 @@ sanguis::load::model::animation::animation(
 		);
 	
 	sge::time::unit const delay(
-		get_entry<
-			int	
-		>(
+		load_delay(
 			entries,
-			SGE_TEXT("delay")
+			opt_delay
 		)
 	);
-
 	sge::renderer::lock_rect const area(
 		tex->area()
 	);

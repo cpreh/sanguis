@@ -2,6 +2,7 @@
 #define SANGUIS_LOAD_MODEL_PART_HPP_INCLUDED
 
 #include "weapon_category.hpp"
+#include "optional_delay.hpp"
 #include "../../weapon_type.hpp"
 #include <sge/parse/ini/entry_vector.hpp>
 #include <sge/texture/part_fwd.hpp>
@@ -29,7 +30,8 @@ public:
 private:
 	part(
 		sge::texture::part_ptr,
-		sge::renderer::dim_type const &cell_size);
+		sge::renderer::dim_type const &cell_size,
+		optional_delay const &opt_delay);
 
 	void add(
 		sge::parse::ini::entry_vector const &,
@@ -44,6 +46,7 @@ private:
 
 	sge::texture::part_ptr const tex;
 	sge::renderer::dim_type const cell_size;
+	optional_delay const opt_delay;
 
 	category_map categories;
 };

@@ -1,6 +1,7 @@
 #include "model.hpp"
 #include "split_first_slash.hpp"
 #include "get_entry.hpp"
+#include "optional_delay.hpp"
 #include "../../exception.hpp"
 #include "../resource/context.hpp"
 #include "../resource/textures.hpp"
@@ -11,7 +12,9 @@
 #include <sge/filesystem/extension.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/log/headers.hpp>
-#include <sge/parse/ini/parse.hpp>
+#include <sge/parse/ini/parse_file.hpp>
+#include <sge/parse/ini/section.hpp>
+#include <sge/parse/ini/section_vector.hpp>
 #include <sge/fstream.hpp>
 #include <sge/text.hpp>
 #include <boost/foreach.hpp>
@@ -40,135 +43,40 @@ bool header_equal(
 	return seq.header == header_name;
 }
 
-// FIXME: make this work with wide strings, too!
-typedef sge::ifstream ifstream;
-
-typedef std::basic_string<
-	ifstream::char_type
-> string;
-
-sge::parse::ini::grammar<
-	string::const_iterator
-> parser;
-
-string const
-read_file(
-	ifstream &ifs)
-{
-	string ret;
-
-	string::value_type ch;
-	while(ifs.get(ch))
-		ret.push_back(ch);
-	return ret;
-}
-
 sge::renderer::dim_type const
 load_dim(
-	sge::filesystem::path const &path)
+	sge::parse::ini::entry_vector const &entries)
 {
-	sge::filesystem::path const ini_file(
-		path / SGE_TEXT("global.ini")
-	);
-
-	ifstream ifs(
-		ini_file,
-		std::ios_base::binary
-	);
-
-	if(!ifs.is_open())
-		throw sanguis::exception(
-			SGE_TEXT("Failed to open ini file: ")
-			+ ini_file.string()
-		);
-
-	string const ret(
-		read_file(
-			ifs
-		)
-	);
-
-	string::const_iterator beg(
-		ret.begin()
-	);
-
-	sge::parse::ini::section_vector sections;
-
-	if(
-		!sge::parse::ini::parse(
-			beg,
-			ret.end(),	
-			sections
-		)
-	)
-	{
-		SGE_LOG_WARNING(
-			sanguis::load::log(),
-			sge::log::_1
-				<< ini_file.string()
-				<< SGE_TEXT(" contains errors!")
-			);
-	}
-	
-	sge::parse::ini::section_vector::const_iterator const header_it(
-		std::find_if(
-			sections.begin(),
-			sections.end(),
-			std::ptr_fun(
-				header_equal
+	return sge::renderer::dim_type(
+		static_cast<sge::renderer::size_type>(
+			sanguis::load::model::get_entry<int>(
+				entries,
+				SGE_TEXT("cell_width")
+			)
+		),
+		static_cast<sge::renderer::size_type>(
+			sanguis::load::model::get_entry<int>(
+				entries,
+				SGE_TEXT("cell_height")
 			)
 		)
 	);
+}
 
-	if(header_it == sections.end())
-		throw sanguis::exception(
-			SGE_TEXT("header subsection not found in ")
-			+ ini_file.string()
-		);
-
-	sge::parse::ini::section const header(
-		*header_it
-	);
-
-	BOOST_FOREACH(
-		sge::parse::ini::entry_vector::const_reference r,
-		header.entries
-	)
-		SGE_LOG_DEBUG(
-			sanguis::load::log(),
-			sge::log::_1
-				<< r.name
-		);
-
-
+sanguis::load::model::optional_delay const
+load_delay(
+	sge::parse::ini::entry_vector const &entries)
+{
 	try
 	{
-		return sge::renderer::dim_type(
-			static_cast<sge::renderer::size_type>(
-				sanguis::load::model::get_entry<int>(
-					header.entries,
-					SGE_TEXT("cell_width")
-				)
-			),
-			static_cast<sge::renderer::size_type>(
-				sanguis::load::model::get_entry<int>(
-					header.entries,
-					SGE_TEXT("cell_height")
-				)
-			)
+		return sanguis::load::model::get_entry<int>(
+			entries,
+			SGE_TEXT("delay")
 		);
 	}
 	catch(sanguis::exception const &e)
 	{
-		SGE_LOG_ERROR(
-			sanguis::load::log(),
-			sge::log::_1
-				<< SGE_TEXT("In ")
-				<< path
-				<< SGE_TEXT(": ")
-				<< e.what()
-		);
-		throw;
+		return sanguis::load::model::optional_delay();
 	}
 }
 
@@ -181,9 +89,56 @@ sanguis::load::model::model::model(
 	path(path),
 	parts()
 {
+	sge::filesystem::path const global_ini(
+		path / SGE_TEXT("global.ini")
+	);
+
+	sge::parse::ini::section_vector global_entries;
+	
+	if(
+		!sge::parse::ini::parse_file(
+			global_ini,
+			global_entries
+		)
+	)
+	{
+		SGE_LOG_WARNING(
+			sanguis::load::log(),
+			sge::log::_1
+				<< global_ini
+				<< SGE_TEXT(" contains errors!")
+			);
+	}
+
+	sge::parse::ini::section_vector::const_iterator const header_it(
+		std::find_if(
+			global_entries.begin(),
+			global_entries.end(),
+			std::ptr_fun(
+				header_equal
+			)
+		)
+	);
+
+	if(header_it == global_entries.end())
+		throw sanguis::exception(
+			SGE_TEXT("header subsection not found in ")
+			+ global_ini.string()
+		);
+
+	sge::parse::ini::section const header(
+		*header_it
+	);
+
 	sge::renderer::dim_type const cell_size(
 		load_dim(
-			path
+			header.entries
+		)
+	);
+
+	optional_delay const opt_delay(
+		load_delay(
+			header.entries
 		)
 	);
 
@@ -212,44 +167,15 @@ sanguis::load::model::model::model(
 			)
 		);
 
-
 		sge::filesystem::path const ini_file(
 			path / (sge::filesystem::stem(file) + SGE_TEXT(".ini"))
 		);
 
-		ifstream ifs(
-			ini_file,
-			std::ios_base::binary
-		);
-
-		if(!ifs.is_open())
-		{
-			SGE_LOG_WARNING(
-				log(),
-				sge::log::_1
-					<< SGE_TEXT("Failed to open ini file: ")
-					<< ini_file.string()
-			);
-
-			continue;
-		}
-
-		string const ret(
-			read_file(
-				ifs
-			)
-		);
-
-		string::const_iterator beg(
-			ret.begin()
-		);
-
 		sge::parse::ini::section_vector sections;
-
+		
 		if(
-			!sge::parse::ini::parse(
-				beg,
-				ret.end(),
+			!sge::parse::ini::parse_file(
+				ini_file,
 				sections
 			)
 		)
@@ -298,7 +224,8 @@ sanguis::load::model::model::model(
 							names.first,	
 							part(
 								tex,
-								cell_size
+								cell_size,
+								opt_delay
 							)
 						)
 					)
