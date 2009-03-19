@@ -37,8 +37,7 @@ sanguis::load::model::weapon_category::operator[](
 
 	if(anim == animation_type::none)
 		throw exception(
-			SGE_TEXT("Default animation not found in ")
-			+ param.path().string()
+			SGE_TEXT("Default animation not found in TODO")
 		);
 	throw base_animation_not_found(
 		anim);

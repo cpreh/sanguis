@@ -63,8 +63,7 @@ calc_rect(
 sge::time::unit
 load_delay(
 	sge::parse::ini::entry_vector const &entries,
-	sanguis::load::model::optional_delay const &opt_delay,
-	sge::filesystem::path const &path)
+	sanguis::load::model::optional_delay const &opt_delay)
 {
 	try
 	{
@@ -83,8 +82,7 @@ load_delay(
 		SGE_LOG_ERROR(
 			sanguis::load::log(),
 			sge::log::_1
-				<< SGE_TEXT("delay not in global.ini but not in specified in ")
-				<< path
+				<< SGE_TEXT("delay not in global.ini but not in specified in TODO")
 				<< SGE_TEXT(" either!")
 		);
 
@@ -122,11 +120,16 @@ sanguis::load::model::animation::animation(
 			)
 		);
 	
+	SGE_LOG_DEBUG(
+		log(),
+		sge::log::_1
+			<< begin << ' ' << end
+	);
+	
 	sge::time::unit const delay(
 		load_delay(
 			entries,
-			param.delay(),
-			param.path()
+			param.delay()
 		)
 	);
 	sge::renderer::lock_rect const area(
@@ -150,9 +153,8 @@ sanguis::load::model::animation::animation(
 			)
 		)
 			throw exception(
-				SGE_TEXT("Rect out of bounds in ")
-				+ param.path().string()
-				+ SGE_TEXT(". Whole area of texture is ")
+				SGE_TEXT("Rect out of bounds in TODO")
+				SGE_TEXT(". Whole area of texture is ")
 				+ boost::lexical_cast<sge::string>(area	)
 				+ SGE_TEXT(" but the inner area is ")
 				+ boost::lexical_cast<sge::string>(cur_area)

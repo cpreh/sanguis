@@ -221,13 +221,12 @@ sanguis::load::model::model::model(
 				std::pair<part_map::iterator, bool> const ret(
 					parts.insert(
 						std::make_pair(
-							names.first,	
+							names.first,
 							part(
 								global_parameters(
 									tex,
 									cell_size,
-									opt_delay,
-									ini_file
+									opt_delay
 								)
 							)
 						)

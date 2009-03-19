@@ -3,13 +3,11 @@
 sanguis::load::model::global_parameters::global_parameters(
 	sge::texture::part_ptr const tex_,
 	sge::renderer::dim_type const &cell_size_,
-	optional_delay const &delay_,
-	sge::filesystem::path const &path_)
+	optional_delay const &delay_)
 :
 	tex_(tex_),
 	cell_size_(cell_size_),
-	delay_(delay_),
-	path_(path_)
+	delay_(delay_)
 {}
 	
 sge::texture::part_ptr const
@@ -28,10 +26,4 @@ sanguis::load::model::optional_delay const &
 sanguis::load::model::global_parameters::delay() const
 {
 	return delay_;
-}
-
-sge::filesystem::path const &
-sanguis::load::model::global_parameters::path() const
-{
-	return path_;
 }

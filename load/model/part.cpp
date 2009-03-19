@@ -38,8 +38,7 @@ sanguis::load::model::part::operator[](
 		return it->second;
 	if(t == weapon_type::none)
 		throw exception(
-			SGE_TEXT("Unarmed weapon model missing in ")
-			+ param.path().string()
+			SGE_TEXT("Unarmed weapon model missing in TODO")
 		);
 	return (*this)[weapon_type::none];
 }
