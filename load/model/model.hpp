@@ -37,6 +37,7 @@ private:
 
 	friend class collection;
 
+	sge::filesystem::path const path;
 	part_map parts;
 };
 

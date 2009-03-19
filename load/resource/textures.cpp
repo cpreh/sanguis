@@ -7,16 +7,29 @@
 #include <sge/texture/add_image.hpp>
 #include <sge/texture/default_creator_impl.hpp>
 #include <sge/texture/no_fragmented.hpp>
+#include <sge/texture/part_raw.hpp>
 #include <sge/renderer/filter/linear.hpp>
 #include <sge/filesystem/directory_iterator.hpp>
 #include <sge/filesystem/extension.hpp>
 #include <sge/filesystem/is_regular.hpp>
 #include <sge/image/loader.hpp>
+#include <sge/image/create_texture.hpp>
 #include <sge/text.hpp>
 #include <sge/fstream.hpp>
 #include <sge/string.hpp>
+#include <sge/make_shared_ptr.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/bind.hpp>
+
+namespace
+{
+
+sge::renderer::filter::texture const
+filter(
+	sge::renderer::filter::linear
+);
+
+}
 
 sge::texture::part_ptr const
 sanguis::load::resource::textures::load(
@@ -29,6 +42,23 @@ sanguis::load::resource::textures::load(
 			&textures::do_load,
 			this,
 			_1));
+}
+
+sge::texture::part_ptr const
+sanguis::load::resource::textures::load(
+	sge::filesystem::path const &path) const
+{
+	return sge::make_shared_ptr<
+		sge::texture::part_raw
+	>(
+		sge::image::create_texture(
+			path,
+			texman.renderer(),
+			il,
+			filter,
+			sge::renderer::resource_flags::none
+		)
+	);
 }
 
 sanguis::load::resource::textures::~textures()
@@ -68,7 +98,9 @@ sanguis::load::resource::textures::textures(
 		>(
 			rend,
 			sge::renderer::color_format::rgba8,
-			sge::renderer::filter::linear)),
+			filter
+		)
+	),
 	il(il)
 {
 	// look for .tex files

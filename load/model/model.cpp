@@ -177,6 +177,9 @@ load_dim(
 sanguis::load::model::model::model(
 	sge::filesystem::path const &path,
 	resource::context const &ctx)
+:
+	path(path),
+	parts()
 {
 	sge::renderer::dim_type const cell_size(
 		load_dim(
@@ -200,18 +203,18 @@ sanguis::load::model::model::model(
 			continue;
 		}
 		
-		if(sge::filesystem::extension(*beg) == SGE_TEXT("ini"))
+		if(sge::filesystem::extension(file) == SGE_TEXT(".ini"))
 			continue;
 
 		sge::texture::part_ptr const tex(
 			ctx.textures().load(
-				file.string()
+				file
 			)
 		);
 
 
 		sge::filesystem::path const ini_file(
-			path / sge::filesystem::stem(file) / SGE_TEXT(".ini")
+			path / (sge::filesystem::stem(file) + SGE_TEXT(".ini"))
 		);
 
 		ifstream ifs(
@@ -276,6 +279,17 @@ sanguis::load::model::model::model(
 				)
 			);
 
+			SGE_LOG_DEBUG(
+				log(),
+				sge::log::_1
+					<< SGE_TEXT("Adding category ")
+					<< names.first
+					<< SGE_TEXT(" in ")
+					<< path
+					<< SGE_TEXT(". Rest: ")
+					<< names.second
+			);
+
 			if(it == parts.end())
 			{
 				std::pair<part_map::iterator, bool> const ret(
@@ -313,8 +327,10 @@ sanguis::load::model::model::operator[](
 
 	if(it == parts.end())
 		throw exception(
-			name
-			+ SGE_TEXT(" not found in model!")
+			SGE_TEXT("Category \"")
+			+ name
+			+ SGE_TEXT("\" not found in ")
+			+ path.string()
 		);
 	
 	return it->second;

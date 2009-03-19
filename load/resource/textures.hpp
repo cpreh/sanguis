@@ -23,6 +23,10 @@ public:
 	load(
 		texture_identifier const &) const;
 
+	sge::texture::part_ptr const
+	load(
+		sge::filesystem::path const &) const;
+	
 	~textures();
 private:
 	friend class context;
