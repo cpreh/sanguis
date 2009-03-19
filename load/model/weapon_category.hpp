@@ -2,7 +2,7 @@
 #define SANGUIS_LOAD_MODEL_WEAPON_CATEGORY_HPP_INCLUDED
 
 #include "animation.hpp"
-#include "optional_delay.hpp"
+#include "global_parameters.hpp"
 #include "../../animation_type.hpp"
 #include <sge/parse/ini/entry_vector.hpp>
 #include <sge/texture/part_fwd.hpp>
@@ -30,10 +30,8 @@ public:
 	operator[](
 		animation_type::type) const;
 private:
-	weapon_category(
-		sge::texture::part_ptr,
-		sge::renderer::dim_type const &,
-		optional_delay const &);
+	explicit weapon_category(
+		global_parameters const &);
 	
 	void add(
 		sge::parse::ini::entry_vector const &,
@@ -46,10 +44,7 @@ private:
 		animation
 	> animation_map;
 
-	sge::texture::part_ptr const tex;
-	sge::renderer::dim_type const cell_size;
-	optional_delay const opt_delay;
-
+	global_parameters const param;
 	animation_map animations;
 };
 

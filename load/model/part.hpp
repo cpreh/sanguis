@@ -2,12 +2,9 @@
 #define SANGUIS_LOAD_MODEL_PART_HPP_INCLUDED
 
 #include "weapon_category.hpp"
-#include "optional_delay.hpp"
+#include "global_parameters.hpp"
 #include "../../weapon_type.hpp"
 #include <sge/parse/ini/entry_vector.hpp>
-#include <sge/texture/part_fwd.hpp>
-#include <sge/renderer/dim_type.hpp>
-#include <sge/math/dim/basic_decl.hpp>
 #include <sge/string.hpp>
 #include <map>
 
@@ -28,10 +25,8 @@ public:
 	operator[](
 		weapon_type::type) const;
 private:
-	part(
-		sge::texture::part_ptr,
-		sge::renderer::dim_type const &cell_size,
-		optional_delay const &opt_delay);
+	explicit part(
+		global_parameters const &);
 
 	void add(
 		sge::parse::ini::entry_vector const &,
@@ -44,10 +39,7 @@ private:
 		weapon_category
 	> category_map;
 
-	sge::texture::part_ptr const tex;
-	sge::renderer::dim_type const cell_size;
-	optional_delay const opt_delay;
-
+	global_parameters const param;
 	category_map categories;
 };
 

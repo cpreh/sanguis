@@ -223,9 +223,12 @@ sanguis::load::model::model::model(
 						std::make_pair(
 							names.first,	
 							part(
-								tex,
-								cell_size,
-								opt_delay
+								global_parameters(
+									tex,
+									cell_size,
+									opt_delay,
+									ini_file
+								)
 							)
 						)
 					)

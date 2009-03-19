@@ -1,6 +1,7 @@
 #include "animation.hpp"
 #include "get_entry.hpp"
 #include "animation_sound.hpp"
+#include "global_parameters.hpp"
 #include "../resource/animations.hpp"
 #include "../resource/context.hpp"
 #include "../log.hpp"
@@ -43,7 +44,8 @@ calc_rect(
 sge::time::unit
 load_delay(
 	sge::parse::ini::entry_vector const &entries,
-	sanguis::load::model::optional_delay const &opt_delay)
+	sanguis::load::model::optional_delay const &opt_delay,
+	sge::filesystem::path const &path)
 {
 	if(opt_delay)
 		return *opt_delay;
@@ -62,7 +64,9 @@ load_delay(
 		SGE_LOG_ERROR(
 			sanguis::load::log(),
 			sge::log::_1
-				<< SGE_TEXT("delay not in global.ini but not in specific ini either!")
+				<< SGE_TEXT("delay not in global.ini but not in specified in ")
+				<< path
+				<< SGE_TEXT(" either!")
 		);
 
 		throw;
@@ -72,10 +76,8 @@ load_delay(
 }
 
 sanguis::load::model::animation::animation(
-	sge::texture::part_ptr const tex,
-	sge::renderer::dim_type const &cell_size,
-	sge::parse::ini::entry_vector const &entries,
-	optional_delay const &opt_delay)
+	global_parameters const &param,
+	sge::parse::ini::entry_vector const &entries)
 :
 	anim(
 		sge::make_shared_ptr<
@@ -104,11 +106,12 @@ sanguis::load::model::animation::animation(
 	sge::time::unit const delay(
 		load_delay(
 			entries,
-			opt_delay
+			param.delay(),
+			param.path()
 		)
 	);
 	sge::renderer::lock_rect const area(
-		tex->area()
+		param.tex()->area()
 	);
 
 	for(sge::renderer::size_type i = begin; i != end; ++i)
@@ -121,10 +124,10 @@ sanguis::load::model::animation::animation(
 					sge::make_shared_ptr<
 						sge::texture::part_raw
 					>(
-						tex->texture(),
+						param.tex()->texture(),
 						calc_rect(
 							area,
-							cell_size,
+							param.cell_size(),
 							i
 						)
 					)

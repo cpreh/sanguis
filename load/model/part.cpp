@@ -38,19 +38,17 @@ sanguis::load::model::part::operator[](
 		return it->second;
 	if(t == weapon_type::none)
 		throw exception(
-			SGE_TEXT("Unarmed weapon model missing in TODO")
+			SGE_TEXT("Unarmed weapon model missing in ")
+			+ param.path().string()
 		);
 	return (*this)[weapon_type::none];
 }
 
 sanguis::load::model::part::part(
-	sge::texture::part_ptr const tex,
-	sge::renderer::dim_type const &cell_size,
-	optional_delay const &opt_delay)
+	global_parameters const &param)
 :
-	tex(tex),
-	cell_size(cell_size),
-	opt_delay(opt_delay)
+	param(param),
+	categories()
 {}
 
 void
@@ -102,9 +100,7 @@ sanguis::load::model::part::add(
 				std::make_pair(
 					type,		
 					weapon_category(
-						tex,
-						cell_size,
-						opt_delay
+						param
 					)
 				)
 			)
