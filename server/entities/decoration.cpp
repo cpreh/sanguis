@@ -6,6 +6,7 @@
 #include "../get_dim.hpp"
 #include "../../load/decoration_name.hpp"
 #include "../../load/context.hpp"
+#include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::decoration::decoration(
 	server::environment const &env,
@@ -16,12 +17,15 @@ sanguis::server::entities::decoration::decoration(
 	entity(
 		base_parameters(
 			env,
-			damage::all(messages::mu(1)),
+			damage::all(static_cast<space_unit>(1)),
 			pos,
 			angle,
 			angle,
 			team::neutral,
-			entities::property_map(),
+			boost::assign::map_list_of
+				(entities::property_type::health,
+				entities::property(static_cast<space_unit>(1))
+			),
 			entity_type::decoration,
 			true,
 			default_dim(
