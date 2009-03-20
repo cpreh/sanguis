@@ -11,9 +11,6 @@ namespace sanguis
 {
 namespace server
 {
-
-struct environment;
-
 namespace waves
 {
 
@@ -25,11 +22,13 @@ public:
 		unsigned waves,
 		unsigned spawns_per_wave,
 		enemy_type::type);
+private:
 	void process(
 		time_type diff,
 		environment const &);
+
 	bool ended() const;
-private:
+
 	diff_clock       diff_;
 	sge::time::timer delay_timer,
 	                 spawn_timer;

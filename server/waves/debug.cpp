@@ -1,0 +1,32 @@
+#include "debug.hpp"
+#include "spawn.hpp"
+
+sanguis::server::waves::debug::debug()
+:
+	spawned(false)
+{}
+
+void 
+sanguis::server::waves::debug::process(
+	time_type,
+	environment const &env)
+{
+	if(spawned)
+		return;
+
+	for(unsigned i = 0; i < enemy_type::size; ++i)
+		spawn(
+			env,
+			static_cast<
+				enemy_type::type
+			>(i)
+		);
+	
+	spawned = true;
+}
+
+bool
+sanguis::server::waves::debug::ended() const
+{
+	return spawned;
+}

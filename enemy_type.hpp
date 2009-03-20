@@ -13,7 +13,8 @@ enum type {
 	zombie01,
 	spider,
 	skeleton,
-  maggot
+	maggot,
+	size
 };
 }
 

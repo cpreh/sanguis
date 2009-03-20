@@ -1,5 +1,6 @@
 #include "generator.hpp"
 #include "simple.hpp"
+//#include "debug.hpp"
 #include <boost/assign/ptr_list_inserter.hpp>
 
 sanguis::server::waves::generator::generator()
@@ -72,6 +73,9 @@ sanguis::server::waves::generator::generator()
 		1,
 		enemy_type::skeleton
 	);
+
+//	boost::assign::ptr_push_back<waves::debug>(waves)
+//	();
 }
 
 void sanguis::server::waves::generator::process(
