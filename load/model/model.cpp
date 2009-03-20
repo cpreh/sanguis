@@ -224,7 +224,6 @@ sanguis::load::model::model::model(
 							names.first,
 							part(
 								global_parameters(
-									tex,
 									cell_size,
 									opt_delay
 								)
@@ -238,7 +237,8 @@ sanguis::load::model::model::model(
 
 			it->second.add(
 				section.entries,
-				names.second
+				names.second,
+				tex
 			);
 		}
 	}

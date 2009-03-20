@@ -94,7 +94,8 @@ load_delay(
 
 sanguis::load::model::animation::animation(
 	global_parameters const &param,
-	sge::parse::ini::entry_vector const &entries)
+	sge::parse::ini::entry_vector const &entries,
+	sge::texture::part_ptr const tex)
 :
 	anim(
 		sge::make_shared_ptr<
@@ -127,7 +128,7 @@ sanguis::load::model::animation::animation(
 		)
 	);
 	sge::renderer::lock_rect const area(
-		param.tex()->area()
+		tex->area()
 	);
 
 	for(sge::renderer::size_type i = begin; i != end; ++i)
@@ -165,7 +166,7 @@ sanguis::load::model::animation::animation(
 					sge::make_shared_ptr<
 						sge::texture::part_raw
 					>(
-						param.tex()->texture(),
+						tex->texture(),
 						cur_area
 					)
 				)

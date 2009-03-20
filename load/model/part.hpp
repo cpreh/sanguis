@@ -5,6 +5,7 @@
 #include "global_parameters.hpp"
 #include "../../weapon_type.hpp"
 #include <sge/parse/ini/entry_vector.hpp>
+#include <sge/texture/part_fwd.hpp>
 #include <sge/string.hpp>
 #include <map>
 
@@ -30,7 +31,8 @@ private:
 
 	void add(
 		sge::parse::ini::entry_vector const &,
-		sge::string const &header);
+		sge::string const &header,
+		sge::texture::part_ptr);
 
 	friend class model;
 

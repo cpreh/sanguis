@@ -2,6 +2,7 @@
 #define SANGUIS_LOAD_MODEL_ANIMATION_HPP_INCLUDED
 
 #include <sge/sprite/animation_series.hpp>
+#include <sge/texture/part_fwd.hpp>
 #include <sge/parse/ini/entry_vector.hpp>
 #include <sge/shared_ptr.hpp>
 
@@ -29,7 +30,8 @@ public:
 private:
 	animation(
 		global_parameters const &,
-		sge::parse::ini::entry_vector const &entries);
+		sge::parse::ini::entry_vector const &entries,
+		sge::texture::part_ptr);
 
 	friend class weapon_category;
 

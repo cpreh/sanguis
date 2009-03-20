@@ -35,7 +35,8 @@ private:
 	
 	void add(
 		sge::parse::ini::entry_vector const &,
-		sge::string const &header);
+		sge::string const &header,
+		sge::texture::part_ptr);
 
 	friend class part;
 

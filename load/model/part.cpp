@@ -53,7 +53,8 @@ sanguis::load::model::part::part(
 void
 sanguis::load::model::part::add(
 	sge::parse::ini::entry_vector const &entries,
-	sge::string const &header)
+	sge::string const &header,
+	sge::texture::part_ptr const tex)
 {
 	split_pair const names(
 		split_first_slash(
@@ -110,6 +111,7 @@ sanguis::load::model::part::add(
 	
 	it->second.add(
 		entries,
-		names.second
+		names.second,
+		tex
 	);
 }

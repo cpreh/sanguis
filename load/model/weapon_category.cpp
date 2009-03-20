@@ -53,7 +53,8 @@ sanguis::load::model::weapon_category::weapon_category(
 void
 sanguis::load::model::weapon_category::add(
 	sge::parse::ini::entry_vector const &entries,
-	sge::string const &header)
+	sge::string const &header,
+	sge::texture::part_ptr const tex)
 {
 	animation_type_array::const_iterator const weapon_index(
 		std::find(
@@ -86,7 +87,8 @@ sanguis::load::model::weapon_category::add(
 				type,		
 				animation(
 					param,
-					entries
+					entries,
+					tex
 				)
 			)
 		).second == false
