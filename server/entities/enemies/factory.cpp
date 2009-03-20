@@ -29,7 +29,7 @@ sanguis::server::entities::enemies::create(
 				direction,
 				boost::assign::map_list_of
 					(entities::property_type::health,
-					 entities::property(messages::mu(3)))
+					 entities::property(static_cast<space_unit>(3)))
 					(entities::property_type::movement_speed,
 					 entities::property(messages::mu(20))),
 				ai::ai_ptr(
