@@ -19,9 +19,9 @@ sanguis::server::buffs::burn::burn(
 		sge::time::second_f(
 			pulse_time
 		),
-		true,
+		sge::time::activation_state::active,
 		clock_.callback(),
-		true
+		sge::time::expiration_state::expired
 	),
 	pulses(0),
 	max_pulses(max_pulses),

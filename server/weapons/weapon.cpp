@@ -150,17 +150,17 @@ sanguis::server::weapons::weapon::weapon(
 	cooldown_timer(
 		sge::time::second_f(
 			base_cooldown_),
-		true,
+		sge::time::activation_state::active,
 		diff.callback()),
 	cast_point_timer(
 		sge::time::second_f(
 			cast_point_),
-		false,
+		sge::time::activation_state::inactive,
 		diff.callback()),
 	reload_timer(
 		sge::time::second_f(
 			reload_time_),
-		false,
+		sge::time::activation_state::inactive,
 		diff.callback()),
 	state_(state::ready)
 {

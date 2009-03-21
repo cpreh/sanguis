@@ -14,12 +14,12 @@ sanguis::server::waves::simple::simple(
 	delay_timer(
 		sge::time::second_f(
 			delay),
-		true,
+		sge::time::activation_state::active,
 		diff_.callback()),
 	spawn_timer(
 		sge::time::second_f(
 			spawn_interval),
-		true,
+		sge::time::activation_state::active,
 		diff_.callback()),
 	waves(waves),
 	spawns_per_wave(spawns_per_wave),

@@ -45,17 +45,20 @@ sanguis::server::entities::projectiles::projectile::projectile(
 			properties,
 			to_entity_type(nptype),
 			true,
-			dim)),
+			dim
+		)
+	),
 	ptype_(nptype),
 	lifetime(
+		sge::time::second_f(
+			lifetime
+				? *lifetime
+				: 0.f
+		),
 		lifetime
-			? sge::time::timer(
-				sge::time::second_f(
-					*lifetime))
-			: sge::time::timer(
-				sge::time::second_f(
-					0.f),
-				false))
+			? sge::time::activation_state::active
+			: sge::time::activation_state::inactive
+	)
 {}
 
 void sanguis::server::entities::projectiles::projectile::die()
