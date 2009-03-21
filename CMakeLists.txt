@@ -71,6 +71,7 @@ FILE (GLOB files
 	server/ai/*.cpp
 	server/auras/*.cpp
 	server/buffs/*.cpp
+	server/collision/*.cpp
 	server/entities/*.cpp
 	server/entities/enemies/*.cpp
 	server/entities/pickups/*.cpp
