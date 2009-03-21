@@ -5,6 +5,7 @@
 #include "radius.hpp"
 #include "../perks/perk.hpp"
 #include "../buffs/buff.hpp"
+#include "../auras/aura.hpp"
 #include "../get_unique_id.hpp"
 #include "../message_converter.hpp"
 #include "../../messages/add.hpp"
@@ -134,6 +135,14 @@ void sanguis::server::entities::entity::center(
 			>(0)
 		)
 	);
+
+	BOOST_FOREACH(
+		aura_container::reference r,
+		auras_
+	)
+		r.pos(
+			_center
+		);
 }
 
 sanguis::server::pos_type const
@@ -249,16 +258,6 @@ sanguis::server::entities::entity::property(
 	property_type::type const e)
 {
 	return properties[e];
-	// TODO: should this signal an error because it might be
-	// rather error prone to default initialise properties
-	// for example if health == 0 the entity is dead immedeately
-	/*property_map::iterator const it = properties.find(e);
-
-	if (it == properties.end())
-		throw exception(
-			SGE_TEXT("couldn't find specified entity property"));
-	
-	return it->second;*/
 }
 
 sanguis::server::exp_type
@@ -373,6 +372,13 @@ sanguis::server::entities::entity::add_buff(
 			return;
 	
 	buffs_.push_back(b);
+}
+
+void
+sanguis::server::entities::entity::add_aura(
+	auras::auto_ptr a)
+{
+	auras_.push_back(a);
 }
 
 sanguis::server::entities::entity::~entity()

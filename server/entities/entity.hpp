@@ -10,6 +10,7 @@
 #include "../environment.hpp"
 #include "../perks/auto_ptr.hpp"
 #include "../buffs/auto_ptr.hpp"
+#include "../auras/auto_ptr.hpp"
 #include "../collision/base.hpp"
 #include "../../messages/base.hpp"
 #include "../../entity_id.hpp"
@@ -103,6 +104,9 @@ public:
 	virtual void add_buff(
 		buffs::auto_ptr);
 
+	virtual void add_aura(
+		auras::auto_ptr);
+
 	virtual ~entity();
 protected:
 	void send(messages::auto_ptr);
@@ -163,6 +167,11 @@ private:
 		buffs::buff
 	>                       buff_container;
 	buff_container          buffs_;
+
+	typedef boost::ptr_list<
+		auras::aura
+	>                       aura_container;
+	aura_container          auras_;
 
 	typedef sge::container::linear_set<
 		entity *
