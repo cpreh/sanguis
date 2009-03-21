@@ -3,12 +3,16 @@
 #include "../entities/property.hpp"
 
 sanguis::server::auras::freeze::freeze(
-	messages::circle_type const &circle_,
+	environment const &env,
+	circle_type const &circle_,
 	team::type const team)
-: aura(
-	circle_,
-	team,
-	influence::debuff)
+:
+	aura(
+		env,
+		circle_,
+		team,
+		influence::debuff
+	)
 {}
 
 void sanguis::server::auras::freeze::do_effect(

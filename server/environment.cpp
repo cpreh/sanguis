@@ -6,12 +6,18 @@ sanguis::server::environment::environment(
 	exp_callback const &exp,
 	level_callback const &level,
 	load_callback const &load,
-	sge::collision::world_ptr const collision)
+	sge::collision::world_ptr const collision_)
 :
 	send(send),
 	insert(insert),
 	exp(exp),
 	level(level),
 	load(load),
-	collision(collision)
+	collision_(collision_)
 {}
+
+sge::collision::world_ptr const
+sanguis::server::environment::collision() const
+{
+	return collision_;
+}

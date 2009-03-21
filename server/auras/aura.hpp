@@ -3,6 +3,7 @@
 
 #include "influence.hpp"
 #include "../entities/entity_fwd.hpp"
+#include "../collision/base.hpp"
 #include "../teams.hpp"
 #include "../types.hpp"
 
@@ -10,10 +11,13 @@ namespace sanguis
 {
 namespace server
 {
+
+struct environment;
+
 namespace auras
 {
 
-class aura {
+class aura : public collision::base {
 public:
 	virtual ~aura();
 
@@ -21,6 +25,7 @@ public:
 		pos_type const &);
 protected:
 	aura(
+		environment const &,
 		circle_type const &,
 		team::type team,
 		influence::type);
@@ -29,7 +34,6 @@ private:
 	do_effect(
 		entities::entity &target) = 0;
 
-	circle_type     circle_;
 	team::type      team_;
 	influence::type influence_;
 };

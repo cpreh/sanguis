@@ -19,7 +19,6 @@ struct environment
 	exp_callback exp;
 	level_callback level;
 	load_callback load;
-	sge::collision::world_ptr const collision;
 
 	environment(
 		send_callback const &,
@@ -28,6 +27,11 @@ struct environment
 		level_callback const &,
 		load_callback const &,
 		sge::collision::world_ptr);
+	
+	sge::collision::world_ptr const
+	collision() const;
+private:
+	sge::collision::world_ptr const collision_;
 };
 }
 }

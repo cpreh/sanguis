@@ -1,8 +1,9 @@
 #include "running.hpp"
 #include "waiting.hpp"
-#include "../entities/sattelite.hpp"
 #include "../entities/base_parameters.hpp"
 #include "../entities/property.hpp"
+#include "../collision/satellite.hpp"
+#include "../collision/base.hpp"
 #include "../environment.hpp"
 #include "../damage_types.hpp"
 #include "../message_functor.hpp"
@@ -45,7 +46,14 @@ sanguis::server::states::running::running(my_context ctx)
 	my_base(ctx),
 	coll_connection(
 		context<machine>().collision()->register_callback(
-			boost::bind(&running::collision,this,_1,_2))),
+			boost::bind(
+				&running::collision,
+				this,
+				_1,
+				_2
+			)
+		)
+	),
 	send(
 		boost::bind(
 			&server::machine::send,
@@ -220,17 +228,27 @@ void sanguis::server::states::running::level_callback(
 		messages::auto_ptr(
 			new messages::level_up(
 				p.id(),
-				p.level())));
+				p.level()
+			)
+		)
+	);
 }
 
 bool sanguis::server::states::running::collision_test(
 	sge::collision::satellite const &a,
 	sge::collision::satellite const &b)
 {
-	entities::entity const &e0 = 
-		dynamic_cast<entities::satellite const &>(a).entity();
-	entities::entity const &e1 = 
-		dynamic_cast<entities::satellite const &>(b).entity();
+	collision::base const
+		&e0(
+			dynamic_cast<
+				collision::satellite const &
+			>(a).base()
+		),
+	        &e1(
+			dynamic_cast<
+				collision::satellite const &
+			>(b).base()
+		);
 	
 	return e0.can_collide_with(e1) || e1.can_collide_with(e0);
 }
@@ -239,10 +257,18 @@ void sanguis::server::states::running::collision(
 	sge::collision::satellite &a,
 	sge::collision::satellite &b)
 {
-	entities::entity &e0 = 
-		dynamic_cast<entities::satellite &>(a).entity();
-	entities::entity &e1 = 
-		dynamic_cast<entities::satellite &>(b).entity();
+	collision::base
+		&e0(
+			dynamic_cast<
+				collision::satellite &
+			>(a).base()
+		),
+		&e1(
+			dynamic_cast<
+				collision::satellite &
+			>(b).base()
+		);
+	
 	e0.collision(e1);
 	e1.collision(e0);
 }

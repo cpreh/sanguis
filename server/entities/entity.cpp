@@ -30,6 +30,16 @@
 sanguis::server::entities::entity::entity(
 	base_parameters const &param)
 :
+	collision::base(
+		environment().collision(),
+		param.center(),
+		angle_to_vector(
+			direction() // TODO: is this right?
+		) * property(
+			property_type::movement_speed
+		).current(),
+		radius()
+	),
 	id_(get_unique_id()),
 	env_(param.env()),
 	armor_(param.armor()),
@@ -41,32 +51,6 @@ sanguis::server::entities::entity::entity(
 	invulnerable_(param.invulnerable()),
 	collision_dim(param.collision_dim()),
 	aggressive_(false),
-	collision_(
-		environment().collision->create_circle(
-			sge::collision::satellite_ptr(
-				new satellite(*this)
-			),
-			sge::math::vector::construct(
-				param.center(),
-				static_cast<
-					space_unit
-				>(0)
-			),
-			sge::math::vector::construct(
-				angle_to_vector(
-					direction() // TODO: is this right?
-				) * property(
-					property_type::movement_speed
-				).current(),
-				static_cast<
-					space_unit
-				>(0)
-			),
-			static_cast<sge::collision::unit>(
-				radius()
-			)
-		)
-	),
 	speed_change_(
 		property(
 			property_type::movement_speed
@@ -132,8 +116,8 @@ sanguis::server::pos_type const
 sanguis::server::entities::entity::center() const
 {
 	return pos_type(
-		collision_->center().x(),
-		collision_->center().y()
+		circle()->center().x(),
+		circle()->center().y()
 	);
 }
 
@@ -141,7 +125,7 @@ sanguis::server::entities::entity::center() const
 void sanguis::server::entities::entity::center(
 	pos_type const &_center)
 {
-	collision_->center(
+	circle()->center(
 		sge::math::vector::construct(
 			_center,
 			static_cast<
@@ -154,9 +138,10 @@ void sanguis::server::entities::entity::center(
 sanguis::server::pos_type const
 sanguis::server::entities::entity::abs_speed() const
 {
+	// TODO: make a conversion function for this!
 	return pos_type(
-		collision_->speed().x(),
-		collision_->speed().y()
+		circle()->speed().x(),
+		circle()->speed().y()
 	);
 }
 
@@ -376,17 +361,6 @@ sanguis::server::entities::entity::link(
 		e);
 }
 
-bool sanguis::server::entities::entity::can_collide_with(
-	entity const &) const
-{
-	return false;
-}
-
-void sanguis::server::entities::entity::collision(
-	entity &)
-{
-}
-
 void
 sanguis::server::entities::entity::add_buff(
 	buffs::auto_ptr b)
@@ -462,4 +436,17 @@ void sanguis::server::entities::entity::speed_change(
 			>(0)
 		)
 	);
+}
+
+bool
+sanguis::server::entities::entity::can_collide_with(
+	entity const &) const
+{
+	return false;
+}
+
+void
+sanguis::server::entities::entity::collision(
+	entity &)
+{
 }

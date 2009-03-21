@@ -10,6 +10,7 @@
 #include "../environment.hpp"
 #include "../perks/auto_ptr.hpp"
 #include "../buffs/auto_ptr.hpp"
+#include "../collision/base.hpp"
 #include "../../messages/base.hpp"
 #include "../../entity_id.hpp"
 #include "../../entity_type.hpp"
@@ -33,7 +34,7 @@ namespace entities
 class base_parameters;
 class auto_weak_link;
 
-class entity {
+class entity : public collision::base {
 	SGE_NONCOPYABLE(entity)
 protected:
 	explicit entity(
@@ -99,9 +100,6 @@ public:
 	link(
 		entity &);
 	
-	virtual bool can_collide_with(entity const &) const;
-	virtual void collision(entity &);
-
 	virtual void add_buff(
 		buffs::auto_ptr);
 
@@ -122,7 +120,15 @@ private:
 	bool has_ref(
 		entity *) const;
 	void speed_change(property::value_type);
+
+	virtual bool
+	can_collide_with(
+		entity const &) const;
 	
+	virtual void
+	collision(
+		entity &);
+
 	entity_id const         id_;
 	server::environment     env_;
 	armor_array             armor_;

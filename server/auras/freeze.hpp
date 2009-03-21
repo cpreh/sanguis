@@ -13,7 +13,8 @@ namespace auras
 class freeze : public aura {
 public:
 	freeze(
-		messages::circle_type const &,
+		environment const &,
+		circle_type const &,
 		team::type team);
 private:
 	void do_effect(
