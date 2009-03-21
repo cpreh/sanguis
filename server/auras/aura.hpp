@@ -30,12 +30,20 @@ protected:
 		team::type team,
 		influence::type);
 private:
+	bool
+	can_collide_with(
+		collision::base const &) const;
+
+	void
+	collision(
+		collision::base &);
+
 	virtual void
 	do_effect(
-		entities::entity &target) = 0;
+		entities::entity &) = 0;
 
-	team::type      team_;
-	influence::type influence_;
+	team::type const      team_;
+	influence::type const influence_;
 };
 
 }
