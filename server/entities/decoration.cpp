@@ -6,6 +6,7 @@
 #include "../get_dim.hpp"
 #include "../../load/decoration_name.hpp"
 #include "../../load/context.hpp"
+#include <sge/container/map_impl.hpp>
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::decoration::decoration(
@@ -24,14 +25,17 @@ sanguis::server::entities::decoration::decoration(
 			team::neutral,
 			boost::assign::map_list_of
 				(entities::property_type::health,
-				entities::property(static_cast<space_unit>(1))
-			),
+				entities::property(static_cast<space_unit>(1))),
 			entity_type::decoration,
 			true,
 			default_dim(
 				env.load().models(),
 				load::decoration_name(
-					dtype)))),
+					dtype
+				)
+			)
+		)
+	),
 	type_(dtype)
 {}
 

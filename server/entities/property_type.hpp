@@ -11,8 +11,8 @@ namespace entities
 namespace property_type
 {
 enum type {
-	health,
 	attack_speed,
+	health,
 	movement_speed,
 	size
 };

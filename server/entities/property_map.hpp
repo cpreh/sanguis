@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_PROPERTY_MAP_HPP_INCLUDED
 
 #include "property_type.hpp"
+#include <sge/container/map_fwd.hpp>
 #include <map>
 
 namespace sanguis
@@ -13,7 +14,8 @@ namespace entities
 
 class property;
 
-typedef std::map<
+typedef sge::container::map<
+	std::map,
 	property_type::type,
 	property
 > property_map;

@@ -1,6 +1,8 @@
 #include "base_parameters.hpp"
+#include "insert_default_properties.hpp"
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>
+#include <sge/container/map_impl.hpp>
 
 sanguis::server::entities::base_parameters::base_parameters(
 	environment const &env_,
@@ -20,7 +22,11 @@ sanguis::server::entities::base_parameters::base_parameters(
 	angle_(angle_),
 	direction_(direction_),
 	team_(team_),
-	properties_(properties_),
+	properties_(
+		insert_default_properties(
+			properties_
+		)
+	),
 	type_(type_),
 	invulnerable_(invulnerable_),
 	collision_dim_(collision_dim_)

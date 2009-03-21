@@ -2,11 +2,13 @@
 #define SANGUIS_SERVER_ENTITIES_BASE_PARAMETERS_HPP_INCLUDED
 
 #include "property_map.hpp"
+#include "property.hpp"
 #include "../environment.hpp"
 #include "../teams.hpp"
 #include "../types.hpp"
 #include "../../damage_type.hpp"
 #include "../../entity_type.hpp"
+#include <sge/container/map_decl.hpp>
 #include <sge/math/vector/basic_decl.hpp>
 #include <sge/math/dim/basic_decl.hpp>
 
@@ -51,7 +53,7 @@ private:
 	space_unit const           angle_,
 	                           direction_;
 	server::team::type const   team_;
-	property_map const         &properties_;
+	property_map const         properties_;
 	entity_type::type const    type_;
 	bool const                 invulnerable_;
 	dim_type const             collision_dim_;

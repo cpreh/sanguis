@@ -19,8 +19,8 @@
 #include <sge/math/vector/basic_decl.hpp>
 #include <sge/math/dim/basic_decl.hpp>
 #include <sge/container/linear_set.hpp>
-#include <sge/collision/objects/circle_fwd.hpp>
 #include <sge/signal/auto_connection.hpp>
+#include <sge/container/map_decl.hpp>
 #include <sge/noncopyable.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
 
@@ -121,6 +121,17 @@ private:
 		entity *) const;
 	void speed_change(property::value_type);
 
+	using base::can_collide_with;
+	using base::collision;
+
+	bool
+	can_collide_with(
+		collision::base const &) const;
+	
+	void
+	collision(
+		collision::base &);
+
 	virtual bool
 	can_collide_with(
 		entity const &) const;
@@ -159,7 +170,6 @@ private:
 	link_container          links,
 	                        backlinks;
 	
-	sge::collision::objects::circle_ptr collision_;
 	sge::signal::auto_connection       speed_change_;
 };
 

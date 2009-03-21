@@ -1,8 +1,8 @@
 #include "entity.hpp"
-#include "sattelite.hpp"
 #include "base_parameters.hpp"
 #include "auto_weak_link.hpp"
 #include "property.hpp"
+#include "radius.hpp"
 #include "../perks/perk.hpp"
 #include "../buffs/buff.hpp"
 #include "../get_unique_id.hpp"
@@ -16,29 +16,30 @@
 #include <sge/math/vector/construct.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/math/dim/arithmetic.hpp>
-#include <sge/math/power.hpp>
 #include <sge/collision/world.hpp>
 #include <sge/collision/objects/circle.hpp>
 #include <sge/container/linear_set_impl.hpp>
+#include <sge/container/map_impl.hpp>
 #include <sge/text.hpp>
 #include <sge/math/vector/output.hpp>
 #include <boost/foreach.hpp>
 #include <boost/bind.hpp>
 #include <typeinfo>
-#include <cmath>
 
 sanguis::server::entities::entity::entity(
 	base_parameters const &param)
 :
 	collision::base(
-		environment().collision(),
+		param.env().collision(),
 		param.center(),
 		angle_to_vector(
-			direction() // TODO: is this right?
-		) * property(
+			param.direction() // TODO: is this right?
+		) * param.properties()[
 			property_type::movement_speed
-		).current(),
-		radius()
+		].current(),
+		entities::radius(
+			param.collision_dim()
+		)
 	),
 	id_(get_unique_id()),
 	env_(param.env()),
@@ -155,9 +156,8 @@ sanguis::server::entities::entity::speed() const
 sanguis::server::space_unit
 sanguis::server::entities::entity::radius() const
 {
-	return std::sqrt(
-		sge::math::quad(dim().w() / 2)
-		+ sge::math::quad(dim().h() / 2)
+	return entities::radius(
+		dim()
 	);
 }
 
@@ -426,7 +426,7 @@ bool sanguis::server::entities::entity::has_ref(
 void sanguis::server::entities::entity::speed_change(
 	property::value_type const s)
 {
-	collision_->speed(
+	circle()->speed(
 		sge::math::vector::construct(
 			angle_to_vector(
 				direction()
@@ -436,6 +436,33 @@ void sanguis::server::entities::entity::speed_change(
 			>(0)
 		)
 	);
+}
+
+bool
+sanguis::server::entities::entity::can_collide_with(
+	collision::base const &b) const
+{
+	entity const *const other(
+		dynamic_cast<entity const *>(&b)
+	);
+
+	return other
+		? can_collide_with(*other)
+		: false;
+}
+
+void
+sanguis::server::entities::entity::collision(
+	collision::base &b)
+{
+	entity *const other(
+		dynamic_cast<entity *>(&b)
+	);
+
+	if(other)
+		collision(
+			*other
+		);
 }
 
 bool
