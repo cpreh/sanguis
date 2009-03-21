@@ -2,7 +2,7 @@
 #define SANGUIS_DAMAGE_TYPE_HPP_INCLUDED
 
 #include "messages/types.hpp"
-#include <boost/array.hpp>
+#include <boost/tr1/array.hpp>
 
 namespace sanguis
 {
@@ -19,7 +19,7 @@ enum type {
 };
 }
 
-typedef boost::array<
+typedef std::tr1::array<
 	messages::space_unit,
 	damage_type::size
 > damage_array;

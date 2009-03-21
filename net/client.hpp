@@ -11,6 +11,7 @@
 #include <boost/asio/ip/tcp.hpp>
 #include <boost/system/error_code.hpp>
 
+#include <boost/tr1/array.hpp>
 #include <boost/function.hpp>
 
 #include <cstddef>
@@ -37,7 +38,7 @@ struct client
 	signal_connection register_data(data_function);
 
 	private:
-	typedef boost::array<data_type::value_type,4096> static_buffer;
+	typedef std::tr1::array<data_type::value_type,4096> static_buffer;
 
 	// asio vars
 	boost::asio::io_service &io_service;

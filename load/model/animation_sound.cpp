@@ -5,7 +5,7 @@
 #include <sge/random/exclusive_range_error.hpp>
 #include <sge/text.hpp>
 #include <sge/string.hpp>
-#include <boost/array.hpp>
+#include <boost/tr1/array.hpp>
 #include <utility>
 #include <iterator>
 
@@ -28,7 +28,7 @@ sanguis::load::model::animation_sound::animation_sound(
 	sge::filesystem::path const &path,
 	resource::context const &ctx)
 {
-	typedef boost::array<
+	typedef std::tr1::array<
 		sge::string,
 		animation_sound_type::size
 	> animation_sound_array;

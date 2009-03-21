@@ -6,7 +6,7 @@
 #include "../exception.hpp"
 #include <sge/text.hpp>
 #include <boost/tr1/random.hpp>
-#include <boost/array.hpp>
+#include <boost/tr1/array.hpp>
 
 void sanguis::server::spawn_pickup(
 	messages::pos_type const &pos,
@@ -22,7 +22,7 @@ void sanguis::server::spawn_pickup(
 	> rng_type;
 
 	unsigned const weapon_pickup_count(3);
-	boost::array<
+	std::tr1::array<
 		weapon_type::type,
 		weapon_pickup_count
 	> const weapon_pickups = {
