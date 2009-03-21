@@ -10,8 +10,8 @@ namespace z_ordering
 
 enum type {
 	background,
-	corpses,
 	decoration,
+	corpses,
 	model_generic,
 	player_lower,
 	bullet,
