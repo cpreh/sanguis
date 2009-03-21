@@ -7,7 +7,7 @@
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image/loader_fwd.hpp>
 #include <sge/filesystem/path.hpp>
-#include <boost/noncopyable.hpp>
+#include <sge/noncopyable.hpp>
 #include <map>
 
 namespace sanguis
@@ -17,7 +17,8 @@ namespace load
 namespace resource
 {
 
-class textures : boost::noncopyable {
+class textures {
+	SGE_NONCOPYABLE(textures)
 public:
 	sge::texture::part_ptr const
 	load(

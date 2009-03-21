@@ -10,9 +10,9 @@
 #include "../entities/entity_fwd.hpp"
 #include <sge/time/timer.hpp>
 #include <sge/log/logger.hpp>
+#include <sge/noncopyable.hpp>
+#include <sge/auto_ptr.hpp>
 #include <boost/optional.hpp>
-#include <boost/noncopyable.hpp>
-#include <memory>
 
 namespace sanguis
 {
@@ -23,7 +23,8 @@ namespace weapons
 
 class delayed_attack;
 
-class weapon : boost::noncopyable {
+class weapon {
+	SGE_NONCOPYABLE(weapon)
 public:
 	space_unit range() const;
 	bool attack(
@@ -94,7 +95,7 @@ private:
 		pos_type>       attack_dest;
 };
 
-typedef std::auto_ptr<weapon> weapon_ptr;
+typedef sge::auto_ptr<weapon> weapon_ptr;
 
 }
 }

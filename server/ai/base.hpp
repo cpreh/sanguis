@@ -3,8 +3,8 @@
 
 #include "../entities/entity_fwd.hpp"
 #include "../../time_type.hpp"
-#include <boost/shared_ptr.hpp>
-#include <boost/noncopyable.hpp>
+#include <sge/shared_ptr.hpp>
+#include <sge/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -14,7 +14,10 @@ namespace server
 namespace ai
 {
 
-class base : boost::noncopyable {
+class base {
+	SGE_NONCOPYABLE(base)
+protected:
+	base();
 public:
 	virtual void bind(
 		entities::entity_with_weapon &me) = 0;
@@ -26,7 +29,7 @@ public:
 	virtual ~base();
 };
 
-typedef boost::shared_ptr<base> ai_ptr;
+typedef sge::shared_ptr<base> ai_ptr;
 
 }
 }

@@ -4,7 +4,7 @@
 #include <sge/sprite/animation_series_fwd.hpp>
 #include <sge/filesystem/path.hpp>
 #include <sge/scoped_ptr.hpp>
-#include <boost/noncopyable.hpp>
+#include <sge/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -17,7 +17,8 @@ class context;
 namespace particle
 {
 
-class animation : boost::noncopyable {
+class animation {
+	SGE_NONCOPYABLE(animation)
 public:
 	sge::sprite::animation_series const &
 	get() const;

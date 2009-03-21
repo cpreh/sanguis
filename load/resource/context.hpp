@@ -6,8 +6,8 @@
 #include <sge/audio/multi_loader_fwd.hpp>
 #include <sge/audio/player_fwd.hpp>
 #include <sge/audio/pool_fwd.hpp>
-#include <boost/scoped_ptr.hpp>
-#include <boost/noncopyable.hpp>
+#include <sge/scoped_ptr.hpp>
+#include <sge/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -23,7 +23,8 @@ class textures;
 class sounds;
 class animations;
 
-class context : boost::noncopyable {
+class context {
+	SGE_NONCOPYABLE(context)
 public:
 	resource::textures const &
 	textures() const;
@@ -44,15 +45,15 @@ private:
 		sge::audio::pool &);
 	~context();
 
-	boost::scoped_ptr<
+	sge::scoped_ptr<
 		resource::textures
 	> textures_;
 
-	boost::scoped_ptr<
+	sge::scoped_ptr<
 		resource::sounds
 	> sounds_;
 
-	boost::scoped_ptr<
+	sge::scoped_ptr<
 		resource::animations
 	> animations_;
 };

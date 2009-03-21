@@ -5,23 +5,26 @@
 #include "output_buffer.hpp"
 
 #include <sge/signal/object.hpp>
+#include <sge/noncopyable.hpp>
 
 #include <boost/asio/io_service.hpp>
 #include <boost/asio/ip/tcp.hpp>
 #include <boost/system/error_code.hpp>
 
 #include <boost/function.hpp>
-#include <boost/array.hpp>
-#include <boost/noncopyable.hpp>
+#include <boost/tr1/array.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
 #include <cstddef>
 
 namespace net
 {
-struct connection : boost::noncopyable
-{
+
+// TODO: put this in a file
+struct connection {
+	SGE_NONCOPYABLE(connection)
+public:
 	// typedefs
-	typedef boost::array<data_type::value_type,4096> static_buffer;
+	typedef std::tr1::array<data_type::value_type,4096> static_buffer;
 
 	const id_type id;
 	boost::asio::ip::tcp::socket socket;
@@ -33,9 +36,9 @@ struct connection : boost::noncopyable
 		: id(id),socket(io_service),connected(false),sending(false) {}
 };
 
-class server : boost::noncopyable
-{
-	public:
+class server {
+	SGE_NONCOPYABLE(server)
+public:
 	typedef void connect_fun (const id_type);
 	typedef void disconnect_fun (const id_type,const string_type &);
 	typedef void data_fun (const id_type,const data_type &);
@@ -53,7 +56,7 @@ class server : boost::noncopyable
 	signal_connection register_disconnect(disconnect_function);
 	signal_connection register_data(data_function);
 
-	private:
+private:
 	typedef boost::ptr_vector<connection> connection_container;
 
 	// asio vars

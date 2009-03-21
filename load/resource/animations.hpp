@@ -4,7 +4,7 @@
 #include <sge/sprite/animation_series.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <sge/filesystem/path.hpp>
-#include <boost/noncopyable.hpp>
+#include <sge/noncopyable.hpp>
 #include <map>
 
 namespace sanguis
@@ -16,7 +16,8 @@ namespace resource
 
 class textures;
 
-class animations : boost::noncopyable {
+class animations {
+	SGE_NONCOPYABLE(animations)
 public:
 	sge::sprite::animation_series const
 	load(

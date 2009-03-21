@@ -11,7 +11,7 @@
 #include <sge/sprite/rotation_type.hpp>
 #include <sge/sprite/point.hpp>
 #include <sge/sprite/dim.hpp>
-#include <boost/noncopyable.hpp>
+#include <sge/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -20,7 +20,8 @@ namespace draw
 
 class environment;
 
-class entity : boost::noncopyable {
+class entity {
+	SGE_NONCOPYABLE(entity)
 public:
 	virtual void update(time_type) = 0;
 	entity_id id() const;

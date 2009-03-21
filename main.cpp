@@ -16,6 +16,8 @@
 #include <sge/iconv.hpp>
 #include <sge/media.hpp>
 #include <sge/make_shared_ptr.hpp>
+#include <sge/auto_ptr.hpp>
+#include <sge/scoped_ptr.hpp>
 #include <sge/console/object.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/systems/list.hpp>
@@ -44,7 +46,6 @@
 
 // boost
 #include <boost/filesystem.hpp>
-#include <boost/scoped_ptr.hpp>
 #include <boost/program_options.hpp>
 
 // c++
@@ -52,7 +53,6 @@
 #include <iostream>
 #include <fstream>
 #include <ostream>
-#include <memory>
 
 // c
 #include <cstdlib>
@@ -60,7 +60,7 @@
 namespace
 {
 
-typedef std::auto_ptr<
+typedef sge::auto_ptr<
 	sanguis::server::machine
 > server_auto_ptr;
 
@@ -234,7 +234,7 @@ try
 	
 	resources.preload();
 
-	boost::scoped_ptr<
+	sge::scoped_ptr<
 		sanguis::server::machine
 	> server(
 		create_server(

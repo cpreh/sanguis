@@ -8,8 +8,8 @@
 #include "../animation_type.hpp"
 #include <sge/log/fwd.hpp>
 #include <sge/string.hpp>
+#include <sge/scoped_ptr.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
-#include <boost/scoped_ptr.hpp>
 
 namespace sanguis
 {
@@ -83,7 +83,7 @@ private:
 	                reloading;
 	funit           health_,
 	                max_health_;
-	boost::scoped_ptr<
+	sge::scoped_ptr<
 		healthbar
 	> healthbar_;
 

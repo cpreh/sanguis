@@ -9,14 +9,15 @@
 #include <sge/audio/multi_loader_fwd.hpp>
 #include <sge/audio/player_fwd.hpp>
 #include <sge/audio/pool_fwd.hpp>
-#include <boost/noncopyable.hpp>
+#include <sge/noncopyable.hpp>
 
 namespace sanguis
 {
 namespace load
 {
 
-class context : boost::noncopyable {
+class context {
+	SGE_NONCOPYABLE(context)
 public:
 	context(
 		sge::image::loader_ptr,

@@ -10,8 +10,8 @@
 #include "../load/model/fwd.hpp"
 #include <sge/sprite/texture_animation.hpp> // TODO: fwd this too!
 #include <sge/sprite/rotation_type.hpp>
-#include <boost/scoped_ptr.hpp>
-#include <memory>
+#include <sge/scoped_ptr.hpp>
+#include <sge/auto_ptr.hpp>
 
 namespace sanguis
 {
@@ -35,7 +35,7 @@ public:
 	sanguis::draw::object &object();
 	sanguis::draw::object const &object() const;
 private:
-	typedef std::auto_ptr<
+	typedef sge::auto_ptr<
 		sge::sprite::texture_animation
 	> animation_auto_ptr;
 
@@ -60,9 +60,9 @@ private:
 	sanguis::draw::object*                  ref;
 
 	weapon_type::type                       weapon_;
-	boost::scoped_ptr<model_part_state>     state;
+	sge::scoped_ptr<model_part_state>       state;
 	
-	typedef boost::scoped_ptr<
+	typedef sge::scoped_ptr<
 		sge::sprite::texture_animation
 	> scoped_texture_animation;
 	scoped_texture_animation                animation_;

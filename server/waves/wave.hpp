@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_WAVES_WAVE_HPP_INCLUDED
 
 #include "../../time_type.hpp"
-#include <boost/noncopyable.hpp>
+#include <sge/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -14,7 +14,10 @@ struct environment;
 namespace waves
 {
 
-class wave : boost::noncopyable {
+class wave {
+	SGE_NONCOPYABLE(wave)
+protected:
+	wave();
 public:
 	virtual void process(
 		time_type diff,

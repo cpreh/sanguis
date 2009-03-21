@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_PERKS_AUTO_PTR_HPP_INCLUDED
 #define SANGUIS_SERVER_PERKS_AUTO_PTR_HPP_INCLUDED
 
-#include <memory>
+#include <sge/auto_ptr.hpp>
 
 namespace sanguis
 {
@@ -12,7 +12,7 @@ namespace perks
 
 class perk;
 
-typedef std::auto_ptr<perk> auto_ptr;
+typedef sge::auto_ptr<perk> auto_ptr;
 
 }
 }

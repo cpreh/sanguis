@@ -3,7 +3,7 @@
 
 #include "animation_container.hpp"
 #include <sge/random/uniform.hpp>
-#include <boost/noncopyable.hpp>
+#include <sge/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -14,7 +14,8 @@ namespace particle
 
 class animation;
 
-class random_animation : boost::noncopyable {
+class random_animation {
+	SGE_NONCOPYABLE(random_animation)
 public:
 	animation const &
 	operator()() const;

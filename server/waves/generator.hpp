@@ -3,7 +3,7 @@
 
 #include "wave.hpp"
 #include "../../time_type.hpp"
-#include <boost/noncopyable.hpp>
+#include <sge/noncopyable.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
 
 namespace sanguis
@@ -16,7 +16,8 @@ struct environment;
 namespace waves
 {
 
-class generator : boost::noncopyable {
+class generator {
+	SGE_NONCOPYABLE(generator)
 public:
 	generator();
 	void process(

@@ -4,12 +4,13 @@
 #include "time_type.hpp"
 #include <sge/time/unit.hpp>
 #include <sge/time/fun.hpp>
-#include <boost/noncopyable.hpp>
+#include <sge/noncopyable.hpp>
 
 namespace sanguis
 {
 
-class diff_clock : boost::noncopyable {
+class diff_clock {
+	SGE_NONCOPYABLE(diff_clock)
 public:
 	diff_clock();
 

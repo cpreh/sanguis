@@ -3,8 +3,8 @@
 
 #include "../../particle_type.hpp"
 #include <sge/filesystem/path.hpp>
+#include <sge/noncopyable.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
-#include <boost/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -20,7 +20,8 @@ namespace particle
 class context;
 class animations;
 
-class collection : boost::noncopyable {
+class collection {
+	SGE_NONCOPYABLE(collection)
 public:
 	animations const &
 	operator[](

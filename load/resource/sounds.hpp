@@ -8,7 +8,7 @@
 #include <sge/audio/player_fwd.hpp>
 #include <sge/audio/file_fwd.hpp>
 #include <sge/filesystem/path.hpp>
-#include <boost/noncopyable.hpp>
+#include <sge/noncopyable.hpp>
 #include <map>
 
 namespace sanguis
@@ -21,7 +21,8 @@ class sound_collection;
 namespace resource
 {
 
-class sounds : boost::noncopyable {
+class sounds {
+	SGE_NONCOPYABLE(sounds)
 public:
 	sound_collection const &
 	load(

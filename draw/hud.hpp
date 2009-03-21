@@ -5,14 +5,15 @@
 #include "../messages/types.hpp"
 #include <sge/font/object_fwd.hpp>
 #include <sge/time/frames_counter.hpp>
-#include <boost/noncopyable.hpp>
+#include <sge/noncopyable.hpp>
 
 namespace sanguis
 {
 namespace draw
 {
 
-class hud : boost::noncopyable {
+class hud {
+	SGE_NONCOPYABLE(hud)
 public:
 	explicit hud(
 		sge::font::object &);
