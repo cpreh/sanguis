@@ -14,7 +14,7 @@ class freeze : public aura {
 public:
 	freeze(
 		environment const &,
-		circle_type const &,
+		space_unit radius,
 		team::type team);
 private:
 	void do_effect(

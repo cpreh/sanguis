@@ -6,6 +6,7 @@
 #include "../collision/base.hpp"
 #include "../teams.hpp"
 #include "../types.hpp"
+#include "../../entity_id.hpp"
 
 namespace sanguis
 {
@@ -21,14 +22,19 @@ class aura : public collision::base {
 public:
 	virtual ~aura();
 
-	void pos(
+	void center(
 		pos_type const &);
+	void owner(
+		entity_id);
 protected:
 	aura(
 		environment const &,
-		circle_type const &,
+		space_unit radius,
 		team::type team,
 		influence::type);
+	
+	entity_id
+	owner() const;
 private:
 	bool
 	can_collide_with(
@@ -44,6 +50,7 @@ private:
 
 	team::type const      team_;
 	influence::type const influence_;
+	entity_id owner_;
 };
 
 }

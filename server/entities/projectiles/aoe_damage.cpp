@@ -1,9 +1,8 @@
 #include "aoe_damage.hpp"
 #include "../property.hpp"
-#include "../../buffs/burn.hpp"
-#include <sge/math/vector/basic_impl.hpp>
+#include "../../auras/burn.hpp"
 #include <sge/math/dim/basic_impl.hpp>
-#include <boost/assign/list_of.hpp>
+#include <sge/container/map_impl.hpp>
 
 sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 	server::environment const &env,
@@ -21,30 +20,20 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 		center,
 		messages::mu(0),
 		team_,
-		boost::assign::map_list_of
-			(	
-				entities::property_type::health,
-				entities::property(messages::mu(1))
-			),
+		property_map(),
 		dim_type(
 			radius * messages::mu(2),
 			radius * messages::mu(2)),
-		pulse_diff * static_cast<time_type>(max_pulses)),
-	pulse_diff(pulse_diff),
-	damage_per_pulse(damage_per_pulse),
-	damage_values(damage_values)
-{}
-
-void sanguis::server::entities::projectiles::aoe_damage::collision(
-	entity &e)
+		pulse_diff * static_cast<time_type>(max_pulses))
 {
-	e.add_buff(
-		buffs::auto_ptr(
-			new buffs::burn(
-				id(),
+	add_aura(
+		auras::auto_ptr(
+			new auras::burn(
+				environment(),
+				radius,
+				team_,
 				damage_per_pulse,
 				pulse_diff,
-				1,
 				damage_values
 			)
 		)

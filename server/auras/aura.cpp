@@ -8,7 +8,8 @@
 sanguis::server::auras::aura::~aura()
 {}
 
-void sanguis::server::auras::aura::pos(
+void
+sanguis::server::auras::aura::center(
 	messages::pos_type const &p)
 {
 	circle()->center(
@@ -19,21 +20,35 @@ void sanguis::server::auras::aura::pos(
 	);
 }
 
+void
+sanguis::server::auras::aura::owner(
+	entity_id const nowner)
+{
+	owner_ = nowner;
+}
+
 sanguis::server::auras::aura::aura(
 	environment const &env,
-	messages::circle_type const &circle_,
+	space_unit const radius,
 	team::type const team_,
 	influence::type const influence_)
 :
 	collision::base(
 		env.collision(),
-		circle_.origin(),
-		pos_type::null(),
-		circle_.radius()
+		pos_type::null(), // will be set later
+		pos_type::null(), // no speed
+		radius
 	),
 	team_(team_),
-	influence_(influence_)
+	influence_(influence_),
+	owner_(static_cast<entity_id>(-1)) // will also be set later
 {}
+
+sanguis::entity_id
+sanguis::server::auras::aura::owner() const
+{
+	return owner_;
+}
 
 bool
 sanguis::server::auras::aura::can_collide_with(

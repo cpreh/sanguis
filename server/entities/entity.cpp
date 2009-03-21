@@ -140,7 +140,7 @@ void sanguis::server::entities::entity::center(
 		aura_container::reference r,
 		auras_
 	)
-		r.pos(
+		r.center(
 			_center
 		);
 }
@@ -379,6 +379,18 @@ sanguis::server::entities::entity::add_aura(
 	auras::auto_ptr a)
 {
 	auras_.push_back(a);
+
+	auras::aura &ref(
+		auras_.back()
+	);
+
+	ref.center(
+		center()
+	);
+
+	ref.owner(
+		id()
+	);
 }
 
 sanguis::server::entities::entity::~entity()

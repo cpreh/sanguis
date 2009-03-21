@@ -4,12 +4,12 @@
 
 sanguis::server::auras::freeze::freeze(
 	environment const &env,
-	circle_type const &circle_,
+	space_unit const radius,
 	team::type const team)
 :
 	aura(
 		env,
-		circle_,
+		radius,
 		team,
 		influence::debuff
 	)
