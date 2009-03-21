@@ -3,7 +3,8 @@
 #include <boost/bind.hpp>
 
 sanguis::diff_clock::diff_clock()
-: diff_time(0)
+:
+	diff_time(0)
 {}
 
 void sanguis::diff_clock::update(
