@@ -1,5 +1,6 @@
 #include "logic.hpp"
 #include "invalid_id.hpp"
+#include "log.hpp"
 #include "../messages/give_weapon.hpp"
 #include "../messages/move.hpp"
 #include "../messages/player_direction.hpp"
@@ -20,7 +21,9 @@
 #include <sge/console/object.hpp>
 #include <sge/time/millisecond.hpp>
 #include <sge/time/resolution.hpp>
+#include <sge/log/headers.hpp>
 #include <sge/structure_cast.hpp>
+#include <sge/text.hpp>
 #include <boost/bind.hpp>
 #include <boost/assign/list_of.hpp>
 #include <boost/optional.hpp>
@@ -302,15 +305,41 @@ void sanguis::client::logic::give_perk(
 	sge::console::arg_list const &args)
 {
 	if(args.size() != 2)
+	{
+		SGE_LOG_WARNING(
+			log(),
+			sge::log::_1
+				<< SGE_TEXT("give_perk requires one argument")
+		);
 		return;
+	}
 	
+	sge::string const perk_name(
+		args[1]
+	);
+
 	perk_type::type const pt(
 		to_perk_type(
-			args[1]));
+			perk_name
+		)
+	);
+
 	if(pt != perk_type::size)
 		send(
 			messages::auto_ptr(
 				new messages::player_choose_perk(
 					player_id_,
-					pt)));
+					pt
+				)
+			)
+		);
+	else
+	{
+		SGE_LOG_WARNING(
+			log(),
+			sge::log::_1
+				<< SGE_TEXT("Invalid perk ")
+				<< perk_name
+		);
+	}
 }

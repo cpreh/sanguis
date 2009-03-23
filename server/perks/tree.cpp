@@ -1,7 +1,9 @@
 #include "tree.hpp"
+#include "../log.hpp"
 #include "../../exception.hpp"
 #include <sge/container/tree_impl.hpp>
 #include <sge/container/traversal.hpp>
+#include <sge/log/headers.hpp>
 #include <sge/text.hpp>
 
 namespace
@@ -24,10 +26,13 @@ sanguis::server::perks::tree::tree()
 	impl(
 		status(
 			perk_type::size,
-			true))
+			true
+		)
+	)
 {
 	impl.push_back(
-		perk_type::ims);
+		perk_type::ims
+	);
 }
 
 sanguis::server::perks::tree::~tree()
@@ -43,25 +48,40 @@ sanguis::server::perks::tree::choosable(
 	> traversal;
 	
 	traversal trav(
-		impl);
+		impl
+	);
 	
-	traversal::iterator const it = std::find_if(
-		trav.begin(),
-		trav.end(),
-		perk_equal(
-			p));
+	traversal::iterator const it(
+		std::find_if(
+			trav.begin(),
+			trav.end(),
+			perk_equal(
+				p
+			)
+		)
+	);
 	
 	if(it == trav.end())
 		return false;
 
 	for(
-		tree_type::const_iterator tree_it(
-			it.internal());
-		tree_it->has_parent();
-		tree_it = tree_it->child_position()
+		tree_type const *pos(
+			&(*it.internal()).parent()
+		); // we always have a parent dummy node
+		pos->has_parent();
+		pos = &pos->parent()
 	)
-		if(!(*it).value().chosen())
+	{
+		if(!pos->value().chosen())
+		{
+			SGE_LOG_WARNING(
+				log(),
+				sge::log::_1
+					<< SGE_TEXT("Perk not chooseable in tree")
+			);
 			return false;
+		}
+	}
 	return true;
 }
 
@@ -85,7 +105,7 @@ sanguis::server::perks::tree::take(
 	
 	if(it == trav.end())
 		throw exception(
-			SGE_TEXT("Perk von found in the tree!"));
+			SGE_TEXT("Perk not found in the tree!"));
 	
 	(*it).value().choose();
 }
