@@ -8,9 +8,7 @@
 #include "../../messages/disconnect.hpp"
 #include "../../messages/give_weapon.hpp"
 #include "../../messages/move.hpp"
-#include "../../messages/pause.hpp"
 #include "../../messages/remove.hpp"
-#include "../../messages/unpause.hpp"
 #include "../../draw/coord_transform.hpp"
 #include "../../load/context.hpp"
 #include <sge/renderer/state/list.hpp>
@@ -79,14 +77,19 @@ sanguis::client::states::running::running(
 			client_entity_type::background));
 }
 
-boost::statechart::result
-sanguis::client::states::running::react(
+void 
+sanguis::client::states::running::draw(
 	tick_event const &t)
 {
+	drawer.draw(t.delta());
+}
+
+void 
+sanguis::client::states::running::process(
+	tick_event const &)
+{
 	context<machine>().dispatch();
-
 	context<machine>().sound_pool().update();
-
 	music_.update();
 
 	// update: cursor pos (TODO: this should be done in a better way)
@@ -96,10 +99,14 @@ sanguis::client::states::running::react(
 			screen_to_virtual(
 				context<machine>().renderer()->screen_size(),
 				logic_.cursor_pos())));
+}
 
-	drawer.draw(t.delta());
-	
-	return discard_event();
+void 
+sanguis::client::states::running::pause(
+	bool const b)
+{
+	logic_.pause(b);
+	drawer.pause(b);
 }
 
 boost::statechart::result
@@ -112,9 +119,7 @@ sanguis::client::states::running::react(
 			messages::disconnect,
 			messages::give_weapon,
 			messages::move,
-			messages::pause,
-			messages::remove,
-			messages::unpause
+			messages::remove
 		>,
 		boost::statechart::result>(
 		*this,
@@ -160,15 +165,6 @@ sanguis::client::states::running::operator()(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	messages::pause const &)
-{
-	logic_.pause(true);
-	drawer.pause(true);
-	return discard_event();
-}
-
-boost::statechart::result
-sanguis::client::states::running::operator()(
 	messages::remove const &m)
 {
 	logic_.remove(
@@ -176,15 +172,6 @@ sanguis::client::states::running::operator()(
 	drawer.process_message(
 		m);
 	// TODO: check the logic if we died
-	return discard_event();
-}
-
-boost::statechart::result
-sanguis::client::states::running::operator()(
-	messages::unpause const &)
-{
-	logic_.pause(false);
-	drawer.pause(false);
 	return discard_event();
 }
 

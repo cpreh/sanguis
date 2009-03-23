@@ -33,28 +33,35 @@ struct player_action;
 
 namespace states
 {
+class unpaused;
+
 class running
-	: public boost::statechart::state<running,machine>
+	: public boost::statechart::state<running,machine,unpaused>
 {
 	public:
 	typedef boost::mpl::list<
-		boost::statechart::custom_reaction<tick_event>,
 		boost::statechart::custom_reaction<message_event>
 		> reactions;
 
 	running(my_context);
-	boost::statechart::result react(tick_event const &);
+	void draw(tick_event const &);
+	void process(tick_event const &);
+	void pause(bool);
 	boost::statechart::result react(message_event const &);
 	
-	boost::statechart::result operator()(messages::assign_id const &);
-	boost::statechart::result operator()(messages::disconnect const &);
-	boost::statechart::result operator()(messages::give_weapon const &);
-	boost::statechart::result operator()(messages::move const &);
-	boost::statechart::result operator()(messages::pause const &);
-	boost::statechart::result operator()(messages::remove const &);
-	boost::statechart::result operator()(messages::unpause const &);
+	boost::statechart::result operator()(
+		messages::assign_id const &);
+	boost::statechart::result operator()(
+		messages::disconnect const &);
+	boost::statechart::result operator()(
+		messages::give_weapon const &);
+	boost::statechart::result operator()(
+		messages::move const &);
+	boost::statechart::result operator()(
+		messages::remove const &);
 	private:
-	boost::statechart::result handle_default_msg(messages::base const &);
+	boost::statechart::result handle_default_msg(
+		messages::base const &);
 
 	void send_message(
 		messages::auto_ptr);
@@ -64,7 +71,6 @@ class running
 	logic                           logic_;
 	input_handler                   input;
 	sge::signal::auto_connection    input_connection;
-	bool                            paused;
 };
 }
 }

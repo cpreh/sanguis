@@ -1,6 +1,7 @@
 #include "menu.hpp"
 #include "connecting.hpp"
 #include "running.hpp"
+#include "unpaused.hpp"
 #include "../log.hpp"
 #include "../../dispatch_type.hpp"
 #include "../../messages/assign_id.hpp"
