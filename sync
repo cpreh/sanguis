@@ -1,0 +1,36 @@
+if [ $# -eq 0 ]; then
+	echo "usage: ./sync [push|pull]"
+	exit -1;
+fi;
+
+rsync_args="-r --verbose -z --progress -h -d -i -e ssh"
+
+if [ $1 = "push" ]; then
+	echo "pushing to git";
+	git push;
+	if [ $? -ne 0 ]; then
+		echo "pushing to git failed, not pushing to rsync";
+		exit $?;
+	fi;
+	rsync $rsync_args media/ rsync@freundlich.mine.nu:/home/rsync/sanguis/media;
+	if [ $? -ne 0 ]; then
+		echo "pushing to rsync failed";
+		exit $?;
+	fi;
+elif [ $1 = "pull" ]; then
+	echo "pulling from git";
+	git pull;
+	if [ $? -ne 0 ]; then
+		echo "pulling from git failed, not pulling from rsync";
+		exit $?
+	fi;
+	echo "pulling from rsync"; 
+	rsync $rsync_args rsync@freundlich.mine.nu:/home/rsync/sanguis/media .;
+	if [ $? -ne 0 ]; then
+		echo "pulling from rsync failed";
+		exit $?
+	fi;
+else
+	echo "invalid argument: $1";
+	exit -2;
+fi
