@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_WEAPONS_PISTOL_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_PISTOL_HPP_INCLUDED
 
+#include "delayed_attack_fwd.hpp"
 #include "weapon.hpp"
 #include "../types.hpp"
 
@@ -10,8 +11,6 @@ namespace server
 {
 namespace weapons
 {
-
-class delayed_attack;
 
 class pistol : public weapon {
 public:

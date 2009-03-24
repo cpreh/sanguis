@@ -1,6 +1,7 @@
 #ifndef SANGUIS_DRAW_FACTORY_SIMPLE_SPRITE_HPP_INCLUDED
 #define SANGUIS_DRAW_FACTORY_SIMPLE_SPRITE_HPP_INCLUDED
 
+#include "../environment_fwd.hpp"
 #include "../entity.hpp"
 #include "../z_ordering.hpp"
 #include "../entity_auto_ptr.hpp"
@@ -11,7 +12,6 @@ namespace sanguis
 {
 namespace draw
 {
-class environment;
 namespace factory
 {
 

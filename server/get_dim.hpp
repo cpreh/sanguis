@@ -1,18 +1,12 @@
 #ifndef SANGUIS_SERVER_GET_DIM_HPP_INCLUDED
 #define SANGUIS_SERVER_GET_DIM_HPP_INCLUDED
 
+#include "../load/model/context_fwd.hpp"
 #include "types.hpp"
 #include <sge/string.hpp>
 
 namespace sanguis
 {
-namespace load
-{
-namespace model
-{
-class context;
-}
-}
 namespace server
 {
 

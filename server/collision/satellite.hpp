@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_COLLISION_SATELLITE_HPP_INCLUDED
 #define SANGUIS_SERVER_COLLISION_SATELLITE_HPP_INCLUDED
 
+#include "base_fwd.hpp"
 #include <sge/collision/satellite.hpp>
 
 namespace sanguis
@@ -9,9 +10,6 @@ namespace server
 {
 namespace collision
 {
-
-class base;
-
 class satellite : public sge::collision::satellite {
 public:
 	explicit satellite(

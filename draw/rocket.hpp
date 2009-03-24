@@ -1,15 +1,13 @@
 #ifndef SANGUIS_DRAW_ROCKET_HPP_INCLUDED
 #define SANGUIS_DRAW_ROCKET_HPP_INCLUDED
 
+#include "environment.hpp"
 #include "bullet.hpp"
 
 namespace sanguis
 {
 namespace draw
 {
-
-class environment;
-
 class rocket : public bullet {
 public:
 	rocket(

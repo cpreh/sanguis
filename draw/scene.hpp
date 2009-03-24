@@ -5,6 +5,9 @@
 #include "hud.hpp"
 #include "system.hpp"
 #include "environment.hpp"
+#include "entity_fwd.hpp"
+#include "background_fwd.hpp"
+#include "../load/context_fwd.hpp"
 #include "../entity_id.hpp"
 #include "../messages/fwd.hpp"
 #include "../time_type.hpp"
@@ -21,16 +24,8 @@
 
 namespace sanguis
 {
-namespace load
-{
-class context;
-}
 namespace draw
 {
-
-class entity;
-class background;
-
 class scene {
 	SGE_NONCOPYABLE(scene)
 public:

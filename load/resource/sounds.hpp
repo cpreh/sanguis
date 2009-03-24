@@ -1,6 +1,7 @@
 #ifndef SANGUIS_LOAD_RESOURCE_SOUNDS_HPP_INCLUDED
 #define SANGUIS_LOAD_RESOURCE_SOUNDS_HPP_INCLUDED
 
+#include "../sound_collection_fwd.hpp"
 #include "../sound_type.hpp"
 #include <sge/audio/sound_fwd.hpp>
 #include <sge/audio/multi_loader_fwd.hpp>
@@ -15,9 +16,6 @@ namespace sanguis
 {
 namespace load
 {
-
-class sound_collection;
-
 namespace resource
 {
 

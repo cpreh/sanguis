@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_ENEMIES_FACTORY_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_ENEMIES_FACTORY_HPP_INCLUDED
 
+#include "../../environment_fwd.hpp"
 #include "../entity.hpp"
 #include "../../../messages/types.hpp"
 #include "../../../enemy_type.hpp"
@@ -9,9 +10,6 @@ namespace sanguis
 {
 namespace server
 {
-
-struct environment;
-
 namespace entities
 {
 namespace enemies

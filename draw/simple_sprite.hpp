@@ -1,6 +1,7 @@
 #ifndef SANGUIS_DRAW_SIMPLE_SPRITE_HPP_INCLUDED
 #define SANGUIS_DRAW_SIMPLE_SPRITE_HPP_INCLUDED
 
+#include "environment_fwd.hpp"
 #include "entity.hpp"
 #include "object.hpp"
 #include <sge/texture/part_fwd.hpp>
@@ -10,9 +11,6 @@ namespace sanguis
 {
 namespace draw
 {
-
-class environment;
-
 class simple_sprite : public entity {
 public:
 	simple_sprite(

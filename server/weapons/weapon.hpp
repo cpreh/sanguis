@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_WEAPONS_WEAPON_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_WEAPON_HPP_INCLUDED
 
+#include "delayed_attack_fwd.hpp"
 #include "../../time_type.hpp"
 #include "../../messages/base.hpp"
 #include "../../weapon_type.hpp"
@@ -20,9 +21,6 @@ namespace server
 {
 namespace weapons
 {
-
-class delayed_attack;
-
 class weapon {
 	SGE_NONCOPYABLE(weapon)
 public:

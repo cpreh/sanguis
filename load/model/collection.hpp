@@ -1,6 +1,7 @@
 #ifndef SANGUIS_LOAD_MODEL_COLLECTION_HPP_INCLUDED
 #define SANGUIS_LOAD_MODEL_COLLECTION_HPP_INCLUDED
 
+#include "../resource/context_fwd.hpp"
 #include "model.hpp"
 #include <sge/string.hpp>
 #include <map>
@@ -9,10 +10,6 @@ namespace sanguis
 {
 namespace load
 {
-namespace resource
-{
-class context;
-}
 namespace model
 {
 

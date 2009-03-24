@@ -1,6 +1,9 @@
 #ifndef SANGUIS_LOAD_PARTICLE_COLLECTION_HPP_INCLUDED
 #define SANGUIS_LOAD_PARTICLE_COLLECTION_HPP_INCLUDED
 
+#include "context_fwd.hpp"
+#include "animations_fwd.hpp"
+#include "../resource/context_fwd.hpp"
 #include "../../particle_type.hpp"
 #include <sge/filesystem/path.hpp>
 #include <sge/noncopyable.hpp>
@@ -10,16 +13,8 @@ namespace sanguis
 {
 namespace load
 {
-namespace resource
-{
-class context;
-}
 namespace particle
 {
-
-class context;
-class animations;
-
 class collection {
 	SGE_NONCOPYABLE(collection)
 public:

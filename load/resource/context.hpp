@@ -1,6 +1,10 @@
 #ifndef SANGUIS_LOAD_RESOURCE_CONTEXT_HPP_INCLUDED
 #define SANGUIS_LOAD_RESOURCE_CONTEXT_HPP_INCLUDED
 
+#include "../context_fwd.hpp"
+#include "textures_fwd.hpp"
+#include "sounds_fwd.hpp"
+#include "animations_fwd.hpp"
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image/loader_fwd.hpp>
 #include <sge/audio/multi_loader_fwd.hpp>
@@ -13,16 +17,8 @@ namespace sanguis
 {
 namespace load
 {
-
-class context;
-
 namespace resource
 {
-
-class textures;
-class sounds;
-class animations;
-
 class context {
 	SGE_NONCOPYABLE(context)
 public:

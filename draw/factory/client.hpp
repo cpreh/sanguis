@@ -1,6 +1,7 @@
 #ifndef SANGUIS_DRAW_FACTORY_CLIENT_HPP_INCLUDED
 #define SANGUIS_DRAW_FACTORY_CLIENT_HPP_INCLUDED
 
+#include "../environment_fwd.hpp"
 #include "../entity_auto_ptr.hpp"
 #include "../../client_messages/fwd.hpp"
 #include <sge/renderer/screen_size.hpp>
@@ -9,7 +10,6 @@ namespace sanguis
 {
 namespace draw
 {
-class environment;
 namespace factory
 {
 

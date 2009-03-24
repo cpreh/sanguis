@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PROPERTY_MAP_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PROPERTY_MAP_HPP_INCLUDED
 
+#include "property_fwd.hpp"
 #include "property_type.hpp"
 #include <sge/container/map_fwd.hpp>
 #include <map>
@@ -11,9 +12,6 @@ namespace server
 {
 namespace entities
 {
-
-class property;
-
 typedef sge::container::map<
 	std::map,
 	property_type::type,

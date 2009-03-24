@@ -1,6 +1,8 @@
 #ifndef SANGUIS_SERVER_STATES_UNPAUSED_HPP_INCLUDED
 #define SANGUIS_SERVER_STATES_UNPAUSED_HPP_INCLUDED
 
+#include "../message_event_fwd.hpp"
+#include "../environment_fwd.hpp"
 #include "running.hpp"
 #include "../../messages/fwd.hpp"
 #include "../../net/types.hpp"
@@ -14,10 +16,6 @@ namespace sanguis
 {
 namespace server
 {
-
-struct message_event;
-struct environment;
-
 namespace states
 {
 

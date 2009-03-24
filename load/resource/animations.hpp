@@ -1,6 +1,7 @@
 #ifndef SANGUIS_LOAD_RESOURCE_ANIMATIONS_HPP_INCLUDED
 #define SANGUIS_LOAD_RESOURCE_ANIMATIONS_HPP_INCLUDED
 
+#include "textures_fwd.hpp"
 #include <sge/sprite/animation_series.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <sge/filesystem/path.hpp>
@@ -13,9 +14,6 @@ namespace load
 {
 namespace resource
 {
-
-class textures;
-
 class animations {
 	SGE_NONCOPYABLE(animations)
 public:

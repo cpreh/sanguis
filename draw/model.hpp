@@ -1,6 +1,9 @@
 #ifndef SANGUIS_DRAW_MODEL_HPP_INCLUDED
 #define SANGUIS_DRAW_MODEL_HPP_INCLUDED
 
+#include "sprite_part_index_fwd.hpp"
+#include "environment_fwd.hpp"
+#include "model_part_fwd.hpp"
 #include "sprite.hpp"
 #include "healthbar.hpp"
 #include "remove_action.hpp"
@@ -15,11 +18,6 @@ namespace sanguis
 {
 namespace draw
 {
-
-class sprite_part_index;
-class model_part;
-class environment;
-
 class model : public sprite {
 public:
 	model(

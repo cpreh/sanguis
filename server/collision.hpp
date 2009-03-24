@@ -1,17 +1,13 @@
-#ifndef SANGUIS_SERVER_COLLISSION_HPP_INCLUDED
-#define SANGUIS_SERVER_COLLISSION_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_COLLISION_HPP_INCLUDED
+#define SANGUIS_SERVER_COLLISION_HPP_INCLUDED
 
+#include "entities/entity_fwd.hpp"
 #include "../messages/types.hpp"
 
 namespace sanguis
 {
 namespace server
 {
-namespace entities
-{
-class entity;
-}
-
 bool collides(
 	entities::entity const&,
 	entities::entity const&);

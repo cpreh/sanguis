@@ -1,15 +1,12 @@
 #ifndef SANGUIS_DRAW_ENVIRONMENT_HPP_INCLUDED
 #define SANGUIS_DRAW_ENVIRONMENT_HPP_INCLUDED
 
+#include "../load/context_fwd.hpp"
 #include "insert_callback.hpp"
 #include "system_fwd.hpp"
 
 namespace sanguis
 {
-namespace load
-{
-class context;
-}
 namespace draw
 {
 

@@ -2,6 +2,7 @@
 #define SANGUIS_DRAW_PARTICLE_PROPERTY_MAP_HPP_INCLUDED
 
 #include "property_container.hpp"
+#include "properties_fwd.hpp"
 #include "../../particle_type.hpp"
 
 namespace sanguis
@@ -10,9 +11,6 @@ namespace draw
 {
 namespace particle
 {
-
-class properties;
-
 class property_map {
 public:
 	explicit property_map(

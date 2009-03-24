@@ -1,6 +1,8 @@
 #ifndef SANGUIS_SERVER_ENTITIES_ENTITY_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_ENTITY_HPP_INCLUDED
 
+#include "base_parameters_fwd.hpp"
+#include "auto_weak_link_fwd.hpp"
 #include "entity_fwd.hpp"
 #include "property.hpp"
 #include "property_map.hpp"
@@ -31,10 +33,6 @@ namespace server
 {
 namespace entities
 {
-
-class base_parameters;
-class auto_weak_link;
-
 class entity : public collision::base {
 	SGE_NONCOPYABLE(entity)
 protected:

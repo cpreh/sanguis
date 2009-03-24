@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_WAVES_WAVE_HPP_INCLUDED
 #define SANGUIS_SERVER_WAVES_WAVE_HPP_INCLUDED
 
+#include "../environment_fwd.hpp"
 #include "../../time_type.hpp"
 #include <sge/noncopyable.hpp>
 
@@ -8,9 +9,6 @@ namespace sanguis
 {
 namespace server
 {
-
-struct environment;
-
 namespace waves
 {
 

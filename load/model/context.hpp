@@ -1,6 +1,9 @@
 #ifndef SANGUIS_LOAD_MODEL_CONTEXT_HPP_INCLUDED
 #define SANGUIS_LOAD_MODEL_CONTEXT_HPP_INCLUDED
 
+#include "../context_fwd.hpp"
+#include "../resource/context_fwd.hpp"
+#include "collection_fwd.hpp"
 #include <sge/scoped_ptr.hpp>
 #include <sge/noncopyable.hpp>
 
@@ -8,17 +11,8 @@ namespace sanguis
 {
 namespace load
 {
-
-class context;
-
-namespace resource
-{
-class context;
-}
 namespace model
 {
-
-class collection;
 
 class context {
 	SGE_NONCOPYABLE(context)

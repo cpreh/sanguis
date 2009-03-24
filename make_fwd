@@ -1,0 +1,31 @@
+#!/bin/bash
+
+header="SANGUIS_$(echo $1 | tr '/' '_' | tr 'a-z' 'A-Z')_FWD_HPP_INCLUDED"
+file="$1_fwd.hpp"
+
+if [ -f "$file" ]; then
+	echo "file " $file " exists already"
+	exit -1;
+fi;
+
+echo "#ifndef ${header}" >> $file
+echo "#define ${header}" >> $file
+echo "" >> $file
+echo "namespace sanguis" >> $file
+echo "{" >> $file
+
+counter=1
+for i in $(echo $1 | sed -e 's#/[^/]*$##' | tr '/' ' '); do
+	echo "namespace $i" >> $file;
+	echo "{" >> $file;
+	((counter++));
+done;
+
+echo "class $(echo $1 | sed -e 's#^.*/\(.*\)$#\1#');" >> $file;
+
+for i in $(seq 1 $counter); do
+	echo '}' >> $file;
+done
+
+echo "" >> $file
+echo "#endif" >> $file

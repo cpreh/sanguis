@@ -1,6 +1,8 @@
 #ifndef SANGUIS_DRAW_SPRITE_HPP_INCLUDED
 #define SANGUIS_DRAW_SPRITE_HPP_INCLUDED
 
+#include "environment_fwd.hpp"
+#include "sprite_part_index_fwd.hpp"
 #include "entity.hpp"
 #include "vector2.hpp"
 #include "object_fwd.hpp"
@@ -15,10 +17,6 @@ namespace sanguis
 {
 namespace draw
 {
-
-class sprite_part_index;
-class environment;
-
 class sprite : public entity {
 	typedef std::vector<
 		object

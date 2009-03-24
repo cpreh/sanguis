@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_STATES_RUNNING_HPP_INCLUDED
 #define SANGUIS_CLIENT_STATES_RUNNING_HPP_INCLUDED
 
+#include "unpaused_fwd.hpp"
 #include "../music_handler.hpp"
 #include "../message_event.hpp"
 #include "../machine.hpp"
@@ -12,6 +13,7 @@
 #include "../../messages/base.hpp"
 #include "../../messages/entity_message.hpp"
 #include "../../draw/scene.hpp"
+#include "../../draw/player_fwd.hpp"
 #include <sge/signal/auto_connection.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
@@ -21,20 +23,10 @@
 
 namespace sanguis
 {
-namespace draw
-{
-class player;
-}
-
 namespace client
 {
-
-struct player_action;
-
 namespace states
 {
-class unpaused;
-
 class running
 	: public boost::statechart::state<running,machine,unpaused>
 {

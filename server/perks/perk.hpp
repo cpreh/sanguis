@@ -1,17 +1,13 @@
 #ifndef SANGUIS_SERVER_PERKS_PERK_HPP_INCLUDED
 #define SANGUIS_SERVER_PERKS_PERK_HPP_INCLUDED
 
+#include "../entities/entity_fwd.hpp"
 #include <sge/noncopyable.hpp>
 
 namespace sanguis
 {
 namespace server
 {
-
-namespace entities
-{
-class entity;
-}
 
 namespace perks
 {

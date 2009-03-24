@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_INPUT_HANDLER_HPP_INCLUDED
 #define SANGUIS_CLIENT_INPUT_HANDLER_HPP_INCLUDED
 
+#include "player_action_fwd.hpp"
 #include <sge/input/key_pair_fwd.hpp>
 #include <sge/input/key_state.hpp>
 #include <boost/function.hpp>
@@ -9,8 +10,6 @@ namespace sanguis
 {
 namespace client
 {
-
-struct player_action;
 
 class input_handler {
 public:

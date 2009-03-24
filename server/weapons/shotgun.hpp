@@ -1,17 +1,16 @@
 #ifndef SANGUIS_SERVER_WEAPONS_SHOTGUN_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_SHOTGUN_HPP_INCLUDED
 
+#include "delayed_attack_fwd.hpp"
 #include "weapon.hpp"
 #include "../types.hpp"
 
-namespace sanguis {
+namespace sanguis 
+{
 namespace server
 {
 namespace weapons
 {
-
-class delayed_attack;
-
 class shotgun : public weapon {
 public:
 	shotgun(

@@ -1,6 +1,9 @@
 #ifndef SANGUIS_LOAD_MODEL_ANIMATION_HPP_INCLUDED
 #define SANGUIS_LOAD_MODEL_ANIMATION_HPP_INCLUDED
 
+#include "global_parameters_fwd.hpp"
+#include "animation_sound_fwd.hpp"
+#include "../resource/context_fwd.hpp"
 #include <sge/sprite/animation_series.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <sge/parse/ini/entry_vector.hpp>
@@ -10,15 +13,8 @@ namespace sanguis
 {
 namespace load
 {
-namespace resource
-{
-class context;
-}
 namespace model
 {
-
-struct global_parameters;
-class animation_sound;
 
 class animation {
 public:

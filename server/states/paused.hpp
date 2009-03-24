@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_STATES_PAUSED_HPP_INCLUDED
 
 #include "running.hpp"
+#include "../environment_fwd.hpp"
 #include "../../messages/fwd.hpp"
 #include "../../net/types.hpp"
 #include <sge/log/fwd.hpp>
@@ -14,9 +15,6 @@ namespace sanguis
 {
 namespace server
 {
-
-struct environment;
-
 namespace states
 {
 

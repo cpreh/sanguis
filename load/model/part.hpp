@@ -1,6 +1,7 @@
 #ifndef SANGUIS_LOAD_MODEL_PART_HPP_INCLUDED
 #define SANGUIS_LOAD_MODEL_PART_HPP_INCLUDED
 
+#include "../resource/context_fwd.hpp"
 #include "weapon_category.hpp"
 #include "global_parameters.hpp"
 #include "../../weapon_type.hpp"
@@ -13,10 +14,6 @@ namespace sanguis
 {
 namespace load
 {
-namespace resource
-{
-class context;
-}
 namespace model
 {
 

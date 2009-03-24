@@ -2,14 +2,12 @@
 #define SANGUIS_DRAW_HEALTHBAR_HPP_INCLUDED
 
 #include "sprite.hpp"
+#include "environment_fwd.hpp"
 
 namespace sanguis
 {
 namespace draw
 {
-
-class environment;
-
 class healthbar : public sprite {
 public:
 	explicit healthbar(

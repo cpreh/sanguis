@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_BUFFS_BUFF_HPP_INCLUDED
 #define SANGUIS_SERVER_BUFFS_BUFF_HPP_INCLUDED
 
+#include "../entities/entity_fwd.hpp"
 #include "../../time_type.hpp"
 #include "../../entity_id.hpp"
 #include <sge/noncopyable.hpp>
@@ -9,10 +10,6 @@ namespace sanguis
 {
 namespace server
 {
-namespace entities
-{
-class entity;
-}
 namespace buffs
 {
 

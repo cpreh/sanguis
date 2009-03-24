@@ -1,6 +1,7 @@
 #ifndef SANGUIS_DRAW_MODEL_PART_HPP_INCLUDED
 #define SANGUIS_DRAW_MODEL_PART_HPP_INCLUDED
 
+#include "model_part_state_fwd.hpp"
 #include "object_fwd.hpp"
 #include "funit.hpp"
 #include "../animation_type.hpp"
@@ -17,9 +18,6 @@ namespace sanguis
 {
 namespace draw
 {
-
-class model_part_state;
-
 class model_part {
 public:
 	model_part(

@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_AUTO_WEAK_LINK_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_AUTO_WEAK_LINK_HPP_INCLUDED
 
+#include "entity_fwd.hpp"
 #include "weak_link_pair.hpp"
 #include "auto_weak_link_ref.hpp"
 
@@ -10,9 +11,6 @@ namespace server
 {
 namespace entities
 {
-
-class entity;
-
 class auto_weak_link {
 public:
 	auto_weak_link();

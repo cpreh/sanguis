@@ -1,8 +1,10 @@
 #ifndef SANGUIS_LOAD_MODEL_CONDITIONAL_SOUND_HPP_INCLUDED
 #define SANGUIS_LOAD_MODEL_CONDITIONAL_SOUND_HPP_INCLUDED
 
+#include "../resource/context_fwd.hpp"
 #include "random_sound.hpp"
 #include "../probability_type.hpp"
+#include "../sound_collection_fwd.hpp"
 #include <sge/audio/sound_fwd.hpp>
 #include <sge/random/uniform.hpp>
 
@@ -10,13 +12,6 @@ namespace sanguis
 {
 namespace load
 {
-
-class sound_collection;
-
-namespace resource
-{
-class context;
-}
 namespace model
 {
 

@@ -1,6 +1,7 @@
 #ifndef SANGUIS_DRAW_ENTITY_HPP_INCLUDED
 #define SANGUIS_DRAW_ENTITY_HPP_INCLUDED
 
+#include "environment_fwd.hpp"
 #include "system_fwd.hpp"
 #include "vector2.hpp"
 #include "remove_action.hpp"
@@ -17,9 +18,6 @@ namespace sanguis
 {
 namespace draw
 {
-
-class environment;
-
 class entity {
 	SGE_NONCOPYABLE(entity)
 public:

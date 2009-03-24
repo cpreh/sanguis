@@ -1,9 +1,9 @@
 #ifndef SANGUIS_DRAW_MODEL_PART_STATE_HPP_INCLUDED
 #define SANGUIS_DRAW_MODEL_PART_STATE_HPP_INCLUDED
 
-// TODO: forward these two
-#include "../load/model/part.hpp"
-#include "../load/model/animation.hpp"
+#include "model_part_fwd.hpp"
+#include "../load/model/part_fwd.hpp"
+#include "../load/model/animation_fwd.hpp"
 #include "../animation_type.hpp"
 #include "../weapon_type.hpp"
 #include <sge/audio/sound_fwd.hpp>
@@ -13,7 +13,6 @@ namespace sanguis
 {
 namespace draw
 {
-class model_part;
 class model_part_state
 {
 	public:

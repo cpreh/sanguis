@@ -2,6 +2,7 @@
 #include "../media_path.hpp"
 #include "../load/resource/sounds.hpp"
 #include "../load/sound_collection.hpp"
+#include "../load/resource/sounds.hpp"
 #include <sge/audio/sound.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/console/object.hpp>

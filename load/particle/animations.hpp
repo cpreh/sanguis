@@ -1,6 +1,9 @@
 #ifndef SANGUIS_LOAD_PARTICLE_ANIMATIONS_HPP_INCLUDED
 #define SANGUIS_LOAD_PARTICLE_ANIMATIONS_HPP_INCLUDED
 
+#include "animation_fwd.hpp"
+#include "random_animation_fwd.hpp"
+#include "../resource/context_fwd.hpp"
 #include "animation_container.hpp"
 #include <sge/filesystem/path.hpp>
 #include <sge/scoped_ptr.hpp>
@@ -10,16 +13,8 @@ namespace sanguis
 {
 namespace load
 {
-namespace resource
-{
-class context;
-}
 namespace particle
 {
-
-class animation;
-class random_animation;
-
 class animations {
 	SGE_NONCOPYABLE(animations)
 public:

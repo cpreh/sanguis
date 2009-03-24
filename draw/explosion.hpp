@@ -1,10 +1,12 @@
 #ifndef SANGUIS_DRAW_EXPLOSION_HPP_INCLUDED
 #define SANGUIS_DRAW_EXPLOSION_HPP_INCLUDED
 
+#include "environment_fwd.hpp"
 #include "entity.hpp"
 #include "particle/base_ptr.hpp"
 #include "particle/container.hpp"
 #include "particle/property_map.hpp"
+#include "particle/properties_fwd.hpp"
 #include "../particle_type.hpp"
 #include "../load/model/random_sound.hpp"
 #include <sge/sprite/point.hpp>
@@ -14,13 +16,6 @@ namespace sanguis
 {
 namespace draw
 {
-namespace particle
-{
-class properties;
-}
-
-class environment;
-
 class explosion : public entity {
 public:
 	explosion(

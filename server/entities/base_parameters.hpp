@@ -3,7 +3,7 @@
 
 #include "property_map.hpp"
 #include "property.hpp"
-#include "../environment.hpp"
+#include "../environment_fwd.hpp"
 #include "../teams.hpp"
 #include "../types.hpp"
 #include "../../damage_type.hpp"
@@ -16,9 +16,6 @@ namespace sanguis
 {
 namespace server
 {
-
-struct environment;
-
 namespace entities
 {
 

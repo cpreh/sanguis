@@ -1,10 +1,12 @@
 #ifndef SANGUIS_CLIENT_MACHINE_HPP_INCLUDED
 #define SANGUIS_CLIENT_MACHINE_HPP_INCLUDED
 
+#include "states/start_fwd.hpp"
+#include "console_wrapper.hpp"
+#include "../load/context_fwd.hpp"
 #include "../messages/base.hpp"
 #include "../net/client.hpp"
 #include "../tick_event.hpp"
-#include "console_wrapper.hpp"
 
 #include <sge/font/object_fwd.hpp>
 #include <sge/input/key_type.hpp>
@@ -21,19 +23,8 @@
 
 namespace sanguis
 {
-namespace load
-{
-class context;
-}
-
 namespace client
 {
-
-namespace states
-{
-struct start;
-}
-
 struct machine
 	: public boost::statechart::state_machine<machine, states::start>
 {

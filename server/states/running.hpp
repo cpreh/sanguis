@@ -1,6 +1,9 @@
 #ifndef SANGUIS_SERVER_STATES_RUNNING_HPP_INCLUDED
 #define SANGUIS_SERVER_STATES_RUNNING_HPP_INCLUDED
 
+#include "unpaused_fwd.hpp"
+#include "../message_event_fwd.hpp"
+#include "../../load/context_fwd.hpp"
 #include "../machine.hpp"
 #include "../send_callback.hpp"
 #include "../console_print_callback.hpp"
@@ -21,20 +24,10 @@
 
 namespace sanguis
 {
-namespace load
-{
-class context;
-}
 namespace server
 {
-
-struct message_event;
-
 namespace states
 {
-
-class unpaused;
-
 class running
 	: public boost::statechart::state<running,machine,unpaused>
 {
