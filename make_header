@@ -1,0 +1,55 @@
+#!/bin/bash
+
+header="SANGUIS_$(echo $1 | tr '/' '_' | tr 'a-z' 'A-Z')_HPP_INCLUDED"
+filename="$1.hpp"
+
+if [ $# -eq 0 ]; then
+	echo "usage: ./make_header name [-with-file]";
+	exit 0;
+fi;
+
+if [ -f "$filename" ]; then
+	echo "file ${filename} exists already"
+	exit -1;
+fi;
+
+echo "#ifndef ${header}" >> $filename
+echo "#define ${header}" >> $filename
+echo "" >> $filename
+
+echo "namespace sanguis" >> $filename
+echo "{" >> $filename
+
+counter=1
+for i in $(echo $1 | sed -e 's#/[^/]*$##' | tr '/' ' '); do
+	echo "namespace $i" >> $filename;
+	echo "{" >> $filename;
+	((counter++));
+done;
+
+echo "" >> $filename;
+
+for i in $(seq 1 $counter); do
+	echo '}' >> $filename;
+done
+
+echo "" >> $filename
+echo "#endif // ${header}" >> $filename
+
+if [ $# -eq 1 ]; then
+	exit 0;
+fi;
+
+if [ $2 = "-with-file" ]; then
+	newfilename="$1.cpp"
+
+	if [ -f "$newfilename" ]; then
+		echo "file ${newfilename} exists already";
+		exit -1;
+	fi;
+
+	base=$(basename $1);
+
+	echo "#include \"${base}.hpp\"" >> ${newfilename}
+	echo "" >> ${newfilename}
+fi;
