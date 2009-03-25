@@ -12,7 +12,7 @@ if [ $1 = "push" ]; then
 		echo "pushing to git failed, not pushing to rsync";
 		exit $?;
 	fi;
-	rsync $rsync_args media/ rsync@freundlich.mine.nu:/home/rsync/sanguis/media;
+	rsync $rsync_args media/ rsync@timeoutd.org:
 	if [ $? -ne 0 ]; then
 		echo "pushing to rsync failed";
 		exit $?;
@@ -25,7 +25,7 @@ elif [ $1 = "pull" ]; then
 		exit $?
 	fi;
 	echo "pulling from rsync"; 
-	rsync $rsync_args rsync@freundlich.mine.nu:/home/rsync/sanguis/media .;
+	rsync $rsync_args rsync@timeoutd.org: media/;
 	if [ $? -ne 0 ]; then
 		echo "pulling from rsync failed";
 		exit $?
