@@ -32,6 +32,7 @@ void sanguis::server::weapons::weapon::update(
 	assert(magazine_used <= magazine_size());
 
 	diff.update(tm);
+	ias_diff.update(tm * (static_cast<space_unit>(1) + ias));
 
 	switch(state_) {
 	case state::ready:
@@ -132,6 +133,7 @@ bool sanguis::server::weapons::weapon::in_range(
 void sanguis::server::weapons::weapon::attack_speed(
 	space_unit const speed)
 {
+	ias = speed;
 }
 
 sanguis::server::weapons::weapon::~weapon()
@@ -147,6 +149,7 @@ sanguis::server::weapons::weapon::weapon(
 	time_type const reload_time_)
 :
 	diff(),
+	ias_diff(),
 	env_(env_),
 	type_(type_),
 	range_(range_),
@@ -156,18 +159,20 @@ sanguis::server::weapons::weapon::weapon(
 		sge::time::second_f(
 			base_cooldown_),
 		sge::time::activation_state::active,
-		diff.callback()),
+		ias_diff.callback()),
 	cast_point_timer(
 		sge::time::second_f(
 			cast_point_),
 		sge::time::activation_state::inactive,
-		diff.callback()),
+		ias_diff.callback()),
 	reload_timer(
 		sge::time::second_f(
 			reload_time_),
 		sge::time::activation_state::inactive,
 		diff.callback()),
-	state_(state::ready)
+	state_(state::ready),
+	ias(static_cast<space_unit>(0)),
+	attack_dest()
 {
 	if(cast_point_timer.interval() > cooldown_timer.interval())
 		SGE_LOG_WARNING(

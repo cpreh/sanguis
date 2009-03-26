@@ -80,7 +80,8 @@ private:
 		};
 	};
 
-	diff_clock              diff;
+	diff_clock              diff,
+	                        ias_diff;
 	server::environment     env_;
 	weapon_type::type       type_;
 	space_unit              range_;
@@ -90,6 +91,7 @@ private:
 	                        cast_point_timer,
 	                        reload_timer;
 	state::type             state_;
+	space_unit              ias;
 
 	boost::optional<
 		pos_type
