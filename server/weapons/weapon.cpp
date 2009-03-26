@@ -2,8 +2,8 @@
 #include "delayed_attack.hpp"
 #include "log.hpp"
 #include "../entities/entity_with_weapon.hpp"
-#include "../distance.hpp"
-#include "../bounding_circle.hpp"
+#include "../collision/distance.hpp"
+#include "../collision/bounding_circle.hpp"
 #include "../../exception.hpp"
 #include <sge/time/second_f.hpp>
 #include <sge/time/resolution.hpp>
@@ -126,7 +126,7 @@ bool sanguis::server::weapons::weapon::in_range(
 	entities::entity const &from,
 	pos_type const &to) const
 {
-	return distance(from, to) - bounding_circle(from).radius() < range();
+	return collision::distance(from, to) - collision::bounding_circle(from).radius() < range();
 }
 
 void sanguis::server::weapons::weapon::attack_speed(

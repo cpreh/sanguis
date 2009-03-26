@@ -1,6 +1,5 @@
 #include "projectile.hpp"
 #include "../base_parameters.hpp"
-#include "../../collision.hpp"
 #include "../../damage_types.hpp"
 #include "../../message_converter.hpp"
 #include "../../../exception.hpp"

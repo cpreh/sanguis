@@ -1,9 +1,9 @@
-#include "collision.hpp"
+#include "collides.hpp"
 #include "bounding_circle.hpp"
-#include "entities/entity.hpp"
+#include "../entities/entity.hpp"
 #include <sge/math/circle_impl.hpp>
 
-bool sanguis::server::collides(
+bool sanguis::server::collision::collides(
 	entities::entity const &a,
 	entities::entity const &b)
 {
@@ -12,9 +12,9 @@ bool sanguis::server::collides(
 		bounding_circle(b));
 }
 
-bool sanguis::server::collides(
+bool sanguis::server::collision::collides(
 	entities::entity const &a,
-	messages::circle_type const &c)
+	circle_type const &c)
 {
 	return sge::math::intersects(
 		bounding_circle(a),

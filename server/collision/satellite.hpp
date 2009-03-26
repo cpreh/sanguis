@@ -10,6 +10,7 @@ namespace server
 {
 namespace collision
 {
+
 class satellite : public sge::collision::satellite {
 public:
 	explicit satellite(

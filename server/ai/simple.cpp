@@ -1,8 +1,8 @@
 #include "simple.hpp"
 #include "../entities/entity_with_weapon.hpp"
 #include "../entities/property.hpp"
-#include "../collision.hpp"
-#include "../distance.hpp"
+#include "../collision/collides.hpp"
+#include "../collision/distance.hpp"
 #include <sge/math/angle.hpp>
 #include <boost/foreach.hpp>
 #include <limits>
@@ -30,7 +30,9 @@ void sanguis::server::ai::simple::update(
 
 	entities::property &speed(
 		me.property(
-			entities::property_type::movement_speed));
+			entities::property_type::movement_speed
+		)
+	);
 
 	if(!target)
 	{
@@ -47,9 +49,11 @@ void sanguis::server::ai::simple::update(
 				continue;
 
 			space_unit const new_distance(
-				server::distance(
+				collision::distance(
 					me,
-					e));
+					e
+				)
+			);
 
 			if(new_distance >= distance)
 				continue;
@@ -79,7 +83,7 @@ void sanguis::server::ai::simple::update(
 		me.angle(*angle);
 	}
 	
-	if(collides(*target, me))
+	if(collision::collides(*target, me))
 		speed.current(
 			messages::mu(0));
 	else

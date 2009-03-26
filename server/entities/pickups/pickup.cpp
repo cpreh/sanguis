@@ -4,7 +4,6 @@
 #include "../property.hpp"
 #include "../../get_dim.hpp"
 #include "../../damage_types.hpp"
-#include "../../collision.hpp"
 #include "../../message_converter.hpp"
 #include "../../../load/pickup_name.hpp"
 #include "../../../load/context.hpp"

@@ -1,13 +1,16 @@
-#ifndef SANGUIS_SERVER_DISTANCE_HPP_INCLUDED
-#define SANGUIS_SERVER_DISTANCE_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_COLLISION_DISTANCE_HPP_INCLUDED
+#define SANGUIS_SERVER_COLLISION_DISTANCE_HPP_INCLUDED
 
-#include "entities/entity_fwd.hpp"
-#include "types.hpp"
+#include "../types.hpp"
+#include "../entities/entity_fwd.hpp"
 
 namespace sanguis
 {
 namespace server
 {
+namespace collision
+{
+
 space_unit
 distance(
 	entities::entity const &,
@@ -18,6 +21,7 @@ distance(
 	entities::entity const &,
 	pos_type const &);
 
+}
 }
 }
 
