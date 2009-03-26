@@ -7,6 +7,7 @@
 #include "../buffs/buff.hpp"
 #include "../auras/aura.hpp"
 #include "../get_unique_id.hpp"
+#include "../log.hpp"
 #include "../message_converter.hpp"
 #include "../../messages/add.hpp"
 #include "../../angle_vector.hpp"
@@ -21,8 +22,9 @@
 #include <sge/collision/objects/circle.hpp>
 #include <sge/container/linear_set_impl.hpp>
 #include <sge/container/map_impl.hpp>
-#include <sge/text.hpp>
 #include <sge/math/vector/output.hpp>
+#include <sge/log/headers.hpp>
+#include <sge/text.hpp>
 #include <boost/foreach.hpp>
 #include <boost/bind.hpp>
 #include <typeinfo>
@@ -325,7 +327,16 @@ void sanguis::server::entities::entity::add_perk(
 	{
 		if(typeid(i) == typeid(*p))
 		{
-			i.raise_level();
+			if(i.can_raise_level())
+				i.raise_level();
+			else
+			{
+				SGE_LOG_WARNING(
+					log(),
+					sge::log::_1
+						<< SGE_TEXT("Tried to raise perk level of a perk which can't do this.")
+				);
+			}
 			return;
 		}
 	}

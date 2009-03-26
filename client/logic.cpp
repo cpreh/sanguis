@@ -1,6 +1,7 @@
 #include "logic.hpp"
 #include "invalid_id.hpp"
 #include "log.hpp"
+#include "to_perk_type.hpp"
 #include "../messages/give_weapon.hpp"
 #include "../messages/move.hpp"
 #include "../messages/player_direction.hpp"
@@ -284,21 +285,6 @@ void sanguis::client::logic::change_weapon(
 			new messages::player_change_weapon(
 				player_id_,
 				current_weapon)));
-}
-
-// TODO: this is only here temporary
-namespace
-{
-
-sanguis::perk_type::type
-to_perk_type(
-	sge::string const &s)
-{
-	if(s == SGE_TEXT("ims"))
-		return sanguis::perk_type::ims;
-	return sanguis::perk_type::size;
-}
-
 }
 
 void sanguis::client::logic::give_perk(
