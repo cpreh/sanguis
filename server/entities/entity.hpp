@@ -1,9 +1,10 @@
 #ifndef SANGUIS_SERVER_ENTITIES_ENTITY_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_ENTITY_HPP_INCLUDED
 
+#include "entity_fwd.hpp"
 #include "base_parameters_fwd.hpp"
 #include "auto_weak_link_fwd.hpp"
-#include "entity_fwd.hpp"
+#include "container.hpp"
 #include "property.hpp"
 #include "property_map.hpp"
 #include "property_type.hpp"

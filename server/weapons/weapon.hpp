@@ -8,7 +8,7 @@
 #include "../../diff_clock.hpp"
 #include "../types.hpp"
 #include "../environment.hpp"
-#include "../entities/entity_fwd.hpp"
+#include "../entities/entity_with_weapon_fwd.hpp"
 #include <sge/time/timer.hpp>
 #include <sge/log/logger.hpp>
 #include <sge/noncopyable.hpp>

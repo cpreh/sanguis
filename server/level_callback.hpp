@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_LEVEL_CALLBACK_HPP_INCLUDED
 
 #include "../messages/types.hpp"
-#include "entities/fwd.hpp"
+#include "entities/player_fwd.hpp"
 #include <boost/function.hpp>
 
 namespace sanguis
@@ -10,7 +10,9 @@ namespace sanguis
 namespace server
 {
 
-typedef boost::function<void (entities::player &,messages::level_type)> level_callback;
+typedef boost::function<
+	void (entities::player &, messages::level_type)
+> level_callback;
 
 }
 }

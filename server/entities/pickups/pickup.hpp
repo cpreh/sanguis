@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_PICKUPS_PICKUP_HPP_INCLUDED
 
 #include "../entity.hpp"
-#include "../fwd.hpp"
+#include "../entity_with_weapon_fwd.hpp"
 #include "../../../pickup_type.hpp"
 #include <boost/optional.hpp>
 

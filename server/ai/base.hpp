@@ -1,7 +1,8 @@
 #ifndef SANGUIS_SERVER_AI_BASE_HPP_INCLUDED
 #define SANGUIS_SERVER_AI_BASE_HPP_INCLUDED
 
-#include "../entities/entity_fwd.hpp"
+#include "../entities/entity_with_weapon_fwd.hpp"
+#include "../entities/container.hpp"
 #include "../../time_type.hpp"
 #include <sge/shared_ptr.hpp>
 #include <sge/noncopyable.hpp>

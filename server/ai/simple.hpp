@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_AI_SIMPLE_HPP_INCLUDED
 
 #include "base.hpp"
-#include "../entities/fwd.hpp"
+#include "../entities/entity_with_weapon_fwd.hpp"
 #include "../entities/auto_weak_link.hpp"
 
 namespace sanguis

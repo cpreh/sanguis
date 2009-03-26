@@ -3,9 +3,9 @@
 
 #include "../message_event_fwd.hpp"
 #include "../environment_fwd.hpp"
-#include "running.hpp"
 #include "../../messages/fwd.hpp"
 #include "../../net/types.hpp"
+#include "running.hpp"
 #include <sge/time/timer.hpp>
 #include <boost/mpl/list.hpp>
 #include <boost/statechart/simple_state.hpp>
