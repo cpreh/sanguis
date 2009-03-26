@@ -18,7 +18,7 @@ sanguis::server::perks::choleric::choleric()
 		sge::time::expiration_state::not_expired
 	),
 	rand(
-		sge::random::inclusive_range<space_unit>(
+		sge::random::make_inclusive_range(
 			static_cast<space_unit>(0),
 			sge::math::twopi<space_unit>()
 		)

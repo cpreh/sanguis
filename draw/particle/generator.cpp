@@ -36,21 +36,21 @@ sanguis::draw::particle::generator::generator(
 	life_timer(sge::time::second_f(life_time)),
 	alignment(alignment),
 	dispersion_angle(
-		sge::random::inclusive_range<rotation_type>(
+		sge::random::make_inclusive_range(
 			static_cast<rotation_type>(0),
 			sge::math::twopi<rotation_type>())),
 	dispersion_value(dispersion_value),
 	velocity_angle(
-		sge::random::inclusive_range<rotation_type>(
+		sge::random::make_inclusive_range(
 			static_cast<rotation_type>(0),
 			sge::math::twopi<rotation_type>())),
 	velocity_value(velocity),
 	rot_angle(
-		sge::random::inclusive_range<rotation_type>(
+		sge::random::make_inclusive_range(
 			static_cast<rotation_type>(0),
 			sge::math::twopi<rotation_type>())),
 	rot_direction(
-		sge::random::inclusive_range<rotation_type>(
+		sge::random::make_inclusive_range(
 			static_cast<rotation_type>(0),
 			static_cast<rotation_type>(1))),
 	rot_velocity(rot_velocity),
