@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_PERKS_IMS_HPP_INCLUDED
 
 #include "perk.hpp"
-#include "../../messages/types.hpp"
+#include "../types.hpp"
 
 namespace sanguis
 {
@@ -13,9 +13,12 @@ namespace perks
 
 class ims : public perk {
 private:
-	void do_apply(entities::entity &);
+	void do_apply(
+		entities::entity &,
+		time_type,
+		environment const &);
 	bool can_raise_level() const;
-	messages::space_unit factor() const;
+	space_unit factor() const;
 };
 
 }

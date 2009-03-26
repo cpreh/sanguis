@@ -3,7 +3,9 @@
 #include "../entities/entity.hpp"
 
 void sanguis::server::perks::ims::do_apply(
-	entities::entity &e)
+	entities::entity &e,
+	time_type,
+	environment const &)
 {
 	e.property(
 		entities::property_type::movement_speed)

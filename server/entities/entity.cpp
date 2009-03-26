@@ -291,7 +291,11 @@ void sanguis::server::entities::entity::update(
 		p.second.reset();
 
 	BOOST_FOREACH(perks::perk &p, perks_)
-		p.apply(*this);
+		p.apply(
+			*this,
+			time,
+			environment()
+		);
 
 	BOOST_FOREACH(property_map::reference p, properties)
 		p.second.apply();

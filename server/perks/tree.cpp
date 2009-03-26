@@ -31,6 +31,9 @@ sanguis::server::perks::tree::tree()
 	)
 {
 	impl.push_back(
+		perk_type::choleric
+	);
+	impl.push_back(
 		perk_type::ias
 	);
 	impl.push_back(

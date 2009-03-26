@@ -25,7 +25,13 @@ sanguis::server::perks::perk::level() const
 }
 
 void sanguis::server::perks::perk::apply(
-	entities::entity &e)
+	entities::entity &e,
+	time_type const time,
+	environment const &env)
 {
-	do_apply(e);
+	do_apply(
+		e,
+		time,
+		env
+	);
 }
