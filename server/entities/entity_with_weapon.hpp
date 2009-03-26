@@ -2,7 +2,9 @@
 #define SANGUIS_SERVER_ENTITY_WITH_WEAPON_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "../weapons/weapon.hpp"
+#include "../weapons/auto_ptr.hpp"
+#include "../../weapon_type.hpp"
+#include <sge/signal/auto_connection.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
 
 namespace sanguis
@@ -21,15 +23,14 @@ protected:
 
 	entity_with_weapon(
 		base_parameters const &,
-		weapons::weapon_ptr start_weapon
-			= weapons::weapon_ptr());
+		weapons::auto_ptr start_weapon);
 
 	virtual void update(
 		time_type,
 		container &entities);
 public:
 	void change_weapon(weapon_type::type);
-	void add_weapon(weapons::weapon_ptr);
+	void add_weapon(weapons::auto_ptr);
 	void remove_weapon(weapon_type::type);
 
 	void target(pos_type const &);
@@ -42,11 +43,14 @@ public:
 	weapons::weapon &active_weapon();
 	weapons::weapon const &active_weapon() const;
 private:
+	void attack_speed_change(property::value_type);
+
 	weapon_container    weapons_;
 	weapon_type::type   weapon_;
 	pos_type            target_;
 	bool                attacking,
 	                    reloading;
+	sge::signal::auto_connection       attack_speed_change_;
 };
 
 }

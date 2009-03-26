@@ -1,5 +1,6 @@
 #include "weapon.hpp"
 #include "../entity_with_weapon.hpp"
+#include "../../weapons/weapon.hpp"
 #include "../../get_dim.hpp"
 #include "../../message_converter.hpp"
 #include "../../weapons/factory.hpp"

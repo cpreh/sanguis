@@ -12,7 +12,6 @@
 #include <sge/time/timer.hpp>
 #include <sge/log/logger.hpp>
 #include <sge/noncopyable.hpp>
-#include <sge/auto_ptr.hpp>
 #include <boost/optional.hpp>
 
 namespace sanguis
@@ -39,6 +38,9 @@ public:
 	bool in_range(
 		entities::entity const &from,
 		pos_type const& to) const;
+
+	void attack_speed(
+		space_unit);
 
 	virtual ~weapon();
 protected:
@@ -90,10 +92,9 @@ private:
 	state::type             state_;
 
 	boost::optional<
-		pos_type>       attack_dest;
+		pos_type
+	>                       attack_dest;
 };
-
-typedef sge::auto_ptr<weapon> weapon_ptr;
 
 }
 }

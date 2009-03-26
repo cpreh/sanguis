@@ -16,8 +16,7 @@ protected:
 	entity_with_ai(
 		base_parameters const &,
 		ai::ai_ptr ai_,
-		weapons::weapon_ptr start_weapon
-			= weapons::weapon_ptr());
+		weapons::auto_ptr start_weapon);
 	
 	virtual void update(
 		time_type,

@@ -121,6 +121,7 @@ private:
 		entity *);
 	bool has_ref(
 		entity *) const;
+	
 	void speed_change(property::value_type);
 
 	using base::can_collide_with;

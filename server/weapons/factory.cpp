@@ -2,10 +2,11 @@
 #include "pistol.hpp"
 #include "shotgun.hpp"
 #include "rocket_launcher.hpp"
+#include "weapon.hpp"
 #include "../../exception.hpp"
 #include <sge/text.hpp>
 
-sanguis::server::weapons::weapon_ptr
+sanguis::server::weapons::auto_ptr
 sanguis::server::weapons::create(
 	weapon_type::type const type,
 	environment const &env)
@@ -15,7 +16,7 @@ sanguis::server::weapons::create(
 		throw exception(
 			SGE_TEXT("Please create melee weapons directly, not through the weapon factory!"));
 	case weapon_type::pistol:
-		return weapon_ptr(
+		return auto_ptr(
 			new pistol(
 				env,
 				type,
@@ -26,7 +27,7 @@ sanguis::server::weapons::create(
 				static_cast<time_type>(2) // reload time
 				));
 	case weapon_type::dual_pistol:
-		return weapon_ptr(
+		return auto_ptr(
 			new pistol(
 				env,
 				type,
@@ -37,7 +38,7 @@ sanguis::server::weapons::create(
 				static_cast<time_type>(4) // reload time
 				));
 	case weapon_type::shotgun:
-		return weapon_ptr(
+		return auto_ptr(
 			new shotgun(
 				env,
 				type,
@@ -49,7 +50,7 @@ sanguis::server::weapons::create(
 				static_cast<time_type>(3) // reload time
 				));
 	case weapon_type::rocket_launcher:
-		return weapon_ptr(
+		return auto_ptr(
 			new rocket_launcher(
 				env,
 				type,

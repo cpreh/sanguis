@@ -89,7 +89,7 @@ void sanguis::server::weapons::weapon::update(
 
 bool sanguis::server::weapons::weapon::attack(
 	entities::entity_with_weapon &from,
-	pos_type const& to)
+	pos_type const &to)
 {
 	if(state_ != state::ready
 	|| !cooldown_timer.update_b()
@@ -127,6 +127,11 @@ bool sanguis::server::weapons::weapon::in_range(
 	pos_type const &to) const
 {
 	return distance(from, to) - bounding_circle(from).radius() < range();
+}
+
+void sanguis::server::weapons::weapon::attack_speed(
+	space_unit const speed)
+{
 }
 
 sanguis::server::weapons::weapon::~weapon()

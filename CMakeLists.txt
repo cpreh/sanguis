@@ -84,9 +84,6 @@ FILE (GLOB files
 ADD_EXECUTABLE(sanguis ${files})
 TARGET_LINK_LIBRARIES(sanguis sgecore sgegui)
 
-#ADD_DEFINITIONS("-pg")
-#SET_TARGET_PROPERTIES(sanguis PROPERTIES LINK_FLAGS "-pg")
-
 IF(NOT MSVC)
 	TARGET_LINK_LIBRARIES(sanguis ${Boost_LIBRARIES} sgecore)
 ENDIF()

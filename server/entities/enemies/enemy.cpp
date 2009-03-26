@@ -1,5 +1,6 @@
 #include "enemy.hpp"
 #include "../base_parameters.hpp"
+#include "../../weapons/weapon.hpp"
 #include "../../message_converter.hpp"
 #include "../../spawn_pickup.hpp"
 #include "../../get_dim.hpp"
@@ -18,7 +19,7 @@ sanguis::server::entities::enemies::enemy::enemy(
 	messages::space_unit const direction,
 	property_map const &properties,
 	ai::ai_ptr const ai_,
-	weapons::weapon_ptr weapon_,
+	weapons::auto_ptr weapon_,
 	unsigned const spawn_chance,
 	messages::exp_type const exp_)
 :

@@ -1,12 +1,14 @@
 #include "entity_with_weapon.hpp"
 #include "../message_converter.hpp"
 #include "../weapons/factory.hpp"
+#include "../weapons/weapon.hpp"
 #include "../../truncation_check_cast.hpp"
 #include "../../messages/give_weapon.hpp"
 #include "../../messages/change_weapon.hpp"
 #include "../../exception.hpp"
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/text.hpp>
+#include <boost/bind.hpp>
 #include <limits>
 
 namespace
@@ -20,13 +22,24 @@ sanguis::server::pos_type const target_undefined(
 
 sanguis::server::entities::entity_with_weapon::entity_with_weapon(
 	base_parameters const &param,
-	weapons::weapon_ptr start_weapon)
+	weapons::auto_ptr start_weapon)
 :
 	entity(param),
 	weapon_(weapon_type::none),
 	target_(target_undefined),
 	attacking(false),
-	reloading(false)
+	reloading(false),
+	attack_speed_change_(
+		property(
+			property_type::attack_speed
+		).register_change_callback(
+			boost::bind(
+				&entity_with_weapon::attack_speed_change,
+				this,
+				_1
+			)
+		)
+	)
 {
 	if(!start_weapon.get())
 		return;
@@ -109,6 +122,13 @@ void sanguis::server::entities::entity_with_weapon::change_weapon(
 	
 	weapon_ = nweapon;
 
+	if(has_weapon())
+		active_weapon().attack_speed(
+			property(
+				property_type::attack_speed
+			).current()
+		);
+
 	send(
 		messages::auto_ptr(
 			new messages::change_weapon(
@@ -117,7 +137,7 @@ void sanguis::server::entities::entity_with_weapon::change_weapon(
 }
 
 void sanguis::server::entities::entity_with_weapon::add_weapon(
-	weapons::weapon_ptr ptr)
+	weapons::auto_ptr ptr)
 {
 	weapon_type::type const wt = ptr->type();
 	unsigned const magazine_size = ptr->magazine_size();
@@ -189,4 +209,12 @@ sanguis::server::weapons::weapon const &
 sanguis::server::entities::entity_with_weapon::active_weapon() const
 {
 	return const_cast<entity_with_weapon &>(*this).active_weapon();
+}
+
+void
+sanguis::server::entities::entity_with_weapon::attack_speed_change(
+	property::value_type const v)
+{
+	if(has_weapon())
+		active_weapon().attack_speed(v);
 }

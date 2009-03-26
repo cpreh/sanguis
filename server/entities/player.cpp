@@ -2,6 +2,7 @@
 #include "base_parameters.hpp"
 #include "../get_dim.hpp"
 #include "../perks/perk.hpp"
+#include "../weapons/weapon.hpp"
 #include "../../load/context.hpp"
 #include "../level_calculate.hpp"
 #include <sge/text.hpp>
@@ -30,7 +31,11 @@ sanguis::server::entities::player::player(
 			get_dim(
 				env.load().models(),
 				SGE_TEXT("player"),
-				SGE_TEXT("bottom")))),
+				SGE_TEXT("bottom")
+			)
+		),
+		weapons::auto_ptr()
+	),
 	net_id_(net_id_),
 	name_(name_),
 	exp_(static_cast<exp_type>(0)),

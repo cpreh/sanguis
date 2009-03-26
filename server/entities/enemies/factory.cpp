@@ -34,7 +34,7 @@ sanguis::server::entities::enemies::create(
 					 entities::property(messages::mu(20))),
 				ai::ai_ptr(
 					new ai::simple()),
-				weapons::weapon_ptr(
+				weapons::auto_ptr(
 					new weapons::pistol(
 						env,
 						weapon_type::pistol,
@@ -63,7 +63,7 @@ sanguis::server::entities::enemies::create(
 					 entities::property(messages::mu(20))),
 				ai::ai_ptr(
 					new ai::simple()),
-				weapons::weapon_ptr(
+				weapons::auto_ptr(
 					new weapons::melee(
 						env,
 						messages::mu(100), // range
@@ -91,7 +91,7 @@ sanguis::server::entities::enemies::create(
 					 entities::property(messages::mu(80))),
 				ai::ai_ptr(
 					new ai::simple()),
-				weapons::weapon_ptr(
+				weapons::auto_ptr(
 					new weapons::melee(
 						env,
 						messages::mu(100), // range
@@ -117,7 +117,7 @@ sanguis::server::entities::enemies::create(
 				entities::property(messages::mu(40))),
 			ai::ai_ptr(
 				new ai::simple()),
-			weapons::weapon_ptr(
+			weapons::auto_ptr(
 				new weapons::melee(
 					env,
 					messages::mu(100), // range
@@ -143,7 +143,7 @@ sanguis::server::entities::enemies::create(
 				entities::property(messages::mu(40))),
 			ai::ai_ptr(
 				new ai::simple()),
-			weapons::weapon_ptr(
+			weapons::auto_ptr(
 				new weapons::melee(
 				env,
 				messages::mu(100), // range
@@ -169,7 +169,7 @@ sanguis::server::entities::enemies::create(
 					 entities::property(messages::mu(70))),
 				ai::ai_ptr(
 					new ai::simple()),
-				weapons::weapon_ptr(
+				weapons::auto_ptr(
 					new weapons::melee(
 						env,
 						messages::mu(120), // range

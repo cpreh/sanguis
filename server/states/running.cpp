@@ -11,6 +11,7 @@
 #include "../entities/player.hpp"
 #include "../entities/decoration.hpp"
 #include "../weapons/factory.hpp"
+#include "../weapons/weapon.hpp"
 #include "../perks/factory.hpp"
 #include "../perks/perk.hpp"
 #include "../log.hpp"
@@ -367,7 +368,9 @@ sanguis::server::states::running::operator()(
 	p.add_weapon(
 		weapons::create(
 			weapon_type::pistol,
-			environment()));
+			environment()
+		)
+	);
 
 	// send start experience
 	// no message_converter here because it operates on a _specific_ entity type

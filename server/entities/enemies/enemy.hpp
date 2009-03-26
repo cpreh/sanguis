@@ -24,7 +24,7 @@ public:
 		messages::space_unit direction,
 		property_map const &,
 		ai::ai_ptr,
-		weapons::weapon_ptr weapon,
+		weapons::auto_ptr weapon,
 		unsigned spawn_chance,
 		messages::exp_type exp);
 
