@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_STATES_MENU_HPP_INCLUDED
 #define SANGUIS_CLIENT_STATES_MENU_HPP_INCLUDED
 
-#include "menu_mover.hpp"
+#include "../menu_mover.hpp"
 #include "../machine.hpp"
 #include "../../tick_event.hpp"
 #include "../message_event.hpp"

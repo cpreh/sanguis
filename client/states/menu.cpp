@@ -40,8 +40,12 @@ sanguis::client::states::menu::menu(
 	main_menu(
 		m,
 		sge::gui::widget::parameters()
-			.pos(sge::gui::point(0,0))
-			.size(sge::gui::dim(1024,768))
+			.pos(
+				sge::gui::point(0,0))
+			.size(
+				sge::gui::dim(1024,768))
+			.activation(
+				sge::gui::activation_state::inactive)
 			.layout(
 				sge::make_shared_ptr<sge::gui::layouts::vertical>(
 					boost::ref(main_menu)))),
@@ -99,6 +103,8 @@ sanguis::client::states::menu::menu(
 				sge::gui::point(0,0))
 			.size(
 				sge::gui::dim(1024,768))
+			.activation(
+				sge::gui::activation_state::inactive)
 			.layout(
 				sge::make_shared_ptr<sge::gui::layouts::vertical>(
 					boost::ref(connect_menu)))),
@@ -184,12 +190,14 @@ sanguis::client::states::menu::menu(
 
 	mover_(
 		m,
-		connect_menu,
 		main_menu),
 
 	main_connect_conn(
 		main_connect.register_clicked(
-			boost::bind(&menu_mover::connect_to_server,&mover_))),
+			boost::bind(
+				&menu_mover::reset,
+				&mover_,
+				boost::ref(connect_menu)))),
 
 	main_start_conn(
 		main_start.register_clicked(
@@ -205,7 +213,10 @@ sanguis::client::states::menu::menu(
 
 	connect_return_conn(
 		connect_return.register_clicked(
-			boost::bind(&menu_mover::return_to_menu,&mover_))),
+			boost::bind(
+				&menu_mover::reset,
+				&mover_,
+				boost::ref(main_menu)))),
 #endif
 
 	connect_now(false)

@@ -16,3 +16,10 @@ always a sound is played
 *high: add lifetime-limited particles for use in - for example - the rocket
 explosion
 *high: introduce console connections
+
+phillemann's stuff:
+-slow down experience stuff
+-add better menu effects, improve menu mover (rewrite?)
+-high score list, available via menu
+-perk choosing
+-new state: dead, where highscorelist is displayed
