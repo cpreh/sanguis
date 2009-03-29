@@ -1,29 +1,29 @@
 #ifndef SANGUIS_MESSAGES_ASSIGN_ID_HPP_INCLUDED
 #define SANGUIS_MESSAGES_ASSIGN_ID_HPP_INCLUDED
 
-#include "../entity_id.hpp"
-#include "base.hpp"
-#include <boost/serialization/access.hpp>
+#include "types/message.hpp"
+#include "entitiy_d.hpp"
+#include <majutsu/composite.hpp>
+#include <majutsu/constant.hpp>
+#include <majutsu/role.hpp>
+#include <boost/mpl/vector.hpp>
 
 namespace sanguis
 {
 namespace messages
 {
 
-class assign_id : public base {
-public:
-	assign_id();
-	explicit assign_id(
-		entity_id player_id_);
-	
-	entity_id player_id() const;
-private:
-	entity_id player_id_;
-	
-	friend class boost::serialization::access;
-	template<typename Archive>
-	void serialize(Archive &ar, unsigned);
-};
+typedef majutsu::composite<
+	boost::mpl::vector<
+		majutsu::constant<
+			types::message::type,
+			types::message::assign_id
+		>
+	>,
+	majutsu::role<
+		entity_id
+	>
+> assign_id;
 
 }
 }

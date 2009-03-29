@@ -1,29 +1,29 @@
 #ifndef SANGUIS_MESSAGES_CLIENT_INFO_HPP_INCLUDED
 #define SANGUIS_MESSAGES_CLIENT_INFO_HPP_INCLUDED
 
-#include "types.hpp"
-#include "base.hpp"
-#include <boost/serialization/access.hpp>
+#include "types/message.hpp"
+#include "string.hpp"
+#include <majutsu/composite.hpp>
+#include <majutsu/constant.hpp>
+#include <majutsu/role.hpp>
+#include <boost/mpl/vector.hpp>
 
 namespace sanguis
 {
 namespace messages
 {
 
-class client_info : public base {
-public:
-	client_info();
-	explicit client_info(
-		string const &);
-
-	string const &name() const;
-private:
-	string name_;
-
-	friend class boost::serialization::access;
-	template<typename Archive>
-	void serialize(Archive &ar, unsigned);
-};
+typedef majutsu::composite<
+	boost::mpl::vector<
+		majutsu::constant<
+			types::message::type,
+			types::message::client_info
+		>
+	>,
+	majutsu::role<
+		string
+	>
+> client_info;
 
 }
 }

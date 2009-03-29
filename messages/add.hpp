@@ -1,18 +1,67 @@
 #ifndef SANGUIS_MESSAGES_ADD_HPP_INCLUDED
 #define SANGUIS_MESSAGES_ADD_HPP_INCLUDED
 
-#include "entity_message.hpp"
-#include "types.hpp"
-#include "../entity_type.hpp"
-#include <sge/math/vector/basic_decl.hpp>
-#include <sge/math/dim/basic_decl.hpp>
-#include <boost/serialization/access.hpp>
+#include "roles/angle.hpp"
+#include "roles/health.hpp"
+#include "roles/max_health.hp"
+#include "roles/pos.hpp"
+#include "roles/speed.hpp"
+#include "message_type.hpp"
+#include "pos.hpp"
+#include "dim.hpp"
+#include "space_unit.hpp"
+#include "vector2.hpp"
+#include <majutsu/composite.hpp>
+#include <majutsu/bind.hpp>
+#include <majutsu/constant.hpp>
+#include <majutsu/role.hpp>
+#include <majutsu/placeholder.hpp>
+#include <boost/mpl/vector.hpp>
 
 namespace sanguis
 {
 namespace messages
 {
 
+typedef majutsu::composite<
+	boost::mpl::vector<
+		majutsu::bind<
+			entity_message,
+			boost::mpl::vector<
+				majutsu::constant<
+					types::message::type,
+					types::message::add
+				>,
+				majutsu::placeholder
+			>
+		>,
+		majutsu::role<
+			pos,
+			roles::pos
+		>,
+		majutsu::role<
+			space_unit,
+			roles::angle
+		>,
+		majutsu::role<
+			vector2,
+			roles::speed
+		>,
+		majutsu::role<
+			space_unit,
+			roles::health
+		>,
+		majutsu::role<
+			space_unit,
+			roles::max_health
+		>,
+		majutsu::role<
+			dim
+		>
+	>
+> add;
+
+/*
 class add : public entity_message {
 public:
 	add();
@@ -46,6 +95,7 @@ private:
 	template<typename Archive>
 	void serialize(Archive &ar, unsigned);
 };
+*/
 
 }
 }
