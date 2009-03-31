@@ -5,7 +5,7 @@
 #include "make_class.hpp"
 #include "enum.hpp"
 #include "types/message.hpp"
-#include "roles/projectile_type.hpp"
+#include "roles/projectile.hpp"
 #include <majutsu/role.hpp>
 #include <boost/mpl/vector.hpp>
 
@@ -19,7 +19,7 @@ typedef make_add_message<
 	boost::mpl::vector<
 		majutsu::role<
 			enum_,
-			roles::projectile_type
+			roles::projectile
 		>
 	>
 > add_projectile_elements;

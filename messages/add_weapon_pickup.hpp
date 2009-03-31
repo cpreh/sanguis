@@ -5,7 +5,7 @@
 #include "make_class.hpp"
 #include "enum.hpp"
 #include "types/message.hpp"
-#include "roles/weapon_pickup_type.hpp"
+#include "roles/weapon.hpp"
 #include <majutsu/role.hpp>
 #include <boost/mpl/vector.hpp>
 
@@ -19,7 +19,7 @@ typedef make_add_message<
 	boost::mpl::vector<
 		majutsu::role<
 			enum_,
-			roles::weapon_pickup_type
+			roles::weapon
 		>
 	>
 > add_weapon_pickup_elements;
