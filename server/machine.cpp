@@ -87,7 +87,7 @@ void sanguis::server::machine::connect_callback(
 
 void sanguis::server::machine::disconnect_callback(
 	net::id_type const id,
-	net::string_type const &)
+	sge::string const &)
 {
 	process_event(
 		message_event(
@@ -141,13 +141,13 @@ void sanguis::server::machine::send(
 	it->second.out_buffer += serialize(m);
 }
 
-net::port_type
+sanguis::net::port_type
 sanguis::server::machine::port() const
 {
 	return port_;
 }
 
-net::server &
+sanguis::net::server &
 sanguis::server::machine::net()
 {
 	return net_;

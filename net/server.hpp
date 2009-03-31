@@ -1,9 +1,12 @@
 #ifndef NET_SERVER_HPP_INCLUDED
 #define NET_SERVER_HPP_INCLUDED
 
-#include "types.hpp"
+#include "id_type.hpp"
+#include "data_type.hpp"
+#include "port_type.hpp"
 #include "output_buffer.hpp"
 
+#include <sge/string.hpp>
 #include <sge/signal/object.hpp>
 #include <sge/noncopyable.hpp>
 
@@ -16,11 +19,13 @@
 #include <boost/ptr_container/ptr_vector.hpp>
 #include <cstddef>
 
+namespace sanguis
+{
 namespace net
 {
 
 // TODO: put this in a file
-struct connection {
+class connection {
 	SGE_NONCOPYABLE(connection)
 public:
 	// typedefs
@@ -40,21 +45,20 @@ class server {
 	SGE_NONCOPYABLE(server)
 public:
 	typedef void connect_fun (const id_type);
-	typedef void disconnect_fun (const id_type,const string_type &);
+	typedef void disconnect_fun (const id_type,sge::string const &);
 	typedef void data_fun (const id_type,const data_type &);
 	typedef boost::function<connect_fun> connect_function;
 	typedef boost::function<disconnect_fun> disconnect_function;
 	typedef boost::function<data_fun> data_function;
-	typedef sge::signal::auto_connection signal_connection;
 
 	server();
 	void listen(const port_type);
 	void process();
 	void queue(const id_type,const data_type &);
 	void queue(const data_type &);
-	signal_connection register_connect(connect_function);
-	signal_connection register_disconnect(disconnect_function);
-	signal_connection register_data(data_function);
+	sge::signal::auto_connection register_connect(connect_function);
+	sge::signal::auto_connection register_disconnect(disconnect_function);
+	sge::signal::auto_connection register_data(data_function);
 
 private:
 	typedef boost::ptr_vector<connection> connection_container;
@@ -79,8 +83,9 @@ private:
 	void write_handler(const boost::system::error_code &,const std::size_t,connection &);
 	void accept_handler(const boost::system::error_code &,connection &);
 	void handle_disconnect(const boost::system::error_code &,connection &);
-	void handle_error(const string_type &,const boost::system::error_code &,const connection &);
+	void handle_error(sge::string const &,const boost::system::error_code &,const connection &);
 };
+}
 }
 
 #endif

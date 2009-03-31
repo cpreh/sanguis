@@ -14,7 +14,7 @@ namespace
 const std::size_t message_header_size = 4;
 }
 
-net::data_type sanguis::deserialize(
+sanguis::net::data_type sanguis::deserialize(
 	net::data_type const &data,
 	deserialize_callback const &callback)
 {
@@ -41,7 +41,7 @@ net::data_type sanguis::deserialize(
 	return deserialize(data.substr(message_header_size+message_size),callback);
 }
 
-net::data_type sanguis::serialize(
+sanguis::net::data_type sanguis::serialize(
 	messages::auto_ptr m)
 {
 	typedef std::basic_ostringstream<net::data_type::value_type> sstream;

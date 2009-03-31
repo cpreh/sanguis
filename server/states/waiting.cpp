@@ -36,7 +36,7 @@ sanguis::server::states::waiting::react(
 boost::statechart::result
 sanguis::server::states::waiting::operator()(
 	net::id_type const id,
-	messages::connect const &m)
+	messages::connect const &)
 {
 	SGE_LOG_INFO(
 		log(),

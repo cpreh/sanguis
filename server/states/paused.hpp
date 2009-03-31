@@ -4,7 +4,7 @@
 #include "running.hpp"
 #include "../environment_fwd.hpp"
 #include "../../messages/fwd.hpp"
-#include "../../net/types.hpp"
+#include "../../net/id_type.hpp"
 #include <sge/log/fwd.hpp>
 #include <boost/mpl/list.hpp>
 #include <boost/statechart/simple_state.hpp>

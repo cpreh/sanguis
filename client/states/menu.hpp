@@ -1,15 +1,15 @@
 #ifndef SANGUIS_CLIENT_STATES_MENU_HPP_INCLUDED
 #define SANGUIS_CLIENT_STATES_MENU_HPP_INCLUDED
 
-#include "../menu_mover.hpp"
 #include "../machine.hpp"
 #include "../../tick_event.hpp"
 #include "../message_event.hpp"
+#include "../menu/button.hpp"
+#include "../menu/mover.hpp"
 #include <sge/log/fwd.hpp>
 #include <sge/gui/widget.hpp>
 #include <sge/gui/manager.hpp>
 #include <sge/gui/widgets/graphics.hpp>
-#include <sge/gui/widgets/buttons/image.hpp>
 #include <sge/gui/widgets/edit.hpp>
 #include <sge/gui/widgets/backdrop.hpp>
 #include <sge/filesystem/path.hpp>
@@ -45,9 +45,16 @@ class menu
 	sge::gui::manager m;
 
 	sge::gui::widget main_menu;
-		sge::gui::widgets::buttons::image main_connect;
-		sge::gui::widgets::buttons::image main_start;
-		sge::gui::widgets::buttons::image main_exit;
+		client::menu::button main_connect;
+		client::menu::button main_start;
+		client::menu::button main_exit;
+
+	/*
+	sge::gui::widget highscore_menu;
+		sge::gui::widgets::graphics highscore_header;
+		boost::ptr_vector<sge::gui::widgets::label> highscore_entries;
+		sge::gui::widgets::buttons::highscore_back;
+		*/
 
 #ifndef SANGUIS_STATES_MENU_DEBUG
 	sge::gui::widget connect_menu;
@@ -58,11 +65,11 @@ class menu
 			sge::gui::widgets::graphics connect_port_label;
 			sge::gui::widgets::edit connect_port_edit;
 		sge::gui::widget connect_connect_wrapper;
-			sge::gui::widgets::buttons::image connect_connect;
+			client::menu::button connect_connect;
 		sge::gui::widget connect_return_wrapper;
-			sge::gui::widgets::buttons::image connect_return;
+			client::menu::button connect_return;
 
-	menu_mover mover_;
+	client::menu::mover mover_;
 
 	sge::signal::auto_connection main_connect_conn;
 	sge::signal::auto_connection main_start_conn;

@@ -66,7 +66,7 @@ void sanguis::server::entities::player::exp(
 	}
 }
 
-net::id_type
+sanguis::net::id_type
 sanguis::server::entities::player::net_id() const
 {
 	return net_id_;

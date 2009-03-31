@@ -1,8 +1,9 @@
 #include "is_disconnect.hpp"
 
-bool net::is_disconnect(const boost::system::error_code &e)
+bool sanguis::net::detail::is_disconnect(boost::system::error_code const &e)
 {
-	switch(e.value()) {
+	switch(e.value()) 
+	{
 	case boost::system::posix_error::connection_aborted:
 	case boost::system::posix_error::connection_reset:
 	case boost::system::posix_error::network_reset:

@@ -51,49 +51,48 @@ sanguis::client::states::menu::menu(
 					boost::ref(main_menu)))),
 	main_connect(
 		main_menu,
-		sge::gui::widget::parameters(),
-		sge::gui::make_image(
-			context<machine>().sys().image_loader()->load(
-				buttons_path/SGE_TEXT("connect_menu")/SGE_TEXT("normal.png"))),
-		sge::gui::make_image(
-			context<machine>().sys().image_loader()->load(
-				buttons_path/SGE_TEXT("connect_menu")/SGE_TEXT("hover.png"))),
-		sge::gui::make_image(
-			context<machine>().sys().image_loader()->load(
-				buttons_path/SGE_TEXT("connect_menu")/SGE_TEXT("keyboard.png"))),
-		sge::gui::make_image(
-			context<machine>().sys().image_loader()->load(
-				buttons_path/SGE_TEXT("connect_menu")/SGE_TEXT("hover_keyboard.png")))),
+		context<machine>().sys().image_loader(),
+		buttons_path,
+		SGE_TEXT("connect_menu")),
 	main_start(
 		main_menu,
-		sge::gui::widget::parameters(),
-		sge::gui::make_image(
-			context<machine>().sys().image_loader()->load(
-				buttons_path/SGE_TEXT("quickstart")/SGE_TEXT("normal.png"))),
-		sge::gui::make_image(
-			context<machine>().sys().image_loader()->load(
-				buttons_path/SGE_TEXT("quickstart")/SGE_TEXT("hover.png"))),
-		sge::gui::make_image(
-			context<machine>().sys().image_loader()->load(
-				buttons_path/SGE_TEXT("quickstart")/SGE_TEXT("keyboard.png"))),
-		sge::gui::make_image(
-			context<machine>().sys().image_loader()->load(
-				buttons_path/SGE_TEXT("quickstart")/SGE_TEXT("hover_keyboard.png")))),
+		context<machine>().sys().image_loader(),
+		buttons_path,
+		SGE_TEXT("quickstart")),
 	main_exit(
 		main_menu,
+		context<machine>().sys().image_loader(),
+		buttons_path,
+		SGE_TEXT("quit")),
+	
+	/*
+	highscore_menu(
+		m,
+		sge::gui::widget::parameters()
+			.pos(
+				sge::gui::point(0,0))
+			.size(
+				sge::gui::dim(1024,768))
+			.activation(
+				sge::gui::activation_state::inactive)
+			.layout(
+				sge::make_shared_ptr<sge::gui::layouts::vertical>(
+					boost::ref(highscore_menu)))),
+
+	highscore_header(
+		highscore_menu,
 		sge::gui::widget::parameters(),
 		sge::gui::make_image(
 			context<machine>().sys().image_loader()->load(
-				buttons_path/SGE_TEXT("quit")/SGE_TEXT("normal.png"))),
-		sge::gui::make_image(
-			context<machine>().sys().image_loader()->load(
-				buttons_path/SGE_TEXT("quit")/SGE_TEXT("hover.png"))),
-		sge::gui::make_image(
-			context<machine>().sys().image_loader()->load(
-				buttons_path/SGE_TEXT("quit")/SGE_TEXT("keyboard.png"))),
-		sge::gui::make_image(
-			context<machine>().sys().image_loader()->load(
-				buttons_path/SGE_TEXT("quit")/SGE_TEXT("hover_keyboard.png")))),
+				buttons_path/SGE_TEXT("normal.png")))),
+	
+	highscore_labels(
+		),
+	
+	highscore_back(
+		)
+		*/
+
 
 #ifndef SANGUIS_STATES_MENU_DEBUG
 	connect_menu(
@@ -153,19 +152,9 @@ sanguis::client::states::menu::menu(
 					boost::ref(connect_connect_wrapper)))),
 	connect_connect(
 		connect_connect_wrapper,
-		sge::gui::widget::parameters(),
-		sge::gui::make_image(
-			context<machine>().sys().image_loader()->load(
-				buttons_path/SGE_TEXT("connect")/SGE_TEXT("normal.png"))),
-		sge::gui::make_image(
-			context<machine>().sys().image_loader()->load(
-				buttons_path/SGE_TEXT("connect")/SGE_TEXT("hover.png"))),
-		sge::gui::make_image(
-			context<machine>().sys().image_loader()->load(
-				buttons_path/SGE_TEXT("connect")/SGE_TEXT("keyboard.png"))),
-		sge::gui::make_image(
-			context<machine>().sys().image_loader()->load(
-				buttons_path/SGE_TEXT("connect")/SGE_TEXT("hover_keyboard.png")))),
+		context<machine>().sys().image_loader(),
+		buttons_path,
+		SGE_TEXT("connect")),
 	connect_return_wrapper(
 		connect_menu,
 		sge::gui::widget::parameters()
@@ -174,19 +163,9 @@ sanguis::client::states::menu::menu(
 					boost::ref(connect_return_wrapper)))),
 	connect_return(
 		connect_return_wrapper,
-		sge::gui::widget::parameters(),
-		sge::gui::make_image(
-			context<machine>().sys().image_loader()->load(
-				buttons_path/SGE_TEXT("return")/SGE_TEXT("normal.png"))),
-		sge::gui::make_image(
-			context<machine>().sys().image_loader()->load(
-				buttons_path/SGE_TEXT("return")/SGE_TEXT("hover.png"))),
-		sge::gui::make_image(
-			context<machine>().sys().image_loader()->load(
-				buttons_path/SGE_TEXT("return")/SGE_TEXT("keyboard.png"))),
-		sge::gui::make_image(
-			context<machine>().sys().image_loader()->load(
-				buttons_path/SGE_TEXT("return")/SGE_TEXT("hover_keyboard.png")))),
+		context<machine>().sys().image_loader(),
+		buttons_path,
+		SGE_TEXT("return")),
 
 	mover_(
 		m,
@@ -195,7 +174,7 @@ sanguis::client::states::menu::menu(
 	main_connect_conn(
 		main_connect.register_clicked(
 			boost::bind(
-				&menu_mover::reset,
+				&client::menu::mover::reset,
 				&mover_,
 				boost::ref(connect_menu)))),
 
@@ -214,7 +193,7 @@ sanguis::client::states::menu::menu(
 	connect_return_conn(
 		connect_return.register_clicked(
 			boost::bind(
-				&menu_mover::reset,
+				&client::menu::mover::reset,
 				&mover_,
 				boost::ref(main_menu)))),
 #endif
@@ -246,7 +225,8 @@ sanguis::client::states::menu::react(
 
 	context<machine>().dispatch();
 #ifndef SANGUIS_STATES_MENU_DEBUG
-	mover_.update(t.delta());
+	mover_.update(
+		t.delta());
 #endif
 	m.draw();
 
@@ -267,7 +247,7 @@ sanguis::client::states::menu::log()
 void sanguis::client::states::menu::connect()
 {
 #ifndef SANGUIS_STATES_MENU_DEBUG
-	context<machine>().address(
+	context<machine>().hostname(
 		sge::iconv(
 			connect_host_edit.text()
 		)

@@ -16,18 +16,18 @@
 #include <boost/lambda/construct.hpp>
 
 sanguis::client::machine::machine(
-	load::context const &resources_,
-	sge::systems::instance &sys_,
-	sge::audio::pool &sound_pool_,
-	sge::font::object &font_,
-	sge::input::key_state_tracker &ks,
-	sge::console::gfx &console,
-	net::address_type const &address_,
-	net::port_type const port_) 
+	load::context const &_resources,
+	sge::systems::instance &_sys,
+	sge::audio::pool &_sound_pool,
+	sge::font::object &_font,
+	sge::input::key_state_tracker &_ks,
+	sge::console::gfx &_console,
+	net::hostname_type const &_hostname,
+	net::port_type const _port) 
 :
-	resources_(resources_),
-	address_(address_),
-	port_(port_),
+	resources_(_resources),
+	hostname_(_hostname),
+	port_(_port),
 	s_conn(
 		net_.register_connect(
 			boost::bind(
@@ -45,23 +45,23 @@ sanguis::client::machine::machine(
 				&machine::data_callback,
 				this,
 				_1))),
-	sys_(sys_),
-	sound_pool_(sound_pool_),
-	font_(font_),
-	ks(ks),
-	console(console),
+	sys_(_sys),
+	sound_pool_(_sound_pool),
+	font_(_font),
+	ks(_ks),
+	console(_console),
 	console_stdlib(
-		console.object(),
+		_console.object(),
 		boost::bind(
 			&sge::console::gfx::print,
-			&console,
+			&_console,
 			_1),
 		boost::bind(
 			&sge::console::gfx::print,
-			&console,
+			&_console,
 			_1)),
 	console_wrapper_(
-		console,
+		_console,
 		sys_.input_system(),
 		sge::input::kc::key_f1),
 	running_(true)
@@ -69,7 +69,7 @@ sanguis::client::machine::machine(
 
 void sanguis::client::machine::connect()
 {
-	net_.connect(address_,port_);
+	net_.connect(hostname_,port_);
 }
 
 void sanguis::client::machine::connect_callback()
@@ -81,7 +81,7 @@ void sanguis::client::machine::connect_callback()
 }
 
 void sanguis::client::machine::disconnect_callback(
-	net::string_type const &)
+	sge::string const &)
 {
 	process_event(
 		message_event(
@@ -97,7 +97,7 @@ void sanguis::client::machine::process_message(
 			ptr));
 }
 
-void sanguis::client::machine::data_callback(const net::data_type &data)
+void sanguis::client::machine::data_callback(net::data_type const &data)
 {
 	in_buffer = deserialize(in_buffer+data,boost::bind(&machine::process_message,this,_1));
 }
@@ -107,30 +107,30 @@ void sanguis::client::machine::send(messages::auto_ptr m)
 	out_buffer += serialize(m);
 }
 
-net::address_type
-sanguis::client::machine::address() const
+sanguis::net::hostname_type
+sanguis::client::machine::hostname() const
 {
-	return address_;
+	return hostname_;
 }
 
-net::port_type
+sanguis::net::port_type
 sanguis::client::machine::port() const
 {
 	return port_;
 }
 
-net::client &
+sanguis::net::client &
 sanguis::client::machine::net()
 {
 	return net_;
 }
 
-void sanguis::client::machine::address(::net::address_type const &_address)
+void sanguis::client::machine::hostname(net::hostname_type const &_hostname)
 {
-	address_ = _address;
+	hostname_ = _hostname;
 }
 
-void sanguis::client::machine::port(::net::port_type const _port)
+void sanguis::client::machine::port(net::port_type const _port)
 {
 	port_ = _port;
 }
