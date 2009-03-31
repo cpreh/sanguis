@@ -3,6 +3,7 @@
 
 #include "types/message.hpp"
 #include "string.hpp"
+#include "make_class.hpp"
 #include <majutsu/composite.hpp>
 #include <majutsu/constant.hpp>
 #include <majutsu/role.hpp>
@@ -18,11 +19,15 @@ typedef majutsu::composite<
 		majutsu::constant<
 			types::message::type,
 			types::message::client_info
+		>,
+		majutsu::role<
+			string
 		>
-	>,
-	majutsu::role<
-		string
 	>
+> client_info_elements;
+
+typedef make_class<
+	client_info_elements
 > client_info;
 
 }

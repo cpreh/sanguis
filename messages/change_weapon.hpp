@@ -3,13 +3,10 @@
 
 #include "roles/weapon.hpp"
 #include "types/message.hpp"
-#include "entity_message.hpp"
+#include "bind_entity_message.hpp"
 #include "enum.hpp"
 #include "make_class.hpp"
 #include <majutsu/composite.hpp>
-#include <majutsu/bind.hpp>
-#include <majutsu/constant.hpp>
-#include <majutsu/placeholder.hpp>
 #include <majutsu/role.hpp>
 #include <boost/mpl/vector.hpp>
 
@@ -20,20 +17,14 @@ namespace messages
 
 typedef majutsu::composite<
 	boost::mpl::vector<
-		majutsu::bind<
-			entity_message,
-			boost::mpl::vector<
-				majutsu::constant<
-					types::message::type,
-					types::message::change_weapon
-				>,
-				majutsu::placeholder
+		bind_entity_message<
+			types::message::change_weapon
 			>
+		>,
+		majutsu::role<
+			enum_,
+			roles::weapon
 		>
-	>,
-	majutsu::role<
-		enum_,
-		roles::weapon
 	>
 > change_weapon_elements;
 

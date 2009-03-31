@@ -2,6 +2,7 @@
 #define SANGUIS_MESSAGES_CONNECT_HPP_INCLUDED
 
 #include "types/message.hpp"
+#include "make_class.hpp"
 #include <majutsu/composite.hpp>
 #include <majutsu/constant.hpp>
 #include <boost/mpl/vector.hpp>
@@ -18,6 +19,10 @@ typedef majutsu::composite<
 			types::message::connect
 		>
 	>
+> connect_elements;
+
+typedef make_class<
+	connect_elements
 > connect;
 
 }

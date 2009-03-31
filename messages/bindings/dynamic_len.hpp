@@ -77,8 +77,10 @@ struct dynamic_len {
 			reinterpret_cast<
 				majutsu::raw_pointer
 			>(
+				// TODO: make this better!
+				// This works with basic_string and raw_vector
 				const_cast<
-					char *
+					type::value_type *	
 				>(ret.data())
 			)
 		);

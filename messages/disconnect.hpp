@@ -2,6 +2,7 @@
 #define SANGUIS_MESSAGES_DISCONNECT_HPP_INCLUDED
 
 #include "types/message.hpp"
+#include "make_elements.hpp"
 #include <majutsu/composite.hpp>
 #include <majutsu/constant.hpp>
 #include <boost/mpl/vector.hpp>
@@ -18,6 +19,10 @@ typedef majutsu::composite<
 			types::message::disconnect
 		>
 	>
+> disconnect_elements;
+
+typedef make_class<
+	disconnect_elements
 > disconnect;
 
 }

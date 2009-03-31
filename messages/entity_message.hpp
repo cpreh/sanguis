@@ -20,22 +20,6 @@ typedef majutsu::composite<
 		>
 	>
 > entity_message;
-/*
-class entity_message : public base {
-public:
-	entity_message();
-	explicit entity_message(
-		entity_id id);
-	entity_id id() const;
-	void id(entity_id);
-private:
-	entity_id id_;
-
-	friend class boost::serialization::access;
-	template<typename Archive>
-	void serialize(Archive &ar, unsigned);
-};
-*/
 
 }
 }
