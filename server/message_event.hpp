@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_MESSAGE_EVENT_HPP_INCLUDED
 
 #include "../messages/base.hpp"
-#include "../net/types.hpp"
+#include "../net/id_type.hpp"
 #include <boost/statechart/event.hpp>
 
 namespace sanguis

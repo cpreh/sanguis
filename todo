@@ -23,3 +23,8 @@ phillemann's stuff:
 -high score list, available via menu
 -perk choosing
 -new state: dead, where highscorelist is displayed
+
+-immediate: 
+--fix menu::button so it stores the redundant buttons (keyboard_hover and hover are the same thing)
+--edit sge::gui::widgets::buttons so button pressing works as expected
+--then add highscore stuff to game

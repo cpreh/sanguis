@@ -1,7 +1,10 @@
 #include "server.hpp"
-#include "exception.hpp"
-#include "is_disconnect.hpp"
-#include "io_service_wrapper.hpp"
+#include "detail/is_disconnect.hpp"
+#include "detail/io_service_wrapper.hpp"
+#include "log.hpp"
+#include <sge/exception.hpp>
+#include <sge/text.hpp>
+#include <sge/iconv.hpp>
 #include <boost/asio/buffer.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/bind.hpp>
@@ -9,10 +12,10 @@
 #include <boost/ref.hpp>
 #include <iostream>
 
-net::server::server()
+sanguis::net::server::server()
 :
 	io_service(
-		io_service_wrapper()
+		detail::io_service_wrapper()
 	),
 	acceptor(
 		io_service
@@ -21,26 +24,27 @@ net::server::server()
 	handlers(0)
 {}
 
-net::server::signal_connection net::server::register_connect(connect_function f)
+sge::signal::auto_connection sanguis::net::server::register_connect(connect_function f)
 {
 	return connect_signal.connect(f);
 }
 
-net::server::signal_connection net::server::register_disconnect(disconnect_function f)
+sge::signal::auto_connection sanguis::net::server::register_disconnect(disconnect_function f)
 {
 	return disconnect_signal.connect(f);
 }
 
-net::server::signal_connection net::server::register_data(data_function f)
+sge::signal::auto_connection sanguis::net::server::register_data(data_function f)
 {
 	return data_signal.connect(f);
 }
 
-void net::server::listen(const port_type port)
+void sanguis::net::server::listen(const port_type port)
 {
-#ifdef NET_LOG
-	std::cerr << "net_server: listening on port " << port << "\n";
-#endif
+	SGE_LOG_DEBUG(
+		log(),
+		sge::log::_1 << SGE_TEXT("server: listening on port ")
+		             << port);
 
 	boost::asio::ip::tcp::endpoint endpoint(boost::asio::ip::tcp::v4(), port);
 	acceptor.open(endpoint.protocol());
@@ -51,7 +55,7 @@ void net::server::listen(const port_type port)
 	accept();
 }
 
-void net::server::accept()
+void sanguis::net::server::accept()
 {
 	connections.push_back(new connection(id_counter++,io_service));
 	connection &c = connections.back();
@@ -61,21 +65,21 @@ void net::server::accept()
 	handlers++;
 }
 
-void net::server::accept_handler(const boost::system::error_code &e,connection &c)
+void sanguis::net::server::accept_handler(const boost::system::error_code &e,connection &c)
 {
 	handlers--;
 
 	if (e)
 	{
-#ifdef NET_LOG
-		std::cerr << "net_server: error while accepting...\n";
-#endif
-		throw exception(e.message());
+		SGE_LOG_DEBUG(
+			log(),
+			sge::log::_1 << SGE_TEXT("server: error while accepting"));
+		throw sge::exception(sge::iconv(e.message()));
 	}
 
-#ifdef NET_LOG
-	std::clog << "net_server: accepting a connection\n";
-#endif
+	SGE_LOG_DEBUG(
+		log(),
+		sge::log::_1 << SGE_TEXT("server: accepting a connection"));
 
 	// FIXME
 	//int flag = 1;
@@ -102,23 +106,30 @@ void net::server::accept_handler(const boost::system::error_code &e,connection &
 	accept();
 }
 
-void net::server::handle_error(const string_type &message,
-	const boost::system::error_code &e,const connection &c)
+void sanguis::net::server::handle_error(
+	const sge::string &message,
+	const boost::system::error_code &e,
+	const connection &c)
 {
 	// do we have an error or a disconnect...
-	if (!is_disconnect(e))
-		throw exception(message+" error: "+e.message());
+	if (!detail::is_disconnect(e))
+		throw sge::exception(
+			sge::iconv(message)+
+			SGE_TEXT(" error: ")+
+			sge::iconv(e.message()));
 
-#ifdef NET_LOG
-	std::clog << "net_server: disconnected " << c.id << " (" << e.message() << ")\n";
-#endif
+	SGE_LOG_DEBUG(
+		log(),
+		sge::log::_1 << SGE_TEXT("server: disconnected ")
+		             << c.id << SGE_TEXT(" (")
+								 << sge::iconv(e.message()) << SGE_TEXT(")"));
 
 	// ...else remove connection
 	disconnect_signal(c.id,e.message());
 	connections.erase_if(connections.begin(),connections.end(),&boost::lambda::_1 == &c);
 }
 
-void net::server::write_handler(const boost::system::error_code &e,
+void sanguis::net::server::write_handler(const boost::system::error_code &e,
 	const std::size_t bytes,connection &c)
 {
 	handlers--;
@@ -129,9 +140,10 @@ void net::server::write_handler(const boost::system::error_code &e,
 		return;
 	}
 
-#ifdef NET_LOG
-	std::clog << "net_server: wrote " << bytes << " bytes\n";
-#endif
+	SGE_LOG_DEBUG(
+		log(),
+		sge::log::_1 << SGE_TEXT("server: wrote ")
+		             << bytes << SGE_TEXT(" bytes."));
 
 	// are there bytes left to send?
 	if (c.output.finished(bytes).to_send())
@@ -147,7 +159,7 @@ void net::server::write_handler(const boost::system::error_code &e,
 	}
 }
 
-void net::server::read_handler(const boost::system::error_code &e,
+void sanguis::net::server::read_handler(const boost::system::error_code &e,
 	const std::size_t bytes,connection &c)
 {
 	handlers--;
@@ -158,19 +170,20 @@ void net::server::read_handler(const boost::system::error_code &e,
 		return;
 	}
 
-#ifdef NET_LOG
-	std::clog << "net_server: reading " << bytes << " bytes\n";
-#endif
+	SGE_LOG_DEBUG(
+		log(),
+		sge::log::_1 << SGE_TEXT("server: reading ")
+		             << bytes << SGE_TEXT(" bytes."));
 	
 	data_signal(c.id,data_type(c.new_data.begin(),c.new_data.begin() + bytes));
 
 	// receive some more
 	c.socket.async_receive(boost::asio::buffer(c.new_data),
-		boost::bind(&net::server::read_handler,this,_1,_2,boost::ref(c)));
+		boost::bind(&sanguis::net::server::read_handler,this,_1,_2,boost::ref(c)));
 	handlers++;
 }
 
-void net::server::queue(const data_type &s)
+void sanguis::net::server::queue(const data_type &s)
 {
 	// send to all clients
 	for (connection_container::iterator i = connections.begin(); 
@@ -183,7 +196,7 @@ void net::server::queue(const data_type &s)
 	}
 }
 
-void net::server::queue(const id_type id,const data_type &s)
+void sanguis::net::server::queue(const id_type id,const data_type &s)
 {
 	for (connection_container::iterator i = connections.begin(); 
 		i != connections.end(); ++i)
@@ -192,17 +205,17 @@ void net::server::queue(const id_type id,const data_type &s)
 			continue;
 
 		if (!i->connected)
-			throw exception("invalid id "+boost::lexical_cast<string_type>(id));
+			throw sge::exception(SGE_TEXT("invalid id ")+boost::lexical_cast<sge::string>(id));
 
 		i->output.push_back(s);
 		return;
 	}
 
 	// no valid id found?
-	throw exception("invalid id "+boost::lexical_cast<string_type>(id));
+	throw sge::exception(SGE_TEXT("invalid id ")+boost::lexical_cast<sge::string>(id));
 }
 
-void net::server::process()
+void sanguis::net::server::process()
 {
 	for (connection_container::iterator i = connections.begin(); 
 		i != connections.end(); ++i)
@@ -212,7 +225,7 @@ void net::server::process()
 
 		i->sending = true;
 		i->socket.async_send(boost::asio::buffer(i->output.buffer()),
-			boost::bind(&net::server::write_handler,this,_1,_2,boost::ref(*i)));
+			boost::bind(&sanguis::net::server::write_handler,this,_1,_2,boost::ref(*i)));
 		handlers++;
 	}
 
@@ -221,6 +234,6 @@ void net::server::process()
 		boost::system::error_code e;
 		io_service.poll(e);
 		if (e)
-			throw exception("poll error: "+e.message());
+			throw sge::exception(SGE_TEXT("poll error: ")+sge::iconv(e.message()));
 	}
 }

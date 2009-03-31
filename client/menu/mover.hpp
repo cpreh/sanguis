@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_MENU_MOVER_HPP_INCLUDED
 #define SANGUIS_CLIENT_MENU_MOVER_HPP_INCLUDED
 
-#include "../time_type.hpp"
+#include "../../time_type.hpp"
 #include <sge/gui/manager_fwd.hpp>
 #include <sge/gui/widget_fwd.hpp>
 #include <sge/gui/point.hpp>
@@ -13,11 +13,13 @@ namespace sanguis
 {
 namespace client
 {
-class menu_mover
+namespace menu
 {
-SGE_NONCOPYABLE(menu_mover)
+class mover
+{
+SGE_NONCOPYABLE(mover)
 public:
-	menu_mover(
+	mover(
 		sge::gui::manager &,
 		sge::gui::widget &);
 	
@@ -60,6 +62,7 @@ private:
 		entry const &);
 	float_vector const random_pos() const;
 };
+}
 }
 }
 

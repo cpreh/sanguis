@@ -5,7 +5,7 @@
 #include "../perks/tree.hpp"
 #include "../perks/list.hpp"
 #include "../../messages/types.hpp"
-#include "../../net/types.hpp"
+#include "../../net/id_type.hpp"
 #include "../../perk_type.hpp"
 
 namespace sanguis

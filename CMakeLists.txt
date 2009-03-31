@@ -56,7 +56,9 @@ ADD_DEFINITIONS(${SGE_CFLAGS})
 FILE (GLOB files 
 	*.cpp
 	net/*.cpp
+	net/detail/*.cpp
 	client/*.cpp
+	client/menu/*.cpp
 	client/states/*.cpp
 	client_messages/*.cpp
 	draw/*.cpp

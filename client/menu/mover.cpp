@@ -1,6 +1,6 @@
-#include "menu_mover.hpp"
-#include "../resolution.hpp"
-#include "../random.hpp"
+#include "mover.hpp"
+#include "../../resolution.hpp"
+#include "../../random.hpp"
 #include <sge/gui/unit.hpp>
 #include <sge/gui/manager.hpp>
 #include <sge/gui/widget.hpp>
@@ -17,7 +17,7 @@
 #include <limits>
 #include <cmath>
 
-sanguis::client::menu_mover::menu_mover(
+sanguis::client::menu::mover::mover(
 	sge::gui::manager &_man,
 	sge::gui::widget &_current)
 	: man_(_man),
@@ -53,7 +53,7 @@ sanguis::client::menu_mover::menu_mover(
 	current_entry_.target = current_entry_.current;
 }
 
-void sanguis::client::menu_mover::update(
+void sanguis::client::menu::mover::update(
 	time_type const &t)
 {
 	update_position(
@@ -78,7 +78,7 @@ void sanguis::client::menu_mover::update(
 	}
 }
 
-void sanguis::client::menu_mover::reset(
+void sanguis::client::menu::mover::reset(
 	sge::gui::widget &w)
 {
 	SGE_ASSERT(to_move_.find(current_) == to_move_.end());
@@ -101,7 +101,7 @@ void sanguis::client::menu_mover::reset(
 		sge::gui::activation_state::active);
 }
 
-void sanguis::client::menu_mover::update_position(
+void sanguis::client::menu::mover::update_position(
 	sge::gui::widget &w,
 	entry &e,
 	time_type const &t)
@@ -120,7 +120,7 @@ void sanguis::client::menu_mover::update_position(
 			e.current));
 }
 
-void sanguis::client::menu_mover::update_visibility(
+void sanguis::client::menu::mover::update_visibility(
 	sge::gui::widget &w,
 	entry const &e)
 {
@@ -160,7 +160,7 @@ void sanguis::client::menu_mover::update_visibility(
 	);
 }
 
-sanguis::client::menu_mover::float_vector const sanguis::client::menu_mover::random_pos() const
+sanguis::client::menu::mover::float_vector const sanguis::client::menu::mover::random_pos() const
 {
 	typedef std::tr1::uniform_real<
 		float_type

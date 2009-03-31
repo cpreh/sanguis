@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERIALIZATION_HPP_INCLUDED
 #define SANGUIS_SERIALIZATION_HPP_INCLUDED
 
-#include "net/types.hpp"
+#include "net/data_type.hpp"
 #include "messages/base.hpp"
 #include <boost/function.hpp>
 

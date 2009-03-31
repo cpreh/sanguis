@@ -32,32 +32,32 @@ public:
 		load::context const &,
 		sge::collision::world_ptr,
 		sge::console::gfx &,
-		::net::port_type);
+		net::port_type);
 	void process(tick_event const &);
 	void process_message(
-		::net::id_type,
+		net::id_type,
 		messages::auto_ptr);
 
 	void connect_callback(
-		::net::id_type);
+		net::id_type);
 	void disconnect_callback(
-		::net::id_type,
-		::net::string_type const &);
+		net::id_type,
+		sge::string const &);
 	void data_callback(
-		::net::id_type,
-		::net::data_type const &);
+		net::id_type,
+		net::data_type const &);
 
 	void send(
 		messages::auto_ptr m);
 
 	void send(
 		messages::auto_ptr,
-		::net::id_type dest);
+		net::id_type dest);
 
 	void console_print(
 		sge::string const &);
-	::net::port_type port() const;
-	::net::server &net();
+	net::port_type port() const;
+	net::server &net();
 	void listen();
 
 	load::context const &
@@ -66,14 +66,14 @@ public:
 	sge::collision::world_ptr const collision();
 private:
 	typedef std::map<
-		::net::id_type,
+		net::id_type,
 		client_data
 	> client_map;
 
 	load::context const &resources_;
-	::net::port_type port_;
-	::net::server net_;
-	::net::server::signal_connection
+	net::port_type port_;
+	net::server net_;
+	sge::signal::auto_connection
 		s_conn,
 		s_disconn,
 		s_data;

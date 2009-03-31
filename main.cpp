@@ -69,7 +69,7 @@ create_server(
 	sanguis::load::context const &,
 	sge::collision::world_ptr const,
 	sge::console::gfx &,
-	::net::port_type,
+	sanguis::net::port_type,
 	bool client_only);
 
 }
@@ -80,8 +80,8 @@ try
 	namespace po = boost::program_options;
 	po::options_description desc("allowed options");
 
-	net::address_type dest_server;
-	net::port_type host_port,dest_port;
+	sanguis::net::hostname_type dest_server;
+	sanguis::net::port_type host_port,dest_port;
 	std::string log_level;
 	bool client_only;
 	unsigned screen_width, screen_height;
@@ -90,13 +90,13 @@ try
 		("help",
 			"produce help message")
 		("dest-server",
-			po::value<net::address_type>(&dest_server)->default_value("localhost"),
+			po::value<sanguis::net::hostname_type>(&dest_server)->default_value("localhost"),
 			"sets the server (ip/hostname) to connect to when hitting space")
 		("dest-port",
-			po::value<net::port_type>(&dest_port)->default_value(1337),
+			po::value<sanguis::net::port_type>(&dest_port)->default_value(1337),
 			"sets the server port to connect to")
 		("host-port",
-			po::value<net::port_type>(&host_port)->default_value(1337),
+			po::value<sanguis::net::port_type>(&host_port)->default_value(1337),
 			"sets the port to listen to for games")
 		("client-only",
 			po::value<bool>(&client_only)->default_value(false),
@@ -289,7 +289,7 @@ create_server(
 	sanguis::load::context const &resources,
 	sge::collision::world_ptr const coll,
 	sge::console::gfx &con,
-	::net::port_type const host_port,
+	sanguis::net::port_type const host_port,
 	bool const client_only)
 {
 	return !client_only
