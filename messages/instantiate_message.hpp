@@ -6,6 +6,6 @@
 #include <boost/mpl/at.hpp>
 
 #define SANGUIS_MESSAGES_INSTANTIATE_MESSAGE(msg)\
-SANGUIS_MESSAGES_SERIALIZATION_REGISTER_CLASS(global_context(), boost::mpl::at_c<memory_type::types, 0>::value, msg)
+SANGUIS_MESSAGES_SERIALIZATION_REGISTER_CLASS(global_context(), boost::mpl::at_c<msg::memory_type::types, 0>::value, msg)
 
 #endif
