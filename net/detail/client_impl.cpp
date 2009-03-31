@@ -29,9 +29,6 @@ sanguis::net::detail::client_impl::client_impl()
 	disconnect_signal_(),
 	data_signal_()
 {
-	// TODO: put this in a single function
-	//int flag = 1;
-	//setsockopt(socket_.native(),IPPROTO_TCP, TCP_NODELAY, &flag, sizeof(int));
 }
 
 void sanguis::net::detail::client_impl::connect(
@@ -48,10 +45,56 @@ void sanguis::net::detail::client_impl::connect(
 		s,
 		boost::lexical_cast<std::string>(
 			port));
+
 	resolver_.async_resolve(
 		query,
 		boost::bind(&client_impl::resolve_handler,this,_1,_2));
+
 	handlers_++;
+}
+
+void sanguis::net::detail::client_impl::queue(const data_type &data)
+{
+	output_.push_back(
+		data);
+}
+
+void sanguis::net::detail::client_impl::process()
+{
+	if (connected_ && !sending_ && output_.to_send())
+	{
+		sending_ = true;
+		socket_.async_send(
+			boost::asio::buffer(output_.buffer()),
+			boost::bind(&sanguis::net::detail::client_impl::write_handler,this,_1,_2));
+		handlers_++;
+	}
+
+	if (!handlers_)
+		return;
+
+	boost::system::error_code e;
+	io_service_.poll(e);
+	if (e)
+		throw sge::exception(
+			SGE_TEXT("poll error: ")+
+			sge::iconv(
+				e.message()));
+}
+
+sge::signal::auto_connection sanguis::net::detail::client_impl::register_connect(client::connect_function const &f)
+{
+	return connect_signal_.connect(f);
+}
+
+sge::signal::auto_connection sanguis::net::detail::client_impl::register_disconnect(client::disconnect_function const &f)
+{
+	return disconnect_signal_.connect(f);
+}
+
+sge::signal::auto_connection sanguis::net::detail::client_impl::register_data(client::data_function const &f)
+{
+	return data_signal_.connect(f);
 }
 
 void sanguis::net::detail::client_impl::resolve_handler(
@@ -72,45 +115,6 @@ void sanguis::net::detail::client_impl::resolve_handler(
 	socket_.async_connect(
 		endpoint,
 		boost::bind(&client_impl::connect_handler,this,_1,++i));
-	handlers_++;
-}
-
-void sanguis::net::detail::client_impl::connect_handler(
-	boost::system::error_code const &e,
-	boost::asio::ip::tcp::resolver::iterator i)
-{
-	handlers_--;
-	if (e)
-	{
-		// are we at the end of the endpoint list?
-		if (i == boost::asio::ip::tcp::resolver::iterator())
-			throw sge::exception(
-				SGE_TEXT("client: exhausted endpoints: ")+
-				sge::iconv(
-					e.message()));
-
-		SGE_LOG_DEBUG(
-			log(),
-			sge::log::_1 << SGE_TEXT("client: resolving next endpoint"));
-		
-		boost::asio::ip::tcp::endpoint endpoint = *i;
-		socket_.async_connect(
-			endpoint,
-			boost::bind(&client_impl::connect_handler,this,_1,++i));
-		handlers_++;
-		return;
-	}
-
-	SGE_LOG_DEBUG(
-		log(),
-		sge::log::_1 << SGE_TEXT("client: connected"));
-
-	// first connect to true, _then_ call signal
-	connected_ = true;
-	connect_signal_();
-	socket_.async_receive(
-		boost::asio::buffer(new_data_),
-		boost::bind(&client_impl::read_handler,this,_1,_2));
 	handlers_++;
 }
 
@@ -168,12 +172,6 @@ void sanguis::net::detail::client_impl::read_handler(
 	handlers_++;
 }
 
-void sanguis::net::detail::client_impl::queue(const data_type &data)
-{
-	output_.push_back(
-		data);
-}
-
 void sanguis::net::detail::client_impl::write_handler(const boost::system::error_code &e,const std::size_t bytes)
 {
 	handlers_--;
@@ -207,41 +205,41 @@ void sanguis::net::detail::client_impl::write_handler(const boost::system::error
 	}
 }
 
-void sanguis::net::detail::client_impl::process()
+void sanguis::net::detail::client_impl::connect_handler(
+	boost::system::error_code const &e,
+	boost::asio::ip::tcp::resolver::iterator i)
 {
-	if (connected_ && !sending_ && output_.to_send())
+	handlers_--;
+	if (e)
 	{
-		sending_ = true;
-		socket_.async_send(
-			boost::asio::buffer(output_.buffer()),
-			boost::bind(&sanguis::net::detail::client_impl::write_handler,this,_1,_2));
+		// are we at the end of the endpoint list?
+		if (i == boost::asio::ip::tcp::resolver::iterator())
+			throw sge::exception(
+				SGE_TEXT("client: exhausted endpoints: ")+
+				sge::iconv(
+					e.message()));
+
+		SGE_LOG_DEBUG(
+			log(),
+			sge::log::_1 << SGE_TEXT("client: resolving next endpoint"));
+		
+		boost::asio::ip::tcp::endpoint endpoint = *i;
+		socket_.async_connect(
+			endpoint,
+			boost::bind(&client_impl::connect_handler,this,_1,++i));
 		handlers_++;
+		return;
 	}
 
-	if (!handlers_)
-		return;
+	SGE_LOG_DEBUG(
+		log(),
+		sge::log::_1 << SGE_TEXT("client: connected"));
 
-	boost::system::error_code e;
-	io_service_.poll(e);
-	if (e)
-		throw sge::exception(
-			SGE_TEXT("poll error: ")+
-			sge::iconv(
-				e.message()));
+	// first connect to true, _then_ call signal
+	connected_ = true;
+	connect_signal_();
+	socket_.async_receive(
+		boost::asio::buffer(new_data_),
+		boost::bind(&client_impl::read_handler,this,_1,_2));
+	handlers_++;
 }
-
-sge::signal::auto_connection sanguis::net::detail::client_impl::register_connect(client::connect_function const &f)
-{
-	return connect_signal_.connect(f);
-}
-
-sge::signal::auto_connection sanguis::net::detail::client_impl::register_disconnect(client::disconnect_function const &f)
-{
-	return disconnect_signal_.connect(f);
-}
-
-sge::signal::auto_connection sanguis::net::detail::client_impl::register_data(client::data_function const &f)
-{
-	return data_signal_.connect(f);
-}
-

@@ -38,4 +38,5 @@ sge::signal::auto_connection sanguis::net::client::register_data(data_function c
 	return impl_->register_data(f);
 }
 
+// has to be here because of impl_
 sanguis::net::client::~client() {}
