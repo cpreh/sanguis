@@ -1,31 +1,35 @@
 #ifndef SANGUIS_MESSAGES_SPEED_HPP_INCLUDED
 #define SANGUIS_MESSAGES_SPEED_HPP_INCLUDED
 
-#include "entity_message.hpp"
-#include "types.hpp"
-#include <sge/math/vector/basic_decl.hpp>
-#include <boost/serialization/access.hpp>
+#include "bind_entity_message.hpp"
+#include "make_class.hpp"
+#include "vector2.hpp"
+#include "types/message.hpp"
+#include "roles/speed.hpp"
+#include <majutsu/composite.hpp>
+#include <majutsu/role.hpp>
+#include <boost/mpl/vector.hpp>
 
 namespace sanguis
 {
 namespace messages
 {
 
-class speed : public entity_message {
-public:
-	speed();
-	speed(
-		entity_id id,
-		vector2 const &);
-	
-	vector2 const &get() const;
-private:
-	vector2 speed_;
+typedef majutsu::composite<
+	boost::mpl::vector<
+		bind_entity_message<
+			types::message::speed
+		>,
+		majutsu::role<
+			vector2,
+			roles::speed
+		>
+	>
+> speed_elements;
 
-	friend class boost::serialization::access;
-	template<typename Archive>
-	void serialize(Archive &ar, unsigned);
-};
+typedef make_class<
+	speed_elements
+> speed;
 
 }
 }

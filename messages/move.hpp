@@ -6,9 +6,6 @@
 #include "pos.hpp"
 #include "make_class.hpp"
 #include <majutsu/composite.hpp>
-#include <majutsu/bind.hpp>
-#include <majutsu/constant.hpp>
-#include <majutsu/placeholder.hpp>
 #include <majutsu/role.hpp>
 #include <boost/mpl/vector.hpp>
 
@@ -20,18 +17,12 @@ namespace messages
 
 typedef majutsu::composite<
 	boost::mpl::vector<
-		majutsu::bind<
-			entity_message,
-			boost::mpl::vector<
-				majutsu::constant<
-					types::message::type,
-					types::mesage::move
-				>
-			>
+		bind_entity_message<
+			types::message::move
+		>,
+		majutsu::role<
+			pos
 		>
-	>,
-	majutsu::role<
-		pos
 	>
 > move_elements;
 

@@ -1,24 +1,22 @@
 #ifndef SANGUIS_MESSAGES_REMOVE_HPP_INCLUDED
 #define SANGUIS_MESSAGES_REMOVE_HPP_INCLUDED
 
-#include "entity_message.hpp"
-#include <boost/serialization/access.hpp>
+#include "bind_entity_message.hpp"
+#include "make_class.hpp"
+#include "types/message.hpp"
 
 namespace sanguis
 {
 namespace messages
 {
 
-class remove : public entity_message {
-public:
-	remove();
-	explicit remove(
-		entity_id);
-private:
-	friend class boost::serialization::access;
-	template<typename Archive>
-	void serialize(Archive &ar, unsigned);
-};
+typedef bind_entity_message<
+	types::message::remove
+>::type remove_elements;
+
+typedef make_class<
+	remove_elements
+> remove;
 
 }
 }

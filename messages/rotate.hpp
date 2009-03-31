@@ -1,30 +1,35 @@
 #ifndef SANGUIS_MESSAGES_ROTATE_HPP_INCLUDED
 #define SANGUIS_MESSAGES_ROTATE_HPP_INCLUDED
 
-#include "entity_message.hpp"
-#include "types.hpp"
-#include <boost/serialization/access.hpp>
+#include "bind_entity_message.hpp"
+#include "make_class.hpp"
+#include "space_unit.hpp"
+#include "types/message.hpp"
+#include "roles/angle.hpp"
+#include <majutsu/composite.hpp>
+#include <majutsu/role.hpp>
+#include <boost/mpl/vector.hpp>
 
 namespace sanguis
 {
 namespace messages
 {
 
-class rotate : public entity_message {
-public:
-	rotate();
-	rotate(
-		entity_id id,
-		space_unit rot);
-	
-	space_unit rot() const;
-private:
-	space_unit rot_;
+typedef majutsus::composite<
+	boost::mpl::vector<
+		bind_entity_message<
+			types::message::rotate
+		>,
+		majutsu::role<
+			space_unit,
+			roles::angle
+		>
+	>
+> rotate_elements;
 
-	friend class boost::serialization::access;
-	template<typename Archive>
-	void serialize(Archive &ar, unsigned);
-};
+typedef make_class<
+	rotate_elements
+>::type rotate;
 
 }
 }
