@@ -1,9 +1,9 @@
 #ifndef SANGUIS_MESSAGES_BINDINGS_DYNAMIC_LEN_HPP_INCLUDED
 #define SANGUIS_MESSAGES_BINDINGS_DYNAMIC_LEN_HPP_INCLUDED
 
+#include <majutsu/detail/copy_n.hpp> // TODO: replace this
 #include <majutsu/size_type.hpp>
 #include <majutsu/raw_pointer.hpp>
-#include <majutsu/detail/copy_n.hpp> // TODO: replace this
 
 namespace sanguis
 {
@@ -24,7 +24,7 @@ struct dynamic_len {
 	needed_size(
 		type const &t)
 	{
-		return t.size() + sizeof(length_type);
+		return t.size() * sizeof(typename T::value_type) + sizeof(length_type);
 	}
 
 	static void
@@ -55,7 +55,7 @@ struct dynamic_len {
 			>(
 				t.data()
 			),
-			t.size(),
+			t.size() * sizeof(typename T::value_type),
 			mem + sizeof(length_type)
 		);
 	}
@@ -73,7 +73,7 @@ struct dynamic_len {
 
 		majutsu::detail::copy_n(
 			beg + sizeof(length_type),
-			sz - sizeof(length_type),
+			sz * sizeof(typename T::value_type) - sizeof(length_type),
 			reinterpret_cast<
 				majutsu::raw_pointer
 			>(
