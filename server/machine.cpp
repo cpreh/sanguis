@@ -110,20 +110,20 @@ void sanguis::server::machine::data_callback(
 	net::id_type const id,
 	net::data_type const &data)
 {
-	clients[id].in_buffer
-		= deserialize(
-			clients[id].in_buffer + data,
-			boost::bind(
-				&machine::process_message,
-				this,
-				id,
-				_1));
+	clients[id].in_buffer += data;
+
+	while (messages::auto_ptr p = deserialize(clients[id].in_buffer))
+		process_message(id,p);
 }
 
 void sanguis::server::machine::send(
 	messages::auto_ptr m) 
 { 
-	net::data_type const m_str = serialize(m);
+	net::data_type m_str;
+
+	serialize(
+		m
+		m_str);
 
 	BOOST_FOREACH(client_map::reference ref, clients)
 		ref.second.out_buffer += m_str;
@@ -138,7 +138,9 @@ void sanguis::server::machine::send(
 		throw exception(
 			SGE_TEXT("machine::send: client id not found!"));
 	
-	it->second.out_buffer += serialize(m);
+	serialize(
+		m,
+		it->second.out_buffer);
 }
 
 sanguis::net::port_type

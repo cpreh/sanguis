@@ -6,7 +6,7 @@
 #include "../data_type.hpp"
 #include "../port_type.hpp"
 #include "../hostname_type.hpp"
-#include "../output_buffer.hpp"
+#include "output_buffer_decl.hpp"
 
 #include <sge/string.hpp>
 #include <sge/signal/object.hpp>

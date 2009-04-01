@@ -97,14 +97,20 @@ void sanguis::client::machine::process_message(
 			ptr));
 }
 
-void sanguis::client::machine::data_callback(net::data_type const &data)
+void sanguis::client::machine::data_callback(
+	net::data_type const &data)
 {
-	in_buffer = deserialize(in_buffer+data,boost::bind(&machine::process_message,this,_1));
+	in_buffer += data;
+	while (messages::auto_ptr p = deserialize(in_buffer))
+		process_message(p);
 }
 
-void sanguis::client::machine::send(messages::auto_ptr m)
+void sanguis::client::machine::send(
+	messages::auto_ptr m)
 {
-	out_buffer += serialize(m);
+	serialize(
+		m,
+		out_buffer);
 }
 
 sanguis::net::hostname_type

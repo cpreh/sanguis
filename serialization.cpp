@@ -1,57 +1,71 @@
 #include "serialization.hpp"
 #include "messages/base.hpp"
 
-#include "archive.hpp"
-#include <boost/serialization/export.hpp>
-
+#include <algorithm>
 #include <sstream>
 #include <iomanip>
 #include <cstddef>
-#include <ostream>
 
 namespace
 {
-const std::size_t message_header_size = 4;
+std::streamsize const message_header_size = 2;
 }
 
-sanguis::net::data_type sanguis::deserialize(
-	net::data_type const &data,
-	deserialize_callback const &callback)
+sanguis::messages::auto_ptr const sanguis::deserialize(
+	net::data_type &data)
 {
 	if (data.size() < message_header_size)
-		return data;
+		return messages::auto_ptr();
 
-	std::basic_istringstream<net::data_type::value_type> 
-		ss(data.substr(0,message_header_size));
+	typedef std::basic_istringstream<net::data_type::value_type> stream_type;
+
+	stream_type
+		sss(
+			data.substr(
+				static_cast<net::data_type::size_type>(
+					0),
+				static_cast<net::data_type::size_type>(
+					message_header_size)));
+
 	std::size_t message_size;
-	ss >> std::hex >> message_size;
+	sss >> std::hex >> message_size;
 
 	if ((data.size()-message_header_size) < message_size)
-		return data;
+		return messages::auto_ptr();
 
-	std::basic_istringstream<net::data_type::value_type> ass(
-		data.substr(message_header_size,message_size));
+	stream_type ss(
+		data.substr(
+			static_cast<net::data_type::size_type>(
+				message_header_size),
+			static_cast<net::data_type::size_type>(
+				message_size-message_header_size)));
 	
-	iarchive ar(ass);
-	// FIXME: can this be fixed?
-	messages::base *unsafe_ptr;
-	ar >> unsafe_ptr;
-	callback(messages::auto_ptr(unsafe_ptr));
+	data = data.substr(
+		static_cast<net::data_type::size_type>(
+			message_size+message_header_size));
 
-	return deserialize(data.substr(message_header_size+message_size),callback);
+	return messages::deserialize(
+		messages::global_context(),
+		ss);
 }
 
-sanguis::net::data_type sanguis::serialize(
-	messages::auto_ptr m)
+void sanguis::serialize(
+	messages::auto_ptr m,
+	net::data_type &a)
 {
-	typedef std::basic_ostringstream<net::data_type::value_type> sstream;
+	typedef std::basic_ostringstream<net::data_type::value_type> stream_type;
 
-	sstream ss;
-	oarchive oa(ss);
-	const messages::base *const ptr = m.get();
-	oa << ptr;
+	stream_type oss;
+	oss << std::hex 
+	    << std::setw(message_header_size) 
+			<< m->size();
 
-	sstream oss;
-	oss << std::hex << std::setw(message_header_size) << ss.str().size() << ss.str();
-	return oss.str();
+	messages::serialize(
+		m,
+		oss);
+
+	std::copy(
+		oss.str().begin(),
+		oss.str().end(),
+		std::back_inserter<net::data_type>(a));
 }
