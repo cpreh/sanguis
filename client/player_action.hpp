@@ -9,7 +9,7 @@ namespace sanguis
 namespace client
 {
 
-typedef messages::space_unit key_scale;
+typedef float key_scale;
 
 struct player_action {
 	enum action_type {

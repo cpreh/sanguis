@@ -20,7 +20,7 @@ enum type {
 }
 
 typedef std::tr1::array<
-	messages::space_unit,
+	float,
 	damage_type::size
 > damage_array;
 

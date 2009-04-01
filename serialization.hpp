@@ -2,15 +2,17 @@
 #define SANGUIS_SERIALIZATION_HPP_INCLUDED
 
 #include "net/data_type.hpp"
-#include "messages/base.hpp"
+#include "messages/auto_ptr.hpp"
 
 namespace sanguis
 {
 
-messages::auto_ptr deserialize(
+messages::auto_ptr
+deserialize(
 	net::data_type &data);
 
-void serialize(
+void
+serialize(
 	messages::auto_ptr,
 	net::data_type &);
 
