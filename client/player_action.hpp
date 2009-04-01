@@ -1,7 +1,6 @@
 #ifndef SANGUIS_CLIENT_PLAYER_ACTION_HPP_INCLUDED
 #define SANGUIS_CLIENT_PLAYER_ACTION_HPP_INCLUDED
 
-#include "../messages/types.hpp"
 #include <boost/statechart/event.hpp>
 
 namespace sanguis
