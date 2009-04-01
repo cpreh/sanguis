@@ -79,7 +79,7 @@ sanguis::server::states::running::running(my_context ctx)
 void sanguis::server::states::running::create_decorations()
 {
 	typedef std::tr1::uniform_real<
-		messages::space_unit
+		space_unit
 	> uniform_su;
 
 	typedef std::tr1::uniform_int<
@@ -99,22 +99,22 @@ void sanguis::server::states::running::create_decorations()
 	rng_type rng_x(
 		create_seeded_randgen(),
 		uniform_su(
-			messages::mu(0),
-			messages::mu(resolution().w())
+			static_cast<space_unit>(0),
+			static_cast<space_unit>(resolution().w())
 		));
 
 	rng_type rng_y(
 		create_seeded_randgen(),
 		uniform_su(
-			messages::mu(0),
-			messages::mu(resolution().h())
+			static_cast<space_unit>(0),
+			static_cast<space_unit>(resolution().h())
 		));
 
 	rng_type rng_angle(
 		create_seeded_randgen(),
 		uniform_su(
-			messages::mu(0),
-			sge::math::twopi<messages::space_unit>()
+			static_cast<space_unit>(0),
+			sge::math::twopi<space_unit>()
 		));
 
 	rng_int_type rng_deco_type(
@@ -202,9 +202,9 @@ sanguis::server::states::running::player(
 }
 
 void sanguis::server::states::running::divide_exp(
-	messages::exp_type const exp)
+	exp_type const exp)
 {
-	if (exp == static_cast<messages::exp_type>(0))
+	if (exp == static_cast<exp_type>(0))
 		return;
 
 	BOOST_FOREACH(running::player_map::reference ref, players())
@@ -222,7 +222,7 @@ void sanguis::server::states::running::divide_exp(
 
 void sanguis::server::states::running::level_callback(
 	entities::player &p,
-	messages::level_type)
+	level_type)
 {
 	// no message_converter here because it operates on a _specific_ entity type
 	send(
@@ -336,18 +336,18 @@ sanguis::server::states::running::operator()(
 	entities::auto_ptr new_player(
 		new entities::player(
 			environment(),
-			damage::list(messages::mu(0)),
+			damage::list(static_cast<space_unit>(0)),
 			net_id,
 			messages::pos_type(
-				messages::mu(resolution().w()/2),
-				messages::mu(resolution().h()/2)),
-			messages::mu(0),
-			messages::mu(0),
+				static_cast<space_unit>(resolution().w()/2),
+				static_cast<space_unit>(resolution().h()/2)),
+			static_cast<space_unit>(0),
+			static_cast<space_unit>(0),
 			boost::assign::map_list_of
 				(entities::property_type::health,
-				entities::property(messages::mu(100)))
+				entities::property(static_cast<space_unit>(100)))
 				(entities::property_type::movement_speed,
-				entities::property(messages::mu(0),messages::mu(100))),
+				entities::property(static_cast<space_unit>(0),static_cast<space_unit>(100))),
 			m.name()));
 
 	players()[net_id] = dynamic_cast<entities::player *>(

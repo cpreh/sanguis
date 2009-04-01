@@ -16,14 +16,14 @@ class health : public pickup {
 public:
 	health(
 		server::environment const &,
-		messages::pos_type const &center,
+		pos_type const &center,
 		team::type team,
-		messages::space_unit amount);
+		health_type amount);
 private:
 	void do_pickup(
 		entity_with_weapon &receiver);
 	
-	space_unit amount;
+	health_type amount;
 };
 
 }

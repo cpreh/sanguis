@@ -185,7 +185,7 @@ sanguis::server::states::unpaused::operator()(
 	{
 		player_.property(
 			entities::property_type::movement_speed).current_to_max();
-		player_.direction(*sge::math::angle_to<messages::space_unit>(e.dir()));
+		player_.direction(*sge::math::angle_to<space_unit>(e.dir()));
 	}
 
 	send(message_convert<messages::speed>(player_));

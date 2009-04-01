@@ -14,14 +14,14 @@ sanguis::server::entities::enemies::enemy::enemy(
 	enemy_type::type const etype_,
 	server::environment const &env,
 	armor_array const &armor,
-	messages::pos_type const &center,
-	messages::space_unit const angle,
-	messages::space_unit const direction,
+	pos_type const &center,
+	space_unit const angle,
+	space_unit const direction,
 	property_map const &properties,
 	ai::ai_ptr const ai_,
 	weapons::auto_ptr weapon_,
 	unsigned const spawn_chance,
-	messages::exp_type const exp_)
+	exp_type const exp_)
 :
 	entity_with_ai(
 		base_parameters(
@@ -57,7 +57,7 @@ sanguis::server::entities::enemies::enemy::add_message() const
 	return message_convert(*this);
 }
 
-sanguis::messages::exp_type
+sanguis::server::exp_type
 sanguis::server::entities::enemies::enemy::exp() const
 {
 	return exp_;

@@ -60,11 +60,11 @@ public:
 		net::id_type);
 
 	void divide_exp(
-		messages::exp_type);
+		exp_type);
 
 	void level_callback(
 		server::entities::player &,
-		messages::level_type);
+		level_type);
 	
 	bool collision_test(
 		sge::collision::satellite const &,

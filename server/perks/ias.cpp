@@ -17,9 +17,9 @@ bool sanguis::server::perks::ias::can_raise_level() const
 	return true;
 }
 
-sanguis::messages::space_unit
+sanguis::server::space_unit
 sanguis::server::perks::ias::factor() const
 {
-	return static_cast<messages::space_unit>(level())
-		* messages::mu(0.1);
+	return static_cast<space_unit>(level())
+		* static_cast<space_unit>(0.1);
 }

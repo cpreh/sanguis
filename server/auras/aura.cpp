@@ -10,7 +10,7 @@ sanguis::server::auras::aura::~aura()
 
 void
 sanguis::server::auras::aura::center(
-	messages::pos_type const &p)
+	pos_type const &p)
 {
 	circle()->center(
 		sge::math::vector::construct(

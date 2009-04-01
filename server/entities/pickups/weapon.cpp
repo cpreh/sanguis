@@ -10,7 +10,7 @@
 
 sanguis::server::entities::pickups::weapon::weapon(
 	server::environment const &env,
-	messages::pos_type const &center,
+	pos_type const &center,
 	team::type const team_,
 	weapon_type::type const weapon_type_)
 :
