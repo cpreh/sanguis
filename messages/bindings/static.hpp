@@ -57,6 +57,8 @@ struct static_ {
 				ret.data()
 			)
 		);
+
+		return ret;
 	}
 };
 

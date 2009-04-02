@@ -19,7 +19,7 @@ typedef majutsu::composite<
 	boost::mpl::vector<
 		bind_entity_message<
 			types::message::move
-		>,
+		>::type,
 		majutsu::role<
 			pos
 		>

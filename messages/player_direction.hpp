@@ -19,7 +19,7 @@ typedef majutsu::composite<
 	boost::mpl::vector<
 		bind_entity_message<
 			types::message::player_direction
-		>,
+		>::type,
 		majutsu::role<
 			vector2,
 			roles::direction
@@ -29,7 +29,7 @@ typedef majutsu::composite<
 
 typedef make_class<
 	player_direction_elements
-> player_direction;
+>::type player_direction;
 
 }
 }

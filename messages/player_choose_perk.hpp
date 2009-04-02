@@ -19,7 +19,7 @@ typedef majutsu::composite<
 	boost::mpl::vector<
 		bind_entity_message<
 			types::message::player_choose_perk
-		>,
+		>::type,
 		majutsu::role<
 			enum_,
 			roles::perk

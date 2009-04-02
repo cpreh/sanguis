@@ -5,7 +5,8 @@
 #include "send_callback.hpp"
 #include "../weapon_type.hpp"
 #include "../entity_id.hpp"
-#include "../messages/fwd.hpp"
+#include "../messages/give_weapon.hpp"
+#include "../messages/move.hpp"
 #include <sge/time/timer.hpp>
 #include <sge/math/vector/static.hpp>
 #include <sge/math/vector/basic_decl.hpp>
@@ -84,7 +85,8 @@ private:
 
 	typedef std::vector<
 		action_handler
-		>                       action_handlers;
+	> action_handlers;
+
 	action_handlers                 actions;
 		
 	entity_id                       player_id_;

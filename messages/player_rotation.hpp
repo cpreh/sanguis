@@ -19,7 +19,7 @@ typedef majutsu::composite<
 	boost::mpl::vector<
 		bind_entity_message<
 			types::message::player_rotation
-		>,
+		>::type,
 		majutsu::role<
 			space_unit,
 			roles::angle
@@ -29,7 +29,7 @@ typedef majutsu::composite<
 
 typedef make_class<
 	player_rotation_types
-> player_rotation;
+>::type player_rotation;
 
 }
 }

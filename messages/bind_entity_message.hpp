@@ -5,6 +5,7 @@
 #include "types/message.hpp"
 #include <majutsu/bind.hpp>
 #include <majutsu/constant.hpp>
+#include <majutsu/placeholder.hpp>
 #include <sge/restrict_typedef_struct.hpp>
 #include <boost/mpl/vector.hpp>
 
@@ -23,7 +24,8 @@ struct bind_entity_message {
 			majutsu::constant<
 				types::message::type,
 				Msg
-			>
+			>,
+			majutsu::placeholder
 		>
 	> type;
 

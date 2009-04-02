@@ -16,7 +16,7 @@
 #include <majutsu/composite.hpp>
 #include <boost/mpl/copy.hpp>
 #include <boost/mpl/back_inserter.hpp>
-#include <boost/mpl/vector.hpP>
+#include <boost/mpl/vector.hpp>
 
 namespace sanguis
 {
@@ -29,7 +29,7 @@ template<
 >
 struct make_add_message {
 	typedef boost::mpl::vector<
-		bind_entity_message<
+		typename bind_entity_message<
 			Msg
 		>::type,
 		majutsu::role<
