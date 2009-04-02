@@ -110,8 +110,15 @@ void sanguis::client::machine::data_callback(
 	net::data_type const &data)
 {
 	in_buffer += data;
-	while (messages::auto_ptr p = deserialize(in_buffer))
+	//while (messages::auto_ptr p = deserialize(in_buffer))
+	//	process_message(p);
+	for(;;)
+	{
+		messages::auto_ptr p = deserialize(in_buffer);
+		if(!p.get())
+			return;
 		process_message(p);
+	}
 }
 
 void sanguis::client::machine::send(

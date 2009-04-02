@@ -3,7 +3,7 @@
 
 #include "types/message.hpp"
 #include "make_class.hpp"
-#include "entitiy_d.hpp"
+#include "entity_id.hpp"
 #include <majutsu/composite.hpp>
 #include <majutsu/constant.hpp>
 #include <majutsu/role.hpp>

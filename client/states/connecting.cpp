@@ -3,12 +3,11 @@
 #include "running.hpp"
 #include "unpaused.hpp"
 #include "../log.hpp"
-#include "../../dispatch_type.hpp"
 #include "../../messages/assign_id.hpp"
 #include "../../messages/client_info.hpp"
 #include "../../messages/connect.hpp"
 #include "../../messages/disconnect.hpp"
-#include "../../messages/types.hpp"
+#include "../../messages/unwrap.hpp"
 #include <sge/renderer/device.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/iconv.hpp>
@@ -31,16 +30,22 @@ boost::statechart::result
 sanguis::client::states::connecting::react(
 	message_event const &m)
 {
-	return dispatch_type<
+	return messages::unwrap<
 		boost::mpl::vector<
 			messages::assign_id,
 			messages::connect,
 			messages::disconnect
 		>,
-		boost::statechart::result>(
+		boost::statechart::result
+	>(
 		*this,
-		*m.message,
-		boost::bind(&connecting::handle_default_msg, this, _1));
+		m.message(),
+		boost::bind(
+			&connecting::handle_default_msg,
+			this,
+			_1
+		)
+	);
 }
 
 boost::statechart::result
@@ -51,7 +56,8 @@ sanguis::client::states::connecting::handle_default_msg(
 		log(),
 		sge::log::_1
 			<< SGE_TEXT("received unexpected message ")
-			<< sge::iconv(typeid(m).name()));
+			<< sge::iconv(typeid(m).name())
+	);
 	return discard_event();
 }
 
@@ -72,9 +78,13 @@ sanguis::client::states::connecting::operator()(
 			<< SGE_TEXT("received id"));
 	post_event(
 		message_event(
-			messages::auto_ptr(
-				new messages::assign_id(
-					m))));
+			messages::create(
+				messages::assign_id(
+					m
+				)
+			)
+		)
+	);
 	return transit<running>();
 }
 
@@ -83,9 +93,12 @@ sanguis::client::states::connecting::operator()(
 	messages::connect const &)
 {
 	context<machine>().send(
-		messages::auto_ptr(
-			new messages::client_info(
-				MESSAGE_TEXT("player1")))); // FIXME
+		messages::create(
+			messages::client_info(
+				MESSAGE_TEXT("player1")
+			)
+		)
+	); // FIXME
 	return discard_event();
 }
 

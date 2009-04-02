@@ -17,7 +17,7 @@ struct message_event : public boost::statechart::event<message_event> {
 	~message_event();
 
 	messages::shared_ptr const
-	message();
+	message() const;
 private:
 	messages::shared_ptr message_;
 };

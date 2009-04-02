@@ -9,9 +9,12 @@
 #include "../logic.hpp"
 #include "../../tick_event.hpp"
 #include "../../weapon_type.hpp"
-#include "../../messages/fwd.hpp"
 #include "../../messages/base.hpp"
-#include "../../messages/entity_message.hpp"
+#include "../../messages/assign_id.hpp"
+#include "../../messages/disconnect.hpp"
+#include "../../messages/give_weapon.hpp"
+#include "../../messages/move.hpp"
+#include "../../messages/remove.hpp"
 #include "../../draw/scene.hpp"
 #include "../../draw/player_fwd.hpp"
 #include <sge/signal/auto_connection.hpp>
@@ -30,10 +33,10 @@ namespace states
 class running
 	: public boost::statechart::state<running,machine,unpaused>
 {
-	public:
+public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<message_event>
-		> reactions;
+	> reactions;
 
 	running(my_context);
 	void draw(tick_event const &);
@@ -51,7 +54,7 @@ class running
 		messages::move const &);
 	boost::statechart::result operator()(
 		messages::remove const &);
-	private:
+private:
 	boost::statechart::result handle_default_msg(
 		messages::base const &);
 

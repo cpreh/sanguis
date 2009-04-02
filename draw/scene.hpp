@@ -8,19 +8,36 @@
 #include "entity_fwd.hpp"
 #include "background_fwd.hpp"
 #include "../load/context_fwd.hpp"
-#include "../entity_id.hpp"
-#include "../messages/fwd.hpp"
-#include "../time_type.hpp"
 #include "../client_messages/fwd.hpp"
+#include "../messages/base.hpp"
+#include "../messages/add.hpp"
+#include "../messages/add_enemy.hpp"
+#include "../messages/add_pickup.hpp"
+#include "../messages/add_decoration.hpp"
+#include "../messages/add_projectile.hpp"
+#include "../messages/add_weapon_pickup.hpp"
+#include "../messages/change_weapon.hpp"
+#include "../messages/experience.hpp"
+#include "../messages/health.hpp"
+#include "../messages/level_up.hpp"
+#include "../messages/max_health.hpp"
+#include "../messages/move.hpp"
+#include "../messages/remove.hpp"
+#include "../messages/resize.hpp"
+#include "../messages/rotate.hpp"
+#include "../messages/start_attacking.hpp"
+#include "../messages/stop_attacking.hpp"
+#include "../messages/start_reloading.hpp"
+#include "../messages/stop_reloading.hpp"
+#include "../messages/speed.hpp"
+#include "../entity_id.hpp"
+#include "../time_type.hpp"
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
-#include <sge/type_info.hpp>
 #include <sge/log/fwd.hpp>
 #include <sge/noncopyable.hpp>
 #include <boost/function.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
-#include <vector>
-#include <map>
 
 namespace sanguis
 {
@@ -118,12 +135,6 @@ private:
 		void (
 			messages::base const &)
 	> dispatch_fun;
-
-	typedef std::map<
-		sge::type_info,
-		dispatch_fun
-	> event_map;
-	event_map event_dispatcher;
 };
 
 }
