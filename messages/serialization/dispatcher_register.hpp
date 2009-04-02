@@ -2,7 +2,6 @@
 #define SANGUIS_MESSAGES_SERIALIZATION_DISPATCHER_REGISTER_HPP_INCLUDED
 
 #include "context_fwd.hpp"
-#include "../types/message.hpp"
 #include <sge/noncopyable.hpp>
 
 namespace sanguis
@@ -18,9 +17,8 @@ template<
 struct dispatcher_register {
 	SGE_NONCOPYABLE(dispatcher_register)
 public:
-	dispatcher_register(
-		context &ctx,
-		types::message::type);
+	explicit dispatcher_register(
+		context &ctx);
 };
 
 }

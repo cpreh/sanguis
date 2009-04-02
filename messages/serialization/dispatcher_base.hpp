@@ -22,7 +22,7 @@ public:
 	on_dispatch(
 		reader const &) const = 0;
 
-	virtual ~dispatch_base();
+	virtual ~dispatcher_base();
 };
 
 }

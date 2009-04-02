@@ -13,7 +13,7 @@ template<
 	typename T
 >
 auto_ptr
-make_conrete(
+make_concrete(
 	T const &value)
 {
 	return auto_ptr(

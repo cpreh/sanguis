@@ -2,6 +2,7 @@
 #define SANGUIS_MESSAGES_SERIALIZATION_READER_IMPL_HPP_INCLUDED
 
 #include "reader.hpp"
+#include "load.hpp"
 #include "../make_concrete.hpp"
 
 template<
@@ -29,7 +30,7 @@ sanguis::messages::serialization::reader::operator()() const
 	boost::mpl::for_each<
 		roles
 	>(
-		read_one<class_type>(
+		load<class_type>(
 			is,
 			obj
 		)
@@ -39,3 +40,5 @@ sanguis::messages::serialization::reader::operator()() const
 		obj
 	);
 }
+
+#endif

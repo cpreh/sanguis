@@ -3,14 +3,15 @@
 
 #include "dispatcher_register.hpp"
 #include "context.hpp"
+#include "dispatcher.hpp"
 #include <sge/auto_ptr.hpp>
+#include <boost/mpl/at.hpp>
 
 template<
 	typename T
 >
-sanguis::messages::serialization::dispatcher_register::dispatcher_register(
-	context &ctx,
-	types::message::type const idx)
+sanguis::messages::serialization::dispatcher_register<T>::dispatcher_register(
+	context &ctx)
 {
 	sge::auto_ptr<
 		dispatcher_base
@@ -19,7 +20,7 @@ sanguis::messages::serialization::dispatcher_register::dispatcher_register(
 	);
 
 	ctx.handlers_.insert(
-		idx,
+		boost::mpl::at_c<typename T::memory_type::types, 0>::value,
 		disp
 	);
 }

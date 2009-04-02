@@ -5,11 +5,10 @@
 #include "serialization/register_class.hpp"
 #include "serialization/instantiate_message.hpp"
 #include "instantiate_concrete.hpp"
-#include <boost/mpl/at.hpp>
 
-#define SANGUIS_MESSAGES_INSTANTIATE_MESSAGE(msg)\
-SANGUIS_MESSAGES_SERIALIZATION_REGISTER_CLASS(global_context(), boost::mpl::at_c<msg::memory_type::types, 0>::value, msg)\
-SANGUIS_MESSAGES_SERIALIZATION_INSTANTIATE_MESSAGE(msg)\
+#define SANGUIS_MESSAGES_INSTANTIATE_MESSAGE(msg) \
+SANGUIS_MESSAGES_SERIALIZATION_REGISTER_CLASS(sanguis::messages::global_context(), msg) \
+SANGUIS_MESSAGES_SERIALIZATION_INSTANTIATE_MESSAGE(msg) \
 SANGUIS_MESSAGES_INSTANTIATE_CONCRETE(msg)
 
 #endif
