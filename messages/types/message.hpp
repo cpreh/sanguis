@@ -44,6 +44,8 @@ enum type {
 	speed,
 	start_attacking,
 	stop_attacking,
+	start_reloading,
+	stop_reloading,
 	unpause
 };
 }

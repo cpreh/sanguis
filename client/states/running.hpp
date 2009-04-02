@@ -15,9 +15,10 @@
 #include "../../messages/give_weapon.hpp"
 #include "../../messages/move.hpp"
 #include "../../messages/remove.hpp"
-#include "../../draw/scene.hpp"
+#include "../../draw/scene_fwd.hpp"
 #include "../../draw/player_fwd.hpp"
 #include <sge/signal/auto_connection.hpp>
+#include <sge/scoped_ptr.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/result.hpp>
@@ -39,6 +40,7 @@ public:
 	> reactions;
 
 	running(my_context);
+	~running();
 	void draw(tick_event const &);
 	void process(tick_event const &);
 	void pause(bool);
@@ -62,7 +64,9 @@ private:
 		messages::auto_ptr);
 
 	music_handler                   music_;
-	draw::scene                     drawer;
+	sge::scoped_ptr<
+		draw::scene
+	> drawer;
 	logic                           logic_;
 	input_handler                   input;
 	sge::signal::auto_connection    input_connection;

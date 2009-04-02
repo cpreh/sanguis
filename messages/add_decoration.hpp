@@ -22,11 +22,11 @@ typedef make_add_message<
 			roles::decoration
 		>
 	>
-> add_decoration_elements;
+>::type add_decoration_elements;
 
 typedef make_class<
 	add_decoration_elements
-> add_decoration;
+>::type add_decoration;
 
 }
 }

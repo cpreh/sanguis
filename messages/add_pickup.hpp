@@ -22,12 +22,11 @@ typedef make_add_message<
 			roles::pickup
 		>
 	>
-> add_pickup_elements;
+>::type add_pickup_elements;
 
 typedef make_class<
 	add_pickup_elements
-> add_pickup;
-
+>::type add_pickup;
 
 }
 }

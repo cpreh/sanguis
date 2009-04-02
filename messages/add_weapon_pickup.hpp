@@ -22,12 +22,11 @@ typedef make_add_message<
 			roles::weapon
 		>
 	>
-> add_weapon_pickup_elements;
+>::type add_weapon_pickup_elements;
 
 typedef make_class<
 	add_weapon_pickup_elements
-> add_weapon_pickup;
-
+>::type add_weapon_pickup;
 
 }
 }

@@ -3,6 +3,7 @@
 
 #include "make_add_message.hpp"
 #include "make_class.hpp"
+#include "enum.hpp"
 #include "types/message.hpp"
 #include <boost/mpl/vector.hpp>
 
@@ -13,7 +14,11 @@ namespace messages
 
 typedef make_add_message<
 	types::message::add,
-	boost::mpl::vector<>
+	boost::mpl::vector<
+		majutsu::role<
+			enum_
+		>
+	>
 >::type add_elements;
 
 typedef make_class<

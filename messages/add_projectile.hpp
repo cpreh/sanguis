@@ -22,12 +22,11 @@ typedef make_add_message<
 			roles::projectile
 		>
 	>
-> add_projectile_elements;
+>::type add_projectile_elements;
 
 typedef make_class<
 	add_projectile_elements
-> add_projectile;
-
+>::type add_projectile;
 
 }
 }

@@ -1,6 +1,7 @@
 #ifndef SANGUIS_DRAW_SCENE_DRAWER_HPP_INCLUDED
 #define SANGUIS_DRAW_SCENE_DRAWER_HPP_INCLUDED
 
+#include "scene_fwd.hpp"
 #include "entity_auto_ptr.hpp"
 #include "hud.hpp"
 #include "system.hpp"
@@ -8,7 +9,7 @@
 #include "entity_fwd.hpp"
 #include "background_fwd.hpp"
 #include "../load/context_fwd.hpp"
-#include "../client_messages/fwd.hpp"
+#include "../client_messages/add_fwd.hpp"
 #include "../messages/base.hpp"
 #include "../messages/add.hpp"
 #include "../messages/add_enemy.hpp"
@@ -55,8 +56,8 @@ public:
 	void process_message(
 		messages::base const &);
 
-	void process_message(
-		client_messages::base const &);
+	void client_message(
+		client_messages::add const &);
 
 	void draw(time_type);
 
@@ -82,8 +83,6 @@ public:
 	void operator()(messages::start_reloading const &);
 	void operator()(messages::stop_reloading const &);
 	void operator()(messages::speed const &);
-
-	void operator()(client_messages::add const &);
 private:
 	void configure_new_object(
 		entity_auto_ptr,
@@ -109,8 +108,6 @@ private:
 		entity_id) const;
 	void process_default_msg(
 		messages::base const &);
-	void process_default_client_msg(
-		client_messages::base const &);
 	draw::system &system();
 	
 	static sge::log::logger &log();

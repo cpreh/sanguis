@@ -19,7 +19,7 @@ typedef majutsu::composite<
 	boost::mpl::vector<
 		bind_entity_message<
 			types::message::speed
-		>,
+		>::type,
 		majutsu::role<
 			vector2,
 			roles::speed
@@ -29,7 +29,7 @@ typedef majutsu::composite<
 
 typedef make_class<
 	speed_elements
-> speed;
+>::type speed;
 
 }
 }

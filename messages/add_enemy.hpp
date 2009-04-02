@@ -22,11 +22,11 @@ typedef make_add_message<
 			roles::enemy
 		>
 	>
-> add_enemy_elements;
+>::type add_enemy_elements;
 
 typedef make_class<
 	add_enemy_elements
-> add_enemy;
+>::type add_enemy;
 
 }
 }

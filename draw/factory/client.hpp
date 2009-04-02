@@ -3,7 +3,7 @@
 
 #include "../environment_fwd.hpp"
 #include "../entity_auto_ptr.hpp"
-#include "../../client_messages/fwd.hpp"
+#include "../../client_messages/add_fwd.hpp"
 #include <sge/renderer/screen_size.hpp>
 
 namespace sanguis

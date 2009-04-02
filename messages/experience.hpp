@@ -1,15 +1,13 @@
 #ifndef SANGUIS_MESSAGES_EXPERIENCE_HPP_INCLUDED
 #define SANGUIS_MESSAGES_EXPERIENCE_HPP_INCLUDED
 
-#include "roles/experience.hpp"
 #include "types/message.hpp"
 #include "bind_entity_message.hpp"
-#include "enum.hpp"
+#include "exp_type.hpp"
 #include "make_class.hpp"
 #include <majutsu/composite.hpp>
 #include <majutsu/role.hpp>
 #include <boost/mpl/vector.hpp>
-
 
 namespace sanguis
 {
@@ -22,8 +20,7 @@ typedef majutsu::composite<
 			types::message::experience
 		>::type,
 		majutsu::role<
-			enum_,
-			roles::experience
+			exp_type
 		>
 	>
 > experience_elements;
