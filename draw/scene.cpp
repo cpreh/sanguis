@@ -311,7 +311,10 @@ void sanguis::draw::scene::operator()(
 {
 	entity(m.id()).pos(
 		virtual_to_screen(
-			ss.renderer()->screen_size(), m.pos()));
+			ss.renderer()->screen_size()
+			m.pos()
+		)
+	);
 }
 
 void sanguis::draw::scene::operator()(
@@ -351,7 +354,10 @@ void sanguis::draw::scene::operator()(
 		>(
 			virtual_to_screen(
 				ss.renderer()->screen_size(),
-				m.get())));
+				m.get()
+			)
+		)
+	);
 }
 
 void sanguis::draw::scene::operator()(

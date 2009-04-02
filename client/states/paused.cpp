@@ -1,11 +1,11 @@
 #include "paused.hpp"
 #include "unpaused.hpp"
-#include "../../dispatch_type.hpp"
-#include "../../messages/unpause.hpp"
+#include "../../messages/unwrap.hpp"
 #include <boost/bind.hpp>
 
 sanguis::client::states::paused::paused(my_context ctx)
-	: my_base(ctx)
+:
+	my_base(ctx)
 {
 	context<running>().pause(true);
 }
@@ -23,14 +23,20 @@ boost::statechart::result
 sanguis::client::states::paused::react(
 	message_event const &m)
 {
-	return dispatch_type<
+	return messages::unwrap<
 		boost::mpl::vector<
 			messages::unpause
 		>,
-		boost::statechart::result>(
+		boost::statechart::result
+	>(
 		*this,
-		*m.message,
-		boost::bind(&paused::handle_default_msg, this, _1));
+		*m.message(),
+		boost::bind(
+			&paused::handle_default_msg,
+			this,
+			_1
+		)
+	);
 }
 
 boost::statechart::result sanguis::client::states::paused::operator()(

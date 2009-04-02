@@ -16,7 +16,7 @@ typedef bind_entity_message<
 
 typedef make_class<
 	remove_elements
-> remove;
+>::type remove;
 
 }
 }

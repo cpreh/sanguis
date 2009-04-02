@@ -1,42 +1,52 @@
 #include "coord_transform.hpp"
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/math/vector/basic_impl.hpp>
+#include <sge/structure_cast.hpp>
 
 sge::sprite::point const
 sanguis::virtual_to_screen(
 	sge::renderer::screen_size const &ss,
-	messages::pos_type const &pos)
+	messages::types::pos const &pos)
 {
-	return sge::sprite::point(
-		static_cast<sge::sprite::unit>(pos.x()),
-		static_cast<sge::sprite::unit>(pos.y()));
+	return sge::structure_cast<
+		sge::sprite::point
+	>(
+		pos
+	);
 }
 
 sge::sprite::dim const
 sanguis::virtual_to_screen(
 	sge::renderer::screen_size const &ss,
-	messages::dim_type const &dim)
+	messages::types::dim const &dim)
 {
-	return sge::sprite::dim(static_cast<sge::sprite::unit>(dim.w()),
-		static_cast<sge::sprite::unit>(dim.h()));
+	return sge::structure_cast<
+		sge::sprite::dim
+	>(
+		dim
+	);
 }
 
-sanguis::messages::pos_type const
+sanguis::messages::types::pos const
 sanguis::screen_to_virtual(
 	sge::renderer::screen_size const &ss,
 	sge::sprite::point const &pos)
 {
-	return messages::pos_type(
-		messages::mu(pos.x()),
-		messages::mu(pos.y()));
+	return sge::structure_cast<
+		messages::types::pos
+	>(
+		pos
+	);
 }
 
-sanguis::messages::dim_type const
+sanguis::messages::types::dim const
 sanguis::screen_to_virtual(
 	sge::renderer::screen_size const &ss,
 	sge::sprite::dim const &dim)
 {
-	return messages::dim_type(
-		messages::mu(dim.w()),
-		messages::mu(dim.h()));
+	return sge::structure_cast<
+		messages::types::dim
+	>(
+		dim
+	);
 }

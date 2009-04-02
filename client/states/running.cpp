@@ -2,13 +2,8 @@
 #include "menu.hpp"
 #include "../next_id.hpp"
 #include "../../client_entity_type.hpp"
-#include "../../dispatch_type.hpp"
 #include "../../client_messages/add.hpp"
-#include "../../messages/assign_id.hpp"
-#include "../../messages/disconnect.hpp"
-#include "../../messages/give_weapon.hpp"
-#include "../../messages/move.hpp"
-#include "../../messages/remove.hpp"
+#include "../../messages/unwrap.hpp"
 #include "../../draw/coord_transform.hpp"
 #include "../../load/context.hpp"
 #include <sge/renderer/state/list.hpp>
@@ -93,12 +88,15 @@ sanguis::client::states::running::process(
 	music_.update();
 
 	// update: cursor pos (TODO: this should be done in a better way)
-	drawer.process_message(
+	drawer(
 		messages::move(
 			cursor_id,
 			screen_to_virtual(
 				context<machine>().renderer()->screen_size(),
-				logic_.cursor_pos())));
+				logic_.cursor_pos()
+			)
+		)
+	);
 }
 
 void 
@@ -113,7 +111,7 @@ boost::statechart::result
 sanguis::client::states::running::react(
 	message_event const &m)
 {
-	return dispatch_type<
+	return messages::unwrap<
 		boost::mpl::vector<
 			messages::assign_id,
 			messages::disconnect,
@@ -121,10 +119,16 @@ sanguis::client::states::running::react(
 			messages::move,
 			messages::remove
 		>,
-		boost::statechart::result>(
+		boost::statechart::result
+	>(
 		*this,
-		*m.message,
-		boost::bind(&running::handle_default_msg, this, _1));
+		*m.message(),
+		boost::bind(
+			&running::handle_default_msg,
+			this,
+			_1
+		)
+	);
 }
 
 boost::statechart::result
@@ -132,7 +136,8 @@ sanguis::client::states::running::operator()(
 	messages::assign_id const &m)
 {
 	logic_.player_id(
-		m.player_id());
+		m.get<messages::entity_id>()
+	);
 	return discard_event();
 }
 
@@ -157,9 +162,11 @@ sanguis::client::states::running::operator()(
 	messages::move const &m)
 {
 	logic_.move(
-		m);
-	drawer.process_message(
-		m);
+		m
+	);
+	drawer(
+		m
+	);
 	return discard_event();
 }
 
@@ -168,9 +175,9 @@ sanguis::client::states::running::operator()(
 	messages::remove const &m)
 {
 	logic_.remove(
-		m.id());
-	drawer.process_message(
-		m);
+		m.get<messages::entity_id>()
+	);
+	drawer(m);
 	// TODO: check the logic if we died
 	return discard_event();
 }

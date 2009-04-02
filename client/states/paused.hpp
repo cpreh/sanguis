@@ -3,7 +3,7 @@
 
 #include "running.hpp"
 #include "../message_event.hpp"
-#include "../../messages/fwd.hpp"
+#include "../../messages/unpause.hpp"
 #include "../../tick_event.hpp"
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
@@ -20,11 +20,11 @@ namespace states
 class paused
 	: public boost::statechart::state<paused,running>
 {
-	public:
+public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<tick_event>,
 		boost::statechart::custom_reaction<message_event>
-		> reactions;
+	> reactions;
 
 	paused(my_context);
 
@@ -32,7 +32,7 @@ class paused
 	boost::statechart::result react(message_event const &);
 
 	boost::statechart::result operator()(messages::unpause const &);
-	private:
+private:
 	boost::statechart::result handle_default_msg(messages::base const &);
 
 	//sge::gui::manager m;
