@@ -30,7 +30,7 @@ struct static_ {
 		type const &t,
 		majutsu::raw_pointer const mem)
 	{
-		majutsu::detai::copy_n(
+		majutsu::detail::copy_n(
 			reinterpret_cast<
 				majutsu::const_raw_pointer
 			>(

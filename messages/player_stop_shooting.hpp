@@ -16,7 +16,7 @@ typedef bind_entity_message<
 
 typedef make_class<
 	player_stop_shooting_elements
-> player_stop_shooting;
+>::type player_stop_shooting;
 
 }
 }

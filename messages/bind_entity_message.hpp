@@ -5,6 +5,7 @@
 #include "types/message.hpp"
 #include <majutsu/bind.hpp>
 #include <majutsu/constant.hpp>
+#include <sge/restrict_typedef_struct.hpp>
 #include <boost/mpl/vector.hpp>
 
 namespace sanguis
@@ -25,6 +26,8 @@ struct bind_entity_message {
 			>
 		>
 	> type;
+
+	SGE_RESTRICT_TYPEDEF_STRUCT(bind_entity_message)
 };
 
 }

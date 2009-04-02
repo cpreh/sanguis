@@ -199,8 +199,12 @@ void sanguis::client::logic::update_rotation()
 		messages::auto_ptr(
 			new messages::player_rotation(
 				player_id_,
-				messages::mu(
-					*rotation))));
+				static_cast<messages::types::space_unit>(
+					*rotation
+				)
+			)
+		)
+	);
 }
 
 void sanguis::client::logic::handle_shooting(
