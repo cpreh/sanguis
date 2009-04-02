@@ -1,7 +1,6 @@
 #ifndef SANGUIS_MESSAGES_MAKE_ADD_MESSAGE_HPP_INCLUDED
 #define SANGUIS_MESSAGES_MAKE_ADD_MESSAGE_HPP_INCLUDED
 
-#include "roles/pos.hpp"
 #include "roles/angle.hpp"
 #include "roles/speed.hpp"
 #include "roles/health.hpp"
@@ -34,8 +33,7 @@ private:
 			Msg
 		>::type,
 		majutsu::role<
-			pos,
-			roles::pos
+			pos
 		>,
 		majutsu::role<
 			space_unit,

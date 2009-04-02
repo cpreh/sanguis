@@ -445,13 +445,20 @@ void sanguis::draw::scene::operator()(
 	).stop_reloading();
 }
 
+template<
+	typename Msg
+>
 void sanguis::draw::scene::configure_new_object(
 	entity_auto_ptr e_ptr,
-	messages::add const &m)
+	Msg const &m)
 {
+	entity_id const id(
+		m. template get<messages::entity_id>()
+	);
+
 	std::pair<entity_map::iterator, bool> const ret(
 		entities.insert(
-			m.get<messages::entity_id>(),
+			id,
 			e_ptr
 		)
 	);
@@ -462,18 +469,18 @@ void sanguis::draw::scene::configure_new_object(
 			log(),
 			sge::log::_1
 				<< SGE_TEXT("Object with id ")
-				<< m.get<messages::entity_id>()
+				<< id
 				<< SGE_TEXT(" already in entity list!"));
 		return;
 	}
 
 	// configure the object
-	process_message(messages::max_health(m.id(), m.max_health()));
-	process_message(messages::health(m.id(), m.health()));
-	process_message(messages::move(m.id(), m.pos()));
-	process_message(messages::resize(m.id(), m.dim()));
-	process_message(messages::rotate(m.id(), m.angle()));
-	process_message(messages::speed(m.id(), m.speed()));
+	(*this)(messages::max_health(id, m. template get<messages::roles::max_health>()));
+	(*this)(messages::health(id, m. template get<messages::roles::health>()));
+	(*this)(messages::move(id, m. template get<messages::pos>()));
+	(*this)(messages::resize(id, m. template get<messages::dim>()));
+	(*this)(messages::rotate(id, m. template get<messages::roles::angle>()));
+	(*this)(messages::speed(id, m. template get<messages::roles::speed>()));
 }
 
 void sanguis::draw::scene::render_dead()

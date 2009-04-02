@@ -84,9 +84,13 @@ public:
 	void operator()(messages::stop_reloading const &);
 	void operator()(messages::speed const &);
 private:
+	template<
+		typename Msg
+	>
 	void configure_new_object(
 		entity_auto_ptr,
-		messages::add const &);
+		Msg const &
+	);
 	
 	void render_dead();
 
