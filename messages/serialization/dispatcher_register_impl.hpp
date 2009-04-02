@@ -19,8 +19,13 @@ sanguis::messages::serialization::dispatcher_register<T>::dispatcher_register(
 		new dispatcher<T>
 	);
 
+	typedef typename boost::mpl::at_c<
+		typename T::memory_type::types,
+		0
+	>::type msg_type;
+
 	ctx.handlers_.insert(
-		boost::mpl::at_c<typename T::memory_type::types, 0>::value,
+		msg_type::value,
 		disp
 	);
 }
