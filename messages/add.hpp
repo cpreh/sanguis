@@ -11,7 +11,7 @@ namespace sanguis
 namespace messages
 {
 
-typedef make_add_mesasge<
+typedef make_add_message<
 	types::message::add,
 	boost::mpl::vector<>
 >::type add_elements;

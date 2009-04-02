@@ -1,7 +1,8 @@
 #include "machine.hpp"
 #include "../messages/connect.hpp"
 #include "../messages/disconnect.hpp"
-#include "../messages/add.hpp"
+#include "../messages/create.hpp"
+#include "../messages/base.hpp"
 #include "../serialization.hpp"
 #include "message_event.hpp"
 #include <sge/systems/instance.hpp>
@@ -76,8 +77,11 @@ void sanguis::client::machine::connect_callback()
 {
 	process_event(
 		message_event(
-			messages::auto_ptr(
-				new messages::connect)));
+			messages::create(
+				messages::connect()
+			)
+		)
+	);
 }
 
 void sanguis::client::machine::disconnect_callback(
@@ -85,8 +89,11 @@ void sanguis::client::machine::disconnect_callback(
 {
 	process_event(
 		message_event(
-			messages::auto_ptr(
-				new messages::disconnect)));
+			messages::create(
+				messages::disconnect()
+			)
+		)
+	);
 }
 
 void sanguis::client::machine::process_message(
@@ -94,7 +101,9 @@ void sanguis::client::machine::process_message(
 {
 	process_event(
 		message_event(
-			ptr));
+			ptr
+		)
+	);
 }
 
 void sanguis::client::machine::data_callback(

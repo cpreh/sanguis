@@ -4,14 +4,14 @@
 #include "states/start_fwd.hpp"
 #include "console_wrapper.hpp"
 #include "../load/context_fwd.hpp"
-#include "../messages/base.hpp"
+#include "../messages/auto_ptr.hpp"
 #include "../net/client.hpp"
 #include "../net/client.hpp"
 #include "../tick_event.hpp"
 
 #include <sge/font/object_fwd.hpp>
 #include <sge/input/key_type.hpp>
-#include <sge/input/key_state_tracker_fwd.hpp> // TODO: remove me!
+#include <sge/input/key_state_tracker_fwd.hpp>
 #include <sge/image/loader_fwd.hpp>
 #include <sge/systems/instance_fwd.hpp>
 #include <sge/audio/player_fwd.hpp>

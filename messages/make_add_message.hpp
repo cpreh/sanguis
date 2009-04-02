@@ -28,6 +28,7 @@ template<
 	typename AdditionalElements
 >
 struct make_add_message {
+private:
 	typedef boost::mpl::vector<
 		typename bind_entity_message<
 			Msg
@@ -56,14 +57,14 @@ struct make_add_message {
 			dim
 		>
 	> common_elements;
-private:
+public:
 	typedef majutsu::composite<
-		boost::mpl::copy<
+		typename boost::mpl::copy<
 			AdditionalElements,
 			boost::mpl::back_inserter<
 				common_elements
 			>
-		>
+		>::type
 	> type;
 };
 

@@ -23,7 +23,7 @@ typedef majutsu::composite<
 
 typedef make_class<
 	connect_elements
-> connect;
+>::type connect;
 
 }
 }
