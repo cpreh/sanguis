@@ -1,7 +1,7 @@
 #ifndef SANGUIS_MESSAGES_UNWRAP_HPP_INCLUDED
 #define SANGUIS_MESSAGES_UNWRAP_HPP_INCLUDED
 
-#include "auto_ptr.hpp"
+#include "base.hpp"
 #include "concrete.hpp"
 #include <boost/type_traits/is_same.hpp>
 #include <boost/mpl/begin.hpp>
@@ -33,7 +33,7 @@ struct unwrap_impl {
 		Iterator *,
 		LastIterator *,
 		Fun &,
-		auto_ptr msg,
+		base const &msg,
 		Handler const &def_handler)
 	{
 		return def_handler(msg);
@@ -58,17 +58,19 @@ struct unwrap_impl<
 		Iterator *,
 		LastIterator *,
 		Fun &f,
-		auto_ptr msg,
+		base const &msg,
 		Handler const &def_handler)
 	{
 		typedef typename boost::mpl::deref<Iterator>::type item;
 		typedef typename boost::mpl::next<Iterator>::type iter;
 
-		return typeid(t) == typeid(concrete<item>)
+		typedef concrete<item> concrete_msg;
+
+		return typeid(msg) == typeid(concrete_msg)
 			? f(
 				static_cast<
-					item const &
-				>(t).value())
+					concrete_msg const &
+				>(msg).value())
 			: unwrap_impl<
 				Result,
 				boost::is_same<
@@ -92,11 +94,11 @@ template<
 	typename Result,
 	typename Fun,
 	typename Handler
-	>
+>
 Result
 unwrap(
 	Fun &f,
-	auto_ptr msg,
+	base const &msg,
 	Handler const &def_handler)
 {
 	typedef typename boost::mpl::begin<Sequence>::type first;

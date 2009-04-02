@@ -6,7 +6,7 @@ namespace sanguis
 namespace draw
 {
 
-typedef unsigned long level_type;
+typedef unsigned long exp_type;
 
 }
 }

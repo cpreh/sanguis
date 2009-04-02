@@ -28,7 +28,7 @@ typedef majutsu::composite<
 
 typedef make_class<
 	client_info_elements
-> client_info;
+>::type client_info;
 
 }
 }

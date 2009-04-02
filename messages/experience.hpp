@@ -19,8 +19,8 @@ namespace messages
 typedef majutsu::composite<
 	boost::mpl::vector<
 		bind_entity_message<
-			types::mesage::experience
-		>,
+			types::message::experience
+		>::type,
 		majutsu::role<
 			enum_,
 			roles::experience
@@ -30,7 +30,7 @@ typedef majutsu::composite<
 
 typedef make_class<
 	experience_elements
-> experience;
+>::type experience;
 
 }
 }

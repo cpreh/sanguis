@@ -8,6 +8,7 @@
 #include "../../messages/connect.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../messages/unwrap.hpp"
+#include "../../messages/create.hpp"
 #include <sge/renderer/device.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/iconv.hpp>
@@ -39,7 +40,7 @@ sanguis::client::states::connecting::react(
 		boost::statechart::result
 	>(
 		*this,
-		m.message(),
+		*m.message(),
 		boost::bind(
 			&connecting::handle_default_msg,
 			this,
@@ -95,7 +96,7 @@ sanguis::client::states::connecting::operator()(
 	context<machine>().send(
 		messages::create(
 			messages::client_info(
-				MESSAGE_TEXT("player1")
+				SGE_TEXT("player1")
 			)
 		)
 	); // FIXME

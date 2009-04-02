@@ -13,7 +13,7 @@ sanguis::messages::concrete<T>::concrete(
 {}
 	
 T const &
-sanguis::messages::concrete<T>::value()
+sanguis::messages::concrete<T>::value() const
 {
 	return value_;
 }

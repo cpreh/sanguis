@@ -4,6 +4,7 @@
 #include "running.hpp"
 #include "../message_event.hpp"
 #include "../../tick_event.hpp"
+#include "../../messages/pause.hpp"
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/result.hpp>

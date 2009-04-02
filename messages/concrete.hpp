@@ -16,7 +16,7 @@ public:
 	explicit concrete(
 		T const &);
 	
-	T const &value();
+	T const &value() const;
 private:
 	majutsu::const_raw_pointer
 	data() const;

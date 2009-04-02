@@ -27,7 +27,7 @@ typedef majutsu::composite<
 
 typedef make_class<
 	level_up_elements
->::type level_up_weapon;
+>::type level_up;
 
 }
 }

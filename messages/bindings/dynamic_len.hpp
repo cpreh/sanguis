@@ -80,7 +80,7 @@ struct dynamic_len {
 				// TODO: make this better!
 				// This works with basic_string and raw_vector
 				const_cast<
-					type::value_type *	
+					typename type::value_type *	
 				>(ret.data())
 			)
 		);

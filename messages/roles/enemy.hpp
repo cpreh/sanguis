@@ -8,7 +8,7 @@ namespace messages
 namespace roles
 {
 
-struct enemy_type
+struct enemy
 {};
 
 }

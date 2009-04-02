@@ -19,8 +19,7 @@ typedef majutsu::composite<
 	boost::mpl::vector<
 		bind_entity_message<
 			types::message::change_weapon
-			>
-		>,
+		>::type,
 		majutsu::role<
 			enum_,
 			roles::weapon

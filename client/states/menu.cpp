@@ -1,6 +1,7 @@
 #include "menu.hpp"
 #include "connecting.hpp"
 #include "../../media_path.hpp"
+#include "../../messages/base.hpp"
 #include "../machine.hpp"
 #include "../log.hpp"
 #include <sge/log/headers.hpp>
@@ -209,7 +210,7 @@ sanguis::client::states::menu::react(
 		log(),
 		sge::log::_1
 			<< SGE_TEXT("got unexpected event ")
-			<< sge::iconv(typeid(*m.message).name()));
+			<< sge::iconv(typeid(*m.message()).name()));
 	return defer_event();
 }
 

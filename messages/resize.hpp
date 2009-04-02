@@ -14,11 +14,11 @@ namespace sanguis
 namespace messages
 {
 
-typedef majutsus::composite<
+typedef majutsu::composite<
 	boost::mpl::vector<
 		bind_entity_message<
 			types::message::resize
-		>,
+		>::type,
 		majutsu::role<
 			dim
 		>
