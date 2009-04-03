@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_LEVEL_CALLBACK_HPP_INCLUDED
 #define SANGUIS_SERVER_LEVEL_CALLBACK_HPP_INCLUDED
 
-#include "leveL_type.hpp"
+#include "level_type.hpp"
 #include "entities/player_fwd.hpp"
 #include <boost/function.hpp>
 

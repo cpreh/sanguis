@@ -4,6 +4,7 @@
 #include <majutsu/detail/copy_n.hpp> // TODO: replace this
 #include <majutsu/size_type.hpp>
 #include <majutsu/raw_pointer.hpp>
+#include <boost/cstdint.hpp>
 
 namespace sanguis
 {

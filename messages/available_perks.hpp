@@ -14,11 +14,11 @@ namespace sanguis
 namespace messages
 {
 
-typedef majutsu::composte<
+typedef majutsu::composite<
 	boost::mpl::vector<
 		bind_entity_message<
 			types::message::available_perks
-		>,
+		>::type,
 		majutsu::role<
 			perk_list
 		>
@@ -27,7 +27,7 @@ typedef majutsu::composte<
 
 typedef make_class<
 	available_perks_elements
-> available_perks;
+>::type available_perks;
 
 }
 }

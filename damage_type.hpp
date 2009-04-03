@@ -1,12 +1,12 @@
 #ifndef SANGUIS_DAMAGE_TYPE_HPP_INCLUDED
 #define SANGUIS_DAMAGE_TYPE_HPP_INCLUDED
 
-#include "messages/types.hpp"
 #include <boost/tr1/array.hpp>
 
 namespace sanguis
 {
 
+// TODO: split this header
 namespace damage_type
 {
 enum type {
@@ -20,7 +20,7 @@ enum type {
 }
 
 typedef std::tr1::array<
-	float,
+	float, // TODO: make a typedef for this!
 	damage_type::size
 > damage_array;
 

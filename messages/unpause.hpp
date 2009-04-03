@@ -2,6 +2,7 @@
 #define SANGUIS_MESSAGES_UNPAUSE_HPP_INCLUDED
 
 #include "types/message.hpp"
+#include "make_class.hpp"
 #include <majutsu/composite.hpp>
 #include <majutsu/constant.hpp>
 #include <boost/mpl/vector.hpp>
@@ -18,7 +19,11 @@ typedef majutsu::composite<
 			types::message::unpause
 		>
 	>
-> unpause;
+> unpause_elements;
+
+typedef make_class<
+	unpause_elements
+>::type unpause;
 
 }
 }

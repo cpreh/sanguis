@@ -2,7 +2,7 @@
 #define SANGUIS_MESSAGES_MOVE_HPP_INCLUDED
 
 #include "types/message.hpp"
-#include "entity_message.hpp"
+#include "bind_entity_message.hpp"
 #include "pos.hpp"
 #include "make_class.hpp"
 #include <majutsu/composite.hpp>

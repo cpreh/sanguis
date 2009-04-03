@@ -4,6 +4,11 @@
 #include "reader.hpp"
 #include "read_element_impl.hpp"
 #include "../make_concrete.hpp"
+#include <majutsu/is_role.hpp>
+#include <boost/mpl/remove_if.hpp>
+#include <boost/mpl/not.hpp>
+#include <boost/mpl/placeholders.hpp>
+#include <boost/mpl/for_each.hpp>
 
 template<
 	typename Msg
