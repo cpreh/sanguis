@@ -1,4 +1,5 @@
 #include "level_calculate.hpp"
+#include "space_unit.hpp"
 #include <cmath>
 
 sanguis::server::level_type

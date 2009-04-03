@@ -1,10 +1,11 @@
 #include "machine.hpp"
+#include "message_event.hpp"
 #include "../tick_event.hpp"
 #include "../serialization.hpp"
+#include "../messages/create.hpp"
 #include "../messages/connect.hpp"
 #include "../messages/disconnect.hpp"
 #include "../exception.hpp"
-#include "message_event.hpp"
 
 #include <sge/console/gfx.hpp>
 #include <sge/systems/instance.hpp>
@@ -80,9 +81,12 @@ void sanguis::server::machine::connect_callback(
 {
 	process_event(
 		message_event(
-			messages::auto_ptr(
-				new messages::connect),
-			id));
+			messages::create(
+				messages::connect()
+			),
+			id
+		)
+	);
 }
 
 void sanguis::server::machine::disconnect_callback(
@@ -91,9 +95,12 @@ void sanguis::server::machine::disconnect_callback(
 {
 	process_event(
 		message_event(
-			messages::auto_ptr(
-				new messages::disconnect),
-			id));
+			messages::create(
+				messages::disconnect()
+			),
+			id
+		)
+	);
 }
 
 void sanguis::server::machine::process_message(
@@ -112,8 +119,15 @@ void sanguis::server::machine::data_callback(
 {
 	clients[id].in_buffer += data;
 
-	while (messages::auto_ptr p = deserialize(clients[id].in_buffer))
-		process_message(id,p);
+	for(;;)
+	{
+		messages::auto_ptr p = deserialize(clients[id].in_buffer);
+		if(!p.get())
+			return;
+		process_message(id, p);
+	}
+	//while (messages::auto_ptr p = deserialize(clients[id].in_buffer))
+	//	process_message(id,p);
 }
 
 void sanguis::server::machine::send(
@@ -122,7 +136,7 @@ void sanguis::server::machine::send(
 	net::data_type m_str;
 
 	serialize(
-		m
+		m,
 		m_str);
 
 	BOOST_FOREACH(client_map::reference ref, clients)
@@ -161,7 +175,8 @@ sanguis::server::machine::resources() const
 	return resources_;
 }
 
-sge::collision::world_ptr const sanguis::server::machine::collision()
+sge::collision::world_ptr const
+sanguis::server::machine::collision()
 {
 	return collision_;
 }
