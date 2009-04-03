@@ -1,8 +1,9 @@
 #include "projectile.hpp"
 #include "../base_parameters.hpp"
 #include "../../damage_types.hpp"
-#include "../../message_converter.hpp"
 #include "../../../exception.hpp"
+#include "../../../messages/add_projectile.hpp"
+#include "../../../messages/create.hpp"
 #include <sge/time/second_f.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/text.hpp>
@@ -36,7 +37,7 @@ sanguis::server::entities::projectiles::projectile::projectile(
 		base_parameters(
 			env,
 			damage::list(
-				messages::mu(0)),
+				static_cast<space_unit>(0)),
 			center,
 			angle,
 			angle,
@@ -92,7 +93,18 @@ void sanguis::server::entities::projectiles::projectile::do_die()
 sanguis::messages::auto_ptr
 sanguis::server::entities::projectiles::projectile::add_message() const
 {
-	return message_convert(*this);	
+	return messages::create(
+		messages::add_projectile(
+			id(),
+			pos(),
+			angle(),
+			abs_speed(),
+			health(),
+			max_health(),
+			dim(),
+			ptype()
+		)
+	);
 }
 
 namespace

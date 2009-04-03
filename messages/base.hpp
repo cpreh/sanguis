@@ -1,6 +1,7 @@
 #ifndef SANGUIS_MESSAGES_BASE_HPP_INCLUDED
 #define SANGUIS_MESSAGES_BASE_HPP_INCLUDED
 
+#include "base_fwd.hpp"
 #include <majutsu/raw_pointer.hpp>
 #include <majutsu/size_type.hpp>
 #include <sge/noncopyable.hpp>

@@ -1,4 +1,5 @@
 #include "message_event.hpp"
+#include "../messages/base.hpp"
 
 sanguis::server::message_event::message_event(
 	messages::auto_ptr message_,

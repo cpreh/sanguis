@@ -18,12 +18,12 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 		projectile_type::aoe_damage,
 		env,
 		center,
-		messages::mu(0),
+		static_cast<space_unit>(0),
 		team_,
 		property_map(),
 		dim_type(
-			radius * messages::mu(2),
-			radius * messages::mu(2)),
+			radius * static_cast<space_unit>(2),
+			radius * static_cast<space_unit>(2)),
 		pulse_diff * static_cast<time_type>(max_pulses))
 {
 	add_aura(

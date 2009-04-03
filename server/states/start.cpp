@@ -23,7 +23,7 @@ sanguis::server::states::start::react(
 		log(),
 		sge::log::_1
 			<< SGE_TEXT("got unexpected message: ")
-			<< sge::iconv(typeid(*m.message).name()));
+			<< sge::iconv(typeid(*m.message()).name()));
 	return forward_event();
 }
 

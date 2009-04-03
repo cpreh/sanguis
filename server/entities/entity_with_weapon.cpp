@@ -1,10 +1,14 @@
 #include "entity_with_weapon.hpp"
-#include "../message_converter.hpp"
+#include "../message_convert/start_reloading.hpp"
+#include "../message_convert/stop_reloading.hpp"
+#include "../message_convert/start_attacking.hpp"
+#include "../message_convert/stop_attacking.hpp"
 #include "../weapons/factory.hpp"
 #include "../weapons/weapon.hpp"
-#include "../../truncation_check_cast.hpp"
 #include "../../messages/give_weapon.hpp"
 #include "../../messages/change_weapon.hpp"
+#include "../../messages/create.hpp"
+#include "../../truncation_check_cast.hpp"
 #include "../../exception.hpp"
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/text.hpp>
@@ -70,12 +74,12 @@ void sanguis::server::entities::entity_with_weapon::update(
 
 		if(active_weapon().reloading() && !reloading)
 		{
-			send(message_convert<messages::start_reloading>(*this));
+			send(message_convert::start_reloading(*this));
 			reloading = true;
 		}
 		else if(reloading && !active_weapon().reloading())
 		{
-			send(message_convert<messages::stop_reloading>(*this));
+			send(message_convert::stop_reloading(*this));
 			reloading = false;
 		}
 	}
@@ -86,7 +90,7 @@ void sanguis::server::entities::entity_with_weapon::update(
 		// previously attacking
 		if (attacking)
 		{
-			send(message_convert<messages::stop_attacking>(*this));
+			send(message_convert::stop_attacking(*this));
 			attacking = false;
 		}
 
@@ -103,12 +107,12 @@ void sanguis::server::entities::entity_with_weapon::update(
 	weapons::weapon &wep(active_weapon());
 	if (wep.attack(*this, target()) && !attacking)
 	{
-		send(message_convert<messages::start_attacking>(*this));
+		send(message_convert::start_attacking(*this));
 		attacking = true;
 	}
 	else if (attacking && wep.ready())
 	{
-		send(message_convert<messages::stop_attacking>(*this));
+		send(message_convert::stop_attacking(*this));
 		attacking = false;
 	}
 }
@@ -130,10 +134,13 @@ void sanguis::server::entities::entity_with_weapon::change_weapon(
 		);
 
 	send(
-		messages::auto_ptr(
-			new messages::change_weapon(
+		messages::create(
+			messages::change_weapon(
 				id(),
-				weapon_)));
+				weapon_
+			)
+		)
+	);
 }
 
 void sanguis::server::entities::entity_with_weapon::add_weapon(
@@ -146,7 +153,9 @@ void sanguis::server::entities::entity_with_weapon::add_weapon(
 		return add_weapon(
 			weapons::create(
 				weapon_type::dual_pistol,
-				environment()));
+				environment()
+			)
+		);
 
 	if (weapons_.count(wt))
 		return;
@@ -155,12 +164,13 @@ void sanguis::server::entities::entity_with_weapon::add_weapon(
 		throw exception(SGE_TEXT("couldn't insert weapon"));
 
 	send(
-		messages::auto_ptr(
-			new messages::give_weapon(
+		messages::create(
+			messages::give_weapon(
 				id(),
-				wt,
-				truncation_check_cast<messages::size_type>(
-					magazine_size))));
+				wt
+			)
+		)
+	);
 }
 
 void sanguis::server::entities::entity_with_weapon::remove_weapon(
@@ -201,7 +211,8 @@ sanguis::server::entities::entity_with_weapon::active_weapon()
 	weapon_container::iterator const it(weapons_.find(weapon_));
 	if(it == weapons_.end())
 		throw exception(
-			SGE_TEXT("No weapon active in entity_with_weapon!"));
+			SGE_TEXT("No weapon active in entity_with_weapon!")
+		);
 	return *it->second;
 }
 

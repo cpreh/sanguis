@@ -1,13 +1,13 @@
 #include "enemy.hpp"
 #include "../base_parameters.hpp"
 #include "../../weapons/weapon.hpp"
-#include "../../message_converter.hpp"
 #include "../../spawn_pickup.hpp"
 #include "../../get_dim.hpp"
 #include "../../../random.hpp"
 #include "../../../load/enemy_name.hpp"
 #include "../../../load/context.hpp"
 #include "../../../messages/add_enemy.hpp"
+#include "../../../messages/create.hpp"
 #include <boost/tr1/random.hpp>
 
 sanguis::server::entities::enemies::enemy::enemy(
@@ -54,7 +54,18 @@ sanguis::server::entities::enemies::enemy::etype() const
 sanguis::messages::auto_ptr
 sanguis::server::entities::enemies::enemy::add_message() const
 {
-	return message_convert(*this);
+	return messages::create(
+		messages::add_enemy(
+			id(),
+			pos(),
+			angle(),
+			abs_speed(),
+			health(),
+			max_health(),
+			dim(),
+			etype()
+		)
+	);
 }
 
 sanguis::server::exp_type

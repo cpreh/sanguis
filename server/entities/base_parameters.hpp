@@ -3,9 +3,11 @@
 
 #include "property_map.hpp"
 #include "property.hpp"
+#include "../pos_type.hpp"
+#include "../space_unit.hpp"
+#include "../dim_type.hpp"
 #include "../environment_fwd.hpp"
 #include "../teams.hpp"
-#include "../types.hpp"
 #include "../../damage_type.hpp"
 #include "../../entity_type.hpp"
 #include <sge/container/map_decl.hpp>

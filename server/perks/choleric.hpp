@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_PERKS_CHOLERIC_HPP_INCLUDED
 
 #include "perk.hpp"
-#include "../types.hpp"
+#include "../space_unit.hpp"
 #include "../../diff_clock.hpp"
 #include <sge/time/timer.hpp>
 #include <sge/random/uniform.hpp>

@@ -1,7 +1,8 @@
 #ifndef SANGUIS_SERVER_COLLISION_DISTANCE_HPP_INCLUDED
 #define SANGUIS_SERVER_COLLISION_DISTANCE_HPP_INCLUDED
 
-#include "../types.hpp"
+#include "../pos_type.hpp"
+#include "../space_unit.hpp"
 #include "../entities/entity_fwd.hpp"
 
 namespace sanguis
