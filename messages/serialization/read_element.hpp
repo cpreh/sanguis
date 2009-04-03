@@ -1,5 +1,5 @@
-#ifndef SANGUIS_MESSAGES_SERIALIZATION_READ_ONE_HPP_INCLUDED
-#define SANGUIS_MESSAGES_SERIALIZATION_READ_ONE_HPP_INCLUDED
+#ifndef SANGUIS_MESSAGES_SERIALIZATION_READ_ELEMENT_HPP_INCLUDED
+#define SANGUIS_MESSAGES_SERIALIZATION_READ_ELEMENT_HPP_INCLUDED
 
 #include "istream.hpp"
 
@@ -13,8 +13,8 @@ namespace serialization
 template<
 	typename Class
 >
-struct read_one {
-	read_one(
+struct read_element {
+	read_element(
 		std::istream &is,
 		Class &obj);
 
@@ -28,4 +28,8 @@ private:
 	mutable Class &obj;
 };
 
+}
+}
+}
 
+#endif
