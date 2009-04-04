@@ -66,15 +66,19 @@ struct dynamic_len {
 		majutsu::const_raw_pointer const beg,
 		majutsu::size_type const sz)
 	{
+		majutsu::size_type const sz_wo_len(
+			sz - sizeof(length_type)
+		);
+
 		type ret;
 		
 		ret.resize(
-			sz / sizeof(typename type::value_type)
+			sz_wo_len / sizeof(typename type::value_type)
 		);
 
 		majutsu::detail::copy_n(
 			beg + sizeof(length_type),
-			sz * sizeof(typename T::value_type) - sizeof(length_type),
+			sz_wo_len * sizeof(typename T::value_type),
 			reinterpret_cast<
 				majutsu::raw_pointer
 			>(
