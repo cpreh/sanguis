@@ -3,7 +3,7 @@ if [ $# -eq 0 ]; then
 	exit -1;
 fi;
 
-rsync_args="-r --verbose -z --progress -h -d -i -e ssh"
+rsync_args="-r --verbose -z --progress -h -d -i -e ssh --delete" 
 
 if [ $1 = "push" ]; then
 	echo "pushing to git";
