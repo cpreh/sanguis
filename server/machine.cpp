@@ -9,6 +9,7 @@
 
 #include <sge/console/gfx.hpp>
 #include <sge/systems/instance.hpp>
+#include <sge/container/raw_vector_impl.hpp>
 #include <sge/text.hpp>
 
 #include <boost/bind.hpp>
@@ -117,7 +118,12 @@ void sanguis::server::machine::data_callback(
 	net::id_type const id,
 	net::data_type const &data)
 {
-	clients[id].in_buffer += data;
+	// TODO: replace this with a more convenient version!
+	clients[id].in_buffer.insert(
+		clients[id].in_buffer.end(),
+		data.begin(),
+		data.end()
+	);
 
 	for(;;)
 	{
@@ -140,7 +146,11 @@ void sanguis::server::machine::send(
 		m_str);
 
 	BOOST_FOREACH(client_map::reference ref, clients)
-		ref.second.out_buffer += m_str;
+		ref.second.out_buffer.insert(
+			ref.second.out_buffer.end(),
+			m_str.begin(),
+			m_str.end()
+		);
 }
 
 void sanguis::server::machine::send(

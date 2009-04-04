@@ -3,8 +3,10 @@
 #include "messages/serialization/deserialize.hpp"
 #include "messages/global_context.hpp"
 #include "messages/base.hpp"
+#include "net/value_type.hpp"
 
 #include <sge/algorithm/copy_n.hpp>
+#include <sge/container/raw_vector_impl.hpp>
 
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/device/back_inserter.hpp>
@@ -33,7 +35,7 @@ sanguis::deserialize(
 		return messages::auto_ptr();
 
 	typedef boost::iostreams::basic_array_source<
-		net::data_type::value_type
+		net::value_type
 	> array_source;
 
 	typedef boost::iostreams::stream_buffer<
@@ -41,7 +43,7 @@ sanguis::deserialize(
 	> stream_buf;
 
 	typedef std::basic_istream<
-		net::data_type::value_type
+		net::value_type
 	> stream_type;
 
 	stream_buf buf(
@@ -81,7 +83,7 @@ void sanguis::serialize(
 	> stream_buf;
 
 	typedef std::basic_ostream<
-		net::data_type::value_type
+		net::value_type
 	> stream_type;
 
 	stream_buf buf(
@@ -115,6 +117,6 @@ void sanguis::serialize(
 	sge::algorithm::copy_n(
 		reinterpret_cast<net::data_type::const_pointer>(&header),
 		message_header_size,
-		&a[0] + header_pos
+		a.data() + header_pos
 	);
 }

@@ -1,7 +1,6 @@
 #include "client_impl.hpp"
 #include "is_disconnect.hpp"
 #include "io_service_wrapper.hpp"
-#include "output_buffer_impl.hpp"
 #include "../log.hpp"
 #include <sge/exception.hpp>
 #include <sge/text.hpp>
@@ -38,9 +37,11 @@ void sanguis::net::detail::client_impl::connect(
 {
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1 << SGE_TEXT("client: resolving hostname ")
-		             << sge::iconv(s) << SGE_TEXT(" on port")
-								 << port);
+		sge::log::_1
+			<< SGE_TEXT("client: resolving hostname ")
+			<< sge::iconv(s) << SGE_TEXT(" on port")
+			 << port
+	);
 	
 	boost::asio::ip::tcp::resolver::query query(
 		s,
@@ -49,7 +50,13 @@ void sanguis::net::detail::client_impl::connect(
 
 	resolver_.async_resolve(
 		query,
-		boost::bind(&client_impl::resolve_handler,this,_1,_2));
+		boost::bind(
+			&client_impl::resolve_handler,
+			this,
+			_1,
+			_2
+		)
+	);
 
 	handlers_++;
 }
@@ -65,10 +72,16 @@ void sanguis::net::detail::client_impl::process()
 {
 	if (connected_ && !sending_ && output_.characters_left())
 	{
+		data_type const &buffer(
+			output_.buffer()
+		);
+
 		sending_ = true;
 		socket_.async_send(
 			boost::asio::buffer(
-				output_.buffer()),
+				buffer.data(),
+				buffer.size()
+			),
 			boost::bind(
 				&sanguis::net::detail::client_impl::write_handler,
 				this,
@@ -146,9 +159,10 @@ void sanguis::net::detail::client_impl::handle_error(
 		
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1 << SGE_TEXT("client: disconnected (")
-								 << sge::iconv(e.message()) 
-								 << SGE_TEXT(")"));
+		sge::log::_1
+			<< SGE_TEXT("client: disconnected (")
+			<< sge::iconv(e.message()) 
+			<< SGE_TEXT(")"));
 
 	connected_ = false;
 	disconnect_signal_(
@@ -172,13 +186,16 @@ void sanguis::net::detail::client_impl::read_handler(
 
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1 << SGE_TEXT("client: read ")
-								 << bytes << SGE_TEXT(" bytes."));
+		sge::log::_1
+			<< SGE_TEXT("client: read ")
+			<< bytes
+			<< SGE_TEXT(" bytes.")
+	);
 
 	data_signal_(
 		data_type(
 			new_data_.begin(),
-			new_data_.begin()+bytes));
+			new_data_.begin() + bytes));
 
 	socket_.async_receive(
 		boost::asio::buffer(
@@ -207,9 +224,10 @@ void sanguis::net::detail::client_impl::write_handler(
 
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1 << SGE_TEXT("client: wrote ")
-								 << bytes 
-								 << SGE_TEXT(" bytes"));
+		sge::log::_1
+			<< SGE_TEXT("client: wrote ")
+			<< bytes 
+			<< SGE_TEXT(" bytes"));
 
 	output_.erase(
 		bytes);
@@ -217,9 +235,15 @@ void sanguis::net::detail::client_impl::write_handler(
 	// are there bytes left to send?
 	if (output_.characters_left())
 	{
+		data_type const &buffer(
+			output_.buffer()
+		);
+
 		socket_.async_send(
 			boost::asio::buffer(
-				output_.buffer()),
+				buffer.data(),
+				buffer.size()
+			),
 			boost::bind(
 				&client_impl::write_handler,
 				this,

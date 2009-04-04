@@ -1,13 +1,18 @@
 #ifndef SANGUIS_NET_DATA_TYPE_HPP_INCLUDED
 #define SANGUIS_NET_DATA_TYPE_HPP_INCLUDED
 
-#include <string>
+#include "value_type.hpp"
+#include <sge/container/raw_vector_fwd.hpp>
 
 namespace sanguis
 {
 namespace net
 {
-typedef std::string data_type;
+
+typedef sge::container::raw_vector<
+	value_type
+> data_type;
+
 }
 }
 

@@ -19,6 +19,7 @@
 #include <sge/console/gfx.hpp>
 #include <sge/console/stdlib.hpp>
 #include <sge/renderer/device_fwd.hpp>
+#include <sge/container/raw_vector_decl.hpp>
 
 #include <boost/statechart/state_machine.hpp>
 

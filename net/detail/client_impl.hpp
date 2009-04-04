@@ -4,9 +4,10 @@
 #include "../client.hpp"
 #include "../id_type.hpp"
 #include "../data_type.hpp"
+#include "../value_type.hpp"
 #include "../port_type.hpp"
 #include "../hostname_type.hpp"
-#include "output_buffer_decl.hpp"
+#include "output_buffer.hpp"
 
 #include <sge/string.hpp>
 #include <sge/signal/object.hpp>
@@ -46,8 +47,9 @@ public:
 		client::data_function const &);
 private:
 	typedef std::tr1::array<
-		data_type::value_type,
-		4096> static_buffer;
+		value_type,
+		4096
+	> static_buffer;
 
 	// asio vars
 	boost::asio::io_service &io_service_;
@@ -57,7 +59,7 @@ private:
 	// vars
 	unsigned handlers_;
 	static_buffer new_data_;
-	output_buffer<data_type::value_type> output_;
+	output_buffer output_;
 	bool connected_,sending_;
 
 	// signals

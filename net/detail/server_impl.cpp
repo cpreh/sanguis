@@ -1,14 +1,13 @@
 #include "server_impl.hpp"
 #include "is_disconnect.hpp"
 #include "io_service_wrapper.hpp"
-#include "output_buffer_decl.hpp"
-#include "output_buffer_impl.hpp"
 #include "connection.hpp"
 #include "../log.hpp"
 #include <sge/exception.hpp>
 #include <sge/text.hpp>
 #include <sge/iconv.hpp>
 #include <sge/lexical_cast.hpp>
+#include <sge/container/raw_vector_impl.hpp>
 #include <boost/asio/buffer.hpp>
 #include <boost/lambda/lambda.hpp>
 #include <boost/bind.hpp>
@@ -60,9 +59,16 @@ void sanguis::net::detail::server_impl::process()
 			continue;
 
 		c.sending_ = true;
+
+		data_type const &out_data(
+			c.output_.buffer()
+		);
+
 		c.socket_.async_send(
 			boost::asio::buffer(
-				c.output_.buffer()),
+				out_data.data(),
+				out_data.size()
+			),
 			boost::bind(
 				&server_impl::write_handler,
 				this,
@@ -222,9 +228,11 @@ void sanguis::net::detail::server_impl::write_handler(
 
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1 << SGE_TEXT("server: wrote ")
-		             << bytes 
-								 << SGE_TEXT(" bytes."));
+		sge::log::_1
+			<< SGE_TEXT("server: wrote ")
+			<< bytes 
+			 << SGE_TEXT(" bytes.")
+	);
 
 	c.output_.erase(
 		bytes);
@@ -236,16 +244,24 @@ void sanguis::net::detail::server_impl::write_handler(
 		return;
 	}
 
+	data_type const &data(
+		c.output_.buffer()
+	);
+
 	c.socket_.async_send(
 		boost::asio::buffer(
-			c.output_.buffer()),
+			data.data(),
+			data.size()
+		),
 		boost::bind(
 			&server_impl::write_handler,
 			this,
 			_1,
 			_2,
-			boost::ref(
-				c)));
+			boost::ref(c)
+		)
+	);
+
 	handlers_++;
 }
 
@@ -279,14 +295,17 @@ void sanguis::net::detail::server_impl::accept_handler(
 
 	c.socket_.async_receive(
 		boost::asio::buffer(
-			c.new_data_),
+			c.new_data_
+		),
 		boost::bind(
 			&server_impl::read_handler,
 			this,
 			_1,
 			_2,
-			boost::ref(
-					c)));
+			boost::ref(c)
+		)
+	);
+
 	handlers_++;
 	accept();
 }
@@ -305,11 +324,13 @@ void sanguis::net::detail::server_impl::handle_error(
 
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1 << SGE_TEXT("server: disconnected ")
-		             << c.id_ 
-								 << SGE_TEXT(" (")
-								 << sge::iconv(e.message()) 
-								 << SGE_TEXT(")"));
+		sge::log::_1
+			<< SGE_TEXT("server: disconnected ")
+			<< c.id_ 
+			 << SGE_TEXT(" (")
+			 << sge::iconv(e.message()) 
+			 << SGE_TEXT(")")
+	);
 
 	// ...else remove connection
 	disconnect_signal_(
@@ -321,7 +342,3 @@ void sanguis::net::detail::server_impl::handle_error(
 		connections_.end(),
 		&boost::lambda::_1 == &c);
 }
-
-
-
-
