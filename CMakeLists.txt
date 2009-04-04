@@ -78,6 +78,7 @@ FILE (GLOB files
 	server/entities/enemies/*.cpp
 	server/entities/pickups/*.cpp
 	server/entities/projectiles/*.cpp
+	server/message_convert/*.cpp
 	server/perks/*.cpp
 	server/states/*.cpp
 	server/waves/*.cpp

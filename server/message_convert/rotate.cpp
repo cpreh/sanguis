@@ -1,17 +1,17 @@
-#include "speed.hpp"
+#include "rotate.hpp"
 #include "../entities/entity.hpp"
-#include "../../messages/speed.hpp"
 #include "../../messages/create.hpp"
-#include <sge/math/vector/basic_impl.hpp>
+#include "../../messages/base.hpp"
+#include "../../messages/rotate.hpp"
 
 sanguis::messages::auto_ptr
-sanguis::server::message_convert::speed(
+sanguis::server::message_convert::rotate(
 	entities::entity const &e)
 {
 	return messages::create(
-		messages::speed(
+		messages::rotate(
 			e.id(),
-			e.abs_speed()
+			e.angle()
 		)
 	);
 }

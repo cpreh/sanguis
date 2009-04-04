@@ -2,6 +2,8 @@
 #define SANGUIS_SERVER_STATES_RUNNING_HPP_INCLUDED
 
 #include "unpaused_fwd.hpp"
+#include "../exp_type.hpp"
+#include "../level_type.hpp"
 #include "../message_event_fwd.hpp"
 #include "../machine.hpp"
 #include "../send_callback.hpp"
@@ -11,8 +13,11 @@
 #include "../entities/auto_ptr.hpp"
 #include "../waves/generator.hpp"
 #include "../../load/context_fwd.hpp"
-#include "../../messages/types.hpp"
-#include "../../messages/fwd.hpp"
+#include "../../messages/connect.hpp"
+#include "../../messages/client_info.hpp"
+#include "../../messages/player_choose_perk.hpp"
+#include "../../messages/base_fwd.hpp"
+#include "../../net/id_type.hpp"
 #include "../../time_type.hpp"
 #include <sge/log/fwd.hpp>
 #include <sge/signal/auto_connection.hpp>

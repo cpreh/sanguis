@@ -3,7 +3,15 @@
 
 #include "../message_event_fwd.hpp"
 #include "../environment_fwd.hpp"
-#include "../../messages/fwd.hpp"
+#include "../../messages/player_direction.hpp"
+#include "../../messages/player_rotation.hpp"
+#include "../../messages/player_start_shooting.hpp"
+#include "../../messages/player_stop_shooting.hpp"
+#include "../../messages/player_change_weapon.hpp"
+#include "../../messages/player_pause.hpp"
+#include "../../messages/player_unpause.hpp"
+#include "../../messages/disconnect.hpp"
+#include "../../messages/base_fwd.hpp"
 #include "../../net/id_type.hpp"
 #include "running.hpp"
 #include <sge/time/timer.hpp>

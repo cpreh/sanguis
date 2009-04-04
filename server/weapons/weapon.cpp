@@ -8,6 +8,7 @@
 #include <sge/time/second_f.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/math/circle_impl.hpp>
+#include <sge/math/vector/basic_impl.hpp>
 #include <sge/text.hpp>
 #include <sge/log/headers.hpp>
 #include <ostream>

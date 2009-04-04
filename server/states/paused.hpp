@@ -3,7 +3,10 @@
 
 #include "running.hpp"
 #include "../environment_fwd.hpp"
-#include "../../messages/fwd.hpp"
+#include "../../messages/player_unpause.hpp"
+#include "../../messages/player_pause.hpp"
+#include "../../messages/disconnect.hpp"
+#include "../../messages/base_fwd.hpp"
 #include "../../net/id_type.hpp"
 #include <sge/log/fwd.hpp>
 #include <boost/mpl/list.hpp>
@@ -21,22 +24,30 @@ namespace states
 class paused
 	: public boost::statechart::simple_state<paused,running>
 {
-	public:
+public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<tick_event>,
 		boost::statechart::custom_reaction<message_event> 
-		> reactions;
+	> reactions;
 	
 	// reactions
-	boost::statechart::result react(const tick_event&);
-	boost::statechart::result react(const message_event&);
+	boost::statechart::result react(tick_event const &);
+	boost::statechart::result react(message_event const &);
 
 	boost::statechart::result
 	operator()(
 		net::id_type,
 		messages::disconnect const &);
-	boost::statechart::result operator()(const net::id_type,const messages::player_unpause &);
-	boost::statechart::result operator()(const net::id_type,const messages::player_pause &);
+
+	boost::statechart::result
+	operator()(
+		net::id_type,
+		messages::player_unpause const &);
+	
+	boost::statechart::result
+	operator()(
+		net::id_type,
+		messages::player_pause const &);
 private:
 	boost::statechart::result handle_default_msg(
 		net::id_type,

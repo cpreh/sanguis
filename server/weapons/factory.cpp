@@ -21,7 +21,7 @@ sanguis::server::weapons::create(
 				env,
 				type,
 				static_cast<time_type>(0.5),
-				messages::mu(5),
+				static_cast<space_unit>(5),
 				static_cast<time_type>(0.2),
 				18, // magazine size
 				static_cast<time_type>(2) // reload time
@@ -32,7 +32,7 @@ sanguis::server::weapons::create(
 				env,
 				type,
 				static_cast<time_type>(0.33),
-				messages::mu(5),
+				static_cast<space_unit>(5),
 				static_cast<time_type>(0.2),
 				36, // magazine size
 				static_cast<time_type>(4) // reload time
@@ -43,9 +43,9 @@ sanguis::server::weapons::create(
 				env,
 				type,
 				static_cast<time_type>(1), // cooldown
-				messages::mu(0.2), // spread radius
+				static_cast<space_unit>(0.2), // spread radius
 				10, // shells
-				messages::mu(1), // damage,
+				static_cast<space_unit>(1), // damage,
 				8, // magazine size
 				static_cast<time_type>(3) // reload time
 				));
@@ -55,8 +55,8 @@ sanguis::server::weapons::create(
 				env,
 				type,
 				static_cast<time_type>(0.8), // cooldown
-				messages::mu(10), // damage
-				messages::mu(100), // aoe
+				static_cast<space_unit>(10), // damage
+				static_cast<space_unit>(100), // aoe
 				1, // magazine size
 				static_cast<time_type>(1.6) // reload time
 				));

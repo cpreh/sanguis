@@ -10,6 +10,8 @@
 #include "../entities/entity.hpp"
 #include "../entities/player.hpp"
 #include "../entities/decoration.hpp"
+#include "../message_convert/level_up.hpp"
+#include "../message_convert/experience.hpp"
 #include "../weapons/factory.hpp"
 #include "../weapons/weapon.hpp"
 #include "../perks/factory.hpp"
@@ -17,13 +19,9 @@
 #include "../log.hpp"
 #include "../send_available_perks.hpp"
 #include "../../messages/assign_id.hpp"
-#include "../../messages/client_info.hpp"
-#include "../../messages/connect.hpp"
-#include "../../messages/experience.hpp"
-#include "../../messages/level_up.hpp"
-#include "../../messages/player_choose_perk.hpp"
+#include "../../messages/unwrap.hpp"
+#include "../../messages/create.hpp"
 #include "../../resolution.hpp"
-#include "../../dispatch_type.hpp"
 #include "../../random.hpp"
 #include "../../exception.hpp"
 #include <sge/iconv.hpp>
@@ -70,10 +68,19 @@ sanguis::server::states::running::running(my_context ctx)
 	SGE_LOG_DEBUG(
 		log(),
 		sge::log::_1
-			<< SGE_TEXT("constructor"));
+			<< SGE_TEXT("constructor")
+	);
+
 	create_decorations();
+
 	context<machine>().collision()->test_callback(
-		boost::bind(&running::collision_test,this,_1,_2));
+		boost::bind(
+			&running::collision_test,
+			this,
+			_1,
+			_2
+		)
+	);
 }
 
 void sanguis::server::states::running::create_decorations()
@@ -212,11 +219,7 @@ void sanguis::server::states::running::divide_exp(
 		entities::player &p = *ref.second;
 		p.exp(p.exp() + exp);
 
-		send(
-			messages::auto_ptr(
-				new messages::experience(
-					p.id(),
-					p.exp())));
+		send(message_convert::experience(p));
 	}
 }
 
@@ -224,15 +227,7 @@ void sanguis::server::states::running::level_callback(
 	entities::player &p,
 	level_type)
 {
-	// no message_converter here because it operates on a _specific_ entity type
-	send(
-		messages::auto_ptr(
-			new messages::level_up(
-				p.id(),
-				p.level()
-			)
-		)
-	);
+	send(message_convert::level_up(p));
 }
 
 bool sanguis::server::states::running::collision_test(
@@ -306,18 +301,25 @@ sanguis::server::states::running::react(
 {
 	message_functor<running, boost::statechart::result> mf(
 		*this,
-		m.id);
+		m.id());
 
-	return dispatch_type<
+	return messages::unwrap<
 		boost::mpl::vector<
 			messages::client_info,
 			messages::connect,
 			messages::player_choose_perk
 		>,
-		boost::statechart::result>(
-			mf,
-			*m.message,
-			boost::bind(&running::handle_default_msg, this, m.id, _1));
+		boost::statechart::result
+	>(
+		mf,
+		*m.message(),
+		boost::bind(
+			&running::handle_default_msg,
+			this,
+			m.id(),
+			_1
+		)
+	);
 }
 
 boost::statechart::result
@@ -338,9 +340,10 @@ sanguis::server::states::running::operator()(
 			environment(),
 			damage::list(static_cast<space_unit>(0)),
 			net_id,
-			messages::pos_type(
+			pos_type(
 				static_cast<space_unit>(resolution().w()/2),
-				static_cast<space_unit>(resolution().h()/2)),
+				static_cast<space_unit>(resolution().h()/2)
+			),
 			static_cast<space_unit>(0),
 			static_cast<space_unit>(0),
 			boost::assign::map_list_of
@@ -348,21 +351,29 @@ sanguis::server::states::running::operator()(
 				entities::property(static_cast<space_unit>(100)))
 				(entities::property_type::movement_speed,
 				entities::property(static_cast<space_unit>(0),static_cast<space_unit>(100))),
-			m.name()));
+			m.get<messages::string>()
+		)
+	);
 
 	players()[net_id] = dynamic_cast<entities::player *>(
 		new_player.get());
 
 	context<machine>().send(
-		messages::auto_ptr(
-			new messages::assign_id(
-				new_player->id())),
-		net_id);
+		messages::create(
+			messages::assign_id(
+				new_player->id()
+			)
+		),
+		net_id
+	);
 
 	entities::player &p(
 		dynamic_cast<entities::player &>(
 			insert_entity(
-				new_player)));
+				new_player
+			)
+		)
+	);
 
 	// TODO: some defaults here
 	p.add_weapon(
@@ -374,16 +385,9 @@ sanguis::server::states::running::operator()(
 
 	// send start experience
 	// no message_converter here because it operates on a _specific_ entity type
-	send(
-		messages::auto_ptr(
-			new messages::experience(
-				p.id(),
-				p.exp())));
-	send(
-		messages::auto_ptr(
-			new messages::level_up(
-				p.id(),
-				p.level())));
+	send(message_convert::experience(p));
+
+	send(message_convert::level_up(p));
 	
 	send_available_perks(
 		p,
@@ -397,7 +401,6 @@ sanguis::server::states::running::operator()(
 		send(e.add_message());
 	}
 
-
 	return discard_event();
 }
 
@@ -406,7 +409,6 @@ sanguis::server::states::running::operator()(
 	net::id_type,
 	messages::connect const &)
 {
-	
 	// FIXME
 	return discard_event();
 }
@@ -420,7 +422,9 @@ sanguis::server::states::running::operator()(
 		static_cast<
 			perk_type::type
 		>(
-			p.perk()));
+			p.get<messages::roles::perk>()
+		)
+	);
 	
 	entities::player &player_(
 		player(id));

@@ -1,5 +1,6 @@
 #include "spawn.hpp"
 #include "../entities/enemies/factory.hpp"
+#include "../entities/entity.hpp"
 #include "../environment.hpp"
 #include "../../random.hpp"
 #include "../../angle_vector.hpp"

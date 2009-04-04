@@ -3,7 +3,6 @@
 
 #include "delayed_attack_fwd.hpp"
 #include "weapon.hpp"
-#include "../types.hpp"
 
 namespace sanguis 
 {
