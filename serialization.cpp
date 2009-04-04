@@ -71,8 +71,8 @@ sanguis::deserialize(
 }
 
 void sanguis::serialize(
-	messages::auto_ptr m,
-	net::data_type &a)
+	messages::auto_ptr message,
+	net::data_type &array)
 {
 	typedef boost::iostreams::back_insert_device<
 		net::data_type
@@ -87,7 +87,7 @@ void sanguis::serialize(
 	> stream_type;
 
 	stream_buf buf(
-		a
+		array
 	);
 
 	stream_type stream(
@@ -95,28 +95,30 @@ void sanguis::serialize(
 	);
 
 	net::data_type::size_type const header_pos(
-		a.size()
+		array.size()
 	);
 
-	a.resize(
-		a.size() + message_header_size
+	array.resize(
+		array.size() + message_header_size
 	);
+
+	sge::cerr << "size before: " << array.size() << '\n';
 
 	messages::serialization::serialize(
 		stream,
-		m
+		message
 	);
+
+	sge::cerr << "size after: " << array.size() << '\n';
 
 	// TODO: endianness!
 	message_header const header(
-		a.size() - message_header_size - header_pos
+		array.size() - message_header_size - header_pos
 	);
 	
-	sge::cerr << "write size: " << header << '\n';
-
 	sge::algorithm::copy_n(
 		reinterpret_cast<net::data_type::const_pointer>(&header),
 		message_header_size,
-		a.data() + header_pos
+		array.data() + header_pos
 	);
 }
