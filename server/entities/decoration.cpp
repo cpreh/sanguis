@@ -7,7 +7,8 @@
 #include "../../load/context.hpp"
 #include "../../messages/create.hpp"
 #include "../../messages/add_decoration.hpp"
-#include <sge/container/map_impl.hpp>
+#include <sge/math/vector/basic_impl.hpp>
+#include <sge/math/dim/basic_impl.hpp>
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::decoration::decoration(

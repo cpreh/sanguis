@@ -8,6 +8,8 @@
 #include "../../../load/context.hpp"
 #include "../../../messages/add_enemy.hpp"
 #include "../../../messages/create.hpp"
+#include <sge/math/vector/basic_impl.hpp>
+#include <sge/math/dim/basic_impl.hpp>
 #include <boost/tr1/random.hpp>
 
 sanguis::server::entities::enemies::enemy::enemy(

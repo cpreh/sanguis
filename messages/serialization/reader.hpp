@@ -1,6 +1,7 @@
 #ifndef SANGUIS_MESSAGES_SERIALIZATION_READER_HPP_INCLUDED
 #define SANGUIS_MESSAGES_SERIALIZATION_READER_HPP_INCLUDED
 
+#include "reader_fwd.hpp"
 #include "istream.hpp"
 #include "../auto_ptr.hpp"
 

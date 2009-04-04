@@ -7,6 +7,8 @@
 #include "../../../load/context.hpp"
 #include "../../../messages/create.hpp"
 #include "../../../messages/add_weapon_pickup.hpp"
+#include <sge/math/vector/basic_impl.hpp>
+#include <sge/math/dim/basic_impl.hpp>
 
 sanguis::server::entities::pickups::weapon::weapon(
 	server::environment const &env,

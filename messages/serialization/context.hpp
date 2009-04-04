@@ -3,6 +3,7 @@
 
 #include "context_fwd.hpp"
 #include "dispatch_map.hpp"
+#include <sge/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -15,6 +16,8 @@ struct context {
 	SGE_NONCOPYABLE(context)
 public:
 	context();
+
+	~context();
 
 	dispatch_map const &
 	handlers() const;

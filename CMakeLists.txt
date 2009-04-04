@@ -65,6 +65,7 @@ FILE (GLOB files
 	draw/factory/*.cpp
 	draw/particle/*.cpp
 	messages/*.cpp
+	messages/serialization/*.cpp
 	load/*.cpp
 	load/model/*.cpp
 	load/particle/*.cpp

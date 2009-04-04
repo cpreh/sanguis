@@ -1,12 +1,14 @@
 #include "deserialize.hpp"
 #include "context.hpp"
 #include "reader.hpp"
+#include "dispatcher_base.hpp"
+#include "../base.hpp"
 #include "../types/message.hpp"
 #include "../../exception.hpp"
 #include <sge/text.hpp>
 
 sanguis::messages::auto_ptr
-sanguis::messages::deserialize::deserialize(
+sanguis::messages::serialization::deserialize(
 	context const &ctx,
 	istream &stream)
 {
@@ -16,9 +18,9 @@ sanguis::messages::deserialize::deserialize(
 		reinterpret_cast<char *>(&t), sizeof(t)
 	);
 
-	dispatch_map::const_iterator const it = ctx.handlers.find(t);
+	dispatch_map::const_iterator const it = ctx.handlers().find(t);
 
-	if(it == ctx.handlers.end())
+	if(it == ctx.handlers().end())
 		throw exception(
 			SGE_TEXT("Invalid message received.")
 		);

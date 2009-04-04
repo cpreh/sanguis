@@ -8,8 +8,9 @@
 #include "../../../load/context.hpp"
 #include "../../../messages/add_pickup.hpp"
 #include "../../../messages/create.hpp"
+#include <sge/math/vector/basic_impl.hpp>
+#include <sge/math/dim/basic_impl.hpp>
 #include <sge/text.hpp>
-#include <boost/foreach.hpp>
 #include <boost/assign/list_of.hpp>
 
 sanguis::pickup_type::type

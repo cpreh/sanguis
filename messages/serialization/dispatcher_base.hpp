@@ -1,6 +1,8 @@
 #ifndef SANGUIS_MESSAGES_SERIALIZATION_DISPATCHER_BASE_HPP_INCLUDED
 #define SANGUIS_MESSAGES_SERIALIZATION_DISPATCHER_BASE_HPP_INCLUDED
 
+#include "dispatcher_base_fwd.hpp"
+#include "reader_fwd.hpp"
 #include "../auto_ptr.hpp"
 #include <sge/noncopyable.hpp>
 
@@ -10,8 +12,6 @@ namespace messages
 {
 namespace serialization
 {
-
-class reader;
 
 struct dispatcher_base {
 	SGE_NONCOPYABLE(dispatcher_base)

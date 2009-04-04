@@ -2,6 +2,7 @@
 #define SANGUIS_MESSAGES_SERIALIZATION_SERIALIZE_HPP_INCLUDED
 
 #include "ostream.hpp"
+#include "../auto_ptr.hpp"
 
 namespace sanguis
 {
