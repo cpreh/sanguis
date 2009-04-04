@@ -7,6 +7,8 @@
 #include "../../exception.hpp"
 #include <sge/text.hpp>
 
+#include <sge/cerr.hpp>
+
 sanguis::messages::auto_ptr
 sanguis::messages::serialization::deserialize(
 	context const &ctx,
@@ -14,6 +16,7 @@ sanguis::messages::serialization::deserialize(
 {
 	types::message::type t;
 
+	// TODO: fix endianness here
 	stream.read(
 		reinterpret_cast<char *>(&t), sizeof(t)
 	);
