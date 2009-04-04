@@ -14,8 +14,8 @@ SET (CMAKE_VERBOSE_MAKEFILE ON)
 
 FIND_PACKAGE(Boost 1.36.0 COMPONENTS
 	filesystem
+	iostreams
 	program_options
-	serialization
 	system
 	thread)
 
