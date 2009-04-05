@@ -17,7 +17,6 @@
 #include <istream>
 #include <ostream>
 
-#include <sge/cerr.hpp>
 
 namespace
 {
@@ -78,8 +77,6 @@ sanguis::deserialize(
 
 	SGE_ASSERT(message_size > 0);
 
-	sge::cerr << "read size: " << message_size << '\n';
-
 	if ((data.size() - message_header_size) < message_size)
 		return messages::auto_ptr();
 
@@ -92,7 +89,12 @@ sanguis::deserialize(
 
 	SGE_ASSERT(ret->size() == message_size);
 
-	SGE_ASSERT(ret->size() + message_header_size == stream.tellg());
+	SGE_ASSERT(
+		ret->size() + message_header_size
+		== static_cast<
+			net::data_type::size_type
+		>(stream.tellg())
+	);
 
 	data.erase(
 		data.begin(),
@@ -140,8 +142,6 @@ void sanguis::serialize(
 
 	// TODO: endianness!
 	stream.write(reinterpret_cast<stream_type::char_type const *>(&header), sizeof(message_header));
-
-	sge::cerr << "write size: " << header << '\n';
 
 	messages::serialization::serialize(
 		stream,

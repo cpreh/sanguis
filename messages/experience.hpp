@@ -2,6 +2,7 @@
 #define SANGUIS_MESSAGES_EXPERIENCE_HPP_INCLUDED
 
 #include "types/message.hpp"
+#include "roles/experience.hpp"
 #include "bind_entity_message.hpp"
 #include "exp_type.hpp"
 #include "make_class.hpp"
@@ -20,7 +21,8 @@ typedef majutsu::composite<
 			types::message::experience
 		>::type,
 		majutsu::role<
-			exp_type
+			exp_type,
+			roles::experience
 		>
 	>
 > experience_elements;

@@ -147,7 +147,7 @@ sanguis::client::states::running::operator()(
 	messages::assign_id const &m)
 {
 	logic_.player_id(
-		m.get<messages::entity_id>()
+		m.get<messages::roles::entity_id>()
 	);
 	return discard_event();
 }
@@ -182,7 +182,7 @@ sanguis::client::states::running::operator()(
 	messages::remove const &m)
 {
 	logic_.remove(
-		m.get<messages::entity_id>()
+		m.get<messages::roles::entity_id>()
 	);
 	(*drawer)(m);
 	// TODO: check the logic if we died

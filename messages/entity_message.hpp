@@ -3,6 +3,7 @@
 
 #include "entity_id.hpp"
 #include "message_type.hpp"
+#include "roles/entity_id.hpp"
 #include <majutsu/composite.hpp>
 #include <majutsu/role.hpp>
 #include <boost/mpl/vector.hpp>
@@ -16,7 +17,8 @@ typedef majutsu::composite<
 	boost::mpl::vector<
 		message_type,
 		majutsu::role<
-			entity_id
+			entity_id,
+			roles::entity_id
 		>
 	>
 > entity_message;

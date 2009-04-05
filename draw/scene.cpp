@@ -179,7 +179,7 @@ void sanguis::draw::scene::operator()(
 	configure_new_object(
 		factory::entity(
 			environment(),
-			m.get<messages::entity_id>(),
+			m.get<messages::roles::entity_id>(),
 			static_cast<
 				entity_type::type
 			>(
@@ -196,7 +196,7 @@ void sanguis::draw::scene::operator()(
 	configure_new_object(
 		factory::enemy(
 			environment(),
-			m.get<messages::entity_id>(),
+			m.get<messages::roles::entity_id>(),
 			static_cast<
 				enemy_type::type
 			>(
@@ -217,7 +217,7 @@ void sanguis::draw::scene::operator()(
 	configure_new_object(
 		factory::decoration(
 			environment(),
-			m.get<messages::entity_id>(),
+			m.get<messages::roles::entity_id>(),
 			static_cast<
 				decoration_type::type
 			>(
@@ -234,7 +234,7 @@ void sanguis::draw::scene::operator()(
 	configure_new_object(
 		factory::pickup(
 			environment(),
-			m.get<messages::entity_id>(),
+			m.get<messages::roles::entity_id>(),
 			static_cast<
 				pickup_type::type
 			>(
@@ -251,7 +251,7 @@ void sanguis::draw::scene::operator()(
 	configure_new_object(
 		factory::projectile(
 			environment(),
-			m.get<messages::entity_id>(),
+			m.get<messages::roles::entity_id>(),
 			static_cast<
 				projectile_type::type
 			>(
@@ -268,7 +268,7 @@ void sanguis::draw::scene::operator()(
 	configure_new_object(
 		factory::weapon_pickup(
 			environment(),
-			m.get<messages::entity_id>(),
+			m.get<messages::roles::entity_id>(),
 			static_cast<
 				weapon_type::type
 			>(
@@ -294,7 +294,7 @@ void sanguis::draw::scene::operator()(
 		return;
 	}
 	
-	entity(m.get<messages::entity_id>()).weapon(
+	entity(m.get<messages::roles::entity_id>()).weapon(
 		static_cast<weapon_type::type>(
 			value
 		)
@@ -305,7 +305,7 @@ void sanguis::draw::scene::operator()(
 	messages::experience const &m)
 {
 	hud_.experience(
-		m.get<messages::exp_type>()
+		m.get<messages::roles::experience>()
 	);
 }
 
@@ -313,7 +313,7 @@ void sanguis::draw::scene::operator()(
 	messages::health const &m)
 {
 	entity(
-		m.get<messages::entity_id>()
+		m.get<messages::roles::entity_id>()
 	).health(
 		m.get<messages::roles::health>()
 	);
@@ -331,7 +331,7 @@ void sanguis::draw::scene::operator()(
 	messages::max_health const &m)
 {
 	entity(
-		m.get<messages::entity_id>()
+		m.get<messages::roles::entity_id>()
 	).max_health(
 		m.get<messages::roles::max_health>()
 	);
@@ -341,7 +341,7 @@ void sanguis::draw::scene::operator()(
 	messages::move const &m)
 {
 	entity(
-		m.get<messages::entity_id>()
+		m.get<messages::roles::entity_id>()
 	).pos(
 		virtual_to_screen(
 			ss.renderer()->screen_size(),
@@ -355,7 +355,7 @@ void sanguis::draw::scene::operator()(
 {
 	entity_map::iterator const it(
 		entities.find(
-			m.get<messages::entity_id>()
+			m.get<messages::roles::entity_id>()
 		)
 	);
 
@@ -376,7 +376,7 @@ void sanguis::draw::scene::operator()(
 {
 	//entity(m.id()).dim(virtual_to_screen(ss.renderer()->screen_size(), m.dim()));
 	entity(
-		m.get<messages::entity_id>()
+		m.get<messages::roles::entity_id>()
 	).dim(
 		sge::structure_cast<
 			sge::sprite::dim
@@ -390,7 +390,7 @@ void sanguis::draw::scene::operator()(
 	messages::rotate const &m)
 {
 	entity(
-		m.get<messages::entity_id>()
+		m.get<messages::roles::entity_id>()
 	).orientation(
 		m.get<messages::roles::angle>()
 	);
@@ -400,7 +400,7 @@ void sanguis::draw::scene::operator()(
 	messages::speed const &m)
 {
 	entity(
-		m.get<messages::entity_id>()
+		m.get<messages::roles::entity_id>()
 	).speed(
 		sge::structure_cast<
 			vector2
@@ -417,7 +417,7 @@ void sanguis::draw::scene::operator()(
 	messages::start_attacking const &m)
 {
 	entity(
-		m.get<messages::entity_id>()
+		m.get<messages::roles::entity_id>()
 	).start_attacking();
 }
 
@@ -425,7 +425,7 @@ void sanguis::draw::scene::operator()(
 	messages::stop_attacking const &m)
 {
 	entity(
-		m.get<messages::entity_id>()
+		m.get<messages::roles::entity_id>()
 	).stop_attacking();
 }
 
@@ -433,7 +433,7 @@ void sanguis::draw::scene::operator()(
 	messages::start_reloading const &m)
 {
 	entity(
-		m.get<messages::entity_id>()
+		m.get<messages::roles::entity_id>()
 	).start_reloading();
 }
 
@@ -441,7 +441,7 @@ void sanguis::draw::scene::operator()(
 	messages::stop_reloading const &m)
 {
 	entity(
-		m.get<messages::entity_id>()
+		m.get<messages::roles::entity_id>()
 	).stop_reloading();
 }
 
@@ -453,7 +453,7 @@ void sanguis::draw::scene::configure_new_object(
 	Msg const &m)
 {
 	entity_id const id(
-		m. template get<messages::entity_id>()
+		m. template get<messages::roles::entity_id>()
 	);
 
 	std::pair<entity_map::iterator, bool> const ret(

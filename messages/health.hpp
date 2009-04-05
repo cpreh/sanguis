@@ -18,7 +18,7 @@ namespace messages
 typedef majutsu::composite<
 	boost::mpl::vector<
 		bind_entity_message<
-			types::message::give_weapon
+			types::message::health
 		>::type,
 		majutsu::role<
 			space_unit,

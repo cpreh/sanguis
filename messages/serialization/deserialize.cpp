@@ -7,8 +7,6 @@
 #include "../../exception.hpp"
 #include <sge/text.hpp>
 
-#include <sge/cerr.hpp>
-
 sanguis::messages::auto_ptr
 sanguis::messages::serialization::deserialize(
 	context const &ctx,
@@ -29,8 +27,6 @@ sanguis::messages::serialization::deserialize(
 	types::message::type const casted_type(
 		static_cast<types::message::type>(type)
 	);
-
-	sge::cerr << "got message type: " << casted_type << '\n';
 
 	dispatch_map::const_iterator const it = ctx.handlers().find(casted_type);
 

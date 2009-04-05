@@ -87,7 +87,7 @@ void sanguis::client::logic::handle_player_action(
 void sanguis::client::logic::give_weapon(
 	messages::give_weapon const &m)
 {
-	if(m.get<messages::entity_id>() != player_id_)
+	if(m.get<messages::roles::entity_id>() != player_id_)
 		return;
 	
 	weapon_type::type const wt(
@@ -110,7 +110,7 @@ void sanguis::client::logic::give_weapon(
 void sanguis::client::logic::move(
 	messages::move const &m)
 {
-	if(m.get<messages::entity_id>() == player_id_)
+	if(m.get<messages::roles::entity_id>() == player_id_)
 		player_center = sge::structure_cast<
 			sge::sprite::point
 		>(

@@ -2,6 +2,7 @@
 #define SANGUIS_MESSAGES_ASSIGN_ID_HPP_INCLUDED
 
 #include "types/message.hpp"
+#include "roles/entity_id.hpp"
 #include "make_class.hpp"
 #include "make_message_id.hpp"
 #include "entity_id.hpp"
@@ -20,7 +21,8 @@ typedef majutsu::composite<
 			types::message::assign_id
 		>::type,
 		majutsu::role<
-			entity_id
+			entity_id,
+			roles::entity_id
 		>
 	>
 > assign_id_elements;
