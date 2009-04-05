@@ -2,6 +2,7 @@
 #include "is_disconnect.hpp"
 #include "io_service_wrapper.hpp"
 #include "../log.hpp"
+#include <sge/container/raw_vector_impl.hpp>
 #include <sge/exception.hpp>
 #include <sge/text.hpp>
 #include <sge/iconv.hpp>

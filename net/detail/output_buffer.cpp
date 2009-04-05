@@ -1,6 +1,12 @@
 #include "output_buffer.hpp"
 #include <sge/container/raw_vector_impl.hpp>
 
+sanguis::net::detail::output_buffer::output_buffer()
+{}
+
+sanguis::net::detail::output_buffer::~output_buffer()
+{}
+
 void sanguis::net::detail::output_buffer::push_back(
 	data_type const &s)
 {

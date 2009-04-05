@@ -3,6 +3,7 @@
 
 #include "../data_type.hpp"
 #include <sge/container/raw_vector_decl.hpp>
+#include <sge/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -13,7 +14,11 @@ namespace detail
 
 class output_buffer
 {
+	SGE_NONCOPYABLE(output_buffer)
 public:
+	output_buffer();
+	~output_buffer();
+
 	void push_back(
 		data_type const &);
 
