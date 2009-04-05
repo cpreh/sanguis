@@ -327,10 +327,17 @@ sanguis::server::states::running::operator()(
 	net::id_type const net_id,
 	messages::client_info const &m)
 {
+	string const &name(
+		m.get<messages::string>()
+	);
+
 	SGE_LOG_DEBUG(
 		log(),
 		sge::log::_1
-			<< SGE_TEXT("sending player's id"));
+			<< SGE_TEXT("Received client info for ")
+			<< name
+	);
+	
 	// TODO: this should be cleaned up somehow
 	// 1) create the player
 	// 2) tell the client the player's id _before_ doing anything else
@@ -351,7 +358,7 @@ sanguis::server::states::running::operator()(
 				entities::property(static_cast<space_unit>(100)))
 				(entities::property_type::movement_speed,
 				entities::property(static_cast<space_unit>(0),static_cast<space_unit>(100))),
-			m.get<messages::string>()
+			name
 		)
 	);
 

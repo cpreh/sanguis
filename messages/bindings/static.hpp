@@ -1,6 +1,7 @@
 #ifndef SANGUIS_MESSAGES_BINDINGS_STATIC_HPP_INCLUDED
 #define SANGUIS_MESSAGES_BINDINGS_STATIC_HPP_INCLUDED
 
+#include <sge/assert.hpp>
 #include <majutsu/detail/copy_n.hpp> // TODO: replace this
 #include <majutsu/size_type.hpp>
 #include <majutsu/raw_pointer.hpp>
@@ -19,10 +20,16 @@ struct static_ {
 	typedef T type;
 
 	static majutsu::size_type
-	needed_size(
-		type const &t)
+	static_size()
 	{
-		return t.size() * sizeof(typename T::value_type); 
+		return type::dim_wrapper::value * sizeof(typename T::value_type);
+	}
+
+	static majutsu::size_type
+	needed_size(
+		type const &)
+	{
+		return static_size();
 	}
 
 	static void
@@ -46,6 +53,8 @@ struct static_ {
 		majutsu::const_raw_pointer const beg,
 		majutsu::size_type const sz)
 	{
+		SGE_ASSERT(sz == static_size());
+
 		type ret;
 
 		majutsu::detail::copy_n(

@@ -1,6 +1,7 @@
 #ifndef SANGUIS_MESSAGES_BINDINGS_DYNAMIC_LEN_HPP_INCLUDED
 #define SANGUIS_MESSAGES_BINDINGS_DYNAMIC_LEN_HPP_INCLUDED
 
+#include <sge/assert.hpp>
 #include <majutsu/detail/copy_n.hpp> // TODO: replace this
 #include <majutsu/size_type.hpp>
 #include <majutsu/raw_pointer.hpp>
@@ -66,9 +67,13 @@ struct dynamic_len {
 		majutsu::const_raw_pointer const beg,
 		majutsu::size_type const sz)
 	{
+		SGE_ASSERT(sz > sizeof(length_type));
+
 		majutsu::size_type const sz_wo_len(
 			sz - sizeof(length_type)
 		);
+
+		SGE_ASSERT(sz_wo_len % sizeof(typename type::value_type) == 0);
 
 		type ret;
 		
