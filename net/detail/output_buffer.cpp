@@ -1,5 +1,6 @@
 #include "output_buffer.hpp"
 #include <sge/container/raw_vector_impl.hpp>
+#include <sge/algorithm/append.hpp>
 
 sanguis::net::detail::output_buffer::output_buffer()
 {}
@@ -13,10 +14,9 @@ void sanguis::net::detail::output_buffer::push_back(
 	if (current.empty())
 		current = s;
 	else
-		appendix.insert(
-			appendix.end(),
-			s.begin(),
-			s.end()
+		sge::algorithm::append(
+			appendix,
+			s
 		);
 }
 
@@ -28,10 +28,9 @@ void sanguis::net::detail::output_buffer::erase(
 		current.begin() + bytes
 	);
 
-	current.insert(
-		current.end(),
-		appendix.begin(),
-		appendix.end()
+	sge::algorithm::append(
+		current,
+		appendix
 	);
 
 	appendix.clear();

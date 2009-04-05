@@ -4,16 +4,17 @@
 #include "messages/global_context.hpp"
 #include "messages/base.hpp"
 #include "net/value_type.hpp"
+#include "truncation_check_cast.hpp"
 
 #include <sge/algorithm/copy_n.hpp>
 #include <sge/container/raw_vector_impl.hpp>
+#include <sge/assert.hpp>
 
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/device/back_inserter.hpp>
 #include <boost/iostreams/stream_buffer.hpp>
 #include <boost/cstdint.hpp>
 
-#include <iosfwd>
 #include <istream>
 #include <ostream>
 
@@ -23,7 +24,22 @@ namespace
 {
 
 typedef boost::uint16_t message_header;
-std::streamsize const message_header_size = sizeof(message_header);
+
+sanguis::net::data_type::size_type const
+message_header_size = sizeof(message_header);
+
+template<
+	typename Stream
+>
+void exceptions(
+	Stream &stream)
+{
+	stream.exceptions(
+		std::ios_base::badbit
+		| std::ios_base::failbit
+		| std::ios_base::eofbit
+	);
+}
 
 }
 
@@ -55,9 +71,13 @@ sanguis::deserialize(
 		&buf
 	);
 
+	exceptions(stream);
+
 	// TODO: endianness!
 	message_header message_size;
 	stream.read(reinterpret_cast<stream_type::char_type *>(&message_size), sizeof(message_size));
+
+	SGE_ASSERT(message_size > 0);
 
 	sge::cerr << "read size: " << message_size << '\n';
 
@@ -94,6 +114,8 @@ void sanguis::serialize(
 		&buf
 	);
 
+	exceptions(stream);
+
 	net::data_type::size_type const header_pos(
 		array.size()
 	);
@@ -102,19 +124,23 @@ void sanguis::serialize(
 		array.size() + message_header_size
 	);
 
-	sge::cerr << "size before: " << array.size() << '\n';
-
 	messages::serialization::serialize(
 		stream,
 		message
 	);
 
-	sge::cerr << "size after: " << array.size() << '\n';
+	stream.flush();
 
 	// TODO: endianness!
 	message_header const header(
-		array.size() - message_header_size - header_pos
+		truncation_check_cast<
+			message_header
+		>(
+			array.size() - message_header_size - header_pos
+		)
 	);
+
+	SGE_ASSERT(header > 0);
 	
 	sge::algorithm::copy_n(
 		reinterpret_cast<net::data_type::const_pointer>(&header),

@@ -17,6 +17,7 @@
 #include <sge/input/key_state_tracker.hpp>
 #include <sge/mainloop/dispatch.hpp>
 #include <sge/container/raw_vector_impl.hpp>
+#include <sge/algorithm/append.hpp>
 #include <boost/bind.hpp>
 #include <boost/lambda/bind.hpp>
 #include <boost/lambda/construct.hpp>
@@ -121,10 +122,9 @@ void sanguis::client::machine::process_message(
 void sanguis::client::machine::data_callback(
 	net::data_type const &data)
 {
-	in_buffer.insert(
-		in_buffer.begin(),
-		data.begin(),
-		data.end()
+	sge::algorithm::append(
+		in_buffer,
+		data
 	);
 	//while (messages::auto_ptr p = deserialize(in_buffer))
 	//	process_message(p);

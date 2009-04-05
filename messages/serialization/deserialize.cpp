@@ -14,12 +14,14 @@ sanguis::messages::serialization::deserialize(
 	context const &ctx,
 	istream &stream)
 {
-	types::message::type t;
+	types::message::type t = types::message::invalid;
 
 	// TODO: fix endianness here
 	stream.read(
 		reinterpret_cast<char *>(&t), sizeof(t)
 	);
+
+	sge::cerr << "got message type: " << t << '\n';
 
 	dispatch_map::const_iterator const it = ctx.handlers().find(t);
 

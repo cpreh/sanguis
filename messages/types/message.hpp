@@ -46,7 +46,8 @@ enum type {
 	stop_attacking,
 	start_reloading,
 	stop_reloading,
-	unpause
+	unpause,
+	invalid = 0xFF
 };
 }
 
