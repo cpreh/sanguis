@@ -7,6 +7,7 @@
 #include "../../messages/assign_id.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../messages/give_weapon.hpp"
+#include "../../messages/available_perks.hpp"
 #include "../../messages/move.hpp"
 #include "../../messages/remove.hpp"
 #include "../../draw/coord_transform.hpp"
@@ -17,8 +18,10 @@
 #include <sge/audio/pool.hpp>
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/state/states.hpp>
+#include <sge/assert.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
+#include <boost/foreach.hpp>
 
 namespace
 {
@@ -58,7 +61,14 @@ sanguis::client::states::running::running(
 			boost::bind(
 				&input_handler::input_callback,
 				&input,
-				_1)))
+				_1))),
+	perks_(),
+	current_level_(
+		static_cast<messages::level_type>(
+			0)),
+	consumed_levels_(
+		static_cast<messages::level_type>(
+			0))
 {
 	context<machine>().renderer()->state(
 		sge::renderer::state::list
@@ -119,7 +129,8 @@ sanguis::client::states::running::react(
 			messages::disconnect,
 			messages::give_weapon,
 			messages::move,
-			messages::remove
+			messages::remove,
+			messages::available_perks
 		>,
 		boost::statechart::result>(
 		*this,
@@ -173,6 +184,44 @@ sanguis::client::states::running::operator()(
 		m);
 	// TODO: check the logic if we died
 	return discard_event();
+}
+
+boost::statechart::result
+sanguis::client::states::running::operator()(
+	messages::available_perks const &m)
+{
+	perks_.clear();
+	BOOST_FOREACH(messages::perk_list::const_reference r,m.perks())
+	{
+		SGE_ASSERT(r < perk_type::size);
+		perks_.push_back(
+			static_cast<perk_type::type>(
+				r));
+	}
+	return discard_event();
+}
+
+sanguis::client::states::running::perk_container const &
+	sanguis::client::states::running::perks() const
+{
+	return perks_;
+}
+
+sanguis::messages::level_type sanguis::client::states::running::levels_left() const
+{
+	return static_cast<messages::level_type>(
+		current_level_-consumed_levels_);
+}
+
+void sanguis::client::states::running::consume_level()
+{
+	SGE_ASSERT(consumed_levels_ < current_level_);
+	consumed_levels_++;
+}
+
+sanguis::entity_id sanguis::client::states::running::player_id() const
+{
+	return logic_.player_id();
 }
 
 boost::statechart::result

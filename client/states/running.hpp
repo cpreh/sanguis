@@ -7,6 +7,7 @@
 #include "../machine.hpp"
 #include "../input_handler.hpp"
 #include "../logic.hpp"
+#include "../../perk_type.hpp"
 #include "../../tick_event.hpp"
 #include "../../weapon_type.hpp"
 #include "../../messages/fwd.hpp"
@@ -20,6 +21,7 @@
 #include <boost/statechart/result.hpp>
 #include <boost/mpl/list.hpp>
 #include <boost/array.hpp>
+#include <vector>
 
 namespace sanguis
 {
@@ -34,6 +36,8 @@ class running
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<message_event>
 		> reactions;
+
+	typedef std::vector<perk_type::type> perk_container;
 
 	running(my_context);
 	void draw(tick_event const &);
@@ -51,6 +55,15 @@ class running
 		messages::move const &);
 	boost::statechart::result operator()(
 		messages::remove const &);
+	boost::statechart::result operator()(
+		messages::available_perks const &);
+	boost::statechart::result operator()(
+		messages::level_up const &);
+	
+	perk_container const &perks() const;
+	messages::level_type levels_left() const;
+	void consume_level();
+	entity_id player_id() const;
 	private:
 	boost::statechart::result handle_default_msg(
 		messages::base const &);
@@ -63,6 +76,8 @@ class running
 	logic                           logic_;
 	input_handler                   input;
 	sge::signal::auto_connection    input_connection;
+	perk_container                  perks_;
+	messages::level_type            current_level_,consumed_levels_;
 };
 }
 }

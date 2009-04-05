@@ -43,6 +43,7 @@ public:
 		entity_id);
 	void player_id(
 		entity_id);
+	entity_id player_id() const;
 
 	sge::sprite::point const
 	cursor_pos() const;

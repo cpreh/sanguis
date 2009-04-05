@@ -127,6 +127,11 @@ void sanguis::client::logic::player_id(
 	player_id_ = id;
 }
 
+sanguis::entity_id sanguis::client::logic::player_id() const
+{
+	return player_id_;
+}
+
 sge::sprite::point const
 sanguis::client::logic::cursor_pos() const
 {
