@@ -144,7 +144,8 @@ sanguis::client::states::running::react(
 			messages::give_weapon,
 			messages::move,
 			messages::remove,
-			messages::available_perks
+			messages::available_perks,
+			messages::level_up
 		>,
 		boost::statechart::result
 	>(
@@ -210,13 +211,24 @@ sanguis::client::states::running::operator()(
 	messages::available_perks const &m)
 {
 	perks_.clear();
-	BOOST_FOREACH(messages::types::enum_vector::const_reference r,m.get<messages::perk_list>())
+	BOOST_FOREACH(
+		messages::types::enum_vector::const_reference r,
+		m.get<messages::perk_list>())
 	{
 		SGE_ASSERT(r < perk_type::size);
 		perks_.push_back(
 			static_cast<perk_type::type>(
 				r));
 	}
+	return forward_event();
+}
+
+boost::statechart::result
+sanguis::client::states::running::operator()(
+	messages::level_up const &m)
+{
+	current_level_ = m.get<messages::level_type>();
+	(*drawer)(m);
 	return discard_event();
 }
 
@@ -235,7 +247,7 @@ sanguis::client::states::running::level_type
 
 void sanguis::client::states::running::consume_level()
 {
-	SGE_ASSERT(consumed_levels_ < current_level_);
+	SGE_ASSERT(levels_left());
 	consumed_levels_++;
 }
 

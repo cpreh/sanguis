@@ -7,12 +7,15 @@
 #include "../../messages/player_choose_perk.hpp"
 #include "../../messages/available_perks.hpp"
 #include "../../messages/create.hpp"
+#include "../../messages/unwrap.hpp"
 #include <sge/gui/skins/standard.hpp>
 #include <sge/gui/unit.hpp>
 #include <sge/gui/make_image.hpp>
+#include <sge/gui/layouts/vertical.hpp>
 #include <sge/image/loader.hpp>
 #include <sge/systems/instance.hpp>
-#include "../../messages/unwrap.hpp"
+#include <sge/make_shared_ptr.hpp>
+#include <sge/cerr.hpp>
 #include <boost/bind.hpp>
 #include <boost/foreach.hpp>
 #include <boost/ref.hpp>
@@ -60,7 +63,10 @@ sanguis::client::states::paused::paused(my_context ctx)
 				.pos(
 					dialog_pos())
 				.size(
-					dialog_size())),
+					dialog_size())
+				.layout(
+					sge::make_shared_ptr<sge::gui::layouts::vertical>(
+						boost::ref(background_)))),
 		perks_left_(
 			background_,
 			sge::gui::widget::parameters(),
@@ -173,10 +179,19 @@ void sanguis::client::states::paused::regenerate_widgets()
 void sanguis::client::states::paused::perk_callback(
 	perk_type::type const p)
 {
+	if (!context<running>().levels_left())
+	{
+		sge::cerr << "NO LEVELS LEFT!\n";
+		return;
+	}
+
 	context<machine>().send(
 		messages::create(
 			messages::player_choose_perk(
 				context<running>().player_id(),
 				p)));
+
+	sge::cerr << "CONSUMED LEVEL!\n";
+
 	context<running>().consume_level();
 }
