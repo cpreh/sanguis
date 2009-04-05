@@ -1,11 +1,15 @@
 #include "machine.hpp"
+#include "make_screenshot_path.hpp"
+#include "message_event.hpp"
 #include "../messages/connect.hpp"
 #include "../messages/disconnect.hpp"
 #include "../messages/create.hpp"
 #include "../messages/base.hpp"
 #include "../serialization.hpp"
-#include "message_event.hpp"
+#include "../log.hpp"
+#include <sge/math/compare.hpp>
 #include <sge/systems/instance.hpp>
+#include <sge/renderer/screenshot.hpp>
 #include <sge/audio/player.hpp>
 #include <sge/audio/pool.hpp>
 #include <sge/renderer/scoped_block.hpp>
@@ -47,6 +51,12 @@ sanguis::client::machine::machine(
 				&machine::data_callback,
 				this,
 				_1))),
+	input_connection(
+		_sys.input_system()->register_callback(
+			boost::bind(
+				&machine::input_callback,
+				this,
+				_1))),
 	sys_(_sys),
 	sound_pool_(_sound_pool),
 	font_(_font),
@@ -66,7 +76,8 @@ sanguis::client::machine::machine(
 		_console,
 		sys_.input_system(),
 		sge::input::kc::key_f1),
-	running_(true)
+	running_(true),
+	screenshot_(false)
 {}
 
 void sanguis::client::machine::connect()
@@ -173,6 +184,7 @@ bool sanguis::client::machine::process(
 
 	net_.process();
 
+	{
 	sge::renderer::scoped_block const block_(sys_.renderer());
 	process_event(t);
 
@@ -181,7 +193,14 @@ bool sanguis::client::machine::process(
 
 	if (ks[sge::input::kc::key_escape])
 		quit();
-	
+	}
+
+	if (screenshot_)
+	{
+		make_screenshot();
+		screenshot_ = false;
+	}
+
 	return running_;
 }
 
@@ -241,4 +260,32 @@ sanguis::load::context const &
 sanguis::client::machine::resources() const
 {
 	return resources_;
+}
+
+void sanguis::client::machine::input_callback(
+	sge::input::key_pair const &k)
+{
+	if (sge::math::almost_zero(k.value()))
+		return;
+
+	if (k.key().code() != sge::input::kc::key_print)
+		return;
+	
+	screenshot_ = true;
+}
+
+void sanguis::client::machine::make_screenshot()
+{
+	sge::filesystem::path const p = 
+		make_screenshot_path();
+	
+	SGE_LOG_DEBUG(
+		log(),
+		sge::log::_1 << SGE_TEXT("writing screenshot: ")
+		             << p);
+	
+	sge::renderer::screenshot(
+		sys().renderer(),
+		sys().image_loader(),
+		p);
 }

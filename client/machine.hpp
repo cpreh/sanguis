@@ -18,6 +18,7 @@
 #include <sge/audio/pool.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/console/stdlib.hpp>
+#include <sge/signal/connection_manager.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/container/raw_vector_decl.hpp>
 
@@ -79,9 +80,7 @@ private:
 	net::port_type port_;
 	net::client net_;
 	sge::signal::auto_connection
-		s_conn,
-		s_disconn,
-		s_data;
+		s_conn,s_disconn,s_data,input_connection;
 	net::data_type
 		in_buffer,
 		out_buffer;
@@ -93,6 +92,11 @@ private:
 	sge::console::stdlib console_stdlib;
 	sanguis::client::console_wrapper console_wrapper_;
 	bool running_;
+	bool screenshot_;
+
+	void input_callback(
+		sge::input::key_pair const &);
+	void make_screenshot();
 };
 
 }
