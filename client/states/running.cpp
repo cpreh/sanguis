@@ -68,10 +68,10 @@ sanguis::client::states::running::running(
 				_1))),
 	perks_(),
 	current_level_(
-		static_cast<messages::level_type>(
+		static_cast<level_type>(
 			0)),
 	consumed_levels_(
-		static_cast<messages::level_type>(
+		static_cast<level_type>(
 			0))
 {
 	context<machine>().renderer()->state(
@@ -210,7 +210,7 @@ sanguis::client::states::running::operator()(
 	messages::available_perks const &m)
 {
 	perks_.clear();
-	BOOST_FOREACH(messages::perk_list::const_reference r,m.perks())
+	BOOST_FOREACH(messages::types::enum_vector::const_reference r,m.get<messages::perk_list>())
 	{
 		SGE_ASSERT(r < perk_type::size);
 		perks_.push_back(
@@ -226,9 +226,10 @@ sanguis::client::states::running::perk_container const &
 	return perks_;
 }
 
-sanguis::messages::level_type sanguis::client::states::running::levels_left() const
+sanguis::client::states::running::level_type 
+	sanguis::client::states::running::levels_left() const
 {
-	return static_cast<messages::level_type>(
+	return static_cast<level_type>(
 		current_level_-consumed_levels_);
 }
 

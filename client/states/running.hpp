@@ -11,9 +11,12 @@
 #include "../../tick_event.hpp"
 #include "../../weapon_type.hpp"
 #include "../../messages/base.hpp"
+#include "../../messages/types/level.hpp"
 #include "../../messages/assign_id.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../messages/give_weapon.hpp"
+#include "../../messages/available_perks.hpp"
+#include "../../messages/level_up.hpp"
 #include "../../messages/move.hpp"
 #include "../../messages/remove.hpp"
 #include "../../draw/scene_fwd.hpp"
@@ -42,6 +45,7 @@ public:
 	> reactions;
 
 	typedef std::vector<perk_type::type> perk_container;
+	typedef messages::types::level level_type;
 
 	running(my_context);
 	~running();
@@ -67,7 +71,7 @@ public:
 		messages::level_up const &);
 	
 	perk_container const &perks() const;
-	messages::level_type levels_left() const;
+	level_type levels_left() const;
 	void consume_level();
 	entity_id player_id() const;
 	private:
@@ -85,7 +89,7 @@ public:
 	input_handler                   input;
 	sge::signal::auto_connection    input_connection;
 	perk_container                  perks_;
-	messages::level_type            current_level_,consumed_levels_;
+	level_type                      current_level_,consumed_levels_;
 };
 }
 }

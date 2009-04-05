@@ -2,11 +2,11 @@
 #include "unpaused.hpp"
 #include "../from_perk_type.hpp"
 #include "../../media_path.hpp"
-#include "../../dispatch_type.hpp"
 #include "../../messages/unpause.hpp"
 #include "../../resolution.hpp"
 #include "../../messages/player_choose_perk.hpp"
 #include "../../messages/available_perks.hpp"
+#include "../../messages/create.hpp"
 #include <sge/gui/skins/standard.hpp>
 #include <sge/gui/unit.hpp>
 #include <sge/gui/make_image.hpp>
@@ -129,7 +129,12 @@ void sanguis::client::states::paused::regenerate_widgets()
 			sge::lexical_cast<sge::string>(
 				context<running>().levels_left()));
 	buttons_.clear();
-	sge::filesystem::path const p = media_path()/SGE_TEXT("perks");
+	sge::filesystem::path const p = 
+		media_path()/
+		SGE_TEXT("menu")/
+		SGE_TEXT("buttons")/
+		SGE_TEXT("perks");
+
 	BOOST_FOREACH(running::perk_container::const_reference r,context<running>().perks())
 	{
 		sge::filesystem::path const base = 
@@ -169,8 +174,8 @@ void sanguis::client::states::paused::perk_callback(
 	perk_type::type const p)
 {
 	context<machine>().send(
-		messages::auto_ptr(
-			new messages::player_choose_perk(
+		messages::create(
+			messages::player_choose_perk(
 				context<running>().player_id(),
 				p)));
 	context<running>().consume_level();
