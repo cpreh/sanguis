@@ -24,8 +24,11 @@ sanguis::messages::serialization::dispatcher_register<T>::dispatcher_register(
 		0
 	>::type msg_type;
 
+	// TODO: fix this cast here, maybe replace majutsu::constant by an enum wrapper
 	ctx.handlers_.insert(
-		msg_type::value,
+		static_cast<
+			types::message::type
+		>(msg_type::value),
 		disp
 	);
 }

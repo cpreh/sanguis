@@ -47,7 +47,7 @@ enum type {
 	start_reloading,
 	stop_reloading,
 	unpause,
-	invalid = 0xFF
+	size_
 };
 }
 

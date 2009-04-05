@@ -84,10 +84,23 @@ sanguis::deserialize(
 	if ((data.size() - message_header_size) < message_size)
 		return messages::auto_ptr();
 
-	return messages::serialization::deserialize(
-		messages::global_context(),
-		stream
+	messages::auto_ptr ret(
+		messages::serialization::deserialize(
+			messages::global_context(),
+			stream
+		)
 	);
+
+	SGE_ASSERT(ret->size() == message_size);
+
+	SGE_ASSERT(ret->size() + message_header_size == stream.tellg());
+
+	data.erase(
+		data.begin(),
+		data.begin() + stream.tellg()
+	);
+
+	return ret;
 }
 
 void sanguis::serialize(
@@ -141,6 +154,8 @@ void sanguis::serialize(
 	);
 
 	SGE_ASSERT(header > 0);
+
+	sge::cerr << "write size: " << header << '\n';
 	
 	sge::algorithm::copy_n(
 		reinterpret_cast<net::data_type::const_pointer>(&header),

@@ -10,7 +10,7 @@ namespace messages
 namespace types
 {
 
-typedef boost::uint32_t enum_;
+typedef boost::uint8_t enum_; // TODO: is this enough?
 
 }
 }

@@ -2,9 +2,9 @@
 #define SANGUIS_MESSAGES_BIND_ENTITY_MESSAGE_HPP_INCLUDED
 
 #include "entity_message.hpp"
+#include "make_message_id.hpp"
 #include "types/message.hpp"
 #include <majutsu/bind.hpp>
-#include <majutsu/constant.hpp>
 #include <majutsu/placeholder.hpp>
 #include <sge/restrict_typedef_struct.hpp>
 #include <boost/mpl/vector.hpp>
@@ -21,10 +21,9 @@ struct bind_entity_message {
 	typedef majutsu::bind<
 		entity_message,
 		boost::mpl::vector<
-			majutsu::constant<
-				types::message::type,
+			typename make_message_id<
 				Msg
-			>,
+			>::type,
 			majutsu::placeholder
 		>
 	> type;

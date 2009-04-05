@@ -3,9 +3,9 @@
 
 #include "types/message.hpp"
 #include "make_class.hpp"
+#include "make_message_id.hpp"
 #include "entity_id.hpp"
 #include <majutsu/composite.hpp>
-#include <majutsu/constant.hpp>
 #include <majutsu/role.hpp>
 #include <boost/mpl/vector.hpp>
 
@@ -16,10 +16,9 @@ namespace messages
 
 typedef majutsu::composite<
 	boost::mpl::vector<
-		majutsu::constant<
-			types::message::type,
+		make_message_id<
 			types::message::assign_id
-		>,
+		>::type,
 		majutsu::role<
 			entity_id
 		>

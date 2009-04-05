@@ -3,8 +3,8 @@
 
 #include "types/message.hpp"
 #include "make_class.hpp"
+#include "make_message_id.hpp"
 #include <majutsu/composite.hpp>
-#include <majutsu/constant.hpp>
 #include <boost/mpl/vector.hpp>
 
 namespace sanguis
@@ -14,10 +14,9 @@ namespace messages
 
 typedef majutsu::composite<
 	boost::mpl::vector<
-		majutsu::constant<
-			types::message::type,
+		make_message_id<
 			types::message::pause
-		>
+		>::type
 	>
 > pause_elements;
 

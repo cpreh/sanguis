@@ -3,7 +3,7 @@
 #include "reader.hpp"
 #include "dispatcher_base.hpp"
 #include "../base.hpp"
-#include "../types/message.hpp"
+#include "../types/message_type.hpp"
 #include "../../exception.hpp"
 #include <sge/text.hpp>
 
@@ -14,20 +14,29 @@ sanguis::messages::serialization::deserialize(
 	context const &ctx,
 	istream &stream)
 {
-	types::message::type t = types::message::invalid;
+	types::message_type type;
 
 	// TODO: fix endianness here
 	stream.read(
-		reinterpret_cast<char *>(&t), sizeof(t)
+		reinterpret_cast<char *>(&type), sizeof(type)
 	);
 
-	sge::cerr << "got message type: " << t << '\n';
+	if(type > types::message::size_)
+		throw exception(
+			SGE_TEXT("Invalid message received!")
+		);
 
-	dispatch_map::const_iterator const it = ctx.handlers().find(t);
+	types::message::type const casted_type(
+		static_cast<types::message::type>(type)
+	);
+
+	sge::cerr << "got message type: " << casted_type << '\n';
+
+	dispatch_map::const_iterator const it = ctx.handlers().find(casted_type);
 
 	if(it == ctx.handlers().end())
 		throw exception(
-			SGE_TEXT("Invalid message received.")
+			SGE_TEXT("No handler for a message found.")
 		);
 	
 	reader d(stream);
