@@ -6,7 +6,6 @@
 #include "net/value_type.hpp"
 #include "truncation_check_cast.hpp"
 
-#include <sge/algorithm/copy_n.hpp>
 #include <sge/container/raw_vector_impl.hpp>
 #include <sge/assert.hpp>
 
@@ -129,37 +128,23 @@ void sanguis::serialize(
 
 	exceptions(stream);
 
-	net::data_type::size_type const header_pos(
-		array.size()
-	);
-
-	array.resize(
-		array.size() + message_header_size
-	);
-
-	messages::serialization::serialize(
-		stream,
-		message
-	);
-
-	stream.flush();
-
-	// TODO: endianness!
 	message_header const header(
 		truncation_check_cast<
 			message_header
 		>(
-			array.size() - message_header_size - header_pos
+			message->size()
 		)
 	);
 
 	SGE_ASSERT(header > 0);
 
+	// TODO: endianness!
+	stream.write(reinterpret_cast<stream_type::char_type const *>(&header), sizeof(message_header));
+
 	sge::cerr << "write size: " << header << '\n';
-	
-	sge::algorithm::copy_n(
-		reinterpret_cast<net::data_type::const_pointer>(&header),
-		message_header_size,
-		array.data() + header_pos
+
+	messages::serialization::serialize(
+		stream,
+		message
 	);
 }

@@ -83,7 +83,7 @@ struct dynamic_len {
 
 		majutsu::detail::copy_n(
 			beg + sizeof(length_type),
-			sz_wo_len * sizeof(typename T::value_type),
+			sz_wo_len,
 			reinterpret_cast<
 				majutsu::raw_pointer
 			>(
