@@ -1,7 +1,8 @@
 #ifndef SANGUIS_SERVER_COLLISION_BASE_HPP_INCLUDED
 #define SANGUIS_SERVER_COLLISION_BASE_HPP_INCLUDED
 
-#include "../types.hpp"
+#include "../pos_type.hpp"
+#include "../space_unit.hpp"
 #include <sge/collision/objects/circle_fwd.hpp>
 #include <sge/collision/world_fwd.hpp>
 #include <sge/noncopyable.hpp>

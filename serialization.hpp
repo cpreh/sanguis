@@ -2,19 +2,19 @@
 #define SANGUIS_SERIALIZATION_HPP_INCLUDED
 
 #include "net/data_type.hpp"
-#include "messages/base.hpp"
-#include <boost/function.hpp>
+#include "messages/auto_ptr.hpp"
 
 namespace sanguis
 {
 
-typedef boost::function<void (messages::auto_ptr)> deserialize_callback;
+messages::auto_ptr
+deserialize(
+	net::data_type &data);
 
-net::data_type deserialize(
-	net::data_type const &data,
-	deserialize_callback const &callback);
-
-net::data_type serialize(messages::auto_ptr);
+void
+serialize(
+	messages::auto_ptr,
+	net::data_type &);
 
 }
 

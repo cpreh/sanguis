@@ -23,11 +23,11 @@ sanguis::server::entities::projectiles::rocket::rocket(
 		boost::assign::map_list_of
 			(
 				entities::property_type::health,
-				entities::property(messages::mu(1))
+				entities::property(static_cast<space_unit>(1))
 			)
 			(
 				entities::property_type::movement_speed,
-				entities::property(messages::mu(300))
+				entities::property(static_cast<space_unit>(300))
 			),
 		default_dim(
 			env.load().models(),
@@ -47,11 +47,11 @@ void sanguis::server::entities::projectiles::rocket::do_die()
 {
 	damage_array const damage_values =
 		boost::assign::list_of
-		(messages::mu(0))
-		(messages::mu(1))
-		(messages::mu(0))
-		(messages::mu(0))
-		(messages::mu(0));
+		(static_cast<space_unit>(0))
+		(static_cast<space_unit>(1))
+		(static_cast<space_unit>(0))
+		(static_cast<space_unit>(0))
+		(static_cast<space_unit>(0));
 	
 	insert(
 		auto_ptr(

@@ -1,27 +1,29 @@
 #include "enemy.hpp"
 #include "../base_parameters.hpp"
 #include "../../weapons/weapon.hpp"
-#include "../../message_converter.hpp"
 #include "../../spawn_pickup.hpp"
 #include "../../get_dim.hpp"
 #include "../../../random.hpp"
 #include "../../../load/enemy_name.hpp"
 #include "../../../load/context.hpp"
 #include "../../../messages/add_enemy.hpp"
+#include "../../../messages/create.hpp"
+#include <sge/math/vector/basic_impl.hpp>
+#include <sge/math/dim/basic_impl.hpp>
 #include <boost/tr1/random.hpp>
 
 sanguis::server::entities::enemies::enemy::enemy(
 	enemy_type::type const etype_,
 	server::environment const &env,
 	armor_array const &armor,
-	messages::pos_type const &center,
-	messages::space_unit const angle,
-	messages::space_unit const direction,
+	pos_type const &center,
+	space_unit const angle,
+	space_unit const direction,
 	property_map const &properties,
 	ai::ai_ptr const ai_,
 	weapons::auto_ptr weapon_,
 	unsigned const spawn_chance,
-	messages::exp_type const exp_)
+	exp_type const exp_)
 :
 	entity_with_ai(
 		base_parameters(
@@ -54,10 +56,21 @@ sanguis::server::entities::enemies::enemy::etype() const
 sanguis::messages::auto_ptr
 sanguis::server::entities::enemies::enemy::add_message() const
 {
-	return message_convert(*this);
+	return messages::create(
+		messages::add_enemy(
+			id(),
+			pos(),
+			angle(),
+			abs_speed(),
+			health(),
+			max_health(),
+			dim(),
+			etype()
+		)
+	);
 }
 
-sanguis::messages::exp_type
+sanguis::server::exp_type
 sanguis::server::entities::enemies::enemy::exp() const
 {
 	return exp_;

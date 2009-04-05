@@ -10,12 +10,16 @@
 #include "../../perk_type.hpp"
 #include "../../tick_event.hpp"
 #include "../../weapon_type.hpp"
-#include "../../messages/fwd.hpp"
 #include "../../messages/base.hpp"
-#include "../../messages/entity_message.hpp"
-#include "../../draw/scene.hpp"
+#include "../../messages/assign_id.hpp"
+#include "../../messages/disconnect.hpp"
+#include "../../messages/give_weapon.hpp"
+#include "../../messages/move.hpp"
+#include "../../messages/remove.hpp"
+#include "../../draw/scene_fwd.hpp"
 #include "../../draw/player_fwd.hpp"
 #include <sge/signal/auto_connection.hpp>
+#include <sge/scoped_ptr.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/result.hpp>
@@ -32,14 +36,15 @@ namespace states
 class running
 	: public boost::statechart::state<running,machine,unpaused>
 {
-	public:
+public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<message_event>
-		> reactions;
+	> reactions;
 
 	typedef std::vector<perk_type::type> perk_container;
 
 	running(my_context);
+	~running();
 	void draw(tick_event const &);
 	void process(tick_event const &);
 	void pause(bool);
@@ -55,6 +60,7 @@ class running
 		messages::move const &);
 	boost::statechart::result operator()(
 		messages::remove const &);
+
 	boost::statechart::result operator()(
 		messages::available_perks const &);
 	boost::statechart::result operator()(
@@ -72,7 +78,9 @@ class running
 		messages::auto_ptr);
 
 	music_handler                   music_;
-	draw::scene                     drawer;
+	sge::scoped_ptr<
+		draw::scene
+	> drawer;
 	logic                           logic_;
 	input_handler                   input;
 	sge::signal::auto_connection    input_connection;

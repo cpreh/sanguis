@@ -1,32 +1,4 @@
 #include "max_health.hpp"
-#include "instantiate_serialize.hpp"
-#include <boost/serialization/export.hpp>
-#include <boost/serialization/base_object.hpp>
+#include "instantiate_message.hpp"
 
-BOOST_CLASS_EXPORT_GUID(sanguis::messages::max_health, "max_health")
-
-sanguis::messages::max_health::max_health()
-{}
-
-sanguis::messages::max_health::max_health(
-	const entity_id id,
-	const space_unit value_)
-: entity_message(id),
-  value_(value_)
-{}
-	
-sanguis::messages::space_unit sanguis::messages::max_health::value() const
-{
-	return value_;
-}
-
-template<typename Archive>
-void sanguis::messages::max_health::serialize(
-	Archive &ar,
-	unsigned)
-{
-	ar & boost::serialization::base_object<entity_message>(*this)
-	   & value_;
-}
-
-SANGUIS_MESSAGES_INSTANTIATE_SERIALIZE(max_health)
+SANGUIS_MESSAGES_INSTANTIATE_MESSAGE(sanguis::messages::max_health)

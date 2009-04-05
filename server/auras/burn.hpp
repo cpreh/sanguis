@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_AURAS_BURN_HPP_INCLUDED
 
 #include "aura.hpp"
-#include "../types.hpp"
+#include "../space_unit.hpp"
 #include "../../damage_type.hpp"
 #include "../../time_type.hpp"
 

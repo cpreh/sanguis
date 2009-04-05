@@ -8,8 +8,8 @@
 #include "../auras/aura.hpp"
 #include "../get_unique_id.hpp"
 #include "../log.hpp"
-#include "../message_converter.hpp"
 #include "../../messages/add.hpp"
+#include "../../messages/create.hpp"
 #include "../../angle_vector.hpp"
 #include "../../exception.hpp"
 #include <sge/math/vector/basic_impl.hpp>
@@ -77,14 +77,15 @@ sanguis::server::entities::entity::id() const
 sanguis::server::pos_type const
 sanguis::server::entities::entity::pos() const
 {
-	return center() - dim() / messages::mu(2);
+	return center() - dim() / static_cast<space_unit>(2);
 }
 
 void sanguis::server::entities::entity::pos(
 	pos_type const &p) 
 { 
 	center(
-		p + dim() / messages::mu(2));
+		p + dim() / static_cast<space_unit>(2)
+	);
 }
 
 sanguis::server::space_unit
@@ -192,12 +193,12 @@ void sanguis::server::entities::entity::damage(
 
 bool sanguis::server::entities::entity::dead() const
 {
-	return health() <= messages::mu(0);
+	return health() <= static_cast<space_unit>(0);
 }
 
 void sanguis::server::entities::entity::die()
 {
-	health(messages::mu(0));
+	health(static_cast<space_unit>(0));
 	on_die();
 }
 
@@ -346,7 +347,18 @@ void sanguis::server::entities::entity::add_perk(
 sanguis::messages::auto_ptr
 sanguis::server::entities::entity::add_message() const
 {
-	return message_convert<messages::add>(*this);
+	return messages::create(
+		messages::add(
+			id(),
+			pos(),
+			angle(),
+			abs_speed(),
+			health(),
+			max_health(),
+			dim(),
+			type()
+		)
+	);
 }
 
 sanguis::server::entities::auto_weak_link

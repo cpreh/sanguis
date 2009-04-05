@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_SEND_CALLBACK_HPP_INCLUDED
 #define SANGUIS_CLIENT_SEND_CALLBACK_HPP_INCLUDED
 
-#include "../messages/base.hpp"
+#include "../messages/auto_ptr.hpp"
 #include <boost/function.hpp>
 
 namespace sanguis

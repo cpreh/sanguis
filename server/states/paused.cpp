@@ -4,11 +4,10 @@
 #include "../message_functor.hpp"
 #include "../log.hpp"
 #include "../entities/entity.hpp"
-#include "../../dispatch_type.hpp"
 #include "../../messages/unpause.hpp"
-#include "../../messages/player_pause.hpp"
-#include "../../messages/player_unpause.hpp"
-#include "../../messages/disconnect.hpp"
+#include "../../messages/create.hpp"
+#include "../../messages/unwrap.hpp"
+#include "../../messages/base.hpp"
 
 #include <sge/iconv.hpp>
 #include <sge/text.hpp>
@@ -21,25 +20,36 @@
 #include <ostream>
 
 // reactions
-boost::statechart::result sanguis::server::states::paused::react(const tick_event&)
+boost::statechart::result
+sanguis::server::states::paused::react(
+	tick_event const &)
 {
 	return discard_event();
 }
 
-boost::statechart::result sanguis::server::states::paused::react(const message_event&m)
+boost::statechart::result
+sanguis::server::states::paused::react(
+	message_event const &m)
 {
-	message_functor<paused,boost::statechart::result> mf(*this,m.id);
+	message_functor<paused,boost::statechart::result> mf(*this,m.id());
 
-	return dispatch_type<
+	return messages::unwrap<
 		boost::mpl::vector<
 			messages::disconnect,
 			messages::player_pause,
 			messages::player_unpause
 		>,
-		boost::statechart::result>(
-			mf,
-			*m.message,
-			boost::bind(&paused::handle_default_msg, this, m.id, _1));
+		boost::statechart::result
+	>(
+		mf,
+		*m.message(),
+		boost::bind(
+			&paused::handle_default_msg,
+			this,
+			m.id(),
+			_1
+		)
+	);
 }
 
 boost::statechart::result
@@ -73,8 +83,11 @@ sanguis::server::states::paused::operator()(
 	messages::player_unpause const &)
 {
 	context<running>().environment().send(
-		messages::auto_ptr(
-			new messages::unpause()));
+		messages::create(
+			messages::unpause()
+		)
+	);
+
 	return transit<unpaused>();
 }
 

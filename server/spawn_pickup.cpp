@@ -9,7 +9,7 @@
 #include <boost/tr1/array.hpp>
 
 void sanguis::server::spawn_pickup(
-	messages::pos_type const &pos,
+	pos_type const &pos,
 	environment const &env)
 {
 	typedef std::tr1::uniform_int<
@@ -62,7 +62,10 @@ void sanguis::server::spawn_pickup(
 					env,
 					pos,
 					team::players,
-					10))); // FIXME: which health value to use?
+					10 // FIXME: which health value to use?
+				)
+			)
+		);
 		break;
 	default:
 		throw exception(

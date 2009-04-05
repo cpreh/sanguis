@@ -66,17 +66,20 @@ void sanguis::server::ai::simple::update(
 		{
 			me.aggressive(false);
 			speed.current(
-				messages::mu(0));
+				static_cast<space_unit>(0));
 			return;
 		}
 
 		me.aggressive(true);
 	}
 
-	boost::optional<messages::space_unit> const angle(
-		sge::math::angle_to<messages::space_unit>(
+	boost::optional<space_unit> const angle(
+		sge::math::angle_to<space_unit>(
 			me.center(),
-			target->center()));
+			target->center()
+		)
+	);
+
 	if(angle)
 	{
 		me.direction(*angle);
@@ -85,7 +88,7 @@ void sanguis::server::ai::simple::update(
 	
 	if(collision::collides(*target, me))
 		speed.current(
-			messages::mu(0));
+			static_cast<space_unit>(0));
 	else
 		speed.current_to_max();
 

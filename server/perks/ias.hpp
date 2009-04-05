@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_PERKS_IAS_HPP_INCLUDED
 
 #include "perk.hpp"
-#include "../types.hpp"
+#include "../space_unit.hpp"
 
 namespace sanguis
 {

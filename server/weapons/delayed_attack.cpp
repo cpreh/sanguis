@@ -1,4 +1,5 @@
 #include "delayed_attack.hpp"
+#include <sge/math/vector/basic_impl.hpp>
 
 sanguis::server::weapons::delayed_attack::delayed_attack(
 	pos_type const &spawn_point_,

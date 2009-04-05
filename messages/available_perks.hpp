@@ -1,31 +1,34 @@
 #ifndef SANGUIS_MESSAGES_AVAILABLE_PERKS_HPP_INCLUDED
 #define SANGUIS_MESSAGES_AVAILABLE_PERKS_HPP_INCLUDED
 
-#include "entity_message.hpp"
+#include "bind_entity_message.hpp"
+#include "make_class.hpp"
 #include "perk_list.hpp"
-#include <boost/serialization/access.hpp>
+#include "types/message.hpp"
+#include <majutsu/composite.hpp>
+#include <majutsu/role.hpp>
+#include <boost/mpl/vector.hpp>
 
 namespace sanguis
 {
 namespace messages
 {
 
-class available_perks : public entity_message {
-public:
-	available_perks();
-	explicit available_perks(
-		perk_list const &);
-	
-	perk_list const &
-	perks() const;
-private:
-	perk_list perks_;
-	
-	friend class boost::serialization::access;
-	template<typename Archive>
-	void serialize(Archive &ar, unsigned);
-};
-	
+typedef majutsu::composite<
+	boost::mpl::vector<
+		bind_entity_message<
+			types::message::available_perks
+		>::type,
+		majutsu::role<
+			perk_list
+		>
+	>
+> available_perks_elements;
+
+typedef make_class<
+	available_perks_elements
+>::type available_perks;
+
 }
 }
 

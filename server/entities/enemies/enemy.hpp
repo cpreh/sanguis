@@ -19,25 +19,25 @@ public:
 		enemy_type::type,
 		server::environment const &,
 		armor_array const &,
-		messages::pos_type const &center,
-		messages::space_unit angle,
-		messages::space_unit direction,
+		pos_type const &center,
+		space_unit angle,
+		space_unit direction,
 		property_map const &,
 		ai::ai_ptr,
 		weapons::auto_ptr weapon,
 		unsigned spawn_chance,
-		messages::exp_type exp);
+		exp_type exp);
 
 	enemy_type::type etype() const;
 private:
 	messages::auto_ptr add_message() const;
-	messages::exp_type exp() const;
+	exp_type exp() const;
 	void on_die();
 
 	ai::ai_ptr         ai_;
 	enemy_type::type   etype_;
 	unsigned           spawn_chance;
-	messages::exp_type exp_;
+	exp_type           exp_;
 };
 
 }

@@ -2,15 +2,17 @@
 #define SANGUIS_SERVER_WEAPONS_WEAPON_HPP_INCLUDED
 
 #include "delayed_attack_fwd.hpp"
+#include "../environment.hpp"
+#include "../pos_type.hpp"
+#include "../space_unit.hpp"
+#include "../entities/entity_with_weapon_fwd.hpp"
 #include "../../time_type.hpp"
 #include "../../messages/base.hpp"
 #include "../../weapon_type.hpp"
 #include "../../diff_clock.hpp"
-#include "../types.hpp"
-#include "../environment.hpp"
-#include "../entities/entity_with_weapon_fwd.hpp"
 #include <sge/time/timer.hpp>
 #include <sge/log/logger.hpp>
+#include <sge/math/vector/basic_decl.hpp>
 #include <sge/noncopyable.hpp>
 #include <boost/optional.hpp>
 
@@ -26,7 +28,7 @@ public:
 	space_unit range() const;
 	bool attack(
 		entities::entity_with_weapon &from,
-		pos_type const& to);
+		pos_type const &to);
 	weapon_type::type type() const;
 	void update(
 		time_type,

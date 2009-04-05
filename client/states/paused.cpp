@@ -12,6 +12,7 @@
 #include <sge/gui/make_image.hpp>
 #include <sge/image/loader.hpp>
 #include <sge/systems/instance.hpp>
+#include "../../messages/unwrap.hpp"
 #include <boost/bind.hpp>
 #include <boost/foreach.hpp>
 #include <boost/ref.hpp>
@@ -85,15 +86,21 @@ boost::statechart::result
 sanguis::client::states::paused::react(
 	message_event const &m)
 {
-	return dispatch_type<
+	return messages::unwrap<
 		boost::mpl::vector<
 			messages::unpause,
 			messages::available_perks
 		>,
-		boost::statechart::result>(
+		boost::statechart::result
+	>(
 		*this,
-		*m.message,
-		boost::bind(&paused::handle_default_msg, this, _1));
+		*m.message(),
+		boost::bind(
+			&paused::handle_default_msg,
+			this,
+			_1
+		)
+	);
 }
 
 boost::statechart::result sanguis::client::states::paused::operator()(

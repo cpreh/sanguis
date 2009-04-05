@@ -1,24 +1,22 @@
 #ifndef SANGUIS_MESSAGES_PLAYER_STOP_SHOOTING_HPP_INCLUDED
 #define SANGUIS_MESSAGES_PLAYER_STOP_SHOOTING_HPP_INCLUDED
 
-#include "entity_message.hpp"
-#include <boost/serialization/access.hpp>
+#include "bind_entity_message.hpp"
+#include "make_class.hpp"
+#include "types/message.hpp"
 
 namespace sanguis
 {
 namespace messages
 {
 
-class player_stop_shooting : public entity_message {
-public:
-	player_stop_shooting();
-	explicit player_stop_shooting(
-		entity_id);
-private:
-	friend class boost::serialization::access;
-	template<typename Archive>
-	void serialize(Archive &ar, unsigned);
-};
+typedef bind_entity_message<
+	types::message::player_stop_shooting
+>::type player_stop_shooting_elements;
+
+typedef make_class<
+	player_stop_shooting_elements
+>::type player_stop_shooting;
 
 }
 }

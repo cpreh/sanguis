@@ -4,7 +4,8 @@
 #include "entity_with_weapon.hpp"
 #include "../perks/tree.hpp"
 #include "../perks/list.hpp"
-#include "../../messages/types.hpp"
+#include "../level_type.hpp"
+#include "../string.hpp"
 #include "../../net/id_type.hpp"
 #include "../../perk_type.hpp"
 

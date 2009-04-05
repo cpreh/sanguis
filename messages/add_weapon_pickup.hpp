@@ -1,36 +1,32 @@
 #ifndef SANGUIS_MESSAGES_ADD_WEAPON_PICKUP_HPP_INCLUDED
 #define SANGUIS_MESSAGES_ADD_WEAPON_PICKUP_HPP_INCLUDED
 
-#include "add.hpp"
-#include "types.hpp"
-#include "../weapon_type.hpp"
-#include <boost/serialization/access.hpp>
+#include "make_add_message.hpp"
+#include "make_class.hpp"
+#include "enum.hpp"
+#include "types/message.hpp"
+#include "roles/weapon.hpp"
+#include <majutsu/role.hpp>
+#include <boost/mpl/vector.hpp>
 
 namespace sanguis
 {
 namespace messages
 {
 
-class add_weapon_pickup : public add {
-public:
-	add_weapon_pickup();
-	add_weapon_pickup(
-		entity_id id,
-		weapon_type::type,
-		pos_type const &,
-		space_unit angle,
-		space_unit health,
-		space_unit max_health,
-		dim_type const &);
-	
-	weapon_type::type wtype() const;
-private:
-	weapon_type::type wtype_;
+typedef make_add_message<
+	types::message::add_weapon_pickup,
+	boost::mpl::vector<
+		majutsu::role<
+			enum_,
+			roles::weapon
+		>
+	>
+>::type add_weapon_pickup_elements;
 
-	friend class boost::serialization::access;
-	template<typename Archive>
-	void serialize(Archive &ar, unsigned);
-};
+typedef make_class<
+	add_weapon_pickup_elements
+>::type add_weapon_pickup;
 
 }
 }

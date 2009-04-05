@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_BUFFS_BURN_HPP_INCLUDED
 #define SANGUIS_SERVER_BUFFS_BURN_HPP_INCLUDED
 
-#include "../types.hpp"
+#include "../space_unit.hpp"
 #include "../../diff_clock.hpp"
 #include "../../time_type.hpp"
 #include "../../damage_type.hpp"

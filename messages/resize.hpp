@@ -1,31 +1,33 @@
 #ifndef SANGUIS_MESSAGES_RESIZE_HPP_INCLUDED
 #define SANGUIS_MESSAGES_RESIZE_HPP_INCLUDED
 
-#include "entity_message.hpp"
-#include "types.hpp"
-#include <sge/math/dim/basic_decl.hpp>
-#include <boost/serialization/access.hpp>
+#include "bind_entity_message.hpp"
+#include "make_class.hpp"
+#include "dim.hpp"
+#include "types/message.hpp"
+#include <majutsu/composite.hpp>
+#include <majutsu/role.hpp>
+#include <boost/mpl/vector.hpp>
 
 namespace sanguis
 {
 namespace messages
 {
 
-class resize : public entity_message {
-public:
-	resize();
-	resize(
-		entity_id,
-		dim_type const &);
-	
-	dim_type const &dim() const;
-private:
-	dim_type dim_;
+typedef majutsu::composite<
+	boost::mpl::vector<
+		bind_entity_message<
+			types::message::resize
+		>::type,
+		majutsu::role<
+			dim
+		>
+	>
+> resize_elements;
 
-	friend class boost::serialization::access;
-	template<typename Archive>
-	void serialize(Archive &ar, unsigned);
-};
+typedef make_class<
+	resize_elements
+>::type resize;
 
 }
 }

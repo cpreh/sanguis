@@ -1,25 +1,22 @@
 #ifndef SANGUIS_MESSAGES_PLAYER_UNPAUSE_HPP_INCLUDED
 #define SANGUIS_MESSAGES_PLAYER_UNPAUSE_HPP_INCLUDED
 
-#include "entity_message.hpp"
-#include "types.hpp"
-#include <boost/serialization/access.hpp>
+#include "bind_entity_message.hpp"
+#include "make_class.hpp"
+#include "types/message.hpp"
 
 namespace sanguis
 {
 namespace messages
 {
 
-class player_unpause : public entity_message {
-public:
-	player_unpause();
-	explicit player_unpause(
-		entity_id);
-private:
-	friend class boost::serialization::access;
-	template<typename Archive>
-	void serialize(Archive &ar, unsigned);
-};
+typedef bind_entity_message<
+	types::message::player_unpause
+>::type player_unpause_elements;
+
+typedef make_class<
+	player_unpause_elements
+>::type player_unpause;
 
 }
 }

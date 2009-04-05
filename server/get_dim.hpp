@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_GET_DIM_HPP_INCLUDED
 
 #include "../load/model/context_fwd.hpp"
-#include "types.hpp"
+#include "dim_type.hpp"
 #include <sge/string.hpp>
 
 namespace sanguis

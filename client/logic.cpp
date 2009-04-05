@@ -2,8 +2,7 @@
 #include "invalid_id.hpp"
 #include "log.hpp"
 #include "to_perk_type.hpp"
-#include "../messages/give_weapon.hpp"
-#include "../messages/move.hpp"
+#include "../messages/create.hpp"
 #include "../messages/player_direction.hpp"
 #include "../messages/player_rotation.hpp"
 #include "../messages/player_start_shooting.hpp"
@@ -79,33 +78,44 @@ void sanguis::client::logic::handle_player_action(
 		return;
 	
 	actions.at(
-		action.type())(
-			action.scale());
+		action.type()
+	)(
+		action.scale()
+	);
 }
 
 void sanguis::client::logic::give_weapon(
 	messages::give_weapon const &m)
 {
-	if(m.id() != player_id_)
+	if(m.get<messages::roles::entity_id>() != player_id_)
 		return;
 	
-	owned_weapons.at(m.weapon()) = true;
+	weapon_type::type const wt(
+		static_cast<
+			weapon_type::type
+		>(
+			m.get<messages::roles::weapon>()
+		)
+	);
+
+	owned_weapons.at(wt) = true;
 
 	// we don't own any weapon so take this one
 	if(current_weapon == weapon_type::size)
 		change_weapon(
-			static_cast<weapon_type::type>(
-				m.weapon()));
+			wt
+		);
 }
 
 void sanguis::client::logic::move(
 	messages::move const &m)
 {
-	if(m.id() == player_id_)
+	if(m.get<messages::roles::entity_id>() == player_id_)
 		player_center = sge::structure_cast<
 			sge::sprite::point
 		>(
-			m.pos()); // FIXME
+			m.get<messages::pos>()
+		); // FIXME
 }
 
 void sanguis::client::logic::pause(
@@ -155,13 +165,17 @@ void sanguis::client::logic::handle_move_y(
 void sanguis::client::logic::update_direction()
 {
 	send(
-		messages::auto_ptr(
-			new messages::player_direction(
+		messages::create(
+			messages::player_direction(
 				player_id_,
 				sge::structure_cast<
-					messages::vector2
+					messages::types::vector2
 				>(
-					direction))));
+					direction
+				)
+			)
+		)
+	);
 }
 
 void sanguis::client::logic::handle_rotation_x(
@@ -192,36 +206,52 @@ void sanguis::client::logic::handle_rotation_y(
 
 void sanguis::client::logic::update_rotation()
 {
-	boost::optional<messages::space_unit> const rotation(
-		sge::math::angle_to<messages::space_unit>(
+	boost::optional<
+		messages::types::space_unit
+	> const rotation(
+		sge::math::angle_to<messages::types::space_unit>(
 			player_center,
-			cursor_pos_));
+			cursor_pos_
+		)
+	);
 
 	if(!rotation || !rotation_timer.update_b())
 		return;
 	
 	send(
-		messages::auto_ptr(
-			new messages::player_rotation(
+		messages::create(
+			messages::player_rotation(
 				player_id_,
-				messages::mu(
-					*rotation))));
+				*rotation
+			)
+		)
+	);
 }
 
 void sanguis::client::logic::handle_shooting(
 	key_scale const s)
 {
-	send(
-		messages::auto_ptr(
-			sge::math::compare(
-				static_cast<key_scale>(0),
-				s)
-			? static_cast<messages::base*>(
-				new messages::player_stop_shooting(
-					player_id_))
-			: static_cast<messages::base*>(
-				new messages::player_start_shooting(
-					player_id_))));
+	if(
+		sge::math::compare(
+			static_cast<key_scale>(0),
+			s
+		)
+	)
+		send(
+			messages::create(
+				messages::player_stop_shooting(
+					player_id_
+				)
+			)
+		);
+	else
+		send(
+			messages::create(
+				messages::player_start_shooting(
+					player_id_
+				)
+			)
+		);
 }
 
 void sanguis::client::logic::handle_switch_weapon_forwards(
@@ -233,15 +263,20 @@ void sanguis::client::logic::handle_switch_weapon_forwards(
 
 	owned_weapons_array::size_type const weapon_index(
 		static_cast<owned_weapons_array::size_type>(
-			current_weapon));
+			current_weapon
+		)
+	);
 
 	assert(weapon_index < owned_weapons.size());
 
-	cyclic_iterator<owned_weapons_array::const_iterator> it(
+	cyclic_iterator<
+		owned_weapons_array::const_iterator
+	> it(
 		owned_weapons.begin()
 		+ static_cast<owned_weapons_array::size_type>(current_weapon),
 		owned_weapons.begin(),
-		owned_weapons.end());
+		owned_weapons.end()
+	);
 
 	//switch(m.type()) {
 	//case player_action::switch_weapon_forwards:
@@ -258,8 +293,12 @@ void sanguis::client::logic::handle_switch_weapon_forwards(
 		static_cast<weapon_type::type>(
 			std::distance(
 				static_cast<owned_weapons_array const &>(
-					owned_weapons).begin(),
-				it.get())));
+					owned_weapons
+				).begin(),
+				it.get()
+			)
+		)
+	);
 }
 
 void sanguis::client::logic::handle_switch_weapon_backwards(
@@ -269,15 +308,22 @@ void sanguis::client::logic::handle_switch_weapon_backwards(
 void sanguis::client::logic::handle_pause_unpause(
 	key_scale)
 {
-	send(
-		messages::auto_ptr(
-			paused
-			? static_cast<messages::base*>(
-				new messages::player_unpause(
-					player_id_))
-			: static_cast<messages::base*>(
-				new messages::player_pause(
-					player_id_))));
+	if(paused)
+		send(
+			messages::create(
+				messages::player_unpause(
+					player_id_
+				)
+			)
+		);
+	else
+		send(
+			messages::create(
+				messages::player_pause(
+					player_id_
+				)
+			)
+		);
 }
 
 void sanguis::client::logic::change_weapon(
@@ -286,10 +332,13 @@ void sanguis::client::logic::change_weapon(
 	current_weapon = w;
 
 	send(
-		messages::auto_ptr(
-			new messages::player_change_weapon(
+		messages::create(
+			messages::player_change_weapon(
 				player_id_,
-				current_weapon)));
+				current_weapon
+			)
+		)
+	);
 }
 
 void sanguis::client::logic::give_perk(
@@ -317,8 +366,8 @@ void sanguis::client::logic::give_perk(
 
 	if(pt != perk_type::size)
 		send(
-			messages::auto_ptr(
-				new messages::player_choose_perk(
+			messages::create(
+				messages::player_choose_perk(
 					player_id_,
 					pt
 				)

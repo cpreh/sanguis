@@ -1,30 +1,35 @@
 #ifndef SANGUIS_MESSAGES_PLAYER_CHANGE_WEAPON_HPP_INCLUDED
 #define SANGUIS_MESSAGES_PLAYER_CHANGE_WEAPON_HPP_INCLUDED
 
-#include "entity_message.hpp"
-#include "types.hpp"
-#include "enum_type.hpp"
-#include <boost/serialization/access.hpp>
+#include "roles/weapon.hpp"
+#include "types/message.hpp"
+#include "bind_entity_message.hpp"
+#include "enum.hpp"
+#include "make_class.hpp"
+#include <majutsu/composite.hpp>
+#include <majutsu/role.hpp>
+#include <boost/mpl/vector.hpp>
 
 namespace sanguis
 {
 namespace messages
 {
 
-class player_change_weapon : public entity_message {
-public:
-	player_change_weapon();
-	player_change_weapon(
-		entity_id i,
-		enum_type weapon);
-	enum_type weapon() const;
-private:
-	enum_type weapon_;
+typedef majutsu::composite<
+	boost::mpl::vector<
+		bind_entity_message<
+			types::message::player_change_weapon
+		>::type,
+		majutsu::role<
+			enum_,
+			roles::weapon
+		>
+	>
+> player_change_weapon_elements;
 
-	friend class boost::serialization::access;
-	template<typename Archive>
-	void serialize(Archive &ar, unsigned);
-};
+typedef make_class<
+	player_change_weapon_elements
+>::type player_change_weapon;
 
 }
 }

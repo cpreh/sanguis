@@ -4,12 +4,13 @@
 #include "../property.hpp"
 #include "../../get_dim.hpp"
 #include "../../damage_types.hpp"
-#include "../../message_converter.hpp"
 #include "../../../load/pickup_name.hpp"
 #include "../../../load/context.hpp"
 #include "../../../messages/add_pickup.hpp"
+#include "../../../messages/create.hpp"
+#include <sge/math/vector/basic_impl.hpp>
+#include <sge/math/dim/basic_impl.hpp>
 #include <sge/text.hpp>
-#include <boost/foreach.hpp>
 #include <boost/assign/list_of.hpp>
 
 sanguis::pickup_type::type
@@ -42,16 +43,16 @@ sanguis::server::entities::pickups::pickup::pickup(
 		base_parameters(
 			env,
 			damage::all(
-				messages::mu(1)), // FIXME: create default values for this
+				static_cast<space_unit>(1)), // FIXME: create default values for this
 			center,
-			messages::mu(0), //angle
-			messages::mu(0), //direction,
+			static_cast<space_unit>(0), //angle
+			static_cast<space_unit>(0), //direction,
 			team_,
 			boost::assign::map_list_of
 				(entities::property_type::health,
-				entities::property(messages::mu(1)))
+				entities::property(static_cast<space_unit>(1)))
 				(entities::property_type::movement_speed,
-				entities::property(messages::mu(0))),
+				entities::property(static_cast<space_unit>(0))),
 			entity_type::pickup,
 			true,
 			dim_
@@ -59,12 +60,27 @@ sanguis::server::entities::pickups::pickup::pickup(
 			: default_dim(
 				env.load().models(),
 				load::pickup_name(
-					ptype_)))),
+					ptype_
+				)
+			)
+		)
+	),
 	ptype_(ptype_)
 {}
 
 sanguis::messages::auto_ptr
 sanguis::server::entities::pickups::pickup::add_message() const
 {
-	return message_convert(*this);
+	return messages::create(
+		messages::add_pickup(
+			id(),
+			pos(),
+			angle(),
+			abs_speed(),
+			health(),
+			max_health(),
+			dim(),
+			ptype()
+		)
+	);
 }

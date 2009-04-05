@@ -1,24 +1,22 @@
 #ifndef SANGUIS_MESSAGES_STOP_RELOADING_HPP_INCLUDED
 #define SANGUIS_MESSAGES_STOP_RELOADING_HPP_INCLUDED
 
-#include "entity_message.hpp"
-#include <boost/serialization/access.hpp>
+#include "bind_entity_message.hpp"
+#include "make_class.hpp"
+#include "types/message.hpp"
 
 namespace sanguis
 {
 namespace messages
 {
 
-class stop_reloading : public entity_message {
-public:
-	stop_reloading();
-	explicit stop_reloading(
-		entity_id id);
-private:
-	friend class boost::serialization::access;
-	template<typename Archive>
-	void serialize(Archive &ar, unsigned);
-};
+typedef bind_entity_message<
+	types::message::stop_reloading
+>::type stop_reloading_elements;
+
+typedef make_class<
+	stop_reloading_elements
+>::type stop_reloading;
 
 }
 }

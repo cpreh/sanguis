@@ -1,29 +1,35 @@
 #ifndef SANGUIS_MESSAGES_MAX_HEALTH_HPP_INCLUDED
 #define SANGUIS_MESSAGES_MAX_HEALTH_HPP_INCLUDED
 
-#include "entity_message.hpp"
-#include "types.hpp"
-#include <boost/serialization/access.hpp>
+#include "bind_entity_message.hpp"
+#include "make_class.hpp"
+#include "types/message.hpp"
+#include "roles/max_health.hpp"
+#include "space_unit.hpp"
+#include <majutsu/composite.hpp>
+#include <majutsu/role.hpp>
+#include <boost/mpl/vector.hpp>
 
 namespace sanguis
 {
 namespace messages
 {
 
-class max_health : public entity_message {
-public:
-	max_health();
-	max_health(
-		entity_id,
-		space_unit);
-	space_unit value() const;
-private:
-	space_unit value_;
+typedef majutsu::composite<
+	boost::mpl::vector<
+		bind_entity_message<
+			types::message::max_health
+		>::type,
+		majutsu::role<
+			space_unit,
+			roles::max_health
+		>
+	>
+> max_health_elements;
 
-	friend class boost::serialization::access;
-	template<class Archive>
-	void serialize(Archive &ar, unsigned);
-};
+typedef make_class<
+	max_health_elements
+>::type max_health;
 
 }
 }

@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_MACHINE_HPP_INCLUDED
 
 #include "states/start_fwd.hpp"
+#include "client_data.hpp"
 #include "../load/context_fwd.hpp"
 #include "../messages/base.hpp"
 #include "../net/server.hpp"
@@ -17,12 +18,6 @@ namespace sanguis
 {
 namespace server
 {
-
-struct client_data
-{
-	net::data_type in_buffer;
-	net::data_type out_buffer;
-};
 
 struct machine
 	: public boost::statechart::state_machine<machine, states::start>

@@ -40,9 +40,10 @@ void sanguis::server::weapons::melee::on_init_attack(
 	entities::entity_with_weapon &owner)
 {
 	owner.property(
-		entities::property_type::movement_speed)
-			.restrict(
-				messages::mu(0));
+		entities::property_type::movement_speed
+	).restrict(
+		static_cast<space_unit>(0)
+	);
 }
 
 void sanguis::server::weapons::melee::on_castpoint(

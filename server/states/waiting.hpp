@@ -4,7 +4,10 @@
 #include "../machine.hpp"
 #include "../message_event.hpp"
 #include "../../tick_event.hpp"
-#include "../../messages/fwd.hpp"
+#include "../../messages/connect.hpp"
+#include "../../messages/disconnect.hpp"
+#include "../../messages/client_info.hpp"
+#include "../../messages/base_fwd.hpp"
 #include <sge/log/fwd.hpp>
 #include <boost/mpl/list.hpp>
 #include <boost/statechart/simple_state.hpp>
@@ -23,17 +26,17 @@ struct waiting
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<tick_event>,
 		boost::statechart::custom_reaction<message_event> 
-		> reactions;
+	> reactions;
 
 	waiting();
-	boost::statechart::result react(const tick_event&);
-	boost::statechart::result react(const message_event&);
+	boost::statechart::result react(tick_event const &);
+	boost::statechart::result react(message_event const &);
 
-	boost::statechart::result operator()(const net::id_type,const messages::connect &);
-	boost::statechart::result operator()(const net::id_type,const messages::disconnect &);
-	boost::statechart::result operator()(const net::id_type,const messages::client_info &);
+	boost::statechart::result operator()(net::id_type, messages::connect const &);
+	boost::statechart::result operator()(net::id_type, messages::disconnect const &);
+	boost::statechart::result operator()(net::id_type, messages::client_info const &);
 private:
-	boost::statechart::result handle_default_msg(const net::id_type,const messages::base &);
+	boost::statechart::result handle_default_msg(net::id_type, messages::base const &);
 
 	static sge::log::logger &log();
 };

@@ -1,7 +1,8 @@
 #ifndef SANGUIS_SERVER_ENTITIES_RADIUS_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_RADIUS_HPP_INCLUDED
 
-#include "../types.hpp"
+#include "../dim_type.hpp"
+#include "../space_unit.hpp"
 
 namespace sanguis
 {

@@ -14,8 +14,8 @@ SET (CMAKE_VERBOSE_MAKEFILE ON)
 
 FIND_PACKAGE(Boost 1.36.0 COMPONENTS
 	filesystem
+	iostreams
 	program_options
-	serialization
 	system
 	thread)
 
@@ -65,6 +65,7 @@ FILE (GLOB files
 	draw/factory/*.cpp
 	draw/particle/*.cpp
 	messages/*.cpp
+	messages/serialization/*.cpp
 	load/*.cpp
 	load/model/*.cpp
 	load/particle/*.cpp
@@ -78,6 +79,7 @@ FILE (GLOB files
 	server/entities/enemies/*.cpp
 	server/entities/pickups/*.cpp
 	server/entities/projectiles/*.cpp
+	server/message_convert/*.cpp
 	server/perks/*.cpp
 	server/states/*.cpp
 	server/waves/*.cpp

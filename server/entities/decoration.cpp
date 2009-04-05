@@ -2,11 +2,13 @@
 #include "base_parameters.hpp"
 #include "property.hpp"
 #include "../damage_types.hpp"
-#include "../message_converter.hpp"
 #include "../get_dim.hpp"
 #include "../../load/decoration_name.hpp"
 #include "../../load/context.hpp"
-#include <sge/container/map_impl.hpp>
+#include "../../messages/create.hpp"
+#include "../../messages/add_decoration.hpp"
+#include <sge/math/vector/basic_impl.hpp>
+#include <sge/math/dim/basic_impl.hpp>
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::decoration::decoration(
@@ -48,5 +50,16 @@ sanguis::server::entities::decoration::dtype() const
 sanguis::messages::auto_ptr
 sanguis::server::entities::decoration::add_message() const
 {
-	return message_convert(*this);
+	return messages::create(
+		messages::add_decoration(
+			id(),
+			pos(),
+			angle(),
+			abs_speed(),
+			health(),
+			max_health(),
+			dim(),
+			dtype()
+		)
+	);
 }

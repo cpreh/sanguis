@@ -5,26 +5,19 @@
 #include "../entities/entity.hpp"
 #include "../entities/property.hpp"
 #include "../message_functor.hpp"
-#include "../message_converter.hpp"
+#include "../message_convert/speed.hpp"
+#include "../message_convert/rotate.hpp"
+#include "../message_convert/remove.hpp"
+#include "../message_convert/health.hpp"
+#include "../message_convert/move.hpp"
 #include "../log.hpp"
 #include "../../truncation_check_cast.hpp"
-#include "../../dispatch_type.hpp"
 #include "../../angle_vector.hpp"
 #include "../../random.hpp"
-#include "../../messages/assign_id.hpp"
-#include "../../messages/disconnect.hpp"
-#include "../../messages/experience.hpp"
-#include "../../messages/level_up.hpp"
-#include "../../messages/player_rotation.hpp"
-#include "../../messages/player_start_shooting.hpp"
-#include "../../messages/player_stop_shooting.hpp"
-#include "../../messages/player_change_weapon.hpp"
-#include "../../messages/player_direction.hpp"
-#include "../../messages/player_pause.hpp"
-#include "../../messages/player_unpause.hpp"
-#include "../../messages/give_weapon.hpp"
-#include "../../messages/speed.hpp"
 #include "../../messages/pause.hpp"
+#include "../../messages/base.hpp"
+#include "../../messages/unwrap.hpp"
+#include "../../messages/create.hpp"
 #include "../../exception.hpp"
 
 #include <sge/math/constants.hpp>
@@ -77,19 +70,26 @@ sanguis::server::states::unpaused::operator()(
 			log(),
 			sge::log::_1
 				<< SGE_TEXT("got player_change_weapon from spectator ")
-				<< id);
+				<< id
+		);
 		return discard_event();
 	}
 
 	entities::player &player_(*it->second);
 
-	if (e.weapon() > weapon_type::size)
+	weapon_type::type const wt(
+		static_cast<
+			weapon_type::type
+		>(
+			e.get<messages::roles::weapon>()
+		)
+	);
+	if (wt > weapon_type::size)
 		throw exception(
-			SGE_TEXT("got invalid weapon type in player_change_weapon"));
+			SGE_TEXT("got invalid weapon type in player_change_weapon")
+		);
 
-	weapon_type::type const type(static_cast<weapon_type::type>(e.weapon()));
-
-	player_.change_weapon(type);
+	player_.change_weapon(wt);
 
 	return discard_event();
 }
@@ -115,10 +115,11 @@ sanguis::server::states::unpaused::operator()(
 	// FIXME: we should really transport the target point over the network
 	player_.target(
 		player_.pos()
-		+ angle_to_vector(player_.direction()) * static_cast<space_unit>(100));
+		+ angle_to_vector(player_.direction()) * static_cast<space_unit>(100)
+	);
 
-	player_.angle(e.angle());
-	send(message_convert<messages::rotate>(player_));
+	player_.angle(e.get<messages::roles::angle>());
+	send(message_convert::rotate(player_));
 	return discard_event();
 }
 
@@ -178,17 +179,24 @@ sanguis::server::states::unpaused::operator()(
 
 	entities::player &player_(*it->second);
 
-	if (is_null(e.dir()))
+	pos_type const dir(
+		e.get<messages::roles::direction>()
+	);
+
+	if (is_null(dir))
 		player_.property(
-			entities::property_type::movement_speed).current(messages::mu(0));
+			entities::property_type::movement_speed
+		).current(
+			static_cast<space_unit>(0)
+		);
 	else
 	{
 		player_.property(
 			entities::property_type::movement_speed).current_to_max();
-		player_.direction(*sge::math::angle_to<messages::space_unit>(e.dir()));
+		player_.direction(*sge::math::angle_to<space_unit>(dir));
 	}
 
-	send(message_convert<messages::speed>(player_));
+	send(message_convert::speed(player_));
 	return discard_event();
 }
 
@@ -210,8 +218,10 @@ sanguis::server::states::unpaused::operator()(
 	messages::player_pause const &)
 {
 	send(
-		messages::auto_ptr(
-			new messages::pause()));
+		messages::create(
+			messages::pause()
+		)
+	);
 	
 	return transit<paused>();
 }
@@ -263,8 +273,8 @@ sanguis::server::states::unpaused::react(
 		{
 			if(i->type() != entity_type::indeterminate)
 			{
-				send(message_convert<messages::health>(*i));
-				send(message_convert<messages::remove>(*i));
+				send(message_convert::health(*i));
+				send(message_convert::remove(*i));
 			}
 			
 			// we have to remove the player link as well
@@ -297,10 +307,10 @@ sanguis::server::states::unpaused::react(
 
 		if (i->type() != entity_type::indeterminate && update_pos)
 		{
-			send(message_convert<messages::move>(*i));
-			send(message_convert<messages::speed>(*i));
-			send(message_convert<messages::rotate>(*i));
-			send(message_convert<messages::health>(*i)); // FIXME: this should be elsewhere
+			send(message_convert::move(*i));
+			send(message_convert::speed(*i));
+			send(message_convert::rotate(*i));
+			send(message_convert::health(*i)); // FIXME: this should be elsewhere
 		}
 
 		++i;
@@ -312,11 +322,12 @@ boost::statechart::result
 sanguis::server::states::unpaused::react(
 	message_event const &m)
 {
-	message_functor<unpaused,boost::statechart::result> mf(
+	message_functor<unpaused, boost::statechart::result> mf(
 		*this,
-		m.id);
+		m.id()
+	);
 
-	return dispatch_type<
+	return messages::unwrap<
 		boost::mpl::vector<
 			messages::disconnect,
 			messages::player_rotation,
@@ -327,14 +338,17 @@ sanguis::server::states::unpaused::react(
 			messages::player_pause,
 			messages::player_direction
 		>,
-		boost::statechart::result>(
-			mf,
-			*m.message,
-			boost::bind(
-				&unpaused::handle_default_msg,
-				this,
-				m.id,
-				_1));
+		boost::statechart::result
+	>(
+		mf,
+		*m.message(),
+		boost::bind(
+			&unpaused::handle_default_msg,
+			this,
+			m.id(),
+			_1
+		)
+	);
 }
 
 sanguis::server::environment const

@@ -1,30 +1,35 @@
 #ifndef SANGUIS_MESSAGES_HEALTH_INCLUDED
 #define SANGUIS_MESSAGES_HEALTH_INCLUDED
 
-#include "entity_message.hpp"
-#include "types.hpp"
-#include <boost/serialization/access.hpp>
+#include "bind_entity_message.hpp"
+#include "make_class.hpp"
+#include "types/message.hpp"
+#include "roles/health.hpp"
+#include "space_unit.hpp"
+#include <majutsu/composite.hpp>
+#include <majutsu/role.hpp>
+#include <boost/mpl/vector.hpp>
 
 namespace sanguis
 {
 namespace messages
 {
 
-class health : public entity_message {
-public:
-	health();
-	health(
-		entity_id,
-		space_unit);
+typedef majutsu::composite<
+	boost::mpl::vector<
+		bind_entity_message<
+			types::message::health
+		>::type,
+		majutsu::role<
+			space_unit,
+			roles::health
+		>
+	>
+> health_elements;
 
-	space_unit value() const;
-private:
-	space_unit value_;
-
-	friend class boost::serialization::access;
-	template<class Archive>
-	void serialize(Archive &ar, unsigned);
-};
+typedef make_class<
+	health_elements
+>::type health;
 
 }
 }

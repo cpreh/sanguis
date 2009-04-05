@@ -11,30 +11,9 @@
 #include "coord_transform.hpp"
 #include "log.hpp"
 #include "environment.hpp"
-#include "../messages/add.hpp"
-#include "../messages/add_decoration.hpp"
-#include "../messages/add_enemy.hpp"
-#include "../messages/add_pickup.hpp"
-#include "../messages/add_projectile.hpp"
-#include "../messages/add_weapon_pickup.hpp"
-#include "../messages/base.hpp"
-#include "../messages/change_weapon.hpp"
-#include "../messages/experience.hpp"
-#include "../messages/health.hpp"
-#include "../messages/level_up.hpp"
-#include "../messages/max_health.hpp"
-#include "../messages/move.hpp"
-#include "../messages/remove.hpp"
-#include "../messages/resize.hpp"
-#include "../messages/rotate.hpp"
-#include "../messages/start_attacking.hpp"
-#include "../messages/stop_attacking.hpp"
-#include "../messages/start_reloading.hpp"
-#include "../messages/stop_reloading.hpp"
-#include "../messages/speed.hpp"
+#include "../messages/unwrap.hpp"
 #include "../client_messages/add.hpp"
 #include "../client/invalid_id.hpp"
-#include "../dispatch_type.hpp"
 #include "../exception.hpp"
 
 #include <sge/make_auto_ptr.hpp>
@@ -99,7 +78,7 @@ sanguis::draw::scene::~scene()
 void sanguis::draw::scene::process_message(
 	messages::base const &m)
 {
-	dispatch_type<
+	messages::unwrap<
 		boost::mpl::vector<
 			messages::add,
 			messages::add_decoration,
@@ -129,24 +108,25 @@ void sanguis::draw::scene::process_message(
 		boost::bind(
 			&scene::process_default_msg,
 			this,
-			_1));
+			_1
+		)
+	);
 }
 
-void sanguis::draw::scene::process_message(
-	client_messages::base const &m)
+void sanguis::draw::scene::client_message(
+	client_messages::add const &m)
 {
-	dispatch_type<
-		boost::mpl::vector<
-			client_messages::add
-		>,
-		void
-	>(
-		*this,
-		m,
-		boost::bind(
-			&scene::process_default_client_msg,
-			this,
-			_1));
+	if(entities.insert(
+		m.id(),
+		factory::client(
+			environment(),
+			m,
+			system().renderer()->screen_size())).second
+	== false)
+		throw exception(
+			SGE_TEXT("Client object with id already in entity list!")
+		);
+	// FIXME: configure the object here, too!
 }
 
 void sanguis::draw::scene::draw(
@@ -199,9 +179,15 @@ void sanguis::draw::scene::operator()(
 	configure_new_object(
 		factory::entity(
 			environment(),
-			m.id(),
-			m.type()),
-		m);
+			m.get<messages::roles::entity_id>(),
+			static_cast<
+				entity_type::type
+			>(
+				m.get<messages::enum_>()
+			)
+		),
+		m
+	);
 }
 
 void sanguis::draw::scene::operator()(
@@ -210,9 +196,15 @@ void sanguis::draw::scene::operator()(
 	configure_new_object(
 		factory::enemy(
 			environment(),
-			m.id(),
-			m.etype()),
-		m);
+			m.get<messages::roles::entity_id>(),
+			static_cast<
+				enemy_type::type
+			>(
+				m.get<messages::roles::enemy>()
+			)
+		),
+		m
+	);
 }
 
 void sanguis::draw::scene::operator()(
@@ -225,9 +217,15 @@ void sanguis::draw::scene::operator()(
 	configure_new_object(
 		factory::decoration(
 			environment(),
-			m.id(),
-			m.ptype()),
-		m);
+			m.get<messages::roles::entity_id>(),
+			static_cast<
+				decoration_type::type
+			>(
+				m.get<messages::roles::decoration>()
+			)
+		),
+		m
+	);
 }
 
 void sanguis::draw::scene::operator()(
@@ -236,9 +234,15 @@ void sanguis::draw::scene::operator()(
 	configure_new_object(
 		factory::pickup(
 			environment(),
-			m.id(),
-			m.ptype()),
-		m);
+			m.get<messages::roles::entity_id>(),
+			static_cast<
+				pickup_type::type
+			>(
+				m.get<messages::roles::pickup>()
+			)
+		),
+		m
+	);
 }
 
 void sanguis::draw::scene::operator()(
@@ -247,9 +251,15 @@ void sanguis::draw::scene::operator()(
 	configure_new_object(
 		factory::projectile(
 			environment(),
-			m.id(),
-			m.ptype()),
-		m);
+			m.get<messages::roles::entity_id>(),
+			static_cast<
+				projectile_type::type
+			>(
+				m.get<messages::roles::projectile>()
+			)
+		),
+		m
+	);
 }
 
 void sanguis::draw::scene::operator()(
@@ -258,18 +268,25 @@ void sanguis::draw::scene::operator()(
 	configure_new_object(
 		factory::weapon_pickup(
 			environment(),
-			m.id(),
-			m.wtype()),
-		m);
+			m.get<messages::roles::entity_id>(),
+			static_cast<
+				weapon_type::type
+			>(
+				m.get<messages::roles::weapon>()
+			)
+		),
+		m
+	);
 }
 
 void sanguis::draw::scene::operator()(
 	messages::change_weapon const &m)
 {
-	messages::enum_type const value(
-		m.weapon());
+	messages::types::enum_ const value(
+		m.get<messages::roles::weapon>()
+	);
 	
-	if(value >= static_cast<messages::enum_type>(weapon_type::size))
+	if(value >= static_cast<messages::types::enum_>(weapon_type::size))
 	{
 		SGE_LOG_WARNING(
 			log(),
@@ -277,51 +294,80 @@ void sanguis::draw::scene::operator()(
 		return;
 	}
 	
-	entity(m.id()).weapon(
+	entity(m.get<messages::roles::entity_id>()).weapon(
 		static_cast<weapon_type::type>(
-			m.weapon()));
+			value
+		)
+	);
 }
 
 void sanguis::draw::scene::operator()(
 	messages::experience const &m)
 {
-	hud_.experience(m.exp());
+	hud_.experience(
+		m.get<messages::roles::experience>()
+	);
 }
 
 void sanguis::draw::scene::operator()(
 	messages::health const &m)
 {
-	entity(m.id()).health(m.value());
+	entity(
+		m.get<messages::roles::entity_id>()
+	).health(
+		m.get<messages::roles::health>()
+	);
 }
 
 void sanguis::draw::scene::operator()(
 	messages::level_up const &m)
 {
-	hud_.level(m.level());
+	hud_.level(
+		m.get<messages::level_type>()
+	);
 }
 
 void sanguis::draw::scene::operator()(
 	messages::max_health const &m)
 {
-	entity(m.id()).max_health(m.value());
+	entity(
+		m.get<messages::roles::entity_id>()
+	).max_health(
+		m.get<messages::roles::max_health>()
+	);
 }
 
 void sanguis::draw::scene::operator()(
 	messages::move const &m)
 {
-	entity(m.id()).pos(
+	entity(
+		m.get<messages::roles::entity_id>()
+	).pos(
 		virtual_to_screen(
-			ss.renderer()->screen_size(), m.pos()));
+			ss.renderer()->screen_size(),
+			m.get<messages::pos>()
+		)
+	);
 }
 
 void sanguis::draw::scene::operator()(
 	messages::remove const &m)
 {
-	entity_map::iterator const it(entities.find(m.id()));
+	entity_map::iterator const it(
+		entities.find(
+			m.get<messages::roles::entity_id>()
+		)
+	);
+
 	if(it == entities.end())
 		throw exception(
-			SGE_TEXT("Object not in entity map, can't remove it!"));
-	draw::entity &e(*it->second);
+			SGE_TEXT("Object not in entity map, can't remove it!")
+		);
+	
+	draw::entity &e(
+		*it->second
+	);
+
 	e.decay();
 }
 
@@ -329,77 +375,93 @@ void sanguis::draw::scene::operator()(
 	messages::resize const &m)
 {
 	//entity(m.id()).dim(virtual_to_screen(ss.renderer()->screen_size(), m.dim()));
-	entity(m.id()).dim(
+	entity(
+		m.get<messages::roles::entity_id>()
+	).dim(
 		sge::structure_cast<
 			sge::sprite::dim
 		>(
-			m.dim()));
+			m.get<messages::dim>()
+		)
+	);
 }
 
 void sanguis::draw::scene::operator()(
 	messages::rotate const &m)
 {
-	entity(m.id()).orientation(m.rot());
+	entity(
+		m.get<messages::roles::entity_id>()
+	).orientation(
+		m.get<messages::roles::angle>()
+	);
 }
 
 void sanguis::draw::scene::operator()(
 	messages::speed const &m)
 {
-	entity(m.id()).speed(
+	entity(
+		m.get<messages::roles::entity_id>()
+	).speed(
 		sge::structure_cast<
 			vector2
 		>(
 			virtual_to_screen(
 				ss.renderer()->screen_size(),
-				m.get())));
+				m.get<messages::roles::speed>()
+			)
+		)
+	);
 }
 
 void sanguis::draw::scene::operator()(
 	messages::start_attacking const &m)
 {
-	entity(m.id()).start_attacking();
+	entity(
+		m.get<messages::roles::entity_id>()
+	).start_attacking();
 }
 
 void sanguis::draw::scene::operator()(
 	messages::stop_attacking const &m)
 {
-	entity(m.id()).stop_attacking();
+	entity(
+		m.get<messages::roles::entity_id>()
+	).stop_attacking();
 }
 
 void sanguis::draw::scene::operator()(
 	messages::start_reloading const &m)
 {
-	entity(m.id()).start_reloading();
+	entity(
+		m.get<messages::roles::entity_id>()
+	).start_reloading();
 }
 
 void sanguis::draw::scene::operator()(
 	messages::stop_reloading const &m)
 {
-	entity(m.id()).stop_reloading();
+	entity(
+		m.get<messages::roles::entity_id>()
+	).stop_reloading();
 }
 
-void sanguis::draw::scene::operator()(
-	client_messages::add const &m)
-{
-	if(entities.insert(
-		m.id(),
-		factory::client(
-			environment(),
-			m,
-			system().renderer()->screen_size())).second
-	== false)
-		throw exception(SGE_TEXT("Client object with id already in entity list!"));
-	// FIXME: configure the object here, too!
-}
-
+template<
+	typename Msg
+>
 void sanguis::draw::scene::configure_new_object(
 	entity_auto_ptr e_ptr,
-	messages::add const &m)
+	Msg const &m)
 {
+	entity_id const id(
+		m. template get<messages::roles::entity_id>()
+	);
+
 	std::pair<entity_map::iterator, bool> const ret(
 		entities.insert(
-			m.id(),
-			e_ptr));
+			id,
+			e_ptr
+		)
+	);
 
 	if(ret.second == false)
 	{
@@ -407,20 +469,18 @@ void sanguis::draw::scene::configure_new_object(
 			log(),
 			sge::log::_1
 				<< SGE_TEXT("Object with id ")
-				<< m.id()
+				<< id
 				<< SGE_TEXT(" already in entity list!"));
 		return;
-	//	throw exception(
-	//		SGE_TEXT("Object with id already in entity list!"));
 	}
 
 	// configure the object
-	process_message(messages::max_health(m.id(), m.max_health()));
-	process_message(messages::health(m.id(), m.health()));
-	process_message(messages::move(m.id(), m.pos()));
-	process_message(messages::resize(m.id(), m.dim()));
-	process_message(messages::rotate(m.id(), m.angle()));
-	process_message(messages::speed(m.id(), m.speed()));
+	(*this)(messages::max_health(id, m. template get<messages::roles::max_health>()));
+	(*this)(messages::health(id, m. template get<messages::roles::health>()));
+	(*this)(messages::move(id, m. template get<messages::pos>()));
+	(*this)(messages::resize(id, m. template get<messages::dim>()));
+	(*this)(messages::rotate(id, m. template get<messages::roles::angle>()));
+	(*this)(messages::speed(id, m. template get<messages::roles::speed>()));
 }
 
 void sanguis::draw::scene::render_dead()
@@ -432,11 +492,13 @@ void sanguis::draw::scene::render_dead()
 	
 	BOOST_FOREACH(entity_map::reference r, dead_list)
 		r.second->transfer(
-			temp_sys);
+			temp_sys
+		);
 	
 	if(paint_background)
 		background().paint_dead(
-			temp_sys);
+			temp_sys
+		);
 	// else TODO: create a fallback!
 	
 	dead_list.clear();
@@ -501,16 +563,6 @@ messages::base const &m)
 		log(),
 		sge::log::_1
 			<< SGE_TEXT("Invalid message event in scene: ")
-			<< sge::iconv(typeid(m).name()));
-}
-
-void sanguis::draw::scene::process_default_client_msg(
-	client_messages::base const &m)
-{
-	SGE_LOG_WARNING(
-		log(),
-		sge::log::_1
-			<< SGE_TEXT("Invalid client message event in scene: ")
 			<< sge::iconv(typeid(m).name()));
 }
 

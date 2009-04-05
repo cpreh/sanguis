@@ -1,57 +1,150 @@
 #include "serialization.hpp"
+#include "messages/serialization/serialize.hpp"
+#include "messages/serialization/deserialize.hpp"
+#include "messages/global_context.hpp"
 #include "messages/base.hpp"
+#include "net/value_type.hpp"
+#include "truncation_check_cast.hpp"
 
-#include "archive.hpp"
-#include <boost/serialization/export.hpp>
+#include <sge/container/raw_vector_impl.hpp>
+#include <sge/assert.hpp>
 
-#include <sstream>
-#include <iomanip>
-#include <cstddef>
+#include <boost/iostreams/device/array.hpp>
+#include <boost/iostreams/device/back_inserter.hpp>
+#include <boost/iostreams/stream_buffer.hpp>
+#include <boost/cstdint.hpp>
+
+#include <istream>
 #include <ostream>
+
 
 namespace
 {
-const std::size_t message_header_size = 4;
+
+typedef boost::uint16_t message_header;
+
+sanguis::net::data_type::size_type const
+message_header_size = sizeof(message_header);
+
+template<
+	typename Stream
+>
+void exceptions(
+	Stream &stream)
+{
+	stream.exceptions(
+		std::ios_base::badbit
+		| std::ios_base::failbit
+		| std::ios_base::eofbit
+	);
 }
 
-sanguis::net::data_type sanguis::deserialize(
-	net::data_type const &data,
-	deserialize_callback const &callback)
+}
+
+sanguis::messages::auto_ptr
+sanguis::deserialize(
+	net::data_type &data)
 {
 	if (data.size() < message_header_size)
-		return data;
+		return messages::auto_ptr();
 
-	std::basic_istringstream<net::data_type::value_type> 
-		ss(data.substr(0,message_header_size));
-	std::size_t message_size;
-	ss >> std::hex >> message_size;
+	typedef boost::iostreams::basic_array_source<
+		net::value_type
+	> array_source;
 
-	if ((data.size()-message_header_size) < message_size)
-		return data;
+	typedef boost::iostreams::stream_buffer<
+		array_source
+	> stream_buf;
 
-	std::basic_istringstream<net::data_type::value_type> ass(
-		data.substr(message_header_size,message_size));
-	
-	iarchive ar(ass);
-	// FIXME: can this be fixed?
-	messages::base *unsafe_ptr;
-	ar >> unsafe_ptr;
-	callback(messages::auto_ptr(unsafe_ptr));
+	typedef std::basic_istream<
+		net::value_type
+	> stream_type;
 
-	return deserialize(data.substr(message_header_size+message_size),callback);
+	stream_buf buf(
+		data.data(),
+		data.data() + data.size()
+	);
+
+	stream_type stream(
+		&buf
+	);
+
+	exceptions(stream);
+
+	// TODO: endianness!
+	message_header message_size;
+	stream.read(reinterpret_cast<stream_type::char_type *>(&message_size), sizeof(message_size));
+
+	SGE_ASSERT(message_size > 0);
+
+	if ((data.size() - message_header_size) < message_size)
+		return messages::auto_ptr();
+
+	messages::auto_ptr ret(
+		messages::serialization::deserialize(
+			messages::global_context(),
+			stream
+		)
+	);
+
+	SGE_ASSERT(ret->size() == message_size);
+
+	SGE_ASSERT(
+		ret->size() + message_header_size
+		== static_cast<
+			net::data_type::size_type
+		>(stream.tellg())
+	);
+
+	data.erase(
+		data.begin(),
+		data.begin() + stream.tellg()
+	);
+
+	return ret;
 }
 
-sanguis::net::data_type sanguis::serialize(
-	messages::auto_ptr m)
+void sanguis::serialize(
+	messages::auto_ptr message,
+	net::data_type &array)
 {
-	typedef std::basic_ostringstream<net::data_type::value_type> sstream;
+	typedef boost::iostreams::back_insert_device<
+		net::data_type
+	> back_inserter;
 
-	sstream ss;
-	oarchive oa(ss);
-	const messages::base *const ptr = m.get();
-	oa << ptr;
+	typedef boost::iostreams::stream_buffer<
+		back_inserter
+	> stream_buf;
 
-	sstream oss;
-	oss << std::hex << std::setw(message_header_size) << ss.str().size() << ss.str();
-	return oss.str();
+	typedef std::basic_ostream<
+		net::value_type
+	> stream_type;
+
+	stream_buf buf(
+		array
+	);
+
+	stream_type stream(
+		&buf
+	);
+
+	exceptions(stream);
+
+	message_header const header(
+		truncation_check_cast<
+			message_header
+		>(
+			message->size()
+		)
+	);
+
+	SGE_ASSERT(header > 0);
+
+	// TODO: endianness!
+	stream.write(reinterpret_cast<stream_type::char_type const *>(&header), sizeof(message_header));
+
+	messages::serialization::serialize(
+		stream,
+		message
+	);
 }

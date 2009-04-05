@@ -4,10 +4,10 @@
 #include "../message_functor.hpp"
 #include "../log.hpp"
 #include "../entities/entity.hpp"
-#include "../../messages/connect.hpp"
+#include "../../messages/create.hpp"
 #include "../../messages/client_info.hpp"
-#include "../../messages/disconnect.hpp"
-#include "../../dispatch_type.hpp"
+#include "../../messages/unwrap.hpp"
+#include "../../messages/base.hpp"
 
 #include <sge/iconv.hpp>
 #include <sge/text.hpp>
@@ -67,9 +67,12 @@ sanguis::server::states::waiting::operator()(
 {
 	post_event(
 		message_event(
-			messages::auto_ptr(
-				new messages::client_info(m)),
-			id));
+			messages::create(
+				m
+			),
+			id
+		)
+	);
 	return transit<running>();
 }
 
@@ -90,17 +93,28 @@ boost::statechart::result
 sanguis::server::states::waiting::react(
 	message_event const &m) 
 {
-	message_functor<waiting,boost::statechart::result> mf(*this,m.id);
-	return dispatch_type<
+	message_functor<waiting,boost::statechart::result> mf(
+		*this,
+		m.id()
+	);
+
+	return messages::unwrap<
 		boost::mpl::vector<
 			messages::connect,
 			messages::disconnect,
 			messages::client_info
 		>,
-		boost::statechart::result>(
+		boost::statechart::result
+	>(
 		mf,
-		*m.message,
-		boost::bind(&waiting::handle_default_msg,this,m.id,_1));
+		*m.message(),
+		boost::bind(
+			&waiting::handle_default_msg,
+			this,
+			m.id(),
+			_1
+		)
+	);
 }
 
 sge::log::logger &

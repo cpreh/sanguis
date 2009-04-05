@@ -3,7 +3,8 @@
 #include "message_event.hpp"
 #include "../messages/connect.hpp"
 #include "../messages/disconnect.hpp"
-#include "../messages/add.hpp"
+#include "../messages/create.hpp"
+#include "../messages/base.hpp"
 #include "../serialization.hpp"
 #include "../log.hpp"
 #include <sge/math/compare.hpp>
@@ -15,6 +16,8 @@
 #include <sge/input/system.hpp>
 #include <sge/input/key_state_tracker.hpp>
 #include <sge/mainloop/dispatch.hpp>
+#include <sge/container/raw_vector_impl.hpp>
+#include <sge/algorithm/append.hpp>
 #include <boost/bind.hpp>
 #include <boost/lambda/bind.hpp>
 #include <boost/lambda/construct.hpp>
@@ -87,8 +90,11 @@ void sanguis::client::machine::connect_callback()
 {
 	process_event(
 		message_event(
-			messages::auto_ptr(
-				new messages::connect)));
+			messages::create(
+				messages::connect()
+			)
+		)
+	);
 }
 
 void sanguis::client::machine::disconnect_callback(
@@ -96,8 +102,11 @@ void sanguis::client::machine::disconnect_callback(
 {
 	process_event(
 		message_event(
-			messages::auto_ptr(
-				new messages::disconnect)));
+			messages::create(
+				messages::disconnect()
+			)
+		)
+	);
 }
 
 void sanguis::client::machine::process_message(
@@ -105,17 +114,35 @@ void sanguis::client::machine::process_message(
 {
 	process_event(
 		message_event(
-			ptr));
+			ptr
+		)
+	);
 }
 
-void sanguis::client::machine::data_callback(net::data_type const &data)
+void sanguis::client::machine::data_callback(
+	net::data_type const &data)
 {
-	in_buffer = deserialize(in_buffer+data,boost::bind(&machine::process_message,this,_1));
+	sge::algorithm::append(
+		in_buffer,
+		data
+	);
+	//while (messages::auto_ptr p = deserialize(in_buffer))
+	//	process_message(p);
+	for(;;)
+	{
+		messages::auto_ptr p = deserialize(in_buffer);
+		if(!p.get())
+			return;
+		process_message(p);
+	}
 }
 
-void sanguis::client::machine::send(messages::auto_ptr m)
+void sanguis::client::machine::send(
+	messages::auto_ptr m)
 {
-	out_buffer += serialize(m);
+	serialize(
+		m,
+		out_buffer);
 }
 
 sanguis::net::hostname_type

@@ -2,11 +2,12 @@
 #define SANGUIS_SERVER_AURAS_AURA_HPP_INCLUDED
 
 #include "influence.hpp"
+#include "../pos_type.hpp"
+#include "../space_unit.hpp"
 #include "../environment_fwd.hpp"
 #include "../entities/entity_fwd.hpp"
 #include "../collision/base.hpp"
 #include "../teams.hpp"
-#include "../types.hpp"
 #include "../../entity_id.hpp"
 
 namespace sanguis

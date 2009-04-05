@@ -6,7 +6,7 @@ sanguis::server::entities::pickups::health::health(
 	server::environment const &env,
 	pos_type const &center,
 	team::type const team_,
-	space_unit const amount)
+	health_type const amount)
 :
 	pickup(
 		pickup_type::health,

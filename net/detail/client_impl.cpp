@@ -2,11 +2,12 @@
 #include "is_disconnect.hpp"
 #include "io_service_wrapper.hpp"
 #include "../log.hpp"
+#include <sge/container/raw_vector_impl.hpp>
 #include <sge/exception.hpp>
 #include <sge/text.hpp>
 #include <sge/iconv.hpp>
+#include <sge/lexical_cast.hpp>
 #include <boost/asio/buffer.hpp>
-#include <boost/lexical_cast.hpp>
 #include <boost/bind.hpp>
 
 sanguis::net::detail::client_impl::client_impl() 
@@ -37,23 +38,32 @@ void sanguis::net::detail::client_impl::connect(
 {
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1 << SGE_TEXT("client: resolving hostname ")
-		             << sge::iconv(s) << SGE_TEXT(" on port")
-								 << port);
+		sge::log::_1
+			<< SGE_TEXT("client: resolving hostname ")
+			<< sge::iconv(s) << SGE_TEXT(" on port")
+			 << port
+	);
 	
 	boost::asio::ip::tcp::resolver::query query(
 		s,
-		boost::lexical_cast<std::string>(
+		sge::lexical_cast<std::string>(
 			port));
 
 	resolver_.async_resolve(
 		query,
-		boost::bind(&client_impl::resolve_handler,this,_1,_2));
+		boost::bind(
+			&client_impl::resolve_handler,
+			this,
+			_1,
+			_2
+		)
+	);
 
 	handlers_++;
 }
 
-void sanguis::net::detail::client_impl::queue(const data_type &data)
+void sanguis::net::detail::client_impl::queue(
+	data_type const &data)
 {
 	output_.push_back(
 		data);
@@ -61,12 +71,23 @@ void sanguis::net::detail::client_impl::queue(const data_type &data)
 
 void sanguis::net::detail::client_impl::process()
 {
-	if (connected_ && !sending_ && output_.to_send())
+	if (connected_ && !sending_ && output_.characters_left())
 	{
+		data_type const &buffer(
+			output_.buffer()
+		);
+
 		sending_ = true;
 		socket_.async_send(
-			boost::asio::buffer(output_.buffer()),
-			boost::bind(&sanguis::net::detail::client_impl::write_handler,this,_1,_2));
+			boost::asio::buffer(
+				buffer.data(),
+				buffer.size()
+			),
+			boost::bind(
+				&sanguis::net::detail::client_impl::write_handler,
+				this,
+				_1,
+				_2));
 		handlers_++;
 	}
 
@@ -74,7 +95,8 @@ void sanguis::net::detail::client_impl::process()
 		return;
 
 	boost::system::error_code e;
-	io_service_.poll(e);
+	io_service_.poll(
+		e);
 	if (e)
 		throw sge::exception(
 			SGE_TEXT("poll error: ")+
@@ -82,19 +104,25 @@ void sanguis::net::detail::client_impl::process()
 				e.message()));
 }
 
-sge::signal::auto_connection sanguis::net::detail::client_impl::register_connect(client::connect_function const &f)
+sge::signal::auto_connection sanguis::net::detail::client_impl::register_connect(
+	client::connect_function const &f)
 {
-	return connect_signal_.connect(f);
+	return connect_signal_.connect(
+		f);
 }
 
-sge::signal::auto_connection sanguis::net::detail::client_impl::register_disconnect(client::disconnect_function const &f)
+sge::signal::auto_connection sanguis::net::detail::client_impl::register_disconnect(
+	client::disconnect_function const &f)
 {
-	return disconnect_signal_.connect(f);
+	return disconnect_signal_.connect(
+		f);
 }
 
-sge::signal::auto_connection sanguis::net::detail::client_impl::register_data(client::data_function const &f)
+sge::signal::auto_connection sanguis::net::detail::client_impl::register_data(
+	client::data_function const &f)
 {
-	return data_signal_.connect(f);
+	return data_signal_.connect(
+		f);
 }
 
 void sanguis::net::detail::client_impl::resolve_handler(
@@ -132,9 +160,10 @@ void sanguis::net::detail::client_impl::handle_error(
 		
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1 << SGE_TEXT("client: disconnected (")
-								 << sge::iconv(e.message()) 
-								 << SGE_TEXT(")"));
+		sge::log::_1
+			<< SGE_TEXT("client: disconnected (")
+			<< sge::iconv(e.message()) 
+			<< SGE_TEXT(")"));
 
 	connected_ = false;
 	disconnect_signal_(
@@ -158,21 +187,31 @@ void sanguis::net::detail::client_impl::read_handler(
 
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1 << SGE_TEXT("client: read")
-								 << bytes << SGE_TEXT(" bytes"));
+		sge::log::_1
+			<< SGE_TEXT("client: read ")
+			<< bytes
+			<< SGE_TEXT(" bytes.")
+	);
 
 	data_signal_(
 		data_type(
 			new_data_.begin(),
-			new_data_.begin()+bytes));
+			new_data_.begin() + bytes));
 
 	socket_.async_receive(
-		boost::asio::buffer(new_data_),
-		boost::bind(&client_impl::read_handler,this,_1,_2));
+		boost::asio::buffer(
+			new_data_),
+		boost::bind(
+			&client_impl::read_handler,
+			this,
+			_1,
+			_2));
 	handlers_++;
 }
 
-void sanguis::net::detail::client_impl::write_handler(const boost::system::error_code &e,const std::size_t bytes)
+void sanguis::net::detail::client_impl::write_handler(
+	boost::system::error_code const &e,
+	std::size_t const bytes)
 {
 	handlers_--;
 
@@ -186,16 +225,31 @@ void sanguis::net::detail::client_impl::write_handler(const boost::system::error
 
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1 << SGE_TEXT("client: wrote ")
-								 << bytes << SGE_TEXT(" bytes"));
+		sge::log::_1
+			<< SGE_TEXT("client: wrote ")
+			<< bytes 
+			<< SGE_TEXT(" bytes"));
+
+	output_.erase(
+		bytes);
 
 	// are there bytes left to send?
-	if (output_.finished(bytes).to_send())
+	if (output_.characters_left())
 	{
+		data_type const &buffer(
+			output_.buffer()
+		);
+
 		socket_.async_send(
 			boost::asio::buffer(
-				output_.buffer()),
-			boost::bind(&client_impl::write_handler,this,_1,_2));
+				buffer.data(),
+				buffer.size()
+			),
+			boost::bind(
+				&client_impl::write_handler,
+				this,
+				_1,
+				_2));
 		handlers_++;
 	}
 	else
@@ -226,7 +280,11 @@ void sanguis::net::detail::client_impl::connect_handler(
 		boost::asio::ip::tcp::endpoint endpoint = *i;
 		socket_.async_connect(
 			endpoint,
-			boost::bind(&client_impl::connect_handler,this,_1,++i));
+			boost::bind(
+				&client_impl::connect_handler,
+				this,
+				_1,
+				++i));
 		handlers_++;
 		return;
 	}
@@ -239,7 +297,12 @@ void sanguis::net::detail::client_impl::connect_handler(
 	connected_ = true;
 	connect_signal_();
 	socket_.async_receive(
-		boost::asio::buffer(new_data_),
-		boost::bind(&client_impl::read_handler,this,_1,_2));
+		boost::asio::buffer(
+			new_data_),
+		boost::bind(
+			&client_impl::read_handler,
+			this,
+			_1,
+			_2));
 	handlers_++;
 }

@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PROPERTY_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PROPERTY_HPP_INCLUDED
 
-#include "../types.hpp"
+#include "../space_unit.hpp"
 #undef max // TODO: find out where windows.h comes from!
 #include <sge/signal/object.hpp>
 #include <sge/signal/auto_connection.hpp>

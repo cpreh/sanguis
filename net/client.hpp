@@ -1,12 +1,10 @@
 #ifndef NET_CLIENT_HPP_INCLUDED
 #define NET_CLIENT_HPP_INCLUDED
 
-#include "output_buffer.hpp"
 #include "hostname_type.hpp"
 #include "port_type.hpp"
 #include "data_type.hpp"
 
-#include <sge/signal/object.hpp>
 #include <sge/signal/auto_connection.hpp>
 #include <sge/scoped_ptr.hpp>
 #include <sge/noncopyable.hpp>

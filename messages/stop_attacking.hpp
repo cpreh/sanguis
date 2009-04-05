@@ -1,24 +1,22 @@
 #ifndef SANGUIS_MESSAGES_STOP_ATTACKING_HPP_INCLUDED
 #define SANGUIS_MESSAGES_STOP_ATTACKING_HPP_INCLUDED
 
-#include "entity_message.hpp"
-#include <boost/serialization/access.hpp>
+#include "bind_entity_message.hpp"
+#include "make_class.hpp"
+#include "types/message.hpp"
 
 namespace sanguis
 {
 namespace messages
 {
 
-class stop_attacking : public entity_message {
-public:
-	stop_attacking();
-	explicit stop_attacking(
-		entity_id id);
-private:
-	friend class boost::serialization::access;
-	template<typename Archive>
-	void serialize(Archive &ar, unsigned);
-};
+typedef bind_entity_message<
+	types::message::stop_attacking
+>::type stop_attacking_elements;
+
+typedef make_class<
+	stop_attacking_elements
+>::type stop_attacking;
 
 }
 }

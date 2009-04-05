@@ -1,5 +1,6 @@
 #include "spawn.hpp"
 #include "../entities/enemies/factory.hpp"
+#include "../entities/entity.hpp"
 #include "../environment.hpp"
 #include "../../random.hpp"
 #include "../../angle_vector.hpp"
@@ -16,7 +17,7 @@ void sanguis::server::waves::spawn(
 	enemy_type::type const etype)
 {
 	typedef std::tr1::uniform_real<
-		messages::space_unit
+		space_unit
 	> uniform_su;
 
 	typedef std::tr1::variate_generator<
@@ -27,30 +28,30 @@ void sanguis::server::waves::spawn(
 	static rng_type rng(
 		create_seeded_randgen(),
 		uniform_su(
-			messages::mu(0),
-			sge::math::twopi<messages::space_unit>()
+			static_cast<space_unit>(0),
+			sge::math::twopi<space_unit>()
 		));
 
 	sge::renderer::screen_size const res(
 		resolution());
 
-	messages::space_unit const
+	space_unit const
 		rand_angle(rng()),
 		radius(
-			messages::mu(
+			static_cast<space_unit>(
 				std::max(
 					res.w(),
 					res.h()))
-			/ messages::mu(2)),
-		scale(messages::mu(1.5)),
-		angle(messages::mu(0));
+			/ static_cast<space_unit>(2)),
+		scale(static_cast<space_unit>(1.5)),
+		angle(static_cast<space_unit>(0));
 	
-	messages::pos_type const
+	pos_type const
 		screen_center(
-			messages::pos_type(
-				messages::mu(res.w()),
-				messages::mu(res.h()))
-			/ messages::mu(2)),
+			pos_type(
+				static_cast<space_unit>(res.w()),
+				static_cast<space_unit>(res.h()))
+			/ static_cast<space_unit>(2)),
 		center(
 			scale * radius * angle_to_vector(rand_angle)),
 		pos(

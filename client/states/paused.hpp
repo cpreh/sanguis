@@ -3,7 +3,7 @@
 
 #include "running.hpp"
 #include "../message_event.hpp"
-#include "../../messages/fwd.hpp"
+#include "../../messages/unpause.hpp"
 #include "../../tick_event.hpp"
 #include <sge/gui/widgets/buttons/image.hpp>
 #include <sge/gui/manager.hpp>
@@ -26,11 +26,11 @@ namespace states
 class paused
 	: public boost::statechart::state<paused,running>
 {
-	public:
+public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<tick_event>,
 		boost::statechart::custom_reaction<message_event>
-		> reactions;
+	> reactions;
 
 	paused(my_context);
 

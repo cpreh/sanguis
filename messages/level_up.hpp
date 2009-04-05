@@ -1,29 +1,33 @@
 #ifndef SANGUIS_MESSAGES_LEVEL_UP_HPP_INCLUDED
 #define SANGUIS_MESSAGES_LEVEL_UP_HPP_INCLUDED
 
-#include "entity_message.hpp"
-#include "types.hpp"
-#include <boost/serialization/access.hpp>
+#include "types/message.hpp"
+#include "bind_entity_message.hpp"
+#include "level_type.hpp"
+#include "make_class.hpp"
+#include <majutsu/composite.hpp>
+#include <majutsu/role.hpp>
+#include <boost/mpl/vector.hpp>
 
 namespace sanguis
 {
 namespace messages
 {
 
-class level_up : public entity_message {
-public:
-	level_up();
-	level_up(
-		entity_id id,
-		level_type level);
-	level_type level() const;
-private:
-	level_type level_;
+typedef majutsu::composite<
+	boost::mpl::vector<
+		bind_entity_message<
+			types::message::level_up
+		>::type,
+		majutsu::role<
+			level_type
+		>
+	>
+> level_up_elements;
 
-	friend class boost::serialization::access;
-	template<typename Archive>
-	void serialize(Archive &ar, unsigned);
-};
+typedef make_class<
+	level_up_elements
+>::type level_up;
 
 }
 }

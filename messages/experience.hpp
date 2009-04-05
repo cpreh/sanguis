@@ -1,29 +1,35 @@
 #ifndef SANGUIS_MESSAGES_EXPERIENCE_HPP_INCLUDED
 #define SANGUIS_MESSAGES_EXPERIENCE_HPP_INCLUDED
 
-#include "entity_message.hpp"
-#include "types.hpp"
-#include <boost/serialization/access.hpp>
+#include "types/message.hpp"
+#include "roles/experience.hpp"
+#include "bind_entity_message.hpp"
+#include "exp_type.hpp"
+#include "make_class.hpp"
+#include <majutsu/composite.hpp>
+#include <majutsu/role.hpp>
+#include <boost/mpl/vector.hpp>
 
 namespace sanguis
 {
 namespace messages
 {
 
-class experience : public entity_message {
-public:
-	experience();
-	experience(
-		entity_id id,
-		exp_type exp);
-	exp_type exp() const;
-private:
-	exp_type exp_;
+typedef majutsu::composite<
+	boost::mpl::vector<
+		bind_entity_message<
+			types::message::experience
+		>::type,
+		majutsu::role<
+			exp_type,
+			roles::experience
+		>
+	>
+> experience_elements;
 
-	friend class boost::serialization::access;
-	template<typename Archive>
-	void serialize(Archive &ar, unsigned);
-};
+typedef make_class<
+	experience_elements
+>::type experience;
 
 }
 }

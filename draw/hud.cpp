@@ -15,13 +15,13 @@ sanguis::draw::hud::hud(
 {}
 
 void sanguis::draw::hud::experience(
-	messages::exp_type const nexperience)
+	exp_type const nexperience)
 {
 	experience_ = nexperience;
 }
 
 void sanguis::draw::hud::level(
-	messages::level_type const nlevel)
+	level_type const nlevel)
 {
 	level_ = nlevel;
 }
@@ -31,8 +31,8 @@ void sanguis::draw::hud::update(
 { 
 	frames_counter.update();
 
-	font.draw_text((
-		sge::format(
+	font.draw_text(
+		(sge::format(
 			SGE_TEXT("exp: %1%, level: %2%, fps: %3%"))
 			% experience_
 			% level_
@@ -41,5 +41,6 @@ void sanguis::draw::hud::update(
 		sge::font::pos::null(),
 		sge::font::dim(200, 100), // FIXME
 		sge::font::align_h::left,
-		sge::font::align_v::top);
+		sge::font::align_v::top
+	);
 }
