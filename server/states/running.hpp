@@ -20,7 +20,7 @@
 #include "../../net/id_type.hpp"
 #include "../../time_type.hpp"
 #include <sge/log/logger_fwd.hpp>
-#include <sge/signal/auto_connection.hpp>
+#include <sge/signal/scoped_connection.hpp>
 #include <sge/collision/satellite_fwd.hpp>
 #include <boost/mpl/list.hpp>
 #include <boost/statechart/state.hpp>
@@ -106,10 +106,10 @@ private:
 	void create_decorations();
 	static sge::log::logger &log();
 
-	sge::signal::auto_connection coll_connection;
+	sge::signal::scoped_connection const coll_connection;
 
-	send_callback send;
-	console_print_callback console_print;
+	send_callback const send;
+	console_print_callback const console_print;
 
 	server::entities::container entities_;
 	player_map players_;

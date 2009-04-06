@@ -7,7 +7,7 @@
 #include <sge/audio/unit.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/gfx_fwd.hpp>
-#include <sge/signal/auto_connection.hpp>
+#include <sge/signal/scoped_connection.hpp>
 #include <sge/scoped_ptr.hpp>
 
 namespace sanguis
@@ -23,7 +23,7 @@ class music_handler
 	void update();
 	private:
 	sge::console::gfx &console_;
-	sge::signal::auto_connection volume_connection_;
+	sge::signal::scoped_connection const volume_connection_;
 	sge::scoped_ptr<load::model::random_sound> sounds_;
 	sge::audio::sound_ptr current_;
 

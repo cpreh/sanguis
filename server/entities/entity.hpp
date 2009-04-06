@@ -28,7 +28,7 @@
 #include <sge/math/vector/basic_decl.hpp>
 #include <sge/math/dim/basic_decl.hpp>
 #include <sge/container/linear_set.hpp>
-#include <sge/signal/auto_connection.hpp>
+#include <sge/signal/scoped_connection.hpp>
 #include <sge/container/map_decl.hpp>
 #include <sge/noncopyable.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
@@ -163,6 +163,7 @@ private:
 	dim_type                collision_dim;
 	bool                    aggressive_;
 	armor_array             armor_diff_;
+	sge::signal::scoped_connection const speed_change_;
 
 	typedef boost::ptr_map<
 		perk_type::type,
@@ -185,8 +186,6 @@ private:
 	>                       link_container;
 	link_container          links,
 	                        backlinks;
-	
-	sge::signal::auto_connection       speed_change_;
 };
 
 }

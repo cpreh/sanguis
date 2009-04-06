@@ -13,7 +13,7 @@
 #include <sge/gui/widgets/edit.hpp>
 #include <sge/gui/widgets/backdrop.hpp>
 #include <sge/filesystem/path.hpp>
-#include <sge/signal/auto_connection.hpp>
+#include <sge/signal/scoped_connection.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/mpl/list.hpp>
@@ -56,7 +56,6 @@ class menu
 		sge::gui::widgets::buttons::highscore_back;
 		*/
 
-#ifndef SANGUIS_STATES_MENU_DEBUG
 	sge::gui::widget connect_menu;
 		sge::gui::widget connect_host;
 			sge::gui::widgets::graphics connect_host_label;
@@ -71,13 +70,12 @@ class menu
 
 	client::menu::mover mover_;
 
-	sge::signal::auto_connection main_connect_conn;
-	sge::signal::auto_connection main_start_conn;
-	sge::signal::auto_connection main_exit_conn;
-
-	sge::signal::auto_connection connect_connect_conn;
-	sge::signal::auto_connection connect_return_conn;
-#endif
+	sge::signal::scoped_connection const
+		main_connect_conn,
+		main_start_conn,
+		main_exit_conn,
+		connect_connect_conn,
+		connect_return_conn;
 
 	bool connect_now;
 	// FIXME: replace by boost::lambda expression or something completely different

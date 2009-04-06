@@ -23,29 +23,41 @@ sanguis::server::machine::machine(
 	net::port_type const port_)
 :
 	resources_(
-		resources_),
+		resources_
+	),
 	port_(
-		port_),
+		port_
+	),
 	s_conn(
 		net_.register_connect(
 			boost::bind(
 				&machine::connect_callback,
 				this,
-				_1))),
+				_1
+			)
+		)
+	),
 	s_disconn(
 		net_.register_disconnect(
 			boost::bind(
 				&machine::disconnect_callback,
 				this,
 				_1,
-				_2))),
+				_2
+			)
+		)
+	),
 	s_data(
 		net_.register_data(
 			boost::bind(
 				&machine::data_callback,
 				this,
 				_1,
-				_2))),
+				_2
+			)
+		)
+	),
+	clients(),
 	collision_(_collision),
 	con(con)
 {}

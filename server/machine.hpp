@@ -10,6 +10,7 @@
 #include "message_event.hpp"
 #include <sge/console/gfx_fwd.hpp>
 #include <sge/collision/world_fwd.hpp>
+#include <sge/signal/scoped_connection.hpp>
 #include <sge/string.hpp>
 #include <boost/statechart/state_machine.hpp>
 #include <map>
@@ -66,9 +67,9 @@ private:
 	> client_map;
 
 	load::context const &resources_;
-	net::port_type port_;
+	net::port_type const port_;
 	net::server net_;
-	sge::signal::auto_connection
+	sge::signal::scoped_connection const
 		s_conn,
 		s_disconn,
 		s_data;

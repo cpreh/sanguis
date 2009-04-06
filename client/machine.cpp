@@ -15,6 +15,7 @@
 #include <sge/renderer/scoped_block.hpp>
 #include <sge/input/system.hpp>
 #include <sge/input/key_state_tracker.hpp>
+#include <sge/input/key_pair.hpp>
 #include <sge/mainloop/dispatch.hpp>
 #include <sge/container/raw_vector_impl.hpp>
 #include <sge/algorithm/append.hpp>

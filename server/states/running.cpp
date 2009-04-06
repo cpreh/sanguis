@@ -57,12 +57,18 @@ sanguis::server::states::running::running(my_context ctx)
 		boost::bind(
 			&server::machine::send,
 			&(context<machine>()),
-			_1)),
+			_1
+		)
+	),
 	console_print(
 		boost::bind(
 			&server::machine::console_print,
 			&(context<machine>()),
-			_1)),
+			_1
+		)
+	),
+	entities_(),
+	players_(),
 	wave_generator()
 {
 	SGE_LOG_DEBUG(

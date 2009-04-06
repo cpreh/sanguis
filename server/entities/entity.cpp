@@ -53,6 +53,7 @@ sanguis::server::entities::entity::entity(
 	invulnerable_(param.invulnerable()),
 	collision_dim(param.collision_dim()),
 	aggressive_(false),
+	armor_diff_(),
 	speed_change_(
 		property(
 			property_type::movement_speed
@@ -63,7 +64,12 @@ sanguis::server::entities::entity::entity(
 				_1
 			)
 		)
-	)
+	),
+	perks_(),
+	buffs_(),
+	auras_(),
+	links(),
+	backlinks()
 {}
 
 sanguis::entity_id

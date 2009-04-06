@@ -4,7 +4,7 @@
 #include "entity.hpp"
 #include "../weapons/auto_ptr.hpp"
 #include "../../weapon_type.hpp"
-#include <sge/signal/auto_connection.hpp>
+#include <sge/signal/scoped_connection.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
 
 namespace sanguis
@@ -50,7 +50,7 @@ private:
 	pos_type            target_;
 	bool                attacking,
 	                    reloading;
-	sge::signal::auto_connection       attack_speed_change_;
+	sge::signal::scoped_connection const attack_speed_change_;
 };
 
 }

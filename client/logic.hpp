@@ -13,7 +13,7 @@
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/gfx_fwd.hpp>
-#include <sge/signal/auto_connection.hpp>
+#include <sge/signal/scoped_connection.hpp>
 #include <sge/sprite/point.hpp>
 #include <sge/noncopyable.hpp>
 #include <boost/tr1/array.hpp>
@@ -78,7 +78,7 @@ private:
 
 	send_callback const             send;
 	sge::renderer::device_ptr const rend;
-	sge::signal::auto_connection give_perk_connection;
+	sge::signal::scoped_connection const give_perk_connection;
 
 	typedef boost::function<
 		void (key_scale)

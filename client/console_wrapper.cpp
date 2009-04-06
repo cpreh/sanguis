@@ -2,6 +2,7 @@
 #include <sge/math/compare.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/input/system.hpp>
+#include <sge/input/key_pair.hpp>
 #include <boost/bind.hpp>
 
 sanguis::client::console_wrapper::console_wrapper(
