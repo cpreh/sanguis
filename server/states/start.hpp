@@ -4,7 +4,7 @@
 #include "../machine.hpp"
 #include "../message_event.hpp"
 #include "../../tick_event.hpp"
-#include <sge/log/fwd.hpp>
+#include <sge/log/logger_fwd.hpp>
 #include <boost/statechart/simple_state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/result.hpp>

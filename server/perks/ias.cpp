@@ -28,5 +28,5 @@ sanguis::server::space_unit
 sanguis::server::perks::ias::factor() const
 {
 	return static_cast<space_unit>(level())
-		* static_cast<space_unit>(0.1);
+		* static_cast<space_unit>(0.2);
 }

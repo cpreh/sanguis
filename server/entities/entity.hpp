@@ -134,9 +134,6 @@ private:
 	
 	void speed_change(property::value_type);
 
-	using base::can_collide_with;
-	using base::collision;
-
 	bool
 	can_collide_with(
 		collision::base const &) const;
@@ -146,11 +143,11 @@ private:
 		collision::base &);
 
 	virtual bool
-	can_collide_with(
+	can_collide_with_entity(
 		entity const &) const;
 	
 	virtual void
-	collision(
+	collision_entity(
 		entity &);
 
 	entity_id const         id_;

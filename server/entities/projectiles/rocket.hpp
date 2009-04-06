@@ -22,7 +22,8 @@ public:
 		space_unit damage,
 		space_unit aoe);
 private:
-	void collision(
+	void
+	collision_entity(
 		entity &);
 	void do_die();
 	

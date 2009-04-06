@@ -19,19 +19,6 @@ sanguis::server::entities::pickups::pickup::ptype() const
 	return ptype_;
 }
 
-bool sanguis::server::entities::pickups::pickup::can_collide_with(
-	entity const &e) const
-{
-	return dynamic_cast<entity_with_weapon const * const>(&e) && e.team() == team();
-}
-
-void sanguis::server::entities::pickups::pickup::collision(
-	entity &e)
-{
-	do_pickup(dynamic_cast<entity_with_weapon &>(e));
-	die();
-}
-
 sanguis::server::entities::pickups::pickup::pickup(
 	pickup_type::type const ptype_,
 	server::environment const &env,
@@ -67,6 +54,21 @@ sanguis::server::entities::pickups::pickup::pickup(
 	),
 	ptype_(ptype_)
 {}
+
+bool
+sanguis::server::entities::pickups::pickup::can_collide_with_entity(
+	entity const &e) const
+{
+	return dynamic_cast<entity_with_weapon const * const>(&e) && e.team() == team();
+}
+
+void
+sanguis::server::entities::pickups::pickup::collision_entity(
+	entity &e)
+{
+	do_pickup(dynamic_cast<entity_with_weapon &>(e));
+	die();
+}
 
 sanguis::messages::auto_ptr
 sanguis::server::entities::pickups::pickup::add_message() const

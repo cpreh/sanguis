@@ -6,7 +6,7 @@
 #include "../message_event.hpp"
 #include "../menu/button.hpp"
 #include "../menu/mover.hpp"
-#include <sge/log/fwd.hpp>
+#include <sge/log/logger_fwd.hpp>
 #include <sge/gui/widget.hpp>
 #include <sge/gui/manager.hpp>
 #include <sge/gui/widgets/graphics.hpp>

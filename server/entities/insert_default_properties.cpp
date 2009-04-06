@@ -14,7 +14,7 @@ sanguis::server::entities::insert_default_properties(
 		boost::assign::map_list_of
 		(
 			property_type::attack_speed,
-			property(static_cast<space_unit>(0))
+			property(static_cast<space_unit>(1))
 		)
 		(
 			property_type::health,

@@ -23,8 +23,8 @@ public:
 	
 	void process(sge::gui::events::invalid_area const &);
 	sge::gui::dim const size_hint() const;
-//private:
-	//using widget::process;
+private:
+	using widget::process;
 };
 }
 }

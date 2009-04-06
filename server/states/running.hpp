@@ -19,7 +19,7 @@
 #include "../../messages/base_fwd.hpp"
 #include "../../net/id_type.hpp"
 #include "../../time_type.hpp"
-#include <sge/log/fwd.hpp>
+#include <sge/log/logger_fwd.hpp>
 #include <sge/signal/auto_connection.hpp>
 #include <sge/collision/satellite_fwd.hpp>
 #include <boost/mpl/list.hpp>

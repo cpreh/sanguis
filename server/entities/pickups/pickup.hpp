@@ -18,9 +18,6 @@ namespace pickups
 class pickup : public entity {
 public:
 	pickup_type::type ptype() const;
-	
-	bool can_collide_with(entity const &) const;
-	void collision(entity &);
 protected:
 	typedef boost::optional<dim_type> optional_dim;
 
@@ -32,6 +29,14 @@ protected:
 		optional_dim const &dim
 			= optional_dim());
 private:
+	bool
+	can_collide_with_entity(
+		entity const &) const;
+	
+	void
+	collision_entity(
+		entity &);
+
 	// TODO: is it ok that pickups are limited to entities with weapons?
 	virtual void do_pickup(
 		entity_with_weapon &receiver) = 0;

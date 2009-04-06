@@ -316,6 +316,9 @@ void sanguis::server::entities::entity::update(
 		else
 			++it;
 	}
+
+	// attack speed is always on maximum
+	property(property_type::attack_speed).current_to_max();
 }
 
 void sanguis::server::entities::entity::add_perk(
@@ -520,7 +523,7 @@ sanguis::server::entities::entity::can_collide_with(
 	);
 
 	return other
-		? can_collide_with(*other)
+		? can_collide_with_entity(*other)
 		: false;
 }
 
@@ -533,20 +536,19 @@ sanguis::server::entities::entity::collision(
 	);
 
 	if(other)
-		collision(
+		collision_entity(
 			*other
 		);
 }
 
 bool
-sanguis::server::entities::entity::can_collide_with(
+sanguis::server::entities::entity::can_collide_with_entity(
 	entity const &) const
 {
 	return false;
 }
 
 void
-sanguis::server::entities::entity::collision(
+sanguis::server::entities::entity::collision_entity(
 	entity &)
-{
-}
+{}
