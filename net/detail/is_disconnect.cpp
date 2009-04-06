@@ -1,6 +1,5 @@
 #include "is_disconnect.hpp"
 #include <boost/asio/error.hpp>
-#include <sge/cerr.hpp>
 
 bool sanguis::net::detail::is_disconnect(boost::system::error_code const &e)
 {
