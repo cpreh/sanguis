@@ -2,11 +2,6 @@
 #include "../../exception.hpp"
 #include <sge/text.hpp>
 
-sanguis::server::perks::perk::perk()
-:
-	level_(1)
-{}
-
 void sanguis::server::perks::perk::raise_level()
 {
 	if(!can_raise_level())
@@ -15,7 +10,20 @@ void sanguis::server::perks::perk::raise_level()
 	++level_;
 }
 
+sanguis::perk_type::type
+sanguis::server::perks::perk::type() const
+{
+	return type_;
+}
+
 sanguis::server::perks::perk::~perk()
+{}
+
+sanguis::server::perks::perk::perk(
+	perk_type::type const type_)
+:
+	type_(type_),
+	level_(1)
 {}
 
 sanguis::server::perks::perk::level_type

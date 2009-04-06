@@ -4,6 +4,7 @@
 #include "../entities/entity_fwd.hpp"
 #include "../environment_fwd.hpp"
 #include "../../time_type.hpp"
+#include "../../perk_type.hpp"
 #include <sge/noncopyable.hpp>
 
 namespace sanguis
@@ -17,15 +18,23 @@ namespace perks
 class perk {
 	SGE_NONCOPYABLE(perk)
 public:
-	perk();
 	void apply(
 		entities::entity &,
 		time_type,
 		environment const &);
+	
 	virtual bool can_raise_level() const = 0;
+	
 	void raise_level();
+	
+	perk_type::type
+	type() const;
+
 	virtual ~perk();
 protected:
+	explicit perk(
+		perk_type::type);
+
 	typedef unsigned level_type;
 	level_type level() const;
 private:
@@ -34,6 +43,7 @@ private:
 		time_type,
 		environment const &) = 0;
 
+	perk_type::type const type_;
 	level_type level_;
 };
 

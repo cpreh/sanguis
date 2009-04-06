@@ -2,6 +2,13 @@
 #include "../entities/property.hpp"
 #include "../entities/entity.hpp"
 
+sanguis::server::perks::ias::ias()
+:
+	perk(
+		perk_type::ias
+	)
+{}
+
 void sanguis::server::perks::ias::do_apply(
 	entities::entity &e,
 	time_type,

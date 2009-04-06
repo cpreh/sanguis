@@ -24,6 +24,7 @@
 #include "../../entity_type.hpp"
 #include "../../damage_type.hpp"
 #include "../../time_type.hpp"
+#include "../../perk_type.hpp"
 #include <sge/math/vector/basic_decl.hpp>
 #include <sge/math/dim/basic_decl.hpp>
 #include <sge/container/linear_set.hpp>
@@ -31,6 +32,7 @@
 #include <sge/container/map_decl.hpp>
 #include <sge/noncopyable.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
+#include <boost/ptr_container/ptr_map.hpp>
 
 namespace sanguis
 {
@@ -117,6 +119,9 @@ protected:
 	environment() const;
 	entity &insert(auto_ptr); 
 
+	bool perk_choosable(
+		perk_type::type) const;
+
 	virtual void on_die();
 private:
 	friend class auto_weak_link;
@@ -162,7 +167,8 @@ private:
 	bool                    aggressive_;
 	armor_array             armor_diff_;
 
-	typedef boost::ptr_list<
+	typedef boost::ptr_map<
+		perk_type::type,
 		perks::perk
 	>                       perk_container;
 	perk_container          perks_;

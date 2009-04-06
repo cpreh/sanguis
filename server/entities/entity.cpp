@@ -18,7 +18,6 @@
 #include <sge/math/vector/construct.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/math/dim/arithmetic.hpp>
-#include <sge/collision/world.hpp>
 #include <sge/collision/objects/circle.hpp>
 #include <sge/container/linear_set_impl.hpp>
 #include <sge/container/map_impl.hpp>
@@ -27,7 +26,6 @@
 #include <sge/text.hpp>
 #include <boost/foreach.hpp>
 #include <boost/bind.hpp>
-#include <typeinfo>
 
 sanguis::server::entities::entity::entity(
 	base_parameters const &param)
@@ -293,8 +291,8 @@ void sanguis::server::entities::entity::update(
 	BOOST_FOREACH(property_map::reference p, properties)
 		p.second.reset();
 
-	BOOST_FOREACH(perks::perk &p, perks_)
-		p.apply(
+	BOOST_FOREACH(perk_container::reference p, perks_)
+		p.second->apply(
 			*this,
 			time,
 			environment()
@@ -323,25 +321,39 @@ void sanguis::server::entities::entity::update(
 void sanguis::server::entities::entity::add_perk(
 	perks::auto_ptr p)
 {
-	// check, if we already have such a perk
-	BOOST_FOREACH(perks::perk &i, perks_)
+	perk_type::type const type_(
+		p->type()
+	);
+
+	perk_container::iterator it(
+		perks_.find(
+			type_
+		)
+	);
+
+	if(it != perks_.end())
 	{
-		if(typeid(i) == typeid(*p))
+		perks::perk &perk_(
+			*it->second
+		);
+
+		if(perk_.can_raise_level())
+			perk_.raise_level();
+		else
 		{
-			if(i.can_raise_level())
-				i.raise_level();
-			else
-			{
-				SGE_LOG_WARNING(
-					log(),
-					sge::log::_1
-						<< SGE_TEXT("Tried to raise perk level of a perk which can't do this.")
-				);
-			}
-			return;
+			SGE_LOG_WARNING(
+				log(),
+				sge::log::_1
+					<< SGE_TEXT("Tried to raise perk level of a perk which can't do this.")
+			);
 		}
+		return;
 	}
-	perks_.push_back(p);
+
+	perks_.insert(
+		type_,
+		p
+	);
 }
 
 sanguis::messages::auto_ptr
@@ -434,7 +446,9 @@ void sanguis::server::entities::entity::send(
 {
 	environment().send(
 		messages::auto_ptr(
-			message));
+			message
+		)
+	);
 }
 
 sanguis::server::environment const &
@@ -448,6 +462,20 @@ sanguis::server::entities::entity::insert(
 	auto_ptr e)
 {
 	return environment().insert(e);
+}
+
+bool
+sanguis::server::entities::entity::perk_choosable(
+	perk_type::type const pt) const
+{
+	perk_container::const_iterator const it(
+		perks_.find(
+			pt
+		)
+	);
+
+	return it == perks_.end()
+		|| it->second->can_raise_level();
 }
 
 void sanguis::server::entities::entity::on_die()

@@ -8,6 +8,9 @@
 
 sanguis::server::perks::choleric::choleric()
 :
+	perk(
+		perk_type::choleric
+	),
 	clock_(),
 	shoot_timer(
 		sge::time::second_f(

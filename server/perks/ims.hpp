@@ -12,6 +12,8 @@ namespace perks
 {
 
 class ims : public perk {
+public:
+	ims();
 private:
 	void do_apply(
 		entities::entity &,
