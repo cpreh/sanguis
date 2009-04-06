@@ -1,14 +1,16 @@
 #include "is_disconnect.hpp"
+#include <boost/asio/error.hpp>
+#include <sge/cerr.hpp>
 
 bool sanguis::net::detail::is_disconnect(boost::system::error_code const &e)
 {
 	switch(e.value()) 
 	{
-	case boost::system::posix_error::connection_aborted:
-	case boost::system::posix_error::connection_reset:
-	case boost::system::posix_error::network_reset:
-	case boost::system::posix_error::timed_out:
-//	case boost::system::posix_error::eof:
+	case boost::asio::error::connection_aborted:
+	case boost::asio::error::connection_reset:
+	case boost::asio::error::network_reset:
+	case boost::asio::error::timed_out:
+	case boost::asio::error::eof:
 		return true;
 	default:
 		return false;
