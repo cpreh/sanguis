@@ -50,6 +50,7 @@ public:
 	button_container buttons_;
 	sge::signal::connection_manager connections_;
 
+	void regenerate_label();
 	void regenerate_widgets(
 		perk_container const &);
 	void perk_callback(perk_type::type);

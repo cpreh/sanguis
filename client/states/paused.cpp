@@ -134,13 +134,19 @@ boost::statechart::result sanguis::client::states::paused::handle_default_msg(
 	return forward_event();
 }
 
-void sanguis::client::states::paused::regenerate_widgets(
-	perk_container const &v)
+void sanguis::client::states::paused::regenerate_label()
 {
 	perks_left_.text(
 			SGE_TEXT("Perks left: ")+
 			sge::lexical_cast<sge::string>(
 				context<running>().levels_left()));
+}
+
+void sanguis::client::states::paused::regenerate_widgets(
+	perk_container const &v)
+{
+	regenerate_label();
+
 	sge::filesystem::path const p = 
 		media_path()/
 		SGE_TEXT("menu")/
@@ -197,6 +203,5 @@ void sanguis::client::states::paused::perk_callback(
 				p)));
 
 	context<running>().consume_level();
-	regenerate_widgets(
-		context<running>().perks());
+	regenerate_label();
 }
