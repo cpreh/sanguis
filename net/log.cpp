@@ -7,6 +7,6 @@ sge::log::logger &sanguis::net::log()
 	static sge::log::logger l(
 		sanguis::log(),
 		SGE_TEXT("net: "),
-		true);
+		false);
 	return l;
 }
