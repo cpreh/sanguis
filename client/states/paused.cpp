@@ -27,13 +27,6 @@ sge::gui::dim const dialog_size()
 	float const scale_x = 0.4f,
 	            scale_y = 0.8f;
 	
-		static_cast<sge::gui::unit>(
-			static_cast<float>(
-				sanguis::resolution().w())*scale_x),
-		static_cast<sge::gui::unit>(
-			static_cast<float>(
-				sanguis::resolution().h())*scale_y)) << "\n";
-	
 	return sge::gui::dim(
 		static_cast<sge::gui::unit>(
 			static_cast<float>(
