@@ -2,7 +2,6 @@
 #define SANGUIS_MESSAGES_BINDINGS_DYNAMIC_LEN_HPP_INCLUDED
 
 #include <sge/assert.hpp>
-#include <sge/container/raw_vector_impl.hpp>
 #include <majutsu/detail/copy_n.hpp> // TODO: replace this
 #include <majutsu/size_type.hpp>
 #include <majutsu/raw_pointer.hpp>
