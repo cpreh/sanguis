@@ -29,7 +29,8 @@ sanguis::server::entities::projectiles::melee::melee(
 	damage(damage)
 {}
 
-void sanguis::server::entities::projectiles::melee::collision(
+void
+sanguis::server::entities::projectiles::melee::collision_entity(
 	entity &e)
 {
 	damage_array const damage_values =

@@ -20,7 +20,8 @@ public:
 		team::type team,
 		space_unit damage);
 private:
-	void collision(
+	void
+	collision_entity(
 		entity &);
 
 	space_unit const damage;

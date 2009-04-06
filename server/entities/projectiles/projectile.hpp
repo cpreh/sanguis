@@ -42,7 +42,7 @@ protected:
 		container &);
 private:
 	virtual bool
-	can_collide_with(
+	can_collide_with_entity(
 		entity const &) const;
 	
 	virtual void do_die();

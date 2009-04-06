@@ -542,14 +542,13 @@ sanguis::server::entities::entity::collision(
 }
 
 bool
-sanguis::server::entities::entity::can_collide_with(
+sanguis::server::entities::entity::can_collide_with_entity(
 	entity const &) const
 {
 	return false;
 }
 
 void
-sanguis::server::entities::entity::collision(
+sanguis::server::entities::entity::collision_entity(
 	entity &)
-{
-}
+{}

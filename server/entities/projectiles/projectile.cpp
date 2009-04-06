@@ -81,7 +81,7 @@ void sanguis::server::entities::projectiles::projectile::update(
 		die();
 }
 
-bool sanguis::server::entities::projectiles::projectile::can_collide_with(
+bool sanguis::server::entities::projectiles::projectile::can_collide_with_entity(
 	entity const &e) const
 {
 	return e.team() != team()

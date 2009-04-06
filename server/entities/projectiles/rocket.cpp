@@ -37,7 +37,8 @@ sanguis::server::entities::projectiles::rocket::rocket(
 	aoe(aoe)
 {}
 
-void sanguis::server::entities::projectiles::rocket::collision(
+void
+sanguis::server::entities::projectiles::rocket::collision_entity(
 	entity &)
 {
 	die();
