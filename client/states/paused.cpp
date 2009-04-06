@@ -148,6 +148,7 @@ void sanguis::client::states::paused::regenerate_widgets(
 		SGE_TEXT("perks");
 
 	buttons_.clear();
+	connections_.clear();
 	BOOST_FOREACH(perk_container::const_reference r,v)
 	{
 		sge::filesystem::path const base = 
@@ -179,7 +180,7 @@ void sanguis::client::states::paused::regenerate_widgets(
 				boost::bind(
 					&paused::perk_callback,
 					this,
-					boost::ref(r))));
+					r)));
 	}
 }
 
@@ -196,5 +197,6 @@ void sanguis::client::states::paused::perk_callback(
 				p)));
 
 	context<running>().consume_level();
-	regenerate_widgets(context<running>().perks());
+	regenerate_widgets(
+		context<running>().perks());
 }
