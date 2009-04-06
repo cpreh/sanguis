@@ -19,6 +19,7 @@
 #include <sge/audio/pool.hpp>
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/state/states.hpp>
+#include <sge/container/raw_vector_impl.hpp>
 #include <sge/assert.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
