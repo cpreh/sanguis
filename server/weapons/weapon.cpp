@@ -33,7 +33,7 @@ void sanguis::server::weapons::weapon::update(
 	assert(magazine_used <= magazine_size());
 
 	diff.update(tm);
-	ias_diff.update(tm * (static_cast<space_unit>(1) + ias));
+	ias_diff.update(tm * ias);
 
 	switch(state_) {
 	case state::ready:

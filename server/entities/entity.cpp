@@ -316,6 +316,9 @@ void sanguis::server::entities::entity::update(
 		else
 			++it;
 	}
+
+	// attack speed is always on maximum
+	property(property_type::attack_speed).current_to_max();
 }
 
 void sanguis::server::entities::entity::add_perk(
