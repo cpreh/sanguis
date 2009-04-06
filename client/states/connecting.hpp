@@ -7,7 +7,7 @@
 #include "../../messages/disconnect.hpp"
 #include "../../messages/assign_id.hpp"
 #include "../../messages/connect.hpp"
-#include <sge/log/fwd.hpp>
+#include <sge/log/logger_fwd.hpp>
 #include <boost/statechart/simple_state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/mpl/list.hpp>

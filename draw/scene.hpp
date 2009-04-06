@@ -35,7 +35,7 @@
 #include "../time_type.hpp"
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
-#include <sge/log/fwd.hpp>
+#include <sge/log/logger_fwd.hpp>
 #include <sge/noncopyable.hpp>
 #include <boost/function.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
