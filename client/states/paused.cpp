@@ -1,6 +1,7 @@
 #include "paused.hpp"
 #include "unpaused.hpp"
 #include "../from_perk_type.hpp"
+#include "../perk_cast.hpp"
 #include "../../media_path.hpp"
 #include "../../messages/unpause.hpp"
 #include "../../resolution.hpp"
@@ -15,6 +16,7 @@
 #include <sge/image/loader.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/make_shared_ptr.hpp>
+#include <sge/container/raw_vector_impl.hpp>
 #include <sge/cerr.hpp>
 #include <boost/bind.hpp>
 #include <boost/foreach.hpp>
@@ -70,12 +72,13 @@ sanguis::client::states::paused::paused(my_context ctx)
 		perks_left_(
 			background_,
 			sge::gui::widget::parameters(),
-			SGE_TEXT("Perks left: ")),
+			SGE_TEXT("")),
 		buttons_(),
 		connections_()
 {
 	context<running>().pause(true);
-	regenerate_widgets();
+	regenerate_widgets(
+		context<running>().perks());
 }
 
 boost::statechart::result
@@ -115,10 +118,13 @@ boost::statechart::result sanguis::client::states::paused::operator()(
 	return transit<unpaused>();
 }
 
+
 boost::statechart::result sanguis::client::states::paused::operator()(
-	messages::available_perks const &)
+	messages::available_perks const &m)
 {
-	regenerate_widgets();
+	regenerate_widgets(
+		perk_cast(
+			m.get<messages::perk_list>()));
 	return forward_event();
 }
 
@@ -128,20 +134,21 @@ boost::statechart::result sanguis::client::states::paused::handle_default_msg(
 	return forward_event();
 }
 
-void sanguis::client::states::paused::regenerate_widgets()
+void sanguis::client::states::paused::regenerate_widgets(
+	perk_container const &v)
 {
 	perks_left_.text(
 			SGE_TEXT("Perks left: ")+
 			sge::lexical_cast<sge::string>(
 				context<running>().levels_left()));
-	buttons_.clear();
 	sge::filesystem::path const p = 
 		media_path()/
 		SGE_TEXT("menu")/
 		SGE_TEXT("buttons")/
 		SGE_TEXT("perks");
 
-	BOOST_FOREACH(running::perk_container::const_reference r,context<running>().perks())
+	buttons_.clear();
+	BOOST_FOREACH(perk_container::const_reference r,v)
 	{
 		sge::filesystem::path const base = 
 			p/from_perk_type(r);
@@ -180,10 +187,7 @@ void sanguis::client::states::paused::perk_callback(
 	perk_type::type const p)
 {
 	if (!context<running>().levels_left())
-	{
-		sge::cerr << "NO LEVELS LEFT!\n";
 		return;
-	}
 
 	context<machine>().send(
 		messages::create(
@@ -191,7 +195,6 @@ void sanguis::client::states::paused::perk_callback(
 				context<running>().player_id(),
 				p)));
 
-	sge::cerr << "CONSUMED LEVEL!\n";
-
 	context<running>().consume_level();
+	regenerate_widgets(context<running>().perks());
 }

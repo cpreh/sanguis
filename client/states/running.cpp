@@ -1,5 +1,6 @@
 #include "running.hpp"
 #include "menu.hpp"
+#include "../perk_cast.hpp"
 #include "../next_id.hpp"
 #include "../../client_entity_type.hpp"
 #include "../../client_messages/add.hpp"
@@ -211,16 +212,9 @@ boost::statechart::result
 sanguis::client::states::running::operator()(
 	messages::available_perks const &m)
 {
-	perks_.clear();
-	BOOST_FOREACH(
-		messages::types::enum_vector::const_reference r,
-		m.get<messages::perk_list>())
-	{
-		SGE_ASSERT(r < perk_type::size);
-		perks_.push_back(
-			static_cast<perk_type::type>(
-				r));
-	}
+	perks_ = 
+		perk_cast(
+			m.get<messages::perk_list>());
 	return forward_event();
 }
 
@@ -233,13 +227,13 @@ sanguis::client::states::running::operator()(
 	return discard_event();
 }
 
-sanguis::client::states::running::perk_container const &
+sanguis::client::perk_container const &
 	sanguis::client::states::running::perks() const
 {
 	return perks_;
 }
 
-sanguis::client::states::running::level_type 
+sanguis::client::level_type 
 	sanguis::client::states::running::levels_left() const
 {
 	return static_cast<level_type>(

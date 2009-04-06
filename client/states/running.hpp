@@ -7,6 +7,8 @@
 #include "../machine.hpp"
 #include "../input_handler.hpp"
 #include "../logic.hpp"
+#include "../perk_container.hpp"
+#include "../level_type.hpp"
 #include "../../perk_type.hpp"
 #include "../../tick_event.hpp"
 #include "../../weapon_type.hpp"
@@ -43,9 +45,6 @@ public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<message_event>
 	> reactions;
-
-	typedef std::vector<perk_type::type> perk_container;
-	typedef messages::types::level level_type;
 
 	running(my_context);
 	~running();
