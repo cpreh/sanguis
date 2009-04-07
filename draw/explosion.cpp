@@ -127,13 +127,13 @@ sanguis::draw::explosion::explosion(
 		environment()),
 	properties_(
 		prop_),
-	ended(false),
-	sounds_(
+	ended(false)//,
+	/*sounds_(
 		environment().context().resources().sounds().load(
 			media_path()/SGE_TEXT("explosion")).sounds(),
 		environment().context().resources(),
-		load::sound_type::nonstream),
-	current_(sounds_.random())
+		load::sound_type::nonstream),*/
+	//current_(sounds_.random())
 {
 	sge::renderer::screen_size const screen_sz(
 		resolution());
@@ -179,7 +179,7 @@ sanguis::draw::explosion::explosion(
 
 	particles.add(n);
 
-	current_->positional(true);
+	/*current_->positional(true);
 	current_->pos(
 		sge::audio::point(
 			static_cast<sge::audio::unit>(pos_.x()),
@@ -191,7 +191,7 @@ sanguis::draw::explosion::explosion(
 		/ static_cast<sge::audio::unit>(
 			resolution().h()));
 
-	current_->play(sge::audio::play_mode::once);
+	current_->play(sge::audio::play_mode::once);*/
 }
 
 sanguis::draw::explosion::~explosion()

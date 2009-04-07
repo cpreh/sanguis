@@ -44,8 +44,8 @@ private:
 	particle::property_map properties_;
 	bool ended;
 
-	load::model::random_sound sounds_;
-	sge::audio::sound_ptr current_;
+//	load::model::random_sound sounds_;
+//	sge::audio::sound_ptr current_;
 };
 
 }
