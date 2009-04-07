@@ -10,6 +10,7 @@
 #include <sge/console/gfx.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/container/raw_vector_impl.hpp>
+#include <sge/container/map_impl.hpp>
 #include <sge/algorithm/append.hpp>
 #include <sge/text.hpp>
 
@@ -93,6 +94,11 @@ void sanguis::server::machine::listen()
 void sanguis::server::machine::connect_callback(
 	net::id_type const id)
 {
+	clients.insert(
+		id,
+		client_data()
+	);
+
 	process_event(
 		message_event(
 			messages::create(
@@ -115,6 +121,10 @@ void sanguis::server::machine::disconnect_callback(
 			id
 		)
 	);
+
+	clients.erase(
+		id
+	);
 }
 
 void sanguis::server::machine::process_message(
@@ -124,7 +134,9 @@ void sanguis::server::machine::process_message(
 	process_event(
 		message_event(
 			m,
-			id));
+			id
+		)
+	);
 }
 
 void sanguis::server::machine::data_callback(
@@ -167,14 +179,10 @@ void sanguis::server::machine::send(
 	messages::auto_ptr m,
 	net::id_type const dest)
 {
-	client_map::iterator const it(clients.find(dest));
-	if(it == clients.end())
-		throw exception(
-			SGE_TEXT("machine::send: client id not found!"));
-	
 	serialize(
 		m,
-		it->second.out_buffer);
+		clients[dest].out_buffer
+	);
 }
 
 sanguis::net::port_type
