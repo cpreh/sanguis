@@ -52,6 +52,8 @@ private:
 	float_type const speed_,
 	                 push_distance_,
 									 threshold_;
+	
+	float_type remaining_time_;
 
 	void update_position(
 		sge::gui::widget&,

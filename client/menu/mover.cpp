@@ -17,6 +17,12 @@
 #include <limits>
 #include <cmath>
 
+namespace
+{
+sanguis::client::menu::mover::float_type const time_step = 
+	static_cast<sanguis::client::menu::mover::float_type>(0.001);
+}
+
 sanguis::client::menu::mover::mover(
 	sge::gui::manager &_man,
 	sge::gui::widget &_current)
@@ -29,7 +35,9 @@ sanguis::client::menu::mover::mover(
 		push_distance_(
 			static_cast<float_type>(200)),
 		threshold_(
-			static_cast<float_type>(50))
+			static_cast<float_type>(50)),
+		remaining_time_(
+			static_cast<float_type>(0))
 {
 	SGE_ASSERT(!_current.has_parent());
 	SGE_ASSERT(_current.activation() == sge::gui::activation_state::inactive);
@@ -56,25 +64,43 @@ sanguis::client::menu::mover::mover(
 void sanguis::client::menu::mover::update(
 	time_type const &t)
 {
-	update_position(
-		*current_,
-		current_entry_,
-		t);
+	float_type const accumulated = 
+		static_cast<float_type>(t+remaining_time_);
+	
+	unsigned iterations = 
+		static_cast<unsigned>(
+			accumulated/time_step);
 
-	update_visibility(
-		*current_,
-		current_entry_);
-
-	BOOST_FOREACH(container::reference r,to_move_)
+	remaining_time_ = 
+		static_cast<float_type>(
+			accumulated) - 
+		static_cast<float_type>(
+			iterations)*
+		time_step;
+	
+	// TODO: actually, the visibility has to be updated only once
+	for (unsigned i = 0; i < iterations; ++i)
 	{
 		update_position(
-			*r.first,
-			r.second,
-			t);
+			*current_,
+			current_entry_,
+			time_step);
 
 		update_visibility(
-			*r.first,
-			r.second);
+			*current_,
+			current_entry_);
+
+		BOOST_FOREACH(container::reference r,to_move_)
+		{
+			update_position(
+				*r.first,
+				r.second,
+				time_step);
+
+			update_visibility(
+				*r.first,
+				r.second);
+		}
 	}
 }
 
