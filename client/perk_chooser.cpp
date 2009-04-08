@@ -98,7 +98,8 @@ sanguis::client::perk_chooser::perk_chooser(
 		buttons_(),
 		connections_(),
 		dirty_(false),
-		send_callback_(_send_callback)
+		send_callback_(_send_callback),
+		images_()
 {
 	SGE_LOG_DEBUG(
 		mylogger,
@@ -195,39 +196,22 @@ void sanguis::client::perk_chooser::regenerate_widgets()
 {
 	regenerate_label();
 
-	sge::filesystem::path const p = 
-		media_path()/
-		SGE_TEXT("menu")/
-		SGE_TEXT("buttons")/
-		SGE_TEXT("perks");
-
 	buttons_.clear();
 	connections_.clear();
 	BOOST_FOREACH(perk_container::const_reference r,perks_)
 	{
-		sge::filesystem::path const base = 
-			p/from_perk_type(r);
-
-		sge::gui::image_ptr const 
-			normal_image = 
-				sge::gui::make_image(
-					sys_.image_loader()->load(
-						base/
-						SGE_TEXT("normal.png"))),
-			hover_image = 
-				sge::gui::make_image(
-					sys_.image_loader()->load(
-						base/
-						SGE_TEXT("hover.png")));
+		image_map::const_iterator const pi = 
+			load_from_cache(
+				r);
 
 		buttons_.push_back(
 			new sge::gui::widgets::buttons::image(
 				background_,
 				sge::gui::widget::parameters(),
-				normal_image,
-				hover_image,
-				hover_image,
-				hover_image));
+				pi->second.normal,
+				pi->second.hover,
+				pi->second.hover,
+				pi->second.hover));
 
 		connections_.connect(
 			buttons_.back().register_clicked(
@@ -251,7 +235,8 @@ void sanguis::client::perk_chooser::choose_callback(
 	if (!levels_left())
 		return;
 
-	send_callback_(p);
+	send_callback_(
+		p);
 	consume_level();
 }
 
@@ -264,4 +249,46 @@ void sanguis::client::perk_chooser::consume_level()
 		regenerate_label();
 	else
 		dirty_ = true;
+}
+
+sanguis::client::perk_chooser::image_map::const_iterator const
+	sanguis::client::perk_chooser::load_from_cache(
+		perk_type::type const r)
+{
+	sge::filesystem::path const p = 
+		media_path()/
+		SGE_TEXT("menu")/
+		SGE_TEXT("buttons")/
+		SGE_TEXT("perks");
+
+	sge::filesystem::path const base = 
+		p/from_perk_type(r);
+
+	image_map::const_iterator pi = 
+		images_.find(
+			r);
+
+	if (pi != images_.end())
+		return pi;
+
+	perk_image new_image;
+
+	new_image.normal = 
+		sge::gui::make_image(
+			sys_.image_loader()->load(
+				base/
+				SGE_TEXT("normal.png")));
+
+	new_image.hover = 
+		sge::gui::make_image(
+			sys_.image_loader()->load(
+				base/
+				SGE_TEXT("hover.png")));
+
+	pi = images_.insert(
+		std::make_pair(
+			r,
+			new_image)).first;
+
+	return pi;
 }
