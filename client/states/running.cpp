@@ -8,9 +8,11 @@
 #include "../../messages/disconnect.hpp"
 #include "../../messages/give_weapon.hpp"
 #include "../../messages/available_perks.hpp"
+#include "../../messages/player_choose_perk.hpp"
 #include "../../messages/move.hpp"
 #include "../../messages/remove.hpp"
 #include "../../messages/unwrap.hpp"
+#include "../../messages/create.hpp"
 #include "../../draw/coord_transform.hpp"
 #include "../../draw/scene.hpp"
 #include "../../load/context.hpp"
@@ -24,6 +26,9 @@
 #include <sge/assert.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
+#include <boost/spirit/home/phoenix/bind/bind_function.hpp>
+#include <boost/spirit/home/phoenix/object/construct.hpp>
+#include <boost/spirit/home/phoenix/core/argument.hpp>
 #include <boost/foreach.hpp>
 
 namespace
@@ -68,13 +73,34 @@ sanguis::client::states::running::running(
 				&input_handler::input_callback,
 				&input,
 				_1))),
-	perks_(),
-	current_level_(
-		static_cast<level_type>(
-			0)),
-	consumed_levels_(
-		static_cast<level_type>(
-			0))
+	perk_chooser_(
+		context<machine>().sys(),
+		boost::bind(
+			&running::send_perk_choose,
+			this,
+			_1))
+				/*
+	perk_chooser_(
+		context<machine>().sys(),
+		boost::phoenix::bind(
+			&running::send_message,
+			this,
+			boost::phoenix::bind(
+				&messages::create<messages::player_choose_perk>,
+				boost::phoenix::construct<messages::player_choose_perk>(
+					boost::phoenix::val(player_id()),
+					boost::phoenix::arg_names::arg1))))
+	perk_chooser_(
+		context<machine>().sys(),
+		boost::bind(
+			&running::send_message,
+			this,
+			boost::bind(
+				&messages::create<messages::player_choose_perk>,
+				boost::phoenix::construct<messages::player_choose_perk>(
+					player_id(),
+					boost::phoenix::arg_names::arg1))))
+					*/
 {
 	context<machine>().renderer()->state(
 		sge::renderer::state::list
@@ -105,6 +131,7 @@ sanguis::client::states::running::draw(
 	tick_event const &t)
 {
 	drawer->draw(t.delta());
+	perk_chooser_.process();
 }
 
 void 
@@ -113,7 +140,7 @@ sanguis::client::states::running::process(
 {
 	context<machine>().dispatch();
 	context<machine>().sound_pool().update();
-	music_.update();
+	music_.process();
 
 	// update: cursor pos (TODO: this should be done in a better way)
 	(*drawer)(
@@ -212,9 +239,9 @@ boost::statechart::result
 sanguis::client::states::running::operator()(
 	messages::available_perks const &m)
 {
-	perks_ = 
+	perk_chooser_.perks(
 		perk_cast(
-			m.get<messages::perk_list>());
+			m.get<messages::perk_list>()));
 	return forward_event();
 }
 
@@ -222,33 +249,21 @@ boost::statechart::result
 sanguis::client::states::running::operator()(
 	messages::level_up const &m)
 {
-	current_level_ = m.get<messages::level_type>();
+	perk_chooser_.level_up(
+		static_cast<level_type>(
+			m.get<messages::level_type>()));
 	(*drawer)(m);
 	return discard_event();
-}
-
-sanguis::client::perk_container const &
-	sanguis::client::states::running::perks() const
-{
-	return perks_;
-}
-
-sanguis::client::level_type 
-	sanguis::client::states::running::levels_left() const
-{
-	return static_cast<level_type>(
-		current_level_-consumed_levels_);
-}
-
-void sanguis::client::states::running::consume_level()
-{
-	SGE_ASSERT(levels_left());
-	consumed_levels_++;
 }
 
 sanguis::entity_id sanguis::client::states::running::player_id() const
 {
 	return logic_.player_id();
+}
+
+sanguis::client::perk_chooser &sanguis::client::states::running::perk_chooser()
+{
+	return perk_chooser_;
 }
 
 boost::statechart::result
@@ -264,4 +279,14 @@ void sanguis::client::states::running::send_message(
 {
 	context<machine>().send(
 		m);
+}
+
+void sanguis::client::states::running::send_perk_choose(
+	perk_type::type const m)
+{
+	send_message(
+		messages::create(
+			messages::player_choose_perk(
+				player_id(),
+				m)));
 }

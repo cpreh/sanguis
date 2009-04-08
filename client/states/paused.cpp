@@ -22,63 +22,12 @@
 #include <boost/foreach.hpp>
 #include <boost/ref.hpp>
 
-namespace
-{
-sge::gui::dim const dialog_size()
-{
-	float const scale_x = 0.4f,
-	            scale_y = 0.8f;
-	
-	return sge::gui::dim(
-		static_cast<sge::gui::unit>(
-			static_cast<float>(
-				sanguis::resolution().w())*scale_x),
-		static_cast<sge::gui::unit>(
-			static_cast<float>(
-				sanguis::resolution().h())*scale_y));
-}
-
-sge::gui::point const dialog_pos()
-{
-	return 
-		sge::structure_cast<sge::gui::point>(
-			sanguis::resolution())/
-		static_cast<sge::gui::unit>(2)-
-		sge::structure_cast<sge::gui::point>(
-			dialog_size())/
-		static_cast<sge::gui::unit>(2);
-}
-}
-
 sanguis::client::states::paused::paused(my_context ctx)
 	: my_base(ctx),
-		m_(
-			context<machine>().sys().renderer(),
-			context<machine>().sys().image_loader(),
-			context<machine>().sys().input_system(),
-			context<machine>().sys().font_system(),
-			sge::gui::skin_ptr(
-				new sge::gui::skins::standard())),
-		background_(
-			m_,
-			sge::gui::widget::parameters()
-				.pos(
-					dialog_pos())
-				.size(
-					dialog_size())
-				.layout(
-					sge::make_shared_ptr<sge::gui::layouts::vertical>(
-						boost::ref(background_)))),
-		perks_left_(
-			background_,
-			sge::gui::widget::parameters(),
-			SGE_TEXT("")),
-		buttons_(),
-		connections_()
+		chooser_activation_(
+			context<running>().perk_chooser())
 {
 	context<running>().pause(true);
-	regenerate_widgets(
-		context<running>().perks());
 }
 
 boost::statechart::result
@@ -87,7 +36,6 @@ sanguis::client::states::paused::react(
 {
 	context<running>().process(t.delta());
 	context<running>().draw(t.delta());
-	m_.draw();
 	return discard_event();
 }
 
@@ -97,8 +45,7 @@ sanguis::client::states::paused::react(
 {
 	return messages::unwrap<
 		boost::mpl::vector<
-			messages::unpause,
-			messages::available_perks
+			messages::unpause
 		>,
 		boost::statechart::result
 	>(
@@ -118,90 +65,8 @@ boost::statechart::result sanguis::client::states::paused::operator()(
 	return transit<unpaused>();
 }
 
-
-boost::statechart::result sanguis::client::states::paused::operator()(
-	messages::available_perks const &m)
-{
-	regenerate_widgets(
-		perk_cast(
-			m.get<messages::perk_list>()));
-	return forward_event();
-}
-
 boost::statechart::result sanguis::client::states::paused::handle_default_msg(
 	messages::base const &)
 {
 	return forward_event();
-}
-
-void sanguis::client::states::paused::regenerate_label()
-{
-	perks_left_.text(
-			SGE_TEXT("Perks left: ")+
-			sge::lexical_cast<sge::string>(
-				context<running>().levels_left()));
-}
-
-void sanguis::client::states::paused::regenerate_widgets(
-	perk_container const &v)
-{
-	regenerate_label();
-
-	sge::filesystem::path const p = 
-		media_path()/
-		SGE_TEXT("menu")/
-		SGE_TEXT("buttons")/
-		SGE_TEXT("perks");
-
-	buttons_.clear();
-	connections_.clear();
-	BOOST_FOREACH(perk_container::const_reference r,v)
-	{
-		sge::filesystem::path const base = 
-			p/from_perk_type(r);
-
-		sge::gui::image_ptr const 
-			normal_image = 
-				sge::gui::make_image(
-					context<machine>().sys().image_loader()->load(
-						base/
-						SGE_TEXT("normal.png"))),
-			hover_image = 
-				sge::gui::make_image(
-					context<machine>().sys().image_loader()->load(
-						base/
-						SGE_TEXT("hover.png")));
-
-		buttons_.push_back(
-			new sge::gui::widgets::buttons::image(
-				background_,
-				sge::gui::widget::parameters(),
-				normal_image,
-				hover_image,
-				hover_image,
-				hover_image));
-
-		connections_.connect(
-			buttons_.back().register_clicked(
-				boost::bind(
-					&paused::perk_callback,
-					this,
-					r)));
-	}
-}
-
-void sanguis::client::states::paused::perk_callback(
-	perk_type::type const p)
-{
-	if (!context<running>().levels_left())
-		return;
-
-	context<machine>().send(
-		messages::create(
-			messages::player_choose_perk(
-				context<running>().player_id(),
-				p)));
-
-	context<running>().consume_level();
-	regenerate_label();
 }

@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_STATES_RUNNING_HPP_INCLUDED
 
 #include "unpaused_fwd.hpp"
+#include "../perk_chooser.hpp"
 #include "../music_handler.hpp"
 #include "../message_event.hpp"
 #include "../machine.hpp"
@@ -73,22 +74,23 @@ public:
 	level_type levels_left() const;
 	void consume_level();
 	entity_id player_id() const;
+	client::perk_chooser &perk_chooser();
 	private:
 	boost::statechart::result handle_default_msg(
 		messages::base const &);
 
 	void send_message(
 		messages::auto_ptr);
+	void send_perk_choose(perk_type::type);
 
-	music_handler                   music_;
+	music_handler music_;
 	sge::scoped_ptr<
 		draw::scene
 	> drawer;
-	logic                           logic_;
-	input_handler                   input;
-	sge::signal::auto_connection    input_connection;
-	perk_container                  perks_;
-	level_type                      current_level_,consumed_levels_;
+	logic logic_;
+	input_handler input;
+	sge::signal::auto_connection input_connection;
+	client::perk_chooser perk_chooser_;
 };
 }
 }

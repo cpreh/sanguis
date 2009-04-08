@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_STATES_PAUSED_HPP_INCLUDED
 
 #include "running.hpp"
+#include "../perk_chooser.hpp"
 #include "../message_event.hpp"
 #include "../../messages/unpause.hpp"
 #include "../../tick_event.hpp"
@@ -38,22 +39,10 @@ public:
 	boost::statechart::result react(message_event const &);
 
 	boost::statechart::result operator()(messages::unpause const &);
-	boost::statechart::result operator()(messages::available_perks const &);
 	private:
-	typedef boost::ptr_vector<sge::gui::widgets::buttons::image> button_container;
-
 	boost::statechart::result handle_default_msg(messages::base const &);
 
-	sge::gui::manager m_;
-	sge::gui::widgets::backdrop background_;
-	sge::gui::widgets::label perks_left_;
-	button_container buttons_;
-	sge::signal::connection_manager connections_;
-
-	void regenerate_label();
-	void regenerate_widgets(
-		perk_container const &);
-	void perk_callback(perk_type::type);
+	perk_chooser::activation chooser_activation_;
 };
 }
 }

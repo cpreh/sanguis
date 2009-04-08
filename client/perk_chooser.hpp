@@ -1,0 +1,74 @@
+#ifndef SANGUIS_CLIENT_PERK_CHOOSER_HPP_INCLUDED
+#define SANGUIS_CLIENT_PERK_CHOOSER_HPP_INCLUDED
+
+#include "../perk_type.hpp"
+#include "level_type.hpp"
+#include "perk_container.hpp"
+#include <sge/systems/instance_fwd.hpp>
+#include <sge/gui/widgets/buttons/image.hpp>
+#include <sge/gui/widgets/backdrop.hpp>
+#include <sge/gui/widgets/label.hpp>
+#include <sge/gui/manager.hpp>
+#include <sge/signal/connection_manager.hpp>
+#include <sge/noncopyable.hpp>
+#include <boost/ptr_container/ptr_vector.hpp>
+#include <boost/function.hpp>
+
+namespace sanguis
+{
+namespace client
+{
+class perk_chooser
+{
+SGE_NONCOPYABLE(perk_chooser)
+public:
+	typedef boost::function<void (perk_type::type)> send_callback;
+
+	perk_chooser(
+		sge::systems::instance &,
+		send_callback const &
+		);
+	void process();
+	void perks(perk_container const &);
+	void level_up(level_type);
+	bool activated() const;
+	void activated(bool);
+
+	class activation
+	{
+	SGE_NONCOPYABLE(activation)
+	public:
+	activation(
+		perk_chooser &);
+	~activation();
+	private:
+	perk_chooser &instance_;
+	};
+private:
+	typedef boost::ptr_vector<sge::gui::widgets::buttons::image> button_container;
+
+	sge::systems::instance &sys_;
+
+	perk_container perks_;
+	level_type 
+		current_level_,
+		consumed_levels_;
+
+	sge::gui::manager m_;
+	sge::gui::widgets::backdrop background_;
+	sge::gui::widgets::label perks_left_;
+	button_container buttons_;
+	sge::signal::connection_manager connections_;
+	bool dirty_;
+	send_callback send_callback_;
+
+	level_type levels_left() const;
+	void regenerate_label();
+	void regenerate_widgets();
+	void choose_callback(perk_type::type);
+	void consume_level();
+};
+}
+}
+
+#endif // SANGUIS_CLIENT_PERK_CHOOSER_HPP_INCLUDED

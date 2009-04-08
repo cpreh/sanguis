@@ -47,7 +47,7 @@ sanguis::client::music_handler::music_handler(
 	current_->play(sge::audio::play_mode::once);
 }
 
-void sanguis::client::music_handler::update()
+void sanguis::client::music_handler::process()
 {
 	if (!current_)
 		return;

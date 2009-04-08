@@ -20,7 +20,7 @@ class music_handler
 	music_handler(
 		sge::console::gfx &,
 		load::resource::context const &);
-	void update();
+	void process();
 	private:
 	sge::console::gfx &console_;
 	sge::signal::scoped_connection const volume_connection_;
