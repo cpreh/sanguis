@@ -49,9 +49,10 @@ private:
 	entry current_entry_;
 	container to_move_;
 
-	float_type const speed_,
-	                 push_distance_,
-									 threshold_;
+	float_type const
+		speed_,
+		push_distance_,
+		threshold_;
 	
 	float_type remaining_time_;
 

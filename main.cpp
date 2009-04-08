@@ -46,9 +46,8 @@
 
 // boost
 #include <boost/filesystem.hpp>
-#include <boost/spirit/home/phoenix/bind.hpp>
-//#include <boost/spirit/home/phoenix/ref.hpp>
-#include <boost/ref.hpp>
+#include <boost/spirit/home/phoenix/bind/bind_function.hpp>
+#include <boost/spirit/home/phoenix/core/reference.hpp>
 #include <boost/program_options.hpp>
 
 // c++
@@ -252,10 +251,10 @@ try
 		boost::phoenix::bind(
 			&create_server,
 			boost::phoenix::ref(server),
-			resources,
+			boost::phoenix::ref(resources),
 			world,
 			boost::phoenix::ref(console_gfx),
-			host_port)
+			host_port),
 		resources,
 		sys,
 		sound_pool,
