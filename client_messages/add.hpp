@@ -17,8 +17,8 @@ public:
 	entity_id id() const;
 	client_entity_type::type type() const;
 private:
-	entity_id                id_;
-	client_entity_type::type type_;
+	entity_id const id_;
+	client_entity_type::type const type_;
 };
 
 }

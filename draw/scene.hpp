@@ -10,6 +10,7 @@
 #include "background_fwd.hpp"
 #include "../load/context_fwd.hpp"
 #include "../client_messages/add_fwd.hpp"
+#include "../client_messages/visible_fwd.hpp"
 #include "../messages/base.hpp"
 #include "../messages/add.hpp"
 #include "../messages/add_enemy.hpp"
@@ -58,6 +59,8 @@ public:
 
 	void client_message(
 		client_messages::add const &);
+	void client_message(
+		client_messages::visible const &);
 
 	void draw(time_type);
 

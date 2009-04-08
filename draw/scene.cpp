@@ -13,6 +13,7 @@
 #include "environment.hpp"
 #include "../messages/unwrap.hpp"
 #include "../client_messages/add.hpp"
+#include "../client_messages/visible.hpp"
 #include "../client/invalid_id.hpp"
 #include "../exception.hpp"
 
@@ -127,6 +128,12 @@ void sanguis::draw::scene::client_message(
 			SGE_TEXT("Client object with id already in entity list!")
 		);
 	// FIXME: configure the object here, too!
+}
+
+void sanguis::draw::scene::client_message(
+	client_messages::visible const &m)
+{
+	entity(m.id()).visible(m.get());	
 }
 
 void sanguis::draw::scene::draw(
