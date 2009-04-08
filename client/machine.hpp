@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_MACHINE_HPP_INCLUDED
 
 #include "states/start_fwd.hpp"
+#include "screenshot.hpp"
 #include "server_callback.hpp"
 #include "console_wrapper.hpp"
 #include "../load/context_fwd.hpp"
@@ -83,7 +84,7 @@ private:
 	net::port_type port_;
 	net::client net_;
 	sge::signal::auto_connection
-		s_conn,s_disconn,s_data,input_connection;
+		s_conn,s_disconn,s_data;
 	net::data_type
 		in_buffer,
 		out_buffer;
@@ -95,12 +96,8 @@ private:
 	sge::console::stdlib console_stdlib;
 	sanguis::client::console_wrapper console_wrapper_;
 	bool running_;
-	bool screenshot_;
 	server_callback server_callback_;
-
-	void input_callback(
-		sge::input::key_pair const &);
-	void make_screenshot();
+	screenshot screenshot_;
 };
 
 }

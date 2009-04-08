@@ -45,7 +45,15 @@ public:
 	perk_chooser &instance_;
 	};
 private:
+	struct perk_image
+	{
+		sge::gui::image_ptr 
+			normal,
+			hover;
+	};
+
 	typedef boost::ptr_vector<sge::gui::widgets::buttons::image> button_container;
+	typedef std::map<perk_type::type,perk_image> image_map;
 
 	sge::systems::instance &sys_;
 
@@ -61,12 +69,16 @@ private:
 	sge::signal::connection_manager connections_;
 	bool dirty_;
 	send_callback send_callback_;
+	image_map images_;
 
 	level_type levels_left() const;
 	void regenerate_label();
 	void regenerate_widgets();
-	void choose_callback(perk_type::type);
+	void choose_callback(
+		perk_type::type);
 	void consume_level();
+	image_map::const_iterator const load_from_cache(
+		perk_type::type);
 };
 }
 }
