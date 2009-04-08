@@ -1,12 +1,15 @@
 #include "serialization.hpp"
 #include "messages/serialization/serialize.hpp"
 #include "messages/serialization/deserialize.hpp"
+#include "messages/serialization/endianness.hpp"
 #include "messages/global_context.hpp"
 #include "messages/base.hpp"
 #include "net/value_type.hpp"
 #include "truncation_check_cast.hpp"
 
 #include <sge/container/raw_vector_impl.hpp>
+#include <sge/io/read.hpp>
+#include <sge/io/write.hpp>
 #include <sge/assert.hpp>
 
 #include <boost/iostreams/device/array.hpp>
@@ -71,10 +74,15 @@ sanguis::deserialize(
 
 	exceptions(stream);
 
-	// TODO: endianness!
-	message_header message_size;
-	stream.read(reinterpret_cast<stream_type::char_type *>(&message_size), sizeof(message_size));
-
+	message_header const message_size(
+		sge::io::read<
+			message_header
+		>(
+			stream,
+			messages::serialization::endianness()
+		)
+	);
+			
 	SGE_ASSERT(message_size > 0);
 
 	if ((data.size() - message_header_size) < message_size)
@@ -140,8 +148,11 @@ void sanguis::serialize(
 
 	SGE_ASSERT(header > 0);
 
-	// TODO: endianness!
-	stream.write(reinterpret_cast<stream_type::char_type const *>(&header), sizeof(message_header));
+	sge::io::write(
+		stream,
+		header,
+		messages::serialization::endianness()
+	);
 
 	messages::serialization::serialize(
 		stream,
