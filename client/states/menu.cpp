@@ -36,7 +36,8 @@ sanguis::client::states::menu::menu(
 		context<machine>().sys().image_loader(),
 		context<machine>().sys().input_system(),
 		context<machine>().sys().font_system(),
-		sge::gui::skin_ptr(new sge::gui::skins::standard())),
+		sge::gui::skin_ptr(
+			new sge::gui::skins::standard())),
 
 	main_menu(
 		m,
@@ -262,5 +263,6 @@ void sanguis::client::states::menu::connect()
 
 void sanguis::client::states::menu::start_server()
 {
+	context<machine>().start_server();
 	connect_now = true;
 }

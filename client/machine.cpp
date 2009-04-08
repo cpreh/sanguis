@@ -24,6 +24,7 @@
 #include <boost/lambda/construct.hpp>
 
 sanguis::client::machine::machine(
+	server_callback const &_server_callback,
 	load::context const &_resources,
 	sge::systems::instance &_sys,
 	sge::audio::pool &_sound_pool,
@@ -79,8 +80,14 @@ sanguis::client::machine::machine(
 		sys_.input_system(),
 		sge::input::kc::key_f1),
 	running_(true),
-	screenshot_(false)
+	screenshot_(false),
+	server_callback_(_server_callback)
 {}
+
+void sanguis::client::machine::start_server()
+{
+	server_callback_();
+}
 
 void sanguis::client::machine::connect()
 {

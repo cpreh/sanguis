@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_MACHINE_HPP_INCLUDED
 
 #include "states/start_fwd.hpp"
+#include "server_callback.hpp"
 #include "console_wrapper.hpp"
 #include "../load/context_fwd.hpp"
 #include "../messages/auto_ptr.hpp"
@@ -33,6 +34,7 @@ struct machine
 {
 public:
 	machine(
+		server_callback const &,
 		load::context const &,
 		sge::systems::instance &,
 		sge::audio::pool &,
@@ -42,6 +44,7 @@ public:
 		net::hostname_type const &,
 		net::port_type);
 
+	void start_server();
 	void connect();
 	void send(messages::auto_ptr);
 	void process_message(messages::auto_ptr);
@@ -93,6 +96,7 @@ private:
 	sanguis::client::console_wrapper console_wrapper_;
 	bool running_;
 	bool screenshot_;
+	server_callback server_callback_;
 
 	void input_callback(
 		sge::input::key_pair const &);

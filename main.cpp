@@ -46,6 +46,9 @@
 
 // boost
 #include <boost/filesystem.hpp>
+#include <boost/spirit/home/phoenix/bind.hpp>
+//#include <boost/spirit/home/phoenix/ref.hpp>
+#include <boost/ref.hpp>
 #include <boost/program_options.hpp>
 
 // c++
@@ -60,17 +63,29 @@
 namespace
 {
 
-typedef sge::auto_ptr<
+typedef sge::scoped_ptr<
 	sanguis::server::machine
-> server_auto_ptr;
+> server_scoped_ptr;
 
-server_auto_ptr
+void
 create_server(
-	sanguis::load::context const &,
-	sge::collision::world_ptr const,
-	sge::console::gfx &,
-	sanguis::net::port_type,
-	bool client_only);
+	server_scoped_ptr &server,
+	sanguis::load::context const &resources,
+	sge::collision::world_ptr const coll,
+	sge::console::gfx &con,
+	sanguis::net::port_type const host_port)
+{
+	server.reset(
+		new sanguis::server::machine(
+				resources,
+				coll,
+				con, 
+				host_port
+		)
+	);
+	
+	server->initiate();
+}
 
 }
 
@@ -83,7 +98,6 @@ try
 	sanguis::net::hostname_type dest_server;
 	sanguis::net::port_type host_port,dest_port;
 	std::string log_level;
-	bool client_only;
 	unsigned screen_width, screen_height;
 
 	desc.add_options()
@@ -98,9 +112,6 @@ try
 		("host-port",
 			po::value<sanguis::net::port_type>(&host_port)->default_value(1337),
 			"sets the port to listen to for games")
-		("client-only",
-			po::value<bool>(&client_only)->default_value(false),
-			"tells if we want to create a server or not")
 		("log",
 			po::value<std::string>(&log_level)->default_value(std::string("debug")),
 			"sets the maximum logging level (one of debug, info, warning, error, fatal in that order)")
@@ -234,21 +245,17 @@ try
 	
 	resources.preload();
 
-	sge::scoped_ptr<
-		sanguis::server::machine
-	> server(
-		create_server(
-			resources,
-			world,
-			console_gfx,
-			host_port,
-			client_only));
+	server_scoped_ptr server;
 
-	if(server)
-		server->initiate();
-	
 	// construct and initialize statemachine
 	sanguis::client::machine client(
+		boost::phoenix::bind(
+			&create_server,
+			boost::phoenix::ref(server),
+			resources,
+			world,
+			boost::phoenix::ref(console_gfx),
+			host_port)
 		resources,
 		sys,
 		sound_pool,
@@ -257,6 +264,7 @@ try
 		console_gfx,
 		dest_server,
 		dest_port);
+
 	// this should construct, among others, the renderer
 	client.initiate();
 
@@ -279,28 +287,4 @@ try
 } catch (std::exception const &e) {
 	std::cerr << "caught standard exception: " << e.what() << '\n';
 	return EXIT_FAILURE;
-}
-
-namespace
-{
-
-server_auto_ptr
-create_server(
-	sanguis::load::context const &resources,
-	sge::collision::world_ptr const coll,
-	sge::console::gfx &con,
-	sanguis::net::port_type const host_port,
-	bool const client_only)
-{
-	return !client_only
-		? server_auto_ptr(
-			new sanguis::server::machine(
-				resources,
-				coll,
-				con, 
-				host_port))
-		: server_auto_ptr();
-
-}
-
 }
