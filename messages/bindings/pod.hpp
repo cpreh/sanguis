@@ -60,7 +60,6 @@ public:
 	}
 };
 
-/*
 template<>
 struct pod<
 	types::space_unit
@@ -68,7 +67,6 @@ struct pod<
 :
 float_
 {};
-*/
 
 }
 }

@@ -1,14 +1,17 @@
 #include "float.hpp"
 #include "pod.hpp"
-#include <sge/math/compare.hpp>
 #include <boost/cstdint.hpp>
 #include <cmath>
 
 namespace
 {
 
-typedef boost::int32_t fixed_int;
+typedef boost::uint32_t fixed_int;
 typedef sanguis::messages::bindings::float_::type float_type;
+
+typedef sanguis::messages::bindings::pod<
+	fixed_int
+> adapted;
 
 fixed_int const sign_bit(
 	0x1
@@ -26,16 +29,26 @@ fixed_int
 make_fixed(
 	float_type const f)
 {
-	return static_cast<fixed_int>(std::log(f) * exp);
+	return static_cast<fixed_int>(
+		std::log(
+			f + static_cast<float_type>(1)
+		) * exp
+	);
+}
+
+float_type
+unmake_fixed(
+	fixed_int const i)
+{
+	return std::exp(
+		static_cast<float_type>(i) / exp
+	) - static_cast<float_type>(1);
 }
 
 fixed_int
 serialize(
 	float_type const f)
 {
-	if(sge::math::almost_zero(f))
-		return 0;
-	
 	return f < 0
 		? make_fixed(-f) | sign_bit
 		: make_fixed(f) & ~sign_bit;
@@ -45,17 +58,12 @@ float_type
 deserialize(
 	fixed_int c)
 {
-	if(c == 0)
-		return 0;
-	
 	bool const is_signed = c & sign_bit;
 	c &= ~sign_bit;
 
-	return
-		std::exp(static_cast<float_type>(c) / exp)
-		* (is_signed
-		? static_cast<float_type>(-1)
-		: static_cast<float_type>(1));
+	return is_signed
+		? unmake_fixed(c) * static_cast<float_type>(-1)
+		: unmake_fixed(c);
 }
 
 }
@@ -72,10 +80,8 @@ sanguis::messages::bindings::float_::place(
 	type const &t,
 	majutsu::raw_pointer const mem)
 {
-	fixed_int const fi = serialize(t);
-
-	pod<fixed_int>::place(
-		fi,
+	adapted::place(
+		serialize(t),
 		mem
 	);
 }
@@ -85,10 +91,10 @@ sanguis::messages::bindings::float_::make(
 	majutsu::const_raw_pointer const beg,
 	majutsu::size_type const sz)
 {
-	fixed_int const fi = pod<fixed_int>::make(
-		beg,
-		sz
+	return deserialize(
+		adapted::make(
+			beg,
+			sz
+		)
 	);
-
-	return deserialize(fi);
 }
