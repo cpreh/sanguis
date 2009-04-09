@@ -2,14 +2,14 @@
 #define SANGUIS_MESSAGES_SPACE_UNIT_HPP_INCLUDED
 
 #include "types/space_unit.hpp"
-#include <majutsu/pod.hpp>
+#include "bindings/pod.hpp"
 
 namespace sanguis
 {
 namespace messages
 {
 
-typedef majutsu::pod<
+typedef bindings::pod<
 	types::space_unit
 > space_unit;
 

@@ -2,7 +2,6 @@
 #define SANGUIS_MESSAGES_BINDINGS_STATIC_HPP_INCLUDED
 
 #include <sge/assert.hpp>
-#include <majutsu/detail/copy_n.hpp> // TODO: replace this
 #include <majutsu/size_type.hpp>
 #include <majutsu/raw_pointer.hpp>
 
@@ -14,10 +13,15 @@ namespace bindings
 {
 
 template<
-	typename T
+	typename T,
+	template<
+		typename 
+	> class Adapted
 >
 struct static_ {
 	typedef T type;
+
+	typedef Adapted<typename T::value_type> adapted;
 
 	static majutsu::size_type
 	static_size()
@@ -35,37 +39,37 @@ struct static_ {
 	static void
 	place(
 		type const &t,
-		majutsu::raw_pointer const mem)
+		majutsu::raw_pointer mem)
 	{
-		majutsu::detail::copy_n(
-			reinterpret_cast<
-				majutsu::const_raw_pointer
-			>(
-				t.data()
-			),
-			t.size() * sizeof(typename T::value_type),
-			mem
-		);
+		for(
+			typename type::const_iterator it(t.begin());
+			it != t.end();
+			mem += adapted::needed_size(*it), ++it
+		)
+			adapted::place(
+				*it,
+				mem
+			);
 	}
 
 	static type
 	make(
-		majutsu::const_raw_pointer const beg,
+		majutsu::const_raw_pointer mem,
 		majutsu::size_type const sz)
 	{
 		SGE_ASSERT(sz == static_size());
 
 		type ret;
 
-		majutsu::detail::copy_n(
-			beg,
-			sz,
-			reinterpret_cast<
-				majutsu::raw_pointer
-			>(
-				ret.data()
-			)
-		);
+		for(
+			typename type::iterator it(ret.begin());
+			it != ret.end();
+			mem += adapted::needed_size(*it), ++it
+		)
+			*it = adapted::make(
+				mem,
+				sizeof(typename T::value_type)
+			);
 
 		return ret;
 	}
