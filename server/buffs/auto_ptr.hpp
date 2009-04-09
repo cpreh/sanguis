@@ -10,6 +10,7 @@ namespace server
 {
 namespace buffs
 {
+
 typedef sge::auto_ptr<
 	buff
 > auto_ptr;

@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_AI_BASE_HPP_INCLUDED
 #define SANGUIS_SERVER_AI_BASE_HPP_INCLUDED
 
+#include "base_fwd.hpp"
 #include "../entities/entity_with_weapon_fwd.hpp"
 #include "../entities/container.hpp"
 #include "../../time_type.hpp"
