@@ -34,7 +34,7 @@ sanguis::server::entities::enemies::create(
 					 entities::property(static_cast<space_unit>(3)))
 					(entities::property_type::movement_speed,
 					 entities::property(static_cast<space_unit>(20))),
-				ai::ai_ptr(
+				ai::auto_ptr(
 					new ai::simple()),
 				weapons::auto_ptr(
 					new weapons::pistol(
@@ -65,7 +65,7 @@ sanguis::server::entities::enemies::create(
 					 entities::property(static_cast<space_unit>(3)))
 					(entities::property_type::movement_speed,
 					 entities::property(static_cast<space_unit>(20))),
-				ai::ai_ptr(
+				ai::auto_ptr(
 					new ai::simple()),
 				weapons::auto_ptr(
 					new weapons::melee(
@@ -95,7 +95,7 @@ sanguis::server::entities::enemies::create(
 					 entities::property(static_cast<space_unit>(1)))
 					(entities::property_type::movement_speed,
 					 entities::property(static_cast<space_unit>(80))),
-				ai::ai_ptr(
+				ai::auto_ptr(
 					new ai::simple()),
 				weapons::auto_ptr(
 					new weapons::melee(
@@ -123,7 +123,7 @@ sanguis::server::entities::enemies::create(
 				entities::property(static_cast<space_unit>(300)))
 				(entities::property_type::movement_speed,
 				entities::property(static_cast<space_unit>(40))),
-			ai::ai_ptr(
+			ai::auto_ptr(
 				new ai::simple()),
 			weapons::auto_ptr(
 				new weapons::melee(
@@ -151,7 +151,7 @@ sanguis::server::entities::enemies::create(
 				entities::property(static_cast<space_unit>(1)))
 				(entities::property_type::movement_speed,
 				entities::property(static_cast<space_unit>(40))),
-			ai::ai_ptr(
+			ai::auto_ptr(
 				new ai::simple()),
 			weapons::auto_ptr(
 				new weapons::melee(
@@ -179,7 +179,7 @@ sanguis::server::entities::enemies::create(
 					 entities::property(static_cast<space_unit>(10)))
 					(entities::property_type::movement_speed,
 					 entities::property(static_cast<space_unit>(70))),
-				ai::ai_ptr(
+				ai::auto_ptr(
 					new ai::simple()),
 				weapons::auto_ptr(
 					new weapons::melee(
