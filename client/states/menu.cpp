@@ -19,6 +19,7 @@
 #include <sge/iconv.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <sge/structure_cast.hpp>
+#include <sge/lexical_cast.hpp>
 #include <boost/ref.hpp>
 #include <boost/bind.hpp>
 #include <boost/lexical_cast.hpp>
@@ -28,211 +29,128 @@ sanguis::client::states::menu::menu(
 	my_context ctx) 
 :
 	my_base(ctx),
-	menu_path(media_path()/SGE_TEXT("menu")),
-	buttons_path(menu_path/SGE_TEXT("buttons")),
-	labels_path(menu_path/SGE_TEXT("labels")),
-	m(
-		context<machine>().sys().renderer(),
-		context<machine>().sys().image_loader(),
-		context<machine>().sys().input_system(),
-		context<machine>().sys().font_system(),
-		sge::gui::skin_ptr(
-			new sge::gui::skins::standard())),
-
-	main_menu(
-		m,
-		sge::gui::widget::parameters()
-			.pos(
-				sge::gui::point(0,0))
-			.size(
-				sge::gui::dim(1024,768))
-			.activation(
-				sge::gui::activation_state::inactive)
-			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::vertical>(
-					boost::ref(main_menu)))),
-	main_connect(
-		main_menu,
-		context<machine>().sys().image_loader(),
-		buttons_path,
-		SGE_TEXT("connect_menu")),
-	main_start(
-		main_menu,
-		context<machine>().sys().image_loader(),
-		buttons_path,
-		SGE_TEXT("quickstart")),
-	main_exit(
-		main_menu,
-		context<machine>().sys().image_loader(),
-		buttons_path,
-		SGE_TEXT("quit")),
-	
-	/*
-	highscore_menu(
-		m,
-		sge::gui::widget::parameters()
-			.pos(
-				sge::gui::point(0,0))
-			.size(
-				sge::gui::dim(1024,768))
-			.activation(
-				sge::gui::activation_state::inactive)
-			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::vertical>(
-					boost::ref(highscore_menu)))),
-
-	highscore_header(
-		highscore_menu,
-		sge::gui::widget::parameters(),
-		sge::gui::make_image(
-			context<machine>().sys().image_loader()->load(
-				buttons_path/SGE_TEXT("normal.png")))),
-	
-	highscore_labels(
-		),
-	
-	highscore_back(
-		)
-		*/
-
-
-#ifndef SANGUIS_STATES_MENU_DEBUG
-	connect_menu(
-		m,
-		sge::gui::widget::parameters()
-			.pos(
-				sge::gui::point(0,0))
-			.size(
-				sge::gui::dim(1024,768))
-			.activation(
-				sge::gui::activation_state::inactive)
-			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::vertical>(
-					boost::ref(connect_menu)))),
-
-	connect_host(
-		connect_menu,
-		sge::gui::widget::parameters()
-			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::horizontal>(
-					boost::ref(connect_host)))),
-	connect_host_label(
-		connect_host,
-		sge::gui::widget::parameters(),
-		sge::gui::make_image(
-			context<machine>().sys().image_loader()->load(
-				labels_path/SGE_TEXT("host.png")))),
-	connect_host_edit(
-		connect_host,
-		sge::gui::widget::parameters(),
-		sge::gui::widgets::edit::single_line,
-		sge::gui::dim(30,1)),
-
-	connect_port(
-		connect_menu,
-		sge::gui::widget::parameters()
-			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::horizontal>(
-					boost::ref(connect_port)))),
-	connect_port_label(
-		connect_port,
-		sge::gui::widget::parameters(),
-		sge::gui::make_image(
-			context<machine>().sys().image_loader()->load(
-				labels_path/SGE_TEXT("port.png")))),
-	connect_port_edit(
-		connect_port,
-		sge::gui::widget::parameters(),
-		sge::gui::widgets::edit::single_line,
-		sge::gui::dim(5,1)),
-
-	connect_connect_wrapper(
-		connect_menu,
-		sge::gui::widget::parameters()
-			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::horizontal>(
-					boost::ref(connect_connect_wrapper)))),
-	connect_connect(
-		connect_connect_wrapper,
-		context<machine>().sys().image_loader(),
-		buttons_path,
-		SGE_TEXT("connect")),
-	connect_return_wrapper(
-		connect_menu,
-		sge::gui::widget::parameters()
-			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::horizontal>(
-					boost::ref(connect_return_wrapper)))),
-	connect_return(
-		connect_return_wrapper,
-		context<machine>().sys().image_loader(),
-		buttons_path,
-		SGE_TEXT("return")),
-
-	mover_(
-		m,
-		main_menu),
-
-	main_connect_conn(
-		main_connect.register_clicked(
+	menu_(
+		context<machine>().sys(),
+		sanguis::menu::callbacks::object(
 			boost::bind(
-				&client::menu::mover::reset,
-				&mover_,
-				boost::ref(connect_menu)))),
-
-	main_start_conn(
-		main_start.register_clicked(
-			boost::bind(&menu::start_server,this))),
-
-	main_exit_conn(
-		main_exit.register_clicked(
-			boost::bind(&machine::quit,&(context<machine>())))),
-
-	connect_connect_conn(
-		connect_connect.register_clicked(
-			boost::bind(&menu::connect,this))),
-
-	connect_return_conn(
-		connect_return.register_clicked(
+				&menu::connect,
+				this,
+				_1,
+				_2),
 			boost::bind(
-				&client::menu::mover::reset,
-				&mover_,
-				boost::ref(main_menu)))),
-#endif
-
-	connect_now(false)
+				&menu::cancel_connect,
+				this),
+			boost::bind(
+				&machine::start_server,
+				&(context<machine>()))))
 {}
 
 boost::statechart::result
 sanguis::client::states::menu::react(
+	tick_event const &t)
+{
+	context<machine>().dispatch();
+
+	menu_.process(
+		t.delta())
+
+	return discard_event();
+}
+
+
+boost::statechart::result
+sanguis::client::states::menu::react(
 	message_event const &m)
+{
+	return messages::unwrap<
+		boost::mpl::vector<
+			messages::assign_id,
+			messages::connect,
+			messages::disconnect,
+			messages::net_error
+		>,
+		boost::statechart::result
+	>(
+		*this,
+		*m.message(),
+		boost::bind(
+			&menu::handle_default_msg,
+			this,
+			_1
+		)
+	);
+}
+
+boost::statechart::result
+sanguis::client::states::running::handle_default_msg(
+	messages::base const &m)
 {
 	SGE_LOG_WARNING(
 		log(),
 		sge::log::_1
 			<< SGE_TEXT("got unexpected event ")
 			<< sge::iconv(typeid(*m.message()).name()));
-	return defer_event();
+	return discard_event();
 }
 
 boost::statechart::result
-sanguis::client::states::menu::react(
-	tick_event const &t)
+sanguis::client::states::running::operator()(
+	messages::net_error const &e)
 {
-	if (connect_now)
-	{
-		context<machine>().connect();
-		return transit<connecting>();
-	}
-
-	context<machine>().dispatch();
-#ifndef SANGUIS_STATES_MENU_DEBUG
-	mover_.update(
-		t.delta());
-#endif
-	m.draw();
-
+	menu_.connection_error(
+		e.message());
 	return discard_event();
+}
+
+boost::statechart::result
+sanguis::client::states::running::operator()(
+	messages::connect const &c)
+{
+	followup_state_ = c.state();
+	context<machine>().send(
+		messages::create(
+			messages::client_info(
+				SGE_TEXT("player1")
+			)
+		)
+	); // FIXME
+	return discard_event();
+}
+
+boost::statechart::result
+sanguis::client::states::running::operator()(
+	messages::disconnect const &c)
+{
+	menu_.connection_error(
+		SGE_TEXT("The server closed the connection"));
+}
+
+boost::statechart::result
+sanguis::client::states::connecting::operator()(
+	messages::assign_id const &m)
+{
+	SGE_LOG_DEBUG(
+		log(),
+		sge::log::_1
+			<< SGE_TEXT("received id"));
+	post_event(
+		message_event(
+			messages::create(
+				messages::assign_id(
+					m
+				)
+			)
+		)
+	);
+	switch (followup_state_)
+	{
+		case followup_state::unpaused:
+			return transit<unpaused>();
+		case followup_state::paused
+			return transit<paused>();
+	}
+	throw sge::exception(
+		SGE_TEXT("invalid followup state!"));
 }
 
 sge::log::logger &
@@ -246,23 +164,37 @@ sanguis::client::states::menu::log()
 	return log_;
 }
 
-void sanguis::client::states::menu::connect()
+void sanguis::client::states::menu::connect(
+	sge::string const &host,
+	sge::string const &port)
 {
-#ifndef SANGUIS_STATES_MENU_DEBUG
 	context<machine>().hostname(
 		sge::iconv(
-			connect_host_edit.text()
+			host
 		)
 	);
-	context<machine>().port(
-		boost::lexical_cast<net::port_type>(
-			connect_port_edit.text()));
-#endif
-	connect_now = true;
+
+	try
+	{
+		context<machine>().port(
+			sge::lexical_cast<net::port_type>(
+				port));
+	}
+	catch (sge::bad_lexical_cast const &)
+	{
+		menu_.connection_error(
+			SGE_TEXT("invalid port specification"));
+	}
+
+	context<machine>().connect();
 }
 
 void sanguis::client::states::menu::start_server()
 {
 	context<machine>().start_server();
-	connect_now = true;
+}
+
+void sanguis::client::states::menu::cancel_connect()
+{
+	context<machine>().cancel_connect();
 }

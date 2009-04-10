@@ -3,7 +3,7 @@
 #include "io_service_wrapper.hpp"
 #include "connection.hpp"
 #include "../log.hpp"
-#include <sge/exception.hpp>
+#include "../exception.hpp"
 #include <sge/text.hpp>
 #include <sge/iconv.hpp>
 #include <sge/lexical_cast.hpp>
@@ -83,7 +83,7 @@ void sanguis::net::detail::server_impl::process()
 		boost::system::error_code e;
 		io_service_.poll(e);
 		if (e)
-			throw sge::exception(
+			throw exception(
 				SGE_TEXT("poll error: ")+
 				sge::iconv(
 					e.message()));
@@ -112,7 +112,7 @@ void sanguis::net::detail::server_impl::queue(
 			continue;
 
 		if (!c.connected_)
-			throw sge::exception(
+			throw exception(
 				SGE_TEXT("invalid id ")+
 				sge::lexical_cast<sge::string>(
 					id));
@@ -124,7 +124,7 @@ void sanguis::net::detail::server_impl::queue(
 	}
 
 	// no valid id found?
-	throw sge::exception(
+	throw exception(
 		SGE_TEXT("invalid id ")+
 		sge::lexical_cast<sge::string>(
 			id));
@@ -276,7 +276,7 @@ void sanguis::net::detail::server_impl::accept_handler(
 		SGE_LOG_DEBUG(
 			log(),
 			sge::log::_1 << SGE_TEXT("server: error while accepting"));
-		throw sge::exception(
+		throw exception(
 			sge::iconv(
 				e.message()));
 	}
@@ -317,7 +317,7 @@ void sanguis::net::detail::server_impl::handle_error(
 {
 	// do we have an error or a disconnect...
 	if (!detail::is_disconnect(e))
-		throw sge::exception(
+		throw exception(
 			sge::iconv(message)+
 			SGE_TEXT(" error: ")+
 			sge::iconv(e.message()));

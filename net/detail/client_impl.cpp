@@ -1,9 +1,9 @@
 #include "client_impl.hpp"
 #include "is_disconnect.hpp"
 #include "io_service_wrapper.hpp"
+#include "../exception.hpp"
 #include "../log.hpp"
 #include <sge/container/raw_vector_impl.hpp>
-#include <sge/exception.hpp>
 #include <sge/text.hpp>
 #include <sge/iconv.hpp>
 #include <sge/lexical_cast.hpp>
@@ -62,6 +62,16 @@ void sanguis::net::detail::client_impl::connect(
 	handlers_++;
 }
 
+void sanguis::net::detail::client_impl::disconnect()
+{
+	clear();
+	/* TODO: should we send this signal here? it could lead to an endless loop
+	 * (in sanguis at least)
+	disconnect_signal_(
+		SGE_TEXT("Client disconnected"));
+		*/
+}
+
 void sanguis::net::detail::client_impl::queue(
 	data_type const &data)
 {
@@ -98,7 +108,7 @@ void sanguis::net::detail::client_impl::process()
 	io_service_.poll(
 		e);
 	if (e)
-		throw sge::exception(
+		throw exception(
 			SGE_TEXT("poll error: ")+
 			sge::iconv(
 				e.message()));
@@ -130,7 +140,7 @@ void sanguis::net::detail::client_impl::resolve_handler(
 	boost::asio::ip::tcp::resolver::iterator i)
 {
 	if (e)
-		throw sge::exception(
+		throw exception(
 			SGE_TEXT("client: error resolving address: ")+
 			sge::iconv(
 				e.message()));
@@ -150,13 +160,17 @@ void sanguis::net::detail::client_impl::handle_error(
 	sge::string const &s,
 	boost::system::error_code const &e)
 {
+	clear();
+
 	if (!detail::is_disconnect(e))
-		throw sge::exception(
+	{
+		throw exception(
 			SGE_TEXT("error in ")+
 			s+
 			SGE_TEXT(": ")+
 			sge::iconv(
 				e.message()));
+	}
 		
 	SGE_LOG_DEBUG(
 		log(),
@@ -165,7 +179,6 @@ void sanguis::net::detail::client_impl::handle_error(
 			<< sge::iconv(e.message()) 
 			<< SGE_TEXT(")"));
 
-	connected_ = false;
 	disconnect_signal_(
 		sge::iconv(
 			e.message()));
@@ -268,7 +281,7 @@ void sanguis::net::detail::client_impl::connect_handler(
 	{
 		// are we at the end of the endpoint list?
 		if (i == boost::asio::ip::tcp::resolver::iterator())
-			throw sge::exception(
+			throw exception(
 				SGE_TEXT("client: exhausted endpoints: ")+
 				sge::iconv(
 					e.message()));
@@ -305,4 +318,10 @@ void sanguis::net::detail::client_impl::connect_handler(
 			_1,
 			_2));
 	handlers_++;
+}
+
+void sanguis::net::detail::client_impl::clear()
+{
+	connected_ = sending_ = false;
+	output_.clear();
 }

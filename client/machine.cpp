@@ -85,7 +85,14 @@ void sanguis::client::machine::start_server()
 
 void sanguis::client::machine::connect()
 {
-	net_.connect(hostname_,port_);
+	net_.connect(
+		hostname_,
+		port_);
+}
+
+void sanguis::client::machine::cancel_connect()
+{
+	net_.disconnect();
 }
 
 void sanguis::client::machine::connect_callback()
@@ -177,6 +184,7 @@ void sanguis::client::machine::port(net::port_type const _port)
 
 bool sanguis::client::machine::process(
 	tick_event const &t)
+try
 {
 	if (out_buffer.size())
 	{
@@ -200,6 +208,14 @@ bool sanguis::client::machine::process(
 	screenshot_.process();
 
 	return running_;
+}
+catch (net::exception const &e)
+{
+	process_event(
+		message_event(
+			messages::create(
+				messages::net_error(
+					e.what()))));
 }
 
 void sanguis::client::machine::quit()

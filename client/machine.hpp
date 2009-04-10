@@ -47,6 +47,7 @@ public:
 
 	void start_server();
 	void connect();
+	void cancel_connect();
 	void send(messages::auto_ptr);
 	void process_message(messages::auto_ptr);
 	// callbacks
