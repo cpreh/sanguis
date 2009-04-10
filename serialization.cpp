@@ -35,11 +35,13 @@ template<
 void exceptions(
 	Stream &stream)
 {
+	/*
 	stream.exceptions(
 		std::ios_base::badbit
 		| std::ios_base::failbit
 		| std::ios_base::eofbit
 	);
+	*/
 }
 
 }

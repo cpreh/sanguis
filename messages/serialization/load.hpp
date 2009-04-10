@@ -3,8 +3,10 @@
 
 #include "raw_container.hpp"
 #include "istream.hpp"
+#include "endianness.hpp"
 #include "../bindings/dynamic_len.hpp"
 #include <sge/container/raw_vector_impl.hpp>
+#include <sge/io/read.hpp>
 
 namespace sanguis
 {
@@ -42,29 +44,40 @@ struct load {
 };
 
 template<
-	typename T
+	typename T,
+	template<
+		typename
+	> class A
 >
 struct load<
 	bindings::dynamic_len<
-		T
+		T,
+		A
 	>
 > {
-	static typename bindings::dynamic_len<T>::type
+	static typename bindings::dynamic_len<T, A>::type
 	get(
 		istream &is)
 	{
-		typename bindings::dynamic_len<T>::type ret;
-
-		raw_container vec;
+		typedef bindings::dynamic_len<T, A> type;
+		typename type::type ret;
 
 		majutsu::size_type const length_sz(
-			sizeof(typename bindings::dynamic_len<T>::length_type)
+			sizeof(typename type::length_type)
 		);
 
-		typename bindings::dynamic_len<T>::length_type sz;
-		is.read(reinterpret_cast<char *>(&sz), length_sz);
+		typedef typename type::length_type length_type;
 
-		vec.resize(
+		length_type const sz(
+			sge::io::read<
+				length_type
+			>(
+				is,
+				endianness()
+			)
+		);
+		
+		raw_container vec(
 			sz + length_sz
 		);
 
@@ -73,7 +86,7 @@ struct load<
 			sz
 		);
 
-		return bindings::dynamic_len<T>::make(
+		return type::make(
 			vec.data(),
 			vec.size()
 		);

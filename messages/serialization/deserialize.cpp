@@ -6,6 +6,7 @@
 #include "../types/message_type.hpp"
 #include "../../exception.hpp"
 #include <sge/text.hpp>
+#include <boost/static_assert.hpp>
 
 sanguis::messages::auto_ptr
 sanguis::messages::serialization::deserialize(
@@ -13,6 +14,9 @@ sanguis::messages::serialization::deserialize(
 	istream &stream)
 {
 	types::message_type type;
+
+	// TODO: we can't specify the endianness of the message type at the moment
+	BOOST_STATIC_ASSERT(sizeof(types::message_type) == 1);
 
 	// TODO: fix endianness here
 	stream.read(

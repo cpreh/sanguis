@@ -172,7 +172,10 @@ try
 		(sge::systems::parameterless::input)
 		(sge::systems::parameterless::image)
 		(sge::systems::parameterless::audio_player)
-		(sge::systems::parameterless::collision_system)
+		(sge::systems::named(
+			sge::systems::parameterless::collision_system,
+			SGE_TEXT("cell")
+		))
 		(sge::systems::parameterless::font));
 
 	// input stuff

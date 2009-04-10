@@ -1,6 +1,7 @@
 #include "enemy.hpp"
 #include "../base_parameters.hpp"
 #include "../../weapons/weapon.hpp"
+#include "../../ai/base.hpp"
 #include "../../spawn_pickup.hpp"
 #include "../../get_dim.hpp"
 #include "../../../random.hpp"
@@ -20,7 +21,7 @@ sanguis::server::entities::enemies::enemy::enemy(
 	space_unit const angle,
 	space_unit const direction,
 	property_map const &properties,
-	ai::ai_ptr const ai_,
+	ai::auto_ptr ai_,
 	weapons::auto_ptr weapon_,
 	unsigned const spawn_chance,
 	exp_type const exp_)
@@ -39,7 +40,10 @@ sanguis::server::entities::enemies::enemy::enemy(
 			default_dim(
 				env.load().models(),
 				load::enemy_name(
-					etype_))),
+					etype_
+				)
+			)
+		),
 		ai_,
 		weapon_),
 	  etype_(etype_),

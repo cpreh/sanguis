@@ -1,8 +1,10 @@
 #ifndef SANGUIS_MESSAGES_BINDINGS_DYNAMIC_LEN_HPP_INCLUDED
 #define SANGUIS_MESSAGES_BINDINGS_DYNAMIC_LEN_HPP_INCLUDED
 
+#include "../../truncation_check_cast.hpp"
+#include "../serialization/endianness.hpp"
+#include <sge/endianness/copy_n_from_host.hpp>
 #include <sge/assert.hpp>
-#include <majutsu/detail/copy_n.hpp> // TODO: replace this
 #include <majutsu/size_type.hpp>
 #include <majutsu/raw_pointer.hpp>
 #include <boost/cstdint.hpp>
@@ -15,10 +17,15 @@ namespace bindings
 {
 
 template<
-	typename T
+	typename T,
+	template<
+		typename 
+	> class Adapted
 >
 struct dynamic_len {
 	typedef T type;
+
+	typedef Adapted<typename T::value_type> adapted;
 
 	typedef boost::uint16_t length_type;
 
@@ -32,39 +39,42 @@ struct dynamic_len {
 	static void
 	place(
 		type const &t,
-		majutsu::raw_pointer const mem)
+		majutsu::raw_pointer mem)
 	{
-		// TODO: check truncation
 		length_type const sz(
-			static_cast<length_type>(
+			truncation_check_cast<length_type>(
 				t.size()
 			)
 		);
 
-		majutsu::detail::copy_n(
+		sge::endianness::copy_n_from_host(
 			reinterpret_cast<
 				majutsu::const_raw_pointer
 			>(
 				&sz
 			),
 			sizeof(length_type),
-			mem
+			mem,
+			sizeof(length_type),
+			serialization::endianness()
 		);
-			
-		majutsu::detail::copy_n(
-			reinterpret_cast<
-				majutsu::const_raw_pointer
-			>(
-				t.data()
-			),
-			t.size() * sizeof(typename T::value_type),
-			mem + sizeof(length_type)
-		);
+
+		mem += sizeof(length_type);
+		
+		for(
+			typename type::const_iterator it(t.begin());
+			it != t.end();
+			mem += adapted::needed_size(*it), ++it
+		)
+			adapted::place(
+				*it,
+				mem
+			);
 	}
 
 	static type 
 	make(
-		majutsu::const_raw_pointer const beg,
+		majutsu::const_raw_pointer mem,
 		majutsu::size_type const sz)
 	{
 		SGE_ASSERT(sz > sizeof(length_type));
@@ -81,19 +91,17 @@ struct dynamic_len {
 			sz_wo_len / sizeof(typename type::value_type)
 		);
 
-		majutsu::detail::copy_n(
-			beg + sizeof(length_type),
-			sz_wo_len,
-			reinterpret_cast<
-				majutsu::raw_pointer
-			>(
-				// TODO: make this better!
-				// This works with basic_string and raw_vector
-				const_cast<
-					typename type::value_type *	
-				>(ret.data())
-			)
-		);
+		mem += sizeof(length_type);
+
+		for(
+			typename type::iterator it(ret.begin());
+			it != ret.end();
+			mem += adapted::needed_size(*it), ++it
+		)
+			*it = adapted::make(
+				mem,
+				sizeof(typename T::value_type)
+			);
 
 		return ret;
 	}
