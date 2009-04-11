@@ -5,7 +5,7 @@ namespace sanguis
 {
 namespace client
 {
-class player_action;
+struct player_action;
 }
 }
 

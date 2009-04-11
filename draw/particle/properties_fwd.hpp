@@ -7,7 +7,7 @@ namespace draw
 {
 namespace particle
 {
-class properties;
+struct properties;
 }
 }
 }
