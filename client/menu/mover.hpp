@@ -6,6 +6,7 @@
 #include <sge/gui/widget_fwd.hpp>
 #include <sge/gui/point.hpp>
 #include <sge/gui/dim.hpp>
+#include <sge/math/vector/basic_decl.hpp>
 #include <sge/noncopyable.hpp>
 #include <map>
 

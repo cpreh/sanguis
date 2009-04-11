@@ -8,6 +8,7 @@
 #include <sge/signal/auto_connection.hpp>
 #include <sge/scoped_ptr.hpp>
 #include <sge/noncopyable.hpp>
+#include <sge/string.hpp>
 
 #include <boost/function.hpp>
 

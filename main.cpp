@@ -105,7 +105,7 @@ try
 		("help",
 			"produce help message")
 		("dest-server",
-			po::value<sanguis::net::hostname_type>(&dest_server)->default_value(SGE_TEXT("localhost")),
+			po::value<sanguis::net::hostname_type>(&dest_server)->default_value("localhost"),
 			"sets the server (ip/hostname) to connect to when hitting space")
 		("dest-port",
 			po::value<sanguis::net::port_type>(&dest_port)->default_value(1337),

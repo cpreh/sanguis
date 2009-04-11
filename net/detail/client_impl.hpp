@@ -7,6 +7,7 @@
 #include "../value_type.hpp"
 #include "../port_type.hpp"
 #include "../hostname_type.hpp"
+#include "static_buffer.hpp"
 #include "output_buffer.hpp"
 
 #include <sge/string.hpp>
@@ -18,7 +19,6 @@
 #include <boost/system/error_code.hpp>
 
 #include <boost/function.hpp>
-#include <boost/tr1/array.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
 #include <cstddef>
 
@@ -47,11 +47,6 @@ public:
 	sge::signal::auto_connection register_data(
 		client::data_function const &);
 private:
-	typedef std::tr1::array<
-		value_type,
-		4096
-	> static_buffer;
-
 	// asio vars
 	boost::asio::io_service &io_service_;
 	boost::asio::ip::tcp::socket socket_;

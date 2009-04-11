@@ -1,13 +1,13 @@
 #ifndef SANGUIS_NET_HOSTNAME_TYPE_HPP_INCLUDED
 #define SANGUIS_NET_HOSTNAME_TYPE_HPP_INCLUDED
 
-#include <sge/string.hpp>
+#include <string>
 
 namespace sanguis
 {
 namespace net
 {
-typedef sge::string hostname_type;
+typedef std::string hostname_type;
 }
 }
 

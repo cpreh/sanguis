@@ -316,12 +316,18 @@ void sanguis::net::detail::server_impl::handle_error(
 	boost::system::error_code const &e,
 	connection const &c)
 {
+	sge::string const error_msg(
+		sge::iconv(
+			e.message()
+		)
+	);
+
 	// do we have an error or a disconnect...
 	if (!detail::is_disconnect(e))
 		throw sge::exception(
 			message +
 			SGE_TEXT(" error: ")+
-			sge::iconv(e.message())
+			error_msg
 		);
 
 	SGE_LOG_DEBUG(
@@ -330,14 +336,14 @@ void sanguis::net::detail::server_impl::handle_error(
 			<< SGE_TEXT("server: disconnected ")
 			<< c.id_ 
 			<< SGE_TEXT(" (")
-			<< e.message() 
+			<< error_msg
 			<< SGE_TEXT(")")
 	);
 
 	// ...else remove connection
 	disconnect_signal_(
 		c.id_,
-		e.message());
+		error_msg);
 
 	connections_.erase_if(
 		connections_.begin(),

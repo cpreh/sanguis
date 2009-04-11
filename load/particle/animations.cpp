@@ -6,6 +6,7 @@
 #include <sge/filesystem/directory_iterator.hpp>
 #include <sge/filesystem/is_directory.hpp>
 #include <sge/log/headers.hpp>
+#include <sge/sprite/animation_series.hpp>
 #include <sge/text.hpp>
 #include <sge/auto_ptr.hpp>
 #include <sge/make_auto_ptr.hpp>

@@ -7,6 +7,11 @@
 #include <sge/gui/dim.hpp>
 #include <sge/sprite/object.hpp>
 #include <sge/math/constants.hpp>
+#include <sge/math/vector/is_null.hpp>
+#include <sge/math/vector/normalize.hpp>
+#include <sge/math/vector/length.hpp>
+#include <sge/math/vector/arithmetic.hpp>
+#include <sge/math/dim/arithmetic.hpp>
 #include <sge/renderer/color.hpp>
 #include <sge/structure_cast.hpp>
 #include <sge/assert.hpp>
