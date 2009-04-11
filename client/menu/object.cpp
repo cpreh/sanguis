@@ -1,13 +1,27 @@
 #include "object.hpp"
+#include "../log.hpp"
+#include "../machine.hpp"
 #include "../../resolution.hpp"
+#include "../../media_path.hpp"
 #include <sge/gui/skins/standard.hpp>
 #include <sge/gui/layouts/horizontal.hpp>
 #include <sge/gui/layouts/vertical.hpp>
+#include <sge/gui/make_image.hpp>
+#include <sge/image/loader.hpp>
 #include <sge/assign/make_container.hpp>
+#include <sge/systems/instance.hpp>
 #include <sge/text.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <boost/ref.hpp>
 #include <boost/bind.hpp>
+
+namespace
+{
+sge::log::logger mylogger(
+	sanguis::client::log(),
+	SGE_TEXT("menu: object: "),
+	true);
+}
 
 sanguis::client::menu::object::object(
 	sge::systems::instance &_sys,
@@ -39,8 +53,7 @@ sanguis::client::menu::object::object(
 			.activation(
 				sge::gui::activation_state::inactive)
 			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::vertical>(
-					boost::ref(main_menu)))),
+				sge::make_shared_ptr<sge::gui::layouts::vertical>())),
 	main_connect(
 		main_menu,
 		sys_.image_loader(),
@@ -63,19 +76,18 @@ sanguis::client::menu::object::object(
 			.pos(
 				sge::gui::point(0,0))
 			.size(
-				sge::structure_cast<sge::gui::dim>(resolution()))
+				sge::structure_cast<sge::gui::dim>(
+					resolution()))
 			.activation(
 				sge::gui::activation_state::inactive)
 			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::vertical>(
-					boost::ref(connect_menu)))),
+				sge::make_shared_ptr<sge::gui::layouts::vertical>())),
 
 	connect_host(
 		connect_menu,
 		sge::gui::widget::parameters()
 			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::horizontal>(
-					boost::ref(connect_host)))),
+				sge::make_shared_ptr<sge::gui::layouts::horizontal>())),
 	connect_host_label(
 		connect_host,
 		sge::gui::widget::parameters(),
@@ -92,8 +104,7 @@ sanguis::client::menu::object::object(
 		connect_menu,
 		sge::gui::widget::parameters()
 			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::horizontal>(
-					boost::ref(connect_port)))),
+				sge::make_shared_ptr<sge::gui::layouts::horizontal>())),
 	connect_port_label(
 		connect_port,
 		sge::gui::widget::parameters(),
@@ -110,8 +121,7 @@ sanguis::client::menu::object::object(
 		connect_menu,
 		sge::gui::widget::parameters()
 			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::horizontal>(
-					boost::ref(connect_connect_wrapper)))),
+				sge::make_shared_ptr<sge::gui::layouts::horizontal>())),
 	connect_connect(
 		connect_connect_wrapper,
 		sys_.image_loader(),
@@ -121,8 +131,7 @@ sanguis::client::menu::object::object(
 		connect_menu,
 		sge::gui::widget::parameters()
 			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::horizontal>(
-					boost::ref(connect_return_wrapper)))),
+				sge::make_shared_ptr<sge::gui::layouts::horizontal>())),
 	connect_return(
 		connect_return_wrapper,
 		sys_.image_loader(),
@@ -135,34 +144,33 @@ sanguis::client::menu::object::object(
 			.pos(
 				sge::gui::point(0,0))
 			.size(
-				sge::structure_cast<sge::gui::dim>(resolution()))
+				sge::structure_cast<sge::gui::dim>(
+					resolution()))
 			.activation(
 				sge::gui::activation_state::inactive)
 			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::vertical>(
-					boost::ref(mb_connect)))),
+				sge::make_shared_ptr<sge::gui::layouts::vertical>())),
 
 	mb_connect_label(
 		mb_connect,
 		sge::gui::widget::parameters(),
-		SGE_TEXT(""))
+		SGE_TEXT("foobar")),
 	
 	mb_connect_buttons(
 		mb_connect,
 		sge::gui::widget::parameters()
 			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::horizontal>(
-					boost::ref(mb_connect_buttons)))),
+				sge::make_shared_ptr<sge::gui::layouts::horizontal>())),
 	
 	mb_connect_buttons_retry(
 		mb_connect_buttons,
-		sge::gui::widget::parameters()
+		sge::gui::widget::parameters(),
 		SGE_TEXT("Retry")),
 
 	mb_connect_buttons_cancel(
 		mb_connect_buttons,
-		sge::gui::widget::parameters()
-		SGE_TEXT("Cancel"))
+		sge::gui::widget::parameters(),
+		SGE_TEXT("Cancel")),
 
 	mover_(
 		m,
@@ -170,52 +178,62 @@ sanguis::client::menu::object::object(
 	),
 
 	connections_(
-		sge::make_container<sge::signal::connection_manager::container>
+		sge::assign::make_container<
+			sge::signal::connection_manager::container
+		>
 		(
-			main_connect.register_clicked(
-				boost::bind(
-					&mover::reset,
-					&mover_,
-					boost::ref(connect_menu)))
+			sge::signal::shared_connection(
+				main_connect.register_clicked(
+					boost::bind(
+						&mover::reset,
+						&mover_,
+						boost::ref(connect_menu))))
+	//					boost::ref(mb_connect))))
 		)
 		(
-			main_start.register_clicked(
-				boost::bind(
-					&object::start_server,
-					this))
+			sge::signal::shared_connection(
+				main_start.register_clicked(
+					boost::bind(
+						&object::start_server,
+						this)))
 		)
 		(
-			main_exit.register_clicked(
-				boost::bind(&machine::quit,&(context<machine>()))),
+			sge::signal::shared_connection(
+				main_exit.register_clicked(
+					_callbacks.quit_))
 		)
 		(
-			connect_connect.register_clicked(
-				boost::bind(
-					&object::connect_from_menu,
-					this))
+			sge::signal::shared_connection(
+				connect_connect.register_clicked(
+					boost::bind(
+						&object::connect_from_menu,
+						this)))
 		)
 		(
-			connect_return.register_clicked(
-				boost::bind(
-					&mover::reset,
-					&mover_,
-					boost::ref(main_menu))),
+			sge::signal::shared_connection(
+				connect_return.register_clicked(
+					boost::bind(
+						&mover::reset,
+						&mover_,
+						boost::ref(main_menu))))
 		)
 		(
-			mb_connect_buttons_retry.register_clicked(
-				boost::bind(
-					&object::connect,
-					this,
-					boost::cref(connection_host_),
-					boost::cref(connection_port_)))
+			sge::signal::shared_connection(
+				mb_connect_buttons_retry.register_clicked(
+					boost::bind(
+						&object::connect,
+						this,
+						boost::cref(connection_host_),
+						boost::cref(connection_port_))))
 		)
 		(
-			mb_connect_buttons_cancel.register_clicked(
-				boost::bind(
-					&object::cancel_connect,
-					this))
+			sge::signal::shared_connection(
+				mb_connect_buttons_cancel.register_clicked(
+					boost::bind(
+						&object::cancel_connect,
+						this)))
 		)
-	)
+	),
 
 	callbacks_(_callbacks)
 {
@@ -232,6 +250,12 @@ void sanguis::client::menu::object::process(
 void sanguis::client::menu::object::connection_error(
 	sge::string const &message)
 {
+	SGE_LOG_DEBUG(
+		mylogger,
+		sge::log::_1 << SGE_TEXT("got conection error: (")
+		             << message 
+								 << SGE_TEXT(")"));
+
 	mb_connect_label.text(
 		SGE_TEXT("Connection to ")+
 		connection_host_+
@@ -239,6 +263,8 @@ void sanguis::client::menu::object::connection_error(
 		connection_port_+
 		SGE_TEXT(" failed: \n")+
 		message);
+	mover_.reset(
+		mb_connect);
 }
 
 void sanguis::client::menu::object::start_server()
@@ -282,27 +308,5 @@ void sanguis::client::menu::object::cancel_connect()
 	mover_.reset(
 		connect_menu);
 	
-	callbacks_.cancel_connection_();
+	callbacks_.cancel_connect_();
 }
-
-/*
-TODO: has to be external
-void sanguis::client::states::menu::connect()
-{
-	context<machine>().hostname(
-		sge::iconv(
-			connect_host_edit.text()
-		)
-	);
-	context<machine>().port(
-		boost::lexical_cast<net::port_type>(
-			connect_port_edit.text()));
-	connect_now = true;
-}
-
-void sanguis::client::states::menu::start_server()
-{
-	context<machine>().start_server();
-	connect_now = true;
-}
-*/

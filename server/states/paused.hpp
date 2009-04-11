@@ -37,11 +37,6 @@ public:
 	boost::statechart::result
 	operator()(
 		net::id_type,
-		messages::disconnect const &);
-
-	boost::statechart::result
-	operator()(
-		net::id_type,
 		messages::player_unpause const &);
 	
 	boost::statechart::result

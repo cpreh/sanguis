@@ -1,9 +1,14 @@
 #ifndef SANGUIS_CLIENT_STATES_MENU_HPP_INCLUDED
 #define SANGUIS_CLIENT_STATES_MENU_HPP_INCLUDED
 
+#include "../../connect_state.hpp"
 #include "../machine.hpp"
 #include "../message_event.hpp"
 #include "../menu/object.hpp"
+#include "../../messages/net_error.hpp"
+#include "../../messages/connect.hpp"
+#include "../../messages/disconnect.hpp"
+#include "../../messages/assign_id.hpp"
 #include "../../tick_event.hpp"
 #include <sge/log/logger_fwd.hpp>
 #include <boost/statechart/state.hpp>
@@ -43,8 +48,8 @@ class menu
 	private:
 	sge::log::logger &log();
 
-	sanguis::menu::object menu_;
-	followup_state::type followup_state_;
+	client::menu::object menu_;
+	connect_state::type connect_state_;
 	
 	void connect(
 		sge::string const &,

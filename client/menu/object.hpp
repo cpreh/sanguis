@@ -9,9 +9,10 @@
 #include <sge/filesystem/path.hpp>
 #include <sge/noncopyable.hpp>
 #include <sge/gui/widgets/buttons/text.hpp>
-#include <sge/gui/widgets/buttons/image.hpp>
+#include <sge/gui/widgets/backdrop.hpp>
 #include <sge/gui/widgets/graphics.hpp>
 #include <sge/gui/widgets/edit.hpp>
+#include <sge/gui/widgets/label.hpp>
 #include <sge/gui/widget.hpp>
 #include <sge/gui/manager.hpp>
 #include <sge/signal/connection_manager.hpp>
@@ -28,7 +29,7 @@ class object
 SGE_NONCOPYABLE(object)
 public:
 	object(
-		sge::systems::instance &
+		sge::systems::instance &,
 		callbacks::object const &);
 	void process(
 		time_type);
@@ -62,8 +63,8 @@ private:
 			client::menu::button connect_return;
 	
 	// put this in separate structs
-	sge::gui::widget mb_connect;
-		sge::gui::label mb_connect_label;
+	sge::gui::widgets::backdrop mb_connect;
+		sge::gui::widgets::label mb_connect_label;
 		sge::gui::widget mb_connect_buttons;
 			sge::gui::widgets::buttons::text mb_connect_buttons_retry;
 			sge::gui::widgets::buttons::text mb_connect_buttons_cancel;

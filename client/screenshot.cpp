@@ -20,8 +20,6 @@ sanguis::client::screenshot::screenshot(
 			_renderer,
 			_loader,
 			_1)),
-	renderer_(_renderer),
-	loader_(_loader),
   active_(false),
 	ic(
 		is->register_callback(

@@ -24,6 +24,10 @@ typedef boost::function<
 	void ()
 > start_server;
 
+typedef boost::function<
+	void ()
+> quit;
+
 }
 }
 }

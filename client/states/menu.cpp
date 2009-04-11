@@ -1,7 +1,11 @@
 #include "menu.hpp"
-#include "connecting.hpp"
+#include "paused.hpp"
+#include "unpaused.hpp"
 #include "../../media_path.hpp"
 #include "../../messages/base.hpp"
+#include "../../messages/unwrap.hpp"
+#include "../../messages/create.hpp"
+#include "../../messages/client_info.hpp"
 #include "../machine.hpp"
 #include "../log.hpp"
 #include <sge/log/headers.hpp>
@@ -23,6 +27,7 @@
 #include <boost/ref.hpp>
 #include <boost/bind.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/mpl/vector.hpp>
 #include <ostream>
 
 sanguis::client::states::menu::menu(
@@ -31,7 +36,7 @@ sanguis::client::states::menu::menu(
 	my_base(ctx),
 	menu_(
 		context<machine>().sys(),
-		sanguis::menu::callbacks::object(
+		client::menu::callbacks::object(
 			boost::bind(
 				&menu::connect,
 				this,
@@ -42,6 +47,9 @@ sanguis::client::states::menu::menu(
 				this),
 			boost::bind(
 				&machine::start_server,
+				&(context<machine>())),
+			boost::bind(
+				&machine::quit,
 				&(context<machine>()))))
 {}
 
@@ -52,7 +60,7 @@ sanguis::client::states::menu::react(
 	context<machine>().dispatch();
 
 	menu_.process(
-		t.delta())
+		t.delta());
 
 	return discard_event();
 }
@@ -82,51 +90,46 @@ sanguis::client::states::menu::react(
 }
 
 boost::statechart::result
-sanguis::client::states::running::handle_default_msg(
-	messages::base const &m)
+sanguis::client::states::menu::handle_default_msg(
+	messages::base const &)
 {
-	SGE_LOG_WARNING(
-		log(),
-		sge::log::_1
-			<< SGE_TEXT("got unexpected event ")
-			<< sge::iconv(typeid(*m.message()).name()));
-	return discard_event();
+	return forward_event();
 }
 
 boost::statechart::result
-sanguis::client::states::running::operator()(
+sanguis::client::states::menu::operator()(
 	messages::net_error const &e)
 {
 	menu_.connection_error(
-		e.message());
+		e.get<messages::roles::error_message>());
 	return discard_event();
 }
 
 boost::statechart::result
-sanguis::client::states::running::operator()(
-	messages::connect const &c)
+sanguis::client::states::menu::operator()(
+	messages::connect const &)
 {
-	followup_state_ = c.state();
 	context<machine>().send(
 		messages::create(
 			messages::client_info(
 				SGE_TEXT("player1")
 			)
 		)
-	); // FIXME
+	);
 	return discard_event();
 }
 
 boost::statechart::result
-sanguis::client::states::running::operator()(
-	messages::disconnect const &c)
+sanguis::client::states::menu::operator()(
+	messages::disconnect const &)
 {
 	menu_.connection_error(
 		SGE_TEXT("The server closed the connection"));
+	return discard_event();
 }
 
 boost::statechart::result
-sanguis::client::states::connecting::operator()(
+sanguis::client::states::menu::operator()(
 	messages::assign_id const &m)
 {
 	SGE_LOG_DEBUG(
@@ -142,11 +145,21 @@ sanguis::client::states::connecting::operator()(
 			)
 		)
 	);
-	switch (followup_state_)
+	switch (
+		static_cast<connect_state::type>(
+			m.get<messages::roles::followup>()))
 	{
-		case followup_state::unpaused:
+		case connect_state::unpaused:
+			SGE_LOG_DEBUG(
+				log(),
+				sge::log::_1
+					<< SGE_TEXT("switching to state \"unpaused\""));
 			return transit<unpaused>();
-		case followup_state::paused
+		case connect_state::paused:
+			SGE_LOG_DEBUG(
+				log(),
+				sge::log::_1
+					<< SGE_TEXT("switching to state \"paused\""));
 			return transit<paused>();
 	}
 	throw sge::exception(
@@ -184,6 +197,7 @@ void sanguis::client::states::menu::connect(
 	{
 		menu_.connection_error(
 			SGE_TEXT("invalid port specification"));
+		return;
 	}
 
 	context<machine>().connect();

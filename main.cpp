@@ -1,8 +1,10 @@
 // own
 #include "server/machine.hpp"
-#include "server/states/start.hpp"
 #include "client/machine.hpp"
 #include "client/states/start.hpp"
+#include "server/states/running.hpp"
+#include "server/states/unpaused.hpp"
+#include "server/entities/entity.hpp"
 #include "load/context.hpp"
 #include "tick_event.hpp"
 #include "media_path.hpp"

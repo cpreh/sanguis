@@ -1,9 +1,11 @@
 #include "machine.hpp"
 #include "message_event.hpp"
+#include "../net/exception.hpp"
 #include "../messages/connect.hpp"
 #include "../messages/disconnect.hpp"
 #include "../messages/create.hpp"
 #include "../messages/base.hpp"
+#include "../messages/net_error.hpp"
 #include "../serialization.hpp"
 #include "../log.hpp"
 #include <sge/math/compare.hpp>
@@ -216,6 +218,7 @@ catch (net::exception const &e)
 			messages::create(
 				messages::net_error(
 					e.what()))));
+	return running_;
 }
 
 void sanguis::client::machine::quit()

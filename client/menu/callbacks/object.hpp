@@ -17,11 +17,13 @@ public:
 	object(
 		connect const &,
 		cancel_connect const &,
-		start_server const &);
+		start_server const &,
+		quit const &);
 	
 	connect connect_;
 	cancel_connect cancel_connect_;
 	start_server start_server_;
+	quit quit_;
 };
 }
 }
