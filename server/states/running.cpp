@@ -462,7 +462,7 @@ sanguis::server::states::running::operator()(
 		return discard_event();
 	}
 
-	p.die();
+	i->second->die();
 
 	SGE_LOG_INFO(
 		log(),
