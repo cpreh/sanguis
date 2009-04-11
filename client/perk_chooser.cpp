@@ -10,9 +10,15 @@
 #include <sge/systems/instance.hpp>
 #include <sge/image/loader.hpp>
 #include <sge/filesystem/path.hpp>
+#include <sge/math/dim/arithmetic.hpp>
+#include <sge/math/dim/output.hpp>
+#include <sge/math/vector/arithmetic.hpp>
+#include <sge/math/vector/output.hpp>
 #include <sge/assert.hpp>
 #include <sge/text.hpp>
 #include <sge/make_shared_ptr.hpp>
+#include <sge/structure_cast.hpp>
+#include <sge/lexical_cast.hpp>
 #include <boost/foreach.hpp>
 #include <boost/bind.hpp>
 
@@ -89,8 +95,7 @@ sanguis::client::perk_chooser::perk_chooser(
 				.activation(
 					sge::gui::activation_state::inactive)
 				.layout(
-					sge::make_shared_ptr<sge::gui::layouts::vertical>(
-						boost::ref(background_)))),
+					sge::make_shared_ptr<sge::gui::layouts::vertical>())),
 		perks_left_(
 			background_,
 			sge::gui::widget::parameters(),
@@ -103,10 +108,11 @@ sanguis::client::perk_chooser::perk_chooser(
 {
 	SGE_LOG_DEBUG(
 		mylogger,
-		sge::log::_1 << SGE_TEXT("started, dialog size: ")
-		             << background_.size()
-								 << SGE_TEXT(", dialog position: ")
-								 << background_.screen_pos());
+		sge::log::_1
+			<< SGE_TEXT("started, dialog size: ")
+			<< background_.size()
+			<< SGE_TEXT(", dialog position: ")
+			<< background_.screen_pos());
 }
 
 void sanguis::client::perk_chooser::process()

@@ -3,6 +3,8 @@
 
 #include "types/message.hpp"
 #include "roles/entity_id.hpp"
+#include "roles/followup.hpp"
+#include "enum.hpp"
 #include "make_class.hpp"
 #include "make_message_id.hpp"
 #include "entity_id.hpp"
@@ -23,6 +25,10 @@ typedef majutsu::composite<
 		majutsu::role<
 			entity_id,
 			roles::entity_id
+		>,
+		majutsu::role<
+			enum_,
+			roles::followup
 		>
 	>
 > assign_id_elements;

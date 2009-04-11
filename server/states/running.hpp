@@ -14,6 +14,7 @@
 #include "../waves/generator.hpp"
 #include "../../load/context_fwd.hpp"
 #include "../../messages/connect.hpp"
+#include "../../messages/disconnect.hpp"
 #include "../../messages/client_info.hpp"
 #include "../../messages/player_choose_perk.hpp"
 #include "../../messages/base_fwd.hpp"
@@ -93,6 +94,9 @@ public:
 	boost::statechart::result operator()(
 		net::id_type,
 		messages::connect const &);
+	boost::statechart::result operator()(
+		net::id_type,
+		messages::disconnect const &);
 	boost::statechart::result operator()(
 		net::id_type,
 		messages::client_info const &);

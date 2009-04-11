@@ -1,6 +1,5 @@
 #include "unpaused.hpp"
 #include "paused.hpp"
-#include "waiting.hpp"
 #include "../entities/player.hpp"
 #include "../entities/entity.hpp"
 #include "../entities/property.hpp"
@@ -227,32 +226,6 @@ sanguis::server::states::unpaused::operator()(
 }
 
 boost::statechart::result
-sanguis::server::states::unpaused::operator()(
-	net::id_type const id,
-	messages::disconnect const &) 
-{
-	// FIXME: this should be handled once and not in every state
-	if (context<running>().players().find(id) == context<running>().players().end())
-	{
-		SGE_LOG_WARNING(
-			log(),
-			sge::log::_1
-				<< SGE_TEXT("spectator ")
-				<< id
-				<< SGE_TEXT(" disconnected"));
-		return discard_event();
-	}
-
-	SGE_LOG_WARNING(
-		log(),
-		sge::log::_1
-			<< SGE_TEXT("disconnected"));
-	
-	// FIXME
-	return transit<waiting>();
-}
-
-boost::statechart::result
 sanguis::server::states::unpaused::react(
 	tick_event const &t)
 {
@@ -329,7 +302,6 @@ sanguis::server::states::unpaused::react(
 
 	return messages::unwrap<
 		boost::mpl::vector<
-			messages::disconnect,
 			messages::player_rotation,
 			messages::player_start_shooting,
 			messages::player_stop_shooting,

@@ -86,11 +86,6 @@ class unpaused
 	operator()(
 		net::id_type,
 		messages::player_pause const &);
-
-	boost::statechart::result
-	operator()(
-		net::id_type,
-		messages::disconnect const &);
 private:
 	boost::statechart::result
 	handle_default_msg(

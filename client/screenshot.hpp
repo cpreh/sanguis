@@ -2,11 +2,13 @@
 #define SANGUIS_CLIENT_SCREENSHOT_HPP_INCLUDED
 
 #include <sge/renderer/device_fwd.hpp>
+#include <sge/filesystem/path.hpp>
 #include <sge/image/loader_fwd.hpp>
 #include <sge/input/system_fwd.hpp>
 #include <sge/signal/scoped_connection.hpp>
 #include <sge/input/key_pair_fwd.hpp>
 #include <sge/noncopyable.hpp>
+#include <boost/function.hpp>
 
 namespace sanguis
 {
@@ -22,8 +24,7 @@ public:
 		sge::input::system_ptr);
 	void process();
 private:
-	sge::renderer::device_ptr const renderer_;
-	sge::image::loader_ptr const loader_;
+	boost::function<void (sge::filesystem::path const &)> make_screenshot;
 	bool active_;
 	sge::signal::scoped_connection const ic;
 

@@ -14,15 +14,19 @@ sanguis::client::screenshot::screenshot(
 	sge::renderer::device_ptr const _renderer,
 	sge::image::loader_ptr const _loader,
 	sge::input::system_ptr const is)
-	: renderer_(_renderer),
-		loader_(_loader),
-	  active_(false),
-		ic(
-			is->register_callback(
-				boost::bind(
-					&screenshot::input_callback,
-					this,
-					_1)))
+: make_screenshot(
+		boost::bind(
+			&sge::renderer::screenshot,
+			_renderer,
+			_loader,
+			_1)),
+  active_(false),
+	ic(
+		is->register_callback(
+			boost::bind(
+				&screenshot::input_callback,
+				this,
+				_1)))
 {
 }
 
@@ -39,10 +43,7 @@ void sanguis::client::screenshot::process()
 		sge::log::_1 << SGE_TEXT("writing screenshot: ")
 								 << p);
 	
-	sge::renderer::screenshot(
-		renderer_,
-		loader_,
-		p);
+	make_screenshot(p);
 		
 	active_ = false;
 }

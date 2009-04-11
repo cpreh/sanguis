@@ -12,6 +12,11 @@ void sanguis::net::client::connect(
 	return impl_->connect(s,port);
 }
 
+void sanguis::net::client::disconnect()
+{
+	return impl_->disconnect();
+}
+
 void sanguis::net::client::queue(
 	data_type const &data)
 {

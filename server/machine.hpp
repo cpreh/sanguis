@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_MACHINE_HPP_INCLUDED
 #define SANGUIS_SERVER_MACHINE_HPP_INCLUDED
 
-#include "states/start_fwd.hpp"
+#include "states/running_fwd.hpp"
 #include "client_data.hpp"
 #include "../load/context_fwd.hpp"
 #include "../messages/base.hpp"
@@ -22,7 +22,7 @@ namespace server
 {
 
 struct machine
-	: public boost::statechart::state_machine<machine, states::start>
+	: public boost::statechart::state_machine<machine, states::running>
 {
 public:
 	machine(

@@ -6,6 +6,7 @@
 #include "../types/message_type.hpp"
 #include "../../exception.hpp"
 #include <sge/text.hpp>
+#include <sge/cerr.hpp>
 #include <boost/static_assert.hpp>
 
 sanguis::messages::auto_ptr
@@ -17,6 +18,8 @@ sanguis::messages::serialization::deserialize(
 
 	// TODO: we can't specify the endianness of the message type at the moment
 	BOOST_STATIC_ASSERT(sizeof(types::message_type) == 1);
+
+	sge::cerr << "-----------------TYPE IS: " << int(type) << "\n";
 
 	// TODO: fix endianness here
 	stream.read(

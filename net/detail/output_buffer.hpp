@@ -19,6 +19,8 @@ public:
 	output_buffer();
 	~output_buffer();
 
+	void clear();
+
 	void push_back(
 		data_type const &);
 

@@ -36,6 +36,7 @@ public:
 	void connect(
 		hostname_type const &,
 		port_type);
+	void disconnect();
 	void queue(
 		data_type const &);
 	void process();
@@ -83,6 +84,7 @@ private:
 	void connect_handler(
 		boost::system::error_code const &,
 		boost::asio::ip::tcp::resolver::iterator);
+	void clear();
 };
 }
 }

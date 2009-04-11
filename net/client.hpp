@@ -35,6 +35,7 @@ public:
 	void connect(
 		hostname_type const &,
 		port_type);
+	void disconnect();
 	void queue(
 		data_type const &);
 	void process();

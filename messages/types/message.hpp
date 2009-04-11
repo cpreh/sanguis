@@ -29,6 +29,7 @@ enum type {
 	level_up,
 	max_health,
 	move,
+	net_error,
 	pause,
 	player_change_weapon,
 	player_choose_perk,

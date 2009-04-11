@@ -1,6 +1,5 @@
 #include "paused.hpp"
 #include "unpaused.hpp"
-#include "waiting.hpp"
 #include "../message_functor.hpp"
 #include "../log.hpp"
 #include "../entities/entity.hpp"
@@ -35,7 +34,6 @@ sanguis::server::states::paused::react(
 
 	return messages::unwrap<
 		boost::mpl::vector<
-			messages::disconnect,
 			messages::player_pause,
 			messages::player_unpause
 		>,
@@ -50,31 +48,6 @@ sanguis::server::states::paused::react(
 			_1
 		)
 	);
-}
-
-boost::statechart::result
-sanguis::server::states::paused::operator()(
-	net::id_type const id,
-	messages::disconnect const &)
-{
-	if (context<running>().players().find(id) == context<running>().players().end())
-	{
-		SGE_LOG_INFO(
-			log(),
-			sge::log::_1
-				<< SGE_TEXT("spectator ")
-				<< id
-				<< SGE_TEXT(" disconnected"));
-		return discard_event();
-	}
-
-	SGE_LOG_INFO(
-		log(),
-		sge::log::_1
-			<< SGE_TEXT("client with id ")
-			<< id
-			<< SGE_TEXT(" disconnected"));
-	return transit<waiting>();
 }
 
 boost::statechart::result

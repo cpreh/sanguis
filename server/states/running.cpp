@@ -1,5 +1,4 @@
 #include "running.hpp"
-#include "waiting.hpp"
 #include "../entities/base_parameters.hpp"
 #include "../entities/property.hpp"
 #include "../collision/satellite.hpp"
@@ -19,6 +18,7 @@
 #include "../log.hpp"
 #include "../send_available_perks.hpp"
 #include "../../messages/assign_id.hpp"
+#include "../../messages/disconnect.hpp"
 #include "../../messages/unwrap.hpp"
 #include "../../messages/create.hpp"
 #include "../../resolution.hpp"
@@ -40,7 +40,8 @@
 #include <boost/tr1/random.hpp>
 #include <ostream>
 
-sanguis::server::states::running::running(my_context ctx)
+sanguis::server::states::running::running(
+	my_context ctx)
 :
 	my_base(ctx),
 	coll_connection(
@@ -74,8 +75,10 @@ sanguis::server::states::running::running(my_context ctx)
 	SGE_LOG_DEBUG(
 		log(),
 		sge::log::_1
-			<< SGE_TEXT("constructor")
+			<< SGE_TEXT("constructor, listening")
 	);
+
+	context<machine>().listen();
 
 	create_decorations();
 
@@ -313,6 +316,7 @@ sanguis::server::states::running::react(
 		boost::mpl::vector<
 			messages::client_info,
 			messages::connect,
+			messages::disconnect,
 			messages::player_choose_perk
 		>,
 		boost::statechart::result
@@ -419,10 +423,60 @@ sanguis::server::states::running::operator()(
 
 boost::statechart::result
 sanguis::server::states::running::operator()(
-	net::id_type,
+	net::id_type const id,
 	messages::connect const &)
 {
-	// FIXME
+	SGE_LOG_INFO(
+		log(),
+		sge::log::_1
+			<< SGE_TEXT("client ")
+			<< id
+			<< SGE_TEXT(" connected"));
+	return discard_event();
+}
+
+boost::statechart::result
+sanguis::server::states::running::operator()(
+	net::id_type const id,
+	messages::disconnect const &)
+{
+	player_map::iterator i = 
+		context<running>().players().find(id);
+	if (i == context<running>().players().end())
+	{
+		SGE_LOG_INFO(
+			log(),
+			sge::log::_1
+				<< SGE_TEXT("spectator ")
+				<< id
+				<< SGE_TEXT(" disconnected"));
+		return discard_event();
+	}
+
+	entities::player &p = 
+		*(i->second);
+	players_.erase(
+		i);
+	// FIXME!
+	for (entities::container::iterator j = entities_.begin();
+	     j != entities_.end();
+			 ++j)
+	{
+		if (&(*j) == &p)
+		{
+			entities_.erase(
+				j);
+			break;
+		}
+	}
+
+	SGE_LOG_INFO(
+		log(),
+		sge::log::_1
+			<< SGE_TEXT("client with id ")
+			<< id
+			<< SGE_TEXT(" disconnected"));
+
 	return discard_event();
 }
 
