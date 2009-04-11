@@ -1,4 +1,6 @@
 #include "running.hpp"
+#include "unpaused.hpp"
+#include "../../connect_state.hpp"
 #include "../entities/base_parameters.hpp"
 #include "../entities/property.hpp"
 #include "../collision/satellite.hpp"
@@ -26,6 +28,7 @@
 #include "../../exception.hpp"
 #include <sge/iconv.hpp>
 #include <sge/math/constants.hpp>
+#include <sge/algorithm/ptr_container_erase.hpp>
 #include <sge/math/vector/output.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>
@@ -375,10 +378,16 @@ sanguis::server::states::running::operator()(
 	players()[net_id] = dynamic_cast<entities::player *>(
 		new_player.get());
 
+	connect_state::type const state = 
+		state_cast<unpaused const *>() != 0
+		? connect_state::unpaused
+		: connect_state::paused;
+
 	context<machine>().send(
 		messages::create(
 			messages::assign_id(
-				new_player->id()
+				new_player->id(),
+				state
 			)
 		),
 		net_id
@@ -457,18 +466,9 @@ sanguis::server::states::running::operator()(
 		*(i->second);
 	players_.erase(
 		i);
-	// FIXME!
-	for (entities::container::iterator j = entities_.begin();
-	     j != entities_.end();
-			 ++j)
-	{
-		if (&(*j) == &p)
-		{
-			entities_.erase(
-				j);
-			break;
-		}
-	}
+	sge::algorithm::ptr_container_erase(
+		entities_,
+		&p);
 
 	SGE_LOG_INFO(
 		log(),
