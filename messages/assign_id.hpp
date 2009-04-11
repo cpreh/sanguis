@@ -2,12 +2,10 @@
 #define SANGUIS_MESSAGES_ASSIGN_ID_HPP_INCLUDED
 
 #include "types/message.hpp"
-#include "roles/entity_id.hpp"
 #include "roles/followup.hpp"
 #include "enum.hpp"
 #include "make_class.hpp"
-#include "make_message_id.hpp"
-#include "entity_id.hpp"
+#include "bind_entity_message.hpp"
 #include <majutsu/composite.hpp>
 #include <majutsu/role.hpp>
 #include <boost/mpl/vector.hpp>
@@ -19,13 +17,9 @@ namespace messages
 
 typedef majutsu::composite<
 	boost::mpl::vector<
-		make_message_id<
+		bind_entity_message<
 			types::message::assign_id
 		>::type,
-		majutsu::role<
-			entity_id,
-			roles::entity_id
-		>,
 		majutsu::role<
 			enum_,
 			roles::followup

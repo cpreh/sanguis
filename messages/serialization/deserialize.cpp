@@ -19,8 +19,6 @@ sanguis::messages::serialization::deserialize(
 	// TODO: we can't specify the endianness of the message type at the moment
 	BOOST_STATIC_ASSERT(sizeof(types::message_type) == 1);
 
-	sge::cerr << "-----------------TYPE IS: " << int(type) << "\n";
-
 	// TODO: fix endianness here
 	stream.read(
 		reinterpret_cast<char *>(&type), sizeof(type)
