@@ -49,8 +49,9 @@ void sanguis::draw::bullet::update(
 			static_cast<funit>(160),
 		tail_length = 
 			std::min(
-				static_cast<funit>(length((*origin) - center())),
-				max_tail_length);
+				sge::math::vector::length<funit>((*origin) - center()),
+				max_tail_length
+			);
 
 	vector2 const
 		newsize(
