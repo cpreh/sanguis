@@ -22,7 +22,7 @@ private:
 	explicit collection(
 		resource::context const &);
 
-	friend struct context;
+	friend class context;
 
 	resource::context const &ctx;
 

@@ -186,9 +186,10 @@ void sanguis::net::detail::server_impl::read_handler(
 
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1 << SGE_TEXT("server: reading ")
-		             << bytes 
-								 << SGE_TEXT(" bytes."));
+		sge::log::_1
+			<< SGE_TEXT("server: reading ")
+			<< bytes 
+			<< SGE_TEXT(" bytes."));
 	
 	data_signal_(
 		c.id_,
@@ -231,7 +232,7 @@ void sanguis::net::detail::server_impl::write_handler(
 		sge::log::_1
 			<< SGE_TEXT("server: wrote ")
 			<< bytes 
-			 << SGE_TEXT(" bytes.")
+			<< SGE_TEXT(" bytes.")
 	);
 
 	c.output_.erase(
@@ -318,9 +319,10 @@ void sanguis::net::detail::server_impl::handle_error(
 	// do we have an error or a disconnect...
 	if (!detail::is_disconnect(e))
 		throw sge::exception(
-			sge::iconv(message)+
+			message +
 			SGE_TEXT(" error: ")+
-			sge::iconv(e.message()));
+			sge::iconv(e.message())
+		);
 
 	SGE_LOG_DEBUG(
 		log(),
@@ -328,7 +330,7 @@ void sanguis::net::detail::server_impl::handle_error(
 			<< SGE_TEXT("server: disconnected ")
 			<< c.id_ 
 			 << SGE_TEXT(" (")
-			 << sge::iconv(e.message()) 
+			 << e.message() 
 			 << SGE_TEXT(")")
 	);
 

@@ -250,9 +250,7 @@ void sanguis::client::states::menu::connect()
 {
 #ifndef SANGUIS_STATES_MENU_DEBUG
 	context<machine>().hostname(
-		sge::iconv(
-			connect_host_edit.text()
-		)
+		connect_host_edit.text()
 	);
 	context<machine>().port(
 		boost::lexical_cast<net::port_type>(

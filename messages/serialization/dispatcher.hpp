@@ -11,7 +11,7 @@ namespace messages
 namespace serialization
 {
 
-class reader;
+struct reader;
 
 template<
 	typename T

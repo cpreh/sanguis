@@ -58,8 +58,8 @@ public:
 private:
 	void clamp();
 	
-	value_type const base_;
 	value_type
+		base_,
 		max_linear_,
 		max_constant_,
 		max_,

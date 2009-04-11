@@ -7,7 +7,7 @@ namespace server
 {
 namespace states
 {
-class start;
+struct start;
 }
 }
 }

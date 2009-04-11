@@ -88,7 +88,7 @@ void sanguis::net::detail::client_impl::process()
 				this,
 				_1,
 				_2));
-		handlers_++;
+		++handlers_;
 	}
 
 	if (!handlers_)
@@ -175,7 +175,7 @@ void sanguis::net::detail::client_impl::read_handler(
 	boost::system::error_code const &e,
 	std::size_t const bytes)
 {
-	handlers_--;
+	--handlers_;
 	
 	if (e)
 	{

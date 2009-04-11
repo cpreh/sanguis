@@ -5,7 +5,7 @@
 #include "../value_type.hpp"
 #include "../id_type.hpp"
 #include <sge/noncopyable.hpp>
-#include <boost/tr1/array.hpp>
+#include <boost/array.hpp>
 #include <boost/asio/io_service.hpp>
 #include <boost/asio/ip/tcp.hpp>
 
@@ -20,7 +20,8 @@ class connection {
 	SGE_NONCOPYABLE(connection)
 public:
 	// typedefs
-	typedef std::tr1::array<
+	// TODO: asio doesn't work well with tr1::array
+	typedef boost::array<
 		value_type,
 		4096
 	> static_buffer_type;

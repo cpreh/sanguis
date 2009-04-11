@@ -5,7 +5,7 @@ namespace sanguis
 {
 namespace server
 {
-class environment;
+struct environment;
 }
 }
 
