@@ -462,13 +462,7 @@ sanguis::server::states::running::operator()(
 		return discard_event();
 	}
 
-	entities::player &p = 
-		*(i->second);
-	players_.erase(
-		i);
-	sge::algorithm::ptr_container_erase(
-		entities_,
-		&p);
+	i->second->die();
 
 	SGE_LOG_INFO(
 		log(),
