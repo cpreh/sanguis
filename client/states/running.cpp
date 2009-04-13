@@ -21,6 +21,7 @@
 #include <sge/audio/player.hpp>
 #include <sge/audio/pool.hpp>
 #include <sge/renderer/state/var.hpp>
+#include <sge/systems/instance.hpp>
 #include <sge/renderer/state/states.hpp>
 #include <sge/container/raw_vector_impl.hpp>
 #include <sge/assert.hpp>
@@ -60,6 +61,7 @@ sanguis::client::states::running::running(
 			&running::send_message,
 			this,
 			_1),
+		context<machine>().sys().image_loader(),
 		context<machine>().renderer(),
 		context<machine>().console_wrapper().con),
 	input(
@@ -78,7 +80,8 @@ sanguis::client::states::running::running(
 		boost::bind(
 			&running::send_perk_choose,
 			this,
-			_1))
+			_1),
+		logic_.cursor())
 				/*
 	perk_chooser_(
 		context<machine>().sys(),

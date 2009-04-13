@@ -79,7 +79,7 @@ sanguis::server::states::paused::operator()(
 boost::statechart::result
 sanguis::server::states::paused::handle_default_msg(
 	net::id_type,
-	messages::base const &m)
+	messages::base const &)
 {
 	return forward_event();
 }

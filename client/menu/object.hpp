@@ -2,12 +2,15 @@
 #define SANGUIS_CLIENT_MENU_OBJECT_HPP_INCLUDED
 
 #include "callbacks/object.hpp"
+#include "menus/main.hpp"
+#include "menus/connect.hpp"
+#include "menus/connect_box.hpp"
 #include "button.hpp"
 #include "mover.hpp"
+#include "../cursor.hpp"
 #include "../../time_type.hpp"
 #include <sge/systems/instance_fwd.hpp>
 #include <sge/filesystem/path.hpp>
-#include <sge/noncopyable.hpp>
 #include <sge/gui/widgets/buttons/text.hpp>
 #include <sge/gui/widgets/backdrop.hpp>
 #include <sge/gui/widgets/graphics.hpp>
@@ -16,6 +19,7 @@
 #include <sge/gui/widget.hpp>
 #include <sge/gui/manager.hpp>
 #include <sge/signal/connection_manager.hpp>
+#include <sge/noncopyable.hpp>
 #include <sge/string.hpp>
 
 namespace sanguis
@@ -45,33 +49,14 @@ private:
 
 	sge::gui::manager m;
 
-	sge::gui::widget main_menu;
-		button main_connect;
-		button main_start;
-		button main_exit;
-
-	sge::gui::widget connect_menu;
-		sge::gui::widget connect_host;
-			sge::gui::widgets::graphics connect_host_label;
-			sge::gui::widgets::edit connect_host_edit;
-		sge::gui::widget connect_port;
-			sge::gui::widgets::graphics connect_port_label;
-			sge::gui::widgets::edit connect_port_edit;
-		sge::gui::widget connect_connect_wrapper;
-			client::menu::button connect_connect;
-		sge::gui::widget connect_return_wrapper;
-			client::menu::button connect_return;
+	menus::main main_;
+	menus::connect connect_;
+	menus::connect_box connect_box_;
 	
-	// put this in separate structs
-	sge::gui::widgets::backdrop mb_connect;
-		sge::gui::widgets::label mb_connect_label;
-		sge::gui::widget mb_connect_buttons;
-			sge::gui::widgets::buttons::text mb_connect_buttons_retry;
-			sge::gui::widgets::buttons::text mb_connect_buttons_cancel;
-
 	mover mover_;
 	sge::signal::connection_manager connections_;
 	callbacks::object const callbacks_;
+	cursor_ptr const cursor_;
 
 	sge::string 
 		connection_host_,

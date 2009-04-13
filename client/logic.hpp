@@ -3,6 +3,7 @@
 
 #include "player_action.hpp"
 #include "send_callback.hpp"
+#include "cursor.hpp"
 #include "../weapon_type.hpp"
 #include "../entity_id.hpp"
 #include "../messages/give_weapon.hpp"
@@ -11,6 +12,7 @@
 #include <sge/math/vector/static.hpp>
 #include <sge/math/vector/basic_decl.hpp>
 #include <sge/renderer/device_fwd.hpp>
+#include <sge/image/loader_fwd.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/gfx_fwd.hpp>
 #include <sge/signal/scoped_connection.hpp>
@@ -28,9 +30,10 @@ namespace client
 class logic {
 	SGE_NONCOPYABLE(logic)
 public:
-	explicit logic(
+	logic(
 		send_callback const &,
-		sge::renderer::device_ptr device,
+		sge::image::loader_ptr,
+		sge::renderer::device_ptr,
 		sge::console::gfx &);	
 	void handle_player_action(
 		player_action const &);
@@ -48,6 +51,7 @@ public:
 
 	sge::sprite::point const
 	cursor_pos() const;
+	sanguis::client::cursor_ptr cursor();
 private:
 	void handle_move_x(
 		key_scale);
@@ -95,8 +99,8 @@ private:
 		float,
 		2
 	>::type                         direction;
-	sge::sprite::point              cursor_pos_,
-	                                player_center;
+	sanguis::client::cursor_ptr     cursor_;
+	sge::sprite::point              player_center;
 	weapon_type::type               current_weapon;
 	bool                            paused;
 	sge::time::timer                rotation_timer;

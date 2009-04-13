@@ -3,6 +3,7 @@
 
 #include "../perk_type.hpp"
 #include "level_type.hpp"
+#include "cursor.hpp"
 #include "perk_container.hpp"
 #include <sge/systems/instance_fwd.hpp>
 #include <sge/gui/widgets/buttons/image.hpp>
@@ -26,8 +27,8 @@ public:
 
 	perk_chooser(
 		sge::systems::instance &,
-		send_callback const &
-		);
+		send_callback const &,
+		sanguis::client::cursor_ptr);
 	void process();
 	void perks(perk_container const &);
 	void level_up(level_type);

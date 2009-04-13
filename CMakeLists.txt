@@ -59,6 +59,7 @@ FILE (GLOB files
 	net/detail/*.cpp
 	client/*.cpp
 	client/menu/*.cpp
+	client/menu/menus/*.cpp
 	client/menu/callbacks/*.cpp
 	client/states/*.cpp
 	client_messages/*.cpp

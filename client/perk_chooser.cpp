@@ -71,7 +71,8 @@ sanguis::client::perk_chooser::activation::~activation()
 
 sanguis::client::perk_chooser::perk_chooser(
 	sge::systems::instance &_sys,
-	send_callback const &_send_callback)
+	send_callback const &_send_callback,
+	sanguis::client::cursor_ptr const _cursor)
 	: sys_(_sys),
 	  perks_(),
 		current_level_(
@@ -84,7 +85,8 @@ sanguis::client::perk_chooser::perk_chooser(
 			sys_.input_system(),
 			sys_.font_system(),
 			sge::gui::skin_ptr(
-				new sge::gui::skins::standard())),
+				new sge::gui::skins::standard()),
+			_cursor),
 		background_(
 			m_,
 			sge::gui::widget::parameters()
@@ -118,7 +120,10 @@ sanguis::client::perk_chooser::perk_chooser(
 void sanguis::client::perk_chooser::process()
 {
 	if (activated())
+	{
+		m_.update();
 		m_.draw();
+	}
 }
 
 void sanguis::client::perk_chooser::perks(

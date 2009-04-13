@@ -28,7 +28,6 @@ public:
 	unpaused(my_context);
 	boost::statechart::result react(tick_event const &);
 	boost::statechart::result react(message_event const &);
-	
 	boost::statechart::result operator()(messages::pause const &);
 private:
 	boost::statechart::result handle_default_msg(messages::base const &);

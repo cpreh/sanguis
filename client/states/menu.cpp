@@ -200,6 +200,10 @@ void sanguis::client::states::menu::connect(
 		return;
 	}
 
+	SGE_LOG_DEBUG(
+		log(),
+		sge::log::_1 << SGE_TEXT("connecting..."));
+
 	context<machine>().connect();
 }
 
