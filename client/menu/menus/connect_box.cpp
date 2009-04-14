@@ -2,6 +2,8 @@
 #include "../../../resolution.hpp"
 #include <sge/font/align_h.hpp>
 #include <sge/font/align_v.hpp>
+#include <sge/renderer/colors.hpp>
+#include <sge/systems/instance.hpp>
 #include <sge/gui/layouts/vertical.hpp>
 #include <sge/gui/layouts/horizontal.hpp>
 #include <sge/structure_cast.hpp>
@@ -9,7 +11,8 @@
 #include <sge/text.hpp>
 
 sanguis::client::menu::menus::connect_box::connect_box(
-	sge::gui::widget::parent_data const &_parent)
+	sge::gui::widget::parent_data const &_parent,
+	sge::systems::instance const &)
 :
 	parent(
 		_parent,
@@ -35,7 +38,10 @@ sanguis::client::menu::menus::connect_box::connect_box(
 		sge::gui::widget::parameters(),
 		SGE_TEXT("foobar"),
 		sge::font::align_h::center,
-		sge::font::align_v::center),
+		sge::font::align_v::center,
+		boost::none,
+		sge::font::metrics_ptr(),
+		sge::renderer::colors::white()),
 	
 	buttons(
 		parent,

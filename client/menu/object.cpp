@@ -60,7 +60,8 @@ sanguis::client::menu::object::object(
 		sys_),
 
 	connect_box_(
-		m),
+		m,
+		sys_),
 
 	mover_(
 		m,

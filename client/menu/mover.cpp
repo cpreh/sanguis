@@ -24,8 +24,29 @@
 
 namespace
 {
-sanguis::client::menu::mover::float_type const time_step = 
-	static_cast<sanguis::client::menu::mover::float_type>(0.001);
+sanguis::client::menu::mover::float_type const 
+	time_step = 
+		static_cast<sanguis::client::menu::mover::float_type>(0.001),
+	epsilon = 
+		static_cast<sanguis::client::menu::mover::float_type>(3.0);
+
+sge::gui::point const center_widget(sge::gui::widget &w)
+{
+	return sge::structure_cast<sge::gui::point>(
+		sge::structure_cast<sge::gui::dim>(
+				sanguis::resolution())/
+			static_cast<sge::gui::unit>(2)-
+			sge::structure_cast<sge::gui::dim>(
+				w.size())/
+			static_cast<sge::gui::unit>(2));
+}
+
+bool almost_zero(sanguis::client::menu::mover::float_vector const &v)
+{
+	return 
+		std::abs(v.x()) < epsilon && 
+		std::abs(v.y()) < epsilon;
+}
 }
 
 sanguis::client::menu::mover::mover(
@@ -51,17 +72,12 @@ sanguis::client::menu::mover::mover(
 		sge::gui::activation_state::active);
 	
 	current_->relative_pos(
-		sge::structure_cast<sge::gui::point>(
-			sge::structure_cast<sge::gui::dim>(
-				resolution())/
-			static_cast<sge::gui::unit>(2)-
-			sge::structure_cast<sge::gui::dim>(
-				current_->size())/
-			static_cast<sge::gui::unit>(2)));
+		center_widget(
+			*current_));
 
-	current_entry_.current = sge::structure_cast<float_vector>(
-		current_->screen_pos()
-	);
+	current_entry_.current = 
+		sge::structure_cast<float_vector>(
+			current_->relative_pos());
 
 	current_entry_.target = current_entry_.current;
 }
@@ -83,7 +99,6 @@ void sanguis::client::menu::mover::update(
 			iterations)*
 		time_step;
 	
-	// TODO: actually, the visibility has to be updated only once
 	for (unsigned i = 0; i < iterations; ++i)
 	{
 		update_position(
@@ -91,21 +106,24 @@ void sanguis::client::menu::mover::update(
 			current_entry_,
 			time_step);
 
-		update_visibility(
-			*current_,
-			current_entry_);
-
 		BOOST_FOREACH(container::reference r,to_move_)
 		{
 			update_position(
 				*r.first,
 				r.second,
 				time_step);
-
-			update_visibility(
-				*r.first,
-				r.second);
 		}
+	}
+
+	update_visibility(
+		*current_,
+		current_entry_);
+
+	BOOST_FOREACH(container::reference r,to_move_)
+	{
+		update_visibility(
+			*r.first,
+			r.second);
 	}
 }
 
@@ -126,8 +144,12 @@ void sanguis::client::menu::mover::reset(
 	current_ = &w;
 	current_entry_.current = random_pos();
 	current_->relative_pos(
-		sge::structure_cast<sge::gui::point>
-			(current_entry_.current));
+		sge::structure_cast<sge::gui::point>(
+			current_entry_.current));
+	current_entry_.target = 
+		sge::structure_cast<float_vector>(
+			center_widget(
+				w));
 	current_->activation(
 		sge::gui::activation_state::active);
 }
@@ -140,7 +162,7 @@ void sanguis::client::menu::mover::update_position(
 	float_vector const 
 		diff = e.target - e.current;
 	
-	if (!sge::math::vector::is_null(diff))
+	if (!almost_zero(diff))
 		e.current += 
 			static_cast<float_type>(t)*
 			speed_*
@@ -155,15 +177,8 @@ void sanguis::client::menu::mover::update_visibility(
 	sge::gui::widget &w,
 	entry const &e)
 {
-	float_vector const center = 
-		sge::structure_cast<float_vector>(
-			sge::structure_cast<float_dim>(
-				resolution())/
-			static_cast<float_type>(2)-
-			sge::structure_cast<float_dim>(
-				w.size())/
-			static_cast<float_type>(2)),
-		diff = center - e.current;
+	float_vector const diff = 
+		current_entry_.target - e.current;
 
 	float_type const visibility = 
 		static_cast<float_type>(1)-
@@ -186,9 +201,7 @@ void sanguis::client::menu::mover::update_visibility(
 				static_cast<sge::renderer::color_channel_8>(
 					static_cast<float_type>(
 						max)
-					*visibility)
-			)
-	);
+					*visibility)));
 }
 
 sanguis::client::menu::mover::float_vector const sanguis::client::menu::mover::random_pos() const
@@ -208,14 +221,6 @@ sanguis::client::menu::mover::float_vector const sanguis::client::menu::mover::r
 			static_cast<float_type>(0),
 			static_cast<float_type>(2)*sge::math::pi<float_type>()
 		));
-	
-	/*
-	float_vector const center = 
-		sge::structure_cast<float_vector>(
-			sge::structure_cast<float_dim>(
-				resolution())/
-			static_cast<float_type>(2));
-			*/
 	
 	float_type const new_angle = 
 		angle();

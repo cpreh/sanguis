@@ -31,9 +31,7 @@ public:
 	typedef float float_type;
 	typedef sge::math::vector::static_<float_type,2>::type float_vector;
 	typedef sge::math::dim::static_<float_type,2>::type float_dim;
-
 private:
-
 	struct entry
 	{
 		float_vector current;
