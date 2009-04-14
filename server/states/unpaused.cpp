@@ -250,6 +250,7 @@ sanguis::server::states::unpaused::react(
 				send(message_convert::remove(*i));
 			}
 			
+			// TODO: use find!
 			// we have to remove the player link as well
 			if(i->type() == entity_type::player)
 			{

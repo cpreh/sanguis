@@ -506,7 +506,6 @@ void sanguis::draw::scene::render_dead()
 		background().paint_dead(
 			temp_sys
 		);
-	// else TODO: create a fallback!
 	
 	dead_list.clear();
 }
