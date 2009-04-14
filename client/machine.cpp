@@ -18,6 +18,7 @@
 #include <sge/mainloop/dispatch.hpp>
 #include <sge/container/raw_vector_impl.hpp>
 #include <sge/algorithm/append.hpp>
+#include <sge/utf8/convert.hpp>
 #include <boost/bind.hpp>
 #include <boost/lambda/bind.hpp>
 #include <boost/lambda/construct.hpp>
@@ -217,7 +218,13 @@ catch (net::exception const &e)
 		message_event(
 			messages::create(
 				messages::net_error(
-					e.what()))));
+					sge::utf8::convert(
+						e.what()
+					)
+				)
+			)
+		)
+	);
 	return running_;
 }
 

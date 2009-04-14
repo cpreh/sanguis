@@ -35,6 +35,7 @@
 #include <sge/log/headers.hpp>
 #include <sge/collision/satellite.hpp>
 #include <sge/collision/world.hpp>
+#include <sge/utf8/convert.hpp>
 #include <sge/text.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/assign/list_of.hpp>
@@ -341,7 +342,9 @@ sanguis::server::states::running::operator()(
 	messages::client_info const &m)
 {
 	string const &name(
-		m.get<messages::string>()
+		sge::utf8::convert(
+			m.get<messages::string>()
+		)
 	);
 
 	SGE_LOG_DEBUG(

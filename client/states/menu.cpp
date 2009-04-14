@@ -21,6 +21,7 @@
 #include <sge/text.hpp>
 #include <sge/cerr.hpp>
 #include <sge/iconv.hpp>
+#include <sge/utf8/convert.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <sge/structure_cast.hpp>
 #include <sge/lexical_cast.hpp>
@@ -101,7 +102,10 @@ sanguis::client::states::menu::operator()(
 	messages::net_error const &e)
 {
 	menu_.connection_error(
-		e.get<messages::roles::error_message>());
+		sge::utf8::convert(
+			e.get<messages::roles::error_message>()
+		)
+	);
 	return discard_event();
 }
 
@@ -112,7 +116,9 @@ sanguis::client::states::menu::operator()(
 	context<machine>().send(
 		messages::create(
 			messages::client_info(
-				SGE_TEXT("player1")
+				sge::utf8::convert(
+					SGE_TEXT("player1")
+				)
 			)
 		)
 	);
