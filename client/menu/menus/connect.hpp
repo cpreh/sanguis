@@ -22,7 +22,7 @@ struct connect
 		sge::gui::widget::parent_data const &,
 		sge::filesystem::path const &buttons_path,
 		sge::filesystem::path const &labels_path,
-		sge::systems::instance &);
+		sge::systems::instance const &);
 
 	sge::gui::widget parent;
 		sge::gui::widget host;

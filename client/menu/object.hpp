@@ -33,14 +33,14 @@ class object
 SGE_NONCOPYABLE(object)
 public:
 	object(
-		sge::systems::instance &,
+		sge::systems::instance const &,
 		callbacks::object const &);
 	void process(
 		time_type);
 	void connection_error(
 		sge::string const &message);
 private:
-	sge::systems::instance &sys_;
+	sge::systems::instance const &sys_;
 	
 	sge::filesystem::path const 
 		menu_path,

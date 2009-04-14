@@ -23,9 +23,15 @@ sanguis::client::menu::menus::connect_box::connect_box(
 				sge::gui::activation_state::inactive)
 			.layout(
 				sge::make_shared_ptr<sge::gui::layouts::vertical>())),
+	
+	label_wrapper(
+		parent,
+		sge::gui::widget::parameters()
+			.layout(
+				sge::make_shared_ptr<sge::gui::layouts::horizontal>())),
 
 	label_(
-		parent,
+		label_wrapper,
 		sge::gui::widget::parameters(),
 		SGE_TEXT("foobar"),
 		sge::font::align_h::center,

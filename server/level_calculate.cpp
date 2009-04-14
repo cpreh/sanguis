@@ -8,6 +8,7 @@ sanguis::server::level_calculate(
 	level_type)
 {
 	return static_cast<level_type>(
+		static_cast<space_unit>(0.3)*
 		std::sqrt(
 			static_cast<space_unit>(e)
 		)

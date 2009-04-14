@@ -20,7 +20,8 @@ struct connect_box
 		sge::gui::widget::parent_data const &);
 
 	sge::gui::widgets::backdrop parent;
-		sge::gui::widgets::label label_;
+		sge::gui::widget label_wrapper;
+			sge::gui::widgets::label label_;
 		sge::gui::widget buttons;
 			sge::gui::widgets::buttons::text buttons_retry;
 			sge::gui::widgets::buttons::text buttons_cancel;

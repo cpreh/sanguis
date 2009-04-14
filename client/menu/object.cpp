@@ -25,7 +25,7 @@ sge::log::logger mylogger(
 }
 
 sanguis::client::menu::object::object(
-	sge::systems::instance &_sys,
+	sge::systems::instance const &_sys,
 	callbacks::object const &_callbacks)
 : 
 	sys_(_sys),

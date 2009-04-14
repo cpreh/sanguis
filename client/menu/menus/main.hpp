@@ -19,7 +19,7 @@ struct main
 	main(
 		sge::gui::widget::parent_data const &,
 		sge::filesystem::path const &,
-		sge::systems::instance &);
+		sge::systems::instance const &);
 
 	sge::gui::widget parent;
 	button connect;
