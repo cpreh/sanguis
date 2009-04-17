@@ -11,12 +11,12 @@
 #include <sge/text.hpp>
 
 sanguis::client::menu::menus::connect_box::connect_box(
-	sge::gui::widget::parent_data const &_parent,
+	sge::gui::widgets::parent_data const &_parent,
 	sge::systems::instance const &)
 :
 	parent(
 		_parent,
-		sge::gui::widget::parameters()
+		sge::gui::widgets::parameters()
 			.pos(
 				sge::gui::point::null())
 			.size(
@@ -29,34 +29,32 @@ sanguis::client::menu::menus::connect_box::connect_box(
 	
 	label_wrapper(
 		parent,
-		sge::gui::widget::parameters()
+		sge::gui::widgets::parameters()
 			.layout(
 				sge::make_shared_ptr<sge::gui::layouts::horizontal>())),
 
 	label_(
 		label_wrapper,
-		sge::gui::widget::parameters(),
+		sge::gui::widgets::parameters(),
 		SGE_TEXT("foobar"),
 		sge::font::align_h::center,
 		sge::font::align_v::center,
-		boost::none,
-		sge::font::metrics_ptr(),
-		sge::renderer::colors::white()),
+		boost::none),
 	
 	buttons(
 		parent,
-		sge::gui::widget::parameters()
+		sge::gui::widgets::parameters()
 			.layout(
 				sge::make_shared_ptr<sge::gui::layouts::horizontal>())),
 	
 	buttons_retry(
 		buttons,
-		sge::gui::widget::parameters(),
+		sge::gui::widgets::parameters(),
 		SGE_TEXT("Retry")),
 
 	buttons_cancel(
 		buttons,
-		sge::gui::widget::parameters(),
+		sge::gui::widgets::parameters(),
 		SGE_TEXT("Cancel"))
 {
 }

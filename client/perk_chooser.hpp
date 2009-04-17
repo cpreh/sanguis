@@ -14,6 +14,7 @@
 #include <sge/noncopyable.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
 #include <boost/function.hpp>
+#include <map>
 
 namespace sanguis
 {

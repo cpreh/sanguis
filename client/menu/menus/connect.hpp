@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_MENU_MENUS_CONNECT_HPP_INCLUDED
 
 #include "../button.hpp"
-#include <sge/gui/widget.hpp>
+#include <sge/gui/widgets/base.hpp>
 #include <sge/gui/widgets/graphics.hpp>
 #include <sge/gui/widgets/edit.hpp>
 #include <sge/filesystem/path.hpp>
@@ -19,21 +19,21 @@ namespace menus
 struct connect
 {
 	connect(
-		sge::gui::widget::parent_data const &,
+		sge::gui::widgets::parent_data const &,
 		sge::filesystem::path const &buttons_path,
 		sge::filesystem::path const &labels_path,
 		sge::systems::instance const &);
 
-	sge::gui::widget parent;
-		sge::gui::widget host;
+	sge::gui::widgets::base parent;
+		sge::gui::widgets::base host;
 			sge::gui::widgets::graphics host_label;
 			sge::gui::widgets::edit host_edit;
-		sge::gui::widget port;
+		sge::gui::widgets::base port;
 			sge::gui::widgets::graphics port_label;
 			sge::gui::widgets::edit port_edit;
-		sge::gui::widget connect_wrapper;
+		sge::gui::widgets::base connect_wrapper;
 			button connect_;
-		sge::gui::widget return_wrapper;
+		sge::gui::widgets::base return_wrapper;
 			button return_;
 };
 }

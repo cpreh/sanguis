@@ -16,7 +16,7 @@ class button : public sge::gui::widgets::buttons::image
 {
 public:
 	button(
-		sge::gui::widget::parent_data const &,
+		sge::gui::widgets::parent_data const &,
 		sge::image::loader_ptr,
 		sge::filesystem::path const &,
 		sge::string const &);
@@ -24,7 +24,7 @@ public:
 	void process(sge::gui::events::invalid_area const &);
 	sge::gui::dim const size_hint() const;
 private:
-	using widget::process;
+	using sge::gui::widgets::base::process;
 };
 }
 }

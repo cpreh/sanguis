@@ -40,9 +40,9 @@ sanguis::client::menu::object::object(
 		sys_.renderer(),
 		sys_.image_loader(),
 		sys_.input_system(),
-		sys_.font_system(),
-		sge::gui::skin_ptr(
-			new sge::gui::skins::standard()),
+		sge::gui::skins::ptr(
+			new sge::gui::skins::standard(
+				sys_.font_system())),
 		sge::gui::cursor_ptr(
 			new sge::gui::default_cursor(
 				_sys.image_loader(),

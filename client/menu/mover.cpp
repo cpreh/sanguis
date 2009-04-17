@@ -3,7 +3,7 @@
 #include "../../random.hpp"
 #include <sge/gui/unit.hpp>
 #include <sge/gui/manager.hpp>
-#include <sge/gui/widget.hpp>
+#include <sge/gui/widgets/base.hpp>
 #include <sge/gui/dim.hpp>
 #include <sge/sprite/object.hpp>
 #include <sge/math/constants.hpp>
@@ -30,7 +30,8 @@ sanguis::client::menu::mover::float_type const
 	epsilon = 
 		static_cast<sanguis::client::menu::mover::float_type>(3.0);
 
-sge::gui::point const center_widget(sge::gui::widget &w)
+sge::gui::point const center_widget(
+	sge::gui::widgets::base &w)
 {
 	return sge::structure_cast<sge::gui::point>(
 		sge::structure_cast<sge::gui::dim>(
@@ -51,7 +52,7 @@ bool almost_zero(sanguis::client::menu::mover::float_vector const &v)
 
 sanguis::client::menu::mover::mover(
 	sge::gui::manager &_man,
-	sge::gui::widget &_current)
+	sge::gui::widgets::base &_current)
 	: man_(_man),
 	  current_(&_current),
 		current_entry_(),
@@ -128,7 +129,7 @@ void sanguis::client::menu::mover::update(
 }
 
 void sanguis::client::menu::mover::reset(
-	sge::gui::widget &w)
+	sge::gui::widgets::base &w)
 {
 	SGE_ASSERT(to_move_.find(current_) == to_move_.end());
 
@@ -155,7 +156,7 @@ void sanguis::client::menu::mover::reset(
 }
 
 void sanguis::client::menu::mover::update_position(
-	sge::gui::widget &w,
+	sge::gui::widgets::base &w,
 	entry &e,
 	time_type const &t)
 {
@@ -174,7 +175,7 @@ void sanguis::client::menu::mover::update_position(
 }
 
 void sanguis::client::menu::mover::update_visibility(
-	sge::gui::widget &w,
+	sge::gui::widgets::base &w,
 	entry const &e)
 {
 	float_vector const diff = 

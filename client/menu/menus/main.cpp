@@ -7,13 +7,13 @@
 #include <sge/text.hpp>
 
 sanguis::client::menu::menus::main::main(
-	sge::gui::widget::parent_data const &_parent,
+	sge::gui::widgets::parent_data const &_parent,
 	sge::filesystem::path const &buttons_path,
 	sge::systems::instance const &sys)
 :
 	parent(
 		_parent,
-		sge::gui::widget::parameters()
+		sge::gui::widgets::parameters()
 			.pos(
 				sge::gui::point::null())
 			.size(

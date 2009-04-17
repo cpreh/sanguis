@@ -83,13 +83,13 @@ sanguis::client::perk_chooser::perk_chooser(
 			sys_.renderer(),
 			sys_.image_loader(),
 			sys_.input_system(),
-			sys_.font_system(),
-			sge::gui::skin_ptr(
-				new sge::gui::skins::standard()),
+			sge::gui::skins::ptr(
+				new sge::gui::skins::standard(
+					sys_.font_system())),
 			_cursor),
 		background_(
 			m_,
-			sge::gui::widget::parameters()
+			sge::gui::widgets::parameters()
 				.pos(
 					dialog_pos())
 				.size(
@@ -100,7 +100,7 @@ sanguis::client::perk_chooser::perk_chooser(
 					sge::make_shared_ptr<sge::gui::layouts::vertical>())),
 		perks_left_(
 			background_,
-			sge::gui::widget::parameters(),
+			sge::gui::widgets::parameters(),
 			SGE_TEXT("")),
 		buttons_(),
 		connections_(),
@@ -218,7 +218,7 @@ void sanguis::client::perk_chooser::regenerate_widgets()
 		buttons_.push_back(
 			new sge::gui::widgets::buttons::image(
 				background_,
-				sge::gui::widget::parameters(),
+				sge::gui::widgets::parameters(),
 				pi->second.normal,
 				pi->second.hover,
 				pi->second.hover,

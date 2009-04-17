@@ -16,7 +16,6 @@
 #include <sge/gui/widgets/graphics.hpp>
 #include <sge/gui/widgets/edit.hpp>
 #include <sge/gui/widgets/label.hpp>
-#include <sge/gui/widget.hpp>
 #include <sge/gui/manager.hpp>
 #include <sge/signal/connection_manager.hpp>
 #include <sge/noncopyable.hpp>

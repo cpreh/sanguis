@@ -5,13 +5,13 @@
 #include <sge/text.hpp>
 
 sanguis::client::menu::button::button(
-	sge::gui::widget::parent_data const &parent,
+	sge::gui::widgets::parent_data const &parent,
 	sge::image::loader_ptr const il,
 	sge::filesystem::path const &base,
 	sge::string const &name)
 	: image(
 			parent,
-			sge::gui::widget::parameters(),
+			sge::gui::widgets::parameters(),
 			sge::gui::make_image(
 				il->load(
 					base/name/SGE_TEXT("normal.png"))),

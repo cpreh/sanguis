@@ -3,7 +3,7 @@
 
 #include "../../time_type.hpp"
 #include <sge/gui/manager_fwd.hpp>
-#include <sge/gui/widget_fwd.hpp>
+#include <sge/gui/widgets/fwd.hpp>
 #include <sge/gui/point.hpp>
 #include <sge/gui/dim.hpp>
 #include <sge/math/vector/basic_decl.hpp>
@@ -22,12 +22,12 @@ SGE_NONCOPYABLE(mover)
 public:
 	mover(
 		sge::gui::manager &,
-		sge::gui::widget &);
+		sge::gui::widgets::base &);
 	
 	void update(
 		time_type const &);
 	
-	void reset(sge::gui::widget &);
+	void reset(sge::gui::widgets::base &);
 	typedef float float_type;
 	typedef sge::math::vector::static_<float_type,2>::type float_vector;
 	typedef sge::math::dim::static_<float_type,2>::type float_dim;
@@ -39,12 +39,12 @@ private:
 	};
 
 	typedef std::map<
-		sge::gui::widget*,
+		sge::gui::widgets::base*,
 		entry	
 	> container;
 
 	sge::gui::manager &man_;
-	sge::gui::widget *current_;
+	sge::gui::widgets::base *current_;
 	entry current_entry_;
 	container to_move_;
 
@@ -56,11 +56,11 @@ private:
 	float_type remaining_time_;
 
 	void update_position(
-		sge::gui::widget&,
+		sge::gui::widgets::base&,
 		entry &,
 		time_type const &);
 	void update_visibility(
-		sge::gui::widget&,
+		sge::gui::widgets::base&,
 		entry const &);
 	float_vector const random_pos() const;
 };
