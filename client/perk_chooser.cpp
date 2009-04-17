@@ -81,7 +81,6 @@ sanguis::client::perk_chooser::perk_chooser(
 			static_cast<level_type>(0)),
 		m_(
 			sys_.renderer(),
-			sys_.image_loader(),
 			sys_.input_system(),
 			sge::gui::skins::ptr(
 				new sge::gui::skins::standard(

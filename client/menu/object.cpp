@@ -38,7 +38,6 @@ sanguis::client::menu::object::object(
 
 	m(
 		sys_.renderer(),
-		sys_.image_loader(),
 		sys_.input_system(),
 		sge::gui::skins::ptr(
 			new sge::gui::skins::standard(
