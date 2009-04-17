@@ -10,9 +10,9 @@
 #include <sge/math/circle_impl.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/text.hpp>
+#include <sge/assert.hpp>
 #include <sge/log/headers.hpp>
 #include <ostream>
-#include <cassert>
 
 sanguis::server::space_unit
 sanguis::server::weapons::weapon::range() const
@@ -30,7 +30,7 @@ void sanguis::server::weapons::weapon::update(
 	time_type const tm,
 	entities::entity_with_weapon &owner)
 {
-	assert(magazine_used <= magazine_size());
+	SGE_ASSERT(magazine_used <= magazine_size());
 
 	diff.update(tm);
 	ias_diff.update(tm * ias);
@@ -70,7 +70,7 @@ void sanguis::server::weapons::weapon::update(
 			return;
 		}
 
-		assert(magazine_size() != unlimited_magazine);
+		SGE_ASSERT(magazine_size() != unlimited_magazine);
 
 		reload_timer.activate();
 		state_ = state::reload;
