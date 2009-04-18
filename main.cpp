@@ -16,7 +16,6 @@
 #include <sge/text.hpp>
 #include <sge/exception.hpp>
 #include <sge/iconv.hpp>
-#include <sge/media.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <sge/auto_ptr.hpp>
 #include <sge/scoped_ptr.hpp>
@@ -45,6 +44,7 @@
 #include <sge/time/resolution.hpp>
 #include <sge/renderer/colors.hpp>
 #include <sge/input/key_state_tracker.hpp>
+#include <sge/config/media_path.hpp>
 
 // boost
 #include <boost/filesystem.hpp>
@@ -185,7 +185,7 @@ try
 
 	// font stuff
 	sge::font::metrics_ptr const metrics = sys.font_system()->create_font(
-		sge::media_path() / SGE_TEXT("fonts") / SGE_TEXT("default.ttf"),
+		sge::config::media_path() / SGE_TEXT("fonts") / SGE_TEXT("default.ttf"),
 		static_cast<sge::font::size_type>(15));
 	sge::font::drawer_ptr const drawer(
 		sge::make_shared_ptr<sge::font::drawer_3d>(
