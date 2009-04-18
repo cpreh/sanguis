@@ -35,8 +35,8 @@ void sanguis::client::menu::button::process(
 		e);
 }
 
-sge::gui::dim const sanguis::client::menu::button::size_hint() const
+sge::gui::dim const sanguis::client::menu::button::optimal_size() const
 {
-	return parent_manager().skin().size_hint(
+	return parent_manager().skin().optimal_size(
 		*this);
 }

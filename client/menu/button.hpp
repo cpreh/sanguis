@@ -22,7 +22,7 @@ public:
 		sge::string const &);
 	
 	void process(sge::gui::events::invalid_area const &);
-	sge::gui::dim const size_hint() const;
+	sge::gui::dim const optimal_size() const;
 private:
 	using sge::gui::widgets::base::process;
 };

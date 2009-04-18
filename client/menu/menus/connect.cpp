@@ -21,8 +21,11 @@ sanguis::client::menu::menus::connect::connect(
 			.pos(
 				sge::gui::point::null())
 			.size(
+			/*
 				sge::structure_cast<sge::gui::dim>(
 					resolution()))
+					*/
+				sge::gui::dim(1023,768))
 			.activation(
 				sge::gui::activation_state::inactive)
 			.layout(
