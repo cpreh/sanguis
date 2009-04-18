@@ -26,7 +26,6 @@
 #include "../../resolution.hpp"
 #include "../../random.hpp"
 #include "../../exception.hpp"
-#include <sge/iconv.hpp>
 #include <sge/math/constants.hpp>
 #include <sge/algorithm/ptr_container_erase.hpp>
 #include <sge/math/vector/output.hpp>
@@ -37,6 +36,7 @@
 #include <sge/collision/world.hpp>
 #include <sge/utf8/convert.hpp>
 #include <sge/text.hpp>
+#include <sge/type_info.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/assign/list_of.hpp>
 #include <boost/foreach.hpp>
@@ -527,7 +527,7 @@ sanguis::server::states::running::handle_default_msg(
 			<< SGE_TEXT("received unexpected message from id ")
 			<< id
 			<< SGE_TEXT(" of type ")
-			<< sge::iconv(typeid(m).name()));
+			<< sge::type_info(typeid(m)).name());
 
 	return discard_event();
 }

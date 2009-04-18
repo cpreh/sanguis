@@ -72,7 +72,7 @@ sanguis::client::menu::mover::mover(
 	current_->activation(
 		sge::gui::activation_state::active);
 	
-	current_->relative_pos(
+	current_->pos(
 		center_widget(
 			*current_));
 
@@ -144,7 +144,7 @@ void sanguis::client::menu::mover::reset(
 
 	current_ = &w;
 	current_entry_.current = random_pos();
-	current_->relative_pos(
+	current_->pos(
 		sge::structure_cast<sge::gui::point>(
 			current_entry_.current));
 	current_entry_.target = 
@@ -169,7 +169,7 @@ void sanguis::client::menu::mover::update_position(
 			speed_*
 			sge::math::vector::normalize(diff);
 
-	w.relative_pos(
+	w.pos(
 		sge::structure_cast<sge::gui::point>(
 			e.current));
 }
