@@ -30,7 +30,6 @@
 #include <boost/assign/list_of.hpp>
 #include <boost/optional.hpp>
 #include <algorithm>
-#include <cassert>
 
 sanguis::client::logic::logic(
 	send_callback const &send,
@@ -286,7 +285,7 @@ void sanguis::client::logic::handle_switch_weapon_forwards(
 		)
 	);
 
-	assert(weapon_index < owned_weapons.size());
+	SGE_ASSERT(weapon_index < owned_weapons.size());
 
 	cyclic_iterator<
 		owned_weapons_array::const_iterator

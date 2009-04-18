@@ -99,15 +99,15 @@ void sanguis::draw::model_part::update(
 	
 	funit const twopi = sge::math::twopi<funit>();
 
-	assert(abs_angle >= static_cast<funit>(0) && abs_angle <= twopi);
-	assert(abs_target >= static_cast<funit>(0) && abs_target <= twopi);
+	SGE_ASSERT(abs_angle >= static_cast<funit>(0) && abs_angle <= twopi);
+	SGE_ASSERT(abs_target >= static_cast<funit>(0) && abs_target <= twopi);
 
 	funit const
 		abs_dist = std::abs(abs_target - abs_angle),
 		swap_dist = (abs_angle > abs_target) ? twopi-abs_angle+abs_target : twopi-abs_target+abs_angle,
 		min_dist = std::min(swap_dist,abs_dist);
 
-	assert(abs_dist >= static_cast<funit>(0) && swap_dist >= static_cast<funit>(0) && min_dist >= static_cast<funit>(0));
+	SGE_ASSERT(abs_dist >= static_cast<funit>(0) && swap_dist >= static_cast<funit>(0) && min_dist >= static_cast<funit>(0));
 
 	funit const dir
 		= abs_angle > abs_target

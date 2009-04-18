@@ -14,7 +14,6 @@
 #include <boost/none.hpp>
 #include <algorithm>
 #include <cmath>
-#include <cassert>
 
 namespace
 {
