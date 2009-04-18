@@ -53,6 +53,14 @@ ENDIF ()
 
 ADD_DEFINITIONS(${SGE_CFLAGS})
 
+SET(media_path ${CMAKE_INSTALL_PREFIX}/share/games/sanguis)
+
+set_source_files_properties(
+	media_path.cpp
+	PROPERTIES
+	COMPILE_FLAGS
+	-DMEDIA_PATH="\\\"${media_path}\\\"")
+
 FILE (GLOB files 
 	*.cpp
 	net/*.cpp
@@ -94,3 +102,8 @@ TARGET_LINK_LIBRARIES(sanguis sgecore sgegui)
 IF(NOT MSVC)
 	TARGET_LINK_LIBRARIES(sanguis ${Boost_LIBRARIES} sgecore)
 ENDIF()
+
+#FILE (GLOB_RECURSE media_files media/*)
+
+#INSTALL (FILES ${media_files} DESTINATION ${media_path})
+INSTALL (TARGETS sanguis DESTINATION ${CMAKE_INSTALL_PREFIX}/bin/)
