@@ -19,9 +19,11 @@ sanguis::client::menu::menus::connect_box::connect_box(
 		sge::gui::widgets::parameters()
 			.pos(
 				sge::gui::point::null())
+			/*
 			.size(
 				sge::structure_cast<sge::gui::dim>(
 					resolution()))
+					*/
 			.activation(
 				sge::gui::activation_state::inactive)
 			.layout(
