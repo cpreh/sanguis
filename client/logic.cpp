@@ -35,7 +35,9 @@ sanguis::client::logic::logic(
 	send_callback const &send,
 	sge::image::loader_ptr const il,
 	sge::renderer::device_ptr const rend,
-	sge::console::gfx &console_gfx)
+	sge::console::gfx &console_gfx,
+	cursor_pos_callback const &cursor_pos_,
+	cursor_show_callback const &cursor_show_)
 :
 	send(send),
 	rend(rend),
@@ -46,7 +48,11 @@ sanguis::client::logic::logic(
 				&logic::give_perk,
 				this,
 				_1),
-			SGE_TEXT("giveperk <perk> - gives you a random perk"))),
+			SGE_TEXT("giveperk <perk> - gives you a random perk")
+		)
+	),
+	cursor_pos_(cursor_pos_),
+	cursor_show_(cursor_show_),
 	actions(
 		boost::assign::list_of
 			(boost::bind(&logic::handle_move_x, this, _1))
@@ -63,12 +69,13 @@ sanguis::client::logic::logic(
 		new sanguis::client::cursor(
 			il,
 			rend)),
-	player_center(0,0),
+	player_center(sge::sprite::point::null()),
 	current_weapon(weapon_type::size),
 	paused(false),
 	rotation_timer(
 		sge::time::millisecond(
-			100))
+			100)),
+	owned_weapons()
 {
 	std::fill(
 		owned_weapons.begin(),
@@ -147,14 +154,6 @@ sanguis::entity_id sanguis::client::logic::player_id() const
 	return player_id_;
 }
 
-sge::sprite::point const
-sanguis::client::logic::cursor_pos() const
-{
-	return 
-		sge::structure_cast<sge::sprite::point>(
-			cursor_->pos());
-}
-
 sanguis::client::cursor_ptr 
 sanguis::client::logic::cursor()
 {
@@ -231,6 +230,10 @@ void sanguis::client::logic::update_rotation()
 			player_center,
 			cursor_pos()
 		)
+	);
+
+	cursor_pos_(
+		cursor_pos()
 	);
 
 	if(!rotation || !rotation_timer.update_b())
@@ -400,4 +403,12 @@ void sanguis::client::logic::give_perk(
 				<< perk_name
 		);
 	}
+}
+
+sge::sprite::point const
+sanguis::client::logic::cursor_pos() const
+{
+	return 
+		sge::structure_cast<sge::sprite::point>(
+			cursor_->pos());
 }
