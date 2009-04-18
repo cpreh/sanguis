@@ -14,6 +14,10 @@ public:
 	cursor(
 		sge::image::loader_ptr,
 		sge::renderer::device_ptr);
+	void pos(sge::gui::point const &);
+	sge::gui::point const pos() const;
+	void real_pos(sge::gui::point const &);
+	void visible(bool);
 	~cursor();
 };
 typedef sge::shared_ptr<sanguis::client::cursor> cursor_ptr;

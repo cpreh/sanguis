@@ -134,6 +134,9 @@ void sanguis::client::logic::pause(
 	bool const p)
 {
 	paused = p;
+
+	cursor_->visible(paused);
+	cursor_show_(!paused);
 }
 
 void sanguis::client::logic::remove(
@@ -193,7 +196,7 @@ void sanguis::client::logic::update_direction()
 void sanguis::client::logic::handle_rotation_x(
 	key_scale const s)
 {
-	cursor_->pos(
+	cursor_->real_pos(
 		sge::gui::point(
 			sge::math::clamp(
 				cursor_->pos().x() + static_cast<sge::gui::unit>(s),
@@ -208,7 +211,7 @@ void sanguis::client::logic::handle_rotation_x(
 void sanguis::client::logic::handle_rotation_y(
 	key_scale const s)
 {
-	cursor_->pos(
+	cursor_->real_pos(
 		sge::gui::point(
 			cursor_->pos().x(),
 			sge::math::clamp(
