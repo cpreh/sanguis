@@ -38,10 +38,10 @@ sanguis::client::menu::menus::connect_box::connect_box(
 	label_(
 		label_wrapper,
 		sge::gui::widgets::parameters(),
-		SGE_TEXT("foobar"),
+		SGE_TEXT(""),
 		sge::font::align_h::center,
 		sge::font::align_v::center,
-		boost::none),
+		sge::gui::dim(30,10)),
 	
 	buttons(
 		parent,
