@@ -75,7 +75,7 @@ public:
 	void consume_level();
 	entity_id player_id() const;
 	client::perk_chooser &perk_chooser();
-	private:
+private:
 	boost::statechart::result handle_default_msg(
 		messages::base const &);
 
@@ -83,6 +83,11 @@ public:
 		messages::auto_ptr);
 	void send_perk_choose(perk_type::type);
 
+	void cursor_pos(
+		sge::sprite::point const &);
+	void cursor_show(
+		bool show);
+	
 	music_handler music_;
 	sge::scoped_ptr<
 		draw::scene

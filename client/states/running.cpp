@@ -4,6 +4,7 @@
 #include "../next_id.hpp"
 #include "../../client_entity_type.hpp"
 #include "../../client_messages/add.hpp"
+#include "../../client_messages/visible.hpp"
 #include "../../messages/assign_id.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../messages/give_weapon.hpp"
@@ -63,7 +64,18 @@ sanguis::client::states::running::running(
 			_1),
 		context<machine>().sys().image_loader(),
 		context<machine>().renderer(),
-		context<machine>().console_wrapper().con),
+		context<machine>().console_wrapper().con,
+		boost::bind(
+			&running::cursor_pos,
+			this,
+			_1
+		),
+		boost::bind(
+			&running::cursor_show,
+			this,
+			_1
+		)
+	),
 	input(
 		boost::bind(
 			&logic::handle_player_action,
@@ -145,16 +157,6 @@ sanguis::client::states::running::process(
 	context<machine>().sound_pool().update();
 	music_.process();
 
-	// update: cursor pos (TODO: this should be done in a better way)
-	(*drawer)(
-		messages::move(
-			cursor_id,
-			screen_to_virtual(
-				context<machine>().renderer()->screen_size(),
-				logic_.cursor_pos()
-			)
-		)
-	);
 }
 
 void 
@@ -292,4 +294,30 @@ void sanguis::client::states::running::send_perk_choose(
 			messages::player_choose_perk(
 				player_id(),
 				m)));
+}
+
+void sanguis::client::states::running::cursor_pos(
+	sge::sprite::point const &pos)
+{
+	(*drawer)(
+		messages::move(
+			cursor_id,
+			screen_to_virtual(
+				context<machine>().renderer()->screen_size(),
+				pos
+			)
+		)
+	);
+
+}
+
+void sanguis::client::states::running::cursor_show(
+	bool const show)
+{
+	drawer->client_message(
+		client_messages::visible(
+			cursor_id,
+			show
+		)
+	);
 }
