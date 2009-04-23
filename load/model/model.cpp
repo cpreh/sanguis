@@ -12,9 +12,9 @@
 #include <sge/filesystem/extension.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/log/headers.hpp>
-#include <sge/parse/ini/parse_file.hpp>
-#include <sge/parse/ini/section.hpp>
-#include <sge/parse/ini/section_vector.hpp>
+#include <sge/parse/json/parse_file.hpp>
+#include <sge/parse/json/object.hpp>
+#include <sge/parse/json/member_name_equal.hpp>
 #include <sge/fstream.hpp>
 #include <sge/text.hpp>
 #include <boost/foreach.hpp>
@@ -31,17 +31,6 @@ namespace
 sge::string const header_name(
 	SGE_TEXT("header")
 );
-
-bool header_equal(
-	sge::parse::ini::section const &seq)
-{
-	SGE_LOG_DEBUG(
-		sanguis::load::log(),
-		sge::log::_1
-			<< seq.header
-	);
-	return seq.header == header_name;
-}
 
 sge::renderer::dim_type const
 load_dim(
@@ -89,15 +78,15 @@ sanguis::load::model::model::model(
 	path(path),
 	parts()
 {
-	sge::filesystem::path const global_ini(
-		path / SGE_TEXT("global.ini")
+	sge::filesystem::path const file(
+		path / SGE_TEXT("config.json")
 	);
 
-	sge::parse::ini::section_vector global_entries;
+	sge::parse::json::object global_entries;
 	
 	if(
-		!sge::parse::ini::parse_file(
-			global_ini,
+		!sge::parse::json::parse_file(
+			path,
 			global_entries
 		)
 	)
@@ -110,12 +99,12 @@ sanguis::load::model::model::model(
 			);
 	}
 
-	sge::parse::ini::section_vector::const_iterator const header_it(
+	sge::parse::json::member_vector::const_iterator const header_it(
 		std::find_if(
 			global_entries.begin(),
 			global_entries.end(),
-			std::ptr_fun(
-				header_equal
+			sge::parse::json::member_name_equal(
+				header_name
 			)
 		)
 	);
@@ -123,42 +112,35 @@ sanguis::load::model::model::model(
 	if(header_it == global_entries.end())
 		throw sanguis::exception(
 			SGE_TEXT("header subsection not found in ")
-			+ global_ini.string()
+			+ file.string()
 		);
 
-	sge::parse::ini::section const header(
-		*header_it
+	sge::parse::json::object const header(
+		boost::get<
+			sge::parse::json::object
+		>(
+			header_it->value_
+		)
 	);
 
 	sge::renderer::dim_type const cell_size(
 		load_dim(
-			header.entries
+			header.members
 		)
 	);
 
 	optional_delay const opt_delay(
 		load_delay(
-			header.entries
+			header.members
 		)
 	);
 
-	for(sge::filesystem::directory_iterator beg(path), end; beg != end; ++beg)
+	BOOST_FOREACH(
+		sge::parse::json::member_vector::const_reference r,
+		global_entries
+	)
 	{
-		sge::filesystem::path const &file(
-			beg->path()
-		);
-
-		if(sge::filesystem::is_directory(*beg))
-		{
-			SGE_LOG_WARNING(
-				log(),
-				sge::log::_1
-					<< file.string()
-					<< SGE_TEXT(" is a directory!"));
-			continue;
-		}
-		
-		if(sge::filesystem::extension(file) == SGE_TEXT(".ini"))
+		if(r.name == header_name)
 			continue;
 
 		sge::texture::part_ptr const tex(
@@ -167,26 +149,6 @@ sanguis::load::model::model::model(
 			)
 		);
 
-		sge::filesystem::path const ini_file(
-			path / (sge::filesystem::stem(file) + SGE_TEXT(".ini"))
-		);
-
-		sge::parse::ini::section_vector sections;
-		
-		if(
-			!sge::parse::ini::parse_file(
-				ini_file,
-				sections
-			)
-		)
-		{
-			SGE_LOG_WARNING(
-				log(),
-				sge::log::_1
-					<< ini_file.string()
-					<< SGE_TEXT(" contains errors!")
-				);
-		}
 
 		BOOST_FOREACH(
 			sge::parse::ini::section_vector::const_reference section,
