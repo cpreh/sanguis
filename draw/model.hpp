@@ -24,7 +24,7 @@ public:
 		draw::environment const &,
 		entity_id id,
 		sge::string const &name,
-		sge::sprite::intrusive_order order,
+		sge::sprite::intrusive::order order,
 		bool needs_healthbar,
 		draw::remove_action::type);
 	~model();

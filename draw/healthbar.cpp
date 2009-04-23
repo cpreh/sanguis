@@ -12,6 +12,7 @@
 #include <sge/math/dim/arithmetic.hpp>
 #include <sge/renderer/color.hpp>
 #include <sge/renderer/colors.hpp>
+#include <sge/sprite/intrusive/parameters.hpp>
 #include <boost/none.hpp>
 #include <algorithm>
 #include <limits>
@@ -41,16 +42,21 @@ sanguis::draw::healthbar::healthbar(
 	max_health_(0)
 {
 	at(background) = object(
-		system(),
-		z_ordering::healthbar_lower,
-		boost::none,
-		boost::none,
-		boost::none,
-		sge::renderer::colors::black());
+		sge::sprite::intrusive::parameters(
+			system(),
+			z_ordering::healthbar_lower
+		)
+		.color(
+			sge::renderer::colors::black()
+		)
+	);
 
 	at(foreground) = object(
-		system(),
-		z_ordering::healthbar_upper);
+		sge::sprite::intrusive::parameters(
+			system(),
+			z_ordering::healthbar_upper
+		)
+	);
 
 	recalc_health();
 }

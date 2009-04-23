@@ -5,6 +5,7 @@
 #include "z_ordering.hpp"
 #include "../client/next_id.hpp"
 #include "../resolution.hpp"
+#include <sge/sprite/intrusive/parameters.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/scoped_target.hpp>
 #include <sge/renderer/fill_pixels.hpp>
@@ -33,15 +34,18 @@ sanguis::draw::background::background(
 			sge::renderer::resource_flags::none
 			)),
 	sprite(
-		env.system(),
-		z_ordering::corpses,
-		sge::sprite::point::null(),
-		sge::texture::const_part_ptr(
+		sge::sprite::intrusive::parameters(
+			env.system(),
+			z_ordering::corpses
+		)
+		.texture(
 			sge::make_shared_ptr<
 				sge::texture::part_raw
 			>(
-				tex)),
-		sge::sprite::texture_dim)
+				tex
+			)
+		)
+	)
 {
 	sge::renderer::fill_pixels(
 		sge::renderer::scoped_texture_lock(
