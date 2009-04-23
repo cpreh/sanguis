@@ -1,5 +1,6 @@
 #include "main.hpp"
 #include "../../../resolution.hpp"
+#include <sge/gui/widgets/parameters.hpp>
 #include <sge/gui/layouts/vertical.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/make_shared_ptr.hpp>
