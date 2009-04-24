@@ -1,5 +1,5 @@
-#ifndef SANGUIS_SERVER_TICK_EVENT_HPP_INCLUDED
-#define SANGUIS_SERVER_TICK_EVENT_HPP_INCLUDED
+#ifndef SANGUIS_TICK_EVENT_HPP_INCLUDED
+#define SANGUIS_TICK_EVENT_HPP_INCLUDED
 
 #include "time_type.hpp"
 #include <boost/statechart/event.hpp>

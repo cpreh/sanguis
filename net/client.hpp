@@ -1,5 +1,5 @@
-#ifndef NET_CLIENT_HPP_INCLUDED
-#define NET_CLIENT_HPP_INCLUDED
+#ifndef SANGUIS_NET_CLIENT_HPP_INCLUDED
+#define SANGUIS_NET_CLIENT_HPP_INCLUDED
 
 #include "hostname_type.hpp"
 #include "port_type.hpp"
