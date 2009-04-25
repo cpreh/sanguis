@@ -2,8 +2,7 @@
 #include "get_entry.hpp"
 #include "animation_sound.hpp"
 #include "global_parameters.hpp"
-#include "../resource/animations.hpp"
-#include "../resource/context.hpp"
+#include "../resource/textures.hpp"
 #include "../log.hpp"
 #include "../../exception.hpp"
 #include <sge/parse/ini/entry.hpp>
@@ -17,6 +16,7 @@
 #include <sge/math/dim/output.hpp>
 #include <sge/math/rect_impl.hpp>
 #include <sge/math/rect_util.hpp>
+#include <sge/parse/json/array.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/text.hpp>
@@ -62,7 +62,7 @@ calc_rect(
 
 sge::time::unit
 load_delay(
-	sge::parse::ini::entry_vector const &entries,
+	sge::parse::json::object const &obj,
 	sanguis::load::model::optional_delay const &opt_delay)
 {
 	try
@@ -70,7 +70,7 @@ load_delay(
 		return sanguis::load::model::get_entry<
 			int	
 		>(
-			entries,
+			obj,
 			SGE_TEXT("delay")
 		);
 	}
@@ -93,9 +93,8 @@ load_delay(
 }
 
 sanguis::load::model::animation::animation(
-	global_parameters const &param,
-	sge::parse::ini::entry_vector const &entries,
-	sge::texture::part_ptr const tex)
+	sge::parse::json::value const &val,
+	global_parameters const &param)
 :
 	anim(
 		sge::make_shared_ptr<
@@ -103,12 +102,26 @@ sanguis::load::model::animation::animation(
 		>()
 	)
 {
+	sge::texture::part_ptr const tex(
+		param.textures().load(
+			param.path()
+		)
+	);
+
+	sge::parse::json::object const obj(
+		boost::get<
+			sge::parse::json::object
+		>(
+			val
+		)
+	);
+
 	sge::renderer::size_type const
 		begin(
 			get_entry<
 				int	
 			>(
-				entries,
+				obj,
 				SGE_TEXT("begin")
 			)
 		),
@@ -116,14 +129,14 @@ sanguis::load::model::animation::animation(
 			get_entry<
 				int	
 			>(
-				entries,
+				obj,
 				SGE_TEXT("end")
 			)
 		);
 
 	sge::time::unit const delay(
 		load_delay(
-			entries,
+			obj,
 			param.delay()
 		)
 	);

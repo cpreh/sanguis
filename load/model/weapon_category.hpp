@@ -3,13 +3,9 @@
 
 #include "../resource/context_fwd.hpp"
 #include "animation.hpp"
-#include "global_parameters.hpp"
+#include "global_parameters_fwd.hpp"
 #include "../../animation_type.hpp"
-#include <sge/parse/ini/entry_vector.hpp>
-#include <sge/texture/part_fwd.hpp>
-#include <sge/renderer/dim_type.hpp>
-#include <sge/math/dim/basic_decl.hpp>
-#include <sge/string.hpp>
+#include <sge/parse/json/value.hpp>
 #include <map>
 
 namespace sanguis
@@ -26,13 +22,9 @@ public:
 		animation_type::type) const;
 private:
 	explicit weapon_category(
+		sge::parse::json::value const &,
 		global_parameters const &);
 	
-	void add(
-		sge::parse::ini::entry_vector const &,
-		sge::string const &header,
-		sge::texture::part_ptr);
-
 	friend class part;
 
 	typedef std::map<
@@ -40,7 +32,6 @@ private:
 		animation
 	> animation_map;
 
-	global_parameters const param;
 	animation_map animations;
 };
 

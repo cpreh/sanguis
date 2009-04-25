@@ -28,10 +28,6 @@
 namespace
 {
 
-sge::string const header_name(
-	SGE_TEXT("header")
-);
-
 sge::renderer::dim_type const
 load_dim(
 	sge::parse::ini::entry_vector const &entries)
@@ -104,7 +100,7 @@ sanguis::load::model::model::model(
 			global_entries.begin(),
 			global_entries.end(),
 			sge::parse::json::member_name_equal(
-				header_name
+				SGE_TEXT("header")
 			)
 		)
 	);
@@ -135,74 +131,50 @@ sanguis::load::model::model::model(
 		)
 	);
 
+	sge::parse::json::member_vector::const_iterator const array_it(
+		std::find_if(
+			global_entries.begin(),
+			global_entries.end(),
+			sge::parse::json::member_name_equal(
+				SGE_TEXT("entries")
+			)
+		)
+	);
+
+	if(array_it == global_entries.end())
+		return;
+
 	BOOST_FOREACH(
-		sge::parse::json::member_vector::const_reference r,
-		global_entries
+		sge::parse::json::array::element_vector::const_reference r,
+		boost::get<
+			sge::parse::json::array
+		>(
+			array_it->value_
+		).elements
 	)
 	{
-		if(r.name == header_name)
-			continue;
-
-		sge::texture::part_ptr const tex(
-			ctx.textures().load(
-				file
-			)
-		);
-
-
-		BOOST_FOREACH(
-			sge::parse::ini::section_vector::const_reference section,
-			sections
-		)
-		{	
-			split_pair const names(
-				split_first_slash(
-					section.header
-				)
-			);
-
-			part_map::iterator it(
-				parts.find(
-					names.first
-				)
-			);
-
-			SGE_LOG_DEBUG(
-				log(),
-				sge::log::_1
-					<< SGE_TEXT("Adding category ")
-					<< names.first
-					<< SGE_TEXT(" in ")
-					<< path
-					<< SGE_TEXT(". Rest: ")
-					<< names.second
-			);
-
-			if(it == parts.end())
-			{
-				std::pair<part_map::iterator, bool> const ret(
-					parts.insert(
-						std::make_pair(
-							names.first,
-							part(
-								global_parameters(
-									cell_size,
-									opt_delay
-								)
-							)
+		if(
+			parts.insert(
+				std::make_pair(
+					r.name,
+					part(
+						r.value_,
+						global_parameters(
+							path,
+							ctx.textures(),
+							cell_size,
+							opt_delay
 						)
 					)
-				);
-				
-				it = ret.first;
-			}
-
-			it->second.add(
-				section.entries,
-				names.second,
-				tex
+				)
+			)
+			.second == false
+		)
+			SGE_LOG_WARNING(
+				log(),
+				sge::log::_1
+					<< SGE_TEXT("Double insert in model!")
 			);
-		}
 	}
 }
 

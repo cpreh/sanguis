@@ -3,11 +3,9 @@
 
 #include "../resource/context_fwd.hpp"
 #include "weapon_category.hpp"
-#include "global_parameters.hpp"
+#include "global_parameters_fwd.hpp"
 #include "../../weapon_type.hpp"
-#include <sge/parse/ini/entry_vector.hpp>
-#include <sge/texture/part_fwd.hpp>
-#include <sge/string.hpp>
+#include <sge/parse/json/value.hpp>
 #include <map>
 
 namespace sanguis
@@ -23,13 +21,9 @@ public:
 	operator[](
 		weapon_type::type) const;
 private:
-	explicit part(
+	part(
+		sge::parse::json::value const &,
 		global_parameters const &);
-
-	void add(
-		sge::parse::ini::entry_vector const &,
-		sge::string const &header,
-		sge::texture::part_ptr);
 
 	friend class model;
 
@@ -38,7 +32,6 @@ private:
 		weapon_category
 	> category_map;
 
-	global_parameters const param;
 	category_map categories;
 };
 

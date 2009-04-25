@@ -3,10 +3,11 @@
 
 #include "../../exception.hpp"
 #include <sge/text.hpp>
-#include <sge/parse/ini/entry.hpp>
-#include <sge/parse/ini/entry_vector.hpp>
-#include <boost/lexical_cast.hpp>
-#include <boost/foreach.hpp>
+#include <sge/string.hpp>
+#include <sge/parse/json/object.hpp>
+#include <sge/parse/json/member_name_equal.hpp>
+#include <boost/variant/get.hpp>
+#include <algorithm>
 
 namespace sanguis
 {
@@ -20,20 +21,30 @@ template<
 >
 T
 get_entry(
-	sge::parse::ini::entry_vector const &e,
+	sge::parse::json::object const &o,
 	sge::string const &name)
 {
-	BOOST_FOREACH(
-		sge::parse::ini::entry_vector::const_reference r,
-		e
-	)
-		if(r.name == name)
-			return boost::lexical_cast<T>(r.value);
+	sge::parse::json::object::member_vector::const_iterator const it(
+		std::find_if(
+			o.members.begin(),
+			o.members.end(),
+			sge::parse::json::member_name_equal(
+				name
+			)
+		)
+	);
 
-	throw exception(
-		SGE_TEXT("entry ")
-		+ name
-		+ SGE_TEXT(" not found")
+	if(it == o.members.end())
+		throw exception(
+			SGE_TEXT("entry ")
+			+ name
+			+ SGE_TEXT(" not found")
+		);
+	
+	return boost::get<
+		T
+	>(
+		it->value_
 	);
 }
 

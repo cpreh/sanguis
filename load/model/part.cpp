@@ -1,12 +1,12 @@
 #include "part.hpp"
-#include "split_first_slash.hpp"
 #include "../../exception.hpp"
-#include <sge/string.hpp>
+#include <sge/parse/json/array.hpp>
 #include <sge/text.hpp>
-#include <sge/filesystem/exists.hpp>
+#include <sge/string.hpp>
 #include <boost/tr1/array.hpp>
+#include <boost/variant/get.hpp>
+#include <boost/foreach.hpp>
 #include <utility>
-#include <iterator>
 
 namespace
 {
@@ -44,74 +44,34 @@ sanguis::load::model::part::operator[](
 }
 
 sanguis::load::model::part::part(
+	sge::parse::json::value const &val,
 	global_parameters const &param)
 :
-	param(param),
 	categories()
-{}
-
-void
-sanguis::load::model::part::add(
-	sge::parse::ini::entry_vector const &entries,
-	sge::string const &header,
-	sge::texture::part_ptr const tex)
 {
-	split_pair const names(
-		split_first_slash(
-			header
-		)
-	);
-
-	weapon_type_array::const_iterator const weapon_index(
-		std::find(
-			weapon_types.begin(),
-			weapon_types.end(),
-			names.first
-		)
-	);
-
-	if(weapon_index == weapon_types.end())
-		throw exception(
-			SGE_TEXT("Invalid weapon_category ")
-			+ names.first
-		);
-
-	weapon_type::type const type(
-		static_cast<
-			weapon_type::type
+	BOOST_FOREACH(
+		sge::parse::json::array::element_vector::const_reference r,
+		boost::get<
+			sge::parse::json::array
 		>(
-			std::distance(
-				weapon_types.begin(),
-				weapon_index
-			)
-		)
-	);
-
-	category_map::iterator it(
-		categories.find(
-			type
-		)
-	);
-
-	if(it == categories.end())
+			val
+		).elements)
 	{
-		std::pair<category_map::iterator, bool> const ret(
+		if(	
 			categories.insert(
 				std::make_pair(
-					type,		
+					r.name,
 					weapon_category(
+						r.value_,
 						param
 					)
 				)
-			)
-		);
-
-		it = ret.first;
+			).second == false
+		)
+			SGE_LOG_WARNING(
+				log(),
+				sge::log::_1
+					<< SGE_TEXT("Double insert in part!")
+			);
 	}
-	
-	it->second.add(
-		entries,
-		names.second,
-		tex
-	);
 }

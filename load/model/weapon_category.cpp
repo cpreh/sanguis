@@ -44,56 +44,35 @@ sanguis::load::model::weapon_category::operator[](
 }
 
 sanguis::load::model::weapon_category::weapon_category(
+	sge::parse::json::value const &val,
 	global_parameters const &param)
 :
-	param(param),
 	animations()
-{}
-
-void
-sanguis::load::model::weapon_category::add(
-	sge::parse::ini::entry_vector const &entries,
-	sge::string const &header,
-	sge::texture::part_ptr const tex)
 {
-	animation_type_array::const_iterator const weapon_index(
-		std::find(
-			animation_types.begin(),
-			animation_types.end(),
-			header	
-		)
-	);
-
-	if(weapon_index == animation_types.end())
-		throw exception(
-			SGE_TEXT("Invalid animation ")
-			+ header
-		);
-
-	animation_type::type const type(
-		static_cast<
-			animation_type::type
+	BOOST_FOREACH(
+		sge::parse::json::array::element_vector::const_reference r,
+		boost::get<
+			sge::parse::json::array
 		>(
-			std::distance(
-				animation_types.begin(),
-				weapon_index
-			)
-		)
-	);
-
-	if(
-		animations.insert(
-			std::make_pair(
-				type,		
-				animation(
-					param,
-					entries,
-					tex
-				)
-			)
-		).second == false
+			array_it->value_
+		).elements
 	)
-		throw exception(
-			SGE_TEXT("Double insert in load!")
-		);
+	{
+		if(
+			animations.insert(
+				std::make_pair(
+					r.name,
+					animation(
+						r.value,
+						param
+					)
+				)
+			).second == false
+		)
+			SGE_LOG_WARNING(
+				log(),
+				sge::log::_1
+					<< SGE_TEXT("Double insert in weapon_category!")
+			);
+	}
 }
