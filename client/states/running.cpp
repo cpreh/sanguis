@@ -17,13 +17,13 @@
 #include "../../draw/coord_transform.hpp"
 #include "../../draw/scene.hpp"
 #include "../../load/context.hpp"
-#include <sge/renderer/state/list.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/audio/player.hpp>
 #include <sge/audio/pool.hpp>
+#include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/var.hpp>
-#include <sge/systems/instance.hpp>
 #include <sge/renderer/state/states.hpp>
+#include <sge/systems/instance.hpp>
 #include <sge/container/raw_vector_impl.hpp>
 #include <sge/assert.hpp>
 #include <boost/mpl/vector.hpp>

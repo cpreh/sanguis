@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_MACHINE_HPP_INCLUDED
 #define SANGUIS_CLIENT_MACHINE_HPP_INCLUDED
 
-#include "states/start_fwd.hpp"
+#include "states/fwd.hpp"
 #include "screenshot.hpp"
 #include "server_callback.hpp"
 #include "console_wrapper.hpp"
@@ -31,7 +31,7 @@ namespace sanguis
 namespace client
 {
 struct machine
-	: public boost::statechart::state_machine<machine, states::start>
+	: public boost::statechart::state_machine<machine, states::menu>
 {
 public:
 	machine(

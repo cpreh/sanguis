@@ -12,6 +12,9 @@
 #include <sge/font/object.hpp>
 #include <sge/font/text_size.hpp>
 #include <sge/renderer/device.hpp>
+#include <sge/renderer/state/list.hpp>
+#include <sge/renderer/state/var.hpp>
+#include <sge/renderer/state/states.hpp>
 #include <sge/image/loader.hpp>
 #include <sge/gui/skins/standard.hpp>
 #include <sge/gui/make_image.hpp>
@@ -52,7 +55,14 @@ sanguis::client::states::menu::menu(
 			boost::bind(
 				&machine::quit,
 				&(context<machine>()))))
-{}
+{
+	context<machine>().renderer()->state(
+		sge::renderer::state::list
+			(sge::renderer::state::bool_::clear_backbuffer = true)
+			(sge::renderer::state::bool_::clear_zbuffer = false)
+			(sge::renderer::state::color_::clear_color = sge::renderer::colors::black())
+	);
+}
 
 boost::statechart::result
 sanguis::client::states::menu::react(
