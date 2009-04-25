@@ -128,11 +128,35 @@ void sanguis::draw::model_part::update(
 
 	funit const new_orientation = 
 		abs_angle + dir * time * turning_speed;
-
-	update_orientation(
-		min_dist < time / turning_speed
-		? desired_orientation
-		: sge::math::abs_angle_to_rel(new_orientation));
+	
+	if (dir > static_cast<funit>(1))
+	{
+		if (new_orientation < desired_orientation)
+		{
+			update_orientation(
+				sge::math::abs_angle_to_rel(
+					new_orientation));
+		}
+		else
+		{
+			update_orientation(
+				desired_orientation);
+		}
+	}
+	else
+	{
+		if (new_orientation > desired_orientation)
+		{
+			update_orientation(
+				sge::math::abs_angle_to_rel(
+					new_orientation));
+		}
+		else
+		{
+			update_orientation(
+				desired_orientation);
+		}
+	}
 }
 
 void sanguis::draw::model_part::orientation(
