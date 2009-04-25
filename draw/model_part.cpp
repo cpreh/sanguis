@@ -131,7 +131,7 @@ void sanguis::draw::model_part::update(
 	
 	if (dir > static_cast<funit>(1))
 	{
-		if (new_orientation < desired_orientation)
+		if (new_orientation > desired_orientation)
 		{
 			update_orientation(
 				sge::math::abs_angle_to_rel(
@@ -145,7 +145,7 @@ void sanguis::draw::model_part::update(
 	}
 	else
 	{
-		if (new_orientation > desired_orientation)
+		if (new_orientation < desired_orientation)
 		{
 			update_orientation(
 				sge::math::abs_angle_to_rel(
