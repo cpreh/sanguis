@@ -1,5 +1,5 @@
-#ifndef NET_SERVER_HPP_INCLUDED
-#define NET_SERVER_HPP_INCLUDED
+#ifndef SANGUIS_NET_SERVER_HPP_INCLUDED
+#define SANGUIS_NET_SERVER_HPP_INCLUDED
 
 #include "id_type.hpp"
 #include "data_type.hpp"

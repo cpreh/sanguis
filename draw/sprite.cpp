@@ -1,6 +1,7 @@
 #include "sprite.hpp"
 #include "sprite_part_index.hpp"
 #include "object.hpp"
+#include <sge/sprite/intrusive/parameters.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/vector/arithmetic.hpp>
 #include <sge/structure_cast.hpp>
@@ -11,7 +12,7 @@ sanguis::draw::sprite::sprite(
 	draw::environment const &env,
 	entity_id const id,
 	size_type const sz,
-	sge::sprite::intrusive_order const order)
+	sge::sprite::intrusive::order const order)
 :
 	entity(
 		env,
@@ -23,8 +24,12 @@ sanguis::draw::sprite::sprite(
 	for(size_type i = 0; i < sz; ++i)
 		sprites.push_back(
 			object(
-				system(),
-				order));
+				sge::sprite::intrusive::parameters(
+					system(),
+					order
+				)
+			)
+		);
 }
 
 sge::sprite::point const

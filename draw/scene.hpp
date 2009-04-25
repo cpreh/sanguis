@@ -1,5 +1,5 @@
-#ifndef SANGUIS_DRAW_SCENE_DRAWER_HPP_INCLUDED
-#define SANGUIS_DRAW_SCENE_DRAWER_HPP_INCLUDED
+#ifndef SANGUIS_DRAW_SCENE_HPP_INCLUDED
+#define SANGUIS_DRAW_SCENE_HPP_INCLUDED
 
 #include "scene_fwd.hpp"
 #include "entity_auto_ptr.hpp"

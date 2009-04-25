@@ -5,7 +5,7 @@
 #include "entity.hpp"
 #include "object.hpp"
 #include <sge/texture/part_fwd.hpp>
-#include <sge/sprite/intrusive_order.hpp>
+#include <sge/sprite/intrusive/order.hpp>
 
 namespace sanguis
 {
@@ -16,7 +16,7 @@ public:
 	simple_sprite(
 		draw::environment const &,
 		entity_id,
-		sge::sprite::intrusive_order,
+		sge::sprite::intrusive::order,
 		sge::texture::const_part_ptr,
 		sge::sprite::repetition_type);
 private:

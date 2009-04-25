@@ -1,5 +1,6 @@
 #include "object.hpp"
 #include "z_ordering.hpp"
+#include <sge/sprite/intrusive/parameters.hpp>
 #include <sge/math/point_rotate.hpp>
 #include <sge/structure_cast.hpp>
 
@@ -19,14 +20,18 @@ sanguis::draw::particle::object::object(
 		rotation_type(0),
 		e),
 	sprite_(
-		e.system(),
-		z_ordering(t),
-		sge::sprite::defaults::pos_,
-		sge::sprite::defaults::texture_,
-		sge::structure_cast<
-			sge::sprite::dim
-		>(
-			images.dim())),
+		sge::sprite::intrusive::parameters(
+			e.system(),
+			z_ordering(t)
+		)
+		.size(
+			sge::structure_cast<
+				sge::sprite::dim
+			>(
+				images.dim()
+			)
+		)
+	),
 	anim(
 		images,
 		fade_total 
