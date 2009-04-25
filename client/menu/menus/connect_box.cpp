@@ -4,6 +4,7 @@
 #include <sge/font/align_v.hpp>
 #include <sge/renderer/colors.hpp>
 #include <sge/systems/instance.hpp>
+#include <sge/gui/widgets/parameters.hpp>
 #include <sge/gui/layouts/vertical.hpp>
 #include <sge/gui/layouts/horizontal.hpp>
 #include <sge/structure_cast.hpp>

@@ -26,9 +26,9 @@
 #include <sge/gui/unit.hpp>
 #include <sge/structure_cast.hpp>
 #include <sge/text.hpp>
+#include <sge/optional.hpp>
 #include <boost/bind.hpp>
 #include <boost/assign/list_of.hpp>
-#include <boost/optional.hpp>
 #include <algorithm>
 
 sanguis::client::logic::logic(
@@ -226,7 +226,7 @@ void sanguis::client::logic::handle_rotation_y(
 
 void sanguis::client::logic::update_rotation()
 {
-	boost::optional<
+	sge::optional<
 		messages::types::space_unit
 	> const rotation(
 		sge::math::angle_to<messages::types::space_unit>(

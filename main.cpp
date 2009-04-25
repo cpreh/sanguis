@@ -44,6 +44,8 @@
 #include <sge/time/resolution.hpp>
 #include <sge/renderer/colors.hpp>
 #include <sge/input/key_state_tracker.hpp>
+#include <sge/sprite/object.hpp>
+#include <sge/sprite/parameters.hpp>
 #include <sge/config/media_path.hpp>
 
 // boost
@@ -208,16 +210,25 @@ try
 		metrics,
 		sys.input_system(),
 		sge::sprite::object(
-			sge::sprite::point(0,0),
-			sge::texture::const_part_ptr(
+			sge::sprite::parameters()
+			.texture(
 				sge::texture::add_image(
 					texman,
 					sys.image_loader()->load(
-						sanguis::media_path() / SGE_TEXT("console_back.jpg")))),
-			sge::sprite::dim(
-				sys.renderer()->screen_size().w(),
-				static_cast<sge::sprite::unit>(
-					sys.renderer()->screen_size().h() / 2))));
+						sanguis::media_path() / SGE_TEXT("console_back.jpg")
+					)
+				)
+			)
+			.size(
+				sge::sprite::dim(
+					sys.renderer()->screen_size().w(),
+					static_cast<sge::sprite::unit>(
+						sys.renderer()->screen_size().h() / 2
+					)
+				)
+			)
+		)
+	);
 	
 	sge::collision::unit const additional_size(
 		500

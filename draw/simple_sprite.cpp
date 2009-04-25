@@ -1,12 +1,13 @@
 #include "simple_sprite.hpp"
 #include "environment.hpp"
+#include <sge/sprite/intrusive/parameters.hpp>
 #include <sge/renderer/colors.hpp>
 #include <sge/math/compare.hpp>
 
 sanguis::draw::simple_sprite::simple_sprite(
 	draw::environment const &env,
 	entity_id const id,
-	sge::sprite::intrusive_order const order,
+	sge::sprite::intrusive::order const order,
 	sge::texture::const_part_ptr const tex,
 	sge::sprite::repetition_type const _repeat)
 :
@@ -14,11 +15,14 @@ sanguis::draw::simple_sprite::simple_sprite(
 		env,
 		id),
 	sprite_(
-		env.system(),
-		order,
-		sge::sprite::point::null(),
-		tex,
-		sge::sprite::texture_dim)
+		sge::sprite::intrusive::parameters(
+			env.system(),
+			order
+		)
+		.texture(
+			tex
+		)
+	)
 {
 	if (!sge::math::compare(_repeat,static_cast<sge::sprite::repetition_type>(1)))
 		sprite_.repeat(_repeat);

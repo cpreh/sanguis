@@ -3,6 +3,7 @@
 #include "../entities/property.hpp"
 #include "../collision/collides.hpp"
 #include "../collision/distance.hpp"
+#include <sge/optional.hpp>
 #include <sge/math/angle.hpp>
 #include <boost/foreach.hpp>
 #include <limits>
@@ -73,7 +74,7 @@ void sanguis::server::ai::simple::update(
 		me.aggressive(true);
 	}
 
-	boost::optional<space_unit> const angle(
+	sge::optional<space_unit> const angle(
 		sge::math::angle_to<space_unit>(
 			me.center(),
 			target->center()

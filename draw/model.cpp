@@ -22,7 +22,7 @@ sanguis::draw::model::model(
 	draw::environment const &env,
 	entity_id const id,
 	sge::string const &name,
-	sge::sprite::intrusive_order const order,
+	sge::sprite::intrusive::order const order,
 	bool const show_healthbar,
 	draw::remove_action::type const remove_action_)
 :

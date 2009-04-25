@@ -1,5 +1,5 @@
-#ifndef SANGUIS_LOAD_RANDOM_SOUND_HPP_INCLUDED
-#define SANGUIS_LOAD_RANDOM_SOUND_HPP_INCLUDED
+#ifndef SANGUIS_LOAD_MODEL_RANDOM_SOUND_HPP_INCLUDED
+#define SANGUIS_LOAD_MODEL_RANDOM_SOUND_HPP_INCLUDED
 
 #include "../resource/context_fwd.hpp"
 #include "../sound_type.hpp"

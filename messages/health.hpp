@@ -1,5 +1,5 @@
-#ifndef SANGUIS_MESSAGES_HEALTH_INCLUDED
-#define SANGUIS_MESSAGES_HEALTH_INCLUDED
+#ifndef SANGUIS_MESSAGES_HEALTH_HPP_INCLUDED
+#define SANGUIS_MESSAGES_HEALTH_HPP_INCLUDED
 
 #include "bind_entity_message.hpp"
 #include "make_class.hpp"

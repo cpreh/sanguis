@@ -9,7 +9,7 @@
 #include <sge/sprite/point.hpp>
 #include <sge/sprite/dim.hpp>
 #include <sge/sprite/color.hpp>
-#include <sge/sprite/intrusive_order.hpp>
+#include <sge/sprite/intrusive/order.hpp>
 #include <sge/math/vector/basic_decl.hpp>
 #include <vector>
 
@@ -28,7 +28,7 @@ public:
 		draw::environment const &env,
 		entity_id id,
 		size_type,
-		sge::sprite::intrusive_order order);
+		sge::sprite::intrusive::order order);
 	
 	sge::sprite::point const center() const;
 	sge::sprite::point const pos() const;

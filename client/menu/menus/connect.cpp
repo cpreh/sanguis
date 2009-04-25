@@ -2,6 +2,7 @@
 #include "../../../resolution.hpp"
 #include <sge/systems/instance.hpp>
 #include <sge/image/loader.hpp>
+#include <sge/gui/widgets/parameters.hpp>
 #include <sge/gui/layouts/horizontal.hpp>
 #include <sge/gui/layouts/vertical.hpp>
 #include <sge/gui/make_image.hpp>

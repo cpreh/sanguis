@@ -3,6 +3,7 @@
 #include "log.hpp"
 #include "../resolution.hpp"
 #include "../media_path.hpp"
+#include <sge/gui/widgets/parameters.hpp>
 #include <sge/gui/skins/standard.hpp>
 #include <sge/gui/layouts/vertical.hpp>
 #include <sge/gui/unit.hpp>

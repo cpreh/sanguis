@@ -1,4 +1,5 @@
 #include "button.hpp"
+#include <sge/gui/widgets/parameters.hpp>
 #include <sge/gui/make_image.hpp>
 #include <sge/gui/manager.hpp>
 #include <sge/image/loader.hpp>
@@ -9,21 +10,22 @@ sanguis::client::menu::button::button(
 	sge::image::loader_ptr const il,
 	sge::filesystem::path const &base,
 	sge::string const &name)
-	: image(
-			parent,
-			sge::gui::widgets::parameters(),
-			sge::gui::make_image(
-				il->load(
-					base/name/SGE_TEXT("normal.png"))),
-			sge::gui::make_image(
-				il->load(
-					base/name/SGE_TEXT("hover.png"))),
-			sge::gui::make_image(
-				il->load(
-					base/name/SGE_TEXT("keyboard.png"))),
-			sge::gui::make_image(
-				il->load(
-					base/name/SGE_TEXT("hover_keyboard.png"))))
+:
+	image(
+		parent,
+		sge::gui::widgets::parameters(),
+		sge::gui::make_image(
+			il->load(
+				base/name/SGE_TEXT("normal.png"))),
+		sge::gui::make_image(
+			il->load(
+				base/name/SGE_TEXT("hover.png"))),
+		sge::gui::make_image(
+			il->load(
+				base/name/SGE_TEXT("keyboard.png"))),
+		sge::gui::make_image(
+			il->load(
+				base/name/SGE_TEXT("hover_keyboard.png"))))
 {
 }
 
