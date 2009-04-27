@@ -24,8 +24,10 @@ sanguis::server::weapons::shotgun::shotgun(
 		static_cast<
 			time_type
 		>(
-			0.5), // FIXME
-		reload_time),
+			0.5
+		), // FIXME
+		reload_time
+	),
 	spread_radius(spread_radius),
 	shells(shells),
 	damage(damage)
@@ -48,7 +50,8 @@ void sanguis::server::weapons::shotgun::do_attack(
 		normal_distribution_su(
 			a.angle(), // mean value
 			spread_radius // sigma
-		));
+		)
+	);
 
 	for(unsigned i = 0; i < shells; ++i)
 		insert(
@@ -58,5 +61,8 @@ void sanguis::server::weapons::shotgun::do_attack(
 					a.spawn_point(),
 					rng(),
 					a.team(),
-					damage)));
+					damage
+				)
+			)
+		);
 }
