@@ -16,7 +16,6 @@
 #include <sge/log/headers.hpp>
 #include <sge/parse/json/parse_file.hpp>
 #include <sge/parse/json/object.hpp>
-#include <sge/parse/json/member_name_equal.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/get.hpp>
 #include <sge/fstream.hpp>
@@ -155,27 +154,12 @@ void sanguis::load::model::model::construct(
 		object_return.members
 	);
 
-	sge::parse::json::member_vector::const_iterator const header_it(
-		std::find_if(
-			global_entries.begin(),
-			global_entries.end(),
-			sge::parse::json::member_name_equal(
-				SGE_TEXT("header")
-			)
-		)
-	);
-
-	if(header_it == global_entries.end())
-		throw sanguis::exception(
-			SGE_TEXT("header subsection not found in ")
-			+ file.string()
-		);
-
-	sge::parse::json::object const header(
-		sge::parse::json::get<
+	sge::parse::json::object const &header(
+		get_entry<
 			sge::parse::json::object
 		>(
-			header_it->value_
+			global_entries,
+			SGE_TEXT("header")
 		)
 	);
 
@@ -191,19 +175,6 @@ void sanguis::load::model::model::construct(
 		)
 	);
 
-	sge::parse::json::member_vector::const_iterator const array_it(
-		std::find_if(
-			global_entries.begin(),
-			global_entries.end(),
-			sge::parse::json::member_name_equal(
-				SGE_TEXT("animations")
-			)
-		)
-	);
-
-	if(array_it == global_entries.end())
-		return;
-
 	optional_texture_identifier const texture(
 		find_texture(
 			global_entries
@@ -212,10 +183,11 @@ void sanguis::load::model::model::construct(
 
 	BOOST_FOREACH(
 		sge::parse::json::element_vector::const_reference r,
-		sge::parse::json::get<
+		get_entry<
 			sge::parse::json::array
 		>(
-			array_it->value_
+			global_entries,
+			SGE_TEXT("parts")
 		).elements
 	)
 	{
@@ -232,7 +204,11 @@ void sanguis::load::model::model::construct(
 				std::make_pair(
 					member.name,
 					part(
-						member.value_,
+						sge::parse::json::get<
+							sge::parse::json::object
+						>(
+							member.value_
+						),
 						global_parameters(
 							path,
 							ctx.textures(),

@@ -5,7 +5,7 @@
 #include "animation.hpp"
 #include "global_parameters_fwd.hpp"
 #include "../../animation_type.hpp"
-#include <sge/parse/json/value.hpp>
+#include <sge/parse/json/object_fwd.hpp>
 #include <map>
 
 namespace sanguis
@@ -22,7 +22,7 @@ public:
 		animation_type::type) const;
 private:
 	explicit weapon_category(
-		sge::parse::json::value const &,
+		sge::parse::json::object const &,
 		global_parameters const &);
 	
 	friend class part;

@@ -6,7 +6,7 @@
 #include "../resource/context_fwd.hpp"
 #include <sge/sprite/animation_series.hpp>
 #include <sge/texture/part_fwd.hpp>
-#include <sge/parse/json/value.hpp>
+#include <sge/parse/json/object_fwd.hpp>
 #include <sge/shared_ptr.hpp>
 
 namespace sanguis
@@ -25,7 +25,7 @@ public:
 	sounds() const;
 private:
 	animation(
-		sge::parse::json::value const &,
+		sge::parse::json::object const &,
 		global_parameters const &);
 
 	friend class weapon_category;

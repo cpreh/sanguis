@@ -38,6 +38,10 @@ struct global_parameters {
 
 	optional_texture_identifier const &
 	texture() const;
+
+	global_parameters const
+	new_texture(
+		optional_texture_identifier const &) const;
 private:
 	sge::filesystem::path const path_;
 	resource::textures const &textures_;

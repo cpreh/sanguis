@@ -1,4 +1,7 @@
 #include "part.hpp"
+#include "find_texture.hpp"
+#include "get_entry.hpp"
+#include "global_parameters.hpp"
 #include "../log.hpp"
 #include "../../exception.hpp"
 #include <sge/parse/json/array.hpp>
@@ -6,6 +9,7 @@
 #include <sge/parse/json/get.hpp>
 #include <sge/algorithm/find_exn.hpp>
 #include <sge/log/headers.hpp>
+#include <sge/optional_impl.hpp>
 #include <sge/text.hpp>
 #include <sge/string.hpp>
 #include <boost/tr1/array.hpp>
@@ -67,18 +71,30 @@ sanguis::load::model::part::operator[](
 }
 
 sanguis::load::model::part::part(
-	sge::parse::json::value const &val,
+	sge::parse::json::object const &object,
 	global_parameters const &param)
 :
 	categories()
 {
+	sge::parse::json::member_vector const &members(
+		object.members
+	);
+
+	optional_texture_identifier const texture(
+		find_texture(
+			members
+		)
+	);
+			
 	BOOST_FOREACH(
 		sge::parse::json::element_vector::const_reference r,
-		sge::parse::json::get<
+		get_entry<
 			sge::parse::json::array
 		>(
-			val
-		).elements)
+			members,
+			SGE_TEXT("weapon_categories")
+		).elements
+	)
 	{
 		sge::parse::json::member const &member(
 			sge::parse::json::get<
@@ -95,8 +111,14 @@ sanguis::load::model::part::part(
 						member.name
 					),
 					weapon_category(
-						member.value_,
-						param
+						sge::parse::json::get<
+							sge::parse::json::object
+						>(
+							member.value_
+						),
+						param.new_texture(
+							texture
+						)
 					)
 				)
 			).second == false

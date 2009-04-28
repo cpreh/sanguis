@@ -1,5 +1,8 @@
 #include "weapon_category.hpp"
 #include "base_animation_not_found.hpp"
+#include "global_parameters.hpp"
+#include "find_texture.hpp"
+#include "get_entry.hpp"
 #include "../log.hpp"
 #include "../../exception.hpp"
 #include <sge/parse/json/array.hpp>
@@ -69,17 +72,28 @@ sanguis::load::model::weapon_category::operator[](
 }
 
 sanguis::load::model::weapon_category::weapon_category(
-	sge::parse::json::value const &val,
+	sge::parse::json::object const &object,
 	global_parameters const &param)
 :
 	animations()
 {
+	sge::parse::json::member_vector const &members(
+		object.members
+	);
+
+	optional_texture_identifier const texture(
+		find_texture(
+			members
+		)
+	);
+
 	BOOST_FOREACH(
 		sge::parse::json::element_vector::const_reference r,
-		sge::parse::json::get<
+		get_entry<
 			sge::parse::json::array
 		>(
-			val	
+			members	,
+			SGE_TEXT("animations")
 		).elements
 	)
 	{
@@ -98,8 +112,14 @@ sanguis::load::model::weapon_category::weapon_category(
 						member.name
 					),
 					animation(
-						member.value_,
-						param
+						sge::parse::json::get<
+							sge::parse::json::object
+						>(
+							member.value_
+						),
+						param.new_texture(
+							texture
+						)
 					)
 				)
 			).second == false

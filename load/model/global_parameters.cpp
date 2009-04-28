@@ -43,3 +43,18 @@ sanguis::load::model::global_parameters::texture() const
 {
 	return texture_;
 }
+
+sanguis::load::model::global_parameters const
+sanguis::load::model::global_parameters::new_texture(
+	optional_texture_identifier const &ntex) const
+{
+	return ntex
+		? global_parameters(
+			path(),
+			textures(),
+			cell_size(),
+			delay(),
+			ntex
+		)
+		: *this;
+}

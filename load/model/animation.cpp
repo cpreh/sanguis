@@ -2,6 +2,7 @@
 #include "get_entry.hpp"
 #include "animation_sound.hpp"
 #include "global_parameters.hpp"
+#include "find_texture.hpp"
 #include "../resource/textures.hpp"
 #include "../log.hpp"
 #include "../../exception.hpp"
@@ -62,7 +63,7 @@ calc_rect(
 
 sge::time::unit
 load_delay(
-	sge::parse::json::object const &obj,
+	sge::parse::json::member_vector const &members,
 	sanguis::load::model::optional_delay const &opt_delay)
 {
 	try
@@ -70,7 +71,7 @@ load_delay(
 		return sanguis::load::model::get_entry<
 			int	
 		>(
-			obj.members,
+			members,
 			SGE_TEXT("delay")
 		);
 	}
@@ -82,7 +83,7 @@ load_delay(
 		SGE_LOG_ERROR(
 			sanguis::load::log(),
 			sge::log::_1
-				<< SGE_TEXT("delay not in global.ini but not in specified in TODO")
+				<< SGE_TEXT("delay not in header but not in specified in leaf TODO")
 				<< SGE_TEXT(" either!")
 		);
 
@@ -93,7 +94,7 @@ load_delay(
 }
 
 sanguis::load::model::animation::animation(
-	sge::parse::json::value const &val,
+	sge::parse::json::object const &object,
 	global_parameters const &param)
 :
 	anim(
@@ -102,41 +103,63 @@ sanguis::load::model::animation::animation(
 		>()
 	)
 {
+	sge::parse::json::member_vector const &members(
+		object.members
+	);
+
+	optional_texture_identifier const texture(
+		param.new_texture(
+			find_texture(
+				members
+			)
+		).texture()
+	);
+	
+	if(!texture)
+		throw exception(
+			SGE_TEXT("texture not found in ")
+			+ param.path().string()
+		);
+
 	sge::texture::part_ptr const tex(
 		param.textures().load(
-			param.path()
+			param.path() / *texture
 		)
 	);
 
-	sge::parse::json::object const obj(
-		sge::parse::json::get<
-			sge::parse::json::object
+	sge::parse::json::element_vector const &range(
+		get_entry<
+			sge::parse::json::array
 		>(
-			val
-		)
+			members,
+			SGE_TEXT("range")
+		).elements
 	);
+
+	if(range.size() < 2)
+		throw exception(
+			SGE_TEXT("range has too few elements in TODO")
+		);
 
 	sge::renderer::size_type const
 		begin(
-			get_entry<
-				int	
+			sge::parse::json::get<
+				int
 			>(
-				obj.members,
-				SGE_TEXT("begin")
+				range[0]
 			)
 		),
 		end(
-			get_entry<
+			sge::parse::json::get<
 				int	
 			>(
-				obj.members,
-				SGE_TEXT("end")
+				range[1]
 			)
 		);
 
 	sge::time::unit const delay(
 		load_delay(
-			obj,
+			members,
 			param.delay()
 		)
 	);
