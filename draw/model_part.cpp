@@ -88,38 +88,106 @@ void sanguis::draw::model_part::update(
 
 	if(sge::math::compare(desired_orientation, invalid_rotation))
 		return;
+	
+	if(sge::math::compare(orientation(), desired_orientation))
+		return;
 
 	funit const
-		abs_angle(
+		// current orientation in [0,2pi]
+		abs_current(
 			sge::math::rel_angle_to_abs(
 				orientation())),
+		// target orientation in [0,2pi]
 		abs_target(
 			sge::math::rel_angle_to_abs(
 				desired_orientation));
 	
+	// shortcut
 	funit const twopi = sge::math::twopi<funit>();
 
-	SGE_ASSERT(abs_angle >= static_cast<funit>(0) && abs_angle <= twopi);
-	SGE_ASSERT(abs_target >= static_cast<funit>(0) && abs_target <= twopi);
+	// TODO: those could be removed, should be asserted in rel_angle_to_abs?
+	SGE_ASSERT(
+		abs_current >= static_cast<funit>(0) && 
+		abs_current <= twopi);
+	SGE_ASSERT(
+		abs_target >= static_cast<funit>(0) && 
+		abs_target <= twopi);
+
+	// Explanation: we now have the current orientation ('c') and the target ('t')
+	// angle on a "line":
+	//
+	// 0 |--------c------------t------------| 2pi
+	// 
+	//    ...dist    abs_dist           swap_...
+	//
+	// The abs_dist below is the "direct" distance from 'c' to 't'. The swap_dist
+	// is the distance from 't' to 2pi (the "end") and from there - after
+	// wrapping to the origin - to 'c'. Of course, 'c' could also be greater than
+	// 't', hence the if test in swap_dist.
+	//
 
 	funit const
-		abs_dist = std::abs(abs_target - abs_angle),
-		swap_dist = (abs_angle > abs_target) ? twopi-abs_angle+abs_target : twopi-abs_target+abs_angle,
+		// this is the "inner distance" from 
+		abs_dist = std::abs(abs_target - abs_current),
+		swap_dist = (abs_current > abs_target) 
+			? twopi-abs_current+abs_target 
+			: twopi-abs_target+abs_current,
 		min_dist = std::min(swap_dist,abs_dist);
 
-	SGE_ASSERT(abs_dist >= static_cast<funit>(0) && swap_dist >= static_cast<funit>(0) && min_dist >= static_cast<funit>(0));
+	SGE_ASSERT(
+		abs_dist >= static_cast<funit>(0) && 
+		swap_dist >= static_cast<funit>(0) && 
+		min_dist >= static_cast<funit>(0));
 
+	// We go left or right, depending on:
+	//
+	// (i) which distance (abs_dist or swap_dist) is smaller
+	// (ii) if the current orientation is greater than the target
 	funit const dir
-		= abs_angle > abs_target
+		= abs_current > abs_target
 		? ((swap_dist > abs_dist) ? static_cast<funit>(-1) : static_cast<funit>(1))
 		: ((swap_dist > abs_dist) ? static_cast<funit>(1) : static_cast<funit>(-1));
 
-	funit const turning_speed = sge::math::twopi<sanguis::draw::funit>();
+	funit const turning_speed = 
+		sge::math::twopi<sanguis::draw::funit>();
 
-	update_orientation(
-		min_dist < time / turning_speed
-		? desired_orientation
-		: sge::math::abs_angle_to_rel(abs_angle + dir * time * turning_speed));
+	funit const new_orientation = 
+		abs_current + dir * time * turning_speed;
+	
+	// This fixes the "epilepsy" bug. Imagine the current orientation being 10,
+	// the desired orientation being 20 and "time" is relatively large in the
+	// above assignment. So we might not get orientation values of 15 or 18
+	// oder 20 in the next frame, but maybe 30. If the next frame is slow again,
+	// the orientation is corrected "downwards" to 5 or 10 again, then upwards and
+	// so on, causing epilepsy.
+	if (dir > static_cast<funit>(0))
+	{
+		if (new_orientation < desired_orientation)
+		{
+			update_orientation(
+				sge::math::abs_angle_to_rel(
+					new_orientation));
+		}
+		else
+		{
+			update_orientation(
+				desired_orientation);
+		}
+	}
+	else
+	{
+		if (new_orientation > desired_orientation)
+		{
+			update_orientation(
+				sge::math::abs_angle_to_rel(
+					new_orientation));
+		}
+		else
+		{
+			update_orientation(
+				desired_orientation);
+		}
+	}
 }
 
 void sanguis::draw::model_part::orientation(

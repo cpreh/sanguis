@@ -1,7 +1,7 @@
 // own
 #include "server/machine.hpp"
 #include "client/machine.hpp"
-#include "client/states/start.hpp"
+#include "client/states/menu.hpp"
 #include "server/states/running.hpp"
 #include "server/states/unpaused.hpp"
 #include "server/entities/entity.hpp"

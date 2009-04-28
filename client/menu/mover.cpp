@@ -30,23 +30,22 @@ sanguis::client::menu::mover::float_type const
 	epsilon = 
 		static_cast<sanguis::client::menu::mover::float_type>(3.0);
 
-sge::gui::point const center_widget(
-	sge::gui::widgets::base &w)
+sge::gui::point const center(
+	sge::gui::dim const &d)
 {
 	return sge::structure_cast<sge::gui::point>(
 		sge::structure_cast<sge::gui::dim>(
 				sanguis::resolution())/
 			static_cast<sge::gui::unit>(2)-
 			sge::structure_cast<sge::gui::dim>(
-				w.size())/
+				d)/
 			static_cast<sge::gui::unit>(2));
 }
 
-bool almost_zero(sanguis::client::menu::mover::float_vector const &v)
+sge::gui::point const center_widget(
+	sge::gui::widgets::base &w)
 {
-	return 
-		std::abs(v.x()) < epsilon && 
-		std::abs(v.y()) < epsilon;
+	return center(w.size());
 }
 }
 
@@ -72,9 +71,14 @@ sanguis::client::menu::mover::mover(
 	current_->activation(
 		sge::gui::activation_state::active);
 	
+	/*
 	current_->pos_hint(
-		center_widget(
+		center_widget_hinted(
 			*current_));
+			*/
+	current_->pos_hint(
+		center(
+			*current_->size_hint()));
 
 	current_entry_.current = 
 		sge::structure_cast<float_vector>(
@@ -86,35 +90,10 @@ sanguis::client::menu::mover::mover(
 void sanguis::client::menu::mover::update(
 	time_type const &t)
 {
-	float_type const accumulated = 
-		static_cast<float_type>(t+remaining_time_);
-	
-	unsigned iterations = 
-		static_cast<unsigned>(
-			accumulated/time_step);
-
-	remaining_time_ = 
-		static_cast<float_type>(
-			accumulated) - 
-		static_cast<float_type>(
-			iterations)*
-		time_step;
-	
-	for (unsigned i = 0; i < iterations; ++i)
-	{
-		update_position(
-			*current_,
-			current_entry_,
-			time_step);
-
-		BOOST_FOREACH(container::reference r,to_move_)
-		{
-			update_position(
-				*r.first,
-				r.second,
-				time_step);
-		}
-	}
+	update_position(
+		*current_,
+		current_entry_,
+		t);
 
 	update_visibility(
 		*current_,
@@ -122,6 +101,11 @@ void sanguis::client::menu::mover::update(
 
 	BOOST_FOREACH(container::reference r,to_move_)
 	{
+		update_position(
+			*r.first,
+			r.second,
+			t);
+
 		update_visibility(
 			*r.first,
 			r.second);
@@ -160,14 +144,23 @@ void sanguis::client::menu::mover::update_position(
 	entry &e,
 	time_type const &t)
 {
-	float_vector const 
-		diff = e.target - e.current;
+	float_vector const diff = 
+		e.target - e.current,
+		normdiff = sge::math::vector::normalize(
+			diff),
+		projected = 
+			normdiff * 
+			static_cast<float_type>(t) * 
+			speed_;
 	
-	if (!almost_zero(diff))
-		e.current += 
-			static_cast<float_type>(t)*
-			speed_*
-			sge::math::vector::normalize(diff);
+	if (sge::math::vector::is_null(diff) || sge::math::vector::is_null(projected))
+		return;
+
+	e.current += 
+		normdiff * 
+		std::min(
+			sge::math::vector::length(diff),
+			sge::math::vector::length(projected));
 
 	w.pos_hint(
 		sge::structure_cast<sge::gui::point>(
