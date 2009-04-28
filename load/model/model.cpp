@@ -18,9 +18,11 @@
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/member_name_equal.hpp>
 #include <sge/parse/json/array.hpp>
+#include <sge/parse/json/get.hpp>
 #include <sge/fstream.hpp>
 #include <sge/text.hpp>
 #include <boost/foreach.hpp>
+#include <boost/variant/get.hpp>
 #include <utility>
 #include <functional>
 #include <algorithm>
@@ -35,17 +37,37 @@ sge::renderer::dim_type const
 load_dim(
 	sge::parse::json::member_vector const &entries)
 {
+	sge::parse::json::array const &array(
+		sanguis::load::model::get_entry<
+			sge::parse::json::array
+		>(
+			entries,
+			SGE_TEXT("cell_dimensions")
+		)
+	);
+
+	sge::parse::json::element_vector const &elements(
+		array.elements
+	);
+
+	if(elements.size() < 2)
+		throw sanguis::exception(
+			SGE_TEXT("Insufficient members in cell_dimensions!")
+		);
+	
 	return sge::renderer::dim_type(
 		static_cast<sge::renderer::size_type>(
-			sanguis::load::model::get_entry<int>(
-				entries,
-				SGE_TEXT("cell_width")
+			sge::parse::json::get<
+				int	
+			>(
+				elements[0]
 			)
 		),
 		static_cast<sge::renderer::size_type>(
-			sanguis::load::model::get_entry<int>(
-				entries,
-				SGE_TEXT("cell_height")
+			sge::parse::json::get<
+				int	
+			>(
+				elements[1]
 			)
 		)
 	);
@@ -77,8 +99,39 @@ sanguis::load::model::model::model(
 	path(path),
 	parts()
 {
+	SGE_LOG_DEBUG(
+		log(),
+		sge::log::_1
+			<< SGE_TEXT("Entering ")
+			<< path.string()
+	);
+
+	try
+	{
+		construct(
+			ctx
+		);
+	}
+	catch(sge::exception const &e)
+	{
+		SGE_LOG_ERROR(
+			log(),
+			sge::log::_1
+				<< SGE_TEXT("model \"")
+				<< path.string()
+				<< SGE_TEXT("\" ")
+				<< e.what()
+		);
+
+		throw;
+	}
+}
+
+void sanguis::load::model::model::construct(
+	resource::context const &ctx)
+{
 	sge::filesystem::path const file(
-		path / SGE_TEXT("config.json")
+		path / (sge::filesystem::stem(path) + SGE_TEXT(".json"))
 	);
 
 	sge::parse::json::object object_return;
@@ -119,7 +172,7 @@ sanguis::load::model::model::model(
 		);
 
 	sge::parse::json::object const header(
-		boost::get<
+		sge::parse::json::get<
 			sge::parse::json::object
 		>(
 			header_it->value_
@@ -159,7 +212,7 @@ sanguis::load::model::model::model(
 
 	BOOST_FOREACH(
 		sge::parse::json::element_vector::const_reference r,
-		boost::get<
+		sge::parse::json::get<
 			sge::parse::json::array
 		>(
 			array_it->value_
@@ -167,7 +220,7 @@ sanguis::load::model::model::model(
 	)
 	{
 		sge::parse::json::member const &member(
-			boost::get<
+			sge::parse::json::get<
 				sge::parse::json::object
 			>(
 				r

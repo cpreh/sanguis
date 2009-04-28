@@ -4,13 +4,13 @@
 #include "../../exception.hpp"
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
+#include <sge/parse/json/get.hpp>
 #include <sge/filesystem/exists.hpp>
 #include <sge/algorithm/find_exn.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/string.hpp>
 #include <sge/text.hpp>
 #include <boost/tr1/array.hpp>
-#include <boost/variant/get.hpp>
 #include <boost/foreach.hpp>
 #include <utility>
 #include <iterator>
@@ -76,7 +76,7 @@ sanguis::load::model::weapon_category::weapon_category(
 {
 	BOOST_FOREACH(
 		sge::parse::json::element_vector::const_reference r,
-		boost::get<
+		sge::parse::json::get<
 			sge::parse::json::array
 		>(
 			val	
@@ -84,7 +84,7 @@ sanguis::load::model::weapon_category::weapon_category(
 	)
 	{
 		sge::parse::json::member const &member(
-			boost::get<
+			sge::parse::json::get<
 				sge::parse::json::object
 			>(
 				r

@@ -2,11 +2,11 @@
 #define SANGUIS_LOAD_MODEL_GET_ENTRY_HPP_INCLUDED
 
 #include "../../exception.hpp"
-#include <sge/text.hpp>
-#include <sge/string.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/member_name_equal.hpp>
-#include <boost/variant/get.hpp>
+#include <sge/parse/json/get.hpp>
+#include <sge/text.hpp>
+#include <sge/string.hpp>
 #include <algorithm>
 
 namespace sanguis
@@ -41,7 +41,7 @@ get_entry(
 			+ SGE_TEXT(" not found")
 		);
 	
-	return boost::get<
+	return sge::parse::json::get<
 		T
 	>(
 		it->value_

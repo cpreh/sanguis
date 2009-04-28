@@ -5,7 +5,7 @@
 #include "../resource/textures.hpp"
 #include "../log.hpp"
 #include "../../exception.hpp"
-#include <sge/parse/ini/entry.hpp>
+#include <sge/parse/json/get.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/time/millisecond.hpp>
@@ -109,7 +109,7 @@ sanguis::load::model::animation::animation(
 	);
 
 	sge::parse::json::object const obj(
-		boost::get<
+		sge::parse::json::get<
 			sge::parse::json::object
 		>(
 			val

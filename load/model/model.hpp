@@ -31,6 +31,9 @@ private:
 	model(
 		sge::filesystem::path const &,
 		resource::context const &);
+	
+	void construct(
+		resource::context const &);
 
 	friend class collection;
 

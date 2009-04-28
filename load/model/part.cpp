@@ -3,12 +3,12 @@
 #include "../../exception.hpp"
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
+#include <sge/parse/json/get.hpp>
 #include <sge/algorithm/find_exn.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/text.hpp>
 #include <sge/string.hpp>
 #include <boost/tr1/array.hpp>
-#include <boost/variant/get.hpp>
 #include <boost/foreach.hpp>
 #include <iterator>
 #include <utility>
@@ -74,14 +74,14 @@ sanguis::load::model::part::part(
 {
 	BOOST_FOREACH(
 		sge::parse::json::element_vector::const_reference r,
-		boost::get<
+		sge::parse::json::get<
 			sge::parse::json::array
 		>(
 			val
 		).elements)
 	{
 		sge::parse::json::member const &member(
-			boost::get<
+			sge::parse::json::get<
 				sge::parse::json::object
 			>(
 				r

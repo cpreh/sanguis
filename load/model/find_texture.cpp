@@ -1,6 +1,7 @@
 #include "find_texture.hpp"
 #include "get_entry.hpp"
 #include "../../exception.hpp"
+#include <sge/parse/json/array.hpp>
 #include <sge/optional_impl.hpp>
 #include <sge/string.hpp>
 #include <sge/text.hpp>
