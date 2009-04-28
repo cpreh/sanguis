@@ -2,6 +2,8 @@
 #include "split_first_slash.hpp"
 #include "get_entry.hpp"
 #include "optional_delay.hpp"
+#include "find_texture.hpp"
+#include "global_parameters.hpp"
 #include "../../exception.hpp"
 #include "../resource/context.hpp"
 #include "../resource/textures.hpp"
@@ -15,6 +17,7 @@
 #include <sge/parse/json/parse_file.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/member_name_equal.hpp>
+#include <sge/parse/json/array.hpp>
 #include <sge/fstream.hpp>
 #include <sge/text.hpp>
 #include <boost/foreach.hpp>
@@ -30,7 +33,7 @@ namespace
 
 sge::renderer::dim_type const
 load_dim(
-	sge::parse::ini::entry_vector const &entries)
+	sge::parse::json::member_vector const &entries)
 {
 	return sge::renderer::dim_type(
 		static_cast<sge::renderer::size_type>(
@@ -50,7 +53,7 @@ load_dim(
 
 sanguis::load::model::optional_delay const
 load_delay(
-	sge::parse::ini::entry_vector const &entries)
+	sge::parse::json::member_vector const &entries)
 {
 	try
 	{
@@ -78,22 +81,26 @@ sanguis::load::model::model::model(
 		path / SGE_TEXT("config.json")
 	);
 
-	sge::parse::json::object global_entries;
+	sge::parse::json::object object_return;
 	
 	if(
 		!sge::parse::json::parse_file(
-			path,
-			global_entries
+			file,
+			object_return
 		)
 	)
 	{
 		SGE_LOG_WARNING(
 			sanguis::load::log(),
 			sge::log::_1
-				<< global_ini
+				<< file 
 				<< SGE_TEXT(" contains errors!")
 			);
 	}
+
+	sge::parse::json::member_vector const &global_entries(
+		object_return.members
+	);
 
 	sge::parse::json::member_vector::const_iterator const header_it(
 		std::find_if(
@@ -136,7 +143,7 @@ sanguis::load::model::model::model(
 			global_entries.begin(),
 			global_entries.end(),
 			sge::parse::json::member_name_equal(
-				SGE_TEXT("entries")
+				SGE_TEXT("animations")
 			)
 		)
 	);
@@ -144,8 +151,14 @@ sanguis::load::model::model::model(
 	if(array_it == global_entries.end())
 		return;
 
+	optional_texture_identifier const texture(
+		find_texture(
+			global_entries
+		)
+	);
+
 	BOOST_FOREACH(
-		sge::parse::json::array::element_vector::const_reference r,
+		sge::parse::json::element_vector::const_reference r,
 		boost::get<
 			sge::parse::json::array
 		>(
@@ -153,17 +166,26 @@ sanguis::load::model::model::model(
 		).elements
 	)
 	{
+		sge::parse::json::member const &member(
+			boost::get<
+				sge::parse::json::object
+			>(
+				r
+			).members.at(0)
+		);
+
 		if(
 			parts.insert(
 				std::make_pair(
-					r.name,
+					member.name,
 					part(
-						r.value_,
+						member.value_,
 						global_parameters(
 							path,
 							ctx.textures(),
 							cell_size,
-							opt_delay
+							opt_delay,
+							texture
 						)
 					)
 				)

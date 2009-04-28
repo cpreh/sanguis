@@ -1,11 +1,16 @@
 #include "part.hpp"
+#include "../log.hpp"
 #include "../../exception.hpp"
 #include <sge/parse/json/array.hpp>
+#include <sge/parse/json/object.hpp>
+#include <sge/algorithm/find_exn.hpp>
+#include <sge/log/headers.hpp>
 #include <sge/text.hpp>
 #include <sge/string.hpp>
 #include <boost/tr1/array.hpp>
 #include <boost/variant/get.hpp>
 #include <boost/foreach.hpp>
+#include <iterator>
 #include <utility>
 
 namespace
@@ -25,6 +30,24 @@ weapon_type_array const weapon_types = {
 	SGE_TEXT("shotgun"),
 	SGE_TEXT("rocket_launcher")
 } };
+
+sanguis::weapon_type::type
+find_weapon_type(
+	sge::string const &str)
+{
+	return static_cast<
+		sanguis::weapon_type::type
+	>(
+		std::distance(
+			weapon_types.begin(),
+			sge::algorithm::find_exn(
+				weapon_types.begin(),
+				weapon_types.end(),
+				str
+			)
+		)
+	);
+}
 
 }
 
@@ -50,19 +73,29 @@ sanguis::load::model::part::part(
 	categories()
 {
 	BOOST_FOREACH(
-		sge::parse::json::array::element_vector::const_reference r,
+		sge::parse::json::element_vector::const_reference r,
 		boost::get<
 			sge::parse::json::array
 		>(
 			val
 		).elements)
 	{
+		sge::parse::json::member const &member(
+			boost::get<
+				sge::parse::json::object
+			>(
+				r
+			).members.at(0)
+		);
+			
 		if(	
 			categories.insert(
 				std::make_pair(
-					r.name,
+					find_weapon_type(
+						member.name
+					),
 					weapon_category(
-						r.value_,
+						member.value_,
 						param
 					)
 				)

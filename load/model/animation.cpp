@@ -70,7 +70,7 @@ load_delay(
 		return sanguis::load::model::get_entry<
 			int	
 		>(
-			obj,
+			obj.members,
 			SGE_TEXT("delay")
 		);
 	}
@@ -121,7 +121,7 @@ sanguis::load::model::animation::animation(
 			get_entry<
 				int	
 			>(
-				obj,
+				obj.members,
 				SGE_TEXT("begin")
 			)
 		),
@@ -129,7 +129,7 @@ sanguis::load::model::animation::animation(
 			get_entry<
 				int	
 			>(
-				obj,
+				obj.members,
 				SGE_TEXT("end")
 			)
 		);

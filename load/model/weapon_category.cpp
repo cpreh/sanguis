@@ -1,10 +1,17 @@
 #include "weapon_category.hpp"
 #include "base_animation_not_found.hpp"
+#include "../log.hpp"
 #include "../../exception.hpp"
+#include <sge/parse/json/array.hpp>
+#include <sge/parse/json/object.hpp>
 #include <sge/filesystem/exists.hpp>
+#include <sge/algorithm/find_exn.hpp>
+#include <sge/log/headers.hpp>
 #include <sge/string.hpp>
 #include <sge/text.hpp>
 #include <boost/tr1/array.hpp>
+#include <boost/variant/get.hpp>
+#include <boost/foreach.hpp>
 #include <utility>
 #include <iterator>
 
@@ -24,6 +31,24 @@ animation_type_array const animation_types = {{
 	SGE_TEXT("deploying"),
 	SGE_TEXT("reloading")
 }};
+
+sanguis::animation_type::type
+find_animation_type(
+	sge::string const &str)
+{
+	return static_cast<
+		sanguis::animation_type::type
+	>(
+		std::distance(
+			animation_types.begin(),
+			sge::algorithm::find_exn(
+				animation_types.begin(),
+				animation_types.end(),
+				str
+			)
+		)
+	);
+}
 
 }
 
@@ -50,20 +75,30 @@ sanguis::load::model::weapon_category::weapon_category(
 	animations()
 {
 	BOOST_FOREACH(
-		sge::parse::json::array::element_vector::const_reference r,
+		sge::parse::json::element_vector::const_reference r,
 		boost::get<
 			sge::parse::json::array
 		>(
-			array_it->value_
+			val	
 		).elements
 	)
 	{
+		sge::parse::json::member const &member(
+			boost::get<
+				sge::parse::json::object
+			>(
+				r
+			).members.at(0)
+		);
+
 		if(
 			animations.insert(
 				std::make_pair(
-					r.name,
+					find_animation_type(
+						member.name
+					),
 					animation(
-						r.value,
+						member.value_,
 						param
 					)
 				)

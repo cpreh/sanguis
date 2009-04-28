@@ -21,20 +21,20 @@ template<
 >
 T
 get_entry(
-	sge::parse::json::object const &o,
+	sge::parse::json::member_vector const &members,
 	sge::string const &name)
 {
-	sge::parse::json::object::member_vector::const_iterator const it(
+	sge::parse::json::member_vector::const_iterator const it(
 		std::find_if(
-			o.members.begin(),
-			o.members.end(),
+			members.begin(),
+			members.end(),
 			sge::parse::json::member_name_equal(
 				name
 			)
 		)
 	);
 
-	if(it == o.members.end())
+	if(it == members.end())
 		throw exception(
 			SGE_TEXT("entry ")
 			+ name
