@@ -36,9 +36,9 @@ get_entry(
 
 	if(it == members.end())
 		throw exception(
-			SGE_TEXT("entry ")
+			SGE_TEXT("entry \"")
 			+ name
-			+ SGE_TEXT(" not found")
+			+ SGE_TEXT("\" not found")
 		);
 	
 	return sge::parse::json::get<

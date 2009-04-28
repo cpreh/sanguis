@@ -118,8 +118,9 @@ sanguis::load::model::model::model(
 			sge::log::_1
 				<< SGE_TEXT("model \"")
 				<< path.string()
-				<< SGE_TEXT("\" ")
+				<< SGE_TEXT("\": \"")
 				<< e.what()
+				<< SGE_TEXT('"')
 		);
 
 		throw;
