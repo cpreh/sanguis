@@ -36,6 +36,10 @@ private:
 	sge::texture::part_ptr const
 	do_load(
 		texture_identifier const &) const;
+	
+	sge::texture::part_ptr const
+	do_load_unnamed(
+		sge::filesystem::path const &) const;
 
 	sge::texture::part_ptr const
 	do_load_inner(
@@ -51,6 +55,11 @@ private:
 	> texture_map;
 
 	typedef std::map<
+		sge::filesystem::path,
+		sge::texture::part_ptr
+	> unnamed_texture_map;
+
+	typedef std::map<
 		texture_identifier,
 		texture_identifier
 	> texture_name_map;
@@ -58,6 +67,7 @@ private:
 	mutable sge::texture::manager texman;
 	sge::image::loader_ptr const il;
 	mutable texture_map textures_;
+	mutable unnamed_texture_map unnamed_textures;
 	mutable texture_name_map texture_names;
 };
 

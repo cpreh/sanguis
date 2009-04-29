@@ -48,15 +48,13 @@ sge::texture::part_ptr const
 sanguis::load::resource::textures::load(
 	sge::filesystem::path const &path) const
 {
-	return sge::make_shared_ptr<
-		sge::texture::part_raw
-	>(
-		sge::image::create_texture(
-			path,
-			texman.renderer(),
-			il,
-			filter,
-			sge::renderer::resource_flags::none
+	return map_get_or_create(
+		unnamed_textures,
+		path,
+		boost::bind(
+			&textures::do_load_unnamed,
+			this,
+			_1
 		)
 	);
 }
@@ -76,6 +74,23 @@ sanguis::load::resource::textures::do_load(
 	return do_load_inner(
 		sanguis::media_path()
 		/ texture_names[id]);
+}
+
+sge::texture::part_ptr const
+sanguis::load::resource::textures::do_load_unnamed(
+	sge::filesystem::path const &path) const
+{
+	return sge::make_shared_ptr<
+		sge::texture::part_raw
+	>(
+		sge::image::create_texture(
+			path,
+			texman.renderer(),
+			il,
+			filter,
+			sge::renderer::resource_flags::none
+		)
+	);
 }
 
 sge::texture::part_ptr const
