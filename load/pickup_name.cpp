@@ -9,7 +9,7 @@ sanguis::load::pickup_name(
 	switch(ptype) {
 	case pickup_type::health:
 		return sge::string(
-			SGE_TEXT("pickup_hp"));
+			SGE_TEXT("pickups/hp"));
 	default:
 		throw exception(
 			SGE_TEXT("load::pickup_name: missing loading code!"));
