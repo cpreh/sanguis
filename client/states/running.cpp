@@ -22,7 +22,7 @@
 #include <sge/audio/pool.hpp>
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/var.hpp>
-#include <sge/renderer/state/states.hpp>
+#include <sge/renderer/state/trampoline.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/container/raw_vector_impl.hpp>
 #include <sge/assert.hpp>
