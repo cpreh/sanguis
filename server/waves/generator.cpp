@@ -14,12 +14,12 @@ sanguis::server::waves::generator::generator()
 		30,
 		1,
 		enemy_type::spider
-	)(
+	/*)(
 		static_cast<time_type>(0),
 		static_cast<time_type>(.5),
 		10,
 		5,
-		enemy_type::maggot
+		enemy_type::maggot*/
 	)(
 		static_cast<time_type>(0),
 		static_cast<time_type>(3),
