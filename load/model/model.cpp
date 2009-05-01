@@ -57,14 +57,16 @@ load_dim(
 	return sge::renderer::dim_type(
 		static_cast<sge::renderer::size_type>(
 			sge::parse::json::get<
-				int	
+				double
+//				int	
 			>(
 				elements[0]
 			)
 		),
 		static_cast<sge::renderer::size_type>(
 			sge::parse::json::get<
-				int	
+				double
+				//int	
 			>(
 				elements[1]
 			)
@@ -78,7 +80,10 @@ load_delay(
 {
 	try
 	{
-		return sanguis::load::model::get_entry<int>(
+		return sanguis::load::model::get_entry<
+			double
+			//int
+		>(
 			entries,
 			SGE_TEXT("delay")
 		);
@@ -192,12 +197,21 @@ void sanguis::load::model::model::construct(
 		).elements
 	)
 	{
-		sge::parse::json::member const &member(
+		sge::parse::json::member_vector const &inner_members(
 			sge::parse::json::get<
 				sge::parse::json::object
 			>(
 				r
-			).members.at(0)
+			).members
+		);
+
+		if(inner_members.size() != 1)
+			throw exception(
+				SGE_TEXT("inner members of the part array have to contain exactly one element!")
+			);
+
+		sge::parse::json::member const &member(
+			inner_members[0]
 		);
 
 		if(

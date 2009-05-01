@@ -97,12 +97,21 @@ sanguis::load::model::weapon_category::weapon_category(
 		).elements
 	)
 	{
-		sge::parse::json::member const &member(
+		sge::parse::json::member_vector const &inner_members(
 			sge::parse::json::get<
 				sge::parse::json::object
 			>(
 				r
-			).members.at(0)
+			).members
+		);
+
+		if(inner_members.size() != 1)
+			throw exception(
+				SGE_TEXT("inner members of the animation array have to contain exactly one element!")
+			);
+
+		sge::parse::json::member const &member(
+			inner_members[0]
 		);
 
 		if(

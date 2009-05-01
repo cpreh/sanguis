@@ -96,14 +96,23 @@ sanguis::load::model::part::part(
 		).elements
 	)
 	{
-		sge::parse::json::member const &member(
+		sge::parse::json::member_vector const &inner_members(
 			sge::parse::json::get<
 				sge::parse::json::object
 			>(
 				r
-			).members.at(0)
+			).members
 		);
-			
+
+		if(inner_members.size() != 1)
+			throw exception(
+				SGE_TEXT("inner members of the weapon category array have to contain exactly one element!")
+			);
+
+		sge::parse::json::member const &member(
+			inner_members[0]
+		);
+
 		if(
 			categories.insert(
 				std::make_pair(
