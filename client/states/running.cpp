@@ -49,7 +49,8 @@ sanguis::client::states::running::running(
 	my_base(ctx), 
 	music_(
 		context<machine>().console_wrapper().con,
-		context<machine>().resources().resources()),
+		context<machine>().resources().resources().sounds()
+	),
 	drawer(
 		new draw::scene(
 			context<machine>().resources(),
@@ -80,20 +81,26 @@ sanguis::client::states::running::running(
 		boost::bind(
 			&logic::handle_player_action,
 			&logic_,
-			_1)),
+			_1
+		)
+	),
 	input_connection(
 		context<machine>().console_wrapper().register_callback(
 			boost::bind(
 				&input_handler::input_callback,
 				&input,
-				_1))),
+				_1
+			)
+		)
+	),
 	perk_chooser_(
 		context<machine>().sys(),
 		boost::bind(
 			&running::send_perk_choose,
 			this,
 			_1),
-		logic_.cursor())
+		logic_.cursor()
+	)
 				/*
 	perk_chooser_(
 		context<machine>().sys(),

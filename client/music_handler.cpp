@@ -1,10 +1,10 @@
 #include "music_handler.hpp"
 #include "../media_path.hpp"
 #include "../load/resource/sounds.hpp"
-#include "../load/resource/sounds.hpp"
 #include <sge/audio/sound.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/console/object.hpp>
+#include <sge/filesystem/directory_iterator.hpp>
 #include <sge/cerr.hpp>
 #include <sge/text.hpp>
 #include <boost/bind.hpp>
@@ -12,9 +12,10 @@
 
 sanguis::client::music_handler::music_handler(
 	sge::console::gfx &_console,
-	load::resource::context const &_resource)
+	load::resource::sounds const &_resource)
 :
 	console_(_console),
+	resource_(_resource),
 	volume_connection_(
 		console_.object().insert(
 			SGE_TEXT("music_volume"),
@@ -25,30 +26,9 @@ sanguis::client::music_handler::music_handler(
 			),
 			SGE_TEXT("takes values from 0 to 100, changes the music volume in percent")
 		)
-	)
-{
-	/*
-	load::sound_container const &s(
-		_resource.sounds().load(
-			media_path() / SGE_TEXT("music")
-		).sounds()
-	);
-	
-	if (s.empty())
-		return;
-
-	sounds_.reset(
-		new load::model::random_sound(
-			s,
-			_resource,
-			load::sound_type::stream
-		)
-	);
-	
-	current_ = sounds_->random();
-	current_->play(sge::audio::play_mode::once);
-	*/
-}
+	),
+	current_()
+{}
 
 void sanguis::client::music_handler::process()
 {
@@ -61,10 +41,21 @@ void sanguis::client::music_handler::process()
 
 void sanguis::client::music_handler::next_title()
 {
-	sge::audio::unit const before = current_->attenuation();
-	current_ = sounds_->random();
+	sge::audio::sound_ptr const old(
+		current_
+	);
+	
+	current_ = load_random();
+	
+	if(!current_)
+		return;
+	
+	if(old)
+		current_->attenuation(
+			old->attenuation()
+		);
+	
 	current_->play(sge::audio::play_mode::once);
-	current_->attenuation(before);
 }
 
 void sanguis::client::music_handler::volume(sge::console::arg_list const &a)
@@ -83,10 +74,42 @@ void sanguis::client::music_handler::volume(sge::console::arg_list const &a)
 
 	try
 	{
-		current_->attenuation(boost::lexical_cast<sge::audio::unit>(a[1]));
+		current_->attenuation(
+			boost::lexical_cast<
+				sge::audio::unit
+			>(
+				a[1]
+			)
+		);
 	}
 	catch (boost::bad_lexical_cast const &)
 	{
 		console_.print(SGE_TEXT("invalid numeric argument"));
 	}
+}
+
+sge::audio::sound_ptr const
+sanguis::client::music_handler::load_random() const
+{
+	// TODO: choose a random one!
+	for(
+		sge::filesystem::directory_iterator it(
+			media_path() / SGE_TEXT("music")
+		);
+		it != sge::filesystem::directory_iterator();
+		++it
+	)
+		try
+		{
+			return resource_.make(
+				resource_.load_uncached(
+					*it
+				),
+				load::sound_type::stream
+			);
+		}
+		catch(sge::exception const &e)
+		{}
+	
+	return sge::audio::sound_ptr();
 }

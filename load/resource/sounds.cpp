@@ -51,6 +51,15 @@ sanguis::load::resource::sounds::load(
 	);
 }
 
+sge::audio::file_ptr const
+sanguis::load::resource::sounds::load_uncached(
+	sge::filesystem::path const &path) const
+{
+	return ml.load(
+		path
+	);
+}
+
 sanguis::load::resource::sounds::~sounds()
 {}
 

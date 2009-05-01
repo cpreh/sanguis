@@ -8,6 +8,7 @@
 #include <sge/audio/pool_fwd.hpp>
 #include <sge/audio/player_fwd.hpp>
 #include <sge/audio/file_fwd.hpp>
+#include <sge/filesystem/path.hpp>
 #include <sge/noncopyable.hpp>
 #include <map>
 
@@ -24,6 +25,10 @@ public:
 	sge::audio::file_ptr const
 	load(
 		sound_identifier const &) const;
+	
+	sge::audio::file_ptr const
+	load_uncached(
+		sge::filesystem::path const &) const;
 	
 	sge::audio::sound_ptr const
 	make(
