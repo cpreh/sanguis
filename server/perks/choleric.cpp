@@ -1,6 +1,7 @@
 #include "choleric.hpp"
 #include "../environment.hpp"
 #include "../entities/projectiles/simple_bullet.hpp"
+#include "../entities/projectiles/rocket.hpp"
 #include <sge/time/second_f.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/random/inclusive_range.hpp>
@@ -25,6 +26,9 @@ sanguis::server::perks::choleric::choleric()
 			static_cast<space_unit>(0),
 			sge::math::twopi<space_unit>()
 		)
+	),
+	damage(
+		static_cast<space_unit>(1)
 	)
 {}
 
@@ -39,22 +43,39 @@ sanguis::server::perks::choleric::do_apply(
 	if(!shoot_timer.update_b())
 		return;
 
-	for(unsigned i = 0; i < 5; ++i)
+	for(unsigned i = 0; i < 3 + level() * 2; ++i)
 		env.insert(
-			entities::auto_ptr(
-				new entities::projectiles::simple_bullet(
-					env,
-					e.center(),
-					rand(),
-					e.team(),
-					static_cast<space_unit>(1.f) // damage
+			can_raise_level()
+			?
+				entities::auto_ptr(
+					new entities::projectiles::simple_bullet(
+						env,
+						e.center(),
+						rand(),
+						e.team(),
+						damage
+					)
 				)
-			)
+			:
+				entities::auto_ptr(
+					new entities::projectiles::rocket(
+						env,
+						e.center(),
+						rand(),
+						e.team(),
+						damage,
+						static_cast<
+							space_unit
+						>(
+							30
+						)
+					)
+				)
 		);
 }
 
 bool
 sanguis::server::perks::choleric::can_raise_level() const
 {
-	return false;
+	return level() < 10;
 }

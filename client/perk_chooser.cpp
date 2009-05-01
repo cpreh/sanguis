@@ -143,13 +143,6 @@ void sanguis::client::perk_chooser::perks(
 void sanguis::client::perk_chooser::level_up(
 	level_type const _current_level)
 {
-	SGE_LOG_DEBUG(
-		mylogger,
-		sge::log::_1 << SGE_TEXT("new level is ")
-		             << _current_level
-								 << SGE_TEXT(", current level is ")
-								 << current_level_);
-
 	SGE_ASSERT(current_level_ <= _current_level);
 
 	current_level_ = _current_level;
