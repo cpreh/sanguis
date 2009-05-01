@@ -1,14 +1,13 @@
 #ifndef SANGUIS_LOAD_RESOURCE_SOUNDS_HPP_INCLUDED
 #define SANGUIS_LOAD_RESOURCE_SOUNDS_HPP_INCLUDED
 
-#include "../sound_collection_fwd.hpp"
+#include "sound_identifier.hpp"
 #include "../sound_type.hpp"
 #include <sge/audio/sound_fwd.hpp>
 #include <sge/audio/multi_loader_fwd.hpp>
 #include <sge/audio/pool_fwd.hpp>
 #include <sge/audio/player_fwd.hpp>
 #include <sge/audio/file_fwd.hpp>
-#include <sge/filesystem/path.hpp>
 #include <sge/noncopyable.hpp>
 #include <map>
 
@@ -22,9 +21,9 @@ namespace resource
 class sounds {
 	SGE_NONCOPYABLE(sounds)
 public:
-	sound_collection const &
+	sge::audio::file_ptr const
 	load(
-		sge::filesystem::path const &) const;
+		sound_identifier const &) const;
 	
 	sge::audio::sound_ptr const
 	make(
@@ -33,9 +32,9 @@ public:
 
 	~sounds();
 private:
-	sound_collection const
+	sge::audio::file_ptr const
 	do_load(
-		sge::filesystem::path const &) const;
+		sound_identifier const &) const;
 
 	sounds(
 		sge::audio::multi_loader &,
@@ -45,8 +44,8 @@ private:
 	friend class context;
 
 	typedef std::map<
-		sge::filesystem::path,
-		sound_collection
+		sound_identifier,
+		sge::audio::file_ptr
 	> sound_map;
 
 	sge::audio::multi_loader &ml;

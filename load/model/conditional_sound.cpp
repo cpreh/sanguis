@@ -1,22 +1,41 @@
 #include "conditional_sound.hpp"
-#include "../sound_collection.hpp"
+#include "get_entry.hpp"
 #include <sge/random/inclusive_range.hpp>
+#include <sge/parse/json/array.hpp>
 #include <sge/math/compare.hpp>
+#include <sge/text.hpp>
 
 sanguis::load::model::conditional_sound::conditional_sound(
-	sound_collection const &col,
-	resource::context const &ctx)
+	sge::parse::json::member_vector const &members,
+	resource::sounds const &ctx)
 :
 	range(
-		col.probability()),
+		static_cast<
+			probability_type
+		>(
+			get_entry<
+				double	
+			>(
+				members,
+				SGE_TEXT("prob")
+			)
+		)
+	),
 	rng(
 		sge::random::inclusive_range<probability_type>(
 			static_cast<probability_type>(0),
-			static_cast<probability_type>(1))),
+			static_cast<probability_type>(1)
+		)
+	),
 	random_sound_(
-		col.sounds(),
-		ctx,
-		sound_type::nonstream) // NOTE: we can safely assume no one wants to play music depending on a probability
+		get_entry<
+			sge::parse::json::array
+		>(
+			members,
+			SGE_TEXT("files")
+		).elements,
+		ctx
+	)
 {}
 
 sge::audio::sound_ptr const

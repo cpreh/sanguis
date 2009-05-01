@@ -1,71 +1,103 @@
 #include "animation_sound.hpp"
-#include "../resource/context.hpp"
-#include "../resource/sounds.hpp"
-#include "../../exception.hpp"
-#include <sge/random/exclusive_range_error.hpp>
+#include "../log.hpp"
+#include <sge/parse/json/get.hpp>
+#include <sge/parse/json/object.hpp>
+#include <sge/parse/json/array.hpp>
+#include <sge/algorithm/find_exn.hpp>
+#include <sge/log/headers.hpp>
 #include <sge/text.hpp>
 #include <sge/string.hpp>
 #include <boost/tr1/array.hpp>
+#include <boost/foreach.hpp>
 #include <utility>
 #include <iterator>
+
+namespace
+{
+
+typedef std::tr1::array<
+	sge::string,
+	sanguis::animation_sound_type::size
+> animation_sound_array;
+
+animation_sound_array const animation_sounds = {{
+	SGE_TEXT("start"),
+	SGE_TEXT("running"),
+	SGE_TEXT("end")
+}};
+
+sanguis::animation_sound_type::type
+find_sound_type(
+	sge::string const &name)
+{
+	return static_cast<
+		sanguis::animation_sound_type::type
+	>(
+		std::distance(
+			animation_sounds.begin(),
+			sge::algorithm::find_exn(
+				animation_sounds.begin(),
+				animation_sounds.end(),
+				name
+			)
+		)
+	);
+}
+
+}
 
 sge::audio::sound_ptr const
 sanguis::load::model::animation_sound::operator[](
 	animation_sound_type::type const stype) const
 {
-	/*
 	animation_sound_map::const_iterator const it(
-		sounds.find(stype));
+		sounds.find(
+			stype
+		)
+	);
 	
-	if(it == sounds.end())*/
-		return sge::audio::sound_ptr();
-	
-	//return it->second.random();
+	return it == sounds.end()
+		? sge::audio::sound_ptr()
+		: it->second.random();
 }
 
-/*
+sanguis::load::model::animation_sound::animation_sound()
+:
+	sounds()
+{}
+
 sanguis::load::model::animation_sound::animation_sound(
-	sge::filesystem::path const &path,
-	resource::context const &ctx)
+	sge::parse::json::member_vector const &members,
+	resource::sounds const &ctx)
+:
+	sounds()
 {
-	typedef std::tr1::array<
-		sge::string,
-		animation_sound_type::size
-	> animation_sound_array;
-
-	animation_sound_array const animation_sounds = {{
-		SGE_TEXT("start"),
-		SGE_TEXT("running"),
-		SGE_TEXT("end")
-	}};
-
-	for(animation_sound_array::const_iterator it(animation_sounds.begin());
-	    it != animation_sounds.end();
-	    ++it)
+	BOOST_FOREACH(
+		sge::parse::json::member_vector::const_reference ref,
+		members
+	)
 	{
-		sge::filesystem::path const sound_path(path / *it);
-		
-		try
-		{
-			if(sounds.insert(
+		if(
+			sounds.insert(
 				std::make_pair(
-					static_cast<animation_sound_type::type>(
-						std::distance(
-							animation_sounds.begin(),
-							it)),
+					find_sound_type(
+						ref.name
+					),
 					conditional_sound(
-						ctx.sounds().load(
-							sound_path),
-						ctx)))
-			.second == false)
-				throw exception(
-					SGE_TEXT("Double insert in model::animation_sound: ")
-					+ sound_path.string());
-		}
-		catch(sge::random::exclusive_range_error const &)
-		{
-			// range of sounds was empty, don't do anything
-		}
+						sge::parse::json::get<
+							sge::parse::json::object
+						>(
+							ref.value_
+						).members,
+						ctx
+					)
+				)
+			).second == false
+		)
+			SGE_LOG_WARNING(
+				log(),
+				sge::log::_1
+					<< SGE_TEXT("Double insert in sounds!")
+			);
 	}
 }
-*/

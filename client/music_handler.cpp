@@ -1,7 +1,6 @@
 #include "music_handler.hpp"
 #include "../media_path.hpp"
 #include "../load/resource/sounds.hpp"
-#include "../load/sound_collection.hpp"
 #include "../load/resource/sounds.hpp"
 #include <sge/audio/sound.hpp>
 #include <sge/console/gfx.hpp>
@@ -28,6 +27,7 @@ sanguis::client::music_handler::music_handler(
 		)
 	)
 {
+	/*
 	load::sound_container const &s(
 		_resource.sounds().load(
 			media_path() / SGE_TEXT("music")
@@ -39,12 +39,15 @@ sanguis::client::music_handler::music_handler(
 
 	sounds_.reset(
 		new load::model::random_sound(
-				s,
-				_resource,
-				load::sound_type::stream));
+			s,
+			_resource,
+			load::sound_type::stream
+		)
+	);
 	
 	current_ = sounds_->random();
 	current_->play(sge::audio::play_mode::once);
+	*/
 }
 
 void sanguis::client::music_handler::process()

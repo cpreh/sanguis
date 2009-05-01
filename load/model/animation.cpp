@@ -101,11 +101,33 @@ sanguis::load::model::animation::animation(
 		sge::make_shared_ptr<
 			sge::sprite::animation_series
 		>()
-	)
+	),
+	sounds_()
 {
 	sge::parse::json::member_vector const &members(
 		object.members
 	);
+
+	try
+	{
+		sounds_ = sge::make_shared_ptr<
+			animation_sound
+		>(
+			get_entry<
+				sge::parse::json::object
+			>(
+				members,
+				SGE_TEXT("sounds")
+			).members,
+			param.sounds()
+		);
+	}
+	catch(exception const &)
+	{
+		sounds_ = sge::make_shared_ptr<
+			animation_sound
+		>();
+	}
 
 	optional_texture_identifier const texture(
 		param.new_texture(
@@ -220,13 +242,5 @@ sanguis::load::model::animation::get() const
 sanguis::load::model::animation_sound const &
 sanguis::load::model::animation::sounds() const
 {
-	static animation_sound ret;
-	return ret; // FIXME
-	/*
-	if(!sounds_)
-		sounds_.reset(
-			new animation_sound(
-				path,
-				ctx));
-	return *sounds_;*/
+	return *sounds_;
 }

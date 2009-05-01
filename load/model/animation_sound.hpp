@@ -1,11 +1,11 @@
 #ifndef SANGUIS_LOAD_MODEL_ANIMATION_SOUND_HPP_INCLUDED
 #define SANGUIS_LOAD_MODEL_ANIMATION_SOUND_HPP_INCLUDED
 
-#include "../resource/context_fwd.hpp"
 #include "conditional_sound.hpp"
+#include "../resource/sounds_fwd.hpp"
 #include "../../animation_sound_type.hpp"
 #include <sge/audio/sound_fwd.hpp>
-#include <sge/filesystem/path.hpp>
+#include <sge/parse/json/member_vector.hpp>
 #include <map>
 
 namespace sanguis
@@ -20,19 +20,19 @@ public:
 	sge::audio::sound_ptr const
 	operator[](
 		animation_sound_type::type) const;
-private:
-/*	animation_sound(
-		sge::filesystem::path const &,
-		resource::context const &);
 	
-	friend class animation;
+	animation_sound();
 
+	animation_sound(
+		sge::parse::json::member_vector const &,
+		resource::sounds const &);
+private:
 	typedef std::map<
 		animation_sound_type::type,
 		conditional_sound
 	> animation_sound_map;
 
-	animation_sound_map sounds;*/
+	animation_sound_map sounds;
 };
 
 }

@@ -8,7 +8,6 @@
 #include "../load/context.hpp"
 #include "../load/resource/sounds.hpp"
 #include "../load/sound_type.hpp"
-#include "../load/sound_collection.hpp"
 #include "../load/particle/context.hpp"
 #include "../load/particle/collection.hpp"
 #include "../load/particle/animations.hpp"

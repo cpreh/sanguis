@@ -215,7 +215,8 @@ void sanguis::load::model::model::construct(
 							ctx.textures(),
 							cell_size,
 							opt_delay,
-							texture
+							texture,
+							ctx.sounds()
 						)
 					)
 				)

@@ -104,7 +104,7 @@ sanguis::load::model::part::part(
 			).members.at(0)
 		);
 			
-		if(	
+		if(
 			categories.insert(
 				std::make_pair(
 					find_weapon_type(

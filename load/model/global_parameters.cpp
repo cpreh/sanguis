@@ -5,13 +5,15 @@ sanguis::load::model::global_parameters::global_parameters(
 	resource::textures const &textures_,
 	sge::renderer::dim_type const &cell_size_,
 	optional_delay const &delay_,
-	optional_texture_identifier const &texture_)
+	optional_texture_identifier const &texture_,
+	resource::sounds const &sounds_)
 :
 	path_(path_),
 	textures_(textures_),
 	cell_size_(cell_size_),
 	delay_(delay_),
-	texture_(texture_)
+	texture_(texture_),
+	sounds_(sounds_)
 {}
 
 sge::filesystem::path const &
@@ -54,7 +56,14 @@ sanguis::load::model::global_parameters::new_texture(
 			textures(),
 			cell_size(),
 			delay(),
-			ntex
+			ntex,
+			sounds()
 		)
 		: *this;
+}
+
+sanguis::load::resource::sounds const &
+sanguis::load::model::global_parameters::sounds() const
+{
+	return sounds_;
 }
