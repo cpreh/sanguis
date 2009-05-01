@@ -148,22 +148,18 @@ void sanguis::server::states::running::create_decorations()
 	{
 		pos_type const position(rng_x(),rng_y());
 		space_unit const angle = rng_angle();
-		decoration_type::type type = static_cast<decoration_type::type>(rng_deco_type());
+		decoration_type::type const type = static_cast<decoration_type::type>(rng_deco_type());
 
-		SGE_LOG_DEBUG(
-			log(),
-			sge::log::_1
-				<< SGE_TEXT("created decoration type ") << type 
-				<< SGE_TEXT(", position: ") << position << SGE_TEXT(", angle: ")
-				<< angle);
-		
 		entities_.push_back(
 			entities::auto_ptr(
 				new entities::decoration(
 					environment(),
 					position,
 					angle,
-					type)));
+					type
+				)
+			)
+		);
 
 		entities_.back().update(time_type(),entities_);
 	}

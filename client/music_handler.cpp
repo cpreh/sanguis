@@ -1,10 +1,13 @@
 #include "music_handler.hpp"
+#include "log.hpp"
 #include "../media_path.hpp"
 #include "../load/resource/sounds.hpp"
 #include <sge/audio/sound.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/console/object.hpp>
 #include <sge/filesystem/directory_iterator.hpp>
+#include <sge/log/headers.hpp>
+#include <sge/exception.hpp>
 #include <sge/cerr.hpp>
 #include <sge/text.hpp>
 #include <boost/bind.hpp>
@@ -109,7 +112,17 @@ sanguis::client::music_handler::load_random() const
 			);
 		}
 		catch(sge::exception const &e)
-		{}
+		{
+			SGE_LOG_WARNING(
+				log(),
+				sge::log::_1
+					<< SGE_TEXT("Music file \"")
+					<< it->path().string()
+					<< SGE_TEXT("\" failed to load: \"")
+					<< e.what()
+					<< SGE_TEXT("\"!")
+			);
+		}
 	
 	return sge::audio::sound_ptr();
 }
