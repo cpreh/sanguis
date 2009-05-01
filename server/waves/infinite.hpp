@@ -1,11 +1,10 @@
-#ifndef SANGUIS_SERVER_WAVES_SIMPLE_HPP_INCLUDED
-#define SANGUIS_SERVER_WAVES_SIMPLE_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_WAVES_INFINITE_HPP_INCLUDED
+#define SANGUIS_SERVER_WAVES_INFINITE_HPP_INCLUDED
 
 #include "wave.hpp"
 #include "../../time_type.hpp"
 #include "../../enemy_type.hpp"
-#include "../../diff_clock.hpp"
-#include <sge/time/timer.hpp>
+#include <sge/scoped_ptr.hpp>
 
 namespace sanguis
 {
@@ -14,30 +13,34 @@ namespace server
 namespace waves
 {
 
-class simple : public wave {
+class infinite : public wave {
 public:
-	simple(
+	infinite(
 		time_type delay,
 		time_type spawn_interval,
 		unsigned waves,
 		unsigned spawns_per_wave,
 		enemy_type::type);
+	
+	~infinite();
 private:
 	void process(
 		time_type diff,
 		environment const &);
-
+	
 	bool ended() const;
 
-	diff_clock diff_;
-	sge::time::timer
-		delay_timer,
-		spawn_timer;
+	time_type const
+		delay_,
+		spawn_interval_;
 	unsigned const
-		waves,
-		spawns_per_wave;
-	enemy_type::type const etype;
-	unsigned waves_spawned;
+		waves_,
+		spawns_per_wave_;
+	enemy_type::type const etype_;
+
+	sge::scoped_ptr<
+		wave	
+	> simple_;
 };
 
 }

@@ -1,11 +1,13 @@
 #include "generator.hpp"
-#include "simple.hpp"
+//#include "simple.hpp"
+#include "infinite.hpp"
 //#include "debug.hpp"
 #include <boost/assign/ptr_list_inserter.hpp>
 
 sanguis::server::waves::generator::generator()
 {
-	boost::assign::ptr_push_back<waves::simple>(waves)
+	// TODO: somehow put this in a configuration file!
+	boost::assign::ptr_push_back<waves::infinite>(waves)
 	(
 		static_cast<time_type>(60),
 		static_cast<time_type>(4),
