@@ -11,7 +11,6 @@
 #include <sge/math/vector/dim.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/math/compare.hpp>
-#include <sge/audio/sound.hpp>
 #include <sge/sprite/object.hpp>
 #include <sge/time/time.hpp>
 #include <sge/structure_cast.hpp>

@@ -32,7 +32,7 @@ sanguis::load::model::conditional_sound::conditional_sound(
 			sge::parse::json::array
 		>(
 			members,
-			SGE_TEXT("files")
+			SGE_TEXT("elements")
 		).elements,
 		ctx
 	)

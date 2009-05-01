@@ -59,7 +59,7 @@ sanguis::load::resource::sounds::do_load(
 	sound_identifier const &name) const
 {
 	sge::filesystem::path const sound_path(
-		media_path() / SGE_TEXT("sounds") / name
+		media_path() / SGE_TEXT("sound") / name
 	);
 
 	return ml.load(
