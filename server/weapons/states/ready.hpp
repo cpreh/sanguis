@@ -7,6 +7,7 @@
 #include <boost/statechart/simple_state.hpp>
 #include <boost/statechart/result.hpp>
 #include <boost/statechart/custom_reaction.hpp>
+#include <boost/mpl/list.hpp>
 
 namespace sanguis
 {
@@ -25,8 +26,10 @@ class ready
 	>
 {
 public:
-	typedef boost::statechart::custom_reaction<
-		events::shoot
+	typedef boost::mpl::list<
+		boost::statechart::custom_reaction<
+			events::shoot
+		>
 	> reactions;
 
 	boost::statechart::result

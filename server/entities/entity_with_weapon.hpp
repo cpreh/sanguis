@@ -42,14 +42,21 @@ public:
 	bool has_weapon() const;
 	weapons::weapon &active_weapon();
 	weapons::weapon const &active_weapon() const;
+
+	void start_attacking();
+
+	void start_reloading();
+	void stop_reloading();
 private:
-	void attack_speed_change(property::value_type);
+	void stop_attacking();
+
+	void attack_speed_change(
+		property::value_type);
 
 	weapon_container    weapons_;
 	weapon_type::type   weapon_;
 	pos_type            target_;
-	bool                attacking,
-	                    reloading;
+	bool                attacking;
 	sge::signal::scoped_connection const attack_speed_change_;
 };
 

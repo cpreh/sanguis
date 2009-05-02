@@ -3,6 +3,7 @@
 #include "ready.hpp"
 #include "../events/poll.hpp"
 #include "../events/shoot.hpp"
+#include "../../entities/entity_with_weapon.hpp"
 
 sanguis::server::weapons::states::backswing::backswing(
 	my_context ctx)
@@ -31,7 +32,10 @@ sanguis::server::weapons::states::backswing::react(
 	
 	context<weapon>().use_magazine_item();
 
-	return context<weapon>().magazine_empty()
-		? transit<reloading>()
-		: transit<ready>();
+	if(context<weapon>().magazine_empty())
+	{
+		e.owner().start_reloading();
+		return transit<reloading>();
+	}
+	return transit<ready>();
 }

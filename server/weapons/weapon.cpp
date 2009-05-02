@@ -211,7 +211,16 @@ sanguis::server::weapons::weapon::reload_time() const
 	return reload_time_;
 }
 
-void sanguis::server::weapons::weapon::on_init_attack(
+void
+sanguis::server::weapons::weapon::init_attack(
+	entities::entity_with_weapon &e)
+{
+	e.start_attacking();
+	on_init_attack(e);
+}
+
+void
+sanguis::server::weapons::weapon::on_init_attack(
 	entities::entity_with_weapon &)
 {}
 

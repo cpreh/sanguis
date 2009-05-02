@@ -18,7 +18,8 @@
 namespace
 {
 
-sanguis::server::pos_type const target_undefined(
+sanguis::server::pos_type const
+target_undefined(
 	std::numeric_limits<sanguis::server::space_unit>::max(),
 	std::numeric_limits<sanguis::server::space_unit>::max());
 
@@ -32,7 +33,6 @@ sanguis::server::entities::entity_with_weapon::entity_with_weapon(
 	weapon_(weapon_type::none),
 	target_(target_undefined),
 	attacking(false),
-	reloading(false),
 	attack_speed_change_(
 		property(
 			property_type::attack_speed
@@ -49,7 +49,8 @@ sanguis::server::entities::entity_with_weapon::entity_with_weapon(
 		return;
 	
 	add_weapon(
-		start_weapon);
+		start_weapon
+	);
 }
 
 void sanguis::server::entities::entity_with_weapon::update(
@@ -71,54 +72,19 @@ void sanguis::server::entities::entity_with_weapon::update(
 	if(has_weapon())
 		active_weapon().update(
 			time,
-			*this);
+			*this
+		);
 
-	/*
-		if(active_weapon().reloading() && !reloading)
-		{
-			send(message_convert::start_reloading(*this));
-			reloading = true;
-		}
-		else if(reloading && !active_weapon().reloading())
-		{
-			send(message_convert::stop_reloading(*this));
-			reloading = false;
-		}
-	*/
-
-	// entity lost its target and/or weapon or aggression or didn't have any of these
-	/*if (weapon_ == weapon_type::none || target() == target_undefined || !aggressive())
+	if (weapon_ == weapon_type::none || target() == target_undefined || !aggressive())
 	{
-		// previously attacking
-		if (attacking)
-		{
-			send(message_convert::stop_attacking(*this));
-			attacking = false;
-		}
-
+		stop_attacking();
 		return;
-	}*/
-
-	// all requirements for an attack are met?
-	// -has a weapon
-	// -has a target
-	// -is aggressive
-	/*
-	if (!has_weapon() || target() == target_undefined || !aggressive())
-		return;
-
-	weapons::weapon &wep(active_weapon());
-	if (wep.attack(*this, target()) && !attacking)
-	{
-		send(message_convert::start_attacking(*this));
-		attacking = true;
 	}
-	else if (attacking && wep.ready())
-	{
-		send(message_convert::stop_attacking(*this));
-		attacking = false;
-	}
-	*/
+	
+	active_weapon().attack(
+		*this,
+		target()
+	);
 }
 
 void sanguis::server::entities::entity_with_weapon::change_weapon(
@@ -223,6 +189,56 @@ sanguis::server::weapons::weapon const &
 sanguis::server::entities::entity_with_weapon::active_weapon() const
 {
 	return const_cast<entity_with_weapon &>(*this).active_weapon();
+}
+
+void
+sanguis::server::entities::entity_with_weapon::start_attacking()
+{
+	if(attacking)
+		return;
+	
+	send(
+		message_convert::start_attacking(
+			*this
+		)
+	);
+
+	attacking = true;
+}
+
+void
+sanguis::server::entities::entity_with_weapon::start_reloading()
+{
+	send(
+		message_convert::start_reloading(
+			*this
+		)
+	);
+}
+
+void
+sanguis::server::entities::entity_with_weapon::stop_reloading()
+{
+	send(
+		message_convert::stop_reloading(
+			*this
+		)
+	);
+}
+
+void
+sanguis::server::entities::entity_with_weapon::stop_attacking()
+{
+	if(!attacking)
+		return;
+	
+	send(
+		message_convert::stop_attacking(
+			*this
+		)
+	);
+
+	attacking = false;
 }
 
 void

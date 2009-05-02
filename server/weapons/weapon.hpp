@@ -123,6 +123,10 @@ private:
 	reload_time() const;
 
 	virtual void
+	init_attack(
+		entities::entity_with_weapon &owner);
+
+	virtual void
 	on_init_attack(
 		entities::entity_with_weapon &owner);
 

@@ -2,6 +2,7 @@
 #include "ready.hpp"
 #include "../events/poll.hpp"
 #include "../events/shoot.hpp"
+#include "../../entities/entity_with_weapon.hpp"
 
 sanguis::server::weapons::states::reloading::reloading(
 	my_context ctx)
@@ -31,6 +32,8 @@ sanguis::server::weapons::states::reloading::react(
 	context<
 		weapon
 	>().reset_magazine();
+
+	e.owner().stop_reloading();
 
 	return transit<ready>();
 }
