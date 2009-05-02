@@ -13,7 +13,7 @@ sanguis::server::weapons::states::backswing::backswing(
 	cooldown(
 		context<
 			weapon
-		>().base_cooldown(),
+		>().backswing_time(),
 		sge::time::activation_state::active,
 		diff_clock_.callback()
 	)

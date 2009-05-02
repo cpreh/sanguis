@@ -114,10 +114,10 @@ private:
 	magazine_empty() const;
 
 	sge::time::resolution const
-	base_cooldown() const;
+	cast_point() const;
 
 	sge::time::resolution const
-	cast_point() const;
+	backswing_time() const;
 
 	sge::time::resolution const
 	reload_time() const;
@@ -143,8 +143,8 @@ private:
 	magazine_type magazine_used;
 	magazine_type const magazine_size_;
 	sge::time::resolution const
-		base_cooldown_,
 		cast_point_,
+		backswing_time_,
 		reload_time_;
 	space_unit
 		ias_,

@@ -98,7 +98,7 @@ sanguis::server::weapons::weapon::weapon(
 	weapon_type::type const type_,
 	space_unit const range_,
 	magazine_type const magazine_size_,
-	time_type const nbase_cooldown,
+	time_type const base_cooldown,
 	time_type const ncast_point,
 	time_type const nreload_time)
 :
@@ -107,14 +107,14 @@ sanguis::server::weapons::weapon::weapon(
 	range_(range_),
 	magazine_used(0),
 	magazine_size_(magazine_size_),
-	base_cooldown_(
-		sge::time::second_f(
-			nbase_cooldown
-		)
-	),
 	cast_point_(
 		sge::time::second_f(
 			ncast_point
+		)
+	),
+	backswing_time_(
+		sge::time::second_f(
+			base_cooldown - ncast_point
 		)
 	),
 	reload_time_(
@@ -125,7 +125,7 @@ sanguis::server::weapons::weapon::weapon(
 	ias_(static_cast<space_unit>(0)),
 	irs_(static_cast<space_unit>(0))
 {
-	if(cast_point_.get() > base_cooldown_.get())
+	if(ncast_point > base_cooldown)
 		SGE_LOG_WARNING(
 			log(),
 			sge::log::_1
@@ -196,15 +196,15 @@ sanguis::server::weapons::weapon::magazine_empty() const
 }
 
 sge::time::resolution const
-sanguis::server::weapons::weapon::base_cooldown() const
-{
-	return base_cooldown_;
-}
-
-sge::time::resolution const
 sanguis::server::weapons::weapon::cast_point() const
 {
 	return cast_point_;
+}
+
+sge::time::resolution const
+sanguis::server::weapons::weapon::backswing_time() const
+{
+	return backswing_time_;
 }
 
 sge::time::resolution const
