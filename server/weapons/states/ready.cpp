@@ -4,14 +4,10 @@
 #include "../events/poll.hpp"
 #include "../../entities/entity_with_weapon.hpp"
 
-#include <sge/cerr.hpp>
-
 boost::statechart::result
 sanguis::server::weapons::states::ready::react(
 	events::shoot const &e)
 {
-	sge::cerr << "attack ready\n";
-
 	if(
 		!context<
 			weapon
@@ -24,7 +20,7 @@ sanguis::server::weapons::states::ready::react(
 	
 	context<
 		weapon
-	>().on_init_attack(
+	>().init_attack(
 		e.from()
 	);
 
@@ -33,6 +29,8 @@ sanguis::server::weapons::states::ready::react(
 	>().post_event(
 		e
 	);
+
+	post_event(e);
 
 	return transit<castpoint>();
 }

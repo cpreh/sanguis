@@ -32,6 +32,10 @@ sanguis::server::weapons::states::backswing::react(
 	
 	context<weapon>().use_magazine_item();
 
+	e.owner().attack_ready();
+
+	post_event(e);
+
 	if(context<weapon>().magazine_empty())
 	{
 		e.owner().start_reloading();

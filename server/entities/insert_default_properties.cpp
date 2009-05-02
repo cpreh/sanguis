@@ -19,9 +19,14 @@ sanguis::server::entities::insert_default_properties(
 		(
 			property_type::health,
 			property(static_cast<space_unit>(1))
-		)(
+		)
+		(
 			property_type::movement_speed,
 			property(static_cast<space_unit>(0))
+		)
+		(
+			property_type::reload_speed,
+			property(static_cast<space_unit>(1))
 		);
 
 	if(default_properties.size() != property_type::size)

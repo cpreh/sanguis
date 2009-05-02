@@ -14,6 +14,7 @@ enum type {
 	attack_speed,
 	health,
 	movement_speed,
+	reload_speed,
 	size
 };
 

@@ -57,5 +57,7 @@ sanguis::server::weapons::states::castpoint::react(
 		e.owner()
 	);
 
+	post_event(e);
+
 	return transit<backswing>();
 }

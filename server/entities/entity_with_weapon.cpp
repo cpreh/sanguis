@@ -33,12 +33,25 @@ sanguis::server::entities::entity_with_weapon::entity_with_weapon(
 	weapon_(weapon_type::none),
 	target_(target_undefined),
 	attacking(false),
+	reloading(false),
+	attack_ready_(false),
 	attack_speed_change_(
 		property(
 			property_type::attack_speed
 		).register_change_callback(
 			boost::bind(
 				&entity_with_weapon::attack_speed_change,
+				this,
+				_1
+			)
+		)
+	),
+	reload_speed_change_(
+		property(
+			property_type::reload_speed
+		).register_change_callback(
+			boost::bind(
+				&entity_with_weapon::reload_speed_change,
 				this,
 				_1
 			)
@@ -75,16 +88,24 @@ void sanguis::server::entities::entity_with_weapon::update(
 			*this
 		);
 
-	if (weapon_ == weapon_type::none || target() == target_undefined || !aggressive())
+	bool const in_range_(
+		target() != target_undefined
+		&& in_range(
+			target()
+		)
+	);
+
+	if (weapon_ == weapon_type::none || !in_range_ || !aggressive())
 	{
 		stop_attacking();
 		return;
 	}
 	
-	active_weapon().attack(
-		*this,
-		target()
-	);
+	if(!reloading && attack_ready_ && in_range_)
+		active_weapon().attack(
+			*this,
+			target()
+		);
 }
 
 void sanguis::server::entities::entity_with_weapon::change_weapon(
@@ -97,12 +118,25 @@ void sanguis::server::entities::entity_with_weapon::change_weapon(
 	
 	weapon_ = nweapon;
 
+	reloading = false;
+	attacking = false;
+
 	if(has_weapon())
+	{
 		active_weapon().attack_speed(
 			property(
 				property_type::attack_speed
 			).current()
 		);
+
+		active_weapon().reload_speed(	
+			property(
+				property_type::reload_speed
+			).current()
+		);
+
+		attack_ready_ = true;
+	}
 
 	send(
 		messages::create(
@@ -192,8 +226,16 @@ sanguis::server::entities::entity_with_weapon::active_weapon() const
 }
 
 void
+sanguis::server::entities::entity_with_weapon::attack_ready()
+{
+	attack_ready_ = true;
+}
+
+void
 sanguis::server::entities::entity_with_weapon::start_attacking()
 {
+	attack_ready_ = false;
+
 	if(attacking)
 		return;
 	
@@ -209,6 +251,8 @@ sanguis::server::entities::entity_with_weapon::start_attacking()
 void
 sanguis::server::entities::entity_with_weapon::start_reloading()
 {
+	reloading = true;
+
 	send(
 		message_convert::start_reloading(
 			*this
@@ -219,6 +263,8 @@ sanguis::server::entities::entity_with_weapon::start_reloading()
 void
 sanguis::server::entities::entity_with_weapon::stop_reloading()
 {
+	reloading = false;
+
 	send(
 		message_convert::stop_reloading(
 			*this
@@ -247,4 +293,12 @@ sanguis::server::entities::entity_with_weapon::attack_speed_change(
 {
 	if(has_weapon())
 		active_weapon().attack_speed(v);
+}
+
+void
+sanguis::server::entities::entity_with_weapon::reload_speed_change(
+	property::value_type const v)
+{
+	if(has_weapon())
+		active_weapon().reload_speed(v);
 }

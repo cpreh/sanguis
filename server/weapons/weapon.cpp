@@ -136,6 +136,8 @@ sanguis::server::weapons::weapon::weapon(
 		throw exception(
 			SGE_TEXT("magazine size of 0 is invalid!")
 		);
+
+	initiate();
 }
 
 sanguis::server::weapons::magazine_type const
@@ -183,7 +185,7 @@ sanguis::server::weapons::weapon::reset_magazine()
 void
 sanguis::server::weapons::weapon::use_magazine_item()
 {
-	--magazine_used;
+	++magazine_used;
 	SGE_ASSERT(magazine_used <= magazine_size());
 }
 

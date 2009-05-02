@@ -25,7 +25,8 @@ protected:
 		base_parameters const &,
 		weapons::auto_ptr start_weapon);
 
-	virtual void update(
+	virtual void
+	update(
 		time_type,
 		container &entities);
 public:
@@ -43,6 +44,8 @@ public:
 	weapons::weapon &active_weapon();
 	weapons::weapon const &active_weapon() const;
 
+	void attack_ready();
+
 	void start_attacking();
 
 	void start_reloading();
@@ -53,11 +56,19 @@ private:
 	void attack_speed_change(
 		property::value_type);
 
-	weapon_container    weapons_;
-	weapon_type::type   weapon_;
-	pos_type            target_;
-	bool                attacking;
-	sge::signal::scoped_connection const attack_speed_change_;
+	void reload_speed_change(
+		property::value_type);
+	
+	weapon_container weapons_;
+	weapon_type::type weapon_;
+	pos_type target_;
+	bool
+		attacking,
+		reloading,
+		attack_ready_;
+	sge::signal::scoped_connection const
+		attack_speed_change_,
+		reload_speed_change_;
 };
 
 }
