@@ -10,6 +10,9 @@
 #include "../../../messages/create.hpp"
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>
+#include <sge/time/second.hpp>
+#include <sge/time/resolution.hpp>
+#include <sge/optional_impl.hpp>
 #include <sge/text.hpp>
 #include <boost/assign/list_of.hpp>
 
@@ -52,6 +55,14 @@ sanguis::server::entities::pickups::pickup::pickup(
 			)
 		)
 	),
+	diff_clock_(),
+	lifetime(
+		sge::time::second(
+			60
+		),
+		sge::time::activation_state::active,
+		diff_clock_.callback()
+	),
 	ptype_(ptype_)
 {}
 
@@ -68,6 +79,24 @@ sanguis::server::entities::pickups::pickup::collision_entity(
 {
 	do_pickup(dynamic_cast<entity_with_weapon &>(e));
 	die();
+}
+
+void
+sanguis::server::entities::pickups::pickup::update(
+	time_type const time,
+	container &entities)
+{
+	entity::update(
+		time,
+		entities
+	);
+
+	diff_clock_.update(
+		time
+	);
+
+	if(lifetime.expired())
+		die();
 }
 
 sanguis::messages::auto_ptr

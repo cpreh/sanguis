@@ -4,7 +4,9 @@
 #include "../entity.hpp"
 #include "../entity_with_weapon_fwd.hpp"
 #include "../../../pickup_type.hpp"
-#include <boost/optional.hpp>
+#include "../../../diff_clock.hpp"
+#include <sge/time/timer.hpp>
+#include <sge/optional_fwd.hpp>
 
 namespace sanguis
 {
@@ -19,15 +21,14 @@ class pickup : public entity {
 public:
 	pickup_type::type ptype() const;
 protected:
-	typedef boost::optional<dim_type> optional_dim;
+	typedef sge::optional<dim_type> optional_dim;
 
 	pickup(
 		pickup_type::type,
 		server::environment const &,
 		pos_type const &center,
 		team::type team,
-		optional_dim const &dim
-			= optional_dim());
+		optional_dim const &dim);
 private:
 	bool
 	can_collide_with_entity(
@@ -37,13 +38,19 @@ private:
 	collision_entity(
 		entity &);
 
+	void update(
+		time_type,
+		container &);
+	
 	// TODO: is it ok that pickups are limited to entities with weapons?
 	virtual void do_pickup(
 		entity_with_weapon &receiver) = 0;
 
 	messages::auto_ptr add_message() const;
 
-	pickup_type::type ptype_;
+	diff_clock diff_clock_;
+	sge::time::timer lifetime;
+	pickup_type::type const ptype_;
 };
 
 }

@@ -1,6 +1,7 @@
 #include "health.hpp"
 #include "../entity_with_weapon.hpp"
 #include "../../get_dim.hpp"
+#include <sge/optional_impl.hpp>
 
 sanguis::server::entities::pickups::health::health(
 	server::environment const &env,
@@ -12,7 +13,9 @@ sanguis::server::entities::pickups::health::health(
 		pickup_type::health,
 		env,
 		center,
-		team_),
+		team_,
+		optional_dim()
+	),
 	amount(amount)
 {}
 

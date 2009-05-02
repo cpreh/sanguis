@@ -3,6 +3,7 @@
 
 #include "../../../projectile_type.hpp"
 #include "../../../time_type.hpp"
+#include "../../../diff_clock.hpp"
 #include "../../../messages/base.hpp"
 #include "../entity.hpp"
 #include <sge/time/timer.hpp>
@@ -49,8 +50,9 @@ private:
 
 	messages::auto_ptr add_message() const;
 
-	projectile_type::type ptype_;
-	sge::time::timer      lifetime;
+	projectile_type::type const ptype_;
+	diff_clock diff_clock_;
+	sge::time::timer lifetime;
 };
 
 }

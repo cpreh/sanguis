@@ -51,6 +51,7 @@ sanguis::server::entities::projectiles::projectile::projectile(
 		)
 	),
 	ptype_(nptype),
+	diff_clock_(),
 	lifetime(
 		sge::time::second_f(
 			lifetime
@@ -59,7 +60,8 @@ sanguis::server::entities::projectiles::projectile::projectile(
 		),
 		lifetime
 			? sge::time::activation_state::active
-			: sge::time::activation_state::inactive
+			: sge::time::activation_state::inactive,
+		diff_clock_.callback()
 	)
 {}
 
@@ -75,7 +77,10 @@ void sanguis::server::entities::projectiles::projectile::update(
 {
 	entity::update(
 		time,
-		entities);
+		entities
+	);
+
+	diff_clock_.update(time);
 
 	if(lifetime.expired())
 		die();
