@@ -4,12 +4,13 @@
 #include "model.hpp"
 #include "environment_fwd.hpp"
 #include <sge/string.hpp>
-#include <boost/optional.hpp>
+#include <sge/optional_decl.hpp>
 
 namespace sanguis
 {
 namespace draw
 {
+
 class bullet : public model {
 public:
 	bullet(
@@ -19,7 +20,7 @@ public:
 private:
 	void update(time_type);
 
-	boost::optional<
+	sge::optional<
 		sge::sprite::point
 	> origin;
 };

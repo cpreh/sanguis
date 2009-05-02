@@ -3,13 +3,13 @@
 #include "z_ordering.hpp"
 #include "sprite_part_index.hpp"
 #include "object.hpp"
+#include <sge/optional_impl.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/vector/arithmetic.hpp>
 #include <sge/math/vector/is_null.hpp>
 #include <sge/math/vector/normalize.hpp>
 #include <sge/math/vector/length.hpp>
 #include <sge/structure_cast.hpp>
-#include <boost/none.hpp>
 
 namespace
 {
