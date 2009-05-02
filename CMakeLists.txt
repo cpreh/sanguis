@@ -94,7 +94,9 @@ FILE (GLOB files
 	server/perks/*.cpp
 	server/states/*.cpp
 	server/waves/*.cpp
-	server/weapons/*.cpp)
+	server/weapons/*.cpp
+	server/weapons/events/*.cpp
+	server/weapons/states/*.cpp)
 
 ADD_EXECUTABLE(sanguis ${files})
 TARGET_LINK_LIBRARIES(sanguis sgecore sgegui)

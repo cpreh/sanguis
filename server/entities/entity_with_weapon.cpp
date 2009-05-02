@@ -58,20 +58,22 @@ void sanguis::server::entities::entity_with_weapon::update(
 {
 	entity::update(
 		time,
-		entities);
+		entities
+	);
 
 	// change to the first weapon if we have any
 	if(weapon_ == weapon_type::none && !weapons_.empty())
 		change_weapon(
-			weapons_.begin()->second->type());
+			weapons_.begin()->second->type()
+		);
 
 
 	if(has_weapon())
-	{
 		active_weapon().update(
 			time,
 			*this);
 
+	/*
 		if(active_weapon().reloading() && !reloading)
 		{
 			send(message_convert::start_reloading(*this));
@@ -82,10 +84,10 @@ void sanguis::server::entities::entity_with_weapon::update(
 			send(message_convert::stop_reloading(*this));
 			reloading = false;
 		}
-	}
+	*/
 
 	// entity lost its target and/or weapon or aggression or didn't have any of these
-	if (weapon_ == weapon_type::none || target() == target_undefined || !aggressive())
+	/*if (weapon_ == weapon_type::none || target() == target_undefined || !aggressive())
 	{
 		// previously attacking
 		if (attacking)
@@ -95,12 +97,13 @@ void sanguis::server::entities::entity_with_weapon::update(
 		}
 
 		return;
-	}
+	}*/
 
 	// all requirements for an attack are met?
 	// -has a weapon
 	// -has a target
 	// -is aggressive
+	/*
 	if (!has_weapon() || target() == target_undefined || !aggressive())
 		return;
 
@@ -115,6 +118,7 @@ void sanguis::server::entities::entity_with_weapon::update(
 		send(message_convert::stop_attacking(*this));
 		attacking = false;
 	}
+	*/
 }
 
 void sanguis::server::entities::entity_with_weapon::change_weapon(
@@ -122,7 +126,8 @@ void sanguis::server::entities::entity_with_weapon::change_weapon(
 {
 	if (nweapon != weapon_type::none && !weapons_.count(nweapon))
 		throw exception(
-			SGE_TEXT("tried to change to non-owned weapon"));
+			SGE_TEXT("tried to change to non-owned weapon")
+		);
 	
 	weapon_ = nweapon;
 
@@ -147,7 +152,7 @@ void sanguis::server::entities::entity_with_weapon::add_weapon(
 	weapons::auto_ptr ptr)
 {
 	weapon_type::type const wt = ptr->type();
-	unsigned const magazine_size = ptr->magazine_size();
+	weapons::magazine_type const magazine_size = ptr->magazine_size();
 
 	if(wt == weapon_type::pistol && weapons_.count(weapon_type::pistol))
 		return add_weapon(
@@ -176,10 +181,8 @@ void sanguis::server::entities::entity_with_weapon::add_weapon(
 void sanguis::server::entities::entity_with_weapon::remove_weapon(
 	weapon_type::type const type_)
 {
-	if (weapons_.find(type_) == weapons_.end())
+	if(!weapons_.erase(type_))
 		throw exception(SGE_TEXT("tried to remove non-owned weapon"));
-	
-	weapons_.erase(type_);
 }
 
 void sanguis::server::entities::entity_with_weapon::target(
