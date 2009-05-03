@@ -366,10 +366,19 @@ sanguis::server::states::running::operator()(
 			static_cast<space_unit>(0),
 			static_cast<space_unit>(0),
 			boost::assign::map_list_of
-				(entities::property_type::health,
-				entities::property(static_cast<space_unit>(100)))
-				(entities::property_type::movement_speed,
-				entities::property(static_cast<space_unit>(0),static_cast<space_unit>(100))),
+				(
+					entities::property_type::health,
+					entities::property(
+						static_cast<space_unit>(100)
+					)
+				)
+				(
+					entities::property_type::movement_speed,
+					entities::property(
+						static_cast<space_unit>(0),
+						static_cast<space_unit>(100)
+					)
+				),
 			name
 		)
 	);

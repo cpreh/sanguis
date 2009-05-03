@@ -323,8 +323,9 @@ void sanguis::server::entities::entity::update(
 	BOOST_FOREACH(property_map::reference p, properties)
 		p.second.apply();
 
-	// attack speed is always on maximum
+	// TODO: somehow make this part of property!
 	property(property_type::attack_speed).current_to_max();
+	property(property_type::health_regeneration).current_to_max();
 
 	property(property_type::health).add(
 		property(property_type::health_regeneration).current() * time

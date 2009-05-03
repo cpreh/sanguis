@@ -1,6 +1,6 @@
 #include "from_perk_type.hpp"
+#include "../exception.hpp"
 #include <sge/text.hpp>
-#include <sge/exception.hpp>
 
 sge::string const
 sanguis::client::from_perk_type(
@@ -10,12 +10,21 @@ sanguis::client::from_perk_type(
 	{
 		case perk_type::choleric:
 			return SGE_TEXT("choleric");
+		case perk_type::health:
+			return SGE_TEXT("health");
 		case perk_type::ias:
 			return SGE_TEXT("ias");
 		case perk_type::ims:
 			return SGE_TEXT("ims");
+		case perk_type::irs:
+			return SGE_TEXT("irs");
+		case perk_type::regeneration:
+			return SGE_TEXT("regeneration");
 		case perk_type::size:
-			throw sge::exception(
-				SGE_TEXT("invalid perk type"));
+			break;
 	}
+
+	throw exception(
+		SGE_TEXT("invalid perk type in from_perk_type!")
+	);
 }

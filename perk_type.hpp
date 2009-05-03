@@ -9,8 +9,11 @@ namespace perk_type
 
 enum type {
 	choleric,
+	health,
 	ias,
 	ims,
+	irs,
+	regeneration,
 	size
 };
 

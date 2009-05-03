@@ -231,10 +231,12 @@ void sanguis::client::perk_chooser::choose_callback(
 {
 	SGE_LOG_DEBUG(
 		mylogger,
-		sge::log::_1 << SGE_TEXT("chose perk ")
-		             << p
-								 << SGE_TEXT(", levels left: ")
-								 << levels_left());
+		sge::log::_1
+			<< SGE_TEXT("chose perk ")
+			<< p
+			 << SGE_TEXT(", levels left: ")
+			 << levels_left()
+	);
 
 	if (!levels_left())
 		return;
