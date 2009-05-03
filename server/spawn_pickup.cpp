@@ -1,6 +1,7 @@
 #include "spawn_pickup.hpp"
 #include "environment.hpp"
 #include "entities/pickups/health.hpp"
+#include "entities/pickups/monster.hpp"
 #include "entities/pickups/weapon.hpp"
 #include "../random.hpp"
 #include "../exception.hpp"
@@ -12,6 +13,9 @@ void sanguis::server::spawn_pickup(
 	pos_type const &pos,
 	environment const &env)
 {
+	// TODO: rework this file!
+	// too ugly
+	
 	typedef std::tr1::uniform_int<
 		unsigned
 	> uniform_ui;
@@ -36,7 +40,7 @@ void sanguis::server::spawn_pickup(
 		create_seeded_randgen(),
 		uniform_ui(
 			0,
-			0 + weapon_pickup_count)  // health + 3 weapons
+			1 + weapon_pickup_count)  // health, monster + 3 weapons
 		);
 
 	unsigned const rand_val(rng());
@@ -63,6 +67,18 @@ void sanguis::server::spawn_pickup(
 					pos,
 					team::players,
 					10 // FIXME: which health value to use?
+				)
+			)
+		);
+		break;
+	case weapon_pickup_count + 1:
+		env.insert(
+			entities::auto_ptr(
+				new entities::pickups::monster(
+					env,
+					pos,
+					team::players,
+					enemy_type::skeleton // TODO: nille, create a new enemy
 				)
 			)
 		);

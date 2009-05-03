@@ -7,6 +7,7 @@ namespace sanguis
 namespace pickup_type {
 	enum type {
 		health,
+		monster,
 		weapon,
 		size
 		// add single perks and others here too

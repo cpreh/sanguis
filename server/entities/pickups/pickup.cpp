@@ -1,5 +1,6 @@
 #include "pickup.hpp"
 #include "../entity_with_weapon.hpp"
+#include "../player.hpp"
 #include "../base_parameters.hpp"
 #include "../property.hpp"
 #include "../../get_dim.hpp"
@@ -70,14 +71,23 @@ bool
 sanguis::server::entities::pickups::pickup::can_collide_with_entity(
 	entity const &e) const
 {
-	return dynamic_cast<entity_with_weapon const * const>(&e) && e.team() == team();
+	// TODO: is it ok to limit this to players? probably yes
+	return dynamic_cast<player const *>(&e) && e.team() == team();
 }
 
 void
 sanguis::server::entities::pickups::pickup::collision_entity(
 	entity &e)
 {
-	do_pickup(dynamic_cast<entity_with_weapon &>(e));
+	// if something is spawned by this pickup that can pickup entities itself
+	// we will get an endless loop
+	if(dead())
+		return;
+	
+	do_pickup(
+		dynamic_cast<entity_with_weapon &>(e)
+	);
+
 	die();
 }
 

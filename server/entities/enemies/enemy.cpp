@@ -45,10 +45,11 @@ sanguis::server::entities::enemies::enemy::enemy(
 			)
 		),
 		ai_,
-		weapon_),
-	  etype_(etype_),
-	  spawn_chance(spawn_chance),
-	  exp_(exp_)
+		weapon_
+	),
+	etype_(etype_),
+	spawn_chance(spawn_chance),
+	exp_(exp_)
 {}
 
 sanguis::enemy_type::type

@@ -34,9 +34,9 @@ private:
 	exp_type exp() const;
 	void on_die();
 
-	enemy_type::type   etype_;
-	unsigned           spawn_chance;
-	exp_type           exp_;
+	enemy_type::type const etype_;
+	unsigned const spawn_chance;
+	exp_type const exp_;
 };
 
 }

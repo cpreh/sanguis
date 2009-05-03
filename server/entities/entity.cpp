@@ -533,9 +533,7 @@ sanguis::server::entities::entity::can_collide_with(
 		dynamic_cast<entity const *>(&b)
 	);
 
-	return other
-		? can_collide_with_entity(*other)
-		: false;
+	return other && can_collide_with_entity(*other);
 }
 
 void

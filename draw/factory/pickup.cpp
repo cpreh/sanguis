@@ -40,15 +40,19 @@ get_texture(
 	sanguis::pickup_type::type const ptype)
 {
 	switch(ptype) {
+	case sanguis::pickup_type::monster:
 	case sanguis::pickup_type::health:
 		return sanguis::load::pickup_name(ptype);
 	case sanguis::pickup_type::weapon:
 		throw sanguis::exception(
 			SGE_TEXT("draw::factory::pickup: weapon pickup cannot be created using pickup!"));
-	default:
-		throw sanguis::exception(
-			SGE_TEXT("draw::factory::pickup: missing loading code!"));
+	case sanguis::pickup_type::size:
+		break;
 	}
+
+	throw sanguis::exception(
+		SGE_TEXT("draw::factory::pickup: missing loading code!")
+	);
 }
 
 }

@@ -18,5 +18,7 @@ sanguis::draw::factory::enemy(
 				etype),
 			z_ordering::model_generic,
 			false,
-			remove_action::render_dead));
+			remove_action::render_dead
+		)
+	);
 }
