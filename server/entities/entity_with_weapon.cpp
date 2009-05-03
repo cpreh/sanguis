@@ -169,6 +169,9 @@ void sanguis::server::entities::entity_with_weapon::add_weapon(
 			)
 		);
 
+		// TODO: if we pick up a pistol, the dual pistol gets reset instead.
+		// Doesn't make much sense, but what should we do?
+
 		if(it != weapons_.end())
 		{
 			it->second->reset();

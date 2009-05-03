@@ -36,6 +36,8 @@ public:
 	value_type current() const;
 	void current(value_type);
 
+	void add(value_type);
+
 	void current_to_max();
 
 	void reset();

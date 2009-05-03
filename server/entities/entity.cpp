@@ -304,9 +304,6 @@ void sanguis::server::entities::entity::update(
 			environment()
 		);
 
-	BOOST_FOREACH(property_map::reference p, properties)
-		p.second.apply();
-
 	for(
 		buff_container::iterator it(buffs_.begin());
 		it != buffs_.end();
@@ -323,8 +320,15 @@ void sanguis::server::entities::entity::update(
 			++it;
 	}
 
+	BOOST_FOREACH(property_map::reference p, properties)
+		p.second.apply();
+
 	// attack speed is always on maximum
 	property(property_type::attack_speed).current_to_max();
+
+	property(property_type::health).add(
+		property(property_type::health_regeneration).current() * time
+	);
 }
 
 void sanguis::server::entities::entity::add_perk(

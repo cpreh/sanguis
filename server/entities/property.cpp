@@ -83,6 +83,14 @@ void sanguis::server::entities::property::current(
 	(*change_signal)(current());
 }
 
+void sanguis::server::entities::property::add(
+	value_type const c)
+{
+	current(
+		current() + c
+	);
+}
+
 void sanguis::server::entities::property::current_to_max()
 {
 	current(max());

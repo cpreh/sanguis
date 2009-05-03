@@ -13,6 +13,7 @@ namespace property_type
 enum type {
 	attack_speed,
 	health,
+	health_regeneration,
 	movement_speed,
 	reload_speed,
 	size
