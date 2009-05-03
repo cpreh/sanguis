@@ -2,6 +2,7 @@
 #include "ready.hpp"
 #include "../events/poll.hpp"
 #include "../events/shoot.hpp"
+#include "../events/reset.hpp"
 #include "../../entities/entity_with_weapon.hpp"
 
 sanguis::server::weapons::states::reloading::reloading(
@@ -36,4 +37,13 @@ sanguis::server::weapons::states::reloading::react(
 	e.owner().stop_reloading();
 
 	return transit<ready>();
+}
+
+boost::statechart::result
+sanguis::server::weapons::states::reloading::react(
+	events::reset const &)
+{
+	reload_time.expire();
+	
+	return discard_event();
 }

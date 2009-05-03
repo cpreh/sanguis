@@ -3,6 +3,7 @@
 #include "ready.hpp"
 #include "../events/poll.hpp"
 #include "../events/shoot.hpp"
+#include "../events/reset.hpp"
 #include "../../entities/entity_with_weapon.hpp"
 
 sanguis::server::weapons::states::backswing::backswing(

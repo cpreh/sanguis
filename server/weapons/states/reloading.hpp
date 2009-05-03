@@ -4,11 +4,13 @@
 #include "reloading_fwd.hpp"
 #include "../weapon.hpp"
 #include "../events/poll_fwd.hpp"
+#include "../events/reset_fwd.hpp"
 #include "../../../diff_clock.hpp"
 #include <sge/time/timer.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/result.hpp>
 #include <boost/statechart/custom_reaction.hpp>
+#include <boost/mpl/list.hpp>
 
 namespace sanguis
 {
@@ -27,8 +29,13 @@ class reloading
 	>
 {
 public:
-	typedef boost::statechart::custom_reaction<
-		events::poll
+	typedef boost::mpl::list<
+		boost::statechart::custom_reaction<
+			events::poll
+		>,
+		boost::statechart::custom_reaction<
+			events::reset
+		>
 	> reactions;
 
 	explicit reloading(
@@ -37,6 +44,10 @@ public:
 	boost::statechart::result
 	react(
 		events::poll const &);
+	
+	boost::statechart::result
+	react(
+		events::reset const &);
 private:
 	diff_clock diff_clock_;
 	sge::time::timer reload_time;

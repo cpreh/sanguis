@@ -2,6 +2,7 @@
 #include "delayed_attack.hpp"
 #include "log.hpp"
 #include "events/poll.hpp"
+#include "events/reset.hpp"
 #include "events/shoot.hpp"
 #include "states/ready.hpp"
 #include "../entities/entity_with_weapon.hpp"
@@ -52,6 +53,16 @@ sanguis::server::weapons::weapon::attack(
 			from,
 			to
 		)
+	);
+}
+
+void
+sanguis::server::weapons::weapon::reset()
+{
+	reset_magazine();
+
+	process_event(
+		events::reset()
 	);
 }
 

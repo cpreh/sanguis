@@ -50,6 +50,8 @@ public:
 		time_type,
 		entities::entity_with_weapon &owner);
 
+	void reset();
+
 	magazine_type	
 	magazine_size() const;
 

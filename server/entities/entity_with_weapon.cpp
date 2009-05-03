@@ -162,8 +162,19 @@ void sanguis::server::entities::entity_with_weapon::add_weapon(
 			)
 		);
 
-	if (weapons_.count(wt))
-		return;
+	{
+		weapon_container::iterator const it(
+			weapons_.find(
+				wt
+			)
+		);
+
+		if(it != weapons_.end())
+		{
+			it->second->reset();
+			return;
+		}
+	}
 
 	if (!weapons_.insert(wt,ptr).second)
 		throw exception(SGE_TEXT("couldn't insert weapon"));
