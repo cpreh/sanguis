@@ -26,9 +26,6 @@ sanguis::server::perks::choleric::choleric()
 			static_cast<space_unit>(0),
 			sge::math::twopi<space_unit>()
 		)
-	),
-	damage(
-		static_cast<space_unit>(1)
 	)
 {}
 
@@ -43,7 +40,13 @@ sanguis::server::perks::choleric::do_apply(
 	if(!shoot_timer.update_b())
 		return;
 
-	for(unsigned i = 0; i < 3 + level() * 2; ++i)
+	unsigned const max(
+		can_raise_level()
+		? 3 + level() * 2
+		: 8 
+	);
+
+	for(unsigned i = 0; i < max; ++i)
 		env.insert(
 			can_raise_level()
 			?
@@ -53,7 +56,7 @@ sanguis::server::perks::choleric::do_apply(
 						e.center(),
 						rand(),
 						e.team(),
-						damage
+						static_cast<space_unit>(1) // damage
 					)
 				)
 			:
@@ -63,12 +66,8 @@ sanguis::server::perks::choleric::do_apply(
 						e.center(),
 						rand(),
 						e.team(),
-						damage,
-						static_cast<
-							space_unit
-						>(
-							30
-						)
+						static_cast<space_unit>(5), // damage
+						static_cast<space_unit>(30) // aoe
 					)
 				)
 		);
