@@ -1,7 +1,6 @@
 #include "logic.hpp"
 #include "invalid_id.hpp"
 #include "log.hpp"
-#include "to_perk_type.hpp"
 #include "cursor.hpp"
 #include "../messages/create.hpp"
 #include "../messages/player_direction.hpp"
@@ -18,8 +17,6 @@
 #include <sge/math/angle.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/renderer/device.hpp>
-#include <sge/console/gfx.hpp>
-#include <sge/console/object.hpp>
 #include <sge/time/millisecond.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/log/headers.hpp>
@@ -35,22 +32,11 @@ sanguis::client::logic::logic(
 	send_callback const &send,
 	sge::image::loader_ptr const il,
 	sge::renderer::device_ptr const rend,
-	sge::console::gfx &console_gfx,
 	cursor_pos_callback const &cursor_pos_,
 	cursor_show_callback const &cursor_show_)
 :
 	send(send),
 	rend(rend),
-	give_perk_connection(
-		console_gfx.object().insert(
-			SGE_TEXT("giveperk"),
-			boost::bind(
-				&logic::give_perk,
-				this,
-				_1),
-			SGE_TEXT("giveperk <perk> - gives you a random perk")
-		)
-	),
 	cursor_pos_(cursor_pos_),
 	cursor_show_(cursor_show_),
 	actions(
@@ -363,49 +349,6 @@ void sanguis::client::logic::change_weapon(
 			)
 		)
 	);
-}
-
-void sanguis::client::logic::give_perk(
-	sge::console::arg_list const &args)
-{
-	if(args.size() != 2)
-	{
-		SGE_LOG_WARNING(
-			log(),
-			sge::log::_1
-				<< SGE_TEXT("give_perk requires one argument")
-		);
-		return;
-	}
-	
-	sge::string const perk_name(
-		args[1]
-	);
-
-	perk_type::type const pt(
-		to_perk_type(
-			perk_name
-		)
-	);
-
-	if(pt != perk_type::size)
-		send(
-			messages::create(
-				messages::player_choose_perk(
-					player_id_,
-					pt
-				)
-			)
-		);
-	else
-	{
-		SGE_LOG_WARNING(
-			log(),
-			sge::log::_1
-				<< SGE_TEXT("Invalid perk ")
-				<< perk_name
-		);
-	}
 }
 
 sge::sprite::point const

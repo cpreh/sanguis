@@ -74,39 +74,40 @@ sanguis::client::perk_chooser::perk_chooser(
 	sge::systems::instance &_sys,
 	send_callback const &_send_callback,
 	sanguis::client::cursor_ptr const _cursor)
-	: sys_(_sys),
-	  perks_(),
-		current_level_(
-			static_cast<level_type>(0)),
-		consumed_levels_(
-			static_cast<level_type>(0)),
-		m_(
-			sys_.renderer(),
-			sys_.input_system(),
-			sge::gui::skins::ptr(
-				new sge::gui::skins::standard(
-					sys_.font_system())),
-			_cursor),
-		background_(
-			m_,
-			sge::gui::widgets::parameters()
-				.pos(
-					dialog_pos())
-				.size(
-					dialog_size())
-				.activation(
-					sge::gui::activation_state::inactive)
-				.layout(
-					sge::make_shared_ptr<sge::gui::layouts::vertical>())),
-		perks_left_(
-			background_,
-			sge::gui::widgets::parameters(),
-			SGE_TEXT("")),
-		buttons_(),
-		connections_(),
-		dirty_(false),
-		send_callback_(_send_callback),
-		images_()
+:
+	sys_(_sys),
+	perks_(),
+	current_level_(
+		static_cast<level_type>(0)),
+	consumed_levels_(
+		static_cast<level_type>(0)),
+	m_(
+		sys_.renderer(),
+		sys_.input_system(),
+		sge::gui::skins::ptr(
+			new sge::gui::skins::standard(
+				sys_.font_system())),
+		_cursor),
+	background_(
+		m_,
+		sge::gui::widgets::parameters()
+			.pos(
+				dialog_pos())
+			.size(
+				dialog_size())
+			.activation(
+				sge::gui::activation_state::inactive)
+			.layout(
+				sge::make_shared_ptr<sge::gui::layouts::vertical>())),
+	perks_left_(
+		background_,
+		sge::gui::widgets::parameters(),
+		SGE_TEXT("")),
+	buttons_(),
+	connections_(),
+	dirty_(false),
+	send_callback_(_send_callback),
+	images_()
 {
 	SGE_LOG_DEBUG(
 		mylogger,

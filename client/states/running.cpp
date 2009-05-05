@@ -65,7 +65,6 @@ sanguis::client::states::running::running(
 			_1),
 		context<machine>().sys().image_loader(),
 		context<machine>().renderer(),
-		context<machine>().console_wrapper().con,
 		boost::bind(
 			&running::cursor_pos,
 			this,

@@ -15,9 +15,6 @@
 #include <sge/math/vector/basic_decl.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image/loader_fwd.hpp>
-#include <sge/console/arg_list.hpp>
-#include <sge/console/gfx_fwd.hpp>
-#include <sge/signal/scoped_connection.hpp>
 #include <sge/sprite/point.hpp>
 #include <sge/noncopyable.hpp>
 #include <boost/tr1/array.hpp>
@@ -36,7 +33,6 @@ public:
 		send_callback const &,
 		sge::image::loader_ptr,
 		sge::renderer::device_ptr,
-		sge::console::gfx &,
 		cursor_pos_callback const &,
 		cursor_show_callback const &);
 	void handle_player_action(
@@ -79,15 +75,11 @@ private:
 	void change_weapon(
 		weapon_type::type);
 
-	void give_perk(
-		sge::console::arg_list const &);
-
 	sge::sprite::point const
 	cursor_pos() const;
 
 	send_callback const             send;
 	sge::renderer::device_ptr const rend;
-	sge::signal::scoped_connection const give_perk_connection;
 
 	cursor_pos_callback const cursor_pos_;
 	cursor_show_callback const cursor_show_;
