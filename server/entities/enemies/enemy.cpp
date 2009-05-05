@@ -2,8 +2,8 @@
 #include "../base_parameters.hpp"
 #include "../../weapons/weapon.hpp"
 #include "../../ai/base.hpp"
-#include "../../spawn_pickup.hpp"
 #include "../../get_dim.hpp"
+#include "../../environment.hpp"
 #include "../../../random.hpp"
 #include "../../../load/enemy_name.hpp"
 #include "../../../load/context.hpp"
@@ -93,6 +93,8 @@ void sanguis::server::entities::enemies::enemy::on_die()
 		rand_gen_type,
 		uniform_ui
 	> rng_type;
+	
+	// FIXME: this should not be static here, but what to do about the spawn chance?
 
 	static rng_type rng(
 		create_seeded_randgen(),
@@ -102,5 +104,7 @@ void sanguis::server::entities::enemies::enemy::on_die()
 		));
 
 	if(rng() <= spawn_chance)
-		spawn_pickup(center(), environment());
+		environment().spawn_pickup(
+			center()
+		);
 }

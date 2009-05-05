@@ -8,6 +8,7 @@
 #include "../machine.hpp"
 #include "../send_callback.hpp"
 #include "../console_print_callback.hpp"
+#include "../pickup_spawner.hpp"
 #include "../entities/player_fwd.hpp"
 #include "../entities/container.hpp"
 #include "../entities/auto_ptr.hpp"
@@ -72,6 +73,8 @@ public:
 		server::entities::player &,
 		level_type);
 	
+	void spawn_pickup();
+
 	bool collision_test(
 		sge::collision::satellite const &,
 		sge::collision::satellite const &);
@@ -118,6 +121,7 @@ private:
 	server::entities::container entities_;
 	player_map players_;
 	
+	pickup_spawner pickup_spawner_;
 	waves::generator wave_generator;
 };
 

@@ -74,6 +74,9 @@ sanguis::server::states::running::running(
 	),
 	entities_(),
 	players_(),
+	pickup_spawner_(
+		environment()
+	),
 	wave_generator()
 {
 	SGE_LOG_DEBUG(
@@ -295,12 +298,14 @@ void sanguis::server::states::running::process(
 sanguis::server::environment const
 sanguis::server::states::running::environment()
 {
+	// TODO: save this in the class instead and return it by reference!
 	return server::environment(
 		send,
 		boost::bind(&running::insert_entity, this, _1),
 		boost::bind(&running::divide_exp, this, _1),
 		boost::bind(&running::level_callback, this, _1, _2),
 		boost::bind(&running::load_callback, this),
+		boost::bind(&pickup_spawner::spawn, &pickup_spawner_, _1),
 		context<machine>().collision());
 }
 

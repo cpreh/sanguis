@@ -13,8 +13,7 @@ sanguis::load::pickup_name(
 		);
 	case pickup_type::monster:
 		return sge::string(
-			//SGE_TEXT("pickups/monster")
-			SGE_TEXT("pickups/hp") // TODO: nille!
+			SGE_TEXT("pickups/monster")
 		);
 	default:
 		throw exception(

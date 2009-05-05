@@ -6,6 +6,7 @@ sanguis::server::environment::environment(
 	exp_callback const &exp,
 	level_callback const &level,
 	load_callback const &load,
+	spawn_pickup_callback const &spawn_pickup,
 	sge::collision::world_ptr const collision_)
 :
 	send(send),
@@ -13,6 +14,7 @@ sanguis::server::environment::environment(
 	exp(exp),
 	level(level),
 	load(load),
+	spawn_pickup(spawn_pickup),
 	collision_(collision_)
 {}
 

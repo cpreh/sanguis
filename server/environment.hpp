@@ -6,6 +6,7 @@
 #include "exp_callback.hpp"
 #include "level_callback.hpp"
 #include "load_callback.hpp"
+#include "spawn_pickup_callback.hpp"
 #include <sge/collision/world_fwd.hpp>
 
 namespace sanguis
@@ -19,6 +20,7 @@ struct environment
 	exp_callback exp;
 	level_callback level;
 	load_callback load;
+	spawn_pickup_callback spawn_pickup;
 
 	environment(
 		send_callback const &,
@@ -26,6 +28,7 @@ struct environment
 		exp_callback const &,
 		level_callback const &,
 		load_callback const &,
+		spawn_pickup_callback const &,
 		sge::collision::world_ptr);
 	
 	sge::collision::world_ptr const
