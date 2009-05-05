@@ -50,7 +50,7 @@ void sanguis::server::ai::simple::update(
 		)
 	);
 
-	if(search_new_target_timer.update_b() || !target)
+	if(/*search_new_target_timer.update_b() ||*/ !target)
 	{
 		space_unit distance(
 			std::numeric_limits<
@@ -75,6 +75,9 @@ void sanguis::server::ai::simple::update(
 				continue;
 
 			distance = new_distance;
+
+			// unlink before we may link an object twice
+			//target.unlink();
 			target = me.link(e);
 		}
 
