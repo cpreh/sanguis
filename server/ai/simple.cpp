@@ -3,6 +3,8 @@
 #include "../entities/property.hpp"
 #include "../collision/collides.hpp"
 #include "../collision/distance.hpp"
+#include <sge/time/second.hpp>
+#include <sge/time/resolution.hpp>
 #include <sge/optional.hpp>
 #include <sge/math/angle.hpp>
 #include <boost/foreach.hpp>
@@ -10,7 +12,16 @@
 
 sanguis::server::ai::simple::simple()
 :
-	me_(0)
+	me_(0),
+	target(),
+	diff_clock_(),
+	search_new_target_timer(
+		sge::time::second(
+			5
+		),
+		sge::time::activation_state::active,
+		diff_clock_.callback()
+	)
 {}
 
 void sanguis::server::ai::simple::bind(
@@ -35,7 +46,7 @@ void sanguis::server::ai::simple::update(
 		)
 	);
 
-	if(!target)
+	if(search_new_target_timer.update_b() || !target)
 	{
 		space_unit distance(
 			std::numeric_limits<
