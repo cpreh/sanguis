@@ -14,11 +14,15 @@ sanguis::load::model::sound::sound(
 		)
 	),
 	probability_(
-		get_entry<
-			double
+		static_cast<
+			probability_type
 		>(
-			members,
-			SGE_TEXT("prob")
+			get_entry<
+				double
+			>(
+				members,
+				SGE_TEXT("prob")
+			)
 		)
 	),
 	file(
