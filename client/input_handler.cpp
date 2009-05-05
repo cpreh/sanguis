@@ -34,7 +34,7 @@ void sanguis::client::input_handler::input_callback(
 	case sge::input::kc::key_c:
 		weapon_switch_event(p);
 		break;
-	case sge::input::kc::key_p:
+	case sge::input::kc::key_e:
 		pause_unpause_event(p);
 		break;
 	default:
