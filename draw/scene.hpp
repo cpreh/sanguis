@@ -14,6 +14,7 @@
 #include "../messages/base.hpp"
 #include "../messages/add.hpp"
 #include "../messages/add_enemy.hpp"
+#include "../messages/add_friend.hpp"
 #include "../messages/add_pickup.hpp"
 #include "../messages/add_decoration.hpp"
 #include "../messages/add_projectile.hpp"
@@ -68,6 +69,7 @@ public:
 
 	void operator()(messages::add const &);
 	void operator()(messages::add_enemy const &);
+	void operator()(messages::add_friend const &);
 	void operator()(messages::add_pickup const &);
 	void operator()(messages::add_decoration const &);
 	void operator()(messages::add_projectile const &);

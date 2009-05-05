@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_FRIEND_HPP_INCLUDED
 
 #include "entity_with_ai.hpp"
-#include "../../enemy_type.hpp"
+#include "../../friend_type.hpp"
 
 namespace sanguis
 {
@@ -14,7 +14,7 @@ namespace entities
 class friend_ : public entity_with_ai {
 public:
 	friend_(
-		enemy_type::type,
+		friend_type::type,
 		server::environment const &,
 		armor_array const &,
 		pos_type const &center,
@@ -27,8 +27,7 @@ public:
 private:
 	messages::auto_ptr add_message() const;
 
-	// TODO: we want to make a new type for this
-	enemy_type::type const etype_;
+	friend_type::type const ftype_;
 };
 
 }

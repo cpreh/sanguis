@@ -18,7 +18,7 @@ sanguis::server::pickup_spawner::pickup_spawner(
 			sge::random::actor::container
 		>(
 			sge::random::actor::element(
-				5.,
+				4.,
 				boost::bind(
 					&pickup_spawner::spawn_health,
 					this
@@ -27,7 +27,7 @@ sanguis::server::pickup_spawner::pickup_spawner(
 		)
 		(
 			sge::random::actor::element(
-				0.1,
+				0.3,
 				boost::bind(
 					&pickup_spawner::spawn_monster,
 					this
@@ -46,7 +46,7 @@ sanguis::server::pickup_spawner::pickup_spawner(
 		)
 		(
 			sge::random::actor::element(
-				0.5,
+				0.8,
 				boost::bind(
 					&pickup_spawner::spawn_weapon,
 					this,
@@ -56,7 +56,7 @@ sanguis::server::pickup_spawner::pickup_spawner(
 		)
 		(
 			sge::random::actor::element(
-				0.5,
+				1.,
 				boost::bind(
 					&pickup_spawner::spawn_weapon,
 					this,
@@ -103,7 +103,7 @@ sanguis::server::pickup_spawner::spawn_monster()
 				env,
 				pos,
 				team::players,
-				enemy_type::skeleton // TODO: nille, create a new enemy
+				friend_type::spider
 			)
 		)
 	);

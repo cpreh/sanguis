@@ -3,15 +3,15 @@
 #include "../weapons/weapon.hpp"
 #include "../ai/base.hpp"
 #include "../get_dim.hpp"
-#include "../../load/enemy_name.hpp"
+#include "../../load/friend_name.hpp"
 #include "../../load/context.hpp"
-#include "../../messages/add_enemy.hpp"
+#include "../../messages/add_friend.hpp"
 #include "../../messages/create.hpp"
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 
 sanguis::server::entities::friend_::friend_(
-	enemy_type::type const etype_,
+	friend_type::type const ftype_,
 	server::environment const &env,
 	armor_array const &armor,
 	pos_type const &center,
@@ -31,27 +31,26 @@ sanguis::server::entities::friend_::friend_(
 			direction,
 			team_,
 			properties,
-			entity_type::enemy,
+			entity_type::friend_,
 			false,
 			default_dim(
 				env.load().models(),
-				load::enemy_name(
-					etype_
+				load::friend_name(
+					ftype_
 				)
 			)
 		),
 		ai_,
 		weapon_
 	),
-	etype_(etype_)
+	ftype_(ftype_)
 {}
 
 sanguis::messages::auto_ptr
 sanguis::server::entities::friend_::add_message() const
 {
-	// TODO: maybe create a different message here?
 	return messages::create(
-		messages::add_enemy(
+		messages::add_friend(
 			id(),
 			pos(),
 			angle(),
@@ -59,7 +58,7 @@ sanguis::server::entities::friend_::add_message() const
 			health(),
 			max_health(),
 			dim(),
-			etype_
+			ftype_
 		)
 	);
 }

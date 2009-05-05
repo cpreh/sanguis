@@ -4,6 +4,7 @@
 #include "factory/client.hpp"
 #include "factory/enemy.hpp"
 #include "factory/entity.hpp"
+#include "factory/friend.hpp"
 #include "factory/pickup.hpp"
 #include "factory/projectile.hpp"
 #include "factory/decoration.hpp"
@@ -26,7 +27,11 @@
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/caps.hpp>
 
-#include <boost/mpl/vector.hpp>
+// super ugly hack, so that we can use a vector with more than 20 types
+// but don't have to touch mpl::vector
+#define FUSION_MAX_VECTOR_SIZE 21
+#include <boost/fusion/container/vector.hpp>
+#include <boost/fusion/include/mpl.hpp>
 #include <boost/bind.hpp>
 #include <boost/foreach.hpp>
 
@@ -80,10 +85,11 @@ void sanguis::draw::scene::process_message(
 	messages::base const &m)
 {
 	messages::unwrap<
-		boost::mpl::vector<
+		boost::fusion::vector<
 			messages::add,
 			messages::add_decoration,
 			messages::add_enemy,
+			messages::add_friend,
 			messages::add_pickup,
 			messages::add_projectile,
 			messages::add_weapon_pickup,
@@ -208,6 +214,23 @@ void sanguis::draw::scene::operator()(
 				enemy_type::type
 			>(
 				m.get<messages::roles::enemy>()
+			)
+		),
+		m
+	);
+}
+
+void sanguis::draw::scene::operator()(
+	messages::add_friend const &m)
+{
+	configure_new_object(
+		factory::friend_(
+			environment(),
+			m.get<messages::roles::entity_id>(),
+			static_cast<
+				friend_type::type
+			>(
+				m.get<messages::roles::friend_>()
 			)
 		),
 		m

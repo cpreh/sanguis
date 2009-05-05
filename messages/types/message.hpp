@@ -14,6 +14,7 @@ enum type {
 	add,
 	add_decoration,
 	add_enemy,
+	add_friend,
 	add_pickup,
 	add_projectile,
 	add_weapon_pickup,

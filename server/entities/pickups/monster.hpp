@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_PICKUPS_MONSTER_HPP_INCLUDED
 
 #include "pickup.hpp"
-#include "../../../enemy_type.hpp"
+#include "../../../friend_type.hpp"
 
 namespace sanguis
 {
@@ -19,12 +19,12 @@ public:
 		server::environment const &,
 		pos_type const &center,
 		team::type,
-		enemy_type::type);
+		friend_type::type);
 private:
 	void do_pickup(
 		entity_with_weapon &receiver);
 	
-	enemy_type::type const etype;
+	friend_type::type const ftype;
 };
 
 }

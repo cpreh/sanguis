@@ -7,7 +7,7 @@
 #include "../../get_dim.hpp"
 #include "../../environment.hpp"
 #include "../../damage_types.hpp"
-#include "../../../load/enemy_name.hpp"
+#include "../../../load/friend_name.hpp"
 #include "../../../load/context.hpp"
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>
@@ -18,7 +18,7 @@ sanguis::server::entities::pickups::monster::monster(
 	server::environment const &env,
 	pos_type const &center,
 	team::type const team_,
-	enemy_type::type const etype)
+	friend_type::type const ftype)
 :
 	pickup(
 		pickup_type::monster,
@@ -27,7 +27,7 @@ sanguis::server::entities::pickups::monster::monster(
 		team_,
 		optional_dim()
 	),
-	etype(etype)
+	ftype(ftype)
 {}
 
 void sanguis::server::entities::pickups::monster::do_pickup(
@@ -36,7 +36,7 @@ void sanguis::server::entities::pickups::monster::do_pickup(
 	environment().insert(
 		entities::auto_ptr(
 			new entities::friend_(
-				etype,
+				ftype,
 				environment(),
 				damage::list(
 					static_cast<space_unit>(0)
@@ -55,7 +55,7 @@ void sanguis::server::entities::pickups::monster::do_pickup(
 				(
 					entities::property_type::movement_speed,
 					entities::property(
-						static_cast<space_unit>(35)
+						static_cast<space_unit>(100)
 					)
 				),
 				ai::auto_ptr(
