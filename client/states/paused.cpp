@@ -1,6 +1,5 @@
 #include "paused.hpp"
 #include "unpaused.hpp"
-#include "../from_perk_type.hpp"
 #include "../perk_cast.hpp"
 #include "../../media_path.hpp"
 #include "../../messages/unpause.hpp"
@@ -23,9 +22,10 @@
 #include <boost/ref.hpp>
 
 sanguis::client::states::paused::paused(my_context ctx)
-	: my_base(ctx),
-		chooser_activation_(
-			context<running>().perk_chooser())
+:
+	my_base(ctx),
+	chooser_activation_(
+	context<running>().perk_chooser())
 {
 	context<running>().pause(true);
 }
