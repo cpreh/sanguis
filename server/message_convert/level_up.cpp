@@ -10,7 +10,11 @@ sanguis::server::message_convert::level_up(
 	return messages::create(
 		messages::level_up(
 			p.id(),
-			p.level()
+			static_cast<
+				messages::types::level
+			>(
+				p.level()
+			)
 		)
 	);
 }
