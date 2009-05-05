@@ -31,9 +31,13 @@ void sanguis::server::ai::simple::bind(
 }
 
 void sanguis::server::ai::simple::update(
-	time_type,
+	time_type const time,
 	entities::container &entities)
 {
+	diff_clock_.update(
+		time
+	);
+
 	if(!me_)
 		return;
 	
