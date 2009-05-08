@@ -30,6 +30,7 @@ sanguis::server::perks::tree::tree()
 		)
 	)
 {
+	// TODO: do this with assign::
 	impl.push_back(
 		perk_type::choleric
 	);
@@ -39,6 +40,15 @@ sanguis::server::perks::tree::tree()
 	impl.push_back(
 		perk_type::ims
 	);
+//	impl.push_back(
+//		perk_type::irs
+//	);
+	impl.push_back(
+		perk_type::health
+	);
+//	impl.push_back(
+//		perk_type::regeneration
+//	);
 }
 
 sanguis::server::perks::tree::~tree()
