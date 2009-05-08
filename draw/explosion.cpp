@@ -8,6 +8,11 @@
 #include "../load/context.hpp"
 #include "../load/resource/sounds.hpp"
 #include "../load/sound_type.hpp"
+#include "../load/model/part.hpp"
+#include "../load/model/weapon_category.hpp"
+#include "../load/model/model.hpp"
+#include "../load/model/context.hpp"
+#include "../load/model/collection.hpp"
 #include "../load/particle/context.hpp"
 #include "../load/particle/collection.hpp"
 #include "../load/particle/animations.hpp"
@@ -16,6 +21,7 @@
 #include "../client/next_id.hpp"
 #include "../resolution.hpp"
 #include "../media_path.hpp"
+#include "../animation_type.hpp"
 #include <sge/minmax_pair_impl.hpp>
 #include <sge/structure_cast.hpp>
 #include <sge/audio/sound.hpp>
@@ -227,12 +233,47 @@ sanguis::draw::explosion::generate_explosion()
 			environment()));
 }
 
+#include "../exception.hpp"
+
+namespace 
+{
+sge::string const to_string(sanguis::particle_type::type const t)
+{
+	switch (t)
+	{
+		case sanguis::particle_type::flare:
+			return SGE_TEXT("flare");
+		case sanguis::particle_type::smoke:
+			return SGE_TEXT("smoke");
+		case sanguis::particle_type::rubble:
+			return SGE_TEXT("rubble");
+		case sanguis::particle_type::size:
+			break;
+	}
+	throw sanguis::exception(
+		SGE_TEXT("invalid enumeration value for particle type"));
+}
+}
+
 sanguis::draw::particle::base_ptr
 sanguis::draw::explosion::generate_particle(
 	particle_type::type const t)
 {
 	sge::sprite::animation_series const anim =
-		environment().context().particles()()[t].random()().get();
+		environment().context().models()()
+		[
+			SGE_TEXT("particles/")+
+			::to_string(t)
+		]
+		[
+			::to_string(t)+SGE_TEXT("0")
+		]
+		[
+			weapon_type::none
+		]
+		[
+			animation_type::none
+		].get();
 	
 	particle::base_ptr ptr;
 	
