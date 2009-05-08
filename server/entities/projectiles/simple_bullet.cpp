@@ -35,7 +35,7 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 {}
 
 void
-sanguis::server::entities::projectiles::simple_bullet::collision_entity(
+sanguis::server::entities::projectiles::simple_bullet::do_damage(
 	entity &e)
 {
 	damage_array const damage_values =

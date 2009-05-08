@@ -39,3 +39,8 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 		)
 	);
 }
+
+void
+sanguis::server::entities::projectiles::aoe_damage::do_damage(
+	entity &)
+{}

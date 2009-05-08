@@ -30,7 +30,7 @@ sanguis::server::entities::projectiles::melee::melee(
 {}
 
 void
-sanguis::server::entities::projectiles::melee::collision_entity(
+sanguis::server::entities::projectiles::melee::do_damage(
 	entity &e)
 {
 	damage_array const damage_values =
@@ -43,6 +43,8 @@ sanguis::server::entities::projectiles::melee::collision_entity(
 	
 	e.damage(
 		damage,
-		damage_values);
+		damage_values
+	);
+
 	die();
 }
