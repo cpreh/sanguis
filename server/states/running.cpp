@@ -1,6 +1,5 @@
 #include "running.hpp"
 #include "unpaused.hpp"
-#include "../entities/property.hpp"
 #include "../collision/test.hpp"
 #include "../collision/execute.hpp"
 #include "../add_decorations.hpp"
@@ -20,9 +19,7 @@
 #include <sge/container/map_impl.hpp>
 #include <sge/random/inclusive_range.hpp>
 #include <sge/log/headers.hpp>
-#include <sge/collision/satellite.hpp>
 #include <sge/collision/world.hpp>
-#include <sge/utf8/convert.hpp>
 #include <sge/text.hpp>
 #include <sge/type_info.hpp>
 #include <boost/mpl/vector.hpp>
