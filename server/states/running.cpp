@@ -1,8 +1,8 @@
 #include "running.hpp"
 #include "unpaused.hpp"
 #include "../entities/property.hpp"
-#include "../collision/satellite.hpp"
-#include "../collision/base.hpp"
+#include "../collision/test.hpp"
+#include "../collision/execute.hpp"
 #include "../add_decorations.hpp"
 #include "../create_player.hpp"
 #include "../environment.hpp"
@@ -44,7 +44,7 @@ sanguis::server::states::running::running(
 		boost::bind(&running::insert_entity, this, _1),
 		boost::bind(&running::divide_exp, this, _1),
 		boost::bind(&running::level_callback, this, _1, _2),
-		boost::bind(&running::load_callback, this),
+		boost::bind(&machine::resources, &context<machine>()),
 		boost::bind(&pickup_spawner::spawn, &pickup_spawner_, _1),
 		boost::bind(&running::pickup_chance, this, _1),
 		context<machine>().collision()
@@ -52,8 +52,7 @@ sanguis::server::states::running::running(
 	coll_connection(
 		context<machine>().collision()->register_callback(
 			boost::bind(
-				&running::collision,
-				this,
+				collision::execute,
 				_1,
 				_2
 			)
@@ -93,8 +92,7 @@ sanguis::server::states::running::running(
 
 	context<machine>().collision()->test_callback(
 		boost::bind(
-			&running::collision_test,
-			this,
+			collision::test,
 			_1,
 			_2
 		)
@@ -111,21 +109,6 @@ sanguis::server::entities::container const &
 sanguis::server::states::running::entities() const
 {
 	return entities_;
-}
-
-sanguis::server::entities::entity &
-sanguis::server::states::running::insert_entity(
-	entities::auto_ptr e)
-{
-	entities_.push_back(e);
-	entities::entity &ref = entities_.back();
-
-	if(ref.type() == entity_type::indeterminate)
-		return ref;
-	
-	send()(ref.add_message());
-
-	return ref;
 }
 
 sanguis::server::states::running::player_map &
@@ -145,73 +128,6 @@ sanguis::server::states::running::player(
 	net::id_type const id)
 {
 	return *players()[id];
-}
-
-void sanguis::server::states::running::divide_exp(
-	exp_type const exp)
-{
-	if (exp == static_cast<exp_type>(0))
-		return;
-
-	BOOST_FOREACH(running::player_map::reference ref, players())
-	{
-		entities::player &p = *ref.second;
-		p.exp(p.exp() + exp);
-
-		send()(message_convert::experience(p));
-	}
-}
-
-void sanguis::server::states::running::level_callback(
-	entities::player &p,
-	level_type)
-{
-	send()(message_convert::level_up(p));
-}
-
-bool sanguis::server::states::running::collision_test(
-	sge::collision::satellite const &a,
-	sge::collision::satellite const &b)
-{
-	collision::base const
-		&e0(
-			dynamic_cast<
-				collision::satellite const &
-			>(a).base()
-		),
-	        &e1(
-			dynamic_cast<
-				collision::satellite const &
-			>(b).base()
-		);
-	
-	return e0.can_collide_with(e1) || e1.can_collide_with(e0);
-}
-
-void sanguis::server::states::running::collision(
-	sge::collision::satellite &a,
-	sge::collision::satellite &b)
-{
-	collision::base
-		&e0(
-			dynamic_cast<
-				collision::satellite &
-			>(a).base()
-		),
-		&e1(
-			dynamic_cast<
-				collision::satellite &
-			>(b).base()
-		);
-	
-	e0.collision(e1);
-	e1.collision(e0);
-}
-
-sanguis::load::context const &
-sanguis::server::states::running::load_callback() const
-{
-	return context<machine>().resources();
 }
 
 void sanguis::server::states::running::process(
@@ -358,6 +274,43 @@ sanguis::server::states::running::operator()(
 	);
 	
 	return discard_event();
+}
+
+void sanguis::server::states::running::divide_exp(
+	exp_type const exp)
+{
+	if (exp == static_cast<exp_type>(0))
+		return;
+
+	BOOST_FOREACH(running::player_map::reference ref, players())
+	{
+		entities::player &p = *ref.second;
+		p.exp(p.exp() + exp);
+
+		send()(message_convert::experience(p));
+	}
+}
+
+void sanguis::server::states::running::level_callback(
+	entities::player &p,
+	level_type)
+{
+	send()(message_convert::level_up(p));
+}
+
+sanguis::server::entities::entity &
+sanguis::server::states::running::insert_entity(
+	entities::auto_ptr e)
+{
+	entities_.push_back(e);
+	entities::entity &ref = entities_.back();
+
+	if(ref.type() == entity_type::indeterminate)
+		return ref;
+	
+	send()(ref.add_message());
+
+	return ref;
 }
 
 sanguis::server::send_callback const &

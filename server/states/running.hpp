@@ -26,7 +26,6 @@
 #include <sge/signal/scoped_connection.hpp>
 #include <sge/random/uniform.hpp>
 #include <sge/container/map_decl.hpp>
-#include <sge/collision/satellite_fwd.hpp>
 #include <boost/mpl/list.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/result.hpp>
@@ -58,42 +57,18 @@ public:
 		server::entities::player *
 	> player_map;
 
-	running(
+	explicit running(
 		my_context);
 	
 	server::entities::container &entities();
 	server::entities::container const &entities() const;
 
-	server::entities::entity &
-	insert_entity(
-		server::entities::auto_ptr);
-	
 	player_map &players();
 	player_map const &players() const;
 
 	entities::player &
 	player(
 		net::id_type);
-
-	void divide_exp(
-		exp_type);
-
-	void level_callback(
-		server::entities::player &,
-		level_type);
-	
-	void spawn_pickup();
-
-	bool collision_test(
-		sge::collision::satellite const &,
-		sge::collision::satellite const &);
-
-	void collision(
-		sge::collision::satellite &,
-		sge::collision::satellite &);
-
-	load::context const &
-	load_callback() const;
 
 	void process(
 		time_type);
@@ -117,6 +92,17 @@ public:
 		net::id_type,
 		messages::player_choose_perk const &);
 private:
+	void divide_exp(
+		exp_type);
+
+	void level_callback(
+		server::entities::player &,
+		level_type);
+	
+	server::entities::entity &
+	insert_entity(
+		server::entities::auto_ptr);
+	
 	send_callback const &
 	send() const;
 
@@ -124,10 +110,11 @@ private:
 	pickup_chance(
 		probability_type);
 
-	boost::statechart::result handle_default_msg(
+	boost::statechart::result
+	handle_default_msg(
 		net::id_type,
 		messages::base const &);
-	void create_decorations();
+
 	static sge::log::logger &log();
 
 	server::environment const environment_;
