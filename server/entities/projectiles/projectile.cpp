@@ -94,6 +94,16 @@ bool sanguis::server::entities::projectiles::projectile::can_collide_with_entity
 		&& !e.invulnerable();
 }
 
+void
+sanguis::server::entities::projectiles::projectile::collision_entity(
+	entity &e)
+{
+	if(!dead())
+		do_damage(
+			e
+		);
+}
+
 void sanguis::server::entities::projectiles::projectile::do_die()
 {}
 
@@ -136,5 +146,3 @@ to_entity_type(
 }
 
 }
-
-

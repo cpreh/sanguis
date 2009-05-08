@@ -23,8 +23,9 @@ public:
 		space_unit aoe);
 private:
 	void
-	collision_entity(
+	do_damage(
 		entity &);
+
 	void do_die();
 	
 	space_unit const

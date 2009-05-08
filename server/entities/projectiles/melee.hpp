@@ -21,7 +21,7 @@ public:
 		space_unit damage);
 private:
 	void
-	collision_entity(
+	do_damage(
 		entity &);
 
 	space_unit const damage;

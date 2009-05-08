@@ -23,6 +23,10 @@ public:
 		unsigned pulses,
 		time_type pulse_diff,
 		damage_array const &damage_values);
+private:
+	void
+	do_damage(
+		entity &);
 };	
 
 }

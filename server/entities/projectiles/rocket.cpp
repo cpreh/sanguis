@@ -40,7 +40,7 @@ sanguis::server::entities::projectiles::rocket::rocket(
 {}
 
 void
-sanguis::server::entities::projectiles::rocket::collision_entity(
+sanguis::server::entities::projectiles::rocket::do_damage(
 	entity &)
 {
 	die();

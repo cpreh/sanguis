@@ -46,6 +46,14 @@ private:
 	can_collide_with_entity(
 		entity const &) const;
 	
+	void
+	collision_entity(
+		entity &);
+
+	virtual void
+	do_damage(
+		entity &) = 0;
+
 	virtual void do_die();
 
 	messages::auto_ptr add_message() const;
