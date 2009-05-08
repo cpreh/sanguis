@@ -166,7 +166,8 @@ void sanguis::server::machine::send(
 
 	serialize(
 		m,
-		m_str);
+		m_str
+	);
 
 	BOOST_FOREACH(client_map::reference ref, clients)
 		sge::algorithm::append(
@@ -175,13 +176,15 @@ void sanguis::server::machine::send(
 		);
 }
 
-void sanguis::server::machine::send(
-	messages::auto_ptr m,
+sanguis::server::send_callback const
+sanguis::server::machine::unicast(
 	net::id_type const dest)
 {
-	serialize(
-		m,
-		clients[dest].out_buffer
+	return boost::bind(
+		&machine::send_unicast,
+		this,
+		_1,
+		dest
 	);
 }
 
@@ -207,4 +210,22 @@ sge::collision::world_ptr const
 sanguis::server::machine::collision()
 {
 	return collision_;
+}
+
+void
+sanguis::server::machine::send_unicast(
+	messages::auto_ptr m,
+	net::id_type const id)
+{
+	net::data_type ser;
+
+	serialize(
+		m,
+		ser
+	);
+
+	sge::algorithm::append(
+		clients[id].out_buffer,
+		ser
+	);
 }

@@ -24,6 +24,7 @@
 #include <sge/math/vector/arithmetic.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/vector/is_null.hpp>
+#include <sge/container/map_impl.hpp>
 #include <sge/collision/world.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/format.hpp>
@@ -250,26 +251,11 @@ sanguis::server::states::unpaused::react(
 				send(message_convert::remove(*i));
 			}
 			
-			// TODO: use find!
 			// we have to remove the player link as well
 			if(i->type() == entity_type::player)
-			{
-				bool found = false;
-				running::player_map &players_(context<running>().players());
-				for(running::player_map::iterator it = players_.begin(); it != players_.end(); ++it)
-					if(it->second->id() == i->id())
-					{
-						players_.erase(it);
-						found = true;
-						break;
-					}
-
-				if(!found)
-					throw exception(
-						(sge::format(
-							SGE_TEXT("Player with id %1% not in player map when erasing!"))
-						% i->id()).str());
-			}
+				context<running>().players().erase(
+					i->id()
+				);
 
 			i = entities.erase(i);
 			continue;

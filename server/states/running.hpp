@@ -25,6 +25,7 @@
 #include <sge/log/logger_fwd.hpp>
 #include <sge/signal/scoped_connection.hpp>
 #include <sge/random/uniform.hpp>
+#include <sge/container/map_decl.hpp>
 #include <sge/collision/satellite_fwd.hpp>
 #include <boost/mpl/list.hpp>
 #include <boost/statechart/state.hpp>
@@ -51,7 +52,8 @@ public:
 		message_event
 	> reactions;
 
-	typedef std::map<
+	typedef sge::container::map<
+		std::map,
 		net::id_type,
 		server::entities::player *
 	> player_map;

@@ -6,7 +6,6 @@
 #include "../perks/list.hpp"
 #include "../level_type.hpp"
 #include "../string.hpp"
-#include "../../net/id_type.hpp"
 #include "../../perk_type.hpp"
 
 namespace sanguis
@@ -21,7 +20,6 @@ public:
 	player(
 		server::environment const &,
 		armor_array const &,
-		net::id_type net_id,
 		pos_type const &center,
 		space_unit direction,
 		space_unit angle,
@@ -29,7 +27,6 @@ public:
 		string const &name);
 
 	// own functions
-	net::id_type net_id() const;
 	string const name() const;
 	exp_type exp() const;
 	void exp(exp_type);
@@ -45,13 +42,13 @@ public:
 	perks::list const
 	available_perks() const;
 private:
-	net::id_type const net_id_;
-	string       const name_;
-	exp_type           exp_;
-	level_type         level_,
-	                   level_delta_;
-	unsigned           skill_points_;
-	perks::tree        perk_tree_;
+	string const name_;
+	exp_type exp_;
+	level_type
+		level_,
+		level_delta_;
+	unsigned skill_points_;
+	perks::tree perk_tree_;
 };
 
 }

@@ -7,7 +7,7 @@
 
 void
 sanguis::server::send_available_perks(
-	entities::player &p,
+	entities::player const &p,
 	send_callback const &send)
 {
 	perks::list const &list(

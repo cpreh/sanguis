@@ -1,37 +1,24 @@
 #include "running.hpp"
 #include "unpaused.hpp"
-#include "../../connect_state.hpp"
-#include "../entities/base_parameters.hpp"
 #include "../entities/property.hpp"
 #include "../collision/satellite.hpp"
 #include "../collision/base.hpp"
+#include "../add_decorations.hpp"
+#include "../create_player.hpp"
 #include "../environment.hpp"
-#include "../damage_types.hpp"
 #include "../message_functor.hpp"
 #include "../entities/entity.hpp"
 #include "../entities/player.hpp"
-#include "../entities/decoration.hpp"
 #include "../message_convert/level_up.hpp"
 #include "../message_convert/experience.hpp"
-#include "../weapons/factory.hpp"
-#include "../weapons/weapon.hpp"
 #include "../perks/factory.hpp"
 #include "../perks/perk.hpp"
 #include "../log.hpp"
 #include "../send_available_perks.hpp"
-#include "../../messages/assign_id.hpp"
-#include "../../messages/disconnect.hpp"
+#include "../../connect_state.hpp"
 #include "../../messages/unwrap.hpp"
-#include "../../messages/create.hpp"
-#include "../../resolution.hpp"
-#include "../../random.hpp"
-#include "../../exception.hpp"
-#include <sge/math/constants.hpp>
-#include <sge/algorithm/ptr_container_erase.hpp>
+#include <sge/container/map_impl.hpp>
 #include <sge/random/inclusive_range.hpp>
-#include <sge/math/vector/output.hpp>
-#include <sge/math/vector/basic_impl.hpp>
-#include <sge/math/dim/basic_impl.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/collision/satellite.hpp>
 #include <sge/collision/world.hpp>
@@ -39,7 +26,6 @@
 #include <sge/text.hpp>
 #include <sge/type_info.hpp>
 #include <boost/mpl/vector.hpp>
-#include <boost/assign/list_of.hpp>
 #include <boost/foreach.hpp>
 #include <boost/bind.hpp>
 #include <boost/tr1/random.hpp>
@@ -101,7 +87,9 @@ sanguis::server::states::running::running(
 
 	context<machine>().listen();
 
-	create_decorations();
+	add_decorations(
+		environment()
+	);
 
 	context<machine>().collision()->test_callback(
 		boost::bind(
@@ -111,75 +99,6 @@ sanguis::server::states::running::running(
 			_2
 		)
 	);
-}
-
-void sanguis::server::states::running::create_decorations()
-{
-	typedef std::tr1::uniform_real<
-		space_unit
-	> uniform_su;
-
-	typedef std::tr1::uniform_int<
-		unsigned
-	> uniform_int;
-
-	typedef std::tr1::variate_generator<
-		rand_gen_type,
-		uniform_su
-	> rng_type;
-
-	typedef std::tr1::variate_generator<
-		rand_gen_type,
-		uniform_int
-	> rng_int_type;
-
-	rng_type rng_x(
-		create_seeded_randgen(),
-		uniform_su(
-			static_cast<space_unit>(0),
-			static_cast<space_unit>(resolution().w())
-		));
-
-	rng_type rng_y(
-		create_seeded_randgen(),
-		uniform_su(
-			static_cast<space_unit>(0),
-			static_cast<space_unit>(resolution().h())
-		));
-
-	rng_type rng_angle(
-		create_seeded_randgen(),
-		uniform_su(
-			static_cast<space_unit>(0),
-			sge::math::twopi<space_unit>()
-		));
-
-	rng_int_type rng_deco_type(
-		create_seeded_randgen(),
-		uniform_int(
-			static_cast<unsigned>(0),
-			static_cast<unsigned>(decoration_type::size-1)
-		));
-
-	for (unsigned i = 0; i < 10; ++i)
-	{
-		pos_type const position(rng_x(),rng_y());
-		space_unit const angle = rng_angle();
-		decoration_type::type const type = static_cast<decoration_type::type>(rng_deco_type());
-
-		entities_.push_back(
-			entities::auto_ptr(
-				new entities::decoration(
-					environment(),
-					position,
-					angle,
-					type
-				)
-			)
-		);
-
-		entities_.back().update(time_type(),entities_);
-	}
 }
 
 sanguis::server::entities::container &
@@ -225,13 +144,7 @@ sanguis::server::entities::player &
 sanguis::server::states::running::player(
 	net::id_type const id)
 {
-	player_map::iterator const it(
-		players().find(
-			id));
-	if(it == players().end())
-		throw exception(
-			SGE_TEXT("Player not found!"));
-	return *it->second;
+	return *players()[id];
 }
 
 void sanguis::server::states::running::divide_exp(
@@ -306,7 +219,8 @@ void sanguis::server::states::running::process(
 {
 	wave_generator.process(
 		time,
-		environment());
+		environment()
+	);
 }
 
 sanguis::server::environment const &
@@ -319,9 +233,13 @@ boost::statechart::result
 sanguis::server::states::running::react(
 	message_event const &m)
 {
-	message_functor<running, boost::statechart::result> mf(
+	message_functor<
+		running,
+		boost::statechart::result
+	> mf(
 		*this,
-		m.id());
+		m.id()
+	);
 
 	return messages::unwrap<
 		boost::mpl::vector<
@@ -348,104 +266,20 @@ sanguis::server::states::running::operator()(
 	net::id_type const net_id,
 	messages::client_info const &m)
 {
-	string const &name(
-		sge::utf8::convert(
-			m.get<messages::string>()
-		)
-	);
-
-	SGE_LOG_DEBUG(
-		log(),
-		sge::log::_1
-			<< SGE_TEXT("Received client info for ")
-			<< name
-	);
-	
-	// TODO: this should be cleaned up somehow
-	// 1) create the player
-	// 2) tell the client the player's id _before_ doing anything else
-	// 3) add the player
-	entities::auto_ptr new_player(
-		new entities::player(
-			environment(),
-			damage::list(static_cast<space_unit>(0)),
-			net_id,
-			pos_type(
-				static_cast<space_unit>(resolution().w()/2),
-				static_cast<space_unit>(resolution().h()/2)
+	players().insert(
+		net_id,
+		create_player(
+			m,
+			context<machine>().unicast(
+				net_id
 			),
-			static_cast<space_unit>(0),
-			static_cast<space_unit>(0),
-			boost::assign::map_list_of
-				(
-					entities::property_type::health,
-					entities::property(
-						static_cast<space_unit>(100)
-					)
-				)
-				(
-					entities::property_type::movement_speed,
-					entities::property(
-						static_cast<space_unit>(0),
-						static_cast<space_unit>(100)
-					)
-				),
-			name
+			environment(),
+			entities_,
+			state_cast<unpaused const *>()
+				? connect_state::unpaused
+				: connect_state::paused
 		)
 	);
-
-	players()[net_id] = dynamic_cast<entities::player *>(
-		new_player.get());
-
-	connect_state::type const state = 
-		state_cast<unpaused const *>() != 0
-		? connect_state::unpaused
-		: connect_state::paused;
-
-	context<machine>().send(
-		messages::create(
-			messages::assign_id(
-				new_player->id(),
-				state
-			)
-		),
-		net_id
-	);
-
-	entities::player &p(
-		dynamic_cast<entities::player &>(
-			insert_entity(
-				new_player
-			)
-		)
-	);
-
-	// TODO: some defaults here
-	p.add_weapon(
-		weapons::create(
-			weapon_type::pistol,
-			environment()
-		)
-	);
-
-	// send start experience
-	// no message_converter here because it operates on a _specific_ entity type
-	send()(message_convert::experience(p));
-
-	send()(message_convert::level_up(p));
-	
-	send_available_perks(
-		p,
-		send()
-	);
-
-	BOOST_FOREACH(entities::entity &e,entities_)
-	{
-		if (e.id() == p.id())
-			continue;
-
-		send()(e.add_message());
-	}
 
 	return discard_event();
 }
@@ -469,27 +303,14 @@ sanguis::server::states::running::operator()(
 	net::id_type const id,
 	messages::disconnect const &)
 {
-	player_map::iterator i = 
-		context<running>().players().find(id);
-	if (i == context<running>().players().end())
-	{
-		SGE_LOG_INFO(
-			log(),
-			sge::log::_1
-				<< SGE_TEXT("spectator ")
-				<< id
-				<< SGE_TEXT(" disconnected"));
-		return discard_event();
-	}
-
-	i->second->die();
-
 	SGE_LOG_INFO(
 		log(),
 		sge::log::_1
 			<< SGE_TEXT("client with id ")
 			<< id
 			<< SGE_TEXT(" disconnected"));
+
+	players()[id]->die();
 
 	return discard_event();
 }
@@ -508,7 +329,8 @@ sanguis::server::states::running::operator()(
 	);
 	
 	entities::player &player_(
-		player(id));
+		player(id)
+	);
 	
 	if(!player_.perk_choosable(perk))
 	{
@@ -524,11 +346,15 @@ sanguis::server::states::running::operator()(
 
 	player_.add_perk(
 		perks::create(
-			perk));
+			perk
+		)
+	);
 	
 	send_available_perks(
 		player_,
-		send()
+		context<machine>().unicast(
+			id
+		)
 	);
 	
 	return discard_event();

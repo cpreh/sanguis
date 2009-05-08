@@ -10,7 +10,6 @@
 sanguis::server::entities::player::player(
 	server::environment const &env,
 	armor_array const &armor,
-	net::id_type const net_id_,
 	pos_type const &center_,
 	space_unit const direction_,
 	space_unit const angle_,
@@ -36,7 +35,6 @@ sanguis::server::entities::player::player(
 		),
 		weapons::auto_ptr()
 	),
-	net_id_(net_id_),
 	name_(name_),
 	exp_(static_cast<exp_type>(0)),
 	level_(static_cast<level_type>(0)),
@@ -67,12 +65,6 @@ void sanguis::server::entities::player::exp(
 			old_level
 		);
 	}
-}
-
-sanguis::net::id_type
-sanguis::server::entities::player::net_id() const
-{
-	return net_id_;
 }
 
 sanguis::server::string const

@@ -8,8 +8,10 @@ namespace sanguis
 {
 namespace server
 {
-void send_available_perks(
-	entities::player &,
+
+void
+send_available_perks(
+	entities::player const &,
 	send_callback const &);
 
 }

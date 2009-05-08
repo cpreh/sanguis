@@ -1,8 +1,10 @@
 #ifndef SANGUIS_SERVER_MACHINE_HPP_INCLUDED
 #define SANGUIS_SERVER_MACHINE_HPP_INCLUDED
 
+#include "send_callback.hpp"
 #include "states/running_fwd.hpp"
 #include "client_data.hpp"
+#include "send_callback.hpp"
 #include "../load/context_fwd.hpp"
 #include "../messages/base.hpp"
 #include "../net/server.hpp"
@@ -30,16 +32,20 @@ public:
 		sge::collision::world_ptr,
 		sge::console::gfx &,
 		net::port_type);
+
 	void process(tick_event const &);
+
 	void process_message(
 		net::id_type,
 		messages::auto_ptr);
 
 	void connect_callback(
 		net::id_type);
+
 	void disconnect_callback(
 		net::id_type,
 		sge::string const &);
+
 	void data_callback(
 		net::id_type,
 		net::data_type const &);
@@ -47,10 +53,10 @@ public:
 	void send(
 		messages::auto_ptr m);
 
-	void send(
-		messages::auto_ptr,
-		net::id_type dest);
-
+	send_callback const
+	unicast(
+		net::id_type);
+	
 	void console_print(
 		sge::string const &);
 	net::port_type port() const;
@@ -62,6 +68,11 @@ public:
 
 	sge::collision::world_ptr const collision();
 private:
+	void
+	send_unicast(
+		messages::auto_ptr,
+		net::id_type);
+	
 	typedef sge::container::map<
 		std::map,
 		net::id_type,
