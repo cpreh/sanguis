@@ -34,7 +34,7 @@ sanguis::server::entities::friend_::friend_(
 			entity_type::friend_,
 			false,
 			default_dim(
-				env.load().models(),
+				env.load()().models(),
 				load::friend_name(
 					ftype_
 				)

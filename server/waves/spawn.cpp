@@ -16,6 +16,8 @@ void sanguis::server::waves::spawn(
 	environment const &env,
 	enemy_type::type const etype)
 {
+	// TODO: put this randomizer somewhere else!
+	
 	typedef std::tr1::uniform_real<
 		space_unit
 	> uniform_su;
@@ -44,7 +46,8 @@ void sanguis::server::waves::spawn(
 					res.h()))
 			/ static_cast<space_unit>(2)),
 		scale(static_cast<space_unit>(1.5)),
-		angle(static_cast<space_unit>(0));
+		angle(static_cast<space_unit>(0)
+	);
 	
 	pos_type const
 		screen_center(
@@ -57,11 +60,13 @@ void sanguis::server::waves::spawn(
 		pos(
 			center + screen_center);
 
-	env.insert(
+	env.insert()(
 		entities::enemies::create(
 			etype,
 			env,
 			pos,
 			angle,
-			angle));
+			angle
+		)
+	);
 }

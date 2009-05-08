@@ -160,13 +160,13 @@ sanguis::server::entities::entity &
 sanguis::server::weapons::weapon::insert(
 	entities::auto_ptr e)
 {
-	return env_.insert(e);
+	return env_.insert()(e);
 }
 
 void sanguis::server::weapons::weapon::send(
 	messages::auto_ptr m)
 {
-	env_.send(m);
+	env_.send()(m);
 }
 
 sanguis::server::environment const &

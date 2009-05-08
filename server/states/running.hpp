@@ -2,12 +2,12 @@
 #define SANGUIS_SERVER_STATES_RUNNING_HPP_INCLUDED
 
 #include "unpaused_fwd.hpp"
+#include "../environment.hpp"
 #include "../exp_type.hpp"
 #include "../probability_type.hpp"
 #include "../level_type.hpp"
 #include "../message_event_fwd.hpp"
 #include "../machine.hpp"
-#include "../send_callback.hpp"
 #include "../console_print_callback.hpp"
 #include "../pickup_spawner.hpp"
 #include "../entities/player_fwd.hpp"
@@ -39,7 +39,12 @@ namespace server
 namespace states
 {
 class running
-	: public boost::statechart::state<running,machine,unpaused>
+:
+	public boost::statechart::state<
+		running,
+		machine,
+		unpaused
+>
 {
 public:
 	typedef boost::statechart::custom_reaction<
@@ -91,7 +96,8 @@ public:
 	void process(
 		time_type);
 
-	server::environment const environment();
+	server::environment const &
+	environment() const;
 
 	boost::statechart::result react(
 		message_event const &);
@@ -109,6 +115,9 @@ public:
 		net::id_type,
 		messages::player_choose_perk const &);
 private:
+	send_callback const &
+	send() const;
+
 	bool
 	pickup_chance(
 		probability_type);
@@ -119,18 +128,21 @@ private:
 	void create_decorations();
 	static sge::log::logger &log();
 
+	server::environment const environment_;
+
 	sge::signal::scoped_connection const coll_connection;
 
-	send_callback const send;
 	console_print_callback const console_print;
 
 	server::entities::container entities_;
 	player_map players_;
 	
 	pickup_spawner pickup_spawner_;
+
 	sge::random::uniform<
 		probability_type
 	> pickup_chance_;
+
 	waves::generator wave_generator;
 };
 

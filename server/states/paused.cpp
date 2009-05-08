@@ -55,7 +55,7 @@ sanguis::server::states::paused::operator()(
 	net::id_type,
 	messages::player_unpause const &)
 {
-	context<running>().environment().send(
+	context<running>().environment().send()(
 		messages::create(
 			messages::unpause()
 		)

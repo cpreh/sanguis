@@ -29,7 +29,7 @@ sanguis::server::entities::player::player(
 			entity_type::player,
 			false,
 			get_dim(
-				env.load().models(),
+				env.load()().models(),
 				SGE_TEXT("player"),
 				SGE_TEXT("bottom")
 			)
@@ -62,7 +62,10 @@ void sanguis::server::entities::player::exp(
 		level_delta_ += new_level - old_level;
 		level_ = new_level;
 		++skill_points_;
-		environment().level(*this, old_level);
+		environment().level()(
+			*this,
+			old_level
+		);
 	}
 }
 

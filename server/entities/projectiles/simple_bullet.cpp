@@ -28,7 +28,7 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 				entities::property(static_cast<space_unit>(500))
 			),
 		default_dim(
-			env.load().models(),
+			env.load()().models(),
 			SGE_TEXT("bullet")),
 		static_cast<time_type>(10)),
 	damage(damage)

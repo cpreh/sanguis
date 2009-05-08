@@ -31,7 +31,7 @@ sanguis::server::entities::decoration::decoration(
 			entity_type::decoration,
 			true,
 			default_dim(
-				env.load().models(),
+				env.load()().models(),
 				load::decoration_name(
 					dtype
 				)

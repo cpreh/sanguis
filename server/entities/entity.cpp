@@ -458,7 +458,7 @@ sanguis::server::entities::entity::~entity()
 void sanguis::server::entities::entity::send(
 	messages::auto_ptr message)
 {
-	environment().send(
+	environment().send()(
 		messages::auto_ptr(
 			message
 		)
@@ -475,7 +475,7 @@ sanguis::server::entities::entity &
 sanguis::server::entities::entity::insert(
 	auto_ptr e)
 {
-	return environment().insert(e);
+	return environment().insert()(e);
 }
 
 bool

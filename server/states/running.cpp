@@ -49,6 +49,20 @@ sanguis::server::states::running::running(
 	my_context ctx)
 :
 	my_base(ctx),
+	environment_(
+		boost::bind(
+			&server::machine::send,
+			&(context<machine>()),
+			_1
+		),
+		boost::bind(&running::insert_entity, this, _1),
+		boost::bind(&running::divide_exp, this, _1),
+		boost::bind(&running::level_callback, this, _1, _2),
+		boost::bind(&running::load_callback, this),
+		boost::bind(&pickup_spawner::spawn, &pickup_spawner_, _1),
+		boost::bind(&running::pickup_chance, this, _1),
+		context<machine>().collision()
+	),
 	coll_connection(
 		context<machine>().collision()->register_callback(
 			boost::bind(
@@ -57,13 +71,6 @@ sanguis::server::states::running::running(
 				_1,
 				_2
 			)
-		)
-	),
-	send(
-		boost::bind(
-			&server::machine::send,
-			&(context<machine>()),
-			_1
 		)
 	),
 	console_print(
@@ -197,7 +204,7 @@ sanguis::server::states::running::insert_entity(
 	if(ref.type() == entity_type::indeterminate)
 		return ref;
 	
-	send(ref.add_message());
+	send()(ref.add_message());
 
 	return ref;
 }
@@ -238,7 +245,7 @@ void sanguis::server::states::running::divide_exp(
 		entities::player &p = *ref.second;
 		p.exp(p.exp() + exp);
 
-		send(message_convert::experience(p));
+		send()(message_convert::experience(p));
 	}
 }
 
@@ -246,7 +253,7 @@ void sanguis::server::states::running::level_callback(
 	entities::player &p,
 	level_type)
 {
-	send(message_convert::level_up(p));
+	send()(message_convert::level_up(p));
 }
 
 bool sanguis::server::states::running::collision_test(
@@ -302,19 +309,10 @@ void sanguis::server::states::running::process(
 		environment());
 }
 
-sanguis::server::environment const
-sanguis::server::states::running::environment()
+sanguis::server::environment const &
+sanguis::server::states::running::environment() const
 {
-	// TODO: save this in the class instead and return it by reference!
-	return server::environment(
-		send,
-		boost::bind(&running::insert_entity, this, _1),
-		boost::bind(&running::divide_exp, this, _1),
-		boost::bind(&running::level_callback, this, _1, _2),
-		boost::bind(&running::load_callback, this),
-		boost::bind(&pickup_spawner::spawn, &pickup_spawner_, _1),
-		boost::bind(&running::pickup_chance, this, _1),
-		context<machine>().collision());
+	return environment_;
 }
 
 boost::statechart::result
@@ -432,20 +430,21 @@ sanguis::server::states::running::operator()(
 
 	// send start experience
 	// no message_converter here because it operates on a _specific_ entity type
-	send(message_convert::experience(p));
+	send()(message_convert::experience(p));
 
-	send(message_convert::level_up(p));
+	send()(message_convert::level_up(p));
 	
 	send_available_perks(
 		p,
-		send);
+		send()
+	);
 
 	BOOST_FOREACH(entities::entity &e,entities_)
 	{
 		if (e.id() == p.id())
 			continue;
 
-		send(e.add_message());
+		send()(e.add_message());
 	}
 
 	return discard_event();
@@ -529,9 +528,16 @@ sanguis::server::states::running::operator()(
 	
 	send_available_perks(
 		player_,
-		send);
+		send()
+	);
 	
 	return discard_event();
+}
+
+sanguis::server::send_callback const &
+sanguis::server::states::running::send() const
+{
+	return environment().send();
 }
 
 bool

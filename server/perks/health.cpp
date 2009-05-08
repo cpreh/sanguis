@@ -17,7 +17,8 @@ void sanguis::server::perks::health::do_apply(
 	e.property(
 		entities::property_type::health)
 		.add_to_max(
-			level() * static_cast<space_unit>(20)
+			static_cast<space_unit>(level())
+			* static_cast<space_unit>(20)
 	);
 }
 

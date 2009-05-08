@@ -33,7 +33,7 @@ sanguis::server::entities::pickups::monster::monster(
 void sanguis::server::entities::pickups::monster::do_pickup(
 	entity_with_weapon &receiver)
 {
-	environment().insert(
+	insert(
 		entities::auto_ptr(
 			new entities::friend_(
 				ftype,

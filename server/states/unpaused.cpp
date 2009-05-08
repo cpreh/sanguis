@@ -333,7 +333,7 @@ sanguis::server::states::unpaused::environment()
 void sanguis::server::states::unpaused::send(
 	messages::auto_ptr m)
 {
-	environment().send(m);
+	environment().send()(m);
 }
 
 sge::log::logger &

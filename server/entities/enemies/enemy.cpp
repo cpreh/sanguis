@@ -37,7 +37,7 @@ sanguis::server::entities::enemies::enemy::enemy(
 			entity_type::enemy,
 			false,
 			default_dim(
-				env.load().models(),
+				env.load()().models(),
 				load::enemy_name(
 					etype_
 				)
@@ -82,14 +82,14 @@ sanguis::server::entities::enemies::enemy::exp() const
 
 void sanguis::server::entities::enemies::enemy::on_die()
 {
-	environment().exp(exp());
+	environment().exp()(exp());
 
 	if(
-		environment().pickup_chance(
+		environment().pickup_chance()(
 			spawn_chance
 		)
 	)
-		environment().spawn_pickup(
+		environment().spawn_pickup()(
 			center()
 		);
 }

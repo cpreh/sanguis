@@ -23,7 +23,7 @@ sanguis::server::entities::pickups::weapon::weapon(
 		center,
 		team_,
 		default_dim(
-			env.load().models(),
+			env.load()().models(),
 			load::weapon_pickup_name(
 				weapon_type_
 			)

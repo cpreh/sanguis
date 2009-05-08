@@ -30,9 +30,11 @@ sanguis::server::entities::projectiles::rocket::rocket(
 				entities::property(static_cast<space_unit>(300))
 			),
 		default_dim(
-			env.load().models(),
-			SGE_TEXT("rocket")),
-		static_cast<time_type>(10)),
+			env.load()().models(),
+			SGE_TEXT("rocket")
+		),
+		static_cast<time_type>(10)
+	),
 	damage(damage),
 	aoe(aoe)
 {}

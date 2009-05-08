@@ -47,7 +47,7 @@ sanguis::server::perks::choleric::do_apply(
 	);
 
 	for(unsigned i = 0; i < max; ++i)
-		env.insert(
+		env.insert()(
 			can_raise_level()
 			?
 				entities::auto_ptr(

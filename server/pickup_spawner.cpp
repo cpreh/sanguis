@@ -82,7 +82,7 @@ sanguis::server::pickup_spawner::spawn(
 void
 sanguis::server::pickup_spawner::spawn_health()
 {
-	env.insert(
+	env.insert()(
 		entities::auto_ptr(
 			new entities::pickups::health(
 				env,
@@ -97,7 +97,7 @@ sanguis::server::pickup_spawner::spawn_health()
 void
 sanguis::server::pickup_spawner::spawn_monster()
 {
-	env.insert(
+	env.insert()(
 		entities::auto_ptr(
 			new entities::pickups::monster(
 				env,
@@ -113,7 +113,7 @@ void
 sanguis::server::pickup_spawner::spawn_weapon(
 	weapon_type::type const wtype)
 {
-	env.insert(
+	env.insert()(
 		entities::auto_ptr(
 			new entities::pickups::weapon(
 				env,

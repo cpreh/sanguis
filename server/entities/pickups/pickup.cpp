@@ -49,7 +49,7 @@ sanguis::server::entities::pickups::pickup::pickup(
 			dim_
 			? *dim_
 			: default_dim(
-				env.load().models(),
+				env.load()().models(),
 				load::pickup_name(
 					ptype_
 				)
