@@ -19,8 +19,6 @@ sanguis::load::context::context(
 		ap,
 		pool),
 	model_ctx(
-		resource_ctx),
-	particle_ctx(
 		resource_ctx)
 {}
 
@@ -37,15 +35,4 @@ sanguis::load::model::context const &
 sanguis::load::context::models() const
 {
 	return model_ctx;
-}
-
-sanguis::load::particle::context const &
-sanguis::load::context::particles() const
-{
-	return particle_ctx;
-}
-
-void sanguis::load::context::preload() const
-{
-	particle_ctx.preload();
 }

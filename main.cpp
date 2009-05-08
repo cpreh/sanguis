@@ -258,8 +258,6 @@ try
 		sys.audio_player(),
 		sound_pool);
 	
-	resources.preload();
-
 	server_scoped_ptr server;
 
 	// construct and initialize statemachine
