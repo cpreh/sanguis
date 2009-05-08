@@ -21,6 +21,9 @@
 #include <sge/noncopyable.hpp>
 #include <sge/string.hpp>
 
+#include <sge/sprite/system.hpp>
+#include <sge/sprite/object.hpp>
+
 namespace sanguis
 {
 namespace client
@@ -55,7 +58,8 @@ private:
 	mover mover_;
 	sge::signal::connection_manager connections_;
 	callbacks::object const callbacks_;
-	cursor_ptr const cursor_;
+	sge::sprite::system ss;
+	sge::sprite::object const background;
 
 	sge::string 
 		connection_host_,

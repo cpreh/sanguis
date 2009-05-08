@@ -16,6 +16,15 @@
 #include <boost/ref.hpp>
 #include <boost/bind.hpp>
 
+#include <sge/sprite/parameters.hpp>
+#include <sge/make_shared_ptr.hpp>
+#include <sge/renderer/filter/linear.hpp>
+#include <sge/renderer/resource_flags.hpp>
+#include <sge/renderer/device.hpp>
+#include <sge/texture/part_raw.hpp>
+#include <sge/image/object.hpp>
+#include "../../media_path.hpp"
+
 namespace
 {
 sge::log::logger mylogger(
@@ -124,7 +133,21 @@ sanguis::client::menu::object::object(
 		)
 	),
 
-	callbacks_(_callbacks)
+	callbacks_(
+		_callbacks),
+	ss(
+		_sys.renderer()),
+	background(
+		sge::sprite::parameters()
+			.pos(
+				sge::sprite::point::null())
+			.texture(
+				sge::make_shared_ptr<sge::texture::part_raw>(
+					_sys.renderer()->create_texture(
+						_sys.image_loader()->load(
+							media_path()/SGE_TEXT("dirt_tile.jpg"))->view(),
+						sge::renderer::filter::linear,
+						sge::renderer::resource_flags::none))))
 {
 }
 
@@ -134,6 +157,8 @@ void sanguis::client::menu::object::process(
 	mover_.update(
 		delta);
 	m.update();
+	ss.render(
+		background);
 	m.draw();
 }
 
