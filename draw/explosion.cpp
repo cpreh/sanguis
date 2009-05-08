@@ -22,6 +22,7 @@
 #include "../resolution.hpp"
 #include "../media_path.hpp"
 #include "../animation_type.hpp"
+#include "../from_particle_type.hpp"
 #include <sge/minmax_pair_impl.hpp>
 #include <sge/structure_cast.hpp>
 #include <sge/audio/sound.hpp>
@@ -132,38 +133,10 @@ sanguis::draw::explosion::explosion(
 		environment()),
 	properties_(
 		prop_),
-	ended(false)//,
-	/*sounds_(
-		environment().context().resources().sounds().load(
-			media_path()/SGE_TEXT("explosion")).sounds(),
-		environment().context().resources(),
-		load::sound_type::nonstream),*/
-	//current_(sounds_.random())
+	ended(false)
 {
 	sge::renderer::screen_size const screen_sz(
 		resolution());
-
-	/*
-	particle::base_ptr n(
-		new particle::generator(
-			boost::bind(
-				&explosion::generate_explosion,
-				this),
-			sge::math::structure_cast<
-				particle::point::value_type
-			>(pos),
-			static_cast<particle::time_type>(10),
-			static_cast<particle::time_type>(1),
-			1,
-			particle::align_type::random,
-			0
-			particle::dispersion_range(0,100),
-			particle::velocity_range(0,30),
-			particle::rotation_velocity_range(0,0),
-			particle::movement_type::expanding,
-			environment()
-		));
-		*/
 
 	particle::base_ptr n(
 		new particle::explosion(
@@ -183,20 +156,6 @@ sanguis::draw::explosion::explosion(
 			environment()));
 
 	particles.add(n);
-
-	/*current_->positional(true);
-	current_->pos(
-		sge::audio::point(
-			static_cast<sge::audio::unit>(pos_.x()),
-			static_cast<sge::audio::unit>(0),
-			static_cast<sge::audio::unit>(pos_.y())));
-	
-	current_->rolloff(
-		static_cast<sge::audio::unit>(1)
-		/ static_cast<sge::audio::unit>(
-			resolution().h()));
-
-	current_->play(sge::audio::play_mode::once);*/
 }
 
 sanguis::draw::explosion::~explosion()
@@ -233,28 +192,6 @@ sanguis::draw::explosion::generate_explosion()
 			environment()));
 }
 
-#include "../exception.hpp"
-
-namespace 
-{
-sge::string const to_string(sanguis::particle_type::type const t)
-{
-	switch (t)
-	{
-		case sanguis::particle_type::flare:
-			return SGE_TEXT("flare");
-		case sanguis::particle_type::smoke:
-			return SGE_TEXT("smoke");
-		case sanguis::particle_type::rubble:
-			return SGE_TEXT("rubble");
-		case sanguis::particle_type::size:
-			break;
-	}
-	throw sanguis::exception(
-		SGE_TEXT("invalid enumeration value for particle type"));
-}
-}
-
 sanguis::draw::particle::base_ptr
 sanguis::draw::explosion::generate_particle(
 	particle_type::type const t)
@@ -263,10 +200,10 @@ sanguis::draw::explosion::generate_particle(
 		environment().context().models()()
 		[
 			SGE_TEXT("particles/")+
-			::to_string(t)
+			from_particle_type(t)
 		]
 		[
-			::to_string(t)+SGE_TEXT("0")
+			from_particle_type(t)+SGE_TEXT("0") // FIXME: random stuff here
 		]
 		[
 			weapon_type::none
