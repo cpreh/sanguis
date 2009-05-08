@@ -11,7 +11,6 @@
 #include "../../../messages/create.hpp"
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>
-#include <boost/tr1/random.hpp>
 
 sanguis::server::entities::enemies::enemy::enemy(
 	enemy_type::type const etype_,
@@ -23,7 +22,7 @@ sanguis::server::entities::enemies::enemy::enemy(
 	property_map const &properties,
 	ai::auto_ptr ai_,
 	weapons::auto_ptr weapon_,
-	unsigned const spawn_chance,
+	probability_type const spawn_chance,
 	exp_type const exp_)
 :
 	entity_with_ai(
@@ -85,25 +84,11 @@ void sanguis::server::entities::enemies::enemy::on_die()
 {
 	environment().exp(exp());
 
-	typedef std::tr1::uniform_int<
-		unsigned
-	> uniform_ui;
-
-	typedef std::tr1::variate_generator<
-		rand_gen_type,
-		uniform_ui
-	> rng_type;
-	
-	// FIXME: this should not be static here, but what to do about the spawn chance?
-
-	static rng_type rng(
-		create_seeded_randgen(),
-		uniform_ui(
-			0,
-			4
-		));
-
-	if(rng() <= spawn_chance)
+	if(
+		environment().pickup_chance(
+			spawn_chance
+		)
+	)
 		environment().spawn_pickup(
 			center()
 		);

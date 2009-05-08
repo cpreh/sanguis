@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_ENEMIES_ENEMY_HPP_INCLUDED
 
 #include "../entity_with_ai.hpp"
+#include "../../probability_type.hpp"
 #include "../../../enemy_type.hpp"
 
 namespace sanguis
@@ -25,7 +26,7 @@ public:
 		property_map const &,
 		ai::auto_ptr,
 		weapons::auto_ptr weapon,
-		unsigned spawn_chance,
+		probability_type spawn_chance,
 		exp_type exp);
 
 	enemy_type::type etype() const;
@@ -35,7 +36,7 @@ private:
 	void on_die();
 
 	enemy_type::type const etype_;
-	unsigned const spawn_chance;
+	probability_type const spawn_chance;
 	exp_type const exp_;
 };
 

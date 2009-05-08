@@ -3,6 +3,7 @@
 
 #include "unpaused_fwd.hpp"
 #include "../exp_type.hpp"
+#include "../probability_type.hpp"
 #include "../level_type.hpp"
 #include "../message_event_fwd.hpp"
 #include "../machine.hpp"
@@ -23,6 +24,7 @@
 #include "../../time_type.hpp"
 #include <sge/log/logger_fwd.hpp>
 #include <sge/signal/scoped_connection.hpp>
+#include <sge/random/uniform.hpp>
 #include <sge/collision/satellite_fwd.hpp>
 #include <boost/mpl/list.hpp>
 #include <boost/statechart/state.hpp>
@@ -107,6 +109,10 @@ public:
 		net::id_type,
 		messages::player_choose_perk const &);
 private:
+	bool
+	pickup_chance(
+		probability_type);
+
 	boost::statechart::result handle_default_msg(
 		net::id_type,
 		messages::base const &);
@@ -122,6 +128,9 @@ private:
 	player_map players_;
 	
 	pickup_spawner pickup_spawner_;
+	sge::random::uniform<
+		probability_type
+	> pickup_chance_;
 	waves::generator wave_generator;
 };
 

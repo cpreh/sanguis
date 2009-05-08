@@ -28,6 +28,7 @@
 #include "../../exception.hpp"
 #include <sge/math/constants.hpp>
 #include <sge/algorithm/ptr_container_erase.hpp>
+#include <sge/random/inclusive_range.hpp>
 #include <sge/math/vector/output.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>
@@ -76,6 +77,12 @@ sanguis::server::states::running::running(
 	players_(),
 	pickup_spawner_(
 		environment()
+	),
+	pickup_chance_(
+		sge::random::make_inclusive_range(
+			static_cast<probability_type>(0),
+			static_cast<probability_type>(1)
+		)
 	),
 	wave_generator()
 {
@@ -306,6 +313,7 @@ sanguis::server::states::running::environment()
 		boost::bind(&running::level_callback, this, _1, _2),
 		boost::bind(&running::load_callback, this),
 		boost::bind(&pickup_spawner::spawn, &pickup_spawner_, _1),
+		boost::bind(&running::pickup_chance, this, _1),
 		context<machine>().collision());
 }
 
@@ -524,6 +532,13 @@ sanguis::server::states::running::operator()(
 		send);
 	
 	return discard_event();
+}
+
+bool
+sanguis::server::states::running::pickup_chance(
+	probability_type const p)
+{
+	return pickup_chance_() <= p;
 }
 
 boost::statechart::result

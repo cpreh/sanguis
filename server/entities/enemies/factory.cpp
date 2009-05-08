@@ -30,12 +30,21 @@ sanguis::server::entities::enemies::create(
 				angle,
 				direction,
 				boost::assign::map_list_of
-					(entities::property_type::health,
-					 entities::property(static_cast<space_unit>(3)))
-					(entities::property_type::movement_speed,
-					 entities::property(static_cast<space_unit>(20))),
+					(
+						entities::property_type::health,
+						entities::property(
+							static_cast<space_unit>(3)
+						)
+					)
+					(
+						entities::property_type::movement_speed,
+						entities::property(
+							static_cast<space_unit>(20)
+						)
+					),
 				ai::auto_ptr(
-					new ai::simple()),
+					new ai::simple()
+				),
 				weapons::auto_ptr(
 					new weapons::pistol(
 						env,
@@ -45,10 +54,12 @@ sanguis::server::entities::enemies::create(
 						static_cast<time_type>(0),
 						3,
 						static_cast<time_type>(15)
-						)),
-				1,
+					)
+				),
+				static_cast<probability_type>(0.25),
 				static_cast<exp_type>(20)
-				));
+			)
+		);
 	case enemy_type::zombie01:
 		return auto_ptr(
 			new enemy(
@@ -74,7 +85,7 @@ sanguis::server::entities::enemies::create(
 						static_cast<time_type>(2), // cd
 						static_cast<space_unit>(2) // damage
 					)),
-				1,
+				static_cast<probability_type>(0.25),
 				static_cast<exp_type>(10)
 				));
 	case enemy_type::wolf_black:
@@ -104,7 +115,7 @@ sanguis::server::entities::enemies::create(
 						static_cast<time_type>(1), // cd
 						static_cast<space_unit>(4) // damage
 					)),
-				1,
+				static_cast<probability_type>(0.25),
 				static_cast<exp_type>(5)
 			 ));
 	case enemy_type::skeleton:
@@ -132,7 +143,7 @@ sanguis::server::entities::enemies::create(
 					static_cast<time_type>(1), // cd
 					static_cast<space_unit>(10) // damage
 				)),
-			 1,
+			 static_cast<probability_type>(0.75),
 			 static_cast<exp_type>(300)
 			 ));
 	case enemy_type::maggot:
@@ -160,7 +171,7 @@ sanguis::server::entities::enemies::create(
 				static_cast<time_type>(1), // cd
 				static_cast<space_unit>(0.5) // damage
 				)),
-			 1,
+			 static_cast<probability_type>(0.1),
 			 static_cast<exp_type>(1)
 			 ));
 	case enemy_type::spider:
@@ -188,7 +199,7 @@ sanguis::server::entities::enemies::create(
 						static_cast<time_type>(2), // cd
 						static_cast<space_unit>(5) // damage
 					)),
-				1,
+				static_cast<probability_type>(0.5),
 				static_cast<exp_type>(15)
 				));
 	default:
