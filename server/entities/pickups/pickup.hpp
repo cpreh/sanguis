@@ -30,7 +30,7 @@ protected:
 		team::type team,
 		optional_dim const &dim);
 private:
-	bool
+	boost::logic::tribool const
 	can_collide_with_entity(
 		entity const &) const;
 	
@@ -43,7 +43,8 @@ private:
 		container &);
 	
 	// TODO: is it ok that pickups are limited to entities with weapons?
-	virtual void do_pickup(
+	virtual void
+	do_pickup(
 		entity_with_weapon &receiver) = 0;
 
 	messages::auto_ptr add_message() const;

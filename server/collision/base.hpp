@@ -6,6 +6,7 @@
 #include <sge/collision/objects/circle_fwd.hpp>
 #include <sge/collision/world_fwd.hpp>
 #include <sge/noncopyable.hpp>
+#include <boost/logic/tribool_fwd.hpp>
 
 namespace sanguis
 {
@@ -31,7 +32,7 @@ protected:
 public:
 	virtual ~base();
 
-	virtual bool
+	virtual boost::logic::tribool const
 	can_collide_with(
 		collision::base const &) const;
 

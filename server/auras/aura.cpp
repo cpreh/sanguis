@@ -4,6 +4,7 @@
 #include <sge/collision/objects/circle.hpp>
 #include <sge/math/circle_impl.hpp>
 #include <sge/math/vector/construct.hpp>
+#include <boost/logic/tribool.hpp>
 
 sanguis::server::auras::aura::~aura()
 {}
@@ -50,7 +51,7 @@ sanguis::server::auras::aura::owner() const
 	return owner_;
 }
 
-bool
+boost::logic::tribool const
 sanguis::server::auras::aura::can_collide_with(
 	collision::base const &o) const
 {

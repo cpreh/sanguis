@@ -25,6 +25,7 @@
 #include <sge/math/vector/output.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/text.hpp>
+#include <boost/logic/tribool.hpp>
 #include <boost/foreach.hpp>
 #include <boost/bind.hpp>
 
@@ -541,7 +542,7 @@ void sanguis::server::entities::entity::max_health_change(
 	);
 }
 
-bool
+boost::logic::tribool const
 sanguis::server::entities::entity::can_collide_with(
 	collision::base const &b) const
 {
@@ -566,11 +567,11 @@ sanguis::server::entities::entity::collision(
 		);
 }
 
-bool
+boost::logic::tribool const
 sanguis::server::entities::entity::can_collide_with_entity(
 	entity const &) const
 {
-	return false;
+	return boost::logic::indeterminate;
 }
 
 void

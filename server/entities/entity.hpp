@@ -140,7 +140,7 @@ private:
 	void max_health_change(
 		property::value_type);
 
-	bool
+	boost::logic::tribool const
 	can_collide_with(
 		collision::base const &) const;
 	
@@ -148,7 +148,7 @@ private:
 	collision(
 		collision::base &);
 
-	virtual bool
+	virtual boost::logic::tribool const 
 	can_collide_with_entity(
 		entity const &) const;
 	
