@@ -67,7 +67,7 @@ sanguis::server::perks::choleric::do_apply(
 						rand(),
 						e.team(),
 						static_cast<space_unit>(5), // damage
-						static_cast<space_unit>(30) // aoe
+						static_cast<space_unit>(50) // aoe
 					)
 				)
 		);

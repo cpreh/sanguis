@@ -8,24 +8,20 @@
 #include "../resource/context.hpp"
 #include "../resource/textures.hpp"
 #include "../log.hpp"
-#include <sge/filesystem/directory_iterator.hpp>
 #include <sge/filesystem/is_directory.hpp>
 #include <sge/filesystem/stem.hpp>
-#include <sge/filesystem/extension.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/parse/json/parse_file.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/get.hpp>
+#include <sge/random/last_exclusive_range.hpp>
 #include <sge/fstream.hpp>
 #include <sge/text.hpp>
+#include <boost/next_prior.hpp>
 #include <boost/foreach.hpp>
-#include <boost/variant/get.hpp>
 #include <utility>
-#include <functional>
-#include <algorithm>
-#include <string>
 
 // TODO: split this stuff!
 
@@ -94,6 +90,64 @@ load_delay(
 	}
 }
 
+}
+
+sanguis::load::model::part const &
+sanguis::load::model::model::operator[](
+	sge::string const &name) const
+{
+	part_map::const_iterator const it(
+		parts.find(
+			name
+		)
+	);
+
+	if(it == parts.end())
+		throw exception(
+			SGE_TEXT("Category \"")
+			+ name
+			+ SGE_TEXT("\" not found in ")
+			+ path.string()
+		);
+	
+	return it->second;
+}
+
+sanguis::load::model::part const &
+sanguis::load::model::model::random_part() const
+{
+	if(!random_part_)
+		random_part_.reset(
+			new part_rand(
+				sge::random::make_last_exclusive_range(
+					static_cast<part_map::size_type>(0),
+					parts.size()
+				)
+			)
+		);
+
+	return boost::next(
+		parts.begin(),
+		(*random_part_)()
+	)->second;
+}
+
+sanguis::load::model::model::size_type
+sanguis::load::model::model::size() const
+{
+	return parts.size();
+}
+
+sanguis::load::model::model::const_iterator
+sanguis::load::model::model::begin() const
+{
+	return parts.begin();
+}
+
+sanguis::load::model::model::const_iterator
+sanguis::load::model::model::end() const
+{
+	return parts.end();
 }
 
 sanguis::load::model::model::model(
@@ -243,42 +297,4 @@ void sanguis::load::model::model::construct(
 					<< SGE_TEXT("Double insert in model!")
 			);
 	}
-}
-
-sanguis::load::model::part const &
-sanguis::load::model::model::operator[](
-	sge::string const &name) const
-{
-	part_map::const_iterator const it(
-		parts.find(
-			name
-		)
-	);
-
-	if(it == parts.end())
-		throw exception(
-			SGE_TEXT("Category \"")
-			+ name
-			+ SGE_TEXT("\" not found in ")
-			+ path.string()
-		);
-	
-	return it->second;
-}
-
-sanguis::load::model::model::const_iterator
-sanguis::load::model::model::begin() const
-{
-	return parts.begin();
-}
-
-sanguis::load::model::model::const_iterator
-sanguis::load::model::model::end() const
-{
-	return parts.end();
-} 
-sanguis::load::model::model::size_type
-sanguis::load::model::model::size() const
-{
-	return parts.size();
 }

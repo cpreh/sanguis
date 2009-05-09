@@ -197,9 +197,7 @@ sanguis::draw::explosion::generate_particle(
 			SGE_TEXT("particles/")+
 			from_particle_type(t)
 		]
-		[
-			from_particle_type(t)+SGE_TEXT("0") // FIXME: random stuff here
-		]
+		.random_part()
 		[
 			weapon_type::none
 		]

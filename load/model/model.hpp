@@ -3,8 +3,10 @@
 
 #include "../resource/context_fwd.hpp"
 #include "part.hpp"
+#include <sge/random/uniform.hpp>
 #include <sge/filesystem/path.hpp>
 #include <sge/string.hpp>
+#include <sge/shared_ptr.hpp>
 #include <map>
 
 namespace sanguis
@@ -24,9 +26,13 @@ public:
 	part const &
 	operator[](
 		sge::string const &) const;
+	
+	part const &
+	random_part() const;
+
+	size_type size() const;
 	const_iterator begin() const;
 	const_iterator end() const;
-	size_type size() const;
 private:
 	model(
 		sge::filesystem::path const &,
@@ -38,7 +44,16 @@ private:
 	friend class collection;
 
 	sge::filesystem::path const path;
+
 	part_map parts;
+
+	typedef sge::random::uniform<
+		part_map::size_type	
+	> part_rand;
+
+	mutable sge::shared_ptr<
+		part_rand
+	> random_part_;
 };
 
 }

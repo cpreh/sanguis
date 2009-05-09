@@ -25,7 +25,8 @@ sanguis::server::weapons::create(
 				static_cast<time_type>(0.2),
 				18, // magazine size
 				static_cast<time_type>(2) // reload time
-				));
+			)
+		);
 	case weapon_type::dual_pistol:
 		return auto_ptr(
 			new pistol(
@@ -36,7 +37,9 @@ sanguis::server::weapons::create(
 				static_cast<time_type>(0.2),
 				36, // magazine size
 				static_cast<time_type>(4) // reload time
-				));
+				
+			)
+		);
 	case weapon_type::shotgun:
 		return auto_ptr(
 			new shotgun(
@@ -48,18 +51,22 @@ sanguis::server::weapons::create(
 				static_cast<space_unit>(1), // damage,
 				8, // magazine size
 				static_cast<time_type>(3) // reload time
-				));
+				
+			)
+		);
 	case weapon_type::rocket_launcher:
 		return auto_ptr(
 			new rocket_launcher(
 				env,
 				type,
 				static_cast<time_type>(0.8), // cooldown
-				static_cast<space_unit>(10), // damage
+				static_cast<space_unit>(20), // damage
 				static_cast<space_unit>(100), // aoe
 				1, // magazine size
 				static_cast<time_type>(1.6) // reload time
-				));
+				
+			)
+		);
 	default:
 		throw exception(
 			SGE_TEXT("Cannot create weapon for given weapon type!"));

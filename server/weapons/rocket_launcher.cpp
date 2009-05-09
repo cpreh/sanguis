@@ -18,8 +18,10 @@ sanguis::server::weapons::rocket_launcher::rocket_launcher(
 		magazine_size,
 		base_cooldown,
 		static_cast<time_type>(
-			0.5), // FIXME
-		reload_time),
+			0.5
+		), // FIXME
+		reload_time
+	),
 	rocket_damage(rocket_damage),
 	rocket_aoe(rocket_aoe)
 {}
@@ -35,5 +37,8 @@ void sanguis::server::weapons::rocket_launcher::do_attack(
 				a.angle(),
 				a.team(),
 				rocket_damage,
-				rocket_aoe)));
+				rocket_aoe
+			)
+		)
+	);
 }
