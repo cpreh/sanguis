@@ -9,6 +9,7 @@
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/text.hpp>
+#include <boost/logic/tribool.hpp>
 
 namespace
 {
@@ -86,7 +87,8 @@ void sanguis::server::entities::projectiles::projectile::update(
 		die();
 }
 
-bool sanguis::server::entities::projectiles::projectile::can_collide_with_entity(
+boost::logic::tribool const
+sanguis::server::entities::projectiles::projectile::can_collide_with_entity(
 	entity const &e) const
 {
 	return e.team() != team()

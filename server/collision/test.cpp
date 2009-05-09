@@ -1,6 +1,7 @@
 #include "test.hpp"
 #include "base.hpp"
 #include "satellite.hpp"
+#include <boost/logic/tribool.hpp>
 
 bool
 sanguis::server::collision::test(
@@ -19,6 +20,15 @@ sanguis::server::collision::test(
 			>(b).base()
 		);
 	
-	// TODO: tribool!	
-	return e0.can_collide_with(e1) || e1.can_collide_with(e0);
+	boost::logic::tribool const 
+		b0(
+			e0.can_collide_with(e1)
+		),
+		b1(
+			e1.can_collide_with(e0)
+		);
+	
+	return !b0 || !b1
+		? false
+		: static_cast<bool>(b0 || b1);
 }

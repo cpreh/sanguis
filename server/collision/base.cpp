@@ -3,6 +3,7 @@
 #include <sge/collision/world.hpp>
 #include <sge/math/vector/construct.hpp>
 #include <sge/math/vector/basic_impl.hpp>
+#include <boost/logic/tribool.hpp>
 
 sanguis::server::collision::base::base(
 	sge::collision::world_ptr const collision_,
@@ -49,11 +50,11 @@ sanguis::server::collision::base::circle() const
 sanguis::server::collision::base::~base()
 {}
 
-bool
+boost::logic::tribool const
 sanguis::server::collision::base::can_collide_with(
 	collision::base const &) const
 {
-	return false;
+	return boost::logic::indeterminate;
 }
 
 void

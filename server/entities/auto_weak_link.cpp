@@ -1,85 +1,58 @@
 #include "auto_weak_link.hpp"
 #include "entity.hpp"
-#include <sge/exception.hpp>
+#include "../../exception.hpp"
 #include <sge/text.hpp>
 
 sanguis::server::entities::auto_weak_link::auto_weak_link()
 :
-	data(
-		0,
-		0)
+	ref(0)
 {}
 
 sanguis::server::entities::auto_weak_link::auto_weak_link(
-	entity &me,
 	entity &ref)
 :
-	data(
-		&me,
-		&ref)
-{}
+	ref(&ref)
+{
+	add_me();
+}
 
 sanguis::server::entities::auto_weak_link::auto_weak_link(
-	auto_weak_link &old)
+	auto_weak_link const &old)
 :
-	data(
-		0,
-		0)
+	auto_hook_type(old),
+	ref(old.ref)
 {
-	old.swap(*this);
+	if(old.is_linked())
+		add_me();
 }
 
 sanguis::server::entities::auto_weak_link::~auto_weak_link()
-{
-	unlink();
-}
+{}
 
 sanguis::server::entities::auto_weak_link &
 sanguis::server::entities::auto_weak_link::operator=(
-	auto_weak_link &old)
+	auto_weak_link const &old)
 {
-	release();
-	old.swap(*this);
+	unlink();
+	auto_hook_type::operator=(old);	
+	ref = old.ref;
+
+	if(old.is_linked())
+		add_me();
 	return *this;
 }
 
 void sanguis::server::entities::auto_weak_link::unlink()
 {
-	if(data.me && data.ref)
-		data.me->unlink(data.ref);
+	auto_hook_type::unlink();
+	ref = 0;
 }
 
-void sanguis::server::entities::auto_weak_link::swap(
-	auto_weak_link &r)
-{
-	data.swap(r.data);
-}
-
-sanguis::server::entities::auto_weak_link::operator sanguis::server::entities::auto_weak_link_ref()
-{
-	return auto_weak_link_ref(
-		release());
-}
-
-sanguis::server::entities::auto_weak_link::auto_weak_link(
-	auto_weak_link_ref const r)
-:
-	data(r.data)
-{}
-
-sanguis::server::entities::auto_weak_link &
-sanguis::server::entities::auto_weak_link::operator=(
-	auto_weak_link_ref const r)
-{
-	unlink();
-	data = r.data;
-	return *this;
-}
-
-sanguis::server::entities::auto_weak_link::operator sanguis::server::entities::auto_weak_link::unspecified *() const
+sanguis::server::entities::auto_weak_link::operator
+sanguis::server::entities::auto_weak_link::unspecified *() const
 {
 	static unspecified unspec;
-	return real_ref()
+	return is_linked()
 		? &unspec
 		: 0;
 }
@@ -96,32 +69,23 @@ sanguis::server::entities::auto_weak_link::operator->() const
 	return &checked_ref();
 }
 
-sanguis::server::entities::entity *
-sanguis::server::entities::auto_weak_link::real_ref() const
-{
-	return data.me && data.me->has_ref(data.ref)
-		? data.ref
-		: 0;
-}
-
 sanguis::server::entities::entity &
 sanguis::server::entities::auto_weak_link::checked_ref() const
 {
-	entity *const r(
-		real_ref());
-	if(!r)
-		throw sge::exception(
-			SGE_TEXT("Tried to dereference a weak link that is dead!"));
-	return *r;
-
+	if(!ref)
+		throw exception(
+			SGE_TEXT("Tried to dereference a weak link that is dead!")
+		);
+	return *ref;
 }
 
-sanguis::server::entities::weak_link_pair const
-sanguis::server::entities::auto_weak_link::release()
+void
+sanguis::server::entities::auto_weak_link::add_me()
 {
-	weak_link_pair const ret(
-		data);
-	data.me = 0;
-	data.ref = 0;
-	return ret;
+	if(!ref)
+		return;
+
+	ref->insert_link(
+		*this
+	);
 }

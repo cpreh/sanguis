@@ -16,6 +16,7 @@
 #include <sge/container/map_impl.hpp>
 #include <sge/optional_impl.hpp>
 #include <sge/text.hpp>
+#include <boost/logic/tribool.hpp>
 #include <boost/assign/list_of.hpp>
 
 sanguis::pickup_type::type
@@ -68,12 +69,12 @@ sanguis::server::entities::pickups::pickup::pickup(
 	ptype_(ptype_)
 {}
 
-bool
+boost::logic::tribool const
 sanguis::server::entities::pickups::pickup::can_collide_with_entity(
 	entity const &e) const
 {
-	// TODO: is it ok to limit this to players? probably yes
-	return dynamic_cast<player const *>(&e) && e.team() == team();
+	return e.team() == team()
+		&& dynamic_cast<entity_with_weapon const *>(&e);
 }
 
 void

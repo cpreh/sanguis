@@ -7,6 +7,7 @@
 #include "../level_type.hpp"
 #include "../string.hpp"
 #include "../../perk_type.hpp"
+#include "../../net/id_type.hpp"
 
 namespace sanguis
 {
@@ -24,7 +25,8 @@ public:
 		space_unit direction,
 		space_unit angle,
 		property_map const &,
-		string const &name);
+		string const &name,
+		net::id_type);
 
 	// own functions
 	string const name() const;
@@ -41,8 +43,12 @@ public:
 	
 	perks::list const
 	available_perks() const;
+
+	net::id_type
+	net_id() const;
 private:
 	string const name_;
+	net::id_type const net_id_;
 	exp_type exp_;
 	level_type
 		level_,

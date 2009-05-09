@@ -2,8 +2,9 @@
 #define SANGUIS_SERVER_ENTITIES_ENTITY_HPP_INCLUDED
 
 #include "entity_fwd.hpp"
+#include "link_container.hpp"
 #include "base_parameters_fwd.hpp"
-#include "auto_weak_link_fwd.hpp"
+#include "auto_weak_link.hpp"
 #include "container.hpp"
 #include "property.hpp"
 #include "property_map.hpp"
@@ -27,7 +28,6 @@
 #include "../../perk_type.hpp"
 #include <sge/math/vector/basic_decl.hpp>
 #include <sge/math/dim/basic_decl.hpp>
-#include <sge/container/linear_set.hpp>
 #include <sge/signal/scoped_connection.hpp>
 #include <sge/container/map_decl.hpp>
 #include <sge/noncopyable.hpp>
@@ -102,9 +102,8 @@ public:
 	
 	virtual messages::auto_ptr add_message() const;
 
-	auto_weak_link
-	link(
-		entity &);
+	auto_weak_link const
+	link();
 	
 	virtual void add_buff(
 		buffs::auto_ptr);
@@ -129,10 +128,8 @@ private:
 	friend class auto_weak_link;
 	friend class satellite;
 
-	void unlink(
-		entity *);
-	bool has_ref(
-		entity *) const;
+	void insert_link(
+		auto_weak_link &);
 	
 	void speed_change(
 		property::value_type);
@@ -143,7 +140,7 @@ private:
 	void max_health_change(
 		property::value_type);
 
-	bool
+	boost::logic::tribool const
 	can_collide_with(
 		collision::base const &) const;
 	
@@ -151,7 +148,7 @@ private:
 	collision(
 		collision::base &);
 
-	virtual bool
+	virtual boost::logic::tribool const 
 	can_collide_with_entity(
 		entity const &) const;
 	
@@ -168,10 +165,10 @@ private:
 	team::type              team_;
 	property_map            properties;
 	entity_type::type const type_;
-	bool                    invulnerable_;
-	dim_type                collision_dim;
-	bool                    aggressive_;
-	armor_array             armor_diff_;
+	bool invulnerable_;
+	dim_type collision_dim;
+	bool aggressive_;
+	armor_array armor_diff_;
 	mutable bool update_health_;
 	sge::signal::scoped_connection const
 		speed_change_,
@@ -194,11 +191,7 @@ private:
 	>                       aura_container;
 	aura_container          auras_;
 
-	typedef sge::container::linear_set<
-		entity *
-	>                       link_container;
-	link_container          links,
-	                        backlinks;
+	link_container links;
 };
 
 }

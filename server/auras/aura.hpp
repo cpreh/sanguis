@@ -35,7 +35,7 @@ protected:
 	entity_id
 	owner() const;
 private:
-	bool
+	boost::logic::tribool const
 	can_collide_with(
 		collision::base const &) const;
 

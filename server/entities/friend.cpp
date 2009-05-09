@@ -1,5 +1,6 @@
 #include "friend.hpp"
 #include "base_parameters.hpp"
+#include "pickups/pickup.hpp"
 #include "../weapons/weapon.hpp"
 #include "../ai/base.hpp"
 #include "../get_dim.hpp"
@@ -9,6 +10,7 @@
 #include "../../messages/create.hpp"
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>
+#include <boost/logic/tribool.hpp>
 
 sanguis::server::entities::friend_::friend_(
 	friend_type::type const ftype_,
@@ -61,4 +63,13 @@ sanguis::server::entities::friend_::add_message() const
 			ftype_
 		)
 	);
+}
+
+boost::logic::tribool const
+sanguis::server::entities::friend_::can_collide_with_entity(
+	entity const &e) const
+{
+	return dynamic_cast<entities::pickups::pickup const *>(&e)
+		? boost::logic::tribool(false)
+		: boost::logic::indeterminate;
 }

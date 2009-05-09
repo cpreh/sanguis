@@ -42,7 +42,7 @@ protected:
 		time_type,
 		container &);
 private:
-	virtual bool
+	virtual boost::logic::tribool const 
 	can_collide_with_entity(
 		entity const &) const;
 	

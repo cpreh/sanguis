@@ -27,6 +27,10 @@ public:
 private:
 	messages::auto_ptr add_message() const;
 
+	boost::logic::tribool const
+	can_collide_with_entity(
+		entity const &) const;
+
 	friend_type::type const ftype_;
 };
 
