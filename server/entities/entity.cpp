@@ -7,6 +7,7 @@
 #include "../buffs/buff.hpp"
 #include "../auras/aura.hpp"
 #include "../get_unique_id.hpp"
+#include "../message_convert/max_health.hpp"
 #include "../log.hpp"
 #include "../../messages/add.hpp"
 #include "../../messages/create.hpp"
@@ -54,12 +55,35 @@ sanguis::server::entities::entity::entity(
 	collision_dim(param.collision_dim()),
 	aggressive_(false),
 	armor_diff_(),
+	update_health_(true),
 	speed_change_(
 		property(
 			property_type::movement_speed
 		).register_change_callback(
 			boost::bind(
 				&entity::speed_change,
+				this,
+				_1
+			)
+		)
+	),
+	health_change_(
+		property(
+			property_type::health
+		).register_change_callback(
+			boost::bind(
+				&entity::health_change,
+				this,
+				_1
+			)
+		)
+	),
+	max_health_change_(
+		property(
+			property_type::health
+		).register_max_change_callback(
+			boost::bind(
+				&entity::max_health_change,
 				this,
 				_1
 			)
@@ -192,7 +216,6 @@ void sanguis::server::entities::entity::damage(
 
 	if(dead())
 		die();
-	// TODO: send health here!
 }
 
 bool sanguis::server::entities::entity::dead() const
@@ -446,6 +469,14 @@ sanguis::server::entities::entity::add_aura(
 	);
 }
 
+bool
+sanguis::server::entities::entity::update_health() const
+{
+	bool const ret = update_health_;
+	update_health_ = false;
+	return ret;
+}
+
 sanguis::server::entities::entity::~entity()
 {
 	BOOST_FOREACH(entity *e, links)
@@ -521,6 +552,24 @@ void sanguis::server::entities::entity::speed_change(
 			static_cast<
 				space_unit
 			>(0)
+		)
+	);
+}
+
+void sanguis::server::entities::entity::health_change(
+	property::value_type)
+{
+	update_health_ = true;
+}
+
+void sanguis::server::entities::entity::max_health_change(
+	property::value_type)
+{
+	update_health_ = true;
+
+	send(
+		message_convert::max_health(
+			*this
 		)
 	);
 }

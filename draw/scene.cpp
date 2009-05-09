@@ -163,7 +163,8 @@ void sanguis::draw::scene::draw(
 			if(e.remove_action() == draw::remove_action::render_dead)
 				dead_list.transfer(
 					it,
-					entities);
+					entities
+				);
 			else
 				entities.erase(it);
 		}

@@ -61,16 +61,11 @@ sanguis::draw::healthbar::healthbar(
 	recalc_health();
 }
 
-void sanguis::draw::healthbar::health(
-	const funit nhealth)
+void sanguis::draw::healthbar::update_health(
+	funit const nhealth,
+	funit const nmax_health)
 {
 	health_ = nhealth;
-	recalc_health();
-}
-
-void sanguis::draw::healthbar::max_health(
-	const funit nmax_health)
-{
 	max_health_ = nmax_health;
 	recalc_health();
 }
@@ -88,8 +83,8 @@ sanguis::draw::healthbar::max_health() const
 }
 
 void sanguis::draw::healthbar::attach_to(
-	const sge::sprite::point& p,
-	const sge::sprite::dim& d)
+	sge::sprite::point const &p,
+	sge::sprite::dim const &d)
 {
 	pos(
 		sge::sprite::point(
@@ -102,39 +97,39 @@ void sanguis::draw::healthbar::attach_to(
 }
 
 void sanguis::draw::healthbar::pos(
-	const sge::sprite::point& p)
+	sge::sprite::point const &p)
 {
 	border().pos() = p;
 	inner().pos() = inner_pos();
 }
 
 void sanguis::draw::healthbar::dim(
-	const sge::sprite::dim& d)
+	sge::sprite::dim const &d)
 {
 	border().size() = d;
 	inner().size() = inner_dim();
 	recalc_health();
 }
 
-const sge::sprite::point
+sge::sprite::point const 
 sanguis::draw::healthbar::inner_pos() const
 {
 	return border().pos() + sge::sprite::point(border_size, border_size);
 }
 
-const sge::sprite::dim
+sge::sprite::dim const 
 sanguis::draw::healthbar::inner_dim() const
 {
 	return border().size() - sge::sprite::dim(2 * border_size, 2 * border_size);
 }
 
-sanguis::draw::object&
+sanguis::draw::object &
 sanguis::draw::healthbar::border()
 {
 	return at(background);
 }
 
-const sanguis::draw::object&
+sanguis::draw::object const &
 sanguis::draw::healthbar::border() const
 {
 	return at(background);
@@ -146,7 +141,7 @@ sanguis::draw::healthbar::inner()
 	return at(foreground);
 }
 
-const sanguis::draw::object&
+sanguis::draw::object const &
 sanguis::draw::healthbar::inner() const
 {
 	return at(foreground);
@@ -174,11 +169,14 @@ void sanguis::draw::healthbar::recalc_health()
 
 	inner().w() = static_cast<sge::sprite::unit>(
 		static_cast<funit>(inner_dim().w()) * remaining_health());
-	inner().color(sge::renderer::rgba8_color(
-		static_cast<sge::renderer::color_channel_8>(
-			(static_cast<funit>(1) - remaining_health()) * static_cast<funit>(pixel_channel_max)),
-		static_cast<sge::renderer::color_channel_8>(
-			remaining_health() * static_cast<funit>(pixel_channel_max)),
-		0,
-		pixel_channel_max));
+	inner().color(
+		sge::renderer::rgba8_color(
+			static_cast<sge::renderer::color_channel_8>(
+				(static_cast<funit>(1) - remaining_health()) * static_cast<funit>(pixel_channel_max)),
+			static_cast<sge::renderer::color_channel_8>(
+				remaining_health() * static_cast<funit>(pixel_channel_max)),
+			0,
+			pixel_channel_max
+		)
+	);
 }

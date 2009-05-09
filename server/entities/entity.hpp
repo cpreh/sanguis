@@ -112,6 +112,8 @@ public:
 	virtual void add_aura(
 		auras::auto_ptr);
 
+	bool update_health() const;
+
 	virtual ~entity();
 protected:
 	void send(messages::auto_ptr);
@@ -132,7 +134,14 @@ private:
 	bool has_ref(
 		entity *) const;
 	
-	void speed_change(property::value_type);
+	void speed_change(
+		property::value_type);
+
+	void health_change(
+		property::value_type);
+
+	void max_health_change(
+		property::value_type);
 
 	bool
 	can_collide_with(
@@ -163,7 +172,11 @@ private:
 	dim_type                collision_dim;
 	bool                    aggressive_;
 	armor_array             armor_diff_;
-	sge::signal::scoped_connection const speed_change_;
+	mutable bool update_health_;
+	sge::signal::scoped_connection const
+		speed_change_,
+		health_change_,
+		max_health_change_;
 
 	typedef boost::ptr_map<
 		perk_type::type,

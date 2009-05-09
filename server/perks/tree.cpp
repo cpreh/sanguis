@@ -43,9 +43,9 @@ sanguis::server::perks::tree::tree()
 //	impl.push_back(
 //		perk_type::irs
 //	);
-//	impl.push_back(
-//		perk_type::health
-//	);
+	impl.push_back(
+		perk_type::health
+	);
 	impl.push_back(
 		perk_type::regeneration
 	);

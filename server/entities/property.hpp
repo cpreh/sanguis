@@ -25,11 +25,10 @@ public:
 		change_callback_fn
 	> change_callback;
 
-	property();
 	property(
 		value_type current,
 		value_type base);
-	property(
+	explicit property(
 		value_type base);
 
 	value_type current() const;
@@ -56,6 +55,10 @@ public:
 	sge::signal::auto_connection
 	register_change_callback(
 		change_callback const &);
+	
+	sge::signal::auto_connection
+	register_max_change_callback(
+		change_callback const &);
 private:
 	void clamp();
 	
@@ -64,6 +67,7 @@ private:
 		max_linear_,
 		max_constant_,
 		max_,
+		max_old_,
 		current_,
 		restrict_;
 	

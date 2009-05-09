@@ -1,4 +1,5 @@
 #include "property.hpp"
+#include <sge/math/compare.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <algorithm>
 #include <limits>
@@ -16,26 +17,6 @@ value_max(
 
 // TODO: somehow unify these ctors
 
-sanguis::server::entities::property::property()
-:
-	base_(static_cast<value_type>(0)),
-	max_linear_(static_cast<value_type>(1)),
-	max_constant_(static_cast<value_type>(0)),
-	max_(base_),
-	current_(base_),
-	restrict_(value_max),
-	change_signal(
-		sge::make_shared_ptr<
-			change_signal_type
-		>()
-	),
-	max_change_signal(
-		sge::make_shared_ptr<
-			change_signal_type
-		>()
-	)
-{}
-
 sanguis::server::entities::property::property(
 	value_type const ncurrent,
 	value_type const base_)
@@ -44,6 +25,7 @@ sanguis::server::entities::property::property(
 	max_linear_(static_cast<value_type>(1)),
 	max_constant_(static_cast<value_type>(0)),
 	max_(base_),
+	max_old_(max_),
 	current_(static_cast<value_type>(0)),
 	restrict_(value_max),
 	change_signal(
@@ -67,6 +49,7 @@ sanguis::server::entities::property::property(
 	max_linear_(static_cast<value_type>(1)),
 	max_constant_(static_cast<value_type>(0)),
 	max_(base_),
+	max_old_(max_),
 	current_(base_),
 	restrict_(value_max),
 	change_signal(
@@ -90,13 +73,20 @@ sanguis::server::entities::property::current() const
 void sanguis::server::entities::property::current(
 	value_type const c)
 {
+	value_type const old(
+		current_
+	);
+
 	current_ = std::min(
 		std::min(
 			restrict_,
-			max()),
-		c);
+			max()
+		),
+		c
+	);
 	
-	(*change_signal)(current());
+	if(!sge::math::compare(old, current()))
+		(*change_signal)(current());
 }
 
 void sanguis::server::entities::property::add(
@@ -114,6 +104,7 @@ void sanguis::server::entities::property::current_to_max()
 
 void sanguis::server::entities::property::reset()
 {
+	max_old_ = max_;
 	max_ = base_;	
 	max_linear_ = static_cast<value_type>(1);
 	max_constant_ = static_cast<value_type>(0);
@@ -153,7 +144,11 @@ void sanguis::server::entities::property::restrict(
 void sanguis::server::entities::property::apply()
 {
 	max_ = (base_ + max_constant_) * max_linear_;
+
 	clamp();
+
+	if(!sge::math::compare(max_, max_old_))
+		(*max_change_signal)(max_);
 }
 
 void sanguis::server::entities::property::unrestrict()
@@ -162,10 +157,17 @@ void sanguis::server::entities::property::unrestrict()
 }
 
 sge::signal::auto_connection
-	sanguis::server::entities::property::register_change_callback(
+sanguis::server::entities::property::register_change_callback(
 	change_callback const &cb)
 {
 	return change_signal->connect(cb);
+}
+
+sge::signal::auto_connection
+sanguis::server::entities::property::register_max_change_callback(
+	change_callback const &cb)
+{
+	return max_change_signal->connect(cb);
 }
 
 void sanguis::server::entities::property::clamp()

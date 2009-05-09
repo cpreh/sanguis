@@ -7,8 +7,8 @@
 #include "../message_convert/speed.hpp"
 #include "../message_convert/rotate.hpp"
 #include "../message_convert/remove.hpp"
-#include "../message_convert/health.hpp"
 #include "../message_convert/move.hpp"
+#include "../message_convert/health.hpp"
 #include "../log.hpp"
 #include "../../truncation_check_cast.hpp"
 #include "../../angle_vector.hpp"
@@ -263,14 +263,20 @@ sanguis::server::states::unpaused::react(
 
 		i->update(
 			static_cast<time_type>(delta),
-			entities);
+			entities
+		);
 
 		if (i->type() != entity_type::indeterminate && update_pos)
 		{
 			send(message_convert::move(*i));
 			send(message_convert::speed(*i));
 			send(message_convert::rotate(*i));
-			send(message_convert::health(*i)); // FIXME: this should be elsewhere
+			if(i->update_health())
+				send(
+					message_convert::health(
+						*i
+					)
+				);
 		}
 
 		++i;

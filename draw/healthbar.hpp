@@ -12,14 +12,19 @@ class healthbar : public sprite {
 public:
 	explicit healthbar(
 		draw::environment const &);
-	void health(funit);
-	void max_health(funit);
+	
+	void update_health(
+		funit health,
+		funit max_health);
 	funit max_health() const;
 	funit health() const;
 	void attach_to(
 		sge::sprite::point const &,
 		sge::sprite::dim const &);
 private:
+	using sprite::health;
+	using sprite::max_health;
+
 	void pos(sge::sprite::point const &);
 	void dim(sge::sprite::dim const &);
 	sge::sprite::point const inner_pos() const;

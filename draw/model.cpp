@@ -30,7 +30,8 @@ sanguis::draw::model::model(
 		env,
 		id,
 		env.context().models()()[name].size(),
-		order),
+		order
+	),
 	attacking(false),
 	reloading(false),
 	health_(0),
@@ -39,7 +40,8 @@ sanguis::draw::model::model(
 		show_healthbar
 		? new healthbar(
 			env)
-		: 0),
+		: 0
+	),
 	remove_action_(remove_action_)
 {
 	part_vector::size_type i(0);
@@ -50,9 +52,13 @@ sanguis::draw::model::model(
 		parts.push_back(
 			new model_part(
 				p.second,
-				at(sprite_part_index(i++))));
+				at(sprite_part_index(i++))
+			)
+		);
+	
 	change_animation(
-		animation_type::deploying);
+		animation_type::deploying
+	);
 }
 
 sanguis::draw::model::~model()
@@ -289,8 +295,11 @@ void sanguis::draw::model::update_healthbar()
 {
 	if(!healthbar_)
 		return;
-	healthbar_->health(health());
-	healthbar_->max_health(max_health());
+	
+	healthbar_->update_health(
+		health(),
+		max_health()
+	);
 }
 
 bool sanguis::draw::model::animations_ended() const
