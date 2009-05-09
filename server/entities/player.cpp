@@ -14,7 +14,8 @@ sanguis::server::entities::player::player(
 	space_unit const direction_,
 	space_unit const angle_,
 	property_map const &properties,
-	string const &name_)
+	string const &name_,
+	net::id_type const net_id_)
 :
 	entity_with_weapon(
 		base_parameters(
@@ -36,6 +37,7 @@ sanguis::server::entities::player::player(
 		weapons::auto_ptr()
 	),
 	name_(name_),
+	net_id_(net_id_),
 	exp_(static_cast<exp_type>(0)),
 	level_(static_cast<level_type>(0)),
 	level_delta_(static_cast<level_type>(0)),
@@ -122,4 +124,10 @@ sanguis::server::entities::player::available_perks() const
 			++it;
 	
 	return ret;
+}
+
+sanguis::net::id_type
+sanguis::server::entities::player::net_id() const
+{
+	return net_id_;
 }

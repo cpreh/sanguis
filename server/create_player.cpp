@@ -24,7 +24,8 @@ sanguis::server::create_player(
 	send_callback const &send_to_player,
 	environment const &env,
 	entities::container const &entities,
-	connect_state::type const current_state)
+	connect_state::type const current_state,
+	net::id_type const net_id)
 {
 	string const &name(
 		sge::utf8::convert(
@@ -60,7 +61,8 @@ sanguis::server::create_player(
 						static_cast<space_unit>(100)
 					)
 				),
-			name
+			name,
+			net_id
 		)
 	);
 

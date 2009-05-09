@@ -1,19 +1,19 @@
 #include "simple.hpp"
+#include "find_nearest_enemy.hpp"
 #include "../entities/entity_with_weapon.hpp"
 #include "../entities/property.hpp"
 #include "../collision/collides.hpp"
-#include "../collision/distance.hpp"
 #include <sge/time/second.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/optional.hpp>
 #include <sge/math/angle.hpp>
-#include <boost/foreach.hpp>
-#include <limits>
 
-sanguis::server::ai::simple::simple()
+sanguis::server::ai::simple::simple(
+	entities::auto_weak_link owner_)
 :
 	me_(0),
 	target(),
+	owner_(owner_),
 	diff_clock_(),
 	search_new_target_timer(
 		sge::time::second(
@@ -52,34 +52,13 @@ void sanguis::server::ai::simple::update(
 
 	if(/*search_new_target_timer.update_b() ||*/ !target)
 	{
-		space_unit distance(
-			std::numeric_limits<
-				space_unit
-			>::max());
-
-		BOOST_FOREACH(
-			entities::entity &e,
-			entities)
-		{
-			if(e.invulnerable() || e.team() == me.team())
-				continue;
-
-			space_unit const new_distance(
-				collision::distance(
-					me,
-					e
-				)
-			);
-
-			if(new_distance >= distance)
-				continue;
-
-			distance = new_distance;
-
-			// unlink before we may link an object twice
-			//target.unlink();
-			target = me.link(e);
-		}
+		target = find_nearest_enemy(
+			me,
+			owner_
+				? owner_->center()
+				: me.center(),
+			entities
+		);
 
 		if(!target)
 		{

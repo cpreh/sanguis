@@ -190,7 +190,8 @@ sanguis::server::states::running::operator()(
 			entities_,
 			state_cast<unpaused const *>()
 				? connect_state::unpaused
-				: connect_state::paused
+				: connect_state::paused,
+			net_id
 		)
 	);
 

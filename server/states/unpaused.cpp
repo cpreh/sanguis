@@ -99,7 +99,10 @@ sanguis::server::states::unpaused::operator()(
 	net::id_type const id,
 	messages::player_rotation const &e)
 {
-	running::player_map::iterator const it(context<running>().players().find(id));
+	running::player_map::iterator const it(
+		context<running>().players().find(id)
+	);
+
 	if (it == context<running>().players().end())
 	{
 		SGE_LOG_WARNING(
@@ -254,7 +257,7 @@ sanguis::server::states::unpaused::react(
 			// we have to remove the player link as well
 			if(i->type() == entity_type::player)
 				context<running>().players().erase(
-					i->id()
+					dynamic_cast<entities::player &>(*i).net_id()
 				);
 
 			i = entities.erase(i);

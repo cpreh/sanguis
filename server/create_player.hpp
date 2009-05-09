@@ -7,6 +7,7 @@
 #include "entities/player_fwd.hpp"
 #include "../connect_state.hpp"
 #include "../messages/client_info.hpp"
+#include "../net/id_type.hpp"
 
 namespace sanguis
 {
@@ -19,7 +20,8 @@ create_player(
 	send_callback const &send_to_player,
 	environment const &,
 	entities::container const &entities,
-	connect_state::type const current_state);
+	connect_state::type const current_state,
+	net::id_type);
 
 }
 }

@@ -16,7 +16,9 @@ namespace ai
 
 class simple : public base {
 public:
-	simple();
+	explicit simple(
+		entities::auto_weak_link owner
+			= entities::auto_weak_link());
 private:
 	void bind(
 		entities::entity_with_weapon &me);
@@ -26,7 +28,9 @@ private:
 		entities::container &);
 
 	entities::entity_with_weapon *me_;
-	entities::auto_weak_link target;
+	entities::auto_weak_link
+		target,
+		owner_;
 	diff_clock diff_clock_;
 	sge::time::timer search_new_target_timer;
 };

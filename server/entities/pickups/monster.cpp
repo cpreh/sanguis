@@ -60,7 +60,9 @@ void sanguis::server::entities::pickups::monster::do_pickup(
 					)
 				),
 				ai::auto_ptr(
-					new ai::simple()
+					new ai::simple(
+						receiver.link()
+					)
 				),
 				weapons::auto_ptr(
 					new weapons::melee(

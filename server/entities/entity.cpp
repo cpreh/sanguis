@@ -92,8 +92,7 @@ sanguis::server::entities::entity::entity(
 	perks_(),
 	buffs_(),
 	auras_(),
-	links(),
-	backlinks()
+	links()
 {}
 
 sanguis::entity_id
@@ -410,30 +409,12 @@ sanguis::server::entities::entity::add_message() const
 	);
 }
 
-sanguis::server::entities::auto_weak_link
-sanguis::server::entities::entity::link(
-	entity &e)
+sanguis::server::entities::auto_weak_link const
+sanguis::server::entities::entity::link()
 {
-	if(!links.insert(&e).second)
-		throw exception(
-			SGE_TEXT("Double link insert in entity!"));
-	
-	try
-	{
-		if(!e.backlinks.insert(this).second)
-			throw exception(
-				SGE_TEXT("Double backlink insert in entity!"));
-	}
-	catch(...)
-	{
-		// TODO: can we wrap this in a RAII class somehow?
-		links.erase(&e);
-		throw;
-	}
-
 	return auto_weak_link(
-		*this,
-		e);
+		*this
+	);
 }
 
 void
@@ -478,13 +459,7 @@ sanguis::server::entities::entity::update_health() const
 }
 
 sanguis::server::entities::entity::~entity()
-{
-	BOOST_FOREACH(entity *e, links)
-		e->backlinks.erase(this);
-
-	BOOST_FOREACH(entity *e, backlinks)
-		e->links.erase(this);
-}
+{}
 
 void sanguis::server::entities::entity::send(
 	messages::auto_ptr message)
@@ -526,19 +501,11 @@ sanguis::server::entities::entity::perk_choosable(
 void sanguis::server::entities::entity::on_die()
 {}
 
-void sanguis::server::entities::entity::unlink(
-	entity * const e)
+void
+sanguis::server::entities::entity::insert_link(
+	auto_weak_link &l)
 {
-	if(!has_ref(e))
-		return;
-	e->backlinks.erase(this);
-	links.erase(e);
-}
-
-bool sanguis::server::entities::entity::has_ref(
-	entity *const e) const
-{
-	return links.find(e) != links.end();
+	links.push_back(l);
 }
 
 void sanguis::server::entities::entity::speed_change(
