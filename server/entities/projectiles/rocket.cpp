@@ -3,6 +3,7 @@
 #include "../property.hpp"
 #include "../../get_dim.hpp"
 #include "../../../load/context.hpp"
+#include <sge/container/map_impl.hpp>
 #include <sge/text.hpp>
 #include <boost/assign/list_of.hpp>
 

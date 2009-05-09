@@ -11,6 +11,7 @@
 #include "../../../load/context.hpp"
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>
+#include <sge/container/map_impl.hpp>
 #include <sge/optional_impl.hpp>
 #include <boost/assign/list_of.hpp>
 

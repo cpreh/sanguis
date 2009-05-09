@@ -1,6 +1,7 @@
 #include "melee.hpp"
 #include "../property.hpp"
 #include <sge/math/dim/basic_impl.hpp>
+#include <sge/container/map_impl.hpp>
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::projectiles::melee::melee(

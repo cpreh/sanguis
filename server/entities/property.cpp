@@ -27,7 +27,13 @@ sanguis::server::entities::property::property()
 	change_signal(
 		sge::make_shared_ptr<
 			change_signal_type
-		>())
+		>()
+	),
+	max_change_signal(
+		sge::make_shared_ptr<
+			change_signal_type
+		>()
+	)
 {}
 
 sanguis::server::entities::property::property(
@@ -43,8 +49,13 @@ sanguis::server::entities::property::property(
 	change_signal(
 		sge::make_shared_ptr<
 			change_signal_type
-		>())
-
+		>()
+	),
+	max_change_signal(
+		sge::make_shared_ptr<
+			change_signal_type
+		>()
+	)
 {
 	current(ncurrent);
 }
@@ -61,8 +72,13 @@ sanguis::server::entities::property::property(
 	change_signal(
 		sge::make_shared_ptr<
 			change_signal_type
-		>())
-
+		>()
+	),
+	max_change_signal(
+		sge::make_shared_ptr<
+			change_signal_type
+		>()
+	)
 {}
 
 sanguis::server::entities::property::value_type

@@ -6,6 +6,7 @@
 #include "../../weapons/melee.hpp"
 #include "../../weapons/pistol.hpp"
 #include "../../../exception.hpp"
+#include <sge/container/map_impl.hpp>
 #include <sge/text.hpp>
 #include <boost/assign/list_of.hpp>
 

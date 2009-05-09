@@ -2,7 +2,6 @@
 #define SANGUIS_SERVER_ENTITIES_PROPERTY_HPP_INCLUDED
 
 #include "../space_unit.hpp"
-#undef max // TODO: find out where windows.h comes from!
 #include <sge/signal/object.hpp>
 #include <sge/signal/auto_connection.hpp>
 #include <sge/shared_ptr.hpp>
@@ -72,9 +71,13 @@ private:
 		change_callback_fn
 	> change_signal_type;
 
-	sge::shared_ptr<
+	typedef sge::shared_ptr<
 		change_signal_type
-	> change_signal;
+	> signal_ptr;
+
+	signal_ptr 
+		change_signal,
+		max_change_signal;
 };
 
 }
