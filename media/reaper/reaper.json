@@ -1,0 +1,1 @@
+{"header":{"cell_dimensions":[64,64],"delay":40},"animations":[{"texture":"reaper.png","default":[{"none":[{"none":{"range":[0,1]}},{"walking":{"range":[1,26]}}]}]}]}

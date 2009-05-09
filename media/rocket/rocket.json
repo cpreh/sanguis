@@ -1,0 +1,1 @@
+{"header":{"cell_dimensions":[32,10],"delay":40},"texture":"rocket.png","parts":[{"default":{"weapon_categories":[{"none":{"animations":[{"dying":{"range":[0,1],"sounds":{"start":{"prob":1,"elements":[{"file":"rocket_explosion.ogg","prob":1}]}}}},{"none":{"range":[0,11]}}]}}]}},{"tail":{"weapon_categories":[{"none":{"animations":[{"none":{"range":[11,16]}}]}}]}}]}

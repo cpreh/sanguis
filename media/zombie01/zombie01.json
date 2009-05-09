@@ -1,0 +1,2 @@
+{"header":{"cell_dimensions":[96,48],"delay":40},"texture":"default_none.png","parts":[{"default":{"weapon_categories":[{"none":{"animations":[{"attacking":{"range":[0,25],"cast_point":15}},{"dying":{"range":[25,35]}},{"none":{"range":[25,26]}},{"walking":{"range":[35,95]}}]}}]}}]}
+
