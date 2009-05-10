@@ -17,7 +17,7 @@ void sanguis::server::perks::regeneration::do_apply(
 	e.property(
 		entities::property_type::health_regeneration
 	).add_to_max(
-		static_cast<space_unit>(level()) * static_cast<space_unit>(0.5)
+		static_cast<space_unit>(level()) * static_cast<space_unit>(0.2)
 	);
 }
 
