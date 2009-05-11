@@ -52,6 +52,7 @@
 #include <boost/filesystem.hpp>
 #include <boost/spirit/home/phoenix/bind/bind_function.hpp>
 #include <boost/spirit/home/phoenix/core/reference.hpp>
+#include <boost/spirit/home/phoenix/core/argument.hpp>
 #include <boost/program_options.hpp>
 
 // c++
@@ -63,6 +64,7 @@
 // c
 #include <cstdlib>
 
+// FIXME: this should not be here!
 namespace
 {
 
@@ -80,10 +82,10 @@ create_server(
 {
 	server.reset(
 		new sanguis::server::machine(
-				resources,
-				coll,
-				con, 
-				host_port
+			resources,
+			coll,
+			con, 
+			host_port
 		)
 	);
 	
@@ -98,23 +100,12 @@ try
 	namespace po = boost::program_options;
 	po::options_description desc("allowed options");
 
-	sanguis::net::hostname_type dest_server;
-	sanguis::net::port_type host_port,dest_port;
 	std::string log_level;
 	unsigned screen_width, screen_height;
 
 	desc.add_options()
 		("help",
 			"produce help message")
-		("dest-server",
-			po::value<sanguis::net::hostname_type>(&dest_server)->default_value("localhost"),
-			"sets the server (ip/hostname) to connect to when hitting space")
-		("dest-port",
-			po::value<sanguis::net::port_type>(&dest_port)->default_value(1337),
-			"sets the server port to connect to")
-		("host-port",
-			po::value<sanguis::net::port_type>(&host_port)->default_value(1337),
-			"sets the port to listen to for games")
 		("log",
 			po::value<std::string>(&log_level)->default_value(std::string("debug")),
 			"sets the maximum logging level (one of debug, info, warning, error, fatal in that order)")
@@ -268,15 +259,15 @@ try
 			boost::phoenix::ref(resources),
 			world,
 			boost::phoenix::ref(console_gfx),
-			host_port),
+			boost::phoenix::arg_names::_1
+		),
 		resources,
 		sys,
 		sound_pool,
 		font,
 		ks,
-		console_gfx,
-		dest_server,
-		dest_port);
+		console_gfx
+	);
 
 	// this should construct, among others, the renderer
 	client.initiate();

@@ -197,30 +197,23 @@ void sanguis::client::states::menu::connect(
 	sge::string const &host,
 	sge::string const &port)
 {
-	context<machine>().hostname(
-		sge::iconv(
-			host
-		)
-	);
-
 	try
 	{
-		context<machine>().port(
-			sge::lexical_cast<net::port_type>(
-				port));
+		context<machine>().connect(
+			host,
+			sge::lexical_cast<
+				net::port_type
+			>(
+				port
+			)
+		);
 	}
 	catch (sge::bad_lexical_cast const &)
 	{
 		menu_.connection_error(
-			SGE_TEXT("invalid port specification"));
-		return;
+			SGE_TEXT("invalid port specification")
+		);
 	}
-
-	SGE_LOG_DEBUG(
-		log(),
-		sge::log::_1 << SGE_TEXT("connecting..."));
-
-	context<machine>().connect();
 }
 
 void sanguis::client::states::menu::start_server()

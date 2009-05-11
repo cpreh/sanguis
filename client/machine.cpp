@@ -20,8 +20,6 @@
 #include <sge/algorithm/append.hpp>
 #include <sge/utf8/convert.hpp>
 #include <boost/bind.hpp>
-#include <boost/lambda/bind.hpp>
-#include <boost/lambda/construct.hpp>
 
 sanguis::client::machine::machine(
 	server_callback const &_server_callback,
@@ -30,13 +28,9 @@ sanguis::client::machine::machine(
 	sge::audio::pool &_sound_pool,
 	sge::font::object &_font,
 	sge::input::key_state_tracker &_ks,
-	sge::console::gfx &_console,
-	net::hostname_type const &_hostname,
-	net::port_type const _port) 
+	sge::console::gfx &_console)
 :
 	resources_(_resources),
-	hostname_(_hostname),
-	port_(_port),
 	s_conn(
 		net_.register_connect(
 			boost::bind(
@@ -83,14 +77,18 @@ sanguis::client::machine::machine(
 
 void sanguis::client::machine::start_server()
 {
-	server_callback_();
+	server_callback_(1337); // FIXME
 }
 
-void sanguis::client::machine::connect()
+void
+sanguis::client::machine::connect(
+	net::hostname_type const &hostname,
+	net::port_type const port)
 {
 	net_.connect(
-		hostname_,
-		port_);
+		hostname,
+		port
+	);
 }
 
 void sanguis::client::machine::cancel_connect()
@@ -157,32 +155,10 @@ void sanguis::client::machine::send(
 		out_buffer);
 }
 
-sanguis::net::hostname_type
-sanguis::client::machine::hostname() const
-{
-	return hostname_;
-}
-
-sanguis::net::port_type
-sanguis::client::machine::port() const
-{
-	return port_;
-}
-
 sanguis::net::client &
 sanguis::client::machine::net()
 {
 	return net_;
-}
-
-void sanguis::client::machine::hostname(net::hostname_type const &_hostname)
-{
-	hostname_ = _hostname;
-}
-
-void sanguis::client::machine::port(net::port_type const _port)
-{
-	port_ = _port;
 }
 
 bool sanguis::client::machine::process(

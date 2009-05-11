@@ -167,9 +167,10 @@ void sanguis::client::menu::object::connection_error(
 {
 	SGE_LOG_DEBUG(
 		mylogger,
-		sge::log::_1 << SGE_TEXT("got conection error: (")
-		             << message 
-								 << SGE_TEXT(")"));
+		sge::log::_1
+			<< SGE_TEXT("got conection error: (")
+			<< message 
+			<< SGE_TEXT(")"));
 
 	connect_box_.label_.text(
 		SGE_TEXT("Connection to \"")+
@@ -203,10 +204,11 @@ void sanguis::client::menu::object::connect(
 {
 	SGE_LOG_DEBUG(
 		mylogger,
-		sge::log::_1 << SGE_TEXT("connecting to ")
-		             << host 
-								 << SGE_TEXT(" on port ")
-								 << port);
+		sge::log::_1
+			<< SGE_TEXT("connecting to ")
+			<< host 
+			<< SGE_TEXT(" on port ")
+			<< port);
 
 	connection_host_ = host;
 	connection_port_ = port;

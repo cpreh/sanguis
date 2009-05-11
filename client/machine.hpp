@@ -8,7 +8,6 @@
 #include "../load/context_fwd.hpp"
 #include "../messages/auto_ptr.hpp"
 #include "../net/client.hpp"
-#include "../net/client.hpp"
 #include "../tick_event.hpp"
 
 #include <sge/font/object_fwd.hpp>
@@ -41,12 +40,13 @@ public:
 		sge::audio::pool &,
 		sge::font::object &,
 		sge::input::key_state_tracker &,
-		sge::console::gfx &,
+		sge::console::gfx &);
+
+	void start_server();
+	void connect(
 		net::hostname_type const &,
 		net::port_type);
 
-	void start_server();
-	void connect();
 	void cancel_connect();
 	void send(messages::auto_ptr);
 	void process_message(messages::auto_ptr);
@@ -55,12 +55,7 @@ public:
 	void disconnect_callback(sge::string const &);
 	void data_callback(net::data_type const &);
 
-	net::hostname_type hostname() const;
-	net::port_type port() const;
 	net::client &net();
-
-	void hostname(net::hostname_type const &);
-	void port(net::port_type);
 
 	bool process(tick_event const &);
 
@@ -81,11 +76,11 @@ public:
 	resources() const;
 private:
 	load::context const &resources_;
-	net::hostname_type hostname_;
-	net::port_type port_;
 	net::client net_;
 	sge::signal::auto_connection
-		s_conn,s_disconn,s_data;
+		s_conn,
+		s_disconn,
+		s_data;
 	net::data_type
 		in_buffer,
 		out_buffer;
