@@ -348,6 +348,7 @@ void sanguis::server::entities::entity::update(
 
 	// TODO: somehow make this part of property!
 	property(property_type::attack_speed).current_to_max();
+	property(property_type::reload_speed).current_to_max();
 	property(property_type::health_regeneration).current_to_max();
 
 	property(property_type::health).add(
