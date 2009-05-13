@@ -54,14 +54,15 @@ sanguis::client::states::menu::menu(
 				&(context<machine>())),
 			boost::bind(
 				&machine::quit,
-				&(context<machine>()))))
-{
-	context<machine>().renderer()->state(
+				&(context<machine>())))),
+	connect_state_(),
+	renderer_state_(
+		context<machine>().renderer(),
 		sge::renderer::state::list
 			(sge::renderer::state::bool_::clear_backbuffer = true)
 			(sge::renderer::state::bool_::clear_zbuffer = false)
-			(sge::renderer::state::color::clear_color = sge::renderer::colors::black())
-	);
+			(sge::renderer::state::color::clear_color = sge::renderer::colors::black()))
+{
 }
 
 boost::statechart::result

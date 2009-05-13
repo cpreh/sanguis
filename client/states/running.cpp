@@ -47,6 +47,11 @@ sanguis::client::states::running::running(
 	my_context ctx)
 :
 	my_base(ctx), 
+	renderer_state_(
+		context<machine>().renderer(),
+		sge::renderer::state::list
+			(sge::renderer::state::bool_::clear_backbuffer = false)
+			(sge::renderer::state::bool_::clear_zbuffer = false)),
 	music_(
 		context<machine>().console_wrapper().con,
 		context<machine>().resources().resources().sounds()
@@ -100,35 +105,7 @@ sanguis::client::states::running::running(
 			_1),
 		logic_.cursor()
 	)
-				/*
-	perk_chooser_(
-		context<machine>().sys(),
-		boost::phoenix::bind(
-			&running::send_message,
-			this,
-			boost::phoenix::bind(
-				&messages::create<messages::player_choose_perk>,
-				boost::phoenix::construct<messages::player_choose_perk>(
-					boost::phoenix::val(player_id()),
-					boost::phoenix::arg_names::arg1))))
-	perk_chooser_(
-		context<machine>().sys(),
-		boost::bind(
-			&running::send_message,
-			this,
-			boost::bind(
-				&messages::create<messages::player_choose_perk>,
-				boost::phoenix::construct<messages::player_choose_perk>(
-					player_id(),
-					boost::phoenix::arg_names::arg1))))
-					*/
 {
-	context<machine>().renderer()->state(
-		sge::renderer::state::list
-			(sge::renderer::state::bool_::clear_backbuffer = false)
-			(sge::renderer::state::bool_::clear_zbuffer = false)
-	);
-
 	drawer->client_message(
 		client_messages::add(
 			::cursor_id,

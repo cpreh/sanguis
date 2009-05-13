@@ -11,6 +11,7 @@
 #include "../../messages/assign_id.hpp"
 #include "../../tick_event.hpp"
 #include <sge/log/logger_fwd.hpp>
+#include <sge/renderer/state/scoped.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/mpl/list.hpp>
@@ -50,6 +51,7 @@ class menu
 
 	client::menu::object menu_;
 	connect_state::type connect_state_;
+	sge::renderer::state::scoped renderer_state_;
 	
 	void connect(
 		sge::string const &,

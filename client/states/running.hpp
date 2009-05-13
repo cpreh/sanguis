@@ -26,6 +26,7 @@
 #include "../../draw/player_fwd.hpp"
 #include <sge/signal/auto_connection.hpp>
 #include <sge/scoped_ptr.hpp>
+#include <sge/renderer/state/scoped.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/result.hpp>
@@ -88,6 +89,7 @@ private:
 	void cursor_show(
 		bool show);
 	
+	sge::renderer::state::scoped renderer_state_;
 	music_handler music_;
 	sge::scoped_ptr<
 		draw::scene
