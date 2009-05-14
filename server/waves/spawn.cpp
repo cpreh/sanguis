@@ -5,7 +5,7 @@
 #include "../../random.hpp"
 #include "../../angle_vector.hpp"
 #include "../../resolution.hpp"
-#include <sge/math/constants.hpp>
+#include <sge/math/twopi.hpp>
 #include <sge/math/vector/arithmetic.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>

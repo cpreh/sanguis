@@ -5,8 +5,7 @@
 #include "../client/next_id.hpp"
 #include <sge/text.hpp>
 #include <sge/structure_cast.hpp>
-#include <sge/math/angle.hpp>
-#include <sge/math/constants.hpp>
+#include <sge/math/vector/angle_between.hpp>
 #include <sge/math/vector/is_null.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/console/var_impl.hpp>
@@ -58,7 +57,7 @@ void sanguis::draw::player::speed(
 	model::speed(v);
 	if (!is_null(v))
 		model::orientation(
-			*sge::math::angle_to<funit>(
+			*sge::math::vector::angle_between<funit>(
 				vector2::null(),
 				v),
 			0);

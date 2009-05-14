@@ -3,8 +3,8 @@
 #include <boost/bind.hpp>
 #include <sge/time/second_f.hpp>
 #include <sge/time/resolution.hpp>
-#include <sge/math/constants.hpp>
-#include <sge/math/angle.hpp>
+#include <sge/math/twopi.hpp>
+#include <sge/math/vector/angle_between.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/vector/is_null.hpp>
 #include <sge/math/vector/normalize.hpp>
@@ -106,7 +106,12 @@ void sanguis::draw::particle::generator::generate()
 		break;
 		case align_type::to_center:
 		{
-			rot = *sge::math::angle_to<rotation_type>(point::null(),refpoint);
+			rot = *sge::math::vector::angle_between<
+				rotation_type
+			>(
+				point::null(),
+				refpoint
+			);
 		}
 		break;
 		case align_type::random:

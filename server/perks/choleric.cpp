@@ -5,7 +5,7 @@
 #include <sge/time/second_f.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/random/inclusive_range.hpp>
-#include <sge/math/pi.hpp>
+#include <sge/math/twopi.hpp>
 
 sanguis::server::perks::choleric::choleric()
 :

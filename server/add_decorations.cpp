@@ -2,7 +2,7 @@
 #include "../resolution.hpp"
 #include "../decoration_type.hpp"
 #include "entities/decoration.hpp"
-#include <sge/math/pi.hpp>
+#include <sge/math/twopi.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/random/uniform.hpp>

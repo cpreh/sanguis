@@ -19,8 +19,7 @@
 #include "../../messages/create.hpp"
 #include "../../exception.hpp"
 
-#include <sge/math/constants.hpp>
-#include <sge/math/angle.hpp>
+#include <sge/math/vector/to_angle.hpp>
 #include <sge/math/vector/arithmetic.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/vector/is_null.hpp>
@@ -196,7 +195,7 @@ sanguis::server::states::unpaused::operator()(
 	{
 		player_.property(
 			entities::property_type::movement_speed).current_to_max();
-		player_.direction(*sge::math::angle_to<space_unit>(dir));
+		player_.direction(*sge::math::vector::to_angle<space_unit>(dir));
 	}
 
 	send(message_convert::speed(player_));

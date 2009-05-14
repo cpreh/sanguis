@@ -5,7 +5,7 @@
 #include "../client/id_dont_care.hpp"
 #include "../exception.hpp"
 #include <sge/format.hpp>
-#include <sge/math/compare.hpp>
+#include <sge/math/almost_zero.hpp>
 #include <sge/math/vector/arithmetic.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>

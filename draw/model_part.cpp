@@ -6,8 +6,10 @@
 #include "../log.hpp"
 #include "../exception.hpp"
 #include <sge/console/var_impl.hpp>
-#include <sge/math/angle.hpp>
-#include <sge/math/constants.hpp>
+#include <sge/math/abs_angle_to_rel.hpp>
+#include <sge/math/rel_angle_to_abs.hpp>
+#include <sge/math/is_rel_angle.hpp>
+#include <sge/math/twopi.hpp>
 #include <sge/math/vector/dim.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/math/compare.hpp>

@@ -14,7 +14,7 @@
 #include "../cyclic_iterator_impl.hpp"
 #include "../perk_type.hpp"
 #include <sge/math/clamp.hpp>
-#include <sge/math/angle.hpp>
+#include <sge/math/vector/angle_between.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/time/millisecond.hpp>
@@ -215,7 +215,7 @@ void sanguis::client::logic::update_rotation()
 	sge::optional<
 		messages::types::space_unit
 	> const rotation(
-		sge::math::angle_to<messages::types::space_unit>(
+		sge::math::vector::angle_between<messages::types::space_unit>(
 			player_center,
 			cursor_pos()
 		)

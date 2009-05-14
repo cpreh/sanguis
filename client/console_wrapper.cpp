@@ -1,5 +1,4 @@
 #include "console_wrapper.hpp"
-#include <sge/math/compare.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/input/system.hpp>
 #include <sge/input/key_pair.hpp>
@@ -16,14 +15,17 @@ sanguis::client::console_wrapper::console_wrapper(
 			boost::bind(
 				&console_wrapper::input_callback,
 				this,
-				_1))),
+				_1
+			)
+		)
+	),
 	toggler(toggler)
 {}
 
 void sanguis::client::console_wrapper::input_callback(
 	sge::input::key_pair const &k)
 {
-	if (k.key().code() == toggler && !sge::math::almost_zero(k.value()))
+	if (k.key().code() == toggler && k.value() != 0)
 	{
 		con.active(!con.active());
 		return;

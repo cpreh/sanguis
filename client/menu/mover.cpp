@@ -6,7 +6,7 @@
 #include <sge/gui/widgets/base.hpp>
 #include <sge/gui/dim.hpp>
 #include <sge/sprite/object.hpp>
-#include <sge/math/constants.hpp>
+#include <sge/math/pi.hpp>
 #include <sge/math/vector/is_null.hpp>
 #include <sge/math/vector/normalize.hpp>
 #include <sge/math/vector/length.hpp>

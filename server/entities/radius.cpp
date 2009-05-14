@@ -1,5 +1,5 @@
 #include "radius.hpp"
-#include <sge/math/power.hpp>
+#include <sge/math/quad.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <cmath>
 

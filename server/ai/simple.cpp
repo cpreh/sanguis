@@ -5,8 +5,8 @@
 #include "../collision/collides.hpp"
 #include <sge/time/second.hpp>
 #include <sge/time/resolution.hpp>
+#include <sge/math/vector/angle_between.hpp>
 #include <sge/optional.hpp>
-#include <sge/math/angle.hpp>
 
 sanguis::server::ai::simple::simple(
 	entities::auto_weak_link owner_)
@@ -72,7 +72,7 @@ void sanguis::server::ai::simple::update(
 	}
 
 	sge::optional<space_unit> const angle(
-		sge::math::angle_to<space_unit>(
+		sge::math::vector::angle_between<space_unit>(
 			me.center(),
 			target->center()
 		)

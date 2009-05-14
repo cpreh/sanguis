@@ -7,7 +7,7 @@
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/random/inclusive_range.hpp>
-#include <sge/math/compare.hpp>
+#include <sge/math/almost_zero.hpp>
 #include <sge/text.hpp>
 #include <sge/assert.hpp>
 #include <boost/foreach.hpp>

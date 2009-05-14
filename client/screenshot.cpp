@@ -3,7 +3,6 @@
 #include "log.hpp"
 #include <sge/renderer/screenshot.hpp>
 #include <sge/filesystem/path.hpp>
-#include <sge/math/compare.hpp>
 #include <sge/input/key_code.hpp>
 #include <sge/input/key_pair.hpp>
 #include <sge/input/system.hpp>
@@ -14,19 +13,25 @@ sanguis::client::screenshot::screenshot(
 	sge::renderer::device_ptr const _renderer,
 	sge::image::loader_ptr const _loader,
 	sge::input::system_ptr const is)
-: make_screenshot(
+:
+	make_screenshot(
 		boost::bind(
 			&sge::renderer::screenshot,
 			_renderer,
 			_loader,
-			_1)),
-  active_(false),
+			_1
+		)
+	),
+	active_(false),
 	ic(
 		is->register_callback(
 			boost::bind(
 				&screenshot::input_callback,
 				this,
-				_1)))
+				_1
+			)
+		)
+	)
 {
 }
 
@@ -40,8 +45,10 @@ void sanguis::client::screenshot::process()
 	
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1 << SGE_TEXT("writing screenshot: ")
-								 << p);
+		sge::log::_1
+			<< SGE_TEXT("writing screenshot: ")
+			<< p
+	);
 	
 	make_screenshot(p);
 		
@@ -51,7 +58,7 @@ void sanguis::client::screenshot::process()
 void sanguis::client::screenshot::input_callback(
 	sge::input::key_pair const &k)
 {
-	if (sge::math::almost_zero(k.value()))
+	if (k.value() == 0)
 		return;
 
 	if (k.key().code() != sge::input::kc::key_print)
