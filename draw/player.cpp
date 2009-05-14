@@ -4,7 +4,7 @@
 #include "object.hpp"
 #include "../client/next_id.hpp"
 #include <sge/text.hpp>
-#include <sge/structure_cast.hpp>
+#include <sge/math/vector/structure_cast.hpp>
 #include <sge/math/vector/angle_between.hpp>
 #include <sge/math/vector/is_null.hpp>
 #include <sge/math/vector/basic_impl.hpp>
@@ -76,12 +76,12 @@ void sanguis::draw::player::update(
 
 	vector2 const
 		leg_center(
-			sge::structure_cast<
+			sge::math::vector::structure_cast<
 				vector2
 			>(
 				player_leg_center)),
 		body_center(
-			sge::structure_cast<
+			sge::math::vector::structure_cast<
 				vector2
 			>(
 				player_body_center));
@@ -96,13 +96,13 @@ void sanguis::draw::player::update(
 		sprite_rotation);
 
 	vector2 const
-		rot_abs = sge::structure_cast<
+		rot_abs = sge::math::vector::structure_cast<
 			vector2
 		>(
 			at(bottom).pos())+new_rotation,
 		top_pos = rot_abs - body_center;
 
-	at(top).pos() = sge::structure_cast<
+	at(top).pos() = sge::math::vector::structure_cast<
 		sge::sprite::point
 	>(
 		top_pos);

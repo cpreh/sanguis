@@ -7,7 +7,6 @@
 #include <sge/gui/layouts/vertical.hpp>
 #include <sge/gui/make_image.hpp>
 #include <sge/make_shared_ptr.hpp>
-#include <sge/structure_cast.hpp>
 #include <sge/text.hpp>
 
 sanguis::client::menu::menus::connect::connect(
@@ -22,10 +21,6 @@ sanguis::client::menu::menus::connect::connect(
 			.pos(
 				sge::gui::point::null())
 			.size(
-			/*
-				sge::structure_cast<sge::gui::dim>(
-					resolution()))
-					*/
 				sge::gui::dim(1023,768))
 			.activation(
 				sge::gui::activation_state::inactive)

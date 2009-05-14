@@ -2,7 +2,7 @@
 #include "../environment.hpp"
 #include "../entities/entity.hpp"
 #include <sge/collision/objects/circle.hpp>
-#include <sge/math/circle_impl.hpp>
+#include <sge/math/circle/basic_impl.hpp>
 #include <sge/math/vector/construct.hpp>
 #include <boost/logic/tribool.hpp>
 

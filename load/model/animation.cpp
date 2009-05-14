@@ -15,8 +15,9 @@
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/math/dim/output.hpp>
-#include <sge/math/rect_impl.hpp>
-#include <sge/math/rect_util.hpp>
+#include <sge/math/rect/basic_impl.hpp>
+#include <sge/math/rect/output.hpp>
+#include <sge/math/rect/contains.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <sge/log/headers.hpp>
@@ -203,7 +204,7 @@ sanguis::load::model::animation::animation(
 		);
 
 		if(
-			!sge::math::contains(
+			!contains(
 				area,
 				cur_area
 			)

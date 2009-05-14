@@ -26,7 +26,6 @@
 #include <sge/iconv.hpp>
 #include <sge/utf8/convert.hpp>
 #include <sge/make_shared_ptr.hpp>
-#include <sge/structure_cast.hpp>
 #include <sge/lexical_cast.hpp>
 #include <boost/ref.hpp>
 #include <boost/bind.hpp>

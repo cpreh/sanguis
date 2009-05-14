@@ -2,7 +2,8 @@
 #include "z_ordering.hpp"
 #include <sge/sprite/intrusive/parameters.hpp>
 #include <sge/math/point_rotate.hpp>
-#include <sge/structure_cast.hpp>
+#include <sge/math/vector/structure_cast.hpp>
+#include <sge/math/dim/structure_cast.hpp>
 
 sanguis::draw::particle::object::object(
 	particle_type::type const t,
@@ -25,7 +26,7 @@ sanguis::draw::particle::object::object(
 			z_ordering(t)
 		)
 		.size(
-			sge::structure_cast<
+			sge::math::dim::structure_cast<
 				sge::sprite::dim
 			>(
 				images.dim()
@@ -58,7 +59,7 @@ bool sanguis::draw::particle::object::update(
 	sprite_.z() = d+base::depth();
 	sprite_.rotation(base::rot()+r);
 	sprite_.center( 
-		sge::structure_cast<
+		sge::math::vector::structure_cast<
 			sge::sprite::point
 		>(
 			sge::math::point_rotate(

@@ -22,7 +22,8 @@
 #include <sge/iconv.hpp>
 #include <sge/text.hpp>
 #include <sge/format.hpp>
-#include <sge/structure_cast.hpp>
+#include <sge/math/dim/structure_cast.hpp>
+#include <sge/math/vector/structure_cast.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/caps.hpp>
@@ -405,7 +406,7 @@ void sanguis::draw::scene::operator()(
 	entity(
 		m.get<messages::roles::entity_id>()
 	).dim(
-		sge::structure_cast<
+		sge::math::dim::structure_cast<
 			sge::sprite::dim
 		>(
 			m.get<messages::dim>()
@@ -429,7 +430,7 @@ void sanguis::draw::scene::operator()(
 	entity(
 		m.get<messages::roles::entity_id>()
 	).speed(
-		sge::structure_cast<
+		sge::math::vector::structure_cast<
 			vector2
 		>(
 			virtual_to_screen(

@@ -15,13 +15,13 @@
 #include "../perk_type.hpp"
 #include <sge/math/clamp.hpp>
 #include <sge/math/vector/angle_between.hpp>
+#include <sge/math/vector/structure_cast.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/time/millisecond.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/gui/unit.hpp>
-#include <sge/structure_cast.hpp>
 #include <sge/text.hpp>
 #include <sge/optional.hpp>
 #include <boost/bind.hpp>
@@ -109,7 +109,7 @@ void sanguis::client::logic::move(
 	messages::move const &m)
 {
 	if(m.get<messages::roles::entity_id>() == player_id_)
-		player_center = sge::structure_cast<
+		player_center = sge::math::vector::structure_cast<
 			sge::sprite::point
 		>(
 			m.get<messages::pos>()
@@ -169,7 +169,7 @@ void sanguis::client::logic::update_direction()
 		messages::create(
 			messages::player_direction(
 				player_id_,
-				sge::structure_cast<
+				sge::math::vector::structure_cast<
 					messages::types::vector2
 				>(
 					direction
@@ -355,6 +355,6 @@ sge::sprite::point const
 sanguis::client::logic::cursor_pos() const
 {
 	return 
-		sge::structure_cast<sge::sprite::point>(
+		sge::math::vector::structure_cast<sge::sprite::point>(
 			cursor_->pos());
 }

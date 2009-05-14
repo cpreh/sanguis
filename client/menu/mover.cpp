@@ -11,9 +11,10 @@
 #include <sge/math/vector/normalize.hpp>
 #include <sge/math/vector/length.hpp>
 #include <sge/math/vector/arithmetic.hpp>
+#include <sge/math/vector/structure_cast.hpp>
 #include <sge/math/dim/arithmetic.hpp>
+#include <sge/math/dim/structure_cast.hpp>
 #include <sge/renderer/color.hpp>
-#include <sge/structure_cast.hpp>
 #include <sge/assert.hpp>
 #include <sge/cerr.hpp>
 #include <boost/tr1/random.hpp>
@@ -33,13 +34,18 @@ sanguis::client::menu::mover::float_type const
 sge::gui::point const center(
 	sge::gui::dim const &d)
 {
-	return sge::structure_cast<sge::gui::point>(
-		sge::structure_cast<sge::gui::dim>(
-				sanguis::resolution())/
-			static_cast<sge::gui::unit>(2)-
-			sge::structure_cast<sge::gui::dim>(
-				d)/
-			static_cast<sge::gui::unit>(2));
+	return sge::math::dim::structure_cast<
+		sge::gui::point
+	>(
+		sge::math::dim::structure_cast<
+			sge::gui::dim
+		>(
+			sanguis::resolution()
+		)/
+		static_cast<sge::gui::unit>(2) -
+		d /
+		static_cast<sge::gui::unit>(2)
+	);
 }
 
 sge::gui::point const center_widget(
@@ -52,18 +58,19 @@ sge::gui::point const center_widget(
 sanguis::client::menu::mover::mover(
 	sge::gui::manager &_man,
 	sge::gui::widgets::base &_current)
-	: man_(_man),
-	  current_(&_current),
-		current_entry_(),
-		to_move_(),
-		speed_(
-			static_cast<float_type>(500)),
-		push_distance_(
-			static_cast<float_type>(200)),
-		threshold_(
-			static_cast<float_type>(50)),
-		remaining_time_(
-			static_cast<float_type>(0))
+:
+	man_(_man),
+	current_(&_current),
+	current_entry_(),
+	to_move_(),
+	speed_(
+		static_cast<float_type>(500)),
+	push_distance_(
+		static_cast<float_type>(200)),
+	threshold_(
+		static_cast<float_type>(50)),
+	remaining_time_(
+		static_cast<float_type>(0))
 {
 	SGE_ASSERT(!_current.has_parent());
 	SGE_ASSERT(_current.activation() == sge::gui::activation_state::inactive);
@@ -81,7 +88,7 @@ sanguis::client::menu::mover::mover(
 			*current_->size_hint()));
 
 	current_entry_.current = 
-		sge::structure_cast<float_vector>(
+		sge::math::vector::structure_cast<float_vector>(
 			current_->relative_pos());
 
 	current_entry_.target = current_entry_.current;
@@ -129,10 +136,10 @@ void sanguis::client::menu::mover::reset(
 	current_ = &w;
 	current_entry_.current = random_pos();
 	current_->pos_hint(
-		sge::structure_cast<sge::gui::point>(
+		sge::math::vector::structure_cast<sge::gui::point>(
 			current_entry_.current));
 	current_entry_.target = 
-		sge::structure_cast<float_vector>(
+		sge::math::vector::structure_cast<float_vector>(
 			center_widget(
 				w));
 	current_->activation(
@@ -163,7 +170,7 @@ void sanguis::client::menu::mover::update_position(
 			sge::math::vector::length(projected));
 
 	w.pos_hint(
-		sge::structure_cast<sge::gui::point>(
+		sge::math::vector::structure_cast<sge::gui::point>(
 			e.current));
 }
 
@@ -180,7 +187,7 @@ void sanguis::client::menu::mover::update_visibility(
 			static_cast<float_type>(
 				threshold_),
 			sge::math::vector::length(
-				sge::structure_cast<float_vector>(
+				sge::math::vector::structure_cast<float_vector>(
 					diff)))/
 			static_cast<float_type>(threshold_);
 

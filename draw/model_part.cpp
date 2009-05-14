@@ -11,11 +11,11 @@
 #include <sge/math/is_rel_angle.hpp>
 #include <sge/math/twopi.hpp>
 #include <sge/math/vector/dim.hpp>
+#include <sge/math/dim/structure_cast.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/math/compare.hpp>
 #include <sge/sprite/object.hpp>
 #include <sge/time/time.hpp>
-#include <sge/structure_cast.hpp>
 #include <sge/text.hpp>
 #include <boost/bind.hpp>
 #include <algorithm>
@@ -44,7 +44,7 @@ sanguis::draw::model_part::model_part(
 	animation_(),
 	ended(false)
 {
-	ref.size() = sge::structure_cast<
+	ref.size() = sge::math::dim::structure_cast<
 		sge::sprite::dim
 	>(
 		info

@@ -18,8 +18,8 @@
 #include "../media_path.hpp"
 #include "../animation_type.hpp"
 #include "../from_particle_type.hpp"
+#include <sge/math/vector/structure_cast.hpp>
 #include <sge/minmax_pair_impl.hpp>
-#include <sge/structure_cast.hpp>
 #include <sge/audio/sound.hpp>
 #include <boost/bind.hpp>
 #include <boost/assign/list_of.hpp>
@@ -161,7 +161,7 @@ void sanguis::draw::explosion::update(
 {
 	ended = particles.update(
 		delta,
-		sge::structure_cast<
+		sge::math::vector::structure_cast<
 			particle::point
 		>(pos_),
 		//particle::point::null(),

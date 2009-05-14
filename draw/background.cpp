@@ -14,8 +14,8 @@
 #include <sge/renderer/filter/linear.hpp>
 #include <sge/texture/part.hpp>
 #include <sge/texture/part_raw.hpp>
+#include <sge/math/dim/structure_cast.hpp>
 #include <sge/make_shared_ptr.hpp>
-#include <sge/structure_cast.hpp>
 
 sanguis::draw::background::background(
 	draw::environment const &env)
@@ -25,7 +25,7 @@ sanguis::draw::background::background(
 		client::next_id()),
 	tex(
 		env.system().renderer()->create_texture(
-			sge::structure_cast<
+			sge::math::dim::structure_cast<
 				sge::renderer::dim_type
 			>(
 				resolution()),

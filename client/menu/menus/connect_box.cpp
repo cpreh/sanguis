@@ -7,7 +7,6 @@
 #include <sge/gui/widgets/parameters.hpp>
 #include <sge/gui/layouts/vertical.hpp>
 #include <sge/gui/layouts/horizontal.hpp>
-#include <sge/structure_cast.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <sge/text.hpp>
 
@@ -20,11 +19,6 @@ sanguis::client::menu::menus::connect_box::connect_box(
 		sge::gui::widgets::parameters()
 			.pos(
 				sge::gui::point::null())
-			/*
-			.size(
-				sge::structure_cast<sge::gui::dim>(
-					resolution()))
-					*/
 			.activation(
 				sge::gui::activation_state::inactive)
 			.layout(

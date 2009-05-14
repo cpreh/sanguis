@@ -9,7 +9,7 @@
 #include <sge/math/vector/is_null.hpp>
 #include <sge/math/vector/normalize.hpp>
 #include <sge/math/vector/length.hpp>
-#include <sge/structure_cast.hpp>
+#include <sge/math/vector/structure_cast.hpp>
 
 namespace
 {
@@ -58,7 +58,7 @@ void sanguis::draw::bullet::update(
 			tail_length,
 			static_cast<funit>(at(tail).size().h())),
 		pos(
-			sge::structure_cast<
+			sge::math::vector::structure_cast<
 				vector2
 			>(
 				center())),
@@ -68,7 +68,7 @@ void sanguis::draw::bullet::update(
 			: pos - normalize(speed())*static_cast<funit>(0.5) * length(newsize));
 
 	at(tail).center(
-		sge::structure_cast<
+		sge::math::vector::structure_cast<
 			sge::sprite::point
 		>(
 			newpos));

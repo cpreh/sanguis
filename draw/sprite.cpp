@@ -4,7 +4,7 @@
 #include <sge/sprite/intrusive/parameters.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/vector/arithmetic.hpp>
-#include <sge/structure_cast.hpp>
+#include <sge/math/vector/structure_cast.hpp>
 #include <boost/foreach.hpp>
 #include <boost/none.hpp>
 
@@ -49,7 +49,7 @@ void sanguis::draw::sprite::update(
 {
 	pos_ += time * speed();
 	update_pos(
-		sge::structure_cast<
+		sge::math::vector::structure_cast<
 			sge::sprite::point
 		>(
 			pos_));
@@ -120,7 +120,7 @@ void sanguis::draw::sprite::speed(
 void sanguis::draw::sprite::pos(
 	sge::sprite::point const &p)
 {
-	pos_ = sge::structure_cast<
+	pos_ = sge::math::vector::structure_cast<
 		vector2
 	>(
 		p);

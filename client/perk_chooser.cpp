@@ -13,12 +13,12 @@
 #include <sge/filesystem/path.hpp>
 #include <sge/math/dim/arithmetic.hpp>
 #include <sge/math/dim/output.hpp>
+#include <sge/math/dim/structure_cast.hpp>
 #include <sge/math/vector/arithmetic.hpp>
 #include <sge/math/vector/output.hpp>
 #include <sge/assert.hpp>
 #include <sge/text.hpp>
 #include <sge/make_shared_ptr.hpp>
-#include <sge/structure_cast.hpp>
 #include <sge/lexical_cast.hpp>
 #include <boost/foreach.hpp>
 #include <boost/bind.hpp>
@@ -47,10 +47,10 @@ sge::gui::dim const dialog_size()
 sge::gui::point const dialog_pos()
 {
 	return 
-		sge::structure_cast<sge::gui::point>(
+		sge::math::dim::structure_cast<sge::gui::point>(
 			sanguis::resolution())/
 		static_cast<sge::gui::unit>(2)-
-		sge::structure_cast<sge::gui::point>(
+		sge::math::dim::structure_cast<sge::gui::point>(
 			dialog_size())/
 		static_cast<sge::gui::unit>(2);
 }

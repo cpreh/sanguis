@@ -1,6 +1,6 @@
 #include "bounding_circle.hpp"
 #include "../entities/entity.hpp"
-#include <sge/math/circle_impl.hpp>
+#include <sge/math/circle/basic_impl.hpp>
 
 sanguis::server::circle_type const
 sanguis::server::collision::bounding_circle(
@@ -8,5 +8,6 @@ sanguis::server::collision::bounding_circle(
 {
 	return circle_type(
 		e.center(),
-		e.radius() * static_cast<space_unit>(0.7));
+		e.radius() * static_cast<space_unit>(0.7)
+	);
 }
