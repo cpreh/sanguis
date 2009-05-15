@@ -53,25 +53,25 @@ sanguis::server::waves::generator::generator()
 	)(
 		static_cast<time_type>(80),
 		static_cast<time_type>(1),
-		8,
-		1,
+		6,
+		2,
 		enemy_type::wolf_white
 	)(
 		static_cast<time_type>(120),
 		static_cast<time_type>(1),
-		8,
-		1,
+		6,
+		2,
 		enemy_type::wolf_black
 	)(
 		static_cast<time_type>(160),
 		static_cast<time_type>(0),
-		40,
-		1,
+		20,
+		10,
 		enemy_type::maggot
 	)(
 		static_cast<time_type>(180),
 		static_cast<time_type>(1),
-		2,
+		3,
 		1,
 		enemy_type::skeleton
 	);
