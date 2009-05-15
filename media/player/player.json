@@ -1,8 +1,8 @@
 {"header":{"cell_dimensions":[64,64],"delay":40},"parts":[{"top":{"weapon_categories":[
-{"none":{"animations":[{"none":{"range":[0,1]}},{"walking":{"range":[1,21]}}],"texture":"none.png"}},
+{"none":{"animations":[{"dying":{"range":[0,20]}},{"none":{"range":[20,21]}},{"walking":{"range":[21,41]}}],"texture":"none.png"}},
 {"pistol":{"animations":[{"attacking":{"range":[0,10],"cast_point":0}},{"none":{"range":[10,11]}},{"walking":{"range":[12,32]}},{"reloading":{"range":[11,12]}}],"texture":"pistol.png"}},
 {"shotgun":{"animations":[{"attacking":{"range":[0,20],"cast_point":0}},{"none":{"range":[20,21]}},{"walking":{"range":[21,41]}}],"texture":"shotgun.png"}},
 {"dual_pistols":{"animations":[{"attacking":{"range":[0,9],"cast_point":0}},{"none":{"range":[9,10]}},{"walking":{"range":[10,30]}}],"texture":"dual_pistols.png"}},
 {"rocket_launcher":{"animations":[{"attacking":{"range":[0,20],"cast_point":0}},{"none":{"range":[62,63]}},{"reloading":{"range":[20,61]}},{"walking":{"range":[61,81]}}],"texture":"rocket_launcher.png"}}
 ]}},{"bottom":{"weapon_categories":[
-{"none":{"animations":[{"none":{"range":[0,1]}},{"walking":{"range":[1,22]}}],"texture":"bottom.png"}}]}}]}
+{"none":{"animations":[{"dying":{"range":[0,11]}},{"none":{"range":[11,12]}},{"walking":{"range":[12,32]}}],"texture":"bottom.png"}}]}}]}
