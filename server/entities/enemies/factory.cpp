@@ -132,9 +132,9 @@ sanguis::server::entities::enemies::create(
 			 direction,
 			 boost::assign::map_list_of
 				(entities::property_type::health,
-				entities::property(static_cast<space_unit>(300)))
+				entities::property(static_cast<space_unit>(500)))
 				(entities::property_type::movement_speed,
-				entities::property(static_cast<space_unit>(40))),
+				entities::property(static_cast<space_unit>(50))),
 			ai::auto_ptr(
 				new ai::simple()),
 			weapons::auto_ptr(
@@ -145,7 +145,7 @@ sanguis::server::entities::enemies::create(
 					static_cast<space_unit>(10) // damage
 				)),
 			 static_cast<probability_type>(0.75),
-			 static_cast<exp_type>(300)
+			 static_cast<exp_type>(400)
 			 ));
 	case enemy_type::maggot:
 		return auto_ptr(
