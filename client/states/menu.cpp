@@ -200,7 +200,9 @@ void sanguis::client::states::menu::connect(
 	try
 	{
 		context<machine>().connect(
-			host,
+			sge::iconv(
+				host
+			),
 			sge::lexical_cast<
 				net::port_type
 			>(

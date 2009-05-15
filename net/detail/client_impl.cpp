@@ -3,6 +3,8 @@
 #include "io_service_wrapper.hpp"
 #include "../exception.hpp"
 #include "../log.hpp"
+#undef max
+// asio brings in window.h's max macro :(
 #include <sge/container/raw_vector_impl.hpp>
 #include <sge/text.hpp>
 #include <sge/iconv.hpp>
