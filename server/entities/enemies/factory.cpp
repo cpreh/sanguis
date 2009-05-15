@@ -34,13 +34,13 @@ sanguis::server::entities::enemies::create(
 					(
 						entities::property_type::health,
 						entities::property(
-							static_cast<space_unit>(3)
+							static_cast<space_unit>(9)
 						)
 					)
 					(
 						entities::property_type::movement_speed,
 						entities::property(
-							static_cast<space_unit>(20)
+							static_cast<space_unit>(25)
 						)
 					),
 				ai::auto_ptr(
@@ -58,7 +58,7 @@ sanguis::server::entities::enemies::create(
 					)
 				),
 				static_cast<probability_type>(0.25),
-				static_cast<exp_type>(20)
+				static_cast<exp_type>(10)
 			)
 		);
 	case enemy_type::zombie01:
@@ -82,12 +82,12 @@ sanguis::server::entities::enemies::create(
 				weapons::auto_ptr(
 					new weapons::melee(
 						env,
-						static_cast<space_unit>(100), // range
+						static_cast<space_unit>(75), // range
 						static_cast<time_type>(2), // cd
 						static_cast<space_unit>(2) // damage
 					)),
 				static_cast<probability_type>(0.25),
-				static_cast<exp_type>(10)
+				static_cast<exp_type>(5)
 				));
 	case enemy_type::wolf_black:
 	case enemy_type::wolf_brown:
@@ -104,20 +104,20 @@ sanguis::server::entities::enemies::create(
 				direction,
 				boost::assign::map_list_of
 					(entities::property_type::health,
-					 entities::property(static_cast<space_unit>(1)))
+					 entities::property(static_cast<space_unit>(3)))
 					(entities::property_type::movement_speed,
-					 entities::property(static_cast<space_unit>(80))),
+					 entities::property(static_cast<space_unit>(85))),
 				ai::auto_ptr(
 					new ai::simple()),
 				weapons::auto_ptr(
 					new weapons::melee(
 						env,
-						static_cast<space_unit>(100), // range
+						static_cast<space_unit>(75), // range
 						static_cast<time_type>(1), // cd
 						static_cast<space_unit>(4) // damage
 					)),
 				static_cast<probability_type>(0.25),
-				static_cast<exp_type>(5)
+				static_cast<exp_type>(10)
 			 ));
 	case enemy_type::skeleton:
 		return auto_ptr(
@@ -145,7 +145,7 @@ sanguis::server::entities::enemies::create(
 					static_cast<space_unit>(10) // damage
 				)),
 			 static_cast<probability_type>(0.75),
-			 static_cast<exp_type>(400)
+			 static_cast<exp_type>(300)
 			 ));
 	case enemy_type::maggot:
 		return auto_ptr(
@@ -168,7 +168,7 @@ sanguis::server::entities::enemies::create(
 			weapons::auto_ptr(
 				new weapons::melee(
 				env,
-				static_cast<space_unit>(100), // range
+				static_cast<space_unit>(75), // range
 				static_cast<time_type>(1), // cd
 				static_cast<space_unit>(0.5) // damage
 				)),
@@ -188,20 +188,20 @@ sanguis::server::entities::enemies::create(
 				direction,
 				boost::assign::map_list_of
 					(entities::property_type::health,
-					 entities::property(static_cast<space_unit>(10)))
+					 entities::property(static_cast<space_unit>(12)))
 					(entities::property_type::movement_speed,
-					 entities::property(static_cast<space_unit>(70))),
+					 entities::property(static_cast<space_unit>(75))),
 				ai::auto_ptr(
 					new ai::simple()),
 				weapons::auto_ptr(
 					new weapons::melee(
 						env,
-						static_cast<space_unit>(120), // range
+						static_cast<space_unit>(75), // range
 						static_cast<time_type>(2), // cd
 						static_cast<space_unit>(5) // damage
 					)),
 				static_cast<probability_type>(0.5),
-				static_cast<exp_type>(15)
+				static_cast<exp_type>(12)
 				));
 	default:
 		throw exception(

@@ -61,7 +61,7 @@ sanguis::server::entities::pickups::pickup::pickup(
 	diff_clock_(),
 	lifetime(
 		sge::time::second(
-			60
+			30
 		),
 		sge::time::activation_state::active,
 		diff_clock_.callback()
