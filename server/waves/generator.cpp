@@ -9,9 +9,9 @@ sanguis::server::waves::generator::generator()
 	// TODO: somehow put this in a configuration file!
 	boost::assign::ptr_push_back<waves::infinite>(waves)
 	(
-		static_cast<time_type>(60),
-		static_cast<time_type>(4),
-		30,
+		static_cast<time_type>(0),
+		static_cast<time_type>(2),
+		60,
 		1,
 		enemy_type::spider
 	/*)(
@@ -26,13 +26,13 @@ sanguis::server::waves::generator::generator()
 		20,
 		1,
 		enemy_type::zombie01
-	)(
+	)/*(
 		static_cast<time_type>(0),
 		static_cast<time_type>(2),
 		30,
 		1,
 		enemy_type::zombie00
-	)(
+	)*/(
 		static_cast<time_type>(90),
 		static_cast<time_type>(2),
 		30,
@@ -45,6 +45,12 @@ sanguis::server::waves::generator::generator()
 		1,
 		enemy_type::zombie00
 	)(
+		static_cast<time_type>(0),
+		static_cast<time_type>(2),
+		1,
+		1,
+		enemy_type::wolf_brown
+	)(
 		static_cast<time_type>(45),
 		static_cast<time_type>(1),
 		8,
@@ -53,13 +59,13 @@ sanguis::server::waves::generator::generator()
 	)(
 		static_cast<time_type>(80),
 		static_cast<time_type>(1),
-		8,
+		12,
 		1,
 		enemy_type::wolf_white
 	)(
 		static_cast<time_type>(120),
 		static_cast<time_type>(1),
-		8,
+		16,
 		1,
 		enemy_type::wolf_black
 	)(

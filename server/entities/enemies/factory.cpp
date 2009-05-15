@@ -82,7 +82,7 @@ sanguis::server::entities::enemies::create(
 				weapons::auto_ptr(
 					new weapons::melee(
 						env,
-						static_cast<space_unit>(100), // range
+						static_cast<space_unit>(60), // range
 						static_cast<time_type>(2), // cd
 						static_cast<space_unit>(2) // damage
 					)),
@@ -112,7 +112,7 @@ sanguis::server::entities::enemies::create(
 				weapons::auto_ptr(
 					new weapons::melee(
 						env,
-						static_cast<space_unit>(100), // range
+						static_cast<space_unit>(60), // range
 						static_cast<time_type>(1), // cd
 						static_cast<space_unit>(4) // damage
 					)),
@@ -140,7 +140,7 @@ sanguis::server::entities::enemies::create(
 			weapons::auto_ptr(
 				new weapons::melee(
 					env,
-					static_cast<space_unit>(100), // range
+					static_cast<space_unit>(60), // range
 					static_cast<time_type>(1), // cd
 					static_cast<space_unit>(10) // damage
 				)),
@@ -168,7 +168,7 @@ sanguis::server::entities::enemies::create(
 			weapons::auto_ptr(
 				new weapons::melee(
 				env,
-				static_cast<space_unit>(100), // range
+				static_cast<space_unit>(40), // range
 				static_cast<time_type>(1), // cd
 				static_cast<space_unit>(0.5) // damage
 				)),
@@ -196,7 +196,7 @@ sanguis::server::entities::enemies::create(
 				weapons::auto_ptr(
 					new weapons::melee(
 						env,
-						static_cast<space_unit>(120), // range
+						static_cast<space_unit>(60), // range
 						static_cast<time_type>(2), // cd
 						static_cast<space_unit>(5) // damage
 					)),
