@@ -76,8 +76,8 @@ sanguis::server::weapons::create(
 				static_cast<time_type>(2), // cooldown
 				static_cast<space_unit>(20), // damage
 				static_cast<space_unit>(180), // radius
-				static_cast<time_type>(0.5), // cast point
-				static_cast<time_type>(1) // reload time
+				static_cast<time_type>(0.1), // cast point
+				static_cast<time_type>(0.5) // reload time
 			)
 		);
 	default:
