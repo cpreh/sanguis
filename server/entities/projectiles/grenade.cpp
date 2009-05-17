@@ -37,7 +37,7 @@ sanguis::server::entities::projectiles::grenade::grenade(
 			env.load()().models(),
 			SGE_TEXT("grenade")
 		),
-		static_cast<time_type>(3),
+		static_cast<time_type>(2),
 		indeterminate::no,
 		aoe_
 	),
@@ -74,7 +74,7 @@ sanguis::server::entities::projectiles::grenade::update(
 
 	if(slowdown_time.update_b())
 		speed.current(
-			speed.current() * static_cast<space_unit>(0.9)
+			speed.current() * static_cast<space_unit>(0.75)
 		);
 	
 	projectile::update(
