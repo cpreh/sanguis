@@ -1,6 +1,7 @@
 #include "projectile.hpp"
 #include "../bullet.hpp"
 #include "../rocket.hpp"
+#include "../grenade.hpp"
 #include "../../exception.hpp"
 #include <sge/text.hpp>
 
@@ -23,6 +24,14 @@ sanguis::draw::factory::projectile(
 				env,
 				id,
 				SGE_TEXT("rocket")));
+	case projectile_type::grenade:
+		return entity_auto_ptr(
+			new grenade(
+				env,
+				id,
+				SGE_TEXT("grenade")
+			)
+		);
 	default:
 		throw exception(
 			SGE_TEXT("draw::factory::projectile: missing loading code!"));

@@ -3,6 +3,7 @@
 #include "shotgun.hpp"
 #include "rocket_launcher.hpp"
 #include "weapon.hpp"
+#include "grenade.hpp"
 #include "../../exception.hpp"
 #include <sge/text.hpp>
 
@@ -65,6 +66,18 @@ sanguis::server::weapons::create(
 				1, // magazine size
 				static_cast<time_type>(1.6) // reload time
 				
+			)
+		);
+	case weapon_type::grenade:
+		return auto_ptr(
+			new grenade(
+				env,
+				type,
+				static_cast<time_type>(2), // cooldown
+				static_cast<space_unit>(20), // damage
+				static_cast<space_unit>(180), // radius
+				static_cast<time_type>(0.5), // cast point
+				static_cast<time_type>(1) // reload time
 			)
 		);
 	default:

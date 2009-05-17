@@ -35,6 +35,9 @@ sanguis::server::weapons::weapon::update(
 	time_type const tm,
 	entities::entity_with_weapon &owner)
 {
+	if(!usable())
+		return;
+
 	process_event(
 		events::poll(
 			tm,
@@ -48,6 +51,9 @@ sanguis::server::weapons::weapon::attack(
 	entities::entity_with_weapon &from,
 	pos_type const &to)
 {
+	if(!usable())
+		return;
+	
 	process_event(
 		events::shoot(
 			from,
@@ -57,13 +63,16 @@ sanguis::server::weapons::weapon::attack(
 }
 
 void
-sanguis::server::weapons::weapon::reset()
+sanguis::server::weapons::weapon::repickup()
 {
 	reset_magazine();
 
 	process_event(
 		events::reset()
 	);
+
+	if(magazines != unlimited_magazine)
+		++magazines;
 }
 
 sanguis::server::weapons::magazine_type
@@ -109,6 +118,7 @@ sanguis::server::weapons::weapon::weapon(
 	weapon_type::type const type_,
 	space_unit const range_,
 	magazine_type const magazine_size_,
+	magazine_type const magazines,
 	time_type const base_cooldown,
 	time_type const ncast_point,
 	time_type const nreload_time)
@@ -117,6 +127,7 @@ sanguis::server::weapons::weapon::weapon(
 	type_(type_),
 	range_(range_),
 	magazine_used(0),
+	magazines(magazines),
 	magazine_size_(magazine_size_),
 	cast_point_(
 		sge::time::second_f(
@@ -187,6 +198,12 @@ sanguis::server::weapons::weapon::irs() const
 	return irs_;
 }
 
+bool
+sanguis::server::weapons::weapon::usable() const
+{
+	return magazines > 0;
+}
+
 void
 sanguis::server::weapons::weapon::reset_magazine()
 {
@@ -204,6 +221,13 @@ bool
 sanguis::server::weapons::weapon::magazine_empty() const
 {
 	return magazine_used == magazine_size();
+}
+
+void
+sanguis::server::weapons::weapon::magazine_exhausted()
+{
+	if(magazines != unlimited_magazine)
+		--magazines;
 }
 
 sge::time::resolution const

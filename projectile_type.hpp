@@ -9,7 +9,8 @@ enum type {
 	aoe_damage,
 	melee,
 	rocket,
-	simple_bullet
+	simple_bullet,
+	grenade
 };
 }
 

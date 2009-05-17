@@ -137,6 +137,7 @@ to_entity_type(
 	switch(p) {
 	case sanguis::projectile_type::rocket:
 	case sanguis::projectile_type::simple_bullet:
+	case sanguis::projectile_type::grenade:
 		return sanguis::entity_type::projectile;
 	case sanguis::projectile_type::aoe_damage:
 	case sanguis::projectile_type::melee:

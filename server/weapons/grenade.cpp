@@ -1,42 +1,44 @@
-#include "pistol.hpp"
+#include "grenade.hpp"
 #include "delayed_attack.hpp"
-#include "../damage_types.hpp"
 #include "../entities/entity.hpp"
-#include "../entities/projectiles/simple_bullet.hpp"
+#include "../entities/projectiles/grenade.hpp"
 
-sanguis::server::weapons::pistol::pistol(
+sanguis::server::weapons::grenade::grenade(
 	server::environment const &env,
 	weapon_type::type const type_,
 	time_type const base_cooldown,
 	space_unit const damage,
+	space_unit const radius,
 	time_type const cast_point,
-	unsigned const magazine_size,
 	time_type const reload_time)
 :
 	weapon(
 		env,
 		type_,
 		1000, // FIXME
-		magazine_size,
-		unlimited_magazine,
+		1, // magazine size
+		1, // number of magazine at start
 		base_cooldown,
 		cast_point,
 		reload_time
 	),
-	damage(damage)
+	damage(damage),
+	radius(radius)
 {}
 
-void sanguis::server::weapons::pistol::do_attack(
+void
+sanguis::server::weapons::grenade::do_attack(
 	delayed_attack const &a)
 {
 	insert(
 		entities::auto_ptr(
-			new entities::projectiles::simple_bullet(
+			new entities::projectiles::grenade(
 				environment(),
 				a.spawn_point(),
 				a.angle(),
 				a.team(),
-				damage
+				damage,
+				radius
 			)
 		)
 	);

@@ -50,7 +50,7 @@ public:
 		time_type,
 		entities::entity_with_weapon &owner);
 
-	void reset();
+	void repickup();
 
 	magazine_type	
 	magazine_size() const;
@@ -75,6 +75,7 @@ protected:
 		weapon_type::type,
 		space_unit range,
 		magazine_type magazine_size,
+		magazine_type magazines_,
 		time_type base_cooldown,
 		time_type cast_point,
 		time_type reload_time);
@@ -100,6 +101,8 @@ protected:
 
 	time_type
 	irs() const;
+
+	bool usable() const;
 private:
 	friend class states::ready;
 	friend class states::reloading;
@@ -114,6 +117,9 @@ private:
 
 	bool
 	magazine_empty() const;
+
+	void
+	magazine_exhausted();
 
 	sge::time::resolution const
 	cast_point() const;
@@ -142,7 +148,9 @@ private:
 	server::environment const env_;
 	weapon_type::type const type_;
 	space_unit const range_;
-	magazine_type magazine_used;
+	magazine_type
+		magazine_used,
+		magazines;
 	magazine_type const magazine_size_;
 	sge::time::resolution const
 		cast_point_,

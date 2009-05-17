@@ -1,0 +1,39 @@
+#include "grenade.hpp"
+#include "z_ordering.hpp"
+#include "explosion.hpp"
+#include "environment.hpp"
+#include <sge/optional_impl.hpp>
+#include <sge/make_auto_ptr.hpp>
+
+sanguis::draw::grenade::grenade(
+	draw::environment const &env,
+	entity_id const id,
+	sge::string const &name)
+:
+	model(
+		env,
+		id,
+		name,
+		z_ordering::bullet,
+		false,
+		draw::remove_action::remove
+	)
+{}
+		
+void sanguis::draw::grenade::on_decay()
+{
+	entity_auto_ptr explo(
+		sge::make_auto_ptr<
+			explosion
+		>(
+			environment(),
+			pos()
+		)
+	);
+	
+	environment().insert()(
+		explo
+	);	
+	
+	model::on_decay();
+}

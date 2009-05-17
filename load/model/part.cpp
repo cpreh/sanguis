@@ -32,7 +32,8 @@ weapon_type_array const weapon_types = {
 	SGE_TEXT("pistol"),
 	SGE_TEXT("dual_pistols"),
 	SGE_TEXT("shotgun"),
-	SGE_TEXT("rocket_launcher")
+	SGE_TEXT("rocket_launcher"),
+	SGE_TEXT("grenade")
 } };
 
 sanguis::weapon_type::type

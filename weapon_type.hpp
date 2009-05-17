@@ -13,6 +13,7 @@ enum type {
 	dual_pistol,
 	shotgun,
 	rocket_launcher,
+	grenade,
 	size
 };
 
