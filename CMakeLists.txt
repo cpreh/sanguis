@@ -62,44 +62,17 @@ set_source_files_properties(
 	COMPILE_FLAGS
 	-DMEDIA_PATH="\\\"${media_path}\\\"")
 
-FILE (GLOB files 
-	*.cpp
-	net/*.cpp
-	net/detail/*.cpp
-	client/*.cpp
-	client/menu/*.cpp
-	client/menu/menus/*.cpp
-	client/menu/callbacks/*.cpp
-	client/states/*.cpp
-	client_messages/*.cpp
-	draw/*.cpp
-	draw/factory/*.cpp
-	draw/particle/*.cpp
-	messages/*.cpp
-	messages/bindings/*.cpp
-	messages/serialization/*.cpp
-	load/*.cpp
-	load/model/*.cpp
-	load/particle/*.cpp
-	load/resource/*.cpp
-	server/*.cpp
-	server/ai/*.cpp
-	server/auras/*.cpp
-	server/buffs/*.cpp
-	server/collision/*.cpp
-	server/entities/*.cpp
-	server/entities/enemies/*.cpp
-	server/entities/pickups/*.cpp
-	server/entities/projectiles/*.cpp
-	server/message_convert/*.cpp
-	server/perks/*.cpp
-	server/states/*.cpp
-	server/waves/*.cpp
-	server/weapons/*.cpp
-	server/weapons/events/*.cpp
-	server/weapons/states/*.cpp)
+FILE (GLOB basefiles *.cpp)
 
-ADD_EXECUTABLE(sanguis ${files})
+FILE (GLOB_RECURSE collectionsfiles
+	net/*.cpp
+	client/*.cpp
+	draw/*.cpp
+	messages/*.cpp
+	load/*.cpp
+	server/*.cpp)
+
+ADD_EXECUTABLE(sanguis ${basefiles} ${collectionsfiles})
 TARGET_LINK_LIBRARIES(sanguis sgecore sgegui)
 
 IF(NOT MSVC)

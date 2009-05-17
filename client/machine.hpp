@@ -17,10 +17,14 @@
 #include <sge/systems/instance_fwd.hpp>
 #include <sge/audio/player_fwd.hpp>
 #include <sge/audio/pool.hpp>
+#include <sge/sprite/system.hpp>
+#include <sge/sprite/object.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/console/stdlib.hpp>
 #include <sge/signal/connection_manager.hpp>
 #include <sge/renderer/device_fwd.hpp>
+#include <sge/renderer/glsl/uniform/variable.hpp>
+#include <sge/renderer/glsl/program.hpp>
 #include <sge/container/raw_vector_decl.hpp>
 
 #include <boost/statechart/state_machine.hpp>
@@ -94,6 +98,11 @@ private:
 	bool running_;
 	server_callback server_callback_;
 	screenshot screenshot_;
+	sge::sprite::system ss_;
+	sge::renderer::glsl::program_ptr shader_;
+	sge::renderer::glsl::uniform::variable_ptr shadervar_;
+	sge::renderer::texture_ptr target_;
+	sge::sprite::object target_sprite_;
 };
 
 }

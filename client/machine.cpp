@@ -8,17 +8,26 @@
 #include "../messages/net_error.hpp"
 #include "../serialization.hpp"
 #include "../log.hpp"
+#include "../media_path.hpp"
+#include "../resolution.hpp"
 #include <sge/math/compare.hpp>
+#include <sge/math/dim/structure_cast.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/audio/player.hpp>
 #include <sge/audio/pool.hpp>
 #include <sge/renderer/scoped_block.hpp>
+#include <sge/renderer/scoped_target.hpp>
 #include <sge/input/system.hpp>
 #include <sge/input/key_state_tracker.hpp>
 #include <sge/mainloop/dispatch.hpp>
 #include <sge/container/raw_vector_impl.hpp>
+#include <sge/texture/part_raw.hpp>
 #include <sge/algorithm/append.hpp>
+#include <sge/renderer/glsl/uniform/single_value.hpp>
+#include <sge/renderer/filter/linear.hpp>
+#include <sge/renderer/texture.hpp>
 #include <sge/utf8/convert.hpp>
+#include <sge/fstream.hpp>
 #include <boost/bind.hpp>
 
 sanguis::client::machine::machine(
@@ -72,8 +81,48 @@ sanguis::client::machine::machine(
 	screenshot_(
 		sys_.renderer(),
 		sys_.image_loader(),
-		sys_.input_system())
-{}
+		sys_.input_system()),
+	ss_(sys_.renderer()),
+	shader_(),
+	shadervar_(),
+	target_(
+		sys.renderer()->create_texture(
+			sge::math::dim::structure_cast<sge::renderer::texture::dim_type>(
+				resolution()),
+			sge::renderer::color_format::rgba8,
+			sge::renderer::filter::linear,
+			sge::renderer::resource_flags::none)),
+	target_sprite_(
+		sge::sprite::parameters()
+			.texture(
+				sge::texture::part_ptr(
+					new sge::texture::part_raw(
+						target_)))
+			.depth(
+				static_cast<sge::sprite::depth_type>(1)))
+{
+	sge::ifstream fragment_stream(
+		media_path()/SGE_TEXT("shaders")/SGE_TEXT("fragment.glsl"));
+	sge::ifstream vertex_stream(
+		media_path()/SGE_TEXT("shaders")/SGE_TEXT("vertex.glsl"));
+
+	shader_ = 
+		sys.renderer()->create_glsl_program(
+			sge::renderer::glsl::istream_ref(
+				vertex_stream),
+			sge::renderer::glsl::istream_ref(
+				fragment_stream));
+	
+	sys.renderer()->glsl_program(
+		shader_);
+
+	shadervar_ = 
+		shader_->uniform(SGE_TEXT("tex"));
+	
+	sge::renderer::glsl::uniform::single_value(
+		shadervar_,
+		static_cast<int>(0));
+}
 
 void sanguis::client::machine::start_server()
 {
@@ -174,7 +223,13 @@ try
 	net_.process();
 
 	{
-	sge::renderer::scoped_block const block_(sys_.renderer());
+	sys_.renderer()->glsl_program(
+		sge::renderer::device::no_program);
+	sge::renderer::scoped_block const block_(
+		sys_.renderer());
+	sge::renderer::scoped_target const target_(
+		sys_.renderer(),
+		target);
 	process_event(t);
 
 	if (console.active())
@@ -183,6 +238,13 @@ try
 	if (ks[sge::input::kc::key_escape])
 		quit();
 	}
+
+	sys_.renderer()->glsl_program(
+		shader_);
+
+	sge::renderer::scoped_block const block_(sys_.renderer());
+	ss_.render(
+		target_sprite);
 
 	screenshot_.process();
 
