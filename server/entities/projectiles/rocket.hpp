@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PROJECTILES_ROCKET_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PROJECTILES_ROCKET_HPP_INCLUDED
 
-#include "projectile.hpp"
+#include "aoe_projectile.hpp"
 
 namespace sanguis
 {
@@ -12,7 +12,7 @@ namespace entities
 namespace projectiles
 {
 
-class rocket : public projectile {
+class rocket : public aoe_projectile {
 public:
 	rocket(
 		server::environment const &,
@@ -28,9 +28,7 @@ private:
 
 	void do_die();
 	
-	space_unit const
-		damage,
-		aoe;
+	space_unit const damage;
 };
 
 }

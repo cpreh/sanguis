@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PROJECTLES_GRENADE_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PROJECTLES_GRENADE_HPP_INCLUDED
 
-#include "projectile.hpp"
+#include "aoe_projectile.hpp"
 #include "../../../diff_clock.hpp"
 #include <sge/time/timer.hpp>
 
@@ -14,7 +14,7 @@ namespace entities
 namespace projectiles
 {
 
-class grenade : public projectile {
+class grenade : public aoe_projectile {
 public:
 	grenade(
 		server::environment const &,
@@ -37,9 +37,7 @@ private:
 	
 	diff_clock diff_clock_;
 	sge::time::timer slowdown_time;
-	space_unit const
-		damage,
-		aoe;
+	space_unit const damage;
 };
 
 }

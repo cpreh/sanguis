@@ -7,6 +7,7 @@
 #include <sge/time/resolution.hpp>
 #include <sge/time/millisecond.hpp>
 #include <sge/text.hpp>
+#include <sge/optional_impl.hpp>
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::projectiles::grenade::grenade(
@@ -15,10 +16,10 @@ sanguis::server::entities::projectiles::grenade::grenade(
 	space_unit const angle,
 	team::type const team_,
 	space_unit const damage,
-	space_unit const aoe)
+	space_unit const aoe_)
 :
-	projectile(
-		projectile_type::grenade,
+	aoe_projectile(
+		aoe_projectile_type::grenade,
 		env,
 		center,
 		angle,
@@ -36,7 +37,9 @@ sanguis::server::entities::projectiles::grenade::grenade(
 			env.load()().models(),
 			SGE_TEXT("grenade")
 		),
-		static_cast<time_type>(3)
+		static_cast<time_type>(3),
+		indeterminate::no,
+		aoe_
 	),
 	diff_clock_(),
 	slowdown_time(
@@ -46,8 +49,7 @@ sanguis::server::entities::projectiles::grenade::grenade(
 		sge::time::activation_state::active,
 		diff_clock_.callback()
 	),
-	damage(damage),
-	aoe(aoe)
+	damage(damage)
 {}
 
 void
@@ -98,7 +100,7 @@ sanguis::server::entities::projectiles::grenade::on_die()
 				environment(),
 				center(),
 				team(),
-				aoe,
+				aoe(),
 				damage,
 				1,
 				static_cast<time_type>(0.1),

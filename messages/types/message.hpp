@@ -12,6 +12,7 @@ namespace message
 {
 enum type {
 	add,
+	add_aoe_projectile,
 	add_decoration,
 	add_enemy,
 	add_friend,

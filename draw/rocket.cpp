@@ -7,13 +7,15 @@
 sanguis::draw::rocket::rocket(
 	draw::environment const &env,
 	entity_id const id,
-	sge::string const &name)
+	sge::string const &name,
+	funit const aoe)
 :
 	bullet(
 		env,
 		id,
 		name
-	)
+	),
+	aoe(aoe)
 {}
 
 void sanguis::draw::rocket::on_decay()
@@ -23,7 +25,8 @@ void sanguis::draw::rocket::on_decay()
 			explosion
 		>(
 			environment(),
-			pos()
+			pos(),
+			aoe
 		)
 	);
 	

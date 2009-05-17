@@ -1,6 +1,7 @@
 #include "scene.hpp"
 #include "entity.hpp"
 #include "background.hpp"
+#include "factory/aoe_projectile.hpp"
 #include "factory/client.hpp"
 #include "factory/enemy.hpp"
 #include "factory/entity.hpp"
@@ -30,7 +31,7 @@
 
 // super ugly hack, so that we can use a vector with more than 20 types
 // but don't have to touch mpl::vector
-#define FUSION_MAX_VECTOR_SIZE 21
+#define FUSION_MAX_VECTOR_SIZE 22
 #include <boost/fusion/container/vector.hpp>
 #include <boost/fusion/include/mpl.hpp>
 #include <boost/bind.hpp>
@@ -88,6 +89,7 @@ void sanguis::draw::scene::process_message(
 	messages::unwrap<
 		boost::fusion::vector<
 			messages::add,
+			messages::add_aoe_projectile,
 			messages::add_decoration,
 			messages::add_enemy,
 			messages::add_friend,
@@ -200,6 +202,24 @@ void sanguis::draw::scene::operator()(
 			>(
 				m.get<messages::enum_>()
 			)
+		),
+		m
+	);
+}
+
+void sanguis::draw::scene::operator()(
+	messages::add_aoe_projectile const &m)
+{
+	configure_new_object(
+		factory::aoe_projectile(
+			environment(),
+			m.get<messages::roles::entity_id>(),
+			static_cast<
+				aoe_projectile_type::type
+			>(
+				m.get<messages::roles::aoe_projectile>()
+			),
+			m.get<messages::roles::aoe>()
 		),
 		m
 	);

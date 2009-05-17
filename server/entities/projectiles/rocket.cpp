@@ -5,6 +5,7 @@
 #include "../../../load/context.hpp"
 #include <sge/container/map_impl.hpp>
 #include <sge/text.hpp>
+#include <sge/optional_impl.hpp>
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::projectiles::rocket::rocket(
@@ -13,10 +14,10 @@ sanguis::server::entities::projectiles::rocket::rocket(
 	space_unit const angle,
 	team::type const team_,
 	space_unit const damage,
-	space_unit const aoe)
+	space_unit const aoe_)
 :
-	projectile(
-		projectile_type::rocket,
+	aoe_projectile(
+		aoe_projectile_type::rocket,
 		env,
 		center,
 		angle,
@@ -34,10 +35,11 @@ sanguis::server::entities::projectiles::rocket::rocket(
 			env.load()().models(),
 			SGE_TEXT("rocket")
 		),
-		static_cast<time_type>(10)
+		static_cast<time_type>(10),
+		indeterminate::no,
+		aoe_
 	),
-	damage(damage),
-	aoe(aoe)
+	damage(damage)
 {}
 
 void
@@ -63,7 +65,7 @@ void sanguis::server::entities::projectiles::rocket::do_die()
 				environment(),
 				center(),
 				team(),
-				aoe,
+				aoe(),
 				damage,
 				1,
 				static_cast<time_type>(0.1),

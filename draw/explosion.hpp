@@ -3,6 +3,7 @@
 
 #include "environment_fwd.hpp"
 #include "entity.hpp"
+#include "funit.hpp"
 #include "particle/base_ptr.hpp"
 #include "particle/container.hpp"
 #include "particle/property_map.hpp"
@@ -20,7 +21,8 @@ class explosion : public entity {
 public:
 	explosion(
 		draw::environment const &,
-		sge::sprite::point const &pos);
+		sge::sprite::point const &pos,
+		funit aoe);
 	~explosion();
 private:
 	void update(

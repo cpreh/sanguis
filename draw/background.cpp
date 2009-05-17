@@ -22,7 +22,8 @@ sanguis::draw::background::background(
 :
 	entity(
 		env,
-		client::next_id()),
+		client::next_id()
+	),
 	tex(
 		env.system().renderer()->create_texture(
 			sge::math::dim::structure_cast<
@@ -32,7 +33,8 @@ sanguis::draw::background::background(
 			sge::renderer::color_format::rgba8,
 			sge::renderer::filter::linear,
 			sge::renderer::resource_flags::none
-			)),
+		)
+	),
 	sprite(
 		sge::sprite::intrusive::parameters(
 			env.system(),
@@ -52,18 +54,21 @@ sanguis::draw::background::background(
 			tex,
 			sge::renderer::lock_flags::writeonly)
 		.value(),
-		sge::renderer::colors::transparent());
+		sge::renderer::colors::transparent()
+	);
 }
 
 void sanguis::draw::background::paint_dead(
 	draw::system &sys)
 {
 	sge::renderer::device_ptr const rend(
-		sys.renderer());
+		sys.renderer()
+	);
 	
 	sge::renderer::scoped_target const scoped_(
 		rend,
-		tex);
+		tex
+	);
 	
 	sys.render();
 }
