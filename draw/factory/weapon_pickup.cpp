@@ -14,8 +14,11 @@ sanguis::draw::factory::weapon_pickup(
 			env,
 			id,
 			load::weapon_pickup_name(
-				wtype),
+				wtype
+			),
 			z_ordering::pickup,
 			false,
-			remove_action::remove));
+			remove_action::remove
+		)	
+	);
 }

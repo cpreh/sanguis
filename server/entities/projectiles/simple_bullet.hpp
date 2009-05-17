@@ -24,7 +24,7 @@ private:
 	void
 	do_damage(
 		entity &);
-
+	
 	space_unit const damage;
 };
 

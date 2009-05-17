@@ -40,6 +40,7 @@ sanguis::server::weapons::states::backswing::react(
 	if(context<weapon>().magazine_empty())
 	{
 		e.owner().start_reloading();
+		context<weapon>().magazine_exhausted();
 		return transit<reloading>();
 	}
 	return transit<ready>();

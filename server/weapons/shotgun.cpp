@@ -20,6 +20,7 @@ sanguis::server::weapons::shotgun::shotgun(
 		type_,
 		1000, // FIXME
 		magazine_size,
+		unlimited_magazine,
 		base_cooldown,
 		static_cast<
 			time_type

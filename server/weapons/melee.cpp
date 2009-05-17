@@ -16,6 +16,7 @@ sanguis::server::weapons::melee::melee(
 		weapon_type::melee,
 		range,
 		unlimited_magazine,
+		unlimited_magazine,
 		base_cooldown,
 		static_cast<time_type>(
 			0),

@@ -174,7 +174,7 @@ void sanguis::server::entities::entity_with_weapon::add_weapon(
 
 		if(it != weapons_.end())
 		{
-			it->second->reset();
+			it->second->repickup();
 			return;
 		}
 	}
