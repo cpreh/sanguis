@@ -3,6 +3,7 @@
 #include "../../auras/burn.hpp"
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/container/map_impl.hpp>
+#include <sge/optional_impl.hpp>
 
 sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 	server::environment const &env,
@@ -14,8 +15,8 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 	time_type const pulse_diff,
 	damage_array const &damage_values)
 :
-	projectile(
-		projectile_type::aoe_damage,
+	aoe_projectile(
+		aoe_projectile_type::aoe_damage,
 		env,
 		center,
 		static_cast<space_unit>(0),
@@ -23,8 +24,12 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 		property_map(),
 		dim_type(
 			radius * static_cast<space_unit>(2),
-			radius * static_cast<space_unit>(2)),
-		pulse_diff * static_cast<time_type>(max_pulses))
+			radius * static_cast<space_unit>(2)
+		),
+		pulse_diff * static_cast<time_type>(max_pulses),
+		indeterminate::yes,
+		radius
+	)
 {
 	add_aura(
 		auras::auto_ptr(

@@ -66,7 +66,7 @@ sanguis::server::pickup_spawner::pickup_spawner(
 		)
 		(
 			sge::random::actor::element(
-				10, // TODO
+				4,
 				boost::bind(
 					&pickup_spawner::spawn_weapon,
 					this,

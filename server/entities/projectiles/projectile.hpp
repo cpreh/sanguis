@@ -1,13 +1,14 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PROJECTILES_PROJECTILE_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PROJECTILES_PROJECTILE_HPP_INCLUDED
 
+#include "indeterminate.hpp"
+#include "../entity.hpp"
 #include "../../../projectile_type.hpp"
 #include "../../../time_type.hpp"
 #include "../../../diff_clock.hpp"
 #include "../../../messages/base.hpp"
-#include "../entity.hpp"
 #include <sge/time/timer.hpp>
-#include <boost/optional.hpp>
+#include <sge/optional_fwd.hpp>
 
 namespace sanguis
 {
@@ -22,7 +23,7 @@ class projectile : public entity {
 public:
 	projectile_type::type ptype() const;
 protected:
-	typedef boost::optional<
+	typedef sge::optional<
 		time_type
 	> optional_life_time;
 
@@ -34,7 +35,8 @@ protected:
 		team::type team,
 		property_map const &,
 		dim_type const &dim,
-		optional_life_time const &);
+		optional_life_time const &,
+		indeterminate::type);
 	
 	void die();
 

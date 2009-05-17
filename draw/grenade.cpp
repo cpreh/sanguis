@@ -8,7 +8,8 @@
 sanguis::draw::grenade::grenade(
 	draw::environment const &env,
 	entity_id const id,
-	sge::string const &name)
+	sge::string const &name,
+	funit const aoe)
 :
 	model(
 		env,
@@ -17,7 +18,8 @@ sanguis::draw::grenade::grenade(
 		z_ordering::bullet,
 		false,
 		draw::remove_action::remove
-	)
+	),
+	aoe(aoe)
 {}
 		
 void sanguis::draw::grenade::on_decay()
@@ -27,7 +29,8 @@ void sanguis::draw::grenade::on_decay()
 			explosion
 		>(
 			environment(),
-			pos()
+			pos(),
+			aoe
 		)
 	);
 	

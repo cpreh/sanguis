@@ -3,6 +3,7 @@
 
 #include "environment_fwd.hpp"
 #include "model.hpp"
+#include "funit.hpp"
 
 namespace sanguis
 {
@@ -14,9 +15,12 @@ public:
 	grenade(
 		draw::environment const &,
 		entity_id,
-		sge::string const &name);
+		sge::string const &name,
+		funit aoe);
 private:
 	void on_decay();
+
+	funit const aoe;
 };
 
 }

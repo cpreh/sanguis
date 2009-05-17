@@ -1,24 +1,14 @@
 #include "projectile.hpp"
 #include "../base_parameters.hpp"
 #include "../../damage_types.hpp"
-#include "../../../exception.hpp"
 #include "../../../messages/add_projectile.hpp"
 #include "../../../messages/create.hpp"
 #include <sge/time/second_f.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>
-#include <sge/text.hpp>
+#include <sge/optional_impl.hpp>
 #include <boost/logic/tribool.hpp>
-
-namespace
-{
-
-sanguis::entity_type::type
-to_entity_type(
-	sanguis::projectile_type::type);
-
-}
 
 sanguis::projectile_type::type
 sanguis::server::entities::projectiles::projectile::ptype() const
@@ -29,12 +19,13 @@ sanguis::server::entities::projectiles::projectile::ptype() const
 sanguis::server::entities::projectiles::projectile::projectile(
 	projectile_type::type const nptype,
 	server::environment const &env,
-	pos_type const& center,
+	pos_type const &center,
 	space_unit const angle,
 	team::type const team_,
 	property_map const &properties,
 	dim_type const &dim,
-	optional_life_time const &lifetime)
+	optional_life_time const &lifetime,
+	indeterminate::type const indeterminate_)
 :
 	entity(
 		base_parameters(
@@ -46,7 +37,9 @@ sanguis::server::entities::projectiles::projectile::projectile(
 			angle,
 			team_,
 			properties,
-			to_entity_type(nptype),
+			indeterminate_ == indeterminate::yes
+				? entity_type::indeterminate
+				: entity_type::projectile,
 			true,
 			dim
 		)
@@ -124,28 +117,4 @@ sanguis::server::entities::projectiles::projectile::add_message() const
 			ptype()
 		)
 	);
-}
-
-namespace
-{
-
-sanguis::entity_type::type
-to_entity_type(
-	sanguis::projectile_type::type const p)
-{
-	// TODO: maybe this is not the best way to do this
-	switch(p) {
-	case sanguis::projectile_type::rocket:
-	case sanguis::projectile_type::simple_bullet:
-	case sanguis::projectile_type::grenade:
-		return sanguis::entity_type::projectile;
-	case sanguis::projectile_type::aoe_damage:
-	case sanguis::projectile_type::melee:
-		return sanguis::entity_type::indeterminate;
-	default:
-		throw sanguis::exception(
-			SGE_TEXT("Invalid projectile type in to_entity_type()!"));
-	}
-}
-
 }

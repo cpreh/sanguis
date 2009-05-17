@@ -6,11 +6,9 @@ namespace sanguis
 
 namespace projectile_type {
 enum type {
-	aoe_damage,
 	melee,
-	rocket,
 	simple_bullet,
-	grenade
+	aoe
 };
 }
 

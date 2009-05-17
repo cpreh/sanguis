@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PROJECTILES_AOE_DAMAGE_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PROJECTILES_AOE_DAMAGE_HPP_INCLUDED
 
-#include "projectile.hpp"
+#include "aoe_projectile.hpp"
 
 namespace sanguis
 {
@@ -12,7 +12,7 @@ namespace entities
 namespace projectiles
 {
 
-class aoe_damage : public projectile {
+class aoe_damage : public aoe_projectile {
 public:
 	aoe_damage(
 		server::environment const &,
