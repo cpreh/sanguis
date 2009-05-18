@@ -25,6 +25,8 @@
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/renderer/glsl/uniform/variable.hpp>
 #include <sge/renderer/glsl/program.hpp>
+#include <sge/renderer/glsl/program_fwd.hpp>
+#include <sge/renderer/texture_fwd.hpp>
 #include <sge/container/raw_vector_decl.hpp>
 
 #include <boost/statechart/state_machine.hpp>

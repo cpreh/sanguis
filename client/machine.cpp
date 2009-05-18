@@ -14,14 +14,32 @@
 #include <sge/math/dim/structure_cast.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/audio/player.hpp>
+#include <sge/sprite/parameters.hpp>
 #include <sge/audio/pool.hpp>
 #include <sge/renderer/scoped_block.hpp>
+#include <sge/renderer/device.hpp>
 #include <sge/renderer/scoped_target.hpp>
+#include <sge/optional_impl.hpp>
+#include <sge/container/raw_vector_impl.hpp>
+#include <boost/spirit/home/phoenix/core/reference.hpp>
+#include <boost/spirit/home/phoenix/operator/self.hpp>
 #include <sge/input/system.hpp>
 #include <sge/input/key_state_tracker.hpp>
 #include <sge/mainloop/dispatch.hpp>
 #include <sge/container/raw_vector_impl.hpp>
 #include <sge/texture/part_raw.hpp>
+#include <sge/renderer/device.hpp>
+#include <sge/renderer/system.hpp>
+#include <sge/renderer/scoped_block.hpp>
+#include <sge/renderer/state/list.hpp>
+#include <sge/renderer/state/var.hpp>
+#include <sge/renderer/state/trampoline.hpp>
+#include <sge/renderer/filter/linear.hpp>
+#include <sge/renderer/texture.hpp>
+#include <sge/renderer/scoped_target.hpp>
+#include <sge/renderer/glsl/uniform/variable.hpp>
+#include <sge/renderer/glsl/uniform/single_value.hpp>
+#include <sge/renderer/glsl/program.hpp>
 #include <sge/algorithm/append.hpp>
 #include <sge/renderer/glsl/uniform/single_value.hpp>
 #include <sge/renderer/filter/linear.hpp>
@@ -86,7 +104,7 @@ sanguis::client::machine::machine(
 	shader_(),
 	shadervar_(),
 	target_(
-		sys.renderer()->create_texture(
+		sys_.renderer()->create_texture(
 			sge::math::dim::structure_cast<sge::renderer::texture::dim_type>(
 				resolution()),
 			sge::renderer::color_format::rgba8,
@@ -107,13 +125,13 @@ sanguis::client::machine::machine(
 		media_path()/SGE_TEXT("shaders")/SGE_TEXT("vertex.glsl"));
 
 	shader_ = 
-		sys.renderer()->create_glsl_program(
+		sys_.renderer()->create_glsl_program(
 			sge::renderer::glsl::istream_ref(
 				vertex_stream),
 			sge::renderer::glsl::istream_ref(
 				fragment_stream));
 	
-	sys.renderer()->glsl_program(
+	sys_.renderer()->glsl_program(
 		shader_);
 
 	shadervar_ = 
@@ -227,9 +245,9 @@ try
 		sge::renderer::device::no_program);
 	sge::renderer::scoped_block const block_(
 		sys_.renderer());
-	sge::renderer::scoped_target const target_(
+	sge::renderer::scoped_target const t_(
 		sys_.renderer(),
-		target);
+		target_);
 	process_event(t);
 
 	if (console.active())
@@ -244,7 +262,7 @@ try
 
 	sge::renderer::scoped_block const block_(sys_.renderer());
 	ss_.render(
-		target_sprite);
+		target_sprite_);
 
 	screenshot_.process();
 

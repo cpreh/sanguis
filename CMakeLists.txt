@@ -67,6 +67,7 @@ FILE (GLOB basefiles *.cpp)
 FILE (GLOB_RECURSE collectionsfiles
 	net/*.cpp
 	client/*.cpp
+	client_messages/*.cpp
 	draw/*.cpp
 	messages/*.cpp
 	load/*.cpp
