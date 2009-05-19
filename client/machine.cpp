@@ -241,6 +241,19 @@ try
 	net_.process();
 
 	{
+	sge::renderer::scoped_block const block_(
+		sys_.renderer());
+
+	process_event(t);
+
+	if (console.active())
+		console.draw();
+
+	if (ks[sge::input::kc::key_escape])
+		quit();
+	}
+	/*
+	{
 	sys_.renderer()->glsl_program(
 		sge::renderer::device::no_program);
 	sge::renderer::scoped_block const block_(
@@ -263,6 +276,7 @@ try
 	sge::renderer::scoped_block const block_(sys_.renderer());
 	ss_.render(
 		target_sprite_);
+	*/
 
 	screenshot_.process();
 
