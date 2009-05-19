@@ -119,6 +119,7 @@ sanguis::client::machine::machine(
 			.depth(
 				static_cast<sge::sprite::depth_type>(1)))
 {
+	/*
 	sge::ifstream fragment_stream(
 		media_path()/SGE_TEXT("shaders")/SGE_TEXT("fragment.glsl"));
 	sge::ifstream vertex_stream(
@@ -140,6 +141,7 @@ sanguis::client::machine::machine(
 	sge::renderer::glsl::uniform::single_value(
 		shadervar_,
 		static_cast<int>(0));
+		*/
 }
 
 void sanguis::client::machine::start_server()
