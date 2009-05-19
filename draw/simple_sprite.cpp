@@ -1,7 +1,6 @@
 #include "simple_sprite.hpp"
 #include "environment.hpp"
 #include <sge/sprite/intrusive/parameters.hpp>
-#include <sge/renderer/colors.hpp>
 #include <sge/math/compare.hpp>
 
 sanguis::draw::simple_sprite::simple_sprite(

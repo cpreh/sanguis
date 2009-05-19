@@ -112,7 +112,7 @@ sanguis::load::resource::textures::textures(
 			sge::texture::no_fragmented
 		>(
 			rend,
-			sge::renderer::color_format::rgba8,
+			sge::image::color::format::rgba8,
 			filter
 		)
 	),

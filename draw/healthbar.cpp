@@ -10,8 +10,8 @@
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/math/dim/arithmetic.hpp>
-#include <sge/renderer/color.hpp>
-#include <sge/renderer/colors.hpp>
+#include <sge/image/color/rgba8.hpp>
+#include <sge/image/color/colors.hpp>
 #include <sge/sprite/intrusive/parameters.hpp>
 #include <boost/none.hpp>
 #include <algorithm>
@@ -47,7 +47,7 @@ sanguis::draw::healthbar::healthbar(
 			z_ordering::healthbar_lower
 		)
 		.color(
-			sge::renderer::colors::black()
+			sge::image::color::colors::black()
 		)
 	);
 
@@ -159,22 +159,39 @@ void sanguis::draw::healthbar::recalc_health()
 		throw exception(
 			(sge::format(SGE_TEXT("draw::healthbar: health (%1%) > max_health (%2%)!"))
 			% health_
-			% max_health_).str());
+			% max_health_).str()
+		);
 
 	if(sge::math::almost_zero(max_health_)) // TODO:
 		return;
 	
-	sge::renderer::color_channel_8 const pixel_channel_max(
-		std::numeric_limits<sge::renderer::color_channel_8>::max());
+	sge::image::color::channel8 const pixel_channel_max(
+		std::numeric_limits<
+			sge::image::color::channel8
+		>::max()
+	);
 
 	inner().w() = static_cast<sge::sprite::unit>(
-		static_cast<funit>(inner_dim().w()) * remaining_health());
+		static_cast<
+			funit
+		>(
+			inner_dim().w()
+		) * remaining_health()
+	);
+
 	inner().color(
-		sge::renderer::rgba8_color(
-			static_cast<sge::renderer::color_channel_8>(
-				(static_cast<funit>(1) - remaining_health()) * static_cast<funit>(pixel_channel_max)),
-			static_cast<sge::renderer::color_channel_8>(
-				remaining_health() * static_cast<funit>(pixel_channel_max)),
+		sge::image::color::rgba8(
+			static_cast<
+				sge::image::color::channel8
+			>(
+				(static_cast<funit>(1) - remaining_health())
+				* static_cast<funit>(pixel_channel_max)
+			),
+			static_cast<
+				sge::image::color::channel8
+			>(
+				remaining_health() * static_cast<funit>(pixel_channel_max)
+			),
 			0,
 			pixel_channel_max
 		)

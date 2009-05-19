@@ -8,10 +8,10 @@
 #include <sge/sprite/intrusive/parameters.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/scoped_target.hpp>
-#include <sge/renderer/fill_pixels.hpp>
 #include <sge/renderer/scoped_texture_lock.hpp>
-#include <sge/renderer/colors.hpp>
 #include <sge/renderer/filter/linear.hpp>
+#include <sge/image/algorithm/fill.hpp>
+#include <sge/image/color/colors.hpp>
 #include <sge/texture/part.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/math/dim/structure_cast.hpp>
@@ -30,7 +30,7 @@ sanguis::draw::background::background(
 				sge::renderer::dim_type
 			>(
 				resolution()),
-			sge::renderer::color_format::rgba8,
+			sge::image::color::format::rgba8,
 			sge::renderer::filter::linear,
 			sge::renderer::resource_flags::none
 		)
@@ -49,12 +49,12 @@ sanguis::draw::background::background(
 		)
 	)
 {
-	sge::renderer::fill_pixels(
+	sge::image::algorithm::fill(
 		sge::renderer::scoped_texture_lock(
 			tex,
 			sge::renderer::lock_flags::writeonly)
 		.value(),
-		sge::renderer::colors::transparent()
+		sge::image::color::colors::transparent()
 	);
 }
 

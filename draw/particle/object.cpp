@@ -76,16 +76,33 @@ bool sanguis::draw::particle::object::update(
 	
 	fade_remaining -= delta;
 	// UGLY ALERT!
-	sge::renderer::color_channel_8 const max = 
-		std::numeric_limits<sge::renderer::color_channel_8>::max();
-	funit const ratio = static_cast<funit>(fade_remaining)/static_cast<funit>(*fade_total);
+	sge::image::color::channel8 const max(
+		std::numeric_limits<
+			sge::image::color::channel8
+		>::max()
+	);
+
+	funit const ratio(
+		static_cast<funit>(
+			fade_remaining
+		)
+		/ static_cast<funit>(
+			*fade_total
+		)
+	);
+
 	sprite_.color(
-		sge::renderer::rgba8_color(
+		sge::image::color::rgba8(
 			max,
 			max,
 			max,
-			static_cast<sge::renderer::color_channel_8>(
-				static_cast<funit>(max)*ratio)));
+			static_cast<
+				sge::image::color::channel8
+			>(
+				static_cast<funit>(max)*ratio
+			)
+		)
+	);
 
 	return fade_remaining < static_cast<funit>(0);
 }

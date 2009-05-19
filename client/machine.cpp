@@ -107,7 +107,7 @@ sanguis::client::machine::machine(
 		sys_.renderer()->create_texture(
 			sge::math::dim::structure_cast<sge::renderer::texture::dim_type>(
 				resolution()),
-			sge::renderer::color_format::rgba8,
+			sge::image::color::format::rgba8,
 			sge::renderer::filter::linear,
 			sge::renderer::resource_flags::none)),
 	target_sprite_(

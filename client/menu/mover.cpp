@@ -14,7 +14,7 @@
 #include <sge/math/vector/structure_cast.hpp>
 #include <sge/math/dim/arithmetic.hpp>
 #include <sge/math/dim/structure_cast.hpp>
-#include <sge/renderer/color.hpp>
+#include <sge/image/color/rgba8.hpp>
 #include <sge/assert.hpp>
 #include <sge/cerr.hpp>
 #include <boost/tr1/random.hpp>
@@ -191,18 +191,27 @@ void sanguis::client::menu::mover::update_visibility(
 					diff)))/
 			static_cast<float_type>(threshold_);
 
-	sge::renderer::color_channel_8 const max = 
-		std::numeric_limits<sge::renderer::color_channel_8>::max();
+	sge::image::color::channel8 const max(
+		std::numeric_limits<
+			sge::image::color::channel8
+		>::max()
+	);
 	
 	man_.connected_sprite(w).color(
-		sge::renderer::rgba8_color(
-				max,
-				max,
-				max,
-				static_cast<sge::renderer::color_channel_8>(
-					static_cast<float_type>(
-						max)
-					*visibility)));
+		sge::image::color::rgba8(
+			max,
+			max,
+			max,
+			static_cast<
+				sge::image::color::channel8
+			>(
+				static_cast<float_type>(
+					max
+				)
+				* visibility
+			)
+		)
+	);
 }
 
 sanguis::client::menu::mover::float_vector const sanguis::client::menu::mover::random_pos() const

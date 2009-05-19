@@ -2,7 +2,6 @@
 #include "../../../resolution.hpp"
 #include <sge/font/align_h.hpp>
 #include <sge/font/align_v.hpp>
-#include <sge/renderer/colors.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/gui/widgets/parameters.hpp>
 #include <sge/gui/layouts/vertical.hpp>

@@ -9,6 +9,7 @@
 #include <sge/gui/make_image.hpp>
 #include <sge/gui/default_cursor.hpp>
 #include <sge/image/loader.hpp>
+#include <sge/image/file.hpp>
 #include <sge/assign/make_container.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/text.hpp>
@@ -22,7 +23,6 @@
 #include <sge/renderer/resource_flags.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/texture/part_raw.hpp>
-#include <sge/image/object.hpp>
 #include "../../media_path.hpp"
 
 namespace
@@ -142,12 +142,19 @@ sanguis::client::menu::object::object(
 			.pos(
 				sge::sprite::point::null())
 			.texture(
-				sge::make_shared_ptr<sge::texture::part_raw>(
+				sge::make_shared_ptr<
+					sge::texture::part_raw
+				>(
 					_sys.renderer()->create_texture(
 						_sys.image_loader()->load(
-							media_path()/SGE_TEXT("dirt_tile.jpg"))->view(),
+							media_path() / SGE_TEXT("dirt_tile.jpg")
+						)->view(),
 						sge::renderer::filter::linear,
-						sge::renderer::resource_flags::none))))
+						sge::renderer::resource_flags::none
+					)
+				)
+			)
+	)
 {
 }
 

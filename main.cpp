@@ -38,11 +38,11 @@
 #include <sge/renderer/filter/linear.hpp>
 #include <sge/collision/system.hpp>
 #include <sge/image/loader.hpp>
+#include <sge/image/color/colors.hpp>
 #include <sge/audio/player.hpp>
 #include <sge/audio/multi_loader.hpp>
 #include <sge/time/second.hpp>
 #include <sge/time/resolution.hpp>
-#include <sge/renderer/colors.hpp>
 #include <sge/input/key_state_tracker.hpp>
 #include <sge/sprite/object.hpp>
 #include <sge/sprite/parameters.hpp>
@@ -178,27 +178,40 @@ try
 	sge::input::key_state_tracker ks(sys.input_system());
 
 	// font stuff
-	sge::font::metrics_ptr const metrics = sys.font_system()->create_font(
-		sge::config::media_path() / SGE_TEXT("fonts") / SGE_TEXT("default.ttf"),
-		static_cast<sge::font::size_type>(15));
+	sge::font::metrics_ptr const metrics(
+		sys.font_system()->create_font(
+			sge::config::media_path() / SGE_TEXT("fonts") / SGE_TEXT("default.ttf"),
+			static_cast<sge::font::size_type>(15)
+		)
+	);
+
 	sge::font::drawer_ptr const drawer(
 		sge::make_shared_ptr<sge::font::drawer_3d>(
 			sys.renderer(),
-			sge::renderer::colors::white()));
-	sge::font::object font(metrics,drawer);
+			sge::image::color::colors::white()
+		)
+	);
+	
+	sge::font::object font(
+		metrics,
+		drawer
+	);
+
 	sge::texture::manager texman(
 		sys.renderer(),
 		sge::texture::default_creator<sge::texture::no_fragmented>(
 			sys.renderer(),
-			sge::renderer::color_format::rgba8, // TODO: what do we want to use here?
-			sge::renderer::filter::linear));
+			sge::image::color::format::rgba8, // TODO: what do we want to use here?
+			sge::renderer::filter::linear
+		)
+	);
 
 	sge::console::object console(SGE_TEXT('/'));
 
 	sge::console::gfx console_gfx(
 		console,
 		sys.renderer(),
-		sge::renderer::rgba8_color(255,255,255,255),
+		sge::image::color::colors::white(),
 		metrics,
 		sys.input_system(),
 		sge::sprite::object(

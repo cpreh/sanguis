@@ -16,6 +16,7 @@
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/state/trampoline.hpp>
 #include <sge/image/loader.hpp>
+#include <sge/image/color/colors.hpp>
 #include <sge/gui/skins/standard.hpp>
 #include <sge/gui/make_image.hpp>
 #include <sge/gui/layouts/vertical.hpp>
@@ -60,7 +61,7 @@ sanguis::client::states::menu::menu(
 		sge::renderer::state::list
 			(sge::renderer::state::bool_::clear_backbuffer = true)
 			(sge::renderer::state::bool_::clear_zbuffer = false)
-			(sge::renderer::state::color::clear_color = sge::renderer::colors::black()))
+			(sge::renderer::state::color::clear_color = sge::image::color::colors::black()))
 {
 }
 
