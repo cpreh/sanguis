@@ -24,10 +24,10 @@
 #include <sge/time/resolution.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/gui/unit.hpp>
+#include <sge/assign/make_container.hpp>
 #include <sge/text.hpp>
-#include <sge/optional.hpp>
+#include <sge/optional_impl.hpp>
 #include <boost/bind.hpp>
-#include <boost/assign/list_of.hpp>
 #include <algorithm>
 
 sanguis::client::logic::logic(
@@ -42,15 +42,66 @@ sanguis::client::logic::logic(
 	cursor_pos_(cursor_pos_),
 	cursor_show_(cursor_show_),
 	actions(
-		boost::assign::list_of
-			(boost::bind(&logic::handle_move_x, this, _1))
-			(boost::bind(&logic::handle_move_y, this, _1))
-			(boost::bind(&logic::handle_rotation_x, this, _1))
-			(boost::bind(&logic::handle_rotation_y, this, _1))
-			(boost::bind(&logic::handle_shooting, this, _1))
-			(boost::bind(&logic::handle_switch_weapon_forwards, this, _1))
-			(boost::bind(&logic::handle_switch_weapon_backwards, this, _1))
-			(boost::bind(&logic::handle_pause_unpause, this, _1)).to_container(actions)),
+		sge::assign::make_container<
+			action_handlers
+		>
+		(
+			boost::bind(
+				&logic::handle_move_x,
+				this,
+				_1
+			)
+		)
+		(
+			boost::bind(
+				&logic::handle_move_y,
+				this,
+				_1
+			)
+		)
+		(
+			boost::bind(
+				&logic::handle_rotation_x,
+				this,
+				_1
+			)
+		)
+		(
+			boost::bind(
+				&logic::handle_rotation_y,
+				this,
+				_1
+			)
+		)
+		(
+			boost::bind(
+				&logic::handle_shooting,
+				this,
+				_1
+			)
+		)
+		(
+			boost::bind(
+				&logic::handle_switch_weapon_forwards,
+				this,
+				_1
+			)
+		)
+		(
+			boost::bind(
+				&logic::handle_switch_weapon_backwards,
+				this,
+				_1
+			)
+		)
+		(
+			boost::bind(
+				&logic::handle_pause_unpause,
+				this,
+				_1
+			)
+		)
+	),
 	player_id_(invalid_id),
 	direction(
 		direction_vector::null()
@@ -61,18 +112,25 @@ sanguis::client::logic::logic(
 			rend
 		)
 	),
-	player_center(sge::sprite::point::null()),
-	current_weapon(weapon_type::size),
+	player_center(
+		sge::sprite::point::null()
+	),
+	current_weapon(
+		weapon_type::size
+	),
 	paused(false),
 	rotation_timer(
 		sge::time::millisecond(
-			100)),
+			100
+		)
+	),
 	owned_weapons()
 {
 	std::fill(
 		owned_weapons.begin(),
 		owned_weapons.end(),
-		false);
+		false
+	);
 }
 
 void sanguis::client::logic::handle_player_action(
