@@ -4,7 +4,8 @@
 #include "../base_parameters.hpp"
 #include "../property.hpp"
 #include "../../get_dim.hpp"
-#include "../../damage_types.hpp"
+#include "../../damage/no_armor.hpp"
+#include "../../damage/list.hpp"
 #include "../../../load/pickup_name.hpp"
 #include "../../../load/context.hpp"
 #include "../../../messages/add_pickup.hpp"
@@ -35,8 +36,7 @@ sanguis::server::entities::pickups::pickup::pickup(
 	entity(
 		base_parameters(
 			env,
-			damage::all(
-				static_cast<space_unit>(1)), // FIXME: create default values for this
+			damage::no_armor(),
 			center,
 			static_cast<space_unit>(0), //angle
 			static_cast<space_unit>(0), //direction,

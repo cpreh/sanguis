@@ -8,7 +8,7 @@ sanguis::server::auras::burn::burn(
 	team::type const team,
 	space_unit const damage_per_pulse,
 	time_type const pulse_diff,
-	damage_array const &damage_values)
+	damage::array const &damage_values)
 :
 	aura(
 		env,

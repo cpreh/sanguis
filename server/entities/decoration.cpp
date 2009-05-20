@@ -1,7 +1,8 @@
 #include "decoration.hpp"
 #include "base_parameters.hpp"
 #include "property.hpp"
-#include "../damage_types.hpp"
+#include "../damage/no_armor.hpp"
+#include "../damage/list.hpp"
 #include "../get_dim.hpp"
 #include "../../load/decoration_name.hpp"
 #include "../../load/context.hpp"
@@ -21,7 +22,7 @@ sanguis::server::entities::decoration::decoration(
 	entity(
 		base_parameters(
 			env,
-			damage::all(static_cast<space_unit>(1)),
+			damage::no_armor(),
 			pos,
 			angle,
 			angle,

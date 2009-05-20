@@ -13,7 +13,7 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 	space_unit const damage_per_pulse,
 	unsigned const max_pulses,
 	time_type const pulse_diff,
-	damage_array const &damage_values)
+	damage::array const &damage_values)
 :
 	aoe_projectile(
 		aoe_projectile_type::aoe_damage,

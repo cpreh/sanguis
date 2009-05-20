@@ -55,7 +55,6 @@ sanguis::server::entities::entity::entity(
 	invulnerable_(param.invulnerable()),
 	collision_dim(param.collision_dim()),
 	aggressive_(false),
-	armor_diff_(),
 	update_health_(true),
 	speed_change_(
 		property(
@@ -209,9 +208,9 @@ sanguis::server::entities::entity::team() const
 
 void sanguis::server::entities::entity::damage(
 	space_unit const d,
-	damage_array const &damages)
+	damage::array const &damages)
 {
-	for(damage_array::size_type i = 0; i < damages.size(); ++i)
+	for(damage::array::size_type i = 0; i < damages.size(); ++i)
 		health(health() - d * damages[i] * (1 - armor_[i]));
 
 	if(dead())
@@ -229,22 +228,10 @@ void sanguis::server::entities::entity::die()
 	on_die();
 }
 
-sanguis::armor_array const &
+sanguis::server::damage::armor const &
 sanguis::server::entities::entity::armor() const
 {
 	return armor_;
-}
-
-sanguis::armor_array const &
-sanguis::server::entities::entity::armor_diff() const
-{
-	return armor_diff_;
-}
-
-sanguis::armor_array &
-sanguis::server::entities::entity::armor_diff()
-{
-	return armor_diff_;
 }
 
 bool sanguis::server::entities::entity::aggressive() const

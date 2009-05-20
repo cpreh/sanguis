@@ -1,5 +1,10 @@
 #include "melee.hpp"
 #include "../property.hpp"
+#include "../../damage/list.hpp"
+#include "../../damage/wrapper.hpp"
+#include "../../damage/meta.hpp"
+#include "../../damage/types.hpp"
+#include "../../damage/full.hpp"
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/container/map_impl.hpp>
 #include <sge/optional_impl.hpp>
@@ -40,17 +45,11 @@ void
 sanguis::server::entities::projectiles::melee::do_damage(
 	entity &e)
 {
-	damage_array const damage_values =
-		boost::assign::list_of
-		(static_cast<space_unit>(1))
-		(static_cast<space_unit>(0))
-		(static_cast<space_unit>(0))
-		(static_cast<space_unit>(0))
-		(static_cast<space_unit>(0));
-	
 	e.damage(
 		damage,
-		damage_values
+		damage::list(
+			damage::normal = damage::full
+		)
 	);
 
 	die();

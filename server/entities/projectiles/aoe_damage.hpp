@@ -22,7 +22,7 @@ public:
 		space_unit damage_per_pulse,
 		unsigned pulses,
 		time_type pulse_diff,
-		damage_array const &damage_values);
+		damage::array const &damage_values);
 private:
 	void
 	do_damage(

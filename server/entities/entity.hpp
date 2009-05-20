@@ -19,6 +19,8 @@
 #include "../perks/auto_ptr.hpp"
 #include "../buffs/auto_ptr.hpp"
 #include "../auras/auto_ptr.hpp"
+#include "../damage/array.hpp"
+#include "../damage/armor.hpp"
 #include "../collision/base.hpp"
 #include "../../messages/auto_ptr.hpp"
 #include "../../entity_id.hpp"
@@ -65,13 +67,11 @@ public:
 
 	void damage(
 		space_unit,
-		damage_array const&);
+		damage::array const &);
 	bool dead() const;
 	virtual void die();
 
-	armor_array const &armor() const;
-	armor_array const &armor_diff() const;
-	armor_array &armor_diff();
+	damage::armor const &armor() const;
 
 	bool aggressive() const;
 	void aggressive(bool);
@@ -158,7 +158,7 @@ private:
 
 	entity_id const         id_;
 	server::environment     env_;
-	armor_array             armor_;
+	damage::armor           armor_;
 	pos_type                center_;
 	space_unit              angle_,
 	                        direction_;
@@ -168,7 +168,6 @@ private:
 	bool invulnerable_;
 	dim_type collision_dim;
 	bool aggressive_;
-	armor_array armor_diff_;
 	mutable bool update_health_;
 	sge::signal::scoped_connection const
 		speed_change_,

@@ -19,7 +19,7 @@ public:
 	enemy(
 		enemy_type::type,
 		server::environment const &,
-		armor_array const &,
+		damage::armor const &,
 		pos_type const &center,
 		space_unit angle,
 		space_unit direction,

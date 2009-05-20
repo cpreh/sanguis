@@ -9,7 +9,7 @@
 
 sanguis::server::entities::player::player(
 	server::environment const &env,
-	armor_array const &armor,
+	damage::armor const &armor,
 	pos_type const &center_,
 	space_unit const direction_,
 	space_unit const angle_,

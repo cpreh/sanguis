@@ -8,7 +8,7 @@ sanguis::server::buffs::burn::burn(
 	space_unit const damage,
 	time_type const pulse_time,
 	unsigned const max_pulses,
-	damage_array const &damage_values)
+	damage::array const &damage_values)
 :
 	buff(
 		source_

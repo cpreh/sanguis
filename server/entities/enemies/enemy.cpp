@@ -15,7 +15,7 @@
 sanguis::server::entities::enemies::enemy::enemy(
 	enemy_type::type const etype_,
 	server::environment const &env,
-	armor_array const &armor,
+	damage::armor const &armor,
 	pos_type const &center,
 	space_unit const angle,
 	space_unit const direction,

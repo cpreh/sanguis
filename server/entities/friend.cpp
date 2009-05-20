@@ -15,7 +15,7 @@
 sanguis::server::entities::friend_::friend_(
 	friend_type::type const ftype_,
 	server::environment const &env,
-	armor_array const &armor,
+	damage::armor const &armor,
 	pos_type const &center,
 	space_unit const angle,
 	space_unit const direction,

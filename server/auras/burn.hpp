@@ -3,7 +3,7 @@
 
 #include "aura.hpp"
 #include "../space_unit.hpp"
-#include "../../damage_type.hpp"
+#include "../damage/array.hpp"
 #include "../../time_type.hpp"
 
 namespace sanguis
@@ -21,14 +21,14 @@ public:
 		team::type team,
 		space_unit damage_per_pules,
 		time_type pulse_diff,
-		damage_array const &);
+		damage::array const &);
 private:
 	void do_effect(
 		entities::entity &target);
 	
 	time_type const pulse_diff;
 	space_unit const damage_per_pulse;
-	damage_array const damage_values;
+	damage::array const damage_values;
 };
 
 }

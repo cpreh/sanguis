@@ -20,7 +20,7 @@ class player : public entity_with_weapon {
 public:
 	player(
 		server::environment const &,
-		armor_array const &,
+		damage::armor const &,
 		pos_type const &center,
 		space_unit direction,
 		space_unit angle,

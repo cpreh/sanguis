@@ -1,7 +1,8 @@
 #include "factory.hpp"
 #include "enemy.hpp"
 #include "../property.hpp"
-#include "../../damage_types.hpp"
+#include "../../damage/no_armor.hpp"
+#include "../../damage/list.hpp"
 #include "../../ai/simple.hpp"
 #include "../../weapons/melee.hpp"
 #include "../../weapons/pistol.hpp"
@@ -24,9 +25,7 @@ sanguis::server::entities::enemies::create(
 			new enemy(
 				etype,
 				env,
-				damage::list(
-					static_cast<space_unit>(0)
-				),
+				damage::no_armor(),
 				center,
 				angle,
 				direction,
@@ -66,9 +65,7 @@ sanguis::server::entities::enemies::create(
 			new enemy(
 				etype,
 				env,
-				damage::list(
-					static_cast<space_unit>(0)
-				),
+				damage::no_armor(),
 				center,
 				angle,
 				direction,
@@ -96,9 +93,7 @@ sanguis::server::entities::enemies::create(
 			new enemy(
 				etype,
 				env,
-				damage::list(
-					static_cast<space_unit>(0)
-				),
+				damage::no_armor(),
 				center,
 				angle,
 				direction,
@@ -124,9 +119,7 @@ sanguis::server::entities::enemies::create(
 			new enemy(
 			 etype,
 			 env,
-			 damage::list(
-			 	static_cast<space_unit>(0)
-			),
+			 damage::no_armor(),
 			 center,
 			 angle,
 			 direction,
@@ -152,9 +145,7 @@ sanguis::server::entities::enemies::create(
 			new enemy(
 			 etype,
 			 env,
-			 damage::list(
-			 	static_cast<space_unit>(0)
-			),
+			 damage::no_armor(),
 			 center,
 			 angle,
 			 direction,
@@ -180,9 +171,7 @@ sanguis::server::entities::enemies::create(
 			new enemy(
 				etype,
 				env,
-				damage::list(
-					static_cast<space_unit>(0)
-				),
+				damage::no_armor(),
 				center,
 				angle,
 				direction,

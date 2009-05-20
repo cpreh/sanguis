@@ -6,7 +6,8 @@
 #include "../../weapons/melee.hpp"
 #include "../../get_dim.hpp"
 #include "../../environment.hpp"
-#include "../../damage_types.hpp"
+#include "../../damage/no_armor.hpp"
+#include "../../damage/list.hpp"
 #include "../../../load/friend_name.hpp"
 #include "../../../load/context.hpp"
 #include <sge/math/vector/basic_impl.hpp>
@@ -39,9 +40,7 @@ void sanguis::server::entities::pickups::monster::do_pickup(
 			new entities::friend_(
 				ftype,
 				environment(),
-				damage::list(
-					static_cast<space_unit>(0)
-				),
+				damage::no_armor(),
 				center(),
 				static_cast<space_unit>(0), // angle TODO
 				static_cast<space_unit>(0), // direction TODO

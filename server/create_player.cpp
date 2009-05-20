@@ -1,7 +1,8 @@
 #include "create_player.hpp"
 #include "string.hpp"
 #include "send_available_perks.hpp"
-#include "damage_types.hpp"
+#include "damage/no_armor.hpp"
+#include "damage/list.hpp"
 #include "entities/player.hpp"
 #include "entities/auto_ptr.hpp"
 #include "weapons/factory.hpp"
@@ -40,7 +41,7 @@ sanguis::server::create_player(
 	entities::auto_ptr new_player(
 		new entities::player(
 			env,
-			damage::list(static_cast<space_unit>(0)),
+			damage::no_armor(),
 			pos_type(
 				static_cast<space_unit>(resolution().w()/2),
 				static_cast<space_unit>(resolution().h()/2)

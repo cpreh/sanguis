@@ -1,6 +1,5 @@
 #include "pistol.hpp"
 #include "delayed_attack.hpp"
-#include "../damage_types.hpp"
 #include "../entities/entity.hpp"
 #include "../entities/projectiles/simple_bullet.hpp"
 

@@ -2,6 +2,11 @@
 #include "aoe_damage.hpp"
 #include "../property.hpp"
 #include "../../get_dim.hpp"
+#include "../../damage/list.hpp"
+#include "../../damage/wrapper.hpp"
+#include "../../damage/meta.hpp"
+#include "../../damage/types.hpp"
+#include "../../damage/full.hpp"
 #include "../../../load/context.hpp"
 #include <sge/container/map_impl.hpp>
 #include <sge/text.hpp>
@@ -51,14 +56,6 @@ sanguis::server::entities::projectiles::rocket::do_damage(
 
 void sanguis::server::entities::projectiles::rocket::do_die()
 {
-	damage_array const damage_values =
-		boost::assign::list_of
-		(static_cast<space_unit>(0))
-		(static_cast<space_unit>(1))
-		(static_cast<space_unit>(0))
-		(static_cast<space_unit>(0))
-		(static_cast<space_unit>(0));
-	
 	insert(
 		auto_ptr(
 			new aoe_damage(
@@ -69,7 +66,9 @@ void sanguis::server::entities::projectiles::rocket::do_die()
 				damage,
 				1,
 				static_cast<time_type>(0.1),
-				damage_values
+				damage::list(
+					damage::fire = damage::full
+				)
 			)
 		)
 	);

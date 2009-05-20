@@ -1,6 +1,7 @@
 #include "projectile.hpp"
 #include "../base_parameters.hpp"
-#include "../../damage_types.hpp"
+#include "../../damage/no_armor.hpp"
+#include "../../damage/list.hpp"
 #include "../../../messages/add_projectile.hpp"
 #include "../../../messages/create.hpp"
 #include <sge/time/second_f.hpp>
@@ -30,8 +31,7 @@ sanguis::server::entities::projectiles::projectile::projectile(
 	entity(
 		base_parameters(
 			env,
-			damage::list(
-				static_cast<space_unit>(0)),
+			damage::no_armor(),
 			center,
 			angle,
 			angle,

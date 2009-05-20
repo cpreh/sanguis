@@ -8,7 +8,7 @@
 #include "../dim_type.hpp"
 #include "../environment_fwd.hpp"
 #include "../teams.hpp"
-#include "../../damage_type.hpp"
+#include "../damage/armor.hpp"
 #include "../../entity_type.hpp"
 #include <sge/container/map_decl.hpp>
 #include <sge/math/vector/basic_decl.hpp>
@@ -25,7 +25,7 @@ class base_parameters {
 public:
 	base_parameters(
 		environment const &,
-		armor_array const &,
+		damage::armor const &,
 		pos_type const &center,
 		space_unit angle,
 		space_unit direction,
@@ -36,7 +36,7 @@ public:
 		dim_type const &collision_dim);
 	
 	environment const &env() const;
-	armor_array const &armor() const;
+	damage::armor const &armor() const;
 	pos_type const &center() const;
 	space_unit angle() const;
 	space_unit direction() const;
@@ -47,7 +47,7 @@ public:
 	dim_type const &collision_dim() const;
 private:
 	environment const          &env_;
-	armor_array const          &armor_;
+	damage::armor const        &armor_;
 	pos_type const             center_;
 	space_unit const           angle_,
 	                           direction_;

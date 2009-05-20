@@ -1,6 +1,11 @@
 #include "simple_bullet.hpp"
 #include "../property.hpp"
 #include "../../get_dim.hpp"
+#include "../../damage/list.hpp"
+#include "../../damage/wrapper.hpp"
+#include "../../damage/meta.hpp"
+#include "../../damage/types.hpp"
+#include "../../damage/full.hpp"
 #include "../../../load/context.hpp"
 #include <sge/container/map_impl.hpp>
 #include <sge/text.hpp>
@@ -43,17 +48,12 @@ void
 sanguis::server::entities::projectiles::simple_bullet::do_damage(
 	entity &e)
 {
-	damage_array const damage_values =
-		boost::assign::list_of
-		(static_cast<space_unit>(0))
-		(static_cast<space_unit>(1))
-		(static_cast<space_unit>(0))
-		(static_cast<space_unit>(0))
-		(static_cast<space_unit>(0));
-			
 	e.damage(
 		damage,
-		damage_values);
+		damage::list(
+			damage::piercing = damage::full
+		)
+	);
 
 	die();
 }

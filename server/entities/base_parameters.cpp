@@ -6,7 +6,7 @@
 
 sanguis::server::entities::base_parameters::base_parameters(
 	environment const &env_,
-	armor_array const &armor_,
+	damage::armor const &armor_,
 	pos_type const &center_,
 	space_unit const angle_,
 	space_unit const direction_,
@@ -38,7 +38,7 @@ sanguis::server::entities::base_parameters::env() const
 	return env_;
 }
 
-sanguis::armor_array const &
+sanguis::server::damage::armor const &
 sanguis::server::entities::base_parameters::armor() const
 {
 	return armor_;

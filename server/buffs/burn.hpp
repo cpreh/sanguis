@@ -2,9 +2,9 @@
 #define SANGUIS_SERVER_BUFFS_BURN_HPP_INCLUDED
 
 #include "../space_unit.hpp"
+#include "../damage/array.hpp"
 #include "../../diff_clock.hpp"
 #include "../../time_type.hpp"
-#include "../../damage_type.hpp"
 #include "buff.hpp"
 #include <sge/time/timer.hpp>
 
@@ -22,7 +22,7 @@ public:
 		space_unit damage,
 		time_type pulse_time,
 		unsigned max_pulses,
-		damage_array const &);
+		damage::array const &);
 private:
 	void update(
 		entities::entity &,
@@ -33,7 +33,7 @@ private:
 	sge::time::timer pulse_timer;
 	unsigned pulses;
 	unsigned const max_pulses;
-	damage_array const damage_values;
+	damage::array const damage_values;
 };
 
 }
