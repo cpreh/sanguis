@@ -73,7 +73,7 @@ sanguis::server::weapons::create(
 			new grenade(
 				env,
 				type,
-				static_cast<time_type>(2), // cooldown
+				static_cast<time_type>(0.7), // cooldown
 				static_cast<space_unit>(20), // damage
 				static_cast<space_unit>(180), // radius
 				static_cast<time_type>(0.1), // cast point
