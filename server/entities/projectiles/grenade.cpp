@@ -2,6 +2,7 @@
 #include "aoe_damage.hpp"
 #include "../property.hpp"
 #include "../../get_dim.hpp"
+#include "../../collision/distance.hpp"
 #include "../../../load/context.hpp"
 #include <sge/container/map_impl.hpp>
 #include <sge/time/resolution.hpp>
@@ -16,7 +17,8 @@ sanguis::server::entities::projectiles::grenade::grenade(
 	space_unit const angle,
 	team::type const team_,
 	space_unit const damage,
-	space_unit const aoe_)
+	space_unit const aoe_,
+	pos_type const &dest_)
 :
 	aoe_projectile(
 		aoe_projectile_type::grenade,
@@ -27,11 +29,18 @@ sanguis::server::entities::projectiles::grenade::grenade(
 		boost::assign::map_list_of
 			(
 				entities::property_type::health,
-				entities::property(static_cast<space_unit>(1))
+				entities::property(
+					static_cast<space_unit>(1)
+				)
 			)
 			(
 				entities::property_type::movement_speed,
-				entities::property(static_cast<space_unit>(300))
+				entities::property(
+					collision::distance(
+						center,
+						dest_
+					)
+				)
 			),
 		default_dim(
 			env.load()().models(),
@@ -74,7 +83,7 @@ sanguis::server::entities::projectiles::grenade::update(
 
 	if(slowdown_time.update_b())
 		speed.current(
-			speed.current() * static_cast<space_unit>(0.75)
+			speed.current() * static_cast<space_unit>(0.9)
 		);
 	
 	projectile::update(

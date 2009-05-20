@@ -38,7 +38,8 @@ sanguis::server::weapons::grenade::do_attack(
 				a.angle(),
 				a.team(),
 				damage,
-				radius
+				radius,
+				a.dest()
 			)
 		)
 	);

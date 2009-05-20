@@ -11,7 +11,6 @@
 #include "../message_convert/health.hpp"
 #include "../log.hpp"
 #include "../../truncation_check_cast.hpp"
-#include "../../angle_vector.hpp"
 #include "../../random.hpp"
 #include "../../messages/pause.hpp"
 #include "../../messages/base.hpp"
@@ -58,24 +57,22 @@ sanguis::server::states::unpaused::handle_default_msg(
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
 	net::id_type const id,
+	messages::player_attack_dest const &e)
+{
+	context<running>().player(
+		id
+	).target(
+		e.get<messages::roles::attack_dest>()
+	);
+
+	return discard_event();
+}
+
+boost::statechart::result
+sanguis::server::states::unpaused::operator()(
+	net::id_type const id,
 	messages::player_change_weapon const &e)
 {
-	running::player_map::iterator const it(
-		context<running>().players().find(id));
-	
-	if (it == context<running>().players().end())
-	{
-		SGE_LOG_WARNING(
-			log(),
-			sge::log::_1
-				<< SGE_TEXT("got player_change_weapon from spectator ")
-				<< id
-		);
-		return discard_event();
-	}
-
-	entities::player &player_(*it->second);
-
 	weapon_type::type const wt(
 		static_cast<
 			weapon_type::type
@@ -83,12 +80,17 @@ sanguis::server::states::unpaused::operator()(
 			e.get<messages::roles::weapon>()
 		)
 	);
+
 	if (wt > weapon_type::size)
 		throw exception(
 			SGE_TEXT("got invalid weapon type in player_change_weapon")
 		);
 
-	player_.change_weapon(wt);
+	context<running>().player(
+		id
+	).change_weapon(
+		wt
+	);
 
 	return discard_event();
 }
@@ -98,30 +100,22 @@ sanguis::server::states::unpaused::operator()(
 	net::id_type const id,
 	messages::player_rotation const &e)
 {
-	running::player_map::iterator const it(
-		context<running>().players().find(id)
+	entities::player &player_(
+		context<running>().player(
+			id
+		)
 	);
 
-	if (it == context<running>().players().end())
-	{
-		SGE_LOG_WARNING(
-			log(),
-			sge::log::_1
-				<< SGE_TEXT("got rotation_event from spectator ")
-				<< id);
-		return discard_event();
-	}
-
-	entities::player &player_(*it->second);
-
-	// FIXME: we should really transport the target point over the network
-	player_.target(
-		player_.pos()
-		+ angle_to_vector(player_.direction()) * static_cast<space_unit>(100)
+	player_.angle(
+		e.get<messages::roles::angle>()
 	);
 
-	player_.angle(e.get<messages::roles::angle>());
-	send(message_convert::rotate(player_));
+	send(
+		message_convert::rotate(
+			player_
+		)
+	);
+
 	return discard_event();
 }
 
@@ -130,17 +124,12 @@ sanguis::server::states::unpaused::operator()(
 	net::id_type const id,
 	messages::player_start_shooting const &)
 {
-	if (context<running>().players().find(id) == context<running>().players().end())
-	{
-		SGE_LOG_WARNING(
-			log(),
-			sge::log::_1
-				<< SGE_TEXT("got shooting event from spectator ")
-				<< id);
-		return discard_event();
-	}
+	context<running>().player(
+		id
+	).aggressive(
+		true
+	);
 
-	context<running>().players()[id]->aggressive(true);
 	return discard_event();
 }
 
@@ -149,17 +138,12 @@ sanguis::server::states::unpaused::operator()(
 	net::id_type const id,
 	messages::player_stop_shooting const &)
 {
-	if (context<running>().players().find(id) == context<running>().players().end())
-	{
-		SGE_LOG_WARNING(
-			log(),
-			sge::log::_1
-				<< SGE_TEXT("got player_stop_shooting from spectator ")
-				<< id);
-		return discard_event();
-	}
+	context<running>().player(
+		id
+	).aggressive(
+		false
+	);
 
-	context<running>().players()[id]->aggressive(false);
 	return discard_event();
 }
 
@@ -168,18 +152,11 @@ sanguis::server::states::unpaused::operator()(
 	net::id_type const id,
 	messages::player_direction const &e)
 {
-	running::player_map::iterator const it(context<running>().players().find(id));
-	if (it == context<running>().players().end())
-	{
-		SGE_LOG_WARNING(
-			log(),
-			sge::log::_1
-				<< SGE_TEXT("got direction_event from spectator ")
-				<< id);
-		return discard_event();
-	}
-
-	entities::player &player_(*it->second);
+	entities::player &player_(
+		context<running>().player(
+			id
+		)
+	);
 
 	pos_type const dir(
 		e.get<messages::roles::direction>()
@@ -194,11 +171,20 @@ sanguis::server::states::unpaused::operator()(
 	else
 	{
 		player_.property(
-			entities::property_type::movement_speed).current_to_max();
-		player_.direction(*sge::math::vector::to_angle<space_unit>(dir));
+			entities::property_type::movement_speed
+		).current_to_max();
+
+		player_.direction(
+			*sge::math::vector::to_angle<space_unit>(dir)
+		);
 	}
 
-	send(message_convert::speed(player_));
+	send(
+		message_convert::speed(
+			player_
+		)
+	);
+
 	return discard_event();
 }
 
@@ -297,6 +283,7 @@ sanguis::server::states::unpaused::react(
 
 	return messages::unwrap<
 		boost::mpl::vector<
+			messages::player_attack_dest,
 			messages::player_rotation,
 			messages::player_start_shooting,
 			messages::player_stop_shooting,

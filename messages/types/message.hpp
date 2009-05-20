@@ -33,6 +33,7 @@ enum type {
 	move,
 	net_error,
 	pause,
+	player_attack_dest,
 	player_change_weapon,
 	player_choose_perk,
 	player_direction,

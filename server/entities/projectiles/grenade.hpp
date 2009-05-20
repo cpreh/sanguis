@@ -22,7 +22,8 @@ public:
 		space_unit angle,
 		team::type,
 		space_unit damage,
-		space_unit aoe);
+		space_unit aoe,
+		pos_type const &dest);
 private:
 	void
 	do_damage(

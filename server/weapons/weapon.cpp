@@ -1,5 +1,4 @@
 #include "weapon.hpp"
-#include "delayed_attack.hpp"
 #include "log.hpp"
 #include "events/poll.hpp"
 #include "events/reset.hpp"

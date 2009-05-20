@@ -3,6 +3,7 @@
 #include "log.hpp"
 #include "cursor.hpp"
 #include "../messages/create.hpp"
+#include "../messages/player_attack_dest.hpp"
 #include "../messages/player_direction.hpp"
 #include "../messages/player_rotation.hpp"
 #include "../messages/player_start_shooting.hpp"
@@ -16,6 +17,7 @@
 #include <sge/math/clamp.hpp>
 #include <sge/math/vector/angle_between.hpp>
 #include <sge/math/vector/structure_cast.hpp>
+#include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/time/millisecond.hpp>
@@ -50,11 +52,15 @@ sanguis::client::logic::logic(
 			(boost::bind(&logic::handle_switch_weapon_backwards, this, _1))
 			(boost::bind(&logic::handle_pause_unpause, this, _1)).to_container(actions)),
 	player_id_(invalid_id),
-	direction(0,0),
+	direction(
+		direction_vector::null()
+	),
 	cursor_(
 		new sanguis::client::cursor(
 			il,
-			rend)),
+			rend
+		)
+	),
 	player_center(sge::sprite::point::null()),
 	current_weapon(weapon_type::size),
 	paused(false),
@@ -188,8 +194,12 @@ void sanguis::client::logic::handle_rotation_x(
 				cursor_->pos().x() + static_cast<sge::gui::unit>(s),
 				static_cast<sge::gui::unit>(0),
 				static_cast<sge::gui::unit>(
-					rend->screen_size().w())),
-			cursor_->pos().y()));
+					rend->screen_size().w()
+				)
+			),
+			cursor_->pos().y()
+		)
+	);
 	
 	update_rotation();
 }
@@ -204,7 +214,10 @@ void sanguis::client::logic::handle_rotation_y(
 				cursor_->pos().y() + static_cast<sge::gui::unit>(s),
 				static_cast<sge::gui::unit>(0),
 				static_cast<sge::gui::unit>(
-					rend->screen_size().h())))
+					rend->screen_size().h()
+				)
+			)
+		)
 	);
 
 	update_rotation();
@@ -215,7 +228,9 @@ void sanguis::client::logic::update_rotation()
 	sge::optional<
 		messages::types::space_unit
 	> const rotation(
-		sge::math::vector::angle_between<messages::types::space_unit>(
+		sge::math::vector::angle_between<
+			messages::types::space_unit
+		>(
 			player_center,
 			cursor_pos()
 		)
@@ -228,6 +243,8 @@ void sanguis::client::logic::update_rotation()
 	if(!rotation || !rotation_timer.update_b())
 		return;
 	
+	// TODO: maybe we can kick rotation
+	// and the server can calculate it from the attack dest
 	send(
 		messages::create(
 			messages::player_rotation(
@@ -236,6 +253,21 @@ void sanguis::client::logic::update_rotation()
 			)
 		)
 	);
+
+
+	send(
+		messages::create(
+			messages::player_attack_dest(
+				player_id_,
+				sge::math::vector::structure_cast<
+					messages::types::vector2
+				>(
+					cursor_pos()
+				)
+			)
+		)
+	);
+
 }
 
 void sanguis::client::logic::handle_shooting(

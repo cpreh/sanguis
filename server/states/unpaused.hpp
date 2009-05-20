@@ -3,6 +3,7 @@
 
 #include "../message_event_fwd.hpp"
 #include "../environment_fwd.hpp"
+#include "../../messages/player_attack_dest.hpp"
 #include "../../messages/player_direction.hpp"
 #include "../../messages/player_rotation.hpp"
 #include "../../messages/player_start_shooting.hpp"
@@ -51,6 +52,11 @@ class unpaused
 	boost::statechart::result
 	react(
 		message_event const &);
+
+	boost::statechart::result
+	operator()(
+		net::id_type,
+		messages::player_attack_dest const &);
 
 	boost::statechart::result
 	operator()(

@@ -22,6 +22,11 @@ distance(
 	entities::entity const &,
 	pos_type const &);
 
+space_unit
+distance(
+	pos_type const &,
+	pos_type const &);
+
 }
 }
 }

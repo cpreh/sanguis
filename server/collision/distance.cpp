@@ -17,5 +17,13 @@ sanguis::server::collision::distance(
 	entities::entity const &a,
 	pos_type const &b)
 {
-	return length(a.center() - b);
+	return distance(a.center(), b);
+}
+
+sanguis::server::space_unit
+sanguis::server::collision::distance(
+	pos_type const &a,
+	pos_type const &b)
+{
+	return length(a - b);
 }
