@@ -100,8 +100,13 @@ void
 sanguis::server::entities::player::add_perk(
 	perks::auto_ptr p)
 {
+	perk_tree_.take(
+		p->type()
+	);
+
 	entity::add_perk(
-		p);
+		p
+	);
 	--skill_points_;
 }
 

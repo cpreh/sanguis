@@ -79,7 +79,14 @@ sanguis::server::perks::tree::choosable(
 	);
 	
 	if(it == trav.end())
+	{
+		SGE_LOG_WARNING(
+			log(),
+			sge::log::_1
+				<< SGE_TEXT("Perk not found in tree")
+		);
 		return false;
+	}
 
 	for(
 		tree_type const *pos(
@@ -94,7 +101,9 @@ sanguis::server::perks::tree::choosable(
 			SGE_LOG_WARNING(
 				log(),
 				sge::log::_1
-					<< SGE_TEXT("Perk not chooseable in tree")
+					<< SGE_TEXT("Perk ")
+					<< p
+					<< SGE_TEXT(" not chooseable in tree.")
 			);
 			return false;
 		}
@@ -112,13 +121,16 @@ sanguis::server::perks::tree::take(
 	> traversal;
 	
 	traversal trav(
-		impl);
+		impl
+	);
 	
 	traversal::iterator const it = std::find_if(
 		trav.begin(),
 		trav.end(),
 		perk_equal(
-			p));
+			p
+		)
+	);
 	
 	if(it == trav.end())
 		throw exception(
@@ -139,7 +151,10 @@ sanguis::server::perks::tree::choosables() const
 			static_cast<
 				perk_type::type
 			>(
-				i));
+				i
+			)
+		);
+
 		if(choosable(pt))
 			ret.push_back(pt);
 	}
