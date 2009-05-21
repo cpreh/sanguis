@@ -64,7 +64,7 @@ sanguis::server::weapons::create(
 				static_cast<space_unit>(20), // damage
 				static_cast<space_unit>(150), // aoe
 				1, // magazine size
-				static_cast<time_type>(1.6) // reload time
+				static_cast<time_type>(1.8) // reload time
 				
 			)
 		);
@@ -77,7 +77,7 @@ sanguis::server::weapons::create(
 				static_cast<space_unit>(20), // damage
 				static_cast<space_unit>(180), // radius
 				static_cast<time_type>(0.1), // cast point
-				static_cast<time_type>(0.5) // reload time
+				static_cast<time_type>(1.0) // reload time
 			)
 		);
 	default:
