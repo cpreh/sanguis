@@ -114,7 +114,7 @@ sanguis::draw::particle::property_container const prop_ = boost::assign::map_lis
 sanguis::draw::explosion::explosion(
 	draw::environment const &env,
 	sge::sprite::point const &pos_,
-	funit const aoe)
+	funit const _aoe)
 :
 	entity(
 		env,
@@ -129,7 +129,8 @@ sanguis::draw::explosion::explosion(
 		environment()),
 	properties_(
 		prop_),
-	ended(false)
+	ended(false),
+	aoe_(_aoe)
 {
 	// TODO: we have to pass the aoe here!
 	sge::renderer::screen_size const screen_sz(
@@ -219,6 +220,7 @@ sanguis::draw::explosion::generate_particle(
 		ptr.reset(
 			new particle::object(
 				t,
+				aoe_,
 				anim,
 				boost::none,
 				environment()));
@@ -236,6 +238,7 @@ sanguis::draw::explosion::generate_particle(
 		ptr.reset(
 			new particle::object(
 				t,
+				aoe_,
 				anim,
 				rng(),
 				environment()));

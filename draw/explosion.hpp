@@ -45,6 +45,7 @@ private:
 	particle::container particles;
 	particle::property_map properties_;
 	bool ended;
+	funit aoe_;
 
 //	load::model::random_sound sounds_;
 //	sge::audio::sound_ptr current_;

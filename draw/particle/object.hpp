@@ -21,6 +21,7 @@ class object : public base
 	public:
 	object(
 		particle_type::type,
+		funit aoe,
 		sge::sprite::animation_series const &,
 		boost::optional<time_type> fade_time,
 		draw::environment const &);

@@ -7,6 +7,7 @@
 
 sanguis::draw::particle::object::object(
 	particle_type::type const t,
+	funit const aoe,
 	sge::sprite::animation_series const &images,
 	boost::optional<time_type> const fade_total,
 	draw::environment const &e)
@@ -26,11 +27,17 @@ sanguis::draw::particle::object::object(
 			z_ordering(t)
 		)
 		.size(
+			/*
 			sge::math::dim::structure_cast<
 				sge::sprite::dim
 			>(
 				images.dim()
 			)
+			*/
+			// TODO: maybe resize with respect to the images.dim() ratio here
+			sge::sprite::dim(
+				static_cast<sge::sprite::unit>(2*aoe),
+				static_cast<sge::sprite::unit>(2*aoe))
 		)
 	),
 	anim(
