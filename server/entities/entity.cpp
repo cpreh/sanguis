@@ -17,12 +17,13 @@
 #include <sge/math/vector/arithmetic.hpp>
 #include <sge/math/vector/dim.hpp>
 #include <sge/math/vector/construct.hpp>
+#include <sge/math/vector/output.hpp>
+#include <sge/math/vector/narrow_cast.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/math/dim/arithmetic.hpp>
 #include <sge/collision/objects/circle.hpp>
 #include <sge/container/linear_set_impl.hpp>
 #include <sge/container/map_impl.hpp>
-#include <sge/math/vector/output.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/text.hpp>
 #include <boost/logic/tribool.hpp>
@@ -147,9 +148,10 @@ void sanguis::server::entities::entity::direction(
 sanguis::server::pos_type const
 sanguis::server::entities::entity::center() const
 {
-	return pos_type(
-		circle()->center().x(),
-		circle()->center().y()
+	return sge::math::vector::narrow_cast<
+		pos_type
+	>(
+		circle()->center()
 	);
 }
 
@@ -178,10 +180,10 @@ void sanguis::server::entities::entity::center(
 sanguis::server::pos_type const
 sanguis::server::entities::entity::abs_speed() const
 {
-	// TODO: make a conversion function for this!
-	return pos_type(
-		circle()->speed().x(),
-		circle()->speed().y()
+	return sge::math::vector::narrow_cast<
+		pos_type
+	>(
+		circle()->speed()
 	);
 }
 
