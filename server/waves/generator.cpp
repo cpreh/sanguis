@@ -18,7 +18,7 @@ sanguis::server::waves::generator::generator()
 		static_cast<time_type>(0),
 		static_cast<time_type>(1),
 		20,
-		1,
+		2,
 		enemy_type::maggot
 	)(
 		static_cast<time_type>(0),

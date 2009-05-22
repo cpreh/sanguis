@@ -24,5 +24,5 @@ void sanguis::server::perks::health::do_apply(
 
 bool sanguis::server::perks::health::can_raise_level() const
 {
-	return true;
+	return level() < 10;
 }

@@ -77,7 +77,7 @@ struct dynamic_len {
 		majutsu::const_raw_pointer mem,
 		majutsu::size_type const sz)
 	{
-		SGE_ASSERT(sz > sizeof(length_type));
+		SGE_ASSERT(sz >= sizeof(length_type));
 
 		majutsu::size_type const sz_wo_len(
 			sz - sizeof(length_type)
@@ -86,6 +86,9 @@ struct dynamic_len {
 		SGE_ASSERT(sz_wo_len % sizeof(typename type::value_type) == 0);
 
 		type ret;
+
+		if(sz_wo_len == 0)
+			return ret;
 		
 		ret.resize(
 			sz_wo_len / sizeof(typename type::value_type)
