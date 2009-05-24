@@ -14,6 +14,7 @@
 #include "../perks/perk.hpp"
 #include "../log.hpp"
 #include "../send_available_perks.hpp"
+#include "../cheat.hpp"
 #include "../../connect_state.hpp"
 #include "../../messages/unwrap.hpp"
 #include <sge/container/map_impl.hpp>
@@ -159,6 +160,7 @@ sanguis::server::states::running::react(
 			messages::client_info,
 			messages::connect,
 			messages::disconnect,
+			messages::player_cheat,
 			messages::player_choose_perk
 		>,
 		boost::statechart::result
@@ -225,6 +227,26 @@ sanguis::server::states::running::operator()(
 			<< SGE_TEXT(" disconnected"));
 
 	players()[id]->die();
+
+	return discard_event();
+}
+
+boost::statechart::result
+sanguis::server::states::running::operator()(
+	net::id_type const id,
+	messages::player_cheat const &p)
+{
+	cheat(
+		player(
+			id
+		),
+		static_cast<
+			cheat_type::type
+		>(
+			p.get<messages::roles::cheat>()
+		),
+		environment()
+	);
 
 	return discard_event();
 }

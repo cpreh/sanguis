@@ -18,6 +18,7 @@
 #include "../../messages/connect.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../messages/client_info.hpp"
+#include "../../messages/player_cheat.hpp"
 #include "../../messages/player_choose_perk.hpp"
 #include "../../messages/base_fwd.hpp"
 #include "../../net/id_type.hpp"
@@ -88,6 +89,9 @@ public:
 	boost::statechart::result operator()(
 		net::id_type,
 		messages::client_info const &);
+	boost::statechart::result operator()(
+		net::id_type,
+		messages::player_cheat const &);
 	boost::statechart::result operator()(
 		net::id_type,
 		messages::player_choose_perk const &);
