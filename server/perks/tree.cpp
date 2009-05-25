@@ -31,15 +31,15 @@ sanguis::server::perks::tree::tree()
 	impl.push_back(
 		status(
 			perk_type::choleric,
-			0,
-			0
+			2,
+			0	
 		)
 	);
 	impl.push_back(
 		status(
 			perk_type::ias,
 			0,
-			0
+			0	
 		)
 	);
 	impl.push_back(
@@ -70,7 +70,7 @@ sanguis::server::perks::tree::tree()
 		status(
 			perk_type::regeneration,
 			0,
-			0
+			2	
 		)
 	);
 }
@@ -119,9 +119,7 @@ sanguis::server::perks::tree::choosable(
 		return false;
 
 	for(
-		tree_type const *pos(
-			&(*it.internal()).parent()
-		); // we always have a parent dummy node
+		tree_type const *pos(&*it.internal());
 		pos->has_parent();
 		pos = &pos->parent()
 	)
@@ -131,8 +129,8 @@ sanguis::server::perks::tree::choosable(
 		);
 
 		if(
-			!status_.chosen()
-			|| status_.required_parent_level() > pos->parent().value().level()
+			status_.required_parent_level()
+			> pos->parent().value().level()
 		)
 			return false;
 	}

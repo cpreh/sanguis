@@ -19,7 +19,6 @@ struct status {
 		level_type required_player_level,
 		level_type required_parent_level);
 	
-	bool chosen() const;
 	void choose();
 
 	level_type required_player_level() const;

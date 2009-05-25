@@ -1,11 +1,17 @@
 #include "status.hpp"
+#include <sge/assert.hpp>
+#include <limits>
 
 sanguis::server::perks::status::status()
 :
 	type_(perk_type::size),
 	required_player_level_(0),
 	required_parent_level_(0),
-	level_(0)
+	level_(
+		std::numeric_limits<
+			level_type
+		>::max()
+	)
 {}
 
 sanguis::server::perks::status::status(
@@ -19,15 +25,10 @@ sanguis::server::perks::status::status(
 	level_(0)
 {}
 	
-bool
-sanguis::server::perks::status::chosen() const
-{
-	return level() > 0;
-}
-
 void
 sanguis::server::perks::status::choose()
 {
+	SGE_ASSERT(type() != perk_type::size);
 	++level_;
 }
 
