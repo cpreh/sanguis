@@ -24,31 +24,54 @@ private:
 sanguis::server::perks::tree::tree()
 :
 	impl(
-		status(
-			perk_type::size,
-			true
-		)
+		status()
 	)
 {
 	// TODO: do this with assign::
 	impl.push_back(
-		perk_type::choleric
+		status(
+			perk_type::choleric,
+			0,
+			0
+		)
 	);
 	impl.push_back(
-		perk_type::ias
+		status(
+			perk_type::ias,
+			0,
+			0
+		)
 	);
 	impl.push_back(
-		perk_type::ims
+		status(
+			perk_type::ims,
+			0,
+			0
+		)
 	);
 	impl.push_back(
-		perk_type::irs
+		status(
+			perk_type::irs,
+			0,
+			0
+		)
 	);
 	impl.push_back(
-		perk_type::health
+		status(
+			perk_type::health,
+			0,
+			0
+		)
 	);
+
 	tree_type &health(impl.back());
+
 	health.push_back(
-		perk_type::regeneration
+		status(
+			perk_type::regeneration,
+			0,
+			0
+		)
 	);
 }
 
@@ -57,7 +80,8 @@ sanguis::server::perks::tree::~tree()
 
 bool
 sanguis::server::perks::tree::choosable(
-	perk_type::type const p) const
+	perk_type::type const p,
+	server::level_type const player_level) const
 {
 	typedef 
 	sge::container::traversal<
@@ -88,6 +112,12 @@ sanguis::server::perks::tree::choosable(
 		return false;
 	}
 
+	if(
+		it->value().required_player_level()
+		> static_cast<level_type>(player_level)
+	)
+		return false;
+
 	for(
 		tree_type const *pos(
 			&(*it.internal()).parent()
@@ -96,17 +126,15 @@ sanguis::server::perks::tree::choosable(
 		pos = &pos->parent()
 	)
 	{
-		if(!pos->value().chosen())
-		{
-			SGE_LOG_WARNING(
-				log(),
-				sge::log::_1
-					<< SGE_TEXT("Perk ")
-					<< p
-					<< SGE_TEXT(" not chooseable in tree.")
-			);
+		status const &status_(
+			pos->value()
+		);
+
+		if(
+			!status_.chosen()
+			|| status_.required_parent_level() > pos->parent().value().level()
+		)
 			return false;
-		}
 	}
 	return true;
 }
@@ -140,7 +168,8 @@ sanguis::server::perks::tree::take(
 }
 
 sanguis::server::perks::list const
-sanguis::server::perks::tree::choosables() const
+sanguis::server::perks::tree::choosables(
+	server::level_type const player_level) const
 {
 	// TODO: very wasteful but easy
 	list ret;
@@ -155,7 +184,12 @@ sanguis::server::perks::tree::choosables() const
 			)
 		);
 
-		if(choosable(pt))
+		if(
+			choosable(
+				pt,
+				player_level
+			)
+		)
 			ret.push_back(pt);
 	}
 	return ret;

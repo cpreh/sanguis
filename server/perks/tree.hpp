@@ -4,6 +4,7 @@
 #include "status.hpp"
 #include "list.hpp"
 #include "../../perk_type.hpp"
+#include "../level_type.hpp"
 #include <sge/container/tree_decl.hpp>
 #include <sge/noncopyable.hpp>
 
@@ -21,12 +22,15 @@ public:
 	~tree();
 
 	bool choosable(
-		perk_type::type) const;
+		perk_type::type,
+		server::level_type player_level) const;
+	
 	void take(
 		perk_type::type);
 	
 	list const
-	choosables() const;
+	choosables(
+		server::level_type player_level) const;
 
 	// public for helper functions
 	typedef sge::container::tree<

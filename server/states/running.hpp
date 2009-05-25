@@ -103,6 +103,9 @@ private:
 		server::entities::player &,
 		level_type);
 	
+	void send_available_perks(
+		entities::player const &);
+	
 	server::entities::entity &
 	insert_entity(
 		server::entities::auto_ptr);

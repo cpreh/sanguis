@@ -287,10 +287,7 @@ sanguis::server::states::running::operator()(
 	);
 	
 	send_available_perks(
-		player_,
-		context<machine>().unicast(
-			id
-		)
+		player_
 	);
 	
 	return discard_event();
@@ -316,6 +313,21 @@ void sanguis::server::states::running::level_callback(
 	level_type)
 {
 	send()(message_convert::level_up(p));
+
+	send_available_perks(
+		p
+	);
+}
+
+void sanguis::server::states::running::send_available_perks(
+	entities::player const &p)
+{
+	server::send_available_perks(
+		p,
+		context<machine>().unicast(
+			p.net_id()
+		)
+	);
 }
 
 sanguis::server::entities::entity &

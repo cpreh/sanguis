@@ -92,7 +92,10 @@ sanguis::server::entities::player::perk_choosable(
 	perk_type::type const p) const
 {
 	return skill_points_
-		&& perk_tree_.choosable(p)
+		&& perk_tree_.choosable(
+			p,
+			level()
+		)
 		&& entity::perk_choosable(p);
 }
 
@@ -114,16 +117,20 @@ sanguis::server::perks::list const
 sanguis::server::entities::player::available_perks() const
 {
 	perks::list ret(
-		perk_tree_.choosables()
+		perk_tree_.choosables(
+			level()
+		)
 	);
 
 	for(
 		perks::list::iterator it = ret.begin();
 		it != ret.end();
 	)
-		if(!entity::perk_choosable(
-			*it
-		))
+		if(
+			!entity::perk_choosable(
+				*it
+			)
+		)
 			it = ret.erase(it);
 		else
 			++it;
