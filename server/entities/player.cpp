@@ -1,6 +1,6 @@
 #include "player.hpp"
 #include "base_parameters.hpp"
-#include "../get_dim.hpp"
+#include "../default_dim.hpp"
 #include "../perks/perk.hpp"
 #include "../weapons/weapon.hpp"
 #include "../../load/context.hpp"
@@ -28,10 +28,9 @@ sanguis::server::entities::player::player(
 			properties,
 			entity_type::player,
 			false,
-			get_dim(
+			default_dim(
 				env.load()().models(),
-				SGE_TEXT("player"),
-				SGE_TEXT("bottom")
+				SGE_TEXT("player")
 			)
 		),
 		weapons::auto_ptr()

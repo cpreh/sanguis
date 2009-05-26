@@ -1,6 +1,5 @@
 #include "health.hpp"
 #include "../entity_with_weapon.hpp"
-#include "../../get_dim.hpp"
 #include <sge/optional_impl.hpp>
 
 sanguis::server::entities::pickups::health::health(

@@ -150,6 +150,12 @@ sanguis::load::model::model::end() const
 	return parts.end();
 }
 
+sge::renderer::dim_type const
+sanguis::load::model::model::dim() const
+{
+	return cell_size;
+}
+
 sanguis::load::model::model::model(
 	sge::filesystem::path const &path,
 	resource::context const &ctx)
@@ -223,10 +229,8 @@ void sanguis::load::model::model::construct(
 		)
 	);
 
-	sge::renderer::dim_type const cell_size(
-		load_dim(
-			header.members
-		)
+	cell_size = load_dim(
+		header.members
 	);
 
 	optional_delay const opt_delay(

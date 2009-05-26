@@ -47,7 +47,7 @@ sanguis::server::weapons::sentry::do_attack(
 				(
 					entities::property_type::health,
 					entities::property(
-						static_cast<space_unit>(9)
+						static_cast<space_unit>(100)
 					)
 				),
 				ai::auto_ptr(

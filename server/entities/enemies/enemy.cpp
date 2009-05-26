@@ -2,7 +2,7 @@
 #include "../base_parameters.hpp"
 #include "../../weapons/weapon.hpp"
 #include "../../ai/base.hpp"
-#include "../../get_dim.hpp"
+#include "../../default_dim.hpp"
 #include "../../environment.hpp"
 #include "../../../random.hpp"
 #include "../../../load/enemy_name.hpp"

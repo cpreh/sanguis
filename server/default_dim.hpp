@@ -11,12 +11,6 @@ namespace server
 {
 
 dim_type const
-get_dim(
-	load::model::context const &,
-	sge::string const &model,
-	sge::string const &part);
-
-dim_type const
 default_dim(
 	load::model::context const &,
 	sge::string const &model);

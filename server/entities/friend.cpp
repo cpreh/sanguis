@@ -3,7 +3,7 @@
 #include "pickups/pickup.hpp"
 #include "../weapons/weapon.hpp"
 #include "../ai/base.hpp"
-#include "../get_dim.hpp"
+#include "../default_dim.hpp"
 #include "../../load/friend_name.hpp"
 #include "../../load/context.hpp"
 #include "../../messages/add_friend.hpp"

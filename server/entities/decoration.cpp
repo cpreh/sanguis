@@ -3,7 +3,7 @@
 #include "property.hpp"
 #include "../damage/no_armor.hpp"
 #include "../damage/list.hpp"
-#include "../get_dim.hpp"
+#include "../default_dim.hpp"
 #include "../../load/decoration_name.hpp"
 #include "../../load/context.hpp"
 #include "../../messages/create.hpp"

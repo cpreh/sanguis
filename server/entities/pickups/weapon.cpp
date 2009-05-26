@@ -1,7 +1,7 @@
 #include "weapon.hpp"
 #include "../entity_with_weapon.hpp"
 #include "../../weapons/weapon.hpp"
-#include "../../get_dim.hpp"
+#include "../../default_dim.hpp"
 #include "../../weapons/factory.hpp"
 #include "../../../load/weapon_pickup_name.hpp"
 #include "../../../load/context.hpp"

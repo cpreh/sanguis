@@ -3,7 +3,7 @@
 #include "../player.hpp"
 #include "../base_parameters.hpp"
 #include "../property.hpp"
-#include "../../get_dim.hpp"
+#include "../../default_dim.hpp"
 #include "../../damage/no_armor.hpp"
 #include "../../damage/list.hpp"
 #include "../../../load/pickup_name.hpp"

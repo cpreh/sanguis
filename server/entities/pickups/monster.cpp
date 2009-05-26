@@ -4,7 +4,6 @@
 #include "../property.hpp"
 #include "../../ai/simple.hpp"
 #include "../../weapons/melee.hpp"
-#include "../../get_dim.hpp"
 #include "../../environment.hpp"
 #include "../../damage/no_armor.hpp"
 #include "../../damage/list.hpp"

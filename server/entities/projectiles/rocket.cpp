@@ -1,7 +1,7 @@
 #include "rocket.hpp"
 #include "aoe_damage.hpp"
 #include "../property.hpp"
-#include "../../get_dim.hpp"
+#include "../../default_dim.hpp"
 #include "../../damage/list.hpp"
 #include "../../damage/wrapper.hpp"
 #include "../../damage/meta.hpp"

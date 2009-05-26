@@ -10,6 +10,7 @@ namespace sanguis
 {
 namespace draw
 {
+
 class player : public model {
 public:
 	player(
@@ -25,10 +26,10 @@ private:
 	using sprite::speed;
 
 	void update(time_type);
-	funit  angle_,
-	       target_angle;
+	funit
+		angle_,
+		target_angle;
 };
-
 
 }
 }

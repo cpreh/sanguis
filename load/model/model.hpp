@@ -5,6 +5,8 @@
 #include "part.hpp"
 #include <sge/random/uniform.hpp>
 #include <sge/filesystem/path.hpp>
+#include <sge/renderer/dim_type.hpp>
+#include <sge/math/dim/basic_decl.hpp>
 #include <sge/string.hpp>
 #include <sge/shared_ptr.hpp>
 #include <map>
@@ -33,6 +35,9 @@ public:
 	size_type size() const;
 	const_iterator begin() const;
 	const_iterator end() const;
+
+	sge::renderer::dim_type const
+	dim() const;
 private:
 	model(
 		sge::filesystem::path const &,
@@ -44,6 +49,8 @@ private:
 	friend class collection;
 
 	sge::filesystem::path const path;
+
+	sge::renderer::dim_type cell_size;
 
 	part_map parts;
 
