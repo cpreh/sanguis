@@ -181,17 +181,20 @@ sanguis::server::entities::enemies::create(
 					(entities::property_type::movement_speed,
 					 entities::property(static_cast<space_unit>(75))),
 				ai::auto_ptr(
-					new ai::simple()),
+					new ai::simple()
+				),
 				weapons::auto_ptr(
 					new weapons::melee(
 						env,
 						static_cast<space_unit>(75), // range
 						static_cast<time_type>(2), // cd
 						static_cast<space_unit>(5) // damage
-					)),
+					)
+				),
 				static_cast<probability_type>(0.5),
 				static_cast<exp_type>(12)
-				));
+			)		
+		);
 	default:
 		throw exception(
 			SGE_TEXT("Invalid enemy_type in factory!"));

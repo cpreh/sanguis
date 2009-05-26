@@ -41,7 +41,9 @@ sanguis::load::resource::textures::load(
 		boost::bind(
 			&textures::do_load,
 			this,
-			_1));
+			_1
+		)
+	);
 }
 
 sge::texture::part_ptr const
@@ -99,7 +101,8 @@ sanguis::load::resource::textures::do_load_inner(
 {
 	return sge::texture::add_image(
 		texman,
-		il->load(p));
+		il->load(p)
+	);
 }
 
 sanguis::load::resource::textures::textures(

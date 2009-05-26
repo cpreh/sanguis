@@ -12,7 +12,8 @@ sanguis::draw::simple_sprite::simple_sprite(
 :
 	entity(
 		env,
-		id),
+		id
+	),
 	sprite_(
 		sge::sprite::intrusive::parameters(
 			env.system(),
@@ -23,7 +24,14 @@ sanguis::draw::simple_sprite::simple_sprite(
 		)
 	)
 {
-	if (!sge::math::compare(_repeat,static_cast<sge::sprite::repetition_type>(1)))
+	if(
+		sge::math::compare(
+			_repeat,
+			static_cast<
+				sge::sprite::repetition_type
+			>(1)
+		)
+	)
 		sprite_.repeat(_repeat);
 }
 
@@ -38,19 +46,19 @@ void sanguis::draw::simple_sprite::orientation(
 }
 
 void sanguis::draw::simple_sprite::pos(
-	sge::sprite::point const& pos_)
+	sge::sprite::point const &pos_)
 {
 	get().pos() = pos_;
 }
 
 void sanguis::draw::simple_sprite::dim(
-	sge::sprite::dim const& dim_)
+	sge::sprite::dim const &dim_)
 {
 	get().size() = dim_;
 }
 
 void sanguis::draw::simple_sprite::visible(
-	const bool v)
+	bool const v)
 {
 	get().visible(v);
 }

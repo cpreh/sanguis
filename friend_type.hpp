@@ -7,6 +7,7 @@ namespace sanguis
 namespace friend_type
 {
 enum type {
+	sentry,
 	spider
 };
 }

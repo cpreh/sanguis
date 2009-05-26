@@ -9,6 +9,8 @@ sanguis::load::friend_name(
 	switch(etype) {
 	case friend_type::spider:
 		return SGE_TEXT("friendly_spider");
+	case friend_type::sentry:
+		return SGE_TEXT("sentry");
 	default:
 		throw exception(
 			SGE_TEXT("load::friend_name: missing loading code!"));

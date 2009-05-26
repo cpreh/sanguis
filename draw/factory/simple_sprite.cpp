@@ -19,6 +19,9 @@ sanguis::draw::factory::simple_sprite(
 			id,
 			z,
 			env.context().resources().textures().load(
-				texture_name),
-			repeat));
+				texture_name
+			),
+			repeat
+		)
+	);
 }

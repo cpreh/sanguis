@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_WEAPONS_WEAPON_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_WEAPON_HPP_INCLUDED
 
+#include "weapon_fwd.hpp"
 #include "delayed_attack_fwd.hpp"
 #include "magazine_type.hpp"
 #include "states/ready_fwd.hpp"

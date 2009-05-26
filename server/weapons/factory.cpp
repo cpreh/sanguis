@@ -4,8 +4,10 @@
 #include "rocket_launcher.hpp"
 #include "weapon.hpp"
 #include "grenade.hpp"
+#include "sentry.hpp"
 #include "../../exception.hpp"
 #include <sge/text.hpp>
+#include <boost/spirit/home/phoenix/object/new.hpp>
 
 sanguis::server::weapons::auto_ptr
 sanguis::server::weapons::create(
@@ -78,6 +80,27 @@ sanguis::server::weapons::create(
 				static_cast<space_unit>(180), // radius
 				static_cast<time_type>(0.1), // cast point
 				static_cast<time_type>(1.0) // reload time
+			)
+		);
+	case weapon_type::sentry:
+		return auto_ptr(
+			new sentry(
+				env,
+				type,
+				static_cast<time_type>(5), // cooldown
+				static_cast<time_type>(2), // cast point
+				static_cast<time_type>(0), // reload time
+				boost::phoenix::new_<
+					weapons::pistol
+				>(
+					env,
+					weapon_type::pistol,
+					static_cast<time_type>(0.3), // cooldown
+					static_cast<space_unit>(2), // damage
+					static_cast<time_type>(0.2), // cast point
+					1000,//weapon::unlimited_magazine,
+					static_cast<time_type>(0) // reload time
+				)
 			)
 		);
 	default:

@@ -74,6 +74,16 @@ sanguis::server::pickup_spawner::pickup_spawner(
 				)
 			)
 		)
+		(
+			sge::random::actor::element(
+				40,
+				boost::bind(
+					&pickup_spawner::spawn_weapon,
+					this,
+					sanguis::weapon_type::sentry
+				)
+			)
+		)
 	),
 	pos(
 		pos_type::null()

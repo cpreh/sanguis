@@ -17,7 +17,8 @@ sanguis::draw::factory::client(
 			env,
 			m.id(),
 			z_ordering::cursor,
-			SGE_TEXT("cursor"));
+			SGE_TEXT("cursor")
+		);
 	// TODO: do we have to tile the background?
 	case client_entity_type::background:
 		return simple_sprite(
@@ -26,7 +27,9 @@ sanguis::draw::factory::client(
 			z_ordering::background,
 			SGE_TEXT("background"),
 			static_cast<sge::sprite::repetition_type>(
-				2));
+				2
+			)
+		);
 	default:
 		throw exception(
 			SGE_TEXT("draw::factory::client: missing loading code!"));

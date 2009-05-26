@@ -14,6 +14,7 @@ enum type {
 	shotgun,
 	rocket_launcher,
 	grenade,
+	sentry,
 	size
 };
 
