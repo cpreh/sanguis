@@ -1,6 +1,7 @@
 #include "cheat.hpp"
 #include "entities/player.hpp"
 #include "weapons/factory.hpp"
+#include "weapons/weapon.hpp"
 #include "../exception.hpp"
 #include <sge/text.hpp>
 
