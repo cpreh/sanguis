@@ -62,19 +62,28 @@ sanguis::client::machine::machine(
 		net_.register_connect(
 			boost::bind(
 				&machine::connect_callback,
-				this))),
+				this
+			)
+		)
+	),
 	s_disconn(
 		net_.register_disconnect(
 			boost::bind(
 				&machine::disconnect_callback,
 				this,
-				_1))),
+				_1
+			)
+		)
+	),
 	s_data(
 		net_.register_data(
 			boost::bind(
 				&machine::data_callback,
 				this,
-				_1))),
+				_1
+			)
+		)
+	),
 	sys_(_sys),
 	sound_pool_(_sound_pool),
 	font_(_font),
@@ -89,20 +98,25 @@ sanguis::client::machine::machine(
 		boost::bind(
 			&sge::console::gfx::print,
 			&_console,
-			_1)),
+			_1
+		)
+	),
 	console_wrapper_(
 		_console,
 		sys_.input_system(),
-		sge::input::kc::key_f1),
+		sge::input::kc::key_f1
+	),
 	running_(true),
 	server_callback_(_server_callback),
 	screenshot_(
 		sys_.renderer(),
 		sys_.image_loader(),
-		sys_.input_system()),
+		sys_.input_system()
+	)
+	/*
 	ss_(sys_.renderer()),
 	shader_(),
-	shadervar_(),
+	shadervar_()
 	target_(
 		sys_.renderer()->create_texture(
 			sge::math::dim::structure_cast<sge::renderer::texture::dim_type>(
@@ -118,6 +132,7 @@ sanguis::client::machine::machine(
 						target_)))
 			.depth(
 				static_cast<sge::sprite::depth_type>(1)))
+	*/
 {
 	/*
 	sge::ifstream fragment_stream(

@@ -100,11 +100,11 @@ private:
 	bool running_;
 	server_callback server_callback_;
 	screenshot screenshot_;
-	sge::sprite::system ss_;
-	sge::renderer::glsl::program_ptr shader_;
-	sge::renderer::glsl::uniform::variable_ptr shadervar_;
-	sge::renderer::texture_ptr target_;
-	sge::sprite::object target_sprite_;
+	//sge::sprite::system ss_;
+	//sge::renderer::glsl::program_ptr shader_;
+	//sge::renderer::glsl::uniform::variable_ptr shadervar_;
+	//sge::renderer::texture_ptr target_;
+	//sge::sprite::object target_sprite_;
 };
 
 }

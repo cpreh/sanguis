@@ -29,7 +29,8 @@ sanguis::draw::background::background(
 			sge::math::dim::structure_cast<
 				sge::renderer::dim_type
 			>(
-				resolution()),
+				resolution() // FIXME: this sould be a power of 2!
+			),
 			sge::image::color::format::rgba8,
 			sge::renderer::filter::linear,
 			sge::renderer::resource_flags::none
