@@ -69,17 +69,25 @@ void sanguis::draw::model_part_state::play(
 		s->play(ss);
 }
 
-void sanguis::draw::model_part_state::update_sound(sge::audio::sound_ptr const s)
+void sanguis::draw::model_part_state::update_sound(
+	sge::audio::sound_ptr const s)
 {
 	if (s)
 		s->pos(
 			sge::audio::point(
-				static_cast<sge::audio::unit>(ref_.object().pos().x()),
+				static_cast<sge::audio::unit>(
+					ref_.object().pos().x()
+				),
 				static_cast<sge::audio::unit>(0),
-				static_cast<sge::audio::unit>(ref_.object().pos().y())));
+				static_cast<sge::audio::unit>(
+					ref_.object().pos().y()
+				)
+			)
+		);
 }
 
-void sanguis::draw::model_part_state::init_sound(sge::audio::sound_ptr const s)
+void sanguis::draw::model_part_state::init_sound(
+	sge::audio::sound_ptr const s)
 {
 	if (!s)
 		return;
@@ -87,7 +95,9 @@ void sanguis::draw::model_part_state::init_sound(sge::audio::sound_ptr const s)
 	s->rolloff(
 		static_cast<sge::audio::unit>(1)
 		/ static_cast<sge::audio::unit>(
-			resolution().h()));
+			resolution().h()
+		)
+	);
 }
 
 void sanguis::draw::model_part_state::update_sounds()
