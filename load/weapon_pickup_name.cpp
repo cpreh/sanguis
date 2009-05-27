@@ -16,7 +16,7 @@ sanguis::load::weapon_pickup_name(
 	case weapon_type::grenade:
 		return SGE_TEXT("pickups/grenade");
 	case weapon_type::sentry:
-		return SGE_TEXT("pickups/pistol");//sentry"); // FIXME: nille, add the sentry pickup!
+		return SGE_TEXT("pickups/sentry");
 	default:
 		throw exception(
 			SGE_TEXT("load::weapon_pickup_name: missing loading code!"));
