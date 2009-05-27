@@ -1,11 +1,14 @@
 #include "sounds.hpp"
 #include "map_get_or_create.hpp"
+#include "../log.hpp"
 #include "../../exception.hpp"
 #include "../../media_path.hpp"
 #include <sge/filesystem/path.hpp>
 #include <sge/audio/player.hpp>
 #include <sge/audio/pool.hpp>
 #include <sge/audio/multi_loader.hpp>
+#include <sge/audio/bad_sound_alloc.hpp>
+#include <sge/log/headers.hpp>
 #include <sge/text.hpp>
 #include <boost/bind.hpp>
 
@@ -18,19 +21,32 @@ make_sound(
 	sge::audio::file_ptr const file,
 	sanguis::load::sound_type::type const type)
 {
-	switch(type) {
-	case sanguis::load::sound_type::stream:
-		return player->create_stream_sound(
-			file
+	try
+	{
+		switch(type) {
+		case sanguis::load::sound_type::stream:
+			return player->create_stream_sound(
+				file
+			);
+		case sanguis::load::sound_type::nonstream:
+			return player->create_nonstream_sound(
+				file
+			);
+		default:;
+			throw sanguis::exception(
+				SGE_TEXT("Invalid sound type in load!")
+			);
+		}
+	}
+	catch(sge::audio::bad_sound_alloc const &e)
+	{
+		SGE_LOG_WARNING(
+			sanguis::load::log(),
+			sge::log::_1
+				<< SGE_TEXT("Allocation of a sound failed! ")
+				<< e.what()
 		);
-	case sanguis::load::sound_type::nonstream:
-		return player->create_nonstream_sound(
-			file
-		);
-	default:;
-		throw sanguis::exception(
-			SGE_TEXT("Invalid sound type in load!")
-		);
+		return sge::audio::sound_ptr();
 	}
 }
 
@@ -89,10 +105,11 @@ sanguis::load::resource::sounds::make(
 		)
 	);
 
-	pool.add(
-		sound_,
-		sge::audio::stop_mode::continue_playing
-	);
+	if(sound_)
+		pool.add(
+			sound_,
+			sge::audio::stop_mode::continue_playing
+		);
 
 	return sound_;
 }
