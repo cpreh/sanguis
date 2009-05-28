@@ -18,7 +18,7 @@ sanguis::server::pickup_spawner::pickup_spawner(
 			sge::random::actor::container
 		>(
 			sge::random::actor::element(
-				4.,
+				static_cast<sge::random::actor::float_type>(4),
 				boost::bind(
 					&pickup_spawner::spawn_health,
 					this
@@ -27,7 +27,7 @@ sanguis::server::pickup_spawner::pickup_spawner(
 		)
 		(
 			sge::random::actor::element(
-				0.3,
+				static_cast<sge::random::actor::float_type>(0.3),
 				boost::bind(
 					&pickup_spawner::spawn_monster,
 					this
@@ -36,7 +36,7 @@ sanguis::server::pickup_spawner::pickup_spawner(
 		)
 		(
 			sge::random::actor::element(
-				2.,
+				static_cast<sge::random::actor::float_type>(2),
 				boost::bind(
 					&pickup_spawner::spawn_weapon,
 					this,
@@ -46,7 +46,7 @@ sanguis::server::pickup_spawner::pickup_spawner(
 		)
 		(
 			sge::random::actor::element(
-				0.8,
+				static_cast<sge::random::actor::float_type>(0.8),
 				boost::bind(
 					&pickup_spawner::spawn_weapon,
 					this,
@@ -56,7 +56,7 @@ sanguis::server::pickup_spawner::pickup_spawner(
 		)
 		(
 			sge::random::actor::element(
-				1.,
+				static_cast<sge::random::actor::float_type>(1),
 				boost::bind(
 					&pickup_spawner::spawn_weapon,
 					this,
@@ -66,7 +66,7 @@ sanguis::server::pickup_spawner::pickup_spawner(
 		)
 		(
 			sge::random::actor::element(
-				4,
+				static_cast<sge::random::actor::float_type>(4),
 				boost::bind(
 					&pickup_spawner::spawn_weapon,
 					this,
@@ -76,7 +76,7 @@ sanguis::server::pickup_spawner::pickup_spawner(
 		)
 		(
 			sge::random::actor::element(
-				0.3,
+				static_cast<sge::random::actor::float_type>(0.3),
 				boost::bind(
 					&pickup_spawner::spawn_weapon,
 					this,
