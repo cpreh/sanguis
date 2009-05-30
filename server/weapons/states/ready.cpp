@@ -2,6 +2,7 @@
 #include "castpoint.hpp"
 #include "../events/shoot.hpp"
 #include "../events/poll.hpp"
+#include "../events/stop.hpp"
 #include "../../entities/entity_with_weapon.hpp"
 
 boost::statechart::result

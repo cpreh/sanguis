@@ -3,6 +3,7 @@
 #include "events/poll.hpp"
 #include "events/reset.hpp"
 #include "events/shoot.hpp"
+#include "events/stop.hpp"
 #include "states/ready.hpp"
 #include "../entities/entity_with_weapon.hpp"
 #include "../collision/distance.hpp"
@@ -58,6 +59,14 @@ sanguis::server::weapons::weapon::attack(
 			from,
 			to
 		)
+	);
+}
+
+void
+sanguis::server::weapons::weapon::stop()
+{
+	process_event(
+		events::stop()
 	);
 }
 

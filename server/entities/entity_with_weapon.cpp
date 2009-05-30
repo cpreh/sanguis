@@ -116,6 +116,9 @@ void sanguis::server::entities::entity_with_weapon::change_weapon(
 			SGE_TEXT("tried to change to non-owned weapon")
 		);
 	
+	if(has_weapon())
+		active_weapon().stop();
+	
 	weapon_ = nweapon;
 
 	reloading = false;

@@ -5,6 +5,7 @@
 #include "../weapon.hpp"
 #include "../events/poll_fwd.hpp"
 #include "../events/shoot_fwd.hpp"
+#include "../events/stop_fwd.hpp"
 #include "../../pos_type.hpp"
 #include "../../../diff_clock.hpp"
 #include <sge/time/timer.hpp>
@@ -38,6 +39,9 @@ public:
 		>,
 		boost::statechart::custom_reaction<
 			events::poll
+		>,
+		boost::statechart::custom_reaction<
+			events::stop
 		>
 	> reactions;
 
@@ -51,6 +55,10 @@ public:
 	boost::statechart::result
 	react(
 		events::poll const &);
+
+	boost::statechart::result
+	react(
+		events::stop const &);
 private:
 	diff_clock diff_clock_;
 	sge::time::timer attack_time;

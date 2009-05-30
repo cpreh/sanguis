@@ -1,8 +1,10 @@
 #include "castpoint.hpp"
 #include "backswing.hpp"
+#include "ready.hpp"
 #include "../delayed_attack.hpp"
 #include "../events/shoot.hpp"
 #include "../events/poll.hpp"
+#include "../events/stop.hpp"
 #include "../../entities/entity_with_weapon.hpp"
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/optional_impl.hpp>
@@ -60,4 +62,11 @@ sanguis::server::weapons::states::castpoint::react(
 	post_event(e);
 
 	return transit<backswing>();
+}
+
+boost::statechart::result
+sanguis::server::weapons::states::castpoint::react(
+	events::stop const &)
+{
+	return transit<ready>();
 }

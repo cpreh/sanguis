@@ -3,6 +3,7 @@
 #include "ready.hpp"
 #include "../events/poll.hpp"
 #include "../events/shoot.hpp"
+#include "../events/stop.hpp"
 #include "../events/reset.hpp"
 #include "../../entities/entity_with_weapon.hpp"
 

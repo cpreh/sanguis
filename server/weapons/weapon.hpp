@@ -51,6 +51,8 @@ public:
 		time_type,
 		entities::entity_with_weapon &owner);
 
+	void stop();
+
 	void repickup();
 
 	magazine_type	

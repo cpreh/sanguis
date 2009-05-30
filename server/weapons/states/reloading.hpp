@@ -4,6 +4,7 @@
 #include "reloading_fwd.hpp"
 #include "../weapon.hpp"
 #include "../events/poll_fwd.hpp"
+#include "../events/stop_fwd.hpp"
 #include "../events/reset_fwd.hpp"
 #include "../../../diff_clock.hpp"
 #include <sge/time/timer.hpp>
@@ -34,6 +35,9 @@ public:
 			events::poll
 		>,
 		boost::statechart::custom_reaction<
+			events::stop
+		>,
+		boost::statechart::custom_reaction<
 			events::reset
 		>
 	> reactions;
@@ -44,6 +48,10 @@ public:
 	boost::statechart::result
 	react(
 		events::poll const &);
+
+	boost::statechart::result
+	react(
+		events::stop const &);
 	
 	boost::statechart::result
 	react(
