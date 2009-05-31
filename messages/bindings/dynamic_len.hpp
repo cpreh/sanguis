@@ -18,14 +18,12 @@ namespace bindings
 
 template<
 	typename T,
-	template<
-		typename 
-	> class Adapted
+	typename Adapted
 >
 struct dynamic_len {
 	typedef T type;
 
-	typedef Adapted<typename T::value_type> adapted;
+	typedef Adapted adapted;
 
 	typedef boost::uint16_t length_type;
 

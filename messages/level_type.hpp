@@ -2,14 +2,14 @@
 #define SANGUIS_MESSAGES_LEVEL_TYPE_HPP_INCLUDED
 
 #include "types/level.hpp"
-#include <majutsu/pod.hpp>
+#include "bindings/pod.hpp"
 
 namespace sanguis
 {
 namespace messages
 {
 
-typedef majutsu::pod<
+typedef bindings::pod<
 	types::level
 > level_type;
 
