@@ -10,6 +10,7 @@
 #include "../message_convert/move.hpp"
 #include "../message_convert/health.hpp"
 #include "../log.hpp"
+#include "../player_record.hpp"
 #include "../../truncation_check_cast.hpp"
 #include "../../random.hpp"
 #include "../../messages/pause.hpp"
@@ -220,7 +221,14 @@ sanguis::server::states::unpaused::react(
 {
 	time_type const delta = t.delta();
 
-	context<running>().process(delta);
+	running::player_map &players_(
+		context<running>().players()
+	);
+
+	if(!players_.empty())
+		context<running>().update_waves(
+			delta
+		);
 
 	// should we send position updates?
 	bool const update_pos = send_timer.update_b();
@@ -241,11 +249,32 @@ sanguis::server::states::unpaused::react(
 			
 			// we have to remove the player link as well
 			if(i->type() == entity_type::player)
-				context<running>().players().erase(
-					dynamic_cast<entities::player &>(*i).net_id()
+			{
+				entities::player &player_(
+					dynamic_cast<
+						entities::player &
+					>(
+						*i
+					)
 				);
 
+				context<running>().add_player_record(
+					player_record(
+						player_.name(),
+						player_.exp()
+					)
+				);
+
+				players_.erase(
+					player_.net_id()
+				);
+
+				if(players_.empty())
+					context<running>().all_dead();
+			}
+
 			i = entities.erase(i);
+
 			continue;
 		}
 

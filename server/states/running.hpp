@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_STATES_RUNNING_HPP_INCLUDED
 
 #include "unpaused_fwd.hpp"
+#include "../player_record_fwd.hpp"
 #include "../environment.hpp"
 #include "../exp_type.hpp"
 #include "../probability_type.hpp"
@@ -32,6 +33,7 @@
 #include <boost/statechart/result.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <map>
+#include <vector>
 
 namespace sanguis
 {
@@ -58,8 +60,13 @@ public:
 		server::entities::player *
 	> player_map;
 
+	typedef std::vector<
+		server::player_record
+	> player_record_vector;
+
 	explicit running(
 		my_context);
+	~running();
 	
 	server::entities::container &entities();
 	server::entities::container const &entities() const;
@@ -71,11 +78,16 @@ public:
 	player(
 		net::id_type);
 
-	void process(
-		time_type);
-
 	server::environment const &
 	environment() const;
+
+	void update_waves(
+		time_type);
+	
+	void add_player_record(
+		player_record const &);
+
+	void all_dead();
 
 	boost::statechart::result react(
 		message_event const &);
@@ -140,6 +152,8 @@ private:
 	> pickup_chance_;
 
 	waves::generator wave_generator;
+
+	player_record_vector player_records;
 };
 
 }

@@ -15,18 +15,23 @@
 #include "../log.hpp"
 #include "../send_available_perks.hpp"
 #include "../cheat.hpp"
+#include "../player_record.hpp"
 #include "../../connect_state.hpp"
 #include "../../messages/unwrap.hpp"
+#include "../../messages/highscore.hpp"
+#include "../../messages/create.hpp"
 #include <sge/container/map_impl.hpp>
 #include <sge/random/inclusive_range.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/collision/world.hpp>
+#include <sge/utf8/convert.hpp>
 #include <sge/text.hpp>
 #include <sge/type_info.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/foreach.hpp>
 #include <boost/bind.hpp>
 #include <boost/tr1/random.hpp>
+#include <algorithm>
 #include <ostream>
 
 sanguis::server::states::running::running(
@@ -74,7 +79,8 @@ sanguis::server::states::running::running(
 			static_cast<probability_type>(1)
 		)
 	),
-	wave_generator()
+	wave_generator(),
+	player_records()
 {
 	SGE_LOG_DEBUG(
 		log(),
@@ -96,6 +102,9 @@ sanguis::server::states::running::running(
 		)
 	);
 }
+
+sanguis::server::states::running::~running()
+{}
 
 sanguis::server::entities::container &
 sanguis::server::states::running::entities()
@@ -128,7 +137,14 @@ sanguis::server::states::running::player(
 	return *players()[id];
 }
 
-void sanguis::server::states::running::process(
+sanguis::server::environment const &
+sanguis::server::states::running::environment() const
+{
+	return environment_;
+}
+
+void
+sanguis::server::states::running::update_waves(
 	time_type const time)
 {
 	wave_generator.process(
@@ -137,10 +153,49 @@ void sanguis::server::states::running::process(
 	);
 }
 
-sanguis::server::environment const &
-sanguis::server::states::running::environment() const
+void
+sanguis::server::states::running::add_player_record(
+	player_record const &rec)
 {
-	return environment_;
+	player_records.push_back(
+		rec
+	);
+}
+
+void
+sanguis::server::states::running::all_dead()
+{
+	messages::types::string_vector names;
+	exp_type exp(0);
+
+	BOOST_FOREACH(
+		player_record_vector::const_reference ref,
+		player_records
+	)
+	{
+		names.push_back(
+			sge::utf8::convert(
+				ref.name()
+			)
+		);
+
+		exp = std::max(
+			exp,
+			ref.exp()
+		);
+	}
+
+	send()(
+		messages::create(
+			messages::highscore
+			(
+				names,
+				exp
+			)
+		)
+	);
+
+	player_records.clear();
 }
 
 boost::statechart::result
