@@ -5,6 +5,7 @@
 #include "menus/main.hpp"
 #include "menus/connect.hpp"
 #include "menus/connect_box.hpp"
+#include "menus/highscore.hpp"
 #include "button.hpp"
 #include "mover.hpp"
 #include "../cursor.hpp"
@@ -54,6 +55,7 @@ private:
 	menus::main main_;
 	menus::connect connect_;
 	menus::connect_box connect_box_;
+	menus::highscore highscore_;
 	
 	mover mover_;
 	sge::signal::connection_manager connections_;
