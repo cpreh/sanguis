@@ -1,8 +1,13 @@
 #include "screenshot.hpp"
+#include "config/homedir.hpp"
 #include "make_screenshot_path.hpp"
 #include "log.hpp"
+#include "../exception.hpp"
 #include <sge/renderer/screenshot.hpp>
 #include <sge/filesystem/path.hpp>
+#include <sge/filesystem/is_directory.hpp>
+#include <sge/filesystem/create_directory.hpp>
+#include <sge/filesystem/exists.hpp>
 #include <sge/input/key_code.hpp>
 #include <sge/input/key_pair.hpp>
 #include <sge/input/system.hpp>
@@ -40,17 +45,25 @@ void sanguis::client::screenshot::process()
 	if (!active_)
 		return;
 
-	sge::filesystem::path const p = 
-		make_screenshot_path();
+	sge::filesystem::path const 
+		p = make_screenshot_path(),
+		dir = config::homedir()/SGE_TEXT("screenshots");
 	
+	if (!sge::filesystem::exists(dir))
+		if (!sge::filesystem::create_directory(dir))
+			throw exception(SGE_TEXT("Screenshot path ")+(dir/p).string()+SGE_TEXT(" doesn't exist and could not be created"));
+	
+	if (!sge::filesystem::is_directory(dir))
+		throw exception(SGE_TEXT("Screenshot path ")+(dir/p).string()+SGE_TEXT(" exists but is not a directory"));
+
 	SGE_LOG_DEBUG(
 		log(),
 		sge::log::_1
 			<< SGE_TEXT("writing screenshot: ")
-			<< p
+			<< (dir/p)
 	);
 	
-	make_screenshot(p);
+	make_screenshot(dir/p);
 		
 	active_ = false;
 }

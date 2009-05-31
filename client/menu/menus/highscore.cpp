@@ -27,15 +27,19 @@ sanguis::client::menu::menus::highscore::highscore(
 			.activation(
 				sge::gui::activation_state::inactive)
 			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::vertical>())),
+				sge::make_shared_ptr<sge::gui::layouts::grid>())),
 	table(
 		parent,
 		sge::gui::widgets::parameters()
+			.pos(
+				sge::gui::point(0,0))
 			.layout(
 				sge::make_shared_ptr<sge::gui::layouts::grid>())),
 	back_button(
 		parent,
-		sge::gui::widgets::parameters(),
+		sge::gui::widgets::parameters()
+			.pos(
+				sge::gui::point(0,1)),
 		SGE_TEXT("Back")),
 	children()
 {

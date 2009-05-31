@@ -10,5 +10,5 @@ sge::filesystem::path const sanguis::client::make_screenshot_path()
 	sge::string const filename = 
 		sge::lexical_cast<sge::string>(
 			sge::time::time())+SGE_TEXT(".")+type;
-	return sge::filesystem::path(SGE_TEXT("screenshots"))/filename;
+	return sge::filesystem::path(filename);
 }
