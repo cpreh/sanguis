@@ -18,6 +18,7 @@
 #include "../../draw/coord_transform.hpp"
 #include "../../draw/scene.hpp"
 #include "../../load/context.hpp"
+#include "../log.hpp"
 #include <sge/renderer/device.hpp>
 #include <sge/audio/player.hpp>
 #include <sge/audio/pool.hpp>
@@ -231,9 +232,16 @@ boost::statechart::result
 sanguis::client::states::running::operator()(
 	messages::highscore const &m)
 {
+	SGE_LOG_DEBUG(
+		sanguis::client::log(),
+		sge::log::_1 
+			<< SGE_TEXT("got highscore message, score was: ")
+		  << m.get<messages::roles::highscore>());
+
 	BOOST_FOREACH(messages::types::string const &s,m.get<messages::string_vector>())
 		gameover_names_.push_back(
-			sge::utf8::convert(s));
+			sge::utf8::convert(
+				s));
 	gameover_score_ = 
 		static_cast<highscore::score_type>(
 			m.get<messages::roles::highscore>());
