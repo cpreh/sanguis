@@ -34,5 +34,4 @@ typedef make_class<
 }
 }
 
-
 #endif

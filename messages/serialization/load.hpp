@@ -45,9 +45,7 @@ struct load {
 
 template<
 	typename T,
-	template<
-		typename
-	> class A
+	typename A
 >
 struct load<
 	bindings::dynamic_len<

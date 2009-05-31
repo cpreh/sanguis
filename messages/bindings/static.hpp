@@ -14,14 +14,12 @@ namespace bindings
 
 template<
 	typename T,
-	template<
-		typename 
-	> class Adapted
+	typename Adapted
 >
 struct static_ {
 	typedef T type;
 
-	typedef Adapted<typename T::value_type> adapted;
+	typedef Adapted adapted;
 
 	static majutsu::size_type
 	static_size()

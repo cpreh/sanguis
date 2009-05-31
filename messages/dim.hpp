@@ -2,8 +2,8 @@
 #define SANGUIS_MESSAGES_DIM_HPP_INCLUDED
 
 #include "bindings/static.hpp"
-#include "bindings/pod.hpp"
 #include "types/dim.hpp"
+#include "space_unit.hpp"
 
 namespace sanguis
 {
@@ -12,7 +12,7 @@ namespace messages
 
 typedef bindings::static_<
 	types::dim,
-	bindings::pod
+	space_unit
 > dim;
 
 }
