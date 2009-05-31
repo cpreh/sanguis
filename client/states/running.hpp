@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_STATES_RUNNING_HPP_INCLUDED
 #define SANGUIS_CLIENT_STATES_RUNNING_HPP_INCLUDED
 
+#include "menu.hpp"
 #include "unpaused_fwd.hpp"
 #include "../perk_chooser.hpp"
 #include "../music_handler.hpp"
@@ -15,6 +16,7 @@
 #include "../../weapon_type.hpp"
 #include "../../messages/base.hpp"
 #include "../../messages/types/level.hpp"
+#include "../../messages/highscore.hpp"
 #include "../../messages/assign_id.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../messages/give_weapon.hpp"
@@ -24,11 +26,15 @@
 #include "../../messages/remove.hpp"
 #include "../../draw/scene_fwd.hpp"
 #include "../../draw/player_fwd.hpp"
+#include "../menu_event.hpp"
+#include "../highscore/name_container.hpp"
+#include "../highscore/score_type.hpp"
 #include <sge/signal/auto_connection.hpp>
 #include <sge/scoped_ptr.hpp>
 #include <sge/renderer/state/scoped.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
+#include <boost/statechart/transition.hpp>
 #include <boost/statechart/result.hpp>
 #include <boost/mpl/list.hpp>
 #include <boost/array.hpp>
@@ -45,7 +51,8 @@ class running
 {
 public:
 	typedef boost::mpl::list<
-		boost::statechart::custom_reaction<message_event>
+		boost::statechart::custom_reaction<message_event>,
+		boost::statechart::transition<menu_event,menu>
 	> reactions;
 
 	running(my_context);
@@ -65,6 +72,8 @@ public:
 		messages::move const &);
 	boost::statechart::result operator()(
 		messages::remove const &);
+	boost::statechart::result operator()(
+		messages::highscore const &);
 
 	boost::statechart::result operator()(
 		messages::available_perks const &);
@@ -76,6 +85,9 @@ public:
 	void consume_level();
 	entity_id player_id() const;
 	client::perk_chooser &perk_chooser();
+	sanguis::client::cursor_ptr cursor();
+	client::highscore::name_container const &gameover_names();
+	client::highscore::score_type gameover_score();
 private:
 	boost::statechart::result handle_default_msg(
 		messages::base const &);
@@ -98,6 +110,8 @@ private:
 	input_handler input;
 	sge::signal::auto_connection input_connection;
 	client::perk_chooser perk_chooser_;
+	client::highscore::name_container gameover_names_;
+	client::highscore::score_type gameover_score_;
 };
 }
 }
