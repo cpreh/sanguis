@@ -34,6 +34,11 @@ sanguis::client::menu::menus::main::main(
 		sys.image_loader(),
 		buttons_path,
 		SGE_TEXT("quickstart")),
+	highscore(
+		parent,
+		sys.image_loader(),
+		buttons_path,
+		SGE_TEXT("highscores")),
 	exit(
 		parent,
 		sys.image_loader(),

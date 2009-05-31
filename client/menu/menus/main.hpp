@@ -24,6 +24,7 @@ struct main
 	sge::gui::widgets::base parent;
 	button connect;
 	button start;
+	button highscore;
 	button exit;
 };
 }

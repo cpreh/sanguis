@@ -70,6 +70,11 @@ sanguis::client::menu::object::object(
 	connect_box_(
 		m,
 		sys_),
+	
+	highscore_(
+		m,
+		buttons_path,
+		sys_),
 
 	mover_(
 		m,
@@ -94,6 +99,14 @@ sanguis::client::menu::object::object(
 					boost::bind(
 						&object::start_server,
 						this)))
+		)
+		(
+			sge::signal::shared_connection(
+				main_.highscore.register_clicked(
+					boost::bind(
+						&mover::reset,
+						&mover_,
+						boost::ref(highscore_.parent))))
 		)
 		(
 			sge::signal::shared_connection(
@@ -123,6 +136,14 @@ sanguis::client::menu::object::object(
 						this,
 						boost::cref(connection_host_),
 						boost::cref(connection_port_))))
+		)
+		(
+			sge::signal::shared_connection(
+				highscore_.back_button.register_clicked(
+					boost::bind(
+						&mover::reset,
+						&mover_,
+						boost::ref(main_.parent))))
 		)
 		(
 			sge::signal::shared_connection(

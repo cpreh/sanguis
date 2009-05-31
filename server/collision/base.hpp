@@ -24,11 +24,18 @@ protected:
 		pos_type const &speed,
 		space_unit const radius);
 	
+	/*
 	sge::collision::objects::circle_ptr const
 	circle();
 
 	sge::collision::objects::const_circle_ptr const
 	circle() const;
+	*/
+	sge::collision::objects::circle_ptr const
+	circle() { return circle_; }
+
+	sge::collision::objects::const_circle_ptr const
+	circle() const { return circle_; }
 public:
 	virtual ~base();
 

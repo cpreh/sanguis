@@ -39,7 +39,7 @@ void sanguis::client::screenshot::process()
 {
 	if (!active_)
 		return;
-	
+
 	sge::filesystem::path const p = 
 		make_screenshot_path();
 	

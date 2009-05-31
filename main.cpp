@@ -170,7 +170,7 @@ try
 		(sge::systems::parameterless::audio_player)
 		(sge::systems::named(
 			sge::systems::parameterless::collision_system,
-			SGE_TEXT("cell")
+			SGE_TEXT("bullet")
 		))
 		(sge::systems::parameterless::font));
 

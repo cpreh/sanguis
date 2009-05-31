@@ -35,6 +35,7 @@ sanguis::server::collision::base::base(
 	)
 {}
 
+/*
 sge::collision::objects::circle_ptr const
 sanguis::server::collision::base::circle()
 {
@@ -46,6 +47,7 @@ sanguis::server::collision::base::circle() const
 {
 	return circle_;
 }
+*/
 
 sanguis::server::collision::base::~base()
 {}
