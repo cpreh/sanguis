@@ -29,7 +29,7 @@ namespace
 {
 sge::gui::dim const dialog_size()
 {
-	float const scale_x = 0.4f,
+	float const scale_x = 0.5f,
 	            scale_y = 0.8f;
 	
 	return sge::gui::dim(
