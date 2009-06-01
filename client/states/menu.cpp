@@ -1,7 +1,6 @@
 #include "menu.hpp"
 #include "paused.hpp"
 #include "unpaused.hpp"
-#include "../../media_path.hpp"
 #include "../../messages/base.hpp"
 #include "../../messages/unwrap.hpp"
 #include "../../messages/create.hpp"
@@ -9,25 +8,14 @@
 #include "../machine.hpp"
 #include "../log.hpp"
 #include <sge/log/headers.hpp>
-#include <sge/font/object.hpp>
-#include <sge/font/text_size.hpp>
-#include <sge/renderer/device.hpp>
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/state/trampoline.hpp>
-#include <sge/image/loader.hpp>
 #include <sge/image/color/colors.hpp>
-#include <sge/gui/skins/standard.hpp>
-#include <sge/gui/make_image.hpp>
-#include <sge/gui/layouts/vertical.hpp>
-#include <sge/gui/layouts/horizontal.hpp>
-#include <sge/systems/instance.hpp>
+#include <sge/utf8/convert.hpp>
+#include <sge/lexical_cast.hpp>
 #include <sge/text.hpp>
 #include <sge/iconv.hpp>
-#include <sge/utf8/convert.hpp>
-#include <sge/make_shared_ptr.hpp>
-#include <sge/lexical_cast.hpp>
-#include <boost/ref.hpp>
 #include <boost/bind.hpp>
 #include <boost/mpl/vector.hpp>
 #include <ostream>
@@ -43,23 +31,30 @@ sanguis::client::states::menu::menu(
 				&menu::connect,
 				this,
 				_1,
-				_2),
+				_2
+			),
 			boost::bind(
 				&menu::cancel_connect,
-				this),
+				this
+			),
 			boost::bind(
 				&machine::start_server,
-				&(context<machine>())),
+				&context<machine>()
+			),
 			boost::bind(
 				&machine::quit,
-				&(context<machine>())))),
+				&context<machine>()
+			)
+		)
+	),
 	connect_state_(),
 	renderer_state_(
 		context<machine>().renderer(),
 		sge::renderer::state::list
 			(sge::renderer::state::bool_::clear_backbuffer = true)
 			(sge::renderer::state::bool_::clear_zbuffer = false)
-			(sge::renderer::state::color::clear_color = sge::image::color::colors::black()))
+			(sge::renderer::state::color::clear_color = sge::image::color::colors::black())
+	)
 {
 }
 

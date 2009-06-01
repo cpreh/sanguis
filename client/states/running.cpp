@@ -20,7 +20,6 @@
 #include "../../load/context.hpp"
 #include "../log.hpp"
 #include <sge/renderer/device.hpp>
-#include <sge/audio/player.hpp>
 #include <sge/audio/pool.hpp>
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/var.hpp>
@@ -31,9 +30,6 @@
 #include <sge/utf8/convert.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
-#include <boost/spirit/home/phoenix/bind/bind_function.hpp>
-#include <boost/spirit/home/phoenix/object/construct.hpp>
-#include <boost/spirit/home/phoenix/core/argument.hpp>
 #include <boost/foreach.hpp>
 
 namespace
