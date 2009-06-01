@@ -25,7 +25,7 @@ sanguis::client::states::paused::paused(my_context ctx)
 :
 	my_base(ctx),
 	chooser_activation_(
-	context<running>().perk_chooser())
+		context<running>().perk_chooser())
 {
 	context<running>().pause(true);
 }

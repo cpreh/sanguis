@@ -1,5 +1,6 @@
 #include "running.hpp"
 #include "menu.hpp"
+#include "gameover.hpp"
 #include "../perk_cast.hpp"
 #include "../next_id.hpp"
 #include "../../client_entity_type.hpp"
@@ -17,6 +18,7 @@
 #include "../../draw/coord_transform.hpp"
 #include "../../draw/scene.hpp"
 #include "../../load/context.hpp"
+#include "../log.hpp"
 #include <sge/renderer/device.hpp>
 #include <sge/audio/player.hpp>
 #include <sge/audio/pool.hpp>
@@ -26,6 +28,7 @@
 #include <sge/systems/instance.hpp>
 #include <sge/container/raw_vector_impl.hpp>
 #include <sge/assert.hpp>
+#include <sge/utf8/convert.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/bind.hpp>
 #include <boost/spirit/home/phoenix/bind/bind_function.hpp>
@@ -104,7 +107,9 @@ sanguis::client::states::running::running(
 			this,
 			_1),
 		logic_.cursor()
-	)
+	),
+	gameover_names_(),
+	gameover_score_()
 {
 	drawer->client_message(
 		client_messages::add(
@@ -225,6 +230,26 @@ sanguis::client::states::running::operator()(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
+	messages::highscore const &m)
+{
+	SGE_LOG_DEBUG(
+		sanguis::client::log(),
+		sge::log::_1 
+			<< SGE_TEXT("got highscore message, score was: ")
+		  << m.get<messages::roles::highscore>());
+
+	BOOST_FOREACH(messages::types::string const &s,m.get<messages::string_vector>())
+		gameover_names_.push_back(
+			sge::utf8::convert(
+				s));
+	gameover_score_ = 
+		static_cast<highscore::score_type>(
+			m.get<messages::roles::highscore>());
+	return transit<gameover>();
+}
+
+boost::statechart::result
+sanguis::client::states::running::operator()(
 	messages::available_perks const &m)
 {
 	perk_chooser_.perks(
@@ -252,6 +277,23 @@ sanguis::entity_id sanguis::client::states::running::player_id() const
 sanguis::client::perk_chooser &sanguis::client::states::running::perk_chooser()
 {
 	return perk_chooser_;
+}
+
+sanguis::client::cursor_ptr sanguis::client::states::running::cursor()
+{
+	return logic_.cursor();
+}
+
+sanguis::client::highscore::name_container const &
+sanguis::client::states::running::gameover_names()
+{
+	return gameover_names_;
+}
+
+sanguis::client::highscore::score_type
+sanguis::client::states::running::gameover_score()
+{
+	return gameover_score_;
 }
 
 boost::statechart::result
