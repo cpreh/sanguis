@@ -2,6 +2,7 @@
 #include "server/machine.hpp"
 #include "client/machine.hpp"
 #include "client/states/menu.hpp"
+#include "client/message_event.hpp"
 #include "server/states/running.hpp"
 #include "server/states/unpaused.hpp"
 #include "server/entities/entity.hpp"
@@ -41,6 +42,7 @@
 #include <sge/image/color/colors.hpp>
 #include <sge/audio/player.hpp>
 #include <sge/audio/multi_loader.hpp>
+#include <sge/audio/pool.hpp>
 #include <sge/time/second.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/input/key_state_tracker.hpp>

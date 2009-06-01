@@ -2,21 +2,18 @@
 #define SANGUIS_CLIENT_STATES_GAMEOVER_HPP_INCLUDED
 
 #include "running.hpp"
-#include "../message_event.hpp"
+#include "../message_event_fwd.hpp"
 #include "../../messages/unpause.hpp"
-#include "../../tick_event.hpp"
+#include "../../tick_event_fwd.hpp"
 #include <sge/gui/widgets/buttons/image.hpp>
 #include <sge/gui/manager.hpp>
 #include <sge/gui/widgets/backdrop.hpp>
 #include <sge/gui/widgets/label.hpp>
 #include <sge/gui/widgets/buttons/text.hpp>
-#include <sge/signal/connection_manager.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/result.hpp>
-#include <boost/ptr_container/ptr_vector.hpp>
 #include <boost/mpl/list.hpp>
-#include <boost/array.hpp>
 
 namespace sanguis
 {

@@ -4,7 +4,9 @@
 #include "../../resolution.hpp"
 #include "../../messages/create.hpp"
 #include "../../messages/unwrap.hpp"
+#include "../../tick_event.hpp"
 #include "../menu_event.hpp"
+#include "../message_event.hpp"
 #include <sge/gui/skins/standard.hpp>
 #include <sge/gui/unit.hpp>
 #include <sge/gui/make_image.hpp>
@@ -125,8 +127,16 @@ boost::statechart::result
 sanguis::client::states::gameover::react(
 	tick_event const &t)
 {
-	context<running>().process(t.delta());
-	context<running>().draw(t.delta());
+	context<running>().process(
+		tick_event(t.delta())
+	);
+
+	context<running>().draw(
+		tick_event(
+			t.delta()
+		)
+	);
+
 	m_.update();
 	m_.draw();
 	return discard_event();

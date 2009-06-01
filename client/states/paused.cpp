@@ -1,5 +1,7 @@
 #include "paused.hpp"
 #include "unpaused.hpp"
+#include "../menu_event.hpp"
+#include "../../tick_event.hpp"
 #include "../../messages/unpause.hpp"
 #include "../../messages/unwrap.hpp"
 #include <boost/bind.hpp>
@@ -17,8 +19,18 @@ boost::statechart::result
 sanguis::client::states::paused::react(
 	tick_event const &t)
 {
-	context<running>().process(t.delta());
-	context<running>().draw(t.delta());
+	context<running>().process(
+		tick_event(
+			t.delta()
+		)
+	);
+
+	context<running>().draw(
+		tick_event(
+			t.delta()
+		)
+	);
+
 	return discard_event();
 }
 

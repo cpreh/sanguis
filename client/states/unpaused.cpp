@@ -1,6 +1,8 @@
 #include "unpaused.hpp"
 #include "paused.hpp"
+#include "../menu_event.hpp"
 #include "../../messages/unwrap.hpp"
+#include "../../tick_event.hpp"
 #include <boost/bind.hpp>
 
 sanguis::client::states::unpaused::unpaused(
@@ -16,9 +18,17 @@ sanguis::client::states::unpaused::react(
 	tick_event const &t)
 {
 	context<running>().process(
-		t.delta());
+		tick_event(
+			t.delta()
+		)
+	);
+
 	context<running>().draw(
-		t.delta());
+		tick_event(
+			t.delta()
+		)
+	);
+
 	return discard_event();
 }
 

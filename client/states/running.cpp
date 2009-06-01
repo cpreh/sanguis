@@ -3,6 +3,9 @@
 #include "gameover.hpp"
 #include "../perk_cast.hpp"
 #include "../next_id.hpp"
+#include "../message_event.hpp"
+#include "../menu_event.hpp"
+#include "../log.hpp"
 #include "../../client_entity_type.hpp"
 #include "../../client_messages/add.hpp"
 #include "../../client_messages/visible.hpp"
@@ -18,7 +21,7 @@
 #include "../../draw/coord_transform.hpp"
 #include "../../draw/scene.hpp"
 #include "../../load/context.hpp"
-#include "../log.hpp"
+#include "../../tick_event.hpp"
 #include <sge/renderer/device.hpp>
 #include <sge/audio/pool.hpp>
 #include <sge/renderer/state/list.hpp>

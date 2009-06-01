@@ -6,6 +6,8 @@
 #include "../../messages/create.hpp"
 #include "../../messages/client_info.hpp"
 #include "../machine.hpp"
+#include "../message_event.hpp"
+#include "../menu_event.hpp"
 #include "../log.hpp"
 #include <sge/log/headers.hpp>
 #include <sge/renderer/state/list.hpp>

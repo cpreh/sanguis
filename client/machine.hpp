@@ -8,24 +8,19 @@
 #include "../load/context_fwd.hpp"
 #include "../messages/auto_ptr.hpp"
 #include "../net/client.hpp"
-#include "../tick_event.hpp"
+#include "../tick_event_fwd.hpp"
 
 #include <sge/font/object_fwd.hpp>
-#include <sge/input/key_type.hpp>
+#include <sge/input/key_code.hpp>
 #include <sge/input/key_state_tracker_fwd.hpp>
-#include <sge/image/loader_fwd.hpp>
 #include <sge/systems/instance_fwd.hpp>
 #include <sge/audio/player_fwd.hpp>
-#include <sge/audio/pool.hpp>
+#include <sge/audio/pool_fwd.hpp>
 #include <sge/sprite/system.hpp>
 #include <sge/sprite/object.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/console/stdlib.hpp>
-#include <sge/signal/connection_manager.hpp>
 #include <sge/renderer/device_fwd.hpp>
-#include <sge/renderer/glsl/uniform/variable.hpp>
-#include <sge/renderer/glsl/program.hpp>
-#include <sge/renderer/glsl/program_fwd.hpp>
 #include <sge/renderer/texture_fwd.hpp>
 #include <sge/container/raw_vector_decl.hpp>
 
@@ -98,7 +93,7 @@ private:
 	sge::console::stdlib console_stdlib;
 	sanguis::client::console_wrapper console_wrapper_;
 	bool running_;
-	server_callback server_callback_;
+	server_callback const server_callback_;
 	screenshot screenshot_;
 	//sge::sprite::system ss_;
 	//sge::renderer::glsl::program_ptr shader_;

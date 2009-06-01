@@ -5,17 +5,15 @@
 #include "unpaused_fwd.hpp"
 #include "../perk_chooser.hpp"
 #include "../music_handler.hpp"
-#include "../message_event.hpp"
+#include "../message_event_fwd.hpp"
 #include "../machine.hpp"
 #include "../input_handler.hpp"
 #include "../logic.hpp"
 #include "../perk_container.hpp"
 #include "../level_type.hpp"
 #include "../../perk_type.hpp"
-#include "../../tick_event.hpp"
-#include "../../weapon_type.hpp"
+#include "../../tick_event_fwd.hpp"
 #include "../../messages/base.hpp"
-#include "../../messages/types/level.hpp"
 #include "../../messages/highscore.hpp"
 #include "../../messages/assign_id.hpp"
 #include "../../messages/disconnect.hpp"
@@ -26,19 +24,17 @@
 #include "../../messages/remove.hpp"
 #include "../../draw/scene_fwd.hpp"
 #include "../../draw/player_fwd.hpp"
-#include "../menu_event.hpp"
+#include "../menu_event_fwd.hpp"
 #include "../highscore/name_container.hpp"
 #include "../highscore/score_type.hpp"
 #include <sge/signal/auto_connection.hpp>
-#include <sge/scoped_ptr.hpp>
 #include <sge/renderer/state/scoped.hpp>
+#include <sge/scoped_ptr.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/transition.hpp>
 #include <boost/statechart/result.hpp>
 #include <boost/mpl/list.hpp>
-#include <boost/array.hpp>
-#include <vector>
 
 namespace sanguis
 {

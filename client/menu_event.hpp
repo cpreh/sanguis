@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_MENU_EVENT_HPP_INCLUDED
 #define SANGUIS_CLIENT_MENU_EVENT_HPP_INCLUDED
 
+#include "menu_event_fwd.hpp"
 #include <boost/statechart/event.hpp>
 
 namespace sanguis

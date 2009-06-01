@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_MESSAGE_EVENT_HPP_INCLUDED
 #define SANGUIS_CLIENT_MESSAGE_EVENT_HPP_INCLUDED
 
+#include "message_event_fwd.hpp"
 #include "../messages/auto_ptr.hpp"
 #include "../messages/shared_ptr.hpp"
 #include <boost/statechart/event.hpp>
