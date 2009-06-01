@@ -28,6 +28,10 @@
 #include <sge/log/headers.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/caps.hpp>
+#include <sge/renderer/scoped_block.hpp>
+#include <sge/renderer/target.hpp>
+#include <sge/renderer/const_scoped_target_lock.hpp>
+#include <sge/renderer/filter/linear.hpp>
 
 // super ugly hack, so that we can use a vector with more than 20 types
 // but don't have to touch mpl::vector
@@ -182,6 +186,30 @@ void sanguis::draw::scene::draw(
 	system().render();
 
 	hud_.update(delta);
+}
+
+sge::renderer::texture_ptr const
+sanguis::draw::scene::capture_screen()
+{
+	sge::renderer::device_ptr const rend(
+		system().renderer()
+	);
+
+	{
+		sge::renderer::scoped_block const block_(
+			rend
+		);
+
+		system().render();
+	}
+
+	return rend->create_texture(
+		sge::renderer::const_scoped_target_lock(
+			rend->target()
+		).value(),
+		sge::renderer::filter::linear,
+		sge::renderer::resource_flags::none
+	);
 }
 
 void sanguis::draw::scene::pause(
