@@ -26,8 +26,7 @@ struct float_ {
 
 	static type
 	make(
-		majutsu::const_raw_pointer beg,
-		majutsu::size_type sz);
+		majutsu::const_raw_pointer beg);
 };
 
 }

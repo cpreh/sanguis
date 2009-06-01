@@ -47,13 +47,11 @@ public:
 
 	static type
 	make(
-		majutsu::const_raw_pointer const beg,
-		majutsu::size_type const sz)
+		majutsu::const_raw_pointer const beg)
 	{
 		return sge::endianness::to_host(
 			adapted::make(
-				beg,
-				sz
+				beg
 			),
 			serialization::endianness()
 		);

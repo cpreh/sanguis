@@ -6,6 +6,7 @@
 #include "endianness.hpp"
 #include "../bindings/dynamic_len.hpp"
 #include <sge/container/raw_vector_impl.hpp>
+#include <sge/algorithm/copy_n.hpp>
 #include <sge/io/read.hpp>
 
 namespace sanguis
@@ -37,8 +38,7 @@ struct load {
 		);
 
 		return Type::make(
-			vec.data(),
-			vec.size()
+			vec.data()
 		);
 	}
 };
@@ -79,14 +79,23 @@ struct load<
 			sz + length_sz
 		);
 
+		sge::algorithm::copy_n(
+			reinterpret_cast<
+				raw_container::const_pointer
+			>(
+				&sz
+			),
+			sizeof(length_type),
+			vec.data()
+		);
+
 		is.read(
 			reinterpret_cast<char *>(vec.data() + length_sz),
-			sz
+			sz - length_sz
 		);
 
 		return type::make(
-			vec.data(),
-			vec.size()
+			vec.data()
 		);
 	}
 };

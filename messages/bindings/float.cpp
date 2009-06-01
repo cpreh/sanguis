@@ -88,13 +88,11 @@ sanguis::messages::bindings::float_::place(
 
 sanguis::messages::bindings::float_::type
 sanguis::messages::bindings::float_::make(
-	majutsu::const_raw_pointer const beg,
-	majutsu::size_type const sz)
+	majutsu::const_raw_pointer const beg)
 {
 	return deserialize(
 		adapted::make(
-			beg,
-			sz
+			beg
 		)
 	);
 }

@@ -4,10 +4,12 @@
 #include "../../truncation_check_cast.hpp"
 #include "../serialization/endianness.hpp"
 #include <sge/endianness/copy_n_from_host.hpp>
+#include <sge/endianness/copy_n_to_host.hpp>
 #include <sge/assert.hpp>
 #include <majutsu/size_type.hpp>
 #include <majutsu/raw_pointer.hpp>
 #include <boost/cstdint.hpp>
+#include <boost/foreach.hpp>
 
 namespace sanguis
 {
@@ -31,7 +33,17 @@ struct dynamic_len {
 	needed_size(
 		type const &t)
 	{
-		return t.size() * sizeof(typename T::value_type) + sizeof(length_type);
+		majutsu::size_type ret(
+			sizeof(length_type)
+		);
+
+		BOOST_FOREACH(
+			typename T::const_reference r,
+			t
+		)
+			ret += adapted::needed_size(r);
+
+		return ret;
 	}
 
 	static void
@@ -41,7 +53,7 @@ struct dynamic_len {
 	{
 		length_type const sz(
 			truncation_check_cast<length_type>(
-				t.size()
+				needed_size(t)
 			)
 		);
 
@@ -72,42 +84,47 @@ struct dynamic_len {
 
 	static type 
 	make(
-		majutsu::const_raw_pointer mem,
-		majutsu::size_type const sz)
+		majutsu::const_raw_pointer const mem)
 	{
-		SGE_ASSERT(sz >= sizeof(length_type));
-
-		majutsu::size_type const sz_wo_len(
-			sz - sizeof(length_type)
+		length_type my_size;
+		
+		sge::endianness::copy_n_to_host(
+			mem,
+			sizeof(length_type),
+			reinterpret_cast<
+				majutsu::raw_pointer
+			>(
+				&my_size
+			),
+			sizeof(length_type),
+			serialization::endianness()
 		);
-
-		SGE_ASSERT(sz_wo_len % sizeof(typename type::value_type) == 0);
-
+		
 		type ret;
 
-		if(sz_wo_len == 0)
-			return ret;
-		
-		ret.resize(
-			sz_wo_len / sizeof(typename type::value_type)
-		);
-
-		mem += sizeof(length_type);
-
 		for(
-			typename type::iterator it(ret.begin());
-			it != ret.end();
-			mem += adapted::needed_size(*it), ++it
-		)
-			*it = adapted::make(
-				mem,
-				sizeof(typename T::value_type)
+			majutsu::const_raw_pointer cur_mem(
+				mem + sizeof(length_type)
 			);
+			cur_mem != mem + my_size;
+		)
+		{
+			typename T::value_type elem(
+				adapted::make(
+					cur_mem
+				)
+			);
+
+			ret.push_back(
+				elem
+			);
+
+			cur_mem += adapted::needed_size(elem);
+		}
 
 		return ret;
 	}
 };
-
 
 }
 }

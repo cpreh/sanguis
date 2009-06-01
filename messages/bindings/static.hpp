@@ -52,11 +52,8 @@ struct static_ {
 
 	static type
 	make(
-		majutsu::const_raw_pointer mem,
-		majutsu::size_type const sz)
+		majutsu::const_raw_pointer mem)
 	{
-		SGE_ASSERT(sz == static_size());
-
 		type ret;
 
 		for(
@@ -65,8 +62,7 @@ struct static_ {
 			mem += adapted::needed_size(*it), ++it
 		)
 			*it = adapted::make(
-				mem,
-				sizeof(typename T::value_type)
+				mem
 			);
 
 		return ret;

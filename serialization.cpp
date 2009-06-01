@@ -20,7 +20,6 @@
 #include <istream>
 #include <ostream>
 
-
 namespace
 {
 
@@ -97,16 +96,22 @@ sanguis::deserialize(
 
 	SGE_ASSERT(ret->size() == message_size);
 
+	net::data_type::size_type const stream_pos(
+		static_cast<
+			net::data_type::size_type
+		>(
+			stream.tellg()
+		)
+	);
+
 	SGE_ASSERT(
 		ret->size() + message_header_size
-		== static_cast<
-			net::data_type::size_type
-		>(stream.tellg())
+		== stream_pos
 	);
 
 	data.erase(
 		data.begin(),
-		data.begin() + stream.tellg()
+		data.begin() + stream_pos
 	);
 
 	return ret;
