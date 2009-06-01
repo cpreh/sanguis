@@ -1,5 +1,5 @@
-#ifndef SANGUIS_SERVER_GET_DIM_HPP_INCLUDED
-#define SANGUIS_SERVER_GET_DIM_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_DEFAULT_DIM_HPP_INCLUDED
+#define SANGUIS_SERVER_DEFAULT_DIM_HPP_INCLUDED
 
 #include "../load/model/context_fwd.hpp"
 #include "dim_type.hpp"
