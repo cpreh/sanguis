@@ -23,14 +23,12 @@
 #include <sge/gui/layouts/horizontal.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/text.hpp>
-#include <sge/cerr.hpp>
 #include <sge/iconv.hpp>
 #include <sge/utf8/convert.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <sge/lexical_cast.hpp>
 #include <boost/ref.hpp>
 #include <boost/bind.hpp>
-#include <boost/lexical_cast.hpp>
 #include <boost/mpl/vector.hpp>
 #include <ostream>
 

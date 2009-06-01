@@ -6,7 +6,6 @@
 #include "../types/message_type.hpp"
 #include "../../exception.hpp"
 #include <sge/text.hpp>
-#include <sge/cerr.hpp>
 #include <boost/static_assert.hpp>
 
 sanguis::messages::auto_ptr

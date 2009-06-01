@@ -164,6 +164,7 @@ sanguis::client::states::running::react(
 			messages::assign_id,
 			messages::disconnect,
 			messages::give_weapon,
+			messages::highscore,
 			messages::move,
 			messages::remove,
 			messages::available_perks,
@@ -236,15 +237,24 @@ sanguis::client::states::running::operator()(
 		sanguis::client::log(),
 		sge::log::_1 
 			<< SGE_TEXT("got highscore message, score was: ")
-		  << m.get<messages::roles::highscore>());
+			<< m.get<messages::roles::highscore>()
+	);
 
-	BOOST_FOREACH(messages::types::string const &s,m.get<messages::string_vector>())
+	BOOST_FOREACH(
+		messages::types::string const &s,
+		m.get<messages::string_vector>()
+	)
 		gameover_names_.push_back(
 			sge::utf8::convert(
-				s));
+				s
+			)
+		);
+	
 	gameover_score_ = 
 		static_cast<highscore::score_type>(
-			m.get<messages::roles::highscore>());
+			m.get<messages::roles::highscore>()
+		);
+	
 	return transit<gameover>();
 }
 
@@ -254,7 +264,10 @@ sanguis::client::states::running::operator()(
 {
 	perk_chooser_.perks(
 		perk_cast(
-			m.get<messages::perk_list>()));
+			m.get<messages::perk_list>()
+		)
+	);
+
 	return forward_event();
 }
 
@@ -264,22 +277,29 @@ sanguis::client::states::running::operator()(
 {
 	perk_chooser_.level_up(
 		static_cast<level_type>(
-			m.get<messages::level_type>()));
+			m.get<messages::level_type>()
+		)
+	);
+
 	(*drawer)(m);
+
 	return discard_event();
 }
 
-sanguis::entity_id sanguis::client::states::running::player_id() const
+sanguis::entity_id
+sanguis::client::states::running::player_id() const
 {
 	return logic_.player_id();
 }
 
-sanguis::client::perk_chooser &sanguis::client::states::running::perk_chooser()
+sanguis::client::perk_chooser &
+sanguis::client::states::running::perk_chooser()
 {
 	return perk_chooser_;
 }
 
-sanguis::client::cursor_ptr sanguis::client::states::running::cursor()
+sanguis::client::cursor_ptr
+sanguis::client::states::running::cursor()
 {
 	return logic_.cursor();
 }
@@ -318,7 +338,10 @@ void sanguis::client::states::running::send_perk_choose(
 		messages::create(
 			messages::player_choose_perk(
 				player_id(),
-				m)));
+				m
+			)
+		)
+	);
 }
 
 void sanguis::client::states::running::cursor_pos(

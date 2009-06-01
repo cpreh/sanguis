@@ -7,7 +7,6 @@
 #include "../animation_sound_type.hpp"
 #include "../resolution.hpp"
 #include <sge/audio/sound.hpp>
-#include <sge/cerr.hpp>
 
 sanguis::draw::model_part_state::model_part_state(
 	load::model::part const &part_,

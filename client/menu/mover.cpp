@@ -16,7 +16,6 @@
 #include <sge/math/dim/structure_cast.hpp>
 #include <sge/image/color/rgba8.hpp>
 #include <sge/assert.hpp>
-#include <sge/cerr.hpp>
 #include <boost/tr1/random.hpp>
 #include <boost/foreach.hpp>
 #include <algorithm>

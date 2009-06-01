@@ -8,7 +8,6 @@
 #include <sge/filesystem/directory_iterator.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/exception.hpp>
-#include <sge/cerr.hpp>
 #include <sge/text.hpp>
 #include <boost/bind.hpp>
 #include <boost/lexical_cast.hpp>

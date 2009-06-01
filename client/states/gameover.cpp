@@ -17,13 +17,11 @@
 #include <sge/math/vector/arithmetic.hpp>
 #include <sge/image/loader.hpp>
 #include <sge/systems/instance.hpp>
-#include <sge/make_shared_ptr.hpp>
 #include <sge/container/raw_vector_impl.hpp>
-#include <sge/cerr.hpp>
-#include <sge/lexical_cast.hpp>
 #include <sge/algorithm/join_strings.hpp>
+#include <sge/lexical_cast.hpp>
+#include <sge/make_shared_ptr.hpp>
 #include <boost/bind.hpp>
-#include <boost/ref.hpp>
 
 namespace
 {
