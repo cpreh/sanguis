@@ -1,7 +1,7 @@
 #include "logic.hpp"
 #include "invalid_id.hpp"
+#include "cursor/object.hpp"
 #include "log.hpp"
-#include "cursor.hpp"
 #include "../messages/create.hpp"
 #include "../messages/player_attack_dest.hpp"
 #include "../messages/player_direction.hpp"
@@ -31,16 +31,15 @@
 #include <algorithm>
 
 sanguis::client::logic::logic(
-	send_callback const &send,
-	sge::image::loader_ptr const il,
-	sge::renderer::device_ptr const rend,
-	cursor_pos_callback const &cursor_pos_,
-	cursor_show_callback const &cursor_show_)
+	send_callback const &_send,
+	sge::renderer::device_ptr const _rend,
+	cursor::object_ptr const _cursor)
 :
-	send(send),
-	rend(rend),
-	cursor_pos_(cursor_pos_),
-	cursor_show_(cursor_show_),
+	send(
+		_send),
+	rend(
+		_rend),
+	cursor_(_cursor),
 	actions(
 		sge::assign::make_container<
 			action_handlers
@@ -105,12 +104,6 @@ sanguis::client::logic::logic(
 	player_id_(invalid_id),
 	direction(
 		direction_vector::null()
-	),
-	cursor_(
-		new sanguis::client::cursor(
-			il,
-			rend
-		)
 	),
 	player_center(
 		sge::sprite::point::null()
@@ -184,9 +177,8 @@ void sanguis::client::logic::pause(
 	bool const p)
 {
 	paused = p;
-
-	cursor_->visible(paused);
-	cursor_show_(!paused);
+	cursor_->visible(
+		paused);
 }
 
 void sanguis::client::logic::remove(
@@ -205,12 +197,6 @@ void sanguis::client::logic::player_id(
 sanguis::entity_id sanguis::client::logic::player_id() const
 {
 	return player_id_;
-}
-
-sanguis::client::cursor_ptr 
-sanguis::client::logic::cursor()
-{
-	return cursor_;
 }
 
 void sanguis::client::logic::handle_move_x(
@@ -246,7 +232,7 @@ void sanguis::client::logic::update_direction()
 void sanguis::client::logic::handle_rotation_x(
 	key_scale const s)
 {
-	cursor_->real_pos(
+	cursor_->pos(
 		sge::gui::point(
 			sge::math::clamp(
 				cursor_->pos().x() + static_cast<sge::gui::unit>(s),
@@ -265,7 +251,7 @@ void sanguis::client::logic::handle_rotation_x(
 void sanguis::client::logic::handle_rotation_y(
 	key_scale const s)
 {
-	cursor_->real_pos(
+	cursor_->pos(
 		sge::gui::point(
 			cursor_->pos().x(),
 			sge::math::clamp(
@@ -290,12 +276,8 @@ void sanguis::client::logic::update_rotation()
 			messages::types::space_unit
 		>(
 			player_center,
-			cursor_pos()
+			cursor_->pos()
 		)
-	);
-
-	cursor_pos_(
-		cursor_pos()
 	);
 
 	if(!rotation || !rotation_timer.update_b())
@@ -320,7 +302,7 @@ void sanguis::client::logic::update_rotation()
 				sge::math::vector::structure_cast<
 					messages::types::vector2
 				>(
-					cursor_pos()
+					cursor_->pos()
 				)
 			)
 		)
@@ -439,12 +421,4 @@ void sanguis::client::logic::change_weapon(
 			)
 		)
 	);
-}
-
-sge::sprite::point const
-sanguis::client::logic::cursor_pos() const
-{
-	return 
-		sge::math::vector::structure_cast<sge::sprite::point>(
-			cursor_->pos());
 }

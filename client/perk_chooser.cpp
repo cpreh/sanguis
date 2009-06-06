@@ -1,6 +1,7 @@
 #include "perk_chooser.hpp"
 #include "from_perk_type.hpp"
 #include "log.hpp"
+#include "cursor/object.hpp"
 #include "../resolution.hpp"
 #include "../media_path.hpp"
 #include <sge/gui/widgets/parameters.hpp>
@@ -73,7 +74,7 @@ sanguis::client::perk_chooser::activation::~activation()
 sanguis::client::perk_chooser::perk_chooser(
 	sge::systems::instance &_sys,
 	send_callback const &_send_callback,
-	sanguis::client::cursor_ptr const _cursor)
+	sanguis::client::cursor::object_ptr const _cursor)
 :
 	sys_(_sys),
 	perks_(),

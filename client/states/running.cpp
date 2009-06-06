@@ -22,6 +22,7 @@
 #include "../../draw/scene.hpp"
 #include "../../load/context.hpp"
 #include "../../tick_event.hpp"
+#include "../cursor/object.hpp"
 #include <sge/renderer/device.hpp>
 #include <sge/audio/pool.hpp>
 #include <sge/renderer/state/list.hpp>
@@ -70,18 +71,8 @@ sanguis::client::states::running::running(
 			&running::send_message,
 			this,
 			_1),
-		context<machine>().sys().image_loader(),
 		context<machine>().renderer(),
-		boost::bind(
-			&running::cursor_pos,
-			this,
-			_1
-		),
-		boost::bind(
-			&running::cursor_show,
-			this,
-			_1
-		)
+		context<machine>().cursor()
 	),
 	input(
 		boost::bind(
@@ -105,10 +96,22 @@ sanguis::client::states::running::running(
 			&running::send_perk_choose,
 			this,
 			_1),
-		logic_.cursor()
+		context<machine>().cursor()
 	),
 	gameover_names_(),
-	gameover_score_()
+	gameover_score_(),
+	cursor_pos_conn_(
+		context<machine>().cursor()->register_pos_callback(
+			boost::bind(
+				&running::cursor_pos,
+				this,
+				_1))),
+	cursor_show_conn_(
+		context<machine>().cursor()->register_visible_callback(
+			boost::bind(
+				&running::cursor_show,
+				this,
+				_1)))
 {
 	drawer->client_message(
 		client_messages::add(
@@ -163,7 +166,7 @@ sanguis::client::states::running::react(
 			messages::assign_id,
 			messages::disconnect,
 			messages::give_weapon,
-			messages::highscore,
+	//		messages::highscore,
 			messages::move,
 			messages::remove,
 			messages::available_perks,
@@ -297,12 +300,6 @@ sanguis::client::states::running::perk_chooser()
 	return perk_chooser_;
 }
 
-sanguis::client::cursor_ptr
-sanguis::client::states::running::cursor()
-{
-	return logic_.cursor();
-}
-
 sanguis::client::highscore::name_container const &
 sanguis::client::states::running::gameover_names()
 {
@@ -364,7 +361,7 @@ void sanguis::client::states::running::cursor_show(
 	drawer->client_message(
 		client_messages::visible(
 			cursor_id,
-			show
+			!show
 		)
 	);
 }

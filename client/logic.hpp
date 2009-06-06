@@ -3,9 +3,7 @@
 
 #include "player_action.hpp"
 #include "send_callback.hpp"
-#include "cursor.hpp"
-#include "cursor_pos_callback.hpp"
-#include "cursor_show_callback.hpp"
+#include "cursor/object_ptr.hpp"
 #include "../weapon_type.hpp"
 #include "../entity_id.hpp"
 #include "../messages/give_weapon.hpp"
@@ -31,10 +29,8 @@ class logic {
 public:
 	logic(
 		send_callback const &,
-		sge::image::loader_ptr,
 		sge::renderer::device_ptr,
-		cursor_pos_callback const &,
-		cursor_show_callback const &);
+		cursor::object_ptr);
 	void handle_player_action(
 		player_action const &);
 	void give_weapon(
@@ -48,8 +44,6 @@ public:
 	void player_id(
 		entity_id);
 	entity_id player_id() const;
-
-	sanguis::client::cursor_ptr cursor();
 private:
 	void handle_move_x(
 		key_scale);
@@ -75,14 +69,9 @@ private:
 	void change_weapon(
 		weapon_type::type);
 
-	sge::sprite::point const
-	cursor_pos() const;
-
-	send_callback const             send;
+	send_callback const send;
 	sge::renderer::device_ptr const rend;
-
-	cursor_pos_callback const cursor_pos_;
-	cursor_show_callback const cursor_show_;
+	cursor::object_ptr const cursor_;
 
 	typedef boost::function<
 		void (key_scale)
@@ -101,12 +90,11 @@ private:
 		2
 	>::type direction_vector;
 
-	direction_vector                direction;
-	sanguis::client::cursor_ptr     cursor_;
-	sge::sprite::point              player_center;
-	weapon_type::type               current_weapon;
-	bool                            paused;
-	sge::time::timer                rotation_timer;
+	direction_vector direction;
+	sge::sprite::point player_center;
+	weapon_type::type current_weapon;
+	bool paused;
+	sge::time::timer rotation_timer;
 
 	typedef std::tr1::array<
 		bool,

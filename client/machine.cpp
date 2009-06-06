@@ -1,5 +1,6 @@
 #include "machine.hpp"
 #include "message_event.hpp"
+#include "cursor/object.hpp"
 #include "../net/exception.hpp"
 #include "../messages/connect.hpp"
 #include "../messages/disconnect.hpp"
@@ -113,7 +114,11 @@ sanguis::client::machine::machine(
 		sys_.renderer(),
 		sys_.image_loader(),
 		sys_.input_system()
-	)
+	),
+	cursor_(
+		new sanguis::client::cursor::object(
+			sys_.image_loader(),
+			sys_.renderer()))
 	/*
 	ss_(sys_.renderer()),
 	shader_(),
@@ -372,4 +377,16 @@ sanguis::load::context const &
 sanguis::client::machine::resources() const
 {
 	return resources_;
+}
+
+sanguis::client::cursor::object_ptr const 
+sanguis::client::machine::cursor()
+{
+	return cursor_;
+}
+
+sanguis::client::cursor::const_object_ptr const 
+sanguis::client::machine::cursor() const
+{
+	return cursor_;
 }

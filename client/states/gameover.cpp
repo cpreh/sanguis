@@ -7,6 +7,7 @@
 #include "../../tick_event.hpp"
 #include "../menu_event.hpp"
 #include "../message_event.hpp"
+#include "../cursor/object.hpp"
 #include <sge/gui/skins/standard.hpp>
 #include <sge/gui/unit.hpp>
 #include <sge/gui/make_image.hpp>
@@ -23,6 +24,7 @@
 #include <sge/algorithm/join_strings.hpp>
 #include <sge/lexical_cast.hpp>
 #include <sge/make_shared_ptr.hpp>
+#include <sge/cerr.hpp>
 #include <boost/bind.hpp>
 
 namespace
@@ -53,7 +55,8 @@ sge::gui::point const dialog_pos()
 }
 }
 
-sanguis::client::states::gameover::gameover(my_context ctx)
+sanguis::client::states::gameover::gameover(
+	my_context ctx)
 :
 	my_base(ctx),
 	m_(
@@ -62,7 +65,7 @@ sanguis::client::states::gameover::gameover(my_context ctx)
 		sge::gui::skins::ptr(
 			new sge::gui::skins::standard(
 				context<machine>().sys().font_system())),
-		context<running>().cursor()),
+		context<machine>().cursor()),
 	background_(
 		m_,
 		sge::gui::widgets::parameters()
@@ -118,9 +121,11 @@ sanguis::client::states::gameover::gameover(my_context ctx)
 		SGE_TEXT("Main menu")),
 	return_connection(
 		buttons_return.register_clicked(
-			boost::bind(&gameover::return_clicked,
-			this)))
+			boost::bind(
+				&gameover::return_clicked,
+				this)))
 {
+	sge::cerr << "i'm now in gameover!\n";
 }
 
 boost::statechart::result

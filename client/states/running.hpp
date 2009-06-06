@@ -81,7 +81,6 @@ public:
 	void consume_level();
 	entity_id player_id() const;
 	client::perk_chooser &perk_chooser();
-	sanguis::client::cursor_ptr cursor();
 	client::highscore::name_container const &gameover_names();
 	client::highscore::score_type gameover_score();
 private:
@@ -108,6 +107,8 @@ private:
 	client::perk_chooser perk_chooser_;
 	client::highscore::name_container gameover_names_;
 	client::highscore::score_type gameover_score_;
+	sge::signal::scoped_connection 
+		cursor_pos_conn_,cursor_show_conn_;
 };
 }
 }

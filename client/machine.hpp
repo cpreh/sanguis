@@ -3,6 +3,8 @@
 
 #include "states/fwd.hpp"
 #include "screenshot.hpp"
+#include "cursor/object_ptr.hpp"
+#include "cursor/const_object_ptr.hpp"
 #include "server_callback.hpp"
 #include "console_wrapper.hpp"
 #include "../load/context_fwd.hpp"
@@ -75,6 +77,9 @@ public:
 	
 	load::context const &
 	resources() const;
+
+	sanguis::client::cursor::object_ptr const cursor();
+	sanguis::client::cursor::const_object_ptr const cursor() const;
 private:
 	load::context const &resources_;
 	net::client net_;
@@ -95,6 +100,7 @@ private:
 	bool running_;
 	server_callback const server_callback_;
 	screenshot screenshot_;
+	sanguis::client::cursor::object_ptr const cursor_;
 	//sge::sprite::system ss_;
 	//sge::renderer::glsl::program_ptr shader_;
 	//sge::renderer::glsl::uniform::variable_ptr shadervar_;

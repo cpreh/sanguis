@@ -8,7 +8,6 @@
 #include "menus/highscore.hpp"
 #include "button.hpp"
 #include "mover.hpp"
-#include "../cursor.hpp"
 #include "../../time_type.hpp"
 #include <sge/systems/instance_fwd.hpp>
 #include <sge/filesystem/path.hpp>
