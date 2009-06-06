@@ -15,7 +15,7 @@ sanguis::load::model::conditional_sound::conditional_sound(
 			probability_type
 		>(
 			sge::parse::json::find_member<
-				double	
+				double
 			>(
 				members,
 				SGE_TEXT("prob")

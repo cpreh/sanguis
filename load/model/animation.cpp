@@ -72,8 +72,7 @@ load_delay(
 	try
 	{
 		return sge::parse::json::find_member<
-			//int	
-			double
+			int	
 		>(
 			members,
 			SGE_TEXT("delay")
@@ -170,16 +169,14 @@ sanguis::load::model::animation::animation(
 	sge::renderer::size_type const
 		begin(
 			sge::parse::json::get<
-				//int
-				double
+				int
 			>(
 				range[0]
 			)
 		),
 		end(
 			sge::parse::json::get<
-				//int	
-				double
+				int	
 			>(
 				range[1]
 			)

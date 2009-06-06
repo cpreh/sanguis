@@ -53,16 +53,14 @@ load_dim(
 	return sge::renderer::dim_type(
 		static_cast<sge::renderer::size_type>(
 			sge::parse::json::get<
-				double
-//				int	
+				int	
 			>(
 				elements[0]
 			)
 		),
 		static_cast<sge::renderer::size_type>(
 			sge::parse::json::get<
-				double
-				//int	
+				int	
 			>(
 				elements[1]
 			)
@@ -77,8 +75,7 @@ load_delay(
 	try
 	{
 		return sge::parse::json::find_member<
-			double
-			//int
+			int
 		>(
 			entries,
 			SGE_TEXT("delay")
