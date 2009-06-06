@@ -1,8 +1,9 @@
 #include "find_texture.hpp"
-#include "get_entry.hpp"
-#include "../../exception.hpp"
 #include <sge/parse/json/array.hpp>
+#include <sge/parse/json/object.hpp>
+#include <sge/parse/json/find_member.hpp>
 #include <sge/optional_impl.hpp>
+#include <sge/exception.hpp>
 #include <sge/string.hpp>
 #include <sge/text.hpp>
 
@@ -12,14 +13,14 @@ sanguis::load::model::find_texture(
 {
 	try
 	{
-		return get_entry<
+		return sge::parse::json::find_member<
 			sge::string
 		>(
 			members,
 			SGE_TEXT("texture")
 		);
 	}
-	catch(exception const &)
+	catch(sge::exception const &)
 	{
 		return optional_texture_identifier();
 	}

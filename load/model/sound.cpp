@@ -1,7 +1,8 @@
 #include "sound.hpp"
-#include "get_entry.hpp"
 #include "../resource/sounds.hpp"
+#include <sge/parse/json/find_member.hpp>
 #include <sge/parse/json/array.hpp>
+#include <sge/parse/json/object.hpp>
 #include <sge/text.hpp>
 
 sanguis::load::model::sound::sound(
@@ -17,7 +18,7 @@ sanguis::load::model::sound::sound(
 		static_cast<
 			probability_type
 		>(
-			get_entry<
+			sge::parse::json::find_member<
 				double
 			>(
 				members,
@@ -27,7 +28,7 @@ sanguis::load::model::sound::sound(
 	),
 	file(
 		ctx.load(
-			get_entry<
+			sge::parse::json::find_member<
 				sge::parse::json::string
 			>(
 				members,

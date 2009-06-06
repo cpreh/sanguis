@@ -1,6 +1,5 @@
 #include "model.hpp"
 #include "split_first_slash.hpp"
-#include "get_entry.hpp"
 #include "optional_delay.hpp"
 #include "find_texture.hpp"
 #include "global_parameters.hpp"
@@ -16,6 +15,7 @@
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/get.hpp>
+#include <sge/parse/json/find_member.hpp>
 #include <sge/random/last_exclusive_range.hpp>
 #include <sge/fstream.hpp>
 #include <sge/text.hpp>
@@ -33,7 +33,7 @@ load_dim(
 	sge::parse::json::member_vector const &entries)
 {
 	sge::parse::json::array const &array(
-		sanguis::load::model::get_entry<
+		sge::parse::json::find_member<
 			sge::parse::json::array
 		>(
 			entries,
@@ -76,7 +76,7 @@ load_delay(
 {
 	try
 	{
-		return sanguis::load::model::get_entry<
+		return sge::parse::json::find_member<
 			double
 			//int
 		>(
@@ -221,7 +221,7 @@ void sanguis::load::model::model::construct(
 	);
 
 	sge::parse::json::object const &header(
-		get_entry<
+		sge::parse::json::find_member<
 			sge::parse::json::object
 		>(
 			global_entries,
@@ -247,7 +247,7 @@ void sanguis::load::model::model::construct(
 
 	BOOST_FOREACH(
 		sge::parse::json::element_vector::const_reference r,
-		get_entry<
+		sge::parse::json::find_member<
 			sge::parse::json::array
 		>(
 			global_entries,

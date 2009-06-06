@@ -1,7 +1,8 @@
 #include "conditional_sound.hpp"
-#include "get_entry.hpp"
 #include <sge/random/inclusive_range.hpp>
 #include <sge/parse/json/array.hpp>
+#include <sge/parse/json/object.hpp>
+#include <sge/parse/json/find_member.hpp>
 #include <sge/math/compare.hpp>
 #include <sge/text.hpp>
 
@@ -13,7 +14,7 @@ sanguis::load::model::conditional_sound::conditional_sound(
 		static_cast<
 			probability_type
 		>(
-			get_entry<
+			sge::parse::json::find_member<
 				double	
 			>(
 				members,
@@ -28,7 +29,7 @@ sanguis::load::model::conditional_sound::conditional_sound(
 		)
 	),
 	random_sound_(
-		get_entry<
+		sge::parse::json::find_member<
 			sge::parse::json::array
 		>(
 			members,

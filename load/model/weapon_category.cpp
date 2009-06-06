@@ -2,12 +2,12 @@
 #include "base_animation_not_found.hpp"
 #include "global_parameters.hpp"
 #include "find_texture.hpp"
-#include "get_entry.hpp"
 #include "../log.hpp"
 #include "../../exception.hpp"
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/get.hpp>
+#include <sge/parse/json/find_member.hpp>
 #include <sge/filesystem/exists.hpp>
 #include <sge/algorithm/find_exn.hpp>
 #include <sge/log/headers.hpp>
@@ -89,7 +89,7 @@ sanguis::load::model::weapon_category::weapon_category(
 
 	BOOST_FOREACH(
 		sge::parse::json::element_vector::const_reference r,
-		get_entry<
+		sge::parse::json::find_member<
 			sge::parse::json::array
 		>(
 			members	,

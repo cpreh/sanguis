@@ -1,5 +1,4 @@
 #include "animation.hpp"
-#include "get_entry.hpp"
 #include "animation_sound.hpp"
 #include "global_parameters.hpp"
 #include "find_texture.hpp"
@@ -7,6 +6,8 @@
 #include "../log.hpp"
 #include "../../exception.hpp"
 #include <sge/parse/json/get.hpp>
+#include <sge/parse/json/find_member.hpp>
+#include <sge/parse/json/object.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/time/millisecond.hpp>
@@ -21,9 +22,10 @@
 #include <sge/parse/json/array.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <sge/log/headers.hpp>
+#include <sge/exception.hpp>
 #include <sge/text.hpp>
+#include <sge/lexical_cast.hpp>
 #include <boost/foreach.hpp>
-#include <boost/lexical_cast.hpp>
 
 namespace
 {
@@ -69,7 +71,7 @@ load_delay(
 {
 	try
 	{
-		return sanguis::load::model::get_entry<
+		return sge::parse::json::find_member<
 			//int	
 			double
 		>(
@@ -77,7 +79,7 @@ load_delay(
 			SGE_TEXT("delay")
 		);
 	}
-	catch(sanguis::exception const &)
+	catch(sge::exception const &)
 	{
 		if(opt_delay)
 			return *opt_delay;
@@ -115,7 +117,7 @@ sanguis::load::model::animation::animation(
 		sounds_ = sge::make_shared_ptr<
 			animation_sound
 		>(
-			get_entry<
+			sge::parse::json::find_member<
 				sge::parse::json::object
 			>(
 				members,
@@ -124,7 +126,7 @@ sanguis::load::model::animation::animation(
 			param.sounds()
 		);
 	}
-	catch(exception const &)
+	catch(sge::exception const &)
 	{
 		sounds_ = sge::make_shared_ptr<
 			animation_sound
@@ -152,7 +154,7 @@ sanguis::load::model::animation::animation(
 	);
 
 	sge::parse::json::element_vector const &range(
-		get_entry<
+		sge::parse::json::find_member<
 			sge::parse::json::array
 		>(
 			members,
@@ -212,11 +214,11 @@ sanguis::load::model::animation::animation(
 			throw exception(
 				SGE_TEXT("Rect out of bounds in TODO")
 				SGE_TEXT(". Whole area of texture is ")
-				+ boost::lexical_cast<sge::string>(area	)
+				+ sge::lexical_cast<sge::string>(area	)
 				+ SGE_TEXT(" but the inner area is ")
-				+ boost::lexical_cast<sge::string>(cur_area)
+				+ sge::lexical_cast<sge::string>(cur_area)
 				+ SGE_TEXT(". This happened when trying to load index ")
-				+ boost::lexical_cast<sge::string>(begin)
+				+ sge::lexical_cast<sge::string>(begin)
 			);
 
 		anim->push_back(
