@@ -37,6 +37,7 @@
 #include "../entity_id.hpp"
 #include "../time_type.hpp"
 #include <sge/renderer/device_fwd.hpp>
+#include <sge/renderer/texture_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/log/logger_fwd.hpp>
 #include <sge/noncopyable.hpp>
@@ -65,6 +66,9 @@ public:
 		client_messages::visible const &);
 
 	void draw(time_type);
+
+	sge::renderer::texture_ptr const
+	capture_screen();
 
 	void pause(bool);
 
