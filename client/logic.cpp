@@ -232,6 +232,7 @@ void sanguis::client::logic::update_direction()
 void sanguis::client::logic::handle_rotation_x(
 	key_scale const s)
 {
+	/*
 	cursor_->pos(
 		sge::gui::point(
 			sge::math::clamp(
@@ -244,13 +245,14 @@ void sanguis::client::logic::handle_rotation_x(
 			cursor_->pos().y()
 		)
 	);
-	
+	*/
 	update_rotation();
 }
 
 void sanguis::client::logic::handle_rotation_y(
 	key_scale const s)
 {
+	/*
 	cursor_->pos(
 		sge::gui::point(
 			cursor_->pos().x(),
@@ -264,6 +266,7 @@ void sanguis::client::logic::handle_rotation_y(
 		)
 	);
 
+	*/
 	update_rotation();
 }
 
