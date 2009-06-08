@@ -3,7 +3,7 @@
 
 #include "pos_callback.hpp"
 #include "visible_callback.hpp"
-#include <sge/gui/default_cursor.hpp>
+#include <sge/gui/cursor/default.hpp>
 #include <sge/signal/object.hpp>
 #include <sge/shared_ptr.hpp>
 
@@ -13,7 +13,7 @@ namespace client
 {
 namespace cursor
 {
-class object : public sge::gui::default_cursor
+class object : public sge::gui::cursor::default_
 {
 public:
 	object(

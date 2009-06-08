@@ -28,6 +28,7 @@ sanguis::client::states::menu::menu(
 	my_base(ctx),
 	menu_(
 		context<machine>().sys(),
+		context<machine>().cursor(),
 		client::menu::callbacks::object(
 			boost::bind(
 				&menu::connect,

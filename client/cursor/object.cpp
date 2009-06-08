@@ -4,7 +4,7 @@ sanguis::client::cursor::object::object(
 	sge::image::loader_ptr const il,
 	sge::renderer::device_ptr const rend)
 : 
-	default_cursor(
+	default_(
 		il,
 		rend),
 	pos_signal_(),
@@ -16,7 +16,7 @@ sanguis::client::cursor::object::object(
 
 sge::gui::point const sanguis::client::cursor::object::pos() const
 {
-	return sge::gui::default_cursor::pos();
+	return sge::gui::cursor::default_::pos();
 }
 
 void sanguis::client::cursor::object::pos(
@@ -24,7 +24,7 @@ void sanguis::client::cursor::object::pos(
 {
 	pos_signal_(
 		p);
-	default_cursor::pos(
+	sge::gui::cursor::default_::pos(
 		p);
 }
 

@@ -232,41 +232,12 @@ void sanguis::client::logic::update_direction()
 void sanguis::client::logic::handle_rotation_x(
 	key_scale const s)
 {
-	/*
-	cursor_->pos(
-		sge::gui::point(
-			sge::math::clamp(
-				cursor_->pos().x() + static_cast<sge::gui::unit>(s),
-				static_cast<sge::gui::unit>(0),
-				static_cast<sge::gui::unit>(
-					rend->screen_size().w()
-				)
-			),
-			cursor_->pos().y()
-		)
-	);
-	*/
 	update_rotation();
 }
 
 void sanguis::client::logic::handle_rotation_y(
 	key_scale const s)
 {
-	/*
-	cursor_->pos(
-		sge::gui::point(
-			cursor_->pos().x(),
-			sge::math::clamp(
-				cursor_->pos().y() + static_cast<sge::gui::unit>(s),
-				static_cast<sge::gui::unit>(0),
-				static_cast<sge::gui::unit>(
-					rend->screen_size().h()
-				)
-			)
-		)
-	);
-
-	*/
 	update_rotation();
 }
 

@@ -5,8 +5,8 @@
 #include "resource/context.hpp"
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image/loader_fwd.hpp>
-#include <sge/audio/multi_loader_fwd.hpp>
 #include <sge/audio/player_fwd.hpp>
+#include <sge/audio/multi_loader.hpp>
 #include <sge/audio/pool_fwd.hpp>
 #include <sge/noncopyable.hpp>
 

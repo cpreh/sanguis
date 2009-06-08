@@ -7,8 +7,11 @@
 #include "animations_fwd.hpp"
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image/loader_fwd.hpp>
-#include <sge/audio/multi_loader_fwd.hpp>
 #include <sge/audio/player_fwd.hpp>
+#include <sge/audio/file_fwd.hpp>
+#include <sge/audio/exception.hpp>
+#include <sge/audio/loader_fwd.hpp>
+#include <sge/multi_loader.hpp>
 #include <sge/audio/pool_fwd.hpp>
 #include <sge/scoped_ptr.hpp>
 #include <sge/noncopyable.hpp>
@@ -36,7 +39,11 @@ private:
 	context(
 		sge::renderer::device_ptr,
 		sge::image::loader_ptr,
-		sge::audio::multi_loader &,
+		sge::multi_loader<
+			sge::audio::loader,
+			sge::audio::file,
+			sge::audio::exception
+		> &,
 		sge::audio::player_ptr,
 		sge::audio::pool &);
 	~context();

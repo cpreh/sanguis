@@ -8,6 +8,7 @@
 #include "menus/highscore.hpp"
 #include "button.hpp"
 #include "mover.hpp"
+#include "../cursor/object_ptr.hpp"
 #include "../../time_type.hpp"
 #include <sge/systems/instance_fwd.hpp>
 #include <sge/filesystem/path.hpp>
@@ -36,6 +37,7 @@ SGE_NONCOPYABLE(object)
 public:
 	object(
 		sge::systems::instance const &,
+		cursor::object_ptr,
 		callbacks::object const &);
 	void process(
 		time_type);

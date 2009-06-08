@@ -3,11 +3,11 @@
 #include "../machine.hpp"
 #include "../../resolution.hpp"
 #include "../../media_path.hpp"
+#include "../cursor/object.hpp"
 #include <sge/gui/skins/standard.hpp>
 #include <sge/gui/layouts/horizontal.hpp>
 #include <sge/gui/layouts/vertical.hpp>
 #include <sge/gui/make_image.hpp>
-#include <sge/gui/default_cursor.hpp>
 #include <sge/image/loader.hpp>
 #include <sge/image/file.hpp>
 #include <sge/assign/make_container.hpp>
@@ -35,6 +35,7 @@ sge::log::logger mylogger(
 
 sanguis::client::menu::object::object(
 	sge::systems::instance const &_sys,
+	cursor::object_ptr const _cursor,
 	callbacks::object const &_callbacks)
 : 
 	sys_(_sys),
@@ -51,10 +52,7 @@ sanguis::client::menu::object::object(
 		sge::gui::skins::ptr(
 			new sge::gui::skins::standard(
 				sys_.font_system())),
-		sge::gui::cursor_ptr(
-			new sge::gui::default_cursor(
-				_sys.image_loader(),
-				_sys.renderer()))),
+		_cursor),
 
 	main_(
 		m,

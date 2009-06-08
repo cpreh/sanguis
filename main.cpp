@@ -255,7 +255,9 @@ try
 			)
 		);
 	
-	sge::audio::multi_loader audio_loader(sys.plugin_manager());
+	sge::audio::multi_loader 
+		audio_loader(
+			sys.plugin_manager());
 	sge::audio::pool sound_pool;
 
 	sanguis::load::context resources(
