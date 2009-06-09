@@ -11,7 +11,7 @@ sanguis::client::cursor::object::object(
 	visible_signal_()
 {
 	visible(
-		false);
+		true);
 }
 
 sge::gui::point const sanguis::client::cursor::object::pos() const
