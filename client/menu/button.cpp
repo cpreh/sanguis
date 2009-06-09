@@ -29,7 +29,7 @@ sanguis::client::menu::button::button(
 {
 }
 
-void sanguis::client::menu::button::process(
+void sanguis::client::menu::button::process_invalid_area(
 	sge::gui::events::invalid_area const &e)
 {
 	parent_manager().skin().draw(

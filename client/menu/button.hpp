@@ -21,10 +21,9 @@ public:
 		sge::filesystem::path const &,
 		sge::string const &);
 	
-	void process(sge::gui::events::invalid_area const &);
+	void process_invalid_area(
+		sge::gui::events::invalid_area const &);
 	sge::gui::dim const optimal_size() const;
-private:
-	using sge::gui::widgets::base::process;
 };
 }
 }
