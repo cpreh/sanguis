@@ -29,6 +29,9 @@ sanguis::server::cheat(
 				)
 			);
 		break;
+	case cheat_type::kill:
+		p.die();
+		break;
 	default:
 		throw exception(
 			SGE_TEXT("Invalid cheat type!")
