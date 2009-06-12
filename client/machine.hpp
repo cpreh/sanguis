@@ -11,6 +11,8 @@
 #include "../messages/auto_ptr.hpp"
 #include "../net/client.hpp"
 #include "../tick_event_fwd.hpp"
+#include "highscore/name_container.hpp"
+#include "highscore/score_type.hpp"
 
 #include <sge/font/object_fwd.hpp>
 #include <sge/input/key_code.hpp>
@@ -80,6 +82,13 @@ public:
 
 	sanguis::client::cursor::object_ptr const cursor();
 	sanguis::client::cursor::const_object_ptr const cursor() const;
+
+	// FIXME: this is so ugly
+	client::highscore::name_container const &gameover_names() const;
+	client::highscore::name_container &gameover_names();
+	client::highscore::score_type gameover_score();
+	void gameover_score(
+		client::highscore::score_type);
 private:
 	load::context const &resources_;
 	net::client net_;
@@ -101,6 +110,8 @@ private:
 	server_callback const server_callback_;
 	screenshot screenshot_;
 	sanguis::client::cursor::object_ptr const cursor_;
+	client::highscore::name_container gameover_names_;
+	client::highscore::score_type gameover_score_;
 	//sge::sprite::system ss_;
 	//sge::renderer::glsl::program_ptr shader_;
 	//sge::renderer::glsl::uniform::variable_ptr shadervar_;

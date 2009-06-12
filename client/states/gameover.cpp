@@ -104,7 +104,7 @@ sanguis::client::states::gameover::gameover(
 			.pos(	
 				sge::gui::point(0,1)),
 		sge::algorithm::join_strings(
-			context<running>().gameover_names(),
+			context<machine>().gameover_names(),
 			SGE_TEXT(", "))),
 	score_text(
 		score,
@@ -112,7 +112,7 @@ sanguis::client::states::gameover::gameover(
 			.pos(	
 				sge::gui::point(1,1)),
 		sge::lexical_cast<sge::string>(
-			context<running>().gameover_score())),
+			context<machine>().gameover_score())),
 	buttons_return(
 		background_,
 		sge::gui::widgets::parameters()
@@ -130,18 +130,8 @@ sanguis::client::states::gameover::gameover(
 
 boost::statechart::result
 sanguis::client::states::gameover::react(
-	tick_event const &t)
+	tick_event const &)
 {
-	context<running>().process(
-		tick_event(t.delta())
-	);
-
-	context<running>().draw(
-		tick_event(
-			t.delta()
-		)
-	);
-
 	m_.update();
 	m_.draw();
 	return discard_event();

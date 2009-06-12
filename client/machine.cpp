@@ -118,7 +118,9 @@ sanguis::client::machine::machine(
 	cursor_(
 		new sanguis::client::cursor::object(
 			sys_.image_loader(),
-			sys_.renderer()))
+			sys_.renderer())),
+	gameover_names_(),
+	gameover_score_()
 	/*
 	ss_(sys_.renderer()),
 	shader_(),
@@ -389,4 +391,25 @@ sanguis::client::cursor::const_object_ptr const
 sanguis::client::machine::cursor() const
 {
 	return cursor_;
+}
+
+sanguis::client::highscore::name_container const &sanguis::client::machine::gameover_names() const
+{
+	return gameover_names_;
+}
+
+sanguis::client::highscore::name_container &sanguis::client::machine::gameover_names()
+{
+	return gameover_names_;
+}
+
+sanguis::client::highscore::score_type sanguis::client::machine::gameover_score()
+{
+	return gameover_score_;
+}
+
+void sanguis::client::machine::gameover_score(
+	client::highscore::score_type const _gameover_score)
+{
+	gameover_score_ = _gameover_score;
 }

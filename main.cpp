@@ -153,35 +153,36 @@ try
 		sge::log::level_from_string(
 			sge::iconv(log_level)));
 
-	sge::systems::instance sys(
-		sge::systems::list()
-		(sge::window::parameters(
-			SGE_TEXT("sanguis")
-		))
-		(sge::renderer::parameters(
-			sge::renderer::display_mode(
-				sanguis::resolution(),
-				sge::renderer::bit_depth::depth32,
-				sge::renderer::refresh_rate_dont_care),
-			sge::renderer::depth_buffer::off,
-			sge::renderer::stencil_buffer::off,
-			sge::renderer::window_mode::windowed,
-			sge::renderer::vsync::on))
-		(sge::systems::parameterless::input)
-		(sge::systems::parameterless::image)
-		(sge::systems::parameterless::audio_player)
-		(sge::systems::named(
-			sge::systems::parameterless::collision_system,
-			SGE_TEXT("cell")
-		))
-		(sge::systems::parameterless::font));
+	sge::scoped_ptr<sge::systems::instance> sys(
+		new sge::systems::instance(
+			sge::systems::list()
+			(sge::window::parameters(
+				SGE_TEXT("sanguis")
+			))
+			(sge::renderer::parameters(
+				sge::renderer::display_mode(
+					sanguis::resolution(),
+					sge::renderer::bit_depth::depth32,
+					sge::renderer::refresh_rate_dont_care),
+				sge::renderer::depth_buffer::off,
+				sge::renderer::stencil_buffer::off,
+				sge::renderer::window_mode::windowed,
+				sge::renderer::vsync::on))
+			(sge::systems::parameterless::input)
+			(sge::systems::parameterless::image)
+			(sge::systems::parameterless::audio_player)
+			(sge::systems::named(
+				sge::systems::parameterless::collision_system,
+				SGE_TEXT("cell")
+			))
+			(sge::systems::parameterless::font)));
 
 	// input stuff
-	sge::input::key_state_tracker ks(sys.input_system());
+	sge::input::key_state_tracker ks(sys->input_system());
 
 	// font stuff
 	sge::font::metrics_ptr const metrics(
-		sys.font_system()->create_font(
+		sys->font_system()->create_font(
 			sge::config::media_path() / SGE_TEXT("fonts") / SGE_TEXT("default.ttf"),
 			static_cast<sge::font::size_type>(15)
 		)
@@ -189,7 +190,7 @@ try
 
 	sge::font::drawer_ptr const drawer(
 		sge::make_shared_ptr<sge::font::drawer_3d>(
-			sys.renderer(),
+			sys->renderer(),
 			sge::image::color::colors::white()
 		)
 	);
@@ -200,9 +201,9 @@ try
 	);
 
 	sge::texture::manager texman(
-		sys.renderer(),
+		sys->renderer(),
 		sge::texture::default_creator<sge::texture::no_fragmented>(
-			sys.renderer(),
+			sys->renderer(),
 			sge::image::color::format::rgba8, // TODO: what do we want to use here?
 			sge::renderer::filter::linear
 		)
@@ -212,25 +213,25 @@ try
 
 	sge::console::gfx console_gfx(
 		console,
-		sys.renderer(),
+		sys->renderer(),
 		sge::image::color::colors::white(),
 		metrics,
-		sys.input_system(),
+		sys->input_system(),
 		sge::sprite::object(
 			sge::sprite::parameters()
 			.texture(
 				sge::texture::add_image(
 					texman,
-					sys.image_loader()->load(
+					sys->image_loader()->load(
 						sanguis::media_path() / SGE_TEXT("console_back.jpg")
 					)
 				)
 			)
 			.size(
 				sge::sprite::dim(
-					sys.renderer()->screen_size().w(),
+					sys->renderer()->screen_size().w(),
 					static_cast<sge::sprite::unit>(
-						sys.renderer()->screen_size().h() / 2
+						sys->renderer()->screen_size().h() / 2
 					)
 				)
 			)
@@ -242,7 +243,7 @@ try
 	);
 
 	sge::collision::world_ptr const world = 
-		sys.collision_system()->create_world(
+		sys->collision_system()->create_world(
 			sge::collision::rect(
 				-additional_size,
 				-additional_size,
@@ -257,14 +258,14 @@ try
 	
 	sge::audio::multi_loader 
 		audio_loader(
-			sys.plugin_manager());
+			sys->plugin_manager());
 	sge::audio::pool sound_pool;
 
 	sanguis::load::context resources(
-		sys.image_loader(),
-		sys.renderer(),
+		sys->image_loader(),
+		sys->renderer(),
 		audio_loader,
-		sys.audio_player(),
+		sys->audio_player(),
 		sound_pool);
 	
 	server_scoped_ptr server;
@@ -280,7 +281,7 @@ try
 			boost::phoenix::arg_names::_1
 		),
 		resources,
-		sys,
+		*sys,
 		sound_pool,
 		font,
 		ks,

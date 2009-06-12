@@ -98,8 +98,6 @@ sanguis::client::states::running::running(
 			_1),
 		context<machine>().cursor()
 	),
-	gameover_names_(),
-	gameover_score_(),
 	cursor_pos_conn_(
 		context<machine>().cursor()->register_pos_callback(
 			boost::bind(
@@ -166,7 +164,7 @@ sanguis::client::states::running::react(
 			messages::assign_id,
 			messages::disconnect,
 			messages::give_weapon,
-	//		messages::highscore,
+			messages::highscore,
 			messages::move,
 			messages::remove,
 			messages::available_perks,
@@ -246,16 +244,16 @@ sanguis::client::states::running::operator()(
 		messages::types::string const &s,
 		m.get<messages::string_vector>()
 	)
-		gameover_names_.push_back(
+		context<machine>().gameover_names().push_back(
 			sge::utf8::convert(
 				s
 			)
 		);
 	
-	gameover_score_ = 
+	context<machine>().gameover_score(
 		static_cast<highscore::score_type>(
 			m.get<messages::roles::highscore>()
-		);
+		));
 	
 	return transit<gameover>();
 }
@@ -298,18 +296,6 @@ sanguis::client::perk_chooser &
 sanguis::client::states::running::perk_chooser()
 {
 	return perk_chooser_;
-}
-
-sanguis::client::highscore::name_container const &
-sanguis::client::states::running::gameover_names()
-{
-	return gameover_names_;
-}
-
-sanguis::client::highscore::score_type
-sanguis::client::states::running::gameover_score()
-{
-	return gameover_score_;
 }
 
 boost::statechart::result
