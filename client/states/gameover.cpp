@@ -1,4 +1,5 @@
 #include "gameover.hpp"
+#include "menu.hpp"
 #include "../perk_cast.hpp"
 #include "../../media_path.hpp"
 #include "../../resolution.hpp"
@@ -125,6 +126,7 @@ sanguis::client::states::gameover::gameover(
 				&gameover::return_clicked,
 				this)))
 {
+	context<machine>().cursor()->visible(true);
 	sge::cerr << "i'm now in gameover!\n";
 }
 
@@ -132,10 +134,19 @@ boost::statechart::result
 sanguis::client::states::gameover::react(
 	tick_event const &)
 {
+	context<machine>().dispatch();
 	m_.update();
 	m_.draw();
 	return discard_event();
 }
+
+boost::statechart::result
+sanguis::client::states::gameover::react(
+	menu_event const &)
+{
+	return transit<menu>();
+}
+
 
 boost::statechart::result
 sanguis::client::states::gameover::react(
@@ -159,7 +170,7 @@ sanguis::client::states::gameover::react(
 boost::statechart::result sanguis::client::states::gameover::handle_default_msg(
 	messages::base const &)
 {
-	return forward_event();
+	return discard_event();
 }
 
 void sanguis::client::states::gameover::return_clicked()
