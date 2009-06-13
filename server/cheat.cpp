@@ -13,8 +13,9 @@ sanguis::server::cheat(
 {
 	switch(type) {
 	case cheat_type::impulse101:
+		// TODO: use SGE_FOREACH_ENUM
 		for(
-			unsigned index = 0;
+			unsigned index = weapon_type::pistol;
 			index < weapon_type::size;
 			++index
 		)
