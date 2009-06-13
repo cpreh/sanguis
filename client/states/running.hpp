@@ -93,7 +93,7 @@ private:
 		sge::sprite::point const &);
 	void cursor_show(
 		bool show);
-	
+
 	sge::renderer::state::scoped renderer_state_;
 	music_handler music_;
 	sge::scoped_ptr<
@@ -104,7 +104,10 @@ private:
 	sge::signal::auto_connection input_connection;
 	client::perk_chooser perk_chooser_;
 	sge::signal::scoped_connection 
-		cursor_pos_conn_,cursor_show_conn_;
+		cursor_pos_conn_,
+		cursor_show_conn_,
+		cheat_kill_conn_,
+		cheat_impulse_conn_;
 };
 }
 }

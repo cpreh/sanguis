@@ -3,11 +3,13 @@
 
 #include "player_action.hpp"
 #include "send_callback.hpp"
+#include "../cheat_type.hpp"
 #include "cursor/object_ptr.hpp"
 #include "../weapon_type.hpp"
 #include "../entity_id.hpp"
 #include "../messages/give_weapon.hpp"
 #include "../messages/move.hpp"
+#include <sge/console/object_fwd.hpp>
 #include <sge/time/timer.hpp>
 #include <sge/math/vector/static.hpp>
 #include <sge/math/vector/basic_decl.hpp>
@@ -15,6 +17,7 @@
 #include <sge/image/loader_fwd.hpp>
 #include <sge/sprite/point.hpp>
 #include <sge/noncopyable.hpp>
+#include <sge/signal/scoped_connection.hpp>
 #include <boost/tr1/array.hpp>
 #include <boost/function.hpp>
 #include <vector>
@@ -30,7 +33,8 @@ public:
 	logic(
 		send_callback const &,
 		sge::renderer::device_ptr,
-		cursor::object_ptr);
+		cursor::object_ptr,
+		sge::console::object &);
 	void handle_player_action(
 		player_action const &);
 	void give_weapon(
@@ -68,6 +72,9 @@ private:
 
 	void change_weapon(
 		weapon_type::type);
+	
+	void send_cheat(
+		cheat_type::type);
 
 	send_callback const send;
 	sge::renderer::device_ptr const rend;
@@ -102,6 +109,9 @@ private:
 	>                               owned_weapons_array;
 	
 	owned_weapons_array             owned_weapons;
+	sge::signal::scoped_connection 
+		cheat_kill_conn_,
+		cheat_impulse_conn_;
 };
 
 }

@@ -12,6 +12,7 @@
 #include "../messages/player_unpause.hpp"
 #include "../messages/player_change_weapon.hpp"
 #include "../messages/player_choose_perk.hpp"
+#include "../messages/player_cheat.hpp"
 #include "../cyclic_iterator_impl.hpp"
 #include "../perk_type.hpp"
 #include <sge/math/clamp.hpp>
@@ -22,6 +23,7 @@
 #include <sge/renderer/device.hpp>
 #include <sge/time/millisecond.hpp>
 #include <sge/time/resolution.hpp>
+#include <sge/console/object.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/gui/unit.hpp>
 #include <sge/assign/make_container.hpp>
@@ -33,7 +35,8 @@
 sanguis::client::logic::logic(
 	send_callback const &_send,
 	sge::renderer::device_ptr const _rend,
-	cursor::object_ptr const _cursor)
+	cursor::object_ptr const _cursor,
+	sge::console::object &_console)
 :
 	send(
 		_send),
@@ -117,7 +120,24 @@ sanguis::client::logic::logic(
 			100
 		)
 	),
-	owned_weapons()
+	owned_weapons(),
+	cheat_kill_conn_(
+		_console.insert(
+			SGE_TEXT("kill"),
+			boost::bind(
+				&logic::send_cheat,
+				this,
+				cheat_type::kill),
+			SGE_TEXT("Commit suicide"))),
+	cheat_impulse_conn_(
+		_console.insert(
+			SGE_TEXT("impulse"),
+			boost::bind(
+				&logic::send_cheat,
+				this,
+				cheat_type::impulse101),
+			SGE_TEXT("Get all weapons")))
+
 {
 	std::fill(
 		owned_weapons.begin(),
@@ -395,4 +415,14 @@ void sanguis::client::logic::change_weapon(
 			)
 		)
 	);
+}
+
+void sanguis::client::logic::send_cheat(
+	cheat_type::type const c)
+{
+	send(
+		messages::create(
+			messages::player_cheat(
+				player_id_,
+				c)));
 }

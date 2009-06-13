@@ -72,7 +72,8 @@ sanguis::client::states::running::running(
 			this,
 			_1),
 		context<machine>().renderer(),
-		context<machine>().cursor()
+		context<machine>().cursor(),
+		context<machine>().console_wrapper().con.object()
 	),
 	input(
 		boost::bind(
