@@ -22,7 +22,7 @@ namespace client
 namespace states
 {
 class gameover
-	: public boost::statechart::state<gameover,running>
+	: public boost::statechart::state<gameover,machine>
 {
 public:
 	typedef boost::mpl::list<
