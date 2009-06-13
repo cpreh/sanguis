@@ -7,7 +7,8 @@ namespace sanguis
 namespace cheat_type
 {
 enum type {
-	impulse101
+	impulse101,
+	kill
 };
 }
 
