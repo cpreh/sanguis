@@ -4,6 +4,8 @@
 #include <sge/math/point_rotate.hpp>
 #include <sge/math/vector/structure_cast.hpp>
 #include <sge/math/dim/structure_cast.hpp>
+#include <sge/image/color/rgba8.hpp>
+#include <sge/image/color/init.hpp>
 
 sanguis::draw::particle::object::object(
 	particle_type::type const t,
@@ -82,12 +84,6 @@ bool sanguis::draw::particle::object::update(
 		return ret;
 	
 	fade_remaining -= delta;
-	// UGLY ALERT!
-	sge::image::color::channel8 const max(
-		std::numeric_limits<
-			sge::image::color::channel8
-		>::max()
-	);
 
 	funit const ratio(
 		static_cast<funit>(
@@ -100,13 +96,19 @@ bool sanguis::draw::particle::object::update(
 
 	sprite_.color(
 		sge::image::color::rgba8(
-			max,
-			max,
-			max,
+			sge::image::color::init::red %= 1.0,
+			sge::image::color::init::green %= 1.0,
+			sge::image::color::init::blue %= 1.0,
+			sge::image::color::init::alpha =
 			static_cast<
 				sge::image::color::channel8
 			>(
-				static_cast<funit>(max)*ratio
+				static_cast<funit>(
+					sge::image::color::rgba8::layout::channel_max<
+						mizuiro::color::channel::alpha
+					>()
+				)
+				* ratio
 			)
 		)
 	);

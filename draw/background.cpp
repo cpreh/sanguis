@@ -11,7 +11,7 @@
 #include <sge/renderer/scoped_texture_lock.hpp>
 #include <sge/renderer/filter/linear.hpp>
 #include <sge/image/algorithm/fill.hpp>
-#include <sge/image/color/colors.hpp>
+#include <sge/image/colors.hpp>
 #include <sge/texture/part.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/math/dim/structure_cast.hpp>
@@ -55,7 +55,7 @@ sanguis::draw::background::background(
 			tex,
 			sge::renderer::lock_flags::writeonly)
 		.value(),
-		sge::image::color::colors::transparent()
+		sge::image::colors::transparent()
 	);
 }
 

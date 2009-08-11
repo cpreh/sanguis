@@ -13,7 +13,7 @@
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/state/trampoline.hpp>
-#include <sge/image/color/colors.hpp>
+#include <sge/image/colors.hpp>
 #include <sge/utf8/convert.hpp>
 #include <sge/lexical_cast.hpp>
 #include <sge/text.hpp>
@@ -56,7 +56,7 @@ sanguis::client::states::menu::menu(
 		sge::renderer::state::list
 			(sge::renderer::state::bool_::clear_backbuffer = true)
 			(sge::renderer::state::bool_::clear_zbuffer = false)
-			(sge::renderer::state::color::clear_color = sge::image::color::colors::black())
+			(sge::renderer::state::color::clear_color = sge::image::colors::black())
 	)
 {
 }

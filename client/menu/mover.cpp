@@ -15,6 +15,7 @@
 #include <sge/math/dim/arithmetic.hpp>
 #include <sge/math/dim/structure_cast.hpp>
 #include <sge/image/color/rgba8.hpp>
+#include <sge/image/color/init.hpp>
 #include <sge/assert.hpp>
 #include <boost/tr1/random.hpp>
 #include <boost/foreach.hpp>
@@ -190,22 +191,19 @@ void sanguis::client::menu::mover::update_visibility(
 					diff)))/
 			static_cast<float_type>(threshold_);
 
-	sge::image::color::channel8 const max(
-		std::numeric_limits<
-			sge::image::color::channel8
-		>::max()
-	);
-	
 	man_.connected_sprite(w).color(
 		sge::image::color::rgba8(
-			max,
-			max,
-			max,
+			sge::image::color::init::red %= 1.0,
+			sge::image::color::init::green %= 1.0,
+			sge::image::color::init::blue %= 1.0,
+			sge::image::color::init::alpha =
 			static_cast<
 				sge::image::color::channel8
 			>(
 				static_cast<float_type>(
-					max
+					sge::image::color::rgba8::layout::channel_max<
+						mizuiro::color::channel::alpha
+					>()
 				)
 				* visibility
 			)

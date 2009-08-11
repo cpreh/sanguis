@@ -39,7 +39,7 @@
 #include <sge/renderer/filter/linear.hpp>
 #include <sge/collision/system.hpp>
 #include <sge/image/loader.hpp>
-#include <sge/image/color/colors.hpp>
+#include <sge/image/colors.hpp>
 #include <sge/audio/player.hpp>
 #include <sge/audio/multi_loader.hpp>
 #include <sge/audio/pool.hpp>
@@ -190,7 +190,7 @@ try
 	sge::font::drawer_ptr const drawer(
 		sge::make_shared_ptr<sge::font::drawer_3d>(
 			sys.renderer(),
-			sge::image::color::colors::white()
+			sge::image::colors::white()
 		)
 	);
 	
@@ -213,7 +213,7 @@ try
 	sge::console::gfx console_gfx(
 		console,
 		sys.renderer(),
-		sge::image::color::colors::white(),
+		sge::image::colors::white(),
 		metrics,
 		sys.input_system(),
 		sge::sprite::object(
