@@ -201,7 +201,7 @@ void sanguis::client::menu::mover::update_visibility(
 				sge::image::color::channel8
 			>(
 				static_cast<float_type>(
-					sge::image::color::rgba8::layout::channel_max<
+					sge::image::color::rgba8::format::channel_max<
 						mizuiro::color::channel::alpha
 					>()
 				)

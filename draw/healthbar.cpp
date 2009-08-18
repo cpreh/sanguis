@@ -174,7 +174,7 @@ void sanguis::draw::healthbar::recalc_health()
 	);
 
 	sge::image::color::channel8 const pixel_channel_max(
-		sge::image::color::rgba8::layout::channel_max<
+		sge::image::color::rgba8::format::channel_max<
 			mizuiro::color::channel::alpha
 		>()
 	);
