@@ -50,8 +50,7 @@ void sanguis::client::screenshot::process()
 		dir = config::homedir()/SGE_TEXT("screenshots");
 	
 	if (!sge::filesystem::exists(dir))
-		if (!sge::filesystem::create_directory(dir))
-			throw exception(SGE_TEXT("Screenshot path ")+(dir/p).string()+SGE_TEXT(" doesn't exist and could not be created"));
+		sge::filesystem::create_directory(dir);
 	
 	if (!sge::filesystem::is_directory(dir))
 		throw exception(SGE_TEXT("Screenshot path ")+(dir/p).string()+SGE_TEXT(" exists but is not a directory"));

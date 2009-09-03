@@ -63,8 +63,8 @@ sanguis::server::weapons::create(
 				env,
 				type,
 				static_cast<time_type>(0.8), // cooldown
-				static_cast<space_unit>(20), // damage
-				static_cast<space_unit>(150), // aoe
+				static_cast<space_unit>(9), // damage
+				static_cast<space_unit>(120), // aoe
 				1, // magazine size
 				static_cast<time_type>(1.8) // reload time
 				

@@ -7,7 +7,7 @@
 #include <sge/time/resolution.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/fstream.hpp>
-#include <sge/sstream.hpp>
+#include <sge/istringstream.hpp>
 #include <sge/text.hpp>
 #include <sge/filesystem/exists.hpp>
 #include <sge/filesystem/is_directory.hpp>
@@ -30,7 +30,9 @@ sanguis::load::resource::animations::load(
 		boost::bind(
 			&animations::do_load,
 			this,
-			_1));
+			_1
+		)
+	);
 }
 
 sge::sprite::animation_series const
