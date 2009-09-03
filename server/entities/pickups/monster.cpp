@@ -65,7 +65,7 @@ void sanguis::server::entities::pickups::monster::do_pickup(
 				weapons::auto_ptr(
 					new weapons::melee(
 						environment(),
-						static_cast<space_unit>(100), // range
+						weapons::range(100),
 						static_cast<time_type>(1), // cooldown
 						static_cast<space_unit>(5) // damage
 					)

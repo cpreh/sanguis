@@ -29,7 +29,7 @@ sanguis::server::weapons::create(
 				static_cast<time_type>(0.2),
 				18, // magazine size
 				static_cast<time_type>(2), // reload time
-				static_cast<space_unit>(1000) // range
+				range(1000)
 			)
 		);
 	case weapon_type::dual_pistol:
@@ -42,7 +42,7 @@ sanguis::server::weapons::create(
 				static_cast<time_type>(0.2),
 				36, // magazine size
 				static_cast<time_type>(4), // reload time
-				static_cast<space_unit>(1000) // range
+				range(1000)
 			)
 		);
 	case weapon_type::shotgun:
@@ -102,7 +102,7 @@ sanguis::server::weapons::create(
 					static_cast<time_type>(0.2), // cast point
 					1000,//weapon::unlimited_magazine,
 					static_cast<time_type>(0), // reload time
-					static_cast<space_unit>(1000) // range	
+					range(1000)
 				)
 			)
 		);

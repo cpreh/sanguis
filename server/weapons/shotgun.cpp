@@ -18,7 +18,7 @@ sanguis::server::weapons::shotgun::shotgun(
 	weapon(
 		env,
 		type_,
-		1000, // FIXME
+		weapons::range(1000), // FIXME
 		magazine_size,
 		unlimited_magazine,
 		base_cooldown,

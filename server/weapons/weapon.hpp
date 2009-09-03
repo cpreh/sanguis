@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_WEAPONS_WEAPON_HPP_INCLUDED
 
 #include "weapon_fwd.hpp"
+#include "range.hpp"
 #include "delayed_attack_fwd.hpp"
 #include "magazine_type.hpp"
 #include "states/ready_fwd.hpp"
@@ -36,7 +37,7 @@ class weapon
 {
 	SGE_NONCOPYABLE(weapon)
 public:
-	space_unit
+	weapons::range const
 	range() const;
 
 	void
@@ -76,7 +77,8 @@ protected:
 	weapon(
 		server::environment const &,
 		weapon_type::type,
-		space_unit range,
+		weapons::range,
+//		space_unit range,
 		magazine_type magazine_size,
 		magazine_type magazines_,
 		time_type base_cooldown,
@@ -150,7 +152,7 @@ private:
 
 	server::environment const env_;
 	weapon_type::type const type_;
-	space_unit const range_;
+	weapons::range const range_;
 	magazine_type
 		magazine_used,
 		magazines;

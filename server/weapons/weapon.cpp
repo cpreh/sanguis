@@ -18,7 +18,7 @@
 #include <limits>
 #include <ostream>
 
-sanguis::server::space_unit
+sanguis::server::weapons::range const
 sanguis::server::weapons::weapon::range() const
 {
 	return range_;
@@ -124,7 +124,7 @@ sanguis::server::weapons::weapon::~weapon()
 sanguis::server::weapons::weapon::weapon(
 	server::environment const &env_,
 	weapon_type::type const type_,
-	space_unit const range_,
+	weapons::range const range_,
 	magazine_type const magazine_size_,
 	magazine_type const magazines,
 	time_type const base_cooldown,

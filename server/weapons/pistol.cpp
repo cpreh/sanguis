@@ -11,13 +11,13 @@ sanguis::server::weapons::pistol::pistol(
 	time_type const cast_point,
 	unsigned const magazine_size,
 	time_type const reload_time,
-	space_unit const range
+	weapons::range const range_
 )
 :
 	weapon(
 		env,
 		type_,
-		range,
+		range_,
 		magazine_size,
 		unlimited_magazine,
 		base_cooldown,

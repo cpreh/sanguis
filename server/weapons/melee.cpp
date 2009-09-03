@@ -7,14 +7,14 @@
 
 sanguis::server::weapons::melee::melee(
 	server::environment const &env,
-	space_unit const range,
+	weapons::range const range_,
 	time_type const base_cooldown,
 	space_unit const damage)
 :
 	weapon(
 		env,
 		weapon_type::melee,
-		range,
+		range_,
 		unlimited_magazine,
 		unlimited_magazine,
 		base_cooldown,
@@ -34,7 +34,10 @@ void sanguis::server::weapons::melee::do_attack(
 				environment(),
 				a.dest(),
 				a.team(),
-				damage)));
+				damage
+			)
+		)
+	);
 }
 
 void sanguis::server::weapons::melee::on_init_attack(

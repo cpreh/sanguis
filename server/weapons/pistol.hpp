@@ -3,6 +3,7 @@
 
 #include "delayed_attack_fwd.hpp"
 #include "weapon.hpp"
+#include "range.hpp"
 
 namespace sanguis
 {
@@ -21,7 +22,7 @@ public:
 		time_type cast_point,
 		unsigned magazine_size,
 		time_type reload_time,
-		space_unit range
+		weapons::range
 	);
 private:
 	void do_attack(
