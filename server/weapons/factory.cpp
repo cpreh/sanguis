@@ -17,7 +17,8 @@ sanguis::server::weapons::create(
 	switch(type) {
 	case weapon_type::melee:
 		throw exception(
-			SGE_TEXT("Please create melee weapons directly, not through the weapon factory!"));
+			SGE_TEXT("Please create melee weapons directly, not through the weapon factory!")
+		);
 	case weapon_type::pistol:
 		return auto_ptr(
 			new pistol(
@@ -27,7 +28,8 @@ sanguis::server::weapons::create(
 				static_cast<space_unit>(5),
 				static_cast<time_type>(0.2),
 				18, // magazine size
-				static_cast<time_type>(2) // reload time
+				static_cast<time_type>(2), // reload time
+				static_cast<space_unit>(1000) // range
 			)
 		);
 	case weapon_type::dual_pistol:
@@ -39,8 +41,8 @@ sanguis::server::weapons::create(
 				static_cast<space_unit>(5),
 				static_cast<time_type>(0.2),
 				36, // magazine size
-				static_cast<time_type>(4) // reload time
-				
+				static_cast<time_type>(4), // reload time
+				static_cast<space_unit>(1000) // range
 			)
 		);
 	case weapon_type::shotgun:
@@ -99,7 +101,8 @@ sanguis::server::weapons::create(
 					static_cast<space_unit>(2), // damage
 					static_cast<time_type>(0.2), // cast point
 					1000,//weapon::unlimited_magazine,
-					static_cast<time_type>(0) // reload time
+					static_cast<time_type>(0), // reload time
+					static_cast<space_unit>(1000) // range	
 				)
 			)
 		);

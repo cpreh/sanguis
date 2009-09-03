@@ -20,7 +20,9 @@ public:
 		space_unit damage,
 		time_type cast_point,
 		unsigned magazine_size,
-		time_type reload_time);
+		time_type reload_time,
+		space_unit range
+	);
 private:
 	void do_attack(
 		delayed_attack const &);

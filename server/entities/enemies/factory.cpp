@@ -53,7 +53,8 @@ sanguis::server::entities::enemies::create(
 						static_cast<space_unit>(1),
 						static_cast<time_type>(0),
 						3,
-						static_cast<time_type>(15)
+						static_cast<time_type>(15),
+						static_cast<space_unit>(1000) // range
 					)
 				),
 				static_cast<probability_type>(0.25),

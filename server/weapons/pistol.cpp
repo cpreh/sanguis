@@ -10,12 +10,14 @@ sanguis::server::weapons::pistol::pistol(
 	space_unit const damage,
 	time_type const cast_point,
 	unsigned const magazine_size,
-	time_type const reload_time)
+	time_type const reload_time,
+	space_unit const range
+)
 :
 	weapon(
 		env,
 		type_,
-		1000, // FIXME
+		range,
 		magazine_size,
 		unlimited_magazine,
 		base_cooldown,
