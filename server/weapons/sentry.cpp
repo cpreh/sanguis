@@ -11,10 +11,11 @@
 sanguis::server::weapons::sentry::sentry(
 	server::environment const &env,
 	weapon_type::type const type_,
-	time_type const base_cooldown,
-	time_type const cast_point,
-	time_type const reload_time,
-	create_function const &sentry_weapon)
+	weapons::base_cooldown const base_cooldown_,
+	weapons::cast_point const cast_point_,
+	weapons::reload_time const reload_time_,
+	create_function const &sentry_weapon
+)
 :
 	weapon(
 		env,
@@ -22,11 +23,15 @@ sanguis::server::weapons::sentry::sentry(
 		weapons::range(
 			1000
 		), // FIXME
-		1, // magazine size
-		1, // number of magazine at start
-		base_cooldown,
-		cast_point,
-		reload_time
+		weapons::magazine_size(
+			1
+		),
+		weapons::magazine_count(
+			1
+		),
+		base_cooldown_,
+		cast_point_,
+		reload_time_
 	),
 	sentry_weapon(sentry_weapon)
 {}

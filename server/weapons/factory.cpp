@@ -5,6 +5,7 @@
 #include "weapon.hpp"
 #include "grenade.hpp"
 #include "sentry.hpp"
+#include "unlimited_magazine_size.hpp"
 #include "../../exception.hpp"
 #include <sge/text.hpp>
 #include <boost/spirit/home/phoenix/object/new.hpp>
@@ -24,11 +25,11 @@ sanguis::server::weapons::create(
 			new pistol(
 				env,
 				type,
-				static_cast<time_type>(0.5),
-				static_cast<space_unit>(5),
-				static_cast<time_type>(0.2),
-				18, // magazine size
-				static_cast<time_type>(2), // reload time
+				base_cooldown(0.5f),
+				static_cast<space_unit>(5), // damage
+				cast_point(0.2f),
+				magazine_size(18),
+				reload_time(2),
 				range(1000)
 			)
 		);
@@ -37,11 +38,11 @@ sanguis::server::weapons::create(
 			new pistol(
 				env,
 				type,
-				static_cast<time_type>(0.33),
-				static_cast<space_unit>(5),
-				static_cast<time_type>(0.2),
-				36, // magazine size
-				static_cast<time_type>(4), // reload time
+				base_cooldown(0.33f),
+				static_cast<space_unit>(5), // damage
+				cast_point(0.2f),
+				magazine_size(36),
+				reload_time(4),
 				range(1000)
 			)
 		);
@@ -50,13 +51,12 @@ sanguis::server::weapons::create(
 			new shotgun(
 				env,
 				type,
-				static_cast<time_type>(1), // cooldown
+				base_cooldown(1),
 				static_cast<space_unit>(0.2), // spread radius
 				10, // shells
 				static_cast<space_unit>(1), // damage,
-				8, // magazine size
-				static_cast<time_type>(3) // reload time
-				
+				magazine_size(8),
+				reload_time(3)
 			)
 		);
 	case weapon_type::rocket_launcher:
@@ -64,12 +64,11 @@ sanguis::server::weapons::create(
 			new rocket_launcher(
 				env,
 				type,
-				static_cast<time_type>(0.8), // cooldown
+				base_cooldown(0.8f),
 				static_cast<space_unit>(9), // damage
 				static_cast<space_unit>(120), // aoe
-				1, // magazine size
-				static_cast<time_type>(1.8) // reload time
-				
+				magazine_size(1),
+				reload_time(1.8f)
 			)
 		);
 	case weapon_type::grenade:
@@ -77,11 +76,11 @@ sanguis::server::weapons::create(
 			new grenade(
 				env,
 				type,
-				static_cast<time_type>(0.7), // cooldown
+				base_cooldown(0.7f),
 				static_cast<space_unit>(20), // damage
 				static_cast<space_unit>(180), // radius
-				static_cast<time_type>(0.1), // cast point
-				static_cast<time_type>(1.0) // reload time
+				cast_point(0.1f),
+				reload_time(1)
 			)
 		);
 	case weapon_type::sentry:
@@ -89,19 +88,19 @@ sanguis::server::weapons::create(
 			new sentry(
 				env,
 				type,
-				static_cast<time_type>(5), // cooldown
-				static_cast<time_type>(2), // cast point
-				static_cast<time_type>(0), // reload time
+				base_cooldown(5),
+				cast_point(2),
+				reload_time(0),
 				boost::phoenix::new_<
 					weapons::pistol
 				>(
 					env,
 					weapon_type::pistol,
-					static_cast<time_type>(0.3), // cooldown
+					base_cooldown(0.3f),
 					static_cast<space_unit>(2), // damage
-					static_cast<time_type>(0.2), // cast point
-					1000,//weapon::unlimited_magazine,
-					static_cast<time_type>(0), // reload time
+					cast_point(0.2f),
+					unlimited_magazine_size,
+					reload_time(0),
 					range(1000)
 				)
 			)

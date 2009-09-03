@@ -1,5 +1,6 @@
 #include "weapon.hpp"
 #include "log.hpp"
+#include "unlimited_magazine_count.hpp"
 #include "events/poll.hpp"
 #include "events/reset.hpp"
 #include "events/shoot.hpp"
@@ -15,7 +16,6 @@
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/text.hpp>
 #include <sge/log/headers.hpp>
-#include <limits>
 #include <ostream>
 
 sanguis::server::weapons::range const
@@ -79,11 +79,11 @@ sanguis::server::weapons::weapon::repickup()
 		events::reset()
 	);
 
-	if(magazines != unlimited_magazine)
-		++magazines;
+	if(magazine_count_ != unlimited_magazine_count)
+		++magazine_count_;
 }
 
-sanguis::server::weapons::magazine_type
+sanguis::server::weapons::magazine_size const
 sanguis::server::weapons::weapon::magazine_size() const
 {
 	return magazine_size_;
@@ -125,37 +125,38 @@ sanguis::server::weapons::weapon::weapon(
 	server::environment const &env_,
 	weapon_type::type const type_,
 	weapons::range const range_,
-	magazine_type const magazine_size_,
-	magazine_type const magazines,
-	time_type const base_cooldown,
-	time_type const ncast_point,
-	time_type const nreload_time)
+	weapons::magazine_size const magazine_size_,
+	weapons::magazine_count const magazine_count_,
+	weapons::base_cooldown const nbase_cooldown_,
+	weapons::cast_point const ncast_point_,
+	weapons::reload_time const nreload_time_
+)
 :
 	env_(env_),
 	type_(type_),
 	range_(range_),
-	magazine_used(0),
-	magazines(magazines),
+	magazine_used_(0),
+	magazine_count_(magazine_count_),
 	magazine_size_(magazine_size_),
 	cast_point_(
 		sge::time::second_f(
-			ncast_point
+			ncast_point_
 		)
 	),
 	backswing_time_(
 		sge::time::second_f(
-			base_cooldown - ncast_point
+			nbase_cooldown_ - ncast_point_
 		)
 	),
 	reload_time_(
 		sge::time::second_f(
-			nreload_time
+			nreload_time_
 		)
 	),
 	ias_(static_cast<space_unit>(0)),
 	irs_(static_cast<space_unit>(0))
 {
-	if(ncast_point > base_cooldown)
+	if(ncast_point_ > nbase_cooldown_)
 		SGE_LOG_WARNING(
 			log(),
 			sge::log::_1
@@ -169,11 +170,6 @@ sanguis::server::weapons::weapon::weapon(
 
 	initiate();
 }
-
-sanguis::server::weapons::magazine_type const
-sanguis::server::weapons::weapon::unlimited_magazine(
-	std::numeric_limits<magazine_type>::max()
-);
 
 sanguis::server::entities::entity &
 sanguis::server::weapons::weapon::insert(
@@ -209,33 +205,33 @@ sanguis::server::weapons::weapon::irs() const
 bool
 sanguis::server::weapons::weapon::usable() const
 {
-	return magazines > 0;
+	return magazine_count_ > 0;
 }
 
 void
 sanguis::server::weapons::weapon::reset_magazine()
 {
-	magazine_used = 0;
+	magazine_used_ = 0;
 }
 
 void
 sanguis::server::weapons::weapon::use_magazine_item()
 {
-	++magazine_used;
-	SGE_ASSERT(magazine_used <= magazine_size());
+	++magazine_used_;
+	SGE_ASSERT(magazine_used_ <= magazine_size());
 }
 
 bool
 sanguis::server::weapons::weapon::magazine_empty() const
 {
-	return magazine_used == magazine_size();
+	return magazine_used_ == magazine_size();
 }
 
 void
 sanguis::server::weapons::weapon::magazine_exhausted()
 {
-	if(magazines != unlimited_magazine)
-		--magazines;
+	if(magazine_count_ != unlimited_magazine_count)
+		--magazine_count_;
 }
 
 sge::time::resolution const

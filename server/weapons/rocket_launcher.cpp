@@ -1,27 +1,29 @@
 #include "rocket_launcher.hpp"
 #include "delayed_attack.hpp"
+#include "unlimited_magazine_count.hpp"
 #include "../entities/projectiles/rocket.hpp"
 
 sanguis::server::weapons::rocket_launcher::rocket_launcher(
 	server::environment const &env,
 	weapon_type::type const type_,
-	time_type const base_cooldown,
+	weapons::base_cooldown const base_cooldown_,
 	space_unit const rocket_damage,
 	space_unit const rocket_aoe,
-	unsigned const magazine_size,
-	time_type const reload_time)
+	weapons::magazine_size const magazine_size_,
+	weapons::reload_time const reload_time_
+)
 :
 	weapon(
 		env,
 		type_,
 		weapons::range(1000), // FIXME
-		magazine_size,
-		unlimited_magazine,
-		base_cooldown,
-		static_cast<time_type>(
-			0.5
+		magazine_size_,
+		unlimited_magazine_count,
+		base_cooldown_,
+		weapons::cast_point(
+			0.5f
 		), // FIXME
-		reload_time
+		reload_time_
 	),
 	rocket_damage(rocket_damage),
 	rocket_aoe(rocket_aoe)

@@ -1,8 +1,11 @@
 #ifndef SANGUIS_SERVER_WEAPONS_SENTRY_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_SENTRY_HPP_INCLUDED
 
-#include "delayed_attack_fwd.hpp"
 #include "weapon.hpp"
+#include "delayed_attack_fwd.hpp"
+#include "base_cooldown.hpp"
+#include "cast_point.hpp"
+#include "reload_time.hpp"
 #include "create_function.hpp"
 
 namespace sanguis
@@ -17,13 +20,16 @@ public:
 	sentry(
 		server::environment const &,
 		weapon_type::type,
-		time_type base_cooldown,
-		time_type cast_point,
-		time_type reload_time,
-		create_function const &sentry_weapon);
+		weapons::base_cooldown,
+		weapons::cast_point,
+		weapons::reload_time,
+		create_function const &sentry_weapon
+	);
 private:
-	void do_attack(
-		delayed_attack const &);
+	void
+	do_attack(
+		delayed_attack const &
+	);
 	
 	create_function const sentry_weapon;
 };

@@ -1,16 +1,17 @@
 #include "pistol.hpp"
 #include "delayed_attack.hpp"
+#include "unlimited_magazine_count.hpp"
 #include "../entities/entity.hpp"
 #include "../entities/projectiles/simple_bullet.hpp"
 
 sanguis::server::weapons::pistol::pistol(
 	server::environment const &env,
 	weapon_type::type const type_,
-	time_type const base_cooldown,
+	weapons::base_cooldown const base_cooldown_,
 	space_unit const damage,
-	time_type const cast_point,
-	unsigned const magazine_size,
-	time_type const reload_time,
+	weapons::cast_point const cast_point_,
+	weapons::magazine_size const magazine_size_,
+	weapons::reload_time const reload_time_,
 	weapons::range const range_
 )
 :
@@ -18,11 +19,11 @@ sanguis::server::weapons::pistol::pistol(
 		env,
 		type_,
 		range_,
-		magazine_size,
-		unlimited_magazine,
-		base_cooldown,
-		cast_point,
-		reload_time
+		magazine_size_,
+		unlimited_magazine_count,
+		base_cooldown_,
+		cast_point_,
+		reload_time_
 	),
 	damage(damage)
 {}

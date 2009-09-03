@@ -3,6 +3,7 @@
 
 #include "delayed_attack_fwd.hpp"
 #include "weapon.hpp"
+#include "base_cooldown.hpp"
 #include "range.hpp"
 
 namespace sanguis
@@ -16,8 +17,9 @@ public:
 	melee(
 		server::environment const &,
 		weapons::range,
-		time_type base_cooldown,
-		space_unit damage);
+		base_cooldown,
+		space_unit damage
+	);
 private:
 	void do_attack(
 		delayed_attack const &);

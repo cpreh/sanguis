@@ -3,6 +3,9 @@
 
 #include "delayed_attack_fwd.hpp"
 #include "weapon.hpp"
+#include "base_cooldown.hpp"
+#include "cast_point.hpp"
+#include "reload_time.hpp"
 
 namespace sanguis
 {
@@ -16,11 +19,12 @@ public:
 	grenade(
 		server::environment const &,
 		weapon_type::type,
-		time_type base_cooldown,
+		weapons::base_cooldown,
 		space_unit damage,
 		space_unit radius,
-		time_type cast_point,
-		time_type reload_time);
+		weapons::cast_point,
+		weapons::reload_time
+	);
 private:
 	void do_attack(
 		delayed_attack const &);

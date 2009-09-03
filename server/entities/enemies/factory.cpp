@@ -49,11 +49,11 @@ sanguis::server::entities::enemies::create(
 					new weapons::pistol(
 						env,
 						weapon_type::pistol,
-						static_cast<time_type>(1),
+						weapons::base_cooldown(1),
 						static_cast<space_unit>(1),
-						static_cast<time_type>(0),
-						3,
-						static_cast<time_type>(15),
+						weapons::cast_point(0),
+						weapons::magazine_size(3),
+						weapons::reload_time(15),
 						weapons::range(1000)
 					)
 				),
@@ -81,12 +81,14 @@ sanguis::server::entities::enemies::create(
 					new weapons::melee(
 						env,
 						weapons::range(75),
-						static_cast<time_type>(2), // cd
+						weapons::base_cooldown(2),
 						static_cast<space_unit>(2) // damage
-					)),
+					)
+				),
 				static_cast<probability_type>(0.25),
 				static_cast<exp_type>(5)
-				));
+			)
+		);
 	case enemy_type::wolf_black:
 	case enemy_type::wolf_brown:
 	case enemy_type::wolf_white:
@@ -109,38 +111,43 @@ sanguis::server::entities::enemies::create(
 					new weapons::melee(
 						env,
 						weapons::range(75),
-						static_cast<time_type>(1), // cd
+						weapons::base_cooldown(1),
 						static_cast<space_unit>(4) // damage
-					)),
+					)
+				),
 				static_cast<probability_type>(0.25),
 				static_cast<exp_type>(10)
-			 ));
+			)
+		);
 	case enemy_type::skeleton:
 		return auto_ptr(
 			new enemy(
-			 etype,
-			 env,
-			 damage::no_armor(),
-			 center,
-			 angle,
-			 direction,
-			 boost::assign::map_list_of
-				(entities::property_type::health,
-				entities::property(static_cast<space_unit>(500)))
-				(entities::property_type::movement_speed,
-				entities::property(static_cast<space_unit>(50))),
-			ai::auto_ptr(
-				new ai::simple()),
-			weapons::auto_ptr(
-				new weapons::melee(
-					env,
-					weapons::range(100),
-					static_cast<time_type>(1), // cd
-					static_cast<space_unit>(10) // damage
-				)),
-			 static_cast<probability_type>(0.75),
-			 static_cast<exp_type>(300)
-			 ));
+				etype,
+				env,
+				damage::no_armor(),
+				center,
+				angle,
+				direction,
+				boost::assign::map_list_of
+					(entities::property_type::health,
+					entities::property(static_cast<space_unit>(500)))
+					(entities::property_type::movement_speed,
+					entities::property(static_cast<space_unit>(50))),
+				ai::auto_ptr(
+					new ai::simple()
+				),
+				weapons::auto_ptr(
+					new weapons::melee(
+						env,
+						weapons::range(100),
+						weapons::base_cooldown(1),
+						static_cast<space_unit>(10) // damage
+					)
+				),
+				static_cast<probability_type>(0.75),
+				static_cast<exp_type>(300)
+			)
+		);
 	case enemy_type::maggot:
 		return auto_ptr(
 			new enemy(
@@ -162,7 +169,7 @@ sanguis::server::entities::enemies::create(
 					new weapons::melee(
 						env,
 						weapons::range(75),
-						static_cast<time_type>(1), // cd
+						weapons::base_cooldown(1),
 						static_cast<space_unit>(0.5) // damage
 					)
 				),
@@ -191,7 +198,7 @@ sanguis::server::entities::enemies::create(
 					new weapons::melee(
 						env,
 						weapons::range(75),
-						static_cast<time_type>(2), // cd
+						weapons::base_cooldown(2),
 						static_cast<space_unit>(5) // damage
 					)
 				),

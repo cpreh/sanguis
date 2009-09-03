@@ -3,6 +3,9 @@
 
 #include "delayed_attack_fwd.hpp"
 #include "weapon.hpp"
+#include "base_cooldown.hpp"
+#include "magazine_size.hpp"
+#include "reload_time.hpp"
 
 namespace sanguis
 {
@@ -15,11 +18,12 @@ public:
 	rocket_launcher(
 		server::environment const &,
 		weapon_type::type,
-		time_type base_cooldown,
+		weapons::base_cooldown,
 		space_unit rocket_damage,
 		space_unit rocket_aoe,
-		unsigned magazine_size,
-		time_type cooldown);
+		weapons::magazine_size,
+		weapons::reload_time
+	);
 private:
 	void do_attack(
 		delayed_attack const &);

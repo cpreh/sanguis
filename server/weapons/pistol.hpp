@@ -3,6 +3,10 @@
 
 #include "delayed_attack_fwd.hpp"
 #include "weapon.hpp"
+#include "base_cooldown.hpp"
+#include "cast_point.hpp"
+#include "magazine_size.hpp"
+#include "reload_time.hpp"
 #include "range.hpp"
 
 namespace sanguis
@@ -17,11 +21,11 @@ public:
 	pistol(
 		server::environment const &,
 		weapon_type::type,
-		time_type base_cooldown,
+		weapons::base_cooldown,
 		space_unit damage,
-		time_type cast_point,
-		unsigned magazine_size,
-		time_type reload_time,
+		weapons::cast_point,
+		weapons::magazine_size,
+		weapons::reload_time,
 		weapons::range
 	);
 private:

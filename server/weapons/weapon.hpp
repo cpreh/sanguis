@@ -4,7 +4,11 @@
 #include "weapon_fwd.hpp"
 #include "range.hpp"
 #include "delayed_attack_fwd.hpp"
-#include "magazine_type.hpp"
+#include "magazine_size.hpp"
+#include "magazine_count.hpp"
+#include "base_cooldown.hpp"
+#include "cast_point.hpp"
+#include "reload_time.hpp"
 #include "states/ready_fwd.hpp"
 #include "states/reloading_fwd.hpp"
 #include "states/backswing_fwd.hpp"
@@ -29,11 +33,12 @@ namespace weapons
 {
 
 class weapon
-: public
-	boost::statechart::state_machine<
-		weapon,
-		states::ready
-	> 
+:
+	public
+		boost::statechart::state_machine<
+			weapon,
+			states::ready
+		> 
 {
 	SGE_NONCOPYABLE(weapon)
 public:
@@ -56,7 +61,7 @@ public:
 
 	void repickup();
 
-	magazine_type	
+	weapons::magazine_size const
 	magazine_size() const;
 
 	bool
@@ -78,14 +83,12 @@ protected:
 		server::environment const &,
 		weapon_type::type,
 		weapons::range,
-//		space_unit range,
-		magazine_type magazine_size,
-		magazine_type magazines_,
-		time_type base_cooldown,
-		time_type cast_point,
-		time_type reload_time);
-
-	static magazine_type const unlimited_magazine;
+		weapons::magazine_size,
+		weapons::magazine_count,
+		base_cooldown,
+		cast_point,
+		reload_time
+	);
 
 	virtual void
 	do_attack(
@@ -153,10 +156,9 @@ private:
 	server::environment const env_;
 	weapon_type::type const type_;
 	weapons::range const range_;
-	magazine_type
-		magazine_used,
-		magazines;
-	magazine_type const magazine_size_;
+	magazine_type magazine_used_;
+	weapons::magazine_count magazine_count_;
+	weapons::magazine_size const magazine_size_;
 	sge::time::resolution const
 		cast_point_,
 		backswing_time_,
