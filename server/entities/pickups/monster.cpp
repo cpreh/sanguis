@@ -67,7 +67,7 @@ void sanguis::server::entities::pickups::monster::do_pickup(
 						environment(),
 						weapons::range(100),
 						weapons::base_cooldown(1),
-						static_cast<space_unit>(5) // damage
+						weapons::damage(5)
 					)
 				)
 			)

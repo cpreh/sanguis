@@ -3,7 +3,7 @@
 #include "../../damage/list.hpp"
 #include "../../damage/wrapper.hpp"
 #include "../../damage/meta.hpp"
-#include "../../damage/types.hpp"
+#include "../../damage/normal.hpp"
 #include "../../damage/full.hpp"
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/container/map_impl.hpp>

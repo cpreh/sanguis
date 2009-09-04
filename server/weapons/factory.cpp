@@ -26,7 +26,7 @@ sanguis::server::weapons::create(
 				env,
 				type,
 				base_cooldown(0.5f),
-				static_cast<space_unit>(5), // damage
+				damage(5),
 				cast_point(0.2f),
 				magazine_size(18),
 				reload_time(2),
@@ -39,7 +39,7 @@ sanguis::server::weapons::create(
 				env,
 				type,
 				base_cooldown(0.33f),
-				static_cast<space_unit>(5), // damage
+				damage(5),
 				cast_point(0.2f),
 				magazine_size(36),
 				reload_time(4),
@@ -54,7 +54,7 @@ sanguis::server::weapons::create(
 				base_cooldown(1),
 				static_cast<space_unit>(0.2), // spread radius
 				10, // shells
-				static_cast<space_unit>(1), // damage,
+				damage(1),
 				magazine_size(8),
 				reload_time(3)
 			)
@@ -65,7 +65,7 @@ sanguis::server::weapons::create(
 				env,
 				type,
 				base_cooldown(0.8f),
-				static_cast<space_unit>(9), // damage
+				damage(9),
 				static_cast<space_unit>(120), // aoe
 				magazine_size(1),
 				reload_time(1.8f)
@@ -77,7 +77,7 @@ sanguis::server::weapons::create(
 				env,
 				type,
 				base_cooldown(0.7f),
-				static_cast<space_unit>(20), // damage
+				damage(20),
 				static_cast<space_unit>(180), // radius
 				cast_point(0.1f),
 				reload_time(1)
@@ -97,7 +97,7 @@ sanguis::server::weapons::create(
 					env,
 					weapon_type::pistol,
 					base_cooldown(0.3f),
-					static_cast<space_unit>(2), // damage
+					damage(2),
 					cast_point(0.2f),
 					unlimited_magazine_size,
 					reload_time(0),

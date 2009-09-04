@@ -4,7 +4,7 @@
 #include "../../damage/list.hpp"
 #include "../../damage/wrapper.hpp"
 #include "../../damage/meta.hpp"
-#include "../../damage/types.hpp"
+#include "../../damage/piercing.hpp"
 #include "../../damage/full.hpp"
 #include "../../../load/context.hpp"
 #include <sge/container/map_impl.hpp>

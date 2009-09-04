@@ -50,7 +50,7 @@ sanguis::server::entities::enemies::create(
 						env,
 						weapon_type::pistol,
 						weapons::base_cooldown(1),
-						static_cast<space_unit>(1),
+						weapons::damage(1),
 						weapons::cast_point(0),
 						weapons::magazine_size(3),
 						weapons::reload_time(15),
@@ -82,7 +82,7 @@ sanguis::server::entities::enemies::create(
 						env,
 						weapons::range(75),
 						weapons::base_cooldown(2),
-						static_cast<space_unit>(2) // damage
+						weapons::damage(2)
 					)
 				),
 				static_cast<probability_type>(0.25),
@@ -112,7 +112,7 @@ sanguis::server::entities::enemies::create(
 						env,
 						weapons::range(75),
 						weapons::base_cooldown(1),
-						static_cast<space_unit>(4) // damage
+						weapons::damage(4)
 					)
 				),
 				static_cast<probability_type>(0.25),
@@ -141,7 +141,7 @@ sanguis::server::entities::enemies::create(
 						env,
 						weapons::range(100),
 						weapons::base_cooldown(1),
-						static_cast<space_unit>(10) // damage
+						weapons::damage(10)
 					)
 				),
 				static_cast<probability_type>(0.75),
@@ -170,7 +170,7 @@ sanguis::server::entities::enemies::create(
 						env,
 						weapons::range(75),
 						weapons::base_cooldown(1),
-						static_cast<space_unit>(0.5) // damage
+						weapons::damage(0.5f)
 					)
 				),
 				static_cast<probability_type>(0.1),
@@ -199,7 +199,7 @@ sanguis::server::entities::enemies::create(
 						env,
 						weapons::range(75),
 						weapons::base_cooldown(2),
-						static_cast<space_unit>(5) // damage
+						weapons::damage(5)
 					)
 				),
 				static_cast<probability_type>(0.5),

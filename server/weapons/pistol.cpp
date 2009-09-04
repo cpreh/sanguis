@@ -8,7 +8,7 @@ sanguis::server::weapons::pistol::pistol(
 	server::environment const &env,
 	weapon_type::type const type_,
 	weapons::base_cooldown const base_cooldown_,
-	space_unit const damage,
+	weapons::damage const damage_,
 	weapons::cast_point const cast_point_,
 	weapons::magazine_size const magazine_size_,
 	weapons::reload_time const reload_time_,
@@ -25,7 +25,9 @@ sanguis::server::weapons::pistol::pistol(
 		cast_point_,
 		reload_time_
 	),
-	damage(damage)
+	damage_(
+		damage_
+	)
 {}
 
 void sanguis::server::weapons::pistol::do_attack(
@@ -38,7 +40,7 @@ void sanguis::server::weapons::pistol::do_attack(
 				a.spawn_point(),
 				a.angle(),
 				a.team(),
-				damage
+				damage_
 			)
 		)
 	);

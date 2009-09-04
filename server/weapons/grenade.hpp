@@ -4,6 +4,7 @@
 #include "delayed_attack_fwd.hpp"
 #include "weapon.hpp"
 #include "base_cooldown.hpp"
+#include "damage.hpp"
 #include "cast_point.hpp"
 #include "reload_time.hpp"
 
@@ -20,18 +21,19 @@ public:
 		server::environment const &,
 		weapon_type::type,
 		weapons::base_cooldown,
-		space_unit damage,
+		weapons::damage,
 		space_unit radius,
 		weapons::cast_point,
 		weapons::reload_time
 	);
 private:
-	void do_attack(
-		delayed_attack const &);
+	void
+	do_attack(
+		delayed_attack const &
+	);
 	
-	space_unit const
-		damage,
-		radius;
+	weapons::damage const damage_;
+	space_unit const radius;
 };
 
 }

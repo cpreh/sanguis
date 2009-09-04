@@ -11,7 +11,7 @@ sanguis::server::weapons::melee::melee(
 	server::environment const &env,
 	weapons::range const range_,
 	weapons::base_cooldown const base_cooldown_,
-	space_unit const damage
+	weapons::damage const damage_
 )
 :
 	weapon(
@@ -28,7 +28,7 @@ sanguis::server::weapons::melee::melee(
 			0
 		)
 	),
-	damage(damage)
+	damage_(damage_)
 {}
 
 void sanguis::server::weapons::melee::do_attack(
@@ -40,7 +40,7 @@ void sanguis::server::weapons::melee::do_attack(
 				environment(),
 				a.dest(),
 				a.team(),
-				damage
+				damage_
 			)
 		)
 	);

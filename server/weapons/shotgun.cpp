@@ -12,7 +12,7 @@ sanguis::server::weapons::shotgun::shotgun(
 	weapons::base_cooldown const base_cooldown_,
 	space_unit const spread_radius,
 	unsigned const shells,
-	space_unit const damage,
+	weapons::damage const damage_,
 	weapons::magazine_size const magazine_size_,
 	weapons::reload_time const reload_time_
 )
@@ -31,7 +31,7 @@ sanguis::server::weapons::shotgun::shotgun(
 	),
 	spread_radius(spread_radius),
 	shells(shells),
-	damage(damage)
+	damage_(damage_)
 {}
 
 void sanguis::server::weapons::shotgun::do_attack(
@@ -54,7 +54,9 @@ void sanguis::server::weapons::shotgun::do_attack(
 		)
 	);
 
-	for(unsigned i = 0; i < shells; ++i)
+	for(
+		unsigned i = 0; i < shells; ++i
+	)
 		insert(
 			entities::auto_ptr(
 				new entities::projectiles::simple_bullet(
@@ -62,7 +64,7 @@ void sanguis::server::weapons::shotgun::do_attack(
 					a.spawn_point(),
 					rng(),
 					a.team(),
-					damage
+					damage_
 				)
 			)
 		);

@@ -8,6 +8,7 @@
 #include "magazine_size.hpp"
 #include "reload_time.hpp"
 #include "range.hpp"
+#include "damage.hpp"
 
 namespace sanguis
 {
@@ -22,17 +23,19 @@ public:
 		server::environment const &,
 		weapon_type::type,
 		weapons::base_cooldown,
-		space_unit damage,
+		weapons::damage,
 		weapons::cast_point,
 		weapons::magazine_size,
 		weapons::reload_time,
 		weapons::range
 	);
 private:
-	void do_attack(
-		delayed_attack const &);
+	void
+	do_attack(
+		delayed_attack const &
+	);
 
-	space_unit const damage;
+	weapons::damage const damage_;
 };
 
 }
