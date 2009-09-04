@@ -21,7 +21,7 @@ void sanguis::server::perks::ims::do_apply(
 
 bool sanguis::server::perks::ims::can_raise_level() const
 {
-	return level() < 5;
+	return level() < 7;
 }
 
 sanguis::server::space_unit

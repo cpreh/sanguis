@@ -42,7 +42,7 @@ sanguis::server::waves::infinite::process(
 		// TODO: which kind of progression do we want here?
 		simple_.reset(
 			new simple(
-				delay_,
+				delay_ *= static_cast<time_type>(0.99f),
 				spawn_interval_ *= static_cast<time_type>(0.99f),
 				count_,
 				spawns_per_wave_,
