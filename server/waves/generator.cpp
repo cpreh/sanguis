@@ -9,64 +9,64 @@ sanguis::server::waves::generator::generator()
 	// TODO: somehow put this in a configuration file!
 	boost::assign::ptr_push_back<waves::infinite>(waves)
 	(
-		static_cast<time_type>(60),
-		static_cast<time_type>(2),
-		15,
-		2,
+		delay(60),
+		spawn_interval(2),
+		count(15),
+		spawns_per_wave(2),
 		enemy_type::spider
 	)(
-		static_cast<time_type>(0),
-		static_cast<time_type>(1),
-		20,
-		2,
+		delay(0),
+		spawn_interval(0),
+		count(20),
+		spawns_per_wave(2),
 		enemy_type::maggot
 	)(
-		static_cast<time_type>(0),
-		static_cast<time_type>(1.5),
-		40,
-		1,
+		delay(0),
+		spawn_interval(1.5f),
+		count(40),
+		spawns_per_wave(1),
 		enemy_type::zombie01
 	)(
-		static_cast<time_type>(0),
-		static_cast<time_type>(2),
-		60,
-		1,
+		delay(0),
+		spawn_interval(2),
+		count(60),
+		spawns_per_wave(1),
 		enemy_type::zombie01
 	)(
-		static_cast<time_type>(90),
-		static_cast<time_type>(1),
-		8,
-		2,
+		delay(90),
+		spawn_interval(1),
+		count(8),
+		spawns_per_wave(2),
 		enemy_type::zombie00
 	)(
-		static_cast<time_type>(45),
-		static_cast<time_type>(1),
-		8,
-		1,
+		delay(45),
+		spawn_interval(1),
+		count(8),
+		spawns_per_wave(1),
 		enemy_type::wolf_brown
 	)(
-		static_cast<time_type>(80),
-		static_cast<time_type>(1),
-		6,
-		2,
+		delay(80),
+		spawn_interval(1),
+		count(6),
+		spawns_per_wave(2),
 		enemy_type::wolf_white
 	)(
-		static_cast<time_type>(120),
-		static_cast<time_type>(1),
-		6,
-		2,
+		delay(120),
+		spawn_interval(1),
+		count(6),
+		spawns_per_wave(2),
 		enemy_type::wolf_black
 	)(
-		static_cast<time_type>(130),
-		static_cast<time_type>(.5),
-		10,
-		2,
+		delay(130),
+		spawn_interval(.5f),
+		count(10),
+		spawns_per_wave(2),
 		enemy_type::spider
 	)(
-		static_cast<time_type>(180),
-		static_cast<time_type>(1),
-		3,
-		1,
+		delay(180),
+		spawn_interval(1),
+		count(3),
+		spawns_per_wave(1),
 		enemy_type::skeleton
 	);
 

@@ -2,22 +2,22 @@
 #include "simple.hpp"
 
 sanguis::server::waves::infinite::infinite(
-	time_type const delay_,
-	time_type const spawn_interval_,
-	unsigned const waves_,
-	unsigned const spawns_per_wave_,
+	waves::delay const delay_,
+	waves::spawn_interval const spawn_interval_,
+	waves::count const count_,
+	waves::spawns_per_wave const spawns_per_wave_,
 	enemy_type::type const etype_)
 :
 	delay_(delay_),
 	spawn_interval_(spawn_interval_),
-	waves_(waves_),
+	count_(count_),
 	spawns_per_wave_(spawns_per_wave_),
 	etype_(etype_),
 	simple_(
 		new simple(
 			delay_,
 			spawn_interval_,
-			waves_,
+			count_,
 			spawns_per_wave_,
 			etype_
 		)
@@ -43,8 +43,8 @@ sanguis::server::waves::infinite::process(
 		simple_.reset(
 			new simple(
 				delay_,
-				spawn_interval_,
-				waves_,
+				spawn_interval_ *= static_cast<time_type>(0.99f),
+				count_,
 				spawns_per_wave_,
 				etype_
 			)
