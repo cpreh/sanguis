@@ -16,7 +16,7 @@ sanguis::server::waves::generator::generator()
 		enemy_type::spider
 	)(
 		delay(0),
-		spawn_interval(0),
+		spawn_interval(2),
 		count(20),
 		spawns_per_wave(2),
 		enemy_type::maggot
