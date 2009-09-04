@@ -5,6 +5,7 @@
 #include "weapon.hpp"
 #include "base_cooldown.hpp"
 #include "damage.hpp"
+#include "aoe.hpp"
 #include "cast_point.hpp"
 #include "reload_time.hpp"
 
@@ -22,7 +23,7 @@ public:
 		weapon_type::type,
 		weapons::base_cooldown,
 		weapons::damage,
-		space_unit radius,
+		weapons::aoe,
 		weapons::cast_point,
 		weapons::reload_time
 	);
@@ -33,7 +34,7 @@ private:
 	);
 	
 	weapons::damage const damage_;
-	space_unit const radius;
+	weapons::aoe const aoe_;
 };
 
 }

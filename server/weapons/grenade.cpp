@@ -8,7 +8,7 @@ sanguis::server::weapons::grenade::grenade(
 	weapon_type::type const type_,
 	weapons::base_cooldown const base_cooldown_,
 	weapons::damage const damage_,
-	space_unit const radius,
+	weapons::aoe const aoe_,
 	weapons::cast_point const cast_point_,
 	weapons::reload_time const reload_time_
 )
@@ -24,7 +24,7 @@ sanguis::server::weapons::grenade::grenade(
 		reload_time_
 	),
 	damage_(damage_),
-	radius(radius)
+	aoe_(aoe_)
 {}
 
 void
@@ -39,7 +39,7 @@ sanguis::server::weapons::grenade::do_attack(
 				a.angle(),
 				a.team(),
 				damage_,
-				radius,
+				aoe_,
 				a.dest()
 			)
 		)

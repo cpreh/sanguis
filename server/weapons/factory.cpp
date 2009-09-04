@@ -66,7 +66,7 @@ sanguis::server::weapons::create(
 				type,
 				base_cooldown(0.8f),
 				damage(9),
-				static_cast<space_unit>(120), // aoe
+				aoe(120), 
 				magazine_size(1),
 				reload_time(1.8f)
 			)
@@ -78,7 +78,7 @@ sanguis::server::weapons::create(
 				type,
 				base_cooldown(0.7f),
 				damage(20),
-				static_cast<space_unit>(180), // radius
+				aoe(180),
 				cast_point(0.1f),
 				reload_time(1)
 			)
