@@ -35,7 +35,8 @@
 #include <ostream>
 
 sanguis::server::states::running::running(
-	my_context ctx)
+	my_context ctx
+)
 :
 	my_base(ctx),
 	environment_(
@@ -49,17 +50,7 @@ sanguis::server::states::running::running(
 		boost::bind(&running::level_callback, this, _1, _2),
 		boost::bind(&machine::resources, &context<machine>()),
 		boost::bind(&pickup_spawner::spawn, &pickup_spawner_, _1),
-		boost::bind(&running::pickup_chance, this, _1),
-		context<machine>().collision()
-	),
-	coll_connection(
-		context<machine>().collision()->register_callback(
-			boost::bind(
-				collision::execute,
-				_1,
-				_2
-			)
-		)
+		boost::bind(&running::pickup_chance, this, _1)
 	),
 	console_print(
 		boost::bind(
@@ -68,17 +59,7 @@ sanguis::server::states::running::running(
 			_1
 		)
 	),
-	entities_(),
 	players_(),
-	pickup_spawner_(
-		environment()
-	),
-	pickup_chance_(
-		sge::random::make_inclusive_range(
-			static_cast<probability_type>(0),
-			static_cast<probability_type>(1)
-		)
-	),
 	wave_generator(),
 	player_records()
 {
@@ -143,15 +124,20 @@ sanguis::server::states::running::environment() const
 	return environment_;
 }
 
+#if 0
 void
 sanguis::server::states::running::update_waves(
-	time_type const time)
+	time_type const time
+)
 {
+	/*
 	wave_generator.process(
 		time,
 		environment()
 	);
+	*/
 }
+#endif
 
 void
 sanguis::server::states::running::add_player_record(
@@ -200,7 +186,8 @@ sanguis::server::states::running::all_dead()
 
 boost::statechart::result
 sanguis::server::states::running::react(
-	message_event const &m)
+	message_event const &m
+)
 {
 	message_functor<
 		running,
@@ -383,21 +370,6 @@ void sanguis::server::states::running::send_available_perks(
 			p.net_id()
 		)
 	);
-}
-
-sanguis::server::entities::entity &
-sanguis::server::states::running::insert_entity(
-	entities::auto_ptr e)
-{
-	entities_.push_back(e);
-	entities::entity &ref = entities_.back();
-
-	if(ref.type() == entity_type::indeterminate)
-		return ref;
-	
-	send()(ref.add_message());
-
-	return ref;
 }
 
 sanguis::server::send_callback const &

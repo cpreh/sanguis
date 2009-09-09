@@ -42,20 +42,48 @@ namespace server
 {
 namespace entities
 {
-class entity : public collision::base {
+
+class entity
+:
+	public collision::base
+{
 	SGE_NONCOPYABLE(entity)
 protected:
 	explicit entity(
-		base_parameters const &);
+		base_parameters const &
+	);
 public:
-	entity_id id() const;
+	void
+	environment(
+		server::environment::object_ptr
+	);
 
-	pos_type const pos() const;
-	void pos(pos_type const &);
-	space_unit angle() const;
-	void angle(space_unit);
-	space_unit direction() const;
-	void direction(space_unit);
+	entity_id
+	id() const;
+
+	pos_type const
+	pos() const;
+
+	void
+	pos(
+		pos_type const &
+	);
+
+	space_unit
+	angle() const;
+
+	void
+	angle(
+		space_unit
+	);
+
+	space_unit
+	direction() const;
+
+	void
+	direction(
+		space_unit
+	);
 	
 	pos_type const center() const;
 	void center(pos_type const &);
@@ -63,18 +91,18 @@ public:
 	space_unit speed() const;
 	space_unit radius() const;
 
-	server::team::type team() const;
+	server::team::type
+	team() const;
 
 	void damage(
 		space_unit,
-		damage::array const &);
+		damage::array const &
+	);
+
 	bool dead() const;
 	virtual void die();
 
 	damage::armor const &armor() const;
-
-	bool aggressive() const;
-	void aggressive(bool);
 
 	health_type health() const;
 	void health(health_type);
@@ -115,60 +143,89 @@ public:
 
 	virtual ~entity();
 protected:
-	void send(messages::auto_ptr);
-	server::environment const &
+	server::environment::object &
 	environment() const;
-	entity &insert(auto_ptr); 
 
-	bool perk_choosable(
-		perk_type::type) const;
+	entity &
+	insert(
+		auto_ptr
+	);
 
-	virtual void on_die();
+	bool
+	perk_choosable(
+		perk_type::type
+	) const;
+
+	virtual void
+	on_die();
 private:
 	friend class auto_weak_link;
 	friend class satellite;
 
-	void insert_link(
-		auto_weak_link &);
+	void
+	insert_link(
+		auto_weak_link &
+	);
 	
-	void speed_change(
-		property::value_type);
+	void
+	speed_change(
+		property::value_type
+	);
 
-	void health_change(
-		property::value_type);
+	void
+	health_change(
+		property::value_type
+	);
 
-	void max_health_change(
-		property::value_type);
+	void
+	max_health_change(
+		property::value_type
+	);
 
 	boost::logic::tribool const
 	can_collide_with(
-		collision::base const &) const;
+		collision::base const &
+	) const;
 	
 	void
 	collision(
-		collision::base &);
+		collision::base &
+	);
 
 	virtual boost::logic::tribool const 
 	can_collide_with_entity(
-		entity const &) const;
+		entity const &
+	) const;
 	
 	virtual void
 	collision_entity(
-		entity &);
+		entity &
+	);
 
-	entity_id const         id_;
-	server::environment     env_;
-	damage::armor           armor_;
-	pos_type                center_;
-	space_unit              angle_,
-	                        direction_;
-	team::type              team_;
-	property_map            properties;
+	entity_id const id_;
+
+	server::environment::object_ptr env_;
+
+	damage::armor armor_;
+
+	pos_type center_;
+
+	space_unit
+		angle_,
+		direction_;
+	
+	team::type team_;
+
+	property_map properties;
+
 	entity_type::type const type_;
+
 	bool invulnerable_;
+
 	dim_type collision_dim;
-	bool aggressive_;
+
 	mutable bool update_health_;
+
 	sge::signal::scoped_connection const
 		speed_change_,
 		health_change_,
@@ -177,18 +234,21 @@ private:
 	typedef boost::ptr_map<
 		perk_type::type,
 		perks::perk
-	>                       perk_container;
-	perk_container          perks_;
+	> perk_container;
+
+	perk_container perks_;
 
 	typedef boost::ptr_list<
 		buffs::buff
-	>                       buff_container;
-	buff_container          buffs_;
+	> buff_container;
+
+	buff_container buffs_;
 
 	typedef boost::ptr_list<
 		auras::aura
-	>                       aura_container;
-	aura_container          auras_;
+	> aura_container;
+
+	aura_container auras_;
 
 	link_container links;
 };

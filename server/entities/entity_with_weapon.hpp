@@ -23,12 +23,14 @@ protected:
 
 	entity_with_weapon(
 		base_parameters const &,
-		weapons::auto_ptr start_weapon);
+		weapons::auto_ptr start_weapon
+	);
 
 	virtual void
 	update(
 		time_type,
-		container &entities);
+		container &entities
+	);
 public:
 	void change_weapon(weapon_type::type);
 	void add_weapon(weapons::auto_ptr);
@@ -37,12 +39,23 @@ public:
 	void target(pos_type const &);
 	pos_type const &target() const;
 
-	bool in_range(
-		pos_type const &) const;
+	bool
+	in_range(
+		pos_type const &
+	) const;
 
-	bool has_weapon() const;
-	weapons::weapon &active_weapon();
-	weapons::weapon const &active_weapon() const;
+	bool
+	has_weapon() const;
+
+	weapons::weapon &
+	active_weapon();
+
+	weapons::weapon const &
+	active_weapon() const;
+
+	void aggressive(
+		bool
+	);
 
 	void attack_ready();
 
@@ -65,7 +78,9 @@ private:
 	bool
 		attacking,
 		reloading,
-		attack_ready_;
+		attack_ready_,
+		aggressive_;
+	
 	sge::signal::scoped_connection const
 		attack_speed_change_,
 		reload_speed_change_;

@@ -5,7 +5,8 @@
 void
 sanguis::server::collision::execute(
 	sge::collision::satellite &a,
-	sge::collision::satellite &b)
+	sge::collision::satellite &b
+)
 {
 	base
 		&e0(

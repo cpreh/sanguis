@@ -65,36 +65,43 @@ public:
 	> player_record_vector;
 
 	explicit running(
-		my_context);
+		my_context
+	);
+
 	~running();
 	
-	server::entities::container &entities();
-	server::entities::container const &entities() const;
-
 	player_map &players();
 	player_map const &players() const;
 
 	entities::player &
 	player(
-		net::id_type);
+		net::id_type
+	);
 
-	server::environment const &
-	environment() const;
+//	server::environment const &
+//	environment() const;
 
-	void update_waves(
-		time_type);
+//	void update_waves(
+//		time_type);
 	
-	void add_player_record(
-		player_record const &);
+	void
+	add_player_record(
+		player_record const &
+	);
 
 	void all_dead();
 
-	boost::statechart::result react(
-		message_event const &);
+	boost::statechart::result
+	react(
+		message_event const &
+	);
 	
-	boost::statechart::result operator()(
+	boost::statechart::result
+	operator()(
 		net::id_type,
-		messages::connect const &);
+		messages::connect const &
+	);
+
 	boost::statechart::result operator()(
 		net::id_type,
 		messages::disconnect const &);
@@ -108,9 +115,6 @@ public:
 		net::id_type,
 		messages::player_choose_perk const &);
 private:
-	void divide_exp(
-		exp_type);
-
 	void level_callback(
 		server::entities::player &,
 		level_type);
@@ -118,40 +122,37 @@ private:
 	void send_available_perks(
 		entities::player const &);
 	
-	server::entities::entity &
-	insert_entity(
-		server::entities::auto_ptr);
-	
 	send_callback const &
 	send() const;
 
-	bool
+	/*bool
 	pickup_chance(
-		probability_type);
+		probability_type);*/
 
 	boost::statechart::result
 	handle_default_msg(
 		net::id_type,
-		messages::base const &);
+		messages::base const &
+	);
 
 	static sge::log::logger &log();
 
-	server::environment const environment_;
+	//server::environment const environment_;
 
-	sge::signal::scoped_connection const coll_connection;
+	//sge::signal::scoped_connection const coll_connection;
 
 	console_print_callback const console_print;
 
-	server::entities::container entities_;
 	player_map players_;
-	
-	pickup_spawner pickup_spawner_;
 
-	sge::random::uniform<
+	world::object_map worlds_;
+	//pickup_spawner pickup_spawner_;
+
+	/*sge::random::uniform<
 		probability_type
-	> pickup_chance_;
+	> pickup_chance_;*/
 
-	waves::generator wave_generator;
+//	waves::generator wave_generator;
 
 	player_record_vector player_records;
 };

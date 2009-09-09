@@ -96,6 +96,14 @@ sanguis::server::entities::entity::entity(
 	links()
 {}
 
+void
+sanguis::server::entities::entity::environment(
+	server::environment const &nenvironment
+)
+{
+	environment_ = nenvironment;
+}
+
 sanguis::entity_id
 sanguis::server::entities::entity::id() const
 {
@@ -234,17 +242,6 @@ sanguis::server::damage::armor const &
 sanguis::server::entities::entity::armor() const
 {
 	return armor_;
-}
-
-bool sanguis::server::entities::entity::aggressive() const
-{
-	return aggressive_;
-}
-
-void sanguis::server::entities::entity::aggressive(
-	bool const n)
-{
-	aggressive_ = n;
 }
 
 sanguis::server::health_type
@@ -452,27 +449,20 @@ sanguis::server::entities::entity::update_health() const
 sanguis::server::entities::entity::~entity()
 {}
 
-void sanguis::server::entities::entity::send(
-	messages::auto_ptr message)
-{
-	environment().send()(
-		messages::auto_ptr(
-			message
-		)
-	);
-}
-
-sanguis::server::environment const &
+sanguis::server::environment::object &
 sanguis::server::entities::entity::environment() const
 {
-	return env_;
+	return *env_;
 }
 
 sanguis::server::entities::entity &
 sanguis::server::entities::entity::insert(
-	auto_ptr e)
+	auto_ptr e
+)
 {
-	return environment().insert()(e);
+	return environment().insert(
+		e
+	);
 }
 
 bool
@@ -525,10 +515,9 @@ void sanguis::server::entities::entity::max_health_change(
 {
 	update_health_ = true;
 
-	send(
-		message_convert::max_health(
-			*this
-		)
+	environment().max_health_changed(
+		id(),
+		max_health()
 	);
 }
 

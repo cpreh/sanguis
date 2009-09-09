@@ -6,7 +6,7 @@
 #include "../pos_type.hpp"
 #include "../space_unit.hpp"
 #include "../dim_type.hpp"
-#include "../environment_fwd.hpp"
+#include "../environment/object_ptr.hpp"
 #include "../teams.hpp"
 #include "../damage/armor.hpp"
 #include "../../entity_type.hpp"
@@ -24,7 +24,7 @@ namespace entities
 class base_parameters {
 public:
 	base_parameters(
-		environment const &,
+		environment::object_ptr,
 		damage::armor const &,
 		pos_type const &center,
 		space_unit angle,
@@ -33,9 +33,10 @@ public:
 		property_map const &properties,
 		entity_type::type type_,
 		bool invulnerable,
-		dim_type const &collision_dim);
+		dim_type const &collision_dim
+	);
 	
-	environment const &env() const;
+	environment::object_ptr const &env() const;
 	damage::armor const &armor() const;
 	pos_type const &center() const;
 	space_unit angle() const;
@@ -46,7 +47,7 @@ public:
 	bool invulnerable() const;
 	dim_type const &collision_dim() const;
 private:
-	environment const          &env_;
+	environment::object_ptr const env_;
 	damage::armor const        &armor_;
 	pos_type const             center_;
 	space_unit const           angle_,

@@ -26,7 +26,8 @@ public:
 		space_unit angle,
 		property_map const &,
 		string const &name,
-		net::id_type);
+		net::id_type
+	);
 
 	// own functions
 	string const name() const;
@@ -35,11 +36,15 @@ public:
 	level_type level() const;
 	level_type level_delta() const;
 
-	bool perk_choosable(
-		perk_type::type) const;
+	bool
+	perk_choosable(
+		perk_type::type
+	) const;
 	
-	void add_perk(
-		perks::auto_ptr);
+	void
+	add_perk(
+		perks::auto_ptr
+	);
 	
 	perks::list const
 	available_perks() const;

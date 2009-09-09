@@ -54,7 +54,8 @@ sanguis::server::collision::base::~base()
 
 boost::logic::tribool const
 sanguis::server::collision::base::can_collide_with(
-	collision::base const &) const
+	collision::base const &
+) const
 {
 	return boost::logic::indeterminate;
 }
