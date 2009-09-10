@@ -6,5 +6,4 @@ sanguis::server::global::context:send(
 	messages::auto_ptr msg
 )
 {
-		
 }

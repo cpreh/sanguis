@@ -74,6 +74,12 @@ private:
 		entity_id
 	);
 
+	void
+	update_sight_range(
+		net::id_type player_id,
+		entity_id target_id
+	);
+
 	entities::entity & 
 	insert(
 		entities::auto_ptr
@@ -85,6 +91,14 @@ private:
 		exp_type
 	);
 */
+
+	// owns functions
+	void
+	send_entity_specific(
+		entity_id,
+		messages::auto_ptr
+	);
+
 
 	server::entities::container entities_;
 

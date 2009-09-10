@@ -6,7 +6,7 @@
 #include "../entities/entity_fwd.hpp"
 #include "../../weapon_type.hpp"
 #include "../../entity_id.hpp"
-#include <sge/shared_ptr.hpp>
+#include <sge/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -53,32 +53,9 @@ public:
 		entities::auto_ptr
 	) = 0;
 
+	
+
 	virtual ~object();
-
-	/*
-	exp_callback const &
-	exp() const;
-
-	level_callback const &
-	level() const;
-
-	load_callback const &
-	load() const;
-
-	spawn_pickup_callback const &
-	spawn_pickup() const;
-
-	pickup_chance_callback const &
-	pickup_chance() const;
-private:
-	send_callback const send_;
-	insert_callback const insert_;
-	exp_callback const exp_;
-	level_callback const level_;
-	load_callback const load_;
-	spawn_pickup_callback const spawn_pickup_;
-	pickup_chance_callback const pickup_chance_;
-*/
 };
 
 }

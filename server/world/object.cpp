@@ -33,6 +33,15 @@ sanguis::server::world::object::update(
 	time_type const time_
 )
 {
+	if(
+		sight_range_timer.update()
+	)
+		BOOST_FOREACH(
+			sigth_range_map::reference sight_range_,
+			sigth_ranges_
+		)
+			sight_range_.update();
+	
 	BOOST_FOREACH(
 		entities::container::reference entity_,
 		entities_
@@ -61,13 +70,19 @@ void
 sanguis::server::world::weapon_changed(
 	entity_id id,
 	weapon_type::type
-);
+)
+{
+	
+}
 
 void
 sanguis::server::world::got_weapon(
 	entity_id id,
 	weapon_type::type
-);
+)
+{
+	global_context_->
+}
 
 void
 sanguis::server::world::attacking_changed(
@@ -75,6 +90,22 @@ sanguis::server::world::attacking_changed(
 	bool const is_attacking
 )
 {
+	send_entity_specific(
+		id,
+		is_attacking
+		?
+			messages::create(
+				messages::start_attacking(
+					id
+				)
+			)
+		:
+			messages::create(
+				messages::stop_attacking(
+					id
+				)
+			)
+	);
 }
 
 void
@@ -83,8 +114,8 @@ sanguis::server::world::reloading_changed(
 	bool const is_reloading
 )
 {
-	global_context_->send(
-		world_id_,
+	send_entity_specific(
+		id,
 		is_reloading
 		?
 			messages::create(
@@ -107,8 +138,8 @@ sanguis::server::world::max_health_changed(
 	health_type const health_
 )
 {
-	global_context_->send(
-		world_id_,
+	send(
+		id,
 		messages::create(
 			messages::max_health(
 				id,
@@ -137,6 +168,18 @@ sanguis::server::world::object::request_transfer(
 		)
 	);
 }
+void
+sanguis::server::world::update_sight_range(
+	net::id_type const player_id,
+	entity_id const target_id
+)
+{
+	sight_ranges[
+		player_id
+	].insert(
+		target_id
+	);
+}
 
 sanguis::server::entities::entity &
 sanguis::server::world::object::insert_entity(
@@ -153,4 +196,25 @@ sanguis::server::world::object::insert_entity(
 	//send()(ref.add_message());
 
 //	return ref;
+}
+
+void
+sanguis::server::world::object::send_entity_specific(
+	entity_id const id,
+	messages::auto_ptr msg
+)
+{
+	BOOST_FOREACH(
+		sight_range_list::const_reference range,
+		sight_ranges
+	)
+		if(
+			range.contains(
+				range
+			)
+		)
+			global_context_->send(
+				range.player_id(),
+				msg
+			);
 }
