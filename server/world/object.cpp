@@ -1,9 +1,14 @@
 #include "object.hpp"
+#include "environment.hpp"
+#include "context.hpp"
 #include <sge/collision/system_ptr.hpp>
+#include <sge/time/second.hpp>
+#include <sge/make_shared_ptr.hpp>
 #include <boost/foreach.hpp>
 #include <boost/bind.hpp>
 
 sanguis::server::world::object::object(
+	context_ptr const global_context_,
 	sge::collision::system_ptr const sys
 )
 :
@@ -12,15 +17,39 @@ sanguis::server::world::object::object(
 			// TODO
 		)
 	),
+	diff_clock_(),
+	sight_range_timer_(
+		sge::time::second(
+			10
+		),
+		sge::time::activation_state::active,
+		diff_clock_.callback()
+	),
 	entities_(),
 	props_(),
-	coll_connection(
+	collision_test_connection_(
+		collision_world_->test_callback(
+			boost::bind(
+				collision::test,
+				_1,
+				_2
+			)
+		)
+	),
+	collision_connection_(
 		collision_world_->register_callback(
 			boost::bind(
 				collision::execute,
 				_1,
 				_2
 			)
+		)
+	),
+	callbacks_(
+		sge::make_shared_ptr<
+			environment
+		>(
+			*this
 		)
 	)
 {}
@@ -34,14 +63,16 @@ sanguis::server::world::object::update(
 )
 {
 	if(
-		sight_range_timer.update()
+		sight_range_timer_.update()
 	)
 		BOOST_FOREACH(
-			sigth_range_map::reference sight_range_,
-			sigth_ranges_
+			sight_range_map::reference ref,
+			sight_ranges_
 		)
-			sight_range_.update();
-	
+			ref.update(
+				time_
+			);
+
 	BOOST_FOREACH(
 		entities::container::reference entity_,
 		entities_
@@ -53,35 +84,34 @@ sanguis::server::world::object::update(
 }
 
 void
-sanguis::server::world::object::transfer(
-	sever::entities::entity_auto_ptr entity_
-)
-{
-	entity_->environment(
-		environment_
-	);
-
-	insert_entity(
-		entity_
-	);
-}
-
-void
 sanguis::server::world::weapon_changed(
-	entity_id id,
-	weapon_type::type
+	entity_id const id,
+	weapon_type::type const wt
 )
 {
-	
+	send_entity_specific(
+		id,
+		messages::weapon_changed(
+			id,
+			wt
+		)
+	);
 }
 
 void
 sanguis::server::world::got_weapon(
-	entity_id id,
-	weapon_type::type
+	entity_id const id,
+	weapon_type::type const wt
 )
 {
-	global_context_->
+	send_player_specific(
+		id,
+		messages::create(
+			messages::got_weapon(
+				wt
+			)
+		)
+	);
 }
 
 void
@@ -133,12 +163,12 @@ sanguis::server::world::reloading_changed(
 }
 
 void
-sanguis::server::world::max_health_changed(
+sanguis::server::world::object::max_health_changed(
 	entity_id const id,
 	health_type const health_
 )
 {
-	send(
+	send_entity_specific(
 		id,
 		messages::create(
 			messages::max_health(
@@ -147,6 +177,30 @@ sanguis::server::world::max_health_changed(
 			)
 		)
 	);
+}
+
+void
+sanguis::server::world::object::divide_exp(
+	exp_type const exp_
+)
+{
+	if(
+		sge::math::almost_zero(
+			exp_
+		)
+	)
+		return;
+
+	BOOST_FOREACH(
+		player_map::reference ref,
+		players_
+	)
+	{
+		entities::player &p = *ref.second;
+		p.exp(p.exp() + exp);
+
+		send()(message_convert::experience(p));
+	}
 }
 
 void
@@ -170,15 +224,27 @@ sanguis::server::world::object::request_transfer(
 }
 void
 sanguis::server::world::update_sight_range(
-	net::id_type const player_id,
-	entity_id const target_id
+	entity_id const player_id_,
+	entity_id const target_id_
 )
 {
-	sight_ranges[
-		player_id
-	].insert(
-		target_id
+	sight_range &range(
+		sight_ranges_[
+			player_id_
+		]
 	);
+
+	if(
+		range.add(
+			target_id_
+		)
+	)
+		send_player_specific(
+			player_id_,
+			entities_[
+				target_id_
+			]->add_message()
+		);
 }
 
 sanguis::server::entities::entity &
@@ -186,16 +252,26 @@ sanguis::server::world::object::insert_entity(
 	entities::auto_ptr e
 )
 {
-	entities_.push_back(e);
+	entity_id const id(
+		e->id()
+	);
+
+	e.environment(
+		environment_
+	);
+
+	entities_.insert(
+		id,
+		e
+	);
+
 	return entities.back();
-	//entities::entity &ref = entities_.back();
+}
 
-	//if(ref.type() == entity_type::indeterminate)
-	//	return ref;
-	
-	//send()(ref.add_message());
-
-//	return ref;
+sge::collision::world_ptr const
+sanguis::server::world::object::collision_world() const
+{
+	return collision_world_;
 }
 
 void
@@ -213,8 +289,20 @@ sanguis::server::world::object::send_entity_specific(
 				range
 			)
 		)
-			global_context_->send(
+			global_context_->send_to_player(
 				range.player_id(),
 				msg
 			);
+}
+
+void
+sanguis::server::world::object::send_player_specific(
+	entity_id const player_id,
+	messages::auto_ptr msg
+)
+{
+	global_context_->send_to_player(
+		player_id,
+		msg
+	);
 }

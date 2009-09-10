@@ -31,18 +31,13 @@
 #include <boost/bind.hpp>
 
 sanguis::server::entities::entity::entity(
-	base_parameters const &param)
+	base_parameters const &param
+)
 :
 	collision::base(
-		param.env().collision(),
-		param.center(),
-		angle_to_vector(
-			param.direction() // TODO: is this right?
-		) * param.properties()[
-			property_type::movement_speed
-		].current(),
-		entities::radius(
-			param.collision_dim()
+		create_circle(
+			param,
+			this
 		)
 	),
 	id_(get_unique_id()),

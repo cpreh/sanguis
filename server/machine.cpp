@@ -63,12 +63,6 @@ sanguis::server::machine::machine(
 	con(con)
 {}
 
-void sanguis::server::machine::console_print(
-	sge::string const &s)
-{
-	con.print(s);
-}
-
 void sanguis::server::machine::process(
 	tick_event const &t)
 {

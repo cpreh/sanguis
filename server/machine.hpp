@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_MACHINE_HPP_INCLUDED
 #define SANGUIS_SERVER_MACHINE_HPP_INCLUDED
 
-#include "send_callback.hpp"
 #include "states/running_fwd.hpp"
 #include "client_data.hpp"
 #include "send_callback.hpp"
@@ -24,7 +23,11 @@ namespace server
 {
 
 struct machine
-	: public boost::statechart::state_machine<machine, states::running>
+:
+	public boost::statechart::state_machine<
+		machine,
+		states::running
+	>
 {
 public:
 	machine(
@@ -33,7 +36,10 @@ public:
 		sge::console::gfx &,
 		net::port_type);
 
-	void process(tick_event const &);
+	void
+	process(
+		tick_event const &
+	);
 
 	void process_message(
 		net::id_type,
@@ -57,21 +63,18 @@ public:
 	unicast(
 		net::id_type);
 	
-	void console_print(
-		sge::string const &);
 	net::port_type port() const;
 	net::server &net();
 	void listen();
 
 	load::context const &
 	resources() const;
-
-	sge::collision::world_ptr const collision();
 private:
 	void
 	send_unicast(
 		messages::auto_ptr,
-		net::id_type);
+		net::id_type
+	);
 	
 	typedef sge::container::map<
 		std::map,
@@ -79,7 +82,6 @@ private:
 		client_data
 	> client_map;
 
-	load::context const &resources_;
 	net::port_type const port_;
 	net::server net_;
 	sge::signal::scoped_connection const
@@ -87,8 +89,6 @@ private:
 		s_disconn,
 		s_data;
 	client_map clients;
-	sge::collision::world_ptr collision_;
-	sge::console::gfx &con;
 };
 
 }

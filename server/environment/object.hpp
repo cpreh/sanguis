@@ -6,6 +6,7 @@
 #include "../entities/entity_fwd.hpp"
 #include "../../weapon_type.hpp"
 #include "../../entity_id.hpp"
+#include <sge/collision/world_fwd.hpp>
 #include <sge/noncopyable.hpp>
 
 namespace sanguis
@@ -53,7 +54,8 @@ public:
 		entities::auto_ptr
 	) = 0;
 
-	
+	virtual sge::collision::world_ptr const
+	collision_world() const = 0;
 
 	virtual ~object();
 };

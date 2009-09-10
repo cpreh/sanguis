@@ -1,53 +1,24 @@
 #include "base.hpp"
-#include "satellite.hpp"
-#include <sge/collision/world.hpp>
-#include <sge/math/vector/construct.hpp>
-#include <sge/math/vector/basic_impl.hpp>
 #include <boost/logic/tribool.hpp>
 
 sanguis::server::collision::base::base(
-	sge::collision::world_ptr const collision_,
-	pos_type const &center,
-	pos_type const &speed,
-	space_unit const radius)
+	sge::collision::objets::base_ptr const base_
+)
 :
-	circle_(
-		collision_->create_circle(
-			sge::collision::satellite_ptr(
-				new satellite(*this)
-			),
-			sge::math::vector::construct(
-				center,
-				static_cast<
-					space_unit
-				>(0)
-			),
-			sge::math::vector::construct(
-				speed,
-				static_cast<
-					space_unit
-				>(0)
-			),
-			static_cast<sge::collision::unit>(
-				radius
-			)
-		)
-	)
+	base_(base_)
 {}
 
-/*
-sge::collision::objects::circle_ptr const
-sanguis::server::collision::base::circle()
+sge::collision::objects::base_ptr const
+sanguis::server::collision::base::collision_object()
 {
-	return circle_;
+	return base_;
 }
 
-sge::collision::objects::const_circle_ptr const
-sanguis::server::collision::base::circle() const
+sge::collision::objects::const_base_ptr const
+sanguis::server::collision::base::collision_object() const
 {
-	return circle_;
+	return base_;
 }
-*/
 
 sanguis::server::collision::base::~base()
 {}
@@ -62,6 +33,7 @@ sanguis::server::collision::base::can_collide_with(
 
 void
 sanguis::server::collision::base::collision(
-	collision::base &)
+	collision::base &
+)
 {
 }

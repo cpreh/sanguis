@@ -16,30 +16,27 @@
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/container/map_impl.hpp>
+#include <sge/make_auto_ptr.hpp>
 #include <boost/assign/list_of.hpp>
-#include <boost/foreach.hpp>
 
 sanguis::server::entities::player *
 sanguis::server::create_player(
-	messages::client_info const &client_info,
+	string const &name,
 	send_callback const &send_to_player,
 	environment const &env,
-	entities::container const &entities,
 	connect_state::type const current_state,
-	net::id_type const net_id)
+	net::id_type const net_id
+)
 {
-	string const &name(
-		sge::utf8::convert(
-			client_info.get<messages::string>()
-		)
-	);
-
+	
 	// TODO: this should be cleaned up somehow
 	// 1) create the player
 	// 2) tell the client the player's id _before_ doing anything else
 	// 3) add the player
-	entities::auto_ptr new_player(
-		new entities::player(
+	entities::player_auto_ptr new_player(
+		sge::make_auto_ptr<
+			entities::player
+		>(
 			env,
 			damage::no_armor(),
 			pos_type(
@@ -76,16 +73,8 @@ sanguis::server::create_player(
 		)
 	);
 
-	entities::player &p(
-		dynamic_cast<entities::player &>(
-			env.insert()(
-				new_player
-			)
-		)
-	);
-
 	// TODO: some defaults here
-	p.add_weapon(
+	new_player->add_weapon(
 		weapons::create(
 			weapon_type::pistol,
 			env
@@ -93,30 +82,21 @@ sanguis::server::create_player(
 	);
 
 	send_to_player(
-		message_convert::experience(p)
+		message_convert::experience(
+			*new_player
+		)
 	);
 
 	send_to_player(
-		message_convert::level_up(p)
+		message_convert::level_up(
+			*new_player
+		)
 	);
 	
 	send_available_perks(
-		p,
+		*new_player,
 		send_to_player
 	);
 
-	BOOST_FOREACH(
-		entities::entity const &e,
-		entities
-	)
-	{
-		if (e.id() == p.id())
-			continue;
-
-		send_to_player(
-			e.add_message()
-		);
-	}
-
-	return &p;
+	return new_player;
 }

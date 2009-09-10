@@ -2,12 +2,18 @@
 #define SANGUIS_SERVER_WORLD_OBJECT_HPP_INCLUDED
 
 #include "object_fwd.hpp"
+#include "context_ptr.hpp"
 #include "environment_fwd.hpp"
 #include "prop_container.hpp"
 #include "../entities/container.hpp"
 #include "../entities/auto_ptr.hpp"
+#include "../environment_ptr.hpp"
 #include "../exp_type.hpp"
+#include "../../diff_clock.hpp"
 #include "../../time_type.hpp"
+#include <sge/collision/world_fwd.hpp>
+#include <sge/collision/system_fwd.hpp>
+#include <sge/time/timer.hpp>
 #include <sge/noncopyable.hpp>
 
 namespace sanguis
@@ -20,7 +26,10 @@ namespace world
 class object {
 	SGE_NONCOPYABLE(object)
 public:
-	object();
+	object(
+		context_ptr const global_context_,
+		sge::collision::system_ptr
+	);
 
 	~object();
 
@@ -28,16 +37,9 @@ public:
 	update(
 		time_type
 	);
-
-	void
-	transfer(
-		sever::entities::entity_auto_ptr
-	);
 private:
 	friend class environment;
 
-	// environment callbacks
-	
 	void
 	weapon_changed(
 		entity_id id,
@@ -69,6 +71,11 @@ private:
 	);
 
 	void
+	divide_exp(
+		exp_type
+	);
+
+	void
 	request_transfer(
 		world_id,
 		entity_id
@@ -84,13 +91,9 @@ private:
 	insert(
 		entities::auto_ptr
 	);
-/*
 
-	void
-	divide_exp(
-		exp_type
-	);
-*/
+	sge::collision::world_ptr const
+	collision_world() const;
 
 	// owns functions
 	void
@@ -99,10 +102,29 @@ private:
 		messages::auto_ptr
 	);
 
+	void
+	send_player_specific(
+		entity_id player_id,
+		messages::auto_ptr
+	);
 
-	server::entities::container entities_;
+	context_ptr const global_context_;
+
+	sge::collision::world_ptr const collision_world_;
+
+	diff_clock diff_clock_;
+
+	sge::time::timer sight_range_timer_;
+
+	entity_map entities_;
 
 	prop_container props_;
+
+	sge::signal::scoped_connection const
+		collision_test_connection_,
+		collision_connection_;
+	
+	server::environment::object_ptr const callbacks_;
 };
 
 }

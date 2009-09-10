@@ -2,7 +2,9 @@
 #define SANGUIS_SERVER_WORLD_ENVIRONMENT_HPP_INCLUDED
 
 #include "environment_fwd.hpp"
+#include "object_fwd.hpp"
 #include "../environment/object.hpp"
+#include <sge/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -15,8 +17,11 @@ class environment
 :
 	public server::environment::object
 {
+	SGE_NONCOPYABLE(environment)
 public:
-	environment();
+	explicit environment(
+		object &
+	);
 
 	~environment();
 
@@ -55,7 +60,7 @@ public:
 		entities::auto_ptr
 	);
 private:
-	
+	object &world_;	
 };
 
 }
