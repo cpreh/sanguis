@@ -1,37 +1,19 @@
 #include "running.hpp"
 #include "unpaused.hpp"
-#include "../collision/test.hpp"
-#include "../collision/execute.hpp"
-#include "../add_decorations.hpp"
-#include "../create_player.hpp"
-#include "../environment.hpp"
+#include "../global/context.hpp"
 #include "../message_functor.hpp"
-#include "../entities/entity.hpp"
-#include "../entities/player.hpp"
-#include "../message_convert/level_up.hpp"
-#include "../message_convert/experience.hpp"
-#include "../perks/factory.hpp"
-#include "../perks/perk.hpp"
 #include "../log.hpp"
-#include "../send_available_perks.hpp"
-#include "../cheat.hpp"
-#include "../player_record.hpp"
 #include "../../connect_state.hpp"
 #include "../../messages/unwrap.hpp"
 #include "../../messages/highscore.hpp"
 #include "../../messages/create.hpp"
 #include <sge/container/map_impl.hpp>
-#include <sge/random/inclusive_range.hpp>
 #include <sge/log/headers.hpp>
-#include <sge/collision/world.hpp>
 #include <sge/utf8/convert.hpp>
 #include <sge/text.hpp>
 #include <sge/type_info.hpp>
 #include <boost/mpl/vector.hpp>
-#include <boost/foreach.hpp>
 #include <boost/bind.hpp>
-#include <boost/tr1/random.hpp>
-#include <algorithm>
 #include <ostream>
 
 sanguis::server::states::running::running(
@@ -39,9 +21,12 @@ sanguis::server::states::running::running(
 )
 :
 	my_base(ctx),
-	//players_(),
-	//wave_generator(),
-	//player_records()
+	global_context_(
+		new global::context(
+			context<machine>().send_unicast()
+			context<machine>().collision_system()
+		)
+	)
 {
 	SGE_LOG_DEBUG(
 		log(),
@@ -199,7 +184,8 @@ sanguis::server::states::running::operator()(
 boost::statechart::result
 sanguis::server::states::running::operator()(
 	net::id_type const id,
-	messages::disconnect const &)
+	messages::disconnect const &
+)
 {
 	SGE_LOG_INFO(
 		log(),
@@ -213,8 +199,6 @@ sanguis::server::states::running::operator()(
 		id
 	);
 
-	//players()[id]->die();
-
 	return discard_event();
 }
 
@@ -223,16 +207,16 @@ sanguis::server::states::running::operator()(
 	net::id_type const id,
 	messages::player_cheat const &p)
 {
-	cheat(
-		player(
-			id
-		),
+	global_context_->cheat(
+		id,
+		// TODO: sanitize the input!
 		static_cast<
 			cheat_type::type
 		>(
-			p.get<messages::roles::cheat>()
-		),
-		environment()
+			p.get<
+				messages::roles::cheat
+			>()
+		)
 	);
 
 	return discard_event();
@@ -260,6 +244,7 @@ sanguis::server::states::running::operator()(
 
 }
 
+/*
 void sanguis::server::states::running::level_callback(
 	entities::player &p,
 	level_type)
@@ -281,6 +266,7 @@ void sanguis::server::states::running::send_available_perks(
 		)
 	);
 }
+*/
 
 boost::statechart::result
 sanguis::server::states::running::handle_default_msg(

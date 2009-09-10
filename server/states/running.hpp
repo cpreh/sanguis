@@ -24,6 +24,7 @@ namespace server
 {
 namespace states
 {
+
 class running
 :
 	public boost::statechart::state<

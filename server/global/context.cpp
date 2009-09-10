@@ -92,7 +92,7 @@ sanguis::server::global::context::send_to_player(
 )
 {
 	// TODO: we probably want to map this id to a net::id_type
-	send_unicast(
+	send_unicast_(
 		player_id_,
 		msg_
 	);

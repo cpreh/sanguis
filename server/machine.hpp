@@ -32,43 +32,63 @@ struct machine
 public:
 	machine(
 		load::context const &,
-		sge::collision::world_ptr,
+		sge::collision::system_ptr,
 		sge::console::gfx &,
-		net::port_type);
+		net::port_type
+	);
 
 	void
 	process(
 		tick_event const &
 	);
 
-	void process_message(
+	void
+	process_message(
 		net::id_type,
-		messages::auto_ptr);
+		messages::auto_ptr
+	);
 
-	void connect_callback(
-		net::id_type);
+	void
+	connect_callback(
+		net::id_type
+	);
 
-	void disconnect_callback(
+	void
+	disconnect_callback(
 		net::id_type,
-		sge::string const &);
+		sge::string const &
+	);
 
-	void data_callback(
+	void
+	data_callback(
 		net::id_type,
-		net::data_type const &);
+		net::data_type const &
+	);
 
-	void send(
-		messages::auto_ptr m);
+	void
+	send(
+		messages::auto_ptr
+	);
 
 	send_callback const
 	unicast(
-		net::id_type);
+		net::id_type
+	);
 	
-	net::port_type port() const;
-	net::server &net();
-	void listen();
+	net::port_type
+	port() const;
+
+	net::server &
+	net();
+
+	void
+	listen();
 
 	load::context const &
 	resources() const;
+
+	sge::collision::system_ptr const
+	collision_system() const;
 private:
 	void
 	send_unicast(
@@ -83,11 +103,14 @@ private:
 	> client_map;
 
 	net::port_type const port_;
+
 	net::server net_;
+
 	sge::signal::scoped_connection const
 		s_conn,
 		s_disconn,
 		s_data;
+
 	client_map clients;
 };
 

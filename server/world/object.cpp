@@ -1,9 +1,14 @@
 #include "object.hpp"
 #include "environment.hpp"
 #include "context.hpp"
-#include <sge/collision/system_ptr.hpp>
+#include "../collision/execute.hpp"
+#include "../collision/test.hpp"
+#include "../../exception.hpp"
+#include <sge/collision/system.hpp>
+#include <sge/collision/world.hpp>
 #include <sge/time/second.hpp>
 #include <sge/make_shared_ptr.hpp>
+#include <sge/text.hpp>
 #include <boost/foreach.hpp>
 #include <boost/bind.hpp>
 
@@ -209,16 +214,23 @@ sanguis::server::world::object::request_transfer(
 	entity_id const entity_id_
 )
 {
+	entity_map::iterator it const(
+		entities_.find(
+			entity_id
+		)
+	);
+
+	if (
+		it == entities_.end()
+	)
+		throw exception(
+			SGE_TEXT("entity can't be transferred!")
+		);
+
 	global_context_->transfer_entity(
 		world_id_,
 		entities_.release(
-			std::find_if(
-				entities_.begin(),
-				entities_.end(),
-				id_equal(
-					entity_id_
-				)
-			)
+			it
 		)
 	);
 }
@@ -260,12 +272,11 @@ sanguis::server::world::object::insert_entity(
 		environment_
 	);
 
-	entities_.insert(
-		id,
-		e
-	);
-
-	return entities.back();
+	return 
+		*entities_.insert(
+			id,
+			e
+		).second;
 }
 
 sge::collision::world_ptr const

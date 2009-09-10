@@ -18,8 +18,9 @@ namespace global
 class context {
 	SGE_NONCOPYABLE(context)
 public:
-	explicit context(
-		unicast_callback const &
+	context(
+		unicast_callback const &,
+		sge::collision::system_ptr
 	);
 
 	~context();

@@ -117,18 +117,26 @@ public:
 		property_type::type);
 
 	virtual exp_type exp() const;
+
 	dim_type const dim() const;
+
 	entity_type::type type() const;
+
 	bool invulnerable() const;
 
-	virtual void update(
+	virtual void
+	update(
 		time_type,
-		container &entities);
+		container &entities
+	);
 
-	virtual void add_perk(
-		perks::auto_ptr); 
+	virtual void
+	add_perk(
+		perks::auto_ptr
+	); 
 	
-	virtual messages::auto_ptr add_message() const;
+	virtual messages::auto_ptr
+	add_message() const;
 
 	auto_weak_link const
 	link();

@@ -19,9 +19,10 @@
 
 sanguis::server::machine::machine(
 	load::context const &resources_,
-	sge::collision::world_ptr const _collision,
+	sge::collision::system_ptr const collision_,
 	sge::console::gfx &con,
-	net::port_type const port_)
+	net::port_type const port_
+)
 :
 	resources_(
 		resources_
@@ -59,7 +60,7 @@ sanguis::server::machine::machine(
 		)
 	),
 	clients(),
-	collision_(_collision),
+	collision_(collision_),
 	con(con)
 {}
 
@@ -135,7 +136,8 @@ void sanguis::server::machine::process_message(
 
 void sanguis::server::machine::data_callback(
 	net::id_type const id,
-	net::data_type const &data)
+	net::data_type const &data
+)
 {
 	sge::algorithm::append(
 		clients[id].in_buffer,
@@ -154,7 +156,8 @@ void sanguis::server::machine::data_callback(
 }
 
 void sanguis::server::machine::send(
-	messages::auto_ptr m) 
+	messages::auto_ptr m
+)
 { 
 	net::data_type m_str;
 
@@ -163,7 +166,10 @@ void sanguis::server::machine::send(
 		m_str
 	);
 
-	BOOST_FOREACH(client_map::reference ref, clients)
+	BOOST_FOREACH(
+		client_map::reference ref,
+		clients
+	)
 		sge::algorithm::append(
 			ref.second.out_buffer,
 			m_str
@@ -172,7 +178,8 @@ void sanguis::server::machine::send(
 
 sanguis::server::send_callback const
 sanguis::server::machine::unicast(
-	net::id_type const dest)
+	net::id_type const dest
+)
 {
 	return boost::bind(
 		&machine::send_unicast,
@@ -201,7 +208,7 @@ sanguis::server::machine::resources() const
 }
 
 sge::collision::world_ptr const
-sanguis::server::machine::collision()
+sanguis::server::machine::collision_system() const
 {
 	return collision_;
 }
