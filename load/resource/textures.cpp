@@ -1,4 +1,5 @@
 #include "textures.hpp"
+#include "texture_context.hpp"
 #include "map_get_or_create.hpp"
 #include "../log.hpp"
 #include "../../exception.hpp"
@@ -46,7 +47,7 @@ sanguis::load::resource::textures::load(
 	);
 }
 
-sge::texture::part_ptr const
+sanguis::load::resource::texture_context_ptr const
 sanguis::load::resource::textures::load(
 	sge::filesystem::path const &path) const
 {
@@ -78,21 +79,16 @@ sanguis::load::resource::textures::do_load(
 		/ texture_names[id]);
 }
 
-sge::texture::part_ptr const
+sanguis::load::resource::texture_context_ptr const
 sanguis::load::resource::textures::do_load_unnamed(
 	sge::filesystem::path const &path) const
 {
-	return sge::make_shared_ptr<
-		sge::texture::part_raw
-	>(
-		sge::image::create_texture(
+	return 
+		sge::make_shared_ptr<texture_context>(
 			path,
 			texman.renderer(),
 			il,
-			filter,
-			sge::renderer::resource_flags::none
-		)
-	);
+			filter);
 }
 
 sge::texture::part_ptr const

@@ -17,6 +17,7 @@
 #include <sge/sprite/object.hpp>
 #include <sge/time/time.hpp>
 #include <sge/text.hpp>
+#include <sge/cerr.hpp>
 #include <boost/bind.hpp>
 #include <algorithm>
 #include <limits>
@@ -44,6 +45,8 @@ sanguis::draw::model_part::model_part(
 	animation_(),
 	ended(false)
 {
+	sge::cerr << "in konstruktor\n";
+	// FIXME: das kann model_part neuerdings nicht mehr wissen
 	ref.size() = sge::math::dim::structure_cast<
 		sge::sprite::dim
 	>(
@@ -51,6 +54,7 @@ sanguis::draw::model_part::model_part(
 		[weapon_type::none]
 		[animation_type::none]
 		.get().dim());
+	sge::cerr << "get hat geklappt\n";
 }
 
 sanguis::draw::model_part::~model_part()
@@ -255,7 +259,9 @@ sanguis::draw::model_part::get_animation(
 	weapon_type::type const wtype,
 	animation_type::type const atype)
 {
-	if (!(*info)[wtype].has_animation(atype))
+	load::model::weapon_category const &t = 
+		(*info)[wtype];
+	if (!t.has_animation(atype))
 		return animation_auto_ptr();
 	return animation_auto_ptr(
 		new sge::sprite::texture_animation(
