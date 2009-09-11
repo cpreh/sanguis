@@ -220,27 +220,18 @@ sanguis::draw::object const &sanguis::draw::model_part::object() const
 bool sanguis::draw::model_part::try_animation(
 	animation_type::type const atype)
 {
-	try
-	{
-		if (weapon_ == weapon_type::size)
-			weapon_ = weapon_type::none;
+	if (weapon_ == weapon_type::size)
+		weapon_ = weapon_type::none;
 
-		scoped_texture_animation nanim(	
-			get_animation(
-				state ? state->weapon_type() : weapon_,
-				atype));
+	scoped_texture_animation nanim(	
+		get_animation(
+			state ? state->weapon_type() : weapon_,
+			atype));
 
-		animation_.swap(nanim);
-	}
-	catch(load::model::base_animation_not_found const &)
-	{
-		/*
-		SGE_LOG_DEBUG(
-			log(),
-			sge::log::_1 << SGE_TEXT("didn't work"));
-			*/
+	if (nanim == scoped_texture_animation())
 		return false;
-	}
+
+	animation_.swap(nanim);
 
 	/*
 	SGE_LOG_DEBUG(
@@ -264,6 +255,8 @@ sanguis::draw::model_part::get_animation(
 	weapon_type::type const wtype,
 	animation_type::type const atype)
 {
+	if (!(*info)[wtype].has_animation(atype))
+		return animation_auto_ptr();
 	return animation_auto_ptr(
 		new sge::sprite::texture_animation(
 			(*info)[wtype]

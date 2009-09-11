@@ -20,6 +20,8 @@ public:
 	animation const &
 	operator[](
 		animation_type::type) const;
+	bool has_animation(
+		animation_type::type) const;
 private:
 	explicit weapon_category(
 		sge::parse::json::object const &,
