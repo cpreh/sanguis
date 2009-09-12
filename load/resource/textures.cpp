@@ -10,6 +10,7 @@
 #include <sge/texture/no_fragmented.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/renderer/filter/linear.hpp>
+#include <sge/renderer/resource_flags_none.hpp>
 #include <sge/filesystem/directory_iterator.hpp>
 #include <sge/filesystem/extension.hpp>
 #include <sge/filesystem/is_regular.hpp>

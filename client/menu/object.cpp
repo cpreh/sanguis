@@ -20,7 +20,7 @@
 #include <sge/sprite/parameters.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <sge/renderer/filter/linear.hpp>
-#include <sge/renderer/resource_flags.hpp>
+#include <sge/renderer/resource_flags_none.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/texture/part_raw.hpp>
 #include "../../media_path.hpp"
