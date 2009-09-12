@@ -1,7 +1,7 @@
 #include "texture_context.hpp"
 #include <sge/make_shared_ptr.hpp>
 #include <sge/texture/part_raw.hpp>
-#include <sge/renderer/resource_flags.hpp>
+#include <sge/renderer/resource_flags_none.hpp>
 #include <sge/image/create_texture.hpp>
 #include <sge/cerr.hpp>
 #include <sge/text.hpp>
