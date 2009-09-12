@@ -31,6 +31,7 @@
 #include <sge/renderer/scoped_block.hpp>
 #include <sge/renderer/target.hpp>
 #include <sge/renderer/const_scoped_target_lock.hpp>
+#include <sge/renderer/resource_flags_none.hpp>
 #include <sge/renderer/filter/linear.hpp>
 
 // super ugly hack, so that we can use a vector with more than 20 types

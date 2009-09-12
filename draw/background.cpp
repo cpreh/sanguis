@@ -9,6 +9,7 @@
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/scoped_target.hpp>
 #include <sge/renderer/scoped_texture_lock.hpp>
+#include <sge/renderer/resource_flags_none.hpp>
 #include <sge/renderer/filter/linear.hpp>
 #include <sge/image/algorithm/fill.hpp>
 #include <sge/image/colors.hpp>
@@ -53,7 +54,7 @@ sanguis::draw::background::background(
 	sge::image::algorithm::fill(
 		sge::renderer::scoped_texture_lock(
 			tex,
-			sge::renderer::lock_flags::writeonly)
+			sge::renderer::lock_mode::writeonly)
 		.value(),
 		sge::image::colors::transparent()
 	);
