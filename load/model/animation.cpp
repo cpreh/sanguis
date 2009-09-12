@@ -149,7 +149,7 @@ sanguis::load::model::animation::animation(
 	context_ = 
 		param_.textures().load(
 			param_.path() / *texture);
-	update();
+	update(); // DEBUG
 }
 
 sge::sprite::animation_series const &
@@ -174,6 +174,7 @@ bool sanguis::load::model::animation::update()
 	anim.reset(
 		new sge::sprite::animation_series());
 
+	// TODO: let the context return sge::image::file_ptr instead and convert to part_ptr here
 	sge::texture::part_ptr const tex = 
 		context_->result();
 

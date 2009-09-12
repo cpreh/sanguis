@@ -314,7 +314,7 @@ catch (net::exception const &e)
 			messages::create(
 				messages::net_error(
 					sge::utf8::convert(
-						e.what()
+						e.string()
 					)
 				)
 			)
