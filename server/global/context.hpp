@@ -134,6 +134,8 @@ private:
 	log();
 
 	unicast_callback const send_unicast_;
+
+	sge::collision::system_ptr const collision_system_;
 	
 	world::map worlds_;
 	

@@ -3,6 +3,7 @@
 #include "../entities/player.hpp"
 #include "../entities/auto_ptr.hpp"
 #include "../world/object.hpp"
+#include "../world/random.hpp"
 #include "../perks/factory.hpp"
 #include "../weapons/weapon.hpp"
 #include "../create_player.hpp"
@@ -25,6 +26,7 @@ sanguis::server::global::context::context(
 )
 :
 	send_unicast_(send_unicast_),
+	collision_system_(collision_system_),
 	worlds_(),
 	players_(),
 	model_context_(model_context_),
@@ -285,15 +287,25 @@ sanguis::server::global::context::world(
 	world_id const world_id_
 )
 {
-	server::world::map::iterator it(
+	server::world::map::iterator const it(
 		worlds_.find(
 			world_id_	
 		)
 	);
 
-	// TODO: load the world here!
-
-	return *it->second;
+	if(
+		it != worlds_.end()
+	)
+		return *it->second;
+	
+	return *worlds_.insert(
+		world_id_,
+		server::world::random(
+			world_context_,
+			collision_system_,
+			model_context_
+		)
+	).first->second;
 }
 
 sge::log::logger &
