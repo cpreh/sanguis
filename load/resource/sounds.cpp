@@ -44,7 +44,7 @@ make_sound(
 			sanguis::load::log(),
 			sge::log::_1
 				<< SGE_TEXT("Allocation of a sound failed! ")
-				<< e.what()
+				<< e.string()
 		);
 		return sge::audio::sound_ptr();
 	}

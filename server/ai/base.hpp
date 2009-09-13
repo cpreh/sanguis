@@ -26,7 +26,7 @@ public:
 	virtual void
 	update(
 		time_type
-	);
+	) = 0;
 	
 	virtual ~base();
 };

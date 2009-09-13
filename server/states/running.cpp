@@ -267,6 +267,12 @@ void sanguis::server::states::running::send_available_perks(
 }
 */
 
+sanguis::server::global::context &
+sanguis::server::states::running::global_context()
+{
+	return *global_context_;
+}
+
 boost::statechart::result
 sanguis::server::states::running::handle_default_msg(
 	net::id_type const id,

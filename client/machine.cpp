@@ -254,7 +254,8 @@ sanguis::client::machine::net()
 }
 
 bool sanguis::client::machine::process(
-	tick_event const &t)
+	tick_event const &t
+)
 try
 {
 	if (out_buffer.size())
@@ -314,7 +315,7 @@ catch (net::exception const &e)
 			messages::create(
 				messages::net_error(
 					sge::utf8::convert(
-						e.what()
+						e.string()
 					)
 				)
 			)
