@@ -11,8 +11,8 @@
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::projectiles::melee::melee(
-	server::environment const &env,
-	pos_type const& center,
+	server::environment::object_ptr const env,
+	pos_type const &center,
 	team::type const team_,
 	space_unit const damage)
 :
@@ -43,7 +43,8 @@ sanguis::server::entities::projectiles::melee::melee(
 
 void
 sanguis::server::entities::projectiles::melee::do_damage(
-	entity &e)
+	entity &e
+)
 {
 	e.damage(
 		damage,

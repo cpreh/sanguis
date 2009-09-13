@@ -28,8 +28,7 @@ protected:
 
 	virtual void
 	update(
-		time_type,
-		container &entities
+		time_type
 	);
 public:
 	void change_weapon(weapon_type::type);

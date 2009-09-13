@@ -19,11 +19,11 @@
 #include <sge/make_auto_ptr.hpp>
 #include <boost/assign/list_of.hpp>
 
-sanguis::server::entities::player *
+sanguis::server::entities::player_auto_ptr
 sanguis::server::create_player(
 	string const &name,
-	send_callback const &send_to_player,
-	environment const &env,
+	unicast_callback const &send_to_player,
+	environment::object_ptr const env,
 	connect_state::type const current_state,
 	net::id_type const net_id
 )
@@ -65,6 +65,7 @@ sanguis::server::create_player(
 	);
 
 	send_to_player(
+		net_id,
 		messages::create(
 			messages::assign_id(
 				new_player->id(),
@@ -82,12 +83,14 @@ sanguis::server::create_player(
 	);
 
 	send_to_player(
+		net_id,
 		message_convert::experience(
 			*new_player
 		)
 	);
 
 	send_to_player(
+		net_id,
 		message_convert::level_up(
 			*new_player
 		)

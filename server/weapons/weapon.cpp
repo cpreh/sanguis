@@ -122,7 +122,7 @@ sanguis::server::weapons::weapon::~weapon()
 {}
 
 sanguis::server::weapons::weapon::weapon(
-	server::environment const &env_,
+	server::environment::object_ptr const env_,
 	weapon_type::type const type_,
 	weapons::range const range_,
 	weapons::magazine_size const magazine_size_,
@@ -171,20 +171,7 @@ sanguis::server::weapons::weapon::weapon(
 	initiate();
 }
 
-sanguis::server::entities::entity &
-sanguis::server::weapons::weapon::insert(
-	entities::auto_ptr e)
-{
-	return env_.insert()(e);
-}
-
-void sanguis::server::weapons::weapon::send(
-	messages::auto_ptr m)
-{
-	env_.send()(m);
-}
-
-sanguis::server::environment const &
+sanguis::server::environment::object_ptr const
 sanguis::server::weapons::weapon::environment() const
 {
 	return env_;

@@ -8,13 +8,15 @@
 void
 sanguis::server::send_available_perks(
 	entities::player const &p,
-	send_callback const &send)
+	unicast_callback const &send
+)
 {
 	perks::list const &list(
 		p.available_perks()
 	);
 
 	send(
+		p.net_id(),
 		messages::create(
 			messages::available_perks(
 				p.id(),

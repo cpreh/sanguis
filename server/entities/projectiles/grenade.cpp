@@ -17,13 +17,14 @@
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::projectiles::grenade::grenade(
-	server::environment const &env,
+	server::environment::object_ptr const env,
 	pos_type const &center,
 	space_unit const angle,
 	team::type const team_,
 	space_unit const damage,
 	space_unit const aoe_,
-	pos_type const &dest_)
+	pos_type const &dest_
+)
 :
 	aoe_projectile(
 		aoe_projectile_type::grenade,
@@ -68,13 +69,14 @@ sanguis::server::entities::projectiles::grenade::grenade(
 
 void
 sanguis::server::entities::projectiles::grenade::do_damage(
-	entity &)
+	entity &
+)
 {}
 
 void
 sanguis::server::entities::projectiles::grenade::update(
-	time_type const time,
-	container &cont)
+	time_type const time
+)
 {
 	diff_clock_.update(
 		time

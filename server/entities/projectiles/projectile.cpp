@@ -59,12 +59,6 @@ sanguis::server::entities::projectiles::projectile::projectile(
 	)
 {}
 
-void sanguis::server::entities::projectiles::projectile::die()
-{
-	entity::die();
-	do_die();
-}
-
 void sanguis::server::entities::projectiles::projectile::update(
 	time_type const time,
 	container &entities)

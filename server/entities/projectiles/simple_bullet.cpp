@@ -13,11 +13,12 @@
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
-	server::environment const &env,
+	server::environment::object_ptr const env,
 	pos_type const &center,
 	space_unit const angle,
 	team::type const team_,
-	space_unit const damage)
+	space_unit const damage
+)
 :
 	projectile(
 		projectile_type::simple_bullet,
@@ -46,7 +47,8 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 
 void
 sanguis::server::entities::projectiles::simple_bullet::do_damage(
-	entity &e)
+	entity &e
+)
 {
 	e.damage(
 		damage,

@@ -5,14 +5,21 @@
 #include "context_ptr.hpp"
 #include "environment_fwd.hpp"
 #include "prop_container.hpp"
-#include "../entities/container.hpp"
+#include "entity_map.hpp"
+#include "sight_range_map.hpp"
 #include "../entities/auto_ptr.hpp"
-#include "../environment_ptr.hpp"
+#include "../environment/object_ptr.hpp"
 #include "../exp_type.hpp"
+#include "../health_type.hpp"
+#include "../player_id.hpp"
 #include "../../diff_clock.hpp"
 #include "../../time_type.hpp"
+#include "../../world_id.hpp"
+#include "../../weapon_type.hpp"
+#include "../../messages/auto_ptr.hpp"
 #include <sge/collision/world_fwd.hpp>
 #include <sge/collision/system_fwd.hpp>
+#include <sge/signal/scoped_connection.hpp>
 #include <sge/time/timer.hpp>
 #include <sge/noncopyable.hpp>
 
@@ -119,17 +126,19 @@ private:
 
 	diff_clock diff_clock_;
 
-	sge::time::timer sight_range_timer_;
+	sge::time::timer
+		sight_range_timer_,
+		send_timer_;
 
 	entity_map entities_;
 
+	sight_range_map sight_ranges_;
+
 	prop_container props_;
 
-	sge::signal::scoped_connection const
-		collision_test_connection_,
-		collision_connection_;
+	sge::signal::scoped_connection const collision_connection_;
 	
-	server::environment::object_ptr const callbacks_;
+	server::environment::object_ptr const environment_;
 };
 
 }

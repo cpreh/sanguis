@@ -15,7 +15,7 @@ class friend_ : public entity_with_ai {
 public:
 	friend_(
 		friend_type::type,
-		server::environment const &,
+		server::environment::object_ptr,
 		damage::armor const &,
 		pos_type const &center,
 		space_unit angle,
@@ -23,13 +23,16 @@ public:
 		team::type,
 		property_map const &,
 		ai::auto_ptr,
-		weapons::auto_ptr weapon);
+		weapons::auto_ptr weapon
+	);
 private:
-	messages::auto_ptr add_message() const;
+	messages::auto_ptr
+	add_message() const;
 
 	boost::logic::tribool const
 	can_collide_with_entity(
-		entity const &) const;
+		entity const &
+	) const;
 
 	friend_type::type const ftype_;
 };

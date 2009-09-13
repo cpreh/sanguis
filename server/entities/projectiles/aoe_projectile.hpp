@@ -17,7 +17,7 @@ class aoe_projectile : public projectile {
 protected:
 	aoe_projectile(
 		aoe_projectile_type::type,
-		server::environment const &,
+		server::environment::object_ptr,
 		pos_type const &center,
 		space_unit angle,
 		team::type,
@@ -25,7 +25,8 @@ protected:
 		dim_type const &dim,
 		optional_life_time const &lifetime,
 		indeterminate::type,
-		space_unit aoe);
+		space_unit aoe
+	);
 	
 	space_unit aoe() const;
 private:

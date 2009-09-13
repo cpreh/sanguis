@@ -15,18 +15,20 @@ namespace projectiles
 class rocket : public aoe_projectile {
 public:
 	rocket(
-		server::environment const &,
+		server::environment::object_ptr,
 		pos_type const &center,
 		space_unit angle,
 		team::type team,
 		space_unit damage,
-		space_unit aoe);
+		space_unit aoe
+	);
 private:
 	void
 	do_damage(
-		entity &);
+		entity &
+	);
 
-	void do_die();
+	void on_die();
 	
 	space_unit const damage;
 };

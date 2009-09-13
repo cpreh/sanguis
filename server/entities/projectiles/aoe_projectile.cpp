@@ -6,7 +6,7 @@
 
 sanguis::server::entities::projectiles::aoe_projectile::aoe_projectile(
 	aoe_projectile_type::type const type_,
-	server::environment const &env,
+	server::environment::object_ptr const env,
 	pos_type const &center,
 	space_unit const angle,
 	team::type const team_,
@@ -14,7 +14,8 @@ sanguis::server::entities::projectiles::aoe_projectile::aoe_projectile(
 	dim_type const &dim,
 	optional_life_time const &lifetime,
 	indeterminate::type const indeterminate_,
-	space_unit const aoe_)
+	space_unit const aoe_
+)
 :
 	projectile(
 		projectile_type::aoe,

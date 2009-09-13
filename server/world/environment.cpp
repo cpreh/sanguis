@@ -2,7 +2,7 @@
 #include "object.hpp"
 
 sanguis::server::world::environment::environment(
-	object &world_
+	world::object &world_
 )
 :
 	world_(world_)
@@ -17,7 +17,7 @@ sanguis::server::world::environment::weapon_changed(
 	weapon_type::type const wt
 )
 {
-	world_->weapon_changed(
+	world_.weapon_changed(
 		id,
 		wt
 	);
@@ -29,7 +29,7 @@ sanguis::server::world::environment::got_weapon(
 	weapon_type::type const wt
 )
 {
-	world_->got_weapon(
+	world_.got_weapon(
 		id,
 		wt
 	);
@@ -41,7 +41,7 @@ sanguis::server::world::environment::attacking_changed(
 	bool const is_attacking
 )
 {
-	world_->attacking_changed(
+	world_.attacking_changed(
 		id,
 		is_attacking
 	);
@@ -53,7 +53,7 @@ sanguis::server::world::environment::reloading_changed(
 	bool const is_reloading
 )
 {
-	world_->reloading_changed(
+	world_.reloading_changed(
 		id,
 		is_reloading
 	);
@@ -65,7 +65,7 @@ sanguis::server::world::environment::max_health_changed(
 	health_type const health_
 )
 {
-	world_->max_health_changed(
+	world_.max_health_changed(
 		id,
 		health_
 	);
@@ -76,7 +76,7 @@ sanguis::server::world::environment::remove_player(
 	player_id const player_id_
 )
 {
-	world_->remove_player(
+	world_.remove_player(
 		player_id_
 	);
 }
@@ -86,7 +86,13 @@ sanguis::server::world::environment::insert(
 	entities::auto_ptr e
 )
 {
-	return world_->insert(
+	return world_.insert(
 		e
 	);
+}
+
+sge::collision::world_ptr const
+sanguis::server::world::environment::collision_world() const
+{
+	// TODO
 }

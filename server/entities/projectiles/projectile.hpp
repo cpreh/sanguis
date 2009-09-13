@@ -29,36 +29,38 @@ protected:
 
 	projectile(
 		projectile_type::type,
-		server::environment const &,
+		server::environment::object_ptr,
 		pos_type const &center,
 		space_unit angle,
 		team::type team,
 		property_map const &,
 		dim_type const &dim,
 		optional_life_time const &,
-		indeterminate::type);
+		indeterminate::type
+	);
 	
-	void die();
-
-	void update(
-		time_type,
-		container &);
+	void
+	update(
+		time_type
+	);
 private:
 	virtual boost::logic::tribool const 
 	can_collide_with_entity(
-		entity const &) const;
+		entity const &
+	) const;
 	
 	void
 	collision_entity(
-		entity &);
+		entity &
+	);
 
 	virtual void
 	do_damage(
-		entity &) = 0;
+		entity &
+	) = 0;
 
-	virtual void do_die();
-
-	messages::auto_ptr add_message() const;
+	messages::auto_ptr
+	add_message() const;
 
 	projectile_type::type const ptype_;
 	diff_clock diff_clock_;

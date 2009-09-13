@@ -13,10 +13,11 @@
 #include "states/reloading_fwd.hpp"
 #include "states/backswing_fwd.hpp"
 #include "states/castpoint_fwd.hpp"
-#include "../environment.hpp"
+#include "../environment/object_ptr.hpp"
 #include "../pos_type.hpp"
 #include "../space_unit.hpp"
 #include "../entities/entity_with_weapon_fwd.hpp"
+#include "../entities/entity_fwd.hpp"
 #include "../../time_type.hpp"
 #include "../../messages/base.hpp"
 #include "../../weapon_type.hpp"
@@ -48,14 +49,17 @@ public:
 	void
 	attack(
 		entities::entity_with_weapon &from,
-		pos_type const &to);
+		pos_type const &to
+	);
 
 	weapon_type::type
 	type() const;
 
-	void update(
+	void
+	update(
 		time_type,
-		entities::entity_with_weapon &owner);
+		entities::entity_with_weapon &owner
+	);
 
 	void stop();
 
@@ -80,7 +84,7 @@ public:
 	virtual ~weapon();
 protected:
 	weapon(
-		server::environment const &,
+		server::environment::object_ptr,
 		weapon_type::type,
 		weapons::range,
 		weapons::magazine_size,
@@ -94,14 +98,7 @@ protected:
 	do_attack(
 		delayed_attack const &) = 0;
 	
-	entities::entity &
-	insert(
-		entities::auto_ptr);
-
-	void send(
-		messages::auto_ptr);
-
-	server::environment const &
+	server::environment::object_ptr const
 	environment() const;
 
 	time_type
@@ -153,7 +150,7 @@ private:
 	static sge::log::logger &
 	log();
 
-	server::environment const env_;
+	server::environment::object_ptr const env_;
 	weapon_type::type const type_;
 	weapons::range const range_;
 	magazine_type magazine_used_;

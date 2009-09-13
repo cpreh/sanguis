@@ -8,7 +8,7 @@
 #include <sge/text.hpp>
 
 sanguis::server::entities::player::player(
-	server::environment const &env,
+	server::environment::object_ptr const env,
 	damage::armor const &armor,
 	pos_type const &center_,
 	space_unit const direction_,
@@ -49,8 +49,10 @@ sanguis::server::entities::player::exp() const
 	return exp_;
 }
 
-void sanguis::server::entities::player::exp(
-	exp_type const e)
+void
+sanguis::server::entities::player::exp(
+	exp_type const e
+)
 {
 	exp_ = e;
 	level_type const

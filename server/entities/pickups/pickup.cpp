@@ -71,7 +71,8 @@ sanguis::server::entities::pickups::pickup::pickup(
 
 boost::logic::tribool const
 sanguis::server::entities::pickups::pickup::can_collide_with_entity(
-	entity const &e) const
+	entity const &e
+) const
 {
 	return e.team() == team()
 		&& dynamic_cast<entity_with_weapon const *>(&e);
@@ -79,7 +80,8 @@ sanguis::server::entities::pickups::pickup::can_collide_with_entity(
 
 void
 sanguis::server::entities::pickups::pickup::collision_entity(
-	entity &e)
+	entity &e
+)
 {
 	// if something is spawned by this pickup that can pickup entities itself
 	// we will get an endless loop
@@ -95,12 +97,11 @@ sanguis::server::entities::pickups::pickup::collision_entity(
 
 void
 sanguis::server::entities::pickups::pickup::update(
-	time_type const time,
-	container &entities)
+	time_type const time
+)
 {
 	entity::update(
-		time,
-		entities
+		time
 	);
 
 	diff_clock_.update(

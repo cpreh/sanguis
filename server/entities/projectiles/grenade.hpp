@@ -17,22 +17,24 @@ namespace projectiles
 class grenade : public aoe_projectile {
 public:
 	grenade(
-		server::environment const &,
+		server::environment::object_ptr,
 		pos_type const &center,
 		space_unit angle,
 		team::type,
 		space_unit damage,
 		space_unit aoe,
-		pos_type const &dest);
+		pos_type const &dest
+	);
 private:
 	void
 	do_damage(
-		entity &);
+		entity &
+	);
 	
 	void
 	update(
-		time_type,
-		container &);
+		time_type
+	);
 	
 	void on_die();
 	

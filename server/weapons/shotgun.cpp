@@ -3,11 +3,12 @@
 #include "unlimited_magazine_count.hpp"
 #include "../entities/entity.hpp"
 #include "../entities/projectiles/simple_bullet.hpp"
+#include "../environment/object.hpp"
 #include "../../random.hpp"
 #include <boost/tr1/random.hpp>
 
 sanguis::server::weapons::shotgun::shotgun(
-	server::environment const &env,
+	server::environment::object_ptr const env,
 	weapon_type::type const type_,
 	weapons::base_cooldown const base_cooldown_,
 	space_unit const spread_radius,
@@ -57,7 +58,7 @@ void sanguis::server::weapons::shotgun::do_attack(
 	for(
 		unsigned i = 0; i < shells; ++i
 	)
-		insert(
+		environment()->insert(
 			entities::auto_ptr(
 				new entities::projectiles::simple_bullet(
 					environment(),

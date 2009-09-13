@@ -3,12 +3,11 @@
 
 #include "states/running_fwd.hpp"
 #include "client_data.hpp"
-#include "send_callback.hpp"
 #include "../load/context_fwd.hpp"
-#include "../messages/base.hpp"
+#include "../messages/auto_ptr.hpp"
 #include "../net/server.hpp"
+#include "../net/id_type.hpp"
 #include "../tick_event.hpp"
-#include "message_event.hpp"
 #include <sge/console/gfx_fwd.hpp>
 #include <sge/collision/system_fwd.hpp>
 #include <sge/container/map_decl.hpp>
@@ -92,10 +91,13 @@ public:
 	);
 private:
 	typedef sge::container::map<
-		std::map,
-		net::id_type,
-		client_data
+		std::map<
+			net::id_type,
+			client_data
+		>
 	> client_map;
+
+	load::context const &resources_;
 
 	net::port_type const port_;
 
@@ -106,7 +108,11 @@ private:
 		s_disconn,
 		s_data;
 
-	client_map clients;
+	client_map clients_;
+
+	sge::collision::system_ptr const collision_;
+
+	sge::console::gfx &console_;
 };
 
 }

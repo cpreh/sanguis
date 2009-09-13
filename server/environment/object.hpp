@@ -5,6 +5,7 @@
 #include "../entities/auto_ptr.hpp"
 #include "../entities/entity_fwd.hpp"
 #include "../player_id.hpp"
+#include "../health_type.hpp"
 #include "../../weapon_type.hpp"
 #include "../../entity_id.hpp"
 #include <sge/collision/world_fwd.hpp>
@@ -20,6 +21,8 @@ namespace environment
 class object {
 	SGE_NONCOPYABLE(object)
 public:
+	object();
+
 	virtual void
 	weapon_changed(
 		entity_id id,

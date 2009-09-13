@@ -7,6 +7,7 @@
 #include "../../damage/meta.hpp"
 #include "../../damage/fire.hpp"
 #include "../../damage/full.hpp"
+#include "../../environment/object.hpp"
 #include "../../../load/context.hpp"
 #include <sge/container/map_impl.hpp>
 #include <sge/text.hpp>
@@ -14,7 +15,7 @@
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::projectiles::rocket::rocket(
-	server::environment const &env,
+	server::environment::object_ptr const env,
 	pos_type const &center,
 	space_unit const angle,
 	team::type const team_,
@@ -54,9 +55,9 @@ sanguis::server::entities::projectiles::rocket::do_damage(
 	die();
 }
 
-void sanguis::server::entities::projectiles::rocket::do_die()
+void sanguis::server::entities::projectiles::rocket::on_die()
 {
-	insert(
+	environment()->insert(
 		auto_ptr(
 			new aoe_damage(
 				environment(),

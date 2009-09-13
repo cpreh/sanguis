@@ -24,6 +24,11 @@ public:
 	add(
 		entity_id
 	);
+
+	bool
+	contains(
+		entity_id
+	) const;
 private:
 	sight_range_entry_set entries_;
 };

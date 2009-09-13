@@ -5,6 +5,8 @@
 #include "../messages/auto_ptr.hpp"
 #include <boost/function.hpp>
 
+namespace sanguis
+{
 namespace server
 {
 
@@ -15,6 +17,7 @@ typedef boost::function<
 	)
 > unicast_callback;
 
+}
 }
 
 #endif

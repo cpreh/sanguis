@@ -12,7 +12,7 @@
 #include "../space_unit.hpp"
 #include "../dim_type.hpp"
 #include "../health_type.hpp"
-#include "../teams.hpp"
+#include "../team.hpp"
 #include "../perks/auto_ptr.hpp"
 #include "../buffs/auto_ptr.hpp"
 #include "../auras/auto_ptr.hpp"

@@ -5,11 +5,12 @@
 #include "../damage/list.hpp"
 #include "../entities/friend.hpp"
 #include "../entities/property.hpp"
+#include "../environment/object.hpp"
 #include <sge/container/map_impl.hpp>
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::weapons::sentry::sentry(
-	server::environment const &env,
+	server::environment::object_ptr const env,
 	weapon_type::type const type_,
 	weapons::base_cooldown const base_cooldown_,
 	weapons::cast_point const cast_point_,
@@ -40,7 +41,7 @@ void
 sanguis::server::weapons::sentry::do_attack(
 	delayed_attack const &a)
 {
-	insert(
+	environment()->insert(
 		entities::auto_ptr(
 			new entities::friend_(
 				friend_type::sentry,

@@ -15,15 +15,17 @@ namespace projectiles
 class simple_bullet : public projectile {
 public:
 	simple_bullet(
-		server::environment const &,
+		server::environment::object_ptr,
 		pos_type const &center,
 		space_unit angle,
 		team::type team,
-		space_unit damage);
+		space_unit damage
+	);
 private:
 	void
 	do_damage(
-		entity &);
+		entity &
+	);
 	
 	space_unit const damage;
 };

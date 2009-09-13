@@ -3,10 +3,15 @@
 
 #include "../entity.hpp"
 #include "../entity_with_weapon_fwd.hpp"
+#include "../../environment/object_ptr.hpp"
+#include "../../team.hpp"
+#include "../../pos_type.hpp"
 #include "../../../pickup_type.hpp"
 #include "../../../diff_clock.hpp"
+#include "../../../messages/auto_ptr.hpp"
 #include <sge/time/timer.hpp>
 #include <sge/optional_fwd.hpp>
+#include <boost/logic/tribool_fwd.hpp>
 
 namespace sanguis
 {
@@ -25,27 +30,32 @@ protected:
 
 	pickup(
 		pickup_type::type,
-		server::environment const &,
+		server::environment::object_ptr,
 		pos_type const &center,
 		team::type team,
-		optional_dim const &dim);
+		optional_dim const &dim
+	);
 private:
 	boost::logic::tribool const
 	can_collide_with_entity(
-		entity const &) const;
+		entity const &
+	) const;
 	
 	void
 	collision_entity(
-		entity &);
+		entity &
+	);
 
-	void update(
-		time_type,
-		container &);
+	void
+	update(
+		time_type
+	);
 	
 	// TODO: is it ok that pickups are limited to entities with weapons?
 	virtual void
 	do_pickup(
-		entity_with_weapon &receiver) = 0;
+		entity_with_weapon &receiver
+	) = 0;
 
 	messages::auto_ptr add_message() const;
 

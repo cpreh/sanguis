@@ -3,7 +3,7 @@
 
 #include "context_fwd.hpp"
 #include "../player_id.hpp"
-#include "../entities/auto_tpr.hpp"
+#include "../entities/auto_ptr.hpp"
 #include "../../world_id.hpp"
 #include "../../messages/auto_ptr.hpp"
 #include <sge/noncopyable.hpp>
@@ -17,6 +17,8 @@ namespace world
 
 class context {
 	SGE_NONCOPYABLE(context)
+protected:
+	context();
 public:
 	virtual void
 	transfer_entity(

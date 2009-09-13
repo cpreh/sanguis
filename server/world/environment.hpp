@@ -20,7 +20,7 @@ class environment
 	SGE_NONCOPYABLE(environment)
 public:
 	explicit environment(
-		object &
+		world::object &
 	);
 
 	~environment();
@@ -54,13 +54,21 @@ public:
 		entity_id,
 		health_type
 	);
+	
+	void
+	remove_player(
+		player_id
+	);
 
 	entities::entity & 
 	insert(
 		entities::auto_ptr
 	);
+
+	sge::collision::world_ptr const
+	collision_world() const;
 private:
-	object &world_;	
+	world::object &world_;	
 };
 
 }

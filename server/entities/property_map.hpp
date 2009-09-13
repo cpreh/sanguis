@@ -13,9 +13,10 @@ namespace server
 namespace entities
 {
 typedef sge::container::map<
-	std::map,
-	property_type::type,
-	property
+	std::map<
+		property_type::type,
+		property
+	>
 > property_map;
 
 }

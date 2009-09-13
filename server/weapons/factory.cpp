@@ -13,7 +13,8 @@
 sanguis::server::weapons::auto_ptr
 sanguis::server::weapons::create(
 	weapon_type::type const type,
-	environment const &env)
+	environment::object_ptr const env
+)
 {
 	switch(type) {
 	case weapon_type::melee:

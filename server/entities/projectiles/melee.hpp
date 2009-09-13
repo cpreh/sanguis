@@ -15,14 +15,16 @@ namespace projectiles
 class melee : public projectile {
 public:
 	melee(
-		server::environment const &,
+		server::environment::object_ptr,
 		pos_type const &center,
 		team::type team,
-		space_unit damage);
+		space_unit damage
+	);
 private:
 	void
 	do_damage(
-		entity &);
+		entity &
+	);
 
 	space_unit const damage;
 };

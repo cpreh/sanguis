@@ -1,20 +1,35 @@
 #include "object.hpp"
 #include "environment.hpp"
+#include "sight_range.hpp"
 #include "context.hpp"
+#include "prop.hpp"
 #include "../collision/execute.hpp"
 #include "../collision/test.hpp"
+#include "../entities/entity.hpp"
 #include "../message_convert/speed.hpp"
 #include "../message_convert/rotate.hpp"
 #include "../message_convert/remove.hpp"
 #include "../message_convert/move.hpp"
 #include "../message_convert/health.hpp"
+#include "../message_convert/experience.hpp"
 #include "../../messages/create.hpp"
+#include "../../messages/change_weapon.hpp"
+#include "../../messages/give_weapon.hpp"
+#include "../../messages/start_attacking.hpp"
+#include "../../messages/stop_attacking.hpp"
+#include "../../messages/start_reloading.hpp"
+#include "../../messages/stop_reloading.hpp"
+#include "../../messages/max_health.hpp"
 #include "../../exception.hpp"
+#include <sge/math/rect/basic_impl.hpp>
 #include <sge/collision/system.hpp>
 #include <sge/collision/world.hpp>
 #include <sge/time/second.hpp>
+#include <sge/time/millisecond.hpp>
 #include <sge/make_shared_ptr.hpp>
+#include <sge/optional_impl.hpp>
 #include <sge/text.hpp>
+#include <boost/tr1/functional.hpp>
 #include <boost/foreach.hpp>
 #include <boost/bind.hpp>
 
@@ -23,8 +38,12 @@ sanguis::server::world::object::object(
 	sge::collision::system_ptr const sys
 )
 :
+	global_context_(
+		global_context_
+	),
 	collision_world_(
 		sys->create_world(
+			sge::collision::optional_rect()
 			// TODO
 		)
 	),
@@ -36,17 +55,16 @@ sanguis::server::world::object::object(
 		sge::time::activation_state::active,
 		diff_clock_.callback()
 	),
-	entities_(),
-	props_(),
-	collision_test_connection_(
-		collision_world_->test_callback(
-			boost::bind(
-				collision::test,
-				_1,
-				_2
-			)
-		)
+	send_timer_(
+		sge::time::millisecond(
+			500
+		),
+		sge::time::activation_state::active,
+		diff_clock_.callback()
 	),
+	entities_(),
+	sight_ranges_(),
+	props_(),
 	collision_connection_(
 		collision_world_->register_callback(
 			boost::bind(
@@ -56,14 +74,24 @@ sanguis::server::world::object::object(
 			)
 		)
 	),
-	callbacks_(
+	environment_(
 		sge::make_shared_ptr<
-			environment
+			world::environment
 		>(
-			*this
+			std::tr1::ref(
+				*this
+			)
 		)
 	)
-{}
+{
+	collision_world_->test_callback(
+		boost::bind(
+			collision::test,
+			_1,
+			_2
+		)
+	);
+}
 
 sanguis::server::world::object::~object()
 {}
@@ -74,21 +102,25 @@ sanguis::server::world::object::update(
 )
 {
 	if(
-		sight_range_timer_.update()
+		sight_range_timer_.update_b()
 	)
+	{
 		BOOST_FOREACH(
 			sight_range_map::reference ref,
 			sight_ranges_
 		)
-			ref.update(
+			ref.second.update(
 				time_
 			);
+	}
 
 	// should we send position updates?
-	bool const update_pos = send_timer.update_b();
+	bool const update_pos = send_timer_.update_b();
 
 	collision_world_->update(
-		static_cast<sge::time::funit>(delta)
+		static_cast<sge::time::funit>(	
+			time_
+		)
 	);
 
 	for (
@@ -105,7 +137,7 @@ sanguis::server::world::object::update(
 		++next;
 
 		entities::entity &e(
-			it->second
+			*it->second
 		);
 
 		/*
@@ -132,13 +164,13 @@ sanguis::server::world::object::update(
 				);
 			}
 			
-			entities.erase(it);
+			entities_.erase(it);
 
 			continue;
 		}
 
 		e.update(
-			static_cast<time_type>(delta)
+			static_cast<time_type>(time_)
 		);
 
 		if(
@@ -181,30 +213,16 @@ sanguis::server::world::object::update(
 }
 
 void
-sanguis::server::world::weapon_changed(
+sanguis::server::world::object::weapon_changed(
 	entity_id const id,
 	weapon_type::type const wt
 )
 {
 	send_entity_specific(
 		id,
-		messages::weapon_changed(
-			id,
-			wt
-		)
-	);
-}
-
-void
-sanguis::server::world::got_weapon(
-	entity_id const id,
-	weapon_type::type const wt
-)
-{
-	send_player_specific(
-		id,
 		messages::create(
-			messages::got_weapon(
+			messages::change_weapon(
+				id,
 				wt
 			)
 		)
@@ -212,7 +230,23 @@ sanguis::server::world::got_weapon(
 }
 
 void
-sanguis::server::world::attacking_changed(
+sanguis::server::world::object::got_weapon(
+	entity_id const id,
+	weapon_type::type const wt
+)
+{
+	send_player_specific(
+		id,
+		messages::create(
+			messages::give_weapon(
+				wt
+			)
+		)
+	);
+}
+
+void
+sanguis::server::world::object::attacking_changed(
 	entity_id const id,
 	bool const is_attacking
 )
@@ -236,7 +270,7 @@ sanguis::server::world::attacking_changed(
 }
 
 void
-sanguis::server::world::reloading_changed(
+sanguis::server::world::object::reloading_changed(
 	entity_id const id,
 	bool const is_reloading
 )
@@ -281,6 +315,7 @@ sanguis::server::world::object::divide_exp(
 	exp_type const exp_
 )
 {
+#if 0
 	if(
 		sge::math::almost_zero(
 			exp_
@@ -298,6 +333,7 @@ sanguis::server::world::object::divide_exp(
 
 		send()(message_convert::experience(p));
 	}
+#endif
 }
 
 void
@@ -306,9 +342,9 @@ sanguis::server::world::object::request_transfer(
 	entity_id const entity_id_
 )
 {
-	entity_map::iterator it const(
+	entity_map::iterator const it(
 		entities_.find(
-			entity_id
+			entity_id_
 		)
 	);
 
@@ -319,15 +355,19 @@ sanguis::server::world::object::request_transfer(
 			SGE_TEXT("entity can't be transferred!")
 		);
 
-	global_context_->transfer_entity(
-		world_id_,
+	entities::auto_ptr entity_(
 		entities_.release(
 			it
-		)
+		).release()
+	);
+
+	global_context_->transfer_entity(
+		world_id_,
+		entity_
 	);
 }
 void
-sanguis::server::world::update_sight_range(
+sanguis::server::world::object::update_sight_range(
 	player_id const player_id_,
 	entity_id const target_id_
 )
@@ -343,26 +383,43 @@ sanguis::server::world::update_sight_range(
 			target_id_
 		)
 	)
+	{
+		entity_map::iterator const it(
+			entities_.find(
+				target_id_
+			)
+		);
+
+		if (
+			it == entities_.end()
+		)
+			throw exception(
+				SGE_TEXT("can't get entity for sight update!")
+			);
+
 		send_player_specific(
 			player_id_,
-			entities_[
-				target_id_
-			]->add_message()
+			it->second->add_message()
 		);
+	}
 }
 
 void
-sanguis::server::world::remove_player(
-	player_id_ const player_id_
+sanguis::server::world::object::remove_player(
+	player_id const player_id_
 )
 {
 	global_context_->remove_player(
 		player_id_
 	);
+
+	sight_ranges_.erase(
+		player_id_
+	);
 }
 
 sanguis::server::entities::entity &
-sanguis::server::world::object::insert_entity(
+sanguis::server::world::object::insert(
 	entities::auto_ptr e
 )
 {
@@ -370,15 +427,28 @@ sanguis::server::world::object::insert_entity(
 		e->id()
 	);
 
-	e.environment(
+	e->environment(
 		environment_
 	);
 
-	return 
-		*entities_.insert(
+	std::pair<
+		entity_map::iterator,
+		bool
+	> const ret(
+		entities_.insert(
 			id,
 			e
-		).second;
+		)
+	);
+
+	if(
+		!ret.second
+	)
+		throw exception(
+			SGE_TEXT("Double insert of entity!")
+		);
+	
+	return *ret.first->second;
 }
 
 sge::collision::world_ptr const
@@ -394,16 +464,16 @@ sanguis::server::world::object::send_entity_specific(
 )
 {
 	BOOST_FOREACH(
-		sight_range_list::const_reference range,
-		sight_ranges
+		sight_range_map::const_reference range,
+		sight_ranges_
 	)
 		if(
-			range.contains(
-				range
+			range.second.contains(
+				id
 			)
 		)
 			global_context_->send_to_player(
-				range.player_id(),
+				range.first,
 				msg
 			);
 }

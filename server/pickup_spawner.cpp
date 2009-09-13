@@ -1,4 +1,5 @@
 #include "pickup_spawner.hpp"
+#include "environment/object.hpp"
 #include "entities/auto_ptr.hpp"
 #include "entities/pickups/health.hpp"
 #include "entities/pickups/monster.hpp"
@@ -10,7 +11,8 @@
 #include <boost/bind.hpp>
 
 sanguis::server::pickup_spawner::pickup_spawner(
-	environment const &env)
+	environment::object_ptr const env
+)
 :
 	env(env),
 	rng(
@@ -102,7 +104,7 @@ sanguis::server::pickup_spawner::spawn(
 void
 sanguis::server::pickup_spawner::spawn_health()
 {
-	env.insert()(
+	env->insert(
 		entities::auto_ptr(
 			new entities::pickups::health(
 				env,
@@ -117,7 +119,7 @@ sanguis::server::pickup_spawner::spawn_health()
 void
 sanguis::server::pickup_spawner::spawn_monster()
 {
-	env.insert()(
+	env->insert(
 		entities::auto_ptr(
 			new entities::pickups::monster(
 				env,
@@ -133,7 +135,7 @@ void
 sanguis::server::pickup_spawner::spawn_weapon(
 	weapon_type::type const wtype)
 {
-	env.insert()(
+	env->insert(
 		entities::auto_ptr(
 			new entities::pickups::weapon(
 				env,

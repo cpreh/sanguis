@@ -13,7 +13,6 @@ namespace world
 {
 
 typedef std::set<
-	entity_id,
 	sight_range_entry
 > sight_range_entry_set;
 

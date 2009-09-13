@@ -3,7 +3,6 @@
 
 #include "base_fwd.hpp"
 #include "../entities/entity_with_weapon_fwd.hpp"
-#include "../entities/container.hpp"
 #include "../../time_type.hpp"
 #include <sge/noncopyable.hpp>
 
@@ -19,12 +18,15 @@ class base {
 protected:
 	base();
 public:
-	virtual void bind(
-		entities::entity_with_weapon &me) = 0;
+	virtual void
+	bind(
+		entities::entity_with_weapon &me
+	) = 0;
 	
-	virtual void update(
-		time_type,
-		entities::container &) = 0;
+	virtual void
+	update(
+		time_type
+	);
 	
 	virtual ~base();
 };

@@ -2,6 +2,10 @@
 #define SANGUIS_SERVER_ENTITIES_PICKUPS_MONSTER_HPP_INCLUDED
 
 #include "pickup.hpp"
+#include "../entity_with_weapon_fwd.hpp"
+#include "../../environment/object_ptr.hpp"
+#include "../../pos_type.hpp"
+#include "../../team.hpp"
 #include "../../../friend_type.hpp"
 
 namespace sanguis
@@ -16,13 +20,16 @@ namespace pickups
 class monster : public pickup {
 public:
 	monster(
-		server::environment const &,
+		server::environment::object_ptr,
 		pos_type const &center,
 		team::type,
-		friend_type::type);
+		friend_type::type
+	);
 private:
-	void do_pickup(
-		entity_with_weapon &receiver);
+	void
+	do_pickup(
+		entity_with_weapon &receiver
+	);
 	
 	friend_type::type const ftype;
 };

@@ -14,7 +14,7 @@
 
 sanguis::server::entities::friend_::friend_(
 	friend_type::type const ftype_,
-	server::environment const &env,
+	server::environment::object_ptr const env,
 	damage::armor const &armor,
 	pos_type const &center,
 	space_unit const angle,
@@ -22,7 +22,8 @@ sanguis::server::entities::friend_::friend_(
 	team::type const team_,
 	property_map const &properties,
 	ai::auto_ptr ai_,
-	weapons::auto_ptr weapon_)
+	weapons::auto_ptr weapon_
+)
 :
 	entity_with_ai(
 		base_parameters(
@@ -67,7 +68,8 @@ sanguis::server::entities::friend_::add_message() const
 
 boost::logic::tribool const
 sanguis::server::entities::friend_::can_collide_with_entity(
-	entity const &e) const
+	entity const &e
+) const
 {
 	return dynamic_cast<entities::pickups::pickup const *>(&e)
 		? boost::logic::tribool(false)

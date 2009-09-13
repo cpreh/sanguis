@@ -2,7 +2,8 @@
 #define SANGUIS_SERVER_WORLD_RANDOM_HPP_INCLUDED
 
 #include "object_auto_ptr.hpp"
-#include "../global/context_ptr.hpp"
+#include "context_ptr.hpp"
+#include <sge/collision/system_fwd.hpp>
 
 namespace sanguis
 {
@@ -13,7 +14,8 @@ namespace world
 
 object_auto_ptr
 random(
-	global::context_ptr
+	context_ptr,
+	sge::collision::system_ptr
 	// TODO: params
 );
 

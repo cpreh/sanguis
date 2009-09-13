@@ -1,5 +1,4 @@
 #include "simple.hpp"
-#include "find_nearest_enemy.hpp"
 #include "../entities/entity_with_weapon.hpp"
 #include "../entities/property.hpp"
 #include "../collision/collides.hpp"
@@ -9,7 +8,8 @@
 #include <sge/optional.hpp>
 
 sanguis::server::ai::simple::simple(
-	entities::auto_weak_link owner_)
+	entities::auto_weak_link owner_
+)
 :
 	me_(0),
 	target(),
@@ -24,16 +24,20 @@ sanguis::server::ai::simple::simple(
 	)
 {}
 
-void sanguis::server::ai::simple::bind(
-	entities::entity_with_weapon &me)
+void
+sanguis::server::ai::simple::bind(
+	entities::entity_with_weapon &me
+)
 {
 	me_ = &me;
 }
 
-void sanguis::server::ai::simple::update(
-	time_type const time,
-	entities::container &entities)
+void
+sanguis::server::ai::simple::update(
+	time_type const time
+)
 {
+#if 0
 	diff_clock_.update(
 		time
 	);
@@ -92,4 +96,5 @@ void sanguis::server::ai::simple::update(
 
 	me.target(
 		target->center());
+#endif
 }

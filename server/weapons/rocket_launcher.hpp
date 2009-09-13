@@ -19,7 +19,7 @@ namespace weapons
 class rocket_launcher : public weapon {
 public:
 	rocket_launcher(
-		server::environment const &,
+		server::environment::object_ptr,
 		weapon_type::type,
 		weapons::base_cooldown,
 		weapons::damage,

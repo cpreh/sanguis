@@ -2,9 +2,10 @@
 #include "delayed_attack.hpp"
 #include "../entities/entity.hpp"
 #include "../entities/projectiles/grenade.hpp"
+#include "../environment/object.hpp"
 
 sanguis::server::weapons::grenade::grenade(
-	server::environment const &env,
+	server::environment::object_ptr const env,
 	weapon_type::type const type_,
 	weapons::base_cooldown const base_cooldown_,
 	weapons::damage const damage_,
@@ -31,7 +32,7 @@ void
 sanguis::server::weapons::grenade::do_attack(
 	delayed_attack const &a)
 {
-	insert(
+	environment()->insert(
 		entities::auto_ptr(
 			new entities::projectiles::grenade(
 				environment(),

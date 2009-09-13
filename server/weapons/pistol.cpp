@@ -3,9 +3,10 @@
 #include "unlimited_magazine_count.hpp"
 #include "../entities/entity.hpp"
 #include "../entities/projectiles/simple_bullet.hpp"
+#include "../environment/object.hpp"
 
 sanguis::server::weapons::pistol::pistol(
-	server::environment const &env,
+	server::environment::object_ptr const env,
 	weapon_type::type const type_,
 	weapons::base_cooldown const base_cooldown_,
 	weapons::damage const damage_,
@@ -30,10 +31,12 @@ sanguis::server::weapons::pistol::pistol(
 	)
 {}
 
-void sanguis::server::weapons::pistol::do_attack(
-	delayed_attack const &a)
+void
+sanguis::server::weapons::pistol::do_attack(
+	delayed_attack const &a
+)
 {
-	insert(
+	environment()->insert(
 		entities::auto_ptr(
 			new entities::projectiles::simple_bullet(
 				environment(),

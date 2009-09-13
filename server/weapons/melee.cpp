@@ -2,13 +2,14 @@
 #include "delayed_attack.hpp"
 #include "unlimited_magazine_size.hpp"
 #include "unlimited_magazine_count.hpp"
+#include "../environment/object.hpp"
 #include "../entities/entity.hpp"
 #include "../entities/entity_with_weapon.hpp"
 #include "../entities/property.hpp"
 #include "../entities/projectiles/melee.hpp"
 
 sanguis::server::weapons::melee::melee(
-	server::environment const &env,
+	server::environment::object_ptr const env,
 	weapons::range const range_,
 	weapons::base_cooldown const base_cooldown_,
 	weapons::damage const damage_
@@ -34,7 +35,7 @@ sanguis::server::weapons::melee::melee(
 void sanguis::server::weapons::melee::do_attack(
 	delayed_attack const &a)
 {
-	insert(
+	environment()->insert(
 		entities::auto_ptr(
 			new entities::projectiles::melee(
 				environment(),

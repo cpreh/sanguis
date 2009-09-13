@@ -20,7 +20,7 @@
 sanguis::server::machine::machine(
 	load::context const &resources_,
 	sge::collision::system_ptr const collision_,
-	sge::console::gfx &con,
+	sge::console::gfx &console_,
 	net::port_type const port_
 )
 :
@@ -59,15 +59,16 @@ sanguis::server::machine::machine(
 			)
 		)
 	),
-	clients(),
+	clients_(),
 	collision_(collision_),
-	con(con)
+	console_(console_)
 {}
 
 void sanguis::server::machine::process(
-	tick_event const &t)
+	tick_event const &t
+)
 {
-	BOOST_FOREACH(client_map::reference ref, clients)
+	BOOST_FOREACH(client_map::reference ref, clients_)
 	{
 		net::data_type &buffer = ref.second.out_buffer;
 		if (buffer.size())
@@ -89,7 +90,7 @@ void sanguis::server::machine::listen()
 void sanguis::server::machine::connect_callback(
 	net::id_type const id)
 {
-	clients.insert(
+	clients_.insert(
 		id,
 		client_data()
 	);
@@ -117,7 +118,7 @@ void sanguis::server::machine::disconnect_callback(
 		)
 	);
 
-	clients.erase(
+	clients_.erase(
 		id
 	);
 }
@@ -140,13 +141,13 @@ void sanguis::server::machine::data_callback(
 )
 {
 	sge::algorithm::append(
-		clients[id].in_buffer,
+		clients_[id].in_buffer,
 		data
 	);
 
 	for(;;)
 	{
-		messages::auto_ptr p = deserialize(clients[id].in_buffer);
+		messages::auto_ptr p = deserialize(clients_[id].in_buffer);
 		if(!p.get())
 			return;
 		process_message(id, p);
@@ -169,7 +170,7 @@ sanguis::server::machine::send_to_all(
 
 	BOOST_FOREACH(
 		client_map::reference ref,
-		clients
+		clients_
 	)
 		sge::algorithm::append(
 			ref.second.out_buffer,
@@ -195,7 +196,7 @@ sanguis::server::machine::resources() const
 	return resources_;
 }
 
-sge::collision::world_ptr const
+sge::collision::system_ptr const
 sanguis::server::machine::collision_system() const
 {
 	return collision_;
@@ -214,7 +215,7 @@ sanguis::server::machine::send_unicast(
 	);
 
 	sge::algorithm::append(
-		clients[id].out_buffer,
+		clients_[id].out_buffer,
 		ser
 	);
 }

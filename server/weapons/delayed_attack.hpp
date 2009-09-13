@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_WEAPONS_DELAYED_ATTACK_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_DELAYED_ATTACK_HPP_INCLUDED
 
-#include "../teams.hpp"
+#include "../team.hpp"
 #include "../pos_type.hpp"
 #include "../space_unit.hpp"
 #include <sge/math/vector/basic_decl.hpp>

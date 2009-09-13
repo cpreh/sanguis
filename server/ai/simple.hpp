@@ -18,20 +18,27 @@ class simple : public base {
 public:
 	explicit simple(
 		entities::auto_weak_link owner
-			= entities::auto_weak_link());
+			= entities::auto_weak_link()
+	);
 private:
-	void bind(
-		entities::entity_with_weapon &me);
+	void
+	bind(
+		entities::entity_with_weapon &me
+	);
 	
-	void update(
-		time_type,
-		entities::container &);
+	void
+	update(
+		time_type
+	);
 
 	entities::entity_with_weapon *me_;
+
 	entities::auto_weak_link
 		target,
 		owner_;
+
 	diff_clock diff_clock_;
+
 	sge::time::timer search_new_target_timer;
 };
 
