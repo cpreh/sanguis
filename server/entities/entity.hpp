@@ -5,7 +5,6 @@
 #include "link_container.hpp"
 #include "base_parameters_fwd.hpp"
 #include "auto_weak_link.hpp"
-#include "container.hpp"
 #include "property.hpp"
 #include "property_map.hpp"
 #include "property_type.hpp"
@@ -13,15 +12,14 @@
 #include "../space_unit.hpp"
 #include "../dim_type.hpp"
 #include "../health_type.hpp"
-#include "../exp_type.hpp"
 #include "../teams.hpp"
-#include "../environment.hpp"
 #include "../perks/auto_ptr.hpp"
 #include "../buffs/auto_ptr.hpp"
 #include "../auras/auto_ptr.hpp"
 #include "../damage/array.hpp"
 #include "../damage/armor.hpp"
 #include "../collision/base.hpp"
+#include "../environment/object_ptr.hpp"
 #include "../../messages/auto_ptr.hpp"
 #include "../../entity_id.hpp"
 #include "../../entity_type.hpp"
@@ -85,49 +83,74 @@ public:
 		space_unit
 	);
 	
-	pos_type const center() const;
-	void center(pos_type const &);
-	pos_type const abs_speed() const;
-	space_unit speed() const;
-	space_unit radius() const;
+	pos_type const
+	center() const;
+
+	void
+	center(
+		pos_type const &
+	);
+
+	pos_type const
+	abs_speed() const;
+
+	space_unit
+	speed() const;
+
+	space_unit
+	radius() const;
 
 	server::team::type
 	team() const;
 
-	void damage(
+	void
+	damage(
 		space_unit,
 		damage::array const &
 	);
 
-	bool dead() const;
-	virtual void die();
+	bool
+	dead() const;
 
-	damage::armor const &armor() const;
+	void
+	die();
 
-	health_type health() const;
-	void health(health_type);
-	health_type max_health() const;
+	damage::armor const &
+	armor() const;
+
+	health_type
+	health() const;
+
+	void
+	health(
+		health_type
+	);
+
+	health_type
+	max_health() const;
 
 	entities::property const &
 	property(
-		property_type::type) const;
+		property_type::type
+	) const;
 	
 	entities::property &
 	property(
-		property_type::type);
+		property_type::type
+	);
 
-	virtual exp_type exp() const;
+	dim_type const
+	dim() const;
 
-	dim_type const dim() const;
+	entity_type::type
+	type() const;
 
-	entity_type::type type() const;
-
-	bool invulnerable() const;
+	bool
+	invulnerable() const;
 
 	virtual void
 	update(
-		time_type,
-		container &entities
+		time_type
 	);
 
 	virtual void
@@ -141,24 +164,21 @@ public:
 	auto_weak_link const
 	link();
 	
-	virtual void add_buff(
-		buffs::auto_ptr);
+	virtual void
+	add_buff(
+		buffs::auto_ptr
+	);
 
-	virtual void add_aura(
-		auras::auto_ptr);
+	virtual void
+	add_aura(
+		auras::auto_ptr
+	);
 
-	bool update_health() const;
+	bool
+	update_health() const;
 
 	virtual ~entity();
 protected:
-	server::environment::object &
-	environment() const;
-
-	entity &
-	insert(
-		auto_ptr
-	);
-
 	bool
 	perk_choosable(
 		perk_type::type

@@ -1,6 +1,6 @@
 #include "aura.hpp"
-#include "../environment.hpp"
 #include "../entities/entity.hpp"
+#include "../collision/create_circle.hpp"
 #include <sge/collision/objects/circle.hpp>
 #include <sge/math/circle/basic_impl.hpp>
 #include <sge/math/vector/construct.hpp>
@@ -11,9 +11,10 @@ sanguis::server::auras::aura::~aura()
 
 void
 sanguis::server::auras::aura::center(
-	pos_type const &p)
+	pos_type const &p
+)
 {
-	circle()->center(
+	collision_object()->pos(
 		sge::math::vector::construct(
 			p,
 			static_cast<space_unit>(0)
@@ -29,16 +30,21 @@ sanguis::server::auras::aura::owner(
 }
 
 sanguis::server::auras::aura::aura(
-	environment const &env,
+	sge::collision::world_ptr const collision_world_,
 	space_unit const radius,
 	team::type const team_,
-	influence::type const influence_)
+	influence::type const influence_
+)
 :
 	collision::base(
-		env.collision(),
-		pos_type::null(), // will be set later
-		pos_type::null(), // no speed
-		radius
+		collision::create_circle(
+			collision_world_,
+			pos_type::null(), // will be set later
+			static_cast<space_unit>(0), // direction
+			radius,
+			static_cast<space_unit>(0), // movement speed
+			*this
+		)
 	),
 	team_(team_),
 	influence_(influence_),

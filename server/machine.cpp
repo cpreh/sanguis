@@ -155,7 +155,8 @@ void sanguis::server::machine::data_callback(
 	//	process_message(id,p);
 }
 
-void sanguis::server::machine::send(
+void
+sanguis::server::machine::send_to_all(
 	messages::auto_ptr m
 )
 { 
@@ -174,19 +175,6 @@ void sanguis::server::machine::send(
 			ref.second.out_buffer,
 			m_str
 		);
-}
-
-sanguis::server::send_callback const
-sanguis::server::machine::unicast(
-	net::id_type const dest
-)
-{
-	return boost::bind(
-		&machine::send_unicast,
-		this,
-		_1,
-		dest
-	);
 }
 
 sanguis::net::port_type

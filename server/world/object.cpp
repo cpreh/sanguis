@@ -3,6 +3,12 @@
 #include "context.hpp"
 #include "../collision/execute.hpp"
 #include "../collision/test.hpp"
+#include "../message_convert/speed.hpp"
+#include "../message_convert/rotate.hpp"
+#include "../message_convert/remove.hpp"
+#include "../message_convert/move.hpp"
+#include "../message_convert/health.hpp"
+#include "../../messages/create.hpp"
 #include "../../exception.hpp"
 #include <sge/collision/system.hpp>
 #include <sge/collision/world.hpp>
@@ -78,14 +84,100 @@ sanguis::server::world::object::update(
 				time_
 			);
 
-	BOOST_FOREACH(
-		entities::container::reference entity_,
-		entities_
-	)
-		entity_.update(
-			time_,
-			entities_
+	// should we send position updates?
+	bool const update_pos = send_timer.update_b();
+
+	collision_world_->update(
+		static_cast<sge::time::funit>(delta)
+	);
+
+	for (
+		entity_map::iterator it(
+			entities_.begin()
+		),
+		next(
+			it
 		);
+		it != entities_.end();
+		it = next
+	)
+	{
+		++next;
+
+		entities::entity &e(
+			it->second
+		);
+
+		/*
+		if(
+			!e.active()
+		)
+			continue;
+		*/
+
+		if(
+			e.dead()
+		)
+		{
+			if(e.type() != entity_type::indeterminate)
+			{
+				send_entity_specific(
+					e.id(),
+					message_convert::health(e)
+				);
+
+				send_entity_specific(
+					e.id(),
+					message_convert::remove(e)
+				);
+			}
+			
+			entities.erase(it);
+
+			continue;
+		}
+
+		e.update(
+			static_cast<time_type>(delta)
+		);
+
+		if(
+			e.type() != entity_type::indeterminate
+			&& update_pos
+		)
+		{
+			send_entity_specific(
+				e.id(),
+				message_convert::move(
+					e
+				)
+			);
+
+			send_entity_specific(
+				e.id(),
+				message_convert::speed(
+					e
+				)
+			);
+
+			send_entity_specific(
+				e.id(),
+				message_convert::rotate(
+					e
+				)
+			);
+
+			if(
+				e.update_health()
+			)
+				send_entity_specific(
+					e.id(),
+					message_convert::health(
+						e
+					)
+				);
+		}
+	}
 }
 
 void
@@ -236,7 +328,7 @@ sanguis::server::world::object::request_transfer(
 }
 void
 sanguis::server::world::update_sight_range(
-	entity_id const player_id_,
+	player_id const player_id_,
 	entity_id const target_id_
 )
 {
@@ -257,6 +349,16 @@ sanguis::server::world::update_sight_range(
 				target_id_
 			]->add_message()
 		);
+}
+
+void
+sanguis::server::world::remove_player(
+	player_id_ const player_id_
+)
+{
+	global_context_->remove_player(
+		player_id_
+	);
 }
 
 sanguis::server::entities::entity &

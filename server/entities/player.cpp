@@ -142,3 +142,11 @@ sanguis::server::entities::player::net_id() const
 {
 	return net_id_;
 }
+
+void
+sanguis::server::entities::player::on_die()
+{
+	environment().remove_player(
+		net_id_
+	);
+}

@@ -4,6 +4,7 @@
 #include "object_fwd.hpp"
 #include "../entities/auto_ptr.hpp"
 #include "../entities/entity_fwd.hpp"
+#include "../player_id.hpp"
 #include "../../weapon_type.hpp"
 #include "../../entity_id.hpp"
 #include <sge/collision/world_fwd.hpp>
@@ -47,6 +48,11 @@ public:
 	max_health_changed(
 		entity_id,
 		health_type
+	) = 0;
+
+	virtual void
+	remove_player(
+		player_id
 	) = 0;
 
 	virtual entities::entity & 

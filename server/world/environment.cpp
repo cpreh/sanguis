@@ -71,6 +71,16 @@ sanguis::server::world::environment::max_health_changed(
 	);
 }
 
+void
+sanguis::server::world::environment::remove_player(
+	player_id const player_id_
+)
+{
+	world_->remove_player(
+		player_id_
+	);
+}
+
 sanguis::server::entities::entity & 
 sanguis::server::world::environment::insert(
 	entities::auto_ptr e

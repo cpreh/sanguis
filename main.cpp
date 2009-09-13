@@ -79,7 +79,7 @@ void
 create_server(
 	server_scoped_ptr &server,
 	sanguis::load::context const &resources,
-	sge::collision::world_ptr const coll,
+	sge::collision::system_ptr const coll,
 	sge::console::gfx &con,
 	sanguis::net::port_type const host_port)
 {
@@ -237,24 +237,6 @@ try
 		)
 	);
 	
-	sge::collision::unit const additional_size(
-		500
-	);
-
-	sge::collision::world_ptr const world = 
-		sys.collision_system()->create_world(
-			sge::collision::rect(
-				-additional_size,
-				-additional_size,
-				static_cast<sge::collision::unit>(
-					sanguis::resolution().w()
-				)+ additional_size,
-				static_cast<sge::collision::unit>(
-					sanguis::resolution().h()
-				) + additional_size
-			)
-		);
-	
 	sge::audio::multi_loader 
 		audio_loader(
 			sys.plugin_manager());
@@ -275,7 +257,7 @@ try
 			&create_server,
 			boost::phoenix::ref(server),
 			boost::phoenix::ref(resources),
-			world,
+			sys.collision_system(),
 			boost::phoenix::ref(console_gfx),
 			boost::phoenix::arg_names::_1
 		),
@@ -303,10 +285,14 @@ try
 			server->process(t);
 		running = client.process(t);
 	}
-} catch (sge::exception const &e) {
-	sge::cerr << SGE_TEXT("caught sge exception: ") << e.what() << SGE_TEXT('\n');
+}
+catch (sge::exception const &e)
+{
+	sge::cerr << SGE_TEXT("caught sge exception: ") << e.string() << SGE_TEXT('\n');
 	return EXIT_FAILURE;
-} catch (std::exception const &e) {
+}
+catch (std::exception const &e)
+{
 	std::cerr << "caught standard exception: " << e.what() << '\n';
 	return EXIT_FAILURE;
 }

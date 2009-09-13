@@ -35,9 +35,17 @@ sanguis::server::entities::entity::entity(
 )
 :
 	collision::base(
-		create_circle(
-			param,
-			this
+		collision::create_circle(
+			param.collision_world(),
+			param.center(),
+			param.direction(),
+			entities::radius(
+				param.collision_dim()
+			),
+			param.properties()[
+				property_type::movement_speed
+			].current(),
+			*this
 		)
 	),
 	id_(get_unique_id()),
@@ -295,8 +303,8 @@ bool sanguis::server::entities::entity::invulnerable() const
 }
 
 void sanguis::server::entities::entity::update(
-	time_type const time,
-	container &)
+	time_type const time
+)
 {
 	BOOST_FOREACH(property_map::reference p, properties)
 		p.second.reset();

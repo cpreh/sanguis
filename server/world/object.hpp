@@ -83,8 +83,13 @@ private:
 
 	void
 	update_sight_range(
-		net::id_type player_id,
+		player_id,
 		entity_id target_id
+	);
+
+	void
+	remove_player(
+		player_id
 	);
 
 	entities::entity & 
@@ -104,7 +109,7 @@ private:
 
 	void
 	send_player_specific(
-		entity_id player_id,
+		player_id,
 		messages::auto_ptr
 	);
 

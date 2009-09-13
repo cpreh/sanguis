@@ -2,7 +2,6 @@
 #define SANGUIS_SERVER_STATES_UNPAUSED_HPP_INCLUDED
 
 #include "../message_event_fwd.hpp"
-#include "../environment_fwd.hpp"
 #include "../../messages/player_attack_dest.hpp"
 #include "../../messages/player_direction.hpp"
 #include "../../messages/player_rotation.hpp"
@@ -29,9 +28,13 @@ namespace states
 {
 
 class unpaused
-	: public boost::statechart::simple_state<unpaused,running>
+:
+	public boost::statechart::simple_state<
+		unpaused,
+		running
+	>
 {
-	public:
+public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<
 			tick_event
@@ -96,11 +99,8 @@ private:
 	boost::statechart::result
 	handle_default_msg(
 		net::id_type,
-		messages::base const &);
-	
-	server::environment const environment();
-	void send(
-		messages::auto_ptr);
+		messages::base const &
+	);
 	
 	static sge::log::logger &log();
 

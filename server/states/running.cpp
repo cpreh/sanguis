@@ -23,7 +23,12 @@ sanguis::server::states::running::running(
 	my_base(ctx),
 	global_context_(
 		new global::context(
-			context<machine>().send_unicast()
+			boost::bind(
+				&machine::send_unicast
+				&context<machine>().send_unicast(),
+				_1,
+				_2
+			),
 			context<machine>().collision_system()
 		)
 	)

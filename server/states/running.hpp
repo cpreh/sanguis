@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_STATES_RUNNING_HPP_INCLUDED
 
 #include "unpaused_fwd.hpp"
-#include "global/context_fwd.hpp"
+#include "../global/context_fwd.hpp"
 #include "../message_event_fwd.hpp"
 #include "../machine.hpp"
 #include "../../messages/connect.hpp"
@@ -93,6 +93,9 @@ public:
 		net::id_type,
 		messages::player_choose_perk const &
 	);
+
+	global::context &
+	global_context();
 private:
 	/*
 	void level_callback(

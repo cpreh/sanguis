@@ -10,7 +10,7 @@
 #include "../tick_event.hpp"
 #include "message_event.hpp"
 #include <sge/console/gfx_fwd.hpp>
-#include <sge/collision/world_fwd.hpp>
+#include <sge/collision/system_fwd.hpp>
 #include <sge/container/map_decl.hpp>
 #include <sge/signal/scoped_connection.hpp>
 #include <sge/string.hpp>
@@ -66,15 +66,10 @@ public:
 	);
 
 	void
-	send(
+	send_to_all(
 		messages::auto_ptr
 	);
 
-	send_callback const
-	unicast(
-		net::id_type
-	);
-	
 	net::port_type
 	port() const;
 
@@ -89,13 +84,13 @@ public:
 
 	sge::collision::system_ptr const
 	collision_system() const;
-private:
+
 	void
 	send_unicast(
 		messages::auto_ptr,
 		net::id_type
 	);
-	
+private:
 	typedef sge::container::map<
 		std::map,
 		net::id_type,

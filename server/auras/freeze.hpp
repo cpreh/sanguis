@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_AURAS_FREEZE_HPP_INCLUDED
 
 #include "aura.hpp"
+#include <sge/collision/world_fwd.hpp>
 
 namespace sanguis
 {
@@ -13,12 +14,15 @@ namespace auras
 class freeze : public aura {
 public:
 	freeze(
-		environment const &,
+		sge::collision::world_ptr,
 		space_unit radius,
-		team::type team);
+		team::type team
+	);
 private:
-	void do_effect(
-		entities::entity &target);
+	void
+	do_effect(
+		entities::entity &target
+	);
 };
 
 }

@@ -68,12 +68,11 @@ sanguis::server::entities::entity_with_weapon::entity_with_weapon(
 }
 
 void sanguis::server::entities::entity_with_weapon::update(
-	time_type const time,
-	container &entities)
+	time_type const time
+)
 {
 	entity::update(
-		time,
-		entities
+		time
 	);
 
 	// change to the first weapon if we have any
@@ -142,6 +141,12 @@ void sanguis::server::entities::entity_with_weapon::change_weapon(
 		attack_ready_ = true;
 	}
 
+	environment().change_weapon(
+		id(),
+		weapon_
+	);
+
+	/*
 	send(
 		messages::create(
 			messages::change_weapon(
@@ -150,6 +155,7 @@ void sanguis::server::entities::entity_with_weapon::change_weapon(
 			)
 		)
 	);
+	*/
 }
 
 void sanguis::server::entities::entity_with_weapon::add_weapon(

@@ -30,7 +30,13 @@ boost::statechart::result
 sanguis::server::states::paused::react(
 	message_event const &m)
 {
-	message_functor<paused,boost::statechart::result> mf(*this,m.id());
+	message_functor<
+		paused,
+		boost::statechart::result
+	> mf(
+		*this,
+		m.id()
+	);
 
 	return messages::unwrap<
 		boost::mpl::vector<
@@ -53,9 +59,10 @@ sanguis::server::states::paused::react(
 boost::statechart::result
 sanguis::server::states::paused::operator()(
 	net::id_type,
-	messages::player_unpause const &)
+	messages::player_unpause const &
+)
 {
-	context<running>().environment().send()(
+	context<machine>().send_to_all(
 		messages::create(
 			messages::unpause()
 		)

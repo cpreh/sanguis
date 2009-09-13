@@ -4,11 +4,11 @@
 #include "influence.hpp"
 #include "../pos_type.hpp"
 #include "../space_unit.hpp"
-#include "../environment_fwd.hpp"
 #include "../entities/entity_fwd.hpp"
 #include "../collision/base.hpp"
 #include "../teams.hpp"
 #include "../../entity_id.hpp"
+#include <sge/collision/world_fwd.hpp>
 
 namespace sanguis
 {
@@ -27,7 +27,7 @@ public:
 		entity_id);
 protected:
 	aura(
-		environment const &,
+		sge::collision::world_ptr,
 		space_unit radius,
 		team::type team,
 		influence::type);

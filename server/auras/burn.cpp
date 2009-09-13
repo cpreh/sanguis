@@ -3,7 +3,7 @@
 #include "../entities/entity.hpp"
 
 sanguis::server::auras::burn::burn(
-	environment const &env,
+	sge::collision::world_ptr const collision_world_,
 	space_unit const radius,
 	team::type const team,
 	space_unit const damage_per_pulse,
@@ -11,7 +11,7 @@ sanguis::server::auras::burn::burn(
 	damage::array const &damage_values)
 :
 	aura(
-		env,
+		collision_world_,
 		radius,
 		team,
 		influence::debuff
@@ -22,7 +22,8 @@ sanguis::server::auras::burn::burn(
 {}
 
 void sanguis::server::auras::burn::do_effect(
-	entities::entity &e)
+	entities::entity &e
+)
 {
 	e.add_buff(
 		buffs::auto_ptr(

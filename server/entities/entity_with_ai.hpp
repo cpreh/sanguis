@@ -18,11 +18,13 @@ public:
 	entity_with_ai(
 		base_parameters const &,
 		ai::auto_ptr ai_,
-		weapons::auto_ptr start_weapon);
+		weapons::auto_ptr start_weapon
+	);
 protected:
-	virtual void update(
-		time_type,
-		container &entities);
+	virtual void
+	update(
+		time_type
+	);
 private:
 	ai::auto_ptr ai_;
 };

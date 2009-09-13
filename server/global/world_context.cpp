@@ -34,3 +34,13 @@ sanguis::server::global::world_context::send_to_player(
 		msg
 	);
 }
+
+void
+sanguis::server::global::world_context::remove_player(
+	player_id const player_id_
+)
+{
+	global_context_.remove_player(
+		player_id_
+	);
+}

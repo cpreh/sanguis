@@ -12,21 +12,23 @@ sanguis::server::entities::entity_with_ai::entity_with_ai(
 :
 	entity_with_weapon(
 		param,
-		start_weapon),
+		start_weapon
+	),
 	ai_(ai_)
 {
 	this->ai_->bind(*this);
 }
 
-void sanguis::server::entities::entity_with_ai::update(
-	time_type const time,
-	container &entities)
+void
+sanguis::server::entities::entity_with_ai::update(
+	time_type const time
+)
 {
 	entity_with_weapon::update(
-		time,
-		entities);
+		time
+	);
 	
 	ai_->update(
-		time,
-		entities);
+		time
+	);
 }

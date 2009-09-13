@@ -1,18 +1,26 @@
 #include "create_circle.hpp"
 #include "../collision/satellite.hpp"
+#include "../../angle_to_vector.hpp"
 #include <sge/collision/world.hpp>
+#include <sge/collision/objects/circle.hpp>
 #include <sge/math/vector/construct.hpp>
 #include <sge/math/vector/basic_impl.hpp>
-#include <boost/tr1/reference.hpp>
+#include <sge/math/vector/arithmetic.hpp>
+#include <sge/make_auto_ptr.hpp>
+#include <boost/tr1/functional.hpp>
 
-sge::collision::base_ptr const
-sanguis::server::entities::create_circle(
-	base_parameters const &param,
+sge::collision::objects::base_ptr const
+sanguis::server::collision::create_circle(
+	sge::collision::world_ptr const collision_world,
+	pos_type const &center,
+	space_unit const direction,
+	space_unit const radius,
+	space_unit const movement_speed,
 	collision::base &obj
 )
 {
 	return
-		param.env().collision_world()->create_circle(
+		collision_world->create_circle(
 			sge::collision::satellite_ptr(
 				sge::make_auto_ptr<
 					collision::satellite
@@ -23,25 +31,22 @@ sanguis::server::entities::create_circle(
 				)
 			),
 			sge::math::vector::construct(
-				param.center(),
+				center,
 				static_cast<
 					space_unit
 				>(0)
 			),
 			sge::math::vector::construct(
 				angle_to_vector(
-					param.direction() // TODO: is this right?
-				) * param.properties()[
-					property_type::movement_speed
-				].current(),
+					direction // TODO: is this right?
+				)
+				* movement_speed,
 				static_cast<
 					space_unit
 				>(0)
 			),
 			static_cast<sge::collision::unit>(
-				entities::radius(
-					param.collision_dim()
-				)
+				radius
 			)
 		);
 }

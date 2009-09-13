@@ -2,7 +2,7 @@
 #include <boost/logic/tribool.hpp>
 
 sanguis::server::collision::base::base(
-	sge::collision::objets::base_ptr const base_
+	sge::collision::objects::base_ptr const base_
 )
 :
 	base_(base_)

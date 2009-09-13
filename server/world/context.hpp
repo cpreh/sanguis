@@ -30,6 +30,11 @@ public:
 		messages::auto_ptr
 	) = 0;
 
+	virtual void
+	remove_player(
+		player_id
+	) = 0;
+
 	virtual ~context();
 };
 

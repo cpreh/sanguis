@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_GLOBAL_CONTEXT_HPP_INCLUDED
 #define SANGUIS_SERVER_GLOBAL_CONTEXT_HPP_INCLUDED
 
+#include "context_fwd.hpp"
 #include "player_map.hpp"
 #include "world_context_fwd.hpp"
 #include "../world/map.hpp"
@@ -33,9 +34,38 @@ public:
 	);
 
 	void
-	choose_perk(
+	player_target(
+		player_id,
+		pos_type const &
+	);
+
+	void
+	player_change_weapon(
+		player_id,
+		weapon_type::type
+	);
+
+	void
+	player_angle(
+		player_id,
+		space_unit
+	);
+
+	void
+	player_change_shooting(
+		player_id,
+		bool shooting
+	);
+
+	void
+	player_choose_perk(
 		player_id,
 		perk_type::type
+	);
+
+	void
+	update(
+		time_type
 	);
 private:
 	friend class world_context;
@@ -46,6 +76,11 @@ private:
 	send_to_player(
 		world_id,
 		messages::auto_ptr
+	);
+
+	void
+	remove_player(
+		player_id
 	);
 
 	void

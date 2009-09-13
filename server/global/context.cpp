@@ -35,7 +35,7 @@ sanguis::server::global::context::insert_player(
 		]
 	);
 
-	entities::player_auto_ptr player(
+	entities::player_auto_ptr player_(
 		create_player(
 			m,
 			send_unicast_,
@@ -44,10 +44,109 @@ sanguis::server::global::context::insert_player(
 			connect_state_
 		)
 	);
+
+	players_[
+		player_id_
+	] = player_.get();
+
+	insert_entity(
+		player_
+	);
 }
 
 void
-sanguis::server::global::context::choose_perk(
+sanguis::server::global::player_target(
+	player_id const player_id_,
+	pos_type const &target_
+)
+{
+	players_[
+		player_id_
+	].target(
+		target_
+	);
+}
+
+void
+sanguis::server::global::player_change_weapon(
+	player_id const player_id_,
+	weapon_type::type const wt
+)
+{
+	players_[
+		player_id_
+	].change_weapon(
+		wt
+	);
+}
+
+void
+sanguis::server::global::player_angle(
+	player_id const player_id_,
+	space_unit const angle_
+)
+{
+	players_[
+		player_id_
+	].angle(
+		angle_
+	);
+}
+
+void
+sanguis::server::global::player_change_shooting(
+	player_id const player_id_,
+	bool const shooting
+)
+{
+	players_[
+		player_id_
+	].aggressive(
+		shooting
+	);
+}
+
+void
+sanguis::server::global_context::player_direction(
+	player_id const player_id_,
+	pos_type const &dir
+)
+{
+
+	entities::player &player_(
+		players_[
+			player_id_
+		]
+	);
+
+	if (is_null(dir))
+		player_.property(
+			entities::property_type::movement_speed
+		).current(
+			static_cast<space_unit>(0)
+		);
+	else
+	{
+		player_.property(
+			entities::property_type::movement_speed
+		).current_to_max();
+
+		player_.direction(
+			*sge::math::vector::to_angle<space_unit>(dir)
+		);
+	}
+
+	/*
+	send(
+		message_convert::speed(
+			player_
+		)
+	);
+	*/
+}
+
+void
+sanguis::server::global::context::player_choose_perk(
 	player_id const player_id_,
 	perk_type::type const perk_type_
 )
@@ -86,6 +185,20 @@ sanguis::server::global::context::choose_perk(
 }
 
 void
+sanguis::server::global::update(
+	time_type const delta
+)
+{
+	BOOST_FOREACH(
+		world_map::reference world_,
+		worlds_
+	)
+		world_.second.update(
+			delta
+		);
+}
+
+void
 sanguis::server::global::context::send_to_player(
 	player_id const player_id_,
 	messages::auto_ptr msg_
@@ -95,6 +208,16 @@ sanguis::server::global::context::send_to_player(
 	send_unicast_(
 		player_id_,
 		msg_
+	);
+}
+
+void
+sanguis::server::global::context::remove_player(
+	player_id const id_
+)
+{
+	players_.erase(
+		id_
 	);
 }
 

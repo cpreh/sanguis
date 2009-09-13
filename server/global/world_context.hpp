@@ -36,6 +36,11 @@ public:
 		player_id,
 		messages::auto_ptr
 	);
+
+	void
+	remove_player(
+		player_id
+	);
 private:
 	global::context &global_context_;
 };

@@ -52,6 +52,9 @@ public:
 	net::id_type
 	net_id() const;
 private:
+	void
+	on_die();
+
 	string const name_;
 	net::id_type const net_id_;
 	exp_type exp_;

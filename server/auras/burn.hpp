@@ -5,6 +5,7 @@
 #include "../space_unit.hpp"
 #include "../damage/array.hpp"
 #include "../../time_type.hpp"
+#include <sge/collision/world_fwd.hpp>
 
 namespace sanguis
 {
@@ -16,15 +17,18 @@ namespace auras
 class burn : public aura {
 public:
 	burn(
-		environment const &,
+		sge::collision::world_ptr,
 		space_unit radius,
 		team::type team,
 		space_unit damage_per_pules,
 		time_type pulse_diff,
-		damage::array const &);
+		damage::array const &
+	);
 private:
-	void do_effect(
-		entities::entity &target);
+	void
+	do_effect(
+		entities::entity &target
+	);
 	
 	time_type const pulse_diff;
 	space_unit const damage_per_pulse;
