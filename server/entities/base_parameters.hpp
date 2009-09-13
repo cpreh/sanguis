@@ -36,7 +36,7 @@ public:
 		dim_type const &collision_dim
 	);
 	
-	environment::object_ptr const &env() const;
+	environment::object_ptr const env() const;
 	damage::armor const &armor() const;
 	pos_type const &center() const;
 	space_unit angle() const;

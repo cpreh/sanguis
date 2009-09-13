@@ -1,14 +1,13 @@
 #include "grenade.hpp"
 #include "aoe_damage.hpp"
 #include "../property.hpp"
-#include "../../default_dim.hpp"
 #include "../../damage/list.hpp"
 #include "../../damage/meta.hpp"
 #include "../../damage/wrapper.hpp"
 #include "../../damage/piercing.hpp"
 #include "../../damage/fire.hpp"
 #include "../../collision/distance.hpp"
-#include "../../../load/context.hpp"
+#include "../../environment/object.hpp"
 #include <sge/container/map_impl.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/time/millisecond.hpp>
@@ -48,8 +47,7 @@ sanguis::server::entities::projectiles::grenade::grenade(
 					)
 				)
 			),
-		default_dim(
-			env.load()().models(),
+		env->entity_dim(
 			SGE_TEXT("grenade")
 		),
 		static_cast<time_type>(2),
@@ -94,15 +92,14 @@ sanguis::server::entities::projectiles::grenade::update(
 		);
 	
 	projectile::update(
-		time,
-		cont
+		time
 	);
 }
 
 void
 sanguis::server::entities::projectiles::grenade::on_die()
 {
-	insert(
+	environment()->insert(
 		auto_ptr(
 			new aoe_damage(
 				environment(),

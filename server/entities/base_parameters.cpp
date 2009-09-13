@@ -5,7 +5,7 @@
 #include <sge/container/map_impl.hpp>
 
 sanguis::server::entities::base_parameters::base_parameters(
-	environment const &env_,
+	environment::object_ptr const env_,
 	damage::armor const &armor_,
 	pos_type const &center_,
 	space_unit const angle_,
@@ -32,7 +32,7 @@ sanguis::server::entities::base_parameters::base_parameters(
 	collision_dim_(collision_dim_)
 {}
 
-sanguis::server::environment const &
+sanguis::server::environment::object_ptr const
 sanguis::server::entities::base_parameters::env() const
 {
 	return env_;

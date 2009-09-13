@@ -2,11 +2,13 @@
 #include "unpaused.hpp"
 #include "../global/context.hpp"
 #include "../message_functor.hpp"
+#include "../message_event.hpp"
 #include "../log.hpp"
 #include "../../connect_state.hpp"
 #include "../../messages/unwrap.hpp"
 #include "../../messages/highscore.hpp"
 #include "../../messages/create.hpp"
+#include "../../load/context.hpp"
 #include <sge/container/map_impl.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/utf8/convert.hpp>
@@ -24,12 +26,15 @@ sanguis::server::states::running::running(
 	global_context_(
 		new global::context(
 			boost::bind(
-				&machine::send_unicast
-				&context<machine>().send_unicast(),
+				&machine::send_unicast,
+				&context<
+					machine
+				>(),
 				_1,
 				_2
 			),
-			context<machine>().collision_system()
+			context<machine>().collision_system(),
+			context<machine>().resources().models()
 		)
 	)
 {
@@ -60,22 +65,10 @@ sanguis::server::states::running::update_waves(
 }
 #endif
 
-void
-sanguis::server::states::running::add_player_record(
-	player_record const &rec
-)
-{
 	/*
-	player_records.push_back(
-		rec
-	);
-	*/
-}
-
 void
 sanguis::server::states::running::all_dead()
 {
-	/*
 	messages::types::string_vector names;
 	exp_type exp(0);
 
@@ -107,8 +100,8 @@ sanguis::server::states::running::all_dead()
 	);
 
 	player_records.clear();
-	*/
 }
+	*/
 
 boost::statechart::result
 sanguis::server::states::running::react(
@@ -155,7 +148,7 @@ sanguis::server::states::running::operator()(
 		net_id,
 		sge::utf8::convert(
 			m.get<
-				messages::roles::name
+				messages::string
 			>()
 		),
 		state_cast<
@@ -170,6 +163,7 @@ sanguis::server::states::running::operator()(
 	return discard_event();
 }
 
+boost::statechart::result
 sanguis::server::states::running::operator()(
 	net::id_type const id,
 	messages::connect const &
@@ -200,7 +194,7 @@ sanguis::server::states::running::operator()(
 			<< SGE_TEXT(" disconnected")
 	);
 
-	global_context_->disconnect(
+	global_context_->player_disconnect(
 		id
 	);
 
@@ -212,7 +206,7 @@ sanguis::server::states::running::operator()(
 	net::id_type const id,
 	messages::player_cheat const &p)
 {
-	global_context_->cheat(
+	global_context_->player_cheat(
 		id,
 		// TODO: sanitize the input!
 		static_cast<
@@ -233,14 +227,14 @@ sanguis::server::states::running::operator()(
 	messages::player_choose_perk const &p
 )
 {
-	global_context_->choose_perk(
+	global_context_->player_choose_perk(
 		id,
 		// FIXME: sanitize the input!
 		static_cast<
 			perk_type::type
 		>(
 			p.get<
-				messages::role::perk
+				messages::roles::perk
 			>()
 		)
 	);

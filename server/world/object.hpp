@@ -12,11 +12,14 @@
 #include "../exp_type.hpp"
 #include "../health_type.hpp"
 #include "../player_id.hpp"
+#include "../dim_type.hpp"
+#include "../string.hpp"
 #include "../../diff_clock.hpp"
 #include "../../time_type.hpp"
 #include "../../world_id.hpp"
 #include "../../weapon_type.hpp"
 #include "../../messages/auto_ptr.hpp"
+#include "../../load/model/context_fwd.hpp"
 #include <sge/collision/world_fwd.hpp>
 #include <sge/collision/system_fwd.hpp>
 #include <sge/signal/scoped_connection.hpp>
@@ -35,7 +38,8 @@ class object {
 public:
 	object(
 		context_ptr const global_context_,
-		sge::collision::system_ptr
+		sge::collision::system_ptr,
+		load::model::context const &
 	);
 
 	~object();
@@ -107,6 +111,11 @@ private:
 	sge::collision::world_ptr const
 	collision_world() const;
 
+	dim_type const
+	entity_dim(
+		string const &model_name
+	) const;
+
 	// owns functions
 	void
 	send_entity_specific(
@@ -121,6 +130,8 @@ private:
 	);
 
 	context_ptr const global_context_;
+
+	load::model::context const &model_context_;
 
 	sge::collision::world_ptr const collision_world_;
 

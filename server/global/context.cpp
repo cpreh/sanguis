@@ -6,6 +6,7 @@
 #include "../perks/factory.hpp"
 #include "../weapons/weapon.hpp"
 #include "../create_player.hpp"
+#include "../cheat.hpp"
 #include "../send_available_perks.hpp"
 #include "../log.hpp"
 #include <sge/log/headers.hpp>
@@ -19,12 +20,14 @@
 
 sanguis::server::global::context::context(
 	unicast_callback const &send_unicast_,
-	sge::collision::system_ptr const collision_system_
+	sge::collision::system_ptr const collision_system_,
+	load::model::context const &model_context_
 )
 :
 	send_unicast_(send_unicast_),
 	worlds_(),
 	players_(),
+	model_context_(model_context_),
 	world_context_(
 		sge::make_shared_ptr<
 			world_context
@@ -71,6 +74,16 @@ sanguis::server::global::context::insert_player(
 			player_
 		)
 	);
+}
+
+void
+sanguis::server::global::context::player_disconnect(
+	player_id const player_id_
+)
+{
+	players_[
+		player_id_
+	]->die();
 }
 
 void
@@ -161,6 +174,20 @@ sanguis::server::global::context::player_direction(
 		)
 	);
 	*/
+}
+
+void
+sanguis::server::global::context::player_cheat(
+	player_id const player_id_,
+	cheat_type::type const cheat_
+)
+{
+	server::cheat(
+		*players_[
+			player_id_
+		],
+		cheat_
+	);
 }
 
 void

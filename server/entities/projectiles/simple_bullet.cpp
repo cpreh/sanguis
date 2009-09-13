@@ -1,12 +1,11 @@
 #include "simple_bullet.hpp"
 #include "../property.hpp"
-#include "../../default_dim.hpp"
 #include "../../damage/list.hpp"
 #include "../../damage/wrapper.hpp"
 #include "../../damage/meta.hpp"
 #include "../../damage/piercing.hpp"
 #include "../../damage/full.hpp"
-#include "../../../load/context.hpp"
+#include "../../environment/object.hpp"
 #include <sge/container/map_impl.hpp>
 #include <sge/text.hpp>
 #include <sge/optional_impl.hpp>
@@ -35,8 +34,7 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 				entities::property_type::movement_speed,
 				entities::property(static_cast<space_unit>(500))
 			),
-		default_dim(
-			env.load()().models(),
+		env->entity_dim(
 			SGE_TEXT("bullet")
 		),
 		static_cast<time_type>(10),

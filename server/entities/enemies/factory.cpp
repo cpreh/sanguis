@@ -14,10 +14,11 @@
 sanguis::server::entities::auto_ptr
 sanguis::server::entities::enemies::create(
 	enemy_type::type const etype,
-	environment const &env,
+	environment::object_ptr const env,
 	pos_type const &center,
 	space_unit const direction,
-	space_unit const angle)
+	space_unit const angle
+)
 {
 	switch(etype) {
 	case enemy_type::zombie00:
@@ -47,7 +48,6 @@ sanguis::server::entities::enemies::create(
 				),
 				weapons::auto_ptr(
 					new weapons::pistol(
-						env,
 						weapon_type::pistol,
 						weapons::base_cooldown(1),
 						weapons::damage(1),
@@ -79,7 +79,6 @@ sanguis::server::entities::enemies::create(
 					new ai::simple()),
 				weapons::auto_ptr(
 					new weapons::melee(
-						env,
 						weapons::range(75),
 						weapons::base_cooldown(2),
 						weapons::damage(2)
@@ -109,7 +108,6 @@ sanguis::server::entities::enemies::create(
 					new ai::simple()),
 				weapons::auto_ptr(
 					new weapons::melee(
-						env,
 						weapons::range(75),
 						weapons::base_cooldown(1),
 						weapons::damage(4)
@@ -138,7 +136,6 @@ sanguis::server::entities::enemies::create(
 				),
 				weapons::auto_ptr(
 					new weapons::melee(
-						env,
 						weapons::range(100),
 						weapons::base_cooldown(1),
 						weapons::damage(10)
@@ -167,7 +164,6 @@ sanguis::server::entities::enemies::create(
 				),
 				weapons::auto_ptr(
 					new weapons::melee(
-						env,
 						weapons::range(75),
 						weapons::base_cooldown(1),
 						weapons::damage(0.5f)
@@ -196,7 +192,6 @@ sanguis::server::entities::enemies::create(
 				),
 				weapons::auto_ptr(
 					new weapons::melee(
-						env,
 						weapons::range(75),
 						weapons::base_cooldown(2),
 						weapons::damage(5)

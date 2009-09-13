@@ -12,12 +12,14 @@
 #include "../player_id.hpp"
 #include "../pos_type.hpp"
 #include "../space_unit.hpp"
+#include "../../cheat_type.hpp"
 #include "../../connect_state.hpp"
 #include "../../weapon_type.hpp"
 #include "../../world_id.hpp"
 #include "../../perk_type.hpp"
 #include "../../time_type.hpp"
 #include "../../messages/auto_ptr.hpp"
+#include "../../load/model/context_fwd.hpp"
 #include <sge/log/logger_fwd.hpp>
 #include <sge/container/map_decl.hpp>
 #include <sge/collision/system_fwd.hpp>
@@ -36,7 +38,8 @@ class context {
 public:
 	context(
 		unicast_callback const &,
-		sge::collision::system_ptr
+		sge::collision::system_ptr,
+		load::model::context const &
 	);
 
 	~context();
@@ -47,6 +50,11 @@ public:
 		player_id,
 		string const &name,
 		connect_state::type
+	);
+
+	void
+	player_disconnect(
+		player_id
 	);
 
 	void
@@ -77,6 +85,12 @@ public:
 	player_direction(
 		player_id,
 		pos_type const &
+	);
+
+	void
+	player_cheat(
+		player_id,
+		cheat_type::type
 	);
 
 	void
@@ -124,6 +138,8 @@ private:
 	world::map worlds_;
 	
 	player_map players_;
+
+	load::model::context const &model_context_;
 
 	sge::shared_ptr<
 		world::context

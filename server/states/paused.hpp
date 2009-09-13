@@ -2,10 +2,8 @@
 #define SANGUIS_SERVER_STATES_PAUSED_HPP_INCLUDED
 
 #include "running.hpp"
-#include "../environment_fwd.hpp"
 #include "../../messages/player_unpause.hpp"
 #include "../../messages/player_pause.hpp"
-#include "../../messages/disconnect.hpp"
 #include "../../messages/base_fwd.hpp"
 #include "../../net/id_type.hpp"
 #include <sge/log/logger_fwd.hpp>

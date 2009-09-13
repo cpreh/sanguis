@@ -3,9 +3,8 @@
 #include "pickups/pickup.hpp"
 #include "../weapons/weapon.hpp"
 #include "../ai/base.hpp"
-#include "../default_dim.hpp"
+#include "../environment/object.hpp"
 #include "../../load/friend_name.hpp"
-#include "../../load/context.hpp"
 #include "../../messages/add_friend.hpp"
 #include "../../messages/create.hpp"
 #include <sge/math/vector/basic_impl.hpp>
@@ -36,8 +35,7 @@ sanguis::server::entities::friend_::friend_(
 			properties,
 			entity_type::friend_,
 			false,
-			default_dim(
-				env.load()().models(),
+			env->entity_dim(
 				load::friend_name(
 					ftype_
 				)

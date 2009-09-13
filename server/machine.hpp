@@ -86,8 +86,8 @@ public:
 
 	void
 	send_unicast(
-		messages::auto_ptr,
-		net::id_type
+		net::id_type,
+		messages::auto_ptr
 	);
 private:
 	typedef sge::container::map<

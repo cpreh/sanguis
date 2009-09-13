@@ -1,10 +1,9 @@
 #include "weapon.hpp"
 #include "../entity_with_weapon.hpp"
 #include "../../weapons/weapon.hpp"
-#include "../../default_dim.hpp"
 #include "../../weapons/factory.hpp"
+#include "../../environment/object.hpp"
 #include "../../../load/weapon_pickup_name.hpp"
-#include "../../../load/context.hpp"
 #include "../../../messages/create.hpp"
 #include "../../../messages/add_weapon_pickup.hpp"
 #include <sge/optional_impl.hpp>
@@ -12,7 +11,7 @@
 #include <sge/math/dim/basic_impl.hpp>
 
 sanguis::server::entities::pickups::weapon::weapon(
-	server::environment const &env,
+	server::environment::object_ptr const env,
 	pos_type const &center,
 	team::type const team_,
 	weapon_type::type const weapon_type_)
@@ -22,8 +21,7 @@ sanguis::server::entities::pickups::weapon::weapon(
 		env,
 		center,
 		team_,
-		default_dim(
-			env.load()().models(),
+		env->entity_dim(
 			load::weapon_pickup_name(
 				weapon_type_
 			)
@@ -60,8 +58,7 @@ void sanguis::server::entities::pickups::weapon::do_pickup(
 {
 	receiver.add_weapon(
 		weapons::create(
-			weapon_type_,
-			environment()
+			weapon_type_
 		)
 	);
 }

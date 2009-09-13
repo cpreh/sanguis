@@ -3,6 +3,7 @@
 
 #include "../entity_with_ai.hpp"
 #include "../../probability_type.hpp"
+#include "../../exp_type.hpp"
 #include "../../../enemy_type.hpp"
 
 namespace sanguis
@@ -18,7 +19,7 @@ class enemy : public entity_with_ai {
 public:	
 	enemy(
 		enemy_type::type,
-		server::environment const &,
+		server::environment::object_ptr,
 		damage::armor const &,
 		pos_type const &center,
 		space_unit angle,
@@ -27,12 +28,12 @@ public:
 		ai::auto_ptr,
 		weapons::auto_ptr weapon,
 		probability_type spawn_chance,
-		exp_type exp);
+		exp_type exp
+	);
 
 	enemy_type::type etype() const;
 private:
 	messages::auto_ptr add_message() const;
-	exp_type exp() const;
 	void on_die();
 
 	enemy_type::type const etype_;

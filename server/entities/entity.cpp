@@ -3,15 +3,16 @@
 #include "auto_weak_link.hpp"
 #include "property.hpp"
 #include "radius.hpp"
+#include "../collision/create_circle.hpp"
 #include "../perks/perk.hpp"
 #include "../buffs/buff.hpp"
 #include "../auras/aura.hpp"
+#include "../environment/object.hpp"
 #include "../get_unique_id.hpp"
-#include "../message_convert/max_health.hpp"
 #include "../log.hpp"
 #include "../../messages/add.hpp"
 #include "../../messages/create.hpp"
-#include "../../angle_vector.hpp"
+#include "../../angle_to_vector.hpp"
 #include "../../exception.hpp"
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/vector/arithmetic.hpp>
@@ -21,7 +22,7 @@
 #include <sge/math/vector/narrow_cast.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/math/dim/arithmetic.hpp>
-#include <sge/collision/objects/circle.hpp>
+#include <sge/collision/objects/base.hpp>
 #include <sge/container/linear_set_impl.hpp>
 #include <sge/container/map_impl.hpp>
 #include <sge/log/headers.hpp>
@@ -36,7 +37,7 @@ sanguis::server::entities::entity::entity(
 :
 	collision::base(
 		collision::create_circle(
-			param.collision_world(),
+			param.env()->collision_world(),
 			param.center(),
 			param.direction(),
 			entities::radius(
@@ -48,6 +49,9 @@ sanguis::server::entities::entity::entity(
 			*this
 		)
 	),
+	environment_(	
+		param.env()
+	),
 	id_(get_unique_id()),
 	env_(param.env()),
 	armor_(param.armor()),
@@ -58,7 +62,6 @@ sanguis::server::entities::entity::entity(
 	type_(param.type()),
 	invulnerable_(param.invulnerable()),
 	collision_dim(param.collision_dim()),
-	aggressive_(false),
 	update_health_(true),
 	speed_change_(
 		property(
@@ -168,7 +171,7 @@ sanguis::server::entities::entity::center() const
 	return sge::math::vector::narrow_cast<
 		pos_type
 	>(
-		circle()->center()
+		collision_object()->pos()
 	);
 }
 
@@ -176,7 +179,7 @@ sanguis::server::entities::entity::center() const
 void sanguis::server::entities::entity::center(
 	pos_type const &_center)
 {
-	circle()->center(
+	collision_object()->pos(
 		sge::math::vector::construct(
 			_center,
 			static_cast<
@@ -200,7 +203,7 @@ sanguis::server::entities::entity::abs_speed() const
 	return sge::math::vector::narrow_cast<
 		pos_type
 	>(
-		circle()->speed()
+		collision_object()->speed()
 	);
 }
 
@@ -283,12 +286,6 @@ sanguis::server::entities::entity::property(
 	property_type::type const e)
 {
 	return properties[e];
-}
-
-sanguis::server::exp_type
-sanguis::server::entities::entity::exp() const
-{
-	return static_cast<exp_type>(0);
 }
 
 sanguis::server::dim_type const
@@ -458,22 +455,6 @@ sanguis::server::entities::entity::update_health() const
 sanguis::server::entities::entity::~entity()
 {}
 
-sanguis::server::environment::object &
-sanguis::server::entities::entity::environment() const
-{
-	return *env_;
-}
-
-sanguis::server::entities::entity &
-sanguis::server::entities::entity::insert(
-	auto_ptr e
-)
-{
-	return environment().insert(
-		e
-	);
-}
-
 bool
 sanguis::server::entities::entity::perk_choosable(
 	perk_type::type const pt) const
@@ -501,7 +482,7 @@ sanguis::server::entities::entity::insert_link(
 void sanguis::server::entities::entity::speed_change(
 	property::value_type const s)
 {
-	circle()->speed(
+	collision_object()->speed(
 		sge::math::vector::construct(
 			angle_to_vector(
 				direction()
@@ -524,7 +505,7 @@ void sanguis::server::entities::entity::max_health_change(
 {
 	update_health_ = true;
 
-	environment().max_health_changed(
+	environment()->max_health_changed(
 		id(),
 		max_health()
 	);

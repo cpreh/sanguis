@@ -1,12 +1,13 @@
 #include "aoe_damage.hpp"
 #include "../property.hpp"
 #include "../../auras/burn.hpp"
+#include "../../environment/object.hpp"
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/container/map_impl.hpp>
 #include <sge/optional_impl.hpp>
 
 sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
-	server::environment const &env,
+	server::environment::object_ptr const env,
 	pos_type const &center,
 	team::type const team_,
 	space_unit const radius,
@@ -34,7 +35,7 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 	add_aura(
 		auras::auto_ptr(
 			new auras::burn(
-				environment(),
+				env->collision_world(),
 				radius,
 				team_,
 				damage_per_pulse,
@@ -47,5 +48,6 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 
 void
 sanguis::server::entities::projectiles::aoe_damage::do_damage(
-	entity &)
+	entity &
+)
 {}

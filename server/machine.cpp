@@ -204,8 +204,9 @@ sanguis::server::machine::collision_system() const
 
 void
 sanguis::server::machine::send_unicast(
-	messages::auto_ptr m,
-	net::id_type const id)
+	net::id_type const id,
+	messages::auto_ptr m
+)
 {
 	net::data_type ser;
 

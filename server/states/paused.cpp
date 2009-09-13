@@ -1,6 +1,7 @@
 #include "paused.hpp"
 #include "unpaused.hpp"
 #include "../message_functor.hpp"
+#include "../message_event.hpp"
 #include "../log.hpp"
 #include "../entities/entity.hpp"
 #include "../../messages/unpause.hpp"
@@ -28,7 +29,8 @@ sanguis::server::states::paused::react(
 
 boost::statechart::result
 sanguis::server::states::paused::react(
-	message_event const &m)
+	message_event const &m
+)
 {
 	message_functor<
 		paused,

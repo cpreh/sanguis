@@ -1,9 +1,8 @@
 #include "player.hpp"
 #include "base_parameters.hpp"
-#include "../default_dim.hpp"
 #include "../perks/perk.hpp"
 #include "../weapons/weapon.hpp"
-#include "../../load/context.hpp"
+#include "../environment/object.hpp"
 #include "../level_calculate.hpp"
 #include <sge/text.hpp>
 
@@ -15,7 +14,8 @@ sanguis::server::entities::player::player(
 	space_unit const angle_,
 	property_map const &properties,
 	string const &name_,
-	net::id_type const net_id_)
+	net::id_type const net_id_
+)
 :
 	entity_with_weapon(
 		base_parameters(
@@ -28,8 +28,7 @@ sanguis::server::entities::player::player(
 			properties,
 			entity_type::player,
 			false,
-			default_dim(
-				env.load()().models(),
+			env->entity_dim(
 				SGE_TEXT("player")
 			)
 		),
@@ -63,10 +62,12 @@ sanguis::server::entities::player::exp(
 		level_delta_ += new_level - old_level;
 		level_ = new_level;
 		++skill_points_;
+		/*
 		environment().level()(
 			*this,
 			old_level
 		);
+		*/ //TODO
 	}
 }
 
@@ -148,7 +149,7 @@ sanguis::server::entities::player::net_id() const
 void
 sanguis::server::entities::player::on_die()
 {
-	environment().remove_player(
+	environment()->remove_player(
 		net_id_
 	);
 }

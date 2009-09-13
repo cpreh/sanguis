@@ -17,10 +17,15 @@ class wave {
 protected:
 	wave();
 public:
-	virtual void process(
+	virtual
+	void process(
 		time_type diff,
-		environment const &) = 0;
-	virtual bool ended() const = 0;
+		environment const &
+	) = 0;
+
+	virtual bool
+	ended() const = 0;
+
 	virtual ~wave();
 };
 

@@ -1,14 +1,12 @@
 #include "rocket.hpp"
 #include "aoe_damage.hpp"
 #include "../property.hpp"
-#include "../../default_dim.hpp"
 #include "../../damage/list.hpp"
 #include "../../damage/wrapper.hpp"
 #include "../../damage/meta.hpp"
 #include "../../damage/fire.hpp"
 #include "../../damage/full.hpp"
 #include "../../environment/object.hpp"
-#include "../../../load/context.hpp"
 #include <sge/container/map_impl.hpp>
 #include <sge/text.hpp>
 #include <sge/optional_impl.hpp>
@@ -20,7 +18,8 @@ sanguis::server::entities::projectiles::rocket::rocket(
 	space_unit const angle,
 	team::type const team_,
 	space_unit const damage,
-	space_unit const aoe_)
+	space_unit const aoe_
+)
 :
 	aoe_projectile(
 		aoe_projectile_type::rocket,
@@ -37,8 +36,7 @@ sanguis::server::entities::projectiles::rocket::rocket(
 				entities::property_type::movement_speed,
 				entities::property(static_cast<space_unit>(300))
 			),
-		default_dim(
-			env.load()().models(),
+		env->entity_dim(
 			SGE_TEXT("rocket")
 		),
 		static_cast<time_type>(10),

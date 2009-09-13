@@ -1,5 +1,6 @@
 #include "environment.hpp"
 #include "object.hpp"
+#include <sge/math/dim/basic_impl.hpp>
 
 sanguis::server::world::environment::environment(
 	world::object &world_
@@ -10,6 +11,16 @@ sanguis::server::world::environment::environment(
 
 sanguis::server::world::environment::~environment()
 {}
+
+sanguis::server::entities::entity & 
+sanguis::server::world::environment::insert(
+	entities::auto_ptr e
+)
+{
+	return world_.insert(
+		e
+	);
+}
 
 void
 sanguis::server::world::environment::weapon_changed(
@@ -81,18 +92,18 @@ sanguis::server::world::environment::remove_player(
 	);
 }
 
-sanguis::server::entities::entity & 
-sanguis::server::world::environment::insert(
-	entities::auto_ptr e
-)
-{
-	return world_.insert(
-		e
-	);
-}
-
 sge::collision::world_ptr const
 sanguis::server::world::environment::collision_world() const
 {
 	return world_.collision_world();
+}
+
+sanguis::server::dim_type const
+sanguis::server::world::environment::entity_dim(
+	string const &model_name
+) const
+{
+	return world_.entity_dim(
+		model_name
+	);
 }

@@ -25,6 +25,11 @@ public:
 
 	~environment();
 
+	entities::entity & 
+	insert(
+		entities::auto_ptr
+	);
+
 	void
 	weapon_changed(
 		entity_id id,
@@ -60,10 +65,10 @@ public:
 		player_id
 	);
 
-	entities::entity & 
-	insert(
-		entities::auto_ptr
-	);
+	dim_type const
+	entity_dim(
+		string const &model_name
+	) const;
 
 	sge::collision::world_ptr const
 	collision_world() const;

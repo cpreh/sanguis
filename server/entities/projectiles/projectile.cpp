@@ -19,14 +19,15 @@ sanguis::server::entities::projectiles::projectile::ptype() const
 
 sanguis::server::entities::projectiles::projectile::projectile(
 	projectile_type::type const nptype,
-	server::environment const &env,
+	server::environment::object_ptr const env,
 	pos_type const &center,
 	space_unit const angle,
 	team::type const team_,
 	property_map const &properties,
 	dim_type const &dim,
 	optional_life_time const &lifetime,
-	indeterminate::type const indeterminate_)
+	indeterminate::type const indeterminate_
+)
 :
 	entity(
 		base_parameters(
@@ -59,13 +60,13 @@ sanguis::server::entities::projectiles::projectile::projectile(
 	)
 {}
 
-void sanguis::server::entities::projectiles::projectile::update(
-	time_type const time,
-	container &entities)
+void
+sanguis::server::entities::projectiles::projectile::update(
+	time_type const time
+)
 {
 	entity::update(
-		time,
-		entities
+		time
 	);
 
 	diff_clock_.update(time);
@@ -76,7 +77,8 @@ void sanguis::server::entities::projectiles::projectile::update(
 
 boost::logic::tribool const
 sanguis::server::entities::projectiles::projectile::can_collide_with_entity(
-	entity const &e) const
+	entity const &e
+) const
 {
 	return e.team() != team()
 		&& !e.dead()
@@ -85,16 +87,14 @@ sanguis::server::entities::projectiles::projectile::can_collide_with_entity(
 
 void
 sanguis::server::entities::projectiles::projectile::collision_entity(
-	entity &e)
+	entity &e
+)
 {
 	if(!dead())
 		do_damage(
 			e
 		);
 }
-
-void sanguis::server::entities::projectiles::projectile::do_die()
-{}
 
 sanguis::messages::auto_ptr
 sanguis::server::entities::projectiles::projectile::add_message() const

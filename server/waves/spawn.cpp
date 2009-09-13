@@ -1,7 +1,7 @@
 #include "spawn.hpp"
 #include "../entities/enemies/factory.hpp"
 #include "../entities/entity.hpp"
-#include "../environment.hpp"
+#include "../environment/object.hpp"
 #include "../../random.hpp"
 #include "../../angle_vector.hpp"
 #include "../../resolution.hpp"
@@ -12,9 +12,11 @@
 #include <boost/tr1/random.hpp>
 #include <algorithm>
 
-void sanguis::server::waves::spawn(
-	environment const &env,
-	enemy_type::type const etype)
+void
+sanguis::server::waves::spawn(
+	environment::object_ptr const env,
+	enemy_type::type const etype
+)
 {
 	// TODO: put this randomizer somewhere else!
 	
@@ -60,7 +62,7 @@ void sanguis::server::waves::spawn(
 		pos(
 			center + screen_center);
 
-	env.insert()(
+	env->insert(
 		entities::enemies::create(
 			etype,
 			env,

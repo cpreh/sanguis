@@ -20,8 +20,13 @@
 #include "../../messages/start_reloading.hpp"
 #include "../../messages/stop_reloading.hpp"
 #include "../../messages/max_health.hpp"
+#include "../../load/model/context.hpp"
+#include "../../load/model/collection.hpp"
+#include "../../load/model/model.hpp"
 #include "../../exception.hpp"
 #include <sge/math/rect/basic_impl.hpp>
+#include <sge/math/dim/basic_impl.hpp>
+#include <sge/math/dim/structure_cast.hpp>
 #include <sge/collision/system.hpp>
 #include <sge/collision/world.hpp>
 #include <sge/time/second.hpp>
@@ -35,11 +40,15 @@
 
 sanguis::server::world::object::object(
 	context_ptr const global_context_,
-	sge::collision::system_ptr const sys
+	sge::collision::system_ptr const sys,
+	load::model::context const &model_context_
 )
 :
 	global_context_(
 		global_context_
+	),
+	model_context_(
+		model_context_
 	),
 	collision_world_(
 		sys->create_world(
@@ -455,6 +464,20 @@ sge::collision::world_ptr const
 sanguis::server::world::object::collision_world() const
 {
 	return collision_world_;
+}
+
+sanguis::server::dim_type const
+sanguis::server::world::object::entity_dim(
+	string const &model_name
+) const
+{
+	return sge::math::dim::structure_cast<
+		dim_type
+	>(
+		model_context_()
+			[model_name]
+			.dim()
+	);
 }
 
 void

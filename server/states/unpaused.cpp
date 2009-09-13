@@ -3,7 +3,9 @@
 #include "../entities/player.hpp"
 #include "../entities/entity.hpp"
 #include "../entities/property.hpp"
+#include "../global/context.hpp"
 #include "../message_functor.hpp"
+#include "../message_event.hpp"
 #include "../log.hpp"
 #include "../../messages/pause.hpp"
 #include "../../messages/base.hpp"
@@ -34,11 +36,6 @@ sanguis::server::states::unpaused::unpaused()
 		sge::time::second_f(
 			static_cast<sge::time::funit>(0.5)
 		)
-	),
-	global_context_(
-		context<
-			running
-		>().global_context()
 	)
 {}
 
@@ -57,7 +54,9 @@ sanguis::server::states::unpaused::operator()(
 	messages::player_attack_dest const &e
 )
 {
-	global_context_.player_target(
+	context<
+		running
+	>().global_context().player_target(
 		id,
 		e.get<
 			messages::roles::attack_dest
@@ -86,7 +85,9 @@ sanguis::server::states::unpaused::operator()(
 			SGE_TEXT("got invalid weapon type in player_change_weapon")
 		);
 
-	global_context_.player_change_weapon(
+	context<
+		running
+	>().global_context().player_change_weapon(
 		id,
 		wt
 	);
@@ -100,7 +101,9 @@ sanguis::server::states::unpaused::operator()(
 	messages::player_rotation const &e
 )
 {
-	global_context_.player_angle(
+	context<
+		running
+	>().global_context().player_angle(
 		id,
 		e.get<messages::roles::angle>()
 	);
@@ -120,7 +123,9 @@ sanguis::server::states::unpaused::operator()(
 	messages::player_start_shooting const &
 )
 {
-	global_context_.player_change_shooting(
+	context<
+		running
+	>().global_context().player_change_shooting(
 		id,
 		true
 	);
@@ -134,7 +139,9 @@ sanguis::server::states::unpaused::operator()(
 	messages::player_stop_shooting const &
 )
 {
-	global_context_.player_change_shooting(
+	context<
+		running
+	>().global_context().player_change_shooting(
 		id,
 		false
 	);
@@ -148,7 +155,9 @@ sanguis::server::states::unpaused::operator()(
 	messages::player_direction const &e
 )
 {
-	global_context_.player_direction(
+	context<
+		running
+	>().global_context().player_direction(
 		id,
 		e.get<
 			messages::roles::direction
@@ -195,7 +204,9 @@ sanguis::server::states::unpaused::react(
 	tick_event const &t
 )
 {
-	global_context_.update(
+	context<
+		running
+	>().global_context().update(
 		t.delta()
 	);
 

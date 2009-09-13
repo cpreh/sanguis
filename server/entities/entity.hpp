@@ -233,6 +233,8 @@ private:
 		entity &
 	);
 
+	environment::object_ptr environment_;
+
 	entity_id const id_;
 
 	server::environment::object_ptr env_;

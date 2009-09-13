@@ -2,11 +2,9 @@
 #include "../base_parameters.hpp"
 #include "../../weapons/weapon.hpp"
 #include "../../ai/base.hpp"
-#include "../../default_dim.hpp"
-#include "../../environment.hpp"
+#include "../../environment/object.hpp"
 #include "../../../random.hpp"
 #include "../../../load/enemy_name.hpp"
-#include "../../../load/context.hpp"
 #include "../../../messages/add_enemy.hpp"
 #include "../../../messages/create.hpp"
 #include <sge/math/vector/basic_impl.hpp>
@@ -14,7 +12,7 @@
 
 sanguis::server::entities::enemies::enemy::enemy(
 	enemy_type::type const etype_,
-	server::environment const &env,
+	server::environment::object_ptr const env,
 	damage::armor const &armor,
 	pos_type const &center,
 	space_unit const angle,
@@ -23,7 +21,8 @@ sanguis::server::entities::enemies::enemy::enemy(
 	ai::auto_ptr ai_,
 	weapons::auto_ptr weapon_,
 	probability_type const spawn_chance,
-	exp_type const exp_)
+	exp_type const exp_
+)
 :
 	entity_with_ai(
 		base_parameters(
@@ -36,8 +35,7 @@ sanguis::server::entities::enemies::enemy::enemy(
 			properties,
 			entity_type::enemy,
 			false,
-			default_dim(
-				env.load()().models(),
+			env->entity_dim(
 				load::enemy_name(
 					etype_
 				)
@@ -74,15 +72,13 @@ sanguis::server::entities::enemies::enemy::add_message() const
 	);
 }
 
-sanguis::server::exp_type
-sanguis::server::entities::enemies::enemy::exp() const
-{
-	return exp_;
-}
-
 void sanguis::server::entities::enemies::enemy::on_die()
 {
-	environment().exp()(exp());
+	/*
+	environment().exp()(
+		exp_
+	);
+	// TODO
 
 	if(
 		environment().pickup_chance()(
@@ -92,4 +88,5 @@ void sanguis::server::entities::enemies::enemy::on_die()
 		environment().spawn_pickup()(
 			center()
 		);
+	*/
 }

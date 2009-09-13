@@ -3,11 +3,10 @@
 #include "../player.hpp"
 #include "../base_parameters.hpp"
 #include "../property.hpp"
-#include "../../default_dim.hpp"
 #include "../../damage/no_armor.hpp"
 #include "../../damage/list.hpp"
+#include "../../environment/object.hpp"
 #include "../../../load/pickup_name.hpp"
-#include "../../../load/context.hpp"
 #include "../../../messages/add_pickup.hpp"
 #include "../../../messages/create.hpp"
 #include <sge/math/vector/basic_impl.hpp>
@@ -51,8 +50,7 @@ sanguis::server::entities::pickups::pickup::pickup(
 			true,
 			dim_
 			? *dim_
-			: default_dim(
-				env.load()().models(),
+			: env->entity_dim(
 				load::pickup_name(
 					ptype_
 				)

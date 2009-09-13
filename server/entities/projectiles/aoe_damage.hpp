@@ -15,18 +15,20 @@ namespace projectiles
 class aoe_damage : public aoe_projectile {
 public:
 	aoe_damage(
-		server::environment const &,
+		server::environment::object_ptr const,
 		pos_type const &center,
 		team::type team,
 		space_unit radius,
 		space_unit damage_per_pulse,
 		unsigned pulses,
 		time_type pulse_diff,
-		damage::array const &damage_values);
+		damage::array const &damage_values
+	);
 private:
 	void
 	do_damage(
-		entity &);
+		entity &
+	);
 };	
 
 }

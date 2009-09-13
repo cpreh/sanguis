@@ -3,6 +3,7 @@
 
 #include "object_auto_ptr.hpp"
 #include "context_ptr.hpp"
+#include "../../load/model/context_fwd.hpp"
 #include <sge/collision/system_fwd.hpp>
 
 namespace sanguis
@@ -15,7 +16,8 @@ namespace world
 object_auto_ptr
 random(
 	context_ptr,
-	sge::collision::system_ptr
+	sge::collision::system_ptr,
+	load::model::context const &
 	// TODO: params
 );
 

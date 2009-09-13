@@ -6,6 +6,8 @@
 #include "../entities/entity_fwd.hpp"
 #include "../player_id.hpp"
 #include "../health_type.hpp"
+#include "../dim_type.hpp"
+#include "../string.hpp"
 #include "../../weapon_type.hpp"
 #include "../../entity_id.hpp"
 #include <sge/collision/world_fwd.hpp>
@@ -22,6 +24,11 @@ class object {
 	SGE_NONCOPYABLE(object)
 public:
 	object();
+
+	virtual entities::entity & 
+	insert(
+		entities::auto_ptr
+	) = 0;
 
 	virtual void
 	weapon_changed(
@@ -58,13 +65,13 @@ public:
 		player_id
 	) = 0;
 
-	virtual entities::entity & 
-	insert(
-		entities::auto_ptr
-	) = 0;
-
 	virtual sge::collision::world_ptr const
 	collision_world() const = 0;
+
+	virtual dim_type const
+	entity_dim(
+		string const &model_name
+	) const = 0;
 
 	virtual ~object();
 };
