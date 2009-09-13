@@ -91,6 +91,13 @@ sanguis::server::world::object::object(
 				*this
 			)
 		)
+	),
+	current_time_(
+		static_cast<
+			time_type
+		>(
+			0
+		)
 	)
 {
 	collision_world_->test_callback(
@@ -110,6 +117,12 @@ sanguis::server::world::object::update(
 	time_type const time_
 )
 {
+	current_time_ += time_;
+
+	diff_clock_.update(
+		time_
+	);
+
 	if(
 		sight_range_timer_.update_b()
 	)
@@ -422,7 +435,8 @@ sanguis::server::world::object::update_sight_range(
 
 	if(
 		range.add(
-			target_id_
+			target_id_,
+			current_time_ // TODO: we have to implement this stuff in sge::chrono
 		)
 	)
 	{

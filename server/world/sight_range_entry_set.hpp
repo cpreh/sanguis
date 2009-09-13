@@ -3,6 +3,7 @@
 
 #include "sight_range_entry.hpp"
 #include "../../entity_id.hpp"
+#include <functional>
 #include <set>
 
 namespace sanguis
@@ -13,7 +14,12 @@ namespace world
 {
 
 typedef std::set<
-	sight_range_entry
+	sight_range_entry,
+	std::pointer_to_binary_function<
+		sight_range_entry const &,
+		sight_range_entry const &,
+		bool
+	>
 > sight_range_entry_set;
 
 }

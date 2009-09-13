@@ -15,6 +15,8 @@ namespace world
 
 class sight_range {
 public:
+	sight_range();
+
 	void
 	update(
 		time_type
@@ -22,7 +24,8 @@ public:
 
 	bool
 	add(
-		entity_id
+		entity_id,
+		time_type
 	);
 
 	bool

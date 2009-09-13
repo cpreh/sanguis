@@ -150,6 +150,8 @@ private:
 	sge::signal::scoped_connection const collision_connection_;
 	
 	server::environment::object_ptr const environment_;
+
+	time_type current_time_;
 };
 
 }

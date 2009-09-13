@@ -1,4 +1,15 @@
 #include "sight_range.hpp"
+#include "compare_sight_range_entry.hpp"
+#include <functional>
+
+sanguis::server::world::sight_range::sight_range()
+:
+	entries_(
+		std::ptr_fun(
+			compare_sight_range_entry
+		)
+	)
+{}
 
 void
 sanguis::server::world::sight_range::update(
@@ -17,7 +28,9 @@ sanguis::server::world::sight_range::update(
 		++next;
 
 		if(
-			it->expired()
+			it->expired(
+				time_
+			)
 		)
 			entries_.erase(
 				it
@@ -27,17 +40,16 @@ sanguis::server::world::sight_range::update(
 
 bool
 sanguis::server::world::sight_range::add(
-	entity_id const id
+	entity_id const id,
+	time_type const time_
 )
 {
-	/*
-	entries_.insert(
+	return entries_.insert(
 		sight_range_entry(
 			id,
-			0 // FIXME
+			time_
 		)
-	);
-	*/
+	).second;
 }
 
 bool
@@ -45,11 +57,16 @@ sanguis::server::world::sight_range::contains(
 	entity_id const id
 ) const
 {
-	/*
 	return
 		entries_.find(
-			id
+			sight_range_entry(
+				id,
+				static_cast<
+					time_type
+				>(
+					0
+				)
+			)
 		)
-		!= entries.end();
-	*/
+		!= entries_.end();
 }

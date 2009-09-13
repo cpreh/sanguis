@@ -28,7 +28,9 @@ public:
 	id() const;
 
 	bool
-	expired() const;
+	expired(
+		time_type
+	) const;
 private:
 	entity_id id_;
 	time_type last_time_;
