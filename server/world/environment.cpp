@@ -94,5 +94,5 @@ sanguis::server::world::environment::insert(
 sge::collision::world_ptr const
 sanguis::server::world::environment::collision_world() const
 {
-	// TODO
+	return world_.collision_world();
 }

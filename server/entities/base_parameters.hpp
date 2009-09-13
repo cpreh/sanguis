@@ -7,7 +7,7 @@
 #include "../space_unit.hpp"
 #include "../dim_type.hpp"
 #include "../environment/object_ptr.hpp"
-#include "../teams.hpp"
+#include "../team.hpp"
 #include "../damage/armor.hpp"
 #include "../../entity_type.hpp"
 #include <sge/container/map_decl.hpp>

@@ -56,6 +56,9 @@ public:
 		server::environment::object_ptr
 	);
 
+	server::environment::object_ptr const
+	environment() const;
+
 	entity_id
 	id() const;
 

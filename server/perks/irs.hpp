@@ -15,11 +15,15 @@ class irs : public perk {
 public:
 	irs();
 private:
-	void do_apply(
+	void
+	do_apply(
 		entities::entity &,
 		time_type,
-		environment const &);
+		environment::object_ptr
+	);
+
 	bool can_raise_level() const;
+
 	space_unit factor() const;
 };
 

@@ -10,7 +10,6 @@
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::weapons::sentry::sentry(
-	server::environment::object_ptr const env,
 	weapon_type::type const type_,
 	weapons::base_cooldown const base_cooldown_,
 	weapons::cast_point const cast_point_,
@@ -19,7 +18,6 @@ sanguis::server::weapons::sentry::sentry(
 )
 :
 	weapon(
-		env,
 		type_,
 		weapons::range(
 			1000
@@ -39,13 +37,14 @@ sanguis::server::weapons::sentry::sentry(
 
 void
 sanguis::server::weapons::sentry::do_attack(
-	delayed_attack const &a)
+	delayed_attack const &a
+)
 {
-	environment()->insert(
+	a.environment()->insert(
 		entities::auto_ptr(
 			new entities::friend_(
 				friend_type::sentry,
-				environment(),
+				a.environment(),
 				damage::no_armor(),
 				a.dest(),
 				a.angle(),

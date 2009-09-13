@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_PERKS_PERK_HPP_INCLUDED
 
 #include "../entities/entity_fwd.hpp"
-#include "../environment_fwd.hpp"
+#include "../environment/object_ptr.hpp"
 #include "../../time_type.hpp"
 #include "../../perk_type.hpp"
 #include <sge/noncopyable.hpp>
@@ -18,12 +18,15 @@ namespace perks
 class perk {
 	SGE_NONCOPYABLE(perk)
 public:
-	void apply(
+	void
+	apply(
 		entities::entity &,
 		time_type,
-		environment const &);
+		environment::object_ptr
+	);
 	
-	virtual bool can_raise_level() const = 0;
+	virtual bool
+	can_raise_level() const = 0;
 	
 	void raise_level();
 	
@@ -33,15 +36,20 @@ public:
 	virtual ~perk();
 protected:
 	explicit perk(
-		perk_type::type);
+		perk_type::type
+	);
 
 	typedef unsigned level_type;
-	level_type level() const;
+
+	level_type
+	level() const;
 private:
-	virtual void do_apply(
+	virtual void
+	do_apply(
 		entities::entity &,
 		time_type,
-		environment const &) = 0;
+		environment::object_ptr
+	) = 0;
 
 	perk_type::type const type_;
 	level_type level_;

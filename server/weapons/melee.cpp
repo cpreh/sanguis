@@ -9,14 +9,12 @@
 #include "../entities/projectiles/melee.hpp"
 
 sanguis::server::weapons::melee::melee(
-	server::environment::object_ptr const env,
 	weapons::range const range_,
 	weapons::base_cooldown const base_cooldown_,
 	weapons::damage const damage_
 )
 :
 	weapon(
-		env,
 		weapon_type::melee,
 		range_,
 		unlimited_magazine_size,
@@ -32,13 +30,15 @@ sanguis::server::weapons::melee::melee(
 	damage_(damage_)
 {}
 
-void sanguis::server::weapons::melee::do_attack(
-	delayed_attack const &a)
+void
+sanguis::server::weapons::melee::do_attack(
+	delayed_attack const &a
+)
 {
-	environment()->insert(
+	a.environment()->insert(
 		entities::auto_ptr(
 			new entities::projectiles::melee(
-				environment(),
+				a.environment(),
 				a.dest(),
 				a.team(),
 				damage_

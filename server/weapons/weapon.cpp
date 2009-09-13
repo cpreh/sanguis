@@ -33,7 +33,8 @@ sanguis::server::weapons::weapon::type() const
 void
 sanguis::server::weapons::weapon::update(
 	time_type const tm,
-	entities::entity_with_weapon &owner)
+	entities::entity_with_weapon &owner
+)
 {
 	if(!usable())
 		return;
@@ -122,7 +123,6 @@ sanguis::server::weapons::weapon::~weapon()
 {}
 
 sanguis::server::weapons::weapon::weapon(
-	server::environment::object_ptr const env_,
 	weapon_type::type const type_,
 	weapons::range const range_,
 	weapons::magazine_size const magazine_size_,
@@ -132,7 +132,6 @@ sanguis::server::weapons::weapon::weapon(
 	weapons::reload_time const nreload_time_
 )
 :
-	env_(env_),
 	type_(type_),
 	range_(range_),
 	magazine_used_(0),
@@ -169,12 +168,6 @@ sanguis::server::weapons::weapon::weapon(
 		);
 
 	initiate();
-}
-
-sanguis::server::environment::object_ptr const
-sanguis::server::weapons::weapon::environment() const
-{
-	return env_;
 }
 
 sanguis::time_type

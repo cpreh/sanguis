@@ -13,7 +13,6 @@
 #include "states/reloading_fwd.hpp"
 #include "states/backswing_fwd.hpp"
 #include "states/castpoint_fwd.hpp"
-#include "../environment/object_ptr.hpp"
 #include "../pos_type.hpp"
 #include "../space_unit.hpp"
 #include "../entities/entity_with_weapon_fwd.hpp"
@@ -84,7 +83,6 @@ public:
 	virtual ~weapon();
 protected:
 	weapon(
-		server::environment::object_ptr,
 		weapon_type::type,
 		weapons::range,
 		weapons::magazine_size,
@@ -98,9 +96,6 @@ protected:
 	do_attack(
 		delayed_attack const &) = 0;
 	
-	server::environment::object_ptr const
-	environment() const;
-
 	time_type
 	ias() const;
 
@@ -150,7 +145,6 @@ private:
 	static sge::log::logger &
 	log();
 
-	server::environment::object_ptr const env_;
 	weapon_type::type const type_;
 	weapons::range const range_;
 	magazine_type magazine_used_;

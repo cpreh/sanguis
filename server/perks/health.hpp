@@ -15,10 +15,13 @@ class health : public perk {
 public:
 	health();
 private:
-	void do_apply(
+	void
+	do_apply(
 		entities::entity &,
 		time_type,
-		environment const &);
+		environment::object_ptr
+	);
+
 	bool can_raise_level() const;
 };
 

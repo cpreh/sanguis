@@ -3,20 +3,19 @@
 #include "weapons/factory.hpp"
 #include "weapons/weapon.hpp"
 #include "../exception.hpp"
-#include <sge/foreach_enum.hpp>
+#include <sge/foreach_enumerator.hpp>
 #include <sge/text.hpp>
 
 void
 sanguis::server::cheat(
 	entities::player &p,
-	cheat_type::type const type,
-	environment::object_pt const env
+	cheat_type::type const type
 )
 {
 	switch(type) {
 	case cheat_type::impulse101:
-		SGE_FOREACH_ENUM_2(
-			index
+		SGE_FOREACH_ENUMERATOR_2(
+			index,
 			weapon_type,
 			weapon_type::pistol
 		)
@@ -26,8 +25,7 @@ sanguis::server::cheat(
 						weapon_type::type
 					>(
 						index
-					),
-					env
+					)
 				)
 			);
 		break;

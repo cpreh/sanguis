@@ -17,7 +17,6 @@ namespace weapons
 class melee : public weapon {
 public:
 	melee(
-		server::environment::object_ptr,
 		weapons::range,
 		weapons::base_cooldown,
 		weapons::damage

@@ -1,8 +1,9 @@
 #ifndef SANGUIS_SERVER_WORLD_MAP_HPP_INCLUDED
 #define SANGUIS_SERVER_WORLD_MAP_HPP_INCLUDED
 
-#include "world_fwd.hpp"
+#include "object_fwd.hpp"
 #include "../../world_id.hpp"
+#include <boost/ptr_container/ptr_map.hpp>
 
 namespace sanguis
 {

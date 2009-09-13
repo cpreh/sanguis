@@ -5,6 +5,7 @@
 #include "../message_convert/stop_attacking.hpp"
 #include "../weapons/factory.hpp"
 #include "../weapons/weapon.hpp"
+#include "../environment/object.hpp"
 #include "../../messages/give_weapon.hpp"
 #include "../../messages/change_weapon.hpp"
 #include "../../messages/create.hpp"
@@ -141,7 +142,7 @@ void sanguis::server::entities::entity_with_weapon::change_weapon(
 		attack_ready_ = true;
 	}
 
-	environment().change_weapon(
+	environment()->weapon_changed(
 		id(),
 		weapon_
 	);
@@ -164,11 +165,13 @@ void sanguis::server::entities::entity_with_weapon::add_weapon(
 	weapon_type::type const wt = ptr->type();
 	weapons::magazine_type const magazine_size = ptr->magazine_size();
 
-	if(wt == weapon_type::pistol && weapons_.count(weapon_type::pistol))
+	if(
+		wt == weapon_type::pistol
+		&& weapons_.count(weapon_type::pistol)
+	)
 		return add_weapon(
 			weapons::create(
-				weapon_type::dual_pistol,
-				environment()
+				weapon_type::dual_pistol
 			)
 		);
 
@@ -192,7 +195,7 @@ void sanguis::server::entities::entity_with_weapon::add_weapon(
 	if (!weapons_.insert(wt,ptr).second)
 		throw exception(SGE_TEXT("couldn't insert weapon"));
 
-	environment().got_weapon(
+	environment()->got_weapon(
 		id(),
 		wt
 	);
@@ -286,17 +289,10 @@ sanguis::server::entities::entity_with_weapon::start_attacking()
 	if(attacking)
 		return;
 	
-	environment().attacking_changed(
+	environment()->attacking_changed(
 		id(),
 		true
 	);
-/*
-	send(
-		message_convert::start_attacking(
-			*this
-		)
-	);
-*/
 
 	attacking = true;
 }
@@ -306,15 +302,7 @@ sanguis::server::entities::entity_with_weapon::start_reloading()
 {
 	reloading = true;
 
-	/*
-	send(
-		message_convert::start_reloading(
-			*this
-		)
-	);
-	*/
-
-	environment().reloading_changed(
+	environment()->reloading_changed(
 		id(),
 		true	
 	);
@@ -325,15 +313,7 @@ sanguis::server::entities::entity_with_weapon::stop_reloading()
 {
 	reloading = false;
 
-	/*
-	send(
-		message_convert::stop_reloading(
-			*this
-		)
-	);
-	*/
-
-	environment().reloading_changed(
+	environment()->reloading_changed(
 		id(),
 		false	
 	);
@@ -345,15 +325,7 @@ sanguis::server::entities::entity_with_weapon::stop_attacking()
 	if(!attacking)
 		return;
 	
-	/*
-	send(
-		message_convert::stop_attacking(
-			*this
-		)
-	);
-	*/
-
-	environment().reload_changed(
+	environment()->reloading_changed(
 		id(),
 		true
 	);
@@ -363,7 +335,8 @@ sanguis::server::entities::entity_with_weapon::stop_attacking()
 
 void
 sanguis::server::entities::entity_with_weapon::attack_speed_change(
-	property::value_type const v)
+	property::value_type const v
+)
 {
 	if(has_weapon())
 		active_weapon().attack_speed(v);
@@ -371,7 +344,8 @@ sanguis::server::entities::entity_with_weapon::attack_speed_change(
 
 void
 sanguis::server::entities::entity_with_weapon::reload_speed_change(
-	property::value_type const v)
+	property::value_type const v
+)
 {
 	if(has_weapon())
 		active_weapon().reload_speed(v);

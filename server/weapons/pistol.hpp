@@ -20,7 +20,6 @@ namespace weapons
 class pistol : public weapon {
 public:
 	pistol(
-		server::environment::object_ptr,
 		weapon_type::type,
 		weapons::base_cooldown,
 		weapons::damage,

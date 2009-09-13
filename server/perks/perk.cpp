@@ -2,7 +2,8 @@
 #include "../../exception.hpp"
 #include <sge/text.hpp>
 
-void sanguis::server::perks::perk::raise_level()
+void
+sanguis::server::perks::perk::raise_level()
 {
 	if(!can_raise_level())
 		throw exception(
@@ -20,7 +21,8 @@ sanguis::server::perks::perk::~perk()
 {}
 
 sanguis::server::perks::perk::perk(
-	perk_type::type const type_)
+	perk_type::type const type_
+)
 :
 	type_(type_),
 	level_(1)
@@ -35,7 +37,8 @@ sanguis::server::perks::perk::level() const
 void sanguis::server::perks::perk::apply(
 	entities::entity &e,
 	time_type const time,
-	environment const &env)
+	environment::object_ptr const env
+)
 {
 	do_apply(
 		e,

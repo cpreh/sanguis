@@ -28,10 +28,11 @@ sanguis::server::entities::pickups::pickup::ptype() const
 
 sanguis::server::entities::pickups::pickup::pickup(
 	pickup_type::type const ptype_,
-	server::environment const &env,
+	server::environment::object_ptr const env,
 	pos_type const &center,
 	team::type const team_,
-	optional_dim const &dim_)
+	optional_dim const &dim_
+)
 :
 	entity(
 		base_parameters(

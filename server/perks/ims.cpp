@@ -12,7 +12,8 @@ sanguis::server::perks::ims::ims()
 void sanguis::server::perks::ims::do_apply(
 	entities::entity &e,
 	time_type,
-	environment const &)
+	environment::object_ptr
+)
 {
 	e.property(
 		entities::property_type::movement_speed)

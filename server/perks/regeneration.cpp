@@ -9,10 +9,12 @@ sanguis::server::perks::regeneration::regeneration()
 	)
 {}
 
-void sanguis::server::perks::regeneration::do_apply(
+void
+sanguis::server::perks::regeneration::do_apply(
 	entities::entity &e,
 	time_type,
-	environment const &)
+	environment::object_ptr
+)
 {
 	e.property(
 		entities::property_type::health_regeneration

@@ -44,6 +44,11 @@ public:
 	update(
 		time_type
 	);
+
+	entities::entity & 
+	insert(
+		entities::auto_ptr
+	);
 private:
 	friend class environment;
 
@@ -97,11 +102,6 @@ private:
 	void
 	remove_player(
 		player_id
-	);
-
-	entities::entity & 
-	insert(
-		entities::auto_ptr
 	);
 
 	sge::collision::world_ptr const

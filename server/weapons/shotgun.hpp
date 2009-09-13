@@ -18,7 +18,6 @@ namespace weapons
 class shotgun : public weapon {
 public:
 	shotgun(
-		server::environment::object_ptr,
 		weapon_type::type,
 		weapons::base_cooldown,
 		space_unit spread_radius,

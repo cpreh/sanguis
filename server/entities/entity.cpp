@@ -101,10 +101,16 @@ sanguis::server::entities::entity::entity(
 
 void
 sanguis::server::entities::entity::environment(
-	server::environment const &nenvironment
+	server::environment::object_ptr const nenvironment
 )
 {
 	environment_ = nenvironment;
+}
+
+sanguis::server::environment::object_ptr const
+sanguis::server::entities::entity::environment() const
+{
+	return environment_;
 }
 
 sanguis::entity_id

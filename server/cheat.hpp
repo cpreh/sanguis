@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_CHEAT_HPP_INCLUDED
 #define SANGUIS_SERVER_CHEAT_HPP_INCLUDED
 
-#include "environment/object_ptr.hpp"
 #include "entities/player_fwd.hpp"
 #include "../cheat_type.hpp"
 
@@ -13,8 +12,7 @@ namespace server
 void
 cheat(
 	entities::player &,
-	cheat_type::type,
-	environment::object_ptr
+	cheat_type::type
 );
 
 }

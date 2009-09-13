@@ -212,6 +212,39 @@ sanguis::server::world::object::update(
 	}
 }
 
+sanguis::server::entities::entity &
+sanguis::server::world::object::insert(
+	entities::auto_ptr e
+)
+{
+	entity_id const id(
+		e->id()
+	);
+
+	e->environment(
+		environment_
+	);
+
+	std::pair<
+		entity_map::iterator,
+		bool
+	> const ret(
+		entities_.insert(
+			id,
+			e
+		)
+	);
+
+	if(
+		!ret.second
+	)
+		throw exception(
+			SGE_TEXT("Double insert of entity!")
+		);
+	
+	return *ret.first->second;
+}
+
 void
 sanguis::server::world::object::weapon_changed(
 	entity_id const id,
@@ -416,39 +449,6 @@ sanguis::server::world::object::remove_player(
 	sight_ranges_.erase(
 		player_id_
 	);
-}
-
-sanguis::server::entities::entity &
-sanguis::server::world::object::insert(
-	entities::auto_ptr e
-)
-{
-	entity_id const id(
-		e->id()
-	);
-
-	e->environment(
-		environment_
-	);
-
-	std::pair<
-		entity_map::iterator,
-		bool
-	> const ret(
-		entities_.insert(
-			id,
-			e
-		)
-	);
-
-	if(
-		!ret.second
-	)
-		throw exception(
-			SGE_TEXT("Double insert of entity!")
-		);
-	
-	return *ret.first->second;
 }
 
 sge::collision::world_ptr const

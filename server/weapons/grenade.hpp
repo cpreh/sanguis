@@ -19,7 +19,6 @@ namespace weapons
 class grenade : public weapon {
 public:
 	grenade(
-		server::environment::object_ptr,
 		weapon_type::type,
 		weapons::base_cooldown,
 		weapons::damage,

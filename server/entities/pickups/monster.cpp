@@ -4,7 +4,7 @@
 #include "../property.hpp"
 #include "../../ai/simple.hpp"
 #include "../../weapons/melee.hpp"
-#include "../../environment.hpp"
+#include "../../environment/object.hpp"
 #include "../../damage/no_armor.hpp"
 #include "../../damage/list.hpp"
 #include "../../../load/friend_name.hpp"
@@ -16,7 +16,7 @@
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::pickups::monster::monster(
-	server::environment const &env,
+	server::environment::object_ptr const env,
 	pos_type const &center,
 	team::type const team_,
 	friend_type::type const ftype)
@@ -31,10 +31,12 @@ sanguis::server::entities::pickups::monster::monster(
 	ftype(ftype)
 {}
 
-void sanguis::server::entities::pickups::monster::do_pickup(
-	entity_with_weapon &receiver)
+void
+sanguis::server::entities::pickups::monster::do_pickup(
+	entity_with_weapon &receiver
+)
 {
-	insert(
+	environment()->insert(
 		entities::auto_ptr(
 			new entities::friend_(
 				ftype,
@@ -64,7 +66,6 @@ void sanguis::server::entities::pickups::monster::do_pickup(
 				),
 				weapons::auto_ptr(
 					new weapons::melee(
-						environment(),
 						weapons::range(100),
 						weapons::base_cooldown(1),
 						weapons::damage(5)

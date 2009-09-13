@@ -8,7 +8,6 @@
 #include <boost/tr1/random.hpp>
 
 sanguis::server::weapons::shotgun::shotgun(
-	server::environment::object_ptr const env,
 	weapon_type::type const type_,
 	weapons::base_cooldown const base_cooldown_,
 	space_unit const spread_radius,
@@ -19,7 +18,6 @@ sanguis::server::weapons::shotgun::shotgun(
 )
 :
 	weapon(
-		env,
 		type_,
 		weapons::range(1000), // FIXME
 		magazine_size_,
@@ -58,10 +56,10 @@ void sanguis::server::weapons::shotgun::do_attack(
 	for(
 		unsigned i = 0; i < shells; ++i
 	)
-		environment()->insert(
+		a.environment()->insert(
 			entities::auto_ptr(
 				new entities::projectiles::simple_bullet(
-					environment(),
+					a.environment(),
 					a.spawn_point(),
 					rng(),
 					a.team(),

@@ -18,7 +18,6 @@ namespace weapons
 class sentry : public weapon {
 public:
 	sentry(
-		server::environment::object_ptr,
 		weapon_type::type,
 		weapons::base_cooldown,
 		weapons::cast_point,

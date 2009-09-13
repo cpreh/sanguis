@@ -51,6 +51,7 @@ sanguis::server::weapons::states::castpoint::react(
 			e.owner().center(),
 			e.owner().angle(),
 			e.owner().team(),
+			e.owner().environment(),
 			*attack_dest
 		)
 	);

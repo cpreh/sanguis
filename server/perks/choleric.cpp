@@ -1,5 +1,5 @@
 #include "choleric.hpp"
-#include "../environment.hpp"
+#include "../environment/object.hpp"
 #include "../entities/projectiles/simple_bullet.hpp"
 #include "../entities/projectiles/rocket.hpp"
 #include <sge/time/second_f.hpp>
@@ -33,7 +33,8 @@ void
 sanguis::server::perks::choleric::do_apply(
 	entities::entity &e,
 	time_type const time,
-	environment const &env)
+	environment::object_ptr const env
+)
 {
 	clock_.update(time);
 
@@ -47,7 +48,7 @@ sanguis::server::perks::choleric::do_apply(
 	);
 
 	for(unsigned i = 0; i < max; ++i)
-		env.insert()(
+		env->insert(
 			can_raise_level()
 			?
 				entities::auto_ptr(

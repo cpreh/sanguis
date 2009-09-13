@@ -3,6 +3,7 @@
 
 #include "../player_id.hpp"
 #include "../entities/player_fwd.hpp"
+#include <sge/container/map_fwd.hpp>
 #include <map>
 
 namespace sanguis
@@ -13,9 +14,10 @@ namespace global
 {
 
 typedef sge::container::map<
-	std::map,
-	player_id,
-	server::entities::player *
+	std::map<
+		player_id,
+		server::entities::player *
+	>
 > player_map;
 
 }

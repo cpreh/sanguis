@@ -9,10 +9,12 @@ sanguis::server::perks::ias::ias()
 	)
 {}
 
-void sanguis::server::perks::ias::do_apply(
+void
+sanguis::server::perks::ias::do_apply(
 	entities::entity &e,
 	time_type,
-	environment const &)
+	environment::object_ptr
+)
 {
 	e.property(
 		entities::property_type::attack_speed)

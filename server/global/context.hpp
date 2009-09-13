@@ -5,8 +5,23 @@
 #include "player_map.hpp"
 #include "world_context_fwd.hpp"
 #include "../world/map.hpp"
+#include "../world/context_fwd.hpp"
+#include "../entities/auto_ptr.hpp"
+#include "../unicast_callback.hpp"
+#include "../string.hpp"
+#include "../player_id.hpp"
+#include "../pos_type.hpp"
+#include "../space_unit.hpp"
+#include "../../connect_state.hpp"
+#include "../../weapon_type.hpp"
 #include "../../world_id.hpp"
+#include "../../perk_type.hpp"
+#include "../../time_type.hpp"
 #include "../../messages/auto_ptr.hpp"
+#include <sge/log/logger_fwd.hpp>
+#include <sge/container/map_decl.hpp>
+#include <sge/collision/system_fwd.hpp>
+#include <sge/shared_ptr.hpp>
 #include <sge/noncopyable.hpp>
 
 namespace sanguis
@@ -30,7 +45,8 @@ public:
 	insert_player(
 		world_id,
 		player_id,
-		string const &name
+		string const &name,
+		connect_state::type
 	);
 
 	void
@@ -55,6 +71,12 @@ public:
 	player_change_shooting(
 		player_id,
 		bool shooting
+	);
+
+	void
+	player_direction(
+		player_id,
+		pos_type const &
 	);
 
 	void
@@ -89,8 +111,23 @@ private:
 		entities::auto_ptr
 	);
 
+	server::world::object &
+	world(
+		world_id
+	);
+
+	static sge::log::logger &
+	log();
+
+	unicast_callback const send_unicast_;
+	
 	world::map worlds_;
+	
 	player_map players_;
+
+	sge::shared_ptr<
+		world::context
+	> const world_context_;
 };
 
 }

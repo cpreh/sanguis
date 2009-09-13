@@ -23,7 +23,6 @@ sanguis::server::entities::player_auto_ptr
 sanguis::server::create_player(
 	string const &name,
 	unicast_callback const &send_to_player,
-	environment::object_ptr const env,
 	connect_state::type const current_state,
 	net::id_type const net_id
 )
@@ -37,7 +36,7 @@ sanguis::server::create_player(
 		sge::make_auto_ptr<
 			entities::player
 		>(
-			env,
+			environment::object_ptr(),
 			damage::no_armor(),
 			pos_type(
 				static_cast<space_unit>(resolution().w()/2),
@@ -77,8 +76,7 @@ sanguis::server::create_player(
 	// TODO: some defaults here
 	new_player->add_weapon(
 		weapons::create(
-			weapon_type::pistol,
-			env
+			weapon_type::pistol
 		)
 	);
 

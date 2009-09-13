@@ -5,7 +5,6 @@
 #include "../environment/object.hpp"
 
 sanguis::server::weapons::rocket_launcher::rocket_launcher(
-	server::environment::object_ptr const env,
 	weapon_type::type const type_,
 	weapons::base_cooldown const base_cooldown_,
 	weapons::damage const damage_,
@@ -15,7 +14,6 @@ sanguis::server::weapons::rocket_launcher::rocket_launcher(
 )
 :
 	weapon(
-		env,
 		type_,
 		weapons::range(1000), // FIXME
 		magazine_size_,
@@ -35,10 +33,10 @@ sanguis::server::weapons::rocket_launcher::do_attack(
 	delayed_attack const &a
 )
 {
-	environment()->insert(
+	a.environment()->insert(
 		entities::auto_ptr(
 			new entities::projectiles::rocket(
-				environment(),
+				a.environment(),
 				a.spawn_point(),
 				a.angle(),
 				a.team(),

@@ -3,7 +3,7 @@
 #include <sge/optional_impl.hpp>
 
 sanguis::server::entities::pickups::health::health(
-	server::environment const &env,
+	server::environment::object_ptr const env,
 	pos_type const &center,
 	team::type const team_,
 	health_type const amount)

@@ -12,8 +12,7 @@
 
 sanguis::server::weapons::auto_ptr
 sanguis::server::weapons::create(
-	weapon_type::type const type,
-	environment::object_ptr const env
+	weapon_type::type const type
 )
 {
 	switch(type) {
@@ -24,7 +23,6 @@ sanguis::server::weapons::create(
 	case weapon_type::pistol:
 		return auto_ptr(
 			new pistol(
-				env,
 				type,
 				base_cooldown(0.5f),
 				damage(5),
@@ -37,7 +35,6 @@ sanguis::server::weapons::create(
 	case weapon_type::dual_pistol:
 		return auto_ptr(
 			new pistol(
-				env,
 				type,
 				base_cooldown(0.33f),
 				damage(5),
@@ -50,7 +47,6 @@ sanguis::server::weapons::create(
 	case weapon_type::shotgun:
 		return auto_ptr(
 			new shotgun(
-				env,
 				type,
 				base_cooldown(1),
 				static_cast<space_unit>(0.2), // spread radius
@@ -63,7 +59,6 @@ sanguis::server::weapons::create(
 	case weapon_type::rocket_launcher:
 		return auto_ptr(
 			new rocket_launcher(
-				env,
 				type,
 				base_cooldown(0.8f),
 				damage(9),
@@ -75,7 +70,6 @@ sanguis::server::weapons::create(
 	case weapon_type::grenade:
 		return auto_ptr(
 			new grenade(
-				env,
 				type,
 				base_cooldown(0.7f),
 				damage(20),
@@ -87,7 +81,6 @@ sanguis::server::weapons::create(
 	case weapon_type::sentry:
 		return auto_ptr(
 			new sentry(
-				env,
 				type,
 				base_cooldown(5),
 				cast_point(2),
@@ -95,7 +88,6 @@ sanguis::server::weapons::create(
 				boost::phoenix::new_<
 					weapons::pistol
 				>(
-					env,
 					weapon_type::pistol,
 					base_cooldown(0.3f),
 					damage(2),

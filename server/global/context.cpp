@@ -1,19 +1,37 @@
 #include "context.hpp"
 #include "world_context.hpp"
+#include "../entities/player.hpp"
+#include "../entities/auto_ptr.hpp"
+#include "../world/object.hpp"
+#include "../perks/factory.hpp"
+#include "../weapons/weapon.hpp"
+#include "../create_player.hpp"
+#include "../send_available_perks.hpp"
+#include "../log.hpp"
+#include <sge/log/headers.hpp>
+#include <sge/container/map_impl.hpp>
+#include <sge/math/vector/is_null.hpp>
+#include <sge/math/vector/to_angle.hpp>
 #include <sge/make_shared_ptr.hpp>
+#include <sge/text.hpp>
+#include <boost/tr1/functional.hpp>
+#include <boost/foreach.hpp>
 
 sanguis::server::global::context::context(
-	unicast_callback const &send_unicast_
+	unicast_callback const &send_unicast_,
+	sge::collision::system_ptr const collision_system_
 )
 :
-	send_unicast_(send_unicast_)
+	send_unicast_(send_unicast_),
 	worlds_(),
 	players_(),
 	world_context_(
 		sge::make_shared_ptr<
 			world_context
 		>(
-			*this
+			std::tr1::ref(
+				*this
+			)
 		)
 	)
 {}
@@ -29,19 +47,18 @@ sanguis::server::global::context::insert_player(
 	connect_state::type const connect_state_
 )
 {
-	world::object &world_(
-		worlds_[
+	server::world::object &world_(
+		world(
 			world_id_
-		]
+		)	
 	);
 
 	entities::player_auto_ptr player_(
 		create_player(
-			m,
+			name,
 			send_unicast_,
-			environment(),
-			entities_,
-			connect_state_
+			connect_state_,
+			player_id_
 		)
 	);
 
@@ -49,72 +66,73 @@ sanguis::server::global::context::insert_player(
 		player_id_
 	] = player_.get();
 
-	insert_entity(
-		player_
+	world_.insert(
+		entities::auto_ptr(
+			player_
+		)
 	);
 }
 
 void
-sanguis::server::global::player_target(
+sanguis::server::global::context::player_target(
 	player_id const player_id_,
 	pos_type const &target_
 )
 {
 	players_[
 		player_id_
-	].target(
+	]->target(
 		target_
 	);
 }
 
 void
-sanguis::server::global::player_change_weapon(
+sanguis::server::global::context::player_change_weapon(
 	player_id const player_id_,
 	weapon_type::type const wt
 )
 {
 	players_[
 		player_id_
-	].change_weapon(
+	]->change_weapon(
 		wt
 	);
 }
 
 void
-sanguis::server::global::player_angle(
+sanguis::server::global::context::player_angle(
 	player_id const player_id_,
 	space_unit const angle_
 )
 {
 	players_[
 		player_id_
-	].angle(
+	]->angle(
 		angle_
 	);
 }
 
 void
-sanguis::server::global::player_change_shooting(
+sanguis::server::global::context::player_change_shooting(
 	player_id const player_id_,
 	bool const shooting
 )
 {
 	players_[
 		player_id_
-	].aggressive(
+	]->aggressive(
 		shooting
 	);
 }
 
 void
-sanguis::server::global_context::player_direction(
+sanguis::server::global::context::player_direction(
 	player_id const player_id_,
 	pos_type const &dir
 )
 {
-
 	entities::player &player_(
-		players_[
+		*players_[
 			player_id_
 		]
 	);
@@ -152,14 +170,14 @@ sanguis::server::global::context::player_choose_perk(
 )
 {
 	entities::player &player_(
-		players_[
+		*players_[
 			player_id_
 		]
 	);
 	
 	if(
 		!player_.perk_choosable(
-			perk
+			perk_type_
 		)
 	)
 	{
@@ -180,20 +198,21 @@ sanguis::server::global::context::player_choose_perk(
 	);
 	
 	send_available_perks(
-		player_
+		player_,
+		send_unicast_
 	);
 }
 
 void
-sanguis::server::global::update(
+sanguis::server::global::context::update(
 	time_type const delta
 )
 {
 	BOOST_FOREACH(
-		world_map::reference world_,
+		server::world::map::reference world_,
 		worlds_
 	)
-		world_.second.update(
+		world_.second->update(
 			delta
 		);
 }
@@ -227,9 +246,37 @@ sanguis::server::global::context::transfer_entity(
 	entities::auto_ptr entity
 )
 {
-	worlds_[
+	world(
 		destination
-	].insert(
+	).insert(
 		entity
 	);
+}
+
+sanguis::server::world::object &
+sanguis::server::global::context::world(
+	world_id const world_id_
+)
+{
+	server::world::map::iterator it(
+		worlds_.find(
+			world_id_	
+		)
+	);
+
+	// TODO: load the world here!
+
+	return *it->second;
+}
+
+sge::log::logger &
+sanguis::server::global::context::log()
+{
+	static sge::log::logger log_(
+		server::log(),
+		SGE_TEXT("global::context: "),
+		true
+	);
+
+	return log_;
 }

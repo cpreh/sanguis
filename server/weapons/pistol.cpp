@@ -6,7 +6,6 @@
 #include "../environment/object.hpp"
 
 sanguis::server::weapons::pistol::pistol(
-	server::environment::object_ptr const env,
 	weapon_type::type const type_,
 	weapons::base_cooldown const base_cooldown_,
 	weapons::damage const damage_,
@@ -17,7 +16,6 @@ sanguis::server::weapons::pistol::pistol(
 )
 :
 	weapon(
-		env,
 		type_,
 		range_,
 		magazine_size_,
@@ -36,10 +34,10 @@ sanguis::server::weapons::pistol::do_attack(
 	delayed_attack const &a
 )
 {
-	environment()->insert(
+	a.environment()->insert(
 		entities::auto_ptr(
 			new entities::projectiles::simple_bullet(
-				environment(),
+				a.environment(),
 				a.spawn_point(),
 				a.angle(),
 				a.team(),

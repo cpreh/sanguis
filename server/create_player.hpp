@@ -4,7 +4,6 @@
 #include "entities/player_auto_ptr.hpp"
 #include "string.hpp"
 #include "unicast_callback.hpp"
-#include "environment/object_ptr.hpp"
 #include "../connect_state.hpp"
 #include "../net/id_type.hpp"
 
@@ -17,7 +16,6 @@ entities::player_auto_ptr
 create_player(
 	string const &name,
 	unicast_callback const &send_to_player,
-	environment::object_ptr,
 	connect_state::type current_state,
 	net::id_type
 );

@@ -18,10 +18,13 @@ class choleric : public perk {
 public:
 	choleric();
 private:
-	void do_apply(
+	void
+	do_apply(
 		entities::entity &,
 		time_type,
-		environment const &);
+		environment::object_ptr
+	);
+
 	bool can_raise_level() const;
 
 	diff_clock       clock_;
