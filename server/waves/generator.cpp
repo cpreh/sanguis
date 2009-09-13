@@ -74,15 +74,19 @@ sanguis::server::waves::generator::generator()
 //	();
 }
 
-void sanguis::server::waves::generator::process(
+void
+sanguis::server::waves::generator::process(
 	time_type const diff,
-	environment const &env)
+	environment::object_ptr const env
+)
 {
 	for(wave_list::iterator it = waves.begin(); it != waves.end(); )
 	{
 		it->process(
 			diff,
-			env);
+			env
+		);
+
 		if(it->ended())
 			it = waves.erase(it);
 		else

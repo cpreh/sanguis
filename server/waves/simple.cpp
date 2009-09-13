@@ -27,9 +27,11 @@ sanguis::server::waves::simple::simple(
 	waves_spawned(0)
 {}
 
-void sanguis::server::waves::simple::process(
+void
+sanguis::server::waves::simple::process(
 	time_type const diff,
-	environment const &env)
+	environment::object_ptr const env
+)
 {
 	diff_.update(diff);
 
@@ -47,7 +49,8 @@ void sanguis::server::waves::simple::process(
 	for(unsigned i = 0; i < spawns_per_wave; ++i)
 		spawn(
 			env,
-			etype);
+			etype
+		);
 }
 
 bool sanguis::server::waves::simple::ended() const

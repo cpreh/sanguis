@@ -23,9 +23,11 @@ public:
 		unsigned spawns_per_wave,
 		enemy_type::type);
 private:
-	void process(
+	void
+	process(
 		time_type diff,
-		environment const &);
+		environment::object_ptr
+	);
 
 	bool ended() const;
 

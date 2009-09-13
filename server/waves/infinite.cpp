@@ -30,7 +30,8 @@ sanguis::server::waves::infinite::~infinite()
 void
 sanguis::server::waves::infinite::process(
 	time_type const diff,
-	environment const &env)
+	environment::object_ptr const env
+)
 {
 	simple_->process(
 		diff,

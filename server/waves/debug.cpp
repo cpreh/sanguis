@@ -9,7 +9,8 @@ sanguis::server::waves::debug::debug()
 void 
 sanguis::server::waves::debug::process(
 	time_type,
-	environment const &env)
+	environment::object_ptr const env
+)
 {
 	if(spawned)
 		return;

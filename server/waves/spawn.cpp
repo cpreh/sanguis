@@ -3,7 +3,7 @@
 #include "../entities/entity.hpp"
 #include "../environment/object.hpp"
 #include "../../random.hpp"
-#include "../../angle_vector.hpp"
+#include "../../angle_to_vector.hpp"
 #include "../../resolution.hpp"
 #include <sge/math/twopi.hpp>
 #include <sge/math/vector/arithmetic.hpp>

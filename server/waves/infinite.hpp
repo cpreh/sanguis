@@ -29,9 +29,11 @@ public:
 	
 	~infinite();
 private:
-	void process(
+	void
+	process(
 		time_type diff,
-		environment const &);
+		environment::object_ptr
+	);
 	
 	bool ended() const;
 
