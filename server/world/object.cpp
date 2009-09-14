@@ -8,11 +8,11 @@
 #include "../entities/entity.hpp"
 #include "../message_convert/speed.hpp"
 #include "../message_convert/rotate.hpp"
-#include "../message_convert/remove.hpp"
 #include "../message_convert/move.hpp"
 #include "../message_convert/health.hpp"
 #include "../message_convert/experience.hpp"
 #include "../../messages/create.hpp"
+#include "../../messages/remove.hpp"
 #include "../../messages/change_weapon.hpp"
 #include "../../messages/give_weapon.hpp"
 #include "../../messages/start_attacking.hpp"
@@ -98,7 +98,8 @@ sanguis::server::world::object::object(
 		>(
 			0
 		)
-	)
+	),
+	wave_gen_()
 {
 	collision_world_->test_callback(
 		boost::bind(
@@ -123,6 +124,11 @@ sanguis::server::world::object::update(
 		time_
 	);
 
+	wave_gen_.process(
+		time_,
+		environment()
+	);
+
 	if(
 		sight_range_timer_.update_b()
 	)
@@ -131,9 +137,26 @@ sanguis::server::world::object::update(
 			sight_range_map::reference ref,
 			sight_ranges_
 		)
-			ref.second.update(
-				time_
+		{
+			entity_remove_vector const removes(
+				ref.second.update(
+					time_
+				)
 			);
+
+			BOOST_FOREACH(	
+				entity_remove_vector::value_type const id,
+				removes
+			)
+				send_player_specific(
+					ref.first,
+					messages::create(
+						messages::remove(
+							id
+						)
+					)
+				);
+		}
 	}
 
 	// should we send position updates?
@@ -173,20 +196,17 @@ sanguis::server::world::object::update(
 			e.dead()
 		)
 		{
-			if(e.type() != entity_type::indeterminate)
-			{
+			if(
+				e.type() != entity_type::indeterminate
+			)
 				send_entity_specific(
 					e.id(),
 					message_convert::health(e)
 				);
-
-				send_entity_specific(
-					e.id(),
-					message_convert::remove(e)
-				);
-			}
 			
-			entities_.erase(it);
+			entities_.erase(
+				it
+			);
 
 			continue;
 		}
@@ -296,7 +316,7 @@ sanguis::server::world::object::got_weapon(
 	weapon_type::type const wt
 )
 {
-	send_player_specific(
+	send_entity_specific(
 		id,
 		messages::create(
 			messages::give_weapon(
@@ -441,30 +461,40 @@ sanguis::server::world::object::update_sight_range(
 	);
 
 	if(
-		range.add(
+		!range.add(
 			target_id_,
 			current_time_ // TODO: we have to implement this stuff in sge::chrono
 		)
 	)
-	{
-		entity_map::iterator const it(
-			entities_.find(
-				target_id_
-			)
-		);
-
-		if (
-			it == entities_.end()
+		return;
+	
+	entity_map::iterator const it(
+		entities_.find(
+			target_id_
 		)
-			throw exception(
-				SGE_TEXT("can't get entity for sight update!")
-			);
+	);
 
-		send_player_specific(
-			player_id_,
-			it->second->add_message()
+	if(
+		it == entities_.end()
+	)
+		throw exception(
+			SGE_TEXT("can't get entity for sight update!")
 		);
-	}
+
+	entities::entity &entity_(
+		*it->second
+	);
+
+	if(
+		entity_.type()
+		== entity_type::indeterminate
+	)
+		return;
+			
+	send_player_specific(
+		player_id_,
+		it->second->add_message()
+	);
 }
 
 void
@@ -524,12 +554,12 @@ sanguis::server::world::object::send_entity_specific(
 
 void
 sanguis::server::world::object::send_player_specific(
-	entity_id const player_id,
+	player_id const player_id_,
 	messages::auto_ptr msg
 )
 {
 	global_context_->send_to_player(
-		player_id,
+		player_id_,
 		msg
 	);
 }

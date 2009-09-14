@@ -110,7 +110,7 @@ private:
 
 	void
 	send_to_player(
-		world_id,
+		player_id,
 		messages::auto_ptr
 	);
 

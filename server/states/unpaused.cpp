@@ -108,12 +108,6 @@ sanguis::server::states::unpaused::operator()(
 		e.get<messages::roles::angle>()
 	);
 
-	/*send(
-		message_convert::rotate(
-			player_
-		)
-	);*/
-
 	return discard_event();
 }
 

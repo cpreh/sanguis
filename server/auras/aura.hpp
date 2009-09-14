@@ -21,31 +21,40 @@ class aura : public collision::base {
 public:
 	virtual ~aura();
 
-	void center(
-		pos_type const &);
-	void owner(
-		entity_id);
+	void
+	center(
+		pos_type const &
+	);
+
+	void
+	owner(
+		entity_id
+	);
 protected:
 	aura(
 		sge::collision::world_ptr,
 		space_unit radius,
 		team::type team,
-		influence::type);
+		influence::type
+	);
 	
 	entity_id
 	owner() const;
 private:
 	boost::logic::tribool const
 	can_collide_with(
-		collision::base const &) const;
+		collision::base const &
+	) const;
 
 	void
 	collision(
-		collision::base &);
+		collision::base &
+	);
 
 	virtual void
 	do_effect(
-		entities::entity &) = 0;
+		entities::entity &
+	) = 0;
 
 	team::type const      team_;
 	influence::type const influence_;

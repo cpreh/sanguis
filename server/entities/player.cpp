@@ -17,7 +17,7 @@ sanguis::server::entities::player::player(
 	space_unit const angle_,
 	property_map const &properties,
 	string const &name_,
-	net::id_type const net_id_
+	server::player_id const player_id_
 )
 :
 	entity_with_weapon(
@@ -38,7 +38,7 @@ sanguis::server::entities::player::player(
 		weapons::auto_ptr()
 	),
 	name_(name_),
-	net_id_(net_id_),
+	player_id_(player_id_),
 	exp_(static_cast<exp_type>(0)),
 	level_(static_cast<level_type>(0)),
 	level_delta_(static_cast<level_type>(0)),
@@ -53,11 +53,7 @@ sanguis::server::entities::player::player(
 			boost::bind(
 				&server::environment::object::update_sight_range,
 				env.get(),
-				static_cast<
-					player_id
-				>(
-					net_id_
-				), // TODO
+				player_id_,
 				_1
 			)
 		)
@@ -166,16 +162,16 @@ sanguis::server::entities::player::available_perks() const
 	return ret;
 }
 
-sanguis::net::id_type
-sanguis::server::entities::player::net_id() const
+sanguis::server::player_id const
+sanguis::server::entities::player::player_id() const
 {
-	return net_id_;
+	return player_id_;
 }
 
 void
 sanguis::server::entities::player::on_die()
 {
 	environment()->remove_player(
-		net_id_
+		player_id()
 	);
 }

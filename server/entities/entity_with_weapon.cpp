@@ -146,17 +146,6 @@ void sanguis::server::entities::entity_with_weapon::change_weapon(
 		id(),
 		weapon_
 	);
-
-	/*
-	send(
-		messages::create(
-			messages::change_weapon(
-				id(),
-				weapon_
-			)
-		)
-	);
-	*/
 }
 
 void sanguis::server::entities::entity_with_weapon::add_weapon(
@@ -199,17 +188,6 @@ void sanguis::server::entities::entity_with_weapon::add_weapon(
 		id(),
 		wt
 	);
-
-	/*
-	send(
-		messages::create(
-			messages::give_weapon(
-				id(),
-				wt
-			)
-		)
-	);
-	*/
 }
 
 void sanguis::server::entities::entity_with_weapon::remove_weapon(

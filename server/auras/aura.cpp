@@ -24,7 +24,8 @@ sanguis::server::auras::aura::center(
 
 void
 sanguis::server::auras::aura::owner(
-	entity_id const nowner)
+	entity_id const nowner
+)
 {
 	owner_ = nowner;
 }
@@ -59,7 +60,8 @@ sanguis::server::auras::aura::owner() const
 
 boost::logic::tribool const
 sanguis::server::auras::aura::can_collide_with(
-	collision::base const &o) const
+	collision::base const &o
+) const
 {
 	entities::entity const *const entity(
 		dynamic_cast<entities::entity const *>(&o)
@@ -78,7 +80,6 @@ sanguis::server::auras::aura::can_collide_with(
 			)
 		);
 }
-
 
 void
 sanguis::server::auras::aura::collision(

@@ -45,7 +45,7 @@ sanguis::server::ai::simple::bind(
 			auras::aggro
 		>(
 			me_->environment()->collision_world(),
-			1000, // FIXME
+			10, // FIXME
 			me_->team(),
 			boost::bind(
 				&simple::potential_target,
@@ -71,13 +71,18 @@ sanguis::server::ai::simple::update(
 		time
 	);
 
-	if(!target_)
-		return;
-	
 	entities::entity_with_weapon &me(
 		*me_
 	);
 
+	if(!target_)
+	{
+		me.aggressive(
+			false
+		);
+		return;
+	}
+	
 	entities::property &speed(
 		me.property(
 			entities::property_type::movement_speed
@@ -110,6 +115,10 @@ sanguis::server::ai::simple::update(
 		);
 	else
 		speed.current_to_max();
+
+	me.aggressive(
+		true
+	);
 
 	me.target(
 		target_->center()

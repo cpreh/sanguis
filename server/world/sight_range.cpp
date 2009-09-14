@@ -11,11 +11,13 @@ sanguis::server::world::sight_range::sight_range()
 	)
 {}
 
-void
+sanguis::server::world::entity_remove_vector const
 sanguis::server::world::sight_range::update(
 	time_type const time_
 )
 {
+	entity_remove_vector ret;
+
 	for(
 		sight_range_entry_set::iterator it(
 			entries_.begin()
@@ -32,10 +34,18 @@ sanguis::server::world::sight_range::update(
 				time_
 			)
 		)
+		{
+			ret.push_back(
+				it->id()
+			);
+
 			entries_.erase(
 				it
 			);
+		}
 	}
+
+	return ret;
 }
 
 bool

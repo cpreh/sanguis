@@ -8,8 +8,8 @@
 #include "../level_type.hpp"
 #include "../string.hpp"
 #include "../exp_type.hpp"
+#include "../player_id.hpp"
 #include "../../perk_type.hpp"
-#include "../../net/id_type.hpp"
 
 namespace sanguis
 {
@@ -28,7 +28,7 @@ public:
 		space_unit angle,
 		property_map const &,
 		string const &name,
-		net::id_type
+		server::player_id
 	);
 
 	// own functions
@@ -51,14 +51,14 @@ public:
 	perks::list const
 	available_perks() const;
 
-	net::id_type
-	net_id() const;
+	server::player_id const
+	player_id() const;
 private:
 	void
 	on_die();
 
 	string const name_;
-	net::id_type const net_id_;
+	server::player_id const player_id_;
 	exp_type exp_;
 	level_type
 		level_,

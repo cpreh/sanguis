@@ -16,7 +16,7 @@ sanguis::server::send_available_perks(
 	);
 
 	send(
-		p.net_id(),
+		p.player_id(),
 		messages::create(
 			messages::available_perks(
 				p.id(),

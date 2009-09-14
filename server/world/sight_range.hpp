@@ -4,6 +4,7 @@
 #include "sight_range_fwd.hpp"
 #include "sight_range_entry_set.hpp"
 #include "sight_range_entry.hpp"
+#include "entity_remove_vector.hpp"
 #include "../../time_type.hpp"
 
 namespace sanguis
@@ -17,7 +18,7 @@ class sight_range {
 public:
 	sight_range();
 
-	void
+	entity_remove_vector const	
 	update(
 		time_type
 	);

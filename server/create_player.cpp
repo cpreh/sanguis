@@ -25,7 +25,7 @@ sanguis::server::create_player(
 	string const &name,
 	unicast_callback const &send_to_player,
 	connect_state::type const current_state,
-	net::id_type const net_id
+	player_id const player_id_ 
 )
 {
 	
@@ -60,12 +60,12 @@ sanguis::server::create_player(
 					)
 				),
 			name,
-			net_id
+			player_id_
 		)
 	);
 
 	send_to_player(
-		net_id,
+		player_id_,
 		messages::create(
 			messages::assign_id(
 				new_player->id(),
@@ -82,14 +82,14 @@ sanguis::server::create_player(
 	);
 
 	send_to_player(
-		net_id,
+		player_id_,
 		message_convert::experience(
 			*new_player
 		)
 	);
 
 	send_to_player(
-		net_id,
+		player_id_,
 		message_convert::level_up(
 			*new_player
 		)
