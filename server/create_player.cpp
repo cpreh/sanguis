@@ -21,6 +21,7 @@
 
 sanguis::server::entities::player_auto_ptr
 sanguis::server::create_player(
+	environment::object_ptr const env,
 	string const &name,
 	unicast_callback const &send_to_player,
 	connect_state::type const current_state,
@@ -36,7 +37,7 @@ sanguis::server::create_player(
 		sge::make_auto_ptr<
 			entities::player
 		>(
-			environment::object_ptr(),
+			env,
 			damage::no_armor(),
 			pos_type(
 				static_cast<space_unit>(resolution().w()/2),

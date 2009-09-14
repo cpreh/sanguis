@@ -60,6 +60,7 @@ sanguis::server::global::context::insert_player(
 
 	entities::player_auto_ptr player_(
 		create_player(
+			world_.environment(),
 			name,
 			send_unicast_,
 			connect_state_,

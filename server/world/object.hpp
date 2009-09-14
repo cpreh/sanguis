@@ -53,6 +53,9 @@ public:
 	insert(
 		entities::auto_ptr
 	);
+
+	server::environment::object_ptr const
+	environment() const;
 private:
 	friend class environment;
 

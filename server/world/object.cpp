@@ -267,6 +267,12 @@ sanguis::server::world::object::insert(
 	return *ret.first->second;
 }
 
+sanguis::server::environment::object_ptr const
+sanguis::server::world::object::environment() const
+{
+	return environment_;
+}
+
 void
 sanguis::server::world::object::weapon_changed(
 	entity_id const id,
