@@ -223,7 +223,7 @@ try
 				sge::texture::add_image(
 					texman,
 					sys.image_loader()->load(
-						sanguis::media_path() / SGE_TEXT("console_back.jpg")
+						sanguis::media_path() / SGE_TEXT("console_back.png")
 					)
 				)
 			)

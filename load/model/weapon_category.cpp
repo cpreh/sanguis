@@ -59,7 +59,10 @@ sanguis::load::model::animation const &
 sanguis::load::model::weapon_category::operator[](
 	animation_type::type const anim) const
 {
-	animation_map::const_iterator const it(animations.find(anim));
+	animation_map::const_iterator const 
+		it(
+			animations.find(
+				anim));
 	if(it != animations.end())
 		return it->second;
 
@@ -67,8 +70,24 @@ sanguis::load::model::weapon_category::operator[](
 		throw exception(
 			SGE_TEXT("Default animation not found in TODO")
 		);
+		
 	throw base_animation_not_found(
 		anim);
+}
+
+sanguis::animation_state::type sanguis::load::model::weapon_category::state(
+	animation_type::type const anim) const
+{
+	animation_map::const_iterator const 
+		it(
+			animations.find(
+				anim));
+	if(it == animations.end())
+		return animation_state::not_found;
+	return 
+		it->second.update()
+		? animation_state::loaded
+		: animation_state::loading;
 }
 
 sanguis::load::model::weapon_category::weapon_category(

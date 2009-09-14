@@ -5,6 +5,7 @@
 #include "animation.hpp"
 #include "global_parameters_fwd.hpp"
 #include "../../animation_type.hpp"
+#include "../../animation_state.hpp"
 #include <sge/parse/json/object_fwd.hpp>
 #include <map>
 
@@ -19,6 +20,8 @@ class weapon_category {
 public:
 	animation const &
 	operator[](
+		animation_type::type) const;
+	animation_state::type state(
 		animation_type::type) const;
 private:
 	explicit weapon_category(

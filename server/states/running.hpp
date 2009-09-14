@@ -38,12 +38,6 @@ public:
 		message_event
 	> reactions;
 
-/*
-	typedef std::vector<
-		server::player_record
-	> player_record_vector;
-*/
-
 	explicit running(
 		my_context
 	);

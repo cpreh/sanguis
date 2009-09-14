@@ -166,7 +166,7 @@ sanguis::client::menu::object::object(
 				>(
 					_sys.renderer()->create_texture(
 						_sys.image_loader()->load(
-							media_path() / SGE_TEXT("dirt_tile.jpg")
+							media_path() / SGE_TEXT("dirt_tile.png")
 						)->view(),
 						sge::renderer::filter::linear,
 						sge::renderer::resource_flags::none

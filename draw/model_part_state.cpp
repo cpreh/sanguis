@@ -7,10 +7,11 @@
 #include "../animation_sound_type.hpp"
 #include "../resolution.hpp"
 #include <sge/audio/sound.hpp>
+#include <sge/math/dim/structure_cast.hpp>
 
 sanguis::draw::model_part_state::model_part_state(
 	load::model::part const &part_,
-	model_part const &_ref,
+	model_part &_ref,
 	animation_type::type const animation_type_,
 	weapon_type::type const weapon_type_)
 :
@@ -21,7 +22,8 @@ sanguis::draw::model_part_state::model_part_state(
 	send(anim_.sounds()[animation_sound_type::end]),
 	animation_type_(animation_type_),
 	weapon_type_(weapon_type_),
-	start_played_(false)
+	start_played_(false),
+	loaded_(false)
 {
 	init_sound(sstart);
 	init_sound(srunning);
@@ -44,6 +46,22 @@ sanguis::draw::model_part_state::weapon_type() const
 
 void sanguis::draw::model_part_state::update()
 {
+	if (!loaded_ && anim_.update())
+	{
+		loaded_ = true;
+
+		model_part::animation_auto_ptr a(
+			ref_.get_animation(
+				weapon_type_,
+				animation_type_));
+		ref_.animation_.take(
+			a);
+		ref_.ref_->size() = 
+			sge::math::dim::structure_cast<sge::sprite::dim>(
+				ref_.animation_->dim());
+		ref_.ended_ = false;
+	}
+	
 	update_sounds();
 
 	if (!sstart || 

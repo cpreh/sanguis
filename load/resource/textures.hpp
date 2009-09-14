@@ -2,6 +2,7 @@
 #define SANGUIS_LOAD_RESOURCE_TEXTURES_HPP_INCLUDED
 
 #include "texture_identifier.hpp"
+#include "texture_context_fwd.hpp"
 #include <sge/texture/part_fwd.hpp>
 #include <sge/texture/manager.hpp>
 #include <sge/renderer/device_fwd.hpp>
@@ -24,7 +25,7 @@ public:
 	load(
 		texture_identifier const &) const;
 
-	sge::texture::part_ptr const
+	texture_context_ptr const
 	load(
 		sge::filesystem::path const &) const;
 	
@@ -37,7 +38,7 @@ private:
 	do_load(
 		texture_identifier const &) const;
 	
-	sge::texture::part_ptr const
+	texture_context_ptr const
 	do_load_unnamed(
 		sge::filesystem::path const &) const;
 
@@ -56,7 +57,7 @@ private:
 
 	typedef std::map<
 		sge::filesystem::path,
-		sge::texture::part_ptr
+		texture_context_ptr
 	> unnamed_texture_map;
 
 	typedef std::map<

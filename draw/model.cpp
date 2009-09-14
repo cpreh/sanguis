@@ -250,7 +250,7 @@ void sanguis::draw::model::change_animation(
 	{
 		animation_type::type part_anim(
 			nanim);
-		while(!p.animation(part_anim))
+		while(p.animation(part_anim) == animation_state::not_found)
 			part_anim = fallback_anim(part_anim);
 	}
 }

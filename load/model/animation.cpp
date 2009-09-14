@@ -1,4 +1,5 @@
 #include "animation.hpp"
+#include "../resource/texture_context.hpp"
 #include "animation_sound.hpp"
 #include "global_parameters.hpp"
 #include "find_texture.hpp"
@@ -24,6 +25,7 @@
 #include <sge/log/headers.hpp>
 #include <sge/exception.hpp>
 #include <sge/text.hpp>
+#include <sge/cerr.hpp>
 #include <sge/lexical_cast.hpp>
 #include <boost/foreach.hpp>
 
@@ -98,19 +100,16 @@ load_delay(
 
 sanguis::load::model::animation::animation(
 	sge::parse::json::object const &object,
-	global_parameters const &param)
+	global_parameters const &_param)
 :
-	anim(
-		sge::make_shared_ptr<
-			sge::sprite::animation_series
-		>()
-	),
+	param_(
+		_param),
+	members_(
+		object.members),
+	context_(),
+	anim(),
 	sounds_()
 {
-	sge::parse::json::member_vector const &members(
-		object.members
-	);
-
 	try
 	{
 		sounds_ = sge::make_shared_ptr<
@@ -119,10 +118,10 @@ sanguis::load::model::animation::animation(
 			sge::parse::json::find_member<
 				sge::parse::json::object
 			>(
-				members,
+				members_,
 				SGE_TEXT("sounds")
 			).members,
-			param.sounds()
+			param_.sounds()
 		);
 	}
 	catch(sge::exception const &)
@@ -133,9 +132,9 @@ sanguis::load::model::animation::animation(
 	}
 
 	optional_texture_identifier const texture(
-		param.new_texture(
+		param_.new_texture(
 			find_texture(
-				members
+				members_
 			)
 		).texture()
 	);
@@ -143,20 +142,47 @@ sanguis::load::model::animation::animation(
 	if(!texture)
 		throw exception(
 			SGE_TEXT("texture not found in ")
-			+ param.path().string()
+			+ param_.path().string()
 		);
 
-	sge::texture::part_ptr const tex(
-		param.textures().load(
-			param.path() / *texture
-		)
-	);
+	sge::cerr << "creating texture context for animation\n";
+	context_ = 
+		param_.textures().load(
+			param_.path() / *texture);
+	//update(); // DEBUG
+}
+
+sge::sprite::animation_series const &
+sanguis::load::model::animation::get() const
+{
+	return *anim;
+}
+
+sanguis::load::model::animation_sound const &
+sanguis::load::model::animation::sounds() const
+{
+	return *sounds_;
+}
+
+bool sanguis::load::model::animation::update() const
+{
+	if (anim)
+		return true;
+	if (!context_->update())
+		return false;
+	
+	anim.reset(
+		new sge::sprite::animation_series());
+
+	// TODO: let the context return sge::image::file_ptr instead and convert to part_ptr here
+	sge::texture::part_ptr const tex = 
+		context_->result();
 
 	sge::parse::json::element_vector const &range(
 		sge::parse::json::find_member<
 			sge::parse::json::array
 		>(
-			members,
+			members_,
 			SGE_TEXT("range")
 		).elements
 	);
@@ -184,8 +210,8 @@ sanguis::load::model::animation::animation(
 
 	sge::time::unit const delay(
 		load_delay(
-			members,
-			param.delay()
+			members_,
+			param_.delay()
 		)
 	);
 	sge::renderer::lock_rect const area(
@@ -197,7 +223,7 @@ sanguis::load::model::animation::animation(
 		sge::renderer::lock_rect const cur_area(
 			calc_rect(
 				area,
-				param.cell_size(),
+				param_.cell_size(),
 				i
 			)
 		);
@@ -234,16 +260,5 @@ sanguis::load::model::animation::animation(
 			)
 		);
 	}
-}
-
-sge::sprite::animation_series const &
-sanguis::load::model::animation::get() const
-{
-	return *anim;
-}
-
-sanguis::load::model::animation_sound const &
-sanguis::load::model::animation::sounds() const
-{
-	return *sounds_;
+	return true;
 }
