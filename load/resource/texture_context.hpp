@@ -8,6 +8,7 @@
 #include <sge/filesystem/path.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image/loader_fwd.hpp>
+#include <sge/image/file_fwd.hpp>
 #include <sge/renderer/filter/texture.hpp>
 #include <sge/texture/part_fwd.hpp>
 
@@ -29,16 +30,18 @@ public:
 	bool update();
 	sge::texture::part_ptr const result();
 private:
-	sge::thread::future::packaged_task<sge::texture::part_ptr> task_;
-	sge::thread::future::shared_object<sge::texture::part_ptr> future_;
+	typedef sge::image::file_ptr future_value;
+	sge::thread::future::packaged_task<future_value> task_;
+	sge::thread::future::shared_object<future_value> future_;
 	//sge::thread::object thread_;
+	sge::image::file_ptr image_result_;
 	sge::texture::part_ptr debug_result_;
+	sge::renderer::device_ptr rend_;
+	sge::renderer::filter::texture filter_;
 
-	sge::texture::part_ptr const task(
+	future_value const task(
 		sge::filesystem::path const &,
-		sge::renderer::device_ptr,
-		sge::image::loader_ptr,
-		sge::renderer::filter::texture);
+		sge::image::loader_ptr);
 };
 }
 }
