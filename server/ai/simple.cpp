@@ -1,18 +1,25 @@
 #include "simple.hpp"
+#include "../auras/aggro.hpp"
+#include "../environment/object.hpp"
 #include "../entities/entity_with_weapon.hpp"
+#include "../entities/entity.hpp"
 #include "../entities/property.hpp"
 #include "../collision/collides.hpp"
+#include "../collision/distance.hpp"
 #include <sge/time/second.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/math/vector/angle_between.hpp>
+#include <sge/make_auto_ptr.hpp>
 #include <sge/optional.hpp>
+#include <sge/assert.hpp>
+#include <boost/bind.hpp>
 
 sanguis::server::ai::simple::simple(
 	entities::auto_weak_link owner_
 )
 :
 	me_(0),
-	target(),
+	target_(),
 	owner_(owner_),
 	diff_clock_(),
 	search_new_target_timer(
@@ -29,7 +36,28 @@ sanguis::server::ai::simple::bind(
 	entities::entity_with_weapon &me
 )
 {
+	SGE_ASSERT(!me_);
+
 	me_ = &me;
+
+	auras::auto_ptr new_aura(
+		sge::make_auto_ptr<
+			auras::aggro
+		>(
+			me_->environment()->collision_world(),
+			1000, // FIXME
+			me_->team(),
+			boost::bind(
+				&simple::potential_target,
+				this,
+				_1
+			)
+		)
+	);
+
+	me_->add_aura(
+		new_aura
+	);
 }
 
 void
@@ -37,16 +65,18 @@ sanguis::server::ai::simple::update(
 	time_type const time
 )
 {
-#if 0
+	SGE_ASSERT(me_);
+
 	diff_clock_.update(
 		time
 	);
 
-	if(!me_)
+	if(!target_)
 		return;
 	
 	entities::entity_with_weapon &me(
-		*me_);
+		*me_
+	);
 
 	entities::property &speed(
 		me.property(
@@ -54,31 +84,10 @@ sanguis::server::ai::simple::update(
 		)
 	);
 
-	if(/*search_new_target_timer.update_b() ||*/ !target)
-	{
-		target = find_nearest_enemy(
-			me,
-			owner_
-				? owner_->center()
-				: me.center(),
-			entities
-		);
-
-		if(!target)
-		{
-			me.aggressive(false);
-			speed.current(
-				static_cast<space_unit>(0));
-			return;
-		}
-
-		me.aggressive(true);
-	}
-
 	sge::optional<space_unit> const angle(
 		sge::math::vector::angle_between<space_unit>(
 			me.center(),
-			target->center()
+			target_->center()
 		)
 	);
 
@@ -88,13 +97,54 @@ sanguis::server::ai::simple::update(
 		me.angle(*angle);
 	}
 	
-	if(collision::collides(*target, me))
+	// don't walk into the enemy
+	// TODO: this should be done with the collision system
+	if(
+		collision::collides(
+			*target_,
+			me
+		)
+	)
 		speed.current(
-			static_cast<space_unit>(0));
+			static_cast<space_unit>(0)
+		);
 	else
 		speed.current_to_max();
 
 	me.target(
-		target->center());
-#endif
+		target_->center()
+	);
+}
+
+void
+sanguis::server::ai::simple::potential_target(
+	entities::entity &new_target
+)
+{
+	// if we already have a target
+	// and the target timer hasn't elapsed
+	// do nothing
+	if(
+		target_ && !search_new_target_timer.expired()
+	)
+		return;
+
+	// if we already have a target
+	// and the new target is farther away
+	// do nothing
+	if(
+		target_
+		&& collision::distance(
+			*target_,
+			*me_
+		)
+		> collision::distance(
+			new_target,
+			*me_
+		)
+	)
+		return;
+			
+	search_new_target_timer.reset();
+	target_ = new_target.link();
 }

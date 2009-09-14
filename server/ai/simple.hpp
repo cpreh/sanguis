@@ -31,10 +31,15 @@ private:
 		time_type
 	);
 
+	void
+	potential_target(
+		entities::entity &
+	);
+
 	entities::entity_with_weapon *me_;
 
 	entities::auto_weak_link
-		target,
+		target_,
 		owner_;
 
 	diff_clock diff_clock_;

@@ -1,6 +1,12 @@
 #ifndef SANGUIS_SERVER_AURAS_AGGRO_HPP_INCLUDED
 #define SANGUIS_SERVER_AURAS_AGGRO_HPP_INCLUDED
 
+#include "aura.hpp"
+#include "../space_unit.hpp"
+#include "../team.hpp"
+#include "../update_target_function.hpp"
+#include <sge/collision/world_fwd.hpp>
+
 namespace sanguis
 {
 namespace server
@@ -14,12 +20,18 @@ class aggro
 {
 public:
 	aggro(
+		sge::collision::world_ptr,
+		space_unit radius,
+		team::type,
+		update_target_function const &
 	);
 private:
 	void
 	do_effect(
-		entities::entity %target
+		entities::entity &target
 	);
+
+	update_target_function const update_target_;
 };
 
 
