@@ -68,8 +68,8 @@ sanguis::load::resource::texture_context::future_value const sanguis::load::reso
 	sge::image::loader_ptr const _il)
 {
 	sge::cerr << SGE_TEXT("created task thread context for ") << _path.string() << SGE_TEXT("\n");
-	sge::thread::sleep(
-		3);
+	//sge::thread::sleep( DEBUG
+	//	3);
 	sge::image::file_ptr const p = 
 		_il->load(
 			_path);
