@@ -33,6 +33,8 @@ public:
 
 	resource::animations const &
 	animations() const;
+
+	void update() const;
 private:
 	friend class load::context;
 

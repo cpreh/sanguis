@@ -31,6 +31,8 @@ public:
 
 	model::context const &
 	models() const;
+
+	void update() const;
 private:
 	sge::image::loader_ptr const il;
 	sge::renderer::device_ptr const rend;

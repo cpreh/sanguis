@@ -143,9 +143,9 @@ sanguis::client::states::running::process(
 	tick_event const &)
 {
 	context<machine>().dispatch();
+	context<machine>().resources().update();
 	context<machine>().sound_pool().update();
 	music_.process();
-
 }
 
 void 

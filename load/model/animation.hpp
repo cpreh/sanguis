@@ -3,7 +3,7 @@
 
 #include "global_parameters.hpp"
 #include "animation_sound_fwd.hpp"
-#include "../resource/texture_context_fwd.hpp"
+#include "../resource/texture_context.hpp"
 #include "../resource/context_fwd.hpp"
 #include <sge/sprite/animation_series.hpp>
 #include <sge/texture/part_fwd.hpp>
@@ -39,7 +39,7 @@ private:
 	global_parameters param_;
 	sge::parse::json::member_vector members_;
 
-	load::resource::texture_context_ptr 
+	load::resource::texture_context
 		context_;
 
 	mutable sge::shared_ptr<

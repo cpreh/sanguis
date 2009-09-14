@@ -6,6 +6,7 @@
 #include "../resource/textures.hpp"
 #include "../log.hpp"
 #include "../../exception.hpp"
+#include "../resource/texture_context_impl.hpp"
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/find_member.hpp>
 #include <sge/parse/json/object.hpp>
@@ -168,7 +169,7 @@ bool sanguis::load::model::animation::update() const
 {
 	if (anim)
 		return true;
-	if (!context_->update())
+	if (!context_.value()->update())
 		return false;
 	
 	anim.reset(
@@ -176,7 +177,7 @@ bool sanguis::load::model::animation::update() const
 
 	// TODO: let the context return sge::image::file_ptr instead and convert to part_ptr here
 	sge::texture::part_ptr const tex = 
-		context_->result();
+		context_.value()->result();
 
 	sge::parse::json::element_vector const &range(
 		sge::parse::json::find_member<

@@ -9,8 +9,8 @@ namespace load
 {
 namespace resource
 {
-class texture_context;
-typedef sge::shared_ptr<texture_context> texture_context_ptr;
+class texture_context_impl;
+typedef sge::shared_ptr<texture_context_impl> texture_context_impl_ptr;
 }
 }
 }

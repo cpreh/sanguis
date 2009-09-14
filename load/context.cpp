@@ -36,3 +36,8 @@ sanguis::load::context::models() const
 {
 	return model_ctx;
 }
+
+void sanguis::load::context::update() const
+{
+	resource_ctx.update();
+}
