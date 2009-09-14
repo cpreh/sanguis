@@ -61,6 +61,23 @@ public:
 	);
 	
 	void
+	divide_exp(
+		exp_type
+	);
+
+	void
+	request_transfer(
+		world_id,
+		entity_id
+	);
+
+	void
+	update_sight_range(
+		player_id,
+		entity_id target_id
+	);
+
+	void
 	remove_player(
 		player_id
 	);

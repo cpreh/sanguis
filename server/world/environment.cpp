@@ -83,6 +83,40 @@ sanguis::server::world::environment::max_health_changed(
 }
 
 void
+sanguis::server::world::environment::divide_exp(
+	exp_type const exp_
+)
+{
+	world_.divide_exp(
+		exp_
+	);
+}
+
+void
+sanguis::server::world::environment::request_transfer(
+	world_id const world_id_,
+	entity_id const entity_id_
+)
+{
+	world_.request_transfer(
+		world_id_,
+		entity_id_
+	);
+}
+
+void
+sanguis::server::world::environment::update_sight_range(
+	player_id const player_id_,
+	entity_id const target_id_
+)
+{
+	world_.update_sight_range(
+		player_id_,
+		target_id_
+	);
+}
+
+void
 sanguis::server::world::environment::remove_player(
 	player_id const player_id_
 )

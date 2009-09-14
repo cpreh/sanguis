@@ -4,7 +4,10 @@
 #include "../weapons/weapon.hpp"
 #include "../environment/object.hpp"
 #include "../level_calculate.hpp"
+#include "../auras/update_sight.hpp"
 #include <sge/text.hpp>
+#include <sge/make_auto_ptr.hpp>
+#include <boost/bind.hpp>
 
 sanguis::server::entities::player::player(
 	server::environment::object_ptr const env,
@@ -40,7 +43,30 @@ sanguis::server::entities::player::player(
 	level_(static_cast<level_type>(0)),
 	level_delta_(static_cast<level_type>(0)),
 	skill_points_(0)
-{}
+{
+	auras::auto_ptr new_aura(
+		sge::make_auto_ptr<
+			auras::update_sight
+		>(
+			env->collision_world(),
+			1000, // FIXME
+			boost::bind(
+				&server::environment::object::update_sight_range,
+				env.get(),
+				static_cast<
+					player_id
+				>(
+					net_id_
+				), // TODO
+				_1
+			)
+		)
+	);
+
+	add_aura(
+		new_aura
+	);
+}
 
 sanguis::server::exp_type
 sanguis::server::entities::player::exp() const

@@ -65,15 +65,25 @@ sanguis::server::auras::aura::can_collide_with(
 		dynamic_cast<entities::entity const *>(&o)
 	);
 
-	return entity && (
-			(entity->team() == team_ && influence_ == influence::buff)
-			|| (entity->team() != team_ && influence_ == influence::debuff));
+	return
+		entity
+		&& (
+			(
+				entity->team() == team_
+				&& influence_ == influence::buff
+			)
+			|| (
+				entity->team() != team_
+				&& influence_ == influence::debuff
+			)
+		);
 }
 
 
 void
 sanguis::server::auras::aura::collision(
-	collision::base &b)
+	collision::base &b
+)
 {
 	do_effect(
 		dynamic_cast<entities::entity &>(b)

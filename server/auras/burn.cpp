@@ -21,7 +21,8 @@ sanguis::server::auras::burn::burn(
 	damage_values(damage_values)
 {}
 
-void sanguis::server::auras::burn::do_effect(
+void
+sanguis::server::auras::burn::do_effect(
 	entities::entity &e
 )
 {

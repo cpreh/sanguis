@@ -8,6 +8,8 @@
 #include "../health_type.hpp"
 #include "../dim_type.hpp"
 #include "../string.hpp"
+#include "../exp_type.hpp"
+#include "../../world_id.hpp"
 #include "../../weapon_type.hpp"
 #include "../../entity_id.hpp"
 #include <sge/collision/world_fwd.hpp>
@@ -58,6 +60,23 @@ public:
 	max_health_changed(
 		entity_id,
 		health_type
+	) = 0;
+
+	virtual void
+	divide_exp(
+		exp_type
+	) = 0;
+
+	virtual void
+	request_transfer(
+		world_id,
+		entity_id
+	) = 0;
+
+	virtual void
+	update_sight_range(
+		player_id,
+		entity_id
 	) = 0;
 
 	virtual void
