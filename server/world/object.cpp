@@ -300,6 +300,7 @@ sanguis::server::world::object::got_weapon(
 		id,
 		messages::create(
 			messages::give_weapon(
+				id,
 				wt
 			)
 		)

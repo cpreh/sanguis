@@ -1,5 +1,7 @@
 #include "context.hpp"
 #include "world_context.hpp"
+#include "../message_convert/rotate.hpp"
+#include "../message_convert/speed.hpp"
 #include "../entities/player.hpp"
 #include "../entities/auto_ptr.hpp"
 #include "../world/object.hpp"
@@ -68,9 +70,10 @@ sanguis::server::global::context::insert_player(
 		)
 	);
 
-	players_[
-		player_id_
-	] = player_.get();
+	players_.insert(
+		player_id_,
+		player_.get()
+	);
 
 	world_.insert(
 		entities::auto_ptr(
@@ -121,10 +124,21 @@ sanguis::server::global::context::player_angle(
 	space_unit const angle_
 )
 {
-	players_[
-		player_id_
-	]->angle(
+	entities::player &player_(
+		*players_[
+			player_id_
+		]
+	);
+
+	player_.angle(
 		angle_
+	);
+
+	send_unicast_(
+		player_id_,
+		message_convert::rotate(
+			player_
+		)
 	);
 }
 
@@ -170,13 +184,12 @@ sanguis::server::global::context::player_direction(
 		);
 	}
 
-	/*
-	send(
+	send_unicast_(
+		player_id_,
 		message_convert::speed(
 			player_
 		)
 	);
-	*/
 }
 
 void
