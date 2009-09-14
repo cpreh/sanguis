@@ -25,14 +25,10 @@ sanguis::load::resource::texture_context::texture_context(
 			_il)),
 	future_(
 		task_.object()),
-	/*thread_(
+	thread_(
 		boost::ref(
-			task_))*/
-	image_result_(
-		task(
-			_path,
-			_il)),
-	debug_result_(
+			task_)),
+	texture_result_(
 		),
 	rend_(
 		_rend),
@@ -44,16 +40,13 @@ sanguis::load::resource::texture_context::texture_context(
 
 bool sanguis::load::resource::texture_context::update()
 {
-	/* DEBUG
 	if (!future_.has_value())
 		return false;
-		*/
-	if (!debug_result_)
-		debug_result_ = 
-			sge::texture::part_ptr(
-				new sge::texture::part_raw(
-					rend_->create_texture(
-					image_result_->view(),
+	if (!texture_result_)
+		texture_result_.reset( 
+			new sge::texture::part_raw(
+				rend_->create_texture(
+					future_.get()->view(),
 					filter_,
 					sge::renderer::resource_flags::none)));
 	return true;
@@ -61,10 +54,12 @@ bool sanguis::load::resource::texture_context::update()
 
 sge::texture::part_ptr const sanguis::load::resource::texture_context::result()
 {
-	return debug_result_;
-	/* DEBUG
-	return future_.get();
-	*/
+	return texture_result_;
+}
+
+sanguis::load::resource::texture_context::~texture_context()
+{
+	thread_.join();
 }
 
 sanguis::load::resource::texture_context::future_value const sanguis::load::resource::texture_context::task(
@@ -77,20 +72,4 @@ sanguis::load::resource::texture_context::future_value const sanguis::load::reso
 			_path);
 	sge::cerr << SGE_TEXT("loaded image ") << _path.string() << SGE_TEXT(" in thread, now returning\n");
 	return p;
-
-#if 0
-	sge::texture::part_ptr const p = 
-		sge::make_shared_ptr<
-			sge::texture::part_raw
-		>(
-			sge::image::create_texture(
-				_path,
-				_rend,
-				_il,
-				_filter,
-				sge::renderer::resource_flags::none
-			)
-		);
-	return p;
-#endif
 }

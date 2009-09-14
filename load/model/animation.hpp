@@ -28,7 +28,7 @@ public:
 	animation_sound const &
 	sounds() const;
 
-	bool update();
+	bool update() const;
 private:
 	animation(
 		sge::parse::json::object const &,
@@ -42,7 +42,7 @@ private:
 	load::resource::texture_context_ptr 
 		context_;
 
-	sge::shared_ptr<
+	mutable sge::shared_ptr<
 		sge::sprite::animation_series
 	> anim;
 

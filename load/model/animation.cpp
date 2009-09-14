@@ -149,7 +149,7 @@ sanguis::load::model::animation::animation(
 	context_ = 
 		param_.textures().load(
 			param_.path() / *texture);
-	update(); // DEBUG
+	//update(); // DEBUG
 }
 
 sge::sprite::animation_series const &
@@ -164,7 +164,7 @@ sanguis::load::model::animation::sounds() const
 	return *sounds_;
 }
 
-bool sanguis::load::model::animation::update()
+bool sanguis::load::model::animation::update() const
 {
 	if (anim)
 		return true;

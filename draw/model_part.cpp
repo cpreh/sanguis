@@ -46,7 +46,8 @@ sanguis::draw::model_part::model_part(
 	ended(false)
 {
 	sge::cerr << "in konstruktor\n";
-	// FIXME: das kann model_part neuerdings nicht mehr wissen
+	ref.size() = sge::sprite::dim::null();
+	/*
 	ref.size() = sge::math::dim::structure_cast<
 		sge::sprite::dim
 	>(
@@ -54,17 +55,18 @@ sanguis::draw::model_part::model_part(
 		[weapon_type::none]
 		[animation_type::none]
 		.get().dim());
+		*/
 	sge::cerr << "get hat geklappt\n";
 }
 
 sanguis::draw::model_part::~model_part()
 {}
 
-bool sanguis::draw::model_part::animation(
+sanguis::animation_state::type sanguis::draw::model_part::animation(
 	animation_type::type const atype)
 {
 	return state && state->animation_type() == atype
-	? true
+	? animation_state::loaded
 	: try_animation(
 		atype);
 }
@@ -221,27 +223,31 @@ sanguis::draw::object const &sanguis::draw::model_part::object() const
 	return *ref;
 }
 
-bool sanguis::draw::model_part::try_animation(
+sanguis::animation_state::type sanguis::draw::model_part::try_animation(
 	animation_type::type const atype)
 {
 	if (weapon_ == weapon_type::size)
 		weapon_ = weapon_type::none;
+	
+	animation_state::type const anim_state = 
+		(*info)[weapon_].state(atype);
+
+	switch (anim_state)
+	{
+		case animation_state::not_found:
+		case animation_state::loading:
+			return anim_state;
+		case animation_state::loaded:
+		break;
+	}
 
 	scoped_texture_animation nanim(	
 		get_animation(
 			state ? state->weapon_type() : weapon_,
 			atype));
 
-	if (nanim == scoped_texture_animation())
-		return false;
-
 	animation_.swap(nanim);
 
-	/*
-	SGE_LOG_DEBUG(
-		log(),
-		sge::log::_1 << SGE_TEXT("that worked"));
-			*/
 	ended = false;
 	state.reset(
 		new model_part_state(
@@ -251,7 +257,12 @@ bool sanguis::draw::model_part::try_animation(
 			state
 			? state->weapon_type()
 			: weapon_));
-	return true;
+
+	ref->size() = 
+		sge::math::dim::structure_cast<sge::sprite::dim>(
+			animation_->dim());
+
+	return anim_state;
 }
 
 sanguis::draw::model_part::animation_auto_ptr
@@ -259,10 +270,6 @@ sanguis::draw::model_part::get_animation(
 	weapon_type::type const wtype,
 	animation_type::type const atype)
 {
-	load::model::weapon_category const &t = 
-		(*info)[wtype];
-	if (!t.has_animation(atype))
-		return animation_auto_ptr();
 	return animation_auto_ptr(
 		new sge::sprite::texture_animation(
 			(*info)[wtype]

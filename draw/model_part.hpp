@@ -9,6 +9,7 @@
 #include "../time_type.hpp"
 #include "../diff_clock.hpp"
 #include "../load/model/fwd.hpp"
+#include "../animation_state.hpp"
 #include <sge/sprite/texture_animation.hpp> // TODO: fwd this too!
 #include <sge/sprite/rotation_type.hpp>
 #include <sge/scoped_ptr.hpp>
@@ -25,7 +26,7 @@ public:
 		sanguis::draw::object &ref);
 	~model_part();
 
-	bool animation(animation_type::type);
+	animation_state::type animation(animation_type::type);
 	void weapon(weapon_type::type);
 	void update(time_type time);
 	void orientation(sge::sprite::rotation_type);
@@ -37,7 +38,7 @@ private:
 		sge::sprite::texture_animation
 	> animation_auto_ptr;
 
-	bool try_animation(
+	animation_state::type try_animation(
 		animation_type::type);
 	
 	animation_auto_ptr get_animation(
