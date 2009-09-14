@@ -74,9 +74,10 @@ private:
 		net::id_type);
 	
 	typedef sge::container::map<
-		std::map,
-		net::id_type,
-		client_data
+		std::map<
+			net::id_type,
+			client_data
+		>
 	> client_map;
 
 	load::context const &resources_;

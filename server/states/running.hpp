@@ -55,9 +55,10 @@ public:
 	> reactions;
 
 	typedef sge::container::map<
-		std::map,
-		net::id_type,
-		server::entities::player *
+		std::map<
+			net::id_type,
+			server::entities::player *
+		>
 	> player_map;
 
 	typedef std::vector<
