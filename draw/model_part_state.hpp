@@ -18,7 +18,7 @@ class model_part_state
 	public:
 	model_part_state(
 		load::model::part const &,
-		model_part const &,
+		model_part &,
 		animation_type::type,
 		weapon_type::type);
 	sanguis::animation_type::type animation_type() const;
@@ -26,12 +26,13 @@ class model_part_state
 	void update();
 	~model_part_state();
 	private:
-	model_part const &ref_;
+	model_part &ref_;
 	load::model::animation const &anim_;
 	sge::audio::sound_ptr const sstart,srunning,send;
 	animation_type::type const animation_type_;
 	weapon_type::type const weapon_type_;
 	bool start_played_;
+	bool loaded_;
 
 	void play(
 		sge::audio::sound_ptr,

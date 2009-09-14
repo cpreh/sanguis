@@ -34,6 +34,8 @@ public:
 	sanguis::draw::object &object();
 	sanguis::draw::object const &object() const;
 private:
+	friend class model_part_state;
+	
 	typedef sge::auto_ptr<
 		sge::sprite::texture_animation
 	> animation_auto_ptr;
@@ -55,17 +57,17 @@ private:
 
 	diff_clock                              anim_diff_clock;
 	sge::sprite::rotation_type              desired_orientation;
-	load::model::part const*                info;
-	sanguis::draw::object*                  ref;
+	load::model::part const*                info_;
+	sanguis::draw::object*                  ref_;
 
 	weapon_type::type                       weapon_;
-	sge::scoped_ptr<model_part_state>       state;
+	sge::scoped_ptr<model_part_state>       state_;
 	
 	typedef sge::scoped_ptr<
 		sge::sprite::texture_animation
 	> scoped_texture_animation;
 	scoped_texture_animation                animation_;
-	bool                                    ended;
+	bool                                    ended_;
 };
 
 }
