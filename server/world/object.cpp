@@ -140,7 +140,7 @@ sanguis::server::world::object::update(
 		{
 			entity_remove_vector const removes(
 				ref.second.update(
-					time_
+					current_time_
 				)
 			);
 

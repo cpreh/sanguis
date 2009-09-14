@@ -29,5 +29,5 @@ sanguis::server::world::sight_range_entry::expired(
 ) const
 {
 	// TODO: sge::chrono!
-	return new_time_ - last_time_ > static_cast<time_type>(30);
+	return (new_time_ - last_time_) > static_cast<time_type>(30);
 }
