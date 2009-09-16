@@ -135,7 +135,8 @@ sanguis::load::resource::textures::textures(
 			filter
 		)
 	),
-	il(il)
+	il(
+		il)
 {
 	// look for .tex files
 	for (sge::filesystem::directory_iterator i(sanguis::media_path()), end; i != end; ++i)

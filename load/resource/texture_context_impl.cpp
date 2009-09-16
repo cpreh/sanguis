@@ -77,7 +77,7 @@ bool sanguis::load::resource::texture_context_impl::decayed() const
 {
 	if (!time_of_death_)
 		return false;
-	sge::cout << "time diff is " << ((sge::time::time() - *time_of_death_)/sge::time::hz()) << "\n";
+	//sge::cout << "time diff is " << ((sge::time::time() - *time_of_death_)/sge::time::hz()) << "\n";
 	return 
 		(sge::time::time() - *time_of_death_)/sge::time::hz() > 10;
 }

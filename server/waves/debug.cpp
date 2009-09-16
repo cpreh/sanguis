@@ -14,7 +14,7 @@ sanguis::server::waves::debug::process(
 	if(spawned)
 		return;
 
-	for(unsigned i = 0; i < enemy_type::size; ++i)
+	for(unsigned i = 0; i < 2; ++i)
 		spawn(
 			env,
 			static_cast<
