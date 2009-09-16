@@ -48,7 +48,8 @@ sanguis::draw::model_part::model_part(
 	state_(),
 	animation_context_(),
 	animation_(),
-	ended_(false)
+	ended_(
+		false)
 {
 	ref_.size() = sge::sprite::dim::null();
 }
@@ -59,10 +60,13 @@ sanguis::draw::model_part::~model_part()
 bool sanguis::draw::model_part::try_animation(
 	animation_type::type const atype)
 {
+	if (weapon_ == weapon_type::size)
+		weapon_ = weapon_type::none;
+	
 	if (state_ && state_->animation_type() == atype)
 		return true;
 	
-	if (!load_part_[weapon_ == weapon_type::size ? weapon_type::none : weapon_].has_animation(atype))
+	if (!load_part_[weapon_].has_animation(atype))
 		return false;
 
 	load_animation(
@@ -244,23 +248,23 @@ sanguis::draw::object const &sanguis::draw::model_part::object() const
 void sanguis::draw::model_part::load_animation(
 	animation_type::type const atype)
 {
-	if (weapon_ == weapon_type::size)
-		weapon_ = weapon_type::none;
-	
 	// DEBUG
 	sge::cerr << "looking for weapon: " << (weapon_ == weapon_type::size ? weapon_type::none : weapon_) << ", animation " << atype << "\n";
 
+	animation_.reset();
 	animation_context_.take(
 		load_part_[weapon_][atype].load());
 	
 	state_.reset(
 		new model_part_state(
 			load_part_,
-			*this,
+			*this, // FIXME: this can be removed now
 			atype,
+			weapon_)
+			/*
 			state_
 				? state_->weapon_type()
-				: weapon_));
+				: weapon_)*/);
 }
 
 void sanguis::draw::model_part::update_orientation(

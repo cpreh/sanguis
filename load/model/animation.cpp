@@ -220,7 +220,7 @@ void sanguis::load::model::animation::fill_cache(
 		)
 	);
 
-	sge::cerr << "delay is " << delay << "\n";
+	//sge::cerr << "delay is " << delay << "\n";
 
 	for(sge::renderer::size_type i = begin; i != end; ++i)
 	{
@@ -249,7 +249,7 @@ void sanguis::load::model::animation::fill_cache(
 			);
 
 		// DEBUG
-		sge::cerr << "adding value!\n";
+		//sge::cerr << "adding value!\n";
 		
 		frame_cache_.push_back(
 			frame_cache_value(
