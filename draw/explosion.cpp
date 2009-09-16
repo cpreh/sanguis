@@ -129,8 +129,10 @@ sanguis::draw::explosion::explosion(
 		environment()),
 	properties_(
 		prop_),
-	ended(false),
-	aoe_(_aoe)
+	ended(
+		false),
+	aoe_(
+		_aoe)
 {
 	// TODO: we have to pass the aoe here!
 	sge::renderer::screen_size const screen_sz(
