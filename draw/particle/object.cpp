@@ -8,6 +8,7 @@
 #include <sge/math/dim/structure_cast.hpp>
 #include <sge/image/color/rgba8.hpp>
 #include <sge/image/color/init.hpp>
+#include <sge/cerr.hpp>
 
 sanguis::draw::particle::object::object(
 	particle_type::type const _type,
@@ -37,6 +38,7 @@ sanguis::draw::particle::object::object(
 					2*_aoe)))),
 	animation_context_(
 		_animation_context),
+	animation_(),
 	fade_total_(
 		_fade_total),
 	fade_remaining_(
@@ -52,8 +54,10 @@ bool sanguis::draw::particle::object::update(
 	rotation_type const r,
 	depth_type const d)
 {
+	animation_context_->update();
 	if (!animation_ && animation_context_->is_finished())
 	{
+		sge::cerr << "animation is finished!\n";
 		animation_.reset(
 			new sge::sprite::texture_animation(
 				animation_context_->result(),
@@ -62,10 +66,12 @@ bool sanguis::draw::particle::object::update(
 					: sge::sprite::texture_animation::loop_method::stop_at_end,
 				sprite_,
 				clock_.callback()));
+				/*
 			base::pos(
 				point(
 					static_cast<funit>(-animation_->dim().w()/2),
 					static_cast<funit>(-animation_->dim().h()/2)));
+					*/
 	}	
 	base::update(delta,p,r,d);
 
@@ -83,8 +89,9 @@ bool sanguis::draw::particle::object::update(
 	clock_.update(
 		delta);
 
-	if (animation_ && !fade_total_)
-		return animation_->process();
+	bool const ret = animation_ ? animation_->process() : false;
+	if (!fade_total_)
+		return ret;
 	
 	fade_remaining_ -= delta;
 

@@ -248,9 +248,6 @@ sanguis::draw::object const &sanguis::draw::model_part::object() const
 void sanguis::draw::model_part::load_animation(
 	animation_type::type const atype)
 {
-	// DEBUG
-	sge::cerr << "looking for weapon: " << (weapon_ == weapon_type::size ? weapon_type::none : weapon_) << ", animation " << atype << "\n";
-
 	animation_.reset();
 	animation_context_.take(
 		load_part_[weapon_][atype].load());
