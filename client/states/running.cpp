@@ -140,10 +140,11 @@ sanguis::client::states::running::draw(
 
 void 
 sanguis::client::states::running::process(
-	tick_event const &)
+	tick_event const &t)
 {
 	context<machine>().dispatch();
-	context<machine>().resources().update();
+	context<machine>().resources().update(
+		t.delta());
 	context<machine>().sound_pool().update();
 	music_.process();
 }

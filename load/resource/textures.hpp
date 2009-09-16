@@ -1,6 +1,7 @@
 #ifndef SANGUIS_LOAD_RESOURCE_TEXTURES_HPP_INCLUDED
 #define SANGUIS_LOAD_RESOURCE_TEXTURES_HPP_INCLUDED
 
+#include "../../time_type.hpp"
 #include "texture_identifier.hpp"
 #include "texture_context_fwd.hpp"
 #include "texture_context.hpp"
@@ -30,7 +31,8 @@ public:
 	load(
 		sge::filesystem::path const &) const;
 	
-	void cleanup() const;
+	void cleanup(
+		time_type) const;
 	
 	~textures();
 private:

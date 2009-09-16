@@ -18,6 +18,7 @@
 #include "../client_messages/visible.hpp"
 #include "../client/invalid_id.hpp"
 #include "../exception.hpp"
+#include "../load/context.hpp"
 
 #include <sge/make_auto_ptr.hpp>
 #include <sge/iconv.hpp>
@@ -157,6 +158,9 @@ void sanguis::draw::scene::draw(
 		paused
 		? 0
 		: delta;
+	
+	env.context().update(
+		real_delta);
 	
 	for(entity_map::iterator it(entities.begin()), next(it); it != entities.end(); it = next)
 	{

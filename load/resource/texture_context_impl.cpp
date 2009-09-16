@@ -10,7 +10,7 @@
 #include <sge/cout.hpp>
 #include <sge/cerr.hpp>
 #include <sge/text.hpp>
-#include <sge/time/time.hpp>
+#include <sge/time/second.hpp>
 #include <boost/bind.hpp>
 #include <boost/ref.hpp>
 
@@ -37,8 +37,12 @@ sanguis::load::resource::texture_context_impl::texture_context_impl(
 		_rend),
 	filter_(
 		_filter),
-	time_of_death_(
-		sge::optional<sge::time::unit>())
+	clock_(),
+	decay_timer_(
+		sge::time::second(
+			10),
+		sge::time::activation_state::active,
+		clock_.callback())
 {
 	sge::cerr << SGE_TEXT("created texture context for ") << _path.string() << SGE_TEXT("\n");
 }
@@ -57,6 +61,13 @@ bool sanguis::load::resource::texture_context_impl::update()
 	return true;
 }
 
+void sanguis::load::resource::texture_context_impl::tick(
+	time_type const delta)
+{
+	clock_.update(
+		delta);
+}
+
 sge::texture::part_ptr const sanguis::load::resource::texture_context_impl::result()
 {
 	return texture_result_;
@@ -64,27 +75,19 @@ sge::texture::part_ptr const sanguis::load::resource::texture_context_impl::resu
 
 void sanguis::load::resource::texture_context_impl::kill()
 {
-	time_of_death_ = 
-		sge::time::time();
+	decay_timer_.activate();
+	decay_timer_.reset();
 }
 
 void sanguis::load::resource::texture_context_impl::revive()
 {
-	time_of_death_.reset();
+	decay_timer_.deactivate();
 }
 
 bool sanguis::load::resource::texture_context_impl::decayed() const
 {
-	if (!time_of_death_)
-		return false;
-	//sge::cout << "time diff is " << ((sge::time::time() - *time_of_death_)/sge::time::hz()) << "\n";
 	return 
-		(sge::time::time() - *time_of_death_)/sge::time::hz() > 10;
-}
-
-sge::optional<sge::time::unit> const sanguis::load::resource::texture_context_impl::time_of_death() const
-{
-	return time_of_death_;
+		decay_timer_.active() && decay_timer_.expired();
 }
 
 sanguis::load::resource::texture_context_impl::~texture_context_impl()
@@ -96,12 +99,14 @@ sanguis::load::resource::texture_context_impl::future_value const sanguis::load:
 	sge::filesystem::path const &_path,
 	sge::image::loader_ptr const _il)
 {
-	sge::cerr << SGE_TEXT("created task thread context for ") << _path.string() << SGE_TEXT("\n");
+	// DEBUG
+	//sge::cerr << SGE_TEXT("created task thread context for ") << _path.string() << SGE_TEXT("\n");
 	//sge::thread::sleep( DEBUG
 	//	3);
 	sge::image::file_ptr const p = 
 		_il->load(
 			_path);
-	sge::cerr << SGE_TEXT("loaded image ") << _path.string() << SGE_TEXT(" in thread, now returning\n");
+	// DEBUG
+	//sge::cerr << SGE_TEXT("loaded image ") << _path.string() << SGE_TEXT(" in thread, now returning\n");
 	return p;
 }

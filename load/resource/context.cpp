@@ -21,9 +21,10 @@ sanguis::load::resource::context::animations() const
 	return *animations_;
 }
 
-void sanguis::load::resource::context::update() const
+void sanguis::load::resource::context::update(time_type const delta) const
 {
-	textures_->cleanup();
+	textures_->cleanup(
+		delta);
 }
 
 sanguis::load::resource::context::context(

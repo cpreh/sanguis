@@ -37,7 +37,9 @@ sanguis::load::context::models() const
 	return model_ctx;
 }
 
-void sanguis::load::context::update() const
+void sanguis::load::context::update(
+	time_type const delta) const
 {
-	resource_ctx.update();
+	resource_ctx.update(
+		delta);
 }

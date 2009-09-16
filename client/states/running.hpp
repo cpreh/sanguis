@@ -53,8 +53,10 @@ public:
 
 	running(my_context);
 	~running();
-	void draw(tick_event const &);
-	void process(tick_event const &);
+	void draw(
+		tick_event const &);
+	void process(
+		tick_event const &);
 	void pause(bool);
 	boost::statechart::result react(message_event const &);
 	

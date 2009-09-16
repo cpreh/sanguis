@@ -65,7 +65,8 @@ sanguis::load::resource::textures::load(
 					_1)));
 }
 
-void sanguis::load::resource::textures::cleanup() const
+void sanguis::load::resource::textures::cleanup(
+	time_type const delta) const
 {
 	for(
 		unnamed_texture_map::iterator it(unnamed_textures.begin()), next(it); 
@@ -73,6 +74,8 @@ void sanguis::load::resource::textures::cleanup() const
 		it = next) 
 	{ 
 		++next; 
+		it->second->tick(
+			delta);
 		if (it->second->decayed())
 		{
 			sge::cerr << "deleting decayed texture " << it->first.string() << "\n";
