@@ -197,7 +197,7 @@ sanguis::draw::particle::base_ptr
 sanguis::draw::explosion::generate_particle(
 	particle_type::type const t)
 {
-	sge::sprite::animation_series const anim =
+	load::model::animation::context_ptr anim = 
 		environment().context().models()()
 		[
 			SGE_TEXT("particles/")+
@@ -209,7 +209,7 @@ sanguis::draw::explosion::generate_particle(
 		]
 		[
 			animation_type::none
-		].get();
+		].load();
 	
 	particle::base_ptr ptr;
 	

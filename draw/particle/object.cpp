@@ -1,5 +1,7 @@
 #include "object.hpp"
 #include "z_ordering.hpp"
+#include "../../load/model/animation_context.hpp"
+#include <sge/sprite/texture_animation.hpp>
 #include <sge/sprite/intrusive/parameters.hpp>
 #include <sge/math/point_rotate.hpp>
 #include <sge/math/vector/structure_cast.hpp>
@@ -8,51 +10,38 @@
 #include <sge/image/color/init.hpp>
 
 sanguis::draw::particle::object::object(
-	particle_type::type const t,
-	funit const aoe,
-	sge::sprite::animation_series const &images,
-	boost::optional<time_type> const fade_total,
-	draw::environment const &e)
+	particle_type::type const _type,
+	funit const _aoe,
+	load::model::animation::context_ptr _animation_context,
+	boost::optional<time_type> const _fade_total,
+	draw::environment const &_e)
 :
 	base(
-		point(
-			static_cast<funit>(-images.dim().w()/2),
-			static_cast<funit>(-images.dim().h()/2)),
+		point::null(),
 		point::null(),
 		depth_type(0),
 		rotation_type(0),
 		rotation_type(0),
-		e),
+		_e),
 	sprite_(
 		sge::sprite::intrusive::parameters(
-			e.system(),
-			z_ordering(t)
-		)
+			_e.system(),
+			z_ordering(
+				_type))
 		.size(
-			/*
-			sge::math::dim::structure_cast<
-				sge::sprite::dim
-			>(
-				images.dim()
-			)
-			*/
 			// TODO: maybe resize with respect to the images.dim() ratio here
 			sge::sprite::dim(
-				static_cast<sge::sprite::unit>(2*aoe),
-				static_cast<sge::sprite::unit>(2*aoe))
-		)
-	),
-	anim(
-		images,
-		fade_total 
-			? sge::sprite::texture_animation::loop_method::repeat
-			: sge::sprite::texture_animation::loop_method::stop_at_end,
-		sprite_,
-		clock.callback()),
-	fade_total(fade_total),
-	fade_remaining(
-		fade_total 
-			? *fade_total 
+				static_cast<sge::sprite::unit>(
+					2*_aoe),
+				static_cast<sge::sprite::unit>(
+					2*_aoe)))),
+	animation_context_(
+		_animation_context),
+	fade_total_(
+		_fade_total),
+	fade_remaining_(
+		fade_total_
+			? *fade_total_
 			: static_cast<time_type>(0))
 {
 }
@@ -63,6 +52,21 @@ bool sanguis::draw::particle::object::update(
 	rotation_type const r,
 	depth_type const d)
 {
+	if (!animation_ && animation_context_->is_finished())
+	{
+		animation_.reset(
+			new sge::sprite::texture_animation(
+				animation_context_->result(),
+				fade_total_ 
+					? sge::sprite::texture_animation::loop_method::repeat
+					: sge::sprite::texture_animation::loop_method::stop_at_end,
+				sprite_,
+				clock_.callback()));
+			base::pos(
+				point(
+					static_cast<funit>(-animation_->dim().w()/2),
+					static_cast<funit>(-animation_->dim().h()/2)));
+	}	
 	base::update(delta,p,r,d);
 
 	sprite_.z() = d+base::depth();
@@ -76,21 +80,20 @@ bool sanguis::draw::particle::object::update(
 				p,
 				r + base::rot())));
 
-	clock.update(delta);
+	clock_.update(
+		delta);
 
-	bool const ret = anim.process();
-
-	if (!fade_total)
-		return ret;
+	if (animation_ && !fade_total_)
+		return animation_->process();
 	
-	fade_remaining -= delta;
+	fade_remaining_ -= delta;
 
 	funit const ratio(
 		static_cast<funit>(
-			fade_remaining
+			fade_remaining_
 		)
 		/ static_cast<funit>(
-			*fade_total
+			*fade_total_
 		)
 	);
 
@@ -113,5 +116,5 @@ bool sanguis::draw::particle::object::update(
 		)
 	);
 
-	return fade_remaining < static_cast<funit>(0);
+	return fade_remaining_ < static_cast<funit>(0);
 }

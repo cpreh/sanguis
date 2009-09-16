@@ -21,7 +21,7 @@ public:
 	animation const &
 	operator[](
 		animation_type::type) const;
-	animation_state::type state(
+	bool has_animation(
 		animation_type::type) const;
 private:
 	explicit weapon_category(

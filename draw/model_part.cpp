@@ -5,6 +5,7 @@
 #include "../load/model/base_animation_not_found.hpp"
 #include "../log.hpp"
 #include "../exception.hpp"
+#include "../load/model/animation_context.hpp"
 #include <sge/console/var_impl.hpp>
 #include <sge/math/abs_angle_to_rel.hpp>
 #include <sge/math/rel_angle_to_abs.hpp>
@@ -32,35 +33,42 @@ invalid_rotation(
 }
 
 sanguis::draw::model_part::model_part(
-	load::model::part const& _info,
+	load::model::part const& _load_part,
 	sanguis::draw::object &_ref)
 :
-	anim_diff_clock(),
-	desired_orientation(
+	anim_diff_clock_(),
+	desired_orientation_(
 		invalid_rotation),
-	info_(
-		&_info),
-	ref_(&_ref),
-	weapon_(weapon_type::none),
+	load_part_(
+		_load_part),
+	ref_(
+		_ref),
+	weapon_(
+		weapon_type::none),
 	state_(),
+	animation_context_(),
 	animation_(),
 	ended_(false)
 {
-	ref_->size() = sge::sprite::dim::null();
+	ref_.size() = sge::sprite::dim::null();
 }
 
 sanguis::draw::model_part::~model_part()
 {}
 
-sanguis::animation_state::type sanguis::draw::model_part::animation(
+bool sanguis::draw::model_part::try_animation(
 	animation_type::type const atype)
 {
-	return 
-		state_ && state_->animation_type() == atype
-		? animation_state::loaded
-		: 
-			try_animation(
-				atype);
+	if (state_ && state_->animation_type() == atype)
+		return true;
+	
+	if (!load_part_[weapon_ == weapon_type::size ? weapon_type::none : weapon_].has_animation(atype))
+		return false;
+
+	load_animation(
+		atype);
+
+	return true;
 }
 
 void sanguis::draw::model_part::weapon(
@@ -68,7 +76,7 @@ void sanguis::draw::model_part::weapon(
 {
 	// we lose the animation here
 	// which model has to reset
-	//state.reset(new model_part_state(*info,animation_type::size,wtype));
+	//state.reset(new model_part_state(*load_part,animation_type::size,wtype));
 	weapon_ = wtype;
 	state_.reset();
 }
@@ -76,8 +84,26 @@ void sanguis::draw::model_part::weapon(
 void sanguis::draw::model_part::update(
 	time_type const time)
 {
-	anim_diff_clock.update(
+	anim_diff_clock_.update(
 		time);
+	
+	if (!animation_ && animation_context_)
+	{
+		animation_context_->update();
+		if (animation_context_->is_finished())
+		{
+			animation_.reset(
+				new sge::sprite::texture_animation(
+					animation_context_->result(),
+					loop_method(
+						state_->animation_type()),
+					ref_,
+					anim_diff_clock_.callback()));
+			ref_.size() = 
+				sge::math::dim::structure_cast<sge::sprite::dim>(
+					animation_->dim());
+		}
+	}
 	
 	if (state_)
 		state_->update();
@@ -85,10 +111,10 @@ void sanguis::draw::model_part::update(
 	if(animation_)
 		ended_ = animation_->process() || ended_;
 
-	if(sge::math::compare(desired_orientation, invalid_rotation))
+	if(sge::math::compare(desired_orientation_, invalid_rotation))
 		return;
 	
-	if(sge::math::compare(orientation(), desired_orientation))
+	if(sge::math::compare(orientation(), desired_orientation_))
 		return;
 
 	funit const
@@ -99,7 +125,7 @@ void sanguis::draw::model_part::update(
 		// target orientation in [0,2pi]
 		abs_target(
 			sge::math::rel_angle_to_abs(
-				desired_orientation));
+				desired_orientation_));
 	
 	// shortcut
 	funit const twopi = sge::math::twopi<funit>();
@@ -161,7 +187,7 @@ void sanguis::draw::model_part::update(
 	// so on, causing epilepsy.
 	if (dir > static_cast<funit>(0))
 	{
-		if (new_orientation < desired_orientation)
+		if (new_orientation < desired_orientation_)
 		{
 			update_orientation(
 				sge::math::abs_angle_to_rel(
@@ -170,12 +196,12 @@ void sanguis::draw::model_part::update(
 		else
 		{
 			update_orientation(
-				desired_orientation);
+				desired_orientation_);
 		}
 	}
 	else
 	{
-		if (new_orientation > desired_orientation)
+		if (new_orientation > desired_orientation_)
 		{
 			update_orientation(
 				sge::math::abs_angle_to_rel(
@@ -184,7 +210,7 @@ void sanguis::draw::model_part::update(
 		else
 		{
 			update_orientation(
-				desired_orientation);
+				desired_orientation_);
 		}
 	}
 }
@@ -195,9 +221,9 @@ void sanguis::draw::model_part::orientation(
 	if(!sge::math::is_rel_angle(rot))
 		rot = sge::math::abs_angle_to_rel(rot);
 
-	if(sge::math::compare(desired_orientation, invalid_rotation))
+	if(sge::math::compare(desired_orientation_, invalid_rotation))
 		update_orientation(rot);
-	desired_orientation = rot;
+	desired_orientation_ = rot;
 }
 
 bool sanguis::draw::model_part::animation_ended() const
@@ -207,64 +233,41 @@ bool sanguis::draw::model_part::animation_ended() const
 
 sanguis::draw::object &sanguis::draw::model_part::object()
 {
-	return *ref_;
+	return ref_;
 }
 
 sanguis::draw::object const &sanguis::draw::model_part::object() const
 {
-	return *ref_;
+	return ref_;
 }
 
-sanguis::animation_state::type sanguis::draw::model_part::try_animation(
+void sanguis::draw::model_part::load_animation(
 	animation_type::type const atype)
 {
 	if (weapon_ == weapon_type::size)
 		weapon_ = weapon_type::none;
 	
-	animation_state::type const anim_state = 
-		(*info_)[weapon_].state(
-			atype);
+	// DEBUG
+	sge::cerr << "looking for weapon: " << (weapon_ == weapon_type::size ? weapon_type::none : weapon_) << ", animation " << atype << "\n";
 
-	switch (anim_state)
-	{
-		case animation_state::not_found:
-			return anim_state;
-		case animation_state::loading:
-		case animation_state::loaded:
-		break;
-	}
-
+	animation_context_.take(
+		load_part_[weapon_][atype].load());
+	
 	state_.reset(
 		new model_part_state(
-			*info_,
+			load_part_,
 			*this,
 			atype,
 			state_
-			? state_->weapon_type()
-			: weapon_));
-	return anim_state;
-}
-
-sanguis::draw::model_part::animation_auto_ptr
-sanguis::draw::model_part::get_animation(
-	weapon_type::type const wtype,
-	animation_type::type const atype)
-{
-	return animation_auto_ptr(
-		new sge::sprite::texture_animation(
-			(*info_)[wtype]
-				[atype]
-					.get(),
-			loop_method(
-				atype),
-			*ref_,
-			anim_diff_clock.callback()));
+				? state_->weapon_type()
+				: weapon_));
 }
 
 void sanguis::draw::model_part::update_orientation(
 	sge::sprite::rotation_type const rot)
 {
-	ref_->rotation(rot);
+	ref_.rotation(
+		rot);
 }
 
 sge::sprite::texture_animation::loop_method::type
@@ -289,5 +292,5 @@ sanguis::draw::model_part::loop_method(
 sge::sprite::rotation_type
 sanguis::draw::model_part::orientation() const
 {
-	return ref_->rotation();
+	return ref_.rotation();
 }

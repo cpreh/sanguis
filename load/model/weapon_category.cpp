@@ -13,6 +13,7 @@
 #include <sge/log/headers.hpp>
 #include <sge/string.hpp>
 #include <sge/text.hpp>
+#include <sge/cerr.hpp>
 #include <boost/tr1/array.hpp>
 #include <boost/foreach.hpp>
 #include <utility>
@@ -63,6 +64,7 @@ sanguis::load::model::weapon_category::operator[](
 		it(
 			animations.find(
 				anim));
+
 	if(it != animations.end())
 		return it->second;
 
@@ -75,19 +77,15 @@ sanguis::load::model::weapon_category::operator[](
 		anim);
 }
 
-sanguis::animation_state::type sanguis::load::model::weapon_category::state(
+bool sanguis::load::model::weapon_category::has_animation(
 	animation_type::type const anim) const
 {
 	animation_map::const_iterator const 
 		it(
 			animations.find(
 				anim));
-	if(it == animations.end())
-		return animation_state::not_found;
 	return 
-		it->second.update()
-		? animation_state::loaded
-		: animation_state::loading;
+		it != animations.end();
 }
 
 sanguis::load::model::weapon_category::weapon_category(
