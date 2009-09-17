@@ -1,10 +1,12 @@
 #include "animation.hpp"
-#include "../resource/texture_context.hpp"
 #include "animation_sound.hpp"
 #include "global_parameters.hpp"
 #include "find_texture.hpp"
-#include "../resource/textures.hpp"
 #include "../log.hpp"
+#include "../resource/texture_context.hpp"
+#include "../resource/textures.hpp"
+#include "../resource/texture_context_impl.hpp"
+#include "animation_context.hpp"
 #include "../../exception.hpp"
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/find_member.hpp>
@@ -28,6 +30,7 @@
 #include <sge/cerr.hpp>
 #include <sge/lexical_cast.hpp>
 #include <boost/foreach.hpp>
+#include <boost/bind.hpp>
 
 namespace
 {
@@ -99,17 +102,31 @@ load_delay(
 }
 
 sanguis::load::model::animation::animation(
-	sge::parse::json::object const &object,
+	sge::parse::json::object const &_object,
 	global_parameters const &_param)
 :
+	object_(
+		_object),
 	param_(
 		_param),
-	members_(
-		object.members),
-	context_(),
-	anim(),
-	sounds_()
+	sounds_(),
+	texture_()
 {
+	optional_texture_identifier _texture = 
+		param_.new_texture(
+			find_texture(
+				object_.members
+			)
+		).texture();
+
+	if(!_texture)
+		throw exception(
+			SGE_TEXT("texture not found in ")
+			+ param_.path().string()
+		);
+	
+	texture_ = *_texture;
+
 	try
 	{
 		sounds_ = sge::make_shared_ptr<
@@ -118,7 +135,7 @@ sanguis::load::model::animation::animation(
 			sge::parse::json::find_member<
 				sge::parse::json::object
 			>(
-				members_,
+				object_.members,
 				SGE_TEXT("sounds")
 			).members,
 			param_.sounds()
@@ -131,31 +148,6 @@ sanguis::load::model::animation::animation(
 		>();
 	}
 
-	optional_texture_identifier const texture(
-		param_.new_texture(
-			find_texture(
-				members_
-			)
-		).texture()
-	);
-	
-	if(!texture)
-		throw exception(
-			SGE_TEXT("texture not found in ")
-			+ param_.path().string()
-		);
-
-	sge::cerr << "creating texture context for animation\n";
-	context_ = 
-		param_.textures().load(
-			param_.path() / *texture);
-	//update(); // DEBUG
-}
-
-sge::sprite::animation_series const &
-sanguis::load::model::animation::get() const
-{
-	return *anim;
 }
 
 sanguis::load::model::animation_sound const &
@@ -164,11 +156,137 @@ sanguis::load::model::animation::sounds() const
 	return *sounds_;
 }
 
+sanguis::load::model::animation::context_ptr sanguis::load::model::animation::load() const 
+{
+	return 
+		context_ptr(
+			new animation_context(
+				param_.textures().load(
+					param_.path() / texture_),
+				frame_cache_,
+				boost::bind(
+					&animation::fill_cache,
+					this,
+					_1)));
+}
+
+void sanguis::load::model::animation::fill_cache(
+	sge::renderer::lock_rect const &_area) const
+{
+	if (!frame_cache_.empty())
+	{
+		// DEBUG
+		//sge::cerr << "cache is not empty, returning\n";
+		return;
+	}
+
+		// DEBUG
+	//sge::cerr << "cache is empty, continuing\n";
+	
+	sge::parse::json::element_vector const &range(
+		sge::parse::json::find_member<
+			sge::parse::json::array
+		>(
+			object_.members,
+			SGE_TEXT("range")
+		).elements
+	);
+
+	if(range.size() < 2)
+		throw exception(
+			SGE_TEXT("range has too few elements in TODO")
+		);
+
+	sge::renderer::size_type const
+		begin(
+			sge::parse::json::get<
+				int
+			>(
+				range[0]
+			)
+		),
+		end(
+			sge::parse::json::get<
+				int	
+			>(
+				range[1]
+			)
+		);
+
+	sge::time::unit const delay(
+		load_delay(
+			object_.members,
+			param_.delay()
+		)
+	);
+
+	//sge::cerr << "delay is " << delay << "\n";
+
+	for(sge::renderer::size_type i = begin; i != end; ++i)
+	{
+		sge::renderer::lock_rect const cur_area(
+			calc_rect(
+				_area,
+				param_.cell_size(),
+				i
+			)
+		);
+
+		if(
+			!contains(
+				_area,
+				cur_area
+			)
+		)
+			throw exception(
+				SGE_TEXT("Rect out of bounds in TODO")
+				SGE_TEXT(". Whole area of texture is ")
+				+ sge::lexical_cast<sge::string>(_area)
+				+ SGE_TEXT(" but the inner area is ")
+				+ sge::lexical_cast<sge::string>(cur_area)
+				+ SGE_TEXT(". This happened when trying to load index ")
+				+ sge::lexical_cast<sge::string>(begin)
+			);
+
+		// DEBUG
+		//sge::cerr << "adding value!\n";
+		
+		frame_cache_.push_back(
+			frame_cache_value(
+				delay,
+				cur_area));
+/*
+		anim->push_back(
+			sge::sprite::animation_entity(
+				sge::time::millisecond(
+					delay
+				),
+				sge::texture::const_part_ptr(
+					sge::make_shared_ptr<
+						sge::texture::part_raw
+					>(
+						tex->texture(),
+						cur_area
+					)
+				)
+			)
+		);
+		*/
+	}
+	/*fill_cache();
+	sge::cerr << "creating texture context for animation\n";
+	context_ = 
+		param_.textures().load(
+			param_.path() / *texture);*/
+	//update(); // DEBUG
+}
+
+#if 0
 bool sanguis::load::model::animation::update() const
 {
 	if (anim)
 		return true;
-	if (!context_->update())
+	if (!context_.value()->update())
 		return false;
 	
 	anim.reset(
@@ -176,7 +294,7 @@ bool sanguis::load::model::animation::update() const
 
 	// TODO: let the context return sge::image::file_ptr instead and convert to part_ptr here
 	sge::texture::part_ptr const tex = 
-		context_->result();
+		context_.value()->result();
 
 	sge::parse::json::element_vector const &range(
 		sge::parse::json::find_member<
@@ -262,3 +380,4 @@ bool sanguis::load::model::animation::update() const
 	}
 	return true;
 }
+#endif

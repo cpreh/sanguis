@@ -32,7 +32,6 @@ class model_part_state
 	animation_type::type const animation_type_;
 	weapon_type::type const weapon_type_;
 	bool start_played_;
-	bool loaded_;
 
 	void play(
 		sge::audio::sound_ptr,

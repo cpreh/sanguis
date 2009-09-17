@@ -129,8 +129,10 @@ sanguis::draw::explosion::explosion(
 		environment()),
 	properties_(
 		prop_),
-	ended(false),
-	aoe_(_aoe)
+	ended(
+		false),
+	aoe_(
+		_aoe)
 {
 	// TODO: we have to pass the aoe here!
 	sge::renderer::screen_size const screen_sz(
@@ -197,7 +199,7 @@ sanguis::draw::particle::base_ptr
 sanguis::draw::explosion::generate_particle(
 	particle_type::type const t)
 {
-	sge::sprite::animation_series const anim =
+	load::model::animation::context_ptr anim = 
 		environment().context().models()()
 		[
 			SGE_TEXT("particles/")+
@@ -209,7 +211,7 @@ sanguis::draw::explosion::generate_particle(
 		]
 		[
 			animation_type::none
-		].get();
+		].load();
 	
 	particle::base_ptr ptr;
 	

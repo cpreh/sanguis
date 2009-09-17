@@ -4,6 +4,7 @@
 #include "../context_fwd.hpp"
 #include "textures_fwd.hpp"
 #include "sounds_fwd.hpp"
+#include "../../time_type.hpp"
 #include "animations_fwd.hpp"
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image/loader_fwd.hpp>
@@ -33,6 +34,9 @@ public:
 
 	resource::animations const &
 	animations() const;
+
+	void update(
+		time_type) const;
 private:
 	friend class load::context;
 

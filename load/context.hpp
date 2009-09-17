@@ -3,6 +3,7 @@
 
 #include "model/context.hpp"
 #include "resource/context.hpp"
+#include "../time_type.hpp"
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image/loader_fwd.hpp>
 #include <sge/audio/player_fwd.hpp>
@@ -31,6 +32,8 @@ public:
 
 	model::context const &
 	models() const;
+
+	void update(time_type) const;
 private:
 	sge::image::loader_ptr const il;
 	sge::renderer::device_ptr const rend;

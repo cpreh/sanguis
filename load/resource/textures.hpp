@@ -1,8 +1,10 @@
 #ifndef SANGUIS_LOAD_RESOURCE_TEXTURES_HPP_INCLUDED
 #define SANGUIS_LOAD_RESOURCE_TEXTURES_HPP_INCLUDED
 
+#include "../../time_type.hpp"
 #include "texture_identifier.hpp"
 #include "texture_context_fwd.hpp"
+#include "texture_context.hpp"
 #include <sge/texture/part_fwd.hpp>
 #include <sge/texture/manager.hpp>
 #include <sge/renderer/device_fwd.hpp>
@@ -25,9 +27,12 @@ public:
 	load(
 		texture_identifier const &) const;
 
-	texture_context_ptr const
+	texture_context const
 	load(
 		sge::filesystem::path const &) const;
+	
+	void cleanup(
+		time_type) const;
 	
 	~textures();
 private:
@@ -38,7 +43,7 @@ private:
 	do_load(
 		texture_identifier const &) const;
 	
-	texture_context_ptr const
+	texture_context_impl_ptr const
 	do_load_unnamed(
 		sge::filesystem::path const &) const;
 
@@ -57,7 +62,7 @@ private:
 
 	typedef std::map<
 		sge::filesystem::path,
-		texture_context_ptr
+		texture_context_impl_ptr
 	> unnamed_texture_map;
 
 	typedef std::map<

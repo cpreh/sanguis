@@ -1,11 +1,12 @@
 #include "generator.hpp"
 //#include "simple.hpp"
-#include "infinite.hpp"
-//#include "debug.hpp"
+//#include "infinite.hpp"
+#include "debug.hpp"
 #include <boost/assign/ptr_list_inserter.hpp>
 
 sanguis::server::waves::generator::generator()
 {
+	/*
 	// TODO: somehow put this in a configuration file!
 	boost::assign::ptr_push_back<waves::infinite>(waves)
 	(
@@ -69,9 +70,10 @@ sanguis::server::waves::generator::generator()
 		spawns_per_wave(1),
 		enemy_type::skeleton
 	);
+	*/
 
-//	boost::assign::ptr_push_back<waves::debug>(waves)
-//	();
+	boost::assign::ptr_push_back<waves::debug>(waves)
+	();
 }
 
 void

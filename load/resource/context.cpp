@@ -21,6 +21,12 @@ sanguis::load::resource::context::animations() const
 	return *animations_;
 }
 
+void sanguis::load::resource::context::update(time_type const delta) const
+{
+	textures_->cleanup(
+		delta);
+}
+
 sanguis::load::resource::context::context(
 	sge::renderer::device_ptr const rend,
 	sge::image::loader_ptr const il,

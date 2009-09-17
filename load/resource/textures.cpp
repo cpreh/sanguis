@@ -1,5 +1,6 @@
 #include "textures.hpp"
 #include "texture_context.hpp"
+#include "texture_context_impl.hpp"
 #include "map_get_or_create.hpp"
 #include "../log.hpp"
 #include "../../exception.hpp"
@@ -19,6 +20,7 @@
 #include <sge/text.hpp>
 #include <sge/fstream.hpp>
 #include <sge/string.hpp>
+#include <sge/cerr.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/bind.hpp>
@@ -48,19 +50,39 @@ sanguis::load::resource::textures::load(
 	);
 }
 
-sanguis::load::resource::texture_context_ptr const
+sanguis::load::resource::texture_context const
 sanguis::load::resource::textures::load(
 	sge::filesystem::path const &path) const
 {
-	return map_get_or_create(
-		unnamed_textures,
-		path,
-		boost::bind(
-			&textures::do_load_unnamed,
-			this,
-			_1
-		)
-	);
+	return 
+		texture_context(
+			map_get_or_create(
+				unnamed_textures,
+				path,
+				boost::bind(
+					&textures::do_load_unnamed,
+					this,
+					_1)));
+}
+
+void sanguis::load::resource::textures::cleanup(
+	time_type const delta) const
+{
+	for(
+		unnamed_texture_map::iterator it(unnamed_textures.begin()), next(it); 
+		it != unnamed_textures.end(); 
+		it = next) 
+	{ 
+		++next; 
+		it->second->tick(
+			delta);
+		if (it->second->decayed())
+		{
+			sge::cerr << "deleting decayed texture " << it->first.string() << "\n";
+			unnamed_textures.erase(
+				it);
+		}
+	}
 }
 
 sanguis::load::resource::textures::~textures()
@@ -80,12 +102,12 @@ sanguis::load::resource::textures::do_load(
 		/ texture_names[id]);
 }
 
-sanguis::load::resource::texture_context_ptr const
+sanguis::load::resource::texture_context_impl_ptr const
 sanguis::load::resource::textures::do_load_unnamed(
 	sge::filesystem::path const &path) const
 {
 	return 
-		sge::make_shared_ptr<texture_context>(
+		sge::make_shared_ptr<texture_context_impl>(
 			path,
 			texman.renderer(),
 			il,
@@ -116,7 +138,8 @@ sanguis::load::resource::textures::textures(
 			filter
 		)
 	),
-	il(il)
+	il(
+		il)
 {
 	// look for .tex files
 	for (sge::filesystem::directory_iterator i(sanguis::media_path()), end; i != end; ++i)
