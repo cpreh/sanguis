@@ -5,6 +5,7 @@
 #include <sge/collision/body.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/vector/construct.hpp>
+#include <sge/math/vector/narrow_cast.hpp>
 #include <sge/make_auto_ptr.hpp>
 #include <boost/logic/tribool.hpp>
 #include <boost/tr1/functional.hpp>
@@ -16,16 +17,54 @@ sanguis::server::collision::base::base()
 	shapes_()
 {}
 
-sge::collision::body_ptr const
-sanguis::server::collision::base::body()
+void
+sanguis::server::collision::base::body_pos(
+	pos_type const &pos_
+)
 {
-	return body_;
+	body_->position(
+		sge::math::vector::construct(
+			pos_,
+			static_cast<
+				space_unit
+			>(0)
+		)
+	);
 }
 
-sge::collision::const_body_ptr const
-sanguis::server::collision::base::body() const
+sanguis::server::pos_type const
+sanguis::server::collision::base::body_pos() const
 {
-	return body_;
+	return sge::math::vector::narrow_cast<
+		pos_type
+	>(
+		body_->position()
+	);
+}
+
+void
+sanguis::server::collision::base::body_speed(
+	pos_type const &speed_
+)
+{
+	body_->linear_velocity(
+		sge::math::vector::construct(
+			speed_,
+			static_cast<
+				space_unit
+			>(0)
+		)
+	);
+}
+
+sanguis::server::pos_type const
+sanguis::server::collision::base::body_speed() const
+{
+	return sge::math::vector::narrow_cast<
+		pos_type
+	>(
+		body_->linear_velocity()
+	);
 }
 
 void

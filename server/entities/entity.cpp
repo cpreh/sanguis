@@ -20,7 +20,6 @@
 #include <sge/math/vector/dim.hpp>
 #include <sge/math/vector/construct.hpp>
 #include <sge/math/vector/output.hpp>
-#include <sge/math/vector/narrow_cast.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/math/dim/arithmetic.hpp>
 #include <sge/collision/body.hpp>
@@ -98,8 +97,6 @@ sanguis::server::entities::entity::transfer(
 )
 {
 	environment_ = nenvironment;
-
-	on_transfer();
 
 	direction(
 		insert_param.direction()
@@ -207,11 +204,7 @@ sanguis::server::entities::entity::direction(
 sanguis::server::pos_type const
 sanguis::server::entities::entity::center() const
 {
-	return sge::math::vector::narrow_cast<
-		pos_type
-	>(
-		body()->position()
-	);
+	return body_pos();
 }
 
 void
@@ -219,13 +212,8 @@ sanguis::server::entities::entity::center(
 	pos_type const &_center
 )
 {
-	body()->position(
-		sge::math::vector::construct(
-			_center,
-			static_cast<
-				space_unit
-			>(0)
-		)
+	body_pos(
+		_center
 	);
 
 	BOOST_FOREACH(
@@ -240,11 +228,7 @@ sanguis::server::entities::entity::center(
 sanguis::server::pos_type const
 sanguis::server::entities::entity::abs_speed() const
 {
-	return sge::math::vector::narrow_cast<
-		pos_type
-	>(
-		body()->linear_velocity()
-	);
+	return body_speed();
 }
 
 sanguis::server::space_unit
@@ -478,10 +462,6 @@ sanguis::server::entities::entity::add_aura(
 		auras_.back()
 	);
 
-	ref.center(
-		center()
-	);
-
 	ref.owner(
 		id()
 	);
@@ -538,18 +518,15 @@ sanguis::server::entities::entity::insert_link(
 	links.push_back(l);
 }
 
-void sanguis::server::entities::entity::speed_change(
-	property::value_type const s)
+void
+sanguis::server::entities::entity::speed_change(
+	property::value_type const s
+)
 {
-	body()->linear_velocity(
-		sge::math::vector::construct(
-			angle_to_vector(
-				direction()
-			) * s,
-			static_cast<
-				space_unit
-			>(0)
-		)
+	body_speed(
+		angle_to_vector(
+			direction()
+		) * s
 	);
 }
 
@@ -631,8 +608,4 @@ void
 sanguis::server::entities::entity::collision_entity_end(
 	entity &
 )
-{}
-
-void
-sanguis::server::entities::entity::on_transfer()
 {}

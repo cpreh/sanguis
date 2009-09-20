@@ -4,7 +4,6 @@
 #include <sge/collision/body.hpp>
 #include <sge/collision/world.hpp>
 #include <sge/math/circle/basic_impl.hpp>
-#include <sge/math/vector/construct.hpp>
 #include <sge/assign/make_container.hpp>
 #include <boost/logic/tribool.hpp>
 
@@ -13,14 +12,10 @@ sanguis::server::auras::aura::~aura()
 
 void
 sanguis::server::auras::aura::center(
-	pos_type const &p
-)
+	pos_type const &p)
 {
-	body()->position(
-		sge::math::vector::construct(
-			p,
-			static_cast<space_unit>(0)
-		)
+	body_pos(
+		p
 	);
 }
 

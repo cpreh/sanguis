@@ -28,7 +28,6 @@
 #include "../../damage_type.hpp"
 #include "../../time_type.hpp"
 #include "../../perk_type.hpp"
-#include <sge/math/vector/basic_decl.hpp>
 #include <sge/math/dim/basic_decl.hpp>
 #include <sge/signal/scoped_connection.hpp>
 #include <sge/container/map_decl.hpp>
@@ -254,9 +253,6 @@ private:
 		entity &
 	);
 
-	virtual void
-	on_transfer();
-
 	environment::object_ptr environment_;
 
 	environment::load_context_ptr const load_context_;
@@ -264,8 +260,6 @@ private:
 	entity_id const id_;
 
 	damage::armor armor_;
-
-	pos_type center_;
 
 	space_unit
 		angle_,

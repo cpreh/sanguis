@@ -3,6 +3,7 @@
 
 #include "shape_vector.hpp"
 #include "create_parameters_fwd.hpp"
+#include "../pos_type.hpp"
 #include <sge/collision/world_fwd.hpp>
 #include <sge/collision/body_fwd.hpp>
 #include <sge/noncopyable.hpp>
@@ -20,11 +21,21 @@ class base {
 protected:
 	base();
 
-	sge::collision::body_ptr const
-	body();
+	void
+	body_pos(
+		pos_type const &
+	);
 
-	sge::collision::const_body_ptr const
-	body() const;
+	pos_type const
+	body_pos() const;
+
+	void
+	body_speed(
+		pos_type const &
+	);
+
+	pos_type const
+	body_speed() const;
 public:
 	void
 	recreate(
