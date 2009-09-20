@@ -254,6 +254,9 @@ private:
 		entity &
 	);
 
+	virtual void
+	on_transfer();
+
 	environment::object_ptr environment_;
 
 	environment::load_context_ptr const load_context_;

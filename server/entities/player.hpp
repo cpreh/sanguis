@@ -54,6 +54,11 @@ private:
 	void
 	on_die();
 
+	void
+	update_sight_range(
+		entity_id
+	);
+
 	string const name_;
 	server::player_id const player_id_;
 	exp_type exp_;

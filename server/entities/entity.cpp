@@ -31,6 +31,7 @@
 #include <sge/assign/make_container.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/text.hpp>
+#include <sge/assert.hpp>
 #include <boost/logic/tribool.hpp>
 #include <boost/foreach.hpp>
 #include <boost/bind.hpp>
@@ -98,6 +99,8 @@ sanguis::server::entities::entity::transfer(
 {
 	environment_ = nenvironment;
 
+	on_transfer();
+
 	direction(
 		insert_param.direction()
 	);
@@ -134,6 +137,10 @@ sanguis::server::entities::entity::transfer(
 sanguis::server::environment::object_ptr const
 sanguis::server::entities::entity::environment() const
 {
+	SGE_ASSERT(
+		environment_
+	);
+
 	return environment_;
 }
 
@@ -624,4 +631,8 @@ void
 sanguis::server::entities::entity::collision_entity_end(
 	entity &
 )
+{}
+
+void
+sanguis::server::entities::entity::on_transfer()
 {}

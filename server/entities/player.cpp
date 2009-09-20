@@ -39,16 +39,14 @@ sanguis::server::entities::player::player(
 	level_delta_(static_cast<level_type>(0)),
 	skill_points_(0)
 {
-	/*
 	auras::auto_ptr new_aura(
 		sge::make_auto_ptr<
 			auras::update_sight
 		>(
 			1000, // FIXME
 			boost::bind(
-				&server::environment::object::update_sight_range,
-				env.get(),
-				player_id_,
+				&player::update_sight_range,
+				this,
 				_1
 			)
 		)
@@ -57,7 +55,6 @@ sanguis::server::entities::player::player(
 	add_aura(
 		new_aura
 	);
-	*/
 }
 
 sanguis::server::exp_type
@@ -173,3 +170,15 @@ sanguis::server::entities::player::on_die()
 		player_id()
 	);
 }
+
+void
+sanguis::server::entities::player::update_sight_range(
+	entity_id const entity_id_
+)
+{
+	environment()->update_sight_range(
+		player_id(),
+		entity_id_
+	);
+}
+
