@@ -5,22 +5,17 @@
 #include <sge/container/map_impl.hpp>
 
 sanguis::server::entities::base_parameters::base_parameters(
-	environment::object_ptr const env_,
+	environment::load_context_ptr const load_context_,
 	damage::armor const &armor_,
-	pos_type const &center_,
-	space_unit const angle_,
-	space_unit const direction_,
 	team::type const team_,
 	property_map const &properties_,
 	entity_type::type const type_,
 	bool const invulnerable_,
-	dim_type const &collision_dim_)
+	dim_type const &collision_dim_
+)
 :
-	env_(env_),
+	load_context_(load_context_),
 	armor_(armor_),
-	center_(center_),
-	angle_(angle_),
-	direction_(direction_),
 	team_(team_),
 	properties_(
 		insert_default_properties(
@@ -32,34 +27,16 @@ sanguis::server::entities::base_parameters::base_parameters(
 	collision_dim_(collision_dim_)
 {}
 
-sanguis::server::environment::object_ptr const
-sanguis::server::entities::base_parameters::env() const
+sanguis::server::environment::load_context_ptr const
+sanguis::server::entities::base_parameters::load_context() const
 {
-	return env_;
+	return load_context_;
 }
 
 sanguis::server::damage::armor const &
 sanguis::server::entities::base_parameters::armor() const
 {
 	return armor_;
-}
-
-sanguis::server::pos_type const &
-sanguis::server::entities::base_parameters::center() const
-{
-	return center_;
-}
-
-sanguis::server::space_unit
-sanguis::server::entities::base_parameters::angle() const
-{
-	return angle_;
-}
-
-sanguis::server::space_unit
-sanguis::server::entities::base_parameters::direction() const
-{
-	return direction_;
 }
 
 sanguis::server::team::type

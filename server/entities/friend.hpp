@@ -15,11 +15,8 @@ class friend_ : public entity_with_ai {
 public:
 	friend_(
 		friend_type::type,
-		server::environment::object_ptr,
+		server::environment::load_context_ptr,
 		damage::armor const &,
-		pos_type const &center,
-		space_unit angle,
-		space_unit direction,
 		team::type,
 		property_map const &,
 		ai::auto_ptr,

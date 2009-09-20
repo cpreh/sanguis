@@ -1,9 +1,11 @@
 #include "aura.hpp"
 #include "../entities/entity.hpp"
-#include "../collision/create_circle.hpp"
-#include <sge/collision/objects/circle.hpp>
+#include <sge/collision/shapes/circle.hpp>
+#include <sge/collision/body.hpp>
+#include <sge/collision/world.hpp>
 #include <sge/math/circle/basic_impl.hpp>
 #include <sge/math/vector/construct.hpp>
+#include <sge/assign/make_container.hpp>
 #include <boost/logic/tribool.hpp>
 
 sanguis::server::auras::aura::~aura()
@@ -14,7 +16,7 @@ sanguis::server::auras::aura::center(
 	pos_type const &p
 )
 {
-	collision_object()->pos(
+	body()->position(
 		sge::math::vector::construct(
 			p,
 			static_cast<space_unit>(0)
@@ -31,22 +33,13 @@ sanguis::server::auras::aura::owner(
 }
 
 sanguis::server::auras::aura::aura(
-	sge::collision::world_ptr const collision_world_,
-	space_unit const radius,
+	space_unit const radius_,
 	team::type const team_,
 	influence::type const influence_
 )
 :
-	collision::base(
-		collision::create_circle(
-			collision_world_,
-			pos_type::null(), // will be set later
-			static_cast<space_unit>(0), // direction
-			radius,
-			static_cast<space_unit>(0), // movement speed
-			*this
-		)
-	),
+	collision::base(),
+	radius_(radius_),
 	team_(team_),
 	influence_(influence_),
 	owner_(static_cast<entity_id>(-1)) // will also be set later
@@ -56,6 +49,22 @@ sanguis::entity_id
 sanguis::server::auras::aura::owner() const
 {
 	return owner_;
+}
+
+sanguis::server::collision::shape_vector const
+sanguis::server::auras::aura::recreate_shapes(
+	sge::collision::world_ptr const world_
+) const
+{
+	return 
+		sge::assign::make_container<
+			collision::shape_vector
+		>(
+			world_->create_circle(
+				radius_
+			)
+		);
+	
 }
 
 boost::logic::tribool const

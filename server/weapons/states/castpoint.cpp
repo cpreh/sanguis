@@ -10,7 +10,8 @@
 #include <sge/optional_impl.hpp>
 
 sanguis::server::weapons::states::castpoint::castpoint(
-	my_context ctx)
+	my_context ctx
+)
 :
 	my_base(ctx),
 	diff_clock_(),
@@ -27,7 +28,8 @@ sanguis::server::weapons::states::castpoint::castpoint(
 
 boost::statechart::result
 sanguis::server::weapons::states::castpoint::react(
-	events::shoot const &e)
+	events::shoot const &e
+)
 {
 	attack_dest = e.to();
 	return discard_event();
@@ -35,7 +37,8 @@ sanguis::server::weapons::states::castpoint::react(
 
 boost::statechart::result
 sanguis::server::weapons::states::castpoint::react(
-	events::poll const &e)
+	events::poll const &e
+)
 {
 	diff_clock_.update(
 		e.time() * context<weapon>().ias()
@@ -52,6 +55,7 @@ sanguis::server::weapons::states::castpoint::react(
 			e.owner().angle(),
 			e.owner().team(),
 			e.owner().environment(),
+			e.owner().load_context(),
 			*attack_dest
 		)
 	);
@@ -67,7 +71,8 @@ sanguis::server::weapons::states::castpoint::react(
 
 boost::statechart::result
 sanguis::server::weapons::states::castpoint::react(
-	events::stop const &)
+	events::stop const &
+)
 {
 	return transit<ready>();
 }

@@ -5,7 +5,6 @@
 #include "../space_unit.hpp"
 #include "../team.hpp"
 #include "../update_target_function.hpp"
-#include <sge/collision/world_fwd.hpp>
 
 namespace sanguis
 {
@@ -20,7 +19,6 @@ class aggro
 {
 public:
 	aggro(
-		sge::collision::world_ptr,
 		space_unit radius,
 		team::type,
 		update_target_function const &

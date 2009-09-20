@@ -1,11 +1,12 @@
 #include "execute.hpp"
-#include "base.hpp"
 #include "satellite.hpp"
+#include "base.hpp"
 
 void
 sanguis::server::collision::execute(
 	sge::collision::satellite &a,
-	sge::collision::satellite &b
+	sge::collision::satellite &b,
+	execute_function const &function
 )
 {
 	base
@@ -19,7 +20,14 @@ sanguis::server::collision::execute(
 				satellite &
 			>(b).base()
 		);
-	
-	e0.collision(e1);
-	e1.collision(e0);
+
+	function(
+		e0,
+		e1
+	);
+
+	function(
+		e1,
+		e0
+	);
 }

@@ -15,9 +15,7 @@ namespace projectiles
 class rocket : public aoe_projectile {
 public:
 	rocket(
-		server::environment::object_ptr,
-		pos_type const &center,
-		space_unit angle,
+		server::environment::load_context_ptr,
 		team::type team,
 		space_unit damage,
 		space_unit aoe

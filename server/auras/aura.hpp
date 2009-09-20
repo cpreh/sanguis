@@ -6,6 +6,7 @@
 #include "../space_unit.hpp"
 #include "../entities/entity_fwd.hpp"
 #include "../collision/base.hpp"
+#include "../collision/shape_vector.hpp"
 #include "../team.hpp"
 #include "../../entity_id.hpp"
 #include <sge/collision/world_fwd.hpp>
@@ -32,15 +33,19 @@ public:
 	);
 protected:
 	aura(
-		sge::collision::world_ptr,
 		space_unit radius,
-		team::type team,
+		team::type,
 		influence::type
 	);
 	
 	entity_id
 	owner() const;
 private:
+	collision::shape_vector const
+	recreate_shapes(
+		sge::collision::world_ptr
+	) const;
+
 	boost::logic::tribool const
 	can_collide_with(
 		collision::base const &
@@ -56,7 +61,8 @@ private:
 		entities::entity &
 	) = 0;
 
-	team::type const      team_;
+	space_unit const radius_;
+	team::type const team_;
 	influence::type const influence_;
 	entity_id owner_;
 };

@@ -12,7 +12,8 @@ sanguis::server::perks::irs::irs()
 void sanguis::server::perks::irs::do_apply(
 	entities::entity &e,
 	time_type,
-	environment::object_ptr
+	environment::object_ptr,
+	environment::load_context_ptr
 )
 {
 	e.property(

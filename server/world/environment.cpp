@@ -1,6 +1,5 @@
 #include "environment.hpp"
 #include "object.hpp"
-#include <sge/math/dim/basic_impl.hpp>
 
 sanguis::server::world::environment::environment(
 	world::object &world_
@@ -14,11 +13,13 @@ sanguis::server::world::environment::~environment()
 
 sanguis::server::entities::entity & 
 sanguis::server::world::environment::insert(
-	entities::auto_ptr e
+	entities::auto_ptr e,
+	entities::insert_parameters const &ip
 )
 {
 	return world_.insert(
-		e
+		e,
+		ip
 	);
 }
 
@@ -95,12 +96,14 @@ sanguis::server::world::environment::divide_exp(
 void
 sanguis::server::world::environment::request_transfer(
 	world_id const world_id_,
-	entity_id const entity_id_
+	entity_id const entity_id_,
+	entities::insert_parameters const &insert_parameters_
 )
 {
 	world_.request_transfer(
 		world_id_,
-		entity_id_
+		entity_id_,
+		insert_parameters_
 	);
 }
 
@@ -130,14 +133,4 @@ sge::collision::world_ptr const
 sanguis::server::world::environment::collision_world() const
 {
 	return world_.collision_world();
-}
-
-sanguis::server::dim_type const
-sanguis::server::world::environment::entity_dim(
-	string const &model_name
-) const
-{
-	return world_.entity_dim(
-		model_name
-	);
 }

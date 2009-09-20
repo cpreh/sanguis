@@ -2,7 +2,7 @@
 #include "../base_parameters.hpp"
 #include "../../weapons/weapon.hpp"
 #include "../../ai/base.hpp"
-#include "../../environment/object.hpp"
+#include "../../environment/load_context.hpp"
 #include "../../../random.hpp"
 #include "../../../load/enemy_name.hpp"
 #include "../../../messages/add_enemy.hpp"
@@ -12,11 +12,8 @@
 
 sanguis::server::entities::enemies::enemy::enemy(
 	enemy_type::type const etype_,
-	server::environment::object_ptr const env,
+	server::environment::load_context_ptr const load_context_,
 	damage::armor const &armor,
-	pos_type const &center,
-	space_unit const angle,
-	space_unit const direction,
 	property_map const &properties,
 	ai::auto_ptr ai_,
 	weapons::auto_ptr weapon_,
@@ -26,16 +23,13 @@ sanguis::server::entities::enemies::enemy::enemy(
 :
 	entity_with_ai(
 		base_parameters(
-			env,
+			load_context_,
 			armor,
-			center,
-			angle,
-			direction,
 			team::monsters,
 			properties,
 			entity_type::enemy,
 			false,
-			env->entity_dim(
+			load_context_->entity_dim(
 				load::enemy_name(
 					etype_
 				)

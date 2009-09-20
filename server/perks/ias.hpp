@@ -19,7 +19,8 @@ private:
 	do_apply(
 		entities::entity &,
 		time_type,
-		environment::object_ptr
+		environment::object_ptr,
+		environment::load_context_ptr
 	);
 	bool can_raise_level() const;
 	space_unit factor() const;

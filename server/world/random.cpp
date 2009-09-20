@@ -6,7 +6,7 @@ sanguis::server::world::object_auto_ptr
 sanguis::server::world::random(
 	context_ptr const ctx_,
 	sge::collision::system_ptr const collision_system_,
-	load::model::context const &model_context_
+	server::environment::load_context_ptr const load_context_
 )
 {
 	// TODO:
@@ -15,6 +15,6 @@ sanguis::server::world::random(
 	>(
 		ctx_,
 		collision_system_,
-		model_context_
+		load_context_
 	);
 }

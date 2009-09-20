@@ -30,7 +30,8 @@ sanguis::server::waves::simple::simple(
 void
 sanguis::server::waves::simple::process(
 	time_type const diff,
-	environment::object_ptr const env
+	environment::object_ptr const env,
+	environment::load_context_ptr const load_context
 )
 {
 	diff_.update(diff);
@@ -49,6 +50,7 @@ sanguis::server::waves::simple::process(
 	for(unsigned i = 0; i < spawns_per_wave; ++i)
 		spawn(
 			env,
+			load_context,
 			etype
 		);
 }

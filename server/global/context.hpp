@@ -5,8 +5,10 @@
 #include "player_map.hpp"
 #include "world_context_fwd.hpp"
 #include "../world/map.hpp"
-#include "../world/context_fwd.hpp"
+#include "../world/context_ptr.hpp"
 #include "../entities/auto_ptr.hpp"
+#include "../entities/insert_parameters_fwd.hpp"
+#include "../environment/load_context_ptr.hpp"
 #include "../unicast_callback.hpp"
 #include "../string.hpp"
 #include "../player_id.hpp"
@@ -122,7 +124,8 @@ private:
 	void
 	transfer_entity(
 		world_id destination,
-		entities::auto_ptr
+		entities::auto_ptr,
+		entities::insert_parameters const &
 	);
 
 	server::world::object &
@@ -141,11 +144,9 @@ private:
 	
 	player_map players_;
 
-	load::model::context const &model_context_;
+	server::world::context_ptr const world_context_;
 
-	sge::shared_ptr<
-		world::context
-	> const world_context_;
+	server::environment::load_context_ptr const load_context_;
 };
 
 }

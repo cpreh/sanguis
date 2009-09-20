@@ -77,7 +77,7 @@ ADD_EXECUTABLE(sanguis ${basefiles} ${collectionsfiles})
 TARGET_LINK_LIBRARIES(sanguis sgecore sgegui)
 
 IF(NOT MSVC)
-	TARGET_LINK_LIBRARIES(sanguis ${Boost_LIBRARIES} sgecore)
+	TARGET_LINK_LIBRARIES(sanguis ${Boost_LIBRARIES})
 ENDIF()
 
 #FILE (GLOB_RECURSE media_files media/*)

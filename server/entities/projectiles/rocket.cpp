@@ -1,21 +1,22 @@
 #include "rocket.hpp"
 #include "aoe_damage.hpp"
 #include "../property.hpp"
+#include "../insert_parameters.hpp"
+#include "../insert_parameters_pos.hpp"
 #include "../../damage/list.hpp"
 #include "../../damage/wrapper.hpp"
 #include "../../damage/meta.hpp"
 #include "../../damage/fire.hpp"
 #include "../../damage/full.hpp"
 #include "../../environment/object.hpp"
+#include "../../environment/load_context.hpp"
 #include <sge/container/map_impl.hpp>
 #include <sge/text.hpp>
 #include <sge/optional_impl.hpp>
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::projectiles::rocket::rocket(
-	server::environment::object_ptr const env,
-	pos_type const &center,
-	space_unit const angle,
+	server::environment::load_context_ptr const load_context_,
 	team::type const team_,
 	space_unit const damage,
 	space_unit const aoe_
@@ -23,9 +24,7 @@ sanguis::server::entities::projectiles::rocket::rocket(
 :
 	aoe_projectile(
 		aoe_projectile_type::rocket,
-		env,
-		center,
-		angle,
+		load_context_,
 		team_,
 		boost::assign::map_list_of
 			(
@@ -36,7 +35,7 @@ sanguis::server::entities::projectiles::rocket::rocket(
 				entities::property_type::movement_speed,
 				entities::property(static_cast<space_unit>(300))
 			),
-		env->entity_dim(
+		load_context_->entity_dim(
 			SGE_TEXT("rocket")
 		),
 		static_cast<time_type>(10),
@@ -58,8 +57,7 @@ void sanguis::server::entities::projectiles::rocket::on_die()
 	environment()->insert(
 		auto_ptr(
 			new aoe_damage(
-				environment(),
-				center(),
+				load_context(),
 				team(),
 				aoe(),
 				damage,
@@ -69,6 +67,9 @@ void sanguis::server::entities::projectiles::rocket::on_die()
 					damage::fire = damage::full
 				)
 			)
+		),
+		insert_parameters_pos(
+			pos()
 		)
 	);
 }

@@ -1,5 +1,7 @@
 #include "pickup_spawner.hpp"
 #include "environment/object.hpp"
+#include "entities/insert_parameters_pos.hpp"
+#include "entities/insert_parameters.hpp"
 #include "entities/auto_ptr.hpp"
 #include "entities/pickups/health.hpp"
 #include "entities/pickups/monster.hpp"
@@ -11,10 +13,12 @@
 #include <boost/bind.hpp>
 
 sanguis::server::pickup_spawner::pickup_spawner(
-	environment::object_ptr const env
+	environment::object_ptr const env,
+	environment::load_context_ptr const load_context
 )
 :
 	env(env),
+	load_context(load_context),
 	rng(
 		sge::assign::make_container<
 			sge::random::actor::container
@@ -107,11 +111,13 @@ sanguis::server::pickup_spawner::spawn_health()
 	env->insert(
 		entities::auto_ptr(
 			new entities::pickups::health(
-				env,
-				pos,
+				load_context,
 				team::players,
 				10 // FIXME: which health value to use?
 			)
+		),
+		entities::insert_parameters_pos(
+			pos
 		)
 	);
 }
@@ -122,11 +128,13 @@ sanguis::server::pickup_spawner::spawn_monster()
 	env->insert(
 		entities::auto_ptr(
 			new entities::pickups::monster(
-				env,
-				pos,
+				load_context,
 				team::players,
 				friend_type::spider
 			)
+		),
+		entities::insert_parameters_pos(
+			pos
 		)
 	);
 }
@@ -138,11 +146,13 @@ sanguis::server::pickup_spawner::spawn_weapon(
 	env->insert(
 		entities::auto_ptr(
 			new entities::pickups::weapon(
-				env,
-				pos,
+				load_context,
 				team::players,
 				wtype
 			)
+		),
+		entities::insert_parameters_pos(
+			pos
 		)
 	);
 }

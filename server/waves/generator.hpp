@@ -3,6 +3,7 @@
 
 #include "wave.hpp"
 #include "../environment/object_ptr.hpp"
+#include "../environment/load_context_ptr.hpp"
 #include "../../time_type.hpp"
 #include <sge/noncopyable.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
@@ -23,7 +24,8 @@ public:
 	void
 	process(
 		time_type,
-		environment::object_ptr
+		environment::object_ptr,
+		environment::load_context_ptr
 	);
 private:
 	typedef boost::ptr_list<wave> wave_list;

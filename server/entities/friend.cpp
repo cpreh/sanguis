@@ -3,7 +3,7 @@
 #include "pickups/pickup.hpp"
 #include "../weapons/weapon.hpp"
 #include "../ai/base.hpp"
-#include "../environment/object.hpp"
+#include "../environment/load_context.hpp"
 #include "../../load/friend_name.hpp"
 #include "../../messages/add_friend.hpp"
 #include "../../messages/create.hpp"
@@ -13,11 +13,8 @@
 
 sanguis::server::entities::friend_::friend_(
 	friend_type::type const ftype_,
-	server::environment::object_ptr const env,
+	server::environment::load_context_ptr const load_context,
 	damage::armor const &armor,
-	pos_type const &center,
-	space_unit const angle,
-	space_unit const direction,
 	team::type const team_,
 	property_map const &properties,
 	ai::auto_ptr ai_,
@@ -26,16 +23,13 @@ sanguis::server::entities::friend_::friend_(
 :
 	entity_with_ai(
 		base_parameters(
-			env,
+			load_context,
 			armor,
-			center,
-			angle,
-			direction,
 			team_,
 			properties,
 			entity_type::friend_,
 			false,
-			env->entity_dim(
+			load_context->entity_dim(
 				load::friend_name(
 					ftype_
 				)

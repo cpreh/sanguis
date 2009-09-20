@@ -4,6 +4,7 @@
 #include "context_fwd.hpp"
 #include "../player_id.hpp"
 #include "../entities/auto_ptr.hpp"
+#include "../entities/insert_parameters_fwd.hpp"
 #include "../../world_id.hpp"
 #include "../../messages/auto_ptr.hpp"
 #include <sge/noncopyable.hpp>
@@ -23,7 +24,8 @@ public:
 	virtual void
 	transfer_entity(
 		world_id destination,
-		entities::auto_ptr
+		entities::auto_ptr,
+		entities::insert_parameters const &
 	) = 0;
 
 	virtual void

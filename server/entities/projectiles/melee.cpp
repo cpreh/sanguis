@@ -11,16 +11,14 @@
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::projectiles::melee::melee(
-	server::environment::object_ptr const env,
-	pos_type const &center,
+	server::environment::load_context_ptr const load_context_,
 	team::type const team_,
-	space_unit const damage)
+	space_unit const damage
+)
 :
 	projectile(
 		projectile_type::melee,
-		env,
-		center,
-		static_cast<space_unit>(0), // angle doesn't matter here
+		load_context_,
 		team_,
 		boost::assign::map_list_of
 			(

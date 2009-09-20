@@ -8,7 +8,9 @@
 #include "entity_map.hpp"
 #include "sight_range_map.hpp"
 #include "../entities/auto_ptr.hpp"
+#include "../entities/insert_parameters_fwd.hpp"
 #include "../environment/object_ptr.hpp"
+#include "../environment/load_context_ptr.hpp"
 #include "../exp_type.hpp"
 #include "../health_type.hpp"
 #include "../player_id.hpp"
@@ -19,7 +21,6 @@
 #include "../../world_id.hpp"
 #include "../../weapon_type.hpp"
 #include "../../messages/auto_ptr.hpp"
-#include "../../load/model/context_fwd.hpp"
 #include <sge/collision/world_fwd.hpp>
 #include <sge/collision/system_fwd.hpp>
 #include <sge/signal/scoped_connection.hpp>
@@ -41,7 +42,7 @@ public:
 	object(
 		context_ptr const global_context_,
 		sge::collision::system_ptr,
-		load::model::context const &
+		server::environment::load_context_ptr
 	);
 
 	~object();
@@ -53,7 +54,8 @@ public:
 
 	entities::entity & 
 	insert(
-		entities::auto_ptr
+		entities::auto_ptr,
+		entities::insert_parameters const &
 	);
 
 	server::environment::object_ptr const
@@ -99,7 +101,8 @@ private:
 	void
 	request_transfer(
 		world_id,
-		entity_id
+		entity_id,
+		entities::insert_parameters const &
 	);
 
 	void
@@ -116,11 +119,6 @@ private:
 	sge::collision::world_ptr const
 	collision_world() const;
 
-	dim_type const
-	entity_dim(
-		string const &model_name
-	) const;
-
 	// owns functions
 	void
 	send_entity_specific(
@@ -136,7 +134,7 @@ private:
 
 	context_ptr const global_context_;
 
-	load::model::context const &model_context_;
+	server::environment::load_context_ptr const load_context_;
 
 	sge::collision::world_ptr const collision_world_;
 
@@ -152,7 +150,10 @@ private:
 
 	prop_container props_;
 
-	sge::signal::scoped_connection const collision_connection_;
+	sge::signal::scoped_connection const
+		collision_connection_begin_,
+		collision_connection_end_,
+		collision_connection_test_;
 	
 	server::environment::object_ptr const environment_;
 

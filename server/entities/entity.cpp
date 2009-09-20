@@ -3,7 +3,8 @@
 #include "auto_weak_link.hpp"
 #include "property.hpp"
 #include "radius.hpp"
-#include "../collision/create_circle.hpp"
+#include "insert_parameters.hpp"
+#include "../collision/create_parameters.hpp"
 #include "../perks/perk.hpp"
 #include "../buffs/buff.hpp"
 #include "../auras/aura.hpp"
@@ -22,9 +23,12 @@
 #include <sge/math/vector/narrow_cast.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/math/dim/arithmetic.hpp>
-#include <sge/collision/objects/base.hpp>
+#include <sge/collision/body.hpp>
+#include <sge/collision/world.hpp>
+#include <sge/collision/shapes/circle.hpp>
 #include <sge/container/linear_set_impl.hpp>
 #include <sge/container/map_impl.hpp>
+#include <sge/assign/make_container.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/text.hpp>
 #include <boost/logic/tribool.hpp>
@@ -35,28 +39,12 @@ sanguis::server::entities::entity::entity(
 	base_parameters const &param
 )
 :
-	collision::base(
-		collision::create_circle(
-			param.env()->collision_world(),
-			param.center(),
-			param.direction(),
-			entities::radius(
-				param.collision_dim()
-			),
-			param.properties()[
-				property_type::movement_speed
-			].current(),
-			*this
-		)
-	),
-	environment_(	
-		param.env()
-	),
+	environment_(),
+	load_context_(param.load_context()),
 	id_(get_unique_id()),
-	env_(param.env()),
 	armor_(param.armor()),
-	angle_(param.angle()),
-	direction_(param.direction()),
+	angle_(0),
+	direction_(0),
 	team_(param.team()),
 	properties(param.properties()),
 	type_(param.type()),
@@ -103,17 +91,56 @@ sanguis::server::entities::entity::entity(
 {}
 
 void
-sanguis::server::entities::entity::environment(
-	server::environment::object_ptr const nenvironment
+sanguis::server::entities::entity::transfer(
+	server::environment::object_ptr const nenvironment,
+	insert_parameters const &insert_param
 )
 {
 	environment_ = nenvironment;
+
+	direction(
+		insert_param.direction()
+	);
+
+	angle(
+		insert_param.angle()
+	);
+
+	collision::create_parameters const create_param(
+		insert_param.center(),
+		angle_to_vector(
+			direction()
+		)
+		* property(
+			property_type::movement_speed
+		).current()
+	);
+		
+	collision::base::recreate(
+		environment_->collision_world(),
+		create_param
+	);
+
+	BOOST_FOREACH(
+		aura_container::reference aura_,
+		auras_
+	)
+		aura_.recreate(
+			environment_->collision_world(),
+			create_param
+		);
 }
 
 sanguis::server::environment::object_ptr const
 sanguis::server::entities::entity::environment() const
 {
 	return environment_;
+}
+
+sanguis::server::environment::load_context_ptr const
+sanguis::server::entities::entity::load_context() const
+{
+	return load_context_;
 }
 
 sanguis::entity_id
@@ -142,8 +169,10 @@ sanguis::server::entities::entity::angle() const
 	return angle_;
 }
 
-void sanguis::server::entities::entity::angle(
-	space_unit const _angle)
+void
+sanguis::server::entities::entity::angle(
+	space_unit const _angle
+)
 {
 	angle_ = _angle;
 }
@@ -154,10 +183,13 @@ sanguis::server::entities::entity::direction() const
 	return direction_;
 }
 
-void sanguis::server::entities::entity::direction(
-	space_unit const _direction)
+void
+sanguis::server::entities::entity::direction(
+	space_unit const _direction
+)
 {
 	direction_ = _direction;
+
 	speed_change(
 		property(
 			property_type::movement_speed
@@ -171,15 +203,16 @@ sanguis::server::entities::entity::center() const
 	return sge::math::vector::narrow_cast<
 		pos_type
 	>(
-		collision_object()->pos()
+		body()->position()
 	);
 }
 
-
-void sanguis::server::entities::entity::center(
-	pos_type const &_center)
+void
+sanguis::server::entities::entity::center(
+	pos_type const &_center
+)
 {
-	collision_object()->pos(
+	body()->position(
 		sge::math::vector::construct(
 			_center,
 			static_cast<
@@ -203,15 +236,17 @@ sanguis::server::entities::entity::abs_speed() const
 	return sge::math::vector::narrow_cast<
 		pos_type
 	>(
-		collision_object()->speed()
+		body()->linear_velocity()
 	);
 }
 
 sanguis::server::space_unit
 sanguis::server::entities::entity::speed() const
 {
-	return property(
-		property_type::movement_speed).current();
+	return
+		property(
+			property_type::movement_speed
+		).current();
 }
 
 sanguis::server::space_unit
@@ -316,7 +351,8 @@ void sanguis::server::entities::entity::update(
 		p.second->apply(
 			*this,
 			time,
-			environment()
+			environment(),
+			load_context()
 		);
 
 	for(
@@ -469,8 +505,24 @@ sanguis::server::entities::entity::perk_choosable(
 		|| it->second->can_raise_level();
 }
 
-void sanguis::server::entities::entity::on_die()
+void
+sanguis::server::entities::entity::on_die()
 {}
+
+sanguis::server::collision::shape_vector const
+sanguis::server::entities::entity::recreate_shapes(
+	sge::collision::world_ptr const world_
+) const
+{
+	return
+		sge::assign::make_container<
+			collision::shape_vector
+		>(
+			world_->create_circle(
+				radius()
+			)
+		);
+}
 
 void
 sanguis::server::entities::entity::insert_link(
@@ -482,7 +534,7 @@ sanguis::server::entities::entity::insert_link(
 void sanguis::server::entities::entity::speed_change(
 	property::value_type const s)
 {
-	collision_object()->speed(
+	body()->linear_velocity(
 		sge::math::vector::construct(
 			angle_to_vector(
 				direction()
@@ -525,18 +577,35 @@ sanguis::server::entities::entity::can_collide_with(
 }
 
 void
-sanguis::server::entities::entity::collision(
-	collision::base &b)
+sanguis::server::entities::entity::collision_begin(
+	collision::base &b
+)
 {
 	entity *const other(
 		dynamic_cast<entity *>(&b)
 	);
 
 	if(other)
-		collision_entity(
+		collision_entity_begin(
 			*other
 		);
 }
+
+void
+sanguis::server::entities::entity::collision_end(
+	collision::base &b
+)
+{
+	entity *const other(
+		dynamic_cast<entity *>(&b)
+	);
+
+	if(other)
+		collision_entity_end(
+			*other
+		);
+}
+
 
 boost::logic::tribool const
 sanguis::server::entities::entity::can_collide_with_entity(
@@ -546,6 +615,13 @@ sanguis::server::entities::entity::can_collide_with_entity(
 }
 
 void
-sanguis::server::entities::entity::collision_entity(
-	entity &)
+sanguis::server::entities::entity::collision_entity_begin(
+	entity &
+)
+{}
+
+void
+sanguis::server::entities::entity::collision_entity_end(
+	entity &
+)
 {}

@@ -1,6 +1,7 @@
 #include "grenade.hpp"
 #include "aoe_damage.hpp"
 #include "../property.hpp"
+#include "../insert_parameters.hpp"
 #include "../../damage/list.hpp"
 #include "../../damage/meta.hpp"
 #include "../../damage/wrapper.hpp"
@@ -8,6 +9,7 @@
 #include "../../damage/fire.hpp"
 #include "../../collision/distance.hpp"
 #include "../../environment/object.hpp"
+#include "../../environment/load_context.hpp"
 #include <sge/container/map_impl.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/time/millisecond.hpp>
@@ -16,9 +18,7 @@
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::projectiles::grenade::grenade(
-	server::environment::object_ptr const env,
-	pos_type const &center,
-	space_unit const angle,
+	server::environment::load_context_ptr const load_context_,
 	team::type const team_,
 	space_unit const damage,
 	space_unit const aoe_,
@@ -27,9 +27,7 @@ sanguis::server::entities::projectiles::grenade::grenade(
 :
 	aoe_projectile(
 		aoe_projectile_type::grenade,
-		env,
-		center,
-		angle,
+		load_context_,
 		team_,
 		boost::assign::map_list_of
 			(
@@ -41,13 +39,15 @@ sanguis::server::entities::projectiles::grenade::grenade(
 			(
 				entities::property_type::movement_speed,
 				entities::property(
+					static_cast<space_unit>(100) // FIXME
+					/*
 					collision::distance(
 						center,
 						dest_
-					)
+					)*/
 				)
 			),
-		env->entity_dim(
+		load_context_->entity_dim(
 			SGE_TEXT("grenade")
 		),
 		static_cast<time_type>(2),
@@ -102,8 +102,7 @@ sanguis::server::entities::projectiles::grenade::on_die()
 	environment()->insert(
 		auto_ptr(
 			new aoe_damage(
-				environment(),
-				center(),
+				load_context(),
 				team(),
 				aoe(),
 				damage,
@@ -115,6 +114,11 @@ sanguis::server::entities::projectiles::grenade::on_die()
 					damage::fire = static_cast<damage::value_type>(0.5)
 				)
 			)
+		),
+		insert_parameters(
+			center(),
+			angle(),
+			angle()
 		)
 	);
 }

@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_ENEMIES_ENEMY_HPP_INCLUDED
 
 #include "../entity_with_ai.hpp"
+#include "../../environment/load_context_ptr.hpp"
 #include "../../probability_type.hpp"
 #include "../../exp_type.hpp"
 #include "../../../enemy_type.hpp"
@@ -19,11 +20,8 @@ class enemy : public entity_with_ai {
 public:	
 	enemy(
 		enemy_type::type,
-		server::environment::object_ptr,
+		server::environment::load_context_ptr,
 		damage::armor const &,
-		pos_type const &center,
-		space_unit angle,
-		space_unit direction,
 		property_map const &,
 		ai::auto_ptr,
 		weapons::auto_ptr weapon,

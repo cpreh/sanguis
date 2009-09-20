@@ -2,13 +2,11 @@
 #include "../entities/entity.hpp"
 
 sanguis::server::auras::update_sight::update_sight(
-	sge::collision::world_ptr const collision_world_,
 	space_unit const radius_,
 	update_sight_function const &update_sight_function_
 )
 :
 	aura(
-		collision_world_,
 		radius_,
 		team::neutral,
 		influence::debuff

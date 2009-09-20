@@ -15,9 +15,7 @@ namespace projectiles
 class simple_bullet : public projectile {
 public:
 	simple_bullet(
-		server::environment::object_ptr,
-		pos_type const &center,
-		space_unit angle,
+		server::environment::load_context_ptr,
 		team::type team,
 		space_unit damage
 	);

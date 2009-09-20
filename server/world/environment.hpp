@@ -27,7 +27,8 @@ public:
 
 	entities::entity & 
 	insert(
-		entities::auto_ptr
+		entities::auto_ptr,
+		entities::insert_parameters const &
 	);
 
 	void
@@ -68,7 +69,8 @@ public:
 	void
 	request_transfer(
 		world_id,
-		entity_id
+		entity_id,
+		entities::insert_parameters const &
 	);
 
 	void
@@ -81,11 +83,6 @@ public:
 	remove_player(
 		player_id
 	);
-
-	dim_type const
-	entity_dim(
-		string const &model_name
-	) const;
 
 	sge::collision::world_ptr const
 	collision_world() const;

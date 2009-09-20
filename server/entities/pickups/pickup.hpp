@@ -3,7 +3,7 @@
 
 #include "../entity.hpp"
 #include "../entity_with_weapon_fwd.hpp"
-#include "../../environment/object_ptr.hpp"
+#include "../../environment/load_context_ptr.hpp"
 #include "../../team.hpp"
 #include "../../pos_type.hpp"
 #include "../../../pickup_type.hpp"
@@ -30,8 +30,7 @@ protected:
 
 	pickup(
 		pickup_type::type,
-		server::environment::object_ptr,
-		pos_type const &center,
+		server::environment::load_context_ptr,
 		team::type team,
 		optional_dim const &dim
 	);

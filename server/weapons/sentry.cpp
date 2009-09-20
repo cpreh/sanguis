@@ -5,6 +5,7 @@
 #include "../damage/list.hpp"
 #include "../entities/friend.hpp"
 #include "../entities/property.hpp"
+#include "../entities/insert_parameters.hpp"
 #include "../environment/object.hpp"
 #include <sge/container/map_impl.hpp>
 #include <boost/assign/list_of.hpp>
@@ -44,11 +45,8 @@ sanguis::server::weapons::sentry::do_attack(
 		entities::auto_ptr(
 			new entities::friend_(
 				friend_type::sentry,
-				a.environment(),
+				a.load_context(),
 				damage::no_armor(),
-				a.dest(),
-				a.angle(),
-				a.angle(), // direction
 				a.team(),
 				boost::assign::map_list_of
 				(
@@ -64,6 +62,11 @@ sanguis::server::weapons::sentry::do_attack(
 					sentry_weapon()
 				)
 			)
+		),
+		entities::insert_parameters(
+			a.dest(),
+			a.angle(),
+			a.angle()
 		)
 	);
 }

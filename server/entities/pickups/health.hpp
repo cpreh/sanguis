@@ -3,9 +3,9 @@
 
 #include "pickup.hpp"
 #include "../entity_with_weapon_fwd.hpp"
+#include "../../environment/load_context_ptr.hpp"
 #include "../../health_type.hpp"
 #include "../../team.hpp"
-#include "../../pos_type.hpp"
 
 namespace sanguis
 {
@@ -19,8 +19,7 @@ namespace pickups
 class health : public pickup {
 public:
 	health(
-		server::environment::object_ptr,
-		pos_type const &center,
+		server::environment::load_context_ptr,
 		team::type team,
 		health_type amount
 	);
@@ -29,7 +28,7 @@ private:
 	do_pickup(
 		entity_with_weapon &receiver
 	);
-	
+
 	health_type const amount;
 };
 

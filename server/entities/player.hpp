@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_PLAYER_HPP_INCLUDED
 
 #include "entity_with_weapon.hpp"
-#include "../environment/object_ptr.hpp"
+#include "../environment/load_context_ptr.hpp"
 #include "../perks/tree.hpp"
 #include "../perks/list.hpp"
 #include "../level_type.hpp"
@@ -21,11 +21,8 @@ namespace entities
 class player : public entity_with_weapon {
 public:
 	player(
-		server::environment::object_ptr,
+		server::environment::load_context_ptr,
 		damage::armor const &,
-		pos_type const &center,
-		space_unit direction,
-		space_unit angle,
 		property_map const &,
 		string const &name,
 		server::player_id
@@ -51,7 +48,7 @@ public:
 	perks::list const
 	available_perks() const;
 
-	server::player_id const
+	server::player_id 
 	player_id() const;
 private:
 	void

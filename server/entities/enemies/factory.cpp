@@ -14,10 +14,7 @@
 sanguis::server::entities::auto_ptr
 sanguis::server::entities::enemies::create(
 	enemy_type::type const etype,
-	environment::object_ptr const env,
-	pos_type const &center,
-	space_unit const direction,
-	space_unit const angle
+	environment::load_context_ptr const load_context_
 )
 {
 	switch(etype) {
@@ -25,11 +22,8 @@ sanguis::server::entities::enemies::create(
 		return auto_ptr(
 			new enemy(
 				etype,
-				env,
+				load_context_,
 				damage::no_armor(),
-				center,
-				angle,
-				direction,
 				boost::assign::map_list_of
 					(
 						entities::property_type::health,
@@ -65,11 +59,8 @@ sanguis::server::entities::enemies::create(
 		return auto_ptr(
 			new enemy(
 				etype,
-				env,
+				load_context_,
 				damage::no_armor(),
-				center,
-				angle,
-				direction,
 				boost::assign::map_list_of
 					(entities::property_type::health,
 					 entities::property(static_cast<space_unit>(3)))
@@ -94,11 +85,8 @@ sanguis::server::entities::enemies::create(
 		return auto_ptr(
 			new enemy(
 				etype,
-				env,
+				load_context_,
 				damage::no_armor(),
-				center,
-				angle,
-				direction,
 				boost::assign::map_list_of
 					(entities::property_type::health,
 					 entities::property(static_cast<space_unit>(3)))
@@ -121,11 +109,8 @@ sanguis::server::entities::enemies::create(
 		return auto_ptr(
 			new enemy(
 				etype,
-				env,
+				load_context_,
 				damage::no_armor(),
-				center,
-				angle,
-				direction,
 				boost::assign::map_list_of
 					(entities::property_type::health,
 					entities::property(static_cast<space_unit>(500)))
@@ -149,11 +134,8 @@ sanguis::server::entities::enemies::create(
 		return auto_ptr(
 			new enemy(
 				etype,
-				env,
+				load_context_,
 				damage::no_armor(),
-				center,
-				angle,
-				direction,
 				boost::assign::map_list_of
 					(entities::property_type::health,
 					entities::property(static_cast<space_unit>(1)))
@@ -177,11 +159,8 @@ sanguis::server::entities::enemies::create(
 		return auto_ptr(
 			new enemy(
 				etype,
-				env,
+				load_context_,
 				damage::no_armor(),
-				center,
-				angle,
-				direction,
 				boost::assign::map_list_of
 					(entities::property_type::health,
 					 entities::property(static_cast<space_unit>(12)))

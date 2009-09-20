@@ -2,6 +2,7 @@
 #include "delayed_attack.hpp"
 #include "unlimited_magazine_count.hpp"
 #include "../entities/projectiles/rocket.hpp"
+#include "../entities/insert_parameters.hpp"
 #include "../environment/object.hpp"
 
 sanguis::server::weapons::rocket_launcher::rocket_launcher(
@@ -36,13 +37,16 @@ sanguis::server::weapons::rocket_launcher::do_attack(
 	a.environment()->insert(
 		entities::auto_ptr(
 			new entities::projectiles::rocket(
-				a.environment(),
-				a.spawn_point(),
-				a.angle(),
+				a.load_context(),
 				a.team(),
 				damage_,
 				aoe_
 			)
+		),
+		entities::insert_parameters(
+			a.spawn_point(),
+			a.angle(),
+			a.angle()
 		)
 	);
 }

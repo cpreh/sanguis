@@ -19,9 +19,7 @@ sanguis::server::entities::projectiles::projectile::ptype() const
 
 sanguis::server::entities::projectiles::projectile::projectile(
 	projectile_type::type const nptype,
-	server::environment::object_ptr const env,
-	pos_type const &center,
-	space_unit const angle,
+	server::environment::load_context_ptr const load_context_,
 	team::type const team_,
 	property_map const &properties,
 	dim_type const &dim,
@@ -31,11 +29,8 @@ sanguis::server::entities::projectiles::projectile::projectile(
 :
 	entity(
 		base_parameters(
-			env,
+			load_context_,
 			damage::no_armor(),
-			center,
-			angle,
-			angle,
 			team_,
 			properties,
 			indeterminate_ == indeterminate::yes

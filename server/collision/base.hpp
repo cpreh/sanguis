@@ -1,7 +1,10 @@
 #ifndef SANGUIS_SERVER_COLLISION_BASE_HPP_INCLUDED
 #define SANGUIS_SERVER_COLLISION_BASE_HPP_INCLUDED
 
-#include <sge/collision/objects/base_fwd.hpp>
+#include "shape_vector.hpp"
+#include "create_parameters_fwd.hpp"
+#include <sge/collision/world_fwd.hpp>
+#include <sge/collision/body_fwd.hpp>
 #include <sge/noncopyable.hpp>
 #include <boost/logic/tribool_fwd.hpp>
 
@@ -15,16 +18,25 @@ namespace collision
 class base {
 	SGE_NONCOPYABLE(base)
 protected:
-	explicit base(
-		sge::collision::objects::base_ptr
+	base();
+
+	sge::collision::body_ptr const
+	body();
+
+	sge::collision::const_body_ptr const
+	body() const;
+public:
+	void
+	recreate(
+		sge::collision::world_ptr,
+		create_parameters const &
 	);
 
-	sge::collision::objects::base_ptr const
-	collision_object();
+	virtual shape_vector const
+	recreate_shapes(
+		sge::collision::world_ptr
+	) const = 0;
 
-	sge::collision::objects::const_base_ptr const
-	collision_object() const;
-public:
 	virtual ~base();
 
 	virtual boost::logic::tribool const
@@ -33,11 +45,17 @@ public:
 	) const;
 
 	virtual void
-	collision(
+	collision_begin(
+		collision::base &
+	);
+
+	virtual void
+	collision_end(
 		collision::base &
 	);
 private:
-	sge::collision::objects::base_ptr const base_;
+	sge::collision::body_ptr body_;
+	shape_vector shapes_;
 };
 
 }

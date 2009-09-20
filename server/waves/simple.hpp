@@ -26,7 +26,8 @@ private:
 	void
 	process(
 		time_type diff,
-		environment::object_ptr
+		environment::object_ptr,
+		environment::load_context_ptr
 	);
 
 	bool ended() const;

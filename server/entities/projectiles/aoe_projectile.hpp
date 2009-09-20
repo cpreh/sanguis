@@ -17,9 +17,7 @@ class aoe_projectile : public projectile {
 protected:
 	aoe_projectile(
 		aoe_projectile_type::type,
-		server::environment::object_ptr,
-		pos_type const &center,
-		space_unit angle,
+		server::environment::load_context_ptr,
 		team::type,
 		property_map const &,
 		dim_type const &dim,

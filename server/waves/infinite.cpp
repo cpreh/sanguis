@@ -30,12 +30,14 @@ sanguis::server::waves::infinite::~infinite()
 void
 sanguis::server::waves::infinite::process(
 	time_type const diff,
-	environment::object_ptr const env
+	environment::object_ptr const env,
+	environment::load_context_ptr const load_context
 )
 {
 	simple_->process(
 		diff,
-		env
+		env,
+		load_context
 	);
 
 	if(simple_->ended())

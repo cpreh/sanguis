@@ -1,6 +1,7 @@
 #include "spawn.hpp"
 #include "../entities/enemies/factory.hpp"
 #include "../entities/entity.hpp"
+#include "../entities/insert_parameters.hpp"
 #include "../environment/object.hpp"
 #include "../../random.hpp"
 #include "../../angle_to_vector.hpp"
@@ -15,6 +16,7 @@
 void
 sanguis::server::waves::spawn(
 	environment::object_ptr const env,
+	environment::load_context_ptr const load_context,
 	enemy_type::type const etype
 )
 {
@@ -65,9 +67,10 @@ sanguis::server::waves::spawn(
 	env->insert(
 		entities::enemies::create(
 			etype,
-			env,
+			load_context
+		),
+		entities::insert_parameters(
 			pos,
-			angle,
 			angle
 		)
 	);

@@ -13,7 +13,8 @@ namespace collision
 bool
 test(
 	sge::collision::satellite const &,
-	sge::collision::satellite const &);
+	sge::collision::satellite const &
+);
 
 }
 }

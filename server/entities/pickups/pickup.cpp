@@ -5,7 +5,7 @@
 #include "../property.hpp"
 #include "../../damage/no_armor.hpp"
 #include "../../damage/list.hpp"
-#include "../../environment/object.hpp"
+#include "../../environment/load_context.hpp"
 #include "../../../load/pickup_name.hpp"
 #include "../../../messages/add_pickup.hpp"
 #include "../../../messages/create.hpp"
@@ -27,19 +27,15 @@ sanguis::server::entities::pickups::pickup::ptype() const
 
 sanguis::server::entities::pickups::pickup::pickup(
 	pickup_type::type const ptype_,
-	server::environment::object_ptr const env,
-	pos_type const &center,
+	server::environment::load_context_ptr const load_context,
 	team::type const team_,
 	optional_dim const &dim_
 )
 :
 	entity(
 		base_parameters(
-			env,
+			load_context,
 			damage::no_armor(),
-			center,
-			static_cast<space_unit>(0), //angle
-			static_cast<space_unit>(0), //direction,
 			team_,
 			boost::assign::map_list_of
 				(entities::property_type::health,
@@ -50,7 +46,7 @@ sanguis::server::entities::pickups::pickup::pickup(
 			true,
 			dim_
 			? *dim_
-			: env->entity_dim(
+			: load_context->entity_dim(
 				load::pickup_name(
 					ptype_
 				)

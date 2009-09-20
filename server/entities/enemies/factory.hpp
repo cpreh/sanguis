@@ -2,9 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_ENEMIES_FACTORY_HPP_INCLUDED
 
 #include "../auto_ptr.hpp"
-#include "../../environment/object_ptr.hpp"
-#include "../../pos_type.hpp"
-#include "../../space_unit.hpp"
+#include "../../environment/load_context_ptr.hpp"
 #include "../../../enemy_type.hpp"
 
 namespace sanguis
@@ -19,10 +17,7 @@ namespace enemies
 auto_ptr
 create(
 	enemy_type::type,
-	environment::object_ptr,
-	pos_type const &center,
-	space_unit direction,
-	space_unit angle
+	environment::load_context_ptr
 );
 
 }

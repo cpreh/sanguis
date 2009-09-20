@@ -79,14 +79,19 @@ sanguis::server::waves::generator::generator()
 void
 sanguis::server::waves::generator::process(
 	time_type const diff,
-	environment::object_ptr const env
+	environment::object_ptr const env,
+	environment::load_context_ptr const load_context
 )
 {
-	for(wave_list::iterator it = waves.begin(); it != waves.end(); )
+	for(
+		wave_list::iterator it = waves.begin();
+		it != waves.end();
+	)
 	{
 		it->process(
 			diff,
-			env
+			env,
+			load_context
 		);
 
 		if(it->ended())

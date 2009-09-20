@@ -8,6 +8,7 @@
 #include "property.hpp"
 #include "property_map.hpp"
 #include "property_type.hpp"
+#include "insert_parameters_fwd.hpp"
 #include "../pos_type.hpp"
 #include "../space_unit.hpp"
 #include "../dim_type.hpp"
@@ -20,6 +21,7 @@
 #include "../damage/armor.hpp"
 #include "../collision/base.hpp"
 #include "../environment/object_ptr.hpp"
+#include "../environment/load_context_ptr.hpp"
 #include "../../messages/auto_ptr.hpp"
 #include "../../entity_id.hpp"
 #include "../../entity_type.hpp"
@@ -52,12 +54,16 @@ protected:
 	);
 public:
 	void
-	environment(
-		server::environment::object_ptr
+	transfer(
+		server::environment::object_ptr,
+		insert_parameters const &
 	);
 
 	server::environment::object_ptr const
 	environment() const;
+
+	server::environment::load_context_ptr const
+	load_context() const;
 
 	entity_id
 	id() const;
@@ -193,6 +199,11 @@ private:
 	friend class auto_weak_link;
 	friend class satellite;
 
+	collision::shape_vector const
+	recreate_shapes(
+		sge::collision::world_ptr
+	) const;
+
 	void
 	insert_link(
 		auto_weak_link &
@@ -219,7 +230,12 @@ private:
 	) const;
 	
 	void
-	collision(
+	collision_begin(
+		collision::base &
+	);
+
+	void
+	collision_end(
 		collision::base &
 	);
 
@@ -229,15 +245,20 @@ private:
 	) const;
 	
 	virtual void
-	collision_entity(
+	collision_entity_begin(
+		entity &
+	);
+
+	virtual void
+	collision_entity_end(
 		entity &
 	);
 
 	environment::object_ptr environment_;
 
-	entity_id const id_;
+	environment::load_context_ptr const load_context_;
 
-	server::environment::object_ptr env_;
+	entity_id const id_;
 
 	damage::armor armor_;
 

@@ -3,13 +3,11 @@
 #include "../entities/property.hpp"
 
 sanguis::server::auras::freeze::freeze(
-	sge::collision::world_ptr const collision_world_,
 	space_unit const radius,
 	team::type const team
 )
 :
 	aura(
-		collision_world_,
 		radius,
 		team,
 		influence::debuff

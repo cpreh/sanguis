@@ -1,6 +1,5 @@
 #include "simple.hpp"
 #include "../auras/aggro.hpp"
-#include "../environment/object.hpp"
 #include "../entities/entity_with_weapon.hpp"
 #include "../entities/entity.hpp"
 #include "../entities/property.hpp"
@@ -44,7 +43,6 @@ sanguis::server::ai::simple::bind(
 		sge::make_auto_ptr<
 			auras::aggro
 		>(
-			me_->environment()->collision_world(),
 			10, // FIXME
 			me_->team(),
 			boost::bind(

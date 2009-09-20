@@ -17,9 +17,7 @@ namespace projectiles
 class grenade : public aoe_projectile {
 public:
 	grenade(
-		server::environment::object_ptr,
-		pos_type const &center,
-		space_unit angle,
+		server::environment::load_context_ptr,
 		team::type,
 		space_unit damage,
 		space_unit aoe,

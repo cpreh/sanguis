@@ -4,7 +4,10 @@
 #include "context.hpp"
 #include "prop.hpp"
 #include "../collision/execute.hpp"
+#include "../collision/execute_begin.hpp"
+#include "../collision/execute_end.hpp"
 #include "../collision/test.hpp"
+#include "../collision/satellite.hpp"
 #include "../entities/entity.hpp"
 #include "../message_convert/speed.hpp"
 #include "../message_convert/rotate.hpp"
@@ -25,8 +28,6 @@
 #include "../../load/model/model.hpp"
 #include "../../exception.hpp"
 #include <sge/math/rect/basic_impl.hpp>
-#include <sge/math/dim/basic_impl.hpp>
-#include <sge/math/dim/structure_cast.hpp>
 #include <sge/collision/system.hpp>
 #include <sge/collision/world.hpp>
 #include <sge/time/second.hpp>
@@ -41,14 +42,14 @@
 sanguis::server::world::object::object(
 	context_ptr const global_context_,
 	sge::collision::system_ptr const sys,
-	load::model::context const &model_context_
+	server::environment::load_context_ptr const load_context_
 )
 :
 	global_context_(
 		global_context_
 	),
-	model_context_(
-		model_context_
+	load_context_(
+		load_context_
 	),
 	collision_world_(
 		sys->create_world(
@@ -74,10 +75,30 @@ sanguis::server::world::object::object(
 	entities_(),
 	sight_ranges_(),
 	props_(),
-	collision_connection_(
-		collision_world_->register_callback(
+	collision_connection_begin_(
+		collision_world_->register_begin_callback(
 			boost::bind(
 				collision::execute,
+				_1,
+				_2,
+				collision::execute_begin()
+			)
+		)
+	),
+	collision_connection_end_(
+		collision_world_->register_begin_callback(
+			boost::bind(
+				collision::execute,
+				_1,
+				_2,
+				collision::execute_begin()
+			)
+		)
+	),
+	collision_connection_test_(
+		collision_world_->register_test_callback(
+			boost::bind(
+				collision::test,
 				_1,
 				_2
 			)
@@ -100,15 +121,7 @@ sanguis::server::world::object::object(
 		)
 	),
 	wave_gen_()
-{
-	collision_world_->test_callback(
-		boost::bind(
-			collision::test,
-			_1,
-			_2
-		)
-	);
-}
+{}
 
 sanguis::server::world::object::~object()
 {}
@@ -126,7 +139,8 @@ sanguis::server::world::object::update(
 
 	wave_gen_.process(
 		time_,
-		environment()
+		environment(),
+		load_context_
 	);
 
 	if(
@@ -256,15 +270,17 @@ sanguis::server::world::object::update(
 
 sanguis::server::entities::entity &
 sanguis::server::world::object::insert(
-	entities::auto_ptr e
+	entities::auto_ptr e,
+	entities::insert_parameters const &insert_params
 )
 {
 	entity_id const id(
 		e->id()
 	);
 
-	e->environment(
-		environment_
+	e->transfer(
+		environment_,
+		insert_params
 	);
 
 	std::pair<
@@ -421,7 +437,8 @@ sanguis::server::world::object::divide_exp(
 void
 sanguis::server::world::object::request_transfer(
 	world_id const world_id_,
-	entity_id const entity_id_
+	entity_id const entity_id_,
+	entities::insert_parameters const &insert_parameters_
 )
 {
 	entity_map::iterator const it(
@@ -445,7 +462,8 @@ sanguis::server::world::object::request_transfer(
 
 	global_context_->transfer_entity(
 		world_id_,
-		entity_
+		entity_,
+		insert_parameters_
 	);
 }
 void
@@ -515,20 +533,6 @@ sge::collision::world_ptr const
 sanguis::server::world::object::collision_world() const
 {
 	return collision_world_;
-}
-
-sanguis::server::dim_type const
-sanguis::server::world::object::entity_dim(
-	string const &model_name
-) const
-{
-	return sge::math::dim::structure_cast<
-		dim_type
-	>(
-		model_context_()
-			[model_name]
-			.dim()
-	);
 }
 
 void

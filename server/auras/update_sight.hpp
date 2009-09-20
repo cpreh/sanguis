@@ -5,7 +5,6 @@
 #include "../space_unit.hpp"
 #include "../update_sight_function.hpp"
 #include "../entities/entity_fwd.hpp"
-#include <sge/collision/world_fwd.hpp>
 
 namespace sanguis
 {
@@ -20,7 +19,6 @@ class update_sight
 {
 public:
 	update_sight(
-		sge::collision::world_ptr,
 		space_unit radius,
 		update_sight_function const &
 	);

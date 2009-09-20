@@ -2,6 +2,7 @@
 #include "../environment/object.hpp"
 #include "../entities/projectiles/simple_bullet.hpp"
 #include "../entities/projectiles/rocket.hpp"
+#include "../entities/insert_parameters.hpp"
 #include <sge/time/second_f.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/random/inclusive_range.hpp>
@@ -33,7 +34,8 @@ void
 sanguis::server::perks::choleric::do_apply(
 	entities::entity &e,
 	time_type const time,
-	environment::object_ptr const env
+	environment::object_ptr const env,
+	environment::load_context_ptr const load_context_
 )
 {
 	clock_.update(time);
@@ -53,9 +55,7 @@ sanguis::server::perks::choleric::do_apply(
 			?
 				entities::auto_ptr(
 					new entities::projectiles::simple_bullet(
-						env,
-						e.center(),
-						rand(),
+						load_context_,
 						e.team(),
 						static_cast<space_unit>(2) // damage
 					)
@@ -63,14 +63,17 @@ sanguis::server::perks::choleric::do_apply(
 			:
 				entities::auto_ptr(
 					new entities::projectiles::rocket(
-						env,
-						e.center(),
-						rand(),
+						load_context_,
 						e.team(),
 						static_cast<space_unit>(5), // damage
 						static_cast<space_unit>(80) // aoe
 					)
 				)
+			,
+			entities::insert_parameters(
+				e.center(),
+				rand()
+			)
 		);
 }
 

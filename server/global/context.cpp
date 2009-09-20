@@ -1,5 +1,6 @@
 #include "context.hpp"
 #include "world_context.hpp"
+#include "load_context.hpp"
 #include "../message_convert/rotate.hpp"
 #include "../message_convert/speed.hpp"
 #include "../entities/player.hpp"
@@ -21,6 +22,8 @@
 #include <boost/tr1/functional.hpp>
 #include <boost/foreach.hpp>
 
+#include "../entities/insert_parameters.hpp"
+
 sanguis::server::global::context::context(
 	unicast_callback const &send_unicast_,
 	sge::collision::system_ptr const collision_system_,
@@ -31,7 +34,6 @@ sanguis::server::global::context::context(
 	collision_system_(collision_system_),
 	worlds_(),
 	players_(),
-	model_context_(model_context_),
 	world_context_(
 		sge::make_shared_ptr<
 			world_context
@@ -39,6 +41,13 @@ sanguis::server::global::context::context(
 			std::tr1::ref(
 				*this
 			)
+		)
+	),
+	load_context_(
+		sge::make_shared_ptr<
+			load_context
+		>(
+			model_context_
 		)
 	)
 {}
@@ -62,7 +71,7 @@ sanguis::server::global::context::insert_player(
 
 	entities::player_auto_ptr player_(
 		create_player(
-			world_.environment(),
+			load_context_,
 			name,
 			send_unicast_,
 			connect_state_,
@@ -78,6 +87,12 @@ sanguis::server::global::context::insert_player(
 	world_.insert(
 		entities::auto_ptr(
 			player_
+		),
+		// FIXME: where to insert the player?
+		entities::insert_parameters(
+			pos_type::null(),
+			0,
+			0
 		)
 	);
 }
@@ -286,13 +301,15 @@ sanguis::server::global::context::remove_player(
 void
 sanguis::server::global::context::transfer_entity(
 	world_id const destination,
-	entities::auto_ptr entity
+	entities::auto_ptr entity,
+	entities::insert_parameters const &insert_parameters_
 )
 {
 	world(
 		destination
 	).insert(
-		entity
+		entity,
+		insert_parameters_
 	);
 }
 
@@ -317,7 +334,7 @@ sanguis::server::global::context::world(
 		server::world::random(
 			world_context_,
 			collision_system_,
-			model_context_
+			load_context_
 		)
 	).first->second;
 }

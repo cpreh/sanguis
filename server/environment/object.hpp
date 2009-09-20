@@ -4,10 +4,9 @@
 #include "object_fwd.hpp"
 #include "../entities/auto_ptr.hpp"
 #include "../entities/entity_fwd.hpp"
+#include "../entities/insert_parameters_fwd.hpp"
 #include "../player_id.hpp"
 #include "../health_type.hpp"
-#include "../dim_type.hpp"
-#include "../string.hpp"
 #include "../exp_type.hpp"
 #include "../../world_id.hpp"
 #include "../../weapon_type.hpp"
@@ -24,12 +23,13 @@ namespace environment
 
 class object {
 	SGE_NONCOPYABLE(object)
-public:
+protected:
 	object();
-
+public:
 	virtual entities::entity & 
 	insert(
-		entities::auto_ptr
+		entities::auto_ptr,
+		entities::insert_parameters const &
 	) = 0;
 
 	virtual void
@@ -70,7 +70,8 @@ public:
 	virtual void
 	request_transfer(
 		world_id,
-		entity_id
+		entity_id,
+		entities::insert_parameters const &
 	) = 0;
 
 	virtual void
@@ -86,11 +87,6 @@ public:
 
 	virtual sge::collision::world_ptr const
 	collision_world() const = 0;
-
-	virtual dim_type const
-	entity_dim(
-		string const &model_name
-	) const = 0;
 
 	virtual ~object();
 };

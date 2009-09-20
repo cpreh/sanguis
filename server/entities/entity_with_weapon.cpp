@@ -1,8 +1,4 @@
 #include "entity_with_weapon.hpp"
-#include "../message_convert/start_reloading.hpp"
-#include "../message_convert/stop_reloading.hpp"
-#include "../message_convert/start_attacking.hpp"
-#include "../message_convert/stop_attacking.hpp"
 #include "../weapons/factory.hpp"
 #include "../weapons/weapon.hpp"
 #include "../environment/object.hpp"

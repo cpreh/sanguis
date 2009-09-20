@@ -13,7 +13,6 @@
 #include "../messages/assign_id.hpp"
 #include "../resolution.hpp"
 #include <sge/utf8/convert.hpp>
-#include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/container/map_impl.hpp>
 #include <sge/make_auto_ptr.hpp>
@@ -21,7 +20,7 @@
 
 sanguis::server::entities::player_auto_ptr
 sanguis::server::create_player(
-	environment::object_ptr const env,
+	environment::load_context_ptr const load_context_,
 	string const &name,
 	unicast_callback const &send_to_player,
 	connect_state::type const current_state,
@@ -37,14 +36,8 @@ sanguis::server::create_player(
 		sge::make_auto_ptr<
 			entities::player
 		>(
-			env,
+			load_context_,
 			damage::no_armor(),
-			pos_type(
-				static_cast<space_unit>(resolution().w()/2),
-				static_cast<space_unit>(resolution().h()/2)
-			),
-			static_cast<space_unit>(0),
-			static_cast<space_unit>(0),
 			boost::assign::map_list_of
 				(
 					entities::property_type::health,

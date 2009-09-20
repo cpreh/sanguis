@@ -6,7 +6,8 @@
 bool
 sanguis::server::collision::test(
 	sge::collision::satellite const &a,
-	sge::collision::satellite const &b)
+	sge::collision::satellite const &b
+)
 {
 	base const
 		&e0(

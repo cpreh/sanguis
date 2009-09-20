@@ -1,5 +1,7 @@
 #include "monster.hpp"
 #include "../base_parameters.hpp"
+#include "../insert_parameters.hpp"
+#include "../insert_parameters_pos.hpp"
 #include "../friend.hpp"
 #include "../property.hpp"
 #include "../../ai/simple.hpp"
@@ -16,15 +18,14 @@
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::pickups::monster::monster(
-	server::environment::object_ptr const env,
-	pos_type const &center,
+	server::environment::load_context_ptr const load_context,
 	team::type const team_,
-	friend_type::type const ftype)
+	friend_type::type const ftype
+)
 :
 	pickup(
 		pickup_type::monster,
-		env,
-		center,
+		load_context,
 		team_,
 		optional_dim()
 	),
@@ -40,11 +41,8 @@ sanguis::server::entities::pickups::monster::do_pickup(
 		entities::auto_ptr(
 			new entities::friend_(
 				ftype,
-				environment(),
+				load_context(),
 				damage::no_armor(),
-				center(),
-				static_cast<space_unit>(0), // angle TODO
-				static_cast<space_unit>(0), // direction TODO
 				receiver.team(),
 				boost::assign::map_list_of
 				(
@@ -72,6 +70,9 @@ sanguis::server::entities::pickups::monster::do_pickup(
 					)
 				)
 			)
+		),
+		entities::insert_parameters_pos(
+			center()
 		)
 	);
 }

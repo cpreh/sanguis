@@ -3,8 +3,7 @@
 
 #include "pickup.hpp"
 #include "../entity_with_weapon_fwd.hpp"
-#include "../../environment/object_ptr.hpp"
-#include "../../pos_type.hpp"
+#include "../../environment/load_context_ptr.hpp"
 #include "../../team.hpp"
 #include "../../../weapon_type.hpp"
 #include "../../../messages/auto_ptr.hpp"
@@ -21,8 +20,7 @@ namespace pickups
 class weapon : public pickup {
 public:
 	weapon(
-		server::environment::object_ptr,
-		pos_type const &center,
+		server::environment::load_context_ptr,
 		team::type team,
 		weapon_type::type
 	);

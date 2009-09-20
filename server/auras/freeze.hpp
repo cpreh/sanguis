@@ -14,7 +14,6 @@ namespace auras
 class freeze : public aura {
 public:
 	freeze(
-		sge::collision::world_ptr,
 		space_unit radius,
 		team::type team
 	);

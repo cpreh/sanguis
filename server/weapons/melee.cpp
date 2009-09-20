@@ -3,6 +3,8 @@
 #include "unlimited_magazine_size.hpp"
 #include "unlimited_magazine_count.hpp"
 #include "../environment/object.hpp"
+#include "../entities/insert_parameters.hpp"
+#include "../entities/insert_parameters_pos.hpp"
 #include "../entities/entity.hpp"
 #include "../entities/entity_with_weapon.hpp"
 #include "../entities/property.hpp"
@@ -38,11 +40,13 @@ sanguis::server::weapons::melee::do_attack(
 	a.environment()->insert(
 		entities::auto_ptr(
 			new entities::projectiles::melee(
-				a.environment(),
-				a.dest(),
+				a.load_context(),
 				a.team(),
 				damage_
 			)
+		),
+		entities::insert_parameters_pos(
+			a.spawn_point()
 		)
 	);
 }

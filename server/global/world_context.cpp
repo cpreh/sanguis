@@ -14,12 +14,14 @@ sanguis::server::global::world_context::~world_context()
 void
 sanguis::server::global::world_context::transfer_entity(
 	world_id const destination,
-	entities::auto_ptr entity 
+	entities::auto_ptr entity,
+	entities::insert_parameters const &insert_parameters_
 )
 {
 	global_context_.transfer_entity(
 		destination,
-		entity
+		entity,
+		insert_parameters_
 	);
 }
 

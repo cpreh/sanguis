@@ -15,8 +15,7 @@ namespace projectiles
 class aoe_damage : public aoe_projectile {
 public:
 	aoe_damage(
-		server::environment::object_ptr const,
-		pos_type const &center,
+		server::environment::load_context_ptr,
 		team::type team,
 		space_unit radius,
 		space_unit damage_per_pulse,

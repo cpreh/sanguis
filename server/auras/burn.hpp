@@ -5,7 +5,6 @@
 #include "../space_unit.hpp"
 #include "../damage/array.hpp"
 #include "../../time_type.hpp"
-#include <sge/collision/world_fwd.hpp>
 
 namespace sanguis
 {
@@ -17,7 +16,6 @@ namespace auras
 class burn : public aura {
 public:
 	burn(
-		sge::collision::world_ptr,
 		space_unit radius,
 		team::type team,
 		space_unit damage_per_pules,

@@ -9,7 +9,8 @@ sanguis::server::waves::debug::debug()
 void 
 sanguis::server::waves::debug::process(
 	time_type,
-	environment::object_ptr const env
+	environment::object_ptr const env,
+	environment::load_context_ptr const load_context
 )
 {
 	if(spawned)
@@ -18,6 +19,7 @@ sanguis::server::waves::debug::process(
 	for(unsigned i = 0; i < 2; ++i)
 		spawn(
 			env,
+			load_context,
 			static_cast<
 				enemy_type::type
 			>(i)

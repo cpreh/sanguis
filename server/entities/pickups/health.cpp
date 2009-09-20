@@ -3,23 +3,26 @@
 #include <sge/optional_impl.hpp>
 
 sanguis::server::entities::pickups::health::health(
-	server::environment::object_ptr const env,
-	pos_type const &center,
+	server::environment::load_context_ptr const load_context,
 	team::type const team_,
-	health_type const amount)
+	health_type const amount
+)
 :
 	pickup(
 		pickup_type::health,
-		env,
-		center,
+		load_context,
 		team_,
 		optional_dim()
 	),
 	amount(amount)
 {}
 
-void sanguis::server::entities::pickups::health::do_pickup(
-	entity_with_weapon &receiver)
+void
+sanguis::server::entities::pickups::health::do_pickup(
+	entity_with_weapon &receiver
+)
 {
-	receiver.health(receiver.health() + amount);	
+	receiver.health(
+		receiver.health() + amount
+	);
 }

@@ -3,6 +3,7 @@
 #include "../perks/perk.hpp"
 #include "../weapons/weapon.hpp"
 #include "../environment/object.hpp"
+#include "../environment/load_context.hpp"
 #include "../level_calculate.hpp"
 #include "../auras/update_sight.hpp"
 #include <sge/text.hpp>
@@ -10,11 +11,8 @@
 #include <boost/bind.hpp>
 
 sanguis::server::entities::player::player(
-	server::environment::object_ptr const env,
+	server::environment::load_context_ptr const load_context_,
 	damage::armor const &armor,
-	pos_type const &center_,
-	space_unit const direction_,
-	space_unit const angle_,
 	property_map const &properties,
 	string const &name_,
 	server::player_id const player_id_
@@ -22,16 +20,13 @@ sanguis::server::entities::player::player(
 :
 	entity_with_weapon(
 		base_parameters(
-			env,
+			load_context_,
 			armor,
-			center_,
-			angle_,
-			direction_,
 			team::players,
 			properties,
 			entity_type::player,
 			false,
-			env->entity_dim(
+			load_context_->entity_dim(
 				SGE_TEXT("player")
 			)
 		),
@@ -44,11 +39,11 @@ sanguis::server::entities::player::player(
 	level_delta_(static_cast<level_type>(0)),
 	skill_points_(0)
 {
+	/*
 	auras::auto_ptr new_aura(
 		sge::make_auto_ptr<
 			auras::update_sight
 		>(
-			env->collision_world(),
 			1000, // FIXME
 			boost::bind(
 				&server::environment::object::update_sight_range,
@@ -62,6 +57,7 @@ sanguis::server::entities::player::player(
 	add_aura(
 		new_aura
 	);
+	*/
 }
 
 sanguis::server::exp_type
@@ -79,17 +75,19 @@ sanguis::server::entities::player::exp(
 	level_type const
 		old_level = level(),
 		new_level = level_calculate(exp(), old_level);
+
 	if (new_level > old_level)
 	{
 		level_delta_ += new_level - old_level;
 		level_ = new_level;
 		++skill_points_;
+
 		/*
-		environment().level()(
+		environment()->level_up()(
 			*this,
 			old_level
 		);
-		*/ //TODO
+		*/
 	}
 }
 
@@ -162,7 +160,7 @@ sanguis::server::entities::player::available_perks() const
 	return ret;
 }
 
-sanguis::server::player_id const
+sanguis::server::player_id
 sanguis::server::entities::player::player_id() const
 {
 	return player_id_;

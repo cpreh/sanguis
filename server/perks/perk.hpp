@@ -3,6 +3,7 @@
 
 #include "../entities/entity_fwd.hpp"
 #include "../environment/object_ptr.hpp"
+#include "../environment/load_context_ptr.hpp"
 #include "../../time_type.hpp"
 #include "../../perk_type.hpp"
 #include <sge/noncopyable.hpp>
@@ -22,7 +23,8 @@ public:
 	apply(
 		entities::entity &,
 		time_type,
-		environment::object_ptr
+		environment::object_ptr,
+		environment::load_context_ptr
 	);
 	
 	virtual bool
@@ -48,7 +50,8 @@ private:
 	do_apply(
 		entities::entity &,
 		time_type,
-		environment::object_ptr
+		environment::object_ptr,
+		environment::load_context_ptr
 	) = 0;
 
 	perk_type::type const type_;
