@@ -14,7 +14,7 @@
 #include <sge/string.hpp>
 #include <sge/text.hpp>
 #include <sge/cerr.hpp>
-#include <boost/tr1/array.hpp>
+#include <tr1/array>
 #include <boost/foreach.hpp>
 #include <utility>
 #include <iterator>

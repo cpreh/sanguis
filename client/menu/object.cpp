@@ -14,7 +14,7 @@
 #include <sge/systems/instance.hpp>
 #include <sge/text.hpp>
 #include <sge/make_shared_ptr.hpp>
-#include <boost/ref.hpp>
+#include <tr1/functional>
 #include <boost/bind.hpp>
 
 #include <sge/sprite/parameters.hpp>
@@ -89,7 +89,7 @@ sanguis::client::menu::object::object(
 					boost::bind(
 						&mover::reset,
 						&mover_,
-						boost::ref(connect_.parent))))
+						std::tr1::ref(connect_.parent))))
 		)
 		(
 			sge::signal::shared_connection(
@@ -104,7 +104,7 @@ sanguis::client::menu::object::object(
 					boost::bind(
 						&mover::reset,
 						&mover_,
-						boost::ref(highscore_.parent))))
+						std::tr1::ref(highscore_.parent))))
 		)
 		(
 			sge::signal::shared_connection(
@@ -124,7 +124,7 @@ sanguis::client::menu::object::object(
 					boost::bind(
 						&mover::reset,
 						&mover_,
-						boost::ref(main_.parent))))
+						std::tr1::ref(main_.parent))))
 		)
 		(
 			sge::signal::shared_connection(
@@ -132,8 +132,8 @@ sanguis::client::menu::object::object(
 					boost::bind(
 						&object::connect,
 						this,
-						boost::cref(connection_host_),
-						boost::cref(connection_port_))))
+						std::tr1::cref(connection_host_),
+						std::tr1::cref(connection_port_))))
 		)
 		(
 			sge::signal::shared_connection(
@@ -141,7 +141,7 @@ sanguis::client::menu::object::object(
 					boost::bind(
 						&mover::reset,
 						&mover_,
-						boost::ref(main_.parent))))
+						std::tr1::ref(main_.parent))))
 		)
 		(
 			sge::signal::shared_connection(

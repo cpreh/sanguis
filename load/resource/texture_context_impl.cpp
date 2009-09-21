@@ -12,7 +12,7 @@
 #include <sge/text.hpp>
 #include <sge/time/second.hpp>
 #include <boost/bind.hpp>
-#include <boost/ref.hpp>
+#include <tr1/functional>
 
 sanguis::load::resource::texture_context_impl::texture_context_impl(
 	sge::filesystem::path const &_path,
@@ -29,7 +29,7 @@ sanguis::load::resource::texture_context_impl::texture_context_impl(
 	future_(
 		task_.object()),
 	thread_(
-		boost::ref(
+		std::tr1::ref(
 			task_)),
 	texture_result_(
 		),

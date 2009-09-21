@@ -18,7 +18,7 @@
 #include <sge/sprite/point.hpp>
 #include <sge/noncopyable.hpp>
 #include <sge/signal/scoped_connection.hpp>
-#include <boost/tr1/array.hpp>
+#include <tr1/array>
 #include <boost/function.hpp>
 #include <vector>
 

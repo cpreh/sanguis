@@ -12,7 +12,7 @@
 #include <sge/optional_impl.hpp>
 #include <sge/text.hpp>
 #include <sge/string.hpp>
-#include <boost/tr1/array.hpp>
+#include <tr1/array>
 #include <boost/foreach.hpp>
 #include <iterator>
 #include <utility>

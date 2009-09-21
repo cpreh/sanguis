@@ -13,7 +13,7 @@
 #include <boost/asio/buffer.hpp>
 #include <boost/lambda/lambda.hpp>
 #include <boost/bind.hpp>
-#include <boost/ref.hpp>
+#include <tr1/functional>
 #include <boost/foreach.hpp>
 #include <iostream>
 
@@ -76,7 +76,7 @@ void sanguis::net::detail::server_impl::process()
 				this,
 				_1,
 				_2,
-				boost::ref(c)));
+				std::tr1::ref(c)));
 		handlers_++;
 	}
 
@@ -168,7 +168,7 @@ void sanguis::net::detail::server_impl::accept()
 			&server_impl::accept_handler,
 			this,
 			_1,
-			boost::ref(c)));
+			std::tr1::ref(c)));
 
 	handlers_++;
 }
@@ -208,7 +208,7 @@ void sanguis::net::detail::server_impl::read_handler(
 			this,
 			_1,
 			_2,
-			boost::ref(
+			std::tr1::ref(
 				c)));
 	handlers_++;
 }
@@ -261,7 +261,7 @@ void sanguis::net::detail::server_impl::write_handler(
 			this,
 			_1,
 			_2,
-			boost::ref(c)
+			std::tr1::ref(c)
 		)
 	);
 
@@ -305,7 +305,7 @@ void sanguis::net::detail::server_impl::accept_handler(
 			this,
 			_1,
 			_2,
-			boost::ref(c)
+			std::tr1::ref(c)
 		)
 	);
 
