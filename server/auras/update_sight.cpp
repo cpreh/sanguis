@@ -29,15 +29,11 @@ sanguis::server::auras::update_sight::update_sight(
 	)
 {}
 
-#include <iostream>
-
 void
 sanguis::server::auras::update_sight::enter(
 	entities::entity &e
 )
 {
-	std::cout << "update sight enter\n";
-
 	enter_(
 		e.id()
 	);
@@ -48,8 +44,6 @@ sanguis::server::auras::update_sight::leave(
 	entities::entity &e
 )
 {
-	std::cout << "update sight leave\n";
-
 	leave_(
 		e.id()
 	);

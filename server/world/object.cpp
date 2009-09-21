@@ -87,7 +87,7 @@ sanguis::server::world::object::object(
 				collision::execute,
 				_1,
 				_2,
-				collision::execute_begin()
+				collision::execute_end()
 			)
 		)
 	),
@@ -424,12 +424,23 @@ sanguis::server::world::object::request_transfer(
 		insert_parameters_
 	);
 }
+
+#include <iostream>
+
 void
 sanguis::server::world::object::add_sight_range(
 	player_id const player_id_,
 	entity_id const target_id_
 )
 {
+	std::cerr
+		<< "add_sight_range: "
+		<< player_id_
+		<< ' '
+		<< target_id_
+		<< '\n';
+		
+
 	sight_ranges_[
 		player_id_
 	].add(
@@ -471,6 +482,13 @@ sanguis::server::world::object::remove_sight_range(
 	entity_id const target_id_
 )
 {
+	std::cerr
+		<< "remove_sight_range: "
+		<< player_id_
+		<< ' '
+		<< target_id_
+		<< '\n';
+		
 	sight_ranges_[
 		player_id_
 	].remove(

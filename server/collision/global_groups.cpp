@@ -62,6 +62,7 @@ sanguis::server::collision::global_groups::global_groups(
 		init_map::const_reference ref,
 		init_
 	)
+	{
 		groups_[
 			ref.first
 		]->collides_with(
@@ -69,6 +70,16 @@ sanguis::server::collision::global_groups::global_groups(
 				ref.second
 			]
 		);
+
+		// FIXME: this should be symmetrical by nature
+		groups_[
+			ref.second
+		]->collides_with(
+			groups_[
+				ref.first
+			]
+		);
+	}
 }
 
 void

@@ -80,7 +80,9 @@ sanguis::server::auras::aura::can_collide_with(
 	collision::base const &o
 ) const
 {
-	return true;
+	return dynamic_cast<
+		entities::entity const *
+	>(&o);
 }
 
 void
