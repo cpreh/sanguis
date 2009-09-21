@@ -12,7 +12,8 @@ sanguis::server::auras::aura::~aura()
 
 void
 sanguis::server::auras::aura::center(
-	pos_type const &p)
+	pos_type const &p
+)
 {
 	body_pos(
 		p
@@ -86,11 +87,21 @@ sanguis::server::auras::aura::can_collide_with(
 }
 
 void
-sanguis::server::auras::aura::collision(
+sanguis::server::auras::aura::collision_begin(
 	collision::base &b
 )
 {
-	do_effect(
+	enter(
+		dynamic_cast<entities::entity &>(b)
+	);
+}
+
+void
+sanguis::server::auras::aura::collision_end(
+	collision::base &b
+)
+{
+	leave(
 		dynamic_cast<entities::entity &>(b)
 	);
 }

@@ -25,7 +25,12 @@ public:
 	);
 private:
 	void
-	do_effect(
+	enter(
+		entities::entity &target
+	);
+
+	void
+	leave(
 		entities::entity &target
 	);
 

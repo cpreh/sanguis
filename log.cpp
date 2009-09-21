@@ -10,7 +10,7 @@ sanguis::log()
 		sge::cerr,
 		SGE_TEXT("sanguis: "),
 		true,
-		sge::log::level::debug
+		sge::log::level::warning
 	);
 	return log_;
 }

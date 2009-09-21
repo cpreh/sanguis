@@ -74,7 +74,13 @@ public:
 	);
 
 	void
-	update_sight_range(
+	add_sight_range(
+		player_id,
+		entity_id target_id
+	);
+
+	void
+	remove_sight_range(
 		player_id,
 		entity_id target_id
 	);

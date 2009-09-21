@@ -20,15 +20,23 @@ class update_sight
 public:
 	update_sight(
 		space_unit radius,
-		update_sight_function const &
+		update_sight_function const &enter_,
+		update_sight_function const &leave_
 	);
 private:
 	void
-	do_effect(
+	enter(
 		entities::entity &target
 	);
 
-	update_sight_function const update_sight_function_;
+	void
+	leave(
+		entities::entity &target
+	);
+
+	update_sight_function const
+		enter_,
+		leave_;
 };
 
 }

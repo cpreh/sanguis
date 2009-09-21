@@ -108,12 +108,24 @@ sanguis::server::world::environment::request_transfer(
 }
 
 void
-sanguis::server::world::environment::update_sight_range(
+sanguis::server::world::environment::add_sight_range(
 	player_id const player_id_,
 	entity_id const target_id_
 )
 {
-	world_.update_sight_range(
+	world_.add_sight_range(
+		player_id_,
+		target_id_
+	);
+}
+
+void
+sanguis::server::world::environment::remove_sight_range(
+	player_id const player_id_,
+	entity_id const target_id_
+)
+{
+	world_.remove_sight_range(
 		player_id_,
 		target_id_
 	);

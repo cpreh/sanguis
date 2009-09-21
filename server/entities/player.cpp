@@ -45,7 +45,12 @@ sanguis::server::entities::player::player(
 		>(
 			1000, // FIXME
 			boost::bind(
-				&player::update_sight_range,
+				&player::add_sight_range,
+				this,
+				_1
+			),
+			boost::bind(
+				&player::remove_sight_range,
 				this,
 				_1
 			)
@@ -172,13 +177,23 @@ sanguis::server::entities::player::on_die()
 }
 
 void
-sanguis::server::entities::player::update_sight_range(
+sanguis::server::entities::player::add_sight_range(
 	entity_id const entity_id_
 )
 {
-	environment()->update_sight_range(
+	environment()->add_sight_range(
 		player_id(),
 		entity_id_
 	);
 }
 
+void
+sanguis::server::entities::player::remove_sight_range(
+	entity_id const entity_id_
+)
+{
+	environment()->remove_sight_range(
+		player_id(),
+		entity_id_
+	);
+}

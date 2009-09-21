@@ -75,7 +75,13 @@ public:
 	) = 0;
 
 	virtual void
-	update_sight_range(
+	add_sight_range(
+		player_id,
+		entity_id
+	) = 0;
+
+	virtual void
+	remove_sight_range(
 		player_id,
 		entity_id
 	) = 0;

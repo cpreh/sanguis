@@ -1,65 +1,40 @@
 #include "sight_range.hpp"
-#include "compare_sight_range_entry.hpp"
-#include <functional>
+#include "../../exception.hpp"
+#include <sge/text.hpp>
 
 sanguis::server::world::sight_range::sight_range()
 :
-	entries_(
-		std::ptr_fun(
-			compare_sight_range_entry
-		)
-	)
+	entries_()
 {}
 
-sanguis::server::world::entity_remove_vector const
-sanguis::server::world::sight_range::update(
-	time_type const time_
+void
+sanguis::server::world::sight_range::add(
+	entity_id const id
 )
 {
-	entity_remove_vector ret;
-
-	for(
-		sight_range_entry_set::iterator it(
-			entries_.begin()
-		),
-		next(it);
-		it != entries_.end();
-		it = next
+	if(
+		!entries_.insert(
+			id
+		).second
 	)
-	{
-		++next;
-
-		if(
-			it->expired(
-				time_
-			)
-		)
-		{
-			ret.push_back(
-				it->id()
-			);
-
-			entries_.erase(
-				it
-			);
-		}
-	}
-
-	return ret;
+		throw exception(
+			SGE_TEXT("Failed to insert a sight range!")
+		);
 }
 
-bool
-sanguis::server::world::sight_range::add(
-	entity_id const id,
-	time_type const time_
+void
+sanguis::server::world::sight_range::remove(
+	entity_id const id
 )
 {
-	return entries_.insert(
-		sight_range_entry(
-			id,
-			time_
+	if(
+		!entries_.erase(
+			id
 		)
-	).second;
+	)
+		throw exception(
+			SGE_TEXT("Failed to remove a sight range!")
+		);
 }
 
 bool
@@ -69,14 +44,7 @@ sanguis::server::world::sight_range::contains(
 {
 	return
 		entries_.find(
-			sight_range_entry(
-				id,
-				static_cast<
-					time_type
-				>(
-					0
-				)
-			)
+			id
 		)
 		!= entries_.end();
 }

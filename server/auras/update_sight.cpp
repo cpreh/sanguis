@@ -3,7 +3,8 @@
 
 sanguis::server::auras::update_sight::update_sight(
 	space_unit const radius_,
-	update_sight_function const &update_sight_function_
+	update_sight_function const &enter_,
+	update_sight_function const &leave_
 )
 :
 	aura(
@@ -11,17 +12,30 @@ sanguis::server::auras::update_sight::update_sight(
 		team::neutral,
 		influence::debuff
 	),
-	update_sight_function_(
-		update_sight_function_
+	enter_(
+		enter_	
+	),
+	leave_(
+		leave_
 	)
 {}
 
 void
-sanguis::server::auras::update_sight::do_effect(
+sanguis::server::auras::update_sight::enter(
 	entities::entity &e
 )
 {
-	update_sight_function_(
+	enter_(
+		e.id()
+	);
+}
+
+void
+sanguis::server::auras::update_sight::leave(
+	entities::entity &e
+)
+{
+	leave_(
 		e.id()
 	);
 }

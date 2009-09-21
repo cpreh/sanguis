@@ -106,11 +106,16 @@ private:
 	);
 
 	void
-	update_sight_range(
+	add_sight_range(
 		player_id,
 		entity_id target_id
 	);
 
+	void
+	remove_sight_range(
+		player_id,
+		entity_id target_id
+	);
 	void
 	remove_player(
 		player_id
@@ -140,9 +145,7 @@ private:
 
 	diff_clock diff_clock_;
 
-	sge::time::timer
-		sight_range_timer_,
-		send_timer_;
+	sge::time::timer send_timer_;
 
 	entity_map entities_;
 

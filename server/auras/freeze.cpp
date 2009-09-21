@@ -14,8 +14,10 @@ sanguis::server::auras::freeze::freeze(
 	)
 {}
 
-void sanguis::server::auras::freeze::do_effect(
-	entities::entity &target)
+void
+sanguis::server::auras::freeze::enter(
+	entities::entity &target
+)
 {
 	target.property(
 		entities::property_type::movement_speed).max(
@@ -26,4 +28,12 @@ void sanguis::server::auras::freeze::do_effect(
 		entities::property_type::attack_speed).max(
 			static_cast<space_unit>(0)
 	);
+}
+
+void
+sanguis::server::auras::freeze::leave(
+	entities::entity &target
+)
+{
+	// FIXME	
 }

@@ -52,12 +52,22 @@ private:
 	) const;
 
 	void
-	collision(
+	collision_begin(
+		collision::base &
+	);
+
+	void
+	collision_end(
 		collision::base &
 	);
 
 	virtual void
-	do_effect(
+	enter(
+		entities::entity &
+	) = 0;
+
+	virtual void
+	leave(
 		entities::entity &
 	) = 0;
 

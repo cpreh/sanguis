@@ -98,14 +98,6 @@ sanguis::server::entities::entity::transfer(
 {
 	environment_ = nenvironment;
 
-	direction(
-		insert_param.direction()
-	);
-
-	angle(
-		insert_param.angle()
-	);
-
 	collision::create_parameters const create_param(
 		insert_param.center(),
 		angle_to_vector(
@@ -119,6 +111,14 @@ sanguis::server::entities::entity::transfer(
 	collision::base::recreate(
 		environment_->collision_world(),
 		create_param
+	);
+
+	direction(
+		insert_param.direction()
+	);
+
+	angle(
+		insert_param.angle()
 	);
 
 	BOOST_FOREACH(

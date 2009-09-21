@@ -74,7 +74,7 @@ sanguis::server::entities::pickups::pickup::can_collide_with_entity(
 }
 
 void
-sanguis::server::entities::pickups::pickup::collision_entity(
+sanguis::server::entities::pickups::pickup::collision_entity_begin(
 	entity &e
 )
 {

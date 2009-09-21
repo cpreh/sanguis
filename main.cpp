@@ -111,7 +111,7 @@ try
 		("help",
 			"produce help message")
 		("log",
-			po::value<std::string>(&log_level)->default_value(std::string("debug")),
+			po::value<std::string>(&log_level)->default_value(std::string("warning")),
 			"sets the maximum logging level (one of debug, info, warning, error, fatal in that order)")
 		("width",
 			po::value<unsigned>(&screen_width)->default_value(1024),
@@ -141,18 +141,25 @@ try
 		return EXIT_SUCCESS;
 	}
 
+	// TODO: remove this global variable!
 	sanguis::resolution(
 		sge::renderer::screen_size(
 			screen_width,
-			screen_height));
+			screen_height
+		)
+	);
 
 	sge::log::global().activate_hierarchy(
 		sge::log::level_from_string(
-			sge::iconv(log_level)));
+			sge::iconv(log_level)
+		)
+	);
 
 	sanguis::log().activate_hierarchy(
 		sge::log::level_from_string(
-			sge::iconv(log_level)));
+			sge::iconv(log_level)
+		)
+	);
 
 	sge::systems::instance sys(
 		sge::systems::list()

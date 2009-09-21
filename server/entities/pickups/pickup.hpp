@@ -41,7 +41,7 @@ private:
 	) const;
 	
 	void
-	collision_entity(
+	collision_entity_begin(
 		entity &
 	);
 

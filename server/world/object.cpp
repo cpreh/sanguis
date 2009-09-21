@@ -58,13 +58,6 @@ sanguis::server::world::object::object(
 		)
 	),
 	diff_clock_(),
-	sight_range_timer_(
-		sge::time::second(
-			10
-		),
-		sge::time::activation_state::active,
-		diff_clock_.callback()
-	),
 	send_timer_(
 		sge::time::millisecond(
 			500
@@ -142,36 +135,6 @@ sanguis::server::world::object::update(
 		environment(),
 		load_context_
 	);
-
-	if(
-		sight_range_timer_.update_b()
-	)
-	{
-		BOOST_FOREACH(
-			sight_range_map::reference ref,
-			sight_ranges_
-		)
-		{
-			entity_remove_vector const removes(
-				ref.second.update(
-					current_time_
-				)
-			);
-
-			BOOST_FOREACH(	
-				entity_remove_vector::value_type const id,
-				removes
-			)
-				send_player_specific(
-					ref.first,
-					messages::create(
-						messages::remove(
-							id
-						)
-					)
-				);
-		}
-	}
 
 	// should we send position updates?
 	bool const update_pos = send_timer_.update_b();
@@ -467,24 +430,16 @@ sanguis::server::world::object::request_transfer(
 	);
 }
 void
-sanguis::server::world::object::update_sight_range(
+sanguis::server::world::object::add_sight_range(
 	player_id const player_id_,
 	entity_id const target_id_
 )
 {
-	sight_range &range(
-		sight_ranges_[
-			player_id_
-		]
+	sight_ranges_[
+		player_id_
+	].add(
+		target_id_
 	);
-
-	if(
-		!range.add(
-			target_id_,
-			current_time_ // TODO: we have to implement this stuff in sge::chrono
-		)
-	)
-		return;
 	
 	entity_map::iterator const it(
 		entities_.find(
@@ -512,6 +467,28 @@ sanguis::server::world::object::update_sight_range(
 	send_player_specific(
 		player_id_,
 		it->second->add_message()
+	);
+}
+
+void
+sanguis::server::world::object::remove_sight_range(
+	player_id const player_id_,
+	entity_id const target_id_
+)
+{
+	sight_ranges_[
+		player_id_
+	].remove(
+		target_id_
+	);
+		
+	send_player_specific(
+		player_id_,
+		messages::create(
+			messages::remove(
+				target_id_
+			)
+		)
 	);
 }
 

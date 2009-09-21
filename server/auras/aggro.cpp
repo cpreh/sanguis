@@ -17,11 +17,19 @@ sanguis::server::auras::aggro::aggro(
 {}
 
 void
-sanguis::server::auras::aggro::do_effect(
+sanguis::server::auras::aggro::enter(
 	entities::entity &target
 )
 {
 	update_target_(
 		target
 	);
+}
+
+void
+sanguis::server::auras::aggro::leave(
+	entities::entity &target
+)
+{
+	// FIXME!
 }

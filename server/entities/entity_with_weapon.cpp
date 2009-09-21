@@ -144,8 +144,10 @@ void sanguis::server::entities::entity_with_weapon::change_weapon(
 	);
 }
 
-void sanguis::server::entities::entity_with_weapon::add_weapon(
-	weapons::auto_ptr ptr)
+void
+sanguis::server::entities::entity_with_weapon::add_weapon(
+	weapons::auto_ptr ptr
+)
 {
 	weapon_type::type const wt = ptr->type();
 	weapons::magazine_type const magazine_size = ptr->magazine_size();
@@ -179,11 +181,6 @@ void sanguis::server::entities::entity_with_weapon::add_weapon(
 
 	if (!weapons_.insert(wt,ptr).second)
 		throw exception(SGE_TEXT("couldn't insert weapon"));
-
-	environment()->got_weapon(
-		id(),
-		wt
-	);
 }
 
 void sanguis::server::entities::entity_with_weapon::remove_weapon(

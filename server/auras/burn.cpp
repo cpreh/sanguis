@@ -20,7 +20,7 @@ sanguis::server::auras::burn::burn(
 {}
 
 void
-sanguis::server::auras::burn::do_effect(
+sanguis::server::auras::burn::enter(
 	entities::entity &e
 )
 {
@@ -35,4 +35,12 @@ sanguis::server::auras::burn::do_effect(
 			)
 		)
 	);
+}
+
+void
+sanguis::server::auras::burn::leave(
+	entities::entity &
+)
+{
+	// FIXME: remove the buff!
 }

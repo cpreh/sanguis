@@ -55,7 +55,12 @@ private:
 	on_die();
 
 	void
-	update_sight_range(
+	add_sight_range(
+		entity_id
+	);
+
+	void
+	remove_sight_range(
 		entity_id
 	);
 

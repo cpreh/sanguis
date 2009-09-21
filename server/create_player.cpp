@@ -67,12 +67,14 @@ sanguis::server::create_player(
 		)
 	);
 
+#if 0
 	// TODO: some defaults here
 	new_player->add_weapon(
 		weapons::create(
 			weapon_type::pistol
 		)
 	);
+#endif
 
 	send_to_player(
 		player_id_,
