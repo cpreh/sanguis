@@ -159,14 +159,6 @@ sanguis::server::entities::entity::pos() const
 	return center() - dim() / static_cast<space_unit>(2);
 }
 
-void sanguis::server::entities::entity::pos(
-	pos_type const &p) 
-{ 
-	center(
-		p + dim() / static_cast<space_unit>(2)
-	);
-}
-
 sanguis::server::space_unit
 sanguis::server::entities::entity::angle() const
 {
@@ -254,12 +246,20 @@ sanguis::server::entities::entity::team() const
 	return team_;
 }
 
-void sanguis::server::entities::entity::damage(
+void
+sanguis::server::entities::entity::damage(
 	space_unit const d,
-	damage::array const &damages)
+	damage::array const &damages
+)
 {
-	for(damage::array::size_type i = 0; i < damages.size(); ++i)
-		health(health() - d * damages[i] * (1 - armor_[i]));
+	for(
+		damage::array::size_type i = 0;
+		i < damages.size();
+		++i
+	)
+		health(
+			health() - d * damages[i] * (1 - armor_[i])
+		);
 
 	if(dead())
 		die();

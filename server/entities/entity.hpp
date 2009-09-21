@@ -70,11 +70,6 @@ public:
 	pos_type const
 	pos() const;
 
-	void
-	pos(
-		pos_type const &
-	);
-
 	space_unit
 	angle() const;
 
