@@ -27,9 +27,7 @@
 #include <sge/log/headers.hpp>
 #include <sge/exception.hpp>
 #include <sge/text.hpp>
-#include <sge/cerr.hpp>
 #include <sge/lexical_cast.hpp>
-#include <boost/foreach.hpp>
 #include <boost/bind.hpp>
 
 namespace
@@ -156,33 +154,31 @@ sanguis::load::model::animation::sounds() const
 	return *sounds_;
 }
 
-sanguis::load::model::animation::context_ptr sanguis::load::model::animation::load() const 
+sanguis::load::model::animation::context_ptr
+sanguis::load::model::animation::load() const 
 {
 	return 
 		context_ptr(
 			new animation_context(
 				param_.textures().load(
-					param_.path() / texture_),
+					param_.path() / texture_
+				),
 				frame_cache_,
 				boost::bind(
 					&animation::fill_cache,
 					this,
-					_1)));
+					_1
+				)
+			)
+		);
 }
 
 void sanguis::load::model::animation::fill_cache(
 	sge::renderer::lock_rect const &_area) const
 {
 	if (!frame_cache_.empty())
-	{
-		// DEBUG
-		//sge::cerr << "cache is not empty, returning\n";
 		return;
-	}
 
-		// DEBUG
-	//sge::cerr << "cache is empty, continuing\n";
-	
 	sge::parse::json::element_vector const &range(
 		sge::parse::json::find_member<
 			sge::parse::json::array
@@ -220,8 +216,6 @@ void sanguis::load::model::animation::fill_cache(
 		)
 	);
 
-	//sge::cerr << "delay is " << delay << "\n";
-
 	for(sge::renderer::size_type i = begin; i != end; ++i)
 	{
 		sge::renderer::lock_rect const cur_area(
@@ -248,9 +242,6 @@ void sanguis::load::model::animation::fill_cache(
 				+ sge::lexical_cast<sge::string>(begin)
 			);
 
-		// DEBUG
-		//sge::cerr << "adding value!\n";
-		
 		frame_cache_.push_back(
 			frame_cache_value(
 				delay,
@@ -274,7 +265,6 @@ void sanguis::load::model::animation::fill_cache(
 		*/
 	}
 	/*fill_cache();
-	sge::cerr << "creating texture context for animation\n";
 	context_ = 
 		param_.textures().load(
 			param_.path() / *texture);*/

@@ -18,7 +18,6 @@
 #include <sge/sprite/object.hpp>
 #include <sge/time/time.hpp>
 #include <sge/text.hpp>
-#include <sge/cerr.hpp>
 #include <boost/bind.hpp>
 #include <algorithm>
 #include <limits>

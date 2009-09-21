@@ -25,7 +25,6 @@
 #include <sge/algorithm/join_strings.hpp>
 #include <sge/lexical_cast.hpp>
 #include <sge/make_shared_ptr.hpp>
-#include <sge/cerr.hpp>
 #include <boost/bind.hpp>
 
 namespace
@@ -127,7 +126,6 @@ sanguis::client::states::gameover::gameover(
 				this)))
 {
 	context<machine>().cursor()->visible(true);
-	sge::cerr << "i'm now in gameover!\n";
 }
 
 boost::statechart::result

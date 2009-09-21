@@ -7,8 +7,6 @@
 #include <sge/image/file.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/thread/sleep.hpp>
-#include <sge/cout.hpp>
-#include <sge/cerr.hpp>
 #include <sge/text.hpp>
 #include <sge/time/second.hpp>
 #include <boost/bind.hpp>
@@ -43,9 +41,7 @@ sanguis::load::resource::texture_context_impl::texture_context_impl(
 			10),
 		sge::time::activation_state::active,
 		clock_.callback())
-{
-	sge::cerr << SGE_TEXT("created texture context for ") << _path.string() << SGE_TEXT("\n");
-}
+{}
 
 bool sanguis::load::resource::texture_context_impl::update()
 {
@@ -95,18 +91,16 @@ sanguis::load::resource::texture_context_impl::~texture_context_impl()
 	thread_.join();
 }
 
-sanguis::load::resource::texture_context_impl::future_value const sanguis::load::resource::texture_context_impl::task(
+sanguis::load::resource::texture_context_impl::future_value const
+sanguis::load::resource::texture_context_impl::task(
 	sge::filesystem::path const &_path,
-	sge::image::loader_ptr const _il)
+	sge::image::loader_ptr const _il
+)
 {
-	// DEBUG
-	//sge::cerr << SGE_TEXT("created task thread context for ") << _path.string() << SGE_TEXT("\n");
-	//sge::thread::sleep( DEBUG
-	//	3);
 	sge::image::file_ptr const p = 
 		_il->load(
-			_path);
-	// DEBUG
-	//sge::cerr << SGE_TEXT("loaded image ") << _path.string() << SGE_TEXT(" in thread, now returning\n");
+			_path
+		);
+	
 	return p;
 }

@@ -8,7 +8,6 @@
 #include <sge/math/dim/structure_cast.hpp>
 #include <sge/image/color/rgba8.hpp>
 #include <sge/image/color/init.hpp>
-#include <sge/cerr.hpp>
 
 sanguis::draw::particle::object::object(
 	particle_type::type const _type,
@@ -56,8 +55,6 @@ bool sanguis::draw::particle::object::update(
 {
 	animation_context_->update();
 	if (!animation_ && animation_context_->is_finished())
-	{
-		sge::cerr << "animation is finished!\n";
 		animation_.reset(
 			new sge::sprite::texture_animation(
 				animation_context_->result(),
@@ -65,14 +62,10 @@ bool sanguis::draw::particle::object::update(
 					? sge::sprite::texture_animation::loop_method::repeat
 					: sge::sprite::texture_animation::loop_method::stop_at_end,
 				sprite_,
-				clock_.callback()));
-				/*
-			base::pos(
-				point(
-					static_cast<funit>(-animation_->dim().w()/2),
-					static_cast<funit>(-animation_->dim().h()/2)));
-					*/
-	}	
+				clock_.callback()
+			)
+		);
+
 	base::update(delta,p,r,d);
 
 	sprite_.z() = d+base::depth();

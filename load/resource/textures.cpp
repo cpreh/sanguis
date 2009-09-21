@@ -20,7 +20,6 @@
 #include <sge/text.hpp>
 #include <sge/fstream.hpp>
 #include <sge/string.hpp>
-#include <sge/cerr.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/bind.hpp>
@@ -77,11 +76,8 @@ void sanguis::load::resource::textures::cleanup(
 		it->second->tick(
 			delta);
 		if (it->second->decayed())
-		{
-			sge::cerr << "deleting decayed texture " << it->first.string() << "\n";
 			unnamed_textures.erase(
 				it);
-		}
 	}
 }
 
