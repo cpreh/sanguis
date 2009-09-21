@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_AURAS_AURA_HPP_INCLUDED
 
 #include "influence.hpp"
+#include "optional_groups.hpp"
 #include "../pos_type.hpp"
 #include "../space_unit.hpp"
 #include "../entities/entity_fwd.hpp"
@@ -35,7 +36,8 @@ protected:
 	aura(
 		space_unit radius,
 		team::type,
-		influence::type
+		influence::type,
+		optional_groups const &
 	);
 	
 	entity_id

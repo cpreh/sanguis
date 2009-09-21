@@ -11,6 +11,7 @@
 #include "../entities/insert_parameters_fwd.hpp"
 #include "../environment/object_ptr.hpp"
 #include "../environment/load_context_ptr.hpp"
+#include "../collision/global_groups.hpp"
 #include "../exp_type.hpp"
 #include "../health_type.hpp"
 #include "../player_id.hpp"
@@ -142,6 +143,8 @@ private:
 	server::environment::load_context_ptr const load_context_;
 
 	sge::collision::world_ptr const collision_world_;
+
+	server::collision::global_groups const collision_groups_;
 
 	diff_clock diff_clock_;
 

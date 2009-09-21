@@ -1,4 +1,6 @@
 #include "aggro.hpp"
+#include <sge/assign/make_container.hpp>
+#include <sge/optional_impl.hpp>
 
 sanguis::server::auras::aggro::aggro(
 	space_unit const radius_,
@@ -9,7 +11,14 @@ sanguis::server::auras::aggro::aggro(
 	aura(
 		radius_,
 		team_,
-		influence::debuff
+		influence::debuff,
+		optional_groups(
+			sge::assign::make_container<
+				collision::group_vector
+			>(
+				collision::group::sight_range
+			)
+		)
 	),
 	update_target_(
 		update_target_

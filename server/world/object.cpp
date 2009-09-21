@@ -57,6 +57,9 @@ sanguis::server::world::object::object(
 			// TODO
 		)
 	),
+	collision_groups_(
+		collision_world_
+	),
 	diff_clock_(),
 	send_timer_(
 		sge::time::millisecond(
@@ -234,6 +237,7 @@ sanguis::server::world::object::insert(
 
 	e->transfer(
 		environment_,
+		collision_groups_,
 		insert_params
 	);
 

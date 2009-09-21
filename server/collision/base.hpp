@@ -2,7 +2,9 @@
 #define SANGUIS_SERVER_COLLISION_BASE_HPP_INCLUDED
 
 #include "shape_vector.hpp"
+#include "group_vector.hpp"
 #include "create_parameters_fwd.hpp"
+#include "global_groups_fwd.hpp"
 #include "../pos_type.hpp"
 #include <sge/collision/world_fwd.hpp>
 #include <sge/collision/body_fwd.hpp>
@@ -19,7 +21,9 @@ namespace collision
 class base {
 	SGE_NONCOPYABLE(base)
 protected:
-	base();
+	explicit base(
+		group_vector const &groups_
+	);
 
 	void
 	body_pos(
@@ -40,6 +44,7 @@ public:
 	void
 	recreate(
 		sge::collision::world_ptr,
+		global_groups const &,
 		create_parameters const &
 	);
 
@@ -67,6 +72,7 @@ public:
 private:
 	sge::collision::body_ptr body_;
 	shape_vector shapes_;
+	group_vector const groups_;
 };
 
 }

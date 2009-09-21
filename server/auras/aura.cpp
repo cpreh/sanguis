@@ -1,10 +1,12 @@
 #include "aura.hpp"
+#include "collision_groups.hpp"
 #include "../entities/entity.hpp"
 #include <sge/collision/shapes/circle.hpp>
 #include <sge/collision/body.hpp>
 #include <sge/collision/world.hpp>
 #include <sge/math/circle/basic_impl.hpp>
 #include <sge/assign/make_container.hpp>
+#include <sge/optional_impl.hpp>
 #include <boost/logic/tribool.hpp>
 
 sanguis::server::auras::aura::~aura()
@@ -31,10 +33,20 @@ sanguis::server::auras::aura::owner(
 sanguis::server::auras::aura::aura(
 	space_unit const radius_,
 	team::type const team_,
-	influence::type const influence_
+	influence::type const influence_,
+	optional_groups const &optional_groups_
 )
 :
-	collision::base(),
+	collision::base(
+		optional_groups_
+		?
+			*optional_groups_
+		:
+			collision_groups(
+				team_,
+				influence_
+			)
+	),
 	radius_(radius_),
 	team_(team_),
 	influence_(influence_),
@@ -68,22 +80,7 @@ sanguis::server::auras::aura::can_collide_with(
 	collision::base const &o
 ) const
 {
-	entities::entity const *const entity(
-		dynamic_cast<entities::entity const *>(&o)
-	);
-
-	return
-		entity
-		&& (
-			(
-				entity->team() == team_
-				&& influence_ == influence::buff
-			)
-			|| (
-				entity->team() != team_
-				&& influence_ == influence::debuff
-			)
-		);
+	return true;
 }
 
 void

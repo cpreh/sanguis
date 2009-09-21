@@ -1,6 +1,7 @@
 #include "freeze.hpp"
 #include "../entities/entity.hpp"
 #include "../entities/property.hpp"
+#include <sge/optional_impl.hpp>
 
 sanguis::server::auras::freeze::freeze(
 	space_unit const radius,
@@ -10,7 +11,8 @@ sanguis::server::auras::freeze::freeze(
 	aura(
 		radius,
 		team,
-		influence::debuff
+		influence::debuff,
+		optional_groups()
 	)
 {}
 

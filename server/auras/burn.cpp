@@ -1,18 +1,21 @@
 #include "burn.hpp"
 #include "../buffs/burn.hpp"
 #include "../entities/entity.hpp"
+#include <sge/optional_impl.hpp>
 
 sanguis::server::auras::burn::burn(
 	space_unit const radius,
 	team::type const team,
 	space_unit const damage_per_pulse,
 	time_type const pulse_diff,
-	damage::array const &damage_values)
+	damage::array const &damage_values
+)
 :
 	aura(
 		radius,
 		team,
-		influence::debuff
+		influence::debuff,
+		optional_groups()
 	),
 	pulse_diff(pulse_diff),
 	damage_per_pulse(damage_per_pulse),

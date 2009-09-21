@@ -20,6 +20,7 @@
 #include "../damage/array.hpp"
 #include "../damage/armor.hpp"
 #include "../collision/base.hpp"
+#include "../collision/global_groups_fwd.hpp"
 #include "../environment/object_ptr.hpp"
 #include "../environment/load_context_ptr.hpp"
 #include "../../messages/auto_ptr.hpp"
@@ -55,6 +56,7 @@ public:
 	void
 	transfer(
 		server::environment::object_ptr,
+		collision::global_groups const &,
 		insert_parameters const &
 	);
 

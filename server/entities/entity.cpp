@@ -4,6 +4,7 @@
 #include "property.hpp"
 #include "radius.hpp"
 #include "insert_parameters.hpp"
+#include "collision_groups.hpp"
 #include "../collision/create_parameters.hpp"
 #include "../perks/perk.hpp"
 #include "../buffs/buff.hpp"
@@ -39,6 +40,12 @@ sanguis::server::entities::entity::entity(
 	base_parameters const &param
 )
 :
+	collision::base(
+		collision_groups(
+			param.type(),
+			param.team()
+		)
+	),
 	environment_(),
 	load_context_(param.load_context()),
 	id_(get_unique_id()),
@@ -93,6 +100,7 @@ sanguis::server::entities::entity::entity(
 void
 sanguis::server::entities::entity::transfer(
 	server::environment::object_ptr const nenvironment,
+	collision::global_groups const &collision_groups_,
 	insert_parameters const &insert_param
 )
 {
@@ -110,6 +118,7 @@ sanguis::server::entities::entity::transfer(
 		
 	collision::base::recreate(
 		environment_->collision_world(),
+		collision_groups_,
 		create_param
 	);
 
@@ -127,6 +136,7 @@ sanguis::server::entities::entity::transfer(
 	)
 		aura_.recreate(
 			environment_->collision_world(),
+			collision_groups_,
 			create_param
 		);
 }
@@ -547,15 +557,11 @@ void sanguis::server::entities::entity::max_health_change(
 	);
 }
 
-#include <iostream>
-
 boost::logic::tribool const
 sanguis::server::entities::entity::can_collide_with(
 	collision::base const &b
 ) const
 {
-	std::cerr << "can collide withbegin\n";
-
 	entity const *const other(
 		dynamic_cast<entity const *>(&b)
 	);
@@ -564,6 +570,8 @@ sanguis::server::entities::entity::can_collide_with(
 		? can_collide_with_entity(*other)
 		: boost::logic::indeterminate;
 }
+
+#include <iostream>
 
 void
 sanguis::server::entities::entity::collision_begin(

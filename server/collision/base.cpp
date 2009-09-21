@@ -1,6 +1,7 @@
 #include "base.hpp"
 #include "satellite.hpp"
 #include "create_parameters.hpp"
+#include "global_groups.hpp"
 #include <sge/collision/world.hpp>
 #include <sge/collision/body.hpp>
 #include <sge/math/vector/basic_impl.hpp>
@@ -11,10 +12,15 @@
 #include <boost/tr1/functional.hpp>
 #include <boost/foreach.hpp>
 
-sanguis::server::collision::base::base()
+sanguis::server::collision::base::base(
+	group_vector const &groups_
+)
 :
 	body_(),
-	shapes_()
+	shapes_(),
+	groups_(
+		groups_
+	)
 {}
 
 void
@@ -70,7 +76,7 @@ sanguis::server::collision::base::body_speed() const
 void
 sanguis::server::collision::base::recreate(
 	sge::collision::world_ptr const world_,
-	//collision::groups const &groups_,
+	global_groups const &global_groups_,
 	create_parameters const &create_param_
 )
 {
@@ -113,16 +119,14 @@ sanguis::server::collision::base::recreate(
 			shape_
 		);
 
-		/*
 		BOOST_FOREACH(
-			group_vector::reference group_,
+			group_vector::const_reference group_,
 			groups_
 		)
-			groups_.add_to_group(
+			global_groups_.add_to_group(
 				shape_,
 				group_
 			);
-		*/
 	}
 }
 
