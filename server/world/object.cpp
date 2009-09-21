@@ -82,7 +82,7 @@ sanguis::server::world::object::object(
 		)
 	),
 	collision_connection_end_(
-		collision_world_->register_begin_callback(
+		collision_world_->register_end_callback(
 			boost::bind(
 				collision::execute,
 				_1,
