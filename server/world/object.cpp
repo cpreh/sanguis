@@ -106,13 +106,6 @@ sanguis::server::world::object::object(
 			)
 		)
 	),
-	current_time_(
-		static_cast<
-			time_type
-		>(
-			0
-		)
-	),
 	wave_gen_()
 {}
 
@@ -124,8 +117,6 @@ sanguis::server::world::object::update(
 	time_type const time_
 )
 {
-	current_time_ += time_;
-
 	diff_clock_.update(
 		time_
 	);

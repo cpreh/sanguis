@@ -160,8 +160,6 @@ private:
 	
 	server::environment::object_ptr const environment_;
 
-	time_type current_time_;
-
 	waves::generator wave_gen_; // TODO: this doesn't belong here, only for testing!
 };
 

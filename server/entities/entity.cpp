@@ -547,10 +547,15 @@ void sanguis::server::entities::entity::max_health_change(
 	);
 }
 
+#include <iostream>
+
 boost::logic::tribool const
 sanguis::server::entities::entity::can_collide_with(
-	collision::base const &b) const
+	collision::base const &b
+) const
 {
+	std::cerr << "can collide withbegin\n";
+
 	entity const *const other(
 		dynamic_cast<entity const *>(&b)
 	);
@@ -565,6 +570,8 @@ sanguis::server::entities::entity::collision_begin(
 	collision::base &b
 )
 {
+	std::cerr << "collision begin\n";
+
 	entity *const other(
 		dynamic_cast<entity *>(&b)
 	);
@@ -580,6 +587,8 @@ sanguis::server::entities::entity::collision_end(
 	collision::base &b
 )
 {
+	std::cerr << "collision end\n";
+
 	entity *const other(
 		dynamic_cast<entity *>(&b)
 	);
@@ -593,7 +602,8 @@ sanguis::server::entities::entity::collision_end(
 
 boost::logic::tribool const
 sanguis::server::entities::entity::can_collide_with_entity(
-	entity const &) const
+	entity const &
+) const
 {
 	return boost::logic::indeterminate;
 }

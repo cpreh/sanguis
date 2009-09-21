@@ -58,12 +58,12 @@ public:
 	virtual void
 	collision_begin(
 		collision::base &
-	);
+	) = 0;
 
 	virtual void
 	collision_end(
 		collision::base &
-	);
+	) = 0;
 private:
 	sge::collision::body_ptr body_;
 	shape_vector shapes_;

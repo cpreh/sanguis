@@ -70,6 +70,7 @@ sanguis::server::collision::base::body_speed() const
 void
 sanguis::server::collision::base::recreate(
 	sge::collision::world_ptr const world_,
+	//collision::groups const &groups_,
 	create_parameters const &create_param_
 )
 {
@@ -107,9 +108,22 @@ sanguis::server::collision::base::recreate(
 		shape_vector::const_reference shape_,
 		shapes_
 	)
+	{
 		body_->add(
 			shape_
 		);
+
+		/*
+		BOOST_FOREACH(
+			group_vector::reference group_,
+			groups_
+		)
+			groups_.add_to_group(
+				shape_,
+				group_
+			);
+		*/
+	}
 }
 
 sanguis::server::collision::base::~base()
@@ -121,18 +135,4 @@ sanguis::server::collision::base::can_collide_with(
 ) const
 {
 	return boost::logic::indeterminate;
-}
-
-void
-sanguis::server::collision::base::collision_begin(
-	collision::base &
-)
-{
-}
-
-void
-sanguis::server::collision::base::collision_end(
-	collision::base &
-)
-{
 }
