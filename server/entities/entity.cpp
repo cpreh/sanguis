@@ -571,15 +571,11 @@ sanguis::server::entities::entity::can_collide_with(
 		: boost::logic::indeterminate;
 }
 
-#include <iostream>
-
 void
 sanguis::server::entities::entity::collision_begin(
 	collision::base &b
 )
 {
-	std::cerr << "collision begin\n";
-
 	entity *const other(
 		dynamic_cast<entity *>(&b)
 	);
@@ -595,8 +591,6 @@ sanguis::server::entities::entity::collision_end(
 	collision::base &b
 )
 {
-	std::cerr << "collision end\n";
-
 	entity *const other(
 		dynamic_cast<entity *>(&b)
 	);
@@ -606,7 +600,6 @@ sanguis::server::entities::entity::collision_end(
 			*other
 		);
 }
-
 
 boost::logic::tribool const
 sanguis::server::entities::entity::can_collide_with_entity(

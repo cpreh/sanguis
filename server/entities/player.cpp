@@ -10,8 +10,6 @@
 #include <sge/make_auto_ptr.hpp>
 #include <boost/bind.hpp>
 
-#include <iostream>
-
 sanguis::server::entities::player::player(
 	server::environment::load_context_ptr const load_context_,
 	damage::armor const &armor,
@@ -41,8 +39,6 @@ sanguis::server::entities::player::player(
 	level_delta_(static_cast<level_type>(0)),
 	skill_points_(0)
 {
-	std::cerr << "player entity id " << id() << '\n';
-
 	auras::auto_ptr new_aura(
 		sge::make_auto_ptr<
 			auras::update_sight

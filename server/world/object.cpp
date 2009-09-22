@@ -124,13 +124,11 @@ sanguis::server::world::object::update(
 		time_
 	);
 
-#if 0
 	wave_gen_.process(
 		time_,
 		environment(),
 		load_context_
 	);
-#endif
 
 	// should we send position updates?
 	bool const update_pos = send_timer_.update_b();
