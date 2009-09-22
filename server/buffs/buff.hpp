@@ -16,13 +16,11 @@ namespace buffs
 class buff {
 	SGE_NONCOPYABLE(buff)
 public:
-	virtual void update(
+	virtual void
+	update(
 		entities::entity &,
-		time_type) = 0;
-
-	virtual bool
-	stacks(
-		buff const &) const;
+		time_type
+	) = 0;
 
 	bool expired() const;
 
@@ -31,7 +29,8 @@ public:
 	virtual ~buff();
 protected:
 	explicit buff(
-		entity_id source);
+		entity_id source
+	);
 
 	void expire();
 private:

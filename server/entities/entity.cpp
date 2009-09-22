@@ -450,15 +450,9 @@ sanguis::server::entities::entity::link()
 
 void
 sanguis::server::entities::entity::add_buff(
-	buffs::auto_ptr b)
+	buffs::auto_ptr b
+)
 {
-	BOOST_FOREACH(
-		buff_container::const_reference r,
-		buffs_
-	)
-		if(!r.stacks(*b) || b->stacks(r))
-			return;
-	
 	buffs_.push_back(b);
 }
 
