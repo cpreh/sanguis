@@ -30,8 +30,8 @@ sanguis::server::entities::projectiles::melee::melee(
 				entities::property(static_cast<space_unit>(0))
 			),
 		dim_type(
-			1,
-			1
+			10,
+			10
 		),
 		static_cast<time_type>(1), // short lifetime
 		indeterminate::yes

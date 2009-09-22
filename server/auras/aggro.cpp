@@ -16,7 +16,7 @@ sanguis::server::auras::aggro::aggro(
 			sge::assign::make_container<
 				collision::group_vector
 			>(
-				collision::group::sight_range
+				collision::group::aggro_aura
 			)
 		)
 	),

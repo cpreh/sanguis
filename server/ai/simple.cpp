@@ -123,11 +123,15 @@ sanguis::server::ai::simple::update(
 	);
 }
 
+#include <iostream>
+
 void
 sanguis::server::ai::simple::potential_target(
 	entities::entity &new_target
 )
 {
+	std::cerr << "potential target " << new_target.id() << '\n';
+
 	// if we already have a target
 	// and the target timer hasn't elapsed
 	// do nothing
