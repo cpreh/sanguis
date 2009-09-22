@@ -6,7 +6,7 @@
 #include <sge/assign/make_container.hpp>
 #include <sge/foreach_enumerator.hpp>
 #include <boost/foreach.hpp>
-#include <map>
+#include <vector>
 #include <utility>
 
 sanguis::server::collision::global_groups::global_groups(
@@ -24,9 +24,11 @@ sanguis::server::collision::global_groups::global_groups(
 			world_->create_group()
 		);
 	
-	typedef std::map<
-		group::type,
-		group::type
+	typedef std::vector<
+		std::pair<
+			group::type,
+			group::type
+		>
 	> init_map;
 
 	init_map const init_(
