@@ -2,10 +2,10 @@
 #define SANGUIS_SERVER_AI_SIMPLE_HPP_INCLUDED
 
 #include "base.hpp"
+#include "entity_map.hpp"
 #include "../entities/entity_with_weapon_fwd.hpp"
 #include "../entities/auto_weak_link.hpp"
-#include "../../diff_clock.hpp"
-#include <sge/time/timer.hpp>
+#include <sge/container/map_decl.hpp>
 
 namespace sanguis
 {
@@ -14,7 +14,10 @@ namespace server
 namespace ai
 {
 
-class simple : public base {
+class simple
+:
+	public base 
+{
 public:
 	explicit simple(
 		entities::auto_weak_link owner
@@ -32,7 +35,12 @@ private:
 	);
 
 	void
-	potential_target(
+	target_enters(
+		entities::entity &
+	);
+
+	void
+	target_leaves(
 		entities::entity &
 	);
 
@@ -42,9 +50,7 @@ private:
 		target_,
 		owner_;
 
-	diff_clock diff_clock_;
-
-	sge::time::timer search_new_target_timer;
+	entity_map potential_targets_;
 };
 
 }

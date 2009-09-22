@@ -53,8 +53,15 @@ sanguis::server::world::object::object(
 	),
 	collision_world_(
 		sys->create_world(
-			sge::collision::optional_rect()
-			// TODO
+			sge::collision::optional_rect(
+				sge::collision::rect(
+					// FIXME
+					-500,
+					-500,
+					1000,
+					1000
+				)
+			)
 		)
 	),
 	collision_groups_(
@@ -425,22 +432,12 @@ sanguis::server::world::object::request_transfer(
 	);
 }
 
-#include <iostream>
-
 void
 sanguis::server::world::object::add_sight_range(
 	player_id const player_id_,
 	entity_id const target_id_
 )
 {
-	std::cerr
-		<< "add_sight_range: "
-		<< player_id_
-		<< ' '
-		<< target_id_
-		<< '\n';
-		
-
 	sight_ranges_[
 		player_id_
 	].add(
@@ -482,13 +479,6 @@ sanguis::server::world::object::remove_sight_range(
 	entity_id const target_id_
 )
 {
-	std::cerr
-		<< "remove_sight_range: "
-		<< player_id_
-		<< ' '
-		<< target_id_
-		<< '\n';
-		
 	sight_ranges_[
 		player_id_
 	].remove(

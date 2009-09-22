@@ -5,7 +5,8 @@
 sanguis::server::auras::aggro::aggro(
 	space_unit const radius_,
 	team::type const team_,
-	update_target_function const &update_target_
+	update_target_function const &add_target_,
+	update_target_function const &remove_target_
 )
 :
 	aura(
@@ -20,8 +21,11 @@ sanguis::server::auras::aggro::aggro(
 			)
 		)
 	),
-	update_target_(
-		update_target_
+	add_target_(
+		add_target_
+	),
+	remove_target_(
+		remove_target_
 	)
 {}
 
@@ -30,7 +34,7 @@ sanguis::server::auras::aggro::enter(
 	entities::entity &target
 )
 {
-	update_target_(
+	add_target_(
 		target
 	);
 }
@@ -40,5 +44,7 @@ sanguis::server::auras::aggro::leave(
 	entities::entity &target
 )
 {
-	// FIXME!
+	remove_target_(
+		target
+	);
 }

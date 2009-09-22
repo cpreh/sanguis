@@ -1,13 +1,13 @@
 #include "simple.hpp"
+#include "search_new_target.hpp"
 #include "../auras/aggro.hpp"
 #include "../entities/entity_with_weapon.hpp"
 #include "../entities/entity.hpp"
 #include "../entities/property.hpp"
 #include "../collision/collides.hpp"
 #include "../collision/distance.hpp"
-#include <sge/time/second.hpp>
-#include <sge/time/resolution.hpp>
 #include <sge/math/vector/angle_between.hpp>
+#include <sge/container/map_impl.hpp>
 #include <sge/make_auto_ptr.hpp>
 #include <sge/optional.hpp>
 #include <sge/assert.hpp>
@@ -20,14 +20,7 @@ sanguis::server::ai::simple::simple(
 	me_(0),
 	target_(),
 	owner_(owner_),
-	diff_clock_(),
-	search_new_target_timer(
-		sge::time::second(
-			5
-		),
-		sge::time::activation_state::active,
-		diff_clock_.callback()
-	)
+	potential_targets_()
 {}
 
 void
@@ -46,7 +39,12 @@ sanguis::server::ai::simple::bind(
 			10, // FIXME
 			me_->team(),
 			boost::bind(
-				&simple::potential_target,
+				&simple::target_enters,
+				this,
+				_1
+			),
+			boost::bind(
+				&simple::target_leaves,
 				this,
 				_1
 			)
@@ -60,27 +58,39 @@ sanguis::server::ai::simple::bind(
 
 void
 sanguis::server::ai::simple::update(
-	time_type const time
+	time_type const
 )
 {
 	SGE_ASSERT(me_);
-
-	diff_clock_.update(
-		time
-	);
 
 	entities::entity_with_weapon &me(
 		*me_
 	);
 
-	if(!target_)
+	if(
+		!target_ && potential_targets_.empty()
+	)
 	{
 		me.aggressive(
 			false
 		);
+
 		return;
 	}
-	
+
+	if(
+		!target_
+	)
+		target_
+			= search_new_target(
+				me,
+				potential_targets_
+			);
+
+	SGE_ASSERT(
+		target_
+	);
+
 	entities::property &speed(
 		me.property(
 			entities::property_type::movement_speed
@@ -123,23 +133,21 @@ sanguis::server::ai::simple::update(
 	);
 }
 
-#include <iostream>
-
 void
-sanguis::server::ai::simple::potential_target(
+sanguis::server::ai::simple::target_enters(
 	entities::entity &new_target
 )
 {
-	std::cerr << "potential target " << new_target.id() << '\n';
-
-	// if we already have a target
-	// and the target timer hasn't elapsed
-	// do nothing
+	potential_targets_.insert(
+		new_target.id(),
+		new_target.link()
+	);
+		
 	if(
-		target_ && !search_new_target_timer.expired()
+		target_
 	)
 		return;
-
+	
 	// if we already have a target
 	// and the new target is farther away
 	// do nothing
@@ -156,6 +164,15 @@ sanguis::server::ai::simple::potential_target(
 	)
 		return;
 			
-	search_new_target_timer.reset();
 	target_ = new_target.link();
+}
+
+void
+sanguis::server::ai::simple::target_leaves(
+	entities::entity &old_target
+)
+{
+	potential_targets_.erase(
+		old_target.id()
+	);
 }

@@ -21,7 +21,8 @@ public:
 	aggro(
 		space_unit radius,
 		team::type,
-		update_target_function const &
+		update_target_function const &add_target,
+		update_target_function const &remove_target
 	);
 private:
 	void
@@ -34,7 +35,9 @@ private:
 		entities::entity &target
 	);
 
-	update_target_function const update_target_;
+	update_target_function const
+		add_target_,
+		remove_target_;
 };
 
 
