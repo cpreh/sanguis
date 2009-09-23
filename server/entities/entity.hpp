@@ -195,10 +195,13 @@ private:
 	friend class auto_weak_link;
 	friend class satellite;
 
-	collision::shape_vector const
+	sge::collision::shapes::container const
 	recreate_shapes(
 		sge::collision::world_ptr
 	) const;
+
+	void
+	on_destroy();
 
 	void
 	insert_link(

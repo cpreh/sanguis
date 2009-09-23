@@ -59,14 +59,14 @@ sanguis::server::auras::aura::owner() const
 	return owner_;
 }
 
-sanguis::server::collision::shape_vector const
+sge::collision::shapes::container const
 sanguis::server::auras::aura::recreate_shapes(
 	sge::collision::world_ptr const world_
 ) const
 {
 	return 
 		sge::assign::make_container<
-			collision::shape_vector
+			sge::collision::shapes::container
 		>(
 			world_->create_circle(
 				radius_
@@ -80,9 +80,15 @@ sanguis::server::auras::aura::can_collide_with(
 	collision::base const &o
 ) const
 {
-	return dynamic_cast<
-		entities::entity const *
-	>(&o);
+	entities::entity const *const entity_(
+		dynamic_cast<
+			entities::entity const *
+		>(&o)
+	);
+
+	return
+		entity_
+		&& entity_->type() != entity_type::indeterminate;
 }
 
 void

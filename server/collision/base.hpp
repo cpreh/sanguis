@@ -1,11 +1,11 @@
 #ifndef SANGUIS_SERVER_COLLISION_BASE_HPP_INCLUDED
 #define SANGUIS_SERVER_COLLISION_BASE_HPP_INCLUDED
 
-#include "shape_vector.hpp"
 #include "group_vector.hpp"
 #include "create_parameters_fwd.hpp"
 #include "global_groups_fwd.hpp"
 #include "../pos_type.hpp"
+#include <sge/collision/shapes/container.hpp>
 #include <sge/collision/world_fwd.hpp>
 #include <sge/collision/body_fwd.hpp>
 #include <sge/noncopyable.hpp>
@@ -48,7 +48,10 @@ public:
 		create_parameters const &
 	);
 
-	virtual shape_vector const
+	void
+	destroy();
+
+	virtual sge::collision::shapes::container const
 	recreate_shapes(
 		sge::collision::world_ptr
 	) const = 0;
@@ -70,8 +73,10 @@ public:
 		collision::base &
 	) = 0;
 private:
+	virtual void
+	on_destroy();
+
 	sge::collision::body_ptr body_;
-	shape_vector shapes_;
 	group_vector const groups_;
 };
 

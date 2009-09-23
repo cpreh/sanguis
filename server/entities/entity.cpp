@@ -500,19 +500,29 @@ void
 sanguis::server::entities::entity::on_die()
 {}
 
-sanguis::server::collision::shape_vector const
+sge::collision::shapes::container const
 sanguis::server::entities::entity::recreate_shapes(
 	sge::collision::world_ptr const world_
 ) const
 {
 	return
 		sge::assign::make_container<
-			collision::shape_vector
+			sge::collision::shapes::container
 		>(
 			world_->create_circle(
 				radius()
 			)
 		);
+}
+
+void
+sanguis::server::entities::entity::on_destroy()
+{
+	BOOST_FOREACH(
+		aura_container::reference aura_,
+		auras_
+	)
+		aura_.destroy();
 }
 
 void

@@ -17,7 +17,6 @@ sanguis::server::collision::base::base(
 )
 :
 	body_(),
-	shapes_(),
 	groups_(
 		groups_
 	)
@@ -80,11 +79,6 @@ sanguis::server::collision::base::recreate(
 	create_parameters const &create_param_
 )
 {
-	shapes_
-		= recreate_shapes(
-			world_
-		);
-	
 	body_
 		= world_->create_body(
 			sge::collision::satellite_ptr(
@@ -95,6 +89,9 @@ sanguis::server::collision::base::recreate(
 						*this
 					)
 				)
+			),
+			recreate_shapes(
+				world_
 			),
 			sge::math::vector::construct(
 				create_param_.center(),
@@ -111,23 +108,21 @@ sanguis::server::collision::base::recreate(
 		);
 	
 	BOOST_FOREACH(
-		shape_vector::const_reference shape_,
-		shapes_
+		group_vector::const_reference group_,
+		groups_
 	)
-	{
-		body_->add(
-			shape_
+		global_groups_.add_to_group(
+			body_,
+			group_
 		);
+}
 
-		BOOST_FOREACH(
-			group_vector::const_reference group_,
-			groups_
-		)
-			global_groups_.add_to_group(
-				shape_,
-				group_
-			);
-	}
+void
+sanguis::server::collision::base::destroy()
+{
+	on_destroy();
+
+	body_.reset();
 }
 
 sanguis::server::collision::base::~base()
@@ -140,3 +135,7 @@ sanguis::server::collision::base::can_collide_with(
 {
 	return boost::logic::indeterminate;
 }
+
+void
+sanguis::server::collision::base::on_destroy()
+{}

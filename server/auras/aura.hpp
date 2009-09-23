@@ -7,9 +7,9 @@
 #include "../space_unit.hpp"
 #include "../entities/entity_fwd.hpp"
 #include "../collision/base.hpp"
-#include "../collision/shape_vector.hpp"
 #include "../team.hpp"
 #include "../../entity_id.hpp"
+#include <sge/collision/shapes/container.hpp>
 #include <sge/collision/world_fwd.hpp>
 
 namespace sanguis
@@ -43,7 +43,7 @@ protected:
 	entity_id
 	owner() const;
 private:
-	collision::shape_vector const
+	sge::collision::shapes::container const
 	recreate_shapes(
 		sge::collision::world_ptr
 	) const;

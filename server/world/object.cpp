@@ -174,14 +174,9 @@ sanguis::server::world::object::update(
 			e.dead()
 		)
 		{
-			if(
-				e.type() != entity_type::indeterminate
-			)
-				send_entity_specific(
-					e.id(),
-					message_convert::health(e)
-				);
-			
+			// process collision end before the destructor is called
+			e.destroy();
+
 			entities_.erase(
 				it
 			);
