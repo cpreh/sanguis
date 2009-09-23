@@ -304,7 +304,7 @@ try
 		running = client.process(t);
 	}
 } catch (sge::exception const &e) {
-	sge::cerr << SGE_TEXT("caught sge exception: ") << e.what() << SGE_TEXT('\n');
+	sge::cerr << SGE_TEXT("caught sge exception: ") << e.string() << SGE_TEXT('\n');
 	return EXIT_FAILURE;
 } catch (std::exception const &e) {
 	std::cerr << "caught standard exception: " << e.what() << '\n';
