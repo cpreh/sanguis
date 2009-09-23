@@ -21,7 +21,7 @@ protected:
 		team::type,
 		property_map const &,
 		dim_type const &dim,
-		optional_life_time const &lifetime,
+		life_time,
 		indeterminate::type,
 		space_unit aoe
 	);

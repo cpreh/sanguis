@@ -25,7 +25,14 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 			radius * static_cast<space_unit>(2),
 			radius * static_cast<space_unit>(2)
 		),
-		pulse_diff * static_cast<time_type>(max_pulses),
+		life_time(
+			pulse_diff
+			* static_cast<
+				time_type
+			>(
+				max_pulses
+			)
+		),
 		indeterminate::yes,
 		radius
 	)

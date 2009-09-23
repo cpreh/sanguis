@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_PROJECTILES_PROJECTILE_HPP_INCLUDED
 
 #include "indeterminate.hpp"
+#include "life_time.hpp"
 #include "../entity.hpp"
 #include "../../../projectile_type.hpp"
 #include "../../../time_type.hpp"
@@ -23,17 +24,13 @@ class projectile : public entity {
 public:
 	projectile_type::type ptype() const;
 protected:
-	typedef sge::optional<
-		time_type
-	> optional_life_time;
-
 	projectile(
 		projectile_type::type,
 		server::environment::load_context_ptr,
 		team::type team,
 		property_map const &,
 		dim_type const &dim,
-		optional_life_time const &,
+		life_time,
 		indeterminate::type
 	);
 	
@@ -48,7 +45,7 @@ private:
 	) const;
 	
 	void
-	collision_entity(
+	collision_entity_begin(
 		entity &
 	);
 
@@ -62,7 +59,7 @@ private:
 
 	projectile_type::type const ptype_;
 	diff_clock diff_clock_;
-	sge::time::timer lifetime;
+	sge::time::timer life_timer_;
 };
 
 }

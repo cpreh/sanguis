@@ -10,7 +10,7 @@ sanguis::server::entities::projectiles::aoe_projectile::aoe_projectile(
 	team::type const team_,
 	property_map const &properties_,
 	dim_type const &dim,
-	optional_life_time const &lifetime,
+	life_time const life_time_,
 	indeterminate::type const indeterminate_,
 	space_unit const aoe_
 )
@@ -21,7 +21,7 @@ sanguis::server::entities::projectiles::aoe_projectile::aoe_projectile(
 		team_,
 		properties_,
 		dim,
-		lifetime,
+		life_time_,
 		indeterminate_
 	),
 	type_(type_),

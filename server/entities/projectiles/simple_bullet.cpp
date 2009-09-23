@@ -8,7 +8,6 @@
 #include "../../environment/load_context.hpp"
 #include <sge/container/map_impl.hpp>
 #include <sge/text.hpp>
-#include <sge/optional_impl.hpp>
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
@@ -33,7 +32,9 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 		load_context->entity_dim(
 			SGE_TEXT("bullet")
 		),
-		static_cast<time_type>(10),
+		life_time(
+			10
+		),
 		indeterminate::no
 	),
 	damage(damage)

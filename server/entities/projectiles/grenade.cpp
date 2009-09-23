@@ -50,7 +50,9 @@ sanguis::server::entities::projectiles::grenade::grenade(
 		load_context_->entity_dim(
 			SGE_TEXT("grenade")
 		),
-		static_cast<time_type>(2),
+		life_time(
+			2
+		),
 		indeterminate::no,
 		aoe_
 	),

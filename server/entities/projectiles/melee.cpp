@@ -7,7 +7,6 @@
 #include "../../damage/full.hpp"
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/container/map_impl.hpp>
-#include <sge/optional_impl.hpp>
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::projectiles::melee::melee(
@@ -30,10 +29,12 @@ sanguis::server::entities::projectiles::melee::melee(
 				entities::property(static_cast<space_unit>(0))
 			),
 		dim_type(
-			10,
-			10
+			1,
+			1
 		),
-		static_cast<time_type>(1), // short lifetime
+		life_time(
+			1
+		), // short lifetime
 		indeterminate::yes
 	),
 	damage(damage)

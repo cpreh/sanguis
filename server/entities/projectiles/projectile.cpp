@@ -9,6 +9,7 @@
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/optional_impl.hpp>
+#include <sge/assert.hpp>
 #include <boost/logic/tribool.hpp>
 
 sanguis::projectile_type::type
@@ -23,7 +24,7 @@ sanguis::server::entities::projectiles::projectile::projectile(
 	team::type const team_,
 	property_map const &properties,
 	dim_type const &dim,
-	optional_life_time const &lifetime,
+	life_time const life_time_,
 	indeterminate::type const indeterminate_
 )
 :
@@ -42,18 +43,16 @@ sanguis::server::entities::projectiles::projectile::projectile(
 	),
 	ptype_(nptype),
 	diff_clock_(),
-	lifetime(
+	life_timer_(
 		sge::time::second_f(
-			lifetime
-				? *lifetime
-				: 0.f
+			life_time_
 		),
-		lifetime
-			? sge::time::activation_state::active
-			: sge::time::activation_state::inactive,
+		sge::time::activation_state::active,
 		diff_clock_.callback()
 	)
 {}
+
+#include <iostream>
 
 void
 sanguis::server::entities::projectiles::projectile::update(
@@ -66,8 +65,11 @@ sanguis::server::entities::projectiles::projectile::update(
 
 	diff_clock_.update(time);
 
-	if(lifetime.expired())
+	if(life_timer_.expired())
+	{
+		std::cerr << "lifetime expired\n";
 		die();
+	}
 }
 
 boost::logic::tribool const
@@ -75,20 +77,26 @@ sanguis::server::entities::projectiles::projectile::can_collide_with_entity(
 	entity const &e
 ) const
 {
-	return e.team() != team()
-		&& !e.dead()
+	SGE_ASSERT(e.team() != team()); // shouldn't happen for now!
+
+	return
+		!e.dead()
 		&& !e.invulnerable();
 }
 
 void
-sanguis::server::entities::projectiles::projectile::collision_entity(
+sanguis::server::entities::projectiles::projectile::collision_entity_begin(
 	entity &e
 )
 {
+	std::cerr << "collision begin projectile\n";
+
 	if(!dead())
 		do_damage(
 			e
 		);
+	else
+		std::cerr << "dead\n";
 }
 
 sanguis::messages::auto_ptr

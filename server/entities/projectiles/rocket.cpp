@@ -12,7 +12,6 @@
 #include "../../environment/load_context.hpp"
 #include <sge/container/map_impl.hpp>
 #include <sge/text.hpp>
-#include <sge/optional_impl.hpp>
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::projectiles::rocket::rocket(
@@ -38,7 +37,9 @@ sanguis::server::entities::projectiles::rocket::rocket(
 		load_context_->entity_dim(
 			SGE_TEXT("rocket")
 		),
-		static_cast<time_type>(10),
+		life_time(
+			10
+		),
 		indeterminate::no,
 		aoe_
 	),
