@@ -16,8 +16,8 @@ sanguis::draw::particle::object::object(
 :
 	base(
 		point(
-			static_cast<funit>(-images.dim().w()/2),
-			static_cast<funit>(-images.dim().h()/2)),
+			static_cast<funit>(-images.begin()->dim().w()/2),
+			static_cast<funit>(-images.begin()->dim().h()/2)),
 		point::null(),
 		depth_type(0),
 		rotation_type(0),

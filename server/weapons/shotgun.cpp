@@ -4,7 +4,7 @@
 #include "../entities/entity.hpp"
 #include "../entities/projectiles/simple_bullet.hpp"
 #include "../../random.hpp"
-#include <boost/tr1/random.hpp>
+#include <tr1/random>
 
 sanguis::server::weapons::shotgun::shotgun(
 	server::environment const &env,

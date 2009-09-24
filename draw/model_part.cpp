@@ -50,7 +50,7 @@ sanguis::draw::model_part::model_part(
 		info
 		[weapon_type::none]
 		[animation_type::none]
-		.get().dim());
+		.get().begin()->dim());
 }
 
 sanguis::draw::model_part::~model_part()

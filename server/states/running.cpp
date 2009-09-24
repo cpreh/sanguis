@@ -30,7 +30,7 @@
 #include <boost/mpl/vector.hpp>
 #include <boost/foreach.hpp>
 #include <boost/bind.hpp>
-#include <boost/tr1/random.hpp>
+#include <tr1/random>
 #include <algorithm>
 #include <ostream>
 

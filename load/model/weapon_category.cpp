@@ -13,8 +13,8 @@
 #include <sge/log/headers.hpp>
 #include <sge/string.hpp>
 #include <sge/text.hpp>
-#include <boost/tr1/array.hpp>
 #include <boost/foreach.hpp>
+#include <tr1/array>
 #include <utility>
 #include <iterator>
 
