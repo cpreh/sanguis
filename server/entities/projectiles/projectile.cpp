@@ -52,8 +52,6 @@ sanguis::server::entities::projectiles::projectile::projectile(
 	)
 {}
 
-#include <iostream>
-
 void
 sanguis::server::entities::projectiles::projectile::update(
 	time_type const time
@@ -66,10 +64,7 @@ sanguis::server::entities::projectiles::projectile::update(
 	diff_clock_.update(time);
 
 	if(life_timer_.expired())
-	{
-		std::cerr << "lifetime expired\n";
 		die();
-	}
 }
 
 boost::logic::tribool const
@@ -89,14 +84,10 @@ sanguis::server::entities::projectiles::projectile::collision_entity_begin(
 	entity &e
 )
 {
-	std::cerr << "collision begin projectile\n";
-
 	if(!dead())
 		do_damage(
 			e
 		);
-	else
-		std::cerr << "dead\n";
 }
 
 sanguis::messages::auto_ptr
