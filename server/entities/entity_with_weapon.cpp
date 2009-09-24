@@ -296,9 +296,9 @@ sanguis::server::entities::entity_with_weapon::stop_attacking()
 	if(!attacking)
 		return;
 	
-	environment()->reloading_changed(
+	environment()->attacking_changed(
 		id(),
-		true
+		false	
 	);
 
 	attacking = false;
