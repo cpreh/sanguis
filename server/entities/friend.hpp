@@ -11,7 +11,11 @@ namespace server
 namespace entities
 {
 
-class friend_ : public entity_with_ai {
+class friend_
+:
+	public with_ai,
+	public with_buffs
+{
 public:
 	friend_(
 		friend_type::type,

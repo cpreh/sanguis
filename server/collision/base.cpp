@@ -12,14 +12,9 @@
 #include <boost/tr1/functional.hpp>
 #include <boost/foreach.hpp>
 
-sanguis::server::collision::base::base(
-	group_vector const &groups_
-)
+sanguis::server::collision::base::base()
 :
-	body_(),
-	groups_(
-		groups_
-	)
+	body_()
 {}
 
 void
@@ -109,7 +104,7 @@ sanguis::server::collision::base::recreate(
 	
 	BOOST_FOREACH(
 		group_vector::const_reference group_,
-		groups_
+		collision_groups()
 	)
 		global_groups_.add_to_group(
 			body_,

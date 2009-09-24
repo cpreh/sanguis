@@ -16,7 +16,11 @@ namespace entities
 namespace enemies
 {
 
-class enemy : public entity_with_ai {
+class enemy
+:
+	public with_ai,
+	public with_buffs
+{
 public:	
 	enemy(
 		enemy_type::type,

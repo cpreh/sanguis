@@ -1,5 +1,5 @@
-#ifndef SANGUIS_SERVER_ENTITIES_ENTITY_HPP_INCLUDED
-#define SANGUIS_SERVER_ENTITIES_ENTITY_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_ENTITIES_BASE_HPP_INCLUDED
+#define SANGUIS_SERVER_ENTITIES_BASE_HPP_INCLUDED
 
 #include "entity_fwd.hpp"
 #include "link_container.hpp"
@@ -43,13 +43,13 @@ namespace server
 namespace entities
 {
 
-class entity
+class base
 :
 	public collision::base
 {
 	SGE_NONCOPYABLE(entity)
 protected:
-	explicit entity(
+	explicit base(
 		base_parameters const &
 	);
 public:
@@ -62,9 +62,6 @@ public:
 
 	server::environment::object_ptr const
 	environment() const;
-
-	server::environment::load_context_ptr const
-	load_context() const;
 
 	entity_id
 	id() const;
@@ -105,34 +102,23 @@ public:
 	space_unit
 	radius() const;
 
-	server::team::type
-	team() const;
+	virtual server::team::type
+	team() const = 0;
 
-	void
+	virtual void
 	damage(
 		space_unit,
 		damage::array const &
-	);
+	) = 0;
 
-	bool
-	dead() const;
+	virtual bool
+	dead() const = 0;
 
-	void
-	die();
+	virtual void
+	die() = 0;
 
-	damage::armor const &
-	armor() const;
-
-	health_type
-	health() const;
-
-	void
-	health(
-		health_type
-	);
-
-	health_type
-	max_health() const;
+	virtual health_type
+	health() const = 0;
 
 	entities::property const &
 	property(
@@ -147,11 +133,11 @@ public:
 	dim_type const
 	dim() const;
 
-	entity_type::type
-	type() const;
+	virtual entity_type::type
+	type() const = 0;
 
-	bool
-	invulnerable() const;
+	virtual bool
+	invulnerable() const = 0;
 
 	virtual void
 	update(
@@ -172,12 +158,12 @@ public:
 	virtual void
 	add_buff(
 		buffs::auto_ptr
-	);
+	) = 0;
 
 	virtual void
 	add_aura(
 		auras::auto_ptr
-	);
+	) = 0;
 
 	bool
 	update_health() const;
@@ -255,23 +241,13 @@ private:
 
 	environment::object_ptr environment_;
 
-	environment::load_context_ptr const load_context_;
-
 	entity_id const id_;
-
-	damage::armor armor_;
 
 	space_unit
 		angle_,
 		direction_;
 	
-	team::type team_;
-
 	property_map properties;
-
-	entity_type::type const type_;
-
-	bool invulnerable_;
 
 	dim_type collision_dim;
 
@@ -281,25 +257,6 @@ private:
 		speed_change_,
 		health_change_,
 		max_health_change_;
-
-	typedef boost::ptr_map<
-		perk_type::type,
-		perks::perk
-	> perk_container;
-
-	perk_container perks_;
-
-	typedef boost::ptr_list<
-		buffs::buff
-	> buff_container;
-
-	buff_container buffs_;
-
-	typedef boost::ptr_list<
-		auras::aura
-	> aura_container;
-
-	aura_container auras_;
 
 	link_container links;
 };

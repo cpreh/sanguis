@@ -22,38 +22,16 @@ namespace entities
 class base_parameters {
 public:
 	base_parameters(
-		environment::load_context_ptr,
-		damage::armor const &,
 		team::type team_,
 		property_map const &properties,
-		entity_type::type type_,
-		bool invulnerable,
 		dim_type const &collision_dim
 	);
 	
-	environment::load_context_ptr const
-	load_context() const;
-
-	damage::armor const &
-	armor() const;
-
-	space_unit
-	angle() const;
-
-	space_unit
-	direction() const;
-
 	server::team::type
 	team() const;
 
 	property_map const &
 	properties() const;
-
-	entity_type::type
-	type() const;
-
-	bool
-	invulnerable() const;
 
 	dim_type const &
 	collision_dim() const;

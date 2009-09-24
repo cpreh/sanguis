@@ -47,17 +47,11 @@ sanguis::server::entities::entity::entity(
 		)
 	),
 	environment_(),
-	load_context_(param.load_context()),
 	id_(get_unique_id()),
-	armor_(param.armor()),
 	angle_(0),
 	direction_(0),
-	team_(param.team()),
 	properties(param.properties()),
-	type_(param.type()),
-	invulnerable_(param.invulnerable()),
 	collision_dim(param.collision_dim()),
-	update_health_(true),
 	speed_change_(
 		property(
 			property_type::movement_speed
@@ -91,9 +85,6 @@ sanguis::server::entities::entity::entity(
 			)
 		)
 	),
-	perks_(),
-	buffs_(),
-	auras_(),
 	links()
 {}
 
@@ -130,15 +121,10 @@ sanguis::server::entities::entity::transfer(
 		insert_param.angle()
 	);
 
-	BOOST_FOREACH(
-		aura_container::reference aura_,
-		auras_
-	)
-		aura_.recreate(
-			environment_->collision_world(),
-			collision_groups_,
-			create_param
-		);
+	on_transfer(
+		collision_groups_,
+		create_param
+	);
 }
 
 sanguis::server::environment::object_ptr const
@@ -217,14 +203,6 @@ sanguis::server::entities::entity::center(
 	body_pos(
 		_center
 	);
-
-	BOOST_FOREACH(
-		aura_container::reference r,
-		auras_
-	)
-		r.center(
-			_center
-		);
 }
 
 sanguis::server::pos_type const
@@ -254,25 +232,6 @@ sanguis::server::team::type
 sanguis::server::entities::entity::team() const
 {
 	return team_;
-}
-
-void
-sanguis::server::entities::entity::damage(
-	space_unit const d,
-	damage::array const &damages
-)
-{
-	for(
-		damage::array::size_type i = 0;
-		i < damages.size();
-		++i
-	)
-		health(
-			health() - d * damages[i] * (1 - armor_[i])
-		);
-
-	if(dead())
-		die();
 }
 
 bool sanguis::server::entities::entity::dead() const
@@ -330,47 +289,12 @@ sanguis::server::entities::entity::dim() const
 	return collision_dim;
 }
 
-sanguis::entity_type::type
-sanguis::server::entities::entity::type() const
-{
-	return type_;
-}
-
-bool sanguis::server::entities::entity::invulnerable() const
-{
-	return invulnerable_;
-}
-
 void sanguis::server::entities::entity::update(
 	time_type const time
 )
 {
 	BOOST_FOREACH(property_map::reference p, properties)
 		p.second.reset();
-
-	BOOST_FOREACH(perk_container::reference p, perks_)
-		p.second->apply(
-			*this,
-			time,
-			environment(),
-			load_context()
-		);
-
-	for(
-		buff_container::iterator it(buffs_.begin());
-		it != buffs_.end();
-	)
-	{
-		it->update(
-			*this,
-			time
-		);
-
-		if(it->expired())
-			it = buffs_.erase(it);
-		else
-			++it;
-	}
 
 	BOOST_FOREACH(property_map::reference p, properties)
 		p.second.apply();
@@ -382,44 +306,6 @@ void sanguis::server::entities::entity::update(
 
 	property(property_type::health).add(
 		property(property_type::health_regeneration).current() * time
-	);
-}
-
-void sanguis::server::entities::entity::add_perk(
-	perks::auto_ptr p)
-{
-	perk_type::type const type_(
-		p->type()
-	);
-
-	perk_container::iterator it(
-		perks_.find(
-			type_
-		)
-	);
-
-	if(it != perks_.end())
-	{
-		perks::perk &perk_(
-			*it->second
-		);
-
-		if(perk_.can_raise_level())
-			perk_.raise_level();
-		else
-		{
-			SGE_LOG_WARNING(
-				log(),
-				sge::log::_1
-					<< SGE_TEXT("Tried to raise perk level of a perk which can't do this.")
-			);
-		}
-		return;
-	}
-
-	perks_.insert(
-		type_,
-		p
 	);
 }
 
@@ -448,29 +334,6 @@ sanguis::server::entities::entity::link()
 	);
 }
 
-void
-sanguis::server::entities::entity::add_buff(
-	buffs::auto_ptr b
-)
-{
-	buffs_.push_back(b);
-}
-
-void
-sanguis::server::entities::entity::add_aura(
-	auras::auto_ptr a)
-{
-	auras_.push_back(a);
-
-	auras::aura &ref(
-		auras_.back()
-	);
-
-	ref.owner(
-		id()
-	);
-}
-
 bool
 sanguis::server::entities::entity::update_health() const
 {
@@ -481,20 +344,6 @@ sanguis::server::entities::entity::update_health() const
 
 sanguis::server::entities::entity::~entity()
 {}
-
-bool
-sanguis::server::entities::entity::perk_choosable(
-	perk_type::type const pt) const
-{
-	perk_container::const_iterator const it(
-		perks_.find(
-			pt
-		)
-	);
-
-	return it == perks_.end()
-		|| it->second->can_raise_level();
-}
 
 void
 sanguis::server::entities::entity::on_die()
@@ -516,18 +365,9 @@ sanguis::server::entities::entity::recreate_shapes(
 }
 
 void
-sanguis::server::entities::entity::on_destroy()
-{
-	BOOST_FOREACH(
-		aura_container::reference aura_,
-		auras_
-	)
-		aura_.destroy();
-}
-
-void
 sanguis::server::entities::entity::insert_link(
-	auto_weak_link &l)
+	auto_weak_link &l
+)
 {
 	links.push_back(l);
 }
@@ -550,8 +390,10 @@ void sanguis::server::entities::entity::health_change(
 	update_health_ = true;
 }
 
-void sanguis::server::entities::entity::max_health_change(
-	property::value_type)
+void
+sanguis::server::entities::entity::max_health_change(
+	property::value_type
+)
 {
 	update_health_ = true;
 

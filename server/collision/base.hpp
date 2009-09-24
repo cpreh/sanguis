@@ -21,9 +21,7 @@ namespace collision
 class base {
 	SGE_NONCOPYABLE(base)
 protected:
-	explicit base(
-		group_vector const &groups_
-	);
+	base();
 
 	void
 	body_pos(
@@ -55,6 +53,9 @@ public:
 	recreate_shapes(
 		sge::collision::world_ptr
 	) const = 0;
+
+	virtual group_vector const
+	collision_groups() const = 0;
 
 	virtual ~base();
 

@@ -18,7 +18,14 @@ namespace server
 namespace entities
 {
 
-class player : public entity_with_weapon {
+class player
+:
+	public with_weapon,
+	public with_armor,
+	public with_perks,
+	public with_auras,
+	public with_buffs
+{
 public:
 	player(
 		server::environment::load_context_ptr,
