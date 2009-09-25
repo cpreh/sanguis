@@ -25,14 +25,17 @@ public:
 		update_target_function const &remove_target
 	);
 private:
+	collision::group_vector const
+	collision_groups() const;
+
 	void
 	enter(
-		entities::entity &target
+		entities::base &target
 	);
 
 	void
 	leave(
-		entities::entity &target
+		entities::base &target
 	);
 
 	update_target_function const

@@ -6,37 +6,45 @@
 #include "../environment/load_context.hpp"
 #include "../level_calculate.hpp"
 #include "../auras/update_sight.hpp"
+#include "../../messages/add.hpp"
+#include "../../messages/create.hpp"
 #include <sge/text.hpp>
 #include <sge/make_auto_ptr.hpp>
 #include <boost/bind.hpp>
 
 sanguis::server::entities::player::player(
 	server::environment::load_context_ptr const load_context_,
-	damage::armor const &armor,
-	property_map const &properties,
+	health_type const health_,
+	damage::armor const &armor_,
+	movement_speed const speed_,
 	string const &name_,
 	server::player_id const player_id_
 )
 :
-	entity_with_weapon(
-		base_parameters(
-			load_context_,
-			armor,
-			team::players,
-			properties,
-			entity_type::player,
-			false,
-			load_context_->entity_dim(
-				SGE_TEXT("player")
-			)
-		),
+	base(),
+	with_weapon(
 		weapons::auto_ptr()
+	),
+	with_health(
+		health_,
+		armor_
+	),
+	with_perks(),
+	with_buffs(),
+	with_auras(),
+	with_dim(
+		load_context_->entity_dim(
+			SGE_TEXT("player")
+		)
+	),
+	movable(
+		speed_
 	),
 	name_(name_),
 	player_id_(player_id_),
-	exp_(static_cast<exp_type>(0)),
-	level_(static_cast<level_type>(0)),
-	level_delta_(static_cast<level_type>(0)),
+	exp_(0),
+	level_(0),
+	level_delta_(0),
 	skill_points_(0)
 {
 	auras::auto_ptr new_aura(
@@ -195,5 +203,23 @@ sanguis::server::entities::player::remove_sight_range(
 	environment()->remove_sight_range(
 		player_id(),
 		entity_id_
+	);
+}
+
+		entity_type::player,
+sanguis::messages::auto_ptr
+sanguis::server::entities::player::add_message() const
+{
+	return messages::create(
+		messages::add(
+			id(),
+			pos(),
+			angle(),
+			abs_speed(),
+			health(),
+			max_health(),
+			dim(),
+			type()
+		)
 	);
 }

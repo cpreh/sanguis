@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_PICKUPS_MONSTER_HPP_INCLUDED
 
 #include "pickup.hpp"
-#include "../entity_with_weapon_fwd.hpp"
+#include "../with_weapon_fwd.hpp"
 #include "../../environment/load_context_ptr.hpp"
 #include "../../team.hpp"
 #include "../../../friend_type.hpp"
@@ -26,7 +26,7 @@ public:
 private:
 	void
 	do_pickup(
-		entity_with_weapon &receiver
+		with_weapon &receiver
 	);
 	
 	friend_type::type const ftype;

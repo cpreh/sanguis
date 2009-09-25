@@ -9,7 +9,6 @@
 #include "../../../diff_clock.hpp"
 #include "../../../messages/base.hpp"
 #include <sge/time/timer.hpp>
-#include <sge/optional_fwd.hpp>
 
 namespace sanguis
 {
@@ -20,43 +19,50 @@ namespace entities
 namespace projectiles
 {
 
-class projectile : public entity {
+class projectile
+:
+	public base
+{
 public:
-	projectile_type::type ptype() const;
+	projectile_type::type
+	ptype() const;
 protected:
 	projectile(
 		projectile_type::type,
-		server::environment::load_context_ptr,
 		team::type team,
-		property_map const &,
-		dim_type const &dim,
+		movement_speed,
 		life_time,
 		indeterminate::type
 	);
 	
 	void
-	update(
+	on_update(
 		time_type
 	);
 private:
+	virtual entity_type::type
+	type() const;
+
+	bool
+	invulnerable() const;
+
+	server::team::type
+	team() const;
+
 	virtual boost::logic::tribool const 
 	can_collide_with_entity(
 		entity const &
 	) const;
-	
+
 	void
 	collision_entity_begin(
 		entity &
 	);
 
-	virtual void
-	do_damage(
-		entity &
-	) = 0;
-
 	messages::auto_ptr
 	add_message() const;
 
+	server::team::type const team_;
 	projectile_type::type const ptype_;
 	diff_clock diff_clock_;
 	sge::time::timer life_timer_;

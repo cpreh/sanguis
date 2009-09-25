@@ -1,4 +1,15 @@
-	buffs_(),
+#include "with_buffs.hpp"
+
+sanguis::server::entities::with_buffs::with_buffs(
+	base_paramters const &param_
+)
+:
+	base_(
+		param_
+	),
+	buffs_()
+{}
+
 void
 sanguis::server::entities::with_buffs::add_buff(
 	buffs::auto_ptr b

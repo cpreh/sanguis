@@ -1,12 +1,17 @@
 #ifndef SANGUIS_SERVER_LEVEL_TYPE_HPP_INCLUDED
 #define SANGUIS_SERVER_LEVEL_TYPE_HPP_INCLUDED
 
+#include <sge/strong_typedef.hpp>
+
 namespace sanguis
 {
 namespace server
 {
 
-typedef float level_type;
+SGE_MAKE_STRONG_TYPEDEF(
+	float,
+	level_type
+)
 
 }
 }

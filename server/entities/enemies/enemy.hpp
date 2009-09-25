@@ -19,14 +19,16 @@ namespace enemies
 class enemy
 :
 	public with_ai,
-	public with_buffs
+	public with_buffs,
+	public with_health,
+	public with_armor,
+	public movable
 {
 public:	
 	enemy(
 		enemy_type::type,
 		server::environment::load_context_ptr,
 		damage::armor const &,
-		property_map const &,
 		ai::auto_ptr,
 		weapons::auto_ptr weapon,
 		probability_type spawn_chance,

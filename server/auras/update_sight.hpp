@@ -4,7 +4,7 @@
 #include "aura.hpp"
 #include "../space_unit.hpp"
 #include "../update_sight_function.hpp"
-#include "../entities/entity_fwd.hpp"
+#include "../entities/base_fwd.hpp"
 
 namespace sanguis
 {
@@ -24,14 +24,17 @@ public:
 		update_sight_function const &leave_
 	);
 private:
+	collision::group_vector const
+	collision_groups() const;
+
 	void
 	enter(
-		entities::entity &target
+		entities::base &target
 	);
 
 	void
 	leave(
-		entities::entity &target
+		entities::base &target
 	);
 
 	update_sight_function const

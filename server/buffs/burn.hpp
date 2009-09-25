@@ -22,11 +22,14 @@ public:
 		space_unit damage,
 		time_type pulse_time,
 		unsigned max_pulses,
-		damage::array const &);
+		damage::array const &
+	);
 private:
-	void update(
-		entities::entity &,
-		time_type);
+	void
+	update(
+		entities::base &,
+		time_type
+	);
 
 	space_unit const damage;
 	diff_clock clock_;

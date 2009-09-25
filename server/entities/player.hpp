@@ -1,7 +1,10 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PLAYER_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PLAYER_HPP_INCLUDED
 
-#include "entity_with_weapon.hpp"
+#include "with_weapon.hpp"
+#include "with_armor.hpp"
+#include "with_perks.hpp"
+#include "with_buffs.hpp"
 #include "../environment/load_context_ptr.hpp"
 #include "../perks/tree.hpp"
 #include "../perks/list.hpp"
@@ -21,10 +24,12 @@ namespace entities
 class player
 :
 	public with_weapon,
-	public with_armor,
+	public with_health,
 	public with_perks,
+	public with_buffs,
 	public with_auras,
-	public with_buffs
+	public with_dim,
+	public movable
 {
 public:
 	player(
@@ -70,6 +75,9 @@ private:
 	remove_sight_range(
 		entity_id
 	);
+
+	messages::auto_ptr
+	add_message();
 
 	string const name_;
 	server::player_id const player_id_;

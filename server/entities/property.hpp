@@ -18,8 +18,10 @@ class property {
 public:
 	typedef space_unit value_type;
 
-	typedef void change_callback_fn(
-		value_type const &);
+	typedef void
+	change_callback_fn(
+		value_type const &
+	);
 
 	typedef boost::function<
 		change_callback_fn
@@ -27,9 +29,12 @@ public:
 
 	property(
 		value_type current,
-		value_type base);
+		value_type base
+	);
+
 	explicit property(
-		value_type base);
+		value_type base
+	);
 
 	value_type current() const;
 	void current(value_type);

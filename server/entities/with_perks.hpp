@@ -1,6 +1,12 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_PERKS_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_PERKS_HPP_INCLUDED
 
+#include "base.hpp"
+#include "base_parameters_fwd.hpp"
+#include "../perks/perk.hpp"
+#include "../../perk_type.hpp"
+#include <boost/ptr_container/ptr_map.hpp>
+
 namespace sanguis
 {
 namespace server

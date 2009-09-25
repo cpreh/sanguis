@@ -19,7 +19,7 @@ sanguis::server::entities::pickups::health::health(
 
 void
 sanguis::server::entities::pickups::health::do_pickup(
-	entity_with_weapon &receiver
+	with_weapon &receiver
 )
 {
 	receiver.health(

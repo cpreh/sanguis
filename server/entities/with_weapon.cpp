@@ -1,4 +1,4 @@
-#include "entity_with_weapon.hpp"
+#include "with_weapon.hpp"
 #include "../weapons/factory.hpp"
 #include "../weapons/weapon.hpp"
 #include "../environment/object.hpp"
@@ -22,11 +22,12 @@ target_undefined(
 
 }
 
-sanguis::server::entities::entity_with_weapon::entity_with_weapon(
+sanguis::server::entities::with_weapon::with_weapon(
 	base_parameters const &param,
-	weapons::auto_ptr start_weapon)
+	weapons::auto_ptr start_weapon
+)
 :
-	entity(param),
+	base(param),
 	weapon_(weapon_type::none),
 	target_(target_undefined),
 	attacking(false),
@@ -38,7 +39,7 @@ sanguis::server::entities::entity_with_weapon::entity_with_weapon(
 			property_type::attack_speed
 		).register_change_callback(
 			boost::bind(
-				&entity_with_weapon::attack_speed_change,
+				&with_weapon::attack_speed_change,
 				this,
 				_1
 			)
@@ -49,7 +50,7 @@ sanguis::server::entities::entity_with_weapon::entity_with_weapon(
 			property_type::reload_speed
 		).register_change_callback(
 			boost::bind(
-				&entity_with_weapon::reload_speed_change,
+				&with_weapon::reload_speed_change,
 				this,
 				_1
 			)
@@ -64,11 +65,12 @@ sanguis::server::entities::entity_with_weapon::entity_with_weapon(
 	);
 }
 
-void sanguis::server::entities::entity_with_weapon::update(
+void
+sanguis::server::entities::with_weapon::update(
 	time_type const time
 )
 {
-	entity::update(
+	base::update(
 		time
 	);
 
@@ -105,8 +107,10 @@ void sanguis::server::entities::entity_with_weapon::update(
 		);
 }
 
-void sanguis::server::entities::entity_with_weapon::change_weapon(
-	weapon_type::type const nweapon)
+void
+sanguis::server::entities::with_weapon::change_weapon(
+	weapon_type::type const nweapon
+)
 {
 	if (nweapon != weapon_type::none && !weapons_.count(nweapon))
 		throw exception(
@@ -145,7 +149,7 @@ void sanguis::server::entities::entity_with_weapon::change_weapon(
 }
 
 void
-sanguis::server::entities::entity_with_weapon::add_weapon(
+sanguis::server::entities::with_weapon::add_weapon(
 	weapons::auto_ptr ptr
 )
 {
@@ -183,40 +187,44 @@ sanguis::server::entities::entity_with_weapon::add_weapon(
 		throw exception(SGE_TEXT("couldn't insert weapon"));
 }
 
-void sanguis::server::entities::entity_with_weapon::remove_weapon(
-	weapon_type::type const type_)
+void
+sanguis::server::entities::with_weapon::remove_weapon(
+	weapon_type::type const type_
+)
 {
 	if(!weapons_.erase(type_))
 		throw exception(SGE_TEXT("tried to remove non-owned weapon"));
 }
 
-void sanguis::server::entities::entity_with_weapon::target(
-	pos_type const &ntarget)
+void
+sanguis::server::entities::with_weapon::target(
+	pos_type const &ntarget
+)
 {
 	target_ = ntarget;
 }
 
 sanguis::server::pos_type const &
-sanguis::server::entities::entity_with_weapon::target() const
+sanguis::server::entities::with_weapon::target() const
 {
 	return target_;
 }
 
 bool
-sanguis::server::entities::entity_with_weapon::in_range(
+sanguis::server::entities::with_weapon::in_range(
 	pos_type const &center
 ) const
 {
 	return has_weapon() && active_weapon().in_range(*this, center);
 }
 
-bool sanguis::server::entities::entity_with_weapon::has_weapon() const
+bool sanguis::server::entities::with_weapon::has_weapon() const
 {
 	return weapon_ != weapon_type::none;	
 }
 
 sanguis::server::weapons::weapon &
-sanguis::server::entities::entity_with_weapon::active_weapon()
+sanguis::server::entities::with_weapon::active_weapon()
 {
 	weapon_container::iterator const it(
 		weapons_.find(
@@ -226,14 +234,14 @@ sanguis::server::entities::entity_with_weapon::active_weapon()
 
 	if(it == weapons_.end())
 		throw exception(
-			SGE_TEXT("No weapon active in entity_with_weapon!")
+			SGE_TEXT("No weapon active in with_weapon!")
 		);
 	
 	return *it->second;
 }
 
 void
-sanguis::server::entities::entity_with_weapon::aggressive(
+sanguis::server::entities::with_weapon::aggressive(
 	bool const naggressive
 )
 {	
@@ -241,19 +249,19 @@ sanguis::server::entities::entity_with_weapon::aggressive(
 }
 
 sanguis::server::weapons::weapon const &
-sanguis::server::entities::entity_with_weapon::active_weapon() const
+sanguis::server::entities::with_weapon::active_weapon() const
 {
-	return const_cast<entity_with_weapon &>(*this).active_weapon();
+	return const_cast<with_weapon &>(*this).active_weapon();
 }
 
 void
-sanguis::server::entities::entity_with_weapon::attack_ready()
+sanguis::server::entities::with_weapon::attack_ready()
 {
 	attack_ready_ = true;
 }
 
 void
-sanguis::server::entities::entity_with_weapon::start_attacking()
+sanguis::server::entities::with_weapon::start_attacking()
 {
 	attack_ready_ = false;
 
@@ -269,7 +277,7 @@ sanguis::server::entities::entity_with_weapon::start_attacking()
 }
 
 void
-sanguis::server::entities::entity_with_weapon::start_reloading()
+sanguis::server::entities::with_weapon::start_reloading()
 {
 	reloading = true;
 
@@ -280,7 +288,7 @@ sanguis::server::entities::entity_with_weapon::start_reloading()
 }
 
 void
-sanguis::server::entities::entity_with_weapon::stop_reloading()
+sanguis::server::entities::with_weapon::stop_reloading()
 {
 	reloading = false;
 
@@ -291,7 +299,7 @@ sanguis::server::entities::entity_with_weapon::stop_reloading()
 }
 
 void
-sanguis::server::entities::entity_with_weapon::stop_attacking()
+sanguis::server::entities::with_weapon::stop_attacking()
 {
 	if(!attacking)
 		return;
@@ -305,7 +313,7 @@ sanguis::server::entities::entity_with_weapon::stop_attacking()
 }
 
 void
-sanguis::server::entities::entity_with_weapon::attack_speed_change(
+sanguis::server::entities::with_weapon::attack_speed_change(
 	property::value_type const v
 )
 {
@@ -314,7 +322,7 @@ sanguis::server::entities::entity_with_weapon::attack_speed_change(
 }
 
 void
-sanguis::server::entities::entity_with_weapon::reload_speed_change(
+sanguis::server::entities::with_weapon::reload_speed_change(
 	property::value_type const v
 )
 {

@@ -21,10 +21,8 @@ sanguis::server::entities::enemies::enemy::enemy(
 	exp_type const exp_
 )
 :
-	entity_with_ai(
+	with_ai(
 		base_parameters(
-			load_context_,
-			armor,
 			team::monsters,
 			properties,
 			entity_type::enemy,
@@ -66,7 +64,8 @@ sanguis::server::entities::enemies::enemy::add_message() const
 	);
 }
 
-void sanguis::server::entities::enemies::enemy::on_die()
+void
+sanguis::server::entities::enemies::enemy::on_die()
 {
 	/*
 	environment().exp()(

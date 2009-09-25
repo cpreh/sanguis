@@ -1,8 +1,8 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PICKUPS_PICKUP_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PICKUPS_PICKUP_HPP_INCLUDED
 
-#include "../entity.hpp"
-#include "../entity_with_weapon_fwd.hpp"
+#include "../base.hpp"
+#include "../with_weapon_fwd.hpp"
 #include "../../environment/load_context_ptr.hpp"
 #include "../../team.hpp"
 #include "../../pos_type.hpp"
@@ -22,7 +22,10 @@ namespace entities
 namespace pickups
 {
 
-class pickup : public entity {
+class pickup
+:
+	public base
+{
 public:
 	pickup_type::type ptype() const;
 protected:
@@ -35,32 +38,42 @@ protected:
 		optional_dim const &dim
 	);
 private:
+	entity_type::type
+	type() const;
+
+	bool
+	invulnerable() const;
+
+	server::team::type
+	team() const;
+
 	boost::logic::tribool const
 	can_collide_with_entity(
-		entity const &
+		base const &
 	) const;
 	
 	void
 	collision_entity_begin(
-		entity &
+		base &
 	);
 
 	void
-	update(
+	on_update(
 		time_type
 	);
 	
 	// TODO: is it ok that pickups are limited to entities with weapons?
 	virtual void
 	do_pickup(
-		entity_with_weapon &receiver
+		with_weapon &receiver
 	) = 0;
 
 	messages::auto_ptr add_message() const;
 
+	server::team::type const team_;
+	pickup_type::type const ptype_;
 	diff_clock diff_clock_;
 	sge::time::timer lifetime;
-	pickup_type::type const ptype_;
 };
 
 }

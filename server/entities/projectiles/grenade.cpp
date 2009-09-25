@@ -29,24 +29,9 @@ sanguis::server::entities::projectiles::grenade::grenade(
 		aoe_projectile_type::grenade,
 		load_context_,
 		team_,
-		boost::assign::map_list_of
-			(
-				entities::property_type::health,
-				entities::property(
-					static_cast<space_unit>(1)
-				)
-			)
-			(
-				entities::property_type::movement_speed,
-				entities::property(
-					static_cast<space_unit>(100) // FIXME
-					/*
-					collision::distance(
-						center,
-						dest_
-					)*/
-				)
-			),
+		movement_speed(
+			0
+		),
 		load_context_->entity_dim(
 			SGE_TEXT("grenade")
 		),
@@ -72,6 +57,13 @@ sanguis::server::entities::projectiles::grenade::do_damage(
 	entity &
 )
 {}
+
+// TODO
+/*
+	collision::distance(
+		center,
+		dest_
+	)*/
 
 void
 sanguis::server::entities::projectiles::grenade::update(

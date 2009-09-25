@@ -3,7 +3,7 @@
 
 #include "object_fwd.hpp"
 #include "../entities/auto_ptr.hpp"
-#include "../entities/entity_fwd.hpp"
+#include "../entities/base_fwd.hpp"
 #include "../entities/insert_parameters_fwd.hpp"
 #include "../player_id.hpp"
 #include "../health_type.hpp"
@@ -26,7 +26,7 @@ class object {
 protected:
 	object();
 public:
-	virtual entities::entity & 
+	virtual entities::base & 
 	insert(
 		entities::auto_ptr,
 		entities::insert_parameters const &
@@ -93,6 +93,9 @@ public:
 
 	virtual sge::collision::world_ptr const
 	collision_world() const = 0;
+
+	virtual load_context_ptr const
+	load_context() const = 0;
 
 	virtual ~object();
 };

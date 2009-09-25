@@ -7,7 +7,9 @@ namespace server
 {
 namespace entities
 {
+
 class auto_weak_link;
+
 }
 }
 }

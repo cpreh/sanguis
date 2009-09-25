@@ -19,14 +19,7 @@ sanguis::server::entities::projectiles::melee::melee(
 		projectile_type::melee,
 		load_context_,
 		team_,
-		boost::assign::map_list_of
-			(
-				entities::property_type::health,
-				entities::property(static_cast<space_unit>(1))
-			)
-			(
-				entities::property_type::movement_speed,
-				entities::property(static_cast<space_unit>(0))
+		entities::property(static_cast<space_unit>(0))
 			),
 		dim_type(
 			1,

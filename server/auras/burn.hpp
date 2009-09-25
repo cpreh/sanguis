@@ -25,12 +25,12 @@ public:
 private:
 	void
 	enter(
-		entities::entity &target
+		entities::base &target
 	);
 
 	void
 	leave(
-		entities::entity &target
+		entities::base &target
 	);
 	
 	time_type const pulse_diff;

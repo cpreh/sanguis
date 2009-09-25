@@ -1,40 +1,22 @@
 #ifndef SANGUIS_SERVER_ENTITIES_BASE_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_BASE_HPP_INCLUDED
 
-#include "entity_fwd.hpp"
+#include "base_fwd.hpp"
 #include "link_container.hpp"
-#include "base_parameters_fwd.hpp"
 #include "auto_weak_link.hpp"
-#include "property.hpp"
-#include "property_map.hpp"
-#include "property_type.hpp"
 #include "insert_parameters_fwd.hpp"
 #include "../pos_type.hpp"
 #include "../space_unit.hpp"
-#include "../dim_type.hpp"
-#include "../health_type.hpp"
 #include "../team.hpp"
-#include "../perks/auto_ptr.hpp"
-#include "../buffs/auto_ptr.hpp"
-#include "../auras/auto_ptr.hpp"
-#include "../damage/array.hpp"
-#include "../damage/armor.hpp"
 #include "../collision/base.hpp"
 #include "../collision/global_groups_fwd.hpp"
+#include "../collision/create_pamameters_fwd.hpp"
 #include "../environment/object_ptr.hpp"
-#include "../environment/load_context_ptr.hpp"
 #include "../../messages/auto_ptr.hpp"
 #include "../../entity_id.hpp"
 #include "../../entity_type.hpp"
-#include "../../damage_type.hpp"
 #include "../../time_type.hpp"
-#include "../../perk_type.hpp"
-#include <sge/math/dim/basic_decl.hpp>
-#include <sge/signal/scoped_connection.hpp>
-#include <sge/container/map_decl.hpp>
 #include <sge/noncopyable.hpp>
-#include <boost/ptr_container/ptr_list.hpp>
-#include <boost/ptr_container/ptr_map.hpp>
 
 namespace sanguis
 {
@@ -47,12 +29,14 @@ class base
 :
 	public collision::base
 {
-	SGE_NONCOPYABLE(entity)
+	SGE_NONCOPYABLE(base)
 protected:
 	explicit base(
 		base_parameters const &
 	);
 public:
+	// general world functions
+	
 	void
 	transfer(
 		server::environment::object_ptr,
@@ -60,14 +44,31 @@ public:
 		insert_parameters const &
 	);
 
+	void
+	update(
+		time_type
+	);
+
+	
+	// linking with other objects
+	
+	auto_weak_link const
+	link();
+
+
+	// environment query function // TODO: should this be public?
+	
 	server::environment::object_ptr const
 	environment() const;
 
+
+	// entity id function
+	
 	entity_id
 	id() const;
 
-	pos_type const
-	pos() const;
+
+	// position and size functions
 
 	space_unit
 	angle() const;
@@ -77,14 +78,6 @@ public:
 		space_unit
 	);
 
-	space_unit
-	direction() const;
-
-	void
-	direction(
-		space_unit
-	);
-	
 	pos_type const
 	center() const;
 
@@ -93,91 +86,46 @@ public:
 		pos_type const &
 	);
 
-	pos_type const
-	abs_speed() const;
+	virtual space_unit
+	radius() const = 0;
 
-	space_unit
-	speed() const;
 
-	space_unit
-	radius() const;
-
-	virtual server::team::type
-	team() const = 0;
-
-	virtual void
-	damage(
-		space_unit,
-		damage::array const &
-	) = 0;
-
+	// life functions
+	
 	virtual bool
 	dead() const = 0;
 
-	virtual void
-	die() = 0;
 
-	virtual health_type
-	health() const = 0;
-
-	entities::property const &
-	property(
-		property_type::type
-	) const;
+	// message functions
 	
-	entities::property &
-	property(
-		property_type::type
-	);
+	virtual messages::auto_ptr
+	add_message() const;
 
-	dim_type const
-	dim() const;
 
+	// type query
+	
 	virtual entity_type::type
 	type() const = 0;
 
 	virtual bool
 	invulnerable() const = 0;
 
+	virtual server::team::type
+	team() const = 0;
+
+	virtual ~base();
+private:
 	virtual void
-	update(
+	on_update(
 		time_type
 	);
 
 	virtual void
-	add_perk(
-		perks::auto_ptr
-	); 
-	
-	virtual messages::auto_ptr
-	add_message() const;
+	on_transfer(
+		collision::global_groups_ const &,
+		collision::create_parameters const &
+	);
 
-	auto_weak_link const
-	link();
-	
-	virtual void
-	add_buff(
-		buffs::auto_ptr
-	) = 0;
-
-	virtual void
-	add_aura(
-		auras::auto_ptr
-	) = 0;
-
-	bool
-	update_health() const;
-
-	virtual ~entity();
-protected:
-	bool
-	perk_choosable(
-		perk_type::type
-	) const;
-
-	virtual void
-	on_die();
-private:
 	friend class auto_weak_link;
 	friend class satellite;
 
@@ -185,30 +133,15 @@ private:
 	recreate_shapes(
 		sge::collision::world_ptr
 	) const;
-
-	void
-	on_destroy();
+	
+	collision::group_vector const
+	collision_groups() const;
 
 	void
 	insert_link(
 		auto_weak_link &
 	);
 	
-	void
-	speed_change(
-		property::value_type
-	);
-
-	void
-	health_change(
-		property::value_type
-	);
-
-	void
-	max_health_change(
-		property::value_type
-	);
-
 	boost::logic::tribool const
 	can_collide_with(
 		collision::base const &
@@ -226,17 +159,17 @@ private:
 
 	virtual boost::logic::tribool const 
 	can_collide_with_entity(
-		entity const &
+		base const &
 	) const;
 	
 	virtual void
 	collision_entity_begin(
-		entity &
+		base &
 	);
 
 	virtual void
 	collision_entity_end(
-		entity &
+		base &
 	);
 
 	environment::object_ptr environment_;
@@ -247,17 +180,6 @@ private:
 		angle_,
 		direction_;
 	
-	property_map properties;
-
-	dim_type collision_dim;
-
-	mutable bool update_health_;
-
-	sge::signal::scoped_connection const
-		speed_change_,
-		health_change_,
-		max_health_change_;
-
 	link_container links;
 };
 

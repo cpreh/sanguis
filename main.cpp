@@ -5,7 +5,6 @@
 #include "client/message_event.hpp"
 #include "server/states/running.hpp"
 #include "server/states/unpaused.hpp"
-#include "server/entities/entity.hpp"
 #include "server/message_event.hpp"
 #include "load/context.hpp"
 #include "tick_event.hpp"

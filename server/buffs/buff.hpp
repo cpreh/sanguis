@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_BUFFS_BUFF_HPP_INCLUDED
 #define SANGUIS_SERVER_BUFFS_BUFF_HPP_INCLUDED
 
-#include "../entities/entity_fwd.hpp"
+#include "../entities/base_fwd.hpp"
 #include "../../time_type.hpp"
 #include "../../entity_id.hpp"
 #include <sge/noncopyable.hpp>
@@ -18,7 +18,7 @@ class buff {
 public:
 	virtual void
 	update(
-		entities::entity &,
+		entities::base &,
 		time_type
 	) = 0;
 

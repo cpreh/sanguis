@@ -1,6 +1,5 @@
 #include "aggro.hpp"
 #include <sge/assign/make_container.hpp>
-#include <sge/optional_impl.hpp>
 
 sanguis::server::auras::aggro::aggro(
 	space_unit const radius_,
@@ -12,14 +11,7 @@ sanguis::server::auras::aggro::aggro(
 	aura(
 		radius_,
 		team_,
-		influence::debuff,
-		optional_groups(
-			sge::assign::make_container<
-				collision::group_vector
-			>(
-				collision::group::aggro_aura
-			)
-		)
+		influence::debuff
 	),
 	add_target_(
 		add_target_
@@ -29,9 +21,21 @@ sanguis::server::auras::aggro::aggro(
 	)
 {}
 
+
+sanguis::server::collision::group_vector const
+sanguis::server::auras::aggro::collision_groups() const
+{
+	return 
+		sge::assign::make_container<
+			collision::group_vector
+		>(
+			collision::group::aggro_aura
+		);
+}
+
 void
 sanguis::server::auras::aggro::enter(
-	entities::entity &target
+	entities::base &target
 )
 {
 	add_target_(
@@ -41,7 +45,7 @@ sanguis::server::auras::aggro::enter(
 
 void
 sanguis::server::auras::aggro::leave(
-	entities::entity &target
+	entities::base &target
 )
 {
 	remove_target_(

@@ -9,6 +9,7 @@
 #include "../../environment/object.hpp"
 #include "../../damage/no_armor.hpp"
 #include "../../damage/list.hpp"
+#include "../../environment/object.hpp"
 #include "../../../load/friend_name.hpp"
 #include "../../../load/context.hpp"
 #include <sge/math/vector/basic_impl.hpp>
@@ -34,14 +35,14 @@ sanguis::server::entities::pickups::monster::monster(
 
 void
 sanguis::server::entities::pickups::monster::do_pickup(
-	entity_with_weapon &receiver
+	with_weapon &receiver
 )
 {
 	environment()->insert(
 		entities::auto_ptr(
 			new entities::friend_(
 				ftype,
-				load_context(),
+				environment()->load_context(),
 				damage::no_armor(),
 				receiver.team(),
 				boost::assign::map_list_of

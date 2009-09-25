@@ -21,25 +21,26 @@ sanguis::server::entities::friend_::friend_(
 	weapons::auto_ptr weapon_
 )
 :
-	entity_with_ai(
+	with_ai(
 		base_parameters(
-			load_context,
-			armor,
-			team_,
 			properties,
-			entity_type::friend_,
-			false,
 			load_context->entity_dim(
 				load::friend_name(
 					ftype_
 				)
 			)
 		),
+		weapon_,
 		ai_,
-		weapon_
 	),
+	with_armor(
+		armor_
+	),
+	with_buffs(),
 	ftype_(ftype_)
 {}
+
+entity_type::friend_,
 
 sanguis::messages::auto_ptr
 sanguis::server::entities::friend_::add_message() const

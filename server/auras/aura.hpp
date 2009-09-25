@@ -2,10 +2,9 @@
 #define SANGUIS_SERVER_AURAS_AURA_HPP_INCLUDED
 
 #include "influence.hpp"
-#include "optional_groups.hpp"
 #include "../pos_type.hpp"
 #include "../space_unit.hpp"
-#include "../entities/entity_fwd.hpp"
+#include "../entities/base_fwd.hpp"
 #include "../collision/base.hpp"
 #include "../team.hpp"
 #include "../../entity_id.hpp"
@@ -19,7 +18,10 @@ namespace server
 namespace auras
 {
 
-class aura : public collision::base {
+class aura
+:
+	public collision::base
+{
 public:
 	virtual ~aura();
 
@@ -36,8 +38,7 @@ protected:
 	aura(
 		space_unit radius,
 		team::type,
-		influence::type,
-		optional_groups const &
+		influence::type
 	);
 	
 	entity_id
@@ -47,6 +48,9 @@ private:
 	recreate_shapes(
 		sge::collision::world_ptr
 	) const;
+
+	virtual collision::group_vector const
+	collision_groups() const;
 
 	boost::logic::tribool const
 	can_collide_with(
@@ -65,12 +69,12 @@ private:
 
 	virtual void
 	enter(
-		entities::entity &
+		entities::base &
 	) = 0;
 
 	virtual void
 	leave(
-		entities::entity &
+		entities::base &
 	) = 0;
 
 	space_unit const radius_;

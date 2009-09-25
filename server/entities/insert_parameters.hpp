@@ -17,13 +17,7 @@ class insert_parameters {
 public:
 	insert_parameters(
 		pos_type const &,
-		space_unit angle_and_direction
-	);
-
-	insert_parameters(
-		pos_type const &,
-		space_unit angle,
-		space_unit direction
+		space_unit angle
 	);
 
 	pos_type const &
@@ -31,14 +25,9 @@ public:
 
 	space_unit
 	angle() const;
-
-	space_unit
-	direction() const;
 private:
 	pos_type const center_;
-	space_unit const
-		angle_,
-		direction_;
+	space_unit const angle_;
 };
 
 }

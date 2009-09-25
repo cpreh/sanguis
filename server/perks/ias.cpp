@@ -11,18 +11,24 @@ sanguis::server::perks::ias::ias()
 
 void
 sanguis::server::perks::ias::do_apply(
-	entities::entity &e,
+	entities::base &entity_,
 	time_type,
 	environment::object_ptr,
 	environment::load_context_ptr
 )
 {
-	e.property(
-		entities::property_type::attack_speed)
-		.multiply_max(factor());
+	dynamic_cast<
+		with_weapon &
+	>(
+		entity_
+	)
+	.attack_speed().multiply_max(
+		factor()
+	);
 }
 
-bool sanguis::server::perks::ias::can_raise_level() const
+bool
+sanguis::server::perks::ias::can_raise_level() const
 {
 	return level() < 8;
 }
@@ -30,6 +36,7 @@ bool sanguis::server::perks::ias::can_raise_level() const
 sanguis::server::space_unit
 sanguis::server::perks::ias::factor() const
 {
-	return static_cast<space_unit>(level())
+	return
+		static_cast<space_unit>(level())
 		* static_cast<space_unit>(0.2);
 }

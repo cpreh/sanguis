@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_PICKUPS_HEALTH_HPP_INCLUDED
 
 #include "pickup.hpp"
-#include "../entity_with_weapon_fwd.hpp"
+#include "../with_weapon_fwd.hpp"
 #include "../../environment/load_context_ptr.hpp"
 #include "../../health_type.hpp"
 #include "../../team.hpp"
@@ -16,7 +16,10 @@ namespace entities
 namespace pickups
 {
 
-class health : public pickup {
+class health
+:
+	public pickup
+{
 public:
 	health(
 		server::environment::load_context_ptr,
@@ -26,7 +29,7 @@ public:
 private:
 	void
 	do_pickup(
-		entity_with_weapon &receiver
+		with_weapon &receiver
 	);
 
 	health_type const amount;

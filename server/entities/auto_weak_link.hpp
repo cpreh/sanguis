@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_AUTO_WEAK_LINK_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_AUTO_WEAK_LINK_HPP_INCLUDED
 
-#include "entity_fwd.hpp"
+#include "base_fwd.hpp"
 #include <boost/intrusive/list_hook.hpp>
 
 namespace sanguis
@@ -17,36 +17,47 @@ typedef boost::intrusive::list_base_hook<
 	>
 > auto_hook_type;
 
-class auto_weak_link : public auto_hook_type {
+class auto_weak_link
+:
+	public auto_hook_type
+{
 public:
 	auto_weak_link();
 
 	explicit auto_weak_link(
-		entity &ref);
+		base &ref
+	);
 
 	auto_weak_link(
-		auto_weak_link const &);
+		auto_weak_link const &
+	);
 	
 	~auto_weak_link();
 
 	auto_weak_link &
 	operator=(
-		auto_weak_link const &);
+		auto_weak_link const &
+	);
 
-	void unlink();
+	void
+	unlink();
 private:
 	struct unspecified {};
 public:
 	operator unspecified *() const;
-	entity &operator*() const;
-	entity *operator->() const;
+
+	base &
+	operator*() const;
+
+	base *
+	operator->() const;
 private:
-	entity &
+	base &
 	checked_ref() const;
 
 	void add_me();
 
-	entity *ref;
+	base *ref;
 };
 
 }

@@ -1,7 +1,17 @@
-	perks_(),
+#include "with_perks.hpp"
+
+sanguis::server::entities::with_perks::with_perks(
+	base_parameters const &param_
+)
+:
+	base(
+		param_
+	),
+	perks_()
+{}
 
 void
-sanguis::server::entities::with_perk::update(
+sanguis::server::entities::with_perks::update(
 	time_type const time
 )
 	BOOST_FOREACH(
@@ -16,7 +26,7 @@ sanguis::server::entities::with_perk::update(
 }
 
 void
-sanguis::server::entities::with_perk::add_perk(
+sanguis::server::entities::with_perks::add_perk(
 	perks::auto_ptr p
 )
 {

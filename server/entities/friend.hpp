@@ -14,6 +14,7 @@ namespace entities
 class friend_
 :
 	public with_ai,
+	public with_armor,
 	public with_buffs
 {
 public:
@@ -21,12 +22,20 @@ public:
 		friend_type::type,
 		server::environment::load_context_ptr,
 		damage::armor const &,
-		team::type,
 		property_map const &,
 		ai::auto_ptr,
 		weapons::auto_ptr weapon
 	);
 private:
+	entity_type::type
+	type() const;
+
+	bool
+	invulnerable() const;
+
+	server::team::type
+	team() const;
+	
 	messages::auto_ptr
 	add_message() const;
 

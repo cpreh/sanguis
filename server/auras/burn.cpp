@@ -1,7 +1,6 @@
 #include "burn.hpp"
 #include "../buffs/burn.hpp"
-#include "../entities/entity.hpp"
-#include <sge/optional_impl.hpp>
+#include "../entities/base.hpp"
 
 sanguis::server::auras::burn::burn(
 	space_unit const radius,
@@ -14,8 +13,7 @@ sanguis::server::auras::burn::burn(
 	aura(
 		radius,
 		team,
-		influence::debuff,
-		optional_groups()
+		influence::debuff
 	),
 	pulse_diff(pulse_diff),
 	damage_per_pulse(damage_per_pulse),
@@ -24,7 +22,7 @@ sanguis::server::auras::burn::burn(
 
 void
 sanguis::server::auras::burn::enter(
-	entities::entity &e
+	entities::base &e
 )
 {
 	e.add_buff(
@@ -42,7 +40,7 @@ sanguis::server::auras::burn::enter(
 
 void
 sanguis::server::auras::burn::leave(
-	entities::entity &
+	entities::base &
 )
 {
 	// FIXME: remove the buff!

@@ -12,7 +12,8 @@ namespace entities
 
 property_map const
 insert_default_properties(
-	property_map const &);
+	property_map const &
+);
 
 }
 }

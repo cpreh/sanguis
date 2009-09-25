@@ -13,10 +13,8 @@
 #include "../messages/assign_id.hpp"
 #include "../resolution.hpp"
 #include <sge/utf8/convert.hpp>
-#include <sge/math/dim/basic_impl.hpp>
 #include <sge/container/map_impl.hpp>
 #include <sge/make_auto_ptr.hpp>
-#include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::player_auto_ptr
 sanguis::server::create_player(
@@ -27,7 +25,6 @@ sanguis::server::create_player(
 	player_id const player_id_ 
 )
 {
-	
 	// TODO: this should be cleaned up somehow
 	// 1) create the player
 	// 2) tell the client the player's id _before_ doing anything else
@@ -37,21 +34,9 @@ sanguis::server::create_player(
 			entities::player
 		>(
 			load_context_,
+			health_type(100),
 			damage::no_armor(),
-			boost::assign::map_list_of
-				(
-					entities::property_type::health,
-					entities::property(
-						static_cast<space_unit>(100)
-					)
-				)
-				(
-					entities::property_type::movement_speed,
-					entities::property(
-						static_cast<space_unit>(0),
-						static_cast<space_unit>(100)
-					)
-				),
+			movement_speed(100),
 			name,
 			player_id_
 		)

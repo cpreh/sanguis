@@ -20,27 +20,15 @@ sanguis::server::entities::projectiles::projectile::ptype() const
 
 sanguis::server::entities::projectiles::projectile::projectile(
 	projectile_type::type const nptype,
-	server::environment::load_context_ptr const load_context_,
 	team::type const team_,
-	property_map const &properties,
+	space_unit const movement_speed_,
 	dim_type const &dim,
 	life_time const life_time_,
 	indeterminate::type const indeterminate_
 )
 :
-	entity(
-		base_parameters(
-			load_context_,
-			damage::no_armor(),
-			team_,
-			properties,
-			indeterminate_ == indeterminate::yes
-				? entity_type::indeterminate
-				: entity_type::projectile,
-			true,
-			dim
-		)
-	),
+	base(),
+	team_(team_),
 	ptype_(nptype),
 	diff_clock_(),
 	life_timer_(
@@ -53,7 +41,7 @@ sanguis::server::entities::projectiles::projectile::projectile(
 {}
 
 void
-sanguis::server::entities::projectiles::projectile::update(
+sanguis::server::entities::projectiles::projectile::on_update(
 	time_type const time
 )
 {
@@ -65,6 +53,24 @@ sanguis::server::entities::projectiles::projectile::update(
 
 	if(life_timer_.expired())
 		die();
+}
+
+sanguis::entity_type::type
+sanguis::server::entities::projectiles::projectile::type() const
+{
+	return entity_type::projectile;
+}
+
+bool
+sanguis::server::entities::projectiles::projectile::invulnerable() const
+{
+	return true;
+}
+
+sanguis::server::team::type
+sanguis::server::entities::projectiles::projectile::team() const
+{
+	return team_;
 }
 
 boost::logic::tribool const

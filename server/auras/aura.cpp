@@ -1,6 +1,6 @@
 #include "aura.hpp"
 #include "collision_groups.hpp"
-#include "../entities/entity.hpp"
+#include "../entities/base.hpp"
 #include <sge/collision/shapes/circle.hpp>
 #include <sge/collision/body.hpp>
 #include <sge/collision/world.hpp>
@@ -33,24 +33,16 @@ sanguis::server::auras::aura::owner(
 sanguis::server::auras::aura::aura(
 	space_unit const radius_,
 	team::type const team_,
-	influence::type const influence_,
-	optional_groups const &optional_groups_
+	influence::type const influence_
 )
 :
-	collision::base(
-		optional_groups_
-		?
-			*optional_groups_
-		:
-			collision_groups(
-				team_,
-				influence_
-			)
-	),
+	collision::base(),
 	radius_(radius_),
 	team_(team_),
 	influence_(influence_),
-	owner_(static_cast<entity_id>(-1)) // will also be set later
+	owner_(
+		static_cast<entity_id>(-1)
+	) // will also be set later
 {}
 
 sanguis::entity_id
@@ -72,7 +64,17 @@ sanguis::server::auras::aura::recreate_shapes(
 				radius_
 			)
 		);
-	
+}
+
+
+sanguis::server::collision::group_vector const
+sanguis::server::auras::aura::collision_groups() const
+{
+	return 
+		auras::collision_groups(
+			team_,
+			influence_
+		);
 }
 
 boost::logic::tribool const
@@ -80,9 +82,9 @@ sanguis::server::auras::aura::can_collide_with(
 	collision::base const &o
 ) const
 {
-	entities::entity const *const entity_(
+	entities::base const *const entity_(
 		dynamic_cast<
-			entities::entity const *
+			entities::base const *
 		>(&o)
 	);
 
@@ -97,7 +99,7 @@ sanguis::server::auras::aura::collision_begin(
 )
 {
 	enter(
-		dynamic_cast<entities::entity &>(b)
+		dynamic_cast<entities::base &>(b)
 	);
 }
 
@@ -107,6 +109,6 @@ sanguis::server::auras::aura::collision_end(
 )
 {
 	leave(
-		dynamic_cast<entities::entity &>(b)
+		dynamic_cast<entities::base &>(b)
 	);
 }

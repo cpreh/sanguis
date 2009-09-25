@@ -13,7 +13,8 @@ namespace entities
 
 space_unit
 radius(
-	dim_type const &);
+	dim_type const &
+);
 
 }
 }

@@ -25,15 +25,7 @@ sanguis::server::entities::projectiles::rocket::rocket(
 		aoe_projectile_type::rocket,
 		load_context_,
 		team_,
-		boost::assign::map_list_of
-			(
-				entities::property_type::health,
-				entities::property(static_cast<space_unit>(1))
-			)
-			(
-				entities::property_type::movement_speed,
-				entities::property(static_cast<space_unit>(300))
-			),
+		movement_speed(300),
 		load_context_->entity_dim(
 			SGE_TEXT("rocket")
 		),
