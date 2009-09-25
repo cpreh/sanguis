@@ -3,15 +3,18 @@
 
 #include "indeterminate.hpp"
 #include "life_time.hpp"
-#include "../entity.hpp"
+#include "../movable.hpp"
+#include "../with_dim.hpp"
+#include "../with_health_fwd.hpp"
+#include "../../dim_type.hpp"
+#include "../../../entity_type.hpp"
 #include "../../../projectile_type.hpp"
 #include "../../../time_type.hpp"
 #include "../../../diff_clock.hpp"
 #include "../../../messages/base.hpp"
 #include <sge/time/timer.hpp>
 
-namespace sanguis
-{
+namespace sanguis {
 namespace server
 {
 namespace entities
@@ -21,7 +24,8 @@ namespace projectiles
 
 class projectile
 :
-	public base
+	public movable,
+	public with_dim
 {
 public:
 	projectile_type::type
@@ -30,7 +34,8 @@ protected:
 	projectile(
 		projectile_type::type,
 		team::type team,
-		movement_speed,
+		server::movement_speed,
+		dim_type const &,
 		life_time,
 		indeterminate::type
 	);
@@ -39,32 +44,48 @@ protected:
 	on_update(
 		time_type
 	);
+
+	void
+	die();
 private:
-	virtual entity_type::type
-	type() const;
+	bool
+	dead() const;
 
 	bool
 	invulnerable() const;
+
+	virtual entity_type::type
+	type() const;
 
 	server::team::type
 	team() const;
 
 	virtual boost::logic::tribool const 
 	can_collide_with_entity(
-		entity const &
+		base const &
 	) const;
 
 	void
 	collision_entity_begin(
-		entity &
+		base &
 	);
+
+	virtual void
+	do_damage(
+		with_health &
+	) = 0;
 
 	messages::auto_ptr
 	add_message() const;
 
 	server::team::type const team_;
+
+	entity_type::type const type_;
+
 	projectile_type::type const ptype_;
+
 	diff_clock diff_clock_;
+
 	sge::time::timer life_timer_;
 };
 

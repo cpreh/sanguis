@@ -1,6 +1,6 @@
 #include "burn.hpp"
 #include "../buffs/burn.hpp"
-#include "../entities/base.hpp"
+#include "../entities/with_buffs.hpp"
 
 sanguis::server::auras::burn::burn(
 	space_unit const radius,
@@ -22,10 +22,15 @@ sanguis::server::auras::burn::burn(
 
 void
 sanguis::server::auras::burn::enter(
-	entities::base &e
+	entities::base &entity_
 )
 {
-	e.add_buff(
+	dynamic_cast<
+		entities::with_buffs &
+	>(
+		entity_
+	)
+	.add_buff(
 		buffs::auto_ptr(
 			new buffs::burn(
 				owner(),

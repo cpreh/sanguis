@@ -2,16 +2,12 @@
 #include "../weapons/weapon.hpp"
 #include "../ai/base.hpp"
 
-sanguis::server::entities::entity_with_ai::~entity_with_ai()
-{}
-
 sanguis::server::entities::entity_with_ai::entity_with_ai(
-	base_parameters const &param,
 	ai::auto_ptr ai_,
 	weapons::auto_ptr start_weapon)
 :
-	entity_with_weapon(
-		param,
+	base(),
+	with_weapon(
 		start_weapon
 	),
 	ai_(ai_)
@@ -19,12 +15,15 @@ sanguis::server::entities::entity_with_ai::entity_with_ai(
 	this->ai_->bind(*this);
 }
 
+sanguis::server::entities::entity_with_ai::~entity_with_ai()
+{}
+
 void
-sanguis::server::entities::entity_with_ai::update(
+sanguis::server::entities::entity_with_ai::on_update(
 	time_type const time
 )
 {
-	entity_with_weapon::update(
+	entity_with_weapon::on_update(
 		time
 	);
 	

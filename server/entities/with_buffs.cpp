@@ -1,25 +1,27 @@
 #include "with_buffs.hpp"
-
-sanguis::server::entities::with_buffs::with_buffs(
-	base_paramters const &param_
-)
-:
-	base_(
-		param_
-	),
-	buffs_()
-{}
+#include "../buffs/buff.hpp"
 
 void
 sanguis::server::entities::with_buffs::add_buff(
-	buffs::auto_ptr b
+	buffs::auto_ptr buff_
 )
 {
-	buffs_.push_back(b);
+	buffs_.push_back(
+		buff_
+	);
 }
 
+sanguis::server::entities::with_buffs::with_buffs()
+:
+	base_(),
+	buffs_()
+{}
+
+sanguis::server::entities::with_buffs::~with_buffs()
+{}
+
 void
-sanguis::server::entities::with_buffs::update(
+sanguis::server::entities::with_buffs::on_update(
 	time_type const time
 )
 {

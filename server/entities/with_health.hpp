@@ -1,11 +1,13 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_HEALTH_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_HEALTH_HPP_INCLUDED
 
+#include "with_health_fwd.hpp"
 #include "base.hpp"
 #include "property.hpp"
 #include "../damage/unit.hpp"
 #include "../damage/array.hpp"
 #include "../damage/armor.hpp"
+#include "../health_type.hpp"
 
 namespace sanguis
 {
@@ -40,9 +42,26 @@ protected:
 	on_update(
 		time_type
 	);
+
+	health_type
+	health() const;
+
+	health_type
+	max_health() const;
 private:
+	virtual void
+	on_die();
+
 	bool
 	dead() const;
+
+	bool
+	invulnerable() const;
+
+	void
+	max_health_change(
+		property::value_type
+	);
 
 	damage::armor armor_;
 

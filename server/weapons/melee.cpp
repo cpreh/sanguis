@@ -3,10 +3,10 @@
 #include "unlimited_magazine_size.hpp"
 #include "unlimited_magazine_count.hpp"
 #include "../environment/object.hpp"
-#include "../entities/insert_parameters.hpp"
 #include "../entities/insert_parameters_pos.hpp"
-#include "../entities/entity.hpp"
-#include "../entities/entity_with_weapon.hpp"
+#include "../entities/base.hpp"
+#include "../entities/with_weapon.hpp"
+#include "../entities/movable.hpp"
 #include "../entities/property.hpp"
 #include "../entities/projectiles/melee.hpp"
 
@@ -51,20 +51,42 @@ sanguis::server::weapons::melee::do_attack(
 	);
 }
 
-void sanguis::server::weapons::melee::on_init_attack(
-	entities::entity_with_weapon &owner)
+void
+sanguis::server::weapons::melee::on_init_attack(
+	entities::with_weapon &owner_
+)
 {
-	owner.property(
-		entities::property_type::movement_speed
-	).restrict(
-		static_cast<space_unit>(0)
+	entities::movable *const movable_(
+		dynamic_cast<
+			entities::movable *
+		>(
+			&owner_
+		)
 	);
+
+	if (
+		movable_
+	)
+		movable_->movement_speed().restrict(
+			static_cast<space_unit>(0)
+		);
 }
 
-void sanguis::server::weapons::melee::on_castpoint(
-	entities::entity_with_weapon &owner)
+void
+sanguis::server::weapons::melee::on_castpoint(
+	entities::with_weapon &owner_
+)
 {
-	owner.property(
-		entities::property_type::movement_speed
-	).unrestrict();
+	entities::movable *const movable_(
+		dynamic_cast<
+			entities::movable *
+		>(
+			&owner_
+		)
+	);
+
+	if (
+		movable_
+	)
+		movable_->movement_speed().unrestrict();
 }

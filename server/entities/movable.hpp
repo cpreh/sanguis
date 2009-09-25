@@ -5,7 +5,7 @@
 #include "property.hpp"
 #include "../movement_speed.hpp"
 #include "../space_unit.hpp"
-#include <sge/signals/scoped_connection.hpp>
+#include <sge/signal/scoped_connection.hpp>
 
 namespace sanguis
 {
@@ -33,12 +33,15 @@ protected:
 	explicit movable(
 		server::movement_speed max_speed
 	);
+
+	pos_type const
+	abs_speed() const;
 private:
 	property movement_speed_;
 
 	space_unit direction_;
 	
-	sge::signals::scoped_connection speed_change_;
+	sge::signal::scoped_connection speed_change_;
 };
 
 }

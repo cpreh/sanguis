@@ -16,7 +16,7 @@ sanguis::server::entities::player::player(
 	server::environment::load_context_ptr const load_context_,
 	health_type const health_,
 	damage::armor const &armor_,
-	movement_speed const speed_,
+	server::movement_speed const speed_,
 	string const &name_,
 	server::player_id const player_id_
 )
@@ -139,7 +139,7 @@ sanguis::server::entities::player::add_perk(
 		p->type()
 	);
 
-	entity::add_perk(
+	with_perks::add_perk(
 		p
 	);
 	--skill_points_;
@@ -206,7 +206,24 @@ sanguis::server::entities::player::remove_sight_range(
 	);
 }
 
-		entity_type::player,
+void
+sanguis::server::entities::player::on_update(
+	time_type const time_
+)
+{
+	with_buffs::on_update(
+		time_
+	);
+
+	with_health::on_update(
+		time_
+	);
+
+	with_weapon::on_update(
+		time_
+	);
+}
+
 sanguis::messages::auto_ptr
 sanguis::server::entities::player::add_message() const
 {
@@ -222,4 +239,16 @@ sanguis::server::entities::player::add_message() const
 			type()
 		)
 	);
+}
+
+sanguis::entity_type::type
+sanguis::server::entities::player::type() const
+{
+	return entity_type::player;
+}
+
+sanguis::server::team::type
+sanguis::server::entities::player::team() const
+{
+	return server::team::players;
 }

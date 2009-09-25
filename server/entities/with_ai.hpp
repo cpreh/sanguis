@@ -15,17 +15,16 @@ class with_ai
 :
 	public with_weapon
 {
-public:
-	~with_ai();
-
+protected:
 	with_ai(
-		base_parameters const &,
 		ai::auto_ptr ai_,
 		weapons::auto_ptr start_weapon
 	);
-protected:
+
+	~with_ai();
+
 	virtual void
-	update(
+	on_update(
 		time_type
 	);
 private:

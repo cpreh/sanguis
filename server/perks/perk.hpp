@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_PERKS_PERK_HPP_INCLUDED
 #define SANGUIS_SERVER_PERKS_PERK_HPP_INCLUDED
 
-#include "../entities/entity_fwd.hpp"
+#include "../entities/base_fwd.hpp"
 #include "../environment/object_ptr.hpp"
 #include "../environment/load_context_ptr.hpp"
 #include "../../time_type.hpp"
@@ -21,7 +21,7 @@ class perk {
 public:
 	void
 	apply(
-		entities::entity &,
+		entities::base &,
 		time_type,
 		environment::object_ptr,
 		environment::load_context_ptr
@@ -30,7 +30,8 @@ public:
 	virtual bool
 	can_raise_level() const = 0;
 	
-	void raise_level();
+	void
+	raise_level();
 	
 	perk_type::type
 	type() const;
@@ -48,7 +49,7 @@ protected:
 private:
 	virtual void
 	do_apply(
-		entities::entity &,
+		entities::base &,
 		time_type,
 		environment::object_ptr,
 		environment::load_context_ptr

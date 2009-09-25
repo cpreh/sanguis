@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_WEAPON_HPP_INCLUDED
 
 #include "base.hpp"
+#include "property.hpp"
 #include "../weapons/auto_ptr.hpp"
 #include "../pos_type.hpp"
 #include "../../weapon_type.hpp"
@@ -27,7 +28,7 @@ protected:
 	);
 
 	virtual void
-	update(
+	on_update(
 		time_type
 	);
 public:

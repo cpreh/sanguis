@@ -2,8 +2,10 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_AURAS_HPP_INCLUDED
 
 #include "base.hpp"
-#include "base_parameters_fwd.hpp"
-#include "../auras/aura.hpp"
+#include "../auras/aura_fwd.hpp"
+#include "../auras/auto_ptr.hpp"
+#include "../collision/global_groups_fwd.hpp"
+#include "../collision/create_parameters_fwd.hpp"
 #include <boost/ptr_container/ptr_list.hpp>
 
 namespace sanguis
@@ -17,11 +19,30 @@ class with_auras
 :
 	public virtual base
 {
-protected:
-	explicit with_auras(
-		base_parameters const &
+public:
+	void
+	add_aura(
+		auras::auto_ptr
 	);
+protected:
+	with_auras();
+
+	~with_auras();
 private:
+	void
+	on_center(
+		pos_type const &
+	);
+
+	void
+	on_destroy();
+
+	void
+	on_transfer(
+		collision::global_groups const &,
+		collision::create_parameters const &
+	);
+
 	typedef boost::ptr_list<
 		auras::aura
 	> aura_container;

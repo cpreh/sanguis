@@ -7,6 +7,12 @@ sanguis::server::entities::with_health::damage(
 	damage::array const &amounts_
 )
 {
+	// TODO:
+	
+	if(
+		dead()
+	)
+		on_die();
 }
 
 sanguis::server::entities::property &
@@ -59,17 +65,19 @@ sanguis::server::entities::with_health::dead() const
 	return health().current() < 0.405f; // LOL Warcraft III
 }
 
-/*
+bool
+sanguis::server::entities::with_health::invulnerable() const
+{
+	return false;
+}
+
 void
-sanguis::server::entities::base::max_health_change(
-	property::value_type
+sanguis::server::entities::with_health::max_health_change(
+	property::value_type const value_
 )
 {
 	environment()->max_health_changed(
 		id(),
-		max_health()
+		value_
 	);
 }
-*/
-
-

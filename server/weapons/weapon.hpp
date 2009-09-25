@@ -15,8 +15,8 @@
 #include "states/castpoint_fwd.hpp"
 #include "../pos_type.hpp"
 #include "../space_unit.hpp"
-#include "../entities/entity_with_weapon_fwd.hpp"
-#include "../entities/entity_fwd.hpp"
+#include "../entities/with_weapon_fwd.hpp"
+#include "../entities/base_fwd.hpp"
 #include "../../time_type.hpp"
 #include "../../messages/base.hpp"
 #include "../../weapon_type.hpp"
@@ -47,7 +47,7 @@ public:
 
 	void
 	attack(
-		entities::entity_with_weapon &from,
+		entities::with_weapon &from,
 		pos_type const &to
 	);
 
@@ -57,7 +57,7 @@ public:
 	void
 	update(
 		time_type,
-		entities::entity_with_weapon &owner
+		entities::with_weapon &owner
 	);
 
 	void stop();
@@ -69,8 +69,9 @@ public:
 
 	bool
 	in_range(
-		entities::entity const &from,
-		pos_type const &to) const;
+		entities::base const &from,
+		pos_type const &to
+	) const;
 
 	void
 	attack_speed(
@@ -132,15 +133,18 @@ private:
 
 	virtual void
 	init_attack(
-		entities::entity_with_weapon &owner);
+		entities::with_weapon &owner
+	);
 
 	virtual void
 	on_init_attack(
-		entities::entity_with_weapon &owner);
+		entities::with_weapon &owner
+	);
 
 	virtual void
 	on_castpoint(
-		entities::entity_with_weapon &owner);
+		entities::with_weapon &owner
+	);
 
 	static sge::log::logger &
 	log();

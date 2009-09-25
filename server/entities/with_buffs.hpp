@@ -2,10 +2,9 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_BUFFS_HPP_INCLUDED
 
 #include "base.hpp"
-#include "base_parameters_fwd.hpp"
-#include "../buffs/buff.hpp"
-#include "../damage/array.hpp"
-#include "../space_unit.hpp"
+#include "../buffs/buff_fwd.hpp"
+#include "../buffs/auto_ptr.hpp"
+#include "../../time_type.hpp"
 #include <boost/ptr_container/ptr_list.hpp>
 
 namespace sanguis
@@ -19,15 +18,19 @@ class with_buffs
 :
 	public virtual base
 {
-protected:
-	explicit with_buffs(
-		base_parameters const &
+public:
+	void
+	add_buff(
+		buffs::auto_ptr
 	);
+protected:
+	with_buffs();
+
+	~with_buffs();
 private:
 	void
-	damage(
-		space_unit,
-		damage::array const &
+	on_update(
+		time_type
 	);
 
 	typedef boost::ptr_list<

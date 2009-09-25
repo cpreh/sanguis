@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PICKUPS_PICKUP_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PICKUPS_PICKUP_HPP_INCLUDED
 
-#include "../base.hpp"
+#include "../with_dim.hpp"
 #include "../with_weapon_fwd.hpp"
 #include "../../environment/load_context_ptr.hpp"
 #include "../../team.hpp"
@@ -24,7 +24,7 @@ namespace pickups
 
 class pickup
 :
-	public base
+	public with_dim
 {
 public:
 	pickup_type::type ptype() const;
@@ -38,11 +38,14 @@ protected:
 		optional_dim const &dim
 	);
 private:
-	entity_type::type
-	type() const;
+	bool
+	dead() const;
 
 	bool
 	invulnerable() const;
+
+	entity_type::type
+	type() const;
 
 	server::team::type
 	team() const;

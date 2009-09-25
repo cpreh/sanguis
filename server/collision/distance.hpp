@@ -3,7 +3,7 @@
 
 #include "../pos_type.hpp"
 #include "../space_unit.hpp"
-#include "../entities/entity_fwd.hpp"
+#include "../entities/base_fwd.hpp"
 
 namespace sanguis
 {
@@ -14,18 +14,21 @@ namespace collision
 
 space_unit
 distance(
-	entities::entity const &,
-	entities::entity const &);
+	entities::base const &,
+	entities::base const &
+);
 
 space_unit
 distance(
-	entities::entity const &,
-	pos_type const &);
+	entities::base const &,
+	pos_type const &
+);
 
 space_unit
 distance(
 	pos_type const &,
-	pos_type const &);
+	pos_type const &
+);
 
 }
 }

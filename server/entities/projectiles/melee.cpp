@@ -10,17 +10,16 @@
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::projectiles::melee::melee(
-	server::environment::load_context_ptr const load_context_,
 	team::type const team_,
-	space_unit const damage
+	damage::unit const damage_
 )
 :
 	projectile(
 		projectile_type::melee,
-		load_context_,
 		team_,
-		entities::property(static_cast<space_unit>(0))
-			),
+		server::movement_speed(
+			0
+		),
 		dim_type(
 			1,
 			1
@@ -30,16 +29,16 @@ sanguis::server::entities::projectiles::melee::melee(
 		), // short lifetime
 		indeterminate::yes
 	),
-	damage(damage)
+	damage_(damage_)
 {}
 
 void
 sanguis::server::entities::projectiles::melee::do_damage(
-	entity &e
+	with_health &e
 )
 {
 	e.damage(
-		damage,
+		damage_,
 		damage::list(
 			damage::normal = damage::full
 		)

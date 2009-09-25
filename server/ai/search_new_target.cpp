@@ -4,7 +4,7 @@
 
 sanguis::server::entities::auto_weak_link const
 sanguis::server::ai::search_new_target(
-	entities::entity const &owner_,
+	entities::base const &owner_,
 	entity_map const &entities_
 )
 {

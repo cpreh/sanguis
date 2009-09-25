@@ -2,6 +2,10 @@
 #define SANGUIS_SERVER_ENTITIES_PROJECTILES_SIMPLE_BULLET_HPP_INCLUDED
 
 #include "projectile.hpp"
+#include "../with_health_fwd.hpp"
+#include "../../environment/load_context_ptr.hpp"
+#include "../../damage/unit.hpp"
+#include "../../team.hpp"
 
 namespace sanguis
 {
@@ -12,20 +16,23 @@ namespace entities
 namespace projectiles
 {
 
-class simple_bullet : public projectile {
+class simple_bullet
+:
+	public projectile
+{
 public:
 	simple_bullet(
 		server::environment::load_context_ptr,
-		team::type team,
-		space_unit damage
+		team::type,
+		damage::unit
 	);
 private:
 	void
 	do_damage(
-		entity &
+		with_health &
 	);
 	
-	space_unit const damage;
+	damage::unit const damage_;
 };
 
 }

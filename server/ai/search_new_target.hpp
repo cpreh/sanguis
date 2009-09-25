@@ -3,7 +3,7 @@
 
 #include "entity_map.hpp"
 #include "../entities/auto_weak_link_fwd.hpp"
-#include "../entities/entity_fwd.hpp"
+#include "../entities/base_fwd.hpp"
 
 namespace sanguis
 {
@@ -14,7 +14,7 @@ namespace ai
 
 entities::auto_weak_link const
 search_new_target(
-	entities::entity const &owner,
+	entities::base const &owner,
 	entity_map const &
 );
 

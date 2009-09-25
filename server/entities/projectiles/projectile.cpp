@@ -19,17 +19,30 @@ sanguis::server::entities::projectiles::projectile::ptype() const
 }
 
 sanguis::server::entities::projectiles::projectile::projectile(
-	projectile_type::type const nptype,
+	projectile_type::type const ptype_,
 	team::type const team_,
-	space_unit const movement_speed_,
-	dim_type const &dim,
+	server::movement_speed const movement_speed_,
+	dim_type const &dim_,
 	life_time const life_time_,
 	indeterminate::type const indeterminate_
 )
 :
 	base(),
+	movable(
+		movement_speed_	
+	),
+	with_dim(
+		dim_
+	),
 	team_(team_),
-	ptype_(nptype),
+	type_(
+		indeterminate_ == indeterminate::yes
+		?
+			entity_type::indeterminate
+		:
+			entity_type::projectile
+	),
+	ptype_(ptype_),
 	diff_clock_(),
 	life_timer_(
 		sge::time::second_f(
@@ -49,22 +62,33 @@ sanguis::server::entities::projectiles::projectile::on_update(
 		time
 	);
 
-	diff_clock_.update(time);
-
-	if(life_timer_.expired())
-		die();
+	diff_clock_.update(
+		time
+	);
 }
 
-sanguis::entity_type::type
-sanguis::server::entities::projectiles::projectile::type() const
+void
+sanguis::server::entities::projectiles::projectile::die()
 {
-	return entity_type::projectile;
+	life_timer_.expire();
+}
+
+bool
+sanguis::server::entities::projectiles::projectile::dead() const
+{
+	return life_timer_.expired();
 }
 
 bool
 sanguis::server::entities::projectiles::projectile::invulnerable() const
 {
 	return true;
+}
+
+sanguis::entity_type::type
+sanguis::server::entities::projectiles::projectile::type() const
+{
+	return type_;
 }
 
 sanguis::server::team::type
@@ -75,7 +99,7 @@ sanguis::server::entities::projectiles::projectile::team() const
 
 boost::logic::tribool const
 sanguis::server::entities::projectiles::projectile::can_collide_with_entity(
-	entity const &e
+	base const &e
 ) const
 {
 	SGE_ASSERT(e.team() != team()); // shouldn't happen for now!
@@ -87,12 +111,18 @@ sanguis::server::entities::projectiles::projectile::can_collide_with_entity(
 
 void
 sanguis::server::entities::projectiles::projectile::collision_entity_begin(
-	entity &e
+	base &entity_
 )
 {
-	if(!dead())
+	if(
+		!dead()
+	)
 		do_damage(
-			e
+			dynamic_cast<
+				with_health &
+			>(
+				entity_	
+			)
 		);
 }
 
@@ -105,8 +135,8 @@ sanguis::server::entities::projectiles::projectile::add_message() const
 			pos(),
 			angle(),
 			abs_speed(),
-			health(),
-			max_health(),
+			health_type(0), // health
+			health_type(0), // max health
 			dim(),
 			ptype()
 		)

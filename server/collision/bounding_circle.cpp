@@ -1,10 +1,11 @@
 #include "bounding_circle.hpp"
-#include "../entities/entity.hpp"
+#include "../entities/base.hpp"
 #include <sge/math/circle/basic_impl.hpp>
 
 sanguis::server::circle_type const
 sanguis::server::collision::bounding_circle(
-	entities::entity const &e)
+	entities::base const &e
+)
 {
 	return circle_type(
 		e.center(),

@@ -14,7 +14,10 @@ namespace server
 namespace weapons
 {
 
-class melee : public weapon {
+class melee
+:
+	public weapon
+{
 public:
 	melee(
 		weapons::range,
@@ -29,12 +32,12 @@ private:
 	
 	void
 	on_init_attack(
-		entities::entity_with_weapon &owner
+		entities::with_weapon &owner
 	);
 	
 	void
 	on_castpoint(
-		entities::entity_with_weapon &owner
+		entities::with_weapon &owner
 	);
 
 	weapons::damage const damage_;

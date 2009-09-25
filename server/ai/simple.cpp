@@ -1,8 +1,11 @@
 #include "simple.hpp"
 #include "search_new_target.hpp"
 #include "../auras/aggro.hpp"
-#include "../entities/entity_with_weapon.hpp"
-#include "../entities/entity.hpp"
+#include "../auras/auto_ptr.hpp"
+#include "../entities/with_weapon.hpp"
+#include "../entities/with_auras.hpp"
+#include "../entities/movable.hpp"
+#include "../entities/base.hpp"
 #include "../entities/property.hpp"
 #include "../collision/collides.hpp"
 #include "../collision/distance.hpp"
@@ -25,7 +28,7 @@ sanguis::server::ai::simple::simple(
 
 void
 sanguis::server::ai::simple::bind(
-	entities::entity_with_weapon &me
+	entities::with_weapon &me
 )
 {
 	SGE_ASSERT(!me_);
@@ -51,7 +54,12 @@ sanguis::server::ai::simple::bind(
 		)
 	);
 
-	me_->add_aura(
+	dynamic_cast<
+		entities::with_auras &
+	>(
+		me
+	)
+	.add_aura(
 		new_aura
 	);
 }
@@ -63,7 +71,7 @@ sanguis::server::ai::simple::update(
 {
 	SGE_ASSERT(me_);
 
-	entities::entity_with_weapon &me(
+	entities::with_weapon &me(
 		*me_
 	);
 
@@ -91,38 +99,57 @@ sanguis::server::ai::simple::update(
 		target_
 	);
 
-	entities::property &speed(
-		me.property(
-			entities::property_type::movement_speed
-		)
-	);
-
-	sge::optional<space_unit> const angle(
-		sge::math::vector::angle_between<space_unit>(
+	sge::optional<
+		space_unit
+	> const angle(
+		sge::math::vector::angle_between<
+			space_unit
+		>(
 			me.center(),
 			target_->center()
 		)
 	);
 
 	if(angle)
-	{
-		me.direction(*angle);
-		me.angle(*angle);
-	}
-	
-	// don't walk into the enemy
-	// TODO: this should be done with the collision system
-	if(
-		collision::collides(
-			*target_,
-			me
-		)
-	)
-		speed.current(
-			static_cast<space_unit>(0)
+		me.angle(
+			*angle
 		);
-	else
-		speed.current_to_max();
+
+	entities::movable *const movable_(
+		dynamic_cast<
+			entities::movable *
+		>(
+			me_
+		)
+	);
+
+	if(
+		movable_
+	)
+	{
+		entities::property &speed(
+			movable_->movement_speed()
+		);
+
+		if(angle)
+			movable_->direction(
+				*angle
+			);
+	
+		// don't walk into the enemy
+		// TODO: this should be done with the collision system
+		if(
+			collision::collides(
+				*target_,
+				me
+			)
+		)
+			speed.current(
+				static_cast<space_unit>(0)
+			);
+		else
+			speed.current_to_max();
+	}
 
 	me.aggressive(
 		true
@@ -135,7 +162,7 @@ sanguis::server::ai::simple::update(
 
 void
 sanguis::server::ai::simple::target_enters(
-	entities::entity &new_target
+	entities::base &new_target
 )
 {
 	potential_targets_.insert(
@@ -169,7 +196,7 @@ sanguis::server::ai::simple::target_enters(
 
 void
 sanguis::server::ai::simple::target_leaves(
-	entities::entity &old_target
+	entities::base &old_target
 )
 {
 	potential_targets_.erase(

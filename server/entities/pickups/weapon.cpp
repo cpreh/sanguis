@@ -44,8 +44,8 @@ sanguis::server::entities::pickups::weapon::add_message() const
 			pos(),
 			angle(),
 			abs_speed(),
-			health(),
-			max_health(),
+			health_type(0), // TODO
+			health_type(0),
 			dim(),
 			wtype()
 		)
@@ -54,7 +54,8 @@ sanguis::server::entities::pickups::weapon::add_message() const
 
 void
 sanguis::server::entities::pickups::weapon::do_pickup(
-	entity_with_weapon &receiver)
+	with_weapon &receiver
+)
 {
 	receiver.add_weapon(
 		weapons::create(

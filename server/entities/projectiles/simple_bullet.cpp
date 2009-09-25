@@ -8,27 +8,20 @@
 #include "../../environment/load_context.hpp"
 #include <sge/container/map_impl.hpp>
 #include <sge/text.hpp>
-#include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 	server::environment::load_context_ptr const load_context,
 	team::type const team_,
-	space_unit const damage
+	damage::unit const damage_
 )
 :
 	projectile(
 		projectile_type::simple_bullet,
 		load_context,
 		team_,
-		boost::assign::map_list_of
-			(
-				entities::property_type::health,
-				entities::property(static_cast<space_unit>(1))
-			)
-			(
-				entities::property_type::movement_speed,
-				entities::property(static_cast<space_unit>(500))
-			),
+		server::movement_speed(
+			500
+		),
 		load_context->entity_dim(
 			SGE_TEXT("bullet")
 		),
@@ -37,12 +30,12 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 		),
 		indeterminate::no
 	),
-	damage(damage)
+	damage_(damage_)
 {}
 
 void
 sanguis::server::entities::projectiles::simple_bullet::do_damage(
-	entity &e
+	with_health &e
 )
 {
 	e.damage(

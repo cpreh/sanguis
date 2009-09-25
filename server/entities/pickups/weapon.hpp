@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_PICKUPS_WEAPON_HPP_INCLUDED
 
 #include "pickup.hpp"
-#include "../entity_with_weapon_fwd.hpp"
+#include "../with_weapon_fwd.hpp"
 #include "../../environment/load_context_ptr.hpp"
 #include "../../team.hpp"
 #include "../../../weapon_type.hpp"
@@ -17,7 +17,10 @@ namespace entities
 namespace pickups
 {
 
-class weapon : public pickup {
+class weapon
+:
+	public pickup
+{
 public:
 	weapon(
 		server::environment::load_context_ptr,
@@ -33,7 +36,7 @@ private:
 
 	void
 	do_pickup(
-		entity_with_weapon &receiver
+		with_weapon &receiver
 	);
 
 	weapon_type::type const weapon_type_;

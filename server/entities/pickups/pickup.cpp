@@ -26,19 +26,17 @@ sanguis::server::entities::pickups::pickup::pickup(
 	optional_dim const &dim_
 )
 :
-	entity(
-		base_parameters(
-			property_map(),
-			dim_
-			?
-				*dim_
-			:
-				load_context->entity_dim(
-					load::pickup_name(
-						ptype_
-					)
+	base(),
+	with_dim(
+		dim_
+		?
+			*dim_
+		:
+			load_context->entity_dim(
+				load::pickup_name(
+					ptype_
 				)
-		)
+			)
 	),
 	team_(team_),
 	ptype_(ptype_),
@@ -51,17 +49,23 @@ sanguis::server::entities::pickups::pickup::pickup(
 		diff_clock_.callback()
 	)
 {}
-	
-sanguis::entity_type::type
-sanguis::server::entities::pickups::pickup::type() const
+
+bool
+sanguis::server::entities::pickups::pickup::dead() const
 {
-	return entity_type::pickup;
+	return life_time.expired();
 }
 
 bool
 sanguis::server::entities::pickups::pickup::invulnerable() const
 {
 	return true;
+}
+
+sanguis::entity_type::type
+sanguis::server::entities::pickups::pickup::type() const
+{
+	return entity_type::pickup;
 }
 
 sanguis::server::team::type
@@ -100,7 +104,7 @@ sanguis::server::entities::pickups::pickup::collision_entity_begin(
 		)
 	);
 
-	die();
+	life_time.expire();
 }
 
 void
@@ -115,11 +119,6 @@ sanguis::server::entities::pickups::pickup::update(
 	diff_clock_.update(
 		time
 	);
-
-	if(
-		lifetime.expired()
-	)
-		die();
 }
 
 sanguis::messages::auto_ptr
@@ -131,8 +130,8 @@ sanguis::server::entities::pickups::pickup::add_message() const
 			pos(),
 			angle(),
 			abs_speed(),
-			health(),
-			max_health(),
+			health_type(0), // TODO!
+			health_type(0),
 			dim(),
 			ptype()
 		)

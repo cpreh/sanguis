@@ -47,14 +47,8 @@ sanguis::server::weapons::sentry::do_attack(
 				friend_type::sentry,
 				a.load_context(),
 				damage::no_armor(),
-				a.team(),
-				boost::assign::map_list_of
-				(
-					entities::property_type::health,
-					entities::property(
-						static_cast<space_unit>(100)
-					)
-				),
+				health_type(100),
+				movement_speed(0),
 				ai::auto_ptr(
 					new ai::simple()
 				),
@@ -65,7 +59,6 @@ sanguis::server::weapons::sentry::do_attack(
 		),
 		entities::insert_parameters(
 			a.dest(),
-			a.angle(),
 			a.angle()
 		)
 	);

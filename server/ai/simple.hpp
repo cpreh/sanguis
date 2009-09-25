@@ -3,7 +3,7 @@
 
 #include "base.hpp"
 #include "entity_map.hpp"
-#include "../entities/entity_with_weapon_fwd.hpp"
+#include "../entities/with_weapon_fwd.hpp"
 #include "../entities/auto_weak_link.hpp"
 #include <sge/container/map_decl.hpp>
 
@@ -26,7 +26,7 @@ public:
 private:
 	void
 	bind(
-		entities::entity_with_weapon &me
+		entities::with_weapon &me
 	);
 	
 	void
@@ -36,15 +36,15 @@ private:
 
 	void
 	target_enters(
-		entities::entity &
+		entities::base &
 	);
 
 	void
 	target_leaves(
-		entities::entity &
+		entities::base &
 	);
 
-	entities::entity_with_weapon *me_;
+	entities::with_weapon *me_;
 
 	entities::auto_weak_link
 		target_,

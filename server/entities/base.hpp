@@ -10,7 +10,7 @@
 #include "../team.hpp"
 #include "../collision/base.hpp"
 #include "../collision/global_groups_fwd.hpp"
-#include "../collision/create_pamameters_fwd.hpp"
+#include "../collision/create_parameters_fwd.hpp"
 #include "../environment/object_ptr.hpp"
 #include "../../messages/auto_ptr.hpp"
 #include "../../entity_id.hpp"
@@ -31,9 +31,7 @@ class base
 {
 	SGE_NONCOPYABLE(base)
 protected:
-	explicit base(
-		base_parameters const &
-	);
+	base();
 public:
 	// general world functions
 	
@@ -95,20 +93,20 @@ public:
 	virtual bool
 	dead() const = 0;
 
+	virtual bool
+	invulnerable() const = 0;
+
 
 	// message functions
 	
 	virtual messages::auto_ptr
-	add_message() const;
+	add_message() const = 0;
 
 
 	// type query
 	
 	virtual entity_type::type
 	type() const = 0;
-
-	virtual bool
-	invulnerable() const = 0;
 
 	virtual server::team::type
 	team() const = 0;
@@ -121,13 +119,17 @@ private:
 	);
 
 	virtual void
+	on_center(
+		pos_type const &
+	);
+
+	virtual void
 	on_transfer(
-		collision::global_groups_ const &,
+		collision::global_groups const &,
 		collision::create_parameters const &
 	);
 
 	friend class auto_weak_link;
-	friend class satellite;
 
 	sge::collision::shapes::container const
 	recreate_shapes(

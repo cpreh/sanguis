@@ -1,16 +1,11 @@
-sanguis::server::entities::with_auras::with_auras(
-	base_parameters const &param_
-)
-:
-	base(
-		param_
-	),
-	auras_()
-{}
+#include "with_auras.hpp"
+#include "../auras/aura.hpp"
+#include <boost/foreach.hpp>
 
 void
 sanguis::server::entities::with_auras::add_aura(
-	auras::auto_ptr a)
+	auras::auto_ptr a
+)
 {
 	auras_.push_back(a);
 
@@ -23,15 +18,26 @@ sanguis::server::entities::with_auras::add_aura(
 	);
 }
 
+sanguis::server::entities::with_auras::with_auras()
+:
+	base(),
+	auras_()
+{}
+
+sanguis::server::entities::with_auras::~with_auras()
+{}
+
 void
-sanguis::server::entities::with_auras::center()
+sanguis::server::entities::with_auras::on_center(
+	pos_type const &center_
+)
 {
 	BOOST_FOREACH(
 		aura_container::reference r,
 		auras_
 	)
 		r.center(
-			_center
+			center_
 		);
 }
 
@@ -46,7 +52,7 @@ sanguis::server::entities::with_auras::on_destroy()
 }
 
 void
-sanguis::server::entities::with_auras::recreate(
+sanguis::server::entities::with_auras::on_transfer(
 )
 {
 	BOOST_FOREACH(

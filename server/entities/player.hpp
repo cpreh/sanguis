@@ -1,18 +1,26 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PLAYER_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PLAYER_HPP_INCLUDED
 
-#include "with_weapon.hpp"
-#include "with_armor.hpp"
-#include "with_perks.hpp"
+#include "movable.hpp"
+#include "with_auras.hpp"
 #include "with_buffs.hpp"
+#include "with_dim.hpp"
+#include "with_health.hpp"
+#include "with_perks.hpp"
+#include "with_weapon.hpp"
 #include "../environment/load_context_ptr.hpp"
+#include "../damage/armor.hpp"
+#include "../perks/auto_ptr.hpp"
 #include "../perks/tree.hpp"
 #include "../perks/list.hpp"
 #include "../level_type.hpp"
 #include "../string.hpp"
 #include "../exp_type.hpp"
 #include "../player_id.hpp"
+#include "../movement_speed.hpp"
+#include "../health_type.hpp"
 #include "../../perk_type.hpp"
+#include "../../time_type.hpp"
 
 namespace sanguis
 {
@@ -23,19 +31,20 @@ namespace entities
 
 class player
 :
-	public with_weapon,
+	public movable,
+	public with_auras,
+	public with_buffs,
+	public with_dim,
 	public with_health,
 	public with_perks,
-	public with_buffs,
-	public with_auras,
-	public with_dim,
-	public movable
+	public with_weapon
 {
 public:
 	player(
 		server::environment::load_context_ptr,
+		health_type,
 		damage::armor const &,
-		property_map const &,
+		server::movement_speed,
 		string const &name,
 		server::player_id
 	);
@@ -76,8 +85,19 @@ private:
 		entity_id
 	);
 
+	void
+	on_update(
+		time_type
+	);
+
 	messages::auto_ptr
-	add_message();
+	add_message() const;
+
+	entity_type::type
+	type() const;
+
+	server::team::type
+	team() const;
 
 	string const name_;
 	server::player_id const player_id_;

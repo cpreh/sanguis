@@ -54,6 +54,39 @@ sanguis::server::entities::base::transfer(
 	);
 }
 
+void
+sanguis::server::entities::base::update(
+	time_type const time
+)
+{
+	//BOOST_FOREACH(property_map::reference p, properties)
+	//	p.second.reset();
+
+	on_update(
+		time
+	);
+
+	/*
+	BOOST_FOREACH(property_map::reference p, properties)
+		p.second.apply();
+	*/
+
+	// TODO: somehow make this part of property!
+	/*
+	property(property_type::attack_speed).current_to_max();
+	property(property_type::reload_speed).current_to_max();
+	property(property_type::health_regeneration).current_to_max();
+	*/
+}
+
+sanguis::server::entities::auto_weak_link const
+sanguis::server::entities::base::link()
+{
+	return auto_weak_link(
+		*this
+	);
+}
+
 sanguis::server::environment::object_ptr const
 sanguis::server::entities::base::environment() const
 {
@@ -112,51 +145,32 @@ sanguis::server::entities::base::center(
 	body_pos(
 		_center
 	);
+
+	on_center(
+		_center
+	);
 }
 
-sanguis::server::space_unit
-sanguis::server::entities::base::speed() const
-{
-	return
-		property(
-			property_type::movement_speed
-		).current();
-}
+sanguis::server::entities::base::~base()
+{}
 
 void
-sanguis::server::entities::base::update(
-	time_type const time
+sanguis::server::entities::base::on_update(
+	time_type
 )
-{
-	//BOOST_FOREACH(property_map::reference p, properties)
-	//	p.second.reset();
+{}
 
-	on_update(
-		time
-	);
+virtual void
+sanguis::server::entities::base::on_center(
+	pos_type const &
+)
+{}
 
-	/*
-	BOOST_FOREACH(property_map::reference p, properties)
-		p.second.apply();
-	*/
-
-	// TODO: somehow make this part of property!
-	/*
-	property(property_type::attack_speed).current_to_max();
-	property(property_type::reload_speed).current_to_max();
-	property(property_type::health_regeneration).current_to_max();
-	*/
-}
-
-sanguis::server::entities::auto_weak_link const
-sanguis::server::entities::base::link()
-{
-	return auto_weak_link(
-		*this
-	);
-}
-
-sanguis::server::entities::base::~entity()
+void
+sanguis::server::entities::base::on_transfer(
+	collision::global_groups const &,
+	collision::create_parameters const &
+)
 {}
 
 sge::collision::shapes::container const

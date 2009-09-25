@@ -1,7 +1,7 @@
 #include "shotgun.hpp"
 #include "delayed_attack.hpp"
 #include "unlimited_magazine_count.hpp"
-#include "../entities/entity.hpp"
+#include "../entities/base.hpp"
 #include "../entities/insert_parameters.hpp"
 #include "../entities/projectiles/simple_bullet.hpp"
 #include "../environment/object.hpp"
@@ -34,8 +34,10 @@ sanguis::server::weapons::shotgun::shotgun(
 	damage_(damage_)
 {}
 
-void sanguis::server::weapons::shotgun::do_attack(
-	delayed_attack const &a)
+void
+sanguis::server::weapons::shotgun::do_attack(
+	delayed_attack const &a
+)
 {
 	typedef std::tr1::normal_distribution<
 		space_unit

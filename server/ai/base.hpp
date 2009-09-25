@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_AI_BASE_HPP_INCLUDED
 
 #include "base_fwd.hpp"
-#include "../entities/entity_with_weapon_fwd.hpp"
+#include "../entities/with_weapon_fwd.hpp"
 #include "../../time_type.hpp"
 #include <sge/noncopyable.hpp>
 
@@ -20,7 +20,7 @@ protected:
 public:
 	virtual void
 	bind(
-		entities::entity_with_weapon &me
+		entities::with_weapon &me
 	) = 0;
 	
 	virtual void

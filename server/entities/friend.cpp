@@ -15,32 +15,45 @@ sanguis::server::entities::friend_::friend_(
 	friend_type::type const ftype_,
 	server::environment::load_context_ptr const load_context,
 	damage::armor const &armor,
-	team::type const team_,
-	property_map const &properties,
+	health_type const health_,
+	server::movement_speed const movement_speed_,
 	ai::auto_ptr ai_,
 	weapons::auto_ptr weapon_
 )
 :
 	with_ai(
-		base_parameters(
-			properties,
-			load_context->entity_dim(
-				load::friend_name(
-					ftype_
-				)
-			)
-		),
 		weapon_,
 		ai_,
 	),
-	with_armor(
+	with_buffs(),
+	with_dim(
+		load_context->entity_dim(
+			load::friend_name(
+				ftype_
+			)
+		)
+	),
+	with_health(
+		health_,
 		armor_
 	),
-	with_buffs(),
+	moveable(
+		movement_speed_
+	),
 	ftype_(ftype_)
 {}
 
-entity_type::friend_,
+sanguis::entity_type::type
+sanguis::server::entities::friend_::type() const
+{
+	return entity_type::friend_;
+}
+
+sanguis::server::team::type
+sanguis::server::entities::friend_::team() const
+{
+	return server::team::players;
+}
 
 sanguis::messages::auto_ptr
 sanguis::server::entities::friend_::add_message() const
@@ -61,10 +74,13 @@ sanguis::server::entities::friend_::add_message() const
 
 boost::logic::tribool const
 sanguis::server::entities::friend_::can_collide_with_entity(
-	entity const &e
+	base const &e
 ) const
 {
-	return dynamic_cast<entities::pickups::pickup const *>(&e)
-		? boost::logic::tribool(false)
-		: boost::logic::indeterminate;
+	return
+		dynamic_cast<
+			entities::pickups::pickup const *
+		>(&e)
+			? boost::logic::tribool(false)
+			: boost::logic::indeterminate;
 }

@@ -3,7 +3,9 @@
 
 #include "base.hpp"
 #include "../dim_type.hpp"
+#include "../pos_type.hpp"
 #include "../space_unit.hpp"
+#include <sge/math/dim/basic_decl.hpp>
 
 namespace sanguis
 {
@@ -21,8 +23,13 @@ protected:
 		dim_type const &
 	);
 
+	~with_dim();
+
 	dim_type const &
 	dim() const;
+
+	pos_type const
+	pos() const;
 private:
 	space_unit
 	radius() const;

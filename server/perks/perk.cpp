@@ -36,7 +36,7 @@ sanguis::server::perks::perk::level() const
 
 void
 sanguis::server::perks::perk::apply(
-	entities::entity &e,
+	entities::base &e,
 	time_type const time,
 	environment::object_ptr const env,
 	environment::load_context_ptr const load_context_
