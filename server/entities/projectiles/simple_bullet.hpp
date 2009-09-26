@@ -6,6 +6,7 @@
 #include "../../environment/load_context_ptr.hpp"
 #include "../../damage/unit.hpp"
 #include "../../team.hpp"
+#include "../../space_unit.hpp"
 
 namespace sanguis
 {
@@ -24,7 +25,8 @@ public:
 	simple_bullet(
 		server::environment::load_context_ptr,
 		team::type,
-		damage::unit
+		damage::unit,
+		space_unit direction
 	);
 private:
 	void

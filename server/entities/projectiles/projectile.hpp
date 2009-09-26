@@ -7,6 +7,7 @@
 #include "../with_dim.hpp"
 #include "../with_health_fwd.hpp"
 #include "../../dim_type.hpp"
+#include "../../space_unit.hpp"
 #include "../../../entity_type.hpp"
 #include "../../../projectile_type.hpp"
 #include "../../../time_type.hpp"
@@ -37,6 +38,7 @@ protected:
 		server::movement_speed,
 		dim_type const &,
 		life_time,
+		space_unit direction,
 		indeterminate::type
 	);
 	
@@ -48,6 +50,9 @@ protected:
 	void
 	die();
 private:
+	virtual void
+	on_die();
+
 	bool
 	dead() const;
 

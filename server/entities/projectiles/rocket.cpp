@@ -1,7 +1,6 @@
 #include "rocket.hpp"
 #include "aoe_damage.hpp"
 #include "../property.hpp"
-#include "../insert_parameters.hpp"
 #include "../insert_parameters_pos.hpp"
 #include "../../damage/list.hpp"
 #include "../../damage/wrapper.hpp"
@@ -17,8 +16,9 @@
 sanguis::server::entities::projectiles::rocket::rocket(
 	server::environment::load_context_ptr const load_context_,
 	team::type const team_,
-	space_unit const damage,
-	space_unit const aoe_
+	damage::unit const damage_,
+	space_unit const aoe_,
+	space_unit const angle_
 )
 :
 	aoe_projectile(
@@ -35,17 +35,21 @@ sanguis::server::entities::projectiles::rocket::rocket(
 		indeterminate::no,
 		aoe_
 	),
-	damage(damage)
+	damage_(
+		damage_
+	)
 {}
 
 void
 sanguis::server::entities::projectiles::rocket::do_damage(
-	entity &)
+	entity &
+)
 {
 	die();
 }
 
-void sanguis::server::entities::projectiles::rocket::on_die()
+void
+sanguis::server::entities::projectiles::rocket::on_die()
 {
 	environment()->insert(
 		auto_ptr(

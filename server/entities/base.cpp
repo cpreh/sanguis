@@ -35,7 +35,7 @@ sanguis::server::entities::base::transfer(
 
 	collision::create_parameters const create_param(
 		insert_param.center(),
-		pos_type::null()
+		initial_direction()
 	);
 
 	collision::base::recreate(
@@ -172,6 +172,12 @@ sanguis::server::entities::base::on_transfer(
 	collision::create_parameters const &
 )
 {}
+
+sanguis::server::pos_type const
+sanguis::server::entities::base::initial_direction() const
+{
+	return pos_type::null();
+}
 
 sge::collision::shapes::container const
 sanguis::server::entities::base::recreate_shapes(

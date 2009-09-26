@@ -9,13 +9,20 @@ sanguis::server::perks::irs::irs()
 	)
 {}
 
-void sanguis::server::perks::irs::do_apply(
-	entities::entity &e,
+void
+sanguis::server::perks::irs::do_apply(
+	entities::base &e,
 	time_type,
-	environment::object_ptr,
-	environment::load_context_ptr
+	environment::object_ptr
 )
 {
+	dynamic_cast<
+		entities::with_weapon &
+	>(
+		e
+	)
+	.
+		
 	e.property(
 		entities::property_type::reload_speed)
 		.multiply_max(factor());

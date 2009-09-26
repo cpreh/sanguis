@@ -28,15 +28,26 @@ sanguis::server::entities::direction(
 	);
 }
 
+sanguis::server::pos_type const
+sanguis::server::entities::movable::abs_speed() const
+{
+	return
+		angle_to_vector(
+			direction_
+		)
+		* movement_speed().current();
+}
+
 sanguis::server::entities::movable::movable(
-	server::movement_speed const max_speed_
+	server::movement_speed const max_speed_,
+	space_unit const direction_
 )
 :
 	movement_speed_(
 		max_speed_
 	),
 	direction_(
-		0
+		direction_
 	),
 	speed_change_(
 		movement_speed_.register_change_callback(
@@ -48,6 +59,12 @@ sanguis::server::entities::movable::movable(
 		)
 	)
 {}
+
+sanguis::server::pos_type const
+sanguis::server::entities::base::initial_direction() const
+{
+	return abs_speed();
+}
 
 void
 sanguis::server::entities::base::speed_change(

@@ -62,15 +62,15 @@ sanguis::server::weapons::shotgun::do_attack(
 		a.environment()->insert(
 			entities::auto_ptr(
 				new entities::projectiles::simple_bullet(
-					a.load_context(),
+					a.environment()->load_context(),
 					a.team(),
-					damage_
+					damage_,
+					rng()
 				)
 			),
 			entities::insert_parameters(
 				a.spawn_point(),
-				a.angle(),
-				rng()
+				a.angle()
 			)
 		);
 }

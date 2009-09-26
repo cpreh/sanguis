@@ -32,6 +32,12 @@ public:
 
 	property &
 	regeneration();
+
+	health_type
+	current_health() const;
+
+	health_type
+	max_health() const;
 protected:
 	with_health(
 		health_type max_health,
@@ -42,12 +48,6 @@ protected:
 	on_update(
 		time_type
 	);
-
-	health_type
-	health() const;
-
-	health_type
-	max_health() const;
 private:
 	virtual void
 	on_die();

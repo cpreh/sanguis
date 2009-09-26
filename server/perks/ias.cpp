@@ -1,6 +1,6 @@
 #include "ias.hpp"
 #include "../entities/property.hpp"
-#include "../entities/entity.hpp"
+#include "../entities/base.hpp"
 
 sanguis::server::perks::ias::ias()
 :
@@ -13,8 +13,7 @@ void
 sanguis::server::perks::ias::do_apply(
 	entities::base &entity_,
 	time_type,
-	environment::object_ptr,
-	environment::load_context_ptr
+	environment::object_ptr
 )
 {
 	dynamic_cast<

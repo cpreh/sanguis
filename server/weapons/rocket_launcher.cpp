@@ -37,15 +37,17 @@ sanguis::server::weapons::rocket_launcher::do_attack(
 	a.environment()->insert(
 		entities::auto_ptr(
 			new entities::projectiles::rocket(
-				a.load_context(),
+				a.environment()->load_context(),
 				a.team(),
-				damage_,
-				aoe_
+				server::damage::unit(
+					damage_
+				),
+				aoe_,
+				a.angle()
 			)
 		),
 		entities::insert_parameters(
 			a.spawn_point(),
-			a.angle(),
 			a.angle()
 		)
 	);

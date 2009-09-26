@@ -1,6 +1,5 @@
 #include "grenade.hpp"
 #include "delayed_attack.hpp"
-#include "../entities/entity.hpp"
 #include "../entities/insert_parameters.hpp"
 #include "../entities/projectiles/grenade.hpp"
 #include "../environment/object.hpp"
@@ -35,16 +34,18 @@ sanguis::server::weapons::grenade::do_attack(
 	a.environment()->insert(
 		entities::auto_ptr(
 			new entities::projectiles::grenade(
-				a.load_context(),
+				a.environment()->load_context(),
 				a.team(),
-				damage_,
+				server::damage::unit(
+					damage_
+				),
 				aoe_,
-				a.dest()
+				a.dest(),
+				a.angle()
 			)
 		),
 		entities::insert_parameters(
 			a.spawn_point(),
-			a.angle(),
 			a.angle()
 		)
 	);

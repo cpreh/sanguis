@@ -24,12 +24,14 @@ sanguis::server::entities::projectiles::projectile::projectile(
 	server::movement_speed const movement_speed_,
 	dim_type const &dim_,
 	life_time const life_time_,
+	space_unit const direction_,
 	indeterminate::type const indeterminate_
 )
 :
 	base(),
 	movable(
-		movement_speed_	
+		movement_speed_,
+		direction_
 	),
 	with_dim(
 		dim_
@@ -71,7 +73,13 @@ void
 sanguis::server::entities::projectiles::projectile::die()
 {
 	life_timer_.expire();
+
+	on_die();
 }
+
+void
+sanguis::server::entities::projectiles::projectile::on_die()
+{}
 
 bool
 sanguis::server::entities::projectiles::projectile::dead() const

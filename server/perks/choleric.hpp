@@ -14,19 +14,22 @@ namespace server
 namespace perks
 {
 
-class choleric : public perk {
+class choleric
+:
+	public perk
+{
 public:
 	choleric();
 private:
 	void
 	do_apply(
-		entities::entity &,
+		entities::base &,
 		time_type,
-		environment::object_ptr,
-		environment::load_context_ptr
+		environment::object_ptr
 	);
 
-	bool can_raise_level() const;
+	bool
+	can_raise_level() const;
 
 	diff_clock       clock_;
 	sge::time::timer shoot_timer;

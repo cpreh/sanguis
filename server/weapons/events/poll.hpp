@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_WEAPONS_EVENTS_POLL_HPP_INCLUDED
 
 #include "poll_fwd.hpp"
-#include "../../entities/entity_with_weapon_fwd.hpp"
+#include "../../entities/with_weapon_fwd.hpp"
 #include "../../../time_type.hpp"
 #include <boost/statechart/event.hpp>
 
@@ -24,16 +24,18 @@ class poll
 public:
 	poll(
 		time_type,
-		entities::entity_with_weapon &owner);
+		entities::with_weapon &owner
+	);
 	
 	time_type
 	time() const;
 
-	entities::entity_with_weapon &
+	entities::with_weapon &
 	owner() const;
 private:
 	time_type const time_;
-	entities::entity_with_weapon &owner_;
+
+	entities::with_weapon &owner_;
 };
 
 }

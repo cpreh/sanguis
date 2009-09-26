@@ -38,10 +38,11 @@ sanguis::server::weapons::pistol::do_attack(
 	a.environment()->insert(
 		entities::auto_ptr(
 			new entities::projectiles::simple_bullet(
-				a.load_context(),
+				a.environment()->load_context(),
 				a.team(),
-				damage_
-			) // FIXME
+				damage_,
+				a.angle()
+			)
 		),
 		entities::insert_parameters(
 			a.spawn_point(),

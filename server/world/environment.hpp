@@ -3,6 +3,7 @@
 
 #include "environment_fwd.hpp"
 #include "object_fwd.hpp"
+#include "../entities/base_fwd.hpp"
 #include "../environment/object.hpp"
 #include <sge/noncopyable.hpp>
 
@@ -25,7 +26,7 @@ public:
 
 	~environment();
 
-	entities::entity & 
+	entities::base & 
 	insert(
 		entities::auto_ptr,
 		entities::insert_parameters const &
@@ -92,6 +93,9 @@ public:
 
 	sge::collision::world_ptr const
 	collision_world() const;
+
+	server::environment::load_context_ptr const
+	load_context() const;
 private:
 	world::object &world_;	
 };

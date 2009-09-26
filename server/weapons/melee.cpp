@@ -40,7 +40,7 @@ sanguis::server::weapons::melee::do_attack(
 	a.environment()->insert(
 		entities::auto_ptr(
 			new entities::projectiles::melee(
-				a.load_context(),
+				a.environment()->load_context(),
 				a.team(),
 				damage_
 			)

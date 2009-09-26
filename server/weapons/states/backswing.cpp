@@ -5,10 +5,11 @@
 #include "../events/shoot.hpp"
 #include "../events/stop.hpp"
 #include "../events/reset.hpp"
-#include "../../entities/entity_with_weapon.hpp"
+#include "../../entities/with_weapon.hpp"
 
 sanguis::server::weapons::states::backswing::backswing(
-	my_context ctx)
+	my_context ctx
+)
 :
 	my_base(ctx),
 	diff_clock_(),
@@ -23,7 +24,8 @@ sanguis::server::weapons::states::backswing::backswing(
 
 boost::statechart::result
 sanguis::server::weapons::states::backswing::react(
-	events::poll const &e)
+	events::poll const &e
+)
 {
 	diff_clock_.update(
 		e.time() * context<weapon>().ias()

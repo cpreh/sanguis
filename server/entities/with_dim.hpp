@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_DIM_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_DIM_HPP_INCLUDED
 
+#include "with_dim_fwd.hpp"
 #include "base.hpp"
 #include "../dim_type.hpp"
 #include "../pos_type.hpp"
@@ -18,6 +19,9 @@ class with_dim
 :
 	public virtual base
 {
+public:
+	pos_type const
+	pos() const;
 protected:
 	explicit with_dim(
 		dim_type const &
@@ -27,9 +31,6 @@ protected:
 
 	dim_type const &
 	dim() const;
-
-	pos_type const
-	pos() const;
 private:
 	space_unit
 	radius() const;

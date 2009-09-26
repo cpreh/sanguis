@@ -11,21 +11,25 @@ namespace server
 namespace perks
 {
 
-class ims : public perk {
+class ims
+:
+	public perk
+{
 public:
 	ims();
 private:
 	void
 	do_apply(
-		entities::entity &,
+		entities::base &,
 		time_type,
-		environment::object_ptr,
-		environment::load_context_ptr
+		environment::object_ptr
 	);
 	
-	bool can_raise_level() const;
+	bool
+	can_raise_level() const;
 
-	space_unit factor() const;
+	space_unit
+	factor() const;
 };
 
 }

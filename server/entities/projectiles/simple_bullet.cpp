@@ -12,7 +12,8 @@
 sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 	server::environment::load_context_ptr const load_context,
 	team::type const team_,
-	damage::unit const damage_
+	damage::unit const damage_,
+	space_unit const direction_
 )
 :
 	projectile(
@@ -28,6 +29,7 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 		life_time(
 			10
 		),
+		direction_,
 		indeterminate::no
 	),
 	damage_(damage_)

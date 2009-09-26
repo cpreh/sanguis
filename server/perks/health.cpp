@@ -11,10 +11,9 @@ sanguis::server::perks::health::health()
 
 void
 sanguis::server::perks::health::do_apply(
-	entities::entity &e,
+	entities::base &e,
 	time_type,
-	environment::object_ptr,
-	environment::load_context_ptr
+	environment::object_ptr
 )
 {
 	dynamic_cast<

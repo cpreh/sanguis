@@ -9,6 +9,7 @@
 #include "sight_range_map.hpp"
 #include "../entities/auto_ptr.hpp"
 #include "../entities/insert_parameters_fwd.hpp"
+#include "../entities/base_fwd.hpp"
 #include "../environment/object_ptr.hpp"
 #include "../environment/load_context_ptr.hpp"
 #include "../collision/global_groups.hpp"
@@ -53,7 +54,7 @@ public:
 		time_type
 	);
 
-	entities::entity & 
+	entities::base & 
 	insert(
 		entities::auto_ptr,
 		entities::insert_parameters const &
@@ -124,6 +125,9 @@ private:
 
 	sge::collision::world_ptr const
 	collision_world() const;
+
+	server::environment::load_context_ptr const
+	load_context() const;
 
 	// owns functions
 	void

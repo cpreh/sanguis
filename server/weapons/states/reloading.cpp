@@ -4,7 +4,7 @@
 #include "../events/shoot.hpp"
 #include "../events/stop.hpp"
 #include "../events/reset.hpp"
-#include "../../entities/entity_with_weapon.hpp"
+#include "../../entities/with_weapon.hpp"
 
 sanguis::server::weapons::states::reloading::reloading(
 	my_context ctx)
@@ -22,7 +22,8 @@ sanguis::server::weapons::states::reloading::reloading(
 
 boost::statechart::result
 sanguis::server::weapons::states::reloading::react(
-	events::poll const &e)
+	events::poll const &e
+)
 {
 	diff_clock_.update(
 		e.time() * context<weapon>().irs()
@@ -42,15 +43,18 @@ sanguis::server::weapons::states::reloading::react(
 
 boost::statechart::result
 sanguis::server::weapons::states::reloading::react(
-	events::stop const &)
+	events::stop const &
+)
 {
 	reload_time.reset();	
+
 	return discard_event();
 }
 
 boost::statechart::result
 sanguis::server::weapons::states::reloading::react(
-	events::reset const &)
+	events::reset const &
+)
 {
 	reload_time.expire();
 	

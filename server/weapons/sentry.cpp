@@ -45,7 +45,7 @@ sanguis::server::weapons::sentry::do_attack(
 		entities::auto_ptr(
 			new entities::friend_(
 				friend_type::sentry,
-				a.load_context(),
+				a.environment()->load_context(),
 				damage::no_armor(),
 				health_type(100),
 				movement_speed(0),

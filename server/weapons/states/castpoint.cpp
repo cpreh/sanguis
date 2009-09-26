@@ -5,7 +5,7 @@
 #include "../events/shoot.hpp"
 #include "../events/poll.hpp"
 #include "../events/stop.hpp"
-#include "../../entities/entity_with_weapon.hpp"
+#include "../../entities/with_weapon.hpp"
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/optional_impl.hpp>
 
@@ -55,7 +55,6 @@ sanguis::server::weapons::states::castpoint::react(
 			e.owner().angle(),
 			e.owner().team(),
 			e.owner().environment(),
-			e.owner().load_context(),
 			*attack_dest
 		)
 	);

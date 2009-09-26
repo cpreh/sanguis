@@ -6,7 +6,6 @@ sanguis::server::weapons::delayed_attack::delayed_attack(
 	space_unit const angle_,
 	team::type const team_,
 	server::environment::object_ptr const environment_,
-	server::environment::load_context_ptr const load_context_,
 	pos_type const &dest_
 )
 :
@@ -14,7 +13,6 @@ sanguis::server::weapons::delayed_attack::delayed_attack(
 	angle_(angle_),
 	team_(team_),
 	environment_(environment_),
-	load_context_(load_context_),
 	dest_(dest_)
 {}
 
@@ -40,12 +38,6 @@ sanguis::server::environment::object_ptr const
 sanguis::server::weapons::delayed_attack::environment() const
 {
 	return environment_;
-}
-
-sanguis::server::environment::load_context_ptr const
-sanguis::server::weapons::delayed_attack::load_context() const
-{
-	return load_context_;
 }
 
 sanguis::server::pos_type const &

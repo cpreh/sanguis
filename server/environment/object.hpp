@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENVIRONMENT_OBJECT_HPP_INCLUDED
 
 #include "object_fwd.hpp"
+#include "load_context_ptr.hpp"
 #include "../entities/auto_ptr.hpp"
 #include "../entities/base_fwd.hpp"
 #include "../entities/insert_parameters_fwd.hpp"

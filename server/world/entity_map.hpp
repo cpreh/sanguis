@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_WORLD_ENTITY_MAP_HPP_INCLUDED
 
 #include "../../entity_id.hpp"
-#include "../entities/entity_fwd.hpp"
+#include "../entities/base_fwd.hpp"
 #include <boost/ptr_container/ptr_map.hpp>
 
 namespace sanguis
@@ -14,7 +14,7 @@ namespace world
 
 typedef boost::ptr_map<
 	entity_id,
-	entities::entity
+	entities::base
 > entity_map;
 
 }

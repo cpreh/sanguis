@@ -11,16 +11,18 @@ namespace server
 namespace perks
 {
 
-class irs : public perk {
+class irs
+:
+	public perk
+{
 public:
 	irs();
 private:
 	void
 	do_apply(
-		entities::entity &,
+		entities::base &,
 		time_type,
-		environment::object_ptr,
-		environment::load_context_ptr
+		environment::object_ptr
 	);
 
 	bool can_raise_level() const;

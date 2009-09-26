@@ -129,6 +129,9 @@ private:
 		collision::create_parameters const &
 	);
 
+	virtual pos_type const
+	initial_speed() const;
+
 	friend class auto_weak_link;
 
 	sge::collision::shapes::container const

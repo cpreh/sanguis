@@ -2,6 +2,14 @@
 #define SANGUIS_SERVER_ENTITIES_PROJECTILES_AOE_PROJECTILE_HPP_INCLUDED
 
 #include "projectile.hpp"
+#include "life_time.hpp"
+#include "indeterminate.hpp"
+#include "../../environment/load_context_ptr.hpp"
+#include "../../team.hpp"
+#include "../../movement_speed.hpp"
+#include "../../dim_type.hpp"
+#include "../../space_unit.hpp"
+#include "../../../messages/auto_ptr.hpp"
 #include "../../../aoe_projectile_type.hpp"
 
 namespace sanguis
@@ -13,25 +21,31 @@ namespace entities
 namespace projectiles
 {
 
-class aoe_projectile : public projectile {
+class aoe_projectile
+:
+	public projectile
+{
 protected:
 	aoe_projectile(
 		aoe_projectile_type::type,
 		server::environment::load_context_ptr,
 		team::type,
-		property_map const &,
+		server::movement_speed,
 		dim_type const &dim,
 		life_time,
 		indeterminate::type,
-		space_unit aoe
+		space_unit aoe,
+		space_unit direction
 	);
 	
-	space_unit aoe() const;
+	space_unit
+	aoe() const;
 private:
 	messages::auto_ptr
 	add_message() const;
 
 	aoe_projectile_type::type const type_;
+
 	space_unit const aoe_;
 };
 

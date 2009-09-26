@@ -11,14 +11,13 @@ sanguis::server::perks::ims::ims()
 
 void
 sanguis::server::perks::ims::do_apply(
-	entities::base &entity_
+	entities::base &entity_,
 	time_type,
-	environment::object_ptr,
-	environment::load_context_ptr
+	environment::object_ptr
 )
 {
 	dynamic_cast<
-		movable &
+		entities::movable &
 	>(
 		entity_
 	)

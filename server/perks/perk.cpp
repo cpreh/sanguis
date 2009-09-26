@@ -38,14 +38,12 @@ void
 sanguis::server::perks::perk::apply(
 	entities::base &e,
 	time_type const time,
-	environment::object_ptr const env,
-	environment::load_context_ptr const load_context_
+	environment::object_ptr const env
 )
 {
 	do_apply(
 		e,
 		time,
-		env,
-		load_context_
+		env
 	);
 }

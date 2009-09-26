@@ -4,6 +4,15 @@
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 
+sanguis::server::pos_type const
+sanguis::server::entities::with_dim::pos() const
+{
+	return entities::pos(
+		center(),
+		dim()
+	);
+}
+
 sanguis::server::entities::with_dim::with_dim(
 	dim_type const &dim_
 )
@@ -18,15 +27,6 @@ sanguis::server::dim_type const &
 sanguis::server::entities::with_dim::dim() const
 {
 	return dim_;
-}
-
-sanguis::server::pos_type const
-sanguis::server::entities::with_dim::pos() const
-{
-	return entities::pos(
-		center(),
-		dim()
-	);
 }
 
 sanguis::server::space_unit

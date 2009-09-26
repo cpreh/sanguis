@@ -20,9 +20,10 @@
 sanguis::server::entities::projectiles::grenade::grenade(
 	server::environment::load_context_ptr const load_context_,
 	team::type const team_,
-	space_unit const damage,
+	damage::unit const damage_,
 	space_unit const aoe_,
-	pos_type const &dest_
+	pos_type const &dest_,
+	space_unit const direction_
 )
 :
 	aoe_projectile(
@@ -30,7 +31,10 @@ sanguis::server::entities::projectiles::grenade::grenade(
 		load_context_,
 		team_,
 		movement_speed(
-			0
+			collision::distance(
+				center,
+				dest_
+			)
 		),
 		load_context_->entity_dim(
 			SGE_TEXT("grenade")
@@ -39,7 +43,8 @@ sanguis::server::entities::projectiles::grenade::grenade(
 			2
 		),
 		indeterminate::no,
-		aoe_
+		aoe_,
+		direction_
 	),
 	diff_clock_(),
 	slowdown_time(
@@ -49,7 +54,9 @@ sanguis::server::entities::projectiles::grenade::grenade(
 		sge::time::activation_state::active,
 		diff_clock_.callback()
 	),
-	damage(damage)
+	damage_(
+		damage_
+	)
 {}
 
 void
@@ -58,15 +65,8 @@ sanguis::server::entities::projectiles::grenade::do_damage(
 )
 {}
 
-// TODO
-/*
-	collision::distance(
-		center,
-		dest_
-	)*/
-
 void
-sanguis::server::entities::projectiles::grenade::update(
+sanguis::server::entities::projectiles::grenade::on_update(
 	time_type const time
 )
 {
@@ -74,18 +74,14 @@ sanguis::server::entities::projectiles::grenade::update(
 		time
 	);
 
-	entities::property &speed(
-		property(
-			property_type::movement_speed
-		)
-	);
-
-	if(slowdown_time.update_b())
-		speed.current(
-			speed.current() * static_cast<space_unit>(0.9)
+	if(
+		slowdown_time.update_b()
+	)
+		movement_speed().current(
+			movement_speed().current() * static_cast<space_unit>(0.9)
 		);
 	
-	projectile::update(
+	projectile::on_update(
 		time
 	);
 }
@@ -99,7 +95,7 @@ sanguis::server::entities::projectiles::grenade::on_die()
 				load_context(),
 				team(),
 				aoe(),
-				damage,
+				damage_,
 				1,
 				static_cast<time_type>(0.1),
 				damage::list(
@@ -111,7 +107,6 @@ sanguis::server::entities::projectiles::grenade::on_die()
 		),
 		insert_parameters(
 			center(),
-			angle(),
 			angle()
 		)
 	);

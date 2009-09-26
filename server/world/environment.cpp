@@ -11,7 +11,7 @@ sanguis::server::world::environment::environment(
 sanguis::server::world::environment::~environment()
 {}
 
-sanguis::server::entities::entity & 
+sanguis::server::entities::base & 
 sanguis::server::world::environment::insert(
 	entities::auto_ptr e,
 	entities::insert_parameters const &ip
@@ -145,4 +145,10 @@ sge::collision::world_ptr const
 sanguis::server::world::environment::collision_world() const
 {
 	return world_.collision_world();
+}
+
+sanguis::server::environment::load_context_ptr const
+sanguis::server::world::environment::load_context() const
+{
+	return world_.load_context();
 }

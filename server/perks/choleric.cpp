@@ -32,10 +32,9 @@ sanguis::server::perks::choleric::choleric()
 
 void
 sanguis::server::perks::choleric::do_apply(
-	entities::entity &e,
+	entities::base &e,
 	time_type const time,
-	environment::object_ptr const env,
-	environment::load_context_ptr const load_context_
+	environment::object_ptr const env
 )
 {
 	clock_.update(time);
@@ -49,32 +48,44 @@ sanguis::server::perks::choleric::do_apply(
 		: 10
 	);
 
-	for(unsigned i = 0; i < max; ++i)
+	for(
+		unsigned i = 0;
+		i < max;
+		++i
+	)
+	{
+		space_unit const angle(
+			rand()
+		);
+
 		env->insert(
 			can_raise_level()
 			?
 				entities::auto_ptr(
 					new entities::projectiles::simple_bullet(
-						load_context_,
+						env->load_context(),
 						e.team(),
-						static_cast<space_unit>(2) // damage
+						damage::unit(2), // damage
+						angle
 					)
 				)
 			:
 				entities::auto_ptr(
 					new entities::projectiles::rocket(
-						load_context_,
+						env->load_context(),
 						e.team(),
-						static_cast<space_unit>(5), // damage
-						static_cast<space_unit>(80) // aoe
+						damage::unit(5), // damage
+						static_cast<space_unit>(80), // aoe
+						angle
 					)
 				)
 			,
 			entities::insert_parameters(
 				e.center(),
-				rand()
+				angle
 			)
 		);
+	}
 }
 
 bool

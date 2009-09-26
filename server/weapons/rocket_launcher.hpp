@@ -16,7 +16,10 @@ namespace server
 namespace weapons
 {
 
-class rocket_launcher : public weapon {
+class rocket_launcher
+:
+	public weapon
+{
 public:
 	rocket_launcher(
 		weapon_type::type,

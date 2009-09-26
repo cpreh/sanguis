@@ -6,7 +6,7 @@
 #include "events/shoot.hpp"
 #include "events/stop.hpp"
 #include "states/ready.hpp"
-#include "../entities/entity_with_weapon.hpp"
+#include "../entities/with_weapon.hpp"
 #include "../collision/distance.hpp"
 #include "../collision/bounding_circle.hpp"
 #include "../../exception.hpp"
@@ -33,7 +33,7 @@ sanguis::server::weapons::weapon::type() const
 void
 sanguis::server::weapons::weapon::update(
 	time_type const tm,
-	entities::entity_with_weapon &owner
+	entities::with_weapon &owner
 )
 {
 	if(!usable())
@@ -49,8 +49,9 @@ sanguis::server::weapons::weapon::update(
 
 void
 sanguis::server::weapons::weapon::attack(
-	entities::entity_with_weapon &from,
-	pos_type const &to)
+	entities::with_weapon &from,
+	pos_type const &to
+)
 {
 	if(!usable())
 		return;
@@ -92,8 +93,9 @@ sanguis::server::weapons::weapon::magazine_size() const
 
 bool
 sanguis::server::weapons::weapon::in_range(
-	entities::entity const &from,
-	pos_type const &to) const
+	entities::base const &from,
+	pos_type const &to
+) const
 {
 	return
 		collision::distance(
@@ -234,19 +236,24 @@ sanguis::server::weapons::weapon::reload_time() const
 
 void
 sanguis::server::weapons::weapon::init_attack(
-	entities::entity_with_weapon &e)
+	entities::with_weapon &e
+)
 {
 	e.start_attacking();
+
 	on_init_attack(e);
 }
 
 void
 sanguis::server::weapons::weapon::on_init_attack(
-	entities::entity_with_weapon &)
+	entities::with_weapon &
+)
 {}
 
-void sanguis::server::weapons::weapon::on_castpoint(
-	entities::entity_with_weapon &)
+void
+sanguis::server::weapons::weapon::on_castpoint(
+	entities::with_weapon &
+)
 {}
 
 sge::log::logger &

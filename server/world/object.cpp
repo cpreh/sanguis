@@ -8,7 +8,10 @@
 #include "../collision/execute_end.hpp"
 #include "../collision/test.hpp"
 #include "../collision/satellite.hpp"
-#include "../entities/entity.hpp"
+#include "../entities/base.hpp"
+#include "../entities/movable.hpp"
+#include "../entities/with_health.hpp"
+#include "../entities/with_dim.hpp"
 #include "../message_convert/speed.hpp"
 #include "../message_convert/rotate.hpp"
 #include "../message_convert/move.hpp"
@@ -159,7 +162,7 @@ sanguis::server::world::object::update(
 	{
 		++next;
 
-		entities::entity &e(
+		entities::base &e(
 			*it->second
 		);
 
@@ -195,39 +198,75 @@ sanguis::server::world::object::update(
 		{
 			send_entity_specific(
 				e.id(),
-				message_convert::move(
-					e
-				)
-			);
-
-			send_entity_specific(
-				e.id(),
-				message_convert::speed(
-					e
-				)
-			);
-
-			send_entity_specific(
-				e.id(),
 				message_convert::rotate(
 					e
 				)
 			);
 
-			if(
-				e.update_health()
-			)
-				send_entity_specific(
-					e.id(),
-					message_convert::health(
-						e
+			{
+				entities::with_dim const * const with_dim_(
+					dynamic_cast<
+						entities::with_dim const *
+					>(
+						&e
 					)
 				);
+
+				if(
+					with_dim_
+				)
+					send_entity_specific(
+						with_dim_->id(),
+						message_convert::move(
+							*with_dim_
+						)
+					);
+			}
+
+			{
+				entities::movable const *const movable_(
+					dynamic_cast<
+						entities::movable const *
+					>(
+						&e
+					)
+				);
+
+				if(
+					movable_
+				)
+					send_entity_specific(
+						movable_->id(),
+						message_convert::speed(
+							*movable_	
+						)
+					);
+			}
+
+			{
+				entities::with_health const *const with_health_(
+					dynamic_cast<
+						entities::with_health const *
+					>(
+						&e
+					)
+				);
+
+				if(
+					with_health_
+				)
+					send_entity_specific(
+						with_health_->id(),
+						message_convert::health(
+							*with_health_	
+						)
+					);
+			}
 		}
 	}
 }
 
-sanguis::server::entities::entity &
+sanguis::server::entities::base &
 sanguis::server::world::object::insert(
 	entities::auto_ptr e,
 	entities::insert_parameters const &insert_params
@@ -452,7 +491,7 @@ sanguis::server::world::object::add_sight_range(
 			SGE_TEXT("can't get entity for sight update!")
 		);
 
-	entities::entity &entity_(
+	entities::base &entity_(
 		*it->second
 	);
 
@@ -508,6 +547,12 @@ sge::collision::world_ptr const
 sanguis::server::world::object::collision_world() const
 {
 	return collision_world_;
+}
+
+sanguis::server::environment::load_context_ptr const
+sanguis::server::world::object::load_context() const
+{
+	return load_context_;
 }
 
 void
