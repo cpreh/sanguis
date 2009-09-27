@@ -7,10 +7,9 @@
 #include <sge/optional_impl.hpp>
 
 sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
-	server::environment::load_context_ptr const load_context,
 	team::type const team_,
 	space_unit const radius,
-	space_unit const damage_per_pulse,
+	damage::unit const damage_per_pulse,
 	unsigned const max_pulses,
 	time_type const pulse_diff,
 	damage::array const &damage_values
@@ -18,9 +17,8 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 :
 	aoe_projectile(
 		aoe_projectile_type::aoe_damage,
-		load_context,
 		team_,
-		property_map(),
+		server::movement_speed(0),
 		dim_type(
 			radius * static_cast<space_unit>(2),
 			radius * static_cast<space_unit>(2)
@@ -34,7 +32,8 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 			)
 		),
 		indeterminate::yes,
-		radius
+		radius,
+		static_cast<space_unit>(0)
 	)
 {
 	add_aura(
@@ -51,7 +50,21 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 }
 
 void
+sanguis::server::entities::projectiles::aoe_damage::on_update(
+	time_type const time_
+)
+{
+	projectile::on_update(
+		time_
+	);
+
+	with_auras::on_update(
+		time_
+	);
+}
+
+void
 sanguis::server::entities::projectiles::aoe_damage::do_damage(
-	entity &
+	with_health &
 )
 {}

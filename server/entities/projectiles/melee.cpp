@@ -27,6 +27,7 @@ sanguis::server::entities::projectiles::melee::melee(
 		life_time(
 			1
 		), // short lifetime
+		static_cast<space_unit>(0),
 		indeterminate::yes
 	),
 	damage_(damage_)

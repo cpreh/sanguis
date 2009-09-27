@@ -28,6 +28,11 @@ protected:
 	with_auras();
 
 	~with_auras();
+
+	void
+	on_update(
+		time_type
+	);
 private:
 	void
 	on_center(

@@ -3,7 +3,6 @@
 
 #include "projectile.hpp"
 #include "../with_health.hpp"
-#include "../../environment/load_context_ptr.hpp"
 #include "../../damage/unit.hpp"
 #include "../../team.hpp"
 
@@ -22,7 +21,6 @@ class melee
 {
 public:
 	melee(
-		server::environment::load_context_ptr,
 		team::type team,
 		damage::unit
 	);

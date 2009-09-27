@@ -10,5 +10,5 @@ sanguis::server::entities::pos(
 	dim_type const &dim_
 )
 {
-	return center_ - dim_ / 2;
+	return center_ - dim_ / static_cast<space_unit>(2);
 }

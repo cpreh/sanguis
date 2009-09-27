@@ -2,6 +2,7 @@
 #include "aoe_damage.hpp"
 #include "../property.hpp"
 #include "../insert_parameters.hpp"
+#include "../../collision/create_parameters.hpp"
 #include "../../damage/list.hpp"
 #include "../../damage/meta.hpp"
 #include "../../damage/wrapper.hpp"
@@ -10,12 +11,12 @@
 #include "../../collision/distance.hpp"
 #include "../../environment/object.hpp"
 #include "../../environment/load_context.hpp"
+#include <sge/math/vector/basic_impl.hpp>
 #include <sge/container/map_impl.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/time/millisecond.hpp>
 #include <sge/text.hpp>
 #include <sge/optional_impl.hpp>
-#include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::projectiles::grenade::grenade(
 	server::environment::load_context_ptr const load_context_,
@@ -28,14 +29,8 @@ sanguis::server::entities::projectiles::grenade::grenade(
 :
 	aoe_projectile(
 		aoe_projectile_type::grenade,
-		load_context_,
 		team_,
-		movement_speed(
-			collision::distance(
-				center,
-				dest_
-			)
-		),
+		server::movement_speed(0),
 		load_context_->entity_dim(
 			SGE_TEXT("grenade")
 		),
@@ -56,12 +51,28 @@ sanguis::server::entities::projectiles::grenade::grenade(
 	),
 	damage_(
 		damage_
+	),
+	dest_(
+		dest_
 	)
 {}
+void
+sanguis::server::entities::projectiles::grenade::on_transfer(
+	collision::global_groups const &,
+	collision::create_parameters const &param_
+)
+{
+	movement_speed().current(
+		collision::distance(
+			param_.center(),
+			dest_
+		)
+	);
+}
 
 void
 sanguis::server::entities::projectiles::grenade::do_damage(
-	entity &
+	with_health &
 )
 {}
 
@@ -92,16 +103,15 @@ sanguis::server::entities::projectiles::grenade::on_die()
 	environment()->insert(
 		auto_ptr(
 			new aoe_damage(
-				load_context(),
 				team(),
 				aoe(),
 				damage_,
 				1,
 				static_cast<time_type>(0.1),
 				damage::list(
-					damage::piercing = static_cast<damage::value_type>(0.5)
+					damage::piercing = damage::unit(0.5f)
 				)(
-					damage::fire = static_cast<damage::value_type>(0.5)
+					damage::fire = damage::unit(0.5f)
 				)
 			)
 		),

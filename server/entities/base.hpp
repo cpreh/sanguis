@@ -130,7 +130,7 @@ private:
 	);
 
 	virtual pos_type const
-	initial_speed() const;
+	initial_direction() const;
 
 	friend class auto_weak_link;
 
@@ -185,7 +185,7 @@ private:
 		angle_,
 		direction_;
 	
-	link_container links;
+	link_container links_;
 };
 
 }

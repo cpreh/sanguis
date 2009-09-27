@@ -9,6 +9,7 @@
 #include "../../space_unit.hpp"
 #include "../../pos_type.hpp"
 #include "../../../diff_clock.hpp"
+#include <sge/math/vector/basic_decl.hpp>
 #include <sge/time/timer.hpp>
 
 namespace sanguis
@@ -35,6 +36,12 @@ public:
 	);
 private:
 	void
+	on_transfer(
+		collision::global_groups const &,
+		collision::create_parameters const &
+	);
+
+	void
 	do_damage(
 		with_health &
 	);
@@ -50,6 +57,7 @@ private:
 	diff_clock diff_clock_;
 	sge::time::timer slowdown_time;
 	damage::unit const damage_;
+	pos_type const dest_;
 };
 
 }

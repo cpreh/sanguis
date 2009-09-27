@@ -1,8 +1,5 @@
 #include "unpaused.hpp"
 #include "paused.hpp"
-#include "../entities/player.hpp"
-#include "../entities/entity.hpp"
-#include "../entities/property.hpp"
 #include "../global/context.hpp"
 #include "../message_functor.hpp"
 #include "../message_event.hpp"

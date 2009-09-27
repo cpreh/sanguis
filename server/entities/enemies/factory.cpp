@@ -9,7 +9,6 @@
 #include "../../../exception.hpp"
 #include <sge/container/map_impl.hpp>
 #include <sge/text.hpp>
-#include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::auto_ptr
 sanguis::server::entities::enemies::create(
@@ -24,19 +23,8 @@ sanguis::server::entities::enemies::create(
 				etype,
 				load_context_,
 				damage::no_armor(),
-				boost::assign::map_list_of
-					(
-						entities::property_type::health,
-						entities::property(
-							static_cast<space_unit>(9)
-						)
-					)
-					(
-						entities::property_type::movement_speed,
-						entities::property(
-							static_cast<space_unit>(25)
-						)
-					),
+				health_type(9),
+				movement_speed(25),
 				ai::auto_ptr(
 					new ai::simple()
 				),
@@ -61,13 +49,11 @@ sanguis::server::entities::enemies::create(
 				etype,
 				load_context_,
 				damage::no_armor(),
-				boost::assign::map_list_of
-					(entities::property_type::health,
-					 entities::property(static_cast<space_unit>(3)))
-					(entities::property_type::movement_speed,
-					 entities::property(static_cast<space_unit>(20))),
+				health_type(3),
+				movement_speed(20),
 				ai::auto_ptr(
-					new ai::simple()),
+					new ai::simple()
+				),
 				weapons::auto_ptr(
 					new weapons::melee(
 						weapons::range(75),
@@ -87,13 +73,11 @@ sanguis::server::entities::enemies::create(
 				etype,
 				load_context_,
 				damage::no_armor(),
-				boost::assign::map_list_of
-					(entities::property_type::health,
-					 entities::property(static_cast<space_unit>(3)))
-					(entities::property_type::movement_speed,
-					 entities::property(static_cast<space_unit>(85))),
+				health_type(3),
+				movement_speed(85),
 				ai::auto_ptr(
-					new ai::simple()),
+					new ai::simple()
+				),
 				weapons::auto_ptr(
 					new weapons::melee(
 						weapons::range(75),
@@ -111,11 +95,8 @@ sanguis::server::entities::enemies::create(
 				etype,
 				load_context_,
 				damage::no_armor(),
-				boost::assign::map_list_of
-					(entities::property_type::health,
-					entities::property(static_cast<space_unit>(500)))
-					(entities::property_type::movement_speed,
-					entities::property(static_cast<space_unit>(50))),
+				health_type(500),
+				movement_speed(50),
 				ai::auto_ptr(
 					new ai::simple()
 				),
@@ -136,11 +117,8 @@ sanguis::server::entities::enemies::create(
 				etype,
 				load_context_,
 				damage::no_armor(),
-				boost::assign::map_list_of
-					(entities::property_type::health,
-					entities::property(static_cast<space_unit>(1)))
-					(entities::property_type::movement_speed,
-					entities::property(static_cast<space_unit>(40))),
+				health_type(1),
+				movement_speed(40),
 				ai::auto_ptr(
 					new ai::simple()
 				),
@@ -161,11 +139,8 @@ sanguis::server::entities::enemies::create(
 				etype,
 				load_context_,
 				damage::no_armor(),
-				boost::assign::map_list_of
-					(entities::property_type::health,
-					 entities::property(static_cast<space_unit>(12)))
-					(entities::property_type::movement_speed,
-					 entities::property(static_cast<space_unit>(75))),
+				health_type(12),
+				movement_speed(75),
 				ai::auto_ptr(
 					new ai::simple()
 				),

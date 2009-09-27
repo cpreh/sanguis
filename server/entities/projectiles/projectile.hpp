@@ -15,7 +15,8 @@
 #include "../../../messages/base.hpp"
 #include <sge/time/timer.hpp>
 
-namespace sanguis {
+namespace sanguis
+{
 namespace server
 {
 namespace entities
@@ -49,6 +50,9 @@ protected:
 
 	void
 	die();
+
+	server::team::type
+	team() const;
 private:
 	virtual void
 	on_die();
@@ -61,9 +65,6 @@ private:
 
 	virtual entity_type::type
 	type() const;
-
-	server::team::type
-	team() const;
 
 	virtual boost::logic::tribool const 
 	can_collide_with_entity(

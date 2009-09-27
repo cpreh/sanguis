@@ -1,7 +1,8 @@
 #include "projectile.hpp"
-#include "../base_parameters.hpp"
+#include "../with_health.hpp"
 #include "../../damage/no_armor.hpp"
 #include "../../damage/list.hpp"
+#include "../../health_type.hpp"
 #include "../../../messages/add_projectile.hpp"
 #include "../../../messages/create.hpp"
 #include <sge/time/second_f.hpp>
@@ -60,10 +61,6 @@ sanguis::server::entities::projectiles::projectile::on_update(
 	time_type const time
 )
 {
-	entity::update(
-		time
-	);
-
 	diff_clock_.update(
 		time
 	);
@@ -75,6 +72,12 @@ sanguis::server::entities::projectiles::projectile::die()
 	life_timer_.expire();
 
 	on_die();
+}
+
+sanguis::server::team::type
+sanguis::server::entities::projectiles::projectile::team() const
+{
+	return team_;
 }
 
 void
@@ -97,12 +100,6 @@ sanguis::entity_type::type
 sanguis::server::entities::projectiles::projectile::type() const
 {
 	return type_;
-}
-
-sanguis::server::team::type
-sanguis::server::entities::projectiles::projectile::team() const
-{
-	return team_;
 }
 
 boost::logic::tribool const

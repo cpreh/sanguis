@@ -10,7 +10,7 @@ namespace server
 namespace damage
 {
 
-struct wrapper;
+class wrapper;
 
 }
 }

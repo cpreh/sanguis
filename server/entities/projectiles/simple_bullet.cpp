@@ -1,12 +1,11 @@
 #include "simple_bullet.hpp"
-#include "../property.hpp"
+#include "../with_health.hpp"
 #include "../../damage/list.hpp"
 #include "../../damage/wrapper.hpp"
 #include "../../damage/meta.hpp"
 #include "../../damage/piercing.hpp"
 #include "../../damage/full.hpp"
 #include "../../environment/load_context.hpp"
-#include <sge/container/map_impl.hpp>
 #include <sge/text.hpp>
 
 sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
@@ -18,7 +17,6 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 :
 	projectile(
 		projectile_type::simple_bullet,
-		load_context,
 		team_,
 		server::movement_speed(
 			500
@@ -41,7 +39,7 @@ sanguis::server::entities::projectiles::simple_bullet::do_damage(
 )
 {
 	e.damage(
-		damage,
+		damage_,
 		damage::list(
 			damage::piercing = damage::full
 		)

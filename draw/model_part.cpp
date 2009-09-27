@@ -104,7 +104,7 @@ void sanguis::draw::model_part::update(
 					anim_diff_clock_.callback()));
 			ref_.size() = 
 				sge::math::dim::structure_cast<sge::sprite::dim>(
-					animation_->dim());
+					animation_->series().begin()->dim()); // TODO
 		}
 	}
 	

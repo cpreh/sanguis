@@ -5,5 +5,10 @@
 sanguis::server::damage::list const
 sanguis::server::damage::no_armor()
 {
-	return all(0);
+	return
+		all(
+			unit(
+				0
+			)
+		);
 }

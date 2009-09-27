@@ -8,7 +8,7 @@ namespace server
 namespace damage
 {
 
-struct list;
+class list;
 
 }
 }

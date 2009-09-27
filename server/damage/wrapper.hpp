@@ -3,7 +3,7 @@
 
 #include "wrapper_fwd.hpp"
 #include "meta_fwd.hpp"
-#include "value_type.hpp"
+#include "unit.hpp"
 #include "../../damage_type.hpp"
 
 namespace sanguis
@@ -13,13 +13,16 @@ namespace server
 namespace damage
 {
 
-struct wrapper {
+class wrapper {
+public:
 	wrapper(
-		damage_type::type);
+		damage_type::type
+	);
 	
 	meta const
 	operator=(
-		value_type) const;
+		unit
+	) const;
 private:
 	damage_type::type const e;
 };

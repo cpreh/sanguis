@@ -29,6 +29,12 @@ sanguis::server::entities::with_auras::~with_auras()
 {}
 
 void
+sanguis::server::entities::with_auras::on_update(
+	time_type const
+)
+{}
+
+void
 sanguis::server::entities::with_auras::on_center(
 	pos_type const &center_
 )

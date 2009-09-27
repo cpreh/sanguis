@@ -8,6 +8,7 @@
 #include "../damage/array.hpp"
 #include "../damage/armor.hpp"
 #include "../health_type.hpp"
+#include <sge/signal/scoped_connection.hpp>
 
 namespace sanguis
 {
@@ -70,7 +71,9 @@ private:
 
 	property
 		health_,
-		health_regeneration_;
+		regeneration_;
+	
+	sge::signal::scoped_connection const max_health_change_;
 };
 
 }

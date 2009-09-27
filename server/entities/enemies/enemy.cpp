@@ -1,5 +1,4 @@
 #include "enemy.hpp"
-#include "../base_parameters.hpp"
 #include "../../weapons/weapon.hpp"
 #include "../../ai/base.hpp"
 #include "../../environment/load_context.hpp"
@@ -13,8 +12,9 @@
 sanguis::server::entities::enemies::enemy::enemy(
 	enemy_type::type const etype_,
 	server::environment::load_context_ptr const load_context_,
-	damage::armor const &armor,
-	property_map const &properties,
+	damage::armor const &armor_,
+	health_type const health_,
+	server::movement_speed const movement_speed_,
 	ai::auto_ptr ai_,
 	weapons::auto_ptr weapon_,
 	probability_type const spawn_chance,
@@ -22,19 +22,24 @@ sanguis::server::entities::enemies::enemy::enemy(
 )
 :
 	with_ai(
-		base_parameters(
-			team::monsters,
-			properties,
-			entity_type::enemy,
-			false,
-			load_context_->entity_dim(
-				load::enemy_name(
-					etype_
-				)
-			)
-		),
 		ai_,
 		weapon_
+	),
+	with_buffs(),
+	with_dim(
+		load_context_->entity_dim(
+			load::enemy_name(
+				etype_
+			)
+		)
+	),	
+	with_health(
+		health_,
+		armor_
+	),
+	movable(
+		movement_speed_,
+		static_cast<space_unit>(0)
 	),
 	etype_(etype_),
 	spawn_chance(spawn_chance),
@@ -47,6 +52,24 @@ sanguis::server::entities::enemies::enemy::etype() const
 	return etype_;
 }
 
+void
+sanguis::server::entities::enemies::enemy::on_update(
+	time_type const time_
+)
+{
+	with_ai::on_update(
+		time_
+	);
+
+	with_buffs::on_update(
+		time_
+	);
+
+	with_health::on_update(
+		time_
+	);
+}
+
 sanguis::messages::auto_ptr
 sanguis::server::entities::enemies::enemy::add_message() const
 {
@@ -56,12 +79,24 @@ sanguis::server::entities::enemies::enemy::add_message() const
 			pos(),
 			angle(),
 			abs_speed(),
-			health(),
+			current_health(),
 			max_health(),
 			dim(),
 			etype()
 		)
 	);
+}
+
+sanguis::entity_type::type
+sanguis::server::entities::enemies::enemy::type() const
+{
+	return entity_type::enemy;
+}
+
+sanguis::server::team::type
+sanguis::server::entities::enemies::enemy::team() const
+{
+	return server::team::monsters;
 }
 
 void

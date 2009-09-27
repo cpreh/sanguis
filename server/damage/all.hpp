@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_DAMAGE_ALL_HPP_INCLUDED
 
 #include "list_fwd.hpp"
-#include "value_type.hpp"
+#include "unit.hpp"
 
 namespace sanguis
 {
@@ -13,7 +13,8 @@ namespace damage
 
 list const
 all(
-	value_type);
+	unit
+);
 
 }
 }

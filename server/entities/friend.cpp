@@ -43,6 +43,24 @@ sanguis::server::entities::friend_::friend_(
 	ftype_(ftype_)
 {}
 
+void
+sanguis::server::entities::friend_::on_update(
+	time_type const time_
+)
+{
+	with_ai::on_update(
+		time_
+	);
+
+	with_buffs::on_update(
+		time_
+	);
+
+	with_health::update(
+		time_
+	);
+}
+
 sanguis::entity_type::type
 sanguis::server::entities::friend_::type() const
 {

@@ -2,7 +2,8 @@
 
 sanguis::server::damage::meta::meta(
 	damage_type::type const e,
-	value_type const d)
+	unit const d
+)
 :
 	e(e),
 	d(d)
@@ -14,7 +15,7 @@ sanguis::server::damage::meta::type() const
 	return e;
 }
 
-sanguis::server::damage::value_type
+sanguis::server::damage::unit
 sanguis::server::damage::meta::value() const
 {
 	return d;

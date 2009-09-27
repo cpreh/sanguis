@@ -3,7 +3,10 @@
 
 sanguis::server::damage::list const
 sanguis::server::damage::all(
-	value_type const v)
+	unit const v
+)
 {
-	return list(v);
+	return list(
+		v
+	);
 }

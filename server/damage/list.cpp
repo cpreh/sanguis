@@ -3,7 +3,8 @@
 #include <algorithm>
 
 sanguis::server::damage::list::list(
-	value_type const t)
+	unit const t
+)
 {
 	std::fill(
 		array_.begin(),
@@ -18,7 +19,7 @@ sanguis::server::damage::list::list(
 	std::fill(
 		array_.begin(),
 		array_.end(),
-		static_cast<value_type>(0)
+		unit(0)
 	);
 
 	array_[m.type()] = m.value();

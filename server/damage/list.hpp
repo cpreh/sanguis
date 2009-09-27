@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_DAMAGE_LIST_HPP_INCLUDED
 
 #include "list_fwd.hpp"
-#include "value_type.hpp"
+#include "unit.hpp"
 #include "array.hpp"
 #include "meta_fwd.hpp"
 
@@ -13,13 +13,15 @@ namespace server
 namespace damage
 {
 
-struct list
-{
+class list {
+public:
 	explicit list(
-		meta const &);
+		meta const &
+	);
 	
 	explicit list(
-		value_type);
+		unit	
+	);
 	
 	list &
 	operator()(

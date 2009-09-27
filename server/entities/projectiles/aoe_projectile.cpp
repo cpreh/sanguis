@@ -1,4 +1,5 @@
 #include "aoe_projectile.hpp"
+#include "../../health_type.hpp"
 #include "../../../messages/add_aoe_projectile.hpp"
 #include "../../../messages/create.hpp"
 #include <sge/math/vector/basic_impl.hpp>
@@ -6,22 +7,22 @@
 
 sanguis::server::entities::projectiles::aoe_projectile::aoe_projectile(
 	aoe_projectile_type::type const type_,
-	server::environment::load_context_ptr const load_context_,
 	team::type const team_,
-	property_map const &properties_,
-	dim_type const &dim,
+	server::movement_speed const movement_speed_,
+	dim_type const &dim_,
 	life_time const life_time_,
 	indeterminate::type const indeterminate_,
-	space_unit const aoe_
+	space_unit const aoe_,
+	space_unit const direction_
 )
 :
 	projectile(
 		projectile_type::aoe,
-		load_context_,
 		team_,
-		properties_,
-		dim,
+		movement_speed_,
+		dim_,
 		life_time_,
+		direction_,
 		indeterminate_
 	),
 	type_(type_),
@@ -43,8 +44,8 @@ sanguis::server::entities::projectiles::aoe_projectile::add_message() const
 			pos(),
 			angle(),
 			abs_speed(),
-			health(),
-			max_health(),
+			health_type(0),
+			health_type(0),
 			dim(),
 			aoe_,
 			type_

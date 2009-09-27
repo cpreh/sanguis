@@ -7,6 +7,8 @@
 #include "../auras/update_sight.hpp"
 #include "../../messages/add.hpp"
 #include "../../messages/create.hpp"
+#include <sge/math/vector/basic_impl.hpp>
+#include <sge/math/dim/basic_impl.hpp>
 #include <sge/text.hpp>
 #include <sge/make_auto_ptr.hpp>
 #include <boost/bind.hpp>

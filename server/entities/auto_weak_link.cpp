@@ -1,5 +1,5 @@
 #include "auto_weak_link.hpp"
-#include "entity.hpp"
+#include "base.hpp"
 #include "../../exception.hpp"
 #include <sge/text.hpp>
 
@@ -9,7 +9,8 @@ sanguis::server::entities::auto_weak_link::auto_weak_link()
 {}
 
 sanguis::server::entities::auto_weak_link::auto_weak_link(
-	entity &ref)
+	base &ref
+)
 :
 	ref(&ref)
 {
@@ -17,7 +18,8 @@ sanguis::server::entities::auto_weak_link::auto_weak_link(
 }
 
 sanguis::server::entities::auto_weak_link::auto_weak_link(
-	auto_weak_link const &old)
+	auto_weak_link const &old
+)
 :
 	auto_hook_type(old),
 	ref(old.ref)
@@ -31,7 +33,8 @@ sanguis::server::entities::auto_weak_link::~auto_weak_link()
 
 sanguis::server::entities::auto_weak_link &
 sanguis::server::entities::auto_weak_link::operator=(
-	auto_weak_link const &old)
+	auto_weak_link const &old
+)
 {
 	unlink();
 	auto_hook_type::operator=(old);	
@@ -42,7 +45,8 @@ sanguis::server::entities::auto_weak_link::operator=(
 	return *this;
 }
 
-void sanguis::server::entities::auto_weak_link::unlink()
+void
+sanguis::server::entities::auto_weak_link::unlink()
 {
 	auto_hook_type::unlink();
 	ref = 0;
@@ -57,19 +61,19 @@ sanguis::server::entities::auto_weak_link::unspecified *() const
 		: 0;
 }
 
-sanguis::server::entities::entity &
+sanguis::server::entities::base &
 sanguis::server::entities::auto_weak_link::operator*() const
 {
 	return checked_ref();
 }
 
-sanguis::server::entities::entity *
+sanguis::server::entities::base *
 sanguis::server::entities::auto_weak_link::operator->() const
 {
 	return &checked_ref();
 }
 
-sanguis::server::entities::entity &
+sanguis::server::entities::base &
 sanguis::server::entities::auto_weak_link::checked_ref() const
 {
 	if(!ref)

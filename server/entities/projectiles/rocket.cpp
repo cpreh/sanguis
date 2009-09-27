@@ -11,7 +11,6 @@
 #include "../../environment/load_context.hpp"
 #include <sge/container/map_impl.hpp>
 #include <sge/text.hpp>
-#include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::projectiles::rocket::rocket(
 	server::environment::load_context_ptr const load_context_,
@@ -23,9 +22,8 @@ sanguis::server::entities::projectiles::rocket::rocket(
 :
 	aoe_projectile(
 		aoe_projectile_type::rocket,
-		load_context_,
 		team_,
-		movement_speed(300),
+		server::movement_speed(300),
 		load_context_->entity_dim(
 			SGE_TEXT("rocket")
 		),
@@ -33,7 +31,8 @@ sanguis::server::entities::projectiles::rocket::rocket(
 			10
 		),
 		indeterminate::no,
-		aoe_
+		aoe_,
+		angle_
 	),
 	damage_(
 		damage_
@@ -42,7 +41,7 @@ sanguis::server::entities::projectiles::rocket::rocket(
 
 void
 sanguis::server::entities::projectiles::rocket::do_damage(
-	entity &
+	with_health &
 )
 {
 	die();
@@ -54,10 +53,9 @@ sanguis::server::entities::projectiles::rocket::on_die()
 	environment()->insert(
 		auto_ptr(
 			new aoe_damage(
-				load_context(),
 				team(),
 				aoe(),
-				damage,
+				damage_,
 				1,
 				static_cast<time_type>(0.1),
 				damage::list(

@@ -13,7 +13,7 @@ sanguis::server::entities::with_buffs::add_buff(
 
 sanguis::server::entities::with_buffs::with_buffs()
 :
-	base_(),
+	base(),
 	buffs_()
 {}
 

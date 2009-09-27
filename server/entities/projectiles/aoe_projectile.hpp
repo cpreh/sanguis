@@ -4,7 +4,6 @@
 #include "projectile.hpp"
 #include "life_time.hpp"
 #include "indeterminate.hpp"
-#include "../../environment/load_context_ptr.hpp"
 #include "../../team.hpp"
 #include "../../movement_speed.hpp"
 #include "../../dim_type.hpp"
@@ -28,7 +27,6 @@ class aoe_projectile
 protected:
 	aoe_projectile(
 		aoe_projectile_type::type,
-		server::environment::load_context_ptr,
 		team::type,
 		server::movement_speed,
 		dim_type const &dim,

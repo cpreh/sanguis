@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_MESSAGE_CONVERT_MAX_HEALTH_HPP_INCLUDED
 #define SANGUIS_SERVER_MESSAGE_CONVERT_MAX_HEALTH_HPP_INCLUDED
 
-#include "../entities/entity_fwd.hpp"
+#include "../entities/with_health_fwd.hpp"
 #include "../../messages/auto_ptr.hpp"
 
 namespace sanguis
@@ -13,7 +13,8 @@ namespace message_convert
 
 messages::auto_ptr
 max_health(
-	entities::entity const &);
+	entities::with_health const &
+);
 
 }
 }

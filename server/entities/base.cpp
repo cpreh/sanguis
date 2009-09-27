@@ -1,4 +1,4 @@
-#include "entity.hpp"
+#include "base.hpp"
 #include "auto_weak_link.hpp"
 #include "insert_parameters.hpp"
 #include "collision_groups.hpp"
@@ -6,7 +6,6 @@
 #include "../environment/object.hpp"
 #include "../get_unique_id.hpp"
 #include <sge/math/vector/basic_impl.hpp>
-#include <sge/math/dim/basic_impl.hpp>
 #include <sge/collision/world.hpp>
 #include <sge/collision/shapes/circle.hpp>
 #include <sge/assign/make_container.hpp>
@@ -20,8 +19,8 @@ sanguis::server::entities::base::base()
 	id_(
 		get_unique_id()
 	),
-	angle_(0)
-	links()
+	angle_(0),
+	links_()
 {}
 
 void
@@ -160,7 +159,7 @@ sanguis::server::entities::base::on_update(
 )
 {}
 
-virtual void
+void
 sanguis::server::entities::base::on_center(
 	pos_type const &
 )
@@ -195,7 +194,7 @@ sanguis::server::entities::base::recreate_shapes(
 }
 
 sanguis::server::collision::group_vector const
-sanguis::server::entities::base::collision_groups()
+sanguis::server::entities::base::collision_groups() const
 {
 	return entities::collision_groups(
 		type(),
@@ -208,7 +207,7 @@ sanguis::server::entities::base::insert_link(
 	auto_weak_link &link_
 )
 {
-	links.push_back(
+	links_.push_back(
 		link_
 	);
 }
@@ -218,9 +217,9 @@ sanguis::server::entities::base::can_collide_with(
 	collision::base const &base_
 ) const
 {
-	entity const *const other(
+	base const *const other(
 		dynamic_cast<
-			entity const *
+			base const *
 		>(
 			&base_
 		)
@@ -233,11 +232,15 @@ sanguis::server::entities::base::can_collide_with(
 
 void
 sanguis::server::entities::base::collision_begin(
-	collision::base &b
+	collision::base &base_
 )
 {
-	entity *const other(
-		dynamic_cast<entity *>(&b)
+	base *const other(
+		dynamic_cast<
+			base *
+		>(
+			&base_
+		)
 	);
 
 	if(other)
@@ -248,11 +251,15 @@ sanguis::server::entities::base::collision_begin(
 
 void
 sanguis::server::entities::base::collision_end(
-	collision::base &b
+	collision::base &base_
 )
 {
-	entity *const other(
-		dynamic_cast<entity *>(&b)
+	base *const other(
+		dynamic_cast<
+			base *
+		>(
+			&base_
+		)
 	);
 
 	if(other)
@@ -263,7 +270,7 @@ sanguis::server::entities::base::collision_end(
 
 boost::logic::tribool const
 sanguis::server::entities::base::can_collide_with_entity(
-	entity const &
+	base const &
 ) const
 {
 	return boost::logic::indeterminate;
@@ -271,12 +278,12 @@ sanguis::server::entities::base::can_collide_with_entity(
 
 void
 sanguis::server::entities::base::collision_entity_begin(
-	entity &
+	base &
 )
 {}
 
 void
 sanguis::server::entities::base::collision_entity_end(
-	entity &
+	base &
 )
 {}

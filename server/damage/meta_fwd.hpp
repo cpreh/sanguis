@@ -8,7 +8,7 @@ namespace server
 namespace damage
 {
 
-struct meta;
+class meta;
 
 }
 }

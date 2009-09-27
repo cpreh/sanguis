@@ -3,7 +3,6 @@
 #include "../message_functor.hpp"
 #include "../message_event.hpp"
 #include "../log.hpp"
-#include "../entities/entity.hpp"
 #include "../../messages/unpause.hpp"
 #include "../../messages/create.hpp"
 #include "../../messages/unwrap.hpp"
