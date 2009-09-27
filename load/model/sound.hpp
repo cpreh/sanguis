@@ -7,7 +7,7 @@
 #include <sge/parse/json/member_vector.hpp>
 #include <sge/audio/sound_fwd.hpp>
 #include <sge/audio/file_fwd.hpp>
-#include <boost/tr1/functional.hpp>
+#include <tr1/functional>
 
 namespace sanguis
 {

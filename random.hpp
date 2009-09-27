@@ -1,7 +1,7 @@
 #ifndef SANGUIS_RANDOM_HPP_INCLUDED
 #define SANGUIS_RANDOM_HPP_INCLUDED
 
-#include <boost/tr1/random.hpp>
+#include <tr1/random>
 
 namespace sanguis
 {

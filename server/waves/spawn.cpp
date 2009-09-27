@@ -10,7 +10,7 @@
 #include <sge/math/vector/arithmetic.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>
-#include <boost/tr1/random.hpp>
+#include <tr1/random>
 #include <algorithm>
 
 void

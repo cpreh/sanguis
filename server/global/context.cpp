@@ -19,8 +19,8 @@
 #include <sge/math/vector/to_angle.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <sge/text.hpp>
-#include <boost/tr1/functional.hpp>
 #include <boost/foreach.hpp>
+#include <tr1/functional>
 
 #include "../entities/insert_parameters.hpp"
 

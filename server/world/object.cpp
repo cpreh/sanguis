@@ -38,9 +38,9 @@
 #include <sge/make_shared_ptr.hpp>
 #include <sge/optional_impl.hpp>
 #include <sge/text.hpp>
-#include <boost/tr1/functional.hpp>
 #include <boost/foreach.hpp>
 #include <boost/bind.hpp>
+#include <tr1/functional>
 
 sanguis::server::world::object::object(
 	context_ptr const global_context_,

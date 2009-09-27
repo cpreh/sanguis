@@ -6,7 +6,7 @@
 #include "../entities/projectiles/simple_bullet.hpp"
 #include "../environment/object.hpp"
 #include "../../random.hpp"
-#include <boost/tr1/random.hpp>
+#include <tr1/random>
 
 sanguis::server::weapons::shotgun::shotgun(
 	weapon_type::type const type_,

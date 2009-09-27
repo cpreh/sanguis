@@ -17,8 +17,8 @@
 #include <sge/image/color/rgba8.hpp>
 #include <sge/image/color/init.hpp>
 #include <sge/assert.hpp>
-#include <boost/tr1/random.hpp>
 #include <boost/foreach.hpp>
+#include <tr1/random>
 #include <algorithm>
 #include <limits>
 #include <cmath>
