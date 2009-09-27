@@ -5,7 +5,6 @@
 #include "../../messages/give_weapon.hpp"
 #include "../../messages/change_weapon.hpp"
 #include "../../messages/create.hpp"
-#include "../../truncation_check_cast.hpp"
 #include "../../exception.hpp"
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/text.hpp>
@@ -23,21 +22,24 @@ target_undefined(
 }
 
 sanguis::server::entities::with_weapon::with_weapon(
-	base_parameters const &param,
 	weapons::auto_ptr start_weapon
 )
 :
-	base(param),
+	base(),
 	weapon_(weapon_type::none),
 	target_(target_undefined),
 	attacking(false),
 	reloading(false),
 	attack_ready_(false),
 	aggressive_(false),
+	attack_speed_(
+		1
+	),
+	reload_speed_(
+		1
+	),
 	attack_speed_change_(
-		property(
-			property_type::attack_speed
-		).register_change_callback(
+		attack_speed_.register_change_callback(
 			boost::bind(
 				&with_weapon::attack_speed_change,
 				this,
@@ -46,9 +48,7 @@ sanguis::server::entities::with_weapon::with_weapon(
 		)
 	),
 	reload_speed_change_(
-		property(
-			property_type::reload_speed
-		).register_change_callback(
+		reload_speed_.register_change_callback(
 			boost::bind(
 				&with_weapon::reload_speed_change,
 				this,
@@ -66,14 +66,10 @@ sanguis::server::entities::with_weapon::with_weapon(
 }
 
 void
-sanguis::server::entities::with_weapon::update(
+sanguis::server::entities::with_weapon::on_update(
 	time_type const time
 )
 {
-	base::update(
-		time
-	);
-
 	// change to the first weapon if we have any
 	if(weapon_ == weapon_type::none && !weapons_.empty())
 		change_weapon(
@@ -128,15 +124,11 @@ sanguis::server::entities::with_weapon::change_weapon(
 	if(has_weapon())
 	{
 		active_weapon().attack_speed(
-			property(
-				property_type::attack_speed
-			).current()
+			attack_speed().current()
 		);
 
 		active_weapon().reload_speed(	
-			property(
-				property_type::reload_speed
-			).current()
+			reload_speed().current()
 		);
 
 		attack_ready_ = true;
@@ -296,6 +288,18 @@ sanguis::server::entities::with_weapon::stop_reloading()
 		id(),
 		false	
 	);
+}
+
+sanguis::server::entities::property &
+sanguis::server::entities::with_weapon::attack_speed()
+{
+	return attack_speed_;
+}
+
+sanguis::server::entities::property &
+sanguis::server::entities::with_weapon::reload_speed()
+{
+	return reload_speed_;
 }
 
 void

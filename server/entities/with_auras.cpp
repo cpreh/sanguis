@@ -1,5 +1,6 @@
 #include "with_auras.hpp"
 #include "../auras/aura.hpp"
+#include "../environment/object.hpp"
 #include <boost/foreach.hpp>
 
 void
@@ -53,6 +54,8 @@ sanguis::server::entities::with_auras::on_destroy()
 
 void
 sanguis::server::entities::with_auras::on_transfer(
+	collision::global_groups const &collision_groups_,
+	collision::create_parameters const &create_param
 )
 {
 	BOOST_FOREACH(
@@ -60,7 +63,7 @@ sanguis::server::entities::with_auras::on_transfer(
 		auras_
 	)
 		aura_.recreate(
-			environment_->collision_world(),
+			environment()->collision_world(),
 			collision_groups_,
 			create_param
 		);

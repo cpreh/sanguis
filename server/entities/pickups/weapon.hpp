@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_PICKUPS_WEAPON_HPP_INCLUDED
 
 #include "pickup.hpp"
-#include "../with_weapon_fwd.hpp"
+#include "../base_fwd.hpp"
 #include "../../environment/load_context_ptr.hpp"
 #include "../../team.hpp"
 #include "../../../weapon_type.hpp"
@@ -36,7 +36,7 @@ private:
 
 	void
 	do_pickup(
-		with_weapon &receiver
+		base &receiver
 	);
 
 	weapon_type::type const weapon_type_;

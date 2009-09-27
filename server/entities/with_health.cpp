@@ -15,6 +15,16 @@ sanguis::server::entities::with_health::damage(
 		on_die();
 }
 
+void
+sanguis::server::entities::with_health::die()
+{
+	health().current(
+		0
+	);
+
+	on_die();
+}
+
 sanguis::server::entities::property &
 sanguis::server::entities::with_health::health()
 {

@@ -1,6 +1,6 @@
 #include "ias.hpp"
 #include "../entities/property.hpp"
-#include "../entities/base.hpp"
+#include "../entities/with_weapon.hpp"
 
 sanguis::server::perks::ias::ias()
 :
@@ -17,7 +17,7 @@ sanguis::server::perks::ias::do_apply(
 )
 {
 	dynamic_cast<
-		with_weapon &
+		entities::with_weapon &
 	>(
 		entity_
 	)

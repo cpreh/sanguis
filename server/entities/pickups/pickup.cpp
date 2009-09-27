@@ -1,7 +1,6 @@
 #include "pickup.hpp"
-#include "../with_weapon.hpp"
-#include "../base_parameters.hpp"
 #include "../../environment/load_context.hpp"
+#include "../../health_type.hpp"
 #include "../../../load/pickup_name.hpp"
 #include "../../../messages/add_pickup.hpp"
 #include "../../../messages/create.hpp"
@@ -41,7 +40,7 @@ sanguis::server::entities::pickups::pickup::pickup(
 	team_(team_),
 	ptype_(ptype_),
 	diff_clock_(),
-	lifetime(
+	life_timer_(
 		sge::time::second(
 			30
 		),
@@ -53,7 +52,7 @@ sanguis::server::entities::pickups::pickup::pickup(
 bool
 sanguis::server::entities::pickups::pickup::dead() const
 {
-	return life_time.expired();
+	return life_timer_.expired();
 }
 
 bool
@@ -81,9 +80,7 @@ sanguis::server::entities::pickups::pickup::can_collide_with_entity(
 {
 	return
 		e.team() == team()
-		&& dynamic_cast<
-			with_weapon const *
-		>(&e);
+		&& !e.invulnerable(); // TODO!
 }
 
 void
@@ -97,25 +94,17 @@ sanguis::server::entities::pickups::pickup::collision_entity_begin(
 		return;
 	
 	do_pickup(
-		dynamic_cast<
-			with_weapon &
-		>(
-			e
-		)
+		e
 	);
 
-	life_time.expire();
+	life_timer_.expire();
 }
 
 void
-sanguis::server::entities::pickups::pickup::update(
+sanguis::server::entities::pickups::pickup::on_update(
 	time_type const time
 )
 {
-	entity::update(
-		time
-	);
-
 	diff_clock_.update(
 		time
 	);
@@ -129,7 +118,7 @@ sanguis::server::entities::pickups::pickup::add_message() const
 			id(),
 			pos(),
 			angle(),
-			abs_speed(),
+			pos_type::null(), // TODO
 			health_type(0), // TODO!
 			health_type(0),
 			dim(),

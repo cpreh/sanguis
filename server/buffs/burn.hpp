@@ -3,6 +3,7 @@
 
 #include "../space_unit.hpp"
 #include "../damage/array.hpp"
+#include "../damage/unit.hpp"
 #include "../../diff_clock.hpp"
 #include "../../time_type.hpp"
 #include "buff.hpp"
@@ -15,11 +16,14 @@ namespace server
 namespace buffs
 {
 
-class burn : public buff {
+class burn
+:
+	public buff
+{
 public:
 	burn(
 		entity_id source,
-		space_unit damage,
+		damage::unit,
 		time_type pulse_time,
 		unsigned max_pulses,
 		damage::array const &
@@ -31,7 +35,7 @@ private:
 		time_type
 	);
 
-	space_unit const damage;
+	damage::unit const damage_;
 	diff_clock clock_;
 	sge::time::timer pulse_timer;
 	unsigned pulses;

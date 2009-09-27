@@ -1,19 +1,20 @@
 #include "burn.hpp"
-#include "../entities/entity.hpp"
+#include "../entities/with_health.hpp"
 #include <sge/time/second_f.hpp>
 #include <sge/time/resolution.hpp>
 
 sanguis::server::buffs::burn::burn(
 	entity_id const source_,
-	space_unit const damage,
+	damage::unit const damage_,
 	time_type const pulse_time,
 	unsigned const max_pulses,
-	damage::array const &damage_values)
+	damage::array const &damage_values
+)
 :
 	buff(
 		source_
 	),
-	damage(damage),
+	damage_(damage_),
 	clock_(),
 	pulse_timer(
 		sge::time::second_f(
@@ -30,8 +31,9 @@ sanguis::server::buffs::burn::burn(
 
 void
 sanguis::server::buffs::burn::update(
-	entities::entity &ref,
-	time_type const diff)
+	entities::base &ref,
+	time_type const diff
+)
 {
 	clock_.update(diff);
 
@@ -44,8 +46,12 @@ sanguis::server::buffs::burn::update(
 		return;
 	}
 
-	ref.damage(
-		damage,
+	dynamic_cast<
+		entities::with_health &
+	>(
+		ref
+	).damage(
+		damage_,
 		damage_values
 	);
 }

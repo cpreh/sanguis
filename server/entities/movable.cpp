@@ -11,19 +11,19 @@ sanguis::server::entities::movable::movement_speed()
 }
 
 sanguis::server::space_unit
-sanguis::server::entities::direction() const
+sanguis::server::entities::movable::direction() const
 {
 	return direction_;
 }
 
 void
-sanguis::server::entities::direction(
+sanguis::server::entities::movable::direction(
 	space_unit const ndirection_
 )
 {
 	direction_ = ndirection_;	
 
-	speed_change_(
+	speed_change(
 		direction_
 	);
 }
@@ -35,7 +35,7 @@ sanguis::server::entities::movable::abs_speed() const
 		angle_to_vector(
 			direction_
 		)
-		* movement_speed().current();
+		* movement_speed_.current();
 }
 
 sanguis::server::entities::movable::movable(
@@ -52,7 +52,7 @@ sanguis::server::entities::movable::movable(
 	speed_change_(
 		movement_speed_.register_change_callback(
 			boost::bind(
-				&entity::speed_change,
+				&movable::speed_change,
 				this,
 				_1
 			)
@@ -61,13 +61,13 @@ sanguis::server::entities::movable::movable(
 {}
 
 sanguis::server::pos_type const
-sanguis::server::entities::base::initial_direction() const
+sanguis::server::entities::movable::initial_direction() const
 {
 	return abs_speed();
 }
 
 void
-sanguis::server::entities::base::speed_change(
+sanguis::server::entities::movable::speed_change(
 	property::value_type const s
 )
 {

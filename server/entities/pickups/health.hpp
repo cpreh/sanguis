@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_PICKUPS_HEALTH_HPP_INCLUDED
 
 #include "pickup.hpp"
-#include "../with_weapon_fwd.hpp"
+#include "../base_fwd.hpp"
 #include "../../environment/load_context_ptr.hpp"
 #include "../../health_type.hpp"
 #include "../../team.hpp"
@@ -29,7 +29,7 @@ public:
 private:
 	void
 	do_pickup(
-		with_weapon &receiver
+		base &receiver
 	);
 
 	health_type const amount;

@@ -27,6 +27,9 @@ public:
 		damage::array const &
 	);
 
+	void
+	die();
+
 	property &
 	health();
 

@@ -85,6 +85,12 @@ public:
 
 	void
 	stop_reloading();
+
+	property &
+	attack_speed();
+
+	property &
+	reload_speed();
 private:
 	void stop_attacking();
 

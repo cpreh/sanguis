@@ -27,12 +27,12 @@ protected:
 	with_buffs();
 
 	~with_buffs();
-private:
+
 	void
 	on_update(
 		time_type
 	);
-
+private:
 	typedef boost::ptr_list<
 		buffs::buff
 	> buff_container;

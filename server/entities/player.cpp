@@ -1,5 +1,4 @@
 #include "player.hpp"
-#include "base_parameters.hpp"
 #include "../perks/perk.hpp"
 #include "../weapons/weapon.hpp"
 #include "../environment/object.hpp"
@@ -22,23 +21,24 @@ sanguis::server::entities::player::player(
 )
 :
 	base(),
-	with_weapon(
-		weapons::auto_ptr()
+	movable(
+		speed_,
+		static_cast<space_unit>(0)
+	),
+	with_auras(),
+	with_buffs(),
+	with_dim(
+		load_context_->entity_dim(
+			SGE_TEXT("player")
+		)
 	),
 	with_health(
 		health_,
 		armor_
 	),
 	with_perks(),
-	with_buffs(),
-	with_auras(),
-	with_dim(
-		load_context_->entity_dim(
-			SGE_TEXT("player")
-		)
-	),
-	movable(
-		speed_
+	with_weapon(
+		weapons::auto_ptr()
 	),
 	name_(name_),
 	player_id_(player_id_),
@@ -121,14 +121,15 @@ sanguis::server::entities::player::level_delta() const
 
 bool
 sanguis::server::entities::player::perk_choosable(
-	perk_type::type const p) const
+	perk_type::type const p
+) const
 {
 	return skill_points_
 		&& perk_tree_.choosable(
 			p,
 			level()
 		)
-		&& entity::perk_choosable(p);
+		&& with_perks::perk_choosable(p);
 }
 
 void
@@ -142,6 +143,7 @@ sanguis::server::entities::player::add_perk(
 	with_perks::add_perk(
 		p
 	);
+
 	--skill_points_;
 }
 
@@ -159,7 +161,7 @@ sanguis::server::entities::player::available_perks() const
 		it != ret.end();
 	)
 		if(
-			!entity::perk_choosable(
+			!with_perks::perk_choosable(
 				*it
 			)
 		)
@@ -219,6 +221,10 @@ sanguis::server::entities::player::on_update(
 		time_
 	);
 
+	with_perks::on_update(
+		time_
+	);
+
 	with_weapon::on_update(
 		time_
 	);
@@ -233,7 +239,7 @@ sanguis::server::entities::player::add_message() const
 			pos(),
 			angle(),
 			abs_speed(),
-			health(),
+			current_health(),
 			max_health(),
 			dim(),
 			type()

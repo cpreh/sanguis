@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_PICKUPS_PICKUP_HPP_INCLUDED
 
 #include "../with_dim.hpp"
-#include "../with_weapon_fwd.hpp"
+#include "../base_fwd.hpp"
 #include "../../environment/load_context_ptr.hpp"
 #include "../../team.hpp"
 #include "../../pos_type.hpp"
@@ -65,10 +65,9 @@ private:
 		time_type
 	);
 	
-	// TODO: is it ok that pickups are limited to entities with weapons?
 	virtual void
 	do_pickup(
-		with_weapon &receiver
+		base &receiver
 	) = 0;
 
 	messages::auto_ptr add_message() const;
@@ -76,7 +75,7 @@ private:
 	server::team::type const team_;
 	pickup_type::type const ptype_;
 	diff_clock diff_clock_;
-	sge::time::timer lifetime;
+	sge::time::timer life_timer_;
 };
 
 }

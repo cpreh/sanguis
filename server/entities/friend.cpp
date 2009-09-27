@@ -1,5 +1,4 @@
 #include "friend.hpp"
-#include "base_parameters.hpp"
 #include "pickups/pickup.hpp"
 #include "../weapons/weapon.hpp"
 #include "../ai/base.hpp"
@@ -14,7 +13,7 @@
 sanguis::server::entities::friend_::friend_(
 	friend_type::type const ftype_,
 	server::environment::load_context_ptr const load_context,
-	damage::armor const &armor,
+	damage::armor const &armor_,
 	health_type const health_,
 	server::movement_speed const movement_speed_,
 	ai::auto_ptr ai_,
@@ -22,8 +21,8 @@ sanguis::server::entities::friend_::friend_(
 )
 :
 	with_ai(
-		weapon_,
 		ai_,
+		weapon_
 	),
 	with_buffs(),
 	with_dim(
@@ -37,8 +36,9 @@ sanguis::server::entities::friend_::friend_(
 		health_,
 		armor_
 	),
-	moveable(
-		movement_speed_
+	movable(
+		movement_speed_,
+		static_cast<space_unit>(0)
 	),
 	ftype_(ftype_)
 {}
@@ -64,7 +64,7 @@ sanguis::server::entities::friend_::add_message() const
 			pos(),
 			angle(),
 			abs_speed(),
-			health(),
+			current_health(),
 			max_health(),
 			dim(),
 			ftype_

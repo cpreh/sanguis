@@ -91,7 +91,6 @@ sanguis::server::global::context::insert_player(
 		// FIXME: where to insert the player?
 		entities::insert_parameters(
 			pos_type::null(),
-			0,
 			0
 		)
 	);
@@ -183,16 +182,12 @@ sanguis::server::global::context::player_direction(
 	);
 
 	if (is_null(dir))
-		player_.property(
-			entities::property_type::movement_speed
-		).current(
+		player_.movement_speed().current(
 			static_cast<space_unit>(0)
 		);
 	else
 	{
-		player_.property(
-			entities::property_type::movement_speed
-		).current_to_max();
+		player_.movement_speed().current_to_max();
 
 		player_.direction(
 			*sge::math::vector::to_angle<space_unit>(dir)

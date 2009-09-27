@@ -10,7 +10,6 @@ sanguis::server::entities::insert_parameters_pos(
 	return
 		insert_parameters(
 			pos_,
-			static_cast<space_unit>(0),
 			static_cast<space_unit>(0)
 		);
 }

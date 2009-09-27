@@ -1,6 +1,6 @@
 #include "irs.hpp"
 #include "../entities/property.hpp"
-#include "../entities/entity.hpp"
+#include "../entities/with_weapon.hpp"
 
 sanguis::server::perks::irs::irs()
 :
@@ -11,7 +11,7 @@ sanguis::server::perks::irs::irs()
 
 void
 sanguis::server::perks::irs::do_apply(
-	entities::base &e,
+	entities::base &entity_,
 	time_type,
 	environment::object_ptr
 )
@@ -19,16 +19,15 @@ sanguis::server::perks::irs::do_apply(
 	dynamic_cast<
 		entities::with_weapon &
 	>(
-		e
+		entity_
 	)
-	.
-		
-	e.property(
-		entities::property_type::reload_speed)
-		.multiply_max(factor());
+	.reload_speed().multiply_max(
+		factor()
+	);
 }
 
-bool sanguis::server::perks::irs::can_raise_level() const
+bool
+sanguis::server::perks::irs::can_raise_level() const
 {
 	return level() < 4;
 }
@@ -36,6 +35,7 @@ bool sanguis::server::perks::irs::can_raise_level() const
 sanguis::server::space_unit
 sanguis::server::perks::irs::factor() const
 {
-	return static_cast<space_unit>(level())
+	return
+		static_cast<space_unit>(level())
 		* static_cast<space_unit>(0.5);
 }

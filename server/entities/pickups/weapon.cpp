@@ -1,8 +1,9 @@
 #include "weapon.hpp"
-#include "../entity_with_weapon.hpp"
+#include "../with_weapon.hpp"
 #include "../../weapons/weapon.hpp"
 #include "../../weapons/factory.hpp"
 #include "../../environment/load_context.hpp"
+#include "../../health_type.hpp"
 #include "../../../load/weapon_pickup_name.hpp"
 #include "../../../messages/create.hpp"
 #include "../../../messages/add_weapon_pickup.hpp"
@@ -43,7 +44,7 @@ sanguis::server::entities::pickups::weapon::add_message() const
 			id(),
 			pos(),
 			angle(),
-			abs_speed(),
+			pos_type::null(), // TODO
 			health_type(0), // TODO
 			health_type(0),
 			dim(),
@@ -54,10 +55,15 @@ sanguis::server::entities::pickups::weapon::add_message() const
 
 void
 sanguis::server::entities::pickups::weapon::do_pickup(
-	with_weapon &receiver
+	base &receiver
 )
 {
-	receiver.add_weapon(
+	dynamic_cast<
+		with_weapon &
+	>(
+		receiver
+	)
+	.add_weapon(
 		weapons::create(
 			weapon_type_
 		)

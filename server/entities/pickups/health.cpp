@@ -1,5 +1,5 @@
 #include "health.hpp"
-#include "../entity_with_weapon.hpp"
+#include "../with_health.hpp"
 #include <sge/optional_impl.hpp>
 
 sanguis::server::entities::pickups::health::health(
@@ -19,10 +19,18 @@ sanguis::server::entities::pickups::health::health(
 
 void
 sanguis::server::entities::pickups::health::do_pickup(
-	with_weapon &receiver
+	base &receiver
 )
 {
-	receiver.health(
-		receiver.health() + amount
+	with_health &with_health_(
+		dynamic_cast<
+			with_health &
+		>(
+			receiver
+		)
+	);
+	
+	with_health_.health().current(
+		with_health_.health().current() + amount
 	);
 }

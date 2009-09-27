@@ -5,7 +5,7 @@
 sanguis::server::auras::burn::burn(
 	space_unit const radius,
 	team::type const team,
-	space_unit const damage_per_pulse,
+	damage::unit const damage_per_pulse,
 	time_type const pulse_diff,
 	damage::array const &damage_values
 )

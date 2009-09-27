@@ -1,29 +1,9 @@
 #include "with_perks.hpp"
-
-sanguis::server::entities::with_perks::with_perks(
-	base_parameters const &param_
-)
-:
-	base(
-		param_
-	),
-	perks_()
-{}
-
-void
-sanguis::server::entities::with_perks::update(
-	time_type const time
-)
-	BOOST_FOREACH(
-		perk_container::reference p,
-		perks_
-	)
-		p.second->apply(
-			*this,
-			time,
-			environment()
-		);
-}
+#include "../perks/perk.hpp"
+#include "../log.hpp"
+#include <sge/log/headers.hpp>
+#include <sge/text.hpp>
+#include <boost/foreach.hpp>
 
 void
 sanguis::server::entities::with_perks::add_perk(
@@ -63,6 +43,31 @@ sanguis::server::entities::with_perks::add_perk(
 		type_,
 		p
 	);
+}
+
+sanguis::server::entities::with_perks::with_perks()
+:
+	base(),
+	perks_()
+{}
+
+sanguis::server::entities::with_perks::~with_perks()
+{}
+
+void
+sanguis::server::entities::with_perks::on_update(
+	time_type const time
+)
+{
+	BOOST_FOREACH(
+		perk_container::reference p,
+		perks_
+	)
+		p.second->apply(
+			*this,
+			time,
+			environment()
+		);
 }
 
 bool
