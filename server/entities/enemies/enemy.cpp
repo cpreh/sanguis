@@ -38,7 +38,9 @@ sanguis::server::entities::enemies::enemy::enemy(
 		armor_
 	),
 	movable(
-		movement_speed_,
+		property(
+			movement_speed_
+		),
 		static_cast<space_unit>(0)
 	),
 	etype_(etype_),

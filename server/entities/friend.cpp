@@ -37,7 +37,9 @@ sanguis::server::entities::friend_::friend_(
 		armor_
 	),
 	movable(
-		movement_speed_,
+		property(
+			movement_speed_
+		),
 		static_cast<space_unit>(0)
 	),
 	ftype_(ftype_)

@@ -35,7 +35,7 @@ public:
 	abs_speed() const;
 protected:
 	movable(
-		server::movement_speed max_speed,
+		property const &speed_,
 		space_unit direction_ 
 	);
 private:

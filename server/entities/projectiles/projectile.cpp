@@ -31,7 +31,9 @@ sanguis::server::entities::projectiles::projectile::projectile(
 :
 	base(),
 	movable(
-		movement_speed_,
+		property(
+			movement_speed_
+		),
 		direction_
 	),
 	with_dim(

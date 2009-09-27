@@ -39,12 +39,12 @@ sanguis::server::entities::movable::abs_speed() const
 }
 
 sanguis::server::entities::movable::movable(
-	server::movement_speed const max_speed_,
+	property const &nmovement_speed_,
 	space_unit const direction_
 )
 :
 	movement_speed_(
-		max_speed_
+		nmovement_speed_
 	),
 	direction_(
 		direction_

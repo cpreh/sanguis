@@ -24,7 +24,10 @@ sanguis::server::entities::player::player(
 :
 	base(),
 	movable(
-		speed_,
+		property(
+			static_cast<property::value_type>(0),
+			speed_
+		),
 		static_cast<space_unit>(0)
 	),
 	with_auras(),
