@@ -5,6 +5,7 @@
 #include "with_auras.hpp"
 #include "with_weapon.hpp"
 #include "../ai/auto_ptr.hpp"
+#include "../ai/create_function.hpp"
 
 namespace sanguis
 {
@@ -20,7 +21,7 @@ class with_ai
 {
 protected:
 	with_ai(
-		ai::auto_ptr ai_,
+		ai::create_function const &create_ai_,
 		weapons::auto_ptr start_weapon
 	);
 
@@ -31,6 +32,14 @@ protected:
 		time_type
 	);
 private:
+	void
+	on_transfer(
+		collision::global_groups const &,
+		collision::create_parameters const &
+	);
+
+	ai::create_function const create_ai_;
+
 	ai::auto_ptr ai_;
 };
 

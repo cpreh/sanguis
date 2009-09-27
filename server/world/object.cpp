@@ -134,13 +134,11 @@ sanguis::server::world::object::update(
 		time_
 	);
 
-/*
 	wave_gen_.process(
 		time_,
 		environment(),
 		load_context_
 	);
-*/
 
 	// should we send position updates?
 	bool const update_pos = send_timer_.update_b();
@@ -167,13 +165,6 @@ sanguis::server::world::object::update(
 		entities::base &e(
 			*it->second
 		);
-
-		/*
-		if(
-			!e.active()
-		)
-			continue;
-		*/
 
 		if(
 			e.dead()
@@ -240,7 +231,7 @@ sanguis::server::world::object::update(
 					send_entity_specific(
 						movable_->id(),
 						message_convert::speed(
-							*movable_	
+							*movable_
 						)
 					);
 			}

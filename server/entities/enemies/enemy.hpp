@@ -6,6 +6,7 @@
 #include "../with_dim.hpp"
 #include "../with_health.hpp"
 #include "../movable.hpp"
+#include "../../ai/create_function.hpp"
 #include "../../environment/load_context_ptr.hpp"
 #include "../../movement_speed.hpp"
 #include "../../health_type.hpp"
@@ -37,7 +38,7 @@ public:
 		damage::armor const &,
 		health_type,
 		server::movement_speed,
-		ai::auto_ptr,
+		ai::create_function const &,
 		weapons::auto_ptr weapon,
 		probability_type spawn_chance,
 		exp_type exp

@@ -1,6 +1,6 @@
 #include "sentry.hpp"
 #include "delayed_attack.hpp"
-#include "../ai/simple.hpp"
+#include "../ai/create_simple.hpp"
 #include "../damage/no_armor.hpp"
 #include "../damage/list.hpp"
 #include "../entities/friend.hpp"
@@ -49,9 +49,7 @@ sanguis::server::weapons::sentry::do_attack(
 				damage::no_armor(),
 				health_type(100),
 				movement_speed(0),
-				ai::auto_ptr(
-					new ai::simple()
-				),
+				ai::create_simple(),
 				auto_ptr(
 					sentry_weapon()
 				)

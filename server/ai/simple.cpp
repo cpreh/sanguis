@@ -16,30 +16,21 @@
 #include <boost/bind.hpp>
 
 sanguis::server::ai::simple::simple(
+	entities::with_ai &me_,
 	entities::auto_weak_link owner_
 )
 :
-	me_(0),
+	me_(me_),
 	target_(),
 	owner_(owner_),
 	potential_targets_()
-{}
-
-void
-sanguis::server::ai::simple::bind(
-	entities::with_ai &me
-)
 {
-	SGE_ASSERT(!me_);
-
-	me_ = &me;
-
 	auras::auto_ptr new_aura(
 		sge::make_auto_ptr<
 			auras::aggro
 		>(
 			10, // FIXME
-			me_->team(),
+			me_.team(),
 			boost::bind(
 				&simple::target_enters,
 				this,
@@ -53,7 +44,7 @@ sanguis::server::ai::simple::bind(
 		)
 	);
 
-	me.add_aura(
+	me_.add_aura(
 		new_aura
 	);
 }
@@ -63,17 +54,11 @@ sanguis::server::ai::simple::update(
 	time_type const
 )
 {
-	SGE_ASSERT(me_);
-
-	entities::with_ai &me(
-		*me_
-	);
-
 	if(
 		!target_ && potential_targets_.empty()
 	)
 	{
-		me.aggressive(
+		me_.aggressive(
 			false
 		);
 
@@ -85,7 +70,7 @@ sanguis::server::ai::simple::update(
 	)
 		target_
 			= search_new_target(
-				me,
+				me_,
 				potential_targets_
 			);
 
@@ -99,13 +84,13 @@ sanguis::server::ai::simple::update(
 		sge::math::vector::angle_between<
 			space_unit
 		>(
-			me.center(),
+			me_.center(),
 			target_->center()
 		)
 	);
 
 	if(angle)
-		me.angle(
+		me_.angle(
 			*angle
 		);
 
@@ -113,7 +98,7 @@ sanguis::server::ai::simple::update(
 		dynamic_cast<
 			entities::movable *
 		>(
-			me_
+			&me_
 		)
 	);
 
@@ -135,7 +120,7 @@ sanguis::server::ai::simple::update(
 		if(
 			collision::collides(
 				*target_,
-				me
+				me_
 			)
 		)
 			speed.current(
@@ -145,11 +130,11 @@ sanguis::server::ai::simple::update(
 			speed.current_to_max();
 	}
 
-	me.aggressive(
+	me_.aggressive(
 		true
 	);
 
-	me.target(
+	me_.target(
 		target_->center()
 	);
 }
@@ -176,11 +161,11 @@ sanguis::server::ai::simple::target_enters(
 		target_
 		&& collision::distance(
 			*target_,
-			*me_
+			me_
 		)
 		> collision::distance(
 			new_target,
-			*me_
+			me_
 		)
 	)
 		return;

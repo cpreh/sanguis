@@ -15,7 +15,7 @@ sanguis::server::entities::enemies::enemy::enemy(
 	damage::armor const &armor_,
 	health_type const health_,
 	server::movement_speed const movement_speed_,
-	ai::auto_ptr ai_,
+	ai::create_function const &ai_,
 	weapons::auto_ptr weapon_,
 	probability_type const spawn_chance,
 	exp_type const exp_

@@ -16,7 +16,7 @@ sanguis::server::entities::friend_::friend_(
 	damage::armor const &armor_,
 	health_type const health_,
 	server::movement_speed const movement_speed_,
-	ai::auto_ptr ai_,
+	ai::create_function const &ai_,
 	weapons::auto_ptr weapon_
 )
 :

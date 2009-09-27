@@ -2,7 +2,6 @@
 #define SANGUIS_SERVER_AI_BASE_HPP_INCLUDED
 
 #include "base_fwd.hpp"
-#include "../entities/with_ai_fwd.hpp"
 #include "../../time_type.hpp"
 #include <sge/noncopyable.hpp>
 
@@ -18,11 +17,6 @@ class base {
 protected:
 	base();
 public:
-	virtual void
-	bind(
-		entities::with_ai &me
-	) = 0;
-	
 	virtual void
 	update(
 		time_type

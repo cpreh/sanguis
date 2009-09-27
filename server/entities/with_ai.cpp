@@ -3,7 +3,7 @@
 #include "../ai/base.hpp"
 
 sanguis::server::entities::with_ai::with_ai(
-	ai::auto_ptr ai_,
+	ai::create_function const &create_ai_,
 	weapons::auto_ptr start_weapon
 )
 :
@@ -12,12 +12,9 @@ sanguis::server::entities::with_ai::with_ai(
 	with_weapon(
 		start_weapon
 	),
-	ai_(ai_)
-{
-	this->ai_->bind(
-		*this
-	);
-}
+	create_ai_(create_ai_),
+	ai_()
+{}
 
 sanguis::server::entities::with_ai::~with_ai()
 {}
@@ -37,5 +34,23 @@ sanguis::server::entities::with_ai::on_update(
 
 	ai_->update(
 		time
+	);
+}
+
+void
+sanguis::server::entities::with_ai::on_transfer(
+	collision::global_groups const &groups_,
+	collision::create_parameters const &param_
+)
+{
+	ai_.reset(
+		create_ai_(
+			*this
+		)
+	);
+
+	with_auras::on_transfer(
+		groups_,
+		param_
 	);
 }

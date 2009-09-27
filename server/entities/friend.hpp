@@ -8,7 +8,7 @@
 #include "movable.hpp"
 #include "../environment/load_context_ptr.hpp"
 #include "../damage/armor.hpp"
-#include "../ai/auto_ptr.hpp"
+#include "../ai/create_function.hpp"
 #include "../weapons/auto_ptr.hpp"
 #include "../health_type.hpp"
 #include "../movement_speed.hpp"
@@ -37,7 +37,7 @@ public:
 		damage::armor const &,
 		health_type health,
 		server::movement_speed,
-		ai::auto_ptr,
+		ai::create_function const &,
 		weapons::auto_ptr weapon
 	);
 private:

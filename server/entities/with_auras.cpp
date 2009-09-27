@@ -35,6 +35,23 @@ sanguis::server::entities::with_auras::on_update(
 {}
 
 void
+sanguis::server::entities::with_auras::on_transfer(
+	collision::global_groups const &collision_groups_,
+	collision::create_parameters const &create_param
+)
+{
+	BOOST_FOREACH(
+		aura_container::reference aura_,
+		auras_
+	)
+		aura_.recreate(
+			environment()->collision_world(),
+			collision_groups_,
+			create_param
+		);
+}
+
+void
 sanguis::server::entities::with_auras::on_center(
 	pos_type const &center_
 )
@@ -56,21 +73,4 @@ sanguis::server::entities::with_auras::on_destroy()
 		auras_
 	)
 		aura_.destroy();
-}
-
-void
-sanguis::server::entities::with_auras::on_transfer(
-	collision::global_groups const &collision_groups_,
-	collision::create_parameters const &create_param
-)
-{
-	BOOST_FOREACH(
-		aura_container::reference aura_,
-		auras_
-	)
-		aura_.recreate(
-			environment()->collision_world(),
-			collision_groups_,
-			create_param
-		);
 }

@@ -3,9 +3,9 @@
 #include "../property.hpp"
 #include "../../damage/no_armor.hpp"
 #include "../../damage/list.hpp"
-#include "../../ai/simple.hpp"
 #include "../../weapons/melee.hpp"
 #include "../../weapons/pistol.hpp"
+#include "../../ai/create_simple.hpp"
 #include "../../../exception.hpp"
 #include <sge/container/map_impl.hpp>
 #include <sge/text.hpp>
@@ -25,9 +25,7 @@ sanguis::server::entities::enemies::create(
 				damage::no_armor(),
 				health_type(9),
 				movement_speed(25),
-				ai::auto_ptr(
-					new ai::simple()
-				),
+				ai::create_simple(),
 				weapons::auto_ptr(
 					new weapons::pistol(
 						weapon_type::pistol,
@@ -51,9 +49,7 @@ sanguis::server::entities::enemies::create(
 				damage::no_armor(),
 				health_type(3),
 				movement_speed(20),
-				ai::auto_ptr(
-					new ai::simple()
-				),
+				ai::create_simple(),
 				weapons::auto_ptr(
 					new weapons::melee(
 						weapons::range(75),
@@ -75,9 +71,7 @@ sanguis::server::entities::enemies::create(
 				damage::no_armor(),
 				health_type(3),
 				movement_speed(85),
-				ai::auto_ptr(
-					new ai::simple()
-				),
+				ai::create_simple(),
 				weapons::auto_ptr(
 					new weapons::melee(
 						weapons::range(75),
@@ -97,9 +91,7 @@ sanguis::server::entities::enemies::create(
 				damage::no_armor(),
 				health_type(500),
 				movement_speed(50),
-				ai::auto_ptr(
-					new ai::simple()
-				),
+				ai::create_simple(),
 				weapons::auto_ptr(
 					new weapons::melee(
 						weapons::range(100),
@@ -119,9 +111,7 @@ sanguis::server::entities::enemies::create(
 				damage::no_armor(),
 				health_type(1),
 				movement_speed(40),
-				ai::auto_ptr(
-					new ai::simple()
-				),
+				ai::create_simple(),
 				weapons::auto_ptr(
 					new weapons::melee(
 						weapons::range(75),
@@ -141,9 +131,7 @@ sanguis::server::entities::enemies::create(
 				damage::no_armor(),
 				health_type(12),
 				movement_speed(75),
-				ai::auto_ptr(
-					new ai::simple()
-				),
+				ai::create_simple(),
 				weapons::auto_ptr(
 					new weapons::melee(
 						weapons::range(75),

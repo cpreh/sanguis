@@ -19,16 +19,11 @@ class simple
 	public base 
 {
 public:
-	explicit simple(
+	simple(
+		entities::with_ai &me,
 		entities::auto_weak_link owner
-			= entities::auto_weak_link()
 	);
 private:
-	void
-	bind(
-		entities::with_ai &me
-	);
-	
 	void
 	update(
 		time_type
@@ -44,7 +39,7 @@ private:
 		entities::base &
 	);
 
-	entities::with_ai *me_;
+	entities::with_ai &me_;
 
 	entities::auto_weak_link
 		target_,

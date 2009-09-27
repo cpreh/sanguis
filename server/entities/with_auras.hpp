@@ -33,6 +33,12 @@ protected:
 	on_update(
 		time_type
 	);
+
+	void
+	on_transfer(
+		collision::global_groups const &,
+		collision::create_parameters const &
+	);
 private:
 	void
 	on_center(
@@ -41,12 +47,6 @@ private:
 
 	void
 	on_destroy();
-
-	void
-	on_transfer(
-		collision::global_groups const &,
-		collision::create_parameters const &
-	);
 
 	typedef boost::ptr_list<
 		auras::aura

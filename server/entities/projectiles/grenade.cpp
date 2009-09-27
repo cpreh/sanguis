@@ -56,6 +56,7 @@ sanguis::server::entities::projectiles::grenade::grenade(
 		dest_
 	)
 {}
+
 void
 sanguis::server::entities::projectiles::grenade::on_transfer(
 	collision::global_groups const &,

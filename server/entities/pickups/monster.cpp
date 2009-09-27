@@ -11,6 +11,8 @@
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/optional_impl.hpp>
+#include <boost/spirit/home/phoenix/core/argument.hpp>
+#include <boost/spirit/home/phoenix/object/new.hpp>
 
 sanguis::server::entities::pickups::monster::monster(
 	server::environment::load_context_ptr const load_context,
@@ -40,10 +42,11 @@ sanguis::server::entities::pickups::monster::do_pickup(
 				damage::no_armor(),
 				health_type(100),
 				server::movement_speed(100),
-				ai::auto_ptr(
-					new ai::simple(
-						receiver.link()
-					)
+				boost::phoenix::new_<
+					ai::simple
+				>(
+					boost::phoenix::arg_names::arg1,
+					receiver.link()
 				),
 				weapons::auto_ptr(
 					new weapons::melee(
