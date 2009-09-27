@@ -8,6 +8,7 @@ sanguis::server::entities::with_ai::with_ai(
 )
 :
 	base(),
+	with_auras(),
 	with_weapon(
 		start_weapon
 	),
@@ -26,10 +27,14 @@ sanguis::server::entities::with_ai::on_update(
 	time_type const time
 )
 {
+	with_auras::on_update(
+		time
+	);
+
 	with_weapon::on_update(
 		time
 	);
-	
+
 	ai_->update(
 		time
 	);

@@ -2,8 +2,7 @@
 #include "search_new_target.hpp"
 #include "../auras/aggro.hpp"
 #include "../auras/auto_ptr.hpp"
-#include "../entities/with_weapon.hpp"
-#include "../entities/with_auras.hpp"
+#include "../entities/with_ai.hpp"
 #include "../entities/movable.hpp"
 #include "../entities/base.hpp"
 #include "../entities/property.hpp"
@@ -28,7 +27,7 @@ sanguis::server::ai::simple::simple(
 
 void
 sanguis::server::ai::simple::bind(
-	entities::with_weapon &me
+	entities::with_ai &me
 )
 {
 	SGE_ASSERT(!me_);
@@ -54,12 +53,7 @@ sanguis::server::ai::simple::bind(
 		)
 	);
 
-	dynamic_cast<
-		entities::with_auras &
-	>(
-		me
-	)
-	.add_aura(
+	me.add_aura(
 		new_aura
 	);
 }
@@ -71,7 +65,7 @@ sanguis::server::ai::simple::update(
 {
 	SGE_ASSERT(me_);
 
-	entities::with_weapon &me(
+	entities::with_ai &me(
 		*me_
 	);
 

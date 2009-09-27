@@ -63,7 +63,7 @@ sanguis::server::entities::movable::movable(
 sanguis::server::pos_type const
 sanguis::server::entities::movable::initial_direction() const
 {
-	return abs_speed();
+	return pos_type::null();//abs_speed();
 }
 
 void

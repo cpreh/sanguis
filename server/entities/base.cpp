@@ -116,20 +116,6 @@ sanguis::server::entities::base::angle(
 	angle_ = _angle;
 }
 
-/*
-void
-sanguis::server::entities::base::direction(
-	space_unit const _direction
-)
-{
-	speed_change(
-		property(
-			property_type::movement_speed
-		).current()
-	);
-}
-*/
-
 sanguis::server::pos_type const
 sanguis::server::entities::base::center() const
 {

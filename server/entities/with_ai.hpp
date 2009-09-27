@@ -1,6 +1,8 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_AI_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_AI_HPP_INCLUDED
 
+#include "with_ai_fwd.hpp"
+#include "with_auras.hpp"
 #include "with_weapon.hpp"
 #include "../ai/auto_ptr.hpp"
 
@@ -13,6 +15,7 @@ namespace entities
 
 class with_ai
 :
+	public with_auras,
 	public with_weapon
 {
 protected:
