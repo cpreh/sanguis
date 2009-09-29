@@ -187,11 +187,11 @@ sanguis::server::global::context::player_direction(
 		);
 	else
 	{
-		player_.movement_speed().current_to_max();
-
 		player_.direction(
 			*sge::math::vector::to_angle<space_unit>(dir)
 		);
+		
+		player_.movement_speed().current_to_max();
 	}
 
 	send_unicast_(

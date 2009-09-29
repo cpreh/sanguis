@@ -21,10 +21,10 @@ sanguis::server::entities::movable::direction(
 	space_unit const ndirection_
 )
 {
-	direction_ = ndirection_;	
+	direction_ = ndirection_;
 
 	speed_change(
-		direction_
+		movement_speed_.current()	
 	);
 }
 
