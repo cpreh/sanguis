@@ -3,8 +3,9 @@
 
 #include "movable_fwd.hpp"
 #include "base.hpp"
-#include "property.hpp"
-#include "../movement_speed.hpp"
+#include "property/initial_fwd.hpp"
+#include "property/object.hpp"
+#include "property/value.hpp"
 #include "../space_unit.hpp"
 #include <sge/signal/scoped_connection.hpp>
 
@@ -20,7 +21,7 @@ class movable
 	public virtual base
 {
 public:
-	property &
+	property::object &
 	movement_speed();
 
 	space_unit
@@ -35,7 +36,7 @@ public:
 	abs_speed() const;
 protected:
 	movable(
-		property const &speed_,
+		property::initial const &speed_,
 		space_unit direction_ 
 	);
 private:
@@ -44,10 +45,10 @@ private:
 
 	void
 	speed_change(
-		property::value_type
+		property::value
 	);
 
-	property movement_speed_;
+	property::object movement_speed_;
 
 	space_unit direction_;
 	

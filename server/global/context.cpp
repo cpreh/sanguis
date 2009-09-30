@@ -5,6 +5,7 @@
 #include "../message_convert/speed.hpp"
 #include "../entities/player.hpp"
 #include "../entities/auto_ptr.hpp"
+#include "../entities/property/current_to_max.hpp"
 #include "../world/object.hpp"
 #include "../world/random.hpp"
 #include "../perks/factory.hpp"
@@ -191,7 +192,9 @@ sanguis::server::global::context::player_direction(
 			*sge::math::vector::to_angle<space_unit>(dir)
 		);
 		
-		player_.movement_speed().current_to_max();
+		entities::property::current_to_max(
+			player_.movement_speed()
+		);
 	}
 
 	send_unicast_(

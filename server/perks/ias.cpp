@@ -1,5 +1,7 @@
 #include "ias.hpp"
-#include "../entities/property.hpp"
+#include "../entities/property/object.hpp"
+#include "../entities/property/value.hpp"
+#include "../entities/property/linear_add.hpp"
 #include "../entities/with_weapon.hpp"
 
 sanguis::server::perks::ias::ias()
@@ -16,13 +18,17 @@ sanguis::server::perks::ias::do_apply(
 	environment::object_ptr
 )
 {
-	dynamic_cast<
-		entities::with_weapon &
-	>(
-		entity_
-	)
-	.attack_speed().multiply_max(
-		factor()
+	entities::property::linear_add(
+		dynamic_cast<
+			entities::with_weapon &
+		>(
+			entity_
+		)
+		.attack_speed(),
+		entities::property::value(
+			level(),
+			5
+		)
 	);
 }
 
@@ -30,12 +36,4 @@ bool
 sanguis::server::perks::ias::can_raise_level() const
 {
 	return level() < 8;
-}
-
-sanguis::server::space_unit
-sanguis::server::perks::ias::factor() const
-{
-	return
-		static_cast<space_unit>(level())
-		* static_cast<space_unit>(0.2);
 }

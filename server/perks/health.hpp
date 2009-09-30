@@ -2,7 +2,6 @@
 #define SANGUIS_SERVER_PERKS_HEALTH_HPP_INCLUDED
 
 #include "perk.hpp"
-#include "../space_unit.hpp"
 
 namespace sanguis
 {

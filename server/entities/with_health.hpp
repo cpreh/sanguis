@@ -3,7 +3,8 @@
 
 #include "with_health_fwd.hpp"
 #include "base.hpp"
-#include "property.hpp"
+#include "property/object.hpp"
+#include "property/value.hpp"
 #include "../damage/unit.hpp"
 #include "../damage/array.hpp"
 #include "../damage/armor.hpp"
@@ -31,10 +32,10 @@ public:
 	void
 	die();
 
-	property &
+	property::object &
 	health();
 
-	property &
+	property::object &
 	regeneration();
 
 	health_type
@@ -64,12 +65,12 @@ private:
 
 	void
 	max_health_change(
-		property::value_type
+		property::value
 	);
 
 	damage::armor armor_;
 
-	property
+	property::object
 		health_,
 		regeneration_;
 	

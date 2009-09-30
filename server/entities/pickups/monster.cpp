@@ -41,7 +41,7 @@ sanguis::server::entities::pickups::monster::do_pickup(
 				environment()->load_context(),
 				damage::no_armor(),
 				health_type(100),
-				server::movement_speed(100),
+				entities::movement_speed(100),
 				boost::phoenix::new_<
 					ai::simple
 				>(

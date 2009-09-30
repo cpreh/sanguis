@@ -1,4 +1,5 @@
 #include "player.hpp"
+#include "property/initial.hpp"
 #include "../perks/perk.hpp"
 #include "../weapons/weapon.hpp"
 #include "../environment/object.hpp"
@@ -17,16 +18,16 @@ sanguis::server::entities::player::player(
 	server::environment::load_context_ptr const load_context_,
 	health_type const health_,
 	damage::armor const &armor_,
-	server::movement_speed const speed_,
+	entities::movement_speed const speed_,
 	string const &name_,
 	server::player_id const player_id_
 )
 :
 	base(),
 	movable(
-		property(
-			static_cast<property::value_type>(0),
-			speed_
+		property::initial(
+			speed_,
+			0
 		),
 		static_cast<space_unit>(0)
 	),

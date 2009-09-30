@@ -1,10 +1,9 @@
 #include "movable.hpp"
-#include "../../angle_to_vector.hpp"
+#include "speed_to_abs.hpp"
 #include <sge/math/vector/basic_impl.hpp>
-#include <sge/math/vector/arithmetic.hpp>
 #include <boost/bind.hpp>
 
-sanguis::server::entities::property &
+sanguis::server::entities::property::object &
 sanguis::server::entities::movable::movement_speed()
 {
 	return movement_speed_;
@@ -24,7 +23,7 @@ sanguis::server::entities::movable::direction(
 	direction_ = ndirection_;
 
 	speed_change(
-		movement_speed_.current()	
+		movement_speed_.current()
 	);
 }
 
@@ -32,14 +31,14 @@ sanguis::server::pos_type const
 sanguis::server::entities::movable::abs_speed() const
 {
 	return
-		angle_to_vector(
-			direction_
-		)
-		* movement_speed_.current();
+		speed_to_abs(
+			direction_,
+			movement_speed_.current()
+		);
 }
 
 sanguis::server::entities::movable::movable(
-	property const &nmovement_speed_,
+	property::initial const &nmovement_speed_,
 	space_unit const direction_
 )
 :
@@ -68,12 +67,13 @@ sanguis::server::entities::movable::initial_direction() const
 
 void
 sanguis::server::entities::movable::speed_change(
-	property::value_type const s
+	property::value const s
 )
 {
 	body_speed(
-		angle_to_vector(
-			direction()
-		) * s
+		speed_to_abs(
+			direction(),
+			s
+		)
 	);
 }

@@ -1,5 +1,7 @@
 #include "health.hpp"
-#include "../entities/property.hpp"
+#include "../entities/property/object.hpp"
+#include "../entities/property/value.hpp"
+#include "../entities/property/constant_add.hpp"
 #include "../entities/with_health.hpp"
 
 sanguis::server::perks::health::health()
@@ -16,14 +18,17 @@ sanguis::server::perks::health::do_apply(
 	environment::object_ptr
 )
 {
-	dynamic_cast<
-		entities::with_health &
-	>(
-		entity_
-	)
-	.health().add_to_max(
-		static_cast<space_unit>(level())
-		* static_cast<space_unit>(20)
+	entities::property::constant_add(
+		dynamic_cast<
+			entities::with_health &
+		>(
+			entity_
+		)
+		.health(),
+		entities::property::value(
+			level() * 20,
+			1
+		)
 	);
 }
 

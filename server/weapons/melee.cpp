@@ -3,11 +3,11 @@
 #include "unlimited_magazine_size.hpp"
 #include "unlimited_magazine_count.hpp"
 #include "../environment/object.hpp"
+#include "../entities/property/object.hpp"
 #include "../entities/insert_parameters_pos.hpp"
 #include "../entities/base.hpp"
 #include "../entities/with_weapon.hpp"
 #include "../entities/movable.hpp"
-#include "../entities/property.hpp"
 #include "../entities/projectiles/melee.hpp"
 
 sanguis::server::weapons::melee::melee(
@@ -63,12 +63,14 @@ sanguis::server::weapons::melee::on_init_attack(
 		)
 	);
 
-	if (
+#if 0
+	if(
 		movable_
 	)
 		movable_->movement_speed().restrict(
-			static_cast<space_unit>(0)
+			0
 		);
+#endif
 }
 
 void
@@ -84,8 +86,10 @@ sanguis::server::weapons::melee::on_castpoint(
 		)
 	);
 
-	if (
+#if 0
+	if(
 		movable_
 	)
 		movable_->movement_speed().unrestrict();
+#endif
 }

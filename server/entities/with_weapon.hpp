@@ -2,7 +2,8 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_WEAPON_HPP_INCLUDED
 
 #include "base.hpp"
-#include "property.hpp"
+#include "property/object.hpp"
+#include "property/value.hpp"
 #include "../weapons/auto_ptr.hpp"
 #include "../pos_type.hpp"
 #include "../../weapon_type.hpp"
@@ -86,22 +87,22 @@ public:
 	void
 	stop_reloading();
 
-	property &
+	property::object &
 	attack_speed();
 
-	property &
+	property::object &
 	reload_speed();
 private:
 	void stop_attacking();
 
 	void
 	attack_speed_change(
-		property::value_type
+		property::value
 	);
 
 	void
 	reload_speed_change(
-		property::value_type
+		property::value
 	);
 	
 	typedef boost::ptr_map<
@@ -121,7 +122,7 @@ private:
 		attack_ready_,
 		aggressive_;
 	
-	property
+	property::object
 		attack_speed_,
 		reload_speed_;
 

@@ -1,4 +1,5 @@
 #include "with_health.hpp"
+#include "property/to_float.hpp"
 #include "../environment/object.hpp"
 #include <boost/bind.hpp>
 
@@ -26,13 +27,13 @@ sanguis::server::entities::with_health::die()
 	on_die();
 }
 
-sanguis::server::entities::property &
+sanguis::server::entities::property::object &
 sanguis::server::entities::with_health::health()
 {
 	return health_;
 }
 
-sanguis::server::entities::property &
+sanguis::server::entities::property::object &
 sanguis::server::entities::with_health::regeneration()
 {
 	return regeneration_;
@@ -41,7 +42,9 @@ sanguis::server::entities::with_health::regeneration()
 sanguis::server::health_type
 sanguis::server::entities::with_health::current_health() const
 {
-	return health_type(
+	return property::to_float<
+		health_type
+	>(
 		health_.current()
 	);
 }
@@ -49,7 +52,9 @@ sanguis::server::entities::with_health::current_health() const
 sanguis::server::health_type
 sanguis::server::entities::with_health::max_health() const
 {
-	return health_type(
+	return property::to_float<
+		health_type
+	>(
 		health_.max()
 	);
 }
@@ -108,12 +113,14 @@ sanguis::server::entities::with_health::invulnerable() const
 
 void
 sanguis::server::entities::with_health::max_health_change(
-	property::value_type const value_
+	property::value const value_
 )
 {
 	environment()->max_health_changed(
 		id(),
-		health_type(
+		property::to_float<
+			health_type
+		>(
 			value_
 		)
 	);

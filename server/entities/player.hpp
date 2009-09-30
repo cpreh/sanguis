@@ -8,6 +8,7 @@
 #include "with_health.hpp"
 #include "with_perks.hpp"
 #include "with_weapon.hpp"
+#include "movement_speed.hpp"
 #include "../environment/load_context_ptr.hpp"
 #include "../damage/armor.hpp"
 #include "../perks/auto_ptr.hpp"
@@ -17,7 +18,6 @@
 #include "../string.hpp"
 #include "../exp_type.hpp"
 #include "../player_id.hpp"
-#include "../movement_speed.hpp"
 #include "../health_type.hpp"
 #include "../../perk_type.hpp"
 #include "../../time_type.hpp"
@@ -44,7 +44,7 @@ public:
 		server::environment::load_context_ptr,
 		health_type,
 		damage::armor const &,
-		server::movement_speed,
+		entities::movement_speed,
 		string const &name,
 		server::player_id
 	);

@@ -1,5 +1,7 @@
 #include "ims.hpp"
-#include "../entities/property.hpp"
+#include "../entities/property/object.hpp"
+#include "../entities/property/value.hpp"
+#include "../entities/property/linear_add.hpp"
 #include "../entities/movable.hpp"
 
 sanguis::server::perks::ims::ims()
@@ -16,13 +18,17 @@ sanguis::server::perks::ims::do_apply(
 	environment::object_ptr
 )
 {
-	dynamic_cast<
-		entities::movable &
-	>(
-		entity_
-	)
-	.movement_speed().multiply_max(
-		factor()
+	entities::property::linear_add(
+		dynamic_cast<
+			entities::movable &
+		>(
+			entity_
+		)
+		.movement_speed(),
+		entities::property::value(
+			level(),
+			10
+		)
 	);
 }
 
@@ -30,12 +36,4 @@ bool
 sanguis::server::perks::ims::can_raise_level() const
 {
 	return level() < 7;
-}
-
-sanguis::server::space_unit
-sanguis::server::perks::ims::factor() const
-{
-	return
-		static_cast<space_unit>(level())
-		* static_cast<space_unit>(0.1);
 }

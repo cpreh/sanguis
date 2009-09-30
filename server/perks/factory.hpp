@@ -13,7 +13,8 @@ namespace perks
 
 auto_ptr
 create(
-	perk_type::type);	
+	perk_type::type
+);
 
 }
 }

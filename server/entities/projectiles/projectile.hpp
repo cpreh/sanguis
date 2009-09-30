@@ -6,6 +6,7 @@
 #include "../movable.hpp"
 #include "../with_dim.hpp"
 #include "../with_health_fwd.hpp"
+#include "../movement_speed.hpp"
 #include "../../dim_type.hpp"
 #include "../../space_unit.hpp"
 #include "../../../entity_type.hpp"
@@ -36,7 +37,7 @@ protected:
 	projectile(
 		projectile_type::type,
 		team::type team,
-		server::movement_speed,
+		entities::movement_speed,
 		dim_type const &,
 		life_time,
 		space_unit direction,

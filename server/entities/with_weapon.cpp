@@ -290,13 +290,13 @@ sanguis::server::entities::with_weapon::stop_reloading()
 	);
 }
 
-sanguis::server::entities::property &
+sanguis::server::entities::property::object &
 sanguis::server::entities::with_weapon::attack_speed()
 {
 	return attack_speed_;
 }
 
-sanguis::server::entities::property &
+sanguis::server::entities::property::object &
 sanguis::server::entities::with_weapon::reload_speed()
 {
 	return reload_speed_;
@@ -318,7 +318,7 @@ sanguis::server::entities::with_weapon::stop_attacking()
 
 void
 sanguis::server::entities::with_weapon::attack_speed_change(
-	property::value_type const v
+	property::value const v
 )
 {
 	if(has_weapon())
@@ -327,7 +327,7 @@ sanguis::server::entities::with_weapon::attack_speed_change(
 
 void
 sanguis::server::entities::with_weapon::reload_speed_change(
-	property::value_type const v
+	property::value const v
 )
 {
 	if(has_weapon())

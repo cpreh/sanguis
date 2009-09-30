@@ -2,7 +2,6 @@
 #define SANGUIS_SERVER_PERKS_IAS_HPP_INCLUDED
 
 #include "perk.hpp"
-#include "../space_unit.hpp"
 
 namespace sanguis
 {
@@ -27,9 +26,6 @@ private:
 
 	bool
 	can_raise_level() const;
-
-	space_unit
-	factor() const;
 };
 
 }

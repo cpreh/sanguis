@@ -1,4 +1,5 @@
 #include "projectile.hpp"
+#include "../property/initial_max.hpp"
 #include "../with_health.hpp"
 #include "../../damage/no_armor.hpp"
 #include "../../damage/list.hpp"
@@ -22,7 +23,7 @@ sanguis::server::entities::projectiles::projectile::ptype() const
 sanguis::server::entities::projectiles::projectile::projectile(
 	projectile_type::type const ptype_,
 	team::type const team_,
-	server::movement_speed const movement_speed_,
+	entities::movement_speed const movement_speed_,
 	dim_type const &dim_,
 	life_time const life_time_,
 	space_unit const direction_,
@@ -31,7 +32,7 @@ sanguis::server::entities::projectiles::projectile::projectile(
 :
 	base(),
 	movable(
-		property(
+		property::initial_max(
 			movement_speed_
 		),
 		direction_

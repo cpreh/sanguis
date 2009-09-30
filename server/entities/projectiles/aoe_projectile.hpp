@@ -4,8 +4,8 @@
 #include "projectile.hpp"
 #include "life_time.hpp"
 #include "indeterminate.hpp"
+#include "../movement_speed.hpp"
 #include "../../team.hpp"
-#include "../../movement_speed.hpp"
 #include "../../dim_type.hpp"
 #include "../../space_unit.hpp"
 #include "../../../messages/auto_ptr.hpp"
@@ -28,7 +28,7 @@ protected:
 	aoe_projectile(
 		aoe_projectile_type::type,
 		team::type,
-		server::movement_speed,
+		entities::movement_speed,
 		dim_type const &dim,
 		life_time,
 		indeterminate::type,

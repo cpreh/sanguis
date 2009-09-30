@@ -2,7 +2,6 @@
 #define SANGUIS_SERVER_PERKS_IRS_HPP_INCLUDED
 
 #include "perk.hpp"
-#include "../space_unit.hpp"
 
 namespace sanguis
 {
@@ -25,9 +24,8 @@ private:
 		environment::object_ptr
 	);
 
-	bool can_raise_level() const;
-
-	space_unit factor() const;
+	bool
+	can_raise_level() const;
 };
 
 }

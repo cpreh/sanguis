@@ -4,7 +4,6 @@
 #include "../damage/no_armor.hpp"
 #include "../damage/list.hpp"
 #include "../entities/friend.hpp"
-#include "../entities/property.hpp"
 #include "../entities/insert_parameters.hpp"
 #include "../environment/object.hpp"
 #include <sge/container/map_impl.hpp>
@@ -48,7 +47,7 @@ sanguis::server::weapons::sentry::do_attack(
 				a.environment()->load_context(),
 				damage::no_armor(),
 				health_type(100),
-				movement_speed(0),
+				entities::movement_speed(0),
 				ai::create_simple(),
 				auto_ptr(
 					sentry_weapon()

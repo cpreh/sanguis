@@ -5,7 +5,8 @@
 #include "../entities/with_ai.hpp"
 #include "../entities/movable.hpp"
 #include "../entities/base.hpp"
-#include "../entities/property.hpp"
+#include "../entities/property/object.hpp"
+#include "../entities/property/current_to_max.hpp"
 #include "../collision/collides.hpp"
 #include "../collision/distance.hpp"
 #include <sge/math/vector/angle_between.hpp>
@@ -106,7 +107,7 @@ sanguis::server::ai::simple::update(
 		movable_
 	)
 	{
-		entities::property &speed(
+		entities::property::object &speed(
 			movable_->movement_speed()
 		);
 
@@ -124,10 +125,12 @@ sanguis::server::ai::simple::update(
 			)
 		)
 			speed.current(
-				static_cast<space_unit>(0)
+				0
 			);
 		else
-			speed.current_to_max();
+			entities::property::current_to_max(
+				speed
+			);
 	}
 
 	me_.aggressive(

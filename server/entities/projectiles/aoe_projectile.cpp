@@ -8,7 +8,7 @@
 sanguis::server::entities::projectiles::aoe_projectile::aoe_projectile(
 	aoe_projectile_type::type const type_,
 	team::type const team_,
-	server::movement_speed const movement_speed_,
+	entities::movement_speed const movement_speed_,
 	dim_type const &dim_,
 	life_time const life_time_,
 	indeterminate::type const indeterminate_,

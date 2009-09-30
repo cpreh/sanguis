@@ -6,12 +6,12 @@
 #include "with_dim.hpp"
 #include "with_health.hpp"
 #include "movable.hpp"
+#include "movement_speed.hpp"
 #include "../environment/load_context_ptr.hpp"
 #include "../damage/armor.hpp"
 #include "../ai/create_function.hpp"
 #include "../weapons/auto_ptr.hpp"
 #include "../health_type.hpp"
-#include "../movement_speed.hpp"
 #include "../../friend_type.hpp"
 #include "../../time_type.hpp"
 
@@ -36,7 +36,7 @@ public:
 		server::environment::load_context_ptr,
 		damage::armor const &,
 		health_type health,
-		server::movement_speed,
+		entities::movement_speed,
 		ai::create_function const &,
 		weapons::auto_ptr weapon
 	);
