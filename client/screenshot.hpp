@@ -7,8 +7,8 @@
 #include <sge/input/system_fwd.hpp>
 #include <sge/signal/scoped_connection.hpp>
 #include <sge/input/key_pair_fwd.hpp>
+#include <sge/function/object.hpp>
 #include <sge/noncopyable.hpp>
-#include <boost/function.hpp>
 
 namespace sanguis
 {
@@ -16,7 +16,7 @@ namespace client
 {
 class screenshot
 {
-SGE_NONCOPYABLE(screenshot)
+	SGE_NONCOPYABLE(screenshot)
 public:
 	screenshot(
 		sge::renderer::device_ptr,
@@ -24,7 +24,10 @@ public:
 		sge::input::system_ptr);
 	void process();
 private:
-	boost::function<void (sge::filesystem::path const &)> make_screenshot;
+	sge::function::object<
+		void (sge::filesystem::path const &)
+	> make_screenshot;
+
 	bool active_;
 	sge::signal::scoped_connection const ic;
 

@@ -10,7 +10,7 @@
 #include <sge/random/actor/container.hpp>
 #include <sge/assign/make_container.hpp>
 #include <sge/math/vector/basic_impl.hpp>
-#include <boost/bind.hpp>
+#include <tr1/functional>
 
 sanguis::server::pickup_spawner::pickup_spawner(
 	environment::object_ptr const env,
@@ -25,7 +25,7 @@ sanguis::server::pickup_spawner::pickup_spawner(
 		>(
 			sge::random::actor::element(
 				static_cast<sge::random::actor::float_type>(4),
-				boost::bind(
+				std::tr1::bind(
 					&pickup_spawner::spawn_health,
 					this
 				)
@@ -34,7 +34,7 @@ sanguis::server::pickup_spawner::pickup_spawner(
 		(
 			sge::random::actor::element(
 				static_cast<sge::random::actor::float_type>(0.3),
-				boost::bind(
+				std::tr1::bind(
 					&pickup_spawner::spawn_monster,
 					this
 				)
@@ -43,7 +43,7 @@ sanguis::server::pickup_spawner::pickup_spawner(
 		(
 			sge::random::actor::element(
 				static_cast<sge::random::actor::float_type>(2),
-				boost::bind(
+				std::tr1::bind(
 					&pickup_spawner::spawn_weapon,
 					this,
 					sanguis::weapon_type::pistol
@@ -53,7 +53,7 @@ sanguis::server::pickup_spawner::pickup_spawner(
 		(
 			sge::random::actor::element(
 				static_cast<sge::random::actor::float_type>(0.8),
-				boost::bind(
+				std::tr1::bind(
 					&pickup_spawner::spawn_weapon,
 					this,
 					sanguis::weapon_type::shotgun
@@ -63,7 +63,7 @@ sanguis::server::pickup_spawner::pickup_spawner(
 		(
 			sge::random::actor::element(
 				static_cast<sge::random::actor::float_type>(1),
-				boost::bind(
+				std::tr1::bind(
 					&pickup_spawner::spawn_weapon,
 					this,
 					sanguis::weapon_type::rocket_launcher
@@ -73,7 +73,7 @@ sanguis::server::pickup_spawner::pickup_spawner(
 		(
 			sge::random::actor::element(
 				static_cast<sge::random::actor::float_type>(4),
-				boost::bind(
+				std::tr1::bind(
 					&pickup_spawner::spawn_weapon,
 					this,
 					sanguis::weapon_type::grenade
@@ -83,7 +83,7 @@ sanguis::server::pickup_spawner::pickup_spawner(
 		(
 			sge::random::actor::element(
 				static_cast<sge::random::actor::float_type>(0.3),
-				boost::bind(
+				std::tr1::bind(
 					&pickup_spawner::spawn_weapon,
 					this,
 					sanguis::weapon_type::sentry

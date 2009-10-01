@@ -3,9 +3,9 @@
 
 #include "../space_unit.hpp"
 #include <sge/signal/object.hpp>
+#include <sge/function/object_fwd.hpp>
 #include <sge/signal/auto_connection.hpp>
 #include <sge/shared_ptr.hpp>
-#include <boost/function.hpp>
 
 namespace sanguis
 {
@@ -23,7 +23,7 @@ public:
 		value_type const &
 	);
 
-	typedef boost::function<
+	typedef sge::function::object<
 		change_callback_fn
 	> change_callback;
 

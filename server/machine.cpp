@@ -6,16 +6,14 @@
 #include "../messages/connect.hpp"
 #include "../messages/disconnect.hpp"
 #include "../exception.hpp"
-
 #include <sge/console/gfx.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/container/raw_vector_impl.hpp>
 #include <sge/container/map_impl.hpp>
 #include <sge/algorithm/append.hpp>
 #include <sge/text.hpp>
-
-#include <boost/bind.hpp>
 #include <boost/foreach.hpp>
+#include <tr1/functional>
 
 sanguis::server::machine::machine(
 	load::context const &resources_,
@@ -32,30 +30,30 @@ sanguis::server::machine::machine(
 	),
 	s_conn(
 		net_.register_connect(
-			boost::bind(
+			std::tr1::bind(
 				&machine::connect_callback,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			)
 		)
 	),
 	s_disconn(
 		net_.register_disconnect(
-			boost::bind(
+			std::tr1::bind(
 				&machine::disconnect_callback,
 				this,
-				_1,
-				_2
+				std::tr1::placeholders::_1,
+				std::tr1::placeholders::_2
 			)
 		)
 	),
 	s_data(
 		net_.register_data(
-			boost::bind(
+			std::tr1::bind(
 				&machine::data_callback,
 				this,
-				_1,
-				_2
+				std::tr1::placeholders::_1,
+				std::tr1::placeholders::_2
 			)
 		)
 	),

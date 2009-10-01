@@ -89,8 +89,8 @@ protected:
 		weapons::magazine_size,
 		weapons::magazine_count,
 		base_cooldown,
-		cast_point,
-		reload_time
+		weapons::cast_point,
+		weapons::reload_time
 	);
 
 	virtual void

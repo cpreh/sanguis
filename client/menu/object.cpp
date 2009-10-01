@@ -8,22 +8,18 @@
 #include <sge/gui/layouts/horizontal.hpp>
 #include <sge/gui/layouts/vertical.hpp>
 #include <sge/gui/make_image.hpp>
+#include <sge/sprite/parameters.hpp>
+#include <sge/texture/part_raw.hpp>
 #include <sge/image/loader.hpp>
 #include <sge/image/file.hpp>
+#include <sge/renderer/filter/linear.hpp>
+#include <sge/renderer/resource_flags_none.hpp>
+#include <sge/renderer/device.hpp>
 #include <sge/assign/make_container.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/text.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <tr1/functional>
-#include <boost/bind.hpp>
-
-#include <sge/sprite/parameters.hpp>
-#include <sge/make_shared_ptr.hpp>
-#include <sge/renderer/filter/linear.hpp>
-#include <sge/renderer/resource_flags_none.hpp>
-#include <sge/renderer/device.hpp>
-#include <sge/texture/part_raw.hpp>
-#include "../../media_path.hpp"
 
 namespace
 {
@@ -51,34 +47,35 @@ sanguis::client::menu::object::object(
 		sys_.input_system(),
 		sge::gui::skins::ptr(
 			new sge::gui::skins::standard(
-				sys_.font_system())),
-		_cursor),
-
+				sys_.font_system()
+			)
+		),
+		_cursor
+	),
 	main_(
 		m,
 		buttons_path,
-		sys_),
-	
+		sys_
+	),
 	connect_(
 		m,
 		buttons_path,
 		labels_path,
-		sys_),
-
+		sys_
+	),
 	connect_box_(
 		m,
-		sys_),
-	
+		sys_
+	),
 	highscore_(
 		m,
 		buttons_path,
-		sys_),
-
+		sys_
+	),
 	mover_(
 		m,
 		main_.parent
 	),
-
 	connections_(
 		sge::assign::make_container<
 			sge::signal::connection_manager::container
@@ -86,69 +83,99 @@ sanguis::client::menu::object::object(
 		(
 			sge::signal::shared_connection(
 				main_.connect.register_clicked(
-					boost::bind(
+					std::tr1::bind(
 						&mover::reset,
 						&mover_,
-						std::tr1::ref(connect_.parent))))
+						std::tr1::ref(connect_.parent)
+					)
+				)
+			)
 		)
 		(
 			sge::signal::shared_connection(
 				main_.start.register_clicked(
-					boost::bind(
+					std::tr1::bind(
 						&object::start_server,
-						this)))
+						this
+					)
+				)
+			)
 		)
 		(
 			sge::signal::shared_connection(
 				main_.highscore.register_clicked(
-					boost::bind(
+					std::tr1::bind(
 						&mover::reset,
 						&mover_,
-						std::tr1::ref(highscore_.parent))))
+						std::tr1::ref(highscore_.parent)
+					)
+				)
+			)
 		)
 		(
 			sge::signal::shared_connection(
 				main_.exit.register_clicked(
-					_callbacks.quit_))
+					_callbacks.quit_
+				)
+			)
 		)
 		(
 			sge::signal::shared_connection(
 				connect_.connect_.register_clicked(
-					boost::bind(
+					std::tr1::bind(
 						&object::connect_from_menu,
-						this)))
+						this
+					)
+				)
+			)
 		)
 		(
 			sge::signal::shared_connection(
 				connect_.return_.register_clicked(
-					boost::bind(
+					std::tr1::bind(
 						&mover::reset,
 						&mover_,
-						std::tr1::ref(main_.parent))))
+						std::tr1::ref(main_.parent)
+					)
+				)
+			)
 		)
 		(
 			sge::signal::shared_connection(
 				connect_box_.buttons_retry.register_clicked(
-					boost::bind(
+					std::tr1::bind(
 						&object::connect,
 						this,
-						std::tr1::cref(connection_host_),
-						std::tr1::cref(connection_port_))))
+						std::tr1::ref(
+							connection_host_
+						),
+						std::tr1::ref(
+							connection_port_
+						)
+					)
+				)
+			)
 		)
 		(
 			sge::signal::shared_connection(
 				highscore_.back_button.register_clicked(
-					boost::bind(
+					std::tr1::bind(
 						&mover::reset,
 						&mover_,
-						std::tr1::ref(main_.parent))))
+						std::tr1::ref(main_.parent)
+					)
+				)
+			)
 		)
 		(
 			sge::signal::shared_connection(
 				connect_box_.buttons_cancel.register_clicked(
-					boost::bind(
+					std::tr1::bind(
 						&object::cancel_connect,
-						this)))
+						this
+					)
+				)
+			)
 		)
 	),
 

@@ -21,8 +21,8 @@
 #include <sge/math/vector/structure_cast.hpp>
 #include <sge/minmax_pair_impl.hpp>
 #include <sge/audio/sound.hpp>
-#include <boost/bind.hpp>
 #include <boost/assign/list_of.hpp>
+#include <tr1/functional>
 
 namespace
 {
@@ -142,10 +142,11 @@ sanguis::draw::explosion::explosion(
 	particle::base_ptr n(
 		new particle::explosion(
 			properties_,
-			boost::bind(
+			std::tr1::bind(
 				&explosion::generate_particle,
 				this,
-				_1),
+				std::tr1::placeholders::_1
+			),
 			particle::point::null(), // pos
 			//sge::math::structure_cast<
 			//	particle::point::value_type
@@ -183,10 +184,11 @@ sanguis::draw::explosion::generate_explosion()
 	return particle::base_ptr(
 		new particle::explosion(
 			properties_,
-			boost::bind(
+			std::tr1::bind(
 				&explosion::generate_particle,
 				this,
-				_1),
+				std::tr1::placeholders::_1
+			),
 			particle::point::null(), // position
 			particle::point::null(), // speed
 			static_cast<particle::depth>(0),

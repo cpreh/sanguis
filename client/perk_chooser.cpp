@@ -21,8 +21,9 @@
 #include <sge/text.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <sge/lexical_cast.hpp>
+#include <tr1/functional>
 #include <boost/foreach.hpp>
-#include <boost/bind.hpp>
+#include <utility>
 
 namespace
 {
@@ -58,8 +59,10 @@ sge::gui::point const dialog_pos()
 }
 
 sanguis::client::perk_chooser::activation::activation(
-	perk_chooser &_instance)
-	: instance_(_instance)
+	perk_chooser &_instance
+)
+:
+	instance_(_instance)
 {
 	SGE_ASSERT(!instance_.activated());
 	instance_.activated(true);
@@ -203,12 +206,15 @@ void sanguis::client::perk_chooser::regenerate_widgets()
 	regenerate_label();
 
 	buttons_.clear();
+
 	connections_.clear();
+
 	BOOST_FOREACH(perk_container::const_reference r,perks_)
 	{
 		image_map::const_iterator const pi = 
 			load_from_cache(
-				r);
+				r
+			);
 
 		buttons_.push_back(
 			new sge::gui::widgets::buttons::image(
@@ -217,14 +223,19 @@ void sanguis::client::perk_chooser::regenerate_widgets()
 				pi->second.normal,
 				pi->second.hover,
 				pi->second.hover,
-				pi->second.hover));
+				pi->second.hover
+			)
+		);
 
 		connections_.connect(
 			buttons_.back().register_clicked(
-				boost::bind(
+				std::tr1::bind(
 					&perk_chooser::choose_callback,
 					this,
-					r)));
+					r
+				)
+			)
+		);
 	}
 }
 
@@ -296,7 +307,9 @@ sanguis::client::perk_chooser::image_map::const_iterator const
 	pi = images_.insert(
 		std::make_pair(
 			r,
-			new_image)).first;
+			new_image
+		)
+	).first;
 
 	return pi;
 }

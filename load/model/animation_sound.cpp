@@ -7,8 +7,8 @@
 #include <sge/log/headers.hpp>
 #include <sge/text.hpp>
 #include <sge/string.hpp>
-#include <tr1/array>
 #include <boost/foreach.hpp>
+#include <tr1/array>
 #include <utility>
 #include <iterator>
 

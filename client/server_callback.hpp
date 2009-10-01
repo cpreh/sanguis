@@ -2,14 +2,14 @@
 #define SANGUIS_CLIENT_SERVER_CALLBACK_HPP_INCLUDED
 
 #include "../net/port_type.hpp"
-#include <boost/function.hpp>
+#include <sge/function/object_fwd.hpp>
 
 namespace sanguis
 {
 namespace client
 {
 
-typedef boost::function<
+typedef sge::function::object<
 	void (
 		net::port_type
 	)

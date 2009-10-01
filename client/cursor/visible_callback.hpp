@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_CURSOR_VISIBLE_CALLBACK_HPP_INCLUDED
 
 #include "visible_fn.hpp"
-#include <boost/function.hpp>
+#include <sge/function/object_fwd.hpp>
 
 namespace sanguis
 {
@@ -10,7 +10,11 @@ namespace client
 {
 namespace cursor
 {
-typedef boost::function<visible_fn> visible_callback;
+
+typedef sge::function::object<
+	visible_fn
+> visible_callback;
+
 }
 }
 }

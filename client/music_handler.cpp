@@ -9,8 +9,9 @@
 #include <sge/log/headers.hpp>
 #include <sge/exception.hpp>
 #include <sge/text.hpp>
-#include <boost/bind.hpp>
-#include <boost/lexical_cast.hpp>
+#include <sge/lexical_cast.hpp>
+#include <sge/bad_lexical_cast.hpp>
+#include <tr1/functional>
 
 sanguis::client::music_handler::music_handler(
 	sge::console::gfx &_console,
@@ -21,10 +22,10 @@ sanguis::client::music_handler::music_handler(
 	volume_connection_(
 		console_.object().insert(
 			SGE_TEXT("music_volume"),
-			boost::bind(
+			std::tr1::bind(
 				&music_handler::volume,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			),
 			SGE_TEXT("takes values from 0 to 100, changes the music volume in percent")
 		)
@@ -77,14 +78,14 @@ void sanguis::client::music_handler::volume(sge::console::arg_list const &a)
 	try
 	{
 		current_->attenuation(
-			boost::lexical_cast<
+			sge::lexical_cast<
 				sge::audio::unit
 			>(
 				a[1]
 			)
 		);
 	}
-	catch (boost::bad_lexical_cast const &)
+	catch (sge::bad_lexical_cast const &)
 	{
 		console_.print(SGE_TEXT("invalid numeric argument"));
 	}

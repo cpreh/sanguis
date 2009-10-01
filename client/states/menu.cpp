@@ -18,8 +18,8 @@
 #include <sge/lexical_cast.hpp>
 #include <sge/text.hpp>
 #include <sge/iconv.hpp>
-#include <boost/bind.hpp>
 #include <boost/mpl/vector.hpp>
+#include <tr1/functional>
 #include <ostream>
 
 sanguis::client::states::menu::menu(
@@ -30,21 +30,21 @@ sanguis::client::states::menu::menu(
 		context<machine>().sys(),
 		context<machine>().cursor(),
 		client::menu::callbacks::object(
-			boost::bind(
+			std::tr1::bind(
 				&menu::connect,
 				this,
-				_1,
-				_2
+				std::tr1::placeholders::_1,
+				std::tr1::placeholders::_2
 			),
-			boost::bind(
+			std::tr1::bind(
 				&menu::cancel_connect,
 				this
 			),
-			boost::bind(
+			std::tr1::bind(
 				&machine::start_server,
 				&context<machine>()
 			),
-			boost::bind(
+			std::tr1::bind(
 				&machine::quit,
 				&context<machine>()
 			)
@@ -68,7 +68,8 @@ sanguis::client::states::menu::react(
 	context<machine>().dispatch();
 
 	menu_.process(
-		t.delta());
+		t.delta()
+	);
 
 	return discard_event();
 }
@@ -89,10 +90,10 @@ sanguis::client::states::menu::react(
 	>(
 		*this,
 		*m.message(),
-		boost::bind(
+		std::tr1::bind(
 			&menu::handle_default_msg,
 			this,
-			_1
+			std::tr1::placeholders::_1
 		)
 	);
 }

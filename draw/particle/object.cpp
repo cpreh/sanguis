@@ -22,19 +22,27 @@ sanguis::draw::particle::object::object(
 		depth_type(0),
 		rotation_type(0),
 		rotation_type(0),
-		_e),
+		_e
+	),
 	sprite_(
 		sge::sprite::intrusive::parameters(
 			_e.system(),
 			z_ordering(
-				_type))
+				_type
+			)
+		)
 		.size(
 			// TODO: maybe resize with respect to the images.dim() ratio here
 			sge::sprite::dim(
 				static_cast<sge::sprite::unit>(
-					2*_aoe),
+					2*_aoe
+				),
 				static_cast<sge::sprite::unit>(
-					2*_aoe)))),
+					2*_aoe
+				)
+			)
+		)
+	),
 	animation_context_(
 		_animation_context),
 	animation_(),

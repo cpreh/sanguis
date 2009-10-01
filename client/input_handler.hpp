@@ -4,7 +4,7 @@
 #include "player_action_fwd.hpp"
 #include <sge/input/key_pair_fwd.hpp>
 #include <sge/input/key_state.hpp>
-#include <boost/function.hpp>
+#include <sge/function/object.hpp>
 
 namespace sanguis
 {
@@ -13,7 +13,7 @@ namespace client
 
 class input_handler {
 public:
-	typedef boost::function<
+	typedef sge::function::object<
 		void (player_action const &)
 	> post_fun;
 

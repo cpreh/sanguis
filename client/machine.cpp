@@ -48,7 +48,7 @@
 #include <sge/renderer/texture.hpp>
 #include <sge/utf8/convert.hpp>
 #include <sge/fstream.hpp>
-#include <boost/bind.hpp>
+#include <tr1/functional>
 
 sanguis::client::machine::machine(
 	server_callback const &_server_callback,
@@ -62,7 +62,7 @@ sanguis::client::machine::machine(
 	resources_(_resources),
 	s_conn(
 		net_.register_connect(
-			boost::bind(
+			std::tr1::bind(
 				&machine::connect_callback,
 				this
 			)
@@ -70,19 +70,19 @@ sanguis::client::machine::machine(
 	),
 	s_disconn(
 		net_.register_disconnect(
-			boost::bind(
+			std::tr1::bind(
 				&machine::disconnect_callback,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			)
 		)
 	),
 	s_data(
 		net_.register_data(
-			boost::bind(
+			std::tr1::bind(
 				&machine::data_callback,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			)
 		)
 	),
@@ -93,14 +93,15 @@ sanguis::client::machine::machine(
 	console(_console),
 	console_stdlib(
 		_console.object(),
-		boost::bind(
+		std::tr1::bind(
 			&sge::console::gfx::print,
 			&_console,
-			_1),
-		boost::bind(
+			std::tr1::placeholders::_1
+		),
+		std::tr1::bind(
 			&sge::console::gfx::print,
 			&_console,
-			_1
+			std::tr1::placeholders::_1
 		)
 	),
 	console_wrapper_(
@@ -118,7 +119,9 @@ sanguis::client::machine::machine(
 	cursor_(
 		new sanguis::client::cursor::object(
 			sys_.image_loader(),
-			sys_.renderer())),
+			sys_.renderer()
+		)
+	),
 	gameover_names_(),
 	gameover_score_()
 	/*
@@ -364,8 +367,10 @@ sanguis::client::machine::font()
 	return font_;
 }
 
-bool sanguis::client::machine::key_pressed(
-	sge::input::key_code const key) const
+bool
+sanguis::client::machine::key_pressed(
+	sge::input::key_code const key
+) const
 {
 	return ks[key];
 }
@@ -394,23 +399,28 @@ sanguis::client::machine::cursor() const
 	return cursor_;
 }
 
-sanguis::client::highscore::name_container const &sanguis::client::machine::gameover_names() const
+sanguis::client::highscore::name_container const &
+sanguis::client::machine::gameover_names() const
 {
 	return gameover_names_;
 }
 
-sanguis::client::highscore::name_container &sanguis::client::machine::gameover_names()
+sanguis::client::highscore::name_container &
+sanguis::client::machine::gameover_names()
 {
 	return gameover_names_;
 }
 
-sanguis::client::highscore::score_type sanguis::client::machine::gameover_score()
+sanguis::client::highscore::score_type
+sanguis::client::machine::gameover_score()
 {
 	return gameover_score_;
 }
 
-void sanguis::client::machine::gameover_score(
-	client::highscore::score_type const _gameover_score)
+void
+sanguis::client::machine::gameover_score(
+	client::highscore::score_type const _gameover_score
+)
 {
 	gameover_score_ = _gameover_score;
 }

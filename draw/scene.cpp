@@ -40,8 +40,9 @@
 #define FUSION_MAX_VECTOR_SIZE 22
 #include <boost/fusion/container/vector.hpp>
 #include <boost/fusion/include/mpl.hpp>
-#include <boost/bind.hpp>
 #include <boost/foreach.hpp>
+
+#include <tr1/functional>
 
 #include <utility>
 #include <typeinfo>
@@ -63,16 +64,20 @@ sanguis::draw::scene::scene(
 	hud_(font),
 	paused(false),
 	env(
-		boost::bind(
+		std::tr1::bind(
 			&scene::insert,
 			this,
-			_1),
+			std::tr1::placeholders::_1
+		),
 		resources_,
-		system()),
+		system()
+	),
 	background_id(
-		client::invalid_id),
+		client::invalid_id
+	),
 	paint_background(
-		rend->caps().render_target_supported())
+		rend->caps().render_target_supported()
+	)
 {
 	if(!paint_background)
 		return;
@@ -121,10 +126,10 @@ void sanguis::draw::scene::process_message(
 	>(
 		*this,
 		m,
-		boost::bind(
+		std::tr1::bind(
 			&scene::process_default_msg,
 			this,
-			_1
+			std::tr1::placeholders::_1
 		)
 	);
 }

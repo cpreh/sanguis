@@ -8,7 +8,7 @@
 #include "../../exception.hpp"
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/text.hpp>
-#include <boost/bind.hpp>
+#include <tr1/functional>
 #include <limits>
 
 namespace
@@ -40,19 +40,19 @@ sanguis::server::entities::with_weapon::with_weapon(
 	),
 	attack_speed_change_(
 		attack_speed_.register_change_callback(
-			boost::bind(
+			std::tr1::bind(
 				&with_weapon::attack_speed_change,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			)
 		)
 	),
 	reload_speed_change_(
 		reload_speed_.register_change_callback(
-			boost::bind(
+			std::tr1::bind(
 				&with_weapon::reload_speed_change,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			)
 		)
 	)

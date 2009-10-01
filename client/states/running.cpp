@@ -33,8 +33,8 @@
 #include <sge/assert.hpp>
 #include <sge/utf8/convert.hpp>
 #include <boost/mpl/vector.hpp>
-#include <boost/bind.hpp>
 #include <boost/foreach.hpp>
+#include <tr1/functional>
 
 namespace
 {
@@ -54,7 +54,8 @@ sanguis::client::states::running::running(
 		context<machine>().renderer(),
 		sge::renderer::state::list
 			(sge::renderer::state::bool_::clear_backbuffer = false)
-			(sge::renderer::state::bool_::clear_zbuffer = false)),
+			(sge::renderer::state::bool_::clear_zbuffer = false)
+	),
 	music_(
 		context<machine>().console_wrapper().con,
 		context<machine>().resources().resources().sounds()
@@ -67,50 +68,58 @@ sanguis::client::states::running::running(
 		)
 	),
 	logic_(
-		boost::bind(
+		std::tr1::bind(
 			&running::send_message,
 			this,
-			_1),
+			std::tr1::placeholders::_1
+		),
 		context<machine>().renderer(),
 		context<machine>().cursor(),
 		context<machine>().console_wrapper().con.object()
 	),
 	input(
-		boost::bind(
+		std::tr1::bind(
 			&logic::handle_player_action,
 			&logic_,
-			_1
+			std::tr1::placeholders::_1
 		)
 	),
 	input_connection(
 		context<machine>().console_wrapper().register_callback(
-			boost::bind(
+			std::tr1::bind(
 				&input_handler::input_callback,
 				&input,
-				_1
+				std::tr1::placeholders::_1
 			)
 		)
 	),
 	perk_chooser_(
 		context<machine>().sys(),
-		boost::bind(
+		std::tr1::bind(
 			&running::send_perk_choose,
 			this,
-			_1),
+			std::tr1::placeholders::_1
+		),
 		context<machine>().cursor()
 	),
 	cursor_pos_conn_(
 		context<machine>().cursor()->register_pos_callback(
-			boost::bind(
+			std::tr1::bind(
 				&running::cursor_pos,
 				this,
-				_1))),
+				std::tr1::placeholders::_1
+			)
+		)
+	),
 	cursor_show_conn_(
 		context<machine>().cursor()->register_visible_callback(
-			boost::bind(
+			std::tr1::bind(
 				&running::cursor_show,
 				this,
-				_1)))
+				std::tr1::placeholders::_1
+			)
+		)
+	)
 {
 	drawer->client_message(
 		client_messages::add(
@@ -176,10 +185,10 @@ sanguis::client::states::running::react(
 	>(
 		*this,
 		*m.message(),
-		boost::bind(
+		std::tr1::bind(
 			&running::handle_default_msg,
 			this,
-			_1
+			std::tr1::placeholders::_1
 		)
 	);
 }
