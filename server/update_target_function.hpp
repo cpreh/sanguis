@@ -2,14 +2,14 @@
 #define SANGUIS_SERVER_UPDATE_TARGET_FUNCTION_HPP_INCLUDED
 
 #include "entities/base_fwd.hpp"
-#include <boost/function.hpp>
+#include <sge/function/object_fwd.hpp>
 
 namespace sanguis
 {
 namespace server
 {
 
-typedef boost::function<
+typedef sge::function::object<
 	void (
 		entities::base &
 	)

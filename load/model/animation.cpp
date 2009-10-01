@@ -28,7 +28,7 @@
 #include <sge/exception.hpp>
 #include <sge/text.hpp>
 #include <sge/lexical_cast.hpp>
-#include <boost/bind.hpp>
+#include <tr1/functional>
 
 namespace
 {
@@ -164,10 +164,10 @@ sanguis::load::model::animation::load() const
 					param_.path() / texture_
 				),
 				frame_cache_,
-				boost::bind(
+				std::tr1::bind(
 					&animation::fill_cache,
 					this,
-					_1
+					std::tr1::placeholders::_1
 				)
 			)
 		);

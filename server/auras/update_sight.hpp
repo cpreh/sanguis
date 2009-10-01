@@ -5,6 +5,7 @@
 #include "../space_unit.hpp"
 #include "../update_sight_function.hpp"
 #include "../entities/base_fwd.hpp"
+#include <sge/function/object.hpp>
 
 namespace sanguis
 {

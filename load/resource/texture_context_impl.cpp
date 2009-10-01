@@ -9,7 +9,6 @@
 #include <sge/thread/sleep.hpp>
 #include <sge/text.hpp>
 #include <sge/time/second.hpp>
-#include <boost/bind.hpp>
 #include <tr1/functional>
 
 sanguis::load::resource::texture_context_impl::texture_context_impl(
@@ -19,11 +18,13 @@ sanguis::load::resource::texture_context_impl::texture_context_impl(
 	sge::renderer::filter::texture const _filter)
 :
 	task_(
-		boost::bind(
+		std::tr1::bind(
 			&texture_context_impl::task,
 			this,
 			_path,
-			_il)),
+			_il
+		)
+	),
 	future_(
 		task_.object()),
 	thread_(

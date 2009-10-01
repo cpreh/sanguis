@@ -6,7 +6,7 @@
 #include <sge/sprite/animation_series.hpp>
 #include <sge/scoped_ptr.hpp>
 #include <sge/renderer/lock_rect.hpp>
-#include <boost/function.hpp>
+#include <sge/function/object.hpp>
 
 namespace sanguis
 {
@@ -17,7 +17,11 @@ namespace model
 class animation_context
 {
 public:
-	typedef boost::function<void (sge::renderer::lock_rect const &)> cache_callback;
+	typedef sge::function::object<
+		void (
+			sge::renderer::lock_rect const &
+		)
+	> cache_callback;
 
 	animation_context(
 		resource::texture_context const &,

@@ -2,14 +2,14 @@
 #define SANGUIS_SERVER_UPDATE_SIGHT_FUNCTION_HPP_INCLUDED
 
 #include "../entity_id.hpp"
-#include <boost/function.hpp>
+#include <sge/function/object_fwd.hpp>
 
 namespace sanguis
 {
 namespace server
 {
 
-typedef boost::function<
+typedef sge::function::object<
 	void (
 		entity_id
 	)

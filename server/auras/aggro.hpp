@@ -5,6 +5,7 @@
 #include "../space_unit.hpp"
 #include "../team.hpp"
 #include "../update_target_function.hpp"
+#include <sge/function/object.hpp>
 
 namespace sanguis
 {

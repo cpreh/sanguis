@@ -3,7 +3,7 @@
 
 #include "base_fwd.hpp"
 #include "../entities/with_ai_fwd.hpp"
-#include <boost/function.hpp>
+#include <sge/function/object_fwd.hpp>
 
 namespace sanguis
 {
@@ -13,7 +13,7 @@ namespace ai
 {
 
 // TODO: we will have to return an auto_ptr here
-typedef boost::function<
+typedef sge::function::object<
 	base * (
 		entities::with_ai &
 	)

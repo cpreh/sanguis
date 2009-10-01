@@ -39,7 +39,6 @@
 #include <sge/optional_impl.hpp>
 #include <sge/text.hpp>
 #include <boost/foreach.hpp>
-#include <boost/bind.hpp>
 #include <tr1/functional>
 
 sanguis::server::world::object::object(
@@ -83,30 +82,30 @@ sanguis::server::world::object::object(
 	props_(),
 	collision_connection_begin_(
 		collision_world_->register_begin_callback(
-			boost::bind(
+			std::tr1::bind(
 				collision::execute,
-				_1,
-				_2,
+				std::tr1::placeholders::_1,
+				std::tr1::placeholders::_2,
 				collision::execute_begin()
 			)
 		)
 	),
 	collision_connection_end_(
 		collision_world_->register_end_callback(
-			boost::bind(
+			std::tr1::bind(
 				collision::execute,
-				_1,
-				_2,
+				std::tr1::placeholders::_1,
+				std::tr1::placeholders::_2,
 				collision::execute_end()
 			)
 		)
 	),
 	collision_connection_test_(
 		collision_world_->register_test_callback(
-			boost::bind(
+			std::tr1::bind(
 				collision::test,
-				_1,
-				_2
+				std::tr1::placeholders::_1,
+				std::tr1::placeholders::_2
 			)
 		)
 	),

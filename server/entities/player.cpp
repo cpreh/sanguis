@@ -12,7 +12,7 @@
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/text.hpp>
 #include <sge/make_auto_ptr.hpp>
-#include <boost/bind.hpp>
+#include <tr1/functional>
 
 sanguis::server::entities::player::player(
 	server::environment::load_context_ptr const load_context_,
@@ -58,15 +58,15 @@ sanguis::server::entities::player::player(
 			auras::update_sight
 		>(
 			1000, // FIXME
-			boost::bind(
+			std::tr1::bind(
 				&player::add_sight_range,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			),
-			boost::bind(
+			std::tr1::bind(
 				&player::remove_sight_range,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			)
 		)
 	);

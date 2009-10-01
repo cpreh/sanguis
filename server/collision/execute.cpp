@@ -1,6 +1,7 @@
 #include "execute.hpp"
 #include "satellite.hpp"
 #include "base.hpp"
+#include <sge/function/object.hpp>
 
 void
 sanguis::server::collision::execute(

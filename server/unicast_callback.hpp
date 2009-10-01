@@ -3,14 +3,14 @@
 
 #include "../net/id_type.hpp"
 #include "../messages/auto_ptr.hpp"
-#include <boost/function.hpp>
+#include <sge/function/object_fwd.hpp>
 
 namespace sanguis
 {
 namespace server
 {
 
-typedef boost::function<
+typedef sge::function::object<
 	void (
 		net::id_type,
 		messages::auto_ptr

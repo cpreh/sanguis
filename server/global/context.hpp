@@ -22,6 +22,7 @@
 #include "../../time_type.hpp"
 #include "../../messages/auto_ptr.hpp"
 #include "../../load/model/context_fwd.hpp"
+#include <sge/function/object.hpp>
 #include <sge/log/logger_fwd.hpp>
 #include <sge/container/map_decl.hpp>
 #include <sge/collision/system_fwd.hpp>

@@ -1,7 +1,7 @@
 #include "movable.hpp"
 #include "speed_to_abs.hpp"
 #include <sge/math/vector/basic_impl.hpp>
-#include <boost/bind.hpp>
+#include <tr1/functional>
 
 sanguis::server::entities::property::changeable &
 sanguis::server::entities::movable::movement_speed()
@@ -50,10 +50,10 @@ sanguis::server::entities::movable::movable(
 	),
 	speed_change_(
 		movement_speed_.register_change_callback(
-			boost::bind(
+			std::tr1::bind(
 				&movable::speed_change,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			)
 		)
 	)

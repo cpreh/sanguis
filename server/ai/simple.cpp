@@ -13,7 +13,7 @@
 #include <sge/make_auto_ptr.hpp>
 #include <sge/optional.hpp>
 #include <sge/assert.hpp>
-#include <boost/bind.hpp>
+#include <tr1/functional>
 
 sanguis::server::ai::simple::simple(
 	entities::with_ai &me_,
@@ -31,15 +31,15 @@ sanguis::server::ai::simple::simple(
 		>(
 			10, // FIXME
 			me_.team(),
-			boost::bind(
+			std::tr1::bind(
 				&simple::target_enters,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			),
-			boost::bind(
+			std::tr1::bind(
 				&simple::target_leaves,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			)
 		)
 	);
