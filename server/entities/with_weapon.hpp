@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_WEAPON_HPP_INCLUDED
 
 #include "base.hpp"
-#include "property/object.hpp"
+#include "property/always_max.hpp"
 #include "property/value.hpp"
 #include "../weapons/auto_ptr.hpp"
 #include "../pos_type.hpp"
@@ -87,10 +87,10 @@ public:
 	void
 	stop_reloading();
 
-	property::object &
+	property::always_max &
 	attack_speed();
 
-	property::object &
+	property::always_max &
 	reload_speed();
 private:
 	void stop_attacking();
@@ -122,7 +122,7 @@ private:
 		attack_ready_,
 		aggressive_;
 	
-	property::object
+	property::always_max
 		attack_speed_,
 		reload_speed_;
 

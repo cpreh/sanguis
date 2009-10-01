@@ -3,7 +3,7 @@
 #include <sge/math/vector/basic_impl.hpp>
 #include <boost/bind.hpp>
 
-sanguis::server::entities::property::object &
+sanguis::server::entities::property::changeable &
 sanguis::server::entities::movable::movement_speed()
 {
 	return movement_speed_;

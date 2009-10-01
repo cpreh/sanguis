@@ -4,7 +4,7 @@
 #include "movable_fwd.hpp"
 #include "base.hpp"
 #include "property/initial_fwd.hpp"
-#include "property/object.hpp"
+#include "property/changeable.hpp"
 #include "property/value.hpp"
 #include "../space_unit.hpp"
 #include <sge/signal/scoped_connection.hpp>
@@ -21,7 +21,7 @@ class movable
 	public virtual base
 {
 public:
-	property::object &
+	property::changeable &
 	movement_speed();
 
 	space_unit
@@ -48,7 +48,7 @@ private:
 		property::value
 	);
 
-	property::object movement_speed_;
+	property::changeable movement_speed_;
 
 	space_unit direction_;
 	

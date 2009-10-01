@@ -1,6 +1,5 @@
 #include "rocket.hpp"
 #include "aoe_damage.hpp"
-#include "../property.hpp"
 #include "../insert_parameters_pos.hpp"
 #include "../../damage/list.hpp"
 #include "../../damage/wrapper.hpp"
@@ -23,7 +22,7 @@ sanguis::server::entities::projectiles::rocket::rocket(
 	aoe_projectile(
 		aoe_projectile_type::rocket,
 		team_,
-		server::movement_speed(300),
+		entities::movement_speed(300),
 		load_context_->entity_dim(
 			SGE_TEXT("rocket")
 		),

@@ -3,8 +3,8 @@
 
 #include "pickup.hpp"
 #include "../base_fwd.hpp"
+#include "../health_type.hpp"
 #include "../../environment/load_context_ptr.hpp"
-#include "../../health_type.hpp"
 #include "../../team.hpp"
 
 namespace sanguis
@@ -24,7 +24,7 @@ public:
 	health(
 		server::environment::load_context_ptr,
 		team::type team,
-		health_type amount
+		entities::health_type amount
 	);
 private:
 	void

@@ -1,5 +1,4 @@
 #include "ims.hpp"
-#include "../entities/property/object.hpp"
 #include "../entities/property/value.hpp"
 #include "../entities/property/linear_add.hpp"
 #include "../entities/movable.hpp"

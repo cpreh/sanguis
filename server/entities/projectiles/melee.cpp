@@ -1,5 +1,4 @@
 #include "melee.hpp"
-#include "../property.hpp"
 #include "../../damage/list.hpp"
 #include "../../damage/wrapper.hpp"
 #include "../../damage/meta.hpp"
@@ -17,7 +16,7 @@ sanguis::server::entities::projectiles::melee::melee(
 	projectile(
 		projectile_type::melee,
 		team_,
-		server::movement_speed(
+		entities::movement_speed(
 			0
 		),
 		dim_type(

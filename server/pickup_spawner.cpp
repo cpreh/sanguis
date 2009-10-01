@@ -113,7 +113,7 @@ sanguis::server::pickup_spawner::spawn_health()
 			new entities::pickups::health(
 				load_context,
 				team::players,
-				health_type(10) // FIXME: which health value to use?
+				entities::health_type(10) // FIXME: which health value to use?
 			)
 		),
 		entities::insert_parameters_pos(

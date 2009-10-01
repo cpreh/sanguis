@@ -7,9 +7,9 @@
 #include "../with_health.hpp"
 #include "../movable.hpp"
 #include "../movement_speed.hpp"
+#include "../health_type.hpp"
 #include "../../ai/create_function.hpp"
 #include "../../environment/load_context_ptr.hpp"
-#include "../../health_type.hpp"
 #include "../../probability_type.hpp"
 #include "../../exp_type.hpp"
 #include "../../../enemy_type.hpp"
@@ -36,8 +36,8 @@ public:
 		enemy_type::type,
 		server::environment::load_context_ptr,
 		damage::armor const &,
-		health_type,
-		server::movement_speed,
+		entities::health_type,
+		entities::movement_speed,
 		ai::create_function const &,
 		weapons::auto_ptr weapon,
 		probability_type spawn_chance,

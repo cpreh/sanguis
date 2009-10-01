@@ -3,12 +3,14 @@
 
 #include "with_health_fwd.hpp"
 #include "base.hpp"
-#include "property/object.hpp"
+#include "property/changeable.hpp"
+#include "property/always_max.hpp"
 #include "property/value.hpp"
+#include "health_type.hpp"
+#include "../health_type.hpp"
 #include "../damage/unit.hpp"
 #include "../damage/array.hpp"
 #include "../damage/armor.hpp"
-#include "../health_type.hpp"
 #include <sge/signal/scoped_connection.hpp>
 
 namespace sanguis
@@ -32,20 +34,20 @@ public:
 	void
 	die();
 
-	property::object &
+	property::changeable &
 	health();
 
-	property::object &
+	property::always_max &
 	regeneration();
 
-	health_type
+	server::health_type
 	current_health() const;
 
-	health_type
+	server::health_type
 	max_health() const;
 protected:
 	with_health(
-		health_type max_health,
+		entities::health_type max_health,
 		damage::armor const &
 	);
 
@@ -70,9 +72,9 @@ private:
 
 	damage::armor armor_;
 
-	property::object
-		health_,
-		regeneration_;
+	property::changeable health_;
+
+	property::always_max regeneration_;
 	
 	sge::signal::scoped_connection const max_health_change_;
 };

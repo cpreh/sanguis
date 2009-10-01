@@ -1,7 +1,8 @@
 #include "with_health.hpp"
 #include "property/to_float.hpp"
+#include "property/initial_max.hpp"
 #include "../environment/object.hpp"
-#include <boost/bind.hpp>
+#include <tr1/functional>
 
 void
 sanguis::server::entities::with_health::damage(
@@ -27,13 +28,13 @@ sanguis::server::entities::with_health::die()
 	on_die();
 }
 
-sanguis::server::entities::property::object &
+sanguis::server::entities::property::changeable &
 sanguis::server::entities::with_health::health()
 {
 	return health_;
 }
 
-sanguis::server::entities::property::object &
+sanguis::server::entities::property::always_max &
 sanguis::server::entities::with_health::regeneration()
 {
 	return regeneration_;
@@ -43,7 +44,7 @@ sanguis::server::health_type
 sanguis::server::entities::with_health::current_health() const
 {
 	return property::to_float<
-		health_type
+		server::health_type
 	>(
 		health_.current()
 	);
@@ -53,14 +54,14 @@ sanguis::server::health_type
 sanguis::server::entities::with_health::max_health() const
 {
 	return property::to_float<
-		health_type
+		server::health_type
 	>(
 		health_.max()
 	);
 }
 
 sanguis::server::entities::with_health::with_health(
-	health_type const max_health_,
+	entities::health_type const max_health_,
 	damage::armor const &armor_
 )
 :
@@ -68,17 +69,19 @@ sanguis::server::entities::with_health::with_health(
 		armor_
 	),
 	health_(
-		max_health_
+		property::initial_max(
+			max_health_
+		)
 	),
 	regeneration_(
 		0
 	),
 	max_health_change_(
 		health_.register_max_change_callback(
-			boost::bind(
+			std::tr1::bind(
 				&with_health::max_health_change,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			)
 		)
 	)
@@ -89,8 +92,9 @@ sanguis::server::entities::with_health::on_update(
 	time_type const time_
 )
 {
-	health().add(
-		regeneration().current() * time_
+	health().current(
+		health().current()
+		+ regeneration().current() * time_
 	);
 }
 
@@ -119,7 +123,7 @@ sanguis::server::entities::with_health::max_health_change(
 	environment()->max_health_changed(
 		id(),
 		property::to_float<
-			health_type
+			server::health_type
 		>(
 			value_
 		)

@@ -1,6 +1,5 @@
 #include "grenade.hpp"
 #include "aoe_damage.hpp"
-#include "../property.hpp"
 #include "../insert_parameters.hpp"
 #include "../../collision/create_parameters.hpp"
 #include "../../damage/list.hpp"
@@ -30,7 +29,7 @@ sanguis::server::entities::projectiles::grenade::grenade(
 	aoe_projectile(
 		aoe_projectile_type::grenade,
 		team_,
-		server::movement_speed(0),
+		entities::movement_speed(0),
 		load_context_->entity_dim(
 			SGE_TEXT("grenade")
 		),
@@ -90,7 +89,11 @@ sanguis::server::entities::projectiles::grenade::on_update(
 		slowdown_time.update_b()
 	)
 		movement_speed().current(
-			movement_speed().current() * static_cast<space_unit>(0.9)
+			movement_speed().current()
+			* property::value(
+				9,
+				10
+			)
 		);
 	
 	projectile::on_update(

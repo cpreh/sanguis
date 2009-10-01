@@ -60,7 +60,7 @@ public:
 	virtual void
 	max_health_changed(
 		entity_id,
-		health_type
+		server::health_type
 	) = 0;
 
 	virtual void

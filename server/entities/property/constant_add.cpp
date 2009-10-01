@@ -1,21 +1,21 @@
 #include "constant_add.hpp"
-#include "object.hpp"
+#include "base.hpp"
 
 void
 sanguis::server::entities::property::constant_add(
-	object &object_,
+	base &base_,
 	value const &value_
 )
 {
-	object::constant_type constant_(
-		object_.constant()
+	base::constant_type constant_(
+		base_.constant()
 	);
 
 	constant_.add(
 		value_
 	);
 
-	object_.constant(
+	base_.constant(
 		constant_
 	);
 }

@@ -143,8 +143,8 @@ sanguis::server::entities::projectiles::projectile::add_message() const
 			pos(),
 			angle(),
 			abs_speed(),
-			health_type(0), // health
-			health_type(0), // max health
+			server::health_type(0), // health
+			server::health_type(0), // max health
 			dim(),
 			ptype()
 		)

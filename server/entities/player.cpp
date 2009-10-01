@@ -16,7 +16,7 @@
 
 sanguis::server::entities::player::player(
 	server::environment::load_context_ptr const load_context_,
-	health_type const health_,
+	entities::health_type const health_,
 	damage::armor const &armor_,
 	entities::movement_speed const speed_,
 	string const &name_,

@@ -1,11 +1,9 @@
-#ifndef SANGUIS_SERVER_ENTITIES_PROPERTY_OBJECT_HPP_INCLUDED
-#define SANGUIS_SERVER_ENTITIES_PROPERTY_OBJECT_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_ENTITIES_PROPERTY_CHANGEABLE_HPP_INCLUDED
+#define SANGUIS_SERVER_ENTITIES_PROPERTY_CHANGEABLE_HPP_INCLUDED
 
-#include "object_fwd.hpp"
+#include "changeable_fwd.hpp"
+#include "base.hpp"
 #include "initial_fwd.hpp"
-#include "value.hpp"
-#include "constant.hpp"
-#include "linear.hpp"
 #include "change_callback.hpp"
 #include "change_signal.hpp"
 #include <sge/signal/auto_connection.hpp>
@@ -20,38 +18,19 @@ namespace entities
 namespace property
 {
 
-class object {
-	SGE_NONCOPYABLE(object)
+class changeable
+:
+	public base
+{
+	SGE_NONCOPYABLE(changeable)
 public:
-	typedef property::value value_type;
-
-	typedef property::constant constant_type;
-
-	typedef property::linear linear_type;
-
-	explicit object(
+	explicit changeable(
 		initial const &
 	);
 
-	object(
+	changeable(
 		value_type base_,
 		value_type current_
-	);
-
-	constant_type const
-	constant();
-
-	linear_type const
-	linear();
-	
-	void
-	constant(
-		constant_type const &
-	);
-
-	void
-	linear(
-		linear_type const &
 	);
 
 	void
@@ -76,19 +55,17 @@ public:
 	);
 private:
 	void
-	recalc_max();
+	on_recalc_max(
+		value_type
+	);
 
 	void
 	clamp_current();
 
 	value_type
-		base_,
 		current_,
 		max_;
 	
-	constant_type constant_;
-	linear_type linear_;
-
 	change_signal
 		change_signal_,
 		max_change_signal_;

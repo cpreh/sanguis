@@ -1,4 +1,5 @@
 #include "with_weapon.hpp"
+#include "property/to_float.hpp"
 #include "../weapons/factory.hpp"
 #include "../weapons/weapon.hpp"
 #include "../environment/object.hpp"
@@ -121,18 +122,16 @@ sanguis::server::entities::with_weapon::change_weapon(
 	reloading = false;
 	attacking = false;
 
+	attack_speed_change(
+		attack_speed_.current()
+	);
+
+	reload_speed_change(
+		reload_speed_.current()
+	);
+
 	if(has_weapon())
-	{
-		active_weapon().attack_speed(
-			attack_speed().current()
-		);
-
-		active_weapon().reload_speed(	
-			reload_speed().current()
-		);
-
 		attack_ready_ = true;
-	}
 
 	environment()->weapon_changed(
 		id(),
@@ -290,13 +289,13 @@ sanguis::server::entities::with_weapon::stop_reloading()
 	);
 }
 
-sanguis::server::entities::property::object &
+sanguis::server::entities::property::always_max &
 sanguis::server::entities::with_weapon::attack_speed()
 {
 	return attack_speed_;
 }
 
-sanguis::server::entities::property::object &
+sanguis::server::entities::property::always_max &
 sanguis::server::entities::with_weapon::reload_speed()
 {
 	return reload_speed_;
@@ -318,18 +317,30 @@ sanguis::server::entities::with_weapon::stop_attacking()
 
 void
 sanguis::server::entities::with_weapon::attack_speed_change(
-	property::value const v
+	property::value const value_
 )
 {
 	if(has_weapon())
-		active_weapon().attack_speed(v);
+		active_weapon().attack_speed(
+			property::to_float<
+				space_unit
+			>(
+				value_
+			)
+		);
 }
 
 void
 sanguis::server::entities::with_weapon::reload_speed_change(
-	property::value const v
+	property::value const value_
 )
 {
 	if(has_weapon())
-		active_weapon().reload_speed(v);
+		active_weapon().reload_speed(
+			property::to_float<
+				space_unit
+			>(
+				value_
+			)
+		);
 }

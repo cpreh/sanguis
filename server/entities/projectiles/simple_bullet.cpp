@@ -18,7 +18,7 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 	projectile(
 		projectile_type::simple_bullet,
 		team_,
-		server::movement_speed(
+		entities::movement_speed(
 			500
 		),
 		load_context->entity_dim(

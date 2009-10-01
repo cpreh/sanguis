@@ -34,7 +34,7 @@ sanguis::server::create_player(
 			entities::player
 		>(
 			load_context_,
-			health_type(100),
+			entities::health_type(100),
 			damage::no_armor(),
 			entities::movement_speed(100),
 			name,

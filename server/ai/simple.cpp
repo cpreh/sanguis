@@ -5,7 +5,6 @@
 #include "../entities/with_ai.hpp"
 #include "../entities/movable.hpp"
 #include "../entities/base.hpp"
-#include "../entities/property/object.hpp"
 #include "../entities/property/current_to_max.hpp"
 #include "../collision/collides.hpp"
 #include "../collision/distance.hpp"
@@ -107,7 +106,7 @@ sanguis::server::ai::simple::update(
 		movable_
 	)
 	{
-		entities::property::object &speed(
+		entities::property::changeable &speed(
 			movable_->movement_speed()
 		);
 

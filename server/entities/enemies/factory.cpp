@@ -1,6 +1,5 @@
 #include "factory.hpp"
 #include "enemy.hpp"
-#include "../property.hpp"
 #include "../../damage/no_armor.hpp"
 #include "../../damage/list.hpp"
 #include "../../weapons/melee.hpp"

@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PROPERTY_CONSTANT_ADD_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PROPERTY_CONSTANT_ADD_HPP_INCLUDED
 
-#include "object_fwd.hpp"
+#include "base_fwd.hpp"
 #include "value.hpp"
 
 namespace sanguis
@@ -15,7 +15,7 @@ namespace property
 
 void
 constant_add(
-	object &,
+	base &,
 	value const &
 );
 

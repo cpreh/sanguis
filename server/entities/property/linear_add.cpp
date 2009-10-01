@@ -1,21 +1,21 @@
 #include "linear_add.hpp"
-#include "object.hpp"
+#include "base.hpp"
 
 void
 sanguis::server::entities::property::linear_add(
-	object &object_,
+	base &base_,
 	value const &value_
 )
 {
-	object::linear_type linear_(
-		object_.linear()
+	base::linear_type linear_(
+		base_.linear()
 	);
 
 	linear_.add(
 		value_
 	);
 
-	object_.linear(
+	base_.linear(
 		linear_
 	);
 }

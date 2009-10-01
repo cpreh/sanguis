@@ -1,12 +1,12 @@
 #include "current_to_max.hpp"
-#include "object.hpp"
+#include "changeable.hpp"
 
 void
 sanguis::server::entities::property::current_to_max(
-	object &object_
+	changeable &changeable_
 )
 {
-	object_.current(
-		object_.max()
+	changeable_.current(
+		changeable_.max()
 	);
 }

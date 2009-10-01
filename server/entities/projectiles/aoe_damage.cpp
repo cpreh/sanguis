@@ -1,5 +1,4 @@
 #include "aoe_damage.hpp"
-#include "../property.hpp"
 #include "../../auras/burn.hpp"
 #include "../../environment/object.hpp"
 #include <sge/math/dim/basic_impl.hpp>
@@ -18,7 +17,7 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 	aoe_projectile(
 		aoe_projectile_type::aoe_damage,
 		team_,
-		server::movement_speed(0),
+		entities::movement_speed(0),
 		dim_type(
 			radius * static_cast<space_unit>(2),
 			radius * static_cast<space_unit>(2)

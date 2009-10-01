@@ -75,11 +75,13 @@ public:
 
 	void
 	attack_speed(
-		space_unit);
+		space_unit
+	);
 
 	void
 	reload_speed(
-		space_unit);
+		space_unit
+	);
 
 	virtual ~weapon();
 protected:

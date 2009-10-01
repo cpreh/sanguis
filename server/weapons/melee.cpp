@@ -3,7 +3,6 @@
 #include "unlimited_magazine_size.hpp"
 #include "unlimited_magazine_count.hpp"
 #include "../environment/object.hpp"
-#include "../entities/property/object.hpp"
 #include "../entities/insert_parameters_pos.hpp"
 #include "../entities/base.hpp"
 #include "../entities/with_weapon.hpp"

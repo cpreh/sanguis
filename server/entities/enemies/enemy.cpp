@@ -1,4 +1,5 @@
 #include "enemy.hpp"
+#include "../property/initial.hpp"
 #include "../../weapons/weapon.hpp"
 #include "../../ai/base.hpp"
 #include "../../environment/load_context.hpp"
@@ -13,8 +14,8 @@ sanguis::server::entities::enemies::enemy::enemy(
 	enemy_type::type const etype_,
 	server::environment::load_context_ptr const load_context_,
 	damage::armor const &armor_,
-	health_type const health_,
-	server::movement_speed const movement_speed_,
+	entities::health_type const health_,
+	entities::movement_speed const movement_speed_,
 	ai::create_function const &ai_,
 	weapons::auto_ptr weapon_,
 	probability_type const spawn_chance,
@@ -38,8 +39,9 @@ sanguis::server::entities::enemies::enemy::enemy(
 		armor_
 	),
 	movable(
-		property(
-			movement_speed_
+		property::initial(
+			movement_speed_,
+			0
 		),
 		static_cast<space_unit>(0)
 	),
