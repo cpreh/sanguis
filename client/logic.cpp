@@ -29,7 +29,8 @@
 #include <sge/assign/make_container.hpp>
 #include <sge/text.hpp>
 #include <sge/optional_impl.hpp>
-#include <boost/bind.hpp>
+#include <sge/function/object.hpp>
+#include <tr1/functional>
 #include <algorithm>
 
 sanguis::client::logic::logic(
@@ -48,59 +49,59 @@ sanguis::client::logic::logic(
 			action_handlers
 		>
 		(
-			boost::bind(
+			std::tr1::bind(
 				&logic::handle_move_x,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			)
 		)
 		(
-			boost::bind(
+			std::tr1::bind(
 				&logic::handle_move_y,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			)
 		)
 		(
-			boost::bind(
+			std::tr1::bind(
 				&logic::handle_rotation_x,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			)
 		)
 		(
-			boost::bind(
+			std::tr1::bind(
 				&logic::handle_rotation_y,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			)
 		)
 		(
-			boost::bind(
+			std::tr1::bind(
 				&logic::handle_shooting,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			)
 		)
 		(
-			boost::bind(
+			std::tr1::bind(
 				&logic::handle_switch_weapon_forwards,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			)
 		)
 		(
-			boost::bind(
+			std::tr1::bind(
 				&logic::handle_switch_weapon_backwards,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			)
 		)
 		(
-			boost::bind(
+			std::tr1::bind(
 				&logic::handle_pause_unpause,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			)
 		)
 	),
@@ -124,18 +125,20 @@ sanguis::client::logic::logic(
 	cheat_kill_conn_(
 		_console.insert(
 			SGE_TEXT("kill"),
-			boost::bind(
+			std::tr1::bind(
 				&logic::send_cheat,
 				this,
-				cheat_type::kill),
+				cheat_type::kill
+			),
 			SGE_TEXT("Commit suicide"))),
 	cheat_impulse_conn_(
 		_console.insert(
 			SGE_TEXT("impulse"),
-			boost::bind(
+			std::tr1::bind(
 				&logic::send_cheat,
 				this,
-				cheat_type::impulse101),
+				cheat_type::impulse101
+			),
 			SGE_TEXT("Get all weapons")))
 
 {
@@ -158,6 +161,9 @@ void sanguis::client::logic::handle_player_action(
 		action.scale()
 	);
 }
+
+sanguis::client::logic::~logic()
+{}
 
 void sanguis::client::logic::give_weapon(
 	messages::give_weapon const &m)

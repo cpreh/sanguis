@@ -1,8 +1,8 @@
 #ifndef SANGUIS_CLIENT_MENU_CALLBACKS_TYPES_HPP_INCLUDED
 #define SANGUIS_CLIENT_MENU_CALLBACKS_TYPES_HPP_INCLUDED
 
+#include <sge/function/object_fwd.hpp>
 #include <sge/string.hpp>
-#include <boost/function.hpp>
 
 namespace sanguis
 {
@@ -12,19 +12,22 @@ namespace menu
 {
 namespace callbacks
 {
-typedef boost::function<
+
+// TODO: split this!
+
+typedef sge::function::object<
 	void (sge::string const &,sge::string const &)
 > connect;
 
-typedef boost::function<
+typedef sge::function::object<
 	void ()
 > cancel_connect;
 
-typedef boost::function<
+typedef sge::function::object<
 	void ()
 > start_server;
 
-typedef boost::function<
+typedef sge::function::object<
 	void ()
 > quit;
 

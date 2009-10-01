@@ -12,9 +12,8 @@
 #include <sge/container/raw_vector_impl.hpp>
 #include <boost/asio/buffer.hpp>
 #include <boost/lambda/lambda.hpp>
-#include <boost/bind.hpp>
-#include <tr1/functional>
 #include <boost/foreach.hpp>
+#include <tr1/functional>
 #include <iostream>
 
 sanguis::net::detail::server_impl::server_impl()
@@ -35,8 +34,10 @@ void sanguis::net::detail::server_impl::listen(
 {
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1 << SGE_TEXT("server: listening on port ")
-		             << port);
+		sge::log::_1
+			<< SGE_TEXT("server: listening on port ")
+			<< port
+	);
 
 	boost::asio::ip::tcp::endpoint endpoint(
 		boost::asio::ip::tcp::v4(),
@@ -71,12 +72,15 @@ void sanguis::net::detail::server_impl::process()
 				out_data.data(),
 				out_data.size()
 			),
-			boost::bind(
+			std::tr1::bind(
 				&server_impl::write_handler,
 				this,
-				_1,
-				_2,
-				std::tr1::ref(c)));
+				std::tr1::placeholders::_1,
+				std::tr1::placeholders::_2,
+				std::tr1::ref(c)
+			)
+		);
+
 		handlers_++;
 	}
 
@@ -164,11 +168,13 @@ void sanguis::net::detail::server_impl::accept()
 
 	acceptor_.async_accept(
 		c.socket_,
-		boost::bind(
+		std::tr1::bind(
 			&server_impl::accept_handler,
 			this,
-			_1,
-			std::tr1::ref(c)));
+			std::tr1::placeholders::_1,
+			std::tr1::ref(c)
+		)
+	);
 
 	handlers_++;
 }
@@ -202,14 +208,19 @@ void sanguis::net::detail::server_impl::read_handler(
 	// receive some more
 	c.socket_.async_receive(
 		boost::asio::buffer(
-			c.new_data_),
-		boost::bind(
+			c.new_data_
+		),
+		std::tr1::bind(
 			&server_impl::read_handler,
 			this,
-			_1,
-			_2,
+			std::tr1::placeholders::_1,
+			std::tr1::placeholders::_2,
 			std::tr1::ref(
-				c)));
+				c
+			)
+		)
+	);
+
 	handlers_++;
 }
 
@@ -256,11 +267,11 @@ void sanguis::net::detail::server_impl::write_handler(
 			data.data(),
 			data.size()
 		),
-		boost::bind(
+		std::tr1::bind(
 			&server_impl::write_handler,
 			this,
-			_1,
-			_2,
+			std::tr1::placeholders::_1,
+			std::tr1::placeholders::_2,
 			std::tr1::ref(c)
 		)
 	);
@@ -300,11 +311,11 @@ void sanguis::net::detail::server_impl::accept_handler(
 		boost::asio::buffer(
 			c.new_data_
 		),
-		boost::bind(
+		std::tr1::bind(
 			&server_impl::read_handler,
 			this,
-			_1,
-			_2,
+			std::tr1::placeholders::_1,
+			std::tr1::placeholders::_2,
 			std::tr1::ref(c)
 		)
 	);

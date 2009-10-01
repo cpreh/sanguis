@@ -2,14 +2,14 @@
 #define SANGUIS_CLIENT_SEND_CALLBACK_HPP_INCLUDED
 
 #include "../messages/auto_ptr.hpp"
-#include <boost/function.hpp>
+#include <sge/function/object_fwd.hpp>
 
 namespace sanguis
 {
 namespace client
 {
 
-typedef boost::function<
+typedef sge::function::object<
 	void (messages::auto_ptr)
 > send_callback;
 

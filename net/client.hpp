@@ -6,11 +6,11 @@
 #include "data_type.hpp"
 
 #include <sge/signal/auto_connection.hpp>
+#include <sge/function/object_fwd.hpp>
 #include <sge/scoped_ptr.hpp>
 #include <sge/noncopyable.hpp>
 #include <sge/string.hpp>
 
-#include <boost/function.hpp>
 
 namespace sanguis
 {
@@ -23,14 +23,14 @@ class client_impl;
 
 class client
 {
-SGE_NONCOPYABLE(client)
+	SGE_NONCOPYABLE(client)
 public:
 	typedef void connect_fun ();
 	typedef void disconnect_fun (sge::string const &);
 	typedef void data_fun (data_type const &);
-	typedef boost::function<connect_fun> connect_function;
-	typedef boost::function<disconnect_fun> disconnect_function;
-	typedef boost::function<data_fun> data_function;
+	typedef sge::function::object<connect_fun> connect_function;
+	typedef sge::function::object<disconnect_fun> disconnect_function;
+	typedef sge::function::object<data_fun> data_function;
 
 	client();
 	void connect(

@@ -22,7 +22,7 @@
 #include <sge/string.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <boost/algorithm/string/trim.hpp>
-#include <boost/bind.hpp>
+#include <tr1/functional>
 
 namespace
 {
@@ -41,10 +41,10 @@ sanguis::load::resource::textures::load(
 	return map_get_or_create(
 		textures_,
 		id, 
-		boost::bind(
+		std::tr1::bind(
 			&textures::do_load,
 			this,
-			_1
+			std::tr1::placeholders::_1
 		)
 	);
 }
@@ -58,10 +58,13 @@ sanguis::load::resource::textures::load(
 			map_get_or_create(
 				unnamed_textures,
 				path,
-				boost::bind(
+				std::tr1::bind(
 					&textures::do_load_unnamed,
 					this,
-					_1)));
+					std::tr1::placeholders::_1
+				)
+			)
+		);
 }
 
 void sanguis::load::resource::textures::cleanup(

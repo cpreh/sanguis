@@ -15,7 +15,10 @@
 #include <sge/text.hpp>
 #include <sge/type_info.hpp>
 #include <boost/mpl/vector.hpp>
-#include <boost/bind.hpp>
+#include <boost/foreach.hpp>
+#include <tr1/functional>
+#include <tr1/random>
+#include <algorithm>
 #include <ostream>
 
 sanguis::server::states::running::running(
@@ -25,13 +28,13 @@ sanguis::server::states::running::running(
 	my_base(ctx),
 	global_context_(
 		new global::context(
-			boost::bind(
+			std::tr1::bind(
 				&machine::send_unicast,
 				&context<
 					machine
 				>(),
-				_1,
-				_2
+				std::tr1::placeholders::_1,
+				std::tr1::placeholders::_2
 			),
 			context<machine>().collision_system(),
 			context<machine>().resources().models()
@@ -128,11 +131,11 @@ sanguis::server::states::running::react(
 	>(
 		mf,
 		*m.message(),
-		boost::bind(
+		std::tr1::bind(
 			&running::handle_default_msg,
 			this,
 			m.id(),
-			_1
+			std::tr1::placeholders::_1
 		)
 	);
 }

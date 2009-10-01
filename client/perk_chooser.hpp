@@ -11,9 +11,9 @@
 #include <sge/gui/widgets/label.hpp>
 #include <sge/gui/manager.hpp>
 #include <sge/signal/connection_manager.hpp>
+#include <sge/function/object.hpp>
 #include <sge/noncopyable.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
-#include <boost/function.hpp>
 #include <map>
 
 namespace sanguis
@@ -22,9 +22,11 @@ namespace client
 {
 class perk_chooser
 {
-SGE_NONCOPYABLE(perk_chooser)
+	SGE_NONCOPYABLE(perk_chooser)
 public:
-	typedef boost::function<void (perk_type::type)> send_callback;
+	typedef sge::function::object<
+		void (perk_type::type)
+	> send_callback;
 
 	perk_chooser(
 		sge::systems::instance &,

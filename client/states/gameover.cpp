@@ -25,7 +25,7 @@
 #include <sge/algorithm/join_strings.hpp>
 #include <sge/lexical_cast.hpp>
 #include <sge/make_shared_ptr.hpp>
-#include <boost/bind.hpp>
+#include <tr1/functional>
 
 namespace
 {
@@ -56,7 +56,8 @@ sge::gui::point const dialog_pos()
 }
 
 sanguis::client::states::gameover::gameover(
-	my_context ctx)
+	my_context ctx
+)
 :
 	my_base(ctx),
 	m_(
@@ -64,66 +65,90 @@ sanguis::client::states::gameover::gameover(
 		context<machine>().sys().input_system(),
 		sge::gui::skins::ptr(
 			new sge::gui::skins::standard(
-				context<machine>().sys().font_system())),
-		context<machine>().cursor()),
+				context<machine>().sys().font_system()
+			)
+		),
+		context<machine>().cursor()
+	),
 	background_(
 		m_,
 		sge::gui::widgets::parameters()
 			.pos(dialog_pos())
 			.size(dialog_size())
 			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::grid>())),
+				sge::make_shared_ptr<sge::gui::layouts::grid>()
+			)
+	),
 	dead_label(
 		background_,
 		sge::gui::widgets::parameters()
 			.pos(	
 				sge::gui::point(0,0)),
-		SGE_TEXT("You are dead.")),
+		SGE_TEXT("You are dead.")
+	),
 	score(
 		background_,
 		sge::gui::widgets::parameters()
 			.pos(	
-				sge::gui::point(0,1))
+				sge::gui::point(0,1)
+			)
 			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::grid>())),
+				sge::make_shared_ptr<sge::gui::layouts::grid>()
+			)
+	),
 	names_head(
 		score,
 		sge::gui::widgets::parameters()
 			.pos(	
-				sge::gui::point(0,0)),
-		SGE_TEXT("Name(s):")),
+				sge::gui::point(0,0)
+			),
+		SGE_TEXT("Name(s):")
+	),
 	score_head(
 		score,
 		sge::gui::widgets::parameters()
 			.pos(	
-				sge::gui::point(1,0)),
-		SGE_TEXT("Score:")),
+				sge::gui::point(1,0)
+			),
+		SGE_TEXT("Score:")
+	),
 	names_text(
 		score,
 		sge::gui::widgets::parameters()
 			.pos(	
-				sge::gui::point(0,1)),
+				sge::gui::point(0,1)
+			),
 		sge::algorithm::join_strings(
 			context<machine>().gameover_names(),
-			SGE_TEXT(", "))),
+			SGE_TEXT(", ")
+		)
+	),
 	score_text(
 		score,
 		sge::gui::widgets::parameters()
 			.pos(	
-				sge::gui::point(1,1)),
+				sge::gui::point(1,1)
+			),
 		sge::lexical_cast<sge::string>(
-			context<machine>().gameover_score())),
+			context<machine>().gameover_score()
+		)
+	),
 	buttons_return(
 		background_,
 		sge::gui::widgets::parameters()
 			.pos(	
-				sge::gui::point(0,2)),
-		SGE_TEXT("Main menu")),
+				sge::gui::point(0,2)
+			),
+		SGE_TEXT("Main menu")
+	),
 	return_connection(
 		buttons_return.register_clicked(
-			boost::bind(
+			std::tr1::bind(
 				&gameover::return_clicked,
-				this)))
+				this
+			)
+		)
+	)
 {
 	context<machine>().cursor()->visible(true);
 }
@@ -157,10 +182,10 @@ sanguis::client::states::gameover::react(
 	>(
 		*this,
 		*m.message(),
-		boost::bind(
+		std::tr1::bind(
 			&gameover::handle_default_msg,
 			this,
-			_1
+			std::tr1::placeholders::_1
 		)
 	);
 }

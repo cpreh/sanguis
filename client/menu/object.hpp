@@ -33,7 +33,7 @@ namespace menu
 {
 class object
 {
-SGE_NONCOPYABLE(object)
+	SGE_NONCOPYABLE(object)
 public:
 	object(
 		sge::systems::instance const &,

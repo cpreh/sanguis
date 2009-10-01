@@ -4,6 +4,7 @@
 #include "../load/context_fwd.hpp"
 #include "insert_callback.hpp"
 #include "system_fwd.hpp"
+#include <sge/function/object.hpp>
 
 namespace sanguis
 {

@@ -3,7 +3,9 @@
 
 #include "container.hpp"
 #include "property_map.hpp"
+#include "base_ptr.hpp"
 #include "../../particle_type.hpp"
+#include <sge/function/object_fwd.hpp>
 
 namespace sanguis
 {
@@ -15,14 +17,14 @@ namespace particle
 // explosion is a container spawning three generators
 class explosion : public container
 {
-	public:
-	typedef boost::function<
+public:
+	typedef sge::function::object<
 		base_ptr (particle_type::type)
 	> callback;
 
 	explosion(
 		property_map const &,
-		callback,
+		callback const &,
 		point const &pos,
 		point const &speed,
 		depth_type,

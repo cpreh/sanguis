@@ -10,7 +10,7 @@
 #include <sge/iconv.hpp>
 #include <sge/lexical_cast.hpp>
 #include <boost/asio/buffer.hpp>
-#include <boost/bind.hpp>
+#include <tr1/functional>
 
 sanguis::net::detail::client_impl::client_impl() 
 :
@@ -53,11 +53,11 @@ void sanguis::net::detail::client_impl::connect(
 
 	resolver_.async_resolve(
 		query,
-		boost::bind(
+		std::tr1::bind(
 			&client_impl::resolve_handler,
 			this,
-			_1,
-			_2
+			std::tr1::placeholders::_1,
+			std::tr1::placeholders::_2
 		)
 	);
 
@@ -95,11 +95,14 @@ void sanguis::net::detail::client_impl::process()
 				buffer.data(),
 				buffer.size()
 			),
-			boost::bind(
+			std::tr1::bind(
 				&sanguis::net::detail::client_impl::write_handler,
 				this,
-				_1,
-				_2));
+				std::tr1::placeholders::_1,
+				std::tr1::placeholders::_2
+			)
+		);
+
 		++handlers_;
 	}
 
@@ -154,7 +157,14 @@ void sanguis::net::detail::client_impl::resolve_handler(
 	boost::asio::ip::tcp::endpoint endpoint = *i;
 	socket_.async_connect(
 		endpoint,
-		boost::bind(&client_impl::connect_handler,this,_1,++i));
+		std::tr1::bind(
+			&client_impl::connect_handler,
+			this,
+			std::tr1::placeholders::_1,
+			++i
+		)
+	);
+
 	handlers_++;
 }
 
@@ -183,7 +193,9 @@ void sanguis::net::detail::client_impl::handle_error(
 
 	disconnect_signal_(
 		sge::iconv(
-			e.message()));
+			e.message()
+		)
+	);
 }
 
 void sanguis::net::detail::client_impl::read_handler(
@@ -215,12 +227,16 @@ void sanguis::net::detail::client_impl::read_handler(
 
 	socket_.async_receive(
 		boost::asio::buffer(
-			new_data_),
-		boost::bind(
+			new_data_
+		),
+		std::tr1::bind(
 			&client_impl::read_handler,
 			this,
-			_1,
-			_2));
+			std::tr1::placeholders::_1,
+			std::tr1::placeholders::_2
+		)
+	);
+
 	handlers_++;
 }
 
@@ -260,11 +276,14 @@ void sanguis::net::detail::client_impl::write_handler(
 				buffer.data(),
 				buffer.size()
 			),
-			boost::bind(
+			std::tr1::bind(
 				&client_impl::write_handler,
 				this,
-				_1,
-				_2));
+				std::tr1::placeholders::_1,
+				std::tr1::placeholders::_2
+			)
+		);
+
 		handlers_++;
 	}
 	else
@@ -295,11 +314,13 @@ void sanguis::net::detail::client_impl::connect_handler(
 		boost::asio::ip::tcp::endpoint endpoint = *i;
 		socket_.async_connect(
 			endpoint,
-			boost::bind(
+			std::tr1::bind(
 				&client_impl::connect_handler,
 				this,
-				_1,
-				++i));
+				std::tr1::placeholders::_1,
+				++i
+			)
+		);
 		handlers_++;
 		return;
 	}
@@ -314,11 +335,14 @@ void sanguis::net::detail::client_impl::connect_handler(
 	socket_.async_receive(
 		boost::asio::buffer(
 			new_data_),
-		boost::bind(
+		std::tr1::bind(
 			&client_impl::read_handler,
 			this,
-			_1,
-			_2));
+			std::tr1::placeholders::_1,
+			std::tr1::placeholders::_2
+		)
+	);
+
 	handlers_++;
 }
 
