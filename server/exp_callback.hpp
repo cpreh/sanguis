@@ -2,14 +2,14 @@
 #define SANGUIS_SERVER_EXP_CALLBACK_HPP_INCLUDED
 
 #include "exp_type.hpp"
-#include <boost/function.hpp>
+#include <sge/function/object_fwd.hpp>
 
 namespace sanguis
 {
 namespace server
 {
 
-typedef boost::function<
+typedef sge::function::object<
 	void (exp_type)
 > exp_callback;
 

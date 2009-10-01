@@ -4,7 +4,7 @@
 #include "../../tick_event.hpp"
 #include "../../messages/unpause.hpp"
 #include "../../messages/unwrap.hpp"
-#include <boost/bind.hpp>
+#include <tr1/functional>
 
 sanguis::client::states::paused::paused(my_context ctx)
 :
@@ -46,10 +46,10 @@ sanguis::client::states::paused::react(
 	>(
 		*this,
 		*m.message(),
-		boost::bind(
+		std::tr1::bind(
 			&paused::handle_default_msg,
 			this,
-			_1
+			std::tr1::placeholders::_1
 		)
 	);
 }

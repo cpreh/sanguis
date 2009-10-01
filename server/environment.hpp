@@ -9,6 +9,7 @@
 #include "spawn_pickup_callback.hpp"
 #include "pickup_chance_callback.hpp"
 #include <sge/collision/world_fwd.hpp>
+#include <sge/function/object.hpp>
 
 namespace sanguis
 {

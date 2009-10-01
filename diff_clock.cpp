@@ -1,6 +1,6 @@
 #include "diff_clock.hpp"
 #include <sge/time/time.hpp>
-#include <boost/bind.hpp>
+#include <tr1/functional>
 
 sanguis::diff_clock::diff_clock()
 :
@@ -17,9 +17,10 @@ void sanguis::diff_clock::update(
 sanguis::diff_clock::fun_type const
 sanguis::diff_clock::callback() const
 {
-	return boost::bind(
+	return std::tr1::bind(
 		&diff_clock::time,
-		this);
+		this
+	);
 }
 
 sge::time::unit

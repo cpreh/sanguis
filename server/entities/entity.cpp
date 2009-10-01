@@ -28,7 +28,7 @@
 #include <sge/text.hpp>
 #include <boost/logic/tribool.hpp>
 #include <boost/foreach.hpp>
-#include <boost/bind.hpp>
+#include <tr1/functional>
 
 sanguis::server::entities::entity::entity(
 	base_parameters const &param)
@@ -61,10 +61,10 @@ sanguis::server::entities::entity::entity(
 		property(
 			property_type::movement_speed
 		).register_change_callback(
-			boost::bind(
+			std::tr1::bind(
 				&entity::speed_change,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			)
 		)
 	),
@@ -72,10 +72,10 @@ sanguis::server::entities::entity::entity(
 		property(
 			property_type::health
 		).register_change_callback(
-			boost::bind(
+			std::tr1::bind(
 				&entity::health_change,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			)
 		)
 	),
@@ -83,10 +83,10 @@ sanguis::server::entities::entity::entity(
 		property(
 			property_type::health
 		).register_max_change_callback(
-			boost::bind(
+			std::tr1::bind(
 				&entity::max_health_change,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			)
 		)
 	),

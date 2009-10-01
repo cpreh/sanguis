@@ -6,19 +6,19 @@
 #include <sge/time/millisecond.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/log/headers.hpp>
-#include <sge/fstream.hpp>
-#include <sge/istringstream.hpp>
-#include <sge/text.hpp>
 #include <sge/filesystem/exists.hpp>
 #include <sge/filesystem/is_directory.hpp>
 #include <sge/filesystem/is_regular.hpp>
 #include <sge/filesystem/next_file.hpp>
 #include <sge/filesystem/first_file.hpp>
+#include <sge/lexical_cast.hpp>
+#include <sge/optional_impl.hpp>
+#include <sge/fstream.hpp>
+#include <sge/istringstream.hpp>
+#include <sge/text.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include <boost/optional.hpp>
-#include <boost/bind.hpp>
-#include <boost/lexical_cast.hpp>
+#include <tr1/functional>
 
 sge::sprite::animation_series const
 sanguis::load::resource::animations::load(
@@ -27,10 +27,10 @@ sanguis::load::resource::animations::load(
 	return map_get_or_create(
 		animations_,
 		dir, 
-		boost::bind(
+		std::tr1::bind(
 			&animations::do_load,
 			this,
-			_1
+			std::tr1::placeholders::_1
 		)
 	);
 }
@@ -43,7 +43,8 @@ sanguis::load::resource::animations::do_load(
 		throw exception(
 			SGE_TEXT("directory for animation \"")
 			+ dir.string()
-			+ SGE_TEXT("\" doesn't exist"));
+			+ SGE_TEXT("\" doesn't exist")
+		);
 
 	sge::filesystem::path const framesfile = dir / SGE_TEXT("frames");
 
@@ -66,15 +67,24 @@ sanguis::load::resource::animations::do_load(
 			SGE_TEXT("unexpected end of file \"")
 			+ framesfile.string());
 
-	boost::optional<sge::time::resolution> const_delay;
+	sge::optional<
+		sge::time::resolution
+	> const_delay;
+
 	if (boost::algorithm::starts_with(line,SGE_TEXT("frame_length ")))
-		const_delay.reset(
+		const_delay =
 			sge::time::millisecond(
-				boost::lexical_cast<sge::time::unit>(
+				sge::lexical_cast<
+					sge::time::unit
+				>(
 					line.substr(
 						sge::string(
-							SGE_TEXT("frame_length "))
-						.length()))));
+							SGE_TEXT("frame_length ")
+						)
+						.length()
+					)
+				)
+			);
 	else
 		file.seekg(0, std::ios_base::beg);
 	
@@ -99,7 +109,7 @@ sanguis::load::resource::animations::do_load(
 			if (!ss)
 				throw exception(
 					SGE_TEXT("invalid line ")
-					+ boost::lexical_cast<sge::string>(lineno)
+					+ sge::lexical_cast<sge::string>(lineno)
 					+ SGE_TEXT(" in animation ")
 					+ dir.string());
 			filename = ss.str().substr(ss.tellg());
@@ -114,7 +124,11 @@ sanguis::load::resource::animations::do_load(
 			sge::sprite::animation_entity(
 				delay,
 				load_texture(
-					dir / filename)));
+					dir / filename
+				)
+			)
+		);
+
 		++lineno;
 	}
 		
@@ -156,7 +170,9 @@ sanguis::load::resource::animations::load_without_frames_file(
 		sge::sprite::animation_entity(
 			sge::time::millisecond(
 				static_cast<sge::time::unit>(1)),
-			load_texture(first_path)));
+			load_texture(first_path)
+		)
+	);
 	return ret; // TODO: can we do this with boost::assign?
 }
 

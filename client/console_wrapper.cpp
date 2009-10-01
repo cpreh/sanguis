@@ -2,28 +2,31 @@
 #include <sge/console/gfx.hpp>
 #include <sge/input/system.hpp>
 #include <sge/input/key_pair.hpp>
-#include <boost/bind.hpp>
+#include <tr1/functional>
 
 sanguis::client::console_wrapper::console_wrapper(
 	sge::console::gfx &con,
 	sge::input::system_ptr const is,
-	sge::input::key_code const toggler)
+	sge::input::key_code const toggler
+)
 :
 	con(con),
 	ic(
 		is->register_callback(
-			boost::bind(
+			std::tr1::bind(
 				&console_wrapper::input_callback,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			)
 		)
 	),
 	toggler(toggler)
 {}
 
-void sanguis::client::console_wrapper::input_callback(
-	sge::input::key_pair const &k)
+void
+sanguis::client::console_wrapper::input_callback(
+	sge::input::key_pair const &k
+)
 {
 	if (k.key().code() == toggler && k.value() != 0)
 	{
@@ -37,7 +40,8 @@ void sanguis::client::console_wrapper::input_callback(
 
 sge::signal::auto_connection
 sanguis::client::console_wrapper::register_callback(
-	sge::input::callback const c)
+	sge::input::callback const c
+)
 {
 	return callbacks.connect(c);
 }

@@ -26,14 +26,13 @@
 #include <sge/container/map_impl.hpp>
 #include <sge/collision/world.hpp>
 #include <sge/log/headers.hpp>
-#include <sge/format.hpp>
-#include <sge/text.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/time/second_f.hpp>
+#include <sge/format.hpp>
+#include <sge/text.hpp>
 
-#include <boost/lexical_cast.hpp>
 #include <boost/mpl/vector.hpp>
-#include <boost/bind.hpp>
+#include <tr1/functional>
 #include <ostream>
 
 sanguis::server::states::unpaused::unpaused()
@@ -325,11 +324,11 @@ sanguis::server::states::unpaused::react(
 	>(
 		mf,
 		*m.message(),
-		boost::bind(
+		std::tr1::bind(
 			&unpaused::handle_default_msg,
 			this,
 			m.id(),
-			_1
+			std::tr1::placeholders::_1
 		)
 	);
 }

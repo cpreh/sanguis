@@ -6,11 +6,10 @@
 #include "port_type.hpp"
 
 #include <sge/signal/auto_connection.hpp>
+#include <sge/function/object_fwd.hpp>
 #include <sge/noncopyable.hpp>
 #include <sge/string.hpp>
 #include <sge/scoped_ptr.hpp>
-
-#include <boost/function.hpp>
 
 namespace sanguis
 {
@@ -27,9 +26,9 @@ public:
 	typedef void connect_fun (id_type);
 	typedef void disconnect_fun (id_type,sge::string const &);
 	typedef void data_fun (id_type,data_type const &);
-	typedef boost::function<connect_fun> connect_function;
-	typedef boost::function<disconnect_fun> disconnect_function;
-	typedef boost::function<data_fun> data_function;
+	typedef sge::function::object<connect_fun> connect_function;
+	typedef sge::function::object<disconnect_fun> disconnect_function;
+	typedef sge::function::object<data_fun> data_function;
 
 	server();
 	void listen(port_type);

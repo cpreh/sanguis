@@ -2,14 +2,14 @@
 #define SANGUIS_SERVER_INSERT_CALLBACK_HPP_INCLUDED
 
 #include "entities/auto_ptr.hpp"
-#include <boost/function.hpp>
+#include <sge/function/object_fwd.hpp>
 
 namespace sanguis
 {
 namespace server
 {
 
-typedef boost::function<
+typedef sge::function::object<
 	entities::entity & (entities::auto_ptr)
 > insert_callback;
 

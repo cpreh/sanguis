@@ -12,7 +12,7 @@
 #include "../../exception.hpp"
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/text.hpp>
-#include <boost/bind.hpp>
+#include <tr1/functional>
 #include <limits>
 
 namespace
@@ -39,10 +39,10 @@ sanguis::server::entities::entity_with_weapon::entity_with_weapon(
 		property(
 			property_type::attack_speed
 		).register_change_callback(
-			boost::bind(
+			std::tr1::bind(
 				&entity_with_weapon::attack_speed_change,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			)
 		)
 	),
@@ -50,10 +50,10 @@ sanguis::server::entities::entity_with_weapon::entity_with_weapon(
 		property(
 			property_type::reload_speed
 		).register_change_callback(
-			boost::bind(
+			std::tr1::bind(
 				&entity_with_weapon::reload_speed_change,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			)
 		)
 	)

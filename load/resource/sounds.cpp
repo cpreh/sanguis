@@ -10,7 +10,7 @@
 #include <sge/audio/bad_sound_alloc.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/text.hpp>
-#include <boost/bind.hpp>
+#include <tr1/functional>
 
 namespace
 {
@@ -59,10 +59,10 @@ sanguis::load::resource::sounds::load(
 	return map_get_or_create(
 		sounds_,
 		name, 
-		boost::bind(
+		std::tr1::bind(
 			&sounds::do_load,
 			this,
-			_1
+			std::tr1::placeholders::_1
 		)
 	);
 }

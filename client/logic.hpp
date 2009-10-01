@@ -16,9 +16,9 @@
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image/loader_fwd.hpp>
 #include <sge/sprite/point.hpp>
-#include <sge/noncopyable.hpp>
+#include <sge/function/object_fwd.hpp>
 #include <sge/signal/scoped_connection.hpp>
-#include <boost/function.hpp>
+#include <sge/noncopyable.hpp>
 #include <tr1/array>
 #include <vector>
 
@@ -34,7 +34,11 @@ public:
 		send_callback const &,
 		sge::renderer::device_ptr,
 		cursor::object_ptr,
-		sge::console::object &);
+		sge::console::object &
+	);
+
+	~logic();
+
 	void handle_player_action(
 		player_action const &);
 	void give_weapon(
@@ -80,7 +84,7 @@ private:
 	sge::renderer::device_ptr const rend;
 	cursor::object_ptr const cursor_;
 
-	typedef boost::function<
+	typedef sge::function::object<
 		void (key_scale)
 	> action_handler;
 

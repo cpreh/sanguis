@@ -7,15 +7,11 @@
 #include "../../messages/create.hpp"
 #include "../../messages/unwrap.hpp"
 #include "../../messages/base.hpp"
-
 #include <sge/iconv.hpp>
 #include <sge/text.hpp>
 #include <sge/log/headers.hpp>
-
-#include <boost/bind.hpp>
 #include <boost/mpl/vector.hpp>
-
-#include <typeinfo>
+#include <tr1/functional>
 #include <ostream>
 
 // reactions
@@ -41,11 +37,11 @@ sanguis::server::states::paused::react(
 	>(
 		mf,
 		*m.message(),
-		boost::bind(
+		std::tr1::bind(
 			&paused::handle_default_msg,
 			this,
 			m.id(),
-			_1
+			std::tr1::placeholders::_1
 		)
 	);
 }

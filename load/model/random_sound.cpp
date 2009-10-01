@@ -11,7 +11,7 @@
 #include <sge/text.hpp>
 #include <sge/assert.hpp>
 #include <boost/foreach.hpp>
-#include <boost/bind.hpp>
+#include <tr1/functional>
 #include <numeric>
 #include <functional>
 
@@ -57,14 +57,14 @@ sanguis::load::model::random_sound::random_sound(
 			>(
 				0
 			),
-			boost::bind(
+			std::tr1::bind(
 				std::plus<
 					probability_type
 				>(),
-				_1,
-				boost::bind(
+				std::tr1::placeholders::_1,
+				std::tr1::bind(
 					&sound::probability,
-					_2
+					std::tr1::placeholders::_2
 				)
 			)
 		)

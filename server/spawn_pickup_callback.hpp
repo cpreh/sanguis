@@ -2,14 +2,14 @@
 #define SANGUIS_SERVER_SPAWN_PICKUP_CALLBACK_HPP_INCLUDED
 
 #include "pos_type.hpp"
-#include <boost/function.hpp>
+#include <sge/function/object_fwd.hpp>
 
 namespace sanguis
 {
 namespace server
 {
 
-typedef boost::function<
+typedef sge::function::object<
 	void (
 		pos_type const &
 	)

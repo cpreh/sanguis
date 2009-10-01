@@ -29,7 +29,7 @@
 #include <sge/type_info.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/foreach.hpp>
-#include <boost/bind.hpp>
+#include <tr1/functional>
 #include <tr1/random>
 #include <algorithm>
 #include <ostream>
@@ -39,33 +39,33 @@ sanguis::server::states::running::running(
 :
 	my_base(ctx),
 	environment_(
-		boost::bind(
+		std::tr1::bind(
 			&server::machine::send,
 			&(context<machine>()),
-			_1
+			std::tr1::placeholders::_1
 		),
-		boost::bind(&running::insert_entity, this, _1),
-		boost::bind(&running::divide_exp, this, _1),
-		boost::bind(&running::level_callback, this, _1, _2),
-		boost::bind(&machine::resources, &context<machine>()),
-		boost::bind(&pickup_spawner::spawn, &pickup_spawner_, _1),
-		boost::bind(&running::pickup_chance, this, _1),
+		std::tr1::bind(&running::insert_entity, this, std::tr1::placeholders::_1),
+		std::tr1::bind(&running::divide_exp, this, std::tr1::placeholders::_1),
+		std::tr1::bind(&running::level_callback, this, std::tr1::placeholders::_1, std::tr1::placeholders::_2),
+		std::tr1::bind(&machine::resources, &context<machine>()),
+		std::tr1::bind(&pickup_spawner::spawn, &pickup_spawner_, std::tr1::placeholders::_1),
+		std::tr1::bind(&running::pickup_chance, this, std::tr1::placeholders::_1),
 		context<machine>().collision()
 	),
 	coll_connection(
 		context<machine>().collision()->register_callback(
-			boost::bind(
+			std::tr1::bind(
 				collision::execute,
-				_1,
-				_2
+				std::tr1::placeholders::_1,
+				std::tr1::placeholders::_2
 			)
 		)
 	),
 	console_print(
-		boost::bind(
+		std::tr1::bind(
 			&server::machine::console_print,
 			&(context<machine>()),
-			_1
+			std::tr1::placeholders::_1
 		)
 	),
 	entities_(),
@@ -95,10 +95,10 @@ sanguis::server::states::running::running(
 	);
 
 	context<machine>().collision()->test_callback(
-		boost::bind(
+		std::tr1::bind(
 			collision::test,
-			_1,
-			_2
+			std::tr1::placeholders::_1,
+			std::tr1::placeholders::_2
 		)
 	);
 }
@@ -222,11 +222,11 @@ sanguis::server::states::running::react(
 	>(
 		mf,
 		*m.message(),
-		boost::bind(
+		std::tr1::bind(
 			&running::handle_default_msg,
 			this,
 			m.id(),
-			_1
+			std::tr1::placeholders::_1
 		)
 	);
 }

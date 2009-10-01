@@ -3,14 +3,14 @@
 
 #include "level_type.hpp"
 #include "entities/player_fwd.hpp"
-#include <boost/function.hpp>
+#include <sge/function/object_fwd.hpp>
 
 namespace sanguis
 {
 namespace server
 {
 
-typedef boost::function<
+typedef sge::function::object<
 	void (entities::player &, level_type)
 > level_callback;
 

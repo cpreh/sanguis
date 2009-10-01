@@ -12,7 +12,7 @@
 #include <sge/input/key_pair.hpp>
 #include <sge/input/system.hpp>
 #include <sge/text.hpp>
-#include <boost/bind.hpp>
+#include <tr1/functional>
 
 sanguis::client::screenshot::screenshot(
 	sge::renderer::device_ptr const _renderer,
@@ -20,20 +20,20 @@ sanguis::client::screenshot::screenshot(
 	sge::input::system_ptr const is)
 :
 	make_screenshot(
-		boost::bind(
+		std::tr1::bind(
 			&sge::renderer::screenshot,
 			_renderer,
 			_loader,
-			_1
+			std::tr1::placeholders::_1
 		)
 	),
 	active_(false),
 	ic(
 		is->register_callback(
-			boost::bind(
+			std::tr1::bind(
 				&screenshot::input_callback,
 				this,
-				_1
+				std::tr1::placeholders::_1
 			)
 		)
 	)

@@ -41,7 +41,6 @@
 #include <sge/font/object_fwd.hpp>
 #include <sge/log/logger_fwd.hpp>
 #include <sge/noncopyable.hpp>
-#include <boost/function.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
 
 namespace sanguis
@@ -142,11 +141,6 @@ private:
 	entity_map
 		entities,
 		dead_list;
-
-	typedef boost::function<
-		void (
-			messages::base const &)
-	> dispatch_fun;
 };
 
 }

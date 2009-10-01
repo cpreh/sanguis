@@ -2,14 +2,15 @@
 #include "generator.hpp"
 #include "z_ordering.hpp"
 #include "properties.hpp"
+#include <sge/function/object.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/make_auto_ptr.hpp>
 #include <sge/minmax_pair_impl.hpp>
-#include <boost/bind.hpp>
+#include <tr1/functional>
 
 sanguis::draw::particle::explosion::explosion(
 	property_map const &properties_,
-	callback const callback,
+	callback const &callback_,
 	point const &p,
 	point const &s,
 	depth_type const d,
@@ -23,20 +24,25 @@ sanguis::draw::particle::explosion::explosion(
 		d,
 		r,
 		rv,
-		e)
+		e
+	)
 {
 	for (unsigned mt = 0; mt < particle_type::size; ++mt)
 	{
 		particle_type::type const t = static_cast<particle_type::type>(mt);
 
 		properties const &prop(
-			properties_[t]);	
+			properties_[t]
+		);
 
 		base_ptr ptr(
 			sge::make_auto_ptr<
 				particle::generator
 			>(
-				boost::bind(callback, t),
+				std::tr1::bind(
+					callback_,
+					t
+				),
 				point::null(),
 				prop.gen_life_time(),
 				prop.gen_frequency(),

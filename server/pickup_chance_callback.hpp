@@ -2,14 +2,14 @@
 #define SANGUIS_SERVER_PICKUP_CHANCE_CALLBACK_HPP_INCLUDED
 
 #include "probability_type.hpp"
-#include <boost/function.hpp>
+#include <sge/function/object_fwd.hpp>
 
 namespace sanguis
 {
 namespace server
 {
 
-typedef boost::function<
+typedef sge::function::object<
 	bool (
 		probability_type
 	)
