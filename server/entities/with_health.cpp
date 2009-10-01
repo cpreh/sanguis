@@ -10,7 +10,7 @@ sanguis::server::entities::with_health::damage(
 	damage::array const &amounts_
 )
 {
-	// TODO:
+	// TODO: make sure current() doesn't get below 0!
 	
 	if(
 		dead()
@@ -106,7 +106,7 @@ sanguis::server::entities::with_health::on_die()
 bool
 sanguis::server::entities::with_health::dead() const
 {
-	return health_.current() < 0.405f; // LOL Warcraft III
+	return health_.current() == 0;
 }
 
 bool

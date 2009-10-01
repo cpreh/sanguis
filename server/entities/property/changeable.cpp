@@ -1,5 +1,7 @@
 #include "changeable.hpp"
 #include "initial.hpp"
+#include "../../../exception.hpp"
+#include <sge/text.hpp>
 #include <algorithm>
 
 sanguis::server::entities::property::changeable::changeable(
@@ -27,12 +29,11 @@ sanguis::server::entities::property::changeable::changeable(
 	),
 	current_(
 		current_
-	),
-	max_(
+	), max_(
 		base_
 	)
 {
-	clamp_current();
+	check_current();
 }
 
 void
@@ -40,9 +41,20 @@ sanguis::server::entities::property::changeable::current(
 	value_type const ncurrent_
 )
 {
+	value_type const old(
+		current()
+	);
+
 	current_ = ncurrent_;
 
-	clamp_current();
+	if (
+		old != current()
+	)
+		change_signal_(
+			current()
+		);
+
+	check_current();
 }
 
 sanguis::server::entities::property::changeable::value_type
@@ -90,15 +102,21 @@ sanguis::server::entities::property::changeable::on_recalc_max(
 		max()
 	);
 
-	clamp_current();
-}
-
-void
-sanguis::server::entities::property::changeable::clamp_current()
-{
-	current_ =
+	current(
 		std::min(
 			current_,
 			max_
+		)
+	);
+}
+
+void
+sanguis::server::entities::property::changeable::check_current()
+{
+	if(
+		current_ > max_
+	)
+		throw exception(
+			SGE_TEXT("current > max")
 		);
 }

@@ -60,7 +60,7 @@ private:
 	);
 
 	void
-	clamp_current();
+	check_current();
 
 	value_type
 		current_,

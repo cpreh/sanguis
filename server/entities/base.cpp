@@ -58,24 +58,9 @@ sanguis::server::entities::base::update(
 	time_type const time
 )
 {
-	//BOOST_FOREACH(property_map::reference p, properties)
-	//	p.second.reset();
-
 	on_update(
 		time
 	);
-
-	/*
-	BOOST_FOREACH(property_map::reference p, properties)
-		p.second.apply();
-	*/
-
-	// TODO: somehow make this part of property!
-	/*
-	property(property_type::attack_speed).current_to_max();
-	property(property_type::reload_speed).current_to_max();
-	property(property_type::health_regeneration).current_to_max();
-	*/
 }
 
 sanguis::server::entities::auto_weak_link const
