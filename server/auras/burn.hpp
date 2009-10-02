@@ -2,9 +2,10 @@
 #define SANGUIS_SERVER_AURAS_BURN_HPP_INCLUDED
 
 #include "aura.hpp"
-#include "../space_unit.hpp"
+#include "../buffs/provider.hpp"
 #include "../damage/array.hpp"
 #include "../damage/unit.hpp"
+#include "../space_unit.hpp"
 #include "../../time_type.hpp"
 
 namespace sanguis
@@ -40,6 +41,7 @@ private:
 	time_type const pulse_diff;
 	damage::unit const damage_per_pulse;
 	damage::array const damage_values;
+	buffs::provider provider_;
 };
 
 }

@@ -7,20 +7,11 @@ sanguis::server::buffs::buff::expired() const
 	return expired_;
 }
 
-sanguis::entity_id
-sanguis::server::buffs::buff::source() const
-{
-	return source_;
-}
-
 sanguis::server::buffs::buff::~buff()
 {}
 
-sanguis::server::buffs::buff::buff(
-	entity_id const source_
-)
+sanguis::server::buffs::buff::buff()
 :
-	source_(source_),
 	expired_(false)
 {}
 

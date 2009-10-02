@@ -1,6 +1,7 @@
 #include "burn.hpp"
 #include "../buffs/burn.hpp"
 #include "../entities/with_buffs.hpp"
+#include <sge/make_auto_ptr.hpp>
 
 sanguis::server::auras::burn::burn(
 	space_unit const radius,
@@ -17,7 +18,8 @@ sanguis::server::auras::burn::burn(
 	),
 	pulse_diff(pulse_diff),
 	damage_per_pulse(damage_per_pulse),
-	damage_values(damage_values)
+	damage_values(damage_values),
+	provider_()
 {}
 
 void
@@ -25,28 +27,37 @@ sanguis::server::auras::burn::enter(
 	entities::base &entity_
 )
 {
-	dynamic_cast<
-		entities::with_buffs &
-	>(
-		entity_
-	)
-	.add_buff(
-		buffs::auto_ptr(
-			new buffs::burn(
-				owner(),
-				damage_per_pulse,
-				pulse_diff,
-				1,
-				damage_values
-			)
+	buffs::auto_ptr new_buff(
+		sge::make_auto_ptr<
+			buffs::burn
+		>(
+			damage_per_pulse,
+			pulse_diff,
+			1,
+			damage_values
 		)
+	);
+
+	provider_.add(
+		dynamic_cast<
+			entities::with_buffs &
+		>(
+			entity_
+		),
+		new_buff
 	);
 }
 
 void
 sanguis::server::auras::burn::leave(
-	entities::base &
+	entities::base &entity_
 )
 {
-	// FIXME: remove the buff!
+	provider_.remove(
+		dynamic_cast<
+			entities::with_buffs &
+		>(
+			entity_
+		)
+	);
 }

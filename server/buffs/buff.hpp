@@ -1,9 +1,9 @@
 #ifndef SANGUIS_SERVER_BUFFS_BUFF_HPP_INCLUDED
 #define SANGUIS_SERVER_BUFFS_BUFF_HPP_INCLUDED
 
+#include "base_hook.hpp"
 #include "../entities/base_fwd.hpp"
 #include "../../time_type.hpp"
-#include "../../entity_id.hpp"
 #include <sge/noncopyable.hpp>
 
 namespace sanguis
@@ -13,7 +13,10 @@ namespace server
 namespace buffs
 {
 
-class buff {
+class buff
+:
+	public base_hook
+{
 	SGE_NONCOPYABLE(buff)
 public:
 	virtual void
@@ -22,19 +25,16 @@ public:
 		time_type
 	) = 0;
 
-	bool expired() const;
-
-	entity_id source() const;
+	bool
+	expired() const;
 
 	virtual ~buff();
 protected:
-	explicit buff(
-		entity_id source
-	);
+	buff();
 
-	void expire();
+	void
+	expire();
 private:
-	entity_id const source_;
 	bool expired_;
 };
 

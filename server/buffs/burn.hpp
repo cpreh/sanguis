@@ -22,7 +22,6 @@ class burn
 {
 public:
 	burn(
-		entity_id source,
 		damage::unit,
 		time_type pulse_time,
 		unsigned max_pulses,

@@ -4,16 +4,13 @@
 #include <sge/time/resolution.hpp>
 
 sanguis::server::buffs::burn::burn(
-	entity_id const source_,
 	damage::unit const damage_,
 	time_type const pulse_time,
 	unsigned const max_pulses,
 	damage::array const &damage_values
 )
 :
-	buff(
-		source_
-	),
+	buff(),
 	damage_(damage_),
 	clock_(),
 	pulse_timer(
