@@ -31,7 +31,7 @@ sanguis::server::perks::choleric::choleric()
 {}
 
 void
-sanguis::server::perks::choleric::do_apply(
+sanguis::server::perks::choleric::update(
 	entities::base &e,
 	time_type const time,
 	environment::object_ptr const env

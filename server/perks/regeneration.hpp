@@ -2,6 +2,8 @@
 #define SANGUIS_SERVER_PERKS_REGENERATION_HPP_INCLUDED
 
 #include "perk.hpp"
+#include "../entities/base_fwd.hpp"
+#include "../entities/property/value.hpp"
 
 namespace sanguis
 {
@@ -18,13 +20,19 @@ public:
 	regeneration();
 private:
 	void
-	do_apply(
-		entities::base &,
-		time_type,
-		environment::object_ptr
+	apply(
+		entities::base &
+	);
+
+	void
+	unapply(
+		entities::base &
 	);
 
 	bool can_raise_level() const;
+
+	entities::property::value const
+	factor() const;
 };
 
 }

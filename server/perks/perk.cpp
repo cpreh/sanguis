@@ -3,6 +3,29 @@
 #include <sge/text.hpp>
 
 void
+sanguis::server::perks::perk::apply(
+	entities::base &
+)
+{
+}
+
+void
+sanguis::server::perks::perk::unapply(
+	entities::base &
+)
+{
+}
+
+void
+sanguis::server::perks::perk::update(
+	entities::base &,
+	time_type const,
+	environment::object_ptr const
+)
+{
+}
+
+void
 sanguis::server::perks::perk::raise_level()
 {
 	if(!can_raise_level())
@@ -34,16 +57,4 @@ sanguis::server::perks::perk::level() const
 	return level_;
 }
 
-void
-sanguis::server::perks::perk::apply(
-	entities::base &e,
-	time_type const time,
-	environment::object_ptr const env
-)
-{
-	do_apply(
-		e,
-		time,
-		env
-	);
-}
+

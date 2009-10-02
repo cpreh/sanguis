@@ -39,6 +39,10 @@ sanguis::server::entities::with_perks::add_perk(
 		return;
 	}
 
+	p->apply(
+		*this
+	);
+
 	perks_.insert(
 		type_,
 		p
@@ -63,7 +67,7 @@ sanguis::server::entities::with_perks::on_update(
 		perk_container::reference p,
 		perks_
 	)
-		p.second->apply(
+		p.second->update(
 			*this,
 			time,
 			environment()

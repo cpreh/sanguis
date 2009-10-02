@@ -18,8 +18,18 @@ namespace perks
 class perk {
 	SGE_NONCOPYABLE(perk)
 public:
-	void
+	virtual void
 	apply(
+		entities::base &
+	);
+
+	virtual void
+	unapply(
+		entities::base &
+	);
+
+	virtual void
+	update(
 		entities::base &,
 		time_type,
 		environment::object_ptr
@@ -45,14 +55,8 @@ protected:
 	level_type
 	level() const;
 private:
-	virtual void
-	do_apply(
-		entities::base &,
-		time_type,
-		environment::object_ptr
-	) = 0;
-
 	perk_type::type const type_;
+
 	level_type level_;
 };
 

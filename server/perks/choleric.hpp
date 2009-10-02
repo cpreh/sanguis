@@ -22,7 +22,7 @@ public:
 	choleric();
 private:
 	void
-	do_apply(
+	update(
 		entities::base &,
 		time_type,
 		environment::object_ptr
