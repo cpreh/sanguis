@@ -12,6 +12,16 @@ sanguis::server::entities::with_health::damage(
 {
 	// TODO: make sure current() doesn't get below 0!
 	
+        for(
+		damage::array::size_type i = 0;
+		i < amounts_.size();
+		++i
+	)
+		health_.current(
+			health_.current()
+			- damage_ * amounts_[i] * (1 - armor_[i])
+		);
+	
 	if(
 		dead()
 	)

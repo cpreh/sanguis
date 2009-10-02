@@ -29,7 +29,7 @@ sanguis::server::ai::simple::simple(
 		sge::make_auto_ptr<
 			auras::aggro
 		>(
-			10, // FIXME
+			500, // FIXME
 			me_.team(),
 			std::tr1::bind(
 				&simple::target_enters,

@@ -1,5 +1,5 @@
-#ifndef SANGUIS_SERVER_MAPS_MAP_HPP_INCLUDED
-#define SANGUIS_SERVER_MAPS_MAP_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_BUFFS_MAP_HPP_INCLUDED
+#define SANGUIS_SERVER_BUFFS_MAP_HPP_INCLUDED
 
 #include "buff_fwd.hpp"
 #include "../../entity_id.hpp"
