@@ -176,6 +176,10 @@ sanguis::server::entities::with_weapon::add_weapon(
 
 	if (!weapons_.insert(wt,ptr).second)
 		throw exception(SGE_TEXT("couldn't insert weapon"));
+	
+	on_new_weapon(
+		wt
+	);
 }
 
 void
@@ -343,4 +347,11 @@ sanguis::server::entities::with_weapon::reload_speed_change(
 				value_
 			)
 		);
+}
+
+void
+sanguis::server::entities::with_weapon::on_new_weapon(
+	weapon_type::type const
+)
+{
 }

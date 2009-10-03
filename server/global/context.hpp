@@ -2,12 +2,12 @@
 #define SANGUIS_SERVER_GLOBAL_CONTEXT_HPP_INCLUDED
 
 #include "context_fwd.hpp"
-#include "player_map.hpp"
 #include "world_context_fwd.hpp"
 #include "../world/map.hpp"
 #include "../world/context_ptr.hpp"
 #include "../entities/auto_ptr.hpp"
 #include "../entities/insert_parameters_fwd.hpp"
+#include "../entities/player_map.hpp"
 #include "../environment/load_context_ptr.hpp"
 #include "../unicast_callback.hpp"
 #include "../string.hpp"
@@ -143,7 +143,7 @@ private:
 	
 	world::map worlds_;
 	
-	player_map players_;
+	entities::player_map players_;
 
 	server::world::context_ptr const world_context_;
 

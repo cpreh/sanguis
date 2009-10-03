@@ -10,6 +10,7 @@
 #include "../entities/auto_ptr.hpp"
 #include "../entities/insert_parameters_fwd.hpp"
 #include "../entities/base_fwd.hpp"
+#include "../entities/player_map.hpp"
 #include "../environment/object_ptr.hpp"
 #include "../environment/load_context_ptr.hpp"
 #include "../collision/global_groups.hpp"
@@ -27,10 +28,12 @@
 #include "../../messages/auto_ptr.hpp"
 #include <sge/collision/world_fwd.hpp>
 #include <sge/collision/system_fwd.hpp>
+#include <sge/container/map_decl.hpp>
 #include <sge/signal/scoped_connection.hpp>
 #include <sge/time/timer.hpp>
 #include <sge/noncopyable.hpp>
 
+#include "../pickup_spawner.hpp"
 #include "../waves/generator.hpp"
 
 namespace sanguis
@@ -150,6 +153,23 @@ private:
 		messages::auto_ptr
 	);
 
+	void
+	update_entity(
+		entity_map::iterator,
+		time_type,
+		bool update_pos
+	);
+
+	void
+	update_entity_health(
+		entities::base &
+	);
+
+	void
+	remove_entity(
+		entities::base &
+	);
+
 	context_ptr const global_context_;
 
 	server::environment::load_context_ptr const load_context_;
@@ -164,6 +184,8 @@ private:
 
 	entity_map entities_;
 
+	entities::player_map players_;
+
 	sight_range_map sight_ranges_;
 
 	prop_container props_;
@@ -174,6 +196,8 @@ private:
 		collision_connection_test_;
 	
 	server::environment::object_ptr const environment_;
+
+	server::pickup_spawner pickup_spawner_;
 
 	waves::generator wave_gen_; // TODO: this doesn't belong here, only for testing!
 };

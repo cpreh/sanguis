@@ -109,6 +109,11 @@ private:
 	server::team::type
 	team() const;
 
+	void
+	on_new_weapon(
+		weapon_type::type
+	);
+
 	string const name_;
 	server::player_id const player_id_;
 	exp_type exp_;

@@ -12,6 +12,7 @@
 #include "../entities/movable.hpp"
 #include "../entities/with_health.hpp"
 #include "../entities/with_dim.hpp"
+#include "../entities/player.hpp"
 #include "../message_convert/speed.hpp"
 #include "../message_convert/rotate.hpp"
 #include "../message_convert/move.hpp"
@@ -31,8 +32,10 @@
 #include "../../load/model/model.hpp"
 #include "../../exception.hpp"
 #include <sge/math/rect/basic_impl.hpp>
+#include <sge/math/almost_zero.hpp>
 #include <sge/collision/system.hpp>
 #include <sge/collision/world.hpp>
+#include <sge/container/map_impl.hpp>
 #include <sge/time/second.hpp>
 #include <sge/time/millisecond.hpp>
 #include <sge/make_shared_ptr.hpp>
@@ -118,6 +121,9 @@ sanguis::server::world::object::object(
 			)
 		)
 	),
+	pickup_spawner_(
+		environment_
+	),
 	wave_gen_()
 {}
 
@@ -161,100 +167,11 @@ sanguis::server::world::object::update(
 	{
 		++next;
 
-		entities::base &e(
-			*it->second
+		update_entity(
+			it,
+			time_,
+			update_pos
 		);
-
-		if(
-			e.dead()
-		)
-		{
-			// process collision end before the destructor is called
-			e.destroy();
-
-			entities_.erase(
-				it
-			);
-
-			continue;
-		}
-
-		e.update(
-			static_cast<time_type>(time_)
-		);
-
-		if(
-			e.type() != entity_type::indeterminate
-			&& update_pos
-		)
-		{
-			send_entity_specific(
-				e.id(),
-				message_convert::rotate(
-					e
-				)
-			);
-
-			{
-				entities::with_dim const * const with_dim_(
-					dynamic_cast<
-						entities::with_dim const *
-					>(
-						&e
-					)
-				);
-
-				if(
-					with_dim_
-				)
-					send_entity_specific(
-						with_dim_->id(),
-						message_convert::move(
-							*with_dim_
-						)
-					);
-			}
-
-			{
-				entities::movable const *const movable_(
-					dynamic_cast<
-						entities::movable const *
-					>(
-						&e
-					)
-				);
-
-				if(
-					movable_
-				)
-					send_entity_specific(
-						movable_->id(),
-						message_convert::speed(
-							*movable_
-						)
-					);
-			}
-
-			{
-				entities::with_health const *const with_health_(
-					dynamic_cast<
-						entities::with_health const *
-					>(
-						&e
-					)
-				);
-
-				if(
-					with_health_
-				)
-					send_entity_specific(
-						with_health_->id(),
-						message_convert::health(
-							*with_health_	
-						)
-					);
-			}
-		}
 	}
 }
 
@@ -291,6 +208,24 @@ sanguis::server::world::object::insert(
 			SGE_TEXT("Double insert of entity!")
 		);
 	
+	{
+		entities::player *const player_(
+			dynamic_cast<
+				entities::player *
+			>(
+				ret.first->second
+			)
+		);
+
+		if(
+			player_
+		)
+			players_.insert(
+				player_->player_id(),
+				player_
+			);
+	}
+
 	return *ret.first->second;
 }
 
@@ -404,7 +339,6 @@ sanguis::server::world::object::divide_exp(
 	exp_type const exp_
 )
 {
-	/*
 	if(
 		sge::math::almost_zero(
 			exp_
@@ -413,16 +347,25 @@ sanguis::server::world::object::divide_exp(
 		return;
 
 	BOOST_FOREACH(
-		player_map::reference ref,
+		entities::player_map::reference ref,
 		players_
 	)
 	{
-		entities::player &p = *ref.second;
-		p.exp(p.exp() + exp);
+		entities::player &player_(
+			*ref.second
+		);
 
-		send()(message_convert::experience(p));
+		player_.add_exp(
+			exp_
+		);
+
+		send_player_specific(
+			player_.player_id(),
+			message_convert::experience(
+				player_
+			)
+		);
 	}
-	*/
 }
 
 void
@@ -431,6 +374,9 @@ sanguis::server::world::object::pickup_chance(
 	pos_type const &center_
 )
 {
+	pickup_spawner_.spawn(
+		center_
+	);
 }
 
 void
@@ -457,6 +403,10 @@ sanguis::server::world::object::request_transfer(
 		entities_.release(
 			it
 		).release()
+	);
+
+	remove_entity(
+		*entity_
 	);
 
 	global_context_->transfer_entity(
@@ -537,10 +487,6 @@ sanguis::server::world::object::remove_player(
 	global_context_->remove_player(
 		player_id_
 	);
-
-	sight_ranges_.erase(
-		player_id_
-	);
 }
 
 sge::collision::world_ptr const
@@ -586,4 +532,156 @@ sanguis::server::world::object::send_player_specific(
 		player_id_,
 		msg
 	);
+}
+
+void
+sanguis::server::world::object::update_entity(
+	entity_map::iterator const it,
+	time_type const time_,
+	bool const update_pos
+)
+{
+	entities::base &e(
+		*it->second
+	);
+
+	e.update(
+		static_cast<
+			time_type
+		>(
+			time_
+		)
+	);
+
+	if(
+		e.dead()
+	)
+	{
+		update_entity_health(
+			e
+		);
+		
+		// process collision end before the destructor is called
+		e.destroy();
+
+		remove_entity(
+			e
+		);
+
+		entities_.erase(
+			it
+		);
+
+		return;
+	}
+
+
+	if(
+		e.type() == entity_type::indeterminate
+		|| !update_pos
+	)
+		return;
+
+
+	send_entity_specific(
+		e.id(),
+		message_convert::rotate(
+			e
+		)
+	);
+
+	{
+		entities::with_dim const * const with_dim_(
+			dynamic_cast<
+				entities::with_dim const *
+			>(
+				&e
+			)
+		);
+
+		if(
+			with_dim_
+		)
+			send_entity_specific(
+				with_dim_->id(),
+				message_convert::move(
+					*with_dim_
+				)
+			);
+	}
+
+	{
+		entities::movable const *const movable_(
+			dynamic_cast<
+				entities::movable const *
+			>(
+				&e
+			)
+		);
+
+		if(
+			movable_
+		)
+			send_entity_specific(
+				movable_->id(),
+				message_convert::speed(
+					*movable_
+				)
+			);
+	}
+
+	update_entity_health(
+		e
+	);
+}
+
+void
+sanguis::server::world::object::update_entity_health(
+	entities::base &entity_
+)
+{
+	entities::with_health const *const with_health_(
+		dynamic_cast<
+			entities::with_health const *
+		>(
+			&entity_
+		)
+	);
+
+	if(
+		with_health_
+	)
+		send_entity_specific(
+			with_health_->id(),
+			message_convert::health(
+				*with_health_	
+			)
+		);
+}
+
+void
+sanguis::server::world::object::remove_entity(
+	entities::base &entity_
+)
+{
+	entities::player const * const player_(
+		dynamic_cast<
+			entities::player const *
+		>(
+			&entity_
+		)
+	);
+
+	if(
+		player_
+	)
+	{
+		players_.erase(
+			player_->player_id()
+		);
+
+		sight_ranges_.erase(
+			player_->player_id()
+		);
+	}
 }

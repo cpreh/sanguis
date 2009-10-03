@@ -87,7 +87,7 @@ sanguis::server::entities::player::add_exp(
 	exp_type const e
 )
 {
-	exp_ = e;
+	exp_ += e;
 	level_type const
 		old_level = level(),
 		new_level = level_calculate(exp(), old_level);
@@ -263,4 +263,15 @@ sanguis::server::team::type
 sanguis::server::entities::player::team() const
 {
 	return server::team::players;
+}
+
+void
+sanguis::server::entities::player::on_new_weapon(
+	weapon_type::type const type_
+)
+{
+	environment()->got_weapon(
+		id(),
+		type_
+	);
 }

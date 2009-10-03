@@ -104,6 +104,11 @@ private:
 	reload_speed_change(
 		property::value
 	);
+
+	virtual void
+	on_new_weapon(
+		weapon_type::type
+	);
 	
 	typedef boost::ptr_map<
 		weapon_type::type,

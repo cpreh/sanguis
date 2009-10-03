@@ -13,12 +13,10 @@
 #include <tr1/functional>
 
 sanguis::server::pickup_spawner::pickup_spawner(
-	environment::object_ptr const env,
-	environment::load_context_ptr const load_context
+	environment::object_ptr const env
 )
 :
 	env(env),
-	load_context(load_context),
 	rng(
 		sge::assign::make_container<
 			sge::random::actor::container
@@ -96,6 +94,9 @@ sanguis::server::pickup_spawner::pickup_spawner(
 	)
 {}
 
+sanguis::server::pickup_spawner::~pickup_spawner()
+{}
+
 void
 sanguis::server::pickup_spawner::spawn(
 	pos_type const &npos)
@@ -111,7 +112,7 @@ sanguis::server::pickup_spawner::spawn_health()
 	env->insert(
 		entities::auto_ptr(
 			new entities::pickups::health(
-				load_context,
+				env->load_context(),
 				team::players,
 				entities::health_type(10) // FIXME: which health value to use?
 			)
@@ -128,7 +129,7 @@ sanguis::server::pickup_spawner::spawn_monster()
 	env->insert(
 		entities::auto_ptr(
 			new entities::pickups::monster(
-				load_context,
+				env->load_context(),
 				team::players,
 				friend_type::spider
 			)
@@ -146,7 +147,7 @@ sanguis::server::pickup_spawner::spawn_weapon(
 	env->insert(
 		entities::auto_ptr(
 			new entities::pickups::weapon(
-				load_context,
+				env->load_context(),
 				team::players,
 				wtype
 			)

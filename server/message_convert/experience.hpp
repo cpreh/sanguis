@@ -13,7 +13,8 @@ namespace message_convert
 
 messages::auto_ptr
 experience(
-	entities::player const &);
+	entities::player const &
+);
 
 }
 }

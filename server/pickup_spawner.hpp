@@ -2,7 +2,6 @@
 #define SANGUIS_SERVER_PICKUP_SPAWNER_HPP_INCLUDED
 
 #include "environment/object_ptr.hpp"
-#include "environment/load_context_ptr.hpp"
 #include "pos_type.hpp"
 #include "../weapon_type.hpp"
 #include <sge/random/actor/normalized.hpp>
@@ -17,9 +16,8 @@ namespace server
 class pickup_spawner {
 	SGE_NONCOPYABLE(pickup_spawner)
 public:
-	pickup_spawner(
-		environment::object_ptr,
-		environment::load_context_ptr
+	explicit pickup_spawner(
+		environment::object_ptr
 	);
 	
 	~pickup_spawner();
@@ -41,7 +39,6 @@ private:
 	);
 	
 	environment::object_ptr const env;
-	environment::load_context_ptr const load_context;
 	sge::random::actor::normalized rng;
 	pos_type pos;
 };

@@ -24,6 +24,7 @@
 #include <tr1/functional>
 
 #include "../entities/insert_parameters.hpp"
+#include "../weapons/factory.hpp"
 
 sanguis::server::global::context::context(
 	unicast_callback const &send_unicast_,
@@ -85,6 +86,10 @@ sanguis::server::global::context::insert_player(
 		player_.get()
 	);
 
+	entities::player *const ptr(
+		player_.get()
+	);
+
 	world_.insert(
 		entities::auto_ptr(
 			player_
@@ -93,6 +98,12 @@ sanguis::server::global::context::insert_player(
 		entities::insert_parameters(
 			pos_type::null(),
 			0
+		)
+	);
+
+	ptr->add_weapon(
+		weapons::create(
+			weapon_type::pistol
 		)
 	);
 }
