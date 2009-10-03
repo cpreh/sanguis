@@ -25,6 +25,8 @@
 
 #include "../entities/insert_parameters.hpp"
 #include "../weapons/factory.hpp"
+#include "../../resolution.hpp"
+#include <sge/math/dim/basic_impl.hpp>
 
 sanguis::server::global::context::context(
 	unicast_callback const &send_unicast_,
@@ -96,7 +98,18 @@ sanguis::server::global::context::insert_player(
 		),
 		// FIXME: where to insert the player?
 		entities::insert_parameters(
-			pos_type::null(),
+			pos_type(
+				static_cast<
+					space_unit
+				>(
+					resolution().w() / 2
+				),
+				static_cast<
+					space_unit
+				>(
+					resolution().h() / 2
+				)
+			),
 			0
 		)
 	);

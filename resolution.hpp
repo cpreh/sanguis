@@ -9,8 +9,10 @@ namespace sanguis
 sge::renderer::screen_size const
 resolution();
 
-void resolution(
-	sge::renderer::screen_size const &);
+void
+resolution(
+	sge::renderer::screen_size const &
+);
 
 }
 
