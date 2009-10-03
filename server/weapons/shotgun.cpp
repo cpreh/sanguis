@@ -59,18 +59,24 @@ sanguis::server::weapons::shotgun::do_attack(
 	for(
 		unsigned i = 0; i < shells; ++i
 	)
+	{
+		space_unit const direction_(
+			rng()
+		);
+
 		a.environment()->insert(
 			entities::auto_ptr(
 				new entities::projectiles::simple_bullet(
 					a.environment()->load_context(),
 					a.team(),
 					damage_,
-					rng()
+					direction_
 				)
 			),
 			entities::insert_parameters(
 				a.spawn_point(),
-				a.angle()
+				direction_
 			)
 		);
+	}
 }

@@ -80,7 +80,7 @@ sanguis::server::entities::pickups::pickup::can_collide_with_entity(
 {
 	return
 		e.team() == team()
-		&& !e.invulnerable(); // TODO!
+		&& e.type() == entity_type::player;
 }
 
 void
@@ -93,11 +93,11 @@ sanguis::server::entities::pickups::pickup::collision_entity_begin(
 	if(dead())
 		return;
 	
+	life_timer_.expire();
+
 	do_pickup(
 		e
 	);
-
-	life_timer_.expire();
 }
 
 void

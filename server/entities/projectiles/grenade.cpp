@@ -1,6 +1,7 @@
 #include "grenade.hpp"
 #include "aoe_damage.hpp"
 #include "../insert_parameters.hpp"
+#include "../property/from_float.hpp"
 #include "../../collision/create_parameters.hpp"
 #include "../../damage/list.hpp"
 #include "../../damage/meta.hpp"
@@ -16,6 +17,7 @@
 #include <sge/time/millisecond.hpp>
 #include <sge/text.hpp>
 #include <sge/optional_impl.hpp>
+#include <algorithm>
 
 sanguis::server::entities::projectiles::grenade::grenade(
 	server::environment::load_context_ptr const load_context_,
@@ -29,7 +31,7 @@ sanguis::server::entities::projectiles::grenade::grenade(
 	aoe_projectile(
 		aoe_projectile_type::grenade,
 		team_,
-		entities::movement_speed(0),
+		entities::movement_speed(500),
 		load_context_->entity_dim(
 			SGE_TEXT("grenade")
 		),
@@ -63,9 +65,14 @@ sanguis::server::entities::projectiles::grenade::on_transfer(
 )
 {
 	movement_speed().current(
-		collision::distance(
-			param_.center(),
-			dest_
+		std::min(
+			movement_speed().max(),
+			property::from_float(
+				collision::distance(
+					param_.center(),
+					dest_
+				)
+			)
 		)
 	);
 }
