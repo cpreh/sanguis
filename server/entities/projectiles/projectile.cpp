@@ -66,11 +66,21 @@ sanguis::server::entities::projectiles::projectile::on_update(
 	diff_clock_.update(
 		time
 	);
+
+	if(
+		dead()
+	)
+		on_die();
 }
 
 void
 sanguis::server::entities::projectiles::projectile::die()
 {
+	if(
+		dead()
+	)
+		return;
+	
 	life_timer_.expire();
 
 	on_die();

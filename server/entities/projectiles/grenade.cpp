@@ -1,6 +1,6 @@
 #include "grenade.hpp"
 #include "aoe_damage.hpp"
-#include "../insert_parameters.hpp"
+#include "../insert_parameters_pos.hpp"
 #include "../property/from_float.hpp"
 #include "../../collision/create_parameters.hpp"
 #include "../../damage/list.hpp"
@@ -126,9 +126,8 @@ sanguis::server::entities::projectiles::grenade::on_die()
 				)
 			)
 		),
-		insert_parameters(
-			center(),
-			angle()
+		insert_parameters_pos(
+			center()
 		)
 	);
 }
