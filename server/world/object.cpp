@@ -254,16 +254,17 @@ sanguis::server::world::object::weapon_changed(
 
 void
 sanguis::server::world::object::got_weapon(
-	entity_id const id,
-	weapon_type::type const wt
+	player_id const player_id_,
+	entity_id const entity_id_,
+	weapon_type::type const wt_
 )
 {
-	send_entity_specific(
-		id,
+	send_player_specific(
+		player_id_,
 		messages::create(
 			messages::give_weapon(
-				id,
-				wt
+				entity_id_,
+				wt_
 			)
 		)
 	);

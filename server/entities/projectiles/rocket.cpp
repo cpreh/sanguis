@@ -63,7 +63,7 @@ sanguis::server::entities::projectiles::rocket::on_die()
 			)
 		),
 		insert_parameters_pos(
-			pos()
+			center()
 		)
 	);
 }

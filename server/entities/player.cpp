@@ -271,6 +271,7 @@ sanguis::server::entities::player::on_new_weapon(
 )
 {
 	environment()->got_weapon(
+		player_id(),
 		id(),
 		type_
 	);

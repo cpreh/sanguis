@@ -37,11 +37,13 @@ sanguis::server::world::environment::weapon_changed(
 
 void
 sanguis::server::world::environment::got_weapon(
+	player_id const player_id,
 	entity_id const id,
 	weapon_type::type const wt
 )
 {
 	world_.got_weapon(
+		player_id,
 		id,
 		wt
 	);

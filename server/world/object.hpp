@@ -78,7 +78,8 @@ private:
 
 	void
 	got_weapon(
-		entity_id id,
+		player_id,
+		entity_id,
 		weapon_type::type
 	);
 

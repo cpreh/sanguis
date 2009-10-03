@@ -144,8 +144,13 @@ sanguis::server::entities::with_weapon::add_weapon(
 	weapons::auto_ptr ptr
 )
 {
-	weapon_type::type const wt = ptr->type();
-	weapons::magazine_type const magazine_size = ptr->magazine_size();
+	weapon_type::type const wt(
+		ptr->type()
+	);
+
+	weapons::magazine_type const magazine_size(
+		ptr->magazine_size()
+	);
 
 	if(
 		wt == weapon_type::pistol
@@ -174,8 +179,15 @@ sanguis::server::entities::with_weapon::add_weapon(
 		}
 	}
 
-	if (!weapons_.insert(wt,ptr).second)
-		throw exception(SGE_TEXT("couldn't insert weapon"));
+	if(
+		!weapons_.insert(
+			wt,
+			ptr
+		).second
+	)
+		throw exception(
+			SGE_TEXT("couldn't insert weapon")
+		);
 	
 	on_new_weapon(
 		wt

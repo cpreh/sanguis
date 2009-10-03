@@ -37,12 +37,15 @@ sanguis::client::logic::logic(
 	send_callback const &_send,
 	sge::renderer::device_ptr const _rend,
 	cursor::object_ptr const _cursor,
-	sge::console::object &_console)
+	sge::console::object &_console
+)
 :
 	send(
-		_send),
+		_send
+	),
 	rend(
-		_rend),
+		_rend
+	),
 	cursor_(_cursor),
 	actions(
 		sge::assign::make_container<
@@ -130,7 +133,9 @@ sanguis::client::logic::logic(
 				this,
 				cheat_type::kill
 			),
-			SGE_TEXT("Commit suicide"))),
+			SGE_TEXT("Commit suicide")
+		)
+	),
 	cheat_impulse_conn_(
 		_console.insert(
 			SGE_TEXT("impulse"),
@@ -139,7 +144,9 @@ sanguis::client::logic::logic(
 				this,
 				cheat_type::impulse101
 			),
-			SGE_TEXT("Get all weapons")))
+			SGE_TEXT("Get all weapons")
+		)
+	)
 
 {
 	std::fill(
@@ -165,12 +172,22 @@ void sanguis::client::logic::handle_player_action(
 sanguis::client::logic::~logic()
 {}
 
-void sanguis::client::logic::give_weapon(
-	messages::give_weapon const &m)
+void
+sanguis::client::logic::give_weapon(
+	messages::give_weapon const &m
+)
 {
 	if(m.get<messages::roles::entity_id>() != player_id_)
+	{
+		SGE_LOG_WARNING(
+			log(),
+			sge::log::_1
+				<< SGE_TEXT("Got invalid give_weapon message!")
+		);
+
 		return;
-	
+	}
+
 	weapon_type::type const wt(
 		static_cast<
 			weapon_type::type
@@ -207,20 +224,25 @@ void sanguis::client::logic::pause(
 		paused);
 }
 
-void sanguis::client::logic::remove(
-	entity_id const id)
+void
+sanguis::client::logic::remove(
+	entity_id const id
+)
 {
 	if(id == player_id_)
 		player_id_ = invalid_id;
 }
 
-void sanguis::client::logic::player_id(
-	entity_id const id)
+void
+sanguis::client::logic::player_id(
+	entity_id const id
+)
 {
 	player_id_ = id;
 }
 
-sanguis::entity_id sanguis::client::logic::player_id() const
+sanguis::entity_id
+sanguis::client::logic::player_id() const
 {
 	return player_id_;
 }
@@ -430,5 +452,8 @@ void sanguis::client::logic::send_cheat(
 		messages::create(
 			messages::player_cheat(
 				player_id_,
-				c)));
+				c
+			)
+		)
+	);
 }
