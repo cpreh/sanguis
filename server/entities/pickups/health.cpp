@@ -1,5 +1,6 @@
 #include "health.hpp"
 #include "../with_health.hpp"
+#include "../property/add.hpp"
 #include <sge/optional_impl.hpp>
 
 sanguis::server::entities::pickups::health::health(
@@ -30,9 +31,8 @@ sanguis::server::entities::pickups::health::do_pickup(
 		)
 	);
 	
-	// TODO:
-	
-	with_health_.health().current(
-		with_health_.health().current() + amount
+	entities::property::add(
+		with_health_.health(),
+		amount
 	);
 }

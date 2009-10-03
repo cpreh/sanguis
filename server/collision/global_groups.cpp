@@ -70,6 +70,24 @@ sanguis::server::collision::global_groups::global_groups(
 				group::player
 			)
 		)
+		(
+			std::make_pair(
+				group::sight_range,
+				group::pickup
+			)
+		)
+		(
+			std::make_pair(
+				group::sight_range,
+				group::projectile_enemy
+			)
+		)
+		(
+			std::make_pair(
+				group::sight_range,
+				group::projectile_player
+			)
+		)
 	);
 
 	BOOST_FOREACH(
