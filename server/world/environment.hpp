@@ -68,6 +68,12 @@ public:
 	);
 
 	void
+	pickup_chance(
+		probability_type spawn_chance,
+		pos_type const &center
+	);
+
+	void
 	request_transfer(
 		world_id,
 		entity_id,

@@ -3,6 +3,7 @@
 #include "../../weapons/weapon.hpp"
 #include "../../ai/base.hpp"
 #include "../../environment/load_context.hpp"
+#include "../../environment/object.hpp"
 #include "../../../random.hpp"
 #include "../../../load/enemy_name.hpp"
 #include "../../../messages/add_enemy.hpp"
@@ -106,19 +107,12 @@ sanguis::server::entities::enemies::enemy::team() const
 void
 sanguis::server::entities::enemies::enemy::on_die()
 {
-	/*
-	environment().exp()(
+	environment()->divide_exp(
 		exp_
 	);
-	// TODO
 
-	if(
-		environment().pickup_chance()(
-			spawn_chance
-		)
-	)
-		environment().spawn_pickup()(
-			center()
-		);
-	*/
+	environment()->pickup_chance(
+		spawn_chance,
+		center()
+	);
 }

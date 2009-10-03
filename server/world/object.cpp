@@ -426,6 +426,14 @@ sanguis::server::world::object::divide_exp(
 }
 
 void
+sanguis::server::world::object::pickup_chance(
+	probability_type const spawn_chance_,
+	pos_type const &center_
+)
+{
+}
+
+void
 sanguis::server::world::object::request_transfer(
 	world_id const world_id_,
 	entity_id const entity_id_,

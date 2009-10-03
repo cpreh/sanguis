@@ -18,6 +18,8 @@
 #include "../player_id.hpp"
 #include "../dim_type.hpp"
 #include "../string.hpp"
+#include "../pos_type.hpp"
+#include "../probability_type.hpp"
 #include "../../diff_clock.hpp"
 #include "../../time_type.hpp"
 #include "../../world_id.hpp"
@@ -98,6 +100,12 @@ private:
 	void
 	divide_exp(
 		exp_type
+	);
+
+	void
+	pickup_chance(
+		probability_type spawn_chance,
+		pos_type const &center
 	);
 
 	void

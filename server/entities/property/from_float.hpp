@@ -2,6 +2,8 @@
 #define SANGUIS_SERVER_ENTITIES_PROPERTY_FROM_FLOAT_HPP_INCLUDED
 
 #include "value.hpp"
+#include "../../../exception.hpp"
+#include <sge/text.hpp>
 #include <math.h> // TODO: check if we have frexp!
 
 namespace sanguis
@@ -28,6 +30,13 @@ from_float(
 			&exp
 		)
 	);
+
+	if(
+		frac < 0.0
+	)
+		throw exception(
+			SGE_TEXT("Tried to convert a negative floating point number into a rational!")
+		);
 
 	value::int_type const
 		factor(

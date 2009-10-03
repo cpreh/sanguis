@@ -9,6 +9,8 @@
 #include "../player_id.hpp"
 #include "../health_type.hpp"
 #include "../exp_type.hpp"
+#include "../pos_type.hpp"
+#include "../probability_type.hpp"
 #include "../../world_id.hpp"
 #include "../../weapon_type.hpp"
 #include "../../entity_id.hpp"
@@ -66,6 +68,12 @@ public:
 	virtual void
 	divide_exp(
 		exp_type
+	) = 0;
+
+	virtual void
+	pickup_chance(
+		probability_type spawn_chance,
+		pos_type const &center
 	) = 0;
 
 	virtual void
