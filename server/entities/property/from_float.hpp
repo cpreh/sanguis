@@ -4,6 +4,7 @@
 #include "value.hpp"
 #include "../../../exception.hpp"
 #include <sge/text.hpp>
+#include <cstdlib>
 #include <math.h> // TODO: check if we have frexp!
 
 namespace sanguis
@@ -14,6 +15,7 @@ namespace entities
 {
 namespace property
 {
+
 template<
 	typename Float
 >
@@ -43,7 +45,7 @@ from_float(
 			1000
 		),
 		power(
-			1 << exp
+			1 << std::abs(exp)
 		);
 
 	return value(
@@ -57,8 +59,21 @@ from_float(
 				factor
 			)
 		)
-		* power,
-		factor * power
+		* (
+			(exp > 0)
+			?
+				power
+			:
+				1
+		),
+		factor
+		* (
+			(exp < 0)
+			?
+				power
+			:
+				1
+		)
 	);
 
 }

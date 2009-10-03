@@ -83,7 +83,7 @@ sanguis::server::entities::player::exp() const
 }
 
 void
-sanguis::server::entities::player::exp(
+sanguis::server::entities::player::add_exp(
 	exp_type const e
 )
 {

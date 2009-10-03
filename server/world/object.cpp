@@ -404,7 +404,7 @@ sanguis::server::world::object::divide_exp(
 	exp_type const exp_
 )
 {
-#if 0
+	/*
 	if(
 		sge::math::almost_zero(
 			exp_
@@ -422,7 +422,7 @@ sanguis::server::world::object::divide_exp(
 
 		send()(message_convert::experience(p));
 	}
-#endif
+	*/
 }
 
 void

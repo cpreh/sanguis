@@ -51,10 +51,20 @@ public:
 
 	// own functions
 	string const name() const;
-	exp_type exp() const;
-	void exp(exp_type);
-	level_type level() const;
-	level_type level_delta() const;
+
+	exp_type
+	exp() const;
+
+	void
+	add_exp(
+		exp_type
+	);
+
+	level_type
+	level() const;
+
+	level_type
+	level_delta() const;
 
 	bool
 	perk_choosable(

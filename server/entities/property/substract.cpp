@@ -13,7 +13,7 @@ sanguis::server::entities::property::substract(
 	);
 
 	changeable_.current(
-		sub > value_
+		sub > changeable_.current() 
 		?
 			0
 		:
