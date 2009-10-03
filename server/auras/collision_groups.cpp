@@ -23,7 +23,7 @@ sanguis::server::auras::collision_groups(
 			sge::assign::make_container<
 				collision::group_vector
 			>(
-				collision::group::player
+				collision::group::projectile_enemy
 			);
 	
 	if (
@@ -42,7 +42,7 @@ sanguis::server::auras::collision_groups(
 			sge::assign::make_container<
 				collision::group_vector
 			>(
-				collision::group::enemy
+				collision::group::projectile_player
 			);
 
 	// TODO:
