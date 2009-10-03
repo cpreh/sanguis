@@ -5,12 +5,23 @@
 sanguis::server::level_type
 sanguis::server::level_calculate(
 	exp_type const e,
-	level_type)
+	level_type
+)
 {
-	return static_cast<level_type>(
-		static_cast<space_unit>(0.3)*
-		std::sqrt(
-			static_cast<space_unit>(e)
-		)
-	);
+	return
+		level_type(
+			static_cast<
+				level_type::value_type
+			>(
+				static_cast<
+					space_unit
+				>(0.3)
+				*
+				std::sqrt(
+					static_cast<
+						space_unit
+					>(e)
+				)
+			)
+		);
 }

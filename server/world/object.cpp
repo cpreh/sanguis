@@ -18,6 +18,7 @@
 #include "../message_convert/move.hpp"
 #include "../message_convert/health.hpp"
 #include "../message_convert/experience.hpp"
+#include "../message_convert/level_up.hpp"
 #include "../../messages/create.hpp"
 #include "../../messages/remove.hpp"
 #include "../../messages/change_weapon.hpp"
@@ -356,8 +357,10 @@ sanguis::server::world::object::divide_exp(
 			*ref.second
 		);
 
-		player_.add_exp(
-			exp_
+		bool const level_updated(
+			player_.add_exp(
+				exp_
+			)
 		);
 
 		send_player_specific(
@@ -366,6 +369,16 @@ sanguis::server::world::object::divide_exp(
 				player_
 			)
 		);
+
+		if(
+			level_updated
+		)
+			send_player_specific(
+				player_.player_id(),
+				message_convert::level_up(
+					player_
+				)
+			);
 	}
 }
 

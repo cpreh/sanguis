@@ -50,7 +50,6 @@ sanguis::server::entities::player::player(
 	player_id_(player_id_),
 	exp_(0),
 	level_(0),
-	level_delta_(0),
 	skill_points_(0)
 {
 	auras::auto_ptr new_aura(
@@ -82,29 +81,32 @@ sanguis::server::entities::player::exp() const
 	return exp_;
 }
 
-void
+bool
 sanguis::server::entities::player::add_exp(
 	exp_type const e
 )
 {
 	exp_ += e;
+
 	level_type const
-		old_level = level(),
-		new_level = level_calculate(exp(), old_level);
-
-	if (new_level > old_level)
-	{
-		level_delta_ += new_level - old_level;
-		level_ = new_level;
-		++skill_points_;
-
-		/*
-		environment()->level_up()(
-			*this,
-			old_level
+		old_level(
+			level()
+		),
+		new_level(
+			level_calculate(
+				exp(),
+				old_level
+			)
 		);
-		*/
-	}
+
+	if (new_level == old_level)
+		return false;
+	
+	skill_points_ += new_level - old_level;
+
+	level_ = new_level;
+	
+	return true;
 }
 
 sanguis::server::string const
@@ -117,12 +119,6 @@ sanguis::server::level_type
 sanguis::server::entities::player::level() const
 {
 	return level_;
-}
-
-sanguis::server::level_type
-sanguis::server::entities::player::level_delta() const
-{
-	return level_delta_;
 }
 
 bool

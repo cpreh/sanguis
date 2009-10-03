@@ -9,7 +9,7 @@ namespace server
 {
 
 SGE_MAKE_STRONG_TYPEDEF(
-	float,
+	unsigned,
 	level_type
 )
 

@@ -5,7 +5,8 @@
 
 sanguis::messages::auto_ptr
 sanguis::server::message_convert::level_up(
-	entities::player const &p)
+	entities::player const &p
+)
 {
 	return messages::create(
 		messages::level_up(

@@ -13,7 +13,8 @@ namespace message_convert
 
 messages::auto_ptr
 level_up(
-	entities::player const &);
+	entities::player const &
+);
 
 }
 }

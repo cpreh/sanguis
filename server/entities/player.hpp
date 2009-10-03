@@ -55,16 +55,13 @@ public:
 	exp_type
 	exp() const;
 
-	void
+	bool
 	add_exp(
 		exp_type
 	);
 
 	level_type
 	level() const;
-
-	level_type
-	level_delta() const;
 
 	bool
 	perk_choosable(
@@ -117,9 +114,7 @@ private:
 	string const name_;
 	server::player_id const player_id_;
 	exp_type exp_;
-	level_type
-		level_,
-		level_delta_;
+	level_type level_;
 	unsigned skill_points_;
 	perks::tree perk_tree_;
 };
