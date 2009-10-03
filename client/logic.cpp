@@ -247,15 +247,19 @@ sanguis::client::logic::player_id() const
 	return player_id_;
 }
 
-void sanguis::client::logic::handle_move_x(
-	key_scale const s)
+void
+sanguis::client::logic::handle_move_x(
+	key_scale const s
+)
 {
 	direction.x() += s;
 	update_direction();
 }
 
-void sanguis::client::logic::handle_move_y(
-	key_scale const s)
+void
+sanguis::client::logic::handle_move_y(
+	key_scale const s
+)
 {
 	direction.y() += s;
 	update_direction();

@@ -175,7 +175,12 @@ try
 			sge::renderer::window_mode::windowed,
 			sge::renderer::vsync::on))
 		(sge::systems::parameterless::input)
-		(sge::systems::parameterless::image)
+		(
+			sge::systems::named(
+				sge::systems::parameterless::image,
+				SGE_TEXT("libpng")
+			)
+		)
 		(sge::systems::parameterless::audio_player)
 		(sge::systems::parameterless::collision_system)
 		(sge::systems::parameterless::font)
