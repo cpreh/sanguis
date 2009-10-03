@@ -60,7 +60,7 @@ sanguis::server::entities::friend_::on_update(
 		time_
 	);
 
-	with_health::update(
+	with_health::on_update(
 		time_
 	);
 }

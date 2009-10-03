@@ -1,5 +1,7 @@
 #include "collision_groups.hpp"
+#include "../../exception.hpp"
 #include <sge/assign/make_container.hpp>
+#include <sge/text.hpp>
 
 sanguis::server::collision::group_vector const
 sanguis::server::auras::collision_groups(
@@ -45,6 +47,7 @@ sanguis::server::auras::collision_groups(
 				collision::group::projectile_player
 			);
 
-	// TODO:
-	return collision::group_vector();
+	throw exception(
+		SGE_TEXT("Don't know a collision group for an aura.")
+	);
 }

@@ -103,7 +103,7 @@ sanguis::server::global::context::insert_player(
 
 	ptr->add_weapon(
 		weapons::create(
-			weapon_type::rocket_launcher
+			weapon_type::pistol
 		)
 	);
 }

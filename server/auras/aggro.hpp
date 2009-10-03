@@ -26,9 +26,6 @@ public:
 		update_target_function const &remove_target
 	);
 private:
-	collision::group_vector const
-	collision_groups() const;
-
 	void
 	enter(
 		entities::base &target

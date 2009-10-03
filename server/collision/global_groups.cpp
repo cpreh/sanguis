@@ -34,12 +34,7 @@ sanguis::server::collision::global_groups::global_groups(
 	init_map const init_(
 		sge::assign::make_container<
 			init_map
-		>(
-			std::make_pair(
-				group::aggro_aura,
-				group::player
-			)
-		)
+		>
 		(
 			std::make_pair(
 				group::enemy,

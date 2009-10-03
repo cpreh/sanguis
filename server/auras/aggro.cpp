@@ -21,18 +21,6 @@ sanguis::server::auras::aggro::aggro(
 	)
 {}
 
-
-sanguis::server::collision::group_vector const
-sanguis::server::auras::aggro::collision_groups() const
-{
-	return 
-		sge::assign::make_container<
-			collision::group_vector
-		>(
-			collision::group::aggro_aura
-		);
-}
-
 void
 sanguis::server::auras::aggro::enter(
 	entities::base &target

@@ -44,7 +44,7 @@ sanguis::server::weapons::melee::do_attack(
 			)
 		),
 		entities::insert_parameters_pos(
-			a.spawn_point()
+			a.dest()
 		)
 	);
 }
