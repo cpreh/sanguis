@@ -4,12 +4,11 @@
 namespace sanguis
 {
 
-namespace entity_type {
+namespace entity_type
+{
 enum type {
-	decoration,
 	enemy,
 	friend_,
-	indeterminate,
 	pickup,
 	player,
 	projectile,

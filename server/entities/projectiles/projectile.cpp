@@ -41,12 +41,11 @@ sanguis::server::entities::projectiles::projectile::projectile(
 		dim_
 	),
 	team_(team_),
-	type_(
+	server_only_(
 		indeterminate_ == indeterminate::yes
-		?
-			entity_type::indeterminate
-		:
-			entity_type::projectile
+	),
+	type_(
+		entity_type::projectile
 	),
 	ptype_(ptype_),
 	diff_clock_(),
@@ -81,6 +80,12 @@ sanguis::server::team::type
 sanguis::server::entities::projectiles::projectile::team() const
 {
 	return team_;
+}
+
+bool
+sanguis::server::entities::projectiles::projectile::server_only() const
+{
+	return server_only_;	
 }
 
 void

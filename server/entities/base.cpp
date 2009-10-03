@@ -121,6 +121,12 @@ sanguis::server::entities::base::center(
 	);
 }
 
+bool
+sanguis::server::entities::base::server_only() const
+{
+	return false;
+}
+
 sanguis::server::entities::base::~base()
 {}
 

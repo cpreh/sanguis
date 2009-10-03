@@ -43,7 +43,19 @@ sanguis::server::collision::global_groups::global_groups(
 		(
 			std::make_pair(
 				group::enemy,
+				group::projectile_player
+			)
+		)
+		(
+			std::make_pair(
+				group::pickup,
 				group::player
+			)
+		)
+		(
+			std::make_pair(
+				group::player,
+				group::projectile_enemy
 			)
 		)
 		(

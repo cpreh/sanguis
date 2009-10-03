@@ -90,7 +90,7 @@ sanguis::server::auras::aura::can_collide_with(
 
 	return
 		entity_
-		&& entity_->type() != entity_type::indeterminate;
+		&& !entity_->server_only();
 }
 
 void

@@ -446,8 +446,7 @@ sanguis::server::world::object::add_sight_range(
 	);
 
 	if(
-		entity_.type()
-		== entity_type::indeterminate
+		entity_.server_only()
 	)
 		return;
 			
@@ -577,7 +576,7 @@ sanguis::server::world::object::update_entity(
 
 
 	if(
-		e.type() == entity_type::indeterminate
+		e.server_only()
 		|| !update_pos
 	)
 		return;

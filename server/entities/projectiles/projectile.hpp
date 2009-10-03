@@ -55,6 +55,9 @@ protected:
 	server::team::type
 	team() const;
 private:
+	bool
+	server_only() const;
+
 	virtual void
 	on_die();
 
@@ -86,6 +89,8 @@ private:
 	add_message() const;
 
 	server::team::type const team_;
+
+	bool const server_only_;
 
 	entity_type::type const type_;
 

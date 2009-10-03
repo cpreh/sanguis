@@ -13,6 +13,9 @@ namespace group
 enum type {
 	aggro_aura,
 	enemy,
+	pickup,	
+	projectile_enemy,
+	projectile_player,
 	player,
 	sight_range,
 	size

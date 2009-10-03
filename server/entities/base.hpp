@@ -96,7 +96,6 @@ public:
 	virtual bool
 	invulnerable() const = 0;
 
-
 	// message functions
 	
 	virtual messages::auto_ptr
@@ -110,6 +109,9 @@ public:
 
 	virtual server::team::type
 	team() const = 0;
+
+	virtual bool
+	server_only() const;
 
 	virtual ~base();
 private:
