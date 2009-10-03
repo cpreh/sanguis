@@ -177,11 +177,9 @@ try
 		(sge::systems::parameterless::input)
 		(sge::systems::parameterless::image)
 		(sge::systems::parameterless::audio_player)
-		(sge::systems::named(
-			sge::systems::parameterless::collision_system,
-			SGE_TEXT("cell")
-		))
-		(sge::systems::parameterless::font));
+		(sge::systems::parameterless::collision_system)
+		(sge::systems::parameterless::font)
+	);
 
 	// input stuff
 	sge::input::key_state_tracker ks(sys.input_system());
