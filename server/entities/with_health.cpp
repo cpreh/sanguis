@@ -1,5 +1,8 @@
 #include "with_health.hpp"
 #include "property/to_float.hpp"
+#include "property/from_float.hpp"
+#include "property/add.hpp"
+#include "property/substract.hpp"
 #include "property/initial_max.hpp"
 #include "../environment/object.hpp"
 #include <tr1/functional>
@@ -10,16 +13,17 @@ sanguis::server::entities::with_health::damage(
 	damage::array const &amounts_
 )
 {
-	// TODO: make sure current() doesn't get below 0!
-	
         for(
 		damage::array::size_type i = 0;
 		i < amounts_.size();
 		++i
 	)
-		health_.current(
-			health_.current()
-			- damage_ * amounts_[i] * (1 - armor_[i])
+		property::substract(
+			health_,
+			property::from_float(
+				damage_
+				* amounts_[i] * (1 - armor_[i])
+			)
 		);
 	
 	if(
@@ -102,9 +106,12 @@ sanguis::server::entities::with_health::on_update(
 	time_type const time_
 )
 {
-	health().current(
-		health().current()
-		+ regeneration().current() * time_
+	entities::property::add(
+		health_,
+		property::from_float(
+			time_
+		)
+		* regeneration().current()
 	);
 }
 
