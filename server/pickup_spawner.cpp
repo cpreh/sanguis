@@ -8,6 +8,7 @@
 #include "entities/pickups/weapon.hpp"
 #include <sge/random/actor/element.hpp>
 #include <sge/random/actor/container.hpp>
+#include <sge/random/inclusive_range.hpp>
 #include <sge/assign/make_container.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <tr1/functional>
@@ -17,6 +18,12 @@ sanguis::server::pickup_spawner::pickup_spawner(
 )
 :
 	env(env),
+	spawn_prob(
+		sge::random::make_inclusive_range(
+			static_cast<probability_type>(0),
+			static_cast<probability_type>(1)
+		)
+	),
 	rng(
 		sge::assign::make_container<
 			sge::random::actor::container
@@ -99,8 +106,16 @@ sanguis::server::pickup_spawner::~pickup_spawner()
 
 void
 sanguis::server::pickup_spawner::spawn(
-	pos_type const &npos)
+	probability_type const prob,
+	pos_type const &npos
+)
 {
+	if(
+		spawn_prob()
+		> prob
+	)
+		return;
+	
 	// TODO: this is really ugly! :(
 	pos = npos;
 	rng();
@@ -142,7 +157,8 @@ sanguis::server::pickup_spawner::spawn_monster()
 
 void
 sanguis::server::pickup_spawner::spawn_weapon(
-	weapon_type::type const wtype)
+	weapon_type::type const wtype
+)
 {
 	env->insert(
 		entities::auto_ptr(

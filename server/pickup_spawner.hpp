@@ -3,8 +3,10 @@
 
 #include "environment/object_ptr.hpp"
 #include "pos_type.hpp"
+#include "probability_type.hpp"
 #include "../weapon_type.hpp"
 #include <sge/random/actor/normalized.hpp>
+#include <sge/random/uniform.hpp>
 #include <sge/math/vector/basic_decl.hpp>
 #include <sge/noncopyable.hpp>
 
@@ -24,6 +26,7 @@ public:
 	
 	void
 	spawn(
+		probability_type,
 		pos_type const &pos
 	);
 private:
@@ -39,7 +42,13 @@ private:
 	);
 	
 	environment::object_ptr const env;
+
+	sge::random::uniform<
+		probability_type
+	> spawn_prob;
+
 	sge::random::actor::normalized rng;
+
 	pos_type pos;
 };
 

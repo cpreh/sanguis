@@ -376,6 +376,7 @@ sanguis::server::world::object::pickup_chance(
 )
 {
 	pickup_spawner_.spawn(
+		spawn_chance_,
 		center_
 	);
 }
