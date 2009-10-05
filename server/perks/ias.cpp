@@ -46,7 +46,7 @@ sanguis::server::perks::ias::unapply(
 bool
 sanguis::server::perks::ias::can_raise_level() const
 {
-	return level() < 8;
+	return level() <= 8;
 }
 
 sanguis::server::entities::property::value const

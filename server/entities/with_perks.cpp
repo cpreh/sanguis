@@ -20,33 +20,36 @@ sanguis::server::entities::with_perks::add_perk(
 		)
 	);
 
-	if(it != perks_.end())
+	if(
+		it == perks_.end()
+	)
+		it =
+			perks_.insert(
+				type_,
+				p
+			).first;
+
+	perks::perk &perk_(
+		*it->second
+	);
+
+	if(
+		!perk_.can_raise_level()
+	)	
 	{
-		perks::perk &perk_(
-			*it->second
+		SGE_LOG_WARNING(
+			log(),
+			sge::log::_1
+				<< SGE_TEXT("Tried to raise perk level of a perk which can't do this.")
 		);
 
-		if(perk_.can_raise_level())
-			perk_.raise_level();
-		else
-		{
-			SGE_LOG_WARNING(
-				log(),
-				sge::log::_1
-					<< SGE_TEXT("Tried to raise perk level of a perk which can't do this.")
-			);
-		}
 		return;
 	}
 
-	p->apply(
+	perk_.raise_level(
 		*this
 	);
 
-	perks_.insert(
-		type_,
-		p
-	);
 }
 
 sanguis::server::entities::with_perks::with_perks()

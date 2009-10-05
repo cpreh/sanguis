@@ -31,6 +31,16 @@ private:
 	bool
 	can_raise_level() const;
 
+	void
+	apply(
+		entities::base &
+	);
+
+	void
+	unapply(
+		entities::base &
+	);
+
 	diff_clock       clock_;
 	sge::time::timer shoot_timer;
 	sge::random::uniform<space_unit> rand;

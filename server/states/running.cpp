@@ -53,59 +53,6 @@ sanguis::server::states::running::running(
 sanguis::server::states::running::~running()
 {}
 
-#if 0
-void
-sanguis::server::states::running::update_waves(
-	time_type const time
-)
-{
-	/*
-	wave_generator.process(
-		time,
-		environment()
-	);
-	*/
-}
-#endif
-
-	/*
-void
-sanguis::server::states::running::all_dead()
-{
-	messages::types::string_vector names;
-	exp_type exp(0);
-
-	BOOST_FOREACH(
-		player_record_vector::const_reference ref,
-		player_records
-	)
-	{
-		names.push_back(
-			sge::utf8::convert(
-				ref.name()
-			)
-		);
-
-		exp = std::max(
-			exp,
-			ref.exp()
-		);
-	}
-
-	send()(
-		messages::create(
-			messages::highscore
-			(
-				names,
-				exp
-			)
-		)
-	);
-
-	player_records.clear();
-}
-	*/
-
 boost::statechart::result
 sanguis::server::states::running::react(
 	message_event const &m
@@ -246,30 +193,6 @@ sanguis::server::states::running::operator()(
 
 }
 
-/*
-void sanguis::server::states::running::level_callback(
-	entities::player &p,
-	level_type)
-{
-	send()(message_convert::level_up(p));
-
-	send_available_perks(
-		p
-	);
-}
-
-void sanguis::server::states::running::send_available_perks(
-	entities::player const &p)
-{
-	server::send_available_perks(
-		p,
-		context<machine>().unicast(
-			p.net_id()
-		)
-	);
-}
-*/
-
 sanguis::server::global::context &
 sanguis::server::states::running::global_context()
 {
@@ -282,6 +205,7 @@ sanguis::server::states::running::handle_default_msg(
 	messages::base const &m
 )
 {
+#if 0
 	SGE_LOG_WARNING(
 		log(),
 		sge::log::_1
@@ -289,7 +213,7 @@ sanguis::server::states::running::handle_default_msg(
 			<< id
 			<< SGE_TEXT(" of type ")
 			<< sge::type_info(typeid(m)).name());
-
+#endif
 	return discard_event();
 }
 

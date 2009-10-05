@@ -3,20 +3,6 @@
 #include <sge/text.hpp>
 
 void
-sanguis::server::perks::perk::apply(
-	entities::base &
-)
-{
-}
-
-void
-sanguis::server::perks::perk::unapply(
-	entities::base &
-)
-{
-}
-
-void
 sanguis::server::perks::perk::update(
 	entities::base &,
 	time_type const,
@@ -26,12 +12,26 @@ sanguis::server::perks::perk::update(
 }
 
 void
-sanguis::server::perks::perk::raise_level()
+sanguis::server::perks::perk::raise_level(
+	entities::base &owner_
+)
 {
-	if(!can_raise_level())
+	if(
+		!can_raise_level()
+	)
 		throw exception(
-			SGE_TEXT("Can't raise perk level!"));
+			SGE_TEXT("Can't raise perk level!")
+		);
+	
+	unapply(
+		owner_
+	);
+
 	++level_;
+
+	apply(
+		owner_
+	);
 }
 
 sanguis::perk_type::type
@@ -56,5 +56,3 @@ sanguis::server::perks::perk::level() const
 {
 	return level_;
 }
-
-

@@ -19,16 +19,6 @@ class perk {
 	SGE_NONCOPYABLE(perk)
 public:
 	virtual void
-	apply(
-		entities::base &
-	);
-
-	virtual void
-	unapply(
-		entities::base &
-	);
-
-	virtual void
 	update(
 		entities::base &,
 		time_type,
@@ -39,7 +29,9 @@ public:
 	can_raise_level() const = 0;
 	
 	void
-	raise_level();
+	raise_level(
+		entities::base &
+	);
 	
 	perk_type::type
 	type() const;
@@ -55,6 +47,16 @@ protected:
 	level_type
 	level() const;
 private:
+	virtual void
+	apply(
+		entities::base &
+	) = 0;
+
+	virtual void
+	unapply(
+		entities::base &
+	) = 0;
+
 	perk_type::type const type_;
 
 	level_type level_;

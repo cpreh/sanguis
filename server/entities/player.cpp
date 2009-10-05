@@ -136,7 +136,8 @@ sanguis::server::entities::player::perk_choosable(
 
 void
 sanguis::server::entities::player::add_perk(
-	perks::auto_ptr p)
+	perks::auto_ptr p
+)
 {
 	perk_tree_.take(
 		p->type()
