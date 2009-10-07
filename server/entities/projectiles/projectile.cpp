@@ -76,14 +76,7 @@ sanguis::server::entities::projectiles::projectile::on_update(
 void
 sanguis::server::entities::projectiles::projectile::die()
 {
-	if(
-		dead()
-	)
-		return;
-	
 	life_timer_.expire();
-
-	on_die();
 }
 
 sanguis::server::team::type
