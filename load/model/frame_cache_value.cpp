@@ -1,4 +1,5 @@
 #include "frame_cache_value.hpp"
+#include <sge/math/box/basic_impl.hpp>
 
 sanguis::load::model::frame_cache_value::frame_cache_value(
 	sge::time::unit const _delay,
@@ -11,12 +12,14 @@ sanguis::load::model::frame_cache_value::frame_cache_value(
 {
 }
 
-sge::time::unit sanguis::load::model::frame_cache_value::delay() const
+sge::time::unit
+sanguis::load::model::frame_cache_value::delay() const
 {
 	return delay_;
 }
 
-sge::renderer::lock_rect const &sanguis::load::model::frame_cache_value::area() const
+sge::renderer::lock_rect const &
+sanguis::load::model::frame_cache_value::area() const
 {
 	return area_;
 }

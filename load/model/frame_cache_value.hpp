@@ -3,7 +3,7 @@
 
 #include <sge/time/unit.hpp>
 #include <sge/renderer/lock_rect.hpp>
-#include <sge/math/rect/basic_decl.hpp>
+#include <sge/math/box/basic_decl.hpp>
 
 namespace sanguis
 {
