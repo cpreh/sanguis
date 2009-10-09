@@ -47,6 +47,9 @@ public:
 		time_type
 	);
 
+	void
+	die();
+
 	
 	// linking with other objects
 	
@@ -119,6 +122,9 @@ private:
 	on_update(
 		time_type
 	);
+
+	virtual void
+	on_die();
 
 	virtual void
 	on_center(

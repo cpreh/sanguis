@@ -44,5 +44,5 @@ sanguis::server::entities::projectiles::melee::do_damage(
 		)
 	);
 
-	die();
+	expire();
 }

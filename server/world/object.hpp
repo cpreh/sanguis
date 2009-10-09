@@ -166,11 +166,6 @@ private:
 		entities::base &
 	);
 
-	void
-	remove_entity(
-		entities::base &
-	);
-
 	context_ptr const global_context_;
 
 	server::environment::load_context_ptr const load_context_;
@@ -184,10 +179,6 @@ private:
 	sge::time::timer send_timer_;
 
 	entity_map entities_;
-
-	entities::player_map players_;
-
-	sight_range_map sight_ranges_;
 
 	prop_container props_;
 

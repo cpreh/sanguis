@@ -9,6 +9,7 @@
 #include "../player_id.hpp"
 #include "../health_type.hpp"
 #include "../exp_type.hpp"
+#include "../level_type.hpp"
 #include "../pos_type.hpp"
 #include "../probability_type.hpp"
 #include "../../world_id.hpp"
@@ -67,8 +68,17 @@ public:
 	) = 0;
 
 	virtual void
-	divide_exp(
+	exp_changed(
+		player_id,
+		entity_id,
 		exp_type
+	) = 0;
+
+	virtual void
+	level_up(
+		player_id,
+		entity_id,
+		level_type
 	) = 0;
 
 	virtual void

@@ -45,5 +45,5 @@ sanguis::server::entities::projectiles::simple_bullet::do_damage(
 		)
 	);
 
-	die();
+	expire();
 }

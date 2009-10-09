@@ -63,6 +63,12 @@ sanguis::server::entities::base::update(
 	);
 }
 
+void
+sanguis::server::entities::base::die()
+{
+	on_die();
+}
+
 sanguis::server::entities::auto_weak_link const
 sanguis::server::entities::base::link()
 {
@@ -134,6 +140,10 @@ void
 sanguis::server::entities::base::on_update(
 	time_type
 )
+{}
+
+void
+sanguis::server::entities::base::on_die()
 {}
 
 void

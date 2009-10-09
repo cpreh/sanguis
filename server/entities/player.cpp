@@ -81,7 +81,7 @@ sanguis::server::entities::player::exp() const
 	return exp_;
 }
 
-bool
+void
 sanguis::server::entities::player::add_exp(
 	exp_type const e
 )
@@ -105,6 +105,12 @@ sanguis::server::entities::player::add_exp(
 	skill_points_ += new_level - old_level;
 
 	level_ = new_level;
+
+	environment()->level_up(
+		player_id(),
+		id(),
+		level()
+	);
 	
 	return true;
 }

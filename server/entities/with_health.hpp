@@ -31,9 +31,6 @@ public:
 		damage::array const &
 	);
 
-	void
-	die();
-
 	property::changeable &
 	health();
 
@@ -56,9 +53,6 @@ protected:
 		time_type
 	);
 private:
-	virtual void
-	on_die();
-
 	bool
 	dead() const;
 

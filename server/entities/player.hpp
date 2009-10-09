@@ -55,8 +55,10 @@ public:
 	exp_type
 	exp() const;
 
-	bool
+	void	
 	add_exp(
+		player_id,
+		entity_id,
 		exp_type
 	);
 

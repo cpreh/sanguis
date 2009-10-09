@@ -25,21 +25,6 @@ sanguis::server::entities::with_health::damage(
 				* amounts_[i] * (1 - armor_[i])
 			)
 		);
-	
-	if(
-		dead()
-	)
-		on_die();
-}
-
-void
-sanguis::server::entities::with_health::die()
-{
-	health().current(
-		0
-	);
-
-	on_die();
 }
 
 sanguis::server::entities::property::changeable &
@@ -113,11 +98,6 @@ sanguis::server::entities::with_health::on_update(
 		)
 		* regeneration().current()
 	);
-}
-
-void
-sanguis::server::entities::with_health::on_die()
-{
 }
 
 bool

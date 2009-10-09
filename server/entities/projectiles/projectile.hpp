@@ -50,16 +50,13 @@ protected:
 	);
 
 	void
-	die();
+	expire();
 
 	server::team::type
 	team() const;
 private:
 	bool
 	server_only() const;
-
-	virtual void
-	on_die();
 
 	bool
 	dead() const;

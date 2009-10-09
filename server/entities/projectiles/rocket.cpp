@@ -43,7 +43,7 @@ sanguis::server::entities::projectiles::rocket::do_damage(
 	with_health &
 )
 {
-	die();
+	expire();
 }
 
 void

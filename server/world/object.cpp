@@ -33,7 +33,6 @@
 #include "../../load/model/model.hpp"
 #include "../../exception.hpp"
 #include <sge/math/rect/basic_impl.hpp>
-#include <sge/math/almost_zero.hpp>
 #include <sge/collision/system.hpp>
 #include <sge/collision/world.hpp>
 #include <sge/container/map_impl.hpp>
@@ -209,24 +208,6 @@ sanguis::server::world::object::insert(
 			SGE_TEXT("Double insert of entity!")
 		);
 	
-	{
-		entities::player *const player_(
-			dynamic_cast<
-				entities::player *
-			>(
-				ret.first->second
-			)
-		);
-
-		if(
-			player_
-		)
-			players_.insert(
-				player_->player_id(),
-				player_
-			);
-	}
-
 	return *ret.first->second;
 }
 
@@ -337,49 +318,21 @@ sanguis::server::world::object::max_health_changed(
 }
 
 void
-sanguis::server::world::object::divide_exp(
-	exp_type const exp_
+sanguis::server::world::object::exp_changed(
+	player_id const player_id_,
+	entity_id const entity_id_,
+	exp_type const exp_,
 )
 {
-	if(
-		sge::math::almost_zero(
-			exp_
-		)
-	)
-		return;
-
-	BOOST_FOREACH(
-		entities::player_map::reference ref,
-		players_
-	)
-	{
-		entities::player &player_(
-			*ref.second
-		);
-
-		bool const level_updated(
-			player_.add_exp(
+	send_player_specific(
+		player_id_,
+		messages::create(
+			messages::experience(
+				entity_id_,
 				exp_
 			)
-		);
-
-		send_player_specific(
-			player_.player_id(),
-			message_convert::experience(
-				player_
-			)
-		);
-
-		if(
-			level_updated
 		)
-			send_player_specific(
-				player_.player_id(),
-				message_convert::level_up(
-					player_
-				)
-			);
-	}
+	);
 }
 
 void
@@ -418,10 +371,6 @@ sanguis::server::world::object::request_transfer(
 		entities_.release(
 			it
 		).release()
-	);
-
-	remove_entity(
-		*entity_
 	);
 
 	global_context_->transfer_entity(
@@ -574,13 +523,11 @@ sanguis::server::world::object::update_entity(
 		update_entity_health(
 			e
 		);
+
+		e.die();
 		
 		// process collision end before the destructor is called
 		e.destroy();
-
-		remove_entity(
-			e
-		);
 
 		entities_.erase(
 			it
@@ -671,31 +618,4 @@ sanguis::server::world::object::update_entity_health(
 				*with_health_	
 			)
 		);
-}
-
-void
-sanguis::server::world::object::remove_entity(
-	entities::base &entity_
-)
-{
-	entities::player const * const player_(
-		dynamic_cast<
-			entities::player const *
-		>(
-			&entity_
-		)
-	);
-
-	if(
-		player_
-	)
-	{
-		players_.erase(
-			player_->player_id()
-		);
-
-		sight_ranges_.erase(
-			player_->player_id()
-		);
-	}
 }
