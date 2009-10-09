@@ -49,7 +49,6 @@
 #include <sge/sprite/object.hpp>
 #include <sge/sprite/parameters.hpp>
 #include <sge/config/media_path.hpp>
-#include <sge/math/rect/basic_impl.hpp>
 
 // boost
 #include <boost/filesystem.hpp>

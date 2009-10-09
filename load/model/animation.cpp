@@ -19,9 +19,9 @@
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/math/dim/output.hpp>
-#include <sge/math/rect/basic_impl.hpp>
-#include <sge/math/rect/output.hpp>
-#include <sge/math/rect/contains.hpp>
+#include <sge/math/box/basic_impl.hpp>
+#include <sge/math/box/output.hpp>
+#include <sge/math/box/contains.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <sge/log/headers.hpp>
@@ -43,7 +43,7 @@ calc_rect(
 	{
 		SGE_ASSERT(index == static_cast<sge::renderer::size_type>(0));
 		return sge::renderer::lock_rect(
-			sge::renderer::lock_rect::point_type::null(),
+			sge::renderer::lock_rect::pos_type::null(),
 			cell_size);
 	}
 
@@ -59,7 +59,7 @@ calc_rect(
 	);
 
 	return sge::renderer::lock_rect(
-		sge::renderer::lock_rect::point_type(
+		sge::renderer::lock_rect::pos_type(
 			index % cells_per_row,
 			index / cells_per_row
 		) * cell_size_edited + area.pos(),

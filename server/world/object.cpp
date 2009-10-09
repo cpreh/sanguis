@@ -32,7 +32,7 @@
 #include "../../load/model/collection.hpp"
 #include "../../load/model/model.hpp"
 #include "../../exception.hpp"
-#include <sge/math/rect/basic_impl.hpp>
+#include <sge/math/box/basic_impl.hpp>
 #include <sge/collision/system.hpp>
 #include <sge/collision/world.hpp>
 #include <sge/container/map_impl.hpp>
@@ -61,10 +61,14 @@ sanguis::server::world::object::object(
 			sge::collision::optional_rect(
 				sge::collision::rect(
 					// FIXME
-					-500,
-					-500,
-					1000,
-					1000
+					sge::collision::rect::pos_type(
+						-500,
+						-500
+					),
+					sge::collision::rect::dim_type(
+						1500,
+						1500
+					)
 				)
 			)
 		)
