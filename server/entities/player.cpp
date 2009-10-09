@@ -75,12 +75,6 @@ sanguis::server::entities::player::player(
 	);
 }
 
-sanguis::server::exp_type
-sanguis::server::entities::player::exp() const
-{
-	return exp_;
-}
-
 void
 sanguis::server::entities::player::add_exp(
 	exp_type const e
@@ -88,43 +82,41 @@ sanguis::server::entities::player::add_exp(
 {
 	exp_ += e;
 
+	environment()->exp_changed(
+		player_id(),
+		id(),
+		exp_
+	);
+
 	level_type const
 		old_level(
-			level()
+			level_
 		),
 		new_level(
 			level_calculate(
-				exp(),
+				exp_,
 				old_level
 			)
 		);
 
 	if (new_level == old_level)
-		return false;
+		return;
 	
 	skill_points_ += new_level - old_level;
 
 	level_ = new_level;
 
-	environment()->level_up(
+	environment()->level_changed(
 		player_id(),
 		id(),
-		level()
+		level_
 	);
-	
-	return true;
 }
 
 sanguis::server::string const
 sanguis::server::entities::player::name() const
 {
 	return name_;
-}
-
-sanguis::server::level_type
-sanguis::server::entities::player::level() const
-{
-	return level_;
 }
 
 bool
@@ -135,7 +127,7 @@ sanguis::server::entities::player::perk_choosable(
 	return skill_points_
 		&& perk_tree_.choosable(
 			p,
-			level()
+			level_
 		)
 		&& with_perks::perk_choosable(p);
 }
@@ -161,7 +153,7 @@ sanguis::server::entities::player::available_perks() const
 {
 	perks::list ret(
 		perk_tree_.choosables(
-			level()
+			level_
 		)
 	);
 

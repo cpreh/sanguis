@@ -75,7 +75,7 @@ public:
 	) = 0;
 
 	virtual void
-	level_up(
+	level_changed(
 		player_id,
 		entity_id,
 		level_type

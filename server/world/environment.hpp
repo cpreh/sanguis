@@ -64,8 +64,17 @@ public:
 	);
 	
 	void
-	divide_exp(
+	exp_changed(
+		player_id,
+		entity_id,
 		exp_type
+	);
+
+	void
+	level_changed(
+		player_id,
+		entity_id,
+		level_type
 	);
 
 	void

@@ -70,6 +70,12 @@ sanguis::server::entities::auto_weak_link::operator*() const
 sanguis::server::entities::base *
 sanguis::server::entities::auto_weak_link::operator->() const
 {
+	return get();
+}
+
+sanguis::server::entities::base *
+sanguis::server::entities::auto_weak_link::get() const
+{
 	return &checked_ref();
 }
 

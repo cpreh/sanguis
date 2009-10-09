@@ -5,10 +5,7 @@
 #include "damage/list.hpp"
 #include "entities/player.hpp"
 #include "entities/auto_ptr.hpp"
-#include "weapons/factory.hpp"
 #include "weapons/weapon.hpp"
-#include "message_convert/experience.hpp"
-#include "message_convert/level_up.hpp"
 #include "../messages/create.hpp"
 #include "../messages/assign_id.hpp"
 #include "../resolution.hpp"
@@ -52,29 +49,6 @@ sanguis::server::create_player(
 		)
 	);
 
-#if 0
-	// TODO: some defaults here
-	new_player->add_weapon(
-		weapons::create(
-			weapon_type::pistol
-		)
-	);
-#endif
-
-	send_to_player(
-		player_id_,
-		message_convert::experience(
-			*new_player
-		)
-	);
-
-	send_to_player(
-		player_id_,
-		message_convert::level_up(
-			*new_player
-		)
-	);
-	
 	send_available_perks(
 		*new_player,
 		send_to_player

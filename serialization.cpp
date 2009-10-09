@@ -117,10 +117,14 @@ sanguis::deserialize(
 	return ret;
 }
 
-void sanguis::serialize(
+void
+sanguis::serialize(
 	messages::auto_ptr message,
-	net::data_type &array)
+	net::data_type &array
+)
 {
+	SGE_ASSERT(message.get());
+
 	typedef boost::iostreams::back_insert_device<
 		net::data_type
 	> back_inserter;

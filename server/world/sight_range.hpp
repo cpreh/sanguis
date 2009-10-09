@@ -29,6 +29,9 @@ public:
 	contains(
 		entity_id
 	) const;
+
+	bool
+	empty() const;
 private:
 	sight_range_entry_set entries_;
 };

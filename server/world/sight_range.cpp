@@ -48,3 +48,9 @@ sanguis::server::world::sight_range::contains(
 		)
 		!= entries_.end();
 }
+
+bool
+sanguis::server::world::sight_range::empty() const
+{
+	return entries_.empty();
+}

@@ -1,4 +1,6 @@
 #include "enemy.hpp"
+#include "../exp_area.hpp"
+#include "../insert_parameters_pos.hpp"
 #include "../property/initial.hpp"
 #include "../../weapons/weapon.hpp"
 #include "../../ai/base.hpp"
@@ -107,8 +109,15 @@ sanguis::server::entities::enemies::enemy::team() const
 void
 sanguis::server::entities::enemies::enemy::on_die()
 {
-	environment()->divide_exp(
-		exp_
+	environment()->insert(
+		auto_ptr(
+			new entities::exp_area(
+				exp_
+			)
+		),
+		insert_parameters_pos(
+			center()
+		)
 	);
 
 	environment()->pickup_chance(

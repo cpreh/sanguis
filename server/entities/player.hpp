@@ -52,18 +52,10 @@ public:
 	// own functions
 	string const name() const;
 
-	exp_type
-	exp() const;
-
 	void	
 	add_exp(
-		player_id,
-		entity_id,
 		exp_type
 	);
-
-	level_type
-	level() const;
 
 	bool
 	perk_choosable(

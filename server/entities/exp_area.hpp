@@ -36,6 +36,9 @@ private:
 	void
 	on_die();
 
+	space_unit
+	radius() const;
+
 	bool
 	dead() const;
 
@@ -50,6 +53,9 @@ private:
 
 	server::team::type
 	team() const;
+
+	bool
+	server_only() const;
 
 	boost::logic::tribool const 
 	can_collide_with_entity(

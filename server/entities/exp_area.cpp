@@ -4,6 +4,7 @@
 #include <sge/container/map_impl.hpp>
 #include <sge/time/millisecond.hpp>
 #include <boost/logic/tribool.hpp>
+#include <boost/foreach.hpp>
 
 sanguis::server::entities::exp_area::exp_area(
 	exp_type const exp_
@@ -37,11 +38,49 @@ sanguis::server::entities::exp_area::on_update(
 void
 sanguis::server::entities::exp_area::on_die()
 {
+	for(
+		weak_link_map::iterator it(
+			player_links_.begin()
+		),
+		next(
+			it
+		);
+		it != player_links_.end();
+		it = next
+	)
+	{
+		++next;
+
+		if(
+			!it->second
+		)
+			player_links_.erase(
+				it
+			);
+	}
+
 	BOOST_FOREACH(
-		player_link_map::reference ref,
+		weak_link_map::reference ref,
 		player_links_
 	)
-		
+		dynamic_cast<
+			player &
+		>(
+			*ref.second
+		).add_exp(
+			server::exp_type(
+				exp_
+				/ static_cast<exp_type::value_type>(
+					player_links_.size()
+				)
+			)
+		);	
+}
+
+sanguis::server::space_unit
+sanguis::server::entities::exp_area::radius() const
+{
+	return static_cast<space_unit>(2000); // TODO!
 }
 
 bool
@@ -72,6 +111,12 @@ sanguis::server::team::type
 sanguis::server::entities::exp_area::team() const
 {
 	return team::monsters; // FIXME
+}
+
+bool
+sanguis::server::entities::exp_area::server_only() const
+{
+	return true;
 }
 
 boost::logic::tribool const 

@@ -10,11 +10,11 @@
 #include "../entities/auto_ptr.hpp"
 #include "../entities/insert_parameters_fwd.hpp"
 #include "../entities/base_fwd.hpp"
-#include "../entities/player_map.hpp"
 #include "../environment/object_ptr.hpp"
 #include "../environment/load_context_ptr.hpp"
 #include "../collision/global_groups.hpp"
 #include "../exp_type.hpp"
+#include "../level_type.hpp"
 #include "../health_type.hpp"
 #include "../player_id.hpp"
 #include "../dim_type.hpp"
@@ -102,8 +102,17 @@ private:
 	);
 
 	void
-	divide_exp(
+	exp_changed(
+		player_id,
+		entity_id,
 		exp_type
+	);
+
+	void
+	level_changed(
+		player_id,
+		entity_id,
+		level_type
 	);
 
 	void
@@ -173,6 +182,8 @@ private:
 	sge::collision::world_ptr const collision_world_;
 
 	server::collision::global_groups const collision_groups_;
+
+	sight_range_map sight_ranges_;
 
 	diff_clock diff_clock_;
 

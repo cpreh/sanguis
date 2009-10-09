@@ -51,6 +51,9 @@ public:
 
 	base *
 	operator->() const;
+
+	base *
+	get() const;
 private:
 	base &
 	checked_ref() const;

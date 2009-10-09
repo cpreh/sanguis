@@ -17,12 +17,12 @@
 #include "../message_convert/rotate.hpp"
 #include "../message_convert/move.hpp"
 #include "../message_convert/health.hpp"
-#include "../message_convert/experience.hpp"
-#include "../message_convert/level_up.hpp"
 #include "../../messages/create.hpp"
 #include "../../messages/remove.hpp"
 #include "../../messages/change_weapon.hpp"
+#include "../../messages/experience.hpp"
 #include "../../messages/give_weapon.hpp"
+#include "../../messages/level_up.hpp"
 #include "../../messages/start_attacking.hpp"
 #include "../../messages/stop_attacking.hpp"
 #include "../../messages/start_reloading.hpp"
@@ -76,6 +76,7 @@ sanguis::server::world::object::object(
 	collision_groups_(
 		collision_world_
 	),
+	sight_ranges_(),
 	diff_clock_(),
 	send_timer_(
 		sge::time::millisecond(
@@ -85,7 +86,6 @@ sanguis::server::world::object::object(
 		diff_clock_.callback()
 	),
 	entities_(),
-	sight_ranges_(),
 	props_(),
 	collision_connection_begin_(
 		collision_world_->register_begin_callback(
@@ -325,7 +325,7 @@ void
 sanguis::server::world::object::exp_changed(
 	player_id const player_id_,
 	entity_id const entity_id_,
-	exp_type const exp_,
+	exp_type const exp_
 )
 {
 	send_player_specific(
@@ -334,6 +334,24 @@ sanguis::server::world::object::exp_changed(
 			messages::experience(
 				entity_id_,
 				exp_
+			)
+		)
+	);
+}
+
+void
+sanguis::server::world::object::level_changed(
+	player_id const player_id_,
+	entity_id const entity_id_,
+	level_type const level_
+)
+{
+	send_player_specific(
+		player_id_,
+		messages::create(
+			messages::level_up(
+				entity_id_,
+				level_
 			)
 		)
 	);
@@ -430,12 +448,33 @@ sanguis::server::world::object::remove_sight_range(
 	entity_id const target_id_
 )
 {
-	sight_ranges_[
-		player_id_
-	].remove(
-		target_id_
-	);
-		
+	{
+		sight_range_map::iterator const sight_it(
+			sight_ranges_.find(
+				player_id_
+			)
+		);
+
+		SGE_ASSERT(
+			sight_it != sight_ranges_.end()
+		);
+
+		sight_it->second.remove(
+			target_id_
+		);
+
+		// if the player sees nothing here
+		// it must have been deleted / moved
+		// because they player always sees himself
+
+		if(
+			sight_it->second.empty()
+		)
+			sight_ranges_.erase(
+				sight_it
+			);
+	}
+	
 	send_player_specific(
 		player_id_,
 		messages::create(

@@ -86,12 +86,30 @@ sanguis::server::world::environment::max_health_changed(
 }
 
 void
-sanguis::server::world::environment::divide_exp(
+sanguis::server::world::environment::exp_changed(
+	player_id const player_id_,
+	entity_id const entity_id_,
 	exp_type const exp_
 )
 {
-	world_.divide_exp(
+	world_.exp_changed(
+		player_id_,
+		entity_id_,
 		exp_
+	);
+}
+
+void
+sanguis::server::world::environment::level_changed(
+	player_id const player_id_,
+	entity_id const entity_id_,
+	level_type const level_
+)
+{
+	world_.level_changed(
+		player_id_,
+		entity_id_,
+		level_
 	);
 }
 
