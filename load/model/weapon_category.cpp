@@ -151,7 +151,7 @@ sanguis::load::model::weapon_category::weapon_category(
 		)
 			SGE_LOG_WARNING(
 				log(),
-				sge::log::_1
+				sge::log::_
 					<< SGE_TEXT("Double insert in weapon_category!")
 			);
 	}

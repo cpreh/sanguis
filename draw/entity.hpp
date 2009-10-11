@@ -8,7 +8,7 @@
 #include "../entity_id.hpp"
 #include "../weapon_type.hpp"
 #include "../time_type.hpp"
-#include <sge/log/logger_fwd.hpp>
+#include <sge/log/object_fwd.hpp>
 #include <sge/sprite/rotation_type.hpp>
 #include <sge/sprite/point.hpp>
 #include <sge/sprite/dim.hpp>
@@ -67,7 +67,8 @@ protected:
 private:
 	virtual void on_decay();
 
-	static sge::log::logger &log();
+	static sge::log::object &
+	log();
 
 	draw::environment const &env_;
 	entity_id               id_;

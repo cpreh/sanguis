@@ -39,7 +39,7 @@ sanguis::server::entities::with_perks::add_perk(
 	{
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_1
+			sge::log::_
 				<< SGE_TEXT("Tried to raise perk level of a perk which can't do this.")
 		);
 

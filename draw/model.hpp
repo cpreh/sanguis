@@ -9,7 +9,7 @@
 #include "remove_action.hpp"
 #include "../entity_id.hpp"
 #include "../animation_type.hpp"
-#include <sge/log/logger_fwd.hpp>
+#include <sge/log/object_fwd.hpp>
 #include <sge/string.hpp>
 #include <sge/scoped_ptr.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
@@ -75,7 +75,8 @@ private:
 	void update_healthbar();
 	bool animations_ended() const;
 
-	static sge::log::logger &log();
+	static sge::log::object &
+	log();
 
 	bool            attacking,
 	                reloading;

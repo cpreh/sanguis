@@ -24,9 +24,10 @@
 #include <sge/systems/instance.hpp>
 #include <sge/systems/list.hpp>
 #include <sge/log/level.hpp>
-#include <sge/log/logger.hpp>
+#include <sge/log/object.hpp>
 #include <sge/log/global.hpp>
 #include <sge/log/level_string.hpp>
+#include <sge/log/activate_levels.hpp>
 #include <sge/font/system.hpp>
 #include <sge/font/metrics.hpp>
 #include <sge/font/drawer_3d.hpp>
@@ -147,13 +148,15 @@ try
 		)
 	);
 
-	sge::log::global().activate_hierarchy(
+	sge::log::activate_levels(
+		sge::log::global(),
 		sge::log::level_from_string(
 			sge::iconv(log_level)
 		)
 	);
 
-	sanguis::log().activate_hierarchy(
+	sge::log::activate_levels(
+		sanguis::log(),
 		sge::log::level_from_string(
 			sge::iconv(log_level)
 		)

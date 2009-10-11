@@ -1,16 +1,27 @@
 #include "log.hpp"
+#include <sge/log/object.hpp>
+#include <sge/log/parameters/root.hpp>
+#include <sge/log/parameters/all.hpp>
 #include <sge/cerr.hpp>
 #include <sge/text.hpp>
-#include <sge/log/logger.hpp>
 
-sge::log::logger &
+sge::log::object &
 sanguis::log()
 {
-	static sge::log::logger log_(
-		sge::cerr,
-		SGE_TEXT("sanguis: "),
-		true,
-		sge::log::level::warning
+	static sge::log::object log_(
+		sge::log::parameters::root(
+			sge::cerr
+		)
+		.prefix(
+			SGE_TEXT("sanguis: ")
+		)
+		.enabled(
+			true
+		)
+		.level(
+			sge::log::level::warning
+		)
+		.create()
 	);
 	return log_;
 }

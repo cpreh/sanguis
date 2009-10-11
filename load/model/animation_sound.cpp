@@ -96,7 +96,7 @@ sanguis::load::model::animation_sound::animation_sound(
 		)
 			SGE_LOG_WARNING(
 				log(),
-				sge::log::_1
+				sge::log::_
 					<< SGE_TEXT("Double insert in sounds!")
 			);
 	}

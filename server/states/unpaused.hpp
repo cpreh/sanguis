@@ -15,6 +15,7 @@
 #include "../../net/id_type.hpp"
 #include "running.hpp"
 #include <sge/time/timer.hpp>
+#include <sge/log/object_fwd.hpp>
 #include <boost/mpl/list.hpp>
 #include <boost/statechart/simple_state.hpp>
 #include <boost/statechart/result.hpp>
@@ -102,7 +103,7 @@ private:
 		messages::base const &
 	);
 	
-	static sge::log::logger &log();
+	static sge::log::object &log();
 
 	sge::time::timer send_timer;
 };

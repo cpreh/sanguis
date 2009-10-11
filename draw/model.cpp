@@ -10,7 +10,9 @@
 #include "../load/context.hpp"
 #include "../client/id_dont_care.hpp"
 #include "../exception.hpp"
+#include <sge/log/parameters/inherited.hpp>
 #include <sge/log/headers.hpp>
+#include <sge/log/object.hpp>
 #include <sge/math/vector/is_null.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/text.hpp>
@@ -198,7 +200,7 @@ void sanguis::draw::model::start_attacking()
 	if(attacking)
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_1 << SGE_TEXT("start_attacking(): already attacking!"));
+			sge::log::_ << SGE_TEXT("start_attacking(): already attacking!"));
 	attacking = true;
 
 	change_animation();
@@ -209,7 +211,7 @@ void sanguis::draw::model::stop_attacking()
 	if(!attacking)
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_1 << SGE_TEXT("stop_attacking(): already not attacking!"));
+			sge::log::_ << SGE_TEXT("stop_attacking(): already not attacking!"));
 	attacking = false;
 
 	change_animation();
@@ -220,7 +222,7 @@ void sanguis::draw::model::start_reloading()
 	if(reloading)
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_1 << SGE_TEXT("start_reloading(): already reloading!"));
+			sge::log::_ << SGE_TEXT("start_reloading(): already reloading!"));
 	reloading = true;
 
 	change_animation();
@@ -231,7 +233,7 @@ void sanguis::draw::model::stop_reloading()
 	if(!reloading)
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_1 << SGE_TEXT("stop_reloading(): already not reloading!"));
+			sge::log::_ << SGE_TEXT("stop_reloading(): already not reloading!"));
 	reloading = false;
 
 	change_animation();
@@ -310,13 +312,14 @@ bool sanguis::draw::model::animations_ended() const
 	return true;
 }
 
-sge::log::logger &
+sge::log::object &
 sanguis::draw::model::log()
 {
-	static sge::log::logger log_(
-		draw::log(),
-		SGE_TEXT("model: "),
-		true
+	static sge::log::object log_(
+		sge::log::parameters::inherited(
+			draw::log(),
+			SGE_TEXT("model: ")
+		)
 	);
 	return log_;
 }

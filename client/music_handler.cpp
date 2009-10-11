@@ -115,7 +115,7 @@ sanguis::client::music_handler::load_random() const
 		{
 			SGE_LOG_WARNING(
 				log(),
-				sge::log::_1
+				sge::log::_
 					<< SGE_TEXT("Music file \"")
 					<< it->path().string()
 					<< SGE_TEXT("\" failed to load: \"")

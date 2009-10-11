@@ -39,7 +39,7 @@
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/renderer/texture_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
-#include <sge/log/logger_fwd.hpp>
+#include <sge/log/object_fwd.hpp>
 #include <sge/noncopyable.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
 
@@ -124,7 +124,8 @@ private:
 		messages::base const &);
 	draw::system &system();
 	
-	static sge::log::logger &log();
+	static sge::log::object &
+	log();
 
 	draw::system                  ss;
 	hud                           hud_;

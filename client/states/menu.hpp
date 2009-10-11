@@ -10,7 +10,7 @@
 #include "../../messages/disconnect.hpp"
 #include "../../messages/assign_id.hpp"
 #include "../../tick_event_fwd.hpp"
-#include <sge/log/logger_fwd.hpp>
+#include <sge/log/object_fwd.hpp>
 #include <sge/renderer/state/scoped.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
@@ -47,7 +47,7 @@ class menu
 	boost::statechart::result operator()(
 		messages::assign_id const &);
 	private:
-	sge::log::logger &log();
+	sge::log::object &log();
 
 	client::menu::object menu_;
 	connect_state::type connect_state_;

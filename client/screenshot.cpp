@@ -11,6 +11,7 @@
 #include <sge/input/key_code.hpp>
 #include <sge/input/key_pair.hpp>
 #include <sge/input/system.hpp>
+#include <sge/log/headers.hpp>
 #include <sge/text.hpp>
 #include <tr1/functional>
 
@@ -57,7 +58,7 @@ void sanguis::client::screenshot::process()
 
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1
+		sge::log::_
 			<< SGE_TEXT("writing screenshot: ")
 			<< (dir/p)
 	);

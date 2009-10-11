@@ -162,7 +162,7 @@ sanguis::load::model::model::model(
 {
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1
+		sge::log::_
 			<< SGE_TEXT("Entering ")
 			<< path.string()
 	);
@@ -177,7 +177,7 @@ sanguis::load::model::model::model(
 	{
 		SGE_LOG_ERROR(
 			log(),
-			sge::log::_1
+			sge::log::_
 				<< SGE_TEXT("model \"")
 				<< path.string()
 				<< SGE_TEXT("\": \"")
@@ -207,7 +207,7 @@ void sanguis::load::model::model::construct(
 	{
 		SGE_LOG_WARNING(
 			sanguis::load::log(),
-			sge::log::_1
+			sge::log::_
 				<< file 
 				<< SGE_TEXT(" contains errors!")
 			);
@@ -294,7 +294,7 @@ void sanguis::load::model::model::construct(
 		)
 			SGE_LOG_WARNING(
 				log(),
-				sge::log::_1
+				sge::log::_
 					<< SGE_TEXT("Double insert in model!")
 			);
 	}

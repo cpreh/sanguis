@@ -4,6 +4,7 @@
 #include "connection.hpp"
 #include "../log.hpp"
 #include "../exception.hpp"
+#include <sge/log/headers.hpp>
 #include <sge/text.hpp>
 #include <sge/iconv.hpp>
 #include <sge/lexical_cast.hpp>
@@ -34,7 +35,7 @@ void sanguis::net::detail::server_impl::listen(
 {
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1
+		sge::log::_
 			<< SGE_TEXT("server: listening on port ")
 			<< port
 	);
@@ -194,7 +195,7 @@ void sanguis::net::detail::server_impl::read_handler(
 
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1
+		sge::log::_
 			<< SGE_TEXT("server: reading ")
 			<< bytes 
 			<< SGE_TEXT(" bytes."));
@@ -242,7 +243,7 @@ void sanguis::net::detail::server_impl::write_handler(
 
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1
+		sge::log::_
 			<< SGE_TEXT("server: wrote ")
 			<< bytes 
 			<< SGE_TEXT(" bytes.")
@@ -289,7 +290,7 @@ void sanguis::net::detail::server_impl::accept_handler(
 	{
 		SGE_LOG_DEBUG(
 			log(),
-			sge::log::_1 << SGE_TEXT("server: error while accepting"));
+			sge::log::_ << SGE_TEXT("server: error while accepting"));
 		throw exception(
 			sge::iconv(
 				e.message()));
@@ -297,7 +298,7 @@ void sanguis::net::detail::server_impl::accept_handler(
 
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1 << SGE_TEXT("server: accepting a connection"));
+		sge::log::_ << SGE_TEXT("server: accepting a connection"));
 
 	// first set connected, _then_ call handler 
 	// (else queueing code in the handler can't work)
@@ -345,7 +346,7 @@ void sanguis::net::detail::server_impl::handle_error(
 
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1
+		sge::log::_
 			<< SGE_TEXT("server: disconnected ")
 			<< c.id_ 
 			<< SGE_TEXT(" (")

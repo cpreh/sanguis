@@ -10,6 +10,7 @@
 #include "../menu_event.hpp"
 #include "../log.hpp"
 #include <sge/log/headers.hpp>
+#include <sge/log/parameters/inherited.hpp>
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/state/trampoline.hpp>
@@ -148,7 +149,7 @@ sanguis::client::states::menu::operator()(
 {
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1
+		sge::log::_
 			<< SGE_TEXT("received id"));
 	post_event(
 		message_event(
@@ -166,13 +167,13 @@ sanguis::client::states::menu::operator()(
 		case connect_state::unpaused:
 			SGE_LOG_DEBUG(
 				log(),
-				sge::log::_1
+				sge::log::_
 					<< SGE_TEXT("switching to state \"unpaused\""));
 			return transit<unpaused>();
 		case connect_state::paused:
 			SGE_LOG_DEBUG(
 				log(),
-				sge::log::_1
+				sge::log::_
 					<< SGE_TEXT("switching to state \"paused\""));
 			return transit<paused>();
 	}
@@ -180,13 +181,14 @@ sanguis::client::states::menu::operator()(
 		SGE_TEXT("invalid followup state!"));
 }
 
-sge::log::logger &
+sge::log::object &
 sanguis::client::states::menu::log()
 {
-	static sge::log::logger log_(
-		client::log(),
-		SGE_TEXT("states::menu: "),
-		true
+	static sge::log::object log_(
+		sge::log::parameters::inherited(
+			client::log(),
+			SGE_TEXT("states::menu: ")
+		)
 	);
 	return log_;
 }

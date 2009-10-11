@@ -106,7 +106,7 @@ sanguis::server::perks::tree::choosable(
 	{
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_1
+			sge::log::_
 				<< SGE_TEXT("Perk not found in tree")
 		);
 		return false;

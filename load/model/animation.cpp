@@ -88,7 +88,7 @@ load_delay(
 	
 		SGE_LOG_ERROR(
 			sanguis::load::log(),
-			sge::log::_1
+			sge::log::_
 				<< SGE_TEXT("delay not in header but not in specified in leaf TODO")
 				<< SGE_TEXT(" either!")
 		);

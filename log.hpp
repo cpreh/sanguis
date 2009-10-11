@@ -1,12 +1,13 @@
 #ifndef SANGUIS_LOG_HPP_INCLUDED
 #define SANGUIS_LOG_HPP_INCLUDED
 
-#include <sge/log/headers.hpp>
+#include <sge/log/object_fwd.hpp>
 
 namespace sanguis
 {
 
-sge::log::logger &log();
+sge::log::object &
+log();
 
 }
 

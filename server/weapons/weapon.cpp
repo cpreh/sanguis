@@ -14,8 +14,10 @@
 #include <sge/time/resolution.hpp>
 #include <sge/math/circle/basic_impl.hpp>
 #include <sge/math/vector/basic_impl.hpp>
-#include <sge/text.hpp>
+#include <sge/log/parameters/inherited.hpp>
+#include <sge/log/object.hpp>
 #include <sge/log/headers.hpp>
+#include <sge/text.hpp>
 #include <ostream>
 
 sanguis::server::weapons::range const
@@ -160,7 +162,7 @@ sanguis::server::weapons::weapon::weapon(
 	if(ncast_point_ > nbase_cooldown_)
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_1
+			sge::log::_
 				<< SGE_TEXT("A weapon's cast point interval is bigger than its cooldown!")
 	);
 
@@ -256,13 +258,14 @@ sanguis::server::weapons::weapon::on_castpoint(
 )
 {}
 
-sge::log::logger &
+sge::log::object &
 sanguis::server::weapons::weapon::log()
 {
-	static sge::log::logger log_(
-		weapons::log(),
-		SGE_TEXT("weapon: "),
-		true
+	static sge::log::object log_(
+		sge::log::parameters::inherited(
+			weapons::log(),
+			SGE_TEXT("weapon: ")
+		)
 	);
 	return log_;
 }

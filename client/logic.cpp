@@ -181,7 +181,7 @@ sanguis::client::logic::give_weapon(
 	{
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_1
+			sge::log::_
 				<< SGE_TEXT("Got invalid give_weapon message!")
 		);
 

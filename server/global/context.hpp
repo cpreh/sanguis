@@ -23,7 +23,7 @@
 #include "../../messages/auto_ptr.hpp"
 #include "../../load/model/context_fwd.hpp"
 #include <sge/function/object.hpp>
-#include <sge/log/logger_fwd.hpp>
+#include <sge/log/object_fwd.hpp>
 #include <sge/container/map_decl.hpp>
 #include <sge/collision/system_fwd.hpp>
 #include <sge/shared_ptr.hpp>
@@ -134,7 +134,7 @@ private:
 		world_id
 	);
 
-	static sge::log::logger &
+	static sge::log::object &
 	log();
 
 	unicast_callback const send_unicast_;

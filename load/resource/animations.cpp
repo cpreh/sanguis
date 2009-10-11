@@ -159,7 +159,7 @@ sanguis::load::resource::animations::load_without_frames_file(
 	if(sge::filesystem::next_file(first_file) != sge::filesystem::directory_iterator())
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_1
+			sge::log::_
 				<< SGE_TEXT("No frames file found in \"")
 				<< dir
 				<< SGE_TEXT("\" although there is more than one file!")

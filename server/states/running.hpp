@@ -12,7 +12,7 @@
 #include "../../messages/player_choose_perk.hpp"
 #include "../../messages/base_fwd.hpp"
 #include "../../net/id_type.hpp"
-#include <sge/log/logger_fwd.hpp>
+#include <sge/log/object_fwd.hpp>
 #include <sge/scoped_ptr.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/result.hpp>
@@ -44,15 +44,6 @@ public:
 
 	~running();
 	
-	/*
-	void
-	add_player_record(
-		player_record const &
-	);
-
-	void all_dead();
-	*/
-
 	boost::statechart::result
 	react(
 		message_event const &
@@ -107,7 +98,8 @@ private:
 		messages::base const &
 	);
 
-	static sge::log::logger &log();
+	static sge::log::object
+	&log();
 
 	sge::scoped_ptr<
 		global::context

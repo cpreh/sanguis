@@ -7,9 +7,11 @@
 #include "../../messages/create.hpp"
 #include "../../messages/unwrap.hpp"
 #include "../../messages/base.hpp"
+#include <sge/log/parameters/inherited.hpp>
+#include <sge/log/headers.hpp>
+#include <sge/log/object.hpp>
 #include <sge/iconv.hpp>
 #include <sge/text.hpp>
-#include <sge/log/headers.hpp>
 #include <boost/mpl/vector.hpp>
 #include <tr1/functional>
 #include <ostream>
@@ -75,7 +77,7 @@ sanguis::server::states::paused::operator()(
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_1
+		sge::log::_
 			<< SGE_TEXT("got superfluous pause"));;
 	return discard_event();
 }
@@ -88,13 +90,14 @@ sanguis::server::states::paused::handle_default_msg(
 	return forward_event();
 }
 
-sge::log::logger &
+sge::log::object &
 sanguis::server::states::paused::log()
 {
-	static sge::log::logger log_(
-		server::log(),
-		SGE_TEXT("paused: "),
-		true
+	static sge::log::object log_(
+		sge::log::parameters::inherited(
+			server::log(),
+			SGE_TEXT("paused: ")
+		)
 	);
 	return log_;
 }

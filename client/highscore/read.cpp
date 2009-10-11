@@ -46,7 +46,7 @@ sanguis::client::highscore::read(
 		{
 			SGE_LOG_ERROR(
 				log(),
-				sge::log::_1
+				sge::log::_
 					<< SGE_TEXT("Errors in the highscore file detected!")
 			);
 

@@ -17,6 +17,9 @@
 #include <sge/math/dim/structure_cast.hpp>
 #include <sge/math/vector/arithmetic.hpp>
 #include <sge/math/vector/output.hpp>
+#include <sge/log/parameters/inherited.hpp>
+#include <sge/log/object.hpp>
+#include <sge/log/headers.hpp>
 #include <sge/assert.hpp>
 #include <sge/text.hpp>
 #include <sge/make_shared_ptr.hpp>
@@ -27,10 +30,13 @@
 
 namespace
 {
-sge::log::logger mylogger(
-	sanguis::client::log(),
-	SGE_TEXT("perk chooser: "),
-	true);
+
+sge::log::object mylogger(
+	sge::log::parameters::inherited(
+		sanguis::client::log(),
+		SGE_TEXT("perk chooser: ")
+	)
+);
 
 sge::gui::dim const dialog_size()
 {
@@ -115,7 +121,7 @@ sanguis::client::perk_chooser::perk_chooser(
 {
 	SGE_LOG_DEBUG(
 		mylogger,
-		sge::log::_1
+		sge::log::_
 			<< SGE_TEXT("started, dialog size: ")
 			<< background_.size()
 			<< SGE_TEXT(", dialog position: ")
@@ -136,7 +142,7 @@ void sanguis::client::perk_chooser::perks(
 {
 	SGE_LOG_DEBUG(
 		mylogger,
-		sge::log::_1 << SGE_TEXT("got new set of perks"));
+		sge::log::_ << SGE_TEXT("got new set of perks"));
 
 	perks_ = _perks;
 	if (activated())
@@ -173,7 +179,7 @@ void sanguis::client::perk_chooser::activated(bool const n)
 {
 	SGE_LOG_DEBUG(
 		mylogger,
-		sge::log::_1 << SGE_TEXT("set activation to ")
+		sge::log::_ << SGE_TEXT("set activation to ")
 		             << n);
 
 	background_.activation(
@@ -244,7 +250,7 @@ void sanguis::client::perk_chooser::choose_callback(
 {
 	SGE_LOG_DEBUG(
 		mylogger,
-		sge::log::_1
+		sge::log::_
 			<< SGE_TEXT("chose perk ")
 			<< p
 			 << SGE_TEXT(", levels left: ")

@@ -174,7 +174,7 @@ sanguis::load::resource::textures::textures(
 			{
 				SGE_LOG_WARNING(
 					sanguis::load::log(),
-					sge::log::_1
+					sge::log::_
 						<< SGE_TEXT("Error in .id file \")")
 						<< p.string()
 						<< SGE_TEXT("\" in line ")

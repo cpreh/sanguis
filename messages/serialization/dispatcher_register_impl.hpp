@@ -48,7 +48,7 @@ sanguis::messages::serialization::dispatcher_register<T>::dispatcher_register(
 
 		SGE_LOG_FATAL(
 			log(),
-			sge::log::_1
+			sge::log::_
 				<< error
 		);
 

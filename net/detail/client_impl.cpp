@@ -6,6 +6,7 @@
 #undef max
 // asio brings in window.h's max macro :(
 #include <sge/container/raw_vector_impl.hpp>
+#include <sge/log/headers.hpp>
 #include <sge/text.hpp>
 #include <sge/iconv.hpp>
 #include <sge/lexical_cast.hpp>
@@ -40,7 +41,7 @@ void sanguis::net::detail::client_impl::connect(
 {
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1
+		sge::log::_
 			<< SGE_TEXT("client: resolving hostname ")
 			<< sge::iconv(s) << SGE_TEXT(" on port")
 			 << port
@@ -152,7 +153,7 @@ void sanguis::net::detail::client_impl::resolve_handler(
 
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1 << SGE_TEXT("client: resolved domain, trying to connect"));
+		sge::log::_ << SGE_TEXT("client: resolved domain, trying to connect"));
 	
 	boost::asio::ip::tcp::endpoint endpoint = *i;
 	socket_.async_connect(
@@ -186,7 +187,7 @@ void sanguis::net::detail::client_impl::handle_error(
 		
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1
+		sge::log::_
 			<< SGE_TEXT("client: disconnected (")
 			<< sge::iconv(e.message()) 
 			<< SGE_TEXT(")"));
@@ -214,7 +215,7 @@ void sanguis::net::detail::client_impl::read_handler(
 
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1
+		sge::log::_
 			<< SGE_TEXT("client: read ")
 			<< bytes
 			<< SGE_TEXT(" bytes.")
@@ -256,7 +257,7 @@ void sanguis::net::detail::client_impl::write_handler(
 
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1
+		sge::log::_
 			<< SGE_TEXT("client: wrote ")
 			<< bytes 
 			<< SGE_TEXT(" bytes"));
@@ -309,7 +310,7 @@ void sanguis::net::detail::client_impl::connect_handler(
 
 		SGE_LOG_DEBUG(
 			log(),
-			sge::log::_1 << SGE_TEXT("client: resolving next endpoint"));
+			sge::log::_ << SGE_TEXT("client: resolving next endpoint"));
 		
 		boost::asio::ip::tcp::endpoint endpoint = *i;
 		socket_.async_connect(
@@ -327,7 +328,7 @@ void sanguis::net::detail::client_impl::connect_handler(
 
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1 << SGE_TEXT("client: connected"));
+		sge::log::_ << SGE_TEXT("client: connected"));
 
 	// first connect to true, _then_ call signal
 	connected_ = true;

@@ -10,6 +10,7 @@
 #include "../../messages/create.hpp"
 #include "../../load/context.hpp"
 #include <sge/container/map_impl.hpp>
+#include <sge/log/parameters/inherited.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/utf8/convert.hpp>
 #include <sge/text.hpp>
@@ -43,7 +44,7 @@ sanguis::server::states::running::running(
 {
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_1
+		sge::log::_
 			<< SGE_TEXT("constructor, listening")
 	);
 
@@ -121,7 +122,7 @@ sanguis::server::states::running::operator()(
 {
 	SGE_LOG_INFO(
 		log(),
-		sge::log::_1
+		sge::log::_
 			<< SGE_TEXT("client ")
 			<< id
 			<< SGE_TEXT(" connected")
@@ -138,7 +139,7 @@ sanguis::server::states::running::operator()(
 {
 	SGE_LOG_INFO(
 		log(),
-		sge::log::_1
+		sge::log::_
 			<< SGE_TEXT("client with id ")
 			<< id
 			<< SGE_TEXT(" disconnected")
@@ -208,7 +209,7 @@ sanguis::server::states::running::handle_default_msg(
 #if 0
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_1
+		sge::log::_
 			<< SGE_TEXT("received unexpected message from id ")
 			<< id
 			<< SGE_TEXT(" of type ")
@@ -217,13 +218,14 @@ sanguis::server::states::running::handle_default_msg(
 	return discard_event();
 }
 
-sge::log::logger &
+sge::log::object &
 sanguis::server::states::running::log()
 {
-	static sge::log::logger log_(
-		server::log(),
-		SGE_TEXT("running: "),
-		true
+	static sge::log::object log_(
+		sge::log::parameters::inherited(
+			server::log(),
+			SGE_TEXT("running: ")
+		)
 	);
 	return log_;
 }

@@ -135,7 +135,7 @@ sanguis::load::model::part::part(
 		)
 			SGE_LOG_WARNING(
 				log(),
-				sge::log::_1
+				sge::log::_
 					<< SGE_TEXT("Double insert in part!")
 			);
 	}
