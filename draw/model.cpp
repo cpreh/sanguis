@@ -318,7 +318,7 @@ sanguis::draw::model::log()
 	static sge::log::object log_(
 		sge::log::parameters::inherited(
 			draw::log(),
-			SGE_TEXT("model: ")
+			SGE_TEXT("model")
 		)
 	);
 	return log_;

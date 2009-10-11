@@ -96,7 +96,7 @@ sanguis::server::states::paused::log()
 	static sge::log::object log_(
 		sge::log::parameters::inherited(
 			server::log(),
-			SGE_TEXT("paused: ")
+			SGE_TEXT("paused")
 		)
 	);
 	return log_;

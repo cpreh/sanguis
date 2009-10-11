@@ -10,7 +10,7 @@ sanguis::net::log()
 	static sge::log::object l(
 		sge::log::parameters::inherited(
 			sanguis::log(),
-			SGE_TEXT("net: ")
+			SGE_TEXT("net")
 		)
 	);
 

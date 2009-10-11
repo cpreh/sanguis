@@ -187,7 +187,7 @@ sanguis::client::states::menu::log()
 	static sge::log::object log_(
 		sge::log::parameters::inherited(
 			client::log(),
-			SGE_TEXT("states::menu: ")
+			SGE_TEXT("states::menu")
 		)
 	);
 	return log_;

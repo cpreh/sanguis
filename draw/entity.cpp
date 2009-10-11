@@ -181,7 +181,7 @@ sanguis::draw::entity::log()
 	static sge::log::object log_(
 		sge::log::parameters::inherited(
 			draw::log(),
-			SGE_TEXT("entity: ")
+			SGE_TEXT("entity")
 		)
 	);
 	return log_;

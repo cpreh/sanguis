@@ -224,7 +224,7 @@ sanguis::server::states::running::log()
 	static sge::log::object log_(
 		sge::log::parameters::inherited(
 			server::log(),
-			SGE_TEXT("running: ")
+			SGE_TEXT("running")
 		)
 	);
 	return log_;

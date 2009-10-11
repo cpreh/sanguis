@@ -246,7 +246,7 @@ sanguis::server::states::unpaused::log()
 	static sge::log::object log_(
 		sge::log::parameters::inherited(
 			server::log(),
-			SGE_TEXT("unpaused: ")
+			SGE_TEXT("unpaused")
 		)
 	);
 

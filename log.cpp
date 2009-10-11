@@ -13,7 +13,7 @@ sanguis::log()
 			sge::cerr
 		)
 		.prefix(
-			SGE_TEXT("sanguis: ")
+			SGE_TEXT("sanguis")
 		)
 		.enabled(
 			true

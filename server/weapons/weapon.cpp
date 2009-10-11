@@ -264,7 +264,7 @@ sanguis::server::weapons::weapon::log()
 	static sge::log::object log_(
 		sge::log::parameters::inherited(
 			weapons::log(),
-			SGE_TEXT("weapon: ")
+			SGE_TEXT("weapon")
 		)
 	);
 	return log_;

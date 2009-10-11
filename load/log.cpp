@@ -10,7 +10,7 @@ sanguis::load::log()
 	static sge::log::object log_(
 		sge::log::parameters::inherited(
 			sanguis::log(),
-			SGE_TEXT("load: ")
+			SGE_TEXT("load")
 		)
 	);
 	return log_;

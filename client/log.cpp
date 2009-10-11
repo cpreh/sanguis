@@ -10,7 +10,7 @@ sanguis::client::log()
 	static sge::log::object log_(
 		sge::log::parameters::inherited(
 			sanguis::log(),
-			SGE_TEXT("client: ")
+			SGE_TEXT("client")
 		)
 	);
 	return log_;
