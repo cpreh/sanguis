@@ -156,11 +156,14 @@ sanguis::draw::healthbar::remaining_health() const
 void sanguis::draw::healthbar::recalc_health()
 {
 	if(health_ > max_health_)
+		return;
+		/*
 		throw exception(
 			(sge::format(SGE_TEXT("draw::healthbar: health (%1%) > max_health (%2%)!"))
 			% health_
 			% max_health_).str()
 		);
+		*/
 
 	if(sge::math::almost_zero(max_health_)) // TODO:
 		return;

@@ -1,5 +1,4 @@
 #include "aoe_projectile.hpp"
-#include "../../health_type.hpp"
 #include "../../../messages/add_aoe_projectile.hpp"
 #include "../../../messages/create.hpp"
 #include <sge/math/vector/basic_impl.hpp>
@@ -43,10 +42,8 @@ sanguis::server::entities::projectiles::aoe_projectile::add_message() const
 			id(),
 			pos(),
 			angle(),
-			abs_speed(),
-			health_type(0),
-			health_type(0),
 			dim(),
+			abs_speed(),
 			aoe_,
 			type_
 		)

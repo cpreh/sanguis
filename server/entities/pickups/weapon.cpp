@@ -3,7 +3,6 @@
 #include "../../weapons/weapon.hpp"
 #include "../../weapons/factory.hpp"
 #include "../../environment/load_context.hpp"
-#include "../../health_type.hpp"
 #include "../../../load/weapon_pickup_name.hpp"
 #include "../../../messages/create.hpp"
 #include "../../../messages/add_weapon_pickup.hpp"
@@ -44,9 +43,6 @@ sanguis::server::entities::pickups::weapon::add_message() const
 			id(),
 			pos(),
 			angle(),
-			pos_type::null(), // TODO
-			health_type(0), // TODO
-			health_type(0),
 			dim(),
 			wtype()
 		)

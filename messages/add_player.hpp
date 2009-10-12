@@ -1,7 +1,7 @@
-#ifndef SANGUIS_MESSAGES_ADD_FRIEND_HPP_INCLUDED
-#define SANGUIS_MESSAGES_ADD_FRIEND_HPP_INCLUDED
+#ifndef SANGUIS_MESSAGES_ADD_PLAYER_HPP_INCLUDED
+#define SANGUIS_MESSAGES_ADD_PLAYER_HPP_INCLUDED
 
-#include "roles/friend.hpp"
+#include "roles/enemy.hpp"
 #include "types/message.hpp"
 #include "make_class.hpp"
 #include "bind_entity_message.hpp"
@@ -20,16 +20,12 @@ typedef make_class<
 	majutsu::composite<
 		boost::mpl::vector<
 			bind_entity_message<
-				types::message::add_friend
+				types::message::add_player
 			>::type,
-			add_with_health,
-			majutsu::role<
-				enum_,
-				roles::friend_
-			>
+			add_with_health
 		>
 	>
->::type add_friend;
+>::type add_player;
 
 }
 }

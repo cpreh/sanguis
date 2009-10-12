@@ -1,10 +1,9 @@
-#ifndef SANGUIS_DRAW_FACTORY_DECORATION_HPP_INCLUDED
-#define SANGUIS_DRAW_FACTORY_DECORATION_HPP_INCLUDED
+#ifndef SANGUIS_DRAW_FACTORY_PLAYER_HPP_INCLUDED
+#define SANGUIS_DRAW_FACTORY_PLAYER_HPP_INCLUDED
 
 #include "../environment_fwd.hpp"
 #include "../entity_auto_ptr.hpp"
 #include "../../entity_id.hpp"
-#include "../../decoration_type.hpp"
 
 namespace sanguis
 {
@@ -14,10 +13,10 @@ namespace factory
 {
 
 entity_auto_ptr
-decoration(
+player(
 	environment const &,
-	entity_id,
-	decoration_type::type);
+	entity_id
+);
 
 }
 }

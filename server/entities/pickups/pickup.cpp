@@ -1,6 +1,5 @@
 #include "pickup.hpp"
 #include "../../environment/load_context.hpp"
-#include "../../health_type.hpp"
 #include "../../../load/pickup_name.hpp"
 #include "../../../messages/add_pickup.hpp"
 #include "../../../messages/create.hpp"
@@ -118,9 +117,6 @@ sanguis::server::entities::pickups::pickup::add_message() const
 			id(),
 			pos(),
 			angle(),
-			pos_type::null(), // TODO
-			health_type(0), // TODO!
-			health_type(0),
 			dim(),
 			ptype()
 		)

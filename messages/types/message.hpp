@@ -11,12 +11,11 @@ namespace types
 namespace message
 {
 enum type {
-	add,
 	add_aoe_projectile,
-	add_decoration,
 	add_enemy,
 	add_friend,
 	add_pickup,
+	add_player,
 	add_projectile,
 	add_weapon_pickup,
 	assign_id,

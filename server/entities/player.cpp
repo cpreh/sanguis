@@ -6,7 +6,7 @@
 #include "../environment/load_context.hpp"
 #include "../level_calculate.hpp"
 #include "../auras/update_sight.hpp"
-#include "../../messages/add.hpp"
+#include "../../messages/add_player.hpp"
 #include "../../messages/create.hpp"
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>
@@ -235,15 +235,14 @@ sanguis::messages::auto_ptr
 sanguis::server::entities::player::add_message() const
 {
 	return messages::create(
-		messages::add(
+		messages::add_player(
 			id(),
 			pos(),
 			angle(),
+			dim(),
 			abs_speed(),
 			current_health(),
-			max_health(),
-			dim(),
-			type()
+			max_health()
 		)
 	);
 }

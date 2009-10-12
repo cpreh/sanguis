@@ -3,7 +3,6 @@
 #include "../with_health.hpp"
 #include "../../damage/no_armor.hpp"
 #include "../../damage/list.hpp"
-#include "../../health_type.hpp"
 #include "../../../messages/add_projectile.hpp"
 #include "../../../messages/create.hpp"
 #include <sge/time/second_f.hpp>
@@ -141,10 +140,8 @@ sanguis::server::entities::projectiles::projectile::add_message() const
 			id(),
 			pos(),
 			angle(),
-			abs_speed(),
-			server::health_type(0), // health
-			server::health_type(0), // max health
 			dim(),
+			abs_speed(),
 			ptype()
 		)
 	);

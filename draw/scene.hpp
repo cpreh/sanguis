@@ -12,12 +12,11 @@
 #include "../client_messages/add_fwd.hpp"
 #include "../client_messages/visible_fwd.hpp"
 #include "../messages/base.hpp"
-#include "../messages/add.hpp"
 #include "../messages/add_aoe_projectile.hpp"
 #include "../messages/add_enemy.hpp"
 #include "../messages/add_friend.hpp"
 #include "../messages/add_pickup.hpp"
-#include "../messages/add_decoration.hpp"
+#include "../messages/add_player.hpp"
 #include "../messages/add_projectile.hpp"
 #include "../messages/add_weapon_pickup.hpp"
 #include "../messages/change_weapon.hpp"
@@ -71,12 +70,11 @@ public:
 
 	void pause(bool);
 
-	void operator()(messages::add const &);
 	void operator()(messages::add_aoe_projectile const &);
 	void operator()(messages::add_enemy const &);
 	void operator()(messages::add_friend const &);
 	void operator()(messages::add_pickup const &);
-	void operator()(messages::add_decoration const &);
+	void operator()(messages::add_player const &);
 	void operator()(messages::add_projectile const &);
 	void operator()(messages::add_weapon_pickup const &);
 	void operator()(messages::change_weapon const &);
@@ -110,19 +108,28 @@ private:
 	draw::environment const &
 	environment();
 
-	void insert(
-		entity_auto_ptr);
+	draw::entity &	
+	insert(
+		entity_auto_ptr
+	);
 
 	draw::entity &
 	entity(
-		entity_id);
+		entity_id
+	);
 	
 	draw::entity const &
 	entity(
-		entity_id) const;
-	void process_default_msg(
-		messages::base const &);
-	draw::system &system();
+		entity_id
+	) const;
+	
+	void
+	process_default_msg(
+		messages::base const &
+	);
+
+	draw::system &
+	system();
 	
 	static sge::log::object &
 	log();

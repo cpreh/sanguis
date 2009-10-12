@@ -85,10 +85,10 @@ sanguis::server::entities::friend_::add_message() const
 			id(),
 			pos(),
 			angle(),
+			dim(),
 			abs_speed(),
 			current_health(),
 			max_health(),
-			dim(),
 			ftype_
 		)
 	);
