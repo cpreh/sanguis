@@ -12,12 +12,14 @@
 #include "coord_transform.hpp"
 #include "log.hpp"
 #include "environment.hpp"
+#include "configure_entity.hpp"
 #include "../messages/unwrap.hpp"
 #include "../client_messages/add.hpp"
 #include "../client_messages/visible.hpp"
 #include "../client/invalid_id.hpp"
 #include "../exception.hpp"
 #include "../load/context.hpp"
+#include "../messages/role_name.hpp"
 
 #include <sge/make_auto_ptr.hpp>
 #include <sge/iconv.hpp>
@@ -36,6 +38,11 @@
 #include <sge/renderer/resource_flags_none.hpp>
 #include <sge/renderer/filter/linear.hpp>
 
+#include <majutsu/is_role.hpp>
+
+#include <boost/mpl/filter_view.hpp>
+#include <boost/mpl/transform_view.hpp>
+#include <boost/mpl/placeholders.hpp>
 // super ugly hack, so that we can use a vector with more than 20 types
 // but don't have to touch mpl::vector
 #define FUSION_MAX_VECTOR_SIZE 22
@@ -516,13 +523,6 @@ void sanguis::draw::scene::operator()(
 		m.get<messages::roles::entity_id>()
 	).stop_reloading();
 }
-
-#include "configure_entity.hpp"
-#include "../messages/role_name.hpp"
-#include <boost/mpl/filter_view.hpp>
-#include <boost/mpl/transform_view.hpp>
-#include <boost/mpl/placeholders.hpp>
-#include <majutsu/is_role.hpp>
 
 template<
 	typename Msg
