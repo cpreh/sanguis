@@ -38,6 +38,8 @@
 #include <sge/texture/manager.hpp>
 #include <sge/texture/add_image.hpp>
 #include <sge/renderer/filter/linear.hpp>
+#include <sge/renderer/refresh_rate_dont_care.hpp>
+#include <sge/renderer/no_multi_sampling.hpp>
 #include <sge/collision/system.hpp>
 #include <sge/image/loader.hpp>
 #include <sge/image/colors.hpp>
@@ -164,18 +166,25 @@ try
 
 	sge::systems::instance sys(
 		sge::systems::list()
-		(sge::window::parameters(
-			SGE_TEXT("sanguis")
-		))
-		(sge::renderer::parameters(
-			sge::renderer::display_mode(
-				sanguis::resolution(),
-				sge::renderer::bit_depth::depth32,
-				sge::renderer::refresh_rate_dont_care),
-			sge::renderer::depth_buffer::off,
-			sge::renderer::stencil_buffer::off,
-			sge::renderer::window_mode::windowed,
-			sge::renderer::vsync::on))
+		(
+			sge::window::parameters(
+				SGE_TEXT("sanguis")
+			)
+		)
+		(
+			sge::renderer::parameters(
+				sge::renderer::display_mode(
+					sanguis::resolution(),
+					sge::renderer::bit_depth::depth32,
+					sge::renderer::refresh_rate_dont_care
+				),
+				sge::renderer::depth_buffer::off,
+				sge::renderer::stencil_buffer::off,
+				sge::renderer::window_mode::windowed,
+				sge::renderer::vsync::on,
+				sge::renderer::no_multi_sampling
+			)
+		)
 		(sge::systems::parameterless::input)
 		(
 			sge::systems::named(
