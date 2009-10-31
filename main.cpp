@@ -38,6 +38,10 @@
 #include <sge/texture/manager.hpp>
 #include <sge/texture/add_image.hpp>
 #include <sge/renderer/filter/linear.hpp>
+#include <sge/renderer/state/list.hpp>
+#include <sge/renderer/state/trampoline.hpp>
+#include <sge/renderer/state/var.hpp>
+#include <sge/renderer/state/bool.hpp>
 #include <sge/renderer/refresh_rate_dont_care.hpp>
 #include <sge/renderer/no_multi_sampling.hpp>
 #include <sge/collision/system.hpp>
@@ -106,7 +110,7 @@ try
 	po::options_description desc("allowed options");
 
 	std::string log_level;
-	unsigned screen_width, screen_height;
+	unsigned screen_width, screen_height, multi_sampling;
 
 	desc.add_options()
 		("help",
@@ -118,7 +122,13 @@ try
 			po::value<unsigned>(&screen_width)->default_value(1024),
 			"sets the display width")
 		("height",
-			po::value<unsigned>(&screen_height)->default_value(768));
+			po::value<unsigned>(&screen_height)->default_value(768),
+			"sets the display height")
+		("multisamples",
+			po::value<unsigned>(&multi_sampling)->default_value(
+				sge::renderer::no_multi_sampling
+			),
+			"sets the number of samples done for anti aliasing");
 	
 	po::variables_map vm;
 	po::store(po::parse_command_line(argc,argv,desc),vm);
@@ -182,7 +192,9 @@ try
 				sge::renderer::stencil_buffer::off,
 				sge::renderer::window_mode::windowed,
 				sge::renderer::vsync::on,
-				sge::renderer::no_multi_sampling
+				sge::renderer::multi_sample_type(
+					multi_sampling
+				)
 			)
 		)
 		(sge::systems::parameterless::input)
@@ -196,6 +208,14 @@ try
 		(sge::systems::parameterless::collision_system)
 		(sge::systems::parameterless::font)
 	);
+
+	if(multi_sampling > 0)
+		sys.renderer()->state(
+			sge::renderer::state::list
+			(
+				sge::renderer::state::bool_::enable_multi_sampling = true
+			)
+		);
 
 	// input stuff
 	sge::input::key_state_tracker ks(sys.input_system());
