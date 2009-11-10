@@ -11,12 +11,17 @@ namespace messages
 template<
 	typename T
 >
-class concrete : public base {
+class concrete
+:
+	public base
+{
 public:
 	explicit concrete(
-		T const &);
+		T const &
+	);
 	
-	T const &value() const;
+	T const &
+	value() const;
 private:
 	majutsu::const_raw_pointer
 	data() const;

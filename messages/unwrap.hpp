@@ -99,7 +99,8 @@ Result
 unwrap(
 	Fun &f,
 	base const &msg,
-	Handler const &def_handler)
+	Handler const &def_handler
+)
 {
 	typedef typename boost::mpl::begin<Sequence>::type first;
 	typedef typename boost::mpl::end<Sequence>::type last;

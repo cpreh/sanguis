@@ -19,7 +19,8 @@ template<
 struct dispatcher : dispatcher_base {
 	auto_ptr
 	on_dispatch(
-		reader const &d) const;
+		reader const &d
+	) const;
 };
 
 }
