@@ -3,6 +3,7 @@
 
 #include "types/message.hpp"
 #include "types/message_type.hpp"
+#include "bindings/fundamental.hpp"
 #include <majutsu/constant.hpp>
 
 namespace sanguis
@@ -20,7 +21,9 @@ private:
 		static_cast<types::message_type>(Msg);
 public:
 	typedef majutsu::constant<
-		types::message_type,
+		bindings::fundamental<
+			types::message_type
+		>,
 		converted_message
 	> type;
 };

@@ -6,6 +6,7 @@
 #include <sge/endianness/copy_n_from_host.hpp>
 #include <sge/endianness/copy_n_to_host.hpp>
 #include <sge/assert.hpp>
+#include <majutsu/concepts/dynamic_memory.hpp>
 #include <majutsu/size_type.hpp>
 #include <majutsu/raw_pointer.hpp>
 #include <boost/cstdint.hpp>
@@ -24,14 +25,40 @@ template<
 >
 struct dynamic_len {
 	typedef T type;
+};
 
-	typedef Adapted adapted;
+}
+}
+}
 
+namespace majutsu
+{
+namespace concepts
+{
+
+template<
+	typename T,
+	typename Adapted
+>
+struct dynamic_memory<
+	sanguis::messages::bindings::dynamic_len<
+		T,
+		Adapted
+	>
+>
+{
+private:
+	typedef T type;
+	typedef dynamic_memory<
+		Adapted
+	> adapted;
+public:
 	typedef boost::uint16_t length_type;
 
 	static majutsu::size_type
 	needed_size(
-		type const &t)
+		type const &t
+	)
 	{
 		majutsu::size_type ret(
 			sizeof(length_type)
@@ -49,10 +76,13 @@ struct dynamic_len {
 	static void
 	place(
 		type const &t,
-		majutsu::raw_pointer mem)
+		majutsu::raw_pointer mem
+	)
 	{
 		length_type const sz(
-			truncation_check_cast<length_type>(
+			sanguis::truncation_check_cast<
+				length_type
+			>(
 				needed_size(t)
 			)
 		);
@@ -66,7 +96,7 @@ struct dynamic_len {
 			sizeof(length_type),
 			mem,
 			sizeof(length_type),
-			serialization::endianness()
+			sanguis::messages::serialization::endianness()
 		);
 
 		mem += sizeof(length_type);
@@ -84,7 +114,8 @@ struct dynamic_len {
 
 	static type 
 	make(
-		majutsu::const_raw_pointer const mem)
+		majutsu::const_raw_pointer const mem
+	)
 	{
 		length_type my_size;
 		
@@ -97,7 +128,7 @@ struct dynamic_len {
 				&my_size
 			),
 			sizeof(length_type),
-			serialization::endianness()
+			sanguis::messages::serialization::endianness()
 		);
 		
 		type ret;
@@ -126,7 +157,6 @@ struct dynamic_len {
 	}
 };
 
-}
 }
 }
 

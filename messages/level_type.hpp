@@ -2,14 +2,14 @@
 #define SANGUIS_MESSAGES_LEVEL_TYPE_HPP_INCLUDED
 
 #include "types/level.hpp"
-#include "bindings/pod.hpp"
+#include "bindings/fundamental.hpp"
 
 namespace sanguis
 {
 namespace messages
 {
 
-typedef bindings::pod<
+typedef bindings::fundamental<
 	types::level
 > level_type;
 

@@ -1,5 +1,5 @@
 #include "float.hpp"
-#include "pod.hpp"
+#include "fundamental.hpp"
 #include <boost/cstdint.hpp>
 #include <cmath>
 
@@ -9,7 +9,7 @@ namespace
 typedef boost::uint32_t fixed_int;
 typedef sanguis::messages::bindings::float_::type float_type;
 
-typedef sanguis::messages::bindings::pod<
+typedef sanguis::messages::bindings::fundamental<
 	fixed_int
 > adapted;
 
@@ -27,7 +27,8 @@ float_type const exp(
 
 fixed_int
 make_fixed(
-	float_type const f)
+	float_type const f
+)
 {
 	return static_cast<fixed_int>(
 		std::log(
@@ -38,7 +39,8 @@ make_fixed(
 
 float_type
 unmake_fixed(
-	fixed_int const i)
+	fixed_int const i
+)
 {
 	return std::exp(
 		static_cast<float_type>(i) / exp
@@ -47,7 +49,8 @@ unmake_fixed(
 
 fixed_int
 serialize(
-	float_type const f)
+	float_type const f
+)
 {
 	return f < 0
 		? make_fixed(-f) | sign_bit
@@ -56,7 +59,8 @@ serialize(
 
 float_type
 deserialize(
-	fixed_int c)
+	fixed_int c
+)
 {
 	bool const is_signed = c & sign_bit;
 	c &= ~sign_bit;
@@ -70,7 +74,8 @@ deserialize(
 
 majutsu::size_type
 sanguis::messages::bindings::float_::needed_size(
-	type const &)
+	type const &
+)
 {
 	return sizeof(fixed_int);
 }
@@ -78,7 +83,8 @@ sanguis::messages::bindings::float_::needed_size(
 void
 sanguis::messages::bindings::float_::place(
 	type const &t,
-	majutsu::raw_pointer const mem)
+	majutsu::raw_pointer const mem
+)
 {
 	adapted::place(
 		serialize(t),
@@ -88,7 +94,8 @@ sanguis::messages::bindings::float_::place(
 
 sanguis::messages::bindings::float_::type
 sanguis::messages::bindings::float_::make(
-	majutsu::const_raw_pointer const beg)
+	majutsu::const_raw_pointer const beg
+)
 {
 	return deserialize(
 		adapted::make(

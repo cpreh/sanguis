@@ -17,16 +17,19 @@ struct float_ {
 
 	static majutsu::size_type
 	needed_size(
-		type const &);
+		type const &
+	);
 
 	static void
 	place(
 		type const &t,
-		majutsu::raw_pointer);
+		majutsu::raw_pointer
+	);
 
 	static type
 	make(
-		majutsu::const_raw_pointer beg);
+		majutsu::const_raw_pointer beg
+	);
 };
 
 }
