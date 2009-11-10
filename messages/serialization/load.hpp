@@ -8,6 +8,7 @@
 #include <sge/container/raw_vector_impl.hpp>
 #include <sge/algorithm/copy_n.hpp>
 #include <sge/io/read.hpp>
+#include <majutsu/concepts/dynamic_memory.hpp>
 
 namespace sanguis
 {
@@ -22,12 +23,17 @@ template<
 struct load {
 	static typename Type::type
 	get(
-		istream &is)
+		istream &is
+	)
 	{
 		typename Type::type ret;
 
+		typedef majutsu::concepts::dynamic_memory<
+			Type
+		> concept;
+
 		raw_container vec(
-			Type::needed_size(
+			concept::needed_size(
 				ret
 			)
 		);
@@ -37,9 +43,10 @@ struct load {
 			vec.size()
 		);
 
-		return Type::make(
-			vec.data()
-		);
+		return
+			concept::make(
+				vec.data()
+			);
 	}
 };
 
@@ -55,9 +62,15 @@ struct load<
 > {
 	static typename bindings::dynamic_len<T, A>::type
 	get(
-		istream &is)
+		istream &is
+	)
 	{
 		typedef bindings::dynamic_len<T, A> type;
+
+		typedef majutsu::concepts::dynamic_memory<
+			type
+		> concept;
+
 		typename type::type ret;
 
 		majutsu::size_type const length_sz(
@@ -94,7 +107,7 @@ struct load<
 			sz - length_sz
 		);
 
-		return type::make(
+		return concept::make(
 			vec.data()
 		);
 	}

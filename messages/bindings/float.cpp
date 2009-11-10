@@ -1,5 +1,6 @@
 #include "float.hpp"
 #include "fundamental.hpp"
+#include <majutsu/concepts/dynamic_memory.hpp>
 #include <boost/cstdint.hpp>
 #include <cmath>
 
@@ -12,6 +13,10 @@ typedef sanguis::messages::bindings::float_::type float_type;
 typedef sanguis::messages::bindings::fundamental<
 	fixed_int
 > adapted;
+
+typedef majutsu::concepts::dynamic_memory<
+	adapted
+> concept;
 
 fixed_int const sign_bit(
 	0x1
@@ -86,7 +91,7 @@ sanguis::messages::bindings::float_::place(
 	majutsu::raw_pointer const mem
 )
 {
-	adapted::place(
+	concept::place(
 		serialize(t),
 		mem
 	);
@@ -98,7 +103,7 @@ sanguis::messages::bindings::float_::make(
 )
 {
 	return deserialize(
-		adapted::make(
+		concept::make(
 			beg
 		)
 	);

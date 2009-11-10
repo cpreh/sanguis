@@ -3,13 +3,15 @@
 
 #include "read_element.hpp"
 #include "load.hpp"
+#include <majutsu/access_role.hpp>
 
 template<
 	typename Class
 >
 sanguis::messages::serialization::read_element<Class>::read_element(
 	std::istream &is,
-	Class &obj)
+	Class &obj
+)
 :
 	is(is),
 	obj(obj)
@@ -23,12 +25,17 @@ template<
 >
 void
 sanguis::messages::serialization::read_element<Class>::operator()(
-	Role &) const
+	Role &
+) const
 {
 	obj. template set<
 		typename Role::alias
 	>(
-		load<typename Role::type>::get(is)
+		load<
+			typename majutsu::access_role<
+				Role
+			>::type
+		>::get(is)
 	);
 }
 

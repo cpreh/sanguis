@@ -25,6 +25,8 @@ template<
 >
 struct dynamic_len {
 	typedef T type;
+
+	typedef boost::uint16_t length_type;
 };
 
 }
@@ -49,12 +51,16 @@ struct dynamic_memory<
 {
 private:
 	typedef T type;
+
 	typedef dynamic_memory<
 		Adapted
 	> adapted;
-public:
-	typedef boost::uint16_t length_type;
 
+	typedef typename sanguis::messages::bindings::dynamic_len<
+		T,
+		Adapted
+	>::length_type length_type;
+public:
 	static majutsu::size_type
 	needed_size(
 		type const &t

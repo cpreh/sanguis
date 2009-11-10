@@ -43,11 +43,7 @@
 #include <boost/mpl/filter_view.hpp>
 #include <boost/mpl/transform_view.hpp>
 #include <boost/mpl/placeholders.hpp>
-// super ugly hack, so that we can use a vector with more than 20 types
-// but don't have to touch mpl::vector
-#define FUSION_MAX_VECTOR_SIZE 22
-#include <boost/fusion/container/vector.hpp>
-#include <boost/fusion/include/mpl.hpp>
+#include <boost/mpl/vector/vector30.hpp>
 #include <boost/foreach.hpp>
 
 #include <tr1/functional>
@@ -106,7 +102,7 @@ void sanguis::draw::scene::process_message(
 	messages::base const &m)
 {
 	messages::unwrap<
-		boost::fusion::vector<
+		boost::mpl::vector21<
 			messages::add_aoe_projectile,
 			messages::add_enemy,
 			messages::add_friend,
