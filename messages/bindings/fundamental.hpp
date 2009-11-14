@@ -6,8 +6,10 @@
 #include "../types/space_unit.hpp"
 #include <sge/endianness/to_host.hpp>
 #include <sge/endianness/from_host.hpp>
-#include <majutsu/concepts/dynamic_memory.hpp>
+#include <majutsu/concepts/dynamic_memory/tag.hpp>
+#include <majutsu/concepts/static_size.hpp>
 #include <majutsu/fundamental.hpp>
+#include <majutsu/raw_pointer.hpp>
 
 namespace sanguis
 {
@@ -26,6 +28,69 @@ majutsu::fundamental<
 >
 {};
 
+template<>
+struct fundamental<
+	float
+>
+:
+float_
+{};
+
+template<
+	typename Type
+>
+void
+place(
+	majutsu::concepts::dynamic_memory::tag const *const tag_,
+	fundamental<
+		Type
+	> const *,
+	Type const &t,
+	majutsu::raw_pointer const mem
+)
+{
+	place(
+		tag_,
+		static_cast<
+			majutsu::fundamental<
+				Type
+			> const *
+		>(0),
+		sge::endianness::from_host(
+			t,
+			sanguis::messages::serialization::endianness()
+		),
+		mem
+	);
+}
+
+template<
+	typename Type
+>
+Type
+make(
+	majutsu::concepts::dynamic_memory::tag const *const tag_,
+	fundamental<
+		Type
+	> const *,
+	majutsu::const_raw_pointer const beg
+)
+{
+	return
+		sge::endianness::to_host(
+			make(
+				tag_,
+				static_cast<
+					majutsu::fundamental<
+						Type
+					> const *
+				>(0),
+				beg
+			),
+			sanguis::messages::serialization::endianness()
+		);
+}
+
 }
 }
 }
@@ -36,70 +101,19 @@ namespace concepts
 {
 
 template<
-	typename T
+	typename Type
 >
-struct dynamic_memory<
+struct static_size<
 	sanguis::messages::bindings::fundamental<
-		T
-	>
->
-{
-private:
-	typedef T type;
-
-	typedef dynamic_memory<
-		majutsu::fundamental<
-			T
-		>
-	> adapted;
-public:
-	static majutsu::size_type
-	needed_size(
-		type const &t
-	)
-	{
-		return adapted::needed_size(
-			t
-		); 
-	}
-
-	static void
-	place(
-		type const &t,
-		majutsu::raw_pointer const mem
-	)
-	{
-		adapted::place(
-			sge::endianness::from_host(
-				t,
-				sanguis::messages::serialization::endianness()
-			),
-			mem
-		);
-	}
-
-	static type
-	make(
-		majutsu::const_raw_pointer const beg
-	)
-	{
-		return sge::endianness::to_host(
-			adapted::make(
-				beg
-			),
-			sanguis::messages::serialization::endianness()
-		);
-	}
-};
-
-template<>
-struct dynamic_memory<
-	sanguis::messages::bindings::fundamental<
-		sanguis::messages::types::space_unit
+		Type
 	>
 >
 :
-sanguis::messages::bindings::float_
+static_size<
+	majutsu::fundamental<
+		Type
+	>
+>
 {};
 
 }

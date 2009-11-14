@@ -5,8 +5,7 @@
 #include "../serialization/endianness.hpp"
 #include <sge/endianness/copy_n_from_host.hpp>
 #include <sge/endianness/copy_n_to_host.hpp>
-#include <sge/assert.hpp>
-#include <majutsu/concepts/dynamic_memory.hpp>
+#include <majutsu/concepts/dynamic_memory/tag.hpp>
 #include <majutsu/size_type.hpp>
 #include <majutsu/raw_pointer.hpp>
 #include <boost/cstdint.hpp>
@@ -20,149 +19,195 @@ namespace bindings
 {
 
 template<
-	typename T,
+	typename Type,
 	typename Adapted
 >
 struct dynamic_len {
-	typedef T type;
+	typedef Type type;
 
 	typedef boost::uint16_t length_type;
 };
 
-}
-}
-}
-
-namespace majutsu
-{
-namespace concepts
-{
-
 template<
-	typename T,
+	typename Type,
 	typename Adapted
 >
-struct dynamic_memory<
-	sanguis::messages::bindings::dynamic_len<
-		T,
+majutsu::size_type
+needed_size(
+	majutsu::concepts::dynamic_memory::tag const *const tag_,
+	dynamic_len<
+		Type,
 		Adapted
-	>
->
+	> const *,
+	Type const &value_
+)
 {
-private:
-	typedef T type;
-
-	typedef dynamic_memory<
-		Adapted
-	> adapted;
-
-	typedef typename sanguis::messages::bindings::dynamic_len<
-		T,
-		Adapted
-	>::length_type length_type;
-public:
-	static majutsu::size_type
-	needed_size(
-		type const &t
-	)
-	{
-		majutsu::size_type ret(
-			sizeof(length_type)
-		);
-
-		BOOST_FOREACH(
-			typename T::const_reference r,
-			t
+	majutsu::size_type ret(
+		sizeof(
+			typename dynamic_len<
+				Type,
+				Adapted
+			>::length_type
 		)
-			ret += adapted::needed_size(r);
+	);
 
-		return ret;
-	}
-
-	static void
-	place(
-		type const &t,
-		majutsu::raw_pointer mem
+	BOOST_FOREACH(
+		typename Type::const_reference elem,
+		value_
 	)
-	{
-		length_type const sz(
-			sanguis::truncation_check_cast<
-				length_type
-			>(
-				needed_size(t)
-			)
-		);
-
-		sge::endianness::copy_n_from_host(
-			reinterpret_cast<
-				majutsu::const_raw_pointer
-			>(
-				&sz
-			),
-			sizeof(length_type),
-			mem,
-			sizeof(length_type),
-			sanguis::messages::serialization::endianness()
-		);
-
-		mem += sizeof(length_type);
-		
-		for(
-			typename type::const_iterator it(t.begin());
-			it != t.end();
-			mem += adapted::needed_size(*it), ++it
-		)
-			adapted::place(
-				*it,
-				mem
-			);
-	}
-
-	static type 
-	make(
-		majutsu::const_raw_pointer const mem
-	)
-	{
-		length_type my_size;
-		
-		sge::endianness::copy_n_to_host(
-			mem,
-			sizeof(length_type),
-			reinterpret_cast<
-				majutsu::raw_pointer
-			>(
-				&my_size
-			),
-			sizeof(length_type),
-			sanguis::messages::serialization::endianness()
-		);
-		
-		type ret;
-
-		for(
-			majutsu::const_raw_pointer cur_mem(
-				mem + sizeof(length_type)
-			);
-			cur_mem != mem + my_size;
-		)
-		{
-			typename T::value_type elem(
-				adapted::make(
-					cur_mem
-				)
-			);
-
-			ret.push_back(
+		ret +=
+			needed_size(
+				tag_,
+				static_cast<
+					Adapted const *
+				>(0),
 				elem
 			);
 
-			cur_mem += adapted::needed_size(elem);
-		}
+	return ret;
+}
 
-		return ret;
+template<
+	typename Type,
+	typename Adapted
+>
+void
+place(
+	majutsu::concepts::dynamic_memory::tag const *const tag_,
+	dynamic_len<
+		Type,
+		Adapted
+	> const *const concept_,
+	Type const &value_,
+	majutsu::raw_pointer mem
+)
+{
+	typedef typename dynamic_len<
+		Type,
+		Adapted
+	>::length_type length_type;
+
+	length_type const sz(
+		sanguis::truncation_check_cast<
+			length_type
+		>(
+			needed_size(
+				tag_,
+				concept_,
+				value_
+			)
+		)
+	);
+
+	sge::endianness::copy_n_from_host(
+		reinterpret_cast<
+			majutsu::const_raw_pointer
+		>(
+			&sz
+		),
+		sizeof(length_type),
+		mem,
+		sizeof(length_type),
+		sanguis::messages::serialization::endianness()
+	);
+
+	mem += sizeof(length_type);
+	
+	for(
+		typename Type::const_iterator it(
+			value_.begin()
+		);
+		it != value_.end();
+		mem +=
+			needed_size(
+				tag_,
+				static_cast<
+					Adapted const *
+				>(0),
+				*it
+			),
+		++it
+	)
+		place(
+			tag_,
+			static_cast<
+				Adapted const *
+			>(0),
+			*it,
+			mem
+		);
+}
+
+template<
+	typename Type,
+	typename Adapted
+>
+Type 
+make(
+	majutsu::concepts::dynamic_memory::tag const *const tag_,
+	dynamic_len<
+		Type,
+		Adapted
+	> const *,
+	majutsu::const_raw_pointer const mem
+)
+{
+	typedef typename dynamic_len<
+		Type,
+		Adapted
+	>::length_type length_type;
+
+	length_type my_size;
+		
+	sge::endianness::copy_n_to_host(
+		mem,
+		sizeof(length_type),
+		reinterpret_cast<
+			majutsu::raw_pointer
+		>(
+			&my_size
+		),
+		sizeof(length_type),
+		sanguis::messages::serialization::endianness()
+	);
+		
+	Type ret;
+
+	for(
+		majutsu::const_raw_pointer cur_mem(
+			mem + sizeof(length_type)
+		);
+		cur_mem != mem + my_size;
+	)
+	{
+		typename Type::value_type elem(
+			make(
+				tag_,
+				static_cast<
+					Adapted const *
+				>(0),
+				cur_mem
+			)
+		);
+
+		ret.push_back(
+			elem
+		);
+
+		cur_mem +=
+			needed_size(
+				tag_,
+				static_cast<
+					Adapted const *
+				>(0),
+				elem
+			);
 	}
-};
 
+	return ret;
+}
+
+}
 }
 }
 

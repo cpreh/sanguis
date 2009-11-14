@@ -31,8 +31,10 @@ message_header_size = sizeof(message_header);
 template<
 	typename Stream
 >
-void exceptions(
-	Stream &stream)
+void
+exceptions(
+	Stream &stream
+)
 {
 	stream.exceptions(
 		std::ios_base::badbit
@@ -45,7 +47,8 @@ void exceptions(
 
 sanguis::messages::auto_ptr
 sanguis::deserialize(
-	net::data_type &data)
+	net::data_type &data
+)
 {
 	if (data.size() < message_header_size)
 		return messages::auto_ptr();
