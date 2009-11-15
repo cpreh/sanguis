@@ -23,6 +23,9 @@ public:
 	T const &
 	value() const;
 private:
+	types::message::type
+	type() const;
+
 	majutsu::const_raw_pointer
 	data() const;
 

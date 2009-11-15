@@ -20,7 +20,8 @@ protected:
 public:
 	virtual auto_ptr
 	on_dispatch(
-		reader const &) const = 0;
+		reader const &
+	) const = 0;
 
 	virtual ~dispatcher_base();
 };

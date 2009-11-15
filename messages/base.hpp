@@ -2,6 +2,7 @@
 #define SANGUIS_MESSAGES_BASE_HPP_INCLUDED
 
 #include "base_fwd.hpp"
+#include "types/message/type.hpp"
 #include <majutsu/raw_pointer.hpp>
 #include <majutsu/size_type.hpp>
 #include <sge/noncopyable.hpp>
@@ -17,6 +18,9 @@ protected:
 	base();
 public:
 	virtual ~base();
+	
+	virtual types::message::type 
+	type() const = 0;
 
 	virtual majutsu::const_raw_pointer
 	data() const = 0;

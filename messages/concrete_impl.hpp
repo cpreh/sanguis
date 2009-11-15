@@ -2,12 +2,14 @@
 #define SANGUIS_MESSAGES_CONCRETE_IMPL_HPP_INCLUDED
 
 #include "concrete.hpp"
+#include "message_id.hpp"
 
 template<
 	typename T
 >
 sanguis::messages::concrete<T>::concrete(
-	T const &value_)
+	T const &value_
+)
 :
 	value_(value_)
 {}
@@ -19,6 +21,15 @@ T const &
 sanguis::messages::concrete<T>::value() const
 {
 	return value_;
+}
+
+template<
+	typename T
+>
+sanguis::messages::types::message::type
+sanguis::messages::concrete<T>::type() const
+{
+	return message_id<T>::value; 
 }
 
 template<
