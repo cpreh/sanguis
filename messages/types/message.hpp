@@ -52,7 +52,7 @@ enum type {
 	start_reloading,
 	stop_reloading,
 	unpause,
-	size_
+	size
 };
 }
 

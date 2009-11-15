@@ -9,6 +9,8 @@ namespace sanguis
 {
 namespace messages
 {
+namespace call
+{
 
 template<
 	typename Callee,
@@ -40,6 +42,7 @@ public:
 	}
 };
 
+}
 }
 }
 

@@ -13,13 +13,13 @@
 #include "log.hpp"
 #include "environment.hpp"
 #include "configure_entity.hpp"
-#include "../messages/unwrap.hpp"
+#include "../messages/call/object.hpp"
+#include "../messages/role_name.hpp"
 #include "../client_messages/add.hpp"
 #include "../client_messages/visible.hpp"
 #include "../client/invalid_id.hpp"
 #include "../exception.hpp"
 #include "../load/context.hpp"
-#include "../messages/role_name.hpp"
 
 #include <sge/make_auto_ptr.hpp>
 #include <sge/iconv.hpp>
@@ -37,6 +37,7 @@
 #include <sge/renderer/const_scoped_target_lock.hpp>
 #include <sge/renderer/resource_flags_none.hpp>
 #include <sge/renderer/filter/linear.hpp>
+#include <sge/function/object.hpp>
 
 #include <majutsu/is_role.hpp>
 
@@ -57,12 +58,40 @@ namespace
 
 unsigned const render_dead_amount = 20;
 
+sanguis::messages::call::object<
+	boost::mpl::vector21<
+		sanguis::messages::add_aoe_projectile,
+		sanguis::messages::add_enemy,
+		sanguis::messages::add_friend,
+		sanguis::messages::add_pickup,
+		sanguis::messages::add_player,
+		sanguis::messages::add_projectile,
+		sanguis::messages::add_weapon_pickup,
+		sanguis::messages::change_weapon,
+		sanguis::messages::experience,
+		sanguis::messages::health,
+		sanguis::messages::level_up,
+		sanguis::messages::max_health,
+		sanguis::messages::move,
+		sanguis::messages::remove,
+		sanguis::messages::resize,
+		sanguis::messages::rotate,
+		sanguis::messages::start_attacking,
+		sanguis::messages::stop_attacking,
+		sanguis::messages::start_reloading,
+		sanguis::messages::stop_reloading,
+		sanguis::messages::speed
+	>,
+	sanguis::draw::scene
+> dispatcher;
+
 }
 
 sanguis::draw::scene::scene(
 	load::context const &resources_,
 	sge::renderer::device_ptr const rend,
-	sge::font::object &font)
+	sge::font::object &font
+)
 :
 	ss(rend),
 	hud_(font),
@@ -90,7 +119,10 @@ sanguis::draw::scene::scene(
 		sge::make_auto_ptr<
 			draw::background
 		>(
-			environment()));
+			environment()
+		)
+	);
+
 	background_id = p->id();
 	insert(p);
 }
@@ -98,9 +130,21 @@ sanguis::draw::scene::scene(
 sanguis::draw::scene::~scene()
 {}
 
-void sanguis::draw::scene::process_message(
-	messages::base const &m)
+void
+sanguis::draw::scene::process_message(
+	messages::base const &m
+)
 {
+	dispatcher(
+		m,
+		*this,
+		std::tr1::bind(
+			&scene::process_default_msg,
+			this,
+			std::tr1::placeholders::_1
+		)
+	);
+#if 0
 	messages::unwrap<
 		boost::mpl::vector21<
 			messages::add_aoe_projectile,
@@ -135,6 +179,7 @@ void sanguis::draw::scene::process_message(
 			std::tr1::placeholders::_1
 		)
 	);
+#endif
 }
 
 void sanguis::draw::scene::client_message(

@@ -1,5 +1,5 @@
-#ifndef SANGUIS_MESSAGES_MAKE_CALLER_INSTANCE_HPP_INCLUDED
-#define SANGUIS_MESSAGES_MAKE_CALLER_INSTANCE_HPP_INCLUDED
+#ifndef SANGUIS_MESSAGES_CALL_MAKE_INSTANCE_HPP_INCLUDED
+#define SANGUIS_MESSAGES_CALL_MAKE_INSTANCE_HPP_INCLUDED
 
 #include "dispatcher.hpp"
 #include "../message_id.hpp"
@@ -9,14 +9,16 @@ namespace sanguis
 {
 namespace messages
 {
+namespace call
+{
 
 template<
 	typename Callee,
 	typename InstanceArray
 >
-class make_caller_instance {
+class make_instance {
 public:
-	explicit make_caller_instance(
+	explicit make_instance(
 		InstanceArray &instances_
 	)
 	:
@@ -27,9 +29,7 @@ public:
 		typename Msg
 	>
 	void
-	operator(
-		Msg &
-	) const
+	operator()() const
 	{
 		typedef call::dispatcher<
 			Callee,
@@ -44,11 +44,13 @@ public:
 			>()
 		);
 
-		instances_[
+		instances_. template replace<
 			message_id<
-				Msg
-			>::value
-		] = ptr;
+				typename Msg::types
+			>::type::value
+		>(
+			ptr
+		);
 	}
 private:
 	InstanceArray &instances_;
@@ -56,5 +58,6 @@ private:
 
 }
 }
+} 
 
 #endif

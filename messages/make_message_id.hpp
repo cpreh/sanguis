@@ -3,8 +3,10 @@
 
 #include "types/message.hpp"
 #include "types/message_type.hpp"
+#include "roles/type.hpp"
 #include "bindings/fundamental.hpp"
 #include <majutsu/constant.hpp>
+#include <majutsu/role.hpp>
 
 namespace sanguis
 {
@@ -20,11 +22,14 @@ private:
 	converted_message =
 		static_cast<types::message_type>(Msg);
 public:
-	typedef majutsu::constant<
-		bindings::fundamental<
-			types::message_type
+	typedef majutsu::role<
+		majutsu::constant<
+			bindings::fundamental<
+				types::message_type
+			>,
+			converted_message
 		>,
-		converted_message
+		roles::type
 	> type;
 };
 

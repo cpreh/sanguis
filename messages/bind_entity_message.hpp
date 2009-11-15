@@ -7,7 +7,7 @@
 #include <majutsu/bind.hpp>
 #include <majutsu/placeholder.hpp>
 #include <sge/restrict_typedef_struct.hpp>
-#include <boost/mpl/vector.hpp>
+#include <boost/mpl/vector/vector10.hpp>
 
 namespace sanguis
 {
@@ -20,7 +20,7 @@ template<
 struct bind_entity_message {
 	typedef majutsu::bind<
 		entity_message,
-		boost::mpl::vector<
+		boost::mpl::vector2<
 			typename make_message_id<
 				Msg
 			>::type,

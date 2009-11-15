@@ -29,7 +29,13 @@ template<
 sanguis::messages::types::message::type
 sanguis::messages::concrete<T>::type() const
 {
-	return message_id<T>::value; 
+	return
+		static_cast<
+			types::message::type
+		>(	message_id<
+				typename T::types
+			>::type::value
+		);
 }
 
 template<

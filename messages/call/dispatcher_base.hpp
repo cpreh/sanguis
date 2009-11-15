@@ -5,26 +5,29 @@ namespace sanguis
 {
 namespace messages
 {
+namespace call
+{
 
 template<
 	typename Callee
 >
-class call_dispatcher_base {
-	SGE_NONCOPYABLE(call_dispatcher_base)
+class dispatcher_base {
+	SGE_NONCOPYABLE(dispatcher_base)
 protected:
-	call_dispatcher_base()
+	dispatcher_base()
 	{}
 public:
-	virtual typename Calle::result_type
+	virtual typename Callee::result_type
 	call(
-		Calle &,
+		Callee &,
 		base const &
 	) const = 0;
 
-	virtual ~call_dispatcher_base()
+	virtual ~dispatcher_base()
 	{}
 };
 
+}
 }
 }
 

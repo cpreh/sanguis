@@ -11,28 +11,40 @@
 sanguis::messages::auto_ptr
 sanguis::messages::serialization::deserialize(
 	context const &ctx,
-	istream &stream)
+	istream &stream
+)
 {
 	types::message_type type;
 
 	// TODO: we can't specify the endianness of the message type at the moment
-	BOOST_STATIC_ASSERT(sizeof(types::message_type) == 1);
+	BOOST_STATIC_ASSERT(
+		sizeof(types::message_type) == 1
+	);
 
 	// TODO: fix endianness here
 	stream.read(
-		reinterpret_cast<char *>(&type), sizeof(type)
+		reinterpret_cast<char *>(&type),
+		sizeof(type)
 	);
 
-	if(type > types::message::size_)
+	stream.unget();
+
+	if(type >= types::message::size)
 		throw exception(
 			SGE_TEXT("Invalid message received!")
 		);
 
 	types::message::type const casted_type(
-		static_cast<types::message::type>(type)
+		static_cast<types::message::type>(
+			type
+		)
 	);
 
-	dispatch_map::const_iterator const it = ctx.handlers().find(casted_type);
+	dispatch_map::const_iterator const it(
+		ctx.handlers().find(
+			casted_type
+		)
+	);
 
 	if(it == ctx.handlers().end())
 		throw exception(

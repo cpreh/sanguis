@@ -70,6 +70,8 @@ public:
 
 	void pause(bool);
 
+	typedef void result_type;
+
 	void operator()(messages::add_aoe_projectile const &);
 	void operator()(messages::add_enemy const &);
 	void operator()(messages::add_friend const &);

@@ -9,7 +9,7 @@
 #include "enum.hpp"
 #include <majutsu/composite.hpp>
 #include <majutsu/role.hpp>
-#include <boost/mpl/vector.hpp>
+#include <boost/mpl/vector/vector10.hpp>
 
 namespace sanguis
 {
@@ -18,7 +18,7 @@ namespace messages
 
 typedef make_class<
 	majutsu::composite<
-		boost::mpl::vector<
+		boost::mpl::vector3<
 			bind_entity_message<
 				types::message::add_enemy
 			>::type,

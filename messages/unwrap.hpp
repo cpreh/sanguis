@@ -102,10 +102,6 @@ unwrap(
 	Handler const &def_handler
 )
 {
-	return
-		callers()[
-			msg->type()
-		]
 	typedef typename boost::mpl::begin<Sequence>::type first;
 	typedef typename boost::mpl::end<Sequence>::type last;
 
