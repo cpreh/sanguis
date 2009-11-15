@@ -7,7 +7,7 @@
 #include "space_unit.hpp"
 #include <majutsu/composite.hpp>
 #include <majutsu/role.hpp>
-#include <boost/mpl/vector.hpp>
+#include <boost/mpl/vector/vector10.hpp>
 
 namespace sanguis
 {
@@ -15,7 +15,7 @@ namespace messages
 {
 
 typedef majutsu::composite<
-	boost::mpl::vector<
+	boost::mpl::vector3<
 		add_with_speed,
 		majutsu::role<
 			space_unit,

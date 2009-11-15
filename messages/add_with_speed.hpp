@@ -6,7 +6,7 @@
 #include "add_elements_base.hpp"
 #include <majutsu/composite.hpp>
 #include <majutsu/role.hpp>
-#include <boost/mpl/vector.hpp>
+#include <boost/mpl/vector/vector10.hpp>
 
 namespace sanguis
 {
@@ -14,7 +14,7 @@ namespace messages
 {
 
 typedef majutsu::composite<
-	boost::mpl::vector<
+	boost::mpl::vector2<
 		add_elements_base,
 		majutsu::role<
 			vector2,

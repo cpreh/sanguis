@@ -14,7 +14,8 @@ template<
 >
 auto_ptr
 make_concrete(
-	T const &value)
+	T const &value
+)
 {
 	return auto_ptr(
 		new concrete<T>(

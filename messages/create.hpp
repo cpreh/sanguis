@@ -14,7 +14,8 @@ template<
 >
 auto_ptr
 create(
-	T const &t)
+	T const &t
+)
 {
 	return auto_ptr(
 		new concrete<T>(
