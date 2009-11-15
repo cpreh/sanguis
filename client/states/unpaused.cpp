@@ -1,8 +1,9 @@
 #include "unpaused.hpp"
 #include "paused.hpp"
 #include "../menu_event.hpp"
-#include "../../messages/unwrap.hpp"
+#include "../../messages/call/object.hpp"
 #include "../../tick_event.hpp"
+#include <sge/function/object.hpp>
 #include <tr1/functional>
 
 sanguis::client::states::unpaused::unpaused(
@@ -36,14 +37,16 @@ boost::statechart::result
 sanguis::client::states::unpaused::react(
 	message_event const &m)
 {
-	return messages::unwrap<
-		boost::mpl::vector<
+	static messages::call::object<
+		boost::mpl::vector1<
 			messages::pause
 		>,
-		boost::statechart::result
-	>(
-		*this,
+		unpaused
+	> dispatcher;
+
+	return dispatcher(
 		*m.message(),
+		*this,
 		std::tr1::bind(
 			&unpaused::handle_default_msg,
 			this,

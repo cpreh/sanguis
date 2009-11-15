@@ -3,16 +3,49 @@
 
 #include "../net/id_type.hpp"
 
-template<typename T,typename R>
-struct message_functor
+namespace sanguis
 {
+namespace server
+{
+
+template<
+	typename T,
+	typename R
+>
+class message_functor
+{
+public:
+	typedef R result_type;
+
+	message_functor(
+		T &t,
+		sanguis::net::id_type const id
+	)
+	:
+		t(t),
+		id(id)
+	{}
+
+	template<
+		typename U
+	>
+	R
+	operator()(
+		U const &m
+	) const
+	{
+		return t(
+			id,
+			m
+		);
+	}
+
+private:
 	T &t;
-	sanguis::net::id_type id;
-
-	message_functor(T &t,const sanguis::net::id_type id) : t(t),id(id) {}
-
-	template<typename U>
-	R operator()(U m) { return t(id,m); }
+	sanguis::net::id_type const id;
 };
+
+}
+}
 
 #endif

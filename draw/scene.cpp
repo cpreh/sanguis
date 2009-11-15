@@ -58,33 +58,6 @@ namespace
 
 unsigned const render_dead_amount = 20;
 
-sanguis::messages::call::object<
-	boost::mpl::vector21<
-		sanguis::messages::add_aoe_projectile,
-		sanguis::messages::add_enemy,
-		sanguis::messages::add_friend,
-		sanguis::messages::add_pickup,
-		sanguis::messages::add_player,
-		sanguis::messages::add_projectile,
-		sanguis::messages::add_weapon_pickup,
-		sanguis::messages::change_weapon,
-		sanguis::messages::experience,
-		sanguis::messages::health,
-		sanguis::messages::level_up,
-		sanguis::messages::max_health,
-		sanguis::messages::move,
-		sanguis::messages::remove,
-		sanguis::messages::resize,
-		sanguis::messages::rotate,
-		sanguis::messages::start_attacking,
-		sanguis::messages::stop_attacking,
-		sanguis::messages::start_reloading,
-		sanguis::messages::stop_reloading,
-		sanguis::messages::speed
-	>,
-	sanguis::draw::scene
-> dispatcher;
-
 }
 
 sanguis::draw::scene::scene(
@@ -135,17 +108,7 @@ sanguis::draw::scene::process_message(
 	messages::base const &m
 )
 {
-	dispatcher(
-		m,
-		*this,
-		std::tr1::bind(
-			&scene::process_default_msg,
-			this,
-			std::tr1::placeholders::_1
-		)
-	);
-#if 0
-	messages::unwrap<
+	static messages::call::object<
 		boost::mpl::vector21<
 			messages::add_aoe_projectile,
 			messages::add_enemy,
@@ -169,21 +132,24 @@ sanguis::draw::scene::process_message(
 			messages::stop_reloading,
 			messages::speed
 		>,
-		void
-	>(
-		*this,
+		scene
+	> dispatcher;
+
+	dispatcher(
 		m,
+		*this,
 		std::tr1::bind(
 			&scene::process_default_msg,
 			this,
 			std::tr1::placeholders::_1
 		)
 	);
-#endif
 }
 
-void sanguis::draw::scene::client_message(
-	client_messages::add const &m)
+void
+sanguis::draw::scene::client_message(
+	client_messages::add const &m
+)
 {
 	if(
 		entities.insert(

@@ -25,13 +25,16 @@ namespace states
 class menu 
 	: public boost::statechart::state<menu,machine>
 {
-	public:
+public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<tick_event>,
 		boost::statechart::custom_reaction<message_event>
-		> reactions;
+	> reactions;
 
-	menu(my_context); 
+	explicit menu(my_context); 
+
+	typedef boost::statechart::result result_type;
+
 	boost::statechart::result react(
 		tick_event const &);
 	boost::statechart::result react(
@@ -46,7 +49,7 @@ class menu
 		messages::disconnect const &);
 	boost::statechart::result operator()(
 		messages::assign_id const &);
-	private:
+private:
 	sge::log::object &log();
 
 	client::menu::object menu_;

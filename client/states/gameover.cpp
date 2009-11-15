@@ -4,7 +4,6 @@
 #include "../../media_path.hpp"
 #include "../../resolution.hpp"
 #include "../../messages/create.hpp"
-#include "../../messages/unwrap.hpp"
 #include "../../tick_event.hpp"
 #include "../menu_event.hpp"
 #include "../message_event.hpp"
@@ -29,18 +28,28 @@
 
 namespace
 {
+
 sge::gui::dim const dialog_size()
 {
-	float const scale_x = 0.5f,
-	            scale_y = 0.8f;
+	float const
+		scale_x = 0.5f,
+		scale_y = 0.8f;
 	
-	return sge::gui::dim(
-		static_cast<sge::gui::unit>(
-			static_cast<float>(
-				sanguis::resolution().w())*scale_x),
-		static_cast<sge::gui::unit>(
-			static_cast<float>(
-				sanguis::resolution().h())*scale_y));
+	return
+		sge::gui::dim(
+			static_cast<sge::gui::unit>(
+				static_cast<float>(
+					sanguis::resolution().w()
+				)
+				* scale_x
+			),
+			static_cast<sge::gui::unit>(
+				static_cast<float>(
+					sanguis::resolution().h()
+				)
+				* scale_y
+			)
+		);
 }
 
 sge::gui::point const dialog_pos()
@@ -173,20 +182,11 @@ sanguis::client::states::gameover::react(
 
 boost::statechart::result
 sanguis::client::states::gameover::react(
-	message_event const &m)
+	message_event const &m
+)
 {
-	return messages::unwrap<
-		boost::mpl::vector<
-		>,
-		boost::statechart::result
-	>(
-		*this,
-		*m.message(),
-		std::tr1::bind(
-			&gameover::handle_default_msg,
-			this,
-			std::tr1::placeholders::_1
-		)
+	return handle_default_msg(
+		*m.message()
 	);
 }
 
@@ -199,5 +199,6 @@ boost::statechart::result sanguis::client::states::gameover::handle_default_msg(
 void sanguis::client::states::gameover::return_clicked()
 {
 	post_event(
-		menu_event());
+		menu_event()
+	);
 }

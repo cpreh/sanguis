@@ -25,7 +25,10 @@ public:
 		boost::statechart::custom_reaction<message_event>
 	> reactions;
 
-	unpaused(my_context);
+	explicit unpaused(my_context);
+
+	typedef boost::statechart::result result_type;
+
 	boost::statechart::result react(tick_event const &);
 	boost::statechart::result react(message_event const &);
 	boost::statechart::result operator()(messages::pause const &);

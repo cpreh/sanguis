@@ -60,6 +60,8 @@ public:
 	void pause(bool);
 	boost::statechart::result react(message_event const &);
 	
+	typedef boost::statechart::result result_type;
+
 	boost::statechart::result operator()(
 		messages::assign_id const &);
 	boost::statechart::result operator()(

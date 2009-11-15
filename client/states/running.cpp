@@ -9,6 +9,7 @@
 #include "../../client_entity_type.hpp"
 #include "../../client_messages/add.hpp"
 #include "../../client_messages/visible.hpp"
+#include "../../messages/call/object.hpp"
 #include "../../messages/assign_id.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../messages/give_weapon.hpp"
@@ -16,7 +17,6 @@
 #include "../../messages/player_choose_perk.hpp"
 #include "../../messages/move.hpp"
 #include "../../messages/remove.hpp"
-#include "../../messages/unwrap.hpp"
 #include "../../messages/create.hpp"
 #include "../../draw/coord_transform.hpp"
 #include "../../draw/scene.hpp"
@@ -32,7 +32,7 @@
 #include <sge/container/raw_vector_impl.hpp>
 #include <sge/assert.hpp>
 #include <sge/utf8/convert.hpp>
-#include <boost/mpl/vector.hpp>
+#include <boost/mpl/vector/vector10.hpp>
 #include <boost/foreach.hpp>
 #include <tr1/functional>
 
@@ -168,10 +168,11 @@ sanguis::client::states::running::pause(
 
 boost::statechart::result
 sanguis::client::states::running::react(
-	message_event const &m)
+	message_event const &m
+)
 {
-	return messages::unwrap<
-		boost::mpl::vector<
+	static messages::call::object<
+		boost::mpl::vector8<
 			messages::assign_id,
 			messages::disconnect,
 			messages::give_weapon,
@@ -181,10 +182,12 @@ sanguis::client::states::running::react(
 			messages::available_perks,
 			messages::level_up
 		>,
-		boost::statechart::result
-	>(
-		*this,
+		running
+	> dispatcher;
+
+	return dispatcher(
 		*m.message(),
+		*this,
 		std::tr1::bind(
 			&running::handle_default_msg,
 			this,

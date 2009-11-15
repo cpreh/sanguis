@@ -4,9 +4,9 @@
 #include "../message_functor.hpp"
 #include "../message_event.hpp"
 #include "../log.hpp"
+#include "../../messages/call/object.hpp"
 #include "../../messages/pause.hpp"
 #include "../../messages/base.hpp"
-#include "../../messages/unwrap.hpp"
 #include "../../messages/create.hpp"
 #include "../../exception.hpp"
 
@@ -23,7 +23,7 @@
 #include <sge/format.hpp>
 #include <sge/text.hpp>
 
-#include <boost/mpl/vector.hpp>
+#include <boost/mpl/vector/vector10.hpp>
 #include <tr1/functional>
 #include <ostream>
 
@@ -208,16 +208,18 @@ boost::statechart::result
 sanguis::server::states::unpaused::react(
 	message_event const &m)
 {
-	message_functor<
+	typedef message_functor<
 		unpaused,
 		boost::statechart::result
-	> mf(
+	> functor_type;
+	
+	functor_type mf(
 		*this,
 		m.id()
 	);
 
-	return messages::unwrap<
-		boost::mpl::vector<
+	static messages::call::object<
+		boost::mpl::vector8<
 			messages::player_attack_dest,
 			messages::player_rotation,
 			messages::player_start_shooting,
@@ -227,10 +229,12 @@ sanguis::server::states::unpaused::react(
 			messages::player_pause,
 			messages::player_direction
 		>,
-		boost::statechart::result
-	>(
-		mf,
+		functor_type
+	> dispatcher;
+
+	return dispatcher(
 		*m.message(),
+		mf,
 		std::tr1::bind(
 			&unpaused::handle_default_msg,
 			this,

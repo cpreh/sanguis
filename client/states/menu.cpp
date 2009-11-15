@@ -2,13 +2,14 @@
 #include "paused.hpp"
 #include "unpaused.hpp"
 #include "../../messages/base.hpp"
-#include "../../messages/unwrap.hpp"
 #include "../../messages/create.hpp"
 #include "../../messages/client_info.hpp"
+#include "../../messages/call/object.hpp"
 #include "../machine.hpp"
 #include "../message_event.hpp"
 #include "../menu_event.hpp"
 #include "../log.hpp"
+#include <sge/function/object.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/log/parameters/inherited.hpp>
 #include <sge/renderer/state/list.hpp>
@@ -78,19 +79,22 @@ sanguis::client::states::menu::react(
 
 boost::statechart::result
 sanguis::client::states::menu::react(
-	message_event const &m)
+	message_event const &m
+)
 {
-	return messages::unwrap<
-		boost::mpl::vector<
+	static messages::call::object<
+		boost::mpl::vector4<
 			messages::assign_id,
 			messages::connect,
 			messages::disconnect,
 			messages::net_error
 		>,
-		boost::statechart::result
-	>(
-		*this,
+		menu
+	> dispatcher;
+
+	return dispatcher(
 		*m.message(),
+		*this,
 		std::tr1::bind(
 			&menu::handle_default_msg,
 			this,
@@ -101,14 +105,16 @@ sanguis::client::states::menu::react(
 
 boost::statechart::result
 sanguis::client::states::menu::handle_default_msg(
-	messages::base const &)
+	messages::base const &
+)
 {
 	return forward_event();
 }
 
 boost::statechart::result
 sanguis::client::states::menu::operator()(
-	messages::net_error const &e)
+	messages::net_error const &e
+)
 {
 	menu_.connection_error(
 		sge::utf8::convert(

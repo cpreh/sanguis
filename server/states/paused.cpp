@@ -3,16 +3,16 @@
 #include "../message_functor.hpp"
 #include "../message_event.hpp"
 #include "../log.hpp"
+#include "../../messages/call/object.hpp"
 #include "../../messages/unpause.hpp"
 #include "../../messages/create.hpp"
-#include "../../messages/unwrap.hpp"
 #include "../../messages/base.hpp"
 #include <sge/log/parameters/inherited.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/log/object.hpp>
 #include <sge/iconv.hpp>
 #include <sge/text.hpp>
-#include <boost/mpl/vector.hpp>
+#include <boost/mpl/vector/vector10.hpp>
 #include <tr1/functional>
 #include <ostream>
 
@@ -29,23 +29,27 @@ sanguis::server::states::paused::react(
 	message_event const &m
 )
 {
-	message_functor<
+	typedef message_functor<
 		paused,
 		boost::statechart::result
-	> mf(
+	> functor_type;
+	
+	functor_type mf(
 		*this,
 		m.id()
 	);
 
-	return messages::unwrap<
-		boost::mpl::vector<
+	static messages::call::object<
+		boost::mpl::vector2<
 			messages::player_pause,
 			messages::player_unpause
 		>,
-		boost::statechart::result
-	>(
-		mf,
+		functor_type
+	> dispatcher;
+	
+	return dispatcher(
 		*m.message(),
+		mf,
 		std::tr1::bind(
 			&paused::handle_default_msg,
 			this,

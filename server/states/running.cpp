@@ -5,7 +5,7 @@
 #include "../message_event.hpp"
 #include "../log.hpp"
 #include "../../connect_state.hpp"
-#include "../../messages/unwrap.hpp"
+#include "../../messages/call/object.hpp"
 #include "../../messages/highscore.hpp"
 #include "../../messages/create.hpp"
 #include "../../load/context.hpp"
@@ -15,7 +15,7 @@
 #include <sge/utf8/convert.hpp>
 #include <sge/text.hpp>
 #include <sge/type_info.hpp>
-#include <boost/mpl/vector.hpp>
+#include <boost/mpl/vector/vector10.hpp>
 #include <boost/foreach.hpp>
 #include <tr1/functional>
 #include <tr1/random>
@@ -59,26 +59,30 @@ sanguis::server::states::running::react(
 	message_event const &m
 )
 {
-	message_functor<
+	typedef message_functor<
 		running,
 		boost::statechart::result
-	> mf(
+	> functor_type;
+	
+	functor_type mf(
 		*this,
 		m.id()
 	);
 
-	return messages::unwrap<
-		boost::mpl::vector<
+	static messages::call::object<
+		boost::mpl::vector5<
 			messages::client_info,
 			messages::connect,
 			messages::disconnect,
 			messages::player_cheat,
 			messages::player_choose_perk
 		>,
-		boost::statechart::result
-	>(
-		mf,
+		functor_type
+	> dispatcher;
+
+	return dispatcher(
 		*m.message(),
+		mf,
 		std::tr1::bind(
 			&running::handle_default_msg,
 			this,

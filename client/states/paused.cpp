@@ -3,7 +3,8 @@
 #include "../menu_event.hpp"
 #include "../../tick_event.hpp"
 #include "../../messages/unpause.hpp"
-#include "../../messages/unwrap.hpp"
+#include "../../messages/call/object.hpp"
+#include <boost/mpl/vector/vector10.hpp>
 #include <tr1/functional>
 
 sanguis::client::states::paused::paused(my_context ctx)
@@ -38,14 +39,16 @@ boost::statechart::result
 sanguis::client::states::paused::react(
 	message_event const &m)
 {
-	return messages::unwrap<
-		boost::mpl::vector<
+	static messages::call::object<
+		boost::mpl::vector1<
 			messages::unpause
 		>,
-		boost::statechart::result
-	>(
-		*this,
+		paused
+	> dispatcher;
+
+	return dispatcher(
 		*m.message(),
+		*this,
 		std::tr1::bind(
 			&paused::handle_default_msg,
 			this,
@@ -56,14 +59,16 @@ sanguis::client::states::paused::react(
 
 boost::statechart::result
 sanguis::client::states::paused::operator()(
-	messages::unpause const &)
+	messages::unpause const &
+)
 {
 	return transit<unpaused>();
 }
 
 boost::statechart::result
 sanguis::client::states::paused::handle_default_msg(
-	messages::base const &)
+	messages::base const &
+)
 {
 	return forward_event();
 }

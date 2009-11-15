@@ -7,7 +7,7 @@
 #include "make_class.hpp"
 #include "make_message_id.hpp"
 #include <majutsu/composite.hpp>
-#include <boost/mpl/vector.hpp>
+#include <boost/mpl/vector/vector10.hpp>
 
 namespace sanguis
 {
@@ -15,7 +15,7 @@ namespace messages
 {
 
 typedef majutsu::composite<
-	boost::mpl::vector<
+	boost::mpl::vector2<
 		make_message_id<
 			types::message::net_error
 		>::type,
