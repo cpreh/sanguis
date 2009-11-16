@@ -17,8 +17,6 @@
 #include <boost/asio/io_service.hpp>
 #include <boost/asio/ip/tcp.hpp>
 #include <boost/system/error_code.hpp>
-
-#include <boost/function.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
 #include <cstddef>
 
