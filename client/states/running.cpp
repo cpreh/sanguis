@@ -23,6 +23,7 @@
 #include "../../load/context.hpp"
 #include "../../tick_event.hpp"
 #include "../cursor/object.hpp"
+#include <sge/log/headers.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/audio/pool.hpp>
 #include <sge/renderer/state/list.hpp>
