@@ -197,6 +197,7 @@ try
 				)
 			)
 		)
+		// TODO: replace this by capabilities
 		(sge::systems::parameterless::input)
 		(
 			sge::systems::named(
@@ -206,7 +207,12 @@ try
 		)
 		(sge::systems::parameterless::audio_player)
 		(sge::systems::parameterless::collision_system)
-		(sge::systems::parameterless::font)
+		(
+			sge::systems::named(
+				sge::systems::parameterless::font,
+				SGE_TEXT("freetype")
+			)
+		)
 	);
 
 	if(multi_sampling > 0)
