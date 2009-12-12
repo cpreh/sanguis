@@ -1,11 +1,11 @@
 #include "model_part_state.hpp"
 #include "model_part.hpp"
-#include "object.hpp"
 #include "../load/model/animation.hpp"
 #include "../load/model/part.hpp"
 #include "../load/model/animation_sound.hpp"
 #include "../animation_sound_type.hpp"
 #include "../resolution.hpp"
+#include <sge/sprite/object_impl.hpp>
 #include <sge/audio/sound.hpp>
 #include <sge/math/dim/structure_cast.hpp>
 

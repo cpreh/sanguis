@@ -3,13 +3,15 @@
 
 #include "sprite/point.hpp"
 #include "sprite/dim.hpp"
+#include "sprite/order.hpp"
 #include "sprite/rotation_type.hpp"
+#include "sprite/normal/object.hpp"
 #include "environment_fwd.hpp"
 #include "sprite_part_index_fwd.hpp"
 #include "entity.hpp"
 #include "vector2.hpp"
-#include "object_fwd.hpp"
 #include <sge/math/vector/basic_decl.hpp>
+#include <sge/sprite/object_decl.hpp>
 #include <vector>
 
 namespace sanguis
@@ -21,6 +23,8 @@ class container
 :
 	public entity
 {
+	typedef sprite::normal::object object;
+
 	typedef std::vector<
 		object
 	> sprite_vector;
@@ -33,6 +37,8 @@ public:
 		size_type,
 		sprite::order
 	);
+
+	~container();
 	
 	sprite::point const center() const;
 	sprite::point const pos() const;
@@ -54,7 +60,6 @@ protected:
 	virtual void speed(vector2 const &);
 	virtual void pos(sprite::point const &);
 	virtual void dim(sprite::dim const &);
-	virtual void visible(bool);
 
 	sprite::rotation_type orientation() const;
 	vector2 const speed() const;
@@ -62,7 +67,8 @@ private:
 	void update_pos(sprite::point const &);
 	void update_orientation(sprite::rotation_type);
 	void transfer(
-		draw::system &);
+		sprite::normal::system &
+	);
 
 	vector2         speed_,
 	                pos_;

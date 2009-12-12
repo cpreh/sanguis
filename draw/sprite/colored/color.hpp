@@ -2,7 +2,7 @@
 #define SANGUIS_DRAW_SPRITE_COLORED_COLOR_HPP_INCLUDED
 
 #include "color_format.hpp"
-#include <sge/image/color/object_fwd.hpp>
+#include <sge/image/color/object.hpp>
 
 namespace sanguis
 {

@@ -1,7 +1,11 @@
 #include "simple_sprite.hpp"
 #include "environment.hpp"
-#include <sge/sprite/intrusive/parameters.hpp>
+#include "sprite/client/parameters.hpp"
+#include "sprite/point.hpp"
 #include <sge/math/compare.hpp>
+#include <sge/sprite/parameters_impl.hpp>
+#include <sge/sprite/intrusive/system_impl.hpp>
+#include <sge/sprite/object_impl.hpp>
 
 sanguis::draw::simple_sprite::simple_sprite(
 	draw::environment const &env,
@@ -17,6 +21,9 @@ sanguis::draw::simple_sprite::simple_sprite(
 	),
 	sprite_(
 		sprite::client::parameters()
+		.pos(
+			sprite::point::null()
+		)
 		.system(
 			&env.client_system()
 		)
@@ -26,6 +33,7 @@ sanguis::draw::simple_sprite::simple_sprite(
 		.texture(
 			tex
 		)
+		.visible(true)
 		.texture_size()
 		.elements()
 	)
@@ -41,21 +49,14 @@ sanguis::draw::simple_sprite::simple_sprite(
 		sprite_.repeat(_repeat);
 }
 
+sanguis::draw::simple_sprite::~simple_sprite()
+{}
+
 void
 sanguis::draw::simple_sprite::update(
 	time_type
 )
 {}
-
-void
-sanguis::draw::simple_sprite::orientation(
-	sprite::rotation_type const angle
-)
-{
-	sprite_.rotation(
-		angle
-	);
-}
 
 void
 sanguis::draw::simple_sprite::pos(
@@ -83,10 +84,4 @@ sanguis::draw::simple_sprite::visible(
 )
 {
 	sprite_.visible(v);
-}
-
-sanguis::draw::sprite::rotation_type
-sanguis::draw::simple_sprite::orientation() const
-{
-	return sprite_.rotation();
 }

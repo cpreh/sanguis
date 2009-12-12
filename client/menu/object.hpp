@@ -81,7 +81,7 @@ private:
 		sge::sprite::type_choices<
 			int,
 			float,
-			sge::sprite::no_clor
+			sge::sprite::no_color
 		>,
 		boost::mpl::vector1<
 			sge::sprite::with_texture
@@ -93,7 +93,7 @@ private:
 	> sprite_object;
 
 	typedef sge::sprite::system<
-		sprite_choies
+		sprite_choices
 	>::type sprite_system;
 
 	typedef sge::sprite::parameters<

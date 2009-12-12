@@ -2,12 +2,12 @@
 #define SANGUIS_DRAW_ENTITY_HPP_INCLUDED
 
 #include "environment_fwd.hpp"
-#include "system_fwd.hpp"
 #include "vector2.hpp"
 #include "remove_action.hpp"
 #include "sprite/rotation_type.hpp"
 #include "sprite/point.hpp"
 #include "sprite/dim.hpp"
+#include "sprite/normal/system.hpp"
 #include "../entity_id.hpp"
 #include "../weapon_type.hpp"
 #include "../time_type.hpp"
@@ -45,6 +45,10 @@ public:
 	virtual void start_reloading();
 	virtual void stop_reloading();
 
+	virtual void transfer(
+		sprite::normal::system &
+	);
+
 	virtual ~entity();
 protected:
 	entity(
@@ -59,9 +63,6 @@ protected:
 
 	draw::environment const &
 	environment() const;
-
-	draw::system &
-	system();
 private:
 	virtual void on_decay();
 

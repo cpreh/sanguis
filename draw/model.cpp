@@ -3,7 +3,6 @@
 #include "z_ordering.hpp"
 #include "log.hpp"
 #include "sprite_part_index.hpp"
-#include "object.hpp"
 #include "environment.hpp"
 #include "../load/model/collection.hpp"
 #include "../load/model/context.hpp"
@@ -15,6 +14,7 @@
 #include <sge/log/object.hpp>
 #include <sge/math/vector/is_null.hpp>
 #include <sge/math/vector/basic_impl.hpp>
+#include <sge/sprite/object_impl.hpp>
 #include <sge/text.hpp>
 #include <sge/make_auto_ptr.hpp>
 #include <boost/foreach.hpp>

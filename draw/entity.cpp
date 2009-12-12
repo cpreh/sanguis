@@ -121,8 +121,10 @@ void sanguis::draw::entity::stop_reloading()
 		sge::log::_ << SGE_TEXT("got a stop reloading message!"));
 }
 
-void sanguis::draw::entity::transfer(
-	draw::system &)
+void
+sanguis::draw::entity::transfer(
+	sprite::normal::system &
+)
 {
 	SGE_LOG_WARNING(
 		log(),
@@ -165,12 +167,6 @@ sanguis::draw::environment const &
 sanguis::draw::entity::environment() const
 {
 	return env_;
-}
-
-sanguis::draw::system &
-sanguis::draw::entity::system()
-{
-	return env_.system();
 }
 
 void sanguis::draw::entity::on_decay()

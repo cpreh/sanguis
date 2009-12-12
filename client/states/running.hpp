@@ -95,7 +95,7 @@ private:
 	void send_perk_choose(perk_type::type);
 
 	void cursor_pos(
-		draw:sprite::point const &
+		draw::sprite::point const &
 	);
 
 	void cursor_show(

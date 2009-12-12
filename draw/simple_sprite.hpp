@@ -6,9 +6,9 @@
 #include "sprite/client/object.hpp"
 #include "sprite/order.hpp"
 #include "entity.hpp"
-#include "object.hpp"
 #include <sge/texture/part_fwd.hpp>
 #include <sge/sprite/intrusive/order.hpp>
+#include <sge/sprite/object_decl.hpp>
 
 namespace sanguis
 {
@@ -24,13 +24,13 @@ public:
 		sge::texture::const_part_ptr,
 		sprite::client::repetition_type
 	);
+
+	~simple_sprite();
 private:
 	void update(time_type);
-	void orientation(sprite::rotation_type);
 	void pos(sprite::point const &);
 	void dim(sprite::dim const &);
 	void visible(bool);
-	sprite::rotation_type orientation() const;
 
 	sprite::client::object sprite_;
 };

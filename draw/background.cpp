@@ -1,6 +1,4 @@
 #include "background.hpp"
-#include "object.hpp"
-#include "system.hpp"
 #include "environment.hpp"
 #include "z_ordering.hpp"
 #include "sprite/normal/parameters.hpp"
@@ -30,7 +28,7 @@ sanguis::draw::background::background(
 		client::next_id()
 	),
 	tex(
-		env.system().renderer()->create_texture(
+		env.client_system().renderer()->create_texture(
 			sge::math::dim::structure_cast<
 				sge::renderer::dim_type
 			>(
@@ -72,9 +70,12 @@ sanguis::draw::background::background(
 	);
 }
 
+sanguis::draw::background::~background()
+{}
+
 void
 sanguis::draw::background::paint_dead(
-	draw::normal::system &sys
+	draw::sprite::normal::system &sys
 )
 {
 	sge::renderer::device_ptr const rend(

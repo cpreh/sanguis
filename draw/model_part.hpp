@@ -2,7 +2,6 @@
 #define SANGUIS_DRAW_MODEL_PART_HPP_INCLUDED
 
 #include "model_part_state_fwd.hpp"
-#include "object_fwd.hpp"
 #include "funit.hpp"
 #include "sprite/normal/object.hpp"
 #include "sprite/normal/texture_animation.hpp"
@@ -28,7 +27,7 @@ class model_part {
 public:
 	model_part(
 		load::model::part const &,
-		sanguis::draw::sprite::normal::object &ref
+		sprite::normal::object &ref
 	);
 
 	~model_part();
@@ -42,8 +41,12 @@ public:
 	void orientation(
 		sprite::rotation_type);
 	bool animation_ended() const;
-	sanguis::draw::object &object();
-	sanguis::draw::object const &object() const;
+
+	sprite::normal::object &
+	object();
+
+	sprite::normal::object const &
+	object() const;
 private:
 	friend class model_part_state;
 
@@ -74,7 +77,7 @@ private:
 
 	load::model::part const &load_part_;
 
-	sanguis::draw::object &ref_;
+	sprite::normal::object &ref_;
 
 	weapon_type::type                       weapon_;
 	typedef sge::scoped_ptr<model_part_state> model_part_state_ptr;

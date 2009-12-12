@@ -2,14 +2,15 @@
 #include "unit.hpp"
 #include "z_ordering.hpp"
 #include "sprite_part_index.hpp"
-#include "object.hpp"
-#include <sge/optional_impl.hpp>
+#include <sge/sprite/object_impl.hpp>
+#include <sge/sprite/center.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/vector/arithmetic.hpp>
 #include <sge/math/vector/is_null.hpp>
 #include <sge/math/vector/normalize.hpp>
 #include <sge/math/vector/length.hpp>
 #include <sge/math/vector/structure_cast.hpp>
+#include <sge/optional_impl.hpp>
 
 namespace
 {
@@ -30,10 +31,13 @@ sanguis::draw::bullet::bullet(
 		name,
 		z_ordering::bullet,
 		false,
-		draw::remove_action::remove),
+		draw::remove_action::remove
+	),
 	origin()
 {
-	at(tail).size().w() = static_cast<unit>(3); // TODO: which value is best here?
+	at(tail).w(
+		static_cast<unit>(3)
+	); // TODO: which value is best here?
 }
 
 void sanguis::draw::bullet::update(
@@ -70,7 +74,8 @@ void sanguis::draw::bullet::update(
 			? pos
 			: pos - normalize(speed())*static_cast<funit>(0.5) * length(newsize));
 
-	at(tail).center(
+	sge::sprite::center(
+		at(tail),
 		sge::math::vector::structure_cast<
 			sprite::point
 		>(

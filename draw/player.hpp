@@ -22,8 +22,8 @@ public:
 	void speed(
 		vector2 const &);
 private:
-	using sprite::orientation;
-	using sprite::speed;
+	using container::orientation;
+	using container::speed;
 
 	void update(time_type);
 

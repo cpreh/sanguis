@@ -8,6 +8,8 @@
 #include <sge/math/vector/is_null.hpp>
 #include <sge/math/vector/normalize.hpp>
 #include <sge/math/vector/arithmetic.hpp>
+#include <sge/exception.hpp>
+#include <sge/text.hpp>
 
 sanguis::draw::particle::generator::generator(
 	generation_callback const generate_object,

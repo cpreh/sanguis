@@ -5,6 +5,7 @@
 #include "sprite/colored/system.hpp"
 #include "sprite/normal/system.hpp"
 #include "sprite/client/system.hpp"
+#include "sprite/particle/system.hpp"
 #include "insert_callback.hpp"
 #include <sge/function/object.hpp>
 
@@ -20,7 +21,8 @@ public:
 		load::context const &,
 		sprite::colored::system &,
 		sprite::normal::system &,
-		sprite::client::system &
+		sprite::client::system &,
+		sprite::particle::system &
 	);
 	
 	insert_callback const &
@@ -37,12 +39,16 @@ public:
 
 	sprite::client::system &
 	client_system() const;
+
+	sprite::particle::system &
+	particle_system() const;
 private:
 	insert_callback const insert_;
 	load::context const   &context_;
 	sprite::colored::system &colored_system_;
 	sprite::normal::system &normal_system_;
 	sprite::client::system &client_system_;
+	sprite::particle::system &particle_system_;
 };
 
 }

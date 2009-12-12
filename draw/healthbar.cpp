@@ -1,6 +1,8 @@
 #include "healthbar.hpp"
 #include "z_ordering.hpp"
-#include "object.hpp"
+#include "environment.hpp"
+#include "sprite/colored/parameters.hpp"
+#include "sprite/colored/color.hpp"
 #include "../client/id_dont_care.hpp"
 #include "../exception.hpp"
 #include <sge/format.hpp>
@@ -12,7 +14,9 @@
 #include <sge/image/color/rgba8.hpp>
 #include <sge/image/color/init.hpp>
 #include <sge/image/colors.hpp>
-#include <sge/sprite/intrusive/parameters.hpp>
+#include <sge/sprite/parameters_impl.hpp>
+#include <sge/sprite/object_impl.hpp>
+#include <sge/sprite/intrusive/system_impl.hpp>
 #include <boost/none.hpp>
 #include <algorithm>
 
@@ -54,6 +58,9 @@ sanguis::draw::healthbar::healthbar(
 {
 	recalc_health();
 }
+
+sanguis::draw::healthbar::~healthbar()
+{}
 
 void
 sanguis::draw::healthbar::update_health(
@@ -109,7 +116,7 @@ sanguis::draw::healthbar::pos(
 		pos_
 	);
 
-	inner.pos(
+	foreground.pos(
 		inner_pos()
 	);
 }
@@ -145,7 +152,7 @@ sanguis::draw::sprite::dim const
 sanguis::draw::healthbar::inner_dim() const
 {
 	return
-		border().size()
+		background.size()
 		- sprite::dim(
 			2 * border_size,
 			2 * border_size

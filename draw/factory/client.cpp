@@ -33,7 +33,7 @@ sanguis::draw::factory::client(
 			static_cast<
 				sprite::client::repetition_type
 			>(
-				2
+				1
 			)
 		);
 	default:

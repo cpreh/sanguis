@@ -349,7 +349,7 @@ sanguis::client::states::running::cursor_pos(
 	(*drawer)(
 		messages::move(
 			cursor_id,
-			screen_to_virtual(
+			draw::screen_to_virtual(
 				context<machine>().renderer()->screen_size(),
 				pos
 			)

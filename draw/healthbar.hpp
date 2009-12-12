@@ -5,6 +5,8 @@
 #include "sprite/point.hpp"
 #include "sprite/dim.hpp"
 #include "sprite/colored/object.hpp"
+#include <sge/sprite/object_decl.hpp>
+#include <sge/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -13,10 +15,13 @@ namespace draw
 
 class healthbar
 {
+	SGE_NONCOPYABLE(healthbar)
 public:
 	explicit healthbar(
 		draw::environment const &
 	);
+
+	~healthbar();
 	
 	void
 	update_health(
@@ -33,9 +38,6 @@ public:
 		sprite::dim const &
 	);
 private:
-	using sprite::health;
-	using sprite::max_health;
-
 	void pos(sprite::point const &);
 	void dim(sprite::dim const &);
 	sprite::point const inner_pos() const;

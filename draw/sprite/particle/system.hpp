@@ -1,5 +1,5 @@
-#ifndef SANGUIS_DRAW_SPRITE_CLIENT_SYSTEM_HPP_INCLUDED
-#define SANGUIS_DRAW_SPRITE_CLIENT_SYSTEM_HPP_INCLUDED
+#ifndef SANGUIS_DRAW_SPRITE_PARTICLE_SYSTEM_HPP_INCLUDED
+#define SANGUIS_DRAW_SPRITE_PARTICLE_SYSTEM_HPP_INCLUDED
 
 #include "choices.hpp"
 #include <sge/sprite/system.hpp>
@@ -10,7 +10,7 @@ namespace draw
 {
 namespace sprite
 {
-namespace client
+namespace particle
 {
 
 typedef sge::sprite::system<

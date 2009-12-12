@@ -1,19 +1,27 @@
 #include "object.hpp"
 #include "z_ordering.hpp"
+#include "../sprite/particle/parameters.hpp"
+#include "../sprite/particle/texture_animation.hpp"
+#include "../sprite/point.hpp"
+#include "../sprite/dim.hpp"
 #include "../../load/model/animation_context.hpp"
-#include <sge/sprite/texture_animation.hpp>
-#include <sge/sprite/intrusive/parameters.hpp>
+#include <sge/sprite/animation/texture_impl.hpp>
+#include <sge/sprite/intrusive/system_impl.hpp>
+#include <sge/sprite/object_impl.hpp>
+#include <sge/sprite/parameters_impl.hpp>
+#include <sge/sprite/center.hpp>
 #include <sge/math/point_rotate.hpp>
 #include <sge/math/vector/structure_cast.hpp>
 #include <sge/math/dim/structure_cast.hpp>
 #include <sge/image/color/rgba8.hpp>
 #include <sge/image/color/init.hpp>
+#include <sge/optional_impl.hpp>
 
 sanguis::draw::particle::object::object(
 	particle_type::type const _type,
 	funit const _aoe,
 	load::model::animation::context_ptr _animation_context,
-	sge::optional<time_type> const _fade_total,
+	optional_time const _fade_total,
 	draw::environment const &_e
 )
 :
@@ -26,9 +34,9 @@ sanguis::draw::particle::object::object(
 		_e
 	),
 	sprite_(
-		sprite::normal::parameters()
+		sprite::particle::parameters()
 		.system(
-			&_e.system()
+			&_e.particle_system()
 		)
 		.order(
 			z_ordering(
@@ -60,6 +68,10 @@ sanguis::draw::particle::object::object(
 {
 }
 
+sanguis::draw::particle::object::~object()
+{
+}
+
 bool sanguis::draw::particle::object::update(
 	time_type const delta,
 	point const &p,
@@ -69,11 +81,11 @@ bool sanguis::draw::particle::object::update(
 	animation_context_->update();
 	if (!animation_ && animation_context_->is_finished())
 		animation_.reset(
-			new sprite::normal::texture_animation(
+			new sprite::particle::texture_animation(
 				animation_context_->result(),
 				fade_total_ 
-					? sge::sprite::loop_method::repeat
-					: sge::sprite::loop_method::stop_at_end,
+					? sge::sprite::animation::loop_method::repeat
+					: sge::sprite::animation::loop_method::stop_at_end,
 				sprite_,
 				clock_.callback()
 			)
@@ -81,9 +93,16 @@ bool sanguis::draw::particle::object::update(
 
 	base::update(delta,p,r,d);
 
-	sprite_.z() = d+base::depth();
-	sprite_.rotation(base::rot()+r);
-	sprite_.center( 
+	sprite_.z(
+		d + base::depth()
+	);
+
+	sprite_.rotation(
+		base::rot() + r
+	);
+
+	sge::sprite::center( 
+		sprite_,
 		sge::math::vector::structure_cast<
 			sprite::point
 		>(
@@ -96,7 +115,8 @@ bool sanguis::draw::particle::object::update(
 	);
 
 	clock_.update(
-		delta);
+		delta
+	);
 
 	bool const ret = animation_ ? animation_->process() : false;
 	if (!fade_total_)

@@ -19,6 +19,9 @@ public:
 	object(
 		sge::image::loader_ptr,
 		sge::renderer::device_ptr);
+
+	~object();
+
 	sge::gui::point const pos() const;
 	void pos(
 		sge::gui::point const &);

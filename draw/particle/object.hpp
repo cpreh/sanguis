@@ -2,8 +2,8 @@
 #define SANGUIS_DRAW_PARTICLE_OBJECT_HPP_INCLUDED
 
 #include "base.hpp"
-#include "../sprite/normal/object.hpp"
-#include "../sprite/normal/texture_animation.hpp"
+#include "../sprite/particle/object.hpp"
+#include "../sprite/particle/texture_animation.hpp"
 #include "../../particle_type.hpp"
 #include "../../diff_clock.hpp"
 #include "../../load/model/animation.hpp"
@@ -21,11 +21,13 @@ namespace particle
 class object : public base
 {
 public:
+	typedef sge::optional<time_type> optional_time;
+
 	object(
 		particle_type::type,
 		funit aoe,
 		load::model::animation::context_ptr,
-		sge::optional<time_type> fade_time,
+		optional_time fade_time,
 		draw::environment const &
 	);
 
@@ -39,13 +41,13 @@ public:
 	);
 
 private:
-	draw::sprite::normal::object sprite_;
+	draw::sprite::particle::object sprite_;
 	diff_clock clock_;
 	load::model::animation::context_ptr animation_context_;
 	sge::scoped_ptr<
-		sprite::normal::texture_animation
+		sprite::particle::texture_animation
 	> animation_;
-	sge::optional<time_type> fade_total_;
+	optional_time fade_total_;
 	time_type fade_remaining_;
 };
 

@@ -5,7 +5,6 @@
 #include "align_type.hpp"
 #include "movement_type.hpp"
 #include "../../diff_clock.hpp"
-#include <sge/sprite/animation_series.hpp>
 #include <sge/random/uniform.hpp>
 #include <sge/time/timer.hpp>
 
@@ -18,7 +17,7 @@ namespace particle
 
 class generator : public container
 {
-	public:
+public:
 	generator(
 		generation_callback,
 		point const &,
@@ -37,7 +36,7 @@ class generator : public container
 		point const &,
 		rotation_type,
 		depth_type);
-	private:
+private:
 	diff_clock clock;
 	generation_callback generate_object;
 	sge::time::timer frequency_timer;

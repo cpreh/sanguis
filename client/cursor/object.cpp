@@ -1,4 +1,5 @@
 #include "object.hpp"
+#include <sge/sprite/object_impl.hpp>
 
 sanguis::client::cursor::object::object(
 	sge::image::loader_ptr const il,
@@ -13,6 +14,9 @@ sanguis::client::cursor::object::object(
 	visible(
 		true);
 }
+
+sanguis::client::cursor::object::~object()
+{}
 
 sge::gui::point const sanguis::client::cursor::object::pos() const
 {

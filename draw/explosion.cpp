@@ -21,6 +21,7 @@
 #include <sge/math/vector/structure_cast.hpp>
 #include <sge/minmax_pair_impl.hpp>
 #include <sge/audio/sound.hpp>
+#include <sge/optional_impl.hpp>
 #include <boost/assign/list_of.hpp>
 #include <tr1/functional>
 
@@ -226,8 +227,10 @@ sanguis::draw::explosion::generate_particle(
 				t,
 				aoe_,
 				anim,
-				boost::none,
-				environment()));
+				particle::object::optional_time(),
+				environment()
+			)
+		);
 	else
 	{
 		// FIXME: this should not be here!
@@ -245,7 +248,9 @@ sanguis::draw::explosion::generate_particle(
 				aoe_,
 				anim,
 				rng(),
-				environment()));
+				environment()
+			)
+		);
 	}
 
 	/*

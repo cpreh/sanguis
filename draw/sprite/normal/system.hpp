@@ -2,7 +2,7 @@
 #define SANGUIS_DRAW_SPRITE_NORMAL_SYSTEM_HPP_INCLUDED
 
 #include "choices.hpp"
-#include <sge/sprite/system_fwd.hpp>
+#include <sge/sprite/system.hpp>
 
 namespace sanguis
 {

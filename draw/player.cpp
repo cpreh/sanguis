@@ -1,7 +1,6 @@
 #include "player.hpp"
 #include "z_ordering.hpp"
 #include "sprite_part_index.hpp"
-#include "object.hpp"
 #include "sprite/point.hpp"
 #include "../client/next_id.hpp"
 #include <sge/text.hpp>
@@ -9,6 +8,7 @@
 #include <sge/math/vector/angle_between.hpp>
 #include <sge/math/vector/is_null.hpp>
 #include <sge/math/vector/basic_impl.hpp>
+#include <sge/sprite/object_impl.hpp>
 #include <sge/console/var_impl.hpp>
 #include <sge/math/point_rotate.hpp>
 #include <boost/none.hpp>
@@ -47,8 +47,8 @@ sanguis::draw::player::player(
 	at(top).order(z_ordering::player_upper);
 	
 	// FIXME: put the rotation point in a config file?
-	at(top).rotate_around(
-		player_body_center);
+/*	at(top).rotate_around(
+		player_body_center);*/
 }
 
 
@@ -103,8 +103,11 @@ void sanguis::draw::player::update(
 			at(bottom).pos())+new_rotation,
 		top_pos = rot_abs - body_center;
 
-	at(top).pos() = sge::math::vector::structure_cast<
-		sprite::point
-	>(
-		top_pos);
+	at(top).pos(
+		sge::math::vector::structure_cast<
+			sprite::point
+		>(
+			top_pos
+		)
+	);
 }

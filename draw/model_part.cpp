@@ -1,6 +1,6 @@
 #include "model_part.hpp"
 #include "model_part_state.hpp"
-#include "object.hpp"
+#include "sprite/dim.hpp"
 #include "../load/model/part.hpp"
 #include "../load/model/base_animation_not_found.hpp"
 #include "../log.hpp"
@@ -16,7 +16,7 @@
 #include <sge/sprite/animation/texture_impl.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/math/compare.hpp>
-#include <sge/sprite/object.hpp>
+#include <sge/sprite/object_impl.hpp>
 #include <sge/time/time.hpp>
 #include <sge/text.hpp>
 #include <algorithm>
@@ -37,7 +37,7 @@ invalid_rotation(
 
 sanguis::draw::model_part::model_part(
 	load::model::part const& _load_part,
-	sanguis:draw::sprite::normal::object &_ref
+	sanguis::draw::sprite::normal::object &_ref
 )
 :
 	anim_diff_clock_(),
@@ -249,12 +249,14 @@ bool sanguis::draw::model_part::animation_ended() const
 	return ended_;
 }
 
-sanguis::draw::object &sanguis::draw::model_part::object()
+sanguis::draw::sprite::normal::object &
+sanguis::draw::model_part::object()
 {
 	return ref_;
 }
 
-sanguis::draw::object const &sanguis::draw::model_part::object() const
+sanguis::draw::sprite::normal::object const &
+sanguis::draw::model_part::object() const
 {
 	return ref_;
 }

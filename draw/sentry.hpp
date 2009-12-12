@@ -17,7 +17,7 @@ public:
 	void orientation(
 		sprite::rotation_type);
 private:
-	using sprite::orientation;
+	using container::orientation;
 };
 
 

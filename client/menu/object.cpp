@@ -219,6 +219,10 @@ sanguis::client::menu::object::object(
 {
 }
 
+sanguis::client::menu::object::~object()
+{
+}
+
 void
 sanguis::client::menu::object::process(
 	time_type const delta

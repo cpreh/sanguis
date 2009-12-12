@@ -4,13 +4,13 @@
 #include "scene_fwd.hpp"
 #include "entity_auto_ptr.hpp"
 #include "hud.hpp"
-#include "system.hpp"
 #include "environment.hpp"
 #include "entity_fwd.hpp"
 #include "background_fwd.hpp"
 #include "sprite/client/system.hpp"
 #include "sprite/normal/system.hpp"
 #include "sprite/colored/system.hpp"
+#include "sprite/particle/system.hpp"
 #include "../load/context_fwd.hpp"
 #include "../client_messages/add_fwd.hpp"
 #include "../client_messages/visible_fwd.hpp"
@@ -139,11 +139,15 @@ private:
 	static sge::log::object &
 	log();
 
+	sge::renderer::device_ptr const rend;
+
 	sprite::normal::system normal_system_;
 
 	sprite::colored::system colored_system_;
 
 	sprite::client::system client_system_;
+
+	sprite::particle::system particle_system_;
 
 	hud                           hud_;
 	bool                          paused;

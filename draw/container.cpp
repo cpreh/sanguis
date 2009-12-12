@@ -1,15 +1,19 @@
-#include "sprite.hpp"
+#include "container.hpp"
+#include "environment.hpp"
 #include "sprite_part_index.hpp"
 #include "sprite/normal/object.hpp"
 #include "sprite/normal/parameters.hpp"
-#include <sge/sprite/intrusive/parameters.hpp>
+#include <sge/sprite/parameters_impl.hpp>
+#include <sge/sprite/intrusive/system_impl.hpp>
+#include <sge/sprite/object_impl.hpp>
+#include <sge/sprite/center.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/vector/arithmetic.hpp>
 #include <sge/math/vector/structure_cast.hpp>
 #include <boost/foreach.hpp>
 #include <boost/none.hpp>
 
-sanguis::draw::container::sprite(
+sanguis::draw::container::container(
 	draw::environment const &env,
 	entity_id const id,
 	size_type const sz,
@@ -27,7 +31,7 @@ sanguis::draw::container::sprite(
 
 	for(size_type i = 0; i < sz; ++i)
 		sprites.push_back(
-			sprite::normal::object(
+			object(
 				sprite::normal::parameters()
 				.system(
 					&env.normal_system()
@@ -35,18 +39,21 @@ sanguis::draw::container::sprite(
 				.order(
 					order
 				)
-				.visible(
-					true
-				)
 				.elements()
 			)
 		);
 }
 
+sanguis::draw::container::~container()
+{
+}
+
 sanguis::draw::sprite::point const
 sanguis::draw::container::center() const
 {
-	return master().center();
+	return sge::sprite::center(
+		master()
+	);
 }
 
 sanguis::draw::sprite::point const
@@ -71,7 +78,7 @@ sanguis::draw::container::update(
 	);
 }
 
-sanguis::draw::object &
+sanguis::draw::container::object &
 sanguis::draw::container::at(
 	sprite_part_index const &i
 )
@@ -79,7 +86,7 @@ sanguis::draw::container::at(
 	return sprites.at(i.get());
 }
 
-sanguis::draw::object const &
+sanguis::draw::container::object const &
 sanguis::draw::container::at(
 	sprite_part_index const &i
 ) const
@@ -87,16 +94,16 @@ sanguis::draw::container::at(
 	return sprites.at(i.get());
 }
 
-sanguis::draw::object &
+sanguis::draw::container::object &
 sanguis::draw::container::master()
 {
 	return at(sprite_part_index(0));
 }
 
-sanguis::draw::object const &
+sanguis::draw::container::object const &
 sanguis::draw::container::master() const
 {
-	return const_cast<sprite &>(*this).master();
+	return const_cast<container &>(*this).master();
 }
 
 sanguis::draw::container::iterator
@@ -151,13 +158,7 @@ void sanguis::draw::container::dim(
 )
 {
 	BOOST_FOREACH(object &s, sprites)
-		s.size() = d;
-}
-
-void sanguis::draw::container::visible(const bool v)
-{
-	BOOST_FOREACH(object &s, sprites)
-		s.visible(v);
+		s.size(d);
 }
 
 sanguis::draw::sprite::rotation_type
@@ -178,5 +179,19 @@ sanguis::draw::container::update_pos(
 )
 {
 	BOOST_FOREACH(object &s, sprites)
-		s.pos() = p;
+		s.pos(p);
+}
+
+void
+sanguis::draw::container::transfer(
+	sprite::normal::system &sys
+)
+{
+	BOOST_FOREACH(	
+		object &s,
+		sprites
+	)
+		s.transfer(
+			sys
+		);
 }

@@ -5,7 +5,7 @@
 #include <sge/math/vector/structure_cast.hpp>
 
 sanguis::draw::sprite::point const
-sanguis::virtual_to_screen(
+sanguis::draw::virtual_to_screen(
 	sge::renderer::screen_size const &ss,
 	messages::types::pos const &pos
 )
@@ -18,7 +18,7 @@ sanguis::virtual_to_screen(
 }
 
 sanguis::draw::sprite::dim const
-sanguis::virtual_to_screen(
+sanguis::draw::virtual_to_screen(
 	sge::renderer::screen_size const &ss,
 	messages::types::dim const &dim
 )
@@ -31,7 +31,7 @@ sanguis::virtual_to_screen(
 }
 
 sanguis::messages::types::pos const
-sanguis::screen_to_virtual(
+sanguis::draw::screen_to_virtual(
 	sge::renderer::screen_size const &ss,
 	sprite::point const &pos
 )
@@ -44,7 +44,7 @@ sanguis::screen_to_virtual(
 }
 
 sanguis::messages::types::dim const
-sanguis::screen_to_virtual(
+sanguis::draw::screen_to_virtual(
 	sge::renderer::screen_size const &ss,
 	sprite::dim const &dim
 )

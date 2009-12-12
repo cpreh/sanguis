@@ -1,6 +1,10 @@
 #include "scene.hpp"
 #include "entity.hpp"
 #include "background.hpp"
+#include "configure_entity.hpp"
+#include "log.hpp"
+#include "environment.hpp"
+#include "z_ordering.hpp"
 #include "factory/aoe_projectile.hpp"
 #include "factory/client.hpp"
 #include "factory/enemy.hpp"
@@ -10,9 +14,7 @@
 #include "factory/projectile.hpp"
 #include "factory/weapon_pickup.hpp"
 #include "coord_transform.hpp"
-#include "log.hpp"
-#include "environment.hpp"
-#include "configure_entity.hpp"
+#include "sprite/order.hpp"
 #include "../messages/call/object.hpp"
 #include "../messages/role_name.hpp"
 #include "../client_messages/add.hpp"
@@ -36,8 +38,11 @@
 #include <sge/renderer/target.hpp>
 #include <sge/renderer/const_scoped_target_lock.hpp>
 #include <sge/renderer/resource_flags_none.hpp>
-#include <sge/renderer/scoped_state.hpp>
+#include <sge/renderer/state/scoped.hpp>
 #include <sge/renderer/filter/linear.hpp>
+#include <sge/sprite/default_equal.hpp>
+#include <sge/sprite/intrusive/system_impl.hpp>
+#include <sge/sprite/object_impl.hpp>
 #include <sge/function/object.hpp>
 
 #include <majutsu/is_role.hpp>
@@ -67,8 +72,11 @@ sanguis::draw::scene::scene(
 	sge::font::object &font
 )
 :
+	rend(rend),
 	normal_system_(rend),
 	colored_system_(rend),
+	client_system_(rend),
+	particle_system_(rend),
 	hud_(font),
 	paused(false),
 	env(
@@ -80,7 +88,8 @@ sanguis::draw::scene::scene(
 		resources_,
 		colored_system_,
 		normal_system_,
-		client_system_
+		client_system_,
+		particle_system_
 	),
 	background_id(
 		client::invalid_id
@@ -161,7 +170,7 @@ sanguis::draw::scene::client_message(
 			factory::client(
 				environment(),
 				m,
-				system().renderer()->screen_size()
+				rend->screen_size()
 			)
 		).second
 		== false
@@ -221,16 +230,17 @@ sanguis::draw::scene::draw(
 	
 	if(dead_list.size() >= render_dead_amount)
 		render_dead();
-	
+
 	{
-	sge::renderer::scoped_state const state_(
+	sge::renderer::state::scoped const state_(
+		rend,	
 		sge::sprite::render_states()
 	);
 
 	normal_system_.matrices();
 
 	client_system_.render(
-		z_ordering::background
+		z_ordering::background,
 		sge::sprite::default_equal()
 	);
 		
@@ -238,7 +248,7 @@ sanguis::draw::scene::draw(
 		sprite::order index(
 			z_ordering::corpses
 		);
-		index < healthbar_lower;
+		index < z_ordering::healthbar_lower;
 		++index
 	)
 		normal_system_.render(
@@ -250,7 +260,7 @@ sanguis::draw::scene::draw(
 		sprite::order index(
 			z_ordering::healthbar_lower
 		);
-		index < smoke;
+		index < z_ordering::smoke;
 		++index
 	)
 		colored_system_.render(
@@ -265,16 +275,17 @@ sanguis::draw::scene::draw(
 		index < z_ordering::cursor;
 		++index
 	)
-		normal_system_.render(
+		particle_system_.render(
 			index,
 			sge::sprite::default_equal()
 		);
-	}
 
 	client_system_.render(
 		z_ordering::cursor,
 		sge::sprite::default_equal()
 	);
+
+	}
 
 	hud_.update(delta);
 }
@@ -282,16 +293,14 @@ sanguis::draw::scene::draw(
 sge::renderer::texture_ptr const
 sanguis::draw::scene::capture_screen()
 {
-	sge::renderer::device_ptr const rend(
-		system().renderer()
-	);
-
 	{
 		sge::renderer::scoped_block const block_(
 			rend
 		);
 
-		system().render();
+		normal_system_.render_all(
+			sge::sprite::default_equal()
+		);
 	}
 
 	return rend->create_texture(
@@ -493,7 +502,7 @@ void sanguis::draw::scene::operator()(
 		m.get<messages::roles::entity_id>()
 	).pos(
 		virtual_to_screen(
-			ss.renderer()->screen_size(),
+			rend->screen_size(),
 			m.get<messages::pos>()
 		)
 	);
@@ -555,7 +564,7 @@ void sanguis::draw::scene::operator()(
 			vector2
 		>(
 			virtual_to_screen(
-				ss.renderer()->screen_size(),
+				rend->screen_size(),
 				m.get<messages::roles::speed>()
 			)
 		)
@@ -634,10 +643,6 @@ sanguis::draw::scene::configure_new_object(
 
 void sanguis::draw::scene::render_dead()
 {
-	sge::renderer::device_ptr const rend(
-		system().renderer()
-	);
-
 	sprite::normal::system temp_sys(rend);
 	
 	BOOST_FOREACH(entity_map::reference r, dead_list)

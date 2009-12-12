@@ -1,8 +1,9 @@
 #include "sentry.hpp"
 #include "z_ordering.hpp"
 #include "sprite_part_index.hpp"
-#include "object.hpp"
 #include "../load/friend_name.hpp"
+#include <sge/sprite/object_impl.hpp>
+#include <sge/sprite/intrusive/system_impl.hpp>
 
 namespace
 {
