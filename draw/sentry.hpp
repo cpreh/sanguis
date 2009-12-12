@@ -15,7 +15,7 @@ public:
 		entity_id);
 	
 	void orientation(
-		sge::sprite::rotation_type);
+		sprite::rotation_type);
 private:
 	using sprite::orientation;
 };

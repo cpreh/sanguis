@@ -20,8 +20,6 @@
 #include <sge/systems/instance_fwd.hpp>
 #include <sge/audio/player_fwd.hpp>
 #include <sge/audio/pool_fwd.hpp>
-#include <sge/sprite/system.hpp>
-#include <sge/sprite/object.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/console/stdlib.hpp>
 #include <sge/renderer/device_fwd.hpp>
@@ -112,11 +110,6 @@ private:
 	sanguis::client::cursor::object_ptr const cursor_;
 	client::highscore::name_container gameover_names_;
 	client::highscore::score_type gameover_score_;
-	//sge::sprite::system ss_;
-	//sge::renderer::glsl::program_ptr shader_;
-	//sge::renderer::glsl::uniform::variable_ptr shadervar_;
-	//sge::renderer::texture_ptr target_;
-	//sge::sprite::object target_sprite_;
 };
 
 }

@@ -21,7 +21,8 @@ enum type {
 	smoke,
 	flare,
 	rubble,
-	cursor
+	cursor,
+	size
 };
 
 }

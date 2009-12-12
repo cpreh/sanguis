@@ -4,9 +4,11 @@
 #include "sprite_part_index_fwd.hpp"
 #include "environment_fwd.hpp"
 #include "model_part_fwd.hpp"
-#include "sprite.hpp"
+#include "container.hpp"
 #include "healthbar.hpp"
 #include "remove_action.hpp"
+#include "sprite/order.hpp"
+#include "sprite/rotation_type.hpp"
 #include "../entity_id.hpp"
 #include "../animation_type.hpp"
 #include <sge/log/object_fwd.hpp>
@@ -18,40 +20,67 @@ namespace sanguis
 {
 namespace draw
 {
-class model : public sprite {
+
+class model
+:
+	public container
+{
 public:
 	model(
 		draw::environment const &,
-		entity_id id,
+		entity_id,
 		sge::string const &name,
-		sge::sprite::intrusive::order order,
+		sprite::order,
 		bool needs_healthbar,
-		draw::remove_action::type);
+		draw::remove_action::type
+	);
+
 	~model();
 
 	funit max_health() const;
 	funit health() const;
 protected:
-	virtual void update(time_type);
-	using sprite::orientation;
-	virtual void orientation(
-		sge::sprite::rotation_type);
-	void orientation(
-		sge::sprite::rotation_type,
-		size_type index);
+	virtual void
+	update(
+		time_type
+	);
+
+	using container::orientation;
+
+	virtual void
+	orientation(
+		sprite::rotation_type
+	);
+
+	void
+	orientation(
+		sprite::rotation_type,
+		size_type index
+	);
 	
-	bool may_be_removed() const;
+	bool
+	may_be_removed() const;
 	
 	draw::remove_action::type
 	remove_action() const;
 
-	virtual void speed(
-		vector2 const &);
-	using sprite::speed;
-	model_part &part(
-		sprite_part_index const &);
-	model_part const &part(
-		sprite_part_index const &) const;
+	virtual void
+	speed(
+		vector2 const &
+	);
+
+	using container::speed;
+
+	model_part &
+	part(
+		sprite_part_index const &
+	);
+
+	model_part const &
+	part(
+		sprite_part_index const &
+	) const;
+
 	bool dead() const;
 	bool walking() const;
 

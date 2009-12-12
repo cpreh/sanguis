@@ -341,8 +341,10 @@ void sanguis::client::states::running::send_perk_choose(
 	);
 }
 
-void sanguis::client::states::running::cursor_pos(
-	sge::sprite::point const &pos)
+void
+sanguis::client::states::running::cursor_pos(
+	draw::sprite::point const &pos
+)
 {
 	(*drawer)(
 		messages::move(

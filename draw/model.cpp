@@ -24,11 +24,11 @@ sanguis::draw::model::model(
 	draw::environment const &env,
 	entity_id const id,
 	sge::string const &name,
-	sge::sprite::intrusive::order const order,
+	sprite::order const order,
 	bool const show_healthbar,
 	draw::remove_action::type const remove_action_)
 :
-	sprite(
+	container(
 		env,
 		id,
 		env.context().models()()[name].size(),
@@ -40,13 +40,17 @@ sanguis::draw::model::model(
 	max_health_(0),
 	healthbar_(
 		show_healthbar
-		? new healthbar(
-			env)
-		: 0
+		?
+			new healthbar(
+				env
+			)
+		:
+			0
 	),
 	remove_action_(remove_action_)
 {
 	part_vector::size_type i(0);
+
 	BOOST_FOREACH(
 		load::model::model::value_type const &p,
 		env.context().models()()[name]
@@ -81,7 +85,7 @@ sanguis::draw::model::health() const
 void sanguis::draw::model::update(
 	time_type const time)
 {
-	sprite::update(time);
+	container::update(time);
 
 	if(healthbar_)
 		healthbar_->attach_to(
@@ -93,14 +97,14 @@ void sanguis::draw::model::update(
 }
 
 void sanguis::draw::model::orientation(
-	sge::sprite::rotation_type const rot)
+	sprite::rotation_type const rot)
 {
 	BOOST_FOREACH(model_part &p, parts)
 		p.orientation(rot);
 }
 
 void sanguis::draw::model::orientation(
-	sge::sprite::rotation_type const rot,
+	sprite::rotation_type const rot,
 	size_type const index)
 {
 	parts.at(index).orientation(rot);	
@@ -124,7 +128,7 @@ void sanguis::draw::model::speed(
 	vector2 const old_speed(
 		speed());
 	
-	sprite::speed(s);
+	container::speed(s);
 
 	if(is_null(s) != is_null(old_speed))
 		change_animation();
@@ -288,7 +292,7 @@ sanguis::draw::model::animation() const
 		? animation_type::reloading
 		: attacking
 			? animation_type::attacking
-			: is_null(sprite::speed())
+			: is_null(container::speed())
 				? animation_type::none
 				: animation_type::walking;
 }

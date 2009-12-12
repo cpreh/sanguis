@@ -8,6 +8,9 @@
 #include "environment.hpp"
 #include "entity_fwd.hpp"
 #include "background_fwd.hpp"
+#include "sprite/client/system.hpp"
+#include "sprite/normal/system.hpp"
+#include "sprite/colored/system.hpp"
 #include "../load/context_fwd.hpp"
 #include "../client_messages/add_fwd.hpp"
 #include "../client_messages/visible_fwd.hpp"
@@ -35,6 +38,7 @@
 #include "../messages/speed.hpp"
 #include "../entity_id.hpp"
 #include "../time_type.hpp"
+#include <sge/sprite/intrusive/system_decl.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/renderer/texture_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
@@ -52,7 +56,9 @@ public:
 	scene(
 		load::context const &,
 		sge::renderer::device_ptr,
-		sge::font::object &);
+		sge::font::object &
+	);
+
 	~scene();
 	
 	void process_message(
@@ -130,13 +136,15 @@ private:
 		messages::base const &
 	);
 
-	draw::system &
-	system();
-	
 	static sge::log::object &
 	log();
 
-	draw::system                  ss;
+	sprite::normal::system normal_system_;
+
+	sprite::colored::system colored_system_;
+
+	sprite::client::system client_system_;
+
 	hud                           hud_;
 	bool                          paused;
 	draw::environment             env;

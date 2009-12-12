@@ -2,8 +2,10 @@
 #define SANGUIS_DRAW_ENVIRONMENT_HPP_INCLUDED
 
 #include "../load/context_fwd.hpp"
+#include "sprite/colored/system.hpp"
+#include "sprite/normal/system.hpp"
+#include "sprite/client/system.hpp"
 #include "insert_callback.hpp"
-#include "system_fwd.hpp"
 #include <sge/function/object.hpp>
 
 namespace sanguis
@@ -16,7 +18,10 @@ public:
 	environment(
 		insert_callback const &,
 		load::context const &,
-		draw::system &);
+		sprite::colored::system &,
+		sprite::normal::system &,
+		sprite::client::system &
+	);
 	
 	insert_callback const &
 	insert() const;
@@ -24,12 +29,20 @@ public:
 	load::context const &
 	context() const;
 
-	draw::system &
-	system() const;
+	sprite::colored::system &
+	colored_system() const;
+
+	sprite::normal::system &
+	normal_system() const;
+
+	sprite::client::system &
+	client_system() const;
 private:
 	insert_callback const insert_;
 	load::context const   &context_;
-	draw::system          &system_;
+	sprite::colored::system &colored_system_;
+	sprite::normal::system &normal_system_;
+	sprite::client::system &client_system_;
 };
 
 }

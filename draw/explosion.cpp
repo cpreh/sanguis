@@ -113,7 +113,7 @@ sanguis::draw::particle::property_container const prop_ = boost::assign::map_lis
 
 sanguis::draw::explosion::explosion(
 	draw::environment const &env,
-	sge::sprite::point const &pos_,
+	sprite::point const &pos_,
 	funit const _aoe)
 :
 	entity(

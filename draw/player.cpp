@@ -2,6 +2,7 @@
 #include "z_ordering.hpp"
 #include "sprite_part_index.hpp"
 #include "object.hpp"
+#include "sprite/point.hpp"
 #include "../client/next_id.hpp"
 #include <sge/text.hpp>
 #include <sge/math/vector/structure_cast.hpp>
@@ -17,7 +18,7 @@
 namespace
 {
 
-sge::sprite::point const
+sanguis::draw::sprite::point const
 	player_body_center(25,32),
 	player_leg_center(32,32);
 
@@ -64,7 +65,7 @@ void sanguis::draw::player::speed(
 }
 
 void sanguis::draw::player::orientation(
-	sge::sprite::rotation_type const u)
+	sprite::rotation_type const u)
 {
 	model::orientation(u, 1); // TODO: better interface for this in model
 }
@@ -86,7 +87,7 @@ void sanguis::draw::player::update(
 			>(
 				player_body_center));
 
-	sge::sprite::rotation_type const sprite_rotation = at(bottom).rotation();
+	sprite::rotation_type const sprite_rotation = at(bottom).rotation();
 
 	vector2 const new_rotation = sge::math::point_rotate(
 		leg_center,
@@ -103,7 +104,7 @@ void sanguis::draw::player::update(
 		top_pos = rot_abs - body_center;
 
 	at(top).pos() = sge::math::vector::structure_cast<
-		sge::sprite::point
+		sprite::point
 	>(
 		top_pos);
 }

@@ -20,7 +20,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include <tr1/functional>
 
-sge::sprite::animation_series const
+sge::sprite::animation::series const
 sanguis::load::resource::animations::load(
 	sge::filesystem::path const &dir) const
 {
@@ -35,7 +35,7 @@ sanguis::load::resource::animations::load(
 	);
 }
 
-sge::sprite::animation_series const
+sge::sprite::animation::series const
 sanguis::load::resource::animations::do_load(
 	sge::filesystem::path const &dir) const
 {
@@ -88,7 +88,7 @@ sanguis::load::resource::animations::do_load(
 	else
 		file.seekg(0, std::ios_base::beg);
 	
-	sge::sprite::animation_series anim;
+	sge::sprite::animation::series anim;
 
 	unsigned lineno = const_delay ? 2 : 1;
 	while (std::getline(file,line))
@@ -121,7 +121,7 @@ sanguis::load::resource::animations::do_load(
 		}
 
 		anim.push_back(
-			sge::sprite::animation_entity(
+			sge::sprite::animation::entity(
 				delay,
 				load_texture(
 					dir / filename
@@ -142,7 +142,7 @@ sanguis::load::resource::animations::load_texture(
 	return textures_.do_load_inner(p);	
 }
 
-sge::sprite::animation_series const
+sge::sprite::animation::series const
 sanguis::load::resource::animations::load_without_frames_file(
 	sge::filesystem::path const &dir) const
 {
@@ -165,9 +165,9 @@ sanguis::load::resource::animations::load_without_frames_file(
 				<< SGE_TEXT("\" although there is more than one file!")
 				<< SGE_TEXT(" Just taking the first image."));
 
-	sge::sprite::animation_series ret;
+	sge::sprite::animation::series ret;
 	ret.push_back(
-		sge::sprite::animation_entity(
+		sge::sprite::animation::entity(
 			sge::time::millisecond(
 				static_cast<sge::time::unit>(1)),
 			load_texture(first_path)

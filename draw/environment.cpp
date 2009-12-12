@@ -3,11 +3,16 @@
 sanguis::draw::environment::environment(
 	insert_callback const &insert_,
 	load::context const &context_,
-	draw::system &system_)
+	sprite::colored::system &colored_system_,
+	sprite::normal::system &normal_system_,
+	sprite::client::system &client_system_
+)
 :
 	insert_(insert_),
 	context_(context_),
-	system_(system_)
+	colored_system_(colored_system_),
+	normal_system_(normal_system_),
+	client_system_(client_system_)
 {}
 	
 sanguis::draw::insert_callback const &
@@ -22,8 +27,20 @@ sanguis::draw::environment::context() const
 	return context_;
 }
 
-sanguis::draw::system &
-sanguis::draw::environment::system() const
+sanguis::draw::sprite::colored::system &
+sanguis::draw::environment::colored_system() const
 {
-	return system_;
+	return colored_system_;
+}
+
+sanguis::draw::sprite::normal::system &
+sanguis::draw::environment::normal_system() const
+{
+	return normal_system_;
+}
+
+sanguis::draw::sprite::client::system &
+sanguis::draw::environment::client_system() const
+{
+	return client_system_;
 }

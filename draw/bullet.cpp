@@ -56,12 +56,15 @@ void sanguis::draw::bullet::update(
 	vector2 const
 		newsize(
 			tail_length,
-			static_cast<funit>(at(tail).size().h())),
+			static_cast<funit>(at(tail).size().h())
+		),
 		pos(
 			sge::math::vector::structure_cast<
 				vector2
 			>(
-				center())),
+				center()
+			)
+		),
 		newpos( 
 			is_null(speed())
 			? pos
@@ -69,11 +72,15 @@ void sanguis::draw::bullet::update(
 
 	at(tail).center(
 		sge::math::vector::structure_cast<
-			sge::sprite::point
+			sprite::point
 		>(
-			newpos));
+			newpos
+		)
+	);
 
-	at(tail).w() =
-		static_cast<sge::sprite::unit>(
-			tail_length);
+	at(tail).w(
+		static_cast<sprite::unit>(
+			tail_length
+		)
+	);
 }

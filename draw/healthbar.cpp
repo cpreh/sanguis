@@ -1,6 +1,5 @@
 #include "healthbar.hpp"
 #include "z_ordering.hpp"
-#include "sprite_part_index.hpp"
 #include "object.hpp"
 #include "../client/id_dont_care.hpp"
 #include "../exception.hpp"
@@ -20,53 +19,51 @@
 namespace
 {
 
-sge::sprite::unit const
+sanguis::draw::sprite::unit const
 	border_size = 2,
 	bar_height = 8;
-
-sanguis::draw::sprite_part_index const
-	background(0),
-	foreground(1);
 
 }
 
 sanguis::draw::healthbar::healthbar(
-	draw::environment const &env)
+	draw::environment const &env
+)
 :
-	sprite(
-		env,
-		client::id_dont_care(),
-		2,
-		z_ordering::model_generic),
+	background(
+		sprite::colored::parameters()
+		.order(
+			z_ordering::healthbar_lower
+		)
+		.system(
+			&env.colored_system()
+		)
+		.elements()
+	),
+	foreground(
+		sprite::colored::parameters()
+		.order(
+			z_ordering::healthbar_upper
+		)
+		.system(
+			&env.colored_system()
+		)
+		.elements()
+	),
 	health_(0),
 	max_health_(0)
 {
-	at(background) = object(
-		sge::sprite::intrusive::parameters(
-			system(),
-			z_ordering::healthbar_lower
-		)
-		.color(
-			sge::image::colors::black()
-		)
-	);
-
-	at(foreground) = object(
-		sge::sprite::intrusive::parameters(
-			system(),
-			z_ordering::healthbar_upper
-		)
-	);
-
 	recalc_health();
 }
 
-void sanguis::draw::healthbar::update_health(
+void
+sanguis::draw::healthbar::update_health(
 	funit const nhealth,
-	funit const nmax_health)
+	funit const nmax_health
+)
 {
 	health_ = nhealth;
 	max_health_ = nmax_health;
+
 	recalc_health();
 }
 
@@ -82,69 +79,77 @@ sanguis::draw::healthbar::max_health() const
 	return max_health_;
 }
 
-void sanguis::draw::healthbar::attach_to(
-	sge::sprite::point const &p,
-	sge::sprite::dim const &d)
+void
+sanguis::draw::healthbar::attach_to(
+	sprite::point const &p,
+	sprite::dim const &d
+)
 {
 	pos(
-		sge::sprite::point(
+		sprite::point(
 			p.x(),
-			p.y() - bar_height));
+			p.y() - bar_height
+		)
+	);
+
 	dim(
-		sge::sprite::dim(
+		sprite::dim(
 			std::max(d.w(), 2 * border_size),
-			bar_height));
+			bar_height
+		)
+	);
 }
 
-void sanguis::draw::healthbar::pos(
-	sge::sprite::point const &p)
+void
+sanguis::draw::healthbar::pos(
+	sprite::point const &pos_
+)
 {
-	border().pos() = p;
-	inner().pos() = inner_pos();
+	background.pos(
+		pos_
+	);
+
+	inner.pos(
+		inner_pos()
+	);
 }
 
-void sanguis::draw::healthbar::dim(
-	sge::sprite::dim const &d)
+void
+sanguis::draw::healthbar::dim(
+	sprite::dim const &dim_
+)
 {
-	border().size() = d;
-	inner().size() = inner_dim();
+	background.size(
+		dim_
+	);
+
+	foreground.size(
+		inner_dim()
+	);
+
 	recalc_health();
 }
 
-sge::sprite::point const 
+sanguis::draw::sprite::point const 
 sanguis::draw::healthbar::inner_pos() const
 {
-	return border().pos() + sge::sprite::point(border_size, border_size);
+	return
+		background.pos()
+		+ sprite::point(
+			border_size,
+			border_size
+		);
 }
 
-sge::sprite::dim const 
+sanguis::draw::sprite::dim const 
 sanguis::draw::healthbar::inner_dim() const
 {
-	return border().size() - sge::sprite::dim(2 * border_size, 2 * border_size);
-}
-
-sanguis::draw::object &
-sanguis::draw::healthbar::border()
-{
-	return at(background);
-}
-
-sanguis::draw::object const &
-sanguis::draw::healthbar::border() const
-{
-	return at(background);
-}
-
-sanguis::draw::object&
-sanguis::draw::healthbar::inner()
-{
-	return at(foreground);
-}
-
-sanguis::draw::object const &
-sanguis::draw::healthbar::inner() const
-{
-	return at(foreground);
+	return
+		border().size()
+		- sprite::dim(
+			2 * border_size,
+			2 * border_size
+		);
 }
 
 sanguis::draw::funit
@@ -153,37 +158,36 @@ sanguis::draw::healthbar::remaining_health() const
 	return health_ / max_health_;
 }
 
-void sanguis::draw::healthbar::recalc_health()
+void
+sanguis::draw::healthbar::recalc_health()
 {
 	if(health_ > max_health_)
 		return;
-		/*
-		throw exception(
-			(sge::format(SGE_TEXT("draw::healthbar: health (%1%) > max_health (%2%)!"))
-			% health_
-			% max_health_).str()
-		);
-		*/
 
 	if(sge::math::almost_zero(max_health_)) // TODO:
 		return;
 	
-	inner().w() = static_cast<sge::sprite::unit>(
+	foreground.w(
 		static_cast<
-			funit
+			sprite::unit
 		>(
-			inner_dim().w()
-		) * remaining_health()
+			static_cast<
+				funit
+			>(
+				inner_dim().w()
+			)
+			* remaining_health()
+		)
 	);
 
 	sge::image::color::channel8 const pixel_channel_max(
-		sge::image::color::rgba8::format::channel_max<
+		sprite::colored::color_format::channel_max<
 			mizuiro::color::channel::alpha
 		>()
 	);
 
-	inner().color(
-		sge::image::color::rgba8(
+	foreground.color(
+		sprite::colored::color(
 			sge::image::color::init::red =
 			static_cast<
 				sge::image::color::channel8

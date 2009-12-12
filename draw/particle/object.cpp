@@ -13,8 +13,9 @@ sanguis::draw::particle::object::object(
 	particle_type::type const _type,
 	funit const _aoe,
 	load::model::animation::context_ptr _animation_context,
-	boost::optional<time_type> const _fade_total,
-	draw::environment const &_e)
+	sge::optional<time_type> const _fade_total,
+	draw::environment const &_e
+)
 :
 	base(
 		point::null(),
@@ -25,23 +26,27 @@ sanguis::draw::particle::object::object(
 		_e
 	),
 	sprite_(
-		sge::sprite::intrusive::parameters(
-			_e.system(),
+		sprite::normal::parameters()
+		.system(
+			&_e.system()
+		)
+		.order(
 			z_ordering(
 				_type
 			)
 		)
 		.size(
 			// TODO: maybe resize with respect to the images.dim() ratio here
-			sge::sprite::dim(
-				static_cast<sge::sprite::unit>(
+			sprite::dim(
+				static_cast<sprite::unit>(
 					2*_aoe
 				),
-				static_cast<sge::sprite::unit>(
+				static_cast<sprite::unit>(
 					2*_aoe
 				)
 			)
 		)
+		.elements()
 	),
 	animation_context_(
 		_animation_context),
@@ -64,11 +69,11 @@ bool sanguis::draw::particle::object::update(
 	animation_context_->update();
 	if (!animation_ && animation_context_->is_finished())
 		animation_.reset(
-			new sge::sprite::texture_animation(
+			new sprite::normal::texture_animation(
 				animation_context_->result(),
 				fade_total_ 
-					? sge::sprite::texture_animation::loop_method::repeat
-					: sge::sprite::texture_animation::loop_method::stop_at_end,
+					? sge::sprite::loop_method::repeat
+					: sge::sprite::loop_method::stop_at_end,
 				sprite_,
 				clock_.callback()
 			)
@@ -80,12 +85,15 @@ bool sanguis::draw::particle::object::update(
 	sprite_.rotation(base::rot()+r);
 	sprite_.center( 
 		sge::math::vector::structure_cast<
-			sge::sprite::point
+			sprite::point
 		>(
 			sge::math::point_rotate(
 				p + base::pos(),
 				p,
-				r + base::rot())));
+				r + base::rot()
+			)
+		)
+	);
 
 	clock_.update(
 		delta);

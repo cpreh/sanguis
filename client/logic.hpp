@@ -3,8 +3,9 @@
 
 #include "player_action.hpp"
 #include "send_callback.hpp"
-#include "../cheat_type.hpp"
 #include "cursor/object_ptr.hpp"
+#include "../draw/sprite/point.hpp"
+#include "../cheat_type.hpp"
 #include "../weapon_type.hpp"
 #include "../entity_id.hpp"
 #include "../messages/give_weapon.hpp"
@@ -15,7 +16,6 @@
 #include <sge/math/vector/basic_decl.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image/loader_fwd.hpp>
-#include <sge/sprite/point.hpp>
 #include <sge/function/object_fwd.hpp>
 #include <sge/signal/scoped_connection.hpp>
 #include <sge/noncopyable.hpp>
@@ -102,7 +102,7 @@ private:
 	>::type direction_vector;
 
 	direction_vector direction;
-	sge::sprite::point player_center;
+	draw::sprite::point player_center;
 	weapon_type::type current_weapon;
 	bool paused;
 	sge::time::timer rotation_timer;

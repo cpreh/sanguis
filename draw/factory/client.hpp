@@ -17,7 +17,8 @@ entity_auto_ptr
 client(
 	environment const &,
 	client_messages::add const &,
-	sge::renderer::screen_size const &);
+	sge::renderer::screen_size const &
+);
 }
 }
 }

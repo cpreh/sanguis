@@ -24,6 +24,7 @@
 #include "../../messages/remove.hpp"
 #include "../../draw/scene_fwd.hpp"
 #include "../../draw/player_fwd.hpp"
+#include "../../draw/sprite/point.hpp"
 #include "../menu_event_fwd.hpp"
 #include "../highscore/name_container.hpp"
 #include "../highscore/score_type.hpp"
@@ -94,7 +95,9 @@ private:
 	void send_perk_choose(perk_type::type);
 
 	void cursor_pos(
-		sge::sprite::point const &);
+		draw:sprite::point const &
+	);
+
 	void cursor_show(
 		bool show);
 

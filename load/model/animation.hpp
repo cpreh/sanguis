@@ -8,7 +8,6 @@
 #include "../resource/texture_identifier.hpp"
 #include "../resource/context_fwd.hpp"
 #include "animation_context_fwd.hpp"
-#include <sge/sprite/animation_series.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/array.hpp>
@@ -26,7 +25,9 @@ namespace model
 
 class animation {
 public:
-	typedef sge::auto_ptr<animation_context> context_ptr;
+	typedef sge::auto_ptr<
+		animation_context
+	> context_ptr;
 
 	animation_sound const &
 	sounds() const;
@@ -35,7 +36,8 @@ public:
 private:
 	animation(
 		sge::parse::json::object const &,
-		global_parameters const &);
+		global_parameters const &
+	);
 
 	friend class weapon_category;
 

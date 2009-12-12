@@ -16,7 +16,6 @@
 #include <sge/math/dim/structure_cast.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/audio/player.hpp>
-#include <sge/sprite/parameters.hpp>
 #include <sge/audio/pool.hpp>
 #include <sge/renderer/scoped_block.hpp>
 #include <sge/renderer/device.hpp>
@@ -124,51 +123,7 @@ sanguis::client::machine::machine(
 	),
 	gameover_names_(),
 	gameover_score_()
-	/*
-	ss_(sys_.renderer()),
-	shader_(),
-	shadervar_()
-	target_(
-		sys_.renderer()->create_texture(
-			sge::math::dim::structure_cast<sge::renderer::texture::dim_type>(
-				resolution()),
-			sge::image::color::format::rgba8,
-			sge::renderer::filter::linear,
-			sge::renderer::resource_flags::none)),
-	target_sprite_(
-		sge::sprite::parameters()
-			.texture(
-				sge::texture::part_ptr(
-					new sge::texture::part_raw(
-						target_)))
-			.depth(
-				static_cast<sge::sprite::depth_type>(1)))
-	*/
-{
-	/*
-	sge::ifstream fragment_stream(
-		media_path()/SGE_TEXT("shaders")/SGE_TEXT("fragment.glsl"));
-	sge::ifstream vertex_stream(
-		media_path()/SGE_TEXT("shaders")/SGE_TEXT("vertex.glsl"));
-
-	shader_ = 
-		sys_.renderer()->create_glsl_program(
-			sge::renderer::glsl::istream_ref(
-				vertex_stream),
-			sge::renderer::glsl::istream_ref(
-				fragment_stream));
-	
-	sys_.renderer()->glsl_program(
-		shader_);
-
-	shadervar_ = 
-		shader_->uniform(SGE_TEXT("tex"));
-	
-	sge::renderer::glsl::uniform::single_value(
-		shadervar_,
-		static_cast<int>(0));
-		*/
-}
+{}
 
 void sanguis::client::machine::start_server()
 {
@@ -281,31 +236,6 @@ try
 	if (ks[sge::input::kc::key_escape])
 		quit();
 	}
-	/*
-	{
-	sys_.renderer()->glsl_program(
-		sge::renderer::device::no_program);
-	sge::renderer::scoped_block const block_(
-		sys_.renderer());
-	sge::renderer::scoped_target const t_(
-		sys_.renderer(),
-		target_);
-	process_event(t);
-
-	if (console.active())
-		console.draw();
-
-	if (ks[sge::input::kc::key_escape])
-		quit();
-	}
-
-	sys_.renderer()->glsl_program(
-		shader_);
-
-	sge::renderer::scoped_block const block_(sys_.renderer());
-	ss_.render(
-		target_sprite_);
-	*/
 
 	screenshot_.process();
 

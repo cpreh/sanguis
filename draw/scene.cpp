@@ -36,6 +36,7 @@
 #include <sge/renderer/target.hpp>
 #include <sge/renderer/const_scoped_target_lock.hpp>
 #include <sge/renderer/resource_flags_none.hpp>
+#include <sge/renderer/scoped_state.hpp>
 #include <sge/renderer/filter/linear.hpp>
 #include <sge/function/object.hpp>
 
@@ -66,7 +67,8 @@ sanguis::draw::scene::scene(
 	sge::font::object &font
 )
 :
-	ss(rend),
+	normal_system_(rend),
+	colored_system_(rend),
 	hud_(font),
 	paused(false),
 	env(
@@ -76,7 +78,9 @@ sanguis::draw::scene::scene(
 			std::tr1::placeholders::_1
 		),
 		resources_,
-		system()
+		colored_system_,
+		normal_system_,
+		client_system_
 	),
 	background_id(
 		client::invalid_id
@@ -174,8 +178,10 @@ void sanguis::draw::scene::client_message(
 	entity(m.id()).visible(m.get());	
 }
 
-void sanguis::draw::scene::draw(
-	time_type const delta)
+void
+sanguis::draw::scene::draw(
+	time_type const delta
+)
 {
 	time_type const real_delta =
 		paused
@@ -183,9 +189,14 @@ void sanguis::draw::scene::draw(
 		: delta;
 	
 	env.context().update(
-		real_delta);
+		real_delta
+	);
 	
-	for(entity_map::iterator it(entities.begin()), next(it); it != entities.end(); it = next)
+	for(
+		entity_map::iterator it(entities.begin()), next(it);
+		it != entities.end();
+		it = next
+	)
 	{
 		draw::entity &e = *it->second;
 		++next;
@@ -211,7 +222,59 @@ void sanguis::draw::scene::draw(
 	if(dead_list.size() >= render_dead_amount)
 		render_dead();
 	
-	system().render();
+	{
+	sge::renderer::scoped_state const state_(
+		sge::sprite::render_states()
+	);
+
+	normal_system_.matrices();
+
+	client_system_.render(
+		z_ordering::background
+		sge::sprite::default_equal()
+	);
+		
+	for(
+		sprite::order index(
+			z_ordering::corpses
+		);
+		index < healthbar_lower;
+		++index
+	)
+		normal_system_.render(
+			index,
+			sge::sprite::default_equal()
+		);
+	
+	for(
+		sprite::order index(
+			z_ordering::healthbar_lower
+		);
+		index < smoke;
+		++index
+	)
+		colored_system_.render(
+			index,
+			sge::sprite::default_equal()
+		);
+
+	for(
+		sprite::order index(
+			z_ordering::smoke
+		);
+		index < z_ordering::cursor;
+		++index
+	)
+		normal_system_.render(
+			index,
+			sge::sprite::default_equal()
+		);
+	}
+
+	client_system_.render(
+		z_ordering::cursor,
+		sge::sprite::default_equal()
+	);
 
 	hud_.update(delta);
 }
@@ -465,7 +528,7 @@ void sanguis::draw::scene::operator()(
 		m.get<messages::roles::entity_id>()
 	).dim(
 		sge::math::dim::structure_cast<
-			sge::sprite::dim
+			sprite::dim
 		>(
 			m.get<messages::dim>()
 		)
@@ -575,7 +638,7 @@ void sanguis::draw::scene::render_dead()
 		system().renderer()
 	);
 
-	draw::system temp_sys(rend);
+	sprite::normal::system temp_sys(rend);
 	
 	BOOST_FOREACH(entity_map::reference r, dead_list)
 		r.second->transfer(
@@ -691,12 +754,6 @@ sanguis::draw::scene::process_default_msg(
 		sge::log::_
 			<< SGE_TEXT("Invalid message event in scene: ")
 			<< sge::iconv(typeid(m).name()));
-}
-
-sanguis::draw::system &
-sanguis::draw::scene::system()
-{
-	return ss;
 }
 
 sge::log::object &

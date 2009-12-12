@@ -36,7 +36,8 @@ void sanguis::draw::entity::on_remove()
 {}
 
 void sanguis::draw::entity::orientation(
-	sge::sprite::rotation_type)
+	sprite::rotation_type
+)
 {
 	SGE_LOG_WARNING(
 		log(),
@@ -50,14 +51,14 @@ void sanguis::draw::entity::speed(vector2 const &)
 		sge::log::_ << SGE_TEXT("Invalid speed call!"));
 }
 
-void sanguis::draw::entity::pos(sge::sprite::point const &)
+void sanguis::draw::entity::pos(sprite::point const &)
 {
 	SGE_LOG_WARNING(
 		log(),
 		sge::log::_ << SGE_TEXT("Invalid pos call!"));
 }
 
-void sanguis::draw::entity::dim(sge::sprite::dim const &)
+void sanguis::draw::entity::dim(sprite::dim const &)
 {
 	SGE_LOG_WARNING(
 		log(),

@@ -11,7 +11,8 @@ sanguis::draw::factory::simple_sprite(
 	entity_id const id,
 	z_ordering::type const z,
 	sge::string const &texture_name,
-	sge::sprite::repetition_type const repeat)
+	sprite::client::repetition_type const repeat
+)
 {
 	return entity_auto_ptr(
 		new draw::simple_sprite(

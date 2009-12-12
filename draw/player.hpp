@@ -4,7 +4,7 @@
 #include "environment_fwd.hpp"
 #include "model.hpp"
 #include "vector2.hpp"
-#include <sge/sprite/texture_animation.hpp>
+#include "sprite/rotation_type.hpp"
 
 namespace sanguis
 {
@@ -18,7 +18,7 @@ public:
 		entity_id id);
 
 	void orientation(
-		sge::sprite::rotation_type);
+		sprite::rotation_type);
 	void speed(
 		vector2 const &);
 private:
@@ -26,6 +26,7 @@ private:
 	using sprite::speed;
 
 	void update(time_type);
+
 	funit
 		angle_,
 		target_angle;

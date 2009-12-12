@@ -5,19 +5,20 @@
 #include "system_fwd.hpp"
 #include "vector2.hpp"
 #include "remove_action.hpp"
+#include "sprite/rotation_type.hpp"
+#include "sprite/point.hpp"
+#include "sprite/dim.hpp"
 #include "../entity_id.hpp"
 #include "../weapon_type.hpp"
 #include "../time_type.hpp"
 #include <sge/log/object_fwd.hpp>
-#include <sge/sprite/rotation_type.hpp>
-#include <sge/sprite/point.hpp>
-#include <sge/sprite/dim.hpp>
 #include <sge/noncopyable.hpp>
 
 namespace sanguis
 {
 namespace draw
 {
+
 class entity {
 	SGE_NONCOPYABLE(entity)
 public:
@@ -31,10 +32,10 @@ public:
 	remove_action() const;
 
 	virtual void on_remove();
-	virtual void orientation(sge::sprite::rotation_type);
+	virtual void orientation(sprite::rotation_type);
 	virtual void speed(vector2 const &);
-	virtual void pos(sge::sprite::point const &);
-	virtual void dim(sge::sprite::dim const &);
+	virtual void pos(sprite::point const &);
+	virtual void dim(sprite::dim const &);
 	virtual void visible(bool);
 	virtual void health(funit);
 	virtual void max_health(funit);
@@ -44,9 +45,6 @@ public:
 	virtual void start_reloading();
 	virtual void stop_reloading();
 
-	virtual void transfer(
-		draw::system &);
-	
 	virtual ~entity();
 protected:
 	entity(

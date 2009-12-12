@@ -17,11 +17,12 @@ namespace sanguis
 {
 namespace draw
 {
+
 class explosion : public entity {
 public:
 	explosion(
 		draw::environment const &,
-		sge::sprite::point const &pos,
+		sprite::point const &pos,
 		funit aoe);
 	~explosion();
 private:
@@ -41,7 +42,7 @@ private:
 	
 	bool may_be_removed() const;
 
-	sge::sprite::point pos_;
+	sprite::point pos_;
 	particle::container particles;
 	particle::property_map properties_;
 	bool ended;

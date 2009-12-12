@@ -2,7 +2,8 @@
 #include "global_parameters.hpp"
 #include "../../exception.hpp"
 #include "../resource/texture_context_impl.hpp"
-#include <sge/sprite/animation_series.hpp>
+#include <sge/sprite/animation/series.hpp>
+#include <sge/sprite/animation/entity.hpp>
 #include <sge/time/millisecond.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/texture/part_fwd.hpp>
@@ -18,7 +19,8 @@
 sanguis::load::model::animation_context::animation_context(
 	resource::texture_context const &_texture_context,
 	frame_cache const &_frame_cache,
-	cache_callback const &_cache_callback)
+	cache_callback const &_cache_callback
+)
 :
 	texture_context_(
 		_texture_context),
@@ -32,7 +34,8 @@ sanguis::load::model::animation_context::animation_context(
 {
 }
 
-void sanguis::load::model::animation_context::update()
+void
+sanguis::load::model::animation_context::update()
 {
 	if (is_finished_)
 		return;
@@ -40,36 +43,46 @@ void sanguis::load::model::animation_context::update()
 	if (!texture_context_.value()->update())
 		return;
 	
-	is_finished_ = 
-		true;
-	animation_ = 
-		sge::sprite::animation_series();
+	is_finished_ = true;
+
+	animation_ = sge::sprite::animation::series();
 
 	sge::texture::part_ptr const t = 
 		texture_context_.value()->result();
 	
 	cache_callback_(
-		t->area());
+		t->area()
+	);
 
-	BOOST_FOREACH(frame_cache::const_reference r,frame_cache_)
+	BOOST_FOREACH(
+		frame_cache::const_reference r,
+		frame_cache_
+	)
 		animation_.push_back(
-			sge::sprite::animation_entity(
+			sge::sprite::animation::entity(
 				sge::time::millisecond(
-					r.delay()),
+					r.delay()
+				),
 				sge::texture::const_part_ptr(
 					sge::make_shared_ptr<
 						sge::texture::part_raw
 					>(
 						t->texture(),
-						r.area()))));
+						r.area()
+					)
+				)
+			)
+		);
 }
 
-bool sanguis::load::model::animation_context::is_finished() const
+bool
+sanguis::load::model::animation_context::is_finished() const
 {
 	return is_finished_;
 }
 
-sge::sprite::animation_series const &sanguis::load::model::animation_context::result() const
+sge::sprite::animation::series const &
+sanguis::load::model::animation_context::result() const
 {
 	return animation_;
 }

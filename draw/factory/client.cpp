@@ -9,7 +9,8 @@ sanguis::draw::entity_auto_ptr
 sanguis::draw::factory::client(
 	environment const &env,
 	client_messages::add const &m,
-	sge::renderer::screen_size const &screen_size)
+	sge::renderer::screen_size const &screen_size
+)
 {
 	switch(m.type()) {
 	case client_entity_type::cursor:
@@ -17,7 +18,10 @@ sanguis::draw::factory::client(
 			env,
 			m.id(),
 			z_ordering::cursor,
-			SGE_TEXT("cursor")
+			SGE_TEXT("cursor"),
+			static_cast<
+				sprite::client::repetition_type
+			>(1)
 		);
 	// TODO: do we have to tile the background?
 	case client_entity_type::background:
@@ -26,7 +30,9 @@ sanguis::draw::factory::client(
 			m.id(),
 			z_ordering::background,
 			SGE_TEXT("background"),
-			static_cast<sge::sprite::repetition_type>(
+			static_cast<
+				sprite::client::repetition_type
+			>(
 				2
 			)
 		);

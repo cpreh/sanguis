@@ -16,10 +16,10 @@ namespace particle
 
 class base
 {
-	public:
+public:
 	typedef particle::depth depth_type;
 	typedef particle::rotation rotation_type;
-	protected:
+protected:
 	base(
 		point const &,
 		point const &,
@@ -27,7 +27,7 @@ class base
 		rotation_type,
 		rotation_type,
 		draw::environment const &);
-	public:
+public:
 	virtual ~base();
 	virtual void pos(point const &);
 	virtual void vel(point const &);
@@ -50,7 +50,7 @@ class base
 	rotation_type const &rot_vel() const;
 	rotation_type &rot_vel();
 	draw::environment const &environment() const;
-	private:
+private:
 	point pos_;
 	point vel_;
 	depth_type depth_;

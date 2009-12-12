@@ -13,6 +13,7 @@
 #include <sge/math/twopi.hpp>
 #include <sge/math/vector/dim.hpp>
 #include <sge/math/dim/structure_cast.hpp>
+#include <sge/sprite/animation/texture_impl.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/math/compare.hpp>
 #include <sge/sprite/object.hpp>
@@ -25,14 +26,19 @@
 namespace
 {
 
-sge::sprite::rotation_type const
+sanguis::draw::sprite::rotation_type const
 invalid_rotation(
-	std::numeric_limits<sge::sprite::rotation_type>::max());
+	std::numeric_limits<
+		sanguis::draw::sprite::rotation_type
+	>::max()
+);
+
 }
 
 sanguis::draw::model_part::model_part(
 	load::model::part const& _load_part,
-	sanguis::draw::object &_ref)
+	sanguis:draw::sprite::normal::object &_ref
+)
 :
 	anim_diff_clock_(),
 	desired_orientation_(
@@ -49,7 +55,9 @@ sanguis::draw::model_part::model_part(
 	ended_(
 		false)
 {
-	ref_.size() = sge::sprite::dim::null();
+	ref_.size(
+		sprite::dim::null()
+	);
 }
 
 sanguis::draw::model_part::~model_part()
@@ -95,15 +103,23 @@ void sanguis::draw::model_part::update(
 		if (animation_context_->is_finished())
 		{
 			animation_.reset(
-				new sge::sprite::texture_animation(
+				new sprite::normal::texture_animation(
 					animation_context_->result(),
 					loop_method(
-						state_->animation_type()),
+						state_->animation_type()
+					),
 					ref_,
-					anim_diff_clock_.callback()));
-			ref_.size() = 
-				sge::math::dim::structure_cast<sge::sprite::dim>(
-					animation_->series().begin()->dim()); // TODO
+					anim_diff_clock_.callback()
+				)
+			);
+
+			ref_.size(
+				sge::math::dim::structure_cast<
+					sprite::dim
+				>(
+					animation_->series().begin()->dim()
+				) // TODO
+			);
 		}
 	}
 	
@@ -218,7 +234,7 @@ void sanguis::draw::model_part::update(
 }
 
 void sanguis::draw::model_part::orientation(
-	sge::sprite::rotation_type rot)
+	sprite::rotation_type rot)
 {
 	if(!sge::math::is_rel_angle(rot))
 		rot = sge::math::abs_angle_to_rel(rot);
@@ -263,32 +279,33 @@ void sanguis::draw::model_part::load_animation(
 }
 
 void sanguis::draw::model_part::update_orientation(
-	sge::sprite::rotation_type const rot)
+	sprite::rotation_type const rot)
 {
 	ref_.rotation(
 		rot);
 }
 
-sge::sprite::texture_animation::loop_method::type
+sge::sprite::animation::loop_method::type
 sanguis::draw::model_part::loop_method(
-	animation_type::type const atype)
+	animation_type::type const atype
+)
 {
 	switch(atype) {
 	case animation_type::none:
 	case animation_type::walking:
 	case animation_type::attacking:
 	case animation_type::reloading:
-		return sge::sprite::texture_animation::loop_method::repeat;
+		return sge::sprite::animation::loop_method::repeat;
 	case animation_type::dying:
 	case animation_type::deploying:
-		return sge::sprite::texture_animation::loop_method::stop_at_end;
+		return sge::sprite::animation::loop_method::stop_at_end;
 	default:
 		throw sge::exception(
 			SGE_TEXT("Invalid animation_type in model_part!"));
 	}
 }
 
-sge::sprite::rotation_type
+sanguis::draw::sprite::rotation_type
 sanguis::draw::model_part::orientation() const
 {
 	return ref_.rotation();

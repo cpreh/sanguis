@@ -21,6 +21,9 @@
 #include <sge/auto_ptr.hpp>
 #include <sge/scoped_ptr.hpp>
 #include <sge/console/object.hpp>
+#include <sge/console/gfx.hpp>
+#include <sge/console/sprite_parameters.hpp>
+#include <sge/console/sprite_object.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/systems/list.hpp>
 #include <sge/log/level.hpp>
@@ -53,8 +56,8 @@
 #include <sge/time/second.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/input/key_state_tracker.hpp>
-#include <sge/sprite/object.hpp>
-#include <sge/sprite/parameters.hpp>
+#include <sge/sprite/object_impl.hpp>
+#include <sge/sprite/parameters_impl.hpp>
 #include <sge/config/media_path.hpp>
 
 // boost
@@ -263,24 +266,28 @@ try
 		sge::image::colors::white(),
 		metrics,
 		sys.input_system(),
-		sge::sprite::object(
-			sge::sprite::parameters()
+		sge::console::sprite_object(
+			sge::console::sprite_parameters()
 			.texture(
 				sge::texture::add_image(
 					texman,
 					sys.image_loader()->load(
-						sanguis::media_path() / SGE_TEXT("console_back.png")
+						sanguis::media_path()
+						/ SGE_TEXT("console_back.png")
 					)
 				)
 			)
 			.size(
-				sge::sprite::dim(
+				sge::console::sprite_object::dim(
 					sys.renderer()->screen_size().w(),
-					static_cast<sge::sprite::unit>(
+					static_cast<
+						sge::console::sprite_object::unit
+					>(
 						sys.renderer()->screen_size().h() / 2
 					)
 				)
 			)
+			.elements()
 		)
 	);
 	

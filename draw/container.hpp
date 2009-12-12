@@ -1,15 +1,14 @@
-#ifndef SANGUIS_DRAW_SPRITE_HPP_INCLUDED
-#define SANGUIS_DRAW_SPRITE_HPP_INCLUDED
+#ifndef SANGUIS_DRAW_CONTAINER_HPP_INCLUDED
+#define SANGUIS_DRAW_CONTAINER_HPP_INCLUDED
 
+#include "sprite/point.hpp"
+#include "sprite/dim.hpp"
+#include "sprite/rotation_type.hpp"
 #include "environment_fwd.hpp"
 #include "sprite_part_index_fwd.hpp"
 #include "entity.hpp"
 #include "vector2.hpp"
 #include "object_fwd.hpp"
-#include <sge/sprite/point.hpp>
-#include <sge/sprite/dim.hpp>
-#include <sge/sprite/color.hpp>
-#include <sge/sprite/intrusive/order.hpp>
 #include <sge/math/vector/basic_decl.hpp>
 #include <vector>
 
@@ -17,21 +16,26 @@ namespace sanguis
 {
 namespace draw
 {
-class sprite : public entity {
+
+class container
+:
+	public entity
+{
 	typedef std::vector<
 		object
 	> sprite_vector;
 public:
 	typedef sprite_vector::size_type size_type;
 
-	sprite(
+	container(
 		draw::environment const &env,
 		entity_id id,
 		size_type,
-		sge::sprite::intrusive::order order);
+		sprite::order
+	);
 	
-	sge::sprite::point const center() const;
-	sge::sprite::point const pos() const;
+	sprite::point const center() const;
+	sprite::point const pos() const;
 protected:
 	typedef sprite_vector::iterator iterator;
 	typedef sprite_vector::const_iterator const_iterator;
@@ -48,16 +52,15 @@ protected:
 
 	virtual void orientation(funit);
 	virtual void speed(vector2 const &);
-	virtual void pos(sge::sprite::point const &);
-	virtual void dim(sge::sprite::dim const &);
-	virtual void color(sge::sprite::color);
+	virtual void pos(sprite::point const &);
+	virtual void dim(sprite::dim const &);
 	virtual void visible(bool);
 
-	sge::sprite::rotation_type orientation() const;
+	sprite::rotation_type orientation() const;
 	vector2 const speed() const;
 private:
-	void update_pos(sge::sprite::point const &);
-	void update_orientation(sge::sprite::rotation_type);
+	void update_pos(sprite::point const &);
+	void update_orientation(sprite::rotation_type);
 	void transfer(
 		draw::system &);
 

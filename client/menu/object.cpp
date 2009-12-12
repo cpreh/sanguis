@@ -8,7 +8,10 @@
 #include <sge/gui/layouts/horizontal.hpp>
 #include <sge/gui/layouts/vertical.hpp>
 #include <sge/gui/make_image.hpp>
-#include <sge/sprite/parameters.hpp>
+#include <sge/sprite/parameters_impl.hpp>
+#include <sge/sprite/object_impl.hpp>
+#include <sge/sprite/external_system_impl.hpp>
+#include <sge/sprite/render_one.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/image/loader.hpp>
 #include <sge/image/file.hpp>
@@ -187,13 +190,16 @@ sanguis::client::menu::object::object(
 	),
 
 	callbacks_(
-		_callbacks),
+		_callbacks
+	),
 	ss(
-		_sys.renderer()),
+		_sys.renderer()
+	),
 	background(
-		sge::sprite::parameters()
+		sprite_parameters()
 			.pos(
-				sge::sprite::point::null())
+				sprite_object::point::null()
+			)
 			.texture(
 				sge::make_shared_ptr<
 					sge::texture::part_raw
@@ -207,18 +213,28 @@ sanguis::client::menu::object::object(
 					)
 				)
 			)
+			.texture_size()
+			.elements()
 	)
 {
 }
 
-void sanguis::client::menu::object::process(
-	time_type const delta)
+void
+sanguis::client::menu::object::process(
+	time_type const delta
+)
 {
 	mover_.update(
-		delta);
+		delta
+	);
+
 	m.update();
-	ss.render(
-		background);
+
+	sge::sprite::render_one(
+		ss,
+		background
+	);
+
 	m.draw();
 }
 

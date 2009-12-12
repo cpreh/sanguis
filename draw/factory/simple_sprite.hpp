@@ -5,8 +5,8 @@
 #include "../entity.hpp"
 #include "../z_ordering.hpp"
 #include "../entity_auto_ptr.hpp"
+#include "../sprite/client/repetition_type.hpp"
 #include <sge/string.hpp>
-#include <sge/sprite/repetition_type.hpp>
 
 namespace sanguis
 {
@@ -21,7 +21,8 @@ simple_sprite(
 	entity_id,
 	z_ordering::type,
 	sge::string const &texture_name,
-	sge::sprite::repetition_type = static_cast<sge::sprite::repetition_type>(1));
+	sprite::client::repetition_type
+);
 
 }
 }

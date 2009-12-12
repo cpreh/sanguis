@@ -34,7 +34,7 @@ sanguis::draw::sentry::sentry(
 
 void
 sanguis::draw::sentry::orientation(
-	sge::sprite::rotation_type const rot)
+	sprite::rotation_type const rot)
 {
 	model::orientation(rot, 1);
 }

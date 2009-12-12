@@ -8,7 +8,8 @@ sanguis::draw::entity_auto_ptr
 sanguis::draw::factory::enemy(
 	environment const &env,
 	entity_id const id,
-	enemy_type::type const etype)
+	enemy_type::type const etype
+)
 {
 	return entity_auto_ptr(
 		new model(

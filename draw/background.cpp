@@ -3,9 +3,12 @@
 #include "system.hpp"
 #include "environment.hpp"
 #include "z_ordering.hpp"
+#include "sprite/normal/parameters.hpp"
 #include "../client/next_id.hpp"
 #include "../resolution.hpp"
-#include <sge/sprite/intrusive/parameters.hpp>
+#include <sge/sprite/default_equal.hpp>
+#include <sge/sprite/parameters_impl.hpp>
+#include <sge/sprite/intrusive/system_impl.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/scoped_target.hpp>
 #include <sge/renderer/scoped_texture_lock.hpp>
@@ -19,7 +22,8 @@
 #include <sge/make_shared_ptr.hpp>
 
 sanguis::draw::background::background(
-	draw::environment const &env)
+	draw::environment const &env
+)
 :
 	entity(
 		env,
@@ -38,8 +42,11 @@ sanguis::draw::background::background(
 		)
 	),
 	sprite(
-		sge::sprite::intrusive::parameters(
-			env.system(),
+		sprite::normal::parameters()
+		.system(
+			&env.normal_system()
+		)
+		.order(
 			z_ordering::corpses
 		)
 		.texture(
@@ -49,6 +56,11 @@ sanguis::draw::background::background(
 				tex
 			)
 		)
+		.pos(
+			sprite::point::null()
+		)
+		.texture_size()
+		.elements()
 	)
 {
 	sge::image::algorithm::fill(
@@ -60,8 +72,10 @@ sanguis::draw::background::background(
 	);
 }
 
-void sanguis::draw::background::paint_dead(
-	draw::system &sys)
+void
+sanguis::draw::background::paint_dead(
+	draw::normal::system &sys
+)
 {
 	sge::renderer::device_ptr const rend(
 		sys.renderer()
@@ -72,9 +86,13 @@ void sanguis::draw::background::paint_dead(
 		tex
 	);
 	
-	sys.render();
+	sys.render_all(
+		sge::sprite::default_equal()
+	);
 }
 
-void sanguis::draw::background::update(
-	time_type)
+void
+sanguis::draw::background::update(
+	time_type
+)
 {}

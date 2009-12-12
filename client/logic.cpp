@@ -113,7 +113,7 @@ sanguis::client::logic::logic(
 		direction_vector::null()
 	),
 	player_center(
-		sge::sprite::point::null()
+		draw::sprite::point::null()
 	),
 	current_weapon(
 		weapon_type::size
@@ -210,7 +210,7 @@ void sanguis::client::logic::move(
 {
 	if(m.get<messages::roles::entity_id>() == player_id_)
 		player_center = sge::math::vector::structure_cast<
-			sge::sprite::point
+			draw::sprite::point
 		>(
 			m.get<messages::pos>()
 		); // FIXME
