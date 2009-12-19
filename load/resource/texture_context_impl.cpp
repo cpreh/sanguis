@@ -26,7 +26,7 @@ sanguis::load::resource::texture_context_impl::texture_context_impl(
 		)
 	),
 	future_(
-		task_.object()),
+		task_.get_future()),
 	thread_(
 		std::tr1::ref(
 			task_)),
