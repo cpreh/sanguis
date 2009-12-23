@@ -80,7 +80,7 @@
 namespace
 {
 
-typedef sge::scoped_ptr<
+typedef fcppt::scoped_ptr<
 	sanguis::server::machine
 > server_scoped_ptr;
 

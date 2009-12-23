@@ -8,7 +8,7 @@ namespace sanguis
 {
 namespace draw
 {
-typedef sge::auto_ptr<
+typedef fcppt::auto_ptr<
 	entity
 > entity_auto_ptr;
 

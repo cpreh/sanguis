@@ -52,15 +52,15 @@ private:
 		sge::audio::pool &);
 	~context();
 
-	sge::scoped_ptr<
+	fcppt::scoped_ptr<
 		resource::textures
 	> textures_;
 
-	sge::scoped_ptr<
+	fcppt::scoped_ptr<
 		resource::sounds
 	> sounds_;
 
-	sge::scoped_ptr<
+	fcppt::scoped_ptr<
 		resource::animations
 	> animations_;
 };

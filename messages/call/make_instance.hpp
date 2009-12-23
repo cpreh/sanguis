@@ -36,7 +36,7 @@ public:
 			Msg
 		> dispatcher;
 
-		sge::auto_ptr<
+		fcppt::auto_ptr<
 			dispatcher
 		> ptr(
 			fcppt::make_auto_ptr<

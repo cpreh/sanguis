@@ -11,7 +11,7 @@ namespace server
 namespace world
 {
 
-typedef sge::shared_ptr<
+typedef fcppt::shared_ptr<
 	context
 > context_ptr;
 

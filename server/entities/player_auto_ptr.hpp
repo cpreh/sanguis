@@ -11,7 +11,7 @@ namespace server
 namespace entities
 {
 
-typedef sge::auto_ptr<
+typedef fcppt::auto_ptr<
 	player
 > player_auto_ptr;
 

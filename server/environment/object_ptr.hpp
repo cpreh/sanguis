@@ -11,7 +11,7 @@ namespace server
 namespace environment
 {
 
-typedef sge::shared_ptr<
+typedef fcppt::shared_ptr<
 	object
 > object_ptr;
 

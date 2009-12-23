@@ -58,7 +58,7 @@ private:
 		part_map::size_type	
 	> part_rand;
 
-	mutable sge::shared_ptr<
+	mutable fcppt::shared_ptr<
 		part_rand
 	> random_part_;
 };

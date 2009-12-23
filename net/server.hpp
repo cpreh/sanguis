@@ -47,7 +47,7 @@ public:
 
 	~server();
 private:
-	sge::scoped_ptr<detail::server_impl> impl_;
+	fcppt::scoped_ptr<detail::server_impl> impl_;
 };
 }
 }

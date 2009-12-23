@@ -28,7 +28,7 @@ private:
 
 	resource::context const &ctx;
 
-	mutable sge::scoped_ptr<
+	mutable fcppt::scoped_ptr<
 		collection
 	> col;
 };

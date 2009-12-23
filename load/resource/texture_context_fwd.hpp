@@ -10,7 +10,7 @@ namespace load
 namespace resource
 {
 class texture_context_impl;
-typedef sge::shared_ptr<texture_context_impl> texture_context_impl_ptr;
+typedef fcppt::shared_ptr<texture_context_impl> texture_context_impl_ptr;
 }
 }
 }

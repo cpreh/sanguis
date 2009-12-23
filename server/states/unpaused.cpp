@@ -20,7 +20,7 @@
 #include <fcppt/log/parameters/inherited.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/time/second_f.hpp>
-#include <sge/format.hpp>
+#include <fcppt/format.hpp>
 #include <fcppt/text.hpp>
 
 #include <boost/mpl/vector/vector10.hpp>

@@ -111,7 +111,7 @@ private:
 	                reloading;
 	funit           health_,
 	                max_health_;
-	sge::scoped_ptr<
+	fcppt::scoped_ptr<
 		healthbar
 	> healthbar_;
 

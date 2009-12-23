@@ -103,7 +103,7 @@ private:
 
 	sge::renderer::state::scoped renderer_state_;
 	music_handler music_;
-	sge::scoped_ptr<
+	fcppt::scoped_ptr<
 		draw::scene
 	> drawer;
 	logic logic_;

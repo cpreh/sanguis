@@ -11,7 +11,7 @@ namespace server
 namespace perks
 {
 
-typedef sge::auto_ptr<perk> auto_ptr;
+typedef fcppt::auto_ptr<perk> auto_ptr;
 
 }
 }

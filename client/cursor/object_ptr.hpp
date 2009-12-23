@@ -10,7 +10,7 @@ namespace client
 {
 namespace cursor
 {
-typedef sge::shared_ptr<object> object_ptr;
+typedef fcppt::shared_ptr<object> object_ptr;
 }
 }
 }

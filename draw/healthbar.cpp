@@ -5,7 +5,7 @@
 #include "sprite/colored/color.hpp"
 #include "../client/id_dont_care.hpp"
 #include "../exception.hpp"
-#include <sge/format.hpp>
+#include <fcppt/format.hpp>
 #include <fcppt/math/almost_zero.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>

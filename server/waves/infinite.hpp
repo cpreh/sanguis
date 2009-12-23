@@ -46,7 +46,7 @@ private:
 		spawns_per_wave_;
 	enemy_type::type const etype_;
 
-	sge::scoped_ptr<
+	fcppt::scoped_ptr<
 		wave
 	> simple_;
 };

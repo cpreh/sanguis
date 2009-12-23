@@ -25,7 +25,7 @@ namespace model
 
 class animation {
 public:
-	typedef sge::auto_ptr<
+	typedef fcppt::auto_ptr<
 		animation_context
 	> context_ptr;
 
@@ -44,7 +44,7 @@ private:
 	sge::parse::json::object object_;
 	global_parameters param_;
 
-	sge::shared_ptr<
+	fcppt::shared_ptr<
 		animation_sound
 	> sounds_;
 

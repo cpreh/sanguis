@@ -8,7 +8,7 @@
 #include "../../log.hpp"
 #include <fcppt/log/headers.hpp>
 #include <fcppt/auto_ptr.hpp>
-#include <sge/format.hpp>
+#include <fcppt/format.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/string.hpp>
 #include <boost/mpl/at.hpp>
@@ -19,7 +19,7 @@ template<
 sanguis::messages::serialization::dispatcher_register<T>::dispatcher_register(
 	context &ctx)
 {
-	sge::auto_ptr<
+	fcppt::auto_ptr<
 		dispatcher_base
 	> disp(
 		new dispatcher<T>
@@ -39,7 +39,7 @@ sanguis::messages::serialization::dispatcher_register<T>::dispatcher_register(
 	).second)
 	{
 		fcppt::string const error(
-			(sge::format(
+			(fcppt::format(
 				FCPPT_TEXT("Message type registered twice: %1%!")
 			)
 				% static_cast<unsigned>(msg_type::value))

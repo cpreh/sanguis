@@ -44,7 +44,7 @@ private:
 	draw::sprite::particle::object sprite_;
 	diff_clock clock_;
 	load::model::animation::context_ptr animation_context_;
-	sge::scoped_ptr<
+	fcppt::scoped_ptr<
 		sprite::particle::texture_animation
 	> animation_;
 	optional_time fade_total_;

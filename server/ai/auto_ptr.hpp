@@ -11,7 +11,7 @@ namespace server
 namespace ai
 {
 
-typedef sge::auto_ptr<
+typedef fcppt::auto_ptr<
 	base
 > auto_ptr;
 

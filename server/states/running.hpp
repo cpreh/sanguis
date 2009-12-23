@@ -101,7 +101,7 @@ private:
 	static fcppt::log::object
 	&log();
 
-	sge::scoped_ptr<
+	fcppt::scoped_ptr<
 		global::context
 	> global_context_;
 	//pickup_spawner pickup_spawner_;

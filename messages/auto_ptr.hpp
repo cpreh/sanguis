@@ -9,7 +9,7 @@ namespace sanguis
 namespace messages
 {
 
-typedef sge::auto_ptr<base> auto_ptr;
+typedef fcppt::auto_ptr<base> auto_ptr;
 
 }
 }

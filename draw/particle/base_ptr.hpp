@@ -10,7 +10,7 @@ namespace draw
 {
 namespace particle
 {
-typedef sge::auto_ptr<
+typedef fcppt::auto_ptr<
 	base
 > base_ptr;
 

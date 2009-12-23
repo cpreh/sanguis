@@ -48,7 +48,7 @@ public:
 		data_function const &);
 	~client();
 private:
-	sge::scoped_ptr<detail::client_impl> impl_;
+	fcppt::scoped_ptr<detail::client_impl> impl_;
 };
 }
 }

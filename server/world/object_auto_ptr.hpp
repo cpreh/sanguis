@@ -11,7 +11,7 @@ namespace server
 namespace world
 {
 
-typedef sge::auto_ptr<
+typedef fcppt::auto_ptr<
 	object
 > object_auto_ptr;
 

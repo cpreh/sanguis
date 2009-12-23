@@ -26,7 +26,7 @@
 #include <fcppt/make_auto_ptr.hpp>
 #include <sge/iconv.hpp>
 #include <fcppt/text.hpp>
-#include <sge/format.hpp>
+#include <fcppt/format.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
@@ -721,7 +721,7 @@ sanguis::draw::scene::entity(
 	)
 		throw exception(
 			(
-				sge::format(
+				fcppt::format(
 					FCPPT_TEXT("Object with id %1% not in entity map!")
 				)
 				% id

@@ -50,9 +50,9 @@ public:
 private:
 	friend class model_part_state;
 
-	typedef sge::scoped_ptr<load::model::animation_context> animation_context_ptr;
+	typedef fcppt::scoped_ptr<load::model::animation_context> animation_context_ptr;
 	
-	typedef sge::auto_ptr<
+	typedef fcppt::auto_ptr<
 		sprite::normal::texture_animation
 	> animation_auto_ptr;
 
@@ -80,11 +80,11 @@ private:
 	sprite::normal::object &ref_;
 
 	weapon_type::type                       weapon_;
-	typedef sge::scoped_ptr<model_part_state> model_part_state_ptr;
+	typedef fcppt::scoped_ptr<model_part_state> model_part_state_ptr;
 	model_part_state_ptr                    state_;
 	animation_context_ptr                   animation_context_;
 	
-	typedef sge::scoped_ptr<
+	typedef fcppt::scoped_ptr<
 		sprite::normal::texture_animation
 	> scoped_texture_animation;
 

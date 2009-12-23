@@ -12,7 +12,7 @@ namespace weapons
 
 class weapon;
 
-typedef sge::auto_ptr<weapon> auto_ptr;
+typedef fcppt::auto_ptr<weapon> auto_ptr;
 
 }
 }
