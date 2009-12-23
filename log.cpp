@@ -2,7 +2,7 @@
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/parameters/root.hpp>
 #include <fcppt/log/parameters/all.hpp>
-#include <sge/cerr.hpp>
+#include <fcppt/io/cerr.hpp>
 #include <fcppt/text.hpp>
 
 fcppt::log::object &
@@ -10,7 +10,7 @@ sanguis::log()
 {
 	static fcppt::log::object log_(
 		fcppt::log::parameters::root(
-			sge::cerr
+			fcppt::io::cerr
 		)
 		.prefix(
 			FCPPT_TEXT("sanguis")

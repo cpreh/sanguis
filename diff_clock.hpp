@@ -3,7 +3,7 @@
 
 #include "time_type.hpp"
 #include <sge/time/unit.hpp>
-#include <sge/time/fun.hpp>
+#include <sge/time/callback.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -14,10 +14,12 @@ class diff_clock {
 public:
 	diff_clock();
 
-	void update(
-		time_type);
+	void
+	update(
+		time_type
+	);
 	
-	typedef sge::time::fun fun_type;
+	typedef sge::time::callback fun_type;
 
 	fun_type const callback() const;
 private:
