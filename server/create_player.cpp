@@ -11,7 +11,7 @@
 #include "../resolution.hpp"
 #include <sge/utf8/convert.hpp>
 #include <fcppt/container/map_impl.hpp>
-#include <sge/make_auto_ptr.hpp>
+#include <fcppt/make_auto_ptr.hpp>
 
 sanguis::server::entities::player_auto_ptr
 sanguis::server::create_player(

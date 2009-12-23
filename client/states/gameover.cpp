@@ -23,7 +23,7 @@
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <sge/algorithm/join_strings.hpp>
 #include <fcppt/lexical_cast.hpp>
-#include <sge/make_shared_ptr.hpp>
+#include <fcppt/make_shared_ptr.hpp>
 #include <tr1/functional>
 
 namespace

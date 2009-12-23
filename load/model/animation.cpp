@@ -23,7 +23,7 @@
 #include <fcppt/math/box/output.hpp>
 #include <fcppt/math/box/contains.hpp>
 #include <sge/parse/json/array.hpp>
-#include <sge/make_shared_ptr.hpp>
+#include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/log/headers.hpp>
 #include <sge/exception.hpp>
 #include <fcppt/text.hpp>

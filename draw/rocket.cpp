@@ -2,7 +2,7 @@
 #include "explosion.hpp"
 #include "environment.hpp"
 #include <sge/optional_impl.hpp>
-#include <sge/make_auto_ptr.hpp>
+#include <fcppt/make_auto_ptr.hpp>
 
 sanguis::draw::rocket::rocket(
 	draw::environment const &env,

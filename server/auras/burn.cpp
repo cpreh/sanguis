@@ -1,7 +1,7 @@
 #include "burn.hpp"
 #include "../buffs/burn.hpp"
 #include "../entities/with_buffs.hpp"
-#include <sge/make_auto_ptr.hpp>
+#include <fcppt/make_auto_ptr.hpp>
 
 sanguis::server::auras::burn::burn(
 	space_unit const radius,

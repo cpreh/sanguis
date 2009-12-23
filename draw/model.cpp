@@ -16,7 +16,7 @@
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <fcppt/text.hpp>
-#include <sge/make_auto_ptr.hpp>
+#include <fcppt/make_auto_ptr.hpp>
 #include <boost/foreach.hpp>
 #include <ostream>
 

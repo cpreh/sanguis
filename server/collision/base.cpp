@@ -7,7 +7,7 @@
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/construct.hpp>
 #include <fcppt/math/vector/narrow_cast.hpp>
-#include <sge/make_auto_ptr.hpp>
+#include <fcppt/make_auto_ptr.hpp>
 #include <boost/logic/tribool.hpp>
 #include <boost/foreach.hpp>
 #include <tr1/functional>

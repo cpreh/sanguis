@@ -1,6 +1,6 @@
 #include "random.hpp"
 #include "object.hpp"
-#include <sge/make_auto_ptr.hpp>
+#include <fcppt/make_auto_ptr.hpp>
 
 sanguis::server::world::object_auto_ptr
 sanguis::server::world::random(

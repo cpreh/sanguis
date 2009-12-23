@@ -38,7 +38,7 @@
 #include <fcppt/container/map_impl.hpp>
 #include <sge/time/second.hpp>
 #include <sge/time/millisecond.hpp>
-#include <sge/make_shared_ptr.hpp>
+#include <fcppt/make_shared_ptr.hpp>
 #include <sge/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>

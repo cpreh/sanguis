@@ -9,7 +9,7 @@
 #include <fcppt/text.hpp>
 #include <sge/fstream.hpp>
 #include <fcppt/lexical_cast.hpp>
-#include <sge/make_shared_ptr.hpp>
+#include <fcppt/make_shared_ptr.hpp>
 #include <boost/foreach.hpp>
 
 sanguis::client::menu::menus::highscore::highscore(

@@ -23,7 +23,7 @@
 #include "../exception.hpp"
 #include "../load/context.hpp"
 
-#include <sge/make_auto_ptr.hpp>
+#include <fcppt/make_auto_ptr.hpp>
 #include <sge/iconv.hpp>
 #include <fcppt/text.hpp>
 #include <sge/format.hpp>

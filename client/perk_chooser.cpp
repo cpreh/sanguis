@@ -22,7 +22,7 @@
 #include <fcppt/log/headers.hpp>
 #include <sge/assert.hpp>
 #include <fcppt/text.hpp>
-#include <sge/make_shared_ptr.hpp>
+#include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <tr1/functional>
 #include <boost/foreach.hpp>

@@ -6,7 +6,7 @@
 #include <sge/gui/widgets/parameters.hpp>
 #include <sge/gui/layouts/vertical.hpp>
 #include <sge/gui/layouts/horizontal.hpp>
-#include <sge/make_shared_ptr.hpp>
+#include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::client::menu::menus::connect_box::connect_box(

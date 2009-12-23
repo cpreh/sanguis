@@ -3,7 +3,7 @@
 
 #include "dispatcher.hpp"
 #include "../message_id.hpp"
-#include <sge/make_auto_ptr.hpp>
+#include <fcppt/make_auto_ptr.hpp>
 
 namespace sanguis
 {

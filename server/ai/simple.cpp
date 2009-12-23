@@ -10,7 +10,7 @@
 #include "../collision/distance.hpp"
 #include <fcppt/math/vector/angle_between.hpp>
 #include <fcppt/container/map_impl.hpp>
-#include <sge/make_auto_ptr.hpp>
+#include <fcppt/make_auto_ptr.hpp>
 #include <sge/optional.hpp>
 #include <sge/assert.hpp>
 #include <tr1/functional>

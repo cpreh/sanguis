@@ -20,7 +20,7 @@
 #include <fcppt/text.hpp>
 #include <sge/fstream.hpp>
 #include <fcppt/string.hpp>
-#include <sge/make_shared_ptr.hpp>
+#include <fcppt/make_shared_ptr.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <tr1/functional>
 

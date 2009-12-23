@@ -17,7 +17,7 @@
 #include <sge/texture/part.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
-#include <sge/make_shared_ptr.hpp>
+#include <fcppt/make_shared_ptr.hpp>
 
 sanguis::draw::background::background(
 	draw::environment const &env

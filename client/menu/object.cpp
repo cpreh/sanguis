@@ -24,7 +24,7 @@
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/text.hpp>
-#include <sge/make_shared_ptr.hpp>
+#include <fcppt/make_shared_ptr.hpp>
 #include <tr1/functional>
 
 namespace
