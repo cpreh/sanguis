@@ -3,12 +3,12 @@
 
 #include "sound_identifier.hpp"
 #include "../sound_type.hpp"
-#include <sge/audio/sound_fwd.hpp>
 #include <sge/audio/multi_loader.hpp>
 #include <sge/audio/pool_fwd.hpp>
 #include <sge/audio/exception.hpp>
-#include <sge/audio/player_fwd.hpp>
-#include <sge/audio/file_fwd.hpp>
+#include <sge/audio/player_ptr.hpp>
+#include <sge/audio/sound_ptr.hpp>
+#include <sge/audio/file_ptr.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <map>
@@ -25,27 +25,32 @@ class sounds {
 public:
 	sge::audio::file_ptr const
 	load(
-		sound_identifier const &) const;
+		sound_identifier const &
+	) const;
 	
 	sge::audio::file_ptr const
 	load_uncached(
-		fcppt::filesystem::path const &) const;
+		fcppt::filesystem::path const &
+	) const;
 	
 	sge::audio::sound_ptr const
 	make(
 		sge::audio::file_ptr,
-		sound_type::type) const;
+		sound_type::type
+	) const;
 
 	~sounds();
 private:
 	sge::audio::file_ptr const
 	do_load(
-		sound_identifier const &) const;
+		sound_identifier const &
+	) const;
 
 	sounds(
 		sge::audio::multi_loader &,
 		sge::audio::player_ptr,
-		sge::audio::pool &);
+		sge::audio::pool &
+	);
 
 	friend class context;
 

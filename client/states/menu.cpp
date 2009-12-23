@@ -216,7 +216,7 @@ void sanguis::client::states::menu::connect(
 			)
 		);
 	}
-	catch (sge::bad_lexical_cast const &)
+	catch (fcppt::bad_lexical_cast const &)
 	{
 		menu_.connection_error(
 			FCPPT_TEXT("invalid port specification")

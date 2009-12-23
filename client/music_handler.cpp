@@ -10,7 +10,7 @@
 #include <sge/exception.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/lexical_cast.hpp>
-#include <sge/bad_lexical_cast.hpp>
+#include <fcppt/bad_lexical_cast.hpp>
 #include <tr1/functional>
 
 sanguis::client::music_handler::music_handler(
@@ -85,7 +85,7 @@ void sanguis::client::music_handler::volume(sge::console::arg_list const &a)
 			)
 		);
 	}
-	catch (sge::bad_lexical_cast const &)
+	catch (fcppt::bad_lexical_cast const &)
 	{
 		console_.print(FCPPT_TEXT("invalid numeric argument"));
 	}

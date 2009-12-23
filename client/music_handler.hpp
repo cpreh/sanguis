@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_MUSIC_HANDLER_HPP_INCLUDED
 
 #include "../load/resource/sounds_fwd.hpp"
-#include <sge/audio/sound_fwd.hpp>
+#include <sge/audio/sound_ptr.hpp>
 #include <sge/audio/unit.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/gfx_fwd.hpp>
