@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_MENU_BUTTON_HPP_INCLUDED
 
 #include <sge/image/loader_fwd.hpp>
-#include <sge/filesystem/path.hpp>
+#include <fcppt/filesystem/path.hpp>
 #include <sge/gui/widgets/buttons/image.hpp>
 #include <sge/string.hpp>
 

@@ -4,7 +4,7 @@
 #include "../resource/context_fwd.hpp"
 #include "part.hpp"
 #include <sge/random/uniform.hpp>
-#include <sge/filesystem/path.hpp>
+#include <fcppt/filesystem/path.hpp>
 #include <sge/renderer/dim_type.hpp>
 #include <sge/math/dim/basic_decl.hpp>
 #include <sge/string.hpp>

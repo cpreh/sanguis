@@ -5,7 +5,7 @@
 #include <sge/audio/sound.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/console/object.hpp>
-#include <sge/filesystem/directory_iterator.hpp>
+#include <fcppt/filesystem/directory_iterator.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/exception.hpp>
 #include <sge/text.hpp>

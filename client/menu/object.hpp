@@ -11,7 +11,7 @@
 #include "../cursor/object_ptr.hpp"
 #include "../../time_type.hpp"
 #include <sge/systems/instance_fwd.hpp>
-#include <sge/filesystem/path.hpp>
+#include <fcppt/filesystem/path.hpp>
 #include <sge/gui/widgets/buttons/text.hpp>
 #include <sge/gui/widgets/backdrop.hpp>
 #include <sge/gui/widgets/graphics.hpp>

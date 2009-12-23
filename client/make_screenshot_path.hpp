@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_MAKE_SCREENSHOT_PATH_HPP_INCLUDED
 #define SANGUIS_CLIENT_MAKE_SCREENSHOT_PATH_HPP_INCLUDED
 
-#include <sge/filesystem/path.hpp>
+#include <fcppt/filesystem/path.hpp>
 
 namespace sanguis
 {

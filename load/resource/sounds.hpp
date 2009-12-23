@@ -9,7 +9,7 @@
 #include <sge/audio/exception.hpp>
 #include <sge/audio/player_fwd.hpp>
 #include <sge/audio/file_fwd.hpp>
-#include <sge/filesystem/path.hpp>
+#include <fcppt/filesystem/path.hpp>
 #include <sge/noncopyable.hpp>
 #include <map>
 

@@ -5,7 +5,7 @@
 #include "texture_context_fwd.hpp"
 #include <sge/time/timer.hpp>
 #include <sge/thread/object.hpp>
-#include <sge/filesystem/path.hpp>
+#include <fcppt/filesystem/path.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image/loader_fwd.hpp>
 #include <sge/image/file_fwd.hpp>

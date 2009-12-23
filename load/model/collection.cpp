@@ -1,7 +1,7 @@
 #include "collection.hpp"
 #include "../../media_path.hpp"
 #include "../../exception.hpp"
-#include <sge/filesystem/exists.hpp>
+#include <fcppt/filesystem/exists.hpp>
 #include <sge/text.hpp>
 #include <utility>
 

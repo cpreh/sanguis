@@ -5,7 +5,7 @@
 #include <sge/gui/widgets/base.hpp>
 #include <sge/gui/widgets/graphics.hpp>
 #include <sge/gui/widgets/edit.hpp>
-#include <sge/filesystem/path.hpp>
+#include <fcppt/filesystem/path.hpp>
 #include <sge/systems/instance_fwd.hpp>
 
 namespace sanguis

@@ -5,7 +5,7 @@
 #include "optional_texture_identifier.hpp"
 #include "../resource/textures_fwd.hpp"
 #include "../resource/sounds_fwd.hpp"
-#include <sge/filesystem/path.hpp>
+#include <fcppt/filesystem/path.hpp>
 #include <sge/renderer/dim_type.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/optional_impl.hpp>

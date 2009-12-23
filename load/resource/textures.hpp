@@ -9,7 +9,7 @@
 #include <sge/texture/manager.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image/loader_fwd.hpp>
-#include <sge/filesystem/path.hpp>
+#include <fcppt/filesystem/path.hpp>
 #include <sge/noncopyable.hpp>
 #include <map>
 

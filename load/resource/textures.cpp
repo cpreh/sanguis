@@ -12,9 +12,9 @@
 #include <sge/texture/part_raw.hpp>
 #include <sge/renderer/filter/linear.hpp>
 #include <sge/renderer/resource_flags_none.hpp>
-#include <sge/filesystem/directory_iterator.hpp>
-#include <sge/filesystem/extension.hpp>
-#include <sge/filesystem/is_regular.hpp>
+#include <fcppt/filesystem/directory_iterator.hpp>
+#include <fcppt/filesystem/extension.hpp>
+#include <fcppt/filesystem/is_regular.hpp>
 #include <sge/image/loader.hpp>
 #include <sge/image/create_texture.hpp>
 #include <sge/text.hpp>

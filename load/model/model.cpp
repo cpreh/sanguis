@@ -7,8 +7,8 @@
 #include "../resource/context.hpp"
 #include "../resource/textures.hpp"
 #include "../log.hpp"
-#include <sge/filesystem/is_directory.hpp>
-#include <sge/filesystem/stem.hpp>
+#include <fcppt/filesystem/is_directory.hpp>
+#include <fcppt/filesystem/stem.hpp>
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/parse/json/parse_file.hpp>

@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_SCREENSHOT_HPP_INCLUDED
 
 #include <sge/renderer/device_fwd.hpp>
-#include <sge/filesystem/path.hpp>
+#include <fcppt/filesystem/path.hpp>
 #include <sge/image/loader_fwd.hpp>
 #include <sge/input/system_fwd.hpp>
 #include <sge/signal/scoped_connection.hpp>

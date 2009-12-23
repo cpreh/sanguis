@@ -11,7 +11,7 @@
 #include <sge/gui/make_image.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/image/loader.hpp>
-#include <sge/filesystem/path.hpp>
+#include <fcppt/filesystem/path.hpp>
 #include <sge/math/dim/arithmetic.hpp>
 #include <sge/math/dim/output.hpp>
 #include <sge/math/dim/structure_cast.hpp>

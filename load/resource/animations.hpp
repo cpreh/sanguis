@@ -4,7 +4,7 @@
 #include "textures_fwd.hpp"
 #include <sge/sprite/animation/series.hpp>
 #include <sge/texture/part_fwd.hpp>
-#include <sge/filesystem/path.hpp>
+#include <fcppt/filesystem/path.hpp>
 #include <sge/noncopyable.hpp>
 #include <map>
 
