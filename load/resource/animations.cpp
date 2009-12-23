@@ -4,21 +4,21 @@
 #include "../log.hpp"
 #include "../../exception.hpp"
 #include <sge/time/millisecond.hpp>
-#include <sge/time/resolution.hpp>
+#include <sge/time/duration.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/filesystem/exists.hpp>
 #include <fcppt/filesystem/is_directory.hpp>
 #include <fcppt/filesystem/is_regular.hpp>
 #include <fcppt/filesystem/next_file.hpp>
 #include <fcppt/filesystem/first_file.hpp>
+#include <fcppt/io/ifstream.hpp>
+#include <fcppt/io/istringstream.hpp>
+#include <fcppt/tr1/functional.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <fcppt/optional_impl.hpp>
-#include <sge/fstream.hpp>
-#include <sge/istringstream.hpp>
 #include <fcppt/text.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include <tr1/functional>
 
 sge::sprite::animation::series const
 sanguis::load::resource::animations::load(
@@ -39,7 +39,7 @@ sge::sprite::animation::series const
 sanguis::load::resource::animations::do_load(
 	fcppt::filesystem::path const &dir) const
 {
-	if (!fcppt::filesystem::exists(dir) || !sge::filesystem::is_directory(dir))
+	if (!fcppt::filesystem::exists(dir) || !fcppt::filesystem::is_directory(dir))
 		throw exception(
 			FCPPT_TEXT("directory for animation \"")
 			+ dir.string()
@@ -49,11 +49,11 @@ sanguis::load::resource::animations::do_load(
 	fcppt::filesystem::path const framesfile = dir / FCPPT_TEXT("frames");
 
 	// look for frames file inside directory
-	if (!fcppt::filesystem::exists(framesfile) || !sge::filesystem::is_regular(framesfile))
+	if (!fcppt::filesystem::exists(framesfile) || !fcppt::filesystem::is_regular(framesfile))
 		return load_without_frames_file(dir);
 	//
 	// and parse line by line
-	sge::ifstream file(framesfile);
+	fcppt::io::ifstream file(framesfile);
 	if (!file.is_open())
 		throw exception(
 			FCPPT_TEXT("error opening file \"")
@@ -68,7 +68,7 @@ sanguis::load::resource::animations::do_load(
 			+ framesfile.string());
 
 	fcppt::optional<
-		sge::time::resolution
+		sge::time::duration
 	> const_delay;
 
 	if (boost::algorithm::starts_with(line,FCPPT_TEXT("frame_length ")))
@@ -98,12 +98,12 @@ sanguis::load::resource::animations::do_load(
 		if (line.empty())
 			continue;
 
-		sge::time::resolution delay(0);
+		sge::time::duration delay(0);
 		fcppt::string filename = line;
 
 		if (!const_delay)
 		{
-			sge::istringstream ss(line);
+			fcppt::io::istringstream ss(line);
 			sge::time::unit temp_delay;
 			ss >> temp_delay >> std::ws;
 			if (!ss)
@@ -156,7 +156,7 @@ sanguis::load::resource::animations::load_without_frames_file(
 	fcppt::filesystem::path const first_path(
 		*first_file);
 
-	if(fcppt::filesystem::next_file(first_file) != sge::filesystem::directory_iterator())
+	if(fcppt::filesystem::next_file(first_file) != fcppt::filesystem::directory_iterator())
 		FCPPT_LOG_WARNING(
 			log(),
 			fcppt::log::_

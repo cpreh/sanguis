@@ -5,8 +5,6 @@
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/text.hpp>
-#include <sge/time/second_f.hpp>
-#include <sge/time/resolution.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 
 sanguis::entity_id

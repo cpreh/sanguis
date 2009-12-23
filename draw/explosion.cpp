@@ -18,12 +18,12 @@
 #include "../media_path.hpp"
 #include "../animation_type.hpp"
 #include "../from_particle_type.hpp"
-#include <fcppt/math/vector/structure_cast.hpp>
-#include <sge/minmax_pair_impl.hpp>
 #include <sge/audio/sound.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/tr1/functional.hpp>
+#include <fcppt/minmax_pair_impl.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <boost/assign/list_of.hpp>
-#include <tr1/functional>
 
 namespace
 {

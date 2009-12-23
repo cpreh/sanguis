@@ -5,24 +5,24 @@
 #include "../log.hpp"
 #include "../../exception.hpp"
 #include "../../media_path.hpp"
-#include <fcppt/log/headers.hpp>
 #include <sge/texture/add_image.hpp>
 #include <sge/texture/default_creator_impl.hpp>
 #include <sge/texture/no_fragmented.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/renderer/filter/linear.hpp>
 #include <sge/renderer/resource_flags_none.hpp>
+#include <sge/image/loader.hpp>
+#include <sge/image/create_texture.hpp>
+#include <fcppt/log/headers.hpp>
 #include <fcppt/filesystem/directory_iterator.hpp>
 #include <fcppt/filesystem/extension.hpp>
 #include <fcppt/filesystem/is_regular.hpp>
-#include <sge/image/loader.hpp>
-#include <sge/image/create_texture.hpp>
+#include <fcppt/io/ifstream.hpp>
+#include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
-#include <sge/fstream.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <boost/algorithm/string/trim.hpp>
-#include <tr1/functional>
 
 namespace
 {
@@ -144,11 +144,11 @@ sanguis::load::resource::textures::textures(
 	for (fcppt::filesystem::directory_iterator i(sanguis::media_path()), end; i != end; ++i)
 	{
 		fcppt::filesystem::path const &p = i->path();
-		if (!fcppt::filesystem::is_regular(p) || sge::filesystem::extension(p) != FCPPT_TEXT(".tex"))
+		if (!fcppt::filesystem::is_regular(p) || fcppt::filesystem::extension(p) != FCPPT_TEXT(".tex"))
 			continue;
 		
 		// and parse line by line
-		sge::ifstream file(p);
+		fcppt::io::ifstream file(p);
 		if (!file.is_open())
 			throw exception(
 				FCPPT_TEXT("error opening id file \"")

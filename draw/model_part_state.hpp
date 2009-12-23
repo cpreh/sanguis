@@ -6,7 +6,7 @@
 #include "../load/model/animation_fwd.hpp"
 #include "../animation_type.hpp"
 #include "../weapon_type.hpp"
-#include <sge/audio/sound_fwd.hpp>
+#include <sge/audio/sound_ptr.hpp>
 #include <sge/audio/play_mode.hpp>
 
 namespace sanguis

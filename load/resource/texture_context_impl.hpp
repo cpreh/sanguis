@@ -4,13 +4,14 @@
 #include "../../diff_clock.hpp"
 #include "texture_context_fwd.hpp"
 #include <sge/time/timer.hpp>
+#include <sge/renderer/device_ptr.hpp>
+#include <sge/renderer/filter/texture.hpp>
+#include <sge/image/loader_ptr.hpp>
+#include <sge/image/file_ptr.hpp>
+#include <sge/texture/part_ptr.hpp>
 #include <fcppt/thread/object.hpp>
 #include <fcppt/filesystem/path.hpp>
-#include <sge/renderer/device_fwd.hpp>
-#include <sge/image/loader_fwd.hpp>
-#include <sge/image/file_fwd.hpp>
-#include <sge/renderer/filter/texture.hpp>
-#include <sge/texture/part_fwd.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <boost/thread/future.hpp>
 
 namespace sanguis
@@ -21,13 +22,14 @@ namespace resource
 {
 class texture_context_impl
 {
-FCPPT_NONCOPYABLE(texture_context_impl)
+	FCPPT_NONCOPYABLE(texture_context_impl)
 public:
 	texture_context_impl(
 		fcppt::filesystem::path const &,
 		sge::renderer::device_ptr,
 		sge::image::loader_ptr,
-		sge::renderer::filter::texture);
+		sge::renderer::filter::texture
+	);
 	bool update();
 	void tick(
 		time_type);

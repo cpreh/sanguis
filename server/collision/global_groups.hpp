@@ -3,8 +3,8 @@
 
 #include "group_map.hpp"
 #include "group.hpp"
-#include <sge/collision/world_fwd.hpp>
-#include <sge/collision/body_fwd.hpp>
+#include <sge/collision/world_ptr.hpp>
+#include <sge/collision/body_ptr.hpp>
 #include <fcppt/container/map_decl.hpp>
 
 namespace sanguis

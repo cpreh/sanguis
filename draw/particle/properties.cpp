@@ -1,5 +1,5 @@
 #include "properties.hpp"
-#include <sge/minmax_pair_impl.hpp>
+#include <fcppt/minmax_pair_impl.hpp>
 
 sanguis::draw::particle::properties::properties(
 	funit const anim_speed_,

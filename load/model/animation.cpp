@@ -12,7 +12,6 @@
 #include <sge/parse/json/find_member.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/texture/part_raw.hpp>
-#include <sge/time/resolution.hpp>
 #include <sge/time/millisecond.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -39,11 +38,11 @@ calc_rect(
 	sge::renderer::dim_type const &cell_size,
 	sge::renderer::size_type const index)
 {
-	if (area.dim().w() == cell_size.w())
+	if (area.dimension().w() == cell_size.w())
 	{
 		FCPPT_ASSERT(index == static_cast<sge::renderer::size_type>(0));
 		return sge::renderer::lock_rect(
-			sge::renderer::lock_rect::pos_type::null(),
+			sge::renderer::lock_rect::vector::null(),
 			cell_size);
 	}
 
@@ -53,13 +52,13 @@ calc_rect(
 
 	sge::renderer::size_type const cells_per_row(
 		std::max(
-			area.dim().w() / cell_size_edited.w(),
+			area.dimension().w() / cell_size_edited.w(),
 			static_cast<sge::renderer::size_type>(1)
 		)
 	);
 
 	return sge::renderer::lock_rect(
-		sge::renderer::lock_rect::pos_type(
+		sge::renderer::lock_rect::vector(
 			index % cells_per_row,
 			index / cells_per_row
 		) * cell_size_edited + area.pos(),

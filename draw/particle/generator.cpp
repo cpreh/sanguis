@@ -1,7 +1,6 @@
 #include "generator.hpp"
 #include "object.hpp"
 #include <sge/time/second_f.hpp>
-#include <sge/time/resolution.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/math/vector/angle_between.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>

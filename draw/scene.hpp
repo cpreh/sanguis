@@ -39,8 +39,8 @@
 #include "../entity_id.hpp"
 #include "../time_type.hpp"
 #include <sge/sprite/intrusive/system_decl.hpp>
-#include <sge/renderer/device_fwd.hpp>
-#include <sge/renderer/texture_fwd.hpp>
+#include <sge/renderer/device_ptr.hpp>
+#include <sge/renderer/texture_ptr.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>

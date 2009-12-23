@@ -5,7 +5,7 @@
 #include "align_type.hpp"
 #include "../funit.hpp"
 #include "../unit.hpp"
-#include <sge/minmax_pair_decl.hpp>
+#include <fcppt/minmax_pair_decl.hpp>
 
 namespace sanguis
 {
@@ -15,19 +15,19 @@ namespace particle
 {
 
 struct properties {
-	typedef sge::minmax_pair<
+	typedef fcppt::minmax_pair<
 		unit
 	> dispersion_range;
 
-	typedef sge::minmax_pair<
+	typedef fcppt::minmax_pair<
 		funit
 	> speed_range;
 
-	typedef sge::minmax_pair<
+	typedef fcppt::minmax_pair<
 		funit
 	> rot_speed_range;
 
-	typedef sge::minmax_pair<
+	typedef fcppt::minmax_pair<
 		funit
 	> fade_range;
 

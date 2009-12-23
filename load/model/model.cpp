@@ -17,7 +17,6 @@
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/find_member.hpp>
 #include <fcppt/random/last_exclusive_range.hpp>
-#include <sge/fstream.hpp>
 #include <fcppt/text.hpp>
 #include <boost/next_prior.hpp>
 #include <boost/foreach.hpp>

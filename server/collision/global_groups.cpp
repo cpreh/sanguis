@@ -4,7 +4,7 @@
 #include <sge/collision/group.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/assign/make_container.hpp>
-#include <sge/foreach_enumerator.hpp>
+#include <fcppt/foreach_enumerator.hpp>
 #include <boost/foreach.hpp>
 #include <vector>
 #include <utility>
@@ -15,7 +15,7 @@ sanguis::server::collision::global_groups::global_groups(
 :
 	groups_()
 {
-	SGE_FOREACH_ENUMERATOR(
+	FCPPT_FOREACH_ENUMERATOR(
 		index,
 		group
 	)

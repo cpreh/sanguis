@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_COLLISION_GROUP_MAP_HPP_INCLUDED
 
 #include "group.hpp"
-#include <sge/collision/group_fwd.hpp>
+#include <sge/collision/group_ptr.hpp>
 #include <fcppt/container/map_fwd.hpp>
 #include <map>
 

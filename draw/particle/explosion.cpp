@@ -4,9 +4,9 @@
 #include "properties.hpp"
 #include <fcppt/function/object.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_auto_ptr.hpp>
-#include <sge/minmax_pair_impl.hpp>
-#include <tr1/functional>
+#include <fcppt/minmax_pair_impl.hpp>
 
 sanguis::draw::particle::explosion::explosion(
 	property_map const &properties_,

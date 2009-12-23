@@ -6,8 +6,8 @@
 #include "global_groups_fwd.hpp"
 #include "../pos_type.hpp"
 #include <sge/collision/shapes/container.hpp>
-#include <sge/collision/world_fwd.hpp>
-#include <sge/collision/body_fwd.hpp>
+#include <sge/collision/world_ptr.hpp>
+#include <sge/collision/body_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <boost/logic/tribool_fwd.hpp>
 

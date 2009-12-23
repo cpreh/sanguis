@@ -6,7 +6,7 @@
 #include "environment_fwd.hpp"
 #include "entity.hpp"
 #include <sge/sprite/object_decl.hpp>
-#include <sge/renderer/texture_fwd.hpp>
+#include <sge/renderer/texture_ptr.hpp>
 
 namespace sanguis
 {

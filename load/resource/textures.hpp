@@ -5,10 +5,10 @@
 #include "texture_identifier.hpp"
 #include "texture_context_fwd.hpp"
 #include "texture_context.hpp"
-#include <sge/texture/part_fwd.hpp>
+#include <sge/texture/part_ptr.hpp>
 #include <sge/texture/manager.hpp>
-#include <sge/renderer/device_fwd.hpp>
-#include <sge/image/loader_fwd.hpp>
+#include <sge/renderer/device_ptr.hpp>
+#include <sge/image/loader_ptr.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <map>
@@ -25,14 +25,18 @@ class textures {
 public:
 	sge::texture::part_ptr const
 	load(
-		texture_identifier const &) const;
+		texture_identifier const &
+	) const;
 
 	texture_context const
 	load(
-		fcppt::filesystem::path const &) const;
+		fcppt::filesystem::path const &
+	) const;
 	
-	void cleanup(
-		time_type) const;
+	void
+	cleanup(
+		time_type
+	) const;
 	
 	~textures();
 private:
@@ -41,15 +45,18 @@ private:
 
 	sge::texture::part_ptr const
 	do_load(
-		texture_identifier const &) const;
+		texture_identifier const &
+	) const;
 	
 	texture_context_impl_ptr const
 	do_load_unnamed(
-		fcppt::filesystem::path const &) const;
+		fcppt::filesystem::path const &
+	) const;
 
 	sge::texture::part_ptr const
 	do_load_inner(
-		fcppt::filesystem::path const &) const;
+		fcppt::filesystem::path const &
+	) const;
 
 	textures(
 		sge::renderer::device_ptr,
