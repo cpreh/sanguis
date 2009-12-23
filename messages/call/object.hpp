@@ -6,7 +6,7 @@
 #include "make_instance.hpp"
 #include "../base_fwd.hpp"
 #include "../types/message.hpp"
-#include <sge/mpl/for_each.hpp>
+#include <fcppt/mpl/for_each.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <boost/ptr_container/ptr_array.hpp>
 
@@ -43,7 +43,7 @@ public:
 	:
 		instances_()
 	{
-		sge::mpl::for_each<
+		fcppt::mpl::for_each<
 			Messages
 		>(
 			make_instance<

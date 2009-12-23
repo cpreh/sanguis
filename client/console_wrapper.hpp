@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_CONSOLE_WRAPPER_HPP_INCLUDED
 
 #include <sge/console/gfx_fwd.hpp>
-#include <sge/input/system_fwd.hpp>
+#include <sge/input/system_ptr.hpp>
 #include <sge/input/key_code.hpp>
 #include <sge/input/key_pair_fwd.hpp>
 #include <sge/input/callback.hpp>

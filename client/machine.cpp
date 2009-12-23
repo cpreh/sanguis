@@ -12,22 +12,15 @@
 #include "../media_path.hpp"
 #include "../resolution.hpp"
 #include "../tick_event.hpp"
-#include <fcppt/math/compare.hpp>
-#include <fcppt/math/dim/structure_cast.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/audio/player.hpp>
 #include <sge/audio/pool.hpp>
 #include <sge/renderer/scoped_block.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/scoped_target.hpp>
-#include <fcppt/optional_impl.hpp>
-#include <fcppt/container/raw_vector_impl.hpp>
-#include <boost/spirit/home/phoenix/core/reference.hpp>
-#include <boost/spirit/home/phoenix/operator/self.hpp>
 #include <sge/input/system.hpp>
 #include <sge/input/key_state_tracker.hpp>
 #include <sge/mainloop/dispatch.hpp>
-#include <fcppt/container/raw_vector_impl.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/system.hpp>
@@ -41,13 +34,17 @@
 #include <sge/renderer/glsl/uniform/variable.hpp>
 #include <sge/renderer/glsl/uniform/single_value.hpp>
 #include <sge/renderer/glsl/program.hpp>
-#include <fcppt/algorithm/append.hpp>
 #include <sge/renderer/glsl/uniform/single_value.hpp>
 #include <sge/renderer/filter/linear.hpp>
 #include <sge/renderer/texture.hpp>
+#include <fcppt/algorithm/append.hpp>
+#include <fcppt/container/raw_vector_impl.hpp>
+#include <fcppt/container/raw_vector_impl.hpp>
+#include <fcppt/math/compare.hpp>
+#include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/utf8/convert.hpp>
-#include <sge/fstream.hpp>
-#include <tr1/functional>
+#include <fcppt/tr1/functional.hpp>
+#include <fcppt/optional_impl.hpp>
 
 sanguis::client::machine::machine(
 	server_callback const &_server_callback,

@@ -4,16 +4,16 @@
 #include "log.hpp"
 #include "../exception.hpp"
 #include <sge/renderer/screenshot.hpp>
+#include <sge/input/key_code.hpp>
+#include <sge/input/key_pair.hpp>
+#include <sge/input/system.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <fcppt/filesystem/is_directory.hpp>
 #include <fcppt/filesystem/create_directory.hpp>
 #include <fcppt/filesystem/exists.hpp>
-#include <sge/input/key_code.hpp>
-#include <sge/input/key_pair.hpp>
-#include <sge/input/system.hpp>
+#include <fcppt/tr1/functional.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/text.hpp>
-#include <tr1/functional>
 
 sanguis::client::screenshot::screenshot(
 	sge::renderer::device_ptr const _renderer,
@@ -54,7 +54,11 @@ void sanguis::client::screenshot::process()
 		fcppt::filesystem::create_directory(dir);
 	
 	if (!fcppt::filesystem::is_directory(dir))
-		throw exception(FCPPT_TEXT("Screenshot path ")+(dir/p).string()+SGE_TEXT(" exists but is not a directory"));
+		throw exception(
+			FCPPT_TEXT("Screenshot path ")
+			+ (dir / p).string()
+			+ FCPPT_TEXT(" exists but is not a directory")
+		);
 
 	FCPPT_LOG_DEBUG(
 		log(),

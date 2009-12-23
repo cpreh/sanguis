@@ -160,7 +160,7 @@ void sanguis::client::menu::mover::update_position(
 			static_cast<float_type>(t) * 
 			speed_;
 	
-	if (fcppt::math::vector::is_null(diff) || sge::math::vector::is_null(projected))
+	if (fcppt::math::vector::is_null(diff) || fcppt::math::vector::is_null(projected))
 		return;
 
 	e.current += 

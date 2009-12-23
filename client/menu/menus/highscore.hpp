@@ -5,6 +5,7 @@
 #include <sge/gui/widgets/base.hpp>
 #include <sge/gui/widgets/buttons/text.hpp>
 #include <sge/systems/instance_fwd.hpp>
+#include <fcppt/filesystem/path.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
 
 namespace sanguis

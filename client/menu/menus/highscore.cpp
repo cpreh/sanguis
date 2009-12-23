@@ -6,8 +6,8 @@
 #include <sge/gui/widgets/label.hpp>
 #include <sge/gui/layouts/grid.hpp>
 #include <sge/gui/layouts/vertical.hpp>
+#include <fcppt/io/ifstream.hpp>
 #include <fcppt/text.hpp>
-#include <sge/fstream.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <boost/foreach.hpp>
@@ -48,9 +48,11 @@ sanguis::client::menu::menus::highscore::highscore(
 
 void sanguis::client::menu::menus::highscore::populate_children()
 {
-	sge::ifstream file(
+	fcppt::io::ifstream file(
 		config::homedir()/
-		FCPPT_TEXT("highscore"));
+		FCPPT_TEXT("highscore")
+	);
+
 	sanguis::client::highscore::table const t = 
 		sanguis::client::highscore::read(
 			file);

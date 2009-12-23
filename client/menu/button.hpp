@@ -1,9 +1,9 @@
 #ifndef SANGUIS_CLIENT_MENU_BUTTON_HPP_INCLUDED
 #define SANGUIS_CLIENT_MENU_BUTTON_HPP_INCLUDED
 
-#include <sge/image/loader_fwd.hpp>
-#include <fcppt/filesystem/path.hpp>
+#include <sge/image/loader_ptr.hpp>
 #include <sge/gui/widgets/buttons/image.hpp>
+#include <fcppt/filesystem/path.hpp>
 #include <fcppt/string.hpp>
 
 namespace sanguis
