@@ -3,7 +3,7 @@
 
 #include "base_fwd.hpp"
 #include "../entities/with_ai_fwd.hpp"
-#include <sge/function/object_fwd.hpp>
+#include <fcppt/function/object_fwd.hpp>
 
 namespace sanguis
 {
@@ -13,7 +13,7 @@ namespace ai
 {
 
 // TODO: we will have to return an auto_ptr here
-typedef sge::function::object<
+typedef fcppt::function::object<
 	base * (
 		entities::with_ai &
 	)

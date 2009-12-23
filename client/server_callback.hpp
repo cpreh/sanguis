@@ -2,14 +2,14 @@
 #define SANGUIS_CLIENT_SERVER_CALLBACK_HPP_INCLUDED
 
 #include "../net/port_type.hpp"
-#include <sge/function/object_fwd.hpp>
+#include <fcppt/function/object_fwd.hpp>
 
 namespace sanguis
 {
 namespace client
 {
 
-typedef sge::function::object<
+typedef fcppt::function::object<
 	void (
 		net::port_type
 	)

@@ -11,7 +11,7 @@
 #include <sge/gui/widgets/label.hpp>
 #include <sge/gui/manager.hpp>
 #include <fcppt/signal/connection_manager.hpp>
-#include <sge/function/object.hpp>
+#include <fcppt/function/object.hpp>
 #include <sge/noncopyable.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
 #include <map>
@@ -24,7 +24,7 @@ class perk_chooser
 {
 	SGE_NONCOPYABLE(perk_chooser)
 public:
-	typedef sge::function::object<
+	typedef fcppt::function::object<
 		void (perk_type::type)
 	> send_callback;
 

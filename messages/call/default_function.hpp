@@ -2,7 +2,7 @@
 #define SANGUIS_MESSAGES_CALL_DEFAULT_FUNCTION_HPP_INCLUDED
 
 #include "../base_fwd.hpp"
-#include <sge/function/object_fwd.hpp>
+#include <fcppt/function/object_fwd.hpp>
 
 namespace sanguis
 {
@@ -15,7 +15,7 @@ template<
 	typename Result
 >
 struct default_function {
-	typedef sge::function::object<
+	typedef fcppt::function::object<
 		Result (
 			base const &
 		)

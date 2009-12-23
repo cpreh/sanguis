@@ -43,7 +43,7 @@
 #include <sge/sprite/default_equal.hpp>
 #include <sge/sprite/intrusive/system_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
-#include <sge/function/object.hpp>
+#include <fcppt/function/object.hpp>
 
 #include <majutsu/is_role.hpp>
 

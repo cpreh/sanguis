@@ -5,7 +5,7 @@
 #include "property_map.hpp"
 #include "base_ptr.hpp"
 #include "../../particle_type.hpp"
-#include <sge/function/object_fwd.hpp>
+#include <fcppt/function/object_fwd.hpp>
 
 namespace sanguis
 {
@@ -18,7 +18,7 @@ namespace particle
 class explosion : public container
 {
 public:
-	typedef sge::function::object<
+	typedef fcppt::function::object<
 		base_ptr (particle_type::type)
 	> callback;
 

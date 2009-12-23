@@ -1,6 +1,6 @@
 #include "execute_begin.hpp"
 #include "base.hpp"
-#include <sge/function/object.hpp>
+#include <fcppt/function/object.hpp>
 #include <tr1/functional>
 
 sanguis::server::collision::execute_function const

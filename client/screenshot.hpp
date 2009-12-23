@@ -7,7 +7,7 @@
 #include <sge/input/system_fwd.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <sge/input/key_pair_fwd.hpp>
-#include <sge/function/object.hpp>
+#include <fcppt/function/object.hpp>
 #include <sge/noncopyable.hpp>
 
 namespace sanguis
@@ -24,7 +24,7 @@ public:
 		sge::input::system_ptr);
 	void process();
 private:
-	sge::function::object<
+	fcppt::function::object<
 		void (fcppt::filesystem::path const &)
 	> make_screenshot;
 

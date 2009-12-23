@@ -3,7 +3,7 @@
 #include "../menu_event.hpp"
 #include "../../messages/call/object.hpp"
 #include "../../tick_event.hpp"
-#include <sge/function/object.hpp>
+#include <fcppt/function/object.hpp>
 #include <tr1/functional>
 
 sanguis::client::states::unpaused::unpaused(

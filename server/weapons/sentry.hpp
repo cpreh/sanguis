@@ -7,7 +7,7 @@
 #include "cast_point.hpp"
 #include "reload_time.hpp"
 #include "create_function.hpp"
-#include <sge/function/object.hpp>
+#include <fcppt/function/object.hpp>
 
 namespace sanguis
 {

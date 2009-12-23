@@ -7,7 +7,7 @@
 #include "../funit.hpp"
 #include <sge/random/inclusive_range.hpp>
 #include <sge/math/vector/static.hpp>
-#include <sge/function/object_fwd.hpp>
+#include <fcppt/function/object_fwd.hpp>
 #include <sge/optional_fwd.hpp>
 #include "fwd.hpp"
 
@@ -27,7 +27,7 @@ typedef sge::random::inclusive_range<funit>      velocity_range;
 typedef sge::random::inclusive_range<rotation>   rotation_velocity_range;
 typedef sge::random::inclusive_range<time_type>  fade_time_range;
 typedef sge::optional<fade_time_range>         fade_type;
-typedef sge::function::object<base_ptr ()>             generation_callback;
+typedef fcppt::function::object<base_ptr ()>             generation_callback;
 
 }
 }

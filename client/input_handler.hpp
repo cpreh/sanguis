@@ -4,7 +4,7 @@
 #include "player_action_fwd.hpp"
 #include <sge/input/key_pair_fwd.hpp>
 #include <sge/input/key_state.hpp>
-#include <sge/function/object.hpp>
+#include <fcppt/function/object.hpp>
 
 namespace sanguis
 {
@@ -13,7 +13,7 @@ namespace client
 
 class input_handler {
 public:
-	typedef sge::function::object<
+	typedef fcppt::function::object<
 		void (player_action const &)
 	> post_fun;
 

@@ -6,7 +6,7 @@
 #include <sge/sprite/animation/series.hpp>
 #include <sge/scoped_ptr.hpp>
 #include <sge/renderer/lock_rect.hpp>
-#include <sge/function/object.hpp>
+#include <fcppt/function/object.hpp>
 
 namespace sanguis
 {
@@ -17,7 +17,7 @@ namespace model
 class animation_context
 {
 public:
-	typedef sge::function::object<
+	typedef fcppt::function::object<
 		void (
 			sge::renderer::lock_rect const &
 		)

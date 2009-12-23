@@ -7,7 +7,7 @@
 #include "sprite/client/system.hpp"
 #include "sprite/particle/system.hpp"
 #include "insert_callback.hpp"
-#include <sge/function/object.hpp>
+#include <fcppt/function/object.hpp>
 
 namespace sanguis
 {

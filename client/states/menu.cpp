@@ -9,7 +9,7 @@
 #include "../message_event.hpp"
 #include "../menu_event.hpp"
 #include "../log.hpp"
-#include <sge/function/object.hpp>
+#include <fcppt/function/object.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <sge/renderer/state/list.hpp>

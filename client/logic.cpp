@@ -29,7 +29,7 @@
 #include <sge/assign/make_container.hpp>
 #include <fcppt/text.hpp>
 #include <sge/optional_impl.hpp>
-#include <sge/function/object.hpp>
+#include <fcppt/function/object.hpp>
 #include <tr1/functional>
 #include <algorithm>
 

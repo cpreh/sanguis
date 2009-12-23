@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_MENU_CALLBACKS_OBJECT_HPP_INCLUDED
 
 #include "types.hpp"
-#include <sge/function/object.hpp>
+#include <fcppt/function/object.hpp>
 
 namespace sanguis
 {

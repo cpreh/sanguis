@@ -16,7 +16,7 @@
 #include <sge/math/vector/basic_decl.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image/loader_fwd.hpp>
-#include <sge/function/object_fwd.hpp>
+#include <fcppt/function/object_fwd.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <sge/noncopyable.hpp>
 #include <tr1/array>
@@ -84,7 +84,7 @@ private:
 	sge::renderer::device_ptr const rend;
 	cursor::object_ptr const cursor_;
 
-	typedef sge::function::object<
+	typedef fcppt::function::object<
 		void (key_scale)
 	> action_handler;
 

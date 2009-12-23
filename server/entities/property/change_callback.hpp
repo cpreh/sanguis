@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_PROPERTY_CHANGE_CALLBACK_HPP_INCLUDED
 
 #include "change_function.hpp"
-#include <sge/function/object_fwd.hpp>
+#include <fcppt/function/object_fwd.hpp>
 
 namespace sanguis
 {
@@ -13,7 +13,7 @@ namespace entities
 namespace property
 {
 
-typedef sge::function::object<
+typedef fcppt::function::object<
 	change_function
 > change_callback;
 
