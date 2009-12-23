@@ -27,7 +27,7 @@
 #include <sge/sprite/object_decl.hpp>
 #include <sge/sprite/parameters_fwd.hpp>
 #include <fcppt/signal/connection_manager.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 
@@ -39,7 +39,7 @@ namespace menu
 {
 class object
 {
-	SGE_NONCOPYABLE(object)
+	FCPPT_NONCOPYABLE(object)
 public:
 	object(
 		sge::systems::instance const &,

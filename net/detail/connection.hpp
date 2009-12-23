@@ -5,7 +5,7 @@
 #include "static_buffer.hpp"
 #include "../value_type.hpp"
 #include "../id_type.hpp"
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <boost/asio/io_service.hpp>
 #include <boost/asio/ip/tcp.hpp>
 
@@ -17,7 +17,7 @@ namespace detail
 {
 
 class connection {
-	SGE_NONCOPYABLE(connection)
+	FCPPT_NONCOPYABLE(connection)
 public:
 	connection(
 		id_type,

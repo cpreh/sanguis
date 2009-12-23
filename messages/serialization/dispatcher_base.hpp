@@ -4,7 +4,7 @@
 #include "dispatcher_base_fwd.hpp"
 #include "reader_fwd.hpp"
 #include "../auto_ptr.hpp"
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -14,7 +14,7 @@ namespace serialization
 {
 
 struct dispatcher_base {
-	SGE_NONCOPYABLE(dispatcher_base)
+	FCPPT_NONCOPYABLE(dispatcher_base)
 protected:
 	dispatcher_base();
 public:

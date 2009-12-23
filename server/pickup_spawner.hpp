@@ -8,7 +8,7 @@
 #include <sge/random/actor/normalized.hpp>
 #include <sge/random/uniform.hpp>
 #include <fcppt/math/vector/basic_decl.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -16,7 +16,7 @@ namespace server
 {
 
 class pickup_spawner {
-	SGE_NONCOPYABLE(pickup_spawner)
+	FCPPT_NONCOPYABLE(pickup_spawner)
 public:
 	explicit pickup_spawner(
 		environment::object_ptr

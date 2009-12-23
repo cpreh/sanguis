@@ -6,7 +6,7 @@
 #include "../../perk_type.hpp"
 #include "../level_type.hpp"
 #include <fcppt/container/tree_decl.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -16,7 +16,7 @@ namespace perks
 {
 
 class tree {
-	SGE_NONCOPYABLE(tree)
+	FCPPT_NONCOPYABLE(tree)
 public:
 	tree();
 	~tree();

@@ -21,7 +21,7 @@ namespace resource
 {
 class texture_context_impl
 {
-SGE_NONCOPYABLE(texture_context_impl)
+FCPPT_NONCOPYABLE(texture_context_impl)
 public:
 	texture_context_impl(
 		fcppt::filesystem::path const &,

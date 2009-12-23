@@ -15,7 +15,7 @@
 #include <sge/multi_loader.hpp>
 #include <sge/audio/pool_fwd.hpp>
 #include <sge/scoped_ptr.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -24,7 +24,7 @@ namespace load
 namespace resource
 {
 class context {
-	SGE_NONCOPYABLE(context)
+	FCPPT_NONCOPYABLE(context)
 public:
 	resource::textures const &
 	textures() const;

@@ -5,7 +5,7 @@
 #include "base.hpp"
 #include "change_callback.hpp"
 #include "change_signal.hpp"
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -20,7 +20,7 @@ class always_max
 :
 	public base
 {
-	SGE_NONCOPYABLE(always_max)
+	FCPPT_NONCOPYABLE(always_max)
 public:
 	explicit always_max(
 		value_type

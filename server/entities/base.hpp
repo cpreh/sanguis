@@ -16,7 +16,7 @@
 #include "../../entity_id.hpp"
 #include "../../entity_type.hpp"
 #include "../../time_type.hpp"
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -29,7 +29,7 @@ class base
 :
 	public collision::base
 {
-	SGE_NONCOPYABLE(base)
+	FCPPT_NONCOPYABLE(base)
 protected:
 	base();
 public:

@@ -12,7 +12,7 @@
 
 #include <fcppt/string.hpp>
 #include <fcppt/signal/object.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 #include <boost/asio/io_service.hpp>
 #include <boost/asio/ip/tcp.hpp>
@@ -28,7 +28,7 @@ namespace detail
 {
 class client_impl
 {
-SGE_NONCOPYABLE(client_impl)
+FCPPT_NONCOPYABLE(client_impl)
 public:
 	client_impl();
 	void connect(

@@ -18,7 +18,7 @@
 #include <sge/image/loader_fwd.hpp>
 #include <fcppt/function/object_fwd.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <tr1/array>
 #include <vector>
 
@@ -28,7 +28,7 @@ namespace client
 {
 
 class logic {
-	SGE_NONCOPYABLE(logic)
+	FCPPT_NONCOPYABLE(logic)
 public:
 	logic(
 		send_callback const &,

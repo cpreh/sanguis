@@ -5,7 +5,7 @@
 #include <sge/sprite/animation/series.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <fcppt/filesystem/path.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <map>
 
 namespace sanguis
@@ -15,7 +15,7 @@ namespace load
 namespace resource
 {
 class animations {
-	SGE_NONCOPYABLE(animations)
+	FCPPT_NONCOPYABLE(animations)
 public:
 	sge::sprite::animation::series const
 	load(

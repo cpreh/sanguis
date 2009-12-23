@@ -7,7 +7,7 @@
 #include <sge/gui/point.hpp>
 #include <sge/gui/dim.hpp>
 #include <fcppt/math/vector/basic_decl.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <map>
 
 namespace sanguis
@@ -18,7 +18,7 @@ namespace menu
 {
 class mover
 {
-SGE_NONCOPYABLE(mover)
+FCPPT_NONCOPYABLE(mover)
 public:
 	mover(
 		sge::gui::manager &,

@@ -8,7 +8,7 @@
 #include <fcppt/signal/scoped_connection.hpp>
 #include <sge/input/key_pair_fwd.hpp>
 #include <fcppt/function/object.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -16,7 +16,7 @@ namespace client
 {
 class screenshot
 {
-	SGE_NONCOPYABLE(screenshot)
+	FCPPT_NONCOPYABLE(screenshot)
 public:
 	screenshot(
 		sge::renderer::device_ptr,

@@ -3,7 +3,7 @@
 
 #include "../data_type.hpp"
 #include <fcppt/container/raw_vector_decl.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -14,7 +14,7 @@ namespace detail
 
 class output_buffer
 {
-	SGE_NONCOPYABLE(output_buffer)
+	FCPPT_NONCOPYABLE(output_buffer)
 public:
 	output_buffer();
 	~output_buffer();

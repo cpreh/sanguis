@@ -7,7 +7,7 @@
 #include "../entities/insert_parameters_fwd.hpp"
 #include "../../world_id.hpp"
 #include "../../messages/auto_ptr.hpp"
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -17,7 +17,7 @@ namespace world
 {
 
 class context {
-	SGE_NONCOPYABLE(context)
+	FCPPT_NONCOPYABLE(context)
 protected:
 	context();
 public:

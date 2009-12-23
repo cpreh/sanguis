@@ -10,7 +10,7 @@
 #include <sge/audio/player_fwd.hpp>
 #include <sge/audio/file_fwd.hpp>
 #include <fcppt/filesystem/path.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <map>
 
 namespace sanguis
@@ -21,7 +21,7 @@ namespace resource
 {
 
 class sounds {
-	SGE_NONCOPYABLE(sounds)
+	FCPPT_NONCOPYABLE(sounds)
 public:
 	sge::audio::file_ptr const
 	load(

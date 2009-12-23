@@ -9,7 +9,7 @@
 #include <sge/audio/player_fwd.hpp>
 #include <sge/audio/multi_loader.hpp>
 #include <sge/audio/pool_fwd.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -17,7 +17,7 @@ namespace load
 {
 
 class context {
-	SGE_NONCOPYABLE(context)
+	FCPPT_NONCOPYABLE(context)
 public:
 	context(
 		sge::image::loader_ptr,

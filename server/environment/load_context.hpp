@@ -4,7 +4,7 @@
 #include "load_context_fwd.hpp"
 #include "../dim_type.hpp"
 #include "../string.hpp"
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -14,7 +14,7 @@ namespace environment
 {
 
 class load_context {
-	SGE_NONCOPYABLE(load_context)
+	FCPPT_NONCOPYABLE(load_context)
 protected:
 	load_context();
 public:

@@ -3,7 +3,7 @@
 
 #include "context_fwd.hpp"
 #include "dispatch_map.hpp"
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -13,7 +13,7 @@ namespace serialization
 {
 
 struct context {
-	SGE_NONCOPYABLE(context)
+	FCPPT_NONCOPYABLE(context)
 public:
 	context();
 

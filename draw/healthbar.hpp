@@ -6,7 +6,7 @@
 #include "sprite/dim.hpp"
 #include "sprite/colored/object.hpp"
 #include <sge/sprite/object_decl.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -15,7 +15,7 @@ namespace draw
 
 class healthbar
 {
-	SGE_NONCOPYABLE(healthbar)
+	FCPPT_NONCOPYABLE(healthbar)
 public:
 	explicit healthbar(
 		draw::environment const &

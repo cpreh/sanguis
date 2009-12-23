@@ -43,7 +43,7 @@
 #include <sge/renderer/texture_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <fcppt/log/object_fwd.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
 
 namespace sanguis
@@ -51,7 +51,7 @@ namespace sanguis
 namespace draw
 {
 class scene {
-	SGE_NONCOPYABLE(scene)
+	FCPPT_NONCOPYABLE(scene)
 public:
 	scene(
 		load::context const &,

@@ -31,7 +31,7 @@
 #include <fcppt/container/map_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <sge/time/timer.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 #include "../pickup_spawner.hpp"
 #include "../waves/generator.hpp"
@@ -44,7 +44,7 @@ namespace world
 {
 
 class object {
-	SGE_NONCOPYABLE(object)
+	FCPPT_NONCOPYABLE(object)
 public:
 	object(
 		context_ptr const global_context_,

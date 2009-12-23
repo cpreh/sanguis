@@ -10,7 +10,7 @@
 #include <boost/asio/io_service.hpp>
 #include <boost/asio/ip/tcp.hpp>
 #include <fcppt/signal/object.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
 #include <cstddef>
 
@@ -21,7 +21,7 @@ namespace net
 namespace detail
 {
 class server_impl {
-	SGE_NONCOPYABLE(server_impl)
+	FCPPT_NONCOPYABLE(server_impl)
 public:
 	server_impl();
 	void listen(

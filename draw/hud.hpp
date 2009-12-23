@@ -6,7 +6,7 @@
 #include "../time_type.hpp"
 #include <sge/font/object_fwd.hpp>
 #include <sge/time/frames_counter.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -14,7 +14,7 @@ namespace draw
 {
 
 class hud {
-	SGE_NONCOPYABLE(hud)
+	FCPPT_NONCOPYABLE(hud)
 public:
 	explicit hud(
 		sge::font::object &);

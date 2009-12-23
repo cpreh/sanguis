@@ -10,7 +10,7 @@
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image/loader_fwd.hpp>
 #include <fcppt/filesystem/path.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <map>
 
 namespace sanguis
@@ -21,7 +21,7 @@ namespace resource
 {
 
 class textures {
-	SGE_NONCOPYABLE(textures)
+	FCPPT_NONCOPYABLE(textures)
 public:
 	sge::texture::part_ptr const
 	load(

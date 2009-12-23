@@ -16,7 +16,7 @@
 #include "../../weapon_type.hpp"
 #include "../../entity_id.hpp"
 #include <sge/collision/world_fwd.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -26,7 +26,7 @@ namespace environment
 {
 
 class object {
-	SGE_NONCOPYABLE(object)
+	FCPPT_NONCOPYABLE(object)
 protected:
 	object();
 public:

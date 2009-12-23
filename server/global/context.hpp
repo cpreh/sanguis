@@ -27,7 +27,7 @@
 #include <fcppt/container/map_decl.hpp>
 #include <sge/collision/system_fwd.hpp>
 #include <sge/shared_ptr.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -37,7 +37,7 @@ namespace global
 {
 
 class context {
-	SGE_NONCOPYABLE(context)
+	FCPPT_NONCOPYABLE(context)
 public:
 	context(
 		unicast_callback const &,

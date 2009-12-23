@@ -4,7 +4,7 @@
 #include "world_context_fwd.hpp"
 #include "context_fwd.hpp"
 #include "../world/context.hpp"
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -17,7 +17,7 @@ class world_context
 :
 	public world::context
 {
-	SGE_NONCOPYABLE(world_context)
+	FCPPT_NONCOPYABLE(world_context)
 public:
 	explicit world_context(
 		global::context &

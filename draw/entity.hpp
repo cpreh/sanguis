@@ -12,7 +12,7 @@
 #include "../weapon_type.hpp"
 #include "../time_type.hpp"
 #include <fcppt/log/object_fwd.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -20,7 +20,7 @@ namespace draw
 {
 
 class entity {
-	SGE_NONCOPYABLE(entity)
+	FCPPT_NONCOPYABLE(entity)
 public:
 	virtual void update(time_type) = 0;
 	entity_id id() const;

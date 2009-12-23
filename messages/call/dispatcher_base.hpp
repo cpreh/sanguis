@@ -12,7 +12,7 @@ template<
 	typename Callee
 >
 class dispatcher_base {
-	SGE_NONCOPYABLE(dispatcher_base)
+	FCPPT_NONCOPYABLE(dispatcher_base)
 protected:
 	dispatcher_base()
 	{}

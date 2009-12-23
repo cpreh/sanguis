@@ -7,7 +7,7 @@
 #include "change_callback.hpp"
 #include "change_signal.hpp"
 #include <fcppt/signal/auto_connection.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -22,7 +22,7 @@ class changeable
 :
 	public base
 {
-	SGE_NONCOPYABLE(changeable)
+	FCPPT_NONCOPYABLE(changeable)
 public:
 	explicit changeable(
 		initial const &

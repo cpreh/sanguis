@@ -7,7 +7,7 @@
 
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/function/object_fwd.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 #include <sge/scoped_ptr.hpp>
 
@@ -21,7 +21,7 @@ class server_impl;
 }
 
 class server {
-	SGE_NONCOPYABLE(server)
+	FCPPT_NONCOPYABLE(server)
 public:
 	typedef void connect_fun (id_type);
 	typedef void disconnect_fun (id_type,fcppt::string const &);

@@ -22,7 +22,7 @@
 #include "../../weapon_type.hpp"
 #include <fcppt/log/object_fwd.hpp>
 #include <sge/time/resolution.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <boost/statechart/state_machine.hpp>
 
 namespace sanguis
@@ -40,7 +40,7 @@ class weapon
 			states::ready
 		> 
 {
-	SGE_NONCOPYABLE(weapon)
+	FCPPT_NONCOPYABLE(weapon)
 public:
 	weapons::range const
 	range() const;

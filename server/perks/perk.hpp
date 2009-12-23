@@ -5,7 +5,7 @@
 #include "../environment/object_ptr.hpp"
 #include "../../time_type.hpp"
 #include "../../perk_type.hpp"
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -16,7 +16,7 @@ namespace perks
 {
 
 class perk {
-	SGE_NONCOPYABLE(perk)
+	FCPPT_NONCOPYABLE(perk)
 public:
 	virtual void
 	update(

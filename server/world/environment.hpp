@@ -5,7 +5,7 @@
 #include "object_fwd.hpp"
 #include "../entities/base_fwd.hpp"
 #include "../environment/object.hpp"
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -18,7 +18,7 @@ class environment
 :
 	public server::environment::object
 {
-	SGE_NONCOPYABLE(environment)
+	FCPPT_NONCOPYABLE(environment)
 public:
 	explicit environment(
 		world::object &

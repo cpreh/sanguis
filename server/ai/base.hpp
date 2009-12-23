@@ -3,7 +3,7 @@
 
 #include "base_fwd.hpp"
 #include "../../time_type.hpp"
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -13,7 +13,7 @@ namespace ai
 {
 
 class base {
-	SGE_NONCOPYABLE(base)
+	FCPPT_NONCOPYABLE(base)
 protected:
 	base();
 public:

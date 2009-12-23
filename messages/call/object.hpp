@@ -7,7 +7,7 @@
 #include "../base_fwd.hpp"
 #include "../types/message.hpp"
 #include <sge/mpl/for_each.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <boost/ptr_container/ptr_array.hpp>
 
 namespace sanguis
@@ -22,7 +22,7 @@ template<
 	typename Callee
 >
 class object {
-	SGE_NONCOPYABLE(object)
+	FCPPT_NONCOPYABLE(object)
 
 	typedef typename Callee::result_type result_type;
 

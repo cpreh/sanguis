@@ -4,13 +4,13 @@
 #include "time_type.hpp"
 #include <sge/time/unit.hpp>
 #include <sge/time/fun.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
 
 class diff_clock {
-	SGE_NONCOPYABLE(diff_clock)
+	FCPPT_NONCOPYABLE(diff_clock)
 public:
 	diff_clock();
 

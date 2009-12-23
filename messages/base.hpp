@@ -5,7 +5,7 @@
 #include "types/message.hpp"
 #include <majutsu/raw_pointer.hpp>
 #include <majutsu/size_type.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -13,7 +13,7 @@ namespace messages
 {
 
 class base {
-	SGE_NONCOPYABLE(base)
+	FCPPT_NONCOPYABLE(base)
 protected:
 	base();
 public:

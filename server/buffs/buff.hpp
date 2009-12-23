@@ -4,7 +4,7 @@
 #include "base_hook.hpp"
 #include "../entities/base_fwd.hpp"
 #include "../../time_type.hpp"
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -17,7 +17,7 @@ class buff
 :
 	public base_hook
 {
-	SGE_NONCOPYABLE(buff)
+	FCPPT_NONCOPYABLE(buff)
 public:
 	virtual void
 	update(

@@ -6,7 +6,7 @@
 #include "auto_ptr.hpp"
 #include "../entities/with_buffs_fwd.hpp"
 #include "../../entity_id.hpp"
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -16,7 +16,7 @@ namespace buffs
 {
 
 class provider {
-	SGE_NONCOPYABLE(provider)
+	FCPPT_NONCOPYABLE(provider)
 public:
 	provider();
 

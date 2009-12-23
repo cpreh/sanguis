@@ -8,7 +8,7 @@
 #include <sge/collision/shapes/container.hpp>
 #include <sge/collision/world_fwd.hpp>
 #include <sge/collision/body_fwd.hpp>
-#include <sge/noncopyable.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <boost/logic/tribool_fwd.hpp>
 
 namespace sanguis
@@ -19,7 +19,7 @@ namespace collision
 {
 
 class base {
-	SGE_NONCOPYABLE(base)
+	FCPPT_NONCOPYABLE(base)
 protected:
 	base();
 
