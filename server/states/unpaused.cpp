@@ -16,8 +16,8 @@
 #include <sge/math/vector/is_null.hpp>
 #include <sge/container/map_impl.hpp>
 #include <sge/collision/world.hpp>
-#include <sge/log/headers.hpp>
-#include <sge/log/parameters/inherited.hpp>
+#include <fcppt/log/headers.hpp>
+#include <fcppt/log/parameters/inherited.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/time/second_f.hpp>
 #include <sge/format.hpp>
@@ -166,7 +166,7 @@ sanguis::server::states::unpaused::operator()(
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_ 
+		fcppt::log::_ 
 			<< FCPPT_TEXT("received superfluous unpause!")
 	);
 
@@ -244,11 +244,11 @@ sanguis::server::states::unpaused::react(
 	);
 }
 
-sge::log::object &
+fcppt::log::object &
 sanguis::server::states::unpaused::log()
 {
-	static sge::log::object log_(
-		sge::log::parameters::inherited(
+	static fcppt::log::object log_(
+		fcppt::log::parameters::inherited(
 			server::log(),
 			FCPPT_TEXT("unpaused")
 		)

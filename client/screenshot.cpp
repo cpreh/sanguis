@@ -11,7 +11,7 @@
 #include <sge/input/key_code.hpp>
 #include <sge/input/key_pair.hpp>
 #include <sge/input/system.hpp>
-#include <sge/log/headers.hpp>
+#include <fcppt/log/headers.hpp>
 #include <fcppt/text.hpp>
 #include <tr1/functional>
 
@@ -58,7 +58,7 @@ void sanguis::client::screenshot::process()
 
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_
+		fcppt::log::_
 			<< FCPPT_TEXT("writing screenshot: ")
 			<< (dir/p)
 	);

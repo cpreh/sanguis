@@ -6,7 +6,7 @@
 #undef max
 // asio brings in window.h's max macro :(
 #include <sge/container/raw_vector_impl.hpp>
-#include <sge/log/headers.hpp>
+#include <fcppt/log/headers.hpp>
 #include <fcppt/text.hpp>
 #include <sge/iconv.hpp>
 #include <fcppt/lexical_cast.hpp>
@@ -41,7 +41,7 @@ void sanguis::net::detail::client_impl::connect(
 {
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_
+		fcppt::log::_
 			<< FCPPT_TEXT("client: resolving hostname ")
 			<< sge::iconv(s) << FCPPT_TEXT(" on port")
 			 << port
@@ -153,7 +153,7 @@ void sanguis::net::detail::client_impl::resolve_handler(
 
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_ << FCPPT_TEXT("client: resolved domain, trying to connect"));
+		fcppt::log::_ << FCPPT_TEXT("client: resolved domain, trying to connect"));
 	
 	boost::asio::ip::tcp::endpoint endpoint = *i;
 	socket_.async_connect(
@@ -187,7 +187,7 @@ void sanguis::net::detail::client_impl::handle_error(
 		
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_
+		fcppt::log::_
 			<< FCPPT_TEXT("client: disconnected (")
 			<< sge::iconv(e.message()) 
 			<< FCPPT_TEXT(")"));
@@ -215,7 +215,7 @@ void sanguis::net::detail::client_impl::read_handler(
 
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_
+		fcppt::log::_
 			<< FCPPT_TEXT("client: read ")
 			<< bytes
 			<< FCPPT_TEXT(" bytes.")
@@ -257,7 +257,7 @@ void sanguis::net::detail::client_impl::write_handler(
 
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_
+		fcppt::log::_
 			<< FCPPT_TEXT("client: wrote ")
 			<< bytes 
 			<< FCPPT_TEXT(" bytes"));
@@ -310,7 +310,7 @@ void sanguis::net::detail::client_impl::connect_handler(
 
 		SGE_LOG_DEBUG(
 			log(),
-			sge::log::_ << FCPPT_TEXT("client: resolving next endpoint"));
+			fcppt::log::_ << FCPPT_TEXT("client: resolving next endpoint"));
 		
 		boost::asio::ip::tcp::endpoint endpoint = *i;
 		socket_.async_connect(
@@ -328,7 +328,7 @@ void sanguis::net::detail::client_impl::connect_handler(
 
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_ << FCPPT_TEXT("client: connected"));
+		fcppt::log::_ << FCPPT_TEXT("client: connected"));
 
 	// first connect to true, _then_ call signal
 	connected_ = true;

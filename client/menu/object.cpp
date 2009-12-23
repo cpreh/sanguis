@@ -20,9 +20,9 @@
 #include <sge/renderer/device.hpp>
 #include <sge/assign/make_container.hpp>
 #include <sge/systems/instance.hpp>
-#include <sge/log/parameters/inherited.hpp>
-#include <sge/log/object.hpp>
-#include <sge/log/headers.hpp>
+#include <fcppt/log/parameters/inherited.hpp>
+#include <fcppt/log/object.hpp>
+#include <fcppt/log/headers.hpp>
 #include <fcppt/text.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <tr1/functional>
@@ -30,8 +30,8 @@
 namespace
 {
 
-sge::log::object mylogger(
-	sge::log::parameters::inherited(
+fcppt::log::object mylogger(
+	fcppt::log::parameters::inherited(
 		sanguis::client::log(),
 		FCPPT_TEXT("menu: object")
 	)
@@ -247,7 +247,7 @@ void sanguis::client::menu::object::connection_error(
 {
 	SGE_LOG_DEBUG(
 		mylogger,
-		sge::log::_
+		fcppt::log::_
 			<< FCPPT_TEXT("got conection error: (")
 			<< message 
 			<< FCPPT_TEXT(")"));
@@ -284,7 +284,7 @@ void sanguis::client::menu::object::connect(
 {
 	SGE_LOG_DEBUG(
 		mylogger,
-		sge::log::_
+		fcppt::log::_
 			<< FCPPT_TEXT("connecting to ")
 			<< host 
 			<< FCPPT_TEXT(" on port ")

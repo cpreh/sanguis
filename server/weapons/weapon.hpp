@@ -20,7 +20,7 @@
 #include "../../time_type.hpp"
 #include "../../messages/base.hpp"
 #include "../../weapon_type.hpp"
-#include <sge/log/object_fwd.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/noncopyable.hpp>
 #include <boost/statechart/state_machine.hpp>
@@ -148,7 +148,7 @@ private:
 		entities::with_weapon &owner
 	);
 
-	static sge::log::object &
+	static fcppt::log::object &
 	log();
 
 	weapon_type::type const type_;

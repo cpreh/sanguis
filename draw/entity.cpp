@@ -1,9 +1,9 @@
 #include "entity.hpp"
 #include "log.hpp"
 #include "environment.hpp"
-#include <sge/log/parameters/inherited.hpp>
-#include <sge/log/headers.hpp>
-#include <sge/log/object.hpp>
+#include <fcppt/log/parameters/inherited.hpp>
+#include <fcppt/log/headers.hpp>
+#include <fcppt/log/object.hpp>
 #include <fcppt/text.hpp>
 #include <sge/time/second_f.hpp>
 #include <sge/time/resolution.hpp>
@@ -41,84 +41,84 @@ void sanguis::draw::entity::orientation(
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_ << FCPPT_TEXT("Invalid orientation call!"));
+		fcppt::log::_ << FCPPT_TEXT("Invalid orientation call!"));
 }
 
 void sanguis::draw::entity::speed(vector2 const &)
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_ << FCPPT_TEXT("Invalid speed call!"));
+		fcppt::log::_ << FCPPT_TEXT("Invalid speed call!"));
 }
 
 void sanguis::draw::entity::pos(sprite::point const &)
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_ << FCPPT_TEXT("Invalid pos call!"));
+		fcppt::log::_ << FCPPT_TEXT("Invalid pos call!"));
 }
 
 void sanguis::draw::entity::dim(sprite::dim const &)
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_ << FCPPT_TEXT("Invalid dim call!"));
+		fcppt::log::_ << FCPPT_TEXT("Invalid dim call!"));
 }
 
 void sanguis::draw::entity::visible(bool)
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_ << FCPPT_TEXT("Invalid visible call!"));
+		fcppt::log::_ << FCPPT_TEXT("Invalid visible call!"));
 }
 
 void sanguis::draw::entity::health(funit)
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_ << FCPPT_TEXT("Invalid health call!"));
+		fcppt::log::_ << FCPPT_TEXT("Invalid health call!"));
 }
 
 void sanguis::draw::entity::max_health(funit)
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_ << FCPPT_TEXT("Invalid max_health call!"));
+		fcppt::log::_ << FCPPT_TEXT("Invalid max_health call!"));
 }
 
 void sanguis::draw::entity::weapon(weapon_type::type)
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_ << FCPPT_TEXT("got a weapon message that can't have a weapon!"));
+		fcppt::log::_ << FCPPT_TEXT("got a weapon message that can't have a weapon!"));
 }
 
 void sanguis::draw::entity::start_attacking()
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_ << FCPPT_TEXT("got a start attacking message!"));
+		fcppt::log::_ << FCPPT_TEXT("got a start attacking message!"));
 }
 
 void sanguis::draw::entity::stop_attacking()
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_ << FCPPT_TEXT("got a stop attacking message!"));
+		fcppt::log::_ << FCPPT_TEXT("got a stop attacking message!"));
 }
 
 void sanguis::draw::entity::start_reloading()
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_ << FCPPT_TEXT("got a start reloading message!"));
+		fcppt::log::_ << FCPPT_TEXT("got a start reloading message!"));
 }
 
 void sanguis::draw::entity::stop_reloading()
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_ << FCPPT_TEXT("got a stop reloading message!"));
+		fcppt::log::_ << FCPPT_TEXT("got a stop reloading message!"));
 }
 
 void
@@ -128,7 +128,7 @@ sanguis::draw::entity::transfer(
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_ << FCPPT_TEXT("Invalid transfer!"));
+		fcppt::log::_ << FCPPT_TEXT("Invalid transfer!"));
 }
 
 sanguis::draw::entity::~entity()
@@ -148,7 +148,7 @@ sanguis::draw::entity::speed() const
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_
+		fcppt::log::_
 			<< FCPPT_TEXT("Invalid speed getter!"));
 	return vector2::null();
 }
@@ -158,7 +158,7 @@ sanguis::draw::entity::orientation() const
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_
+		fcppt::log::_
 			<< FCPPT_TEXT("Invalid orientation getter!"));
 	return static_cast<funit>(0);
 }
@@ -172,11 +172,11 @@ sanguis::draw::entity::environment() const
 void sanguis::draw::entity::on_decay()
 {}
 
-sge::log::object &
+fcppt::log::object &
 sanguis::draw::entity::log()
 {
-	static sge::log::object log_(
-		sge::log::parameters::inherited(
+	static fcppt::log::object log_(
+		fcppt::log::parameters::inherited(
 			draw::log(),
 			FCPPT_TEXT("entity")
 		)

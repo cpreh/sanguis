@@ -24,7 +24,7 @@
 #include <sge/math/box/contains.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/make_shared_ptr.hpp>
-#include <sge/log/headers.hpp>
+#include <fcppt/log/headers.hpp>
 #include <sge/exception.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/lexical_cast.hpp>
@@ -88,7 +88,7 @@ load_delay(
 	
 		SGE_LOG_ERROR(
 			sanguis::load::log(),
-			sge::log::_
+			fcppt::log::_
 				<< FCPPT_TEXT("delay not in header but not in specified in leaf TODO")
 				<< FCPPT_TEXT(" either!")
 		);

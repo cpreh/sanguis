@@ -9,9 +9,9 @@
 #include "../load/context.hpp"
 #include "../client/id_dont_care.hpp"
 #include "../exception.hpp"
-#include <sge/log/parameters/inherited.hpp>
-#include <sge/log/headers.hpp>
-#include <sge/log/object.hpp>
+#include <fcppt/log/parameters/inherited.hpp>
+#include <fcppt/log/headers.hpp>
+#include <fcppt/log/object.hpp>
 #include <sge/math/vector/is_null.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
@@ -204,7 +204,7 @@ void sanguis::draw::model::start_attacking()
 	if(attacking)
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_ << FCPPT_TEXT("start_attacking(): already attacking!"));
+			fcppt::log::_ << FCPPT_TEXT("start_attacking(): already attacking!"));
 	attacking = true;
 
 	change_animation();
@@ -215,7 +215,7 @@ void sanguis::draw::model::stop_attacking()
 	if(!attacking)
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_ << FCPPT_TEXT("stop_attacking(): already not attacking!"));
+			fcppt::log::_ << FCPPT_TEXT("stop_attacking(): already not attacking!"));
 	attacking = false;
 
 	change_animation();
@@ -226,7 +226,7 @@ void sanguis::draw::model::start_reloading()
 	if(reloading)
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_ << FCPPT_TEXT("start_reloading(): already reloading!"));
+			fcppt::log::_ << FCPPT_TEXT("start_reloading(): already reloading!"));
 	reloading = true;
 
 	change_animation();
@@ -237,7 +237,7 @@ void sanguis::draw::model::stop_reloading()
 	if(!reloading)
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_ << FCPPT_TEXT("stop_reloading(): already not reloading!"));
+			fcppt::log::_ << FCPPT_TEXT("stop_reloading(): already not reloading!"));
 	reloading = false;
 
 	change_animation();
@@ -316,11 +316,11 @@ bool sanguis::draw::model::animations_ended() const
 	return true;
 }
 
-sge::log::object &
+fcppt::log::object &
 sanguis::draw::model::log()
 {
-	static sge::log::object log_(
-		sge::log::parameters::inherited(
+	static fcppt::log::object log_(
+		fcppt::log::parameters::inherited(
 			draw::log(),
 			FCPPT_TEXT("model")
 		)

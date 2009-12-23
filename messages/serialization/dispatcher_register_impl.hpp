@@ -6,7 +6,7 @@
 #include "dispatcher.hpp"
 #include "../../exception.hpp"
 #include "../../log.hpp"
-#include <sge/log/headers.hpp>
+#include <fcppt/log/headers.hpp>
 #include <sge/auto_ptr.hpp>
 #include <sge/format.hpp>
 #include <fcppt/text.hpp>
@@ -48,7 +48,7 @@ sanguis::messages::serialization::dispatcher_register<T>::dispatcher_register(
 
 		SGE_LOG_FATAL(
 			log(),
-			sge::log::_
+			fcppt::log::_
 				<< error
 		);
 

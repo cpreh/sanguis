@@ -12,7 +12,7 @@
 #include "../../messages/player_choose_perk.hpp"
 #include "../../messages/base_fwd.hpp"
 #include "../../net/id_type.hpp"
-#include <sge/log/object_fwd.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <sge/scoped_ptr.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/result.hpp>
@@ -98,7 +98,7 @@ private:
 		messages::base const &
 	);
 
-	static sge::log::object
+	static fcppt::log::object
 	&log();
 
 	sge::scoped_ptr<

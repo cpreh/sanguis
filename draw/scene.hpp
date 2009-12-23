@@ -42,7 +42,7 @@
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/renderer/texture_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
-#include <sge/log/object_fwd.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <sge/noncopyable.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
 
@@ -136,7 +136,7 @@ private:
 		messages::base const &
 	);
 
-	static sge::log::object &
+	static fcppt::log::object &
 	log();
 
 	sge::renderer::device_ptr const rend;

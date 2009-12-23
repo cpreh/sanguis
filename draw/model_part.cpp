@@ -14,7 +14,7 @@
 #include <sge/math/vector/dim.hpp>
 #include <sge/math/dim/structure_cast.hpp>
 #include <sge/sprite/animation/texture_impl.hpp>
-#include <sge/log/headers.hpp>
+#include <fcppt/log/headers.hpp>
 #include <sge/math/compare.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/time/time.hpp>

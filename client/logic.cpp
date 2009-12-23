@@ -24,7 +24,7 @@
 #include <sge/time/millisecond.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/console/object.hpp>
-#include <sge/log/headers.hpp>
+#include <fcppt/log/headers.hpp>
 #include <sge/gui/unit.hpp>
 #include <sge/assign/make_container.hpp>
 #include <fcppt/text.hpp>
@@ -181,7 +181,7 @@ sanguis::client::logic::give_weapon(
 	{
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_
+			fcppt::log::_
 				<< FCPPT_TEXT("Got invalid give_weapon message!")
 		);
 

@@ -10,7 +10,7 @@
 #include <sge/parse/json/find_member.hpp>
 #include <fcppt/filesystem/exists.hpp>
 #include <sge/algorithm/find_exn.hpp>
-#include <sge/log/headers.hpp>
+#include <fcppt/log/headers.hpp>
 #include <sge/string.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
@@ -151,7 +151,7 @@ sanguis::load::model::weapon_category::weapon_category(
 		)
 			SGE_LOG_WARNING(
 				log(),
-				sge::log::_
+				fcppt::log::_
 					<< FCPPT_TEXT("Double insert in weapon_category!")
 			);
 	}

@@ -14,9 +14,9 @@
 #include <sge/time/resolution.hpp>
 #include <sge/math/circle/basic_impl.hpp>
 #include <sge/math/vector/basic_impl.hpp>
-#include <sge/log/parameters/inherited.hpp>
-#include <sge/log/object.hpp>
-#include <sge/log/headers.hpp>
+#include <fcppt/log/parameters/inherited.hpp>
+#include <fcppt/log/object.hpp>
+#include <fcppt/log/headers.hpp>
 #include <fcppt/text.hpp>
 #include <ostream>
 
@@ -162,7 +162,7 @@ sanguis::server::weapons::weapon::weapon(
 	if(ncast_point_ > nbase_cooldown_)
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_
+			fcppt::log::_
 				<< FCPPT_TEXT("A weapon's cast point interval is bigger than its cooldown!")
 	);
 
@@ -258,11 +258,11 @@ sanguis::server::weapons::weapon::on_castpoint(
 )
 {}
 
-sge::log::object &
+fcppt::log::object &
 sanguis::server::weapons::weapon::log()
 {
-	static sge::log::object log_(
-		sge::log::parameters::inherited(
+	static fcppt::log::object log_(
+		fcppt::log::parameters::inherited(
 			weapons::log(),
 			FCPPT_TEXT("weapon")
 		)

@@ -8,7 +8,7 @@
 #include <sge/audio/pool.hpp>
 #include <sge/audio/multi_loader.hpp>
 #include <sge/audio/bad_sound_alloc.hpp>
-#include <sge/log/headers.hpp>
+#include <fcppt/log/headers.hpp>
 #include <fcppt/text.hpp>
 #include <tr1/functional>
 
@@ -42,7 +42,7 @@ make_sound(
 	{
 		SGE_LOG_WARNING(
 			sanguis::load::log(),
-			sge::log::_
+			fcppt::log::_
 				<< FCPPT_TEXT("Allocation of a sound failed! ")
 				<< e.string()
 		);

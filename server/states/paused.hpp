@@ -6,7 +6,7 @@
 #include "../../messages/player_pause.hpp"
 #include "../../messages/base_fwd.hpp"
 #include "../../net/id_type.hpp"
-#include <sge/log/object_fwd.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <boost/mpl/list.hpp>
 #include <boost/statechart/simple_state.hpp>
 #include <boost/statechart/result.hpp>
@@ -46,7 +46,7 @@ private:
 		net::id_type,
 		messages::base const &);
 
-	static sge::log::object &
+	static fcppt::log::object &
 	log();
 };
 

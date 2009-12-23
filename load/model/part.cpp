@@ -8,7 +8,7 @@
 #include <sge/parse/json/find_member.hpp>
 #include <sge/parse/json/get.hpp>
 #include <sge/algorithm/find_exn.hpp>
-#include <sge/log/headers.hpp>
+#include <fcppt/log/headers.hpp>
 #include <sge/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <sge/string.hpp>
@@ -135,7 +135,7 @@ sanguis::load::model::part::part(
 		)
 			SGE_LOG_WARNING(
 				log(),
-				sge::log::_
+				fcppt::log::_
 					<< FCPPT_TEXT("Double insert in part!")
 			);
 	}

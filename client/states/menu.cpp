@@ -10,8 +10,8 @@
 #include "../menu_event.hpp"
 #include "../log.hpp"
 #include <sge/function/object.hpp>
-#include <sge/log/headers.hpp>
-#include <sge/log/parameters/inherited.hpp>
+#include <fcppt/log/headers.hpp>
+#include <fcppt/log/parameters/inherited.hpp>
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/state/trampoline.hpp>
@@ -155,7 +155,7 @@ sanguis::client::states::menu::operator()(
 {
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_
+		fcppt::log::_
 			<< FCPPT_TEXT("received id"));
 	post_event(
 		message_event(
@@ -173,13 +173,13 @@ sanguis::client::states::menu::operator()(
 		case connect_state::unpaused:
 			SGE_LOG_DEBUG(
 				log(),
-				sge::log::_
+				fcppt::log::_
 					<< FCPPT_TEXT("switching to state \"unpaused\""));
 			return transit<unpaused>();
 		case connect_state::paused:
 			SGE_LOG_DEBUG(
 				log(),
-				sge::log::_
+				fcppt::log::_
 					<< FCPPT_TEXT("switching to state \"paused\""));
 			return transit<paused>();
 	}
@@ -187,11 +187,11 @@ sanguis::client::states::menu::operator()(
 		FCPPT_TEXT("invalid followup state!"));
 }
 
-sge::log::object &
+fcppt::log::object &
 sanguis::client::states::menu::log()
 {
-	static sge::log::object log_(
-		sge::log::parameters::inherited(
+	static fcppt::log::object log_(
+		fcppt::log::parameters::inherited(
 			client::log(),
 			FCPPT_TEXT("states::menu")
 		)

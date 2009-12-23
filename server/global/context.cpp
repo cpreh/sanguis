@@ -14,9 +14,9 @@
 #include "../cheat.hpp"
 #include "../send_available_perks.hpp"
 #include "../log.hpp"
-#include <sge/log/parameters/inherited.hpp>
-#include <sge/log/headers.hpp>
-#include <sge/log/object.hpp>
+#include <fcppt/log/parameters/inherited.hpp>
+#include <fcppt/log/headers.hpp>
+#include <fcppt/log/object.hpp>
 #include <sge/container/map_impl.hpp>
 #include <sge/math/vector/is_null.hpp>
 #include <sge/math/vector/to_angle.hpp>
@@ -265,7 +265,7 @@ sanguis::server::global::context::player_choose_perk(
 	{
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_
+			fcppt::log::_
 				<< FCPPT_TEXT("Player with id ")
 				<< player_id_
 				<< FCPPT_TEXT(" tried to take an invalid perk")
@@ -363,11 +363,11 @@ sanguis::server::global::context::world(
 	).first->second;
 }
 
-sge::log::object &
+fcppt::log::object &
 sanguis::server::global::context::log()
 {
-	static sge::log::object log_(
-		sge::log::parameters::inherited(
+	static fcppt::log::object log_(
+		fcppt::log::parameters::inherited(
 			server::log(),
 			FCPPT_TEXT("global::context")
 		)

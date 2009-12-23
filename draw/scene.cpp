@@ -29,9 +29,9 @@
 #include <sge/format.hpp>
 #include <sge/math/dim/structure_cast.hpp>
 #include <sge/math/vector/structure_cast.hpp>
-#include <sge/log/parameters/inherited.hpp>
-#include <sge/log/headers.hpp>
-#include <sge/log/object.hpp>
+#include <fcppt/log/parameters/inherited.hpp>
+#include <fcppt/log/headers.hpp>
+#include <fcppt/log/object.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/caps.hpp>
 #include <sge/renderer/scoped_block.hpp>
@@ -448,7 +448,7 @@ void sanguis::draw::scene::operator()(
 	{
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_ << FCPPT_TEXT("Invalid change_weapon message: Value out of range!"));
+			fcppt::log::_ << FCPPT_TEXT("Invalid change_weapon message: Value out of range!"));
 		return;
 	}
 	
@@ -756,16 +756,16 @@ sanguis::draw::scene::process_default_msg(
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_
+		fcppt::log::_
 			<< FCPPT_TEXT("Invalid message event in scene: ")
 			<< sge::iconv(typeid(m).name()));
 }
 
-sge::log::object &
+fcppt::log::object &
 sanguis::draw::scene::log()
 {
-	static sge::log::object log_(
-		sge::log::parameters::inherited(
+	static fcppt::log::object log_(
+		fcppt::log::parameters::inherited(
 			draw::log(),
 			FCPPT_TEXT("scene")
 		)

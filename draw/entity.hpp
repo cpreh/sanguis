@@ -11,7 +11,7 @@
 #include "../entity_id.hpp"
 #include "../weapon_type.hpp"
 #include "../time_type.hpp"
-#include <sge/log/object_fwd.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <sge/noncopyable.hpp>
 
 namespace sanguis
@@ -66,7 +66,7 @@ protected:
 private:
 	virtual void on_decay();
 
-	static sge::log::object &
+	static fcppt::log::object &
 	log();
 
 	draw::environment const &env_;

@@ -4,7 +4,7 @@
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/algorithm/find_exn.hpp>
-#include <sge/log/headers.hpp>
+#include <fcppt/log/headers.hpp>
 #include <fcppt/text.hpp>
 #include <sge/string.hpp>
 #include <boost/foreach.hpp>
@@ -96,7 +96,7 @@ sanguis::load::model::animation_sound::animation_sound(
 		)
 			SGE_LOG_WARNING(
 				log(),
-				sge::log::_
+				fcppt::log::_
 					<< FCPPT_TEXT("Double insert in sounds!")
 			);
 	}

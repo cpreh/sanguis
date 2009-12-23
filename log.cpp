@@ -1,15 +1,15 @@
 #include "log.hpp"
-#include <sge/log/object.hpp>
-#include <sge/log/parameters/root.hpp>
-#include <sge/log/parameters/all.hpp>
+#include <fcppt/log/object.hpp>
+#include <fcppt/log/parameters/root.hpp>
+#include <fcppt/log/parameters/all.hpp>
 #include <sge/cerr.hpp>
 #include <fcppt/text.hpp>
 
-sge::log::object &
+fcppt::log::object &
 sanguis::log()
 {
-	static sge::log::object log_(
-		sge::log::parameters::root(
+	static fcppt::log::object log_(
+		fcppt::log::parameters::root(
 			sge::cerr
 		)
 		.prefix(
@@ -19,7 +19,7 @@ sanguis::log()
 			true
 		)
 		.level(
-			sge::log::level::warning
+			fcppt::log::level::warning
 		)
 		.create()
 	);

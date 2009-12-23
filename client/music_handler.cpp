@@ -6,7 +6,7 @@
 #include <sge/console/gfx.hpp>
 #include <sge/console/object.hpp>
 #include <fcppt/filesystem/directory_iterator.hpp>
-#include <sge/log/headers.hpp>
+#include <fcppt/log/headers.hpp>
 #include <sge/exception.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/lexical_cast.hpp>
@@ -115,7 +115,7 @@ sanguis::client::music_handler::load_random() const
 		{
 			SGE_LOG_WARNING(
 				log(),
-				sge::log::_
+				fcppt::log::_
 					<< FCPPT_TEXT("Music file \"")
 					<< it->path().string()
 					<< FCPPT_TEXT("\" failed to load: \"")

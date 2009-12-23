@@ -5,7 +5,7 @@
 #include "../../exception.hpp"
 #include <sge/time/millisecond.hpp>
 #include <sge/time/resolution.hpp>
-#include <sge/log/headers.hpp>
+#include <fcppt/log/headers.hpp>
 #include <fcppt/filesystem/exists.hpp>
 #include <fcppt/filesystem/is_directory.hpp>
 #include <fcppt/filesystem/is_regular.hpp>
@@ -159,7 +159,7 @@ sanguis::load::resource::animations::load_without_frames_file(
 	if(fcppt::filesystem::next_file(first_file) != sge::filesystem::directory_iterator())
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_
+			fcppt::log::_
 				<< FCPPT_TEXT("No frames file found in \"")
 				<< dir
 				<< FCPPT_TEXT("\" although there is more than one file!")

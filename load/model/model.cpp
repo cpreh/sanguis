@@ -10,7 +10,7 @@
 #include <fcppt/filesystem/is_directory.hpp>
 #include <fcppt/filesystem/stem.hpp>
 #include <sge/math/dim/basic_impl.hpp>
-#include <sge/log/headers.hpp>
+#include <fcppt/log/headers.hpp>
 #include <sge/parse/json/parse_file.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/array.hpp>
@@ -162,7 +162,7 @@ sanguis::load::model::model::model(
 {
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_
+		fcppt::log::_
 			<< FCPPT_TEXT("Entering ")
 			<< path.string()
 	);
@@ -177,7 +177,7 @@ sanguis::load::model::model::model(
 	{
 		SGE_LOG_ERROR(
 			log(),
-			sge::log::_
+			fcppt::log::_
 				<< FCPPT_TEXT("model \"")
 				<< path.string()
 				<< FCPPT_TEXT("\": \"")
@@ -207,7 +207,7 @@ void sanguis::load::model::model::construct(
 	{
 		SGE_LOG_WARNING(
 			sanguis::load::log(),
-			sge::log::_
+			fcppt::log::_
 				<< file 
 				<< FCPPT_TEXT(" contains errors!")
 			);
@@ -294,7 +294,7 @@ void sanguis::load::model::model::construct(
 		)
 			SGE_LOG_WARNING(
 				log(),
-				sge::log::_
+				fcppt::log::_
 					<< FCPPT_TEXT("Double insert in model!")
 			);
 	}

@@ -5,7 +5,7 @@
 #include "../log.hpp"
 #include "../../exception.hpp"
 #include "../../media_path.hpp"
-#include <sge/log/headers.hpp>
+#include <fcppt/log/headers.hpp>
 #include <sge/texture/add_image.hpp>
 #include <sge/texture/default_creator_impl.hpp>
 #include <sge/texture/no_fragmented.hpp>
@@ -174,7 +174,7 @@ sanguis::load::resource::textures::textures(
 			{
 				SGE_LOG_WARNING(
 					sanguis::load::log(),
-					sge::log::_
+					fcppt::log::_
 						<< FCPPT_TEXT("Error in .id file \")")
 						<< p.string()
 						<< FCPPT_TEXT("\" in line ")

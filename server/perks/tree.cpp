@@ -3,7 +3,7 @@
 #include "../../exception.hpp"
 #include <sge/container/tree_impl.hpp>
 #include <sge/container/traversal.hpp>
-#include <sge/log/headers.hpp>
+#include <fcppt/log/headers.hpp>
 #include <fcppt/text.hpp>
 
 namespace
@@ -106,7 +106,7 @@ sanguis::server::perks::tree::choosable(
 	{
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_
+			fcppt::log::_
 				<< FCPPT_TEXT("Perk not found in tree")
 		);
 		return false;

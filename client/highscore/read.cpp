@@ -6,7 +6,7 @@
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/find_member.hpp>
 #include <sge/assign/make_container.hpp>
-#include <sge/log/headers.hpp>
+#include <fcppt/log/headers.hpp>
 #include <sge/string.hpp>
 #include <sge/char_type.hpp>
 #include <fcppt/text.hpp>
@@ -46,7 +46,7 @@ sanguis::client::highscore::read(
 		{
 			SGE_LOG_ERROR(
 				log(),
-				sge::log::_
+				fcppt::log::_
 					<< FCPPT_TEXT("Errors in the highscore file detected!")
 			);
 

@@ -7,9 +7,9 @@
 #include "../../messages/unpause.hpp"
 #include "../../messages/create.hpp"
 #include "../../messages/base.hpp"
-#include <sge/log/parameters/inherited.hpp>
-#include <sge/log/headers.hpp>
-#include <sge/log/object.hpp>
+#include <fcppt/log/parameters/inherited.hpp>
+#include <fcppt/log/headers.hpp>
+#include <fcppt/log/object.hpp>
 #include <sge/iconv.hpp>
 #include <fcppt/text.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -81,7 +81,7 @@ sanguis::server::states::paused::operator()(
 {
 	SGE_LOG_WARNING(
 		log(),
-		sge::log::_
+		fcppt::log::_
 			<< FCPPT_TEXT("got superfluous pause"));;
 	return discard_event();
 }
@@ -94,11 +94,11 @@ sanguis::server::states::paused::handle_default_msg(
 	return forward_event();
 }
 
-sge::log::object &
+fcppt::log::object &
 sanguis::server::states::paused::log()
 {
-	static sge::log::object log_(
-		sge::log::parameters::inherited(
+	static fcppt::log::object log_(
+		fcppt::log::parameters::inherited(
 			server::log(),
 			FCPPT_TEXT("paused")
 		)

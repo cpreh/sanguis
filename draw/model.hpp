@@ -11,7 +11,7 @@
 #include "sprite/rotation_type.hpp"
 #include "../entity_id.hpp"
 #include "../animation_type.hpp"
-#include <sge/log/object_fwd.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <sge/string.hpp>
 #include <sge/scoped_ptr.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
@@ -104,7 +104,7 @@ private:
 	void update_healthbar();
 	bool animations_ended() const;
 
-	static sge::log::object &
+	static fcppt::log::object &
 	log();
 
 	bool            attacking,
