@@ -4,8 +4,8 @@
 #include "float.hpp"
 #include "../serialization/endianness.hpp"
 #include "../types/space_unit.hpp"
-#include <sge/endianness/to_host.hpp>
-#include <sge/endianness/from_host.hpp>
+#include <fcppt/endianness/to_host.hpp>
+#include <fcppt/endianness/from_host.hpp>
 #include <majutsu/concepts/dynamic_memory/tag.hpp>
 #include <majutsu/concepts/static_size.hpp>
 #include <majutsu/fundamental.hpp>
@@ -56,7 +56,7 @@ place(
 				Type
 			> const *
 		>(0),
-		sge::endianness::from_host(
+		fcppt::endianness::from_host(
 			t,
 			sanguis::messages::serialization::endianness()
 		),
@@ -77,7 +77,7 @@ make(
 )
 {
 	return
-		sge::endianness::to_host(
+		fcppt::endianness::to_host(
 			make(
 				tag_,
 				static_cast<

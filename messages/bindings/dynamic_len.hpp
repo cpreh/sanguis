@@ -3,8 +3,8 @@
 
 #include "../../truncation_check_cast.hpp"
 #include "../serialization/endianness.hpp"
-#include <sge/endianness/copy_n_from_host.hpp>
-#include <sge/endianness/copy_n_to_host.hpp>
+#include <fcppt/endianness/copy_n_from_host.hpp>
+#include <fcppt/endianness/copy_n_to_host.hpp>
 #include <majutsu/concepts/dynamic_memory/tag.hpp>
 #include <majutsu/size_type.hpp>
 #include <majutsu/raw_pointer.hpp>
@@ -99,7 +99,7 @@ place(
 		)
 	);
 
-	sge::endianness::copy_n_from_host(
+	fcppt::endianness::copy_n_from_host(
 		reinterpret_cast<
 			majutsu::const_raw_pointer
 		>(
@@ -159,7 +159,7 @@ make(
 
 	length_type my_size;
 		
-	sge::endianness::copy_n_to_host(
+	fcppt::endianness::copy_n_to_host(
 		mem,
 		sizeof(length_type),
 		reinterpret_cast<
