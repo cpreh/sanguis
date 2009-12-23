@@ -12,10 +12,10 @@ sanguis::load::model::collection::operator[](
 	model_map::const_iterator it(models.find(name));
 	if(it == models.end())
 	{
-		sge::filesystem::path const path(
+		fcppt::filesystem::path const path(
 			media_path() / name);
 		
-		if(!sge::filesystem::exists(path))
+		if(!fcppt::filesystem::exists(path))
 			throw exception(
 				SGE_TEXT("Model ")
 				+ name

@@ -3,12 +3,12 @@
 #include <sge/lexical_cast.hpp>
 #include <sge/text.hpp>
 
-sge::filesystem::path const sanguis::client::make_screenshot_path()
+fcppt::filesystem::path const sanguis::client::make_screenshot_path()
 {
 	sge::string const type = 
 		SGE_TEXT("png");
 	sge::string const filename = 
 		sge::lexical_cast<sge::string>(
 			sge::time::time())+SGE_TEXT(".")+type;
-	return sge::filesystem::path(filename);
+	return fcppt::filesystem::path(filename);
 }

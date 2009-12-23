@@ -2,7 +2,7 @@
 #include <sge/config/find_config_path.hpp>
 #include <sge/text.hpp>
 
-sge::filesystem::path const
+fcppt::filesystem::path const
 sanguis::client::config::homedir()
 {
 	return sge::config::find_config_path(

@@ -40,7 +40,7 @@ public:
 	dim() const;
 private:
 	model(
-		sge::filesystem::path const &,
+		fcppt::filesystem::path const &,
 		resource::context const &);
 	
 	void construct(
@@ -48,7 +48,7 @@ private:
 
 	friend class collection;
 
-	sge::filesystem::path const path;
+	fcppt::filesystem::path const path;
 
 	sge::renderer::dim_type cell_size;
 

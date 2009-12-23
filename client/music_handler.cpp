@@ -96,10 +96,10 @@ sanguis::client::music_handler::load_random() const
 {
 	// TODO: choose a random one!
 	for(
-		sge::filesystem::directory_iterator it(
+		fcppt::filesystem::directory_iterator it(
 			media_path() / SGE_TEXT("music")
 		);
-		it != sge::filesystem::directory_iterator();
+		it != fcppt::filesystem::directory_iterator();
 		++it
 	)
 		try

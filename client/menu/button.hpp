@@ -18,7 +18,7 @@ public:
 	button(
 		sge::gui::widgets::parent_data const &,
 		sge::image::loader_ptr,
-		sge::filesystem::path const &,
+		fcppt::filesystem::path const &,
 		sge::string const &);
 	
 	void process_invalid_area(

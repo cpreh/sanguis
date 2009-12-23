@@ -1,7 +1,7 @@
 #include "global_parameters.hpp"
 
 sanguis::load::model::global_parameters::global_parameters(
-	sge::filesystem::path const &path_,
+	fcppt::filesystem::path const &path_,
 	resource::textures const &textures_,
 	sge::renderer::dim_type const &cell_size_,
 	optional_delay const &delay_,
@@ -16,7 +16,7 @@ sanguis::load::model::global_parameters::global_parameters(
 	sounds_(sounds_)
 {}
 
-sge::filesystem::path const &
+fcppt::filesystem::path const &
 sanguis::load::model::global_parameters::path() const
 {
 	return path_;

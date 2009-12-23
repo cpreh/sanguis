@@ -12,7 +12,7 @@
 #include <tr1/functional>
 
 sanguis::load::resource::texture_context_impl::texture_context_impl(
-	sge::filesystem::path const &_path,
+	fcppt::filesystem::path const &_path,
 	sge::renderer::device_ptr const _rend,
 	sge::image::loader_ptr const _il,
 	sge::renderer::filter::texture const _filter)
@@ -94,7 +94,7 @@ sanguis::load::resource::texture_context_impl::~texture_context_impl()
 
 sanguis::load::resource::texture_context_impl::future_value const
 sanguis::load::resource::texture_context_impl::task(
-	sge::filesystem::path const &_path,
+	fcppt::filesystem::path const &_path,
 	sge::image::loader_ptr const _il
 )
 {

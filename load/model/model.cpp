@@ -154,7 +154,7 @@ sanguis::load::model::model::dim() const
 }
 
 sanguis::load::model::model::model(
-	sge::filesystem::path const &path,
+	fcppt::filesystem::path const &path,
 	resource::context const &ctx)
 :
 	path(path),
@@ -192,8 +192,8 @@ sanguis::load::model::model::model(
 void sanguis::load::model::model::construct(
 	resource::context const &ctx)
 {
-	sge::filesystem::path const file(
-		path / (sge::filesystem::stem(path) + SGE_TEXT(".json"))
+	fcppt::filesystem::path const file(
+		path / (fcppt::filesystem::stem(path) + SGE_TEXT(".json"))
 	);
 
 	sge::parse::json::object object_return;

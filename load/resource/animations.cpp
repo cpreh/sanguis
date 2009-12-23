@@ -22,7 +22,7 @@
 
 sge::sprite::animation::series const
 sanguis::load::resource::animations::load(
-	sge::filesystem::path const &dir) const
+	fcppt::filesystem::path const &dir) const
 {
 	return map_get_or_create(
 		animations_,
@@ -37,19 +37,19 @@ sanguis::load::resource::animations::load(
 
 sge::sprite::animation::series const
 sanguis::load::resource::animations::do_load(
-	sge::filesystem::path const &dir) const
+	fcppt::filesystem::path const &dir) const
 {
-	if (!sge::filesystem::exists(dir) || !sge::filesystem::is_directory(dir))
+	if (!fcppt::filesystem::exists(dir) || !sge::filesystem::is_directory(dir))
 		throw exception(
 			SGE_TEXT("directory for animation \"")
 			+ dir.string()
 			+ SGE_TEXT("\" doesn't exist")
 		);
 
-	sge::filesystem::path const framesfile = dir / SGE_TEXT("frames");
+	fcppt::filesystem::path const framesfile = dir / SGE_TEXT("frames");
 
 	// look for frames file inside directory
-	if (!sge::filesystem::exists(framesfile) || !sge::filesystem::is_regular(framesfile))
+	if (!fcppt::filesystem::exists(framesfile) || !sge::filesystem::is_regular(framesfile))
 		return load_without_frames_file(dir);
 	//
 	// and parse line by line
@@ -137,26 +137,26 @@ sanguis::load::resource::animations::do_load(
 
 sge::texture::const_part_ptr const
 sanguis::load::resource::animations::load_texture(
-	sge::filesystem::path const &p) const
+	fcppt::filesystem::path const &p) const
 {
 	return textures_.do_load_inner(p);	
 }
 
 sge::sprite::animation::series const
 sanguis::load::resource::animations::load_without_frames_file(
-	sge::filesystem::path const &dir) const
+	fcppt::filesystem::path const &dir) const
 {
-	sge::filesystem::directory_iterator const first_file(
-		sge::filesystem::first_file(
+	fcppt::filesystem::directory_iterator const first_file(
+		fcppt::filesystem::first_file(
 			dir));
 	
-	if(first_file == sge::filesystem::directory_iterator())
+	if(first_file == fcppt::filesystem::directory_iterator())
 		throw exception(dir.string() + SGE_TEXT(" is empty!"));
 	
-	sge::filesystem::path const first_path(
+	fcppt::filesystem::path const first_path(
 		*first_file);
 
-	if(sge::filesystem::next_file(first_file) != sge::filesystem::directory_iterator())
+	if(fcppt::filesystem::next_file(first_file) != sge::filesystem::directory_iterator())
 		SGE_LOG_WARNING(
 			log(),
 			sge::log::_

@@ -29,7 +29,7 @@ public:
 
 	texture_context const
 	load(
-		sge::filesystem::path const &) const;
+		fcppt::filesystem::path const &) const;
 	
 	void cleanup(
 		time_type) const;
@@ -45,11 +45,11 @@ private:
 	
 	texture_context_impl_ptr const
 	do_load_unnamed(
-		sge::filesystem::path const &) const;
+		fcppt::filesystem::path const &) const;
 
 	sge::texture::part_ptr const
 	do_load_inner(
-		sge::filesystem::path const &) const;
+		fcppt::filesystem::path const &) const;
 
 	textures(
 		sge::renderer::device_ptr,
@@ -61,7 +61,7 @@ private:
 	> texture_map;
 
 	typedef std::map<
-		sge::filesystem::path,
+		fcppt::filesystem::path,
 		texture_context_impl_ptr
 	> unnamed_texture_map;
 

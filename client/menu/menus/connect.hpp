@@ -20,8 +20,8 @@ struct connect
 {
 	connect(
 		sge::gui::widgets::parent_data const &,
-		sge::filesystem::path const &buttons_path,
-		sge::filesystem::path const &labels_path,
+		fcppt::filesystem::path const &buttons_path,
+		fcppt::filesystem::path const &labels_path,
 		sge::systems::instance const &);
 
 	sge::gui::widgets::base parent;

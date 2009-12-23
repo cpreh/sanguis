@@ -51,7 +51,7 @@ sanguis::load::resource::textures::load(
 
 sanguis::load::resource::texture_context const
 sanguis::load::resource::textures::load(
-	sge::filesystem::path const &path) const
+	fcppt::filesystem::path const &path) const
 {
 	return 
 		texture_context(
@@ -103,7 +103,7 @@ sanguis::load::resource::textures::do_load(
 
 sanguis::load::resource::texture_context_impl_ptr const
 sanguis::load::resource::textures::do_load_unnamed(
-	sge::filesystem::path const &path) const
+	fcppt::filesystem::path const &path) const
 {
 	return 
 		sge::make_shared_ptr<texture_context_impl>(
@@ -115,7 +115,7 @@ sanguis::load::resource::textures::do_load_unnamed(
 
 sge::texture::part_ptr const
 sanguis::load::resource::textures::do_load_inner(
-	sge::filesystem::path const &p) const
+	fcppt::filesystem::path const &p) const
 {
 	return sge::texture::add_image(
 		texman,
@@ -141,10 +141,10 @@ sanguis::load::resource::textures::textures(
 		il)
 {
 	// look for .tex files
-	for (sge::filesystem::directory_iterator i(sanguis::media_path()), end; i != end; ++i)
+	for (fcppt::filesystem::directory_iterator i(sanguis::media_path()), end; i != end; ++i)
 	{
-		sge::filesystem::path const &p = i->path();
-		if (!sge::filesystem::is_regular(p) || sge::filesystem::extension(p) != SGE_TEXT(".tex"))
+		fcppt::filesystem::path const &p = i->path();
+		if (!fcppt::filesystem::is_regular(p) || sge::filesystem::extension(p) != SGE_TEXT(".tex"))
 			continue;
 		
 		// and parse line by line

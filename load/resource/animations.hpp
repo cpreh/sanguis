@@ -19,22 +19,22 @@ class animations {
 public:
 	sge::sprite::animation::series const
 	load(
-		sge::filesystem::path const &
+		fcppt::filesystem::path const &
 	) const;
 private:
 	sge::sprite::animation::series const
 	do_load(
-		sge::filesystem::path const &
+		fcppt::filesystem::path const &
 	) const;
 
 	sge::texture::const_part_ptr const
 	load_texture(
-		sge::filesystem::path const &
+		fcppt::filesystem::path const &
 	) const;
 	
 	sge::sprite::animation::series const
 	load_without_frames_file(
-		sge::filesystem::path const &
+		fcppt::filesystem::path const &
 	) const;
 
 	friend class context;
@@ -43,7 +43,7 @@ private:
 		textures &);
 
 	typedef std::map<
-		sge::filesystem::path,
+		fcppt::filesystem::path,
 		sge::sprite::animation::series
 	> animation_map;
 	

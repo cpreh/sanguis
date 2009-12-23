@@ -69,7 +69,7 @@ sanguis::load::resource::sounds::load(
 
 sge::audio::file_ptr const
 sanguis::load::resource::sounds::load_uncached(
-	sge::filesystem::path const &path) const
+	fcppt::filesystem::path const &path) const
 {
 	return ml.load(
 		path
@@ -83,7 +83,7 @@ sge::audio::file_ptr const
 sanguis::load::resource::sounds::do_load(
 	sound_identifier const &name) const
 {
-	sge::filesystem::path const sound_path(
+	fcppt::filesystem::path const sound_path(
 		media_path() / SGE_TEXT("sound") / name
 	);
 

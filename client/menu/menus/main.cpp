@@ -9,7 +9,7 @@
 
 sanguis::client::menu::menus::main::main(
 	sge::gui::widgets::parent_data const &_parent,
-	sge::filesystem::path const &buttons_path,
+	fcppt::filesystem::path const &buttons_path,
 	sge::systems::instance const &sys)
 :
 	parent(

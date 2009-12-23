@@ -11,8 +11,8 @@
 
 sanguis::client::menu::menus::connect::connect(
 	sge::gui::widgets::parent_data const &_parent,
-	sge::filesystem::path const &buttons_path,
-	sge::filesystem::path const &labels_path,
+	fcppt::filesystem::path const &buttons_path,
+	fcppt::filesystem::path const &labels_path,
 	sge::systems::instance const &sys)
 :
 	parent(

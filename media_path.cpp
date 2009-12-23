@@ -5,10 +5,10 @@
 #include <sge/text.hpp>
 #include <boost/assign/list_of.hpp>
 
-sge::filesystem::path const
+fcppt::filesystem::path const
 sanguis::media_path()
 {
-	static sge::filesystem::path const ret(
+	static fcppt::filesystem::path const ret(
 		sge::config::find_path(
 			sge::config::make_files(
 				SGE_TEXT("sanguis")

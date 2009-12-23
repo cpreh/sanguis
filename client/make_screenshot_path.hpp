@@ -7,7 +7,7 @@ namespace sanguis
 {
 namespace client
 {
-sge::filesystem::path const make_screenshot_path();
+fcppt::filesystem::path const make_screenshot_path();
 }
 }
 

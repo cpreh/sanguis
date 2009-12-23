@@ -280,13 +280,13 @@ sanguis::client::perk_chooser::image_map::const_iterator const
 	sanguis::client::perk_chooser::load_from_cache(
 		perk_type::type const r)
 {
-	sge::filesystem::path const p = 
+	fcppt::filesystem::path const p = 
 		media_path()/
 		SGE_TEXT("menu")/
 		SGE_TEXT("buttons")/
 		SGE_TEXT("perks");
 
-	sge::filesystem::path const base = 
+	fcppt::filesystem::path const base = 
 		p/from_perk_type(r);
 
 	image_map::const_iterator pi = 

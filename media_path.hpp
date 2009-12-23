@@ -6,7 +6,7 @@
 namespace sanguis
 {
 
-sge::filesystem::path const
+fcppt::filesystem::path const
 media_path();
 
 }

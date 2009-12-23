@@ -14,7 +14,7 @@
 
 sanguis::client::menu::menus::highscore::highscore(
 	sge::gui::widgets::parent_data const &_parent,
-	sge::filesystem::path const &,
+	fcppt::filesystem::path const &,
 	sge::systems::instance const &)
 :
 	parent(

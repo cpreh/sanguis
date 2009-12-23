@@ -18,7 +18,7 @@ struct main
 {
 	main(
 		sge::gui::widgets::parent_data const &,
-		sge::filesystem::path const &,
+		fcppt::filesystem::path const &,
 		sge::systems::instance const &);
 
 	sge::gui::widgets::base parent;

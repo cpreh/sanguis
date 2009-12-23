@@ -61,7 +61,7 @@ public:
 private:
 	sge::systems::instance const &sys_;
 	
-	sge::filesystem::path const 
+	fcppt::filesystem::path const 
 		menu_path,
 		buttons_path,
 		labels_path;

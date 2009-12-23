@@ -24,7 +24,7 @@ class texture_context_impl
 SGE_NONCOPYABLE(texture_context_impl)
 public:
 	texture_context_impl(
-		sge::filesystem::path const &,
+		fcppt::filesystem::path const &,
 		sge::renderer::device_ptr,
 		sge::image::loader_ptr,
 		sge::renderer::filter::texture);
@@ -48,7 +48,7 @@ private:
 	sge::time::timer decay_timer_;
 
 	future_value const task(
-		sge::filesystem::path const &,
+		fcppt::filesystem::path const &,
 		sge::image::loader_ptr);
 };
 }

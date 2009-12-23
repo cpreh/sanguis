@@ -29,7 +29,7 @@ public:
 	
 	sge::audio::file_ptr const
 	load_uncached(
-		sge::filesystem::path const &) const;
+		fcppt::filesystem::path const &) const;
 	
 	sge::audio::sound_ptr const
 	make(

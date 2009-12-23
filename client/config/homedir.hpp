@@ -9,7 +9,7 @@ namespace client
 {
 namespace config
 {
-sge::filesystem::path const homedir();
+fcppt::filesystem::path const homedir();
 }
 }
 }

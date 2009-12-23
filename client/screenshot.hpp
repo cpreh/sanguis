@@ -25,7 +25,7 @@ public:
 	void process();
 private:
 	sge::function::object<
-		void (sge::filesystem::path const &)
+		void (fcppt::filesystem::path const &)
 	> make_screenshot;
 
 	bool active_;
