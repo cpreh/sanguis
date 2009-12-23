@@ -16,7 +16,7 @@
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/state/trampoline.hpp>
 #include <sge/image/colors.hpp>
-#include <sge/utf8/convert.hpp>
+#include <fcppt/utf8/convert.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/iconv.hpp>
@@ -117,7 +117,7 @@ sanguis::client::states::menu::operator()(
 )
 {
 	menu_.connection_error(
-		sge::utf8::convert(
+		fcppt::utf8::convert(
 			e.get<messages::roles::error_message>()
 		)
 	);
@@ -131,7 +131,7 @@ sanguis::client::states::menu::operator()(
 	context<machine>().send(
 		messages::create(
 			messages::client_info(
-				sge::utf8::convert(
+				fcppt::utf8::convert(
 					FCPPT_TEXT("player1")
 				)
 			)

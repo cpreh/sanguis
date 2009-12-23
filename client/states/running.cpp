@@ -32,7 +32,7 @@
 #include <sge/systems/instance.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/assert.hpp>
-#include <sge/utf8/convert.hpp>
+#include <fcppt/utf8/convert.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <boost/foreach.hpp>
 #include <tr1/functional>
@@ -260,7 +260,7 @@ sanguis::client::states::running::operator()(
 		m.get<messages::string_vector>()
 	)
 		context<machine>().gameover_names().push_back(
-			sge::utf8::convert(
+			fcppt::utf8::convert(
 				s
 			)
 		);

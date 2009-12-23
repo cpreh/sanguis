@@ -12,7 +12,7 @@
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/headers.hpp>
-#include <sge/utf8/convert.hpp>
+#include <fcppt/utf8/convert.hpp>
 #include <fcppt/text.hpp>
 #include <sge/type_info.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -101,7 +101,7 @@ sanguis::server::states::running::operator()(
 	global_context_->insert_player(
 		0, // FIXME: which world id?
 		net_id,
-		sge::utf8::convert(
+		fcppt::utf8::convert(
 			m.get<
 				messages::string
 			>()

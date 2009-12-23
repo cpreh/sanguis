@@ -45,7 +45,7 @@
 #include <sge/renderer/glsl/uniform/single_value.hpp>
 #include <sge/renderer/filter/linear.hpp>
 #include <sge/renderer/texture.hpp>
-#include <sge/utf8/convert.hpp>
+#include <fcppt/utf8/convert.hpp>
 #include <sge/fstream.hpp>
 #include <tr1/functional>
 
@@ -247,7 +247,7 @@ catch (net::exception const &e)
 		message_event(
 			messages::create(
 				messages::net_error(
-					sge::utf8::convert(
+					fcppt::utf8::convert(
 						e.string()
 					)
 				)
