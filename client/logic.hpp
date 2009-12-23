@@ -17,7 +17,7 @@
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image/loader_fwd.hpp>
 #include <sge/function/object_fwd.hpp>
-#include <sge/signal/scoped_connection.hpp>
+#include <fcppt/signal/scoped_connection.hpp>
 #include <sge/noncopyable.hpp>
 #include <tr1/array>
 #include <vector>
@@ -113,7 +113,7 @@ private:
 	>                               owned_weapons_array;
 	
 	owned_weapons_array             owned_weapons;
-	sge::signal::scoped_connection 
+	fcppt::signal::scoped_connection 
 		cheat_kill_conn_,
 		cheat_impulse_conn_;
 };

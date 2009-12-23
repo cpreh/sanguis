@@ -9,7 +9,7 @@
 #include <boost/system/error_code.hpp>
 #include <boost/asio/io_service.hpp>
 #include <boost/asio/ip/tcp.hpp>
-#include <sge/signal/object.hpp>
+#include <fcppt/signal/object.hpp>
 #include <sge/noncopyable.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
 #include <cstddef>
@@ -32,11 +32,11 @@ public:
 		data_type const &);
 	void queue(
 		data_type const &);
-	sge::signal::auto_connection register_connect(
+	fcppt::signal::auto_connection register_connect(
 		server::connect_function const &);
-	sge::signal::auto_connection register_disconnect(
+	fcppt::signal::auto_connection register_disconnect(
 		server::disconnect_function const &);
-	sge::signal::auto_connection register_data(
+	fcppt::signal::auto_connection register_data(
 		server::data_function const &);
 private:
 	typedef boost::ptr_vector<connection> connection_container;
@@ -48,9 +48,9 @@ private:
 	connection_container connections_;
 	unsigned handlers_;
 
-	sge::signal::object<server::connect_fun> connect_signal_;
-	sge::signal::object<server::disconnect_fun> disconnect_signal_;
-	sge::signal::object<server::data_fun> data_signal_;
+	fcppt::signal::object<server::connect_fun> connect_signal_;
+	fcppt::signal::object<server::disconnect_fun> disconnect_signal_;
+	fcppt::signal::object<server::data_fun> data_signal_;
 
 	void accept();
 	void read_handler(

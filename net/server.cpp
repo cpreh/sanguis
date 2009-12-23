@@ -7,21 +7,21 @@ sanguis::net::server::server()
 	  	new detail::server_impl())
 {}
 
-sge::signal::auto_connection sanguis::net::server::register_connect(
+fcppt::signal::auto_connection sanguis::net::server::register_connect(
 	connect_function const &f)
 {
 	return impl_->register_connect(
 		f);
 }
 
-sge::signal::auto_connection sanguis::net::server::register_disconnect(
+fcppt::signal::auto_connection sanguis::net::server::register_disconnect(
 	disconnect_function const &f)
 {
 	return impl_->register_disconnect(
 		f);
 }
 
-sge::signal::auto_connection sanguis::net::server::register_data(
+fcppt::signal::auto_connection sanguis::net::server::register_data(
 	data_function const &f)
 {
 	return impl_->register_data(

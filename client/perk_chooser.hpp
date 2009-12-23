@@ -10,7 +10,7 @@
 #include <sge/gui/widgets/backdrop.hpp>
 #include <sge/gui/widgets/label.hpp>
 #include <sge/gui/manager.hpp>
-#include <sge/signal/connection_manager.hpp>
+#include <fcppt/signal/connection_manager.hpp>
 #include <sge/function/object.hpp>
 #include <sge/noncopyable.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
@@ -70,7 +70,7 @@ private:
 	sge::gui::widgets::backdrop background_;
 	sge::gui::widgets::label perks_left_;
 	button_container buttons_;
-	sge::signal::connection_manager connections_;
+	fcppt::signal::connection_manager connections_;
 	bool dirty_;
 	send_callback send_callback_;
 	image_map images_;

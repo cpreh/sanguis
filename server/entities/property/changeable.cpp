@@ -69,7 +69,7 @@ sanguis::server::entities::property::changeable::max() const
 	return max_;
 }
 
-sge::signal::auto_connection
+fcppt::signal::auto_connection
 sanguis::server::entities::property::changeable::register_change_callback(
 	change_callback const &callback_
 )
@@ -80,7 +80,7 @@ sanguis::server::entities::property::changeable::register_change_callback(
 		);
 }
 
-sge::signal::auto_connection
+fcppt::signal::auto_connection
 sanguis::server::entities::property::changeable::register_max_change_callback(
 	change_callback const &callback_
 )

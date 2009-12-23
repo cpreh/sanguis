@@ -28,7 +28,7 @@
 #include "../menu_event_fwd.hpp"
 #include "../highscore/name_container.hpp"
 #include "../highscore/score_type.hpp"
-#include <sge/signal/auto_connection.hpp>
+#include <fcppt/signal/auto_connection.hpp>
 #include <sge/renderer/state/scoped.hpp>
 #include <sge/scoped_ptr.hpp>
 #include <boost/statechart/state.hpp>
@@ -108,9 +108,9 @@ private:
 	> drawer;
 	logic logic_;
 	input_handler input;
-	sge::signal::auto_connection input_connection;
+	fcppt::signal::auto_connection input_connection;
 	client::perk_chooser perk_chooser_;
-	sge::signal::scoped_connection 
+	fcppt::signal::scoped_connection 
 		cursor_pos_conn_,
 		cursor_show_conn_,
 		cheat_kill_conn_,

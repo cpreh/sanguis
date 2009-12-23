@@ -4,7 +4,7 @@
 #include "pos_callback.hpp"
 #include "visible_callback.hpp"
 #include <sge/gui/cursor/default.hpp>
-#include <sge/signal/object.hpp>
+#include <fcppt/signal/object.hpp>
 #include <sge/shared_ptr.hpp>
 
 namespace sanguis
@@ -27,13 +27,13 @@ public:
 		sge::gui::point const &);
 	void visible(
 		bool);
-	sge::signal::auto_connection register_pos_callback(
+	fcppt::signal::auto_connection register_pos_callback(
 		pos_callback const &);
-	sge::signal::auto_connection register_visible_callback(
+	fcppt::signal::auto_connection register_visible_callback(
 		visible_callback const &);
 private:
-	typedef sge::signal::object<pos_fn> pos_signal_type;
-	typedef sge::signal::object<visible_fn> visible_signal_type;
+	typedef fcppt::signal::object<pos_fn> pos_signal_type;
+	typedef fcppt::signal::object<visible_fn> visible_signal_type;
 
 	pos_signal_type pos_signal_;
 	visible_signal_type visible_signal_;

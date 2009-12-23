@@ -8,7 +8,7 @@
 #include "../pos_type.hpp"
 #include "../../weapon_type.hpp"
 #include "../../time_type.hpp"
-#include <sge/signal/scoped_connection.hpp>
+#include <fcppt/signal/scoped_connection.hpp>
 #include <sge/math/vector/basic_decl.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
 
@@ -131,7 +131,7 @@ private:
 		attack_speed_,
 		reload_speed_;
 
-	sge::signal::scoped_connection const
+	fcppt::signal::scoped_connection const
 		attack_speed_change_,
 		reload_speed_change_;
 };

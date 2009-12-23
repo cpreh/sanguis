@@ -29,7 +29,7 @@ public:
 	value_type
 	current() const;
 
-	sge::signal::auto_connection
+	fcppt::signal::auto_connection
 	register_change_callback(
 		change_callback const &
 	);

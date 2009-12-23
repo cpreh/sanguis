@@ -38,7 +38,7 @@ sanguis::client::console_wrapper::input_callback(
 		callbacks(k);
 }
 
-sge::signal::auto_connection
+fcppt::signal::auto_connection
 sanguis::client::console_wrapper::register_callback(
 	sge::input::callback const c
 )

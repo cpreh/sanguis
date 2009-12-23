@@ -5,7 +5,7 @@
 #include "data_type.hpp"
 #include "port_type.hpp"
 
-#include <sge/signal/auto_connection.hpp>
+#include <fcppt/signal/auto_connection.hpp>
 #include <sge/function/object_fwd.hpp>
 #include <sge/noncopyable.hpp>
 #include <sge/string.hpp>
@@ -38,11 +38,11 @@ public:
 		data_type const &);
 	void queue(
 		data_type const &);
-	sge::signal::auto_connection register_connect(
+	fcppt::signal::auto_connection register_connect(
 		connect_function const &);
-	sge::signal::auto_connection register_disconnect(
+	fcppt::signal::auto_connection register_disconnect(
 		disconnect_function const &);
-	sge::signal::auto_connection register_data(
+	fcppt::signal::auto_connection register_data(
 		data_function const &);
 
 	~server();

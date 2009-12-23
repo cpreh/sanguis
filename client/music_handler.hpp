@@ -6,7 +6,7 @@
 #include <sge/audio/unit.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/gfx_fwd.hpp>
-#include <sge/signal/scoped_connection.hpp>
+#include <fcppt/signal/scoped_connection.hpp>
 
 namespace sanguis
 {
@@ -23,7 +23,7 @@ public:
 private:
 	sge::console::gfx &console_;
 	load::resource::sounds const &resource_;
-	sge::signal::scoped_connection const volume_connection_;
+	fcppt::signal::scoped_connection const volume_connection_;
 	sge::audio::sound_ptr current_;
 
 	void next_title();

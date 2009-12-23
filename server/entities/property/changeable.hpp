@@ -6,7 +6,7 @@
 #include "initial_fwd.hpp"
 #include "change_callback.hpp"
 #include "change_signal.hpp"
-#include <sge/signal/auto_connection.hpp>
+#include <fcppt/signal/auto_connection.hpp>
 #include <sge/noncopyable.hpp>
 
 namespace sanguis
@@ -44,12 +44,12 @@ public:
 	value_type
 	max() const;
 
-	sge::signal::auto_connection
+	fcppt::signal::auto_connection
 	register_change_callback(
 		change_callback const &
 	);
 
-	sge::signal::auto_connection
+	fcppt::signal::auto_connection
 	register_max_change_callback(
 		change_callback const &
 	);

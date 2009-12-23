@@ -28,17 +28,17 @@ void sanguis::net::client::process()
 	return impl_->process();
 }
 
-sge::signal::auto_connection sanguis::net::client::register_connect(connect_function const &f)
+fcppt::signal::auto_connection sanguis::net::client::register_connect(connect_function const &f)
 {
 	return impl_->register_connect(f);
 }
 
-sge::signal::auto_connection sanguis::net::client::register_disconnect(disconnect_function const &f)
+fcppt::signal::auto_connection sanguis::net::client::register_disconnect(disconnect_function const &f)
 {
 	return impl_->register_disconnect(f);
 }
 
-sge::signal::auto_connection sanguis::net::client::register_data(data_function const &f)
+fcppt::signal::auto_connection sanguis::net::client::register_data(data_function const &f)
 {
 	return impl_->register_data(f);
 }

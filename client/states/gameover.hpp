@@ -51,7 +51,7 @@ public:
 			sge::gui::widgets::label names_text;
 			sge::gui::widgets::label score_text;
 		sge::gui::widgets::buttons::text buttons_return;
-	sge::signal::scoped_connection return_connection;
+	fcppt::signal::scoped_connection return_connection;
 
 };
 }

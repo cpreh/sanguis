@@ -11,7 +11,7 @@
 #include "output_buffer.hpp"
 
 #include <sge/string.hpp>
-#include <sge/signal/object.hpp>
+#include <fcppt/signal/object.hpp>
 #include <sge/noncopyable.hpp>
 
 #include <boost/asio/io_service.hpp>
@@ -38,11 +38,11 @@ public:
 	void queue(
 		data_type const &);
 	void process();
-	sge::signal::auto_connection register_connect(
+	fcppt::signal::auto_connection register_connect(
 		client::connect_function const &);
-	sge::signal::auto_connection register_disconnect(
+	fcppt::signal::auto_connection register_disconnect(
 		client::disconnect_function const &);
-	sge::signal::auto_connection register_data(
+	fcppt::signal::auto_connection register_data(
 		client::data_function const &);
 private:
 	// asio vars
@@ -57,9 +57,9 @@ private:
 	bool connected_,sending_;
 
 	// signals
-	sge::signal::object<client::connect_fun> connect_signal_;
-	sge::signal::object<client::disconnect_fun> disconnect_signal_;
-	sge::signal::object<client::data_fun> data_signal_;
+	fcppt::signal::object<client::connect_fun> connect_signal_;
+	fcppt::signal::object<client::disconnect_fun> disconnect_signal_;
+	fcppt::signal::object<client::data_fun> data_signal_;
 
 	// handlers
 	void handle_error(

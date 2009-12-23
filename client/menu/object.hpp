@@ -26,7 +26,7 @@
 #include <sge/sprite/external_system_decl.hpp>
 #include <sge/sprite/object_decl.hpp>
 #include <sge/sprite/parameters_fwd.hpp>
-#include <sge/signal/connection_manager.hpp>
+#include <fcppt/signal/connection_manager.hpp>
 #include <sge/noncopyable.hpp>
 #include <sge/string.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -74,7 +74,7 @@ private:
 	menus::highscore highscore_;
 	
 	mover mover_;
-	sge::signal::connection_manager connections_;
+	fcppt::signal::connection_manager connections_;
 	callbacks::object const callbacks_;
 
 	typedef sge::sprite::choices<

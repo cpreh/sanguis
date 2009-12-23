@@ -90,7 +90,7 @@ public:
 private:
 	load::context const &resources_;
 	net::client net_;
-	sge::signal::auto_connection
+	fcppt::signal::auto_connection
 		s_conn,
 		s_disconn,
 		s_data;

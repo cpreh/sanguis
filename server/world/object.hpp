@@ -29,7 +29,7 @@
 #include <sge/collision/world_fwd.hpp>
 #include <sge/collision/system_fwd.hpp>
 #include <sge/container/map_decl.hpp>
-#include <sge/signal/scoped_connection.hpp>
+#include <fcppt/signal/scoped_connection.hpp>
 #include <sge/time/timer.hpp>
 #include <sge/noncopyable.hpp>
 
@@ -193,7 +193,7 @@ private:
 
 	prop_container props_;
 
-	sge::signal::scoped_connection const
+	fcppt::signal::scoped_connection const
 		collision_connection_begin_,
 		collision_connection_end_,
 		collision_connection_test_;

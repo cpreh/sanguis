@@ -120,21 +120,21 @@ void sanguis::net::detail::client_impl::process()
 				e.message()));
 }
 
-sge::signal::auto_connection sanguis::net::detail::client_impl::register_connect(
+fcppt::signal::auto_connection sanguis::net::detail::client_impl::register_connect(
 	client::connect_function const &f)
 {
 	return connect_signal_.connect(
 		f);
 }
 
-sge::signal::auto_connection sanguis::net::detail::client_impl::register_disconnect(
+fcppt::signal::auto_connection sanguis::net::detail::client_impl::register_disconnect(
 	client::disconnect_function const &f)
 {
 	return disconnect_signal_.connect(
 		f);
 }
 
-sge::signal::auto_connection sanguis::net::detail::client_impl::register_data(
+fcppt::signal::auto_connection sanguis::net::detail::client_impl::register_data(
 	client::data_function const &f)
 {
 	return data_signal_.connect(

@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_PROPERTY_CHANGE_SIGNAL_HPP_INCLUDED
 
 #include "change_function.hpp"
-#include <sge/signal/object.hpp>
+#include <fcppt/signal/object.hpp>
 
 namespace sanguis
 {
@@ -13,7 +13,7 @@ namespace entities
 namespace property
 {
 
-typedef sge::signal::object<
+typedef fcppt::signal::object<
 	change_function
 > change_signal;
 

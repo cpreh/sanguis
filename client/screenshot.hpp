@@ -5,7 +5,7 @@
 #include <fcppt/filesystem/path.hpp>
 #include <sge/image/loader_fwd.hpp>
 #include <sge/input/system_fwd.hpp>
-#include <sge/signal/scoped_connection.hpp>
+#include <fcppt/signal/scoped_connection.hpp>
 #include <sge/input/key_pair_fwd.hpp>
 #include <sge/function/object.hpp>
 #include <sge/noncopyable.hpp>
@@ -29,7 +29,7 @@ private:
 	> make_screenshot;
 
 	bool active_;
-	sge::signal::scoped_connection const ic;
+	fcppt::signal::scoped_connection const ic;
 
 	void input_callback(
 		sge::input::key_pair const &);

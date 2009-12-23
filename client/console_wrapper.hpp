@@ -6,9 +6,9 @@
 #include <sge/input/key_code.hpp>
 #include <sge/input/key_pair_fwd.hpp>
 #include <sge/input/callback.hpp>
-#include <sge/signal/object.hpp>
-#include <sge/signal/auto_connection.hpp>
-#include <sge/signal/scoped_connection.hpp>
+#include <fcppt/signal/object.hpp>
+#include <fcppt/signal/auto_connection.hpp>
+#include <fcppt/signal/scoped_connection.hpp>
 
 namespace sanguis
 {
@@ -17,9 +17,9 @@ namespace client
 struct console_wrapper
 {
 	sge::console::gfx &con;
-	sge::signal::scoped_connection const ic;
+	fcppt::signal::scoped_connection const ic;
 	sge::input::key_code const toggler;
-	sge::signal::object<sge::input::key_pair_fun> callbacks;
+	fcppt::signal::object<sge::input::key_pair_fun> callbacks;
 
 	console_wrapper(
 		sge::console::gfx &,
@@ -29,7 +29,7 @@ struct console_wrapper
 	void input_callback(
 		sge::input::key_pair const &);
 
-	sge::signal::auto_connection register_callback(
+	fcppt::signal::auto_connection register_callback(
 		sge::input::callback);
 };
 }

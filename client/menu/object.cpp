@@ -88,10 +88,10 @@ sanguis::client::menu::object::object(
 	),
 	connections_(
 		sge::assign::make_container<
-			sge::signal::connection_manager::container
+			fcppt::signal::connection_manager::container
 		>
 		(
-			sge::signal::shared_connection(
+			fcppt::signal::shared_connection(
 				main_.connect.register_clicked(
 					std::tr1::bind(
 						&mover::reset,
@@ -102,7 +102,7 @@ sanguis::client::menu::object::object(
 			)
 		)
 		(
-			sge::signal::shared_connection(
+			fcppt::signal::shared_connection(
 				main_.start.register_clicked(
 					std::tr1::bind(
 						&object::start_server,
@@ -112,7 +112,7 @@ sanguis::client::menu::object::object(
 			)
 		)
 		(
-			sge::signal::shared_connection(
+			fcppt::signal::shared_connection(
 				main_.highscore.register_clicked(
 					std::tr1::bind(
 						&mover::reset,
@@ -123,14 +123,14 @@ sanguis::client::menu::object::object(
 			)
 		)
 		(
-			sge::signal::shared_connection(
+			fcppt::signal::shared_connection(
 				main_.exit.register_clicked(
 					_callbacks.quit_
 				)
 			)
 		)
 		(
-			sge::signal::shared_connection(
+			fcppt::signal::shared_connection(
 				connect_.connect_.register_clicked(
 					std::tr1::bind(
 						&object::connect_from_menu,
@@ -140,7 +140,7 @@ sanguis::client::menu::object::object(
 			)
 		)
 		(
-			sge::signal::shared_connection(
+			fcppt::signal::shared_connection(
 				connect_.return_.register_clicked(
 					std::tr1::bind(
 						&mover::reset,
@@ -151,7 +151,7 @@ sanguis::client::menu::object::object(
 			)
 		)
 		(
-			sge::signal::shared_connection(
+			fcppt::signal::shared_connection(
 				connect_box_.buttons_retry.register_clicked(
 					std::tr1::bind(
 						&object::connect,
@@ -167,7 +167,7 @@ sanguis::client::menu::object::object(
 			)
 		)
 		(
-			sge::signal::shared_connection(
+			fcppt::signal::shared_connection(
 				highscore_.back_button.register_clicked(
 					std::tr1::bind(
 						&mover::reset,
@@ -178,7 +178,7 @@ sanguis::client::menu::object::object(
 			)
 		)
 		(
-			sge::signal::shared_connection(
+			fcppt::signal::shared_connection(
 				connect_box_.buttons_cancel.register_clicked(
 					std::tr1::bind(
 						&object::cancel_connect,

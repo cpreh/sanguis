@@ -11,7 +11,7 @@
 #include <sge/console/gfx_fwd.hpp>
 #include <sge/collision/system_fwd.hpp>
 #include <sge/container/map_decl.hpp>
-#include <sge/signal/scoped_connection.hpp>
+#include <fcppt/signal/scoped_connection.hpp>
 #include <sge/string.hpp>
 #include <boost/statechart/state_machine.hpp>
 #include <map>
@@ -103,7 +103,7 @@ private:
 
 	net::server net_;
 
-	sge::signal::scoped_connection const
+	fcppt::signal::scoped_connection const
 		s_conn,
 		s_disconn,
 		s_data;

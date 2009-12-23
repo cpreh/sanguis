@@ -11,7 +11,7 @@
 #include "../damage/unit.hpp"
 #include "../damage/array.hpp"
 #include "../damage/armor.hpp"
-#include <sge/signal/scoped_connection.hpp>
+#include <fcppt/signal/scoped_connection.hpp>
 
 namespace sanguis
 {
@@ -70,7 +70,7 @@ private:
 
 	property::always_max regeneration_;
 	
-	sge::signal::scoped_connection const max_health_change_;
+	fcppt::signal::scoped_connection const max_health_change_;
 };
 
 }

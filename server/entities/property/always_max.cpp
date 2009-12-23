@@ -16,7 +16,7 @@ sanguis::server::entities::property::always_max::current() const
 	return current_;
 }
 
-sge::signal::auto_connection
+fcppt::signal::auto_connection
 sanguis::server::entities::property::always_max::register_change_callback(
 	change_callback const &callback_
 )

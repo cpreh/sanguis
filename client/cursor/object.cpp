@@ -41,14 +41,14 @@ void sanguis::client::cursor::object::visible(
 		n);
 }
 
-sge::signal::auto_connection sanguis::client::cursor::object::register_pos_callback(
+fcppt::signal::auto_connection sanguis::client::cursor::object::register_pos_callback(
 	pos_callback const &p)
 {
 	return pos_signal_.connect(
 		p);
 }
 
-sge::signal::auto_connection sanguis::client::cursor::object::register_visible_callback(
+fcppt::signal::auto_connection sanguis::client::cursor::object::register_visible_callback(
 	visible_callback const &p)
 {
 	return visible_signal_.connect(

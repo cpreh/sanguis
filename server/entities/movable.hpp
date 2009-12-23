@@ -7,7 +7,7 @@
 #include "property/changeable.hpp"
 #include "property/value.hpp"
 #include "../space_unit.hpp"
-#include <sge/signal/scoped_connection.hpp>
+#include <fcppt/signal/scoped_connection.hpp>
 
 namespace sanguis
 {
@@ -52,7 +52,7 @@ private:
 
 	space_unit direction_;
 	
-	sge::signal::scoped_connection speed_change_;
+	fcppt::signal::scoped_connection speed_change_;
 };
 
 }
