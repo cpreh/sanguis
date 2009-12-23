@@ -4,7 +4,7 @@
 #include "../../diff_clock.hpp"
 #include "texture_context_fwd.hpp"
 #include <sge/time/timer.hpp>
-#include <sge/thread/object.hpp>
+#include <fcppt/thread/object.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image/loader_fwd.hpp>
@@ -40,7 +40,7 @@ private:
 	typedef sge::image::file_ptr future_value;
 	boost::packaged_task<future_value> task_;
 	boost::unique_future<future_value> future_;
-	sge::thread::object thread_;
+	fcppt::thread::object thread_;
 	sge::texture::part_ptr texture_result_;
 	sge::renderer::device_ptr rend_;
 	sge::renderer::filter::texture filter_;
