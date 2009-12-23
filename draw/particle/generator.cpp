@@ -9,7 +9,7 @@
 #include <sge/math/vector/normalize.hpp>
 #include <sge/math/vector/arithmetic.hpp>
 #include <sge/exception.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::draw::particle::generator::generator(
 	generation_callback const generate_object,
@@ -96,7 +96,7 @@ void sanguis::draw::particle::generator::generate()
 		break;
 		default:
 			throw sge::exception(
-				SGE_TEXT("invalid movement type"));
+				FCPPT_TEXT("invalid movement type"));
 	}
 	
 	rotation_type rot;
@@ -120,7 +120,7 @@ void sanguis::draw::particle::generator::generate()
 		break;
 		default:
 			throw sge::exception(
-				SGE_TEXT("invalid align type"));
+				FCPPT_TEXT("invalid align type"));
 	}
 
 	base_ptr object = generate_object();

@@ -4,7 +4,7 @@
 #include <sge/math/dim/basic_impl.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/format.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::draw::hud::hud(
 	sge::font::object &font)
@@ -33,7 +33,7 @@ void sanguis::draw::hud::update(
 
 	font.draw_text(
 		(sge::format(
-			SGE_TEXT("exp: %1%, level: %2%, fps: %3%"))
+			FCPPT_TEXT("exp: %1%, level: %2%, fps: %3%"))
 			% experience_
 			% level_
 			% frames_counter.frames_str())

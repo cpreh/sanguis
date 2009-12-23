@@ -1,6 +1,6 @@
 #include "from_perk_type.hpp"
 #include "../exception.hpp"
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sge::string const
 sanguis::client::from_perk_type(
@@ -9,22 +9,22 @@ sanguis::client::from_perk_type(
 	switch (s)
 	{
 		case perk_type::choleric:
-			return SGE_TEXT("choleric");
+			return FCPPT_TEXT("choleric");
 		case perk_type::health:
-			return SGE_TEXT("health");
+			return FCPPT_TEXT("health");
 		case perk_type::ias:
-			return SGE_TEXT("ias");
+			return FCPPT_TEXT("ias");
 		case perk_type::ims:
-			return SGE_TEXT("ims");
+			return FCPPT_TEXT("ims");
 		case perk_type::irs:
-			return SGE_TEXT("irs");
+			return FCPPT_TEXT("irs");
 		case perk_type::regeneration:
-			return SGE_TEXT("regeneration");
+			return FCPPT_TEXT("regeneration");
 		case perk_type::size:
 			break;
 	}
 
 	throw exception(
-		SGE_TEXT("invalid perk type in from_perk_type!")
+		FCPPT_TEXT("invalid perk type in from_perk_type!")
 	);
 }

@@ -1,7 +1,7 @@
 #include "exception.hpp"
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::exception::exception(sge::string const &w)
-	: sge::exception(SGE_TEXT("sanguis: ")+w)
+	: sge::exception(FCPPT_TEXT("sanguis: ")+w)
 {
 }

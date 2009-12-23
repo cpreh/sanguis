@@ -27,7 +27,7 @@
 #include <sge/log/headers.hpp>
 #include <sge/gui/unit.hpp>
 #include <sge/assign/make_container.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <sge/optional_impl.hpp>
 #include <sge/function/object.hpp>
 #include <tr1/functional>
@@ -127,24 +127,24 @@ sanguis::client::logic::logic(
 	owned_weapons(),
 	cheat_kill_conn_(
 		_console.insert(
-			SGE_TEXT("kill"),
+			FCPPT_TEXT("kill"),
 			std::tr1::bind(
 				&logic::send_cheat,
 				this,
 				cheat_type::kill
 			),
-			SGE_TEXT("Commit suicide")
+			FCPPT_TEXT("Commit suicide")
 		)
 	),
 	cheat_impulse_conn_(
 		_console.insert(
-			SGE_TEXT("impulse"),
+			FCPPT_TEXT("impulse"),
 			std::tr1::bind(
 				&logic::send_cheat,
 				this,
 				cheat_type::impulse101
 			),
-			SGE_TEXT("Get all weapons")
+			FCPPT_TEXT("Get all weapons")
 		)
 	)
 
@@ -182,7 +182,7 @@ sanguis::client::logic::give_weapon(
 		SGE_LOG_WARNING(
 			log(),
 			sge::log::_
-				<< SGE_TEXT("Got invalid give_weapon message!")
+				<< FCPPT_TEXT("Got invalid give_weapon message!")
 		);
 
 		return;

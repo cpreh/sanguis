@@ -4,7 +4,7 @@
 #include "../../pickup_type.hpp"
 #include "../../load/pickup_name.hpp"
 #include "../../exception.hpp"
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 namespace
 {
@@ -45,13 +45,13 @@ get_texture(
 		return sanguis::load::pickup_name(ptype);
 	case sanguis::pickup_type::weapon:
 		throw sanguis::exception(
-			SGE_TEXT("draw::factory::pickup: weapon pickup cannot be created using pickup!"));
+			FCPPT_TEXT("draw::factory::pickup: weapon pickup cannot be created using pickup!"));
 	case sanguis::pickup_type::size:
 		break;
 	}
 
 	throw sanguis::exception(
-		SGE_TEXT("draw::factory::pickup: missing loading code!")
+		FCPPT_TEXT("draw::factory::pickup: missing loading code!")
 	);
 }
 

@@ -9,7 +9,7 @@
 #include <sge/log/headers.hpp>
 #include <sge/auto_ptr.hpp>
 #include <sge/format.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <sge/string.hpp>
 #include <boost/mpl/at.hpp>
 
@@ -40,7 +40,7 @@ sanguis::messages::serialization::dispatcher_register<T>::dispatcher_register(
 	{
 		sge::string const error(
 			(sge::format(
-				SGE_TEXT("Message type registered twice: %1%!")
+				FCPPT_TEXT("Message type registered twice: %1%!")
 			)
 				% static_cast<unsigned>(msg_type::value))
 			.str()

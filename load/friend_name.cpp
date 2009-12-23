@@ -1,6 +1,6 @@
 #include "friend_name.hpp"
 #include "../exception.hpp"
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sge::string const
 sanguis::load::friend_name(
@@ -8,11 +8,11 @@ sanguis::load::friend_name(
 {
 	switch(etype) {
 	case friend_type::spider:
-		return SGE_TEXT("friendly_spider");
+		return FCPPT_TEXT("friendly_spider");
 	case friend_type::sentry:
-		return SGE_TEXT("sentry");
+		return FCPPT_TEXT("sentry");
 	default:
 		throw exception(
-			SGE_TEXT("load::friend_name: missing loading code!"));
+			FCPPT_TEXT("load::friend_name: missing loading code!"));
 	}
 }

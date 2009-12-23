@@ -5,7 +5,7 @@
 #include "../../load/friend_name.hpp"
 #include "../../friend_type.hpp"
 #include "../../exception.hpp"
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::draw::entity_auto_ptr
 sanguis::draw::factory::friend_(
@@ -36,7 +36,7 @@ sanguis::draw::factory::friend_(
 		);
 	default:
 		throw exception(
-			SGE_TEXT("Missing factory code in draw::factory::friend!")
+			FCPPT_TEXT("Missing factory code in draw::factory::friend!")
 		);
 	}
 }

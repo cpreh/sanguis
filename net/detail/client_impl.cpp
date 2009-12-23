@@ -7,7 +7,7 @@
 // asio brings in window.h's max macro :(
 #include <sge/container/raw_vector_impl.hpp>
 #include <sge/log/headers.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <sge/iconv.hpp>
 #include <sge/lexical_cast.hpp>
 #include <boost/asio/buffer.hpp>
@@ -42,8 +42,8 @@ void sanguis::net::detail::client_impl::connect(
 	SGE_LOG_DEBUG(
 		log(),
 		sge::log::_
-			<< SGE_TEXT("client: resolving hostname ")
-			<< sge::iconv(s) << SGE_TEXT(" on port")
+			<< FCPPT_TEXT("client: resolving hostname ")
+			<< sge::iconv(s) << FCPPT_TEXT(" on port")
 			 << port
 	);
 	
@@ -71,7 +71,7 @@ void sanguis::net::detail::client_impl::disconnect()
 	/* TODO: should we send this signal here? it could lead to an endless loop
 	 * (in sanguis at least)
 	disconnect_signal_(
-		SGE_TEXT("Client disconnected"));
+		FCPPT_TEXT("Client disconnected"));
 		*/
 }
 
@@ -115,7 +115,7 @@ void sanguis::net::detail::client_impl::process()
 		e);
 	if (e)
 		throw exception(
-			SGE_TEXT("poll error: ")+
+			FCPPT_TEXT("poll error: ")+
 			sge::iconv(
 				e.message()));
 }
@@ -147,13 +147,13 @@ void sanguis::net::detail::client_impl::resolve_handler(
 {
 	if (e)
 		throw exception(
-			SGE_TEXT("client: error resolving address: ")+
+			FCPPT_TEXT("client: error resolving address: ")+
 			sge::iconv(
 				e.message()));
 
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_ << SGE_TEXT("client: resolved domain, trying to connect"));
+		sge::log::_ << FCPPT_TEXT("client: resolved domain, trying to connect"));
 	
 	boost::asio::ip::tcp::endpoint endpoint = *i;
 	socket_.async_connect(
@@ -178,9 +178,9 @@ void sanguis::net::detail::client_impl::handle_error(
 	if (!detail::is_disconnect(e))
 	{
 		throw exception(
-			SGE_TEXT("error in ")+
+			FCPPT_TEXT("error in ")+
 			s+
-			SGE_TEXT(": ")+
+			FCPPT_TEXT(": ")+
 			sge::iconv(
 				e.message()));
 	}
@@ -188,9 +188,9 @@ void sanguis::net::detail::client_impl::handle_error(
 	SGE_LOG_DEBUG(
 		log(),
 		sge::log::_
-			<< SGE_TEXT("client: disconnected (")
+			<< FCPPT_TEXT("client: disconnected (")
 			<< sge::iconv(e.message()) 
-			<< SGE_TEXT(")"));
+			<< FCPPT_TEXT(")"));
 
 	disconnect_signal_(
 		sge::iconv(
@@ -208,7 +208,7 @@ void sanguis::net::detail::client_impl::read_handler(
 	if (e)
 	{
 		handle_error(
-			SGE_TEXT("client read"),
+			FCPPT_TEXT("client read"),
 			e);
 		return;
 	}
@@ -216,9 +216,9 @@ void sanguis::net::detail::client_impl::read_handler(
 	SGE_LOG_DEBUG(
 		log(),
 		sge::log::_
-			<< SGE_TEXT("client: read ")
+			<< FCPPT_TEXT("client: read ")
 			<< bytes
-			<< SGE_TEXT(" bytes.")
+			<< FCPPT_TEXT(" bytes.")
 	);
 
 	data_signal_(
@@ -250,7 +250,7 @@ void sanguis::net::detail::client_impl::write_handler(
 	if (e)
 	{
 		handle_error(
-			SGE_TEXT("client write"),
+			FCPPT_TEXT("client write"),
 			e);
 		return;
 	}
@@ -258,9 +258,9 @@ void sanguis::net::detail::client_impl::write_handler(
 	SGE_LOG_DEBUG(
 		log(),
 		sge::log::_
-			<< SGE_TEXT("client: wrote ")
+			<< FCPPT_TEXT("client: wrote ")
 			<< bytes 
-			<< SGE_TEXT(" bytes"));
+			<< FCPPT_TEXT(" bytes"));
 
 	output_.erase(
 		bytes);
@@ -304,13 +304,13 @@ void sanguis::net::detail::client_impl::connect_handler(
 		// are we at the end of the endpoint list?
 		if (i == boost::asio::ip::tcp::resolver::iterator())
 			throw exception(
-				SGE_TEXT("client: exhausted endpoints: ")+
+				FCPPT_TEXT("client: exhausted endpoints: ")+
 				sge::iconv(
 					e.message()));
 
 		SGE_LOG_DEBUG(
 			log(),
-			sge::log::_ << SGE_TEXT("client: resolving next endpoint"));
+			sge::log::_ << FCPPT_TEXT("client: resolving next endpoint"));
 		
 		boost::asio::ip::tcp::endpoint endpoint = *i;
 		socket_.async_connect(
@@ -328,7 +328,7 @@ void sanguis::net::detail::client_impl::connect_handler(
 
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_ << SGE_TEXT("client: connected"));
+		sge::log::_ << FCPPT_TEXT("client: connected"));
 
 	// first connect to true, _then_ call signal
 	connected_ = true;

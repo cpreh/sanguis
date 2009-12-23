@@ -5,7 +5,7 @@
 #include "../base.hpp"
 #include "../types/message_type.hpp"
 #include "../../exception.hpp"
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <boost/static_assert.hpp>
 
 sanguis::messages::auto_ptr
@@ -31,7 +31,7 @@ sanguis::messages::serialization::deserialize(
 
 	if(type >= types::message::size)
 		throw exception(
-			SGE_TEXT("Invalid message received!")
+			FCPPT_TEXT("Invalid message received!")
 		);
 
 	types::message::type const casted_type(
@@ -48,7 +48,7 @@ sanguis::messages::serialization::deserialize(
 
 	if(it == ctx.handlers().end())
 		throw exception(
-			SGE_TEXT("No handler for a message found.")
+			FCPPT_TEXT("No handler for a message found.")
 		);
 	
 	reader d(stream);

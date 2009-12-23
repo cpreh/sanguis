@@ -205,7 +205,7 @@ sanguis::draw::explosion::generate_particle(
 	load::model::animation::context_ptr anim = 
 		environment().context().models()()
 		[
-			SGE_TEXT("particles/")+
+			FCPPT_TEXT("particles/")+
 			from_particle_type(t)
 		]
 		.random_part()

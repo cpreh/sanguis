@@ -2,7 +2,7 @@
 #define SANGUIS_DETAIL_TRUNCATION_CHECK_CAST_IMPL_HPP_INCLUDED
 
 #include "../exception.hpp"
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <sge/format.hpp>
 
 #include <typeinfo>
@@ -14,8 +14,8 @@ Dest sanguis::truncation_check_cast(const Source& source)
 	if(static_cast<Source>(dest) != source)
 		throw exception((
 			sge::format(
-				SGE_TEXT("truncation_check_cast_failed when casting from ")
-				SGE_TEXT("(type: '%1%', value: %2%) to (type: '%3%', value: %4%)!")
+				FCPPT_TEXT("truncation_check_cast_failed when casting from ")
+				FCPPT_TEXT("(type: '%1%', value: %2%) to (type: '%3%', value: %4%)!")
 			) % typeid(Source).name()
 			  % source
 			  % typeid(Dest).name()

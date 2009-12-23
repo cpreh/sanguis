@@ -7,7 +7,7 @@
 #include "../../ai/create_simple.hpp"
 #include "../../../exception.hpp"
 #include <sge/container/map_impl.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::server::entities::auto_ptr
 sanguis::server::entities::enemies::create(
@@ -144,6 +144,6 @@ sanguis::server::entities::enemies::create(
 		);
 	default:
 		throw exception(
-			SGE_TEXT("Invalid enemy_type in factory!"));
+			FCPPT_TEXT("Invalid enemy_type in factory!"));
 	}
 }

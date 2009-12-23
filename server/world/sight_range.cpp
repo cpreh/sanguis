@@ -1,6 +1,6 @@
 #include "sight_range.hpp"
 #include "../../exception.hpp"
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::server::world::sight_range::sight_range()
 :
@@ -18,7 +18,7 @@ sanguis::server::world::sight_range::add(
 		).second
 	)
 		throw exception(
-			SGE_TEXT("Failed to insert a sight range!")
+			FCPPT_TEXT("Failed to insert a sight range!")
 		);
 }
 
@@ -33,7 +33,7 @@ sanguis::server::world::sight_range::remove(
 		)
 	)
 		throw exception(
-			SGE_TEXT("Failed to remove a sight range!")
+			FCPPT_TEXT("Failed to remove a sight range!")
 		);
 }
 

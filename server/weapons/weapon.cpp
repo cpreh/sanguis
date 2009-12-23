@@ -17,7 +17,7 @@
 #include <sge/log/parameters/inherited.hpp>
 #include <sge/log/object.hpp>
 #include <sge/log/headers.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <ostream>
 
 sanguis::server::weapons::range const
@@ -163,12 +163,12 @@ sanguis::server::weapons::weapon::weapon(
 		SGE_LOG_WARNING(
 			log(),
 			sge::log::_
-				<< SGE_TEXT("A weapon's cast point interval is bigger than its cooldown!")
+				<< FCPPT_TEXT("A weapon's cast point interval is bigger than its cooldown!")
 	);
 
 	if(magazine_size() == 0)
 		throw exception(
-			SGE_TEXT("magazine size of 0 is invalid!")
+			FCPPT_TEXT("magazine size of 0 is invalid!")
 		);
 
 	initiate();
@@ -264,7 +264,7 @@ sanguis::server::weapons::weapon::log()
 	static sge::log::object log_(
 		sge::log::parameters::inherited(
 			weapons::log(),
-			SGE_TEXT("weapon")
+			FCPPT_TEXT("weapon")
 		)
 	);
 	return log_;

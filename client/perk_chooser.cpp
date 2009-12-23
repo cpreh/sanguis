@@ -21,7 +21,7 @@
 #include <sge/log/object.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/assert.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <sge/lexical_cast.hpp>
 #include <tr1/functional>
@@ -34,7 +34,7 @@ namespace
 sge::log::object mylogger(
 	sge::log::parameters::inherited(
 		sanguis::client::log(),
-		SGE_TEXT("perk chooser: ")
+		FCPPT_TEXT("perk chooser: ")
 	)
 );
 
@@ -112,7 +112,7 @@ sanguis::client::perk_chooser::perk_chooser(
 	perks_left_(
 		background_,
 		sge::gui::widgets::parameters(),
-		SGE_TEXT("")),
+		FCPPT_TEXT("")),
 	buttons_(),
 	connections_(),
 	dirty_(false),
@@ -122,9 +122,9 @@ sanguis::client::perk_chooser::perk_chooser(
 	SGE_LOG_DEBUG(
 		mylogger,
 		sge::log::_
-			<< SGE_TEXT("started, dialog size: ")
+			<< FCPPT_TEXT("started, dialog size: ")
 			<< background_.size()
-			<< SGE_TEXT(", dialog position: ")
+			<< FCPPT_TEXT(", dialog position: ")
 			<< background_.screen_pos());
 }
 
@@ -142,7 +142,7 @@ void sanguis::client::perk_chooser::perks(
 {
 	SGE_LOG_DEBUG(
 		mylogger,
-		sge::log::_ << SGE_TEXT("got new set of perks"));
+		sge::log::_ << FCPPT_TEXT("got new set of perks"));
 
 	perks_ = _perks;
 	if (activated())
@@ -179,7 +179,7 @@ void sanguis::client::perk_chooser::activated(bool const n)
 {
 	SGE_LOG_DEBUG(
 		mylogger,
-		sge::log::_ << SGE_TEXT("set activation to ")
+		sge::log::_ << FCPPT_TEXT("set activation to ")
 		             << n);
 
 	background_.activation(
@@ -202,7 +202,7 @@ sanguis::client::level_type sanguis::client::perk_chooser::levels_left() const
 void sanguis::client::perk_chooser::regenerate_label()
 {
 	perks_left_.text(
-			SGE_TEXT("Perks left: ")+
+			FCPPT_TEXT("Perks left: ")+
 			sge::lexical_cast<sge::string>(
 				levels_left()));
 }
@@ -251,9 +251,9 @@ void sanguis::client::perk_chooser::choose_callback(
 	SGE_LOG_DEBUG(
 		mylogger,
 		sge::log::_
-			<< SGE_TEXT("chose perk ")
+			<< FCPPT_TEXT("chose perk ")
 			<< p
-			 << SGE_TEXT(", levels left: ")
+			 << FCPPT_TEXT(", levels left: ")
 			 << levels_left()
 	);
 
@@ -282,9 +282,9 @@ sanguis::client::perk_chooser::image_map::const_iterator const
 {
 	fcppt::filesystem::path const p = 
 		media_path()/
-		SGE_TEXT("menu")/
-		SGE_TEXT("buttons")/
-		SGE_TEXT("perks");
+		FCPPT_TEXT("menu")/
+		FCPPT_TEXT("buttons")/
+		FCPPT_TEXT("perks");
 
 	fcppt::filesystem::path const base = 
 		p/from_perk_type(r);
@@ -302,13 +302,13 @@ sanguis::client::perk_chooser::image_map::const_iterator const
 		sge::gui::make_image(
 			sys_.image_loader()->load(
 				base/
-				SGE_TEXT("normal.png")));
+				FCPPT_TEXT("normal.png")));
 
 	new_image.hover = 
 		sge::gui::make_image(
 			sys_.image_loader()->load(
 				base/
-				SGE_TEXT("hover.png")));
+				FCPPT_TEXT("hover.png")));
 
 	pi = images_.insert(
 		std::make_pair(

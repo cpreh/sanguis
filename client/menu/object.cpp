@@ -23,7 +23,7 @@
 #include <sge/log/parameters/inherited.hpp>
 #include <sge/log/object.hpp>
 #include <sge/log/headers.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <tr1/functional>
 
@@ -33,7 +33,7 @@ namespace
 sge::log::object mylogger(
 	sge::log::parameters::inherited(
 		sanguis::client::log(),
-		SGE_TEXT("menu: object")
+		FCPPT_TEXT("menu: object")
 	)
 );
 
@@ -46,11 +46,11 @@ sanguis::client::menu::object::object(
 : 
 	sys_(_sys),
 	menu_path(
-		media_path()/SGE_TEXT("menu")),
+		media_path()/FCPPT_TEXT("menu")),
 	buttons_path(
-		menu_path/SGE_TEXT("buttons")),
+		menu_path/FCPPT_TEXT("buttons")),
 	labels_path(
-		menu_path/SGE_TEXT("labels")),
+		menu_path/FCPPT_TEXT("labels")),
 
 	m(
 		sys_.renderer(),
@@ -206,7 +206,7 @@ sanguis::client::menu::object::object(
 				>(
 					_sys.renderer()->create_texture(
 						_sys.image_loader()->load(
-							media_path() / SGE_TEXT("dirt_tile.png")
+							media_path() / FCPPT_TEXT("dirt_tile.png")
 						)->view(),
 						sge::renderer::filter::linear,
 						sge::renderer::resource_flags::none
@@ -248,16 +248,16 @@ void sanguis::client::menu::object::connection_error(
 	SGE_LOG_DEBUG(
 		mylogger,
 		sge::log::_
-			<< SGE_TEXT("got conection error: (")
+			<< FCPPT_TEXT("got conection error: (")
 			<< message 
-			<< SGE_TEXT(")"));
+			<< FCPPT_TEXT(")"));
 
 	connect_box_.label_.text(
-		SGE_TEXT("Connection to \"")+
+		FCPPT_TEXT("Connection to \"")+
 		connection_host_+
-		SGE_TEXT("\" on port \"")+
+		FCPPT_TEXT("\" on port \"")+
 		connection_port_+
-		SGE_TEXT("\" failed: \n")+
+		FCPPT_TEXT("\" failed: \n")+
 		message);
 	mover_.reset(
 		connect_box_.parent);
@@ -267,8 +267,8 @@ void sanguis::client::menu::object::start_server()
 {
 	callbacks_.start_server_();
 	connect(
-		SGE_TEXT("localhost"),
-		SGE_TEXT("1337"));
+		FCPPT_TEXT("localhost"),
+		FCPPT_TEXT("1337"));
 }
 
 void sanguis::client::menu::object::connect_from_menu()
@@ -285,20 +285,20 @@ void sanguis::client::menu::object::connect(
 	SGE_LOG_DEBUG(
 		mylogger,
 		sge::log::_
-			<< SGE_TEXT("connecting to ")
+			<< FCPPT_TEXT("connecting to ")
 			<< host 
-			<< SGE_TEXT(" on port ")
+			<< FCPPT_TEXT(" on port ")
 			<< port);
 
 	connection_host_ = host;
 	connection_port_ = port;
 
 	connect_box_.label_.text(
-		SGE_TEXT("Connecting to \"")+
+		FCPPT_TEXT("Connecting to \"")+
 		host+
-		SGE_TEXT("\" on port \"")+
+		FCPPT_TEXT("\" on port \"")+
 		port+
-		SGE_TEXT("\""));
+		FCPPT_TEXT("\""));
 
 	callbacks_.connect_(
 		host,

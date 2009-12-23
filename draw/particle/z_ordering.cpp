@@ -1,5 +1,5 @@
 #include "z_ordering.hpp"
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <sge/exception.hpp>
 
 sanguis::draw::z_ordering::type
@@ -15,6 +15,6 @@ sanguis::draw::particle::z_ordering(
 		return draw::z_ordering::rubble;
 	default:
 		throw sge::exception(
-			SGE_TEXT("invalid particle type!"));
+			FCPPT_TEXT("invalid particle type!"));
 	}
 }

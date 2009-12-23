@@ -4,7 +4,7 @@
 #include "weapons/weapon.hpp"
 #include "../exception.hpp"
 #include <sge/foreach_enumerator.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 void
 sanguis::server::cheat(
@@ -34,7 +34,7 @@ sanguis::server::cheat(
 		break;
 	default:
 		throw exception(
-			SGE_TEXT("Invalid cheat type!")
+			FCPPT_TEXT("Invalid cheat type!")
 		);
 	}
 }

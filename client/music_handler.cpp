@@ -8,7 +8,7 @@
 #include <fcppt/filesystem/directory_iterator.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/exception.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <sge/lexical_cast.hpp>
 #include <sge/bad_lexical_cast.hpp>
 #include <tr1/functional>
@@ -21,13 +21,13 @@ sanguis::client::music_handler::music_handler(
 	resource_(_resource),
 	volume_connection_(
 		console_.object().insert(
-			SGE_TEXT("music_volume"),
+			FCPPT_TEXT("music_volume"),
 			std::tr1::bind(
 				&music_handler::volume,
 				this,
 				std::tr1::placeholders::_1
 			),
-			SGE_TEXT("takes values from 0 to 100, changes the music volume in percent")
+			FCPPT_TEXT("takes values from 0 to 100, changes the music volume in percent")
 		)
 	),
 	current_()
@@ -65,13 +65,13 @@ void sanguis::client::music_handler::volume(sge::console::arg_list const &a)
 {
 	if (!current_)
 	{
-		console_.print(SGE_TEXT("no music files registered, makes no sense to set a volume"));
+		console_.print(FCPPT_TEXT("no music files registered, makes no sense to set a volume"));
 		return;
 	}
 
 	if (a.size() != 2)
 	{
-		console_.print(SGE_TEXT("invalid number of arguments"));
+		console_.print(FCPPT_TEXT("invalid number of arguments"));
 		return;
 	}
 
@@ -87,7 +87,7 @@ void sanguis::client::music_handler::volume(sge::console::arg_list const &a)
 	}
 	catch (sge::bad_lexical_cast const &)
 	{
-		console_.print(SGE_TEXT("invalid numeric argument"));
+		console_.print(FCPPT_TEXT("invalid numeric argument"));
 	}
 }
 
@@ -97,7 +97,7 @@ sanguis::client::music_handler::load_random() const
 	// TODO: choose a random one!
 	for(
 		fcppt::filesystem::directory_iterator it(
-			media_path() / SGE_TEXT("music")
+			media_path() / FCPPT_TEXT("music")
 		);
 		it != fcppt::filesystem::directory_iterator();
 		++it
@@ -116,11 +116,11 @@ sanguis::client::music_handler::load_random() const
 			SGE_LOG_WARNING(
 				log(),
 				sge::log::_
-					<< SGE_TEXT("Music file \"")
+					<< FCPPT_TEXT("Music file \"")
 					<< it->path().string()
-					<< SGE_TEXT("\" failed to load: \"")
+					<< FCPPT_TEXT("\" failed to load: \"")
 					<< e.string()
-					<< SGE_TEXT("\"!")
+					<< FCPPT_TEXT("\"!")
 			);
 		}
 	

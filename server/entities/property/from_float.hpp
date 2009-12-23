@@ -3,7 +3,7 @@
 
 #include "value.hpp"
 #include "../../../exception.hpp"
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <cstdlib>
 #include <math.h> // TODO: check if we have frexp!
 
@@ -37,7 +37,7 @@ from_float(
 		frac < 0.0
 	)
 		throw exception(
-			SGE_TEXT("Tried to convert a negative floating point number into a rational!")
+			FCPPT_TEXT("Tried to convert a negative floating point number into a rational!")
 		);
 
 	value::int_type const

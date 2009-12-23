@@ -5,7 +5,7 @@
 #include <sge/systems/instance.hpp>
 #include <sge/math/dim/structure_cast.hpp>
 #include <sge/make_shared_ptr.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::client::menu::menus::main::main(
 	sge::gui::widgets::parent_data const &_parent,
@@ -28,21 +28,21 @@ sanguis::client::menu::menus::main::main(
 		parent,
 		sys.image_loader(),
 		buttons_path,
-		SGE_TEXT("connect_menu")),
+		FCPPT_TEXT("connect_menu")),
 	start(
 		parent,
 		sys.image_loader(),
 		buttons_path,
-		SGE_TEXT("quickstart")),
+		FCPPT_TEXT("quickstart")),
 	highscore(
 		parent,
 		sys.image_loader(),
 		buttons_path,
-		SGE_TEXT("highscores")),
+		FCPPT_TEXT("highscores")),
 	exit(
 		parent,
 		sys.image_loader(),
 		buttons_path,
-		SGE_TEXT("quit"))
+		FCPPT_TEXT("quit"))
 {
 }

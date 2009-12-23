@@ -8,7 +8,7 @@
 #include <sge/parse/json/object.hpp>
 #include <sge/random/inclusive_range.hpp>
 #include <sge/math/almost_zero.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <sge/assert.hpp>
 #include <boost/foreach.hpp>
 #include <tr1/functional>
@@ -76,7 +76,7 @@ sanguis::load::model::random_sound::random_sound(
 		)
 	)
 		throw exception(
-			SGE_TEXT("sound probabilities are 0!")
+			FCPPT_TEXT("sound probabilities are 0!")
 		);
 
 	BOOST_FOREACH(
@@ -109,6 +109,6 @@ sanguis::load::model::random_sound::random() const
 			return sounds_[i].make();
 	
 	throw exception(
-		SGE_TEXT("probability didn't match any sounds!")
+		FCPPT_TEXT("probability didn't match any sounds!")
 	);
 }

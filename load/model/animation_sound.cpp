@@ -5,7 +5,7 @@
 #include <sge/parse/json/array.hpp>
 #include <sge/algorithm/find_exn.hpp>
 #include <sge/log/headers.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <sge/string.hpp>
 #include <boost/foreach.hpp>
 #include <tr1/array>
@@ -21,9 +21,9 @@ typedef std::tr1::array<
 > animation_sound_array;
 
 animation_sound_array const animation_sounds = {{
-	SGE_TEXT("start"),
-	SGE_TEXT("running"),
-	SGE_TEXT("end")
+	FCPPT_TEXT("start"),
+	FCPPT_TEXT("running"),
+	FCPPT_TEXT("end")
 }};
 
 sanguis::animation_sound_type::type
@@ -97,7 +97,7 @@ sanguis::load::model::animation_sound::animation_sound(
 			SGE_LOG_WARNING(
 				log(),
 				sge::log::_
-					<< SGE_TEXT("Double insert in sounds!")
+					<< FCPPT_TEXT("Double insert in sounds!")
 			);
 	}
 }

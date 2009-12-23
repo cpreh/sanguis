@@ -26,7 +26,7 @@
 #include <sge/make_shared_ptr.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/exception.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <sge/lexical_cast.hpp>
 #include <tr1/functional>
 
@@ -78,7 +78,7 @@ load_delay(
 			int	
 		>(
 			members,
-			SGE_TEXT("delay")
+			FCPPT_TEXT("delay")
 		);
 	}
 	catch(sge::exception const &)
@@ -89,8 +89,8 @@ load_delay(
 		SGE_LOG_ERROR(
 			sanguis::load::log(),
 			sge::log::_
-				<< SGE_TEXT("delay not in header but not in specified in leaf TODO")
-				<< SGE_TEXT(" either!")
+				<< FCPPT_TEXT("delay not in header but not in specified in leaf TODO")
+				<< FCPPT_TEXT(" either!")
 		);
 
 		throw;
@@ -119,7 +119,7 @@ sanguis::load::model::animation::animation(
 
 	if(!_texture)
 		throw exception(
-			SGE_TEXT("texture not found in ")
+			FCPPT_TEXT("texture not found in ")
 			+ param_.path().string()
 		);
 	
@@ -134,7 +134,7 @@ sanguis::load::model::animation::animation(
 				sge::parse::json::object
 			>(
 				object_.members,
-				SGE_TEXT("sounds")
+				FCPPT_TEXT("sounds")
 			).members,
 			param_.sounds()
 		);
@@ -184,13 +184,13 @@ void sanguis::load::model::animation::fill_cache(
 			sge::parse::json::array
 		>(
 			object_.members,
-			SGE_TEXT("range")
+			FCPPT_TEXT("range")
 		).elements
 	);
 
 	if(range.size() < 2)
 		throw exception(
-			SGE_TEXT("range has too few elements in TODO")
+			FCPPT_TEXT("range has too few elements in TODO")
 		);
 
 	sge::renderer::size_type const
@@ -233,12 +233,12 @@ void sanguis::load::model::animation::fill_cache(
 			)
 		)
 			throw exception(
-				SGE_TEXT("Rect out of bounds in TODO")
-				SGE_TEXT(". Whole area of texture is ")
+				FCPPT_TEXT("Rect out of bounds in TODO")
+				FCPPT_TEXT(". Whole area of texture is ")
 				+ sge::lexical_cast<sge::string>(_area)
-				+ SGE_TEXT(" but the inner area is ")
+				+ FCPPT_TEXT(" but the inner area is ")
 				+ sge::lexical_cast<sge::string>(cur_area)
-				+ SGE_TEXT(". This happened when trying to load index ")
+				+ FCPPT_TEXT(". This happened when trying to load index ")
 				+ sge::lexical_cast<sge::string>(begin)
 			);
 

@@ -15,7 +15,7 @@
 #include <sge/container/map_impl.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/time/millisecond.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <sge/optional_impl.hpp>
 #include <algorithm>
 
@@ -33,7 +33,7 @@ sanguis::server::entities::projectiles::grenade::grenade(
 		team_,
 		entities::movement_speed(500),
 		load_context_->entity_dim(
-			SGE_TEXT("grenade")
+			FCPPT_TEXT("grenade")
 		),
 		life_time(
 			2

@@ -7,7 +7,7 @@
 #include <sge/image/file.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/thread/sleep.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <sge/time/second.hpp>
 #include <tr1/functional>
 

@@ -18,7 +18,7 @@
 #include <sge/math/compare.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/time/time.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <algorithm>
 #include <limits>
 #include <cmath>
@@ -303,7 +303,7 @@ sanguis::draw::model_part::loop_method(
 		return sge::sprite::animation::loop_method::stop_at_end;
 	default:
 		throw sge::exception(
-			SGE_TEXT("Invalid animation_type in model_part!"));
+			FCPPT_TEXT("Invalid animation_type in model_part!"));
 	}
 }
 

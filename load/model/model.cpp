@@ -18,7 +18,7 @@
 #include <sge/parse/json/find_member.hpp>
 #include <sge/random/last_exclusive_range.hpp>
 #include <sge/fstream.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <boost/next_prior.hpp>
 #include <boost/foreach.hpp>
 #include <utility>
@@ -37,7 +37,7 @@ load_dim(
 			sge::parse::json::array
 		>(
 			entries,
-			SGE_TEXT("cell_dimensions")
+			FCPPT_TEXT("cell_dimensions")
 		)
 	);
 
@@ -47,7 +47,7 @@ load_dim(
 
 	if(elements.size() < 2)
 		throw sanguis::exception(
-			SGE_TEXT("Insufficient members in cell_dimensions!")
+			FCPPT_TEXT("Insufficient members in cell_dimensions!")
 		);
 	
 	return sge::renderer::dim_type(
@@ -78,7 +78,7 @@ load_delay(
 			int
 		>(
 			entries,
-			SGE_TEXT("delay")
+			FCPPT_TEXT("delay")
 		);
 	}
 	catch(sanguis::exception const &e)
@@ -101,9 +101,9 @@ sanguis::load::model::model::operator[](
 
 	if(it == parts.end())
 		throw exception(
-			SGE_TEXT("Category \"")
+			FCPPT_TEXT("Category \"")
 			+ name
-			+ SGE_TEXT("\" not found in ")
+			+ FCPPT_TEXT("\" not found in ")
 			+ path.string()
 		);
 	
@@ -163,7 +163,7 @@ sanguis::load::model::model::model(
 	SGE_LOG_DEBUG(
 		log(),
 		sge::log::_
-			<< SGE_TEXT("Entering ")
+			<< FCPPT_TEXT("Entering ")
 			<< path.string()
 	);
 
@@ -178,11 +178,11 @@ sanguis::load::model::model::model(
 		SGE_LOG_ERROR(
 			log(),
 			sge::log::_
-				<< SGE_TEXT("model \"")
+				<< FCPPT_TEXT("model \"")
 				<< path.string()
-				<< SGE_TEXT("\": \"")
+				<< FCPPT_TEXT("\": \"")
 				<< e.string()
-				<< SGE_TEXT('"')
+				<< FCPPT_TEXT('"')
 		);
 
 		throw;
@@ -193,7 +193,7 @@ void sanguis::load::model::model::construct(
 	resource::context const &ctx)
 {
 	fcppt::filesystem::path const file(
-		path / (fcppt::filesystem::stem(path) + SGE_TEXT(".json"))
+		path / (fcppt::filesystem::stem(path) + FCPPT_TEXT(".json"))
 	);
 
 	sge::parse::json::object object_return;
@@ -209,7 +209,7 @@ void sanguis::load::model::model::construct(
 			sanguis::load::log(),
 			sge::log::_
 				<< file 
-				<< SGE_TEXT(" contains errors!")
+				<< FCPPT_TEXT(" contains errors!")
 			);
 	}
 
@@ -222,7 +222,7 @@ void sanguis::load::model::model::construct(
 			sge::parse::json::object
 		>(
 			global_entries,
-			SGE_TEXT("header")
+			FCPPT_TEXT("header")
 		)
 	);
 
@@ -248,7 +248,7 @@ void sanguis::load::model::model::construct(
 			sge::parse::json::array
 		>(
 			global_entries,
-			SGE_TEXT("parts")
+			FCPPT_TEXT("parts")
 		).elements
 	)
 	{
@@ -262,7 +262,7 @@ void sanguis::load::model::model::construct(
 
 		if(inner_members.size() != 1)
 			throw exception(
-				SGE_TEXT("inner members of the part array have to contain exactly one element!")
+				FCPPT_TEXT("inner members of the part array have to contain exactly one element!")
 			);
 
 		sge::parse::json::member const &member(
@@ -295,7 +295,7 @@ void sanguis::load::model::model::construct(
 			SGE_LOG_WARNING(
 				log(),
 				sge::log::_
-					<< SGE_TEXT("Double insert in model!")
+					<< FCPPT_TEXT("Double insert in model!")
 			);
 	}
 }

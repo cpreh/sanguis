@@ -7,7 +7,7 @@
 #include <sge/gui/layouts/vertical.hpp>
 #include <sge/gui/make_image.hpp>
 #include <sge/make_shared_ptr.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::client::menu::menus::connect::connect(
 	sge::gui::widgets::parent_data const &_parent,
@@ -37,7 +37,7 @@ sanguis::client::menu::menus::connect::connect(
 		sge::gui::widgets::parameters(),
 		sge::gui::make_image(
 			sys.image_loader()->load(
-				labels_path/SGE_TEXT("host.png")))),
+				labels_path/FCPPT_TEXT("host.png")))),
 	host_edit(
 		host,
 		sge::gui::widgets::parameters(),
@@ -54,7 +54,7 @@ sanguis::client::menu::menus::connect::connect(
 		sge::gui::widgets::parameters(),
 		sge::gui::make_image(
 			sys.image_loader()->load(
-				labels_path/SGE_TEXT("port.png")))),
+				labels_path/FCPPT_TEXT("port.png")))),
 	port_edit(
 		port,
 		sge::gui::widgets::parameters(),
@@ -70,7 +70,7 @@ sanguis::client::menu::menus::connect::connect(
 		connect_wrapper,
 		sys.image_loader(),
 		buttons_path,
-		SGE_TEXT("connect")),
+		FCPPT_TEXT("connect")),
 	return_wrapper(
 		parent,
 		sge::gui::widgets::parameters()
@@ -80,6 +80,6 @@ sanguis::client::menu::menus::connect::connect(
 		return_wrapper,
 		sys.image_loader(),
 		buttons_path,
-		SGE_TEXT("return"))
+		FCPPT_TEXT("return"))
 {
 }

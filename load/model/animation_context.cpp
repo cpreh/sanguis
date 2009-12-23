@@ -11,7 +11,7 @@
 #include <sge/parse/json/member_vector.hpp>
 #include <sge/parse/json/element_vector.hpp>
 #include <sge/parse/json/find_member.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <sge/time/unit.hpp>
 #include <boost/foreach.hpp>

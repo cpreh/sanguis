@@ -10,7 +10,7 @@
 #include <sge/algorithm/find_exn.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/optional_impl.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <sge/string.hpp>
 #include <boost/foreach.hpp>
 #include <tr1/array>
@@ -27,13 +27,13 @@ typedef std::tr1::array<
 
 weapon_type_array const weapon_types = {
 {
-	SGE_TEXT("none"),
-	SGE_TEXT("melee"),
-	SGE_TEXT("pistol"),
-	SGE_TEXT("dual_pistols"),
-	SGE_TEXT("shotgun"),
-	SGE_TEXT("rocket_launcher"),
-	SGE_TEXT("grenade")
+	FCPPT_TEXT("none"),
+	FCPPT_TEXT("melee"),
+	FCPPT_TEXT("pistol"),
+	FCPPT_TEXT("dual_pistols"),
+	FCPPT_TEXT("shotgun"),
+	FCPPT_TEXT("rocket_launcher"),
+	FCPPT_TEXT("grenade")
 } };
 
 sanguis::weapon_type::type
@@ -66,7 +66,7 @@ sanguis::load::model::part::operator[](
 		return it->second;
 	if(t == weapon_type::none)
 		throw exception(
-			SGE_TEXT("Unarmed weapon model missing in TODO")
+			FCPPT_TEXT("Unarmed weapon model missing in TODO")
 		);
 	return (*this)[weapon_type::none];
 }
@@ -93,7 +93,7 @@ sanguis::load::model::part::part(
 			sge::parse::json::array
 		>(
 			members,
-			SGE_TEXT("weapon_categories")
+			FCPPT_TEXT("weapon_categories")
 		).elements
 	)
 	{
@@ -107,7 +107,7 @@ sanguis::load::model::part::part(
 
 		if(inner_members.size() != 1)
 			throw exception(
-				SGE_TEXT("inner members of the weapon category array have to contain exactly one element!")
+				FCPPT_TEXT("inner members of the weapon category array have to contain exactly one element!")
 			);
 
 		sge::parse::json::member const &member(
@@ -136,7 +136,7 @@ sanguis::load::model::part::part(
 			SGE_LOG_WARNING(
 				log(),
 				sge::log::_
-					<< SGE_TEXT("Double insert in part!")
+					<< FCPPT_TEXT("Double insert in part!")
 			);
 	}
 }

@@ -2,7 +2,7 @@
 #include "../rocket.hpp"
 #include "../grenade.hpp"
 #include "../../exception.hpp"
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::draw::entity_auto_ptr
 sanguis::draw::factory::aoe_projectile(
@@ -17,7 +17,7 @@ sanguis::draw::factory::aoe_projectile(
 			new rocket(
 				env,
 				id,
-				SGE_TEXT("rocket"),
+				FCPPT_TEXT("rocket"),
 				aoe
 			)
 		);
@@ -26,13 +26,13 @@ sanguis::draw::factory::aoe_projectile(
 			new grenade(
 				env,
 				id,
-				SGE_TEXT("grenade"),
+				FCPPT_TEXT("grenade"),
 				aoe
 			)
 		);
 	default:
 		throw exception(
-			SGE_TEXT("draw::factory::aoe_projectile: missing loading code!")
+			FCPPT_TEXT("draw::factory::aoe_projectile: missing loading code!")
 		);
 	}
 }

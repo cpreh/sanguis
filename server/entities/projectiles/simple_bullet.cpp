@@ -6,7 +6,7 @@
 #include "../../damage/piercing.hpp"
 #include "../../damage/full.hpp"
 #include "../../environment/load_context.hpp"
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 	server::environment::load_context_ptr const load_context,
@@ -22,7 +22,7 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 			500
 		),
 		load_context->entity_dim(
-			SGE_TEXT("bullet")
+			FCPPT_TEXT("bullet")
 		),
 		life_time(
 			10

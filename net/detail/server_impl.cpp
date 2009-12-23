@@ -5,7 +5,7 @@
 #include "../log.hpp"
 #include "../exception.hpp"
 #include <sge/log/headers.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <sge/iconv.hpp>
 #include <sge/lexical_cast.hpp>
 #undef max
@@ -36,7 +36,7 @@ void sanguis::net::detail::server_impl::listen(
 	SGE_LOG_DEBUG(
 		log(),
 		sge::log::_
-			<< SGE_TEXT("server: listening on port ")
+			<< FCPPT_TEXT("server: listening on port ")
 			<< port
 	);
 
@@ -91,7 +91,7 @@ void sanguis::net::detail::server_impl::process()
 		io_service_.poll(e);
 		if (e)
 			throw exception(
-				SGE_TEXT("poll error: ")+
+				FCPPT_TEXT("poll error: ")+
 				sge::iconv(
 					e.message()));
 	}
@@ -120,7 +120,7 @@ void sanguis::net::detail::server_impl::queue(
 
 		if (!c.connected_)
 			throw exception(
-				SGE_TEXT("invalid id ")+
+				FCPPT_TEXT("invalid id ")+
 				sge::lexical_cast<sge::string>(
 					id));
 
@@ -132,7 +132,7 @@ void sanguis::net::detail::server_impl::queue(
 
 	// no valid id found?
 	throw exception(
-		SGE_TEXT("invalid id ")+
+		FCPPT_TEXT("invalid id ")+
 		sge::lexical_cast<sge::string>(
 			id));
 }
@@ -189,16 +189,16 @@ void sanguis::net::detail::server_impl::read_handler(
 
 	if (e)
 	{
-		handle_error(SGE_TEXT("server read"),e,c);
+		handle_error(FCPPT_TEXT("server read"),e,c);
 		return;
 	}
 
 	SGE_LOG_DEBUG(
 		log(),
 		sge::log::_
-			<< SGE_TEXT("server: reading ")
+			<< FCPPT_TEXT("server: reading ")
 			<< bytes 
-			<< SGE_TEXT(" bytes."));
+			<< FCPPT_TEXT(" bytes."));
 	
 	data_signal_(
 		c.id_,
@@ -235,7 +235,7 @@ void sanguis::net::detail::server_impl::write_handler(
 	if (e)
 	{
 		handle_error(
-			SGE_TEXT("server write"),
+			FCPPT_TEXT("server write"),
 			e,
 			c);
 		return;
@@ -244,9 +244,9 @@ void sanguis::net::detail::server_impl::write_handler(
 	SGE_LOG_DEBUG(
 		log(),
 		sge::log::_
-			<< SGE_TEXT("server: wrote ")
+			<< FCPPT_TEXT("server: wrote ")
 			<< bytes 
-			<< SGE_TEXT(" bytes.")
+			<< FCPPT_TEXT(" bytes.")
 	);
 
 	c.output_.erase(
@@ -290,7 +290,7 @@ void sanguis::net::detail::server_impl::accept_handler(
 	{
 		SGE_LOG_DEBUG(
 			log(),
-			sge::log::_ << SGE_TEXT("server: error while accepting"));
+			sge::log::_ << FCPPT_TEXT("server: error while accepting"));
 		throw exception(
 			sge::iconv(
 				e.message()));
@@ -298,7 +298,7 @@ void sanguis::net::detail::server_impl::accept_handler(
 
 	SGE_LOG_DEBUG(
 		log(),
-		sge::log::_ << SGE_TEXT("server: accepting a connection"));
+		sge::log::_ << FCPPT_TEXT("server: accepting a connection"));
 
 	// first set connected, _then_ call handler 
 	// (else queueing code in the handler can't work)
@@ -340,18 +340,18 @@ void sanguis::net::detail::server_impl::handle_error(
 	if (!detail::is_disconnect(e))
 		throw sge::exception(
 			message +
-			SGE_TEXT(" error: ")+
+			FCPPT_TEXT(" error: ")+
 			error_msg
 		);
 
 	SGE_LOG_DEBUG(
 		log(),
 		sge::log::_
-			<< SGE_TEXT("server: disconnected ")
+			<< FCPPT_TEXT("server: disconnected ")
 			<< c.id_ 
-			<< SGE_TEXT(" (")
+			<< FCPPT_TEXT(" (")
 			<< error_msg
-			<< SGE_TEXT(")")
+			<< FCPPT_TEXT(")")
 	);
 
 	// ...else remove connection

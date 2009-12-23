@@ -6,7 +6,7 @@
 #include <sge/gui/widgets/label.hpp>
 #include <sge/gui/layouts/grid.hpp>
 #include <sge/gui/layouts/vertical.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <sge/fstream.hpp>
 #include <sge/lexical_cast.hpp>
 #include <sge/make_shared_ptr.hpp>
@@ -40,7 +40,7 @@ sanguis::client::menu::menus::highscore::highscore(
 		sge::gui::widgets::parameters()
 			.pos(
 				sge::gui::point(0,1)),
-		SGE_TEXT("Back")),
+		FCPPT_TEXT("Back")),
 	children()
 {
 	populate_children();
@@ -50,7 +50,7 @@ void sanguis::client::menu::menus::highscore::populate_children()
 {
 	sge::ifstream file(
 		config::homedir()/
-		SGE_TEXT("highscore"));
+		FCPPT_TEXT("highscore"));
 	sanguis::client::highscore::table const t = 
 		sanguis::client::highscore::read(
 			file);
@@ -61,14 +61,14 @@ void sanguis::client::menu::menus::highscore::populate_children()
 			sge::gui::widgets::parameters()
 				.pos(
 					sge::gui::point(0,0)),
-			SGE_TEXT("Name(s)")));
+			FCPPT_TEXT("Name(s)")));
 	children.push_back(
 		new sge::gui::widgets::label(
 			table,
 			sge::gui::widgets::parameters()
 				.pos(
 					sge::gui::point(1,0)),
-			SGE_TEXT("Score")));
+			FCPPT_TEXT("Score")));
 
 	sge::gui::unit y_pos = 1;
 	BOOST_FOREACH(sanguis::client::highscore::entry const &e,t)
@@ -81,7 +81,7 @@ void sanguis::client::menu::menus::highscore::populate_children()
 						sge::gui::point(0,y_pos)),
 				sge::algorithm::join_strings(
 					e.names(),
-					SGE_TEXT(", "))));
+					FCPPT_TEXT(", "))));
 		children.push_back(
 			new sge::gui::widgets::label(
 				table,

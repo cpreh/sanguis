@@ -1,7 +1,7 @@
 #include "collision_groups.hpp"
 #include "../../exception.hpp"
 #include <sge/assign/make_container.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::server::collision::group_vector const
 sanguis::server::auras::collision_groups(
@@ -48,6 +48,6 @@ sanguis::server::auras::collision_groups(
 			);
 
 	throw exception(
-		SGE_TEXT("Don't know a collision group for an aura.")
+		FCPPT_TEXT("Don't know a collision group for an aura.")
 	);
 }

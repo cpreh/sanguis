@@ -14,7 +14,7 @@
 
 // sge
 #include <sge/cerr.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <sge/exception.hpp>
 #include <sge/iconv.hpp>
 #include <sge/make_shared_ptr.hpp>
@@ -135,7 +135,7 @@ try
 	
 	po::variables_map vm;
 	po::store(po::parse_command_line(argc,argv,desc),vm);
-	if (boost::filesystem::exists(SGE_TEXT("config")))
+	if (boost::filesystem::exists(FCPPT_TEXT("config")))
 	{
 		// NOTE: this has to be a std::ifstream since boost::po only handels those cases
 		std::ifstream config_file("config");
@@ -181,7 +181,7 @@ try
 		sge::systems::list()
 		(
 			sge::window::parameters(
-				SGE_TEXT("sanguis")
+				FCPPT_TEXT("sanguis")
 			)
 		)
 		(
@@ -205,7 +205,7 @@ try
 		(
 			sge::systems::named(
 				sge::systems::parameterless::image,
-				SGE_TEXT("libpng")
+				FCPPT_TEXT("libpng")
 			)
 		)
 		(sge::systems::parameterless::audio_player)
@@ -213,7 +213,7 @@ try
 		(
 			sge::systems::named(
 				sge::systems::parameterless::font,
-				SGE_TEXT("freetype")
+				FCPPT_TEXT("freetype")
 			)
 		)
 	);
@@ -232,7 +232,7 @@ try
 	// font stuff
 	sge::font::metrics_ptr const metrics(
 		sys.font_system()->create_font(
-			sge::config::media_path() / SGE_TEXT("fonts") / SGE_TEXT("default.ttf"),
+			sge::config::media_path() / FCPPT_TEXT("fonts") / SGE_TEXT("default.ttf"),
 			static_cast<sge::font::size_type>(15)
 		)
 	);
@@ -258,7 +258,7 @@ try
 		)
 	);
 
-	sge::console::object console(SGE_TEXT('/'));
+	sge::console::object console(FCPPT_TEXT('/'));
 
 	sge::console::gfx console_gfx(
 		console,
@@ -273,7 +273,7 @@ try
 					texman,
 					sys.image_loader()->load(
 						sanguis::media_path()
-						/ SGE_TEXT("console_back.png")
+						/ FCPPT_TEXT("console_back.png")
 					)
 				)
 			)
@@ -342,7 +342,7 @@ try
 }
 catch (sge::exception const &e)
 {
-	sge::cerr << SGE_TEXT("caught sge exception: ") << e.string() << SGE_TEXT('\n');
+	sge::cerr << FCPPT_TEXT("caught sge exception: ") << e.string() << SGE_TEXT('\n');
 	return EXIT_FAILURE;
 }
 catch (std::exception const &e)

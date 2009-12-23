@@ -3,7 +3,7 @@
 #include <sge/log/parameters/root.hpp>
 #include <sge/log/parameters/all.hpp>
 #include <sge/cerr.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sge::log::object &
 sanguis::log()
@@ -13,7 +13,7 @@ sanguis::log()
 			sge::cerr
 		)
 		.prefix(
-			SGE_TEXT("sanguis")
+			FCPPT_TEXT("sanguis")
 		)
 		.enabled(
 			true

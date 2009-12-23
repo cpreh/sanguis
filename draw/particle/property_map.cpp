@@ -1,7 +1,7 @@
 #include "property_map.hpp"
 #include "properties.hpp"
 #include "../../exception.hpp"
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::draw::particle::property_map::property_map(
 	property_container const &container_)
@@ -20,7 +20,7 @@ sanguis::draw::particle::property_map::operator[](
 	// TODO: maybe provide a default here?
 	if(it == container_.end())
 		throw exception(
-			SGE_TEXT("Property not found in particle!"));
+			FCPPT_TEXT("Property not found in particle!"));
 	return it->second;
 
 }

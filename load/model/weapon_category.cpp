@@ -12,7 +12,7 @@
 #include <sge/algorithm/find_exn.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/string.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
 #include <tr1/array>
 #include <utility>
@@ -27,12 +27,12 @@ typedef std::tr1::array<
 > animation_type_array;
 
 animation_type_array const animation_types = {{
-	SGE_TEXT("none"),
-	SGE_TEXT("attacking"),
-	SGE_TEXT("walking"),
-	SGE_TEXT("dying"),
-	SGE_TEXT("deploying"),
-	SGE_TEXT("reloading")
+	FCPPT_TEXT("none"),
+	FCPPT_TEXT("attacking"),
+	FCPPT_TEXT("walking"),
+	FCPPT_TEXT("dying"),
+	FCPPT_TEXT("deploying"),
+	FCPPT_TEXT("reloading")
 }};
 
 sanguis::animation_type::type
@@ -69,7 +69,7 @@ sanguis::load::model::weapon_category::operator[](
 
 	if(anim == animation_type::none)
 		throw exception(
-			SGE_TEXT("Default animation not found in TODO")
+			FCPPT_TEXT("Default animation not found in TODO")
 		);
 		
 	throw base_animation_not_found(
@@ -109,7 +109,7 @@ sanguis::load::model::weapon_category::weapon_category(
 			sge::parse::json::array
 		>(
 			members	,
-			SGE_TEXT("animations")
+			FCPPT_TEXT("animations")
 		).elements
 	)
 	{
@@ -123,7 +123,7 @@ sanguis::load::model::weapon_category::weapon_category(
 
 		if(inner_members.size() != 1)
 			throw exception(
-				SGE_TEXT("inner members of the animation array have to contain exactly one element!")
+				FCPPT_TEXT("inner members of the animation array have to contain exactly one element!")
 			);
 
 		sge::parse::json::member const &member(
@@ -152,7 +152,7 @@ sanguis::load::model::weapon_category::weapon_category(
 			SGE_LOG_WARNING(
 				log(),
 				sge::log::_
-					<< SGE_TEXT("Double insert in weapon_category!")
+					<< FCPPT_TEXT("Double insert in weapon_category!")
 			);
 	}
 }

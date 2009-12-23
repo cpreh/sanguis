@@ -40,7 +40,7 @@
 #include <sge/time/millisecond.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <sge/optional_impl.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
 #include <tr1/functional>
 
@@ -209,7 +209,7 @@ sanguis::server::world::object::insert(
 		!ret.second
 	)
 		throw exception(
-			SGE_TEXT("Double insert of entity!")
+			FCPPT_TEXT("Double insert of entity!")
 		);
 	
 	return *ret.first->second;
@@ -386,7 +386,7 @@ sanguis::server::world::object::request_transfer(
 		it == entities_.end()
 	)
 		throw exception(
-			SGE_TEXT("entity can't be transferred!")
+			FCPPT_TEXT("entity can't be transferred!")
 		);
 
 	entities::auto_ptr entity_(
@@ -424,7 +424,7 @@ sanguis::server::world::object::add_sight_range(
 		it == entities_.end()
 	)
 		throw exception(
-			SGE_TEXT("can't get entity for sight update!")
+			FCPPT_TEXT("can't get entity for sight update!")
 		);
 
 	entities::base &entity_(

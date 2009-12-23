@@ -1,7 +1,7 @@
 #include "changeable.hpp"
 #include "initial.hpp"
 #include "../../../exception.hpp"
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <algorithm>
 
 sanguis::server::entities::property::changeable::changeable(
@@ -117,6 +117,6 @@ sanguis::server::entities::property::changeable::check_current()
 		current_ > max_
 	)
 		throw exception(
-			SGE_TEXT("current > max")
+			FCPPT_TEXT("current > max")
 		);
 }

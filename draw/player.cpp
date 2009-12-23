@@ -3,7 +3,7 @@
 #include "sprite_part_index.hpp"
 #include "sprite/point.hpp"
 #include "../client/next_id.hpp"
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <sge/math/vector/structure_cast.hpp>
 #include <sge/math/vector/angle_between.hpp>
 #include <sge/math/vector/is_null.hpp>
@@ -35,7 +35,7 @@ sanguis::draw::player::player(
 	model(
 		env,
 		id,
-		SGE_TEXT("player"),
+		FCPPT_TEXT("player"),
 		z_ordering::model_generic,
 		true,
 		draw::remove_action::render_dead),

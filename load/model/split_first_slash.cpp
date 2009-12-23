@@ -1,6 +1,6 @@
 #include "split_first_slash.hpp"
 #include "../../exception.hpp"
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::load::model::split_pair const
 sanguis::load::model::split_first_slash(
@@ -8,13 +8,13 @@ sanguis::load::model::split_first_slash(
 {
 	sge::string::size_type const sz(
 		s.find(
-			SGE_TEXT('/')
+			FCPPT_TEXT('/')
 		)
 	);
 
 	if(sz == sge::string::npos)
 		throw exception(
-			SGE_TEXT("No / found in ")
+			FCPPT_TEXT("No / found in ")
 			+ s
 		);
 	

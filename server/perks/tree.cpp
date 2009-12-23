@@ -4,7 +4,7 @@
 #include <sge/container/tree_impl.hpp>
 #include <sge/container/traversal.hpp>
 #include <sge/log/headers.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 namespace
 {
@@ -107,7 +107,7 @@ sanguis::server::perks::tree::choosable(
 		SGE_LOG_WARNING(
 			log(),
 			sge::log::_
-				<< SGE_TEXT("Perk not found in tree")
+				<< FCPPT_TEXT("Perk not found in tree")
 		);
 		return false;
 	}
@@ -160,7 +160,7 @@ sanguis::server::perks::tree::take(
 	
 	if(it == trav.end())
 		throw exception(
-			SGE_TEXT("Perk not found in the tree!"));
+			FCPPT_TEXT("Perk not found in the tree!"));
 	
 	(*it).value().choose();
 }

@@ -21,7 +21,7 @@
 #include <sge/time/resolution.hpp>
 #include <sge/time/second_f.hpp>
 #include <sge/format.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 #include <boost/mpl/vector/vector10.hpp>
 #include <tr1/functional>
@@ -79,7 +79,7 @@ sanguis::server::states::unpaused::operator()(
 
 	if (wt > weapon_type::size)
 		throw exception(
-			SGE_TEXT("got invalid weapon type in player_change_weapon")
+			FCPPT_TEXT("got invalid weapon type in player_change_weapon")
 		);
 
 	context<
@@ -167,7 +167,7 @@ sanguis::server::states::unpaused::operator()(
 	SGE_LOG_WARNING(
 		log(),
 		sge::log::_ 
-			<< SGE_TEXT("received superfluous unpause!")
+			<< FCPPT_TEXT("received superfluous unpause!")
 	);
 
 	return discard_event();
@@ -250,7 +250,7 @@ sanguis::server::states::unpaused::log()
 	static sge::log::object log_(
 		sge::log::parameters::inherited(
 			server::log(),
-			SGE_TEXT("unpaused")
+			FCPPT_TEXT("unpaused")
 		)
 	);
 

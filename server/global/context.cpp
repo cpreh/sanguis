@@ -21,7 +21,7 @@
 #include <sge/math/vector/is_null.hpp>
 #include <sge/math/vector/to_angle.hpp>
 #include <sge/make_shared_ptr.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
 #include <tr1/functional>
 
@@ -266,10 +266,10 @@ sanguis::server::global::context::player_choose_perk(
 		SGE_LOG_WARNING(
 			log(),
 			sge::log::_
-				<< SGE_TEXT("Player with id ")
+				<< FCPPT_TEXT("Player with id ")
 				<< player_id_
-				<< SGE_TEXT(" tried to take an invalid perk")
-				<< SGE_TEXT(" or has no skillpoints left!"));
+				<< FCPPT_TEXT(" tried to take an invalid perk")
+				<< FCPPT_TEXT(" or has no skillpoints left!"));
 		return;
 	}
 
@@ -369,7 +369,7 @@ sanguis::server::global::context::log()
 	static sge::log::object log_(
 		sge::log::parameters::inherited(
 			server::log(),
-			SGE_TEXT("global::context")
+			FCPPT_TEXT("global::context")
 		)
 	);
 

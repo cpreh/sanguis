@@ -12,7 +12,7 @@
 #include <sge/input/key_pair.hpp>
 #include <sge/input/system.hpp>
 #include <sge/log/headers.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <tr1/functional>
 
 sanguis::client::screenshot::screenshot(
@@ -48,18 +48,18 @@ void sanguis::client::screenshot::process()
 
 	fcppt::filesystem::path const 
 		p = make_screenshot_path(),
-		dir = config::homedir()/SGE_TEXT("screenshots");
+		dir = config::homedir()/FCPPT_TEXT("screenshots");
 	
 	if (!fcppt::filesystem::exists(dir))
 		fcppt::filesystem::create_directory(dir);
 	
 	if (!fcppt::filesystem::is_directory(dir))
-		throw exception(SGE_TEXT("Screenshot path ")+(dir/p).string()+SGE_TEXT(" exists but is not a directory"));
+		throw exception(FCPPT_TEXT("Screenshot path ")+(dir/p).string()+SGE_TEXT(" exists but is not a directory"));
 
 	SGE_LOG_DEBUG(
 		log(),
 		sge::log::_
-			<< SGE_TEXT("writing screenshot: ")
+			<< FCPPT_TEXT("writing screenshot: ")
 			<< (dir/p)
 	);
 	

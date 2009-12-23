@@ -2,7 +2,7 @@
 #include "buff.hpp"
 #include "../entities/with_buffs.hpp"
 #include "../../exception.hpp"
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <utility>
 
 sanguis::server::buffs::provider::provider()
@@ -33,7 +33,7 @@ sanguis::server::buffs::provider::add(
 		!ret.second
 	)
 		throw exception(
-			SGE_TEXT("Double buff insertion!")
+			FCPPT_TEXT("Double buff insertion!")
 		);
 	
 	entity_.add_buff(
@@ -56,7 +56,7 @@ sanguis::server::buffs::provider::remove(
 		it == buffs_.end()
 	)
 		throw exception(
-			SGE_TEXT("No buff for an entity!")
+			FCPPT_TEXT("No buff for an entity!")
 		);
 	
 	map::auto_type reclaimed(

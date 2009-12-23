@@ -8,7 +8,7 @@
 #include <sge/time/second.hpp>
 #include <sge/container/map_impl.hpp>
 #include <sge/optional_impl.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <boost/logic/tribool.hpp>
 
 sanguis::pickup_type::type

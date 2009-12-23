@@ -11,7 +11,7 @@
 #include <sge/log/headers.hpp>
 #include <sge/log/object.hpp>
 #include <sge/iconv.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <tr1/functional>
 #include <ostream>
@@ -82,7 +82,7 @@ sanguis::server::states::paused::operator()(
 	SGE_LOG_WARNING(
 		log(),
 		sge::log::_
-			<< SGE_TEXT("got superfluous pause"));;
+			<< FCPPT_TEXT("got superfluous pause"));;
 	return discard_event();
 }
 
@@ -100,7 +100,7 @@ sanguis::server::states::paused::log()
 	static sge::log::object log_(
 		sge::log::parameters::inherited(
 			server::log(),
-			SGE_TEXT("paused")
+			FCPPT_TEXT("paused")
 		)
 	);
 	return log_;

@@ -15,7 +15,7 @@
 #include <sge/optional_impl.hpp>
 #include <sge/fstream.hpp>
 #include <sge/istringstream.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include <tr1/functional>
@@ -41,12 +41,12 @@ sanguis::load::resource::animations::do_load(
 {
 	if (!fcppt::filesystem::exists(dir) || !sge::filesystem::is_directory(dir))
 		throw exception(
-			SGE_TEXT("directory for animation \"")
+			FCPPT_TEXT("directory for animation \"")
 			+ dir.string()
-			+ SGE_TEXT("\" doesn't exist")
+			+ FCPPT_TEXT("\" doesn't exist")
 		);
 
-	fcppt::filesystem::path const framesfile = dir / SGE_TEXT("frames");
+	fcppt::filesystem::path const framesfile = dir / FCPPT_TEXT("frames");
 
 	// look for frames file inside directory
 	if (!fcppt::filesystem::exists(framesfile) || !sge::filesystem::is_regular(framesfile))
@@ -56,22 +56,22 @@ sanguis::load::resource::animations::do_load(
 	sge::ifstream file(framesfile);
 	if (!file.is_open())
 		throw exception(
-			SGE_TEXT("error opening file \"")
+			FCPPT_TEXT("error opening file \"")
 			+ framesfile.string()
-			+ SGE_TEXT("\""));
+			+ FCPPT_TEXT("\""));
 	
 	// read first line, determine if it has constant frame time
 	sge::string line;
 	if (!std::getline(file,line))
 		throw exception(
-			SGE_TEXT("unexpected end of file \"")
+			FCPPT_TEXT("unexpected end of file \"")
 			+ framesfile.string());
 
 	sge::optional<
 		sge::time::resolution
 	> const_delay;
 
-	if (boost::algorithm::starts_with(line,SGE_TEXT("frame_length ")))
+	if (boost::algorithm::starts_with(line,FCPPT_TEXT("frame_length ")))
 		const_delay =
 			sge::time::millisecond(
 				sge::lexical_cast<
@@ -79,7 +79,7 @@ sanguis::load::resource::animations::do_load(
 				>(
 					line.substr(
 						sge::string(
-							SGE_TEXT("frame_length ")
+							FCPPT_TEXT("frame_length ")
 						)
 						.length()
 					)
@@ -108,9 +108,9 @@ sanguis::load::resource::animations::do_load(
 			ss >> temp_delay >> std::ws;
 			if (!ss)
 				throw exception(
-					SGE_TEXT("invalid line ")
+					FCPPT_TEXT("invalid line ")
 					+ sge::lexical_cast<sge::string>(lineno)
-					+ SGE_TEXT(" in animation ")
+					+ FCPPT_TEXT(" in animation ")
 					+ dir.string());
 			filename = ss.str().substr(ss.tellg());
 			delay = sge::time::millisecond(temp_delay);
@@ -151,7 +151,7 @@ sanguis::load::resource::animations::load_without_frames_file(
 			dir));
 	
 	if(first_file == fcppt::filesystem::directory_iterator())
-		throw exception(dir.string() + SGE_TEXT(" is empty!"));
+		throw exception(dir.string() + FCPPT_TEXT(" is empty!"));
 	
 	fcppt::filesystem::path const first_path(
 		*first_file);
@@ -160,10 +160,10 @@ sanguis::load::resource::animations::load_without_frames_file(
 		SGE_LOG_WARNING(
 			log(),
 			sge::log::_
-				<< SGE_TEXT("No frames file found in \"")
+				<< FCPPT_TEXT("No frames file found in \"")
 				<< dir
-				<< SGE_TEXT("\" although there is more than one file!")
-				<< SGE_TEXT(" Just taking the first image."));
+				<< FCPPT_TEXT("\" although there is more than one file!")
+				<< FCPPT_TEXT(" Just taking the first image."));
 
 	sge::sprite::animation::series ret;
 	ret.push_back(

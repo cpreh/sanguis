@@ -1,6 +1,6 @@
 #include "weapon_pickup_name.hpp"
 #include "../exception.hpp"
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sge::string const
 sanguis::load::weapon_pickup_name(
@@ -8,17 +8,17 @@ sanguis::load::weapon_pickup_name(
 {
 	switch(wtype) {
 	case weapon_type::pistol:
-		return SGE_TEXT("pickups/pistol");
+		return FCPPT_TEXT("pickups/pistol");
 	case weapon_type::shotgun:
-		return SGE_TEXT("pickups/shotgun");
+		return FCPPT_TEXT("pickups/shotgun");
 	case weapon_type::rocket_launcher:
-		return SGE_TEXT("pickups/rocket_launcher");
+		return FCPPT_TEXT("pickups/rocket_launcher");
 	case weapon_type::grenade:
-		return SGE_TEXT("pickups/grenade");
+		return FCPPT_TEXT("pickups/grenade");
 	case weapon_type::sentry:
-		return SGE_TEXT("pickups/sentry");
+		return FCPPT_TEXT("pickups/sentry");
 	default:
 		throw exception(
-			SGE_TEXT("load::weapon_pickup_name: missing loading code!"));
+			FCPPT_TEXT("load::weapon_pickup_name: missing loading code!"));
 	}
 }

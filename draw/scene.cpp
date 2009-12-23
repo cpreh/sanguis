@@ -25,7 +25,7 @@
 
 #include <sge/make_auto_ptr.hpp>
 #include <sge/iconv.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <sge/format.hpp>
 #include <sge/math/dim/structure_cast.hpp>
 #include <sge/math/vector/structure_cast.hpp>
@@ -176,7 +176,7 @@ sanguis::draw::scene::client_message(
 		== false
 	)
 		throw exception(
-			SGE_TEXT("Client object with id already in entity list!")
+			FCPPT_TEXT("Client object with id already in entity list!")
 		);
 	// FIXME: configure the object here, too!
 }
@@ -448,7 +448,7 @@ void sanguis::draw::scene::operator()(
 	{
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_ << SGE_TEXT("Invalid change_weapon message: Value out of range!"));
+			sge::log::_ << FCPPT_TEXT("Invalid change_weapon message: Value out of range!"));
 		return;
 	}
 	
@@ -519,7 +519,7 @@ void sanguis::draw::scene::operator()(
 
 	if(it == entities.end())
 		throw exception(
-			SGE_TEXT("Object not in entity map, can't remove it!")
+			FCPPT_TEXT("Object not in entity map, can't remove it!")
 		);
 	
 	draw::entity &e(
@@ -699,7 +699,7 @@ sanguis::draw::scene::insert(
 		!ret.second
 	)
 		throw exception(
-			SGE_TEXT("scene::insert(): failed to insert!")
+			FCPPT_TEXT("scene::insert(): failed to insert!")
 		);
 	
 	return *ret.first->second;
@@ -722,7 +722,7 @@ sanguis::draw::scene::entity(
 		throw exception(
 			(
 				sge::format(
-					SGE_TEXT("Object with id %1% not in entity map!")
+					FCPPT_TEXT("Object with id %1% not in entity map!")
 				)
 				% id
 			).str()
@@ -757,7 +757,7 @@ sanguis::draw::scene::process_default_msg(
 	SGE_LOG_WARNING(
 		log(),
 		sge::log::_
-			<< SGE_TEXT("Invalid message event in scene: ")
+			<< FCPPT_TEXT("Invalid message event in scene: ")
 			<< sge::iconv(typeid(m).name()));
 }
 
@@ -767,7 +767,7 @@ sanguis::draw::scene::log()
 	static sge::log::object log_(
 		sge::log::parameters::inherited(
 			draw::log(),
-			SGE_TEXT("scene")
+			FCPPT_TEXT("scene")
 		)
 	);
 	return log_;

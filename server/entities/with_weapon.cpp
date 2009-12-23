@@ -8,7 +8,7 @@
 #include "../../messages/create.hpp"
 #include "../../exception.hpp"
 #include <sge/math/vector/basic_impl.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <tr1/functional>
 #include <limits>
 
@@ -111,7 +111,7 @@ sanguis::server::entities::with_weapon::change_weapon(
 {
 	if (nweapon != weapon_type::none && !weapons_.count(nweapon))
 		throw exception(
-			SGE_TEXT("tried to change to non-owned weapon")
+			FCPPT_TEXT("tried to change to non-owned weapon")
 		);
 	
 	if(has_weapon())
@@ -186,7 +186,7 @@ sanguis::server::entities::with_weapon::add_weapon(
 		).second
 	)
 		throw exception(
-			SGE_TEXT("couldn't insert weapon")
+			FCPPT_TEXT("couldn't insert weapon")
 		);
 	
 	on_new_weapon(
@@ -200,7 +200,7 @@ sanguis::server::entities::with_weapon::remove_weapon(
 )
 {
 	if(!weapons_.erase(type_))
-		throw exception(SGE_TEXT("tried to remove non-owned weapon"));
+		throw exception(FCPPT_TEXT("tried to remove non-owned weapon"));
 }
 
 void
@@ -241,7 +241,7 @@ sanguis::server::entities::with_weapon::active_weapon()
 
 	if(it == weapons_.end())
 		throw exception(
-			SGE_TEXT("No weapon active in with_weapon!")
+			FCPPT_TEXT("No weapon active in with_weapon!")
 		);
 	
 	return *it->second;

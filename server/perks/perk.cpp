@@ -1,6 +1,6 @@
 #include "perk.hpp"
 #include "../../exception.hpp"
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 void
 sanguis::server::perks::perk::update(
@@ -20,7 +20,7 @@ sanguis::server::perks::perk::raise_level(
 		!can_raise_level()
 	)
 		throw exception(
-			SGE_TEXT("Can't raise perk level!")
+			FCPPT_TEXT("Can't raise perk level!")
 		);
 	
 	unapply(

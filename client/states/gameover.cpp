@@ -93,7 +93,7 @@ sanguis::client::states::gameover::gameover(
 		sge::gui::widgets::parameters()
 			.pos(	
 				sge::gui::point(0,0)),
-		SGE_TEXT("You are dead.")
+		FCPPT_TEXT("You are dead.")
 	),
 	score(
 		background_,
@@ -111,7 +111,7 @@ sanguis::client::states::gameover::gameover(
 			.pos(	
 				sge::gui::point(0,0)
 			),
-		SGE_TEXT("Name(s):")
+		FCPPT_TEXT("Name(s):")
 	),
 	score_head(
 		score,
@@ -119,7 +119,7 @@ sanguis::client::states::gameover::gameover(
 			.pos(	
 				sge::gui::point(1,0)
 			),
-		SGE_TEXT("Score:")
+		FCPPT_TEXT("Score:")
 	),
 	names_text(
 		score,
@@ -129,7 +129,7 @@ sanguis::client::states::gameover::gameover(
 			),
 		sge::algorithm::join_strings(
 			context<machine>().gameover_names(),
-			SGE_TEXT(", ")
+			FCPPT_TEXT(", ")
 		)
 	),
 	score_text(
@@ -148,7 +148,7 @@ sanguis::client::states::gameover::gameover(
 			.pos(	
 				sge::gui::point(0,2)
 			),
-		SGE_TEXT("Main menu")
+		FCPPT_TEXT("Main menu")
 	),
 	return_connection(
 		buttons_return.register_clicked(

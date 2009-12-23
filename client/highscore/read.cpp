@@ -9,7 +9,7 @@
 #include <sge/log/headers.hpp>
 #include <sge/string.hpp>
 #include <sge/char_type.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
 #include <istream>
 
@@ -47,7 +47,7 @@ sanguis::client::highscore::read(
 			SGE_LOG_ERROR(
 				log(),
 				sge::log::_
-					<< SGE_TEXT("Errors in the highscore file detected!")
+					<< FCPPT_TEXT("Errors in the highscore file detected!")
 			);
 
 			return table();
@@ -62,7 +62,7 @@ sanguis::client::highscore::read(
 			sge::parse::json::array
 		>(
 			result.members,
-			SGE_TEXT("entries")
+			FCPPT_TEXT("entries")
 		).elements
 	)
 	{
@@ -82,7 +82,7 @@ sanguis::client::highscore::read(
 				sge::parse::json::array
 			>(
 				members,
-				SGE_TEXT("names")
+				FCPPT_TEXT("names")
 			).elements
 		)
 			names_result.push_back(
@@ -100,7 +100,7 @@ sanguis::client::highscore::read(
 					int
 				>(
 					members,
-					SGE_TEXT("score")
+					FCPPT_TEXT("score")
 				)
 			)
 		);

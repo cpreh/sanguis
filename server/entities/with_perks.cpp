@@ -2,7 +2,7 @@
 #include "../perks/perk.hpp"
 #include "../log.hpp"
 #include <sge/log/headers.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
 
 void
@@ -40,7 +40,7 @@ sanguis::server::entities::with_perks::add_perk(
 		SGE_LOG_WARNING(
 			log(),
 			sge::log::_
-				<< SGE_TEXT("Tried to raise perk level of a perk which can't do this.")
+				<< FCPPT_TEXT("Tried to raise perk level of a perk which can't do this.")
 		);
 
 		return;

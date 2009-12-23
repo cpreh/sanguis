@@ -18,7 +18,7 @@
 #include <sge/image/colors.hpp>
 #include <sge/utf8/convert.hpp>
 #include <sge/lexical_cast.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <sge/iconv.hpp>
 #include <boost/mpl/vector.hpp>
 #include <tr1/functional>
@@ -132,7 +132,7 @@ sanguis::client::states::menu::operator()(
 		messages::create(
 			messages::client_info(
 				sge::utf8::convert(
-					SGE_TEXT("player1")
+					FCPPT_TEXT("player1")
 				)
 			)
 		)
@@ -145,7 +145,7 @@ sanguis::client::states::menu::operator()(
 	messages::disconnect const &)
 {
 	menu_.connection_error(
-		SGE_TEXT("The server closed the connection"));
+		FCPPT_TEXT("The server closed the connection"));
 	return discard_event();
 }
 
@@ -156,7 +156,7 @@ sanguis::client::states::menu::operator()(
 	SGE_LOG_DEBUG(
 		log(),
 		sge::log::_
-			<< SGE_TEXT("received id"));
+			<< FCPPT_TEXT("received id"));
 	post_event(
 		message_event(
 			messages::create(
@@ -174,17 +174,17 @@ sanguis::client::states::menu::operator()(
 			SGE_LOG_DEBUG(
 				log(),
 				sge::log::_
-					<< SGE_TEXT("switching to state \"unpaused\""));
+					<< FCPPT_TEXT("switching to state \"unpaused\""));
 			return transit<unpaused>();
 		case connect_state::paused:
 			SGE_LOG_DEBUG(
 				log(),
 				sge::log::_
-					<< SGE_TEXT("switching to state \"paused\""));
+					<< FCPPT_TEXT("switching to state \"paused\""));
 			return transit<paused>();
 	}
 	throw sge::exception(
-		SGE_TEXT("invalid followup state!"));
+		FCPPT_TEXT("invalid followup state!"));
 }
 
 sge::log::object &
@@ -193,7 +193,7 @@ sanguis::client::states::menu::log()
 	static sge::log::object log_(
 		sge::log::parameters::inherited(
 			client::log(),
-			SGE_TEXT("states::menu")
+			FCPPT_TEXT("states::menu")
 		)
 	);
 	return log_;
@@ -219,7 +219,7 @@ void sanguis::client::states::menu::connect(
 	catch (sge::bad_lexical_cast const &)
 	{
 		menu_.connection_error(
-			SGE_TEXT("invalid port specification")
+			FCPPT_TEXT("invalid port specification")
 		);
 	}
 }

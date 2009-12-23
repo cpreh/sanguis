@@ -1,6 +1,6 @@
 #include "movement_type.hpp"
 #include <sge/exception.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <ostream>
 #include <istream>
 
@@ -21,7 +21,7 @@ sanguis::draw::particle::operator>>(
 	s >> i;
 	if (i >= movement_type::size)
 		throw sge::exception(
-			SGE_TEXT("invalid movement type"));
+			FCPPT_TEXT("invalid movement type"));
 	t = static_cast<movement_type::type>(i);
 	return s;
 }

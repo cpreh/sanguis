@@ -9,7 +9,7 @@
 #include <sge/audio/multi_loader.hpp>
 #include <sge/audio/bad_sound_alloc.hpp>
 #include <sge/log/headers.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <tr1/functional>
 
 namespace
@@ -34,7 +34,7 @@ make_sound(
 			);
 		default:;
 			throw sanguis::exception(
-				SGE_TEXT("Invalid sound type in load!")
+				FCPPT_TEXT("Invalid sound type in load!")
 			);
 		}
 	}
@@ -43,7 +43,7 @@ make_sound(
 		SGE_LOG_WARNING(
 			sanguis::load::log(),
 			sge::log::_
-				<< SGE_TEXT("Allocation of a sound failed! ")
+				<< FCPPT_TEXT("Allocation of a sound failed! ")
 				<< e.string()
 		);
 		return sge::audio::sound_ptr();
@@ -84,7 +84,7 @@ sanguis::load::resource::sounds::do_load(
 	sound_identifier const &name) const
 {
 	fcppt::filesystem::path const sound_path(
-		media_path() / SGE_TEXT("sound") / name
+		media_path() / FCPPT_TEXT("sound") / name
 	);
 
 	return ml.load(

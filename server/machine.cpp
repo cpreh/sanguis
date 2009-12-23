@@ -11,7 +11,7 @@
 #include <sge/container/raw_vector_impl.hpp>
 #include <sge/container/map_impl.hpp>
 #include <sge/algorithm/append.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
 #include <tr1/functional>
 

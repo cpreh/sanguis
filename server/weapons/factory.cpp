@@ -7,7 +7,7 @@
 #include "sentry.hpp"
 #include "unlimited_magazine_size.hpp"
 #include "../../exception.hpp"
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <boost/spirit/home/phoenix/object/new.hpp>
 
 sanguis::server::weapons::auto_ptr
@@ -18,7 +18,7 @@ sanguis::server::weapons::create(
 	switch(type) {
 	case weapon_type::melee:
 		throw exception(
-			SGE_TEXT("Please create melee weapons directly, not through the weapon factory!")
+			FCPPT_TEXT("Please create melee weapons directly, not through the weapon factory!")
 		);
 	case weapon_type::pistol:
 		return auto_ptr(
@@ -100,6 +100,6 @@ sanguis::server::weapons::create(
 		);
 	default:
 		throw exception(
-			SGE_TEXT("Cannot create weapon for given weapon type!"));
+			FCPPT_TEXT("Cannot create weapon for given weapon type!"));
 	}
 }

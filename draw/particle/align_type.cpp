@@ -1,6 +1,6 @@
 #include "align_type.hpp"
 #include <sge/exception.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <ostream>
 #include <istream>
 
@@ -21,7 +21,7 @@ sanguis::draw::particle::operator>>(
 	s >> i;
 	if (i >= align_type::size)
 		throw sge::exception(
-			SGE_TEXT("invalid alignment type"));
+			FCPPT_TEXT("invalid alignment type"));
 	t = static_cast<align_type::type>(i);
 	return s;
 }

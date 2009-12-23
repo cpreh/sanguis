@@ -5,7 +5,7 @@
 #include <sge/optional_impl.hpp>
 #include <sge/exception.hpp>
 #include <sge/string.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::load::model::optional_texture_identifier const
 sanguis::load::model::find_texture(
@@ -17,7 +17,7 @@ sanguis::load::model::find_texture(
 			sge::string
 		>(
 			members,
-			SGE_TEXT("texture")
+			FCPPT_TEXT("texture")
 		);
 	}
 	catch(sge::exception const &)

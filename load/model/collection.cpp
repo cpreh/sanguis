@@ -2,7 +2,7 @@
 #include "../../media_path.hpp"
 #include "../../exception.hpp"
 #include <fcppt/filesystem/exists.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <utility>
 
 sanguis::load::model::model const &
@@ -17,9 +17,9 @@ sanguis::load::model::collection::operator[](
 		
 		if(!fcppt::filesystem::exists(path))
 			throw exception(
-				SGE_TEXT("Model ")
+				FCPPT_TEXT("Model ")
 				+ name
-				+ SGE_TEXT(" not found!"));
+				+ FCPPT_TEXT(" not found!"));
 
 		it = models.insert(
 			std::make_pair(

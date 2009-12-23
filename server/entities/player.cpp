@@ -10,7 +10,7 @@
 #include "../../messages/create.hpp"
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/dim/basic_impl.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <sge/make_auto_ptr.hpp>
 #include <tr1/functional>
 
@@ -35,7 +35,7 @@ sanguis::server::entities::player::player(
 	with_buffs(),
 	with_dim(
 		load_context_->entity_dim(
-			SGE_TEXT("player")
+			FCPPT_TEXT("player")
 		)
 	),
 	with_health(

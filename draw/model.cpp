@@ -15,7 +15,7 @@
 #include <sge/math/vector/is_null.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <sge/make_auto_ptr.hpp>
 #include <boost/foreach.hpp>
 #include <ostream>
@@ -204,7 +204,7 @@ void sanguis::draw::model::start_attacking()
 	if(attacking)
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_ << SGE_TEXT("start_attacking(): already attacking!"));
+			sge::log::_ << FCPPT_TEXT("start_attacking(): already attacking!"));
 	attacking = true;
 
 	change_animation();
@@ -215,7 +215,7 @@ void sanguis::draw::model::stop_attacking()
 	if(!attacking)
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_ << SGE_TEXT("stop_attacking(): already not attacking!"));
+			sge::log::_ << FCPPT_TEXT("stop_attacking(): already not attacking!"));
 	attacking = false;
 
 	change_animation();
@@ -226,7 +226,7 @@ void sanguis::draw::model::start_reloading()
 	if(reloading)
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_ << SGE_TEXT("start_reloading(): already reloading!"));
+			sge::log::_ << FCPPT_TEXT("start_reloading(): already reloading!"));
 	reloading = true;
 
 	change_animation();
@@ -237,7 +237,7 @@ void sanguis::draw::model::stop_reloading()
 	if(!reloading)
 		SGE_LOG_WARNING(
 			log(),
-			sge::log::_ << SGE_TEXT("stop_reloading(): already not reloading!"));
+			sge::log::_ << FCPPT_TEXT("stop_reloading(): already not reloading!"));
 	reloading = false;
 
 	change_animation();
@@ -279,7 +279,7 @@ sanguis::draw::model::fallback_anim(
 		return animation_type::none;
 	default:
 		throw exception(
-			SGE_TEXT("Invalid animation in fallback_anim!"));
+			FCPPT_TEXT("Invalid animation in fallback_anim!"));
 	}
 }
 
@@ -322,7 +322,7 @@ sanguis::draw::model::log()
 	static sge::log::object log_(
 		sge::log::parameters::inherited(
 			draw::log(),
-			SGE_TEXT("model")
+			FCPPT_TEXT("model")
 		)
 	);
 	return log_;

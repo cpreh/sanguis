@@ -7,7 +7,7 @@
 #include <sge/gui/layouts/vertical.hpp>
 #include <sge/gui/layouts/horizontal.hpp>
 #include <sge/make_shared_ptr.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::client::menu::menus::connect_box::connect_box(
 	sge::gui::widgets::parent_data const &_parent,
@@ -32,7 +32,7 @@ sanguis::client::menu::menus::connect_box::connect_box(
 	label_(
 		label_wrapper,
 		sge::gui::widgets::parameters(),
-		SGE_TEXT(""),
+		FCPPT_TEXT(""),
 		sge::font::align_h::center,
 		sge::font::align_v::center,
 		sge::gui::dim(30,10)),
@@ -46,11 +46,11 @@ sanguis::client::menu::menus::connect_box::connect_box(
 	buttons_retry(
 		buttons,
 		sge::gui::widgets::parameters(),
-		SGE_TEXT("Retry")),
+		FCPPT_TEXT("Retry")),
 
 	buttons_cancel(
 		buttons,
 		sge::gui::widgets::parameters(),
-		SGE_TEXT("Cancel"))
+		FCPPT_TEXT("Cancel"))
 {
 }

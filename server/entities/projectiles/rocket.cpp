@@ -9,7 +9,7 @@
 #include "../../environment/object.hpp"
 #include "../../environment/load_context.hpp"
 #include <sge/container/map_impl.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::server::entities::projectiles::rocket::rocket(
 	server::environment::load_context_ptr const load_context_,
@@ -24,7 +24,7 @@ sanguis::server::entities::projectiles::rocket::rocket(
 		team_,
 		entities::movement_speed(300),
 		load_context_->entity_dim(
-			SGE_TEXT("rocket")
+			FCPPT_TEXT("rocket")
 		),
 		life_time(
 			10

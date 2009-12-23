@@ -13,7 +13,7 @@
 #include <sge/log/parameters/inherited.hpp>
 #include <sge/log/headers.hpp>
 #include <sge/utf8/convert.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <sge/type_info.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <boost/foreach.hpp>
@@ -45,7 +45,7 @@ sanguis::server::states::running::running(
 	SGE_LOG_DEBUG(
 		log(),
 		sge::log::_
-			<< SGE_TEXT("constructor, listening")
+			<< FCPPT_TEXT("constructor, listening")
 	);
 
 	context<machine>().listen();
@@ -127,9 +127,9 @@ sanguis::server::states::running::operator()(
 	SGE_LOG_INFO(
 		log(),
 		sge::log::_
-			<< SGE_TEXT("client ")
+			<< FCPPT_TEXT("client ")
 			<< id
-			<< SGE_TEXT(" connected")
+			<< FCPPT_TEXT(" connected")
 	);
 
 	return discard_event();
@@ -144,9 +144,9 @@ sanguis::server::states::running::operator()(
 	SGE_LOG_INFO(
 		log(),
 		sge::log::_
-			<< SGE_TEXT("client with id ")
+			<< FCPPT_TEXT("client with id ")
 			<< id
-			<< SGE_TEXT(" disconnected")
+			<< FCPPT_TEXT(" disconnected")
 	);
 
 	global_context_->player_disconnect(
@@ -214,9 +214,9 @@ sanguis::server::states::running::handle_default_msg(
 	SGE_LOG_WARNING(
 		log(),
 		sge::log::_
-			<< SGE_TEXT("received unexpected message from id ")
+			<< FCPPT_TEXT("received unexpected message from id ")
 			<< id
-			<< SGE_TEXT(" of type ")
+			<< FCPPT_TEXT(" of type ")
 			<< sge::type_info(typeid(m)).name());
 #endif
 	return discard_event();
@@ -228,7 +228,7 @@ sanguis::server::states::running::log()
 	static sge::log::object log_(
 		sge::log::parameters::inherited(
 			server::log(),
-			SGE_TEXT("running")
+			FCPPT_TEXT("running")
 		)
 	);
 	return log_;

@@ -17,7 +17,7 @@
 #include <fcppt/filesystem/is_regular.hpp>
 #include <sge/image/loader.hpp>
 #include <sge/image/create_texture.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <sge/fstream.hpp>
 #include <sge/string.hpp>
 #include <sge/make_shared_ptr.hpp>
@@ -93,9 +93,9 @@ sanguis::load::resource::textures::do_load(
 {
 	if (texture_names.find(id) == texture_names.end())
 		throw exception(
-			SGE_TEXT("no texture for id \"")
+			FCPPT_TEXT("no texture for id \"")
 			+ id
-			+ SGE_TEXT("\" found"));
+			+ FCPPT_TEXT("\" found"));
 	return do_load_inner(
 		sanguis::media_path()
 		/ texture_names[id]);
@@ -144,16 +144,16 @@ sanguis::load::resource::textures::textures(
 	for (fcppt::filesystem::directory_iterator i(sanguis::media_path()), end; i != end; ++i)
 	{
 		fcppt::filesystem::path const &p = i->path();
-		if (!fcppt::filesystem::is_regular(p) || sge::filesystem::extension(p) != SGE_TEXT(".tex"))
+		if (!fcppt::filesystem::is_regular(p) || sge::filesystem::extension(p) != FCPPT_TEXT(".tex"))
 			continue;
 		
 		// and parse line by line
 		sge::ifstream file(p);
 		if (!file.is_open())
 			throw exception(
-				SGE_TEXT("error opening id file \"")
+				FCPPT_TEXT("error opening id file \"")
 				+ p.string()
-				+ SGE_TEXT('"'));
+				+ FCPPT_TEXT('"'));
 
 		std::streamsize line_num(0);
 		sge::string line;
@@ -168,18 +168,18 @@ sanguis::load::resource::textures::textures(
 
 			sge::string::size_type const equal
 				= line.find(
-					SGE_TEXT("="));
+					FCPPT_TEXT("="));
 
 			if(equal == sge::string::npos)
 			{
 				SGE_LOG_WARNING(
 					sanguis::load::log(),
 					sge::log::_
-						<< SGE_TEXT("Error in .id file \")")
+						<< FCPPT_TEXT("Error in .id file \")")
 						<< p.string()
-						<< SGE_TEXT("\" in line ")
+						<< FCPPT_TEXT("\" in line ")
 						<< line_num
-						<< SGE_TEXT('!'));
+						<< FCPPT_TEXT('!'));
 				continue;
 			}
 			texture_names[line.substr(0,equal)] = line.substr(equal+1);

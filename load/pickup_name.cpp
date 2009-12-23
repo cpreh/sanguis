@@ -1,6 +1,6 @@
 #include "pickup_name.hpp"
 #include "../exception.hpp"
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sge::string const
 sanguis::load::pickup_name(
@@ -9,15 +9,15 @@ sanguis::load::pickup_name(
 	switch(ptype) {
 	case pickup_type::health:
 		return sge::string(
-			SGE_TEXT("pickups/hp")
+			FCPPT_TEXT("pickups/hp")
 		);
 	case pickup_type::monster:
 		return sge::string(
-			SGE_TEXT("pickups/monster")
+			FCPPT_TEXT("pickups/monster")
 		);
 	default:
 		throw exception(
-			SGE_TEXT("load::pickup_name: missing loading code!")
+			FCPPT_TEXT("load::pickup_name: missing loading code!")
 		);
 	}
 }

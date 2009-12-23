@@ -4,7 +4,7 @@
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/find_member.hpp>
 #include <sge/math/compare.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::load::model::conditional_sound::conditional_sound(
 	sge::parse::json::member_vector const &members,
@@ -18,7 +18,7 @@ sanguis::load::model::conditional_sound::conditional_sound(
 				double
 			>(
 				members,
-				SGE_TEXT("prob")
+				FCPPT_TEXT("prob")
 			)
 		)
 	),
@@ -33,7 +33,7 @@ sanguis::load::model::conditional_sound::conditional_sound(
 			sge::parse::json::array
 		>(
 			members,
-			SGE_TEXT("elements")
+			FCPPT_TEXT("elements")
 		).elements,
 		ctx
 	)

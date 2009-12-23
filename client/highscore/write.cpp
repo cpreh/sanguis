@@ -1,5 +1,5 @@
 #include "write.hpp"
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 #include <boost/next_prior.hpp>
 #include <ostream>
 
@@ -8,7 +8,7 @@ sanguis::client::highscore::write(
 	sge::ostream &s,
 	table const &t)
 {
-	s << SGE_TEXT("{ \"entries\": [");
+	s << FCPPT_TEXT("{ \"entries\": [");
 
 	for(
 		table::const_iterator it(
@@ -18,7 +18,7 @@ sanguis::client::highscore::write(
 		++it
 	)
 	{
-		s << SGE_TEXT("{ \"names\": [");
+		s << FCPPT_TEXT("{ \"names\": [");
 
 		name_container const &names(
 			it->names()
@@ -33,24 +33,24 @@ sanguis::client::highscore::write(
 		)
 		{
 			s
-				<< SGE_TEXT('"')
+				<< FCPPT_TEXT('"')
 				<< *nit
-				<< SGE_TEXT('"');
+				<< FCPPT_TEXT('"');
 
 			if(boost::next(nit) != names.end())
-				s << SGE_TEXT(',');
+				s << FCPPT_TEXT(',');
 		}
 
 		s
-			<< SGE_TEXT("], score : ")
+			<< FCPPT_TEXT("], score : ")
 			<< it->score()
-			<< SGE_TEXT('}');
+			<< FCPPT_TEXT('}');
 
-		s << SGE_TEXT('}');
+		s << FCPPT_TEXT('}');
 
 		if(boost::next(it) != t.end())
-			s << SGE_TEXT(',');
+			s << FCPPT_TEXT(',');
 	}
 
-	s << SGE_TEXT("]}");
+	s << FCPPT_TEXT("]}");
 }

@@ -7,7 +7,7 @@
 #include "irs.hpp"
 #include "regeneration.hpp"
 #include "../../exception.hpp"
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::server::perks::auto_ptr
 sanguis::server::perks::create(
@@ -40,7 +40,7 @@ sanguis::server::perks::create(
 		);
 	default:
 		throw exception(
-			SGE_TEXT("Invalid perk type!")
+			FCPPT_TEXT("Invalid perk type!")
 		);
 	}
 }

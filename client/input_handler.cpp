@@ -2,7 +2,7 @@
 #include "player_action.hpp"
 #include "../exception.hpp"
 #include <sge/input/key_pair.hpp>
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::client::input_handler::input_handler(
 	post_fun const &post_message)
@@ -64,7 +64,7 @@ void sanguis::client::input_handler::direction_event(
 		break;
 	default:
 		throw exception(
-			SGE_TEXT("direction_event: impossible!")
+			FCPPT_TEXT("direction_event: impossible!")
 		);
 	}
 
@@ -90,7 +90,7 @@ void sanguis::client::input_handler::rotation_event(
 		break;
 	default:
 		throw exception(
-			SGE_TEXT("rotation_event: impossible!")
+			FCPPT_TEXT("rotation_event: impossible!")
 		);
 	}
 

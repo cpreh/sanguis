@@ -1,7 +1,7 @@
 #include "projectile.hpp"
 #include "../bullet.hpp"
 #include "../../exception.hpp"
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::draw::entity_auto_ptr
 sanguis::draw::factory::projectile(
@@ -15,12 +15,12 @@ sanguis::draw::factory::projectile(
 			new bullet(
 				env,
 				id,
-				SGE_TEXT("bullet")
+				FCPPT_TEXT("bullet")
 			)
 		);
 	default:
 		throw exception(
-			SGE_TEXT("draw::factory::projectile: missing loading code!")
+			FCPPT_TEXT("draw::factory::projectile: missing loading code!")
 		);
 	}
 }

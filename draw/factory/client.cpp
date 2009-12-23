@@ -3,7 +3,7 @@
 #include "../z_ordering.hpp"
 #include "../../client_messages/add.hpp"
 #include "../../exception.hpp"
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::draw::entity_auto_ptr
 sanguis::draw::factory::client(
@@ -18,7 +18,7 @@ sanguis::draw::factory::client(
 			env,
 			m.id(),
 			z_ordering::cursor,
-			SGE_TEXT("cursor"),
+			FCPPT_TEXT("cursor"),
 			static_cast<
 				sprite::client::repetition_type
 			>(1)
@@ -29,7 +29,7 @@ sanguis::draw::factory::client(
 			env,
 			m.id(),
 			z_ordering::background,
-			SGE_TEXT("background"),
+			FCPPT_TEXT("background"),
 			static_cast<
 				sprite::client::repetition_type
 			>(
@@ -38,6 +38,6 @@ sanguis::draw::factory::client(
 		);
 	default:
 		throw exception(
-			SGE_TEXT("draw::factory::client: missing loading code!"));
+			FCPPT_TEXT("draw::factory::client: missing loading code!"));
 	}
 }

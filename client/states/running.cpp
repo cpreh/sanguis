@@ -251,7 +251,7 @@ sanguis::client::states::running::operator()(
 	SGE_LOG_DEBUG(
 		sanguis::client::log(),
 		sge::log::_ 
-			<< SGE_TEXT("got highscore message, score was: ")
+			<< FCPPT_TEXT("got highscore message, score was: ")
 			<< m.get<messages::roles::highscore>()
 	);
 

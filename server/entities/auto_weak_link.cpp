@@ -1,7 +1,7 @@
 #include "auto_weak_link.hpp"
 #include "base.hpp"
 #include "../../exception.hpp"
-#include <sge/text.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::server::entities::auto_weak_link::auto_weak_link()
 :
@@ -84,7 +84,7 @@ sanguis::server::entities::auto_weak_link::checked_ref() const
 {
 	if(!ref)
 		throw exception(
-			SGE_TEXT("Tried to dereference a weak link that is dead!")
+			FCPPT_TEXT("Tried to dereference a weak link that is dead!")
 		);
 	return *ref;
 }
