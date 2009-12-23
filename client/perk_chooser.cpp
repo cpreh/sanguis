@@ -70,13 +70,13 @@ sanguis::client::perk_chooser::activation::activation(
 :
 	instance_(_instance)
 {
-	SGE_ASSERT(!instance_.activated());
+	FCPPT_ASSERT(!instance_.activated());
 	instance_.activated(true);
 }
 
 sanguis::client::perk_chooser::activation::~activation()
 {
-	SGE_ASSERT(instance_.activated());
+	FCPPT_ASSERT(instance_.activated());
 	instance_.activated(false);
 }
 
@@ -154,7 +154,7 @@ void sanguis::client::perk_chooser::perks(
 void sanguis::client::perk_chooser::level_up(
 	level_type const _current_level)
 {
-	SGE_ASSERT(current_level_ <= _current_level);
+	FCPPT_ASSERT(current_level_ <= _current_level);
 
 	current_level_ = _current_level;
 	if (activated())
@@ -267,7 +267,7 @@ void sanguis::client::perk_chooser::choose_callback(
 
 void sanguis::client::perk_chooser::consume_level()
 {
-	SGE_ASSERT(levels_left());
+	FCPPT_ASSERT(levels_left());
 	consumed_levels_++;
 
 	if (activated())

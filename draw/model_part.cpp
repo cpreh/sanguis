@@ -149,10 +149,10 @@ void sanguis::draw::model_part::update(
 	funit const twopi = sge::math::twopi<funit>();
 
 	// TODO: those could be removed, should be asserted in rel_angle_to_abs?
-	SGE_ASSERT(
+	FCPPT_ASSERT(
 		abs_current >= static_cast<funit>(0) && 
 		abs_current <= twopi);
-	SGE_ASSERT(
+	FCPPT_ASSERT(
 		abs_target >= static_cast<funit>(0) && 
 		abs_target <= twopi);
 
@@ -177,7 +177,7 @@ void sanguis::draw::model_part::update(
 			: twopi-abs_target+abs_current,
 		min_dist = std::min(swap_dist,abs_dist);
 
-	SGE_ASSERT(
+	FCPPT_ASSERT(
 		abs_dist >= static_cast<funit>(0) && 
 		swap_dist >= static_cast<funit>(0) && 
 		min_dist >= static_cast<funit>(0));

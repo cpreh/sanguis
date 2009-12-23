@@ -58,7 +58,7 @@ sanguis::server::ai::search_new_target(
 		}
 	}
 
-	SGE_ASSERT(
+	FCPPT_ASSERT(
 		ret
 		&& !ret->invulnerable()
 	);

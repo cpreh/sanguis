@@ -85,7 +85,7 @@ sanguis::deserialize(
 		)
 	);
 			
-	SGE_ASSERT(message_size > 0);
+	FCPPT_ASSERT(message_size > 0);
 
 	if ((data.size() - message_header_size) < message_size)
 		return messages::auto_ptr();
@@ -97,7 +97,7 @@ sanguis::deserialize(
 		)
 	);
 
-	SGE_ASSERT(ret->size() == message_size);
+	FCPPT_ASSERT(ret->size() == message_size);
 
 	net::data_type::size_type const stream_pos(
 		static_cast<
@@ -107,7 +107,7 @@ sanguis::deserialize(
 		)
 	);
 
-	SGE_ASSERT(
+	FCPPT_ASSERT(
 		ret->size() + message_header_size
 		== stream_pos
 	);
@@ -126,7 +126,7 @@ sanguis::serialize(
 	net::data_type &array
 )
 {
-	SGE_ASSERT(message.get());
+	FCPPT_ASSERT(message.get());
 
 	typedef boost::iostreams::back_insert_device<
 		net::data_type
@@ -158,7 +158,7 @@ sanguis::serialize(
 		)
 	);
 
-	SGE_ASSERT(header > 0);
+	FCPPT_ASSERT(header > 0);
 
 	sge::io::write(
 		stream,

@@ -75,7 +75,7 @@ sanguis::server::ai::simple::update(
 				potential_targets_
 			);
 
-	SGE_ASSERT(
+	FCPPT_ASSERT(
 		target_
 	);
 

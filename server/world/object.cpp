@@ -455,7 +455,7 @@ sanguis::server::world::object::remove_sight_range(
 			)
 		);
 
-		SGE_ASSERT(
+		FCPPT_ASSERT(
 			sight_it != sight_ranges_.end()
 		);
 

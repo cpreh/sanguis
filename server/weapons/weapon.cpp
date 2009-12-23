@@ -202,7 +202,7 @@ void
 sanguis::server::weapons::weapon::use_magazine_item()
 {
 	++magazine_used_;
-	SGE_ASSERT(magazine_used_ <= magazine_size());
+	FCPPT_ASSERT(magazine_used_ <= magazine_size());
 }
 
 bool

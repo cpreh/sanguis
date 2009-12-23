@@ -72,8 +72,8 @@ sanguis::client::menu::mover::mover(
 	remaining_time_(
 		static_cast<float_type>(0))
 {
-	SGE_ASSERT(!_current.has_parent());
-	SGE_ASSERT(_current.activation() == sge::gui::activation_state::inactive);
+	FCPPT_ASSERT(!_current.has_parent());
+	FCPPT_ASSERT(_current.activation() == sge::gui::activation_state::inactive);
 
 	current_->activation(
 		sge::gui::activation_state::active);
@@ -122,7 +122,7 @@ void sanguis::client::menu::mover::update(
 void sanguis::client::menu::mover::reset(
 	sge::gui::widgets::base &w)
 {
-	SGE_ASSERT(to_move_.find(current_) == to_move_.end());
+	FCPPT_ASSERT(to_move_.find(current_) == to_move_.end());
 
 	to_move_[current_].current = current_entry_.current;
 	to_move_[current_].target = random_pos();

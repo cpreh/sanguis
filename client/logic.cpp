@@ -375,7 +375,7 @@ void sanguis::client::logic::handle_switch_weapon_forwards(
 		)
 	);
 
-	SGE_ASSERT(weapon_index < owned_weapons.size());
+	FCPPT_ASSERT(weapon_index < owned_weapons.size());
 
 	cyclic_iterator<
 		owned_weapons_array::const_iterator

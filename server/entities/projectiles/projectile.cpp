@@ -108,7 +108,7 @@ sanguis::server::entities::projectiles::projectile::can_collide_with_entity(
 	base const &e
 ) const
 {
-	SGE_ASSERT(e.team() != team()); // shouldn't happen for now!
+	FCPPT_ASSERT(e.team() != team()); // shouldn't happen for now!
 
 	return
 		!e.dead()

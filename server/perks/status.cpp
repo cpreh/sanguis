@@ -28,7 +28,7 @@ sanguis::server::perks::status::status(
 void
 sanguis::server::perks::status::choose()
 {
-	SGE_ASSERT(type() != perk_type::size);
+	FCPPT_ASSERT(type() != perk_type::size);
 	++level_;
 }
 

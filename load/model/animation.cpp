@@ -41,7 +41,7 @@ calc_rect(
 {
 	if (area.dim().w() == cell_size.w())
 	{
-		SGE_ASSERT(index == static_cast<sge::renderer::size_type>(0));
+		FCPPT_ASSERT(index == static_cast<sge::renderer::size_type>(0));
 		return sge::renderer::lock_rect(
 			sge::renderer::lock_rect::pos_type::null(),
 			cell_size);

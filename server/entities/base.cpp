@@ -80,7 +80,7 @@ sanguis::server::entities::base::link()
 sanguis::server::environment::object_ptr const
 sanguis::server::entities::base::environment() const
 {
-	SGE_ASSERT(
+	FCPPT_ASSERT(
 		environment_
 	);
 

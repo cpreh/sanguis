@@ -87,7 +87,7 @@ sanguis::load::model::random_sound::random_sound(
 			r.probability() / normalization
 		);
 	
-	SGE_ASSERT(ranges.size() == sounds_.size());
+	FCPPT_ASSERT(ranges.size() == sounds_.size());
 }
 
 sge::audio::sound_ptr const
