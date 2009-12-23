@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_HIGHSCORE_READ_HPP_INCLUDED
 
 #include "table.hpp"
-#include <sge/istream.hpp>
+#include <fcppt/io/istream.hpp>
 
 namespace sanguis
 {
@@ -11,7 +11,7 @@ namespace client
 namespace highscore
 {
 table const read(
-	sge::istream &);
+	fcppt::io::istream &);
 }
 }
 }

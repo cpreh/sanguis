@@ -4,17 +4,17 @@
 #include <ostream>
 #include <istream>
 
-sge::ostream &
+fcppt::io::ostream &
 sanguis::draw::particle::operator<<(
-	sge::ostream &s,
+	fcppt::io::ostream &s,
 	movement_type::type const t)
 {
 	return s << static_cast<unsigned>(t);
 }
 
-sge::istream &
+fcppt::io::istream &
 sanguis::draw::particle::operator>>(
-	sge::istream &s,
+	fcppt::io::istream &s,
 	movement_type::type &t)
 {
 	unsigned i;

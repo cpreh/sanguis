@@ -12,14 +12,13 @@
 #include "../messages/move.hpp"
 #include <sge/console/object_fwd.hpp>
 #include <sge/time/timer.hpp>
+#include <sge/renderer/device_ptr.hpp>
 #include <fcppt/math/vector/static.hpp>
 #include <fcppt/math/vector/basic_decl.hpp>
-#include <sge/renderer/device_fwd.hpp>
-#include <sge/image/loader_fwd.hpp>
 #include <fcppt/function/object_fwd.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
+#include <fcppt/tr1/array.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <tr1/array>
 #include <vector>
 
 namespace sanguis

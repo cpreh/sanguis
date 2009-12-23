@@ -1,8 +1,8 @@
 #ifndef SANGUIS_DRAW_PARTICLE_ALIGN_TYPE_HPP_INCLUDED
 #define SANGUIS_DRAW_PARTICLE_ALIGN_TYPE_HPP_INCLUDED
 
-#include <sge/ostream.hpp>
-#include <sge/istream.hpp>
+#include <fcppt/io/ostream.hpp>
+#include <fcppt/io/istream.hpp>
 
 namespace sanguis
 {
@@ -21,14 +21,14 @@ enum type
 };
 }
 
-sge::ostream &
+fcppt::io::ostream &
 operator<<(
-	sge::ostream &,
+	fcppt::io::ostream &,
 	align_type::type);
 
-sge::istream &
+fcppt::io::istream &
 operator>>(
-	sge::istream &,
+	fcppt::io::istream &,
 	align_type::type &);
 
 }

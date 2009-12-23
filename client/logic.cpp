@@ -15,22 +15,21 @@
 #include "../messages/player_cheat.hpp"
 #include "../cyclic_iterator_impl.hpp"
 #include "../perk_type.hpp"
+#include <sge/time/millisecond.hpp>
+#include <sge/renderer/device.hpp>
+#include <sge/console/object.hpp>
+#include <sge/gui/unit.hpp>
 #include <fcppt/math/clamp.hpp>
 #include <fcppt/math/vector/angle_between.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
-#include <sge/renderer/device.hpp>
-#include <sge/time/millisecond.hpp>
-#include <sge/time/resolution.hpp>
-#include <sge/console/object.hpp>
 #include <fcppt/log/headers.hpp>
-#include <sge/gui/unit.hpp>
 #include <fcppt/assign/make_container.hpp>
+#include <fcppt/tr1/functional.hpp>
+#include <fcppt/function/object.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/optional_impl.hpp>
-#include <fcppt/function/object.hpp>
-#include <tr1/functional>
 #include <algorithm>
 
 sanguis::client::logic::logic(

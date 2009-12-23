@@ -5,7 +5,7 @@
 
 void
 sanguis::client::highscore::write(
-	sge::ostream &s,
+	fcppt::io::ostream &s,
 	table const &t)
 {
 	s << FCPPT_TEXT("{ \"entries\": [");

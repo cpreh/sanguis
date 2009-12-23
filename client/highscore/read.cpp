@@ -15,7 +15,7 @@
 
 sanguis::client::highscore::table const
 sanguis::client::highscore::read(
-	sge::istream &stream)
+	fcppt::io::istream &stream)
 {
 	sge::parse::json::object result;
 
