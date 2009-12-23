@@ -12,13 +12,11 @@
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/headers.hpp>
+#include <fcppt/tr1/functional.hpp>
 #include <fcppt/utf8/convert.hpp>
 #include <fcppt/text.hpp>
-#include <sge/type_info.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <boost/foreach.hpp>
-#include <tr1/functional>
-#include <tr1/random>
 #include <algorithm>
 #include <ostream>
 
@@ -210,15 +208,6 @@ sanguis::server::states::running::handle_default_msg(
 	messages::base const &m
 )
 {
-#if 0
-	FCPPT_LOG_WARNING(
-		log(),
-		fcppt::log::_
-			<< FCPPT_TEXT("received unexpected message from id ")
-			<< id
-			<< FCPPT_TEXT(" of type ")
-			<< sge::type_info(typeid(m)).name());
-#endif
 	return discard_event();
 }
 

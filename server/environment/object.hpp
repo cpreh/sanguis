@@ -15,7 +15,7 @@
 #include "../../world_id.hpp"
 #include "../../weapon_type.hpp"
 #include "../../entity_id.hpp"
-#include <sge/collision/world_fwd.hpp>
+#include <sge/collision/world_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis

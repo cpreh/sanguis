@@ -11,7 +11,6 @@
 #include "../collision/bounding_circle.hpp"
 #include "../../exception.hpp"
 #include <sge/time/second_f.hpp>
-#include <sge/time/resolution.hpp>
 #include <fcppt/math/circle/basic_impl.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
@@ -218,19 +217,19 @@ sanguis::server::weapons::weapon::magazine_exhausted()
 		--magazine_count_;
 }
 
-sge::time::resolution const
+sge::time::duration const
 sanguis::server::weapons::weapon::cast_point() const
 {
 	return cast_point_;
 }
 
-sge::time::resolution const
+sge::time::duration const
 sanguis::server::weapons::weapon::backswing_time() const
 {
 	return backswing_time_;
 }
 
-sge::time::resolution const
+sge::time::duration const
 sanguis::server::weapons::weapon::reload_time() const
 {
 	return reload_time_;

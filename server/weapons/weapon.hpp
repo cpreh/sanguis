@@ -20,8 +20,9 @@
 #include "../../time_type.hpp"
 #include "../../messages/base.hpp"
 #include "../../weapon_type.hpp"
+#include <sge/time/duration.hpp>
 #include <fcppt/log/object_fwd.hpp>
-#include <sge/time/resolution.hpp>
+#include <fcppt/chrono/duration_impl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <boost/statechart/state_machine.hpp>
 
@@ -124,13 +125,13 @@ private:
 	void
 	magazine_exhausted();
 
-	sge::time::resolution const
+	sge::time::duration const
 	cast_point() const;
 
-	sge::time::resolution const
+	sge::time::duration const
 	backswing_time() const;
 
-	sge::time::resolution const
+	sge::time::duration const
 	reload_time() const;
 
 	virtual void
@@ -156,7 +157,7 @@ private:
 	magazine_type magazine_used_;
 	weapons::magazine_count magazine_count_;
 	weapons::magazine_size const magazine_size_;
-	sge::time::resolution const
+	sge::time::duration const
 		cast_point_,
 		backswing_time_,
 		reload_time_;

@@ -9,22 +9,21 @@
 #include "../../messages/base.hpp"
 #include "../../messages/create.hpp"
 #include "../../exception.hpp"
+#include <sge/collision/world.hpp>
+#include <sge/time/second_f.hpp>
 
 #include <fcppt/math/vector/to_angle.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/is_null.hpp>
 #include <fcppt/container/map_impl.hpp>
-#include <sge/collision/world.hpp>
 #include <fcppt/log/headers.hpp>
+#include <fcppt/tr1/functional.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
-#include <sge/time/resolution.hpp>
-#include <sge/time/second_f.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/text.hpp>
 
 #include <boost/mpl/vector/vector10.hpp>
-#include <tr1/functional>
 #include <ostream>
 
 sanguis::server::states::unpaused::unpaused()

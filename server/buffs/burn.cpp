@@ -1,7 +1,6 @@
 #include "burn.hpp"
 #include "../entities/with_health.hpp"
 #include <sge/time/second_f.hpp>
-#include <sge/time/resolution.hpp>
 
 sanguis::server::buffs::burn::burn(
 	damage::unit const damage_,

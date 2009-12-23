@@ -22,10 +22,10 @@
 #include "../../time_type.hpp"
 #include "../../messages/auto_ptr.hpp"
 #include "../../load/model/context_fwd.hpp"
+#include <sge/collision/system_ptr.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/container/map_decl.hpp>
-#include <sge/collision/system_fwd.hpp>
 #include <fcppt/shared_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 

@@ -6,7 +6,6 @@
 #include "../../../messages/add_projectile.hpp"
 #include "../../../messages/create.hpp"
 #include <sge/time/second_f.hpp>
-#include <sge/time/resolution.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/optional_impl.hpp>

@@ -4,7 +4,7 @@
 #include "object_auto_ptr.hpp"
 #include "context_ptr.hpp"
 #include "../environment/load_context_ptr.hpp"
-#include <sge/collision/system_fwd.hpp>
+#include <sge/collision/system_ptr.hpp>
 
 namespace sanguis
 {

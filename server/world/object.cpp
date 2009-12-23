@@ -61,11 +61,11 @@ sanguis::server::world::object::object(
 			sge::collision::optional_rect(
 				sge::collision::rect(
 					// FIXME
-					sge::collision::rect::pos_type(
+					sge::collision::rect::vector(
 						-500,
 						-500
 					),
-					sge::collision::rect::dim_type(
+					sge::collision::rect::dim(
 						1500,
 						1500
 					)
