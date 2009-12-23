@@ -138,7 +138,7 @@ sanguis::client::states::gameover::gameover(
 			.pos(	
 				sge::gui::point(1,1)
 			),
-		fcppt::lexical_cast<sge::string>(
+		fcppt::lexical_cast<fcppt::string>(
 			context<machine>().gameover_score()
 		)
 	),

@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_MENU_CALLBACKS_TYPES_HPP_INCLUDED
 
 #include <fcppt/function/object_fwd.hpp>
-#include <sge/string.hpp>
+#include <fcppt/string.hpp>
 
 namespace sanguis
 {
@@ -16,7 +16,7 @@ namespace callbacks
 // TODO: split this!
 
 typedef fcppt::function::object<
-	void (sge::string const &,sge::string const &)
+	void (fcppt::string const &,sge::string const &)
 > connect;
 
 typedef fcppt::function::object<

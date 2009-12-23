@@ -12,7 +12,7 @@
 #include "../entity_id.hpp"
 #include "../animation_type.hpp"
 #include <fcppt/log/object_fwd.hpp>
-#include <sge/string.hpp>
+#include <fcppt/string.hpp>
 #include <sge/scoped_ptr.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
 
@@ -29,7 +29,7 @@ public:
 	model(
 		draw::environment const &,
 		entity_id,
-		sge::string const &name,
+		fcppt::string const &name,
 		sprite::order,
 		bool needs_healthbar,
 		draw::remove_action::type

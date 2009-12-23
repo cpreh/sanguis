@@ -3,7 +3,7 @@
 
 #include "../resource/context_fwd.hpp"
 #include "model.hpp"
-#include <sge/string.hpp>
+#include <fcppt/string.hpp>
 #include <map>
 
 namespace sanguis
@@ -17,7 +17,7 @@ class collection {
 public:
 	model const &
 	operator[](
-		sge::string const &) const;
+		fcppt::string const &) const;
 private:
 	explicit collection(
 		resource::context const &);
@@ -27,7 +27,7 @@ private:
 	resource::context const &ctx;
 
 	typedef std::map<
-		sge::string,
+		fcppt::string,
 		model
 	> model_map;
 

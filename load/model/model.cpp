@@ -91,7 +91,7 @@ load_delay(
 
 sanguis::load::model::part const &
 sanguis::load::model::model::operator[](
-	sge::string const &name) const
+	fcppt::string const &name) const
 {
 	part_map::const_iterator const it(
 		parts.find(

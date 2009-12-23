@@ -19,7 +19,7 @@
 #include <sge/image/create_texture.hpp>
 #include <fcppt/text.hpp>
 #include <sge/fstream.hpp>
-#include <sge/string.hpp>
+#include <fcppt/string.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <tr1/functional>
@@ -156,7 +156,7 @@ sanguis::load::resource::textures::textures(
 				+ FCPPT_TEXT('"'));
 
 		std::streamsize line_num(0);
-		sge::string line;
+		fcppt::string line;
 		while (std::getline(file,line))
 		{
 			++line_num;
@@ -166,11 +166,11 @@ sanguis::load::resource::textures::textures(
 			if (line.empty())
 				continue;
 
-			sge::string::size_type const equal
+			fcppt::string::size_type const equal
 				= line.find(
 					FCPPT_TEXT("="));
 
-			if(equal == sge::string::npos)
+			if(equal == fcppt::string::npos)
 			{
 				SGE_LOG_WARNING(
 					sanguis::load::log(),

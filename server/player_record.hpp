@@ -3,7 +3,7 @@
 
 #include "player_record_fwd.hpp"
 #include "exp_type.hpp"
-#include <sge/string.hpp>
+#include <fcppt/string.hpp>
 
 namespace sanguis
 {
@@ -13,13 +13,13 @@ namespace server
 class player_record {
 public:
 	player_record(
-		sge::string const &name,
+		fcppt::string const &name,
 		exp_type);
 	
-	sge::string const &name() const;
+	fcppt::string const &name() const;
 	exp_type exp() const;
 private:
-	sge::string name_;
+	fcppt::string name_;
 	exp_type exp_;
 };
 

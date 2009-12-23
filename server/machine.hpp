@@ -12,7 +12,7 @@
 #include <sge/collision/system_fwd.hpp>
 #include <fcppt/container/map_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
-#include <sge/string.hpp>
+#include <fcppt/string.hpp>
 #include <boost/statechart/state_machine.hpp>
 #include <map>
 
@@ -55,7 +55,7 @@ public:
 	void
 	disconnect_callback(
 		net::id_type,
-		sge::string const &
+		fcppt::string const &
 	);
 
 	void

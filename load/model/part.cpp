@@ -11,7 +11,7 @@
 #include <fcppt/log/headers.hpp>
 #include <sge/optional_impl.hpp>
 #include <fcppt/text.hpp>
-#include <sge/string.hpp>
+#include <fcppt/string.hpp>
 #include <boost/foreach.hpp>
 #include <tr1/array>
 #include <iterator>
@@ -21,7 +21,7 @@ namespace
 {
 
 typedef std::tr1::array<
-	sge::string,
+	fcppt::string,
 	sanguis::weapon_type::size
 > weapon_type_array;
 
@@ -38,7 +38,7 @@ weapon_type_array const weapon_types = {
 
 sanguis::weapon_type::type
 find_weapon_type(
-	sge::string const &str)
+	fcppt::string const &str)
 {
 	return static_cast<
 		sanguis::weapon_type::type

@@ -2,7 +2,7 @@
 #include "../exception.hpp"
 #include <fcppt/text.hpp>
 
-sge::string const
+fcppt::string const
 sanguis::load::enemy_name(
 	enemy_type::type const etype)
 {

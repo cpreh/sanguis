@@ -15,7 +15,7 @@ public:
 	rocket(
 		draw::environment const &,
 		entity_id id,
-		sge::string const &name,
+		fcppt::string const &name,
 		funit aoe);
 private:
 	void on_decay();

@@ -2,7 +2,7 @@
 #include "../exception.hpp"
 #include <fcppt/text.hpp>
 
-sge::string const
+fcppt::string const
 sanguis::client::from_perk_type(
 	perk_type::type const s)
 {

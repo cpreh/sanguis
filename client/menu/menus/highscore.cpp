@@ -88,7 +88,7 @@ void sanguis::client::menu::menus::highscore::populate_children()
 				sge::gui::widgets::parameters()
 					.pos(
 						sge::gui::point(1,y_pos)),
-				fcppt::lexical_cast<sge::string>(e.score())));
+				fcppt::lexical_cast<fcppt::string>(e.score())));
 
 		++y_pos;
 	}

@@ -2,7 +2,7 @@
 #include "exception.hpp"
 #include <fcppt/text.hpp>
 
-sge::string const sanguis::from_particle_type(particle_type::type const t)
+fcppt::string const sanguis::from_particle_type(particle_type::type const t)
 {
 	switch (t)
 	{

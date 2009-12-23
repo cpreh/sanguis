@@ -2,14 +2,14 @@
 #define SANGUIS_LOAD_FRIEND_NAME_HPP_INCLUDED
 
 #include "../friend_type.hpp"
-#include <sge/string.hpp>
+#include <fcppt/string.hpp>
 
 namespace sanguis
 {
 namespace load
 {
 
-sge::string const
+fcppt::string const
 friend_name(
 	friend_type::type);
 

@@ -7,7 +7,7 @@
 
 sanguis::load::model::model const &
 sanguis::load::model::collection::operator[](
-	sge::string const &name) const
+	fcppt::string const &name) const
 {
 	model_map::const_iterator it(models.find(name));
 	if(it == models.end())

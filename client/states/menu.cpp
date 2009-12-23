@@ -200,8 +200,8 @@ sanguis::client::states::menu::log()
 }
 
 void sanguis::client::states::menu::connect(
-	sge::string const &host,
-	sge::string const &port)
+	fcppt::string const &host,
+	fcppt::string const &port)
 {
 	try
 	{

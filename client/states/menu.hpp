@@ -57,8 +57,8 @@ private:
 	sge::renderer::state::scoped const renderer_state_;
 	
 	void connect(
-		sge::string const &,
-		sge::string const &);
+		fcppt::string const &,
+		fcppt::string const &);
 	void start_server();
 	void cancel_connect();
 };

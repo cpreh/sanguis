@@ -10,7 +10,7 @@ namespace net
 class exception : public sge::exception
 {
 public:
-	explicit exception(sge::string const &);
+	explicit exception(fcppt::string const &);
 };
 }
 }

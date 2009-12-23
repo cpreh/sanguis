@@ -10,7 +10,7 @@
 #include <sge/auto_ptr.hpp>
 #include <sge/format.hpp>
 #include <fcppt/text.hpp>
-#include <sge/string.hpp>
+#include <fcppt/string.hpp>
 #include <boost/mpl/at.hpp>
 
 template<
@@ -38,7 +38,7 @@ sanguis::messages::serialization::dispatcher_register<T>::dispatcher_register(
 		disp
 	).second)
 	{
-		sge::string const error(
+		fcppt::string const error(
 			(sge::format(
 				FCPPT_TEXT("Message type registered twice: %1%!")
 			)

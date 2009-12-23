@@ -10,7 +10,7 @@ sanguis::draw::factory::simple_sprite(
 	environment const &env,
 	entity_id const id,
 	z_ordering::type const z,
-	sge::string const &texture_name,
+	fcppt::string const &texture_name,
 	sprite::client::repetition_type const repeat
 )
 {

@@ -105,7 +105,7 @@ void sanguis::server::machine::connect_callback(
 
 void sanguis::server::machine::disconnect_callback(
 	net::id_type const id,
-	sge::string const &)
+	fcppt::string const &)
 {
 	process_event(
 		message_event(

@@ -28,7 +28,7 @@
 #include <sge/sprite/parameters_fwd.hpp>
 #include <fcppt/signal/connection_manager.hpp>
 #include <sge/noncopyable.hpp>
-#include <sge/string.hpp>
+#include <fcppt/string.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 
 namespace sanguis
@@ -56,7 +56,7 @@ public:
 
 	void
 	connection_error(
-		sge::string const &message
+		fcppt::string const &message
 	);
 private:
 	sge::systems::instance const &sys_;
@@ -103,15 +103,15 @@ private:
 	sprite_system ss;
 	sprite_object const background;
 
-	sge::string 
+	fcppt::string 
 		connection_host_,
 		connection_port_;
 
 	void start_server();
 	void connect_from_menu();
 	void connect(
-		sge::string const &,
-		sge::string const &);
+		fcppt::string const &,
+		fcppt::string const &);
 	void cancel_connect();
 };
 }

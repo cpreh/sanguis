@@ -65,7 +65,7 @@ private:
 		boost::system::error_code const &,
 		connection &);
 	void handle_error(
-		sge::string const &,
+		fcppt::string const &,
 		boost::system::error_code const &,
 		connection const &);
 };

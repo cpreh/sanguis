@@ -7,7 +7,7 @@
 #include <sge/parse/json/find_member.hpp>
 #include <sge/assign/make_container.hpp>
 #include <fcppt/log/headers.hpp>
-#include <sge/string.hpp>
+#include <fcppt/string.hpp>
 #include <sge/char_type.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
@@ -21,14 +21,14 @@ sanguis::client::highscore::read(
 
 	{
 		// TODO: can't we use the istream iterators directly?
-		sge::string str;
+		fcppt::string str;
 
 		sge::char_type ch;
 
 		while(stream.get(ch))
 			str.push_back(ch);
 
-		sge::string::const_iterator beg(
+		fcppt::string::const_iterator beg(
 			str.begin()
 		);
 
@@ -36,7 +36,7 @@ sanguis::client::highscore::read(
 			!sge::parse::json::parse_range(
 				beg,
 				static_cast<
-					sge::string::const_iterator
+					fcppt::string::const_iterator
 				>(
 					str.end()
 				),

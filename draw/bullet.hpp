@@ -4,7 +4,7 @@
 #include "model.hpp"
 #include "environment_fwd.hpp"
 #include "sprite/point.hpp"
-#include <sge/string.hpp>
+#include <fcppt/string.hpp>
 #include <sge/optional_decl.hpp>
 
 namespace sanguis
@@ -17,7 +17,7 @@ public:
 	bullet(
 		draw::environment const &,
 		entity_id id,
-		sge::string const &name
+		fcppt::string const &name
 	);
 private:
 	void update(time_type);

@@ -235,11 +235,11 @@ void sanguis::load::model::animation::fill_cache(
 			throw exception(
 				FCPPT_TEXT("Rect out of bounds in TODO")
 				FCPPT_TEXT(". Whole area of texture is ")
-				+ fcppt::lexical_cast<sge::string>(_area)
+				+ fcppt::lexical_cast<fcppt::string>(_area)
 				+ FCPPT_TEXT(" but the inner area is ")
-				+ fcppt::lexical_cast<sge::string>(cur_area)
+				+ fcppt::lexical_cast<fcppt::string>(cur_area)
 				+ FCPPT_TEXT(". This happened when trying to load index ")
-				+ fcppt::lexical_cast<sge::string>(begin)
+				+ fcppt::lexical_cast<fcppt::string>(begin)
 			);
 
 		frame_cache_.push_back(

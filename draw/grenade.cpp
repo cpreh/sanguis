@@ -8,7 +8,7 @@
 sanguis::draw::grenade::grenade(
 	draw::environment const &env,
 	entity_id const id,
-	sge::string const &name,
+	fcppt::string const &name,
 	funit const aoe)
 :
 	model(

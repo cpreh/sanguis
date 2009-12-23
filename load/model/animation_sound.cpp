@@ -6,7 +6,7 @@
 #include <sge/algorithm/find_exn.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/text.hpp>
-#include <sge/string.hpp>
+#include <fcppt/string.hpp>
 #include <boost/foreach.hpp>
 #include <tr1/array>
 #include <utility>
@@ -16,7 +16,7 @@ namespace
 {
 
 typedef std::tr1::array<
-	sge::string,
+	fcppt::string,
 	sanguis::animation_sound_type::size
 > animation_sound_array;
 
@@ -28,7 +28,7 @@ animation_sound_array const animation_sounds = {{
 
 sanguis::animation_sound_type::type
 find_sound_type(
-	sge::string const &name)
+	fcppt::string const &name)
 {
 	return static_cast<
 		sanguis::animation_sound_type::type

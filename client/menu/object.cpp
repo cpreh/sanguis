@@ -243,7 +243,7 @@ sanguis::client::menu::object::process(
 }
 
 void sanguis::client::menu::object::connection_error(
-	sge::string const &message)
+	fcppt::string const &message)
 {
 	SGE_LOG_DEBUG(
 		mylogger,
@@ -279,8 +279,8 @@ void sanguis::client::menu::object::connect_from_menu()
 }
 
 void sanguis::client::menu::object::connect(
-	sge::string const &host,
-	sge::string const &port)
+	fcppt::string const &host,
+	fcppt::string const &port)
 {
 	SGE_LOG_DEBUG(
 		mylogger,

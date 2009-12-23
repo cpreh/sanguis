@@ -5,10 +5,10 @@
 
 fcppt::filesystem::path const sanguis::client::make_screenshot_path()
 {
-	sge::string const type = 
+	fcppt::string const type = 
 		FCPPT_TEXT("png");
-	sge::string const filename = 
-		fcppt::lexical_cast<sge::string>(
+	fcppt::string const filename = 
+		fcppt::lexical_cast<fcppt::string>(
 			sge::time::time())+FCPPT_TEXT(".")+type;
 	return fcppt::filesystem::path(filename);
 }

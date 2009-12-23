@@ -7,7 +7,7 @@
 #include <fcppt/filesystem/path.hpp>
 #include <sge/renderer/dim_type.hpp>
 #include <sge/math/dim/basic_decl.hpp>
-#include <sge/string.hpp>
+#include <fcppt/string.hpp>
 #include <sge/shared_ptr.hpp>
 #include <map>
 
@@ -19,7 +19,7 @@ namespace model
 {
 
 class model {
-	typedef std::map<sge::string, part> part_map;
+	typedef std::map<fcppt::string, part> part_map;
 public:
 	typedef part_map::value_type     value_type;
 	typedef part_map::const_iterator const_iterator;
@@ -27,7 +27,7 @@ public:
 
 	part const &
 	operator[](
-		sge::string const &) const;
+		fcppt::string const &) const;
 	
 	part const &
 	random_part() const;

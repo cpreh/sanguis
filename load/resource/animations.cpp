@@ -61,7 +61,7 @@ sanguis::load::resource::animations::do_load(
 			+ FCPPT_TEXT("\""));
 	
 	// read first line, determine if it has constant frame time
-	sge::string line;
+	fcppt::string line;
 	if (!std::getline(file,line))
 		throw exception(
 			FCPPT_TEXT("unexpected end of file \"")
@@ -78,7 +78,7 @@ sanguis::load::resource::animations::do_load(
 					sge::time::unit
 				>(
 					line.substr(
-						sge::string(
+						fcppt::string(
 							FCPPT_TEXT("frame_length ")
 						)
 						.length()
@@ -99,7 +99,7 @@ sanguis::load::resource::animations::do_load(
 			continue;
 
 		sge::time::resolution delay(0);
-		sge::string filename = line;
+		fcppt::string filename = line;
 
 		if (!const_delay)
 		{
@@ -109,7 +109,7 @@ sanguis::load::resource::animations::do_load(
 			if (!ss)
 				throw exception(
 					FCPPT_TEXT("invalid line ")
-					+ fcppt::lexical_cast<sge::string>(lineno)
+					+ fcppt::lexical_cast<fcppt::string>(lineno)
 					+ FCPPT_TEXT(" in animation ")
 					+ dir.string());
 			filename = ss.str().substr(ss.tellg());

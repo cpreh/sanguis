@@ -55,7 +55,7 @@ public:
 	void process_message(messages::auto_ptr);
 	// callbacks
 	void connect_callback();
-	void disconnect_callback(sge::string const &);
+	void disconnect_callback(fcppt::string const &);
 	void data_callback(net::data_type const &);
 
 	net::client &net();

@@ -9,7 +9,7 @@
 namespace
 {
 
-sge::string const
+fcppt::string const
 get_texture(
 	sanguis::pickup_type::type);
 
@@ -35,7 +35,7 @@ sanguis::draw::factory::pickup(
 namespace
 {
 
-sge::string const
+fcppt::string const
 get_texture(
 	sanguis::pickup_type::type const ptype)
 {

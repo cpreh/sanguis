@@ -4,7 +4,7 @@
 #include <sge/parse/json/find_member.hpp>
 #include <sge/optional_impl.hpp>
 #include <sge/exception.hpp>
-#include <sge/string.hpp>
+#include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::load::model::optional_texture_identifier const
@@ -14,7 +14,7 @@ sanguis::load::model::find_texture(
 	try
 	{
 		return sge::parse::json::find_member<
-			sge::string
+			fcppt::string
 		>(
 			members,
 			FCPPT_TEXT("texture")

@@ -10,7 +10,7 @@
 #include "static_buffer.hpp"
 #include "output_buffer.hpp"
 
-#include <sge/string.hpp>
+#include <fcppt/string.hpp>
 #include <fcppt/signal/object.hpp>
 #include <sge/noncopyable.hpp>
 
@@ -63,7 +63,7 @@ private:
 
 	// handlers
 	void handle_error(
-		sge::string const &,
+		fcppt::string const &,
 		boost::system::error_code const &);
 	void read_handler(
 		boost::system::error_code const &,

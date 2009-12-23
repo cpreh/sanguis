@@ -2,14 +2,14 @@
 #define SANGUIS_LOAD_PICKUP_NAME_HPP_INCLUDED
 
 #include "../pickup_type.hpp"
-#include <sge/string.hpp>
+#include <fcppt/string.hpp>
 
 namespace sanguis
 {
 namespace load
 {
 
-sge::string const
+fcppt::string const
 pickup_name(
 	pickup_type::type);
 

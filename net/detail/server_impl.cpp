@@ -121,7 +121,7 @@ void sanguis::net::detail::server_impl::queue(
 		if (!c.connected_)
 			throw exception(
 				FCPPT_TEXT("invalid id ")+
-				fcppt::lexical_cast<sge::string>(
+				fcppt::lexical_cast<fcppt::string>(
 					id));
 
 		c.output_.push_back(
@@ -133,7 +133,7 @@ void sanguis::net::detail::server_impl::queue(
 	// no valid id found?
 	throw exception(
 		FCPPT_TEXT("invalid id ")+
-		fcppt::lexical_cast<sge::string>(
+		fcppt::lexical_cast<fcppt::string>(
 			id));
 }
 
@@ -326,11 +326,11 @@ void sanguis::net::detail::server_impl::accept_handler(
 }
 
 void sanguis::net::detail::server_impl::handle_error(
-	sge::string const &message,
+	fcppt::string const &message,
 	boost::system::error_code const &e,
 	connection const &c)
 {
-	sge::string const error_msg(
+	fcppt::string const error_msg(
 		sge::iconv(
 			e.message()
 		)

@@ -11,7 +11,7 @@
 #include <fcppt/filesystem/exists.hpp>
 #include <sge/algorithm/find_exn.hpp>
 #include <fcppt/log/headers.hpp>
-#include <sge/string.hpp>
+#include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
 #include <tr1/array>
@@ -22,7 +22,7 @@ namespace
 {
 
 typedef std::tr1::array<
-	sge::string,
+	fcppt::string,
 	sanguis::animation_type::size
 > animation_type_array;
 
@@ -37,7 +37,7 @@ animation_type_array const animation_types = {{
 
 sanguis::animation_type::type
 find_animation_type(
-	sge::string const &str)
+	fcppt::string const &str)
 {
 	return static_cast<
 		sanguis::animation_type::type

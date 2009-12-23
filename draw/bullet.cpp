@@ -23,7 +23,7 @@ sanguis::draw::sprite_part_index const
 sanguis::draw::bullet::bullet(
 	draw::environment const &env,
 	entity_id id,
-	sge::string const &name)
+	fcppt::string const &name)
 :
 	model(
 		env,

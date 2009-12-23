@@ -1,14 +1,14 @@
 #include "player_record.hpp"
 
 sanguis::server::player_record::player_record(
-	sge::string const &name_,
+	fcppt::string const &name_,
 	exp_type const exp_)
 :
 	name_(name_),
 	exp_(exp_)
 {}
 	
-sge::string const &
+fcppt::string const &
 sanguis::server::player_record::name() const
 {
 	return name_;

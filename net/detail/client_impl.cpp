@@ -170,7 +170,7 @@ void sanguis::net::detail::client_impl::resolve_handler(
 }
 
 void sanguis::net::detail::client_impl::handle_error(
-	sge::string const &s,
+	fcppt::string const &s,
 	boost::system::error_code const &e)
 {
 	clear();

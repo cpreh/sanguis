@@ -203,7 +203,7 @@ void sanguis::client::perk_chooser::regenerate_label()
 {
 	perks_left_.text(
 			FCPPT_TEXT("Perks left: ")+
-			fcppt::lexical_cast<sge::string>(
+			fcppt::lexical_cast<fcppt::string>(
 				levels_left()));
 }
 

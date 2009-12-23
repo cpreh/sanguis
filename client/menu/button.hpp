@@ -4,7 +4,7 @@
 #include <sge/image/loader_fwd.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <sge/gui/widgets/buttons/image.hpp>
-#include <sge/string.hpp>
+#include <fcppt/string.hpp>
 
 namespace sanguis
 {
@@ -19,7 +19,7 @@ public:
 		sge::gui::widgets::parent_data const &,
 		sge::image::loader_ptr,
 		fcppt::filesystem::path const &,
-		sge::string const &);
+		fcppt::string const &);
 	
 	void process_invalid_area(
 		sge::gui::events::invalid_area const &);
