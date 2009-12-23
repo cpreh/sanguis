@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_PLAYER_ID_HPP_INCLUDED
 
 #include "../net/id_type.hpp"
-//#include <sge/strong_typedef.hpp>
+//#include <fcppt/strong_typedef.hpp>
 #include <boost/cstdint.hpp>
 
 namespace sanguis
@@ -14,7 +14,7 @@ namespace server
 
 typedef net::id_type player_id;
 
-/*SGE_MAKE_STRONG_TYPEDEF(
+/*FCPPT_MAKE_STRONG_TYPEDEF(
 	net::id_type,//boost::uint32_t,
 	player_id
 )
