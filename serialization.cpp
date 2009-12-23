@@ -8,8 +8,8 @@
 #include "truncation_check_cast.hpp"
 
 #include <fcppt/container/raw_vector_impl.hpp>
-#include <sge/io/read.hpp>
-#include <sge/io/write.hpp>
+#include <fcppt/io/read.hpp>
+#include <fcppt/io/write.hpp>
 #include <sge/assert.hpp>
 
 #include <boost/iostreams/device/array.hpp>
@@ -77,7 +77,7 @@ sanguis::deserialize(
 	exceptions(stream);
 
 	message_header const message_size(
-		sge::io::read<
+		fcppt::io::read<
 			message_header
 		>(
 			stream,
@@ -160,7 +160,7 @@ sanguis::serialize(
 
 	FCPPT_ASSERT(header > 0);
 
-	sge::io::write(
+	fcppt::io::write(
 		stream,
 		header,
 		messages::serialization::endianness()

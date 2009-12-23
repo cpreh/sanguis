@@ -7,7 +7,7 @@
 #include "../bindings/dynamic_len.hpp"
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <sge/algorithm/copy_n.hpp>
-#include <sge/io/read.hpp>
+#include <fcppt/io/read.hpp>
 #include <majutsu/concepts/dynamic_memory/tag.hpp>
 
 namespace sanguis
@@ -84,7 +84,7 @@ struct load<
 		typedef typename type::length_type length_type;
 
 		length_type const sz(
-			sge::io::read<
+			fcppt::io::read<
 				length_type
 			>(
 				is,
