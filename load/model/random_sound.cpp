@@ -6,7 +6,7 @@
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
-#include <sge/random/inclusive_range.hpp>
+#include <fcppt/random/inclusive_range.hpp>
 #include <fcppt/math/almost_zero.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert.hpp>
@@ -20,7 +20,7 @@ sanguis::load::model::random_sound::random_sound(
 	resource::sounds const &ctx)
 :
 	rng(
-		sge::random::inclusive_range<
+		fcppt::random::inclusive_range<
 			probability_type	
 		>(
 			0,

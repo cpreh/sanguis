@@ -5,7 +5,7 @@
 #include "../entities/insert_parameters.hpp"
 #include <sge/time/second_f.hpp>
 #include <sge/time/resolution.hpp>
-#include <sge/random/inclusive_range.hpp>
+#include <fcppt/random/inclusive_range.hpp>
 #include <fcppt/math/twopi.hpp>
 
 sanguis::server::perks::choleric::choleric()
@@ -23,7 +23,7 @@ sanguis::server::perks::choleric::choleric()
 		sge::time::expiration_state::not_expired
 	),
 	rand(
-		sge::random::make_inclusive_range(
+		fcppt::random::make_inclusive_range(
 			static_cast<space_unit>(0),
 			fcppt::math::twopi<space_unit>()
 		)

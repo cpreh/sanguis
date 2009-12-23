@@ -16,7 +16,7 @@
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/find_member.hpp>
-#include <sge/random/last_exclusive_range.hpp>
+#include <fcppt/random/last_exclusive_range.hpp>
 #include <sge/fstream.hpp>
 #include <fcppt/text.hpp>
 #include <boost/next_prior.hpp>
@@ -116,7 +116,7 @@ sanguis::load::model::model::random_part() const
 	if(!random_part_)
 		random_part_.reset(
 			new part_rand(
-				sge::random::make_last_exclusive_range(
+				fcppt::random::make_last_exclusive_range(
 					static_cast<part_map::size_type>(0),
 					parts.size()
 				)

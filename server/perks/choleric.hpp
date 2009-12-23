@@ -5,7 +5,7 @@
 #include "../space_unit.hpp"
 #include "../../diff_clock.hpp"
 #include <sge/time/timer.hpp>
-#include <sge/random/uniform.hpp>
+#include <fcppt/random/uniform.hpp>
 
 namespace sanguis
 {
@@ -43,7 +43,7 @@ private:
 
 	diff_clock       clock_;
 	sge::time::timer shoot_timer;
-	sge::random::uniform<space_unit> rand;
+	fcppt::random::uniform<space_unit> rand;
 };
 
 }

@@ -6,7 +6,7 @@
 #include "../resource/sounds_fwd.hpp"
 #include "../probability_type.hpp"
 #include <sge/parse/json/element_vector.hpp>
-#include <sge/random/uniform.hpp>
+#include <fcppt/random/uniform.hpp>
 #include <sge/audio/sound_fwd.hpp>
 #include <vector>
 
@@ -34,7 +34,7 @@ private:
 
 	range_vector ranges;
 
-	mutable sge::random::uniform<
+	mutable fcppt::random::uniform<
 		probability_type
 	> rng; 
 };

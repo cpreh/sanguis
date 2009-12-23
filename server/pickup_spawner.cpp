@@ -6,9 +6,9 @@
 #include "entities/pickups/health.hpp"
 #include "entities/pickups/monster.hpp"
 #include "entities/pickups/weapon.hpp"
-#include <sge/random/actor/element.hpp>
-#include <sge/random/actor/container.hpp>
-#include <sge/random/inclusive_range.hpp>
+#include <fcppt/random/actor/element.hpp>
+#include <fcppt/random/actor/container.hpp>
+#include <fcppt/random/inclusive_range.hpp>
 #include <sge/assign/make_container.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <tr1/functional>
@@ -19,17 +19,17 @@ sanguis::server::pickup_spawner::pickup_spawner(
 :
 	env(env),
 	spawn_prob(
-		sge::random::make_inclusive_range(
+		fcppt::random::make_inclusive_range(
 			static_cast<probability_type>(0),
 			static_cast<probability_type>(1)
 		)
 	),
 	rng(
 		sge::assign::make_container<
-			sge::random::actor::container
+			fcppt::random::actor::container
 		>(
-			sge::random::actor::element(
-				static_cast<sge::random::actor::float_type>(4),
+			fcppt::random::actor::element(
+				static_cast<fcppt::random::actor::float_type>(4),
 				std::tr1::bind(
 					&pickup_spawner::spawn_health,
 					this
@@ -37,8 +37,8 @@ sanguis::server::pickup_spawner::pickup_spawner(
 			)
 		)
 		(
-			sge::random::actor::element(
-				static_cast<sge::random::actor::float_type>(0.3),
+			fcppt::random::actor::element(
+				static_cast<fcppt::random::actor::float_type>(0.3),
 				std::tr1::bind(
 					&pickup_spawner::spawn_monster,
 					this
@@ -46,8 +46,8 @@ sanguis::server::pickup_spawner::pickup_spawner(
 			)
 		)
 		(
-			sge::random::actor::element(
-				static_cast<sge::random::actor::float_type>(2),
+			fcppt::random::actor::element(
+				static_cast<fcppt::random::actor::float_type>(2),
 				std::tr1::bind(
 					&pickup_spawner::spawn_weapon,
 					this,
@@ -56,8 +56,8 @@ sanguis::server::pickup_spawner::pickup_spawner(
 			)
 		)
 		(
-			sge::random::actor::element(
-				static_cast<sge::random::actor::float_type>(0.8),
+			fcppt::random::actor::element(
+				static_cast<fcppt::random::actor::float_type>(0.8),
 				std::tr1::bind(
 					&pickup_spawner::spawn_weapon,
 					this,
@@ -66,8 +66,8 @@ sanguis::server::pickup_spawner::pickup_spawner(
 			)
 		)
 		(
-			sge::random::actor::element(
-				static_cast<sge::random::actor::float_type>(1),
+			fcppt::random::actor::element(
+				static_cast<fcppt::random::actor::float_type>(1),
 				std::tr1::bind(
 					&pickup_spawner::spawn_weapon,
 					this,
@@ -76,8 +76,8 @@ sanguis::server::pickup_spawner::pickup_spawner(
 			)
 		)
 		(
-			sge::random::actor::element(
-				static_cast<sge::random::actor::float_type>(4),
+			fcppt::random::actor::element(
+				static_cast<fcppt::random::actor::float_type>(4),
 				std::tr1::bind(
 					&pickup_spawner::spawn_weapon,
 					this,
@@ -86,8 +86,8 @@ sanguis::server::pickup_spawner::pickup_spawner(
 			)
 		)
 		(
-			sge::random::actor::element(
-				static_cast<sge::random::actor::float_type>(0.3),
+			fcppt::random::actor::element(
+				static_cast<fcppt::random::actor::float_type>(0.3),
 				std::tr1::bind(
 					&pickup_spawner::spawn_weapon,
 					this,

@@ -1,5 +1,5 @@
 #include "conditional_sound.hpp"
-#include <sge/random/inclusive_range.hpp>
+#include <fcppt/random/inclusive_range.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/find_member.hpp>
@@ -23,7 +23,7 @@ sanguis::load::model::conditional_sound::conditional_sound(
 		)
 	),
 	rng(
-		sge::random::inclusive_range<probability_type>(
+		fcppt::random::inclusive_range<probability_type>(
 			static_cast<probability_type>(0),
 			static_cast<probability_type>(1)
 		)

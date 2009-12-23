@@ -106,7 +106,7 @@ private:
 	> global_context_;
 	//pickup_spawner pickup_spawner_;
 
-	/*sge::random::uniform<
+	/*fcppt::random::uniform<
 		probability_type
 	> pickup_chance_;*/
 

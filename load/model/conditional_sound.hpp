@@ -6,7 +6,7 @@
 #include "../probability_type.hpp"
 #include <sge/parse/json/member_vector.hpp>
 #include <sge/audio/sound_fwd.hpp>
-#include <sge/random/uniform.hpp>
+#include <fcppt/random/uniform.hpp>
 
 namespace sanguis
 {
@@ -26,7 +26,7 @@ public:
 private:
 	probability_type range;
 
-	mutable sge::random::uniform<
+	mutable fcppt::random::uniform<
 		probability_type
 	> rng;
 

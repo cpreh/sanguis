@@ -3,7 +3,7 @@
 
 #include "../resource/context_fwd.hpp"
 #include "part.hpp"
-#include <sge/random/uniform.hpp>
+#include <fcppt/random/uniform.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <sge/renderer/dim_type.hpp>
 #include <fcppt/math/dim/basic_decl.hpp>
@@ -54,7 +54,7 @@ private:
 
 	part_map parts;
 
-	typedef sge::random::uniform<
+	typedef fcppt::random::uniform<
 		part_map::size_type	
 	> part_rand;
 

@@ -5,8 +5,8 @@
 #include "pos_type.hpp"
 #include "probability_type.hpp"
 #include "../weapon_type.hpp"
-#include <sge/random/actor/normalized.hpp>
-#include <sge/random/uniform.hpp>
+#include <fcppt/random/actor/normalized.hpp>
+#include <fcppt/random/uniform.hpp>
 #include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -43,11 +43,11 @@ private:
 	
 	environment::object_ptr const env;
 
-	sge::random::uniform<
+	fcppt::random::uniform<
 		probability_type
 	> spawn_prob;
 
-	sge::random::actor::normalized rng;
+	fcppt::random::actor::normalized rng;
 
 	pos_type pos;
 };

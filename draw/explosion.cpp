@@ -234,7 +234,7 @@ sanguis::draw::explosion::generate_particle(
 	else
 	{
 		// FIXME: this should not be here!
-		sge::random::uniform<
+		fcppt::random::uniform<
 			particle::time_type
 		>
 			rng(

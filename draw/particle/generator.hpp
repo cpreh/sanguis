@@ -5,7 +5,7 @@
 #include "align_type.hpp"
 #include "movement_type.hpp"
 #include "../../diff_clock.hpp"
-#include <sge/random/uniform.hpp>
+#include <fcppt/random/uniform.hpp>
 #include <sge/time/timer.hpp>
 
 namespace sanguis
@@ -43,13 +43,13 @@ private:
 	sge::time::timer life_timer;
 	align_type::type const alignment;
 	
-	sge::random::uniform<rotation_type> dispersion_angle;
-	sge::random::uniform<dispersion_range::value_type> dispersion_value;
-	sge::random::uniform<rotation_type> velocity_angle;
-	sge::random::uniform<velocity_range::value_type> velocity_value;
-	sge::random::uniform<rotation_type> rot_angle;
-	sge::random::uniform<rotation_type> rot_direction;
-	sge::random::uniform<rotation_type> rot_velocity;
+	fcppt::random::uniform<rotation_type> dispersion_angle;
+	fcppt::random::uniform<dispersion_range::value_type> dispersion_value;
+	fcppt::random::uniform<rotation_type> velocity_angle;
+	fcppt::random::uniform<velocity_range::value_type> velocity_value;
+	fcppt::random::uniform<rotation_type> rot_angle;
+	fcppt::random::uniform<rotation_type> rot_direction;
+	fcppt::random::uniform<rotation_type> rot_velocity;
 	movement_type::type const movement;
 
 	void generate();
