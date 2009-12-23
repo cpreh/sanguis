@@ -14,7 +14,7 @@
 #include <sge/math/vector/arithmetic.hpp>
 #include <sge/math/vector/basic_impl.hpp>
 #include <sge/math/vector/is_null.hpp>
-#include <sge/container/map_impl.hpp>
+#include <fcppt/container/map_impl.hpp>
 #include <sge/collision/world.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/parameters/inherited.hpp>

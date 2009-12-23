@@ -20,7 +20,7 @@
 #include <sge/math/vector/arithmetic.hpp>
 #include <sge/image/loader.hpp>
 #include <sge/systems/instance.hpp>
-#include <sge/container/raw_vector_impl.hpp>
+#include <fcppt/container/raw_vector_impl.hpp>
 #include <sge/algorithm/join_strings.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <sge/make_shared_ptr.hpp>

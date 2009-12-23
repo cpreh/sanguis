@@ -6,7 +6,7 @@
 #include "../exp_type.hpp"
 #include "../../entity_id.hpp"
 #include "../../diff_clock.hpp"
-#include <sge/container/map_decl.hpp>
+#include <fcppt/container/map_decl.hpp>
 #include <sge/time/timer.hpp>
 #include <map>
 
@@ -78,7 +78,7 @@ private:
 
 	sge::time::timer expire_timer_;
 
-	typedef sge::container::map<
+	typedef fcppt::container::map<
 		std::map<
 			entity_id,
 			auto_weak_link

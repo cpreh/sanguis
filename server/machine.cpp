@@ -8,8 +8,8 @@
 #include "../exception.hpp"
 #include <sge/console/gfx.hpp>
 #include <sge/systems/instance.hpp>
-#include <sge/container/raw_vector_impl.hpp>
-#include <sge/container/map_impl.hpp>
+#include <fcppt/container/raw_vector_impl.hpp>
+#include <fcppt/container/map_impl.hpp>
 #include <sge/algorithm/append.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>

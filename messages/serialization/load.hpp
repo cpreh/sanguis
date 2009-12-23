@@ -5,7 +5,7 @@
 #include "istream.hpp"
 #include "endianness.hpp"
 #include "../bindings/dynamic_len.hpp"
-#include <sge/container/raw_vector_impl.hpp>
+#include <fcppt/container/raw_vector_impl.hpp>
 #include <sge/algorithm/copy_n.hpp>
 #include <sge/io/read.hpp>
 #include <majutsu/concepts/dynamic_memory/tag.hpp>

@@ -2,7 +2,7 @@
 #define SANGUIS_NET_DETAIL_OUTPUT_BUFFER_HPP_INCLUDED
 
 #include "../data_type.hpp"
-#include <sge/container/raw_vector_decl.hpp>
+#include <fcppt/container/raw_vector_decl.hpp>
 #include <sge/noncopyable.hpp>
 
 namespace sanguis

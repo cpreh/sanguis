@@ -6,7 +6,7 @@
 #include "../entities/friend.hpp"
 #include "../entities/insert_parameters.hpp"
 #include "../environment/object.hpp"
-#include <sge/container/map_impl.hpp>
+#include <fcppt/container/map_impl.hpp>
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::weapons::sentry::sentry(

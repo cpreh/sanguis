@@ -3,7 +3,7 @@
 
 #include "player_fwd.hpp"
 #include "../player_id.hpp"
-#include <sge/container/map_fwd.hpp>
+#include <fcppt/container/map_fwd.hpp>
 #include <map>
 
 namespace sanguis
@@ -13,7 +13,7 @@ namespace server
 namespace entities
 {
 
-typedef sge::container::map<
+typedef fcppt::container::map<
 	std::map<
 		player_id,
 		server::entities::player *

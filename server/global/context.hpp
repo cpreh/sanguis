@@ -24,7 +24,7 @@
 #include "../../load/model/context_fwd.hpp"
 #include <sge/function/object.hpp>
 #include <fcppt/log/object_fwd.hpp>
-#include <sge/container/map_decl.hpp>
+#include <fcppt/container/map_decl.hpp>
 #include <sge/collision/system_fwd.hpp>
 #include <sge/shared_ptr.hpp>
 #include <sge/noncopyable.hpp>

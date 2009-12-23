@@ -30,7 +30,7 @@
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/state/trampoline.hpp>
 #include <sge/systems/instance.hpp>
-#include <sge/container/raw_vector_impl.hpp>
+#include <fcppt/container/raw_vector_impl.hpp>
 #include <sge/assert.hpp>
 #include <sge/utf8/convert.hpp>
 #include <boost/mpl/vector/vector10.hpp>

@@ -2,7 +2,7 @@
 #include "../entities/auto_weak_link.hpp"
 #include "../entities/base.hpp"
 #include "../collision/distance.hpp"
-#include <sge/container/map_impl.hpp>
+#include <fcppt/container/map_impl.hpp>
 #include <sge/assert.hpp>
 #include <boost/foreach.hpp>
 #include <limits>

@@ -2,7 +2,7 @@
 #include "group.hpp"
 #include <sge/collision/world.hpp>
 #include <sge/collision/group.hpp>
-#include <sge/container/map_impl.hpp>
+#include <fcppt/container/map_impl.hpp>
 #include <sge/assign/make_container.hpp>
 #include <sge/foreach_enumerator.hpp>
 #include <boost/foreach.hpp>

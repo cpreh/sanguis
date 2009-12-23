@@ -5,7 +5,7 @@
 #include "entity_map.hpp"
 #include "../entities/with_ai_fwd.hpp"
 #include "../entities/auto_weak_link.hpp"
-#include <sge/container/map_decl.hpp>
+#include <fcppt/container/map_decl.hpp>
 
 namespace sanguis
 {

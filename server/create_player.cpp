@@ -10,7 +10,7 @@
 #include "../messages/assign_id.hpp"
 #include "../resolution.hpp"
 #include <sge/utf8/convert.hpp>
-#include <sge/container/map_impl.hpp>
+#include <fcppt/container/map_impl.hpp>
 #include <sge/make_auto_ptr.hpp>
 
 sanguis::server::entities::player_auto_ptr

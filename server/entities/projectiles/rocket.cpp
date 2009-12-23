@@ -8,7 +8,7 @@
 #include "../../damage/full.hpp"
 #include "../../environment/object.hpp"
 #include "../../environment/load_context.hpp"
-#include <sge/container/map_impl.hpp>
+#include <fcppt/container/map_impl.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::server::entities::projectiles::rocket::rocket(

@@ -5,7 +5,7 @@
 #include "group.hpp"
 #include <sge/collision/world_fwd.hpp>
 #include <sge/collision/body_fwd.hpp>
-#include <sge/container/map_decl.hpp>
+#include <fcppt/container/map_decl.hpp>
 
 namespace sanguis
 {

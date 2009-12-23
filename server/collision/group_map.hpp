@@ -3,7 +3,7 @@
 
 #include "group.hpp"
 #include <sge/collision/group_fwd.hpp>
-#include <sge/container/map_fwd.hpp>
+#include <fcppt/container/map_fwd.hpp>
 #include <map>
 
 namespace sanguis
@@ -13,7 +13,7 @@ namespace server
 namespace collision
 {
 
-typedef sge::container::map<
+typedef fcppt::container::map<
 	std::map<
 		group::type,
 		sge::collision::group_ptr

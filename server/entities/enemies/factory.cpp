@@ -6,7 +6,7 @@
 #include "../../weapons/pistol.hpp"
 #include "../../ai/create_simple.hpp"
 #include "../../../exception.hpp"
-#include <sge/container/map_impl.hpp>
+#include <fcppt/container/map_impl.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::server::entities::auto_ptr

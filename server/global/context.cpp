@@ -17,7 +17,7 @@
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/object.hpp>
-#include <sge/container/map_impl.hpp>
+#include <fcppt/container/map_impl.hpp>
 #include <sge/math/vector/is_null.hpp>
 #include <sge/math/vector/to_angle.hpp>
 #include <sge/make_shared_ptr.hpp>

@@ -5,7 +5,7 @@
 #include "list.hpp"
 #include "../../perk_type.hpp"
 #include "../level_type.hpp"
-#include <sge/container/tree_decl.hpp>
+#include <fcppt/container/tree_decl.hpp>
 #include <sge/noncopyable.hpp>
 
 namespace sanguis
@@ -33,7 +33,7 @@ public:
 		server::level_type player_level) const;
 
 	// public for helper functions
-	typedef sge::container::tree<
+	typedef fcppt::container::tree<
 		status
 	> tree_type;
 private:

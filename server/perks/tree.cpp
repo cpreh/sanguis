@@ -1,8 +1,8 @@
 #include "tree.hpp"
 #include "../log.hpp"
 #include "../../exception.hpp"
-#include <sge/container/tree_impl.hpp>
-#include <sge/container/traversal.hpp>
+#include <fcppt/container/tree_impl.hpp>
+#include <fcppt/container/traversal.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/text.hpp>
 
@@ -84,7 +84,7 @@ sanguis::server::perks::tree::choosable(
 	server::level_type const player_level) const
 {
 	typedef 
-	sge::container::traversal<
+	fcppt::container::traversal<
 		tree_type const
 	> traversal;
 	
@@ -142,7 +142,7 @@ sanguis::server::perks::tree::take(
 	perk_type::type const p)
 {
 	typedef 
-	sge::container::traversal<
+	fcppt::container::traversal<
 		tree_type
 	> traversal;
 	

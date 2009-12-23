@@ -28,7 +28,7 @@
 #include "../../messages/auto_ptr.hpp"
 #include <sge/collision/world_fwd.hpp>
 #include <sge/collision/system_fwd.hpp>
-#include <sge/container/map_decl.hpp>
+#include <fcppt/container/map_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <sge/time/timer.hpp>
 #include <sge/noncopyable.hpp>

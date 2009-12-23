@@ -1,7 +1,7 @@
 #include "exp_area.hpp"
 #include "player.hpp"
 #include "auto_weak_link.hpp"
-#include <sge/container/map_impl.hpp>
+#include <fcppt/container/map_impl.hpp>
 #include <sge/time/millisecond.hpp>
 #include <boost/logic/tribool.hpp>
 #include <boost/foreach.hpp>

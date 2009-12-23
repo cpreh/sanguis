@@ -10,7 +10,7 @@
 #include "../tick_event.hpp"
 #include <sge/console/gfx_fwd.hpp>
 #include <sge/collision/system_fwd.hpp>
-#include <sge/container/map_decl.hpp>
+#include <fcppt/container/map_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <sge/string.hpp>
 #include <boost/statechart/state_machine.hpp>
@@ -90,7 +90,7 @@ public:
 		messages::auto_ptr
 	);
 private:
-	typedef sge::container::map<
+	typedef fcppt::container::map<
 		std::map<
 			net::id_type,
 			client_data

@@ -35,7 +35,7 @@
 #include <sge/math/box/basic_impl.hpp>
 #include <sge/collision/system.hpp>
 #include <sge/collision/world.hpp>
-#include <sge/container/map_impl.hpp>
+#include <fcppt/container/map_impl.hpp>
 #include <sge/time/second.hpp>
 #include <sge/time/millisecond.hpp>
 #include <sge/make_shared_ptr.hpp>

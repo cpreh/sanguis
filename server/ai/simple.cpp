@@ -9,7 +9,7 @@
 #include "../collision/collides.hpp"
 #include "../collision/distance.hpp"
 #include <sge/math/vector/angle_between.hpp>
-#include <sge/container/map_impl.hpp>
+#include <fcppt/container/map_impl.hpp>
 #include <sge/make_auto_ptr.hpp>
 #include <sge/optional.hpp>
 #include <sge/assert.hpp>
