@@ -1,7 +1,7 @@
 #ifndef SANGUIS_MESSAGES_MAKE_CLASS_HPP_INCLUDED
 #define SANGUIS_MESSAGES_MAKE_CLASS_HPP_INCLUDED
 
-#include <sge/restrict_typedef_struct.hpp>
+#include <fcppt/restrict_typedef_struct.hpp>
 #include <majutsu/memory/raw.hpp>
 #include <majutsu/class.hpp>
 
@@ -19,7 +19,7 @@ struct make_class {
 		majutsu::memory::raw
 	> type;
 
-	SGE_RESTRICT_TYPEDEF_STRUCT(make_class)
+	FCPPT_RESTRICT_TYPEDEF_STRUCT(make_class)
 };
 
 }
