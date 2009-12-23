@@ -13,24 +13,12 @@
 #include "log.hpp"
 
 // sge
-#include <sge/cerr.hpp>
-#include <fcppt/text.hpp>
-#include <sge/exception.hpp>
-#include <fcppt/iconv.hpp>
-#include <fcppt/make_shared_ptr.hpp>
-#include <fcppt/auto_ptr.hpp>
-#include <fcppt/scoped_ptr.hpp>
 #include <sge/console/object.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/console/sprite_parameters.hpp>
 #include <sge/console/sprite_object.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/systems/list.hpp>
-#include <fcppt/log/level.hpp>
-#include <fcppt/log/object.hpp>
-#include <fcppt/log/global.hpp>
-#include <fcppt/log/level_string.hpp>
-#include <fcppt/log/activate_levels.hpp>
 #include <sge/font/system.hpp>
 #include <sge/font/metrics.hpp>
 #include <sge/font/drawer_3d.hpp>
@@ -59,9 +47,21 @@
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/config/media_path.hpp>
+#include <sge/exception.hpp>
+
+#include <fcppt/filesystem/exists.hpp>
+#include <fcppt/log/level.hpp>
+#include <fcppt/log/object.hpp>
+#include <fcppt/log/global.hpp>
+#include <fcppt/log/activate_levels.hpp>
+#include <fcppt/io/cerr.hpp>
+#include <fcppt/text.hpp>
+#include <fcppt/iconv.hpp>
+#include <fcppt/make_shared_ptr.hpp>
+#include <fcppt/auto_ptr.hpp>
+#include <fcppt/scoped_ptr.hpp>
 
 // boost
-#include <boost/filesystem.hpp>
 #include <boost/spirit/home/phoenix/bind/bind_function.hpp>
 #include <boost/spirit/home/phoenix/core/reference.hpp>
 #include <boost/spirit/home/phoenix/core/argument.hpp>
@@ -135,7 +135,7 @@ try
 	
 	po::variables_map vm;
 	po::store(po::parse_command_line(argc,argv,desc),vm);
-	if (boost::filesystem::exists(FCPPT_TEXT("config")))
+	if (fcppt::filesystem::exists(FCPPT_TEXT("config")))
 	{
 		// NOTE: this has to be a std::ifstream since boost::po only handels those cases
 		std::ifstream config_file("config");
@@ -232,7 +232,9 @@ try
 	// font stuff
 	sge::font::metrics_ptr const metrics(
 		sys.font_system()->create_font(
-			sge::config::media_path() / FCPPT_TEXT("fonts") / SGE_TEXT("default.ttf"),
+			sge::config::media_path()
+			/ FCPPT_TEXT("fonts")
+			/ FCPPT_TEXT("default.ttf"),
 			static_cast<sge::font::size_type>(15)
 		)
 	);
@@ -342,11 +344,19 @@ try
 }
 catch (sge::exception const &e)
 {
-	sge::cerr << FCPPT_TEXT("caught sge exception: ") << e.string() << SGE_TEXT('\n');
+	fcppt::io::cerr
+		<< FCPPT_TEXT("caught sge exception: ")
+		<< e.string()
+		<< FCPPT_TEXT('\n');
+
 	return EXIT_FAILURE;
 }
 catch (std::exception const &e)
 {
-	std::cerr << "caught standard exception: " << e.what() << '\n';
+	std::cerr
+		<< "caught standard exception: "
+		<< e.what()
+		<< '\n';
+
 	return EXIT_FAILURE;
 }
