@@ -26,7 +26,7 @@ sanguis::server::ai::simple::simple(
 	potential_targets_()
 {
 	auras::auto_ptr new_aura(
-		sge::make_auto_ptr<
+		fcppt::make_auto_ptr<
 			auras::aggro
 		>(
 			1000, // FIXME

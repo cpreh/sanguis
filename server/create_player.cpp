@@ -27,7 +27,7 @@ sanguis::server::create_player(
 	// 2) tell the client the player's id _before_ doing anything else
 	// 3) add the player
 	entities::player_auto_ptr new_player(
-		sge::make_auto_ptr<
+		fcppt::make_auto_ptr<
 			entities::player
 		>(
 			load_context_,

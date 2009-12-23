@@ -77,7 +77,7 @@ sanguis::server::collision::base::recreate(
 	body_
 		= world_->create_body(
 			sge::collision::satellite_ptr(
-				sge::make_auto_ptr<
+				fcppt::make_auto_ptr<
 					collision::satellite
 				>(
 					std::tr1::ref(

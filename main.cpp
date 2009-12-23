@@ -238,7 +238,7 @@ try
 	);
 
 	sge::font::drawer_ptr const drawer(
-		sge::make_shared_ptr<sge::font::drawer_3d>(
+		fcppt::make_shared_ptr<sge::font::drawer_3d>(
 			sys.renderer(),
 			sge::image::colors::white()
 		)

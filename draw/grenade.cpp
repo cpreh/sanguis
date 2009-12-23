@@ -25,7 +25,7 @@ sanguis::draw::grenade::grenade(
 void sanguis::draw::grenade::on_decay()
 {
 	entity_auto_ptr explo(
-		sge::make_auto_ptr<
+		fcppt::make_auto_ptr<
 			explosion
 		>(
 			environment(),

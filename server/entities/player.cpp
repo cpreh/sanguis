@@ -53,7 +53,7 @@ sanguis::server::entities::player::player(
 	skill_points_(0)
 {
 	auras::auto_ptr new_aura(
-		sge::make_auto_ptr<
+		fcppt::make_auto_ptr<
 			auras::update_sight
 		>(
 			1000, // FIXME

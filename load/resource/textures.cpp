@@ -106,7 +106,7 @@ sanguis::load::resource::textures::do_load_unnamed(
 	fcppt::filesystem::path const &path) const
 {
 	return 
-		sge::make_shared_ptr<texture_context_impl>(
+		fcppt::make_shared_ptr<texture_context_impl>(
 			path,
 			texman.renderer(),
 			il,

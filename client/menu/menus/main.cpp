@@ -23,7 +23,7 @@ sanguis::client::menu::menus::main::main(
 			.activation(
 				sge::gui::activation_state::inactive)
 			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::vertical>())),
+				fcppt::make_shared_ptr<sge::gui::layouts::vertical>())),
 	connect(
 		parent,
 		sys.image_loader(),

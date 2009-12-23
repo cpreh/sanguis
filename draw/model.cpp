@@ -163,7 +163,7 @@ void sanguis::draw::model::on_decay()
 		return;
 	
 	entity_auto_ptr blood_(
-		sge::make_auto_ptr<
+		fcppt::make_auto_ptr<
 			blood
 		>(
 			environment(),

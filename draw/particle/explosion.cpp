@@ -36,7 +36,7 @@ sanguis::draw::particle::explosion::explosion(
 		);
 
 		base_ptr ptr(
-			sge::make_auto_ptr<
+			fcppt::make_auto_ptr<
 				particle::generator
 			>(
 				std::tr1::bind(

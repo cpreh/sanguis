@@ -64,7 +64,7 @@ sanguis::load::model::animation_context::update()
 					r.delay()
 				),
 				sge::texture::const_part_ptr(
-					sge::make_shared_ptr<
+					fcppt::make_shared_ptr<
 						sge::texture::part_raw
 					>(
 						t->texture(),

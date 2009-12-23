@@ -85,7 +85,7 @@ sanguis::client::states::gameover::gameover(
 			.pos(dialog_pos())
 			.size(dialog_size())
 			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::grid>()
+				fcppt::make_shared_ptr<sge::gui::layouts::grid>()
 			)
 	),
 	dead_label(
@@ -102,7 +102,7 @@ sanguis::client::states::gameover::gameover(
 				sge::gui::point(0,1)
 			)
 			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::grid>()
+				fcppt::make_shared_ptr<sge::gui::layouts::grid>()
 			)
 	),
 	names_head(

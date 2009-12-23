@@ -108,7 +108,7 @@ sanguis::client::perk_chooser::perk_chooser(
 			.activation(
 				sge::gui::activation_state::inactive)
 			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::vertical>())),
+				fcppt::make_shared_ptr<sge::gui::layouts::vertical>())),
 	perks_left_(
 		background_,
 		sge::gui::widgets::parameters(),

@@ -201,7 +201,7 @@ sanguis::client::menu::object::object(
 				sprite_object::point::null()
 			)
 			.texture(
-				sge::make_shared_ptr<
+				fcppt::make_shared_ptr<
 					sge::texture::part_raw
 				>(
 					_sys.renderer()->create_texture(

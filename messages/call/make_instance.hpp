@@ -39,7 +39,7 @@ public:
 		sge::auto_ptr<
 			dispatcher
 		> ptr(
-			sge::make_auto_ptr<
+			fcppt::make_auto_ptr<
 				dispatcher
 			>()
 		);

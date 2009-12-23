@@ -127,7 +127,7 @@ sanguis::load::model::animation::animation(
 
 	try
 	{
-		sounds_ = sge::make_shared_ptr<
+		sounds_ = fcppt::make_shared_ptr<
 			animation_sound
 		>(
 			sge::parse::json::find_member<
@@ -141,7 +141,7 @@ sanguis::load::model::animation::animation(
 	}
 	catch(sge::exception const &)
 	{
-		sounds_ = sge::make_shared_ptr<
+		sounds_ = fcppt::make_shared_ptr<
 			animation_sound
 		>();
 	}

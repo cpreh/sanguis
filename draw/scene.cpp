@@ -102,7 +102,7 @@ sanguis::draw::scene::scene(
 		return;
 	
 	entity_auto_ptr p(
-		sge::make_auto_ptr<
+		fcppt::make_auto_ptr<
 			draw::background
 		>(
 			environment()

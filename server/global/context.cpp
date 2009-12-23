@@ -41,7 +41,7 @@ sanguis::server::global::context::context(
 	worlds_(),
 	players_(),
 	world_context_(
-		sge::make_shared_ptr<
+		fcppt::make_shared_ptr<
 			world_context
 		>(
 			std::tr1::ref(
@@ -50,7 +50,7 @@ sanguis::server::global::context::context(
 		)
 	),
 	load_context_(
-		sge::make_shared_ptr<
+		fcppt::make_shared_ptr<
 			load_context
 		>(
 			model_context_

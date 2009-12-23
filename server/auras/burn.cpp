@@ -28,7 +28,7 @@ sanguis::server::auras::burn::enter(
 )
 {
 	buffs::auto_ptr new_buff(
-		sge::make_auto_ptr<
+		fcppt::make_auto_ptr<
 			buffs::burn
 		>(
 			damage_per_pulse,

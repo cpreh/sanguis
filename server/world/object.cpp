@@ -117,7 +117,7 @@ sanguis::server::world::object::object(
 		)
 	),
 	environment_(
-		sge::make_shared_ptr<
+		fcppt::make_shared_ptr<
 			world::environment
 		>(
 			std::tr1::ref(

@@ -10,7 +10,7 @@ sanguis::server::world::random(
 )
 {
 	// TODO:
-	return sge::make_auto_ptr<
+	return fcppt::make_auto_ptr<
 		object
 	>(
 		ctx_,

@@ -25,13 +25,13 @@ sanguis::client::menu::menus::connect::connect(
 			.activation(
 				sge::gui::activation_state::inactive)
 			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::vertical>())),
+				fcppt::make_shared_ptr<sge::gui::layouts::vertical>())),
 
 	host(
 		parent,
 		sge::gui::widgets::parameters()
 			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::horizontal>())),
+				fcppt::make_shared_ptr<sge::gui::layouts::horizontal>())),
 	host_label(
 		host,
 		sge::gui::widgets::parameters(),
@@ -48,7 +48,7 @@ sanguis::client::menu::menus::connect::connect(
 		parent,
 		sge::gui::widgets::parameters()
 			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::horizontal>())),
+				fcppt::make_shared_ptr<sge::gui::layouts::horizontal>())),
 	port_label(
 		port,
 		sge::gui::widgets::parameters(),
@@ -65,7 +65,7 @@ sanguis::client::menu::menus::connect::connect(
 		parent,
 		sge::gui::widgets::parameters()
 			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::horizontal>())),
+				fcppt::make_shared_ptr<sge::gui::layouts::horizontal>())),
 	connect_(
 		connect_wrapper,
 		sys.image_loader(),
@@ -75,7 +75,7 @@ sanguis::client::menu::menus::connect::connect(
 		parent,
 		sge::gui::widgets::parameters()
 			.layout(
-				sge::make_shared_ptr<sge::gui::layouts::horizontal>())),
+				fcppt::make_shared_ptr<sge::gui::layouts::horizontal>())),
 	return_(
 		return_wrapper,
 		sys.image_loader(),

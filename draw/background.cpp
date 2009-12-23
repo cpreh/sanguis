@@ -48,7 +48,7 @@ sanguis::draw::background::background(
 			z_ordering::corpses
 		)
 		.texture(
-			sge::make_shared_ptr<
+			fcppt::make_shared_ptr<
 				sge::texture::part_raw
 			>(
 				tex
