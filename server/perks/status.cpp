@@ -1,5 +1,5 @@
 #include "status.hpp"
-#include <sge/assert.hpp>
+#include <fcppt/assert.hpp>
 #include <limits>
 
 sanguis::server::perks::status::status()

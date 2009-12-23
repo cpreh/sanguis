@@ -16,7 +16,7 @@
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <sge/image/color/rgba8.hpp>
 #include <sge/image/color/init.hpp>
-#include <sge/assert.hpp>
+#include <fcppt/assert.hpp>
 #include <boost/foreach.hpp>
 #include <tr1/random>
 #include <algorithm>

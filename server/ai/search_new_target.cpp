@@ -3,7 +3,7 @@
 #include "../entities/base.hpp"
 #include "../collision/distance.hpp"
 #include <fcppt/container/map_impl.hpp>
-#include <sge/assert.hpp>
+#include <fcppt/assert.hpp>
 #include <boost/foreach.hpp>
 #include <limits>
 

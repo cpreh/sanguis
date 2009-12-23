@@ -10,7 +10,7 @@
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <sge/optional_impl.hpp>
-#include <sge/assert.hpp>
+#include <fcppt/assert.hpp>
 #include <boost/logic/tribool.hpp>
 
 sanguis::projectile_type::type

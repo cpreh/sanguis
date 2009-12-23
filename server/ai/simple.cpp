@@ -12,7 +12,7 @@
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/make_auto_ptr.hpp>
 #include <sge/optional.hpp>
-#include <sge/assert.hpp>
+#include <fcppt/assert.hpp>
 #include <tr1/functional>
 
 sanguis::server::ai::simple::simple(

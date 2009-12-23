@@ -20,7 +20,7 @@
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/headers.hpp>
-#include <sge/assert.hpp>
+#include <fcppt/assert.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/lexical_cast.hpp>

@@ -1,6 +1,6 @@
 #include "perk_cast.hpp"
 #include <fcppt/container/raw_vector.hpp>
-#include <sge/assert.hpp>
+#include <fcppt/assert.hpp>
 #include <boost/foreach.hpp>
 
 sanguis::client::perk_container const sanguis::client::perk_cast(

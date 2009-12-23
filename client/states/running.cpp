@@ -31,7 +31,7 @@
 #include <sge/renderer/state/trampoline.hpp>
 #include <sge/systems/instance.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
-#include <sge/assert.hpp>
+#include <fcppt/assert.hpp>
 #include <sge/utf8/convert.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <boost/foreach.hpp>

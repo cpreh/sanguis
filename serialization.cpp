@@ -10,7 +10,7 @@
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/io/read.hpp>
 #include <fcppt/io/write.hpp>
-#include <sge/assert.hpp>
+#include <fcppt/assert.hpp>
 
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/device/back_inserter.hpp>

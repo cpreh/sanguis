@@ -9,7 +9,7 @@
 #include <sge/collision/world.hpp>
 #include <sge/collision/shapes/circle.hpp>
 #include <sge/assign/make_container.hpp>
-#include <sge/assert.hpp>
+#include <fcppt/assert.hpp>
 #include <boost/logic/tribool.hpp>
 
 sanguis::server::entities::base::base()
