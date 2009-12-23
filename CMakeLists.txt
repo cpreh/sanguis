@@ -12,28 +12,23 @@ INCLUDE (FindPkgConfig)
 
 SET (CMAKE_VERBOSE_MAKEFILE ON)
 
-FIND_PACKAGE(Boost 1.36.0 COMPONENTS
-	filesystem
+SET (Boost_ADDITIONAL_VERSIONS "1.41" "1.41.0")
+
+IF(MSVC)
+	SET(Boost_USE_STATIC_LIBS ON)
+ENDIF()
+
+FIND_PACKAGE(
+	Boost 1.41.0 REQUIRED COMPONENTS
 	iostreams
 	program_options
 	system
-	thread)
+	thread
+)
 
-IF(NOT Boost_FOUND)
-	MESSAGE(STATUS "Boost not found!")
-ENDIF()
+INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIR})
 
-IF(Boost_INCLUDE_DIR)
-	INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIR})
-ELSE()
-	MESSAGE(STATUS "Boost headers not found. You will have to specify them in your build environment or you can use -DBOOST_ROOT= to tell cmake where your boost installation is.")
-ENDIF()
-
-IF(Boost_LIBRARY_DIRS)
-	LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
-ELSE()
-	MESSAGE(STATUS "Boost libraries not found.")
-ENDIF()
+LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
 
 pkg_check_modules (SGE spacegameengine)
 
@@ -74,7 +69,8 @@ FILE (GLOB_RECURSE collectionsfiles
 	server/*.cpp)
 
 ADD_EXECUTABLE(sanguis ${basefiles} ${collectionsfiles})
-TARGET_LINK_LIBRARIES(sanguis sgecore sgegui)
+
+TARGET_LINK_LIBRARIES(sanguis fcppt sgecore sgegui)
 
 IF(NOT MSVC)
 	TARGET_LINK_LIBRARIES(sanguis ${Boost_LIBRARIES})
