@@ -22,7 +22,7 @@
 #include <sge/systems/instance.hpp>
 #include <sge/container/raw_vector_impl.hpp>
 #include <sge/algorithm/join_strings.hpp>
-#include <sge/lexical_cast.hpp>
+#include <fcppt/lexical_cast.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <tr1/functional>
 
@@ -138,7 +138,7 @@ sanguis::client::states::gameover::gameover(
 			.pos(	
 				sge::gui::point(1,1)
 			),
-		sge::lexical_cast<sge::string>(
+		fcppt::lexical_cast<sge::string>(
 			context<machine>().gameover_score()
 		)
 	),

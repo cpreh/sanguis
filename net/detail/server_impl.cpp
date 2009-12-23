@@ -7,7 +7,7 @@
 #include <sge/log/headers.hpp>
 #include <fcppt/text.hpp>
 #include <sge/iconv.hpp>
-#include <sge/lexical_cast.hpp>
+#include <fcppt/lexical_cast.hpp>
 #undef max
 // asio brings in window.h's max macro :(
 #include <sge/container/raw_vector_impl.hpp>
@@ -121,7 +121,7 @@ void sanguis::net::detail::server_impl::queue(
 		if (!c.connected_)
 			throw exception(
 				FCPPT_TEXT("invalid id ")+
-				sge::lexical_cast<sge::string>(
+				fcppt::lexical_cast<sge::string>(
 					id));
 
 		c.output_.push_back(
@@ -133,7 +133,7 @@ void sanguis::net::detail::server_impl::queue(
 	// no valid id found?
 	throw exception(
 		FCPPT_TEXT("invalid id ")+
-		sge::lexical_cast<sge::string>(
+		fcppt::lexical_cast<sge::string>(
 			id));
 }
 

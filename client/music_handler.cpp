@@ -9,7 +9,7 @@
 #include <sge/log/headers.hpp>
 #include <sge/exception.hpp>
 #include <fcppt/text.hpp>
-#include <sge/lexical_cast.hpp>
+#include <fcppt/lexical_cast.hpp>
 #include <sge/bad_lexical_cast.hpp>
 #include <tr1/functional>
 
@@ -78,7 +78,7 @@ void sanguis::client::music_handler::volume(sge::console::arg_list const &a)
 	try
 	{
 		current_->attenuation(
-			sge::lexical_cast<
+			fcppt::lexical_cast<
 				sge::audio::unit
 			>(
 				a[1]

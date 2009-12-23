@@ -11,7 +11,7 @@
 #include <fcppt/filesystem/is_regular.hpp>
 #include <fcppt/filesystem/next_file.hpp>
 #include <fcppt/filesystem/first_file.hpp>
-#include <sge/lexical_cast.hpp>
+#include <fcppt/lexical_cast.hpp>
 #include <sge/optional_impl.hpp>
 #include <sge/fstream.hpp>
 #include <sge/istringstream.hpp>
@@ -74,7 +74,7 @@ sanguis::load::resource::animations::do_load(
 	if (boost::algorithm::starts_with(line,FCPPT_TEXT("frame_length ")))
 		const_delay =
 			sge::time::millisecond(
-				sge::lexical_cast<
+				fcppt::lexical_cast<
 					sge::time::unit
 				>(
 					line.substr(
@@ -109,7 +109,7 @@ sanguis::load::resource::animations::do_load(
 			if (!ss)
 				throw exception(
 					FCPPT_TEXT("invalid line ")
-					+ sge::lexical_cast<sge::string>(lineno)
+					+ fcppt::lexical_cast<sge::string>(lineno)
 					+ FCPPT_TEXT(" in animation ")
 					+ dir.string());
 			filename = ss.str().substr(ss.tellg());

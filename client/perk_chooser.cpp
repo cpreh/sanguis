@@ -23,7 +23,7 @@
 #include <sge/assert.hpp>
 #include <fcppt/text.hpp>
 #include <sge/make_shared_ptr.hpp>
-#include <sge/lexical_cast.hpp>
+#include <fcppt/lexical_cast.hpp>
 #include <tr1/functional>
 #include <boost/foreach.hpp>
 #include <utility>
@@ -203,7 +203,7 @@ void sanguis::client::perk_chooser::regenerate_label()
 {
 	perks_left_.text(
 			FCPPT_TEXT("Perks left: ")+
-			sge::lexical_cast<sge::string>(
+			fcppt::lexical_cast<sge::string>(
 				levels_left()));
 }
 

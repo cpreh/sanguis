@@ -9,7 +9,7 @@
 #include <sge/log/headers.hpp>
 #include <fcppt/text.hpp>
 #include <sge/iconv.hpp>
-#include <sge/lexical_cast.hpp>
+#include <fcppt/lexical_cast.hpp>
 #include <boost/asio/buffer.hpp>
 #include <tr1/functional>
 
@@ -49,7 +49,7 @@ void sanguis::net::detail::client_impl::connect(
 	
 	boost::asio::ip::tcp::resolver::query query(
 		s,
-		sge::lexical_cast<std::string>(
+		fcppt::lexical_cast<std::string>(
 			port));
 
 	resolver_.async_resolve(

@@ -8,7 +8,7 @@
 #include <sge/gui/layouts/vertical.hpp>
 #include <fcppt/text.hpp>
 #include <sge/fstream.hpp>
-#include <sge/lexical_cast.hpp>
+#include <fcppt/lexical_cast.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <boost/foreach.hpp>
 
@@ -88,7 +88,7 @@ void sanguis::client::menu::menus::highscore::populate_children()
 				sge::gui::widgets::parameters()
 					.pos(
 						sge::gui::point(1,y_pos)),
-				sge::lexical_cast<sge::string>(e.score())));
+				fcppt::lexical_cast<sge::string>(e.score())));
 
 		++y_pos;
 	}

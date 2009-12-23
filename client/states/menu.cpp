@@ -17,7 +17,7 @@
 #include <sge/renderer/state/trampoline.hpp>
 #include <sge/image/colors.hpp>
 #include <sge/utf8/convert.hpp>
-#include <sge/lexical_cast.hpp>
+#include <fcppt/lexical_cast.hpp>
 #include <fcppt/text.hpp>
 #include <sge/iconv.hpp>
 #include <boost/mpl/vector.hpp>
@@ -209,7 +209,7 @@ void sanguis::client::states::menu::connect(
 			sge::iconv(
 				host
 			),
-			sge::lexical_cast<
+			fcppt::lexical_cast<
 				net::port_type
 			>(
 				port

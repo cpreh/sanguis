@@ -27,7 +27,7 @@
 #include <sge/log/headers.hpp>
 #include <sge/exception.hpp>
 #include <fcppt/text.hpp>
-#include <sge/lexical_cast.hpp>
+#include <fcppt/lexical_cast.hpp>
 #include <tr1/functional>
 
 namespace
@@ -235,11 +235,11 @@ void sanguis::load::model::animation::fill_cache(
 			throw exception(
 				FCPPT_TEXT("Rect out of bounds in TODO")
 				FCPPT_TEXT(". Whole area of texture is ")
-				+ sge::lexical_cast<sge::string>(_area)
+				+ fcppt::lexical_cast<sge::string>(_area)
 				+ FCPPT_TEXT(" but the inner area is ")
-				+ sge::lexical_cast<sge::string>(cur_area)
+				+ fcppt::lexical_cast<sge::string>(cur_area)
 				+ FCPPT_TEXT(". This happened when trying to load index ")
-				+ sge::lexical_cast<sge::string>(begin)
+				+ fcppt::lexical_cast<sge::string>(begin)
 			);
 
 		frame_cache_.push_back(
