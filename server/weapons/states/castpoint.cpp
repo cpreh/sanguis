@@ -7,7 +7,7 @@
 #include "../events/stop.hpp"
 #include "../../entities/with_weapon.hpp"
 #include <fcppt/math/vector/basic_impl.hpp>
-#include <sge/optional_impl.hpp>
+#include <fcppt/optional_impl.hpp>
 
 sanguis::server::weapons::states::castpoint::castpoint(
 	my_context ctx

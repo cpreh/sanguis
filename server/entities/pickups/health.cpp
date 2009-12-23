@@ -1,7 +1,7 @@
 #include "health.hpp"
 #include "../with_health.hpp"
 #include "../property/add.hpp"
-#include <sge/optional_impl.hpp>
+#include <fcppt/optional_impl.hpp>
 
 sanguis::server::entities::pickups::health::health(
 	server::environment::load_context_ptr const load_context,

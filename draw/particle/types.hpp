@@ -8,7 +8,7 @@
 #include <fcppt/random/inclusive_range.hpp>
 #include <fcppt/math/vector/static.hpp>
 #include <fcppt/function/object_fwd.hpp>
-#include <sge/optional_fwd.hpp>
+#include <fcppt/optional_fwd.hpp>
 #include "fwd.hpp"
 
 namespace sanguis 
@@ -26,7 +26,7 @@ typedef fcppt::random::inclusive_range<funit>      dispersion_range;
 typedef fcppt::random::inclusive_range<funit>      velocity_range;
 typedef fcppt::random::inclusive_range<rotation>   rotation_velocity_range;
 typedef fcppt::random::inclusive_range<time_type>  fade_time_range;
-typedef sge::optional<fade_time_range>         fade_type;
+typedef fcppt::optional<fade_time_range>         fade_type;
 typedef fcppt::function::object<base_ptr ()>             generation_callback;
 
 }

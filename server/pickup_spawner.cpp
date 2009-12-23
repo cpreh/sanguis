@@ -9,7 +9,7 @@
 #include <fcppt/random/actor/element.hpp>
 #include <fcppt/random/actor/container.hpp>
 #include <fcppt/random/inclusive_range.hpp>
-#include <sge/assign/make_container.hpp>
+#include <fcppt/assign/make_container.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <tr1/functional>
 
@@ -25,7 +25,7 @@ sanguis::server::pickup_spawner::pickup_spawner(
 		)
 	),
 	rng(
-		sge::assign::make_container<
+		fcppt::assign::make_container<
 			fcppt::random::actor::container
 		>(
 			fcppt::random::actor::element(

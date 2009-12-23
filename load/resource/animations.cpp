@@ -12,7 +12,7 @@
 #include <fcppt/filesystem/next_file.hpp>
 #include <fcppt/filesystem/first_file.hpp>
 #include <fcppt/lexical_cast.hpp>
-#include <sge/optional_impl.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <sge/fstream.hpp>
 #include <sge/istringstream.hpp>
 #include <fcppt/text.hpp>
@@ -67,7 +67,7 @@ sanguis::load::resource::animations::do_load(
 			FCPPT_TEXT("unexpected end of file \"")
 			+ framesfile.string());
 
-	sge::optional<
+	fcppt::optional<
 		sge::time::resolution
 	> const_delay;
 

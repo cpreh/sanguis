@@ -10,7 +10,7 @@
 #include "../../../diff_clock.hpp"
 #include <sge/time/timer.hpp>
 #include <fcppt/math/vector/basic_decl.hpp>
-#include <sge/optional_decl.hpp>
+#include <fcppt/optional_decl.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/result.hpp>
 #include <boost/statechart/custom_reaction.hpp>
@@ -62,7 +62,7 @@ public:
 private:
 	diff_clock diff_clock_;
 	sge::time::timer attack_time;
-	sge::optional<
+	fcppt::optional<
 		pos_type
 	> attack_dest;
 };

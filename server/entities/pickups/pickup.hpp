@@ -10,7 +10,7 @@
 #include "../../../diff_clock.hpp"
 #include "../../../messages/auto_ptr.hpp"
 #include <sge/time/timer.hpp>
-#include <sge/optional_fwd.hpp>
+#include <fcppt/optional_fwd.hpp>
 #include <boost/logic/tribool_fwd.hpp>
 
 namespace sanguis
@@ -29,7 +29,7 @@ class pickup
 public:
 	pickup_type::type ptype() const;
 protected:
-	typedef sge::optional<dim_type> optional_dim;
+	typedef fcppt::optional<dim_type> optional_dim;
 
 	pickup(
 		pickup_type::type,

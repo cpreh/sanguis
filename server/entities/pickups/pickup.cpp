@@ -7,7 +7,7 @@
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <sge/time/second.hpp>
 #include <fcppt/container/map_impl.hpp>
-#include <sge/optional_impl.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <boost/logic/tribool.hpp>
 

@@ -5,7 +5,7 @@
 #include "environment_fwd.hpp"
 #include "sprite/point.hpp"
 #include <fcppt/string.hpp>
-#include <sge/optional_decl.hpp>
+#include <fcppt/optional_decl.hpp>
 
 namespace sanguis
 {
@@ -22,7 +22,7 @@ public:
 private:
 	void update(time_type);
 
-	sge::optional<
+	fcppt::optional<
 		sprite::point
 	> origin;
 };

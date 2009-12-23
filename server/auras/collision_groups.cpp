@@ -1,6 +1,6 @@
 #include "collision_groups.hpp"
 #include "../../exception.hpp"
-#include <sge/assign/make_container.hpp>
+#include <fcppt/assign/make_container.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::server::collision::group_vector const
@@ -22,7 +22,7 @@ sanguis::server::auras::collision_groups(
 
 	)
 		return
-			sge::assign::make_container<
+			fcppt::assign::make_container<
 				collision::group_vector
 			>(
 				collision::group::projectile_enemy
@@ -41,7 +41,7 @@ sanguis::server::auras::collision_groups(
 
 	)
 		return
-			sge::assign::make_container<
+			fcppt::assign::make_container<
 				collision::group_vector
 			>(
 				collision::group::projectile_player

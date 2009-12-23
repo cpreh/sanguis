@@ -3,7 +3,7 @@
 #include "../../environment/object.hpp"
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
-#include <sge/optional_impl.hpp>
+#include <fcppt/optional_impl.hpp>
 
 sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 	team::type const team_,

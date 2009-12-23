@@ -6,7 +6,7 @@
 #include "../../../load/weapon_pickup_name.hpp"
 #include "../../../messages/create.hpp"
 #include "../../../messages/add_weapon_pickup.hpp"
-#include <sge/optional_impl.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 

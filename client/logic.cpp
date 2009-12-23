@@ -26,9 +26,9 @@
 #include <sge/console/object.hpp>
 #include <fcppt/log/headers.hpp>
 #include <sge/gui/unit.hpp>
-#include <sge/assign/make_container.hpp>
+#include <fcppt/assign/make_container.hpp>
 #include <fcppt/text.hpp>
-#include <sge/optional_impl.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/function/object.hpp>
 #include <tr1/functional>
 #include <algorithm>
@@ -48,7 +48,7 @@ sanguis::client::logic::logic(
 	),
 	cursor_(_cursor),
 	actions(
-		sge::assign::make_container<
+		fcppt::assign::make_container<
 			action_handlers
 		>
 		(
@@ -295,7 +295,7 @@ void sanguis::client::logic::handle_rotation_y(
 
 void sanguis::client::logic::update_rotation()
 {
-	sge::optional<
+	fcppt::optional<
 		messages::types::space_unit
 	> const rotation(
 		fcppt::math::vector::angle_between<

@@ -3,7 +3,7 @@
 #include <sge/collision/world.hpp>
 #include <sge/collision/group.hpp>
 #include <fcppt/container/map_impl.hpp>
-#include <sge/assign/make_container.hpp>
+#include <fcppt/assign/make_container.hpp>
 #include <sge/foreach_enumerator.hpp>
 #include <boost/foreach.hpp>
 #include <vector>
@@ -32,7 +32,7 @@ sanguis::server::collision::global_groups::global_groups(
 	> init_map;
 
 	init_map const init_(
-		sge::assign::make_container<
+		fcppt::assign::make_container<
 			init_map
 		>
 		(

@@ -5,8 +5,8 @@
 #include <sge/collision/body.hpp>
 #include <sge/collision/world.hpp>
 #include <fcppt/math/circle/basic_impl.hpp>
-#include <sge/assign/make_container.hpp>
-#include <sge/optional_impl.hpp>
+#include <fcppt/assign/make_container.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <boost/logic/tribool.hpp>
 
 sanguis::server::auras::aura::~aura()
@@ -57,7 +57,7 @@ sanguis::server::auras::aura::recreate_shapes(
 ) const
 {
 	return 
-		sge::assign::make_container<
+		fcppt::assign::make_container<
 			sge::collision::shapes::container
 		>(
 			world_->create_circle(

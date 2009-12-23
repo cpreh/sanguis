@@ -2,7 +2,7 @@
 #include "z_ordering.hpp"
 #include "explosion.hpp"
 #include "environment.hpp"
-#include <sge/optional_impl.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/make_auto_ptr.hpp>
 
 sanguis::draw::grenade::grenade(

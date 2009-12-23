@@ -8,7 +8,7 @@
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <sge/collision/world.hpp>
 #include <sge/collision/shapes/circle.hpp>
-#include <sge/assign/make_container.hpp>
+#include <fcppt/assign/make_container.hpp>
 #include <fcppt/assert.hpp>
 #include <boost/logic/tribool.hpp>
 
@@ -171,7 +171,7 @@ sanguis::server::entities::base::recreate_shapes(
 ) const
 {
 	return
-		sge::assign::make_container<
+		fcppt::assign::make_container<
 			sge::collision::shapes::container
 		>(
 			world_->create_circle(

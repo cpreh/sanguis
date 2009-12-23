@@ -16,7 +16,7 @@
 #include <sge/time/resolution.hpp>
 #include <sge/time/millisecond.hpp>
 #include <fcppt/text.hpp>
-#include <sge/optional_impl.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <algorithm>
 
 sanguis::server::entities::projectiles::grenade::grenade(

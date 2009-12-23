@@ -9,7 +9,7 @@
 #include "../../load/model/animation.hpp"
 #include <sge/sprite/object_decl.hpp>
 #include <fcppt/scoped_ptr.hpp>
-#include <sge/optional_decl.hpp>
+#include <fcppt/optional_decl.hpp>
 
 namespace sanguis
 {
@@ -21,7 +21,7 @@ namespace particle
 class object : public base
 {
 public:
-	typedef sge::optional<time_type> optional_time;
+	typedef fcppt::optional<time_type> optional_time;
 
 	object(
 		particle_type::type,

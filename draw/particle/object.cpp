@@ -15,7 +15,7 @@
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <sge/image/color/rgba8.hpp>
 #include <sge/image/color/init.hpp>
-#include <sge/optional_impl.hpp>
+#include <fcppt/optional_impl.hpp>
 
 sanguis::draw::particle::object::object(
 	particle_type::type const _type,

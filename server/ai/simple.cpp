@@ -11,7 +11,7 @@
 #include <fcppt/math/vector/angle_between.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/make_auto_ptr.hpp>
-#include <sge/optional.hpp>
+#include <fcppt/optional.hpp>
 #include <fcppt/assert.hpp>
 #include <tr1/functional>
 
@@ -79,7 +79,7 @@ sanguis::server::ai::simple::update(
 		target_
 	);
 
-	sge::optional<
+	fcppt::optional<
 		space_unit
 	> const angle(
 		fcppt::math::vector::angle_between<

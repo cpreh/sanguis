@@ -1,7 +1,7 @@
 #include "update_sight.hpp"
 #include "../entities/base.hpp"
-#include <sge/assign/make_container.hpp>
-#include <sge/optional_impl.hpp>
+#include <fcppt/assign/make_container.hpp>
+#include <fcppt/optional_impl.hpp>
 
 sanguis::server::auras::update_sight::update_sight(
 	space_unit const radius_,
@@ -26,7 +26,7 @@ sanguis::server::collision::group_vector const
 sanguis::server::auras::update_sight::collision_groups() const
 {
 	return
-		sge::assign::make_container<
+		fcppt::assign::make_container<
 			collision::group_vector
 		>(
 			collision::group::sight_range

@@ -8,7 +8,7 @@
 #include <fcppt/filesystem/path.hpp>
 #include <sge/renderer/dim_type.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
-#include <sge/optional_impl.hpp>
+#include <fcppt/optional_impl.hpp>
 
 namespace sanguis
 {

@@ -18,7 +18,7 @@
 #include <sge/renderer/filter/linear.hpp>
 #include <sge/renderer/resource_flags_none.hpp>
 #include <sge/renderer/device.hpp>
-#include <sge/assign/make_container.hpp>
+#include <fcppt/assign/make_container.hpp>
 #include <sge/systems/instance.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/object.hpp>
@@ -87,7 +87,7 @@ sanguis::client::menu::object::object(
 		main_.parent
 	),
 	connections_(
-		sge::assign::make_container<
+		fcppt::assign::make_container<
 			fcppt::signal::connection_manager::container
 		>
 		(

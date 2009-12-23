@@ -39,7 +39,7 @@
 #include <sge/time/second.hpp>
 #include <sge/time/millisecond.hpp>
 #include <fcppt/make_shared_ptr.hpp>
-#include <sge/optional_impl.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
 #include <tr1/functional>
