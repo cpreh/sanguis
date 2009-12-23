@@ -172,7 +172,7 @@ sanguis::load::resource::textures::textures(
 
 			if(equal == fcppt::string::npos)
 			{
-				SGE_LOG_WARNING(
+				FCPPT_LOG_WARNING(
 					sanguis::load::log(),
 					fcppt::log::_
 						<< FCPPT_TEXT("Error in .id file \")")

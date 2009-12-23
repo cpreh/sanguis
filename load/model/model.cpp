@@ -160,7 +160,7 @@ sanguis::load::model::model::model(
 	path(path),
 	parts()
 {
-	SGE_LOG_DEBUG(
+	FCPPT_LOG_DEBUG(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("Entering ")
@@ -175,7 +175,7 @@ sanguis::load::model::model::model(
 	}
 	catch(sge::exception const &e)
 	{
-		SGE_LOG_ERROR(
+		FCPPT_LOG_ERROR(
 			log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("model \"")
@@ -205,7 +205,7 @@ void sanguis::load::model::model::construct(
 		)
 	)
 	{
-		SGE_LOG_WARNING(
+		FCPPT_LOG_WARNING(
 			sanguis::load::log(),
 			fcppt::log::_
 				<< file 
@@ -292,7 +292,7 @@ void sanguis::load::model::model::construct(
 			)
 			.second == false
 		)
-			SGE_LOG_WARNING(
+			FCPPT_LOG_WARNING(
 				log(),
 				fcppt::log::_
 					<< FCPPT_TEXT("Double insert in model!")

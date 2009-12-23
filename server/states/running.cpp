@@ -42,7 +42,7 @@ sanguis::server::states::running::running(
 		)
 	)
 {
-	SGE_LOG_DEBUG(
+	FCPPT_LOG_DEBUG(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("constructor, listening")
@@ -124,7 +124,7 @@ sanguis::server::states::running::operator()(
 	messages::connect const &
 )
 {
-	SGE_LOG_INFO(
+	FCPPT_LOG_INFO(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("client ")
@@ -141,7 +141,7 @@ sanguis::server::states::running::operator()(
 	messages::disconnect const &
 )
 {
-	SGE_LOG_INFO(
+	FCPPT_LOG_INFO(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("client with id ")
@@ -211,7 +211,7 @@ sanguis::server::states::running::handle_default_msg(
 )
 {
 #if 0
-	SGE_LOG_WARNING(
+	FCPPT_LOG_WARNING(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("received unexpected message from id ")

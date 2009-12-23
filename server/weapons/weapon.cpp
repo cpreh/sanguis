@@ -160,7 +160,7 @@ sanguis::server::weapons::weapon::weapon(
 	irs_(static_cast<space_unit>(0))
 {
 	if(ncast_point_ > nbase_cooldown_)
-		SGE_LOG_WARNING(
+		FCPPT_LOG_WARNING(
 			log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("A weapon's cast point interval is bigger than its cooldown!")

@@ -56,7 +56,7 @@ void sanguis::client::screenshot::process()
 	if (!fcppt::filesystem::is_directory(dir))
 		throw exception(FCPPT_TEXT("Screenshot path ")+(dir/p).string()+SGE_TEXT(" exists but is not a directory"));
 
-	SGE_LOG_DEBUG(
+	FCPPT_LOG_DEBUG(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("writing screenshot: ")

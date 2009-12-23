@@ -44,7 +44,7 @@ sanguis::client::highscore::read(
 			)
 		)
 		{
-			SGE_LOG_ERROR(
+			FCPPT_LOG_ERROR(
 				log(),
 				fcppt::log::_
 					<< FCPPT_TEXT("Errors in the highscore file detected!")

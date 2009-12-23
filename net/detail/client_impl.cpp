@@ -39,7 +39,7 @@ void sanguis::net::detail::client_impl::connect(
 	hostname_type const &s,
 	port_type const port)
 {
-	SGE_LOG_DEBUG(
+	FCPPT_LOG_DEBUG(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("client: resolving hostname ")
@@ -151,7 +151,7 @@ void sanguis::net::detail::client_impl::resolve_handler(
 			fcppt::iconv(
 				e.message()));
 
-	SGE_LOG_DEBUG(
+	FCPPT_LOG_DEBUG(
 		log(),
 		fcppt::log::_ << FCPPT_TEXT("client: resolved domain, trying to connect"));
 	
@@ -185,7 +185,7 @@ void sanguis::net::detail::client_impl::handle_error(
 				e.message()));
 	}
 		
-	SGE_LOG_DEBUG(
+	FCPPT_LOG_DEBUG(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("client: disconnected (")
@@ -213,7 +213,7 @@ void sanguis::net::detail::client_impl::read_handler(
 		return;
 	}
 
-	SGE_LOG_DEBUG(
+	FCPPT_LOG_DEBUG(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("client: read ")
@@ -255,7 +255,7 @@ void sanguis::net::detail::client_impl::write_handler(
 		return;
 	}
 
-	SGE_LOG_DEBUG(
+	FCPPT_LOG_DEBUG(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("client: wrote ")
@@ -308,7 +308,7 @@ void sanguis::net::detail::client_impl::connect_handler(
 				fcppt::iconv(
 					e.message()));
 
-		SGE_LOG_DEBUG(
+		FCPPT_LOG_DEBUG(
 			log(),
 			fcppt::log::_ << FCPPT_TEXT("client: resolving next endpoint"));
 		
@@ -326,7 +326,7 @@ void sanguis::net::detail::client_impl::connect_handler(
 		return;
 	}
 
-	SGE_LOG_DEBUG(
+	FCPPT_LOG_DEBUG(
 		log(),
 		fcppt::log::_ << FCPPT_TEXT("client: connected"));
 

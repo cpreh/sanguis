@@ -133,7 +133,7 @@ sanguis::load::model::part::part(
 				)
 			).second == false
 		)
-			SGE_LOG_WARNING(
+			FCPPT_LOG_WARNING(
 				log(),
 				fcppt::log::_
 					<< FCPPT_TEXT("Double insert in part!")

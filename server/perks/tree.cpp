@@ -104,7 +104,7 @@ sanguis::server::perks::tree::choosable(
 	
 	if(it == trav.end())
 	{
-		SGE_LOG_WARNING(
+		FCPPT_LOG_WARNING(
 			log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("Perk not found in tree")

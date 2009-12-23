@@ -119,7 +119,7 @@ sanguis::client::perk_chooser::perk_chooser(
 	send_callback_(_send_callback),
 	images_()
 {
-	SGE_LOG_DEBUG(
+	FCPPT_LOG_DEBUG(
 		mylogger,
 		fcppt::log::_
 			<< FCPPT_TEXT("started, dialog size: ")
@@ -140,7 +140,7 @@ void sanguis::client::perk_chooser::process()
 void sanguis::client::perk_chooser::perks(
 	perk_container const &_perks)
 {
-	SGE_LOG_DEBUG(
+	FCPPT_LOG_DEBUG(
 		mylogger,
 		fcppt::log::_ << FCPPT_TEXT("got new set of perks"));
 
@@ -177,7 +177,7 @@ bool sanguis::client::perk_chooser::activated() const
 
 void sanguis::client::perk_chooser::activated(bool const n)
 {
-	SGE_LOG_DEBUG(
+	FCPPT_LOG_DEBUG(
 		mylogger,
 		fcppt::log::_ << FCPPT_TEXT("set activation to ")
 		             << n);
@@ -248,7 +248,7 @@ void sanguis::client::perk_chooser::regenerate_widgets()
 void sanguis::client::perk_chooser::choose_callback(
 	perk_type::type const p)
 {
-	SGE_LOG_DEBUG(
+	FCPPT_LOG_DEBUG(
 		mylogger,
 		fcppt::log::_
 			<< FCPPT_TEXT("chose perk ")

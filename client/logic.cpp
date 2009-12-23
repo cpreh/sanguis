@@ -179,7 +179,7 @@ sanguis::client::logic::give_weapon(
 {
 	if(m.get<messages::roles::entity_id>() != player_id_)
 	{
-		SGE_LOG_WARNING(
+		FCPPT_LOG_WARNING(
 			log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("Got invalid give_weapon message!")

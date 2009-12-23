@@ -263,7 +263,7 @@ sanguis::server::global::context::player_choose_perk(
 		)
 	)
 	{
-		SGE_LOG_WARNING(
+		FCPPT_LOG_WARNING(
 			log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("Player with id ")

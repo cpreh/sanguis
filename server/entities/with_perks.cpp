@@ -37,7 +37,7 @@ sanguis::server::entities::with_perks::add_perk(
 		!perk_.can_raise_level()
 	)	
 	{
-		SGE_LOG_WARNING(
+		FCPPT_LOG_WARNING(
 			log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("Tried to raise perk level of a perk which can't do this.")

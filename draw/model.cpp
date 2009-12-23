@@ -202,7 +202,7 @@ void sanguis::draw::model::weapon(
 void sanguis::draw::model::start_attacking()
 {
 	if(attacking)
-		SGE_LOG_WARNING(
+		FCPPT_LOG_WARNING(
 			log(),
 			fcppt::log::_ << FCPPT_TEXT("start_attacking(): already attacking!"));
 	attacking = true;
@@ -213,7 +213,7 @@ void sanguis::draw::model::start_attacking()
 void sanguis::draw::model::stop_attacking()
 {
 	if(!attacking)
-		SGE_LOG_WARNING(
+		FCPPT_LOG_WARNING(
 			log(),
 			fcppt::log::_ << FCPPT_TEXT("stop_attacking(): already not attacking!"));
 	attacking = false;
@@ -224,7 +224,7 @@ void sanguis::draw::model::stop_attacking()
 void sanguis::draw::model::start_reloading()
 {
 	if(reloading)
-		SGE_LOG_WARNING(
+		FCPPT_LOG_WARNING(
 			log(),
 			fcppt::log::_ << FCPPT_TEXT("start_reloading(): already reloading!"));
 	reloading = true;
@@ -235,7 +235,7 @@ void sanguis::draw::model::start_reloading()
 void sanguis::draw::model::stop_reloading()
 {
 	if(!reloading)
-		SGE_LOG_WARNING(
+		FCPPT_LOG_WARNING(
 			log(),
 			fcppt::log::_ << FCPPT_TEXT("stop_reloading(): already not reloading!"));
 	reloading = false;

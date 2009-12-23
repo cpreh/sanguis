@@ -153,7 +153,7 @@ boost::statechart::result
 sanguis::client::states::menu::operator()(
 	messages::assign_id const &m)
 {
-	SGE_LOG_DEBUG(
+	FCPPT_LOG_DEBUG(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("received id"));
@@ -171,13 +171,13 @@ sanguis::client::states::menu::operator()(
 			m.get<messages::roles::followup>()))
 	{
 		case connect_state::unpaused:
-			SGE_LOG_DEBUG(
+			FCPPT_LOG_DEBUG(
 				log(),
 				fcppt::log::_
 					<< FCPPT_TEXT("switching to state \"unpaused\""));
 			return transit<unpaused>();
 		case connect_state::paused:
-			SGE_LOG_DEBUG(
+			FCPPT_LOG_DEBUG(
 				log(),
 				fcppt::log::_
 					<< FCPPT_TEXT("switching to state \"paused\""));

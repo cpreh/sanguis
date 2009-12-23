@@ -46,7 +46,7 @@ sanguis::messages::serialization::dispatcher_register<T>::dispatcher_register(
 			.str()
 		);
 
-		SGE_LOG_FATAL(
+		FCPPT_LOG_FATAL(
 			log(),
 			fcppt::log::_
 				<< error

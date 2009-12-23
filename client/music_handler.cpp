@@ -113,7 +113,7 @@ sanguis::client::music_handler::load_random() const
 		}
 		catch(sge::exception const &e)
 		{
-			SGE_LOG_WARNING(
+			FCPPT_LOG_WARNING(
 				log(),
 				fcppt::log::_
 					<< FCPPT_TEXT("Music file \"")

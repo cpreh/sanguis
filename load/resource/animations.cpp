@@ -157,7 +157,7 @@ sanguis::load::resource::animations::load_without_frames_file(
 		*first_file);
 
 	if(fcppt::filesystem::next_file(first_file) != sge::filesystem::directory_iterator())
-		SGE_LOG_WARNING(
+		FCPPT_LOG_WARNING(
 			log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("No frames file found in \"")

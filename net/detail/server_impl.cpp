@@ -33,7 +33,7 @@ sanguis::net::detail::server_impl::server_impl()
 void sanguis::net::detail::server_impl::listen(
 	port_type const port)
 {
-	SGE_LOG_DEBUG(
+	FCPPT_LOG_DEBUG(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("server: listening on port ")
@@ -193,7 +193,7 @@ void sanguis::net::detail::server_impl::read_handler(
 		return;
 	}
 
-	SGE_LOG_DEBUG(
+	FCPPT_LOG_DEBUG(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("server: reading ")
@@ -241,7 +241,7 @@ void sanguis::net::detail::server_impl::write_handler(
 		return;
 	}
 
-	SGE_LOG_DEBUG(
+	FCPPT_LOG_DEBUG(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("server: wrote ")
@@ -288,7 +288,7 @@ void sanguis::net::detail::server_impl::accept_handler(
 
 	if (e)
 	{
-		SGE_LOG_DEBUG(
+		FCPPT_LOG_DEBUG(
 			log(),
 			fcppt::log::_ << FCPPT_TEXT("server: error while accepting"));
 		throw exception(
@@ -296,7 +296,7 @@ void sanguis::net::detail::server_impl::accept_handler(
 				e.message()));
 	}
 
-	SGE_LOG_DEBUG(
+	FCPPT_LOG_DEBUG(
 		log(),
 		fcppt::log::_ << FCPPT_TEXT("server: accepting a connection"));
 
@@ -344,7 +344,7 @@ void sanguis::net::detail::server_impl::handle_error(
 			error_msg
 		);
 
-	SGE_LOG_DEBUG(
+	FCPPT_LOG_DEBUG(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("server: disconnected ")

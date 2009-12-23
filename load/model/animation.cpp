@@ -86,7 +86,7 @@ load_delay(
 		if(opt_delay)
 			return *opt_delay;
 	
-		SGE_LOG_ERROR(
+		FCPPT_LOG_ERROR(
 			sanguis::load::log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("delay not in header but not in specified in leaf TODO")

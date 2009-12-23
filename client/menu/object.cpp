@@ -245,7 +245,7 @@ sanguis::client::menu::object::process(
 void sanguis::client::menu::object::connection_error(
 	fcppt::string const &message)
 {
-	SGE_LOG_DEBUG(
+	FCPPT_LOG_DEBUG(
 		mylogger,
 		fcppt::log::_
 			<< FCPPT_TEXT("got conection error: (")
@@ -282,7 +282,7 @@ void sanguis::client::menu::object::connect(
 	fcppt::string const &host,
 	fcppt::string const &port)
 {
-	SGE_LOG_DEBUG(
+	FCPPT_LOG_DEBUG(
 		mylogger,
 		fcppt::log::_
 			<< FCPPT_TEXT("connecting to ")

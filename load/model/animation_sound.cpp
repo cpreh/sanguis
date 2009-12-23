@@ -94,7 +94,7 @@ sanguis::load::model::animation_sound::animation_sound(
 				)
 			).second == false
 		)
-			SGE_LOG_WARNING(
+			FCPPT_LOG_WARNING(
 				log(),
 				fcppt::log::_
 					<< FCPPT_TEXT("Double insert in sounds!")

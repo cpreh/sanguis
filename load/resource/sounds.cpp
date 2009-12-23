@@ -40,7 +40,7 @@ make_sound(
 	}
 	catch(sge::audio::bad_sound_alloc const &e)
 	{
-		SGE_LOG_WARNING(
+		FCPPT_LOG_WARNING(
 			sanguis::load::log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("Allocation of a sound failed! ")

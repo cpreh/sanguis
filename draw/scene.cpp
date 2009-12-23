@@ -446,7 +446,7 @@ void sanguis::draw::scene::operator()(
 	
 	if(value >= static_cast<messages::types::enum_>(weapon_type::size))
 	{
-		SGE_LOG_WARNING(
+		FCPPT_LOG_WARNING(
 			log(),
 			fcppt::log::_ << FCPPT_TEXT("Invalid change_weapon message: Value out of range!"));
 		return;
@@ -754,7 +754,7 @@ sanguis::draw::scene::process_default_msg(
 	messages::base const &m
 )
 {
-	SGE_LOG_WARNING(
+	FCPPT_LOG_WARNING(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("Invalid message event in scene: ")

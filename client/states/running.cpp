@@ -248,7 +248,7 @@ boost::statechart::result
 sanguis::client::states::running::operator()(
 	messages::highscore const &m)
 {
-	SGE_LOG_DEBUG(
+	FCPPT_LOG_DEBUG(
 		sanguis::client::log(),
 		fcppt::log::_ 
 			<< FCPPT_TEXT("got highscore message, score was: ")

@@ -79,7 +79,7 @@ sanguis::server::states::paused::operator()(
 	net::id_type,
 	messages::player_pause const &)
 {
-	SGE_LOG_WARNING(
+	FCPPT_LOG_WARNING(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("got superfluous pause"));;
