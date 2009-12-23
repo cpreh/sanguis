@@ -3,7 +3,7 @@
 #include "z_ordering.hpp"
 #include "properties.hpp"
 #include <fcppt/function/object.hpp>
-#include <sge/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
 #include <sge/make_auto_ptr.hpp>
 #include <sge/minmax_pair_impl.hpp>
 #include <tr1/functional>

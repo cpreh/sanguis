@@ -4,12 +4,12 @@
 #include "sprite_part_index.hpp"
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/center.hpp>
-#include <sge/math/vector/basic_impl.hpp>
-#include <sge/math/vector/arithmetic.hpp>
-#include <sge/math/vector/is_null.hpp>
-#include <sge/math/vector/normalize.hpp>
-#include <sge/math/vector/length.hpp>
-#include <sge/math/vector/structure_cast.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/is_null.hpp>
+#include <fcppt/math/vector/normalize.hpp>
+#include <fcppt/math/vector/length.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
 #include <sge/optional_impl.hpp>
 
 namespace
@@ -53,7 +53,7 @@ void sanguis::draw::bullet::update(
 			static_cast<funit>(160),
 		tail_length = 
 			std::min(
-				sge::math::vector::length<funit>((*origin) - center()),
+				fcppt::math::vector::length<funit>((*origin) - center()),
 				max_tail_length
 			);
 
@@ -63,7 +63,7 @@ void sanguis::draw::bullet::update(
 			static_cast<funit>(at(tail).size().h())
 		),
 		pos(
-			sge::math::vector::structure_cast<
+			fcppt::math::vector::structure_cast<
 				vector2
 			>(
 				center()
@@ -76,7 +76,7 @@ void sanguis::draw::bullet::update(
 
 	sge::sprite::center(
 		at(tail),
-		sge::math::vector::structure_cast<
+		fcppt::math::vector::structure_cast<
 			sprite::point
 		>(
 			newpos

@@ -4,7 +4,7 @@
 #include "../../damage/meta.hpp"
 #include "../../damage/normal.hpp"
 #include "../../damage/full.hpp"
-#include <sge/math/dim/basic_impl.hpp>
+#include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <boost/assign/list_of.hpp>
 

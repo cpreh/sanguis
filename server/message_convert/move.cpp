@@ -2,7 +2,7 @@
 #include "../entities/with_dim.hpp"
 #include "../../messages/move.hpp"
 #include "../../messages/create.hpp"
-#include <sge/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
 
 sanguis::messages::auto_ptr
 sanguis::server::message_convert::move(

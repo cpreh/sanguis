@@ -32,7 +32,7 @@
 #include "../../load/model/collection.hpp"
 #include "../../load/model/model.hpp"
 #include "../../exception.hpp"
-#include <sge/math/box/basic_impl.hpp>
+#include <fcppt/math/box/basic_impl.hpp>
 #include <sge/collision/system.hpp>
 #include <sge/collision/world.hpp>
 #include <fcppt/container/map_impl.hpp>

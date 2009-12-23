@@ -3,7 +3,7 @@
 #include <sge/gui/widgets/parameters.hpp>
 #include <sge/gui/layouts/vertical.hpp>
 #include <sge/systems/instance.hpp>
-#include <sge/math/dim/structure_cast.hpp>
+#include <fcppt/math/dim/structure_cast.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <fcppt/text.hpp>
 
@@ -18,7 +18,7 @@ sanguis::client::menu::menus::main::main(
 			.pos(
 				sge::gui::point::null())
 			.size(
-				sge::math::dim::structure_cast<sge::gui::dim>(
+				fcppt::math::dim::structure_cast<sge::gui::dim>(
 					resolution()))
 			.activation(
 				sge::gui::activation_state::inactive)

@@ -2,7 +2,7 @@
 #include "environment.hpp"
 #include "sprite/client/parameters.hpp"
 #include "sprite/point.hpp"
-#include <sge/math/compare.hpp>
+#include <fcppt/math/compare.hpp>
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/sprite/intrusive/system_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
@@ -39,7 +39,7 @@ sanguis::draw::simple_sprite::simple_sprite(
 	)
 {
 	if(
-		sge::math::compare(
+		fcppt::math::compare(
 			_repeat,
 			static_cast<
 				sprite::client::repetition_type

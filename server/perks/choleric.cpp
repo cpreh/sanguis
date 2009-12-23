@@ -6,7 +6,7 @@
 #include <sge/time/second_f.hpp>
 #include <sge/time/resolution.hpp>
 #include <sge/random/inclusive_range.hpp>
-#include <sge/math/twopi.hpp>
+#include <fcppt/math/twopi.hpp>
 
 sanguis::server::perks::choleric::choleric()
 :
@@ -25,7 +25,7 @@ sanguis::server::perks::choleric::choleric()
 	rand(
 		sge::random::make_inclusive_range(
 			static_cast<space_unit>(0),
-			sge::math::twopi<space_unit>()
+			fcppt::math::twopi<space_unit>()
 		)
 	)
 {}

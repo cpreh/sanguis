@@ -18,8 +18,8 @@
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/container/map_impl.hpp>
-#include <sge/math/vector/is_null.hpp>
-#include <sge/math/vector/to_angle.hpp>
+#include <fcppt/math/vector/is_null.hpp>
+#include <fcppt/math/vector/to_angle.hpp>
 #include <sge/make_shared_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
@@ -28,7 +28,7 @@
 #include "../entities/insert_parameters.hpp"
 #include "../weapons/factory.hpp"
 #include "../../resolution.hpp"
-#include <sge/math/dim/basic_impl.hpp>
+#include <fcppt/math/dim/basic_impl.hpp>
 
 sanguis::server::global::context::context(
 	unicast_callback const &send_unicast_,
@@ -215,7 +215,7 @@ sanguis::server::global::context::player_direction(
 	else
 	{
 		player_.direction(
-			*sge::math::vector::to_angle<space_unit>(dir)
+			*fcppt::math::vector::to_angle<space_unit>(dir)
 		);
 		
 		entities::property::current_to_max(

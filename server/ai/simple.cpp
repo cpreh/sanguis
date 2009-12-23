@@ -8,7 +8,7 @@
 #include "../entities/property/current_to_max.hpp"
 #include "../collision/collides.hpp"
 #include "../collision/distance.hpp"
-#include <sge/math/vector/angle_between.hpp>
+#include <fcppt/math/vector/angle_between.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <sge/make_auto_ptr.hpp>
 #include <sge/optional.hpp>
@@ -82,7 +82,7 @@ sanguis::server::ai::simple::update(
 	sge::optional<
 		space_unit
 	> const angle(
-		sge::math::vector::angle_between<
+		fcppt::math::vector::angle_between<
 			space_unit
 		>(
 			me_.center(),

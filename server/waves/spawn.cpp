@@ -6,10 +6,10 @@
 #include "../../random.hpp"
 #include "../../angle_to_vector.hpp"
 #include "../../resolution.hpp"
-#include <sge/math/twopi.hpp>
-#include <sge/math/vector/arithmetic.hpp>
-#include <sge/math/vector/basic_impl.hpp>
-#include <sge/math/dim/basic_impl.hpp>
+#include <fcppt/math/twopi.hpp>
+#include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/dim/basic_impl.hpp>
 #include <tr1/random>
 #include <algorithm>
 
@@ -35,7 +35,7 @@ sanguis::server::waves::spawn(
 		create_seeded_randgen(),
 		uniform_su(
 			static_cast<space_unit>(0),
-			sge::math::twopi<space_unit>()
+			fcppt::math::twopi<space_unit>()
 		));
 
 	sge::renderer::screen_size const res(

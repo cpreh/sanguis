@@ -27,8 +27,8 @@
 #include <sge/iconv.hpp>
 #include <fcppt/text.hpp>
 #include <sge/format.hpp>
-#include <sge/math/dim/structure_cast.hpp>
-#include <sge/math/vector/structure_cast.hpp>
+#include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/object.hpp>
@@ -536,7 +536,7 @@ void sanguis::draw::scene::operator()(
 	entity(
 		m.get<messages::roles::entity_id>()
 	).dim(
-		sge::math::dim::structure_cast<
+		fcppt::math::dim::structure_cast<
 			sprite::dim
 		>(
 			m.get<messages::dim>()
@@ -560,7 +560,7 @@ void sanguis::draw::scene::operator()(
 	entity(
 		m.get<messages::roles::entity_id>()
 	).speed(
-		sge::math::vector::structure_cast<
+		fcppt::math::vector::structure_cast<
 			vector2
 		>(
 			virtual_to_screen(

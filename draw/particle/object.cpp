@@ -10,9 +10,9 @@
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/sprite/center.hpp>
-#include <sge/math/point_rotate.hpp>
-#include <sge/math/vector/structure_cast.hpp>
-#include <sge/math/dim/structure_cast.hpp>
+#include <fcppt/math/point_rotate.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/math/dim/structure_cast.hpp>
 #include <sge/image/color/rgba8.hpp>
 #include <sge/image/color/init.hpp>
 #include <sge/optional_impl.hpp>
@@ -103,10 +103,10 @@ bool sanguis::draw::particle::object::update(
 
 	sge::sprite::center( 
 		sprite_,
-		sge::math::vector::structure_cast<
+		fcppt::math::vector::structure_cast<
 			sprite::point
 		>(
-			sge::math::point_rotate(
+			fcppt::math::point_rotate(
 				p + base::pos(),
 				p,
 				r + base::rot()

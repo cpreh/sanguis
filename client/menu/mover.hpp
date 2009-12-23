@@ -6,7 +6,7 @@
 #include <sge/gui/widgets/fwd.hpp>
 #include <sge/gui/point.hpp>
 #include <sge/gui/dim.hpp>
-#include <sge/math/vector/basic_decl.hpp>
+#include <fcppt/math/vector/basic_decl.hpp>
 #include <sge/noncopyable.hpp>
 #include <map>
 
@@ -29,8 +29,8 @@ public:
 	
 	void reset(sge::gui::widgets::base &);
 	typedef float float_type;
-	typedef sge::math::vector::static_<float_type,2>::type float_vector;
-	typedef sge::math::dim::static_<float_type,2>::type float_dim;
+	typedef fcppt::math::vector::static_<float_type,2>::type float_vector;
+	typedef fcppt::math::dim::static_<float_type,2>::type float_dim;
 private:
 	struct entry
 	{

@@ -1,6 +1,6 @@
 #include "movable.hpp"
 #include "speed_to_abs.hpp"
-#include <sge/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
 #include <tr1/functional>
 
 sanguis::server::entities::property::changeable &

@@ -1,5 +1,5 @@
 #include "resolution.hpp"
-#include <sge/math/dim/basic_impl.hpp>
+#include <fcppt/math/dim/basic_impl.hpp>
 
 namespace
 {

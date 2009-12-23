@@ -4,7 +4,7 @@
 #include <sge/collision/shapes/circle.hpp>
 #include <sge/collision/body.hpp>
 #include <sge/collision/world.hpp>
-#include <sge/math/circle/basic_impl.hpp>
+#include <fcppt/math/circle/basic_impl.hpp>
 #include <sge/assign/make_container.hpp>
 #include <sge/optional_impl.hpp>
 #include <boost/logic/tribool.hpp>

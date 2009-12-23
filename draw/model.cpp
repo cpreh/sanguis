@@ -12,8 +12,8 @@
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/object.hpp>
-#include <sge/math/vector/is_null.hpp>
-#include <sge/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/is_null.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <fcppt/text.hpp>
 #include <sge/make_auto_ptr.hpp>

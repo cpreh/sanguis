@@ -7,7 +7,7 @@
 #include <fcppt/text.hpp>
 #include <sge/time/second_f.hpp>
 #include <sge/time/resolution.hpp>
-#include <sge/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
 
 sanguis::entity_id
 sanguis::draw::entity::id() const

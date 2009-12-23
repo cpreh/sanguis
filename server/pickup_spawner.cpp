@@ -10,7 +10,7 @@
 #include <sge/random/actor/container.hpp>
 #include <sge/random/inclusive_range.hpp>
 #include <sge/assign/make_container.hpp>
-#include <sge/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
 #include <tr1/functional>
 
 sanguis::server::pickup_spawner::pickup_spawner(

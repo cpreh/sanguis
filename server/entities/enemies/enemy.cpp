@@ -10,8 +10,8 @@
 #include "../../../load/enemy_name.hpp"
 #include "../../../messages/add_enemy.hpp"
 #include "../../../messages/create.hpp"
-#include <sge/math/vector/basic_impl.hpp>
-#include <sge/math/dim/basic_impl.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/dim/basic_impl.hpp>
 
 sanguis::server::entities::enemies::enemy::enemy(
 	enemy_type::type const etype_,

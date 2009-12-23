@@ -9,7 +9,7 @@
 #include "../../pos_type.hpp"
 #include "../../../diff_clock.hpp"
 #include <sge/time/timer.hpp>
-#include <sge/math/vector/basic_decl.hpp>
+#include <fcppt/math/vector/basic_decl.hpp>
 #include <sge/optional_decl.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/result.hpp>

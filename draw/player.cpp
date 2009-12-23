@@ -4,13 +4,13 @@
 #include "sprite/point.hpp"
 #include "../client/next_id.hpp"
 #include <fcppt/text.hpp>
-#include <sge/math/vector/structure_cast.hpp>
-#include <sge/math/vector/angle_between.hpp>
-#include <sge/math/vector/is_null.hpp>
-#include <sge/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/math/vector/angle_between.hpp>
+#include <fcppt/math/vector/is_null.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/console/var_impl.hpp>
-#include <sge/math/point_rotate.hpp>
+#include <fcppt/math/point_rotate.hpp>
 #include <boost/none.hpp>
 #include <algorithm>
 #include <cmath>
@@ -58,7 +58,7 @@ void sanguis::draw::player::speed(
 	model::speed(v);
 	if (!is_null(v))
 		model::orientation(
-			*sge::math::vector::angle_between<funit>(
+			*fcppt::math::vector::angle_between<funit>(
 				vector2::null(),
 				v),
 			0);
@@ -77,19 +77,19 @@ void sanguis::draw::player::update(
 
 	vector2 const
 		leg_center(
-			sge::math::vector::structure_cast<
+			fcppt::math::vector::structure_cast<
 				vector2
 			>(
 				player_leg_center)),
 		body_center(
-			sge::math::vector::structure_cast<
+			fcppt::math::vector::structure_cast<
 				vector2
 			>(
 				player_body_center));
 
 	sprite::rotation_type const sprite_rotation = at(bottom).rotation();
 
-	vector2 const new_rotation = sge::math::point_rotate(
+	vector2 const new_rotation = fcppt::math::point_rotate(
 		leg_center,
 		vector2(
 			static_cast<funit>(at(bottom).w()/2),
@@ -97,14 +97,14 @@ void sanguis::draw::player::update(
 		sprite_rotation);
 
 	vector2 const
-		rot_abs = sge::math::vector::structure_cast<
+		rot_abs = fcppt::math::vector::structure_cast<
 			vector2
 		>(
 			at(bottom).pos())+new_rotation,
 		top_pos = rot_abs - body_center;
 
 	at(top).pos(
-		sge::math::vector::structure_cast<
+		fcppt::math::vector::structure_cast<
 			sprite::point
 		>(
 			top_pos

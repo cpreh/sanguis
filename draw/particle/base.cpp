@@ -1,6 +1,6 @@
 #include "base.hpp"
-#include <sge/math/vector/basic_impl.hpp>
-#include <sge/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/arithmetic.hpp>
 
 sanguis::draw::particle::base::base(
 	point const &pos_,

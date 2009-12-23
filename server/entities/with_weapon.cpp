@@ -7,7 +7,7 @@
 #include "../../messages/change_weapon.hpp"
 #include "../../messages/create.hpp"
 #include "../../exception.hpp"
-#include <sge/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/text.hpp>
 #include <tr1/functional>
 #include <limits>

@@ -5,7 +5,7 @@
 #include "../collision/create_parameters.hpp"
 #include "../environment/object.hpp"
 #include "../get_unique_id.hpp"
-#include <sge/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
 #include <sge/collision/world.hpp>
 #include <sge/collision/shapes/circle.hpp>
 #include <sge/assign/make_container.hpp>

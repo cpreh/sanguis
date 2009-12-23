@@ -15,11 +15,11 @@
 #include "../messages/player_cheat.hpp"
 #include "../cyclic_iterator_impl.hpp"
 #include "../perk_type.hpp"
-#include <sge/math/clamp.hpp>
-#include <sge/math/vector/angle_between.hpp>
-#include <sge/math/vector/structure_cast.hpp>
-#include <sge/math/vector/basic_impl.hpp>
-#include <sge/math/dim/basic_impl.hpp>
+#include <fcppt/math/clamp.hpp>
+#include <fcppt/math/vector/angle_between.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/dim/basic_impl.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/time/millisecond.hpp>
 #include <sge/time/resolution.hpp>
@@ -209,7 +209,7 @@ void sanguis::client::logic::move(
 	messages::move const &m)
 {
 	if(m.get<messages::roles::entity_id>() == player_id_)
-		player_center = sge::math::vector::structure_cast<
+		player_center = fcppt::math::vector::structure_cast<
 			draw::sprite::point
 		>(
 			m.get<messages::pos>()
@@ -271,7 +271,7 @@ void sanguis::client::logic::update_direction()
 		messages::create(
 			messages::player_direction(
 				player_id_,
-				sge::math::vector::structure_cast<
+				fcppt::math::vector::structure_cast<
 					messages::types::vector2
 				>(
 					direction
@@ -298,7 +298,7 @@ void sanguis::client::logic::update_rotation()
 	sge::optional<
 		messages::types::space_unit
 	> const rotation(
-		sge::math::vector::angle_between<
+		fcppt::math::vector::angle_between<
 			messages::types::space_unit
 		>(
 			player_center,
@@ -325,7 +325,7 @@ void sanguis::client::logic::update_rotation()
 		messages::create(
 			messages::player_attack_dest(
 				player_id_,
-				sge::math::vector::structure_cast<
+				fcppt::math::vector::structure_cast<
 					messages::types::vector2
 				>(
 					cursor_->pos()
@@ -340,7 +340,7 @@ void sanguis::client::logic::handle_shooting(
 	key_scale const s)
 {
 	if(
-		sge::math::compare(
+		fcppt::math::compare(
 			static_cast<key_scale>(0),
 			s
 		)

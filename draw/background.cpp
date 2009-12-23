@@ -16,7 +16,7 @@
 #include <sge/image/colors.hpp>
 #include <sge/texture/part.hpp>
 #include <sge/texture/part_raw.hpp>
-#include <sge/math/dim/structure_cast.hpp>
+#include <fcppt/math/dim/structure_cast.hpp>
 #include <sge/make_shared_ptr.hpp>
 
 sanguis::draw::background::background(
@@ -29,7 +29,7 @@ sanguis::draw::background::background(
 	),
 	tex(
 		env.client_system().renderer()->create_texture(
-			sge::math::dim::structure_cast<
+			fcppt::math::dim::structure_cast<
 				sge::renderer::dim_type
 			>(
 				resolution() // FIXME: this sould be a power of 2!

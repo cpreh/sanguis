@@ -4,7 +4,7 @@
 #include "insert_parameters_fwd.hpp"
 #include "../space_unit.hpp"
 #include "../pos_type.hpp"
-#include <sge/math/vector/basic_decl.hpp>
+#include <fcppt/math/vector/basic_decl.hpp>
 
 namespace sanguis
 {

@@ -6,7 +6,7 @@
 #include <sge/random/uniform.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <sge/renderer/dim_type.hpp>
-#include <sge/math/dim/basic_decl.hpp>
+#include <fcppt/math/dim/basic_decl.hpp>
 #include <fcppt/string.hpp>
 #include <sge/shared_ptr.hpp>
 #include <map>

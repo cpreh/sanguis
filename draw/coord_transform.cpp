@@ -1,8 +1,8 @@
 #include "coord_transform.hpp"
-#include <sge/math/dim/basic_impl.hpp>
-#include <sge/math/dim/structure_cast.hpp>
-#include <sge/math/vector/basic_impl.hpp>
-#include <sge/math/vector/structure_cast.hpp>
+#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
 
 sanguis::draw::sprite::point const
 sanguis::draw::virtual_to_screen(
@@ -10,7 +10,7 @@ sanguis::draw::virtual_to_screen(
 	messages::types::pos const &pos
 )
 {
-	return sge::math::vector::structure_cast<
+	return fcppt::math::vector::structure_cast<
 		sprite::point
 	>(
 		pos
@@ -23,7 +23,7 @@ sanguis::draw::virtual_to_screen(
 	messages::types::dim const &dim
 )
 {
-	return sge::math::dim::structure_cast<
+	return fcppt::math::dim::structure_cast<
 		sprite::dim
 	>(
 		dim
@@ -36,7 +36,7 @@ sanguis::draw::screen_to_virtual(
 	sprite::point const &pos
 )
 {
-	return sge::math::vector::structure_cast<
+	return fcppt::math::vector::structure_cast<
 		messages::types::pos
 	>(
 		pos
@@ -49,7 +49,7 @@ sanguis::draw::screen_to_virtual(
 	sprite::dim const &dim
 )
 {
-	return sge::math::dim::structure_cast<
+	return fcppt::math::dim::structure_cast<
 		messages::types::dim
 	>(
 		dim

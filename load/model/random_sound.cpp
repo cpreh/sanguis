@@ -7,7 +7,7 @@
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/random/inclusive_range.hpp>
-#include <sge/math/almost_zero.hpp>
+#include <fcppt/math/almost_zero.hpp>
 #include <fcppt/text.hpp>
 #include <sge/assert.hpp>
 #include <boost/foreach.hpp>
@@ -71,7 +71,7 @@ sanguis::load::model::random_sound::random_sound(
 	);
 
 	if(
-		sge::math::almost_zero(
+		fcppt::math::almost_zero(
 			normalization
 		)
 	)

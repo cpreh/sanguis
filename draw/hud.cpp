@@ -1,8 +1,8 @@
 #include "hud.hpp"
 #include <sge/font/object.hpp>
 #include <sge/font/text_size.hpp>
-#include <sge/math/dim/basic_impl.hpp>
-#include <sge/math/vector/basic_impl.hpp>
+#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
 #include <sge/format.hpp>
 #include <fcppt/text.hpp>
 

@@ -18,7 +18,7 @@
 #include "../media_path.hpp"
 #include "../animation_type.hpp"
 #include "../from_particle_type.hpp"
-#include <sge/math/vector/structure_cast.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
 #include <sge/minmax_pair_impl.hpp>
 #include <sge/audio/sound.hpp>
 #include <sge/optional_impl.hpp>
@@ -149,7 +149,7 @@ sanguis::draw::explosion::explosion(
 				std::tr1::placeholders::_1
 			),
 			particle::point::null(), // pos
-			//sge::math::structure_cast<
+			//fcppt::math::structure_cast<
 			//	particle::point::value_type
 			//>(pos), // position
 			particle::point::null(), // speed
@@ -171,7 +171,7 @@ void sanguis::draw::explosion::update(
 {
 	ended = particles.update(
 		delta,
-		sge::math::vector::structure_cast<
+		fcppt::math::vector::structure_cast<
 			particle::point
 		>(pos_),
 		//particle::point::null(),

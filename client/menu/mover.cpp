@@ -6,14 +6,14 @@
 #include <sge/gui/widgets/base.hpp>
 #include <sge/gui/dim.hpp>
 #include <sge/sprite/object.hpp>
-#include <sge/math/pi.hpp>
-#include <sge/math/vector/is_null.hpp>
-#include <sge/math/vector/normalize.hpp>
-#include <sge/math/vector/length.hpp>
-#include <sge/math/vector/arithmetic.hpp>
-#include <sge/math/vector/structure_cast.hpp>
-#include <sge/math/dim/arithmetic.hpp>
-#include <sge/math/dim/structure_cast.hpp>
+#include <fcppt/math/pi.hpp>
+#include <fcppt/math/vector/is_null.hpp>
+#include <fcppt/math/vector/normalize.hpp>
+#include <fcppt/math/vector/length.hpp>
+#include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/math/dim/arithmetic.hpp>
+#include <fcppt/math/dim/structure_cast.hpp>
 #include <sge/image/color/rgba8.hpp>
 #include <sge/image/color/init.hpp>
 #include <sge/assert.hpp>
@@ -34,10 +34,10 @@ sanguis::client::menu::mover::float_type const
 sge::gui::point const center(
 	sge::gui::dim const &d)
 {
-	return sge::math::dim::structure_cast<
+	return fcppt::math::dim::structure_cast<
 		sge::gui::point
 	>(
-		sge::math::dim::structure_cast<
+		fcppt::math::dim::structure_cast<
 			sge::gui::dim
 		>(
 			sanguis::resolution()
@@ -88,7 +88,7 @@ sanguis::client::menu::mover::mover(
 			*current_->size_hint()));
 
 	current_entry_.current = 
-		sge::math::vector::structure_cast<float_vector>(
+		fcppt::math::vector::structure_cast<float_vector>(
 			current_->relative_pos());
 
 	current_entry_.target = current_entry_.current;
@@ -136,10 +136,10 @@ void sanguis::client::menu::mover::reset(
 	current_ = &w;
 	current_entry_.current = random_pos();
 	current_->pos_hint(
-		sge::math::vector::structure_cast<sge::gui::point>(
+		fcppt::math::vector::structure_cast<sge::gui::point>(
 			current_entry_.current));
 	current_entry_.target = 
-		sge::math::vector::structure_cast<float_vector>(
+		fcppt::math::vector::structure_cast<float_vector>(
 			center_widget(
 				w));
 	current_->activation(
@@ -153,24 +153,24 @@ void sanguis::client::menu::mover::update_position(
 {
 	float_vector const diff = 
 		e.target - e.current,
-		normdiff = sge::math::vector::normalize(
+		normdiff = fcppt::math::vector::normalize(
 			diff),
 		projected = 
 			normdiff * 
 			static_cast<float_type>(t) * 
 			speed_;
 	
-	if (sge::math::vector::is_null(diff) || sge::math::vector::is_null(projected))
+	if (fcppt::math::vector::is_null(diff) || sge::math::vector::is_null(projected))
 		return;
 
 	e.current += 
 		normdiff * 
 		std::min(
-			sge::math::vector::length(diff),
-			sge::math::vector::length(projected));
+			fcppt::math::vector::length(diff),
+			fcppt::math::vector::length(projected));
 
 	w.pos_hint(
-		sge::math::vector::structure_cast<sge::gui::point>(
+		fcppt::math::vector::structure_cast<sge::gui::point>(
 			e.current));
 }
 
@@ -186,8 +186,8 @@ void sanguis::client::menu::mover::update_visibility(
 		std::min(
 			static_cast<float_type>(
 				threshold_),
-			sge::math::vector::length(
-				sge::math::vector::structure_cast<float_vector>(
+			fcppt::math::vector::length(
+				fcppt::math::vector::structure_cast<float_vector>(
 					diff)))/
 			static_cast<float_type>(threshold_);
 
@@ -226,7 +226,7 @@ sanguis::client::menu::mover::float_vector const sanguis::client::menu::mover::r
 		create_seeded_randgen(),
 		uniform_float(
 			static_cast<float_type>(0),
-			static_cast<float_type>(2)*sge::math::pi<float_type>()
+			static_cast<float_type>(2)*fcppt::math::pi<float_type>()
 		));
 	
 	float_type const new_angle = 

@@ -6,11 +6,11 @@
 #include "../client/id_dont_care.hpp"
 #include "../exception.hpp"
 #include <sge/format.hpp>
-#include <sge/math/almost_zero.hpp>
-#include <sge/math/vector/arithmetic.hpp>
-#include <sge/math/vector/basic_impl.hpp>
-#include <sge/math/dim/basic_impl.hpp>
-#include <sge/math/dim/arithmetic.hpp>
+#include <fcppt/math/almost_zero.hpp>
+#include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/dim/arithmetic.hpp>
 #include <sge/image/color/rgba8.hpp>
 #include <sge/image/color/init.hpp>
 #include <sge/image/colors.hpp>
@@ -171,7 +171,7 @@ sanguis::draw::healthbar::recalc_health()
 	if(health_ > max_health_)
 		return;
 
-	if(sge::math::almost_zero(max_health_)) // TODO:
+	if(fcppt::math::almost_zero(max_health_)) // TODO:
 		return;
 	
 	foreground.w(

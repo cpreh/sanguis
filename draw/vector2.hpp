@@ -2,14 +2,14 @@
 #define SANGUIS_DRAW_VECTOR2_HPP_INCLUDED
 
 #include "funit.hpp"
-#include <sge/math/vector/static.hpp>
+#include <fcppt/math/vector/static.hpp>
 
 namespace sanguis
 {
 namespace draw
 {
 
-typedef sge::math::vector::static_<
+typedef fcppt::math::vector::static_<
 	funit,
 	2
 >::type vector2;

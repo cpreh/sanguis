@@ -12,8 +12,8 @@
 #include "../media_path.hpp"
 #include "../resolution.hpp"
 #include "../tick_event.hpp"
-#include <sge/math/compare.hpp>
-#include <sge/math/dim/structure_cast.hpp>
+#include <fcppt/math/compare.hpp>
+#include <fcppt/math/dim/structure_cast.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/audio/player.hpp>
 #include <sge/audio/pool.hpp>

@@ -1,7 +1,7 @@
 #include "aoe_damage.hpp"
 #include "../../auras/burn.hpp"
 #include "../../environment/object.hpp"
-#include <sge/math/dim/basic_impl.hpp>
+#include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <sge/optional_impl.hpp>
 

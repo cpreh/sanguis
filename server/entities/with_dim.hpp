@@ -6,7 +6,7 @@
 #include "../dim_type.hpp"
 #include "../pos_type.hpp"
 #include "../space_unit.hpp"
-#include <sge/math/dim/basic_decl.hpp>
+#include <fcppt/math/dim/basic_decl.hpp>
 
 namespace sanguis
 {

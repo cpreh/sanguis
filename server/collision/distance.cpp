@@ -1,8 +1,8 @@
 #include "distance.hpp"
 #include "../entities/base.hpp"
-#include <sge/math/vector/basic_impl.hpp>
-#include <sge/math/vector/arithmetic.hpp>
-#include <sge/math/vector/length.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/length.hpp>
 
 sanguis::server::space_unit
 sanguis::server::collision::distance(

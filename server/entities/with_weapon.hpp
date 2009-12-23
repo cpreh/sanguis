@@ -9,7 +9,7 @@
 #include "../../weapon_type.hpp"
 #include "../../time_type.hpp"
 #include <fcppt/signal/scoped_connection.hpp>
-#include <sge/math/vector/basic_decl.hpp>
+#include <fcppt/math/vector/basic_decl.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
 
 namespace sanguis

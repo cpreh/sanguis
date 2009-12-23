@@ -6,7 +6,7 @@
 #include "base_ptr.hpp"
 #include "../funit.hpp"
 #include <sge/random/inclusive_range.hpp>
-#include <sge/math/vector/static.hpp>
+#include <fcppt/math/vector/static.hpp>
 #include <fcppt/function/object_fwd.hpp>
 #include <sge/optional_fwd.hpp>
 #include "fwd.hpp"
@@ -21,7 +21,7 @@ namespace particle
 typedef funit depth;
 typedef funit rotation;
 typedef funit time_type;
-typedef sge::math::vector::static_<funit, 2>::type point;
+typedef fcppt::math::vector::static_<funit, 2>::type point;
 typedef sge::random::inclusive_range<funit>      dispersion_range;
 typedef sge::random::inclusive_range<funit>      velocity_range;
 typedef sge::random::inclusive_range<rotation>   rotation_velocity_range;

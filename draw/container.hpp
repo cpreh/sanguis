@@ -10,7 +10,7 @@
 #include "sprite_part_index_fwd.hpp"
 #include "entity.hpp"
 #include "vector2.hpp"
-#include <sge/math/vector/basic_decl.hpp>
+#include <fcppt/math/vector/basic_decl.hpp>
 #include <sge/sprite/object_decl.hpp>
 #include <vector>
 

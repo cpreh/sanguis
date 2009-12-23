@@ -6,7 +6,7 @@
 #include "../events/poll.hpp"
 #include "../events/stop.hpp"
 #include "../../entities/with_weapon.hpp"
-#include <sge/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
 #include <sge/optional_impl.hpp>
 
 sanguis::server::weapons::states::castpoint::castpoint(

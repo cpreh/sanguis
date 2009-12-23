@@ -8,8 +8,8 @@
 #include "../auras/update_sight.hpp"
 #include "../../messages/add_player.hpp"
 #include "../../messages/create.hpp"
-#include <sge/math/vector/basic_impl.hpp>
-#include <sge/math/dim/basic_impl.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/text.hpp>
 #include <sge/make_auto_ptr.hpp>
 #include <tr1/functional>

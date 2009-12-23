@@ -7,15 +7,15 @@
 #include "../exception.hpp"
 #include "../load/model/animation_context.hpp"
 #include <sge/console/var_impl.hpp>
-#include <sge/math/abs_angle_to_rel.hpp>
-#include <sge/math/rel_angle_to_abs.hpp>
-#include <sge/math/is_rel_angle.hpp>
-#include <sge/math/twopi.hpp>
-#include <sge/math/vector/dim.hpp>
-#include <sge/math/dim/structure_cast.hpp>
+#include <fcppt/math/abs_angle_to_rel.hpp>
+#include <fcppt/math/rel_angle_to_abs.hpp>
+#include <fcppt/math/is_rel_angle.hpp>
+#include <fcppt/math/twopi.hpp>
+#include <fcppt/math/vector/dim.hpp>
+#include <fcppt/math/dim/structure_cast.hpp>
 #include <sge/sprite/animation/texture_impl.hpp>
 #include <fcppt/log/headers.hpp>
-#include <sge/math/compare.hpp>
+#include <fcppt/math/compare.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/time/time.hpp>
 #include <fcppt/text.hpp>
@@ -114,7 +114,7 @@ void sanguis::draw::model_part::update(
 			);
 
 			ref_.size(
-				sge::math::dim::structure_cast<
+				fcppt::math::dim::structure_cast<
 					sprite::dim
 				>(
 					animation_->series().begin()->dim()
@@ -129,24 +129,24 @@ void sanguis::draw::model_part::update(
 	if(animation_)
 		ended_ = animation_->process() || ended_;
 
-	if(sge::math::compare(desired_orientation_, invalid_rotation))
+	if(fcppt::math::compare(desired_orientation_, invalid_rotation))
 		return;
 	
-	if(sge::math::compare(orientation(), desired_orientation_))
+	if(fcppt::math::compare(orientation(), desired_orientation_))
 		return;
 
 	funit const
 		// current orientation in [0,2pi]
 		abs_current(
-			sge::math::rel_angle_to_abs(
+			fcppt::math::rel_angle_to_abs(
 				orientation())),
 		// target orientation in [0,2pi]
 		abs_target(
-			sge::math::rel_angle_to_abs(
+			fcppt::math::rel_angle_to_abs(
 				desired_orientation_));
 	
 	// shortcut
-	funit const twopi = sge::math::twopi<funit>();
+	funit const twopi = fcppt::math::twopi<funit>();
 
 	// TODO: those could be removed, should be asserted in rel_angle_to_abs?
 	FCPPT_ASSERT(
@@ -192,7 +192,7 @@ void sanguis::draw::model_part::update(
 		: ((swap_dist > abs_dist) ? static_cast<funit>(1) : static_cast<funit>(-1));
 
 	funit const turning_speed = 
-		sge::math::twopi<sanguis::draw::funit>();
+		fcppt::math::twopi<sanguis::draw::funit>();
 
 	funit const new_orientation = 
 		abs_current + dir * time * turning_speed;
@@ -208,7 +208,7 @@ void sanguis::draw::model_part::update(
 		if (new_orientation < desired_orientation_)
 		{
 			update_orientation(
-				sge::math::abs_angle_to_rel(
+				fcppt::math::abs_angle_to_rel(
 					new_orientation));
 		}
 		else
@@ -222,7 +222,7 @@ void sanguis::draw::model_part::update(
 		if (new_orientation > desired_orientation_)
 		{
 			update_orientation(
-				sge::math::abs_angle_to_rel(
+				fcppt::math::abs_angle_to_rel(
 					new_orientation));
 		}
 		else
@@ -236,10 +236,10 @@ void sanguis::draw::model_part::update(
 void sanguis::draw::model_part::orientation(
 	sprite::rotation_type rot)
 {
-	if(!sge::math::is_rel_angle(rot))
-		rot = sge::math::abs_angle_to_rel(rot);
+	if(!fcppt::math::is_rel_angle(rot))
+		rot = fcppt::math::abs_angle_to_rel(rot);
 
-	if(sge::math::compare(desired_orientation_, invalid_rotation))
+	if(fcppt::math::compare(desired_orientation_, invalid_rotation))
 		update_orientation(rot);
 	desired_orientation_ = rot;
 }

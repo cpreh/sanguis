@@ -7,8 +7,8 @@
 #include "../../../messages/create.hpp"
 #include <sge/time/second_f.hpp>
 #include <sge/time/resolution.hpp>
-#include <sge/math/vector/basic_impl.hpp>
-#include <sge/math/dim/basic_impl.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/dim/basic_impl.hpp>
 #include <sge/optional_impl.hpp>
 #include <sge/assert.hpp>
 #include <boost/logic/tribool.hpp>

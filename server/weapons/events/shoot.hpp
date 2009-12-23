@@ -4,7 +4,7 @@
 #include "shoot_fwd.hpp"
 #include "../../entities/with_weapon_fwd.hpp"
 #include "../../pos_type.hpp"
-#include <sge/math/vector/basic_decl.hpp>
+#include <fcppt/math/vector/basic_decl.hpp>
 #include <boost/statechart/event.hpp>
 
 namespace sanguis

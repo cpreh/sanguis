@@ -5,7 +5,7 @@
 #include "../pos_type.hpp"
 #include "../space_unit.hpp"
 #include "../environment/object_ptr.hpp"
-#include <sge/math/vector/basic_decl.hpp>
+#include <fcppt/math/vector/basic_decl.hpp>
 
 namespace sanguis
 {

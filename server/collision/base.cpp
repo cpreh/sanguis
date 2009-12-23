@@ -4,9 +4,9 @@
 #include "global_groups.hpp"
 #include <sge/collision/world.hpp>
 #include <sge/collision/body.hpp>
-#include <sge/math/vector/basic_impl.hpp>
-#include <sge/math/vector/construct.hpp>
-#include <sge/math/vector/narrow_cast.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/construct.hpp>
+#include <fcppt/math/vector/narrow_cast.hpp>
 #include <sge/make_auto_ptr.hpp>
 #include <boost/logic/tribool.hpp>
 #include <boost/foreach.hpp>
@@ -23,7 +23,7 @@ sanguis::server::collision::base::body_pos(
 )
 {
 	body_->position(
-		sge::math::vector::construct(
+		fcppt::math::vector::construct(
 			pos_,
 			static_cast<
 				space_unit
@@ -35,7 +35,7 @@ sanguis::server::collision::base::body_pos(
 sanguis::server::pos_type const
 sanguis::server::collision::base::body_pos() const
 {
-	return sge::math::vector::narrow_cast<
+	return fcppt::math::vector::narrow_cast<
 		pos_type
 	>(
 		body_->position()
@@ -48,7 +48,7 @@ sanguis::server::collision::base::body_speed(
 )
 {
 	body_->linear_velocity(
-		sge::math::vector::construct(
+		fcppt::math::vector::construct(
 			speed_,
 			static_cast<
 				space_unit
@@ -60,7 +60,7 @@ sanguis::server::collision::base::body_speed(
 sanguis::server::pos_type const
 sanguis::server::collision::base::body_speed() const
 {
-	return sge::math::vector::narrow_cast<
+	return fcppt::math::vector::narrow_cast<
 		pos_type
 	>(
 		body_->linear_velocity()
@@ -88,13 +88,13 @@ sanguis::server::collision::base::recreate(
 			recreate_shapes(
 				world_
 			),
-			sge::math::vector::construct(
+			fcppt::math::vector::construct(
 				create_param_.center(),
 				static_cast<
 					space_unit
 				>(0)
 			),
-			sge::math::vector::construct(
+			fcppt::math::vector::construct(
 				create_param_.speed(),
 				static_cast<
 					space_unit

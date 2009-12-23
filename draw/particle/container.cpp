@@ -1,6 +1,6 @@
 #include "container.hpp"
-#include <sge/math/point_rotate.hpp>
-#include <sge/math/compare.hpp>
+#include <fcppt/math/point_rotate.hpp>
+#include <fcppt/math/compare.hpp>
 #include <boost/foreach.hpp>
 
 sanguis::draw::particle::container::container(
@@ -46,7 +46,7 @@ bool sanguis::draw::particle::container::update(
 {
 	base::update(delta, p, r, d);
 
-	point const thispos = sge::math::point_rotate(
+	point const thispos = fcppt::math::point_rotate(
 		p + base::pos(),
 		p,
 		r + base::rot());

@@ -2,12 +2,12 @@
 #include "object.hpp"
 #include <sge/time/second_f.hpp>
 #include <sge/time/resolution.hpp>
-#include <sge/math/twopi.hpp>
-#include <sge/math/vector/angle_between.hpp>
-#include <sge/math/vector/basic_impl.hpp>
-#include <sge/math/vector/is_null.hpp>
-#include <sge/math/vector/normalize.hpp>
-#include <sge/math/vector/arithmetic.hpp>
+#include <fcppt/math/twopi.hpp>
+#include <fcppt/math/vector/angle_between.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/is_null.hpp>
+#include <fcppt/math/vector/normalize.hpp>
+#include <fcppt/math/vector/arithmetic.hpp>
 #include <sge/exception.hpp>
 #include <fcppt/text.hpp>
 
@@ -39,17 +39,17 @@ sanguis::draw::particle::generator::generator(
 	dispersion_angle(
 		sge::random::make_inclusive_range(
 			static_cast<rotation_type>(0),
-			sge::math::twopi<rotation_type>())),
+			fcppt::math::twopi<rotation_type>())),
 	dispersion_value(dispersion_value),
 	velocity_angle(
 		sge::random::make_inclusive_range(
 			static_cast<rotation_type>(0),
-			sge::math::twopi<rotation_type>())),
+			fcppt::math::twopi<rotation_type>())),
 	velocity_value(velocity),
 	rot_angle(
 		sge::random::make_inclusive_range(
 			static_cast<rotation_type>(0),
-			sge::math::twopi<rotation_type>())),
+			fcppt::math::twopi<rotation_type>())),
 	rot_direction(
 		sge::random::make_inclusive_range(
 			static_cast<rotation_type>(0),
@@ -107,7 +107,7 @@ void sanguis::draw::particle::generator::generate()
 		break;
 		case align_type::to_center:
 		{
-			rot = *sge::math::vector::angle_between<
+			rot = *fcppt::math::vector::angle_between<
 				rotation_type
 			>(
 				point::null(),

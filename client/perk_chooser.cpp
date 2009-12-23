@@ -12,11 +12,11 @@
 #include <sge/systems/instance.hpp>
 #include <sge/image/loader.hpp>
 #include <fcppt/filesystem/path.hpp>
-#include <sge/math/dim/arithmetic.hpp>
-#include <sge/math/dim/output.hpp>
-#include <sge/math/dim/structure_cast.hpp>
-#include <sge/math/vector/arithmetic.hpp>
-#include <sge/math/vector/output.hpp>
+#include <fcppt/math/dim/arithmetic.hpp>
+#include <fcppt/math/dim/output.hpp>
+#include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/output.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/headers.hpp>
@@ -55,10 +55,10 @@ sge::gui::dim const dialog_size()
 sge::gui::point const dialog_pos()
 {
 	return 
-		sge::math::dim::structure_cast<sge::gui::point>(
+		fcppt::math::dim::structure_cast<sge::gui::point>(
 			sanguis::resolution())/
 		static_cast<sge::gui::unit>(2)-
-		sge::math::dim::structure_cast<sge::gui::point>(
+		fcppt::math::dim::structure_cast<sge::gui::point>(
 			dialog_size())/
 		static_cast<sge::gui::unit>(2);
 }

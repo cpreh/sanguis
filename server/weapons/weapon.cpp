@@ -12,8 +12,8 @@
 #include "../../exception.hpp"
 #include <sge/time/second_f.hpp>
 #include <sge/time/resolution.hpp>
-#include <sge/math/circle/basic_impl.hpp>
-#include <sge/math/vector/basic_impl.hpp>
+#include <fcppt/math/circle/basic_impl.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/headers.hpp>

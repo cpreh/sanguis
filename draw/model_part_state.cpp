@@ -7,7 +7,7 @@
 #include "../resolution.hpp"
 #include <sge/sprite/object_impl.hpp>
 #include <sge/audio/sound.hpp>
-#include <sge/math/dim/structure_cast.hpp>
+#include <fcppt/math/dim/structure_cast.hpp>
 
 // TODO: hier animationskram rausnehmen, ggf. friend-Beziehung wegnehmen
 sanguis::draw::model_part_state::model_part_state(

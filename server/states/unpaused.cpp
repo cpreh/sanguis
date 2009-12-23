@@ -10,10 +10,10 @@
 #include "../../messages/create.hpp"
 #include "../../exception.hpp"
 
-#include <sge/math/vector/to_angle.hpp>
-#include <sge/math/vector/arithmetic.hpp>
-#include <sge/math/vector/basic_impl.hpp>
-#include <sge/math/vector/is_null.hpp>
+#include <fcppt/math/vector/to_angle.hpp>
+#include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/is_null.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <sge/collision/world.hpp>
 #include <fcppt/log/headers.hpp>

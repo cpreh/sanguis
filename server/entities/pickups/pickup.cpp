@@ -3,8 +3,8 @@
 #include "../../../load/pickup_name.hpp"
 #include "../../../messages/add_pickup.hpp"
 #include "../../../messages/create.hpp"
-#include <sge/math/vector/basic_impl.hpp>
-#include <sge/math/dim/basic_impl.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/dim/basic_impl.hpp>
 #include <sge/time/second.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <sge/optional_impl.hpp>

@@ -1,8 +1,8 @@
 #include "aoe_projectile.hpp"
 #include "../../../messages/add_aoe_projectile.hpp"
 #include "../../../messages/create.hpp"
-#include <sge/math/vector/basic_impl.hpp>
-#include <sge/math/dim/basic_impl.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/dim/basic_impl.hpp>
 
 sanguis::server::entities::projectiles::aoe_projectile::aoe_projectile(
 	aoe_projectile_type::type const type_,

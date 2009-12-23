@@ -7,9 +7,9 @@
 #include <sge/sprite/intrusive/system_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/center.hpp>
-#include <sge/math/vector/basic_impl.hpp>
-#include <sge/math/vector/arithmetic.hpp>
-#include <sge/math/vector/structure_cast.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
 #include <boost/foreach.hpp>
 #include <boost/none.hpp>
 
@@ -70,7 +70,7 @@ sanguis::draw::container::update(
 	pos_ += time * speed();
 
 	update_pos(
-		sge::math::vector::structure_cast<
+		fcppt::math::vector::structure_cast<
 			sprite::point
 		>(
 			pos_
@@ -146,7 +146,7 @@ void sanguis::draw::container::pos(
 	sprite::point const &p
 )
 {
-	pos_ = sge::math::vector::structure_cast<
+	pos_ = fcppt::math::vector::structure_cast<
 		vector2
 	>(
 		p);

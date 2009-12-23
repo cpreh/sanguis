@@ -3,7 +3,7 @@
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/find_member.hpp>
-#include <sge/math/compare.hpp>
+#include <fcppt/math/compare.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::load::model::conditional_sound::conditional_sound(
@@ -43,7 +43,7 @@ sge::audio::sound_ptr const
 sanguis::load::model::conditional_sound::random() const
 {
 	// avoid the corner case in which the probability is 1
-	return sge::math::compare(range, static_cast<probability_type>(1)) || rng() < range
+	return fcppt::math::compare(range, static_cast<probability_type>(1)) || rng() < range
 		? random_sound_.random()
 		: sge::audio::sound_ptr();
 }

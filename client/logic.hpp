@@ -12,8 +12,8 @@
 #include "../messages/move.hpp"
 #include <sge/console/object_fwd.hpp>
 #include <sge/time/timer.hpp>
-#include <sge/math/vector/static.hpp>
-#include <sge/math/vector/basic_decl.hpp>
+#include <fcppt/math/vector/static.hpp>
+#include <fcppt/math/vector/basic_decl.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image/loader_fwd.hpp>
 #include <fcppt/function/object_fwd.hpp>
@@ -96,7 +96,7 @@ private:
 		
 	entity_id player_id_;
 
-	typedef sge::math::vector::static_<
+	typedef fcppt::math::vector::static_<
 		float,
 		2
 	>::type direction_vector;

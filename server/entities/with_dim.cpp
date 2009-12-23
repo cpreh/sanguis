@@ -1,8 +1,8 @@
 #include "with_dim.hpp"
 #include "radius.hpp"
 #include "pos.hpp"
-#include <sge/math/dim/basic_impl.hpp>
-#include <sge/math/vector/basic_impl.hpp>
+#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
 
 sanguis::server::pos_type const
 sanguis::server::entities::with_dim::pos() const
