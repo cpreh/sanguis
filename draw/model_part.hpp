@@ -15,8 +15,8 @@
 #include "../load/model/animation_context_fwd.hpp"
 #include <sge/sprite/animation/loop_method.hpp>
 #include <sge/sprite/rotation_type.hpp>
-#include <sge/scoped_ptr.hpp>
-#include <sge/auto_ptr.hpp>
+#include <fcppt/scoped_ptr.hpp>
+#include <fcppt/auto_ptr.hpp>
 
 namespace sanguis
 {

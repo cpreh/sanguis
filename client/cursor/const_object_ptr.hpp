@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_CURSOR_CONST_OBJECT_PTR_HPP_INCLUDED
 
 #include "object_fwd.hpp"
-#include <sge/shared_ptr.hpp>
+#include <fcppt/shared_ptr.hpp>
 
 namespace sanguis
 {

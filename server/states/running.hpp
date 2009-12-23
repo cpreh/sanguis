@@ -13,7 +13,7 @@
 #include "../../messages/base_fwd.hpp"
 #include "../../net/id_type.hpp"
 #include <fcppt/log/object_fwd.hpp>
-#include <sge/scoped_ptr.hpp>
+#include <fcppt/scoped_ptr.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/result.hpp>
 #include <boost/statechart/custom_reaction.hpp>

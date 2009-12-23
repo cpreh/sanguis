@@ -1,7 +1,7 @@
 #ifndef SANGUIS_LOAD_RESOURCE_TEXTURE_CONTEXT_FWD_HPP_INCLUDED
 #define SANGUIS_LOAD_RESOURCE_TEXTURE_CONTEXT_FWD_HPP_INCLUDED
 
-#include <sge/shared_ptr.hpp>
+#include <fcppt/shared_ptr.hpp>
 
 namespace sanguis
 {

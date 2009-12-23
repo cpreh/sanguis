@@ -7,7 +7,7 @@
 #include "../../exception.hpp"
 #include "../../log.hpp"
 #include <fcppt/log/headers.hpp>
-#include <sge/auto_ptr.hpp>
+#include <fcppt/auto_ptr.hpp>
 #include <sge/format.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/string.hpp>

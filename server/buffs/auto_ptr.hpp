@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_BUFFS_AUTO_PTR_HPP_INCLUDED
 
 #include "buff_fwd.hpp"
-#include <sge/auto_ptr.hpp>
+#include <fcppt/auto_ptr.hpp>
 
 namespace sanguis
 {

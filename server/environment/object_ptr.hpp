@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENVIRONMENT_OBJECT_PTR_HPP_INCLUDED
 
 #include "object_fwd.hpp"
-#include <sge/shared_ptr.hpp>
+#include <fcppt/shared_ptr.hpp>
 
 namespace sanguis
 {

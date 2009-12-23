@@ -4,7 +4,7 @@
 #include "../context_fwd.hpp"
 #include "../resource/context_fwd.hpp"
 #include "collection_fwd.hpp"
-#include <sge/scoped_ptr.hpp>
+#include <fcppt/scoped_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis

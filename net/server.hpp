@@ -9,7 +9,7 @@
 #include <fcppt/function/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
-#include <sge/scoped_ptr.hpp>
+#include <fcppt/scoped_ptr.hpp>
 
 namespace sanguis
 {

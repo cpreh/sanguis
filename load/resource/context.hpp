@@ -14,7 +14,7 @@
 #include <sge/audio/loader_fwd.hpp>
 #include <sge/multi_loader.hpp>
 #include <sge/audio/pool_fwd.hpp>
-#include <sge/scoped_ptr.hpp>
+#include <fcppt/scoped_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis

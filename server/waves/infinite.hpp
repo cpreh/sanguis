@@ -8,7 +8,7 @@
 #include "spawns_per_wave.hpp"
 #include "../../time_type.hpp"
 #include "../../enemy_type.hpp"
-#include <sge/scoped_ptr.hpp>
+#include <fcppt/scoped_ptr.hpp>
 
 namespace sanguis
 {

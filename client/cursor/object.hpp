@@ -5,7 +5,7 @@
 #include "visible_callback.hpp"
 #include <sge/gui/cursor/default.hpp>
 #include <fcppt/signal/object.hpp>
-#include <sge/shared_ptr.hpp>
+#include <fcppt/shared_ptr.hpp>
 
 namespace sanguis
 {

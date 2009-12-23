@@ -18,8 +18,8 @@
 #include <sge/exception.hpp>
 #include <sge/iconv.hpp>
 #include <sge/make_shared_ptr.hpp>
-#include <sge/auto_ptr.hpp>
-#include <sge/scoped_ptr.hpp>
+#include <fcppt/auto_ptr.hpp>
+#include <fcppt/scoped_ptr.hpp>
 #include <sge/console/object.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/console/sprite_parameters.hpp>

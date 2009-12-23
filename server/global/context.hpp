@@ -26,7 +26,7 @@
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/container/map_decl.hpp>
 #include <sge/collision/system_fwd.hpp>
-#include <sge/shared_ptr.hpp>
+#include <fcppt/shared_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis

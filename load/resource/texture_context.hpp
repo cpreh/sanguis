@@ -2,7 +2,7 @@
 #define SANGUIS_LOAD_RESOURCE_TEXTURE_CONTEXT_HPP_INCLUDED
 
 #include "texture_context_fwd.hpp"
-#include <sge/shared_ptr.hpp>
+#include <fcppt/shared_ptr.hpp>
 
 namespace sanguis
 {

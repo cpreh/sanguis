@@ -8,7 +8,7 @@
 #include <sge/renderer/dim_type.hpp>
 #include <fcppt/math/dim/basic_decl.hpp>
 #include <fcppt/string.hpp>
-#include <sge/shared_ptr.hpp>
+#include <fcppt/shared_ptr.hpp>
 #include <map>
 
 namespace sanguis

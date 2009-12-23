@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENVIRONMENT_LOAD_CONTEXT_PTR_HPP_INCLUDED
 
 #include "load_context_fwd.hpp"
-#include <sge/shared_ptr.hpp>
+#include <fcppt/shared_ptr.hpp>
 
 namespace sanguis
 {

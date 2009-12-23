@@ -8,7 +8,7 @@
 #include "../../diff_clock.hpp"
 #include "../../load/model/animation.hpp"
 #include <sge/sprite/object_decl.hpp>
-#include <sge/scoped_ptr.hpp>
+#include <fcppt/scoped_ptr.hpp>
 #include <sge/optional_decl.hpp>
 
 namespace sanguis

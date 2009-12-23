@@ -13,8 +13,8 @@
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/member_vector.hpp>
 #include <sge/parse/json/member.hpp>
-#include <sge/shared_ptr.hpp>
-#include <sge/auto_ptr.hpp>
+#include <fcppt/shared_ptr.hpp>
+#include <fcppt/auto_ptr.hpp>
 
 namespace sanguis
 {

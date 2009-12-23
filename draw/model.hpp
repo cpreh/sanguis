@@ -13,7 +13,7 @@
 #include "../animation_type.hpp"
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/string.hpp>
-#include <sge/scoped_ptr.hpp>
+#include <fcppt/scoped_ptr.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
 
 namespace sanguis

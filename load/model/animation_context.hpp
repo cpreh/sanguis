@@ -4,7 +4,7 @@
 #include "../resource/texture_context.hpp"
 #include "frame_cache.hpp"
 #include <sge/sprite/animation/series.hpp>
-#include <sge/scoped_ptr.hpp>
+#include <fcppt/scoped_ptr.hpp>
 #include <sge/renderer/lock_rect.hpp>
 #include <fcppt/function/object.hpp>
 

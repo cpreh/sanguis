@@ -2,7 +2,7 @@
 #define SANGUIS_MESSAGES_SHARED_PTR_HPP_INCLUDED
 
 #include "base_fwd.hpp"
-#include <sge/shared_ptr.hpp>
+#include <fcppt/shared_ptr.hpp>
 
 namespace sanguis
 {

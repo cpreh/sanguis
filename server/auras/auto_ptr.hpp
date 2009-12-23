@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_AURAS_AUTO_PTR_HPP_INCLUDED
 
 #include "aura_fwd.hpp"
-#include <sge/auto_ptr.hpp>
+#include <fcppt/auto_ptr.hpp>
 
 namespace sanguis
 {

@@ -30,7 +30,7 @@
 #include "../highscore/score_type.hpp"
 #include <fcppt/signal/auto_connection.hpp>
 #include <sge/renderer/state/scoped.hpp>
-#include <sge/scoped_ptr.hpp>
+#include <fcppt/scoped_ptr.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/transition.hpp>
