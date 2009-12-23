@@ -19,7 +19,7 @@
 #include <sge/utf8/convert.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <fcppt/text.hpp>
-#include <sge/iconv.hpp>
+#include <fcppt/iconv.hpp>
 #include <boost/mpl/vector.hpp>
 #include <tr1/functional>
 #include <ostream>
@@ -206,7 +206,7 @@ void sanguis::client::states::menu::connect(
 	try
 	{
 		context<machine>().connect(
-			sge::iconv(
+			fcppt::iconv(
 				host
 			),
 			fcppt::lexical_cast<

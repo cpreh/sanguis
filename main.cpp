@@ -16,7 +16,7 @@
 #include <sge/cerr.hpp>
 #include <fcppt/text.hpp>
 #include <sge/exception.hpp>
-#include <sge/iconv.hpp>
+#include <fcppt/iconv.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/auto_ptr.hpp>
 #include <fcppt/scoped_ptr.hpp>
@@ -166,14 +166,14 @@ try
 	fcppt::log::activate_levels(
 		fcppt::log::global(),
 		fcppt::log::level_from_string(
-			sge::iconv(log_level)
+			fcppt::iconv(log_level)
 		)
 	);
 
 	fcppt::log::activate_levels(
 		sanguis::log(),
 		fcppt::log::level_from_string(
-			sge::iconv(log_level)
+			fcppt::iconv(log_level)
 		)
 	);
 

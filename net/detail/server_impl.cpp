@@ -6,7 +6,7 @@
 #include "../exception.hpp"
 #include <fcppt/log/headers.hpp>
 #include <fcppt/text.hpp>
-#include <sge/iconv.hpp>
+#include <fcppt/iconv.hpp>
 #include <fcppt/lexical_cast.hpp>
 #undef max
 // asio brings in window.h's max macro :(
@@ -92,7 +92,7 @@ void sanguis::net::detail::server_impl::process()
 		if (e)
 			throw exception(
 				FCPPT_TEXT("poll error: ")+
-				sge::iconv(
+				fcppt::iconv(
 					e.message()));
 	}
 }
@@ -292,7 +292,7 @@ void sanguis::net::detail::server_impl::accept_handler(
 			log(),
 			fcppt::log::_ << FCPPT_TEXT("server: error while accepting"));
 		throw exception(
-			sge::iconv(
+			fcppt::iconv(
 				e.message()));
 	}
 
@@ -331,7 +331,7 @@ void sanguis::net::detail::server_impl::handle_error(
 	connection const &c)
 {
 	fcppt::string const error_msg(
-		sge::iconv(
+		fcppt::iconv(
 			e.message()
 		)
 	);

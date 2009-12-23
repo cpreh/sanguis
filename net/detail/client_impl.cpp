@@ -8,7 +8,7 @@
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/text.hpp>
-#include <sge/iconv.hpp>
+#include <fcppt/iconv.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <boost/asio/buffer.hpp>
 #include <tr1/functional>
@@ -43,7 +43,7 @@ void sanguis::net::detail::client_impl::connect(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("client: resolving hostname ")
-			<< sge::iconv(s) << FCPPT_TEXT(" on port")
+			<< fcppt::iconv(s) << FCPPT_TEXT(" on port")
 			 << port
 	);
 	
@@ -116,7 +116,7 @@ void sanguis::net::detail::client_impl::process()
 	if (e)
 		throw exception(
 			FCPPT_TEXT("poll error: ")+
-			sge::iconv(
+			fcppt::iconv(
 				e.message()));
 }
 
@@ -148,7 +148,7 @@ void sanguis::net::detail::client_impl::resolve_handler(
 	if (e)
 		throw exception(
 			FCPPT_TEXT("client: error resolving address: ")+
-			sge::iconv(
+			fcppt::iconv(
 				e.message()));
 
 	SGE_LOG_DEBUG(
@@ -181,7 +181,7 @@ void sanguis::net::detail::client_impl::handle_error(
 			FCPPT_TEXT("error in ")+
 			s+
 			FCPPT_TEXT(": ")+
-			sge::iconv(
+			fcppt::iconv(
 				e.message()));
 	}
 		
@@ -189,11 +189,11 @@ void sanguis::net::detail::client_impl::handle_error(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("client: disconnected (")
-			<< sge::iconv(e.message()) 
+			<< fcppt::iconv(e.message()) 
 			<< FCPPT_TEXT(")"));
 
 	disconnect_signal_(
-		sge::iconv(
+		fcppt::iconv(
 			e.message()
 		)
 	);
@@ -305,7 +305,7 @@ void sanguis::net::detail::client_impl::connect_handler(
 		if (i == boost::asio::ip::tcp::resolver::iterator())
 			throw exception(
 				FCPPT_TEXT("client: exhausted endpoints: ")+
-				sge::iconv(
+				fcppt::iconv(
 					e.message()));
 
 		SGE_LOG_DEBUG(

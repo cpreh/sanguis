@@ -24,7 +24,7 @@
 #include "../load/context.hpp"
 
 #include <fcppt/make_auto_ptr.hpp>
-#include <sge/iconv.hpp>
+#include <fcppt/iconv.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
@@ -758,7 +758,7 @@ sanguis::draw::scene::process_default_msg(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("Invalid message event in scene: ")
-			<< sge::iconv(typeid(m).name()));
+			<< fcppt::iconv(typeid(m).name()));
 }
 
 fcppt::log::object &
