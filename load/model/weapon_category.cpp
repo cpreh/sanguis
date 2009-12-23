@@ -9,7 +9,7 @@
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/find_member.hpp>
 #include <fcppt/filesystem/exists.hpp>
-#include <sge/algorithm/find_exn.hpp>
+#include <fcppt/algorithm/find_exn.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
@@ -44,7 +44,7 @@ find_animation_type(
 	>(
 		std::distance(
 			animation_types.begin(),
-			sge::algorithm::find_exn(
+			fcppt::algorithm::find_exn(
 				animation_types.begin(),
 				animation_types.end(),
 				str

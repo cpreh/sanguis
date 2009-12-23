@@ -6,7 +6,7 @@
 #include "endianness.hpp"
 #include "../bindings/dynamic_len.hpp"
 #include <fcppt/container/raw_vector_impl.hpp>
-#include <sge/algorithm/copy_n.hpp>
+#include <fcppt/algorithm/copy_n.hpp>
 #include <fcppt/io/read.hpp>
 #include <majutsu/concepts/dynamic_memory/tag.hpp>
 
@@ -96,7 +96,7 @@ struct load<
 			sz + length_sz
 		);
 
-		sge::algorithm::copy_n(
+		fcppt::algorithm::copy_n(
 			reinterpret_cast<
 				raw_container::const_pointer
 			>(

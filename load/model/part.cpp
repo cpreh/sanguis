@@ -7,7 +7,7 @@
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/find_member.hpp>
 #include <sge/parse/json/get.hpp>
-#include <sge/algorithm/find_exn.hpp>
+#include <fcppt/algorithm/find_exn.hpp>
 #include <fcppt/log/headers.hpp>
 #include <sge/optional_impl.hpp>
 #include <fcppt/text.hpp>
@@ -45,7 +45,7 @@ find_weapon_type(
 	>(
 		std::distance(
 			weapon_types.begin(),
-			sge::algorithm::find_exn(
+			fcppt::algorithm::find_exn(
 				weapon_types.begin(),
 				weapon_types.end(),
 				str

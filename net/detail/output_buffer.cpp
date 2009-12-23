@@ -1,6 +1,6 @@
 #include "output_buffer.hpp"
 #include <fcppt/container/raw_vector_impl.hpp>
-#include <sge/algorithm/append.hpp>
+#include <fcppt/algorithm/append.hpp>
 
 sanguis::net::detail::output_buffer::output_buffer()
 {}
@@ -20,7 +20,7 @@ void sanguis::net::detail::output_buffer::push_back(
 	if (current.empty())
 		current = s;
 	else
-		sge::algorithm::append(
+		fcppt::algorithm::append(
 			appendix,
 			s
 		);
@@ -34,7 +34,7 @@ void sanguis::net::detail::output_buffer::erase(
 		current.begin() + bytes
 	);
 
-	sge::algorithm::append(
+	fcppt::algorithm::append(
 		current,
 		appendix
 	);

@@ -21,7 +21,7 @@
 #include <sge/image/loader.hpp>
 #include <sge/systems/instance.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
-#include <sge/algorithm/join_strings.hpp>
+#include <fcppt/algorithm/join_strings.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <tr1/functional>
@@ -127,7 +127,7 @@ sanguis::client::states::gameover::gameover(
 			.pos(	
 				sge::gui::point(0,1)
 			),
-		sge::algorithm::join_strings(
+		fcppt::algorithm::join_strings(
 			context<machine>().gameover_names(),
 			FCPPT_TEXT(", ")
 		)

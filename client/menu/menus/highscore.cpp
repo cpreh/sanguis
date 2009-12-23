@@ -1,7 +1,7 @@
 #include "highscore.hpp"
 #include "../../highscore/read.hpp"
 #include "../../config/homedir.hpp"
-#include <sge/algorithm/join_strings.hpp>
+#include <fcppt/algorithm/join_strings.hpp>
 #include <sge/gui/widgets/parameters.hpp>
 #include <sge/gui/widgets/label.hpp>
 #include <sge/gui/layouts/grid.hpp>
@@ -79,7 +79,7 @@ void sanguis::client::menu::menus::highscore::populate_children()
 				sge::gui::widgets::parameters()
 					.pos(
 						sge::gui::point(0,y_pos)),
-				sge::algorithm::join_strings(
+				fcppt::algorithm::join_strings(
 					e.names(),
 					FCPPT_TEXT(", "))));
 		children.push_back(

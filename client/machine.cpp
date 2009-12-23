@@ -41,7 +41,7 @@
 #include <sge/renderer/glsl/uniform/variable.hpp>
 #include <sge/renderer/glsl/uniform/single_value.hpp>
 #include <sge/renderer/glsl/program.hpp>
-#include <sge/algorithm/append.hpp>
+#include <fcppt/algorithm/append.hpp>
 #include <sge/renderer/glsl/uniform/single_value.hpp>
 #include <sge/renderer/filter/linear.hpp>
 #include <sge/renderer/texture.hpp>
@@ -182,7 +182,7 @@ void sanguis::client::machine::process_message(
 void sanguis::client::machine::data_callback(
 	net::data_type const &data)
 {
-	sge::algorithm::append(
+	fcppt::algorithm::append(
 		in_buffer,
 		data
 	);

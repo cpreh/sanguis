@@ -3,7 +3,7 @@
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/array.hpp>
-#include <sge/algorithm/find_exn.hpp>
+#include <fcppt/algorithm/find_exn.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/string.hpp>
@@ -35,7 +35,7 @@ find_sound_type(
 	>(
 		std::distance(
 			animation_sounds.begin(),
-			sge::algorithm::find_exn(
+			fcppt::algorithm::find_exn(
 				animation_sounds.begin(),
 				animation_sounds.end(),
 				name

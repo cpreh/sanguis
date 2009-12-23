@@ -10,7 +10,7 @@
 #include <sge/systems/instance.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
-#include <sge/algorithm/append.hpp>
+#include <fcppt/algorithm/append.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
 #include <tr1/functional>
@@ -138,7 +138,7 @@ void sanguis::server::machine::data_callback(
 	net::data_type const &data
 )
 {
-	sge::algorithm::append(
+	fcppt::algorithm::append(
 		clients_[id].in_buffer,
 		data
 	);
@@ -170,7 +170,7 @@ sanguis::server::machine::send_to_all(
 		client_map::reference ref,
 		clients_
 	)
-		sge::algorithm::append(
+		fcppt::algorithm::append(
 			ref.second.out_buffer,
 			m_str
 		);
@@ -213,7 +213,7 @@ sanguis::server::machine::send_unicast(
 		ser
 	);
 
-	sge::algorithm::append(
+	fcppt::algorithm::append(
 		clients_[id].out_buffer,
 		ser
 	);
