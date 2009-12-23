@@ -6,6 +6,7 @@
 #include <sge/input/key_code.hpp>
 #include <sge/input/key_pair_fwd.hpp>
 #include <sge/input/callback.hpp>
+#include <sge/input/key_pair_function.hpp>
 #include <fcppt/signal/object.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
@@ -19,7 +20,7 @@ struct console_wrapper
 	sge::console::gfx &con;
 	fcppt::signal::scoped_connection const ic;
 	sge::input::key_code const toggler;
-	fcppt::signal::object<sge::input::key_pair_fun> callbacks;
+	fcppt::signal::object<sge::input::key_pair_function> callbacks;
 
 	console_wrapper(
 		sge::console::gfx &,

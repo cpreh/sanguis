@@ -16,7 +16,10 @@ namespace callbacks
 // TODO: split this!
 
 typedef fcppt::function::object<
-	void (fcppt::string const &,sge::string const &)
+	void (
+		fcppt::string const &,
+		fcppt::string const &
+	)
 > connect;
 
 typedef fcppt::function::object<

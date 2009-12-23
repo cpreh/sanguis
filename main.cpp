@@ -35,6 +35,7 @@
 #include <sge/renderer/state/bool.hpp>
 #include <sge/renderer/refresh_rate_dont_care.hpp>
 #include <sge/renderer/no_multi_sampling.hpp>
+#include <sge/renderer/device.hpp>
 #include <sge/collision/system.hpp>
 #include <sge/image/loader.hpp>
 #include <sge/image/colors.hpp>
@@ -42,7 +43,6 @@
 #include <sge/audio/multi_loader.hpp>
 #include <sge/audio/pool.hpp>
 #include <sge/time/second.hpp>
-#include <sge/time/resolution.hpp>
 #include <sge/input/key_state_tracker.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/parameters_impl.hpp>
@@ -54,6 +54,7 @@
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/global.hpp>
 #include <fcppt/log/activate_levels.hpp>
+#include <fcppt/log/level_from_string.hpp>
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/iconv.hpp>

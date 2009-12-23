@@ -18,12 +18,12 @@
 #include <sge/input/key_code.hpp>
 #include <sge/input/key_state_tracker_fwd.hpp>
 #include <sge/systems/instance_fwd.hpp>
-#include <sge/audio/player_fwd.hpp>
+#include <sge/audio/player_ptr.hpp>
 #include <sge/audio/pool_fwd.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/console/stdlib.hpp>
-#include <sge/renderer/device_fwd.hpp>
-#include <sge/renderer/texture_fwd.hpp>
+#include <sge/renderer/device_ptr.hpp>
+#include <sge/renderer/texture_ptr.hpp>
 #include <fcppt/container/raw_vector_decl.hpp>
 
 #include <boost/statechart/state_machine.hpp>

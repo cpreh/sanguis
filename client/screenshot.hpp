@@ -1,13 +1,13 @@
 #ifndef SANGUIS_CLIENT_SCREENSHOT_HPP_INCLUDED
 #define SANGUIS_CLIENT_SCREENSHOT_HPP_INCLUDED
 
-#include <sge/renderer/device_fwd.hpp>
-#include <fcppt/filesystem/path.hpp>
-#include <sge/image/loader_fwd.hpp>
-#include <sge/input/system_fwd.hpp>
-#include <fcppt/signal/scoped_connection.hpp>
+#include <sge/renderer/device_ptr.hpp>
+#include <sge/image/loader_ptr.hpp>
+#include <sge/input/system_ptr.hpp>
 #include <sge/input/key_pair_fwd.hpp>
+#include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/function/object.hpp>
+#include <fcppt/filesystem/path.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis

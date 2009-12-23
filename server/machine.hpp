@@ -9,7 +9,7 @@
 #include "../net/id_type.hpp"
 #include "../tick_event.hpp"
 #include <sge/console/gfx_fwd.hpp>
-#include <sge/collision/system_fwd.hpp>
+#include <sge/collision/system_ptr.hpp>
 #include <fcppt/container/map_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/string.hpp>
