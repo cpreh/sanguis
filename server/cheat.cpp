@@ -3,7 +3,7 @@
 #include "weapons/factory.hpp"
 #include "weapons/weapon.hpp"
 #include "../exception.hpp"
-#include <fcppt/foreach_enumerator.hpp>
+#include <fcppt/foreach_enumerator_start.hpp>
 #include <fcppt/text.hpp>
 
 void
@@ -14,7 +14,7 @@ sanguis::server::cheat(
 {
 	switch(type) {
 	case cheat_type::impulse101:
-		FCPPT_FOREACH_ENUMERATOR_2(
+		FCPPT_FOREACH_ENUMERATOR_START(
 			index,
 			weapon_type,
 			weapon_type::pistol
