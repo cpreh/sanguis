@@ -204,8 +204,12 @@ sanguis::client::draw2d::message_dispatcher::operator()(
 	messages::max_health const &m
 )
 {
-	entity(
-		m.get<messages::roles::entity_id>()
+	fcppt::dynamic_cast_<
+		with_health &
+	>(
+		entity(
+			m.get<messages::roles::entity_id>()
+		)
 	).max_health(
 		m.get<messages::roles::max_health>()
 	);

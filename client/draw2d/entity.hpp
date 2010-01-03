@@ -1,7 +1,6 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITY_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITY_HPP_INCLUDED
 
-#include "sprite/rotation_type.hpp"
 #include "sprite/point.hpp"
 #include "sprite/dim.hpp"
 #include "../time_type.hpp"
@@ -38,11 +37,6 @@ public:
 	virtual void
 	dim(
 		sprite::dim const &
-	) = 0;
-
-	virtual void
-	orientation(
-		sprite::rotation_type
 	) = 0;
 
 	virtual void

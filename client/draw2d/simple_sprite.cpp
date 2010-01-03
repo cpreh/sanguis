@@ -1,5 +1,4 @@
 #include "simple_sprite.hpp"
-#include "environment.hpp"
 #include "sprite/client/parameters.hpp"
 #include "sprite/point.hpp"
 #include <fcppt/math/compare.hpp>
@@ -7,25 +6,21 @@
 #include <sge/sprite/intrusive/system_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 
-sanguis::draw::simple_sprite::simple_sprite(
-	draw::environment const &env,
-	entity_id const id,
+sanguis::client::draw2d::simple_sprite::simple_sprite(
+	sprite::client::system &system_,		
 	sprite::order const order,
 	sge::texture::const_part_ptr const tex,
 	sprite::client::repetition_type const _repeat
 )
 :
-	entity(
-		env,
-		id
-	),
+	entity(),
 	sprite_(
 		sprite::client::parameters()
 		.pos(
 			sprite::point::null()
 		)
 		.system(
-			&env.client_system()
+			system_
 		)
 		.order(
 			order
@@ -46,20 +41,22 @@ sanguis::draw::simple_sprite::simple_sprite(
 			>(1)
 		)
 	)
-		sprite_.repeat(_repeat);
+		sprite_.repeat(
+			_repeat
+		);
 }
 
-sanguis::draw::simple_sprite::~simple_sprite()
+sanguis::client::draw2d::simple_sprite::~simple_sprite()
 {}
 
 void
-sanguis::draw::simple_sprite::update(
+sanguis::client::draw2d::simple_sprite::update(
 	time_type
 )
 {}
 
 void
-sanguis::draw::simple_sprite::pos(
+sanguis::client::draw2d::simple_sprite::pos(
 	sprite::point const &pos_
 )
 {
@@ -69,7 +66,7 @@ sanguis::draw::simple_sprite::pos(
 }
 
 void
-sanguis::draw::simple_sprite::dim(
+sanguis::client::draw2d::simple_sprite::dim(
 	sprite::dim const &dim_
 )
 {
@@ -79,7 +76,7 @@ sanguis::draw::simple_sprite::dim(
 }
 
 void
-sanguis::draw::simple_sprite::visible(
+sanguis::client::draw2d::simple_sprite::visible(
 	bool const v
 )
 {

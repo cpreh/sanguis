@@ -12,14 +12,18 @@
 
 namespace sanguis
 {
-namespace draw
+namespace client
+{
+namespace draw2d
 {
 
-class simple_sprite : public entity {
+class simple_sprite
+:
+	public entity
+{
 public:
 	simple_sprite(
-		draw::environment const &,
-		entity_id,
+		sprite::client::system &system_,		
 		sprite::order,
 		sge::texture::const_part_ptr,
 		sprite::client::repetition_type
@@ -27,14 +31,32 @@ public:
 
 	~simple_sprite();
 private:
-	void update(time_type);
-	void pos(sprite::point const &);
-	void dim(sprite::dim const &);
-	void visible(bool);
+	// entity overrides
+	
+	void
+	update(
+		time_type
+	);
+
+	void
+	pos(
+		sprite::point const &
+	);
+
+	void
+	dim(
+		sprite::dim const &
+	);
+
+	void
+	visible(
+		bool
+	);
 
 	sprite::client::object sprite_;
 };
 
+}
 }
 }
 
