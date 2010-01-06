@@ -23,7 +23,8 @@ namespace draw
 
 class model
 :
-	public container
+	public container,
+	public with_health
 {
 public:
 	model(
@@ -37,8 +38,11 @@ public:
 
 	~model();
 
-	funit max_health() const;
-	funit health() const;
+	health_type
+	max_health() const;
+
+	health_type
+	health() const;
 protected:
 	virtual void
 	update(

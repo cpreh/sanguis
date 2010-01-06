@@ -24,6 +24,9 @@ public:
 	orientation(
 		sprite::rotation_type
 	) = 0;
+
+	virtual sprite::rotation_type
+	orientation() const = 0;
 };
 
 }

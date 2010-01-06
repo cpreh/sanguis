@@ -1,10 +1,9 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITY_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITY_HPP_INCLUDED
 
-#include "sprite/point.hpp"
-#include "sprite/dim.hpp"
-#include "../time_type.hpp"
-#include <fcppt/log/object_fwd.hpp>
+#include "../sprite/point.hpp"
+#include "../sprite/dim.hpp"
+#include "../../../time_type.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -13,10 +12,14 @@ namespace client
 {
 namespace draw2d
 {
-
-class entity
+namespace entities
 {
-	FCPPT_NONCOPYABLE(entity)
+
+class base
+{
+	FCPPT_NONCOPYABLE(base)
+protected:
+	base();
 public:
 	virtual void
 	update(
@@ -44,19 +47,12 @@ public:
 		bool
 	) = 0;
 
-	virtual ~entity();
-protected:
-	entity();
-
-	virtual funit
-	orientation() const;
+	virtual ~base();
 private:
-	static fcppt::log::object &
-	log();
-
 	bool may_be_removed_;
 };
 
+}
 }
 }
 }

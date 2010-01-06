@@ -31,7 +31,8 @@ namespace client
 namespace draw2d
 {
 
-class scene {
+class scene
+{
 	FCPPT_NONCOPYABLE(scene)
 public:
 	scene(
@@ -66,9 +67,6 @@ public:
 	pause(
 		bool
 	);
-
-	typedef void result_type;
-
 private:
 	void
 	render_systems();
@@ -83,11 +81,6 @@ private:
 	entity(
 		entity_id
 	);
-	
-	draw::entity const &
-	entity(
-		entity_id
-	) const;
 	
 	static fcppt::log::object &
 	log();
