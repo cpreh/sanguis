@@ -35,7 +35,7 @@ class message_dispatcher
 {
 public:
 	explicit message_dispatcher(
-		message_environment const &
+		message_environment &
 	);
 
 	typedef void result_type;
@@ -50,25 +50,33 @@ public:
 		messages::add_enemy const &
 	);
 
-	void operator()(messages::add_friend const &);
-	void operator()(messages::add_pickup const &);
-	void operator()(messages::add_player const &);
-	void operator()(messages::add_projectile const &);
-	void operator()(messages::add_weapon_pickup const &);
-	void operator()(messages::change_weapon const &);
-	void operator()(messages::experience const &);
-	void operator()(messages::health const &);
-	void operator()(messages::level_up const &);
-	void operator()(messages::max_health const &);
-	void operator()(messages::move const &);
-	void operator()(messages::remove const &);
-	void operator()(messages::resize const &);
-	void operator()(messages::rotate const &);
-	void operator()(messages::start_attacking const &);
-	void operator()(messages::stop_attacking const &);
-	void operator()(messages::start_reloading const &);
-	void operator()(messages::stop_reloading const &);
-	void operator()(messages::speed const &);
+	result_type
+	operator()(
+		messages::add_friend const &
+	);
+
+	result_type
+	operator()(
+		messages::add_pickup const &
+	);
+
+	result_type operator()(messages::add_player const &);
+	result_type operator()(messages::add_projectile const &);
+	result_type operator()(messages::add_weapon_pickup const &);
+	result_type operator()(messages::change_weapon const &);
+	result_type operator()(messages::experience const &);
+	result_type operator()(messages::health const &);
+	result_type operator()(messages::level_up const &);
+	result_type operator()(messages::max_health const &);
+	result_type operator()(messages::move const &);
+	result_type operator()(messages::remove const &);
+	result_type operator()(messages::resize const &);
+	result_type operator()(messages::rotate const &);
+	result_type operator()(messages::start_attacking const &);
+	result_type operator()(messages::stop_attacking const &);
+	result_type operator()(messages::start_reloading const &);
+	result_type operator()(messages::stop_reloading const &);
+	result_type operator()(messages::speed const &);
 
 	void
 	process_default_msg(
@@ -84,17 +92,12 @@ private:
 		Msg const &
 	);
 
-	draw::entity &
+	draw2d::entity &
 	entity(
 		entity_id
 	);
 	
-	draw::entity const &
-	entity(
-		entity_id
-	) const;
-
-	message_environment const &env_;
+	message_environment &env_;
 };
 
 }

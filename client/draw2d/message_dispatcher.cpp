@@ -2,7 +2,7 @@
 #include "message_environment.hpp"
 
 sanguis::client::draw2d::message_dispatcher::message_dispatcher(
-	message_environment const &env_
+	message_environment &env_
 )
 :
 	env_(env_)
@@ -382,4 +382,15 @@ sanguis::client::draw2d::message_dispatcher::configure_new_object(
 			m
 		)
 	);
+}
+
+sanguis::client::draw2d::entity &
+sanguis::client::draw2d::message_dispatcher::entity(
+	entity_id const id
+)
+{
+	return
+		env_.entity(
+			id
+		);
 }
