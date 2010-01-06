@@ -1,15 +1,20 @@
-#include "message_dispatcher.hpp"
-#include "message_environment.hpp"
+#include "dispatcher.hpp"
+#include "environment.hpp"
+#include "configure_entity.hpp"
 
-sanguis::client::draw2d::message_dispatcher::message_dispatcher(
-	message_environment &env_
+sanguis::client::draw2d::message::dispatcher::dispatcher(
+	environment &env_
 )
 :
 	env_(env_)
 {}
 
+sanguis::client::draw2d::message::dispatcher::~dispatcher()
+{
+}
+
 void
-sanguis::client::draw2d::message_dispatcher::operator()(
+sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::add_aoe_projectile const &m
 )
 {
@@ -29,7 +34,7 @@ sanguis::client::draw2d::message_dispatcher::operator()(
 }
 
 void
-sanguis::client::draw2d::message_dispatcher::operator()(
+sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::add_enemy const &m
 )
 {
@@ -48,7 +53,7 @@ sanguis::client::draw2d::message_dispatcher::operator()(
 }
 
 void
-sanguis::client::draw2d::message_dispatcher::operator()(
+sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::add_friend const &m
 )
 {
@@ -67,7 +72,7 @@ sanguis::client::draw2d::message_dispatcher::operator()(
 }
 
 void
-sanguis::client::draw2d::message_dispatcher::operator()(
+sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::add_pickup const &m
 )
 {
@@ -86,7 +91,7 @@ sanguis::client::draw2d::message_dispatcher::operator()(
 }
 
 void
-sanguis::client::draw2d::message_dispatcher::operator()(
+sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::add_player const &m
 )
 {
@@ -100,7 +105,7 @@ sanguis::client::draw2d::message_dispatcher::operator()(
 }
 
 void
-sanguis::client::draw2d::message_dispatcher::operator()(
+sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::add_projectile const &m
 )
 {
@@ -119,7 +124,7 @@ sanguis::client::draw2d::message_dispatcher::operator()(
 }
 
 void
-sanguis::client::draw2d::message_dispatcher::operator()(
+sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::add_weapon_pickup const &m
 )
 {
@@ -138,7 +143,7 @@ sanguis::client::draw2d::message_dispatcher::operator()(
 }
 
 void
-sanguis::client::draw2d::message_dispatcher::operator()(
+sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::change_weapon const &m
 )
 {
@@ -168,7 +173,7 @@ sanguis::client::draw2d::message_dispatcher::operator()(
 }
 
 void
-sanguis::client::draw2d::message_dispatcher::operator()(
+sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::experience const &m
 )
 {
@@ -178,7 +183,7 @@ sanguis::client::draw2d::message_dispatcher::operator()(
 }
 
 void
-sanguis::client::draw2d::message_dispatcher::operator()(
+sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::health const &m
 )
 {
@@ -190,7 +195,7 @@ sanguis::client::draw2d::message_dispatcher::operator()(
 }
 
 void
-sanguis::client::draw2d::message_dispatcher::operator()(
+sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::level_up const &m
 )
 {
@@ -200,7 +205,7 @@ sanguis::client::draw2d::message_dispatcher::operator()(
 }
 
 void
-sanguis::client::draw2d::message_dispatcher::operator()(
+sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::max_health const &m
 )
 {
@@ -216,7 +221,7 @@ sanguis::client::draw2d::message_dispatcher::operator()(
 }
 
 void
-sanguis::client::draw2d::message_dispatcher::operator()(
+sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::move const &m
 )
 {
@@ -231,7 +236,7 @@ sanguis::client::draw2d::message_dispatcher::operator()(
 }
 
 void
-sanguis::client::draw2d::message_dispatcher::operator()(
+sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::remove const &m
 )
 {
@@ -241,7 +246,7 @@ sanguis::client::draw2d::message_dispatcher::operator()(
 }
 
 void
-sanguis::client::draw2d::message_dispatcher::operator()(
+sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::resize const &m
 )
 {
@@ -257,7 +262,7 @@ sanguis::client::draw2d::message_dispatcher::operator()(
 }
 
 void
-sanguis::client::draw2d::message_dispatcher::operator()(
+sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::rotate const &m
 )
 {
@@ -269,7 +274,7 @@ sanguis::client::draw2d::message_dispatcher::operator()(
 }
 
 void
-sanguis::client::draw2d::message_dispatcher::operator()(
+sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::speed const &m
 )
 {
@@ -288,7 +293,7 @@ sanguis::client::draw2d::message_dispatcher::operator()(
 }
 
 void
-sanguis::client::draw2d::message_dispatcher::operator()(
+sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::start_attacking const &m
 )
 {
@@ -298,7 +303,7 @@ sanguis::client::draw2d::message_dispatcher::operator()(
 }
 
 void
-sanguis::client::draw2d::message_dispatcher::operator()(
+sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::stop_attacking const &m
 )
 {
@@ -308,7 +313,7 @@ sanguis::client::draw2d::message_dispatcher::operator()(
 }
 
 void
-sanguis::client::draw2d::message_dispatcher::operator()(
+sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::start_reloading const &m
 )
 {
@@ -318,7 +323,7 @@ sanguis::client::draw2d::message_dispatcher::operator()(
 }
 
 void
-sanguis::client::draw2d::message_dispatcher::operator()(
+sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::stop_reloading const &m
 )
 {
@@ -328,7 +333,7 @@ sanguis::client::draw2d::message_dispatcher::operator()(
 }
 
 void
-sanguis::client::draw2d::message_dispatcher::process_default_msg(
+sanguis::client::draw2d::message::dispatcher::process_default_msg(
 	messages::base const &m
 )
 {
@@ -345,8 +350,8 @@ template<
 	typename Msg
 >
 void
-sanguis::client::draw2d::message_dispatcher::configure_new_object(
-	entity_auto_ptr e_ptr,
+sanguis::client::draw2d::message::dispatcher::configure_new_object(
+	entities::auto_ptr e_ptr,
 	Msg const &m
 )
 {
@@ -354,7 +359,7 @@ sanguis::client::draw2d::message_dispatcher::configure_new_object(
 		m.get<messages::roles::entity_id>()
 	);
 
-	draw::entity &entity_(
+	entities::base &entity_(
 		env_->insert(
 			e_ptr,
 			id
@@ -384,8 +389,8 @@ sanguis::client::draw2d::message_dispatcher::configure_new_object(
 	);
 }
 
-sanguis::client::draw2d::entity &
-sanguis::client::draw2d::message_dispatcher::entity(
+sanguis::client::draw2d::entities::base &
+sanguis::client::draw2d::message::dispatcher::entity(
 	entity_id const id
 )
 {

@@ -1,13 +1,19 @@
-#ifndef SANGUIS_DRAW_SCENE_FWD_HPP_INCLUDED
-#define SANGUIS_DRAW_SCENE_FWD_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_SCENE_OBJECT_FWD_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_SCENE_OBJECT_FWD_HPP_INCLUDED
 
 namespace sanguis
 {
-namespace draw
+namespace client
+{
+namespace draw2d
+{
+namespace scene
 {
 
-class scene;
+class object;
 
+}
+}
 }
 }
 

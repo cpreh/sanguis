@@ -1,11 +1,11 @@
 #ifndef SANGUIS_CLIENT_DRAW_MESSAGE_ENVIRONMENT_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW_MESSAGE_ENVIRONMENT_HPP_INCLUDED
 
-#include "entity_fwd.hpp"
-#include "entity_auto_ptr.hpp"
-#include "../exp_type.hpp"
-#include "../level_type.hpp"
-#include "../../entity_id.hpp"
+#include "../entities/base_fwd.hpp"
+#include "../entities/auto_ptr.hpp"
+#include "../../exp_type.hpp"
+#include "../../level_type.hpp"
+#include "../../../entity_id.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -14,23 +14,25 @@ namespace client
 {
 namespace draw2d
 {
+namespace message
+{
 
-class message_environment
+class environment
 {
 	FCPPT_NONCOPYABLE(environment)
 protected:
-	message_environment();
+	environment();
 public:
-	virtual draw2d::entity &
+	virtual entities::base &
 	insert(
-		entity_auto_ptr,
+		entities::auto_ptr,
 		entity_id
 	) = 0;
 
-	virtual draw2d::entity &
+	virtual entities::base &
 	entity(
 		entity_id
-	);
+	) = 0;
 
 	virtual void
 	experience(
@@ -42,9 +44,10 @@ public:
 		level_type
 	) = 0;
 
-	virtual ~message_environment();
+	virtual ~environment();
 };
 
+}
 }
 }
 }

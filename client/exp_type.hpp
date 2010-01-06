@@ -3,11 +3,14 @@
 
 namespace sanguis
 {
+namespace client
+{
 namespace draw
 {
 
 typedef unsigned long exp_type;
 
+}
 }
 }
 

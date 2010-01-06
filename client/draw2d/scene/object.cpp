@@ -1,19 +1,6 @@
-#include "scene.hpp"
-#include "entity.hpp"
-#include "background.hpp"
-#include "configure_entity.hpp"
-#include "log.hpp"
-#include "environment.hpp"
+#include "object.hpp"
 #include "z_ordering.hpp"
-#include "factory/aoe_projectile.hpp"
 #include "factory/client.hpp"
-#include "factory/enemy.hpp"
-#include "factory/friend.hpp"
-#include "factory/pickup.hpp"
-#include "factory/player.hpp"
-#include "factory/projectile.hpp"
-#include "factory/weapon_pickup.hpp"
-#include "coord_transform.hpp"
 #include "sprite/order.hpp"
 #include "../messages/call/object.hpp"
 #include "../messages/role_name.hpp"
@@ -23,77 +10,61 @@
 #include "../exception.hpp"
 #include "../load/context.hpp"
 
-#include <fcppt/make_auto_ptr.hpp>
-#include <fcppt/iconv.hpp>
-#include <fcppt/text.hpp>
-#include <fcppt/format.hpp>
-#include <fcppt/math/dim/structure_cast.hpp>
-#include <fcppt/math/vector/structure_cast.hpp>
-#include <fcppt/log/parameters/inherited.hpp>
-#include <fcppt/log/headers.hpp>
-#include <fcppt/log/object.hpp>
 #include <sge/renderer/device.hpp>
-#include <sge/renderer/caps.hpp>
-#include <sge/renderer/scoped_block.hpp>
-#include <sge/renderer/target.hpp>
-#include <sge/renderer/const_scoped_target_lock.hpp>
-#include <sge/renderer/resource_flags_none.hpp>
 #include <sge/renderer/state/scoped.hpp>
-#include <sge/renderer/filter/linear.hpp>
 #include <sge/sprite/default_equal.hpp>
 #include <sge/sprite/intrusive/system_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
+
 #include <fcppt/function/object.hpp>
+#include <fcppt/make_auto_ptr.hpp>
+#include <fcppt/text.hpp>
+#include <fcppt/format.hpp>
+#include <fcppt/tr1/functional.hpp>
 
-#include <majutsu/is_role.hpp>
-
-#include <boost/mpl/filter_view.hpp>
-#include <boost/mpl/transform_view.hpp>
-#include <boost/mpl/placeholders.hpp>
-#include <boost/mpl/vector/vector30.hpp>
 #include <boost/foreach.hpp>
 
-#include <tr1/functional>
-
 #include <utility>
-#include <typeinfo>
-#include <ostream>
 
-sanguis::draw::scene::scene(
+sanguis::client::draw2d::scene::object::object(
 	load::context const &resources_,
-	sge::renderer::device_ptr const rend,
+	sge::renderer::device_ptr const rend_,
 	sge::font::object &font
 )
 :
-	rend(rend),
+	rend_(rend_),
 	normal_system_(rend),
 	colored_system_(rend),
 	client_system_(rend),
 	particle_system_(rend),
 	hud_(font),
-	paused(false),
-	env(
-		std::tr1::bind(
-			&scene::insert,
-			this,
-			std::tr1::placeholders::_1
-		),
-		resources_,
-		colored_system_,
-		normal_system_,
-		client_system_,
-		particle_system_
+	paused_(false),
+	message_environment_(
+		fcppt::make_auto_ptr<
+			message_environment
+		>(
+			std::tr1::ref(
+				*this
+			)
+		)
 	),
-	message_dispatcher(
-		
-	)
+	message_dispatcher_(
+		fcppt::make_auto_ptr<
+			message::dispatcher
+		>(
+			std::tr1::ref(
+				*message_environment_
+			)
+		)
+	),
+	entities_()
 {}
 
-sanguis::draw::scene::~scene()
+sanguis::client::draw2d::scene::object::~object()
 {}
 
 void
-sanguis::draw::scene::process_message(
+sanguis::client::draw2d::scene::object::process_message(
 	messages::base const &m
 )
 {
@@ -136,7 +107,7 @@ sanguis::draw::scene::process_message(
 }
 
 void
-sanguis::draw::scene::client_message(
+sanguis::client::draw2d::scene::object::client_message(
 	client_messages::add const &m
 )
 {
@@ -158,7 +129,7 @@ sanguis::draw::scene::client_message(
 }
 
 void
-sanguis::draw::scene::client_message(
+sanguis::client::draw2d::scene::object::client_message(
 	client_messages::visible const &m
 )
 {
@@ -166,7 +137,7 @@ sanguis::draw::scene::client_message(
 }
 
 void
-sanguis::draw::scene::draw(
+sanguis::client::draw2d::scene::object::draw(
 	time_type const delta
 )
 {
@@ -222,7 +193,7 @@ sanguis::draw::scene::draw(
 }
 
 void
-sanguis::draw::scene::pause(
+sanguis::client::draw2d::scene::object::pause(
 	bool const p
 )
 {
@@ -287,7 +258,7 @@ sanguis::client::draw2d::scene::render_systems()
 }
 
 sanguis::draw::entity &
-sanguis::draw::scene::insert(
+sanguis::client::draw2d::scene::object::insert(
 	entity_auto_ptr e,
 	entity_id const id
 )
@@ -313,7 +284,7 @@ sanguis::draw::scene::insert(
 }
 
 sanguis::draw::entity &
-sanguis::draw::scene::entity(
+sanguis::client::draw2d::scene::object::entity(
 	entity_id const id
 )
 {
@@ -338,7 +309,7 @@ sanguis::draw::scene::entity(
 }
 
 sanguis::draw::entity const &
-sanguis::draw::scene::entity(
+sanguis::client::draw2d::scene::object::entity(
 	entity_id const id
 ) const
 {
@@ -354,16 +325,4 @@ sanguis::draw::scene::entity(
 				id
 			)
 		);
-}
-
-fcppt::log::object &
-sanguis::draw::scene::log()
-{
-	static fcppt::log::object log_(
-		fcppt::log::parameters::inherited(
-			draw::log(),
-			FCPPT_TEXT("scene")
-		)
-	);
-	return log_;
 }
