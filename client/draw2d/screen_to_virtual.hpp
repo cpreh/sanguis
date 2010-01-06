@@ -1,5 +1,5 @@
-#ifndef SANGUIS_DRAW_COORD_TRANSFORM_HPP_INCLUDED
-#define SANGUIS_DRAW_COORD_TRANSFORM_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_SCREEN_TO_VIRTUAL_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_SCREEN_TO_VIRTUAL_HPP_INCLUDED
 
 #include "sprite/point.hpp"
 #include "sprite/dim.hpp"
@@ -9,20 +9,10 @@
 
 namespace sanguis
 {
-namespace draw
+namespace client
 {
-
-sprite::point const
-virtual_to_screen(
-	sge::renderer::screen_size const &,
-	messages::types::pos const &
-);
-
-sprite::dim const
-virtual_to_screen(
-	sge::renderer::screen_size const &,
-	messages::types::dim const &
-);
+namespace draw2d
+{
 
 messages::types::pos const
 screen_to_virtual(
@@ -36,6 +26,7 @@ screen_to_virtual(
 	sprite::dim const &
 );
 
+}
 }
 }
 
