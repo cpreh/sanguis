@@ -1,13 +1,16 @@
-#ifndef SANGUIS_DRAW_UNIT_HPP_INCLUDED
-#define SANGUIS_DRAW_UNIT_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_UNIT_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_UNIT_HPP_INCLUDED
 
 namespace sanguis
 {
-namespace draw
+namespace client
+{
+namespace draw2d
 {
 
 typedef int unit;
 
+}
 }
 }
 

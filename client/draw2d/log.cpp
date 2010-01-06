@@ -5,13 +5,14 @@
 #include <fcppt/text.hpp>
 
 fcppt::log::object &
-sanguis::draw::log()
+sanguis::client::draw2d::log()
 {
 	static fcppt::log::object log_(
 		fcppt::log::parameters::inherited(
-			sanguis::log(),
-			FCPPT_TEXT("draw")
+			client::log(),
+			FCPPT_TEXT("draw2d")
 		)
 	);
+
 	return log_;
 }

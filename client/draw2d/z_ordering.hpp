@@ -1,9 +1,11 @@
-#ifndef SANGUIS_DRAW_Z_ORDERING_HPP_INCLUDED
-#define SANGUIS_DRAW_Z_ORDERING_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_Z_ORDERING_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_Z_ORDERING_HPP_INCLUDED
 
 namespace sanguis
 {
-namespace draw
+namespace client
+{
+namespace draw2d
 {
 namespace z_ordering
 {
@@ -25,6 +27,7 @@ enum type {
 	size
 };
 
+}
 }
 }
 }
