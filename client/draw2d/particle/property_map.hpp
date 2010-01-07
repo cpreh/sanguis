@@ -1,5 +1,5 @@
-#ifndef SANGUIS_DRAW_PARTICLE_PROPERTY_MAP_HPP_INCLUDED
-#define SANGUIS_DRAW_PARTICLE_PROPERTY_MAP_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_PARTICLE_PROPERTY_MAP_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_PARTICLE_PROPERTY_MAP_HPP_INCLUDED
 
 #include "property_container.hpp"
 #include "properties_fwd.hpp"
@@ -7,10 +7,13 @@
 
 namespace sanguis
 {
-namespace draw
+namespace client
+{
+namespace draw2d
 {
 namespace particle
 {
+
 class property_map {
 public:
 	explicit property_map(
@@ -23,7 +26,7 @@ private:
 	property_container container_;	
 };
 
-
+}
 }
 }
 }

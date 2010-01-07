@@ -1,5 +1,5 @@
-#ifndef SANGUIS_DRAW_PARTICLE_TYPES_HPP_INCLUDED
-#define SANGUIS_DRAW_PARTICLE_TYPES_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_PARTICLE_TYPES_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_PARTICLE_TYPES_HPP_INCLUDED
 
 // TODO: split this!
 
@@ -13,7 +13,9 @@
 
 namespace sanguis 
 {
-namespace draw
+namespace client
+{
+namespace draw2d
 {
 namespace particle
 {
@@ -29,6 +31,7 @@ typedef fcppt::random::inclusive_range<time_type>  fade_time_range;
 typedef fcppt::optional<fade_time_range>         fade_type;
 typedef fcppt::function::object<base_ptr ()>             generation_callback;
 
+}
 }
 }
 }

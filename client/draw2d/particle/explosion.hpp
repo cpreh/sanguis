@@ -1,5 +1,5 @@
-#ifndef SANGUIS_DRAW_PARTICLE_EXPLOSION_HPP_INCLUDED
-#define SANGUIS_DRAW_PARTICLE_EXPLOSION_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_PARTICLE_EXPLOSION_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_PARTICLE_EXPLOSION_HPP_INCLUDED
 
 #include "container.hpp"
 #include "property_map.hpp"
@@ -9,7 +9,9 @@
 
 namespace sanguis
 {
-namespace draw
+namespace client
+{
+namespace draw2d
 {
 namespace particle
 {
@@ -33,6 +35,7 @@ public:
 		draw::environment const &);
 };
 
+}
 }
 }
 }

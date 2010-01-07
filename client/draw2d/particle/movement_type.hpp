@@ -1,12 +1,14 @@
-#ifndef SANGUIS_DRAW_PARTICLE_MOVEMENT_TYPE_HPP_INCLUDED
-#define SANGUIS_DRAW_PARTICLE_MOVEMENT_TYPE_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_PARTICLE_MOVEMENT_TYPE_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_PARTICLE_MOVEMENT_TYPE_HPP_INCLUDED
 
 #include <fcppt/io/ostream.hpp>
 #include <fcppt/io/istream.hpp>
 
 namespace sanguis 
 {
-namespace draw
+namespace client
+{
+namespace draw2d
 {
 namespace particle
 {
@@ -32,6 +34,7 @@ operator>>(
 	fcppt::io::istream &,
 	movement_type::type &);
 
+}
 }
 }
 }

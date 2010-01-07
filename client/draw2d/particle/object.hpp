@@ -1,5 +1,5 @@
-#ifndef SANGUIS_DRAW_PARTICLE_OBJECT_HPP_INCLUDED
-#define SANGUIS_DRAW_PARTICLE_OBJECT_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_PARTICLE_OBJECT_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_PARTICLE_OBJECT_HPP_INCLUDED
 
 #include "base.hpp"
 #include "../sprite/particle/object.hpp"
@@ -13,7 +13,9 @@
 
 namespace sanguis
 {
-namespace draw
+namespace client
+{
+namespace draw2d
 {
 namespace particle
 {
@@ -51,6 +53,7 @@ private:
 	time_type fade_remaining_;
 };
 
+}
 }
 }
 }

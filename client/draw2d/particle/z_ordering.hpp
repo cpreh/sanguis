@@ -1,20 +1,24 @@
-#ifndef SANGUIS_DRAW_PARTICLE_Z_ORDERING_HPP_INCLUDED
-#define SANGUIS_DRAW_PARTICLE_Z_ORDERING_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_PARTICLE_Z_ORDERING_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_PARTICLE_Z_ORDERING_HPP_INCLUDED
 
 #include "../z_ordering.hpp"
 #include "../../particle_type.hpp"
 
 namespace sanguis
 {
-namespace draw
+namespace client
+{
+namespace draw2d
 {
 namespace particle
 {
 
 draw::z_ordering::type
 z_ordering(
-	particle_type::type);
+	particle_type::type
+);
 
+}
 }
 }
 }

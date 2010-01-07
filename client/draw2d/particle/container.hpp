@@ -1,19 +1,21 @@
-#ifndef SANGUIS_DRAW_PARTICLE_CONTAINER_HPP_INCLUDED
-#define SANGUIS_DRAW_PARTICLE_CONTAINER_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_PARTICLE_CONTAINER_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_PARTICLE_CONTAINER_HPP_INCLUDED
 
 #include "base.hpp"
 #include <boost/ptr_container/ptr_list.hpp>
 
 namespace sanguis 
 {
-namespace draw
+namespace client
+{
+namespace draw2d
 {
 namespace particle
 {
 
 class container : public base
 {
-	public:
+public:
 	typedef boost::ptr_list<base> children_container;
 	container(
 		point const &pos,
@@ -37,10 +39,11 @@ class container : public base
 	using base::depth;
 	using base::rot;
 	using base::rot_vel;
-	private:
+private:
 	children_container children_;
 };
 
+}
 }
 }
 }

@@ -1,5 +1,5 @@
-#ifndef SANGUIS_DRAW_PARTICLE_BASE_HPP_INCLUDED
-#define SANGUIS_DRAW_PARTICLE_BASE_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_PARTICLE_BASE_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_PARTICLE_BASE_HPP_INCLUDED
 
 #include "types.hpp"
 #include "fwd.hpp"
@@ -8,7 +8,9 @@
 
 namespace sanguis
 {
-namespace draw
+namespace client
+{
+namespace draw2d
 {
 namespace particle
 {
@@ -58,6 +60,7 @@ private:
 	draw::environment const &e;
 };
 
+}
 }
 }
 }

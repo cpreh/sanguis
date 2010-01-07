@@ -1,5 +1,5 @@
-#ifndef SANGUIS_DRAW_PARTICLE_GENERATOR_HPP_INCLUDED
-#define SANGUIS_DRAW_PARTICLE_GENERATOR_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_PARTICLE_GENERATOR_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_PARTICLE_GENERATOR_HPP_INCLUDED
 
 #include "container.hpp"
 #include "align_type.hpp"
@@ -10,7 +10,9 @@
 
 namespace sanguis
 {
-namespace draw
+namespace client
+{
+namespace draw2d
 {
 namespace particle
 {
@@ -55,6 +57,7 @@ private:
 	void generate();
 };
 
+}
 }
 }
 }

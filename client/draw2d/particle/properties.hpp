@@ -1,5 +1,5 @@
-#ifndef SANGUIS_DRAW_PARTICLE_PROPERTIES_HPP_INCLUDED
-#define SANGUIS_DRAW_PARTICLE_PROPERTIES_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_PARTICLE_PROPERTIES_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_PARTICLE_PROPERTIES_HPP_INCLUDED
 
 #include "movement_type.hpp"
 #include "align_type.hpp"
@@ -9,7 +9,9 @@
 
 namespace sanguis
 {
-namespace draw
+namespace client
+{
+namespace draw2d
 {
 namespace particle
 {
@@ -69,6 +71,7 @@ private:
 	movement_type::type movement_;
 };
 
+}
 }
 }
 }
