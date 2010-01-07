@@ -38,46 +38,86 @@ public:
 
 	~logic();
 
-	void handle_player_action(
-		player_action const &);
-	void give_weapon(
-		messages::give_weapon const &);
-	void move(
-		messages::move const &);
-	void pause(
-		bool);
-	void remove(
-		entity_id);
-	void player_id(
-		entity_id);
-	entity_id player_id() const;
+	void
+	handle_player_action(
+		player_action const &
+	);
+
+	void
+	give_weapon(
+		messages::give_weapon const &
+	);
+
+	void
+	move(
+		messages::move const &
+	);
+
+	void
+	pause(
+		bool
+	);
+
+	void
+	remove(
+		entity_id
+	);
 private:
-	void handle_move_x(
-		key_scale);
-	void handle_move_y(
-		key_scale);
-	void update_direction();
+	void
+	handle_move_x(
+		key_scale
+	);
 
-	void handle_rotation_x(
-		key_scale);
-	void handle_rotation_y(
-		key_scale);
-	void update_rotation();
+	void
+	handle_move_y(
+		key_scale
+	);
 
-	void handle_shooting(
-		key_scale);
-	void handle_switch_weapon_forwards(
-		key_scale);
-	void handle_switch_weapon_backwards(
-		key_scale);
-	void handle_pause_unpause(
-		key_scale);
+	void
+	update_direction();
 
-	void change_weapon(
-		weapon_type::type);
+	void
+	handle_rotation_x(
+		key_scale
+	);
+
+	void
+	handle_rotation_y(
+		key_scale
+	);
+
+	void 
+	update_rotation();
+
+	void
+	handle_shooting(
+		key_scale
+	);
+
+	void
+	handle_switch_weapon_forwards(
+		key_scale
+	);
+
+	void
+	handle_switch_weapon_backwards(
+		key_scale
+	);
+
+	void
+	handle_pause_unpause(
+		key_scale
+	);
+
+	void
+	change_weapon(
+		weapon_type::type
+	);
 	
-	void send_cheat(
-		cheat_type::type);
+	void
+	send_cheat(
+		cheat_type::type
+	);
 
 	send_callback const send;
 	sge::renderer::device_ptr const rend;
@@ -93,15 +133,11 @@ private:
 
 	action_handlers const actions;
 		
-	entity_id player_id_;
-
 	typedef fcppt::math::vector::static_<
 		float,
 		2
 	>::type direction_vector;
 
-	direction_vector direction;
-	draw::sprite::point player_center;
 	weapon_type::type current_weapon;
 	bool paused;
 	sge::time::timer rotation_timer;

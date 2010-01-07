@@ -155,12 +155,11 @@ sanguis::client::logic::logic(
 	);
 }
 
-void sanguis::client::logic::handle_player_action(
-	player_action const &action)
+void
+sanguis::client::logic::handle_player_action(
+	player_action const &action
+)
 {
-	if(player_id_ == invalid_id)
-		return;
-	
 	actions.at(
 		action.type()
 	)(
@@ -223,12 +222,12 @@ sanguis::client::logic::handle_move_y(
 	update_direction();
 }
 
-void sanguis::client::logic::update_direction()
+void
+sanguis::client::logic::update_direction()
 {
 	send(
 		messages::create(
 			messages::player_direction(
-				player_id_,
 				fcppt::math::vector::structure_cast<
 					messages::types::vector2
 				>(
@@ -239,19 +238,24 @@ void sanguis::client::logic::update_direction()
 	);
 }
 
-void sanguis::client::logic::handle_rotation_x(
-	key_scale const s)
+void
+sanguis::client::logic::handle_rotation_x(
+	key_scale const s
+)
 {
 	update_rotation();
 }
 
-void sanguis::client::logic::handle_rotation_y(
-	key_scale const s)
+void
+sanguis::client::logic::handle_rotation_y(
+	key_scale const s
+)
 {
 	update_rotation();
 }
 
-void sanguis::client::logic::update_rotation()
+void
+sanguis::client::logic::update_rotation()
 {
 	fcppt::optional<
 		messages::types::space_unit
@@ -272,7 +276,6 @@ void sanguis::client::logic::update_rotation()
 	send(
 		messages::create(
 			messages::player_rotation(
-				player_id_,
 				*rotation
 			)
 		)
@@ -282,7 +285,6 @@ void sanguis::client::logic::update_rotation()
 	send(
 		messages::create(
 			messages::player_attack_dest(
-				player_id_,
 				fcppt::math::vector::structure_cast<
 					messages::types::vector2
 				>(
@@ -294,8 +296,10 @@ void sanguis::client::logic::update_rotation()
 
 }
 
-void sanguis::client::logic::handle_shooting(
-	key_scale const s)
+void
+sanguis::client::logic::handle_shooting(
+	key_scale const s
+)
 {
 	if(
 		fcppt::math::compare(
@@ -305,23 +309,21 @@ void sanguis::client::logic::handle_shooting(
 	)
 		send(
 			messages::create(
-				messages::player_stop_shooting(
-					player_id_
-				)
+				messages::player_stop_shooting()
 			)
 		);
 	else
 		send(
 			messages::create(
-				messages::player_start_shooting(
-					player_id_
-				)
+				messages::player_start_shooting()
 			)
 		);
 }
 
-void sanguis::client::logic::handle_switch_weapon_forwards(
-	key_scale)
+void
+sanguis::client::logic::handle_switch_weapon_forwards(
+	key_scale
+)
 {
 	// we don't own any weapon
 	if(current_weapon == weapon_type::size)
@@ -344,15 +346,18 @@ void sanguis::client::logic::handle_switch_weapon_forwards(
 		owned_weapons.end()
 	);
 
+/*
 	switch(m.type())
 	{
-	case player_action::switch_weapon_forwards:
+	case player_action::switch_weapon_forwards:*/
 		while(!*++it) ;
+	/*
 		break;
 	case player_action::switch_weapon_backwards:
 		while(!*--it) ;
 		break;
 	}
+	*/
 
 	change_weapon(
 		static_cast<weapon_type::type>(
@@ -366,27 +371,27 @@ void sanguis::client::logic::handle_switch_weapon_forwards(
 	);
 }
 
-void sanguis::client::logic::handle_switch_weapon_backwards(
-	key_scale)
+void
+sanguis::client::logic::handle_switch_weapon_backwards(
+	key_scale
+)
 {}
 
-void sanguis::client::logic::handle_pause_unpause(
-	key_scale)
+void
+sanguis::client::logic::handle_pause_unpause(
+	key_scale
+)
 {
 	if(paused)
 		send(
 			messages::create(
-				messages::player_unpause(
-					player_id_
-				)
+				messages::player_unpause()
 			)
 		);
 	else
 		send(
 			messages::create(
-				messages::player_pause(
-					player_id_
-				)
+				messages::player_pause()
 			)
 		);
 }
@@ -401,7 +406,6 @@ sanguis::client::logic::change_weapon(
 	send(
 		messages::create(
 			messages::player_change_weapon(
-				player_id_,
 				current_weapon
 			)
 		)
@@ -416,7 +420,6 @@ sanguis::client::logic::send_cheat(
 	send(
 		messages::create(
 			messages::player_cheat(
-				player_id_,
 				c
 			)
 		)
