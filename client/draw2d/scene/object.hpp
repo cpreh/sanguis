@@ -3,6 +3,7 @@
 
 #include "object_fwd.hpp"
 #include "hud.hpp"
+#include "message_environment_fwd.hpp"
 #include "../message/environment_fwd.hpp"
 #include "../message/dispatcher_fwd.hpp"
 #include "../entities/auto_ptr.hpp"
@@ -70,6 +71,8 @@ public:
 		bool
 	);
 private:
+	friend class message_environment;
+
 	void
 	render_systems();
 

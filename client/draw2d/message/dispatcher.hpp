@@ -70,23 +70,90 @@ public:
 		messages::add_pickup const &
 	);
 
-	result_type operator()(messages::add_player const &);
-	result_type operator()(messages::add_projectile const &);
-	result_type operator()(messages::add_weapon_pickup const &);
-	result_type operator()(messages::change_weapon const &);
-	result_type operator()(messages::experience const &);
-	result_type operator()(messages::health const &);
-	result_type operator()(messages::level_up const &);
-	result_type operator()(messages::max_health const &);
-	result_type operator()(messages::move const &);
-	result_type operator()(messages::remove const &);
-	result_type operator()(messages::resize const &);
-	result_type operator()(messages::rotate const &);
-	result_type operator()(messages::start_attacking const &);
-	result_type operator()(messages::stop_attacking const &);
-	result_type operator()(messages::start_reloading const &);
-	result_type operator()(messages::stop_reloading const &);
-	result_type operator()(messages::speed const &);
+	result_type
+	operator()(
+		messages::add_player const &
+	);
+
+	result_type
+	operator()(
+		messages::add_projectile const &
+	);
+
+	result_type
+	operator()(
+		messages::add_weapon_pickup const &
+	);
+
+	result_type
+	operator()(
+		messages::change_weapon const &
+	);
+
+	result_type
+	operator()(
+		messages::experience const &
+	);
+
+	result_type
+	operator()(
+		messages::health const &
+	);
+
+	result_type
+	operator()(
+		messages::level_up const &
+	);
+
+	result_type
+	operator()(
+		messages::max_health const &
+	);
+
+	result_type
+	operator()(
+		messages::move const &
+	);
+
+	result_type
+	operator()(
+		messages::remove const &
+	);
+
+	result_type
+	operator()(
+		messages::resize const &
+	);
+
+	result_type
+	operator()(
+		messages::rotate const &
+	);
+
+	result_type
+	operator()(
+		messages::start_attacking const &
+	);
+
+	result_type
+	operator()(
+		messages::stop_attacking const &
+	);
+
+	result_type
+	operator()(
+		messages::start_reloading const &
+	);
+
+	result_type
+	operator()(
+		messages::stop_reloading const &
+	);
+
+	result_type
+	operator()(
+		messages::speed const &
+	);
 
 	void
 	process_default_msg(

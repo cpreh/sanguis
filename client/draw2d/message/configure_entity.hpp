@@ -1,20 +1,20 @@
-#ifndef SANGUIS_DRAW_CONFIGURE_ENTITY_HPP_INCLUDED
-#define SANGUIS_DRAW_CONFIGURE_ENTITY_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_MESSAGE_CONFIGURE_ENTITY_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_MESSAGE_CONFIGURE_ENTITY_HPP_INCLUDED
 
-#include "scene.hpp"
-#include "../messages/pos.hpp"
-#include "../messages/move.hpp"
-#include "../messages/rotate.hpp"
-#include "../messages/max_health.hpp"
-#include "../messages/health.hpp"
-#include "../messages/speed.hpp"
-#include "../messages/dim.hpp"
-#include "../messages/resize.hpp"
-#include "../messages/roles/angle.hpp"
-#include "../messages/roles/max_health.hpp"
-#include "../messages/roles/health.hpp"
-#include "../messages/roles/speed.hpp"
-#include "../entity_id.hpp"
+#include "dispatcher.hpp"
+#include "../../../messages/pos.hpp"
+#include "../../../messages/move.hpp"
+#include "../../../messages/rotate.hpp"
+#include "../../../messages/max_health.hpp"
+#include "../../../messages/health.hpp"
+#include "../../../messages/speed.hpp"
+#include "../../../messages/dim.hpp"
+#include "../../../messages/resize.hpp"
+#include "../../../messages/roles/angle.hpp"
+#include "../../../messages/roles/max_health.hpp"
+#include "../../../messages/roles/health.hpp"
+#include "../../../messages/roles/speed.hpp"
+#include "../../../entity_id.hpp"
 #include <boost/mpl/map.hpp>
 #include <boost/mpl/pair.hpp>
 #include <boost/mpl/at.hpp>
@@ -60,12 +60,12 @@ public:
 	typedef void result_type;
 
 	configure_entity(
-		scene &scene_,
+		dispatcher &dispatcher_,
 		entity_id const id_,
 		Message const &message_
 	)
 	:
-		scene_(scene_),
+		dispatcher_(dispatcher_),
 		id_(id_),
 		message_(message_)
 	{}
@@ -84,7 +84,7 @@ public:
 		Role &
 	) const
 	{
-		scene_(
+		dispatcher_(
 			typename boost::mpl::at<
 				mapping,
 				Role
@@ -113,7 +113,7 @@ public:
 	{
 	}
 private:
-	scene &scene_;
+	dispatcher &dispatcher_;
 	entity_id const id_;
 	Message const &message_;
 };

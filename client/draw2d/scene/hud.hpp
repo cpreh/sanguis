@@ -1,6 +1,7 @@
-#ifndef SANGUIS_DRAW_HUD_HPP_INCLUDED
-#define SANGUIS_DRAW_HUD_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_SCENE_HUD_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_SCENE_HUD_HPP_INCLUDED
 
+#include "hud_fwd.hpp"
 #include "../../exp_type.hpp"
 #include "../../level_type.hpp"
 #include "../../../time_type.hpp"
