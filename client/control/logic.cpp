@@ -1,26 +1,18 @@
 #include "logic.hpp"
-#include "invalid_id.hpp"
-#include "cursor/object.hpp"
-#include "log.hpp"
-#include "../messages/create.hpp"
-#include "../messages/player_attack_dest.hpp"
-#include "../messages/player_direction.hpp"
-#include "../messages/player_rotation.hpp"
-#include "../messages/player_start_shooting.hpp"
-#include "../messages/player_stop_shooting.hpp"
-#include "../messages/player_pause.hpp"
-#include "../messages/player_unpause.hpp"
-#include "../messages/player_change_weapon.hpp"
-#include "../messages/player_choose_perk.hpp"
-#include "../messages/player_cheat.hpp"
-#include "../cyclic_iterator_impl.hpp"
-#include "../perk_type.hpp"
+#include "../log.hpp"
+#include "../../messages/create.hpp"
+#include "../../messages/player_attack_dest.hpp"
+#include "../../messages/player_direction.hpp"
+#include "../../messages/player_rotation.hpp"
+#include "../../messages/player_start_shooting.hpp"
+#include "../../messages/player_stop_shooting.hpp"
+#include "../../messages/player_pause.hpp"
+#include "../../messages/player_unpause.hpp"
+#include "../../messages/player_change_weapon.hpp"
+#include "../../messages/player_cheat.hpp"
+#include "../../cyclic_iterator_impl.hpp"
 #include <sge/time/millisecond.hpp>
-#include <sge/renderer/device.hpp>
 #include <sge/console/object.hpp>
-#include <sge/gui/unit.hpp>
-#include <fcppt/math/clamp.hpp>
-#include <fcppt/math/vector/angle_between.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
@@ -29,23 +21,18 @@
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <algorithm>
 
-sanguis::client::logic::logic(
+sanguis::client::control::logic::logic(
 	send_callback const &_send,
-	sge::renderer::device_ptr const _rend,
-	cursor::object_ptr const _cursor,
+	environment const &environment_,
 	sge::console::object &_console
 )
 :
 	send(
 		_send
 	),
-	rend(
-		_rend
-	),
-	cursor_(_cursor),
+	environment_(environment_),
 	actions(
 		fcppt::assign::make_container<
 			action_handlers
@@ -107,13 +94,6 @@ sanguis::client::logic::logic(
 			)
 		)
 	),
-	player_id_(invalid_id),
-	direction(
-		direction_vector::null()
-	),
-	player_center(
-		draw::sprite::point::null()
-	),
 	current_weapon(
 		weapon_type::size
 	),
@@ -156,7 +136,7 @@ sanguis::client::logic::logic(
 }
 
 void
-sanguis::client::logic::handle_player_action(
+sanguis::client::control::logic::handle_player_action(
 	player_action const &action
 )
 {
@@ -167,11 +147,11 @@ sanguis::client::logic::handle_player_action(
 	);
 }
 
-sanguis::client::logic::~logic()
+sanguis::client::control::logic::~logic()
 {}
 
 void
-sanguis::client::logic::give_player_weapon(
+sanguis::client::control::logic::give_player_weapon(
 	messages::give_weapon const &m
 )
 {
@@ -193,37 +173,39 @@ sanguis::client::logic::give_player_weapon(
 }
 
 void
-sanguis::client::logic::pause(
+sanguis::client::control::logic::pause(
 	bool const p
 )
 {
 	paused = p;
+}
 
-	cursor_->visible(
-		paused
+void
+sanguis::client::control::logic::handle_move_x(
+	key_scale const s
+)
+{
+	environment_.direction_x(
+		s
 	);
-}
 
-void
-sanguis::client::logic::handle_move_x(
-	key_scale const s
-)
-{
-	direction.x() += s;
 	update_direction();
 }
 
 void
-sanguis::client::logic::handle_move_y(
+sanguis::client::control::logic::handle_move_y(
 	key_scale const s
 )
 {
-	direction.y() += s;
+	environment_.direction_y(
+		s
+	);
+
 	update_direction();
 }
 
 void
-sanguis::client::logic::update_direction()
+sanguis::client::control::logic::update_direction()
 {
 	send(
 		messages::create(
@@ -231,7 +213,7 @@ sanguis::client::logic::update_direction()
 				fcppt::math::vector::structure_cast<
 					messages::types::vector2
 				>(
-					direction
+					environment_.direction()
 				)
 			)
 		)
@@ -239,24 +221,26 @@ sanguis::client::logic::update_direction()
 }
 
 void
-sanguis::client::logic::handle_rotation_x(
-	key_scale const s
+sanguis::client::control::logic::handle_rotation_x(
+	key_scale const
 )
 {
 	update_rotation();
 }
 
 void
-sanguis::client::logic::handle_rotation_y(
-	key_scale const s
+sanguis::client::control::logic::handle_rotation_y(
+	key_scale const
 )
 {
 	update_rotation();
 }
 
 void
-sanguis::client::logic::update_rotation()
+sanguis::client::control::logic::update_rotation()
 {
+	// FIXME: the rotation is still handled in the cursor
+/*
 	fcppt::optional<
 		messages::types::space_unit
 	> const rotation(
@@ -270,17 +254,20 @@ sanguis::client::logic::update_rotation()
 
 	if(!rotation || !rotation_timer.update_b())
 		return;
+*/
+
+	if(!rotation_timer.update_b())
+		return;
 	
 	// TODO: maybe we can kick rotation
 	// and the server can calculate it from the attack dest
 	send(
 		messages::create(
 			messages::player_rotation(
-				*rotation
+				environment_.rotation()
 			)
 		)
 	);
-
 
 	send(
 		messages::create(
@@ -288,16 +275,15 @@ sanguis::client::logic::update_rotation()
 				fcppt::math::vector::structure_cast<
 					messages::types::vector2
 				>(
-					cursor_->pos()
+					environment_.attack_dest()
 				)
 			)
 		)
 	);
-
 }
 
 void
-sanguis::client::logic::handle_shooting(
+sanguis::client::control::logic::handle_shooting(
 	key_scale const s
 )
 {
@@ -321,7 +307,7 @@ sanguis::client::logic::handle_shooting(
 }
 
 void
-sanguis::client::logic::handle_switch_weapon_forwards(
+sanguis::client::control::logic::handle_switch_weapon_forwards(
 	key_scale
 )
 {
@@ -360,9 +346,13 @@ sanguis::client::logic::handle_switch_weapon_forwards(
 	*/
 
 	change_weapon(
-		static_cast<weapon_type::type>(
+		static_cast<
+			weapon_type::type
+		>(
 			std::distance(
-				static_cast<owned_weapons_array const &>(
+				static_cast<
+					owned_weapons_array const &
+				>(
 					owned_weapons
 				).begin(),
 				it.get()
@@ -372,13 +362,13 @@ sanguis::client::logic::handle_switch_weapon_forwards(
 }
 
 void
-sanguis::client::logic::handle_switch_weapon_backwards(
+sanguis::client::control::logic::handle_switch_weapon_backwards(
 	key_scale
 )
 {}
 
 void
-sanguis::client::logic::handle_pause_unpause(
+sanguis::client::control::logic::handle_pause_unpause(
 	key_scale
 )
 {
@@ -397,7 +387,7 @@ sanguis::client::logic::handle_pause_unpause(
 }
 
 void
-sanguis::client::logic::change_weapon(
+sanguis::client::control::logic::change_weapon(
 	weapon_type::type const w
 )
 {
@@ -413,7 +403,7 @@ sanguis::client::logic::change_weapon(
 }
 
 void
-sanguis::client::logic::send_cheat(
+sanguis::client::control::logic::send_cheat(
 	cheat_type::type const c
 )
 {

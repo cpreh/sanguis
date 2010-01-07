@@ -1,20 +1,13 @@
 #ifndef SANGUIS_CLIENT_LOGIC_HPP_INCLUDED
 #define SANGUIS_CLIENT_LOGIC_HPP_INCLUDED
 
-#include "player_action.hpp"
-#include "send_callback.hpp"
-#include "cursor/object_ptr.hpp"
-#include "../draw/sprite/point.hpp"
-#include "../cheat_type.hpp"
-#include "../weapon_type.hpp"
-#include "../entity_id.hpp"
-#include "../messages/give_weapon.hpp"
-#include "../messages/move.hpp"
+#include "player_action_fwd.hpp"
+#include "environment_fwd.hpp"
+#include "../send_callback.hpp"
+#include "../../cheat_type.hpp"
+#include "../../weapon_type.hpp"
 #include <sge/console/object_fwd.hpp>
 #include <sge/time/timer.hpp>
-#include <sge/renderer/device_ptr.hpp>
-#include <fcppt/math/vector/static.hpp>
-#include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/function/object_fwd.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/tr1/array.hpp>
@@ -34,8 +27,7 @@ class logic
 public:
 	logic(
 		send_callback const &,
-		sge::renderer::device_ptr,
-		cursor::object_ptr,
+		environment const &,
 		sge::console::object &
 	);
 
@@ -47,8 +39,8 @@ public:
 	);
 
 	void
-	give_weapon(
-		messages::give_weapon const &
+	give_player_weapon(
+		weapon_type::type
 	);
 
 	void
@@ -59,11 +51,6 @@ public:
 	void
 	pause(
 		bool
-	);
-
-	void
-	remove(
-		entity_id
 	);
 private:
 	void
@@ -123,8 +110,8 @@ private:
 	);
 
 	send_callback const send;
-	sge::renderer::device_ptr const rend;
-	cursor::object_ptr const cursor_;
+
+	environment const &environment_;
 
 	typedef fcppt::function::object<
 		void (key_scale)
@@ -136,21 +123,19 @@ private:
 
 	action_handlers const actions;
 		
-	typedef fcppt::math::vector::static_<
-		float,
-		2
-	>::type direction_vector;
-
 	weapon_type::type current_weapon;
+
 	bool paused;
+
 	sge::time::timer rotation_timer;
 
 	typedef std::tr1::array<
 		bool,
 		weapon_type::size
-	>                               owned_weapons_array;
+	> owned_weapons_array;
 	
-	owned_weapons_array             owned_weapons;
+	owned_weapons_array owned_weapons;
+
 	fcppt::signal::scoped_connection 
 		cheat_kill_conn_,
 		cheat_impulse_conn_;

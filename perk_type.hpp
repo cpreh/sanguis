@@ -3,7 +3,6 @@
 
 namespace sanguis
 {
-
 namespace perk_type
 {
 
