@@ -12,8 +12,9 @@
 #include "../sprite/normal/system.hpp"
 #include "../sprite/colored/system.hpp"
 #include "../sprite/particle/system.hpp"
-#include "../../client/messages/add_fwd.hpp"
-#include "../../client/messages/visible_fwd.hpp"
+#include "../../control/environment_fwd.hpp"
+#include "../../messages/add_fwd.hpp"
+#include "../../messages/visible_fwd.hpp"
 #include "../../../load/context_fwd.hpp"
 #include "../../../messages/base.hpp"
 #include "../../../entity_id.hpp"
@@ -48,17 +49,17 @@ public:
 	
 	void
 	process_message(
-		messages::base const &
+		sanguis::messages::base const &
+	);
+
+	entity_id
+	client_message(
+		client::messages::add const &
 	);
 
 	void
 	client_message(
-		client_messages::add const &
-	);
-
-	void
-	client_message(
-		client_messages::visible const &
+		client::messages::visible const &
 	);
 
 	void
@@ -70,6 +71,9 @@ public:
 	pause(
 		bool
 	);
+
+	client::control::environment &
+	control_environment() const;
 private:
 	friend class message_environment;
 
