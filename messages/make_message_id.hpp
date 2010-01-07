@@ -16,7 +16,8 @@ namespace messages
 template<
 	types::message::type Msg
 >
-struct make_message_id {
+struct make_message_id
+{
 private:
 	static types::message_type const
 	converted_message =

@@ -121,6 +121,7 @@ sanguis::client::states::menu::operator()(
 			e.get<messages::roles::error_message>()
 		)
 	);
+
 	return discard_event();
 }
 
@@ -137,26 +138,33 @@ sanguis::client::states::menu::operator()(
 			)
 		)
 	);
+
 	return discard_event();
 }
 
 boost::statechart::result
 sanguis::client::states::menu::operator()(
-	messages::disconnect const &)
+	messages::disconnect const &
+)
 {
 	menu_.connection_error(
-		FCPPT_TEXT("The server closed the connection"));
+		FCPPT_TEXT("The server closed the connection")
+	);
+
 	return discard_event();
 }
 
 boost::statechart::result
 sanguis::client::states::menu::operator()(
-	messages::assign_id const &m)
+	messages::assign_id const &m
+)
 {
 	FCPPT_LOG_DEBUG(
 		log(),
 		fcppt::log::_
-			<< FCPPT_TEXT("received id"));
+			<< FCPPT_TEXT("received id")
+	);
+
 	post_event(
 		message_event(
 			messages::create(
@@ -166,25 +174,34 @@ sanguis::client::states::menu::operator()(
 			)
 		)
 	);
+
 	switch (
 		static_cast<connect_state::type>(
-			m.get<messages::roles::followup>()))
+			m.get<messages::roles::followup>()
+		)
+	)
 	{
 		case connect_state::unpaused:
 			FCPPT_LOG_DEBUG(
 				log(),
 				fcppt::log::_
-					<< FCPPT_TEXT("switching to state \"unpaused\""));
+					<< FCPPT_TEXT("switching to state \"unpaused\"")
+			);
+
 			return transit<unpaused>();
 		case connect_state::paused:
 			FCPPT_LOG_DEBUG(
 				log(),
 				fcppt::log::_
-					<< FCPPT_TEXT("switching to state \"paused\""));
+					<< FCPPT_TEXT("switching to state \"paused\"")
+			);
+
 			return transit<paused>();
 	}
+
 	throw sge::exception(
-		FCPPT_TEXT("invalid followup state!"));
+		FCPPT_TEXT("invalid followup state!")
+	);
 }
 
 fcppt::log::object &

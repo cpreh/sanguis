@@ -1,7 +1,7 @@
 #ifndef SANGUIS_MESSAGES_PLAYER_DIRECTION_HPP_INCLUDED
 #define SANGUIS_MESSAGES_PLAYER_DIRECTION_HPP_INCLUDED
 
-#include "bind_entity_message.hpp"
+#include "bind_player_message.hpp"
 #include "make_class.hpp"
 #include "vector2.hpp"
 #include "types/message.hpp"
@@ -17,7 +17,7 @@ namespace messages
 
 typedef majutsu::composite<
 	boost::mpl::vector2<
-		bind_entity_message<
+		bind_player_message<
 			types::message::player_direction
 		>::type,
 		majutsu::role<

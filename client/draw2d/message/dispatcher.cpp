@@ -113,8 +113,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 {
 	configure_new_object(
 		factory::player(
-			environment(),
-			m.get<messages::roles::entity_id>()
+			environment()
 		),
 		m
 	);
@@ -128,7 +127,6 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	configure_new_object(
 		factory::projectile(
 			environment(),
-			m.get<messages::roles::entity_id>(),
 			static_cast<
 				projectile_type::type
 			>(
@@ -147,7 +145,6 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	configure_new_object(
 		factory::weapon_pickup(
 			environment(),
-			m.get<messages::roles::entity_id>(),
 			static_cast<
 				weapon_type::type
 			>(

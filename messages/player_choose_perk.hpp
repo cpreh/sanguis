@@ -3,7 +3,7 @@
 
 #include "roles/perk.hpp"
 #include "types/message.hpp"
-#include "bind_entity_message.hpp"
+#include "bind_player_message.hpp"
 #include "enum.hpp"
 #include "make_class.hpp"
 #include <majutsu/composite.hpp>
@@ -17,7 +17,7 @@ namespace messages
 
 typedef majutsu::composite<
 	boost::mpl::vector2<
-		bind_entity_message<
+		bind_player_message<
 			types::message::player_choose_perk
 		>::type,
 		majutsu::role<

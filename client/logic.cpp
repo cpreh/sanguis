@@ -172,21 +172,10 @@ sanguis::client::logic::~logic()
 {}
 
 void
-sanguis::client::logic::give_weapon(
+sanguis::client::logic::give_player_weapon(
 	messages::give_weapon const &m
 )
 {
-	if(m.get<messages::roles::entity_id>() != player_id_)
-	{
-		FCPPT_LOG_WARNING(
-			log(),
-			fcppt::log::_
-				<< FCPPT_TEXT("Got invalid give_weapon message!")
-		);
-
-		return;
-	}
-
 	weapon_type::type const wt(
 		static_cast<
 			weapon_type::type
@@ -204,46 +193,16 @@ sanguis::client::logic::give_weapon(
 		);
 }
 
-void sanguis::client::logic::move(
-	messages::move const &m)
-{
-	if(m.get<messages::roles::entity_id>() == player_id_)
-		player_center = fcppt::math::vector::structure_cast<
-			draw::sprite::point
-		>(
-			m.get<messages::pos>()
-		); // FIXME
-}
-
-void sanguis::client::logic::pause(
-	bool const p)
+void
+sanguis::client::logic::pause(
+	bool const p
+)
 {
 	paused = p;
+
 	cursor_->visible(
-		paused);
-}
-
-void
-sanguis::client::logic::remove(
-	entity_id const id
-)
-{
-	if(id == player_id_)
-		player_id_ = invalid_id;
-}
-
-void
-sanguis::client::logic::player_id(
-	entity_id const id
-)
-{
-	player_id_ = id;
-}
-
-sanguis::entity_id
-sanguis::client::logic::player_id() const
-{
-	return player_id_;
+		paused
+	);
 }
 
 void
@@ -385,16 +344,15 @@ void sanguis::client::logic::handle_switch_weapon_forwards(
 		owned_weapons.end()
 	);
 
-	//switch(m.type()) {
-	//case player_action::switch_weapon_forwards:
+	switch(m.type())
+	{
+	case player_action::switch_weapon_forwards:
 		while(!*++it) ;
-	//	break;
-	/*case player_action::switch_weapon_backwards:
+		break;
+	case player_action::switch_weapon_backwards:
 		while(!*--it) ;
 		break;
-	default:
-		return;
-	}*/
+	}
 
 	change_weapon(
 		static_cast<weapon_type::type>(
@@ -433,8 +391,10 @@ void sanguis::client::logic::handle_pause_unpause(
 		);
 }
 
-void sanguis::client::logic::change_weapon(
-	weapon_type::type const w)
+void
+sanguis::client::logic::change_weapon(
+	weapon_type::type const w
+)
 {
 	current_weapon = w;
 
@@ -448,8 +408,10 @@ void sanguis::client::logic::change_weapon(
 	);
 }
 
-void sanguis::client::logic::send_cheat(
-	cheat_type::type const c)
+void
+sanguis::client::logic::send_cheat(
+	cheat_type::type const c
+)
 {
 	send(
 		messages::create(

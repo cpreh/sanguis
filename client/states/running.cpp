@@ -199,11 +199,13 @@ sanguis::client::states::running::react(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	messages::assign_id const &m)
+	messages::assign_id const &m
+)
 {
 	logic_.player_id(
 		m.get<messages::roles::entity_id>()
 	);
+
 	return discard_event();
 }
 
