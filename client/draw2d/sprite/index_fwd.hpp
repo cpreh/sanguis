@@ -1,11 +1,19 @@
-#ifndef SANGUIS_DRAW_SPRITE_PART_INDEX_FWD_HPP_INCLUDED
-#define SANGUIS_DRAW_SPRITE_PART_INDEX_FWD_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_SPRITE_INDEX_FWD_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_SPRITE_INDEX_FWD_HPP_INCLUDED
 
 namespace sanguis
 {
-namespace draw
+namespace client
 {
-class sprite_part_index;
+namespace draw2d
+{
+namespace sprite
+{
+
+class index;
+
+}
+}
 }
 }
 

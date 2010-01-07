@@ -1,14 +1,12 @@
-#include "model.hpp"
-#include "model_part.hpp"
-#include "z_ordering.hpp"
-#include "log.hpp"
-#include "sprite_part_index.hpp"
-#include "environment.hpp"
-#include "../load/model/collection.hpp"
-#include "../load/model/context.hpp"
-#include "../load/context.hpp"
-#include "../client/id_dont_care.hpp"
-#include "../exception.hpp"
+#include "object.hpp"
+#include "part.hpp"
+#include "../../log.hpp"
+#include "../../sprite/index.hpp"
+#include "../../../id_dont_care.hpp"
+#include "../../../../load/model/collection.hpp"
+#include "../../../../load/model/context.hpp"
+#include "../../../../load/context.hpp"
+#include "../../../../exception.hpp"
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/object.hpp>
@@ -16,17 +14,17 @@
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/make_auto_ptr.hpp>
 #include <boost/foreach.hpp>
 #include <ostream>
 
-sanguis::draw::model::model(
+sanguis::client::draw2d::entities::model::object::object(
 	draw::environment const &env,
 	entity_id const id,
 	fcppt::string const &name,
 	sprite::order const order,
 	bool const show_healthbar,
-	draw::remove_action::type const remove_action_)
+	draw::remove_action::type const remove_action_
+)
 :
 	container(
 		env,
@@ -67,22 +65,22 @@ sanguis::draw::model::model(
 	);
 }
 
-sanguis::draw::model::~model()
+sanguis::client::draw2d::entities::model::object::~model()
 {}
 
 sanguis::draw::funit
-sanguis::draw::model::max_health() const
+sanguis::client::draw2d::entities::model::object::max_health() const
 {
 	return max_health_;
 }
 
 sanguis::draw::funit
-sanguis::draw::model::health() const
+sanguis::client::draw2d::entities::model::object::health() const
 {
 	return health_;
 }
 
-void sanguis::draw::model::update(
+void sanguis::client::draw2d::entities::model::object::update(
 	time_type const time)
 {
 	container::update(time);
@@ -96,33 +94,33 @@ void sanguis::draw::model::update(
 		p.update(time);
 }
 
-void sanguis::draw::model::orientation(
+void sanguis::client::draw2d::entities::model::object::orientation(
 	sprite::rotation_type const rot)
 {
 	BOOST_FOREACH(model_part &p, parts)
 		p.orientation(rot);
 }
 
-void sanguis::draw::model::orientation(
+void sanguis::client::draw2d::entities::model::object::orientation(
 	sprite::rotation_type const rot,
 	size_type const index)
 {
 	parts.at(index).orientation(rot);	
 }
 
-bool sanguis::draw::model::may_be_removed() const
+bool sanguis::client::draw2d::entities::model::object::may_be_removed() const
 {
 	return entity::may_be_removed()
 		&& animations_ended();
 }
 
 sanguis::draw::remove_action::type
-sanguis::draw::model::remove_action() const
+sanguis::client::draw2d::entities::model::object::remove_action() const
 {
 	return remove_action_; 
 }
 
-void sanguis::draw::model::speed(
+void sanguis::client::draw2d::entities::model::object::speed(
 	vector2 const &s)
 {
 	vector2 const old_speed(
@@ -134,43 +132,29 @@ void sanguis::draw::model::speed(
 		change_animation();
 }
 
-sanguis::draw::model_part &
-sanguis::draw::model::part(
+sanguis::client::draw2d::entities::model::object_part &
+sanguis::client::draw2d::entities::model::object::part(
 	sprite_part_index const &idx)
 {
 	return parts.at(idx.get());
 }
 
-bool sanguis::draw::model::dead() const
+bool sanguis::client::draw2d::entities::model::object::dead() const
 {
 	return health() <= 0;
 }
 
-bool sanguis::draw::model::walking() const
+bool sanguis::client::draw2d::entities::model::object::walking() const
 {
 	return !is_null(speed());
 }
 
-bool sanguis::draw::model::has_health() const
+bool sanguis::client::draw2d::entities::model::object::has_health() const
 {
 	return max_health() > 0;
 }
 
-void sanguis::draw::model::on_decay()
-{
-	/*
-	if(!has_health())
-		return;
-	
-	entity_auto_ptr blood_(
-		fcppt::make_auto_ptr<
-			blood
-		>(
-			environment(),
-			pos()));*/
-}
-
-void sanguis::draw::model::health(
+void sanguis::client::draw2d::entities::model::object::health(
 	funit const health)
 {
 	health_ = health;
@@ -184,14 +168,14 @@ void sanguis::draw::model::health(
 	speed(vector2::null()); // FIXME
 }
 
-void sanguis::draw::model::max_health(
+void sanguis::client::draw2d::entities::model::object::max_health(
 	funit const max_health)
 {
 	max_health_ = max_health;
 	update_healthbar();
 }
 
-void sanguis::draw::model::weapon(
+void sanguis::client::draw2d::entities::model::object::weapon(
 	weapon_type::type const weapon_)
 {
 	BOOST_FOREACH(model_part &p, parts)
@@ -199,7 +183,7 @@ void sanguis::draw::model::weapon(
 	change_animation();
 }
 
-void sanguis::draw::model::start_attacking()
+void sanguis::client::draw2d::entities::model::object::start_attacking()
 {
 	if(attacking)
 		FCPPT_LOG_WARNING(
@@ -210,7 +194,7 @@ void sanguis::draw::model::start_attacking()
 	change_animation();
 }
 
-void sanguis::draw::model::stop_attacking()
+void sanguis::client::draw2d::entities::model::object::stop_attacking()
 {
 	if(!attacking)
 		FCPPT_LOG_WARNING(
@@ -221,7 +205,7 @@ void sanguis::draw::model::stop_attacking()
 	change_animation();
 }
 
-void sanguis::draw::model::start_reloading()
+void sanguis::client::draw2d::entities::model::object::start_reloading()
 {
 	if(reloading)
 		FCPPT_LOG_WARNING(
@@ -232,7 +216,7 @@ void sanguis::draw::model::start_reloading()
 	change_animation();
 }
 
-void sanguis::draw::model::stop_reloading()
+void sanguis::client::draw2d::entities::model::object::stop_reloading()
 {
 	if(!reloading)
 		FCPPT_LOG_WARNING(
@@ -243,13 +227,13 @@ void sanguis::draw::model::stop_reloading()
 	change_animation();
 }
 
-void sanguis::draw::model::change_animation()
+void sanguis::client::draw2d::entities::model::object::change_animation()
 {
 	change_animation(
 		animation());
 }
 
-void sanguis::draw::model::change_animation(
+void sanguis::client::draw2d::entities::model::object::change_animation(
 	animation_type::type const nanim)
 {
 	BOOST_FOREACH(model_part &p, parts)
@@ -262,7 +246,7 @@ void sanguis::draw::model::change_animation(
 }
 
 sanguis::animation_type::type
-sanguis::draw::model::fallback_anim(
+sanguis::client::draw2d::entities::model::object::fallback_anim(
 	animation_type::type const anim) const
 {
 	switch(anim) {
@@ -284,20 +268,30 @@ sanguis::draw::model::fallback_anim(
 }
 
 sanguis::animation_type::type
-sanguis::draw::model::animation() const
+sanguis::client::draw2d::entities::model::object::animation() const
 {
-	return dead()
-	? animation_type::dying
-	: reloading
-		? animation_type::reloading
-		: attacking
-			? animation_type::attacking
-			: is_null(container::speed())
-				? animation_type::none
-				: animation_type::walking;
+	return
+		dead()
+		?
+			animation_type::dying
+		:
+			reloading
+			?
+				animation_type::reloading
+			:
+				attacking
+				?
+					animation_type::attacking
+				:
+					is_null(container::speed())
+					?
+						animation_type::none
+					:
+						animation_type::walking;
 }
 
-void sanguis::draw::model::update_healthbar()
+void
+sanguis::client::draw2d::entities::model::object::update_healthbar()
 {
 	if(!healthbar_)
 		return;
@@ -308,16 +302,20 @@ void sanguis::draw::model::update_healthbar()
 	);
 }
 
-bool sanguis::draw::model::animations_ended() const
+bool
+sanguis::client::draw2d::entities::model::object::animations_ended() const
 {
-	BOOST_FOREACH(part_vector::const_reference part, parts)
+	BOOST_FOREACH(
+		part_vector::const_reference part,
+		parts
+	)
 		if(!part.animation_ended())
 			return false;
 	return true;
 }
 
 fcppt::log::object &
-sanguis::draw::model::log()
+sanguis::client::draw2d::entities::model::object::log()
 {
 	static fcppt::log::object log_(
 		fcppt::log::parameters::inherited(

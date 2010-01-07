@@ -1,17 +1,20 @@
-#ifndef SANGUIS_DRAW_SPRITE_FLOAT_UNIT_HPP_INCLUDED
-#define SANGUIS_DRAW_SPRITE_FLOAT_UNIT_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_SPRITE_FLOAT_UNIT_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_SPRITE_FLOAT_UNIT_HPP_INCLUDED
 
 #include "../funit.hpp"
 
 namespace sanguis
 {
-namespace draw
+namespace client
+{
+namespace draw2d
 {
 namespace sprite
 {
 
 typedef draw::funit float_unit;
 
+}
 }
 }
 }

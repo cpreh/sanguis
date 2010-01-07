@@ -1,12 +1,14 @@
-#ifndef SANGUIS_DRAW_VECTOR2_HPP_INCLUDED
-#define SANGUIS_DRAW_VECTOR2_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_VECTOR2_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_VECTOR2_HPP_INCLUDED
 
 #include "funit.hpp"
 #include <fcppt/math/vector/static.hpp>
 
 namespace sanguis
 {
-namespace draw
+namespace client
+{
+namespace draw2d
 {
 
 typedef fcppt::math::vector::static_<
@@ -14,6 +16,7 @@ typedef fcppt::math::vector::static_<
 	2
 >::type vector2;
 
+}
 }
 }
 

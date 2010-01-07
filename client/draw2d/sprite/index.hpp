@@ -1,25 +1,34 @@
-#ifndef SANGUIS_DRAW_SPRITE_PART_INDEX_HPP_INCLUDED
-#define SANGUIS_DRAW_SPRITE_PART_INDEX_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_SPRITE_PART_INDEX_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_SPRITE_PART_INDEX_HPP_INCLUDED
 
 #include <cstddef>
 
 namespace sanguis
 {
-namespace draw
+namespace client
+{
+namespace draw2d
+{
+namespace sprite
 {
 
-class sprite_part_index {
+class index
+{
 public:
 	typedef std::size_t value_type;
 
 	explicit sprite_part_index(
-		value_type);
+		value_type
+	);
 	
-	value_type get() const;
+	value_type
+	get() const;
 private:
 	value_type value;
 };
 
+}
+}
 }
 }
 

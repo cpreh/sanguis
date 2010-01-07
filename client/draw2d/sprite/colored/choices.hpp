@@ -1,5 +1,5 @@
-#ifndef SANGUIS_DRAW_SPRITE_COLORED_CHOICES_HPP_INCLUDED
-#define SANGUIS_DRAW_SPRITE_COLORED_CHOICES_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_SPRITE_COLORED_CHOICES_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_SPRITE_COLORED_CHOICES_HPP_INCLUDED
 
 #include "type_choices.hpp"
 #include <sge/sprite/choices.hpp>
@@ -9,7 +9,9 @@
 
 namespace sanguis
 {
-namespace draw
+namespace client
+{
+namespace draw2d
 {
 namespace sprite
 {
@@ -24,6 +26,7 @@ typedef sge::sprite::choices<
 	>
 > choices;
 
+}
 }
 }
 }

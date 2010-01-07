@@ -1,12 +1,14 @@
-#ifndef SANGUIS_DRAW_SPRITE_PARTICLE_PARAMETERS_HPP_INCLUDED
-#define SANGUIS_DRAW_SPRITE_PARTICLE_PARAMETERS_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_SPRITE_PARTICLE_PARAMETERS_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_SPRITE_PARTICLE_PARAMETERS_HPP_INCLUDED
 
 #include "choices.hpp"
 #include <sge/sprite/parameters_fwd.hpp>
 
 namespace sanguis
 {
-namespace draw
+namespace client
+{
+namespace draw2d
 {
 namespace sprite
 {
@@ -17,6 +19,7 @@ typedef sge::sprite::parameters<
 	choices
 > parameters;
 
+}
 }
 }
 }
