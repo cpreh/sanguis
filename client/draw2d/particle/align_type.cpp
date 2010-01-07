@@ -5,7 +5,7 @@
 #include <istream>
 
 fcppt::io::ostream &
-sanguis::draw::particle::operator<<(
+sanguis::client::draw2d::particle::operator<<(
 	fcppt::io::ostream &s,
 	align_type::type const t)
 {
@@ -13,7 +13,7 @@ sanguis::draw::particle::operator<<(
 }
 
 fcppt::io::istream &
-sanguis::draw::particle::operator>>(
+sanguis::client::draw2d::particle::operator>>(
 	fcppt::io::istream &s,
 	align_type::type &t)
 {

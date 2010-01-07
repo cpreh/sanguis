@@ -8,7 +8,7 @@
 #include <fcppt/make_auto_ptr.hpp>
 #include <fcppt/minmax_pair_impl.hpp>
 
-sanguis::draw::particle::explosion::explosion(
+sanguis::client::draw2d::particle::explosion::explosion(
 	property_map const &properties_,
 	callback const &callback_,
 	point const &p,

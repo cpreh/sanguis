@@ -3,7 +3,7 @@
 #include <sge/exception.hpp>
 
 sanguis::draw::z_ordering::type
-sanguis::draw::particle::z_ordering(
+sanguis::client::draw2d::particle::z_ordering(
 	particle_type::type const p)
 {
 	switch (p) {

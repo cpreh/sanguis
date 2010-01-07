@@ -10,7 +10,7 @@
 #include <sge/exception.hpp>
 #include <fcppt/text.hpp>
 
-sanguis::draw::particle::generator::generator(
+sanguis::client::draw2d::particle::generator::generator(
 	generation_callback const generate_object,
 	point const &pos,
 	time_type const life_time,
@@ -60,7 +60,7 @@ sanguis::draw::particle::generator::generator(
 		generate();
 }
 
-void sanguis::draw::particle::generator::generate()
+void sanguis::client::draw2d::particle::generator::generate()
 {
 	rotation_type const disp_rot = dispersion_angle();
 	point::value_type const disp_value = dispersion_value();
@@ -139,7 +139,7 @@ void sanguis::draw::particle::generator::generate()
 	add(object);
 }
 
-bool sanguis::draw::particle::generator::update(
+bool sanguis::client::draw2d::particle::generator::update(
 	time_type const delta,
 	point const &p,
 	rotation_type const r,

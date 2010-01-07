@@ -17,7 +17,7 @@
 #include <sge/image/color/init.hpp>
 #include <fcppt/optional_impl.hpp>
 
-sanguis::draw::particle::object::object(
+sanguis::client::draw2d::particle::object::object(
 	particle_type::type const _type,
 	funit const _aoe,
 	load::model::animation::context_ptr _animation_context,
@@ -68,11 +68,11 @@ sanguis::draw::particle::object::object(
 {
 }
 
-sanguis::draw::particle::object::~object()
+sanguis::client::draw2d::particle::object::~object()
 {
 }
 
-bool sanguis::draw::particle::object::update(
+bool sanguis::client::draw2d::particle::object::update(
 	time_type const delta,
 	point const &p,
 	rotation_type const r,

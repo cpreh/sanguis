@@ -1,7 +1,7 @@
 #include "properties.hpp"
 #include <fcppt/minmax_pair_impl.hpp>
 
-sanguis::draw::particle::properties::properties(
+sanguis::client::draw2d::particle::properties::properties(
 	funit const anim_speed_,
 	unsigned const spawn_initial_,
 	funit const gen_life_time_,
@@ -28,67 +28,67 @@ sanguis::draw::particle::properties::properties(
 {}
 
 sanguis::draw::funit
-sanguis::draw::particle::properties::anim_speed() const
+sanguis::client::draw2d::particle::properties::anim_speed() const
 {
 	return anim_speed_;
 }
 
 unsigned
-sanguis::draw::particle::properties::spawn_initial() const
+sanguis::client::draw2d::particle::properties::spawn_initial() const
 {
 	return spawn_initial_;
 }
 
 sanguis::draw::funit
-sanguis::draw::particle::properties::gen_life_time() const
+sanguis::client::draw2d::particle::properties::gen_life_time() const
 {
 	return gen_life_time_;
 }
 
 sanguis::draw::funit
-sanguis::draw::particle::properties::gen_frequency() const
+sanguis::client::draw2d::particle::properties::gen_frequency() const
 {
 	return gen_frequency_;
 }
 
-sanguis::draw::particle::align_type::type
-sanguis::draw::particle::properties::align() const
+sanguis::client::draw2d::particle::align_type::type
+sanguis::client::draw2d::particle::properties::align() const
 {
 	return align_;
 }
 
-sanguis::draw::particle::properties::dispersion_range const &
-sanguis::draw::particle::properties::dispersion() const
+sanguis::client::draw2d::particle::properties::dispersion_range const &
+sanguis::client::draw2d::particle::properties::dispersion() const
 {
 	return dispersion_;
 }
 
-sanguis::draw::particle::properties::speed_range const &
-sanguis::draw::particle::properties::speed() const
+sanguis::client::draw2d::particle::properties::speed_range const &
+sanguis::client::draw2d::particle::properties::speed() const
 {
 	return speed_;
 }
 
-sanguis::draw::particle::properties::rot_speed_range const &
-sanguis::draw::particle::properties::rot_speed() const
+sanguis::client::draw2d::particle::properties::rot_speed_range const &
+sanguis::client::draw2d::particle::properties::rot_speed() const
 {
 	return rot_speed_;
 }
 
 bool
-sanguis::draw::particle::properties::do_fade() const
+sanguis::client::draw2d::particle::properties::do_fade() const
 {
 	return do_fade_;
 }
 
-sanguis::draw::particle::properties::fade_range const &
-sanguis::draw::particle::properties::fade() const
+sanguis::client::draw2d::particle::properties::fade_range const &
+sanguis::client::draw2d::particle::properties::fade() const
 {
 	return fade_;
 }
 
-sanguis::draw::particle::movement_type::type
-sanguis::draw::particle::properties::movement() const
+sanguis::client::draw2d::particle::movement_type::type
+sanguis::client::draw2d::particle::properties::movement() const
 {
 	return movement_;
 }

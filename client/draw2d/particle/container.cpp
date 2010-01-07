@@ -3,7 +3,7 @@
 #include <fcppt/math/compare.hpp>
 #include <boost/foreach.hpp>
 
-sanguis::draw::particle::container::container(
+sanguis::client::draw2d::particle::container::container(
 	point const &p,
 	point const &v,
 	depth_type const depth_,
@@ -20,25 +20,25 @@ sanguis::draw::particle::container::container(
 		e)
 {}
 
-sanguis::draw::particle::container::children_container const &
-sanguis::draw::particle::container::children() const
+sanguis::client::draw2d::particle::container::children_container const &
+sanguis::client::draw2d::particle::container::children() const
 {
 	return children_;
 }
 
-sanguis::draw::particle::container::children_container &
-sanguis::draw::particle::container::children()
+sanguis::client::draw2d::particle::container::children_container &
+sanguis::client::draw2d::particle::container::children()
 {
 	return children_;
 }
 
-void sanguis::draw::particle::container::add(
+void sanguis::client::draw2d::particle::container::add(
 	base_ptr ptr)
 {
 	children_.push_back(ptr);
 }
 
-bool sanguis::draw::particle::container::update(
+bool sanguis::client::draw2d::particle::container::update(
 	time_type const delta,
 	point const &p,
 	rotation_type const r,
