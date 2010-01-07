@@ -1,11 +1,22 @@
-#ifndef SANGUIS_DRAW_MODEL_PART_FWD_HPP_INCLUDED
-#define SANGUIS_DRAW_MODEL_PART_FWD_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_PART_FWD_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_PART_FWD_HPP_INCLUDED
 
 namespace sanguis
 {
-namespace draw
+namespace client
 {
-class model_part;
+namespace draw2d
+{
+namespace entities
+{
+namespace model
+{
+
+class part;
+
+}
+}
+}
 }
 }
 

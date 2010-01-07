@@ -1,15 +1,15 @@
-#ifndef SANGUIS_DRAW_CONTAINER_HPP_INCLUDED
-#define SANGUIS_DRAW_CONTAINER_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_CONTAINER_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_ENTITIES_CONTAINER_HPP_INCLUDED
 
-#include "sprite/point.hpp"
-#include "sprite/dim.hpp"
-#include "sprite/order.hpp"
-#include "sprite/rotation_type.hpp"
-#include "sprite/normal/object.hpp"
-#include "environment_fwd.hpp"
-#include "sprite_part_index_fwd.hpp"
-#include "entity.hpp"
-#include "vector2.hpp"
+#include "with_orientation.hpp"
+#include "with_speed.hpp"
+#include "../sprite/point.hpp"
+#include "../sprite/dim.hpp"
+#include "../sprite/order.hpp"
+#include "../sprite/rotation_type.hpp"
+#include "../sprite/normal/object.hpp"
+#include "../sprite/index_fwd.hpp"
+#include "../vector2.hpp"
 #include <fcppt/math/vector/basic_decl.hpp>
 #include <sge/sprite/object_decl.hpp>
 #include <vector>
@@ -19,6 +19,8 @@ namespace sanguis
 namespace client
 {
 namespace draw2d
+{
+namespace entities
 {
 
 class container
@@ -35,16 +37,17 @@ public:
 	typedef sprite_vector::size_type size_type;
 
 	container(
-		draw::environment const &env,
-		entity_id id,
-		size_type,
+		size_type num_sprites,
 		sprite::order
 	);
 
 	~container();
 	
-	sprite::point const center() const;
-	sprite::point const pos() const;
+	sprite::point const
+	center() const;
+
+	sprite::point const
+	pos() const;
 protected:
 	typedef sprite_vector::iterator iterator;
 	typedef sprite_vector::const_iterator const_iterator;
@@ -86,12 +89,12 @@ protected:
 	// own functions
 	object &
 	at(
-		sprite_part_index const &
+		sprite::index const &
 	);
 
 	object const &
 	at(
-		sprite_part_index const &
+		sprite::index const &
 	) const;
 
 	object &
@@ -129,6 +132,7 @@ private:
 	sprite_vector sprites;
 };
 
+}
 }
 }
 }

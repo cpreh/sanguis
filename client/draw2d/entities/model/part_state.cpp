@@ -1,5 +1,5 @@
-#include "model_part_state.hpp"
-#include "model_part.hpp"
+#include "part_state.hpp"
+#include "part.hpp"
 #include "../load/model/animation.hpp"
 #include "../load/model/part.hpp"
 #include "../load/model/animation_sound.hpp"
@@ -10,11 +10,12 @@
 #include <fcppt/math/dim/structure_cast.hpp>
 
 // TODO: hier animationskram rausnehmen, ggf. friend-Beziehung wegnehmen
-sanguis::draw::model_part_state::model_part_state(
+sanguis::client::draw2d::entities::model::part_state::part_state(
 	load::model::part const &part_,
-	model_part &_ref,
+	part &_ref,
 	animation_type::type const animation_type_,
-	weapon_type::type const weapon_type_)
+	weapon_type::type const weapon_type_
+)
 :
 	ref_(_ref),
 	anim_(part_[weapon_type_][animation_type_]),
@@ -33,24 +34,27 @@ sanguis::draw::model_part_state::model_part_state(
 }
 
 sanguis::animation_type::type
-sanguis::draw::model_part_state::animation_type() const
+sanguis::client::draw2d::entities::model::part_state::animation_type() const
 {
 	return animation_type_;
 }
 
 sanguis::weapon_type::type
-sanguis::draw::model_part_state::weapon_type() const
+sanguis::client::draw2d::entities::model::part_state::weapon_type() const
 {
 	return weapon_type_;
 }
 
-void sanguis::draw::model_part_state::update()
+void
+sanguis::client::draw2d::entities::model::part_state::update()
 {
 	update_sounds();
 
-	if (!sstart || 
-	    (!start_played_ && 
-	     sstart->status() == sge::audio::sound_status::stopped))
+	if(
+		!sstart || 
+		(!start_played_ && 
+		sstart->status() == sge::audio::sound_status::stopped)
+	)
 	{
 		start_played_ = true;
 		play(
@@ -59,21 +63,25 @@ void sanguis::draw::model_part_state::update()
 	}
 }
 
-sanguis::draw::model_part_state::~model_part_state()
+sanguis::client::draw2d::entities::model::part_state::~part_state()
 {
 	play(send);
 }
 
-void sanguis::draw::model_part_state::play(
+void
+sanguis::client::draw2d::entities::model::part_state::play(
 	sge::audio::sound_ptr const s,
-	sge::audio::play_mode::type const ss)
+	sge::audio::play_mode::type const ss
+)
 {
 	if (s)
 		s->play(ss);
 }
 
-void sanguis::draw::model_part_state::update_sound(
-	sge::audio::sound_ptr const s)
+void
+sanguis::client::draw2d::entities::model::part_state::update_sound(
+	sge::audio::sound_ptr const s
+)
 {
 	if (s)
 		s->pos(
@@ -89,8 +97,10 @@ void sanguis::draw::model_part_state::update_sound(
 		);
 }
 
-void sanguis::draw::model_part_state::init_sound(
-	sge::audio::sound_ptr const s)
+void
+sanguis::client::draw2d::entities::model::part_state::init_sound(
+	sge::audio::sound_ptr const s
+)
 {
 	if (!s)
 		return;
@@ -103,7 +113,8 @@ void sanguis::draw::model_part_state::init_sound(
 	);
 }
 
-void sanguis::draw::model_part_state::update_sounds()
+void
+sanguis::client::draw2d::entities::model::part_state::update_sounds()
 {
 	update_sound(sstart);
 	update_sound(srunning);

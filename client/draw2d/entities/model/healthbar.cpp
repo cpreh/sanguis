@@ -1,10 +1,10 @@
 #include "healthbar.hpp"
-#include "z_ordering.hpp"
-#include "environment.hpp"
-#include "sprite/colored/parameters.hpp"
-#include "sprite/colored/color.hpp"
-#include "../client/id_dont_care.hpp"
-#include "../exception.hpp"
+#include "../../z_ordering.hpp"
+#include "../../sprite/colored/parameters.hpp"
+#include "../../sprite/colored/color.hpp"
+#include "../../sprite/unit.hpp"
+#include "../../../id_dont_care.hpp"
+#include "../../../../exception.hpp"
 #include <fcppt/format.hpp>
 #include <fcppt/math/almost_zero.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -17,20 +17,19 @@
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/intrusive/system_impl.hpp>
-#include <boost/none.hpp>
 #include <algorithm>
 
 namespace
 {
 
-sanguis::draw::sprite::unit const
+sanguis::client::draw2d::sprite::unit const
 	border_size = 2,
 	bar_height = 8;
 
 }
 
-sanguis::draw::healthbar::healthbar(
-	draw::environment const &env
+sanguis::client::draw2d::entities::model::healthbar::healthbar(
+	sprite::colored::system &sys
 )
 :
 	background(
@@ -39,7 +38,7 @@ sanguis::draw::healthbar::healthbar(
 			z_ordering::healthbar_lower
 		)
 		.system(
-			&env.colored_system()
+			sys
 		)
 		.elements()
 	),
@@ -49,7 +48,7 @@ sanguis::draw::healthbar::healthbar(
 			z_ordering::healthbar_upper
 		)
 		.system(
-			&env.colored_system()
+			sys
 		)
 		.elements()
 	),
@@ -59,13 +58,13 @@ sanguis::draw::healthbar::healthbar(
 	recalc_health();
 }
 
-sanguis::draw::healthbar::~healthbar()
+sanguis::client::draw2d::entities::model::healthbar::~healthbar()
 {}
 
 void
-sanguis::draw::healthbar::update_health(
-	funit const nhealth,
-	funit const nmax_health
+sanguis::client::draw2d::entities::model::healthbar::update_health(
+	health_type const nhealth,
+	health_type const nmax_health
 )
 {
 	health_ = nhealth;
@@ -74,20 +73,20 @@ sanguis::draw::healthbar::update_health(
 	recalc_health();
 }
 
-sanguis::draw::funit
-sanguis::draw::healthbar::health() const
+sanguis::draw::health_type
+sanguis::client::draw2d::entities::model::healthbar::health() const
 {
 	return health_;
 }
 
-sanguis::draw::funit
-sanguis::draw::healthbar::max_health() const
+sanguis::draw::health_type
+sanguis::client::draw2d::entities::model::healthbar::max_health() const
 {
 	return max_health_;
 }
 
 void
-sanguis::draw::healthbar::attach_to(
+sanguis::client::draw2d::entities::model::healthbar::attach_to(
 	sprite::point const &p,
 	sprite::dim const &d
 )
@@ -108,7 +107,7 @@ sanguis::draw::healthbar::attach_to(
 }
 
 void
-sanguis::draw::healthbar::pos(
+sanguis::client::draw2d::entities::model::healthbar::pos(
 	sprite::point const &pos_
 )
 {
@@ -122,7 +121,7 @@ sanguis::draw::healthbar::pos(
 }
 
 void
-sanguis::draw::healthbar::dim(
+sanguis::client::draw2d::entities::model::healthbar::dim(
 	sprite::dim const &dim_
 )
 {
@@ -138,7 +137,7 @@ sanguis::draw::healthbar::dim(
 }
 
 sanguis::draw::sprite::point const 
-sanguis::draw::healthbar::inner_pos() const
+sanguis::client::draw2d::entities::model::healthbar::inner_pos() const
 {
 	return
 		background.pos()
@@ -149,7 +148,7 @@ sanguis::draw::healthbar::inner_pos() const
 }
 
 sanguis::draw::sprite::dim const 
-sanguis::draw::healthbar::inner_dim() const
+sanguis::client::draw2d::entities::model::healthbar::inner_dim() const
 {
 	return
 		background.size()
@@ -159,14 +158,14 @@ sanguis::draw::healthbar::inner_dim() const
 		);
 }
 
-sanguis::draw::funit
-sanguis::draw::healthbar::remaining_health() const
+sanguis::draw::health_type
+sanguis::client::draw2d::entities::model::healthbar::remaining_health() const
 {
 	return health_ / max_health_;
 }
 
 void
-sanguis::draw::healthbar::recalc_health()
+sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 {
 	if(health_ > max_health_)
 		return;
@@ -179,7 +178,7 @@ sanguis::draw::healthbar::recalc_health()
 			sprite::unit
 		>(
 			static_cast<
-				funit
+				health_type
 			>(
 				inner_dim().w()
 			)
@@ -199,14 +198,14 @@ sanguis::draw::healthbar::recalc_health()
 			static_cast<
 				sge::image::color::channel8
 			>(
-				(static_cast<funit>(1) - remaining_health())
-				* static_cast<funit>(pixel_channel_max)
+				(static_cast<health_type>(1) - remaining_health())
+				* static_cast<health_type>(pixel_channel_max)
 			),
 			sge::image::color::init::green =
 			static_cast<
 				sge::image::color::channel8
 			>(
-				remaining_health() * static_cast<funit>(pixel_channel_max)
+				remaining_health() * static_cast<health_type>(pixel_channel_max)
 			),
 			sge::image::color::init::blue %= 0.0,
 			sge::image::color::init::alpha %= 1.0

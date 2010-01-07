@@ -1,16 +1,24 @@
-#ifndef SANGUIS_DRAW_HEALTHBAR_HPP_INCLUDED
-#define SANGUIS_DRAW_HEALTHBAR_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_HEALTHBAR_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_HEALTHBAR_HPP_INCLUDED
 
-#include "environment_fwd.hpp"
-#include "sprite/point.hpp"
-#include "sprite/dim.hpp"
-#include "sprite/colored/object.hpp"
+#include "healthbar_fwd.hpp"
+#include "../../sprite/point.hpp"
+#include "../../sprite/dim.hpp"
+#include "../../sprite/colored/object.hpp"
+#include "../../sprite/colored/system.hpp"
+#include "../../../health_type.hpp"
 #include <sge/sprite/object_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
-namespace draw
+namespace client
+{
+namespace draw2d
+{
+namespace entities
+{
+namespace model
 {
 
 class healthbar
@@ -18,19 +26,22 @@ class healthbar
 	FCPPT_NONCOPYABLE(healthbar)
 public:
 	explicit healthbar(
-		draw::environment const &
+		sprite::colored::system &
 	);
 
 	~healthbar();
 	
 	void
 	update_health(
-		funit health,
-		funit max_health
+		health_type health,
+		health_type max_health
 	);
 
-	funit max_health() const;
-	funit health() const;
+	health_type
+	max_health() const;
+
+	health_type
+	health() const;
 
 	void
 	attach_to(
@@ -38,22 +49,40 @@ public:
 		sprite::dim const &
 	);
 private:
-	void pos(sprite::point const &);
-	void dim(sprite::dim const &);
-	sprite::point const inner_pos() const;
-	sprite::dim const inner_dim() const;
-	funit remaining_health() const;
-	void recalc_health();
+	void
+	pos(
+		sprite::point const &
+	);
+
+	void
+	dim(
+		sprite::dim const &
+	);
+
+	sprite::point const
+	inner_pos() const;
+
+	sprite::dim const
+	inner_dim() const;
+
+	health_type	
+	remaining_health() const;
+
+	void
+	recalc_health();
 
 	sprite::colored::object
 		background,
 		foreground;
 	
-	funit
+	health_type	
 		health_,
 		max_health_;
 };
 
+}
+}
+}
 }
 }
 

@@ -1,8 +1,8 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_WITH_ORIENTATION_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_WITH_ORIENTATION_HPP_INCLUDED
 
-#include "entity.hpp"
-#include "sprite/rotation_type.hpp"
+#include "base.hpp"
+#include "../sprite/rotation_type.hpp"
 
 namespace sanguis
 {
@@ -10,10 +10,12 @@ namespace client
 {
 namespace draw2d
 {
+namespace entities
+{
 
 class with_orientation
 :
-	public virtual entity
+	public virtual base
 {
 protected:
 	with_orientation();
@@ -32,6 +34,6 @@ public:
 }
 }
 }
+}
 
 #endif
-

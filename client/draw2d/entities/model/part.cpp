@@ -1,12 +1,11 @@
-#include "model_part.hpp"
-#include "model_part_state.hpp"
-#include "sprite/dim.hpp"
-#include "../load/model/part.hpp"
-#include "../load/model/base_animation_not_found.hpp"
-#include "../log.hpp"
+#include "part.hpp"
+#include "part_state.hpp"
+#include "../../sprite/dim.hpp"
+#include "../../sprite/rotation_type.hpp"
+#include "../../../../load/model/part.hpp"
+#include "../../../../load/model/base_animation_not_found.hpp"
 #include "../exception.hpp"
 #include "../load/model/animation_context.hpp"
-#include <sge/console/var_impl.hpp>
 #include <sge/sprite/animation/texture_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
@@ -15,7 +14,6 @@
 #include <fcppt/math/is_rel_angle.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/math/vector/dim.hpp>
-#include <fcppt/log/headers.hpp>
 #include <fcppt/math/compare.hpp>
 #include <fcppt/text.hpp>
 #include <algorithm>
@@ -25,7 +23,7 @@
 namespace
 {
 
-sanguis::draw::sprite::rotation_type const
+sanguis::client::draw2d::sprite::rotation_type const
 invalid_rotation(
 	std::numeric_limits<
 		sanguis::draw::sprite::rotation_type
@@ -34,20 +32,24 @@ invalid_rotation(
 
 }
 
-sanguis::draw::model_part::model_part(
+sanguis::client::draw2d::entities::model::part::part(
 	load::model::part const& _load_part,
 	sanguis::draw::sprite::normal::object &_ref
 )
 :
 	anim_diff_clock_(),
 	desired_orientation_(
-		invalid_rotation),
+		invalid_rotation
+	),
 	load_part_(
-		_load_part),
+		_load_part
+	),
 	ref_(
-		_ref),
+		_ref
+	),
 	weapon_(
-		weapon_type::none),
+		weapon_type::none
+	),
 	state_(),
 	animation_context_(),
 	animation_(),
@@ -59,11 +61,13 @@ sanguis::draw::model_part::model_part(
 	);
 }
 
-sanguis::draw::model_part::~model_part()
+sanguis::client::draw2d::entities::model::part::~part()
 {}
 
-bool sanguis::draw::model_part::try_animation(
-	animation_type::type const atype)
+bool
+sanguis::client::draw2d::entities::model::part::try_animation(
+	animation_type::type const atype
+)
 {
 	if (weapon_ == weapon_type::size)
 		weapon_ = weapon_type::none;
@@ -75,13 +79,16 @@ bool sanguis::draw::model_part::try_animation(
 		return false;
 
 	load_animation(
-		atype);
+		atype
+	);
 
 	return true;
 }
 
-void sanguis::draw::model_part::weapon(
-	weapon_type::type const wtype)
+void
+sanguis::client::draw2d::entities::model::part::weapon(
+	weapon_type::type const wtype
+)
 {
 	// we lose the animation here
 	// which model has to reset
@@ -90,8 +97,10 @@ void sanguis::draw::model_part::weapon(
 	state_.reset();
 }
 
-void sanguis::draw::model_part::update(
-	time_type const time)
+void
+sanguis::client::draw2d::entities::model::part::update(
+	time_type const time
+)
 {
 	anim_diff_clock_.update(
 		time);
@@ -232,36 +241,42 @@ void sanguis::draw::model_part::update(
 	}
 }
 
-void sanguis::draw::model_part::orientation(
-	sprite::rotation_type rot)
+void
+sanguis::client::draw2d::entities::model::part::orientation(
+	sprite::rotation_type rot
+)
 {
 	if(!fcppt::math::is_rel_angle(rot))
 		rot = fcppt::math::abs_angle_to_rel(rot);
 
 	if(fcppt::math::compare(desired_orientation_, invalid_rotation))
 		update_orientation(rot);
+
 	desired_orientation_ = rot;
 }
 
-bool sanguis::draw::model_part::animation_ended() const
+bool
+sanguis::client::draw2d::entities::model::part::animation_ended() const
 {
 	return ended_;
 }
 
 sanguis::draw::sprite::normal::object &
-sanguis::draw::model_part::object()
+sanguis::client::draw2d::entities::model::part::object()
 {
 	return ref_;
 }
 
 sanguis::draw::sprite::normal::object const &
-sanguis::draw::model_part::object() const
+sanguis::client::draw2d::entities::model::part::object() const
 {
 	return ref_;
 }
 
-void sanguis::draw::model_part::load_animation(
-	animation_type::type const atype)
+void
+sanguis::client::draw2d::entities::model::part::load_animation(
+	animation_type::type const atype
+)
 {
 	animation_.reset();
 	animation_context_.take(
@@ -272,26 +287,32 @@ void sanguis::draw::model_part::load_animation(
 			load_part_,
 			*this, // FIXME: this can be removed now
 			atype,
-			weapon_)
+			weapon_
+		)
 			/*
 			state_
 				? state_->weapon_type()
-				: weapon_)*/);
+				: weapon_)*/
+	);
 }
 
-void sanguis::draw::model_part::update_orientation(
-	sprite::rotation_type const rot)
+void
+sanguis::client::draw2d::entities::model::part::update_orientation(
+	sprite::rotation_type const rot
+)
 {
 	ref_.rotation(
-		rot);
+		rot
+	);
 }
 
 sge::sprite::animation::loop_method::type
-sanguis::draw::model_part::loop_method(
+sanguis::client::draw2d::entities::model::part::loop_method(
 	animation_type::type const atype
 )
 {
-	switch(atype) {
+	switch(atype)
+	{
 	case animation_type::none:
 	case animation_type::walking:
 	case animation_type::attacking:
@@ -300,14 +321,15 @@ sanguis::draw::model_part::loop_method(
 	case animation_type::dying:
 	case animation_type::deploying:
 		return sge::sprite::animation::loop_method::stop_at_end;
-	default:
-		throw sge::exception(
-			FCPPT_TEXT("Invalid animation_type in model_part!"));
 	}
+
+	throw sge::exception(
+		FCPPT_TEXT("Invalid animation_type in model_part!")
+	);
 }
 
 sanguis::draw::sprite::rotation_type
-sanguis::draw::model_part::orientation() const
+sanguis::client::draw2d::entities::model::part::orientation() const
 {
 	return ref_.rotation();
 }

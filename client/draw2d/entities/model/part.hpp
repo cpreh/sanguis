@@ -1,46 +1,67 @@
-#ifndef SANGUIS_DRAW_MODEL_PART_HPP_INCLUDED
-#define SANGUIS_DRAW_MODEL_PART_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_PART_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_PART_HPP_INCLUDED
 
-#include "model_part_state_fwd.hpp"
-#include "funit.hpp"
-#include "sprite/normal/object.hpp"
-#include "sprite/normal/texture_animation.hpp"
-#include "sprite/rotation_type.hpp"
-#include "../animation_type.hpp"
-#include "../weapon_type.hpp"
-#include "../time_type.hpp"
-#include "../diff_clock.hpp"
-#include "../load/model/fwd.hpp"
+#include "part_state_fwd.hpp"
+#include "../../sprite/normal/object.hpp"
+#include "../../sprite/normal/texture_animation.hpp"
+#include "../../sprite/rotation_type.hpp"
+#include "../../../../animation_type.hpp"
+#include "../../../../weapon_type.hpp"
+#include "../../../../time_type.hpp"
+#include "../../../../diff_clock.hpp"
+#include "../../../../load/model/part_fwd.hpp"
+#include "../../../../load/model/animation_context_fwd.hpp"
 #include "../animation_state.hpp"
 #include "../load/model/animation_context_fwd.hpp"
 #include <sge/sprite/animation/loop_method.hpp>
-#include <sge/sprite/rotation_type.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <fcppt/auto_ptr.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
-namespace draw
+namespace client
+{
+namespace draw2d
+{
+namespace entities
+{
+namespace model
 {
 
-class model_part {
+class part
+{
+	FCPPT_NONCOPYABLE(part)
 public:
-	model_part(
+	part(
 		load::model::part const &,
 		sprite::normal::object &ref
 	);
 
-	~model_part();
+	~part();
 
-	bool try_animation(
-		animation_type::type);
-	void weapon(
-		weapon_type::type);
-	void update(
-		time_type);
-	void orientation(
-		sprite::rotation_type);
-	bool animation_ended() const;
+	bool
+	try_animation(
+		animation_type::type
+	);
+
+	void
+	weapon(
+		weapon_type::type
+	);
+
+	void
+	update(
+		time_type
+	);
+
+	void
+	orientation(
+		sprite::rotation_type
+	);
+
+	bool
+	animation_ended() const;
 
 	sprite::normal::object &
 	object();
@@ -48,18 +69,23 @@ public:
 	sprite::normal::object const &
 	object() const;
 private:
-	friend class model_part_state;
+	friend class part_state;
 
-	typedef fcppt::scoped_ptr<load::model::animation_context> animation_context_ptr;
+	typedef fcppt::scoped_ptr<
+		load::model::animation_context
+	> animation_context_ptr;
 	
 	typedef fcppt::auto_ptr<
 		sprite::normal::texture_animation
 	> animation_auto_ptr;
 
-	void load_animation(
-		animation_type::type);
+	void
+	load_animation(
+		animation_type::type
+	);
 	
-	void update_orientation(
+	void
+	update_orientation(
 		sprite::rotation_type
 	);
 
@@ -79,19 +105,28 @@ private:
 
 	sprite::normal::object &ref_;
 
-	weapon_type::type                       weapon_;
-	typedef fcppt::scoped_ptr<model_part_state> model_part_state_ptr;
-	model_part_state_ptr                    state_;
-	animation_context_ptr                   animation_context_;
+	weapon_type::type weapon_;
+
+	typedef fcppt::scoped_ptr<
+		part_state
+	> part_state_ptr;
+
+	part_state_ptr state_;
+
+	animation_context_ptr animation_context_;
 	
 	typedef fcppt::scoped_ptr<
 		sprite::normal::texture_animation
 	> scoped_texture_animation;
 
-	scoped_texture_animation                animation_;
-	bool                                    ended_;
+	scoped_texture_animation animation_;
+
+	bool ended_;
 };
 
+}
+}
+}
 }
 }
 
