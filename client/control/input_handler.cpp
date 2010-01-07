@@ -1,10 +1,10 @@
 #include "input_handler.hpp"
 #include "player_action.hpp"
-#include "../exception.hpp"
+#include "../../exception.hpp"
 #include <sge/input/key_pair.hpp>
 #include <fcppt/text.hpp>
 
-sanguis::client::input_handler::input_handler(
+sanguis::client::control::input_handler::input_handler(
 	post_fun const &post_message)
 :
 	post_message(post_message),
@@ -12,7 +12,7 @@ sanguis::client::input_handler::input_handler(
 	last_y(0)
 {}
 
-void sanguis::client::input_handler::input_callback(
+void sanguis::client::control::input_handler::input_callback(
 	sge::input::key_pair const &p)
 {
 	sge::input::key_code const code = p.key().code();
@@ -42,7 +42,7 @@ void sanguis::client::input_handler::input_callback(
 	}
 }
 
-void sanguis::client::input_handler::direction_event(
+void sanguis::client::control::input_handler::direction_event(
 	sge::input::key_pair const &p)
 {
 	sge::input::key_state const val(
@@ -76,7 +76,7 @@ void sanguis::client::input_handler::direction_event(
 	);
 }
 
-void sanguis::client::input_handler::rotation_event(
+void sanguis::client::control::input_handler::rotation_event(
 	sge::input::key_pair const &p)
 {
 	player_action::action_type to_send;
@@ -104,7 +104,7 @@ void sanguis::client::input_handler::rotation_event(
 	);
 }
 
-void sanguis::client::input_handler::shooting_event(
+void sanguis::client::control::input_handler::shooting_event(
 	sge::input::key_pair const &p)
 {
 	post_message(
@@ -117,7 +117,7 @@ void sanguis::client::input_handler::shooting_event(
 	);
 }
 	
-void sanguis::client::input_handler::weapon_switch_event(
+void sanguis::client::control::input_handler::weapon_switch_event(
 	sge::input::key_pair const &p)
 {
 	if(!p.value())
@@ -134,7 +134,7 @@ void sanguis::client::input_handler::weapon_switch_event(
 	);
 }
 
-void sanguis::client::input_handler::pause_unpause_event(
+void sanguis::client::control::input_handler::pause_unpause_event(
 	sge::input::key_pair const &p)
 {
 	if(!p.value())

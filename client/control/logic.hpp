@@ -25,8 +25,11 @@ namespace sanguis
 {
 namespace client
 {
+namespace control
+{
 
-class logic {
+class logic
+{
 	FCPPT_NONCOPYABLE(logic)
 public:
 	logic(
@@ -153,6 +156,7 @@ private:
 		cheat_impulse_conn_;
 };
 
+}
 }
 }
 
