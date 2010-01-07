@@ -22,8 +22,7 @@
 #include "../../messages/level_up.hpp"
 #include "../../messages/move.hpp"
 #include "../../messages/remove.hpp"
-#include "../../draw/scene_fwd.hpp"
-#include "../../draw/player_fwd.hpp"
+#include "../../draw/scene/object_fwd.hpp"
 #include "../../draw/sprite/point.hpp"
 #include "../menu_event_fwd.hpp"
 #include "../highscore/name_container.hpp"
@@ -102,14 +101,21 @@ private:
 		bool show);
 
 	sge::renderer::state::scoped renderer_state_;
+
 	music_handler music_;
+
 	fcppt::scoped_ptr<
-		draw::scene
+		draw2d::scene::object
 	> drawer;
+
 	logic logic_;
+
 	input_handler input;
+
 	fcppt::signal::auto_connection input_connection;
+
 	client::perk_chooser perk_chooser_;
+
 	fcppt::signal::scoped_connection 
 		cursor_pos_conn_,
 		cursor_show_conn_,

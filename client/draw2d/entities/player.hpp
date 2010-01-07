@@ -6,6 +6,7 @@
 #include "../sprite/rotation_type.hpp"
 #include "../vector2.hpp"
 #include "../funit.hpp"
+#include "../../../time_type.hpp"
 
 namespace sanguis
 {
