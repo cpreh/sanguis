@@ -1,6 +1,22 @@
 #include "dispatcher.hpp"
 #include "environment.hpp"
 #include "configure_entity.hpp"
+#include "../entities/with_health.hpp"
+#include "../entities/with_rotation.hpp"
+#include "../entities/with_speed.hpp"
+#include "../entities/with_weapon.hpp"
+#include "../log.hpp"
+#include "../../../messages/role_name.hpp"
+#include <fcppt/log/headers.hpp>
+#include <fcppt/dynamic_cast.hpp>
+#include <fcppt/type_name.hpp>
+#include <fcppt/text.hpp>
+#include <boost/mpl/filter_view.hpp>
+#include <boost/mpl/for_each.hpp>
+#include <boost/mpl/placeholders.hpp>
+#include <boost/mpl/transform_view.hpp>
+#include <majutsu/is_role.hpp>
+#include <typeinfo>
 
 sanguis::client::draw2d::message::dispatcher::dispatcher(
 	environment &env_
@@ -163,8 +179,12 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		return;
 	}
 	
-	entity(
-		m.get<messages::roles::entity_id>()
+	fcppt::dynamic_cast_<
+		entities::with_weapon &
+	>(
+		entity(
+			m.get<messages::roles::entity_id>()
+		)
 	).weapon(
 		static_cast<weapon_type::type>(
 			value
@@ -187,8 +207,12 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::health const &m
 )
 {
-	entity(
-		m.get<messages::roles::entity_id>()
+	fcppt::dynamic_cast_<
+		with_health &
+	>(
+		entity(
+			m.get<messages::roles::entity_id>()
+		)
 	).health(
 		m.get<messages::roles::health>()
 	);
@@ -266,8 +290,12 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::rotate const &m
 )
 {
-	entity(
-		m.get<messages::roles::entity_id>()
+	fcppt::dynamic_cast_<
+		entities::with_rotation &
+	>(
+		entity(
+			m.get<messages::roles::entity_id>()
+		)
 	).orientation(
 		m.get<messages::roles::angle>()
 	);
@@ -278,8 +306,12 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::speed const &m
 )
 {
-	entity(
-		m.get<messages::roles::entity_id>()
+	fcppt::dynamic_cast_<
+		entities::with_speed &
+	>(
+		entity(
+			m.get<messages::roles::entity_id>()
+		)
 	).speed(
 		fcppt::math::vector::structure_cast<
 			vector2
@@ -297,8 +329,12 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::start_attacking const &m
 )
 {
-	entity(
-		m.get<messages::roles::entity_id>()
+	fcppt::dynamic_cast_<
+		entities::with_weapon &
+	>(
+		entity(
+			m.get<messages::roles::entity_id>()
+		)
 	).start_attacking();
 }
 
@@ -307,8 +343,12 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::stop_attacking const &m
 )
 {
-	entity(
-		m.get<messages::roles::entity_id>()
+	fcppt::dynamic_cast_<
+		entities::with_weapon &
+	>(
+		entity(
+			m.get<messages::roles::entity_id>()
+		)
 	).stop_attacking();
 }
 
@@ -317,9 +357,15 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::start_reloading const &m
 )
 {
-	entity(
-		m.get<messages::roles::entity_id>()
-	).start_reloading();
+	fcppt::dynamic_cast_<
+		entities::with_weapon &
+	>(
+		entity(
+			m.get<messages::roles::entity_id>()
+		)
+	).reloading(
+		true
+	);
 }
 
 void
@@ -327,9 +373,15 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::stop_reloading const &m
 )
 {
-	entity(
-		m.get<messages::roles::entity_id>()
-	).stop_reloading();
+	fcppt::dynamic_cast_<
+		entities::with_weapon &
+	>(
+		entity(
+			m.get<messages::roles::entity_id>()
+		)
+	).reloading(
+		false
+	);
 }
 
 void
@@ -341,7 +393,7 @@ sanguis::client::draw2d::message::dispatcher::process_default_msg(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("Invalid message event in scene: ")
-			<< fcppt::iconv(typeid(m).name())
+			<< fcppt::type_name(typeid(m))
 	);
 }
 

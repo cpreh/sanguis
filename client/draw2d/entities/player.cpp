@@ -1,44 +1,38 @@
 #include "player.hpp"
-#include "z_ordering.hpp"
-#include "sprite_part_index.hpp"
-#include "sprite/point.hpp"
-#include "../client/next_id.hpp"
+#include "../z_ordering.hpp"
+#include "../sprite/index.hpp"
+#include "../sprite/point.hpp"
+#include <sge/sprite/object_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/angle_between.hpp>
 #include <fcppt/math/vector/is_null.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
-#include <sge/sprite/object_impl.hpp>
-#include <sge/console/var_impl.hpp>
 #include <fcppt/math/point_rotate.hpp>
-#include <boost/none.hpp>
-#include <algorithm>
-#include <cmath>
 
 namespace
 {
 
-sanguis::draw::sprite::point const
+sanguis::client::draw2d::sprite::point const
 	player_body_center(25,32),
 	player_leg_center(32,32);
 
-sanguis::draw::sprite_part_index const
+sanguis::client::draw2d::sprite::index const
 	top(1),
 	bottom(0);
 
 }
 
-sanguis::draw::player::player(
-	draw::environment const &env,
-	entity_id const id)
+sanguis::client::draw2d::entities::player::player(
+	model::parameters const &param
+)
 :
-	model(
-		env,
-		id,
+	model::object(
+		param,
 		FCPPT_TEXT("player"),
 		z_ordering::model_generic,
-		true,
-		draw::remove_action::render_dead),
+		true
+	),
 	angle_(static_cast<funit>(0)),
 	target_angle(angle_)
 {
@@ -52,49 +46,66 @@ sanguis::draw::player::player(
 }
 
 
-void sanguis::draw::player::speed(
-	vector2 const &v)
+void
+sanguis::client::draw2d::entities::player::speed(
+	vector2 const &v
+)
 {
-	model::speed(v);
+	model::object::speed(v);
+
 	if (!is_null(v))
-		model::orientation(
+		model::object::orientation(
 			*fcppt::math::vector::angle_between<funit>(
 				vector2::null(),
-				v),
-			0);
+				v
+			),
+			0
+		);
 }
 
-void sanguis::draw::player::orientation(
-	sprite::rotation_type const u)
+void
+sanguis::client::draw2d::entities::player::orientation(
+	sprite::rotation_type const u
+)
 {
-	model::orientation(u, 1); // TODO: better interface for this in model
+	model::object::orientation(u, 1); // TODO: better interface for this in model
 }
 
-void sanguis::draw::player::update(
-	time_type const time)
+void
+sanguis::client::draw2d::entities::player::update(
+	time_type const time
+)
 {
-	model::update(time);
+	model::object::update(time);
 
 	vector2 const
 		leg_center(
 			fcppt::math::vector::structure_cast<
 				vector2
 			>(
-				player_leg_center)),
+				player_leg_center
+			)
+		),
 		body_center(
 			fcppt::math::vector::structure_cast<
 				vector2
 			>(
-				player_body_center));
+				player_body_center
+			)
+		);
 
 	sprite::rotation_type const sprite_rotation = at(bottom).rotation();
 
-	vector2 const new_rotation = fcppt::math::point_rotate(
-		leg_center,
-		vector2(
-			static_cast<funit>(at(bottom).w()/2),
-			static_cast<funit>(at(bottom).h()/2)),
-		sprite_rotation);
+	vector2 const new_rotation(
+		fcppt::math::point_rotate(
+			leg_center,
+			vector2(
+				static_cast<funit>(at(bottom).w()/2),
+				static_cast<funit>(at(bottom).h()/2)
+			),
+			sprite_rotation
+		)
+	);
 
 	vector2 const
 		rot_abs = fcppt::math::vector::structure_cast<

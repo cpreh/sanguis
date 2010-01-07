@@ -1,9 +1,8 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_FACTORY_FRIEND_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_FACTORY_FRIEND_HPP_INCLUDED
 
-#include "../environment_fwd.hpp"
-#include "../entity_auto_ptr.hpp"
-#include "../../entity_id.hpp"
+#include "../entities/auto_ptr.hpp"
+#include "../entities/model/parameters_fwd.hpp"
 #include "../../friend_type.hpp" 
 
 namespace sanguis
@@ -15,10 +14,9 @@ namespace draw2d
 namespace factory
 {
 
-entity_auto_ptr
+entities::auto_ptr
 friend_(
-	environment const &,
-	entity_id,
+	entities::model::parameters const &,
 	friend_type::type
 );
 

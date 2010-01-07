@@ -1,37 +1,55 @@
-#ifndef SANGUIS_DRAW_PLAYER_HPP_INCLUDED
-#define SANGUIS_DRAW_PLAYER_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_PLAYER_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_ENTITIES_PLAYER_HPP_INCLUDED
 
-#include "environment_fwd.hpp"
-#include "model.hpp"
-#include "vector2.hpp"
-#include "sprite/rotation_type.hpp"
+#include "model/parameters_fwd.hpp"
+#include "model/object.hpp"
+#include "../sprite/rotation_type.hpp"
+#include "../vector2.hpp"
+#include "../funit.hpp"
 
 namespace sanguis
 {
-namespace draw
+namespace client
+{
+namespace draw2d
+{
+namespace entities
 {
 
-class player : public model {
+class player
+:
+	public model::object
+{
 public:
-	player(
-		draw::environment const &,
-		entity_id id);
+	explicit player(
+		model::parameters const &
+	);
 
-	void orientation(
-		sprite::rotation_type);
-	void speed(
-		vector2 const &);
+	void
+	orientation(
+		sprite::rotation_type
+	);
+
+	void
+	speed(
+		vector2 const &
+	);
 private:
 	using container::orientation;
 	using container::speed;
 
-	void update(time_type);
+	void
+	update(
+		time_type
+	);
 
 	funit
 		angle_,
 		target_angle;
 };
 
+}
+}
 }
 }
 

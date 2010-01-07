@@ -5,18 +5,20 @@
 #include "../../exception.hpp"
 #include <fcppt/text.hpp>
 
-sanguis::draw::entity_auto_ptr
-sanguis::draw::factory::client(
-	environment const &env,
-	client_messages::add const &m,
+sanguis::client::draw2d::entities::auto_ptr
+sanguis::client::draw2d::factory::client(
+	sprite::client::system &client_system_,
+	load::resource::textures const &textures_,
+	client_messages::add const &message_,
 	sge::renderer::screen_size const &screen_size
 )
 {
-	switch(m.type()) {
+	switch(message_.type())
+	{
 	case client_entity_type::cursor:
 		return simple_sprite(
-			env,
-			m.id(),
+			client_system_,
+			textures_,
 			z_ordering::cursor,
 			FCPPT_TEXT("cursor"),
 			static_cast<
@@ -26,8 +28,8 @@ sanguis::draw::factory::client(
 	// TODO: do we have to tile the background?
 	case client_entity_type::background:
 		return simple_sprite(
-			env,
-			m.id(),
+			client_system_,
+			textures_,
 			z_ordering::background,
 			FCPPT_TEXT("background"),
 			static_cast<
@@ -36,8 +38,9 @@ sanguis::draw::factory::client(
 				1
 			)
 		);
-	default:
-		throw exception(
-			FCPPT_TEXT("draw::factory::client: missing loading code!"));
 	}
+
+	throw exception(
+		FCPPT_TEXT("draw::factory::client: missing loading code!")
+	);
 }

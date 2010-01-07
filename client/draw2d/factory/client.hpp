@@ -1,9 +1,9 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_FACTORY_CLIENT_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_FACTORY_CLIENT_HPP_INCLUDED
 
-#include "../environment_fwd.hpp"
-#include "../entity_auto_ptr.hpp"
-#include "../../client_messages/add_fwd.hpp"
+#include "../entities/auto_ptr.hpp"
+#include "../sprite/client/system.hpp"
+#include "../../messages/add_fwd.hpp"
 #include <sge/renderer/screen_size.hpp>
 
 namespace sanguis
@@ -15,9 +15,10 @@ namespace draw2d
 namespace factory
 {
 
-entity_auto_ptr
+entities::auto_ptr
 client(
-	environment const &,
+	sprite::client::system &client_system_,
+	load::resource::textures const &textures_,
 	client_messages::add const &,
 	sge::renderer::screen_size const &
 );

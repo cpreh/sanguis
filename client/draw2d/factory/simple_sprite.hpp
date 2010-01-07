@@ -1,11 +1,11 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_FACTORY_SIMPLE_SPRITE_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_FACTORY_SIMPLE_SPRITE_HPP_INCLUDED
 
-#include "../environment_fwd.hpp"
-#include "../entity.hpp"
-#include "../z_ordering.hpp"
-#include "../entity_auto_ptr.hpp"
+#include "../entities/auto_ptr.hpp"
 #include "../sprite/client/repetition_type.hpp"
+#include "../sprite/client/system.hpp"
+#include "../z_ordering.hpp"
+#include "../../../load/resource/textures_fwd.hpp"
 #include <fcppt/string.hpp>
 
 namespace sanguis
@@ -17,10 +17,10 @@ namespace draw2d
 namespace factory
 {
 
-entity_auto_ptr
+entities::auto_ptr
 simple_sprite(
-	environment const &,
-	entity_id,
+	sprite::client::system &,
+	load::resource::textures const &,
 	z_ordering::type,
 	fcppt::string const &texture_name,
 	sprite::client::repetition_type

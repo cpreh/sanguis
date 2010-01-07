@@ -132,7 +132,7 @@ private:
 		bool
 	);
 
-
+	// own functions
 	void
 	change_animation();
 

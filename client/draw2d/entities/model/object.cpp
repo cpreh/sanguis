@@ -78,45 +78,63 @@ sanguis::client::draw2d::entities::model::object::health() const
 	return health_;
 }
 
-void sanguis::client::draw2d::entities::model::object::update(
-	time_type const time)
+void
+sanguis::client::draw2d::entities::model::object::update(
+	time_type const time
+)
 {
 	container::update(time);
 
 	if(healthbar_)
 		healthbar_->attach_to(
 			master().pos(),
-			master().size());
+			master().size()
+		);
 
-	BOOST_FOREACH(model_part &p, parts)
+	BOOST_FOREACH(
+		model_part &p,
+		parts
+	)
 		p.update(time);
 }
 
-void sanguis::client::draw2d::entities::model::object::orientation(
-	sprite::rotation_type const rot)
+void
+sanguis::client::draw2d::entities::model::object::orientation(
+	sprite::rotation_type const rot
+)
 {
-	BOOST_FOREACH(model_part &p, parts)
+	BOOST_FOREACH(
+		model_part &p,
+		parts
+	)
 		p.orientation(rot);
 }
 
-void sanguis::client::draw2d::entities::model::object::orientation(
+void
+sanguis::client::draw2d::entities::model::object::orientation(
 	sprite::rotation_type const rot,
-	size_type const index)
+	size_type const index
+)
 {
 	parts.at(index).orientation(rot);	
 }
 
-bool sanguis::client::draw2d::entities::model::object::may_be_removed() const
+bool
+sanguis::client::draw2d::entities::model::object::may_be_removed() const
 {
-	return entity::may_be_removed()
+	return
+		entity::may_be_removed()
 		&& animations_ended();
 }
 
-void sanguis::client::draw2d::entities::model::object::speed(
-	vector2 const &s)
+void
+sanguis::client::draw2d::entities::model::object::speed(
+	vector2 const &s
+)
 {
 	vector2 const old_speed(
-		speed());
+		speed()
+	);
 	
 	container::speed(s);
 
@@ -126,28 +144,34 @@ void sanguis::client::draw2d::entities::model::object::speed(
 
 sanguis::client::draw2d::entities::model::object_part &
 sanguis::client::draw2d::entities::model::object::part(
-	sprite_part_index const &idx)
+	sprite_part_index const &idx
+)
 {
 	return parts.at(idx.get());
 }
 
-bool sanguis::client::draw2d::entities::model::object::dead() const
+bool
+sanguis::client::draw2d::entities::model::object::dead() const
 {
 	return health() <= 0;
 }
 
-bool sanguis::client::draw2d::entities::model::object::walking() const
+bool
+sanguis::client::draw2d::entities::model::object::walking() const
 {
 	return !is_null(speed());
 }
 
-bool sanguis::client::draw2d::entities::model::object::has_health() const
+bool
+sanguis::client::draw2d::entities::model::object::has_health() const
 {
 	return max_health() > 0;
 }
 
-void sanguis::client::draw2d::entities::model::object::health(
-	funit const health)
+void
+sanguis::client::draw2d::entities::model::object::health(
+	health_type const health
+)
 {
 	health_ = health;
 	update_healthbar();
@@ -156,83 +180,85 @@ void sanguis::client::draw2d::entities::model::object::health(
 		return;
 	
 	healthbar_.reset();
+
 	change_animation();
+
 	speed(vector2::null()); // FIXME
 }
 
-void sanguis::client::draw2d::entities::model::object::max_health(
-	funit const max_health)
+void
+sanguis::client::draw2d::entities::model::object::max_health(
+	health_type const max_health
+)
 {
 	max_health_ = max_health;
 	update_healthbar();
 }
 
-void sanguis::client::draw2d::entities::model::object::weapon(
-	weapon_type::type const weapon_)
+void
+sanguis::client::draw2d::entities::model::object::weapon(
+	weapon_type::type const weapon_
+)
 {
 	BOOST_FOREACH(model_part &p, parts)
 		p.weapon(weapon_);
 	change_animation();
 }
 
-void sanguis::client::draw2d::entities::model::object::start_attacking()
+void
+sanguis::client::draw2d::entities::model::object::attacking(
+	bool const nattacking_
+)
 {
-	if(attacking)
+	if(nattacking_ == attacking_)
 		FCPPT_LOG_WARNING(
 			log(),
-			fcppt::log::_ << FCPPT_TEXT("start_attacking(): already attacking!"));
-	attacking = true;
+			fcppt::log::_ << FCPPT_TEXT("attacking(): value already set!")
+		);
+
+	attacking_ = nattacking_;
 
 	change_animation();
 }
 
-void sanguis::client::draw2d::entities::model::object::stop_attacking()
+void
+sanguis::client::draw2d::entities::model::object::reloading(
+	bool const nreloading_
+)
 {
-	if(!attacking)
+	if(nreloading_ == reloading_)
 		FCPPT_LOG_WARNING(
 			log(),
-			fcppt::log::_ << FCPPT_TEXT("stop_attacking(): already not attacking!"));
-	attacking = false;
+			fcppt::log::_ << FCPPT_TEXT("reloading(): value already set!")
+		);
+	
+	reloading_ = nreloading_;
 
 	change_animation();
 }
 
-void sanguis::client::draw2d::entities::model::object::start_reloading()
-{
-	if(reloading)
-		FCPPT_LOG_WARNING(
-			log(),
-			fcppt::log::_ << FCPPT_TEXT("start_reloading(): already reloading!"));
-	reloading = true;
-
-	change_animation();
-}
-
-void sanguis::client::draw2d::entities::model::object::stop_reloading()
-{
-	if(!reloading)
-		FCPPT_LOG_WARNING(
-			log(),
-			fcppt::log::_ << FCPPT_TEXT("stop_reloading(): already not reloading!"));
-	reloading = false;
-
-	change_animation();
-}
-
-void sanguis::client::draw2d::entities::model::object::change_animation()
+void
+sanguis::client::draw2d::entities::model::object::change_animation()
 {
 	change_animation(
-		animation());
+		animation()
+	);
 }
 
-void sanguis::client::draw2d::entities::model::object::change_animation(
-	animation_type::type const nanim)
+void
+sanguis::client::draw2d::entities::model::object::change_animation(
+	animation_type::type const nanim
+)
 {
 	BOOST_FOREACH(model_part &p, parts)
 	{
 		animation_type::type part_anim(
-			nanim);
-		while(!p.try_animation(part_anim))
+			nanim
+		);
+
+		while(
+			!p.try_animation(part_anim)
+		)
 			part_anim = fallback_anim(part_anim);
 	}
 }

@@ -7,18 +7,18 @@
 #include "../../exception.hpp"
 #include <fcppt/text.hpp>
 
-sanguis::draw::entity_auto_ptr
-sanguis::draw::factory::friend_(
-	environment const &env,
-	entity_id const id,
-	friend_type::type const etype)
+sanguis::client::draw2d::entities::auto_ptr
+sanguis::client::draw2d::factory::friend_(
+	entities::model::parameters const &param,
+	friend_type::type const etype
+)
 {
-	switch(etype) {
+	switch(etype)
+	{
 	case friend_type::spider:
-		return entity_auto_ptr(
+		return entities::auto_ptr(
 			new model(
-				env,
-				id,
+				param,
 				load::friend_name(
 					etype
 				),
@@ -28,15 +28,14 @@ sanguis::draw::factory::friend_(
 			)
 		);
 	case friend_type::sentry:
-		return entity_auto_ptr(
+		return entities::auto_ptr(
 			new sentry(
-				env,
-				id
+				param
 			)
 		);
-	default:
-		throw exception(
-			FCPPT_TEXT("Missing factory code in draw::factory::friend!")
-		);
 	}
+
+	throw exception(
+		FCPPT_TEXT("Missing factory code in client::draw2d::factory::friend!")
+	);
 }

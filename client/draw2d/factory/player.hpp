@@ -16,8 +16,7 @@ namespace factory
 
 entity_auto_ptr
 player(
-	environment const &,
-	entity_id
+	environment const &
 );
 
 }
