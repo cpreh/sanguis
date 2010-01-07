@@ -1,26 +1,37 @@
-#ifndef SANGUIS_DRAW_SENTRY_HPP_INCLUDED
-#define SANGUIS_DRAW_SENTRY_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_SENTRY_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_ENTITIES_SENTRY_HPP_INCLUDED
 
-#include "model.hpp"
+#include "model/object.hpp"
+#include "model/parameters_fwd.hpp"
 
 namespace sanguis
 {
-namespace draw
+namespace client
+{
+namespace draw2d
+{
+namespace entities
 {
 
-class sentry : public model {
+class sentry
+:
+	public model::object
+{
 public:
-	sentry(
-		draw::environment const &,
-		entity_id);
+	explicit sentry(
+		model::parameters const &
+	);
 	
-	void orientation(
-		sprite::rotation_type);
+	void
+	orientation(
+		sprite::rotation_type
+	);
 private:
 	using container::orientation;
 };
 
-
+}
+}
 }
 }
 

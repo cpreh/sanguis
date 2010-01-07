@@ -11,7 +11,8 @@ namespace load
 
 fcppt::string const
 enemy_name(
-	enemy_type::type);
+	enemy_type::type
+);
 
 }
 }

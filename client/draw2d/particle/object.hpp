@@ -4,6 +4,7 @@
 #include "base.hpp"
 #include "../sprite/particle/object.hpp"
 #include "../sprite/particle/texture_animation.hpp"
+#include "../sprite/particle/system.hpp"
 #include "../../particle_type.hpp"
 #include "../../diff_clock.hpp"
 #include "../../load/model/animation.hpp"
@@ -30,7 +31,7 @@ public:
 		funit aoe,
 		load::model::animation::context_ptr,
 		optional_time fade_time,
-		draw::environment const &
+		sprite::particle::system &
 	);
 
 	~object();

@@ -8,14 +8,13 @@ sanguis::client::draw2d::particle::base::base(
 	depth_type depth_,
 	rotation_type rot_,
 	rotation_type rot_vel_,
-	draw::environment const &e)
+)
 :
 	pos_(pos_),
 	vel_(vel_),
 	depth_(depth_),
 	rot_(rot_),
-	rot_vel_(rot_vel_),
-	e(e)
+	rot_vel_(rot_vel_)
 {}
 
 sanguis::client::draw2d::particle::base::~base()
@@ -120,10 +119,4 @@ sanguis::client::draw2d::particle::base::rotation_type &
 sanguis::client::draw2d::particle::base::rot_vel()
 {
 	return rot_vel_;
-}
-
-sanguis::draw::environment const &
-sanguis::client::draw2d::particle::base::environment() const
-{
-	return e;
 }

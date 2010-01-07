@@ -1,6 +1,7 @@
 #ifndef SANGUIS_LOAD_MODEL_COLLECTION_HPP_INCLUDED
 #define SANGUIS_LOAD_MODEL_COLLECTION_HPP_INCLUDED
 
+#include "collection_fwd.hpp"
 #include "../resource/context_fwd.hpp"
 #include "model.hpp"
 #include <fcppt/string.hpp>
@@ -13,14 +14,17 @@ namespace load
 namespace model
 {
 
-class collection {
+class collection
+{
 public:
 	model const &
 	operator[](
-		fcppt::string const &) const;
+		fcppt::string const &
+	) const;
 private:
 	explicit collection(
-		resource::context const &);
+		resource::context const &
+	);
 
 	friend class context;
 

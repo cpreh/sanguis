@@ -1,32 +1,43 @@
-#ifndef SANGUIS_DRAW_BULLET_HPP_INCLUDED
-#define SANGUIS_DRAW_BULLET_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_BULLET_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_ENTITIES_BULLET_HPP_INCLUDED
 
-#include "model.hpp"
-#include "environment_fwd.hpp"
-#include "sprite/point.hpp"
+#include "model/object.hpp"
+#include "model/parameters_fwd.hpp"
+#include "../sprite/point.hpp"
 #include <fcppt/string.hpp>
 #include <fcppt/optional_decl.hpp>
 
 namespace sanguis
 {
-namespace draw
+namespace client
+{
+namespace draw2d
+{
+namespace entities
 {
 
-class bullet : public model {
+class bullet
+:
+	public model::object
+{
 public:
 	bullet(
-		draw::environment const &,
-		entity_id id,
+		model::parameters const &,
 		fcppt::string const &name
 	);
 private:
-	void update(time_type);
+	void
+	update(
+		time_type
+	);
 
 	fcppt::optional<
 		sprite::point
 	> origin;
 };
 
+}
+}
 }
 }
 

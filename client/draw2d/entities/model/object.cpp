@@ -1,11 +1,10 @@
 #include "object.hpp"
 #include "part.hpp"
+#include "parameters.hpp"
 #include "../../log.hpp"
 #include "../../sprite/index.hpp"
 #include "../../../id_dont_care.hpp"
 #include "../../../../load/model/collection.hpp"
-#include "../../../../load/model/context.hpp"
-#include "../../../../load/context.hpp"
 #include "../../../../exception.hpp"
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/headers.hpp>
@@ -18,18 +17,18 @@
 #include <ostream>
 
 sanguis::client::draw2d::entities::model::object::object(
-	draw::environment const &env,
-	entity_id const id,
+	parameters const &param_,
 	fcppt::string const &name,
 	sprite::order const order,
-	bool const show_healthbar,
-	draw::remove_action::type const remove_action_
+	bool const show_healthbar
 )
 :
+	base(),
+	with_health(),
+	with_weapon(),
 	container(
-		env,
-		id,
-		env.context().models()()[name].size(),
+		param_.normal_system(),
+		param_.collection()[name].size()
 		order
 	),
 	attacking(false),
@@ -40,18 +39,17 @@ sanguis::client::draw2d::entities::model::object::object(
 		show_healthbar
 		?
 			new healthbar(
-				env
+				param_.colored_system()
 			)
 		:
 			0
-	),
-	remove_action_(remove_action_)
+	)
 {
 	part_vector::size_type i(0);
 
 	BOOST_FOREACH(
 		load::model::model::value_type const &p,
-		env.context().models()()[name]
+		param_.collection()[name]
 	)
 		parts.push_back(
 			new model_part(
@@ -112,12 +110,6 @@ bool sanguis::client::draw2d::entities::model::object::may_be_removed() const
 {
 	return entity::may_be_removed()
 		&& animations_ended();
-}
-
-sanguis::draw::remove_action::type
-sanguis::client::draw2d::entities::model::object::remove_action() const
-{
-	return remove_action_; 
 }
 
 void sanguis::client::draw2d::entities::model::object::speed(
@@ -247,24 +239,29 @@ void sanguis::client::draw2d::entities::model::object::change_animation(
 
 sanguis::animation_type::type
 sanguis::client::draw2d::entities::model::object::fallback_anim(
-	animation_type::type const anim) const
+	animation_type::type const anim
+) const
 {
-	switch(anim) {
+	switch(anim)
+	{
 	case animation_type::none:
 		return animation_type::size;
 	case animation_type::attacking:
 	case animation_type::reloading:
 		return walking()
-		? animation_type::walking
-		: animation_type::none;
+			?
+				animation_type::walking
+			:
+				animation_type::none;
 	case animation_type::deploying:
 	case animation_type::walking:
 	case animation_type::dying:
 		return animation_type::none;
-	default:
-		throw exception(
-			FCPPT_TEXT("Invalid animation in fallback_anim!"));
 	}
+
+	throw exception(
+		FCPPT_TEXT("Invalid animation in fallback_anim!")
+	);
 }
 
 sanguis::animation_type::type

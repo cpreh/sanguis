@@ -4,9 +4,11 @@
 
 fcppt::string const
 sanguis::load::enemy_name(
-	enemy_type::type const etype)
+	enemy_type::type const etype
+)
 {
-	switch(etype) {
+	switch(etype)
+	{
 	case enemy_type::wolf_black:
 		return FCPPT_TEXT("wolf_black");
 	case enemy_type::wolf_brown:
@@ -23,8 +25,9 @@ sanguis::load::enemy_name(
 		return FCPPT_TEXT("skeleton");
 	case enemy_type::maggot:
 		return FCPPT_TEXT("maggot");
-	default:
-		throw exception(
-			FCPPT_TEXT("load::enemy_name: missing loading code!"));
 	}
+
+	throw exception(
+		FCPPT_TEXT("load::enemy_name: missing loading code!")
+	);
 }

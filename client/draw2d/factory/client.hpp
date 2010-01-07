@@ -1,5 +1,5 @@
-#ifndef SANGUIS_DRAW_FACTORY_CLIENT_HPP_INCLUDED
-#define SANGUIS_DRAW_FACTORY_CLIENT_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_FACTORY_CLIENT_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_FACTORY_CLIENT_HPP_INCLUDED
 
 #include "../environment_fwd.hpp"
 #include "../entity_auto_ptr.hpp"
@@ -8,7 +8,9 @@
 
 namespace sanguis
 {
-namespace draw
+namespace client
+{
+namespace draw2d
 {
 namespace factory
 {
@@ -19,6 +21,8 @@ client(
 	client_messages::add const &,
 	sge::renderer::screen_size const &
 );
+
+}
 }
 }
 }

@@ -14,7 +14,8 @@ namespace load
 namespace model
 {
 
-class context {
+class context
+{
 	FCPPT_NONCOPYABLE(context)
 public:
 	collection const &

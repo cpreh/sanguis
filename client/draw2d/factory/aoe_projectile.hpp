@@ -1,26 +1,32 @@
-#ifndef SANGUIS_DRAW_FACTORY_AOE_PROJECTILE_HPP_INCLUDED
-#define SANGUIS_DRAW_FACTORY_AOE_PROJECTILE_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_FACTORY_AOE_PROJECTILE_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_FACTORY_AOE_PROJECTILE_HPP_INCLUDED
 
-#include "../entity_auto_ptr.hpp"
-#include "../environment_fwd.hpp"
+#include "../entities/auto_ptr.hpp"
+#include "../entities/model/parameters_fwd.hpp"
+#include "../sprite/particle/system.hpp"
+#include "../insert_callback.hpp"
 #include "../funit.hpp"
-#include "../../entity_id.hpp"
-#include "../../aoe_projectile_type.hpp"
+#include "../../../aoe_projectile_type.hpp"
 
 namespace sanguis
 {
-namespace draw
+namespace client
+{
+namespace draw2d
 {
 namespace factory
 {
 
-entity_auto_ptr
+entities::auto_ptr
 aoe_projectile(
-	environment const &,
-	entity_id,
+	model::parameters const &,
+	sprite::particle::system &,
+	insert_callback const &,
 	aoe_projectile_type::type,
-	funit aoe);
+	funit aoe
+);
 
+}
 }
 }
 }

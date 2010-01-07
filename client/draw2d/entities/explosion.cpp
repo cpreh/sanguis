@@ -1,5 +1,4 @@
 #include "explosion.hpp"
-#include "environment.hpp"
 #include "particle/generator.hpp"
 #include "particle/explosion.hpp"
 #include "particle/properties.hpp"
@@ -13,7 +12,6 @@
 #include "../load/model/model.hpp"
 #include "../load/model/context.hpp"
 #include "../load/model/collection.hpp"
-#include "../client/next_id.hpp"
 #include "../resolution.hpp"
 #include "../media_path.hpp"
 #include "../animation_type.hpp"
@@ -113,27 +111,29 @@ sanguis::draw::particle::property_container const prop_ = boost::assign::map_lis
 }
 
 sanguis::draw::explosion::explosion(
-	draw::environment const &env,
+	sprite::particle::system &particle_system_,
 	sprite::point const &pos_,
-	funit const _aoe)
+	funit const _aoe
+)
 :
-	entity(
-		env,
-		client::next_id()),
+	base(),
 	pos_(pos_),
 	particles(
 		particle::point::null(),
 		particle::point::null(),
 		particle::depth(0),
 		particle::rotation(0),
-		particle::rotation(0),
-		environment()),
+		particle::rotation(0)
+	),
 	properties_(
-		prop_),
+		prop_
+	),
 	ended(
-		false),
+		false
+	),
 	aoe_(
-		_aoe)
+		_aoe
+	)
 {
 	// TODO: we have to pass the aoe here!
 	sge::renderer::screen_size const screen_sz(
@@ -156,7 +156,7 @@ sanguis::draw::explosion::explosion(
 			static_cast<particle::depth>(0),
 			static_cast<particle::rotation>(0), // no rotation and...
 			static_cast<particle::rotation>(0), // ...no rotation speed
-			environment()
+			particle_system_
 		)
 	);
 
@@ -166,17 +166,21 @@ sanguis::draw::explosion::explosion(
 sanguis::draw::explosion::~explosion()
 {}
 
-void sanguis::draw::explosion::update(
-	time_type const delta)
+void
+sanguis::draw::explosion::update(
+	time_type const delta
+)
 {
-	ended = particles.update(
-		delta,
-		fcppt::math::vector::structure_cast<
-			particle::point
-		>(pos_),
-		//particle::point::null(),
-		static_cast<particle::rotation>(0),
-		static_cast<particle::depth>(0));
+	ended =
+		particles.update(
+			delta,
+			fcppt::math::vector::structure_cast<
+				particle::point
+			>(pos_),
+			//particle::point::null(),
+			static_cast<particle::rotation>(0),
+			static_cast<particle::depth>(0)
+		);
 }
 
 sanguis::draw::particle::base_ptr
@@ -195,12 +199,15 @@ sanguis::draw::explosion::generate_explosion()
 			static_cast<particle::depth>(0),
 			static_cast<particle::rotation>(0), // no rotation and...
 			static_cast<particle::rotation>(0), // ...no rotation speed
-			environment()));
+			environment()
+		)
+	);
 }
 
 sanguis::draw::particle::base_ptr
 sanguis::draw::explosion::generate_particle(
-	particle_type::type const t)
+	particle_type::type const t
+)
 {
 	load::model::animation::context_ptr anim = 
 		environment().context().models()()
@@ -219,7 +226,8 @@ sanguis::draw::explosion::generate_particle(
 	particle::base_ptr ptr;
 	
 	particle::properties const &prop(
-		properties_[t]);
+		properties_[t]
+	);
 
 	if (!prop.do_fade())
 		ptr.reset(
@@ -261,7 +269,8 @@ sanguis::draw::explosion::generate_particle(
 	return ptr;
 }
 
-bool sanguis::draw::explosion::may_be_removed() const
+bool
+sanguis::draw::explosion::may_be_removed() const
 {
 	return ended;
 }

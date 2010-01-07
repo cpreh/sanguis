@@ -8,6 +8,7 @@
 #include "../sprite/order.hpp"
 #include "../sprite/rotation_type.hpp"
 #include "../sprite/normal/object.hpp"
+#include "../sprite/normal/system.hpp"
 #include "../sprite/index_fwd.hpp"
 #include "../vector2.hpp"
 #include <fcppt/math/vector/basic_decl.hpp>
@@ -37,6 +38,7 @@ public:
 	typedef sprite_vector::size_type size_type;
 
 	container(
+		sprite::normal::system &,
 		size_type num_sprites,
 		sprite::order
 	);

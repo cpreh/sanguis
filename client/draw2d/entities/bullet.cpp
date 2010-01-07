@@ -1,7 +1,7 @@
 #include "bullet.hpp"
-#include "unit.hpp"
-#include "z_ordering.hpp"
-#include "sprite_part_index.hpp"
+#include "../sprite/unit.hpp"
+#include "../sprite/index.hpp"
+#include "../z_ordering.hpp"
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/center.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
@@ -15,33 +15,33 @@
 namespace
 {
 
-sanguis::draw::sprite_part_index const
+sanguis::client::draw2d::sprite::index const
 	tail(1);
 
 }
 
-sanguis::draw::bullet::bullet(
-	draw::environment const &env,
-	entity_id id,
-	fcppt::string const &name)
+sanguis::client::draw2d::entities::bullet::bullet(
+	model::parameters const &param,
+	fcppt::string const &name
+)
 :
 	model(
-		env,
-		id,
+		param,
 		name,
 		z_ordering::bullet,
-		false,
-		draw::remove_action::remove
+		false
 	),
 	origin()
 {
 	at(tail).w(
-		static_cast<unit>(3)
+		static_cast<sprite::unit>(3)
 	); // TODO: which value is best here?
 }
 
-void sanguis::draw::bullet::update(
-	time_type const time)
+void
+sanguis::client::draw2d::entities::bullet::update(
+	time_type const time
+)
 {
 	if (!origin)
 		origin = center();
@@ -72,7 +72,8 @@ void sanguis::draw::bullet::update(
 		newpos( 
 			is_null(speed())
 			? pos
-			: pos - normalize(speed())*static_cast<funit>(0.5) * length(newsize));
+			: pos - normalize(speed())*static_cast<funit>(0.5) * length(newsize)
+		);
 
 	sge::sprite::center(
 		at(tail),

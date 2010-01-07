@@ -22,7 +22,7 @@ sanguis::client::draw2d::particle::object::object(
 	funit const _aoe,
 	load::model::animation::context_ptr _animation_context,
 	optional_time const _fade_total,
-	draw::environment const &_e
+	sprite::particle::system &particle_system_
 )
 :
 	base(
@@ -30,13 +30,12 @@ sanguis::client::draw2d::particle::object::object(
 		point::null(),
 		depth_type(0),
 		rotation_type(0),
-		rotation_type(0),
-		_e
+		rotation_type(0)
 	),
 	sprite_(
 		sprite::particle::parameters()
 		.system(
-			&_e.particle_system()
+			&particle_system_
 		)
 		.order(
 			z_ordering(
@@ -72,11 +71,13 @@ sanguis::client::draw2d::particle::object::~object()
 {
 }
 
-bool sanguis::client::draw2d::particle::object::update(
+bool
+sanguis::client::draw2d::particle::object::update(
 	time_type const delta,
 	point const &p,
 	rotation_type const r,
-	depth_type const d)
+	depth_type const d
+)
 {
 	animation_context_->update();
 	if (!animation_ && animation_context_->is_finished())

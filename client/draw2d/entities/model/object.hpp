@@ -4,6 +4,7 @@
 #include "object_fwd.hpp"
 #include "healthbar_fwd.hpp"
 #include "part_fwd.hpp"
+#include "parameters_fwd.hpp"
 #include "../container.hpp"
 #include "../with_health.hpp"
 #include "../with_weapon.hpp"
@@ -37,6 +38,7 @@ class object
 {
 public:
 	object(
+		parameters const &,
 		fcppt::string const &name,
 		sprite::order,
 		bool needs_healthbar

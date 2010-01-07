@@ -8,16 +8,16 @@ sanguis::client::draw2d::particle::container::container(
 	point const &v,
 	depth_type const depth_,
 	rotation_type const rot_,
-	rotation_type const rot_vel_,
-	draw::environment const &e)
+	rotation_type const rot_vel_
+)
 :
 	base(
 		p,
 		v,
 		depth_,
 		rot_,
-		rot_vel_,
-		e)
+		rot_vel_
+	)
 {}
 
 sanguis::client::draw2d::particle::container::children_container const &

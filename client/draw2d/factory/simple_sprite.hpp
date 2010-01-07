@@ -1,5 +1,5 @@
-#ifndef SANGUIS_DRAW_FACTORY_SIMPLE_SPRITE_HPP_INCLUDED
-#define SANGUIS_DRAW_FACTORY_SIMPLE_SPRITE_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_FACTORY_SIMPLE_SPRITE_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_FACTORY_SIMPLE_SPRITE_HPP_INCLUDED
 
 #include "../environment_fwd.hpp"
 #include "../entity.hpp"
@@ -10,7 +10,9 @@
 
 namespace sanguis
 {
-namespace draw
+namespace client
+{
+namespace draw2d
 {
 namespace factory
 {
@@ -24,6 +26,7 @@ simple_sprite(
 	sprite::client::repetition_type
 );
 
+}
 }
 }
 }

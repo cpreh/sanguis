@@ -1,20 +1,20 @@
 #include "sentry.hpp"
-#include "z_ordering.hpp"
-#include "sprite_part_index.hpp"
-#include "../load/friend_name.hpp"
+#include "../z_ordering.hpp"
+#include "../sprite/index.hpp"
+#include "../../../load/friend_name.hpp"
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/intrusive/system_impl.hpp>
 
 namespace
 {
 
-sanguis::draw::sprite_part_index const
+sanguis::client::draw2d::sprite::index const
 	top(1),
 	bottom(0);
 
 }
 
-sanguis::draw::sentry::sentry(
+sanguis::client::draw2d::entities::sentry::sentry(
 	draw::environment const &env,
 	entity_id const id)
 :
@@ -25,8 +25,7 @@ sanguis::draw::sentry::sentry(
 			friend_type::sentry
 		),
 		z_ordering::model_generic,
-		true,
-		draw::remove_action::render_dead
+		true
 	)
 {
 	at(bottom).order(z_ordering::player_lower);
@@ -34,8 +33,9 @@ sanguis::draw::sentry::sentry(
 }
 
 void
-sanguis::draw::sentry::orientation(
-	sprite::rotation_type const rot)
+sanguis::client::draw2d::entities::sentry::orientation(
+	sprite::rotation_type const rot
+)
 {
 	model::orientation(rot, 1);
 }

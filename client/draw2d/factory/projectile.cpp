@@ -1,26 +1,25 @@
 #include "projectile.hpp"
-#include "../bullet.hpp"
-#include "../../exception.hpp"
+#include "../entities/bullet.hpp"
+#include "../../../exception.hpp"
 #include <fcppt/text.hpp>
 
-sanguis::draw::entity_auto_ptr
-sanguis::draw::factory::projectile(
-	environment const &env,
-	entity_id const id,
-	projectile_type::type const ptype)
+sanguis::client::draw2d::entities::auto_ptr
+sanguis::client::draw2d::factory::projectile(
+	entities::model::parameters const &param_
+	projectile_type::type const ptype
+)
 {
 	switch(ptype) {
 	case projectile_type::simple_bullet:
-		return entity_auto_ptr(
-			new bullet(
-				env,
-				id,
+		return entities::auto_ptr(
+			new entities::bullet(
+				param_,
 				FCPPT_TEXT("bullet")
 			)
 		);
-	default:
-		throw exception(
-			FCPPT_TEXT("draw::factory::projectile: missing loading code!")
-		);
 	}
+
+	throw exception(
+		FCPPT_TEXT("draw::factory::projectile: missing loading code!")
+	);
 }

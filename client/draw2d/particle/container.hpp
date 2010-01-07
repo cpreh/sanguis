@@ -17,13 +17,15 @@ class container : public base
 {
 public:
 	typedef boost::ptr_list<base> children_container;
+
 	container(
 		point const &pos,
 		point const &speed,
 		depth_type,
 		rotation_type,
-		rotation_type,
-		draw::environment const &);
+		rotation_type
+	);
+
 	children_container const &children() const;
 	children_container &children();
 	void add(base_ptr ptr);

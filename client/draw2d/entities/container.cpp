@@ -14,16 +14,14 @@
 #include <boost/none.hpp>
 
 sanguis::draw::container::container(
-	draw::environment const &env,
-	entity_id const id,
+	sprite::normal::system &normal_system,
 	size_type const sz,
 	sprite::order const order
 )
 :
-	entity(
-		env,
-		id
-	),
+	base(),
+	with_orientation(),
+	with_speed(),
 	speed_(vector2::null()),
 	pos_(vector2::null())
 {
@@ -34,7 +32,7 @@ sanguis::draw::container::container(
 			object(
 				sprite::normal::parameters()
 				.system(
-					&env.normal_system()
+					&normal_system_
 				)
 				.order(
 					order
