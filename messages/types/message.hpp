@@ -44,6 +44,7 @@ enum type {
 	player_stop_shooting,
 	player_unpause,
 	remove,
+	remove_id,
 	resize,
 	rotate,
 	speed,

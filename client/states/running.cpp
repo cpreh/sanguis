@@ -132,25 +132,33 @@ sanguis::client::states::running::draw(
 )
 {
 	drawer->draw(t.delta());
+
 	perk_chooser_.process();
 }
 
 void 
 sanguis::client::states::running::process(
-	tick_event const &t)
+	tick_event const &t
+)
 {
 	context<machine>().dispatch();
+
 	context<machine>().resources().update(
-		t.delta());
+		t.delta()
+	);
+
 	context<machine>().sound_pool().update();
+
 	music_.process();
 }
 
 void 
 sanguis::client::states::running::pause(
-	bool const b)
+	bool const b
+)
 {
 	logic_.pause(b);
+
 	drawer->pause(b);
 }
 
@@ -191,23 +199,30 @@ sanguis::client::states::running::operator()(
 		m.get<messages::roles::entity_id>()
 	);
 
+	input.active(
+		true
+	);
+
 	return discard_event();
 }
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	messages::disconnect const &)
+	messages::disconnect const &
+)
 {
 	return transit<menu>();
 }
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	messages::give_weapon const &m)
+	messages::give_weapon const &m
+)
 {
 	logic_.give_weapon(
 		m
 	);
+
 	return discard_event();
 }
 
@@ -243,7 +258,8 @@ sanguis::client::states::running::operator()(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	messages::available_perks const &m)
+	messages::available_perks const &m
+)
 {
 	perk_chooser_.perks(
 		perk_cast(
@@ -256,7 +272,8 @@ sanguis::client::states::running::operator()(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	messages::level_up const &m)
+	messages::level_up const &m
+)
 {
 	perk_chooser_.level_up(
 		static_cast<level_type>(

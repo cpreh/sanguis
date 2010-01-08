@@ -42,6 +42,8 @@ private:
 	direction_y(
 		client::control::key_scale
 	);
+
+	client::control::direction_vector direction_;
 };
 
 }

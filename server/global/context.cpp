@@ -14,6 +14,7 @@
 #include "../cheat.hpp"
 #include "../send_available_perks.hpp"
 #include "../log.hpp"
+#include "../../messages/remove_id.hpp"
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/object.hpp>
@@ -317,6 +318,13 @@ sanguis::server::global::context::remove_player(
 	player_id const id_
 )
 {
+	send_unicast_(
+		player_id_,
+		messages::create(
+			messages::remove_id()
+		)
+	);
+
 	players_.erase(
 		id_
 	);

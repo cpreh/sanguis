@@ -80,16 +80,19 @@ private:
 	void
 	render_systems();
 
-	draw::entity &	
+	entities::base &	
 	insert(
-		entity_auto_ptr,
+		entities::auto_ptr,
 		entity_id
 	);
 
-	draw::entity &
+	entities::base &
 	entity(
 		entity_id
 	);
+
+	entities::base *
+	own_player();
 	
 	sge::renderer::device_ptr const rend_;
 

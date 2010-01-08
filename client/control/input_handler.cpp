@@ -5,17 +5,33 @@
 #include <fcppt/text.hpp>
 
 sanguis::client::control::input_handler::input_handler(
-	post_fun const &post_message)
+	post_fun const &post_message
+)
 :
+	active_(false),
 	post_message(post_message),
 	last_x(0),
 	last_y(0)
 {}
 
-void sanguis::client::control::input_handler::input_callback(
-	sge::input::key_pair const &p)
+void
+sanguis::client::control::input_handler::active(
+	bool const nactive_
+)
 {
+	active_ = nactive_;
+}
+
+void
+sanguis::client::control::input_handler::input_callback(
+	sge::input::key_pair const &p
+)
+{
+	if(!active_)
+		return;
+
 	sge::input::key_code const code = p.key().code();
+
 	switch(code) {
 	case sge::input::kc::key_a:
 	case sge::input::kc::key_d:

@@ -23,6 +23,11 @@ public:
 	explicit input_handler(
 		post_fun const &
 	);
+
+	void
+	active(
+		bool
+	);
 	
 	void
 	input_callback(
@@ -53,6 +58,8 @@ private:
 	pause_unpause_event(
 		sge::input::key_pair const &
 	);
+
+	bool active_;
 
 	post_fun const post_message;
 

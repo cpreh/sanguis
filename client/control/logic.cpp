@@ -240,21 +240,6 @@ void
 sanguis::client::control::logic::update_rotation()
 {
 	// FIXME: the rotation is still handled in the cursor
-/*
-	fcppt::optional<
-		messages::types::space_unit
-	> const rotation(
-		fcppt::math::vector::angle_between<
-			messages::types::space_unit
-		>(
-			player_center,
-			cursor_->pos()
-		)
-	);
-
-	if(!rotation || !rotation_timer.update_b())
-		return;
-*/
 
 	if(!rotation_timer.update_b())
 		return;

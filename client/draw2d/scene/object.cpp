@@ -48,6 +48,15 @@ sanguis::client::draw2d::scene::object::object(
 			)
 		)
 	),
+	control_environment_(
+		fcppt::make_auto_ptr<
+			control_environment
+		>(
+			std::tr1::ref(
+				*this
+			)
+		)
+	),
 	message_dispatcher_(
 		fcppt::make_auto_ptr<
 			message::dispatcher
@@ -325,4 +334,21 @@ sanguis::client::draw2d::scene::object::entity(
 				id
 			)
 		);
+}
+
+sanguis::client::draw2d::entities::base *
+sanguis::client::draw2d::scene::object::own_player()
+{
+	entity_map::iterator const it(
+		entities.find(
+			player_id_
+		)
+	);
+
+	return
+		it == entities.end()
+		?
+			0
+		:
+			it->second;
 }
