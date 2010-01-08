@@ -37,8 +37,9 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 {
 	configure_new_object(
 		factory::aoe_projectile(
-			environment(),
-			m.get<messages::roles::entity_id>(),
+			env_.model_parameters(),
+			env_.particle_system(),
+			env_.insert_callback(),
 			SANGUIS_CAST_ENUM(
 				aoe_projectile_type,
 				m.get<messages::roles::aoe_projectile>()
@@ -56,8 +57,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 {
 	configure_new_object(
 		factory::enemy(
-			environment(),
-			m.get<messages::roles::entity_id>(),
+			env_.model_parameters(),
 			SANGUIS_CAST_ENUM(
 				enemy_type,
 				m.get<messages::roles::enemy>()
@@ -74,8 +74,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 {
 	configure_new_object(
 		factory::friend_(
-			environment(),
-			m.get<messages::roles::entity_id>(),
+			env_.model_parameters(),
 			SANGUIS_CAST_ENUM(
 				friend_type,
 				m.get<messages::roles::friend_>()
@@ -92,8 +91,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 {
 	configure_new_object(
 		factory::pickup(
-			environment(),
-			m.get<messages::roles::entity_id>(),
+			env_.model_parameters(),
 			SANGUIS_CAST_ENUM(
 				pickup_type,
 				m.get<messages::roles::pickup>()
@@ -129,7 +127,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 {
 	configure_new_object(
 		factory::projectile(
-			environment(),
+			env_.model_parameters(),
 			SANGUIS_CAST_ENUM(
 				projectile_type::type<
 				m.get<messages::roles::projectile>()
@@ -146,7 +144,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 {
 	configure_new_object(
 		factory::weapon_pickup(
-			environment(),
+			env_.model_parameters(),
 			SANGUIS_CAST_ENUM(
 				weapon_type,
 				m.get<messages::roles::weapon>()

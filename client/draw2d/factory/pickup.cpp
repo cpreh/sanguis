@@ -1,5 +1,5 @@
 #include "pickup.hpp"
-#include "../model.hpp"
+#include "../entities/model/object.hpp"
 #include "../z_ordering.hpp"
 #include "../../pickup_type.hpp"
 #include "../../load/pickup_name.hpp"
@@ -11,25 +11,27 @@ namespace
 
 fcppt::string const
 get_texture(
-	sanguis::pickup_type::type);
+	sanguis::pickup_type::type
+);
 
 }
 
-sanguis::draw::entity_auto_ptr
-sanguis::draw::factory::pickup(
-	environment const &env,
-	entity_id const id,
-	pickup_type::type const ptype)
+sanguis::client::draw2d::entities::auto_ptr
+sanguis::client::draw2d::factory::pickup(
+	entities::model::parameters const &param_,
+	pickup_type::type const ptype
+)
 {
-	return entity_auto_ptr(
-		new model(
-			env,
-			id,
+	return entities::auto_ptr(
+		new entities::model::object(
+			param_,
 			get_texture(
-				ptype),
+				ptype
+			),
 			z_ordering::pickup,
-			false,
-			remove_action::remove));
+			false
+		)
+	);
 }
 
 namespace
@@ -37,9 +39,11 @@ namespace
 
 fcppt::string const
 get_texture(
-	sanguis::pickup_type::type const ptype)
+	sanguis::pickup_type::type const ptype
+)
 {
-	switch(ptype) {
+	switch(ptype)
+	{
 	case sanguis::pickup_type::monster:
 	case sanguis::pickup_type::health:
 		return sanguis::load::pickup_name(ptype);

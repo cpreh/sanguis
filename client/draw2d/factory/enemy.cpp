@@ -1,26 +1,23 @@
 #include "enemy.hpp"
-#include "../model.hpp"
+#include "../entities/model/object.hpp"
 #include "../z_ordering.hpp"
 #include "../../load/enemy_name.hpp"
 #include "../../enemy_type.hpp"
 
-sanguis::draw::entity_auto_ptr
-sanguis::draw::factory::enemy(
-	environment const &env,
-	entity_id const id,
+sanguis::client::draw2d::entities::auto_ptr
+sanguis::client::draw2d::factory::enemy(
+	entities::model::parameters const &param_,
 	enemy_type::type const etype
 )
 {
-	return entity_auto_ptr(
-		new model(
-			env,
-			id,
+	return entities::auto_ptr(
+		new entities::model::object(
+			param_,
 			load::enemy_name(
 				etype
 			),
 			z_ordering::model_generic,
-			false,
-			remove_action::render_dead
+			false
 		)
 	);
 }

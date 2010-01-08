@@ -57,3 +57,28 @@ sanguis::client::draw2d::scene::message_environment::level(
 		level_
 	);
 }
+
+sanguis::client::draw2d::entities::model::parameters const &
+sanguis::client::draw2d::scene::message_environment::model_parameters() const
+{
+	return model::paramters(
+	);		
+}
+
+sanguis::client::draw2d::sprite::particle::system &
+sanguis::client::draw2d::scene::message_environment::particle_system() const
+{
+	return object_.particle_system();
+}
+
+sanguis::client::draw2d::insert_callback const &
+sanguis::client::draw2d::scene::message_environment::insert_callback() const
+{
+	return object_.insert_callback();
+}
+
+sanguis::client::draw2d::transform_callback const &
+sanguis::client::draw2d::scene::message_environment::transform_callback() const
+{
+	return object_.transform_callback();
+}

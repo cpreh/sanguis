@@ -3,6 +3,10 @@
 
 #include "../entities/base_fwd.hpp"
 #include "../entities/auto_ptr.hpp"
+#include "../entities/model/parameters_fwd.hpp"
+#include "../sprite/particle/system.hpp"
+#include "../insert_callback.hpp"
+#include "../transform_callback.hpp"
 #include "../../exp_type.hpp"
 #include "../../level_type.hpp"
 #include "../../../entity_id.hpp"
@@ -43,6 +47,18 @@ public:
 	level(
 		level_type
 	) = 0;
+
+	virtual entities::model::parameters const &
+	model_parameters() const = 0;
+
+	virtual sprite::particle::system &
+	particle_system() const = 0;
+
+	virtual draw2d::insert_callback const &
+	insert_callback() const = 0;
+
+	virtual draw2d::transform_callback const &
+	transform_callback() const = 0;
 
 	virtual ~environment();
 };

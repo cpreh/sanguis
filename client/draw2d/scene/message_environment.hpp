@@ -49,6 +49,18 @@ private:
 		level_type
 	);
 
+	entities::model::parameters const &
+	model_parameters() const;
+
+	sprite::particle::system &
+	particle_system() const;
+
+	draw2d::insert_callback const &
+	insert_callback() const;
+
+	draw2d::transform_callback const &
+	transform_callback() const;
+
 	object &scene_;
 
 	hud &hud_;

@@ -91,7 +91,15 @@ private:
 		entity_id
 	);
 
-	entities::base *
+	void
+	transform(
+		sprite::point const &
+	);
+
+	draw2d::transform_callback const &
+	transform_callback() const;
+
+	entities::base &
 	own_player();
 	
 	sge::renderer::device_ptr const rend_;
