@@ -16,7 +16,7 @@ class add
 public:
 	add(
 		entity_id,
-		client_entity_type::type
+		entity_type::type
 	);
 
 	entity_id

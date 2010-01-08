@@ -21,6 +21,7 @@
 #include "../../messages/base.hpp"
 #include "../../messages/highscore.hpp"
 #include "../../messages/assign_id.hpp"
+#include "../../messages/remove_id.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../messages/give_weapon.hpp"
 #include "../../messages/available_perks.hpp"
@@ -92,6 +93,11 @@ public:
 	boost::statechart::result
 	operator()(
 		messages::assign_id const &
+	);
+
+	boost::statechart::result
+	operator()(
+		messages::remove_id const &
 	);
 
 	boost::statechart::result

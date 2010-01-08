@@ -3,7 +3,7 @@
 
 #include "../entities/auto_ptr.hpp"
 #include "../sprite/client/system.hpp"
-#include "../../messages/add_fwd.hpp"
+#include "../../entity_type.hpp"
 #include <sge/renderer/screen_size.hpp>
 
 namespace sanguis
@@ -19,7 +19,7 @@ entities::auto_ptr
 client(
 	sprite::client::system &client_system_,
 	load::resource::textures const &textures_,
-	client_messages::add const &,
+	entity_type::type,	
 	sge::renderer::screen_size const &
 );
 

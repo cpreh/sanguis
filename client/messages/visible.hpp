@@ -5,23 +5,31 @@
 
 namespace sanguis
 {
-namespace client_messages
+namespace client
+{
+namespace messages
 {
 
-class visible {
+class visible
+{
 public:
 	visible(
 		entity_id,
-		bool visible_);
+		bool visible_
+	);
 
-	entity_id id() const;
+	entity_id
+	id() const;
 
-	bool get() const;
+	bool
+	get() const;
 private:
 	entity_id const id_;
+
 	bool const visible_;
 };
 
+}
 }
 }
 

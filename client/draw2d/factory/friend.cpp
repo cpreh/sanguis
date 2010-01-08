@@ -13,7 +13,9 @@ sanguis::client::draw2d::factory::friend_(
 	friend_type::type const etype
 )
 {
-	switch(etype)
+	switch(
+		etype
+	)
 	{
 	case friend_type::spider:
 		return entities::auto_ptr(

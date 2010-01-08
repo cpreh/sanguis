@@ -3,7 +3,6 @@
 #include "../weapons/factory.hpp"
 #include "../weapons/weapon.hpp"
 #include "../environment/object.hpp"
-#include "../../messages/give_weapon.hpp"
 #include "../../messages/change_weapon.hpp"
 #include "../../messages/create.hpp"
 #include "../../exception.hpp"

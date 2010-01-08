@@ -336,19 +336,10 @@ sanguis::client::draw2d::scene::object::entity(
 		);
 }
 
-sanguis::client::draw2d::entities::base *
+sanguis::client::draw2d::entities::base &
 sanguis::client::draw2d::scene::object::own_player()
 {
-	entity_map::iterator const it(
-		entities.find(
-			player_id_
-		)
+	return entity(
+		player_id_
 	);
-
-	return
-		it == entities.end()
-		?
-			0
-		:
-			it->second;
 }

@@ -5,12 +5,14 @@
 #include "../message_event.hpp"
 #include "../menu_event.hpp"
 #include "../log.hpp"
+#include "../invalid_id.hpp"
 #include "../cursor/object.hpp"
 #include "../../client_entity_type.hpp"
 #include "../../client_messages/add.hpp"
 #include "../../client_messages/visible.hpp"
 #include "../../messages/call/object.hpp"
 #include "../../messages/assign_id.hpp"
+#include "../../messages/remove_assign_id.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../messages/give_weapon.hpp"
 #include "../../messages/available_perks.hpp"
@@ -20,6 +22,7 @@
 #include "../../draw/scene.hpp"
 #include "../../load/context.hpp"
 #include "../../tick_event.hpp"
+#include "../../cast_enum.hpp"
 #include <sge/audio/pool.hpp>
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/var.hpp>
@@ -168,8 +171,9 @@ sanguis::client::states::running::react(
 )
 {
 	static messages::call::object<
-		boost::mpl::vector8<
+		boost::mpl::vector9<
 			messages::assign_id,
+			messages::remove_id,
 			messages::disconnect,
 			messages::give_weapon,
 			messages::highscore,
@@ -195,12 +199,28 @@ sanguis::client::states::running::operator()(
 	messages::assign_id const &m
 )
 {
-	logic_.player_id(
-		m.get<messages::roles::entity_id>()
+	drawer.player_id(
+		m.get<messages::entity_id>()
 	);
 
 	input.active(
 		true
+	);
+
+	return discard_event();
+}
+
+boost::statechart::result
+sanguis::client::states::running::operator()(
+	messages::remove_id const &
+)
+{
+	drawer.player_id(
+		invalid_id()
+	);
+
+	input.active(
+		false
 	);
 
 	return discard_event();
@@ -219,8 +239,11 @@ sanguis::client::states::running::operator()(
 	messages::give_weapon const &m
 )
 {
-	logic_.give_weapon(
-		m
+	logic_.give_player_weapon(
+		SANGUIS_CAST_ENUM(
+			weapon_type,
+			m.get<messages::roles::weapon>()
+		)
 	);
 
 	return discard_event();
@@ -286,12 +309,6 @@ sanguis::client::states::running::operator()(
 	return discard_event();
 }
 
-sanguis::entity_id
-sanguis::client::states::running::player_id() const
-{
-	return logic_.player_id();
-}
-
 sanguis::client::perk_chooser &
 sanguis::client::states::running::perk_chooser()
 {
@@ -308,20 +325,24 @@ sanguis::client::states::running::handle_default_msg(
 	return discard_event();
 }
 
-void sanguis::client::states::running::send_message(
-	messages::auto_ptr m)
+void
+sanguis::client::states::running::send_message(
+	messages::auto_ptr m
+)
 {
 	context<machine>().send(
-		m);
+		m
+	);
 }
 
-void sanguis::client::states::running::send_perk_choose(
-	perk_type::type const m)
+void
+sanguis::client::states::running::send_perk_choose(
+	perk_type::type const m
+)
 {
 	send_message(
 		messages::create(
 			messages::player_choose_perk(
-				player_id(),
 				m
 			)
 		)

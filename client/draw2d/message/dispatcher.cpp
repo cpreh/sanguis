@@ -7,6 +7,7 @@
 #include "../entities/with_weapon.hpp"
 #include "../log.hpp"
 #include "../../../messages/role_name.hpp"
+#include "../../../cast_enum.hpp"
 #include <fcppt/log/headers.hpp>
 #include <fcppt/dynamic_cast.hpp>
 #include <fcppt/type_name.hpp>
@@ -38,9 +39,8 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		factory::aoe_projectile(
 			environment(),
 			m.get<messages::roles::entity_id>(),
-			static_cast<
-				aoe_projectile_type::type
-			>(
+			SANGUIS_CAST_ENUM(
+				aoe_projectile_type,
 				m.get<messages::roles::aoe_projectile>()
 			),
 			m.get<messages::roles::aoe>()
@@ -58,9 +58,8 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		factory::enemy(
 			environment(),
 			m.get<messages::roles::entity_id>(),
-			static_cast<
-				enemy_type::type
-			>(
+			SANGUIS_CAST_ENUM(
+				enemy_type,
 				m.get<messages::roles::enemy>()
 			)
 		),
@@ -77,9 +76,8 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		factory::friend_(
 			environment(),
 			m.get<messages::roles::entity_id>(),
-			static_cast<
-				friend_type::type
-			>(
+			SANGUIS_CAST_ENUM(
+				friend_type,
 				m.get<messages::roles::friend_>()
 			)
 		),
@@ -96,9 +94,8 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		factory::pickup(
 			environment(),
 			m.get<messages::roles::entity_id>(),
-			static_cast<
-				pickup_type::type
-			>(
+			SANGUIS_CAST_ENUM(
+				pickup_type,
 				m.get<messages::roles::pickup>()
 			)
 		),
@@ -112,10 +109,16 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 )
 {
 	configure_new_object(
-		factory::player(
-			environment()
-		),
-		m
+		m.get<messages::roles::id>() == env_.own_player_id()
+		?
+			factory::own_player(
+				env_.model_parameters(),
+				env_.transform_callback()	
+			)
+		:
+			factory::player(
+				env_.model_parameters()
+			)
 	);
 }
 
@@ -127,9 +130,8 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	configure_new_object(
 		factory::projectile(
 			environment(),
-			static_cast<
-				projectile_type::type
-			>(
+			SANGUIS_CAST_ENUM(
+				projectile_type::type<
 				m.get<messages::roles::projectile>()
 			)
 		),
@@ -145,9 +147,8 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	configure_new_object(
 		factory::weapon_pickup(
 			environment(),
-			static_cast<
-				weapon_type::type
-			>(
+			SANGUIS_CAST_ENUM(
+				weapon_type,
 				m.get<messages::roles::weapon>()
 			)
 		),
@@ -160,22 +161,6 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	messages::change_weapon const &m
 )
 {
-	messages::types::enum_ const value(
-		m.get<messages::roles::weapon>()
-	);
-	
-	if(
-		value >= static_cast<messages::types::enum_>(weapon_type::size)
-	)
-	{
-		FCPPT_LOG_WARNING(
-			log(),
-			fcppt::log::_ << FCPPT_TEXT("Invalid change_weapon message: Value out of range!")
-		);
-
-		return;
-	}
-	
 	fcppt::dynamic_cast_<
 		entities::with_weapon &
 	>(
@@ -183,8 +168,9 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			m.get<messages::roles::entity_id>()
 		)
 	).weapon(
-		static_cast<weapon_type::type>(
-			value
+		SANGUIS_CAST_ENUM(
+			weapon_type,
+			m.get<messages::roles::weapon>()
 		)
 	);
 }

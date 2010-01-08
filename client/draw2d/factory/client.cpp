@@ -9,13 +9,15 @@ sanguis::client::draw2d::entities::auto_ptr
 sanguis::client::draw2d::factory::client(
 	sprite::client::system &client_system_,
 	load::resource::textures const &textures_,
-	client_messages::add const &message_,
+	entity_type::type const type_,
 	sge::renderer::screen_size const &screen_size
 )
 {
-	switch(message_.type())
+	switch(
+		type_
+	)
 	{
-	case client_entity_type::cursor:
+	case entity_type::cursor:
 		return simple_sprite(
 			client_system_,
 			textures_,
@@ -23,10 +25,12 @@ sanguis::client::draw2d::factory::client(
 			FCPPT_TEXT("cursor"),
 			static_cast<
 				sprite::client::repetition_type
-			>(1)
+			>(
+				1
+			)
 		);
 	// TODO: do we have to tile the background?
-	case client_entity_type::background:
+	case entity_type::background:
 		return simple_sprite(
 			client_system_,
 			textures_,

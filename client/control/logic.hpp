@@ -44,11 +44,6 @@ public:
 	);
 
 	void
-	move(
-		messages::move const &
-	);
-
-	void
 	pause(
 		bool
 	);

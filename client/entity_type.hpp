@@ -3,12 +3,18 @@
 
 namespace sanguis
 {
+namespace client
+{
 
-namespace client_entity_type {
-enum type {	
+namespace client_entity_type
+{
+enum type
+{
 	cursor,
-	background
+	background,
+	size
 };
+}
 
 }
 }

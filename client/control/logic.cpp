@@ -152,18 +152,12 @@ sanguis::client::control::logic::~logic()
 
 void
 sanguis::client::control::logic::give_player_weapon(
-	messages::give_weapon const &m
+	weapon_type::type const wt
 )
 {
-	weapon_type::type const wt(
-		static_cast<
-			weapon_type::type
-		>(
-			m.get<messages::roles::weapon>()
-		)
-	);
-
-	owned_weapons.at(wt) = true;
+	owned_weapons.at(
+		wt
+	) = true;
 
 	// we don't own any weapon so take this one
 	if(current_weapon == weapon_type::size)
