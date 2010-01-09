@@ -11,6 +11,10 @@ sanguis::client::draw2d::factory::projectile(
 {
 	switch(ptype)
 	{
+	case projectile_type::aoe:
+	case projectile_type::melee:
+	case projectile_type::size:
+		break;
 	case projectile_type::simple_bullet:
 		return entities::auto_ptr(
 			new entities::bullet(

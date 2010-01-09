@@ -24,7 +24,6 @@ sanguis::client::draw2d::entities::model::object::object(
 	bool const show_healthbar
 )
 :
-	base(),
 	container(
 		param_.normal_system(),
 		param_.collection()[name].size(),

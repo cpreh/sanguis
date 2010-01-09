@@ -1,7 +1,6 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_WEAPON_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_WEAPON_HPP_INCLUDED
 
-#include "base.hpp"
 #include "../../../weapon_type.hpp"
 
 namespace sanguis
@@ -14,8 +13,6 @@ namespace entities
 {
 
 class with_weapon
-:
-	public virtual base
 {
 protected:
 	with_weapon();

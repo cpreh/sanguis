@@ -1,7 +1,6 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_SPEED_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_SPEED_HPP_INCLUDED
 
-#include "base.hpp"
 #include "../vector2.hpp"
 
 namespace sanguis
@@ -14,8 +13,6 @@ namespace entities
 {
 
 class with_speed
-:
-	public virtual base
 {
 protected:
 	with_speed();

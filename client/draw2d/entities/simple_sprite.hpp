@@ -21,7 +21,7 @@ namespace entities
 
 class simple_sprite
 :
-	public virtual base,
+	public base,
 	public with_visibility
 {
 public:
