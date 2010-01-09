@@ -6,10 +6,12 @@ namespace sanguis
 
 namespace aoe_projectile_type
 {
-enum type {
+enum type
+{
 	aoe_damage,
 	rocket,
-	grenade
+	grenade,
+	size
 };
 
 }

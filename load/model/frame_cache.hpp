@@ -1,6 +1,7 @@
 #ifndef SANGUIS_LOAD_MODEL_FRAME_CACHE_HPP_INCLUDED
 #define SANGUIS_LOAD_MODEL_FRAME_CACHE_HPP_INCLUDED
 
+#include "frmae_cache_fwd.hpp"
 #include "frame_cache_value.hpp"
 #include <vector>
 

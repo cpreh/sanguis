@@ -4,6 +4,7 @@
 #include "global_parameters.hpp"
 #include "frame_cache.hpp"
 #include "animation_sound_fwd.hpp"
+#include "animation_context_ptr.hpp"
 #include "../resource/texture_context.hpp"
 #include "../resource/texture_identifier.hpp"
 #include "../resource/context_fwd.hpp"
@@ -25,14 +26,10 @@ namespace model
 
 class animation {
 public:
-	typedef fcppt::auto_ptr<
-		animation_context
-	> context_ptr;
-
 	animation_sound const &
 	sounds() const;
 
-	context_ptr load() const;
+	animation_context_ptr load() const;
 private:
 	animation(
 		sge::parse::json::object const &,

@@ -12,7 +12,7 @@ namespace draw2d
 namespace sprite
 {
 
-typedef draw::funit float_unit;
+typedef draw2d::funit float_unit;
 
 }
 }

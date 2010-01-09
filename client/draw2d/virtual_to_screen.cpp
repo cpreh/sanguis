@@ -4,7 +4,7 @@
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 
-sanguis::draw::sprite::point const
+sanguis::client::draw2d::sprite::point const
 sanguis::client::draw2d::virtual_to_screen(
 	sge::renderer::screen_size const &ss,
 	messages::types::pos const &pos
@@ -17,7 +17,7 @@ sanguis::client::draw2d::virtual_to_screen(
 	);
 }
 
-sanguis::draw::sprite::dim const
+sanguis::client::draw2d::sprite::dim const
 sanguis::client::draw2d::virtual_to_screen(
 	sge::renderer::screen_size const &ss,
 	messages::types::dim const &dim

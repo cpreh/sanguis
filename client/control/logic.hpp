@@ -3,6 +3,7 @@
 
 #include "player_action_fwd.hpp"
 #include "environment_fwd.hpp"
+#include "key_scale.hpp"
 #include "../send_callback.hpp"
 #include "../../cheat_type.hpp"
 #include "../../weapon_type.hpp"
@@ -27,7 +28,7 @@ class logic
 public:
 	logic(
 		send_callback const &,
-		environment const &,
+		environment &,
 		sge::console::object &
 	);
 
@@ -106,7 +107,7 @@ private:
 
 	send_callback const send;
 
-	environment const &environment_;
+	environment &environment_;
 
 	typedef fcppt::function::object<
 		void (key_scale)

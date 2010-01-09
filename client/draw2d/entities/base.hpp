@@ -26,6 +26,9 @@ public:
 		time_type
 	) = 0;
 
+	virtual void
+	decay();
+
 	virtual bool
 	may_be_removed() const;
 	

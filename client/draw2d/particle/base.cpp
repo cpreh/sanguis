@@ -5,9 +5,9 @@
 sanguis::client::draw2d::particle::base::base(
 	point const &pos_,
 	point const &vel_,
-	depth_type depth_,
-	rotation_type rot_,
-	rotation_type rot_vel_,
+	depth_type const depth_,
+	rotation_type const rot_,
+	rotation_type const rot_vel_
 )
 :
 	pos_(pos_),

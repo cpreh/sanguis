@@ -2,12 +2,26 @@
 #include "environment.hpp"
 #include "configure_entity.hpp"
 #include "../entities/with_health.hpp"
-#include "../entities/with_rotation.hpp"
+#include "../entities/with_orientation.hpp"
 #include "../entities/with_speed.hpp"
 #include "../entities/with_weapon.hpp"
+#include "../factory/aoe_projectile.hpp"
+#include "../factory/enemy.hpp"
+#include "../factory/friend.hpp"
+#include "../factory/pickup.hpp"
+#include "../factory/projectile.hpp"
+#include "../factory/player.hpp"
+#include "../factory/own_player.hpp"
+#include "../factory/weapon_pickup.hpp"
 #include "../log.hpp"
+#include "../virtual_to_screen.hpp"
 #include "../../../messages/role_name.hpp"
+#include "../../../messages/base.hpp"
 #include "../../../cast_enum.hpp"
+#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/dynamic_cast.hpp>
 #include <fcppt/type_name.hpp>
@@ -30,9 +44,9 @@ sanguis::client::draw2d::message::dispatcher::~dispatcher()
 {
 }
 
-void
+sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	messages::add_aoe_projectile const &m
+	sanguis::messages::add_aoe_projectile const &m
 )
 {
 	configure_new_object(
@@ -42,17 +56,17 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			env_.insert_callback(),
 			SANGUIS_CAST_ENUM(
 				aoe_projectile_type,
-				m.get<messages::roles::aoe_projectile>()
+				m.get<sanguis::messages::roles::aoe_projectile>()
 			),
-			m.get<messages::roles::aoe>()
+			m.get<sanguis::messages::roles::aoe>()
 		),
 		m
 	);
 }
 
-void
+sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	messages::add_enemy const &m
+	sanguis::messages::add_enemy const &m
 )
 {
 	configure_new_object(
@@ -60,16 +74,16 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			env_.model_parameters(),
 			SANGUIS_CAST_ENUM(
 				enemy_type,
-				m.get<messages::roles::enemy>()
+				m.get<sanguis::messages::roles::enemy>()
 			)
 		),
 		m
 	);
 }
 
-void
+sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	messages::add_friend const &m
+	sanguis::messages::add_friend const &m
 )
 {
 	configure_new_object(
@@ -77,16 +91,16 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			env_.model_parameters(),
 			SANGUIS_CAST_ENUM(
 				friend_type,
-				m.get<messages::roles::friend_>()
+				m.get<sanguis::messages::roles::friend_>()
 			)
 		),
 		m
 	);
 }
 
-void
+sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	messages::add_pickup const &m
+	sanguis::messages::add_pickup const &m
 )
 {
 	configure_new_object(
@@ -94,20 +108,20 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			env_.model_parameters(),
 			SANGUIS_CAST_ENUM(
 				pickup_type,
-				m.get<messages::roles::pickup>()
+				m.get<sanguis::messages::roles::pickup>()
 			)
 		),
 		m
 	);
 }
 
-void
+sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	messages::add_player const &m
+	sanguis::messages::add_player const &m
 )
 {
 	configure_new_object(
-		m.get<messages::roles::id>() == env_.own_player_id()
+		m.get<sanguis::messages::roles::entity_id>() == env_.own_player_id()
 		?
 			factory::own_player(
 				env_.model_parameters(),
@@ -116,30 +130,31 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		:
 			factory::player(
 				env_.model_parameters()
-			)
+			),
+		m
 	);
 }
 
-void
+sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	messages::add_projectile const &m
+	sanguis::messages::add_projectile const &m
 )
 {
 	configure_new_object(
 		factory::projectile(
 			env_.model_parameters(),
 			SANGUIS_CAST_ENUM(
-				projectile_type::type<
-				m.get<messages::roles::projectile>()
+				projectile_type,
+				m.get<sanguis::messages::roles::projectile>()
 			)
 		),
 		m
 	);
 }
 
-void
+sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	messages::add_weapon_pickup const &m
+	sanguis::messages::add_weapon_pickup const &m
 )
 {
 	configure_new_object(
@@ -147,227 +162,231 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			env_.model_parameters(),
 			SANGUIS_CAST_ENUM(
 				weapon_type,
-				m.get<messages::roles::weapon>()
+				m.get<sanguis::messages::roles::weapon>()
 			)
 		),
 		m
 	);
 }
 
-void
+sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	messages::change_weapon const &m
+	sanguis::messages::change_weapon const &m
 )
 {
 	fcppt::dynamic_cast_<
 		entities::with_weapon &
 	>(
 		entity(
-			m.get<messages::roles::entity_id>()
+			m.get<sanguis::messages::roles::entity_id>()
 		)
 	).weapon(
 		SANGUIS_CAST_ENUM(
 			weapon_type,
-			m.get<messages::roles::weapon>()
+			m.get<sanguis::messages::roles::weapon>()
 		)
 	);
 }
 
-void
+sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	messages::experience const &m
+	sanguis::messages::experience const &m
 )
 {
-	env_->experience(
-		m.get<messages::roles::experience>()
+	env_.experience(
+		m.get<sanguis::messages::roles::experience>()
 	);
 }
 
-void
+sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	messages::health const &m
+	sanguis::messages::health const &m
 )
 {
 	fcppt::dynamic_cast_<
-		with_health &
+		entities::with_health &
 	>(
 		entity(
-			m.get<messages::roles::entity_id>()
+			m.get<sanguis::messages::roles::entity_id>()
 		)
 	).health(
-		m.get<messages::roles::health>()
+		m.get<sanguis::messages::roles::health>()
 	);
 }
 
-void
+sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	messages::level_up const &m
+	sanguis::messages::level_up const &m
 )
 {
-	env_->level(
-		m.get<messages::level_type>()
+	env_.level(
+		m.get<sanguis::messages::level_type>()
 	);
 }
 
-void
+sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	messages::max_health const &m
+	sanguis::messages::max_health const &m
 )
 {
 	fcppt::dynamic_cast_<
-		with_health &
+		entities::with_health &
 	>(
 		entity(
-			m.get<messages::roles::entity_id>()
+			m.get<sanguis::messages::roles::entity_id>()
 		)
 	).max_health(
-		m.get<messages::roles::max_health>()
+		m.get<sanguis::messages::roles::max_health>()
 	);
 }
 
-void
+sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	messages::move const &m
+	sanguis::messages::move const &m
 )
 {
 	entity(
-		m.get<messages::roles::entity_id>()
+		m.get<sanguis::messages::roles::entity_id>()
 	).pos(
 		virtual_to_screen(
-			rend->screen_size(),
-			m.get<messages::pos>()
+			env_.screen_size(),
+			m.get<sanguis::messages::pos>()
 		)
 	);
 }
 
-void
+sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	messages::remove const &m
+	sanguis::messages::remove const &m
 )
 {
 	entity(
-		m.get<messages::roles::entity_id>()
+		m.get<sanguis::messages::roles::entity_id>()
 	).decay();
 }
 
-void
+sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	messages::resize const &m
+	sanguis::messages::resize const &m
 )
 {
 	entity(
-		m.get<messages::roles::entity_id>()
+		m.get<sanguis::messages::roles::entity_id>()
 	).dim(
 		fcppt::math::dim::structure_cast<
 			sprite::dim
 		>(
-			m.get<messages::dim>()
+			m.get<sanguis::messages::dim>()
 		)
 	);
 }
 
-void
+sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	messages::rotate const &m
+	sanguis::messages::rotate const &m
 )
 {
 	fcppt::dynamic_cast_<
-		entities::with_rotation &
+		entities::with_orientation &
 	>(
 		entity(
-			m.get<messages::roles::entity_id>()
+			m.get<sanguis::messages::roles::entity_id>()
 		)
 	).orientation(
-		m.get<messages::roles::angle>()
+		m.get<sanguis::messages::roles::angle>()
 	);
 }
 
-void
+sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	messages::speed const &m
+	sanguis::messages::speed const &m
 )
 {
 	fcppt::dynamic_cast_<
 		entities::with_speed &
 	>(
 		entity(
-			m.get<messages::roles::entity_id>()
+			m.get<sanguis::messages::roles::entity_id>()
 		)
 	).speed(
 		fcppt::math::vector::structure_cast<
 			vector2
 		>(
 			virtual_to_screen(
-				rend->screen_size(),
-				m.get<messages::roles::speed>()
+				env_.screen_size(),
+				m.get<sanguis::messages::roles::speed>()
 			)
 		)
 	);
 }
 
-void
+sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	messages::start_attacking const &m
+	sanguis::messages::start_attacking const &m
 )
 {
 	fcppt::dynamic_cast_<
 		entities::with_weapon &
 	>(
 		entity(
-			m.get<messages::roles::entity_id>()
+			m.get<sanguis::messages::roles::entity_id>()
 		)
-	).start_attacking();
+	).attacking(
+		true
+	);
 }
 
-void
+sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	messages::stop_attacking const &m
+	sanguis::messages::stop_attacking const &m
 )
 {
 	fcppt::dynamic_cast_<
 		entities::with_weapon &
 	>(
 		entity(
-			m.get<messages::roles::entity_id>()
+			m.get<sanguis::messages::roles::entity_id>()
 		)
-	).stop_attacking();
+	).attacking(
+		false
+	);
 }
 
-void
+sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	messages::start_reloading const &m
+	sanguis::messages::start_reloading const &m
 )
 {
 	fcppt::dynamic_cast_<
 		entities::with_weapon &
 	>(
 		entity(
-			m.get<messages::roles::entity_id>()
+			m.get<sanguis::messages::roles::entity_id>()
 		)
 	).reloading(
 		true
 	);
 }
 
-void
+sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	messages::stop_reloading const &m
+	sanguis::messages::stop_reloading const &m
 )
 {
 	fcppt::dynamic_cast_<
 		entities::with_weapon &
 	>(
 		entity(
-			m.get<messages::roles::entity_id>()
+			m.get<sanguis::messages::roles::entity_id>()
 		)
 	).reloading(
 		false
 	);
 }
 
-void
+sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::process_default_msg(
-	messages::base const &m
+	sanguis::messages::base const &m
 )
 {
 	FCPPT_LOG_WARNING(
@@ -389,14 +408,12 @@ sanguis::client::draw2d::message::dispatcher::configure_new_object(
 )
 {
 	entity_id const id(
-		m.get<messages::roles::entity_id>()
+		m. template get<sanguis::messages::roles::entity_id>()
 	);
 
-	entities::base &entity_(
-		env_->insert(
-			e_ptr,
-			id
-		)
+	env_.insert(
+		e_ptr,
+		id
 	);
 
 	boost::mpl::for_each<
@@ -407,7 +424,7 @@ sanguis::client::draw2d::message::dispatcher::configure_new_object(
 					boost::mpl::_1
 				>
 			>,
-			messages::role_name<
+			sanguis::messages::role_name<
 				boost::mpl::_1
 			>
 		>

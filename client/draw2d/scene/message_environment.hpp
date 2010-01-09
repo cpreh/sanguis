@@ -61,6 +61,9 @@ private:
 	draw2d::transform_callback const &
 	transform_callback() const;
 
+	entity_id
+	own_player_id() const;
+
 	object &scene_;
 
 	hud &hud_;

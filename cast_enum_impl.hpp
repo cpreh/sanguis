@@ -33,14 +33,14 @@ cast_enum_impl(
 			FCPPT_TEXT("Received invalid enum: ")
 			+ fcppt::type_name(typeid(Enum))
 			+ FCPPT_TEXT(", value = ")
-			+ fcppt::lexical_cast<fcppt::string>(value_)
+			+ fcppt::lexical_cast<fcppt::string>(value)
 		);
 	
 	return
 		static_cast<
 			Enum
 		>(
-			Value
+			value
 		);
 }
 

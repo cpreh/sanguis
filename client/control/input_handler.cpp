@@ -64,19 +64,20 @@ void sanguis::client::control::input_handler::direction_event(
 	sge::input::key_state const val(
 		p.value() ? 1 : -1);
 
-	player_action::action_type to_send;
+	action_type::type to_send;
+
 	key_scale scale = static_cast<key_scale>(val);
 
 	switch(p.key().code()) {
 	case sge::input::kc::key_a:
 		scale = -scale;
 	case sge::input::kc::key_d:
-		to_send = player_action::horizontal_move;
+		to_send = action_type::horizontal_move;
 		break;
 	case sge::input::kc::key_w:
 		scale = -scale;
 	case sge::input::kc::key_s:
-		to_send = player_action::vertical_move;
+		to_send = action_type::vertical_move;
 		break;
 	default:
 		throw exception(
@@ -95,14 +96,14 @@ void sanguis::client::control::input_handler::direction_event(
 void sanguis::client::control::input_handler::rotation_event(
 	sge::input::key_pair const &p)
 {
-	player_action::action_type to_send;
+	action_type::type to_send;
 
 	switch(p.key().code()) {
 	case sge::input::kc::mouse_x_axis:
-		to_send = player_action::horizontal_look;
+		to_send = action_type::horizontal_look;
 		break;
 	case sge::input::kc::mouse_y_axis:
-		to_send = player_action::vertical_look;
+		to_send = action_type::vertical_look;
 		break;
 	default:
 		throw exception(
@@ -125,7 +126,7 @@ void sanguis::client::control::input_handler::shooting_event(
 {
 	post_message(
 		player_action(
-			player_action::shoot,
+			action_type::shoot,
 			static_cast<key_scale>(
 				p.value()
 			)
@@ -141,8 +142,8 @@ void sanguis::client::control::input_handler::weapon_switch_event(
 	post_message(
 		player_action(
 			p.key().code() == sge::input::kc::key_x
-			? player_action::switch_weapon_backwards
-			: player_action::switch_weapon_forwards,
+			? action_type::switch_weapon_backwards
+			: action_type::switch_weapon_forwards,
 			static_cast<key_scale>(
 				p.value()
 			)
@@ -157,7 +158,7 @@ void sanguis::client::control::input_handler::pause_unpause_event(
 		return;
 	post_message(
 		player_action(
-			player_action::pause_unpause,
+			action_type::pause_unpause,
 			static_cast<key_scale>(
 				p.value()
 			)

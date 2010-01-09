@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_CONTROL_ENVIRONMENT_HPP_INCLUDED
 #define SANGUIS_CLIENT_CONTROL_ENVIRONMENT_HPP_INCLUDED
 
+#include "environment_fwd.hpp"
 #include "direction_vector.hpp"
 #include "key_scale.hpp"
 #include <fcppt/noncopyable.hpp>

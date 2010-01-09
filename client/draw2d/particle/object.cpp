@@ -4,7 +4,7 @@
 #include "../sprite/particle/texture_animation.hpp"
 #include "../sprite/point.hpp"
 #include "../sprite/dim.hpp"
-#include "../../load/model/animation_context.hpp"
+#include "../../../load/model/animation_context.hpp"
 #include <sge/sprite/animation/texture_impl.hpp>
 #include <sge/sprite/intrusive/system_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
@@ -20,7 +20,7 @@
 sanguis::client::draw2d::particle::object::object(
 	particle_type::type const _type,
 	funit const _aoe,
-	load::model::animation::context_ptr _animation_context,
+	load::model::animation_context_ptr _animation_context,
 	optional_time const _fade_total,
 	sprite::particle::system &particle_system_
 )

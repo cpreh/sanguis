@@ -4,11 +4,14 @@
 namespace sanguis
 {
 
-namespace projectile_type {
-enum type {
+namespace projectile_type
+{
+enum type
+{
 	melee,
 	simple_bullet,
-	aoe
+	aoe,
+	size
 };
 }
 

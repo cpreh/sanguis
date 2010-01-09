@@ -23,13 +23,18 @@
 
 namespace sanguis
 {
-namespace draw
+namespace client
+{
+namespace draw2d
+{
+namespace message
 {
 
 template<
 	typename Message
 >
-class configure_entity {
+class configure_entity
+{
 	typedef boost::mpl::map<
 		boost::mpl::pair<
 			messages::pos,
@@ -118,6 +123,8 @@ private:
 	Message const &message_;
 };
 
+}
+}
 }
 }
 

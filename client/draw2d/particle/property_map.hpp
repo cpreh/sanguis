@@ -3,7 +3,7 @@
 
 #include "property_container.hpp"
 #include "properties_fwd.hpp"
-#include "../../particle_type.hpp"
+#include "../../../particle_type.hpp"
 
 namespace sanguis
 {

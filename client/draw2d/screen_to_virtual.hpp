@@ -3,8 +3,8 @@
 
 #include "sprite/point.hpp"
 #include "sprite/dim.hpp"
-#include "../messages/types/pos.hpp"
-#include "../messages/types/dim.hpp"
+#include "../../messages/types/pos.hpp"
+#include "../../messages/types/dim.hpp"
 #include <sge/renderer/screen_size.hpp>
 
 namespace sanguis

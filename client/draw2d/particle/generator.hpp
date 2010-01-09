@@ -4,7 +4,7 @@
 #include "container.hpp"
 #include "align_type.hpp"
 #include "movement_type.hpp"
-#include "../../diff_clock.hpp"
+#include "../../../diff_clock.hpp"
 #include <fcppt/random/uniform.hpp>
 #include <sge/time/timer.hpp>
 
@@ -17,7 +17,9 @@ namespace draw2d
 namespace particle
 {
 
-class generator : public container
+class generator
+:
+	public container
 {
 public:
 	generator(
@@ -31,13 +33,16 @@ public:
 		dispersion_range const &,
 		velocity_range const &,
 		rotation_velocity_range const &,
-		movement_type::type,
-		draw::environment const &);
-	bool update(
+		movement_type::type
+	);
+
+	bool
+	update(
 		time_type,
 		point const &,
 		rotation_type,
-		depth_type);
+		depth_type
+	);
 private:
 	diff_clock clock;
 	generation_callback generate_object;

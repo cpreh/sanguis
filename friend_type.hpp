@@ -6,11 +6,14 @@ namespace sanguis
 
 namespace friend_type
 {
-enum type {
+enum type
+{
 	sentry,
-	spider
+	spider,
+	size
 };
 }
 
 }
+
 #endif

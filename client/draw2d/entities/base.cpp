@@ -9,6 +9,10 @@ sanguis::client::draw2d::entities::base::base()
 	may_be_removed_(false)
 {}
 
+void
+sanguis::client::draw2d::entities::base::decay()
+{}
+
 bool
 sanguis::client::draw2d::entities::base::may_be_removed() const
 {

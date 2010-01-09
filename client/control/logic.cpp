@@ -1,4 +1,6 @@
 #include "logic.hpp"
+#include "player_action.hpp"
+#include "environment.hpp"
 #include "../log.hpp"
 #include "../../messages/create.hpp"
 #include "../../messages/player_attack_dest.hpp"
@@ -25,7 +27,7 @@
 
 sanguis::client::control::logic::logic(
 	send_callback const &_send,
-	environment const &environment_,
+	environment &environment_,
 	sge::console::object &_console
 )
 :
@@ -202,10 +204,10 @@ void
 sanguis::client::control::logic::update_direction()
 {
 	send(
-		messages::create(
-			messages::player_direction(
+		sanguis::messages::create(
+			sanguis::messages::player_direction(
 				fcppt::math::vector::structure_cast<
-					messages::types::vector2
+					sanguis::messages::types::vector2
 				>(
 					environment_.direction()
 				)
@@ -241,18 +243,18 @@ sanguis::client::control::logic::update_rotation()
 	// TODO: maybe we can kick rotation
 	// and the server can calculate it from the attack dest
 	send(
-		messages::create(
-			messages::player_rotation(
+		sanguis::messages::create(
+			sanguis::messages::player_rotation(
 				environment_.rotation()
 			)
 		)
 	);
 
 	send(
-		messages::create(
-			messages::player_attack_dest(
+		sanguis::messages::create(
+			sanguis::messages::player_attack_dest(
 				fcppt::math::vector::structure_cast<
-					messages::types::vector2
+					sanguis::messages::types::vector2
 				>(
 					environment_.attack_dest()
 				)
@@ -273,14 +275,14 @@ sanguis::client::control::logic::handle_shooting(
 		)
 	)
 		send(
-			messages::create(
-				messages::player_stop_shooting()
+			sanguis::messages::create(
+				sanguis::messages::player_stop_shooting()
 			)
 		);
 	else
 		send(
-			messages::create(
-				messages::player_start_shooting()
+			sanguis::messages::create(
+				sanguis::messages::player_start_shooting()
 			)
 		);
 }
@@ -353,14 +355,14 @@ sanguis::client::control::logic::handle_pause_unpause(
 {
 	if(paused)
 		send(
-			messages::create(
-				messages::player_unpause()
+			sanguis::messages::create(
+				sanguis::messages::player_unpause()
 			)
 		);
 	else
 		send(
-			messages::create(
-				messages::player_pause()
+			sanguis::messages::create(
+				sanguis::messages::player_pause()
 			)
 		);
 }
@@ -373,8 +375,8 @@ sanguis::client::control::logic::change_weapon(
 	current_weapon = w;
 
 	send(
-		messages::create(
-			messages::player_change_weapon(
+		sanguis::messages::create(
+			sanguis::messages::player_change_weapon(
 				current_weapon
 			)
 		)
@@ -387,8 +389,8 @@ sanguis::client::control::logic::send_cheat(
 )
 {
 	send(
-		messages::create(
-			messages::player_cheat(
+		sanguis::messages::create(
+			sanguis::messages::player_cheat(
 				c
 			)
 		)

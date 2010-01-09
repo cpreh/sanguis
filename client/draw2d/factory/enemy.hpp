@@ -3,7 +3,7 @@
 
 #include "../entities/auto_ptr.hpp"
 #include "../entities/model/parameters_fwd.hpp"
-#include "../../enemy_type.hpp" 
+#include "../../../enemy_type.hpp" 
 
 namespace sanguis
 {

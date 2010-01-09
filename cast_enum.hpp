@@ -12,6 +12,6 @@ cast_enum_impl<\
 	enum_::size\
 >(\
 	value_\
-);
+)
 
 #endif

@@ -1,20 +1,25 @@
 #include "z_ordering.hpp"
+#include "../../../exception.hpp"
 #include <fcppt/text.hpp>
-#include <sge/exception.hpp>
 
-sanguis::draw::z_ordering::type
+sanguis::client::draw2d::z_ordering::type
 sanguis::client::draw2d::particle::z_ordering(
-	particle_type::type const p)
+	particle_type::type const p
+)
 {
-	switch (p) {
+	switch (p)
+	{
 	case particle_type::flare:
-		return draw::z_ordering::flare;
+		return draw2d::z_ordering::flare;
 	case particle_type::smoke:
-		return draw::z_ordering::smoke;
+		return draw2d::z_ordering::smoke;
 	case particle_type::rubble:
-		return draw::z_ordering::rubble;
-	default:
-		throw sge::exception(
-			FCPPT_TEXT("invalid particle type!"));
+		return draw2d::z_ordering::rubble;
+	case particle_type::size:
+		break;
 	}
+	
+	throw exception(
+		FCPPT_TEXT("invalid particle type!")
+	);
 }

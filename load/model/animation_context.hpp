@@ -1,8 +1,9 @@
 #ifndef SANGUIS_LOAD_MODEL_ANIMATION_CONTEXT_HPP_INCLUDED
 #define SANGUIS_LOAD_MODEL_ANIMATION_CONTEXT_HPP_INCLUDED
 
+#include "animation_context_fwd.hpp"
+#include "frame_cache_fwd.hpp"
 #include "../resource/texture_context.hpp"
-#include "frame_cache.hpp"
 #include <sge/sprite/animation/series.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <sge/renderer/lock_rect.hpp>

@@ -3,7 +3,7 @@
 
 #include "../entities/auto_ptr.hpp"
 #include "../entities/model/parameters_fwd.hpp"
-#include "../../pickup_type.hpp"
+#include "../../../pickup_type.hpp"
 
 namespace sanguis
 {

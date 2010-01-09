@@ -19,7 +19,7 @@ namespace factory
 
 entities::auto_ptr
 aoe_projectile(
-	model::parameters const &,
+	entities::model::parameters const &,
 	sprite::particle::system &,
 	insert_callback const &,
 	aoe_projectile_type::type,

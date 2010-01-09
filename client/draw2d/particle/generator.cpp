@@ -16,21 +16,21 @@ sanguis::client::draw2d::particle::generator::generator(
 	time_type const life_time,
 	time_type const frequency,
 	unsigned const spawn_initial,
-	align_type::type alignment,
-	depth_type depth,
+	align_type::type const alignment,
+	depth_type const depth,
 	dispersion_range const &dispersion_value,
 	velocity_range const &velocity,
 	rotation_velocity_range const &rot_velocity,
-	movement_type::type const mt,
-	draw::environment const &e)
+	movement_type::type const mt
+)
 :
 	container(
 		pos,
 		point::null(),
 		depth,
 		rotation_type(0),
-		rotation_type(0),
-		e),
+		rotation_type(0)
+	),
 	generate_object(generate_object),
 	frequency_timer(sge::time::second_f(frequency)),
 	life_timer(sge::time::second_f(life_time)),

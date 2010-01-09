@@ -12,7 +12,8 @@ sanguis::client::draw2d::particle::properties::properties(
 	rot_speed_range const &rot_speed_,
 	bool const do_fade_,
 	fade_range const &fade_,
-	movement_type::type const movement_)
+	movement_type::type const movement_
+)
 :
 	anim_speed_(anim_speed_),
 	spawn_initial_(spawn_initial_),
@@ -27,7 +28,7 @@ sanguis::client::draw2d::particle::properties::properties(
 	movement_(movement_)
 {}
 
-sanguis::draw::funit
+sanguis::client::draw2d::funit
 sanguis::client::draw2d::particle::properties::anim_speed() const
 {
 	return anim_speed_;
@@ -39,13 +40,13 @@ sanguis::client::draw2d::particle::properties::spawn_initial() const
 	return spawn_initial_;
 }
 
-sanguis::draw::funit
+sanguis::client::draw2d::funit
 sanguis::client::draw2d::particle::properties::gen_life_time() const
 {
 	return gen_life_time_;
 }
 
-sanguis::draw::funit
+sanguis::client::draw2d::funit
 sanguis::client::draw2d::particle::properties::gen_frequency() const
 {
 	return gen_frequency_;

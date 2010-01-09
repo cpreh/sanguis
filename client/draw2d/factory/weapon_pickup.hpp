@@ -2,7 +2,8 @@
 #define SANGUIS_CLIENT_DRAW2D_FACTORY_WEAPON_PICKUP_HPP_INCLUDED
 
 #include "../entities/auto_ptr.hpp"
-#include "../../weapon_type.hpp"
+#include "../entities/model/parameters_fwd.hpp"
+#include "../../../weapon_type.hpp"
 
 namespace sanguis
 {

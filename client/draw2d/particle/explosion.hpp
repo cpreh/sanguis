@@ -4,7 +4,7 @@
 #include "container.hpp"
 #include "property_map.hpp"
 #include "base_ptr.hpp"
-#include "../../particle_type.hpp"
+#include "../../../particle_type.hpp"
 #include <fcppt/function/object_fwd.hpp>
 
 namespace sanguis
@@ -17,7 +17,9 @@ namespace particle
 {
 
 // explosion is a container spawning three generators
-class explosion : public container
+class explosion
+:
+	public container
 {
 public:
 	typedef fcppt::function::object<
@@ -31,8 +33,8 @@ public:
 		point const &speed,
 		depth_type,
 		rotation_type,
-		rotation_type,
-		draw::environment const &);
+		rotation_type
+	);
 };
 
 }

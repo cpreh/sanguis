@@ -50,114 +50,114 @@ public:
 
 	typedef void result_type;
 
-	result_type;
+	result_type
 	operator()(
-		messages::add_aoe_projectile const &
+		sanguis::messages::add_aoe_projectile const &
 	);
 
 	result_type
 	operator()(
-		messages::add_enemy const &
+		sanguis::messages::add_enemy const &
 	);
 
 	result_type
 	operator()(
-		messages::add_friend const &
+		sanguis::messages::add_friend const &
 	);
 
 	result_type
 	operator()(
-		messages::add_pickup const &
+		sanguis::messages::add_pickup const &
 	);
 
 	result_type
 	operator()(
-		messages::add_player const &
+		sanguis::messages::add_player const &
 	);
 
 	result_type
 	operator()(
-		messages::add_projectile const &
+		sanguis::messages::add_projectile const &
 	);
 
 	result_type
 	operator()(
-		messages::add_weapon_pickup const &
+		sanguis::messages::add_weapon_pickup const &
 	);
 
 	result_type
 	operator()(
-		messages::change_weapon const &
+		sanguis::messages::change_weapon const &
 	);
 
 	result_type
 	operator()(
-		messages::experience const &
+		sanguis::messages::experience const &
 	);
 
 	result_type
 	operator()(
-		messages::health const &
+		sanguis::messages::health const &
 	);
 
 	result_type
 	operator()(
-		messages::level_up const &
+		sanguis::messages::level_up const &
 	);
 
 	result_type
 	operator()(
-		messages::max_health const &
+		sanguis::messages::max_health const &
 	);
 
 	result_type
 	operator()(
-		messages::move const &
+		sanguis::messages::move const &
 	);
 
 	result_type
 	operator()(
-		messages::remove const &
+		sanguis::messages::remove const &
 	);
 
 	result_type
 	operator()(
-		messages::resize const &
+		sanguis::messages::resize const &
 	);
 
 	result_type
 	operator()(
-		messages::rotate const &
+		sanguis::messages::rotate const &
 	);
 
 	result_type
 	operator()(
-		messages::start_attacking const &
+		sanguis::messages::start_attacking const &
 	);
 
 	result_type
 	operator()(
-		messages::stop_attacking const &
+		sanguis::messages::stop_attacking const &
 	);
 
 	result_type
 	operator()(
-		messages::start_reloading const &
+		sanguis::messages::start_reloading const &
 	);
 
 	result_type
 	operator()(
-		messages::stop_reloading const &
+		sanguis::messages::stop_reloading const &
 	);
 
 	result_type
 	operator()(
-		messages::speed const &
+		sanguis::messages::speed const &
 	);
 
-	void
+	result_type
 	process_default_msg(
-		messages::base const &
+		sanguis::messages::base const &
 	);
 private:
 	template<

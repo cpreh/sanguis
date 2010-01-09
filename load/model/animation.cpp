@@ -153,11 +153,11 @@ sanguis::load::model::animation::sounds() const
 	return *sounds_;
 }
 
-sanguis::load::model::animation::context_ptr
+sanguis::load::model::animation_context_ptr
 sanguis::load::model::animation::load() const 
 {
 	return 
-		context_ptr(
+		animation_context_ptr(
 			new animation_context(
 				param_.textures().load(
 					param_.path() / texture_

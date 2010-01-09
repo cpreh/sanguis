@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_MESSAGE_ENVIRONMENT_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_MESSAGE_ENVIRONMENT_HPP_INCLUDED
 
+#include "environment_fwd.hpp"
 #include "../entities/base_fwd.hpp"
 #include "../entities/auto_ptr.hpp"
 #include "../entities/model/parameters_fwd.hpp"
@@ -10,6 +11,7 @@
 #include "../../exp_type.hpp"
 #include "../../level_type.hpp"
 #include "../../../entity_id.hpp"
+#include <sge/renderer/screen_size.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -59,6 +61,12 @@ public:
 
 	virtual draw2d::transform_callback const &
 	transform_callback() const = 0;
+
+	virtual entity_id
+	own_player_id() const = 0;
+
+	virtual sge::renderer::screen_size const
+	screen_size() const = 0;
 
 	virtual ~environment();
 };
