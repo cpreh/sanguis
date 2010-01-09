@@ -45,8 +45,8 @@ public:
 		sprite::dim const &
 	) = 0;
 
-	sprite::point const
-	center() const;
+	virtual sprite::point const
+	center() const = 0;
 
 	virtual void
 	visible(

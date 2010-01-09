@@ -1,12 +1,12 @@
 #include "aoe_projectile.hpp"
 #include "../entities/aoe_bullet.hpp"
-#include "../../load/aoe_projectile_name.hpp"
-#include "../../exception.hpp"
+#include "../../../load/aoe_projectile_name.hpp"
+#include "../../../exception.hpp"
 #include <fcppt/text.hpp>
 
 sanguis::client::draw2d::entities::auto_ptr
 sanguis::client::draw2d::factory::aoe_projectile(
-	model::parameters const &param,
+	entities::model::parameters const &param,
 	sprite::particle::system &particle_system,
 	insert_callback const &insert,
 	aoe_projectile_type::type const ptype,
@@ -15,7 +15,8 @@ sanguis::client::draw2d::factory::aoe_projectile(
 {
 	switch(ptype)
 	{
-	case aoe_projectile_type::aoe_projectile:
+	case aoe_projectile_type::aoe_damage:
+	case aoe_projectile_type::size:
 		break;
 	case aoe_projectile_type::rocket:
 	case aoe_projectile_type::grenade:
@@ -26,7 +27,7 @@ sanguis::client::draw2d::factory::aoe_projectile(
 				insert,
 				load::aoe_projectile_name(
 					ptype
-				)
+				),
 				aoe
 			)
 		);

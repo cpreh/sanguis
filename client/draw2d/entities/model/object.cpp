@@ -31,8 +31,8 @@ sanguis::client::draw2d::entities::model::object::object(
 		param_.collection()[name].size()
 		order
 	),
-	attacking(false),
-	reloading(false),
+	attacking_(false),
+	reloading_(false),
 	health_(0),
 	max_health_(0),
 	healthbar_(

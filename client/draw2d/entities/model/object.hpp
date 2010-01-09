@@ -11,8 +11,8 @@
 #include "../../sprite/index_fwd.hpp"
 #include "../../sprite/order.hpp"
 #include "../../sprite/rotation_type.hpp"
+#include "../../vector2.hpp"
 #include "../../../health_type.hpp"
-#include "../../../vector2.hpp"
 #include "../../../../animation_type.hpp"
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/string.hpp>
@@ -159,8 +159,8 @@ private:
 	log();
 
 	bool
-		attacking,
-		reloading;
+		attacking_,
+		reloading_;
 
 	health_type
 		health_,
@@ -171,7 +171,7 @@ private:
 	> healthbar_;
 
 	typedef boost::ptr_vector<
-		part
+		model::part
 	> part_vector;
 
 	part_vector parts;

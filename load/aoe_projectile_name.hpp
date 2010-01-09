@@ -10,7 +10,7 @@ namespace load
 {
 
 fcppt::string const
-enemy_name(
+aoe_projectile_name(
 	aoe_projectile_type::type
 );
 

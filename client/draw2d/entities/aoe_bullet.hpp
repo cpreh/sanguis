@@ -18,7 +18,7 @@ namespace entities
 
 class aoe_bullet
 :
-	public model
+	public model::object
 {
 public:
 	aoe_bullet(

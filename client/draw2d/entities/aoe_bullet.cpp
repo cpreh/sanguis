@@ -13,7 +13,7 @@ sanguis::client::draw2d::entities::aoe_bullet::aoe_bullet(
 	funit const aoe
 )
 :
-	model(
+	model::object(
 		param,
 		name,
 		z_ordering::bullet,

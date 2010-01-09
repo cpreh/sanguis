@@ -70,6 +70,11 @@ protected:
 		sprite::dim const &
 	);
 
+	void
+	visible(
+		bool
+	);
+
 	// with_orientation overrides
 	virtual void
 	orientation(
@@ -120,11 +125,6 @@ private:
 	void
 	update_pos(
 		sprite::point const &
-	);
-
-	void
-	update_orientation(
-		sprite::rotation_type
 	);
 
 	vector2
