@@ -245,6 +245,12 @@ sanguis::client::draw2d::scene::object::player_id(
 	player_id_ = nplayer_id_;
 }
 
+sanguis::client::control::environment &
+sanguis::client::draw2d::scene::object::control_environment() const
+{
+	return *control_environment_;
+}
+
 void
 sanguis::client::draw2d::scene::object::render_systems()
 {
@@ -419,6 +425,12 @@ sanguis::load::model::collection const &
 sanguis::client::draw2d::scene::object::load_collection() const
 {
 	return resources_.models()();
+}
+
+sanguis::entity_id
+sanguis::client::draw2d::scene::object::player_id() const
+{
+	return player_id_;
 }
 
 sge::renderer::screen_size const

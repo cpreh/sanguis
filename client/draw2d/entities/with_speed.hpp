@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_SPEED_HPP_INCLUDED
 
 #include "../vector2.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -14,6 +15,7 @@ namespace entities
 
 class with_speed
 {
+	FCPPT_NONCOPYABLE(with_speed)
 protected:
 	with_speed();
 

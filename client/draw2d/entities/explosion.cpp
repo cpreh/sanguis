@@ -164,6 +164,24 @@ sanguis::client::draw2d::entities::explosion::~explosion()
 {}
 
 void
+sanguis::client::draw2d::entities::explosion::pos(
+	sprite::point const &
+)
+{}
+
+void
+sanguis::client::draw2d::entities::explosion::dim(
+	sprite::dim const &
+)
+{}
+
+sanguis::client::draw2d::sprite::point const
+sanguis::client::draw2d::entities::explosion::center() const
+{
+	return pos_;
+}
+
+void
 sanguis::client::draw2d::entities::explosion::update(
 	time_type const delta
 )

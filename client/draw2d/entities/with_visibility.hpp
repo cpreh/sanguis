@@ -1,6 +1,8 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_VISIBILITY_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_VISIBILITY_HPP_INCLUDED
 
+#include <fcppt/noncopyable.hpp>
+
 namespace sanguis
 {
 namespace client
@@ -12,6 +14,7 @@ namespace entities
 
 class with_visibility
 {
+	FCPPT_NONCOPYABLE(with_visibility)
 protected:
 	with_visibility();
 

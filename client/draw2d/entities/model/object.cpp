@@ -170,6 +170,11 @@ sanguis::client::draw2d::entities::model::object::has_health() const
 }
 
 void
+sanguis::client::draw2d::entities::model::object::on_decay()
+{
+}
+
+void
 sanguis::client::draw2d::entities::model::object::health(
 	health_type const health
 )

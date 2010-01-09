@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_ORIENTATION_HPP_INCLUDED
 
 #include "../sprite/rotation_type.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -14,6 +15,7 @@ namespace entities
 
 class with_orientation
 {
+	FCPPT_NONCOPYABLE(with_orientation)
 protected:
 	with_orientation();
 

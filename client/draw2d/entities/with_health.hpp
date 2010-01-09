@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_HEALTH_HPP_INCLUDED
 
 #include "../../health_type.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -14,6 +15,7 @@ namespace entities
 
 class with_health
 {
+	FCPPT_NONCOPYABLE(with_health)
 protected:
 	with_health();
 
