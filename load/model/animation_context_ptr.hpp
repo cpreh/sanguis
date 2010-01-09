@@ -2,6 +2,7 @@
 #define SANGUIS_LOAD_MODEL_ANIMATION_CONTEXT_PTR_HPP_INCLUDED
 
 #include "animation_context_fwd.hpp"
+#include <fcppt/auto_ptr.hpp>
 
 namespace sanguis
 {

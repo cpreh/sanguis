@@ -6,24 +6,28 @@
 #include "../menu_event.hpp"
 #include "../log.hpp"
 #include "../invalid_id.hpp"
+#include "../entity_type.hpp"
+#include "../control/logic.hpp"
+#include "../control/input_handler.hpp"
 #include "../cursor/object.hpp"
-#include "../../client_entity_type.hpp"
-#include "../../client_messages/add.hpp"
-#include "../../client_messages/visible.hpp"
+#include "../messages/add.hpp"
+#include "../messages/visible.hpp"
+#include "../draw2d/screen_to_virtual.hpp" // FIXME
+#include "../draw2d/scene/object.hpp"
 #include "../../messages/call/object.hpp"
 #include "../../messages/assign_id.hpp"
-#include "../../messages/remove_assign_id.hpp"
+#include "../../messages/remove_id.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../messages/give_weapon.hpp"
 #include "../../messages/available_perks.hpp"
 #include "../../messages/player_choose_perk.hpp"
+#include "../../messages/move.hpp"
 #include "../../messages/create.hpp"
-#include "../../draw/screen_to_virtual.hpp"
-#include "../../draw/scene.hpp"
 #include "../../load/context.hpp"
 #include "../../tick_event.hpp"
 #include "../../cast_enum.hpp"
 #include <sge/audio/pool.hpp>
+#include <sge/renderer/device.hpp>
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/state/trampoline.hpp>
@@ -32,7 +36,6 @@
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/utf8/convert.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/make_auto_ptr.hpp>
 #include <fcppt/assert.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <boost/foreach.hpp>
@@ -53,18 +56,15 @@ sanguis::client::states::running::running(
 		context<machine>().resources().resources().sounds()
 	),
 	drawer(
-		fcppt::make_auto_ptr<
-			draw2d::scene::object
-		>(
+		new draw2d::scene::object(
 			context<machine>().resources(),
 			context<machine>().renderer(),
-			context<machine>().font()
+			context<machine>().font(),
+			context<machine>().cursor()
 		)
 	),
 	logic_(
-		fcppt::make_auto_ptr<
-			control::logic
-		>(
+		new control::logic(
 			std::tr1::bind(
 				&running::send_message,
 				this,
@@ -75,17 +75,19 @@ sanguis::client::states::running::running(
 		)
 	),
 	input(
-		std::tr1::bind(
-			&logic::handle_player_action,
-			&logic_,
-			std::tr1::placeholders::_1
+		new control::input_handler(
+			std::tr1::bind(
+				&control::logic::handle_player_action,
+				logic_.get(),
+				std::tr1::placeholders::_1
+			)
 		)
 	),
 	input_connection(
 		context<machine>().console_wrapper().register_callback(
 			std::tr1::bind(
-				&input_handler::input_callback,
-				&input,
+				&control::input_handler::input_callback,
+				input.get(),
 				std::tr1::placeholders::_1
 			)
 		)
@@ -102,7 +104,7 @@ sanguis::client::states::running::running(
 	cursor_id(
 		drawer->client_message(
 			client::messages::add(
-				client_entity_type::cursor
+				client::entity_type::cursor
 			)
 		)
 	),
@@ -160,7 +162,7 @@ sanguis::client::states::running::pause(
 	bool const b
 )
 {
-	logic_.pause(b);
+	logic_->pause(b);
 
 	drawer->pause(b);
 }
@@ -170,15 +172,15 @@ sanguis::client::states::running::react(
 	message_event const &m
 )
 {
-	static messages::call::object<
-		boost::mpl::vector9<
-			messages::assign_id,
-			messages::remove_id,
-			messages::disconnect,
-			messages::give_weapon,
-			messages::highscore,
-			messages::available_perks,
-			messages::level_up
+	static sanguis::messages::call::object<
+		boost::mpl::vector7<
+			sanguis::messages::assign_id,
+			sanguis::messages::remove_id,
+			sanguis::messages::disconnect,
+			sanguis::messages::give_weapon,
+			sanguis::messages::highscore,
+			sanguis::messages::available_perks,
+			sanguis::messages::level_up
 		>,
 		running
 	> dispatcher;
@@ -196,14 +198,14 @@ sanguis::client::states::running::react(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	messages::assign_id const &m
+	sanguis::messages::assign_id const &m
 )
 {
-	drawer.player_id(
-		m.get<messages::entity_id>()
+	drawer->player_id(
+		m.get<sanguis::messages::roles::entity_id>()
 	);
 
-	input.active(
+	input->active(
 		true
 	);
 
@@ -212,14 +214,14 @@ sanguis::client::states::running::operator()(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	messages::remove_id const &
+	sanguis::messages::remove_id const &
 )
 {
-	drawer.player_id(
+	drawer->player_id(
 		invalid_id
 	);
 
-	input.active(
+	input->active(
 		false
 	);
 
@@ -228,7 +230,7 @@ sanguis::client::states::running::operator()(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	messages::disconnect const &
+	sanguis::messages::disconnect const &
 )
 {
 	return transit<menu>();
@@ -236,13 +238,13 @@ sanguis::client::states::running::operator()(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	messages::give_weapon const &m
+	sanguis::messages::give_weapon const &m
 )
 {
-	logic_.give_player_weapon(
+	logic_->give_player_weapon(
 		SANGUIS_CAST_ENUM(
 			weapon_type,
-			m.get<messages::roles::weapon>()
+			m.get<sanguis::messages::roles::weapon>()
 		)
 	);
 
@@ -251,19 +253,19 @@ sanguis::client::states::running::operator()(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	messages::highscore const &m
+	sanguis::messages::highscore const &m
 )
 {
 	FCPPT_LOG_DEBUG(
 		sanguis::client::log(),
 		fcppt::log::_ 
 			<< FCPPT_TEXT("got highscore message, score was: ")
-			<< m.get<messages::roles::highscore>()
+			<< m.get<sanguis::messages::roles::highscore>()
 	);
 
 	BOOST_FOREACH(
-		messages::types::string const &s,
-		m.get<messages::string_vector>()
+		sanguis::messages::types::string const &s,
+		m.get<sanguis::messages::string_vector>()
 	)
 		context<machine>().gameover_names().push_back(
 			fcppt::utf8::convert(
@@ -273,7 +275,7 @@ sanguis::client::states::running::operator()(
 	
 	context<machine>().gameover_score(
 		static_cast<highscore::score_type>(
-			m.get<messages::roles::highscore>()
+			m.get<sanguis::messages::roles::highscore>()
 		));
 	
 	return transit<gameover>();
@@ -281,12 +283,12 @@ sanguis::client::states::running::operator()(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	messages::available_perks const &m
+	sanguis::messages::available_perks const &m
 )
 {
 	perk_chooser_.perks(
 		perk_cast(
-			m.get<messages::perk_list>()
+			m.get<sanguis::messages::perk_list>()
 		)
 	);
 
@@ -295,16 +297,20 @@ sanguis::client::states::running::operator()(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	messages::level_up const &m
+	sanguis::messages::level_up const &m
 )
 {
 	perk_chooser_.level_up(
 		static_cast<level_type>(
-			m.get<messages::level_type>()
+			m.get<sanguis::messages::level_type>()
 		)
 	);
 
-	(*drawer)(m);
+	drawer->process_message(
+		*sanguis::messages::create(
+			m
+		)
+	);
 
 	return discard_event();
 }
@@ -317,7 +323,7 @@ sanguis::client::states::running::perk_chooser()
 
 boost::statechart::result
 sanguis::client::states::running::handle_default_msg(
-	messages::base const &m
+	sanguis::messages::base const &m
 )
 {
 	drawer->process_message(m);
@@ -327,7 +333,7 @@ sanguis::client::states::running::handle_default_msg(
 
 void
 sanguis::client::states::running::send_message(
-	messages::auto_ptr m
+	sanguis::messages::auto_ptr m
 )
 {
 	context<machine>().send(
@@ -341,8 +347,8 @@ sanguis::client::states::running::send_perk_choose(
 )
 {
 	send_message(
-		messages::create(
-			messages::player_choose_perk(
+		sanguis::messages::create(
+			sanguis::messages::player_choose_perk(
 				m
 			)
 		)
@@ -354,12 +360,14 @@ sanguis::client::states::running::cursor_pos(
 	draw2d::sprite::point const &pos // FIXME
 )
 {
-	(*drawer)(
-		messages::move(
-			cursor_id,
-			draw2d::screen_to_virtual( // FIXME
-				context<machine>().renderer()->screen_size(),
-				pos
+	drawer->process_message(
+		*sanguis::messages::create(
+			sanguis::messages::move(
+				cursor_id,
+				draw2d::screen_to_virtual( // FIXME
+					context<machine>().renderer()->screen_size(),
+					pos
+				)
 			)
 		)
 	);
@@ -371,7 +379,7 @@ sanguis::client::states::running::cursor_show(
 )
 {
 	drawer->client_message(
-		client_messages::visible(
+		client::messages::visible(
 			cursor_id,
 			!show
 		)

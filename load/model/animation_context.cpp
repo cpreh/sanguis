@@ -1,7 +1,8 @@
 #include "animation_context.hpp"
 #include "global_parameters.hpp"
-#include "../../exception.hpp"
+#include "frame_cache.hpp"
 #include "../resource/texture_context_impl.hpp"
+#include "../../exception.hpp"
 #include <sge/sprite/animation/series.hpp>
 #include <sge/sprite/animation/entity.hpp>
 #include <sge/time/millisecond.hpp>

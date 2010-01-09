@@ -14,7 +14,7 @@ typedef make_class<
 	make_message_id<
 		types::message::remove_id
 	>::type
-> remove_id;
+>::type remove_id;
 
 }
 }

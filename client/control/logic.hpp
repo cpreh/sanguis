@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_CONTROL_LOGIC_HPP_INCLUDED
 #define SANGUIS_CLIENT_CONTROL_LOGIC_HPP_INCLUDED
 
+#include "logic_fwd.hpp"
 #include "player_action_fwd.hpp"
 #include "environment_fwd.hpp"
 #include "key_scale.hpp"

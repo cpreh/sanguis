@@ -178,7 +178,7 @@ private:
 	> logic_;
 
 	fcppt::scoped_ptr<
-		input_handler
+		control::input_handler
 	> input;
 
 	fcppt::signal::auto_connection input_connection;

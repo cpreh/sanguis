@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_CONTROL_INPUT_HANDLER_HPP_INCLUDED
 #define SANGUIS_CLIENT_CONTROL_INPUT_HANDLER_HPP_INCLUDED
 
+#include "input_handler_fwd.hpp"
 #include "player_action_fwd.hpp"
 #include <sge/input/key_pair_fwd.hpp>
 #include <sge/input/key_state.hpp>
