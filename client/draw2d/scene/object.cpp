@@ -4,11 +4,11 @@
 #include "sprite/order.hpp"
 #include "../messages/call/object.hpp"
 #include "../messages/role_name.hpp"
-#include "../client_messages/add.hpp"
-#include "../client_messages/visible.hpp"
-#include "../client/invalid_id.hpp"
-#include "../exception.hpp"
-#include "../load/context.hpp"
+#include "../../messages/add.hpp"
+#include "../../messages/visible.hpp"
+#include "../../invalid_id.hpp"
+#include "../../../exception.hpp"
+#include "../../../load/context.hpp"
 
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/state/scoped.hpp>
@@ -40,6 +40,7 @@ sanguis::client::draw2d::scene::object::object(
 	particle_system_(rend),
 	hud_(font),
 	paused_(false),
+	player_id_(invalid_id),
 	transform_callback_(
 		std::tr1::bind(
 			&object::transform,
@@ -130,26 +131,36 @@ sanguis::client::draw2d::scene::object::process_message(
 	);
 }
 
-void
+sanguis::entity_id
 sanguis::client::draw2d::scene::object::client_message(
-	client_messages::add const &m
+	messages::add const &m
 )
 {
-	if(
+	std::pair<
+		entity_map::iterator,
+		bool
+	> const ret(
 		entities.insert(
-			m.id(),
+			next_id(),
 			factory::client(
-				environment(),
-				m,
+				client_system(),
+				resources_.resources().textures(),
+				m.type(),
 				rend->screen_size()
 			)
-		).second
-		== false
+		)
+	);
+	
+	if(
+		ret.second == false
 	)
 		throw exception(
 			FCPPT_TEXT("Client object with id already in entity list!")
 		);
+	
 	// FIXME: configure the object here, too!
+	//
+	return ret.first->first;
 }
 
 void
@@ -157,7 +168,11 @@ sanguis::client::draw2d::scene::object::client_message(
 	client_messages::visible const &m
 )
 {
-	entity(m.id()).visible(m.get());	
+	entity(
+		m.id()
+	).visible(
+		m.get()
+	);
 }
 
 void
@@ -222,6 +237,14 @@ sanguis::client::draw2d::scene::object::pause(
 )
 {
 	paused = p;
+}
+
+void
+sanguis::client::draw2d::scene::object::player_id(
+	entity_id const nplayer_id_
+)
+{
+	player_id_ = nplayer_id_;
 }
 
 void

@@ -13,24 +13,41 @@ namespace client
 {
 namespace cursor
 {
-class object : public sge::gui::cursor::default_
+
+class object
+:
+	public sge::gui::cursor::default_
 {
 public:
 	object(
 		sge::image::loader_ptr,
-		sge::renderer::device_ptr);
+		sge::renderer::device_ptr
+	);
 
 	~object();
 
-	sge::gui::point const pos() const;
-	void pos(
-		sge::gui::point const &);
-	void visible(
-		bool);
-	fcppt::signal::auto_connection register_pos_callback(
-		pos_callback const &);
-	fcppt::signal::auto_connection register_visible_callback(
-		visible_callback const &);
+	sge::gui::point const
+	pos() const;
+
+	void
+	pos(
+		sge::gui::point const &
+	);
+
+	void
+	visible(
+		bool
+	);
+
+	fcppt::signal::auto_connection
+	register_pos_callback(
+		pos_callback const &
+	);
+
+	fcppt::signal::auto_connection
+	register_visible_callback(
+		visible_callback const &
+	);
 private:
 	typedef fcppt::signal::object<pos_fn> pos_signal_type;
 	typedef fcppt::signal::object<visible_fn> visible_signal_type;
@@ -38,6 +55,7 @@ private:
 	pos_signal_type pos_signal_;
 	visible_signal_type visible_signal_;
 };
+
 }
 }
 }

@@ -74,6 +74,11 @@ public:
 		bool
 	);
 
+	void
+	player_id(
+		entity_id
+	);
+
 	client::control::environment &
 	control_environment() const;
 private:
@@ -137,6 +142,8 @@ private:
 	hud hud_;
 
 	bool paused_;
+
+	entity_id player_id_;
 
 	draw2d::transform_callback const transform_callback_;
 

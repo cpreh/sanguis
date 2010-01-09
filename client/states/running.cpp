@@ -216,7 +216,7 @@ sanguis::client::states::running::operator()(
 )
 {
 	drawer.player_id(
-		invalid_id()
+		invalid_id
 	);
 
 	input.active(
@@ -363,7 +363,6 @@ sanguis::client::states::running::cursor_pos(
 			)
 		)
 	);
-
 }
 
 void

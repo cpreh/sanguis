@@ -1,7 +1,9 @@
 #include "control_environment.hpp"
+#include "object.hpp"
 #include "../entities/base.hpp"
 #include <fcppt/math/vector/angle_between.hpp>
 #include <fcppt/optional_impl.hpp>
+#include <fcppt/assert.hpp>
 
 sanguis::client::draw2d::scene::control_environment::control_environment(
 	object &object_
@@ -22,6 +24,7 @@ sanguis::client::draw2d::scene::control_environment::direction() const
 sanguis::client::control::direction_vector const
 sanguis::client::draw2d::scene::control_environment::attack_dest() const
 {
+	// FIXME: where to get this from?
 }
 
 sanguis::client::control::key_scale
