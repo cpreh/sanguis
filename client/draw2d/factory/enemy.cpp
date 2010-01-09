@@ -1,8 +1,8 @@
 #include "enemy.hpp"
 #include "../entities/model/object.hpp"
 #include "../z_ordering.hpp"
-#include "../../load/enemy_name.hpp"
-#include "../../enemy_type.hpp"
+#include "../../../enemy_type.hpp"
+#include "../../../load/enemy_name.hpp"
 
 sanguis::client::draw2d::entities::auto_ptr
 sanguis::client::draw2d::factory::enemy(

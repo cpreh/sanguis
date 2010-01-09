@@ -14,13 +14,13 @@ namespace client
 namespace draw2d
 {
 
-messages::types::pos const
+sanguis::messages::types::pos const
 screen_to_virtual(
 	sge::renderer::screen_size const &,
 	sprite::point const &
 );
 
-messages::types::dim const
+sanguis::messages::types::dim const
 screen_to_virtual(
 	sge::renderer::screen_size const &,
 	sprite::dim const &

@@ -1,8 +1,7 @@
 #include "client.hpp"
 #include "simple_sprite.hpp"
 #include "../z_ordering.hpp"
-#include "../../client_messages/add.hpp"
-#include "../../exception.hpp"
+#include "../../../exception.hpp"
 #include <fcppt/text.hpp>
 
 sanguis::client::draw2d::entities::auto_ptr
@@ -17,6 +16,8 @@ sanguis::client::draw2d::factory::client(
 		type_
 	)
 	{
+	case entity_type::size:
+		break;
 	case entity_type::cursor:
 		return simple_sprite(
 			client_system_,

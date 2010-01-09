@@ -6,7 +6,7 @@ namespace sanguis
 namespace client
 {
 
-namespace client_entity_type
+namespace entity_type
 {
 enum type
 {

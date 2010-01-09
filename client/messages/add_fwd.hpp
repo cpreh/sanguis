@@ -3,11 +3,14 @@
 
 namespace sanguis
 {
-namespace client_messages
+namespace client
+{
+namespace messages
 {
 
 class add;
 
+}
 }
 }
 

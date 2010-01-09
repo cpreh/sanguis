@@ -1,5 +1,5 @@
-#ifndef SANGUIS_CLIENT_LOGIC_HPP_INCLUDED
-#define SANGUIS_CLIENT_LOGIC_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_CONTROL_LOGIC_HPP_INCLUDED
+#define SANGUIS_CLIENT_CONTROL_LOGIC_HPP_INCLUDED
 
 #include "player_action_fwd.hpp"
 #include "environment_fwd.hpp"

@@ -1,9 +1,9 @@
 #include "pickup.hpp"
 #include "../entities/model/object.hpp"
 #include "../z_ordering.hpp"
-#include "../../pickup_type.hpp"
-#include "../../load/pickup_name.hpp"
-#include "../../exception.hpp"
+#include "../../../pickup_type.hpp"
+#include "../../../exception.hpp"
+#include "../../../load/pickup_name.hpp"
 #include <fcppt/text.hpp>
 
 namespace

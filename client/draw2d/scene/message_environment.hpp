@@ -23,7 +23,7 @@ class message_environment
 public:
 	explicit message_environment(
 		object &,
-		hud &,
+		hud &
 	);
 
 	~message_environment();
@@ -49,7 +49,7 @@ private:
 		level_type
 	);
 
-	entities::model::parameters const &
+	entities::model::parameters const
 	model_parameters() const;
 
 	sprite::particle::system &
@@ -64,7 +64,10 @@ private:
 	entity_id
 	own_player_id() const;
 
-	object &scene_;
+	sge::renderer::screen_size const
+	screen_size() const;
+
+	object &object_;
 
 	hud &hud_;
 };

@@ -1,13 +1,14 @@
 #include "message_environment.hpp"
 #include "object.hpp"
 #include "hud.hpp"
+#include "../entities/model/parameters.hpp"
 
 sanguis::client::draw2d::scene::message_environment::message_environment(
-	object &scene_,
+	object &object_,
 	hud &hud_
 )
 :
-	scene_(scene_),
+	object_(object_),
 	hud_(hud_)
 {}
 
@@ -21,7 +22,7 @@ sanguis::client::draw2d::scene::message_environment::insert(
 )
 {
 	return 
-		scene_.insert(
+		object_.insert(
 			e_ptr,
 			id
 		);
@@ -33,7 +34,7 @@ sanguis::client::draw2d::scene::message_environment::entity(
 )
 {
 	return
-		scene_.entity(
+		object_.entity(
 			id
 		);
 }
@@ -58,10 +59,10 @@ sanguis::client::draw2d::scene::message_environment::level(
 	);
 }
 
-sanguis::client::draw2d::entities::model::parameters const &
+sanguis::client::draw2d::entities::model::parameters const
 sanguis::client::draw2d::scene::message_environment::model_parameters() const
 {
-	return model::paramters(
+	return entities::model::parameters(
 		object_.colored_system(),
 		object_.normal_system(),
 		object_.load_collection()
@@ -84,4 +85,10 @@ sanguis::client::draw2d::transform_callback const &
 sanguis::client::draw2d::scene::message_environment::transform_callback() const
 {
 	return object_.transform_callback();
+}
+
+sge::renderer::screen_size const
+sanguis::client::draw2d::scene::message_environment::screen_size() const
+{
+	return object_.screen_size();
 }

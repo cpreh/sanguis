@@ -1,15 +1,22 @@
 #include "control_environment.hpp"
 #include "object.hpp"
 #include "../entities/base.hpp"
+#include "../screen_to_virtual.hpp"
+#include "../../cursor/object.hpp"
 #include <fcppt/math/vector/angle_between.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/assert.hpp>
 
 sanguis::client::draw2d::scene::control_environment::control_environment(
-	object &object_
+	object &object_,
+	client::cursor::object_ptr const cursor_
 )
 :
-	object_(object_)
+	object_(object_),
+	cursor_(cursor_),
+	direction_(
+		client::control::direction_vector::null()
+	)
 {}
 
 sanguis::client::draw2d::scene::control_environment::~control_environment()
@@ -24,20 +31,24 @@ sanguis::client::draw2d::scene::control_environment::direction() const
 sanguis::client::control::direction_vector const
 sanguis::client::draw2d::scene::control_environment::attack_dest() const
 {
-	// FIXME: where to get this from?
+	return
+		screen_to_virtual(
+			object_.screen_size(),
+			cursor_->pos()
+		);
 }
 
 sanguis::client::control::key_scale
 sanguis::client::draw2d::scene::control_environment::rotation() const
 {
 	fcppt::optional<
-		control::direction_vector
+		control::key_scale
 	> const ret(
 		fcppt::math::vector::angle_between<
 			control::key_scale
 		>(
 			object_.own_player().center(),
-			attack_dest()
+			cursor_->pos()
 		)
 	);
 

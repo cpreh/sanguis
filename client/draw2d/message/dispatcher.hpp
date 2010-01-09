@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_MESSAGE_DISPATCHER_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_MESSAGE_DISPATCHER_HPP_INCLUDED
 
+#include "dispatcher_fwd.hpp"
 #include "environment_fwd.hpp"
 #include "../entities/auto_ptr.hpp"
 #include "../entities/base_fwd.hpp"

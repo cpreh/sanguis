@@ -4,6 +4,7 @@
 #include "../entities/auto_ptr.hpp"
 #include "../sprite/client/system.hpp"
 #include "../../entity_type.hpp"
+#include "../../../load/resource/textures_fwd.hpp"
 #include <sge/renderer/screen_size.hpp>
 
 namespace sanguis

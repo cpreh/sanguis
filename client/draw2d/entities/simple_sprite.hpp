@@ -1,13 +1,11 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_SIMPLE_SPRITE_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_SIMPLE_SPRITE_HPP_INCLUDED
 
-#include "environment_fwd.hpp"
-#include "sprite/client/repetition_type.hpp"
-#include "sprite/client/object.hpp"
-#include "sprite/order.hpp"
-#include "entity.hpp"
-#include <sge/texture/part_fwd.hpp>
-#include <sge/sprite/intrusive/order.hpp>
+#include "base.hpp"
+#include "../sprite/client/repetition_type.hpp"
+#include "../sprite/client/object.hpp"
+#include "../sprite/order.hpp"
+#include <sge/texture/part_ptr.hpp>
 #include <sge/sprite/object_decl.hpp>
 
 namespace sanguis
@@ -16,10 +14,12 @@ namespace client
 {
 namespace draw2d
 {
+namespace entities
+{
 
 class simple_sprite
 :
-	public entity
+	public base
 {
 public:
 	simple_sprite(
@@ -48,6 +48,9 @@ private:
 		sprite::dim const &
 	);
 
+	sprite::point const
+	center() const;
+
 	void
 	visible(
 		bool
@@ -56,6 +59,7 @@ private:
 	sprite::client::object sprite_;
 };
 
+}
 }
 }
 }

@@ -1,7 +1,12 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_CONTROL_ENVIRONMENT_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_CONTROL_ENVIRONMENT_HPP_INCLUDED
 
+#include "object_fwd.hpp"
 #include "../../control/environment.hpp"
+#include "../../control/direction_vector.hpp"
+#include "../../control/key_scale.hpp"
+#include "../../cursor/object_ptr.hpp"
+#include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -20,6 +25,8 @@ class control_environment
 	FCPPT_NONCOPYABLE(control_environment)
 public:
 	control_environment(
+		object &,
+		client::cursor::object_ptr
 	);
 
 	~control_environment();
@@ -43,6 +50,10 @@ private:
 		client::control::key_scale
 	);
 
+	object &object_;
+
+	client::cursor::object_ptr const cursor_;
+
 	client::control::direction_vector direction_;
 };
 
@@ -52,4 +63,3 @@ private:
 }
 
 #endif
-

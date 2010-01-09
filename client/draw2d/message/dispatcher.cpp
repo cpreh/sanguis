@@ -5,6 +5,7 @@
 #include "../entities/with_orientation.hpp"
 #include "../entities/with_speed.hpp"
 #include "../entities/with_weapon.hpp"
+#include "../entities/model/parameters.hpp"
 #include "../factory/aoe_projectile.hpp"
 #include "../factory/enemy.hpp"
 #include "../factory/friend.hpp"

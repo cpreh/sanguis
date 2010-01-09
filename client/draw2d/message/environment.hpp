@@ -50,7 +50,7 @@ public:
 		level_type
 	) = 0;
 
-	virtual entities::model::parameters const &
+	virtual entities::model::parameters const
 	model_parameters() const = 0;
 
 	virtual sprite::particle::system &

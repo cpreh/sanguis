@@ -5,8 +5,9 @@
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/sprite/intrusive/system_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
+#include <sge/sprite/center.hpp>
 
-sanguis::client::draw2d::simple_sprite::simple_sprite(
+sanguis::client::draw2d::entities::simple_sprite::simple_sprite(
 	sprite::client::system &system_,		
 	sprite::order const order,
 	sge::texture::const_part_ptr const tex,
@@ -46,17 +47,17 @@ sanguis::client::draw2d::simple_sprite::simple_sprite(
 		);
 }
 
-sanguis::client::draw2d::simple_sprite::~simple_sprite()
+sanguis::client::draw2d::entities::simple_sprite::~simple_sprite()
 {}
 
 void
-sanguis::client::draw2d::simple_sprite::update(
+sanguis::client::draw2d::entities::simple_sprite::update(
 	time_type
 )
 {}
 
 void
-sanguis::client::draw2d::simple_sprite::pos(
+sanguis::client::draw2d::entities::simple_sprite::pos(
 	sprite::point const &pos_
 )
 {
@@ -66,7 +67,7 @@ sanguis::client::draw2d::simple_sprite::pos(
 }
 
 void
-sanguis::client::draw2d::simple_sprite::dim(
+sanguis::client::draw2d::entities::simple_sprite::dim(
 	sprite::dim const &dim_
 )
 {
@@ -75,8 +76,17 @@ sanguis::client::draw2d::simple_sprite::dim(
 	);
 }
 
+sanguis::client::draw2d::sprite::point const
+sanguis::client::draw2d::entities::simple_sprite::center() const
+{
+	return
+		sge::sprite::center(
+			sprite_
+		);
+}
+
 void
-sanguis::client::draw2d::simple_sprite::visible(
+sanguis::client::draw2d::entities::simple_sprite::visible(
 	bool const v
 )
 {

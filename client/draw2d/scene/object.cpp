@@ -1,12 +1,17 @@
 #include "object.hpp"
-#include "z_ordering.hpp"
-#include "factory/client.hpp"
-#include "sprite/order.hpp"
-#include "../messages/call/object.hpp"
-#include "../messages/role_name.hpp"
+#include "message_environment.hpp"
+#include "control_environment.hpp"
+#include "../message/dispatcher.hpp"
+#include "../z_ordering.hpp"
+#include "../factory/client.hpp"
+#include "../sprite/order.hpp"
+#include "../sprite/matrix.hpp"
+#include "../../invalid_id.hpp"
+#include "../../next_id.hpp"
 #include "../../messages/add.hpp"
 #include "../../messages/visible.hpp"
-#include "../../invalid_id.hpp"
+#include "../../../messages/call/object.hpp"
+#include "../../../messages/role_name.hpp"
 #include "../../../exception.hpp"
 #include "../../../load/context.hpp"
 
@@ -16,9 +21,10 @@
 #include <sge/sprite/intrusive/system_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 
+#include <fcppt/math/matrix/basic_impl.hpp>
+#include <fcppt/math/matrix/translation.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/make_auto_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/format.hpp>
 
@@ -29,15 +35,16 @@
 sanguis::client::draw2d::scene::object::object(
 	load::context const &resources_,
 	sge::renderer::device_ptr const rend_,
-	sge::font::object &font
+	sge::font::object &font,
+	client::cursor::object_ptr const cursor_
 )
 :
 	resources_(resources_),
 	rend_(rend_),
-	normal_system_(rend),
-	colored_system_(rend),
-	client_system_(rend),
-	particle_system_(rend),
+	normal_system_(rend_),
+	colored_system_(rend_),
+	client_system_(rend_),
+	particle_system_(rend_),
 	hud_(font),
 	paused_(false),
 	player_id_(invalid_id),
@@ -52,34 +59,25 @@ sanguis::client::draw2d::scene::object::object(
 		std::tr1::bind(
 			&object::insert,
 			this,
-			std::tr1::placeholders::_1
+			std::tr1::placeholders::_1,
+			std::tr1::placeholders::_2
 		)
 	),
 	message_environment_(
-		fcppt::make_auto_ptr<
-			message_environment
-		>(
-			std::tr1::ref(
-				*this
-			)
+		new message_environment(
+			*this,
+			hud_
 		)
 	),
 	control_environment_(
-		fcppt::make_auto_ptr<
-			control_environment
-		>(
-			std::tr1::ref(
-				*this
-			)
+		new scene::control_environment(
+			*this,
+			cursor_
 		)
 	),
 	message_dispatcher_(
-		fcppt::make_auto_ptr<
-			message::dispatcher
-		>(
-			std::tr1::ref(
-				*message_environment_
-			)
+		new message::dispatcher(
+			*message_environment_
 		)
 	),
 	entities_()
@@ -90,42 +88,42 @@ sanguis::client::draw2d::scene::object::~object()
 
 void
 sanguis::client::draw2d::scene::object::process_message(
-	messages::base const &m
+	sanguis::messages::base const &m
 )
 {
-	static messages::call::object<
+	static sanguis::messages::call::object<
 		boost::mpl::vector21<
-			messages::add_aoe_projectile,
-			messages::add_enemy,
-			messages::add_friend,
-			messages::add_pickup,
-			messages::add_player,
-			messages::add_projectile,
-			messages::add_weapon_pickup,
-			messages::change_weapon,
-			messages::experience,
-			messages::health,
-			messages::level_up,
-			messages::max_health,
-			messages::move,
-			messages::remove,
-			messages::resize,
-			messages::rotate,
-			messages::start_attacking,
-			messages::stop_attacking,
-			messages::start_reloading,
-			messages::stop_reloading,
-			messages::speed
+			sanguis::messages::add_aoe_projectile,
+			sanguis::messages::add_enemy,
+			sanguis::messages::add_friend,
+			sanguis::messages::add_pickup,
+			sanguis::messages::add_player,
+			sanguis::messages::add_projectile,
+			sanguis::messages::add_weapon_pickup,
+			sanguis::messages::change_weapon,
+			sanguis::messages::experience,
+			sanguis::messages::health,
+			sanguis::messages::level_up,
+			sanguis::messages::max_health,
+			sanguis::messages::move,
+			sanguis::messages::remove,
+			sanguis::messages::resize,
+			sanguis::messages::rotate,
+			sanguis::messages::start_attacking,
+			sanguis::messages::stop_attacking,
+			sanguis::messages::start_reloading,
+			sanguis::messages::stop_reloading,
+			sanguis::messages::speed
 		>,
-		scene
+		message::dispatcher
 	> dispatcher;
 
 	dispatcher(
 		m,
-		message_dispatcher_,
+		*message_dispatcher_,
 		std::tr1::bind(
-			&message_dispatcher::process_default_msg,
-			&message_dispatcher_,
+			&message::dispatcher::process_default_msg,
+			message_dispatcher_.get(),
 			std::tr1::placeholders::_1
 		)
 	);
@@ -133,20 +131,20 @@ sanguis::client::draw2d::scene::object::process_message(
 
 sanguis::entity_id
 sanguis::client::draw2d::scene::object::client_message(
-	messages::add const &m
+	client::messages::add const &m
 )
 {
 	std::pair<
 		entity_map::iterator,
 		bool
 	> const ret(
-		entities.insert(
+		entities_.insert(
 			next_id(),
 			factory::client(
 				client_system(),
 				resources_.resources().textures(),
 				m.type(),
-				rend->screen_size()
+				screen_size()
 			)
 		)
 	);
@@ -165,7 +163,7 @@ sanguis::client::draw2d::scene::object::client_message(
 
 void
 sanguis::client::draw2d::scene::object::client_message(
-	client_messages::visible const &m
+	client::messages::visible const &m
 )
 {
 	entity(
@@ -181,26 +179,28 @@ sanguis::client::draw2d::scene::object::draw(
 )
 {
 	time_type const real_delta =
-		paused
+		paused_
 		? 0
 		: delta;
 	
+#if 0
 	env.context().update(
 		real_delta
 	);
+#endif
 	
 	for(
 		entity_map::iterator it(
-			entities.begin()
+			entities_.begin()
 		),
 		next(it);
-		it != entities.end();
+		it != entities_.end();
 		it = next
 	)
 	{
 		++next;
 
-		draw::entity &e = *it->second;
+		entities::base &e = *it->second;
 
 		e.update(
 			real_delta
@@ -212,18 +212,10 @@ sanguis::client::draw2d::scene::object::draw(
 		{
 			e.on_remove();
 
-			entities.erase(it);
+			entities_.erase(it);
 		}
 	}
 
-	BOOST_FOREACH(
-		entity_map::reference r,
-		dead_list
-	)
-		r.second->update(
-			real_delta
-		);
-	
 	render_systems();
 
 	hud_.update(
@@ -236,7 +228,7 @@ sanguis::client::draw2d::scene::object::pause(
 	bool const p
 )
 {
-	paused = p;
+	paused_ = p;
 }
 
 void
@@ -248,10 +240,10 @@ sanguis::client::draw2d::scene::object::player_id(
 }
 
 void
-sanguis::client::draw2d::scene::render_systems()
+sanguis::client::draw2d::scene::object::render_systems()
 {
 	sge::renderer::state::scoped const state_(
-		rend,	
+		rend_,
 		sge::sprite::render_states()
 	);
 
@@ -304,9 +296,9 @@ sanguis::client::draw2d::scene::render_systems()
 	);
 }
 
-sanguis::draw::entity &
+sanguis::client::draw2d::entities::base &
 sanguis::client::draw2d::scene::object::insert(
-	entity_auto_ptr e,
+	entities::auto_ptr e,
 	entity_id const id
 )
 {
@@ -314,7 +306,7 @@ sanguis::client::draw2d::scene::object::insert(
 		entity_map::iterator,
 		bool
 	> const ret(
-		entities.insert(
+		entities_.insert(
 			id,
 			e
 		)
@@ -330,19 +322,19 @@ sanguis::client::draw2d::scene::object::insert(
 	return *ret.first->second;
 }
 
-sanguis::draw::entity &
+sanguis::client::draw2d::entities::base &
 sanguis::client::draw2d::scene::object::entity(
 	entity_id const id
 )
 {
 	entity_map::iterator const it(
-		entities.find(
+		entities_.find(
 			id
 		)
 	);
 
 	if(
-		it == entities.end()
+		it == entities_.end()
 	)
 		throw exception(
 			(
@@ -353,25 +345,6 @@ sanguis::client::draw2d::scene::object::entity(
 			).str()
 		);
 	return *it->second;
-}
-
-sanguis::draw::entity const &
-sanguis::client::draw2d::scene::object::entity(
-	entity_id const id
-) const
-{
-	return
-		const_cast<
-			draw::entity const &
-		>(
-			const_cast<
-				scene &
-			>(
-				*this
-			).entity(
-				id
-			)
-		);
 }
 
 sanguis::client::draw2d::entities::base &
@@ -388,11 +361,10 @@ sanguis::client::draw2d::scene::object::transform(
 )
 {
 	sprite::matrix const matrix_(
-		fcppt::math::matrix::translate(
-			fcppt::math::vector::construct(
-				center_,
-				0
-			)
+		fcppt::math::matrix::translation(
+			static_cast<sprite::float_unit>(center_.x()),
+			static_cast<sprite::float_unit>(center_.y()),
+			static_cast<sprite::float_unit>(0)
 		)
 	);
 
@@ -401,13 +373,13 @@ sanguis::client::draw2d::scene::object::transform(
 	);
 }
 
-sanguis::client::draw2d::draw2d::transform_callback const &
+sanguis::client::draw2d::transform_callback const &
 sanguis::client::draw2d::scene::object::transform_callback() const
 {
 	return transform_callback_;	
 }
 
-sanguis::client::draw2d::draw2d::insert_callback const &
+sanguis::client::draw2d::insert_callback const &
 sanguis::client::draw2d::scene::object::insert_callback() const
 {
 	return insert_callback_;
@@ -441,4 +413,10 @@ sanguis::load::model::collection const &
 sanguis::client::draw2d::scene::object::load_collection() const
 {
 	return resources_.models()();
+}
+
+sge::renderer::screen_size const
+sanguis::client::draw2d::scene::object::screen_size() const
+{
+	return rend_->screen_size();
 }

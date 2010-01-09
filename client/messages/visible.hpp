@@ -1,7 +1,8 @@
 #ifndef SANGUIS_CLIENT_MESSAGES_VISIBLE_HPP_INCLUDED
 #define SANGUIS_CLIENT_MESSAGES_VISIBLE_HPP_INCLUDED
 
-#include "../entity_id.hpp"
+#include "visible_fwd.hpp"
+#include "../../entity_id.hpp"
 
 namespace sanguis
 {

@@ -1,10 +1,10 @@
 #include "friend.hpp"
-#include "../model.hpp"
-#include "../sentry.hpp"
+#include "../entities/model/object.hpp"
+#include "../entities/sentry.hpp"
 #include "../z_ordering.hpp"
-#include "../../load/friend_name.hpp"
-#include "../../friend_type.hpp"
-#include "../../exception.hpp"
+#include "../../../load/friend_name.hpp"
+#include "../../../friend_type.hpp"
+#include "../../../exception.hpp"
 #include <fcppt/text.hpp>
 
 sanguis::client::draw2d::entities::auto_ptr
@@ -17,21 +17,22 @@ sanguis::client::draw2d::factory::friend_(
 		etype
 	)
 	{
+	case friend_type::size:
+		break;
 	case friend_type::spider:
 		return entities::auto_ptr(
-			new model(
+			new entities::model::object(
 				param,
 				load::friend_name(
 					etype
 				),
 				z_ordering::model_generic,
-				true,
-				remove_action::render_dead
+				true
 			)
 		);
 	case friend_type::sentry:
 		return entities::auto_ptr(
-			new sentry(
+			new entities::sentry(
 				param
 			)
 		);

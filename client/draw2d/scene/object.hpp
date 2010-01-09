@@ -12,7 +12,11 @@
 #include "../sprite/normal/system.hpp"
 #include "../sprite/colored/system.hpp"
 #include "../sprite/particle/system.hpp"
+#include "../sprite/point.hpp"
+#include "../transform_callback.hpp"
+#include "../insert_callback.hpp"
 #include "../../control/environment_fwd.hpp"
+#include "../../cursor/object_ptr.hpp"
 #include "../../messages/add_fwd.hpp"
 #include "../../messages/visible_fwd.hpp"
 #include "../../../load/context_fwd.hpp"
@@ -22,6 +26,7 @@
 #include "../../../time_type.hpp"
 #include <sge/sprite/intrusive/system_decl.hpp>
 #include <sge/renderer/device_ptr.hpp>
+#include <sge/renderer/screen_size.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -44,7 +49,8 @@ public:
 	object(
 		load::context const &,
 		sge::renderer::device_ptr,
-		sge::font::object &
+		sge::font::object &,
+		client::cursor::object_ptr
 	);
 
 	~object();
@@ -56,12 +62,12 @@ public:
 
 	entity_id
 	client_message(
-		client::messages::add const &
+		sanguis::client::messages::add const &
 	);
 
 	void
 	client_message(
-		client::messages::visible const &
+		sanguis::client::messages::visible const &
 	);
 
 	void
@@ -83,6 +89,8 @@ public:
 	control_environment() const;
 private:
 	friend class message_environment;
+
+	friend class control_environment;
 
 	void
 	render_systems();
@@ -126,6 +134,9 @@ private:
 
 	load::model::collection const &
 	load_collection() const;
+
+	sge::renderer::screen_size const
+	screen_size() const;
 	
 	load::context const &resources_;
 
@@ -154,12 +165,16 @@ private:
 	> message_environment_;
 
 	fcppt::scoped_ptr<
+		control::environment
+	> control_environment_;
+
+	fcppt::scoped_ptr<
 		message::dispatcher
 	> message_dispatcher_;
 
 	typedef boost::ptr_map<
 		entity_id,
-		draw::entity
+		entities::base
 	> entity_map;
 
 	entity_map entities_;

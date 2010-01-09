@@ -1,6 +1,6 @@
 #include "simple_sprite.hpp"
 #include "../entities/simple_sprite.hpp"
-#include "../../load/resource/textures.hpp"
+#include "../../../load/resource/textures.hpp"
 
 sanguis::client::draw2d::entities::auto_ptr
 sanguis::client::draw2d::factory::simple_sprite(
