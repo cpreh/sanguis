@@ -4,7 +4,9 @@
 #include "model/parameters_fwd.hpp"
 #include "model/object.hpp"
 #include "../sprite/particle/system.hpp"
+#include "../insert_callback.hpp"
 #include "../funit.hpp"
+#include "../../../load/model/collection_fwd.hpp"
 #include <fcppt/function/object.hpp>
 
 namespace sanguis
@@ -31,6 +33,8 @@ public:
 private:
 	void
 	on_decay();
+
+	load::model::collection const &model_collection_;
 
 	sprite::particle::system &particle_system_;
 

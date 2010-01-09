@@ -11,8 +11,6 @@
 #include "../../../../diff_clock.hpp"
 #include "../../../../load/model/part_fwd.hpp"
 #include "../../../../load/model/animation_context_fwd.hpp"
-#include "../animation_state.hpp"
-#include "../load/model/animation_context_fwd.hpp"
 #include <sge/sprite/animation/loop_method.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <fcppt/auto_ptr.hpp>

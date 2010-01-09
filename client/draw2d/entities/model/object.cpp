@@ -1,6 +1,7 @@
 #include "object.hpp"
 #include "part.hpp"
 #include "parameters.hpp"
+#include "healthbar.hpp"
 #include "../../log.hpp"
 #include "../../sprite/index.hpp"
 #include "../../../id_dont_care.hpp"
@@ -24,13 +25,13 @@ sanguis::client::draw2d::entities::model::object::object(
 )
 :
 	base(),
-	with_health(),
-	with_weapon(),
 	container(
 		param_.normal_system(),
-		param_.collection()[name].size()
+		param_.collection()[name].size(),
 		order
 	),
+	with_health(),
+	with_weapon(),
 	attacking_(false),
 	reloading_(false),
 	health_(0),
@@ -43,7 +44,8 @@ sanguis::client::draw2d::entities::model::object::object(
 			)
 		:
 			0
-	)
+	),
+	parts()
 {
 	part_vector::size_type i(0);
 
@@ -52,9 +54,9 @@ sanguis::client::draw2d::entities::model::object::object(
 		param_.collection()[name]
 	)
 		parts.push_back(
-			new model_part(
+			new model::part(
 				p.second,
-				at(sprite_part_index(i++))
+				at(sprite::index(i++))
 			)
 		);
 	
@@ -63,16 +65,16 @@ sanguis::client::draw2d::entities::model::object::object(
 	);
 }
 
-sanguis::client::draw2d::entities::model::object::~model()
+sanguis::client::draw2d::entities::model::object::~object()
 {}
 
-sanguis::draw::funit
+sanguis::client::health_type
 sanguis::client::draw2d::entities::model::object::max_health() const
 {
 	return max_health_;
 }
 
-sanguis::draw::funit
+sanguis::client::health_type
 sanguis::client::draw2d::entities::model::object::health() const
 {
 	return health_;
@@ -92,7 +94,7 @@ sanguis::client::draw2d::entities::model::object::update(
 		);
 
 	BOOST_FOREACH(
-		model_part &p,
+		model::part &p,
 		parts
 	)
 		p.update(time);
@@ -104,7 +106,7 @@ sanguis::client::draw2d::entities::model::object::orientation(
 )
 {
 	BOOST_FOREACH(
-		model_part &p,
+		model::part &p,
 		parts
 	)
 		p.orientation(rot);
@@ -123,7 +125,7 @@ bool
 sanguis::client::draw2d::entities::model::object::may_be_removed() const
 {
 	return
-		entity::may_be_removed()
+		base::may_be_removed()
 		&& animations_ended();
 }
 
@@ -142,9 +144,9 @@ sanguis::client::draw2d::entities::model::object::speed(
 		change_animation();
 }
 
-sanguis::client::draw2d::entities::model::object_part &
+sanguis::client::draw2d::entities::model::part &
 sanguis::client::draw2d::entities::model::object::part(
-	sprite_part_index const &idx
+	sprite::index const &idx
 )
 {
 	return parts.at(idx.get());
@@ -200,7 +202,7 @@ sanguis::client::draw2d::entities::model::object::weapon(
 	weapon_type::type const weapon_
 )
 {
-	BOOST_FOREACH(model_part &p, parts)
+	BOOST_FOREACH(model::part &p, parts)
 		p.weapon(weapon_);
 	change_animation();
 }
@@ -250,7 +252,7 @@ sanguis::client::draw2d::entities::model::object::change_animation(
 	animation_type::type const nanim
 )
 {
-	BOOST_FOREACH(model_part &p, parts)
+	BOOST_FOREACH(model::part &p, parts)
 	{
 		animation_type::type part_anim(
 			nanim
@@ -283,6 +285,8 @@ sanguis::client::draw2d::entities::model::object::fallback_anim(
 	case animation_type::walking:
 	case animation_type::dying:
 		return animation_type::none;
+	case animation_type::size:
+		break;
 	}
 
 	throw exception(
@@ -298,11 +302,11 @@ sanguis::client::draw2d::entities::model::object::animation() const
 		?
 			animation_type::dying
 		:
-			reloading
+			reloading_
 			?
 				animation_type::reloading
 			:
-				attacking
+				attacking_
 				?
 					animation_type::attacking
 				:
@@ -342,7 +346,7 @@ sanguis::client::draw2d::entities::model::object::log()
 {
 	static fcppt::log::object log_(
 		fcppt::log::parameters::inherited(
-			draw::log(),
+			draw2d::log(),
 			FCPPT_TEXT("model")
 		)
 	);

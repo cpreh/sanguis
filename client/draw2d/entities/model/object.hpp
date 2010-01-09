@@ -88,10 +88,12 @@ protected:
 		sprite::index const &
 	);
 
+#if 0
 	model::part const &
 	part(
 		sprite::index const &
 	) const;
+#endif
 
 	bool
 	dead() const;

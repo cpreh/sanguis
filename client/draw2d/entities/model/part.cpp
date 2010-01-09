@@ -4,8 +4,8 @@
 #include "../../sprite/rotation_type.hpp"
 #include "../../../../load/model/part.hpp"
 #include "../../../../load/model/base_animation_not_found.hpp"
-#include "../exception.hpp"
-#include "../load/model/animation_context.hpp"
+#include "../../../../load/model/animation_context.hpp"
+#include "../../../../exception.hpp"
 #include <sge/sprite/animation/texture_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
@@ -26,7 +26,7 @@ namespace
 sanguis::client::draw2d::sprite::rotation_type const
 invalid_rotation(
 	std::numeric_limits<
-		sanguis::draw::sprite::rotation_type
+		sanguis::client::draw2d::sprite::rotation_type
 	>::max()
 );
 
@@ -34,7 +34,7 @@ invalid_rotation(
 
 sanguis::client::draw2d::entities::model::part::part(
 	load::model::part const& _load_part,
-	sanguis::draw::sprite::normal::object &_ref
+	sprite::normal::object &_ref
 )
 :
 	anim_diff_clock_(),
@@ -200,7 +200,7 @@ sanguis::client::draw2d::entities::model::part::update(
 		: ((swap_dist > abs_dist) ? static_cast<funit>(1) : static_cast<funit>(-1));
 
 	funit const turning_speed = 
-		fcppt::math::twopi<sanguis::draw::funit>();
+		fcppt::math::twopi<funit>();
 
 	funit const new_orientation = 
 		abs_current + dir * time * turning_speed;
@@ -261,13 +261,13 @@ sanguis::client::draw2d::entities::model::part::animation_ended() const
 	return ended_;
 }
 
-sanguis::draw::sprite::normal::object &
+sanguis::client::draw2d::sprite::normal::object &
 sanguis::client::draw2d::entities::model::part::object()
 {
 	return ref_;
 }
 
-sanguis::draw::sprite::normal::object const &
+sanguis::client::draw2d::sprite::normal::object const &
 sanguis::client::draw2d::entities::model::part::object() const
 {
 	return ref_;
@@ -283,7 +283,7 @@ sanguis::client::draw2d::entities::model::part::load_animation(
 		load_part_[weapon_][atype].load());
 	
 	state_.reset(
-		new model_part_state(
+		new part_state(
 			load_part_,
 			*this, // FIXME: this can be removed now
 			atype,
@@ -321,6 +321,8 @@ sanguis::client::draw2d::entities::model::part::loop_method(
 	case animation_type::dying:
 	case animation_type::deploying:
 		return sge::sprite::animation::loop_method::stop_at_end;
+	case animation_type::size:
+		break;
 	}
 
 	throw sge::exception(
@@ -328,7 +330,7 @@ sanguis::client::draw2d::entities::model::part::loop_method(
 	);
 }
 
-sanguis::draw::sprite::rotation_type
+sanguis::client::draw2d::sprite::rotation_type
 sanguis::client::draw2d::entities::model::part::orientation() const
 {
 	return ref_.rotation();

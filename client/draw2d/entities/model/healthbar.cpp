@@ -38,7 +38,7 @@ sanguis::client::draw2d::entities::model::healthbar::healthbar(
 			z_ordering::healthbar_lower
 		)
 		.system(
-			sys
+			&sys
 		)
 		.elements()
 	),
@@ -48,7 +48,7 @@ sanguis::client::draw2d::entities::model::healthbar::healthbar(
 			z_ordering::healthbar_upper
 		)
 		.system(
-			sys
+			&sys
 		)
 		.elements()
 	),
@@ -73,13 +73,13 @@ sanguis::client::draw2d::entities::model::healthbar::update_health(
 	recalc_health();
 }
 
-sanguis::draw::health_type
+sanguis::client::health_type
 sanguis::client::draw2d::entities::model::healthbar::health() const
 {
 	return health_;
 }
 
-sanguis::draw::health_type
+sanguis::client::health_type
 sanguis::client::draw2d::entities::model::healthbar::max_health() const
 {
 	return max_health_;
@@ -136,7 +136,7 @@ sanguis::client::draw2d::entities::model::healthbar::dim(
 	recalc_health();
 }
 
-sanguis::draw::sprite::point const 
+sanguis::client::draw2d::sprite::point const 
 sanguis::client::draw2d::entities::model::healthbar::inner_pos() const
 {
 	return
@@ -147,7 +147,7 @@ sanguis::client::draw2d::entities::model::healthbar::inner_pos() const
 		);
 }
 
-sanguis::draw::sprite::dim const 
+sanguis::client::draw2d::sprite::dim const 
 sanguis::client::draw2d::entities::model::healthbar::inner_dim() const
 {
 	return
@@ -158,7 +158,7 @@ sanguis::client::draw2d::entities::model::healthbar::inner_dim() const
 		);
 }
 
-sanguis::draw::health_type
+sanguis::client::health_type
 sanguis::client::draw2d::entities::model::healthbar::remaining_health() const
 {
 	return health_ / max_health_;

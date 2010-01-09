@@ -1,10 +1,10 @@
 #include "part_state.hpp"
 #include "part.hpp"
-#include "../load/model/animation.hpp"
-#include "../load/model/part.hpp"
-#include "../load/model/animation_sound.hpp"
-#include "../animation_sound_type.hpp"
-#include "../resolution.hpp"
+#include "../../../../load/model/animation.hpp"
+#include "../../../../load/model/part.hpp"
+#include "../../../../load/model/animation_sound.hpp"
+#include "../../../../animation_sound_type.hpp"
+#include "../../../../resolution.hpp"
 #include <sge/sprite/object_impl.hpp>
 #include <sge/audio/sound.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>

@@ -8,6 +8,7 @@
 #include "../../../../weapon_type.hpp"
 #include <sge/audio/sound_ptr.hpp>
 #include <sge/audio/play_mode.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {

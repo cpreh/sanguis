@@ -25,7 +25,7 @@ sanguis::client::draw2d::entities::bullet::bullet(
 	fcppt::string const &name
 )
 :
-	model(
+	model::object(
 		param,
 		name,
 		z_ordering::bullet,
@@ -46,7 +46,7 @@ sanguis::client::draw2d::entities::bullet::update(
 	if (!origin)
 		origin = center();
 	
-	model::update(time);
+	model::object::update(time);
 
 	funit const
 		max_tail_length =
