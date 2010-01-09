@@ -5,6 +5,7 @@
 #include "with_visibility.hpp"
 #include "../sprite/client/repetition_type.hpp"
 #include "../sprite/client/object.hpp"
+#include "../sprite/client/system.hpp"
 #include "../sprite/order.hpp"
 #include <sge/texture/part_ptr.hpp>
 #include <sge/sprite/object_decl.hpp>

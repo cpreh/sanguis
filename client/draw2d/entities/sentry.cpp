@@ -15,12 +15,11 @@ sanguis::client::draw2d::sprite::index const
 }
 
 sanguis::client::draw2d::entities::sentry::sentry(
-	draw::environment const &env,
-	entity_id const id)
+	model::parameters const &param_
+)
 :
-	model(
-		env,
-		id,
+	model::object(
+		param_,
 		load::friend_name(
 			friend_type::sentry
 		),
@@ -37,5 +36,5 @@ sanguis::client::draw2d::entities::sentry::orientation(
 	sprite::rotation_type const rot
 )
 {
-	model::orientation(rot, 1);
+	model::object::orientation(rot, 1);
 }

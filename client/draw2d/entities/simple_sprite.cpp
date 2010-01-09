@@ -1,6 +1,6 @@
 #include "simple_sprite.hpp"
-#include "sprite/client/parameters.hpp"
-#include "sprite/point.hpp"
+#include "../sprite/client/parameters.hpp"
+#include "../sprite/point.hpp"
 #include <fcppt/math/compare.hpp>
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/sprite/intrusive/system_impl.hpp>
@@ -14,14 +14,15 @@ sanguis::client::draw2d::entities::simple_sprite::simple_sprite(
 	sprite::client::repetition_type const _repeat
 )
 :
-	entity(),
+	base(),
+	with_visibility(),
 	sprite_(
 		sprite::client::parameters()
 		.pos(
 			sprite::point::null()
 		)
 		.system(
-			system_
+			&system_
 		)
 		.order(
 			order

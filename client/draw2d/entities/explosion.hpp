@@ -9,6 +9,7 @@
 #include "../sprite/particle/system.hpp"
 #include "../funit.hpp"
 #include "../../../particle_type.hpp"
+#include "../../../load/model/collection_fwd.hpp"
 
 namespace sanguis
 {
@@ -26,34 +27,60 @@ class explosion
 public:
 	explosion(
 		sprite::particle::system &,
+		load::model::collection const &,
 		sprite::point const &pos,
 		funit aoe
 	);
 
 	~explosion();
 private:
+	// base overrides
+	
 	void
 	update(
 		time_type
 	);
+
+	void
+	pos(
+		sprite::point const &
+	);
+
+	void
+	dim(
+		sprite::dim const &
+	);
+
+	sprite::point const
+	center() const;
 
 	particle::base_ptr
 	generate_explosion();
 
 	particle::base_ptr
 	generate_particle(
-		particle_type::type);
+		particle_type::type
+	);
 
 	particle::properties const &
 	properties(
-		particle_type::type const t) const;
+		particle_type::type const t
+	) const;
 	
 	bool may_be_removed() const;
 
+	sprite::particle::system &particle_system_;
+
+	load::model::collection const &model_collection_;
+
 	sprite::point pos_;
+
 	particle::container particles;
+
 	particle::property_map properties_;
+
 	bool ended;
+
 	funit aoe_;
 };
 

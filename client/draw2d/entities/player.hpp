@@ -35,14 +35,14 @@ public:
 	speed(
 		vector2 const &
 	);
-private:
-	using container::orientation;
-	using container::speed;
-
+protected:
 	void
 	update(
 		time_type
 	);
+private:
+	using container::orientation;
+	using container::speed;
 
 	funit
 		angle_,

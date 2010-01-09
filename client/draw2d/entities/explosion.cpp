@@ -1,22 +1,16 @@
 #include "explosion.hpp"
-#include "particle/generator.hpp"
-#include "particle/explosion.hpp"
-#include "particle/properties.hpp"
-#include "particle/object.hpp"
-#include "particle/z_ordering.hpp"
-#include "../load/context.hpp"
-#include "../load/resource/sounds.hpp"
-#include "../load/sound_type.hpp"
-#include "../load/model/part.hpp"
-#include "../load/model/weapon_category.hpp"
-#include "../load/model/model.hpp"
-#include "../load/model/context.hpp"
-#include "../load/model/collection.hpp"
-#include "../resolution.hpp"
-#include "../media_path.hpp"
-#include "../animation_type.hpp"
-#include "../from_particle_type.hpp"
-#include <sge/audio/sound.hpp>
+#include "../particle/explosion.hpp"
+#include "../particle/properties.hpp"
+#include "../particle/property_container.hpp"
+#include "../particle/object.hpp"
+#include "../particle/z_ordering.hpp"
+#include "../../../load/model/part.hpp"
+#include "../../../load/model/weapon_category.hpp"
+#include "../../../load/model/model.hpp"
+#include "../../../load/model/collection.hpp"
+#include "../../../resolution.hpp"
+#include "../../../animation_type.hpp"
+#include "../../../from_particle_type.hpp"
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/minmax_pair_impl.hpp>
@@ -27,96 +21,99 @@ namespace
 {
 
 // TODO: put this somewhere else
-sanguis::draw::particle::property_container const prop_ = boost::assign::map_list_of
+sanguis::client::draw2d::particle::property_container const prop_ = boost::assign::map_list_of
 (
 	sanguis::particle_type::flare,
-	sanguis::draw::particle::properties(
+	sanguis::client::draw2d::particle::properties(
 		static_cast<
-			sanguis::draw::funit
+			sanguis::client::draw2d::funit
 		>(
 			0.03),
 		5,
 		0,
 		0,
-		sanguis::draw::particle::align_type::random,
-		sanguis::draw::particle::properties::dispersion_range(
+		sanguis::client::draw2d::particle::align_type::random,
+		sanguis::client::draw2d::particle::properties::dispersion_range(
 			0,
 			50),
-		sanguis::draw::particle::properties::speed_range(
+		sanguis::client::draw2d::particle::properties::speed_range(
 			0,
 			0),
-		sanguis::draw::particle::properties::rot_speed_range(
+		sanguis::client::draw2d::particle::properties::rot_speed_range(
 			0,
 			10),
 		false,
-		sanguis::draw::particle::properties::fade_range(
+		sanguis::client::draw2d::particle::properties::fade_range(
 			0,
 			0),
-		sanguis::draw::particle::movement_type::random)
+		sanguis::client::draw2d::particle::movement_type::random)
 )
 (
 	sanguis::particle_type::smoke,
-	sanguis::draw::particle::properties(
+	sanguis::client::draw2d::particle::properties(
 		static_cast<
-			sanguis::draw::funit
+			sanguis::client::draw2d::funit
 		>(
 			0.04),
 		9,
 		0,
 		0,
-		sanguis::draw::particle::align_type::to_center,
-		sanguis::draw::particle::properties::dispersion_range(
+		sanguis::client::draw2d::particle::align_type::to_center,
+		sanguis::client::draw2d::particle::properties::dispersion_range(
 			0,
 			20),
-		sanguis::draw::particle::properties::speed_range(
+		sanguis::client::draw2d::particle::properties::speed_range(
 			100,
 			250),
-		sanguis::draw::particle::properties::rot_speed_range(
+		sanguis::client::draw2d::particle::properties::rot_speed_range(
 			0,
 			0),
 		true,
-		sanguis::draw::particle::properties::fade_range(
+		sanguis::client::draw2d::particle::properties::fade_range(
 			2,
 			10),
-		sanguis::draw::particle::movement_type::expanding)
+		sanguis::client::draw2d::particle::movement_type::expanding)
 )
 (
 	sanguis::particle_type::rubble,
-	sanguis::draw::particle::properties(
+	sanguis::client::draw2d::particle::properties(
 		static_cast<
-			sanguis::draw::funit
+			sanguis::client::draw2d::funit
 		>(
 			0.03),
 		0,
 		0,
 		0,
-		sanguis::draw::particle::align_type::random,
-		sanguis::draw::particle::properties::dispersion_range(
+		sanguis::client::draw2d::particle::align_type::random,
+		sanguis::client::draw2d::particle::properties::dispersion_range(
 			0,
 			40),
-		sanguis::draw::particle::properties::speed_range(
+		sanguis::client::draw2d::particle::properties::speed_range(
 			0,
 			400),
-		sanguis::draw::particle::properties::rot_speed_range(
+		sanguis::client::draw2d::particle::properties::rot_speed_range(
 			0,
 			10),
 		false,
-		sanguis::draw::particle::properties::fade_range(
+		sanguis::client::draw2d::particle::properties::fade_range(
 			0,
 			0),
-		sanguis::draw::particle::movement_type::random)
+		sanguis::client::draw2d::particle::movement_type::random)
 )
 ;
 
 }
 
-sanguis::draw::explosion::explosion(
+sanguis::client::draw2d::entities::explosion::explosion(
 	sprite::particle::system &particle_system_,
+	load::model::collection const &model_collection_,
 	sprite::point const &pos_,
 	funit const _aoe
 )
 :
 	base(),
+	particle_system_(particle_system_),
+	model_collection_(model_collection_),
 	pos_(pos_),
 	particles(
 		particle::point::null(),
@@ -155,19 +152,19 @@ sanguis::draw::explosion::explosion(
 			particle::point::null(), // speed
 			static_cast<particle::depth>(0),
 			static_cast<particle::rotation>(0), // no rotation and...
-			static_cast<particle::rotation>(0), // ...no rotation speed
-			particle_system_
+			static_cast<particle::rotation>(0)//, // ...no rotation speed
+			//particle_system_
 		)
 	);
 
 	particles.add(n);
 }
 
-sanguis::draw::explosion::~explosion()
+sanguis::client::draw2d::entities::explosion::~explosion()
 {}
 
 void
-sanguis::draw::explosion::update(
+sanguis::client::draw2d::entities::explosion::update(
 	time_type const delta
 )
 {
@@ -183,8 +180,8 @@ sanguis::draw::explosion::update(
 		);
 }
 
-sanguis::draw::particle::base_ptr
-sanguis::draw::explosion::generate_explosion()
+sanguis::client::draw2d::particle::base_ptr
+sanguis::client::draw2d::entities::explosion::generate_explosion()
 {
 	return particle::base_ptr(
 		new particle::explosion(
@@ -198,19 +195,18 @@ sanguis::draw::explosion::generate_explosion()
 			particle::point::null(), // speed
 			static_cast<particle::depth>(0),
 			static_cast<particle::rotation>(0), // no rotation and...
-			static_cast<particle::rotation>(0), // ...no rotation speed
-			environment()
+			static_cast<particle::rotation>(0)  // ...no rotation speed
 		)
 	);
 }
 
-sanguis::draw::particle::base_ptr
-sanguis::draw::explosion::generate_particle(
+sanguis::client::draw2d::particle::base_ptr
+sanguis::client::draw2d::entities::explosion::generate_particle(
 	particle_type::type const t
 )
 {
-	load::model::animation::context_ptr anim = 
-		environment().context().models()()
+	load::model::animation_context_ptr anim(
+		model_collection_
 		[
 			FCPPT_TEXT("particles/")+
 			from_particle_type(t)
@@ -221,7 +217,8 @@ sanguis::draw::explosion::generate_particle(
 		]
 		[
 			animation_type::none
-		].load();
+		].load()
+	);
 	
 	particle::base_ptr ptr;
 	
@@ -236,7 +233,7 @@ sanguis::draw::explosion::generate_particle(
 				aoe_,
 				anim,
 				particle::object::optional_time(),
-				environment()
+				particle_system_
 			)
 		);
 	else
@@ -248,7 +245,9 @@ sanguis::draw::explosion::generate_particle(
 			rng(
 				particle::fade_time_range(
 					prop.fade().min(),
-					prop.fade().max()));
+					prop.fade().max()
+				)
+			);
 		
 		ptr.reset(
 			new particle::object(
@@ -256,7 +255,7 @@ sanguis::draw::explosion::generate_particle(
 				aoe_,
 				anim,
 				rng(),
-				environment()
+				particle_system_
 			)
 		);
 	}
@@ -270,7 +269,7 @@ sanguis::draw::explosion::generate_particle(
 }
 
 bool
-sanguis::draw::explosion::may_be_removed() const
+sanguis::client::draw2d::entities::explosion::may_be_removed() const
 {
 	return ended;
 }

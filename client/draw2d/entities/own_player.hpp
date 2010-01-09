@@ -5,6 +5,7 @@
 #include "model/parameters_fwd.hpp"
 #include "../transform_callback.hpp"
 #include "../../../time_type.hpp"
+#include <fcppt/function/object.hpp>
 
 namespace sanguis
 {
