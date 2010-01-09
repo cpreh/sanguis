@@ -16,7 +16,8 @@ namespace sanguis
 namespace load
 {
 
-class context {
+class context
+{
 	FCPPT_NONCOPYABLE(context)
 public:
 	context(
@@ -24,7 +25,9 @@ public:
 		sge::renderer::device_ptr,
 		sge::audio::multi_loader &,
 		sge::audio::player_ptr,
-		sge::audio::pool &);
+		sge::audio::pool &
+	);
+
 	~context();
 
 	resource::context const &
@@ -33,7 +36,10 @@ public:
 	model::context const &
 	models() const;
 
-	void update(time_type) const;
+	void
+	update(
+		time_type
+	) const;
 private:
 	sge::image::loader_ptr const il;
 	sge::renderer::device_ptr const rend;

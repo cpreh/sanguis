@@ -62,7 +62,10 @@ sanguis::client::draw2d::entities::model::parameters const &
 sanguis::client::draw2d::scene::message_environment::model_parameters() const
 {
 	return model::paramters(
-	);		
+		object_.colored_system(),
+		object_.normal_system(),
+		object_.load_collection()
+	);
 }
 
 sanguis::client::draw2d::sprite::particle::system &

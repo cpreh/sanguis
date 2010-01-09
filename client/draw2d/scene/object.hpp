@@ -16,12 +16,14 @@
 #include "../../messages/add_fwd.hpp"
 #include "../../messages/visible_fwd.hpp"
 #include "../../../load/context_fwd.hpp"
+#include "../../../load/model/collection_fwd.hpp"
 #include "../../../messages/base.hpp"
 #include "../../../entity_id.hpp"
 #include "../../../time_type.hpp"
 #include <sge/sprite/intrusive/system_decl.hpp>
 #include <sge/renderer/device_ptr.hpp>
 #include <sge/font/object_fwd.hpp>
+#include <fcppt/function/object.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
@@ -91,6 +93,9 @@ private:
 		entity_id
 	);
 
+	entities::base &
+	own_player();
+
 	void
 	transform(
 		sprite::point const &
@@ -99,9 +104,26 @@ private:
 	draw2d::transform_callback const &
 	transform_callback() const;
 
-	entities::base &
-	own_player();
+	draw2d::insert_callback const &
+	insert_callback() const;
+
+	sprite::normal::system &
+	normal_system();
+
+	sprite::colored::system &
+	colored_system();
+
+	sprite::client::system &
+	client_system();
+
+	sprite::particle::system &
+	particle_system();
+
+	load::model::collection const &
+	load_collection() const;
 	
+	load::context const &resources_;
+
 	sge::renderer::device_ptr const rend_;
 
 	sprite::normal::system normal_system_;
@@ -115,6 +137,10 @@ private:
 	hud hud_;
 
 	bool paused_;
+
+	draw2d::transform_callback const transform_callback_;
+
+	draw2d::insert_callback const insert_callback_;
 
 	fcppt::scoped_ptr<
 		message::environment

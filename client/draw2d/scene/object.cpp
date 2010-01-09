@@ -17,10 +17,10 @@
 #include <sge/sprite/object_impl.hpp>
 
 #include <fcppt/function/object.hpp>
+#include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_auto_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/format.hpp>
-#include <fcppt/tr1/functional.hpp>
 
 #include <boost/foreach.hpp>
 
@@ -32,6 +32,7 @@ sanguis::client::draw2d::scene::object::object(
 	sge::font::object &font
 )
 :
+	resources_(resources_),
 	rend_(rend_),
 	normal_system_(rend),
 	colored_system_(rend),
@@ -39,6 +40,20 @@ sanguis::client::draw2d::scene::object::object(
 	particle_system_(rend),
 	hud_(font),
 	paused_(false),
+	transform_callback_(
+		std::tr1::bind(
+			&object::transform,
+			this,
+			std::tr1::placeholders::_1
+		)
+	),
+	insert_callback_(
+		std::tr1::bind(
+			&object::insert,
+			this,
+			std::tr1::placeholders::_1
+		)
+	),
 	message_environment_(
 		fcppt::make_auto_ptr<
 			message_environment
@@ -342,4 +357,65 @@ sanguis::client::draw2d::scene::object::own_player()
 	return entity(
 		player_id_
 	);
+}
+
+void
+sanguis::client::draw2d::scene::object::transform(
+	sprite::point const &center_
+)
+{
+	sprite::matrix const matrix_(
+		fcppt::math::matrix::translate(
+			fcppt::math::vector::construct(
+				center_,
+				0
+			)
+		)
+	);
+
+	normal_system_.transform(		
+		matrix_
+	);
+}
+
+sanguis::client::draw2d::draw2d::transform_callback const &
+sanguis::client::draw2d::scene::object::transform_callback() const
+{
+	return transform_callback_;	
+}
+
+sanguis::client::draw2d::draw2d::insert_callback const &
+sanguis::client::draw2d::scene::object::insert_callback() const
+{
+	return insert_callback_;
+}
+
+sanguis::client::draw2d::sprite::normal::system &
+sanguis::client::draw2d::scene::object::normal_system()
+{
+	return normal_system_;
+}
+
+sanguis::client::draw2d::sprite::colored::system &
+sanguis::client::draw2d::scene::object::colored_system()
+{
+	return colored_system_;
+}
+
+sanguis::client::draw2d::sprite::client::system &
+sanguis::client::draw2d::scene::object::client_system()
+{
+	return client_system_;
+}
+
+sanguis::client::draw2d::sprite::particle::system &
+sanguis::client::draw2d::scene::object::particle_system()
+{
+	return particle_system_;
+}
+
+sanguis::load::model::collection const &
+sanguis::client::draw2d::scene::object::load_collection() const
+{
+	return resources_.models()();
 }
