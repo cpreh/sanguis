@@ -2,10 +2,11 @@
 #include "message_environment.hpp"
 #include "control_environment.hpp"
 #include "../message/dispatcher.hpp"
-#include "../z_ordering.hpp"
 #include "../factory/client.hpp"
 #include "../sprite/order.hpp"
 #include "../sprite/matrix.hpp"
+#include "../entities/with_visibility.hpp"
+#include "../z_ordering.hpp"
 #include "../../invalid_id.hpp"
 #include "../../next_id.hpp"
 #include "../../messages/add.hpp"
@@ -25,6 +26,7 @@
 #include <fcppt/math/matrix/translation.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/dynamic_cast.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/format.hpp>
 
@@ -166,8 +168,12 @@ sanguis::client::draw2d::scene::object::client_message(
 	client::messages::visible const &m
 )
 {
-	entity(
-		m.id()
+	fcppt::dynamic_cast_<
+		entities::with_visibility &
+	>(
+		entity(
+			m.id()
+		)
 	).visible(
 		m.get()
 	);

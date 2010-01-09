@@ -1,8 +1,7 @@
 #include "container.hpp"
-#include "environment.hpp"
-#include "sprite_part_index.hpp"
-#include "sprite/normal/object.hpp"
-#include "sprite/normal/parameters.hpp"
+#include "../sprite/normal/object.hpp"
+#include "../sprite/normal/parameters.hpp"
+#include "../sprite/index.hpp"
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/sprite/intrusive/system_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
@@ -11,10 +10,9 @@
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <boost/foreach.hpp>
-#include <boost/none.hpp>
 
 sanguis::client::draw2d::entities::container::container(
-	sprite::normal::system &normal_system,
+	sprite::normal::system &normal_system_,
 	size_type const sz,
 	sprite::order const order
 )
@@ -46,7 +44,7 @@ sanguis::client::draw2d::entities::container::~container()
 {
 }
 
-sanguis::draw::sprite::point const
+sanguis::client::draw2d::sprite::point const
 sanguis::client::draw2d::entities::container::center() const
 {
 	return sge::sprite::center(
@@ -54,7 +52,7 @@ sanguis::client::draw2d::entities::container::center() const
 	);
 }
 
-sanguis::draw::sprite::point const
+sanguis::client::draw2d::sprite::point const
 sanguis::client::draw2d::entities::container::pos() const
 {
 	return master().pos();
@@ -100,15 +98,6 @@ sanguis::client::draw2d::entities::container::dim(
 }
 
 void
-sanguis::client::draw2d::entities::container::visible(
-	bool const visible_
-)
-{
-	BOOST_FOREACH(object &s, sprites)
-		s.visible(visible_);
-}
-
-void
 sanguis::client::draw2d::entities::container::orientation(
 	sprite::rotation_type const o
 )
@@ -139,7 +128,7 @@ sanguis::client::draw2d::entities::container::speed() const
 
 sanguis::client::draw2d::entities::container::object &
 sanguis::client::draw2d::entities::container::at(
-	sprite_part_index const &i
+	sprite::index const &i
 )
 {
 	return sprites.at(i.get());
@@ -147,7 +136,7 @@ sanguis::client::draw2d::entities::container::at(
 
 sanguis::client::draw2d::entities::container::object const &
 sanguis::client::draw2d::entities::container::at(
-	sprite_part_index const &i
+	sprite::index const &i
 ) const
 {
 	return sprites.at(i.get());
@@ -156,7 +145,9 @@ sanguis::client::draw2d::entities::container::at(
 sanguis::client::draw2d::entities::container::object &
 sanguis::client::draw2d::entities::container::master()
 {
-	return at(sprite_part_index(0));
+	return at(
+		sprite::index(0)
+	);
 }
 
 sanguis::client::draw2d::entities::container::object const &

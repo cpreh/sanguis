@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SPRITE_INDEX_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SPRITE_INDEX_HPP_INCLUDED
 
+#include "index_fwd.hpp"
 #include <cstddef>
 
 namespace sanguis
@@ -17,7 +18,7 @@ class index
 public:
 	typedef std::size_t value_type;
 
-	explicit sprite_part_index(
+	explicit index(
 		value_type
 	);
 	

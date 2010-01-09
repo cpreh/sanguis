@@ -48,11 +48,6 @@ public:
 	virtual sprite::point const
 	center() const = 0;
 
-	virtual void
-	visible(
-		bool
-	) = 0;
-
 	virtual ~base();
 private:
 	bool may_be_removed_;

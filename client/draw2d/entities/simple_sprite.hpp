@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_SIMPLE_SPRITE_HPP_INCLUDED
 
 #include "base.hpp"
+#include "with_visibility.hpp"
 #include "../sprite/client/repetition_type.hpp"
 #include "../sprite/client/object.hpp"
 #include "../sprite/order.hpp"
@@ -19,7 +20,8 @@ namespace entities
 
 class simple_sprite
 :
-	public base
+	public virtual base,
+	public with_visibility
 {
 public:
 	simple_sprite(
@@ -51,6 +53,8 @@ private:
 	sprite::point const
 	center() const;
 
+	// with_visibility overrides
+	
 	void
 	visible(
 		bool

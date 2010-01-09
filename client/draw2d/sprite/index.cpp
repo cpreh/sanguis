@@ -1,13 +1,14 @@
-#include "sprite_part_index.hpp"
+#include "index.hpp"
 
-sanguis::draw::sprite_part_index::sprite_part_index(
-	value_type const value)
+sanguis::client::draw2d::sprite::index::index(
+	value_type const value
+)
 :
 	value(value)
 {}
 
-sanguis::draw::sprite_part_index::value_type
-sanguis::draw::sprite_part_index::get() const
+sanguis::client::draw2d::sprite::index::value_type
+sanguis::client::draw2d::sprite::index::get() const
 {
 	return value;
 }

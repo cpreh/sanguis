@@ -70,11 +70,6 @@ protected:
 		sprite::dim const &
 	);
 
-	void
-	visible(
-		bool
-	);
-
 	// with_orientation overrides
 	virtual void
 	orientation(
