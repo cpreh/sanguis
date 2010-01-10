@@ -25,6 +25,8 @@ sanguis::load::enemy_name(
 		return FCPPT_TEXT("skeleton");
 	case enemy_type::maggot:
 		return FCPPT_TEXT("maggot");
+	case enemy_type::size:
+		break;
 	}
 
 	throw exception(
