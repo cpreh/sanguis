@@ -26,8 +26,11 @@ public:
 		time_type
 	) = 0;
 
-	virtual void
+	void
 	decay();
+
+	virtual void
+	on_decay();
 
 	virtual bool
 	may_be_removed() const;

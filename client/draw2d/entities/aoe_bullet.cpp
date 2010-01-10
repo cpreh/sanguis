@@ -19,7 +19,8 @@ sanguis::client::draw2d::entities::aoe_bullet::aoe_bullet(
 		param,
 		name,
 		z_ordering::bullet,
-		false
+		model::needs_healthbar::no,
+		model::decay_option::immediate
 	),
 	model_collection_(param.collection()),
 	particle_system_(particle_system_),

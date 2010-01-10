@@ -27,7 +27,8 @@ sanguis::client::draw2d::factory::friend_(
 					etype
 				),
 				z_ordering::model_generic,
-				true
+				entities::model::needs_healthbar::yes,
+				entities::model::decay_option::delayed
 			)
 		);
 	case friend_type::sentry:

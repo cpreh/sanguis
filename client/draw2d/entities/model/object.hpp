@@ -3,8 +3,11 @@
 
 #include "object_fwd.hpp"
 #include "healthbar_fwd.hpp"
+#include "decay_time_fwd.hpp"
 #include "part_fwd.hpp"
 #include "parameters_fwd.hpp"
+#include "needs_healthbar.hpp"
+#include "decay_option.hpp"
 #include "../container.hpp"
 #include "../with_health.hpp"
 #include "../with_weapon.hpp"
@@ -41,7 +44,8 @@ public:
 		parameters const &,
 		fcppt::string const &name,
 		sprite::order,
-		bool needs_healthbar
+		needs_healthbar::type,
+		decay_option::type
 	);
 
 	~object();
@@ -72,9 +76,13 @@ protected:
 		size_type index
 	);
 	
+	// base overrides
 	bool
 	may_be_removed() const;
 	
+	virtual void
+	on_decay();
+
 	// with_speed overrides
 	virtual void
 	speed(
@@ -88,13 +96,6 @@ protected:
 		sprite::index const &
 	);
 
-#if 0
-	model::part const &
-	part(
-		sprite::index const &
-	) const;
-#endif
-
 	bool
 	dead() const;
 
@@ -103,9 +104,6 @@ protected:
 
 	bool
 	has_health() const;
-
-	virtual void
-	on_decay();
 private:
 	// with_health overrides
 	void
@@ -157,6 +155,9 @@ private:
 	bool
 	animations_ended() const;
 
+	bool
+	decayed() const;
+
 	static fcppt::log::object &
 	log();
 
@@ -171,6 +172,12 @@ private:
 	fcppt::scoped_ptr<
 		healthbar
 	> healthbar_;
+
+	fcppt::scoped_ptr<
+		decay_time
+	> decay_time_;
+
+	decay_option::type const decay_option_;
 
 	typedef boost::ptr_vector<
 		model::part

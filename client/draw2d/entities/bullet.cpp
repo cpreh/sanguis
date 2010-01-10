@@ -29,7 +29,8 @@ sanguis::client::draw2d::entities::bullet::bullet(
 		param,
 		name,
 		z_ordering::bullet,
-		false
+		model::needs_healthbar::no,
+		model::decay_option::immediate
 	),
 	origin()
 {

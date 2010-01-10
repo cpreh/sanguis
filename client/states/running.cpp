@@ -126,7 +126,13 @@ sanguis::client::states::running::running(
 			)
 		)
 	)
-{}
+{
+	drawer->client_message(
+		client::messages::add(
+			client::entity_type::background
+		)
+	);
+}
 
 sanguis::client::states::running::~running()
 {}

@@ -31,7 +31,8 @@ sanguis::client::draw2d::entities::player::player(
 		param,
 		FCPPT_TEXT("player"),
 		z_ordering::model_generic,
-		true
+		model::needs_healthbar::yes,
+		model::decay_option::delayed
 	),
 	angle_(static_cast<funit>(0)),
 	target_angle(angle_)

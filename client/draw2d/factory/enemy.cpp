@@ -17,7 +17,8 @@ sanguis::client::draw2d::factory::enemy(
 				etype
 			),
 			z_ordering::model_generic,
-			false
+			entities::model::needs_healthbar::no,
+			entities::model::decay_option::delayed
 		)
 	);
 }

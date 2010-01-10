@@ -24,7 +24,8 @@ sanguis::client::draw2d::entities::sentry::sentry(
 			friend_type::sentry
 		),
 		z_ordering::model_generic,
-		true
+		model::needs_healthbar::yes,
+		model::decay_option::delayed
 	)
 {
 	at(bottom).order(z_ordering::player_lower);

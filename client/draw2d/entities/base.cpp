@@ -7,6 +7,14 @@ sanguis::client::draw2d::entities::base::base()
 
 void
 sanguis::client::draw2d::entities::base::decay()
+{
+	may_be_removed_ = true;
+
+	on_decay();
+}
+
+void
+sanguis::client::draw2d::entities::base::on_decay()
 {}
 
 bool

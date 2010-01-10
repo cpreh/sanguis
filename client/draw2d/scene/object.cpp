@@ -189,12 +189,6 @@ sanguis::client::draw2d::scene::object::draw(
 		? 0
 		: delta;
 	
-#if 0
-	env.context().update(
-		real_delta
-	);
-#endif
-	
 	for(
 		entity_map::iterator it(
 			entities_.begin()
@@ -372,6 +366,7 @@ sanguis::client::draw2d::scene::object::transform(
 	sprite::point const &center_
 )
 {
+#if 0
 	sprite::matrix const matrix_(
 		fcppt::math::matrix::translation(
 			static_cast<sprite::float_unit>(center_.x()),
@@ -383,6 +378,7 @@ sanguis::client::draw2d::scene::object::transform(
 	normal_system_.transform(		
 		matrix_
 	);
+#endif
 }
 
 sanguis::client::draw2d::transform_callback const &

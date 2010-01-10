@@ -29,7 +29,8 @@ sanguis::client::draw2d::factory::pickup(
 				ptype
 			),
 			z_ordering::pickup,
-			false
+			entities::model::needs_healthbar::no,
+			entities::model::decay_option::immediate
 		)
 	);
 }

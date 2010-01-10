@@ -2,6 +2,7 @@
 #include "part.hpp"
 #include "parameters.hpp"
 #include "healthbar.hpp"
+#include "decay_time.hpp"
 #include "../../log.hpp"
 #include "../../sprite/index.hpp"
 #include "../../../id_dont_care.hpp"
@@ -21,7 +22,8 @@ sanguis::client::draw2d::entities::model::object::object(
 	parameters const &param_,
 	fcppt::string const &name,
 	sprite::order const order,
-	bool const show_healthbar
+	needs_healthbar::type const needs_healthbar_,
+	decay_option::type const decay_option_
 )
 :
 	container(
@@ -36,7 +38,7 @@ sanguis::client::draw2d::entities::model::object::object(
 	health_(0),
 	max_health_(0),
 	healthbar_(
-		show_healthbar
+		needs_healthbar_ == needs_healthbar::yes
 		?
 			new healthbar(
 				param_.colored_system()
@@ -44,6 +46,8 @@ sanguis::client::draw2d::entities::model::object::object(
 		:
 			0
 	),
+	decay_time_(),
+	decay_option_(decay_option_),
 	parts()
 {
 	part_vector::size_type i(0);
@@ -91,6 +95,11 @@ sanguis::client::draw2d::entities::model::object::update(
 			master().pos(),
 			master().size()
 		);
+	
+	if(decay_time_)
+		decay_time_->update(
+			time
+		);
 
 	BOOST_FOREACH(
 		model::part &p,
@@ -125,7 +134,19 @@ sanguis::client::draw2d::entities::model::object::may_be_removed() const
 {
 	return
 		base::may_be_removed()
-		&& animations_ended();
+		&& animations_ended()
+		&& decayed();
+}
+
+void
+sanguis::client::draw2d::entities::model::object::on_decay()
+{
+	if(
+		decay_option_ == decay_option::delayed
+	)
+		decay_time_.reset(
+			new decay_time()
+		);
 }
 
 void
@@ -167,11 +188,6 @@ bool
 sanguis::client::draw2d::entities::model::object::has_health() const
 {
 	return max_health() > 0;
-}
-
-void
-sanguis::client::draw2d::entities::model::object::on_decay()
-{
 }
 
 void
@@ -343,6 +359,12 @@ sanguis::client::draw2d::entities::model::object::animations_ended() const
 		if(!part.animation_ended())
 			return false;
 	return true;
+}
+
+bool
+sanguis::client::draw2d::entities::model::object::decayed() const
+{
+	return !decay_time_ || decay_time_->ended();
 }
 
 fcppt::log::object &
