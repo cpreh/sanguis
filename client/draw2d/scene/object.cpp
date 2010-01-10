@@ -1,12 +1,14 @@
 #include "object.hpp"
 #include "message_environment.hpp"
 #include "control_environment.hpp"
+#include "screen_center.hpp"
 #include "../message/dispatcher.hpp"
 #include "../factory/client.hpp"
 #include "../sprite/order.hpp"
 #include "../sprite/matrix.hpp"
 #include "../entities/with_visibility.hpp"
 #include "../z_ordering.hpp"
+#include "../vector2.hpp"
 #include "../../invalid_id.hpp"
 #include "../../next_id.hpp"
 #include "../../messages/add.hpp"
@@ -253,13 +255,15 @@ sanguis::client::draw2d::scene::object::render_systems()
 		sge::sprite::render_states()
 	);
 
-	normal_system_.matrices();
+	client_system_.matrices();
 
 	client_system_.render(
 		z_ordering::background,
 		sge::sprite::default_equal()
 	);
 		
+	normal_system_.matrices();
+
 	for(
 		sprite::order index(
 			z_ordering::corpses
@@ -296,6 +300,8 @@ sanguis::client::draw2d::scene::object::render_systems()
 			sge::sprite::default_equal()
 		);
 
+	client_system_.matrices();
+
 	client_system_.render(
 		z_ordering::cursor,
 		sge::sprite::default_equal()
@@ -322,7 +328,12 @@ sanguis::client::draw2d::scene::object::insert(
 		!ret.second
 	)
 		throw exception(
-			FCPPT_TEXT("scene::insert(): failed to insert!")
+			(
+				fcppt::format(
+					FCPPT_TEXT("Failed to insert object with id %1%!")
+				)
+				% id
+			).str()
 		);
 	
 	return *ret.first->second;
@@ -366,11 +377,17 @@ sanguis::client::draw2d::scene::object::transform(
 	sprite::point const &center_
 )
 {
-#if 0
+	vector2 const translation_(
+		screen_center(
+			center_,
+			screen_size()
+		)
+	);
+
 	sprite::matrix const matrix_(
 		fcppt::math::matrix::translation(
-			static_cast<sprite::float_unit>(center_.x()),
-			static_cast<sprite::float_unit>(center_.y()),
+			translation_.x(),
+			translation_.y(),
 			static_cast<sprite::float_unit>(0)
 		)
 	);
@@ -378,7 +395,14 @@ sanguis::client::draw2d::scene::object::transform(
 	normal_system_.transform(		
 		matrix_
 	);
-#endif
+
+	colored_system_.transform(		
+		matrix_
+	);
+
+	particle_system_.transform(		
+		matrix_
+	);
 }
 
 sanguis::client::draw2d::transform_callback const &
