@@ -47,13 +47,16 @@
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/config/media_path.hpp>
+#include <sge/log/global_context.hpp>
 
 #include <fcppt/filesystem/exists.hpp>
 #include <fcppt/log/level.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/global.hpp>
+#include <fcppt/log/context.hpp>
 #include <fcppt/log/activate_levels.hpp>
 #include <fcppt/log/level_from_string.hpp>
+#include <fcppt/log/make_location.hpp>
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/iconv.hpp>
@@ -73,6 +76,8 @@
 #include <iostream>
 #include <fstream>
 #include <ostream>
+#include <string>
+#include <vector>
 
 // c
 #include <cstdlib>
@@ -116,23 +121,50 @@ try
 	std::string log_level;
 	unsigned screen_width, screen_height, multi_sampling;
 
+	typedef std::vector<
+		std::string
+	> logger_vector;
+
+	logger_vector enabled_logs_;
+
 	desc.add_options()
-		("help",
-			"produce help message")
-		("log",
-			po::value<std::string>(&log_level)->default_value(std::string("warning")),
-			"sets the maximum logging level (one of debug, info, warning, error, fatal in that order)")
-		("width",
+		(
+			"help",
+			"produce help message"
+		)
+		(
+			"log",
+			po::value<
+				std::string
+			>(
+				&log_level
+			)->default_value(
+				std::string("warning")
+			),
+			"sets the maximum logging level (one of debug, info, warning, error, fatal in that order)"
+		)
+		(
+			"width",
 			po::value<unsigned>(&screen_width)->default_value(1024),
-			"sets the display width")
-		("height",
+			"sets the display width"
+		)
+		(
+			"height",
 			po::value<unsigned>(&screen_height)->default_value(768),
-			"sets the display height")
-		("multisamples",
+			"sets the display height"
+		)
+		(
+			"multisamples",
 			po::value<unsigned>(&multi_sampling)->default_value(
 				sge::renderer::no_multi_sampling
 			),
-			"sets the number of samples done for anti aliasing");
+			"sets the number of samples done for anti aliasing"
+		)
+		(
+			"enable-sge-log",
+			po::value<logger_vector>(&enabled_logs_),
+			"Enables a logger"
+		);
 	
 	po::variables_map vm;
 	po::store(po::parse_command_line(argc,argv,desc),vm);
@@ -226,6 +258,37 @@ try
 				sge::renderer::state::bool_::enable_multi_sampling = true
 			)
 		);
+
+	BOOST_FOREACH(
+		logger_vector::const_reference ref,
+		enabled_logs_
+	)
+	{
+		fcppt::string const name(
+			fcppt::iconv(
+				ref
+			)
+		);
+
+		fcppt::log::object *const obj_(
+			sge::log::global_context().find(
+				fcppt::log::make_location(
+					name,
+					FCPPT_TEXT('/')
+				)
+			)
+		);
+
+		if(obj_)
+			obj_->enable(
+				true
+			);
+		else
+			fcppt::io::cerr
+				<< FCPPT_TEXT("Logger ")
+				<< name
+				<< FCPPT_TEXT(" does not exist\n");
+	}
 
 	// input stuff
 	sge::input::key_state_tracker ks(sys.input_system());
