@@ -17,6 +17,7 @@ sanguis::server::collision::assign_groups(
 			group_vector::const_reference group_,
 			groups_
 		)
+
 			global_groups_.add_to_group(
 				shape_,
 				group_

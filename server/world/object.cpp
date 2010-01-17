@@ -40,6 +40,7 @@
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/math/box/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
@@ -606,45 +607,29 @@ sanguis::server::world::object::update_entity(
 		)
 	);
 
-	{
-		entities::with_dim const * const with_dim_(
-			dynamic_cast<
-				entities::with_dim const *
-			>(
-				&e
+	FCPPT_TRY_DYNAMIC_CAST(
+		entities::with_dim const *,
+		with_dim_,
+		&e
+	)
+		send_entity_specific(
+			with_dim_->id(),
+			message_convert::move(
+				*with_dim_
 			)
 		);
 
-		if(
-			with_dim_
-		)
-			send_entity_specific(
-				with_dim_->id(),
-				message_convert::move(
-					*with_dim_
-				)
-			);
-	}
-
-	{
-		entities::movable const *const movable_(
-			dynamic_cast<
-				entities::movable const *
-			>(
-				&e
+	FCPPT_TRY_DYNAMIC_CAST(
+		entities::movable const *,
+		movable_,
+		&e
+	)
+		send_entity_specific(
+			movable_->id(),
+			message_convert::speed(
+				*movable_
 			)
 		);
-
-		if(
-			movable_
-		)
-			send_entity_specific(
-				movable_->id(),
-				message_convert::speed(
-					*movable_
-				)
-			);
-	}
 
 	update_entity_health(
 		e
@@ -656,16 +641,10 @@ sanguis::server::world::object::update_entity_health(
 	entities::base &entity_
 )
 {
-	entities::with_health const *const with_health_(
-		dynamic_cast<
-			entities::with_health const *
-		>(
-			&entity_
-		)
-	);
-
-	if(
-		with_health_
+	FCPPT_TRY_DYNAMIC_CAST(
+		entities::with_health const *,
+		with_health_,
+		&entity_
 	)
 		send_entity_specific(
 			with_health_->id(),
