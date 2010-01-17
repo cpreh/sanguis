@@ -1,6 +1,7 @@
 #include "with_auras.hpp"
 #include "../auras/aura.hpp"
 #include "../environment/object.hpp"
+#include <fcppt/algorithm/append.hpp>
 #include <boost/foreach.hpp>
 
 void
@@ -16,6 +17,13 @@ sanguis::server::entities::with_auras::add_aura(
 
 	ref.owner(
 		id()
+	);
+
+	collision::body::add_shapes(
+		ref.recreate_shapes(
+			environment()->collision_world(),
+			environment()->global_collision_groups()
+		)
 	);
 }
 
@@ -34,43 +42,30 @@ sanguis::server::entities::with_auras::on_update(
 )
 {}
 
-void
-sanguis::server::entities::with_auras::on_transfer(
-	collision::global_groups const &collision_groups_,
-	collision::create_parameters const &create_param
+sge::collision::shapes::container const
+sanguis::server::entities::with_auras::recreate_shapes(
+	sge::collision::world_ptr const world_,
+	collision::global_groups const &global_groups_
 )
 {
+	sge::collision::shapes::container ret(
+		entities::base::recreate_shapes(
+			world_,
+			global_groups_
+		)
+	);
+
 	BOOST_FOREACH(
 		aura_container::reference aura_,
 		auras_
 	)
-		aura_.recreate(
-			environment()->collision_world(),
-			collision_groups_,
-			create_param
+		fcppt::algorithm::append(
+			ret,
+			aura_.recreate_shapes(
+				world_,
+				global_groups_
+			)
 		);
-}
 
-void
-sanguis::server::entities::with_auras::on_center(
-	pos_type const &center_
-)
-{
-	BOOST_FOREACH(
-		aura_container::reference r,
-		auras_
-	)
-		r.center(
-			center_
-		);
-}
-
-void
-sanguis::server::entities::with_auras::on_destroy()
-{
-	BOOST_FOREACH(
-		aura_container::reference aura_,
-		auras_
-	)
-		aura_.destroy();
+	return ret;
 }

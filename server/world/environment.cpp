@@ -179,6 +179,12 @@ sanguis::server::world::environment::collision_world() const
 	return world_.collision_world();
 }
 
+sanguis::server::collision::global_groups const &
+sanguis::server::world::environment::global_collision_groups() const
+{
+	return world_.global_collision_groups();
+}
+
 sanguis::server::environment::load_context_ptr const
 sanguis::server::world::environment::load_context() const
 {

@@ -32,17 +32,18 @@
 #include "../../load/model/collection.hpp"
 #include "../../load/model/model.hpp"
 #include "../../exception.hpp"
-#include <fcppt/math/box/basic_impl.hpp>
 #include <sge/collision/system.hpp>
 #include <sge/collision/world.hpp>
-#include <fcppt/container/map_impl.hpp>
+#include <sge/collision/box.hpp>
 #include <sge/time/second.hpp>
 #include <sge/time/millisecond.hpp>
+#include <fcppt/container/map_impl.hpp>
+#include <fcppt/math/box/basic_impl.hpp>
+#include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
-#include <tr1/functional>
 
 sanguis::server::world::object::object(
 	context_ptr const global_context_,
@@ -58,19 +59,22 @@ sanguis::server::world::object::object(
 	),
 	collision_world_(
 		sys->create_world(
-			sge::collision::optional_rect(
-				sge::collision::rect(
+			sge::collision::optional_box(
+				sge::collision::box(
 					// FIXME
-					sge::collision::rect::vector(
+					sge::collision::box::vector(
 						-500,
-						-500
+						-500,
+						0
 					),
-					sge::collision::rect::dim(
+					sge::collision::box::dim(
 						1500,
-						1500
+						1500,
+						0	
 					)
 				)
-			)
+			),
+			sge::collision::constraint::constrain_2d
 		)
 	),
 	collision_groups_(
@@ -499,6 +503,12 @@ sge::collision::world_ptr const
 sanguis::server::world::object::collision_world() const
 {
 	return collision_world_;
+}
+
+sanguis::server::collision::global_groups const &
+sanguis::server::world::object::global_collision_groups() const
+{
+	return collision_groups_;
 }
 
 sanguis::server::environment::load_context_ptr const

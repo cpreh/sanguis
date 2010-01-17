@@ -6,6 +6,7 @@
 #include "../entities/auto_ptr.hpp"
 #include "../entities/base_fwd.hpp"
 #include "../entities/insert_parameters_fwd.hpp"
+#include "../collision/global_groups_fwd.hpp"
 #include "../player_id.hpp"
 #include "../health_type.hpp"
 #include "../exp_type.hpp"
@@ -25,7 +26,8 @@ namespace server
 namespace environment
 {
 
-class object {
+class object
+{
 	FCPPT_NONCOPYABLE(object)
 protected:
 	object();
@@ -113,6 +115,9 @@ public:
 
 	virtual sge::collision::world_ptr const
 	collision_world() const = 0;
+
+	virtual collision::global_groups const &
+	global_collision_groups() const = 0;
 
 	virtual load_context_ptr const
 	load_context() const = 0;

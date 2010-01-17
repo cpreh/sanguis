@@ -4,7 +4,7 @@
 #include "group_map.hpp"
 #include "group.hpp"
 #include <sge/collision/world_ptr.hpp>
-#include <sge/collision/body_ptr.hpp>
+#include <sge/collision/shapes/base_ptr.hpp>
 #include <fcppt/container/map_decl.hpp>
 
 namespace sanguis
@@ -14,7 +14,8 @@ namespace server
 namespace collision
 {
 
-class global_groups {
+class global_groups
+{
 public:
 	explicit global_groups(
 		sge::collision::world_ptr
@@ -22,7 +23,7 @@ public:
 
 	void
 	add_to_group(
-		sge::collision::body_ptr,
+		sge::collision::shapes::base_ptr,
 		group::type
 	) const;
 private:

@@ -11,14 +11,24 @@ namespace server
 namespace collision
 {
 
-class satellite : public sge::collision::satellite {
+class satellite
+:
+	public sge::collision::satellite
+{
 public:
 	explicit satellite(
-		collision::base &);
+		collision::base &
+	);
 	
 	void
 	position_change(
-		sge::collision::point const &);
+		sge::collision::point const &
+	);
+	
+	void
+	velocity_change(
+		sge::collision::point const &
+	);
 	
 	collision::base &
 	base();

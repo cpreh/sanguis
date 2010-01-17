@@ -1,14 +1,22 @@
 #include "satellite.hpp"
 
 sanguis::server::collision::satellite::satellite(
-	collision::base &base_)
+	collision::base &base_
+)
 :
 	base_(base_)
 {}
 
 void
 sanguis::server::collision::satellite::position_change(
-	sge::collision::point const &)
+	sge::collision::point const &
+)
+{}
+
+void
+sanguis::server::collision::satellite::velocity_change(
+	sge::collision::point const &
+)
 {}
 
 sanguis::server::collision::base &

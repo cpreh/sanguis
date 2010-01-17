@@ -6,10 +6,12 @@
 #include "../space_unit.hpp"
 #include "../entities/base_fwd.hpp"
 #include "../collision/base.hpp"
+#include "../collision/group_vector.hpp"
+#include "../collision/global_groups_fwd.hpp"
 #include "../team.hpp"
 #include "../../entity_id.hpp"
 #include <sge/collision/shapes/container.hpp>
-#include <sge/collision/world_fwd.hpp>
+#include <sge/collision/world_ptr.hpp>
 
 namespace sanguis
 {
@@ -26,13 +28,14 @@ public:
 	virtual ~aura();
 
 	void
-	center(
-		pos_type const &
-	);
-
-	void
 	owner(
 		entity_id
+	);
+
+	sge::collision::shapes::container const
+	recreate_shapes(
+		sge::collision::world_ptr,
+		collision::global_groups const &
 	);
 protected:
 	aura(
@@ -44,11 +47,6 @@ protected:
 	entity_id
 	owner() const;
 private:
-	sge::collision::shapes::container const
-	recreate_shapes(
-		sge::collision::world_ptr
-	) const;
-
 	virtual collision::group_vector const
 	collision_groups() const;
 

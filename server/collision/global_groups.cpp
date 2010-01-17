@@ -101,14 +101,14 @@ sanguis::server::collision::global_groups::global_groups(
 
 void
 sanguis::server::collision::global_groups::add_to_group(
-	sge::collision::body_ptr const body_,
+	sge::collision::shapes::base_ptr const shape_,
 	group::type const group_
 ) const
 {
 	groups_[
 		group_
 	]->add(
-		body_
+		shape_
 	);
 }
 

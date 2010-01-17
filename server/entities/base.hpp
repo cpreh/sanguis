@@ -9,6 +9,7 @@
 #include "../space_unit.hpp"
 #include "../team.hpp"
 #include "../collision/base.hpp"
+#include "../collision/body.hpp"
 #include "../collision/global_groups_fwd.hpp"
 #include "../collision/create_parameters_fwd.hpp"
 #include "../environment/object_ptr.hpp"
@@ -27,11 +28,18 @@ namespace entities
 
 class base
 :
+	public collision::body,
 	public collision::base
 {
 	FCPPT_NONCOPYABLE(base)
 protected:
 	base();
+
+	sge::collision::shapes::container const
+	recreate_shapes(
+		sge::collision::world_ptr,
+		collision::global_groups const &
+	);
 public:
 	// general world functions
 	
@@ -141,14 +149,6 @@ private:
 	initial_direction() const;
 
 	friend class auto_weak_link;
-
-	sge::collision::shapes::container const
-	recreate_shapes(
-		sge::collision::world_ptr
-	) const;
-	
-	collision::group_vector const
-	collision_groups() const;
 
 	void
 	insert_link(

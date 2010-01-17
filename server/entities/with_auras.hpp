@@ -5,7 +5,8 @@
 #include "../auras/aura_fwd.hpp"
 #include "../auras/auto_ptr.hpp"
 #include "../collision/global_groups_fwd.hpp"
-#include "../collision/create_parameters_fwd.hpp"
+#include <sge/collision/shapes/container.hpp>
+#include <sge/collision/world_ptr.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
 
 namespace sanguis
@@ -34,20 +35,12 @@ protected:
 		time_type
 	);
 
-	void
-	on_transfer(
-		collision::global_groups const &,
-		collision::create_parameters const &
+	sge::collision::shapes::container const
+	recreate_shapes(
+		sge::collision::world_ptr,
+		collision::global_groups const &
 	);
 private:
-	void
-	on_center(
-		pos_type const &
-	);
-
-	void
-	on_destroy();
-
 	typedef boost::ptr_list<
 		auras::aura
 	> aura_container;

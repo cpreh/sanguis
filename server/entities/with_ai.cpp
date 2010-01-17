@@ -48,9 +48,4 @@ sanguis::server::entities::with_ai::on_transfer(
 			*this
 		)
 	);
-
-	with_auras::on_transfer(
-		groups_,
-		param_
-	);
 }

@@ -1,26 +1,13 @@
 #include "aura.hpp"
 #include "collision_groups.hpp"
+#include "../collision/assign_groups.hpp"
+#include "../collision/create_circle.hpp"
 #include "../entities/base.hpp"
-#include <sge/collision/shapes/circle.hpp>
-#include <sge/collision/body.hpp>
-#include <sge/collision/world.hpp>
-#include <fcppt/math/circle/basic_impl.hpp>
 #include <fcppt/assign/make_container.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <boost/logic/tribool.hpp>
 
 sanguis::server::auras::aura::~aura()
 {}
-
-void
-sanguis::server::auras::aura::center(
-	pos_type const &p
-)
-{
-	body_pos(
-		p
-	);
-}
 
 void
 sanguis::server::auras::aura::owner(
@@ -28,6 +15,28 @@ sanguis::server::auras::aura::owner(
 )
 {
 	owner_ = nowner;
+}
+
+sge::collision::shapes::container const
+sanguis::server::auras::aura::recreate_shapes(
+	sge::collision::world_ptr const world_,
+	collision::global_groups const &global_groups_
+)
+{
+	return 
+		collision::assign_groups(
+			fcppt::assign::make_container<
+				sge::collision::shapes::container
+			>(
+				collision::create_circle(
+					world_,
+					*this,
+					radius_
+				)
+			),
+			collision_groups(),
+			global_groups_
+		);
 }
 
 sanguis::server::auras::aura::aura(
@@ -51,26 +60,10 @@ sanguis::server::auras::aura::owner() const
 	return owner_;
 }
 
-sge::collision::shapes::container const
-sanguis::server::auras::aura::recreate_shapes(
-	sge::collision::world_ptr const world_
-) const
-{
-	return 
-		fcppt::assign::make_container<
-			sge::collision::shapes::container
-		>(
-			world_->create_circle(
-				radius_
-			)
-		);
-}
-
-
 sanguis::server::collision::group_vector const
 sanguis::server::auras::aura::collision_groups() const
 {
-	return 
+	return
 		auras::collision_groups(
 			team_,
 			influence_

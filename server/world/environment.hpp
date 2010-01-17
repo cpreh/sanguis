@@ -110,6 +110,9 @@ public:
 	sge::collision::world_ptr const
 	collision_world() const;
 
+	collision::global_groups const &
+	global_collision_groups() const;
+
 	server::environment::load_context_ptr const
 	load_context() const;
 private:

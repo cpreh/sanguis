@@ -2,18 +2,19 @@
 #include "auto_weak_link.hpp"
 #include "insert_parameters.hpp"
 #include "collision_groups.hpp"
+#include "../collision/assign_groups.hpp"
 #include "../collision/create_parameters.hpp"
+#include "../collision/create_circle.hpp"
 #include "../environment/object.hpp"
 #include "../get_unique_id.hpp"
 #include <fcppt/math/vector/basic_impl.hpp>
-#include <sge/collision/world.hpp>
-#include <sge/collision/shapes/circle.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/assert.hpp>
 #include <boost/logic/tribool.hpp>
 
 sanguis::server::entities::base::base()
 :
+	collision::body(),
 	collision::base(),
 	environment_(),
 	id_(
@@ -22,6 +23,31 @@ sanguis::server::entities::base::base()
 	angle_(0),
 	links_()
 {}
+
+sge::collision::shapes::container const
+sanguis::server::entities::base::recreate_shapes(
+	sge::collision::world_ptr const world_,
+	collision::global_groups const &global_groups_	
+)
+{
+	return
+		collision::assign_groups(
+			fcppt::assign::make_container<
+				sge::collision::shapes::container
+			>(
+				collision::create_circle(
+					world_,
+					*this,
+					radius()
+				)
+			),
+			entities::collision_groups(
+				type(),
+				team()
+			),
+			global_groups_
+		);
+}
 
 void
 sanguis::server::entities::base::transfer(
@@ -37,7 +63,7 @@ sanguis::server::entities::base::transfer(
 		initial_direction()
 	);
 
-	collision::base::recreate(
+	collision::body::recreate(
 		environment_->collision_world(),
 		collision_groups_,
 		create_param
@@ -163,30 +189,6 @@ sanguis::server::pos_type const
 sanguis::server::entities::base::initial_direction() const
 {
 	return pos_type::null();
-}
-
-sge::collision::shapes::container const
-sanguis::server::entities::base::recreate_shapes(
-	sge::collision::world_ptr const world_
-) const
-{
-	return
-		fcppt::assign::make_container<
-			sge::collision::shapes::container
-		>(
-			world_->create_circle(
-				radius()
-			)
-		);
-}
-
-sanguis::server::collision::group_vector const
-sanguis::server::entities::base::collision_groups() const
-{
-	return entities::collision_groups(
-		type(),
-		team()
-	);
 }
 
 void
