@@ -330,7 +330,7 @@ sanguis::client::draw2d::scene::object::insert(
 		throw exception(
 			(
 				fcppt::format(
-					FCPPT_TEXT("Failed to insert object with id %1%!")
+					FCPPT_TEXT("draw: Failed to insert object with id %1%!")
 				)
 				% id
 			).str()
@@ -356,7 +356,7 @@ sanguis::client::draw2d::scene::object::entity(
 		throw exception(
 			(
 				fcppt::format(
-					FCPPT_TEXT("Object with id %1% not in entity map!")
+					FCPPT_TEXT("draw: Object with id %1% not in entity map!")
 				)
 				% id
 			).str()

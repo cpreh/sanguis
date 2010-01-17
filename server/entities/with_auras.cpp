@@ -19,12 +19,15 @@ sanguis::server::entities::with_auras::add_aura(
 		id()
 	);
 
-	collision::body::add_shapes(
-		ref.recreate_shapes(
-			environment()->collision_world(),
-			environment()->global_collision_groups()
-		)
-	);
+	if(
+		is_in_world()
+	)
+		collision::body::add_shapes(
+			ref.recreate_shapes(
+				environment()->collision_world(),
+				environment()->global_collision_groups()
+			)
+		);
 }
 
 sanguis::server::entities::with_auras::with_auras()

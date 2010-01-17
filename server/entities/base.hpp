@@ -70,6 +70,9 @@ public:
 	server::environment::object_ptr const
 	environment() const;
 
+	bool
+	is_in_world() const;
+
 
 	// entity id function
 	

@@ -47,7 +47,6 @@
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/config/media_path.hpp>
-#include <sge/exception.hpp>
 
 #include <fcppt/filesystem/exists.hpp>
 #include <fcppt/log/level.hpp>
@@ -61,6 +60,7 @@
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/auto_ptr.hpp>
 #include <fcppt/scoped_ptr.hpp>
+#include <fcppt/exception.hpp>
 
 // boost
 #include <boost/spirit/home/phoenix/bind/bind_function.hpp>
@@ -343,10 +343,10 @@ try
 		running = client.process(t);
 	}
 }
-catch (sge::exception const &e)
+catch (fcppt::exception const &e)
 {
 	fcppt::io::cerr
-		<< FCPPT_TEXT("caught sge exception: ")
+		<< FCPPT_TEXT("caught fcppt exception: ")
 		<< e.string()
 		<< FCPPT_TEXT('\n');
 

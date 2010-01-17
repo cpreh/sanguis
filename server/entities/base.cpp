@@ -113,6 +113,12 @@ sanguis::server::entities::base::environment() const
 	return environment_;
 }
 
+bool
+sanguis::server::entities::base::is_in_world() const
+{
+	return environment_;	
+}
+
 sanguis::entity_id
 sanguis::server::entities::base::id() const
 {
