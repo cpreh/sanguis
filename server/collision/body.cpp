@@ -91,11 +91,14 @@ sanguis::server::collision::body::recreate(
 	create_parameters const &create_param_
 )
 {
-	shapes_ =
+	sge::collision::shapes::container const new_shapes_(
 		recreate_shapes(
 			world_,
 			global_groups_
-		);
+		)
+	);
+
+	shapes_.clear();
 
 	body_ =
 		world_->create_body(
@@ -113,6 +116,10 @@ sanguis::server::collision::body::recreate(
 				>(0)
 			)
 		);
+	
+	add_shapes(
+		new_shapes_
+	);
 }
 
 void
