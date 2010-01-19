@@ -11,6 +11,8 @@
 #include "media_path.hpp"
 #include "resolution.hpp"
 #include "log.hpp"
+#include "log_switcher.hpp"
+#include "log_context.hpp"
 
 // sge
 #include <sge/console/object.hpp>
@@ -121,12 +123,6 @@ try
 	std::string log_level;
 	unsigned screen_width, screen_height, multi_sampling;
 
-	typedef std::vector<
-		std::string
-	> logger_vector;
-
-	logger_vector enabled_logs_;
-
 	desc.add_options()
 		(
 			"help",
@@ -159,12 +155,19 @@ try
 				sge::renderer::no_multi_sampling
 			),
 			"sets the number of samples done for anti aliasing"
-		)
-		(
-			"enable-sge-log",
-			po::value<logger_vector>(&enabled_logs_),
-			"Enables a logger"
 		);
+
+	sanguis::log_switcher 
+		sge_log(
+			boost::phoenix::ref(
+				desc),
+			FCPPT_TEXT("sge"),
+			sge::log::global_context()),
+		sanguis_log(
+			boost::phoenix::ref(
+				desc),
+			FCPPT_TEXT("sanguis"),
+			sanguis::log_context());
 	
 	po::variables_map vm;
 	po::store(po::parse_command_line(argc,argv,desc),vm);
@@ -251,6 +254,13 @@ try
 		)
 	);
 
+	sge_log.apply(
+		vm);
+
+	sanguis_log.apply(
+		vm);
+
+
 	if(multi_sampling > 0)
 		sys.renderer()->state(
 			sge::renderer::state::list
@@ -258,37 +268,6 @@ try
 				sge::renderer::state::bool_::enable_multi_sampling = true
 			)
 		);
-
-	BOOST_FOREACH(
-		logger_vector::const_reference ref,
-		enabled_logs_
-	)
-	{
-		fcppt::string const name(
-			fcppt::iconv(
-				ref
-			)
-		);
-
-		fcppt::log::object *const obj_(
-			sge::log::global_context().find(
-				fcppt::log::make_location(
-					name,
-					FCPPT_TEXT('/')
-				)
-			)
-		);
-
-		if(obj_)
-			obj_->enable(
-				true
-			);
-		else
-			fcppt::io::cerr
-				<< FCPPT_TEXT("Logger ")
-				<< name
-				<< FCPPT_TEXT(" does not exist\n");
-	}
 
 	// input stuff
 	sge::input::key_state_tracker ks(sys.input_system());

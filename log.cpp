@@ -1,4 +1,5 @@
 #include "log.hpp"
+#include "log_context.hpp"
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/parameters/root.hpp>
 #include <fcppt/log/parameters/all.hpp>
@@ -21,6 +22,8 @@ sanguis::log()
 		.level(
 			fcppt::log::level::warning
 		)
+		.context(
+			log_context())
 		.create()
 	);
 	return log_;
