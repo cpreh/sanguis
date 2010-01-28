@@ -5,6 +5,7 @@
 #include "../../messages/create.hpp"
 #include "../../messages/client_info.hpp"
 #include "../../messages/call/object.hpp"
+#include "../../exception.hpp"
 #include "../machine.hpp"
 #include "../message_event.hpp"
 #include "../menu_event.hpp"
@@ -199,7 +200,7 @@ sanguis::client::states::menu::operator()(
 			return transit<paused>();
 	}
 
-	throw sge::exception(
+	throw exception(
 		FCPPT_TEXT("invalid followup state!")
 	);
 }
