@@ -1,10 +1,10 @@
 #ifndef SANGUIS_MESSAGES_BINDINGS_DYNAMIC_LEN_HPP_INCLUDED
 #define SANGUIS_MESSAGES_BINDINGS_DYNAMIC_LEN_HPP_INCLUDED
 
-#include "../../truncation_check_cast.hpp"
 #include "../serialization/endianness.hpp"
 #include <fcppt/endianness/copy_n_from_host.hpp>
 #include <fcppt/endianness/copy_n_to_host.hpp>
+#include <fcppt/truncation_check_cast.hpp>
 #include <majutsu/concepts/dynamic_memory/tag.hpp>
 #include <majutsu/size_type.hpp>
 #include <majutsu/raw_pointer.hpp>
@@ -88,7 +88,7 @@ place(
 	>::length_type length_type;
 
 	length_type const sz(
-		sanguis::truncation_check_cast<
+		fcppt::truncation_check_cast<
 			length_type
 		>(
 			needed_size(

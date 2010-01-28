@@ -5,12 +5,12 @@
 #include "messages/global_context.hpp"
 #include "messages/base.hpp"
 #include "net/value_type.hpp"
-#include "truncation_check_cast.hpp"
 
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/io/read.hpp>
 #include <fcppt/io/write.hpp>
 #include <fcppt/assert.hpp>
+#include <fcppt/truncation_check_cast.hpp>
 
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/device/back_inserter.hpp>
@@ -151,7 +151,7 @@ sanguis::serialize(
 	exceptions(stream);
 
 	message_header const header(
-		truncation_check_cast<
+		fcppt::truncation_check_cast<
 			message_header
 		>(
 			message->size()
