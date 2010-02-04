@@ -8,7 +8,8 @@ namespace connect_state
 enum type
 {
 	paused,
-	unpaused
+	unpaused,
+	size
 };
 }
 }

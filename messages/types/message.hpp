@@ -23,6 +23,7 @@ enum type {
 	change_weapon,
 	client_info,
 	connect,
+	connect_state,
 	disconnect,
 	experience,
 	give_weapon,

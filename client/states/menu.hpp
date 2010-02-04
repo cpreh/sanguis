@@ -8,7 +8,7 @@
 #include "../../messages/net_error.hpp"
 #include "../../messages/connect.hpp"
 #include "../../messages/disconnect.hpp"
-#include "../../messages/assign_id.hpp"
+#include "../../messages/connect_state.hpp"
 #include "../../tick_event_fwd.hpp"
 #include <fcppt/log/object_fwd.hpp>
 #include <sge/renderer/state/scoped.hpp>
@@ -48,7 +48,7 @@ public:
 	boost::statechart::result operator()(
 		messages::disconnect const &);
 	boost::statechart::result operator()(
-		messages::assign_id const &);
+		messages::connect_state const &);
 private:
 	fcppt::log::object &log();
 

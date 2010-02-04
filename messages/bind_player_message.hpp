@@ -9,7 +9,7 @@ namespace sanguis
 namespace messages
 {
 
-// for noew, player messages are nothing special
+// for now, player messages are nothing special
 // this might be changed if support for multiple players on one client may be added
 template<
 	types::message::type Msg

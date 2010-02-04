@@ -6,7 +6,6 @@
 #include "string.hpp"
 #include "unicast_callback.hpp"
 #include "player_id.hpp"
-#include "../connect_state.hpp"
 
 namespace sanguis
 {
@@ -18,7 +17,6 @@ create_player(
 	environment::load_context_ptr,
 	string const &name,
 	unicast_callback const &send_to_player,
-	connect_state::type current_state,
 	player_id
 );
 

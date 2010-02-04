@@ -28,6 +28,7 @@
 #include "../../messages/start_reloading.hpp"
 #include "../../messages/stop_reloading.hpp"
 #include "../../messages/max_health.hpp"
+#include "../../messages/assign_id.hpp"
 #include "../../load/model/context.hpp"
 #include "../../load/model/collection.hpp"
 #include "../../load/model/model.hpp"
@@ -442,10 +443,38 @@ sanguis::server::world::object::add_sight_range(
 	)
 		return;
 			
-	send_player_specific(
-		player_id_,
+	messages::auto_ptr message_(
 		it->second->add_message()
 	);
+
+	bool const is_add_player_(
+		message_->type()
+		== messages::types::message::add_player
+	);
+
+	send_player_specific(
+		player_id_,
+		message_
+	);
+
+	if(
+		is_add_player_
+		&&
+		dynamic_cast<
+			entities::player &
+		>(
+			entity_
+		).player_id()
+		== player_id_
+	)
+		send_player_specific(
+			player_id_,
+			messages::create(
+				messages::assign_id(
+					entity_.id()
+				)
+			)
+		);
 }
 
 void

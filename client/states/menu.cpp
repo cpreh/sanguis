@@ -6,6 +6,7 @@
 #include "../../messages/client_info.hpp"
 #include "../../messages/call/object.hpp"
 #include "../../exception.hpp"
+#include "../../cast_enum.hpp"
 #include "../machine.hpp"
 #include "../message_event.hpp"
 #include "../menu_event.hpp"
@@ -85,7 +86,7 @@ sanguis::client::states::menu::react(
 {
 	static messages::call::object<
 		boost::mpl::vector4<
-			messages::assign_id,
+			messages::connect_state,
 			messages::connect,
 			messages::disconnect,
 			messages::net_error
@@ -157,19 +158,19 @@ sanguis::client::states::menu::operator()(
 
 boost::statechart::result
 sanguis::client::states::menu::operator()(
-	messages::assign_id const &m
+	messages::connect_state const &m
 )
 {
 	FCPPT_LOG_DEBUG(
 		log(),
 		fcppt::log::_
-			<< FCPPT_TEXT("received id")
+			<< FCPPT_TEXT("Received connect_state")
 	);
 
 	post_event(
 		message_event(
 			messages::create(
-				messages::assign_id(
+				messages::connect_state(
 					m
 				)
 			)
@@ -177,8 +178,9 @@ sanguis::client::states::menu::operator()(
 	);
 
 	switch (
-		static_cast<connect_state::type>(
-			m.get<messages::roles::followup>()
+		SANGUIS_CAST_ENUM(
+			connect_state,
+			m.get<messages::roles::connect_state>()
 		)
 	)
 	{
@@ -198,10 +200,12 @@ sanguis::client::states::menu::operator()(
 			);
 
 			return transit<paused>();
+		case connect_state::size:
+			break;
 	}
 
 	throw exception(
-		FCPPT_TEXT("invalid followup state!")
+		FCPPT_TEXT("invalid connect_state!")
 	);
 }
 

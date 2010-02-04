@@ -18,14 +18,9 @@ sanguis::server::create_player(
 	environment::load_context_ptr const load_context_,
 	string const &name,
 	unicast_callback const &send_to_player,
-	connect_state::type const current_state,
 	player_id const player_id_ 
 )
 {
-	// TODO: this should be cleaned up somehow
-	// 1) create the player
-	// 2) tell the client the player's id _before_ doing anything else
-	// 3) add the player
 	entities::player_auto_ptr new_player(
 		fcppt::make_auto_ptr<
 			entities::player
@@ -36,16 +31,6 @@ sanguis::server::create_player(
 			entities::movement_speed(100),
 			name,
 			player_id_
-		)
-	);
-
-	send_to_player(
-		player_id_,
-		messages::create(
-			messages::assign_id(
-				new_player->id(),
-				current_state
-			)
 		)
 	);
 

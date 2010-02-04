@@ -15,6 +15,7 @@
 #include "../send_available_perks.hpp"
 #include "../log.hpp"
 #include "../../messages/remove_id.hpp"
+#include "../../messages/connect_state.hpp"
 #include "../../messages/create.hpp"
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/headers.hpp>
@@ -77,12 +78,20 @@ sanguis::server::global::context::insert_player(
 		)	
 	);
 
+	send_unicast_(
+		player_id_,
+		messages::create(
+			messages::connect_state(
+				connect_state_
+			)
+		)
+	);
+
 	entities::player_auto_ptr player_(
 		create_player(
 			load_context_,
 			name,
 			send_unicast_,
-			connect_state_,
 			player_id_
 		)
 	);
