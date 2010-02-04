@@ -352,7 +352,7 @@ sanguis::client::draw2d::scene::object::insert(
 		throw exception(
 			(
 				fcppt::format(
-					FCPPT_TEXT("draw: Failed to insert object with id %1%!")
+					FCPPT_TEXT("draw: Tried to insert object with id %1% twice!")
 				)
 				% id
 			).str()
