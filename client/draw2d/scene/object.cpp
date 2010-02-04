@@ -377,6 +377,7 @@ sanguis::client::draw2d::scene::object::transform(
 	sprite::point const &center_
 )
 {
+#if 0
 	vector2 const translation_(
 		screen_center(
 			center_,
@@ -403,6 +404,7 @@ sanguis::client::draw2d::scene::object::transform(
 	particle_system_.transform(		
 		matrix_
 	);
+#endif
 }
 
 sanguis::client::draw2d::transform_callback const &
