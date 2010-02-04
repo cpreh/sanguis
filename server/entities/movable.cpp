@@ -1,7 +1,7 @@
 #include "movable.hpp"
 #include "speed_to_abs.hpp"
 #include <fcppt/math/vector/basic_impl.hpp>
-#include <tr1/functional>
+#include <fcppt/tr1/functional.hpp>
 
 sanguis::server::entities::property::changeable &
 sanguis::server::entities::movable::movement_speed()
