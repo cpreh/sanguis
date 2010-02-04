@@ -6,11 +6,6 @@
 #include "entities/player.hpp"
 #include "entities/auto_ptr.hpp"
 #include "weapons/weapon.hpp"
-#include "../messages/create.hpp"
-#include "../messages/assign_id.hpp"
-#include "../resolution.hpp"
-#include <fcppt/utf8/convert.hpp>
-#include <fcppt/container/map_impl.hpp>
 #include <fcppt/make_auto_ptr.hpp>
 
 sanguis::server::entities::player_auto_ptr
