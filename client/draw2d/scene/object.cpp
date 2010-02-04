@@ -11,6 +11,7 @@
 #include "../vector2.hpp"
 #include "../../invalid_id.hpp"
 #include "../../next_id.hpp"
+#include "../../log.hpp"
 #include "../../messages/add.hpp"
 #include "../../messages/visible.hpp"
 #include "../../../messages/call/object.hpp"
@@ -26,11 +27,13 @@
 
 #include <fcppt/math/matrix/basic_impl.hpp>
 #include <fcppt/math/matrix/translation.hpp>
+#include <fcppt/log/headers.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/dynamic_cast.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/format.hpp>
+#include <fcppt/exception.hpp>
 
 #include <boost/foreach.hpp>
 
@@ -238,6 +241,25 @@ sanguis::client::draw2d::scene::object::player_id(
 	entity_id const nplayer_id_
 )
 {
+	if(
+		player_id_ == nplayer_id_
+	)
+	{
+		FCPPT_LOG_WARNING(
+			log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("player_id ")
+				<< (
+					player_id_ == invalid_id
+					?
+						FCPPT_TEXT("unset")
+					:
+						FCPPT_TEXT("set")
+				)
+				<< FCPPT_TEXT(" twice!")
+		);
+	}
+
 	player_id_ = nplayer_id_;
 }
 
@@ -367,9 +389,25 @@ sanguis::client::draw2d::scene::object::entity(
 sanguis::client::draw2d::entities::base &
 sanguis::client::draw2d::scene::object::own_player()
 {
-	return entity(
-		player_id_
-	);
+	try
+	{
+		return entity(
+			player_id_
+		);
+	}
+	catch(
+		fcppt::exception const &e
+	)
+	{
+		FCPPT_LOG_ERROR(
+			log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("In own_player: ")
+				<< e.string()
+		);
+
+		throw;
+	}
 }
 
 void

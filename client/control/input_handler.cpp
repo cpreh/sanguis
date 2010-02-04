@@ -1,7 +1,9 @@
 #include "input_handler.hpp"
 #include "player_action.hpp"
+#include "../log.hpp"
 #include "../../exception.hpp"
 #include <sge/input/key_pair.hpp>
+#include <fcppt/log/headers.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::client::control::input_handler::input_handler(
@@ -19,6 +21,25 @@ sanguis::client::control::input_handler::active(
 	bool const nactive_
 )
 {
+	if(
+		active_ == nactive_
+	)
+	{
+		FCPPT_LOG_WARNING(
+			log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("input_active ")
+				<< (
+					!nactive_
+					?
+						FCPPT_TEXT("unset")
+					:
+						FCPPT_TEXT("set")
+				)
+				<< FCPPT_TEXT(" twice!")
+		);
+	}
+
 	active_ = nactive_;
 }
 

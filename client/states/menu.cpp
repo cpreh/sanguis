@@ -167,16 +167,6 @@ sanguis::client::states::menu::operator()(
 			<< FCPPT_TEXT("Received connect_state")
 	);
 
-	post_event(
-		message_event(
-			messages::create(
-				messages::connect_state(
-					m
-				)
-			)
-		)
-	);
-
 	switch (
 		SANGUIS_CAST_ENUM(
 			connect_state,
