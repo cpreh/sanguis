@@ -129,7 +129,8 @@ sanguis::server::global::context::insert_player(
 
 	ptr->add_weapon(
 		weapons::create(
-			weapon_type::pistol
+			weapon_type::shotgun
+			//weapon_type::pistol
 		)
 	);
 }

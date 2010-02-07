@@ -150,21 +150,38 @@ sanguis::server::world::object::update(
 		time_
 	);
 
+#if 0
 	wave_gen_.process(
 		time_,
 		environment(),
 		load_context_
 	);
+#endif
 
 	// should we send position updates?
 	bool const update_pos = send_timer_.update_b();
 
-	collision_world_->update(
-		static_cast<sge::time::funit>(	
-			time_
-		)
-	);
+	{
+#if 0
+		scoped_update update_(
+			is_world_update_
+		);
+#endif
+		collision_world_->update(
+			static_cast<sge::time::funit>(	
+				time_
+			)
+		);
+	}
 
+#if 0
+	while(
+		!deferred_adds.empty()
+	)
+		insert_entity(
+			deffered_adds.release_front()
+		);
+#endif
 	for (
 		entity_map::iterator it(
 			entities_.begin()
@@ -192,6 +209,22 @@ sanguis::server::world::object::insert(
 	entities::insert_parameters const &insert_params
 )
 {
+#if 0
+	if(
+		is_world_update_
+	)
+		deferred_adds_.push_back(
+			deferred_add(
+				e,
+				insert_params
+			)
+		);
+	else
+		insert_entity(
+			e,
+			insert_params
+		);
+#endif
 	entity_id const id(
 		e->id()
 	);
