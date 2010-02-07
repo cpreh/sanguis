@@ -1,13 +1,12 @@
 #include "decay_time.hpp"
-#include <sge/time/second.hpp>
 
-sanguis::client::draw2d::entities::model::decay_time::decay_time()
+sanguis::client::draw2d::entities::model::decay_time::decay_time(
+	sge::time::duration const &duration_
+)
 :
 	diff_clock_(),
 	timer_(
-		sge::time::second(
-			120
-		)
+		duration_
 	)
 {}
 

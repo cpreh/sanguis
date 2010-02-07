@@ -3,6 +3,7 @@
 
 #include "decay_time_fwd.hpp"
 #include "../../../../diff_clock.hpp"
+#include <sge/time/duration.hpp>
 #include <sge/time/timer.hpp>
 
 namespace sanguis
@@ -19,7 +20,9 @@ namespace model
 class decay_time
 {
 public:
-	decay_time();
+	explicit decay_time(
+		sge::time::duration const &
+	);
 
 	void
 	update(

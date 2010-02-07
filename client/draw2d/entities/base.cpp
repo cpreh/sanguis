@@ -7,7 +7,10 @@ sanguis::client::draw2d::entities::base::base()
 
 void
 sanguis::client::draw2d::entities::base::decay()
-{}
+{
+	// decay can be overridden so that is_decayed() can be used
+	removed_ = true;
+}
 
 void
 sanguis::client::draw2d::entities::base::remove()

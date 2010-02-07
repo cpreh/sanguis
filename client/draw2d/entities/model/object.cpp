@@ -8,12 +8,13 @@
 #include "../../../id_dont_care.hpp"
 #include "../../../../load/model/collection.hpp"
 #include "../../../../exception.hpp"
+#include <sge/time/second.hpp>
+#include <sge/sprite/object_impl.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/math/vector/is_null.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
-#include <sge/sprite/object_impl.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
 #include <ostream>
@@ -141,12 +142,13 @@ sanguis::client::draw2d::entities::model::object::is_decayed() const
 void
 sanguis::client::draw2d::entities::model::object::decay()
 {
-	if(
-		decay_option_ == decay_option::delayed
-	)
-		decay_time_.reset(
-			new decay_time()
-		);
+	decay_time_.reset(
+		new decay_time(
+			decay_option_ == decay_option::delayed
+			? sge::time::second(10)
+			: sge::time::second(0)
+		)
+	);
 }
 
 void
