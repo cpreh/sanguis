@@ -67,7 +67,8 @@ private:
 		particle_type::type const t
 	) const;
 	
-	bool may_be_removed() const;
+	bool
+	is_decayed() const;
 
 	sprite::particle::system &particle_system_;
 

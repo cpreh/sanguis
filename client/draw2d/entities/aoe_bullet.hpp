@@ -32,7 +32,7 @@ public:
 	);
 private:
 	void
-	on_decay();
+	decay();
 
 	load::model::collection const &model_collection_;
 

@@ -78,10 +78,10 @@ protected:
 	
 	// base overrides
 	bool
-	may_be_removed() const;
+	is_decayed() const;
 	
 	virtual void
-	on_decay();
+	decay();
 
 	// with_speed overrides
 	virtual void
@@ -154,9 +154,6 @@ private:
 
 	bool
 	animations_ended() const;
-
-	bool
-	decayed() const;
 
 	static fcppt::log::object &
 	log();

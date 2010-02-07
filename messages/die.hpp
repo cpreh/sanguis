@@ -1,5 +1,5 @@
-#ifndef SANGUIS_MESSAGES_REMOVE_HPP_INCLUDED
-#define SANGUIS_MESSAGES_REMOVE_HPP_INCLUDED
+#ifndef SANGUIS_MESSAGES_DIE_HPP_INCLUDED
+#define SANGUIS_MESSAGES_DIE_HPP_INCLUDED
 
 #include "bind_entity_message.hpp"
 #include "make_class.hpp"
@@ -12,9 +12,9 @@ namespace messages
 
 typedef make_class<
 	bind_entity_message<
-		types::message::remove
+		types::message::die
 	>::type
->::type remove;
+>::type die;
 
 }
 }

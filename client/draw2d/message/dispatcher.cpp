@@ -191,6 +191,16 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
+	sanguis::messages::die const &m
+)
+{
+	entity(
+		m.get<sanguis::messages::roles::entity_id>()
+	).decay();
+}
+
+sanguis::client::draw2d::message::dispatcher::result_type
+sanguis::client::draw2d::message::dispatcher::operator()(
 	sanguis::messages::experience const &m
 )
 {
@@ -263,7 +273,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 {
 	entity(
 		m.get<sanguis::messages::roles::entity_id>()
-	).decay();
+	).remove();
 }
 
 sanguis::client::draw2d::message::dispatcher::result_type

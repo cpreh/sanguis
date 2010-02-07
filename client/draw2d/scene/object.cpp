@@ -99,7 +99,7 @@ sanguis::client::draw2d::scene::object::process_message(
 )
 {
 	static sanguis::messages::call::object<
-		boost::mpl::vector21<
+		boost::mpl::vector22<
 			sanguis::messages::add_aoe_projectile,
 			sanguis::messages::add_enemy,
 			sanguis::messages::add_friend,
@@ -108,6 +108,7 @@ sanguis::client::draw2d::scene::object::process_message(
 			sanguis::messages::add_projectile,
 			sanguis::messages::add_weapon_pickup,
 			sanguis::messages::change_weapon,
+			sanguis::messages::die,
 			sanguis::messages::experience,
 			sanguis::messages::health,
 			sanguis::messages::level_up,
@@ -217,7 +218,9 @@ sanguis::client::draw2d::scene::object::draw(
 		{
 			e.on_remove();
 
-			entities_.erase(it);
+			entities_.erase(
+				it
+			);
 		}
 	}
 

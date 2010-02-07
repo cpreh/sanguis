@@ -19,6 +19,7 @@
 #include "../message_convert/health.hpp"
 #include "../../messages/create.hpp"
 #include "../../messages/remove.hpp"
+#include "../../messages/die.hpp"
 #include "../../messages/change_weapon.hpp"
 #include "../../messages/experience.hpp"
 #include "../../messages/give_weapon.hpp"
@@ -500,7 +501,7 @@ sanguis::server::world::object::remove_sight_range(
 
 		// if the player sees nothing here
 		// it must have been deleted / moved
-		// because they player always sees himself
+		// because the player always sees himself
 
 		if(
 			sight_it->second.empty()
@@ -510,13 +511,25 @@ sanguis::server::world::object::remove_sight_range(
 			);
 	}
 	
+	// if an entity has been removed
+	// we have to tell the client that it is dead instead
 	send_player_specific(
 		player_id_,
-		messages::create(
-			messages::remove(
-				target_id_
+		entities_.count(
+			target_id_
+		) == 0u
+		?
+			messages::create(
+				messages::die(
+					target_id_
+				)
 			)
-		)
+		:
+			messages::create(
+				messages::remove(
+					target_id_
+				)
+			)
 	);
 }
 

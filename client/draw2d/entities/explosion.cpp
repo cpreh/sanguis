@@ -287,7 +287,7 @@ sanguis::client::draw2d::entities::explosion::generate_particle(
 }
 
 bool
-sanguis::client::draw2d::entities::explosion::may_be_removed() const
+sanguis::client::draw2d::entities::explosion::is_decayed() const
 {
 	return ended;
 }

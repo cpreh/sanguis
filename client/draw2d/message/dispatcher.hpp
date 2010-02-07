@@ -14,6 +14,7 @@
 #include "../../../messages/add_weapon_pickup.hpp"
 #include "../../../messages/base_fwd.hpp"
 #include "../../../messages/change_weapon.hpp"
+#include "../../../messages/die.hpp"
 #include "../../../messages/experience.hpp"
 #include "../../../messages/health.hpp"
 #include "../../../messages/level_up.hpp"
@@ -89,6 +90,11 @@ public:
 	result_type
 	operator()(
 		sanguis::messages::change_weapon const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::die const &
 	);
 
 	result_type

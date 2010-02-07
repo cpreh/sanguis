@@ -29,15 +29,15 @@ public:
 	void
 	decay();
 
-	virtual void
-	on_decay();
+	void
+	remove();
 
-	virtual bool
-	may_be_removed() const;
-	
 	virtual void
 	on_remove();
 
+	bool
+	may_be_removed() const;
+	
 	virtual void
 	pos(
 		sprite::point const &
@@ -53,7 +53,10 @@ public:
 
 	virtual ~base();
 private:
-	bool may_be_removed_;
+	virtual bool
+	is_decayed() const;
+
+	bool removed_;
 };
 
 }

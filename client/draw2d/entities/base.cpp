@@ -2,30 +2,36 @@
 
 sanguis::client::draw2d::entities::base::base()
 :
-	may_be_removed_(false)
+	removed_(false)
 {}
 
 void
 sanguis::client::draw2d::entities::base::decay()
-{
-	may_be_removed_ = true;
-
-	on_decay();
-}
-
-void
-sanguis::client::draw2d::entities::base::on_decay()
 {}
 
-bool
-sanguis::client::draw2d::entities::base::may_be_removed() const
+void
+sanguis::client::draw2d::entities::base::remove()
 {
-	return may_be_removed_;
+	removed_ = true;
 }
 
 void
 sanguis::client::draw2d::entities::base::on_remove()
 {}
 
+bool
+sanguis::client::draw2d::entities::base::may_be_removed() const
+{
+	return
+		removed_
+		|| is_decayed();
+}
+
 sanguis::client::draw2d::entities::base::~base()
 {}
+
+bool
+sanguis::client::draw2d::entities::base::is_decayed() const
+{
+	return false;
+}

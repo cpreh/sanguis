@@ -130,16 +130,16 @@ sanguis::client::draw2d::entities::model::object::orientation(
 }
 
 bool
-sanguis::client::draw2d::entities::model::object::may_be_removed() const
+sanguis::client::draw2d::entities::model::object::is_decayed() const
 {
 	return
-		base::may_be_removed()
-		&& animations_ended()
-		&& decayed();
+		animations_ended()
+		&& decay_time_
+		&& decay_time_->ended();
 }
 
 void
-sanguis::client::draw2d::entities::model::object::on_decay()
+sanguis::client::draw2d::entities::model::object::decay()
 {
 	if(
 		decay_option_ == decay_option::delayed
@@ -359,12 +359,6 @@ sanguis::client::draw2d::entities::model::object::animations_ended() const
 		if(!part.animation_ended())
 			return false;
 	return true;
-}
-
-bool
-sanguis::client::draw2d::entities::model::object::decayed() const
-{
-	return !decay_time_ || decay_time_->ended();
 }
 
 fcppt::log::object &
