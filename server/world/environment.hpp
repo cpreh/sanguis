@@ -3,7 +3,6 @@
 
 #include "environment_fwd.hpp"
 #include "object_fwd.hpp"
-#include "../entities/base_fwd.hpp"
 #include "../environment/object.hpp"
 #include <fcppt/noncopyable.hpp>
 
@@ -26,7 +25,7 @@ public:
 
 	~environment();
 
-	entities::base & 
+	void
 	insert(
 		entities::auto_ptr,
 		entities::insert_parameters const &

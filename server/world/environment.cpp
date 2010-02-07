@@ -11,13 +11,13 @@ sanguis::server::world::environment::environment(
 sanguis::server::world::environment::~environment()
 {}
 
-sanguis::server::entities::base & 
+void
 sanguis::server::world::environment::insert(
 	entities::auto_ptr e,
 	entities::insert_parameters const &ip
 )
 {
-	return world_.insert(
+	world_.insert(
 		e,
 		ip
 	);

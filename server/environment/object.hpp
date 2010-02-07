@@ -4,7 +4,6 @@
 #include "object_fwd.hpp"
 #include "load_context_ptr.hpp"
 #include "../entities/auto_ptr.hpp"
-#include "../entities/base_fwd.hpp"
 #include "../entities/insert_parameters_fwd.hpp"
 #include "../collision/global_groups_fwd.hpp"
 #include "../player_id.hpp"
@@ -32,7 +31,7 @@ class object
 protected:
 	object();
 public:
-	virtual entities::base & 
+	virtual void 
 	insert(
 		entities::auto_ptr,
 		entities::insert_parameters const &

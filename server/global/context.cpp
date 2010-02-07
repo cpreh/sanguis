@@ -29,7 +29,8 @@
 #include <tr1/functional>
 
 #include "../entities/insert_parameters.hpp"
-#include "../weapons/factory.hpp"
+#include "../entities/insert_parameters_pos.hpp"
+#include "../entities/pickups/weapon.hpp"
 #include "../../resolution.hpp"
 #include <fcppt/math/dim/basic_impl.hpp>
 
@@ -101,36 +102,40 @@ sanguis::server::global::context::insert_player(
 		player_.get()
 	);
 
-	entities::player *const ptr(
-		player_.get()
+	// FIXME: where to insert the player?
+	pos_type const spawn_pos(
+		static_cast<
+			space_unit
+		>(
+			resolution().w() / 2
+		),
+		static_cast<
+			space_unit
+		>(
+			resolution().h() / 2
+		)
 	);
-
+	
 	world_.insert(
 		entities::auto_ptr(
 			player_
 		),
-		// FIXME: where to insert the player?
 		entities::insert_parameters(
-			pos_type(
-				static_cast<
-					space_unit
-				>(
-					resolution().w() / 2
-				),
-				static_cast<
-					space_unit
-				>(
-					resolution().h() / 2
-				)
-			),
+			spawn_pos,
 			0
 		)
 	);
 
-	ptr->add_weapon(
-		weapons::create(
-			weapon_type::shotgun
-			//weapon_type::pistol
+	world_.insert(
+		entities::auto_ptr(
+			new entities::pickups::weapon(
+				load_context_,
+				team::players,
+				weapon_type::pistol
+			)
+		),
+		entities::insert_parameters_pos(
+			spawn_pos
 		)
 	);
 }

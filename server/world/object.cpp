@@ -3,6 +3,7 @@
 #include "sight_range.hpp"
 #include "context.hpp"
 #include "prop.hpp"
+#include "deferred_add/object.hpp"
 #include "../collision/execute.hpp"
 #include "../collision/execute_begin.hpp"
 #include "../collision/execute_end.hpp"
@@ -44,6 +45,7 @@
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/make_shared_ptr.hpp>
+//#include <fcppt/make_auto_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
@@ -93,6 +95,7 @@ sanguis::server::world::object::object(
 		diff_clock_.callback()
 	),
 	entities_(),
+	deferred_adds_(),
 	props_(),
 	collision_connection_begin_(
 		collision_world_->register_begin_callback(
@@ -161,27 +164,25 @@ sanguis::server::world::object::update(
 	// should we send position updates?
 	bool const update_pos = send_timer_.update_b();
 
+	collision_world_->update(
+		static_cast<sge::time::funit>(	
+			time_
+		)
+	);
+
+	while(
+		!deferred_adds_.empty()
+	)
 	{
-#if 0
-		scoped_update update_(
-			is_world_update_
+		deferred_add::auto_ptr ptr(
+			deferred_adds_.pop_front().release()
 		);
-#endif
-		collision_world_->update(
-			static_cast<sge::time::funit>(	
-				time_
-			)
+
+		insert_deferred(
+			ptr
 		);
 	}
 
-#if 0
-	while(
-		!deferred_adds.empty()
-	)
-		insert_entity(
-			deffered_adds.release_front()
-		);
-#endif
 	for (
 		entity_map::iterator it(
 			entities_.begin()
@@ -203,56 +204,25 @@ sanguis::server::world::object::update(
 	}
 }
 
-sanguis::server::entities::base &
+void
 sanguis::server::world::object::insert(
-	entities::auto_ptr e,
+	entities::auto_ptr entity_,
 	entities::insert_parameters const &insert_params
 )
 {
-#if 0
-	if(
-		is_world_update_
-	)
-		deferred_adds_.push_back(
-			deferred_add(
-				e,
-				insert_params
-			)
-		);
-	else
-		insert_entity(
-			e,
+	deferred_add::auto_ptr ptr(
+		new deferred_add::object(
+//		fcppt::make_auto_ptr<
+//			deferred_add::object
+//		>(
+			entity_,
 			insert_params
-		);
-#endif
-	entity_id const id(
-		e->id()
-	);
-
-	e->transfer(
-		environment_,
-		collision_groups_,
-		insert_params
-	);
-
-	std::pair<
-		entity_map::iterator,
-		bool
-	> const ret(
-		entities_.insert(
-			id,
-			e
 		)
 	);
 
-	if(
-		!ret.second
-	)
-		throw exception(
-			FCPPT_TEXT("Double insert of entity!")
-		);
-	
-	return *ret.first->second;
+	deferred_adds_.push_back(
+		ptr
+	);
 }
 
 sanguis::server::environment::object_ptr const
@@ -724,5 +694,44 @@ sanguis::server::world::object::update_entity_health(
 			message_convert::health(
 				*with_health_	
 			)
+		);
+}
+
+void
+sanguis::server::world::object::insert_deferred(
+	deferred_add::auto_ptr ptr
+)
+{
+	entities::base &entity_(
+		ptr->entity()
+	);
+
+	entity_id const id(
+		entity_.id()
+	);
+
+	entity_.transfer(
+		environment_,
+		collision_groups_,
+		ptr->insert_parameters()
+	);
+
+	typedef std::pair<
+		entity_map::iterator,
+		bool
+	> return_type;
+	
+	return_type const ret(
+		entities_.insert(
+			id,
+			ptr->release_entity()
+		)
+	);
+
+	if(
+		!ret.second
+	)
+		throw exception(
+			FCPPT_TEXT("Double insert of entity!")
 		);
 }

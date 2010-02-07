@@ -7,6 +7,8 @@
 #include "prop_container.hpp"
 #include "entity_map.hpp"
 #include "sight_range_map.hpp"
+#include "deferred_add/queue.hpp"
+#include "deferred_add/auto_ptr.hpp"
 #include "../entities/auto_ptr.hpp"
 #include "../entities/insert_parameters_fwd.hpp"
 #include "../entities/base_fwd.hpp"
@@ -28,9 +30,9 @@
 #include "../../messages/auto_ptr.hpp"
 #include <sge/collision/world_ptr.hpp>
 #include <sge/collision/system_ptr.hpp>
+#include <sge/time/timer.hpp>
 #include <fcppt/container/map_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
-#include <sge/time/timer.hpp>
 #include <fcppt/noncopyable.hpp>
 
 #include "../pickup_spawner.hpp"
@@ -43,7 +45,8 @@ namespace server
 namespace world
 {
 
-class object {
+class object
+{
 	FCPPT_NONCOPYABLE(object)
 public:
 	object(
@@ -59,7 +62,7 @@ public:
 		time_type
 	);
 
-	entities::base & 
+	void
 	insert(
 		entities::auto_ptr,
 		entities::insert_parameters const &
@@ -153,7 +156,7 @@ private:
 	server::environment::load_context_ptr const
 	load_context() const;
 
-	// owns functions
+	// own functions
 	void
 	send_entity_specific(
 		entity_id,
@@ -178,6 +181,11 @@ private:
 		entities::base &
 	);
 
+	void
+	insert_deferred(
+		deferred_add::auto_ptr
+	);
+
 	context_ptr const global_context_;
 
 	server::environment::load_context_ptr const load_context_;
@@ -193,6 +201,8 @@ private:
 	sge::time::timer send_timer_;
 
 	entity_map entities_;
+
+	deferred_add::queue deferred_adds_;
 
 	prop_container props_;
 

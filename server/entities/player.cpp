@@ -10,9 +10,9 @@
 #include "../../messages/create.hpp"
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/make_auto_ptr.hpp>
-#include <tr1/functional>
 
 sanguis::server::entities::player::player(
 	server::environment::load_context_ptr const load_context_,
