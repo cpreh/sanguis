@@ -50,6 +50,7 @@ sanguis::server::ai::search_new_target(
 
 		if(
 			new_distance < distance
+			&& !link->invulnerable()
 		)
 		{
 			distance = new_distance;
@@ -59,8 +60,8 @@ sanguis::server::ai::search_new_target(
 	}
 
 	FCPPT_ASSERT(
-		ret
-		&& !ret->invulnerable()
+		!ret
+		|| !ret->invulnerable()
 	);
 
 	return ret;

@@ -10,10 +10,9 @@
 #include "../collision/distance.hpp"
 #include <fcppt/math/vector/angle_between.hpp>
 #include <fcppt/container/map_impl.hpp>
+#include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_auto_ptr.hpp>
 #include <fcppt/optional.hpp>
-#include <fcppt/assert.hpp>
-#include <tr1/functional>
 
 sanguis::server::ai::simple::simple(
 	entities::with_ai &me_,
@@ -75,9 +74,10 @@ sanguis::server::ai::simple::update(
 				potential_targets_
 			);
 
-	FCPPT_ASSERT(
-		target_
-	);
+	if(
+		!target_
+	)
+		return;
 
 	fcppt::optional<
 		space_unit
