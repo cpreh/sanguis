@@ -2,6 +2,7 @@
 #include "../../z_ordering.hpp"
 #include "../../sprite/colored/parameters.hpp"
 #include "../../sprite/colored/color.hpp"
+#include "../../sprite/colored/color_format.hpp"
 #include "../../sprite/unit.hpp"
 #include "../../../id_dont_care.hpp"
 #include "../../../../exception.hpp"
@@ -11,6 +12,7 @@
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
+#include <sge/image/color/any/convert.hpp>
 #include <sge/image/color/rgba8.hpp>
 #include <sge/image/color/init.hpp>
 #include <sge/image/colors.hpp>
@@ -39,6 +41,13 @@ sanguis::client::draw2d::entities::model::healthbar::healthbar(
 		)
 		.system(
 			&sys
+		)
+		.color(
+			sge::image::color::any::convert<
+				sprite::colored::color_format	
+			>(
+				sge::image::colors::black()
+			)
 		)
 		.elements()
 	),
