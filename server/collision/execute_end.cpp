@@ -1,7 +1,7 @@
 #include "execute_end.hpp"
 #include "base.hpp"
 #include <fcppt/function/object.hpp>
-#include <tr1/functional>
+#include <fcppt/tr1/functional.hpp>
 
 sanguis::server::collision::execute_function const
 sanguis::server::collision::execute_end()

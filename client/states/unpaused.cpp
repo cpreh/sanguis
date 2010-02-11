@@ -4,7 +4,7 @@
 #include "../../messages/call/object.hpp"
 #include "../../tick_event.hpp"
 #include <fcppt/function/object.hpp>
-#include <tr1/functional>
+#include <fcppt/tr1/functional.hpp>
 
 sanguis::client::states::unpaused::unpaused(
 	my_context ctx)

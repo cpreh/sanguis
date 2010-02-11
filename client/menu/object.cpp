@@ -18,14 +18,14 @@
 #include <sge/renderer/filter/linear.hpp>
 #include <sge/renderer/resource_flags_none.hpp>
 #include <sge/renderer/device.hpp>
-#include <fcppt/assign/make_container.hpp>
 #include <sge/systems/instance.hpp>
+#include <fcppt/assign/make_container.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/headers.hpp>
+#include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/make_shared_ptr.hpp>
-#include <tr1/functional>
 
 namespace
 {

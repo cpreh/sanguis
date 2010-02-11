@@ -11,7 +11,7 @@
 #include <fcppt/random/inclusive_range.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
-#include <tr1/functional>
+#include <fcppt/tr1/functional.hpp>
 
 sanguis::server::pickup_spawner::pickup_spawner(
 	environment::object_ptr const env

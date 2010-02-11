@@ -11,9 +11,9 @@
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/algorithm/append.hpp>
+#include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
-#include <tr1/functional>
 
 sanguis::server::machine::machine(
 	load::context const &resources_,

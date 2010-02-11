@@ -10,7 +10,7 @@
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
-#include <tr1/random>
+#include <fcppt/tr1/random.hpp>
 #include <algorithm>
 
 void

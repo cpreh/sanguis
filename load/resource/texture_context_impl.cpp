@@ -6,9 +6,9 @@
 #include <sge/image/loader.hpp>
 #include <sge/image/file.hpp>
 #include <sge/renderer/device.hpp>
-#include <fcppt/text.hpp>
 #include <sge/time/second.hpp>
-#include <tr1/functional>
+#include <fcppt/tr1/functional.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::load::resource::texture_context_impl::texture_context_impl(
 	fcppt::filesystem::path const &_path,

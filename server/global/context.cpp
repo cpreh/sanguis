@@ -23,10 +23,10 @@
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/math/vector/is_null.hpp>
 #include <fcppt/math/vector/to_angle.hpp>
+#include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
-#include <tr1/functional>
 
 #include "../entities/insert_parameters.hpp"
 #include "../entities/insert_parameters_pos.hpp"

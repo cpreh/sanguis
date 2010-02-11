@@ -20,11 +20,11 @@
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/headers.hpp>
+#include <fcppt/tr1/functional.hpp>
 #include <fcppt/assert.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/lexical_cast.hpp>
-#include <tr1/functional>
 #include <boost/foreach.hpp>
 #include <utility>
 

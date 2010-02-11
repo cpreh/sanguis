@@ -7,8 +7,8 @@
 #include "../../messages/create.hpp"
 #include "../../exception.hpp"
 #include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
-#include <tr1/functional>
 #include <limits>
 
 namespace

@@ -2,7 +2,7 @@
 #include <sge/console/gfx.hpp>
 #include <sge/input/system.hpp>
 #include <sge/input/key_pair.hpp>
-#include <tr1/functional>
+#include <fcppt/tr1/functional.hpp>
 
 sanguis::client::console_wrapper::console_wrapper(
 	sge::console::gfx &con,

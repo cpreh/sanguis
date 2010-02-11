@@ -10,9 +10,11 @@
 #include "../../exception.hpp"
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/find_member.hpp>
+#include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/time/millisecond.hpp>
+#include <sge/exception.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
@@ -21,13 +23,11 @@
 #include <fcppt/math/box/basic_impl.hpp>
 #include <fcppt/math/box/output.hpp>
 #include <fcppt/math/box/contains.hpp>
-#include <sge/parse/json/array.hpp>
+#include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/log/headers.hpp>
-#include <sge/exception.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/lexical_cast.hpp>
-#include <tr1/functional>
 
 namespace
 {

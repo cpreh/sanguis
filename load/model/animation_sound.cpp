@@ -5,10 +5,10 @@
 #include <sge/parse/json/array.hpp>
 #include <fcppt/algorithm/find_exn.hpp>
 #include <fcppt/log/headers.hpp>
+#include <fcppt/tr1/array.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/string.hpp>
 #include <boost/foreach.hpp>
-#include <tr1/array>
 #include <utility>
 #include <iterator>
 
