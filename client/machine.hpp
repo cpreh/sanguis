@@ -72,7 +72,7 @@ public:
 	bool key_pressed(
 		sge::input::key_code) const;
 	
-	sanguis::client::console_wrapper &
+	sanguis::client::console &
 	console_wrapper();
 	
 	load::context const &
@@ -103,7 +103,7 @@ private:
 	sge::input::key_state_tracker &ks;
 	sge::console::gfx &console;
 	sge::console::stdlib console_stdlib;
-	sanguis::client::console_wrapper console_wrapper_;
+	sanguis::client::console console_wrapper_;
 	bool running_;
 	server_callback const server_callback_;
 	screenshot screenshot_;

@@ -302,7 +302,7 @@ sanguis::client::machine::key_pressed(
 	return ks[key];
 }
 
-sanguis::client::console_wrapper &
+sanguis::client::console &
 sanguis::client::machine::console_wrapper()
 {
 	return console_wrapper_;

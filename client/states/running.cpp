@@ -52,7 +52,7 @@ sanguis::client::states::running::running(
 			(sge::renderer::state::bool_::clear_zbuffer = false)
 	),
 	music_(
-		context<machine>().console_wrapper().con,
+		context<machine>().console_wrapper().object(),
 		context<machine>().resources().resources().sounds()
 	),
 	drawer(
@@ -71,7 +71,7 @@ sanguis::client::states::running::running(
 				std::tr1::placeholders::_1
 			),
 			drawer->control_environment(),
-			context<machine>().console_wrapper().con.object()
+			context<machine>().console_wrapper().object().object()
 		)
 	),
 	input(
