@@ -26,7 +26,7 @@ public:
 		time_type
 	) = 0;
 
-	void
+	virtual void
 	decay();
 
 	void

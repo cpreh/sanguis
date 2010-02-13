@@ -46,6 +46,7 @@
 #include <fcppt/make_shared_ptr.hpp>
 //#include <fcppt/make_auto_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
+#include <fcppt/assert.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
 
@@ -516,11 +517,20 @@ sanguis::server::world::object::remove_sight_range(
 	
 	// if an entity has been removed
 	// we have to tell the client that it is dead instead
+	
+	entity_map::const_iterator const it(
+		entities_.find(
+			target_id_
+		)
+	);
+
+	FCPPT_ASSERT(
+		it != entities_.end()
+	);
+
 	send_player_specific(
 		player_id_,
-		entities_.count(
-			target_id_
-		) == 0u
+		it->second->dead()
 		?
 			messages::create(
 				messages::die(
