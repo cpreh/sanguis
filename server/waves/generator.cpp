@@ -11,6 +11,9 @@
 #include <fcppt/make_auto_ptr.hpp>
 #include <boost/assign/ptr_list_inserter.hpp>
 
+#include "../log.hpp"
+#include <fcppt/log/headers.hpp>
+
 sanguis::server::waves::generator::generator(
 	sge::console::object &console_
 )
@@ -27,6 +30,7 @@ sanguis::server::waves::generator::generator(
 		)
 	)
 {
+#if 0
 	// TODO: somehow put this in a configuration file!
 	boost::assign::ptr_push_back<waves::infinite>(waves)
 	(
@@ -93,6 +97,7 @@ sanguis::server::waves::generator::generator(
 
 	//boost::assign::ptr_push_back<waves::debug>(waves)
 	//();
+#endif
 }
 
 sanguis::server::waves::generator::~generator()
@@ -130,15 +135,22 @@ sanguis::server::waves::generator::spawn(
 try
 {
 	if(
-		args_.size() != 2u
+		args_.size() != 3u
 	)
 	{
+		FCPPT_LOG_ERROR(
+			log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("Invalid argument count ")
+				<< args_.size()
+		);
+
 		// TODO: error!
 		return;
 	}
 
 	fcppt::string const action(
-		args_[0]
+		args_[1]
 	);
 
 	if(
@@ -146,7 +158,7 @@ try
 	)
 		waves.push_back(
 			make(
-				args_[1]
+				args_[2]
 			)
 		);
 	else if(
@@ -158,7 +170,7 @@ try
 				single
 			>(
 				convert_enemy_name(
-					args_[1]
+					args_[2]
 				)
 			)
 		);
@@ -169,6 +181,11 @@ try
 	}
 	else
 	{
+		FCPPT_LOG_ERROR(
+			log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("Invalid argument")
+		);
 		// TODO: error!
 	}
 }
@@ -176,5 +193,10 @@ catch(
 	exception const &e
 )
 {
+	FCPPT_LOG_ERROR(
+		log(),
+		fcppt::log::_
+			<< e.string()
+	);
 	// TODO: error!
 }
