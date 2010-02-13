@@ -3,14 +3,14 @@
 #include "../log.hpp"
 #include "../../exception.hpp"
 #include "../../media_path.hpp"
-#include <fcppt/filesystem/path.hpp>
 #include <sge/audio/player.hpp>
 #include <sge/audio/pool.hpp>
 #include <sge/audio/multi_loader.hpp>
 #include <sge/audio/bad_sound_alloc.hpp>
+#include <fcppt/filesystem/path.hpp>
 #include <fcppt/log/headers.hpp>
+#include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
-#include <tr1/functional>
 
 namespace
 {

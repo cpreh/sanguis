@@ -21,6 +21,7 @@ sanguis::server::entities::base::base()
 		get_unique_id()
 	),
 	angle_(0),
+	processed_(false),
 	links_()
 {}
 
@@ -93,6 +94,18 @@ void
 sanguis::server::entities::base::die()
 {
 	on_die();
+}
+
+bool
+sanguis::server::entities::base::processed() const
+{
+	return processed_;
+}
+	
+void
+sanguis::server::entities::base::may_be_deleted()
+{
+	processed_ = true;
 }
 
 sanguis::server::entities::auto_weak_link const

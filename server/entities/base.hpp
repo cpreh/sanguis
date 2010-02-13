@@ -58,6 +58,12 @@ public:
 	void
 	die();
 
+	bool
+	processed() const;
+	
+	void
+	may_be_deleted();
+
 	
 	// linking with other objects
 	
@@ -192,9 +198,9 @@ private:
 
 	entity_id const id_;
 
-	space_unit
-		angle_,
-		direction_;
+	space_unit angle_;
+
+	bool processed_;
 	
 	link_container links_;
 };

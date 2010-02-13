@@ -8,10 +8,10 @@
 #include <sge/parse/json/object.hpp>
 #include <fcppt/random/inclusive_range.hpp>
 #include <fcppt/math/almost_zero.hpp>
+#include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert.hpp>
 #include <boost/foreach.hpp>
-#include <tr1/functional>
 #include <numeric>
 #include <functional>
 

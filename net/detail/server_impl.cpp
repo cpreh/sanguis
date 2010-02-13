@@ -11,10 +11,10 @@
 #undef max
 // asio brings in window.h's max macro :(
 #include <fcppt/container/raw_vector_impl.hpp>
+#include <fcppt/tr1/functional.hpp>
 #include <boost/asio/buffer.hpp>
 #include <boost/lambda/lambda.hpp>
 #include <boost/foreach.hpp>
-#include <tr1/functional>
 #include <iostream>
 
 sanguis::net::detail::server_impl::server_impl()

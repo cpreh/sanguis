@@ -17,7 +17,10 @@ namespace server
 namespace waves
 {
 
-class infinite : public wave {
+class infinite
+:
+	public wave
+{
 public:
 	infinite(
 		waves::delay,

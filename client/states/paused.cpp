@@ -4,8 +4,8 @@
 #include "../../tick_event.hpp"
 #include "../../messages/unpause.hpp"
 #include "../../messages/call/object.hpp"
+#include <fcppt/tr1/functional.hpp>
 #include <boost/mpl/vector/vector10.hpp>
-#include <tr1/functional>
 
 sanguis::client::states::paused::paused(my_context ctx)
 :

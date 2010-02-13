@@ -1,7 +1,7 @@
 #ifndef SANGUIS_RANDOM_HPP_INCLUDED
 #define SANGUIS_RANDOM_HPP_INCLUDED
 
-#include <tr1/random>
+#include <fcppt/tr1/random.hpp>
 
 namespace sanguis
 {

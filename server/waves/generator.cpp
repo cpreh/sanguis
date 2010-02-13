@@ -1,10 +1,36 @@
 #include "generator.hpp"
 #include "infinite.hpp"
+#include "single.hpp"
+#include "make.hpp"
+#include "convert_enemy_name.hpp"
+#include "../../exception.hpp"
 //#include "debug.hpp"
+#include <sge/console/object.hpp>
+#include <fcppt/tr1/functional.hpp>
+#include <fcppt/text.hpp>
+#include <fcppt/make_auto_ptr.hpp>
 #include <boost/assign/ptr_list_inserter.hpp>
 
-sanguis::server::waves::generator::generator()
+#include "../log.hpp"
+#include <fcppt/log/headers.hpp>
+
+sanguis::server::waves::generator::generator(
+	sge::console::object &console_
+)
+:
+	spawn_connection(
+		console_.insert(
+			FCPPT_TEXT("spawn"),
+			std::tr1::bind(
+				&generator::spawn,
+				this,
+				std::tr1::placeholders::_1
+			),
+			FCPPT_TEXT("spawn wave [wavename] or spawn enemy [enemyname]")
+		)
+	)
 {
+#if 0
 	// TODO: somehow put this in a configuration file!
 	boost::assign::ptr_push_back<waves::infinite>(waves)
 	(
@@ -71,7 +97,11 @@ sanguis::server::waves::generator::generator()
 
 	//boost::assign::ptr_push_back<waves::debug>(waves)
 	//();
+#endif
 }
+
+sanguis::server::waves::generator::~generator()
+{}
 
 void
 sanguis::server::waves::generator::process(
@@ -96,4 +126,77 @@ sanguis::server::waves::generator::process(
 		else
 			++it;
 	}
+}
+
+void
+sanguis::server::waves::generator::spawn(
+	sge::console::arg_list const &args_
+)
+try
+{
+	if(
+		args_.size() != 3u
+	)
+	{
+		FCPPT_LOG_ERROR(
+			log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("Invalid argument count ")
+				<< args_.size()
+		);
+
+		// TODO: error!
+		return;
+	}
+
+	fcppt::string const action(
+		args_[1]
+	);
+
+	if(
+		action == FCPPT_TEXT("wave")
+	)
+		waves.push_back(
+			make(
+				args_[2]
+			)
+		);
+	else if(
+		action == FCPPT_TEXT("enemy")
+	)
+	{
+		wave_auto_ptr ptr(
+			fcppt::make_auto_ptr<
+				single
+			>(
+				convert_enemy_name(
+					args_[2]
+				)
+			)
+		);
+
+		waves.push_back(
+			ptr
+		);
+	}
+	else
+	{
+		FCPPT_LOG_ERROR(
+			log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("Invalid argument")
+		);
+		// TODO: error!
+	}
+}
+catch(
+	exception const &e
+)
+{
+	FCPPT_LOG_ERROR(
+		log(),
+		fcppt::log::_
+			<< e.string()
+	);
+	// TODO: error!
 }

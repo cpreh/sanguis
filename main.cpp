@@ -97,8 +97,9 @@ create_server(
 	server_scoped_ptr &server,
 	sanguis::load::context const &resources,
 	sge::collision::system_ptr const coll,
-	sge::console::gfx &con,
-	sanguis::net::port_type const host_port)
+	sge::console::object &con,
+	sanguis::net::port_type const host_port
+)
 {
 	server.reset(
 		new sanguis::server::machine(
@@ -322,6 +323,9 @@ try
 					)
 				)
 			)
+			.pos(
+				sge::console::sprite_object::point::null()
+			)
 			.size(
 				sge::console::sprite_object::dim(
 					sys.renderer()->screen_size().w(),
@@ -357,7 +361,7 @@ try
 			boost::phoenix::ref(server),
 			boost::phoenix::ref(resources),
 			sys.collision_system(),
-			boost::phoenix::ref(console_gfx),
+			boost::phoenix::ref(console),
 			boost::phoenix::arg_names::_1
 		),
 		resources,

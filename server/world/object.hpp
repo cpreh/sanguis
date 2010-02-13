@@ -7,8 +7,6 @@
 #include "prop_container.hpp"
 #include "entity_map.hpp"
 #include "sight_range_map.hpp"
-#include "deferred_add/queue.hpp"
-#include "deferred_add/auto_ptr.hpp"
 #include "../entities/auto_ptr.hpp"
 #include "../entities/insert_parameters_fwd.hpp"
 #include "../entities/base_fwd.hpp"
@@ -30,6 +28,7 @@
 #include "../../messages/auto_ptr.hpp"
 #include <sge/collision/world_ptr.hpp>
 #include <sge/collision/system_ptr.hpp>
+#include <sge/console/object_fwd.hpp>
 #include <sge/time/timer.hpp>
 #include <fcppt/container/map_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
@@ -52,7 +51,8 @@ public:
 	object(
 		context_ptr const global_context_,
 		sge::collision::system_ptr,
-		server::environment::load_context_ptr
+		server::environment::load_context_ptr,
+		sge::console::object &
 	);
 
 	~object();
@@ -181,11 +181,6 @@ private:
 		entities::base &
 	);
 
-	void
-	insert_deferred(
-		deferred_add::auto_ptr
-	);
-
 	context_ptr const global_context_;
 
 	server::environment::load_context_ptr const load_context_;
@@ -201,8 +196,6 @@ private:
 	sge::time::timer send_timer_;
 
 	entity_map entities_;
-
-	deferred_add::queue deferred_adds_;
 
 	prop_container props_;
 

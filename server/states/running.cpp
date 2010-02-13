@@ -36,7 +36,8 @@ sanguis::server::states::running::running(
 				std::tr1::placeholders::_2
 			),
 			context<machine>().collision_system(),
-			context<machine>().resources().models()
+			context<machine>().resources().models(),
+			context<machine>().console()
 		)
 	)
 {

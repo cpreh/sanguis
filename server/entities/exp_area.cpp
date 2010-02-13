@@ -2,38 +2,23 @@
 #include "player.hpp"
 #include "auto_weak_link.hpp"
 #include <fcppt/container/map_impl.hpp>
-#include <sge/time/millisecond.hpp>
 #include <boost/logic/tribool.hpp>
 #include <boost/foreach.hpp>
+
+#include <iostream>
 
 sanguis::server::entities::exp_area::exp_area(
 	exp_type const exp_
 )
 :
 	exp_(exp_),
-	diff_clock_(),
-	expire_timer_(
-		sge::time::millisecond(
-			10
-		),
-		sge::time::activation_state::active,
-		diff_clock_.callback()
-	),
 	player_links_()
-{}
+{
+	std::cerr << "exp area\n";
+}
 
 sanguis::server::entities::exp_area::~exp_area()
 {}
-
-void
-sanguis::server::entities::exp_area::on_update(
-	time_type const time_
-)
-{
-	diff_clock_.update(
-		time_
-	);
-}
 
 void
 sanguis::server::entities::exp_area::on_die()
@@ -86,13 +71,13 @@ sanguis::server::entities::exp_area::radius() const
 bool
 sanguis::server::entities::exp_area::dead() const
 {
-	return expire_timer_.expired();	
+	return true;
 }
 
 bool
 sanguis::server::entities::exp_area::invulnerable() const
 {
-	return false;
+	return true;
 }
 
 sanguis::messages::auto_ptr
@@ -136,6 +121,8 @@ sanguis::server::entities::exp_area::collision_entity_begin(
 	base &entity_
 )
 {
+	std::cerr << "collision\n";
+
 	player_links_.insert(
 		entity_.id(),
 		entity_.link()

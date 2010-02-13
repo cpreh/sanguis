@@ -5,7 +5,7 @@
 #include "property/substract.hpp"
 #include "property/initial_max.hpp"
 #include "../environment/object.hpp"
-#include <tr1/functional>
+#include <fcppt/tr1/functional.hpp>
 
 void
 sanguis::server::entities::with_health::damage(

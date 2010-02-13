@@ -5,13 +5,13 @@
 #include <sge/audio/sound.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/console/object.hpp>
+#include <sge/exception.hpp>
 #include <fcppt/filesystem/directory_iterator.hpp>
 #include <fcppt/log/headers.hpp>
-#include <sge/exception.hpp>
+#include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <fcppt/bad_lexical_cast.hpp>
-#include <tr1/functional>
 
 sanguis::client::music_handler::music_handler(
 	sge::console::gfx &_console,

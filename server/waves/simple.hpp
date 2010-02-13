@@ -14,14 +14,18 @@ namespace server
 namespace waves
 {
 
-class simple : public wave {
+class simple
+:
+	public wave
+{
 public:
 	simple(
 		time_type delay,
 		time_type spawn_interval,
 		unsigned waves,
 		unsigned spawns_per_wave,
-		enemy_type::type);
+		enemy_type::type
+	);
 private:
 	void
 	process(

@@ -6,6 +6,8 @@
 #include <sge/gui/widgets/base.hpp>
 #include <sge/gui/dim.hpp>
 #include <sge/sprite/object.hpp>
+#include <sge/image/color/rgba8.hpp>
+#include <sge/image/color/init.hpp>
 #include <fcppt/math/pi.hpp>
 #include <fcppt/math/vector/is_null.hpp>
 #include <fcppt/math/vector/normalize.hpp>
@@ -14,11 +16,9 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
-#include <sge/image/color/rgba8.hpp>
-#include <sge/image/color/init.hpp>
+#include <fcppt/tr1/random.hpp>
 #include <fcppt/assert.hpp>
 #include <boost/foreach.hpp>
-#include <tr1/random>
 #include <algorithm>
 #include <limits>
 #include <cmath>

@@ -7,11 +7,11 @@
 // asio brings in window.h's max macro :(
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/log/headers.hpp>
+#include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/iconv.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <boost/asio/buffer.hpp>
-#include <tr1/functional>
 
 sanguis::net::detail::client_impl::client_impl() 
 :

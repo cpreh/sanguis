@@ -11,19 +11,19 @@
 #include "../message_event.hpp"
 #include "../menu_event.hpp"
 #include "../log.hpp"
-#include <fcppt/function/object.hpp>
-#include <fcppt/log/headers.hpp>
-#include <fcppt/log/parameters/inherited.hpp>
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/state/trampoline.hpp>
 #include <sge/image/colors.hpp>
+#include <fcppt/function/object.hpp>
+#include <fcppt/log/headers.hpp>
+#include <fcppt/log/parameters/inherited.hpp>
+#include <fcppt/tr1/functional.hpp>
 #include <fcppt/utf8/convert.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/iconv.hpp>
 #include <boost/mpl/vector.hpp>
-#include <tr1/functional>
 #include <ostream>
 
 sanguis::client::states::menu::menu(
