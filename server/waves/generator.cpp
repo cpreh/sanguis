@@ -1,9 +1,14 @@
 #include "generator.hpp"
 #include "infinite.hpp"
+#include "single.hpp"
+#include "make.hpp"
+#include "convert_enemy_name.hpp"
+#include "../../exception.hpp"
 //#include "debug.hpp"
 #include <sge/console/object.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/make_auto_ptr.hpp>
 #include <boost/assign/ptr_list_inserter.hpp>
 
 sanguis::server::waves::generator::generator(
@@ -18,7 +23,7 @@ sanguis::server::waves::generator::generator(
 				this,
 				std::tr1::placeholders::_1
 			),
-			FCPPT_TEXT("spawn [wave_gen]")
+			FCPPT_TEXT("spawn wave [wavename] or spawn enemy [enemyname]")
 		)
 	)
 {
@@ -90,6 +95,9 @@ sanguis::server::waves::generator::generator(
 	//();
 }
 
+sanguis::server::waves::generator::~generator()
+{}
+
 void
 sanguis::server::waves::generator::process(
 	time_type const diff,
@@ -119,5 +127,54 @@ void
 sanguis::server::waves::generator::spawn(
 	sge::console::arg_list const &args_
 )
+try
 {
+	if(
+		args_.size() != 2u
+	)
+	{
+		// TODO: error!
+		return;
+	}
+
+	fcppt::string const action(
+		args_[0]
+	);
+
+	if(
+		action == FCPPT_TEXT("wave")
+	)
+		waves.push_back(
+			make(
+				args_[1]
+			)
+		);
+	else if(
+		action == FCPPT_TEXT("enemy")
+	)
+	{
+		wave_auto_ptr ptr(
+			fcppt::make_auto_ptr<
+				single
+			>(
+				convert_enemy_name(
+					args_[1]
+				)
+			)
+		);
+
+		waves.push_back(
+			ptr
+		);
+	}
+	else
+	{
+		// TODO: error!
+	}
+}
+catch(
+	exception const &e
+)
+{
+	// TODO: error!
 }

@@ -10,7 +10,10 @@ namespace server
 namespace waves
 {
 
-class debug : public wave {
+class debug
+:
+	public wave
+{
 public:
 	debug();
 private:
@@ -21,7 +24,8 @@ private:
 		environment::load_context_ptr
 	);
 
-	bool ended() const;
+	bool
+	ended() const;
 
 	bool spawned;
 };

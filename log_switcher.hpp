@@ -1,5 +1,5 @@
-#ifndef SANGUIS_LOG_SWITCHER_HPP_HPP_INCLUDED
-#define SANGUIS_LOG_SWITCHER_HPP_HPP_INCLUDED
+#ifndef SANGUIS_LOG_SWITCHER_HPP_INCLUDED
+#define SANGUIS_LOG_SWITCHER_HPP_INCLUDED
 
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>

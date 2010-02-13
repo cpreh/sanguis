@@ -26,6 +26,8 @@ public:
 		sge::console::object &
 	);
 
+	~generator();
+
 	void
 	process(
 		time_type,
