@@ -28,6 +28,7 @@
 #include "../../messages/auto_ptr.hpp"
 #include <sge/collision/world_ptr.hpp>
 #include <sge/collision/system_ptr.hpp>
+#include <sge/console/object_fwd.hpp>
 #include <sge/time/timer.hpp>
 #include <fcppt/container/map_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
@@ -50,7 +51,8 @@ public:
 	object(
 		context_ptr const global_context_,
 		sge::collision::system_ptr,
-		server::environment::load_context_ptr
+		server::environment::load_context_ptr,
+		sge::console::object &
 	);
 
 	~object();

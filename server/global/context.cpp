@@ -37,7 +37,8 @@
 sanguis::server::global::context::context(
 	unicast_callback const &send_unicast_,
 	sge::collision::system_ptr const collision_system_,
-	load::model::context const &model_context_
+	load::model::context const &model_context_,
+	sge::console::object &console_
 )
 :
 	send_unicast_(send_unicast_),
@@ -59,7 +60,8 @@ sanguis::server::global::context::context(
 		>(
 			model_context_
 		)
-	)
+	),
+	console_(console_)
 {}
 
 sanguis::server::global::context::~context()
@@ -382,7 +384,8 @@ sanguis::server::global::context::world(
 		server::world::random(
 			world_context_,
 			collision_system_,
-			load_context_
+			load_context_,
+			console_
 		)
 	).first->second;
 }

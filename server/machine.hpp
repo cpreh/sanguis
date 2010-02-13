@@ -8,7 +8,7 @@
 #include "../net/server.hpp"
 #include "../net/id_type.hpp"
 #include "../tick_event.hpp"
-#include <sge/console/gfx_fwd.hpp>
+#include <sge/console/object_fwd.hpp>
 #include <sge/collision/system_ptr.hpp>
 #include <fcppt/container/map_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
@@ -32,7 +32,7 @@ public:
 	machine(
 		load::context const &,
 		sge::collision::system_ptr,
-		sge::console::gfx &,
+		sge::console::object &,
 		net::port_type
 	);
 
@@ -84,6 +84,9 @@ public:
 	sge::collision::system_ptr const
 	collision_system() const;
 
+	sge::console::object &
+	console();
+
 	void
 	send_unicast(
 		net::id_type,
@@ -112,7 +115,7 @@ private:
 
 	sge::collision::system_ptr const collision_;
 
-	sge::console::gfx &console_;
+	sge::console::object &console_;
 };
 
 }

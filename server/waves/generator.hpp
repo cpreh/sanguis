@@ -5,6 +5,9 @@
 #include "../environment/object_ptr.hpp"
 #include "../environment/load_context_ptr.hpp"
 #include "../../time_type.hpp"
+#include <sge/console/object_fwd.hpp>
+#include <sge/console/arg_list.hpp>
+#include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
 
@@ -12,14 +15,16 @@ namespace sanguis
 {
 namespace server
 {
-
 namespace waves
 {
 
-class generator {
+class generator
+{
 	FCPPT_NONCOPYABLE(generator)
 public:
-	generator();
+	explicit generator(
+		sge::console::object &
+	);
 
 	void
 	process(
@@ -28,7 +33,17 @@ public:
 		environment::load_context_ptr
 	);
 private:
-	typedef boost::ptr_list<wave> wave_list;
+	void
+	spawn(
+		sge::console::arg_list const &
+	);
+
+	fcppt::signal::scoped_connection spawn_connection;
+
+	typedef boost::ptr_list<
+		wave
+	> wave_list;
+
 	wave_list waves;
 };
 

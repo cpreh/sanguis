@@ -1,9 +1,26 @@
 #include "generator.hpp"
 #include "infinite.hpp"
 //#include "debug.hpp"
+#include <sge/console/object.hpp>
+#include <fcppt/tr1/functional.hpp>
+#include <fcppt/text.hpp>
 #include <boost/assign/ptr_list_inserter.hpp>
 
-sanguis::server::waves::generator::generator()
+sanguis::server::waves::generator::generator(
+	sge::console::object &console_
+)
+:
+	spawn_connection(
+		console_.insert(
+			FCPPT_TEXT("spawn"),
+			std::tr1::bind(
+				&generator::spawn,
+				this,
+				std::tr1::placeholders::_1
+			),
+			FCPPT_TEXT("spawn [wave_gen]")
+		)
+	)
 {
 	// TODO: somehow put this in a configuration file!
 	boost::assign::ptr_push_back<waves::infinite>(waves)
@@ -96,4 +113,11 @@ sanguis::server::waves::generator::process(
 		else
 			++it;
 	}
+}
+
+void
+sanguis::server::waves::generator::spawn(
+	sge::console::arg_list const &args_
+)
+{
 }

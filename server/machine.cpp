@@ -18,7 +18,7 @@
 sanguis::server::machine::machine(
 	load::context const &resources_,
 	sge::collision::system_ptr const collision_,
-	sge::console::gfx &console_,
+	sge::console::object &console_,
 	net::port_type const port_
 )
 :
@@ -62,7 +62,8 @@ sanguis::server::machine::machine(
 	console_(console_)
 {}
 
-void sanguis::server::machine::process(
+void
+sanguis::server::machine::process(
 	tick_event const &t
 )
 {
@@ -80,13 +81,16 @@ void sanguis::server::machine::process(
 	process_event(t);
 }
 
-void sanguis::server::machine::listen()
+void
+sanguis::server::machine::listen()
 {
 	net_.listen(port_);
 }
 
-void sanguis::server::machine::connect_callback(
-	net::id_type const id)
+void
+sanguis::server::machine::connect_callback(
+	net::id_type const id
+)
 {
 	clients_.insert(
 		id,
@@ -103,9 +107,11 @@ void sanguis::server::machine::connect_callback(
 	);
 }
 
-void sanguis::server::machine::disconnect_callback(
+void
+sanguis::server::machine::disconnect_callback(
 	net::id_type const id,
-	fcppt::string const &)
+	fcppt::string const &
+)
 {
 	process_event(
 		message_event(
@@ -121,9 +127,11 @@ void sanguis::server::machine::disconnect_callback(
 	);
 }
 
-void sanguis::server::machine::process_message(
+void
+sanguis::server::machine::process_message(
 	net::id_type const id,
-	messages::auto_ptr m)
+	messages::auto_ptr m
+)
 {
 	process_event(
 		message_event(
@@ -133,7 +141,8 @@ void sanguis::server::machine::process_message(
 	);
 }
 
-void sanguis::server::machine::data_callback(
+void
+sanguis::server::machine::data_callback(
 	net::id_type const id,
 	net::data_type const &data
 )
@@ -198,6 +207,12 @@ sge::collision::system_ptr const
 sanguis::server::machine::collision_system() const
 {
 	return collision_;
+}
+
+sge::console::object &
+sanguis::server::machine::console()
+{
+	return console_;
 }
 
 void
