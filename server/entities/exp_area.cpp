@@ -2,7 +2,6 @@
 #include "player.hpp"
 #include "auto_weak_link.hpp"
 #include <fcppt/container/map_impl.hpp>
-#include <sge/time/millisecond.hpp>
 #include <boost/logic/tribool.hpp>
 #include <boost/foreach.hpp>
 
@@ -13,14 +12,6 @@ sanguis::server::entities::exp_area::exp_area(
 )
 :
 	exp_(exp_),
-	diff_clock_(),
-	expire_timer_(
-		sge::time::millisecond(
-			10
-		),
-		sge::time::activation_state::active,
-		diff_clock_.callback()
-	),
 	player_links_()
 {
 	std::cerr << "exp area\n";
@@ -28,16 +19,6 @@ sanguis::server::entities::exp_area::exp_area(
 
 sanguis::server::entities::exp_area::~exp_area()
 {}
-
-void
-sanguis::server::entities::exp_area::on_update(
-	time_type const time_
-)
-{
-	diff_clock_.update(
-		time_
-	);
-}
 
 void
 sanguis::server::entities::exp_area::on_die()
@@ -90,7 +71,7 @@ sanguis::server::entities::exp_area::radius() const
 bool
 sanguis::server::entities::exp_area::dead() const
 {
-	return expire_timer_.expired();	
+	return true;
 }
 
 bool

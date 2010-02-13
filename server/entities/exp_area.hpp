@@ -5,9 +5,7 @@
 #include "auto_weak_link_fwd.hpp"
 #include "../exp_type.hpp"
 #include "../../entity_id.hpp"
-#include "../../diff_clock.hpp"
 #include <fcppt/container/map_decl.hpp>
-#include <sge/time/timer.hpp>
 #include <map>
 
 namespace sanguis
@@ -28,11 +26,6 @@ public:
 protected:
 	~exp_area();
 private:
-	void
-	on_update(
-		time_type
-	);
-
 	void
 	on_die();
 
@@ -73,10 +66,6 @@ private:
 	);
 
 	exp_type const exp_;
-
-	diff_clock diff_clock_;
-
-	sge::time::timer expire_timer_;
 
 	typedef fcppt::container::map<
 		std::map<
