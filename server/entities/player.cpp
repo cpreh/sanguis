@@ -75,11 +75,15 @@ sanguis::server::entities::player::player(
 	);
 }
 
+#include <iostream>
+
 void
 sanguis::server::entities::player::add_exp(
 	exp_type const e
 )
 {
+	std::cerr << "add_exp " << e << '\n';
+
 	exp_ += e;
 
 	environment()->exp_changed(

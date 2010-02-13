@@ -3,7 +3,6 @@
 #include "sight_range.hpp"
 #include "context.hpp"
 #include "prop.hpp"
-#include "deferred_add/object.hpp"
 #include "../collision/execute.hpp"
 #include "../collision/execute_begin.hpp"
 #include "../collision/execute_end.hpp"
@@ -95,7 +94,6 @@ sanguis::server::world::object::object(
 		diff_clock_.callback()
 	),
 	entities_(),
-	deferred_adds_(),
 	props_(),
 	collision_connection_begin_(
 		collision_world_->register_begin_callback(
@@ -168,19 +166,6 @@ sanguis::server::world::object::update(
 		)
 	);
 
-	while(
-		!deferred_adds_.empty()
-	)
-	{
-		deferred_add::auto_ptr ptr(
-			deferred_adds_.pop_front().release()
-		);
-
-		insert_deferred(
-			ptr
-		);
-	}
-
 	for (
 		entity_map::iterator it(
 			entities_.begin()
@@ -205,22 +190,37 @@ sanguis::server::world::object::update(
 void
 sanguis::server::world::object::insert(
 	entities::auto_ptr entity_,
-	entities::insert_parameters const &insert_params
+	entities::insert_parameters const &insert_parameters_
 )
 {
-	deferred_add::auto_ptr ptr(
-		new deferred_add::object(
-//		fcppt::make_auto_ptr<
-//			deferred_add::object
-//		>(
-			entity_,
-			insert_params
+	entity_id const id(
+		entity_->id()
+	);
+
+	entity_->transfer(
+		environment_,
+		collision_groups_,
+		insert_parameters_
+	);
+
+	typedef std::pair<
+		entity_map::iterator,
+		bool
+	> return_type;
+	
+	return_type const ret(
+		entities_.insert(
+			id,
+			entity_	
 		)
 	);
 
-	deferred_adds_.push_back(
-		ptr
-	);
+	if(
+		!ret.second
+	)
+		throw exception(
+			FCPPT_TEXT("Double insert of entity!")
+		);
 }
 
 sanguis::server::environment::object_ptr const
@@ -692,44 +692,5 @@ sanguis::server::world::object::update_entity_health(
 			message_convert::health(
 				*with_health_	
 			)
-		);
-}
-
-void
-sanguis::server::world::object::insert_deferred(
-	deferred_add::auto_ptr ptr
-)
-{
-	entities::base &entity_(
-		ptr->entity()
-	);
-
-	entity_id const id(
-		entity_.id()
-	);
-
-	entity_.transfer(
-		environment_,
-		collision_groups_,
-		ptr->insert_parameters()
-	);
-
-	typedef std::pair<
-		entity_map::iterator,
-		bool
-	> return_type;
-	
-	return_type const ret(
-		entities_.insert(
-			id,
-			ptr->release_entity()
-		)
-	);
-
-	if(
-		!ret.second
-	)
-		throw exception(
-			FCPPT_TEXT("Double insert of entity!")
 		);
 }

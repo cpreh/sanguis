@@ -6,6 +6,8 @@
 #include <boost/logic/tribool.hpp>
 #include <boost/foreach.hpp>
 
+#include <iostream>
+
 sanguis::server::entities::exp_area::exp_area(
 	exp_type const exp_
 )
@@ -20,7 +22,9 @@ sanguis::server::entities::exp_area::exp_area(
 		diff_clock_.callback()
 	),
 	player_links_()
-{}
+{
+	std::cerr << "exp area\n";
+}
 
 sanguis::server::entities::exp_area::~exp_area()
 {}
@@ -92,7 +96,7 @@ sanguis::server::entities::exp_area::dead() const
 bool
 sanguis::server::entities::exp_area::invulnerable() const
 {
-	return false;
+	return true;
 }
 
 sanguis::messages::auto_ptr
@@ -136,6 +140,8 @@ sanguis::server::entities::exp_area::collision_entity_begin(
 	base &entity_
 )
 {
+	std::cerr << "collision\n";
+
 	player_links_.insert(
 		entity_.id(),
 		entity_.link()

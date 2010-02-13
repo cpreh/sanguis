@@ -7,8 +7,6 @@
 #include "prop_container.hpp"
 #include "entity_map.hpp"
 #include "sight_range_map.hpp"
-#include "deferred_add/queue.hpp"
-#include "deferred_add/auto_ptr.hpp"
 #include "../entities/auto_ptr.hpp"
 #include "../entities/insert_parameters_fwd.hpp"
 #include "../entities/base_fwd.hpp"
@@ -181,11 +179,6 @@ private:
 		entities::base &
 	);
 
-	void
-	insert_deferred(
-		deferred_add::auto_ptr
-	);
-
 	context_ptr const global_context_;
 
 	server::environment::load_context_ptr const load_context_;
@@ -201,8 +194,6 @@ private:
 	sge::time::timer send_timer_;
 
 	entity_map entities_;
-
-	deferred_add::queue deferred_adds_;
 
 	prop_container props_;
 
