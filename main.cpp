@@ -322,6 +322,9 @@ try
 					)
 				)
 			)
+			.pos(
+				sge::console::sprite_object::point::null()
+			)
 			.size(
 				sge::console::sprite_object::dim(
 					sys.renderer()->screen_size().w(),
