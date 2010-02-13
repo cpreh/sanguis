@@ -614,9 +614,12 @@ sanguis::server::world::object::update_entity(
 	);
 
 	if(
-		e.processed()
+		!e.processed()
 	)
+	{
 		e.may_be_deleted();
+		return;
+	}
 	else if(
 		e.dead()
 	)
