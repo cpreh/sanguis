@@ -87,12 +87,6 @@ sanguis::client::draw2d::scene::message_environment::transform_callback() const
 	return object_.transform_callback();
 }
 
-sanguis::entity_id
-sanguis::client::draw2d::scene::message_environment::own_player_id() const
-{
-	return object_.player_id();
-}
-
 sge::renderer::screen_size const
 sanguis::client::draw2d::scene::message_environment::screen_size() const
 {

@@ -7,6 +7,7 @@
 #include "../level_calculate.hpp"
 #include "../auras/update_sight.hpp"
 #include "../../messages/add_player.hpp"
+#include "../../messages/add_own_player.hpp"
 #include "../../messages/create.hpp"
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
@@ -236,21 +237,21 @@ sanguis::server::entities::player::on_update(
 }
 
 sanguis::messages::auto_ptr
-sanguis::server::entities::player::add_message() const
+sanguis::server::entities::player::add_message(
+	server::player_id const receiver_
+) const
 {
-	return messages::create(
-		messages::add_player(
-			id(),
-			pos(),
-			angle(),
-			dim(),
-			abs_speed(),
-			current_health(),
-			max_health()
-		)
-	);
+	return
+		receiver_ == player_id()
+		?
+			make_add_message<
+				messages::add_own_player
+			>()
+		:
+			make_add_message<
+				messages::add_player
+			>();
 }
-
 sanguis::entity_type::type
 sanguis::server::entities::player::type() const
 {
@@ -274,3 +275,25 @@ sanguis::server::entities::player::on_new_weapon(
 		type_
 	);
 }
+
+template<
+	typename Message
+>
+sanguis::messages::auto_ptr
+sanguis::server::entities::player::make_add_message() const
+{
+	return
+		messages::create(
+			Message(
+				id(),
+				pos(),
+				angle(),
+				dim(),
+				abs_speed(),
+				current_health(),
+				max_health()
+			)
+		);
+}
+
+

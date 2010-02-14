@@ -34,6 +34,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/exception.hpp>
+#include <fcppt/assert.hpp>
 
 #include <boost/foreach.hpp>
 
@@ -99,10 +100,11 @@ sanguis::client::draw2d::scene::object::process_message(
 )
 {
 	static sanguis::messages::call::object<
-		boost::mpl::vector22<
+		boost::mpl::vector23<
 			sanguis::messages::add_aoe_projectile,
 			sanguis::messages::add_enemy,
 			sanguis::messages::add_friend,
+			sanguis::messages::add_own_player,
 			sanguis::messages::add_pickup,
 			sanguis::messages::add_player,
 			sanguis::messages::add_projectile,
@@ -272,6 +274,8 @@ sanguis::client::draw2d::scene::object::control_environment() const
 	return *control_environment_;
 }
 
+#include <fcppt/math/matrix/matrix.hpp>
+
 void
 sanguis::client::draw2d::scene::object::render_systems()
 {
@@ -282,10 +286,22 @@ sanguis::client::draw2d::scene::object::render_systems()
 
 	client_system_.matrices();
 
-	client_system_.render(
-		z_ordering::background,
-		sge::sprite::default_equal()
-	);
+	{
+		client_system_.renderer()->transform(
+			sge::renderer::matrix_mode::texture,
+			normal_system_.transform() * 0.1f
+		);
+
+		client_system_.render(
+			z_ordering::background,
+			sge::sprite::default_equal()
+		);
+
+		client_system_.renderer()->transform(
+			sge::renderer::matrix_mode::texture,
+			sprite::client::system::matrix::identity()
+		);
+	}
 		
 	normal_system_.matrices();
 
@@ -392,6 +408,10 @@ sanguis::client::draw2d::scene::object::entity(
 sanguis::client::draw2d::entities::base &
 sanguis::client::draw2d::scene::object::own_player()
 {
+	FCPPT_ASSERT(
+		player_id_ != invalid_id
+	);
+
 	try
 	{
 		return entity(
@@ -418,7 +438,6 @@ sanguis::client::draw2d::scene::object::transform(
 	sprite::point const &center_
 )
 {
-#if 0
 	vector2 const translation_(
 		screen_center(
 			center_,
@@ -445,7 +464,6 @@ sanguis::client::draw2d::scene::object::transform(
 	particle_system_.transform(		
 		matrix_
 	);
-#endif
 }
 
 sanguis::client::draw2d::transform_callback const &
@@ -488,12 +506,6 @@ sanguis::load::model::collection const &
 sanguis::client::draw2d::scene::object::load_collection() const
 {
 	return resources_.models()();
-}
-
-sanguis::entity_id
-sanguis::client::draw2d::scene::object::player_id() const
-{
-	return player_id_;
 }
 
 sge::renderer::screen_size const

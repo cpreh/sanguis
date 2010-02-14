@@ -101,6 +101,20 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
+	sanguis::messages::add_own_player const &m
+)
+{
+	configure_new_object(
+		factory::own_player(
+			env_.model_parameters(),
+			env_.transform_callback()	
+		),
+		m
+	);
+}
+
+sanguis::client::draw2d::message::dispatcher::result_type
+sanguis::client::draw2d::message::dispatcher::operator()(
 	sanguis::messages::add_pickup const &m
 )
 {
@@ -122,16 +136,9 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 )
 {
 	configure_new_object(
-		m.get<sanguis::messages::roles::entity_id>() == env_.own_player_id()
-		?
-			factory::own_player(
-				env_.model_parameters(),
-				env_.transform_callback()	
-			)
-		:
-			factory::player(
-				env_.model_parameters()
-			),
+		factory::player(
+			env_.model_parameters()
+		),
 		m
 	);
 }
@@ -403,7 +410,7 @@ sanguis::client::draw2d::message::dispatcher::process_default_msg(
 	FCPPT_LOG_WARNING(
 		log(),
 		fcppt::log::_
-			<< FCPPT_TEXT("Invalid message event in scene: ")
+			<< FCPPT_TEXT("Invalid message event in dispatcher: ")
 			<< fcppt::type_name(typeid(m))
 	);
 }

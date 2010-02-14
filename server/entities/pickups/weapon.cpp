@@ -36,7 +36,9 @@ sanguis::server::entities::pickups::weapon::wtype() const
 }
 
 sanguis::messages::auto_ptr
-sanguis::server::entities::pickups::weapon::add_message() const
+sanguis::server::entities::pickups::weapon::add_message(
+	player_id const
+) const
 {
 	return messages::create(
 		messages::add_weapon_pickup(

@@ -32,7 +32,9 @@ public:
 	wtype() const;
 private:
 	messages::auto_ptr
-	add_message() const;
+	add_message(
+		player_id
+	) const;
 
 	void
 	do_pickup(

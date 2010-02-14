@@ -70,7 +70,10 @@ private:
 		base &receiver
 	) = 0;
 
-	messages::auto_ptr add_message() const;
+	messages::auto_ptr
+	add_message(
+		player_id
+	) const;
 
 	server::team::type const team_;
 	pickup_type::type const ptype_;

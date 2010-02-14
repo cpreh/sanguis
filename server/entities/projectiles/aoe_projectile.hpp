@@ -40,7 +40,9 @@ protected:
 	aoe() const;
 private:
 	messages::auto_ptr
-	add_message() const;
+	add_message(
+		player_id
+	) const;
 
 	aoe_projectile_type::type const type_;
 

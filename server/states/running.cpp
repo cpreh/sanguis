@@ -205,8 +205,8 @@ sanguis::server::states::running::global_context()
 
 boost::statechart::result
 sanguis::server::states::running::handle_default_msg(
-	net::id_type const id,
-	messages::base const &m
+	net::id_type const,
+	messages::base const &
 )
 {
 	return discard_event();

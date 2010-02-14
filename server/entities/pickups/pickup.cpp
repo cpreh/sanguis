@@ -110,7 +110,9 @@ sanguis::server::entities::pickups::pickup::on_update(
 }
 
 sanguis::messages::auto_ptr
-sanguis::server::entities::pickups::pickup::add_message() const
+sanguis::server::entities::pickups::pickup::add_message(
+	player_id const
+) const
 {
 	return messages::create(
 		messages::add_pickup(

@@ -62,9 +62,6 @@ public:
 	virtual draw2d::transform_callback const &
 	transform_callback() const = 0;
 
-	virtual entity_id
-	own_player_id() const = 0;
-
 	virtual sge::renderer::screen_size const
 	screen_size() const = 0;
 

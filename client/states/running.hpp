@@ -19,8 +19,8 @@
 #include "../../perk_type.hpp"
 #include "../../tick_event_fwd.hpp"
 #include "../../messages/base.hpp"
+#include "../../messages/add_own_player.hpp"
 #include "../../messages/highscore.hpp"
-#include "../../messages/assign_id.hpp"
 #include "../../messages/remove_id.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../messages/give_weapon.hpp"
@@ -92,7 +92,7 @@ public:
 
 	boost::statechart::result
 	operator()(
-		messages::assign_id const &
+		messages::add_own_player const &
 	);
 
 	boost::statechart::result
