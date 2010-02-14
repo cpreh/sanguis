@@ -51,6 +51,12 @@ sanguis::client::draw2d::entities::simple_sprite::simple_sprite(
 sanguis::client::draw2d::entities::simple_sprite::~simple_sprite()
 {}
 
+sanguis::client::draw2d::entities::simple_sprite::object_type const &
+sanguis::client::draw2d::entities::simple_sprite::object() const
+{
+	return sprite_;
+}
+
 void
 sanguis::client::draw2d::entities::simple_sprite::update(
 	time_type

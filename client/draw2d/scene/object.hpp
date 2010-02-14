@@ -156,7 +156,9 @@ private:
 
 	bool paused_;
 
-	entity_id player_id_;
+	entity_id
+		player_id_,
+		background_id_;
 
 	vector2 texture_translation_;
 

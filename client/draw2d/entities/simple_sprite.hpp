@@ -33,6 +33,11 @@ public:
 	);
 
 	~simple_sprite();
+
+	typedef sprite::client::object object_type;
+
+	object_type const &
+	object() const;
 private:
 	// entity overrides
 	
@@ -61,7 +66,7 @@ private:
 		bool
 	);
 
-	sprite::client::object sprite_;
+	object_type sprite_;
 };
 
 }

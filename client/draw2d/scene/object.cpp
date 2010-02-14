@@ -2,6 +2,7 @@
 #include "message_environment.hpp"
 #include "control_environment.hpp"
 #include "screen_center.hpp"
+#include "background_dim.hpp"
 #include "../message/dispatcher.hpp"
 #include "../factory/client.hpp"
 #include "../sprite/order.hpp"
@@ -27,8 +28,7 @@
 
 #include <fcppt/math/matrix/basic_impl.hpp>
 #include <fcppt/math/matrix/translation.hpp>
-#include <fcppt/math/dim/structure_cast.hpp>
-#include <fcppt/math/dim/static.hpp>
+#include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/construct.hpp>
 #include <fcppt/math/vector/dim.hpp>
@@ -61,6 +61,7 @@ sanguis::client::draw2d::scene::object::object(
 	hud_(font),
 	paused_(false),
 	player_id_(invalid_id),
+	background_id_(invalid_id),
 	texture_translation_(
 		vector2::null()
 	),
@@ -174,9 +175,18 @@ sanguis::client::draw2d::scene::object::client_message(
 			FCPPT_TEXT("Client object with id already in entity list!")
 		);
 	
+	entity_id const id(
+		ret.first->first
+	);
+
+	if(
+		m.type() == client::entity_type::background
+	)
+		background_id_ = id;
+
 	// FIXME: configure the object here, too!
 	//
-	return ret.first->first;
+	return id;
 }
 
 void
@@ -458,16 +468,18 @@ sanguis::client::draw2d::scene::object::transform(
 
 	// TODO: the sprite systems should not hold their matrices!
 
+	FCPPT_ASSERT(
+		background_id_ != invalid_id
+	);
+
 	texture_translation_ =
 		-translation_
 		/
-		fcppt::math::dim::structure_cast<
-			fcppt::math::dim::static_<
-				vector2::value_type,
-				vector2::dim_wrapper::value
-			>::type
-		>(
-			screen_size()
+		// TODO: HACK, HACK
+		background_dim(
+			entity(
+				background_id_
+			)
 		);
 
 	sprite::matrix const matrix_(
