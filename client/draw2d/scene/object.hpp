@@ -135,9 +135,6 @@ private:
 	load::model::collection const &
 	load_collection() const;
 
-	entity_id
-	player_id() const;
-
 	sge::renderer::screen_size const
 	screen_size() const;
 	

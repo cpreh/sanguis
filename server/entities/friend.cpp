@@ -78,7 +78,9 @@ sanguis::server::entities::friend_::team() const
 }
 
 sanguis::messages::auto_ptr
-sanguis::server::entities::friend_::add_message() const
+sanguis::server::entities::friend_::add_message(
+	server::player_id const
+) const
 {
 	return messages::create(
 		messages::add_friend(

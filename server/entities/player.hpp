@@ -92,7 +92,9 @@ private:
 	);
 
 	messages::auto_ptr
-	add_message() const;
+	add_message(
+		server::player_id
+	) const;
 
 	entity_type::type
 	type() const;
@@ -104,6 +106,12 @@ private:
 	on_new_weapon(
 		weapon_type::type
 	);
+
+	template<
+		typename Message
+	>
+	messages::auto_ptr
+	make_add_message() const;
 
 	string const name_;
 	server::player_id const player_id_;

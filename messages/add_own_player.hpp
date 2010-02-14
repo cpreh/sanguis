@@ -1,5 +1,5 @@
-#ifndef SANGUIS_MESSAGES_ADD_PLAYER_HPP_INCLUDED
-#define SANGUIS_MESSAGES_ADD_PLAYER_HPP_INCLUDED
+#ifndef SANGUIS_MESSAGES_ADD_OWN_PLAYER_HPP_INCLUDED
+#define SANGUIS_MESSAGES_ADD_OWN_PLAYER_HPP_INCLUDED
 
 #include "types/message.hpp"
 #include "make_class.hpp"
@@ -12,9 +12,9 @@ namespace messages
 
 typedef make_class<
 	make_player_message<
-		types::message::add_player
+		types::message::add_own_player
 	>::type
->::type add_player;
+>::type add_own_player;
 
 }
 }

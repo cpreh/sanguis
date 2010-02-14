@@ -8,6 +8,7 @@
 #include "../pos_type.hpp"
 #include "../space_unit.hpp"
 #include "../team.hpp"
+#include "../player_id.hpp"
 #include "../collision/base.hpp"
 #include "../collision/body.hpp"
 #include "../collision/global_groups_fwd.hpp"
@@ -119,7 +120,9 @@ public:
 	// message functions
 	
 	virtual messages::auto_ptr
-	add_message() const = 0;
+	add_message(
+		player_id
+	) const = 0;
 
 
 	// type query

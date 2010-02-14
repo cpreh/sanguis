@@ -53,7 +53,9 @@ private:
 	team() const;
 	
 	messages::auto_ptr
-	add_message() const;
+	add_message(
+		server::player_id
+	) const;
 
 	boost::logic::tribool const
 	can_collide_with_entity(

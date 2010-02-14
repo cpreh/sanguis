@@ -61,9 +61,6 @@ private:
 	draw2d::transform_callback const &
 	transform_callback() const;
 
-	entity_id
-	own_player_id() const;
-
 	sge::renderer::screen_size const
 	screen_size() const;
 

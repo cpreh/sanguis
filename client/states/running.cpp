@@ -15,7 +15,7 @@
 #include "../draw2d/screen_to_virtual.hpp" // FIXME
 #include "../draw2d/scene/object.hpp"
 #include "../../messages/call/object.hpp"
-#include "../../messages/assign_id.hpp"
+#include "../../messages/add_own_player.hpp"
 #include "../../messages/remove_id.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../messages/give_weapon.hpp"
@@ -180,7 +180,7 @@ sanguis::client::states::running::react(
 {
 	static sanguis::messages::call::object<
 		boost::mpl::vector7<
-			sanguis::messages::assign_id,
+			sanguis::messages::add_own_player,
 			sanguis::messages::remove_id,
 			sanguis::messages::disconnect,
 			sanguis::messages::give_weapon,
@@ -204,12 +204,24 @@ sanguis::client::states::running::react(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	sanguis::messages::assign_id const &m
+	sanguis::messages::add_own_player const &m
 )
 {
 	drawer->player_id(
 		m.get<sanguis::messages::roles::entity_id>()
 	);
+
+	{
+		sanguis::messages::auto_ptr wrapped_msg(
+			sanguis::messages::create(
+				m
+			)
+		);
+
+		drawer->process_message(
+			*wrapped_msg
+		);
+	}
 
 	input->active(
 		true

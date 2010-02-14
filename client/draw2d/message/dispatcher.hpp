@@ -8,6 +8,7 @@
 #include "../../../messages/add_aoe_projectile.hpp"
 #include "../../../messages/add_enemy.hpp"
 #include "../../../messages/add_friend.hpp"
+#include "../../../messages/add_own_player.hpp"
 #include "../../../messages/add_pickup.hpp"
 #include "../../../messages/add_player.hpp"
 #include "../../../messages/add_projectile.hpp"
@@ -65,6 +66,11 @@ public:
 	result_type
 	operator()(
 		sanguis::messages::add_friend const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::add_own_player const &
 	);
 
 	result_type

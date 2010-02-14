@@ -78,7 +78,9 @@ sanguis::server::entities::enemies::enemy::on_update(
 }
 
 sanguis::messages::auto_ptr
-sanguis::server::entities::enemies::enemy::add_message() const
+sanguis::server::entities::enemies::enemy::add_message(
+	player_id const
+) const
 {
 	return messages::create(
 		messages::add_enemy(

@@ -132,7 +132,9 @@ sanguis::server::entities::projectiles::projectile::collision_entity_begin(
 }
 
 sanguis::messages::auto_ptr
-sanguis::server::entities::projectiles::projectile::add_message() const
+sanguis::server::entities::projectiles::projectile::add_message(
+	player_id const
+) const
 {
 	return messages::create(
 		messages::add_projectile(

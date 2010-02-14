@@ -35,7 +35,9 @@ sanguis::server::entities::projectiles::aoe_projectile::aoe() const
 }
 
 sanguis::messages::auto_ptr
-sanguis::server::entities::projectiles::aoe_projectile::add_message() const
+sanguis::server::entities::projectiles::aoe_projectile::add_message(
+	player_id const
+) const
 {
 	return messages::create(
 		messages::add_aoe_projectile(

@@ -83,7 +83,9 @@ private:
 	) = 0;
 
 	messages::auto_ptr
-	add_message() const;
+	add_message(
+		player_id
+	) const;
 
 	server::team::type const team_;
 

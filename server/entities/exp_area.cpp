@@ -81,7 +81,9 @@ sanguis::server::entities::exp_area::invulnerable() const
 }
 
 sanguis::messages::auto_ptr
-sanguis::server::entities::exp_area::add_message() const
+sanguis::server::entities::exp_area::add_message(
+	player_id const
+) const
 {
 	return messages::auto_ptr(); // TODO: get rid of this
 }
