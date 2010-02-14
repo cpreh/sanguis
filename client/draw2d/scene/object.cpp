@@ -275,10 +275,19 @@ sanguis::client::draw2d::scene::object::control_environment() const
 }
 
 #include <fcppt/math/matrix/matrix.hpp>
+#include <fcppt/math/matrix/translation.hpp>
+#include <sge/time/timer.hpp>
+#include <sge/time/second.hpp>
 
 void
 sanguis::client::draw2d::scene::object::render_systems()
 {
+	static sge::time::timer footime(
+		sge::time::second(1)
+	);
+
+	footime.update_b();
+
 	sge::renderer::state::scoped const state_(
 		rend_,
 		sge::sprite::render_states()
@@ -289,7 +298,7 @@ sanguis::client::draw2d::scene::object::render_systems()
 	{
 		client_system_.renderer()->transform(
 			sge::renderer::matrix_mode::texture,
-			normal_system_.transform() * 0.1f
+			fcppt::math::matrix::translation(footime.elapsed_frames() * 10.f, 0.f, 0.f)//normal_system_.transform() * 0.1f
 		);
 
 		client_system_.render(
