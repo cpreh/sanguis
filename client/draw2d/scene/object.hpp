@@ -15,6 +15,7 @@
 #include "../sprite/point.hpp"
 #include "../transform_callback.hpp"
 #include "../insert_callback.hpp"
+#include "../vector2.hpp"
 #include "../../control/environment_fwd.hpp"
 #include "../../cursor/object_ptr.hpp"
 #include "../../messages/add_fwd.hpp"
@@ -29,6 +30,7 @@
 #include <sge/renderer/screen_size.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <fcppt/function/object.hpp>
+#include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
@@ -155,6 +157,8 @@ private:
 	bool paused_;
 
 	entity_id player_id_;
+
+	vector2 texture_translation_;
 
 	draw2d::transform_callback const transform_callback_;
 

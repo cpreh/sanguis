@@ -27,6 +27,11 @@
 
 #include <fcppt/math/matrix/basic_impl.hpp>
 #include <fcppt/math/matrix/translation.hpp>
+#include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/math/dim/static.hpp>
+#include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/construct.hpp>
+#include <fcppt/math/vector/dim.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/tr1/functional.hpp>
@@ -56,6 +61,9 @@ sanguis::client::draw2d::scene::object::object(
 	hud_(font),
 	paused_(false),
 	player_id_(invalid_id),
+	texture_translation_(
+		vector2::null()
+	),
 	transform_callback_(
 		std::tr1::bind(
 			&object::transform,
@@ -274,20 +282,9 @@ sanguis::client::draw2d::scene::object::control_environment() const
 	return *control_environment_;
 }
 
-#include <fcppt/math/matrix/matrix.hpp>
-#include <fcppt/math/matrix/translation.hpp>
-#include <sge/time/timer.hpp>
-#include <sge/time/second.hpp>
-
 void
 sanguis::client::draw2d::scene::object::render_systems()
 {
-	static sge::time::timer footime(
-		sge::time::second(1)
-	);
-
-	footime.update_b();
-
 	sge::renderer::state::scoped const state_(
 		rend_,
 		sge::sprite::render_states()
@@ -298,7 +295,12 @@ sanguis::client::draw2d::scene::object::render_systems()
 	{
 		client_system_.renderer()->transform(
 			sge::renderer::matrix_mode::texture,
-			fcppt::math::matrix::translation(footime.elapsed_frames() * 10.f, 0.f, 0.f)//normal_system_.transform() * 0.1f
+			fcppt::math::matrix::translation(
+				fcppt::math::vector::construct(
+					texture_translation_,
+					0.f
+				)
+			)
 		);
 
 		client_system_.render(
@@ -453,6 +455,20 @@ sanguis::client::draw2d::scene::object::transform(
 			screen_size()
 		)
 	);
+
+	// TODO: the sprite systems should not hold their matrices!
+
+	texture_translation_ =
+		-translation_
+		/
+		fcppt::math::dim::structure_cast<
+			fcppt::math::dim::static_<
+				vector2::value_type,
+				vector2::dim_wrapper::value
+			>::type
+		>(
+			screen_size()
+		);
 
 	sprite::matrix const matrix_(
 		fcppt::math::matrix::translation(
