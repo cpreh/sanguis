@@ -274,6 +274,8 @@ sanguis::client::draw2d::scene::object::control_environment() const
 	return *control_environment_;
 }
 
+#include <fcppt/math/matrix/matrix.hpp>
+
 void
 sanguis::client::draw2d::scene::object::render_systems()
 {
@@ -284,10 +286,22 @@ sanguis::client::draw2d::scene::object::render_systems()
 
 	client_system_.matrices();
 
-	client_system_.render(
-		z_ordering::background,
-		sge::sprite::default_equal()
-	);
+	{
+		client_system_.renderer()->transform(
+			sge::renderer::matrix_mode::texture,
+			normal_system_.transform() * 0.1f
+		);
+
+		client_system_.render(
+			z_ordering::background,
+			sge::sprite::default_equal()
+		);
+
+		client_system_.renderer()->transform(
+			sge::renderer::matrix_mode::texture,
+			sprite::client::system::matrix::identity()
+		);
+	}
 		
 	normal_system_.matrices();
 
