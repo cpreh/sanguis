@@ -4,6 +4,8 @@
 #include "../screen_to_virtual.hpp"
 #include "../../cursor/object.hpp"
 #include <fcppt/math/vector/angle_between.hpp>
+#include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/assert.hpp>
 
@@ -41,13 +43,18 @@ sanguis::client::draw2d::scene::control_environment::attack_dest() const
 sanguis::client::control::key_scale
 sanguis::client::draw2d::scene::control_environment::rotation() const
 {
+	// TODO: this should not be here
 	fcppt::optional<
 		control::key_scale
 	> const ret(
 		fcppt::math::vector::angle_between<
 			control::key_scale
 		>(
-			object_.own_player().center(),
+			fcppt::math::dim::structure_cast<
+				sprite::point
+			>(
+				object_.screen_size() / 2u
+			),
 			cursor_->pos()
 		)
 	);

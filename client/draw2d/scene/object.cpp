@@ -60,10 +60,9 @@ sanguis::client::draw2d::scene::object::object(
 	particle_system_(rend_),
 	hud_(font),
 	paused_(false),
-	player_id_(invalid_id),
 	background_id_(invalid_id),
-	texture_translation_(
-		vector2::null()
+	player_center_(
+		sprite::point::null()
 	),
 	transform_callback_(
 		std::tr1::bind(
@@ -259,33 +258,6 @@ sanguis::client::draw2d::scene::object::pause(
 	paused_ = p;
 }
 
-void
-sanguis::client::draw2d::scene::object::player_id(
-	entity_id const nplayer_id_
-)
-{
-	if(
-		player_id_ == nplayer_id_
-	)
-	{
-		FCPPT_LOG_WARNING(
-			log(),
-			fcppt::log::_
-				<< FCPPT_TEXT("player_id ")
-				<< (
-					player_id_ == invalid_id
-					?
-						FCPPT_TEXT("unset")
-					:
-						FCPPT_TEXT("set")
-				)
-				<< FCPPT_TEXT(" twice!")
-		);
-	}
-
-	player_id_ = nplayer_id_;
-}
-
 sanguis::client::control::environment &
 sanguis::client::draw2d::scene::object::control_environment() const
 {
@@ -300,6 +272,20 @@ sanguis::client::draw2d::scene::object::render_systems()
 		sge::sprite::render_states()
 	);
 
+	vector2 const translation_(
+		screen_center(
+			player_center_,
+			screen_size()
+		)
+	);
+
+	// TODO: the sprite systems should not hold their matrices!
+
+	FCPPT_ASSERT(
+		background_id_ != invalid_id
+	);
+
+
 	client_system_.matrices();
 
 	{
@@ -307,7 +293,14 @@ sanguis::client::draw2d::scene::object::render_systems()
 			sge::renderer::matrix_mode::texture,
 			fcppt::math::matrix::translation(
 				fcppt::math::vector::construct(
-					texture_translation_,
+					-translation_
+					/
+					// TODO: HACK, HACK
+					background_dim(
+						entity(
+							background_id_
+						)
+					),
 					0.f
 				)
 			)
@@ -323,7 +316,15 @@ sanguis::client::draw2d::scene::object::render_systems()
 			sprite::client::system::matrix::identity()
 		);
 	}
-		
+
+	normal_system_.transform(		
+		fcppt::math::matrix::translation(
+			translation_.x(),
+			translation_.y(),
+			static_cast<sprite::float_unit>(0)
+		)
+	);
+	
 	normal_system_.matrices();
 
 	for(
@@ -426,32 +427,10 @@ sanguis::client::draw2d::scene::object::entity(
 	return *it->second;
 }
 
-sanguis::client::draw2d::entities::base &
-sanguis::client::draw2d::scene::object::own_player()
+sanguis::client::draw2d::sprite::point const
+sanguis::client::draw2d::scene::object::player_center() const
 {
-	FCPPT_ASSERT(
-		player_id_ != invalid_id
-	);
-
-	try
-	{
-		return entity(
-			player_id_
-		);
-	}
-	catch(
-		fcppt::exception const &e
-	)
-	{
-		FCPPT_LOG_ERROR(
-			log(),
-			fcppt::log::_
-				<< FCPPT_TEXT("In own_player: ")
-				<< e.string()
-		);
-
-		throw;
-	}
+	return player_center_;
 }
 
 void
@@ -459,48 +438,7 @@ sanguis::client::draw2d::scene::object::transform(
 	sprite::point const &center_
 )
 {
-	vector2 const translation_(
-		screen_center(
-			center_,
-			screen_size()
-		)
-	);
-
-	// TODO: the sprite systems should not hold their matrices!
-
-	FCPPT_ASSERT(
-		background_id_ != invalid_id
-	);
-
-	texture_translation_ =
-		-translation_
-		/
-		// TODO: HACK, HACK
-		background_dim(
-			entity(
-				background_id_
-			)
-		);
-
-	sprite::matrix const matrix_(
-		fcppt::math::matrix::translation(
-			translation_.x(),
-			translation_.y(),
-			static_cast<sprite::float_unit>(0)
-		)
-	);
-
-	normal_system_.transform(		
-		matrix_
-	);
-
-	colored_system_.transform(		
-		matrix_
-	);
-
-	particle_system_.transform(		
-		matrix_
-	);
+	player_center_ = center_;
 }
 
 sanguis::client::draw2d::transform_callback const &

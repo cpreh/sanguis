@@ -207,10 +207,7 @@ sanguis::client::states::running::operator()(
 	sanguis::messages::add_own_player const &m
 )
 {
-	drawer->player_id(
-		m.get<sanguis::messages::roles::entity_id>()
-	);
-
+	// TODO: is this still needed?
 	{
 		sanguis::messages::auto_ptr wrapped_msg(
 			sanguis::messages::create(
@@ -235,10 +232,6 @@ sanguis::client::states::running::operator()(
 	sanguis::messages::remove_id const &
 )
 {
-	drawer->player_id(
-		invalid_id
-	);
-
 	input->active(
 		false
 	);

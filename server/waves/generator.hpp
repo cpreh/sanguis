@@ -40,6 +40,9 @@ private:
 		sge::console::arg_list const &
 	);
 
+	void
+	spawn_all();
+
 	fcppt::signal::scoped_connection spawn_connection;
 
 	typedef boost::ptr_list<
