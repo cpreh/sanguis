@@ -90,12 +90,12 @@ sanguis::client::machine::machine(
 	console_stdlib(
 		_console.object(),
 		std::tr1::bind(
-			&sge::console::gfx::print,
+			&sge::console::gfx::print_line,
 			&_console,
 			std::tr1::placeholders::_1
 		),
 		std::tr1::bind(
-			&sge::console::gfx::print,
+			&sge::console::gfx::print_line,
 			&_console,
 			std::tr1::placeholders::_1
 		)

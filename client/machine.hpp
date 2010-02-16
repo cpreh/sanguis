@@ -6,7 +6,7 @@
 #include "cursor/object_ptr.hpp"
 #include "cursor/const_object_ptr.hpp"
 #include "server_callback.hpp"
-#include "console_wrapper.hpp"
+#include "console.hpp"
 #include "../load/context_fwd.hpp"
 #include "../messages/auto_ptr.hpp"
 #include "../net/client.hpp"

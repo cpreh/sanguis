@@ -1,4 +1,4 @@
-#include "console_wrapper.hpp"
+#include "console.hpp"
 #include <sge/console/gfx.hpp>
 #include <sge/input/system.hpp>
 #include <sge/input/key_pair.hpp>

@@ -130,6 +130,12 @@ try
 			"produce help message"
 		)
 		(
+			"history-size",
+			po::value<sge::console::gfx::output_line_limit>()->default_value(
+				static_cast<sge::console::gfx::output_line_limit>(8000)),
+			"Size of the console output history"
+		)
+		(
 			"log",
 			po::value<
 				std::string
@@ -337,7 +343,8 @@ try
 				)
 			)
 			.elements()
-		)
+		),
+		vm["history-size"].as<sge::console::gfx::output_line_limit>()
 	);
 	
 	sge::audio::multi_loader 

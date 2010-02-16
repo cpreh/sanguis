@@ -65,13 +65,13 @@ void sanguis::client::music_handler::volume(sge::console::arg_list const &a)
 {
 	if (!current_)
 	{
-		console_.print(FCPPT_TEXT("no music files registered, makes no sense to set a volume"));
+		console_.print_line(FCPPT_TEXT("no music files registered, makes no sense to set a volume"));
 		return;
 	}
 
 	if (a.size() != 2)
 	{
-		console_.print(FCPPT_TEXT("invalid number of arguments"));
+		console_.print_line(FCPPT_TEXT("invalid number of arguments"));
 		return;
 	}
 
@@ -87,7 +87,7 @@ void sanguis::client::music_handler::volume(sge::console::arg_list const &a)
 	}
 	catch (fcppt::bad_lexical_cast const &)
 	{
-		console_.print(FCPPT_TEXT("invalid numeric argument"));
+		console_.print_line(FCPPT_TEXT("invalid numeric argument"));
 	}
 }
 
