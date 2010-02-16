@@ -15,7 +15,6 @@
 #include "../sprite/point.hpp"
 #include "../transform_callback.hpp"
 #include "../insert_callback.hpp"
-#include "../vector2.hpp"
 #include "../../control/environment_fwd.hpp"
 #include "../../cursor/object_ptr.hpp"
 #include "../../messages/add_fwd.hpp"
@@ -160,7 +159,7 @@ private:
 		player_id_,
 		background_id_;
 
-	vector2 texture_translation_;
+	sprite::point player_center_;
 
 	draw2d::transform_callback const transform_callback_;
 
