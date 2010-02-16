@@ -60,7 +60,6 @@ sanguis::client::draw2d::scene::object::object(
 	particle_system_(rend_),
 	hud_(font),
 	paused_(false),
-	player_id_(invalid_id),
 	background_id_(invalid_id),
 	player_center_(
 		sprite::point::null()
@@ -259,33 +258,6 @@ sanguis::client::draw2d::scene::object::pause(
 	paused_ = p;
 }
 
-void
-sanguis::client::draw2d::scene::object::player_id(
-	entity_id const nplayer_id_
-)
-{
-	if(
-		player_id_ == nplayer_id_
-	)
-	{
-		FCPPT_LOG_WARNING(
-			log(),
-			fcppt::log::_
-				<< FCPPT_TEXT("player_id ")
-				<< (
-					player_id_ == invalid_id
-					?
-						FCPPT_TEXT("unset")
-					:
-						FCPPT_TEXT("set")
-				)
-				<< FCPPT_TEXT(" twice!")
-		);
-	}
-
-	player_id_ = nplayer_id_;
-}
-
 sanguis::client::control::environment &
 sanguis::client::draw2d::scene::object::control_environment() const
 {
@@ -455,32 +427,10 @@ sanguis::client::draw2d::scene::object::entity(
 	return *it->second;
 }
 
-sanguis::client::draw2d::entities::base &
-sanguis::client::draw2d::scene::object::own_player()
+sanguis::client::draw2d::sprite::point const
+sanguis::client::draw2d::scene::object::player_center() const
 {
-	FCPPT_ASSERT(
-		player_id_ != invalid_id
-	);
-
-	try
-	{
-		return entity(
-			player_id_
-		);
-	}
-	catch(
-		fcppt::exception const &e
-	)
-	{
-		FCPPT_LOG_ERROR(
-			log(),
-			fcppt::log::_
-				<< FCPPT_TEXT("In own_player: ")
-				<< e.string()
-		);
-
-		throw;
-	}
+	return player_center_;
 }
 
 void

@@ -107,8 +107,8 @@ private:
 		entity_id
 	);
 
-	entities::base &
-	own_player();
+	sprite::point const
+	player_center() const;
 
 	void
 	transform(
@@ -155,9 +155,7 @@ private:
 
 	bool paused_;
 
-	entity_id
-		player_id_,
-		background_id_;
+	entity_id background_id_;
 
 	sprite::point player_center_;
 
