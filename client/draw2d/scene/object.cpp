@@ -390,6 +390,17 @@ sanguis::client::draw2d::scene::object::insert(
 	if(
 		!ret.second
 	)
+	{
+		FCPPT_LOG_ERROR(
+			log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("draw: Tried to insert object with id ")
+				<< id
+				<< FCPPT_TEXT(" twice!")
+		);
+
+		// FIXME: why does this still happen?
+#if 0
 		throw exception(
 			(
 				fcppt::format(
@@ -398,6 +409,8 @@ sanguis::client::draw2d::scene::object::insert(
 				% id
 			).str()
 		);
+#endif
+	}
 	
 	return *ret.first->second;
 }

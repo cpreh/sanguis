@@ -149,6 +149,12 @@ sanguis::client::draw2d::entities::model::object::decay()
 			: sge::time::second(0)
 		)
 	);
+
+	healthbar_.reset();
+
+	change_animation();
+
+	speed(vector2::null()); // FIXME
 }
 
 void
@@ -177,7 +183,7 @@ sanguis::client::draw2d::entities::model::object::part(
 bool
 sanguis::client::draw2d::entities::model::object::dead() const
 {
-	return health() <= 0;
+	return decay_time_ != 0;
 }
 
 bool
@@ -198,16 +204,8 @@ sanguis::client::draw2d::entities::model::object::health(
 )
 {
 	health_ = health;
+
 	update_healthbar();
-	
-	if(!dead())
-		return;
-	
-	healthbar_.reset();
-
-	change_animation();
-
-	speed(vector2::null()); // FIXME
 }
 
 void
