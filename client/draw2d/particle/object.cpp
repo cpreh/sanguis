@@ -13,6 +13,7 @@
 #include <fcppt/math/point_rotate.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/io/cout.hpp>
 #include <sge/image/color/rgba8.hpp>
 #include <sge/image/color/init.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -53,6 +54,12 @@ sanguis::client::draw2d::particle::object::object(
 				)
 			)
 		)
+		.color(
+			sge::image::color::rgba8(
+			sge::image::color::init::red %= 1.0,
+			sge::image::color::init::green %= 1.0,
+			sge::image::color::init::blue %= 1.0,
+			sge::image::color::init::alpha %= 1.0))
 		.elements()
 	),
 	animation_context_(
