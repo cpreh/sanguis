@@ -10,13 +10,13 @@
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/sprite/center.hpp>
+#include <sge/image/color/rgba8.hpp>
+#include <sge/image/color/init.hpp>
 #include <fcppt/math/point_rotate.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
-#include <fcppt/io/cout.hpp>
-#include <sge/image/color/rgba8.hpp>
-#include <sge/image/color/init.hpp>
 #include <fcppt/optional_impl.hpp>
+#include <algorithm>
 
 sanguis::client::draw2d::particle::object::object(
 	particle_type::type const _type,
@@ -146,17 +146,11 @@ sanguis::client::draw2d::particle::object::update(
 			sge::image::color::init::red %= 1.0,
 			sge::image::color::init::green %= 1.0,
 			sge::image::color::init::blue %= 1.0,
-			sge::image::color::init::alpha =
-			static_cast<
-				sge::image::color::channel8
-			>(
-				static_cast<funit>(
-					sge::image::color::rgba8::format::channel_max<
-						mizuiro::color::channel::alpha
-					>()
+			sge::image::color::init::alpha %=
+				std::max(
+					static_cast<funit>(0),
+					ratio
 				)
-				* ratio
-			)
 		)
 	);
 
