@@ -1,7 +1,25 @@
 #ifndef SANGUIS_CLIENT_OBJECT_HPP_INCLUDED
 #define SANGUIS_CLIENT_OBJECT_HPP_INCLUDED
 
+#include "machine.hpp"
+#include "../load/context.hpp"
+#include "../net/port_type.hpp"
 #include "../main_object.hpp"
+
+#include <sge/audio/multi_loader.hpp>
+#include <sge/audio/pool.hpp>
+#include <sge/console/gfx.hpp>
+#include <sge/console/object.hpp>
+#include <sge/font/drawer_ptr.hpp>
+#include <sge/font/metrics_ptr.hpp>
+#include <sge/font/object.hpp>
+#include <sge/input/key_state_tracker.hpp>
+#include <sge/systems/instance_fwd.hpp>
+#include <sge/texture/manager.hpp>
+
+#include <fcppt/noncopyable.hpp>
+
+#include <boost/program_options/variables_map.hpp>
 
 namespace sanguis
 {
@@ -15,7 +33,8 @@ class object
 	FCPPT_NONCOPYABLE(object)
 public:
 	explicit object(
-		sge::systems::instance &
+		sge::systems::instance &,
+		boost::program_options::variables_map const &
 	);
 
 	~object();
@@ -23,13 +42,18 @@ private:
 	int
 	run();
 
-	sge::input::key_state_tracker key_states_;
+	void
+	create_server(
+		net::port_type
+	);
+
+	sge::input::key_state_tracker key_state_tracker_;
 	
 	sge::font::metrics_ptr const font_metrics_;
 
 	sge::font::drawer_ptr const font_drawer_;
 
-	sge::font::object const font_;
+	sge::font::object font_;
 
 	sge::texture::manager texture_manager_;
 
@@ -40,6 +64,8 @@ private:
 	sge::audio::multi_loader audio_loader_;
 
 	sge::audio::pool sound_pool_;
+
+	load::context resources_;
 
 	client::machine machine_;
 };

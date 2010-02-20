@@ -15,7 +15,6 @@
 #include <sge/gui/layouts/grid.hpp>
 #include <sge/gui/widgets/parameters.hpp>
 #include <sge/image/loader.hpp>
-#include <sge/systems/instance.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/dim.hpp>
@@ -70,11 +69,11 @@ sanguis::client::states::gameover::gameover(
 :
 	my_base(ctx),
 	m_(
-		context<machine>().sys().renderer(),
-		context<machine>().sys().input_system(),
+		context<machine>().renderer(),
+		context<machine>().input_system(),
 		sge::gui::skins::ptr(
 			new sge::gui::skins::standard(
-				context<machine>().sys().font_system()
+				context<machine>().font_system()
 			)
 		),
 		context<machine>().cursor()

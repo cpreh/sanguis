@@ -7,6 +7,7 @@
 #include "../../messages/unpause.hpp"
 #include "../../messages/create.hpp"
 #include "../../messages/base.hpp"
+#include "../../tick_event.hpp"
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/object.hpp>

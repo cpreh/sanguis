@@ -23,15 +23,19 @@
 #include <fcppt/lexical_cast.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/iconv.hpp>
-#include <boost/mpl/vector.hpp>
+#include <boost/mpl/vector/vector10.hpp>
 #include <ostream>
 
 sanguis::client::states::menu::menu(
-	my_context ctx) 
+	my_context ctx
+)
 :
 	my_base(ctx),
 	menu_(
-		context<machine>().sys(),
+		context<machine>().renderer(),
+		context<machine>().image_loader(),
+		context<machine>().font_system(),
+		context<machine>().input_system(),
 		context<machine>().cursor(),
 		client::menu::callbacks::object(
 			std::tr1::bind(

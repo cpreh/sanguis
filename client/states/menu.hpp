@@ -56,11 +56,17 @@ private:
 	connect_state::type connect_state_;
 	sge::renderer::state::scoped const renderer_state_;
 	
-	void connect(
+	void
+	connect(
 		fcppt::string const &,
-		fcppt::string const &);
-	void start_server();
-	void cancel_connect();
+		fcppt::string const &
+	);
+
+	void
+	start_server();
+
+	void
+	cancel_connect();
 };
 }
 }

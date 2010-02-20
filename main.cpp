@@ -96,7 +96,7 @@ try
 		log_level
 	);
 
-	sge::systems::instance const sys(
+	sge::systems::instance sys(
 		sanguis::args::sge_options(
 			vm
 		)

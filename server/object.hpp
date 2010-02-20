@@ -3,6 +3,7 @@
 
 #include "machine.hpp"
 #include "../load/model/context_fwd.hpp"
+#include "../main_object.hpp"
 #include <sge/systems/instance_fwd.hpp>
 #include <fcppt/thread/object.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -14,17 +15,22 @@ namespace server
 {
 
 class object
+:
+	public main_object
 {
 	FCPPT_NONCOPYABLE(object)
 public:
 	explicit object(
-		sge::systems::instance &,
+		sge::systems::instance const &,
 		boost::program_options::variables_map const &,
-		load::model::context const &
+		load::model::context const *
 	);
 
 	~object();
 private:
+	int
+	run();
+
 	void
 	mainloop();
 

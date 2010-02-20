@@ -27,11 +27,11 @@
 #include "../../tick_event.hpp"
 #include "../../cast_enum.hpp"
 #include <sge/audio/pool.hpp>
+#include <sge/console/gfx.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/state/trampoline.hpp>
-#include <sge/systems/instance.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/utf8/convert.hpp>
@@ -93,7 +93,10 @@ sanguis::client::states::running::running(
 		)
 	),
 	perk_chooser_(
-		context<machine>().sys(),
+		context<machine>().renderer(),
+		context<machine>().input_system(),
+		context<machine>().image_loader(),
+		context<machine>().font_system(),
 		std::tr1::bind(
 			&running::send_perk_choose,
 			this,

@@ -40,24 +40,29 @@ fcppt::log::object mylogger(
 }
 
 sanguis::client::menu::object::object(
-	sge::systems::instance const &_sys,
+	sge::renderer::device_ptr const renderer_,
+	sge::image::loader_ptr const image_loader_,
+	sge::font::system_ptr const font_system_,
+	sge::input::system_ptr const input_system_,
 	cursor::object_ptr const _cursor,
-	callbacks::object const &_callbacks)
+	callbacks::object const &_callbacks
+)
 : 
-	sys_(_sys),
 	menu_path(
-		media_path()/FCPPT_TEXT("menu")),
+		media_path()/FCPPT_TEXT("menu")
+	),
 	buttons_path(
-		menu_path/FCPPT_TEXT("buttons")),
+		menu_path/FCPPT_TEXT("buttons")
+	),
 	labels_path(
-		menu_path/FCPPT_TEXT("labels")),
-
+		menu_path/FCPPT_TEXT("labels")
+	),
 	m(
-		sys_.renderer(),
-		sys_.input_system(),
+		renderer_,
+		input_system_,
 		sge::gui::skins::ptr(
 			new sge::gui::skins::standard(
-				sys_.font_system()
+				font_system_
 			)
 		),
 		_cursor
@@ -65,22 +70,20 @@ sanguis::client::menu::object::object(
 	main_(
 		m,
 		buttons_path,
-		sys_
+		image_loader_
 	),
 	connect_(
 		m,
 		buttons_path,
 		labels_path,
-		sys_
+		image_loader_
 	),
 	connect_box_(
-		m,
-		sys_
+		m
 	),
 	highscore_(
 		m,
-		buttons_path,
-		sys_
+		buttons_path
 	),
 	mover_(
 		m,
@@ -188,12 +191,11 @@ sanguis::client::menu::object::object(
 			)
 		)
 	),
-
 	callbacks_(
 		_callbacks
 	),
 	ss(
-		_sys.renderer()
+		renderer_
 	),
 	background(
 		sprite_parameters()
@@ -204,8 +206,8 @@ sanguis::client::menu::object::object(
 				fcppt::make_shared_ptr<
 					sge::texture::part_raw
 				>(
-					_sys.renderer()->create_texture(
-						_sys.image_loader()->load(
+					renderer_->create_texture(
+						image_loader_->load(
 							media_path() / FCPPT_TEXT("dirt_tile.png")
 						)->view(),
 						sge::renderer::filter::linear,
@@ -242,8 +244,10 @@ sanguis::client::menu::object::process(
 	m.draw();
 }
 
-void sanguis::client::menu::object::connection_error(
-	fcppt::string const &message)
+void
+sanguis::client::menu::object::connection_error(
+	fcppt::string const &message
+)
 {
 	FCPPT_LOG_DEBUG(
 		mylogger,

@@ -12,7 +12,7 @@ namespace client
 
 main_object_auto_ptr
 create(
-	sge::systems::instance const &,
+	sge::systems::instance &,
 	boost::program_options::variables_map const &
 );
 

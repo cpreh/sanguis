@@ -3,8 +3,8 @@
 
 #include "../button.hpp"
 #include <sge/gui/widgets/base.hpp>
+#include <sge/image/loader_ptr.hpp>
 #include <fcppt/filesystem/path.hpp>
-#include <sge/systems/instance_fwd.hpp>
 
 namespace sanguis
 {
@@ -19,7 +19,8 @@ struct main
 	main(
 		sge::gui::widgets::parent_data const &,
 		fcppt::filesystem::path const &,
-		sge::systems::instance const &);
+		sge::image::loader_ptr
+	);
 
 	sge::gui::widgets::base parent;
 	button connect;

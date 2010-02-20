@@ -9,34 +9,20 @@
 #include "../messages/net_error.hpp"
 #include "../serialization.hpp"
 #include "../log.hpp"
-#include "../media_path.hpp"
-#include "../resolution.hpp"
 #include "../tick_event.hpp"
-#include <sge/systems/instance.hpp>
+
 #include <sge/audio/player.hpp>
 #include <sge/audio/pool.hpp>
-#include <sge/renderer/scoped_block.hpp>
-#include <sge/renderer/device.hpp>
-#include <sge/renderer/scoped_target.hpp>
-#include <sge/input/system.hpp>
+#include <sge/console/gfx.hpp>
 #include <sge/input/key_state_tracker.hpp>
+#include <sge/input/system.hpp>
 #include <sge/mainloop/dispatch.hpp>
-#include <sge/texture/part_raw.hpp>
-#include <sge/renderer/device.hpp>
-#include <sge/renderer/system.hpp>
 #include <sge/renderer/scoped_block.hpp>
-#include <sge/renderer/state/list.hpp>
-#include <sge/renderer/state/var.hpp>
-#include <sge/renderer/state/trampoline.hpp>
-#include <sge/renderer/filter/linear.hpp>
+#include <sge/renderer/device.hpp>
 #include <sge/renderer/texture.hpp>
-#include <sge/renderer/scoped_target.hpp>
-#include <sge/renderer/glsl/uniform/variable.hpp>
-#include <sge/renderer/glsl/uniform/single_value.hpp>
-#include <sge/renderer/glsl/program.hpp>
-#include <sge/renderer/glsl/uniform/single_value.hpp>
-#include <sge/renderer/filter/linear.hpp>
-#include <sge/renderer/texture.hpp>
+#include <sge/texture/part_raw.hpp>
+#include <sge/systems/instance.hpp>
+
 #include <fcppt/algorithm/append.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
@@ -49,13 +35,19 @@
 sanguis::client::machine::machine(
 	server_callback const &_server_callback,
 	load::context const &_resources,
-	sge::systems::instance &_sys,
 	sge::audio::pool &_sound_pool,
 	sge::font::object &_font,
 	sge::input::key_state_tracker &_ks,
-	sge::console::gfx &_console)
+	sge::console::gfx &_console,
+	sge::input::system_ptr const input_system_,
+	sge::renderer::device_ptr const renderer_,
+	sge::image::loader_ptr const image_loader_,
+	sge::audio::player_ptr const audio_player_
+)
 :
 	resources_(_resources),
+	audio_player_(audio_player_),
+	renderer_(renderer_),
 	s_conn(
 		net_.register_connect(
 			std::tr1::bind(
@@ -82,7 +74,6 @@ sanguis::client::machine::machine(
 			)
 		)
 	),
-	sys_(_sys),
 	sound_pool_(_sound_pool),
 	font_(_font),
 	ks(_ks),
@@ -102,20 +93,20 @@ sanguis::client::machine::machine(
 	),
 	console_wrapper_(
 		_console,
-		sys_.input_system(),
+		input_system_,
 		sge::input::kc::key_f1
 	),
 	running_(true),
 	server_callback_(_server_callback),
 	screenshot_(
-		sys_.renderer(),
-		sys_.image_loader(),
-		sys_.input_system()
+		renderer_,
+		image_loader_,
+		input_system_
 	),
 	cursor_(
 		new sanguis::client::cursor::object(
-			sys_.image_loader(),
-			sys_.renderer()
+			image_loader_,
+			renderer_
 		)
 	),
 	gameover_names_(),
@@ -223,7 +214,8 @@ try
 
 	{
 	sge::renderer::scoped_block const block_(
-		sys_.renderer());
+		renderer_
+	);
 
 	process_event(t);
 
@@ -267,19 +259,13 @@ void sanguis::client::machine::dispatch()
 sge::renderer::device_ptr const
 sanguis::client::machine::renderer() const
 {
-	return sys_.renderer();
-}
-
-sge::systems::instance &
-sanguis::client::machine::sys() const
-{
-	return sys_;
+	return renderer_;
 }
 
 sge::audio::player_ptr const
 sanguis::client::machine::audio_player() const
 {
-	return sys_.audio_player();
+	return audio_player_;
 }
 
 sge::audio::pool &

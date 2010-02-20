@@ -1,5 +1,6 @@
 #include "create.hpp"
 #include "object.hpp"
+#include <fcppt/make_auto_ptr.hpp>
 
 sanguis::main_object_auto_ptr
 sanguis::server::create(
@@ -8,7 +9,7 @@ sanguis::server::create(
 	load::model::context const *const context
 )
 {
-	object_auto_ptr ret(
+	main_object_auto_ptr ret(
 		fcppt::make_auto_ptr<
 			object
 		>(

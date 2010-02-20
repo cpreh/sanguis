@@ -2,7 +2,6 @@
 #include "../../../resolution.hpp"
 #include <sge/font/align_h.hpp>
 #include <sge/font/align_v.hpp>
-#include <sge/systems/instance.hpp>
 #include <sge/gui/widgets/parameters.hpp>
 #include <sge/gui/layouts/vertical.hpp>
 #include <sge/gui/layouts/horizontal.hpp>
@@ -10,8 +9,8 @@
 #include <fcppt/text.hpp>
 
 sanguis::client::menu::menus::connect_box::connect_box(
-	sge::gui::widgets::parent_data const &_parent,
-	sge::systems::instance const &)
+	sge::gui::widgets::parent_data const &_parent
+)
 :
 	parent(
 		_parent,

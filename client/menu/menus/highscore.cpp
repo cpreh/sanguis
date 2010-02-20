@@ -14,33 +14,43 @@
 
 sanguis::client::menu::menus::highscore::highscore(
 	sge::gui::widgets::parent_data const &_parent,
-	fcppt::filesystem::path const &,
-	sge::systems::instance const &)
+	fcppt::filesystem::path const &
+)
 :
 	parent(
 		_parent,
 		sge::gui::widgets::parameters()
 			.pos(
-				sge::gui::point::null())
+				sge::gui::point::null()
+			)
 			.size(
-				sge::gui::dim(1023,768))
+				sge::gui::dim(1023,768)
+			)
 			.activation(
-				sge::gui::activation_state::inactive)
+				sge::gui::activation_state::inactive
+			)
 			.layout(
-				fcppt::make_shared_ptr<sge::gui::layouts::grid>())),
+				fcppt::make_shared_ptr<sge::gui::layouts::grid>()
+			)
+	),
 	table(
 		parent,
 		sge::gui::widgets::parameters()
 			.pos(
-				sge::gui::point(0,0))
+				sge::gui::point(0,0)
+			)
 			.layout(
-				fcppt::make_shared_ptr<sge::gui::layouts::grid>())),
+				fcppt::make_shared_ptr<sge::gui::layouts::grid>()
+			)
+	),
 	back_button(
 		parent,
 		sge::gui::widgets::parameters()
 			.pos(
-				sge::gui::point(0,1)),
-		FCPPT_TEXT("Back")),
+				sge::gui::point(0,1)
+			),
+		FCPPT_TEXT("Back")
+	),
 	children()
 {
 	populate_children();

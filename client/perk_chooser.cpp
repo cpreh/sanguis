@@ -9,7 +9,6 @@
 #include <sge/gui/layouts/vertical.hpp>
 #include <sge/gui/unit.hpp>
 #include <sge/gui/make_image.hpp>
-#include <sge/systems/instance.hpp>
 #include <sge/image/loader.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
@@ -81,23 +80,30 @@ sanguis::client::perk_chooser::activation::~activation()
 }
 
 sanguis::client::perk_chooser::perk_chooser(
-	sge::systems::instance &_sys,
+	sge::renderer::device_ptr const renderer_,
+	sge::input::system_ptr const input_system_,
+	sge::image::loader_ptr const image_loader_,
+	sge::font::system_ptr const font_system_,
 	send_callback const &_send_callback,
-	sanguis::client::cursor::object_ptr const _cursor)
+	sanguis::client::cursor::object_ptr const _cursor
+)
 :
-	sys_(_sys),
+	image_loader_(image_loader_),
 	perks_(),
 	current_level_(
 		static_cast<level_type>(0)),
 	consumed_levels_(
 		static_cast<level_type>(0)),
 	m_(
-		sys_.renderer(),
-		sys_.input_system(),
+		renderer_,
+		input_system_,
 		sge::gui::skins::ptr(
 			new sge::gui::skins::standard(
-				sys_.font_system())),
-		_cursor),
+				font_system_
+			)
+		),
+		_cursor
+	),
 	background_(
 		m_,
 		sge::gui::widgets::parameters()
@@ -291,7 +297,8 @@ sanguis::client::perk_chooser::image_map::const_iterator const
 
 	image_map::const_iterator pi = 
 		images_.find(
-			r);
+			r
+		);
 
 	if (pi != images_.end())
 		return pi;
@@ -300,15 +307,19 @@ sanguis::client::perk_chooser::image_map::const_iterator const
 
 	new_image.normal = 
 		sge::gui::make_image(
-			sys_.image_loader()->load(
+			image_loader_->load(
 				base/
-				FCPPT_TEXT("normal.png")));
+				FCPPT_TEXT("normal.png")
+			)
+		);
 
 	new_image.hover = 
 		sge::gui::make_image(
-			sys_.image_loader()->load(
+			image_loader_->load(
 				base/
-				FCPPT_TEXT("hover.png")));
+				FCPPT_TEXT("hover.png")
+			)
+		);
 
 	pi = images_.insert(
 		std::make_pair(

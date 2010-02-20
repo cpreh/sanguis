@@ -8,7 +8,6 @@
 #include "../../messages/call/object.hpp"
 #include "../../messages/highscore.hpp"
 #include "../../messages/create.hpp"
-#include "../../load/context.hpp"
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/headers.hpp>
@@ -36,8 +35,7 @@ sanguis::server::states::running::running(
 				std::tr1::placeholders::_2
 			),
 			context<machine>().collision_system(),
-			context<machine>().resources().models(),
-			context<machine>().console()
+			context<machine>().resources()
 		)
 	)
 {

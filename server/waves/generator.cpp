@@ -4,7 +4,6 @@
 #include "make.hpp"
 #include "convert_enemy_name.hpp"
 #include "../../exception.hpp"
-#include <sge/console/object.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/make_auto_ptr.hpp>
@@ -14,9 +13,8 @@
 #include <fcppt/log/headers.hpp>
 
 sanguis::server::waves::generator::generator(
-	sge::console::object &console_
 )
-:
+#if 0
 	spawn_connection(
 		console_.insert(
 			FCPPT_TEXT("spawn"),
@@ -28,6 +26,7 @@ sanguis::server::waves::generator::generator(
 			FCPPT_TEXT("spawn wave [wavename], spawn enemy [enemyname] or spawn all")
 		)
 	)
+#endif
 {}
 
 sanguis::server::waves::generator::~generator()

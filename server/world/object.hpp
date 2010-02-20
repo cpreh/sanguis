@@ -50,7 +50,7 @@ public:
 	object(
 		context_ptr const global_context_,
 		sge::collision::system_ptr,
-		server::environment::load_context_ptr,
+		server::environment::load_context_ptr
 	);
 
 	~object();

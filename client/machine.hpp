@@ -1,29 +1,34 @@
 #ifndef SANGUIS_CLIENT_MACHINE_HPP_INCLUDED
 #define SANGUIS_CLIENT_MACHINE_HPP_INCLUDED
 
-#include "states/fwd.hpp"
-#include "screenshot.hpp"
 #include "cursor/object_ptr.hpp"
 #include "cursor/const_object_ptr.hpp"
-#include "server_callback.hpp"
+#include "highscore/name_container.hpp"
+#include "highscore/score_type.hpp"
+#include "states/menu_fwd.hpp"
 #include "console.hpp"
+#include "screenshot.hpp"
+#include "server_callback.hpp"
 #include "../load/context_fwd.hpp"
 #include "../messages/auto_ptr.hpp"
 #include "../net/client.hpp"
+#include "../net/data_type.hpp"
+#include "../net/hostname_type.hpp"
+#include "../net/port_type.hpp"
 #include "../tick_event_fwd.hpp"
-#include "highscore/name_container.hpp"
-#include "highscore/score_type.hpp"
 
-#include <sge/font/object_fwd.hpp>
-#include <sge/input/key_code.hpp>
-#include <sge/input/key_state_tracker_fwd.hpp>
-#include <sge/systems/instance_fwd.hpp>
 #include <sge/audio/player_ptr.hpp>
 #include <sge/audio/pool_fwd.hpp>
 #include <sge/console/gfx_fwd.hpp>
 #include <sge/console/stdlib.hpp>
+#include <sge/font/object_fwd.hpp>
+#include <sge/font/system_ptr.hpp>
+#include <sge/input/key_code.hpp>
+#include <sge/input/key_state_tracker_fwd.hpp>
+#include <sge/input/system_ptr.hpp>
+#include <sge/image/loader_ptr.hpp>
 #include <sge/renderer/device_ptr.hpp>
-#include <sge/renderer/texture_ptr.hpp>
+
 #include <fcppt/container/raw_vector_decl.hpp>
 
 #include <boost/statechart/state_machine.hpp>
@@ -44,11 +49,14 @@ public:
 	machine(
 		server_callback const &,
 		load::context const &,
-		sge::systems::instance &,
 		sge::audio::pool &,
 		sge::font::object &,
 		sge::input::key_state_tracker &,
-		sge::console::gfx &
+		sge::console::gfx &,
+		sge::input::system_ptr,
+		sge::renderer::device_ptr,
+		sge::image::loader_ptr,
+		sge::audio::player_ptr
 	);
 
 	void
@@ -60,27 +68,72 @@ public:
 		net::port_type
 	);
 
-	void cancel_connect();
-	void send(messages::auto_ptr);
-	void process_message(messages::auto_ptr);
+	void
+	cancel_connect();
+	
+	void
+	send(
+		messages::auto_ptr
+	);
+	
+	void
+	process_message(
+		messages::auto_ptr
+	);
 	// callbacks
-	void connect_callback();
-	void disconnect_callback(fcppt::string const &);
-	void data_callback(net::data_type const &);
+	
+	void
+	connect_callback();
+	
+	void
+	disconnect_callback(
+		fcppt::string const &
+	);
+	
+	void
+	data_callback(
+		net::data_type const &
+	);
 
-	net::client &net();
+	net::client &
+	net();
 
-	bool process(tick_event const &);
+	bool
+	process(
+		tick_event const &
+	);
 
-	void quit();
-	void dispatch();
-	sge::renderer::device_ptr const renderer() const;
-	sge::systems::instance &sys() const;
-	sge::audio::player_ptr const audio_player() const;
-	sge::audio::pool &sound_pool();
-	sge::font::object &font();
-	bool key_pressed(
-		sge::input::key_code) const;
+	void
+	quit();
+
+	void
+	dispatch();
+
+	sge::renderer::device_ptr const
+	renderer() const;
+
+	sge::image::loader_ptr const
+	image_loader() const;
+
+	sge::font::system_ptr const
+	font_system() const;
+
+	sge::input::system_ptr const
+	input_system() const;
+
+	sge::audio::player_ptr const
+	audio_player() const;
+
+	sge::audio::pool &
+	sound_pool();
+
+	sge::font::object &
+	font();
+
+	bool
+	key_pressed(
+		sge::input::key_code
+	) const;
 	
 	sanguis::client::console &
 	console_wrapper();
@@ -88,13 +141,21 @@ public:
 	load::context const &
 	resources() const;
 
-	sanguis::client::cursor::object_ptr const cursor();
-	sanguis::client::cursor::const_object_ptr const cursor() const;
+	sanguis::client::cursor::object_ptr const
+	cursor();
+
+	sanguis::client::cursor::const_object_ptr const
+	cursor() const;
 
 	// FIXME: this is so ugly
-	client::highscore::name_container const &gameover_names() const;
-	client::highscore::name_container &gameover_names();
-	client::highscore::score_type gameover_score();
+	client::highscore::name_container const &
+	gameover_names() const;
+
+	client::highscore::name_container &
+	gameover_names();
+
+	client::highscore::score_type
+	gameover_score();
 
 	void
 	gameover_score(
@@ -102,26 +163,44 @@ public:
 	);
 private:
 	load::context const &resources_;
+
+	sge::audio::player_ptr const audio_player_;
+
+	sge::renderer::device_ptr const renderer_;
+
 	net::client net_;
+
 	fcppt::signal::auto_connection
 		s_conn,
 		s_disconn,
 		s_data;
+
 	net::data_type
 		in_buffer,
 		out_buffer;
-	sge::systems::instance &sys_;
+
 	sge::audio::pool &sound_pool_;
+
 	sge::font::object &font_;
+
 	sge::input::key_state_tracker &ks;
+
 	sge::console::gfx &console;
+	
 	sge::console::stdlib console_stdlib;
+
 	sanguis::client::console console_wrapper_;
+
 	bool running_;
+
 	server_callback const server_callback_;
+
 	screenshot screenshot_;
+
 	sanguis::client::cursor::object_ptr const cursor_;
+
 	client::highscore::name_container gameover_names_;
+
 	client::highscore::score_type gameover_score_;
 };
 

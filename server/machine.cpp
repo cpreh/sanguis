@@ -6,16 +6,16 @@
 #include "../messages/connect.hpp"
 #include "../messages/disconnect.hpp"
 #include "../exception.hpp"
-#include <sge/systems/instance.hpp>
+#include <fcppt/algorithm/append.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
-#include <fcppt/algorithm/append.hpp>
+#include <fcppt/function/object.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
 
 sanguis::server::machine::machine(
-	load::context const &resources_,
+	load::model::context const &resources_,
 	sge::collision::system_ptr const collision_,
 	net::port_type const port_
 )
@@ -195,7 +195,7 @@ sanguis::server::machine::net()
 	return net_;
 }
 
-sanguis::load::context const &
+sanguis::load::model::context const &
 sanguis::server::machine::resources() const
 {
 	return resources_;

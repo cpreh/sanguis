@@ -23,7 +23,6 @@
 #include "../../messages/auto_ptr.hpp"
 #include "../../load/model/context_fwd.hpp"
 #include <sge/collision/system_ptr.hpp>
-#include <sge/console/object_fwd.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/container/map_decl.hpp>
@@ -37,14 +36,14 @@ namespace server
 namespace global
 {
 
-class context {
+class context
+{
 	FCPPT_NONCOPYABLE(context)
 public:
 	context(
 		unicast_callback const &,
 		sge::collision::system_ptr,
-		load::model::context const &,
-		sge::console::object &
+		load::model::context const &
 	);
 
 	~context();
@@ -150,8 +149,6 @@ private:
 	server::world::context_ptr const world_context_;
 
 	server::environment::load_context_ptr const load_context_;
-
-	sge::console::object &console_;
 };
 
 }
