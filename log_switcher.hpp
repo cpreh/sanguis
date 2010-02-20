@@ -30,7 +30,8 @@ public:
 
 	void
 	apply(
-		boost::program_options::variables_map &);
+		boost::program_options::variables_map const &
+	);
 private:
 	fcppt::string const prefix_;
 	fcppt::log::context &context_;

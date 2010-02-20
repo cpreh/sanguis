@@ -76,7 +76,7 @@ public:
 	void
 	listen();
 
-	load::context const &
+	load::model::context const &
 	resources() const;
 
 	sge::collision::system_ptr const
@@ -95,7 +95,7 @@ private:
 		>
 	> client_map;
 
-	load::context const &resources_;
+	load::model::context const &resources_;
 
 	net::port_type const port_;
 
