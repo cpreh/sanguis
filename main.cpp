@@ -102,16 +102,6 @@ try
 		vm
 	);
 
-	/*
-	sanguis::load::context resources(
-		sys.image_loader(),
-		sys.renderer(),
-		audio_loader,
-		sys.audio_player(),
-		sound_pool
-	);
-	*/
-
 	typedef fcppt::scoped_ptr<
 		sanguis::main_object
 	> main_object_scoped_ptr;
