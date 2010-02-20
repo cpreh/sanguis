@@ -134,6 +134,7 @@ sanguis::client::object::object(
 		sys.input_system(),
 		sys.renderer(),
 		sys.image_loader(),
+		sys.font_system(),
 		sys.audio_player()
 	)
 {
@@ -152,6 +153,9 @@ sanguis::client::object::object(
 
 	machine_.initiate();
 }
+
+sanguis::client::object::~object()
+{}
 
 int
 sanguis::client::object::run()

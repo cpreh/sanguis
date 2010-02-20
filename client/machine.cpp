@@ -42,12 +42,16 @@ sanguis::client::machine::machine(
 	sge::input::system_ptr const input_system_,
 	sge::renderer::device_ptr const renderer_,
 	sge::image::loader_ptr const image_loader_,
+	sge::font::system_ptr const font_system_,
 	sge::audio::player_ptr const audio_player_
 )
 :
 	resources_(_resources),
-	audio_player_(audio_player_),
+	input_system_(input_system_),
 	renderer_(renderer_),
+	image_loader_(image_loader_),
+	font_system_(font_system_),
+	audio_player_(audio_player_),
 	s_conn(
 		net_.register_connect(
 			std::tr1::bind(
@@ -113,7 +117,8 @@ sanguis::client::machine::machine(
 	gameover_score_()
 {}
 
-void sanguis::client::machine::start_server()
+void
+sanguis::client::machine::start_server()
 {
 	server_callback_(1337); // FIXME
 }
@@ -121,7 +126,8 @@ void sanguis::client::machine::start_server()
 void
 sanguis::client::machine::connect(
 	net::hostname_type const &hostname,
-	net::port_type const port)
+	net::port_type const port
+)
 {
 	net_.connect(
 		hostname,
@@ -129,12 +135,14 @@ sanguis::client::machine::connect(
 	);
 }
 
-void sanguis::client::machine::cancel_connect()
+void
+sanguis::client::machine::cancel_connect()
 {
 	net_.disconnect();
 }
 
-void sanguis::client::machine::connect_callback()
+void
+sanguis::client::machine::connect_callback()
 {
 	process_event(
 		message_event(
@@ -145,8 +153,10 @@ void sanguis::client::machine::connect_callback()
 	);
 }
 
-void sanguis::client::machine::disconnect_callback(
-	fcppt::string const &)
+void
+sanguis::client::machine::disconnect_callback(
+	fcppt::string const &
+)
 {
 	process_event(
 		message_event(
@@ -157,8 +167,10 @@ void sanguis::client::machine::disconnect_callback(
 	);
 }
 
-void sanguis::client::machine::process_message(
-	messages::auto_ptr ptr)
+void
+sanguis::client::machine::process_message(
+	messages::auto_ptr ptr
+)
 {
 	process_event(
 		message_event(
@@ -167,8 +179,10 @@ void sanguis::client::machine::process_message(
 	);
 }
 
-void sanguis::client::machine::data_callback(
-	net::data_type const &data)
+void
+sanguis::client::machine::data_callback(
+	net::data_type const &data
+)
 {
 	fcppt::algorithm::append(
 		in_buffer,
@@ -185,12 +199,15 @@ void sanguis::client::machine::data_callback(
 	}
 }
 
-void sanguis::client::machine::send(
-	messages::auto_ptr m)
+void
+sanguis::client::machine::send(
+	messages::auto_ptr m
+)
 {
 	serialize(
 		m,
-		out_buffer);
+		out_buffer
+	);
 }
 
 sanguis::net::client &
@@ -199,7 +216,8 @@ sanguis::client::machine::net()
 	return net_;
 }
 
-bool sanguis::client::machine::process(
+bool
+sanguis::client::machine::process(
 	tick_event const &t
 )
 try
@@ -246,12 +264,14 @@ catch (net::exception const &e)
 	return running_;
 }
 
-void sanguis::client::machine::quit()
+void
+sanguis::client::machine::quit()
 {
 	running_ = false;
 }
 
-void sanguis::client::machine::dispatch()
+void
+sanguis::client::machine::dispatch()
 {
 	sge::mainloop::dispatch();
 }
@@ -260,6 +280,24 @@ sge::renderer::device_ptr const
 sanguis::client::machine::renderer() const
 {
 	return renderer_;
+}
+
+sge::image::loader_ptr const
+sanguis::client::machine::image_loader() const
+{
+	return image_loader_;
+}
+
+sge::font::system_ptr const
+sanguis::client::machine::font_system() const
+{
+	return font_system_;
+}
+
+sge::input::system_ptr const
+sanguis::client::machine::input_system() const
+{
+	return input_system_;
 }
 
 sge::audio::player_ptr const

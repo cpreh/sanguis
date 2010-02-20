@@ -21,6 +21,15 @@ sanguis::server::object::object(
 	)
 {}
 
+sanguis::server::object::~object()
+{}
+
+int
+sanguis::server::object::run()
+{
+	// TODO: run the thread here instead!
+}
+
 void
 sanguis::server::object::mainloop()
 {

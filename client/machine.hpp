@@ -56,6 +56,7 @@ public:
 		sge::input::system_ptr,
 		sge::renderer::device_ptr,
 		sge::image::loader_ptr,
+		sge::font::system_ptr,
 		sge::audio::player_ptr
 	);
 
@@ -164,9 +165,15 @@ public:
 private:
 	load::context const &resources_;
 
-	sge::audio::player_ptr const audio_player_;
+	sge::input::system_ptr const input_system_;
 
 	sge::renderer::device_ptr const renderer_;
+
+	sge::image::loader_ptr const image_loader_;
+
+	sge::font::system_ptr const font_system_;
+
+	sge::audio::player_ptr const audio_player_;
 
 	net::client net_;
 
