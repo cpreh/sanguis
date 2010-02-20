@@ -152,3 +152,15 @@ sanguis::client::object::object(
 
 	machine_.initiate();
 }
+
+int
+sanguis::client::object::run()
+{
+}
+
+void
+sanguis::client::object::create_server(
+	net::port_type const port_
+)
+{
+}

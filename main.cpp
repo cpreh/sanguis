@@ -72,14 +72,6 @@ try
 		return EXIT_SUCCESS;
 	}
 
-	// TODO: remove this global variable!
-	/*sanguis::resolution(
-		sge::renderer::screen_size(
-			screen_width,
-			screen_height
-		)
-	);*/
-
 	fcppt::log::level::type const log_level(
 		sanguis::args::log_level(
 			vm
