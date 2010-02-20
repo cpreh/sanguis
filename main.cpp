@@ -262,10 +262,12 @@ try
 	);
 
 	sge_log.apply(
-		vm);
+		vm
+	);
 
 	sanguis_log.apply(
-		vm);
+		vm
+	);
 
 
 	if(multi_sampling > 0)
@@ -349,7 +351,9 @@ try
 	
 	sge::audio::multi_loader 
 		audio_loader(
-			sys.plugin_manager());
+			sys.plugin_manager()
+		);
+
 	sge::audio::pool sound_pool;
 
 	sanguis::load::context resources(
@@ -357,7 +361,8 @@ try
 		sys.renderer(),
 		audio_loader,
 		sys.audio_player(),
-		sound_pool);
+		sound_pool
+	);
 	
 	server_scoped_ptr server;
 
