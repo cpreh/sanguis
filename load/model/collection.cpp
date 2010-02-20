@@ -7,13 +7,15 @@
 
 sanguis::load::model::model const &
 sanguis::load::model::collection::operator[](
-	fcppt::string const &name) const
+	fcppt::string const &name
+) const
 {
 	model_map::const_iterator it(models.find(name));
 	if(it == models.end())
 	{
 		fcppt::filesystem::path const path(
-			media_path() / name);
+			media_path() / name
+		);
 		
 		if(!fcppt::filesystem::exists(path))
 			throw exception(
@@ -26,14 +28,17 @@ sanguis::load::model::collection::operator[](
 				name,
 				model(
 					path,
-					ctx))
-			).first;
+					ctx
+				)
+			)
+		).first;
 	}
 	return it->second;	
 }
 
 sanguis::load::model::collection::collection(
-	resource::context const &ctx)
+	resource::context const &ctx
+)
 :
 	ctx(ctx)
 {}

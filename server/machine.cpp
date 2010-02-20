@@ -6,7 +6,6 @@
 #include "../messages/connect.hpp"
 #include "../messages/disconnect.hpp"
 #include "../exception.hpp"
-#include <sge/console/gfx.hpp>
 #include <sge/systems/instance.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
@@ -18,7 +17,6 @@
 sanguis::server::machine::machine(
 	load::context const &resources_,
 	sge::collision::system_ptr const collision_,
-	sge::console::object &console_,
 	net::port_type const port_
 )
 :
@@ -58,9 +56,9 @@ sanguis::server::machine::machine(
 		)
 	),
 	clients_(),
-	collision_(collision_),
-	console_(console_)
-{}
+	collision_(collision_)
+{
+}
 
 void
 sanguis::server::machine::process(
@@ -207,12 +205,6 @@ sge::collision::system_ptr const
 sanguis::server::machine::collision_system() const
 {
 	return collision_;
-}
-
-sge::console::object &
-sanguis::server::machine::console()
-{
-	return console_;
 }
 
 void

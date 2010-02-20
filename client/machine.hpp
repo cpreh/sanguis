@@ -20,7 +20,7 @@
 #include <sge/systems/instance_fwd.hpp>
 #include <sge/audio/player_ptr.hpp>
 #include <sge/audio/pool_fwd.hpp>
-#include <sge/console/gfx.hpp>
+#include <sge/console/gfx_fwd.hpp>
 #include <sge/console/stdlib.hpp>
 #include <sge/renderer/device_ptr.hpp>
 #include <sge/renderer/texture_ptr.hpp>
@@ -32,8 +32,13 @@ namespace sanguis
 {
 namespace client
 {
-struct machine
-	: public boost::statechart::state_machine<machine, states::menu>
+
+class machine
+:
+	public boost::statechart::state_machine<
+		machine,
+		states::menu
+	>
 {
 public:
 	machine(
@@ -43,12 +48,17 @@ public:
 		sge::audio::pool &,
 		sge::font::object &,
 		sge::input::key_state_tracker &,
-		sge::console::gfx &);
+		sge::console::gfx &
+	);
 
-	void start_server();
-	void connect(
+	void
+	start_server();
+
+	void
+	connect(
 		net::hostname_type const &,
-		net::port_type);
+		net::port_type
+	);
 
 	void cancel_connect();
 	void send(messages::auto_ptr);
@@ -85,8 +95,11 @@ public:
 	client::highscore::name_container const &gameover_names() const;
 	client::highscore::name_container &gameover_names();
 	client::highscore::score_type gameover_score();
-	void gameover_score(
-		client::highscore::score_type);
+
+	void
+	gameover_score(
+		client::highscore::score_type
+	);
 private:
 	load::context const &resources_;
 	net::client net_;

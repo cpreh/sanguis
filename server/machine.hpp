@@ -3,12 +3,11 @@
 
 #include "states/running_fwd.hpp"
 #include "client_data.hpp"
-#include "../load/context_fwd.hpp"
+#include "../load/model/context_fwd.hpp"
 #include "../messages/auto_ptr.hpp"
 #include "../net/server.hpp"
 #include "../net/id_type.hpp"
-#include "../tick_event.hpp"
-#include <sge/console/object_fwd.hpp>
+#include "../tick_event_fwd.hpp"
 #include <sge/collision/system_ptr.hpp>
 #include <fcppt/container/map_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
@@ -30,9 +29,8 @@ struct machine
 {
 public:
 	machine(
-		load::context const &,
+		load::model::context const &,
 		sge::collision::system_ptr,
-		sge::console::object &,
 		net::port_type
 	);
 
@@ -84,9 +82,6 @@ public:
 	sge::collision::system_ptr const
 	collision_system() const;
 
-	sge::console::object &
-	console();
-
 	void
 	send_unicast(
 		net::id_type,
@@ -114,8 +109,6 @@ private:
 	client_map clients_;
 
 	sge::collision::system_ptr const collision_;
-
-	sge::console::object &console_;
 };
 
 }

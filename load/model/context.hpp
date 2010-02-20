@@ -27,11 +27,9 @@ private:
 		resource::context const &);
 	~context();
 
-	resource::context const &ctx;
-
 	mutable fcppt::scoped_ptr<
 		collection
-	> col;
+	> collection_;
 };
 
 }
