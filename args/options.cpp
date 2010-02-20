@@ -1,8 +1,11 @@
 #include "options.hpp"
+#include <sge/console/output_line_limit.hpp>
+#include <sge/renderer/multi_sample_type.hpp>
 #include <sge/renderer/no_multi_sampling.hpp>
+#include <sge/renderer/screen_unit.hpp>
 #include <string>
 
-boost::program_options::option_description const
+boost::program_options::options_description const
 sanguis::args::options()
 {
 	namespace po = boost::program_options;
@@ -17,10 +20,10 @@ sanguis::args::options()
 		(
 			"history-size",
 			po::value<
-				sge::console::gfx::output_line_limit
+				sge::console::output_line_limit
 			>()->default_value(
 				static_cast<
-					sge::console::gfx::output_line_limit
+					sge::console::output_line_limit
 				>(8000)
 			),
 			"Size of the console output history"
@@ -36,17 +39,23 @@ sanguis::args::options()
 		)
 		(
 			"width",
-			po::value<unsigned>()->default_value(1024),
+			po::value<
+				sge::renderer::screen_unit
+			>()->default_value(1024),
 			"sets the display width"
 		)
 		(
 			"height",
-			po::value<unsigned>()->default_value(768),
+			po::value<
+				sge::renderer::screen_unit
+			>()->default_value(768),
 			"sets the display height"
 		)
 		(
 			"multisamples",
-			po::value<unsigned>()->default_value(
+			po::value<
+				sge::renderer::multi_sample_type
+			>()->default_value(
 				sge::renderer::no_multi_sampling
 			),
 			"sets the number of samples done for anti aliasing"

@@ -12,7 +12,7 @@ namespace args
 boost::program_options::variables_map const
 parse(
 	int argc,
-	char const *const *argv,
+	char **argv,
 	boost::program_options::options_description const &
 );
 

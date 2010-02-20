@@ -1,10 +1,11 @@
 #include "client_sge_options.hpp"
 #include "multi_sampling.hpp"
 #include "resolution.hpp"
+#include <sge/renderer/parameters.hpp>
+#include <sge/renderer/refresh_rate_dont_care.hpp>
 #include <sge/systems/list.hpp>
 #include <sge/systems/named.hpp>
 #include <sge/window/parameters.hpp>
-#include <sge/renderer/parameters.hpp>
 #include <fcppt/text.hpp>
 
 sge::systems::list const

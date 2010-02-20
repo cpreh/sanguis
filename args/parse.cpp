@@ -2,14 +2,15 @@
 #include "parse.hpp"
 #include <fcppt/filesystem/exists.hpp>
 #include <fcppt/text.hpp>
+#include <boost/program_options/parsers.hpp>
 #include <iostream>
 #include <ostream>
 #include <fstream>
 
 boost::program_options::variables_map const
 sanguis::args::parse(
-	int const argv,
-	char const *const *const argv,
+	int const argc,
+	char **const argv,
 	boost::program_options::options_description const &desc
 )
 {

@@ -18,10 +18,12 @@ sanguis::args::sge_options(
 			)
 		:
 			// TODO: we might want a client only mode, too
-			client_sge_options()
-				.append(
-					server_sge_options(
-						vm
-					)
-				);
+			client_sge_options(
+				vm
+			)
+			.append(
+				server_sge_options(
+					vm
+				)
+			);
 }

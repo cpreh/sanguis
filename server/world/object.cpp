@@ -67,13 +67,13 @@ sanguis::server::world::object::object(
 				sge::collision::box(
 					// FIXME
 					sge::collision::box::vector(
-						-500,
-						-500,
+						-1000,
+						-1000,
 						0
 					),
 					sge::collision::box::dim(
-						1500,
-						1500,
+						1000,
+						1000,
 						0	
 					)
 				)
