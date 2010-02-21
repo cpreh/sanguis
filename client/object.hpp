@@ -4,6 +4,7 @@
 #include "machine.hpp"
 #include "../load/context.hpp"
 #include "../net/port_type.hpp"
+#include "../server/object_fwd.hpp"
 #include "../main_object.hpp"
 
 #include <sge/audio/multi_loader.hpp>
@@ -18,6 +19,7 @@
 #include <sge/texture/manager.hpp>
 
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/scoped_ptr.hpp>
 
 #include <boost/program_options/variables_map.hpp>
 
@@ -47,6 +49,8 @@ private:
 		net::port_type
 	);
 
+	sge::systems::instance &sys_;
+
 	sge::input::key_state_tracker key_state_tracker_;
 	
 	sge::font::metrics_ptr const font_metrics_;
@@ -68,6 +72,12 @@ private:
 	load::context resources_;
 
 	client::machine machine_;
+
+	fcppt::scoped_ptr<
+		server::object
+	> server_;
+
+	boost::program_options::variables_map variables_map_;
 };
 
 }

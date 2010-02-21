@@ -7,10 +7,14 @@
 namespace sanguis
 {
 
-class exception : public sge::exception {
+class exception
+:
+	public sge::exception
+{
 public:
 	explicit exception(
-		fcppt::string const &);
+		fcppt::string const &
+	);
 };
 
 }

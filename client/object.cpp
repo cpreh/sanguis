@@ -2,6 +2,7 @@
 #include "message_event.hpp"
 #include "states/menu.hpp"
 #include "../args/multi_sampling.hpp"
+#include "../server/object.hpp"
 #include "../media_path.hpp"
 #include "../tick_event.hpp"
 
@@ -31,19 +32,21 @@
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/make_auto_ptr.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::client::object::object(
-	sge::systems::instance &sys,
-	boost::program_options::variables_map const &vm
+	sge::systems::instance &sys_,
+	boost::program_options::variables_map const &variables_map_
 )
 :
+	sys_(sys_),
 	key_state_tracker_(
-		sys.input_system()
+		sys_.input_system()
 	),
 	font_metrics_(
-		sys.font_system()->create_font(
+		sys_.font_system()->create_font(
 			sge::config::media_path()
 			/ FCPPT_TEXT("fonts")
 			/ FCPPT_TEXT("default.ttf"),
@@ -54,7 +57,7 @@ sanguis::client::object::object(
 		fcppt::make_shared_ptr<
 			sge::font::drawer_3d
 		>(
-			sys.renderer(),
+			sys_.renderer(),
 			sge::image::colors::white()
 		)
 	),
@@ -63,11 +66,11 @@ sanguis::client::object::object(
 		font_drawer_
 	),
 	texture_manager_(
-		sys.renderer(),
+		sys_.renderer(),
 		sge::texture::default_creator<
 			sge::texture::no_fragmented
 		>(
-			sys.renderer(),
+			sys_.renderer(),
 			sge::image::color::format::rgba8, // TODO: what do we want to use here?
 			sge::renderer::filter::linear
 		)
@@ -77,16 +80,16 @@ sanguis::client::object::object(
 	),
 	console_gfx_(
 		console_,
-		sys.renderer(),
+		sys_.renderer(),
 		sge::image::colors::white(),
 		font_metrics_,
-		sys.input_system(),
+		sys_.input_system(),
 		sge::console::sprite_object(
 			sge::console::sprite_parameters()
 			.texture(
 				sge::texture::add_image(
 					texture_manager_,
-					sys.image_loader()->load(
+					sys_.image_loader()->load(
 						sanguis::media_path()
 						/ FCPPT_TEXT("console_back.png")
 					)
@@ -97,27 +100,31 @@ sanguis::client::object::object(
 			)
 			.size(
 				sge::console::sprite_object::dim(
-					sys.renderer()->screen_size().w(),
+					sys_.renderer()->screen_size().w(),
 					static_cast<
 						sge::console::sprite_object::unit
 					>(
-						sys.renderer()->screen_size().h() / 2
+						sys_.renderer()->screen_size().h() / 2
 					)
 				)
 			)
 			.elements()
 		),
-		vm["history-size"].as<sge::console::output_line_limit>()
+		variables_map_[
+			"history-size"
+		].as<
+			sge::console::output_line_limit
+		>()
 	),
 	audio_loader_(
-		sys.plugin_manager()
+		sys_.plugin_manager()
 	),
 	sound_pool_(),
 	resources_(
-		sys.image_loader(),
-		sys.renderer(),
+		sys_.image_loader(),
+		sys_.renderer(),
 		audio_loader_,
-		sys.audio_player(),
+		sys_.audio_player(),
 		sound_pool_
 	),
 	machine_(
@@ -131,20 +138,22 @@ sanguis::client::object::object(
 		font_,
 		key_state_tracker_,
 		console_gfx_,
-		sys.input_system(),
-		sys.renderer(),
-		sys.image_loader(),
-		sys.font_system(),
-		sys.audio_player()
-	)
+		sys_.input_system(),
+		sys_.renderer(),
+		sys_.image_loader(),
+		sys_.font_system(),
+		sys_.audio_player()
+	),
+	server_(),
+	variables_map_(variables_map_)
 {
 	if(	
 		args::multi_sampling(
-			vm
+			variables_map_
 		)
 		> 0
 	)
-		sys.renderer()->state(
+		sys_.renderer()->state(
 			sge::renderer::state::list
 			(
 				sge::renderer::state::bool_::enable_multi_sampling = true
@@ -167,4 +176,19 @@ sanguis::client::object::create_server(
 	net::port_type const port_
 )
 {
+/*
+	variables_map_[
+		"serverport"
+	] = port_;
+*/
+
+	server_.take(
+		fcppt::make_auto_ptr<
+			server::object
+		>(
+			sys_,
+			variables_map_,
+			&resources_.models()
+		)
+	);
 }

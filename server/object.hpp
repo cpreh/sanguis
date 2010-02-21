@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_OBJECT_HPP_INCLUDED
 
 #include "machine.hpp"
+#include "object_fwd.hpp"
 #include "../load/model/context_fwd.hpp"
 #include "../main_object.hpp"
 #include <sge/systems/instance_fwd.hpp>
