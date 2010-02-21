@@ -1,6 +1,7 @@
 #ifndef SANGUIS_NET_SERVER_HPP_INCLUDED
 #define SANGUIS_NET_SERVER_HPP_INCLUDED
 
+#include "detail/server_impl_fwd.hpp"
 #include "id_type.hpp"
 #include "data_type.hpp"
 #include "port_type.hpp"
@@ -15,10 +16,6 @@ namespace sanguis
 {
 namespace net
 {
-namespace detail
-{
-class server_impl;
-}
 
 class server {
 	FCPPT_NONCOPYABLE(server)
@@ -31,19 +28,40 @@ public:
 	typedef fcppt::function::object<data_fun> data_function;
 
 	server();
-	void listen(port_type);
-	void process();
-	void queue(
+
+	void
+	listen(
+		port_type
+	);
+
+	void
+	process();
+
+	void
+	queue(
 		id_type,
-		data_type const &);
-	void queue(
-		data_type const &);
-	fcppt::signal::auto_connection register_connect(
-		connect_function const &);
-	fcppt::signal::auto_connection register_disconnect(
-		disconnect_function const &);
-	fcppt::signal::auto_connection register_data(
-		data_function const &);
+		data_type const &
+	);
+
+	void
+	queue(
+		data_type const &
+	);
+
+	fcppt::signal::auto_connection
+	register_connect(
+		connect_function const &
+	);
+
+	fcppt::signal::auto_connection
+	register_disconnect(
+		disconnect_function const &
+	);
+
+	fcppt::signal::auto_connection
+	register_data(
+		data_function const &
+	);
 
 	~server();
 private:

@@ -1,6 +1,8 @@
 #include "object.hpp"
+#include "../args/server_port.hpp"
 #include <sge/systems/instance.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <cstdlib>
 
 sanguis::server::object::object(
 	sge::systems::instance const &sys,
@@ -11,7 +13,9 @@ sanguis::server::object::object(
 	machine_(
 		*model_context, // TODO!model_context,
 		sys.collision_system(),
-		vm["port"].as<net::port_type>()
+		args::server_port(
+			vm
+		)
 	),
 	server_thread_(
 		std::tr1::bind(
@@ -27,7 +31,9 @@ sanguis::server::object::~object()
 int
 sanguis::server::object::run()
 {
-	// TODO: run the thread here instead!
+	server_thread_.join();
+
+	return EXIT_SUCCESS;
 }
 
 void

@@ -1,4 +1,5 @@
 #include "options.hpp"
+#include "../net/port_type.hpp"
 #include <sge/console/output_line_limit.hpp>
 #include <sge/renderer/multi_sample_type.hpp>
 #include <sge/renderer/no_multi_sampling.hpp>
@@ -68,6 +69,15 @@ sanguis::args::options()
 				false
 			),
 			"only start a server"
+		)
+		(
+			"serverport",
+			po::value<
+				net::port_type
+			>()->default_value(
+				31337
+			),
+			"the server port"
 		);
 	
 	return desc;
