@@ -28,6 +28,12 @@ sanguis::server::object::object(
 sanguis::server::object::~object()
 {}
 
+void
+sanguis::server::object::quit()
+{
+	// TODO
+}
+
 int
 sanguis::server::object::run()
 {
@@ -39,5 +45,5 @@ sanguis::server::object::run()
 void
 sanguis::server::object::mainloop()
 {
-	
+	// TODO	
 }

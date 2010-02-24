@@ -124,23 +124,6 @@ try
 		);
 	
 	return obj->run();
-	
-/*
-	sge::time::timer frame_timer(
-		sge::time::second(1)
-	);
-
-	bool running = true;
-	while (running)
-	{
-		sanguis::tick_event t(static_cast<sanguis::time_type>(frame_timer.reset()));
-
-		// get and send messages
-		if(server)
-			server->process(t);
-		running = client.process(t);
-	}
-*/
 }
 catch(
 	fcppt::exception const &e

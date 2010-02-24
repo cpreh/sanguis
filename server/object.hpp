@@ -28,10 +28,13 @@ public:
 	);
 
 	~object();
-private:
+
+	void
+	quit();
+
 	int
 	run();
-
+private:
 	void
 	mainloop();
 

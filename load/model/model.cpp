@@ -29,7 +29,8 @@ namespace
 
 sge::renderer::dim_type const
 load_dim(
-	sge::parse::json::member_vector const &entries)
+	sge::parse::json::member_vector const &entries
+)
 {
 	sge::parse::json::array const &array(
 		sge::parse::json::find_member<
@@ -69,7 +70,8 @@ load_dim(
 
 sanguis::load::model::optional_delay const
 load_delay(
-	sge::parse::json::member_vector const &entries)
+	sge::parse::json::member_vector const &entries
+)
 {
 	try
 	{
@@ -90,7 +92,8 @@ load_delay(
 
 sanguis::load::model::part const &
 sanguis::load::model::model::operator[](
-	fcppt::string const &name) const
+	fcppt::string const &name
+) const
 {
 	part_map::const_iterator const it(
 		parts.find(
@@ -154,7 +157,8 @@ sanguis::load::model::model::dim() const
 
 sanguis::load::model::model::model(
 	fcppt::filesystem::path const &path,
-	resource::context const &ctx)
+	resource::context const &ctx
+)
 :
 	path(path),
 	parts()
@@ -188,8 +192,10 @@ sanguis::load::model::model::model(
 	}
 }
 
-void sanguis::load::model::model::construct(
-	resource::context const &ctx)
+void
+sanguis::load::model::model::construct(
+	resource::context const &ctx
+)
 {
 	fcppt::filesystem::path const file(
 		path / (fcppt::filesystem::stem(path) + FCPPT_TEXT(".json"))
