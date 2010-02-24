@@ -14,7 +14,7 @@ namespace load
 
 class server_context
 :
-	context_base
+	public context_base
 {
 	FCPPT_NONCOPYABLE(server_context)
 public:

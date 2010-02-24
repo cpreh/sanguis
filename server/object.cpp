@@ -7,11 +7,11 @@
 sanguis::server::object::object(
 	sge::systems::instance const &sys,
 	boost::program_options::variables_map const &vm,
-	load::model::context const *const model_context
+	load::context_base const &load_context
 )
 :
 	machine_(
-		*model_context, // TODO!model_context,
+		load_context,
 		sys.collision_system(),
 		args::server_port(
 			vm

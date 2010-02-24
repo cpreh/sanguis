@@ -1,11 +1,10 @@
 #include "load_context.hpp"
-#include "../../load/model/context.hpp"
-#include "../../load/model/collection.hpp"
+#include "../../load/context_base.hpp"
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 
 sanguis::server::global::load_context::load_context(
-	load::model::context const &model_context_
+	load::context_base const &model_context_
 )
 :
 	model_context_(model_context_)
@@ -19,8 +18,8 @@ sanguis::server::global::load_context::entity_dim(
 	return fcppt::math::dim::structure_cast<
 		dim_type
 	>(
-		model_context_()
-			[model_name]
-			.dim()
+		model_context_.model_dim(
+			model_name
+		)
 	);
 }

@@ -4,7 +4,7 @@
 #include "../environment/load_context.hpp"
 #include "../dim_type.hpp"
 #include "../string.hpp"
-#include "../../load/model/context_fwd.hpp"
+#include "../../load/context_base.hpp"
 
 namespace sanguis
 {
@@ -19,7 +19,7 @@ class load_context
 {
 public:
 	explicit load_context(
-		load::model::context const &
+		load::context_base const &
 	);
 private:
 	dim_type const
@@ -27,7 +27,7 @@ private:
 		string const &model_name
 	) const;
 	
-	load::model::context const &model_context_;
+	load::context_base const &model_context_;
 };
 
 }

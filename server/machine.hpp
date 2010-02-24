@@ -3,7 +3,7 @@
 
 #include "states/running_fwd.hpp"
 #include "client_data.hpp"
-#include "../load/model/context_fwd.hpp"
+#include "../load/context_base_fwd.hpp"
 #include "../messages/auto_ptr.hpp"
 #include "../net/server.hpp"
 #include "../net/id_type.hpp"
@@ -29,7 +29,7 @@ struct machine
 {
 public:
 	machine(
-		load::model::context const &,
+		load::context_base const &,
 		sge::collision::system_ptr,
 		net::port_type
 	);
@@ -76,7 +76,7 @@ public:
 	void
 	listen();
 
-	load::model::context const &
+	load::context_base const &
 	resources() const;
 
 	sge::collision::system_ptr const
@@ -95,7 +95,7 @@ private:
 		>
 	> client_map;
 
-	load::model::context const &resources_;
+	load::context_base const &resources_;
 
 	net::port_type const port_;
 

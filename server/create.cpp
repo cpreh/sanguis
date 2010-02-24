@@ -6,7 +6,7 @@ sanguis::main_object_auto_ptr
 sanguis::server::create(
 	sge::systems::instance const &sys,
 	boost::program_options::variables_map const &vm,
-	load::model::context const *const context
+	load::context_base const &context
 )
 {
 	main_object_auto_ptr ret(

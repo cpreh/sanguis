@@ -220,7 +220,7 @@ sanguis::client::object::create_server(
 		>(
 			sys_,
 			variables_map_,
-			&resources_.models()
+			resources_
 		)
 	);
 }
