@@ -2,6 +2,7 @@
 #include "find_texture.hpp"
 #include "global_parameters.hpp"
 #include "json_header.hpp"
+#include "load_delay.hpp"
 #include "load_dim.hpp"
 #include "optional_delay.hpp"
 #include "parse_json.hpp"
@@ -21,33 +22,6 @@
 #include <boost/next_prior.hpp>
 #include <boost/foreach.hpp>
 #include <utility>
-
-// TODO: split this stuff!
-
-namespace
-{
-
-sanguis::load::model::optional_delay const
-load_delay(
-	sge::parse::json::member_vector const &entries
-)
-{
-	try
-	{
-		return sge::parse::json::find_member<
-			int
-		>(
-			entries,
-			FCPPT_TEXT("delay")
-		);
-	}
-	catch(sanguis::exception const &e)
-	{
-		return sanguis::load::model::optional_delay();
-	}
-}
-
-}
 
 sanguis::load::model::part const &
 sanguis::load::model::model::operator[](
