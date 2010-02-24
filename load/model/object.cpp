@@ -1,4 +1,4 @@
-#include "model.hpp"
+#include "object.hpp"
 #include "find_texture.hpp"
 #include "global_parameters.hpp"
 #include "json_header.hpp"
@@ -23,8 +23,11 @@
 #include <boost/foreach.hpp>
 #include <utility>
 
+sanguis::load::model::object::~object()
+{}
+
 sanguis::load::model::part const &
-sanguis::load::model::model::operator[](
+sanguis::load::model::object::operator[](
 	fcppt::string const &name
 ) const
 {
@@ -46,7 +49,7 @@ sanguis::load::model::model::operator[](
 }
 
 sanguis::load::model::part const &
-sanguis::load::model::model::random_part() const
+sanguis::load::model::object::random_part() const
 {
 	if(!random_part_)
 		random_part_.reset(
@@ -64,31 +67,31 @@ sanguis::load::model::model::random_part() const
 	)->second;
 }
 
-sanguis::load::model::model::size_type
-sanguis::load::model::model::size() const
+sanguis::load::model::object::size_type
+sanguis::load::model::object::size() const
 {
 	return parts.size();
 }
 
-sanguis::load::model::model::const_iterator
-sanguis::load::model::model::begin() const
+sanguis::load::model::object::const_iterator
+sanguis::load::model::object::begin() const
 {
 	return parts.begin();
 }
 
-sanguis::load::model::model::const_iterator
-sanguis::load::model::model::end() const
+sanguis::load::model::object::const_iterator
+sanguis::load::model::object::end() const
 {
 	return parts.end();
 }
 
 sge::renderer::dim_type const
-sanguis::load::model::model::dim() const
+sanguis::load::model::object::dim() const
 {
 	return cell_size;
 }
 
-sanguis::load::model::model::model(
+sanguis::load::model::object::object(
 	fcppt::filesystem::path const &path,
 	resource::context const &ctx
 )
@@ -126,7 +129,7 @@ sanguis::load::model::model::model(
 }
 
 void
-sanguis::load::model::model::construct(
+sanguis::load::model::object::construct(
 	resource::context const &ctx
 )
 {

@@ -31,7 +31,7 @@
 #include "../../messages/max_health.hpp"
 #include "../../load/model/context.hpp"
 #include "../../load/model/collection.hpp"
-#include "../../load/model/model.hpp"
+#include "../../load/model/object.hpp"
 #include "../../exception.hpp"
 #include <sge/collision/system.hpp>
 #include <sge/collision/world.hpp>

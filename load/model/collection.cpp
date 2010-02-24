@@ -1,9 +1,9 @@
 #include "collection.hpp"
 #include "make_path.hpp"
-#include "model.hpp"
+#include "object.hpp"
 #include <utility>
 
-sanguis::load::model::model const &
+sanguis::load::model::object const &
 sanguis::load::model::collection::operator[](
 	fcppt::string const &name
 ) const
@@ -20,7 +20,7 @@ sanguis::load::model::collection::operator[](
 		it = models.insert(
 			std::make_pair(
 				name,
-				model(
+				object(
 					make_path(
 						name
 					),

@@ -1,5 +1,5 @@
-#ifndef SANGUIS_LOAD_MODEL_MODEL_HPP_INCLUDED
-#define SANGUIS_LOAD_MODEL_MODEL_HPP_INCLUDED
+#ifndef SANGUIS_LOAD_MODEL_OBJECT_HPP_INCLUDED
+#define SANGUIS_LOAD_MODEL_OBJECT_HPP_INCLUDED
 
 #include "../resource/context_fwd.hpp"
 #include "part.hpp"
@@ -18,7 +18,7 @@ namespace load
 namespace model
 {
 
-class model
+class object
 {
 	typedef std::map<
 		fcppt::string,
@@ -28,6 +28,8 @@ public:
 	typedef part_map::value_type     value_type;
 	typedef part_map::const_iterator const_iterator;
 	typedef part_map::size_type      size_type;
+
+	~object();
 
 	part const &
 	operator[](
@@ -49,7 +51,7 @@ public:
 	sge::renderer::dim_type const
 	dim() const;
 private:
-	model(
+	object(
 		fcppt::filesystem::path const &,
 		resource::context const &
 	);
