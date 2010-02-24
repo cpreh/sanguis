@@ -1,18 +1,17 @@
 #include "model.hpp"
 #include "find_texture.hpp"
 #include "global_parameters.hpp"
+#include "json_header.hpp"
 #include "load_dim.hpp"
 #include "optional_delay.hpp"
+#include "parse_json.hpp"
 #include "split_first_slash.hpp"
 #include "../../exception.hpp"
 #include "../resource/context.hpp"
 #include "../resource/textures.hpp"
 #include "../log.hpp"
-#include <fcppt/filesystem/is_directory.hpp>
-#include <fcppt/filesystem/stem.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/log/headers.hpp>
-#include <sge/parse/json/parse_file.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/get.hpp>
@@ -157,37 +156,20 @@ sanguis::load::model::model::construct(
 	resource::context const &ctx
 )
 {
-	fcppt::filesystem::path const file(
-		path / (fcppt::filesystem::stem(path) + FCPPT_TEXT(".json"))
-	);
-
 	sge::parse::json::object object_return;
 	
-	if(
-		!sge::parse::json::parse_file(
-			file,
-			object_return
-		)
-	)
-	{
-		FCPPT_LOG_WARNING(
-			sanguis::load::log(),
-			fcppt::log::_
-				<< file 
-				<< FCPPT_TEXT(" contains errors!")
-			);
-	}
+	parse_json(
+		path,
+		object_return
+	);
 
 	sge::parse::json::member_vector const &global_entries(
 		object_return.members
 	);
 
 	sge::parse::json::object const &header(
-		sge::parse::json::find_member<
-			sge::parse::json::object
-		>(
-			global_entries,
-			FCPPT_TEXT("header")
+		json_header(
+			global_entries
 		)
 	);
 
