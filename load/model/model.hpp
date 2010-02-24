@@ -18,8 +18,12 @@ namespace load
 namespace model
 {
 
-class model {
-	typedef std::map<fcppt::string, part> part_map;
+class model
+{
+	typedef std::map<
+		fcppt::string,
+		part
+	> part_map;
 public:
 	typedef part_map::value_type     value_type;
 	typedef part_map::const_iterator const_iterator;
@@ -27,24 +31,33 @@ public:
 
 	part const &
 	operator[](
-		fcppt::string const &) const;
+		fcppt::string const &
+	) const;
 	
 	part const &
 	random_part() const;
 
-	size_type size() const;
-	const_iterator begin() const;
-	const_iterator end() const;
+	size_type
+	size() const;
+
+	const_iterator
+	begin() const;
+
+	const_iterator
+	end() const;
 
 	sge::renderer::dim_type const
 	dim() const;
 private:
 	model(
 		fcppt::filesystem::path const &,
-		resource::context const &);
+		resource::context const &
+	);
 	
-	void construct(
-		resource::context const &);
+	void
+	construct(
+		resource::context const &
+	);
 
 	friend class collection;
 
