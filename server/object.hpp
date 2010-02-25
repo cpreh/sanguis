@@ -27,6 +27,9 @@ public:
 		load::model::context const *
 	);
 
+	void
+	quit();
+
 	~object();
 private:
 	int
@@ -38,6 +41,8 @@ private:
 	server::machine machine_;
 
 	fcppt::thread::object server_thread_;
+
+	bool running_;
 };
 
 }
