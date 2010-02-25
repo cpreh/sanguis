@@ -2,6 +2,8 @@
 #define SANGUIS_SERVER_PERKS_REGENERATION_HPP_INCLUDED
 
 #include "perk.hpp"
+#include "level_type.hpp"
+#include "level_diff.hpp"
 #include "../entities/base_fwd.hpp"
 #include "../entities/property/value.hpp"
 
@@ -20,19 +22,19 @@ public:
 	regeneration();
 private:
 	void
-	apply(
-		entities::base &
+	change(
+		entities::base &,
+		level_diff
 	);
 
-	void
-	unapply(
-		entities::base &
-	);
+	bool
+	can_raise_level() const;
 
-	bool can_raise_level() const;
-
+	static
 	entities::property::value const
-	factor() const;
+	factor(
+		level_type
+	);
 };
 
 }

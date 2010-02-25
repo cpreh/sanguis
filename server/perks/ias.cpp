@@ -1,7 +1,7 @@
 #include "ias.hpp"
+#include "diff_factor.hpp"
 #include "../entities/property/value.hpp"
-#include "../entities/property/linear_add.hpp"
-#include "../entities/property/linear_remove.hpp"
+#include "../entities/property/linear_change.hpp"
 #include "../entities/with_weapon.hpp"
 
 sanguis::server::perks::ias::ias()
@@ -12,34 +12,23 @@ sanguis::server::perks::ias::ias()
 {}
 
 void
-sanguis::server::perks::ias::apply(
-	entities::base &entity_
+sanguis::server::perks::ias::change(
+	entities::base &entity_,
+	level_diff const diff_
 )
 {
-	entities::property::linear_add(
+	entities::property::linear_change(
 		dynamic_cast<
 			entities::with_weapon &
 		>(
 			entity_
 		)
 		.attack_speed(),
-		factor()
-	);
-}
-
-void
-sanguis::server::perks::ias::unapply(
-	entities::base &entity_
-)
-{
-	entities::property::linear_remove(
-		dynamic_cast<
-			entities::with_weapon &
-		>(
-			entity_
+		diff_factor(
+			factor,
+			level(),
+			diff_
 		)
-		.attack_speed(),
-		factor()
 	);
 }
 
@@ -50,11 +39,13 @@ sanguis::server::perks::ias::can_raise_level() const
 }
 
 sanguis::server::entities::property::value const
-sanguis::server::perks::ias::factor() const
+sanguis::server::perks::ias::factor(
+	level_type const level_
+)
 {
 	return
 		entities::property::value(
-			level(),
+			level_,
 			5
 		);
 }

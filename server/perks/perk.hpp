@@ -1,6 +1,8 @@
 #ifndef SANGUIS_SERVER_PERKS_PERK_HPP_INCLUDED
 #define SANGUIS_SERVER_PERKS_PERK_HPP_INCLUDED
 
+#include "level_type.hpp"
+#include "level_diff.hpp"
 #include "../entities/base_fwd.hpp"
 #include "../environment/object_ptr.hpp"
 #include "../../time_type.hpp"
@@ -11,11 +13,11 @@ namespace sanguis
 {
 namespace server
 {
-
 namespace perks
 {
 
-class perk {
+class perk
+{
 	FCPPT_NONCOPYABLE(perk)
 public:
 	virtual void
@@ -42,19 +44,13 @@ protected:
 		perk_type::type
 	);
 
-	typedef unsigned level_type;
-
 	level_type
 	level() const;
 private:
 	virtual void
-	apply(
-		entities::base &
-	) = 0;
-
-	virtual void
-	unapply(
-		entities::base &
+	change(
+		entities::base &,
+		level_diff
 	) = 0;
 
 	perk_type::type const type_;

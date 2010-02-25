@@ -40,6 +40,8 @@ sanguis::server::perks::create(
 		return auto_ptr(
 			new regeneration()
 		);
+	case perk_type::size:
+		break;
 	}
 
 	throw exception(

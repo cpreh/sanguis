@@ -11,19 +11,11 @@ sanguis::server::entities::property::linear::linear()
 {}
 
 void
-sanguis::server::entities::property::linear::add(
+sanguis::server::entities::property::linear::change(
 	value_type const add_
 )
 {
 	value_ += add_;
-}
-
-void
-sanguis::server::entities::property::linear::remove(
-	value_type const sub_
-)
-{
-	value_ -= sub_;
 }
 
 sanguis::server::entities::property::linear::value_type

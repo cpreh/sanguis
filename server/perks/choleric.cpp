@@ -94,13 +94,8 @@ sanguis::server::perks::choleric::can_raise_level() const
 }
 
 void
-sanguis::server::perks::choleric::apply(
-	entities::base &
-)
-{}
-
-void
-sanguis::server::perks::choleric::unapply(
-	entities::base &
+sanguis::server::perks::choleric::change(
+	entities::base &,
+	level_diff
 )
 {}

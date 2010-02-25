@@ -13,19 +13,15 @@ namespace entities
 namespace property
 {
 
-class linear {
+class linear
+{
 public:
 	typedef property::value value_type;
 
 	linear();
 
 	void
-	add(
-		value_type
-	);
-
-	void
-	remove(
+	change(
 		value_type
 	);
 
