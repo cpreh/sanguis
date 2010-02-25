@@ -61,15 +61,20 @@ public:
 	register_data(
 		server::data_function const &
 	);
+
+	void
+	run();
+
+	void
+	stop();
 private:
 	typedef boost::ptr_vector<connection> connection_container;
 
-	boost::asio::io_service &io_service_;
+	boost::asio::io_service io_service_;
 	boost::asio::ip::tcp::acceptor acceptor_;
 
 	id_type id_counter_;
 	connection_container connections_;
-	unsigned handlers_;
 
 	fcppt::signal::object<server::connect_fun> connect_signal_;
 	fcppt::signal::object<server::disconnect_fun> disconnect_signal_;

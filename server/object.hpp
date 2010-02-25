@@ -27,13 +27,13 @@ public:
 		load::context_base const &
 	);
 
-	~object();
-
 	void
 	quit();
 
 	int
 	run();
+
+	~object();
 private:
 	void
 	mainloop();
@@ -41,6 +41,8 @@ private:
 	server::machine machine_;
 
 	fcppt::thread::object server_thread_;
+
+	bool running_;
 };
 
 }

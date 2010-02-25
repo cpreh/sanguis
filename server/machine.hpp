@@ -73,6 +73,12 @@ public:
 	net::server &
 	net();
 
+	void 
+	run();
+
+	void 
+	stop();
+
 	void
 	listen();
 

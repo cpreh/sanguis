@@ -27,6 +27,7 @@ public:
 	typedef fcppt::function::object<disconnect_fun> disconnect_function;
 	typedef fcppt::function::object<data_fun> data_function;
 
+	explicit
 	server();
 
 	void
@@ -40,28 +41,29 @@ public:
 	void
 	queue(
 		id_type,
-		data_type const &
-	);
+		data_type const &);
 
 	void
 	queue(
-		data_type const &
-	);
+		data_type const &);
 
 	fcppt::signal::auto_connection
 	register_connect(
-		connect_function const &
-	);
+		connect_function const &);
 
 	fcppt::signal::auto_connection
 	register_disconnect(
-		disconnect_function const &
-	);
+		disconnect_function const &);
 
 	fcppt::signal::auto_connection
 	register_data(
-		data_function const &
-	);
+		data_function const &);
+
+	void 
+	run();
+
+	void 
+	stop();
 
 	~server();
 private:

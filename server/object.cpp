@@ -22,28 +22,32 @@ sanguis::server::object::object(
 			&object::mainloop,
 			this
 		)
-	)
-{}
-
-sanguis::server::object::~object()
+	),
+	running_(
+		true)
 {}
 
 void
 sanguis::server::object::quit()
 {
-	// TODO
+	running_ = false;
+	machine_.stop();
 }
+
+
+sanguis::server::object::~object()
+{}
 
 int
 sanguis::server::object::run()
 {
 	server_thread_.join();
-
 	return EXIT_SUCCESS;
 }
 
 void
 sanguis::server::object::mainloop()
 {
-	// TODO	
+	while (running_)
+		machine_.run();
 }
