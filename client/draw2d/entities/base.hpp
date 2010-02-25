@@ -27,7 +27,7 @@ public:
 		time_type
 	) = 0;
 
-	virtual void
+	void
 	decay();
 
 	void
@@ -57,6 +57,9 @@ public:
 	void
 	inc_ref();
 private:
+	virtual void
+	on_decay();
+
 	bool
 	dec_ref();
 

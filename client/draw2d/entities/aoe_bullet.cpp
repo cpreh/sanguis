@@ -29,7 +29,7 @@ sanguis::client::draw2d::entities::aoe_bullet::aoe_bullet(
 {}
 		
 void
-sanguis::client::draw2d::entities::aoe_bullet::decay()
+sanguis::client::draw2d::entities::aoe_bullet::on_decay()
 {
 	entities::auto_ptr explo(
 		fcppt::make_auto_ptr<
@@ -49,5 +49,5 @@ sanguis::client::draw2d::entities::aoe_bullet::decay()
 		client::next_id()
 	);	
 	
-	model::object::decay();
+	model::object::on_decay();
 }

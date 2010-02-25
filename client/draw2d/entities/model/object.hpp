@@ -81,7 +81,7 @@ protected:
 	is_decayed() const;
 	
 	virtual void
-	decay();
+	on_decay();
 
 	// with_speed overrides
 	virtual void
