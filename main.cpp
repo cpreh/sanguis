@@ -4,6 +4,7 @@
 #include "args/sge_options.hpp"
 #include "args/server_only.hpp"
 #include "client/create.hpp"
+#include "load/server_context.hpp"
 #include "server/create.hpp"
 #include "log.hpp"
 #include "log_context.hpp"
@@ -102,19 +103,37 @@ try
 		vm
 	);
 
+	bool const server_only(
+		sanguis::args::server_only(
+			vm
+		)
+	);
+
+	typedef fcppt::scoped_ptr<
+		sanguis::load::context_base
+	> server_context_;
+
+	server_context_ context_;
+
+	// TODO: ugly!
+	if(
+		server_only
+	)
+		context_.reset(
+			new sanguis::load::server_context()
+		);
+
 	typedef fcppt::scoped_ptr<
 		sanguis::main_object
 	> main_object_scoped_ptr;
 
 	main_object_scoped_ptr obj(
-		sanguis::args::server_only(
-			vm
-		)
+		server_only
 		?
 			sanguis::server::create(
 				sys,
 				vm,
-				0 // no loader
+				*context_
 			)
 		:
 			sanguis::client::create(
@@ -124,23 +143,6 @@ try
 		);
 	
 	return obj->run();
-	
-/*
-	sge::time::timer frame_timer(
-		sge::time::second(1)
-	);
-
-	bool running = true;
-	while (running)
-	{
-		sanguis::tick_event t(static_cast<sanguis::time_type>(frame_timer.reset()));
-
-		// get and send messages
-		if(server)
-			server->process(t);
-		running = client.process(t);
-	}
-*/
 }
 catch(
 	fcppt::exception const &e

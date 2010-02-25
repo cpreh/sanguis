@@ -5,6 +5,7 @@
 #include "../server/object.hpp"
 #include "../media_path.hpp"
 #include "../tick_event.hpp"
+#include "../time_type.hpp"
 
 #include <sge/config/media_path.hpp>
 #include <sge/console/sprite_object.hpp>
@@ -24,6 +25,8 @@
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/systems/instance.hpp>
+#include <sge/time/second.hpp>
+#include <sge/time/timer.hpp>
 #include <sge/texture/add_image.hpp>
 #include <sge/texture/default_creator_impl.hpp>
 #include <sge/texture/no_fragmented.hpp>
@@ -35,6 +38,8 @@
 #include <fcppt/make_auto_ptr.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/text.hpp>
+
+#include <cstdlib>
 
 sanguis::client::object::object(
 	sge::systems::instance &sys_,
@@ -169,6 +174,33 @@ sanguis::client::object::~object()
 int
 sanguis::client::object::run()
 {
+	sge::time::timer frame_timer(
+		sge::time::second(1)
+	);
+
+	while(
+		machine_.process(
+			tick_event(
+				static_cast<
+					time_type
+				>(
+					frame_timer.reset()
+				)
+			)
+		)
+	) ;
+
+	if(
+		server_
+	)
+		server_->quit();
+
+	return
+		server_
+		?
+			server_->run()
+		:
+			EXIT_SUCCESS;
 }
 
 void
@@ -188,7 +220,7 @@ sanguis::client::object::create_server(
 		>(
 			sys_,
 			variables_map_,
-			&resources_.models()
+			resources_
 		)
 	);
 }

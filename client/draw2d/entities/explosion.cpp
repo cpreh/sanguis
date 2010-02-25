@@ -6,7 +6,7 @@
 #include "../particle/z_ordering.hpp"
 #include "../../../load/model/part.hpp"
 #include "../../../load/model/weapon_category.hpp"
-#include "../../../load/model/model.hpp"
+#include "../../../load/model/object.hpp"
 #include "../../../load/model/collection.hpp"
 #include "../../../resolution.hpp"
 #include "../../../animation_type.hpp"

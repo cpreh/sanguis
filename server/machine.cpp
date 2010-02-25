@@ -15,7 +15,7 @@
 #include <boost/foreach.hpp>
 
 sanguis::server::machine::machine(
-	load::model::context const &resources_,
+	load::context_base const &resources_,
 	sge::collision::system_ptr const collision_,
 	net::port_type const port_
 )
@@ -212,7 +212,7 @@ sanguis::server::machine::net()
 		net_;
 }
 
-sanguis::load::model::context const &
+sanguis::load::context_base const &
 sanguis::server::machine::resources() const
 {
 	return 

@@ -24,7 +24,9 @@ private:
 	friend class load::context;
 
 	explicit context(
-		resource::context const &);
+		resource::context const &
+	);
+
 	~context();
 
 	mutable fcppt::scoped_ptr<

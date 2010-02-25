@@ -1,38 +1,34 @@
 #include "collection.hpp"
-#include "../../media_path.hpp"
-#include "../../exception.hpp"
-#include <fcppt/filesystem/exists.hpp>
-#include <fcppt/text.hpp>
+#include "make_path.hpp"
+#include "object.hpp"
 #include <utility>
 
-sanguis::load::model::model const &
+sanguis::load::model::object const &
 sanguis::load::model::collection::operator[](
 	fcppt::string const &name
 ) const
 {
-	model_map::const_iterator it(models.find(name));
-	if(it == models.end())
-	{
-		fcppt::filesystem::path const path(
-			media_path() / name
-		);
-		
-		if(!fcppt::filesystem::exists(path))
-			throw exception(
-				FCPPT_TEXT("Model ")
-				+ name
-				+ FCPPT_TEXT(" not found!"));
+	model_map::const_iterator it(
+		models.find(
+			name
+		)
+	);
 
+	if(
+		it == models.end()
+	)
 		it = models.insert(
 			std::make_pair(
 				name,
-				model(
-					path,
+				object(
+					make_path(
+						name
+					),
 					ctx
 				)
 			)
 		).first;
-	}
+
 	return it->second;	
 }
 

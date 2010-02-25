@@ -1,17 +1,18 @@
-#include "model.hpp"
-#include "split_first_slash.hpp"
-#include "optional_delay.hpp"
+#include "object.hpp"
 #include "find_texture.hpp"
 #include "global_parameters.hpp"
+#include "json_header.hpp"
+#include "load_delay.hpp"
+#include "load_dim.hpp"
+#include "optional_delay.hpp"
+#include "parse_json.hpp"
+#include "split_first_slash.hpp"
 #include "../../exception.hpp"
 #include "../resource/context.hpp"
 #include "../resource/textures.hpp"
 #include "../log.hpp"
-#include <fcppt/filesystem/is_directory.hpp>
-#include <fcppt/filesystem/stem.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/log/headers.hpp>
-#include <sge/parse/json/parse_file.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/get.hpp>
@@ -22,75 +23,13 @@
 #include <boost/foreach.hpp>
 #include <utility>
 
-// TODO: split this stuff!
-
-namespace
-{
-
-sge::renderer::dim_type const
-load_dim(
-	sge::parse::json::member_vector const &entries)
-{
-	sge::parse::json::array const &array(
-		sge::parse::json::find_member<
-			sge::parse::json::array
-		>(
-			entries,
-			FCPPT_TEXT("cell_dimensions")
-		)
-	);
-
-	sge::parse::json::element_vector const &elements(
-		array.elements
-	);
-
-	if(elements.size() < 2)
-		throw sanguis::exception(
-			FCPPT_TEXT("Insufficient members in cell_dimensions!")
-		);
-	
-	return sge::renderer::dim_type(
-		static_cast<sge::renderer::size_type>(
-			sge::parse::json::get<
-				int	
-			>(
-				elements[0]
-			)
-		),
-		static_cast<sge::renderer::size_type>(
-			sge::parse::json::get<
-				int	
-			>(
-				elements[1]
-			)
-		)
-	);
-}
-
-sanguis::load::model::optional_delay const
-load_delay(
-	sge::parse::json::member_vector const &entries)
-{
-	try
-	{
-		return sge::parse::json::find_member<
-			int
-		>(
-			entries,
-			FCPPT_TEXT("delay")
-		);
-	}
-	catch(sanguis::exception const &e)
-	{
-		return sanguis::load::model::optional_delay();
-	}
-}
-
-}
+sanguis::load::model::object::~object()
+{}
 
 sanguis::load::model::part const &
-sanguis::load::model::model::operator[](
-	fcppt::string const &name) const
+sanguis::load::model::object::operator[](
+	fcppt::string const &name
+) const
 {
 	part_map::const_iterator const it(
 		parts.find(
@@ -110,7 +49,7 @@ sanguis::load::model::model::operator[](
 }
 
 sanguis::load::model::part const &
-sanguis::load::model::model::random_part() const
+sanguis::load::model::object::random_part() const
 {
 	if(!random_part_)
 		random_part_.reset(
@@ -128,33 +67,34 @@ sanguis::load::model::model::random_part() const
 	)->second;
 }
 
-sanguis::load::model::model::size_type
-sanguis::load::model::model::size() const
+sanguis::load::model::object::size_type
+sanguis::load::model::object::size() const
 {
 	return parts.size();
 }
 
-sanguis::load::model::model::const_iterator
-sanguis::load::model::model::begin() const
+sanguis::load::model::object::const_iterator
+sanguis::load::model::object::begin() const
 {
 	return parts.begin();
 }
 
-sanguis::load::model::model::const_iterator
-sanguis::load::model::model::end() const
+sanguis::load::model::object::const_iterator
+sanguis::load::model::object::end() const
 {
 	return parts.end();
 }
 
 sge::renderer::dim_type const
-sanguis::load::model::model::dim() const
+sanguis::load::model::object::dim() const
 {
 	return cell_size;
 }
 
-sanguis::load::model::model::model(
+sanguis::load::model::object::object(
 	fcppt::filesystem::path const &path,
-	resource::context const &ctx)
+	resource::context const &ctx
+)
 :
 	path(path),
 	parts()
@@ -188,40 +128,25 @@ sanguis::load::model::model::model(
 	}
 }
 
-void sanguis::load::model::model::construct(
-	resource::context const &ctx)
+void
+sanguis::load::model::object::construct(
+	resource::context const &ctx
+)
 {
-	fcppt::filesystem::path const file(
-		path / (fcppt::filesystem::stem(path) + FCPPT_TEXT(".json"))
-	);
-
 	sge::parse::json::object object_return;
 	
-	if(
-		!sge::parse::json::parse_file(
-			file,
-			object_return
-		)
-	)
-	{
-		FCPPT_LOG_WARNING(
-			sanguis::load::log(),
-			fcppt::log::_
-				<< file 
-				<< FCPPT_TEXT(" contains errors!")
-			);
-	}
+	parse_json(
+		path,
+		object_return
+	);
 
 	sge::parse::json::member_vector const &global_entries(
 		object_return.members
 	);
 
 	sge::parse::json::object const &header(
-		sge::parse::json::find_member<
-			sge::parse::json::object
-		>(
-			global_entries,
-			FCPPT_TEXT("header")
+		json_header(
+			global_entries
 		)
 	);
 
