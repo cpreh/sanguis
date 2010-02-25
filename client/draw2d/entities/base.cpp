@@ -1,5 +1,8 @@
 #include "base.hpp"
+#include "../log.hpp"
+#include <fcppt/log/headers.hpp>
 #include <fcppt/assert.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::client::draw2d::entities::base::base()
 :
@@ -10,8 +13,17 @@ sanguis::client::draw2d::entities::base::base()
 void
 sanguis::client::draw2d::entities::base::decay()
 {
-	// decay can be overridden so that is_decayed() can be used
-	removed_ = true;
+	if(
+		dec_ref()
+	)
+		on_decay();
+	else
+		FCPPT_LOG_WARNING(
+			log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("decay() called but refcount is ")
+				<< refs_
+		);
 }
 
 void
@@ -21,6 +33,13 @@ sanguis::client::draw2d::entities::base::remove()
 		dec_ref()
 	)
 		removed_ = true;
+	else
+		FCPPT_LOG_WARNING(
+			log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("remove() called but refcount is ")
+				<< refs_
+		);
 }
 
 void
@@ -42,6 +61,19 @@ void
 sanguis::client::draw2d::entities::base::inc_ref()
 {
 	++refs_;
+
+	FCPPT_LOG_WARNING(
+		log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("inc_ref(): refs_ is now ")
+			<< refs_
+	);
+}
+
+void
+sanguis::client::draw2d::entities::base::on_decay()
+{
+	removed_ = true;
 }
 
 bool

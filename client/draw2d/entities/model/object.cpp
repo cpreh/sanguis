@@ -141,7 +141,7 @@ sanguis::client::draw2d::entities::model::object::is_decayed() const
 }
 
 void
-sanguis::client::draw2d::entities::model::object::decay()
+sanguis::client::draw2d::entities::model::object::on_decay()
 {
 	decay_time_.reset(
 		new decay_time(

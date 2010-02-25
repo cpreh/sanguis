@@ -48,7 +48,7 @@ sanguis::server::perks::perk::perk(
 )
 :
 	type_(type_),
-	level_(1)
+	level_(0)
 {}
 
 sanguis::server::perks::perk::level_type

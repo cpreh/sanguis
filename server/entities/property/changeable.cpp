@@ -29,7 +29,8 @@ sanguis::server::entities::property::changeable::changeable(
 	),
 	current_(
 		current_
-	), max_(
+	),
+	max_(
 		base_
 	)
 {
@@ -47,7 +48,7 @@ sanguis::server::entities::property::changeable::current(
 
 	current_ = ncurrent_;
 
-	if (
+	if(
 		old != current()
 	)
 		change_signal_(
