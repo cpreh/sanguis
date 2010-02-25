@@ -399,6 +399,7 @@ sanguis::client::draw2d::scene::object::insert(
 				<< FCPPT_TEXT(" twice!")
 		);
 
+		ret.first->second->inc_ref();
 		// FIXME: why does this still happen?
 #if 0
 		throw exception(
