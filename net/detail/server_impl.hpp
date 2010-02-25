@@ -46,7 +46,6 @@ private:
 
 	id_type id_counter_;
 	connection_container connections_;
-	unsigned handlers_;
 
 	fcppt::signal::object<server::connect_fun> connect_signal_;
 	fcppt::signal::object<server::disconnect_fun> disconnect_signal_;

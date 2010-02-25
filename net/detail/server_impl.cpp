@@ -20,25 +20,22 @@
 sanguis::net::detail::server_impl::server_impl()
 :
 	io_service_(
-		detail::io_service_wrapper()
-	),
+		detail::io_service_wrapper()),
 	acceptor_(
-		io_service_
-	),
+		io_service_),
 	id_counter_(
-		static_cast<id_type>(0)),
-	handlers_(0)
+		static_cast<id_type>(0))
 {}
 
-void sanguis::net::detail::server_impl::listen(
+void 
+sanguis::net::detail::server_impl::listen(
 	port_type const port)
 {
 	FCPPT_LOG_DEBUG(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("server: listening on port ")
-			<< port
-	);
+			<< port);
 
 	boost::asio::ip::tcp::endpoint endpoint(
 		boost::asio::ip::tcp::v4(),
@@ -55,7 +52,8 @@ void sanguis::net::detail::server_impl::listen(
 	accept();
 }
 
-void sanguis::net::detail::server_impl::process()
+void 
+sanguis::net::detail::server_impl::process()
 {
 	BOOST_FOREACH(connection_container::reference c,connections_)
 	{
@@ -81,23 +79,20 @@ void sanguis::net::detail::server_impl::process()
 				std::tr1::ref(c)
 			)
 		);
-
-		handlers_++;
 	}
 
-	if (handlers_)
-	{
-		boost::system::error_code e;
-		io_service_.poll(e);
-		if (e)
-			throw exception(
-				FCPPT_TEXT("poll error: ")+
-				fcppt::iconv(
-					e.message()));
-	}
+	boost::system::error_code e;
+	io_service_.poll(
+		e);
+	if (e)
+		throw exception(
+			FCPPT_TEXT("poll error: ")+
+			fcppt::iconv(
+				e.message()));
 }
 
-void sanguis::net::detail::server_impl::queue(
+void 
+sanguis::net::detail::server_impl::queue(
 	data_type const &s)
 {
 	BOOST_FOREACH(connection_container::reference c,connections_)
@@ -109,11 +104,14 @@ void sanguis::net::detail::server_impl::queue(
 	}
 }
 
-void sanguis::net::detail::server_impl::queue(
+void 
+sanguis::net::detail::server_impl::queue(
 	id_type const id,
 	data_type const &s)
 {
-	BOOST_FOREACH(connection_container::reference c,connections_)
+	BOOST_FOREACH(
+		connection_container::reference c,
+		connections_)
 	{
 		if (c.id_ != id)
 			continue;
@@ -137,28 +135,32 @@ void sanguis::net::detail::server_impl::queue(
 			id));
 }
 
-fcppt::signal::auto_connection sanguis::net::detail::server_impl::register_connect(
+fcppt::signal::auto_connection 
+sanguis::net::detail::server_impl::register_connect(
 	server::connect_function const &f)
 {
 	return connect_signal_.connect(
 		f);
 }
 
-fcppt::signal::auto_connection sanguis::net::detail::server_impl::register_disconnect(
+fcppt::signal::auto_connection 
+sanguis::net::detail::server_impl::register_disconnect(
 	server::disconnect_function const &f)
 {
 	return disconnect_signal_.connect(
 		f);
 }
 
-fcppt::signal::auto_connection sanguis::net::detail::server_impl::register_data(
+fcppt::signal::auto_connection 
+sanguis::net::detail::server_impl::register_data(
 	server::data_function const &f)
 {
 	return data_signal_.connect(
 		f);
 }
 
-void sanguis::net::detail::server_impl::accept()
+void 
+sanguis::net::detail::server_impl::accept()
 {
 	connections_.push_back(
 		new connection(
@@ -176,17 +178,14 @@ void sanguis::net::detail::server_impl::accept()
 			std::tr1::ref(c)
 		)
 	);
-
-	handlers_++;
 }
 
-void sanguis::net::detail::server_impl::read_handler(
+void 
+sanguis::net::detail::server_impl::read_handler(
 	boost::system::error_code const &e,
 	std::size_t const bytes,
 	connection &c)
 {
-	handlers_--;
-
 	if (e)
 	{
 		handle_error(FCPPT_TEXT("server read"),e,c);
@@ -221,17 +220,14 @@ void sanguis::net::detail::server_impl::read_handler(
 			)
 		)
 	);
-
-	handlers_++;
 }
 
-void sanguis::net::detail::server_impl::write_handler(
+void 
+sanguis::net::detail::server_impl::write_handler(
 	boost::system::error_code const &e,
 	std::size_t const bytes,
 	connection &c)
 {
-	handlers_--;
-
 	if (e)
 	{
 		handle_error(
@@ -276,16 +272,13 @@ void sanguis::net::detail::server_impl::write_handler(
 			std::tr1::ref(c)
 		)
 	);
-
-	handlers_++;
 }
 
-void sanguis::net::detail::server_impl::accept_handler(
+void 
+sanguis::net::detail::server_impl::accept_handler(
 	boost::system::error_code const &e,
 	connection &c)
 {
-	handlers_--;
-
 	if (e)
 	{
 		FCPPT_LOG_DEBUG(
@@ -321,11 +314,11 @@ void sanguis::net::detail::server_impl::accept_handler(
 		)
 	);
 
-	handlers_++;
 	accept();
 }
 
-void sanguis::net::detail::server_impl::handle_error(
+void 
+sanguis::net::detail::server_impl::handle_error(
 	fcppt::string const &message,
 	boost::system::error_code const &e,
 	connection const &c)
