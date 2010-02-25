@@ -11,9 +11,11 @@
 
 sanguis::server::perks::auto_ptr
 sanguis::server::perks::create(
-	perk_type::type const pt)
+	perk_type::type const pt
+)
 {
-	switch(pt) {
+	switch(pt)
+	{
 	case perk_type::choleric:
 		return auto_ptr(
 			new choleric()
@@ -38,9 +40,10 @@ sanguis::server::perks::create(
 		return auto_ptr(
 			new regeneration()
 		);
-	default:
-		throw exception(
-			FCPPT_TEXT("Invalid perk type!")
-		);
 	}
+
+	throw exception(
+		FCPPT_TEXT("Invalid perk type!")
+	);
+
 }

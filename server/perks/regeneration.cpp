@@ -46,7 +46,7 @@ sanguis::server::perks::regeneration::unapply(
 bool
 sanguis::server::perks::regeneration::can_raise_level() const
 {
-	return level() <= 3;
+	return level() < 3;
 }
 
 sanguis::server::entities::property::value const

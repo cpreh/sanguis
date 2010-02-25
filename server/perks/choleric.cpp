@@ -90,7 +90,7 @@ sanguis::server::perks::choleric::update(
 bool
 sanguis::server::perks::choleric::can_raise_level() const
 {
-	return level() <= 10;
+	return level() < 10;
 }
 
 void

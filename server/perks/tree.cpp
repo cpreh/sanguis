@@ -9,12 +9,16 @@
 namespace
 {
 
-struct perk_equal {
+struct perk_equal
+{
 	explicit perk_equal(
-		sanguis::perk_type::type);
+		sanguis::perk_type::type
+	);
 	
-	bool operator()(
-		sanguis::server::perks::tree::tree_type const &) const;
+	bool
+	operator()(
+		sanguis::server::perks::tree::tree_type const &
+	) const;
 private:
 	sanguis::perk_type::type p;
 };
@@ -81,7 +85,8 @@ sanguis::server::perks::tree::~tree()
 bool
 sanguis::server::perks::tree::choosable(
 	perk_type::type const p,
-	server::level_type const player_level) const
+	server::level_type const player_level
+) const
 {
 	typedef 
 	fcppt::container::tree::in_order<
@@ -139,7 +144,8 @@ sanguis::server::perks::tree::choosable(
 
 void
 sanguis::server::perks::tree::take(
-	perk_type::type const p)
+	perk_type::type const p
+)
 {
 	typedef 
 	fcppt::container::tree::in_order<
@@ -167,7 +173,8 @@ sanguis::server::perks::tree::take(
 
 sanguis::server::perks::list const
 sanguis::server::perks::tree::choosables(
-	server::level_type const player_level) const
+	server::level_type const player_level
+) const
 {
 	// TODO: very wasteful but easy
 	list ret;
@@ -197,7 +204,8 @@ namespace
 {
 
 perk_equal::perk_equal(
-	sanguis::perk_type::type const p)
+	sanguis::perk_type::type const p
+)
 :
 	p(p)
 {}

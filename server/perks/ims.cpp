@@ -46,7 +46,7 @@ sanguis::server::perks::ims::unapply(
 bool
 sanguis::server::perks::ims::can_raise_level() const
 {
-	return level() <= 7;
+	return level() < 7;
 }
 
 sanguis::server::entities::property::value const
