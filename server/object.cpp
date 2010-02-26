@@ -24,8 +24,12 @@ sanguis::server::object::object(
 		)
 	),
 	running_(
-		true)
-{}
+		true),
+	timer_(
+		new boost::asio::deadline_timer(
+			_io_service))
+{
+}
 
 void
 sanguis::server::object::quit()
@@ -33,7 +37,6 @@ sanguis::server::object::quit()
 	running_ = false;
 	machine_.stop();
 }
-
 
 sanguis::server::object::~object()
 {}

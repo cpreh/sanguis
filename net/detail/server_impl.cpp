@@ -16,14 +16,30 @@
 #include <boost/foreach.hpp>
 #include <iostream>
 
-sanguis::net::detail::server_impl::server_impl()
+sanguis::net::detail::server_impl::server_impl(
+	server::time_resolution const &_time_duration)
 :
 	io_service_(),
 	acceptor_(
 		io_service_),
 	id_counter_(
-		static_cast<id_type>(0))
-{}
+		static_cast<id_type>(0)),
+	time_duration_(
+		_time_duration),
+	timer_(
+		new boost::asio::deadline_timer(
+			io_service_))
+{
+	timer_->expires_from_now(
+		server::time_resolution(
+			16));
+
+	timer_->async_wait(
+		boost::bind(
+			&server::handle_timeout,
+			this,
+			boost::asio::placeholders::error));
+}
 
 void 
 sanguis::net::detail::server_impl::listen(
@@ -186,6 +202,14 @@ sanguis::net::detail::server_impl::register_data(
 	return data_signal_.connect(
 		f
 	);
+}
+
+fcppt::signal::auto_connection 
+sanguis::net::detail::server_impl::register_timer(
+	server::timer_function const &_f)
+{
+	return timer_signal_.connect(
+		f);
 }
 
 void 
