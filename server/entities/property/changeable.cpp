@@ -1,6 +1,7 @@
 #include "changeable.hpp"
 #include "initial.hpp"
 #include "../../../exception.hpp"
+#include <fcppt/math/compare.hpp>
 #include <fcppt/text.hpp>
 #include <algorithm>
 
@@ -49,7 +50,10 @@ sanguis::server::entities::property::changeable::current(
 	current_ = ncurrent_;
 
 	if(
-		old != current()
+		!fcppt::math::compare(
+			old,
+			current()
+		)
 	)
 		change_signal_(
 			current()
@@ -92,8 +96,6 @@ sanguis::server::entities::property::changeable::register_max_change_callback(
 		);
 }
 
-#include <iostream>
-
 void
 sanguis::server::entities::property::changeable::on_recalc_max(
 	value_type const nmax_
@@ -104,8 +106,6 @@ sanguis::server::entities::property::changeable::on_recalc_max(
 	max_change_signal_(
 		max()
 	);
-
-	std::cerr << "min(current_, max_): " << current_ << ' ' << max_ << '\n';
 
 	current(
 		std::min(
@@ -118,8 +118,6 @@ sanguis::server::entities::property::changeable::on_recalc_max(
 void
 sanguis::server::entities::property::changeable::check_current()
 {
-	std::cerr << "current > max: " << current_ << ' ' << max_ << '\n';
-
 	if(
 		current_ > max_
 	)

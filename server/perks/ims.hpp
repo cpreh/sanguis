@@ -31,7 +31,7 @@ private:
 	can_raise_level() const;
 
 	static
-	entities::property::value const
+	entities::property::value 
 	factor(
 		level_type
 	);

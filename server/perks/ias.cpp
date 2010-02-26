@@ -38,14 +38,10 @@ sanguis::server::perks::ias::can_raise_level() const
 	return level() < 8;
 }
 
-sanguis::server::entities::property::value const
+sanguis::server::entities::property::value
 sanguis::server::perks::ias::factor(
 	level_type const level_
 )
 {
-	return
-		entities::property::value(
-			level_,
-			5
-		);
+	return level_ * 0.2f;
 }

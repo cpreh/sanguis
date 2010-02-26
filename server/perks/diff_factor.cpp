@@ -1,8 +1,8 @@
 #include "diff_factor.hpp"
 
-sanguis::server::entities::property::value const
+sanguis::server::entities::property::value
 sanguis::server::perks::diff_factor(
-	entities::property::value const (*const factor_)(level_type),
+	entities::property::value (*const factor_)(level_type),
 	level_type const level_,
 	level_diff const diff_
 )

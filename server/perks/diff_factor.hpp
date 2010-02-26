@@ -12,9 +12,9 @@ namespace server
 namespace perks
 {
 
-entities::property::value const
+entities::property::value
 diff_factor(
-	entities::property::value const (*)(level_type),
+	entities::property::value (*)(level_type),
 	level_type,
 	level_diff
 );

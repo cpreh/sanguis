@@ -38,14 +38,10 @@ sanguis::server::perks::ims::can_raise_level() const
 	return level() < 7;
 }
 
-sanguis::server::entities::property::value const
+sanguis::server::entities::property::value
 sanguis::server::perks::ims::factor(
 	level_type const level_
 )
 {
-	return
-		entities::property::value(
-			level_,
-			10
-		);
+	return level_ * 0.1f;
 }
