@@ -92,6 +92,8 @@ sanguis::server::entities::property::changeable::register_max_change_callback(
 		);
 }
 
+#include <iostream>
+
 void
 sanguis::server::entities::property::changeable::on_recalc_max(
 	value_type const nmax_
@@ -102,6 +104,8 @@ sanguis::server::entities::property::changeable::on_recalc_max(
 	max_change_signal_(
 		max()
 	);
+
+	std::cerr << "min(current_, max_): " << current_ << ' ' << max_ << '\n';
 
 	current(
 		std::min(
@@ -114,6 +118,8 @@ sanguis::server::entities::property::changeable::on_recalc_max(
 void
 sanguis::server::entities::property::changeable::check_current()
 {
+	std::cerr << "current > max: " << current_ << ' ' << max_ << '\n';
+
 	if(
 		current_ > max_
 	)
