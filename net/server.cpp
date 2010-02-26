@@ -2,10 +2,12 @@
 #include "detail/server_impl.hpp"
 #include "detail/connection.hpp"
 
-sanguis::net::server::server()
+sanguis::net::server::server(
+	time_resolution const &_r)
 :	
 	impl_(
-	 	new detail::server_impl())
+	 	new detail::server_impl(
+			_r))
 {}
 
 fcppt::signal::auto_connection 
@@ -32,6 +34,15 @@ sanguis::net::server::register_data(
 {
 	return 
 		impl_->register_data(
+			_f);
+}
+
+fcppt::signal::auto_connection 
+sanguis::net::server::register_timer(
+	timer_function const &_f)
+{
+	return 
+		impl_->register_timer(
 			_f);
 }
 

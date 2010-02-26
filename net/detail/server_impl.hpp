@@ -9,6 +9,7 @@
 #include "connection_fwd.hpp"
 #include <boost/system/error_code.hpp>
 #include <boost/asio/io_service.hpp>
+#include <boost/asio/deadline_timer.hpp>
 #include <boost/asio/ip/tcp.hpp>
 #include <fcppt/signal/object.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -26,12 +27,13 @@ class server_impl
 {
 	FCPPT_NONCOPYABLE(server_impl)
 public:
-	server_impl();
+	explicit
+	server_impl(
+		server::time_resolution const &);
 
 	void
 	listen(
-		port_type
-	);
+		port_type);
 
 	void
 	process();
@@ -39,28 +41,27 @@ public:
 	void
 	queue(
 		id_type,
-		data_type const &
-	);
+		data_type const &);
 
 	void
 	queue(
-		data_type const &
-	);
+		data_type const &);
 
 	fcppt::signal::auto_connection
 	register_connect(
-		server::connect_function const &
-	);
+		server::connect_function const &);
 
 	fcppt::signal::auto_connection
 	register_disconnect(
-		server::disconnect_function const &
-	);
+		server::disconnect_function const &);
 	
 	fcppt::signal::auto_connection
 	register_data(
-		server::data_function const &
-	);
+		server::data_function const &);
+
+	fcppt::signal::auto_connection
+	register_timer(
+		server::timer_function const &);
 
 	void
 	run();
@@ -76,9 +77,16 @@ private:
 	id_type id_counter_;
 	connection_container connections_;
 
+	server::time_resolution const timer_duration_;
+
+	// NOTE: The deadline_timer is gone after it first triggers
+	// so we have to create a new one every time
+	fcppt::auto_ptr<boost::asio::deadline_timer> timer_;
+
 	fcppt::signal::object<server::connect_fun> connect_signal_;
 	fcppt::signal::object<server::disconnect_fun> disconnect_signal_;
 	fcppt::signal::object<server::data_fun> data_signal_;
+	fcppt::signal::object<server::timer_fun> timer_signal_;
 
 	void
 	accept();
@@ -109,6 +117,10 @@ private:
 		boost::system::error_code const &,
 		connection const &
 	);
+
+	void
+	handle_timeout(
+		boost::system::error_code const &);
 };
 
 }

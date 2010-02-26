@@ -38,10 +38,11 @@ private:
 	void
 	mainloop();
 
+	void
+	handle_timeout();
+
 	server::machine machine_;
-
 	fcppt::thread::object server_thread_;
-
 	bool running_;
 };
 

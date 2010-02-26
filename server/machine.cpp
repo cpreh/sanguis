@@ -26,6 +26,9 @@ sanguis::server::machine::machine(
 	port_(
 		port_
 	),
+	net_(
+		net::server::time_resolution(
+			16)),
 	s_conn(
 		net_.register_connect(
 			std::tr1::bind(
@@ -55,6 +58,11 @@ sanguis::server::machine::machine(
 			)
 		)
 	),
+	s_timer(
+		net_.register_timer(
+			std::tr1::bind(
+				&machine::timer_callback,
+				this))),
 	clients_(),
 	collision_(collision_)
 {
@@ -174,6 +182,12 @@ sanguis::server::machine::data_callback(
 	}
 	//while (messages::auto_ptr p = deserialize(clients[id].in_buffer))
 	//	process_message(id,p);
+}
+
+void
+sanguis::server::machine::timer_callback()
+{
+	run();
 }
 
 void

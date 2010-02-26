@@ -11,6 +11,7 @@
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/scoped_ptr.hpp>
+#include <boost/date_time.hpp>
 
 namespace sanguis
 {
@@ -23,12 +24,16 @@ public:
 	typedef void connect_fun (id_type);
 	typedef void disconnect_fun (id_type,fcppt::string const &);
 	typedef void data_fun (id_type,data_type const &);
+	typedef void timer_fun ();
 	typedef fcppt::function::object<connect_fun> connect_function;
 	typedef fcppt::function::object<disconnect_fun> disconnect_function;
 	typedef fcppt::function::object<data_fun> data_function;
+	typedef fcppt::function::object<timer_fun> timer_function;
+	typedef boost::posix_time::milliseconds time_resolution;
 
 	explicit
-	server();
+	server(
+		time_resolution const &);
 
 	void
 	listen(
@@ -58,6 +63,10 @@ public:
 	fcppt::signal::auto_connection
 	register_data(
 		data_function const &);
+	
+	fcppt::signal::auto_connection
+	register_timer(
+		timer_function const &);
 
 	void 
 	run();

@@ -25,7 +25,8 @@ sanguis::server::object::object(
 	),
 	running_(
 		true)
-{}
+{
+}
 
 void
 sanguis::server::object::quit()
@@ -33,7 +34,6 @@ sanguis::server::object::quit()
 	running_ = false;
 	machine_.stop();
 }
-
 
 sanguis::server::object::~object()
 {}
