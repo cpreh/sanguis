@@ -1,7 +1,6 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_BASE_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_BASE_HPP_INCLUDED
 
-#include "ref_count.hpp"
 #include "../sprite/point.hpp"
 #include "../sprite/dim.hpp"
 #include "../../../time_type.hpp"
@@ -30,12 +29,6 @@ public:
 	void
 	decay();
 
-	void
-	remove();
-
-	virtual void
-	on_remove();
-
 	bool
 	may_be_removed() const;
 	
@@ -53,22 +46,14 @@ public:
 	center() const = 0;
 
 	virtual ~base();
-
-	void
-	inc_ref();
 private:
 	virtual void
 	on_decay();
-
-	bool
-	dec_ref();
 
 	virtual bool
 	is_decayed() const;
 
 	bool removed_;
-
-	ref_count refs_;
 };
 
 }

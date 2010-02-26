@@ -34,6 +34,11 @@ private:
 		entity_id
 	);
 
+	void
+	remove(
+		entity_id
+	);
+
 	entities::base &
 	entity(
 		entity_id

@@ -278,9 +278,9 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	sanguis::messages::remove const &m
 )
 {
-	entity(
+	env_.remove(
 		m.get<sanguis::messages::roles::entity_id>()
-	).remove();
+	);
 }
 
 sanguis::client::draw2d::message::dispatcher::result_type

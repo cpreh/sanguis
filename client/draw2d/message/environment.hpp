@@ -35,6 +35,11 @@ public:
 		entity_id
 	) = 0;
 
+	virtual void
+	remove(
+		entity_id
+	) = 0;
+
 	virtual entities::base &
 	entity(
 		entity_id
