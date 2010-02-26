@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_MACHINE_HPP_INCLUDED
 #define SANGUIS_CLIENT_MACHINE_HPP_INCLUDED
 
+#include "states/menu_fwd.hpp"
 #include "cursor/object_ptr.hpp"
 #include "cursor/const_object_ptr.hpp"
 #include "highscore/name_container.hpp"

@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_PERKS_CHOLERIC_HPP_INCLUDED
 
 #include "perk.hpp"
+#include "level_diff.hpp"
 #include "../space_unit.hpp"
 #include "../../diff_clock.hpp"
 #include <sge/time/timer.hpp>
@@ -32,13 +33,9 @@ private:
 	can_raise_level() const;
 
 	void
-	apply(
-		entities::base &
-	);
-
-	void
-	unapply(
-		entities::base &
+	change(
+		entities::base &,
+		level_diff
 	);
 
 	diff_clock       clock_;

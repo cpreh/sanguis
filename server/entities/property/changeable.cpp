@@ -1,6 +1,7 @@
 #include "changeable.hpp"
 #include "initial.hpp"
 #include "../../../exception.hpp"
+#include <fcppt/math/compare.hpp>
 #include <fcppt/text.hpp>
 #include <algorithm>
 
@@ -49,7 +50,10 @@ sanguis::server::entities::property::changeable::current(
 	current_ = ncurrent_;
 
 	if(
-		old != current()
+		!fcppt::math::compare(
+			old,
+			current()
+		)
 	)
 		change_signal_(
 			current()

@@ -1,7 +1,7 @@
 #include "regeneration.hpp"
+#include "diff_factor.hpp"
 #include "../entities/property/value.hpp"
-#include "../entities/property/constant_add.hpp"
-#include "../entities/property/constant_remove.hpp"
+#include "../entities/property/constant_change.hpp"
 #include "../entities/with_health.hpp"
 
 sanguis::server::perks::regeneration::regeneration()
@@ -12,49 +12,36 @@ sanguis::server::perks::regeneration::regeneration()
 {}
 
 void
-sanguis::server::perks::regeneration::apply(
-	entities::base &entity_
+sanguis::server::perks::regeneration::change(
+	entities::base &entity_,
+	level_diff const diff_
 )
 {
-	entities::property::constant_add(
+	entities::property::constant_change(
 		dynamic_cast<
 			entities::with_health &
 		>(
 			entity_
 		)
 		.regeneration(),
-		factor()
-	);
-}
-
-void
-sanguis::server::perks::regeneration::unapply(
-	entities::base &entity_
-)
-{
-	entities::property::constant_remove(
-		dynamic_cast<
-			entities::with_health &
-		>(
-			entity_
+		diff_factor(
+			factor,
+			level(),
+			diff_
 		)
-		.regeneration(),
-		factor()
 	);
 }
 
 bool
 sanguis::server::perks::regeneration::can_raise_level() const
 {
-	return level() <= 3;
+	return level() < 3;
 }
 
-sanguis::server::entities::property::value const
-sanguis::server::perks::regeneration::factor() const
+sanguis::server::entities::property::value
+sanguis::server::perks::regeneration::factor(
+	level_type const level_
+)
 {
-	return
-		entities::property::value(
-			level() * 3,
-			4
-		);
+	return level_ * 0.75f;
 }

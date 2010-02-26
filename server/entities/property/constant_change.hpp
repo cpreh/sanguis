@@ -1,5 +1,5 @@
-#ifndef SANGUIS_SERVER_ENTITIES_PROPERTY_CONSTANT_ADD_HPP_INCLUDED
-#define SANGUIS_SERVER_ENTITIES_PROPERTY_CONSTANT_ADD_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_ENTITIES_PROPERTY_CONSTANT_CHANGE_HPP_INCLUDED
+#define SANGUIS_SERVER_ENTITIES_PROPERTY_CONSTANT_CHANGE_HPP_INCLUDED
 
 #include "base_fwd.hpp"
 #include "value.hpp"
@@ -14,7 +14,7 @@ namespace property
 {
 
 void
-constant_add(
+constant_change(
 	base &,
 	value const &
 );

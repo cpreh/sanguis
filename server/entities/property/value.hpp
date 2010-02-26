@@ -1,7 +1,8 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PROPERTY_VALUE_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PROPERTY_VALUE_HPP_INCLUDED
 
-#include <boost/rational.hpp>
+//#include "unit.hpp"
+//#include <boost/rational.hpp>
 
 namespace sanguis
 {
@@ -12,9 +13,10 @@ namespace entities
 namespace property
 {
 
-typedef boost::rational<
-	unsigned long
-> value;
+typedef float value;
+/*typedef boost::rational<
+	unit
+> value;*/
 
 }
 }

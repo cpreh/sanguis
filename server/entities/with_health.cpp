@@ -103,7 +103,7 @@ sanguis::server::entities::with_health::on_update(
 bool
 sanguis::server::entities::with_health::dead() const
 {
-	return health_.current() == 0;
+	return health_.current() <= 0;
 }
 
 bool

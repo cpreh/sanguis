@@ -1,8 +1,8 @@
-#include "constant_remove.hpp"
+#include "constant_change.hpp"
 #include "base.hpp"
 
 void
-sanguis::server::entities::property::constant_remove(
+sanguis::server::entities::property::constant_change(
 	base &base_,
 	value const &value_
 )
@@ -11,7 +11,7 @@ sanguis::server::entities::property::constant_remove(
 		base_.constant()
 	);
 
-	constant_.remove(
+	constant_.change(
 		value_
 	);
 

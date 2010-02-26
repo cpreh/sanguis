@@ -96,10 +96,7 @@ sanguis::server::entities::projectiles::grenade::on_update(
 	)
 		movement_speed().current(
 			movement_speed().current()
-			* property::value(
-				9,
-				10
-			)
+			* 0.9f
 		);
 	
 	projectile::on_update(

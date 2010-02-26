@@ -234,13 +234,9 @@ sanguis::client::draw2d::scene::object::draw(
 		if(
 			e.may_be_removed()
 		)
-		{
-			e.on_remove();
-
 			entities_.erase(
 				it
 			);
-		}
 	}
 
 	render_systems();
@@ -394,12 +390,11 @@ sanguis::client::draw2d::scene::object::insert(
 		FCPPT_LOG_ERROR(
 			log(),
 			fcppt::log::_
-				<< FCPPT_TEXT("draw: Tried to insert object with id ")
+				<< FCPPT_TEXT("Tried to insert object with id ")
 				<< id
 				<< FCPPT_TEXT(" twice!")
 		);
 
-		ret.first->second->inc_ref();
 		// FIXME: why does this still happen?
 #if 0
 		throw exception(
@@ -414,6 +409,26 @@ sanguis::client::draw2d::scene::object::insert(
 	}
 	
 	return *ret.first->second;
+}
+
+void
+sanguis::client::draw2d::scene::object::remove(
+	entity_id const id
+)
+{
+	if(
+		!entities_.erase(
+			id
+		)
+	)
+		throw exception(
+			(
+				fcppt::format(
+					FCPPT_TEXT("Object with id %1% cannot be removed!")
+				)
+				% id
+			).str()
+		);
 }
 
 sanguis::client::draw2d::entities::base &
@@ -433,7 +448,7 @@ sanguis::client::draw2d::scene::object::entity(
 		throw exception(
 			(
 				fcppt::format(
-					FCPPT_TEXT("draw: Object with id %1% not in entity map!")
+					FCPPT_TEXT("Object with id %1% not in entity map!")
 				)
 				% id
 			).str()

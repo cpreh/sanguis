@@ -2,10 +2,11 @@
 #define SANGUIS_SERVER_ENTITIES_PROPERTY_FROM_FLOAT_HPP_INCLUDED
 
 #include "value.hpp"
-#include "../../../exception.hpp"
-#include <fcppt/text.hpp>
-#include <cstdlib>
-#include <math.h> // TODO: check if we have frexp!
+//#include "../../../exception.hpp"
+//#include <fcppt/math/almost_zero.hpp>
+//#include <fcppt/format.hpp>
+//#include <fcppt/text.hpp>
+//#include <cmath>
 
 namespace sanguis
 {
@@ -19,63 +20,99 @@ namespace property
 template<
 	typename Float
 >
-value const
+value 
 from_float(
 	Float const float_
 )
 {
+	return static_cast<value>(float_);
+#if 0
+	if(
+		fcppt::math::almost_zero(
+			float_
+		)
+	)
+		return
+			value(
+				0,
+				1
+			);
 	int exp;
 
-	double const frac(
-		frexp(
+	Float const frac(
+		std::frexp(
 			float_,
 			&exp
 		)
 	);
 
-	if(
-		frac < 0.0
-	)
-		throw exception(
-			FCPPT_TEXT("Tried to convert a negative floating point number into a rational!")
+	Float const
+		dexp(
+			std::pow(
+				static_cast<Float>(2),
+				std::abs(
+					exp
+				)
+			)
+		),
+		pot(
+			std::pow(
+				static_cast<Float>(10),
+				std::abs(
+					exp
+				)
+			)
+		),
+		num_exp(
+			exp > 0
+			?
+				dexp
+			:
+				1
+		),
+		den_exp(
+			exp < 0
+			?
+				dexp
+			:
+				1
 		);
 
 	value::int_type const
-		factor(
-			1000
+		num(
+			static_cast<
+				value::int_type
+			>(
+				num_exp * frac * pot
+			)
 		),
-		power(
-			1 << std::abs(exp)
+		den(
+			static_cast<
+				value::int_type
+			>(
+				den_exp * pot
+			)
+		);
+	
+	std::cerr << "dexp: " << dexp <<  ", pot: " << pot << ", float_: " << float_ <<  ", frac: " << frac << ", exp: " << exp << ", num: " << num << ", den: " << den << '\n';
+
+	if(
+		den <= 0
+	)
+		throw exception(
+			(
+				fcppt::format(
+					FCPPT_TEXT("from_float: den is <= 0 (%1%)")
+				)
+				% den
+			).str()
 		);
 
 	return value(
-		static_cast<
-			value::int_type
-		>(
-			frac
-			* static_cast<
-				Float
-			>(
-				factor
-			)
-		)
-		* (
-			(exp > 0)
-			?
-				power
-			:
-				1
-		),
-		factor
-		* (
-			(exp < 0)
-			?
-				power
-			:
-				1
-		)
+		num,
+		den
 	);
-
+#endif
 }
 
 }

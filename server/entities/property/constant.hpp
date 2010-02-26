@@ -13,19 +13,15 @@ namespace entities
 namespace property
 {
 
-class constant {
+class constant
+{
 public:
 	typedef property::value value_type;
 
 	constant();
 
 	void
-	add(
-		value_type
-	);
-
-	void
-	remove(
+	change(
 		value_type
 	);
 
