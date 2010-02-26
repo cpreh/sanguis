@@ -49,7 +49,6 @@ sanguis::server::entities::with_perks::add_perk(
 	perk_.raise_level(
 		*this
 	);
-
 }
 
 sanguis::server::entities::with_perks::with_perks()

@@ -14,20 +14,25 @@ sanguis::server::cheat(
 {
 	switch(type) {
 	case cheat_type::impulse101:
-		FCPPT_FOREACH_ENUMERATOR_START(
-			index,
-			weapon_type,
-			weapon_type::pistol
+		for(
+			unsigned i = 0;
+			i < 50;
+			++i
 		)
-			p.add_weapon(
-				weapons::create(
-					static_cast<
-						weapon_type::type
-					>(
-						index
+			FCPPT_FOREACH_ENUMERATOR_START(
+				index,
+				weapon_type,
+				weapon_type::pistol
+			)
+				p.add_weapon(
+					weapons::create(
+						static_cast<
+							weapon_type::type
+						>(
+							index
+						)
 					)
-				)
-			);
+				);
 		break;
 	case cheat_type::kill:
 		p.die();

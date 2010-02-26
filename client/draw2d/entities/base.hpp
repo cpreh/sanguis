@@ -26,14 +26,8 @@ public:
 		time_type
 	) = 0;
 
-	virtual void
-	decay();
-
 	void
-	remove();
-
-	virtual void
-	on_remove();
+	decay();
 
 	bool
 	may_be_removed() const;
@@ -53,6 +47,9 @@ public:
 
 	virtual ~base();
 private:
+	virtual void
+	on_decay();
+
 	virtual bool
 	is_decayed() const;
 

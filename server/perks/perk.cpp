@@ -23,15 +23,12 @@ sanguis::server::perks::perk::raise_level(
 			FCPPT_TEXT("Can't raise perk level!")
 		);
 	
-	unapply(
-		owner_
+	change(
+		owner_,
+		1
 	);
 
 	++level_;
-
-	apply(
-		owner_
-	);
 }
 
 sanguis::perk_type::type
@@ -48,10 +45,10 @@ sanguis::server::perks::perk::perk(
 )
 :
 	type_(type_),
-	level_(1)
+	level_(0)
 {}
 
-sanguis::server::perks::perk::level_type
+sanguis::server::perks::level_type
 sanguis::server::perks::perk::level() const
 {
 	return level_;

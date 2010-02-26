@@ -1,8 +1,8 @@
-#include "linear_add.hpp"
+#include "linear_change.hpp"
 #include "base.hpp"
 
 void
-sanguis::server::entities::property::linear_add(
+sanguis::server::entities::property::linear_change(
 	base &base_,
 	value const &value_
 )
@@ -11,7 +11,7 @@ sanguis::server::entities::property::linear_add(
 		base_.linear()
 	);
 
-	linear_.add(
+	linear_.change(
 		value_
 	);
 

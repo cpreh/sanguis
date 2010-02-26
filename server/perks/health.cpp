@@ -1,7 +1,7 @@
 #include "health.hpp"
+#include "diff_factor.hpp"
 #include "../entities/property/value.hpp"
-#include "../entities/property/constant_add.hpp"
-#include "../entities/property/constant_remove.hpp"
+#include "../entities/property/constant_change.hpp"
 #include "../entities/with_health.hpp"
 
 sanguis::server::perks::health::health()
@@ -12,49 +12,40 @@ sanguis::server::perks::health::health()
 {}
 
 void
-sanguis::server::perks::health::apply(
-	entities::base &entity_
+sanguis::server::perks::health::change(
+	entities::base &entity_,
+	level_diff const diff_
 )
 {
-	entities::property::constant_add(
+	entities::property::constant_change(
 		dynamic_cast<
 			entities::with_health &
 		>(
 			entity_
 		)
 		.health(),
-		factor()
-	);
-}
-
-void
-sanguis::server::perks::health::unapply(
-	entities::base &entity_
-)
-{
-	entities::property::constant_remove(
-		dynamic_cast<
-			entities::with_health &
-		>(
-			entity_
+		diff_factor(
+			factor,
+			level(),
+			diff_
 		)
-		.health(),
-		factor()
 	);
 }
 
 bool
 sanguis::server::perks::health::can_raise_level() const
 {
-	return level() <= 10;
+	return level() < 10;
 }
 
 sanguis::server::entities::property::value const
-sanguis::server::perks::health::factor() const
+sanguis::server::perks::health::factor(
+	level_type const level_
+)
 {
 	return
-		entities::property::value(
-			level() * 20,
+		sanguis::server::entities::property::value(
+			level_ * 20,
 			1
 		);
 }

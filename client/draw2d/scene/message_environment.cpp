@@ -28,6 +28,16 @@ sanguis::client::draw2d::scene::message_environment::insert(
 		);
 }
 
+void
+sanguis::client::draw2d::scene::message_environment::remove(
+	entity_id const id
+)
+{
+	object_.remove(
+		id
+	);
+}
+
 sanguis::client::draw2d::entities::base &
 sanguis::client::draw2d::scene::message_environment::entity(
 	entity_id const id

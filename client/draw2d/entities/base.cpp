@@ -1,4 +1,8 @@
 #include "base.hpp"
+#include "../log.hpp"
+#include <fcppt/log/headers.hpp>
+#include <fcppt/assert.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::client::draw2d::entities::base::base()
 :
@@ -8,19 +12,8 @@ sanguis::client::draw2d::entities::base::base()
 void
 sanguis::client::draw2d::entities::base::decay()
 {
-	// decay can be overridden so that is_decayed() can be used
-	removed_ = true;
+	on_decay();
 }
-
-void
-sanguis::client::draw2d::entities::base::remove()
-{
-	removed_ = true;
-}
-
-void
-sanguis::client::draw2d::entities::base::on_remove()
-{}
 
 bool
 sanguis::client::draw2d::entities::base::may_be_removed() const
@@ -32,6 +25,12 @@ sanguis::client::draw2d::entities::base::may_be_removed() const
 
 sanguis::client::draw2d::entities::base::~base()
 {}
+
+void
+sanguis::client::draw2d::entities::base::on_decay()
+{
+	removed_ = true;
+}
 
 bool
 sanguis::client::draw2d::entities::base::is_decayed() const

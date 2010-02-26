@@ -2,6 +2,8 @@
 #define SANGUIS_SERVER_PERKS_HEALTH_HPP_INCLUDED
 
 #include "perk.hpp"
+#include "level_type.hpp"
+#include "level_diff.hpp"
 #include "../entities/base_fwd.hpp"
 #include "../entities/property/value.hpp"
 
@@ -20,20 +22,19 @@ public:
 	health();
 private:
 	void
-	apply(
-		entities::base &
-	);
-
-	void
-	unapply(
-		entities::base &
+	change(
+		entities::base &,
+		level_diff
 	);
 
 	bool
 	can_raise_level() const;
 
+	static
 	entities::property::value const
-	factor() const;
+	factor(
+		level_type
+	);
 };
 
 }
