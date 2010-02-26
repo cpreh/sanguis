@@ -1,5 +1,6 @@
 #include "explosion.hpp"
 #include "../particle/explosion.hpp"
+#include "../particle/fade_time_range.hpp"
 #include "../particle/properties.hpp"
 #include "../particle/property_container.hpp"
 #include "../particle/object.hpp"
