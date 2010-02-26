@@ -11,6 +11,7 @@
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/scoped_ptr.hpp>
+#include <boost/date_time.hpp>
 
 namespace sanguis
 {

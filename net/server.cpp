@@ -37,6 +37,15 @@ sanguis::net::server::register_data(
 			_f);
 }
 
+fcppt::signal::auto_connection 
+sanguis::net::server::register_timer(
+	timer_function const &_f)
+{
+	return 
+		impl_->register_timer(
+			_f);
+}
+
 void 
 sanguis::net::server::listen(
 	port_type const _port)

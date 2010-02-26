@@ -24,10 +24,7 @@ sanguis::server::object::object(
 		)
 	),
 	running_(
-		true),
-	timer_(
-		new boost::asio::deadline_timer(
-			_io_service))
+		true)
 {
 }
 

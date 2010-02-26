@@ -9,6 +9,7 @@
 #include "connection_fwd.hpp"
 #include <boost/system/error_code.hpp>
 #include <boost/asio/io_service.hpp>
+#include <boost/asio/deadline_timer.hpp>
 #include <boost/asio/ip/tcp.hpp>
 #include <fcppt/signal/object.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -26,8 +27,9 @@ class server_impl
 {
 	FCPPT_NONCOPYABLE(server_impl)
 public:
+	explicit
 	server_impl(
-		boost::posix_time::time_duration const &);
+		server::time_resolution const &);
 
 	void
 	listen(
@@ -75,7 +77,7 @@ private:
 	id_type id_counter_;
 	connection_container connections_;
 
-	server::time_resolution const _time_duration;
+	server::time_resolution const timer_duration_;
 
 	// NOTE: The deadline_timer is gone after it first triggers
 	// so we have to create a new one every time
@@ -116,7 +118,9 @@ private:
 		connection const &
 	);
 
-
+	void
+	handle_timeout(
+		boost::system::error_code const &);
 };
 
 }

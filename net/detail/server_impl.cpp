@@ -13,30 +13,31 @@
 #include <fcppt/tr1/functional.hpp>
 #include <boost/asio/buffer.hpp>
 #include <boost/lambda/lambda.hpp>
+#include <boost/asio.hpp>
 #include <boost/foreach.hpp>
+#include <boost/bind.hpp>
 #include <iostream>
 
 sanguis::net::detail::server_impl::server_impl(
-	server::time_resolution const &_time_duration)
+	server::time_resolution const &_timer_duration)
 :
 	io_service_(),
 	acceptor_(
 		io_service_),
 	id_counter_(
 		static_cast<id_type>(0)),
-	time_duration_(
-		_time_duration),
+	timer_duration_(
+		_timer_duration),
 	timer_(
 		new boost::asio::deadline_timer(
 			io_service_))
 {
 	timer_->expires_from_now(
-		server::time_resolution(
-			16));
+		_timer_duration);
 
 	timer_->async_wait(
 		boost::bind(
-			&server::handle_timeout,
+			&server_impl::handle_timeout,
 			this,
 			boost::asio::placeholders::error));
 }
@@ -209,7 +210,7 @@ sanguis::net::detail::server_impl::register_timer(
 	server::timer_function const &_f)
 {
 	return timer_signal_.connect(
-		f);
+		_f);
 }
 
 void 
@@ -438,4 +439,34 @@ sanguis::net::detail::server_impl::handle_error(
 		connections_.end(),
 		&boost::lambda::_1 == &c
 	);
+}
+
+void
+sanguis::net::detail::server_impl::handle_timeout(
+	boost::system::error_code const &_e)
+{
+	if (_e)
+	{
+		FCPPT_LOG_DEBUG(
+			log(),
+			fcppt::log::_ << FCPPT_TEXT("server: error on timeout")
+		);
+
+		throw exception(
+			fcppt::iconv(
+				_e.message()
+			)
+		);
+	}
+
+	timer_signal_();
+
+	timer_->expires_from_now(
+		timer_duration_);
+			
+	timer_->async_wait(
+		boost::bind(
+			&server_impl::handle_timeout,
+			this,
+			boost::asio::placeholders::error));
 }
