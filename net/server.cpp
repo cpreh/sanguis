@@ -56,13 +56,6 @@ sanguis::net::server::listen(
 }
 
 void 
-sanguis::net::server::process()
-{
-	return 
-		impl_->process();
-}
-
-void 
 sanguis::net::server::queue(
 	id_type const _id,
 	data_type const &_data)

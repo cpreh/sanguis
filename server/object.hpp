@@ -6,6 +6,7 @@
 #include "../load/context_base_fwd.hpp"
 #include "../main_object.hpp"
 #include <sge/systems/instance_fwd.hpp>
+#include <sge/time/timer.hpp>
 #include <fcppt/thread/object.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <boost/program_options/variables_map.hpp>
@@ -21,7 +22,8 @@ class object
 {
 	FCPPT_NONCOPYABLE(object)
 public:
-	explicit object(
+	explicit 
+	object(
 		sge::systems::instance const &,
 		boost::program_options::variables_map const &,
 		load::context_base const &
@@ -39,9 +41,11 @@ private:
 	mainloop();
 
 	void
-	handle_timeout();
+	timer_callback();
 
+	sge::time::timer frame_timer_;
 	server::machine machine_;
+	fcppt::signal::scoped_connection const timer_connection_;
 	fcppt::thread::object server_thread_;
 	bool running_;
 };

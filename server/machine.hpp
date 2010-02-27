@@ -63,9 +63,6 @@ public:
 	);
 
 	void
-	timer_callback();
-
-	void
 	send_to_all(
 		messages::auto_ptr
 	);
@@ -113,8 +110,7 @@ private:
 	fcppt::signal::scoped_connection const
 		s_conn,
 		s_disconn,
-		s_data,
-		s_timer;
+		s_data;
 
 	client_map clients_;
 
