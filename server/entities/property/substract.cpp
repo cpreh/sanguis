@@ -7,6 +7,11 @@ sanguis::server::entities::property::substract(
 	value const &value_
 )
 {
+	changeable_.current(
+		changeable_.current()
+		- value_
+	);
+#if 0
 	value const sub(
 		changeable_.current()
 		- value_
@@ -19,4 +24,5 @@ sanguis::server::entities::property::substract(
 		:
 			sub
 	);
+#endif
 }
