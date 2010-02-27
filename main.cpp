@@ -128,7 +128,8 @@ try
 	> main_object_scoped_ptr;
 
 	main_object_scoped_ptr obj(
-		server_only
+		//server_only FIXME: seems to be true by default?
+		false
 		?
 			sanguis::server::create(
 				sys,

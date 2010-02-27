@@ -35,6 +35,7 @@
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/io/cerr.hpp>
 #include <fcppt/make_auto_ptr.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/text.hpp>
@@ -152,6 +153,7 @@ sanguis::client::object::object(
 	server_(),
 	variables_map_(variables_map_)
 {
+	fcppt::io::cerr << "client::object::object()\n";
 	if(	
 		args::multi_sampling(
 			variables_map_
@@ -178,6 +180,8 @@ sanguis::client::object::run()
 		sge::time::second(1)
 	);
 
+	fcppt::io::cerr << "run()\n";
+
 	while(
 		machine_.process(
 			tick_event(
@@ -188,7 +192,7 @@ sanguis::client::object::run()
 				)
 			)
 		)
-	) ;
+	) fcppt::io::cerr << "process()\n";
 
 	if(
 		server_

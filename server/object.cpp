@@ -34,6 +34,7 @@ sanguis::server::object::object(
 	running_(
 		true)
 {
+	fcppt::io::cerr << "server::object()\n";
 }
 
 void
@@ -49,6 +50,7 @@ sanguis::server::object::~object()
 int
 sanguis::server::object::run()
 {
+	fcppt::io::cerr << "server::object::run\n";
 	server_thread_.join();
 	return EXIT_SUCCESS;
 }
@@ -57,16 +59,12 @@ void
 sanguis::server::object::mainloop()
 {
 	while (running_)
-	{
-		fcppt::io::cerr << "mainloop()\n";
 		machine_.run();
-	}
 }
 
 void
 sanguis::server::object::timer_callback()
 {
-	fcppt::io::cerr << "timer_callback()\n";
 	sge::time::timer::frames_type const f = 
 		frame_timer_.elapsed_frames();
 	frame_timer_.reset();
