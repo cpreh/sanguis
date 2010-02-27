@@ -69,15 +69,24 @@ sanguis::client::states::menu::menu(
 {
 }
 
+#include <iostream>
+
 boost::statechart::result
 sanguis::client::states::menu::react(
-	tick_event const &t)
+	tick_event const &t
+)
 {
+	std::cerr << "menu::react\n";
+
 	context<machine>().dispatch();
+
+	std::cerr << "menu::react after dispatch\n";
 
 	menu_.process(
 		t.delta()
 	);
+
+	std::cerr << "menu::react after menu process\n";
 
 	return discard_event();
 }

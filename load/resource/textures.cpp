@@ -12,7 +12,6 @@
 #include <sge/renderer/filter/linear.hpp>
 #include <sge/renderer/resource_flags_none.hpp>
 #include <sge/image/loader.hpp>
-#include <sge/image/create_texture.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/filesystem/directory_iterator.hpp>
 #include <fcppt/filesystem/extension.hpp>
@@ -89,33 +88,44 @@ sanguis::load::resource::textures::~textures()
 
 sge::texture::part_ptr const
 sanguis::load::resource::textures::do_load(
-	texture_identifier const &id) const
+	texture_identifier const &id
+) const
 {
-	if (texture_names.find(id) == texture_names.end())
+	if(
+		texture_names.find(id) == texture_names.end()
+	)
 		throw exception(
 			FCPPT_TEXT("no texture for id \"")
 			+ id
-			+ FCPPT_TEXT("\" found"));
+			+ FCPPT_TEXT("\" found")
+		);
+
 	return do_load_inner(
 		sanguis::media_path()
-		/ texture_names[id]);
+		/ texture_names[id]
+	);
 }
 
 sanguis::load::resource::texture_context_impl_ptr const
 sanguis::load::resource::textures::do_load_unnamed(
-	fcppt::filesystem::path const &path) const
+	fcppt::filesystem::path const &path
+) const
 {
 	return 
-		fcppt::make_shared_ptr<texture_context_impl>(
+		fcppt::make_shared_ptr<
+			texture_context_impl
+		>(
 			path,
 			texman.renderer(),
 			il,
-			filter);
+			filter
+		);
 }
 
 sge::texture::part_ptr const
 sanguis::load::resource::textures::do_load_inner(
-	fcppt::filesystem::path const &p) const
+	fcppt::filesystem::path const &p
+) const
 {
 	return sge::texture::add_image(
 		texman,
@@ -125,7 +135,8 @@ sanguis::load::resource::textures::do_load_inner(
 
 sanguis::load::resource::textures::textures(
 	sge::renderer::device_ptr const rend,
-	sge::image::loader_ptr const il)
+	sge::image::loader_ptr const il
+)
 :
 	texman(
 		rend,
@@ -138,7 +149,8 @@ sanguis::load::resource::textures::textures(
 		)
 	),
 	il(
-		il)
+		il
+	)
 {
 	// look for .tex files
 	for (fcppt::filesystem::directory_iterator i(sanguis::media_path()), end; i != end; ++i)

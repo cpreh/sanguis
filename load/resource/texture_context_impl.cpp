@@ -1,5 +1,4 @@
 #include "texture_context_impl.hpp" 
-#include <fcppt/make_shared_ptr.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/renderer/resource_flags_none.hpp>
 #include <sge/image/create_texture.hpp>
@@ -8,6 +7,7 @@
 #include <sge/renderer/device.hpp>
 #include <sge/time/second.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::load::resource::texture_context_impl::texture_context_impl(
@@ -53,7 +53,10 @@ bool sanguis::load::resource::texture_context_impl::update()
 				rend_->create_texture(
 					future_.get()->view(),
 					filter_,
-					sge::renderer::resource_flags::none)));
+					sge::renderer::resource_flags::none
+				)
+			)
+		);
 	return true;
 }
 

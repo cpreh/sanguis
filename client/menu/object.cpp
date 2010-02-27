@@ -39,6 +39,9 @@ fcppt::log::object mylogger(
 
 }
 
+#include <iostream>
+#include <fcppt/math/dim/dim.hpp>
+
 sanguis::client::menu::object::object(
 	sge::renderer::device_ptr const renderer_,
 	sge::image::loader_ptr const image_loader_,
@@ -219,6 +222,7 @@ sanguis::client::menu::object::object(
 			.elements()
 	)
 {
+	std::cerr << background.texture()->dim() << '\n';
 }
 
 sanguis::client::menu::object::~object()
@@ -230,11 +234,17 @@ sanguis::client::menu::object::process(
 	time_type const delta
 )
 {
+	std::cerr << "menu::object::process\n";
+
 	mover_.update(
 		delta
 	);
 
+	std::cerr << "menu::object::process after mover_\n";
+
 	m.update();
+
+	std::cerr << "menu::object::process after update\n";
 
 	sge::sprite::render_one(
 		ss,

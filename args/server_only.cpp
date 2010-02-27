@@ -5,5 +5,5 @@ sanguis::args::server_only(
 	boost::program_options::variables_map const &vm
 )
 {
-	return vm.count("serveronly");	
+	return vm["serveronly"].as<bool>();
 }

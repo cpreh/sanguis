@@ -122,14 +122,13 @@ try
 		context_.reset(
 			new sanguis::load::server_context()
 		);
-
+	
 	typedef fcppt::scoped_ptr<
 		sanguis::main_object
 	> main_object_scoped_ptr;
 
 	main_object_scoped_ptr obj(
-		//server_only FIXME: seems to be true by default?
-		false
+		server_only
 		?
 			sanguis::server::create(
 				sys,
