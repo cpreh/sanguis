@@ -11,6 +11,7 @@
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/io/cerr.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
 
@@ -58,11 +59,6 @@ sanguis::server::machine::machine(
 			)
 		)
 	),
-	s_timer(
-		net_.register_timer(
-			std::tr1::bind(
-				&machine::timer_callback,
-				this))),
 	clients_(),
 	collision_(collision_)
 {
@@ -83,7 +79,6 @@ sanguis::server::machine::process(
 		}
 	}
 
-	net_.process();
 	process_event(t);
 }
 
@@ -182,12 +177,6 @@ sanguis::server::machine::data_callback(
 	}
 	//while (messages::auto_ptr p = deserialize(clients[id].in_buffer))
 	//	process_message(id,p);
-}
-
-void
-sanguis::server::machine::timer_callback()
-{
-	run();
 }
 
 void

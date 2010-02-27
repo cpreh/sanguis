@@ -11,6 +11,7 @@
 // asio brings in window.h's max macro :(
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/io/cerr.hpp>
 #include <boost/asio/buffer.hpp>
 #include <boost/lambda/lambda.hpp>
 #include <boost/asio.hpp>
@@ -25,7 +26,8 @@ sanguis::net::detail::server_impl::server_impl(
 	acceptor_(
 		io_service_),
 	id_counter_(
-		static_cast<id_type>(0)),
+		static_cast<id_type>(
+			0)),
 	timer_duration_(
 		_timer_duration),
 	timer_(
@@ -76,17 +78,21 @@ sanguis::net::detail::server_impl::listen(
 	accept();
 }
 
-void
-sanguis::net::detail::server_impl::process()
+void 
+sanguis::net::detail::server_impl::queue(
+	data_type const &s)
 {
 	BOOST_FOREACH(
 		connection_container::reference c,
 		connections_
 	)
 	{
-		if (c.sending_ || !c.output_.characters_left())
+		if (!c.connected_)
 			continue;
-
+		c.output_.push_back(
+			s);
+		if (c.sending_)
+			continue;
 		c.sending_ = true;
 
 		data_type const &out_data(
@@ -105,33 +111,6 @@ sanguis::net::detail::server_impl::process()
 				std::tr1::placeholders::_2,
 				std::tr1::ref(c)
 			)
-		);
-	}
-
-	boost::system::error_code e;
-	io_service_.poll(e);
-	if (e)
-		throw exception(
-			FCPPT_TEXT("poll error: ")+
-			fcppt::iconv(
-				e.message()
-			)
-		);
-}
-
-void 
-sanguis::net::detail::server_impl::queue(
-	data_type const &s)
-{
-	BOOST_FOREACH(
-		connection_container::reference c,
-		connections_
-	)
-	{
-		if (!c.connected_)
-			continue;
-		c.output_.push_back(
-			s
 		);
 	}
 }
@@ -163,7 +142,27 @@ sanguis::net::detail::server_impl::queue(
 			s
 		);
 
-		return;
+		if (c.sending_)
+			return;
+		c.sending_ = true;
+
+		data_type const &out_data(
+			c.output_.buffer()
+		);
+
+		c.socket_.async_send(
+			boost::asio::buffer(
+				out_data.data(),
+				out_data.size()
+			),
+			std::tr1::bind(
+				&server_impl::write_handler,
+				this,
+				std::tr1::placeholders::_1,
+				std::tr1::placeholders::_2,
+				std::tr1::ref(c)
+			)
+		);
 	}
 
 	// no valid id found?
@@ -445,6 +444,11 @@ void
 sanguis::net::detail::server_impl::handle_timeout(
 	boost::system::error_code const &_e)
 {
+	FCPPT_LOG_DEBUG(
+		log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("server: timeout "));
+
 	if (_e)
 	{
 		FCPPT_LOG_DEBUG(
@@ -460,6 +464,10 @@ sanguis::net::detail::server_impl::handle_timeout(
 	}
 
 	timer_signal_();
+
+	timer_.reset(
+		new boost::asio::deadline_timer(
+			timer_->get_io_service()));
 
 	timer_->expires_from_now(
 		timer_duration_);

@@ -41,9 +41,6 @@ public:
 	);
 
 	void
-	process();
-
-	void
 	queue(
 		id_type,
 		data_type const &);
