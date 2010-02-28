@@ -208,11 +208,23 @@ sanguis::client::object::create_server(
 	net::port_type const port_
 )
 {
-/*
-	variables_map_[
+	// HACK HACK, FIXME!
+	static_cast<
+		std::map<
+			std::string,
+			boost::program_options::variable_value
+		> &
+	>(
+		variables_map_
+	)[
 		"serverport"
-	] = port_;
-*/
+	] =
+		boost::program_options::variable_value(
+			boost::any(
+				port_
+			),
+			false
+		);
 
 	server_.take(
 		fcppt::make_auto_ptr<
