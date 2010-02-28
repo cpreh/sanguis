@@ -2,6 +2,7 @@
 #include "../exp_area.hpp"
 #include "../insert_parameters_pos.hpp"
 #include "../property/initial.hpp"
+#include "../spawns/spawn.hpp"
 #include "../../weapons/weapon.hpp"
 #include "../../ai/base.hpp"
 #include "../../environment/load_context.hpp"
@@ -21,8 +22,9 @@ sanguis::server::entities::enemies::enemy::enemy(
 	entities::movement_speed const movement_speed_,
 	ai::create_function const &ai_,
 	weapons::auto_ptr weapon_,
-	probability_type const spawn_chance,
-	exp_type const exp_
+	probability_type const spawn_chance_,
+	exp_type const exp_,
+	auto_weak_link const spawn_owner
 )
 :
 	with_ai(
@@ -49,8 +51,9 @@ sanguis::server::entities::enemies::enemy::enemy(
 		static_cast<space_unit>(0)
 	),
 	etype_(etype_),
-	spawn_chance(spawn_chance),
-	exp_(exp_)
+	spawn_chance_(spawn_chance_),
+	exp_(exp_),
+	spawn_owner_(spawn_owner_)
 {}
 
 sanguis::enemy_type::type
@@ -111,6 +114,18 @@ sanguis::server::entities::enemies::enemy::team() const
 void
 sanguis::server::entities::enemies::enemy::on_die()
 {
+	if(
+		spawn_owner_
+	)
+		dynamic_cast<
+			spawns::spawn &
+		>(
+			*spawn_owner_
+		)
+		.unregister(
+			*this
+		);
+
 	environment()->insert(
 		auto_ptr(
 			new entities::exp_area(
@@ -123,7 +138,7 @@ sanguis::server::entities::enemies::enemy::on_die()
 	);
 
 	environment()->pickup_chance(
-		spawn_chance,
+		spawn_chance_,
 		center()
 	);
 }

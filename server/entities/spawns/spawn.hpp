@@ -20,9 +20,16 @@ namespace spawns
 
 class spawn
 :
-	public base
+	public entities::base
 {
 	FCPPT_NONCOPYABLE(spawn)
+public:
+	virtual void
+	unregister(
+		entities::base &
+	);
+
+	~spawn();
 protected:
 	explicit spawn(
 		enemy_type::type
@@ -39,10 +46,12 @@ private:
 		time_type
 	);
 
-	count
+	virtual count
 	may_spawn(
 		time_type
 	) = 0;
+
+	enemy_type::type const enemy_type_;
 };
 
 }
