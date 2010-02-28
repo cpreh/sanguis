@@ -44,6 +44,11 @@ private:
 		time_type
 	);
 
+	void
+	add_count(
+		size_type
+	);
+
 	diff_clock diff_clock_;
 
 	count_per_wave const count_per_wave_;

@@ -34,6 +34,7 @@ sanguis::server::entities::spawns::limited::unregister(
 
 	--spawned_;
 }
+
 sanguis::server::entities::spawns::size_type
 sanguis::server::entities::spawns::limited::may_spawn(
 	time_type const time_
@@ -60,4 +61,12 @@ sanguis::server::entities::spawns::limited::may_spawn(
 			)
 		:
 			0;
+}
+
+void
+sanguis::server::entities::spawns::limited::add_count(
+	size_type const add_
+)
+{
+	spawned_ += add_;	
 }

@@ -55,6 +55,11 @@ private:
 		time_type
 	) = 0;
 
+	virtual void
+	add_count(
+		size_type
+	) = 0;
+
 	enemy_type::type const enemy_type_;
 };
 

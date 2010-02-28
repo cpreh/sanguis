@@ -49,6 +49,7 @@ sanguis::server::entities::spawns::spawn::on_update(
 				time_
 			)
 	)
+	{
 		for(
 			size_type i = 0;
 			i < count_;
@@ -60,4 +61,9 @@ sanguis::server::entities::spawns::spawn::on_update(
 				enemy_type_,
 				link()
 			);
+
+		add_count(
+			count_
+		);
+	}
 }
