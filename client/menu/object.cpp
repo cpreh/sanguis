@@ -89,6 +89,8 @@ sanguis::client::menu::object::object(
 	),
 	mover_(
 		m,
+		fcppt::math::dim::structure_cast<sge::gui::dim>(
+			renderer_->screen_size()),
 		main_.parent
 	),
 	connections_(
