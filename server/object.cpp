@@ -1,10 +1,16 @@
 #include "object.hpp"
+#include "log.hpp"
+#include "message_event.hpp"
+#include "states/running.hpp"
+#include "states/unpaused.hpp"
 #include "../time_type.hpp"
 #include "../tick_event.hpp"
 #include <sge/systems/instance.hpp>
 #include <sge/time/second.hpp>
+#include <fcppt/log/headers.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/io/cerr.hpp>
+#include <fcppt/exception.hpp>
+#include <fcppt/text.hpp>
 #include <cstdlib>
 
 sanguis::server::object::object(
@@ -33,7 +39,7 @@ sanguis::server::object::object(
 	running_(
 		true)
 {
-	fcppt::io::cerr << "server::object()\n";
+	machine_.initiate();
 }
 
 void
@@ -49,7 +55,6 @@ sanguis::server::object::~object()
 int
 sanguis::server::object::run()
 {
-	fcppt::io::cerr << "server::object::run\n";
 	server_thread_.join();
 	return EXIT_SUCCESS;
 }
@@ -57,8 +62,22 @@ sanguis::server::object::run()
 void
 sanguis::server::object::mainloop()
 {
-	while (running_)
-		machine_.run();
+	try
+	{
+		while (running_)
+			machine_.run();
+	}
+	catch(
+		fcppt::exception const &e
+	)
+	{
+		FCPPT_LOG_ERROR(
+			log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("Error in server thread: ")
+				<< e.string()
+		);
+	}
 }
 
 void
