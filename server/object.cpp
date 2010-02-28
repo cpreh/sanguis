@@ -40,6 +40,7 @@ sanguis::server::object::object(
 		true)
 {
 	machine_.initiate();
+	machine_.listen();
 }
 
 void
