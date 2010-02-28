@@ -8,6 +8,7 @@
 #include "../movable.hpp"
 #include "../movement_speed.hpp"
 #include "../health_type.hpp"
+#include "../auto_weak_link.hpp"
 #include "../../ai/create_function.hpp"
 #include "../../environment/load_context_ptr.hpp"
 #include "../../probability_type.hpp"
@@ -41,7 +42,8 @@ public:
 		ai::create_function const &,
 		weapons::auto_ptr weapon,
 		probability_type spawn_chance,
-		exp_type exp
+		exp_type exp,
+		auto_weak_link spawn_owner = auto_weak_link()
 	);
 
 	enemy_type::type
@@ -67,8 +69,9 @@ private:
 	on_die();
 
 	enemy_type::type const etype_;
-	probability_type const spawn_chance;
+	probability_type const spawn_chance_;
 	exp_type const exp_;
+	auto_weak_link const spawn_owner_;
 };
 
 }
