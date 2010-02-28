@@ -72,6 +72,8 @@ sanguis::client::menu::object::object(
 	),
 	main_(
 		m,
+		fcppt::math::dim::structure_cast<sge::gui::dim>(
+			renderer_->screen_size()),
 		buttons_path,
 		image_loader_
 	),

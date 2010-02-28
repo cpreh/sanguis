@@ -18,6 +18,7 @@ struct main
 {
 	main(
 		sge::gui::widgets::parent_data const &,
+		sge::gui::dim const &,
 		fcppt::filesystem::path const &,
 		sge::image::loader_ptr
 	);

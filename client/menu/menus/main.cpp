@@ -8,6 +8,7 @@
 
 sanguis::client::menu::menus::main::main(
 	sge::gui::widgets::parent_data const &_parent,
+	sge::gui::dim const &_resolution,
 	fcppt::filesystem::path const &buttons_path,
 	sge::image::loader_ptr const image_loader_
 )
@@ -19,9 +20,7 @@ sanguis::client::menu::menus::main::main(
 				sge::gui::point::null()
 			)
 			.size(
-				fcppt::math::dim::structure_cast<sge::gui::dim>(
-					resolution()
-				)
+				_resolution
 			)
 			.activation(
 				sge::gui::activation_state::inactive
