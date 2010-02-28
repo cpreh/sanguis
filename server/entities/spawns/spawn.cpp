@@ -1,4 +1,6 @@
 #include "spawn.hpp"
+#include "../../environment/object.hpp"
+#include "../../waves/spawn.hpp"
 
 void
 sanguis::server::entities::spawns::spawn::unregister(
@@ -41,11 +43,14 @@ sanguis::server::entities::spawns::spawn::on_update(
 				time_
 			)
 	)
-	{
-	/*
-		waves::spawn(
-			
-		);	
-	*/
-	}
+		for(
+			count::value_type i = 0;
+			i < count_;
+			++i
+		)
+			waves::spawn(
+				environment(),
+				environment()->load_context(),
+				enemy_type_
+			);	
 }

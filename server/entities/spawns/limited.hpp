@@ -6,7 +6,9 @@
 #include "hidden.hpp"
 #include "limit.hpp"
 #include "spawn.hpp"
+#include "../../../diff_clock.hpp"
 #include "../../../enemy_type.hpp"
+#include <sge/time/timer.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -32,16 +34,21 @@ public:
 		limit
 	);
 private:
-	count	
+	void
+	unregister(
+		entities::base &
+	);
+
+	count const
 	may_spawn(
 		time_type
 	);
 
-	diff_clock_ diff_;
-
-	sge::time::timer delay_;
+	diff_clock diff_clock_;
 
 	count const count_;
+
+	sge::time::timer delay_;
 
 	count spawned_;
 

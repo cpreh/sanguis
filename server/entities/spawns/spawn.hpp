@@ -20,7 +20,7 @@ namespace spawns
 
 class spawn
 :
-	public entities::base
+	public virtual entities::base
 {
 	FCPPT_NONCOPYABLE(spawn)
 public:
@@ -46,7 +46,7 @@ private:
 		time_type
 	);
 
-	virtual count
+	virtual count const
 	may_spawn(
 		time_type
 	) = 0;
