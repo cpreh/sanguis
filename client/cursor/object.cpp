@@ -1,9 +1,6 @@
 #include "object.hpp"
 #include <sge/sprite/object_impl.hpp>
 
-#include <iostream>
-#include <fcppt/math/dim/dim.hpp>
-
 sanguis::client::cursor::object::object(
 	sge::image::loader_ptr const il,
 	sge::renderer::device_ptr const rend
@@ -19,8 +16,6 @@ sanguis::client::cursor::object::object(
 	visible(
 		true
 	);
-
-	std::cerr << sprite().texture()->dim() << '\n';
 }
 
 sanguis::client::cursor::object::~object()
