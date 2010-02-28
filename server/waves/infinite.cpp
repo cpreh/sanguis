@@ -1,28 +1,29 @@
 #include "infinite.hpp"
-#include "simple.hpp"
+#include "../entities/spawns/limited.hpp"
+#include "../entities/auto_ptr.hpp"
+#include "../entities/insert_parameters_pos.hpp"
+#include "../environment/object.hpp"
+#include <sge/time/second_f.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
 
 sanguis::server::waves::infinite::infinite(
 	waves::delay const delay_,
 	waves::spawn_interval const spawn_interval_,
-	waves::count const count_,
 	waves::spawns_per_wave const spawns_per_wave_,
 	enemy_type::type const etype_
 )
 :
-	delay_(delay_),
+	diff_clock_(),
+	delay_time_(
+		sge::time::second_f(
+			delay_
+		),
+		sge::time::activation_state::active,
+		diff_clock_.callback()
+	),
 	spawn_interval_(spawn_interval_),
-	count_(count_),
 	spawns_per_wave_(spawns_per_wave_),
-	etype_(etype_),
-	simple_(
-		new simple(
-			delay_,
-			spawn_interval_,
-			count_,
-			spawns_per_wave_,
-			etype_
-		)
-	)
+	etype_(etype_)
 {}
 
 sanguis::server::waves::infinite::~infinite()
@@ -32,25 +33,42 @@ void
 sanguis::server::waves::infinite::process(
 	time_type const diff,
 	environment::object_ptr const env,
-	environment::load_context_ptr const load_context
+	environment::load_context_ptr const
 )
 {
-	simple_->process(
-		diff,
-		env,
-		load_context
+	// TODO: the waves system must be replaced sometime
+
+	diff_clock_.update(
+		diff
 	);
 
-	if(simple_->ended())
+	if(
+		delay_time_.update_b()
+	)
 	{
-		// TODO: which kind of progression do we want here?
-		simple_.reset(
-			new simple(
-				delay_ *= static_cast<time_type>(0.99f),
-				spawn_interval_ *= static_cast<time_type>(0.99f),
-				count_,
-				spawns_per_wave_,
-				etype_
+		delay_time_.deactivate();
+
+		entities::auto_ptr spawn_(
+			new entities::spawns::limited(
+				etype_,
+				entities::spawns::count_per_wave(
+					spawns_per_wave_
+				),
+				entities::spawns::interval(
+					sge::time::second_f(
+						spawn_interval_
+					)
+				),
+				entities::spawns::limit(
+					10
+				) // TODO!
+			)
+		);
+
+		env->insert(
+			spawn_,
+			entities::insert_parameters_pos(
+				pos_type::null() // TODO!
 			)
 		);
 	}

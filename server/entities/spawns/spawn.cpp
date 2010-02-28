@@ -20,6 +20,12 @@ sanguis::server::entities::spawns::spawn::spawn(
 	enemy_type_(enemy_type_)
 {}
 
+sanguis::server::space_unit
+sanguis::server::entities::spawns::spawn::radius() const
+{
+	return static_cast<space_unit>(1); // TODO!
+}
+
 sanguis::entity_type::type
 sanguis::server::entities::spawns::spawn::type() const
 {
@@ -51,6 +57,7 @@ sanguis::server::entities::spawns::spawn::on_update(
 			waves::spawn(
 				environment(),
 				environment()->load_context(),
-				enemy_type_
+				enemy_type_,
+				link()
 			);
 }
