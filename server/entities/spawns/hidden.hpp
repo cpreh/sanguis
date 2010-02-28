@@ -29,6 +29,9 @@ private:
 	bool
 	invulnerable() const;
 
+	bool
+	server_only() const;
+
 	messages::auto_ptr
 	add_message(
 		player_id
