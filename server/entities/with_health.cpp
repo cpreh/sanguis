@@ -2,7 +2,7 @@
 #include "property/to_float.hpp"
 #include "property/from_float.hpp"
 #include "property/add.hpp"
-#include "property/substract.hpp"
+#include "property/subtract.hpp"
 #include "property/initial_max.hpp"
 #include "../environment/object.hpp"
 #include <fcppt/tr1/functional.hpp>
@@ -18,7 +18,7 @@ sanguis::server::entities::with_health::damage(
 		i < amounts_.size();
 		++i
 	)
-		property::substract(
+		property::subtract(
 			health_,
 			property::from_float(
 				damage_

@@ -15,7 +15,8 @@ void
 sanguis::server::waves::spawn(
 	environment::object_ptr const env,
 	environment::load_context_ptr const load_context,
-	enemy_type::type const etype
+	enemy_type::type const etype,
+	entities::auto_weak_link const spawn
 )
 {
 	// TODO: put this randomizer somewhere else!
@@ -61,7 +62,8 @@ sanguis::server::waves::spawn(
 	env->insert(
 		entities::enemies::create(
 			etype,
-			load_context
+			load_context,
+			spawn
 		),
 		entities::insert_parameters(
 			pos,

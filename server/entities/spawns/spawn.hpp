@@ -1,8 +1,9 @@
 #ifndef SANGUIS_SERVER_ENTITIES_SPAWNS_SPAWN_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_SPAWNS_SPAWN_HPP_INCLUDED
 
-#include "count.hpp"
+#include "size_type.hpp"
 #include "../base.hpp"
+#include "../../space_unit.hpp"
 #include "../../team.hpp"
 #include "../../../enemy_type.hpp"
 #include "../../../entity_type.hpp"
@@ -20,7 +21,7 @@ namespace spawns
 
 class spawn
 :
-	public entities::base
+	public virtual entities::base
 {
 	FCPPT_NONCOPYABLE(spawn)
 public:
@@ -35,6 +36,9 @@ protected:
 		enemy_type::type
 	);
 private:
+	space_unit
+	radius() const;
+
 	entity_type::type
 	type() const;
 
@@ -46,9 +50,14 @@ private:
 		time_type
 	);
 
-	virtual count
+	virtual size_type 
 	may_spawn(
 		time_type
+	) = 0;
+
+	virtual void
+	add_count(
+		size_type
 	) = 0;
 
 	enemy_type::type const enemy_type_;

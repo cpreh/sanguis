@@ -24,7 +24,7 @@ sanguis::server::entities::enemies::enemy::enemy(
 	weapons::auto_ptr weapon_,
 	probability_type const spawn_chance_,
 	exp_type const exp_,
-	auto_weak_link const spawn_owner
+	auto_weak_link const spawn_owner_
 )
 :
 	with_ai(

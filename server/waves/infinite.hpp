@@ -4,11 +4,12 @@
 #include "wave.hpp"
 #include "delay.hpp"
 #include "spawn_interval.hpp"
-#include "count.hpp"
 #include "spawns_per_wave.hpp"
-#include "../../time_type.hpp"
+#include "../../diff_clock.hpp"
 #include "../../enemy_type.hpp"
-#include <fcppt/scoped_ptr.hpp>
+#include "../../time_type.hpp"
+#include <sge/time/timer.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -21,11 +22,11 @@ class infinite
 :
 	public wave
 {
+	FCPPT_NONCOPYABLE(infinite)
 public:
 	infinite(
 		waves::delay,
 		waves::spawn_interval,
-		waves::count,
 		waves::spawns_per_wave,
 		enemy_type::type
 	);
@@ -39,19 +40,18 @@ private:
 		environment::load_context_ptr
 	);
 	
-	bool ended() const;
+	bool
+	ended() const;
 
-	time_type 
-		delay_,
-		spawn_interval_;
-	unsigned 
-		count_,
-		spawns_per_wave_;
+	diff_clock diff_clock_;
+	
+	sge::time::timer delay_time_;
+
+	time_type const spawn_interval_;
+
+	spawns_per_wave const spawns_per_wave_;
+
 	enemy_type::type const etype_;
-
-	fcppt::scoped_ptr<
-		wave
-	> simple_;
 };
 
 }

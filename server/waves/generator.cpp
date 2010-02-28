@@ -147,61 +147,51 @@ sanguis::server::waves::generator::spawn_all()
 	(
 		delay(60),
 		spawn_interval(2),
-		count(15),
 		spawns_per_wave(2),
 		enemy_type::spider
 	)(
 		delay(0),
 		spawn_interval(2),
-		count(20),
 		spawns_per_wave(2),
 		enemy_type::maggot
 	)(
 		delay(0),
 		spawn_interval(1.5f),
-		count(40),
 		spawns_per_wave(1),
 		enemy_type::zombie01
 	)(
 		delay(0),
 		spawn_interval(2),
-		count(60),
 		spawns_per_wave(1),
 		enemy_type::zombie01
 	)(
 		delay(90),
 		spawn_interval(1),
-		count(8),
 		spawns_per_wave(2),
 		enemy_type::zombie00
 	)(
 		delay(45),
 		spawn_interval(1),
-		count(8),
 		spawns_per_wave(1),
 		enemy_type::wolf_brown
 	)(
 		delay(80),
 		spawn_interval(1),
-		count(6),
 		spawns_per_wave(2),
 		enemy_type::wolf_white
 	)(
 		delay(120),
 		spawn_interval(1),
-		count(6),
 		spawns_per_wave(2),
 		enemy_type::wolf_black
 	)(
 		delay(130),
 		spawn_interval(.5f),
-		count(10),
 		spawns_per_wave(2),
 		enemy_type::spider
 	)(
 		delay(180),
 		spawn_interval(1),
-		count(3),
 		spawns_per_wave(1),
 		enemy_type::skeleton
 	);
