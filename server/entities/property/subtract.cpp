@@ -1,8 +1,8 @@
-#include "substract.hpp"
+#include "subtract.hpp"
 #include "changeable.hpp"
 
 void
-sanguis::server::entities::property::substract(
+sanguis::server::entities::property::subtract(
 	changeable &changeable_,
 	value const &value_
 )
