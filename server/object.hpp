@@ -4,12 +4,12 @@
 #include "machine.hpp"
 #include "object_fwd.hpp"
 #include "../load/context_base_fwd.hpp"
+#include "../net/port_type.hpp"
 #include "../main_object.hpp"
 #include <sge/systems/instance_fwd.hpp>
 #include <sge/time/timer.hpp>
 #include <fcppt/thread/object.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <boost/program_options/variables_map.hpp>
 
 namespace sanguis
 {
@@ -25,7 +25,7 @@ public:
 	explicit 
 	object(
 		sge::systems::instance const &,
-		boost::program_options::variables_map const &,
+		net::port_type,
 		load::context_base const &
 	);
 

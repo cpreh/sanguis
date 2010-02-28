@@ -1,5 +1,4 @@
 #include "object.hpp"
-#include "../args/server_port.hpp"
 #include "../time_type.hpp"
 #include "../tick_event.hpp"
 #include <sge/systems/instance.hpp>
@@ -10,7 +9,7 @@
 
 sanguis::server::object::object(
 	sge::systems::instance const &sys,
-	boost::program_options::variables_map const &vm,
+	net::port_type const port_,
 	load::context_base const &load_context)
 :
 	frame_timer_(
@@ -20,8 +19,8 @@ sanguis::server::object::object(
 	machine_(
 		load_context,
 		sys.collision_system(),
-		args::server_port(
-			vm)),
+		port_
+	),
 	timer_connection_(
 		machine_.net().register_timer(
 			std::tr1::bind(

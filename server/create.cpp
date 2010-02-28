@@ -1,5 +1,6 @@
 #include "create.hpp"
 #include "object.hpp"
+#include "../args/server_port.hpp"
 #include <fcppt/make_auto_ptr.hpp>
 
 sanguis::main_object_auto_ptr
@@ -14,7 +15,9 @@ sanguis::server::create(
 			object
 		>(
 			sys,
-			vm,
+			args::server_port(
+				vm
+			),
 			context
 		)
 	);

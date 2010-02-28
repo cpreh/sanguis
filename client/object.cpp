@@ -149,8 +149,7 @@ sanguis::client::object::object(
 		sys_.font_system(),
 		sys_.audio_player()
 	),
-	server_(),
-	variables_map_(variables_map_)
+	server_()
 {
 	if(	
 		args::multi_sampling(
@@ -208,30 +207,12 @@ sanguis::client::object::create_server(
 	net::port_type const port_
 )
 {
-	// HACK HACK, FIXME!
-	static_cast<
-		std::map<
-			std::string,
-			boost::program_options::variable_value
-		> &
-	>(
-		variables_map_
-	)[
-		"serverport"
-	] =
-		boost::program_options::variable_value(
-			boost::any(
-				port_
-			),
-			false
-		);
-
 	server_.take(
 		fcppt::make_auto_ptr<
 			server::object
 		>(
 			sys_,
-			variables_map_,
+			port_,
 			resources_
 		)
 	);

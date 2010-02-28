@@ -76,8 +76,6 @@ private:
 	fcppt::scoped_ptr<
 		server::object
 	> server_;
-
-	boost::program_options::variables_map variables_map_;
 };
 
 }
