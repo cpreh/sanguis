@@ -4,8 +4,8 @@
 
 sanguis::server::entities::spawns::limited::limited(
 	enemy_type::type const enemy_type_,
-	count const count_,
-	delay const ndelay_,
+	count_per_wave const count_per_wave_,
+	interval const interval_,
 	limit const limit_
 )
 :
@@ -13,9 +13,9 @@ sanguis::server::entities::spawns::limited::limited(
 		enemy_type_
 	),
 	diff_clock_(),
-	count_(count_),
+	count_per_wave_(count_per_wave_),
 	delay_(
-		ndelay_,
+		interval_,
 		sge::time::activation_state::active,
 		diff_clock_.callback()
 	),
@@ -34,7 +34,7 @@ sanguis::server::entities::spawns::limited::unregister(
 
 	--spawned_;
 }
-sanguis::server::entities::spawns::count const
+sanguis::server::entities::spawns::size_type
 sanguis::server::entities::spawns::limited::may_spawn(
 	time_type const time_
 )
@@ -46,20 +46,18 @@ sanguis::server::entities::spawns::limited::may_spawn(
 	return
 		delay_.update_b()
 		?
-			count(
-				std::min(
-					static_cast<
-						limit::value_type
-					>(
-						spawned_ - limit_
-					),
-					static_cast<
-						count::value_type
-					>(
-						count_
-					)
+			std::min(
+				static_cast<
+					size_type
+				>(
+					spawned_ - limit_
+				),
+				static_cast<
+					size_type
+				>(
+					count_per_wave_
 				)
 			)
 		:
-			count(0);
+			0;
 }

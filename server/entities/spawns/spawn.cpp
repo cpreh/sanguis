@@ -38,13 +38,13 @@ sanguis::server::entities::spawns::spawn::on_update(
 )
 {
 	if(
-		count const count_ =
+		size_type const count_ =
 			may_spawn(
 				time_
 			)
 	)
 		for(
-			count::value_type i = 0;
+			size_type i = 0;
 			i < count_;
 			++i
 		)
@@ -52,5 +52,5 @@ sanguis::server::entities::spawns::spawn::on_update(
 				environment(),
 				environment()->load_context(),
 				enemy_type_
-			);	
+			);
 }

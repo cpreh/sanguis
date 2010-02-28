@@ -6,7 +6,8 @@ sanguis::server::waves::infinite::infinite(
 	waves::spawn_interval const spawn_interval_,
 	waves::count const count_,
 	waves::spawns_per_wave const spawns_per_wave_,
-	enemy_type::type const etype_)
+	enemy_type::type const etype_
+)
 :
 	delay_(delay_),
 	spawn_interval_(spawn_interval_),

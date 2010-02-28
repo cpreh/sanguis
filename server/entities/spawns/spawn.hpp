@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_SPAWNS_SPAWN_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_SPAWNS_SPAWN_HPP_INCLUDED
 
-#include "count.hpp"
+#include "size_type.hpp"
 #include "../base.hpp"
 #include "../../team.hpp"
 #include "../../../enemy_type.hpp"
@@ -46,7 +46,7 @@ private:
 		time_type
 	);
 
-	virtual count const
+	virtual size_type 
 	may_spawn(
 		time_type
 	) = 0;

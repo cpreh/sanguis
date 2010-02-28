@@ -1,5 +1,5 @@
-#ifndef SANGUIS_SERVER_ENTITIES_SPAWNS_DELAY_HPP_INCLUDED
-#define SANGUIS_SERVER_ENTITIES_SPAWNS_DELAY_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_ENTITIES_SPAWNS_INTERVAL_HPP_INCLUDED
+#define SANGUIS_SERVER_ENTITIES_SPAWNS_INTERVAL_HPP_INCLUDED
 
 #include <sge/time/duration.hpp>
 #include <fcppt/chrono/duration_decl.hpp>
@@ -16,7 +16,7 @@ namespace spawns
 
 FCPPT_MAKE_STRONG_TYPEDEF(
 	sge::time::duration,
-	delay
+	interval
 )
 
 }
