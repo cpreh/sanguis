@@ -83,11 +83,13 @@ sanguis::server::object::mainloop()
 void
 sanguis::server::object::timer_callback()
 {
-	sge::time::timer::frames_type const f = 
-		frame_timer_.elapsed_frames();
-	frame_timer_.reset();
 	machine_.process(
 		tick_event(
-			static_cast<time_type>(
-				f)));
+			static_cast<
+				time_type
+			>(
+				frame_timer_.reset()
+			)
+		)
+	);
 }
