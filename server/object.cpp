@@ -39,8 +39,6 @@ sanguis::server::object::object(
 	running_(
 		true)
 {
-	machine_.initiate();
-	machine_.listen();
 }
 
 void
@@ -65,6 +63,8 @@ sanguis::server::object::mainloop()
 {
 	try
 	{
+		machine_.initiate();
+		//machine_.listen();
 		while (running_)
 			machine_.run();
 	}
