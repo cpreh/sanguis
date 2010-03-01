@@ -57,12 +57,15 @@ find_animation_type(
 
 sanguis::load::model::animation const &
 sanguis::load::model::weapon_category::operator[](
-	animation_type::type const anim) const
+	animation_type::type const anim
+) const
 {
 	animation_map::const_iterator const 
 		it(
 			animations.find(
-				anim));
+				anim
+			)
+		);
 
 	if(it != animations.end())
 		return it->second;
@@ -73,23 +76,30 @@ sanguis::load::model::weapon_category::operator[](
 		);
 		
 	throw base_animation_not_found(
-		anim);
+		anim
+	);
 }
 
-bool sanguis::load::model::weapon_category::has_animation(
-	animation_type::type const anim) const
+bool
+sanguis::load::model::weapon_category::has_animation(
+	animation_type::type const anim
+) const
 {
 	animation_map::const_iterator const 
 		it(
 			animations.find(
-				anim));
+				anim
+			)
+		);
+
 	return 
 		it != animations.end();
 }
 
 sanguis::load::model::weapon_category::weapon_category(
 	sge::parse::json::object const &object,
-	global_parameters const &param)
+	global_parameters const &param
+)
 :
 	animations()
 {
