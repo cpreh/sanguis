@@ -46,8 +46,8 @@ private:
 	sge::time::timer frame_timer_;
 	server::machine machine_;
 	fcppt::signal::scoped_connection const timer_connection_;
-	fcppt::thread::object server_thread_;
 	bool running_;
+	fcppt::thread::object server_thread_;
 };
 
 }

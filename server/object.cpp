@@ -32,12 +32,12 @@ sanguis::server::object::object(
 			std::tr1::bind(
 				&object::timer_callback,
 				this))),
+	running_(
+		true),
 	server_thread_(
 		std::tr1::bind(
 			&object::mainloop,
-			this)),
-	running_(
-		true)
+			this))
 {
 }
 
