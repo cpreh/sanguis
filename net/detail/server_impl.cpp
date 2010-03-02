@@ -11,7 +11,6 @@
 // asio brings in window.h's max macro :(
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/io/cerr.hpp>
 #include <boost/asio/buffer.hpp>
 #include <boost/lambda/lambda.hpp>
 #include <boost/asio.hpp>
@@ -28,6 +27,7 @@ sanguis::net::detail::server_impl::server_impl(
 	id_counter_(
 		static_cast<id_type>(
 			0)),
+	new_connection_(),
 	timer_duration_(
 		_timer_duration),
 	timer_(
@@ -87,8 +87,6 @@ sanguis::net::detail::server_impl::queue(
 		connections_
 	)
 	{
-		if (!c.connected_)
-			continue;
 		c.output_.push_back(
 			s);
 		if (c.sending_)
@@ -128,16 +126,6 @@ sanguis::net::detail::server_impl::queue(
 		if (c.id_ != id)
 			continue;
 
-		if (!c.connected_)
-			throw exception(
-				FCPPT_TEXT("invalid id ")+
-				fcppt::lexical_cast<
-					fcppt::string
-				>(
-					id
-				)
-			);
-
 		c.output_.push_back(
 			s
 		);
@@ -163,6 +151,7 @@ sanguis::net::detail::server_impl::queue(
 				std::tr1::ref(c)
 			)
 		);
+		return;
 	}
 
 	// no valid id found?
@@ -227,22 +216,19 @@ sanguis::net::detail::server_impl::stop()
 void 
 sanguis::net::detail::server_impl::accept()
 {
-	connections_.push_back(
+	new_connection_.reset(
 		new connection(
 			id_counter_++,
 			io_service_
 		)
 	);
 
-	connection &c = connections_.back();
-
 	acceptor_.async_accept(
-		c.socket_,
+		new_connection_->socket_,
 		std::tr1::bind(
 			&server_impl::accept_handler,
 			this,
-			std::tr1::placeholders::_1,
-			std::tr1::ref(c)
+			std::tr1::placeholders::_1
 		)
 	);
 }
@@ -348,8 +334,7 @@ sanguis::net::detail::server_impl::write_handler(
 
 void 
 sanguis::net::detail::server_impl::accept_handler(
-	boost::system::error_code const &e,
-	connection &c
+	boost::system::error_code const &e
 )
 {
 	if (e)
@@ -368,12 +353,14 @@ sanguis::net::detail::server_impl::accept_handler(
 
 	FCPPT_LOG_DEBUG(
 		log(),
-		fcppt::log::_ << FCPPT_TEXT("server: accepting a connection")
+		fcppt::log::_ << FCPPT_TEXT("server: accepting a connection, id is ") << new_connection_->id_
 	);
 
-	// first set connected, _then_ call handler 
-	// (else queueing code in the handler can't work)
-	c.connected_ = true;
+	connections_.push_back(
+		new_connection_);
+	
+	connection &c = 
+		connections_.back();
 
 	// send signal to handlers
 	connect_signal_(

@@ -75,6 +75,7 @@ private:
 	boost::asio::ip::tcp::acceptor acceptor_;
 
 	id_type id_counter_;
+	fcppt::auto_ptr<connection> new_connection_;
 	connection_container connections_;
 
 	server::time_resolution const timer_duration_;
@@ -107,8 +108,7 @@ private:
 
 	void
 	accept_handler(
-		boost::system::error_code const &,
-		connection &
+		boost::system::error_code const &
 	);
 
 	void
