@@ -98,7 +98,8 @@ void
 sanguis::server::machine::listen()
 {
 	net_.listen(
-		port_);
+		port_
+	);
 }
 
 void

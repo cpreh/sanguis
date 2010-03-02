@@ -16,12 +16,14 @@
 sanguis::server::object::object(
 	sge::systems::instance const &sys,
 	net::port_type const port_,
-	load::context_base const &load_context)
+	load::context_base const &load_context
+)
 :
 	frame_timer_(
 		sge::time::second(
-			static_cast<sge::time::unit>(
-				1))),
+			1
+		)
+	),
 	machine_(
 		load_context,
 		sys.collision_system(),
@@ -31,20 +33,34 @@ sanguis::server::object::object(
 		machine_.net().register_timer(
 			std::tr1::bind(
 				&object::timer_callback,
-				this))),
+				this
+			)
+		)
+	),
 	running_(
-		true),
+		true
+	),
+	mutex_(),
 	server_thread_(
 		std::tr1::bind(
 			&object::mainloop,
-			this))
+			this
+		)
+	)
 {
 }
 
 void
 sanguis::server::object::quit()
 {
-	running_ = false;
+	{
+		boost::mutex::scoped_lock const lock_(
+			mutex_
+		);
+		
+		running_ = false;
+	}
+
 	machine_.stop();
 }
 
@@ -64,8 +80,8 @@ sanguis::server::object::mainloop()
 	try
 	{
 		machine_.initiate();
-		//machine_.listen();
-		while (running_)
+
+		while (running())
 			machine_.run();
 	}
 	catch(
@@ -79,6 +95,8 @@ sanguis::server::object::mainloop()
 				<< e.string()
 		);
 	}
+	
+	// TODO: destroy the machine?
 }
 
 void
@@ -93,4 +111,14 @@ sanguis::server::object::timer_callback()
 			)
 		)
 	);
+}
+
+bool
+sanguis::server::object::running()
+{
+	boost::mutex::scoped_lock const lock_(
+		mutex_
+	);
+
+	return running_;
 }
