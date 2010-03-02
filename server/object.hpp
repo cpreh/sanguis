@@ -36,6 +36,9 @@ public:
 	int
 	run();
 
+	bool
+	running();
+
 	~object();
 private:
 	void
@@ -44,8 +47,8 @@ private:
 	void
 	timer_callback();
 
-	bool
-	running();
+	void
+	reset_running();
 
 	sge::time::timer frame_timer_;
 

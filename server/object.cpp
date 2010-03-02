@@ -53,15 +53,19 @@ sanguis::server::object::object(
 void
 sanguis::server::object::quit()
 {
-	{
-		boost::mutex::scoped_lock const lock_(
-			mutex_
-		);
-		
-		running_ = false;
-	}
+	reset_running();
 
 	machine_.stop();
+}
+
+bool
+sanguis::server::object::running()
+{
+	boost::mutex::scoped_lock const lock_(
+		mutex_
+	);
+
+	return running_;
 }
 
 sanguis::server::object::~object()
@@ -94,9 +98,9 @@ sanguis::server::object::mainloop()
 				<< FCPPT_TEXT("Error in server thread: ")
 				<< e.string()
 		);
+
+		reset_running();
 	}
-	
-	// TODO: destroy the machine?
 }
 
 void
@@ -113,12 +117,12 @@ sanguis::server::object::timer_callback()
 	);
 }
 
-bool
-sanguis::server::object::running()
+void
+sanguis::server::object::reset_running()
 {
 	boost::mutex::scoped_lock const lock_(
 		mutex_
 	);
-
-	return running_;
+		
+	running_ = false;
 }
