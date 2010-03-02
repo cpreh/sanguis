@@ -10,6 +10,7 @@
 #include <sge/time/timer.hpp>
 #include <fcppt/thread/object.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <boost/thread/thread.hpp>
 
 namespace sanguis
 {
@@ -35,6 +36,9 @@ public:
 	int
 	run();
 
+	bool
+	running();
+
 	~object();
 private:
 	void
@@ -43,10 +47,16 @@ private:
 	void
 	timer_callback();
 
+	void
+	reset_running();
+
 	sge::time::timer frame_timer_;
+
 	server::machine machine_;
+
 	fcppt::signal::scoped_connection const timer_connection_;
 	bool running_;
+	boost::mutex mutex_;
 	fcppt::thread::object server_thread_;
 };
 

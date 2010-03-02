@@ -1,10 +1,11 @@
 #include "machine.hpp"
 #include "message_event.hpp"
 #include "../tick_event.hpp"
-#include "../serialization.hpp"
 #include "../messages/create.hpp"
 #include "../messages/connect.hpp"
 #include "../messages/disconnect.hpp"
+#include "../net/serialize.hpp"
+#include "../net/deserialize.hpp"
 #include "../exception.hpp"
 #include <fcppt/algorithm/append.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
@@ -98,7 +99,8 @@ void
 sanguis::server::machine::listen()
 {
 	net_.listen(
-		port_);
+		port_
+	);
 }
 
 void
@@ -171,8 +173,9 @@ sanguis::server::machine::data_callback(
 	for(;;)
 	{
 		messages::auto_ptr p = 
-			deserialize(
-				clients_[_id].in_buffer);
+			net::deserialize(
+				clients_[_id].in_buffer
+			);
 		if(!p.get())
 			return;
 		process_message(_id, p);
@@ -188,7 +191,7 @@ sanguis::server::machine::send_to_all(
 { 
 	net::data_type m_str;
 
-	serialize(
+	net::serialize(
 		_m,
 		m_str
 	);
@@ -239,7 +242,7 @@ sanguis::server::machine::send_unicast(
 {
 	net::data_type ser;
 
-	serialize(
+	net::serialize(
 		_m,
 		ser
 	);

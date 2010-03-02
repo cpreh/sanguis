@@ -187,7 +187,12 @@ sanguis::client::object::run()
 				)
 			)
 		)
-	) ;
+	)
+		if(
+			server_
+			&& !server_->running()
+		)
+			break;
 
 	if(
 		server_

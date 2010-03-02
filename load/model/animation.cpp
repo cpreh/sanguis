@@ -36,7 +36,8 @@ sge::renderer::lock_rect const
 calc_rect(
 	sge::renderer::lock_rect const &area,
 	sge::renderer::dim_type const &cell_size,
-	sge::renderer::size_type const index)
+	sge::renderer::size_type const index
+)
 {
 	if (area.dimension().w() == cell_size.w())
 	{
@@ -100,7 +101,8 @@ load_delay(
 
 sanguis::load::model::animation::animation(
 	sge::parse::json::object const &_object,
-	global_parameters const &_param)
+	global_parameters const &_param
+)
 :
 	object_(
 		_object),

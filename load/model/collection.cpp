@@ -8,6 +8,10 @@ sanguis::load::model::collection::operator[](
 	fcppt::string const &name
 ) const
 {
+	boost::mutex::scoped_lock const lock_(
+		mutex_
+	);
+
 	model_map::const_iterator it(
 		models.find(
 			name
@@ -36,5 +40,7 @@ sanguis::load::model::collection::collection(
 	resource::context const &ctx
 )
 :
-	ctx(ctx)
+	ctx(ctx),
+	models(),
+	mutex_()
 {}

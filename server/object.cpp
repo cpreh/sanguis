@@ -16,12 +16,14 @@
 sanguis::server::object::object(
 	sge::systems::instance const &sys,
 	net::port_type const port_,
-	load::context_base const &load_context)
+	load::context_base const &load_context
+)
 :
 	frame_timer_(
 		sge::time::second(
-			static_cast<sge::time::unit>(
-				1))),
+			1
+		)
+	),
 	machine_(
 		load_context,
 		sys.collision_system(),
@@ -31,21 +33,39 @@ sanguis::server::object::object(
 		machine_.net().register_timer(
 			std::tr1::bind(
 				&object::timer_callback,
-				this))),
+				this
+			)
+		)
+	),
 	running_(
-		true),
+		true
+	),
+	mutex_(),
 	server_thread_(
 		std::tr1::bind(
 			&object::mainloop,
-			this))
+			this
+		)
+	)
 {
 }
 
 void
 sanguis::server::object::quit()
 {
-	running_ = false;
+	reset_running();
+
 	machine_.stop();
+}
+
+bool
+sanguis::server::object::running()
+{
+	boost::mutex::scoped_lock const lock_(
+		mutex_
+	);
+
+	return running_;
 }
 
 sanguis::server::object::~object()
@@ -64,8 +84,8 @@ sanguis::server::object::mainloop()
 	try
 	{
 		machine_.initiate();
-		//machine_.listen();
-		while (running_)
+
+		while (running())
 			machine_.run();
 	}
 	catch(
@@ -78,6 +98,8 @@ sanguis::server::object::mainloop()
 				<< FCPPT_TEXT("Error in server thread: ")
 				<< e.string()
 		);
+
+		reset_running();
 	}
 }
 
@@ -93,4 +115,14 @@ sanguis::server::object::timer_callback()
 			)
 		)
 	);
+}
+
+void
+sanguis::server::object::reset_running()
+{
+	boost::mutex::scoped_lock const lock_(
+		mutex_
+	);
+		
+	running_ = false;
 }

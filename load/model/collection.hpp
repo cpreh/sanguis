@@ -5,6 +5,7 @@
 #include "../resource/context_fwd.hpp"
 #include "object.hpp"
 #include <fcppt/string.hpp>
+#include <boost/thread/thread.hpp>
 #include <map>
 
 namespace sanguis
@@ -36,6 +37,8 @@ private:
 	> model_map;
 
 	mutable model_map models;
+
+	mutable boost::mutex mutex_;
 };
 
 }

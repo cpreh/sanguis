@@ -7,7 +7,8 @@
 #include "../messages/create.hpp"
 #include "../messages/base.hpp"
 #include "../messages/net_error.hpp"
-#include "../serialization.hpp"
+#include "../net/deserialize.hpp"
+#include "../net/serialize.hpp"
 #include "../log.hpp"
 #include "../tick_event.hpp"
 
@@ -192,7 +193,7 @@ sanguis::client::machine::data_callback(
 	//	process_message(p);
 	for(;;)
 	{
-		messages::auto_ptr p = deserialize(in_buffer);
+		messages::auto_ptr p = net::deserialize(in_buffer);
 		if(!p.get())
 			return;
 		process_message(p);
@@ -204,7 +205,7 @@ sanguis::client::machine::send(
 	messages::auto_ptr m
 )
 {
-	serialize(
+	net::serialize(
 		m,
 		out_buffer
 	);
