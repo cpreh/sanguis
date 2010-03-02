@@ -11,9 +11,11 @@ namespace messages
 namespace serialization
 {
 
-void serialize(
+void
+serialize(
 	ostream &,
-	auto_ptr);
+	auto_ptr
+);
 
 }
 }
