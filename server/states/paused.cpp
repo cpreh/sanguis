@@ -12,7 +12,6 @@
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/iconv.hpp>
 #include <fcppt/text.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <ostream>
