@@ -22,7 +22,7 @@
 #include <fcppt/utf8/convert.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/iconv.hpp>
+#include <fcppt/to_std_string.hpp>
 #include <boost/mpl/vector.hpp>
 #include <ostream>
 
@@ -218,7 +218,7 @@ void sanguis::client::states::menu::connect(
 	try
 	{
 		context<machine>().connect(
-			fcppt::iconv(
+			fcppt::to_std_string(
 				host
 			),
 			fcppt::lexical_cast<

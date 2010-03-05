@@ -61,7 +61,7 @@
 #include <fcppt/log/make_location.hpp>
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/iconv.hpp>
+#include <fcppt/from_std_string.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/auto_ptr.hpp>
 #include <fcppt/scoped_ptr.hpp>
@@ -209,14 +209,14 @@ try
 	fcppt::log::activate_levels(
 		fcppt::log::global(),
 		fcppt::log::level_from_string(
-			fcppt::iconv(log_level)
+			fcppt::from_std_string(log_level)
 		)
 	);
 
 	fcppt::log::activate_levels(
 		sanguis::log(),
 		fcppt::log::level_from_string(
-			fcppt::iconv(log_level)
+			fcppt::from_std_string(log_level)
 		)
 	);
 
