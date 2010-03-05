@@ -1,6 +1,6 @@
 #include "log_level.hpp"
 #include <fcppt/log/level_from_string.hpp>
-#include <fcppt/iconv.hpp>
+#include <fcppt/from_std_string.hpp>
 #include <string>
 
 fcppt::log::level::type
@@ -10,7 +10,7 @@ sanguis::args::log_level(
 {
 	return
 		fcppt::log::level_from_string(
-			fcppt::iconv(
+			fcppt::from_std_string(
 				vm["log"].as<
 					std::string
 				>()

@@ -444,7 +444,7 @@ sanguis::net::detail::server_impl::handle_timeout(
 		);
 
 		throw exception(
-			fcppt::iconv(
+			fcppt::from_std_string(
 				_e.message()
 			)
 		);
