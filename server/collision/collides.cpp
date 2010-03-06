@@ -1,8 +1,8 @@
 #include "collides.hpp"
 #include "bounding_circle.hpp"
 #include "../entities/base.hpp"
-#include <fcppt/math/circle/basic_impl.hpp>
-#include <fcppt/math/circle/intersects.hpp>
+#include <fcppt/math/sphere/basic_impl.hpp>
+#include <fcppt/math/sphere/intersects.hpp>
 
 bool
 sanguis::server::collision::collides(
