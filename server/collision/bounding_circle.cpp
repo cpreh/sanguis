@@ -1,6 +1,6 @@
 #include "bounding_circle.hpp"
 #include "../entities/base.hpp"
-#include <fcppt/math/circle/basic_impl.hpp>
+#include <fcppt/math/sphere/basic_impl.hpp>
 
 sanguis::server::circle_type const
 sanguis::server::collision::bounding_circle(
