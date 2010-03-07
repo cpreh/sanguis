@@ -3,11 +3,11 @@
 #include "single.hpp"
 #include "make.hpp"
 #include "convert_enemy_name.hpp"
-#include "../../exception.hpp"
 #include <sge/console/object.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/make_auto_ptr.hpp>
+#include <fcppt/exception.hpp>
 #include <boost/assign/ptr_list_inserter.hpp>
 
 #include "../log.hpp"
@@ -152,7 +152,7 @@ try
 	}
 }
 catch(
-	exception const &e
+	fcppt::exception const &e
 )
 {
 	FCPPT_LOG_ERROR(
