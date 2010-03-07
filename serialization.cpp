@@ -126,6 +126,9 @@ sanguis::serialize(
 	net::data_type &array
 )
 {
+	if(!message.get())
+		return;
+
 	FCPPT_ASSERT(message.get());
 
 	typedef boost::iostreams::back_insert_device<
