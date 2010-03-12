@@ -3,14 +3,15 @@
 #include "single.hpp"
 #include "make.hpp"
 #include "convert_enemy_name.hpp"
-#include "../../exception.hpp"
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/make_auto_ptr.hpp>
+#include <fcppt/exception.hpp>
 #include <boost/assign/ptr_list_inserter.hpp>
 
 #include "../log.hpp"
 #include <fcppt/log/headers.hpp>
+#include <fcppt/lexical_cast.hpp>
 
 sanguis::server::waves::generator::generator(
 )
@@ -23,7 +24,7 @@ sanguis::server::waves::generator::generator(
 				this,
 				std::tr1::placeholders::_1
 			),
-			FCPPT_TEXT("spawn wave [wavename], spawn enemy [enemyname] or spawn all")
+			FCPPT_TEXT("spawn wave (wavename) [count], spawn enemy (enemyname) [count] or spawn all")
 		)
 	)
 #endif
@@ -74,7 +75,7 @@ try
 	}
 
 	if(
-		args_.size() != 3u
+		args_.size() != 3u && args_.size() != 4u
 	)
 	{
 		FCPPT_LOG_ERROR(
@@ -91,32 +92,54 @@ try
 		args_[1]
 	);
 
+	unsigned const count(
+		args_.size() == 4u
+		?
+			fcppt::lexical_cast<
+				unsigned
+			>(
+				args_[3]
+			)
+		:
+			1u
+	);
+	
 	if(
 		action == FCPPT_TEXT("wave")
 	)
-		waves.push_back(
-			make(
-				args_[2]
-			)
-		);
+		for(
+			unsigned i = 0;
+			i < count;
+			++i
+		)
+			waves.push_back(
+				make(
+					args_[2]
+				)
+			);
 	else if(
 		action == FCPPT_TEXT("enemy")
 	)
-	{
-		wave_auto_ptr ptr(
-			fcppt::make_auto_ptr<
-				single
-			>(
-				convert_enemy_name(
-					args_[2]
+		for(
+			unsigned i = 0;
+			i < count;
+			++i
+		)
+		{
+			wave_auto_ptr ptr(
+				fcppt::make_auto_ptr<
+					single
+				>(
+					convert_enemy_name(
+						args_[2]
+					)
 				)
-			)
-		);
+			);
 
-		waves.push_back(
-			ptr
-		);
-	}
+			waves.push_back(
+				ptr
+			);
+		}
 	else
 	{
 		FCPPT_LOG_ERROR(
@@ -128,7 +151,7 @@ try
 	}
 }
 catch(
-	exception const &e
+	fcppt::exception const &e
 )
 {
 	FCPPT_LOG_ERROR(

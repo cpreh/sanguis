@@ -2,7 +2,7 @@
 #include "../log.hpp"
 #include "../../exception.hpp"
 #include <fcppt/container/tree/object_impl.hpp>
-#include <fcppt/container/tree/in_order.hpp>
+#include <fcppt/container/tree/pre_order.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/text.hpp>
 
@@ -88,8 +88,13 @@ sanguis::server::perks::tree::choosable(
 	server::level_type const player_level
 ) const
 {
+	if(
+		p == perk_type::size
+	)
+		return false;
+
 	typedef 
-	fcppt::container::tree::in_order<
+	fcppt::container::tree::pre_order<
 		tree_type const
 	> traversal;
 	
@@ -124,7 +129,7 @@ sanguis::server::perks::tree::choosable(
 		return false;
 
 	for(
-		tree_type const *pos(&*it.internal());
+		tree_type const *pos(&*it);
 		pos->has_parent();
 		pos = &pos->parent()
 	)
@@ -148,7 +153,7 @@ sanguis::server::perks::tree::take(
 )
 {
 	typedef 
-	fcppt::container::tree::in_order<
+	fcppt::container::tree::pre_order<
 		tree_type
 	> traversal;
 	
