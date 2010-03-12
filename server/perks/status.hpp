@@ -11,21 +11,30 @@ namespace server
 namespace perks
 {
 
-struct status {
+struct status
+{
 	status();
 
 	status(
 		perk_type::type,
 		level_type required_player_level,
-		level_type required_parent_level);
+		level_type required_parent_level
+	);
 	
-	void choose();
+	void
+	choose();
 
-	level_type required_player_level() const;
-	level_type required_parent_level() const;
-	level_type level() const;
+	level_type
+	required_player_level() const;
 
-	perk_type::type type() const;
+	level_type
+	required_parent_level() const;
+
+	level_type
+	level() const;
+
+	perk_type::type
+	type() const;
 private:
 	perk_type::type type_;
 	level_type
