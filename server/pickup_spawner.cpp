@@ -8,7 +8,7 @@
 #include "entities/pickups/weapon.hpp"
 #include <fcppt/random/actor/element.hpp>
 #include <fcppt/random/actor/container.hpp>
-#include <fcppt/random/inclusive_range.hpp>
+#include <fcppt/random/make_inclusive_range.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
