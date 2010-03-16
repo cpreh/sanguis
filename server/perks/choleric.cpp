@@ -4,7 +4,7 @@
 #include "../entities/projectiles/rocket.hpp"
 #include "../entities/insert_parameters.hpp"
 #include <sge/time/second_f.hpp>
-#include <fcppt/random/inclusive_range.hpp>
+#include <fcppt/random/make_inclusive_range.hpp>
 #include <fcppt/math/twopi.hpp>
 
 sanguis::server::perks::choleric::choleric()
