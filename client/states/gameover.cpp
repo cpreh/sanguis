@@ -25,6 +25,7 @@
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <fcppt/make_shared_ptr.hpp>
+#include <fcppt/text.hpp>
 
 namespace
 {
