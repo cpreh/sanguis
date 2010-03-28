@@ -12,8 +12,6 @@
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/io/cerr.hpp>
-#include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
 
 sanguis::server::machine::machine(
@@ -108,7 +106,6 @@ sanguis::server::machine::connect_callback(
 	net::id_type const _id
 )
 {
-	fcppt::io::cerr << "got a connect_callback with id " << _id << "\n";
 	clients_.insert(
 		_id,
 		client_data()
@@ -130,7 +127,6 @@ sanguis::server::machine::disconnect_callback(
 	fcppt::string const &
 )
 {
-	fcppt::io::cerr << "got a disconnect_callback with id " << _id << "\n";
 	process_event(
 		message_event(
 			messages::create(

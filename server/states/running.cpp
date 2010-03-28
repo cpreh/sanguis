@@ -143,14 +143,24 @@ sanguis::server::states::running::operator()(
 	messages::console_command const &msg
 )
 {
-	console_.eval(
-		console_.prefix()
-		+
+	fcppt::string const command(
 		fcppt::utf8::convert(
 			msg.get<
 				messages::string
 			>()
 		)
+	);
+
+	FCPPT_LOG_DEBUG(
+		log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("Received console command: ")
+			<< command
+	);
+
+	console_.eval(
+		console_.prefix()
+		+ command
 	);
 		
 	return discard_event();
