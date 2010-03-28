@@ -1,6 +1,7 @@
 #include "object.hpp"
 #include "message_event.hpp"
 #include "states/menu.hpp"
+#include "log.hpp"
 #include "../args/multi_sampling.hpp"
 #include "../server/object.hpp"
 #include "../media_path.hpp"
@@ -32,9 +33,12 @@
 #include <sge/texture/no_fragmented.hpp>
 
 #include <fcppt/function/object.hpp>
+#include <fcppt/log/output.hpp>
+#include <fcppt/log/fatal.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/exception.hpp>
 #include <fcppt/make_auto_ptr.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/text.hpp>
@@ -177,34 +181,42 @@ sanguis::client::object::run()
 		sge::time::second(1)
 	);
 
-	while(
-		machine_.process(
-			tick_event(
-				static_cast<
-					time_type
-				>(
-					frame_timer.reset()
+	try
+	{
+		while(
+			machine_.process(
+				tick_event(
+					static_cast<
+						time_type
+					>(
+						frame_timer.reset()
+					)
 				)
 			)
 		)
+			if(
+				server_
+				&& !server_->running()
+			)
+				break;
+	}
+	catch(
+		fcppt::exception const &e
 	)
-		if(
-			server_
-			&& !server_->running()
-		)
-			break;
+	{
+		FCPPT_LOG_FATAL(
+			log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("Client error: ")
+				<< e.string()
+		);
 
-	if(
-		server_
-	)
-		server_->quit();
+		quit_server();
 
-	return
-		server_
-		?
-			server_->run()
-		:
-			EXIT_SUCCESS;
+		return EXIT_FAILURE;
+	}
+
+	return quit_server();
 }
 
 void
@@ -221,4 +233,21 @@ sanguis::client::object::create_server(
 			resources_
 		)
 	);
+}
+
+int
+sanguis::client::object::quit_server()
+{
+
+	if(
+		server_
+	)
+		server_->quit();
+
+	return
+		server_
+		?
+			server_->run()
+		:
+			EXIT_SUCCESS;
 }

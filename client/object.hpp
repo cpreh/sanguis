@@ -49,6 +49,9 @@ private:
 		net::port_type
 	);
 
+	int
+	quit_server();
+
 	sge::systems::instance &sys_;
 
 	sge::input::key_state_tracker key_state_tracker_;
