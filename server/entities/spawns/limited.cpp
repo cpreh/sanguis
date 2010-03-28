@@ -51,7 +51,7 @@ sanguis::server::entities::spawns::limited::may_spawn(
 				static_cast<
 					size_type
 				>(
-					spawned_ - limit_
+					limit_ - spawned_
 				),
 				static_cast<
 					size_type
