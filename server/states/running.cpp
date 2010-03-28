@@ -37,6 +37,9 @@ sanguis::server::states::running::running(
 			context<machine>().collision_system(),
 			context<machine>().resources()
 		)
+	),
+	console_(
+		FCPPT_TEXT('/')
 	)
 {
 	FCPPT_LOG_DEBUG(
@@ -67,9 +70,10 @@ sanguis::server::states::running::react(
 	);
 
 	static messages::call::object<
-		boost::mpl::vector5<
+		boost::mpl::vector6<
 			messages::client_info,
 			messages::connect,
+			messages::console_command,
 			messages::disconnect,
 			messages::player_cheat,
 			messages::player_choose_perk
@@ -135,6 +139,23 @@ sanguis::server::states::running::operator()(
 boost::statechart::result
 sanguis::server::states::running::operator()(
 	net::id_type const id,
+	messages::console_command const &msg
+)
+{
+	console_.eval(
+		fcppt::utf8::convert(
+			msg.get<
+				messages::string
+			>()
+		)
+	);
+		
+	return discard_event();
+}
+
+boost::statechart::result
+sanguis::server::states::running::operator()(
+	net::id_type const id,
 	messages::disconnect const &
 )
 {
@@ -156,7 +177,8 @@ sanguis::server::states::running::operator()(
 boost::statechart::result
 sanguis::server::states::running::operator()(
 	net::id_type const id,
-	messages::player_cheat const &p)
+	messages::player_cheat const &p
+)
 {
 	global_context_->player_cheat(
 		id,
