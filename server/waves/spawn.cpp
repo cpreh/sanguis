@@ -44,7 +44,7 @@ sanguis::server::waves::spawn(
 			static_cast<
 				space_unit
 			>(
-				1000
+				500
 			)
 		),
 		scale(static_cast<space_unit>(1.5)),
