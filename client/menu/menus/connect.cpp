@@ -1,5 +1,4 @@
 #include "connect.hpp"
-#include "../../../resolution.hpp"
 #include <sge/image/loader.hpp>
 #include <sge/gui/widgets/parameters.hpp>
 #include <sge/gui/layouts/horizontal.hpp>

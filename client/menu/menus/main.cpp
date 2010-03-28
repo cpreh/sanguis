@@ -1,5 +1,4 @@
 #include "main.hpp"
-#include "../../../resolution.hpp"
 #include <sge/gui/widgets/parameters.hpp>
 #include <sge/gui/layouts/vertical.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>

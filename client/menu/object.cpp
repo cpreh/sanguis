@@ -1,7 +1,6 @@
 #include "object.hpp"
 #include "../log.hpp"
 #include "../machine.hpp"
-#include "../../resolution.hpp"
 #include "../../media_path.hpp"
 #include "../cursor/object.hpp"
 #include <sge/gui/skins/standard.hpp>

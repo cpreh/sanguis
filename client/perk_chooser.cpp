@@ -2,14 +2,15 @@
 #include "from_perk_type.hpp"
 #include "log.hpp"
 #include "cursor/object.hpp"
-#include "../resolution.hpp"
 #include "../media_path.hpp"
+#include "../resolution_type.hpp"
 #include <sge/gui/widgets/parameters.hpp>
 #include <sge/gui/skins/standard.hpp>
 #include <sge/gui/layouts/vertical.hpp>
 #include <sge/gui/unit.hpp>
 #include <sge/gui/make_image.hpp>
 #include <sge/image/loader.hpp>
+#include <sge/renderer/device.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/output.hpp>
@@ -37,7 +38,10 @@ fcppt::log::object mylogger(
 	)
 );
 
-sge::gui::dim const dialog_size()
+sge::gui::dim const
+dialog_size(
+	sanguis::resolution_type const &resolution_
+)
 {
 	float const scale_x = 0.4f,
 	            scale_y = 0.8f;
@@ -45,20 +49,32 @@ sge::gui::dim const dialog_size()
 	return sge::gui::dim(
 		static_cast<sge::gui::unit>(
 			static_cast<float>(
-				sanguis::resolution().w())*scale_x),
+				resolution_.w()
+			) * scale_x
+		),
 		static_cast<sge::gui::unit>(
 			static_cast<float>(
-				sanguis::resolution().h())*scale_y));
+				resolution_.h()
+			) * scale_y
+		)
+	);
 }
 
-sge::gui::point const dialog_pos()
+sge::gui::point const
+dialog_pos(
+	sanguis::resolution_type const &resolution_
+)
 {
 	return 
 		fcppt::math::dim::structure_cast<sge::gui::point>(
-			sanguis::resolution())/
-		static_cast<sge::gui::unit>(2)-
+			resolution_
+		) /
+		static_cast<sge::gui::unit>(2) -
 		fcppt::math::dim::structure_cast<sge::gui::point>(
-			dialog_size())/
+			dialog_size(
+				resolution_
+			)
+		) /
 		static_cast<sge::gui::unit>(2);
 }
 }
@@ -108,9 +124,15 @@ sanguis::client::perk_chooser::perk_chooser(
 		m_,
 		sge::gui::widgets::parameters()
 			.pos(
-				dialog_pos())
+				dialog_pos(
+					renderer_->screen_size()
+				)
+			)
 			.size(
-				dialog_size())
+				dialog_size(
+					renderer_->screen_size()
+				)
+			)
 			.activation(
 				sge::gui::activation_state::inactive)
 			.layout(

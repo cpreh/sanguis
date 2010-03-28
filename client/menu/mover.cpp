@@ -1,5 +1,4 @@
 #include "mover.hpp"
-#include "../../resolution.hpp"
 #include "../../random.hpp"
 #include <sge/gui/unit.hpp>
 #include <sge/gui/manager.hpp>

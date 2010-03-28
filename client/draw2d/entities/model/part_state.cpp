@@ -4,7 +4,6 @@
 #include "../../../../load/model/part.hpp"
 #include "../../../../load/model/animation_sound.hpp"
 #include "../../../../animation_sound_type.hpp"
-#include "../../../../resolution.hpp"
 #include <sge/sprite/object_impl.hpp>
 #include <sge/audio/sound.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
@@ -104,6 +103,8 @@ sanguis::client::draw2d::entities::model::part_state::init_sound(
 {
 	if (!s)
 		return;
+	// TODO!
+#if 0
 	s->positional(true);
 	s->rolloff(
 		static_cast<sge::audio::unit>(1)
@@ -111,6 +112,7 @@ sanguis::client::draw2d::entities::model::part_state::init_sound(
 			resolution().h()
 		)
 	);
+#endif
 }
 
 void
