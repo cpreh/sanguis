@@ -36,7 +36,8 @@
 sanguis::server::global::context::context(
 	unicast_callback const &send_unicast_,
 	sge::collision::system_ptr const collision_system_,
-	load::context_base const &model_context_
+	load::context_base const &model_context_,
+	sge::console::object &console_
 )
 :
 	send_unicast_(send_unicast_),
@@ -58,6 +59,9 @@ sanguis::server::global::context::context(
 		>(
 			model_context_
 		)
+	),
+	console_(
+		console_
 	)
 {}
 

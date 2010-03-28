@@ -23,6 +23,7 @@
 #include "../../messages/auto_ptr.hpp"
 #include "../../load/context_base_fwd.hpp"
 #include <sge/collision/system_ptr.hpp>
+#include <sge/console/object_fwd.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/container/map_decl.hpp>
@@ -43,7 +44,8 @@ public:
 	context(
 		unicast_callback const &,
 		sge::collision::system_ptr,
-		load::context_base const &
+		load::context_base const &,
+		sge::console::object &
 	);
 
 	~context();
@@ -149,6 +151,8 @@ private:
 	server::world::context_ptr const world_context_;
 
 	server::environment::load_context_ptr const load_context_;
+
+	sge::console::object &console_;
 };
 
 }

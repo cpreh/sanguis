@@ -109,11 +109,12 @@ private:
 	static fcppt::log::object
 	&log();
 
+	sge::console::object console_;
+
 	fcppt::scoped_ptr<
 		global::context
 	> global_context_;
 
-	sge::console::object console_;
 	//pickup_spawner pickup_spawner_;
 
 	/*fcppt::random::uniform<

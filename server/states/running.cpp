@@ -24,6 +24,9 @@ sanguis::server::states::running::running(
 )
 :
 	my_base(ctx),
+	console_(
+		FCPPT_TEXT('/')
+	),
 	global_context_(
 		new global::context(
 			std::tr1::bind(
@@ -35,11 +38,9 @@ sanguis::server::states::running::running(
 				std::tr1::placeholders::_2
 			),
 			context<machine>().collision_system(),
-			context<machine>().resources()
+			context<machine>().resources(),
+			console_
 		)
-	),
-	console_(
-		FCPPT_TEXT('/')
 	)
 {
 	FCPPT_LOG_DEBUG(
@@ -143,6 +144,8 @@ sanguis::server::states::running::operator()(
 )
 {
 	console_.eval(
+		console_.prefix()
+		+
 		fcppt::utf8::convert(
 			msg.get<
 				messages::string
