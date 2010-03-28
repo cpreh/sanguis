@@ -99,7 +99,12 @@ sanguis::client::machine::machine(
 	console_wrapper_(
 		_console,
 		input_system_,
-		sge::input::kc::key_f1
+		sge::input::kc::key_f1,
+		std::tr1::bind(
+			&machine::send,
+			this,
+			std::tr1::placeholders::_1
+		)
 	),
 	running_(true),
 	server_callback_(_server_callback),

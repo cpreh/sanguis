@@ -6,6 +6,7 @@
 #include "make_message_id.hpp"
 #include "types/message.hpp"
 #include <majutsu/composite.hpp>
+#include <majutsu/role.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 
 namespace sanguis
@@ -19,7 +20,9 @@ typedef make_class<
 			make_message_id<
 				types::message::console_command
 			>::type,
-			string
+			majutsu::role<
+				string
+			>
 		>
 	>
 >::type console_command;
