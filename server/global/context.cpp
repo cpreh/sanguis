@@ -376,7 +376,8 @@ sanguis::server::global::context::world(
 		server::world::random(
 			world_context_,
 			collision_system_,
-			load_context_
+			load_context_,
+			console_
 		)
 	).first->second;
 }

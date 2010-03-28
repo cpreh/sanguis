@@ -97,17 +97,23 @@ sanguis::client::console::fallback(
 	fcppt::string const &string_
 )
 {
+	fcppt::string const prefix(
+		FCPPT_TEXT("sv_")
+	);
+
 	if(
 		boost::algorithm::starts_with(
 			string_,
-			FCPPT_TEXT("sv_")
+			prefix
 		)
 	)
 		send_(
 			messages::create(
 				messages::console_command(
 					fcppt::utf8::convert(
-						string_
+						string_.substr(
+							prefix.size()
+						)
 					)
 				)
 			)

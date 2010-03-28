@@ -5,8 +5,9 @@
 #include "../environment/object_ptr.hpp"
 #include "../environment/load_context_ptr.hpp"
 #include "../../time_type.hpp"
-//#include <fcppt/signal/scoped_connection.hpp>
 #include <sge/console/arg_list.hpp>
+#include <sge/console/object_fwd.hpp>
+#include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
 
@@ -21,7 +22,9 @@ class generator
 {
 	FCPPT_NONCOPYABLE(generator)
 public:
-	explicit generator();
+	explicit generator(
+		sge::console::object &
+	);
 
 	~generator();
 
@@ -40,7 +43,7 @@ private:
 	void
 	spawn_all();
 
-	//fcppt::signal::scoped_connection spawn_connection;
+	fcppt::signal::scoped_connection spawn_connection;
 
 	typedef boost::ptr_list<
 		wave
