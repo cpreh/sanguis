@@ -1,24 +1,22 @@
 #include "machine.hpp"
 #include "message_event.hpp"
 #include "../tick_event.hpp"
-#include "../serialization.hpp"
 #include "../messages/create.hpp"
 #include "../messages/connect.hpp"
 #include "../messages/disconnect.hpp"
+#include "../net/serialize.hpp"
+#include "../net/deserialize.hpp"
 #include "../exception.hpp"
-#include <sge/console/gfx.hpp>
-#include <sge/systems/instance.hpp>
+#include <fcppt/algorithm/append.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
-#include <fcppt/algorithm/append.hpp>
+#include <fcppt/function/object.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
 
 sanguis::server::machine::machine(
-	load::context const &resources_,
+	load::context_base const &resources_,
 	sge::collision::system_ptr const collision_,
-	sge::console::object &console_,
 	net::port_type const port_
 )
 :
@@ -28,6 +26,9 @@ sanguis::server::machine::machine(
 	port_(
 		port_
 	),
+	net_(
+		net::server::time_resolution(
+			16)),
 	s_conn(
 		net_.register_connect(
 			std::tr1::bind(
@@ -58,9 +59,9 @@ sanguis::server::machine::machine(
 		)
 	),
 	clients_(),
-	collision_(collision_),
-	console_(console_)
-{}
+	collision_(collision_)
+{
+}
 
 void
 sanguis::server::machine::process(
@@ -77,23 +78,36 @@ sanguis::server::machine::process(
 		}
 	}
 
-	net_.process();
 	process_event(t);
+}
+
+void
+sanguis::server::machine::run()
+{
+	net_.run();
+}
+
+void
+sanguis::server::machine::stop()
+{
+	net_.stop();
 }
 
 void
 sanguis::server::machine::listen()
 {
-	net_.listen(port_);
+	net_.listen(
+		port_
+	);
 }
 
 void
 sanguis::server::machine::connect_callback(
-	net::id_type const id
+	net::id_type const _id
 )
 {
 	clients_.insert(
-		id,
+		_id,
 		client_data()
 	);
 
@@ -102,14 +116,14 @@ sanguis::server::machine::connect_callback(
 			messages::create(
 				messages::connect()
 			),
-			id
+			_id
 		)
 	);
 }
 
 void
 sanguis::server::machine::disconnect_callback(
-	net::id_type const id,
+	net::id_type const _id,
 	fcppt::string const &
 )
 {
@@ -118,46 +132,49 @@ sanguis::server::machine::disconnect_callback(
 			messages::create(
 				messages::disconnect()
 			),
-			id
+			_id
 		)
 	);
 
 	clients_.erase(
-		id
+		_id
 	);
 }
 
 void
 sanguis::server::machine::process_message(
-	net::id_type const id,
-	messages::auto_ptr m
+	net::id_type const _id,
+	messages::auto_ptr _m
 )
 {
 	process_event(
 		message_event(
-			m,
-			id
+			_m,
+			_id
 		)
 	);
 }
 
 void
 sanguis::server::machine::data_callback(
-	net::id_type const id,
-	net::data_type const &data
+	net::id_type const _id,
+	net::data_type const &_data
 )
 {
 	fcppt::algorithm::append(
-		clients_[id].in_buffer,
-		data
+		clients_[_id].in_buffer,
+		_data
 	);
 
 	for(;;)
 	{
-		messages::auto_ptr p = deserialize(clients_[id].in_buffer);
+		messages::auto_ptr p = 
+			net::deserialize(
+				clients_[_id].in_buffer
+			);
 		if(!p.get())
 			return;
-		process_message(id, p);
+		process_message(_id, p);
 	}
 	//while (messages::auto_ptr p = deserialize(clients[id].in_buffer))
 	//	process_message(id,p);
@@ -165,13 +182,13 @@ sanguis::server::machine::data_callback(
 
 void
 sanguis::server::machine::send_to_all(
-	messages::auto_ptr m
+	messages::auto_ptr _m
 )
 { 
 	net::data_type m_str;
 
-	serialize(
-		m,
+	net::serialize(
+		_m,
 		m_str
 	);
 
@@ -188,48 +205,46 @@ sanguis::server::machine::send_to_all(
 sanguis::net::port_type
 sanguis::server::machine::port() const
 {
-	return port_;
+	return 
+		port_;
 }
 
 sanguis::net::server &
 sanguis::server::machine::net()
 {
-	return net_;
+	return 
+		net_;
 }
 
-sanguis::load::context const &
+sanguis::load::context_base const &
 sanguis::server::machine::resources() const
 {
-	return resources_;
+	return 
+		resources_;
 }
 
 sge::collision::system_ptr const
 sanguis::server::machine::collision_system() const
 {
-	return collision_;
-}
-
-sge::console::object &
-sanguis::server::machine::console()
-{
-	return console_;
+	return 
+		collision_;
 }
 
 void
 sanguis::server::machine::send_unicast(
-	net::id_type const id,
-	messages::auto_ptr m
+	net::id_type const _id,
+	messages::auto_ptr _m
 )
 {
 	net::data_type ser;
 
-	serialize(
-		m,
+	net::serialize(
+		_m,
 		ser
 	);
 
 	fcppt::algorithm::append(
-		clients_[id].out_buffer,
+		clients_[_id].out_buffer,
 		ser
 	);
 }

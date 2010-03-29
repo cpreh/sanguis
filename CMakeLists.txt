@@ -60,13 +60,15 @@ set_source_files_properties(
 FILE (GLOB basefiles *.cpp)
 
 FILE (GLOB_RECURSE collectionsfiles
+	args/*.cpp
 	net/*.cpp
 	client/*.cpp
 	client_messages/*.cpp
 	draw/*.cpp
 	messages/*.cpp
 	load/*.cpp
-	server/*.cpp)
+	server/*.cpp
+)
 
 ADD_EXECUTABLE(sanguis ${basefiles} ${collectionsfiles})
 

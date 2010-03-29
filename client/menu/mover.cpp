@@ -1,5 +1,4 @@
 #include "mover.hpp"
-#include "../../resolution.hpp"
 #include "../../random.hpp"
 #include <sge/gui/unit.hpp>
 #include <sge/gui/manager.hpp>
@@ -32,6 +31,7 @@ sanguis::client::menu::mover::float_type const
 		static_cast<sanguis::client::menu::mover::float_type>(3.0);
 
 sge::gui::point const center(
+	sge::gui::dim const &_resolution,
 	sge::gui::dim const &d)
 {
 	return fcppt::math::dim::structure_cast<
@@ -40,7 +40,7 @@ sge::gui::point const center(
 		fcppt::math::dim::structure_cast<
 			sge::gui::dim
 		>(
-			sanguis::resolution()
+			_resolution
 		)/
 		static_cast<sge::gui::unit>(2) -
 		d /
@@ -49,17 +49,21 @@ sge::gui::point const center(
 }
 
 sge::gui::point const center_widget(
+	sge::gui::dim const &_resolution,
 	sge::gui::widgets::base &w)
 {
-	return center(w.size());
+	return center(_resolution,w.size());
 }
 }
 
 sanguis::client::menu::mover::mover(
 	sge::gui::manager &_man,
+	sge::gui::dim const &_resolution,
 	sge::gui::widgets::base &_current)
 :
 	man_(_man),
+	resolution_(
+		_resolution),
 	current_(&_current),
 	current_entry_(),
 	to_move_(),
@@ -85,6 +89,7 @@ sanguis::client::menu::mover::mover(
 			*/
 	current_->pos_hint(
 		center(
+			resolution_,
 			*current_->size_hint()));
 
 	current_entry_.current = 
@@ -141,6 +146,7 @@ void sanguis::client::menu::mover::reset(
 	current_entry_.target = 
 		fcppt::math::vector::structure_cast<float_vector>(
 			center_widget(
+				resolution_,
 				w));
 	current_->activation(
 		sge::gui::activation_state::active);

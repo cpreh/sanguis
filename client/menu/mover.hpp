@@ -7,6 +7,7 @@
 #include <sge/gui/point.hpp>
 #include <sge/gui/dim.hpp>
 #include <fcppt/math/vector/basic_decl.hpp>
+#include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <map>
 
@@ -22,6 +23,7 @@ FCPPT_NONCOPYABLE(mover)
 public:
 	mover(
 		sge::gui::manager &,
+		sge::gui::dim const &,
 		sge::gui::widgets::base &);
 	
 	void update(
@@ -44,6 +46,7 @@ private:
 	> container;
 
 	sge::gui::manager &man_;
+	sge::gui::dim const resolution_;
 	sge::gui::widgets::base *current_;
 	entry current_entry_;
 	container to_move_;

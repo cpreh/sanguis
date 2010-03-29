@@ -27,7 +27,7 @@ public:
 	boost::asio::ip::tcp::socket socket_;
 	static_buffer new_data_;
 	output_buffer output_;
-	bool connected_,sending_;
+	bool sending_;
 
 };
 

@@ -8,7 +8,6 @@
 #include "../../messages/call/object.hpp"
 #include "../../messages/highscore.hpp"
 #include "../../messages/create.hpp"
-#include "../../load/context.hpp"
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/headers.hpp>
@@ -25,6 +24,9 @@ sanguis::server::states::running::running(
 )
 :
 	my_base(ctx),
+	console_(
+		FCPPT_TEXT('/')
+	),
 	global_context_(
 		new global::context(
 			std::tr1::bind(
@@ -36,8 +38,8 @@ sanguis::server::states::running::running(
 				std::tr1::placeholders::_2
 			),
 			context<machine>().collision_system(),
-			context<machine>().resources().models(),
-			context<machine>().console()
+			context<machine>().resources(),
+			console_
 		)
 	)
 {
@@ -69,9 +71,10 @@ sanguis::server::states::running::react(
 	);
 
 	static messages::call::object<
-		boost::mpl::vector5<
+		boost::mpl::vector6<
 			messages::client_info,
 			messages::connect,
+			messages::console_command,
 			messages::disconnect,
 			messages::player_cheat,
 			messages::player_choose_perk
@@ -137,6 +140,35 @@ sanguis::server::states::running::operator()(
 boost::statechart::result
 sanguis::server::states::running::operator()(
 	net::id_type const id,
+	messages::console_command const &msg
+)
+{
+	fcppt::string const command(
+		fcppt::utf8::convert(
+			msg.get<
+				messages::string
+			>()
+		)
+	);
+
+	FCPPT_LOG_DEBUG(
+		log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("Received console command: ")
+			<< command
+	);
+
+	console_.eval(
+		console_.prefix()
+		+ command
+	);
+		
+	return discard_event();
+}
+
+boost::statechart::result
+sanguis::server::states::running::operator()(
+	net::id_type const id,
 	messages::disconnect const &
 )
 {
@@ -158,7 +190,8 @@ sanguis::server::states::running::operator()(
 boost::statechart::result
 sanguis::server::states::running::operator()(
 	net::id_type const id,
-	messages::player_cheat const &p)
+	messages::player_cheat const &p
+)
 {
 	global_context_->player_cheat(
 		id,

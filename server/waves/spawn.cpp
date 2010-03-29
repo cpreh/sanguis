@@ -5,19 +5,18 @@
 #include "../environment/object.hpp"
 #include "../../random.hpp"
 #include "../../angle_to_vector.hpp"
-#include "../../resolution.hpp"
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/tr1/random.hpp>
-#include <algorithm>
 
 void
 sanguis::server::waves::spawn(
 	environment::object_ptr const env,
 	environment::load_context_ptr const load_context,
-	enemy_type::type const etype
+	enemy_type::type const etype,
+	entities::auto_weak_link const spawn
 )
 {
 	// TODO: put this randomizer somewhere else!
@@ -36,38 +35,35 @@ sanguis::server::waves::spawn(
 		uniform_su(
 			static_cast<space_unit>(0),
 			fcppt::math::twopi<space_unit>()
-		));
-
-	sge::renderer::screen_size const res(
-		resolution());
+		)
+	);
 
 	space_unit const
 		rand_angle(rng()),
 		radius(
-			static_cast<space_unit>(
-				std::max(
-					res.w(),
-					res.h()))
-			/ static_cast<space_unit>(2)),
+			static_cast<
+				space_unit
+			>(
+				500
+			)
+		),
 		scale(static_cast<space_unit>(1.5)),
 		angle(static_cast<space_unit>(0)
 	);
 	
 	pos_type const
-		screen_center(
-			pos_type(
-				static_cast<space_unit>(res.w()),
-				static_cast<space_unit>(res.h()))
-			/ static_cast<space_unit>(2)),
 		center(
-			scale * radius * angle_to_vector(rand_angle)),
+			scale * radius * angle_to_vector(rand_angle)
+		),
 		pos(
-			center + screen_center);
+			center
+		);
 
 	env->insert(
 		entities::enemies::create(
 			etype,
-			load_context
+			load_context,
+			spawn
 		),
 		entities::insert_parameters(
 			pos,

@@ -6,11 +6,11 @@
 #include "../../../../load/model/base_animation_not_found.hpp"
 #include "../../../../load/model/animation_context.hpp"
 #include "../../../../exception.hpp"
+#include "../../../../rel_angle_to_abs.hpp"
 #include <sge/sprite/animation/texture_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/abs_angle_to_rel.hpp>
-#include <fcppt/math/rel_angle_to_abs.hpp>
 #include <fcppt/math/is_rel_angle.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/math/vector/dim.hpp>
@@ -146,12 +146,16 @@ sanguis::client::draw2d::entities::model::part::update(
 	funit const
 		// current orientation in [0,2pi]
 		abs_current(
-			fcppt::math::rel_angle_to_abs(
-				orientation())),
+			rel_angle_to_abs(
+				orientation()
+			)
+		),
 		// target orientation in [0,2pi]
 		abs_target(
-			fcppt::math::rel_angle_to_abs(
-				desired_orientation_));
+			rel_angle_to_abs(
+				desired_orientation_
+			)
+		);
 	
 	// shortcut
 	funit const twopi = fcppt::math::twopi<funit>();

@@ -9,7 +9,10 @@ namespace net
 {
 namespace detail
 {
-boost::asio::io_service &io_service_wrapper();
+
+boost::asio::io_service &
+io_service_wrapper();
+
 }
 }
 }

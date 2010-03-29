@@ -8,10 +8,12 @@
 #include "../../messages/connect.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../messages/client_info.hpp"
+#include "../../messages/console_command.hpp"
 #include "../../messages/player_cheat.hpp"
 #include "../../messages/player_choose_perk.hpp"
 #include "../../messages/base_fwd.hpp"
 #include "../../net/id_type.hpp"
+#include <sge/console/object.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <boost/statechart/state.hpp>
@@ -52,19 +54,25 @@ public:
 	boost::statechart::result
 	operator()(
 		net::id_type,
+		messages::client_info const &
+	);
+
+	boost::statechart::result
+	operator()(
+		net::id_type,
 		messages::connect const &
 	);
 
 	boost::statechart::result
 	operator()(
 		net::id_type,
-		messages::disconnect const &
+		messages::console_command const &
 	);
 
 	boost::statechart::result
 	operator()(
 		net::id_type,
-		messages::client_info const &
+		messages::disconnect const &
 	);
 
 	boost::statechart::result
@@ -101,9 +109,12 @@ private:
 	static fcppt::log::object
 	&log();
 
+	sge::console::object console_;
+
 	fcppt::scoped_ptr<
 		global::context
 	> global_context_;
+
 	//pickup_spawner pickup_spawner_;
 
 	/*fcppt::random::uniform<

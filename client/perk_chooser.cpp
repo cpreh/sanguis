@@ -2,15 +2,15 @@
 #include "from_perk_type.hpp"
 #include "log.hpp"
 #include "cursor/object.hpp"
-#include "../resolution.hpp"
 #include "../media_path.hpp"
+#include "../resolution_type.hpp"
 #include <sge/gui/widgets/parameters.hpp>
 #include <sge/gui/skins/standard.hpp>
 #include <sge/gui/layouts/vertical.hpp>
 #include <sge/gui/unit.hpp>
 #include <sge/gui/make_image.hpp>
-#include <sge/systems/instance.hpp>
 #include <sge/image/loader.hpp>
+#include <sge/renderer/device.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/output.hpp>
@@ -38,7 +38,10 @@ fcppt::log::object mylogger(
 	)
 );
 
-sge::gui::dim const dialog_size()
+sge::gui::dim const
+dialog_size(
+	sanguis::resolution_type const &resolution_
+)
 {
 	float const scale_x = 0.4f,
 	            scale_y = 0.8f;
@@ -46,20 +49,32 @@ sge::gui::dim const dialog_size()
 	return sge::gui::dim(
 		static_cast<sge::gui::unit>(
 			static_cast<float>(
-				sanguis::resolution().w())*scale_x),
+				resolution_.w()
+			) * scale_x
+		),
 		static_cast<sge::gui::unit>(
 			static_cast<float>(
-				sanguis::resolution().h())*scale_y));
+				resolution_.h()
+			) * scale_y
+		)
+	);
 }
 
-sge::gui::point const dialog_pos()
+sge::gui::point const
+dialog_pos(
+	sanguis::resolution_type const &resolution_
+)
 {
 	return 
 		fcppt::math::dim::structure_cast<sge::gui::point>(
-			sanguis::resolution())/
-		static_cast<sge::gui::unit>(2)-
+			resolution_
+		) /
+		static_cast<sge::gui::unit>(2) -
 		fcppt::math::dim::structure_cast<sge::gui::point>(
-			dialog_size())/
+			dialog_size(
+				resolution_
+			)
+		) /
 		static_cast<sge::gui::unit>(2);
 }
 }
@@ -81,30 +96,43 @@ sanguis::client::perk_chooser::activation::~activation()
 }
 
 sanguis::client::perk_chooser::perk_chooser(
-	sge::systems::instance &_sys,
+	sge::renderer::device_ptr const renderer_,
+	sge::input::system_ptr const input_system_,
+	sge::image::loader_ptr const image_loader_,
+	sge::font::system_ptr const font_system_,
 	send_callback const &_send_callback,
-	sanguis::client::cursor::object_ptr const _cursor)
+	sanguis::client::cursor::object_ptr const _cursor
+)
 :
-	sys_(_sys),
+	image_loader_(image_loader_),
 	perks_(),
 	current_level_(
 		static_cast<level_type>(0)),
 	consumed_levels_(
 		static_cast<level_type>(0)),
 	m_(
-		sys_.renderer(),
-		sys_.input_system(),
+		renderer_,
+		input_system_,
 		sge::gui::skins::ptr(
 			new sge::gui::skins::standard(
-				sys_.font_system())),
-		_cursor),
+				font_system_
+			)
+		),
+		_cursor
+	),
 	background_(
 		m_,
 		sge::gui::widgets::parameters()
 			.pos(
-				dialog_pos())
+				dialog_pos(
+					renderer_->screen_size()
+				)
+			)
 			.size(
-				dialog_size())
+				dialog_size(
+					renderer_->screen_size()
+				)
+			)
 			.activation(
 				sge::gui::activation_state::inactive)
 			.layout(
@@ -291,7 +319,8 @@ sanguis::client::perk_chooser::image_map::const_iterator const
 
 	image_map::const_iterator pi = 
 		images_.find(
-			r);
+			r
+		);
 
 	if (pi != images_.end())
 		return pi;
@@ -300,15 +329,19 @@ sanguis::client::perk_chooser::image_map::const_iterator const
 
 	new_image.normal = 
 		sge::gui::make_image(
-			sys_.image_loader()->load(
+			image_loader_->load(
 				base/
-				FCPPT_TEXT("normal.png")));
+				FCPPT_TEXT("normal.png")
+			)
+		);
 
 	new_image.hover = 
 		sge::gui::make_image(
-			sys_.image_loader()->load(
+			image_loader_->load(
 				base/
-				FCPPT_TEXT("hover.png")));
+				FCPPT_TEXT("hover.png")
+			)
+		);
 
 	pi = images_.insert(
 		std::make_pair(

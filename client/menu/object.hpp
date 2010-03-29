@@ -10,14 +10,16 @@
 #include "mover.hpp"
 #include "../cursor/object_ptr.hpp"
 #include "../../time_type.hpp"
-#include <sge/systems/instance_fwd.hpp>
-#include <fcppt/filesystem/path.hpp>
+#include <sge/font/system_ptr.hpp>
 #include <sge/gui/widgets/buttons/text.hpp>
 #include <sge/gui/widgets/backdrop.hpp>
 #include <sge/gui/widgets/graphics.hpp>
 #include <sge/gui/widgets/edit.hpp>
 #include <sge/gui/widgets/label.hpp>
 #include <sge/gui/manager.hpp>
+#include <sge/image/loader_ptr.hpp>
+#include <sge/input/system_ptr.hpp>
+#include <sge/renderer/device_ptr.hpp>
 #include <sge/sprite/type_choices.hpp>
 #include <sge/sprite/no_color.hpp>
 #include <sge/sprite/with_texture.hpp>
@@ -26,9 +28,12 @@
 #include <sge/sprite/external_system_decl.hpp>
 #include <sge/sprite/object_decl.hpp>
 #include <sge/sprite/parameters_fwd.hpp>
+
+#include <fcppt/filesystem/path.hpp>
 #include <fcppt/signal/connection_manager.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
+
 #include <boost/mpl/vector/vector10.hpp>
 
 namespace sanguis
@@ -42,7 +47,10 @@ class object
 	FCPPT_NONCOPYABLE(object)
 public:
 	object(
-		sge::systems::instance const &,
+		sge::renderer::device_ptr,
+		sge::image::loader_ptr,
+		sge::font::system_ptr,
+		sge::input::system_ptr,
 		cursor::object_ptr,
 		callbacks::object const &
 	);
@@ -59,8 +67,6 @@ public:
 		fcppt::string const &message
 	);
 private:
-	sge::systems::instance const &sys_;
-	
 	fcppt::filesystem::path const 
 		menu_path,
 		buttons_path,
@@ -69,12 +75,17 @@ private:
 	sge::gui::manager m;
 
 	menus::main main_;
+
 	menus::connect connect_;
+
 	menus::connect_box connect_box_;
+
 	menus::highscore highscore_;
 	
 	mover mover_;
+
 	fcppt::signal::connection_manager connections_;
+
 	callbacks::object const callbacks_;
 
 	typedef sge::sprite::choices<
@@ -107,12 +118,20 @@ private:
 		connection_host_,
 		connection_port_;
 
-	void start_server();
-	void connect_from_menu();
-	void connect(
+	void
+	start_server();
+
+	void
+	connect_from_menu();
+
+	void
+	connect(
 		fcppt::string const &,
-		fcppt::string const &);
-	void cancel_connect();
+		fcppt::string const &
+	);
+
+	void
+	cancel_connect();
 };
 }
 }

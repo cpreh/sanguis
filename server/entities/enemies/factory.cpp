@@ -12,7 +12,8 @@
 sanguis::server::entities::auto_ptr
 sanguis::server::entities::enemies::create(
 	enemy_type::type const etype,
-	environment::load_context_ptr const load_context_
+	environment::load_context_ptr const load_context_,
+	entities::auto_weak_link const spawn_
 )
 {
 	switch(etype) {
@@ -37,7 +38,8 @@ sanguis::server::entities::enemies::create(
 					)
 				),
 				static_cast<probability_type>(0.25),
-				static_cast<exp_type>(10)
+				static_cast<exp_type>(10),
+				spawn_
 			)
 		);
 	case enemy_type::zombie01:
@@ -57,7 +59,8 @@ sanguis::server::entities::enemies::create(
 					)
 				),
 				static_cast<probability_type>(0.25),
-				static_cast<exp_type>(5)
+				static_cast<exp_type>(5),
+				spawn_
 			)
 		);
 	case enemy_type::wolf_black:
@@ -79,7 +82,8 @@ sanguis::server::entities::enemies::create(
 					)
 				),
 				static_cast<probability_type>(0.25),
-				static_cast<exp_type>(10)
+				static_cast<exp_type>(10),
+				spawn_
 			)
 		);
 	case enemy_type::skeleton:
@@ -99,7 +103,8 @@ sanguis::server::entities::enemies::create(
 					)
 				),
 				static_cast<probability_type>(0.75),
-				static_cast<exp_type>(300)
+				static_cast<exp_type>(300),
+				spawn_
 			)
 		);
 	case enemy_type::maggot:
@@ -119,7 +124,8 @@ sanguis::server::entities::enemies::create(
 					)
 				),
 				static_cast<probability_type>(0.1),
-				static_cast<exp_type>(1)
+				static_cast<exp_type>(1),
+				spawn_
 			)
 		);
 	case enemy_type::spider:
@@ -139,11 +145,15 @@ sanguis::server::entities::enemies::create(
 					)
 				),
 				static_cast<probability_type>(0.5),
-				static_cast<exp_type>(12)
+				static_cast<exp_type>(12),
+				spawn_
 			)		
 		);
-	default:
-		throw exception(
-			FCPPT_TEXT("Invalid enemy_type in factory!"));
+	case enemy_type::size:
+		break;
 	}
+
+	throw exception(
+		FCPPT_TEXT("Invalid enemy_type in factory!")
+	);
 }

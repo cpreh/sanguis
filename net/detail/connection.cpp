@@ -7,6 +7,5 @@ sanguis::net::detail::connection::connection(
 	  socket_(_io_service),
 		new_data_(),
 		output_(),
-		connected_(false),
 		sending_(false) 
 {}

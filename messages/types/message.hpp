@@ -24,6 +24,7 @@ enum type {
 	client_info,
 	connect,
 	connect_state,
+	console_command,
 	die,
 	disconnect,
 	experience,

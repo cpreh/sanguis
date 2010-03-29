@@ -1,17 +1,18 @@
 #include "explosion.hpp"
 #include "../particle/explosion.hpp"
+#include "../particle/fade_time_range.hpp"
 #include "../particle/properties.hpp"
 #include "../particle/property_container.hpp"
 #include "../particle/object.hpp"
 #include "../particle/z_ordering.hpp"
 #include "../../../load/model/part.hpp"
 #include "../../../load/model/weapon_category.hpp"
-#include "../../../load/model/model.hpp"
+#include "../../../load/model/object.hpp"
 #include "../../../load/model/collection.hpp"
-#include "../../../resolution.hpp"
 #include "../../../animation_type.hpp"
 #include "../../../from_particle_type.hpp"
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <sge/renderer/device.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/minmax_pair_impl.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -132,11 +133,6 @@ sanguis::client::draw2d::entities::explosion::explosion(
 		_aoe
 	)
 {
-	// TODO: we have to pass the aoe here!
-	sge::renderer::screen_size const screen_sz(
-		resolution()
-	);
-
 	particle::base_ptr n(
 		new particle::explosion(
 			properties_,

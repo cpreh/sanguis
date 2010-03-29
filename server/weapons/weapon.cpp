@@ -11,7 +11,7 @@
 #include "../collision/bounding_circle.hpp"
 #include "../../exception.hpp"
 #include <sge/time/second_f.hpp>
-#include <fcppt/math/circle/basic_impl.hpp>
+#include <fcppt/math/sphere/basic_impl.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/object.hpp>

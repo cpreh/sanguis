@@ -7,6 +7,7 @@
 #include "../../sprite/index.hpp"
 #include "../../../id_dont_care.hpp"
 #include "../../../../load/model/collection.hpp"
+#include "../../../../load/model/object.hpp"
 #include "../../../../exception.hpp"
 #include <sge/time/second.hpp>
 #include <sge/sprite/object_impl.hpp>
@@ -54,7 +55,7 @@ sanguis::client::draw2d::entities::model::object::object(
 	part_vector::size_type i(0);
 
 	BOOST_FOREACH(
-		load::model::model::value_type const &p,
+		load::model::object::value_type const &p,
 		param_.collection()[name]
 	)
 		parts.push_back(

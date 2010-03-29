@@ -21,7 +21,7 @@
 #include "../../perk_type.hpp"
 #include "../../time_type.hpp"
 #include "../../messages/auto_ptr.hpp"
-#include "../../load/model/context_fwd.hpp"
+#include "../../load/context_base_fwd.hpp"
 #include <sge/collision/system_ptr.hpp>
 #include <sge/console/object_fwd.hpp>
 #include <fcppt/function/object.hpp>
@@ -37,13 +37,14 @@ namespace server
 namespace global
 {
 
-class context {
+class context
+{
 	FCPPT_NONCOPYABLE(context)
 public:
 	context(
 		unicast_callback const &,
 		sge::collision::system_ptr,
-		load::model::context const &,
+		load::context_base const &,
 		sge::console::object &
 	);
 

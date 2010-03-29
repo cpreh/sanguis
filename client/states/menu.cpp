@@ -22,16 +22,20 @@
 #include <fcppt/utf8/convert.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/iconv.hpp>
-#include <boost/mpl/vector.hpp>
+#include <fcppt/to_std_string.hpp>
+#include <boost/mpl/vector/vector10.hpp>
 #include <ostream>
 
 sanguis::client::states::menu::menu(
-	my_context ctx) 
+	my_context ctx
+)
 :
 	my_base(ctx),
 	menu_(
-		context<machine>().sys(),
+		context<machine>().renderer(),
+		context<machine>().image_loader(),
+		context<machine>().font_system(),
+		context<machine>().input_system(),
 		context<machine>().cursor(),
 		client::menu::callbacks::object(
 			std::tr1::bind(
@@ -67,7 +71,8 @@ sanguis::client::states::menu::menu(
 
 boost::statechart::result
 sanguis::client::states::menu::react(
-	tick_event const &t)
+	tick_event const &t
+)
 {
 	context<machine>().dispatch();
 
@@ -218,7 +223,7 @@ void sanguis::client::states::menu::connect(
 	try
 	{
 		context<machine>().connect(
-			fcppt::iconv(
+			fcppt::to_std_string(
 				host
 			),
 			fcppt::lexical_cast<

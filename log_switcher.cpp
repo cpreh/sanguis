@@ -117,7 +117,8 @@ sanguis::log_switcher::log_switcher(
 
 void
 sanguis::log_switcher::apply(
-	boost::program_options::variables_map &_vm)
+	boost::program_options::variables_map const &_vm
+)
 {
 	if (!_vm.count("enable-"+prefix_+"-log"))
 		return;

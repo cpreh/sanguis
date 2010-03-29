@@ -24,14 +24,14 @@ private:
 	friend class load::context;
 
 	explicit context(
-		resource::context const &);
-	~context();
+		resource::context const &
+	);
 
-	resource::context const &ctx;
+	~context();
 
 	mutable fcppt::scoped_ptr<
 		collection
-	> col;
+	> collection_;
 };
 
 }

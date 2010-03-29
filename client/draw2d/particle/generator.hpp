@@ -2,8 +2,14 @@
 #define SANGUIS_CLIENT_DRAW2D_PARTICLE_GENERATOR_HPP_INCLUDED
 
 #include "container.hpp"
+#include "generation_callback.hpp"
 #include "align_type.hpp"
+#include "time_type.hpp"
+#include "dispersion_range.hpp"
+#include "velocity_range.hpp"
+#include "rotation_velocity_range.hpp"
 #include "movement_type.hpp"
+#include "point.hpp"
 #include "../../../diff_clock.hpp"
 #include <fcppt/random/uniform.hpp>
 #include <sge/time/timer.hpp>

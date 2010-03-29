@@ -3,16 +3,19 @@
 
 sanguis::client::cursor::object::object(
 	sge::image::loader_ptr const il,
-	sge::renderer::device_ptr const rend)
+	sge::renderer::device_ptr const rend
+)
 : 
 	default_(
 		il,
-		rend),
+		rend
+	),
 	pos_signal_(),
 	visible_signal_()
 {
 	visible(
-		true);
+		true
+	);
 }
 
 sanguis::client::cursor::object::~object()

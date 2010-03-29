@@ -4,7 +4,6 @@
 #include <sge/gui/widgets/parent_data.hpp>
 #include <sge/gui/widgets/base.hpp>
 #include <sge/gui/widgets/buttons/text.hpp>
-#include <sge/systems/instance_fwd.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
 
@@ -22,8 +21,8 @@ struct highscore
 
 	highscore(
 		sge::gui::widgets::parent_data const &,
-		fcppt::filesystem::path const &buttons_path,
-		sge::systems::instance const &);
+		fcppt::filesystem::path const &buttons_path
+	);
 	
 	sge::gui::widgets::base parent;
 		sge::gui::widgets::base table;

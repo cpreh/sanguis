@@ -2,13 +2,11 @@
 #define SANGUIS_SERVER_ENTITIES_PROPERTY_FROM_FLOAT_HPP_INCLUDED
 
 #include "value.hpp"
-#include "../../../exception.hpp"
-#include <fcppt/math/almost_zero.hpp>
-#include <fcppt/format.hpp>
-#include <fcppt/text.hpp>
-#include <cmath>
-
-#include <iostream>
+//#include "../../../exception.hpp"
+//#include <fcppt/math/almost_zero.hpp>
+//#include <fcppt/format.hpp>
+//#include <fcppt/text.hpp>
+//#include <cmath>
 
 namespace sanguis
 {
@@ -22,11 +20,13 @@ namespace property
 template<
 	typename Float
 >
-value const
+value 
 from_float(
 	Float const float_
 )
 {
+	return static_cast<value>(float_);
+#if 0
 	if(
 		fcppt::math::almost_zero(
 			float_
@@ -112,7 +112,7 @@ from_float(
 		num,
 		den
 	);
-
+#endif
 }
 
 }

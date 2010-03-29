@@ -4,15 +4,20 @@
 #include <fcppt/log/object.hpp>
 #include <fcppt/text.hpp>
 
+namespace
+{
+
+fcppt::log::object log_(
+	fcppt::log::parameters::inherited(
+		sanguis::log(),
+		FCPPT_TEXT("net")
+	)
+);
+
+}
+
 fcppt::log::object &
 sanguis::net::log()
 {
-	static fcppt::log::object l(
-		fcppt::log::parameters::inherited(
-			sanguis::log(),
-			FCPPT_TEXT("net")
-		)
-	);
-
-	return l;
+	return log_;
 }

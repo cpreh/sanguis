@@ -31,13 +31,12 @@
 #include "../entities/insert_parameters.hpp"
 #include "../entities/insert_parameters_pos.hpp"
 #include "../entities/pickups/weapon.hpp"
-#include "../../resolution.hpp"
 #include <fcppt/math/dim/basic_impl.hpp>
 
 sanguis::server::global::context::context(
 	unicast_callback const &send_unicast_,
 	sge::collision::system_ptr const collision_system_,
-	load::model::context const &model_context_,
+	load::context_base const &model_context_,
 	sge::console::object &console_
 )
 :
@@ -61,7 +60,9 @@ sanguis::server::global::context::context(
 			model_context_
 		)
 	),
-	console_(console_)
+	console_(
+		console_
+	)
 {}
 
 sanguis::server::global::context::~context()
@@ -106,18 +107,9 @@ sanguis::server::global::context::insert_player(
 
 	// FIXME: where to insert the player?
 	pos_type const spawn_pos(
-		static_cast<
-			space_unit
-		>(
-			resolution().w() / 2
-		),
-		static_cast<
-			space_unit
-		>(
-			resolution().h() / 2
-		)
+		pos_type::null()
 	);
-	
+
 	world_.insert(
 		entities::auto_ptr(
 			player_

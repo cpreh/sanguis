@@ -5,11 +5,14 @@
 #include "level_type.hpp"
 #include "perk_container.hpp"
 #include "cursor/object_ptr.hpp"
-#include <sge/systems/instance_fwd.hpp>
+#include <sge/font/system_ptr.hpp>
 #include <sge/gui/widgets/buttons/image.hpp>
 #include <sge/gui/widgets/backdrop.hpp>
 #include <sge/gui/widgets/label.hpp>
 #include <sge/gui/manager.hpp>
+#include <sge/image/loader_ptr.hpp>
+#include <sge/input/system_ptr.hpp>
+#include <sge/renderer/device_ptr.hpp>
 #include <fcppt/signal/connection_manager.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -29,26 +32,33 @@ public:
 	> send_callback;
 
 	perk_chooser(
-		sge::systems::instance &,
+		sge::renderer::device_ptr,
+		sge::input::system_ptr,
+		sge::image::loader_ptr,
+		sge::font::system_ptr,
 		send_callback const &,
-		sanguis::client::cursor::object_ptr);
+		sanguis::client::cursor::object_ptr
+	);
+
 	void process();
 	void perks(perk_container const &);
 	void level_up(level_type);
 	bool activated() const;
 	void activated(bool);
 
+	// TODO: own header file?
 	class activation
 	{
 	FCPPT_NONCOPYABLE(activation)
 	public:
-	activation(
+	explicit activation(
 		perk_chooser &);
 	~activation();
 	private:
 	perk_chooser &instance_;
 	};
 private:
+	// TODO: own header file?
 	struct perk_image
 	{
 		sge::gui::image_ptr 
@@ -59,7 +69,7 @@ private:
 	typedef boost::ptr_vector<sge::gui::widgets::buttons::image> button_container;
 	typedef std::map<perk_type::type,perk_image> image_map;
 
-	sge::systems::instance &sys_;
+	sge::image::loader_ptr const image_loader_;
 
 	perk_container perks_;
 	level_type 

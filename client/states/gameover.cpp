@@ -2,9 +2,9 @@
 #include "menu.hpp"
 #include "../perk_cast.hpp"
 #include "../../media_path.hpp"
-#include "../../resolution.hpp"
 #include "../../messages/create.hpp"
 #include "../../tick_event.hpp"
+#include "../../resolution_type.hpp"
 #include "../menu_event.hpp"
 #include "../message_event.hpp"
 #include "../cursor/object.hpp"
@@ -15,7 +15,7 @@
 #include <sge/gui/layouts/grid.hpp>
 #include <sge/gui/widgets/parameters.hpp>
 #include <sge/image/loader.hpp>
-#include <sge/systems/instance.hpp>
+#include <sge/renderer/device.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/dim.hpp>
@@ -25,11 +25,15 @@
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <fcppt/make_shared_ptr.hpp>
+#include <fcppt/text.hpp>
 
 namespace
 {
 
-sge::gui::dim const dialog_size()
+sge::gui::dim const
+dialog_size(
+	sanguis::resolution_type const &resolution_
+)
 {
 	float const
 		scale_x = 0.5f,
@@ -39,27 +43,34 @@ sge::gui::dim const dialog_size()
 		sge::gui::dim(
 			static_cast<sge::gui::unit>(
 				static_cast<float>(
-					sanguis::resolution().w()
+					resolution_.w()
 				)
 				* scale_x
 			),
 			static_cast<sge::gui::unit>(
 				static_cast<float>(
-					sanguis::resolution().h()
+					resolution_.h()
 				)
 				* scale_y
 			)
 		);
 }
 
-sge::gui::point const dialog_pos()
+sge::gui::point const
+dialog_pos(
+	sanguis::resolution_type const &resolution_
+)
 {
 	return 
 		fcppt::math::dim::structure_cast<sge::gui::point>(
-			sanguis::resolution())/
+			resolution_
+		) /
 		static_cast<sge::gui::unit>(2)-
 		fcppt::math::dim::structure_cast<sge::gui::point>(
-			dialog_size())/
+			dialog_size(
+				resolution_
+			)
+		) /
 		static_cast<sge::gui::unit>(2);
 }
 }
@@ -70,11 +81,11 @@ sanguis::client::states::gameover::gameover(
 :
 	my_base(ctx),
 	m_(
-		context<machine>().sys().renderer(),
-		context<machine>().sys().input_system(),
+		context<machine>().renderer(),
+		context<machine>().input_system(),
 		sge::gui::skins::ptr(
 			new sge::gui::skins::standard(
-				context<machine>().sys().font_system()
+				context<machine>().font_system()
 			)
 		),
 		context<machine>().cursor()
@@ -82,8 +93,16 @@ sanguis::client::states::gameover::gameover(
 	background_(
 		m_,
 		sge::gui::widgets::parameters()
-			.pos(dialog_pos())
-			.size(dialog_size())
+			.pos(
+				dialog_pos(
+					context<machine>().renderer()->screen_size()
+				)
+			)
+			.size(
+				dialog_size(
+					context<machine>().renderer()->screen_size()
+				)
+			)
 			.layout(
 				fcppt::make_shared_ptr<sge::gui::layouts::grid>()
 			)

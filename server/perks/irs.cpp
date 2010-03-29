@@ -38,14 +38,10 @@ sanguis::server::perks::irs::can_raise_level() const
 	return level() < 4;
 }
 
-sanguis::server::entities::property::value const
+sanguis::server::entities::property::value
 sanguis::server::perks::irs::factor(
 	level_type const level_
 )
 {
-	return
-		entities::property::value(
-			level_,
-			2
-		);
+	return level_ * 0.5f;
 }

@@ -48,6 +48,8 @@ sanguis::server::entities::collision_groups(
 			break;
 		}
 		break;
+	case entity_type::spawn:
+		break;
 	}
 
 	return ret;

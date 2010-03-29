@@ -1,8 +1,10 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_PARTICLE_BASE_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_PARTICLE_BASE_HPP_INCLUDED
 
-#include "types.hpp"
-#include "fwd.hpp"
+#include "point.hpp"
+#include "depth.hpp"
+#include "rotation.hpp"
+#include "time_type.hpp"
 #include <fcppt/math/vector/basic_decl.hpp>
 
 namespace sanguis

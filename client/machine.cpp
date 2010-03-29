@@ -7,36 +7,23 @@
 #include "../messages/create.hpp"
 #include "../messages/base.hpp"
 #include "../messages/net_error.hpp"
-#include "../serialization.hpp"
+#include "../net/deserialize.hpp"
+#include "../net/serialize.hpp"
 #include "../log.hpp"
-#include "../media_path.hpp"
-#include "../resolution.hpp"
 #include "../tick_event.hpp"
-#include <sge/systems/instance.hpp>
+
 #include <sge/audio/player.hpp>
 #include <sge/audio/pool.hpp>
-#include <sge/renderer/scoped_block.hpp>
-#include <sge/renderer/device.hpp>
-#include <sge/renderer/scoped_target.hpp>
-#include <sge/input/system.hpp>
+#include <sge/console/gfx.hpp>
 #include <sge/input/key_state_tracker.hpp>
+#include <sge/input/system.hpp>
 #include <sge/mainloop/dispatch.hpp>
-#include <sge/texture/part_raw.hpp>
-#include <sge/renderer/device.hpp>
-#include <sge/renderer/system.hpp>
 #include <sge/renderer/scoped_block.hpp>
-#include <sge/renderer/state/list.hpp>
-#include <sge/renderer/state/var.hpp>
-#include <sge/renderer/state/trampoline.hpp>
-#include <sge/renderer/filter/linear.hpp>
+#include <sge/renderer/device.hpp>
 #include <sge/renderer/texture.hpp>
-#include <sge/renderer/scoped_target.hpp>
-#include <sge/renderer/glsl/uniform/variable.hpp>
-#include <sge/renderer/glsl/uniform/single_value.hpp>
-#include <sge/renderer/glsl/program.hpp>
-#include <sge/renderer/glsl/uniform/single_value.hpp>
-#include <sge/renderer/filter/linear.hpp>
-#include <sge/renderer/texture.hpp>
+#include <sge/texture/part_raw.hpp>
+#include <sge/systems/instance.hpp>
+
 #include <fcppt/algorithm/append.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
@@ -49,13 +36,23 @@
 sanguis::client::machine::machine(
 	server_callback const &_server_callback,
 	load::context const &_resources,
-	sge::systems::instance &_sys,
 	sge::audio::pool &_sound_pool,
 	sge::font::object &_font,
 	sge::input::key_state_tracker &_ks,
-	sge::console::gfx &_console)
+	sge::console::gfx &_console,
+	sge::input::system_ptr const input_system_,
+	sge::renderer::device_ptr const renderer_,
+	sge::image::loader_ptr const image_loader_,
+	sge::font::system_ptr const font_system_,
+	sge::audio::player_ptr const audio_player_
+)
 :
 	resources_(_resources),
+	input_system_(input_system_),
+	renderer_(renderer_),
+	image_loader_(image_loader_),
+	font_system_(font_system_),
+	audio_player_(audio_player_),
 	s_conn(
 		net_.register_connect(
 			std::tr1::bind(
@@ -82,7 +79,6 @@ sanguis::client::machine::machine(
 			)
 		)
 	),
-	sys_(_sys),
 	sound_pool_(_sound_pool),
 	font_(_font),
 	ks(_ks),
@@ -102,27 +98,33 @@ sanguis::client::machine::machine(
 	),
 	console_wrapper_(
 		_console,
-		sys_.input_system(),
-		sge::input::kc::key_f1
+		input_system_,
+		sge::input::kc::key_f1,
+		std::tr1::bind(
+			&machine::send,
+			this,
+			std::tr1::placeholders::_1
+		)
 	),
 	running_(true),
 	server_callback_(_server_callback),
 	screenshot_(
-		sys_.renderer(),
-		sys_.image_loader(),
-		sys_.input_system()
+		renderer_,
+		image_loader_,
+		input_system_
 	),
 	cursor_(
 		new sanguis::client::cursor::object(
-			sys_.image_loader(),
-			sys_.renderer()
+			image_loader_,
+			renderer_
 		)
 	),
 	gameover_names_(),
 	gameover_score_()
 {}
 
-void sanguis::client::machine::start_server()
+void
+sanguis::client::machine::start_server()
 {
 	server_callback_(1337); // FIXME
 }
@@ -130,7 +132,8 @@ void sanguis::client::machine::start_server()
 void
 sanguis::client::machine::connect(
 	net::hostname_type const &hostname,
-	net::port_type const port)
+	net::port_type const port
+)
 {
 	net_.connect(
 		hostname,
@@ -138,12 +141,14 @@ sanguis::client::machine::connect(
 	);
 }
 
-void sanguis::client::machine::cancel_connect()
+void
+sanguis::client::machine::cancel_connect()
 {
 	net_.disconnect();
 }
 
-void sanguis::client::machine::connect_callback()
+void
+sanguis::client::machine::connect_callback()
 {
 	process_event(
 		message_event(
@@ -154,8 +159,10 @@ void sanguis::client::machine::connect_callback()
 	);
 }
 
-void sanguis::client::machine::disconnect_callback(
-	fcppt::string const &)
+void
+sanguis::client::machine::disconnect_callback(
+	fcppt::string const &
+)
 {
 	process_event(
 		message_event(
@@ -166,8 +173,10 @@ void sanguis::client::machine::disconnect_callback(
 	);
 }
 
-void sanguis::client::machine::process_message(
-	messages::auto_ptr ptr)
+void
+sanguis::client::machine::process_message(
+	messages::auto_ptr ptr
+)
 {
 	process_event(
 		message_event(
@@ -176,8 +185,10 @@ void sanguis::client::machine::process_message(
 	);
 }
 
-void sanguis::client::machine::data_callback(
-	net::data_type const &data)
+void
+sanguis::client::machine::data_callback(
+	net::data_type const &data
+)
 {
 	fcppt::algorithm::append(
 		in_buffer,
@@ -187,19 +198,22 @@ void sanguis::client::machine::data_callback(
 	//	process_message(p);
 	for(;;)
 	{
-		messages::auto_ptr p = deserialize(in_buffer);
+		messages::auto_ptr p = net::deserialize(in_buffer);
 		if(!p.get())
 			return;
 		process_message(p);
 	}
 }
 
-void sanguis::client::machine::send(
-	messages::auto_ptr m)
+void
+sanguis::client::machine::send(
+	messages::auto_ptr m
+)
 {
-	serialize(
+	net::serialize(
 		m,
-		out_buffer);
+		out_buffer
+	);
 }
 
 sanguis::net::client &
@@ -208,7 +222,8 @@ sanguis::client::machine::net()
 	return net_;
 }
 
-bool sanguis::client::machine::process(
+bool
+sanguis::client::machine::process(
 	tick_event const &t
 )
 try
@@ -223,7 +238,8 @@ try
 
 	{
 	sge::renderer::scoped_block const block_(
-		sys_.renderer());
+		renderer_
+	);
 
 	process_event(t);
 
@@ -254,12 +270,14 @@ catch (net::exception const &e)
 	return running_;
 }
 
-void sanguis::client::machine::quit()
+void
+sanguis::client::machine::quit()
 {
 	running_ = false;
 }
 
-void sanguis::client::machine::dispatch()
+void
+sanguis::client::machine::dispatch()
 {
 	sge::mainloop::dispatch();
 }
@@ -267,19 +285,31 @@ void sanguis::client::machine::dispatch()
 sge::renderer::device_ptr const
 sanguis::client::machine::renderer() const
 {
-	return sys_.renderer();
+	return renderer_;
 }
 
-sge::systems::instance &
-sanguis::client::machine::sys() const
+sge::image::loader_ptr const
+sanguis::client::machine::image_loader() const
 {
-	return sys_;
+	return image_loader_;
+}
+
+sge::font::system_ptr const
+sanguis::client::machine::font_system() const
+{
+	return font_system_;
+}
+
+sge::input::system_ptr const
+sanguis::client::machine::input_system() const
+{
+	return input_system_;
 }
 
 sge::audio::player_ptr const
 sanguis::client::machine::audio_player() const
 {
-	return sys_.audio_player();
+	return audio_player_;
 }
 
 sge::audio::pool &

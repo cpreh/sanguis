@@ -3,15 +3,16 @@
 #include "single.hpp"
 #include "make.hpp"
 #include "convert_enemy_name.hpp"
-#include "../../exception.hpp"
 #include <sge/console/object.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/make_auto_ptr.hpp>
+#include <fcppt/exception.hpp>
 #include <boost/assign/ptr_list_inserter.hpp>
 
 #include "../log.hpp"
 #include <fcppt/log/headers.hpp>
+#include <fcppt/lexical_cast.hpp>
 
 sanguis::server::waves::generator::generator(
 	sge::console::object &console_
@@ -25,7 +26,7 @@ sanguis::server::waves::generator::generator(
 				this,
 				std::tr1::placeholders::_1
 			),
-			FCPPT_TEXT("spawn wave [wavename], spawn enemy [enemyname] or spawn all")
+			FCPPT_TEXT("spawn wave (wavename) [count], spawn enemy (enemyname) [count] or spawn all")
 		)
 	)
 {}
@@ -75,7 +76,7 @@ try
 	}
 
 	if(
-		args_.size() != 3u
+		args_.size() != 3u && args_.size() != 4u
 	)
 	{
 		FCPPT_LOG_ERROR(
@@ -92,32 +93,54 @@ try
 		args_[1]
 	);
 
+	unsigned const count(
+		args_.size() == 4u
+		?
+			fcppt::lexical_cast<
+				unsigned
+			>(
+				args_[3]
+			)
+		:
+			1u
+	);
+	
 	if(
 		action == FCPPT_TEXT("wave")
 	)
-		waves.push_back(
-			make(
-				args_[2]
-			)
-		);
+		for(
+			unsigned i = 0;
+			i < count;
+			++i
+		)
+			waves.push_back(
+				make(
+					args_[2]
+				)
+			);
 	else if(
 		action == FCPPT_TEXT("enemy")
 	)
-	{
-		wave_auto_ptr ptr(
-			fcppt::make_auto_ptr<
-				single
-			>(
-				convert_enemy_name(
-					args_[2]
+		for(
+			unsigned i = 0;
+			i < count;
+			++i
+		)
+		{
+			wave_auto_ptr ptr(
+				fcppt::make_auto_ptr<
+					single
+				>(
+					convert_enemy_name(
+						args_[2]
+					)
 				)
-			)
-		);
+			);
 
-		waves.push_back(
-			ptr
-		);
-	}
+			waves.push_back(
+				ptr
+			);
+		}
 	else
 	{
 		FCPPT_LOG_ERROR(
@@ -129,7 +152,7 @@ try
 	}
 }
 catch(
-	exception const &e
+	fcppt::exception const &e
 )
 {
 	FCPPT_LOG_ERROR(
@@ -148,61 +171,51 @@ sanguis::server::waves::generator::spawn_all()
 	(
 		delay(60),
 		spawn_interval(2),
-		count(15),
 		spawns_per_wave(2),
 		enemy_type::spider
 	)(
 		delay(0),
 		spawn_interval(2),
-		count(20),
 		spawns_per_wave(2),
 		enemy_type::maggot
 	)(
 		delay(0),
 		spawn_interval(1.5f),
-		count(40),
 		spawns_per_wave(1),
 		enemy_type::zombie01
 	)(
 		delay(0),
 		spawn_interval(2),
-		count(60),
 		spawns_per_wave(1),
 		enemy_type::zombie01
 	)(
 		delay(90),
 		spawn_interval(1),
-		count(8),
 		spawns_per_wave(2),
 		enemy_type::zombie00
 	)(
 		delay(45),
 		spawn_interval(1),
-		count(8),
 		spawns_per_wave(1),
 		enemy_type::wolf_brown
 	)(
 		delay(80),
 		spawn_interval(1),
-		count(6),
 		spawns_per_wave(2),
 		enemy_type::wolf_white
 	)(
 		delay(120),
 		spawn_interval(1),
-		count(6),
 		spawns_per_wave(2),
 		enemy_type::wolf_black
 	)(
 		delay(130),
 		spawn_interval(.5f),
-		count(10),
 		spawns_per_wave(2),
 		enemy_type::spider
 	)(
 		delay(180),
 		spawn_interval(1),
-		count(3),
 		spawns_per_wave(1),
 		enemy_type::skeleton
 	);

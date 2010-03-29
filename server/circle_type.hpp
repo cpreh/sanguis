@@ -2,16 +2,16 @@
 #define SANGUIS_SERVER_CIRCLE_TYPE_HPP_INCLUDED
 
 #include "space_unit.hpp"
-#include <fcppt/math/circle/basic_fwd.hpp>
+#include <fcppt/math/sphere/circle.hpp>
 
 namespace sanguis
 {
 namespace server
 {
 
-typedef fcppt::math::circle::basic<
+typedef fcppt::math::sphere::circle<
 	space_unit
-> circle_type;
+>::type circle_type;
 
 }
 }

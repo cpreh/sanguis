@@ -9,6 +9,7 @@
 #include "../../messages/base.hpp"
 #include "../../messages/create.hpp"
 #include "../../exception.hpp"
+#include "../../tick_event.hpp"
 #include <sge/collision/world.hpp>
 #include <sge/time/second_f.hpp>
 

@@ -15,17 +15,20 @@ namespace load
 namespace model
 {
 
-class part {
+class part
+{
 public:
 	weapon_category const &
 	operator[](
-		weapon_type::type) const;
+		weapon_type::type
+	) const;
 private:
 	part(
 		sge::parse::json::object const &,
-		global_parameters const &);
+		global_parameters const &
+	);
 
-	friend class model;
+	friend class object;
 
 	typedef std::map<
 		weapon_type::type,

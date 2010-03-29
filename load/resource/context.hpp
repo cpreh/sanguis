@@ -21,7 +21,9 @@ namespace load
 {
 namespace resource
 {
-class context {
+
+class context
+{
 	FCPPT_NONCOPYABLE(context)
 public:
 	resource::textures const &
@@ -33,8 +35,10 @@ public:
 	resource::animations const &
 	animations() const;
 
-	void update(
-		time_type) const;
+	void
+	update(
+		time_type
+	) const;
 private:
 	friend class load::context;
 

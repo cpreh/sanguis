@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_STATES_MENU_HPP_INCLUDED
 #define SANGUIS_CLIENT_STATES_MENU_HPP_INCLUDED
 
-#include "../../connect_state.hpp"
+#include "menu_fwd.hpp"
 #include "../machine.hpp"
 #include "../message_event_fwd.hpp"
 #include "../menu/object.hpp"
@@ -9,6 +9,7 @@
 #include "../../messages/connect.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../messages/connect_state.hpp"
+#include "../../connect_state.hpp"
 #include "../../tick_event_fwd.hpp"
 #include <fcppt/log/object_fwd.hpp>
 #include <sge/renderer/state/scoped.hpp>
@@ -22,7 +23,8 @@ namespace client
 {
 namespace states
 {
-class menu 
+
+class menu
 	: public boost::statechart::state<menu,machine>
 {
 public:
@@ -56,12 +58,19 @@ private:
 	connect_state::type connect_state_;
 	sge::renderer::state::scoped const renderer_state_;
 	
-	void connect(
+	void
+	connect(
 		fcppt::string const &,
-		fcppt::string const &);
-	void start_server();
-	void cancel_connect();
+		fcppt::string const &
+	);
+
+	void
+	start_server();
+
+	void
+	cancel_connect();
 };
+
 }
 }
 }

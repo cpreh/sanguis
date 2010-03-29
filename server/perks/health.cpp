@@ -38,14 +38,10 @@ sanguis::server::perks::health::can_raise_level() const
 	return level() < 10;
 }
 
-sanguis::server::entities::property::value const
+sanguis::server::entities::property::value
 sanguis::server::perks::health::factor(
 	level_type const level_
 )
 {
-	return
-		sanguis::server::entities::property::value(
-			level_ * 20,
-			1
-		);
+	return level_ * 20.f;
 }

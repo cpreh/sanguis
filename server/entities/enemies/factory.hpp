@@ -3,6 +3,7 @@
 
 #include "../auto_ptr.hpp"
 #include "../../environment/load_context_ptr.hpp"
+#include "../../entities/auto_weak_link.hpp"
 #include "../../../enemy_type.hpp"
 
 namespace sanguis
@@ -17,7 +18,8 @@ namespace enemies
 auto_ptr
 create(
 	enemy_type::type,
-	environment::load_context_ptr
+	environment::load_context_ptr,
+	entities::auto_weak_link spawn
 );
 
 }

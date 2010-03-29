@@ -11,9 +11,15 @@ namespace sanguis
 namespace client
 {
 
-struct message_event : public boost::statechart::event<message_event> {
+struct message_event
+:
+	boost::statechart::event<
+		message_event
+	>
+{
 	explicit message_event(
-		messages::auto_ptr message);
+		messages::auto_ptr message
+	);
 	
 	~message_event();
 
