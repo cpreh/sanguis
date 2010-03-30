@@ -11,6 +11,7 @@
 #include <fcppt/math/vector/angle_between.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/make_auto_ptr.hpp>
 #include <fcppt/optional.hpp>
 
@@ -54,18 +55,7 @@ sanguis::server::ai::simple::update(
 )
 {
 	if(
-		!target_ && potential_targets_.empty()
-	)
-	{
-		me_.aggressive(
-			false
-		);
-
-		return;
-	}
-
-	if(
-		!target_
+		!target_ && !potential_targets_.empty()
 	)
 		target_
 			= search_new_target(
@@ -77,7 +67,22 @@ sanguis::server::ai::simple::update(
 	if(
 		!target_
 	)
+	{
+		me_.aggressive(
+			false
+		);
+
+		FCPPT_TRY_DYNAMIC_CAST(
+			entities::movable *,
+			movable_,
+			&me_
+		)
+			movable_->movement_speed().current(
+				0
+			);
+
 		return;
+	}
 
 	fcppt::optional<
 		space_unit
@@ -95,16 +100,10 @@ sanguis::server::ai::simple::update(
 			*angle
 		);
 
-	entities::movable *const movable_(
-		dynamic_cast<
-			entities::movable *
-		>(
-			&me_
-		)
-	);
-
-	if(
-		movable_
+	FCPPT_TRY_DYNAMIC_CAST(
+		entities::movable *,
+		movable_,
+		&me_
 	)
 	{
 		entities::property::changeable &speed(
