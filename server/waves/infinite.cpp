@@ -3,7 +3,7 @@
 #include "../entities/auto_ptr.hpp"
 #include "../entities/insert_parameters_pos.hpp"
 #include "../environment/object.hpp"
-#include <sge/time/second_f.hpp>
+#include <sge/time/second.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 
 sanguis::server::waves::infinite::infinite(
@@ -15,7 +15,7 @@ sanguis::server::waves::infinite::infinite(
 :
 	diff_clock_(),
 	delay_time_(
-		sge::time::second_f(
+		sge::time::second(
 			delay_
 		),
 		sge::time::activation_state::active,
@@ -55,7 +55,7 @@ sanguis::server::waves::infinite::process(
 					spawns_per_wave_
 				),
 				entities::spawns::interval(
-					sge::time::second_f(
+					sge::time::second(
 						spawn_interval_
 					)
 				),

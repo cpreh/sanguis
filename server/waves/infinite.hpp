@@ -47,7 +47,7 @@ private:
 	
 	sge::time::timer delay_time_;
 
-	time_type const spawn_interval_;
+	spawn_interval const spawn_interval_;
 
 	spawns_per_wave const spawns_per_wave_;
 
