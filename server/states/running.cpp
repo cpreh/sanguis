@@ -227,7 +227,6 @@ sanguis::server::states::running::operator()(
 	);
 
 	return discard_event();
-
 }
 
 sanguis::server::global::context &
