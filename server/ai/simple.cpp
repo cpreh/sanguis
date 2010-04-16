@@ -60,7 +60,8 @@ sanguis::server::ai::simple::update(
 		target_
 			= search_new_target(
 				me_,
-				owner_,
+				entities::auto_weak_link(),
+				//owner_,
 				potential_targets_
 			);
 
