@@ -17,6 +17,9 @@ sanguis::media_path()
 			boost::assign::list_of(
 				FCPPT_TEXT("media")
 			)
+			(
+				MEDIA_PATH
+			)
 		)
 	);
 

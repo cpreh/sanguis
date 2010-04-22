@@ -55,7 +55,8 @@ set_source_files_properties(
 	media_path.cpp
 	PROPERTIES
 	COMPILE_FLAGS
-	-DMEDIA_PATH="\\\"${media_path}\\\"")
+	-DMEDIA_PATH="\\\"${media_path}\\\""
+)
 
 FILE (GLOB basefiles *.cpp)
 
@@ -70,6 +71,14 @@ FILE (GLOB_RECURSE collectionsfiles
 	server/*.cpp
 )
 
+set_source_files_properties(
+	media_path.cpp
+	PROPERTIES
+	COMPILE_FLAGS
+	-DMEDIA_PATH="\\\"${CMAKE_INSTALL_PREFIX}/share/games/sanguis/media\\\""
+)
+
+
 ADD_EXECUTABLE(sanguis ${basefiles} ${collectionsfiles})
 
 TARGET_LINK_LIBRARIES(sanguis fcppt sgecore sgegui)
@@ -78,7 +87,6 @@ IF(NOT MSVC)
 	TARGET_LINK_LIBRARIES(sanguis ${Boost_LIBRARIES})
 ENDIF()
 
-#FILE (GLOB_RECURSE media_files media/*)
+INSTALL (DIRECTORY media/ DESTINATION share/games/sanguis/media/)
 
-#INSTALL (FILES ${media_files} DESTINATION ${media_path})
 INSTALL (TARGETS sanguis DESTINATION ${CMAKE_INSTALL_PREFIX}/bin/)
