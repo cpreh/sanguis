@@ -14,6 +14,7 @@
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/utf8/convert.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/exception.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <boost/foreach.hpp>
 #include <algorithm>
@@ -158,10 +159,23 @@ sanguis::server::states::running::operator()(
 			<< command
 	);
 
-	console_.eval(
-		console_.prefix()
-		+ command
-	);
+	try
+	{
+		console_.eval(
+			console_.prefix()
+			+ command
+		);
+	}
+	catch(
+		fcppt::exception const &e
+	)
+	{
+		FCPPT_LOG_ERROR(
+			log(),
+			fcppt::log::_
+				<< e.string()
+		);
+	}
 		
 	return discard_event();
 }
