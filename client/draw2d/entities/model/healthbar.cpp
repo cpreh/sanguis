@@ -19,6 +19,8 @@
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/intrusive/system_impl.hpp>
+#include <mizuiro/color/types/channel_value.hpp>
+#include <mizuiro/color/channel_max.hpp>
 #include <algorithm>
 
 namespace
@@ -195,9 +197,14 @@ sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 		)
 	);
 
-	sge::image::color::channel8 const pixel_channel_max(
-		sprite::colored::color_format::channel_max<
-			mizuiro::color::channel::alpha
+	typedef mizuiro::color::types::channel_value<
+		sprite::colored::color_format,
+		mizuiro::color::channel::alpha
+	>::type alpha_value;
+
+	alpha_value const pixel_channel_max(
+		mizuiro::color::channel_max<
+			alpha_value
 		>()
 	);
 
