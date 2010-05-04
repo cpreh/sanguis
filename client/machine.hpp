@@ -61,6 +61,8 @@ public:
 		sge::audio::player_ptr
 	);
 
+	~machine();
+
 	void
 	start_server();
 
