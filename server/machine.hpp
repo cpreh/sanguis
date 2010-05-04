@@ -34,6 +34,8 @@ public:
 		net::port_type
 	);
 
+	~machine();
+
 	void
 	process(
 		tick_event const &
