@@ -5,6 +5,8 @@
 #include "entity_map.hpp"
 #include "../entities/with_ai_fwd.hpp"
 #include "../entities/auto_weak_link.hpp"
+#include "../../diff_clock.hpp"
+#include <sge/time/timer.hpp>
 #include <fcppt/container/map_decl.hpp>
 
 namespace sanguis
@@ -23,6 +25,8 @@ public:
 		entities::with_ai &me,
 		entities::auto_weak_link owner
 	);
+
+	~simple();
 private:
 	void
 	update(
@@ -38,6 +42,10 @@ private:
 	target_leaves(
 		entities::base &
 	);
+
+	diff_clock diff_clock_;
+
+	sge::time::timer pos_timer_;
 
 	entities::with_ai &me_;
 

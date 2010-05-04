@@ -17,6 +17,8 @@
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/tr1/random.hpp>
 #include <fcppt/assert.hpp>
+#include <mizuiro/color/types/channel_value.hpp>
+#include <mizuiro/color/channel_max.hpp>
 #include <boost/foreach.hpp>
 #include <algorithm>
 #include <limits>
@@ -207,8 +209,11 @@ void sanguis::client::menu::mover::update_visibility(
 				sge::image::color::channel8
 			>(
 				static_cast<float_type>(
-					sge::image::color::rgba8::format::channel_max<
-						mizuiro::color::channel::alpha
+					mizuiro::color::channel_max<
+						mizuiro::color::types::channel_value<
+							sge::image::color::rgba8::format,
+							mizuiro::color::channel::alpha
+						>::type
 					>()
 				)
 				* visibility

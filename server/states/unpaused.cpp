@@ -206,7 +206,8 @@ sanguis::server::states::unpaused::react(
 
 boost::statechart::result
 sanguis::server::states::unpaused::react(
-	message_event const &m)
+	message_event const &m
+)
 {
 	typedef message_functor<
 		unpaused,
