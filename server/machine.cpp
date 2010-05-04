@@ -63,6 +63,10 @@ sanguis::server::machine::machine(
 {
 }
 
+sanguis::server::machine::~machine()
+{
+}
+
 void
 sanguis::server::machine::process(
 	tick_event const &t
