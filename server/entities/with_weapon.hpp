@@ -37,7 +37,7 @@ public:
 	change_weapon(
 		weapon_type::type
 	);
-	
+
 	void
 	add_weapon(
 		weapons::auto_ptr
@@ -52,9 +52,6 @@ public:
 	target(
 		pos_type const &
 	);
-
-	pos_type const &
-	target() const;
 
 	bool
 	in_range(
@@ -109,7 +106,7 @@ private:
 	on_new_weapon(
 		weapon_type::type
 	);
-	
+
 	typedef boost::ptr_map<
 		weapon_type::type,
 		weapons::weapon
@@ -126,7 +123,7 @@ private:
 		reloading,
 		attack_ready_,
 		aggressive_;
-	
+
 	property::always_max
 		attack_speed_,
 		reload_speed_;
