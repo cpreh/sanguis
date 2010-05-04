@@ -123,6 +123,9 @@ sanguis::client::machine::machine(
 	gameover_score_()
 {}
 
+sanguis::client::machine::~machine()
+{}
+
 void
 sanguis::client::machine::start_server()
 {
