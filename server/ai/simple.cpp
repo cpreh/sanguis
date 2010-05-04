@@ -8,7 +8,9 @@
 #include "../entities/property/current_to_max.hpp"
 #include "../collision/collides.hpp"
 #include "../collision/distance.hpp"
+#include <sge/time/second.hpp>
 #include <fcppt/math/vector/angle_between.hpp>
+#include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
@@ -20,6 +22,15 @@ sanguis::server::ai::simple::simple(
 	entities::auto_weak_link owner_
 )
 :
+	diff_clock_(),
+	pos_timer_(
+		sge::time::second(
+			0 // TODO	
+		),
+		sge::time::activation_state::active,
+		diff_clock_.callback(),
+		sge::time::expiration_state::expired
+	),
 	me_(me_),
 	target_(),
 	owner_(owner_),
@@ -29,7 +40,7 @@ sanguis::server::ai::simple::simple(
 		fcppt::make_auto_ptr<
 			auras::aggro
 		>(
-			1000, // FIXME
+			1000, // TODO
 			me_.team(),
 			std::tr1::bind(
 				&simple::target_enters,
@@ -49,11 +60,47 @@ sanguis::server::ai::simple::simple(
 	);
 }
 
-void
-sanguis::server::ai::simple::update(
-	time_type const
+sanguis::server::ai::simple::~simple()
+{}
+
+// TODO: move this!
+
+#include <sge/time/second_f.hpp>
+#include <fcppt/random/uniform.hpp>
+#include <fcppt/random/make_inclusive_range.hpp>
+#include <fcppt/math/twopi.hpp>
+#include <cmath>
+
+namespace
+{
+
+sanguis::server::pos_type
+make_vector_from_angle(
+	sanguis::server::space_unit const angle
 )
 {
+	return
+		sanguis::server::pos_type(
+			std::cos(
+				angle
+			),
+			std::sin(
+				angle
+			)
+		);
+}
+
+}
+
+void
+sanguis::server::ai::simple::update(
+	time_type const time_
+)
+{
+	diff_clock_.update(
+		time_
+	);
+
 	if(
 		!target_ && !potential_targets_.empty()
 	)
@@ -85,14 +132,67 @@ sanguis::server::ai::simple::update(
 		return;
 	}
 
-	fcppt::optional<
+	me_.target(
+		target_->center()
+	);
+
+	if(
+		!pos_timer_.update_b()
+	)
+		return;
+
+	me_.aggressive(
+		true
+	);
+
+	typedef fcppt::random::uniform<
 		space_unit
-	> const angle(
+	> rng_type;
+
+	// FIXME!
+	static rng_type rng(
+		fcppt::random::make_inclusive_range(
+			static_cast<
+				space_unit
+			>(0),
+			fcppt::math::twopi<
+				space_unit
+			>()
+		)
+	);
+
+	space_unit const distance(
+		collision::distance(
+			*target_,
+			me_
+		)
+	);
+
+	pos_timer_.interval(
+		sge::time::second_f(
+			distance * (1.f + rng()) / 1000.f // TODO!
+		)
+	);
+
+	pos_type const fuzzy_target(
+		target_->center()
+		+
+		make_vector_from_angle(
+			rng()
+		)
+		* distance / 50.f
+	);
+
+	typedef fcppt::optional<
+		space_unit
+	> optional_angle;
+	
+	optional_angle const angle(
 		fcppt::math::vector::angle_between<
 			space_unit
 		>(
 			me_.center(),
-			target_->center()
+			fuzzy_target
 		)
 	);
 
@@ -111,7 +211,9 @@ sanguis::server::ai::simple::update(
 			movable_->movement_speed()
 		);
 
-		if(angle)
+		if(
+			angle
+		)
 			movable_->direction(
 				*angle
 			);
@@ -132,14 +234,6 @@ sanguis::server::ai::simple::update(
 				speed
 			);
 	}
-
-	me_.aggressive(
-		true
-	);
-
-	me_.target(
-		target_->center()
-	);
 }
 
 void
