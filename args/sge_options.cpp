@@ -13,7 +13,7 @@ sanguis::args::sge_options(
 			vm
 		)
 		?
-			client_sge_options(
+			server_sge_options(
 				vm
 			)
 		:
