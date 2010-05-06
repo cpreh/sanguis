@@ -8,7 +8,8 @@ namespace cheat_type
 {
 enum type {
 	impulse101,
-	kill
+	kill,
+	size
 };
 }
 
