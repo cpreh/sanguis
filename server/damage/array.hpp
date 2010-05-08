@@ -3,7 +3,7 @@
 
 #include "unit.hpp"
 #include "../../damage_type.hpp"
-#include <boost/array.hpp>
+#include <fcppt/tr1/array.hpp>
 
 namespace sanguis
 {
@@ -12,9 +12,7 @@ namespace server
 namespace damage
 {
 
-// TODO: we use boost::array here
-// because boost::assign doesn't work with tr1::array
-typedef boost::array<
+typedef std::tr1::array<
 	unit,
 	damage_type::size
 > array;
