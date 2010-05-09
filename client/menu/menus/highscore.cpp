@@ -24,7 +24,7 @@ sanguis::client::menu::menus::highscore::highscore(
 				sge::gui::point::null()
 			)
 			.size(
-				sge::gui::dim(1023,768)
+				sge::gui::dim(1024,768)
 			)
 			.activation(
 				sge::gui::activation_state::inactive

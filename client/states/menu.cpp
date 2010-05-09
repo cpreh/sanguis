@@ -32,6 +32,7 @@ sanguis::client::states::menu::menu(
 :
 	my_base(ctx),
 	menu_(
+		context<machine>().settings(),
 		context<machine>().renderer(),
 		context<machine>().image_loader(),
 		context<machine>().font_system(),

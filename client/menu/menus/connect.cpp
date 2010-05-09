@@ -1,4 +1,6 @@
 #include "connect.hpp"
+#include "../../config/settings/get_or_default.hpp"
+#include "../../config/settings/set_key.hpp"
 #include <sge/image/loader.hpp>
 #include <sge/gui/widgets/parameters.hpp>
 #include <sge/gui/layouts/horizontal.hpp>
@@ -6,8 +8,20 @@
 #include <sge/gui/make_image.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/char_type.hpp>
+
+namespace
+{
+
+fcppt::char_type const
+	*const ini_section = FCPPT_TEXT("connect_menu"),
+	*const hostname_key = FCPPT_TEXT("hostname"),
+	*const port_key = FCPPT_TEXT("port");
+
+}
 
 sanguis::client::menu::menus::connect::connect(
+	config::settings::object &_settings,
 	sge::gui::widgets::parent_data const &_parent,
 	fcppt::filesystem::path const &buttons_path,
 	fcppt::filesystem::path const &labels_path,
@@ -20,7 +34,7 @@ sanguis::client::menu::menus::connect::connect(
 			.pos(
 				sge::gui::point::null())
 			.size(
-				sge::gui::dim(1023,768))
+				sge::gui::dim(1024,768))
 			.activation(
 				sge::gui::activation_state::inactive)
 			.layout(
@@ -47,7 +61,13 @@ sanguis::client::menu::menus::connect::connect(
 		host,
 		sge::gui::widgets::parameters(),
 		sge::gui::widgets::edit::single_line,
-		sge::gui::dim(30,1)
+		sge::gui::dim(30,1),
+		config::settings::get_or_default(
+			_settings,
+			ini_section,
+			hostname_key,
+			FCPPT_TEXT("")
+		)
 	),
 	port(
 		parent,
@@ -69,7 +89,14 @@ sanguis::client::menu::menus::connect::connect(
 		port,
 		sge::gui::widgets::parameters(),
 		sge::gui::widgets::edit::single_line,
-		sge::gui::dim(5,1)
+		sge::gui::dim(5,1),
+		config::settings::get_or_default(
+			_settings,
+			ini_section,
+			port_key,
+			FCPPT_TEXT("31337") // TODO: don't hard code the default port!
+		)
+
 	),
 	connect_wrapper(
 		parent,
@@ -96,6 +123,26 @@ sanguis::client::menu::menus::connect::connect(
 		image_loader_,
 		buttons_path,
 		FCPPT_TEXT("return")
+	),
+	settings_(
+		_settings
 	)
 {
+}
+
+sanguis::client::menu::menus::connect::~connect()
+{
+	config::settings::set_key(
+		settings_,
+		ini_section,
+		hostname_key,
+		host_edit.text()
+	);
+
+	config::settings::set_key(
+		settings_,
+		ini_section,
+		port_key,
+		port_edit.text()
+	);
 }

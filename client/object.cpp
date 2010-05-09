@@ -1,4 +1,5 @@
 #include "object.hpp"
+#include "config/settings/file.hpp"
 #include "message_event.hpp"
 #include "states/menu.hpp"
 #include "log.hpp"
@@ -50,6 +51,12 @@ sanguis::client::object::object(
 	boost::program_options::variables_map const &variables_map_
 )
 :
+	settings_(
+		client::config::settings::file()
+	),
+	saver_(
+		settings_
+	),
 	sys_(sys_),
 	key_state_tracker_(
 		sys_.input_system()
@@ -137,6 +144,7 @@ sanguis::client::object::object(
 		sound_pool_
 	),
 	machine_(
+		settings_,
 		std::tr1::bind(
 			&object::create_server,
 			this,
@@ -172,7 +180,8 @@ sanguis::client::object::object(
 }
 
 sanguis::client::object::~object()
-{}
+{
+}
 
 int
 sanguis::client::object::run()
@@ -238,7 +247,6 @@ sanguis::client::object::create_server(
 int
 sanguis::client::object::quit_server()
 {
-
 	if(
 		server_
 	)

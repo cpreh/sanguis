@@ -4,6 +4,7 @@
 #include "states/menu_fwd.hpp"
 #include "cursor/object_ptr.hpp"
 #include "cursor/const_object_ptr.hpp"
+#include "config/settings/object_fwd.hpp"
 #include "highscore/name_container.hpp"
 #include "highscore/score_type.hpp"
 #include "states/menu_fwd.hpp"
@@ -48,6 +49,7 @@ class machine
 {
 public:
 	machine(
+		config::settings::object &,
 		server_callback const &,
 		load::context const &,
 		sge::audio::pool &,
@@ -113,6 +115,9 @@ public:
 	void
 	dispatch();
 
+	config::settings::object &
+	settings();
+
 	sge::renderer::device_ptr const
 	renderer() const;
 
@@ -166,6 +171,8 @@ public:
 		client::highscore::score_type
 	);
 private:
+	config::settings::object &settings_;
+
 	load::context const &resources_;
 
 	sge::input::system_ptr const input_system_;

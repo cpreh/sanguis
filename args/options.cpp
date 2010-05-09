@@ -53,6 +53,15 @@ sanguis::args::options()
 			"sets the display height"
 		)
 		(
+			"fullscreen",
+			po::value<
+				bool
+			>()->default_value(
+				false
+			),
+			"start in fullscreen mode"
+		)
+		(
 			"multisamples",
 			po::value<
 				sge::renderer::multi_sample_type

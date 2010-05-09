@@ -34,6 +34,7 @@
 #include <fcppt/optional_impl.hpp>
 
 sanguis::client::machine::machine(
+	config::settings::object &settings_,
 	server_callback const &_server_callback,
 	load::context const &_resources,
 	sge::audio::pool &_sound_pool,
@@ -47,6 +48,7 @@ sanguis::client::machine::machine(
 	sge::audio::player_ptr const audio_player_
 )
 :
+	settings_(settings_),
 	resources_(_resources),
 	input_system_(input_system_),
 	renderer_(renderer_),
@@ -283,6 +285,12 @@ void
 sanguis::client::machine::dispatch()
 {
 	sge::mainloop::dispatch();
+}
+
+sanguis::client::config::settings::object &
+sanguis::client::machine::settings()
+{
+	return settings_;
 }
 
 sge::renderer::device_ptr const
