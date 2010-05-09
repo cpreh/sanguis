@@ -51,6 +51,9 @@ private:
 	);
 
 	int
+	do_quit();
+
+	int
 	quit_server();
 
 	sge::systems::instance &sys_;

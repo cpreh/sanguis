@@ -216,12 +216,12 @@ sanguis::client::object::run()
 				<< e.string()
 		);
 
-		quit_server();
+		do_quit();
 
 		return EXIT_FAILURE;
 	}
 
-	return quit_server();
+	return do_quit();
 }
 
 void
@@ -241,9 +241,30 @@ sanguis::client::object::create_server(
 }
 
 int
+sanguis::client::object::do_quit()
+{
+	try
+	{
+		settings_.save();	
+	}
+	catch(
+		fcppt::exception const &e
+	)
+	{
+		FCPPT_LOG_FATAL(
+			log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("Saving your settings failed: ")
+				<< e.string()
+		);
+	}
+
+	return quit_server();
+}
+
+int
 sanguis::client::object::quit_server()
 {
-
 	if(
 		server_
 	)

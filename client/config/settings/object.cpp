@@ -1,6 +1,9 @@
 #include "object.hpp"
+#include "../../../exception.hpp"
+#include <sge/parse/ini/output/to_file.hpp>
 #include <sge/parse/ini/parse_file.hpp>
 #include <sge/parse/exception.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::client::config::settings::object::object(
 	fcppt::filesystem::path const &path_
@@ -44,5 +47,13 @@ sanguis::client::config::settings::object::sections() const
 void
 sanguis::client::config::settings::object::save()
 {
-	// TODO!
+	if(
+		!sge::parse::ini::output::to_file(
+			path_,
+			sections_
+		)
+	)
+		throw exception(
+			FCPPT_TEXT("Writing the settings failed!")
+		);
 }

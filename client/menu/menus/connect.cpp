@@ -9,7 +9,7 @@
 #include <fcppt/text.hpp>
 
 sanguis::client::menu::menus::connect::connect(
-	config::settings::object &settings_,
+	config::settings::object &_settings,
 	sge::gui::widgets::parent_data const &_parent,
 	fcppt::filesystem::path const &buttons_path,
 	fcppt::filesystem::path const &labels_path,
@@ -51,7 +51,7 @@ sanguis::client::menu::menus::connect::connect(
 		sge::gui::widgets::edit::single_line,
 		sge::gui::dim(30,1),
 		config::settings::get_or_default(
-			settings_,
+			_settings,
 			FCPPT_TEXT("connect_menu"),
 			FCPPT_TEXT("hostname"),
 			FCPPT_TEXT("")
@@ -79,7 +79,7 @@ sanguis::client::menu::menus::connect::connect(
 		sge::gui::widgets::edit::single_line,
 		sge::gui::dim(5,1),
 		config::settings::get_or_default(
-			settings_,
+			_settings,
 			FCPPT_TEXT("connect_menu"),
 			FCPPT_TEXT("port"),
 			FCPPT_TEXT("31337") // TODO: don't hard code the default port!
@@ -111,6 +111,14 @@ sanguis::client::menu::menus::connect::connect(
 		image_loader_,
 		buttons_path,
 		FCPPT_TEXT("return")
+	),
+	settings_(
+		_settings
 	)
 {
+}
+
+sanguis::client::menu::menus::connect::~connect()
+{
+	// TODO: write the settings!	
 }
