@@ -51,6 +51,12 @@ sanguis::client::object::object(
 	boost::program_options::variables_map const &variables_map_
 )
 :
+	settings_(
+		client::config::settings::file()
+	),
+	saver_(
+		settings_
+	),
 	sys_(sys_),
 	key_state_tracker_(
 		sys_.input_system()
@@ -137,9 +143,6 @@ sanguis::client::object::object(
 		sys_.audio_player(),
 		sound_pool_
 	),
-	settings_(
-		client::config::settings::file()
-	),
 	machine_(
 		settings_,
 		std::tr1::bind(
@@ -177,7 +180,8 @@ sanguis::client::object::object(
 }
 
 sanguis::client::object::~object()
-{}
+{
+}
 
 int
 sanguis::client::object::run()
@@ -216,12 +220,12 @@ sanguis::client::object::run()
 				<< e.string()
 		);
 
-		do_quit();
+		quit_server();
 
 		return EXIT_FAILURE;
 	}
 
-	return do_quit();
+	return quit_server();
 }
 
 void
@@ -238,28 +242,6 @@ sanguis::client::object::create_server(
 			resources_
 		)
 	);
-}
-
-int
-sanguis::client::object::do_quit()
-{
-	try
-	{
-		settings_.save();	
-	}
-	catch(
-		fcppt::exception const &e
-	)
-	{
-		FCPPT_LOG_FATAL(
-			log(),
-			fcppt::log::_
-				<< FCPPT_TEXT("Saving your settings failed: ")
-				<< e.string()
-		);
-	}
-
-	return quit_server();
 }
 
 int

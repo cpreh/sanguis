@@ -45,7 +45,7 @@ sanguis::client::config::settings::object::sections() const
 }
 
 void
-sanguis::client::config::settings::object::save()
+sanguis::client::config::settings::object::save() const
 {
 	if(
 		!sge::parse::ini::output::to_file(

@@ -34,7 +34,7 @@ public:
 	sections() const;
 
 	void
-	save();
+	save() const;
 private:
 	fcppt::filesystem::path const path_;
 

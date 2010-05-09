@@ -3,6 +3,7 @@
 
 #include "machine.hpp"
 #include "config/settings/object.hpp"
+#include "config/settings/saver.hpp"
 #include "../load/context.hpp"
 #include "../net/port_type.hpp"
 #include "../server/object_fwd.hpp"
@@ -51,10 +52,12 @@ private:
 	);
 
 	int
-	do_quit();
-
-	int
 	quit_server();
+
+	// declare the config stuff first, so they are destroyed last
+	config::settings::object settings_;
+
+	config::settings::saver saver_;
 
 	sge::systems::instance &sys_;
 
@@ -77,8 +80,6 @@ private:
 	sge::audio::pool sound_pool_;
 
 	load::context resources_;
-
-	config::settings::object settings_;
 
 	client::machine machine_;
 
