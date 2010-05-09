@@ -7,11 +7,16 @@
 #include "../net/serialize.hpp"
 #include "../net/deserialize.hpp"
 #include "../exception.hpp"
+#include "../log.hpp"
 #include <fcppt/algorithm/append.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/function/object.hpp>
+#include <fcppt/log/output.hpp>
+#include <fcppt/log/error.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/exception.hpp>
+#include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
 
 sanguis::server::machine::machine(
@@ -176,12 +181,12 @@ sanguis::server::machine::data_callback(
 			net::deserialize(
 				clients_[_id].in_buffer
 			);
+
 		if(!p.get())
 			return;
+
 		process_message(_id, p);
 	}
-	//while (messages::auto_ptr p = deserialize(clients[id].in_buffer))
-	//	process_message(id,p);
 }
 
 void
@@ -239,6 +244,7 @@ sanguis::server::machine::send_unicast(
 	net::id_type const _id,
 	messages::auto_ptr _m
 )
+try
 {
 	net::data_type ser;
 
@@ -250,5 +256,16 @@ sanguis::server::machine::send_unicast(
 	fcppt::algorithm::append(
 		clients_[_id].out_buffer,
 		ser
+	);
+}
+catch(
+	fcppt::exception const &e
+)
+{
+	FCPPT_LOG_ERROR(
+		log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("send_unicast failed: ")
+			<< e.string()
 	);
 }

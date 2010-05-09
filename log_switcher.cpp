@@ -5,7 +5,6 @@
 #include <fcppt/log/level_from_string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert.hpp>
-#include <fcppt/io/cerr.hpp>
 #include <sge/log/global.hpp>
 #include <sge/exception.hpp>
 #include <boost/algorithm/string/split.hpp>
@@ -132,9 +131,6 @@ sanguis::log_switcher::apply(
 			split(
 				s,
 				FCPPT_TEXT(':'));
-
-		fcppt::io::cerr << "first part is: " << splitted.first << "\n";
-		fcppt::io::cerr << "second part is: " << splitted.second << "\n";
 
 		string_vector const parts = 
 			explode(

@@ -8,6 +8,7 @@
 #include "../../messages/call/object.hpp"
 #include "../../messages/highscore.hpp"
 #include "../../messages/create.hpp"
+#include "../../cast_enum.hpp"
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/headers.hpp>
@@ -209,10 +210,8 @@ sanguis::server::states::running::operator()(
 {
 	global_context_->player_cheat(
 		id,
-		// TODO: sanitize the input!
-		static_cast<
-			cheat_type::type
-		>(
+		SANGUIS_CAST_ENUM(
+			cheat_type,
 			p.get<
 				messages::roles::cheat
 			>()
@@ -230,10 +229,8 @@ sanguis::server::states::running::operator()(
 {
 	global_context_->player_choose_perk(
 		id,
-		// FIXME: sanitize the input!
-		static_cast<
-			perk_type::type
-		>(
+		SANGUIS_CAST_ENUM(
+			perk_type,
 			p.get<
 				messages::roles::perk
 			>()
