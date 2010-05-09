@@ -1,4 +1,5 @@
 #include "object.hpp"
+#include "config/settings/file.hpp"
 #include "message_event.hpp"
 #include "states/menu.hpp"
 #include "log.hpp"
@@ -135,6 +136,9 @@ sanguis::client::object::object(
 		audio_loader_,
 		sys_.audio_player(),
 		sound_pool_
+	),
+	settings_(
+		client::config::settings::file()
 	),
 	machine_(
 		std::tr1::bind(

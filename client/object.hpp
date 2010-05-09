@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_OBJECT_HPP_INCLUDED
 
 #include "machine.hpp"
+#include "config/settings/object.hpp"
 #include "../load/context.hpp"
 #include "../net/port_type.hpp"
 #include "../server/object_fwd.hpp"
@@ -73,6 +74,8 @@ private:
 	sge::audio::pool sound_pool_;
 
 	load::context resources_;
+
+	config::settings::object settings_;
 
 	client::machine machine_;
 
