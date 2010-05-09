@@ -39,6 +39,7 @@ fcppt::log::object mylogger(
 }
 
 sanguis::client::menu::object::object(
+	config::settings::object &settings_,
 	sge::renderer::device_ptr const renderer_,
 	sge::image::loader_ptr const image_loader_,
 	sge::font::system_ptr const font_system_,
@@ -74,6 +75,7 @@ sanguis::client::menu::object::object(
 		image_loader_
 	),
 	connect_(
+		settings_,
 		m,
 		buttons_path,
 		labels_path,

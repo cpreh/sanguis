@@ -1,4 +1,5 @@
 #include "connect.hpp"
+#include "../../config/settings/get_or_default.hpp"
 #include <sge/image/loader.hpp>
 #include <sge/gui/widgets/parameters.hpp>
 #include <sge/gui/layouts/horizontal.hpp>
@@ -8,6 +9,7 @@
 #include <fcppt/text.hpp>
 
 sanguis::client::menu::menus::connect::connect(
+	config::settings::object &settings_,
 	sge::gui::widgets::parent_data const &_parent,
 	fcppt::filesystem::path const &buttons_path,
 	fcppt::filesystem::path const &labels_path,
@@ -47,7 +49,13 @@ sanguis::client::menu::menus::connect::connect(
 		host,
 		sge::gui::widgets::parameters(),
 		sge::gui::widgets::edit::single_line,
-		sge::gui::dim(30,1)
+		sge::gui::dim(30,1),
+		config::settings::get_or_default(
+			settings_,
+			FCPPT_TEXT("connect_menu"),
+			FCPPT_TEXT("hostname"),
+			FCPPT_TEXT("")
+		)
 	),
 	port(
 		parent,
@@ -69,7 +77,14 @@ sanguis::client::menu::menus::connect::connect(
 		port,
 		sge::gui::widgets::parameters(),
 		sge::gui::widgets::edit::single_line,
-		sge::gui::dim(5,1)
+		sge::gui::dim(5,1),
+		config::settings::get_or_default(
+			settings_,
+			FCPPT_TEXT("connect_menu"),
+			FCPPT_TEXT("port"),
+			FCPPT_TEXT("31337") // TODO: don't hard code the default port!
+		)
+
 	),
 	connect_wrapper(
 		parent,

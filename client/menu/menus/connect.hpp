@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_MENU_MENUS_CONNECT_HPP_INCLUDED
 
 #include "../button.hpp"
+#include "../../config/settings/object_fwd.hpp"
 #include <sge/gui/widgets/base.hpp>
 #include <sge/gui/widgets/graphics.hpp>
 #include <sge/gui/widgets/edit.hpp>
@@ -19,6 +20,7 @@ namespace menus
 struct connect
 {
 	connect(
+		config::settings::object &,
 		sge::gui::widgets::parent_data const &,
 		fcppt::filesystem::path const &buttons_path,
 		fcppt::filesystem::path const &labels_path,

@@ -141,6 +141,7 @@ sanguis::client::object::object(
 		client::config::settings::file()
 	),
 	machine_(
+		settings_,
 		std::tr1::bind(
 			&object::create_server,
 			this,

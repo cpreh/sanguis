@@ -8,6 +8,7 @@
 #include "menus/highscore.hpp"
 #include "button.hpp"
 #include "mover.hpp"
+#include "../config/settings/object_fwd.hpp"
 #include "../cursor/object_ptr.hpp"
 #include "../../time_type.hpp"
 #include <sge/font/system_ptr.hpp>
@@ -47,6 +48,7 @@ class object
 	FCPPT_NONCOPYABLE(object)
 public:
 	object(
+		config::settings::object &,
 		sge::renderer::device_ptr,
 		sge::image::loader_ptr,
 		sge::font::system_ptr,
