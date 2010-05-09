@@ -1,6 +1,7 @@
 #include "client_sge_options.hpp"
 #include "multi_sampling.hpp"
 #include "resolution.hpp"
+#include "window_mode.hpp"
 #include <sge/renderer/parameters.hpp>
 #include <sge/renderer/refresh_rate_dont_care.hpp>
 #include <sge/systems/list.hpp>
@@ -31,7 +32,9 @@ sanguis::args::client_sge_options(
 				),
 				sge::renderer::depth_buffer::off,
 				sge::renderer::stencil_buffer::off,
-				sge::renderer::window_mode::windowed,
+				window_mode(
+					vm
+				),
 				sge::renderer::vsync::on,
 				sge::renderer::multi_sample_type(
 					multi_sampling(
