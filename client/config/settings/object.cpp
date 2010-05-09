@@ -5,23 +5,24 @@
 sanguis::client::config::settings::object::object(
 	fcppt::filesystem::path const &path_
 )
-try
 :
 	path_(path_)
 {
-	if(
-		!sge::parse::ini::parse_file(
-			path_,
-			sections_
+	try
+	{
+		if(
+			!sge::parse::ini::parse_file(
+				path_,
+				sections_
+			)
 		)
+			sections_.clear();
+	}
+	catch(
+		sge::parse::exception const &
 	)
-		sections_.clear();
-
-}
-catch(
-	sge::parse::exception const &
-)
-{
+	{
+	}
 }
 
 sanguis::client::config::settings::object::~object()
