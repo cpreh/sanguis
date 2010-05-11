@@ -2,7 +2,7 @@
 #include "../../exception.hpp"
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/element_vector.hpp>
-#include <sge/parse/json/find_member.hpp>
+#include <sge/parse/json/find_member_exn.hpp>
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/renderer/size_type.hpp>
@@ -15,7 +15,7 @@ sanguis::load::model::load_dim(
 )
 {
 	sge::parse::json::array const &array(
-		sge::parse::json::find_member<
+		sge::parse::json::find_member_exn<
 			sge::parse::json::array
 		>(
 			entries,

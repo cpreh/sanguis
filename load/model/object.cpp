@@ -14,7 +14,7 @@
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/get.hpp>
-#include <sge/parse/json/find_member.hpp>
+#include <sge/parse/json/find_member_exn.hpp>
 #include <fcppt/filesystem/is_directory.hpp>
 #include <fcppt/filesystem/stem.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
@@ -170,7 +170,7 @@ sanguis::load::model::object::construct(
 
 	BOOST_FOREACH(
 		sge::parse::json::element_vector::const_reference r,
-		sge::parse::json::find_member<
+		sge::parse::json::find_member_exn<
 			sge::parse::json::array
 		>(
 			global_entries,

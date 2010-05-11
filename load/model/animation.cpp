@@ -2,14 +2,15 @@
 #include "animation_sound.hpp"
 #include "global_parameters.hpp"
 #include "find_texture.hpp"
+#include "animation_context.hpp"
 #include "../log.hpp"
 #include "../resource/texture_context.hpp"
 #include "../resource/textures.hpp"
 #include "../resource/texture_context_impl.hpp"
-#include "animation_context.hpp"
 #include "../../exception.hpp"
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/find_member.hpp>
+#include <sge/parse/json/find_member_exn.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/texture/part_raw.hpp>
@@ -70,31 +71,36 @@ calc_rect(
 sge::time::unit
 load_delay(
 	sge::parse::json::member_vector const &members,
-	sanguis::load::model::optional_delay const &opt_delay)
+	sanguis::load::model::optional_delay const &opt_delay
+)
 {
-	try
-	{
-		return sge::parse::json::find_member<
+	int const *const ret(
+		sge::parse::json::find_member<
 			int	
 		>(
 			members,
 			FCPPT_TEXT("delay")
-		);
-	}
-	catch(sge::exception const &)
-	{
-		if(opt_delay)
-			return *opt_delay;
-	
-		FCPPT_LOG_ERROR(
-			sanguis::load::log(),
-			fcppt::log::_
-				<< FCPPT_TEXT("delay not in header but not in specified in leaf TODO")
-				<< FCPPT_TEXT(" either!")
-		);
+		)
+	);
 
-		throw;
-	}
+	if(
+		ret
+	)
+		return
+			static_cast<
+				sge::time::unit
+			>(
+				*ret
+			);
+
+	if(
+		opt_delay
+	)
+		return *opt_delay;
+
+	throw sanguis::exception(
+		FCPPT_TEXT("delay not in header but not in specified in leaf TODO either!")
+	);
 }
 
 }
@@ -105,9 +111,11 @@ sanguis::load::model::animation::animation(
 )
 :
 	object_(
-		_object),
+		_object
+	),
 	param_(
-		_param),
+		_param
+	),
 	sounds_(),
 	texture_()
 {
@@ -126,27 +134,33 @@ sanguis::load::model::animation::animation(
 	
 	texture_ = *_texture;
 
-	try
 	{
-		sounds_ = fcppt::make_shared_ptr<
-			animation_sound
-		>(
+		sge::parse::json::object const *const sounds_object(
 			sge::parse::json::find_member<
 				sge::parse::json::object
 			>(
 				object_.members,
 				FCPPT_TEXT("sounds")
-			).members,
-			param_.sounds()
+			)
 		);
-	}
-	catch(sge::exception const &)
-	{
-		sounds_ = fcppt::make_shared_ptr<
-			animation_sound
-		>();
-	}
 
+		// TODO: this should be a scoped_ptr
+		if(
+			sounds_object
+		)
+			sounds_ =
+				fcppt::make_shared_ptr<
+					animation_sound
+				>(
+					sounds_object->members,
+					param_.sounds()
+				);
+		else
+			sounds_ =
+				fcppt::make_shared_ptr<
+					animation_sound
+				>();
+	}
 }
 
 sanguis::load::model::animation_sound const &
@@ -174,14 +188,17 @@ sanguis::load::model::animation::load() const
 		);
 }
 
-void sanguis::load::model::animation::fill_cache(
-	sge::renderer::lock_rect const &_area) const
+void
+sanguis::load::model::animation::fill_cache(
+	sge::renderer::lock_rect const &_area
+) const
 {
 	if (!frame_cache_.empty())
 		return;
 
+	// range must be specified
 	sge::parse::json::element_vector const &range(
-		sge::parse::json::find_member<
+		sge::parse::json::find_member_exn<
 			sge::parse::json::array
 		>(
 			object_.members,

@@ -5,7 +5,7 @@
 #include "../../exception.hpp"
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
-#include <sge/parse/json/find_member.hpp>
+#include <sge/parse/json/find_member_exn.hpp>
 #include <sge/parse/json/get.hpp>
 #include <fcppt/algorithm/find_exn.hpp>
 #include <fcppt/tr1/array.hpp>
@@ -58,22 +58,28 @@ find_weapon_type(
 
 sanguis::load::model::weapon_category const &
 sanguis::load::model::part::operator[](
-	weapon_type::type const t) const
+	weapon_type::type const t
+) const
 {
 	category_map::const_iterator const it(
-		categories.find(t));
+		categories.find(t)
+	);
+
 	if(it != categories.end())
 		return it->second;
+
 	if(t == weapon_type::none)
 		throw exception(
 			FCPPT_TEXT("Unarmed weapon model missing in TODO")
 		);
+
 	return (*this)[weapon_type::none];
 }
 
 sanguis::load::model::part::part(
 	sge::parse::json::object const &object,
-	global_parameters const &param)
+	global_parameters const &param
+)
 :
 	categories()
 {
@@ -89,7 +95,7 @@ sanguis::load::model::part::part(
 			
 	BOOST_FOREACH(
 		sge::parse::json::element_vector::const_reference r,
-		sge::parse::json::find_member<
+		sge::parse::json::find_member_exn<
 			sge::parse::json::array
 		>(
 			members,

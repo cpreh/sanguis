@@ -1,6 +1,6 @@
 #include "json_header.hpp"
 #include <sge/parse/json/array.hpp>
-#include <sge/parse/json/find_member.hpp>
+#include <sge/parse/json/find_member_exn.hpp>
 #include <sge/parse/json/object.hpp>
 #include <fcppt/text.hpp>
 
@@ -10,7 +10,7 @@ sanguis::load::model::json_header(
 )
 {
 	return
-		sge::parse::json::find_member<
+		sge::parse::json::find_member_exn<
 			sge::parse::json::object
 		>(
 			global_entries,
