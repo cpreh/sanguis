@@ -2,12 +2,12 @@
 #include <sge/gui/widgets/parameters.hpp>
 #include <sge/gui/make_image.hpp>
 #include <sge/gui/manager.hpp>
-#include <sge/image/loader.hpp>
+#include <sge/image/multi_loader.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::client::menu::button::button(
 	sge::gui::widgets::parent_data const &parent,
-	sge::image::loader_ptr const il,
+	sge::image::multi_loader const &il,
 	fcppt::filesystem::path const &base,
 	fcppt::string const &name
 )
@@ -16,22 +16,22 @@ sanguis::client::menu::button::button(
 		parent,
 		sge::gui::widgets::parameters(),
 		sge::gui::make_image(
-			il->load(
+			il.load(
 				base/name/FCPPT_TEXT("normal.png")
 			)
 		),
 		sge::gui::make_image(
-			il->load(
+			il.load(
 				base/name/FCPPT_TEXT("hover.png")
 			)
 		),
 		sge::gui::make_image(
-			il->load(
+			il.load(
 				base/name/FCPPT_TEXT("keyboard.png")
 			)
 		),
 		sge::gui::make_image(
-			il->load(
+			il.load(
 				base/name/FCPPT_TEXT("hover_keyboard.png")
 			)
 		)

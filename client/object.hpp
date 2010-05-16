@@ -9,7 +9,6 @@
 #include "../server/object_fwd.hpp"
 #include "../main_object.hpp"
 
-#include <sge/audio/multi_loader.hpp>
 #include <sge/audio/pool.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/console/object.hpp>
@@ -74,8 +73,6 @@ private:
 	sge::console::object console_;
 
 	sge::console::gfx console_gfx_;
-
-	sge::audio::multi_loader audio_loader_;
 
 	sge::audio::pool sound_pool_;
 

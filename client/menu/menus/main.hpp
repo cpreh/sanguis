@@ -3,7 +3,7 @@
 
 #include "../button.hpp"
 #include <sge/gui/widgets/base.hpp>
-#include <sge/image/loader_ptr.hpp>
+#include <sge/image/multi_loader_fwd.hpp>
 #include <fcppt/filesystem/path.hpp>
 
 namespace sanguis
@@ -20,7 +20,7 @@ struct main
 		sge::gui::widgets::parent_data const &,
 		sge::gui::dim const &,
 		fcppt::filesystem::path const &,
-		sge::image::loader_ptr
+		sge::image::multi_loader const &
 	);
 
 	sge::gui::widgets::base parent;

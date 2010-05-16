@@ -11,7 +11,7 @@
 #include <sge/texture/part_raw.hpp>
 #include <sge/renderer/filter/linear.hpp>
 #include <sge/renderer/resource_flags_none.hpp>
-#include <sge/image/loader.hpp>
+#include <sge/image/multi_loader.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/filesystem/directory_iterator.hpp>
 #include <fcppt/filesystem/extension.hpp>
@@ -117,7 +117,9 @@ sanguis::load::resource::textures::do_load_unnamed(
 		>(
 			path,
 			texman.renderer(),
-			il,
+			std::tr1::ref(
+				il
+			),
 			filter
 		);
 }
@@ -129,13 +131,13 @@ sanguis::load::resource::textures::do_load_inner(
 {
 	return sge::texture::add_image(
 		texman,
-		il->load(p)
+		il.load(p)
 	);
 }
 
 sanguis::load::resource::textures::textures(
 	sge::renderer::device_ptr const rend,
-	sge::image::loader_ptr const il
+	sge::image::multi_loader const &il
 )
 :
 	texman(

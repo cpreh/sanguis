@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_MENU_BUTTON_HPP_INCLUDED
 #define SANGUIS_CLIENT_MENU_BUTTON_HPP_INCLUDED
 
-#include <sge/image/loader_ptr.hpp>
+#include <sge/image/multi_loader_fwd.hpp>
 #include <sge/gui/widgets/buttons/image.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <fcppt/string.hpp>
@@ -12,18 +12,25 @@ namespace client
 {
 namespace menu
 {
-class button : public sge::gui::widgets::buttons::image
+class button
+:
+	public sge::gui::widgets::buttons::image
 {
 public:
 	button(
 		sge::gui::widgets::parent_data const &,
-		sge::image::loader_ptr,
+		sge::image::multi_loader const &,
 		fcppt::filesystem::path const &,
-		fcppt::string const &);
+		fcppt::string const &
+	);
 	
-	void process_invalid_area(
-		sge::gui::events::invalid_area const &);
-	sge::gui::dim const optimal_size() const;
+	void
+	process_invalid_area(
+		sge::gui::events::invalid_area const &
+	);
+
+	sge::gui::dim const
+	optimal_size() const;
 };
 }
 }

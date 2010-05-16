@@ -17,14 +17,17 @@
 
 sanguis::client::screenshot::screenshot(
 	sge::renderer::device_ptr const _renderer,
-	sge::image::loader_ptr const _loader,
-	sge::input::system_ptr const is)
+	sge::image::multi_loader const &_loader,
+	sge::input::system_ptr const is
+)
 :
 	make_screenshot(
 		std::tr1::bind(
 			&sge::renderer::screenshot,
 			_renderer,
-			_loader,
+			std::tr1::ref(
+				_loader
+			),
 			std::tr1::placeholders::_1
 		)
 	),

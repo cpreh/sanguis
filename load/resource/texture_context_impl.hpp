@@ -6,7 +6,7 @@
 #include <sge/time/timer.hpp>
 #include <sge/renderer/device_ptr.hpp>
 #include <sge/renderer/filter/texture.hpp>
-#include <sge/image/loader_ptr.hpp>
+#include <sge/image/multi_loader_fwd.hpp>
 #include <sge/image/file_ptr.hpp>
 #include <sge/texture/part_ptr.hpp>
 #include <fcppt/thread/object.hpp>
@@ -27,7 +27,7 @@ public:
 	texture_context_impl(
 		fcppt::filesystem::path const &,
 		sge::renderer::device_ptr,
-		sge::image::loader_ptr,
+		sge::image::multi_loader const &,
 		sge::renderer::filter::texture
 	);
 	bool update();
@@ -51,7 +51,8 @@ private:
 
 	future_value const task(
 		fcppt::filesystem::path const &,
-		sge::image::loader_ptr);
+		sge::image::multi_loader const &
+	);
 };
 }
 }

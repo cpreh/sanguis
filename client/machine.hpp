@@ -28,7 +28,7 @@
 #include <sge/input/key_code.hpp>
 #include <sge/input/key_state_tracker_fwd.hpp>
 #include <sge/input/system_ptr.hpp>
-#include <sge/image/loader_ptr.hpp>
+#include <sge/image/multi_loader_fwd.hpp>
 #include <sge/renderer/device_ptr.hpp>
 
 #include <fcppt/container/raw_vector_decl.hpp>
@@ -58,7 +58,7 @@ public:
 		sge::console::gfx &,
 		sge::input::system_ptr,
 		sge::renderer::device_ptr,
-		sge::image::loader_ptr,
+		sge::image::multi_loader const &,
 		sge::font::system_ptr,
 		sge::audio::player_ptr
 	);
@@ -121,7 +121,7 @@ public:
 	sge::renderer::device_ptr const
 	renderer() const;
 
-	sge::image::loader_ptr const
+	sge::image::multi_loader const &
 	image_loader() const;
 
 	sge::font::system_ptr const
@@ -179,7 +179,7 @@ private:
 
 	sge::renderer::device_ptr const renderer_;
 
-	sge::image::loader_ptr const image_loader_;
+	sge::image::multi_loader const &image_loader_;
 
 	sge::font::system_ptr const font_system_;
 

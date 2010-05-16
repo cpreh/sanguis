@@ -3,7 +3,7 @@
 
 #include "sound_identifier.hpp"
 #include "../sound_type.hpp"
-#include <sge/audio/multi_loader.hpp>
+#include <sge/audio/multi_loader_fwd.hpp>
 #include <sge/audio/pool_fwd.hpp>
 #include <sge/audio/exception.hpp>
 #include <sge/audio/player_ptr.hpp>
@@ -47,7 +47,7 @@ private:
 	) const;
 
 	sounds(
-		sge::audio::multi_loader &,
+		sge::audio::multi_loader const &,
 		sge::audio::player_ptr,
 		sge::audio::pool &
 	);
@@ -59,7 +59,7 @@ private:
 		sge::audio::file_ptr
 	> sound_map;
 
-	sge::audio::multi_loader &ml;
+	sge::audio::multi_loader const &ml;
 	sge::audio::player_ptr const player;
 	sge::audio::pool &pool;
 	mutable sound_map sounds_;

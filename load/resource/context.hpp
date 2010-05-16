@@ -7,11 +7,10 @@
 #include "sounds_fwd.hpp"
 #include "animations_fwd.hpp"
 #include <sge/renderer/device_ptr.hpp>
-#include <sge/image/loader_ptr.hpp>
+#include <sge/image/multi_loader_fwd.hpp>
 #include <sge/audio/player_ptr.hpp>
-#include <sge/audio/multi_loader.hpp>
+#include <sge/audio/multi_loader_fwd.hpp>
 #include <sge/audio/pool_fwd.hpp>
-#include <sge/multi_loader.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -44,8 +43,8 @@ private:
 
 	context(
 		sge::renderer::device_ptr,
-		sge::image::loader_ptr,
-		sge::audio::multi_loader &,
+		sge::image::multi_loader const &,
+		sge::audio::multi_loader const &,
 		sge::audio::player_ptr,
 		sge::audio::pool &
 	);

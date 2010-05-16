@@ -21,16 +21,20 @@ sanguis::load::resource::context::animations() const
 	return *animations_;
 }
 
-void sanguis::load::resource::context::update(time_type const delta) const
+void
+sanguis::load::resource::context::update(
+	time_type const delta
+) const
 {
 	textures_->cleanup(
-		delta);
+		delta
+	);
 }
 
 sanguis::load::resource::context::context(
 	sge::renderer::device_ptr const rend,
-	sge::image::loader_ptr const il,
-	sge::audio::multi_loader &ml,
+	sge::image::multi_loader const &il,
+	sge::audio::multi_loader const &ml,
 	sge::audio::player_ptr const ap,
 	sge::audio::pool &pool
 )
@@ -38,15 +42,21 @@ sanguis::load::resource::context::context(
 	textures_(
 		new resource::textures(
 			rend,
-			il)),
+			il
+		)
+	),
 	sounds_(
 		new resource::sounds(
 			ml,
 			ap,
-			pool)),
+			pool
+		)
+	),
 	animations_(
 		new resource::animations(
-			*textures_))
+			*textures_
+		)
+	)
 {}
 
 sanguis::load::resource::context::~context()

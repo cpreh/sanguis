@@ -8,7 +8,7 @@
 #include <sge/texture/part_ptr.hpp>
 #include <sge/texture/manager.hpp>
 #include <sge/renderer/device_ptr.hpp>
-#include <sge/image/loader_ptr.hpp>
+#include <sge/image/multi_loader_fwd.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <map>
@@ -60,7 +60,8 @@ private:
 
 	textures(
 		sge::renderer::device_ptr,
-		sge::image::loader_ptr);
+		sge::image::multi_loader const &
+	);
 
 	typedef std::map<
 		texture_identifier,
@@ -78,9 +79,13 @@ private:
 	> texture_name_map;
 
 	mutable sge::texture::manager texman;
-	sge::image::loader_ptr const il;
+
+	sge::image::multi_loader const &il;
+
 	mutable texture_map textures_;
+
 	mutable unnamed_texture_map unnamed_textures;
+
 	mutable texture_name_map texture_names;
 };
 

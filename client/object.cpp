@@ -17,7 +17,7 @@
 #include <sge/font/system.hpp>
 #include <sge/image/color/format.hpp>
 #include <sge/image/colors.hpp>
-#include <sge/image/loader.hpp>
+#include <sge/image/multi_loader.hpp>
 #include <sge/renderer/filter/linear.hpp>
 #include <sge/renderer/state/bool.hpp>
 #include <sge/renderer/state/list.hpp>
@@ -105,7 +105,7 @@ sanguis::client::object::object(
 			.texture(
 				sge::texture::add_image(
 					texture_manager_,
-					sys_.image_loader()->load(
+					sys_.image_loader().load(
 						sanguis::media_path()
 						/ FCPPT_TEXT("console_back.png")
 					)
@@ -132,14 +132,11 @@ sanguis::client::object::object(
 			sge::console::output_line_limit
 		>()
 	),
-	audio_loader_(
-		sys_.plugin_manager()
-	),
 	sound_pool_(),
 	resources_(
 		sys_.image_loader(),
 		sys_.renderer(),
-		audio_loader_,
+		sys_.audio_loader(),
 		sys_.audio_player(),
 		sound_pool_
 	),

@@ -43,7 +43,7 @@ sanguis::client::machine::machine(
 	sge::console::gfx &_console,
 	sge::input::system_ptr const input_system_,
 	sge::renderer::device_ptr const renderer_,
-	sge::image::loader_ptr const image_loader_,
+	sge::image::multi_loader const &image_loader_,
 	sge::font::system_ptr const font_system_,
 	sge::audio::player_ptr const audio_player_
 )
@@ -299,7 +299,7 @@ sanguis::client::machine::renderer() const
 	return renderer_;
 }
 
-sge::image::loader_ptr const
+sge::image::multi_loader const &
 sanguis::client::machine::image_loader() const
 {
 	return image_loader_;

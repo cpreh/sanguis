@@ -1,11 +1,11 @@
 #include "connect.hpp"
 #include "../../config/settings/get_or_default.hpp"
 #include "../../config/settings/set_key.hpp"
-#include <sge/image/loader.hpp>
 #include <sge/gui/widgets/parameters.hpp>
 #include <sge/gui/layouts/horizontal.hpp>
 #include <sge/gui/layouts/vertical.hpp>
 #include <sge/gui/make_image.hpp>
+#include <sge/image/multi_loader.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/char_type.hpp>
@@ -25,7 +25,7 @@ sanguis::client::menu::menus::connect::connect(
 	sge::gui::widgets::parent_data const &_parent,
 	fcppt::filesystem::path const &buttons_path,
 	fcppt::filesystem::path const &labels_path,
-	sge::image::loader_ptr const image_loader_
+	sge::image::multi_loader const &image_loader_
 )
 :
 	parent(
@@ -52,7 +52,7 @@ sanguis::client::menu::menus::connect::connect(
 		host,
 		sge::gui::widgets::parameters(),
 		sge::gui::make_image(
-			image_loader_->load(
+			image_loader_.load(
 				labels_path/FCPPT_TEXT("host.png")
 			)
 		)
@@ -80,7 +80,7 @@ sanguis::client::menu::menus::connect::connect(
 		port,
 		sge::gui::widgets::parameters(),
 		sge::gui::make_image(
-			image_loader_->load(
+			image_loader_.load(
 				labels_path/FCPPT_TEXT("port.png")
 			)
 		)

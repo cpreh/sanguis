@@ -18,7 +18,7 @@
 #include <sge/gui/widgets/edit.hpp>
 #include <sge/gui/widgets/label.hpp>
 #include <sge/gui/manager.hpp>
-#include <sge/image/loader_ptr.hpp>
+#include <sge/image/multi_loader_fwd.hpp>
 #include <sge/input/system_ptr.hpp>
 #include <sge/renderer/device_ptr.hpp>
 #include <sge/sprite/type_choices.hpp>
@@ -50,7 +50,7 @@ public:
 	object(
 		config::settings::object &,
 		sge::renderer::device_ptr,
-		sge::image::loader_ptr,
+		sge::image::multi_loader const &,
 		sge::font::system_ptr,
 		sge::input::system_ptr,
 		cursor::object_ptr,

@@ -5,8 +5,13 @@
 #include <sge/renderer/parameters.hpp>
 #include <sge/renderer/refresh_rate_dont_care.hpp>
 #include <sge/systems/list.hpp>
-#include <sge/systems/named.hpp>
+#include <sge/systems/image_loader.hpp>
+#include <sge/systems/audio_loader.hpp>
+#include <sge/systems/parameterless.hpp>
 #include <sge/window/parameters.hpp>
+#include <sge/extension_set.hpp>
+#include <fcppt/assign/make_container.hpp>
+#include <fcppt/container/bitfield/basic_impl.hpp>
 #include <fcppt/text.hpp>
 
 sge::systems::list const
@@ -43,19 +48,35 @@ sanguis::args::client_sge_options(
 				)
 			)
 		)
-		// TODO: replace this by capabilities
-		(sge::systems::parameterless::input)
 		(
-			sge::systems::named(
-				sge::systems::parameterless::image,
-				FCPPT_TEXT("libpng")
+			sge::systems::parameterless::input
+		)
+		(
+			sge::systems::image_loader(
+				sge::image::capabilities_field(
+					sge::image::capabilities::threadsafe
+				),
+				fcppt::assign::make_container<
+					sge::extension_set
+				>(
+					FCPPT_TEXT("png")
+				)
 			)
 		)
-		(sge::systems::parameterless::audio_player)
 		(
-			sge::systems::named(
-				sge::systems::parameterless::font,
-				FCPPT_TEXT("freetype")
+			sge::systems::audio_loader(
+				sge::audio::loader_capabilities_field::null(),
+				fcppt::assign::make_container<
+					sge::extension_set
+				>(
+					FCPPT_TEXT("ogg")
+				)
 			)
+		)
+		(
+			sge::systems::parameterless::audio_player
+		)
+		(
+			sge::systems::parameterless::font // TODO: make sure that we can load truetype fonts, use a multi loader here as well!
 		);
 }

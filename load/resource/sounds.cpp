@@ -117,7 +117,7 @@ sanguis::load::resource::sounds::make(
 }
 
 sanguis::load::resource::sounds::sounds(
-	sge::audio::multi_loader &ml,
+	sge::audio::multi_loader const &ml,
 	sge::audio::player_ptr const player,
 	sge::audio::pool &pool
 )

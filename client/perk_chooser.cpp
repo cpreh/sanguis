@@ -9,8 +9,8 @@
 #include <sge/gui/layouts/vertical.hpp>
 #include <sge/gui/unit.hpp>
 #include <sge/gui/make_image.hpp>
-#include <sge/image/loader.hpp>
 #include <sge/renderer/device.hpp>
+#include <sge/image/multi_loader.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/output.hpp>
@@ -98,7 +98,7 @@ sanguis::client::perk_chooser::activation::~activation()
 sanguis::client::perk_chooser::perk_chooser(
 	sge::renderer::device_ptr const renderer_,
 	sge::input::system_ptr const input_system_,
-	sge::image::loader_ptr const image_loader_,
+	sge::image::multi_loader const &image_loader_,
 	sge::font::system_ptr const font_system_,
 	send_callback const &_send_callback,
 	sanguis::client::cursor::object_ptr const _cursor
@@ -329,7 +329,7 @@ sanguis::client::perk_chooser::image_map::const_iterator const
 
 	new_image.normal = 
 		sge::gui::make_image(
-			image_loader_->load(
+			image_loader_.load(
 				base/
 				FCPPT_TEXT("normal.png")
 			)
@@ -337,7 +337,7 @@ sanguis::client::perk_chooser::image_map::const_iterator const
 
 	new_image.hover = 
 		sge::gui::make_image(
-			image_loader_->load(
+			image_loader_.load(
 				base/
 				FCPPT_TEXT("hover.png")
 			)
