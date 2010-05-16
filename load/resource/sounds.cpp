@@ -19,7 +19,8 @@ sge::audio::sound_ptr const
 make_sound(
 	sge::audio::player_ptr const player,
 	sge::audio::file_ptr const file,
-	sanguis::load::sound_type::type const type)
+	sanguis::load::sound_type::type const type
+)
 {
 	try
 	{
@@ -32,11 +33,11 @@ make_sound(
 			return player->create_nonstream_sound(
 				file
 			);
-		default:;
-			throw sanguis::exception(
-				FCPPT_TEXT("Invalid sound type in load!")
-			);
 		}
+
+		throw sanguis::exception(
+			FCPPT_TEXT("Invalid sound type in load!")
+		);
 	}
 	catch(sge::audio::bad_sound_alloc const &e)
 	{
@@ -81,7 +82,8 @@ sanguis::load::resource::sounds::~sounds()
 
 sge::audio::file_ptr const
 sanguis::load::resource::sounds::do_load(
-	sound_identifier const &name) const
+	sound_identifier const &name
+) const
 {
 	fcppt::filesystem::path const sound_path(
 		media_path() / FCPPT_TEXT("sound") / name
@@ -117,7 +119,8 @@ sanguis::load::resource::sounds::make(
 sanguis::load::resource::sounds::sounds(
 	sge::audio::multi_loader &ml,
 	sge::audio::player_ptr const player,
-	sge::audio::pool &pool)
+	sge::audio::pool &pool
+)
 :
 	ml(ml),
 	player(player),
