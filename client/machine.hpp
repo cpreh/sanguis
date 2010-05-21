@@ -58,7 +58,7 @@ public:
 		sge::console::gfx &,
 		sge::input::system_ptr,
 		sge::renderer::device_ptr,
-		sge::image::multi_loader const &,
+		sge::image::multi_loader &,
 		sge::font::system_ptr,
 		sge::audio::player_ptr
 	);
@@ -121,7 +121,7 @@ public:
 	sge::renderer::device_ptr const
 	renderer() const;
 
-	sge::image::multi_loader const &
+	sge::image::multi_loader &
 	image_loader() const;
 
 	sge::font::system_ptr const
@@ -179,7 +179,7 @@ private:
 
 	sge::renderer::device_ptr const renderer_;
 
-	sge::image::multi_loader const &image_loader_;
+	sge::image::multi_loader &image_loader_;
 
 	sge::font::system_ptr const font_system_;
 

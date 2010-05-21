@@ -19,7 +19,7 @@ class button
 public:
 	button(
 		sge::gui::widgets::parent_data const &,
-		sge::image::multi_loader const &,
+		sge::image::multi_loader &,
 		fcppt::filesystem::path const &,
 		fcppt::string const &
 	);

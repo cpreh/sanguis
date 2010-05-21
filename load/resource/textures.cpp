@@ -137,7 +137,7 @@ sanguis::load::resource::textures::do_load_inner(
 
 sanguis::load::resource::textures::textures(
 	sge::renderer::device_ptr const rend,
-	sge::image::multi_loader const &il
+	sge::image::multi_loader &il
 )
 :
 	texman(

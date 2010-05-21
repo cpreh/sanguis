@@ -27,7 +27,7 @@ public:
 	texture_context_impl(
 		fcppt::filesystem::path const &,
 		sge::renderer::device_ptr,
-		sge::image::multi_loader const &,
+		sge::image::multi_loader &,
 		sge::renderer::filter::texture
 	);
 	bool update();
@@ -51,7 +51,7 @@ private:
 
 	future_value const task(
 		fcppt::filesystem::path const &,
-		sge::image::multi_loader const &
+		sge::image::multi_loader &
 	);
 };
 }

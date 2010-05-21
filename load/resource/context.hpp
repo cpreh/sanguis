@@ -43,8 +43,8 @@ private:
 
 	context(
 		sge::renderer::device_ptr,
-		sge::image::multi_loader const &,
-		sge::audio::multi_loader const &,
+		sge::image::multi_loader &,
+		sge::audio::multi_loader &,
 		sge::audio::player_ptr,
 		sge::audio::pool &
 	);

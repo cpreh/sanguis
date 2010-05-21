@@ -28,7 +28,7 @@ public:
 		sge::gui::widgets::parent_data const &,
 		fcppt::filesystem::path const &buttons_path,
 		fcppt::filesystem::path const &labels_path,
-		sge::image::multi_loader const &
+		sge::image::multi_loader &
 	);
 
 	~connect();

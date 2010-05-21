@@ -13,7 +13,7 @@
 sanguis::load::resource::texture_context_impl::texture_context_impl(
 	fcppt::filesystem::path const &_path,
 	sge::renderer::device_ptr const _rend,
-	sge::image::multi_loader const &_il,
+	sge::image::multi_loader &_il,
 	sge::renderer::filter::texture const _filter)
 :
 	task_(
@@ -99,7 +99,7 @@ sanguis::load::resource::texture_context_impl::~texture_context_impl()
 sanguis::load::resource::texture_context_impl::future_value const
 sanguis::load::resource::texture_context_impl::task(
 	fcppt::filesystem::path const &_path,
-	sge::image::multi_loader const &_il
+	sge::image::multi_loader &_il
 )
 {
 	sge::image::file_ptr const p = 

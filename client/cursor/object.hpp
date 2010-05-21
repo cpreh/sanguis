@@ -22,7 +22,7 @@ class object
 {
 public:
 	object(
-		sge::image::multi_loader const &,
+		sge::image::multi_loader &,
 		sge::renderer::device_ptr
 	);
 

@@ -34,7 +34,7 @@ public:
 	perk_chooser(
 		sge::renderer::device_ptr,
 		sge::input::system_ptr,
-		sge::image::multi_loader const &,
+		sge::image::multi_loader &,
 		sge::font::system_ptr,
 		send_callback const &,
 		sanguis::client::cursor::object_ptr
@@ -69,7 +69,7 @@ private:
 	typedef boost::ptr_vector<sge::gui::widgets::buttons::image> button_container;
 	typedef std::map<perk_type::type,perk_image> image_map;
 
-	sge::image::multi_loader const &image_loader_;
+	sge::image::multi_loader &image_loader_;
 
 	perk_container perks_;
 	level_type 

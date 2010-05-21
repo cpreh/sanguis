@@ -41,7 +41,7 @@ fcppt::log::object mylogger(
 sanguis::client::menu::object::object(
 	config::settings::object &settings_,
 	sge::renderer::device_ptr const renderer_,
-	sge::image::multi_loader const &image_loader_,
+	sge::image::multi_loader &image_loader_,
 	sge::font::system_ptr const font_system_,
 	sge::input::system_ptr const input_system_,
 	cursor::object_ptr const _cursor,

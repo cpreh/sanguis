@@ -33,8 +33,8 @@ sanguis::load::resource::context::update(
 
 sanguis::load::resource::context::context(
 	sge::renderer::device_ptr const rend,
-	sge::image::multi_loader const &il,
-	sge::audio::multi_loader const &ml,
+	sge::image::multi_loader &il,
+	sge::audio::multi_loader &ml,
 	sge::audio::player_ptr const ap,
 	sge::audio::pool &pool
 )

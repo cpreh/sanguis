@@ -9,7 +9,7 @@ sanguis::client::menu::menus::main::main(
 	sge::gui::widgets::parent_data const &_parent,
 	sge::gui::dim const &_resolution,
 	fcppt::filesystem::path const &buttons_path,
-	sge::image::multi_loader const &image_loader_
+	sge::image::multi_loader &image_loader_
 )
 :
 	parent(

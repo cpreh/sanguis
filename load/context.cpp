@@ -3,9 +3,9 @@
 #include "model/collection.hpp"
 
 sanguis::load::context::context(
-	sge::image::multi_loader const &il,
+	sge::image::multi_loader &il,
 	sge::renderer::device_ptr const rend,
-	sge::audio::multi_loader const &ml,
+	sge::audio::multi_loader &ml,
 	sge::audio::player_ptr const ap,
 	sge::audio::pool &pool
 )

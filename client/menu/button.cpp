@@ -7,7 +7,7 @@
 
 sanguis::client::menu::button::button(
 	sge::gui::widgets::parent_data const &parent,
-	sge::image::multi_loader const &il,
+	sge::image::multi_loader &il,
 	fcppt::filesystem::path const &base,
 	fcppt::string const &name
 )

@@ -26,9 +26,9 @@ class context
 	FCPPT_NONCOPYABLE(context)
 public:
 	context(
-		sge::image::multi_loader const &,
+		sge::image::multi_loader &,
 		sge::renderer::device_ptr,
-		sge::audio::multi_loader const &,
+		sge::audio::multi_loader &,
 		sge::audio::player_ptr,
 		sge::audio::pool &
 	);
@@ -52,9 +52,9 @@ private:
 		fcppt::string const &
 	) const;
 
-	sge::image::multi_loader const &il;
+	sge::image::multi_loader &il;
 	sge::renderer::device_ptr const rend;
-	sge::audio::multi_loader const &ml;
+	sge::audio::multi_loader &ml;
 	sge::audio::player_ptr const ap;
 	sge::audio::pool &pool;
 

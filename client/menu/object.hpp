@@ -50,7 +50,7 @@ public:
 	object(
 		config::settings::object &,
 		sge::renderer::device_ptr,
-		sge::image::multi_loader const &,
+		sge::image::multi_loader &,
 		sge::font::system_ptr,
 		sge::input::system_ptr,
 		cursor::object_ptr,

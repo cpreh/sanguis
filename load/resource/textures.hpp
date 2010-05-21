@@ -60,7 +60,7 @@ private:
 
 	textures(
 		sge::renderer::device_ptr,
-		sge::image::multi_loader const &
+		sge::image::multi_loader &
 	);
 
 	typedef std::map<
@@ -80,7 +80,7 @@ private:
 
 	mutable sge::texture::manager texman;
 
-	sge::image::multi_loader const &il;
+	sge::image::multi_loader &il;
 
 	mutable texture_map textures_;
 

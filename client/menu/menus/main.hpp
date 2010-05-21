@@ -20,7 +20,7 @@ struct main
 		sge::gui::widgets::parent_data const &,
 		sge::gui::dim const &,
 		fcppt::filesystem::path const &,
-		sge::image::multi_loader const &
+		sge::image::multi_loader &
 	);
 
 	sge::gui::widgets::base parent;

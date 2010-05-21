@@ -25,7 +25,7 @@ sanguis::client::menu::menus::connect::connect(
 	sge::gui::widgets::parent_data const &_parent,
 	fcppt::filesystem::path const &buttons_path,
 	fcppt::filesystem::path const &labels_path,
-	sge::image::multi_loader const &image_loader_
+	sge::image::multi_loader &image_loader_
 )
 :
 	parent(

@@ -47,7 +47,7 @@ private:
 	) const;
 
 	sounds(
-		sge::audio::multi_loader const &,
+		sge::audio::multi_loader &,
 		sge::audio::player_ptr,
 		sge::audio::pool &
 	);
@@ -59,7 +59,7 @@ private:
 		sge::audio::file_ptr
 	> sound_map;
 
-	sge::audio::multi_loader const &ml;
+	sge::audio::multi_loader &ml;
 	sge::audio::player_ptr const player;
 	sge::audio::pool &pool;
 	mutable sound_map sounds_;

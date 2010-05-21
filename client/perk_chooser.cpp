@@ -98,7 +98,7 @@ sanguis::client::perk_chooser::activation::~activation()
 sanguis::client::perk_chooser::perk_chooser(
 	sge::renderer::device_ptr const renderer_,
 	sge::input::system_ptr const input_system_,
-	sge::image::multi_loader const &image_loader_,
+	sge::image::multi_loader &image_loader_,
 	sge::font::system_ptr const font_system_,
 	send_callback const &_send_callback,
 	sanguis::client::cursor::object_ptr const _cursor
