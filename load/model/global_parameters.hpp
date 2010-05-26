@@ -17,14 +17,17 @@ namespace load
 namespace model
 {
 
-struct global_parameters {
+class global_parameters
+{
+public:
 	global_parameters(
 		fcppt::filesystem::path const &,
 		resource::textures const &,
 		sge::renderer::dim_type const &cell_size,
 		optional_delay const &,
 		optional_texture_identifier const &,
-		resource::sounds const &);
+		resource::sounds const &
+	);
 	
 	fcppt::filesystem::path const &
 	path() const;
@@ -43,7 +46,8 @@ struct global_parameters {
 
 	global_parameters const
 	new_texture(
-		optional_texture_identifier const &) const;
+		optional_texture_identifier const &
+	) const;
 	
 	resource::sounds const &
 	sounds() const;

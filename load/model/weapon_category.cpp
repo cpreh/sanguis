@@ -7,7 +7,7 @@
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/get.hpp>
-#include <sge/parse/json/find_member.hpp>
+#include <sge/parse/json/find_member_exn.hpp>
 #include <fcppt/filesystem/exists.hpp>
 #include <fcppt/algorithm/find_exn.hpp>
 #include <fcppt/log/headers.hpp>
@@ -115,7 +115,7 @@ sanguis::load::model::weapon_category::weapon_category(
 
 	BOOST_FOREACH(
 		sge::parse::json::element_vector::const_reference r,
-		sge::parse::json::find_member<
+		sge::parse::json::find_member_exn<
 			sge::parse::json::array
 		>(
 			members	,

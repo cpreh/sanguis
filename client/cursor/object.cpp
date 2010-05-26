@@ -2,7 +2,7 @@
 #include <sge/sprite/object_impl.hpp>
 
 sanguis::client::cursor::object::object(
-	sge::image::loader_ptr const il,
+	sge::image::multi_loader &il,
 	sge::renderer::device_ptr const rend
 )
 : 

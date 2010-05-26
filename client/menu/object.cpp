@@ -12,8 +12,8 @@
 #include <sge/sprite/external_system_impl.hpp>
 #include <sge/sprite/render_one.hpp>
 #include <sge/texture/part_raw.hpp>
-#include <sge/image/loader.hpp>
 #include <sge/image/file.hpp>
+#include <sge/image/multi_loader.hpp>
 #include <sge/renderer/filter/linear.hpp>
 #include <sge/renderer/resource_flags_none.hpp>
 #include <sge/renderer/device.hpp>
@@ -41,7 +41,7 @@ fcppt::log::object mylogger(
 sanguis::client::menu::object::object(
 	config::settings::object &settings_,
 	sge::renderer::device_ptr const renderer_,
-	sge::image::loader_ptr const image_loader_,
+	sge::image::multi_loader &image_loader_,
 	sge::font::system_ptr const font_system_,
 	sge::input::system_ptr const input_system_,
 	cursor::object_ptr const _cursor,
@@ -212,7 +212,7 @@ sanguis::client::menu::object::object(
 					sge::texture::part_raw
 				>(
 					renderer_->create_texture(
-						image_loader_->load(
+						image_loader_.load(
 							media_path() / FCPPT_TEXT("dirt_tile.png")
 						)->view(),
 						sge::renderer::filter::linear,

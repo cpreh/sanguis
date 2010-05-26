@@ -3,7 +3,7 @@
 
 #include "sound_identifier.hpp"
 #include "../sound_type.hpp"
-#include <sge/audio/multi_loader.hpp>
+#include <sge/audio/multi_loader_fwd.hpp>
 #include <sge/audio/pool_fwd.hpp>
 #include <sge/audio/exception.hpp>
 #include <sge/audio/player_ptr.hpp>

@@ -1,13 +1,14 @@
 #include "sound.hpp"
 #include "../resource/sounds.hpp"
-#include <sge/parse/json/find_member.hpp>
+#include <sge/parse/json/find_member_exn.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::load::model::sound::sound(
 	sge::parse::json::member_vector const &members,
-	resource::sounds const &ctx)
+	resource::sounds const &ctx
+)
 :
 	ctx(
 		std::tr1::ref(
@@ -18,7 +19,7 @@ sanguis::load::model::sound::sound(
 		static_cast<
 			probability_type
 		>(
-			sge::parse::json::find_member<
+			sge::parse::json::find_member_exn<
 				double
 			>(
 				members,
@@ -28,7 +29,7 @@ sanguis::load::model::sound::sound(
 	),
 	file(
 		ctx.load(
-			sge::parse::json::find_member<
+			sge::parse::json::find_member_exn<
 				sge::parse::json::string
 			>(
 				members,

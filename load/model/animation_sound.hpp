@@ -15,17 +15,20 @@ namespace load
 namespace model
 {
 
-class animation_sound {
+class animation_sound
+{
 public:
 	sge::audio::sound_ptr const
 	operator[](
-		animation_sound_type::type) const;
+		animation_sound_type::type
+	) const;
 	
 	animation_sound();
 
 	animation_sound(
 		sge::parse::json::member_vector const &,
-		resource::sounds const &);
+		resource::sounds const &
+	);
 private:
 	typedef std::map<
 		animation_sound_type::type,

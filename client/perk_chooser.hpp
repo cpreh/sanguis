@@ -10,7 +10,7 @@
 #include <sge/gui/widgets/backdrop.hpp>
 #include <sge/gui/widgets/label.hpp>
 #include <sge/gui/manager.hpp>
-#include <sge/image/loader_ptr.hpp>
+#include <sge/image/multi_loader_fwd.hpp>
 #include <sge/input/system_ptr.hpp>
 #include <sge/renderer/device_ptr.hpp>
 #include <fcppt/signal/connection_manager.hpp>
@@ -34,7 +34,7 @@ public:
 	perk_chooser(
 		sge::renderer::device_ptr,
 		sge::input::system_ptr,
-		sge::image::loader_ptr,
+		sge::image::multi_loader &,
 		sge::font::system_ptr,
 		send_callback const &,
 		sanguis::client::cursor::object_ptr
@@ -69,7 +69,7 @@ private:
 	typedef boost::ptr_vector<sge::gui::widgets::buttons::image> button_container;
 	typedef std::map<perk_type::type,perk_image> image_map;
 
-	sge::image::loader_ptr const image_loader_;
+	sge::image::multi_loader &image_loader_;
 
 	perk_container perks_;
 	level_type 
