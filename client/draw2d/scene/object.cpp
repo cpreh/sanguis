@@ -314,7 +314,7 @@ sanguis::client::draw2d::scene::object::render_lighting()
 		)
 		(
 			sge::renderer::state::color::ambient_light_color
-				= sge::image::colors::blue()
+				= sge::image::colors::darkblue()
 		)
 	);
 
