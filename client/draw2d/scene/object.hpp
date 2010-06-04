@@ -96,6 +96,9 @@ private:
 	void
 	render_systems();
 
+	void
+	render_lighting();
+
 	entities::base &	
 	insert(
 		entities::auto_ptr,
