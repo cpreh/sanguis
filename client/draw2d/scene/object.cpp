@@ -21,10 +21,16 @@
 #include "../../../load/context.hpp"
 
 #include <sge/renderer/device.hpp>
+#include <sge/renderer/material.hpp>
 #include <sge/renderer/state/scoped.hpp>
+#include <sge/renderer/state/list.hpp>
+#include <sge/renderer/state/bool.hpp>
+#include <sge/renderer/state/trampoline.hpp>
+#include <sge/renderer/state/var.hpp>
 #include <sge/sprite/default_equal.hpp>
 #include <sge/sprite/intrusive/system_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
+#include <sge/image/colors.hpp>
 
 #include <fcppt/math/matrix/basic_impl.hpp>
 #include <fcppt/math/matrix/translation.hpp>
@@ -268,13 +274,6 @@ sanguis::client::draw2d::scene::object::render_systems()
 		sge::sprite::render_states()
 	);
 
-	vector2 const translation_(
-		screen_center(
-			player_center_,
-			screen_size()
-		)
-	);
-
 	// TODO: the sprite systems should not hold their matrices!
 
 	FCPPT_ASSERT(
@@ -282,36 +281,88 @@ sanguis::client::draw2d::scene::object::render_systems()
 	);
 
 
-	client_system_.matrices();
+	render_lighting();
 
-	{
-		client_system_.renderer()->transform(
-			sge::renderer::matrix_mode::texture,
-			fcppt::math::matrix::translation(
-				fcppt::math::vector::construct(
-					-translation_
-					/
-					// TODO: HACK, HACK
-					background_dim(
-						entity(
-							background_id_
-						)
-					),
-					0.f
-				)
-			)
+	for(
+		sprite::order index(
+			z_ordering::healthbar_lower
 		);
-
-		client_system_.render(
-			z_ordering::background,
+		index <= z_ordering::healthbar_upper;
+		++index
+	)
+		colored_system_.render(
+			index,
 			sge::sprite::default_equal()
 		);
 
-		client_system_.renderer()->transform(
-			sge::renderer::matrix_mode::texture,
-			sprite::client::system::matrix::identity()
-		);
-	}
+	client_system_.matrices();
+
+	client_system_.render(
+		z_ordering::cursor,
+		sge::sprite::default_equal()
+	);
+}
+
+void
+sanguis::client::draw2d::scene::object::render_lighting()
+{
+	sge::renderer::state::scoped const state(
+		rend_,
+		sge::renderer::state::list
+		(
+			sge::renderer::state::bool_::enable_lighting = true
+		)
+		(
+			sge::renderer::state::color::ambient_light_color
+				= sge::image::colors::darkblue()
+		)
+	);
+
+	rend_->material(
+		sge::renderer::material(
+			sge::image::colors::black(),
+			sge::image::colors::white(),
+			sge::image::colors::black(),
+			sge::image::colors::black(),
+			0.
+		)
+	);
+
+	client_system_.matrices();
+
+	vector2 const translation_(
+		screen_center(
+			player_center_,
+			screen_size()
+		)
+	);
+
+	rend_->transform(
+		sge::renderer::matrix_mode::texture,
+		fcppt::math::matrix::translation(
+			fcppt::math::vector::construct(
+				-translation_
+				/
+				// TODO: HACK, HACK
+				background_dim(
+					entity(
+						background_id_
+					)
+				),
+				0.f
+			)
+		)
+	);
+
+	client_system_.render(
+		z_ordering::background,
+		sge::sprite::default_equal()
+	);
+
+	client_system_.renderer()->transform(
+		sge::renderer::matrix_mode::texture,
+		sprite::client::system::matrix::identity()
+	);
 
 	normal_system_.transform(		
 		fcppt::math::matrix::translation(
@@ -327,22 +378,10 @@ sanguis::client::draw2d::scene::object::render_systems()
 		sprite::order index(
 			z_ordering::corpses
 		);
-		index < z_ordering::healthbar_lower;
+		index <= z_ordering::player_upper;
 		++index
 	)
 		normal_system_.render(
-			index,
-			sge::sprite::default_equal()
-		);
-	
-	for(
-		sprite::order index(
-			z_ordering::healthbar_lower
-		);
-		index < z_ordering::smoke;
-		++index
-	)
-		colored_system_.render(
 			index,
 			sge::sprite::default_equal()
 		);
@@ -351,20 +390,13 @@ sanguis::client::draw2d::scene::object::render_systems()
 		sprite::order index(
 			z_ordering::smoke
 		);
-		index < z_ordering::cursor;
+		index <= z_ordering::rubble;
 		++index
 	)
 		particle_system_.render(
 			index,
 			sge::sprite::default_equal()
 		);
-
-	client_system_.matrices();
-
-	client_system_.render(
-		z_ordering::cursor,
-		sge::sprite::default_equal()
-	);
 }
 
 sanguis::client::draw2d::entities::base &

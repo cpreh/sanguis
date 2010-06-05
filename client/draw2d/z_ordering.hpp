@@ -18,11 +18,11 @@ enum type {
 	bullet,
 	pickup,
 	player_upper,
-	healthbar_lower,
-	healthbar_upper,
 	smoke,
 	flare,
 	rubble,
+	healthbar_lower,
+	healthbar_upper,
 	cursor,
 	size
 };

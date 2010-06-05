@@ -19,8 +19,6 @@
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/intrusive/system_impl.hpp>
-#include <mizuiro/color/types/channel_value.hpp>
-#include <mizuiro/color/channel_max.hpp>
 #include <algorithm>
 
 namespace
@@ -197,31 +195,15 @@ sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 		)
 	);
 
-	typedef mizuiro::color::types::channel_value<
-		sprite::colored::color_format,
-		mizuiro::color::channel::alpha
-	>::type alpha_value;
-
-	alpha_value const pixel_channel_max(
-		mizuiro::color::channel_max<
-			alpha_value
-		>()
-	);
-
 	foreground.color(
 		sprite::colored::color(
-			sge::image::color::init::red =
-			static_cast<
-				sge::image::color::channel8
-			>(
-				(static_cast<health_type>(1) - remaining_health())
-				* static_cast<health_type>(pixel_channel_max)
+			sge::image::color::init::red %= std::min(
+			static_cast<health_type>(	2.0 -  2.0 * remaining_health() ),
+			static_cast<health_type>(1)
 			),
-			sge::image::color::init::green =
-			static_cast<
-				sge::image::color::channel8
-			>(
-				remaining_health() * static_cast<health_type>(pixel_channel_max)
+			sge::image::color::init::green %= std::min(
+			static_cast<health_type>( 1.4 * remaining_health() ),
+			static_cast<health_type>(0.7)
 			),
 			sge::image::color::init::blue %= 0.0,
 			sge::image::color::init::alpha %= 1.0
