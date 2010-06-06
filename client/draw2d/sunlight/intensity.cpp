@@ -9,6 +9,7 @@
 #include <fcppt/math/vector/unit_circle.hpp>
 #include <fcppt/assert.hpp>
 #include <boost/date_time/gregorian/gregorian_types.hpp>
+#include <algorithm>
 #include <cmath>
 #include <ctime>
 
@@ -109,13 +110,18 @@ sanguis::client::draw2d::sunlight::intensity(
 		hr = 
 			h + R/60.0,
 		result =
-			fcppt::math::vector::dot(
-				fcppt::math::vector::unit_circle(
-					hr
-				),
-				vector_type(
-					1,
-					0
+			std::max(
+				static_cast<real>(0),
+				fcppt::math::vector::dot(
+					fcppt::math::vector::unit_circle(
+						fcppt::math::deg_to_rad(
+							hr
+						)
+					),
+					vector_type(
+						0.f,
+						1.f
+					)
 				)
 			);
 	
