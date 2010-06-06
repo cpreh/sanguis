@@ -189,9 +189,7 @@ private:
 
 	fcppt::signal::scoped_connection const
 		cursor_pos_conn_,
-		cursor_show_conn_,
-		cheat_kill_conn_,
-		cheat_impulse_conn_;
+		cursor_show_conn_;
 };
 }
 }

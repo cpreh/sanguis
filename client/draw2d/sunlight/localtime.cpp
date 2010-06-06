@@ -7,7 +7,7 @@ sanguis::client::draw2d::sunlight::localtime(
 )
 {
 	return
-		*std::localtime(
+		*std::gmtime(
 			&time_
 		);
 }
