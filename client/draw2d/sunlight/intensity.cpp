@@ -3,10 +3,6 @@
 #include "localtime.hpp"
 #include <fcppt/math/deg_to_rad.hpp>
 #include <fcppt/math/rad_to_deg.hpp>
-#include <fcppt/math/vector/static.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
-#include <fcppt/math/vector/dot.hpp>
-#include <fcppt/math/vector/unit_circle.hpp>
 #include <fcppt/assert.hpp>
 #include <boost/date_time/gregorian/gregorian_types.hpp>
 #include <algorithm>
@@ -41,11 +37,6 @@ sanguis::client::draw2d::sunlight::intensity(
 		current
 	);
 
-	typedef fcppt::math::vector::static_<
-		real,
-		2
-	>::type vector_type;
-	
 	real const 
 		hours = 
 			static_cast<real>(current_tm.tm_hour),
@@ -112,15 +103,9 @@ sanguis::client::draw2d::sunlight::intensity(
 		result =
 			std::max(
 				static_cast<real>(0),
-				fcppt::math::vector::dot(
-					fcppt::math::vector::unit_circle(
-						fcppt::math::deg_to_rad(
-							hr
-						)
-					),
-					vector_type(
-						0.f,
-						1.f
+				std::sin(
+					fcppt::math::deg_to_rad(
+						hr
 					)
 				)
 			);
