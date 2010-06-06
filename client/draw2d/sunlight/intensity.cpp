@@ -9,6 +9,8 @@
 #include <cmath>
 #include <ctime>
 
+#include <iostream>
+
 sanguis::client::draw2d::sunlight::real
 sanguis::client::draw2d::sunlight::intensity(
 	std::time_t const current_time
@@ -115,5 +117,5 @@ sanguis::client::draw2d::sunlight::intensity(
 		&& result <= 1.0
 	);
 
-	return hr;
+	return result;
 }
