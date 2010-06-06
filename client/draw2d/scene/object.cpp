@@ -8,6 +8,7 @@
 #include "../sprite/order.hpp"
 #include "../sprite/matrix.hpp"
 #include "../entities/with_visibility.hpp"
+#include "../sunlight/current_color.hpp"
 #include "../z_ordering.hpp"
 #include "../vector2.hpp"
 #include "../../invalid_id.hpp"
@@ -314,7 +315,7 @@ sanguis::client::draw2d::scene::object::render_lighting()
 		)
 		(
 			sge::renderer::state::color::ambient_light_color
-				= sge::image::colors::darkblue()
+				= sunlight::current_color()
 		)
 	);
 
