@@ -43,9 +43,9 @@ sanguis::client::draw2d::sunlight::intensity(
 		minutes = 
 			static_cast<real>(current_tm.tm_min),
 		lambda = 
-			13.5,
+			7.990,
 		phi = 
-			fcppt::math::deg_to_rad(52.5),
+			fcppt::math::deg_to_rad(52.2493),
 		fracminutes = 
 			minutes/60.0,
 		fracday = 
