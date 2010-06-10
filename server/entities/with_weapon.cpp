@@ -7,6 +7,7 @@
 #include "../../messages/create.hpp"
 #include "../../exception.hpp"
 #include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 #include <limits>
