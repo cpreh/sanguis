@@ -6,6 +6,7 @@
 #include "../../damage/piercing.hpp"
 #include "../../damage/full.hpp"
 #include "../../environment/load_context.hpp"
+#include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::server::entities::projectiles::simple_bullet::simple_bullet(

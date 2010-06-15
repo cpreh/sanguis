@@ -1,6 +1,7 @@
 #include "collection.hpp"
 #include "make_path.hpp"
 #include "object.hpp"
+#include <fcppt/math/vector/basic_impl.hpp>
 #include <utility>
 
 sanguis::load::model::object const &
