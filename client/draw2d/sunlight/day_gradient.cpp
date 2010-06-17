@@ -1,5 +1,6 @@
 #include "day_gradient.hpp"
 #include "gradients.hpp"
+#include <fcppt/math/pi.hpp>
 #include <mizuiro/color/object.hpp>
 #include <mizuiro/color/init/red.hpp>
 #include <mizuiro/color/init/blue.hpp>
@@ -15,6 +16,15 @@ struct color
 
 	color()
 	{
+		typedef sanguis::client::draw2d::sunlight::real real;
+
+		real const pi(
+			fcppt::math::pi<
+				real
+			>()
+		);
+
+		// TODO: nille!
 		// TODO: add gradients for [-pi, pi]!
 		grads.add(
 			0,
