@@ -18,6 +18,7 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/almost_zero.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/tr1/functional.hpp>
@@ -269,8 +270,7 @@ sanguis::client::control::logic::handle_shooting(
 )
 {
 	if(
-		fcppt::math::compare(
-			static_cast<key_scale>(0),
+		fcppt::math::almost_zero(
 			s
 		)
 	)

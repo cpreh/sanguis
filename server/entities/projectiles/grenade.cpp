@@ -13,6 +13,7 @@
 #include "../../environment/load_context.hpp"
 #include <sge/time/millisecond.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/optional_impl.hpp>

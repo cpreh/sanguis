@@ -9,6 +9,7 @@
 #include "../../environment/object.hpp"
 #include "../../environment/load_context.hpp"
 #include <fcppt/container/map_impl.hpp>
+#include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::server::entities::projectiles::rocket::rocket(
