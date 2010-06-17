@@ -19,7 +19,7 @@ sanguis::client::draw2d::sunlight::make_color(
 	// TODO: we have to something sensible for the night as well!
 	// Maybe add more stuff to the day gradient
 	return
-		sun_angle > fcppt::math::pi<real>()
+		sun_angle < 0.f
 		?
 			dest_color(
 				sge::image::color::init::red %= 0.,
