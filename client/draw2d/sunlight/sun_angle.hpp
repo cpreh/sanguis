@@ -1,5 +1,5 @@
-#ifndef SANGUIS_CLIENT_DRAW2D_SUNLIGHT_INTENSITY_HPP_INCLUDED
-#define SANGUIS_CLIENT_DRAW2D_SUNLIGHT_INTENSITY_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_SUNLIGHT_SUN_ANGLE_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_SUNLIGHT_SUN_ANGLE_HPP_INCLUDED
 
 #include "real.hpp"
 #include <ctime>
@@ -14,7 +14,7 @@ namespace sunlight
 {
 
 sunlight::real
-intensity(
+sun_angle(
 	std::time_t
 );
 
