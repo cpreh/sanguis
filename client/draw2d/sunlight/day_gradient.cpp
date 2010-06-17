@@ -15,6 +15,7 @@ struct color
 
 	color()
 	{
+		// TODO: add gradients for [-pi, pi]!
 		grads.add(
 			0,
 			color_point(
