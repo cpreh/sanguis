@@ -1,18 +1,22 @@
 #include "make_color.hpp"
-#include <sge/image/color/init.hpp>
-#include <sge/image/color/rgb8.hpp>
+#include "day_gradient.hpp"
+#include "gradients.hpp"
+#include <sge/image/color/rgba32f_format.hpp>
+#include <mizuiro/color/convert.hpp>
 #include <fcppt/variant/object_impl.hpp>
 
 sge::image::color::any::object const
 sanguis::client::draw2d::sunlight::make_color(
-	real const intensity
+	real const sun_angle
 )
 {
-	// TODO: calculate a proper gradient!
 	return
-		sge::image::color::rgb8(
-			sge::image::color::init::red %= intensity,
-			sge::image::color::init::green %= intensity,
-			sge::image::color::init::blue %= 0.2
+		// convert into something that sge::image::color::any supports
+		mizuiro::color::convert<
+			sge::image::color::rgba32f_format
+		>(
+			day_gradient().interpolate(
+				sun_angle
+			)
 		);
 }

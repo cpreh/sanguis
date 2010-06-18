@@ -4,10 +4,10 @@
 #include "../entities/insert_parameters.hpp"
 #include "../environment/object.hpp"
 #include "../../random.hpp"
-#include "../../angle_to_vector.hpp"
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/unit_circle.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/tr1/random.hpp>
 
@@ -53,7 +53,11 @@ sanguis::server::waves::spawn(
 	
 	pos_type const
 		center(
-			scale * radius * angle_to_vector(rand_angle)
+			scale
+			* radius
+			* fcppt::math::vector::unit_circle(
+				rand_angle
+			)
 		),
 		pos(
 			center

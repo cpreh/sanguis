@@ -11,6 +11,7 @@
 #include <sge/parse/json/find_member_exn.hpp>
 #include <fcppt/filesystem/exists.hpp>
 #include <fcppt/algorithm/find_exn.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/tr1/array.hpp>
 #include <fcppt/auto_ptr.hpp>

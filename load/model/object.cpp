@@ -19,6 +19,7 @@
 #include <fcppt/filesystem/is_directory.hpp>
 #include <fcppt/filesystem/stem.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/random/make_last_exclusive_range.hpp>
 #include <fcppt/auto_ptr.hpp>
