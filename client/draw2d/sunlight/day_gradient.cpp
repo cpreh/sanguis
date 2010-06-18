@@ -1,6 +1,5 @@
 #include "day_gradient.hpp"
 #include "gradients.hpp"
-#include <fcppt/math/pi.hpp>
 #include <mizuiro/color/object.hpp>
 #include <mizuiro/color/init/red.hpp>
 #include <mizuiro/color/init/blue.hpp>
@@ -16,16 +15,6 @@ struct color
 
 	color()
 	{
-		typedef sanguis::client::draw2d::sunlight::real real;
-
-		real const pi(
-			fcppt::math::pi<
-				real
-			>()
-		);
-
-		// TODO: nille!
-		// TODO: add gradients for [-pi, pi]!
 		grads.add(
 			-3.14159f,
 			color_point(
@@ -71,7 +60,7 @@ struct color
 			color_point(
 				mizuiro::color::init::red %= 1.,
 				mizuiro::color::init::green %= 0.987313,
-				mizuiro::color::init::blue %= 0.90196,
+				mizuiro::color::init::blue %= 0.90196
 			)
 		);
 		grads.add(
@@ -79,7 +68,7 @@ struct color
 			color_point(
 				mizuiro::color::init::red %= 1.,
 				mizuiro::color::init::green %= 0.987313,
-				mizuiro::color::init::blue %= 0.90196,
+				mizuiro::color::init::blue %= 0.90196
 			)
 		);
 		grads.add(
