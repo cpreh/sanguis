@@ -1,6 +1,7 @@
 #ifndef SANGUIS_LOAD_MODEL_ANIMATION_HPP_INCLUDED
 #define SANGUIS_LOAD_MODEL_ANIMATION_HPP_INCLUDED
 
+#include "animation_fwd.hpp"
 #include "global_parameters.hpp"
 #include "frame_cache.hpp"
 #include "animation_sound_fwd.hpp"
@@ -15,7 +16,7 @@
 #include <sge/parse/json/member_vector.hpp>
 #include <sge/parse/json/member.hpp>
 #include <fcppt/shared_ptr.hpp>
-#include <fcppt/auto_ptr.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -24,21 +25,25 @@ namespace load
 namespace model
 {
 
-class animation {
+class animation
+{
+	FCPPT_NONCOPYABLE(animation)
 public:
 	animation_sound const &
 	sounds() const;
 
-	animation_context_ptr load() const;
-private:
+	animation_context_ptr
+	load() const;
+
+	~animation();
+
 	animation(
 		sge::parse::json::object const &,
 		global_parameters const &
 	);
-
-	friend class weapon_category;
-
+private:
 	sge::parse::json::object object_;
+
 	global_parameters param_;
 
 	fcppt::shared_ptr<
@@ -46,10 +51,13 @@ private:
 	> sounds_;
 
 	mutable frame_cache frame_cache_;
+
 	resource::texture_identifier texture_;
 
-	void fill_cache(
-		sge::renderer::lock_rect const &) const;
+	void
+	fill_cache(
+		sge::renderer::lock_rect const &
+	) const;
 };
 
 }

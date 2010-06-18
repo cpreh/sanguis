@@ -3,10 +3,11 @@
 
 #include "collection_fwd.hpp"
 #include "../resource/context_fwd.hpp"
-#include "object.hpp"
+#include "object_fwd.hpp"
 #include <fcppt/string.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <boost/thread/thread.hpp>
-#include <map>
+#include <boost/ptr_container/ptr_map.hpp>
 
 namespace sanguis
 {
@@ -17,11 +18,14 @@ namespace model
 
 class collection
 {
+	FCPPT_NONCOPYABLE(collection)
 public:
 	object const &
 	operator[](
 		fcppt::string const &
 	) const;
+
+	~collection();
 private:
 	explicit collection(
 		resource::context const &
@@ -31,9 +35,9 @@ private:
 
 	resource::context const &ctx;
 
-	typedef std::map<
+	typedef boost::ptr_map<
 		fcppt::string,
-		object	
+		object
 	> model_map;
 
 	mutable model_map models;

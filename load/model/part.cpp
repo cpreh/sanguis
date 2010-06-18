@@ -1,6 +1,7 @@
 #include "part.hpp"
 #include "find_texture.hpp"
 #include "global_parameters.hpp"
+#include "weapon_category.hpp"
 #include "../log.hpp"
 #include "../../exception.hpp"
 #include <sge/parse/json/array.hpp>
@@ -11,11 +12,12 @@
 #include <fcppt/tr1/array.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/optional_impl.hpp>
+#include <fcppt/auto_ptr.hpp>
+#include <fcppt/make_auto_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/string.hpp>
 #include <boost/foreach.hpp>
 #include <iterator>
-#include <utility>
 
 namespace
 {
@@ -38,20 +40,22 @@ weapon_type_array const weapon_types = {
 
 sanguis::weapon_type::type
 find_weapon_type(
-	fcppt::string const &str)
+	fcppt::string const &str
+)
 {
-	return static_cast<
-		sanguis::weapon_type::type
-	>(
-		std::distance(
-			weapon_types.begin(),
-			fcppt::algorithm::find_exn(
+	return
+		static_cast<
+			sanguis::weapon_type::type
+		>(
+			std::distance(
 				weapon_types.begin(),
-				weapon_types.end(),
-				str
+				fcppt::algorithm::find_exn(
+					weapon_types.begin(),
+					weapon_types.end(),
+					str
+				)
 			)
-		)
-	);
+		);
 }
 
 }
@@ -66,7 +70,7 @@ sanguis::load::model::part::operator[](
 	);
 
 	if(it != categories.end())
-		return it->second;
+		return *it->second;
 
 	if(t == weapon_type::none)
 		throw exception(
@@ -74,6 +78,10 @@ sanguis::load::model::part::operator[](
 		);
 
 	return (*this)[weapon_type::none];
+}
+
+sanguis::load::model::part::~part()
+{
 }
 
 sanguis::load::model::part::part(
@@ -120,23 +128,30 @@ sanguis::load::model::part::part(
 			inner_members[0]
 		);
 
+		fcppt::auto_ptr<
+			weapon_category
+		>
+		to_insert(
+			fcppt::make_auto_ptr<
+				weapon_category
+			>(
+				sge::parse::json::get<
+					sge::parse::json::object
+				>(
+					member.value_
+				),
+				param.new_texture(
+					texture
+				)
+			)
+		);
+
 		if(
 			categories.insert(
-				std::make_pair(
-					find_weapon_type(
-						member.name
-					),
-					weapon_category(
-						sge::parse::json::get<
-							sge::parse::json::object
-						>(
-							member.value_
-						),
-						param.new_texture(
-							texture
-						)
-					)
-				)
+				find_weapon_type(
+					member.name
+				),
+				to_insert
 			).second == false
 		)
 			FCPPT_LOG_WARNING(

@@ -1,6 +1,8 @@
 #include "context.hpp"
+#include "model/object.hpp"
 #include "model/context.hpp"
 #include "model/collection.hpp"
+#include <fcppt/math/dim/basic_impl.hpp>
 
 sanguis::load::context::context(
 	sge::image::multi_loader &il,

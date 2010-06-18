@@ -12,6 +12,7 @@
 #include "../../../load/model/weapon_category.hpp"
 #include "../../../load/model/object.hpp"
 #include "../../../load/model/collection.hpp"
+#include "../../../load/model/animation.hpp"
 #include "../../../animation_type.hpp"
 #include "../../../from_particle_type.hpp"
 #include <fcppt/math/vector/structure_cast.hpp>

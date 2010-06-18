@@ -7,6 +7,7 @@
 #include "optional_delay.hpp"
 #include "parse_json.hpp"
 #include "split_first_slash.hpp"
+#include "part.hpp"
 #include "../../exception.hpp"
 #include "../resource/context.hpp"
 #include "../resource/textures.hpp"
@@ -20,6 +21,8 @@
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/random/make_last_exclusive_range.hpp>
+#include <fcppt/auto_ptr.hpp>
+#include <fcppt/make_auto_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <boost/next_prior.hpp>
 #include <boost/foreach.hpp>
@@ -47,7 +50,7 @@ sanguis::load::model::object::operator[](
 			+ path.string()
 		);
 	
-	return it->second;
+	return *it->second;
 }
 
 sanguis::load::model::part const &
@@ -63,10 +66,11 @@ sanguis::load::model::object::random_part() const
 			)
 		);
 
-	return boost::next(
-		parts.begin(),
-		(*random_part_)()
-	)->second;
+	return
+		*boost::next(
+			parts.begin(),
+			(*random_part_)()
+		)->second;
 }
 
 sanguis::load::model::object::size_type
@@ -195,26 +199,33 @@ sanguis::load::model::object::construct(
 			inner_members[0]
 		);
 
+		fcppt::auto_ptr<
+			part
+		>
+		to_insert(
+			fcppt::make_auto_ptr<
+				part
+			>(
+				sge::parse::json::get<
+					sge::parse::json::object
+				>(
+					member.value_
+				),
+				global_parameters(
+					path,
+					ctx.textures(),
+					cell_size,
+					opt_delay,
+					texture,
+					ctx.sounds()
+				)
+			)
+		);
+
 		if(
 			parts.insert(
-				std::make_pair(
-					member.name,
-					part(
-						sge::parse::json::get<
-							sge::parse::json::object
-						>(
-							member.value_
-						),
-						global_parameters(
-							path,
-							ctx.textures(),
-							cell_size,
-							opt_delay,
-							texture,
-							ctx.sounds()
-						)
-					)
-				)
+				member.name,
+				to_insert
 			)
 			.second == false
 		)

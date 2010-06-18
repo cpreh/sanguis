@@ -2,6 +2,7 @@
 #include "base_animation_not_found.hpp"
 #include "global_parameters.hpp"
 #include "find_texture.hpp"
+#include "animation.hpp"
 #include "../log.hpp"
 #include "../../exception.hpp"
 #include <sge/parse/json/array.hpp>
@@ -12,10 +13,11 @@
 #include <fcppt/algorithm/find_exn.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/tr1/array.hpp>
+#include <fcppt/auto_ptr.hpp>
+#include <fcppt/make_auto_ptr.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
-#include <utility>
 #include <iterator>
 
 namespace
@@ -37,7 +39,8 @@ animation_type_array const animation_types = {{
 
 sanguis::animation_type::type
 find_animation_type(
-	fcppt::string const &str)
+	fcppt::string const &str
+)
 {
 	return static_cast<
 		sanguis::animation_type::type
@@ -68,7 +71,7 @@ sanguis::load::model::weapon_category::operator[](
 		);
 
 	if(it != animations.end())
-		return it->second;
+		return *it->second;
 
 	if(anim == animation_type::none)
 		throw exception(
@@ -95,6 +98,9 @@ sanguis::load::model::weapon_category::has_animation(
 	return 
 		it != animations.end();
 }
+
+sanguis::load::model::weapon_category::~weapon_category()
+{}
 
 sanguis::load::model::weapon_category::weapon_category(
 	sge::parse::json::object const &object,
@@ -140,23 +146,30 @@ sanguis::load::model::weapon_category::weapon_category(
 			inner_members[0]
 		);
 
+		fcppt::auto_ptr<
+			animation
+		>
+		to_insert(
+			fcppt::make_auto_ptr<
+				animation
+			>(
+				sge::parse::json::get<
+					sge::parse::json::object
+				>(
+					member.value_
+				),
+				param.new_texture(
+					texture
+				)
+			)
+		);
+
 		if(
 			animations.insert(
-				std::make_pair(
-					find_animation_type(
-						member.name
-					),
-					animation(
-						sge::parse::json::get<
-							sge::parse::json::object
-						>(
-							member.value_
-						),
-						param.new_texture(
-							texture
-						)
-					)
-				)
+				find_animation_type(
+					member.name
+				),
+				to_insert
 			).second == false
 		)
 			FCPPT_LOG_WARNING(

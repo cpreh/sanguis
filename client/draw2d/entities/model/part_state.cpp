@@ -3,6 +3,7 @@
 #include "../../../../load/model/animation.hpp"
 #include "../../../../load/model/part.hpp"
 #include "../../../../load/model/animation_sound.hpp"
+#include "../../../../load/model/weapon_category.hpp"
 #include "../../../../animation_sound_type.hpp"
 #include <sge/sprite/object_impl.hpp>
 #include <sge/audio/sound.hpp>
