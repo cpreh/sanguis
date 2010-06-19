@@ -1,12 +1,14 @@
 #ifndef SANGUIS_LOAD_MODEL_WEAPON_CATEGORY_HPP_INCLUDED
 #define SANGUIS_LOAD_MODEL_WEAPON_CATEGORY_HPP_INCLUDED
 
-#include "animation.hpp"
+#include "weapon_category_fwd.hpp"
+#include "animation_fwd.hpp"
 #include "global_parameters_fwd.hpp"
 #include "../resource/context_fwd.hpp"
 #include "../../animation_type.hpp"
 #include <sge/parse/json/object_fwd.hpp>
-#include <map>
+#include <fcppt/noncopyable.hpp>
+#include <boost/ptr_container/ptr_map.hpp>
 
 namespace sanguis
 {
@@ -17,6 +19,7 @@ namespace model
 
 class weapon_category
 {
+	FCPPT_NONCOPYABLE(weapon_category)
 public:
 	animation const &
 	operator[](
@@ -27,15 +30,15 @@ public:
 	has_animation(
 		animation_type::type
 	) const;
-private:
+
+	~weapon_category();
+
 	explicit weapon_category(
 		sge::parse::json::object const &,
 		global_parameters const &
 	);
-	
-	friend class part;
-
-	typedef std::map<
+private:
+	typedef boost::ptr_map<
 		animation_type::type,
 		animation
 	> animation_map;

@@ -5,6 +5,8 @@
 #include "../../../../load/model/part.hpp"
 #include "../../../../load/model/base_animation_not_found.hpp"
 #include "../../../../load/model/animation_context.hpp"
+#include "../../../../load/model/weapon_category.hpp"
+#include "../../../../load/model/animation.hpp"
 #include "../../../../exception.hpp"
 #include "../../../../rel_angle_to_abs.hpp"
 #include <sge/sprite/animation/texture_impl.hpp>

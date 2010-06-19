@@ -55,12 +55,12 @@ sanguis::client::draw2d::entities::model::object::object(
 	part_vector::size_type i(0);
 
 	BOOST_FOREACH(
-		load::model::object::value_type const &p,
+		load::model::object::const_reference p,
 		param_.collection()[name]
 	)
 		parts.push_back(
 			new model::part(
-				p.second,
+				*p.second,
 				at(sprite::index(i++))
 			)
 		);

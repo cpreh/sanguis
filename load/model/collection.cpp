@@ -1,8 +1,8 @@
 #include "collection.hpp"
 #include "make_path.hpp"
 #include "object.hpp"
-#include <fcppt/math/vector/basic_impl.hpp>
-#include <utility>
+#include <fcppt/auto_ptr.hpp>
+#include <fcppt/make_auto_ptr.hpp>
 
 sanguis::load::model::object const &
 sanguis::load::model::collection::operator[](
@@ -22,19 +22,32 @@ sanguis::load::model::collection::operator[](
 	if(
 		it == models.end()
 	)
-		it = models.insert(
-			std::make_pair(
-				name,
-				object(
-					make_path(
-						name
-					),
-					ctx
-				)
+	{
+		fcppt::auto_ptr<
+			object
+		>
+		to_insert(
+			fcppt::make_auto_ptr<
+				object
+			>(
+				make_path(
+					name
+				),
+				ctx
 			)
+		);
+			
+		it = models.insert(
+			name,
+			to_insert
 		).first;
+	}
 
-	return it->second;	
+	return *it->second;	
+}
+
+sanguis::load::model::collection::~collection()
+{
 }
 
 sanguis::load::model::collection::collection(

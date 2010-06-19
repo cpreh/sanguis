@@ -105,6 +105,10 @@ load_delay(
 
 }
 
+sanguis::load::model::animation::~animation()
+{
+}
+
 sanguis::load::model::animation::animation(
 	sge::parse::json::object const &_object,
 	global_parameters const &_param

@@ -1,8 +1,13 @@
 #include "sun_angle.hpp"
 #include "time_to_gregorian.hpp"
 #include "localtime.hpp"
+#include "../log.hpp"
 #include <fcppt/math/deg_to_rad.hpp>
 #include <fcppt/math/rad_to_deg.hpp>
+#include <fcppt/math/pi.hpp>
+#include <fcppt/log/output.hpp>
+#include <fcppt/log/error.hpp>
+#include <fcppt/text.hpp>
 #include <boost/date_time/gregorian/gregorian_types.hpp>
 #include <cmath>
 #include <ctime>
@@ -97,7 +102,27 @@ sanguis::client::draw2d::sunlight::sun_angle(
 		R = 
 			1.02/std::tan(fcppt::math::deg_to_rad(h + 10.3/(h+5.11))),
 		hr = 
-			h + R/60.0;
-	
-	return hr;
+			h + R/60.0,
+		hr_rad =
+			fcppt::math::deg_to_rad(
+				hr
+			),
+		half_pi(
+			fcppt::math::pi<real>() / 2.f
+		);
+
+	if(
+		hr_rad < -half_pi
+		|| hr_rad > half_pi
+	)
+	{
+		FCPPT_LOG_ERROR(
+			log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("sun angle out of range: ")
+				<< hr_rad
+		)
+	}
+
+	return hr_rad;
 }

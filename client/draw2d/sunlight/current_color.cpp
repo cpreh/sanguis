@@ -8,6 +8,6 @@ sanguis::client::draw2d::sunlight::current_color()
 {
 	return
 		sunlight::make_color(
-			current_sun_angle()
+			sunlight::current_sun_angle()
 		);
 }
