@@ -56,7 +56,7 @@ sanguis::client::states::running::running(
 		context<machine>().resources().resources().sounds()
 	),
 	daytime_settings_(
-		context<machine>().console_wrapper().object().object()
+		context<machine>().console_wrapper().object()
 	),
 	drawer(
 		new draw2d::scene::object(

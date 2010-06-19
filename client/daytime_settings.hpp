@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_DAYTIME_SETTINGS_HPP_INCLUDED
 #define SANGUIS_CLIENT_DAYTIME_SETTINGS_HPP_INCLUDED
 
-#include <sge/console/object_fwd.hpp>
+#include <sge/console/gfx_fwd.hpp>
 #include <sge/console/arg_list.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -18,7 +18,7 @@ class daytime_settings
 public:
 	explicit
 	daytime_settings(
-		sge::console::object &
+		sge::console::gfx &
 	);
 
 	std::tm const
@@ -53,6 +53,12 @@ private:
 	reset_time_speed(
 		sge::console::arg_list const &
 	);
+
+	sge::console::gfx &console_;
+
+	std::time_t time_begin_;
+
+	std::time_t speedup_;
 
 	fcppt::signal::scoped_connection const
 		day_con_,
