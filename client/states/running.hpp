@@ -10,6 +10,7 @@
 #include "../perk_container.hpp"
 #include "../level_type.hpp"
 #include "../menu_event_fwd.hpp"
+#include "../daytime_settings.hpp"
 #include "../control/logic_fwd.hpp"
 #include "../control/input_handler_fwd.hpp"
 #include "../highscore/name_container.hpp"
@@ -28,7 +29,7 @@
 #include "../../messages/level_up.hpp"
 #include "../../entity_id.hpp"
 #include <sge/renderer/state/scoped.hpp>
-#include <fcppt/signal/auto_connection.hpp>
+#include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
@@ -169,6 +170,8 @@ private:
 
 	music_handler music_;
 
+	client::daytime_settings daytime_settings_;
+
 	fcppt::scoped_ptr<
 		draw2d::scene::object
 	> drawer;
@@ -181,7 +184,7 @@ private:
 		control::input_handler
 	> input;
 
-	fcppt::signal::auto_connection input_connection;
+	fcppt::signal::scoped_connection const input_connection;
 
 	client::perk_chooser perk_chooser_;
 

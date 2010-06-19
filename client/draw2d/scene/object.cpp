@@ -8,7 +8,8 @@
 #include "../sprite/order.hpp"
 #include "../sprite/matrix.hpp"
 #include "../entities/with_visibility.hpp"
-#include "../sunlight/current_color.hpp"
+#include "../sunlight/make_color.hpp"
+#include "../sunlight/sun_angle.hpp"
 #include "../z_ordering.hpp"
 #include "../vector2.hpp"
 #include "../../invalid_id.hpp"
@@ -56,7 +57,8 @@ sanguis::client::draw2d::scene::object::object(
 	load::context const &resources_,
 	sge::renderer::device_ptr const rend_,
 	sge::font::object &font,
-	client::cursor::object_ptr const cursor_
+	client::cursor::object_ptr const cursor_,
+	std::tm const &current_time_
 )
 :
 	resources_(resources_),
@@ -103,7 +105,10 @@ sanguis::client::draw2d::scene::object::object(
 			*message_environment_
 		)
 	),
-	entities_()
+	entities_(),
+	current_time_(
+		current_time_
+	)
 {}
 
 sanguis::client::draw2d::scene::object::~object()
@@ -261,6 +266,14 @@ sanguis::client::draw2d::scene::object::pause(
 	paused_ = p;
 }
 
+void
+sanguis::client::draw2d::scene::object::set_time(
+		std::tm const &new_time_
+)
+{
+	current_time_ = new_time_;
+}
+
 sanguis::client::control::environment &
 sanguis::client::draw2d::scene::object::control_environment() const
 {
@@ -315,7 +328,11 @@ sanguis::client::draw2d::scene::object::render_lighting()
 		)
 		(
 			sge::renderer::state::color::ambient_light_color
-				= sunlight::current_color()
+				= sunlight::make_color(
+					sunlight::sun_angle(
+						current_time_
+					)
+				)
 		)
 	);
 

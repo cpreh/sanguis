@@ -1,8 +1,8 @@
-#include "localtime.hpp"
+#include "gmtime.hpp"
 #include <ctime>
 
 std::tm const
-sanguis::client::draw2d::sunlight::localtime(
+sanguis::client::gmtime(
 	std::time_t const time_
 )
 {

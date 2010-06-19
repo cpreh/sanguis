@@ -33,6 +33,7 @@
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
+#include <ctime>
 
 namespace sanguis
 {
@@ -51,7 +52,8 @@ public:
 		load::context const &,
 		sge::renderer::device_ptr,
 		sge::font::object &,
-		client::cursor::object_ptr
+		client::cursor::object_ptr,
+		std::tm const &initial_time
 	);
 
 	~object();
@@ -82,8 +84,8 @@ public:
 	);
 
 	void
-	player_id(
-		entity_id
+	set_time(
+		std::tm const &
 	);
 
 	client::control::environment &
@@ -189,6 +191,8 @@ private:
 	> entity_map;
 
 	entity_map entities_;
+
+	std::tm current_time_;
 };
 
 }
