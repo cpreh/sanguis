@@ -4,6 +4,8 @@
 #include <sge/console/gfx_fwd.hpp>
 #include <sge/console/arg_list.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
+#include <fcppt/chrono/system_clock.hpp>
+#include <fcppt/chrono/time_point_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <ctime>
 
@@ -21,9 +23,17 @@ public:
 		sge::console::gfx &
 	);
 
+	~daytime_settings();
+
 	std::tm const
 	current_time();
 private:
+	typedef fcppt::chrono::system_clock clock;
+
+	typedef clock::time_point time_point;
+
+	typedef time_point::rep time_rep;
+
 	void
 	change_day(
 		sge::console::arg_list const &
@@ -54,11 +64,14 @@ private:
 		sge::console::arg_list const &
 	);
 
+	static time_point const
+	now();
+
 	sge::console::gfx &console_;
 
-	std::time_t time_begin_;
+	time_point time_begin_;
 
-	std::time_t speedup_;
+	time_rep speedup_;
 
 	fcppt::signal::scoped_connection const
 		day_con_,
