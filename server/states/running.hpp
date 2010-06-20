@@ -90,16 +90,6 @@ public:
 	global::context &
 	global_context();
 private:
-	/*
-	void level_callback(
-		server::entities::player &,
-		level_type);
-	
-	void send_available_perks(
-		entities::player const &);
-	
-	*/
-
 	boost::statechart::result
 	handle_default_msg(
 		net::id_type,
@@ -114,16 +104,6 @@ private:
 	fcppt::scoped_ptr<
 		global::context
 	> global_context_;
-
-	//pickup_spawner pickup_spawner_;
-
-	/*fcppt::random::uniform<
-		probability_type
-	> pickup_chance_;*/
-
-//	waves::generator wave_generator;
-
-//	player_record_vector player_records;
 };
 
 }

@@ -15,11 +15,6 @@
 #include "../draw2d/screen_to_virtual.hpp" // FIXME
 #include "../draw2d/scene/object.hpp"
 #include "../../messages/call/object.hpp"
-#include "../../messages/add_own_player.hpp"
-#include "../../messages/remove_id.hpp"
-#include "../../messages/disconnect.hpp"
-#include "../../messages/give_weapon.hpp"
-#include "../../messages/available_perks.hpp"
 #include "../../messages/player_choose_perk.hpp"
 #include "../../messages/move.hpp"
 #include "../../messages/create.hpp"
@@ -190,14 +185,15 @@ sanguis::client::states::running::react(
 )
 {
 	static sanguis::messages::call::object<
-		boost::mpl::vector7<
+		boost::mpl::vector8<
 			sanguis::messages::add_own_player,
 			sanguis::messages::remove_id,
 			sanguis::messages::disconnect,
 			sanguis::messages::give_weapon,
 			sanguis::messages::highscore,
 			sanguis::messages::available_perks,
-			sanguis::messages::level_up
+			sanguis::messages::level_up,
+			sanguis::messages::console_print
 		>,
 		running
 	> dispatcher;
@@ -337,6 +333,22 @@ sanguis::client::states::running::operator()(
 	return discard_event();
 }
 
+boost::statechart::result
+sanguis::client::states::running::operator()(
+	sanguis::messages::console_print const &m
+)
+{
+	context<machine>().console_wrapper().object().print_line(
+		fcppt::utf8::convert(
+			m.get<
+				sanguis::messages::string
+			>()
+		)
+	);
+
+	return discard_event();	
+}
+	
 sanguis::client::perk_chooser &
 sanguis::client::states::running::perk_chooser()
 {
