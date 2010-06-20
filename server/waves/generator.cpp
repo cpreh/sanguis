@@ -4,6 +4,7 @@
 #include "make.hpp"
 #include "convert_enemy_name.hpp"
 #include "../console.hpp"
+#include "../net_id_from_args.hpp"
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/make_auto_ptr.hpp>
@@ -18,9 +19,10 @@
 // it should not register the functions more than once
 
 sanguis::server::waves::generator::generator(
-	server::console &console_
+	server::console &_console
 )
 :
+	console_(_console),
 	spawn_connection(
 		console_.insert(
 			FCPPT_TEXT("spawn"),
@@ -31,7 +33,8 @@ sanguis::server::waves::generator::generator(
 			),
 			FCPPT_TEXT("spawn wave (wavename) [count], spawn enemy (enemyname) [count] or spawn all")
 		)
-	)
+	),
+	waves()
 {}
 
 sanguis::server::waves::generator::~generator()
@@ -69,7 +72,7 @@ sanguis::server::waves::generator::spawn(
 try
 {
 	if(
-		args_.size() == 2u
+		args_.size() == 3u
 		&& args_[1] == FCPPT_TEXT("all")
 	)
 	{
@@ -79,16 +82,16 @@ try
 	}
 
 	if(
-		args_.size() != 3u && args_.size() != 4u
+		args_.size() != 4u && args_.size() != 5u
 	)
 	{
-		FCPPT_LOG_ERROR(
-			log(),
-			fcppt::log::_
-				<< FCPPT_TEXT("Invalid call to spawn!")
+		console_.print_line(
+			server::net_id_from_args(
+				args_
+			),
+			FCPPT_TEXT("Invalid parameter count for spawn command.")
 		);
 
-		// TODO: error!
 		return;
 	}
 
@@ -97,7 +100,7 @@ try
 	);
 
 	unsigned const count(
-		args_.size() == 4u
+		args_.size() == 5u
 		?
 			fcppt::lexical_cast<
 				unsigned
@@ -146,24 +149,24 @@ try
 		}
 	else
 	{
-		FCPPT_LOG_ERROR(
-			log(),
-			fcppt::log::_
-				<< FCPPT_TEXT("Invalid argument")
+		console_.print_line(
+			server::net_id_from_args(
+				args_
+			),
+			FCPPT_TEXT("Invalid argument for spawn command.")
 		);
-		// TODO: error!
 	}
 }
 catch(
 	fcppt::exception const &e
 )
 {
-	FCPPT_LOG_ERROR(
-		log(),
-		fcppt::log::_
-			<< e.string()
+	console_.print_line(
+		server::net_id_from_args(
+			args_
+		),
+		e.string()
 	);
-	// TODO: error!
 }
 
 void

@@ -43,6 +43,8 @@ private:
 	void
 	spawn_all();
 
+	server::console &console_;
+
 	fcppt::signal::scoped_connection spawn_connection;
 
 	typedef boost::ptr_list<

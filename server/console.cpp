@@ -45,6 +45,14 @@ sanguis::server::console::insert(
 		)
 	);
 
+	// TODO: we have to know when a command doesn't exist anymore!
+	known_commands_.push_back(
+		server::console_command_pair(
+			command,
+			description
+		)
+	);
+
 	return
 		object_.insert(
 			command,

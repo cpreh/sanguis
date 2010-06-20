@@ -355,12 +355,23 @@ sanguis::client::states::running::operator()(
 	sanguis::messages::add_console_command const &m
 )
 {
-	context<machine>().console().register_server_command(
+	fcppt::string const name(
 		fcppt::utf8::convert(
 			m.get<
 				sanguis::messages::roles::command_name
 			>()
-		),
+		)
+	);
+
+	FCPPT_LOG_DEBUG(
+		sanguis::client::log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("Got a new console command: ")
+			<< name
+	);
+
+	context<machine>().console().register_server_command(
+		name,
 		fcppt::utf8::convert(
 			m.get<
 				sanguis::messages::roles::command_description
