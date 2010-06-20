@@ -15,7 +15,7 @@ namespace sunlight
 
 sunlight::real
 sun_angle(
-	std::time_t
+	std::tm const &
 );
 
 }

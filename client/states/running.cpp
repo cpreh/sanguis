@@ -55,12 +55,16 @@ sanguis::client::states::running::running(
 		context<machine>().console_wrapper().object(),
 		context<machine>().resources().resources().sounds()
 	),
+	daytime_settings_(
+		context<machine>().console_wrapper().object()
+	),
 	drawer(
 		new draw2d::scene::object(
 			context<machine>().resources(),
 			context<machine>().renderer(),
 			context<machine>().font(),
-			context<machine>().cursor()
+			context<machine>().cursor(),
+			daytime_settings_.current_time()
 		)
 	),
 	logic_(
@@ -155,6 +159,10 @@ sanguis::client::states::running::process(
 	tick_event const &t
 )
 {
+	drawer->set_time(
+		daytime_settings_.current_time()
+	);
+
 	context<machine>().dispatch();
 
 	context<machine>().resources().update(

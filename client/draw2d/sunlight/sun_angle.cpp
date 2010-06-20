@@ -1,6 +1,5 @@
 #include "sun_angle.hpp"
 #include "time_to_gregorian.hpp"
-#include "localtime.hpp"
 #include "../log.hpp"
 #include <fcppt/math/deg_to_rad.hpp>
 #include <fcppt/math/rad_to_deg.hpp>
@@ -14,15 +13,9 @@
 
 sanguis::client::draw2d::sunlight::real
 sanguis::client::draw2d::sunlight::sun_angle(
-	std::time_t const current_time
+	std::tm const &current_tm
 )
 {
-	std::tm const current_tm(
-		sunlight::localtime(
-			current_time
-		)
-	);
-
 	boost::gregorian::date const current(
 		sunlight::time_to_gregorian(
 			current_tm

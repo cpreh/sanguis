@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_CONSOLE_HPP_INCLUDED
 #define SANGUIS_CLIENT_CONSOLE_HPP_INCLUDED
 
+#include "console_fwd.hpp"
 #include "send_callback.hpp"
 #include <sge/console/gfx_fwd.hpp>
 #include <sge/input/system_ptr.hpp>
