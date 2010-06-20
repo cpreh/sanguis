@@ -11,8 +11,10 @@
 // asio brings in window.h's max macro :(
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <boost/spirit/home/phoenix/core/argument.hpp>
+#include <boost/spirit/home/phoenix/operator/comparison.hpp>
+#include <boost/spirit/home/phoenix/operator/self.hpp>
 #include <boost/asio/buffer.hpp>
-#include <boost/lambda/lambda.hpp>
 #include <boost/asio.hpp>
 #include <boost/foreach.hpp>
 #include <boost/bind.hpp>
@@ -423,7 +425,7 @@ sanguis::net::detail::server_impl::handle_error(
 	connections_.erase_if(
 		connections_.begin(),
 		connections_.end(),
-		&boost::lambda::_1 == &c
+		&boost::phoenix::arg_names::arg1 == &c
 	);
 }
 

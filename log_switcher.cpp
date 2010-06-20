@@ -10,8 +10,10 @@
 #include <sge/exception.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/classification.hpp>
+#include <boost/spirit/home/phoenix/core/argument.hpp>
+#include <boost/spirit/home/phoenix/core/reference.hpp>
+#include <boost/spirit/home/phoenix/operator/arithmetic.hpp>
 #include <boost/foreach.hpp>
-#include <boost/lambda/lambda.hpp>
 
 namespace
 {
@@ -82,13 +84,14 @@ to_location(
 		!r.empty());
 		
 	fcppt::log::location l(
-		r.front());
+		r.front()
+	);
 	
-	// TODO: use phoenix instead
 	std::for_each(
 		boost::next(r.begin()),
 		r.end(),
-		boost::lambda::var(l) += boost::lambda::_1);
+		boost::phoenix::ref(l) += boost::phoenix::arg_names::arg1
+	);
 	
 	return 
 		l;
