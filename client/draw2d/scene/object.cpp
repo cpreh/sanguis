@@ -299,6 +299,18 @@ sanguis::client::draw2d::scene::object::render_systems()
 
 	for(
 		sprite::order index(
+			z_ordering::smoke
+		);
+		index <= z_ordering::rubble;
+		++index
+	)
+		particle_system_.render(
+			index,
+			sge::sprite::default_equal()
+		);
+
+	for(
+		sprite::order index(
 			z_ordering::healthbar_lower
 		);
 		index <= z_ordering::healthbar_upper;
@@ -400,18 +412,6 @@ sanguis::client::draw2d::scene::object::render_lighting()
 		++index
 	)
 		normal_system_.render(
-			index,
-			sge::sprite::default_equal()
-		);
-
-	for(
-		sprite::order index(
-			z_ordering::smoke
-		);
-		index <= z_ordering::rubble;
-		++index
-	)
-		particle_system_.render(
 			index,
 			sge::sprite::default_equal()
 		);
