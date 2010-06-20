@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_MACHINE_HPP_INCLUDED
 #define SANGUIS_SERVER_MACHINE_HPP_INCLUDED
 
+#include "machine_fwd.hpp"
 #include "states/running_fwd.hpp"
 #include "client_data.hpp"
 #include "../load/context_base_fwd.hpp"

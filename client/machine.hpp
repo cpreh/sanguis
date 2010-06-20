@@ -145,7 +145,7 @@ public:
 	) const;
 	
 	sanguis::client::console &
-	console_wrapper();
+	console();
 	
 	load::context const &
 	resources() const;
@@ -202,11 +202,11 @@ private:
 
 	sge::input::key_state_tracker &ks;
 
-	sge::console::gfx &console;
+	sge::console::gfx &console_gfx_;
 	
 	sge::console::stdlib console_stdlib;
 
-	sanguis::client::console console_wrapper_;
+	sanguis::client::console console_;
 
 	bool running_;
 

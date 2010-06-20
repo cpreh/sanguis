@@ -8,18 +8,19 @@ sanguis::server::world::random(
 	context_ptr const ctx_,
 	sge::collision::system_ptr const collision_system_,
 	server::environment::load_context_ptr const load_context_,
-	sge::console::object &console_
+	server::console &console_
 )
 {
 	// TODO:
-	return fcppt::make_auto_ptr<
-		object
-	>(
-		ctx_,
-		collision_system_,
-		load_context_,
-		std::tr1::ref(
-			console_
-		)
-	);
+	return
+		fcppt::make_auto_ptr<
+			object
+		>(
+			ctx_,
+			collision_system_,
+			load_context_,
+			std::tr1::ref(
+				console_
+			)
+		);
 }

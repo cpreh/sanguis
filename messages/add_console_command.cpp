@@ -1,6 +1,6 @@
-#include "console_command.hpp"
+#include "add_console_command.hpp"
 #include "instantiate_message.hpp"
 
 SANGUIS_MESSAGES_INSTANTIATE_MESSAGE(
-	sanguis::messages::console_command
+	sanguis::messages::add_console_command
 )

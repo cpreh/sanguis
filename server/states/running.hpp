@@ -5,6 +5,7 @@
 #include "../global/context_fwd.hpp"
 #include "../message_event_fwd.hpp"
 #include "../machine.hpp"
+#include "../console.hpp"
 #include "../../messages/connect.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../messages/client_info.hpp"
@@ -13,7 +14,6 @@
 #include "../../messages/player_choose_perk.hpp"
 #include "../../messages/base_fwd.hpp"
 #include "../../net/id_type.hpp"
-#include <sge/console/object.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <boost/statechart/state.hpp>
@@ -90,16 +90,6 @@ public:
 	global::context &
 	global_context();
 private:
-	/*
-	void level_callback(
-		server::entities::player &,
-		level_type);
-	
-	void send_available_perks(
-		entities::player const &);
-	
-	*/
-
 	boost::statechart::result
 	handle_default_msg(
 		net::id_type,
@@ -109,21 +99,11 @@ private:
 	static fcppt::log::object
 	&log();
 
-	sge::console::object console_;
+	sanguis::server::console console_;
 
 	fcppt::scoped_ptr<
 		global::context
 	> global_context_;
-
-	//pickup_spawner pickup_spawner_;
-
-	/*fcppt::random::uniform<
-		probability_type
-	> pickup_chance_;*/
-
-//	waves::generator wave_generator;
-
-//	player_record_vector player_records;
 };
 
 }

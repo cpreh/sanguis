@@ -53,7 +53,7 @@ sanguis::server::world::object::object(
 	context_ptr const global_context_,
 	sge::collision::system_ptr const sys,
 	server::environment::load_context_ptr const load_context_,
-	sge::console::object &console_
+	server::console &console_
 )
 :
 	global_context_(

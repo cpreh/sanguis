@@ -14,6 +14,7 @@
 #include "../player_id.hpp"
 #include "../pos_type.hpp"
 #include "../space_unit.hpp"
+#include "../console_fwd.hpp"
 #include "../../cheat_type.hpp"
 #include "../../connect_state.hpp"
 #include "../../weapon_type.hpp"
@@ -23,7 +24,6 @@
 #include "../../messages/auto_ptr.hpp"
 #include "../../load/context_base_fwd.hpp"
 #include <sge/collision/system_ptr.hpp>
-#include <sge/console/object_fwd.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/container/map_decl.hpp>
@@ -45,7 +45,7 @@ public:
 		unicast_callback const &,
 		sge::collision::system_ptr,
 		load::context_base const &,
-		sge::console::object &
+		server::console &
 	);
 
 	~context();
@@ -152,7 +152,7 @@ private:
 
 	server::environment::load_context_ptr const load_context_;
 
-	sge::console::object &console_;
+	server::console &console_;
 };
 
 }

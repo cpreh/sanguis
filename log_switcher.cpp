@@ -1,4 +1,5 @@
 #include "log_switcher.hpp"
+#include "string_vector.hpp"
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/activate_levels.hpp>
 #include <fcppt/log/context.hpp>
@@ -9,14 +10,13 @@
 #include <sge/exception.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/classification.hpp>
+#include <boost/spirit/home/phoenix/core/argument.hpp>
+#include <boost/spirit/home/phoenix/core/reference.hpp>
+#include <boost/spirit/home/phoenix/operator/arithmetic.hpp>
 #include <boost/foreach.hpp>
-#include <boost/lambda/lambda.hpp>
 
 namespace
 {
-typedef 
-std::vector<fcppt::string> 
-string_vector;
 
 typedef 
 std::pair
@@ -26,17 +26,21 @@ std::pair
 >
 string_pair;
 
-string_vector const explode(
+sanguis::string_vector const
+explode(
 	fcppt::string const &e,
-	fcppt::string const &seps)
+	fcppt::string const &seps
+)
 {
-	string_vector v;
+	sanguis::string_vector v;
 
 	boost::algorithm::split(
 		v,
 		e,
 		boost::algorithm::is_any_of(
-			seps));
+			seps
+		)
+	);
 
 	return v;
 }
@@ -80,12 +84,14 @@ to_location(
 		!r.empty());
 		
 	fcppt::log::location l(
-		r.front());
+		r.front()
+	);
 	
 	std::for_each(
 		boost::next(r.begin()),
 		r.end(),
-		boost::lambda::var(l) += boost::lambda::_1);
+		boost::phoenix::ref(l) += boost::phoenix::arg_names::arg1
+	);
 	
 	return 
 		l;

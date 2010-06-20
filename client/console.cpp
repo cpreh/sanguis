@@ -1,4 +1,5 @@
 #include "console.hpp"
+#include "../messages/serialization/convert_string_vector.hpp"
 #include "../messages/console_command.hpp"
 #include "../messages/create.hpp"
 #include "../messages/base.hpp"
@@ -12,28 +13,19 @@
 #include <boost/algorithm/string/predicate.hpp>
 
 sanguis::client::console::console(
-	sge::console::gfx &_object,
+	sge::console::gfx &_gfx,
 	sge::input::system_ptr const _input_system,
 	sge::input::key_code const _toggler,
 	send_callback const &_send
 )
 :
-	object_(
-		_object
+	gfx_(
+		_gfx
 	),
 	input_connection_(
 		_input_system->register_callback(
 			std::tr1::bind(
 				&console::input_callback,
-				this,
-				std::tr1::placeholders::_1
-			)
-		)
-	),
-	fallback_connection_(
-		object_.object().register_fallback(
-			std::tr1::bind(
-				&console::fallback,
 				this,
 				std::tr1::placeholders::_1
 			)
@@ -45,7 +37,8 @@ sanguis::client::console::console(
 	send_(
 		_send
 	),
-	callbacks_()
+	callbacks_(),
+	server_connections_()
 {}
 
 fcppt::signal::auto_connection
@@ -59,18 +52,37 @@ sanguis::client::console::register_callback(
 		);
 }
 
+void
+sanguis::client::console::register_server_command(
+	fcppt::string const &name,
+	fcppt::string const &description
+)
+{
+	server_connections_.connect(
+		gfx_.object().insert(
+			name,
+			std::tr1::bind(
+				&console::server_callback,
+				this,
+				std::tr1::placeholders::_1
+			),
+			description
+		)
+	);
+}
+
 sge::console::gfx &
-sanguis::client::console::object()
+sanguis::client::console::gfx()
 {
 	return
-		object_;
+		gfx_;
 }
 
 sge::console::gfx const &
-sanguis::client::console::object() const
+sanguis::client::console::gfx() const
 {
 	return
-		object_;
+		gfx_;
 }
 
 void
@@ -80,42 +92,30 @@ sanguis::client::console::input_callback(
 {
 	if (_k.key().code() == toggler_ && _k.value() != 0)
 	{
-		object_.active(
-			!object_.active()
+		gfx_.active(
+			!gfx_.active()
 		);
 		return;
 	}
 
-	if (!object_.active())
+	if (!gfx_.active())
 		callbacks_(
 			_k
 		);
 }
 
 void
-sanguis::client::console::fallback(
-	fcppt::string const &string_
+sanguis::client::console::server_callback(
+	sge::console::arg_list const &args_
 )
 {
-	fcppt::string const prefix(
-		FCPPT_TEXT("sv_")
-	);
-
-	if(
-		boost::algorithm::starts_with(
-			string_,
-			prefix
-		)
-	)
-		send_(
-			messages::create(
-				messages::console_command(
-					fcppt::utf8::convert(
-						string_.substr(
-							prefix.size()
-						)
-					)
+	send_(
+		sanguis::messages::create(
+			sanguis::messages::console_command(
+				sanguis::messages::serialization::convert_string_vector(
+					args_
 				)
 			)
-		);
+		)
+	);
 }

@@ -6,14 +6,20 @@
 #include "entities/player.hpp"
 #include "entities/auto_ptr.hpp"
 #include "weapons/weapon.hpp"
+#include "../messages/create.hpp"
+#include "../messages/add_console_command.hpp"
+#include <fcppt/utf8/convert.hpp>
+#include <fcppt/homogenous_pair_impl.hpp>
 #include <fcppt/make_auto_ptr.hpp>
+#include <boost/foreach.hpp>
 
 sanguis::server::entities::player_auto_ptr
 sanguis::server::create_player(
 	environment::load_context_ptr const load_context_,
 	string const &name,
 	unicast_callback const &send_to_player,
-	player_id const player_id_ 
+	player_id const player_id_,
+	console_command_vector const &known_commands_
 )
 {
 	entities::player_auto_ptr new_player(
@@ -33,6 +39,24 @@ sanguis::server::create_player(
 		*new_player,
 		send_to_player
 	);
+
+	BOOST_FOREACH(
+		console_command_vector::const_reference elem,
+		known_commands_
+	)
+		send_to_player(
+			new_player->player_id(),
+			messages::create(
+				messages::add_console_command(
+					fcppt::utf8::convert(
+						elem.first
+					),
+					fcppt::utf8::convert(
+						elem.second
+					)
+				)
+			)
+		);
 
 	return new_player;
 }

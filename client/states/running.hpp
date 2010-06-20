@@ -27,6 +27,8 @@
 #include "../../messages/give_weapon.hpp"
 #include "../../messages/available_perks.hpp"
 #include "../../messages/level_up.hpp"
+#include "../../messages/console_print.hpp"
+#include "../../messages/add_console_command.hpp"
 #include "../../entity_id.hpp"
 #include <sge/renderer/state/scoped.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
@@ -125,7 +127,17 @@ public:
 	operator()(
 		messages::level_up const &
 	);
+
+	boost::statechart::result
+	operator()(
+		messages::console_print const &
+	);
 	
+	boost::statechart::result
+	operator()(
+		messages::add_console_command const &
+	);
+
 	perk_container const &
 	perks() const;
 	

@@ -14,6 +14,7 @@
 #include "../cheat.hpp"
 #include "../send_available_perks.hpp"
 #include "../log.hpp"
+#include "../console.hpp"
 #include "../../messages/remove_id.hpp"
 #include "../../messages/connect_state.hpp"
 #include "../../messages/create.hpp"
@@ -37,7 +38,7 @@ sanguis::server::global::context::context(
 	unicast_callback const &send_unicast_,
 	sge::collision::system_ptr const collision_system_,
 	load::context_base const &model_context_,
-	sge::console::object &console_
+	server::console &console_
 )
 :
 	send_unicast_(send_unicast_),
@@ -96,7 +97,8 @@ sanguis::server::global::context::insert_player(
 			load_context_,
 			name,
 			send_unicast_,
-			player_id_
+			player_id_,
+			console_.known_commands()
 		)
 	);
 

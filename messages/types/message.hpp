@@ -10,8 +10,10 @@ namespace types
 
 namespace message
 {
-enum type {
+enum type
+{
 	add_aoe_projectile,
+	add_console_command,
 	add_enemy,
 	add_friend,
 	add_own_player,
@@ -25,6 +27,7 @@ enum type {
 	connect,
 	connect_state,
 	console_command,
+	console_print,
 	die,
 	disconnect,
 	experience,
