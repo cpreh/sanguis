@@ -13,7 +13,8 @@ sanguis::server::create_player(
 	environment::load_context_ptr const load_context_,
 	string const &name,
 	unicast_callback const &send_to_player,
-	player_id const player_id_ 
+	player_id const player_id_,
+	console_command_vector const &known_commands_
 )
 {
 	entities::player_auto_ptr new_player(

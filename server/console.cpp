@@ -4,6 +4,7 @@
 #include "../messages/create.hpp"
 #include <fcppt/function/object.hpp>
 #include <fcppt/utf8/convert.hpp>
+#include <fcppt/homogenous_pair_impl.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
@@ -17,7 +18,11 @@ sanguis::server::console::console(
 		FCPPT_TEXT('/') // TODO: is this right?
 	),
 	send_(_send),
-	unicast_(_unicast)
+	unicast_(_unicast),
+	known_commands_()
+{}
+
+sanguis::server::console::~console()
 {}
 
 fcppt::signal::auto_connection
@@ -62,11 +67,9 @@ sanguis::server::console::eval(
 		)
 	);
 
-#if 0
 	object_.eval(
 		args_
 	);
-#endif
 }
 
 void
@@ -85,4 +88,10 @@ sanguis::server::console::print_line(
 			)
 		)
 	);
+}
+
+sanguis::server::console_command_vector const &
+sanguis::server::console::known_commands() const
+{
+	return known_commands_;
 }

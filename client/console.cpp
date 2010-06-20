@@ -1,4 +1,5 @@
 #include "console.hpp"
+#include "../messages/serialization/convert_string_vector.hpp"
 #include "../messages/console_command.hpp"
 #include "../messages/create.hpp"
 #include "../messages/base.hpp"
@@ -25,15 +26,6 @@ sanguis::client::console::console(
 		_input_system->register_callback(
 			std::tr1::bind(
 				&console::input_callback,
-				this,
-				std::tr1::placeholders::_1
-			)
-		)
-	),
-	fallback_connection_(
-		gfx_.object().register_fallback(
-			std::tr1::bind(
-				&console::fallback,
 				this,
 				std::tr1::placeholders::_1
 			)
@@ -113,36 +105,17 @@ sanguis::client::console::input_callback(
 }
 
 void
-sanguis::client::console::fallback(
-	fcppt::string const &string_
-)
-{
-	fcppt::string const prefix(
-		FCPPT_TEXT("sv_")
-	);
-
-	if(
-		boost::algorithm::starts_with(
-			string_,
-			prefix
-		)
-	)
-		send_(
-			messages::create(
-				messages::console_command(
-					fcppt::utf8::convert(
-						string_.substr(
-							prefix.size()
-						)
-					)
-				)
-			)
-		);
-}
-
-void
 sanguis::client::console::server_callback(
 	sge::console::arg_list const &args_
 )
 {
+	send_(
+		sanguis::messages::create(
+			sanguis::messages::console_command(
+				sanguis::messages::serialization::convert_string_vector(
+					args_
+				)
+			)
+		)
+	);
 }

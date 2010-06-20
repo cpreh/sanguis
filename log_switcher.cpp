@@ -1,4 +1,5 @@
 #include "log_switcher.hpp"
+#include "string_vector.hpp"
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/activate_levels.hpp>
 #include <fcppt/log/context.hpp>
@@ -14,9 +15,6 @@
 
 namespace
 {
-typedef 
-std::vector<fcppt::string> 
-string_vector;
 
 typedef 
 std::pair
@@ -26,17 +24,21 @@ std::pair
 >
 string_pair;
 
-string_vector const explode(
+sanguis::string_vector const
+explode(
 	fcppt::string const &e,
-	fcppt::string const &seps)
+	fcppt::string const &seps
+)
 {
-	string_vector v;
+	sanguis::string_vector v;
 
 	boost::algorithm::split(
 		v,
 		e,
 		boost::algorithm::is_any_of(
-			seps));
+			seps
+		)
+	);
 
 	return v;
 }
@@ -82,6 +84,7 @@ to_location(
 	fcppt::log::location l(
 		r.front());
 	
+	// TODO: use phoenix instead
 	std::for_each(
 		boost::next(r.begin()),
 		r.end(),

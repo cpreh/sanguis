@@ -57,11 +57,6 @@ private:
 	);
 
 	void
-	fallback(
-		fcppt::string const &
-	);
-
-	void
 	server_callback(
 		sge::console::arg_list const &
 	);
@@ -69,8 +64,7 @@ private:
 	sge::console::gfx &gfx_;
 
 	fcppt::signal::scoped_connection const
-		input_connection_,
-		fallback_connection_;
+		input_connection_;
 
 	sge::input::key_code const toggler_;
 

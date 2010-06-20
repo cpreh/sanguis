@@ -3,7 +3,7 @@
 #include "single.hpp"
 #include "make.hpp"
 #include "convert_enemy_name.hpp"
-#include <sge/console/object.hpp>
+#include "../console.hpp"
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/make_auto_ptr.hpp>
@@ -14,8 +14,11 @@
 #include <fcppt/log/headers.hpp>
 #include <fcppt/lexical_cast.hpp>
 
+// NOTE: be careful when we move this class because
+// it should not register the functions more than once
+
 sanguis::server::waves::generator::generator(
-	sge::console::object &console_
+	server::console &console_
 )
 :
 	spawn_connection(

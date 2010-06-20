@@ -6,6 +6,7 @@
 #include "string.hpp"
 #include "unicast_callback.hpp"
 #include "player_id.hpp"
+#include "console_command_vector.hpp"
 
 namespace sanguis
 {
@@ -17,7 +18,8 @@ create_player(
 	environment::load_context_ptr,
 	string const &name,
 	unicast_callback const &send_to_player,
-	player_id
+	player_id,
+	server::console_command_vector const &
 );
 
 }

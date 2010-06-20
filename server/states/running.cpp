@@ -4,8 +4,11 @@
 #include "../message_functor.hpp"
 #include "../message_event.hpp"
 #include "../log.hpp"
+#include "../make_unicast_callback.hpp"
+#include "../make_send_callback.hpp"
 #include "../../connect_state.hpp"
 #include "../../messages/call/object.hpp"
+#include "../../messages/serialization/convert_string_vector.hpp"
 #include "../../messages/highscore.hpp"
 #include "../../messages/create.hpp"
 #include "../../cast_enum.hpp"
@@ -27,17 +30,17 @@ sanguis::server::states::running::running(
 :
 	my_base(ctx),
 	console_(
-		FCPPT_TEXT('/')
+		server::make_send_callback(
+			context<machine>()
+		),
+		server::make_unicast_callback(
+			context<machine>()
+		)
 	),
 	global_context_(
 		new global::context(
-			std::tr1::bind(
-				&machine::send_unicast,
-				&context<
-					machine
-				>(),
-				std::tr1::placeholders::_1,
-				std::tr1::placeholders::_2
+			server::make_unicast_callback(
+				context<machine>()
 			),
 			context<machine>().collision_system(),
 			context<machine>().resources(),
@@ -145,26 +148,31 @@ sanguis::server::states::running::operator()(
 	messages::console_command const &msg
 )
 {
-	fcppt::string const command(
-		fcppt::utf8::convert(
+	sanguis::string_vector const command(
+		messages::serialization::convert_string_vector(
 			msg.get<
-				messages::string
+				messages::string_vector
 			>()
 		)
 	);
+
+	if(
+		command.empty()
+	)
+		return discard_event();
 
 	FCPPT_LOG_DEBUG(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("Received console command: ")
-			<< command
+			<< command[0]
 	);
 
 	try
 	{
 		console_.eval(
-			console_.prefix()
-			+ command
+			id,
+			command
 		);
 	}
 	catch(

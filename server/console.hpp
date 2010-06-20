@@ -4,11 +4,13 @@
 #include "console_fwd.hpp"
 #include "send_callback.hpp"
 #include "unicast_callback.hpp"
+#include "console_command_vector.hpp"
 #include "../net/id_type.hpp"
 #include <sge/console/object.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/callback.hpp>
 #include <fcppt/signal/auto_connection.hpp>
+#include <fcppt/homogenous_pair_decl.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
@@ -47,12 +49,17 @@ public:
 		net::id_type,
 		fcppt::string const &
 	);
+
+	console_command_vector const &
+	known_commands() const;
 private:
 	sge::console::object object_;
 
 	server::send_callback const send_;
 
 	server::unicast_callback const unicast_;
+
+	console_command_vector known_commands_;
 };
 
 }

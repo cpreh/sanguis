@@ -2,7 +2,7 @@
 #define SANGUIS_MESSAGES_CONSOLE_COMMAND_HPP_INCLUDED
 
 #include "make_class.hpp"
-#include "string.hpp"
+#include "string_vector.hpp"
 #include "make_message_id.hpp"
 #include "types/message.hpp"
 #include <majutsu/composite.hpp>
@@ -21,7 +21,7 @@ typedef make_class<
 				types::message::console_command
 			>::type,
 			majutsu::role<
-				string
+				string_vector
 			>
 		>
 	>
