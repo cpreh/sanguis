@@ -40,7 +40,7 @@ sanguis::client::machine::machine(
 	sge::audio::pool &_sound_pool,
 	sge::font::object &_font,
 	sge::input::key_state_tracker &_ks,
-	sge::console::gfx &_console,
+	sge::console::gfx &_console_gfx,
 	sge::input::system_ptr const input_system_,
 	sge::renderer::device_ptr const renderer_,
 	sge::image::multi_loader &image_loader_,
@@ -84,22 +84,22 @@ sanguis::client::machine::machine(
 	sound_pool_(_sound_pool),
 	font_(_font),
 	ks(_ks),
-	console(_console),
+	console_gfx_(_console_gfx),
 	console_stdlib(
-		_console.object(),
+		_console_gfx.object(),
 		std::tr1::bind(
 			&sge::console::gfx::print_line,
-			&_console,
+			&_console_gfx,
 			std::tr1::placeholders::_1
 		),
 		std::tr1::bind(
 			&sge::console::gfx::print_line,
-			&_console,
+			&_console_gfx,
 			std::tr1::placeholders::_1
 		)
 	),
-	console_wrapper_(
-		_console,
+	console_(
+		_console_gfx,
 		input_system_,
 		sge::input::kc::key_f1,
 		std::tr1::bind(
@@ -242,17 +242,17 @@ try
 	net_.process();
 
 	{
-	sge::renderer::scoped_block const block_(
-		renderer_
-	);
+		sge::renderer::scoped_block const block_(
+			renderer_
+		);
 
-	process_event(t);
+		process_event(t);
 
-	if (console.active())
-		console.draw();
+		if (console_gfx_.active())
+			console_gfx_.draw();
 
-	if (ks[sge::input::kc::key_escape])
-		quit();
+		if (ks[sge::input::kc::key_escape])
+			quit();
 	}
 
 	screenshot_.process();
@@ -344,9 +344,9 @@ sanguis::client::machine::key_pressed(
 }
 
 sanguis::client::console &
-sanguis::client::machine::console_wrapper()
+sanguis::client::machine::console()
 {
-	return console_wrapper_;
+	return console_;
 }
 
 sanguis::load::context const &

@@ -47,11 +47,11 @@ sanguis::client::states::running::running(
 			(sge::renderer::state::bool_::clear_zbuffer = false)
 	),
 	music_(
-		context<machine>().console_wrapper().object(),
+		context<machine>().console().gfx(),
 		context<machine>().resources().resources().sounds()
 	),
 	daytime_settings_(
-		context<machine>().console_wrapper().object()
+		context<machine>().console().gfx()
 	),
 	drawer(
 		new draw2d::scene::object(
@@ -70,7 +70,7 @@ sanguis::client::states::running::running(
 				std::tr1::placeholders::_1
 			),
 			drawer->control_environment(),
-			context<machine>().console_wrapper().object().object()
+			context<machine>().console().gfx().object()
 		)
 	),
 	input(
@@ -83,7 +83,7 @@ sanguis::client::states::running::running(
 		)
 	),
 	input_connection(
-		context<machine>().console_wrapper().register_callback(
+		context<machine>().console().register_callback(
 			std::tr1::bind(
 				&control::input_handler::input_callback,
 				input.get(),
@@ -185,7 +185,7 @@ sanguis::client::states::running::react(
 )
 {
 	static sanguis::messages::call::object<
-		boost::mpl::vector8<
+		boost::mpl::vector9<
 			sanguis::messages::add_own_player,
 			sanguis::messages::remove_id,
 			sanguis::messages::disconnect,
@@ -193,7 +193,8 @@ sanguis::client::states::running::react(
 			sanguis::messages::highscore,
 			sanguis::messages::available_perks,
 			sanguis::messages::level_up,
-			sanguis::messages::console_print
+			sanguis::messages::console_print,
+			sanguis::messages::add_console_command
 		>,
 		running
 	> dispatcher;
@@ -338,7 +339,7 @@ sanguis::client::states::running::operator()(
 	sanguis::messages::console_print const &m
 )
 {
-	context<machine>().console_wrapper().object().print_line(
+	context<machine>().console().gfx().print_line(
 		fcppt::utf8::convert(
 			m.get<
 				sanguis::messages::string
@@ -348,7 +349,28 @@ sanguis::client::states::running::operator()(
 
 	return discard_event();	
 }
-	
+
+boost::statechart::result
+sanguis::client::states::running::operator()(
+	sanguis::messages::add_console_command const &m
+)
+{
+	context<machine>().console().register_server_command(
+		fcppt::utf8::convert(
+			m.get<
+				sanguis::messages::roles::command_name
+			>()
+		),
+		fcppt::utf8::convert(
+			m.get<
+				sanguis::messages::roles::command_description
+			>()
+		)
+	);
+
+	return discard_event();
+}
+
 sanguis::client::perk_chooser &
 sanguis::client::states::running::perk_chooser()
 {

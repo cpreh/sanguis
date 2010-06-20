@@ -37,11 +37,17 @@ public:
 		sge::input::callback const &
 	);
 	
+	void
+	register_server_command(
+		fcppt::string const &name,
+		fcppt::string const &description
+	);
+	
 	sge::console::gfx &
-	object();
+	gfx();
 	
 	sge::console::gfx const &
-	object() const;
+	gfx() const;
 private:
 	void 
 	input_callback(
@@ -53,7 +59,7 @@ private:
 		fcppt::string const &
 	);
 
-	sge::console::gfx &object_;
+	sge::console::gfx &gfx_;
 
 	fcppt::signal::scoped_connection const
 		input_connection_,
