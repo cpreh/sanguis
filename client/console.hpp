@@ -4,6 +4,7 @@
 #include "console_fwd.hpp"
 #include "send_callback.hpp"
 #include <sge/console/gfx_fwd.hpp>
+#include <sge/console/arg_list.hpp>
 #include <sge/input/system_ptr.hpp>
 #include <sge/input/key_code.hpp>
 #include <sge/input/key_pair_fwd.hpp>
@@ -13,6 +14,7 @@
 #include <fcppt/signal/object.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
+#include <fcppt/signal/connection_manager.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -59,6 +61,11 @@ private:
 		fcppt::string const &
 	);
 
+	void
+	server_callback(
+		sge::console::arg_list const &
+	);
+
 	sge::console::gfx &gfx_;
 
 	fcppt::signal::scoped_connection const
@@ -73,7 +80,9 @@ private:
 		sge::input::key_pair_function
 	> callbacks_;
 
+	fcppt::signal::connection_manager server_connections_;
 };
+
 }
 }
 

@@ -45,7 +45,8 @@ sanguis::client::console::console(
 	send_(
 		_send
 	),
-	callbacks_()
+	callbacks_(),
+	server_connections_()
 {}
 
 fcppt::signal::auto_connection
@@ -65,7 +66,17 @@ sanguis::client::console::register_server_command(
 	fcppt::string const &description
 )
 {
-	
+	server_connections_.connect(
+		gfx_.object().insert(
+			name,
+			std::tr1::bind(
+				&console::server_callback,
+				this,
+				std::tr1::placeholders::_1
+			),
+			description
+		)
+	);
 }
 
 sge::console::gfx &
@@ -127,4 +138,11 @@ sanguis::client::console::fallback(
 				)
 			)
 		);
+}
+
+void
+sanguis::client::console::server_callback(
+	sge::console::arg_list const &args_
+)
+{
 }
