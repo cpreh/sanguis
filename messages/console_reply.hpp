@@ -1,5 +1,5 @@
-#ifndef SANGUIS_MESSAGES_CONSOLE_COMMAND_HPP_INCLUDED
-#define SANGUIS_MESSAGES_CONSOLE_COMMAND_HPP_INCLUDED
+#ifndef SANGUIS_MESSAGES_CONSOLE_REPLY_HPP_INCLUDED
+#define SANGUIS_MESSAGES_CONSOLE_REPLY_HPP_INCLUDED
 
 #include "make_class.hpp"
 #include "string.hpp"
@@ -18,14 +18,14 @@ typedef make_class<
 	majutsu::composite<
 		boost::mpl::vector2<
 			make_message_id<
-				types::message::console_command
+				types::message::console_reply
 			>::type,
 			majutsu::role<
 				string
 			>
 		>
 	>
->::type console_command;
+>::type console_reply;
 
 }
 }
