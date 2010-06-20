@@ -2,10 +2,14 @@
 #include "gmtime.hpp"
 #include <sge/console/object.hpp>
 #include <sge/console/gfx.hpp>
+#include <fcppt/chrono/system_clock.hpp>
+#include <fcppt/chrono/time_point_arithmetic.hpp>
+#include <fcppt/chrono/time_point_impl.hpp>
+#include <fcppt/chrono/duration_arithmetic.hpp>
+#include <fcppt/chrono/duration_impl.hpp>
 #include <fcppt/io/istringstream.hpp>
 #include <fcppt/time/parse_date.hpp>
 #include <fcppt/time/parse_time.hpp>
-#include <fcppt/time/std_time.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/lexical_cast.hpp>
@@ -73,7 +77,7 @@ sanguis::client::daytime_settings::daytime_settings(
 :
 	console_(_console),
 	time_begin_(
-		fcppt::time::std_time()
+		daytime_settings::now()
 	),
 	speedup_(1),
 	day_con_(
@@ -138,21 +142,26 @@ sanguis::client::daytime_settings::daytime_settings(
 	);
 }
 
+sanguis::client::daytime_settings::~daytime_settings()
+{}
+
 std::tm const
 sanguis::client::daytime_settings::current_time()
 {
-	std::time_t const time_(
-		fcppt::time::std_time()
+	time_point const time_(
+		daytime_settings::now()
 	);
 
 	std::tm const localtime_(
 		client::gmtime(
-			time_begin_
-			+ (
-				time_
-				- time_begin_
+			clock::to_time_t(
+				time_begin_
+				+ (
+					time_
+					- time_begin_
+				)
+				* speedup_
 			)
-			* speedup_
 		)
 	);
 
@@ -256,9 +265,9 @@ sanguis::client::daytime_settings::change_time_speed(
 
 	try
 	{
-		std::time_t const speedup(
+		time_rep const speedup(
 			fcppt::lexical_cast<
-				std::time_t	
+				time_rep
 			>(
 				args_[1]
 			)
@@ -275,7 +284,7 @@ sanguis::client::daytime_settings::change_time_speed(
 
 		speedup_ = speedup;
 
-		time_begin_ = fcppt::time::std_time();
+		time_begin_ = daytime_settings::now();
 	}
 	catch(
 		fcppt::exception const &
@@ -329,4 +338,10 @@ sanguis::client::daytime_settings::reset_time(
 	current_time_.tm_sec = invalid_value;
 	current_time_.tm_min = invalid_value;
 	current_time_.tm_hour = invalid_value;
+}
+
+sanguis::client::daytime_settings::time_point const
+sanguis::client::daytime_settings::now()
+{
+	return clock::now();
 }
