@@ -25,7 +25,7 @@ enum type {
 	connect,
 	connect_state,
 	console_command,
-	console_reply,
+	console_print,
 	die,
 	disconnect,
 	experience,
