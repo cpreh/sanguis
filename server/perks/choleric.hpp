@@ -3,6 +3,7 @@
 
 #include "perk.hpp"
 #include "level_diff.hpp"
+#include "level_type.hpp"
 #include "../space_unit.hpp"
 #include "../../diff_clock.hpp"
 #include <sge/time/timer.hpp>
@@ -29,8 +30,8 @@ private:
 		environment::object_ptr
 	);
 
-	bool
-	can_raise_level() const;
+	level_type
+	max_level() const;
 
 	void
 	change(

@@ -27,8 +27,8 @@ public:
 		environment::object_ptr
 	);
 	
-	virtual bool
-	can_raise_level() const = 0;
+	bool
+	can_raise_level() const;
 	
 	void
 	raise_level(
@@ -52,6 +52,9 @@ private:
 		entities::base &,
 		level_diff
 	) = 0;
+
+	virtual level_type
+	max_level() const = 0;
 
 	perk_type::type const type_;
 

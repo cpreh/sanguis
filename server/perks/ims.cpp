@@ -1,6 +1,5 @@
 #include "ims.hpp"
-#include "diff_factor.hpp"
-#include "../entities/property/value.hpp"
+#include "change_simple.hpp"
 #include "../entities/property/linear_change.hpp"
 #include "../entities/movable.hpp"
 
@@ -17,31 +16,19 @@ sanguis::server::perks::ims::change(
 	level_diff const diff_
 )
 {
-	entities::property::linear_change(
-		dynamic_cast<
-			entities::movable &
-		>(
-			entity_
-		)
-		.movement_speed(),
-		diff_factor(
-			factor,
-			level(),
-			diff_
-		)
+	perks::change_simple<
+		entities::movable
+	>(
+		&entities::property::linear_change,
+		entity_,
+		&entities::movable::movement_speed,
+		0.1f,
+		diff_
 	);
 }
 
-bool
-sanguis::server::perks::ims::can_raise_level() const
+sanguis::server::perks::level_type
+sanguis::server::perks::ims::max_level() const
 {
-	return level() < 7;
-}
-
-sanguis::server::entities::property::value
-sanguis::server::perks::ims::factor(
-	level_type const level_
-)
-{
-	return level_ * 0.1f;
+	return 7;
 }
