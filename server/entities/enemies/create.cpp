@@ -1,4 +1,4 @@
-#include "factory.hpp"
+#include "create.hpp"
 #include "enemy.hpp"
 #include "../../damage/no_armor.hpp"
 #include "../../damage/list.hpp"
@@ -16,7 +16,8 @@ sanguis::server::entities::enemies::create(
 	entities::auto_weak_link const spawn_
 )
 {
-	switch(etype) {
+	switch(etype)
+	{
 	case enemy_type::zombie00:
 		return auto_ptr(
 			new enemy(

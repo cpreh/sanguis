@@ -1,5 +1,5 @@
 #include "spawn.hpp"
-#include "../entities/enemies/factory.hpp"
+#include "../entities/enemies/create.hpp"
 #include "../entities/base.hpp"
 #include "../entities/insert_parameters.hpp"
 #include "../environment/object.hpp"
