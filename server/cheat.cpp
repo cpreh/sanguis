@@ -12,7 +12,13 @@ sanguis::server::cheat(
 	cheat_type::type const type
 )
 {
-	switch(type) {
+	switch(type)
+	{
+	case cheat_type::exp:
+		p.add_exp(
+			static_cast<exp_type>(100000)
+		);
+		return;
 	case cheat_type::impulse101:
 		for(
 			unsigned i = 0;
@@ -33,13 +39,15 @@ sanguis::server::cheat(
 						)
 					)
 				);
-		break;
+		return;
 	case cheat_type::kill:
 		p.die();
+		return;
+	case cheat_type::size:
 		break;
-	default:
-		throw exception(
-			FCPPT_TEXT("Invalid cheat type!")
-		);
 	}
+
+	throw exception(
+		FCPPT_TEXT("Invalid cheat type!")
+	);
 }

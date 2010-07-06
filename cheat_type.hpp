@@ -7,6 +7,7 @@ namespace sanguis
 namespace cheat_type
 {
 enum type {
+	exp,
 	impulse101,
 	kill,
 	size

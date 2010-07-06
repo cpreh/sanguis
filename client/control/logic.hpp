@@ -135,7 +135,8 @@ private:
 
 	fcppt::signal::scoped_connection 
 		cheat_kill_conn_,
-		cheat_impulse_conn_;
+		cheat_impulse_conn_,
+		cheat_exp_conn_;
 };
 
 }
