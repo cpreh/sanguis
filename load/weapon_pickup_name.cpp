@@ -4,9 +4,11 @@
 
 fcppt::string const
 sanguis::load::weapon_pickup_name(
-	weapon_type::type const wtype)
+	weapon_type::type const wtype
+)
 {
-	switch(wtype) {
+	switch(wtype)
+	{
 	case weapon_type::pistol:
 		return FCPPT_TEXT("pickups/pistol");
 	case weapon_type::shotgun:
@@ -17,8 +19,14 @@ sanguis::load::weapon_pickup_name(
 		return FCPPT_TEXT("pickups/grenade");
 	case weapon_type::sentry:
 		return FCPPT_TEXT("pickups/sentry");
-	default:
-		throw exception(
-			FCPPT_TEXT("load::weapon_pickup_name: missing loading code!"));
+	case weapon_type::none:
+	case weapon_type::melee:
+	case weapon_type::dual_pistol:
+	case weapon_type::size:
+		break;
 	}
+
+	throw exception(
+		FCPPT_TEXT("load::weapon_pickup_name: missing loading code!")
+	);
 }
