@@ -1,4 +1,4 @@
-#include "factory.hpp"
+#include "create.hpp"
 #include "pistol.hpp"
 #include "shotgun.hpp"
 #include "rocket_launcher.hpp"
@@ -15,7 +15,8 @@ sanguis::server::weapons::create(
 	weapon_type::type const type
 )
 {
-	switch(type) {
+	switch(type)
+	{
 	case weapon_type::melee:
 		throw exception(
 			FCPPT_TEXT("Please create melee weapons directly, not through the weapon factory!")
@@ -98,8 +99,12 @@ sanguis::server::weapons::create(
 				)
 			)
 		);
-	default:
-		throw exception(
-			FCPPT_TEXT("Cannot create weapon for given weapon type!"));
+	case weapon_type::none:
+	case weapon_type::size:
+		break;
 	}
+
+	throw exception(
+		FCPPT_TEXT("Cannot create weapon for given weapon type!")
+	);
 }

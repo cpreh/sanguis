@@ -1,6 +1,6 @@
 #include "cheat.hpp"
 #include "entities/player.hpp"
-#include "weapons/factory.hpp"
+#include "weapons/create.hpp"
 #include "weapons/weapon.hpp"
 #include "../exception.hpp"
 #include <fcppt/foreach_enumerator_start.hpp>
