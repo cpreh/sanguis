@@ -63,44 +63,68 @@ void sanguis::client::menu::menus::highscore::populate_children()
 		FCPPT_TEXT("highscore")
 	);
 
-	sanguis::client::highscore::table const t = 
-		sanguis::client::highscore::read(
-			file);
+	sanguis::client::highscore::table const read_table(
+		file.is_open()
+		?
+			sanguis::client::highscore::read(
+				file
+			)
+		:
+			sanguis::client::highscore::table()
+	);
 
 	children.push_back(
 		new sge::gui::widgets::label(
 			table,
 			sge::gui::widgets::parameters()
 				.pos(
-					sge::gui::point(0,0)),
-			FCPPT_TEXT("Name(s)")));
+					sge::gui::point(0,0)
+				),
+			FCPPT_TEXT("Name(s)")
+		)
+	);
+
 	children.push_back(
 		new sge::gui::widgets::label(
 			table,
 			sge::gui::widgets::parameters()
 				.pos(
-					sge::gui::point(1,0)),
-			FCPPT_TEXT("Score")));
+					sge::gui::point(1,0)
+				),
+			FCPPT_TEXT("Score")
+		)
+	);
 
 	sge::gui::unit y_pos = 1;
-	BOOST_FOREACH(sanguis::client::highscore::entry const &e,t)
+	BOOST_FOREACH(
+		sanguis::client::highscore::entry const &e,
+		read_table
+	)
 	{
 		children.push_back(
 			new sge::gui::widgets::label(
 				table,
 				sge::gui::widgets::parameters()
 					.pos(
-						sge::gui::point(0,y_pos)),
+						sge::gui::point(0,y_pos)
+					),
 				fcppt::algorithm::join_strings(
 					e.names(),
-					FCPPT_TEXT(", "))));
+					FCPPT_TEXT(", ")
+				)
+			)
+		);
+
 		children.push_back(
 			new sge::gui::widgets::label(
 				table,
 				sge::gui::widgets::parameters()
 					.pos(
-						sge::gui::point(1,y_pos)),
-				fcppt::lexical_cast<fcppt::string>(e.score())));
+						sge::gui::point(1,y_pos)
+					),
+				fcppt::lexical_cast<fcppt::string>(e.score())
+			)
+		);
 
 		++y_pos;
 	}
