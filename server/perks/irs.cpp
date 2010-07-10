@@ -1,6 +1,5 @@
 #include "irs.hpp"
-#include "diff_factor.hpp"
-#include "../entities/property/value.hpp"
+#include "change_simple.hpp"
 #include "../entities/property/linear_change.hpp"
 #include "../entities/with_weapon.hpp"
 
@@ -17,31 +16,19 @@ sanguis::server::perks::irs::change(
 	level_diff const diff_
 )
 {
-	entities::property::linear_change(
-		dynamic_cast<
-			entities::with_weapon &
-		>(
-			entity_
-		)
-		.reload_speed(),
-		diff_factor(
-			factor,
-			level(),
-			diff_
-		)
+	perks::change_simple<
+		entities::with_weapon
+	>(
+		&entities::property::linear_change,
+		entity_,
+		&entities::with_weapon::reload_speed,
+		0.5f,
+		diff_
 	);
 }
 
-bool
-sanguis::server::perks::irs::can_raise_level() const
+sanguis::server::perks::level_type
+sanguis::server::perks::irs::max_level() const
 {
-	return level() < 4;
-}
-
-sanguis::server::entities::property::value
-sanguis::server::perks::irs::factor(
-	level_type const level_
-)
-{
-	return level_ * 0.5f;
+	return 4;
 }

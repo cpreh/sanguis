@@ -1,6 +1,7 @@
 #include "perk.hpp"
 #include "../../exception.hpp"
 #include <fcppt/text.hpp>
+#include <fcppt/assert.hpp>
 
 void
 sanguis::server::perks::perk::update(
@@ -9,6 +10,16 @@ sanguis::server::perks::perk::update(
 	environment::object_ptr const
 )
 {
+}
+
+bool
+sanguis::server::perks::perk::can_raise_level() const
+{
+	FCPPT_ASSERT(
+		level() <= max_level()
+	);
+
+	return level() < max_level();
 }
 
 void

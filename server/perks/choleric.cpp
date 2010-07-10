@@ -87,10 +87,10 @@ sanguis::server::perks::choleric::update(
 	}
 }
 
-bool
-sanguis::server::perks::choleric::can_raise_level() const
+sanguis::server::perks::level_type
+sanguis::server::perks::choleric::max_level() const
 {
-	return level() < 10;
+	return 10;
 }
 
 void

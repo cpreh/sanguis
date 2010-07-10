@@ -1,13 +1,12 @@
 #include "generator.hpp"
 #include "object.hpp"
+#include "velocity_from_movement.hpp"
+#include "rotation_from_alignment.hpp"
 #include <sge/time/second_f.hpp>
 #include <fcppt/random/make_inclusive_range.hpp>
 #include <fcppt/math/twopi.hpp>
-#include <fcppt/math/vector/angle_between.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/is_null.hpp>
-#include <fcppt/math/vector/normalize.hpp>
-#include <fcppt/math/vector/arithmetic.hpp>
 #include <sge/exception.hpp>
 #include <fcppt/text.hpp>
 
@@ -79,49 +78,22 @@ void sanguis::client::draw2d::particle::generator::generate()
 				static_cast<point::value_type>(rot_angle()))
 			: diff;
 			
-	point velocity = point::null();
-	switch (movement)
-	{
-		case movement_type::random:
-		{
-			rotation_type const s_angle = velocity_angle();
-			velocity = point(std::cos(s_angle),std::sin(s_angle)) * velocity_value();
-		}
-		break;
-		case movement_type::shrinking:
-			velocity = normalize(refpoint);
-		break;
-		case movement_type::expanding:
-			velocity = normalize(-refpoint);
-		break;
-		default:
-			throw sge::exception(
-				FCPPT_TEXT("invalid movement type"));
-	}
+	point const velocity(
+		particle::velocity_from_movement(
+			movement,
+			refpoint,
+			velocity_angle,
+			velocity_value
+		)
+	);
 	
-	rotation_type rot;
-	switch (alignment)
-	{
-		case align_type::none:
-			rot = static_cast<rotation_type>(0);
-		break;
-		case align_type::to_center:
-		{
-			rot = *fcppt::math::vector::angle_between<
-				rotation_type
-			>(
-				point::null(),
-				refpoint
-			);
-		}
-		break;
-		case align_type::random:
-			rot = rot_angle();
-		break;
-		default:
-			throw sge::exception(
-				FCPPT_TEXT("invalid align type"));
-	}
+	rotation_type const rot(
+		particle::rotation_from_alignment(
+			alignment,
+			refpoint,
+			rot_angle
+		)
+	);
 
 	base_ptr object = generate_object();
 
@@ -140,11 +112,13 @@ void sanguis::client::draw2d::particle::generator::generate()
 	add(object);
 }
 
-bool sanguis::client::draw2d::particle::generator::update(
+bool
+sanguis::client::draw2d::particle::generator::update(
 	time_type const delta,
 	point const &p,
 	rotation_type const r,
-	depth_type const d)
+	depth_type const d
+)
 {
 	clock.update(delta);
 

@@ -128,8 +128,18 @@ sanguis::client::control::logic::logic(
 			),
 			FCPPT_TEXT("Get all weapons")
 		)
+	),
+	cheat_exp_conn_(
+		_console.insert(
+			FCPPT_TEXT("exp"),
+			std::tr1::bind(
+				&logic::send_cheat,
+				this,
+				cheat_type::exp
+			),
+			FCPPT_TEXT("Get a lot of exp")
+		)
 	)
-
 {
 	std::fill(
 		owned_weapons.begin(),

@@ -4,9 +4,11 @@
 
 fcppt::string const
 sanguis::load::pickup_name(
-	pickup_type::type const ptype)
+	pickup_type::type const ptype
+)
 {
-	switch(ptype) {
+	switch(ptype)
+	{
 	case pickup_type::health:
 		return fcppt::string(
 			FCPPT_TEXT("pickups/hp")
@@ -15,9 +17,12 @@ sanguis::load::pickup_name(
 		return fcppt::string(
 			FCPPT_TEXT("pickups/monster")
 		);
-	default:
-		throw exception(
-			FCPPT_TEXT("load::pickup_name: missing loading code!")
-		);
+	case pickup_type::weapon:
+	case pickup_type::size:
+		break;
 	}
+
+	throw exception(
+		FCPPT_TEXT("load::pickup_name: missing loading code!")
+	);
 }

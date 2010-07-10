@@ -5,7 +5,6 @@
 #include "level_type.hpp"
 #include "level_diff.hpp"
 #include "../entities/base_fwd.hpp"
-#include "../entities/property/value.hpp"
 
 namespace sanguis
 {
@@ -27,14 +26,8 @@ private:
 		level_diff
 	);
 
-	bool
-	can_raise_level() const;
-
-	static
-	entities::property::value
-	factor(
-		level_type
-	);
+	level_type
+	max_level() const;
 };
 
 }

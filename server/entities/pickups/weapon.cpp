@@ -1,7 +1,7 @@
 #include "weapon.hpp"
 #include "../with_weapon.hpp"
 #include "../../weapons/weapon.hpp"
-#include "../../weapons/factory.hpp"
+#include "../../weapons/create.hpp"
 #include "../../environment/load_context.hpp"
 #include "../../../load/weapon_pickup_name.hpp"
 #include "../../../messages/create.hpp"

@@ -48,7 +48,7 @@ sanguis::client::draw2d::scene::hud::update(
 			% frames_counter.frames_str()
 		).str(),
 		sge::font::pos::null(),
-		sge::font::dim(200, 100), // FIXME
+		sge::font::dim(300, 100), // FIXME
 		sge::font::align_h::left,
 		sge::font::align_v::top
 	);

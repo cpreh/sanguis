@@ -50,7 +50,7 @@ struct overwrite_members
 		);
 
 		if(
-			src != invalid_value
+			dest  == invalid_value
 		)
 			dest = src;
 	}
@@ -165,6 +165,10 @@ sanguis::client::daytime_settings::current_time()
 		)
 	);
 
+	std::tm result_time_(
+		current_time_
+	);
+
 	typedef boost::fusion::vector<
 		std::tm &,
 		std::tm const &
@@ -175,14 +179,14 @@ sanguis::client::daytime_settings::current_time()
 			zipped_vec
 		>(
 			zipped_vec(
-				current_time_,
+				result_time_,
 				localtime_
 			)
 		),
 		overwrite_members()
 	);
 
-	return current_time_;
+	return result_time_;
 }
 
 void
@@ -302,7 +306,7 @@ sanguis::client::daytime_settings::reset_day(
 )
 {
 	if(
-		args_.size() == 1
+		args_.size() == 2
 	)
 	{
 		console_.print_line(
@@ -325,7 +329,7 @@ sanguis::client::daytime_settings::reset_time(
 )
 {
 	if(
-		args_.size() == 1
+		args_.size() == 2
 	)
 	{
 		console_.print_line(

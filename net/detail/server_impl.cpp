@@ -18,7 +18,6 @@
 #include <boost/asio.hpp>
 #include <boost/foreach.hpp>
 #include <boost/bind.hpp>
-#include <iostream>
 
 sanguis::net::detail::server_impl::server_impl(
 	server::time_resolution const &_timer_duration)

@@ -1,6 +1,5 @@
 #include "regeneration.hpp"
-#include "diff_factor.hpp"
-#include "../entities/property/value.hpp"
+#include "change_simple.hpp"
 #include "../entities/property/constant_change.hpp"
 #include "../entities/with_health.hpp"
 
@@ -17,31 +16,19 @@ sanguis::server::perks::regeneration::change(
 	level_diff const diff_
 )
 {
-	entities::property::constant_change(
-		dynamic_cast<
-			entities::with_health &
-		>(
-			entity_
-		)
-		.regeneration(),
-		diff_factor(
-			factor,
-			level(),
-			diff_
-		)
+	perks::change_simple<
+		entities::with_health
+	>(
+		&entities::property::constant_change,
+		entity_,
+		&entities::with_health::regeneration,
+		0.75f,
+		diff_
 	);
 }
 
-bool
-sanguis::server::perks::regeneration::can_raise_level() const
+sanguis::server::perks::level_type
+sanguis::server::perks::regeneration::max_level() const
 {
-	return level() < 3;
-}
-
-sanguis::server::entities::property::value
-sanguis::server::perks::regeneration::factor(
-	level_type const level_
-)
-{
-	return level_ * 0.75f;
+	return 3;
 }

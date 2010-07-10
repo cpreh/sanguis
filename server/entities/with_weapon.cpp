@@ -1,6 +1,6 @@
 #include "with_weapon.hpp"
 #include "property/to_float.hpp"
-#include "../weapons/factory.hpp"
+#include "../weapons/create.hpp"
 #include "../weapons/weapon.hpp"
 #include "../environment/object.hpp"
 #include "../../messages/change_weapon.hpp"

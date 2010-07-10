@@ -44,7 +44,7 @@ sanguis::server::entities::collision_groups(
 				collision::group::projectile_enemy
 			);
 			break;
-		default:
+		case team::neutral:
 			break;
 		}
 		break;
