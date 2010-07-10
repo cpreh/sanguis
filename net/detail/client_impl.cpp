@@ -1,6 +1,5 @@
 #include "client_impl.hpp"
 #include "is_disconnect.hpp"
-#include "io_service_wrapper.hpp"
 #include "../exception.hpp"
 #include "../log.hpp"
 #undef max
