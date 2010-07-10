@@ -16,6 +16,8 @@
 #include <sge/font/metrics_ptr.hpp>
 #include <sge/font/object.hpp>
 #include <sge/input/key_state_tracker.hpp>
+#include <sge/mainloop/io_service_ptr.hpp>
+#include <sge/time/timer.hpp>
 #include <sge/systems/instance_fwd.hpp>
 #include <sge/texture/manager.hpp>
 
@@ -44,6 +46,12 @@ public:
 private:
 	int
 	run();
+
+	void
+	register_handler();
+
+	void
+	loop_handler();
 
 	void
 	create_server(
@@ -76,9 +84,13 @@ private:
 
 	sge::audio::pool sound_pool_;
 
+	sge::mainloop::io_service_ptr const io_service_;
+
 	load::context resources_;
 
 	client::machine machine_;
+
+	sge::time::timer frame_timer_;
 
 	fcppt::scoped_ptr<
 		server::object

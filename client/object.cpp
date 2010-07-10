@@ -18,6 +18,7 @@
 #include <sge/image/color/format.hpp>
 #include <sge/image/colors.hpp>
 #include <sge/image/multi_loader.hpp>
+#include <sge/mainloop/io_service.hpp>
 #include <sge/renderer/filter/linear.hpp>
 #include <sge/renderer/state/bool.hpp>
 #include <sge/renderer/state/list.hpp>
@@ -134,6 +135,9 @@ sanguis::client::object::object(
 		>()
 	),
 	sound_pool_(),
+	io_service_(
+		sys_.window()->io_service()
+	),
 	resources_(
 		sys_.image_loader(),
 		sys_.renderer(),
@@ -158,7 +162,10 @@ sanguis::client::object::object(
 		sys_.image_loader(),
 		sys_.font_system(),
 		sys_.audio_player(),
-		sys_.window()->io_service()
+		io_service_
+	),
+	frame_timer_(
+		sge::time::second(1)
 	),
 	server_()
 {
@@ -185,28 +192,11 @@ sanguis::client::object::~object()
 int
 sanguis::client::object::run()
 {
-	sge::time::timer frame_timer(
-		sge::time::second(1)
-	);
-
 	try
 	{
-		while(
-			machine_.process(
-				tick_event(
-					static_cast<
-						time_type
-					>(
-						frame_timer.reset()
-					)
-				)
-			)
-		)
-			if(
-				server_
-				&& !server_->running()
-			)
-				break;
+		register_handler();
+		
+		io_service_->run();
 	}
 	catch(
 		fcppt::exception const &e
@@ -225,6 +215,41 @@ sanguis::client::object::run()
 	}
 
 	return quit_server();
+}
+
+void
+sanguis::client::object::register_handler()
+{
+	io_service_->dispatch(
+		std::tr1::bind(
+			&object::loop_handler,
+			this
+		)
+	);
+}
+
+void
+sanguis::client::object::loop_handler()
+{
+	if(
+		!machine_.process(
+			tick_event(
+				static_cast<
+					time_type
+				>(
+					frame_timer_.reset()
+				)
+			)
+		)
+		||
+		(
+			server_
+			&& !server_->running()
+		)
+	)
+		io_service_->stop();
+	else
+		register_handler();
 }
 
 void
