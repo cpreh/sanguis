@@ -32,6 +32,7 @@
 #include <sge/texture/add_image.hpp>
 #include <sge/texture/default_creator_impl.hpp>
 #include <sge/texture/no_fragmented.hpp>
+#include <sge/window/instance.hpp>
 
 #include <fcppt/function/object.hpp>
 #include <fcppt/log/output.hpp>
@@ -156,7 +157,8 @@ sanguis::client::object::object(
 		sys_.renderer(),
 		sys_.image_loader(),
 		sys_.font_system(),
-		sys_.audio_player()
+		sys_.audio_player(),
+		sys_.window()->io_service()
 	),
 	server_()
 {

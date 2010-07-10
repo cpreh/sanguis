@@ -2,6 +2,7 @@
 #include "multi_sampling.hpp"
 #include "resolution.hpp"
 #include "window_mode.hpp"
+#include <sge/mainloop/asio/create_io_service.hpp>
 #include <sge/renderer/parameters.hpp>
 #include <sge/renderer/refresh_rate_dont_care.hpp>
 #include <sge/systems/list.hpp>
@@ -24,6 +25,9 @@ sanguis::args::client_sge_options(
 		(
 			sge::window::parameters(
 				FCPPT_TEXT("sanguis")
+			)
+			.io_service(
+				sge::mainloop::asio::create_io_service()
 			)
 		)
 		(

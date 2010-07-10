@@ -1,14 +1,15 @@
 #ifndef SANGUIS_NET_DETAIL_CLIENT_IMPL_HPP_INCLUDED
 #define SANGUIS_NET_DETAIL_CLIENT_IMPL_HPP_INCLUDED
 
+#include "client_impl_fwd.hpp"
+#include "static_buffer.hpp"
+#include "output_buffer.hpp"
 #include "../client.hpp"
 #include "../id_type.hpp"
 #include "../data_type.hpp"
 #include "../value_type.hpp"
 #include "../port_type.hpp"
 #include "../hostname_type.hpp"
-#include "static_buffer.hpp"
-#include "output_buffer.hpp"
 
 #include <fcppt/string.hpp>
 #include <fcppt/signal/object.hpp>
@@ -26,11 +27,15 @@ namespace net
 {
 namespace detail
 {
+
 class client_impl
 {
-FCPPT_NONCOPYABLE(client_impl)
+	FCPPT_NONCOPYABLE(client_impl)
 public:
-	client_impl();
+	explicit client_impl(
+		boost::asio::io_service &
+	);
+
 	void connect(
 		hostname_type const &,
 		port_type);

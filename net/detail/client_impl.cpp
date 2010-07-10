@@ -13,10 +13,12 @@
 #include <fcppt/text.hpp>
 #include <boost/asio/buffer.hpp>
 
-sanguis::net::detail::client_impl::client_impl() 
+sanguis::net::detail::client_impl::client_impl(
+	boost::asio::io_service &_io_service
+)
 :
 	io_service_(
-		io_service_wrapper()
+		_io_service
 	),
 	socket_(
 		io_service_
