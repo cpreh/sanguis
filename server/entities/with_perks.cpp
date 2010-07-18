@@ -87,6 +87,7 @@ sanguis::server::entities::with_perks::perk_choosable(
 		)
 	);
 
-	return it == perks_.end()
+	return
+		it == perks_.end()
 		|| it->second->can_raise_level();
 }

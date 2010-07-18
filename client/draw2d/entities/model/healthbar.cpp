@@ -197,22 +197,24 @@ sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 
 	foreground.color(
 		sprite::colored::color(
-			sge::image::color::init::red %=
+			(sge::image::color::init::red %=
 				std::min(
 					static_cast<health_type>(
 						2.0 -  2.0 * remaining_health()
 					),
 					static_cast<health_type>(1)
-				),
-			sge::image::color::init::green %=
+				)
+			)
+			(sge::image::color::init::green %=
 				std::min(
 					static_cast<health_type>(
 						1.4 * remaining_health()
 					),
 					static_cast<health_type>(0.7)
-				),
-			sge::image::color::init::blue %= 0.0,
-			sge::image::color::init::alpha %= 1.0
+				)
+			)
+			(sge::image::color::init::blue %= 0.0)
+			(sge::image::color::init::alpha %= 1.0)
 		)
 	);
 }

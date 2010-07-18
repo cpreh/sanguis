@@ -201,22 +201,23 @@ void sanguis::client::menu::mover::update_visibility(
 
 	man_.connected_sprite(w).color(
 		sge::image::color::rgba8(
-			sge::image::color::init::red %= 1.0,
-			sge::image::color::init::green %= 1.0,
-			sge::image::color::init::blue %= 1.0,
-			sge::image::color::init::alpha =
-			static_cast<
-				sge::image::color::channel8
-			>(
-				static_cast<float_type>(
-					mizuiro::color::channel_max<
-						mizuiro::color::types::channel_value<
-							sge::image::color::rgba8::format,
-							mizuiro::color::channel::alpha
-						>::type
-					>()
+			(sge::image::color::init::red %= 1.0)
+			(sge::image::color::init::green %= 1.0)
+			(sge::image::color::init::blue %= 1.0)
+			(sge::image::color::init::alpha =
+				static_cast<
+					sge::image::color::channel8
+				>(
+					static_cast<float_type>(
+						mizuiro::color::channel_max<
+							mizuiro::color::types::channel_value<
+								sge::image::color::rgba8::format,
+								mizuiro::color::channel::alpha
+							>::type
+						>()
+					)
+					* visibility
 				)
-				* visibility
 			)
 		)
 	);
