@@ -95,6 +95,10 @@ private:
 	fcppt::scoped_ptr<
 		server::object
 	> server_;
+
+	bool running_;
+
+	bool next_handler_;
 };
 
 }

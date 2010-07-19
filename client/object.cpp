@@ -167,7 +167,13 @@ sanguis::client::object::object(
 	frame_timer_(
 		sge::time::second(1)
 	),
-	server_()
+	server_(),
+	running_(
+		true
+	),
+	next_handler_(
+		true
+	)
 {
 	if(	
 		args::multi_sampling(
@@ -194,9 +200,17 @@ sanguis::client::object::run()
 {
 	try
 	{
-		register_handler();
+		while(
+			running_
+		)
+		{
+			if(
+				next_handler_
+			)
+				register_handler();
 		
-		io_service_->run();
+			io_service_->run_one();
+		}
 	}
 	catch(
 		fcppt::exception const &e
@@ -226,6 +240,8 @@ sanguis::client::object::register_handler()
 			this
 		)
 	);
+
+	next_handler_ = false;
 }
 
 void
@@ -247,9 +263,9 @@ sanguis::client::object::loop_handler()
 			&& !server_->running()
 		)
 	)
-		io_service_->stop();
-	else
-		register_handler();
+		running_ = false;
+
+	next_handler_ = true;
 }
 
 void
