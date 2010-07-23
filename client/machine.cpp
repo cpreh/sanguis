@@ -45,7 +45,8 @@ sanguis::client::machine::machine(
 	sge::renderer::device_ptr const renderer_,
 	sge::image::multi_loader &image_loader_,
 	sge::font::system_ptr const font_system_,
-	sge::audio::player_ptr const audio_player_
+	sge::audio::player_ptr const audio_player_,
+	sge::mainloop::io_service_ptr const io_service_
 )
 :
 	settings_(settings_),
@@ -55,6 +56,9 @@ sanguis::client::machine::machine(
 	image_loader_(image_loader_),
 	font_system_(font_system_),
 	audio_player_(audio_player_),
+	net_(
+		io_service_
+	),
 	s_conn(
 		net_.register_connect(
 			std::tr1::bind(

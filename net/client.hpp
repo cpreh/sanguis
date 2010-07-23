@@ -1,9 +1,12 @@
 #ifndef SANGUIS_NET_CLIENT_HPP_INCLUDED
 #define SANGUIS_NET_CLIENT_HPP_INCLUDED
 
+#include "detail/client_impl_fwd.hpp"
 #include "hostname_type.hpp"
 #include "port_type.hpp"
 #include "data_type.hpp"
+
+#include <sge/mainloop/io_service_ptr.hpp>
 
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/function/object_fwd.hpp>
@@ -16,10 +19,6 @@ namespace sanguis
 {
 namespace net
 {
-namespace detail
-{
-class client_impl;
-}
 
 class client
 {
@@ -32,7 +31,10 @@ public:
 	typedef fcppt::function::object<disconnect_fun> disconnect_function;
 	typedef fcppt::function::object<data_fun> data_function;
 
-	client();
+	explicit client(
+		sge::mainloop::io_service_ptr
+	);
+
 	void connect(
 		hostname_type const &,
 		port_type);

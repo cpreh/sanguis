@@ -1,6 +1,7 @@
 #ifndef SANGUIS_NET_DETAIL_STATIC_BUFFER_HPP_INCLUDED
 #define SANGUIS_NET_DETAIL_STATIC_BUFFER_HPP_INCLUDED
 
+#include "../value_type.hpp"
 #include <boost/array.hpp>
 
 namespace sanguis

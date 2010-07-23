@@ -219,7 +219,8 @@ sanguis::server::entities::with_weapon::in_range(
 	return has_weapon() && active_weapon().in_range(*this, center);
 }
 
-bool sanguis::server::entities::with_weapon::has_weapon() const
+bool
+sanguis::server::entities::with_weapon::has_weapon() const
 {
 	return weapon_ != weapon_type::none;
 }

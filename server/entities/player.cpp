@@ -291,5 +291,3 @@ sanguis::server::entities::player::make_add_message() const
 			)
 		);
 }
-
-

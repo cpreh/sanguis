@@ -18,81 +18,81 @@ struct color
 		grads.add(
 			-3.14159f,
 			color_point(
-				mizuiro::color::init::red %= 0.125736,
-				mizuiro::color::init::green %= 0.125736,
-				mizuiro::color::init::blue %= 0.219608
+				(mizuiro::color::init::red %= 0.125736)
+				(mizuiro::color::init::green %= 0.125736)
+				(mizuiro::color::init::blue %= 0.219608)
 			)
 		);
 		grads.add(
 			-1.56924f,
 			color_point(
-				mizuiro::color::init::red %= 0.125736,
-				mizuiro::color::init::green %= 0.125736,
-				mizuiro::color::init::blue %= 0.219608
+				(mizuiro::color::init::red %= 0.125736)
+				(mizuiro::color::init::green %= 0.125736)
+				(mizuiro::color::init::blue %= 0.219608)
 			)
 		);
 		grads.add(
 			0,
 			color_point(
-				mizuiro::color::init::red %= 0.125736,
-				mizuiro::color::init::green %= 0.125736,
-				mizuiro::color::init::blue %= 0.219608
+				(mizuiro::color::init::red %= 0.125736)
+				(mizuiro::color::init::green %= 0.125736)
+				(mizuiro::color::init::blue %= 0.219608)
 			)
 		);
 		grads.add(
 			0.0916717f,
 			color_point(
-				mizuiro::color::init::red %= 1.,
-				mizuiro::color::init::green %= 0.156863,
-				mizuiro::color::init::blue %= 0.156863
+				(mizuiro::color::init::red %= 1.)
+				(mizuiro::color::init::green %= 0.156863)
+				(mizuiro::color::init::blue %= 0.156863)
 			)
 		);
 		grads.add(
 			0.153819f,
 			color_point(
-				mizuiro::color::init::red %= 1.,
-				mizuiro::color::init::green %= 0.588235,
-				mizuiro::color::init::blue %= 0.
+				(mizuiro::color::init::red %= 1.)
+				(mizuiro::color::init::green %= 0.588235)
+				(mizuiro::color::init::blue %= 0.)
 			)
 		);
 		grads.add(
 			0.785177f,
 			color_point(
-				mizuiro::color::init::red %= 1.,
-				mizuiro::color::init::green %= 0.987313,
-				mizuiro::color::init::blue %= 0.90196
+				(mizuiro::color::init::red %= 1.)
+				(mizuiro::color::init::green %= 0.987313)
+				(mizuiro::color::init::blue %= 0.90196)
 			)
 		);
 		grads.add(
 			2.37095f,
 			color_point(
-				mizuiro::color::init::red %= 1.,
-				mizuiro::color::init::green %= 0.987313,
-				mizuiro::color::init::blue %= 0.90196
+				(mizuiro::color::init::red %= 1.)
+				(mizuiro::color::init::green %= 0.987313)
+				(mizuiro::color::init::blue %= 0.90196)
 			)
 		);
 		grads.add(
 			2.95894f,
 			color_point(
-				mizuiro::color::init::red %= 1.,
-				mizuiro::color::init::green %= 0.635294,
-				mizuiro::color::init::blue %= 0.
+				(mizuiro::color::init::red %= 1.)
+				(mizuiro::color::init::green %= 0.635294)
+				(mizuiro::color::init::blue %= 0.)
 			)
 		);
 		grads.add(
 			3.0608f,
 			color_point(
-				mizuiro::color::init::red %= 1.,
-				mizuiro::color::init::green %= 0.156863,
-				mizuiro::color::init::blue %= 0.156863
+				(mizuiro::color::init::red %= 1.)
+				(mizuiro::color::init::green %= 0.156863)
+				(mizuiro::color::init::blue %= 0.156863)
 			)
 		);
 		grads.add(
 			3.14159f,
 			color_point(
-				mizuiro::color::init::red %= 0.125736,
-				mizuiro::color::init::green %= 0.125736,
-				mizuiro::color::init::blue %= 0.219608
+				(mizuiro::color::init::red %= 0.125736)
+				(mizuiro::color::init::green %= 0.125736)
+				(mizuiro::color::init::blue %= 0.219608)
 			)
 		);
 	}

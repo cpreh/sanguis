@@ -18,6 +18,7 @@
 #include <sge/image/color/format.hpp>
 #include <sge/image/colors.hpp>
 #include <sge/image/multi_loader.hpp>
+#include <sge/mainloop/io_service.hpp>
 #include <sge/renderer/filter/linear.hpp>
 #include <sge/renderer/state/bool.hpp>
 #include <sge/renderer/state/list.hpp>
@@ -32,6 +33,7 @@
 #include <sge/texture/add_image.hpp>
 #include <sge/texture/default_creator_impl.hpp>
 #include <sge/texture/no_fragmented.hpp>
+#include <sge/window/instance.hpp>
 
 #include <fcppt/function/object.hpp>
 #include <fcppt/log/output.hpp>
@@ -133,6 +135,9 @@ sanguis::client::object::object(
 		>()
 	),
 	sound_pool_(),
+	io_service_(
+		sys_.window()->io_service()
+	),
 	resources_(
 		sys_.image_loader(),
 		sys_.renderer(),
@@ -156,9 +161,19 @@ sanguis::client::object::object(
 		sys_.renderer(),
 		sys_.image_loader(),
 		sys_.font_system(),
-		sys_.audio_player()
+		sys_.audio_player(),
+		io_service_
 	),
-	server_()
+	frame_timer_(
+		sge::time::second(1)
+	),
+	server_(),
+	running_(
+		true
+	),
+	next_handler_(
+		true
+	)
 {
 	if(	
 		args::multi_sampling(
@@ -183,28 +198,19 @@ sanguis::client::object::~object()
 int
 sanguis::client::object::run()
 {
-	sge::time::timer frame_timer(
-		sge::time::second(1)
-	);
-
 	try
 	{
 		while(
-			machine_.process(
-				tick_event(
-					static_cast<
-						time_type
-					>(
-						frame_timer.reset()
-					)
-				)
-			)
+			running_
 		)
+		{
 			if(
-				server_
-				&& !server_->running()
+				next_handler_
 			)
-				break;
+				register_handler();
+		
+			io_service_->run_one();
+		}
 	}
 	catch(
 		fcppt::exception const &e
@@ -223,6 +229,43 @@ sanguis::client::object::run()
 	}
 
 	return quit_server();
+}
+
+void
+sanguis::client::object::register_handler()
+{
+	io_service_->dispatch(
+		std::tr1::bind(
+			&object::loop_handler,
+			this
+		)
+	);
+
+	next_handler_ = false;
+}
+
+void
+sanguis::client::object::loop_handler()
+{
+	if(
+		!machine_.process(
+			tick_event(
+				static_cast<
+					time_type
+				>(
+					frame_timer_.reset()
+				)
+			)
+		)
+		||
+		(
+			server_
+			&& !server_->running()
+		)
+	)
+		running_ = false;
+
+	next_handler_ = true;
 }
 
 void
