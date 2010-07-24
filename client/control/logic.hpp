@@ -9,6 +9,7 @@
 #include "../../cheat_type.hpp"
 #include "../../weapon_type.hpp"
 #include <sge/console/object_fwd.hpp>
+#include <sge/console/arg_list.hpp>
 #include <sge/time/timer.hpp>
 #include <fcppt/function/object_fwd.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
@@ -103,7 +104,9 @@ private:
 	
 	void
 	send_cheat(
-		cheat_type::type
+		cheat_type::type,
+		sge::console::arg_list const &,
+		sge::console::object &
 	);
 
 	send_callback const send;

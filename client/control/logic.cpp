@@ -113,7 +113,9 @@ sanguis::client::control::logic::logic(
 			std::tr1::bind(
 				&logic::send_cheat,
 				this,
-				cheat_type::kill
+				cheat_type::kill,
+				std::tr1::placeholders::_1,
+				std::tr1::placeholders::_2
 			),
 			FCPPT_TEXT("Commit suicide")
 		)
@@ -124,7 +126,9 @@ sanguis::client::control::logic::logic(
 			std::tr1::bind(
 				&logic::send_cheat,
 				this,
-				cheat_type::impulse101
+				cheat_type::impulse101,
+				std::tr1::placeholders::_1,
+				std::tr1::placeholders::_2
 			),
 			FCPPT_TEXT("Get all weapons")
 		)
@@ -135,7 +139,9 @@ sanguis::client::control::logic::logic(
 			std::tr1::bind(
 				&logic::send_cheat,
 				this,
-				cheat_type::exp
+				cheat_type::exp,
+				std::tr1::placeholders::_1,
+				std::tr1::placeholders::_2
 			),
 			FCPPT_TEXT("Get a lot of exp")
 		)
@@ -395,7 +401,9 @@ sanguis::client::control::logic::change_weapon(
 
 void
 sanguis::client::control::logic::send_cheat(
-	cheat_type::type const c
+	cheat_type::type const c,
+	sge::console::arg_list const &,
+	sge::console::object &
 )
 {
 	send(

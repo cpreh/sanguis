@@ -90,18 +90,7 @@ sanguis::client::machine::machine(
 	ks(_ks),
 	console_gfx_(_console_gfx),
 	console_stdlib(
-		_console_gfx.object(),
-		std::tr1::bind(
-			&sge::console::gfx::print_line,
-			&_console_gfx,
-			std::tr1::placeholders::_1
-		),
-		std::tr1::bind(
-			&sge::console::gfx::print_line,
-			&_console_gfx,
-			std::tr1::placeholders::_1
-		)
-	),
+		_console_gfx.object()),
 	console_(
 		_console_gfx,
 		input_system_,
