@@ -1,6 +1,8 @@
 #include "hud.hpp"
-#include <sge/font/object.hpp>
-#include <sge/font/text_size.hpp>
+#include <sge/font/draw_text.hpp>
+#include <sge/font/text_part.hpp>
+#include <sge/font/flags_none.hpp>
+#include <fcppt/container/bitfield/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/format.hpp>
@@ -38,7 +40,8 @@ sanguis::client::draw2d::scene::hud::update(
 { 
 	frames_counter.update();
 
-	font.draw_text(
+	sge::font::draw_text(
+		font,
 		(
 			fcppt::format(
 				FCPPT_TEXT("exp: %1%, level: %2%, fps: %3%")
@@ -50,6 +53,7 @@ sanguis::client::draw2d::scene::hud::update(
 		sge::font::pos::null(),
 		sge::font::dim(300, 100), // FIXME
 		sge::font::align_h::left,
-		sge::font::align_v::top
+		sge::font::align_v::top,
+		sge::font::flags::none
 	);
 }
