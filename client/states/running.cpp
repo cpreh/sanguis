@@ -23,6 +23,7 @@
 #include "../../cast_enum.hpp"
 #include <sge/audio/pool.hpp>
 #include <sge/console/gfx.hpp>
+#include <sge/console/object.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/var.hpp>
@@ -47,11 +48,11 @@ sanguis::client::states::running::running(
 			(sge::renderer::state::bool_::clear_zbuffer = false)
 	),
 	music_(
-		context<machine>().console().gfx(),
+		context<machine>().console().gfx().object(),
 		context<machine>().resources().resources().sounds()
 	),
 	daytime_settings_(
-		context<machine>().console().gfx()
+		context<machine>().console().gfx().object()
 	),
 	drawer(
 		new draw2d::scene::object(
@@ -339,7 +340,7 @@ sanguis::client::states::running::operator()(
 	sanguis::messages::console_print const &m
 )
 {
-	context<machine>().console().gfx().print_line(
+	context<machine>().console().gfx().object().emit_message(
 		fcppt::utf8::convert(
 			m.get<
 				sanguis::messages::string

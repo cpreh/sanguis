@@ -22,7 +22,6 @@
 #include <sge/audio/player_ptr.hpp>
 #include <sge/audio/pool_fwd.hpp>
 #include <sge/console/gfx_fwd.hpp>
-#include <sge/console/stdlib.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/system_ptr.hpp>
 #include <sge/input/key_code.hpp>
@@ -206,8 +205,6 @@ private:
 
 	sge::console::gfx &console_gfx_;
 	
-	sge::console::stdlib console_stdlib;
-
 	sanguis::client::console console_;
 
 	bool running_;

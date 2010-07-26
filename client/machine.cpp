@@ -89,8 +89,6 @@ sanguis::client::machine::machine(
 	font_(_font),
 	ks(_ks),
 	console_gfx_(_console_gfx),
-	console_stdlib(
-		_console_gfx.object()),
 	console_(
 		_console_gfx,
 		input_system_,

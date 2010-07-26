@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_DAYTIME_SETTINGS_HPP_INCLUDED
 #define SANGUIS_CLIENT_DAYTIME_SETTINGS_HPP_INCLUDED
 
-#include <sge/console/gfx_fwd.hpp>
+#include <sge/console/object_fwd.hpp>
 #include <sge/console/arg_list.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/chrono/system_clock.hpp>
@@ -20,7 +20,7 @@ class daytime_settings
 public:
 	explicit
 	daytime_settings(
-		sge::console::gfx &
+		sge::console::object &
 	);
 
 	~daytime_settings();
@@ -36,38 +36,42 @@ private:
 
 	void
 	change_day(
-		sge::console::arg_list const &
+		sge::console::arg_list const &,
+		sge::console::object &
 	);
 
 	void
 	change_time(
-		sge::console::arg_list const &
+		sge::console::arg_list const &,
+		sge::console::object &
 	);
 
 	void
 	change_time_speed(
-		sge::console::arg_list const &
+		sge::console::arg_list const &,
+		sge::console::object &
 	);
 
 	void
 	reset_day(
-		sge::console::arg_list const &
+		sge::console::arg_list const &,
+		sge::console::object &
 	);
 
 	void
 	reset_time(
-		sge::console::arg_list const &
+		sge::console::arg_list const &,
+		sge::console::object &
 	);
 
 	void
 	reset_time_speed(
-		sge::console::arg_list const &
+		sge::console::arg_list const &,
+		sge::console::object &
 	);
 
 	static time_point const
 	now();
-
-	sge::console::gfx &console_;
 
 	time_point time_begin_;
 

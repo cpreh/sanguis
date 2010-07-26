@@ -14,20 +14,21 @@
 #include <fcppt/bad_lexical_cast.hpp>
 
 sanguis::client::music_handler::music_handler(
-	sge::console::gfx &_console,
+	sge::console::object &_console,
 	load::resource::sounds const &_resource)
 :
-	console_(_console),
 	resource_(_resource),
 	volume_connection_(
-		console_.object().insert(
+		_console.insert(
 			FCPPT_TEXT("music_volume"),
 			std::tr1::bind(
 				&music_handler::volume,
 				this,
-				std::tr1::placeholders::_1
+				std::tr1::placeholders::_1,
+				std::tr1::placeholders::_2
 			),
-			FCPPT_TEXT("takes values from 0 to 100, changes the music volume in percent")
+			FCPPT_TEXT("Changes the music volume"),
+			FCPPT_TEXT("Usage: /music_volume p\np is a value in [0,100] which specifies the volume in percent")
 		)
 	),
 	current_()
@@ -61,17 +62,17 @@ void sanguis::client::music_handler::next_title()
 	current_->play(sge::audio::play_mode::once);
 }
 
-void sanguis::client::music_handler::volume(sge::console::arg_list const &a)
+void sanguis::client::music_handler::volume(sge::console::arg_list const &a,sge::console::object &o)
 {
 	if (!current_)
 	{
-		console_.print_line(FCPPT_TEXT("no music files registered, makes no sense to set a volume"));
+		o.emit_error(FCPPT_TEXT("no music files registered, makes no sense to set a volume"));
 		return;
 	}
 
 	if (a.size() != 2)
 	{
-		console_.print_line(FCPPT_TEXT("invalid number of arguments"));
+		o.emit_error(FCPPT_TEXT("invalid number of arguments"));
 		return;
 	}
 
@@ -87,7 +88,7 @@ void sanguis::client::music_handler::volume(sge::console::arg_list const &a)
 	}
 	catch (fcppt::bad_lexical_cast const &)
 	{
-		console_.print_line(FCPPT_TEXT("invalid numeric argument"));
+		o.emit_error(FCPPT_TEXT("invalid numeric argument"));
 	}
 }
 

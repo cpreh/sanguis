@@ -5,7 +5,7 @@
 #include <sge/audio/sound_ptr.hpp>
 #include <sge/audio/unit.hpp>
 #include <sge/console/arg_list.hpp>
-#include <sge/console/gfx_fwd.hpp>
+#include <sge/console/object_fwd.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 
 namespace sanguis
@@ -16,12 +16,11 @@ class music_handler
 {
 public:
 	music_handler(
-		sge::console::gfx &,
+		sge::console::object &,
 		load::resource::sounds const &);
 
 	void process();
 private:
-	sge::console::gfx &console_;
 	load::resource::sounds const &resource_;
 	fcppt::signal::scoped_connection const volume_connection_;
 	sge::audio::sound_ptr current_;
@@ -29,7 +28,8 @@ private:
 	void next_title();
 
 	void volume(
-		sge::console::arg_list const &);
+		sge::console::arg_list const &,
+		sge::console::object &);
 	
 	sge::audio::sound_ptr const
 	load_random() const;

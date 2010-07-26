@@ -1,7 +1,6 @@
 #include "daytime_settings.hpp"
 #include "gmtime.hpp"
 #include <sge/console/object.hpp>
-#include <sge/console/gfx.hpp>
 #include <fcppt/chrono/system_clock.hpp>
 #include <fcppt/chrono/time_point_arithmetic.hpp>
 #include <fcppt/chrono/time_point_impl.hpp>
@@ -72,65 +71,69 @@ BOOST_FUSION_ADAPT_STRUCT(
 )
 
 sanguis::client::daytime_settings::daytime_settings(
-	sge::console::gfx &_console
+	sge::console::object &_console
 )
 :
-	console_(_console),
 	time_begin_(
 		daytime_settings::now()
 	),
 	speedup_(1),
 	day_con_(
-		console_.object().insert(
+		_console.insert(
 			FCPPT_TEXT("day"),
 			std::tr1::bind(
 				&daytime_settings::change_day,
 				this,
-				std::tr1::placeholders::_1
+				std::tr1::placeholders::_1,
+				std::tr1::placeholders::_2 
 			),
 			FCPPT_TEXT("Sets the current day to a fixed value.")
 		)
 	),
 	time_con_(
-		console_.object().insert(
+		_console.insert(
 			FCPPT_TEXT("time"),
 			std::tr1::bind(
 				&daytime_settings::change_time,
 				this,
-				std::tr1::placeholders::_1
+				std::tr1::placeholders::_1,
+				std::tr1::placeholders::_2
 			),
 			FCPPT_TEXT("Sets the current time to a fixed value.")
 		)
 	),
 	time_speed_con_(
-		console_.object().insert(
+		_console.insert(
 			FCPPT_TEXT("time_speed"),
 			std::tr1::bind(
 				&daytime_settings::change_time_speed,
 				this,
-				std::tr1::placeholders::_1
+				std::tr1::placeholders::_1,
+				std::tr1::placeholders::_2
 			),
 			FCPPT_TEXT("Sets the current time speedup. Use a value of 1 to reset this.")
 		)
 	),
 	reset_day_con_(
-		console_.object().insert(
+		_console.insert(
 			FCPPT_TEXT("reset_day"),
 			std::tr1::bind(
 				&daytime_settings::reset_day,
 				this,
-				std::tr1::placeholders::_1
+				std::tr1::placeholders::_1,
+				std::tr1::placeholders::_2
 			),
 			FCPPT_TEXT("Resets to the current day.")
 		)
 	),
 	reset_time_con_(
-		console_.object().insert(
+		_console.insert(
 			FCPPT_TEXT("reset_time"),
 			std::tr1::bind(
 				&daytime_settings::reset_time,
 				this,
-				std::tr1::placeholders::_1
+				std::tr1::placeholders::_1,
+				std::tr1::placeholders::_2
 			),
 			FCPPT_TEXT("Resets to the current time.")
 		)
@@ -191,14 +194,15 @@ sanguis::client::daytime_settings::current_time()
 
 void
 sanguis::client::daytime_settings::change_day(
-	sge::console::arg_list const &args_
+	sge::console::arg_list const &args_,
+	sge::console::object &o
 )
 {
 	if(
 		args_.size() != 2
 	)
 	{
-		console_.print_line(
+		o.emit_error(
 			FCPPT_TEXT("The date command needs one argument!")
 		);
 
@@ -215,21 +219,22 @@ sanguis::client::daytime_settings::change_day(
 			current_time_
 		)
 	)
-		console_.print_line(
+		o.emit_error(
 			FCPPT_TEXT("Day parsing failed.")
 		);
 }
 
 void
 sanguis::client::daytime_settings::change_time(
-	sge::console::arg_list const &args_
+	sge::console::arg_list const &args_,
+	sge::console::object &o
 )
 {
 	if(
 		args_.size() != 2
 	)
 	{
-		console_.print_line(
+		o.emit_error(
 			FCPPT_TEXT("The time command needs one argument!")
 		);
 
@@ -246,21 +251,22 @@ sanguis::client::daytime_settings::change_time(
 			current_time_
 		)
 	)
-		console_.print_line(
+		o.emit_error(
 			FCPPT_TEXT("Time parsing failed.")
 		);
 }
 
 void
 sanguis::client::daytime_settings::change_time_speed(
-	sge::console::arg_list const &args_
+	sge::console::arg_list const &args_,
+	sge::console::object &o
 )
 {
 	if(
 		args_.size() != 2
 	)
 	{
-		console_.print_line(
+		o.emit_error(
 			FCPPT_TEXT("The time_speed command needs one argument!")
 		);
 
@@ -281,7 +287,7 @@ sanguis::client::daytime_settings::change_time_speed(
 			speedup < 1
 		)
 		{
-			console_.print_line(
+			o.emit_error(
 				FCPPT_TEXT("speedup needs to be > 0")
 			);
 		}
@@ -294,7 +300,7 @@ sanguis::client::daytime_settings::change_time_speed(
 		fcppt::exception const &
 	)
 	{
-		console_.print_line(
+		o.emit_error(
 			FCPPT_TEXT("You need to pass an int argument to the time_speed command: ")
 		);
 	}
@@ -302,14 +308,15 @@ sanguis::client::daytime_settings::change_time_speed(
 
 void
 sanguis::client::daytime_settings::reset_day(
-	sge::console::arg_list const &args_
+	sge::console::arg_list const &args_,
+	sge::console::object &o
 )
 {
 	if(
 		args_.size() == 2
 	)
 	{
-		console_.print_line(
+		o.emit_error(
 			FCPPT_TEXT("Dangling arguments for reset_day!")
 		);
 
@@ -325,14 +332,15 @@ sanguis::client::daytime_settings::reset_day(
 
 void
 sanguis::client::daytime_settings::reset_time(
-	sge::console::arg_list const &args_
+	sge::console::arg_list const &args_,
+	sge::console::object &o
 )
 {
 	if(
 		args_.size() == 2
 	)
 	{
-		console_.print_line(
+		o.emit_error(
 			FCPPT_TEXT("Dangling arguments for reset_time!")
 		);
 
