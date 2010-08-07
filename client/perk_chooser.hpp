@@ -5,7 +5,7 @@
 #include "level_type.hpp"
 #include "perk_container.hpp"
 #include "cursor/object_ptr.hpp"
-#include <sge/font/system_ptr.hpp>
+#include <sge/font/metrics_ptr.hpp>
 #include <sge/gui/widgets/buttons/image.hpp>
 #include <sge/gui/widgets/backdrop.hpp>
 #include <sge/gui/widgets/label.hpp>
@@ -35,7 +35,7 @@ public:
 		sge::renderer::device_ptr,
 		sge::input::system_ptr,
 		sge::image::multi_loader &,
-		sge::font::system_ptr,
+		sge::font::metrics_ptr,
 		send_callback const &,
 		sanguis::client::cursor::object_ptr
 	);

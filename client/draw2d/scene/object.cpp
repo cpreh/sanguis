@@ -54,20 +54,24 @@
 #include <utility>
 
 sanguis::client::draw2d::scene::object::object(
-	load::context const &resources_,
-	sge::renderer::device_ptr const rend_,
-	sge::font::object &font,
-	client::cursor::object_ptr const cursor_,
-	std::tm const &current_time_
+	load::context const &_resources,
+	sge::renderer::device_ptr const _rend,
+	sge::font::metrics_ptr const _font_metrics,
+	sge::font::drawer_ptr const _font_drawer,
+	client::cursor::object_ptr const _cursor,
+	std::tm const &_current_time
 )
 :
-	resources_(resources_),
-	rend_(rend_),
+	resources_(_resources),
+	rend_(_rend),
 	normal_system_(rend_),
 	colored_system_(rend_),
 	client_system_(rend_),
 	particle_system_(rend_),
-	hud_(font),
+	hud_(
+		_font_metrics,
+		_font_drawer
+	),
 	paused_(false),
 	background_id_(invalid_id),
 	player_center_(
@@ -97,7 +101,7 @@ sanguis::client::draw2d::scene::object::object(
 	control_environment_(
 		new scene::control_environment(
 			*this,
-			cursor_
+			_cursor
 		)
 	),
 	message_dispatcher_(
@@ -107,7 +111,7 @@ sanguis::client::draw2d::scene::object::object(
 	),
 	entities_(),
 	current_time_(
-		current_time_
+		_current_time
 	)
 {}
 

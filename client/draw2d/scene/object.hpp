@@ -27,7 +27,8 @@
 #include <sge/sprite/intrusive/system_decl.hpp>
 #include <sge/renderer/device_ptr.hpp>
 #include <sge/renderer/screen_size.hpp>
-#include <sge/font/object_fwd.hpp>
+#include <sge/font/metrics_ptr.hpp>
+#include <sge/font/drawer_ptr.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -51,7 +52,8 @@ public:
 	object(
 		load::context const &,
 		sge::renderer::device_ptr,
-		sge::font::object &,
+		sge::font::metrics_ptr,
+		sge::font::drawer_ptr,
 		client::cursor::object_ptr,
 		std::tm const &initial_time
 	);

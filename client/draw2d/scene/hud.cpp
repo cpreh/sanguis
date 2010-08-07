@@ -9,10 +9,12 @@
 #include <fcppt/text.hpp>
 
 sanguis::client::draw2d::scene::hud::hud(
-	sge::font::object &font
+	sge::font::metrics_ptr const _font_metrics,
+	sge::font::drawer_ptr const _font_drawer
 )
 :
-	font(font),
+	font_metrics_(_font_metrics),
+	font_drawer_(_font_drawer),
 	experience_(0),
 	level_(0)
 {}
@@ -41,7 +43,8 @@ sanguis::client::draw2d::scene::hud::update(
 	frames_counter.update();
 
 	sge::font::draw_text(
-		font,
+		font_metrics_,
+		font_drawer_,
 		(
 			fcppt::format(
 				FCPPT_TEXT("exp: %1%, level: %2%, fps: %3%")

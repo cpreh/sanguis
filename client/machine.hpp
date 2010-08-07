@@ -22,8 +22,8 @@
 #include <sge/audio/player_ptr.hpp>
 #include <sge/audio/pool_fwd.hpp>
 #include <sge/console/gfx_fwd.hpp>
-#include <sge/font/object_fwd.hpp>
-#include <sge/font/system_ptr.hpp>
+#include <sge/font/metrics_ptr.hpp>
+#include <sge/font/drawer_ptr.hpp>
 #include <sge/input/key_code.hpp>
 #include <sge/input/key_state_tracker_fwd.hpp>
 #include <sge/input/system_ptr.hpp>
@@ -53,13 +53,13 @@ public:
 		server_callback const &,
 		load::context const &,
 		sge::audio::pool &,
-		sge::font::object &,
+		sge::font::metrics_ptr,
+		sge::font::drawer_ptr,
 		sge::input::key_state_tracker &,
 		sge::console::gfx &,
 		sge::input::system_ptr,
 		sge::renderer::device_ptr,
 		sge::image::multi_loader &,
-		sge::font::system_ptr,
 		sge::audio::player_ptr,
 		sge::mainloop::io_service_ptr
 	);
@@ -125,9 +125,6 @@ public:
 	sge::image::multi_loader &
 	image_loader() const;
 
-	sge::font::system_ptr const
-	font_system() const;
-
 	sge::input::system_ptr const
 	input_system() const;
 
@@ -137,8 +134,11 @@ public:
 	sge::audio::pool &
 	sound_pool();
 
-	sge::font::object &
-	font();
+	sge::font::metrics_ptr const
+	font_metrics() const;
+
+	sge::font::drawer_ptr const
+	font_drawer() const;
 
 	bool
 	key_pressed(
@@ -182,8 +182,6 @@ private:
 
 	sge::image::multi_loader &image_loader_;
 
-	sge::font::system_ptr const font_system_;
-
 	sge::audio::player_ptr const audio_player_;
 
 	net::client net_;
@@ -199,7 +197,9 @@ private:
 
 	sge::audio::pool &sound_pool_;
 
-	sge::font::object &font_;
+	sge::font::metrics_ptr const font_metrics_;
+
+	sge::font::drawer_ptr const font_drawer_;
 
 	sge::input::key_state_tracker &ks;
 

@@ -5,7 +5,8 @@
 #include "../../exp_type.hpp"
 #include "../../level_type.hpp"
 #include "../../../time_type.hpp"
-#include <sge/font/object_fwd.hpp>
+#include <sge/font/metrics_ptr.hpp>
+#include <sge/font/drawer_ptr.hpp>
 #include <sge/time/frames_counter.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -23,7 +24,8 @@ class hud
 	FCPPT_NONCOPYABLE(hud)
 public:
 	explicit hud(
-		sge::font::object &
+		sge::font::metrics_ptr,
+		sge::font::drawer_ptr
 	);
 
 	void
@@ -41,7 +43,9 @@ public:
 		time_type
 	);
 private:
-	sge::font::object &font;
+	sge::font::metrics_ptr const font_metrics_;
+	
+	sge::font::drawer_ptr const font_drawer_;
 
 	exp_type experience_;
 

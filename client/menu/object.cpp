@@ -39,17 +39,17 @@ fcppt::log::object mylogger(
 }
 
 sanguis::client::menu::object::object(
-	config::settings::object &settings_,
-	sge::renderer::device_ptr const renderer_,
-	sge::image::multi_loader &image_loader_,
-	sge::font::system_ptr const font_system_,
-	sge::input::system_ptr const input_system_,
+	config::settings::object &_settings,
+	sge::renderer::device_ptr const _renderer,
+	sge::image::multi_loader &_image_loader,
+	sge::font::metrics_ptr const _font_metrics,
+	sge::input::system_ptr const _input_system,
 	cursor::object_ptr const _cursor,
 	callbacks::object const &_callbacks
 )
 : 
 	menu_path(
-		media_path()/FCPPT_TEXT("menu")
+		sanguis::media_path()/FCPPT_TEXT("menu")
 	),
 	buttons_path(
 		menu_path/FCPPT_TEXT("buttons")
@@ -58,11 +58,11 @@ sanguis::client::menu::object::object(
 		menu_path/FCPPT_TEXT("labels")
 	),
 	m(
-		renderer_,
-		input_system_,
+		_renderer,
+		_input_system,
 		sge::gui::skins::ptr(
 			new sge::gui::skins::standard(
-				font_system_
+				_font_metrics
 			)
 		),
 		_cursor
@@ -70,16 +70,16 @@ sanguis::client::menu::object::object(
 	main_(
 		m,
 		fcppt::math::dim::structure_cast<sge::gui::dim>(
-			renderer_->screen_size()),
+			_renderer->screen_size()),
 		buttons_path,
-		image_loader_
+		_image_loader
 	),
 	connect_(
-		settings_,
+		_settings,
 		m,
 		buttons_path,
 		labels_path,
-		image_loader_
+		_image_loader
 	),
 	connect_box_(
 		m
@@ -91,7 +91,7 @@ sanguis::client::menu::object::object(
 	mover_(
 		m,
 		fcppt::math::dim::structure_cast<sge::gui::dim>(
-			renderer_->screen_size()),
+			_renderer->screen_size()),
 		main_.parent
 	),
 	connections_(
@@ -200,7 +200,7 @@ sanguis::client::menu::object::object(
 		_callbacks
 	),
 	ss(
-		renderer_
+		_renderer
 	),
 	background(
 		sprite_parameters()
@@ -211,8 +211,8 @@ sanguis::client::menu::object::object(
 				fcppt::make_shared_ptr<
 					sge::texture::part_raw
 				>(
-					renderer_->create_texture(
-						image_loader_.load(
+					_renderer->create_texture(
+						_image_loader.load(
 							media_path() / FCPPT_TEXT("dirt_tile.png")
 						)->view(),
 						sge::renderer::filter::linear,

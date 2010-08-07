@@ -85,7 +85,7 @@ sanguis::client::states::gameover::gameover(
 		context<machine>().input_system(),
 		sge::gui::skins::ptr(
 			new sge::gui::skins::standard(
-				context<machine>().font_system()
+				context<machine>().font_metrics()
 			)
 		),
 		context<machine>().cursor()

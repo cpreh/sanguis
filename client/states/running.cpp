@@ -58,7 +58,8 @@ sanguis::client::states::running::running(
 		new draw2d::scene::object(
 			context<machine>().resources(),
 			context<machine>().renderer(),
-			context<machine>().font(),
+			context<machine>().font_metrics(),
+			context<machine>().font_drawer(),
 			context<machine>().cursor(),
 			daytime_settings_.current_time()
 		)
@@ -96,7 +97,7 @@ sanguis::client::states::running::running(
 		context<machine>().renderer(),
 		context<machine>().input_system(),
 		context<machine>().image_loader(),
-		context<machine>().font_system(),
+		context<machine>().font_metrics(),
 		std::tr1::bind(
 			&running::send_perk_choose,
 			this,

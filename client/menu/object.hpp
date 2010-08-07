@@ -11,7 +11,7 @@
 #include "../config/settings/object_fwd.hpp"
 #include "../cursor/object_ptr.hpp"
 #include "../../time_type.hpp"
-#include <sge/font/system_ptr.hpp>
+#include <sge/font/metrics_ptr.hpp>
 #include <sge/gui/widgets/buttons/text.hpp>
 #include <sge/gui/widgets/backdrop.hpp>
 #include <sge/gui/widgets/graphics.hpp>
@@ -51,7 +51,7 @@ public:
 		config::settings::object &,
 		sge::renderer::device_ptr,
 		sge::image::multi_loader &,
-		sge::font::system_ptr,
+		sge::font::metrics_ptr,
 		sge::input::system_ptr,
 		cursor::object_ptr,
 		callbacks::object const &

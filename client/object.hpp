@@ -14,7 +14,6 @@
 #include <sge/console/object.hpp>
 #include <sge/font/drawer_ptr.hpp>
 #include <sge/font/metrics_ptr.hpp>
-#include <sge/font/object.hpp>
 #include <sge/input/key_state_tracker.hpp>
 #include <sge/mainloop/io_service_ptr.hpp>
 #include <sge/time/timer.hpp>
@@ -73,8 +72,6 @@ private:
 	sge::font::metrics_ptr const font_metrics_;
 
 	sge::font::drawer_ptr const font_drawer_;
-
-	sge::font::object font_;
 
 	sge::texture::manager texture_manager_;
 

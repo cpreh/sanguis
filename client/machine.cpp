@@ -38,13 +38,13 @@ sanguis::client::machine::machine(
 	server_callback const &_server_callback,
 	load::context const &_resources,
 	sge::audio::pool &_sound_pool,
-	sge::font::object &_font,
+	sge::font::metrics_ptr const _font_metrics,
+	sge::font::drawer_ptr const _font_drawer,
 	sge::input::key_state_tracker &_ks,
 	sge::console::gfx &_console_gfx,
 	sge::input::system_ptr const input_system_,
 	sge::renderer::device_ptr const renderer_,
 	sge::image::multi_loader &image_loader_,
-	sge::font::system_ptr const font_system_,
 	sge::audio::player_ptr const audio_player_,
 	sge::mainloop::io_service_ptr const io_service_
 )
@@ -54,7 +54,6 @@ sanguis::client::machine::machine(
 	input_system_(input_system_),
 	renderer_(renderer_),
 	image_loader_(image_loader_),
-	font_system_(font_system_),
 	audio_player_(audio_player_),
 	net_(
 		io_service_
@@ -86,7 +85,8 @@ sanguis::client::machine::machine(
 		)
 	),
 	sound_pool_(_sound_pool),
-	font_(_font),
+	font_metrics_(_font_metrics),
+	font_drawer_(_font_drawer),
 	ks(_ks),
 	console_gfx_(_console_gfx),
 	console_(
@@ -296,12 +296,6 @@ sanguis::client::machine::image_loader() const
 	return image_loader_;
 }
 
-sge::font::system_ptr const
-sanguis::client::machine::font_system() const
-{
-	return font_system_;
-}
-
 sge::input::system_ptr const
 sanguis::client::machine::input_system() const
 {
@@ -320,10 +314,16 @@ sanguis::client::machine::sound_pool()
 	return sound_pool_;
 }
 
-sge::font::object &
-sanguis::client::machine::font()
+sge::font::metrics_ptr const
+sanguis::client::machine::font_metrics() const
 {
-	return font_;
+	return font_metrics_;
+}
+
+sge::font::drawer_ptr const
+sanguis::client::machine::font_drawer() const
+{
+	return font_drawer_;
 }
 
 bool

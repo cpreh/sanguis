@@ -35,7 +35,7 @@ sanguis::client::states::menu::menu(
 		context<machine>().settings(),
 		context<machine>().renderer(),
 		context<machine>().image_loader(),
-		context<machine>().font_system(),
+		context<machine>().font_metrics(),
 		context<machine>().input_system(),
 		context<machine>().cursor(),
 		client::menu::callbacks::object(

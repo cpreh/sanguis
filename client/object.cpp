@@ -79,10 +79,6 @@ sanguis::client::object::object(
 			sge::image::colors::white()
 		)
 	),
-	font_(
-		font_metrics_,
-		font_drawer_
-	),
 	texture_manager_(
 		sys_.renderer(),
 		sge::texture::default_creator<
@@ -154,13 +150,13 @@ sanguis::client::object::object(
 		),
 		resources_,
 		sound_pool_,
-		font_,
+		font_metrics_,
+		font_drawer_,
 		key_state_tracker_,
 		console_gfx_,
 		sys_.input_system(),
 		sys_.renderer(),
 		sys_.image_loader(),
-		sys_.font_system(),
 		sys_.audio_player(),
 		io_service_
 	),

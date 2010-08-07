@@ -96,26 +96,26 @@ sanguis::client::perk_chooser::activation::~activation()
 }
 
 sanguis::client::perk_chooser::perk_chooser(
-	sge::renderer::device_ptr const renderer_,
-	sge::input::system_ptr const input_system_,
-	sge::image::multi_loader &image_loader_,
-	sge::font::system_ptr const font_system_,
+	sge::renderer::device_ptr const _renderer,
+	sge::input::system_ptr const _input_system,
+	sge::image::multi_loader &_image_loader,
+	sge::font::metrics_ptr const _font_metrics,
 	send_callback const &_send_callback,
 	sanguis::client::cursor::object_ptr const _cursor
 )
 :
-	image_loader_(image_loader_),
+	image_loader_(_image_loader),
 	perks_(),
 	current_level_(
 		static_cast<level_type>(0)),
 	consumed_levels_(
 		static_cast<level_type>(0)),
 	m_(
-		renderer_,
-		input_system_,
+		_renderer,
+		_input_system,
 		sge::gui::skins::ptr(
 			new sge::gui::skins::standard(
-				font_system_
+				_font_metrics
 			)
 		),
 		_cursor
@@ -125,12 +125,12 @@ sanguis::client::perk_chooser::perk_chooser(
 		sge::gui::widgets::parameters()
 			.pos(
 				dialog_pos(
-					renderer_->screen_size()
+					_renderer->screen_size()
 				)
 			)
 			.size(
 				dialog_size(
-					renderer_->screen_size()
+					_renderer->screen_size()
 				)
 			)
 			.activation(
