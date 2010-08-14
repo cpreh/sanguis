@@ -46,7 +46,7 @@ find_sound_type(
 
 }
 
-sge::audio::sound_ptr const
+sge::audio::sound::positional_ptr const
 sanguis::load::model::animation_sound::operator[](
 	animation_sound_type::type const stype) const
 {
@@ -57,7 +57,7 @@ sanguis::load::model::animation_sound::operator[](
 	);
 	
 	return it == sounds.end()
-		? sge::audio::sound_ptr()
+		? sge::audio::sound::positional_ptr()
 		: it->second.random();
 }
 

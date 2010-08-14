@@ -6,52 +6,14 @@
 #include <sge/audio/player.hpp>
 #include <sge/audio/pool.hpp>
 #include <sge/audio/multi_loader.hpp>
+#include <sge/audio/buffer.hpp>
+#include <sge/audio/sound/base.hpp>
+#include <sge/audio/sound/positional.hpp>
 #include <sge/audio/bad_sound_alloc.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
-
-namespace
-{
-
-sge::audio::sound_ptr const
-make_sound(
-	sge::audio::player_ptr const player,
-	sge::audio::file_ptr const file,
-	sanguis::load::sound_type::type const type
-)
-{
-	try
-	{
-		switch(type) {
-		case sanguis::load::sound_type::stream:
-			return player->create_stream_sound(
-				file
-			);
-		case sanguis::load::sound_type::nonstream:
-			return player->create_nonstream_sound(
-				file
-			);
-		}
-
-		throw sanguis::exception(
-			FCPPT_TEXT("Invalid sound type in load!")
-		);
-	}
-	catch(sge::audio::bad_sound_alloc const &e)
-	{
-		FCPPT_LOG_WARNING(
-			sanguis::load::log(),
-			fcppt::log::_
-				<< FCPPT_TEXT("Allocation of a sound failed! ")
-				<< e.string()
-		);
-		return sge::audio::sound_ptr();
-	}
-}
-
-}
 
 sge::audio::file_ptr const
 sanguis::load::resource::sounds::load(
@@ -94,26 +56,122 @@ sanguis::load::resource::sounds::do_load(
 	);
 }
 
-sge::audio::sound_ptr const
+// FIXME: Put in a separate function
+sge::audio::sound::base_ptr const
 sanguis::load::resource::sounds::make(
 	sge::audio::file_ptr const file,
 	sound_type::type const type) const
 {
-	sge::audio::sound_ptr const sound_(
-		make_sound(
-			player,
-			file,
-			type
-		)
-	);
+	sge::audio::sound::base_ptr sound;
 
-	if(sound_)
+	try
+	{
+		switch(type) 
+		{
+		case sanguis::load::sound_type::stream:
+			sound = 
+				player->create_nonpositional_stream(
+					file);
+		break;
+		case sanguis::load::sound_type::nonstream:
+			{
+			sge::audio::buffer_ptr const buf = 
+				map_get_or_create(
+					buffers_,
+					file,
+					std::tr1::bind(
+						&sge::audio::player::create_buffer,
+						player.get(),
+						std::tr1::placeholders::_1));
+			sound = 
+				buf->create_nonpositional();
+			}
+		break;
+		default:
+		throw sanguis::exception(
+			FCPPT_TEXT("Invalid sound type in load!")
+		);
+		}
+
+	}
+	catch(sge::audio::bad_sound_alloc const &e)
+	{
+		FCPPT_LOG_WARNING(
+			sanguis::load::log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("Allocation of a sound failed! ")
+				<< e.string()
+		);
+		sound = sge::audio::sound::base_ptr();
+	}
+
+	if(sound)
 		pool.add(
-			sound_,
+			sound,
 			sge::audio::stop_mode::continue_playing
 		);
 
-	return sound_;
+	return sound;
+}
+
+sge::audio::sound::positional_ptr const
+sanguis::load::resource::sounds::make_positional(
+	sge::audio::file_ptr const file,
+	sge::audio::sound::positional_parameters const &params,
+	sound_type::type const type) const
+{
+	sge::audio::sound::positional_ptr sound;
+
+	try
+	{
+		switch(type) 
+		{
+		case sanguis::load::sound_type::stream:
+			sound = 
+				player->create_positional_stream(
+					file,
+					params);
+		break;
+		case sanguis::load::sound_type::nonstream:
+		{
+			sge::audio::buffer_ptr const buf = 
+				map_get_or_create(
+					buffers_,
+					file,
+					std::tr1::bind(
+						&sge::audio::player::create_buffer,
+						player.get(),
+						std::tr1::placeholders::_1));
+			sound = 
+				buf->create_positional(
+					params);
+		}
+		break;
+		default:
+		throw sanguis::exception(
+			FCPPT_TEXT("Invalid sound type in load!")
+		);
+		}
+
+	}
+	catch(sge::audio::bad_sound_alloc const &e)
+	{
+		FCPPT_LOG_WARNING(
+			sanguis::load::log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("Allocation of a sound failed! ")
+				<< e.string()
+		);
+		sound = sge::audio::sound::positional_ptr();
+	}
+
+	if(sound)
+		pool.add(
+			sound,
+			sge::audio::stop_mode::continue_playing
+		);
+
+	return sound;
 }
 
 sanguis::load::resource::sounds::sounds(

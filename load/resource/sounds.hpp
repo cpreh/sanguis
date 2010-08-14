@@ -7,7 +7,10 @@
 #include <sge/audio/pool_fwd.hpp>
 #include <sge/audio/exception.hpp>
 #include <sge/audio/player_ptr.hpp>
-#include <sge/audio/sound_ptr.hpp>
+#include <sge/audio/buffer_ptr.hpp>
+#include <sge/audio/sound/base_ptr.hpp>
+#include <sge/audio/sound/positional_ptr.hpp>
+#include <sge/audio/sound/positional_parameters.hpp>
 #include <sge/audio/file_ptr.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -33,9 +36,16 @@ public:
 		fcppt::filesystem::path const &
 	) const;
 	
-	sge::audio::sound_ptr const
+	sge::audio::sound::base_ptr const
 	make(
 		sge::audio::file_ptr,
+		sound_type::type
+	) const;
+
+	sge::audio::sound::positional_ptr const
+	make_positional(
+		sge::audio::file_ptr,
+		sge::audio::sound::positional_parameters const &,
 		sound_type::type
 	) const;
 
@@ -59,10 +69,19 @@ private:
 		sge::audio::file_ptr
 	> sound_map;
 
+	typedef
+	std::map
+	<
+		sge::audio::file_ptr,
+		sge::audio::buffer_ptr
+	>
+	buffer_map;
+
 	sge::audio::multi_loader &ml;
 	sge::audio::player_ptr const player;
 	sge::audio::pool &pool;
 	mutable sound_map sounds_;
+	mutable buffer_map buffers_;
 };
 
 }

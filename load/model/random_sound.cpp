@@ -90,11 +90,11 @@ sanguis::load::model::random_sound::random_sound(
 	FCPPT_ASSERT(ranges.size() == sounds_.size());
 }
 
-sge::audio::sound_ptr const
+sge::audio::sound::positional_ptr const
 sanguis::load::model::random_sound::random() const
 {
 	if(sounds_.empty())
-		return sge::audio::sound_ptr();
+		return sge::audio::sound::positional_ptr();
 	
 	probability_type const number(
 		rng()

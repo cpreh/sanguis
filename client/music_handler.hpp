@@ -2,8 +2,7 @@
 #define SANGUIS_CLIENT_MUSIC_HANDLER_HPP_INCLUDED
 
 #include "../load/resource/sounds_fwd.hpp"
-#include <sge/audio/sound_ptr.hpp>
-#include <sge/audio/unit.hpp>
+#include <sge/audio/sound/base_ptr.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/object_fwd.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
@@ -23,7 +22,7 @@ public:
 private:
 	load::resource::sounds const &resource_;
 	fcppt::signal::scoped_connection const volume_connection_;
-	sge::audio::sound_ptr current_;
+	sge::audio::sound::base_ptr current_;
 
 	void next_title();
 
@@ -31,7 +30,7 @@ private:
 		sge::console::arg_list const &,
 		sge::console::object &);
 	
-	sge::audio::sound_ptr const
+	sge::audio::sound::base_ptr const
 	load_random() const;
 };
 }

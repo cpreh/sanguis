@@ -40,7 +40,7 @@ sanguis::load::model::conditional_sound::conditional_sound(
 	)
 {}
 
-sge::audio::sound_ptr const
+sge::audio::sound::positional_ptr const
 sanguis::load::model::conditional_sound::random() const
 {
 	// avoid the corner case in which the probability is 1
@@ -53,5 +53,5 @@ sanguis::load::model::conditional_sound::random() const
 		?
 			random_sound_.random()
 		:
-			sge::audio::sound_ptr();
+			sge::audio::sound::positional_ptr();
 }

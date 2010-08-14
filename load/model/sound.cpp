@@ -45,11 +45,12 @@ sanguis::load::model::sound::probability() const
 	return probability_;
 }
 
-sge::audio::sound_ptr const
+sge::audio::sound::positional_ptr const
 sanguis::load::model::sound::make() const
 {
-	return ctx.get().make(
+	return ctx.get().make_positional(
 		file,
+		sge::audio::sound::positional_parameters(),
 		sound_type::nonstream
 	);
 }

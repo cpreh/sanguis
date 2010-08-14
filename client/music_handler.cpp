@@ -2,7 +2,7 @@
 #include "log.hpp"
 #include "../media_path.hpp"
 #include "../load/resource/sounds.hpp"
-#include <sge/audio/sound.hpp>
+#include <sge/audio/sound/base.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/console/object.hpp>
 #include <sge/exception.hpp>
@@ -39,13 +39,13 @@ void sanguis::client::music_handler::process()
 	if (!current_)
 		return;
 	
-	if (current_->status() == sge::audio::sound_status::stopped)
+	if (current_->status() == sge::audio::sound::play_status::stopped)
 		next_title();
 }
 
 void sanguis::client::music_handler::next_title()
 {
-	sge::audio::sound_ptr const old(
+	sge::audio::sound::base_ptr const old(
 		current_
 	);
 	
@@ -55,11 +55,10 @@ void sanguis::client::music_handler::next_title()
 		return;
 	
 	if(old)
-		current_->attenuation(
-			old->attenuation()
-		);
+		current_->gain(
+			old->gain());
 	
-	current_->play(sge::audio::play_mode::once);
+	current_->play(sge::audio::sound::repeat::once);
 }
 
 void sanguis::client::music_handler::volume(sge::console::arg_list const &a,sge::console::object &o)
@@ -78,9 +77,9 @@ void sanguis::client::music_handler::volume(sge::console::arg_list const &a,sge:
 
 	try
 	{
-		current_->attenuation(
+		current_->gain(
 			fcppt::lexical_cast<
-				sge::audio::unit
+				sge::audio::scalar
 			>(
 				a[1]
 			)
@@ -92,7 +91,7 @@ void sanguis::client::music_handler::volume(sge::console::arg_list const &a,sge:
 	}
 }
 
-sge::audio::sound_ptr const
+sge::audio::sound::base_ptr const
 sanguis::client::music_handler::load_random() const
 {
 	// TODO: choose a random one!
@@ -125,5 +124,5 @@ sanguis::client::music_handler::load_random() const
 			);
 		}
 	
-	return sge::audio::sound_ptr();
+	return sge::audio::sound::base_ptr();
 }

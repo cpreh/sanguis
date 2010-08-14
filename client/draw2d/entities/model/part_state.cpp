@@ -6,7 +6,7 @@
 #include "../../../../load/model/weapon_category.hpp"
 #include "../../../../animation_sound_type.hpp"
 #include <sge/sprite/object_impl.hpp>
-#include <sge/audio/sound.hpp>
+#include <sge/audio/sound/positional.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 
 // TODO: hier animationskram rausnehmen, ggf. friend-Beziehung wegnehmen
@@ -53,13 +53,13 @@ sanguis::client::draw2d::entities::model::part_state::update()
 	if(
 		!sstart || 
 		(!start_played_ && 
-		sstart->status() == sge::audio::sound_status::stopped)
+		sstart->status() == sge::audio::sound::play_status::stopped)
 	)
 	{
 		start_played_ = true;
 		play(
 			srunning,
-			sge::audio::play_mode::loop);
+			sge::audio::sound::repeat::loop);
 	}
 }
 
@@ -70,8 +70,8 @@ sanguis::client::draw2d::entities::model::part_state::~part_state()
 
 void
 sanguis::client::draw2d::entities::model::part_state::play(
-	sge::audio::sound_ptr const s,
-	sge::audio::play_mode::type const ss
+	sge::audio::sound::positional_ptr const s,
+	sge::audio::sound::repeat::type const ss
 )
 {
 	if (s)
@@ -80,17 +80,17 @@ sanguis::client::draw2d::entities::model::part_state::play(
 
 void
 sanguis::client::draw2d::entities::model::part_state::update_sound(
-	sge::audio::sound_ptr const s
+	sge::audio::sound::positional_ptr const s
 )
 {
 	if (s)
-		s->pos(
-			sge::audio::point(
-				static_cast<sge::audio::unit>(
+		s->position(
+			sge::audio::vector(
+				static_cast<sge::audio::scalar>(
 					ref_.object().pos().x()
 				),
-				static_cast<sge::audio::unit>(0),
-				static_cast<sge::audio::unit>(
+				static_cast<sge::audio::scalar>(0),
+				static_cast<sge::audio::scalar>(
 					ref_.object().pos().y()
 				)
 			)
@@ -99,7 +99,7 @@ sanguis::client::draw2d::entities::model::part_state::update_sound(
 
 void
 sanguis::client::draw2d::entities::model::part_state::init_sound(
-	sge::audio::sound_ptr const s
+	sge::audio::sound::positional_ptr const s
 )
 {
 	if (!s)
@@ -108,8 +108,8 @@ sanguis::client::draw2d::entities::model::part_state::init_sound(
 #if 0
 	s->positional(true);
 	s->rolloff(
-		static_cast<sge::audio::unit>(1)
-		/ static_cast<sge::audio::unit>(
+		static_cast<sge::audio::scalar>(1)
+		/ static_cast<sge::audio::scalar>(
 			resolution().h()
 		)
 	);

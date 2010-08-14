@@ -5,7 +5,7 @@
 #include "../resource/sounds_fwd.hpp"
 #include "../probability_type.hpp"
 #include <sge/parse/json/member_vector.hpp>
-#include <sge/audio/sound_fwd.hpp>
+#include <sge/audio/sound/positional_ptr.hpp>
 #include <fcppt/random/uniform.hpp>
 
 namespace sanguis
@@ -21,7 +21,7 @@ public:
 		sge::parse::json::member_vector const &,
 		resource::sounds const &);
 	
-	sge::audio::sound_ptr const
+	sge::audio::sound::positional_ptr const
 	random() const;
 private:
 	probability_type range;

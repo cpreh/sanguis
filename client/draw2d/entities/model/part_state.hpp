@@ -6,8 +6,8 @@
 #include "../../../../load/model/animation_fwd.hpp"
 #include "../../../../animation_type.hpp"
 #include "../../../../weapon_type.hpp"
-#include <sge/audio/sound_ptr.hpp>
-#include <sge/audio/play_mode.hpp>
+#include <sge/audio/sound/positional_ptr.hpp>
+#include <sge/audio/sound/repeat.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -47,7 +47,7 @@ private:
 
 	load::model::animation const &anim_;
 
-	sge::audio::sound_ptr const
+	sge::audio::sound::positional_ptr const
 		sstart,
 		srunning,
 		send;
@@ -60,18 +60,18 @@ private:
 
 	void
 	play(
-		sge::audio::sound_ptr,
-		sge::audio::play_mode::type = sge::audio::play_mode::once
+		sge::audio::sound::positional_ptr,
+		sge::audio::sound::repeat::type = sge::audio::sound::repeat::once
 	);
 	
 	void
 	update_sound(
-		sge::audio::sound_ptr
+		sge::audio::sound::positional_ptr
 	);
 
 	void
 	init_sound(
-		sge::audio::sound_ptr
+		sge::audio::sound::positional_ptr
 	);
 
 	void

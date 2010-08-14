@@ -4,7 +4,7 @@
 #include "conditional_sound.hpp"
 #include "../resource/sounds_fwd.hpp"
 #include "../../animation_sound_type.hpp"
-#include <sge/audio/sound_fwd.hpp>
+#include <sge/audio/sound/positional_ptr.hpp>
 #include <sge/parse/json/member_vector.hpp>
 #include <map>
 
@@ -18,7 +18,7 @@ namespace model
 class animation_sound
 {
 public:
-	sge::audio::sound_ptr const
+	sge::audio::sound::positional_ptr const
 	operator[](
 		animation_sound_type::type
 	) const;
