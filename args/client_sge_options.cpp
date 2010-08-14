@@ -5,9 +5,10 @@
 #include <sge/mainloop/asio/create_io_service.hpp>
 #include <sge/renderer/parameters.hpp>
 #include <sge/renderer/refresh_rate_dont_care.hpp>
-#include <sge/systems/list.hpp>
-#include <sge/systems/image_loader.hpp>
 #include <sge/systems/audio_loader.hpp>
+#include <sge/systems/audio_player_default.hpp>
+#include <sge/systems/image_loader.hpp>
+#include <sge/systems/list.hpp>
 #include <sge/systems/parameterless.hpp>
 #include <sge/window/parameters.hpp>
 #include <sge/extension_set.hpp>
@@ -78,7 +79,7 @@ sanguis::args::client_sge_options(
 			)
 		)
 		(
-			sge::systems::parameterless::audio_player
+			sge::systems::audio_player_default()
 		)
 		(
 			sge::systems::parameterless::font // TODO: make sure that we can load truetype fonts, use a multi loader here as well!
