@@ -29,6 +29,7 @@
 #include <sge/renderer/screen_size.hpp>
 #include <sge/font/metrics_ptr.hpp>
 #include <sge/font/drawer_ptr.hpp>
+#include <sge/audio/listener_fwd.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -54,6 +55,7 @@ public:
 		sge::renderer::device_ptr,
 		sge::font::metrics_ptr,
 		sge::font::drawer_ptr,
+		sge::audio::listener &,
 		client::cursor::object_ptr,
 		std::tm const &initial_time
 	);
@@ -164,6 +166,8 @@ private:
 	sprite::particle::system particle_system_;
 
 	hud hud_;
+
+	sge::audio::listener &audio_listener_;
 
 	bool paused_;
 

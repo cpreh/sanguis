@@ -33,6 +33,7 @@
 #include <sge/sprite/intrusive/system_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/image/colors.hpp>
+#include <sge/audio/listener.hpp>
 
 #include <fcppt/math/matrix/basic_impl.hpp>
 #include <fcppt/math/matrix/translation.hpp>
@@ -58,6 +59,7 @@ sanguis::client::draw2d::scene::object::object(
 	sge::renderer::device_ptr const _rend,
 	sge::font::metrics_ptr const _font_metrics,
 	sge::font::drawer_ptr const _font_drawer,
+	sge::audio::listener &_audio_listener,
 	client::cursor::object_ptr const _cursor,
 	std::tm const &_current_time
 )
@@ -72,6 +74,7 @@ sanguis::client::draw2d::scene::object::object(
 		_font_metrics,
 		_font_drawer
 	),
+	audio_listener_(_audio_listener),
 	paused_(false),
 	background_id_(invalid_id),
 	player_center_(
@@ -522,12 +525,25 @@ sanguis::client::draw2d::scene::object::transform(
 )
 {
 	player_center_ = center_;
+
+	// TODO: abstract this, and why (x,z)?
+	audio_listener_.position(
+		sge::audio::vector(
+			static_cast<sge::audio::scalar>(
+				player_center_.x()
+			),
+			static_cast<sge::audio::scalar>(0),
+			static_cast<sge::audio::scalar>(
+				player_center_.y()
+			)
+		)
+	);
 }
 
 sanguis::client::draw2d::transform_callback const &
 sanguis::client::draw2d::scene::object::transform_callback() const
 {
-	return transform_callback_;	
+	return transform_callback_;
 }
 
 sanguis::client::draw2d::insert_callback const &

@@ -22,6 +22,7 @@
 #include "../../tick_event.hpp"
 #include "../../cast_enum.hpp"
 #include <sge/audio/pool.hpp>
+#include <sge/audio/player.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/console/object.hpp>
 #include <sge/renderer/device.hpp>
@@ -60,6 +61,7 @@ sanguis::client::states::running::running(
 			context<machine>().renderer(),
 			context<machine>().font_metrics(),
 			context<machine>().font_drawer(),
+			context<machine>().audio_player()->listener(),
 			context<machine>().cursor(),
 			daytime_settings_.current_time()
 		)
