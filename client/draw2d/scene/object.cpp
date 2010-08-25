@@ -430,10 +430,12 @@ sanguis::client::draw2d::scene::object::insert(
 	entity_id const id
 )
 {
-	std::pair<
+	typedef std::pair<
 		entity_map::iterator,
 		bool
-	> const ret(
+	> ret_type;
+
+	ret_type const ret(
 		entities_.insert(
 			id,
 			e

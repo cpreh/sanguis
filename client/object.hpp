@@ -8,6 +8,7 @@
 #include "../net/port_type.hpp"
 #include "../server/object_fwd.hpp"
 #include "../main_object.hpp"
+#include "../scoped_machine.hpp"
 
 #include <sge/audio/pool.hpp>
 #include <sge/console/gfx.hpp>
@@ -96,6 +97,12 @@ private:
 	bool running_;
 
 	bool next_handler_;
+
+	typedef sanguis::scoped_machine<
+		client::machine
+	> scoped_machine;
+
+	scoped_machine scoped_machine_;
 };
 
 }

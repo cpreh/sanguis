@@ -6,6 +6,7 @@
 #include "../load/context_base_fwd.hpp"
 #include "../net/port_type.hpp"
 #include "../main_object.hpp"
+#include "../scoped_machine.hpp"
 #include <sge/systems/instance_fwd.hpp>
 #include <sge/time/timer.hpp>
 #include <fcppt/thread/object.hpp>
@@ -55,9 +56,18 @@ private:
 	server::machine machine_;
 
 	fcppt::signal::scoped_connection const timer_connection_;
+
 	bool running_;
+
 	boost::mutex mutex_;
+
 	fcppt::thread::object server_thread_;
+
+	typedef sanguis::scoped_machine<
+		server::machine
+	> scoped_machine;
+
+	scoped_machine scoped_machine_;
 };
 
 }

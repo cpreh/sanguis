@@ -5,6 +5,7 @@
 #include "states/unpaused.hpp"
 #include "../time_type.hpp"
 #include "../tick_event.hpp"
+#include "../scoped_machine_impl.hpp"
 #include <sge/systems/instance.hpp>
 #include <sge/time/second.hpp>
 #include <fcppt/log/headers.hpp>
@@ -46,6 +47,9 @@ sanguis::server::object::object(
 			&object::mainloop,
 			this
 		)
+	),
+	scoped_machine_(
+		machine_
 	)
 {
 }
@@ -83,8 +87,6 @@ sanguis::server::object::mainloop()
 {
 	try
 	{
-		machine_.initiate();
-
 		while (running())
 			machine_.run();
 	}

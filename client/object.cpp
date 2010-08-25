@@ -8,6 +8,7 @@
 #include "../media_path.hpp"
 #include "../tick_event.hpp"
 #include "../time_type.hpp"
+#include "../scoped_machine_impl.hpp"
 
 #include <sge/config/media_path.hpp>
 #include <sge/console/sprite_object.hpp>
@@ -169,6 +170,9 @@ sanguis::client::object::object(
 	),
 	next_handler_(
 		true
+	),
+	scoped_machine_(
+		machine_
 	)
 {
 	if(	
@@ -183,8 +187,6 @@ sanguis::client::object::object(
 				sge::renderer::state::bool_::enable_multi_sampling = true
 			)
 		);
-
-	machine_.initiate();
 }
 
 sanguis::client::object::~object()
