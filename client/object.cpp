@@ -18,6 +18,7 @@
 #include <sge/font/system.hpp>
 #include <sge/image/color/format.hpp>
 #include <sge/image/colors.hpp>
+#include <sge/image/create_texture.hpp>
 #include <sge/image/multi_loader.hpp>
 #include <sge/mainloop/io_service.hpp>
 #include <sge/renderer/filter/linear.hpp>
@@ -26,14 +27,13 @@
 #include <sge/renderer/state/trampoline.hpp>
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/device.hpp>
+#include <sge/renderer/resource_flags_none.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/time/second.hpp>
 #include <sge/time/timer.hpp>
-#include <sge/texture/add_image.hpp>
-#include <sge/texture/default_creator_impl.hpp>
-#include <sge/texture/no_fragmented.hpp>
+#include <sge/texture/part_raw.hpp>
 #include <sge/window/instance.hpp>
 
 #include <fcppt/function/object.hpp>
@@ -50,8 +50,8 @@
 #include <cstdlib>
 
 sanguis::client::object::object(
-	sge::systems::instance &sys_,
-	boost::program_options::variables_map const &variables_map_
+	sge::systems::instance &_sys,
+	boost::program_options::variables_map const &_variables_map
 )
 :
 	settings_(
@@ -60,7 +60,7 @@ sanguis::client::object::object(
 	saver_(
 		settings_
 	),
-	sys_(sys_),
+	sys_(_sys),
 	key_state_tracker_(
 		sys_.input_system()
 	),
@@ -80,16 +80,6 @@ sanguis::client::object::object(
 			sge::image::colors::white()
 		)
 	),
-	texture_manager_(
-		sys_.renderer(),
-		sge::texture::default_creator<
-			sge::texture::no_fragmented
-		>(
-			sys_.renderer(),
-			sge::image::color::format::rgba8, // TODO: what do we want to use here?
-			sge::renderer::filter::linear
-		)
-	),
 	console_(
 		FCPPT_TEXT('/')
 	),
@@ -102,11 +92,16 @@ sanguis::client::object::object(
 		sge::console::sprite_object(
 			sge::console::sprite_parameters()
 			.texture(
-				sge::texture::add_image(
-					texture_manager_,
-					sys_.image_loader().load(
+				fcppt::make_shared_ptr<
+					sge::texture::part_raw
+				>(
+					sge::image::create_texture(
 						sanguis::media_path()
-						/ FCPPT_TEXT("console_back.png")
+						/ FCPPT_TEXT("console_back.png"),
+						sys_.renderer(),
+						sys_.image_loader(),
+						sge::renderer::filter::linear,
+						sge::renderer::resource_flags::none
 					)
 				)
 			)
@@ -125,7 +120,7 @@ sanguis::client::object::object(
 			)
 			.elements()
 		),
-		variables_map_[
+		_variables_map[
 			"history-size"
 		].as<
 			sge::console::output_line_limit
@@ -177,7 +172,7 @@ sanguis::client::object::object(
 {
 	if(	
 		args::multi_sampling(
-			variables_map_
+			_variables_map
 		)
 		> 0
 	)

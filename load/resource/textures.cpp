@@ -6,7 +6,6 @@
 #include "../../exception.hpp"
 #include "../../media_path.hpp"
 #include <sge/texture/add_image.hpp>
-#include <sge/texture/default_creator_impl.hpp>
 #include <sge/texture/no_fragmented.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/renderer/filter/linear.hpp>
@@ -22,6 +21,8 @@
 #include <fcppt/string.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <boost/algorithm/string/trim.hpp>
+#include <boost/spirit/home/phoenix/object/construct.hpp>
+#include <boost/spirit/home/phoenix/object/new.hpp>
 
 namespace
 {
@@ -136,22 +137,26 @@ sanguis::load::resource::textures::do_load_inner(
 }
 
 sanguis::load::resource::textures::textures(
-	sge::renderer::device_ptr const rend,
-	sge::image::multi_loader &il
+	sge::renderer::device_ptr const _rend,
+	sge::image::multi_loader &_il
 )
 :
 	texman(
-		rend,
-		sge::texture::default_creator<
-			sge::texture::no_fragmented
+		_rend,
+		boost::phoenix::construct<
+			sge::texture::fragmented_auto_ptr
 		>(
-			rend,
-			sge::image::color::format::rgba8,
-			filter
+			boost::phoenix::new_<
+				sge::texture::no_fragmented
+			>(
+				_rend,
+				sge::image::color::format::rgba8,
+				filter
+			)
 		)
 	),
 	il(
-		il
+		_il
 	)
 {
 	// look for .tex files

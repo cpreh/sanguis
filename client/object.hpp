@@ -19,7 +19,6 @@
 #include <sge/mainloop/io_service_ptr.hpp>
 #include <sge/time/timer.hpp>
 #include <sge/systems/instance_fwd.hpp>
-#include <sge/texture/manager.hpp>
 
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
@@ -73,8 +72,6 @@ private:
 	sge::font::metrics_ptr const font_metrics_;
 
 	sge::font::drawer_ptr const font_drawer_;
-
-	sge::texture::manager texture_manager_;
 
 	sge::console::object console_;
 
