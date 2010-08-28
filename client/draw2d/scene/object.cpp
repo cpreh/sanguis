@@ -6,7 +6,7 @@
 #include "../message/dispatcher.hpp"
 #include "../factory/client.hpp"
 #include "../sprite/order.hpp"
-#include "../sprite/matrix.hpp"
+#include "../sprite/float_unit.hpp"
 #include "../entities/with_visibility.hpp"
 #include "../sunlight/make_color.hpp"
 #include "../sunlight/sun_angle.hpp"
@@ -24,6 +24,7 @@
 
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/material.hpp>
+#include <sge/renderer/matrix_pixel_to_space.hpp>
 #include <sge/renderer/state/scoped.hpp>
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/bool.hpp>
@@ -35,7 +36,10 @@
 #include <sge/image/colors.hpp>
 #include <sge/audio/listener.hpp>
 
+#include <fcppt/math/matrix/arithmetic.hpp>
 #include <fcppt/math/matrix/basic_impl.hpp>
+#include <fcppt/math/matrix/orthogonal_xy.hpp>
+#include <fcppt/math/matrix/static.hpp>
 #include <fcppt/math/matrix/translation.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -115,8 +119,25 @@ sanguis::client::draw2d::scene::object::object(
 	entities_(),
 	current_time_(
 		_current_time
+	),
+	default_transform_(
+		sge::renderer::matrix_pixel_to_space<
+			sprite::float_unit
+		>(
+			rend_->screen_size()
+		)
 	)
-{}
+{
+	rend_->material(
+		sge::renderer::material(
+			sge::image::colors::black(),
+			sge::image::colors::white(),
+			sge::image::colors::black(),
+			sge::image::colors::black(),
+			0.
+		)
+	);
+}
 
 sanguis::client::draw2d::scene::object::~object()
 {}
@@ -171,10 +192,12 @@ sanguis::client::draw2d::scene::object::client_message(
 	client::messages::add const &m
 )
 {
-	std::pair<
+	typedef std::pair<
 		entity_map::iterator,
 		bool
-	> const ret(
+	> ret_type;
+	
+	ret_type const ret(
 		entities_.insert(
 			next_id(),
 			factory::client(
@@ -290,17 +313,26 @@ sanguis::client::draw2d::scene::object::control_environment() const
 void
 sanguis::client::draw2d::scene::object::render_systems()
 {
+	FCPPT_ASSERT(
+		background_id_ != invalid_id
+	);
+
 	sge::renderer::state::scoped const state_(
 		rend_,
 		sge::sprite::render_states()
 	);
 
-	// TODO: the sprite systems should not hold their matrices!
-
-	FCPPT_ASSERT(
-		background_id_ != invalid_id
+	rend_->transform(
+		sge::renderer::matrix_mode::world,
+		default_transform_
 	);
 
+	rend_->transform(
+		sge::renderer::matrix_mode::projection,
+		fcppt::math::matrix::orthogonal_xy<
+			sprite::float_unit
+		>()
+	);
 
 	render_lighting();
 
@@ -311,7 +343,7 @@ sanguis::client::draw2d::scene::object::render_systems()
 		index <= z_ordering::rubble;
 		++index
 	)
-		particle_system_.render(
+		particle_system_.render_advanced(
 			index,
 			sge::sprite::default_equal()
 		);
@@ -323,14 +355,17 @@ sanguis::client::draw2d::scene::object::render_systems()
 		index <= z_ordering::healthbar_upper;
 		++index
 	)
-		colored_system_.render(
+		colored_system_.render_advanced(
 			index,
 			sge::sprite::default_equal()
 		);
 
-	client_system_.matrices();
+	rend_->transform(
+		sge::renderer::matrix_mode::world,
+		default_transform_
+	);
 
-	client_system_.render(
+	client_system_.render_advanced(
 		z_ordering::cursor,
 		sge::sprite::default_equal()
 	);
@@ -355,20 +390,8 @@ sanguis::client::draw2d::scene::object::render_lighting()
 		)
 	);
 
-	rend_->material(
-		sge::renderer::material(
-			sge::image::colors::black(),
-			sge::image::colors::white(),
-			sge::image::colors::black(),
-			sge::image::colors::black(),
-			0.
-		)
-	);
-
-	client_system_.matrices();
-
-	vector2 const translation_(
-		screen_center(
+	vector2 const translation(
+		scene::screen_center(
 			player_center_,
 			screen_size()
 		)
@@ -378,10 +401,9 @@ sanguis::client::draw2d::scene::object::render_lighting()
 		sge::renderer::matrix_mode::texture,
 		fcppt::math::matrix::translation(
 			fcppt::math::vector::construct(
-				-translation_
+				-translation
 				/
-				// TODO: HACK, HACK
-				background_dim(
+				scene::background_dim(
 					entity(
 						background_id_
 					)
@@ -391,26 +413,31 @@ sanguis::client::draw2d::scene::object::render_lighting()
 		)
 	);
 
-	client_system_.render(
+	client_system_.render_advanced(
 		z_ordering::background,
 		sge::sprite::default_equal()
 	);
 
-	client_system_.renderer()->transform(
+	rend_->transform(
 		sge::renderer::matrix_mode::texture,
-		sprite::client::system::matrix::identity()
+		fcppt::math::matrix::static_<
+			sprite::float_unit,
+			4,
+			4
+		>::type::identity()
 	);
 
-	normal_system_.transform(		
+	rend_->transform(
+		sge::renderer::matrix_mode::world,
+		default_transform_
+		*
 		fcppt::math::matrix::translation(
-			translation_.x(),
-			translation_.y(),
+			translation.x(),
+			translation.y(),
 			static_cast<sprite::float_unit>(0)
 		)
 	);
 	
-	normal_system_.matrices();
-
 	for(
 		sprite::order index(
 			z_ordering::corpses
@@ -418,7 +445,7 @@ sanguis::client::draw2d::scene::object::render_lighting()
 		index <= z_ordering::player_upper;
 		++index
 	)
-		normal_system_.render(
+		normal_system_.render_advanced(
 			index,
 			sge::sprite::default_equal()
 		);

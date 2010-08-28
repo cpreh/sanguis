@@ -13,6 +13,7 @@
 #include "../sprite/colored/system.hpp"
 #include "../sprite/particle/system.hpp"
 #include "../sprite/point.hpp"
+#include "../sprite/matrix.hpp"
 #include "../transform_callback.hpp"
 #include "../insert_callback.hpp"
 #include "../../control/environment_fwd.hpp"
@@ -32,6 +33,7 @@
 #include <sge/audio/listener_fwd.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/math/vector/basic_decl.hpp>
+#include <fcppt/math/matrix/basic_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
@@ -152,7 +154,7 @@ private:
 
 	sge::renderer::screen_size const
 	screen_size() const;
-	
+
 	load::context const &resources_;
 
 	sge::renderer::device_ptr const rend_;
@@ -199,6 +201,8 @@ private:
 	entity_map entities_;
 
 	std::tm current_time_;
+
+	sprite::matrix const default_transform_;
 };
 
 }
