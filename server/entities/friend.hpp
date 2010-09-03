@@ -10,7 +10,7 @@
 #include "../environment/load_context_ptr.hpp"
 #include "../damage/armor.hpp"
 #include "../ai/create_function.hpp"
-#include "../weapons/auto_ptr.hpp"
+#include "../weapons/unique_ptr.hpp"
 #include "../health_type.hpp"
 #include "../../friend_type.hpp"
 #include "../../time_type.hpp"
@@ -38,7 +38,7 @@ public:
 		health_type health,
 		entities::movement_speed,
 		ai::create_function const &,
-		weapons::auto_ptr weapon
+		weapons::unique_ptr weapon
 	);
 private:
 	void

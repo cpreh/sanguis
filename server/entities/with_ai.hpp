@@ -4,8 +4,9 @@
 #include "with_ai_fwd.hpp"
 #include "with_auras.hpp"
 #include "with_weapon.hpp"
-#include "../ai/auto_ptr.hpp"
+#include "../ai/unique_ptr.hpp"
 #include "../ai/create_function.hpp"
+#include "../weapons/unique_ptr.hpp"
 
 namespace sanguis
 {
@@ -20,9 +21,9 @@ class with_ai
 	public with_weapon
 {
 protected:
-	with_ai(
+	explicit with_ai(
 		ai::create_function const &create_ai_,
-		weapons::auto_ptr start_weapon
+		weapons::unique_ptr start_weapon
 	);
 
 	~with_ai();
@@ -40,7 +41,7 @@ private:
 
 	ai::create_function const create_ai_;
 
-	ai::auto_ptr ai_;
+	ai::unique_ptr ai_;
 };
 
 }

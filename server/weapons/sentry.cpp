@@ -49,7 +49,7 @@ sanguis::server::weapons::sentry::do_attack(
 				entities::health_type(100),
 				entities::movement_speed(0),
 				ai::create_simple(),
-				auto_ptr(
+				weapons::unique_ptr(
 					sentry_weapon()
 				)
 			)

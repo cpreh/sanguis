@@ -12,39 +12,41 @@
 #include <boost/logic/tribool.hpp>
 
 sanguis::server::entities::friend_::friend_(
-	friend_type::type const ftype_,
-	server::environment::load_context_ptr const load_context,
-	damage::armor const &armor_,
-	health_type const health_,
-	entities::movement_speed const movement_speed_,
-	ai::create_function const &ai_,
-	weapons::auto_ptr weapon_
+	friend_type::type const _ftype,
+	server::environment::load_context_ptr const _load_context,
+	damage::armor const &_armor,
+	health_type const _health,
+	entities::movement_speed const _movement_speed,
+	ai::create_function const &_ai,
+	weapons::unique_ptr _weapon
 )
 :
 	with_ai(
-		ai_,
-		weapon_
+		_ai,
+		move(
+			_weapon
+		)
 	),
 	with_buffs(),
 	with_dim(
-		load_context->entity_dim(
+		_load_context->entity_dim(
 			load::friend_name(
-				ftype_
+				_ftype
 			)
 		)
 	),
 	with_health(
-		health_,
-		armor_
+		_health,
+		_armor
 	),
 	movable(
 		property::initial(
-			movement_speed_,
+			_movement_speed,
 			0
 		),
 		static_cast<space_unit>(0)
 	),
-	ftype_(ftype_)
+	ftype_(_ftype)
 {}
 
 void

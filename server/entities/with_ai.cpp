@@ -3,16 +3,18 @@
 #include "../ai/base.hpp"
 
 sanguis::server::entities::with_ai::with_ai(
-	ai::create_function const &create_ai_,
-	weapons::auto_ptr start_weapon
+	ai::create_function const &_create_ai,
+	weapons::unique_ptr _start_weapon
 )
 :
 	base(),
 	with_auras(),
 	with_weapon(
-		start_weapon
+		move(
+			_start_weapon
+		)
 	),
-	create_ai_(create_ai_),
+	create_ai_(_create_ai),
 	ai_()
 {}
 

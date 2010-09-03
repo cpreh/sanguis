@@ -4,7 +4,7 @@
 #include "base.hpp"
 #include "property/always_max.hpp"
 #include "property/value.hpp"
-#include "../weapons/auto_ptr.hpp"
+#include "../weapons/unique_ptr.hpp"
 #include "../pos_type.hpp"
 #include "../../weapon_type.hpp"
 #include "../../time_type.hpp"
@@ -25,7 +25,7 @@ class with_weapon
 {
 protected:
 	explicit with_weapon(
-		weapons::auto_ptr start_weapon
+		weapons::unique_ptr start_weapon
 	);
 
 	virtual void
@@ -40,7 +40,7 @@ public:
 
 	void
 	add_weapon(
-		weapons::auto_ptr
+		weapons::unique_ptr
 	);
 
 	void

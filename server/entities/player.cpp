@@ -45,7 +45,7 @@ sanguis::server::entities::player::player(
 	),
 	with_perks(),
 	with_weapon(
-		weapons::auto_ptr()
+		weapons::unique_ptr()
 	),
 	name_(name_),
 	player_id_(player_id_),

@@ -6,6 +6,7 @@
 #include "../../messages/change_weapon.hpp"
 #include "../../messages/create.hpp"
 #include "../../exception.hpp"
+#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/tr1/functional.hpp>
@@ -23,7 +24,7 @@ target_undefined(
 }
 
 sanguis::server::entities::with_weapon::with_weapon(
-	weapons::auto_ptr start_weapon
+	weapons::unique_ptr _start_weapon
 )
 :
 	base(),
@@ -58,11 +59,13 @@ sanguis::server::entities::with_weapon::with_weapon(
 		)
 	)
 {
-	if(!start_weapon.get())
+	if(!_start_weapon.get())
 		return;
 
 	add_weapon(
-		start_weapon
+		move(
+			_start_weapon
+		)
 	);
 }
 
@@ -141,7 +144,7 @@ sanguis::server::entities::with_weapon::change_weapon(
 
 void
 sanguis::server::entities::with_weapon::add_weapon(
-	weapons::auto_ptr ptr
+	weapons::unique_ptr ptr
 )
 {
 	weapon_type::type const wt(
@@ -180,9 +183,12 @@ sanguis::server::entities::with_weapon::add_weapon(
 	}
 
 	if(
-		!weapons_.insert(
+		!fcppt::container::ptr::insert_unique_ptr_map(
+			weapons_,
 			wt,
-			ptr
+			move(
+				ptr
+			)
 		).second
 	)
 		throw exception(

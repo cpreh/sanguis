@@ -11,6 +11,7 @@
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/optional_impl.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <boost/spirit/home/phoenix/core/argument.hpp>
 #include <boost/spirit/home/phoenix/object/new.hpp>
 
@@ -48,8 +49,10 @@ sanguis::server::entities::pickups::monster::do_pickup(
 					boost::phoenix::arg_names::arg1,
 					receiver.link()
 				),
-				weapons::auto_ptr(
-					new weapons::melee(
+				weapons::unique_ptr(
+					fcppt::make_unique_ptr<
+						weapons::melee
+					>(
 						weapons::range(100),
 						weapons::base_cooldown(1),
 						weapons::damage(5)

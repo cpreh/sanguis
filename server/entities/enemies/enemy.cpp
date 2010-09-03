@@ -15,45 +15,47 @@
 #include <fcppt/math/dim/basic_impl.hpp>
 
 sanguis::server::entities::enemies::enemy::enemy(
-	enemy_type::type const etype_,
-	server::environment::load_context_ptr const load_context_,
-	damage::armor const &armor_,
-	entities::health_type const health_,
-	entities::movement_speed const movement_speed_,
-	ai::create_function const &ai_,
-	weapons::auto_ptr weapon_,
-	probability_type const spawn_chance_,
-	exp_type const exp_,
-	auto_weak_link const spawn_owner_
+	enemy_type::type const _etype,
+	server::environment::load_context_ptr const _load_context,
+	damage::armor const &_armor,
+	entities::health_type const _health,
+	entities::movement_speed const _movement_speed,
+	ai::create_function const &_ai,
+	weapons::unique_ptr _weapon,
+	probability_type const _spawn_chance,
+	exp_type const _exp,
+	auto_weak_link const _spawn_owner
 )
 :
 	with_ai(
-		ai_,
-		weapon_
+		_ai,
+		move(
+			_weapon
+		)
 	),
 	with_buffs(),
 	with_dim(
-		load_context_->entity_dim(
+		_load_context->entity_dim(
 			load::enemy_name(
-				etype_
+				_etype
 			)
 		)
 	),	
 	with_health(
-		health_,
-		armor_
+		_health,
+		_armor
 	),
 	movable(
 		property::initial(
-			movement_speed_,
+			_movement_speed,
 			0
 		),
 		static_cast<space_unit>(0)
 	),
-	etype_(etype_),
-	spawn_chance_(spawn_chance_),
-	exp_(exp_),
-	spawn_owner_(spawn_owner_)
+	etype_(_etype),
+	spawn_chance_(_spawn_chance),
+	exp_(_exp),
+	spawn_owner_(_spawn_owner)
 {}
 
 sanguis::enemy_type::type

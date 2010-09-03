@@ -4,9 +4,11 @@
 #include "../../damage/list.hpp"
 #include "../../weapons/melee.hpp"
 #include "../../weapons/pistol.hpp"
+#include "../../weapons/unique_ptr.hpp"
 #include "../../ai/create_simple.hpp"
 #include "../../../exception.hpp"
 #include <fcppt/container/map_impl.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::server::entities::auto_ptr
@@ -27,8 +29,10 @@ sanguis::server::entities::enemies::create(
 				health_type(9),
 				movement_speed(25),
 				ai::create_simple(),
-				weapons::auto_ptr(
-					new weapons::pistol(
+				weapons::unique_ptr(
+					fcppt::make_unique_ptr<
+						weapons::pistol
+					>(
 						weapon_type::pistol,
 						weapons::base_cooldown(1),
 						weapons::damage(1),
@@ -52,8 +56,10 @@ sanguis::server::entities::enemies::create(
 				health_type(3),
 				movement_speed(20),
 				ai::create_simple(),
-				weapons::auto_ptr(
-					new weapons::melee(
+				weapons::unique_ptr(
+					fcppt::make_unique_ptr<
+						weapons::melee
+					>(
 						weapons::range(75),
 						weapons::base_cooldown(2),
 						weapons::damage(2)
@@ -75,8 +81,10 @@ sanguis::server::entities::enemies::create(
 				health_type(3),
 				movement_speed(85),
 				ai::create_simple(),
-				weapons::auto_ptr(
-					new weapons::melee(
+				weapons::unique_ptr(
+					fcppt::make_unique_ptr<
+						weapons::melee
+					>(
 						weapons::range(75),
 						weapons::base_cooldown(1),
 						weapons::damage(4)
@@ -96,8 +104,10 @@ sanguis::server::entities::enemies::create(
 				health_type(500),
 				movement_speed(50),
 				ai::create_simple(),
-				weapons::auto_ptr(
-					new weapons::melee(
+				weapons::unique_ptr(
+					fcppt::make_unique_ptr<
+						weapons::melee
+					>(
 						weapons::range(100),
 						weapons::base_cooldown(1),
 						weapons::damage(10)
@@ -117,8 +127,10 @@ sanguis::server::entities::enemies::create(
 				health_type(1),
 				movement_speed(40),
 				ai::create_simple(),
-				weapons::auto_ptr(
-					new weapons::melee(
+				weapons::unique_ptr(
+					fcppt::make_unique_ptr<
+						weapons::melee
+					>(
 						weapons::range(75),
 						weapons::base_cooldown(1),
 						weapons::damage(0.5f)
@@ -138,8 +150,10 @@ sanguis::server::entities::enemies::create(
 				health_type(12),
 				movement_speed(75),
 				ai::create_simple(),
-				weapons::auto_ptr(
-					new weapons::melee(
+				weapons::unique_ptr(
+					fcppt::make_unique_ptr<
+						weapons::melee
+					>(
 						weapons::range(75),
 						weapons::base_cooldown(2),
 						weapons::damage(5)

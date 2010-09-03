@@ -10,6 +10,7 @@
 #include "../health_type.hpp"
 #include "../auto_weak_link.hpp"
 #include "../../ai/create_function.hpp"
+#include "../../weapons/unique_ptr.hpp"
 #include "../../environment/load_context_ptr.hpp"
 #include "../../probability_type.hpp"
 #include "../../exp_type.hpp"
@@ -40,7 +41,7 @@ public:
 		entities::health_type,
 		entities::movement_speed,
 		ai::create_function const &,
-		weapons::auto_ptr weapon,
+		weapons::unique_ptr weapon,
 		probability_type spawn_chance,
 		exp_type exp,
 		auto_weak_link spawn_owner = auto_weak_link()
