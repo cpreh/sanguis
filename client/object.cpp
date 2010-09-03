@@ -43,7 +43,7 @@
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/exception.hpp>
-#include <fcppt/make_auto_ptr.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/text.hpp>
 
@@ -267,7 +267,7 @@ sanguis::client::object::create_server(
 )
 {
 	server_.take(
-		fcppt::make_auto_ptr<
+		fcppt::make_unique_ptr<
 			server::object
 		>(
 			sys_,

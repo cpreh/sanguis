@@ -65,7 +65,10 @@ sanguis::client::draw2d::particle::object::object(
 		.elements()
 	),
 	animation_context_(
-		_animation_context),
+		move(
+			_animation_context
+		)
+	),
 	animation_(),
 	fade_total_(
 		_fade_total),

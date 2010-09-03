@@ -2,11 +2,14 @@
 #include "../messages/base.hpp"
 
 sanguis::server::message_event::message_event(
-	messages::auto_ptr message_,
-	net::id_type const id_) 
+	messages::auto_ptr _message,
+	net::id_type const _id
+)
 :
-	message_(message_),
-	id_(id_) 
+	message_(
+		_message.release()
+	),
+	id_(_id) 
 {}
 
 sanguis::server::message_event::~message_event()

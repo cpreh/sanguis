@@ -12,6 +12,7 @@
 #include <boost/asio/deadline_timer.hpp>
 #include <boost/asio/ip/tcp.hpp>
 #include <fcppt/signal/object.hpp>
+#include <fcppt/auto_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
 #include <cstddef>

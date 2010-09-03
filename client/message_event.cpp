@@ -2,9 +2,12 @@
 #include "../messages/base.hpp"
 
 sanguis::client::message_event::message_event(
-	messages::auto_ptr message_)
+	messages::auto_ptr _message
+)
 :
-	message_(message_)
+	message_(
+		_message.release()
+	)
 {}
 
 sanguis::client::message_event::~message_event()

@@ -13,6 +13,7 @@
 #include "../../../load/model/object.hpp"
 #include "../../../load/model/collection.hpp"
 #include "../../../load/model/animation.hpp"
+#include "../../../load/model/animation_context.hpp"
 #include "../../../animation_type.hpp"
 #include "../../../from_particle_type.hpp"
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -22,16 +23,16 @@
 #include <fcppt/text.hpp>
 
 sanguis::client::draw2d::entities::explosion::explosion(
-	sprite::particle::system &particle_system_,
-	load::model::collection const &model_collection_,
-	sprite::point const &pos_,
+	sprite::particle::system &_particle_system,
+	load::model::collection const &_model_collection,
+	sprite::point const &_pos,
 	funit const _aoe
 )
 :
 	base(),
-	particle_system_(particle_system_),
-	model_collection_(model_collection_),
-	pos_(pos_),
+	particle_system_(_particle_system),
+	model_collection_(_model_collection),
+	pos_(_pos),
 	particles(
 		particle::point::null(),
 		particle::point::null(),
@@ -161,7 +162,9 @@ sanguis::client::draw2d::entities::explosion::generate_particle(
 			new particle::object(
 				t,
 				aoe_,
-				anim,
+				move(
+					anim
+				),
 				particle::object::optional_time(),
 				particle_system_
 			)
@@ -183,7 +186,9 @@ sanguis::client::draw2d::entities::explosion::generate_particle(
 			new particle::object(
 				t,
 				aoe_,
-				anim,
+				move(
+					anim
+				),
 				rng(),
 				particle_system_
 			)
