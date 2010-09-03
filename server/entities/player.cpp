@@ -13,7 +13,7 @@
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/make_auto_ptr.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 
 sanguis::server::entities::player::player(
 	server::environment::load_context_ptr const load_context_,
@@ -53,26 +53,24 @@ sanguis::server::entities::player::player(
 	level_(0),
 	skill_points_(0)
 {
-	auras::auto_ptr new_aura(
-		fcppt::make_auto_ptr<
-			auras::update_sight
-		>(
-			1000, // FIXME
-			std::tr1::bind(
-				&player::add_sight_range,
-				this,
-				std::tr1::placeholders::_1
-			),
-			std::tr1::bind(
-				&player::remove_sight_range,
-				this,
-				std::tr1::placeholders::_1
-			)
-		)
-	);
-
 	add_aura(
-		new_aura
+		auras::unique_ptr(
+			fcppt::make_unique_ptr<
+				auras::update_sight
+			>(
+				1000, // FIXME
+				std::tr1::bind(
+					&player::add_sight_range,
+					this,
+					std::tr1::placeholders::_1
+				),
+				std::tr1::bind(
+					&player::remove_sight_range,
+					this,
+					std::tr1::placeholders::_1
+				)
+			)
+		)	
 	);
 }
 

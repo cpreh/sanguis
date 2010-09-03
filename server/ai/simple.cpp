@@ -1,7 +1,7 @@
 #include "simple.hpp"
 #include "search_new_target.hpp"
 #include "../auras/aggro.hpp"
-#include "../auras/auto_ptr.hpp"
+#include "../auras/unique_ptr.hpp"
 #include "../entities/with_ai.hpp"
 #include "../entities/movable.hpp"
 #include "../entities/base.hpp"
@@ -14,7 +14,7 @@
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
-#include <fcppt/make_auto_ptr.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional.hpp>
 
 sanguis::server::ai::simple::simple(
@@ -36,27 +36,25 @@ sanguis::server::ai::simple::simple(
 	owner_(owner_),
 	potential_targets_()
 {
-	auras::auto_ptr new_aura(
-		fcppt::make_auto_ptr<
-			auras::aggro
-		>(
-			1000, // TODO
-			me_.team(),
-			std::tr1::bind(
-				&simple::target_enters,
-				this,
-				std::tr1::placeholders::_1
-			),
-			std::tr1::bind(
-				&simple::target_leaves,
-				this,
-				std::tr1::placeholders::_1
+	me_.add_aura(
+		auras::unique_ptr(
+			fcppt::make_unique_ptr<
+				auras::aggro
+			>(
+				1000, // TODO
+				me_.team(),
+				std::tr1::bind(
+					&simple::target_enters,
+					this,
+					std::tr1::placeholders::_1
+				),
+				std::tr1::bind(
+					&simple::target_leaves,
+					this,
+					std::tr1::placeholders::_1
+				)
 			)
 		)
-	);
-
-	me_.add_aura(
-		new_aura
 	);
 }
 

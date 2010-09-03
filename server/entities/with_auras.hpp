@@ -3,7 +3,7 @@
 
 #include "base.hpp"
 #include "../auras/aura_fwd.hpp"
-#include "../auras/auto_ptr.hpp"
+#include "../auras/unique_ptr.hpp"
 #include "../collision/global_groups_fwd.hpp"
 #include <sge/collision/shapes/container.hpp>
 #include <sge/collision/world_ptr.hpp>
@@ -23,7 +23,7 @@ class with_auras
 public:
 	void
 	add_aura(
-		auras::auto_ptr
+		auras::unique_ptr
 	);
 protected:
 	with_auras();
