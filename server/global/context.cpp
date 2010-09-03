@@ -22,6 +22,7 @@
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/container/map_impl.hpp>
+#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/math/vector/is_null.hpp>
 #include <fcppt/math/vector/to_angle.hpp>
 #include <fcppt/tr1/functional.hpp>
@@ -373,15 +374,17 @@ sanguis::server::global::context::world(
 	)
 		return *it->second;
 	
-	return *worlds_.insert(
-		world_id_,
-		server::world::random(
-			world_context_,
-			collision_system_,
-			load_context_,
-			console_
-		)
-	).first->second;
+	return
+		*fcppt::container::ptr::insert_unique_ptr_map(
+			worlds_,
+			world_id_,
+			server::world::random(
+				world_context_,
+				collision_system_,
+				load_context_,
+				console_
+			)
+		).first->second;
 }
 
 fcppt::log::object &

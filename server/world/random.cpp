@@ -1,9 +1,9 @@
 #include "random.hpp"
 #include "object.hpp"
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/make_auto_ptr.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 
-sanguis::server::world::object_auto_ptr
+sanguis::server::world::object_unique_ptr
 sanguis::server::world::random(
 	context_ptr const ctx_,
 	sge::collision::system_ptr const collision_system_,
@@ -13,7 +13,7 @@ sanguis::server::world::random(
 {
 	// TODO:
 	return
-		fcppt::make_auto_ptr<
+		fcppt::make_unique_ptr<
 			object
 		>(
 			ctx_,
