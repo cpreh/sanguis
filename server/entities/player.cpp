@@ -133,15 +133,17 @@ sanguis::server::entities::player::perk_choosable(
 
 void
 sanguis::server::entities::player::add_perk(
-	perks::auto_ptr p
+	perks::unique_ptr _ptr
 )
 {
 	perk_tree_.take(
-		p->type()
+		_ptr->type()
 	);
 
 	with_perks::add_perk(
-		p
+		move(
+			_ptr
+		)
 	);
 
 	--skill_points_;

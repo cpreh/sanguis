@@ -1,22 +1,23 @@
 #include "with_perks.hpp"
 #include "../perks/perk.hpp"
 #include "../log.hpp"
+#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
 
 void
 sanguis::server::entities::with_perks::add_perk(
-	perks::auto_ptr p
+	perks::unique_ptr _ptr
 )
 {
-	perk_type::type const type_(
-		p->type()
+	perk_type::type const type(
+		_ptr->type()
 	);
 
 	perk_container::iterator it(
 		perks_.find(
-			type_
+			type
 		)
 	);
 
@@ -24,17 +25,20 @@ sanguis::server::entities::with_perks::add_perk(
 		it == perks_.end()
 	)
 		it =
-			perks_.insert(
-				type_,
-				p
+			fcppt::container::ptr::insert_unique_ptr_map(
+				perks_,
+				type,
+				move(
+					_ptr
+				)
 			).first;
 
-	perks::perk &perk_(
+	perks::perk &ref(
 		*it->second
 	);
 
 	if(
-		!perk_.can_raise_level()
+		!ref.can_raise_level()
 	)	
 	{
 		FCPPT_LOG_WARNING(
@@ -46,7 +50,7 @@ sanguis::server::entities::with_perks::add_perk(
 		return;
 	}
 
-	perk_.raise_level(
+	ref.raise_level(
 		*this
 	);
 }

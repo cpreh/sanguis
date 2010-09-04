@@ -3,7 +3,7 @@
 
 #include "base.hpp"
 #include "../perks/perk_fwd.hpp"
-#include "../perks/auto_ptr.hpp"
+#include "../perks/unique_ptr.hpp"
 #include "../../perk_type.hpp"
 #include <boost/ptr_container/ptr_map.hpp>
 
@@ -21,7 +21,7 @@ class with_perks
 public:
 	void
 	add_perk(
-		perks::auto_ptr
+		perks::unique_ptr
 	);
 protected:
 	with_perks();

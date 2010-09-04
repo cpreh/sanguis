@@ -8,7 +8,8 @@
 #include "../entities/property/current_to_max.hpp"
 #include "../world/object.hpp"
 #include "../world/random.hpp"
-#include "../perks/factory.hpp"
+#include "../perks/create.hpp"
+#include "../perks/perk.hpp"
 #include "../weapons/weapon.hpp"
 #include "../create_player.hpp"
 #include "../cheat.hpp"
@@ -36,14 +37,14 @@
 #include <fcppt/math/dim/basic_impl.hpp>
 
 sanguis::server::global::context::context(
-	unicast_callback const &send_unicast_,
-	sge::collision::system_ptr const collision_system_,
-	load::context_base const &model_context_,
-	server::console &console_
+	unicast_callback const &_send_unicast,
+	sge::collision::system_ptr const _collision_system,
+	load::context_base const &_model_context,
+	server::console &_console
 )
 :
-	send_unicast_(send_unicast_),
-	collision_system_(collision_system_),
+	send_unicast_(_send_unicast),
+	collision_system_(_collision_system),
 	worlds_(),
 	players_(),
 	world_context_(
@@ -59,11 +60,11 @@ sanguis::server::global::context::context(
 		fcppt::make_shared_ptr<
 			load_context
 		>(
-			model_context_
+			_model_context
 		)
 	),
 	console_(
-		console_
+		_console
 	)
 {}
 

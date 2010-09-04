@@ -12,7 +12,7 @@
 #include "health_type.hpp"
 #include "../environment/load_context_ptr.hpp"
 #include "../damage/armor.hpp"
-#include "../perks/auto_ptr.hpp"
+#include "../perks/unique_ptr.hpp"
 #include "../perks/tree.hpp"
 #include "../perks/list.hpp"
 #include "../level_type.hpp"
@@ -64,7 +64,7 @@ public:
 	
 	void
 	add_perk(
-		perks::auto_ptr
+		perks::unique_ptr
 	);
 	
 	perks::list const
