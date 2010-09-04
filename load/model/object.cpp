@@ -16,14 +16,14 @@
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
+#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/filesystem/is_directory.hpp>
 #include <fcppt/filesystem/stem.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/random/make_last_exclusive_range.hpp>
-#include <fcppt/auto_ptr.hpp>
-#include <fcppt/make_auto_ptr.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <boost/next_prior.hpp>
 #include <boost/foreach.hpp>
@@ -57,15 +57,18 @@ sanguis::load::model::object::operator[](
 sanguis::load::model::part const &
 sanguis::load::model::object::random_part() const
 {
-	if(!random_part_)
-		random_part_.reset(
-			new part_rand(
+	if(
+		!random_part_
+	)
+		random_part_ =
+			fcppt::make_unique_ptr<
+				part_rand
+			>(
 				fcppt::random::make_last_exclusive_range(
 					static_cast<part_map::size_type>(0),
 					parts.size()
 				)
-			)
-		);
+			);
 
 	return
 		*boost::next(
@@ -200,33 +203,27 @@ sanguis::load::model::object::construct(
 			inner_members[0]
 		);
 
-		fcppt::auto_ptr<
-			part
-		>
-		to_insert(
-			fcppt::make_auto_ptr<
-				part
-			>(
-				sge::parse::json::get<
-					sge::parse::json::object
-				>(
-					member.value_
-				),
-				global_parameters(
-					path,
-					ctx.textures(),
-					cell_size,
-					opt_delay,
-					texture,
-					ctx.sounds()
-				)
-			)
-		);
-
 		if(
-			parts.insert(
+			fcppt::container::ptr::insert_unique_ptr_map(
+				parts,
 				member.name,
-				to_insert
+				fcppt::make_unique_ptr<
+					part
+				>(
+					sge::parse::json::get<
+						sge::parse::json::object
+					>(
+						member.value_
+					),
+					global_parameters(
+						path,
+						ctx.textures(),
+						cell_size,
+						opt_delay,
+						texture,
+						ctx.sounds()
+					)
+				)
 			)
 			.second == false
 		)

@@ -1,8 +1,8 @@
 #include "collection.hpp"
 #include "make_path.hpp"
 #include "object.hpp"
-#include <fcppt/auto_ptr.hpp>
-#include <fcppt/make_auto_ptr.hpp>
+#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 
 sanguis::load::model::object const &
 sanguis::load::model::collection::operator[](
@@ -22,26 +22,19 @@ sanguis::load::model::collection::operator[](
 	if(
 		it == models.end()
 	)
-	{
-		fcppt::auto_ptr<
-			object
-		>
-		to_insert(
-			fcppt::make_auto_ptr<
-				object
-			>(
-				make_path(
-					name
-				),
-				ctx
-			)
-		);
-			
-		it = models.insert(
-			name,
-			to_insert
-		).first;
-	}
+		it =
+			fcppt::container::ptr::insert_unique_ptr_map(
+				models,
+				name,
+				fcppt::make_unique_ptr<
+					object
+				>(
+					make_path(
+						name
+					),
+					ctx
+				)
+			).first;
 
 	return *it->second;	
 }
