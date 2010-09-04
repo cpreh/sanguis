@@ -11,20 +11,24 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 
-sanguis::server::entities::auto_ptr
+sanguis::server::entities::unique_ptr
 sanguis::server::entities::enemies::create(
-	enemy_type::type const etype,
-	environment::load_context_ptr const load_context_,
-	entities::auto_weak_link const spawn_
+	enemy_type::type const _etype,
+	environment::load_context_ptr const _load_context,
+	entities::auto_weak_link const _spawn
 )
 {
-	switch(etype)
+	switch(
+		_etype
+	)
 	{
 	case enemy_type::zombie00:
-		return auto_ptr(
-			new enemy(
-				etype,
-				load_context_,
+		return unique_ptr(
+			fcppt::make_unique_ptr<
+				enemy
+			>(
+				_etype,
+				_load_context,
 				damage::no_armor(),
 				health_type(9),
 				movement_speed(25),
@@ -44,14 +48,16 @@ sanguis::server::entities::enemies::create(
 				),
 				static_cast<probability_type>(0.25),
 				static_cast<exp_type>(10),
-				spawn_
+				_spawn
 			)
 		);
 	case enemy_type::zombie01:
-		return auto_ptr(
-			new enemy(
-				etype,
-				load_context_,
+		return unique_ptr(
+			fcppt::make_unique_ptr<
+				enemy
+			>(
+				_etype,
+				_load_context,
 				damage::no_armor(),
 				health_type(3),
 				movement_speed(20),
@@ -67,16 +73,18 @@ sanguis::server::entities::enemies::create(
 				),
 				static_cast<probability_type>(0.25),
 				static_cast<exp_type>(5),
-				spawn_
+				_spawn
 			)
 		);
 	case enemy_type::wolf_black:
 	case enemy_type::wolf_brown:
 	case enemy_type::wolf_white:
-		return auto_ptr(
-			new enemy(
-				etype,
-				load_context_,
+		return unique_ptr(
+			fcppt::make_unique_ptr<
+				enemy
+			>(
+				_etype,
+				_load_context,
 				damage::no_armor(),
 				health_type(3),
 				movement_speed(85),
@@ -92,14 +100,16 @@ sanguis::server::entities::enemies::create(
 				),
 				static_cast<probability_type>(0.25),
 				static_cast<exp_type>(10),
-				spawn_
+				_spawn
 			)
 		);
 	case enemy_type::skeleton:
-		return auto_ptr(
-			new enemy(
-				etype,
-				load_context_,
+		return unique_ptr(
+			fcppt::make_unique_ptr<
+				enemy
+			>(
+				_etype,
+				_load_context,
 				damage::no_armor(),
 				health_type(500),
 				movement_speed(50),
@@ -115,14 +125,16 @@ sanguis::server::entities::enemies::create(
 				),
 				static_cast<probability_type>(0.75),
 				static_cast<exp_type>(300),
-				spawn_
+				_spawn
 			)
 		);
 	case enemy_type::maggot:
-		return auto_ptr(
-			new enemy(
-				etype,
-				load_context_,
+		return unique_ptr(
+			fcppt::make_unique_ptr<
+				enemy
+			>(
+				_etype,
+				_load_context,
 				damage::no_armor(),
 				health_type(1),
 				movement_speed(40),
@@ -138,14 +150,16 @@ sanguis::server::entities::enemies::create(
 				),
 				static_cast<probability_type>(0.1),
 				static_cast<exp_type>(1),
-				spawn_
+				_spawn
 			)
 		);
 	case enemy_type::spider:
-		return auto_ptr(
-			new enemy(
-				etype,
-				load_context_,
+		return unique_ptr(
+			fcppt::make_unique_ptr<
+				enemy
+			>(
+				_etype,
+				_load_context,
 				damage::no_armor(),
 				health_type(12),
 				movement_speed(75),
@@ -161,7 +175,7 @@ sanguis::server::entities::enemies::create(
 				),
 				static_cast<probability_type>(0.5),
 				static_cast<exp_type>(12),
-				spawn_
+				_spawn
 			)		
 		);
 	case enemy_type::size:

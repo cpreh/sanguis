@@ -28,7 +28,7 @@ public:
 	void
 	transfer_entity(
 		world_id destination,
-		entities::auto_ptr,
+		entities::unique_ptr,
 		entities::insert_parameters const &
 	);
 

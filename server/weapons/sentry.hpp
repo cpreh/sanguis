@@ -8,6 +8,7 @@
 #include "reload_time.hpp"
 #include "create_function.hpp"
 #include <fcppt/function/object.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -16,22 +17,28 @@ namespace server
 namespace weapons
 {
 
-class sentry : public weapon {
+class sentry
+:
+	public weapon
+{
+	FCPPT_NONCOPYABLE(sentry)
 public:
-	sentry(
+	explicit sentry(
 		weapon_type::type,
 		weapons::base_cooldown,
 		weapons::cast_point,
 		weapons::reload_time,
 		create_function const &sentry_weapon
 	);
+
+	~sentry();
 private:
 	void
 	do_attack(
 		delayed_attack const &
 	);
 	
-	create_function const sentry_weapon;
+	create_function const sentry_weapon_;
 };
 
 }

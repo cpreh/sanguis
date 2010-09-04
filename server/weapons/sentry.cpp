@@ -7,18 +7,19 @@
 #include "../entities/insert_parameters.hpp"
 #include "../environment/object.hpp"
 #include <fcppt/container/map_impl.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::weapons::sentry::sentry(
-	weapon_type::type const type_,
-	weapons::base_cooldown const base_cooldown_,
-	weapons::cast_point const cast_point_,
-	weapons::reload_time const reload_time_,
-	create_function const &sentry_weapon
+	weapon_type::type const _type,
+	weapons::base_cooldown const _base_cooldown,
+	weapons::cast_point const _cast_point,
+	weapons::reload_time const _reload_time,
+	create_function const &_sentry_weapon
 )
 :
 	weapon(
-		type_,
+		_type,
 		weapons::range(
 			1000
 		), // FIXME
@@ -28,35 +29,44 @@ sanguis::server::weapons::sentry::sentry(
 		weapons::magazine_count(
 			1
 		),
-		base_cooldown_,
-		cast_point_,
-		reload_time_
+		_base_cooldown,
+		_cast_point,
+		_reload_time
 	),
-	sentry_weapon(sentry_weapon)
-{}
+	sentry_weapon_(
+		_sentry_weapon
+	)
+{
+}
+
+sanguis::server::weapons::sentry::~sentry()
+{
+}
 
 void
 sanguis::server::weapons::sentry::do_attack(
-	delayed_attack const &a
+	delayed_attack const &_attack
 )
 {
-	a.environment()->insert(
-		entities::auto_ptr(
-			new entities::friend_(
+	_attack.environment()->insert(
+		entities::unique_ptr(
+			fcppt::make_unique_ptr<
+				entities::friend_
+			>(
 				friend_type::sentry,
-				a.environment()->load_context(),
+				_attack.environment()->load_context(),
 				damage::no_armor(),
 				entities::health_type(100),
 				entities::movement_speed(0),
 				ai::create_simple(),
 				weapons::unique_ptr(
-					sentry_weapon()
+					sentry_weapon_()
 				)
 			)
 		),
 		entities::insert_parameters(
-			a.dest(),
-			a.angle()
+			_attack.dest(),
+			_attack.angle()
 		)
 	);
 }

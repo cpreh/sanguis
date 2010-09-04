@@ -6,6 +6,7 @@
 #include <sge/time/second_f.hpp>
 #include <fcppt/random/make_inclusive_range.hpp>
 #include <fcppt/math/twopi.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 
 sanguis::server::perks::choleric::choleric()
 :
@@ -60,8 +61,10 @@ sanguis::server::perks::choleric::update(
 		env->insert(
 			can_raise_level()
 			?
-				entities::auto_ptr(
-					new entities::projectiles::simple_bullet(
+				entities::unique_ptr(
+					fcppt::make_unique_ptr<
+						entities::projectiles::simple_bullet
+					>(
 						env->load_context(),
 						e.team(),
 						damage::unit(2), // damage
@@ -69,8 +72,10 @@ sanguis::server::perks::choleric::update(
 					)
 				)
 			:
-				entities::auto_ptr(
-					new entities::projectiles::rocket(
+				entities::unique_ptr(
+					fcppt::make_unique_ptr<
+						entities::projectiles::rocket
+					>(
 						env->load_context(),
 						e.team(),
 						damage::unit(5), // damage

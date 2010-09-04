@@ -7,36 +7,37 @@
 #include "../environment/object.hpp"
 #include "../../random.hpp"
 #include <fcppt/tr1/random.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 
 sanguis::server::weapons::shotgun::shotgun(
-	weapon_type::type const type_,
-	weapons::base_cooldown const base_cooldown_,
-	space_unit const spread_radius,
-	unsigned const shells,
-	weapons::damage const damage_,
-	weapons::magazine_size const magazine_size_,
-	weapons::reload_time const reload_time_
+	weapon_type::type const _type,
+	weapons::base_cooldown const _base_cooldown,
+	space_unit const _spread_radius,
+	unsigned const _shells,
+	weapons::damage const _damage,
+	weapons::magazine_size const _magazine_size,
+	weapons::reload_time const _reload_time
 )
 :
 	weapon(
-		type_,
+		_type,
 		weapons::range(1000), // FIXME
-		magazine_size_,
+		_magazine_size,
 		unlimited_magazine_count,
-		base_cooldown_,
+		_base_cooldown,
 		weapons::cast_point(
 			0.5f
 		), // FIXME
-		reload_time_
+		_reload_time
 	),
-	spread_radius(spread_radius),
-	shells(shells),
-	damage_(damage_)
+	spread_radius_(_spread_radius),
+	shells_(_shells),
+	damage_(_damage)
 {}
 
 void
 sanguis::server::weapons::shotgun::do_attack(
-	delayed_attack const &a
+	delayed_attack const &_attack
 )
 {
 	typedef std::tr1::normal_distribution<
@@ -49,32 +50,35 @@ sanguis::server::weapons::shotgun::do_attack(
 	> rng_type;
 
 	rng_type rng(
+		// TODO: save the randgen!
 		create_seeded_randgen(),
 		normal_distribution_su(
-			a.angle(), // mean value
-			spread_radius // sigma
+			_attack.angle(), // mean value
+			spread_radius_ // sigma
 		)
 	);
 
 	for(
-		unsigned i = 0; i < shells; ++i
+		unsigned i = 0; i < shells_; ++i
 	)
 	{
 		space_unit const direction_(
 			rng()
 		);
 
-		a.environment()->insert(
-			entities::auto_ptr(
-				new entities::projectiles::simple_bullet(
-					a.environment()->load_context(),
-					a.team(),
+		_attack.environment()->insert(
+			entities::unique_ptr(
+				fcppt::make_unique_ptr<
+					entities::projectiles::simple_bullet
+				>(
+					_attack.environment()->load_context(),
+					_attack.team(),
 					damage_,
 					direction_
 				)
 			),
 			entities::insert_parameters(
-				a.spawn_point(),
+				_attack.spawn_point(),
 				direction_
 			)
 		);

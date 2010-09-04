@@ -8,19 +8,20 @@
 #include "../entities/with_weapon.hpp"
 #include "../entities/movable.hpp"
 #include "../entities/projectiles/melee.hpp"
+#include <fcppt/make_unique_ptr.hpp>
 
 sanguis::server::weapons::melee::melee(
-	weapons::range const range_,
-	weapons::base_cooldown const base_cooldown_,
-	weapons::damage const damage_
+	weapons::range const _range,
+	weapons::base_cooldown const _base_cooldown,
+	weapons::damage const _damage
 )
 :
 	weapon(
 		weapon_type::melee,
-		range_,
+		_range,
 		unlimited_magazine_size,
 		unlimited_magazine_count,
-		base_cooldown_,
+		_base_cooldown,
 		weapons::cast_point(
 			0
 		),
@@ -28,37 +29,39 @@ sanguis::server::weapons::melee::melee(
 			0
 		)
 	),
-	damage_(damage_)
+	damage_(_damage)
 {}
 
 void
 sanguis::server::weapons::melee::do_attack(
-	delayed_attack const &a
+	delayed_attack const &_attack
 )
 {
-	a.environment()->insert(
-		entities::auto_ptr(
-			new entities::projectiles::melee(
-				a.team(),
+	_attack.environment()->insert(
+		entities::unique_ptr(
+			fcppt::make_unique_ptr<
+				entities::projectiles::melee
+			>(
+				_attack.team(),
 				damage_
 			)
 		),
 		entities::insert_parameters_pos(
-			a.dest()
+			_attack.dest()
 		)
 	);
 }
 
 void
 sanguis::server::weapons::melee::on_init_attack(
-	entities::with_weapon &owner_
+	entities::with_weapon &_owner
 )
 {
-	entities::movable *const movable_(
+	entities::movable *const movable(
 		dynamic_cast<
 			entities::movable *
 		>(
-			&owner_
+			&_owner
 		)
 	);
 
@@ -74,14 +77,14 @@ sanguis::server::weapons::melee::on_init_attack(
 
 void
 sanguis::server::weapons::melee::on_castpoint(
-	entities::with_weapon &owner_
+	entities::with_weapon &_owner
 )
 {
-	entities::movable *const movable_(
+	entities::movable *const movable(
 		dynamic_cast<
 			entities::movable *
 		>(
-			&owner_
+			&_owner
 		)
 	);
 

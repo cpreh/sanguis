@@ -1,11 +1,12 @@
 #include "world_context.hpp"
 #include "context.hpp"
+#include "../entities/base.hpp"
 
 sanguis::server::global::world_context::world_context(
-	global::context &global_context_
+	global::context &_global_context
 )
 :
-	global_context_(global_context_)
+	global_context_(_global_context)
 {}
 
 sanguis::server::global::world_context::~world_context()
@@ -13,36 +14,38 @@ sanguis::server::global::world_context::~world_context()
 
 void
 sanguis::server::global::world_context::transfer_entity(
-	world_id const destination,
-	entities::auto_ptr entity,
-	entities::insert_parameters const &insert_parameters_
+	world_id const _destination,
+	entities::unique_ptr _entity,
+	entities::insert_parameters const &_insert_parameters
 )
 {
 	global_context_.transfer_entity(
-		destination,
-		entity,
-		insert_parameters_
+		_destination,
+		move(
+			_entity
+		),
+		_insert_parameters
 	);
 }
 
 void
 sanguis::server::global::world_context::send_to_player(
-	player_id const player_id_,
-	messages::auto_ptr msg
+	player_id const _player_id,
+	messages::auto_ptr _msg
 )
 {
 	global_context_.send_to_player(
-		player_id_,
-		msg
+		_player_id,
+		_msg
 	);
 }
 
 void
 sanguis::server::global::world_context::remove_player(
-	player_id const player_id_
+	player_id const _player_id
 )
 {
 	global_context_.remove_player(
-		player_id_
+		_player_id
 	);
 }

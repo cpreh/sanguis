@@ -2,7 +2,7 @@
 #include "environment/object.hpp"
 #include "entities/insert_parameters_pos.hpp"
 #include "entities/insert_parameters.hpp"
-#include "entities/auto_ptr.hpp"
+#include "entities/unique_ptr.hpp"
 #include "entities/pickups/health.hpp"
 #include "entities/pickups/monster.hpp"
 #include "entities/pickups/weapon.hpp"
@@ -12,12 +12,13 @@
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 
 sanguis::server::pickup_spawner::pickup_spawner(
-	environment::object_ptr const env
+	environment::object_ptr const _env
 )
 :
-	env(env),
+	env(_env),
 	spawn_prob(
 		fcppt::random::make_inclusive_range(
 			static_cast<probability_type>(0),
@@ -125,8 +126,10 @@ void
 sanguis::server::pickup_spawner::spawn_health()
 {
 	env->insert(
-		entities::auto_ptr(
-			new entities::pickups::health(
+		entities::unique_ptr(
+			fcppt::make_unique_ptr<
+				entities::pickups::health
+			>(
 				env->load_context(),
 				team::players,
 				entities::health_type(10) // FIXME: which health value to use?
@@ -142,8 +145,10 @@ void
 sanguis::server::pickup_spawner::spawn_monster()
 {
 	env->insert(
-		entities::auto_ptr(
-			new entities::pickups::monster(
+		entities::unique_ptr(
+			fcppt::make_unique_ptr<
+				entities::pickups::monster
+			>(
 				env->load_context(),
 				team::players,
 				friend_type::spider
@@ -161,8 +166,10 @@ sanguis::server::pickup_spawner::spawn_weapon(
 )
 {
 	env->insert(
-		entities::auto_ptr(
-			new entities::pickups::weapon(
+		entities::unique_ptr(
+			fcppt::make_unique_ptr<
+				entities::pickups::weapon
+			>(
 				env->load_context(),
 				team::players,
 				wtype

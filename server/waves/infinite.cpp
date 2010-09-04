@@ -1,10 +1,10 @@
 #include "infinite.hpp"
 #include "../entities/spawns/limited.hpp"
-#include "../entities/auto_ptr.hpp"
 #include "../entities/insert_parameters_pos.hpp"
 #include "../environment/object.hpp"
 #include <sge/time/second.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 
 sanguis::server::waves::infinite::infinite(
 	waves::delay const delay_,
@@ -31,15 +31,15 @@ sanguis::server::waves::infinite::~infinite()
 
 void
 sanguis::server::waves::infinite::process(
-	time_type const diff,
-	environment::object_ptr const env,
+	time_type const _diff,
+	environment::object_ptr const _env,
 	environment::load_context_ptr const
 )
 {
 	// TODO: the waves system must be replaced sometime
 
 	diff_clock_.update(
-		diff
+		_diff
 	);
 
 	if(
@@ -48,25 +48,25 @@ sanguis::server::waves::infinite::process(
 	{
 		delay_time_.deactivate();
 
-		entities::auto_ptr spawn_(
-			new entities::spawns::limited(
-				etype_,
-				entities::spawns::count_per_wave(
-					spawns_per_wave_
-				),
-				entities::spawns::interval(
-					sge::time::second(
-						spawn_interval_
-					)
-				),
-				entities::spawns::limit(
-					10
-				) // TODO!
-			)
-		);
-
-		env->insert(
-			spawn_,
+		_env->insert(
+			entities::unique_ptr(
+				fcppt::make_unique_ptr<
+					entities::spawns::limited
+				>(
+					etype_,
+					entities::spawns::count_per_wave(
+						spawns_per_wave_
+					),
+					entities::spawns::interval(
+						sge::time::second(
+							spawn_interval_
+						)
+					),
+					entities::spawns::limit(
+						10
+					) // TODO!
+				)
+			),
 			entities::insert_parameters_pos(
 				pos_type::null() // TODO!
 			)

@@ -23,7 +23,7 @@ public:
 	explicit exp_area(
 		exp_type
 	);
-protected:
+
 	~exp_area();
 private:
 	void

@@ -4,7 +4,7 @@
 #include "../message_convert/rotate.hpp"
 #include "../message_convert/speed.hpp"
 #include "../entities/player.hpp"
-#include "../entities/auto_ptr.hpp"
+#include "../entities/unique_ptr.hpp"
 #include "../entities/property/current_to_max.hpp"
 #include "../world/object.hpp"
 #include "../world/random.hpp"
@@ -28,6 +28,7 @@
 #include <fcppt/math/vector/to_angle.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_shared_ptr.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
 
@@ -94,7 +95,7 @@ sanguis::server::global::context::insert_player(
 		)
 	);
 
-	entities::player_auto_ptr player_(
+	entities::player_unique_ptr player_(
 		create_player(
 			load_context_,
 			name,
@@ -115,8 +116,10 @@ sanguis::server::global::context::insert_player(
 	);
 
 	world_.insert(
-		entities::auto_ptr(
-			player_
+		entities::unique_ptr(
+			move(
+				player_
+			)
 		),
 		entities::insert_parameters(
 			spawn_pos,
@@ -125,8 +128,10 @@ sanguis::server::global::context::insert_player(
 	);
 
 	world_.insert(
-		entities::auto_ptr(
-			new entities::pickups::weapon(
+		entities::unique_ptr(
+			fcppt::make_unique_ptr<
+				entities::pickups::weapon
+			>(
 				load_context_,
 				team::players,
 				weapon_type::pistol
@@ -302,28 +307,28 @@ sanguis::server::global::context::player_choose_perk(
 
 void
 sanguis::server::global::context::update(
-	time_type const delta
+	time_type const _delta
 )
 {
 	BOOST_FOREACH(
-		server::world::map::reference world_,
+		server::world::map::reference world,
 		worlds_
 	)
-		world_.second->update(
-			delta
+		world.second->update(
+			_delta
 		);
 }
 
 void
 sanguis::server::global::context::send_to_player(
-	player_id const player_id_,
-	messages::auto_ptr msg_
+	player_id const _player_id,
+	messages::auto_ptr _msg
 )
 {
 	// TODO: we probably want to map this id to a net::id_type
 	send_unicast_(
-		player_id_,
-		msg_
+		_player_id,
+		_msg
 	);
 }
 
@@ -346,16 +351,18 @@ sanguis::server::global::context::remove_player(
 
 void
 sanguis::server::global::context::transfer_entity(
-	world_id const destination,
-	entities::auto_ptr entity,
-	entities::insert_parameters const &insert_parameters_
+	world_id const _destination,
+	entities::unique_ptr _entity,
+	entities::insert_parameters const &_insert_parameters
 )
 {
 	world(
-		destination
+		_destination
 	).insert(
-		entity,
-		insert_parameters_
+		move(
+			_entity
+		),
+		_insert_parameters
 	);
 }
 

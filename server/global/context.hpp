@@ -5,7 +5,7 @@
 #include "world_context_fwd.hpp"
 #include "../world/map.hpp"
 #include "../world/context_ptr.hpp"
-#include "../entities/auto_ptr.hpp"
+#include "../entities/unique_ptr.hpp"
 #include "../entities/insert_parameters_fwd.hpp"
 #include "../entities/player_map.hpp"
 #include "../environment/load_context_ptr.hpp"
@@ -128,7 +128,7 @@ private:
 	void
 	transfer_entity(
 		world_id destination,
-		entities::auto_ptr,
+		entities::unique_ptr,
 		entities::insert_parameters const &
 	);
 

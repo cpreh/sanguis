@@ -39,11 +39,11 @@
 #include <sge/time/second.hpp>
 #include <sge/time/millisecond.hpp>
 #include <fcppt/container/map_impl.hpp>
+#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/math/box/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/make_shared_ptr.hpp>
-//#include <fcppt/make_auto_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/assert.hpp>
 #include <fcppt/text.hpp>
@@ -192,18 +192,18 @@ sanguis::server::world::object::update(
 
 void
 sanguis::server::world::object::insert(
-	entities::auto_ptr entity_,
-	entities::insert_parameters const &insert_parameters_
+	entities::unique_ptr _entity,
+	entities::insert_parameters const &_insert_parameters
 )
 {
 	entity_id const id(
-		entity_->id()
+		_entity->id()
 	);
 
-	entity_->transfer(
+	_entity->transfer(
 		environment_,
 		collision_groups_,
-		insert_parameters_
+		_insert_parameters
 	);
 
 	typedef std::pair<
@@ -212,9 +212,12 @@ sanguis::server::world::object::insert(
 	> return_type;
 	
 	return_type const ret(
-		entities_.insert(
+		fcppt::container::ptr::insert_unique_ptr_map(
+			entities_,
 			id,
-			entity_	
+			move(
+				_entity
+			)
 		)
 	);
 
@@ -382,14 +385,14 @@ sanguis::server::world::object::pickup_chance(
 
 void
 sanguis::server::world::object::request_transfer(
-	world_id const world_id_,
-	entity_id const entity_id_,
-	entities::insert_parameters const &insert_parameters_
+	world_id const _world_id,
+	entity_id const _entity_id,
+	entities::insert_parameters const &_insert_parameters
 )
 {
 	entity_map::iterator const it(
 		entities_.find(
-			entity_id_
+			_entity_id
 		)
 	);
 
@@ -400,16 +403,18 @@ sanguis::server::world::object::request_transfer(
 			FCPPT_TEXT("entity can't be transferred!")
 		);
 
-	entities::auto_ptr entity_(
+	entities::unique_ptr entity(
 		entities_.release(
 			it
 		).release()
 	);
 
 	global_context_->transfer_entity(
-		world_id_,
-		entity_,
-		insert_parameters_
+		_world_id,
+		move(
+			entity
+		),
+		_insert_parameters
 	);
 }
 

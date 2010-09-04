@@ -21,7 +21,7 @@ class rocket_launcher
 	public weapon
 {
 public:
-	rocket_launcher(
+	explicit rocket_launcher(
 		weapon_type::type,
 		weapons::base_cooldown,
 		weapons::damage,
@@ -36,6 +36,7 @@ private:
 	);
 	
 	weapons::damage const damage_;
+
 	weapons::aoe const aoe_;
 };
 

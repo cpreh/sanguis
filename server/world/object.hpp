@@ -7,7 +7,7 @@
 #include "prop_container.hpp"
 #include "entity_map.hpp"
 #include "sight_range_map.hpp"
-#include "../entities/auto_ptr.hpp"
+#include "../entities/unique_ptr.hpp"
 #include "../entities/insert_parameters_fwd.hpp"
 #include "../entities/base_fwd.hpp"
 #include "../environment/object_ptr.hpp"
@@ -64,7 +64,7 @@ public:
 
 	void
 	insert(
-		entities::auto_ptr,
+		entities::unique_ptr,
 		entities::insert_parameters const &
 	);
 

@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_CREATE_PLAYER_HPP_INCLUDED
 #define SANGUIS_SERVER_CREATE_PLAYER_HPP_INCLUDED
 
-#include "entities/player_auto_ptr.hpp"
+#include "entities/player_unique_ptr.hpp"
 #include "environment/load_context_ptr.hpp"
 #include "string.hpp"
 #include "unicast_callback.hpp"
@@ -13,7 +13,7 @@ namespace sanguis
 namespace server
 {
 
-entities::player_auto_ptr
+entities::player_unique_ptr
 create_player(
 	environment::load_context_ptr,
 	string const &name,

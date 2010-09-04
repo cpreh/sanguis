@@ -13,6 +13,7 @@
 #include "../../../messages/create.hpp"
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 
 sanguis::server::entities::enemies::enemy::enemy(
 	enemy_type::type const _etype,
@@ -129,8 +130,10 @@ sanguis::server::entities::enemies::enemy::on_die()
 		);
 
 	environment()->insert(
-		auto_ptr(
-			new entities::exp_area(
+		unique_ptr(
+			fcppt::make_unique_ptr<
+				entities::exp_area
+			>(
 				exp_
 			)
 		),

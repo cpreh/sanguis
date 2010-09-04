@@ -3,7 +3,7 @@
 
 #include "object_fwd.hpp"
 #include "load_context_ptr.hpp"
-#include "../entities/auto_ptr.hpp"
+#include "../entities/unique_ptr.hpp"
 #include "../entities/insert_parameters_fwd.hpp"
 #include "../collision/global_groups_fwd.hpp"
 #include "../player_id.hpp"
@@ -33,7 +33,7 @@ protected:
 public:
 	virtual void 
 	insert(
-		entities::auto_ptr,
+		entities::unique_ptr,
 		entities::insert_parameters const &
 	) = 0;
 

@@ -3,7 +3,7 @@
 
 #include "context_fwd.hpp"
 #include "../player_id.hpp"
-#include "../entities/auto_ptr.hpp"
+#include "../entities/unique_ptr.hpp"
 #include "../entities/insert_parameters_fwd.hpp"
 #include "../../world_id.hpp"
 #include "../../messages/auto_ptr.hpp"
@@ -16,7 +16,8 @@ namespace server
 namespace world
 {
 
-class context {
+class context
+{
 	FCPPT_NONCOPYABLE(context)
 protected:
 	context();
@@ -24,7 +25,7 @@ public:
 	virtual void
 	transfer_entity(
 		world_id destination,
-		entities::auto_ptr,
+		entities::unique_ptr,
 		entities::insert_parameters const &
 	) = 0;
 

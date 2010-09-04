@@ -1,5 +1,6 @@
 #include "environment.hpp"
 #include "object.hpp"
+#include "../entities/base.hpp"
 
 sanguis::server::world::environment::environment(
 	world::object &world_
@@ -13,12 +14,14 @@ sanguis::server::world::environment::~environment()
 
 void
 sanguis::server::world::environment::insert(
-	entities::auto_ptr e,
+	entities::unique_ptr e,
 	entities::insert_parameters const &ip
 )
 {
 	world_.insert(
-		e,
+		move(
+			e
+		),
 		ip
 	);
 }

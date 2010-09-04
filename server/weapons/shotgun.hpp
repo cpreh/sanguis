@@ -15,7 +15,10 @@ namespace server
 namespace weapons
 {
 
-class shotgun : public weapon {
+class shotgun
+:
+	public weapon
+{
 public:
 	shotgun(
 		weapon_type::type,
@@ -32,8 +35,10 @@ private:
 		delayed_attack const &
 	);
 	
-	space_unit const spread_radius;
-	unsigned const shells;
+	space_unit const spread_radius_;
+
+	unsigned const shells_;
+
 	weapons::damage const damage_;
 };
 

@@ -5,48 +5,51 @@
 #include "../entities/insert_parameters.hpp"
 #include "../entities/projectiles/simple_bullet.hpp"
 #include "../environment/object.hpp"
+#include <fcppt/make_unique_ptr.hpp>
 
 sanguis::server::weapons::pistol::pistol(
-	weapon_type::type const type_,
-	weapons::base_cooldown const base_cooldown_,
-	weapons::damage const damage_,
-	weapons::cast_point const cast_point_,
-	weapons::magazine_size const magazine_size_,
-	weapons::reload_time const reload_time_,
-	weapons::range const range_
+	weapon_type::type const _type,
+	weapons::base_cooldown const _base_cooldown,
+	weapons::damage const _damage,
+	weapons::cast_point const _cast_point,
+	weapons::magazine_size const _magazine_size,
+	weapons::reload_time const _reload_time,
+	weapons::range const _range
 )
 :
 	weapon(
-		type_,
-		range_,
-		magazine_size_,
+		_type,
+		_range,
+		_magazine_size,
 		unlimited_magazine_count,
-		base_cooldown_,
-		cast_point_,
-		reload_time_
+		_base_cooldown,
+		_cast_point,
+		_reload_time
 	),
 	damage_(
-		damage_
+		_damage
 	)
 {}
 
 void
 sanguis::server::weapons::pistol::do_attack(
-	delayed_attack const &a
+	delayed_attack const &_attack
 )
 {
-	a.environment()->insert(
-		entities::auto_ptr(
-			new entities::projectiles::simple_bullet(
-				a.environment()->load_context(),
-				a.team(),
+	_attack.environment()->insert(
+		entities::unique_ptr(
+			fcppt::make_unique_ptr<
+				entities::projectiles::simple_bullet
+			>(
+				_attack.environment()->load_context(),
+				_attack.team(),
 				damage_,
-				a.angle()
+				_attack.angle()
 			)
 		),
 		entities::insert_parameters(
-			a.spawn_point(),
-			a.angle()
+			_attack.spawn_point(),
+			_attack.angle()
 		)
 	);
 }

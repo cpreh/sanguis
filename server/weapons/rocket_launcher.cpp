@@ -4,51 +4,54 @@
 #include "../entities/projectiles/rocket.hpp"
 #include "../entities/insert_parameters.hpp"
 #include "../environment/object.hpp"
+#include <fcppt/make_unique_ptr.hpp>
 
 sanguis::server::weapons::rocket_launcher::rocket_launcher(
-	weapon_type::type const type_,
-	weapons::base_cooldown const base_cooldown_,
-	weapons::damage const damage_,
-	weapons::aoe const aoe_,
-	weapons::magazine_size const magazine_size_,
-	weapons::reload_time const reload_time_
+	weapon_type::type const _type,
+	weapons::base_cooldown const _base_cooldown,
+	weapons::damage const _damage,
+	weapons::aoe const _aoe,
+	weapons::magazine_size const _magazine_size,
+	weapons::reload_time const _reload_time
 )
 :
 	weapon(
-		type_,
+		_type,
 		weapons::range(1000), // FIXME
-		magazine_size_,
+		_magazine_size,
 		unlimited_magazine_count,
-		base_cooldown_,
+		_base_cooldown,
 		weapons::cast_point(
 			0.5f
 		), // FIXME
-		reload_time_
+		_reload_time
 	),
-	damage_(damage_),
-	aoe_(aoe_)
+	damage_(_damage),
+	aoe_(_aoe)
 {}
 
 void
 sanguis::server::weapons::rocket_launcher::do_attack(
-	delayed_attack const &a
+	delayed_attack const &_attack
 )
 {
-	a.environment()->insert(
-		entities::auto_ptr(
-			new entities::projectiles::rocket(
-				a.environment()->load_context(),
-				a.team(),
+	_attack.environment()->insert(
+		entities::unique_ptr(
+			fcppt::make_unique_ptr<
+				entities::projectiles::rocket
+			>(
+				_attack.environment()->load_context(),
+				_attack.team(),
 				server::damage::unit(
 					damage_
 				),
 				aoe_,
-				a.angle()
+				_attack.angle()
 			)
 		),
 		entities::insert_parameters(
-			a.spawn_point(),
-			a.angle()
+			_attack.spawn_point(),
+			_attack.angle()
 		)
 	);
 }

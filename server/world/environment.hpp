@@ -27,7 +27,7 @@ public:
 
 	void
 	insert(
-		entities::auto_ptr,
+		entities::unique_ptr,
 		entities::insert_parameters const &
 	);
 

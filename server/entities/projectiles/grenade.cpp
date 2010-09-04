@@ -15,6 +15,7 @@
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <algorithm>
@@ -109,8 +110,10 @@ void
 sanguis::server::entities::projectiles::grenade::on_die()
 {
 	environment()->insert(
-		auto_ptr(
-			new aoe_damage(
+		entities::unique_ptr(
+			fcppt::make_unique_ptr<
+				aoe_damage
+			>(
 				team(),
 				aoe(),
 				damage_,
