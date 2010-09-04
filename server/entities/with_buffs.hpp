@@ -4,9 +4,10 @@
 #include "with_buffs_fwd.hpp"
 #include "base.hpp"
 #include "../buffs/list.hpp"
-#include "../buffs/buff.hpp"
-#include "../buffs/auto_ptr.hpp"
+#include "../buffs/buff.hpp" // for buffs::list
+#include "../buffs/unique_ptr.hpp"
 #include "../../time_type.hpp"
+#include <fcppt/noncopyable.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
 
 namespace sanguis
@@ -20,6 +21,7 @@ class with_buffs
 :
 	public virtual base
 {
+	FCPPT_NONCOPYABLE(with_buffs)
 public:
 	void
 	add_buff(
@@ -28,7 +30,7 @@ public:
 
 	void
 	claim_buff(
-		buffs::auto_ptr
+		buffs::unique_ptr
 	);
 protected:
 	with_buffs();

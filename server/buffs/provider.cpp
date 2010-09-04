@@ -2,6 +2,7 @@
 #include "buff.hpp"
 #include "../entities/with_buffs.hpp"
 #include "../../exception.hpp"
+#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/text.hpp>
 #include <utility>
 
@@ -15,17 +16,22 @@ sanguis::server::buffs::provider::~provider()
 
 void
 sanguis::server::buffs::provider::add(
-	entities::with_buffs &entity_,
-	auto_ptr buff_
+	entities::with_buffs &_entity,
+	unique_ptr _buff
 )
 {
-	std::pair<
+	typedef std::pair<
 		map::iterator,
 		bool
-	> const ret(
-		buffs_.insert(
-			entity_.id(),
-			buff_
+	> ret_type;
+	
+	ret_type const ret(
+		fcppt::container::ptr::insert_unique_ptr_map(
+			buffs_,
+			_entity.id(),
+			move(
+				_buff
+			)
 		)
 	);
 
@@ -36,19 +42,19 @@ sanguis::server::buffs::provider::add(
 			FCPPT_TEXT("Double buff insertion!")
 		);
 	
-	entity_.add_buff(
+	_entity.add_buff(
 		*ret.first->second
 	);
 }
 
 void
 sanguis::server::buffs::provider::remove(
-	entities::with_buffs &entity_
+	entities::with_buffs &_entity
 )
 {
 	map::iterator const it(
 		buffs_.find(
-			entity_.id()
+			_entity.id()
 		)
 	);
 
@@ -68,8 +74,8 @@ sanguis::server::buffs::provider::remove(
 	if(
 		!reclaimed->expired()
 	)
-		entity_.claim_buff(
-			auto_ptr(
+		_entity.claim_buff(
+			buffs::unique_ptr(
 				reclaimed.release()
 			)
 		);

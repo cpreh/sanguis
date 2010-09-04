@@ -38,9 +38,12 @@ private:
 		entities::base &target
 	);
 	
-	time_type const pulse_diff;
-	damage::unit const damage_per_pulse;
-	damage::array const damage_values;
+	time_type const pulse_diff_;
+
+	damage::unit const damage_per_pulse_;
+
+	damage::array const damage_values_;
+
 	buffs::provider provider_;
 };
 

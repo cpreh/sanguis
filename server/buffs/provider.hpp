@@ -3,7 +3,7 @@
 
 #include "provider_fwd.hpp"
 #include "map.hpp"
-#include "auto_ptr.hpp"
+#include "unique_ptr.hpp"
 #include "../entities/with_buffs_fwd.hpp"
 #include "../../entity_id.hpp"
 #include <fcppt/noncopyable.hpp>
@@ -15,7 +15,8 @@ namespace server
 namespace buffs
 {
 
-class provider {
+class provider
+{
 	FCPPT_NONCOPYABLE(provider)
 public:
 	provider();
@@ -25,7 +26,7 @@ public:
 	void
 	add(
 		entities::with_buffs &,
-		auto_ptr
+		unique_ptr
 	);
 
 	void
