@@ -2,10 +2,10 @@
 #include "debug.hpp"
 #include "wave.hpp"
 #include "../../exception.hpp"
-#include <fcppt/make_auto_ptr.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 
-sanguis::server::waves::wave_auto_ptr
+sanguis::server::waves::unique_ptr
 sanguis::server::waves::make(
 	fcppt::string const &name
 )
@@ -15,12 +15,11 @@ sanguis::server::waves::make(
 		name == FCPPT_TEXT("debug")
 	)
 		return
-			wave_auto_ptr(
-				new debug()
+			unique_ptr(
+				fcppt::make_unique_ptr<
+					debug
+				>()
 			);
-			/*fcppt::make_auto_ptr<
-				debug
-			>();*/
 	throw
 		exception(
 			FCPPT_TEXT("Invalid wave ")

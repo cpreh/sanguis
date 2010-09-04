@@ -45,13 +45,13 @@ private:
 
 	server::console &console_;
 
-	fcppt::signal::scoped_connection spawn_connection;
+	fcppt::signal::scoped_connection const spawn_connection_;
 
 	typedef boost::ptr_list<
 		wave
 	> wave_list;
 
-	wave_list waves;
+	wave_list waves_;
 };
 
 }

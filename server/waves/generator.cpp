@@ -5,9 +5,10 @@
 #include "convert_enemy_name.hpp"
 #include "../console.hpp"
 #include "../net_id_from_args.hpp"
+#include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/make_auto_ptr.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/exception.hpp>
 #include <boost/assign/ptr_list_inserter.hpp>
 
@@ -23,7 +24,7 @@ sanguis::server::waves::generator::generator(
 )
 :
 	console_(_console),
-	spawn_connection(
+	spawn_connection_(
 		console_.insert(
 			FCPPT_TEXT("spawn"),
 			std::tr1::bind(
@@ -34,7 +35,7 @@ sanguis::server::waves::generator::generator(
 			FCPPT_TEXT("spawn wave (wavename) [count], spawn enemy (enemyname) [count] or spawn all")
 		)
 	),
-	waves()
+	waves_()
 {}
 
 sanguis::server::waves::generator::~generator()
@@ -48,8 +49,8 @@ sanguis::server::waves::generator::process(
 )
 {
 	for(
-		wave_list::iterator it = waves.begin();
-		it != waves.end();
+		wave_list::iterator it = waves_.begin();
+		it != waves_.end();
 	)
 	{
 		it->process(
@@ -59,7 +60,7 @@ sanguis::server::waves::generator::process(
 		);
 
 		if(it->ended())
-			it = waves.erase(it);
+			it = waves_.erase(it);
 		else
 			++it;
 	}
@@ -119,7 +120,8 @@ try
 			i < count;
 			++i
 		)
-			waves.push_back(
+			fcppt::container::ptr::push_back_unique_ptr(
+				waves_,
 				make(
 					args_[2]
 				)
@@ -132,9 +134,9 @@ try
 			i < count;
 			++i
 		)
-		{
-			wave_auto_ptr ptr(
-				fcppt::make_auto_ptr<
+			fcppt::container::ptr::push_back_unique_ptr(
+				waves_,
+				fcppt::make_unique_ptr<
 					single
 				>(
 					convert_enemy_name(
@@ -142,11 +144,6 @@ try
 					)
 				)
 			);
-
-			waves.push_back(
-				ptr
-			);
-		}
 	else
 	{
 		console_.print_line(
@@ -173,7 +170,7 @@ void
 sanguis::server::waves::generator::spawn_all()
 {
 	// TODO: somehow put this in a configuration file!
-	boost::assign::ptr_push_back<waves::infinite>(waves)
+	boost::assign::ptr_push_back<waves::infinite>(waves_)
 	(
 		delay(60),
 		spawn_interval(40),
