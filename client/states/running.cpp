@@ -2,11 +2,11 @@
 #include "menu.hpp"
 #include "gameover.hpp"
 #include "../perk_cast.hpp"
-#include "../message_event.hpp"
 #include "../menu_event.hpp"
 #include "../log.hpp"
 #include "../invalid_id.hpp"
 #include "../entity_type.hpp"
+#include "../events/message.hpp"
 #include "../control/logic.hpp"
 #include "../control/input_handler.hpp"
 #include "../cursor/object.hpp"
@@ -196,7 +196,7 @@ sanguis::client::states::running::pause(
 
 boost::statechart::result
 sanguis::client::states::running::react(
-	message_event const &_event
+	events::message const &_event
 )
 {
 	static sanguis::messages::call::object<
@@ -216,7 +216,7 @@ sanguis::client::states::running::react(
 
 	return
 		dispatcher(
-			*_event.message(),
+			*_event.value(),
 			*this,
 			std::tr1::bind(
 				&running::handle_default_msg,
@@ -473,5 +473,12 @@ sanguis::client::states::running::cursor_show(
 void
 sanguis::client::states::running::on_escape()
 {
+#if 0
+	send_message(
+		sanguis::messages::create(
+			sanguis::messages::player_pause()
+		)
+	);
+#endif
 	context<machine>().quit(); // TODO!
 }

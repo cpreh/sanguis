@@ -1,6 +1,6 @@
 #include "object.hpp"
 #include "config/settings/file.hpp"
-#include "message_event.hpp"
+#include "events/message.hpp"
 #include "states/menu.hpp"
 #include "log.hpp"
 #include "../args/multi_sampling.hpp"

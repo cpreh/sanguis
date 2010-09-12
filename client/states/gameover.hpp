@@ -3,7 +3,7 @@
 
 #include "running.hpp"
 #include "../menu_event.hpp"
-#include "../message_event_fwd.hpp"
+#include "../events/message_fwd.hpp"
 #include "../../messages/unpause.hpp"
 #include "../../tick_event_fwd.hpp"
 #include <sge/gui/widgets/buttons/image.hpp>
@@ -28,17 +28,17 @@ class gameover
 public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<tick_event>,
-		boost::statechart::custom_reaction<message_event>,
+		boost::statechart::custom_reaction<events::message>,
 		boost::statechart::custom_reaction<menu_event>
 	> reactions;
 
 	gameover(my_context);
 
 	boost::statechart::result react(tick_event const &);
-	boost::statechart::result react(message_event const &);
+	boost::statechart::result react(events::message const &);
 	boost::statechart::result react(menu_event const &);
 
-	private:
+private:
 	boost::statechart::result handle_default_msg(messages::base const &);
 	void return_clicked();
 

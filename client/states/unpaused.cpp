@@ -1,6 +1,7 @@
 #include "unpaused.hpp"
 #include "paused.hpp"
 #include "../menu_event.hpp"
+#include "../events/message.hpp"
 #include "../../messages/call/object.hpp"
 #include "../../tick_event.hpp"
 #include <fcppt/function/object.hpp>
@@ -35,7 +36,8 @@ sanguis::client::states::unpaused::react(
 
 boost::statechart::result
 sanguis::client::states::unpaused::react(
-	message_event const &m)
+	events::message const &_event
+)
 {
 	static messages::call::object<
 		boost::mpl::vector1<
@@ -45,7 +47,7 @@ sanguis::client::states::unpaused::react(
 	> dispatcher;
 
 	return dispatcher(
-		*m.message(),
+		*_event.value(),
 		*this,
 		std::tr1::bind(
 			&unpaused::handle_default_msg,

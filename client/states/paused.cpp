@@ -1,6 +1,7 @@
 #include "paused.hpp"
 #include "unpaused.hpp"
 #include "../menu_event.hpp"
+#include "../events/message.hpp"
 #include "../../tick_event.hpp"
 #include "../../messages/unpause.hpp"
 #include "../../messages/call/object.hpp"
@@ -37,7 +38,8 @@ sanguis::client::states::paused::react(
 
 boost::statechart::result
 sanguis::client::states::paused::react(
-	message_event const &m)
+	events::message const &m
+)
 {
 	static messages::call::object<
 		boost::mpl::vector1<
@@ -47,7 +49,7 @@ sanguis::client::states::paused::react(
 	> dispatcher;
 
 	return dispatcher(
-		*m.message(),
+		*m.value(),
 		*this,
 		std::tr1::bind(
 			&paused::handle_default_msg,

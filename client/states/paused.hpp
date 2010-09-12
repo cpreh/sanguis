@@ -3,7 +3,7 @@
 
 #include "running.hpp"
 #include "../perk_chooser.hpp"
-#include "../message_event_fwd.hpp"
+#include "../events/message_fwd.hpp"
 #include "../../messages/unpause.hpp"
 #include "../../tick_event_fwd.hpp"
 #include <boost/statechart/state.hpp>
@@ -18,12 +18,16 @@ namespace client
 namespace states
 {
 class paused
-	: public boost::statechart::state<paused,running>
+:
+	public boost::statechart::state<
+		paused,
+		running
+	>
 {
 public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<tick_event>,
-		boost::statechart::custom_reaction<message_event>
+		boost::statechart::custom_reaction<events::message>
 	> reactions;
 
 	explicit paused(my_context);
@@ -31,7 +35,7 @@ public:
 	typedef boost::statechart::result result_type;
 
 	boost::statechart::result react(tick_event const &);
-	boost::statechart::result react(message_event const &);
+	boost::statechart::result react(events::message const &);
 
 	boost::statechart::result operator()(messages::unpause const &);
 private:

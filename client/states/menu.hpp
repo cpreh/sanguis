@@ -3,7 +3,7 @@
 
 #include "menu_fwd.hpp"
 #include "../machine.hpp"
-#include "../message_event_fwd.hpp"
+#include "../events/message_fwd.hpp"
 #include "../menu/object.hpp"
 #include "../../messages/net_error.hpp"
 #include "../../messages/connect.hpp"
@@ -30,17 +30,23 @@ class menu
 public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<tick_event>,
-		boost::statechart::custom_reaction<message_event>
+		boost::statechart::custom_reaction<events::message>
 	> reactions;
 
 	explicit menu(my_context); 
 
 	typedef boost::statechart::result result_type;
 
-	boost::statechart::result react(
-		tick_event const &);
-	boost::statechart::result react(
-		message_event const &);
+	boost::statechart::result
+	react(
+		tick_event const &
+	);
+
+	boost::statechart::result
+	react(
+		events::message const &
+	);
+
 	boost::statechart::result handle_default_msg(
 		messages::base const &);
 	boost::statechart::result operator()(

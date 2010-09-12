@@ -1,5 +1,5 @@
 #include "machine.hpp"
-#include "message_event.hpp"
+#include "events/message.hpp"
 #include "cursor/object.hpp"
 #include "../net/exception.hpp"
 #include "../messages/connect.hpp"
@@ -144,7 +144,7 @@ void
 sanguis::client::machine::connect_callback()
 {
 	process_event(
-		message_event(
+		events::message(
 			messages::create(
 				messages::connect()
 			)
@@ -158,7 +158,7 @@ sanguis::client::machine::disconnect_callback(
 )
 {
 	process_event(
-		message_event(
+		events::message(
 			messages::create(
 				messages::disconnect()
 			)
@@ -172,7 +172,7 @@ sanguis::client::machine::process_message(
 )
 {
 	process_event(
-		message_event(
+		events::message(
 			ptr
 		)
 	);
@@ -249,7 +249,7 @@ try
 catch (net::exception const &e)
 {
 	process_event(
-		message_event(
+		events::message(
 			messages::create(
 				messages::net_error(
 					fcppt::utf8::convert(

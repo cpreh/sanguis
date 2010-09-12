@@ -6,7 +6,7 @@
 #include "../../tick_event.hpp"
 #include "../../resolution_type.hpp"
 #include "../menu_event.hpp"
-#include "../message_event.hpp"
+#include "../events/message.hpp"
 #include "../cursor/object.hpp"
 #include <sge/gui/skins/standard.hpp>
 #include <sge/gui/unit.hpp>
@@ -201,11 +201,11 @@ sanguis::client::states::gameover::react(
 
 boost::statechart::result
 sanguis::client::states::gameover::react(
-	message_event const &m
+	events::message const &m
 )
 {
 	return handle_default_msg(
-		*m.message()
+		*m.value()
 	);
 }
 

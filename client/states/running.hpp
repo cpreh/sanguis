@@ -6,11 +6,11 @@
 #include "../machine.hpp"
 #include "../perk_chooser.hpp"
 #include "../music_handler.hpp"
-#include "../message_event_fwd.hpp"
 #include "../perk_container.hpp"
 #include "../level_type.hpp"
 #include "../menu_event_fwd.hpp"
 #include "../daytime_settings.hpp"
+#include "../events/message_fwd.hpp"
 #include "../control/logic_fwd.hpp"
 #include "../control/input_handler_fwd.hpp"
 #include "../highscore/name_container.hpp"
@@ -57,7 +57,7 @@ class running
 public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<
-			message_event
+			events::message
 		>,
 		boost::statechart::transition<
 			menu_event,
@@ -88,7 +88,7 @@ public:
 
 	boost::statechart::result
 	react(
-		message_event const &
+		events::message const &
 	);
 	
 	typedef boost::statechart::result result_type;

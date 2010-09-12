@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_STATES_UNPAUSED_HPP_INCLUDED
 
 #include "running.hpp"
-#include "../message_event.hpp"
+#include "../events/message_fwd.hpp"
 #include "../../tick_event.hpp"
 #include "../../messages/pause.hpp"
 #include <boost/statechart/state.hpp>
@@ -22,7 +22,7 @@ class unpaused
 public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<tick_event>,
-		boost::statechart::custom_reaction<message_event>
+		boost::statechart::custom_reaction<events::message>
 	> reactions;
 
 	explicit unpaused(my_context);
@@ -30,7 +30,7 @@ public:
 	typedef boost::statechart::result result_type;
 
 	boost::statechart::result react(tick_event const &);
-	boost::statechart::result react(message_event const &);
+	boost::statechart::result react(events::message const &);
 	boost::statechart::result operator()(messages::pause const &);
 private:
 	boost::statechart::result handle_default_msg(messages::base const &);

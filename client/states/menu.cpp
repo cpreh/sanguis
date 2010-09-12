@@ -8,7 +8,7 @@
 #include "../../exception.hpp"
 #include "../../cast_enum.hpp"
 #include "../machine.hpp"
-#include "../message_event.hpp"
+#include "../events/message.hpp"
 #include "../menu_event.hpp"
 #include "../log.hpp"
 #include <sge/renderer/state/list.hpp>
@@ -87,7 +87,7 @@ sanguis::client::states::menu::react(
 
 boost::statechart::result
 sanguis::client::states::menu::react(
-	message_event const &m
+	events::message const &m
 )
 {
 	static messages::call::object<
@@ -101,7 +101,7 @@ sanguis::client::states::menu::react(
 	> dispatcher;
 
 	return dispatcher(
-		*m.message(),
+		*m.value(),
 		*this,
 		std::tr1::bind(
 			&menu::handle_default_msg,
