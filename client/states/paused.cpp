@@ -1,8 +1,8 @@
 #include "paused.hpp"
 #include "unpaused.hpp"
-#include "../menu_event.hpp"
+#include "../events/menu.hpp"
 #include "../events/message.hpp"
-#include "../../tick_event.hpp"
+#include "../events/tick.hpp"
 #include "../../messages/unpause.hpp"
 #include "../../messages/call/object.hpp"
 #include <fcppt/tr1/functional.hpp>
@@ -12,25 +12,23 @@ sanguis::client::states::paused::paused(my_context ctx)
 :
 	my_base(ctx),
 	chooser_activation_(
-		context<running>().perk_chooser())
+		context<running>().perk_chooser()
+	)
 {
 	context<running>().pause(true);
 }
 
 boost::statechart::result
 sanguis::client::states::paused::react(
-	tick_event const &t)
+	events::tick const &_event
+)
 {
 	context<running>().process(
-		tick_event(
-			t.delta()
-		)
+		_event
 	);
 
 	context<running>().draw(
-		tick_event(
-			t.delta()
-		)
+		_event
 	);
 
 	return discard_event();
@@ -38,7 +36,7 @@ sanguis::client::states::paused::react(
 
 boost::statechart::result
 sanguis::client::states::paused::react(
-	events::message const &m
+	events::message const &_event
 )
 {
 	static messages::call::object<
@@ -49,7 +47,7 @@ sanguis::client::states::paused::react(
 	> dispatcher;
 
 	return dispatcher(
-		*m.value(),
+		*_event.value(),
 		*this,
 		std::tr1::bind(
 			&paused::handle_default_msg,

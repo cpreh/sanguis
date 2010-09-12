@@ -3,10 +3,10 @@
 #include "../perk_cast.hpp"
 #include "../../media_path.hpp"
 #include "../../messages/create.hpp"
-#include "../../tick_event.hpp"
 #include "../../resolution_type.hpp"
-#include "../menu_event.hpp"
+#include "../events/menu.hpp"
 #include "../events/message.hpp"
+#include "../events/tick.hpp"
 #include "../cursor/object.hpp"
 #include <sge/gui/skins/standard.hpp>
 #include <sge/gui/unit.hpp>
@@ -183,17 +183,22 @@ sanguis::client::states::gameover::gameover(
 
 boost::statechart::result
 sanguis::client::states::gameover::react(
-	tick_event const &)
+	events::tick const &
+)
 {
 	context<machine>().dispatch();
+
 	m_.update();
+
 	m_.draw();
+
 	return discard_event();
 }
 
 boost::statechart::result
 sanguis::client::states::gameover::react(
-	menu_event const &)
+	events::menu const &
+)
 {
 	return transit<menu>();
 }
@@ -209,15 +214,18 @@ sanguis::client::states::gameover::react(
 	);
 }
 
-boost::statechart::result sanguis::client::states::gameover::handle_default_msg(
-	messages::base const &)
+boost::statechart::result
+sanguis::client::states::gameover::handle_default_msg(
+	messages::base const &
+)
 {
 	return discard_event();
 }
 
-void sanguis::client::states::gameover::return_clicked()
+void
+sanguis::client::states::gameover::return_clicked()
 {
 	post_event(
-		menu_event()
+		events::menu()
 	);
 }

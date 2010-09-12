@@ -1,12 +1,12 @@
 #include "object.hpp"
 #include "config/settings/file.hpp"
 #include "events/message.hpp"
+#include "events/tick.hpp"
 #include "states/menu.hpp"
 #include "log.hpp"
 #include "../args/multi_sampling.hpp"
 #include "../server/object.hpp"
 #include "../media_path.hpp"
-#include "../tick_event.hpp"
 #include "../time_type.hpp"
 #include "../scoped_machine_impl.hpp"
 
@@ -238,7 +238,7 @@ sanguis::client::object::loop_handler()
 {
 	if(
 		!machine_.process(
-			tick_event(
+			events::tick(
 				static_cast<
 					time_type
 				>(

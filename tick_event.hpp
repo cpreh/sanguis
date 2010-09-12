@@ -7,11 +7,20 @@
 
 namespace sanguis
 {
-class tick_event : public boost::statechart::event<tick_event>
+
+class tick_event
+:
+	public boost::statechart::event<
+		tick_event
+	>
 {
 public:
-	explicit tick_event(time_type);
-	time_type delta() const;
+	explicit tick_event(
+		time_type
+	);
+
+	time_type
+	delta() const;
 private:
 	time_type delta_;
 };

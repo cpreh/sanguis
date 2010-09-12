@@ -1,6 +1,7 @@
 #include "machine.hpp"
 #include "events/message.hpp"
 #include "cursor/object.hpp"
+#include "events/tick.hpp"
 #include "../net/exception.hpp"
 #include "../messages/connect.hpp"
 #include "../messages/disconnect.hpp"
@@ -10,7 +11,6 @@
 #include "../net/deserialize.hpp"
 #include "../net/serialize.hpp"
 #include "../log.hpp"
-#include "../tick_event.hpp"
 
 #include <sge/audio/player.hpp>
 #include <sge/audio/pool.hpp>
@@ -217,7 +217,7 @@ sanguis::client::machine::net()
 
 bool
 sanguis::client::machine::process(
-	tick_event const &_event
+	events::tick const &_event
 )
 try
 {

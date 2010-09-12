@@ -9,7 +9,8 @@
 #include "../../cast_enum.hpp"
 #include "../machine.hpp"
 #include "../events/message.hpp"
-#include "../menu_event.hpp"
+#include "../events/tick.hpp"
+#include "../events/menu.hpp"
 #include "../log.hpp"
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/var.hpp>
@@ -72,18 +73,17 @@ sanguis::client::states::menu::menu(
 
 boost::statechart::result
 sanguis::client::states::menu::react(
-	tick_event const &t
+	events::tick const &_event
 )
 {
 	context<machine>().dispatch();
 
 	menu_.process(
-		t.delta()
+		_event.delta()
 	);
 
 	return discard_event();
 }
-
 
 boost::statechart::result
 sanguis::client::states::menu::react(

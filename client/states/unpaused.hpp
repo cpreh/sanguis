@@ -3,7 +3,8 @@
 
 #include "running.hpp"
 #include "../events/message_fwd.hpp"
-#include "../../tick_event.hpp"
+#include "../events/menu_fwd.hpp"
+#include "../events/tick_fwd.hpp"
 #include "../../messages/pause.hpp"
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
@@ -16,24 +17,57 @@ namespace client
 {
 namespace states
 {
+
 class unpaused
-	: public boost::statechart::state<unpaused,running>
+:
+	public boost::statechart::state<
+		unpaused,
+		running
+	>
 {
 public:
 	typedef boost::mpl::list<
-		boost::statechart::custom_reaction<tick_event>,
-		boost::statechart::custom_reaction<events::message>
+		boost::statechart::custom_reaction<
+			events::tick
+		>,
+		boost::statechart::custom_reaction<
+			events::message
+		>,
+		boost::statechart::custom_reaction<
+			events::menu
+		>
 	> reactions;
 
-	explicit unpaused(my_context);
+	explicit unpaused(
+		my_context
+	);
 
 	typedef boost::statechart::result result_type;
 
-	boost::statechart::result react(tick_event const &);
-	boost::statechart::result react(events::message const &);
-	boost::statechart::result operator()(messages::pause const &);
+	boost::statechart::result
+	react(
+		events::tick const &
+	);
+
+	boost::statechart::result
+	react(
+		events::message const &
+	);
+
+	boost::statechart::result
+	react(
+		events::menu const &
+	);
+
+	result_type
+	operator()(
+		messages::pause const &
+	);
 private:
-	boost::statechart::result handle_default_msg(messages::base const &);
+	boost::statechart::result
+	handle_default_msg(
+		messages::base const &
+	);
 };
 }
 }

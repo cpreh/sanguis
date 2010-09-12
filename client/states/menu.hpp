@@ -4,13 +4,13 @@
 #include "menu_fwd.hpp"
 #include "../machine.hpp"
 #include "../events/message_fwd.hpp"
+#include "../events/tick_fwd.hpp"
 #include "../menu/object.hpp"
 #include "../../messages/net_error.hpp"
 #include "../../messages/connect.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../messages/connect_state.hpp"
 #include "../../connect_state.hpp"
-#include "../../tick_event_fwd.hpp"
 #include <fcppt/log/object_fwd.hpp>
 #include <sge/renderer/state/scoped.hpp>
 #include <boost/statechart/state.hpp>
@@ -25,12 +25,20 @@ namespace states
 {
 
 class menu
-	: public boost::statechart::state<menu,machine>
+:
+	public boost::statechart::state<
+		menu,
+		machine
+	>
 {
 public:
 	typedef boost::mpl::list<
-		boost::statechart::custom_reaction<tick_event>,
-		boost::statechart::custom_reaction<events::message>
+		boost::statechart::custom_reaction<
+			events::tick
+		>,
+		boost::statechart::custom_reaction<
+			events::message
+		>
 	> reactions;
 
 	explicit menu(my_context); 
@@ -39,7 +47,7 @@ public:
 
 	boost::statechart::result
 	react(
-		tick_event const &
+		events::tick const &
 	);
 
 	boost::statechart::result
@@ -47,21 +55,38 @@ public:
 		events::message const &
 	);
 
-	boost::statechart::result handle_default_msg(
-		messages::base const &);
-	boost::statechart::result operator()(
-		messages::net_error const &);
-	boost::statechart::result operator()(
-		messages::connect const &);
-	boost::statechart::result operator()(
-		messages::disconnect const &);
-	boost::statechart::result operator()(
-		messages::connect_state const &);
+	boost::statechart::result
+	handle_default_msg(
+		messages::base const &
+	);
+
+	result_type
+	operator()(
+		messages::net_error const &
+	);
+
+	result_type
+	operator()(
+		messages::connect const &
+	);
+
+	result_type
+	operator()(
+		messages::disconnect const &
+	);
+
+	result_type
+	operator()(
+		messages::connect_state const &
+	);
 private:
-	fcppt::log::object &log();
+	fcppt::log::object &
+	log();
 
 	client::menu::object menu_;
+
 	connect_state::type connect_state_;
+
 	sge::renderer::state::scoped const renderer_state_;
 	
 	void

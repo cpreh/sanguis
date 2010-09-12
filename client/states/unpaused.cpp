@@ -1,14 +1,15 @@
 #include "unpaused.hpp"
 #include "paused.hpp"
-#include "../menu_event.hpp"
 #include "../events/message.hpp"
+#include "../events/menu.hpp"
+#include "../events/tick.hpp"
 #include "../../messages/call/object.hpp"
-#include "../../tick_event.hpp"
 #include <fcppt/function/object.hpp>
 #include <fcppt/tr1/functional.hpp>
 
 sanguis::client::states::unpaused::unpaused(
-	my_context ctx)
+	my_context ctx
+)
 :
 	my_base(ctx)
 {
@@ -17,18 +18,15 @@ sanguis::client::states::unpaused::unpaused(
 
 boost::statechart::result
 sanguis::client::states::unpaused::react(
-	tick_event const &t)
+	events::tick const &_event
+)
 {
 	context<running>().process(
-		tick_event(
-			t.delta()
-		)
+		_event
 	);
 
 	context<running>().draw(
-		tick_event(
-			t.delta()
-		)
+		_event
 	);
 
 	return discard_event();
@@ -56,17 +54,27 @@ sanguis::client::states::unpaused::react(
 		)
 	);
 }
+boost::statechart::result
+sanguis::client::states::unpaused::react(
+	events::menu const &_event
+)
+{
+	context<machine>().quit(); // TODO!
+	return discard_event(); // TODO!
+}
 
 boost::statechart::result
 sanguis::client::states::unpaused::operator()(
-	messages::pause const &)
+	messages::pause const &
+)
 {
 	return transit<paused>();
 }
 
 boost::statechart::result
 sanguis::client::states::unpaused::handle_default_msg(
-	messages::base const &)
+	messages::base const &
+)
 {
 	return forward_event();
 }

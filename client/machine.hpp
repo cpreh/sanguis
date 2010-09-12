@@ -5,6 +5,7 @@
 #include "cursor/object_ptr.hpp"
 #include "cursor/const_object_ptr.hpp"
 #include "config/settings/object_fwd.hpp"
+#include "events/tick_fwd.hpp"
 #include "highscore/name_container.hpp"
 #include "highscore/score_type.hpp"
 #include "states/menu_fwd.hpp"
@@ -17,7 +18,6 @@
 #include "../net/data_type.hpp"
 #include "../net/hostname_type.hpp"
 #include "../net/port_type.hpp"
-#include "../tick_event_fwd.hpp"
 
 #include <sge/audio/player_ptr.hpp>
 #include <sge/audio/pool_fwd.hpp>
@@ -104,7 +104,7 @@ public:
 
 	bool
 	process(
-		tick_event const &
+		events::tick const &
 	);
 
 	void

@@ -2,14 +2,15 @@
 #include "menu.hpp"
 #include "gameover.hpp"
 #include "../perk_cast.hpp"
-#include "../menu_event.hpp"
 #include "../log.hpp"
 #include "../invalid_id.hpp"
 #include "../entity_type.hpp"
-#include "../events/message.hpp"
 #include "../control/logic.hpp"
 #include "../control/input_handler.hpp"
 #include "../cursor/object.hpp"
+#include "../events/menu.hpp"
+#include "../events/message.hpp"
+#include "../events/tick.hpp"
 #include "../messages/add.hpp"
 #include "../messages/visible.hpp"
 #include "../draw2d/screen_to_virtual.hpp" // FIXME
@@ -19,7 +20,6 @@
 #include "../../messages/move.hpp"
 #include "../../messages/create.hpp"
 #include "../../load/context.hpp"
-#include "../../tick_event.hpp"
 #include "../../cast_enum.hpp"
 #include <sge/audio/pool.hpp>
 #include <sge/audio/player.hpp>
@@ -150,7 +150,7 @@ sanguis::client::states::running::~running()
 
 void 
 sanguis::client::states::running::draw(
-	tick_event const &_event
+	events::tick const &_event
 )
 {
 	drawer_->draw(
@@ -162,7 +162,7 @@ sanguis::client::states::running::draw(
 
 void 
 sanguis::client::states::running::process(
-	tick_event const &_event
+	events::tick const &_event
 )
 {
 	drawer_->set_time(
@@ -473,12 +473,7 @@ sanguis::client::states::running::cursor_show(
 void
 sanguis::client::states::running::on_escape()
 {
-#if 0
-	send_message(
-		sanguis::messages::create(
-			sanguis::messages::player_pause()
-		)
+	post_event(
+		events::menu()
 	);
-#endif
-	context<machine>().quit(); // TODO!
 }

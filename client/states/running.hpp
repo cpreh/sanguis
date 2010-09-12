@@ -8,7 +8,6 @@
 #include "../music_handler.hpp"
 #include "../perk_container.hpp"
 #include "../level_type.hpp"
-#include "../menu_event_fwd.hpp"
 #include "../daytime_settings.hpp"
 #include "../events/message_fwd.hpp"
 #include "../control/logic_fwd.hpp"
@@ -17,8 +16,8 @@
 #include "../highscore/score_type.hpp"
 #include "../draw2d/scene/object_fwd.hpp"
 #include "../draw2d/sprite/point.hpp"
+#include "../events/tick_fwd.hpp"
 #include "../../perk_type.hpp"
-#include "../../tick_event_fwd.hpp"
 #include "../../messages/base.hpp"
 #include "../../messages/add_own_player.hpp"
 #include "../../messages/highscore.hpp"
@@ -58,10 +57,6 @@ public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<
 			events::message
-		>,
-		boost::statechart::transition<
-			menu_event,
-			menu
 		>
 	> reactions;
 
@@ -73,12 +68,12 @@ public:
 
 	void
 	draw(
-		tick_event const &
+		events::tick const &
 	);
 
 	void
 	process(
-		tick_event const &
+		events::tick const &
 	);
 
 	void
@@ -209,6 +204,7 @@ private:
 		cursor_pos_conn_,
 		cursor_show_conn_;
 };
+
 }
 }
 }
