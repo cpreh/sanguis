@@ -1,5 +1,7 @@
 #include "input_handler.hpp"
 #include "player_action.hpp"
+#include "axis_direction_max.hpp"
+#include "axis_direction_min.hpp"
 #include "../log.hpp"
 #include "../../exception.hpp"
 #include <sge/input/system.hpp>
@@ -111,20 +113,20 @@ sanguis::client::control::input_handler::direction_event(
 	sge::input::key_pair const &_key_pair
 )
 {
-	// TODO: fix this!
-	sge::input::key_state const val(
+	key_scale scale(
 		_key_pair.value()
 		?
-			1
+			control::axis_direction_max()
 		:
-			-1
+			control::axis_direction_min()
 	);
 
 	action_type::type to_send;
 
-	key_scale scale = static_cast<key_scale>(val);
-
-	switch(_key_pair.key().code()) {
+	switch(
+		_key_pair.key().code()
+	)
+	{
 	case sge::input::kc::key_a:
 		scale = -scale;
 	case sge::input::kc::key_d:

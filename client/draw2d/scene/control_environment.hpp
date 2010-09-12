@@ -50,6 +50,12 @@ private:
 		client::control::key_scale
 	);
 
+	void
+	update_direction(
+		client::control::key_scale &ref,
+		client::control::key_scale diff
+	);
+
 	object &object_;
 
 	client::cursor::object_ptr const cursor_;

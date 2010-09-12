@@ -2,10 +2,13 @@
 #include "object.hpp"
 #include "../entities/base.hpp"
 #include "../screen_to_virtual.hpp"
+#include "../../control/axis_direction_max.hpp"
+#include "../../control/axis_direction_min.hpp"
 #include "../../cursor/object.hpp"
 #include <fcppt/math/vector/angle_between.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
+#include <fcppt/math/clamp.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/assert.hpp>
 
@@ -76,7 +79,10 @@ sanguis::client::draw2d::scene::control_environment::direction_x(
 	client::control::key_scale const x
 )
 {
-	direction_.x() += x;
+	update_direction(
+		direction_.x(),
+		x
+	);
 }
 
 void
@@ -84,5 +90,30 @@ sanguis::client::draw2d::scene::control_environment::direction_y(
 	client::control::key_scale const y
 )
 {
-	direction_.y() += y;
+	update_direction(
+		direction_.y(),
+		y
+	);
+}
+
+void
+sanguis::client::draw2d::scene::control_environment::update_direction(
+	client::control::key_scale &_ref,
+	client::control::key_scale const _diff
+)
+{
+	_ref =
+		fcppt::math::clamp(
+			_ref + _diff,
+			static_cast<
+				client::control::key_scale
+			>(
+				control::axis_direction_min()
+			),
+			static_cast<
+				client::control::key_scale
+			>(
+				control::axis_direction_max()
+			)
+		);
 }
