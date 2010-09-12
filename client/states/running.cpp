@@ -29,6 +29,8 @@
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/state/trampoline.hpp>
+#include <sge/input/action.hpp>
+#include <sge/input/system.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/utf8/convert.hpp>
@@ -55,7 +57,7 @@ sanguis::client::states::running::running(
 	daytime_settings_(
 		context<machine>().console().gfx().object()
 	),
-	drawer(
+	drawer_(
 		new draw2d::scene::object(
 			context<machine>().resources(),
 			context<machine>().renderer(),
@@ -73,12 +75,13 @@ sanguis::client::states::running::running(
 				this,
 				std::tr1::placeholders::_1
 			),
-			drawer->control_environment(),
+			drawer_->control_environment(),
 			context<machine>().console().gfx().object()
 		)
 	),
-	input(
+	player_input_(
 		new control::input_handler(
+			context<machine>().input_system(),
 			std::tr1::bind(
 				&control::logic::handle_player_action,
 				logic_.get(),
@@ -86,12 +89,14 @@ sanguis::client::states::running::running(
 			)
 		)
 	),
-	input_connection(
-		context<machine>().console().register_callback(
-			std::tr1::bind(
-				&control::input_handler::input_callback,
-				input.get(),
-				std::tr1::placeholders::_1
+	esc_connection_(
+		context<machine>().input_system()->register_callback(
+			sge::input::action(
+				sge::input::kc::key_escape,
+				std::tr1::bind(
+					&states::running::on_escape,
+					this
+				)
 			)
 		)
 	),
@@ -107,8 +112,8 @@ sanguis::client::states::running::running(
 		),
 		context<machine>().cursor()
 	),
-	cursor_id(
-		drawer->client_message(
+	cursor_id_(
+		drawer_->client_message(
 			client::messages::add(
 				client::entity_type::cursor
 			)
@@ -133,7 +138,7 @@ sanguis::client::states::running::running(
 		)
 	)
 {
-	drawer->client_message(
+	drawer_->client_message(
 		client::messages::add(
 			client::entity_type::background
 		)
@@ -145,27 +150,29 @@ sanguis::client::states::running::~running()
 
 void 
 sanguis::client::states::running::draw(
-	tick_event const &t
+	tick_event const &_event
 )
 {
-	drawer->draw(t.delta());
+	drawer_->draw(
+		_event.delta()
+	);
 
 	perk_chooser_.process();
 }
 
 void 
 sanguis::client::states::running::process(
-	tick_event const &t
+	tick_event const &_event
 )
 {
-	drawer->set_time(
+	drawer_->set_time(
 		daytime_settings_.current_time()
 	);
 
 	context<machine>().dispatch();
 
 	context<machine>().resources().update(
-		t.delta()
+		_event.delta()
 	);
 
 	context<machine>().sound_pool().update();
@@ -175,17 +182,21 @@ sanguis::client::states::running::process(
 
 void 
 sanguis::client::states::running::pause(
-	bool const b
+	bool const _on
 )
 {
-	logic_->pause(b);
+	logic_->pause(
+		_on
+	);
 
-	drawer->pause(b);
+	drawer_->pause(
+		_on
+	);
 }
 
 boost::statechart::result
 sanguis::client::states::running::react(
-	message_event const &m
+	message_event const &_event
 )
 {
 	static sanguis::messages::call::object<
@@ -203,15 +214,16 @@ sanguis::client::states::running::react(
 		running
 	> dispatcher;
 
-	return dispatcher(
-		*m.message(),
-		*this,
-		std::tr1::bind(
-			&running::handle_default_msg,
-			this,
-			std::tr1::placeholders::_1
-		)
-	);
+	return
+		dispatcher(
+			*_event.message(),
+			*this,
+			std::tr1::bind(
+				&running::handle_default_msg,
+				this,
+				std::tr1::placeholders::_1
+			)
+		);
 }
 
 boost::statechart::result
@@ -227,12 +239,12 @@ sanguis::client::states::running::operator()(
 			)
 		);
 
-		drawer->process_message(
+		drawer_->process_message(
 			*wrapped_msg
 		);
 	}
 
-	input->active(
+	player_input_->active(
 		true
 	);
 
@@ -244,7 +256,7 @@ sanguis::client::states::running::operator()(
 	sanguis::messages::remove_id const &
 )
 {
-	input->active(
+	player_input_->active(
 		false
 	);
 
@@ -299,7 +311,8 @@ sanguis::client::states::running::operator()(
 	context<machine>().gameover_score(
 		static_cast<highscore::score_type>(
 			m.get<sanguis::messages::roles::highscore>()
-		));
+		)
+	);
 	
 	return transit<gameover>();
 }
@@ -329,7 +342,7 @@ sanguis::client::states::running::operator()(
 		)
 	);
 
-	drawer->process_message(
+	drawer_->process_message(
 		*sanguis::messages::create(
 			m
 		)
@@ -397,7 +410,7 @@ sanguis::client::states::running::handle_default_msg(
 	sanguis::messages::base const &m
 )
 {
-	drawer->process_message(m);
+	drawer_->process_message(m);
 
 	return discard_event();
 }
@@ -431,10 +444,10 @@ sanguis::client::states::running::cursor_pos(
 	draw2d::sprite::point const &pos // FIXME
 )
 {
-	drawer->process_message(
+	drawer_->process_message(
 		*sanguis::messages::create(
 			sanguis::messages::move(
-				cursor_id,
+				cursor_id_,
 				draw2d::screen_to_virtual( // FIXME
 					context<machine>().renderer()->screen_size(),
 					pos
@@ -446,13 +459,19 @@ sanguis::client::states::running::cursor_pos(
 
 void
 sanguis::client::states::running::cursor_show(
-	bool const show
+	bool const _show
 )
 {
-	drawer->client_message(
+	drawer_->client_message(
 		client::messages::visible(
-			cursor_id,
-			!show
+			cursor_id_,
+			!_show
 		)
 	);
+}
+
+void
+sanguis::client::states::running::on_escape()
+{
+	context<machine>().quit(); // TODO!
 }

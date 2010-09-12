@@ -24,8 +24,6 @@
 #include <sge/console/gfx_fwd.hpp>
 #include <sge/font/metrics_ptr.hpp>
 #include <sge/font/drawer_ptr.hpp>
-#include <sge/input/key_code.hpp>
-#include <sge/input/key_state_tracker_fwd.hpp>
 #include <sge/input/system_ptr.hpp>
 #include <sge/image/multi_loader_fwd.hpp>
 #include <sge/renderer/device_ptr.hpp>
@@ -55,7 +53,6 @@ public:
 		sge::audio::pool &,
 		sge::font::metrics_ptr,
 		sge::font::drawer_ptr,
-		sge::input::key_state_tracker &,
 		sge::console::gfx &,
 		sge::input::system_ptr,
 		sge::renderer::device_ptr,
@@ -140,11 +137,6 @@ public:
 	sge::font::drawer_ptr const
 	font_drawer() const;
 
-	bool
-	key_pressed(
-		sge::input::key_code
-	) const;
-	
 	sanguis::client::console &
 	console();
 	
@@ -200,8 +192,6 @@ private:
 	sge::font::metrics_ptr const font_metrics_;
 
 	sge::font::drawer_ptr const font_drawer_;
-
-	sge::input::key_state_tracker &ks;
 
 	sge::console::gfx &console_gfx_;
 	

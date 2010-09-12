@@ -15,7 +15,6 @@
 #include <sge/audio/player.hpp>
 #include <sge/audio/pool.hpp>
 #include <sge/console/gfx.hpp>
-#include <sge/input/key_state_tracker.hpp>
 #include <sge/input/system.hpp>
 #include <sge/mainloop/dispatch.hpp>
 #include <sge/renderer/scoped_block.hpp>
@@ -40,7 +39,6 @@ sanguis::client::machine::machine(
 	sge::audio::pool &_sound_pool,
 	sge::font::metrics_ptr const _font_metrics,
 	sge::font::drawer_ptr const _font_drawer,
-	sge::input::key_state_tracker &_ks,
 	sge::console::gfx &_console_gfx,
 	sge::input::system_ptr const input_system_,
 	sge::renderer::device_ptr const renderer_,
@@ -87,7 +85,6 @@ sanguis::client::machine::machine(
 	sound_pool_(_sound_pool),
 	font_metrics_(_font_metrics),
 	font_drawer_(_font_drawer),
-	ks(_ks),
 	console_gfx_(_console_gfx),
 	console_(
 		_console_gfx,
@@ -220,7 +217,7 @@ sanguis::client::machine::net()
 
 bool
 sanguis::client::machine::process(
-	tick_event const &t
+	tick_event const &_event
 )
 try
 {
@@ -237,13 +234,12 @@ try
 			renderer_
 		);
 
-		process_event(t);
+		process_event(
+			_event
+		);
 
 		if (console_gfx_.active())
 			console_gfx_.draw();
-
-		if (ks[sge::input::kc::key_escape])
-			quit();
 	}
 
 	screenshot_.process();
@@ -324,14 +320,6 @@ sge::font::drawer_ptr const
 sanguis::client::machine::font_drawer() const
 {
 	return font_drawer_;
-}
-
-bool
-sanguis::client::machine::key_pressed(
-	sge::input::key_code const key
-) const
-{
-	return ks[key];
 }
 
 sanguis::client::console &

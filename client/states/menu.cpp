@@ -135,7 +135,8 @@ sanguis::client::states::menu::operator()(
 
 boost::statechart::result
 sanguis::client::states::menu::operator()(
-	messages::connect const &)
+	messages::connect const &
+)
 {
 	context<machine>().send(
 		messages::create(
@@ -214,12 +215,15 @@ sanguis::client::states::menu::log()
 			FCPPT_TEXT("states::menu")
 		)
 	);
+
 	return log_;
 }
 
-void sanguis::client::states::menu::connect(
+void
+sanguis::client::states::menu::connect(
 	fcppt::string const &host,
-	fcppt::string const &port)
+	fcppt::string const &port
+)
 {
 	try
 	{
@@ -242,12 +246,14 @@ void sanguis::client::states::menu::connect(
 	}
 }
 
-void sanguis::client::states::menu::start_server()
+void
+sanguis::client::states::menu::start_server()
 {
 	context<machine>().start_server();
 }
 
-void sanguis::client::states::menu::cancel_connect()
+void
+sanguis::client::states::menu::cancel_connect()
 {
 	context<machine>().cancel_connect();
 }

@@ -9,12 +9,12 @@
 #include <sge/parse/json/find_member_exn.hpp>
 #include <sge/parse/json/get.hpp>
 #include <fcppt/algorithm/find_exn.hpp>
+#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/tr1/array.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/optional_impl.hpp>
-#include <fcppt/auto_ptr.hpp>
-#include <fcppt/make_auto_ptr.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/string.hpp>
 #include <boost/foreach.hpp>
@@ -129,30 +129,24 @@ sanguis::load::model::part::part(
 			inner_members[0]
 		);
 
-		fcppt::auto_ptr<
-			weapon_category
-		>
-		to_insert(
-			fcppt::make_auto_ptr<
-				weapon_category
-			>(
-				sge::parse::json::get<
-					sge::parse::json::object
-				>(
-					member.value_
-				),
-				param.new_texture(
-					texture
-				)
-			)
-		);
-
 		if(
-			categories.insert(
+			fcppt::container::ptr::insert_unique_ptr_map(
+				categories,
 				find_weapon_type(
 					member.name
 				),
-				to_insert
+				fcppt::make_unique_ptr<
+					weapon_category
+				>(
+					sge::parse::json::get<
+						sge::parse::json::object
+					>(
+						member.value_
+					),
+					param.new_texture(
+						texture
+					)
+				)
 			).second == false
 		)
 			FCPPT_LOG_WARNING(

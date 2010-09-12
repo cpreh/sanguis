@@ -61,9 +61,6 @@ sanguis::client::object::object(
 		settings_
 	),
 	sys_(_sys),
-	key_state_tracker_(
-		sys_.input_system()
-	),
 	font_metrics_(
 		sys_.font_system()->create_font(
 			sge::config::media_path()
@@ -148,7 +145,6 @@ sanguis::client::object::object(
 		sound_pool_,
 		font_metrics_,
 		font_drawer_,
-		key_state_tracker_,
 		console_gfx_,
 		sys_.input_system(),
 		sys_.renderer(),

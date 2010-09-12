@@ -178,6 +178,9 @@ private:
 		bool show
 	);
 
+	void
+	on_escape();
+
 	sge::renderer::state::scoped renderer_state_;
 
 	music_handler music_;
@@ -186,7 +189,7 @@ private:
 
 	fcppt::scoped_ptr<
 		draw2d::scene::object
-	> drawer;
+	> drawer_;
 
 	fcppt::scoped_ptr<
 		control::logic
@@ -194,13 +197,13 @@ private:
 
 	fcppt::scoped_ptr<
 		control::input_handler
-	> input;
+	> player_input_;
 
-	fcppt::signal::scoped_connection const input_connection;
+	fcppt::signal::scoped_connection const esc_connection_;
 
 	client::perk_chooser perk_chooser_;
 
-	entity_id const cursor_id;
+	entity_id const cursor_id_;
 
 	fcppt::signal::scoped_connection const
 		cursor_pos_conn_,

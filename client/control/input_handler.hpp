@@ -5,7 +5,9 @@
 #include "player_action_fwd.hpp"
 #include <sge/input/key_pair_fwd.hpp>
 #include <sge/input/key_state.hpp>
+#include <sge/input/system_ptr.hpp>
 #include <fcppt/function/object.hpp>
+#include <fcppt/signal/scoped_connection.hpp>
 
 namespace sanguis
 {
@@ -22,6 +24,7 @@ public:
 	> post_fun;
 
 	explicit input_handler(
+		sge::input::system_ptr,
 		post_fun const &
 	);
 
@@ -62,11 +65,13 @@ private:
 
 	bool active_;
 
-	post_fun const post_message;
+	post_fun const post_message_;
+
+	fcppt::signal::scoped_connection const connection_;
 
 	sge::input::key_state
-		last_x,
-		last_y;
+		last_x_,
+		last_y_;
 };
 
 }

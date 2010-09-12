@@ -15,7 +15,6 @@
 #include <sge/console/object.hpp>
 #include <sge/font/drawer_ptr.hpp>
 #include <sge/font/metrics_ptr.hpp>
-#include <sge/input/key_state_tracker.hpp>
 #include <sge/mainloop/io_service_ptr.hpp>
 #include <sge/time/timer.hpp>
 #include <sge/systems/instance_fwd.hpp>
@@ -67,8 +66,6 @@ private:
 
 	sge::systems::instance &sys_;
 
-	sge::input::key_state_tracker key_state_tracker_;
-	
 	sge::font::metrics_ptr const font_metrics_;
 
 	sge::font::drawer_ptr const font_drawer_;
