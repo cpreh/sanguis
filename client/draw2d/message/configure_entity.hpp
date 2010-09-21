@@ -15,6 +15,7 @@
 #include "../../../messages/roles/health.hpp"
 #include "../../../messages/roles/speed.hpp"
 #include "../../../entity_id.hpp"
+#include <fcppt/nonassignable.hpp>
 #include <boost/mpl/map.hpp>
 #include <boost/mpl/pair.hpp>
 #include <boost/mpl/at.hpp>
@@ -35,6 +36,10 @@ template<
 >
 class configure_entity
 {
+	FCPPT_NONASSIGNABLE(
+		configure_entity
+	)
+
 	typedef boost::mpl::map<
 		boost::mpl::pair<
 			messages::pos,

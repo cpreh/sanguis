@@ -5,6 +5,7 @@
 #include "../space_unit.hpp"
 #include "../pos_type.hpp"
 #include <fcppt/math/vector/basic_decl.hpp>
+#include <fcppt/nonassignable.hpp>
 
 namespace sanguis
 {
@@ -13,7 +14,11 @@ namespace server
 namespace entities
 {
 
-class insert_parameters {
+class insert_parameters
+{
+	FCPPT_NONASSIGNABLE(
+		insert_parameters
+	)
 public:
 	insert_parameters(
 		pos_type const &,

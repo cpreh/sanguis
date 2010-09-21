@@ -5,6 +5,7 @@
 #include "../../sprite/normal/system.hpp"
 #include "../../sprite/colored/system.hpp"
 #include "../../../../load/model/collection_fwd.hpp"
+#include <fcppt/nonassignable.hpp>
 
 namespace sanguis
 {
@@ -19,6 +20,9 @@ namespace model
 
 class parameters
 {
+	FCPPT_NONASSIGNABLE(
+		parameters
+	)
 public:
 	explicit parameters(
 		sprite::colored::system &,

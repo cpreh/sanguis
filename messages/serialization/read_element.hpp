@@ -2,6 +2,7 @@
 #define SANGUIS_MESSAGES_SERIALIZATION_READ_ELEMENT_HPP_INCLUDED
 
 #include "istream.hpp"
+#include <fcppt/nonassignable.hpp>
 
 namespace sanguis
 {
@@ -13,16 +14,24 @@ namespace serialization
 template<
 	typename Class
 >
-struct read_element {
+class read_element
+{
+	FCPPT_NONASSIGNABLE(
+		read_element
+	)
+public:
 	read_element(
 		std::istream &is,
-		Class &obj);
+		Class &obj
+	);
 
 	template<
 		typename Role
 	>
-	void operator()(
-		Role &) const;
+	void
+	operator()(
+		Role &
+	) const;
 private:
 	istream &is;
 	mutable Class &obj;

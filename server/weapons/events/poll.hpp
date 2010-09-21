@@ -4,6 +4,7 @@
 #include "poll_fwd.hpp"
 #include "../../entities/with_weapon_fwd.hpp"
 #include "../../../time_type.hpp"
+#include <fcppt/nonassignable.hpp>
 #include <boost/statechart/event.hpp>
 
 namespace sanguis
@@ -21,6 +22,9 @@ class poll
 		poll
 	>
 {
+	FCPPT_NONASSIGNABLE(
+		poll
+	)
 public:
 	poll(
 		time_type,

@@ -7,12 +7,13 @@
 #include <fcppt/log/context_fwd.hpp>
 #include <boost/program_options/options_description.hpp>
 #include <boost/program_options/variables_map.hpp>
+#include <string>
 
 namespace sanguis
 {
 class log_switcher
 {
-FCPPT_NONCOPYABLE(log_switcher)
+	FCPPT_NONCOPYABLE(log_switcher)
 public:
 	typedef
 	boost::program_options::options_description &
@@ -33,7 +34,7 @@ public:
 		boost::program_options::variables_map const &
 	);
 private:
-	fcppt::string const prefix_;
+	std::string const prefix_;
 	fcppt::log::context &context_;
 };
 }

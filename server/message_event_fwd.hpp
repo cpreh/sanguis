@@ -5,7 +5,7 @@ namespace sanguis
 {
 namespace server
 {
-struct message_event;
+class message_event;
 }
 }
 

@@ -12,6 +12,7 @@
 #include "../../messages/highscore.hpp"
 #include "../../messages/create.hpp"
 #include "../../cast_enum.hpp"
+#include "../../tick_event.hpp"
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/headers.hpp>

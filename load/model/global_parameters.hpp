@@ -1,13 +1,15 @@
 #ifndef SANGUIS_LOAD_MODEL_GLOBAL_PARAMETERS_HPP_INCLUDED
 #define SANGUIS_LOAD_MODEL_GLOBAL_PARAMETERS_HPP_INCLUDED
 
+#include "global_parameters_fwd.hpp"
 #include "optional_delay.hpp"
 #include "optional_texture_identifier.hpp"
 #include "../resource/textures_fwd.hpp"
 #include "../resource/sounds_fwd.hpp"
-#include <fcppt/filesystem/path.hpp>
 #include <sge/renderer/dim_type.hpp>
+#include <fcppt/filesystem/path.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/nonassignable.hpp>
 #include <fcppt/optional_impl.hpp>
 
 namespace sanguis
@@ -19,6 +21,9 @@ namespace model
 
 class global_parameters
 {
+	FCPPT_NONASSIGNABLE(
+		global_parameters
+	)
 public:
 	global_parameters(
 		fcppt::filesystem::path const &,

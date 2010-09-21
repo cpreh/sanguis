@@ -5,6 +5,7 @@
 #include "value.hpp"
 #include "constant.hpp"
 #include "linear.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -15,7 +16,11 @@ namespace entities
 namespace property
 {
 
-class base {
+class base
+{
+	FCPPT_NONCOPYABLE(
+		base
+	)
 public:
 	typedef property::value value_type;
 

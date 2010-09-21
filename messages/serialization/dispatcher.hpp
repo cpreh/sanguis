@@ -1,6 +1,7 @@
 #ifndef SANGUIS_MESSAGES_SERIALIZATION_DISPATCHER_HPP_INCLUDED
 #define SANGUIS_MESSAGES_SERIALIZATION_DISPATCHER_HPP_INCLUDED
 
+#include "reader_fwd.hpp"
 #include "dispatcher_base.hpp"
 #include "../auto_ptr.hpp"
 
@@ -10,8 +11,6 @@ namespace messages
 {
 namespace serialization
 {
-
-struct reader;
 
 template<
 	typename T

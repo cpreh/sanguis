@@ -2,8 +2,15 @@
 #include <fcppt/filesystem/path.hpp>
 #include <sge/config/find_path_exn.hpp>
 #include <sge/config/make_files.hpp>
+#include <fcppt/assign/make_container.hpp>
 #include <fcppt/text.hpp>
-#include <boost/assign/list_of.hpp>
+
+#define SANGUIS_FCPPT_TEXT_WRAPPER(\
+		text\
+)\
+	FCPPT_TEXT(\
+		text\
+	)
 
 fcppt::filesystem::path const
 sanguis::media_path()
@@ -14,11 +21,16 @@ sanguis::media_path()
 				FCPPT_TEXT("sanguis")
 			),
 			FCPPT_TEXT("sanguis_media"),
-			boost::assign::list_of(
+			fcppt::assign::make_container<
+				sge::config::path_vector
+			>
+			(
 				FCPPT_TEXT("media")
 			)
 			(
-				MEDIA_PATH
+				SANGUIS_FCPPT_TEXT_WRAPPER(
+					MEDIA_PATH
+				)
 			)
 		)
 	);

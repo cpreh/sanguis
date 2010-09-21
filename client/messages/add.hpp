@@ -3,6 +3,7 @@
 
 #include "add_fwd.hpp"
 #include "../entity_type.hpp"
+#include <fcppt/nonassignable.hpp>
 
 namespace sanguis
 {
@@ -13,6 +14,9 @@ namespace messages
 
 class add
 {
+	FCPPT_NONASSIGNABLE(
+		add
+	)
 public:
 	explicit add(
 		entity_type::type

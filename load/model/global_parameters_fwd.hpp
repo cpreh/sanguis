@@ -7,7 +7,7 @@ namespace load
 {
 namespace model
 {
-struct global_parameters;
+class global_parameters;
 }
 }
 }

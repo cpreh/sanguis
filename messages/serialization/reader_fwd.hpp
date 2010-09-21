@@ -8,7 +8,7 @@ namespace messages
 namespace serialization
 {
 
-struct reader;
+class reader;
 
 }
 }

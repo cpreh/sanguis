@@ -108,11 +108,13 @@ sanguis::server::entities::exp_area::can_collide_with_entity(
 	base const &entity_
 ) const
 {
-	return dynamic_cast<
-		player const *
-	>(
-		&entity_
-	);
+	return
+		dynamic_cast<
+			player const *
+		>(
+			&entity_
+		)
+		!= 0;
 }
 	
 void

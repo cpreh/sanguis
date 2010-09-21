@@ -11,6 +11,7 @@
 #include <fcppt/filesystem/is_regular.hpp>
 #include <fcppt/filesystem/next_file.hpp>
 #include <fcppt/filesystem/first_file.hpp>
+#include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/io/ifstream.hpp>
 #include <fcppt/io/istringstream.hpp>
 #include <fcppt/tr1/functional.hpp>
@@ -42,7 +43,9 @@ sanguis::load::resource::animations::do_load(
 	if (!fcppt::filesystem::exists(dir) || !fcppt::filesystem::is_directory(dir))
 		throw exception(
 			FCPPT_TEXT("directory for animation \"")
-			+ dir.string()
+			+ fcppt::filesystem::path_to_string(
+				dir
+			)
 			+ FCPPT_TEXT("\" doesn't exist")
 		);
 
@@ -57,7 +60,9 @@ sanguis::load::resource::animations::do_load(
 	if (!file.is_open())
 		throw exception(
 			FCPPT_TEXT("error opening file \"")
-			+ framesfile.string()
+			+ fcppt::filesystem::path_to_string(
+				framesfile
+			)
 			+ FCPPT_TEXT("\""));
 	
 	// read first line, determine if it has constant frame time
@@ -65,7 +70,10 @@ sanguis::load::resource::animations::do_load(
 	if (!std::getline(file,line))
 		throw exception(
 			FCPPT_TEXT("unexpected end of file \"")
-			+ framesfile.string());
+			+ fcppt::filesystem::path_to_string(
+				framesfile
+			)
+		);
 
 	fcppt::optional<
 		sge::time::duration
@@ -111,7 +119,10 @@ sanguis::load::resource::animations::do_load(
 					FCPPT_TEXT("invalid line ")
 					+ fcppt::lexical_cast<fcppt::string>(lineno)
 					+ FCPPT_TEXT(" in animation ")
-					+ dir.string());
+					+ fcppt::filesystem::path_to_string(
+						dir
+					)
+				);
 			filename = ss.str().substr(ss.tellg());
 			delay = sge::time::millisecond(temp_delay);
 		}
@@ -151,7 +162,12 @@ sanguis::load::resource::animations::load_without_frames_file(
 			dir));
 	
 	if(first_file == fcppt::filesystem::directory_iterator())
-		throw exception(dir.string() + FCPPT_TEXT(" is empty!"));
+		throw sanguis::exception(
+			fcppt::filesystem::path_to_string(
+				dir
+			)
+			+ FCPPT_TEXT(" is empty!")
+		);
 	
 	fcppt::filesystem::path const first_path(
 		*first_file);
@@ -161,7 +177,9 @@ sanguis::load::resource::animations::load_without_frames_file(
 			log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("No frames file found in \"")
-				<< dir
+				<< fcppt::filesystem::path_to_string(
+					dir
+				)
 				<< FCPPT_TEXT("\" although there is more than one file!")
 				<< FCPPT_TEXT(" Just taking the first image."));
 

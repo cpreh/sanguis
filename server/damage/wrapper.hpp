@@ -5,6 +5,7 @@
 #include "meta_fwd.hpp"
 #include "unit.hpp"
 #include "../../damage_type.hpp"
+#include <fcppt/nonassignable.hpp>
 
 namespace sanguis
 {
@@ -13,7 +14,11 @@ namespace server
 namespace damage
 {
 
-class wrapper {
+class wrapper
+{
+	FCPPT_NONASSIGNABLE(
+		wrapper
+	)
 public:
 	wrapper(
 		damage_type::type

@@ -16,6 +16,7 @@
 #include <sge/texture/part_raw.hpp>
 #include <sge/time/millisecond.hpp>
 #include <sge/exception.hpp>
+#include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
@@ -133,7 +134,9 @@ sanguis::load::model::animation::animation(
 	if(!_texture)
 		throw exception(
 			FCPPT_TEXT("texture not found in ")
-			+ param_.path().string()
+			+ fcppt::filesystem::path_to_string(
+				param_.path()
+			)
 		);
 	
 	texture_ = *_texture;

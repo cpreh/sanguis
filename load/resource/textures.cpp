@@ -15,6 +15,7 @@
 #include <fcppt/filesystem/directory_iterator.hpp>
 #include <fcppt/filesystem/extension.hpp>
 #include <fcppt/filesystem/is_regular.hpp>
+#include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/io/ifstream.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
@@ -171,7 +172,9 @@ sanguis::load::resource::textures::textures(
 		if (!file.is_open())
 			throw exception(
 				FCPPT_TEXT("error opening id file \"")
-				+ p.string()
+				+ fcppt::filesystem::path_to_string(
+					p
+				)
 				+ FCPPT_TEXT('"'));
 
 		std::streamsize line_num(0);
@@ -195,7 +198,9 @@ sanguis::load::resource::textures::textures(
 					sanguis::load::log(),
 					fcppt::log::_
 						<< FCPPT_TEXT("Error in .id file \")")
-						<< p.string()
+						<< fcppt::filesystem::path_to_string(
+							p
+						)
 						<< FCPPT_TEXT("\" in line ")
 						<< line_num
 						<< FCPPT_TEXT('!'));

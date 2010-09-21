@@ -4,6 +4,7 @@
 #include "create_parameters_fwd.hpp"
 #include "../pos_type.hpp"
 #include <fcppt/math/vector/basic_decl.hpp>
+#include <fcppt/nonassignable.hpp>
 
 namespace sanguis
 {
@@ -12,7 +13,11 @@ namespace server
 namespace collision
 {
 
-class create_parameters {
+class create_parameters
+{
+	FCPPT_NONASSIGNABLE(
+		create_parameters
+	)
 public:
 	create_parameters(
 		pos_type const &center,

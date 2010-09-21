@@ -1,19 +1,23 @@
 #include "log_switcher.hpp"
 #include "string_vector.hpp"
+#include <sge/log/global.hpp>
+#include <sge/exception.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/activate_levels.hpp>
 #include <fcppt/log/context.hpp>
 #include <fcppt/log/level_from_string.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/assert.hpp>
-#include <sge/log/global.hpp>
-#include <sge/exception.hpp>
+#include <fcppt/from_std_string.hpp>
+#include <fcppt/to_std_string.hpp>
+#include <fcppt/text.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/spirit/home/phoenix/core/argument.hpp>
 #include <boost/spirit/home/phoenix/core/reference.hpp>
 #include <boost/spirit/home/phoenix/operator/arithmetic.hpp>
 #include <boost/foreach.hpp>
+#include <string>
+#include <vector>
 
 namespace
 {
@@ -25,6 +29,11 @@ std::pair
 	fcppt::string
 >
 string_pair;
+
+typedef
+std::vector<
+	std::string
+> std_string_vector;
 
 sanguis::string_vector const
 explode(
@@ -48,7 +57,8 @@ explode(
 string_pair const
 split(
 	fcppt::string const &e,
-	fcppt::char_type const sep)
+	fcppt::char_type const sep
+)
 {
 	fcppt::string::size_type const p = 
 		e.rfind(sep);
@@ -75,10 +85,13 @@ split(
 	return result;
 }
 
-template<typename Range>
+template<
+	typename Range
+>
 fcppt::log::location const 
 to_location(
-	Range const &r)
+	Range const &r
+)
 {
 	FCPPT_ASSERT(
 		!r.empty());
@@ -96,28 +109,45 @@ to_location(
 	return 
 		l;
 }
+
+std::string const
+make_enable_name(
+	std::string const &_prefix
+)
+{
+	return
+		"enable-"
+		+ _prefix
+		+ "-log";
+}
+
 }
 
 sanguis::log_switcher::log_switcher(
 	options_callback const &_options_callback,
 	fcppt::string const &_prefix,
-	fcppt::log::context &_context)
+	fcppt::log::context &_context
+)
 :
 	prefix_(
-		_prefix),
+		fcppt::to_std_string(
+			_prefix
+		)
+	),
 	context_(
-		_context)
+		_context
+	)
 {
-	// add_options::operator() takes a const char * instead of std::string
-	fcppt::string const ugly_po_hack = 
-		FCPPT_TEXT(
-			"enable-"+prefix_+"-log");
 	_options_callback().add_options()
 		(
-			ugly_po_hack.c_str(),
-			//"kacke",
-			boost::program_options::value<string_vector>(),
-			"Path specifications enabling either all log levels or just one (example: foo/bar/baz:debug)");
+			::make_enable_name(
+				prefix_
+			).c_str(),
+			boost::program_options::value<
+				::std_string_vector
+			>(),
+			"Path specifications enabling either all log levels or just one (example: foo/bar/baz:debug)"
+		);
 }
 
 void
@@ -125,47 +155,76 @@ sanguis::log_switcher::apply(
 	boost::program_options::variables_map const &_vm
 )
 {
-	if (!_vm.count("enable-"+prefix_+"-log"))
+	std::string const option(
+		::make_enable_name(
+			prefix_
+		)
+	);
+
+	if (!_vm.count(option))
 		return;
 
-	string_vector const specs =
-		_vm["enable-"+prefix_+"-log"].as<string_vector>();
+	::std_string_vector const specs(
+		_vm[
+			option
+		].as<
+			::std_string_vector
+		>()
+	);
 	
-	BOOST_FOREACH(fcppt::string const &s,specs)
+	BOOST_FOREACH(
+		std::string const &string_part,
+		specs
+	)
 	{
-		string_pair const splitted = 
-			split(
-				s,
-				FCPPT_TEXT(':'));
+		string_pair const splitted(
+			::split(
+				fcppt::from_std_string(
+					string_part
+				),
+				FCPPT_TEXT(':')
+			)
+		);
 
-		string_vector const parts = 
-			explode(
+		sanguis::string_vector const parts(
+			::explode(
 				splitted.first,
-				FCPPT_TEXT("/"));
+				FCPPT_TEXT("/")
+			)
+		);
 
-		fcppt::log::location const l =
+		fcppt::log::location const location(
 			to_location(
-				parts);
+				parts
+			)
+		);
 		
-		fcppt::log::object *o =
+		fcppt::log::object *const log_object(
 			context_.find(
-				l);
+				location
+			)
+		);
 
-		if (!o)
+		if (!log_object)
 			throw 
 				sge::exception(
-					FCPPT_TEXT("The specified log context ")+l.string()+FCPPT_TEXT(" wasn't found"));
+					FCPPT_TEXT("The specified log context ")
+					+ location.string()
+					+ FCPPT_TEXT(" wasn't found")
+				);
 	
-		fcppt::log::level::type const t = 
+		fcppt::log::level::type const level = 
 			splitted.second.empty()
 			?
 				fcppt::log::level::debug
 			:	
 				fcppt::log::level_from_string(
-					splitted.second);
+					splitted.second
+				);
 
 		fcppt::log::activate_levels(
-			*o,
-			t);
+			*log_object,
+			level
+		);
 	}
 }

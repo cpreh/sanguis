@@ -4,6 +4,7 @@
 #include "reader_fwd.hpp"
 #include "istream.hpp"
 #include "../auto_ptr.hpp"
+#include <fcppt/nonassignable.hpp>
 
 namespace sanguis
 {
@@ -12,9 +13,15 @@ namespace messages
 namespace serialization
 {
 
-struct reader {
+class reader
+{
+	FCPPT_NONASSIGNABLE(
+		reader
+	)
+public:
 	explicit reader(
-		istream &);
+		istream &
+	);
 
 	template<
 		typename Msg

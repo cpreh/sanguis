@@ -4,6 +4,7 @@
 #include "../messages/auto_ptr.hpp"
 #include "../messages/shared_ptr.hpp"
 #include "../net/id_type.hpp"
+#include <fcppt/nonassignable.hpp>
 #include <boost/statechart/event.hpp>
 
 namespace sanguis
@@ -11,11 +12,20 @@ namespace sanguis
 namespace server
 {
 
-struct message_event : public boost::statechart::event<message_event> 
+class message_event
+:
+	public boost::statechart::event<
+		message_event
+	>
 {
+	FCPPT_NONASSIGNABLE(
+		message_event
+	)
+public:
 	message_event(
 		messages::auto_ptr message,
-		net::id_type id);
+		net::id_type id
+	);
 	
 	~message_event();
 	

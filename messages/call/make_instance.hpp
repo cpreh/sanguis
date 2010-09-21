@@ -3,6 +3,7 @@
 
 #include "dispatcher.hpp"
 #include "../message_id.hpp"
+#include <fcppt/nonassignable.hpp>
 #include <fcppt/make_auto_ptr.hpp>
 
 namespace sanguis
@@ -16,13 +17,17 @@ template<
 	typename Callee,
 	typename InstanceArray
 >
-class make_instance {
+class make_instance
+{
+	FCPPT_NONASSIGNABLE(
+		make_instance
+	)
 public:
 	explicit make_instance(
-		InstanceArray &instances_
+		InstanceArray &_instances
 	)
 	:
-		instances_(instances_)
+		instances_(_instances)
 	{}
 	
 	template<

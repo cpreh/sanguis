@@ -11,6 +11,7 @@
 #include <fcppt/filesystem/is_directory.hpp>
 #include <fcppt/filesystem/create_directory.hpp>
 #include <fcppt/filesystem/exists.hpp>
+#include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/text.hpp>
@@ -50,8 +51,9 @@ void sanguis::client::screenshot::process()
 		return;
 
 	fcppt::filesystem::path const 
-		p = make_screenshot_path(),
-		dir = config::homedir()/FCPPT_TEXT("screenshots");
+		screenshot_path = make_screenshot_path(),
+		dir = config::homedir()/FCPPT_TEXT("screenshots"),
+		whole_path = dir / screenshot_path;
 	
 	if (!fcppt::filesystem::exists(dir))
 		fcppt::filesystem::create_directory(dir);
@@ -59,7 +61,9 @@ void sanguis::client::screenshot::process()
 	if (!fcppt::filesystem::is_directory(dir))
 		throw exception(
 			FCPPT_TEXT("Screenshot path ")
-			+ (dir / p).string()
+			+ fcppt::filesystem::path_to_string(
+				whole_path
+			)
 			+ FCPPT_TEXT(" exists but is not a directory")
 		);
 
@@ -67,10 +71,14 @@ void sanguis::client::screenshot::process()
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("writing screenshot: ")
-			<< (dir/p)
+			<< fcppt::filesystem::path_to_string(
+				whole_path
+			)
 	);
 	
-	make_screenshot(dir/p);
+	make_screenshot(
+		whole_path
+	);
 		
 	active_ = false;
 }

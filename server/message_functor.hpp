@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_MESSAGE_FUNCTOR_HPP_INCLUDED
 
 #include "../net/id_type.hpp"
+#include <fcppt/nonassignable.hpp>
 
 namespace sanguis
 {
@@ -14,6 +15,9 @@ template<
 >
 class message_functor
 {
+	FCPPT_NONASSIGNABLE(
+		message_functor
+	)
 public:
 	typedef R result_type;
 

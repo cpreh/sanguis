@@ -5,9 +5,10 @@
 #include "frame_cache_fwd.hpp"
 #include "../resource/texture_context.hpp"
 #include <sge/sprite/animation/series.hpp>
-#include <fcppt/scoped_ptr.hpp>
 #include <sge/renderer/lock_rect.hpp>
 #include <fcppt/function/object.hpp>
+#include <fcppt/nonassignable.hpp>
+#include <fcppt/scoped_ptr.hpp>
 
 namespace sanguis
 {
@@ -17,6 +18,9 @@ namespace model
 {
 class animation_context
 {
+	FCPPT_NONASSIGNABLE(
+		animation_context
+	)
 public:
 	typedef fcppt::function::object<
 		void (

@@ -3,6 +3,7 @@
 
 #include "visible_fwd.hpp"
 #include "../../entity_id.hpp"
+#include <fcppt/nonassignable.hpp>
 
 namespace sanguis
 {
@@ -13,6 +14,9 @@ namespace messages
 
 class visible
 {
+	FCPPT_NONASSIGNABLE(
+		visible
+	)
 public:
 	visible(
 		entity_id,

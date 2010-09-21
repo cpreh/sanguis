@@ -5,6 +5,7 @@
 #include "../../entities/with_weapon_fwd.hpp"
 #include "../../pos_type.hpp"
 #include <fcppt/math/vector/basic_decl.hpp>
+#include <fcppt/nonassignable.hpp>
 #include <boost/statechart/event.hpp>
 
 namespace sanguis
@@ -22,6 +23,9 @@ class shoot
 		shoot
 	>
 {
+	FCPPT_NONASSIGNABLE(
+		shoot
+	)
 public:
 	shoot(
 		entities::with_weapon &from,

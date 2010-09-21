@@ -18,6 +18,7 @@
 #include <sge/parse/json/find_member_exn.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/filesystem/is_directory.hpp>
+#include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/filesystem/stem.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
@@ -48,7 +49,9 @@ sanguis::load::model::object::operator[](
 			FCPPT_TEXT("Category \"")
 			+ name
 			+ FCPPT_TEXT("\" not found in ")
-			+ path.string()
+			+ fcppt::filesystem::path_to_string(
+				path
+			)
 		);
 	
 	return *it->second;
@@ -113,7 +116,9 @@ sanguis::load::model::object::object(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("Entering ")
-			<< path.string()
+			<< fcppt::filesystem::path_to_string(
+				path
+			)
 	);
 
 	try
@@ -128,7 +133,9 @@ sanguis::load::model::object::object(
 			log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("model \"")
-				<< path.string()
+				<< fcppt::filesystem::path_to_string(
+					path
+				)
 				<< FCPPT_TEXT("\": \"")
 				<< e.string()
 				<< FCPPT_TEXT('"')
