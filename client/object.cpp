@@ -20,6 +20,7 @@
 #include <sge/image/colors.hpp>
 #include <sge/image/create_texture.hpp>
 #include <sge/image/multi_loader.hpp>
+#include <sge/mainloop/dispatch.hpp>
 #include <sge/mainloop/io_service.hpp>
 #include <sge/renderer/filter/linear.hpp>
 #include <sge/renderer/state/bool.hpp>
@@ -159,9 +160,6 @@ sanguis::client::object::object(
 	running_(
 		true
 	),
-	next_handler_(
-		true
-	),
 	scoped_machine_(
 		machine_
 	)
@@ -189,16 +187,18 @@ sanguis::client::object::run()
 {
 	try
 	{
+		register_handler();
+
 		while(
 			running_
 		)
 		{
 			if(
-				next_handler_
+				io_service_
 			)
-				register_handler();
-		
-			io_service_->run_one();
+				io_service_->run_one();
+			else
+				sge::mainloop::dispatch();
 		}
 	}
 	catch(
@@ -223,14 +223,15 @@ sanguis::client::object::run()
 void
 sanguis::client::object::register_handler()
 {
-	io_service_->dispatch(
-		std::tr1::bind(
-			&object::loop_handler,
-			this
-		)
-	);
-
-	next_handler_ = false;
+	if(
+		io_service_
+	)
+		io_service_->post(
+			std::tr1::bind(
+				&object::loop_handler,
+				this
+			)
+		);
 }
 
 void
@@ -253,8 +254,8 @@ sanguis::client::object::loop_handler()
 		)
 	)
 		running_ = false;
-
-	next_handler_ = true;
+	else
+		register_handler();
 }
 
 void

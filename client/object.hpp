@@ -90,8 +90,6 @@ private:
 
 	bool running_;
 
-	bool next_handler_;
-
 	typedef sanguis::scoped_machine<
 		client::machine
 	> scoped_machine;
