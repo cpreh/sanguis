@@ -1,23 +1,30 @@
-#include "unpaused.hpp"
-#include "paused.hpp"
-#include "../events/message.hpp"
+#include "perk_chooser.hpp"
 #include "../events/menu.hpp"
+#include "../events/message.hpp"
 #include "../events/tick.hpp"
+#include "../../messages/unpause.hpp"
 #include "../../messages/call/object.hpp"
-#include <fcppt/function/object.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <boost/mpl/vector/vector10.hpp>
 
-sanguis::client::states::unpaused::unpaused(
+sanguis::client::states::perk_chooser::perk_chooser(
 	my_context ctx
 )
 :
-	my_base(ctx)
+	my_base(ctx),
+	chooser_activation_(
+		context<running>().perk_chooser()
+	)
 {
-	context<running>().pause(false);
+	context<
+		running
+	>().pause(
+		true
+	);
 }
 
 boost::statechart::result
-sanguis::client::states::unpaused::react(
+sanguis::client::states::perk_chooser::react(
 	events::tick const &_event
 )
 {
@@ -33,46 +40,38 @@ sanguis::client::states::unpaused::react(
 }
 
 boost::statechart::result
-sanguis::client::states::unpaused::react(
+sanguis::client::states::perk_chooser::react(
 	events::message const &_event
 )
 {
 	static messages::call::object<
 		boost::mpl::vector1<
-			messages::pause
+			messages::unpause
 		>,
-		unpaused
+		perk_chooser	
 	> dispatcher;
 
 	return dispatcher(
 		*_event.value(),
 		*this,
 		std::tr1::bind(
-			&unpaused::handle_default_msg,
+			&perk_chooser::handle_default_msg,
 			this,
 			std::tr1::placeholders::_1
 		)
 	);
 }
+
 boost::statechart::result
-sanguis::client::states::unpaused::react(
-	events::menu const &_event
+sanguis::client::states::perk_chooser::operator()(
+	messages::unpause const &
 )
 {
-	context<machine>().quit(); // TODO!
-	return discard_event(); // TODO!
+	//return transit<states::perk_chooser>();
 }
 
 boost::statechart::result
-sanguis::client::states::unpaused::operator()(
-	messages::pause const &
-)
-{
-	return transit<paused>();
-}
-
-boost::statechart::result
-sanguis::client::states::unpaused::handle_default_msg(
+sanguis::client::states::perk_chooser::handle_default_msg(
 	messages::base const &
 )
 {

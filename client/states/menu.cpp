@@ -1,5 +1,4 @@
 #include "menu.hpp"
-#include "paused.hpp"
 #include "unpaused.hpp"
 #include "../../messages/base.hpp"
 #include "../../messages/create.hpp"
@@ -165,7 +164,7 @@ sanguis::client::states::menu::operator()(
 
 boost::statechart::result
 sanguis::client::states::menu::operator()(
-	messages::connect_state const &m
+	messages::connect_state const &_message
 )
 {
 	FCPPT_LOG_DEBUG(
@@ -174,36 +173,7 @@ sanguis::client::states::menu::operator()(
 			<< FCPPT_TEXT("Received connect_state")
 	);
 
-	switch (
-		SANGUIS_CAST_ENUM(
-			connect_state,
-			m.get<messages::roles::connect_state>()
-		)
-	)
-	{
-		case connect_state::unpaused:
-			FCPPT_LOG_DEBUG(
-				log(),
-				fcppt::log::_
-					<< FCPPT_TEXT("switching to state \"unpaused\"")
-			);
-
-			return transit<unpaused>();
-		case connect_state::paused:
-			FCPPT_LOG_DEBUG(
-				log(),
-				fcppt::log::_
-					<< FCPPT_TEXT("switching to state \"paused\"")
-			);
-
-			return transit<paused>();
-		case connect_state::size:
-			break;
-	}
-
-	throw exception(
-		FCPPT_TEXT("invalid connect_state!")
-	);
+	return transit<ingame>();
 }
 
 fcppt::log::object &

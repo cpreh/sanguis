@@ -79,22 +79,6 @@ dialog_pos(
 }
 }
 
-sanguis::client::perk_chooser::activation::activation(
-	perk_chooser &_instance
-)
-:
-	instance_(_instance)
-{
-	FCPPT_ASSERT(!instance_.activated());
-	instance_.activated(true);
-}
-
-sanguis::client::perk_chooser::activation::~activation()
-{
-	FCPPT_ASSERT(instance_.activated());
-	instance_.activated(false);
-}
-
 sanguis::client::perk_chooser::perk_chooser(
 	sge::renderer::device_ptr const _renderer,
 	sge::input::system_ptr const _input_system,

@@ -290,10 +290,10 @@ sanguis::client::draw2d::scene::object::draw(
 
 void
 sanguis::client::draw2d::scene::object::pause(
-	bool const p
+	bool const _paused
 )
 {
-	paused_ = p;
+	paused_ = _paused;
 }
 
 void

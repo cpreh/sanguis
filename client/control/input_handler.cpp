@@ -99,7 +99,7 @@ sanguis::client::control::input_handler::input_callback(
 		);
 		break;
 	case sge::input::kc::key_e:
-		pause_unpause_event(
+		escape_event(
 			_key_pair
 		);
 		break;
@@ -230,7 +230,7 @@ sanguis::client::control::input_handler::weapon_switch_event(
 }
 
 void
-sanguis::client::control::input_handler::pause_unpause_event(
+sanguis::client::control::input_handler::escape_event(
 	sge::input::key_pair const &_key_pair
 )
 {
@@ -241,7 +241,7 @@ sanguis::client::control::input_handler::pause_unpause_event(
 
 	post_message_(
 		player_action(
-			action_type::pause_unpause,
+			action_type::escape,
 			static_cast<
 				key_scale
 			>(

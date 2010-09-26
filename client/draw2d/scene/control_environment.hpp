@@ -56,7 +56,7 @@ private:
 		client::control::key_scale diff
 	);
 
-	object &object_;
+	scene::object &object_;
 
 	client::cursor::object_ptr const cursor_;
 

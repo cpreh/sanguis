@@ -36,7 +36,7 @@
 #include <fcppt/utf8/convert.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/assert.hpp>
-#include <boost/mpl/vector/vector10.hpp>
+#include <boost/mpl/vector/vector20.hpp>
 #include <boost/foreach.hpp>
 
 sanguis::client::states::running::running(
@@ -148,8 +148,8 @@ sanguis::client::states::running::running(
 sanguis::client::states::running::~running()
 {}
 
-void 
-sanguis::client::states::running::draw(
+boost::statechart::result
+sanguis::client::states::running::react(
 	events::tick const &_event
 )
 {
@@ -158,13 +158,7 @@ sanguis::client::states::running::draw(
 	);
 
 	perk_chooser_.process();
-}
 
-void 
-sanguis::client::states::running::process(
-	events::tick const &_event
-)
-{
 	drawer_->set_time(
 		daytime_settings_.current_time()
 	);
@@ -178,20 +172,8 @@ sanguis::client::states::running::process(
 	context<machine>().sound_pool().update();
 
 	music_.process();
-}
 
-void 
-sanguis::client::states::running::pause(
-	bool const _on
-)
-{
-	logic_->pause(
-		_on
-	);
-
-	drawer_->pause(
-		_on
-	);
+	return discard_event();
 }
 
 boost::statechart::result
@@ -200,7 +182,7 @@ sanguis::client::states::running::react(
 )
 {
 	static sanguis::messages::call::object<
-		boost::mpl::vector9<
+		boost::mpl::vector11<
 			sanguis::messages::add_own_player,
 			sanguis::messages::remove_id,
 			sanguis::messages::disconnect,
@@ -209,7 +191,9 @@ sanguis::client::states::running::react(
 			sanguis::messages::available_perks,
 			sanguis::messages::level_up,
 			sanguis::messages::console_print,
-			sanguis::messages::add_console_command
+			sanguis::messages::add_console_command,
+			sanguis::messages::pause,
+			sanguis::messages::unpause
 		>,
 		running
 	> dispatcher;
@@ -228,14 +212,14 @@ sanguis::client::states::running::react(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	sanguis::messages::add_own_player const &m
+	sanguis::messages::add_own_player const &_message
 )
 {
 	// TODO: is this still needed?
 	{
 		sanguis::messages::auto_ptr wrapped_msg(
 			sanguis::messages::create(
-				m
+				_message
 			)
 		);
 
@@ -273,13 +257,13 @@ sanguis::client::states::running::operator()(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	sanguis::messages::give_weapon const &m
+	sanguis::messages::give_weapon const &_message
 )
 {
 	logic_->give_player_weapon(
 		SANGUIS_CAST_ENUM(
 			weapon_type,
-			m.get<sanguis::messages::roles::weapon>()
+			_message.get<sanguis::messages::roles::weapon>()
 		)
 	);
 
@@ -288,29 +272,29 @@ sanguis::client::states::running::operator()(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	sanguis::messages::highscore const &m
+	sanguis::messages::highscore const &_message
 )
 {
 	FCPPT_LOG_DEBUG(
 		sanguis::client::log(),
 		fcppt::log::_ 
 			<< FCPPT_TEXT("got highscore message, score was: ")
-			<< m.get<sanguis::messages::roles::highscore>()
+			<< _message.get<sanguis::messages::roles::highscore>()
 	);
 
 	BOOST_FOREACH(
-		sanguis::messages::types::string const &s,
-		m.get<sanguis::messages::string_vector>()
+		sanguis::messages::types::string const &entry,
+		_message.get<sanguis::messages::string_vector>()
 	)
 		context<machine>().gameover_names().push_back(
 			fcppt::utf8::convert(
-				s
+				entry	
 			)
 		);
 	
 	context<machine>().gameover_score(
 		static_cast<highscore::score_type>(
-			m.get<sanguis::messages::roles::highscore>()
+			_message.get<sanguis::messages::roles::highscore>()
 		)
 	);
 	
@@ -319,12 +303,12 @@ sanguis::client::states::running::operator()(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	sanguis::messages::available_perks const &m
+	sanguis::messages::available_perks const &_message
 )
 {
 	perk_chooser_.perks(
 		perk_cast(
-			m.get<sanguis::messages::perk_list>()
+			_message.get<sanguis::messages::perk_list>()
 		)
 	);
 
@@ -333,18 +317,18 @@ sanguis::client::states::running::operator()(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	sanguis::messages::level_up const &m
+	sanguis::messages::level_up const &_message
 )
 {
 	perk_chooser_.level_up(
 		static_cast<level_type>(
-			m.get<sanguis::messages::level_type>()
+			_message.get<sanguis::messages::level_type>()
 		)
 	);
 
 	drawer_->process_message(
 		*sanguis::messages::create(
-			m
+			_message
 		)
 	);
 
@@ -353,12 +337,12 @@ sanguis::client::states::running::operator()(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	sanguis::messages::console_print const &m
+	sanguis::messages::console_print const &_message
 )
 {
 	context<machine>().console().gfx().object().emit_message(
 		fcppt::utf8::convert(
-			m.get<
+			_message.get<
 				sanguis::messages::string
 			>()
 		)
@@ -369,12 +353,12 @@ sanguis::client::states::running::operator()(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	sanguis::messages::add_console_command const &m
+	sanguis::messages::add_console_command const &_message
 )
 {
 	fcppt::string const name(
 		fcppt::utf8::convert(
-			m.get<
+			_message.get<
 				sanguis::messages::roles::command_name
 			>()
 		)
@@ -390,10 +374,34 @@ sanguis::client::states::running::operator()(
 	context<machine>().console().register_server_command(
 		name,
 		fcppt::utf8::convert(
-			m.get<
+			_message.get<
 				sanguis::messages::roles::command_description
 			>()
 		)
+	);
+
+	return discard_event();
+}
+
+boost::statechart::result
+sanguis::client::states::running::operator()(
+	sanguis::messages::pause const &
+)
+{
+	drawer_->pause(
+		true
+	);
+
+	return discard_event();
+}
+
+boost::statechart::result
+sanguis::client::states::running::operator()(
+	sanguis::messages::unpause const &
+)
+{
+	drawer_->pause(
+		false
 	);
 
 	return discard_event();
@@ -407,33 +415,35 @@ sanguis::client::states::running::perk_chooser()
 
 boost::statechart::result
 sanguis::client::states::running::handle_default_msg(
-	sanguis::messages::base const &m
+	sanguis::messages::base const &_message
 )
 {
-	drawer_->process_message(m);
+	drawer_->process_message(
+		_message
+	);
 
 	return discard_event();
 }
 
 void
 sanguis::client::states::running::send_message(
-	sanguis::messages::auto_ptr m
+	sanguis::messages::auto_ptr _message
 )
 {
 	context<machine>().send(
-		m
+		_message
 	);
 }
 
 void
 sanguis::client::states::running::send_perk_choose(
-	perk_type::type const m
+	perk_type::type const _perk_type
 )
 {
 	send_message(
 		sanguis::messages::create(
 			sanguis::messages::player_choose_perk(
-				m
+				_perk_type
 			)
 		)
 	);
@@ -441,7 +451,7 @@ sanguis::client::states::running::send_perk_choose(
 
 void
 sanguis::client::states::running::cursor_pos(
-	draw2d::sprite::point const &pos // FIXME
+	draw2d::sprite::point const &_pos // FIXME
 )
 {
 	drawer_->process_message(
@@ -450,7 +460,7 @@ sanguis::client::states::running::cursor_pos(
 				cursor_id_,
 				draw2d::screen_to_virtual( // FIXME
 					context<machine>().renderer()->screen_size(),
-					pos
+					_pos
 				)
 			)
 		)

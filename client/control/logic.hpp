@@ -45,11 +45,6 @@ public:
 	give_player_weapon(
 		weapon_type::type
 	);
-
-	void
-	pause(
-		bool
-	);
 private:
 	void
 	handle_move_x(
@@ -93,7 +88,7 @@ private:
 	);
 
 	void
-	handle_pause_unpause(
+	handle_escape(
 		key_scale
 	);
 
@@ -109,9 +104,9 @@ private:
 		sge::console::object &
 	);
 
-	send_callback const send;
+	send_callback const send_;
 
-	environment &environment_;
+	control::environment &environment_;
 
 	typedef fcppt::function::object<
 		void (key_scale)
@@ -121,20 +116,18 @@ private:
 		action_handler
 	> action_handlers;
 
-	action_handlers const actions;
+	action_handlers const actions_;
 		
-	weapon_type::type current_weapon;
+	weapon_type::type current_weapon_;
 
-	bool paused;
-
-	sge::time::timer rotation_timer;
+	sge::time::timer rotation_timer_;
 
 	typedef std::tr1::array<
 		bool,
 		weapon_type::size
 	> owned_weapons_array;
 	
-	owned_weapons_array owned_weapons;
+	owned_weapons_array owned_weapons_;
 
 	fcppt::signal::scoped_connection 
 		cheat_kill_conn_,

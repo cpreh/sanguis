@@ -59,7 +59,7 @@ private:
 	);
 
 	void
-	pause_unpause_event(
+	escape_event(
 		sge::input::key_pair const &
 	);
 

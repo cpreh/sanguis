@@ -1,8 +1,7 @@
 #ifndef SANGUIS_CLIENT_STATES_RUNNING_HPP_INCLUDED
 #define SANGUIS_CLIENT_STATES_RUNNING_HPP_INCLUDED
 
-#include "menu.hpp"
-#include "unpaused_fwd.hpp"
+#include "ingame_fwd.hpp"
 #include "../machine.hpp"
 #include "../perk_chooser.hpp"
 #include "../music_handler.hpp"
@@ -12,8 +11,6 @@
 #include "../events/message_fwd.hpp"
 #include "../control/logic_fwd.hpp"
 #include "../control/input_handler_fwd.hpp"
-#include "../highscore/name_container.hpp"
-#include "../highscore/score_type.hpp"
 #include "../draw2d/scene/object_fwd.hpp"
 #include "../draw2d/sprite/point.hpp"
 #include "../events/tick_fwd.hpp"
@@ -28,6 +25,8 @@
 #include "../../messages/level_up.hpp"
 #include "../../messages/console_print.hpp"
 #include "../../messages/add_console_command.hpp"
+#include "../../messages/pause.hpp"
+#include "../../messages/unpause.hpp"
 #include "../../entity_id.hpp"
 #include <sge/renderer/state/scoped.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
@@ -36,7 +35,7 @@
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/transition.hpp>
 #include <boost/statechart/result.hpp>
-#include <boost/mpl/list.hpp>
+#include <boost/mpl/list/list10.hpp>
 
 namespace sanguis
 {
@@ -50,11 +49,14 @@ class running
 	public boost::statechart::state<
 		running,
 		machine,
-		unpaused
+		ingame	
 	>
 {
 public:
-	typedef boost::mpl::list<
+	typedef boost::mpl::list2<
+		boost::statechart::custom_reaction<
+			events::tick
+		>,
 		boost::statechart::custom_reaction<
 			events::message
 		>
@@ -66,19 +68,9 @@ public:
 
 	~running();
 
-	void
-	draw(
+	boost::statechart::result
+	react(
 		events::tick const &
-	);
-
-	void
-	process(
-		events::tick const &
-	);
-
-	void
-	pause(
-		bool
 	);
 
 	boost::statechart::result
@@ -131,6 +123,16 @@ public:
 	boost::statechart::result
 	operator()(
 		messages::add_console_command const &
+	);
+
+	boost::statechart::result
+	operator()(
+		messages::pause const &
+	);
+
+	boost::statechart::result
+	operator()(
+		messages::unpause const &
 	);
 
 	perk_container const &

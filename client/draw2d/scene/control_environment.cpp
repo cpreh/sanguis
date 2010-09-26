@@ -13,12 +13,12 @@
 #include <fcppt/assert.hpp>
 
 sanguis::client::draw2d::scene::control_environment::control_environment(
-	object &object_,
-	client::cursor::object_ptr const cursor_
+	object &_object,
+	client::cursor::object_ptr const _cursor
 )
 :
-	object_(object_),
-	cursor_(cursor_),
+	object_(_object),
+	cursor_(_cursor),
 	direction_(
 		client::control::direction_vector::null()
 	)
@@ -54,9 +54,11 @@ sanguis::client::control::key_scale
 sanguis::client::draw2d::scene::control_environment::rotation() const
 {
 	// TODO: this should not be here
-	fcppt::optional<
+	typedef fcppt::optional<
 		control::key_scale
-	> const ret(
+	> const optional_scale;
+	
+	optional_scale ret(
 		fcppt::math::vector::angle_between<
 			control::key_scale
 		>(

@@ -1,8 +1,8 @@
-#ifndef SANGUIS_CLIENT_STATES_PAUSED_HPP_INCLUDED
-#define SANGUIS_CLIENT_STATES_PAUSED_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_STATES_PERK_CHOOSER_HPP_INCLUDED
+#define SANGUIS_CLIENT_STATES_PERK_CHOOSER_HPP_INCLUDED
 
 #include "running.hpp"
-#include "../perk_chooser.hpp"
+#include "../perk_chooser_activation.hpp"
 #include "../events/message_fwd.hpp"
 #include "../events/tick_fwd.hpp"
 #include "../../messages/unpause.hpp"
@@ -17,10 +17,10 @@ namespace client
 {
 namespace states
 {
-class paused
+class perk_chooser
 :
 	public boost::statechart::state<
-		paused,
+		perk_chooser,
 		running
 	>
 {
@@ -34,7 +34,7 @@ public:
 		>
 	> reactions;
 
-	explicit paused(
+	explicit perk_chooser(
 		my_context
 	);
 
@@ -60,7 +60,7 @@ private:
 		messages::base const &
 	);
 
-	perk_chooser::activation chooser_activation_;
+	client::perk_chooser_activation chooser_activation_;
 };
 }
 }

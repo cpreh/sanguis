@@ -1,10 +1,11 @@
 #ifndef SANGUIS_CLIENT_PERK_CHOOSER_HPP_INCLUDED
 #define SANGUIS_CLIENT_PERK_CHOOSER_HPP_INCLUDED
 
-#include "../perk_type.hpp"
+#include "perk_chooser_fwd.hpp"
 #include "level_type.hpp"
 #include "perk_container.hpp"
 #include "cursor/object_ptr.hpp"
+#include "../perk_type.hpp"
 #include <sge/font/metrics_ptr.hpp>
 #include <sge/gui/widgets/buttons/image.hpp>
 #include <sge/gui/widgets/backdrop.hpp>
@@ -23,6 +24,7 @@ namespace sanguis
 {
 namespace client
 {
+
 class perk_chooser
 {
 	FCPPT_NONCOPYABLE(perk_chooser)
@@ -40,23 +42,26 @@ public:
 		sanguis::client::cursor::object_ptr
 	);
 
-	void process();
-	void perks(perk_container const &);
-	void level_up(level_type);
-	bool activated() const;
-	void activated(bool);
+	void
+	process();
 
-	// TODO: own header file?
-	class activation
-	{
-	FCPPT_NONCOPYABLE(activation)
-	public:
-	explicit activation(
-		perk_chooser &);
-	~activation();
-	private:
-	perk_chooser &instance_;
-	};
+	void
+	perks(
+		perk_container const &
+	);
+
+	void
+	level_up(
+		level_type
+	);
+
+	bool
+	activated() const;
+
+	void
+	activated(
+		bool
+	);
 private:
 	// TODO: own header file?
 	struct perk_image
@@ -94,6 +99,7 @@ private:
 	image_map::const_iterator const load_from_cache(
 		perk_type::type);
 };
+
 }
 }
 

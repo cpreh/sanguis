@@ -8,8 +8,6 @@
 #include "../../messages/player_rotation.hpp"
 #include "../../messages/player_start_shooting.hpp"
 #include "../../messages/player_stop_shooting.hpp"
-#include "../../messages/player_pause.hpp"
-#include "../../messages/player_unpause.hpp"
 #include "../../messages/player_change_weapon.hpp"
 #include "../../messages/player_cheat.hpp"
 #include "../../cyclic_iterator_impl.hpp"
@@ -28,15 +26,17 @@
 
 sanguis::client::control::logic::logic(
 	send_callback const &_send,
-	environment &environment_,
+	control::environment &_environment,
 	sge::console::object &_console
 )
 :
-	send(
+	send_(
 		_send
 	),
-	environment_(environment_),
-	actions(
+	environment_(
+		_environment
+	),
+	actions_(
 		fcppt::assign::make_container<
 			action_handlers
 		>
@@ -91,22 +91,21 @@ sanguis::client::control::logic::logic(
 		)
 		(
 			std::tr1::bind(
-				&logic::handle_pause_unpause,
+				&logic::handle_escape,
 				this,
 				std::tr1::placeholders::_1
 			)
 		)
 	),
-	current_weapon(
+	current_weapon_(
 		weapon_type::size
 	),
-	paused(false),
-	rotation_timer(
+	rotation_timer_(
 		sge::time::millisecond(
 			100
 		)
 	),
-	owned_weapons(),
+	owned_weapons_(),
 	cheat_kill_conn_(
 		_console.insert(
 			FCPPT_TEXT("kill"),
@@ -148,21 +147,21 @@ sanguis::client::control::logic::logic(
 	)
 {
 	std::fill(
-		owned_weapons.begin(),
-		owned_weapons.end(),
+		owned_weapons_.begin(),
+		owned_weapons_.end(),
 		false
 	);
 }
 
 void
 sanguis::client::control::logic::handle_player_action(
-	player_action const &action
+	player_action const &_action
 )
 {
-	actions.at(
-		action.type()
+	actions_.at(
+		_action.type()
 	)(
-		action.scale()
+		_action.scale()
 	);
 }
 
@@ -171,35 +170,29 @@ sanguis::client::control::logic::~logic()
 
 void
 sanguis::client::control::logic::give_player_weapon(
-	weapon_type::type const wt
+	weapon_type::type const _weapon_type
 )
 {
-	owned_weapons.at(
-		wt
+	owned_weapons_.at(
+		_weapon_type
 	) = true;
 
 	// we don't own any weapon so take this one
-	if(current_weapon == weapon_type::size)
+	if(
+		current_weapon_ == weapon_type::size
+	)
 		change_weapon(
-			wt
+			_weapon_type
 		);
 }
 
 void
-sanguis::client::control::logic::pause(
-	bool const p
-)
-{
-	paused = p;
-}
-
-void
 sanguis::client::control::logic::handle_move_x(
-	key_scale const s
+	key_scale const _scale
 )
 {
 	environment_.direction_x(
-		s
+		_scale
 	);
 
 	update_direction();
@@ -207,11 +200,11 @@ sanguis::client::control::logic::handle_move_x(
 
 void
 sanguis::client::control::logic::handle_move_y(
-	key_scale const s
+	key_scale const _scale
 )
 {
 	environment_.direction_y(
-		s
+		_scale
 	);
 
 	update_direction();
@@ -220,7 +213,7 @@ sanguis::client::control::logic::handle_move_y(
 void
 sanguis::client::control::logic::update_direction()
 {
-	send(
+	send_(
 		sanguis::messages::create(
 			sanguis::messages::player_direction(
 				fcppt::math::vector::structure_cast<
@@ -254,12 +247,14 @@ sanguis::client::control::logic::update_rotation()
 {
 	// FIXME: the rotation is still handled in the cursor
 
-	if(!rotation_timer.update_b())
+	if(
+		!rotation_timer_.update_b()
+	)
 		return;
 	
 	// TODO: maybe we can kick rotation
 	// and the server can calculate it from the attack dest
-	send(
+	send_(
 		sanguis::messages::create(
 			sanguis::messages::player_rotation(
 				environment_.rotation()
@@ -267,7 +262,7 @@ sanguis::client::control::logic::update_rotation()
 		)
 	);
 
-	send(
+	send_(
 		sanguis::messages::create(
 			sanguis::messages::player_attack_dest(
 				fcppt::math::vector::structure_cast<
@@ -282,21 +277,21 @@ sanguis::client::control::logic::update_rotation()
 
 void
 sanguis::client::control::logic::handle_shooting(
-	key_scale const s
+	key_scale const _scale
 )
 {
 	if(
 		fcppt::math::almost_zero(
-			s
+			_scale
 		)
 	)
-		send(
+		send_(
 			sanguis::messages::create(
 				sanguis::messages::player_stop_shooting()
 			)
 		);
 	else
-		send(
+		send_(
 			sanguis::messages::create(
 				sanguis::messages::player_start_shooting()
 			)
@@ -309,24 +304,36 @@ sanguis::client::control::logic::handle_switch_weapon_forwards(
 )
 {
 	// we don't own any weapon
-	if(current_weapon == weapon_type::size)
+	if(
+		current_weapon_ == weapon_type::size
+	)
 		return;
 
 	owned_weapons_array::size_type const weapon_index(
-		static_cast<owned_weapons_array::size_type>(
-			current_weapon
+		static_cast<
+			owned_weapons_array::size_type
+		>(
+			current_weapon_
 		)
 	);
 
-	FCPPT_ASSERT(weapon_index < owned_weapons.size());
+	FCPPT_ASSERT(
+		weapon_index < owned_weapons_.size()
+	);
 
-	cyclic_iterator<
+	typedef cyclic_iterator<
 		owned_weapons_array::const_iterator
-	> it(
-		owned_weapons.begin()
-		+ static_cast<owned_weapons_array::size_type>(current_weapon),
-		owned_weapons.begin(),
-		owned_weapons.end()
+	> iterator;
+	
+	iterator it(
+		owned_weapons_.begin()
+		+ static_cast<
+			owned_weapons_array::size_type
+		>(
+			current_weapon_
+		),
+		owned_weapons_.begin(),
+		owned_weapons_.end()
 	);
 
 /*
@@ -350,7 +357,7 @@ sanguis::client::control::logic::handle_switch_weapon_forwards(
 				static_cast<
 					owned_weapons_array const &
 				>(
-					owned_weapons
+					owned_weapons_
 				).begin(),
 				it.get()
 			)
@@ -365,35 +372,23 @@ sanguis::client::control::logic::handle_switch_weapon_backwards(
 {}
 
 void
-sanguis::client::control::logic::handle_pause_unpause(
+sanguis::client::control::logic::handle_escape(
 	key_scale
 )
 {
-	if(paused)
-		send(
-			sanguis::messages::create(
-				sanguis::messages::player_unpause()
-			)
-		);
-	else
-		send(
-			sanguis::messages::create(
-				sanguis::messages::player_pause()
-			)
-		);
 }
 
 void
 sanguis::client::control::logic::change_weapon(
-	weapon_type::type const w
+	weapon_type::type const _weapon_type
 )
 {
-	current_weapon = w;
+	current_weapon_ = _weapon_type;
 
-	send(
+	send_(
 		sanguis::messages::create(
 			sanguis::messages::player_change_weapon(
-				current_weapon
+				current_weapon_
 			)
 		)
 	);
@@ -401,15 +396,15 @@ sanguis::client::control::logic::change_weapon(
 
 void
 sanguis::client::control::logic::send_cheat(
-	cheat_type::type const c,
+	cheat_type::type const _cheat,
 	sge::console::arg_list const &,
 	sge::console::object &
 )
 {
-	send(
+	send_(
 		sanguis::messages::create(
 			sanguis::messages::player_cheat(
-				c
+				_cheat
 			)
 		)
 	);

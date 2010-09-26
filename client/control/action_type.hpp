@@ -19,8 +19,7 @@ enum type
 	shoot,
 	switch_weapon_forwards,
 	switch_weapon_backwards,
-	pause_unpause
-	// TODO: more
+	escape	
 };
 }
 
