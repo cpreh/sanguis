@@ -109,6 +109,9 @@ public:
 	update(
 		time_type
 	);
+
+	entities::player_map::size_type
+	player_count() const;
 private:
 	friend class world_context;
 

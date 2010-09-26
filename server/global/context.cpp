@@ -319,6 +319,12 @@ sanguis::server::global::context::update(
 		);
 }
 
+sanguis::server::entities::player_map::size_type
+sanguis::server::global::context::player_count() const
+{
+	return players_.size();
+}
+
 void
 sanguis::server::global::context::send_to_player(
 	player_id const _player_id,

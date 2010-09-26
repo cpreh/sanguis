@@ -179,6 +179,14 @@ sanguis::server::states::unpaused::operator()(
 	messages::player_pause const &
 )
 {
+	if(
+		context<
+			running
+		>().global_context().player_count()
+		> 1u
+	)
+		return discard_event();
+
 	context<
 		machine
 	>().send_to_all(
@@ -192,13 +200,13 @@ sanguis::server::states::unpaused::operator()(
 
 boost::statechart::result
 sanguis::server::states::unpaused::react(
-	tick_event const &t
+	tick_event const &_event
 )
 {
 	context<
 		running
 	>().global_context().update(
-		t.delta()
+		_event.delta()
 	);
 
 	return discard_event();
