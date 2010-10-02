@@ -1,7 +1,7 @@
-#ifndef SANGUIS_CLIENT_CONTROL_LOGIC_HPP_INCLUDED
-#define SANGUIS_CLIENT_CONTROL_LOGIC_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_CONTROL_ACTION_HANDLER_HPP_INCLUDED
+#define SANGUIS_CLIENT_CONTROL_ACTION_HANDLER_HPP_INCLUDED
 
-#include "logic_fwd.hpp"
+#include "action_handler_fwd.hpp"
 #include "player_action_fwd.hpp"
 #include "environment_fwd.hpp"
 #include "key_scale.hpp"
@@ -11,11 +11,9 @@
 #include <sge/console/object_fwd.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/time/timer.hpp>
-#include <fcppt/function/object_fwd.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/tr1/array.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <vector>
 
 namespace sanguis
 {
@@ -24,13 +22,15 @@ namespace client
 namespace control
 {
 
-class logic
+class action_handler
 {
-	FCPPT_NONCOPYABLE(logic)
+	FCPPT_NONCOPYABLE(
+		action_handler
+	)
 public:
-	logic(
-		send_callback const &,
-		environment &,
+	action_handler(
+		cleint::send_callback const &,
+		control::environment &,
 		sge::console::object &
 	);
 
@@ -88,8 +88,8 @@ private:
 	);
 
 	void
-	handle_escape(
-		key_scale
+	handle_switch_weapon(
+		bool forward
 	);
 
 	void
@@ -104,20 +104,10 @@ private:
 		sge::console::object &
 	);
 
-	send_callback const send_;
+	client::send_callback const send_;
 
 	control::environment &environment_;
 
-	typedef fcppt::function::object<
-		void (key_scale)
-	> action_handler;
-
-	typedef std::vector<
-		action_handler
-	> action_handlers;
-
-	action_handlers const actions_;
-		
 	weapon_type::type current_weapon_;
 
 	sge::time::timer rotation_timer_;
@@ -129,7 +119,7 @@ private:
 	
 	owned_weapons_array owned_weapons_;
 
-	fcppt::signal::scoped_connection 
+	fcppt::signal::scoped_connection const
 		cheat_kill_conn_,
 		cheat_impulse_conn_,
 		cheat_exp_conn_;

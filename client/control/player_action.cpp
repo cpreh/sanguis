@@ -1,12 +1,12 @@
 #include "player_action.hpp"
 
 sanguis::client::control::player_action::player_action(
-	action_type::type const type_,
-	key_scale const scale_
+	action_type::type const _type,
+	key_scale const _scale
 )
 :
-	type_(type_),
-	scale_(scale_)
+	type_(_type),
+	scale_(_scale)
 {}
 
 sanguis::client::control::action_type::type

@@ -173,7 +173,7 @@ sanguis::client::states::menu::operator()(
 			<< FCPPT_TEXT("Received connect_state")
 	);
 
-	return transit<ingame>();
+	return transit<waiting_for_player>();
 }
 
 fcppt::log::object &

@@ -19,6 +19,7 @@ enum type
 	shoot,
 	switch_weapon_forwards,
 	switch_weapon_backwards,
+	perk_menu,
 	escape	
 };
 }

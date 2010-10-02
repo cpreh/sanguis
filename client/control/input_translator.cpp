@@ -1,26 +1,23 @@
-#include "input_handler.hpp"
+#include "input_translator.hpp"
 #include "player_action.hpp"
 #include "axis_direction_max.hpp"
 #include "axis_direction_min.hpp"
-#include "../log.hpp"
 #include "../../exception.hpp"
 #include <sge/input/system.hpp>
 #include <sge/input/key_pair.hpp>
-#include <fcppt/log/headers.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 
-sanguis::client::control::input_handler::input_handler(
+sanguis::client::control::input_translator::input_translator(
 	sge::input::system_ptr const _input_sys,
-	post_fun const &_post_message
+	control::post_fun const &_post_message
 )
 :
-	active_(false),
 	post_message_(_post_message),
 	connection_(
 		_input_sys->register_callback(
 			std::tr1::bind(
-				&input_handler::input_callback,
+				&input_translator::input_callback,
 				this,
 				std::tr1::placeholders::_1
 			)
@@ -31,40 +28,10 @@ sanguis::client::control::input_handler::input_handler(
 {}
 
 void
-sanguis::client::control::input_handler::active(
-	bool const _active
-)
-{
-	if(
-		active_ == _active
-	)
-	{
-		FCPPT_LOG_WARNING(
-			log(),
-			fcppt::log::_
-				<< FCPPT_TEXT("input_active ")
-				<< (
-					!_active
-					?
-						FCPPT_TEXT("unset")
-					:
-						FCPPT_TEXT("set")
-				)
-				<< FCPPT_TEXT(" twice!")
-		);
-	}
-
-	active_ = _active;
-}
-
-void
-sanguis::client::control::input_handler::input_callback(
+sanguis::client::control::input_translator::input_callback(
 	sge::input::key_pair const &_key_pair
 )
 {
-	if(!active_)
-		return;
-
 	sge::input::key_code const code(
 		_key_pair.key().code()
 	);
@@ -99,6 +66,11 @@ sanguis::client::control::input_handler::input_callback(
 		);
 		break;
 	case sge::input::kc::key_e:
+		perk_event(
+			_key_pair
+		);
+		break;
+	case sge::input::kc::key_escape:
 		escape_event(
 			_key_pair
 		);
@@ -109,7 +81,7 @@ sanguis::client::control::input_handler::input_callback(
 }
 
 void
-sanguis::client::control::input_handler::direction_event(
+sanguis::client::control::input_translator::direction_event(
 	sge::input::key_pair const &_key_pair
 )
 {
@@ -152,7 +124,7 @@ sanguis::client::control::input_handler::direction_event(
 }
 
 void
-sanguis::client::control::input_handler::rotation_event(
+sanguis::client::control::input_translator::rotation_event(
 	sge::input::key_pair const &_key_pair
 )
 {
@@ -187,7 +159,7 @@ sanguis::client::control::input_handler::rotation_event(
 }
 
 void
-sanguis::client::control::input_handler::shooting_event(
+sanguis::client::control::input_translator::shooting_event(
 	sge::input::key_pair const &_key_pair
 )
 {
@@ -204,7 +176,7 @@ sanguis::client::control::input_handler::shooting_event(
 }
 	
 void
-sanguis::client::control::input_handler::weapon_switch_event(
+sanguis::client::control::input_translator::weapon_switch_event(
 	sge::input::key_pair const &_key_pair
 )
 {
@@ -230,7 +202,29 @@ sanguis::client::control::input_handler::weapon_switch_event(
 }
 
 void
-sanguis::client::control::input_handler::escape_event(
+sanguis::client::control::input_translator::perk_event(
+	sge::input::key_pair const &_key_pair
+)
+{
+	if(
+		!_key_pair.value()
+	)
+		return;
+
+	post_message_(
+		player_action(
+			action_type::perk_menu,
+			static_cast<
+				key_scale
+			>(
+				_key_pair.value()
+			)
+		)
+	);
+}
+
+void
+sanguis::client::control::input_translator::escape_event(
 	sge::input::key_pair const &_key_pair
 )
 {

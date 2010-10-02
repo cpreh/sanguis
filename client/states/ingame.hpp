@@ -1,8 +1,9 @@
 #ifndef SANGUIS_CLIENT_STATES_INGAME_HPP_INCLUDED
 #define SANGUIS_CLIENT_STATES_INGAME_HPP_INCLUDED
 
-#include "running.hpp"
-#include "../events/menu_fwd.hpp"
+#include "has_player.hpp"
+#include "../events/player_action_fwd.hpp"
+#include <fcppt/noncopyable.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/result.hpp>
@@ -19,13 +20,16 @@ class ingame
 :
 	public boost::statechart::state<
 		ingame,
-		running
+		has_player	
 	>
 {
+	FCPPT_NONCOPYABLE(
+		ingame
+	)
 public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<
-			events::menu
+			events::player_action
 		>
 	> reactions;
 
@@ -33,11 +37,13 @@ public:
 		my_context
 	);
 
+	~ingame();
+
 	typedef boost::statechart::result result_type;
 
 	boost::statechart::result
 	react(
-		events::menu const &
+		events::player_action const &
 	);
 };
 

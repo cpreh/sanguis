@@ -75,29 +75,13 @@ sanguis::client::states::running::running(
 				this,
 				std::tr1::placeholders::_1
 			),
+			std::tr1::bind(
+				&running::menu_event,
+				this,
+				std::tr1::placeholders::_1
+			),
 			drawer_->control_environment(),
 			context<machine>().console().gfx().object()
-		)
-	),
-	player_input_(
-		new control::input_handler(
-			context<machine>().input_system(),
-			std::tr1::bind(
-				&control::logic::handle_player_action,
-				logic_.get(),
-				std::tr1::placeholders::_1
-			)
-		)
-	),
-	esc_connection_(
-		context<machine>().input_system()->register_callback(
-			sge::input::action(
-				sge::input::kc::key_escape,
-				std::tr1::bind(
-					&states::running::on_escape,
-					this
-				)
-			)
 		)
 	),
 	perk_chooser_(
@@ -227,10 +211,6 @@ sanguis::client::states::running::operator()(
 			*wrapped_msg
 		);
 	}
-
-	player_input_->active(
-		true
-	);
 
 	return discard_event();
 }
@@ -432,6 +412,18 @@ sanguis::client::states::running::send_message(
 {
 	context<machine>().send(
 		_message
+	);
+}
+
+void
+sanguis::client::states::running::menu_event(
+	control::menu_action::type const _type
+)
+{
+	post_event(
+		events::menu(
+			_type
+		)
 	);
 }
 

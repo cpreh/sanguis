@@ -1,7 +1,7 @@
-#ifndef SANGUIS_CLIENT_CONTROL_INPUT_HANDLER_HPP_INCLUDED
-#define SANGUIS_CLIENT_CONTROL_INPUT_HANDLER_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_CONTROL_INPUT_TRANSLATOR_HPP_INCLUDED
+#define SANGUIS_CLIENT_CONTROL_INPUT_TRANSLATOR_HPP_INCLUDED
 
-#include "input_handler_fwd.hpp"
+#include "input_translator_fwd.hpp"
 #include "player_action_fwd.hpp"
 #include <sge/input/key_pair_fwd.hpp>
 #include <sge/input/key_state.hpp>
@@ -16,7 +16,7 @@ namespace client
 namespace control
 {
 
-class input_handler
+class input_translator
 {
 public:
 	typedef fcppt::function::object<
@@ -28,11 +28,6 @@ public:
 		post_fun const &
 	);
 
-	void
-	active(
-		bool
-	);
-	
 	void
 	input_callback(
 		sge::input::key_pair const &
@@ -59,13 +54,16 @@ private:
 	);
 
 	void
+	perk_event(
+		sge::input::key_pair const &
+	);
+
+	void
 	escape_event(
 		sge::input::key_pair const &
 	);
 
-	bool active_;
-
-	post_fun const post_message_;
+	control::post_fun const post_message_;
 
 	fcppt::signal::scoped_connection const connection_;
 

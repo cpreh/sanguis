@@ -1,4 +1,4 @@
-#include "logic.hpp"
+#include "action_handler.hpp"
 #include "player_action.hpp"
 #include "environment.hpp"
 #include "../log.hpp"
@@ -11,6 +11,7 @@
 #include "../../messages/player_change_weapon.hpp"
 #include "../../messages/player_cheat.hpp"
 #include "../../cyclic_iterator_impl.hpp"
+#include "../../exception.hpp"
 #include <sge/time/millisecond.hpp>
 #include <sge/console/object.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -18,13 +19,13 @@
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/almost_zero.hpp>
 #include <fcppt/log/headers.hpp>
-#include <fcppt/assign/make_container.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/text.hpp>
 #include <algorithm>
+#include <iterator>
 
-sanguis::client::control::logic::logic(
+sanguis::client::control::action_handler::action_handler(
 	send_callback const &_send,
 	control::environment &_environment,
 	sge::console::object &_console
@@ -35,67 +36,6 @@ sanguis::client::control::logic::logic(
 	),
 	environment_(
 		_environment
-	),
-	actions_(
-		fcppt::assign::make_container<
-			action_handlers
-		>
-		(
-			std::tr1::bind(
-				&logic::handle_move_x,
-				this,
-				std::tr1::placeholders::_1
-			)
-		)
-		(
-			std::tr1::bind(
-				&logic::handle_move_y,
-				this,
-				std::tr1::placeholders::_1
-			)
-		)
-		(
-			std::tr1::bind(
-				&logic::handle_rotation_x,
-				this,
-				std::tr1::placeholders::_1
-			)
-		)
-		(
-			std::tr1::bind(
-				&logic::handle_rotation_y,
-				this,
-				std::tr1::placeholders::_1
-			)
-		)
-		(
-			std::tr1::bind(
-				&logic::handle_shooting,
-				this,
-				std::tr1::placeholders::_1
-			)
-		)
-		(
-			std::tr1::bind(
-				&logic::handle_switch_weapon_forwards,
-				this,
-				std::tr1::placeholders::_1
-			)
-		)
-		(
-			std::tr1::bind(
-				&logic::handle_switch_weapon_backwards,
-				this,
-				std::tr1::placeholders::_1
-			)
-		)
-		(
-			std::tr1::bind(
-				&logic::handle_escape,
-				this,
-				std::tr1::placeholders::_1
-			)
-		)
 	),
 	current_weapon_(
 		weapon_type::size
@@ -110,7 +50,7 @@ sanguis::client::control::logic::logic(
 		_console.insert(
 			FCPPT_TEXT("kill"),
 			std::tr1::bind(
-				&logic::send_cheat,
+				&action_handler::send_cheat,
 				this,
 				cheat_type::kill,
 				std::tr1::placeholders::_1,
@@ -123,7 +63,7 @@ sanguis::client::control::logic::logic(
 		_console.insert(
 			FCPPT_TEXT("impulse"),
 			std::tr1::bind(
-				&logic::send_cheat,
+				&action_handler::send_cheat,
 				this,
 				cheat_type::impulse101,
 				std::tr1::placeholders::_1,
@@ -136,7 +76,7 @@ sanguis::client::control::logic::logic(
 		_console.insert(
 			FCPPT_TEXT("exp"),
 			std::tr1::bind(
-				&logic::send_cheat,
+				&action_handler::send_cheat,
 				this,
 				cheat_type::exp,
 				std::tr1::placeholders::_1,
@@ -154,22 +94,73 @@ sanguis::client::control::logic::logic(
 }
 
 void
-sanguis::client::control::logic::handle_player_action(
+sanguis::client::control::action_handler::handle_player_action(
 	player_action const &_action
 )
 {
-	actions_.at(
-		_action.type()
-	)(
+	key_scale const scale(
 		_action.scale()
 	);
+
+	switch(
+		_action.type()
+	)
+	{
+	case action_type::horizontal_move:
+		handle_move_x(
+			scale
+		);
+
+		return;
+	case action_type::vertical_move:
+		handle_move_y(
+			scale
+		);
+
+		return;
+	case action_type::horizontal_look:
+		handle_rotation_x(
+			scale
+		);
+
+		return;
+	case action_type::vertical_look:
+		handle_rotation_y(
+			scale
+		);
+
+		return;
+	case action_type::shoot:
+		handle_shooting(
+			scale
+		);
+
+		return;
+	case action_type::switch_weapon_forwards:
+		handle_switch_weapon_forwards(
+			scale
+		);
+
+		return;
+	case action_type::switch_weapon_backwards:
+		handle_switch_weapon_backwards(
+			scale
+		);
+
+		return;
+	case action_type::perk_menu:
+	case action_type::escape:
+		throw sanguis::exception(
+			FCPPT_TEXT("Invalid action in action_handler!")
+		);
+	}
 }
 
-sanguis::client::control::logic::~logic()
+sanguis::client::control::action_handler::~action_handler()
 {}
 
 void
-sanguis::client::control::logic::give_player_weapon(
+sanguis::client::control::action_handler::give_player_weapon(
 	weapon_type::type const _weapon_type
 )
 {
@@ -187,7 +178,7 @@ sanguis::client::control::logic::give_player_weapon(
 }
 
 void
-sanguis::client::control::logic::handle_move_x(
+sanguis::client::control::action_handler::handle_move_x(
 	key_scale const _scale
 )
 {
@@ -199,7 +190,7 @@ sanguis::client::control::logic::handle_move_x(
 }
 
 void
-sanguis::client::control::logic::handle_move_y(
+sanguis::client::control::action_handler::handle_move_y(
 	key_scale const _scale
 )
 {
@@ -211,7 +202,7 @@ sanguis::client::control::logic::handle_move_y(
 }
 
 void
-sanguis::client::control::logic::update_direction()
+sanguis::client::control::action_handler::update_direction()
 {
 	send_(
 		sanguis::messages::create(
@@ -227,7 +218,7 @@ sanguis::client::control::logic::update_direction()
 }
 
 void
-sanguis::client::control::logic::handle_rotation_x(
+sanguis::client::control::action_handler::handle_rotation_x(
 	key_scale const
 )
 {
@@ -235,7 +226,7 @@ sanguis::client::control::logic::handle_rotation_x(
 }
 
 void
-sanguis::client::control::logic::handle_rotation_y(
+sanguis::client::control::action_handler::handle_rotation_y(
 	key_scale const
 )
 {
@@ -243,7 +234,7 @@ sanguis::client::control::logic::handle_rotation_y(
 }
 
 void
-sanguis::client::control::logic::update_rotation()
+sanguis::client::control::action_handler::update_rotation()
 {
 	// FIXME: the rotation is still handled in the cursor
 
@@ -276,7 +267,7 @@ sanguis::client::control::logic::update_rotation()
 }
 
 void
-sanguis::client::control::logic::handle_shooting(
+sanguis::client::control::action_handler::handle_shooting(
 	key_scale const _scale
 )
 {
@@ -299,8 +290,35 @@ sanguis::client::control::logic::handle_shooting(
 }
 
 void
-sanguis::client::control::logic::handle_switch_weapon_forwards(
+sanguis::client::control::action_handler::handle_switch_weapon_forwards(
 	key_scale
+)
+{
+	handle_switch_weapon(
+		true
+	);
+}
+
+void
+sanguis::client::control::action_handler::handle_switch_weapon_backwards(
+	key_scale
+)
+{
+	handle_switch_weapon(
+		false
+	);
+}
+
+void
+sanguis::client::control::action_handler::handle_perk_dialog(
+	key_scale
+)
+{
+}
+
+void
+sanguis::client::control::action_handler::handle_switch_weapon(
+	bool const _forward
 )
 {
 	// we don't own any weapon
@@ -336,18 +354,12 @@ sanguis::client::control::logic::handle_switch_weapon_forwards(
 		owned_weapons_.end()
 	);
 
-/*
-	switch(m.type())
-	{
-	case player_action::switch_weapon_forwards:*/
+	if(
+		_forward
+	)
 		while(!*++it) ;
-	/*
-		break;
-	case player_action::switch_weapon_backwards:
+	else
 		while(!*--it) ;
-		break;
-	}
-	*/
 
 	change_weapon(
 		static_cast<
@@ -366,20 +378,7 @@ sanguis::client::control::logic::handle_switch_weapon_forwards(
 }
 
 void
-sanguis::client::control::logic::handle_switch_weapon_backwards(
-	key_scale
-)
-{}
-
-void
-sanguis::client::control::logic::handle_escape(
-	key_scale
-)
-{
-}
-
-void
-sanguis::client::control::logic::change_weapon(
+sanguis::client::control::action_handler::change_weapon(
 	weapon_type::type const _weapon_type
 )
 {
@@ -395,7 +394,7 @@ sanguis::client::control::logic::change_weapon(
 }
 
 void
-sanguis::client::control::logic::send_cheat(
+sanguis::client::control::action_handler::send_cheat(
 	cheat_type::type const _cheat,
 	sge::console::arg_list const &,
 	sge::console::object &

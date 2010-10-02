@@ -18,7 +18,6 @@
 #include "../../messages/base.hpp"
 #include "../../messages/add_own_player.hpp"
 #include "../../messages/highscore.hpp"
-#include "../../messages/remove_id.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../messages/give_weapon.hpp"
 #include "../../messages/available_perks.hpp"
@@ -33,7 +32,6 @@
 #include <fcppt/scoped_ptr.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
-#include <boost/statechart/transition.hpp>
 #include <boost/statechart/result.hpp>
 #include <boost/mpl/list/list10.hpp>
 
@@ -79,16 +77,6 @@ public:
 	);
 	
 	typedef boost::statechart::result result_type;
-
-	boost::statechart::result
-	operator()(
-		messages::add_own_player const &
-	);
-
-	boost::statechart::result
-	operator()(
-		messages::remove_id const &
-	);
 
 	boost::statechart::result
 	operator()(
@@ -187,16 +175,6 @@ private:
 	fcppt::scoped_ptr<
 		draw2d::scene::object
 	> drawer_;
-
-	fcppt::scoped_ptr<
-		control::logic
-	> logic_;
-
-	fcppt::scoped_ptr<
-		control::input_handler
-	> player_input_;
-
-	fcppt::signal::scoped_connection const esc_connection_;
 
 	client::perk_chooser perk_chooser_;
 
