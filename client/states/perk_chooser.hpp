@@ -1,11 +1,11 @@
 #ifndef SANGUIS_CLIENT_STATES_PERK_CHOOSER_HPP_INCLUDED
 #define SANGUIS_CLIENT_STATES_PERK_CHOOSER_HPP_INCLUDED
 
-#include "running.hpp"
+#include "has_player.hpp"
 #include "../perk_chooser_activation.hpp"
-#include "../events/message_fwd.hpp"
+#include "../events/action_fwd.hpp"
 #include "../events/tick_fwd.hpp"
-#include "../../messages/unpause.hpp"
+#include <fcppt/noncopyable.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/result.hpp>
@@ -17,26 +17,32 @@ namespace client
 {
 namespace states
 {
+
 class perk_chooser
 :
 	public boost::statechart::state<
 		perk_chooser,
-		running
+		has_player
 	>
 {
+	FCPPT_NONCOPYABLE(
+		perk_chooser
+	)
 public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<
 			events::tick
 		>,
 		boost::statechart::custom_reaction<
-			events::message
+			events::action
 		>
 	> reactions;
 
 	explicit perk_chooser(
 		my_context
 	);
+
+	~perk_chooser();
 
 	typedef boost::statechart::result result_type;
 
@@ -47,21 +53,12 @@ public:
 
 	boost::statechart::result
 	react(
-		events::message const &
-	);
-
-	result_type
-	operator()(
-		messages::unpause const &
+		events::action const &
 	);
 private:
-	boost::statechart::result
-	handle_default_msg(
-		messages::base const &
-	);
-
 	client::perk_chooser_activation chooser_activation_;
 };
+
 }
 }
 }

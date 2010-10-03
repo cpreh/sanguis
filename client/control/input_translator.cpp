@@ -10,7 +10,7 @@
 
 sanguis::client::control::input_translator::input_translator(
 	sge::input::system_ptr const _input_sys,
-	control::post_fun const &_post_message
+	post_fun const &_post_message
 )
 :
 	post_message_(_post_message),

@@ -1,5 +1,5 @@
 #include "menu.hpp"
-#include "unpaused.hpp"
+#include "waiting_for_player.hpp"
 #include "../../messages/base.hpp"
 #include "../../messages/create.hpp"
 #include "../../messages/client_info.hpp"
@@ -75,8 +75,6 @@ sanguis::client::states::menu::react(
 	events::tick const &_event
 )
 {
-	context<machine>().dispatch();
-
 	menu_.process(
 		_event.delta()
 	);
@@ -164,7 +162,7 @@ sanguis::client::states::menu::operator()(
 
 boost::statechart::result
 sanguis::client::states::menu::operator()(
-	messages::connect_state const &_message
+	messages::connect_state const &
 )
 {
 	FCPPT_LOG_DEBUG(

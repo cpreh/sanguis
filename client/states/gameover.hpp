@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_STATES_GAMEOVER_HPP_INCLUDED
 
 #include "running.hpp"
+#include "args/gameover_fwd.hpp"
 #include "../events/menu_fwd.hpp"
 #include "../events/message_fwd.hpp"
 #include "../events/tick_fwd.hpp"
@@ -43,7 +44,8 @@ public:
 	> reactions;
 
 	explicit gameover(
-		my_context
+		my_context,
+		args::gameover const &
 	);
 
 	boost::statechart::result

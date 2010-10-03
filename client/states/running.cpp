@@ -1,12 +1,10 @@
 #include "running.hpp"
 #include "menu.hpp"
 #include "gameover.hpp"
-#include "../perk_cast.hpp"
-#include "../log.hpp"
-#include "../invalid_id.hpp"
+#include "args/gameover.hpp"
+#include "../daytime_settings.hpp"
 #include "../entity_type.hpp"
-#include "../control/logic.hpp"
-#include "../control/input_handler.hpp"
+#include "../log.hpp"
 #include "../cursor/object.hpp"
 #include "../events/menu.hpp"
 #include "../events/message.hpp"
@@ -16,7 +14,6 @@
 #include "../draw2d/screen_to_virtual.hpp" // FIXME
 #include "../draw2d/scene/object.hpp"
 #include "../../messages/call/object.hpp"
-#include "../../messages/player_choose_perk.hpp"
 #include "../../messages/move.hpp"
 #include "../../messages/create.hpp"
 #include "../../load/context.hpp"
@@ -29,21 +26,22 @@
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/state/trampoline.hpp>
-#include <sge/input/action.hpp>
-#include <sge/input/system.hpp>
-#include <fcppt/log/headers.hpp>
+#include <fcppt/log/output.hpp>
+#include <fcppt/log/debug.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/utf8/convert.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/assert.hpp>
-#include <boost/mpl/vector/vector20.hpp>
+#include <fcppt/make_unique_ptr.hpp>
+#include <boost/mpl/vector/vector10.hpp>
 #include <boost/foreach.hpp>
 
 sanguis::client::states::running::running(
-	my_context ctx
+	my_context _ctx
 )
 :
-	my_base(ctx), 
+	my_base(
+		_ctx
+	), 
 	renderer_state_(
 		context<machine>().renderer(),
 		sge::renderer::state::list
@@ -55,46 +53,28 @@ sanguis::client::states::running::running(
 		context<machine>().resources().resources().sounds()
 	),
 	daytime_settings_(
-		context<machine>().console().gfx().object()
+		fcppt::make_unique_ptr<
+			client::daytime_settings
+		>(
+			std::tr1::ref(
+				context<machine>().console().gfx().object()
+			)
+		)
 	),
 	drawer_(
-		new draw2d::scene::object(
+		fcppt::make_unique_ptr<
+			draw2d::scene::object
+		>(
 			context<machine>().resources(),
 			context<machine>().renderer(),
 			context<machine>().font_metrics(),
 			context<machine>().font_drawer(),
-			context<machine>().audio_player()->listener(),
+			std::tr1::ref(
+				context<machine>().audio_player()->listener()
+			),
 			context<machine>().cursor(),
-			daytime_settings_.current_time()
+			daytime_settings_->current_time()
 		)
-	),
-	logic_(
-		new control::logic(
-			std::tr1::bind(
-				&running::send_message,
-				this,
-				std::tr1::placeholders::_1
-			),
-			std::tr1::bind(
-				&running::menu_event,
-				this,
-				std::tr1::placeholders::_1
-			),
-			drawer_->control_environment(),
-			context<machine>().console().gfx().object()
-		)
-	),
-	perk_chooser_(
-		context<machine>().renderer(),
-		context<machine>().input_system(),
-		context<machine>().image_loader(),
-		context<machine>().font_metrics(),
-		std::tr1::bind(
-			&running::send_perk_choose,
-			this,
-			std::tr1::placeholders::_1
-		),
-		context<machine>().cursor()
 	),
 	cursor_id_(
 		drawer_->client_message(
@@ -137,17 +117,13 @@ sanguis::client::states::running::react(
 	events::tick const &_event
 )
 {
+	drawer_->set_time(
+		daytime_settings_->current_time()
+	);
+
 	drawer_->draw(
 		_event.delta()
 	);
-
-	perk_chooser_.process();
-
-	drawer_->set_time(
-		daytime_settings_.current_time()
-	);
-
-	context<machine>().dispatch();
 
 	context<machine>().resources().update(
 		_event.delta()
@@ -166,13 +142,9 @@ sanguis::client::states::running::react(
 )
 {
 	static sanguis::messages::call::object<
-		boost::mpl::vector11<
-			sanguis::messages::add_own_player,
-			sanguis::messages::remove_id,
+		boost::mpl::vector7<
 			sanguis::messages::disconnect,
-			sanguis::messages::give_weapon,
 			sanguis::messages::highscore,
-			sanguis::messages::available_perks,
 			sanguis::messages::level_up,
 			sanguis::messages::console_print,
 			sanguis::messages::add_console_command,
@@ -196,58 +168,10 @@ sanguis::client::states::running::react(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	sanguis::messages::add_own_player const &_message
-)
-{
-	// TODO: is this still needed?
-	{
-		sanguis::messages::auto_ptr wrapped_msg(
-			sanguis::messages::create(
-				_message
-			)
-		);
-
-		drawer_->process_message(
-			*wrapped_msg
-		);
-	}
-
-	return discard_event();
-}
-
-boost::statechart::result
-sanguis::client::states::running::operator()(
-	sanguis::messages::remove_id const &
-)
-{
-	player_input_->active(
-		false
-	);
-
-	return discard_event();
-}
-
-boost::statechart::result
-sanguis::client::states::running::operator()(
 	sanguis::messages::disconnect const &
 )
 {
 	return transit<menu>();
-}
-
-boost::statechart::result
-sanguis::client::states::running::operator()(
-	sanguis::messages::give_weapon const &_message
-)
-{
-	logic_->give_player_weapon(
-		SANGUIS_CAST_ENUM(
-			weapon_type,
-			_message.get<sanguis::messages::roles::weapon>()
-		)
-	);
-
-	return discard_event();
 }
 
 boost::statechart::result
@@ -262,37 +186,31 @@ sanguis::client::states::running::operator()(
 			<< _message.get<sanguis::messages::roles::highscore>()
 	);
 
+	highscore::name_container names;
+
 	BOOST_FOREACH(
 		sanguis::messages::types::string const &entry,
 		_message.get<sanguis::messages::string_vector>()
 	)
-		context<machine>().gameover_names().push_back(
+		names.push_back(
 			fcppt::utf8::convert(
 				entry	
 			)
 		);
 	
-	context<machine>().gameover_score(
-		static_cast<highscore::score_type>(
-			_message.get<sanguis::messages::roles::highscore>()
-		)
-	);
-	
-	return transit<gameover>();
-}
-
-boost::statechart::result
-sanguis::client::states::running::operator()(
-	sanguis::messages::available_perks const &_message
-)
-{
-	perk_chooser_.perks(
-		perk_cast(
-			_message.get<sanguis::messages::perk_list>()
-		)
-	);
-
-	return forward_event();
+	return
+		transit<
+			gameover
+		>(
+			args::gameover(
+				names,
+				static_cast<
+					highscore::score_type
+				>(
+					_message.get<sanguis::messages::roles::highscore>()
+				)
+			)
+		);
 }
 
 boost::statechart::result
@@ -300,12 +218,6 @@ sanguis::client::states::running::operator()(
 	sanguis::messages::level_up const &_message
 )
 {
-	perk_chooser_.level_up(
-		static_cast<level_type>(
-			_message.get<sanguis::messages::level_type>()
-		)
-	);
-
 	drawer_->process_message(
 		*sanguis::messages::create(
 			_message
@@ -387,10 +299,10 @@ sanguis::client::states::running::operator()(
 	return discard_event();
 }
 
-sanguis::client::perk_chooser &
-sanguis::client::states::running::perk_chooser()
+sanguis::client::control::environment &
+sanguis::client::states::running::control_environment()
 {
-	return perk_chooser_;
+	return drawer_->control_environment();
 }
 
 boost::statechart::result
@@ -403,42 +315,6 @@ sanguis::client::states::running::handle_default_msg(
 	);
 
 	return discard_event();
-}
-
-void
-sanguis::client::states::running::send_message(
-	sanguis::messages::auto_ptr _message
-)
-{
-	context<machine>().send(
-		_message
-	);
-}
-
-void
-sanguis::client::states::running::menu_event(
-	control::menu_action::type const _type
-)
-{
-	post_event(
-		events::menu(
-			_type
-		)
-	);
-}
-
-void
-sanguis::client::states::running::send_perk_choose(
-	perk_type::type const _perk_type
-)
-{
-	send_message(
-		sanguis::messages::create(
-			sanguis::messages::player_choose_perk(
-				_perk_type
-			)
-		)
-	);
 }
 
 void
@@ -469,13 +345,5 @@ sanguis::client::states::running::cursor_show(
 			cursor_id_,
 			!_show
 		)
-	);
-}
-
-void
-sanguis::client::states::running::on_escape()
-{
-	post_event(
-		events::menu()
 	);
 }

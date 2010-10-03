@@ -3,24 +3,17 @@
 
 #include "ingame_fwd.hpp"
 #include "../machine.hpp"
-#include "../perk_chooser.hpp"
 #include "../music_handler.hpp"
-#include "../perk_container.hpp"
-#include "../level_type.hpp"
-#include "../daytime_settings.hpp"
-#include "../events/message_fwd.hpp"
-#include "../control/logic_fwd.hpp"
-#include "../control/input_handler_fwd.hpp"
+#include "../daytime_settings_fwd.hpp"
+#include "../control/environment_fwd.hpp"
 #include "../draw2d/scene/object_fwd.hpp"
 #include "../draw2d/sprite/point.hpp"
 #include "../events/tick_fwd.hpp"
-#include "../../perk_type.hpp"
+#include "../events/message_fwd.hpp"
 #include "../../messages/base.hpp"
 #include "../../messages/add_own_player.hpp"
 #include "../../messages/highscore.hpp"
 #include "../../messages/disconnect.hpp"
-#include "../../messages/give_weapon.hpp"
-#include "../../messages/available_perks.hpp"
 #include "../../messages/level_up.hpp"
 #include "../../messages/console_print.hpp"
 #include "../../messages/add_console_command.hpp"
@@ -29,6 +22,7 @@
 #include "../../entity_id.hpp"
 #include <sge/renderer/state/scoped.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
@@ -50,6 +44,9 @@ class running
 		ingame	
 	>
 {
+	FCPPT_NONCOPYABLE(
+		running
+	)
 public:
 	typedef boost::mpl::list2<
 		boost::statechart::custom_reaction<
@@ -85,17 +82,7 @@ public:
 
 	boost::statechart::result
 	operator()(
-		messages::give_weapon const &
-	);
-
-	boost::statechart::result
-	operator()(
 		messages::highscore const &
-	);
-
-	boost::statechart::result
-	operator()(
-		messages::available_perks const &
 	);
 
 	boost::statechart::result
@@ -123,34 +110,12 @@ public:
 		messages::unpause const &
 	);
 
-	perk_container const &
-	perks() const;
-	
-	level_type
-	levels_left() const;
-	
-	void
-	consume_level();
-
-	entity_id
-	player_id() const;
-
-	client::perk_chooser &
-	perk_chooser();
+	control::environment &
+	control_environment();
 private:
 	boost::statechart::result
 	handle_default_msg(
 		messages::base const &
-	);
-
-	void
-	send_message(
-		messages::auto_ptr
-	);
-
-	void
-	send_perk_choose(
-		perk_type::type
 	);
 
 	void
@@ -163,20 +128,17 @@ private:
 		bool show
 	);
 
-	void
-	on_escape();
-
-	sge::renderer::state::scoped renderer_state_;
+	sge::renderer::state::scoped const renderer_state_;
 
 	music_handler music_;
 
-	client::daytime_settings daytime_settings_;
+	fcppt::scoped_ptr<
+		client::daytime_settings
+	> daytime_settings_;
 
 	fcppt::scoped_ptr<
 		draw2d::scene::object
 	> drawer_;
-
-	client::perk_chooser perk_chooser_;
 
 	entity_id const cursor_id_;
 

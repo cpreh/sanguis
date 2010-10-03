@@ -108,9 +108,7 @@ sanguis::client::machine::machine(
 			image_loader_,
 			renderer_
 		)
-	),
-	gameover_names_(),
-	gameover_score_()
+	)
 {}
 
 sanguis::client::machine::~machine()
@@ -268,12 +266,6 @@ sanguis::client::machine::quit()
 	running_ = false;
 }
 
-void
-sanguis::client::machine::dispatch()
-{
-	sge::mainloop::dispatch();
-}
-
 sanguis::client::config::settings::object &
 sanguis::client::machine::settings()
 {
@@ -344,30 +336,4 @@ sanguis::client::cursor::const_object_ptr const
 sanguis::client::machine::cursor() const
 {
 	return cursor_;
-}
-
-sanguis::client::highscore::name_container const &
-sanguis::client::machine::gameover_names() const
-{
-	return gameover_names_;
-}
-
-sanguis::client::highscore::name_container &
-sanguis::client::machine::gameover_names()
-{
-	return gameover_names_;
-}
-
-sanguis::client::highscore::score_type
-sanguis::client::machine::gameover_score()
-{
-	return gameover_score_;
-}
-
-void
-sanguis::client::machine::gameover_score(
-	client::highscore::score_type const _gameover_score
-)
-{
-	gameover_score_ = _gameover_score;
 }

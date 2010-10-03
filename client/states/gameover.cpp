@@ -1,8 +1,6 @@
 #include "gameover.hpp"
 #include "menu.hpp"
-#include "../perk_cast.hpp"
-#include "../../media_path.hpp"
-#include "../../messages/create.hpp"
+#include "args/gameover.hpp"
 #include "../../resolution_type.hpp"
 #include "../events/menu.hpp"
 #include "../events/message.hpp"
@@ -76,10 +74,13 @@ dialog_pos(
 }
 
 sanguis::client::states::gameover::gameover(
-	my_context ctx
+	my_context _ctx,
+	args::gameover const &_args
 )
 :
-	my_base(ctx),
+	my_base(
+		_ctx
+	),
 	m_(
 		context<machine>().renderer(),
 		context<machine>().input_system(),
@@ -147,7 +148,7 @@ sanguis::client::states::gameover::gameover(
 				sge::gui::point(0,1)
 			),
 		fcppt::algorithm::join_strings(
-			context<machine>().gameover_names(),
+			_args.names(),
 			FCPPT_TEXT(", ")
 		)
 	),
@@ -158,7 +159,7 @@ sanguis::client::states::gameover::gameover(
 				sge::gui::point(1,1)
 			),
 		fcppt::lexical_cast<fcppt::string>(
-			context<machine>().gameover_score()
+			_args.score()
 		)
 	),
 	buttons_return(
@@ -186,8 +187,6 @@ sanguis::client::states::gameover::react(
 	events::tick const &
 )
 {
-	context<machine>().dispatch();
-
 	m_.update();
 
 	m_.draw();
@@ -202,7 +201,6 @@ sanguis::client::states::gameover::react(
 {
 	return transit<menu>();
 }
-
 
 boost::statechart::result
 sanguis::client::states::gameover::react(

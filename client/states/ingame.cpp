@@ -1,9 +1,9 @@
 #include "ingame.hpp"
 #include "ingame_menu.hpp"
 #include "perk_chooser.hpp"
-#include "../events/menu.hpp"
-#include "../../exception.hpp"
-#include <fcppt/text.hpp>
+#include "../events/action.hpp"
+#include "../events/message.hpp"
+#include "../events/tick.hpp"
 
 sanguis::client::states::ingame::ingame(
 	my_context _ctx
@@ -15,22 +15,25 @@ sanguis::client::states::ingame::ingame(
 {
 }
 
+sanguis::client::states::ingame::~ingame()
+{
+}
+
 boost::statechart::result
 sanguis::client::states::ingame::react(
-	events::menu const &_event
+	events::action const &_event
 )
 {
 	switch(
-		_event.type()
+		_event.value().type()
 	)
 	{
-	case control::menu_action::perk:
+	case control::action_type::perk_menu:
 		return transit<states::perk_chooser>();
-	case control::menu_action::options:
+	case control::action_type::escape:
 		return transit<states::ingame_menu>();
+	default:
+		// forward the event to the inner state, so it can be processed normally
+		return forward_event();
 	}
-
-	throw exception(
-		FCPPT_TEXT("Invalid menu event!")
-	);
 }

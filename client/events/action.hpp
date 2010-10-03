@@ -1,7 +1,9 @@
 #ifndef SANGUIS_CLIENT_EVENTS_ACTION_HPP_INCLUDED
 #define SANGUIS_CLIENT_EVENTS_ACTION_HPP_INCLUDED
 
-#include "../control/action_type.hpp"
+#include "action_fwd.hpp"
+#include "../control/player_action.hpp"
+#include <fcppt/nonassignable.hpp>
 #include <boost/statechart/event.hpp>
 
 namespace sanguis
@@ -22,13 +24,13 @@ class action
 	)
 public:
 	explicit action(
-		control::action_type
+		control::player_action const &
 	);
 
-	control::action_type::type
-	type() const;
+	control::player_action
+	value() const;
 private:
-	control::action_type const type_;
+	control::player_action const value_;
 };
 
 }

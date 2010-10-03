@@ -1,11 +1,20 @@
 #ifndef SANGUIS_CLIENT_STATES_HAS_PLAYER_HPP_INCLUDED
 #define SANGUIS_CLIENT_STATES_HAS_PLAYER_HPP_INCLUDED
 
+#include "running.hpp"
+#include "ingame_fwd.hpp"
 #include "../control/input_translator_fwd.hpp"
 #include "../control/action_handler_fwd.hpp"
+#include "../control/player_action_fwd.hpp"
 #include "../events/message_fwd.hpp"
-#include "../events/player_action_fwd.hpp"
+#include "../events/action_fwd.hpp"
+#include "../perk_chooser_fwd.hpp"
+#include "../../messages/base_fwd.hpp"
 #include "../../messages/remove_id.hpp"
+#include "../../messages/available_perks.hpp"
+#include "../../messages/level_up.hpp"
+#include "../../messages/give_weapon.hpp"
+#include "../../perk_type.hpp"
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <boost/statechart/state.hpp>
@@ -24,7 +33,8 @@ class has_player
 :
 	public boost::statechart::state<
 		has_player,
-		running
+		running,
+		ingame
 	>
 {
 	FCPPT_NONCOPYABLE(
@@ -32,11 +42,11 @@ class has_player
 	)
 public:
 	typedef boost::mpl::list<
-		boost::statechart::custom_reacton<
+		boost::statechart::custom_reaction<
 			events::message
 		>,
-		boost::statechart::custom_reacton<
-			events::player_action
+		boost::statechart::custom_reaction<
+			events::action
 		>
 	> reactions;
 
@@ -53,17 +63,47 @@ public:
 
 	boost::statechart::result
 	react(
-		events::player_action const &
+		events::action const &
 	);
 
-	boost::statechart::result
+	typedef boost::statechart::result result_type;
+
+	result_type
+	operator()(
+		messages::give_weapon const &
+	);
+
+	result_type
 	operator()(
 		messages::remove_id const &
 	);
+
+	result_type
+	operator()(
+		messages::available_perks const &
+	);
+
+	result_type
+	operator()(
+		messages::level_up const &
+	);
+
+	client::perk_chooser &
+	perk_chooser();
 private:
 	void
 	handle_player_action(
 		control::player_action const &
+	);
+
+	void
+	send_perk_choose(
+		perk_type::type
+	);
+
+	boost::statechart::result
+	handle_default_msg(
+		sanguis::messages::base const &
 	);
 
 	fcppt::scoped_ptr<
@@ -73,6 +113,10 @@ private:
 	fcppt::scoped_ptr<
 		control::action_handler
 	> action_handler_;
+
+	fcppt::scoped_ptr<
+		client::perk_chooser
+	> perk_chooser_;
 };
 
 }

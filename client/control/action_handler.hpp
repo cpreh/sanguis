@@ -29,12 +29,12 @@ class action_handler
 	)
 public:
 	action_handler(
-		cleint::send_callback const &,
+		client::send_callback const &,
 		control::environment &,
 		sge::console::object &
 	);
 
-	~logic();
+	~action_handler();
 
 	void
 	handle_player_action(

@@ -310,13 +310,6 @@ sanguis::client::control::action_handler::handle_switch_weapon_backwards(
 }
 
 void
-sanguis::client::control::action_handler::handle_perk_dialog(
-	key_scale
-)
-{
-}
-
-void
 sanguis::client::control::action_handler::handle_switch_weapon(
 	bool const _forward
 )

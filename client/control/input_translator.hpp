@@ -8,6 +8,7 @@
 #include <sge/input/system_ptr.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -18,12 +19,15 @@ namespace control
 
 class input_translator
 {
+	FCPPT_NONCOPYABLE(
+		input_translator
+	)
 public:
 	typedef fcppt::function::object<
 		void (player_action const &)
 	> post_fun;
 
-	explicit input_handler(
+	explicit input_translator(
 		sge::input::system_ptr,
 		post_fun const &
 	);
@@ -63,7 +67,7 @@ private:
 		sge::input::key_pair const &
 	);
 
-	control::post_fun const post_message_;
+	post_fun const post_message_;
 
 	fcppt::signal::scoped_connection const connection_;
 

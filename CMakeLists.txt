@@ -25,6 +25,16 @@ IF(MSVC)
 	SET(Boost_USE_STATIC_LIBS ON)
 ENDIF()
 
+IF(NOT STATECHART_INCLUDE_DIR)
+	MESSAGE(
+		FATAL_ERROR
+		"Please specify the include dir of the modified statechart library, for example:
+		cmake -D STATECHART_INCLUDE_DIR=foobar/statechart/include"
+	)
+ENDIF()
+
+INCLUDE_DIRECTORIES(${STATECHART_INCLUDE_DIR})
+
 FIND_PACKAGE(
 	Boost 1.41.0 REQUIRED COMPONENTS
 	iostreams

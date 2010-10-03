@@ -1,5 +1,11 @@
 #include "waiting_for_player.hpp"
+#include "has_player.hpp"
+#include "ingame.hpp"
+#include "../events/action.hpp"
+#include "../events/message.hpp"
+#include "../events/tick.hpp"
 #include "../../messages/call/object.hpp"
+#include "../../messages/create.hpp"
 #include <fcppt/tr1/functional.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 
@@ -23,7 +29,7 @@ sanguis::client::states::waiting_for_player::react(
 		boost::mpl::vector1<
 			sanguis::messages::add_own_player
 		>,
-		running
+		waiting_for_player
 	> dispatcher;
 
 	return
@@ -40,19 +46,23 @@ sanguis::client::states::waiting_for_player::react(
 
 boost::statechart::result
 sanguis::client::states::waiting_for_player::react(
-	events::player_action const &_event
+	events::action const &_event
 )
 {
 	return discard_event();
 }
 
-boost::statechart::result
+sanguis::client::states::waiting_for_player::result_type
 sanguis::client::states::waiting_for_player::operator()(
 	messages::add_own_player const &_message
 )
 {
-	post_message(
-		_message
+	post_event(
+		events::message(
+			messages::create(
+				_message
+			)
+		)
 	);
 
 	return transit<has_player>();
@@ -60,7 +70,7 @@ sanguis::client::states::waiting_for_player::operator()(
 
 boost::statechart::result
 sanguis::client::states::waiting_for_player::handle_default_msg(
-	messages::base const &
+	sanguis::messages::base const &
 )
 {
 	return forward_event();	

@@ -7,7 +7,9 @@ namespace sanguis
 {
 namespace client
 {
-typedef messages::types::level level_type;
+
+typedef sanguis::messages::types::level level_type;
+
 }
 }
 

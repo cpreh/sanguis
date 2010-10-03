@@ -6,8 +6,6 @@
 #include "cursor/const_object_ptr.hpp"
 #include "config/settings/object_fwd.hpp"
 #include "events/tick_fwd.hpp"
-#include "highscore/name_container.hpp"
-#include "highscore/score_type.hpp"
 #include "states/menu_fwd.hpp"
 #include "console.hpp"
 #include "screenshot.hpp"
@@ -30,6 +28,7 @@
 #include <sge/mainloop/io_service_ptr.hpp>
 
 #include <fcppt/container/raw_vector_decl.hpp>
+#include <fcppt/noncopyable.hpp>
 
 #include <boost/statechart/state_machine.hpp>
 
@@ -45,6 +44,9 @@ class machine
 		states::menu
 	>
 {
+	FCPPT_NONCOPYABLE(
+		machine
+	)
 public:
 	machine(
 		config::settings::object &,
@@ -84,7 +86,6 @@ public:
 	process_message(
 		messages::auto_ptr
 	);
-	// callbacks
 	
 	void
 	connect_callback();
@@ -109,9 +110,6 @@ public:
 
 	void
 	quit();
-
-	void
-	dispatch();
 
 	config::settings::object &
 	settings();
@@ -148,21 +146,6 @@ public:
 
 	sanguis::client::cursor::const_object_ptr const
 	cursor() const;
-
-	// FIXME: this is so ugly
-	client::highscore::name_container const &
-	gameover_names() const;
-
-	client::highscore::name_container &
-	gameover_names();
-
-	client::highscore::score_type
-	gameover_score();
-
-	void
-	gameover_score(
-		client::highscore::score_type
-	);
 private:
 	config::settings::object &settings_;
 
@@ -204,10 +187,6 @@ private:
 	screenshot screenshot_;
 
 	sanguis::client::cursor::object_ptr const cursor_;
-
-	client::highscore::name_container gameover_names_;
-
-	client::highscore::score_type gameover_score_;
 };
 
 }

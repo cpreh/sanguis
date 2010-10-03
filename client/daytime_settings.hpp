@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_DAYTIME_SETTINGS_HPP_INCLUDED
 #define SANGUIS_CLIENT_DAYTIME_SETTINGS_HPP_INCLUDED
 
+#include "daytime_settings_fwd.hpp"
 #include <sge/console/object_fwd.hpp>
 #include <sge/console/arg_list.hpp>
 #include <fcppt/signal/scoped_connection.hpp>

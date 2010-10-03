@@ -10,7 +10,11 @@ namespace client
 {
 namespace highscore
 {
-typedef std::vector<fcppt::string> name_container;
+
+typedef std::vector<
+	fcppt::string
+> name_container;
+
 }
 }
 }

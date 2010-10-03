@@ -1,8 +1,9 @@
 #ifndef SANGUIS_CLIENT_STATES_INGAME_HPP_INCLUDED
 #define SANGUIS_CLIENT_STATES_INGAME_HPP_INCLUDED
 
+#include "ingame_fwd.hpp"
 #include "has_player.hpp"
-#include "../events/player_action_fwd.hpp"
+#include "../events/action_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
@@ -29,7 +30,7 @@ class ingame
 public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<
-			events::player_action
+			events::action
 		>
 	> reactions;
 
@@ -43,7 +44,7 @@ public:
 
 	boost::statechart::result
 	react(
-		events::player_action const &
+		events::action const &
 	);
 };
 
