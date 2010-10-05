@@ -5,6 +5,7 @@
 #include "../machine.hpp"
 #include "../music_handler.hpp"
 #include "../daytime_settings_fwd.hpp"
+#include "../perk_chooser_fwd.hpp"
 #include "../control/environment_fwd.hpp"
 #include "../draw2d/scene/object_fwd.hpp"
 #include "../draw2d/sprite/point.hpp"
@@ -14,12 +15,14 @@
 #include "../../messages/add_own_player.hpp"
 #include "../../messages/highscore.hpp"
 #include "../../messages/disconnect.hpp"
-#include "../../messages/level_up.hpp"
 #include "../../messages/console_print.hpp"
 #include "../../messages/add_console_command.hpp"
 #include "../../messages/pause.hpp"
 #include "../../messages/unpause.hpp"
+#include "../../messages/available_perks.hpp"
+#include "../../messages/level_up.hpp"
 #include "../../entity_id.hpp"
+#include "../../perk_type.hpp"
 #include <sge/renderer/state/scoped.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -110,8 +113,16 @@ public:
 		messages::unpause const &
 	);
 
+	result_type
+	operator()(
+		messages::available_perks const &
+	);
+
 	control::environment &
 	control_environment();
+
+	client::perk_chooser &
+	perk_chooser();
 private:
 	boost::statechart::result
 	handle_default_msg(
@@ -128,9 +139,18 @@ private:
 		bool show
 	);
 
+	void
+	send_perk_choose(
+		perk_type::type
+	);
+
 	sge::renderer::state::scoped const renderer_state_;
 
 	music_handler music_;
+
+	fcppt::scoped_ptr<
+		client::perk_chooser
+	> perk_chooser_;
 
 	fcppt::scoped_ptr<
 		client::daytime_settings

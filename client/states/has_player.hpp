@@ -8,13 +8,9 @@
 #include "../control/player_action_fwd.hpp"
 #include "../events/message_fwd.hpp"
 #include "../events/action_fwd.hpp"
-#include "../perk_chooser_fwd.hpp"
 #include "../../messages/base_fwd.hpp"
 #include "../../messages/remove_id.hpp"
-#include "../../messages/available_perks.hpp"
-#include "../../messages/level_up.hpp"
 #include "../../messages/give_weapon.hpp"
-#include "../../perk_type.hpp"
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <boost/statechart/state.hpp>
@@ -77,28 +73,10 @@ public:
 	operator()(
 		messages::remove_id const &
 	);
-
-	result_type
-	operator()(
-		messages::available_perks const &
-	);
-
-	result_type
-	operator()(
-		messages::level_up const &
-	);
-
-	client::perk_chooser &
-	perk_chooser();
 private:
 	void
 	handle_player_action(
 		control::player_action const &
-	);
-
-	void
-	send_perk_choose(
-		perk_type::type
 	);
 
 	boost::statechart::result
@@ -113,10 +91,6 @@ private:
 	fcppt::scoped_ptr<
 		control::action_handler
 	> action_handler_;
-
-	fcppt::scoped_ptr<
-		client::perk_chooser
-	> perk_chooser_;
 };
 
 }

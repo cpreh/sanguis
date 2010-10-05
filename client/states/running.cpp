@@ -5,6 +5,8 @@
 #include "../daytime_settings.hpp"
 #include "../entity_type.hpp"
 #include "../log.hpp"
+#include "../perk_cast.hpp"
+#include "../perk_chooser.hpp"
 #include "../cursor/object.hpp"
 #include "../events/menu.hpp"
 #include "../events/message.hpp"
@@ -16,6 +18,7 @@
 #include "../../messages/call/object.hpp"
 #include "../../messages/move.hpp"
 #include "../../messages/create.hpp"
+#include "../../messages/player_choose_perk.hpp"
 #include "../../load/context.hpp"
 #include "../../cast_enum.hpp"
 #include <sge/audio/pool.hpp>
@@ -51,6 +54,24 @@ sanguis::client::states::running::running(
 	music_(
 		context<machine>().console().gfx().object(),
 		context<machine>().resources().resources().sounds()
+	),
+	perk_chooser_(
+		fcppt::make_unique_ptr<
+			client::perk_chooser
+		>(
+			context<machine>().renderer(),
+			context<machine>().input_system(),
+			std::tr1::ref(
+				context<machine>().image_loader()
+			),
+			context<machine>().font_metrics(),
+			std::tr1::bind(
+				&running::send_perk_choose,
+				this,
+				std::tr1::placeholders::_1
+			),
+			context<machine>().cursor()
+		)
 	),
 	daytime_settings_(
 		fcppt::make_unique_ptr<
@@ -142,14 +163,15 @@ sanguis::client::states::running::react(
 )
 {
 	static sanguis::messages::call::object<
-		boost::mpl::vector7<
+		boost::mpl::vector8<
 			sanguis::messages::disconnect,
 			sanguis::messages::highscore,
 			sanguis::messages::level_up,
 			sanguis::messages::console_print,
 			sanguis::messages::add_console_command,
 			sanguis::messages::pause,
-			sanguis::messages::unpause
+			sanguis::messages::unpause,
+			sanguis::messages::available_perks
 		>,
 		running
 	> dispatcher;
@@ -221,6 +243,14 @@ sanguis::client::states::running::operator()(
 	drawer_->process_message(
 		*sanguis::messages::create(
 			_message
+		)
+	);
+
+	perk_chooser_->level_up(
+		static_cast<
+			level_type
+		>(
+			_message.get<sanguis::messages::level_type>()
 		)
 	);
 
@@ -299,10 +329,30 @@ sanguis::client::states::running::operator()(
 	return discard_event();
 }
 
+boost::statechart::result
+sanguis::client::states::running::operator()(
+	sanguis::messages::available_perks const &_message
+)
+{
+	perk_chooser_->perks(
+		client::perk_cast(
+			_message.get<sanguis::messages::perk_list>()
+		)
+	);
+
+	return discard_event();
+}
+
 sanguis::client::control::environment &
 sanguis::client::states::running::control_environment()
 {
 	return drawer_->control_environment();
+}
+
+sanguis::client::perk_chooser &
+sanguis::client::states::running::perk_chooser()
+{
+	return *perk_chooser_;
 }
 
 boost::statechart::result
@@ -344,6 +394,20 @@ sanguis::client::states::running::cursor_show(
 		client::messages::visible(
 			cursor_id_,
 			!_show
+		)
+	);
+}
+
+void
+sanguis::client::states::running::send_perk_choose(
+	perk_type::type const _perk_type
+)
+{
+	context<machine>().send(
+		sanguis::messages::create(
+			sanguis::messages::player_choose_perk(
+				_perk_type
+			)
 		)
 	);
 }

@@ -13,7 +13,7 @@ sanguis::client::states::perk_chooser::perk_chooser(
 		_ctx
 	),
 	chooser_activation_(
-		context<has_player>().perk_chooser()
+		context<running>().perk_chooser()
 	)
 {
 }
@@ -27,7 +27,7 @@ sanguis::client::states::perk_chooser::react(
 	events::tick const &
 )
 {
-	context<has_player>().perk_chooser().process();
+	context<running>().perk_chooser().process();
 
 	return forward_event();
 }

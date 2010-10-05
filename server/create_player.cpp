@@ -15,36 +15,36 @@
 
 sanguis::server::entities::player_unique_ptr
 sanguis::server::create_player(
-	environment::load_context_ptr const load_context_,
-	string const &name,
-	unicast_callback const &send_to_player,
-	player_id const player_id_,
-	console_command_vector const &known_commands_
+	environment::load_context_ptr const _load_context,
+	string const &_name,
+	unicast_callback const &_send_to_player,
+	player_id const _player_id,
+	console_command_vector const &_known_commands
 )
 {
 	entities::player_unique_ptr new_player(
 		fcppt::make_unique_ptr<
 			entities::player
 		>(
-			load_context_,
+			_load_context,
 			entities::health_type(100),
 			damage::no_armor(),
 			entities::movement_speed(100),
-			name,
-			player_id_
+			_name,
+			_player_id
 		)
 	);
 
 	send_available_perks(
 		*new_player,
-		send_to_player
+		_send_to_player
 	);
 
 	BOOST_FOREACH(
 		console_command_vector::const_reference elem,
-		known_commands_
+		_known_commands
 	)
-		send_to_player(
+		_send_to_player(
 			new_player->player_id(),
 			messages::create(
 				messages::add_console_command(
