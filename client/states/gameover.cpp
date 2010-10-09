@@ -82,7 +82,7 @@ sanguis::client::states::gameover::gameover(
 	my_base(ctx),
 	m_(
 		context<machine>().renderer(),
-		context<machine>().input_system(),
+		context<machine>().input_processor(),
 		sge::gui::skins::ptr(
 			new sge::gui::skins::standard(
 				context<machine>().font_metrics()

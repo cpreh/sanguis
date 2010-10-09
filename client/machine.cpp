@@ -40,7 +40,7 @@ sanguis::client::machine::machine(
 	sge::font::metrics_ptr const _font_metrics,
 	sge::font::drawer_ptr const _font_drawer,
 	sge::console::gfx &_console_gfx,
-	sge::input::system_ptr const input_system_,
+	sge::input::processor_ptr const input_processor_,
 	sge::renderer::device_ptr const renderer_,
 	sge::image::multi_loader &image_loader_,
 	sge::audio::player_ptr const audio_player_,
@@ -49,7 +49,7 @@ sanguis::client::machine::machine(
 :
 	settings_(settings_),
 	resources_(_resources),
-	input_system_(input_system_),
+	input_processor_(input_processor_),
 	renderer_(renderer_),
 	image_loader_(image_loader_),
 	audio_player_(audio_player_),
@@ -88,7 +88,7 @@ sanguis::client::machine::machine(
 	console_gfx_(_console_gfx),
 	console_(
 		_console_gfx,
-		input_system_,
+		input_processor_,
 		sge::input::kc::key_f1,
 		std::tr1::bind(
 			&machine::send,
@@ -101,7 +101,7 @@ sanguis::client::machine::machine(
 	screenshot_(
 		renderer_,
 		image_loader_,
-		input_system_
+		input_processor_
 	),
 	cursor_(
 		new sanguis::client::cursor::object(
@@ -292,10 +292,10 @@ sanguis::client::machine::image_loader() const
 	return image_loader_;
 }
 
-sge::input::system_ptr const
-sanguis::client::machine::input_system() const
+sge::input::processor_ptr const
+sanguis::client::machine::input_processor() const
 {
-	return input_system_;
+	return input_processor_;
 }
 
 sge::audio::player_ptr const

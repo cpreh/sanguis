@@ -19,7 +19,7 @@
 #include <sge/gui/widgets/label.hpp>
 #include <sge/gui/manager.hpp>
 #include <sge/image/multi_loader_fwd.hpp>
-#include <sge/input/system_ptr.hpp>
+#include <sge/input/processor_ptr.hpp>
 #include <sge/renderer/device_ptr.hpp>
 #include <sge/sprite/type_choices.hpp>
 #include <sge/sprite/no_color.hpp>
@@ -52,7 +52,7 @@ public:
 		sge::renderer::device_ptr,
 		sge::image::multi_loader &,
 		sge::font::metrics_ptr,
-		sge::input::system_ptr,
+		sge::input::processor_ptr,
 		cursor::object_ptr,
 		callbacks::object const &
 	);

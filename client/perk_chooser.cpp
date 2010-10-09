@@ -97,7 +97,7 @@ sanguis::client::perk_chooser::activation::~activation()
 
 sanguis::client::perk_chooser::perk_chooser(
 	sge::renderer::device_ptr const _renderer,
-	sge::input::system_ptr const _input_system,
+	sge::input::processor_ptr const _input_processor,
 	sge::image::multi_loader &_image_loader,
 	sge::font::metrics_ptr const _font_metrics,
 	send_callback const &_send_callback,
@@ -112,7 +112,7 @@ sanguis::client::perk_chooser::perk_chooser(
 		static_cast<level_type>(0)),
 	m_(
 		_renderer,
-		_input_system,
+		_input_processor,
 		sge::gui::skins::ptr(
 			new sge::gui::skins::standard(
 				_font_metrics

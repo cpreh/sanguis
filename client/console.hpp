@@ -5,7 +5,7 @@
 #include "send_callback.hpp"
 #include <sge/console/gfx_fwd.hpp>
 #include <sge/console/arg_list.hpp>
-#include <sge/input/system_ptr.hpp>
+#include <sge/input/processor_ptr.hpp>
 #include <sge/input/key_code.hpp>
 #include <sge/input/key_pair_fwd.hpp>
 #include <sge/input/callback.hpp>
@@ -29,7 +29,7 @@ public:
 	explicit
 	console(
 		sge::console::gfx &,
-		sge::input::system_ptr,
+		sge::input::processor_ptr,
 		sge::input::key_code,
 		send_callback const &
 	);

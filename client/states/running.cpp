@@ -30,7 +30,7 @@
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/state/trampoline.hpp>
 #include <sge/input/action.hpp>
-#include <sge/input/system.hpp>
+#include <sge/input/processor.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/utf8/convert.hpp>
@@ -81,7 +81,7 @@ sanguis::client::states::running::running(
 	),
 	player_input_(
 		new control::input_handler(
-			context<machine>().input_system(),
+			context<machine>().input_processor(),
 			std::tr1::bind(
 				&control::logic::handle_player_action,
 				logic_.get(),
@@ -90,7 +90,7 @@ sanguis::client::states::running::running(
 		)
 	),
 	esc_connection_(
-		context<machine>().input_system()->register_callback(
+		context<machine>().input_processor()->register_callback(
 			sge::input::action(
 				sge::input::kc::key_escape,
 				std::tr1::bind(
@@ -102,7 +102,7 @@ sanguis::client::states::running::running(
 	),
 	perk_chooser_(
 		context<machine>().renderer(),
-		context<machine>().input_system(),
+		context<machine>().input_processor(),
 		context<machine>().image_loader(),
 		context<machine>().font_metrics(),
 		std::tr1::bind(

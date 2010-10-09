@@ -5,7 +5,7 @@
 #include "player_action_fwd.hpp"
 #include <sge/input/key_pair_fwd.hpp>
 #include <sge/input/key_state.hpp>
-#include <sge/input/system_ptr.hpp>
+#include <sge/input/processor_ptr.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 
@@ -24,7 +24,7 @@ public:
 	> post_fun;
 
 	explicit input_handler(
-		sge::input::system_ptr,
+		sge::input::processor_ptr,
 		post_fun const &
 	);
 

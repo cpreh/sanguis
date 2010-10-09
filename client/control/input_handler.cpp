@@ -4,21 +4,21 @@
 #include "axis_direction_min.hpp"
 #include "../log.hpp"
 #include "../../exception.hpp"
-#include <sge/input/system.hpp>
+#include <sge/input/processor.hpp>
 #include <sge/input/key_pair.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::client::control::input_handler::input_handler(
-	sge::input::system_ptr const _input_sys,
+	sge::input::processor_ptr const _input_processor,
 	post_fun const &_post_message
 )
 :
 	active_(false),
 	post_message_(_post_message),
 	connection_(
-		_input_sys->register_callback(
+		_input_processor->register_callback(
 			std::tr1::bind(
 				&input_handler::input_callback,
 				this,

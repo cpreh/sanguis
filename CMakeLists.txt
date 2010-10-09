@@ -63,11 +63,27 @@ FIND_PACKAGE(
 
 INCLUDE_DIRECTORIES(${SGE_INCLUDE_DIRS})
 
-IF (${CMAKE_COMPILER_IS_GNUCXX})
-	ADD_DEFINITIONS("
-		-fvisibility=hidden -ansi -pedantic-errors -Wall"
+INCLUDE (CheckCXXSourceRuns)
+
+CHECK_CXX_SOURCE_RUNS(
+	"#include <cstdlib>
+	int main()
+	{
+	#ifdef __clang__
+		return EXIT_SUCCESS;
+	#else
+		return EXIT_FAILURE;
+	#endif
+	}
+	"
+	COMPILER_IS_CLANGPP
+)
+
+IF (CMAKE_COMPILER_IS_GNUCXX OR COMPILER_IS_CLANGPP)
+	ADD_DEFINITIONS(
+		"-fvisibility=hidden -ansi -pedantic-errors -Wall"
 		"-Wextra -Wconversion -Wfloat-equal -Wredundant-decls"
-		"-Wstrict-null-sentinel -Winit-self -Woverloaded-virtual"
+		"-Winit-self -Woverloaded-virtual"
 		"-Wold-style-cast -Wnon-virtual-dtor -Wctor-dtor-privacy -Wsign-promo"
 		"-Wstrict-aliasing=1 -Wmissing-declarations -Wno-long-long"
 	)
