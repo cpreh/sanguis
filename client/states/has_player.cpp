@@ -23,7 +23,7 @@ sanguis::client::states::has_player::has_player(
 		fcppt::make_unique_ptr<
 			control::input_translator
 		>(
-			context<machine>().input_system(),
+			context<machine>().input_processor(),
 			std::tr1::bind(
 				&states::has_player::handle_player_action,
 				this,
