@@ -43,7 +43,7 @@ sanguis::client::menu::object::object(
 	sge::renderer::device_ptr const _renderer,
 	sge::image::multi_loader &_image_loader,
 	sge::font::metrics_ptr const _font_metrics,
-	sge::input::system_ptr const _input_system,
+	sge::input::processor_ptr const _input_processor,
 	cursor::object_ptr const _cursor,
 	callbacks::object const &_callbacks
 )
@@ -59,7 +59,7 @@ sanguis::client::menu::object::object(
 	),
 	m(
 		_renderer,
-		_input_system,
+		_input_processor,
 		sge::gui::skins::ptr(
 			new sge::gui::skins::standard(
 				_font_metrics

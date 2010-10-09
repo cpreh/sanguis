@@ -86,7 +86,7 @@ sanguis::client::object::object(
 		sys_.renderer(),
 		sge::image::colors::white(),
 		font_metrics_,
-		sys_.input_system(),
+		sys_.input_processor(),
 		sge::console::sprite_object(
 			sge::console::sprite_parameters()
 			.texture(
@@ -147,7 +147,7 @@ sanguis::client::object::object(
 		font_metrics_,
 		font_drawer_,
 		console_gfx_,
-		sys_.input_system(),
+		sys_.input_processor(),
 		sys_.renderer(),
 		sys_.image_loader(),
 		sys_.audio_player(),

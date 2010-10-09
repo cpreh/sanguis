@@ -12,7 +12,7 @@
 #include <sge/gui/widgets/label.hpp>
 #include <sge/gui/manager.hpp>
 #include <sge/image/multi_loader_fwd.hpp>
-#include <sge/input/system_ptr.hpp>
+#include <sge/input/processor_ptr.hpp>
 #include <sge/renderer/device_ptr.hpp>
 #include <fcppt/signal/connection_manager.hpp>
 #include <fcppt/function/object.hpp>
@@ -35,7 +35,7 @@ public:
 
 	perk_chooser(
 		sge::renderer::device_ptr,
-		sge::input::system_ptr,
+		sge::input::processor_ptr,
 		sge::image::multi_loader &,
 		sge::font::metrics_ptr,
 		send_callback const &,

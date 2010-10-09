@@ -3,19 +3,19 @@
 #include "axis_direction_max.hpp"
 #include "axis_direction_min.hpp"
 #include "../../exception.hpp"
-#include <sge/input/system.hpp>
+#include <sge/input/processor.hpp>
 #include <sge/input/key_pair.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::client::control::input_translator::input_translator(
-	sge::input::system_ptr const _input_sys,
+	sge::input::processor_ptr const _input_processor,
 	post_fun const &_post_message
 )
 :
 	post_message_(_post_message),
 	connection_(
-		_input_sys->register_callback(
+		_input_processor->register_callback(
 			std::tr1::bind(
 				&input_translator::input_callback,
 				this,

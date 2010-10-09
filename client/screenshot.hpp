@@ -3,7 +3,7 @@
 
 #include <sge/renderer/device_ptr.hpp>
 #include <sge/image/multi_loader_fwd.hpp>
-#include <sge/input/system_ptr.hpp>
+#include <sge/input/processor_ptr.hpp>
 #include <sge/input/key_pair_fwd.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/function/object.hpp>
@@ -21,8 +21,10 @@ public:
 	screenshot(
 		sge::renderer::device_ptr,
 		sge::image::multi_loader const &,
-		sge::input::system_ptr
+		sge::input::processor_ptr
 	);
+
+	~screenshot();
 
 	void process();
 private:

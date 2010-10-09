@@ -5,7 +5,7 @@
 #include "../messages/base.hpp"
 #include <sge/console/gfx.hpp>
 #include <sge/console/object.hpp>
-#include <sge/input/system.hpp>
+#include <sge/input/processor.hpp>
 #include <sge/input/key_pair.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/utf8/convert.hpp>
@@ -14,7 +14,7 @@
 
 sanguis::client::console::console(
 	sge::console::gfx &_gfx,
-	sge::input::system_ptr const _input_system,
+	sge::input::processor_ptr const _input_system,
 	sge::input::key_code const _toggler,
 	send_callback const &_send
 )

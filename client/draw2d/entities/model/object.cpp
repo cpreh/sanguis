@@ -21,17 +21,17 @@
 #include <ostream>
 
 sanguis::client::draw2d::entities::model::object::object(
-	parameters const &param_,
-	fcppt::string const &name,
-	sprite::order const order,
-	needs_healthbar::type const needs_healthbar_,
-	decay_option::type const decay_option_
+	parameters const &_param,
+	fcppt::string const &_name,
+	sprite::order const _order,
+	needs_healthbar::type const _needs_healthbar,
+	decay_option::type const _decay_option
 )
 :
 	container(
-		param_.normal_system(),
-		param_.collection()[name].size(),
-		order
+		_param.normal_system(),
+		_param.collection()[_name].size(),
+		_order
 	),
 	with_health(),
 	with_weapon(),
@@ -40,27 +40,27 @@ sanguis::client::draw2d::entities::model::object::object(
 	health_(0),
 	max_health_(0),
 	healthbar_(
-		needs_healthbar_ == needs_healthbar::yes
+		_needs_healthbar == needs_healthbar::yes
 		?
-			new healthbar(
-				param_.colored_system()
+			new model::healthbar(
+				_param.colored_system()
 			)
 		:
 			0
 	),
 	decay_time_(),
-	decay_option_(decay_option_),
+	decay_option_(_decay_option),
 	parts()
 {
 	part_vector::size_type i(0);
 
 	BOOST_FOREACH(
-		load::model::object::const_reference p,
-		param_.collection()[name]
+		load::model::object::const_reference ref,
+		_param.collection()[_name]
 	)
 		parts.push_back(
 			new model::part(
-				*p.second,
+				*ref.second,
 				at(sprite::index(i++))
 			)
 		);

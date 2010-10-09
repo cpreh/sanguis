@@ -6,7 +6,7 @@
 #include <sge/renderer/screenshot.hpp>
 #include <sge/input/key_code.hpp>
 #include <sge/input/key_pair.hpp>
-#include <sge/input/system.hpp>
+#include <sge/input/processor.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <fcppt/filesystem/is_directory.hpp>
 #include <fcppt/filesystem/create_directory.hpp>
@@ -19,7 +19,7 @@
 sanguis::client::screenshot::screenshot(
 	sge::renderer::device_ptr const _renderer,
 	sge::image::multi_loader const &_loader,
-	sge::input::system_ptr const is
+	sge::input::processor_ptr const is
 )
 :
 	make_screenshot(
@@ -42,6 +42,10 @@ sanguis::client::screenshot::screenshot(
 			)
 		)
 	)
+{
+}
+
+sanguis::client::screenshot::~screenshot()
 {
 }
 
