@@ -59,31 +59,11 @@ private:
 	void
 	update_direction();
 
-	void
-	handle_rotation_x(
-		key_scale
-	);
-
-	void
-	handle_rotation_y(
-		key_scale
-	);
-
 	void 
 	update_rotation();
 
 	void
 	handle_shooting(
-		key_scale
-	);
-
-	void
-	handle_switch_weapon_forwards(
-		key_scale
-	);
-
-	void
-	handle_switch_weapon_backwards(
 		key_scale
 	);
 

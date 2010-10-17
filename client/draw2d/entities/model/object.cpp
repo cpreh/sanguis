@@ -55,7 +55,7 @@ sanguis::client::draw2d::entities::model::object::object(
 	part_vector::size_type i(0);
 
 	BOOST_FOREACH(
-		load::model::object::const_reference ref,
+		load::model::object::value_type const &ref,
 		_param.collection()[_name]
 	)
 		parts.push_back(

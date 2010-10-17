@@ -5,8 +5,8 @@
 #include "../messages/base.hpp"
 #include <sge/console/gfx.hpp>
 #include <sge/console/object.hpp>
-#include <sge/input/processor.hpp>
-#include <sge/input/key_pair.hpp>
+#include <sge/input/keyboard/device.hpp>
+#include <sge/input/keyboard/key_event.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/utf8/convert.hpp>
 #include <fcppt/text.hpp>
@@ -14,8 +14,8 @@
 
 sanguis::client::console::console(
 	sge::console::gfx &_gfx,
-	sge::input::processor_ptr const _input_system,
-	sge::input::key_code const _toggler,
+	sge::input::keyboard::device_ptr const _keyboard,
+	sge::input::keyboard::key_code::type const _toggler,
 	send_callback const &_send
 )
 :
@@ -23,7 +23,7 @@ sanguis::client::console::console(
 		_gfx
 	),
 	input_connection_(
-		_input_system->register_callback(
+		_keyboard->key_callback(
 			std::tr1::bind(
 				&console::input_callback,
 				this,
@@ -43,7 +43,7 @@ sanguis::client::console::console(
 
 fcppt::signal::auto_connection
 sanguis::client::console::register_callback(
-	sge::input::callback const &_c
+	sge::input::keyboard::key_callback const &_c
 )
 {
 	return 
@@ -87,10 +87,10 @@ sanguis::client::console::gfx() const
 
 void
 sanguis::client::console::input_callback(
-	sge::input::key_pair const &_k
+	sge::input::keyboard::key_event const &_k
 )
 {
-	if (_k.key().code() == toggler_ && _k.value() != 0)
+	if (_k.key().code() == toggler_ && _k.pressed())
 	{
 		gfx_.active(
 			!gfx_.active()

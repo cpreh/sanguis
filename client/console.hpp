@@ -5,11 +5,11 @@
 #include "send_callback.hpp"
 #include <sge/console/gfx_fwd.hpp>
 #include <sge/console/arg_list.hpp>
-#include <sge/input/processor_ptr.hpp>
-#include <sge/input/key_code.hpp>
-#include <sge/input/key_pair_fwd.hpp>
-#include <sge/input/callback.hpp>
-#include <sge/input/key_pair_function.hpp>
+#include <sge/input/keyboard/device_ptr.hpp>
+#include <sge/input/keyboard/key_code.hpp>
+#include <sge/input/keyboard/key_event_fwd.hpp>
+#include <sge/input/keyboard/key_callback.hpp>
+#include <sge/input/keyboard/key_function.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/signal/object.hpp>
 #include <fcppt/signal/auto_connection.hpp>
@@ -29,14 +29,14 @@ public:
 	explicit
 	console(
 		sge::console::gfx &,
-		sge::input::processor_ptr,
-		sge::input::key_code,
+		sge::input::keyboard::device_ptr,
+		sge::input::keyboard::key_code::type toggler,
 		send_callback const &
 	);
 
 	fcppt::signal::auto_connection 
 	register_callback(
-		sge::input::callback const &
+		sge::input::keyboard::key_callback const &
 	);
 	
 	void
@@ -53,7 +53,7 @@ public:
 private:
 	void 
 	input_callback(
-		sge::input::key_pair const &
+		sge::input::keyboard::key_event const &
 	);
 
 	void
@@ -66,12 +66,12 @@ private:
 	fcppt::signal::scoped_connection const
 		input_connection_;
 
-	sge::input::key_code const toggler_;
+	sge::input::keyboard::key_code::type const toggler_;
 
 	send_callback const send_;
 
 	fcppt::signal::object<
-		sge::input::key_pair_function
+		sge::input::keyboard::key_function
 	> callbacks_;
 
 	fcppt::signal::connection_manager server_connections_;

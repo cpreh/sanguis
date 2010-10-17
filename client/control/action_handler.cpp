@@ -119,15 +119,8 @@ sanguis::client::control::action_handler::handle_player_action(
 
 		return;
 	case action_type::horizontal_look:
-		handle_rotation_x(
-			scale
-		);
-
-		return;
 	case action_type::vertical_look:
-		handle_rotation_y(
-			scale
-		);
+		update_rotation();
 
 		return;
 	case action_type::shoot:
@@ -137,14 +130,14 @@ sanguis::client::control::action_handler::handle_player_action(
 
 		return;
 	case action_type::switch_weapon_forwards:
-		handle_switch_weapon_forwards(
-			scale
+		handle_switch_weapon(
+			true
 		);
 
 		return;
 	case action_type::switch_weapon_backwards:
-		handle_switch_weapon_backwards(
-			scale
+		handle_switch_weapon(
+			false
 		);
 
 		return;
@@ -218,22 +211,6 @@ sanguis::client::control::action_handler::update_direction()
 }
 
 void
-sanguis::client::control::action_handler::handle_rotation_x(
-	key_scale const
-)
-{
-	update_rotation();
-}
-
-void
-sanguis::client::control::action_handler::handle_rotation_y(
-	key_scale const
-)
-{
-	update_rotation();
-}
-
-void
 sanguis::client::control::action_handler::update_rotation()
 {
 	// FIXME: the rotation is still handled in the cursor
@@ -287,26 +264,6 @@ sanguis::client::control::action_handler::handle_shooting(
 				sanguis::messages::player_start_shooting()
 			)
 		);
-}
-
-void
-sanguis::client::control::action_handler::handle_switch_weapon_forwards(
-	key_scale
-)
-{
-	handle_switch_weapon(
-		true
-	);
-}
-
-void
-sanguis::client::control::action_handler::handle_switch_weapon_backwards(
-	key_scale
-)
-{
-	handle_switch_weapon(
-		false
-	);
 }
 
 void

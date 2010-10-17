@@ -4,9 +4,8 @@
 #include "log.hpp"
 #include "../exception.hpp"
 #include <sge/renderer/screenshot.hpp>
-#include <sge/input/key_code.hpp>
-#include <sge/input/key_pair.hpp>
-#include <sge/input/processor.hpp>
+#include <sge/input/keyboard/key_event.hpp>
+#include <sge/input/keyboard/device.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <fcppt/filesystem/is_directory.hpp>
 #include <fcppt/filesystem/create_directory.hpp>
@@ -19,7 +18,7 @@
 sanguis::client::screenshot::screenshot(
 	sge::renderer::device_ptr const _renderer,
 	sge::image::multi_loader const &_loader,
-	sge::input::processor_ptr const is
+	sge::input::keyboard::device_ptr const _keyboard
 )
 :
 	make_screenshot(
@@ -34,7 +33,7 @@ sanguis::client::screenshot::screenshot(
 	),
 	active_(false),
 	ic(
-		is->register_callback(
+		_keyboard->key_callback(
 			std::tr1::bind(
 				&screenshot::input_callback,
 				this,
@@ -49,7 +48,8 @@ sanguis::client::screenshot::~screenshot()
 {
 }
 
-void sanguis::client::screenshot::process()
+void
+sanguis::client::screenshot::process()
 {
 	if (!active_)
 		return;
@@ -87,13 +87,15 @@ void sanguis::client::screenshot::process()
 	active_ = false;
 }
 
-void sanguis::client::screenshot::input_callback(
-	sge::input::key_pair const &k)
+void
+sanguis::client::screenshot::input_callback(
+	sge::input::keyboard::key_event const &_event
+)
 {
-	if (k.value() == 0)
+	if (!_event.pressed())
 		return;
 
-	if (k.key().code() != sge::input::kc::key_print)
+	if (_event.key().code() != sge::input::keyboard::key_code::print)
 		return;
 	
 	active_ = true;

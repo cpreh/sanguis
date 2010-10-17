@@ -15,7 +15,6 @@
 #include <sge/audio/player.hpp>
 #include <sge/audio/pool.hpp>
 #include <sge/console/gfx.hpp>
-#include <sge/input/system.hpp>
 #include <sge/mainloop/dispatch.hpp>
 #include <sge/renderer/scoped_block.hpp>
 #include <sge/renderer/device.hpp>
@@ -30,6 +29,7 @@
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/utf8/convert.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
 
 sanguis::client::machine::machine(
@@ -40,21 +40,23 @@ sanguis::client::machine::machine(
 	sge::font::metrics_ptr const _font_metrics,
 	sge::font::drawer_ptr const _font_drawer,
 	sge::console::gfx &_console_gfx,
-	sge::input::processor_ptr const input_processor_,
-	sge::renderer::device_ptr const renderer_,
-	sge::image::multi_loader &image_loader_,
-	sge::audio::player_ptr const audio_player_,
-	sge::mainloop::io_service_ptr const io_service_
+	sge::input::keyboard::device_ptr const _keyboard,
+	sge::input::mouse::device_ptr const _mouse,
+	sge::renderer::device_ptr const _renderer,
+	sge::image::multi_loader &_image_loader,
+	sge::audio::player_ptr const _audio_player,
+	sge::mainloop::io_service_ptr const _io_service
 )
 :
 	settings_(settings_),
 	resources_(_resources),
-	input_processor_(input_processor_),
-	renderer_(renderer_),
-	image_loader_(image_loader_),
-	audio_player_(audio_player_),
+	keyboard_(_keyboard),
+	mouse_(_mouse),
+	renderer_(_renderer),
+	image_loader_(_image_loader),
+	audio_player_(_audio_player),
 	net_(
-		io_service_
+		_io_service
 	),
 	s_conn(
 		net_.register_connect(
@@ -88,8 +90,8 @@ sanguis::client::machine::machine(
 	console_gfx_(_console_gfx),
 	console_(
 		_console_gfx,
-		input_processor_,
-		sge::input::kc::key_f1,
+		keyboard_,
+		sge::input::keyboard::key_code::f1,
 		std::tr1::bind(
 			&machine::send,
 			this,
@@ -101,11 +103,15 @@ sanguis::client::machine::machine(
 	screenshot_(
 		renderer_,
 		image_loader_,
-		input_processor_
+		keyboard_
 	),
 	cursor_(
-		new sanguis::client::cursor::object(
-			image_loader_,
+		fcppt::make_unique_ptr<
+			sanguis::client::cursor::object
+		>(
+			std::tr1::ref(
+				image_loader_
+			),
 			renderer_
 		)
 	)
@@ -284,10 +290,16 @@ sanguis::client::machine::image_loader() const
 	return image_loader_;
 }
 
-sge::input::processor_ptr const
-sanguis::client::machine::input_processor() const
+sge::input::keyboard::device_ptr const
+sanguis::client::machine::keyboard() const
 {
-	return input_processor_;
+	return keyboard_;
+}
+
+sge::input::mouse::device_ptr const
+sanguis::client::machine::mouse() const
+{
+	return mouse_;
 }
 
 sge::audio::player_ptr const

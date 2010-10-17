@@ -3,8 +3,8 @@
 
 #include <sge/renderer/device_ptr.hpp>
 #include <sge/image/multi_loader_fwd.hpp>
-#include <sge/input/processor_ptr.hpp>
-#include <sge/input/key_pair_fwd.hpp>
+#include <sge/input/keyboard/device_ptr.hpp>
+#include <sge/input/keyboard/key_event_fwd.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/filesystem/path.hpp>
@@ -14,6 +14,7 @@ namespace sanguis
 {
 namespace client
 {
+
 class screenshot
 {
 	FCPPT_NONCOPYABLE(screenshot)
@@ -21,12 +22,13 @@ public:
 	screenshot(
 		sge::renderer::device_ptr,
 		sge::image::multi_loader const &,
-		sge::input::processor_ptr
+		sge::input::keyboard::device_ptr
 	);
 
 	~screenshot();
 
-	void process();
+	void
+	process();
 private:
 	fcppt::function::object<
 		void (fcppt::filesystem::path const &)
@@ -35,9 +37,12 @@ private:
 	bool active_;
 	fcppt::signal::scoped_connection const ic;
 
-	void input_callback(
-		sge::input::key_pair const &);
+	void
+	input_callback(
+		sge::input::keyboard::key_event const &
+	);
 };
+
 }
 }
 

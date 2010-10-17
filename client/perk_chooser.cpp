@@ -11,6 +11,7 @@
 #include <sge/gui/make_image.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/image/multi_loader.hpp>
+#include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/output.hpp>
@@ -24,6 +25,7 @@
 #include <fcppt/assert.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/make_shared_ptr.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <boost/foreach.hpp>
 #include <utility>
@@ -81,7 +83,8 @@ dialog_pos(
 
 sanguis::client::perk_chooser::perk_chooser(
 	sge::renderer::device_ptr const _renderer,
-	sge::input::processor_ptr const _input_processor,
+	sge::input::keyboard::device_ptr const _keyboard,
+	sge::input::mouse::device_ptr const _mouse,
 	sge::image::multi_loader &_image_loader,
 	sge::font::metrics_ptr const _font_metrics,
 	send_callback const &_send_callback,
@@ -94,18 +97,21 @@ sanguis::client::perk_chooser::perk_chooser(
 		static_cast<level_type>(0)),
 	consumed_levels_(
 		static_cast<level_type>(0)),
-	m_(
+	manager_(
 		_renderer,
-		_input_processor,
+		_keyboard,
+		_mouse,
 		sge::gui::skins::ptr(
-			new sge::gui::skins::standard(
+			fcppt::make_unique_ptr<
+				sge::gui::skins::standard
+			>(
 				_font_metrics
 			)
 		),
 		_cursor
 	),
 	background_(
-		m_,
+		manager_,
 		sge::gui::widgets::parameters()
 			.pos(
 				dialog_pos(
@@ -140,17 +146,20 @@ sanguis::client::perk_chooser::perk_chooser(
 			<< background_.screen_pos());
 }
 
-void sanguis::client::perk_chooser::process()
+void
+sanguis::client::perk_chooser::process()
 {
 	if (activated())
 	{
-		m_.update();
-		m_.draw();
+		manager_.update();
+		manager_.draw();
 	}
 }
 
-void sanguis::client::perk_chooser::perks(
-	perk_container const &_perks)
+void
+sanguis::client::perk_chooser::perks(
+	perk_container const &_perks
+)
 {
 	FCPPT_LOG_DEBUG(
 		mylogger,
@@ -163,8 +172,10 @@ void sanguis::client::perk_chooser::perks(
 		dirty_ = true;
 }
 
-void sanguis::client::perk_chooser::level_up(
-	level_type const _current_level)
+void
+sanguis::client::perk_chooser::level_up(
+	level_type const _current_level
+)
 {
 	FCPPT_ASSERT(current_level_ <= _current_level);
 
@@ -175,7 +186,8 @@ void sanguis::client::perk_chooser::level_up(
 		dirty_ = true;
 }
 
-bool sanguis::client::perk_chooser::activated() const
+bool
+sanguis::client::perk_chooser::activated() const
 {
 	switch (background_.activation())
 	{
@@ -187,39 +199,60 @@ bool sanguis::client::perk_chooser::activated() const
 	return false;
 }
 
-void sanguis::client::perk_chooser::activated(bool const n)
+void
+sanguis::client::perk_chooser::activated(
+	bool const _n
+)
 {
 	FCPPT_LOG_DEBUG(
 		mylogger,
-		fcppt::log::_ << FCPPT_TEXT("set activation to ")
-		             << n);
+		fcppt::log::_
+			<< FCPPT_TEXT("set activation to ")
+			<< _n
+	);
 
 	background_.activation(
-		n ? sge::gui::activation_state::active
-		  : sge::gui::activation_state::inactive);
+		_n
+		?
+			sge::gui::activation_state::active
+		:
+			sge::gui::activation_state::inactive
+	);
 	
-	if (n && dirty_)
+	if (_n && dirty_)
 	{
 		regenerate_widgets();
 		dirty_ = false;
 	}
 }
 
-sanguis::client::level_type sanguis::client::perk_chooser::levels_left() const
+sanguis::client::level_type
+sanguis::client::perk_chooser::levels_left() const
 {
-	return static_cast<level_type>(
-		current_level_-consumed_levels_);
+	return
+		static_cast<
+			level_type
+		>(
+			current_level_
+			- consumed_levels_
+		);
 }
 
-void sanguis::client::perk_chooser::regenerate_label()
+void
+sanguis::client::perk_chooser::regenerate_label()
 {
 	perks_left_.text(
-			FCPPT_TEXT("Perks left: ")+
-			fcppt::lexical_cast<fcppt::string>(
-				levels_left()));
+		FCPPT_TEXT("Perks left: ")+
+		fcppt::lexical_cast<
+			fcppt::string
+		>(
+			levels_left()
+		)
+	);
 }
 
-void sanguis::client::perk_chooser::regenerate_widgets()
+void
+sanguis::client::perk_chooser::regenerate_widgets()
 {
 	regenerate_label();
 
@@ -234,9 +267,14 @@ void sanguis::client::perk_chooser::regenerate_widgets()
 				r
 			);
 
-		buttons_.push_back(
-			new sge::gui::widgets::buttons::image(
-				background_,
+		fcppt::container::ptr::push_back_unique_ptr(
+			buttons_,
+			fcppt::make_unique_ptr<
+				sge::gui::widgets::buttons::image
+			>(
+				sge::gui::widgets::parent_data(
+					background_
+				),
 				sge::gui::widgets::parameters(),
 				pi->second.normal,
 				pi->second.hover,

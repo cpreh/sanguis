@@ -22,7 +22,8 @@
 #include <sge/console/gfx_fwd.hpp>
 #include <sge/font/metrics_ptr.hpp>
 #include <sge/font/drawer_ptr.hpp>
-#include <sge/input/processor_ptr.hpp>
+#include <sge/input/keyboard/device_ptr.hpp>
+#include <sge/input/mouse/device_ptr.hpp>
 #include <sge/image/multi_loader_fwd.hpp>
 #include <sge/renderer/device_ptr.hpp>
 #include <sge/mainloop/io_service_ptr.hpp>
@@ -56,7 +57,8 @@ public:
 		sge::font::metrics_ptr,
 		sge::font::drawer_ptr,
 		sge::console::gfx &,
-		sge::input::processor_ptr,
+		sge::input::keyboard::device_ptr,
+		sge::input::mouse::device_ptr,
 		sge::renderer::device_ptr,
 		sge::image::multi_loader &,
 		sge::audio::player_ptr,
@@ -120,8 +122,11 @@ public:
 	sge::image::multi_loader &
 	image_loader() const;
 
-	sge::input::processor_ptr const
-	input_processor() const;
+	sge::input::keyboard::device_ptr const
+	keyboard() const;
+
+	sge::input::mouse::device_ptr const
+	mouse() const;
 
 	sge::audio::player_ptr const
 	audio_player() const;
@@ -151,7 +156,9 @@ private:
 
 	load::context const &resources_;
 
-	sge::input::processor_ptr const input_processor_;
+	sge::input::keyboard::device_ptr const keyboard_;
+
+	sge::input::mouse::device_ptr const mouse_;
 
 	sge::renderer::device_ptr const renderer_;
 

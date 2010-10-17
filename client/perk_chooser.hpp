@@ -12,7 +12,8 @@
 #include <sge/gui/widgets/label.hpp>
 #include <sge/gui/manager.hpp>
 #include <sge/image/multi_loader_fwd.hpp>
-#include <sge/input/processor_ptr.hpp>
+#include <sge/input/keyboard/device_ptr.hpp>
+#include <sge/input/mouse/device_ptr.hpp>
 #include <sge/renderer/device_ptr.hpp>
 #include <fcppt/signal/connection_manager.hpp>
 #include <fcppt/function/object.hpp>
@@ -35,7 +36,8 @@ public:
 
 	perk_chooser(
 		sge::renderer::device_ptr,
-		sge::input::processor_ptr,
+		sge::input::keyboard::device_ptr,
+		sge::input::mouse::device_ptr,
 		sge::image::multi_loader &,
 		sge::font::metrics_ptr,
 		send_callback const &,
@@ -81,7 +83,7 @@ private:
 		current_level_,
 		consumed_levels_;
 
-	sge::gui::manager m_;
+	sge::gui::manager manager_;
 	sge::gui::widgets::backdrop background_;
 	sge::gui::widgets::label perks_left_;
 	button_container buttons_;

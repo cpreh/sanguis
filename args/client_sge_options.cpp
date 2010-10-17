@@ -8,6 +8,9 @@
 #include <sge/systems/audio_loader.hpp>
 #include <sge/systems/audio_player_default.hpp>
 #include <sge/systems/image_loader.hpp>
+#include <sge/systems/input.hpp>
+#include <sge/systems/input_helper.hpp>
+#include <sge/systems/input_helper_field.hpp>
 #include <sge/systems/list.hpp>
 #include <sge/systems/parameterless.hpp>
 #include <sge/window/parameters.hpp>
@@ -54,7 +57,13 @@ sanguis::args::client_sge_options(
 			)
 		)
 		(
-			sge::systems::parameterless::input
+			sge::systems::input(
+				sge::systems::input_helper_field(
+					sge::systems::input_helper::keyboard_collector
+				)
+				|
+				sge::systems::input_helper::mouse_collector
+			)
 		)
 		(
 			sge::systems::image_loader(
