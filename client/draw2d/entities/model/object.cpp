@@ -54,13 +54,26 @@ sanguis::client::draw2d::entities::model::object::object(
 {
 	part_vector::size_type i(0);
 
+	load::model::object const &model(
+		_param.collection()[_name]
+	);
+
+	/*
 	BOOST_FOREACH(
 		load::model::object::value_type const &ref,
-		_param.collection()[_name]
+		model//_param.collection()[_name]
+	)
+	*/
+	for(
+		load::model::object::const_iterator it(
+			model.begin()
+		);
+		it != model.end();
+		++it
 	)
 		parts.push_back(
 			new model::part(
-				*ref.second,
+				*it->second,
 				at(sprite::index(i++))
 			)
 		);
@@ -353,11 +366,18 @@ sanguis::client::draw2d::entities::model::object::update_healthbar()
 bool
 sanguis::client::draw2d::entities::model::object::animations_ended() const
 {
-	BOOST_FOREACH(
+	/*BOOST_FOREACH(
 		part_vector::const_reference part,
 		parts
+	)*/
+	for(
+		part_vector::const_iterator it(
+			parts.begin()
+		);
+		it != parts.end();
+		++it
 	)
-		if(!part.animation_ended())
+		if(!it->animation_ended())
 			return false;
 	return true;
 }

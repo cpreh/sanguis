@@ -19,7 +19,8 @@
 #include <sge/gui/widgets/label.hpp>
 #include <sge/gui/manager.hpp>
 #include <sge/image/multi_loader_fwd.hpp>
-#include <sge/input/processor_ptr.hpp>
+#include <sge/input/keyboard/device_ptr.hpp>
+#include <sge/input/mouse/device_ptr.hpp>
 #include <sge/renderer/device_ptr.hpp>
 #include <sge/sprite/type_choices.hpp>
 #include <sge/sprite/no_color.hpp>
@@ -52,7 +53,8 @@ public:
 		sge::renderer::device_ptr,
 		sge::image::multi_loader &,
 		sge::font::metrics_ptr,
-		sge::input::processor_ptr,
+		sge::input::keyboard::device_ptr,
+		sge::input::mouse::device_ptr,
 		cursor::object_ptr,
 		callbacks::object const &
 	);
@@ -70,11 +72,11 @@ public:
 	);
 private:
 	fcppt::filesystem::path const 
-		menu_path,
-		buttons_path,
-		labels_path;
+		menu_path_,
+		buttons_path_,
+		labels_path_;
 
-	sge::gui::manager m;
+	sge::gui::manager manager_;
 
 	menus::main main_;
 
@@ -113,8 +115,8 @@ private:
 		sprite_choices
 	> sprite_parameters;
 
-	sprite_system ss;
-	sprite_object const background;
+	sprite_system sprite_system_;
+	sprite_object const background_;
 
 	fcppt::string 
 		connection_host_,

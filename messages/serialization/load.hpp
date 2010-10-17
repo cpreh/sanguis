@@ -9,6 +9,7 @@
 #include <fcppt/algorithm/copy_n.hpp>
 #include <fcppt/io/read.hpp>
 #include <majutsu/concepts/dynamic_memory/tag.hpp>
+#include <iosfwd>
 
 namespace sanguis
 {
@@ -41,8 +42,16 @@ struct load {
 		);
 
 		is.read(
-			reinterpret_cast<char *>(vec.data()),
-			vec.size()
+			reinterpret_cast<
+				char *
+			>(
+				vec.data()
+			),
+			static_cast<
+				std::streamsize
+			>(
+				vec.size()
+			)
 		);
 
 		return

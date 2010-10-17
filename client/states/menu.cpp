@@ -10,6 +10,7 @@
 #include "../events/message.hpp"
 #include "../events/tick.hpp"
 #include "../events/menu.hpp"
+#include "../events/action.hpp"
 #include "../log.hpp"
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/var.hpp>
@@ -36,7 +37,8 @@ sanguis::client::states::menu::menu(
 		context<machine>().renderer(),
 		context<machine>().image_loader(),
 		context<machine>().font_metrics(),
-		context<machine>().input_processor(),
+		context<machine>().keyboard(),
+		context<machine>().mouse(),
 		context<machine>().cursor(),
 		client::menu::callbacks::object(
 			std::tr1::bind(

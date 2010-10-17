@@ -34,7 +34,7 @@ public:
 	) const;
 private:
 	istream &is;
-	mutable Class &obj;
+	Class &obj;
 };
 
 }

@@ -1,15 +1,24 @@
 #include "serialize.hpp"
 #include "../base.hpp"
+#include <iosfwd>
+#include <ostream>
 
 void
 sanguis::messages::serialization::serialize(
-	ostream &stream,
-	auto_ptr msg)
+	ostream &_stream,
+	auto_ptr _msg
+)
 {
-	stream.write(
-		reinterpret_cast<ostream::char_type const *>(
-			msg->data()
+	_stream.write(
+		reinterpret_cast<
+			ostream::char_type const *
+		>(
+			_msg->data()
 		),
-		msg->size()
+		static_cast<
+			std::streamsize
+		>(
+			_msg->size()
+		)
 	);
 }

@@ -23,6 +23,7 @@
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <fcppt/make_shared_ptr.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 
 namespace
@@ -81,18 +82,21 @@ sanguis::client::states::gameover::gameover(
 	my_base(
 		_ctx
 	),
-	m_(
+	manager_(
 		context<machine>().renderer(),
-		context<machine>().input_processor(),
+		context<machine>().keyboard(),
+		context<machine>().mouse(),
 		sge::gui::skins::ptr(
-			new sge::gui::skins::standard(
+			fcppt::make_unique_ptr<
+				sge::gui::skins::standard
+			>(
 				context<machine>().font_metrics()
 			)
 		),
 		context<machine>().cursor()
 	),
 	background_(
-		m_,
+		manager_,
 		sge::gui::widgets::parameters()
 			.pos(
 				dialog_pos(
@@ -108,14 +112,14 @@ sanguis::client::states::gameover::gameover(
 				fcppt::make_shared_ptr<sge::gui::layouts::grid>()
 			)
 	),
-	dead_label(
+	dead_label_(
 		background_,
 		sge::gui::widgets::parameters()
 			.pos(	
 				sge::gui::point(0,0)),
 		FCPPT_TEXT("You are dead.")
 	),
-	score(
+	score_(
 		background_,
 		sge::gui::widgets::parameters()
 			.pos(	
@@ -125,24 +129,24 @@ sanguis::client::states::gameover::gameover(
 				fcppt::make_shared_ptr<sge::gui::layouts::grid>()
 			)
 	),
-	names_head(
-		score,
+	names_head_(
+		score_,
 		sge::gui::widgets::parameters()
 			.pos(	
 				sge::gui::point(0,0)
 			),
 		FCPPT_TEXT("Name(s):")
 	),
-	score_head(
-		score,
+	score_head_(
+		score_,
 		sge::gui::widgets::parameters()
 			.pos(	
 				sge::gui::point(1,0)
 			),
 		FCPPT_TEXT("Score:")
 	),
-	names_text(
-		score,
+	names_text_(
+		score_,
 		sge::gui::widgets::parameters()
 			.pos(	
 				sge::gui::point(0,1)
@@ -152,8 +156,8 @@ sanguis::client::states::gameover::gameover(
 			FCPPT_TEXT(", ")
 		)
 	),
-	score_text(
-		score,
+	score_text_(
+		score_,
 		sge::gui::widgets::parameters()
 			.pos(	
 				sge::gui::point(1,1)
@@ -162,7 +166,7 @@ sanguis::client::states::gameover::gameover(
 			_args.score()
 		)
 	),
-	buttons_return(
+	buttons_return_(
 		background_,
 		sge::gui::widgets::parameters()
 			.pos(	
@@ -170,8 +174,8 @@ sanguis::client::states::gameover::gameover(
 			),
 		FCPPT_TEXT("Main menu")
 	),
-	return_connection(
-		buttons_return.register_clicked(
+	return_connection_(
+		buttons_return_.register_clicked(
 			std::tr1::bind(
 				&gameover::return_clicked,
 				this
@@ -187,9 +191,9 @@ sanguis::client::states::gameover::react(
 	events::tick const &
 )
 {
-	m_.update();
+	manager_.update();
 
-	m_.draw();
+	manager_.draw();
 
 	return discard_event();
 }
@@ -204,12 +208,13 @@ sanguis::client::states::gameover::react(
 
 boost::statechart::result
 sanguis::client::states::gameover::react(
-	events::message const &m
+	events::message const &_message
 )
 {
-	return handle_default_msg(
-		*m.value()
-	);
+	return
+		handle_default_msg(
+			*_message.value()
+		);
 }
 
 boost::statechart::result

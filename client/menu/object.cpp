@@ -25,6 +25,7 @@
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/make_shared_ptr.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 
 namespace
 {
@@ -43,55 +44,65 @@ sanguis::client::menu::object::object(
 	sge::renderer::device_ptr const _renderer,
 	sge::image::multi_loader &_image_loader,
 	sge::font::metrics_ptr const _font_metrics,
-	sge::input::processor_ptr const _input_processor,
+	sge::input::keyboard::device_ptr const _keyboard,
+	sge::input::mouse::device_ptr const _mouse,
 	cursor::object_ptr const _cursor,
 	callbacks::object const &_callbacks
 )
 : 
-	menu_path(
-		sanguis::media_path()/FCPPT_TEXT("menu")
+	menu_path_(
+		sanguis::media_path() / FCPPT_TEXT("menu")
 	),
-	buttons_path(
-		menu_path/FCPPT_TEXT("buttons")
+	buttons_path_(
+		menu_path_ / FCPPT_TEXT("buttons")
 	),
-	labels_path(
-		menu_path/FCPPT_TEXT("labels")
+	labels_path_(
+		menu_path_ / FCPPT_TEXT("labels")
 	),
-	m(
+	manager_(
 		_renderer,
-		_input_processor,
+		_keyboard,
+		_mouse,
 		sge::gui::skins::ptr(
-			new sge::gui::skins::standard(
+			fcppt::make_unique_ptr<
+				sge::gui::skins::standard
+			>(
 				_font_metrics
 			)
 		),
 		_cursor
 	),
 	main_(
-		m,
-		fcppt::math::dim::structure_cast<sge::gui::dim>(
-			_renderer->screen_size()),
-		buttons_path,
+		manager_,
+		fcppt::math::dim::structure_cast<
+			sge::gui::dim
+		>(
+			_renderer->screen_size()
+		),
+		buttons_path_,
 		_image_loader
 	),
 	connect_(
 		_settings,
-		m,
-		buttons_path,
-		labels_path,
+		manager_,
+		buttons_path_,
+		labels_path_,
 		_image_loader
 	),
 	connect_box_(
-		m
+		manager_
 	),
 	highscore_(
-		m,
-		buttons_path
+		manager_,
+		buttons_path_
 	),
 	mover_(
-		m,
-		fcppt::math::dim::structure_cast<sge::gui::dim>(
-			_renderer->screen_size()),
+		manager_,
+		fcppt::math::dim::structure_cast<
+			sge::gui::dim
+		>(
+			_renderer->screen_size()
+		),
 		main_.parent
 	),
 	connections_(
@@ -199,10 +210,10 @@ sanguis::client::menu::object::object(
 	callbacks_(
 		_callbacks
 	),
-	ss(
+	sprite_system_(
 		_renderer
 	),
-	background(
+	background_(
 		sprite_parameters()
 			.pos(
 				sprite_object::point::null()
@@ -232,34 +243,35 @@ sanguis::client::menu::object::~object()
 
 void
 sanguis::client::menu::object::process(
-	time_type const delta
+	time_type const _delta
 )
 {
 	mover_.update(
-		delta
+		_delta
 	);
 
-	m.update();
+	manager_.update();
 
 	sge::sprite::render_one(
-		ss,
-		background
+		sprite_system_,
+		background_
 	);
 
-	m.draw();
+	manager_.draw();
 }
 
 void
 sanguis::client::menu::object::connection_error(
-	fcppt::string const &message
+	fcppt::string const &_message
 )
 {
 	FCPPT_LOG_DEBUG(
 		mylogger,
 		fcppt::log::_
 			<< FCPPT_TEXT("got conection error: (")
-			<< message 
-			<< FCPPT_TEXT(")"));
+			<< _message 
+			<< FCPPT_TEXT(")")
+	);
 
 	connect_box_.label_.text(
 		FCPPT_TEXT("Connection to \"")+
@@ -267,60 +279,75 @@ sanguis::client::menu::object::connection_error(
 		FCPPT_TEXT("\" on port \"")+
 		connection_port_+
 		FCPPT_TEXT("\" failed: \n")+
-		message);
+		_message
+	);
+
 	mover_.reset(
-		connect_box_.parent);
+		connect_box_.parent
+	);
 }
 
-void sanguis::client::menu::object::start_server()
+void
+sanguis::client::menu::object::start_server()
 {
 	callbacks_.start_server_();
+
 	connect(
 		FCPPT_TEXT("localhost"),
-		FCPPT_TEXT("1337"));
+		FCPPT_TEXT("1337")
+	);
 }
 
-void sanguis::client::menu::object::connect_from_menu()
+void
+sanguis::client::menu::object::connect_from_menu()
 {
 	connect(
 		connect_.host_edit.text(),
 		connect_.port_edit.text());
 }
 
-void sanguis::client::menu::object::connect(
-	fcppt::string const &host,
-	fcppt::string const &port)
+void
+sanguis::client::menu::object::connect(
+	fcppt::string const &_host,
+	fcppt::string const &_port
+)
 {
 	FCPPT_LOG_DEBUG(
 		mylogger,
 		fcppt::log::_
 			<< FCPPT_TEXT("connecting to ")
-			<< host 
+			<< _host 
 			<< FCPPT_TEXT(" on port ")
-			<< port);
+			<< _port
+	);
 
-	connection_host_ = host;
-	connection_port_ = port;
+	connection_host_ = _host;
+	connection_port_ = _port;
 
 	connect_box_.label_.text(
 		FCPPT_TEXT("Connecting to \"")+
-		host+
+		_host+
 		FCPPT_TEXT("\" on port \"")+
-		port+
-		FCPPT_TEXT("\""));
+		_port+
+		FCPPT_TEXT("\"")
+	);
 
 	callbacks_.connect_(
-		host,
-		port);
+		_host,
+		_port
+	);
 	
 	mover_.reset(
-		connect_box_.parent);
+		connect_box_.parent
+	);
 }
 
-void sanguis::client::menu::object::cancel_connect()
+void
+sanguis::client::menu::object::cancel_connect()
 {
 	mover_.reset(
-		connect_.parent);
+		connect_.parent
+	);
 	
 	callbacks_.cancel_connect_();
 }

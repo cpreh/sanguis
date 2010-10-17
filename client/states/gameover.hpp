@@ -71,16 +71,16 @@ private:
 	void
 	return_clicked();
 
-	sge::gui::manager m_;
+	sge::gui::manager manager_;
 	sge::gui::widgets::backdrop background_;
-		sge::gui::widgets::label dead_label;
-		sge::gui::widgets::base score;
-			sge::gui::widgets::label names_head;
-			sge::gui::widgets::label score_head;
-			sge::gui::widgets::label names_text;
-			sge::gui::widgets::label score_text;
-		sge::gui::widgets::buttons::text buttons_return;
-	fcppt::signal::scoped_connection return_connection;
+		sge::gui::widgets::label dead_label_;
+		sge::gui::widgets::base score_;
+			sge::gui::widgets::label names_head_;
+			sge::gui::widgets::label score_head_;
+			sge::gui::widgets::label names_text_;
+			sge::gui::widgets::label score_text_;
+		sge::gui::widgets::buttons::text buttons_return_;
+	fcppt::signal::scoped_connection return_connection_;
 
 };
 }

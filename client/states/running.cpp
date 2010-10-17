@@ -60,7 +60,8 @@ sanguis::client::states::running::running(
 			client::perk_chooser
 		>(
 			context<machine>().renderer(),
-			context<machine>().input_processor(),
+			context<machine>().keyboard(),
+			context<machine>().mouse(),
 			std::tr1::ref(
 				context<machine>().image_loader()
 			),
