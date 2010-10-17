@@ -24,9 +24,10 @@ sanguis::server::entities::enemies::create(
 	{
 	case enemy_type::zombie00:
 		return unique_ptr(
-			fcppt::make_unique_ptr<
-				enemy
-			>(
+			new enemy(
+			//fcppt::make_unique_ptr<
+			//	enemy
+			//>(
 				_etype,
 				_load_context,
 				damage::no_armor(),
@@ -53,9 +54,10 @@ sanguis::server::entities::enemies::create(
 		);
 	case enemy_type::zombie01:
 		return unique_ptr(
-			fcppt::make_unique_ptr<
-				enemy
-			>(
+			new enemy(
+//			fcppt::make_unique_ptr<
+//				enemy
+//			>(
 				_etype,
 				_load_context,
 				damage::no_armor(),
@@ -80,9 +82,10 @@ sanguis::server::entities::enemies::create(
 	case enemy_type::wolf_brown:
 	case enemy_type::wolf_white:
 		return unique_ptr(
-			fcppt::make_unique_ptr<
-				enemy
-			>(
+			new enemy(
+			//fcppt::make_unique_ptr<
+			//	enemy
+			//>(
 				_etype,
 				_load_context,
 				damage::no_armor(),
@@ -105,9 +108,10 @@ sanguis::server::entities::enemies::create(
 		);
 	case enemy_type::skeleton:
 		return unique_ptr(
-			fcppt::make_unique_ptr<
-				enemy
-			>(
+			new enemy(
+			//fcppt::make_unique_ptr<
+			//	enemy
+			//>(
 				_etype,
 				_load_context,
 				damage::no_armor(),
@@ -130,9 +134,10 @@ sanguis::server::entities::enemies::create(
 		);
 	case enemy_type::maggot:
 		return unique_ptr(
-			fcppt::make_unique_ptr<
-				enemy
-			>(
+			new enemy(
+			//fcppt::make_unique_ptr<
+			//	enemy
+			//>(
 				_etype,
 				_load_context,
 				damage::no_armor(),
@@ -155,9 +160,10 @@ sanguis::server::entities::enemies::create(
 		);
 	case enemy_type::spider:
 		return unique_ptr(
-			fcppt::make_unique_ptr<
-				enemy
-			>(
+			new enemy(
+			//fcppt::make_unique_ptr<
+			//	enemy
+			//>(
 				_etype,
 				_load_context,
 				damage::no_armor(),

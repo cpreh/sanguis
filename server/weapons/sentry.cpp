@@ -50,9 +50,10 @@ sanguis::server::weapons::sentry::do_attack(
 {
 	_attack.environment()->insert(
 		entities::unique_ptr(
-			fcppt::make_unique_ptr<
-				entities::friend_
-			>(
+			new entities::friend_(
+//			fcppt::make_unique_ptr<
+//				entities::friend_
+//			>(
 				friend_type::sentry,
 				_attack.environment()->load_context(),
 				damage::no_armor(),
