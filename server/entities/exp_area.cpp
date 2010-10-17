@@ -1,6 +1,7 @@
 #include "exp_area.hpp"
 #include "player.hpp"
 #include "auto_weak_link.hpp"
+#include "../../messages/base.hpp"
 #include <fcppt/container/map_impl.hpp>
 #include <boost/logic/tribool.hpp>
 #include <boost/foreach.hpp>

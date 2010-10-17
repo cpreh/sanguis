@@ -1,5 +1,6 @@
 #include "make_unicast_callback.hpp"
 #include "machine.hpp"
+#include "../messages/base.hpp"
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/function/object.hpp>
 

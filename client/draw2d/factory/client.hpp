@@ -18,8 +18,8 @@ namespace factory
 
 entities::auto_ptr
 client(
-	sprite::client::system &client_system_,
-	load::resource::textures const &textures_,
+	sprite::client::system &,
+	load::resource::textures const &,
 	entity_type::type,	
 	sge::renderer::screen_size const &
 );

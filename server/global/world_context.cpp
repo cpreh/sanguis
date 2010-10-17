@@ -1,6 +1,7 @@
 #include "world_context.hpp"
 #include "context.hpp"
 #include "../entities/base.hpp"
+#include "../../messages/base.hpp"
 
 sanguis::server::global::world_context::world_context(
 	global::context &_global_context
