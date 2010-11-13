@@ -1,2 +1,12 @@
+#!/bin/sh
+
 mkdir -p build
-cd build && cmake ..; make $*; cd ..
+pushd build > /dev/null
+
+cmake \
+	-D CMAKE_CXX_COMPILER=/usr/bin/clang++ \
+	..
+
+make $*
+
+popd > /dev/null

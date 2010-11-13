@@ -15,7 +15,6 @@
 #include <sge/audio/player.hpp>
 #include <sge/audio/pool.hpp>
 #include <sge/console/gfx.hpp>
-#include <sge/mainloop/dispatch.hpp>
 #include <sge/renderer/scoped_block.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/texture.hpp>
@@ -45,7 +44,7 @@ sanguis::client::machine::machine(
 	sge::renderer::device_ptr const _renderer,
 	sge::image::multi_loader &_image_loader,
 	sge::audio::player_ptr const _audio_player,
-	sge::mainloop::io_service_ptr const _io_service
+	awl::mainloop::io_service_ptr const _io_service
 )
 :
 	settings_(settings_),

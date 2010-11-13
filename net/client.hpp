@@ -6,7 +6,7 @@
 #include "port_type.hpp"
 #include "data_type.hpp"
 
-#include <sge/mainloop/io_service_ptr.hpp>
+#include <awl/mainloop/io_service_ptr.hpp>
 
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/function/object_fwd.hpp>
@@ -32,7 +32,7 @@ public:
 	typedef fcppt::function::object<data_fun> data_function;
 
 	explicit client(
-		sge::mainloop::io_service_ptr
+		awl::mainloop::io_service_ptr
 	);
 
 	void connect(

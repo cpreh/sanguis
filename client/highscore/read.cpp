@@ -78,7 +78,7 @@ sanguis::client::highscore::read(
 			entry(
 				names_result,
 				sge::parse::json::find_member_exn<
-					int
+					score_type
 				>(
 					members,
 					FCPPT_TEXT("score")

@@ -23,26 +23,26 @@ sanguis::server::entities::with_ai::~with_ai()
 
 void
 sanguis::server::entities::with_ai::on_update(
-	time_type const time
+	time_type const _time
 )
 {
 	with_auras::on_update(
-		time
+		_time
 	);
 
 	with_weapon::on_update(
-		time
+		_time
 	);
 
 	ai_->update(
-		time
+		_time
 	);
 }
 
 void
 sanguis::server::entities::with_ai::on_transfer(
-	collision::global_groups const &groups_,
-	collision::create_parameters const &param_
+	collision::global_groups const &_groups,
+	collision::create_parameters const &_param
 )
 {
 	ai_.reset(

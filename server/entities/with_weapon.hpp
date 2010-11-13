@@ -119,8 +119,8 @@ private:
 	pos_type target_;
 
 	bool
-		attacking,
-		reloading,
+		attacking_,
+		reloading_,
 		attack_ready_,
 		aggressive_;
 

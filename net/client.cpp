@@ -1,19 +1,25 @@
 #include "detail/client_impl.hpp"
-#include <sge/mainloop/asio/io_service.hpp>
+#include <awl/mainloop/asio/io_service.hpp>
+#include <fcppt/tr1/functional.hpp>
 #include <fcppt/dynamic_pointer_cast.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 
 sanguis::net::client::client(
-	sge::mainloop::io_service_ptr const _io_service
+	awl::mainloop::io_service_ptr const _io_service
 )
 :
 	impl_(
-		new detail::client_impl(
-			fcppt::dynamic_pointer_cast<
-				sge::mainloop::asio::io_service
-			>(
-				_io_service
+		fcppt::make_unique_ptr<
+			detail::client_impl
+		>(
+			std::tr1::ref(
+				fcppt::dynamic_pointer_cast<
+					awl::mainloop::asio::io_service
+				>(
+					_io_service
+				)
+				->get()
 			)
-			->get()
 		)
 	)
 {

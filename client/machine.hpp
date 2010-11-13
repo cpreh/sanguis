@@ -26,7 +26,8 @@
 #include <sge/input/mouse/device_ptr.hpp>
 #include <sge/image/multi_loader_fwd.hpp>
 #include <sge/renderer/device_ptr.hpp>
-#include <sge/mainloop/io_service_ptr.hpp>
+
+#include <awl/mainloop/io_service_ptr.hpp>
 
 #include <fcppt/container/raw_vector_decl.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -62,7 +63,7 @@ public:
 		sge::renderer::device_ptr,
 		sge::image::multi_loader &,
 		sge::audio::player_ptr,
-		sge::mainloop::io_service_ptr
+		awl::mainloop::io_service_ptr
 	);
 
 	~machine();

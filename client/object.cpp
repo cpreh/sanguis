@@ -20,8 +20,6 @@
 #include <sge/image/colors.hpp>
 #include <sge/image/create_texture.hpp>
 #include <sge/image/multi_loader.hpp>
-#include <sge/mainloop/dispatch.hpp>
-#include <sge/mainloop/io_service.hpp>
 #include <sge/renderer/filter/linear.hpp>
 #include <sge/renderer/state/bool.hpp>
 #include <sge/renderer/state/list.hpp>
@@ -36,6 +34,8 @@
 #include <sge/time/timer.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/window/instance.hpp>
+
+#include <awl/mainloop/io_service.hpp>
 
 #include <fcppt/function/object.hpp>
 #include <fcppt/log/output.hpp>
@@ -108,7 +108,11 @@ sanguis::client::object::object(
 			)
 			.size(
 				sge::console::sprite_object::dim(
-					sys_.renderer()->screen_size().w(),
+					static_cast<
+						sge::console::sprite_object::unit
+					>(
+						sys_.renderer()->screen_size().w()
+					),
 					static_cast<
 						sge::console::sprite_object::unit
 					>(
@@ -125,8 +129,11 @@ sanguis::client::object::object(
 		>()
 	),
 	sound_pool_(),
+	window_(
+		sys_.window()
+	),
 	io_service_(
-		sys_.window()->io_service()
+		sys_.window()->awl_io_service()
 	),
 	resources_(
 		sys_.image_loader(),
@@ -199,18 +206,18 @@ sanguis::client::object::run()
 			)
 				io_service_->run_one();
 			else
-				sge::mainloop::dispatch();
+				window_->dispatch();
 		}
 	}
 	catch(
-		fcppt::exception const &e
+		fcppt::exception const &_exception
 	)
 	{
 		FCPPT_LOG_FATAL(
 			log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("Client error: ")
-				<< e.string()
+				<< _exception.string()
 		);
 
 		quit_server();

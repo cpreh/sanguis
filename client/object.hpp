@@ -15,9 +15,11 @@
 #include <sge/console/object.hpp>
 #include <sge/font/drawer_ptr.hpp>
 #include <sge/font/metrics_ptr.hpp>
-#include <sge/mainloop/io_service_ptr.hpp>
 #include <sge/time/timer.hpp>
 #include <sge/systems/instance_fwd.hpp>
+#include <sge/window/instance_ptr.hpp>
+
+#include <awl/mainloop/io_service_ptr.hpp>
 
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
@@ -76,7 +78,9 @@ private:
 
 	sge::audio::pool sound_pool_;
 
-	sge::mainloop::io_service_ptr const io_service_;
+	sge::window::instance_ptr const window_;
+
+	awl::mainloop::io_service_ptr const io_service_;
 
 	load::context resources_;
 

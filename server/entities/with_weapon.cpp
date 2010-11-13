@@ -30,8 +30,8 @@ sanguis::server::entities::with_weapon::with_weapon(
 	base(),
 	weapon_(weapon_type::none),
 	target_(target_undefined),
-	attacking(false),
-	reloading(false),
+	attacking_(false),
+	reloading_(false),
 	attack_ready_(false),
 	aggressive_(false),
 	attack_speed_(
@@ -71,7 +71,7 @@ sanguis::server::entities::with_weapon::with_weapon(
 
 void
 sanguis::server::entities::with_weapon::on_update(
-	time_type const time
+	time_type const _time
 )
 {
 	// change to the first weapon if we have any
@@ -83,7 +83,7 @@ sanguis::server::entities::with_weapon::on_update(
 
 	if(has_weapon())
 		active_weapon().update(
-			time,
+			_time,
 			*this
 		);
 
@@ -100,7 +100,7 @@ sanguis::server::entities::with_weapon::on_update(
 		return;
 	}
 
-	if(!reloading && attack_ready_ && in_range_)
+	if(!reloading_ && attack_ready_ && in_range_)
 		active_weapon().attack(
 			*this,
 			target_
@@ -109,10 +109,10 @@ sanguis::server::entities::with_weapon::on_update(
 
 void
 sanguis::server::entities::with_weapon::change_weapon(
-	weapon_type::type const nweapon
+	weapon_type::type const _weapon
 )
 {
-	if (nweapon != weapon_type::none && !weapons_.count(nweapon))
+	if (_weapon != weapon_type::none && !weapons_.count(_weapon))
 		throw exception(
 			FCPPT_TEXT("tried to change to non-owned weapon")
 		);
@@ -120,10 +120,10 @@ sanguis::server::entities::with_weapon::change_weapon(
 	if(has_weapon())
 		active_weapon().stop();
 
-	weapon_ = nweapon;
+	weapon_ = _weapon;
 
-	reloading = false;
-	attacking = false;
+	reloading_ = false;
+	attacking_ = false;
 
 	attack_speed_change(
 		attack_speed_.current()
@@ -144,15 +144,15 @@ sanguis::server::entities::with_weapon::change_weapon(
 
 void
 sanguis::server::entities::with_weapon::add_weapon(
-	weapons::unique_ptr ptr
+	weapons::unique_ptr _ptr
 )
 {
 	weapon_type::type const wt(
-		ptr->type()
+		_ptr->type()
 	);
 
 	weapons::magazine_type const magazine_size(
-		ptr->magazine_size()
+		_ptr->magazine_size()
 	);
 
 	if(
@@ -187,7 +187,7 @@ sanguis::server::entities::with_weapon::add_weapon(
 			weapons_,
 			wt,
 			move(
-				ptr
+				_ptr
 			)
 		).second
 	)
@@ -202,27 +202,27 @@ sanguis::server::entities::with_weapon::add_weapon(
 
 void
 sanguis::server::entities::with_weapon::remove_weapon(
-	weapon_type::type const type_
+	weapon_type::type const _weapon
 )
 {
-	if(!weapons_.erase(type_))
-		throw exception(FCPPT_TEXT("tried to remove non-owned weapon"));
+	if(!weapons_.erase(_weapon))
+		throw sanguis::exception(FCPPT_TEXT("tried to remove non-owned weapon"));
 }
 
 void
 sanguis::server::entities::with_weapon::target(
-	pos_type const &ntarget
+	pos_type const &_target
 )
 {
-	target_ = ntarget;
+	target_ = _target;
 }
 
 bool
 sanguis::server::entities::with_weapon::in_range(
-	pos_type const &center
+	pos_type const &_center
 ) const
 {
-	return has_weapon() && active_weapon().in_range(*this, center);
+	return has_weapon() && active_weapon().in_range(*this, _center);
 }
 
 bool
@@ -250,10 +250,10 @@ sanguis::server::entities::with_weapon::active_weapon()
 
 void
 sanguis::server::entities::with_weapon::aggressive(
-	bool const naggressive
+	bool const _aggressive
 )
 {
-	aggressive_ = naggressive;
+	aggressive_ = _aggressive;
 }
 
 sanguis::server::weapons::weapon const &
@@ -273,7 +273,7 @@ sanguis::server::entities::with_weapon::start_attacking()
 {
 	attack_ready_ = false;
 
-	if(attacking)
+	if(attacking_)
 		return;
 
 	environment()->attacking_changed(
@@ -281,13 +281,13 @@ sanguis::server::entities::with_weapon::start_attacking()
 		true
 	);
 
-	attacking = true;
+	attacking_ = true;
 }
 
 void
 sanguis::server::entities::with_weapon::start_reloading()
 {
-	reloading = true;
+	reloading_ = true;
 
 	environment()->reloading_changed(
 		id(),
@@ -298,7 +298,7 @@ sanguis::server::entities::with_weapon::start_reloading()
 void
 sanguis::server::entities::with_weapon::stop_reloading()
 {
-	reloading = false;
+	reloading_ = false;
 
 	environment()->reloading_changed(
 		id(),
@@ -321,7 +321,7 @@ sanguis::server::entities::with_weapon::reload_speed()
 void
 sanguis::server::entities::with_weapon::stop_attacking()
 {
-	if(!attacking)
+	if(!attacking_)
 		return;
 
 	environment()->attacking_changed(
@@ -329,12 +329,12 @@ sanguis::server::entities::with_weapon::stop_attacking()
 		false
 	);
 
-	attacking = false;
+	attacking_ = false;
 }
 
 void
 sanguis::server::entities::with_weapon::attack_speed_change(
-	property::value const value_
+	property::value const _value
 )
 {
 	if(has_weapon())
@@ -342,14 +342,14 @@ sanguis::server::entities::with_weapon::attack_speed_change(
 			property::to_float<
 				space_unit
 			>(
-				value_
+				_value
 			)
 		);
 }
 
 void
 sanguis::server::entities::with_weapon::reload_speed_change(
-	property::value const value_
+	property::value const _value
 )
 {
 	if(has_weapon())
@@ -357,7 +357,7 @@ sanguis::server::entities::with_weapon::reload_speed_change(
 			property::to_float<
 				space_unit
 			>(
-				value_
+				_value
 			)
 		);
 }

@@ -2,9 +2,9 @@
 #include "multi_sampling.hpp"
 #include "resolution.hpp"
 #include "window_mode.hpp"
-#include <sge/mainloop/asio/create_io_service.hpp>
 #include <sge/renderer/parameters.hpp>
 #include <sge/renderer/refresh_rate_dont_care.hpp>
+#include <sge/renderer/window_parameters.hpp>
 #include <sge/systems/audio_loader.hpp>
 #include <sge/systems/audio_player_default.hpp>
 #include <sge/systems/image_loader.hpp>
@@ -13,47 +13,56 @@
 #include <sge/systems/input_helper_field.hpp>
 #include <sge/systems/list.hpp>
 #include <sge/systems/parameterless.hpp>
+#include <sge/systems/renderer.hpp>
+#include <sge/systems/window.hpp>
+#include <sge/systems/viewport/manage_resize.hpp>
 #include <sge/window/parameters.hpp>
 #include <sge/extension_set.hpp>
+#include <awl/mainloop/asio/create_io_service.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/container/bitfield/basic_impl.hpp>
 #include <fcppt/text.hpp>
 
 sge::systems::list const
 sanguis::args::client_sge_options(
-	boost::program_options::variables_map const &vm
+	boost::program_options::variables_map const &_vm
 )
 {
 	return
 		sge::systems::list()
 		(
-			sge::window::parameters(
-				FCPPT_TEXT("sanguis")
+			sge::systems::window(
+				sge::renderer::window_parameters(
+					FCPPT_TEXT("sanguis")
+				)
 			)
 			.io_service(
-				sge::mainloop::asio::create_io_service()
+				awl::mainloop::asio::create_io_service()
 			)
 		)
 		(
-			sge::renderer::parameters(
-				sge::renderer::display_mode(
-					resolution(
-						vm
+			sge::systems::renderer(
+				sge::renderer::parameters(
+					sge::renderer::display_mode(
+						args::resolution(
+							_vm
+						),
+						sge::renderer::bit_depth::depth32,
+						sge::renderer::refresh_rate_dont_care
 					),
-					sge::renderer::bit_depth::depth32,
-					sge::renderer::refresh_rate_dont_care
-				),
-				sge::renderer::depth_buffer::off,
-				sge::renderer::stencil_buffer::off,
-				window_mode(
-					vm
-				),
-				sge::renderer::vsync::on,
-				sge::renderer::multi_sample_type(
-					multi_sampling(
-						vm
+					sge::renderer::depth_buffer::off,
+					sge::renderer::stencil_buffer::off,
+					args::window_mode(
+						_vm
+					),
+					sge::renderer::vsync::on,
+					sge::renderer::multi_sample_type(
+						args::multi_sampling(
+							_vm
+						)
 					)
-				)
+				),
+				sge::systems::viewport::manage_resize()
 			)
 		)
 		(
