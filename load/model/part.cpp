@@ -141,7 +141,7 @@ sanguis::load::model::part::part(
 					sge::parse::json::get<
 						sge::parse::json::object
 					>(
-						member.value_
+						member.value
 					),
 					param.new_texture(
 						texture

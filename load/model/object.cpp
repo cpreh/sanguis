@@ -220,7 +220,7 @@ sanguis::load::model::object::construct(
 					sge::parse::json::get<
 						sge::parse::json::object
 					>(
-						member.value_
+						member.value
 					),
 					global_parameters(
 						path,

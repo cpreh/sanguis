@@ -87,7 +87,7 @@ sanguis::load::model::animation_sound::animation_sound(
 						sge::parse::json::get<
 							sge::parse::json::object
 						>(
-							ref.value_
+							ref.value
 						).members,
 						ctx
 					)

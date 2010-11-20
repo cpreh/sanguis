@@ -157,7 +157,7 @@ sanguis::load::model::weapon_category::weapon_category(
 				sge::parse::json::get<
 					sge::parse::json::object
 				>(
-					member.value_
+					member.value
 				),
 				param.new_texture(
 					texture
