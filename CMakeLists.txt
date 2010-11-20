@@ -152,6 +152,11 @@ TARGET_LINK_LIBRARIES(
 	${FCPPT_LIBRARIES}
 	${SGE_CORE_LIBRARY}
 	${SGE_GUI_LIBRARY}
+	sgefonttext #FIXME
+	sgeconsole #FIXME
+	sgesprite #FIXMe
+	sgesystems #FIXME
+	sgetexture #FIXME
 )
 
 IF(NOT MSVC)

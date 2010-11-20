@@ -62,7 +62,7 @@ sanguis::client::draw2d::scene::object::object(
 	load::context const &_resources,
 	sge::renderer::device_ptr const _rend,
 	sge::font::metrics_ptr const _font_metrics,
-	sge::font::drawer_ptr const _font_drawer,
+	sge::font::text::drawer_ptr const _font_drawer,
 	sge::audio::listener &_audio_listener,
 	client::cursor::object_ptr const _cursor,
 	std::tm const &_current_time

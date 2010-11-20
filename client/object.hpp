@@ -13,7 +13,7 @@
 #include <sge/audio/pool.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/console/object.hpp>
-#include <sge/font/drawer_ptr.hpp>
+#include <sge/font/text/drawer_ptr.hpp>
 #include <sge/font/metrics_ptr.hpp>
 #include <sge/time/timer.hpp>
 #include <sge/systems/instance_fwd.hpp>
@@ -70,7 +70,7 @@ private:
 
 	sge::font::metrics_ptr const font_metrics_;
 
-	sge::font::drawer_ptr const font_drawer_;
+	sge::font::text::drawer_ptr const font_drawer_;
 
 	sge::console::object console_;
 

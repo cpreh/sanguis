@@ -29,7 +29,7 @@
 #include <sge/renderer/device_ptr.hpp>
 #include <sge/renderer/screen_size.hpp>
 #include <sge/font/metrics_ptr.hpp>
-#include <sge/font/drawer_ptr.hpp>
+#include <sge/font/text/drawer_ptr.hpp>
 #include <sge/audio/listener_fwd.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/math/vector/basic_decl.hpp>
@@ -56,7 +56,7 @@ public:
 		load::context const &,
 		sge::renderer::device_ptr,
 		sge::font::metrics_ptr,
-		sge::font::drawer_ptr,
+		sge::font::text::drawer_ptr,
 		sge::audio::listener &,
 		client::cursor::object_ptr,
 		std::tm const &initial_time

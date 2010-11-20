@@ -16,20 +16,19 @@ ENDIF()
 FIND_PATH(
 	SGE_INCLUDE_DIRS
 	NAMES sge/config.hpp
-	HINTS
-	${SGE_ROOT}/include
+	PATHS ${SGE_ROOT}/include
 )
 
 FIND_LIBRARY(
 	SGE_CORE_LIBRARY
 	NAMES sgecore
-	HINTS ${SGE_ROOT}/lib
+	PATHS ${SGE_ROOT}/lib
 )
 
 FIND_LIBRARY(
 	SGE_GUI_LIBRARY
 	NAMES sgegui
-	HINTS ${SGE_ROOT}/lib
+	PATHS ${SGE_ROOT}/lib
 )
 
 INCLUDE(FindPackageHandleStandardArgs)

@@ -1,7 +1,7 @@
 #include "hud.hpp"
-#include <sge/font/draw_text.hpp>
-#include <sge/font/text_part.hpp>
-#include <sge/font/flags_none.hpp>
+#include <sge/font/text/part.hpp>
+#include <sge/font/text/draw.hpp>
+#include <sge/font/text/flags_none.hpp>
 #include <fcppt/container/bitfield/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
@@ -10,7 +10,7 @@
 
 sanguis::client::draw2d::scene::hud::hud(
 	sge::font::metrics_ptr const _font_metrics,
-	sge::font::drawer_ptr const _font_drawer
+	sge::font::text::drawer_ptr const _font_drawer
 )
 :
 	font_metrics_(_font_metrics),
@@ -42,7 +42,7 @@ sanguis::client::draw2d::scene::hud::update(
 { 
 	frames_counter.update();
 
-	sge::font::draw_text(
+	sge::font::text::draw(
 		font_metrics_,
 		font_drawer_,
 		(
@@ -55,8 +55,8 @@ sanguis::client::draw2d::scene::hud::update(
 		).str(),
 		sge::font::pos::null(),
 		sge::font::dim(300, 100), // FIXME
-		sge::font::align_h::left,
-		sge::font::align_v::top,
-		sge::font::flags::none
+		sge::font::text::align_h::left,
+		sge::font::text::align_v::top,
+		sge::font::text::flags::none
 	);
 }

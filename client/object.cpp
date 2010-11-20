@@ -13,7 +13,7 @@
 #include <sge/config/media_path.hpp>
 #include <sge/console/sprite_object.hpp>
 #include <sge/console/sprite_parameters.hpp>
-#include <sge/font/drawer_3d.hpp>
+#include <sge/font/text/drawer_3d.hpp>
 #include <sge/font/size_type.hpp>
 #include <sge/font/system.hpp>
 #include <sge/image/color/format.hpp>
@@ -72,7 +72,7 @@ sanguis::client::object::object(
 	),
 	font_drawer_(
 		fcppt::make_shared_ptr<
-			sge::font::drawer_3d
+			sge::font::text::drawer_3d
 		>(
 			sys_.renderer(),
 			sge::image::colors::white()

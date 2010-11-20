@@ -1,6 +1,6 @@
 #include "connect_box.hpp"
-#include <sge/font/align_h.hpp>
-#include <sge/font/align_v.hpp>
+#include <sge/font/text/align_h.hpp>
+#include <sge/font/text/align_v.hpp>
 #include <sge/gui/widgets/parameters.hpp>
 #include <sge/gui/layouts/vertical.hpp>
 #include <sge/gui/layouts/horizontal.hpp>
@@ -31,8 +31,8 @@ sanguis::client::menu::menus::connect_box::connect_box(
 		label_wrapper,
 		sge::gui::widgets::parameters(),
 		FCPPT_TEXT(""),
-		sge::font::align_h::center,
-		sge::font::align_v::center,
+		sge::font::text::align_h::center,
+		sge::font::text::align_v::center,
 		sge::gui::dim(30,10)),
 	
 	buttons(

@@ -21,7 +21,7 @@
 #include <sge/audio/pool_fwd.hpp>
 #include <sge/console/gfx_fwd.hpp>
 #include <sge/font/metrics_ptr.hpp>
-#include <sge/font/drawer_ptr.hpp>
+#include <sge/font/text/drawer_ptr.hpp>
 #include <sge/input/keyboard/device_ptr.hpp>
 #include <sge/input/mouse/device_ptr.hpp>
 #include <sge/image/multi_loader_fwd.hpp>
@@ -56,7 +56,7 @@ public:
 		load::context const &,
 		sge::audio::pool &,
 		sge::font::metrics_ptr,
-		sge::font::drawer_ptr,
+		sge::font::text::drawer_ptr,
 		sge::console::gfx &,
 		sge::input::keyboard::device_ptr,
 		sge::input::mouse::device_ptr,
@@ -138,7 +138,7 @@ public:
 	sge::font::metrics_ptr const
 	font_metrics() const;
 
-	sge::font::drawer_ptr const
+	sge::font::text::drawer_ptr const
 	font_drawer() const;
 
 	sanguis::client::console &
@@ -182,7 +182,7 @@ private:
 
 	sge::font::metrics_ptr const font_metrics_;
 
-	sge::font::drawer_ptr const font_drawer_;
+	sge::font::text::drawer_ptr const font_drawer_;
 
 	sge::console::gfx &console_gfx_;
 	

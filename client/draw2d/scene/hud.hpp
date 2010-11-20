@@ -6,7 +6,7 @@
 #include "../../level_type.hpp"
 #include "../../../time_type.hpp"
 #include <sge/font/metrics_ptr.hpp>
-#include <sge/font/drawer_ptr.hpp>
+#include <sge/font/text/drawer_ptr.hpp>
 #include <sge/time/frames_counter.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -25,7 +25,7 @@ class hud
 public:
 	explicit hud(
 		sge::font::metrics_ptr,
-		sge::font::drawer_ptr
+		sge::font::text::drawer_ptr
 	);
 
 	void
@@ -45,7 +45,7 @@ public:
 private:
 	sge::font::metrics_ptr const font_metrics_;
 	
-	sge::font::drawer_ptr const font_drawer_;
+	sge::font::text::drawer_ptr const font_drawer_;
 
 	exp_type experience_;
 
