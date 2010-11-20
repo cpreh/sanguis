@@ -102,13 +102,13 @@ sanguis::client::control::input_translator::axis_callback(
 	{
 	case sge::input::mouse::axis::x:
 		rotation_event(
-			_event.axis_position(),
+			_event.axis_value(),
 			action_type::horizontal_look
 		);
 		break;
 	case sge::input::mouse::axis::y:
 		rotation_event(
-			_event.axis_position(),
+			_event.axis_value(),
 			action_type::vertical_look
 		);
 		break;
@@ -178,7 +178,7 @@ sanguis::client::control::input_translator::direction_event(
 
 void
 sanguis::client::control::input_translator::rotation_event(
-	sge::input::mouse::axis_position const _position,
+	sge::input::mouse::axis_value const _value,
 	action_type::type const _action
 )
 {
@@ -188,7 +188,7 @@ sanguis::client::control::input_translator::rotation_event(
 			static_cast<
 				key_scale
 			>(
-				_position
+				_value
 			)
 		)
 	);

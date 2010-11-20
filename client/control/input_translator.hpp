@@ -7,7 +7,7 @@
 #include <sge/input/keyboard/device_ptr.hpp>
 #include <sge/input/keyboard/key_event_fwd.hpp>
 #include <sge/input/mouse/axis_event_fwd.hpp>
-#include <sge/input/mouse/axis_position.hpp>
+#include <sge/input/mouse/axis_value.hpp>
 #include <sge/input/mouse/button_event_fwd.hpp>
 #include <sge/input/mouse/device_ptr.hpp>
 #include <fcppt/function/object.hpp>
@@ -59,7 +59,7 @@ private:
 
 	void
 	rotation_event(
-		sge::input::mouse::axis_position,
+		sge::input::mouse::axis_value,
 		action_type::type
 	);
 
