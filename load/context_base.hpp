@@ -2,7 +2,7 @@
 #define SANGUIS_LOAD_CONTEXT_BASE_HPP_INCLUDED
 
 #include "context_base_fwd.hpp"
-#include <sge/renderer/dim_type.hpp>
+#include <sge/renderer/dim2.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 
@@ -19,7 +19,7 @@ protected:
 public:
 	virtual ~context_base();
 
-	virtual sge::renderer::dim_type const
+	virtual sge::renderer::dim2 const
 	model_dim(
 		fcppt::string const &
 	) const = 0;

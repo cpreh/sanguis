@@ -17,7 +17,7 @@ sanguis::load::server_context::server_context()
 sanguis::load::server_context::~server_context()
 {}
 
-sge::renderer::dim_type const
+sge::renderer::dim2 const
 sanguis::load::server_context::model_dim(
 	fcppt::string const &model_name
 ) const

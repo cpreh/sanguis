@@ -9,8 +9,9 @@
 #include "../collision/collides.hpp"
 #include "../collision/distance.hpp"
 #include <sge/time/second.hpp>
-#include <fcppt/math/vector/angle_between.hpp>
+#include <fcppt/math/vector/signed_angle_cast.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
@@ -186,12 +187,16 @@ sanguis::server::ai::simple::update(
 	> optional_angle;
 	
 	optional_angle const angle(
-		fcppt::math::vector::angle_between<
-			space_unit
-		>(
-			me_.center(),
-			fuzzy_target
-		)
+		fuzzy_target == me_.center()
+		?
+			optional_angle()
+		:
+			fcppt::math::vector::signed_angle_cast<
+				space_unit
+			>(
+				me_.center(),
+				fuzzy_target
+			)
 	);
 
 	if(angle)

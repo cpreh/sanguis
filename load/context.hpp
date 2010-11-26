@@ -6,7 +6,7 @@
 #include "resource/context.hpp"
 #include "../time_type.hpp"
 #include <sge/renderer/device_fwd.hpp>
-#include <sge/renderer/dim_type.hpp>
+#include <sge/renderer/dim2.hpp>
 #include <sge/image/multi_loader_fwd.hpp>
 #include <sge/audio/player_fwd.hpp>
 #include <sge/audio/multi_loader_fwd.hpp>
@@ -47,7 +47,7 @@ public:
 	) const;
 private:
 	// context_base overrides
-	sge::renderer::dim_type const
+	sge::renderer::dim2 const
 	model_dim(
 		fcppt::string const &
 	) const;

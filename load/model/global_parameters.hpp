@@ -6,7 +6,7 @@
 #include "optional_texture_identifier.hpp"
 #include "../resource/textures_fwd.hpp"
 #include "../resource/sounds_fwd.hpp"
-#include <sge/renderer/dim_type.hpp>
+#include <sge/renderer/dim2.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/nonassignable.hpp>
@@ -28,7 +28,7 @@ public:
 	global_parameters(
 		fcppt::filesystem::path const &,
 		resource::textures const &,
-		sge::renderer::dim_type const &cell_size,
+		sge::renderer::dim2 const &cell_size,
 		optional_delay const &,
 		optional_texture_identifier const &,
 		resource::sounds const &
@@ -40,7 +40,7 @@ public:
 	resource::textures const &
 	textures() const;
 
-	sge::renderer::dim_type const &
+	sge::renderer::dim2 const &
 	cell_size() const;
 
 	optional_delay const &
@@ -59,7 +59,7 @@ public:
 private:
 	fcppt::filesystem::path const path_;
 	resource::textures const &textures_;
-	sge::renderer::dim_type const cell_size_;
+	sge::renderer::dim2 const cell_size_;
 	optional_delay const delay_;
 	optional_texture_identifier const texture_;
 	resource::sounds const &sounds_;

@@ -54,7 +54,7 @@ sanguis::load::context::update(
 	);
 }
 
-sge::renderer::dim_type const
+sge::renderer::dim2 const
 sanguis::load::context::model_dim(
 	fcppt::string const &model_name_
 ) const

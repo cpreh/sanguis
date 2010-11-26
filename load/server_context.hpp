@@ -2,7 +2,7 @@
 #define SANGUIS_LOAD_SERVER_CONTEXT_HPP_INCLUDED
 
 #include "context_base.hpp"
-#include <sge/renderer/dim_type.hpp>
+#include <sge/renderer/dim2.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 #include <map>
@@ -22,14 +22,14 @@ public:
 
 	~server_context();
 private:
-	sge::renderer::dim_type const
+	sge::renderer::dim2 const
 	model_dim(
 		fcppt::string const &
 	) const;
 
 	typedef std::map<
 		fcppt::string,
-		sge::renderer::dim_type
+		sge::renderer::dim2
 	> dim_map;
 
 	mutable dim_map dims_;

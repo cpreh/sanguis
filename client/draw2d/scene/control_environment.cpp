@@ -5,12 +5,12 @@
 #include "../../control/axis_direction_max.hpp"
 #include "../../control/axis_direction_min.hpp"
 #include "../../cursor/object.hpp"
-#include <fcppt/math/vector/angle_between.hpp>
+#include <fcppt/math/vector/comparison.hpp>
+#include <fcppt/math/vector/signed_angle_cast.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/clamp.hpp>
 #include <fcppt/optional_impl.hpp>
-#include <fcppt/assert.hpp>
 
 sanguis::client::draw2d::scene::control_environment::control_environment(
 	object &_object,
@@ -53,27 +53,26 @@ sanguis::client::draw2d::scene::control_environment::attack_dest() const
 sanguis::client::control::key_scale
 sanguis::client::draw2d::scene::control_environment::rotation() const
 {
-	// TODO: this should not be here
-	typedef fcppt::optional<
-		control::key_scale
-	> const optional_scale;
-	
-	optional_scale ret(
-		fcppt::math::vector::angle_between<
-			control::key_scale
+	sprite::point const refpoint(
+		fcppt::math::dim::structure_cast<
+			sprite::point
 		>(
-			fcppt::math::dim::structure_cast<
-				sprite::point
-			>(
-				object_.screen_size() / 2u
-			),
-			cursor_->pos()
+			object_.screen_size() / 2u
 		)
 	);
 
-	FCPPT_ASSERT(ret);
-
-	return *ret;
+	return
+		cursor_->pos() == refpoint
+		?
+			// FIXME: this should not update the rotation at all!
+			static_cast<control::key_scale>(0)
+		:
+			fcppt::math::vector::signed_angle_cast<
+				control::key_scale
+			>(
+				refpoint,
+				cursor_->pos()
+			);
 }
 
 void

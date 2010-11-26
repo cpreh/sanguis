@@ -3,7 +3,7 @@
 sanguis::load::model::global_parameters::global_parameters(
 	fcppt::filesystem::path const &path_,
 	resource::textures const &textures_,
-	sge::renderer::dim_type const &cell_size_,
+	sge::renderer::dim2 const &cell_size_,
 	optional_delay const &delay_,
 	optional_texture_identifier const &texture_,
 	resource::sounds const &sounds_)
@@ -28,7 +28,7 @@ sanguis::load::model::global_parameters::textures() const
 	return textures_;
 }
 
-sge::renderer::dim_type const &
+sge::renderer::dim2 const &
 sanguis::load::model::global_parameters::cell_size() const
 {
 	return cell_size_;

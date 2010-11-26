@@ -5,7 +5,7 @@
 #include <sge/sprite/object_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
-#include <fcppt/math/vector/angle_between.hpp>
+#include <fcppt/math/vector/signed_angle_cast.hpp>
 #include <fcppt/math/vector/is_null.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/point_rotate.hpp>
@@ -54,9 +54,15 @@ sanguis::client::draw2d::entities::player::speed(
 {
 	model::object::speed(v);
 
-	if (!is_null(v))
+	if(
+		!fcppt::math::vector::is_null(
+			v
+		)
+	)
 		model::object::orientation(
-			*fcppt::math::vector::angle_between<funit>(
+			fcppt::math::vector::signed_angle_cast<
+				funit
+			>(
 				vector2::null(),
 				v
 			),

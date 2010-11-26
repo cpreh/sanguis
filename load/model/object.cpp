@@ -98,7 +98,7 @@ sanguis::load::model::object::end() const
 	return parts.end();
 }
 
-sge::renderer::dim_type const
+sge::renderer::dim2 const
 sanguis::load::model::object::dim() const
 {
 	return cell_size;

@@ -9,7 +9,7 @@
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/text.hpp>
 
-sge::renderer::dim_type const
+sge::renderer::dim2 const
 sanguis::load::model::load_dim(
 	sge::parse::json::member_vector const &entries
 )
@@ -33,7 +33,7 @@ sanguis::load::model::load_dim(
 		);
 	
 	return
-		sge::renderer::dim_type(
+		sge::renderer::dim2(
 			static_cast<
 				sge::renderer::size_type
 			>(

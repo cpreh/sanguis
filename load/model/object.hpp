@@ -6,7 +6,7 @@
 #include "../resource/context_fwd.hpp"
 #include <fcppt/random/uniform.hpp>
 #include <fcppt/filesystem/path.hpp>
-#include <sge/renderer/dim_type.hpp>
+#include <sge/renderer/dim2.hpp>
 #include <fcppt/math/dim/basic_decl.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -53,7 +53,7 @@ public:
 	const_iterator
 	end() const;
 
-	sge::renderer::dim_type const
+	sge::renderer::dim2 const
 	dim() const;
 
 	object(
@@ -70,7 +70,7 @@ private:
 
 	fcppt::filesystem::path const path;
 
-	sge::renderer::dim_type cell_size;
+	sge::renderer::dim2 cell_size;
 
 	part_map parts;
 

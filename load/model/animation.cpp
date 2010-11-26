@@ -8,6 +8,7 @@
 #include "../resource/textures.hpp"
 #include "../resource/texture_context_impl.hpp"
 #include "../../exception.hpp"
+#include <sge/renderer/dim2.hpp>
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/find_member.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
@@ -37,7 +38,7 @@ namespace
 sge::renderer::lock_rect const
 calc_rect(
 	sge::renderer::lock_rect const &area,
-	sge::renderer::dim_type const &cell_size,
+	sge::renderer::dim2 const &cell_size,
 	sge::renderer::size_type const index
 )
 {
@@ -49,7 +50,7 @@ calc_rect(
 			cell_size);
 	}
 
-	sge::renderer::dim_type const cell_size_edited(
+	sge::renderer::dim2 const cell_size_edited(
 		cell_size.w()+1,
 		cell_size.h()+1);
 
