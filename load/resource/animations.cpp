@@ -123,7 +123,14 @@ sanguis::load::resource::animations::do_load(
 						dir
 					)
 				);
-			filename = ss.str().substr(ss.tellg());
+			filename =
+				ss.str().substr(
+					static_cast<
+						fcppt::string::size_type
+					>(
+						ss.tellg()
+					)
+				);
 			delay = sge::time::millisecond(temp_delay);
 		}
 		else
