@@ -5,6 +5,9 @@
 #include "convert_enemy_name.hpp"
 #include "../console.hpp"
 #include "../net_id_from_args.hpp"
+#include <sge/font/text/to_fcppt_string.hpp>
+#include <sge/font/text/lit.hpp>
+#include <sge/font/text/string.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
@@ -43,9 +46,9 @@ sanguis::server::waves::generator::~generator()
 
 void
 sanguis::server::waves::generator::process(
-	time_type const diff,
-	environment::object_ptr const env,
-	environment::load_context_ptr const load_context
+	time_type const _diff,
+	environment::object_ptr const _env,
+	environment::load_context_ptr const _load_context
 )
 {
 	for(
@@ -54,9 +57,9 @@ sanguis::server::waves::generator::process(
 	)
 	{
 		it->process(
-			diff,
-			env,
-			load_context
+			_diff,
+			_env,
+			_load_context
 		);
 
 		if(it->ended())
@@ -68,13 +71,13 @@ sanguis::server::waves::generator::process(
 
 void
 sanguis::server::waves::generator::spawn(
-	sge::console::arg_list const &args_
+	sge::console::arg_list const &_args
 )
 try
 {
 	if(
-		args_.size() == 3u
-		&& args_[1] == FCPPT_TEXT("all")
+		_args.size() == 3u
+		&& _args[1] == SGE_FONT_TEXT_LIT("all")
 	)
 	{
 		spawn_all();
@@ -83,12 +86,12 @@ try
 	}
 
 	if(
-		args_.size() != 4u && args_.size() != 5u
+		_args.size() != 4u && _args.size() != 5u
 	)
 	{
 		console_.print_line(
 			server::net_id_from_args(
-				args_
+				_args
 			),
 			FCPPT_TEXT("Invalid parameter count for spawn command.")
 		);
@@ -96,24 +99,24 @@ try
 		return;
 	}
 
-	fcppt::string const action(
-		args_[1]
+	sge::font::text::string const action(
+		_args[1]
 	);
 
 	unsigned const count(
-		args_.size() == 5u
+		_args.size() == 5u
 		?
 			fcppt::lexical_cast<
 				unsigned
 			>(
-				args_[3]
+				_args[3]
 			)
 		:
 			1u
 	);
 	
 	if(
-		action == FCPPT_TEXT("wave")
+		action == SGE_FONT_TEXT_LIT("wave")
 	)
 		for(
 			unsigned i = 0;
@@ -122,12 +125,14 @@ try
 		)
 			fcppt::container::ptr::push_back_unique_ptr(
 				waves_,
-				make(
-					args_[2]
+				waves::make(
+					sge::font::text::to_fcppt_string(
+						_args[2]
+					)
 				)
 			);
 	else if(
-		action == FCPPT_TEXT("enemy")
+		action == SGE_FONT_TEXT_LIT("enemy")
 	)
 		for(
 			unsigned i = 0;
@@ -140,7 +145,9 @@ try
 					single
 				>(
 					convert_enemy_name(
-						args_[2]
+						sge::font::text::to_fcppt_string(
+							_args[2]
+						)
 					)
 				)
 			);
@@ -148,21 +155,21 @@ try
 	{
 		console_.print_line(
 			server::net_id_from_args(
-				args_
+				_args
 			),
 			FCPPT_TEXT("Invalid argument for spawn command.")
 		);
 	}
 }
 catch(
-	fcppt::exception const &e
+	fcppt::exception const &error
 )
 {
 	console_.print_line(
 		server::net_id_from_args(
-			args_
+			_args
 		),
-		e.string()
+		error.string()
 	);
 }
 

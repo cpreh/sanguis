@@ -13,6 +13,7 @@
 #include "../../messages/create.hpp"
 #include "../../cast_enum.hpp"
 #include "../../tick_event.hpp"
+#include "../../to_console_arg_list.hpp"
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/headers.hpp>
@@ -145,13 +146,13 @@ sanguis::server::states::running::operator()(
 
 boost::statechart::result
 sanguis::server::states::running::operator()(
-	net::id_type const id,
-	messages::console_command const &msg
+	net::id_type const _id,
+	messages::console_command const &_msg
 )
 {
 	sanguis::string_vector const command(
 		messages::serialization::convert_string_vector(
-			msg.get<
+			_msg.get<
 				messages::string_vector
 			>()
 		)
@@ -172,18 +173,20 @@ sanguis::server::states::running::operator()(
 	try
 	{
 		console_.eval(
-			id,
-			command
+			_id,
+			sanguis::to_console_arg_list(
+				command
+			)
 		);
 	}
 	catch(
-		fcppt::exception const &e
+		fcppt::exception const &error
 	)
 	{
 		FCPPT_LOG_ERROR(
 			log(),
 			fcppt::log::_
-				<< e.string()
+				<< error.string()
 		);
 	}
 		

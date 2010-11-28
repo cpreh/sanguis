@@ -29,6 +29,7 @@
 #include "../../messages/start_reloading.hpp"
 #include "../../messages/stop_reloading.hpp"
 #include "../../messages/max_health.hpp"
+#include "../../messages/types/exp.hpp"
 #include "../../load/model/context.hpp"
 #include "../../load/model/collection.hpp"
 #include "../../load/model/object.hpp"
@@ -50,20 +51,20 @@
 #include <boost/foreach.hpp>
 
 sanguis::server::world::object::object(
-	context_ptr const global_context_,
-	sge::collision::system_ptr const sys,
-	server::environment::load_context_ptr const load_context_,
-	server::console &console_
+	context_ptr const _global_context,
+	sge::collision::system_ptr const _sys,
+	server::environment::load_context_ptr const _load_context,
+	server::console &_console
 )
 :
 	global_context_(
-		global_context_
+		_global_context
 	),
 	load_context_(
-		load_context_
+		_load_context
 	),
 	collision_world_(
-		sys->create_world(
+		_sys->create_world(
 			sge::collision::optional_box(
 				sge::collision::box(
 					// FIXME
@@ -138,7 +139,7 @@ sanguis::server::world::object::object(
 		environment_
 	),
 	wave_gen_(
-		console_
+		_console
 	)
 {}
 
@@ -147,15 +148,15 @@ sanguis::server::world::object::~object()
 
 void
 sanguis::server::world::object::update(
-	time_type const time_
+	time_type const _time
 )
 {
 	diff_clock_.update(
-		time_
+		_time
 	);
 
 	wave_gen_.process(
-		time_,
+		_time,
 		environment(),
 		load_context_
 	);
@@ -164,8 +165,10 @@ sanguis::server::world::object::update(
 	bool const update_pos = send_timer_.update_b();
 
 	collision_world_->update(
-		static_cast<sge::time::funit>(	
-			time_
+		static_cast<
+			sge::time::funit
+		>(
+			_time
 		)
 	);
 
@@ -184,7 +187,7 @@ sanguis::server::world::object::update(
 
 		update_entity(
 			it,
-			time_,
+			_time,
 			update_pos
 		);
 	}
@@ -237,16 +240,16 @@ sanguis::server::world::object::environment() const
 
 void
 sanguis::server::world::object::weapon_changed(
-	entity_id const id,
-	weapon_type::type const wt
+	entity_id const _id,
+	weapon_type::type const _wt
 )
 {
 	send_entity_specific(
-		id,
+		_id,
 		messages::create(
 			messages::change_weapon(
-				id,
-				wt
+				_id,
+				_wt
 			)
 		)
 	);
@@ -254,17 +257,17 @@ sanguis::server::world::object::weapon_changed(
 
 void
 sanguis::server::world::object::got_weapon(
-	player_id const player_id_,
-	entity_id const entity_id_,
-	weapon_type::type const wt_
+	player_id const _player_id,
+	entity_id const _entity_id,
+	weapon_type::type const _wt
 )
 {
 	send_player_specific(
-		player_id_,
+		_player_id,
 		messages::create(
 			messages::give_weapon(
-				entity_id_,
-				wt_
+				_entity_id,
+				_wt
 			)
 		)
 	);
@@ -272,23 +275,23 @@ sanguis::server::world::object::got_weapon(
 
 void
 sanguis::server::world::object::attacking_changed(
-	entity_id const id,
-	bool const is_attacking
+	entity_id const _id,
+	bool const _is_attacking
 )
 {
 	send_entity_specific(
-		id,
-		is_attacking
+		_id,
+		_is_attacking
 		?
 			messages::create(
 				messages::start_attacking(
-					id
+					_id
 				)
 			)
 		:
 			messages::create(
 				messages::stop_attacking(
-					id
+					_id
 				)
 			)
 	);
@@ -296,23 +299,23 @@ sanguis::server::world::object::attacking_changed(
 
 void
 sanguis::server::world::object::reloading_changed(
-	entity_id const id,
-	bool const is_reloading
+	entity_id const _id,
+	bool const _is_reloading
 )
 {
 	send_entity_specific(
-		id,
-		is_reloading
+		_id,
+		_is_reloading
 		?
 			messages::create(
 				messages::start_reloading(
-					id
+					_id
 				)
 			)
 		:
 			messages::create(
 				messages::stop_reloading(
-					id
+					_id
 				)
 			)
 	);
@@ -320,16 +323,16 @@ sanguis::server::world::object::reloading_changed(
 
 void
 sanguis::server::world::object::max_health_changed(
-	entity_id const id,
-	health_type const health_
+	entity_id const _id,
+	health_type const _health
 )
 {
 	send_entity_specific(
-		id,
+		_id,
 		messages::create(
 			messages::max_health(
-				id,
-				health_
+				_id,
+				_health
 			)
 		)
 	);
@@ -337,17 +340,22 @@ sanguis::server::world::object::max_health_changed(
 
 void
 sanguis::server::world::object::exp_changed(
-	player_id const player_id_,
-	entity_id const entity_id_,
-	exp_type const exp_
+	player_id const _player_id,
+	entity_id const _entity_id,
+	exp_type const _exp
 )
 {
 	send_player_specific(
-		player_id_,
+		_player_id,
 		messages::create(
 			messages::experience(
-				entity_id_,
-				exp_
+				_entity_id,
+				// round EXP
+				static_cast<
+					sanguis::messages::types::exp
+				>(
+					_exp
+				)
 			)
 		)
 	);
@@ -355,17 +363,17 @@ sanguis::server::world::object::exp_changed(
 
 void
 sanguis::server::world::object::level_changed(
-	player_id const player_id_,
-	entity_id const entity_id_,
-	level_type const level_
+	player_id const _player_id,
+	entity_id const _entity_id,
+	level_type const _level
 )
 {
 	send_player_specific(
-		player_id_,
+		_player_id,
 		messages::create(
 			messages::level_up(
-				entity_id_,
-				level_
+				_entity_id,
+				_level
 			)
 		)
 	);
@@ -373,13 +381,13 @@ sanguis::server::world::object::level_changed(
 
 void
 sanguis::server::world::object::pickup_chance(
-	probability_type const spawn_chance_,
-	pos_type const &center_
+	probability_type const _spawn_chance,
+	pos_type const &_center
 )
 {
 	pickup_spawner_.spawn(
-		spawn_chance_,
-		center_
+		_spawn_chance,
+		_center
 	);
 }
 
@@ -399,7 +407,7 @@ sanguis::server::world::object::request_transfer(
 	if (
 		it == entities_.end()
 	)
-		throw exception(
+		throw sanguis::exception(
 			FCPPT_TEXT("entity can't be transferred!")
 		);
 
@@ -420,56 +428,56 @@ sanguis::server::world::object::request_transfer(
 
 void
 sanguis::server::world::object::add_sight_range(
-	player_id const player_id_,
-	entity_id const target_id_
+	player_id const _player_id,
+	entity_id const _target_id
 )
 {
 	sight_ranges_[
-		player_id_
+		_player_id
 	].add(
-		target_id_
+		_target_id
 	);
 	
 	entity_map::iterator const it(
 		entities_.find(
-			target_id_
+			_target_id
 		)
 	);
 
 	if(
 		it == entities_.end()
 	)
-		throw exception(
+		throw sanguis::exception(
 			FCPPT_TEXT("can't get entity for sight update!")
 		);
 
-	entities::base &entity_(
+	entities::base &entity(
 		*it->second
 	);
 
 	if(
-		entity_.server_only()
+		entity.server_only()
 	)
 		return;
 			
 	send_player_specific(
-		player_id_,
+		_player_id,
 		it->second->add_message(
-			player_id_
+			_player_id
 		)
 	);
 }
 
 void
 sanguis::server::world::object::remove_sight_range(
-	player_id const player_id_,
-	entity_id const target_id_
+	player_id const _player_id,
+	entity_id const _target_id
 )
 {
 	{
 		sight_range_map::iterator const sight_it(
 			sight_ranges_.find(
-				player_id_
+				_player_id
 			)
 		);
 
@@ -478,7 +486,7 @@ sanguis::server::world::object::remove_sight_range(
 		);
 
 		sight_it->second.remove(
-			target_id_
+			_target_id
 		);
 
 		// if the player sees nothing here
@@ -498,7 +506,7 @@ sanguis::server::world::object::remove_sight_range(
 	
 	entity_map::const_iterator const it(
 		entities_.find(
-			target_id_
+			_target_id
 		)
 	);
 
@@ -507,18 +515,18 @@ sanguis::server::world::object::remove_sight_range(
 	);
 
 	send_player_specific(
-		player_id_,
+		_player_id,
 		it->second->dead()
 		?
 			messages::create(
 				messages::die(
-					target_id_
+					_target_id
 				)
 			)
 		:
 			messages::create(
 				messages::remove(
-					target_id_
+					_target_id
 				)
 			)
 	);
@@ -526,11 +534,11 @@ sanguis::server::world::object::remove_sight_range(
 
 void
 sanguis::server::world::object::remove_player(
-	player_id const player_id_
+	player_id const _player_id
 )
 {
 	global_context_->remove_player(
-		player_id_
+		_player_id
 	);
 }
 
@@ -554,8 +562,8 @@ sanguis::server::world::object::load_context() const
 
 void
 sanguis::server::world::object::send_entity_specific(
-	entity_id const id,
-	messages::auto_ptr msg
+	entity_id const _id,
+	messages::auto_ptr _msg
 )
 {
 	BOOST_FOREACH(
@@ -564,68 +572,65 @@ sanguis::server::world::object::send_entity_specific(
 	)
 		if(
 			range.second.contains(
-				id
+				_id
 			)
 		)
 			global_context_->send_to_player(
 				range.first,
-				msg
+				_msg
 			);
 }
 
 void
 sanguis::server::world::object::send_player_specific(
-	player_id const player_id_,
-	messages::auto_ptr msg
+	player_id const _player_id,
+	messages::auto_ptr _msg
 )
 {
 	global_context_->send_to_player(
-		player_id_,
-		msg
+		_player_id,
+		_msg
 	);
 }
 
 void
 sanguis::server::world::object::update_entity(
-	entity_map::iterator const it,
-	time_type const time_,
-	bool const update_pos
+	entity_map::iterator const _it,
+	time_type const _time,
+	bool const _update_pos
 )
 {
-	entities::base &e(
-		*it->second
+	entities::base &entity(
+		*_it->second
 	);
 
-	e.update(
-		static_cast<
-			time_type
-		>(
-			time_
-		)
+	entity.update(
+		_time
 	);
 
 	if(
-		!e.processed()
+		!entity.processed()
 	)
 	{
-		e.may_be_deleted();
+		entity.may_be_deleted();
+
 		return;
 	}
 	else if(
-		e.dead()
+		entity.dead()
 	)
 	{
 		update_entity_health(
-			e
+			entity
 		);
 
-		e.die();
+		entity.die();
 		
 		// process collision end before the destructor is called
-		e.destroy();
+		entity.destroy();
 
 		entities_.erase(
-			it
+			_it
 		);
 
 		return;
@@ -633,62 +638,62 @@ sanguis::server::world::object::update_entity(
 
 
 	if(
-		e.server_only()
-		|| !update_pos
+		entity.server_only()
+		|| !_update_pos
 	)
 		return;
 
 
 	send_entity_specific(
-		e.id(),
+		entity.id(),
 		message_convert::rotate(
-			e
+			entity
 		)
 	);
 
 	FCPPT_TRY_DYNAMIC_CAST(
 		entities::with_dim const *,
-		with_dim_,
-		&e
+		with_dim,
+		&entity
 	)
 		send_entity_specific(
-			with_dim_->id(),
+			with_dim->id(),
 			message_convert::move(
-				*with_dim_
+				*with_dim
 			)
 		);
 
 	FCPPT_TRY_DYNAMIC_CAST(
 		entities::movable const *,
-		movable_,
-		&e
+		movable,
+		&entity
 	)
 		send_entity_specific(
-			movable_->id(),
+			movable->id(),
 			message_convert::speed(
-				*movable_
+				*movable
 			)
 		);
 
 	update_entity_health(
-		e
+		entity
 	);
 }
 
 void
 sanguis::server::world::object::update_entity_health(
-	entities::base &entity_
+	entities::base &_entity
 )
 {
 	FCPPT_TRY_DYNAMIC_CAST(
 		entities::with_health const *,
-		with_health_,
-		&entity_
+		with_health,
+		&_entity
 	)
 		send_entity_specific(
-			with_health_->id(),
+			with_health->id(),
 			message_convert::health(
-				*with_health_	
+				*with_health
 			)
 		);
 }

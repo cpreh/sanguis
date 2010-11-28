@@ -12,6 +12,8 @@
 #include <sge/gui/layouts/vertical.hpp>
 #include <sge/gui/layouts/grid.hpp>
 #include <sge/gui/widgets/parameters.hpp>
+#include <sge/font/text/lit.hpp>
+#include <sge/font/text/from_fcppt_string.hpp>
 #include <sge/image/loader.hpp>
 #include <sge/renderer/device.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
@@ -117,7 +119,7 @@ sanguis::client::states::gameover::gameover(
 		sge::gui::widgets::parameters()
 			.pos(	
 				sge::gui::point(0,0)),
-		FCPPT_TEXT("You are dead.")
+		SGE_FONT_TEXT_LIT("You are dead.")
 	),
 	score_(
 		background_,
@@ -135,7 +137,7 @@ sanguis::client::states::gameover::gameover(
 			.pos(	
 				sge::gui::point(0,0)
 			),
-		FCPPT_TEXT("Name(s):")
+		SGE_FONT_TEXT_LIT("Name(s):")
 	),
 	score_head_(
 		score_,
@@ -143,7 +145,7 @@ sanguis::client::states::gameover::gameover(
 			.pos(	
 				sge::gui::point(1,0)
 			),
-		FCPPT_TEXT("Score:")
+		SGE_FONT_TEXT_LIT("Score:")
 	),
 	names_text_(
 		score_,
@@ -151,9 +153,11 @@ sanguis::client::states::gameover::gameover(
 			.pos(	
 				sge::gui::point(0,1)
 			),
-		fcppt::algorithm::join_strings(
-			_args.names(),
-			FCPPT_TEXT(", ")
+		sge::font::text::from_fcppt_string(
+			fcppt::algorithm::join_strings(
+				_args.names(),
+				FCPPT_TEXT(", ")
+			)
 		)
 	),
 	score_text_(
@@ -162,7 +166,9 @@ sanguis::client::states::gameover::gameover(
 			.pos(	
 				sge::gui::point(1,1)
 			),
-		fcppt::lexical_cast<fcppt::string>(
+		fcppt::lexical_cast<
+			sge::font::text::string
+		>(
 			_args.score()
 		)
 	),
@@ -172,7 +178,7 @@ sanguis::client::states::gameover::gameover(
 			.pos(	
 				sge::gui::point(0,2)
 			),
-		FCPPT_TEXT("Main menu")
+		SGE_FONT_TEXT_LIT("Main menu")
 	),
 	return_connection_(
 		buttons_return_.register_clicked(

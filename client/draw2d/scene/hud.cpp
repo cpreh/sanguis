@@ -2,6 +2,7 @@
 #include <sge/font/text/part.hpp>
 #include <sge/font/text/draw.hpp>
 #include <sge/font/text/flags_none.hpp>
+#include <sge/font/text/from_fcppt_string.hpp>
 #include <fcppt/container/bitfield/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
@@ -45,14 +46,16 @@ sanguis::client::draw2d::scene::hud::update(
 	sge::font::text::draw(
 		font_metrics_,
 		font_drawer_,
-		(
-			fcppt::format(
-				FCPPT_TEXT("exp: %1%, level: %2%, fps: %3%")
-			)
-			% experience_
-			% level_
-			% frames_counter.frames_str()
-		).str(),
+		sge::font::text::from_fcppt_string(
+			(
+				fcppt::format(
+					FCPPT_TEXT("exp: %1%, level: %2%, fps: %3%")
+				)
+				% experience_
+				% level_
+				% frames_counter.frames_str()
+			).str()
+		),
 		sge::font::pos::null(),
 		sge::font::dim(300, 100), // FIXME
 		sge::font::text::align_h::left,

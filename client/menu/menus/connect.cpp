@@ -6,6 +6,8 @@
 #include <sge/gui/layouts/vertical.hpp>
 #include <sge/gui/make_image.hpp>
 #include <sge/image/multi_loader.hpp>
+#include <sge/font/text/from_fcppt_string.hpp>
+#include <sge/font/text/to_fcppt_string.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/char_type.hpp>
@@ -62,11 +64,13 @@ sanguis::client::menu::menus::connect::connect(
 		sge::gui::widgets::parameters(),
 		sge::gui::widgets::edit::single_line,
 		sge::gui::dim(30,1),
-		config::settings::get_or_default(
-			_settings,
-			ini_section,
-			hostname_key,
-			FCPPT_TEXT("")
+		sge::font::text::from_fcppt_string(
+			config::settings::get_or_default(
+				_settings,
+				ini_section,
+				hostname_key,
+				FCPPT_TEXT("")
+			)
 		)
 	),
 	port(
@@ -90,11 +94,13 @@ sanguis::client::menu::menus::connect::connect(
 		sge::gui::widgets::parameters(),
 		sge::gui::widgets::edit::single_line,
 		sge::gui::dim(5,1),
-		config::settings::get_or_default(
-			_settings,
-			ini_section,
-			port_key,
-			FCPPT_TEXT("31337") // TODO: don't hard code the default port!
+		sge::font::text::from_fcppt_string(
+			config::settings::get_or_default(
+				_settings,
+				ini_section,
+				port_key,
+				FCPPT_TEXT("31337") // TODO: don't hard code the default port!
+			)
 		)
 
 	),
@@ -136,13 +142,17 @@ sanguis::client::menu::menus::connect::~connect()
 		settings_,
 		ini_section,
 		hostname_key,
-		host_edit.text()
+		sge::font::text::to_fcppt_string(
+			host_edit.text()
+		)
 	);
 
 	config::settings::set_key(
 		settings_,
 		ini_section,
 		port_key,
-		port_edit.text()
+		sge::font::text::to_fcppt_string(
+			port_edit.text()
+		)
 	);
 }

@@ -29,6 +29,7 @@
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/state/trampoline.hpp>
+#include <sge/font/text/from_fcppt_string.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
@@ -264,10 +265,12 @@ sanguis::client::states::running::operator()(
 )
 {
 	context<machine>().console().gfx().object().emit_message(
-		fcppt::utf8::convert(
-			_message.get<
-				sanguis::messages::string
-			>()
+		sge::font::text::from_fcppt_string(
+			fcppt::utf8::convert(
+				_message.get<
+					sanguis::messages::string
+				>()
+			)
 		)
 	);
 

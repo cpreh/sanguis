@@ -1,6 +1,8 @@
 #include "daytime_settings.hpp"
 #include "gmtime.hpp"
 #include <sge/console/object.hpp>
+#include <sge/font/text/lit.hpp>
+#include <sge/font/text/to_fcppt_string.hpp>
 #include <fcppt/chrono/system_clock.hpp>
 #include <fcppt/chrono/time_point_arithmetic.hpp>
 #include <fcppt/chrono/time_point_impl.hpp>
@@ -36,16 +38,20 @@ struct overwrite_members
 	>
 	result_type
 	operator()(
-		T const &t
+		T const &_t
 	) const
 	{
 
 		int &dest(
-			boost::fusion::at_c<0>(t)
+			boost::fusion::at_c<0>(
+				_t
+			)
 		);
 
 		int const &src(
-			boost::fusion::at_c<1>(t)
+			boost::fusion::at_c<1>(
+				_t
+			)
 		);
 
 		if(
@@ -80,62 +86,62 @@ sanguis::client::daytime_settings::daytime_settings(
 	speedup_(1),
 	day_con_(
 		_console.insert(
-			FCPPT_TEXT("day"),
+			SGE_FONT_TEXT_LIT("day"),
 			std::tr1::bind(
 				&daytime_settings::change_day,
 				this,
 				std::tr1::placeholders::_1,
 				std::tr1::placeholders::_2 
 			),
-			FCPPT_TEXT("Sets the current day to a fixed value.")
+			SGE_FONT_TEXT_LIT("Sets the current day to a fixed value.")
 		)
 	),
 	time_con_(
 		_console.insert(
-			FCPPT_TEXT("time"),
+			SGE_FONT_TEXT_LIT("time"),
 			std::tr1::bind(
 				&daytime_settings::change_time,
 				this,
 				std::tr1::placeholders::_1,
 				std::tr1::placeholders::_2
 			),
-			FCPPT_TEXT("Sets the current time to a fixed value.")
+			SGE_FONT_TEXT_LIT("Sets the current time to a fixed value.")
 		)
 	),
 	time_speed_con_(
 		_console.insert(
-			FCPPT_TEXT("time_speed"),
+			SGE_FONT_TEXT_LIT("time_speed"),
 			std::tr1::bind(
 				&daytime_settings::change_time_speed,
 				this,
 				std::tr1::placeholders::_1,
 				std::tr1::placeholders::_2
 			),
-			FCPPT_TEXT("Sets the current time speedup. Use a value of 1 to reset this.")
+			SGE_FONT_TEXT_LIT("Sets the current time speedup. Use a value of 1 to reset this.")
 		)
 	),
 	reset_day_con_(
 		_console.insert(
-			FCPPT_TEXT("reset_day"),
+			SGE_FONT_TEXT_LIT("reset_day"),
 			std::tr1::bind(
 				&daytime_settings::reset_day,
 				this,
 				std::tr1::placeholders::_1,
 				std::tr1::placeholders::_2
 			),
-			FCPPT_TEXT("Resets to the current day.")
+			SGE_FONT_TEXT_LIT("Resets to the current day.")
 		)
 	),
 	reset_time_con_(
 		_console.insert(
-			FCPPT_TEXT("reset_time"),
+			SGE_FONT_TEXT_LIT("reset_time"),
 			std::tr1::bind(
 				&daytime_settings::reset_time,
 				this,
 				std::tr1::placeholders::_1,
 				std::tr1::placeholders::_2
 			),
-			FCPPT_TEXT("Resets to the current time.")
+			SGE_FONT_TEXT_LIT("Resets to the current time.")
 		)
 	)
 {
@@ -194,23 +200,25 @@ sanguis::client::daytime_settings::current_time()
 
 void
 sanguis::client::daytime_settings::change_day(
-	sge::console::arg_list const &args_,
-	sge::console::object &o
+	sge::console::arg_list const &_args,
+	sge::console::object &_object
 )
 {
 	if(
-		args_.size() != 2
+		_args.size() != 2
 	)
 	{
-		o.emit_error(
-			FCPPT_TEXT("The date command needs one argument!")
+		_object.emit_error(
+			SGE_FONT_TEXT_LIT("The date command needs one argument!")
 		);
 
 		return;
 	}
 
 	fcppt::io::istringstream iss(
-		args_[1]
+		sge::font::text::to_fcppt_string(
+			_args[1]
+		)
 	);
 
 	if(
@@ -219,30 +227,32 @@ sanguis::client::daytime_settings::change_day(
 			current_time_
 		)
 	)
-		o.emit_error(
-			FCPPT_TEXT("Day parsing failed.")
+		_object.emit_error(
+			SGE_FONT_TEXT_LIT("Day parsing failed.")
 		);
 }
 
 void
 sanguis::client::daytime_settings::change_time(
-	sge::console::arg_list const &args_,
-	sge::console::object &o
+	sge::console::arg_list const &_args,
+	sge::console::object &_object
 )
 {
 	if(
-		args_.size() != 2
+		_args.size() != 2
 	)
 	{
-		o.emit_error(
-			FCPPT_TEXT("The time command needs one argument!")
+		_object.emit_error(
+			SGE_FONT_TEXT_LIT("The time command needs one argument!")
 		);
 
 		return;
 	}
 
 	fcppt::io::istringstream iss(
-		args_[1]
+		sge::font::text::to_fcppt_string(
+			_args[1]
+		)
 	);
 
 	if(
@@ -251,23 +261,23 @@ sanguis::client::daytime_settings::change_time(
 			current_time_
 		)
 	)
-		o.emit_error(
-			FCPPT_TEXT("Time parsing failed.")
+		_object.emit_error(
+			SGE_FONT_TEXT_LIT("Time parsing failed.")
 		);
 }
 
 void
 sanguis::client::daytime_settings::change_time_speed(
-	sge::console::arg_list const &args_,
-	sge::console::object &o
+	sge::console::arg_list const &_args,
+	sge::console::object &_object
 )
 {
 	if(
-		args_.size() != 2
+		_args.size() != 2
 	)
 	{
-		o.emit_error(
-			FCPPT_TEXT("The time_speed command needs one argument!")
+		_object.emit_error(
+			SGE_FONT_TEXT_LIT("The time_speed command needs one argument!")
 		);
 
 		return;
@@ -279,7 +289,7 @@ sanguis::client::daytime_settings::change_time_speed(
 			fcppt::lexical_cast<
 				time_rep
 			>(
-				args_[1]
+				_args[1]
 			)
 		);
 
@@ -287,9 +297,11 @@ sanguis::client::daytime_settings::change_time_speed(
 			speedup < 1
 		)
 		{
-			o.emit_error(
-				FCPPT_TEXT("speedup needs to be > 0")
+			_object.emit_error(
+				SGE_FONT_TEXT_LIT("speedup needs to be > 0")
 			);
+
+			return;
 		}
 
 		speedup_ = speedup;
@@ -300,24 +312,24 @@ sanguis::client::daytime_settings::change_time_speed(
 		fcppt::exception const &
 	)
 	{
-		o.emit_error(
-			FCPPT_TEXT("You need to pass an int argument to the time_speed command: ")
+		_object.emit_error(
+			SGE_FONT_TEXT_LIT("You need to pass an int argument to the time_speed command: ")
 		);
 	}
 }
 
 void
 sanguis::client::daytime_settings::reset_day(
-	sge::console::arg_list const &args_,
-	sge::console::object &o
+	sge::console::arg_list const &_args,
+	sge::console::object &_object
 )
 {
 	if(
-		args_.size() == 2
+		_args.size() == 2
 	)
 	{
-		o.emit_error(
-			FCPPT_TEXT("Dangling arguments for reset_day!")
+		_object.emit_error(
+			SGE_FONT_TEXT_LIT("Dangling arguments for reset_day!")
 		);
 
 		return;
@@ -332,16 +344,16 @@ sanguis::client::daytime_settings::reset_day(
 
 void
 sanguis::client::daytime_settings::reset_time(
-	sge::console::arg_list const &args_,
-	sge::console::object &o
+	sge::console::arg_list const &_args,
+	sge::console::object &_object
 )
 {
 	if(
-		args_.size() == 2
+		_args.size() == 2
 	)
 	{
-		o.emit_error(
-			FCPPT_TEXT("Dangling arguments for reset_time!")
+		_object.emit_error(
+			SGE_FONT_TEXT_LIT("Dangling arguments for reset_time!")
 		);
 
 		return;

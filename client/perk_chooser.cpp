@@ -4,6 +4,7 @@
 #include "cursor/object.hpp"
 #include "../media_path.hpp"
 #include "../resolution_type.hpp"
+#include <sge/font/text/lit.hpp>
 #include <sge/gui/widgets/parameters.hpp>
 #include <sge/gui/skins/standard.hpp>
 #include <sge/gui/layouts/vertical.hpp>
@@ -130,7 +131,8 @@ sanguis::client::perk_chooser::perk_chooser(
 	perks_left_(
 		background_,
 		sge::gui::widgets::parameters(),
-		FCPPT_TEXT("")),
+		SGE_FONT_TEXT_LIT("")
+	),
 	buttons_(),
 	connections_(),
 	dirty_(false),
@@ -242,9 +244,10 @@ void
 sanguis::client::perk_chooser::regenerate_label()
 {
 	perks_left_.text(
-		FCPPT_TEXT("Perks left: ")+
+		SGE_FONT_TEXT_LIT("Perks left: ")
+		+
 		fcppt::lexical_cast<
-			fcppt::string
+			sge::font::text::string
 		>(
 			levels_left()
 		)

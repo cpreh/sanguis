@@ -40,7 +40,7 @@ sanguis::server::auras::burn::enter(
 			>(
 				damage_per_pulse_,
 				pulse_diff_,
-				1,
+				1u,
 				damage_values_
 			)
 		)

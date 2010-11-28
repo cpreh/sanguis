@@ -13,13 +13,15 @@
 
 sanguis::server::weapons::unique_ptr
 sanguis::server::weapons::create(
-	weapon_type::type const type
+	weapon_type::type const _type
 )
 {
-	switch(type)
+	switch(
+		_type
+	)
 	{
 	case weapon_type::melee:
-		throw exception(
+		throw sanguis::exception(
 			FCPPT_TEXT("Please create melee weapons directly, not through the weapon factory!")
 		);
 	case weapon_type::pistol:
@@ -28,7 +30,7 @@ sanguis::server::weapons::create(
 				fcppt::make_unique_ptr<
 					pistol
 				>(
-					type,
+					_type,
 					base_cooldown(0.5f),
 					damage(5),
 					cast_point(0.2f),
@@ -43,7 +45,7 @@ sanguis::server::weapons::create(
 				fcppt::make_unique_ptr<
 					pistol
 				>(
-					type,
+					_type,
 					base_cooldown(0.33f),
 					damage(5),
 					cast_point(0.2f),
@@ -58,10 +60,10 @@ sanguis::server::weapons::create(
 				fcppt::make_unique_ptr<
 					shotgun
 				>(
-					type,
+					_type,
 					base_cooldown(1),
 					static_cast<space_unit>(0.2), // spread radius
-					10, // shells
+					10u, // shells
 					damage(1),
 					magazine_size(8),
 					reload_time(3)
@@ -73,7 +75,7 @@ sanguis::server::weapons::create(
 				fcppt::make_unique_ptr<
 					rocket_launcher
 				>(
-					type,
+					_type,
 					base_cooldown(0.8f),
 					damage(9),
 					aoe(120), 
@@ -87,7 +89,7 @@ sanguis::server::weapons::create(
 				fcppt::make_unique_ptr<
 					grenade
 				>(
-					type,
+					_type,
 					base_cooldown(0.7f),
 					damage(20),
 					aoe(180),
@@ -101,7 +103,7 @@ sanguis::server::weapons::create(
 				fcppt::make_unique_ptr<
 					sentry
 				>(
-					type,
+					_type,
 					base_cooldown(5),
 					cast_point(2),
 					reload_time(0),
@@ -123,7 +125,7 @@ sanguis::server::weapons::create(
 		break;
 	}
 
-	throw exception(
+	throw sanguis::exception(
 		FCPPT_TEXT("Cannot create weapon for given weapon type!")
 	);
 }

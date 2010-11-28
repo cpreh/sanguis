@@ -2,6 +2,9 @@
 #include "../messages/add_console_command.hpp"
 #include "../messages/console_print.hpp"
 #include "../messages/create.hpp"
+#include <sge/font/text/lit.hpp>
+#include <sge/font/text/from_fcppt_string.hpp>
+#include <sge/font/text/string.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/utf8/convert.hpp>
 #include <fcppt/homogenous_pair_impl.hpp>
@@ -15,7 +18,7 @@ sanguis::server::console::console(
 )
 :
 	object_(
-		FCPPT_TEXT('/') // TODO: is this right?
+		SGE_FONT_TEXT_LIT('/') // TODO: is this right?
 	),
 	send_(_send),
 	unicast_(_unicast),
@@ -27,19 +30,19 @@ sanguis::server::console::~console()
 
 fcppt::signal::auto_connection
 sanguis::server::console::insert(
-	fcppt::string const &command,
-	sge::console::callback const &callback,
-	fcppt::string const &description
+	fcppt::string const &_command,
+	sge::console::callback const &_callback,
+	fcppt::string const &_description
 )
 {
 	send_(
 		messages::create(
 			messages::add_console_command(
 				fcppt::utf8::convert(
-					command
+					_command
 				),
 				fcppt::utf8::convert(
-					description
+					_description
 				)
 			)
 		)
@@ -48,50 +51,54 @@ sanguis::server::console::insert(
 	// TODO: we have to know when a command doesn't exist anymore!
 	known_commands_.push_back(
 		server::console_command_pair(
-			command,
-			description
+			_command,
+			_description
 		)
 	);
 
 	return
 		object_.insert(
-			command,
-			callback,
-			description
+			sge::font::text::from_fcppt_string(
+				_command
+			),
+			_callback,
+			sge::font::text::from_fcppt_string(
+				_description
+			)
 		);
 }
 
 void
 sanguis::server::console::eval(
-	net::id_type const id_,
-	sge::console::arg_list args_
+	net::id_type const _id,
+	sge::console::arg_list _args
 )
 {
-	args_.push_back(
+	_args.push_back(
 		fcppt::lexical_cast<
-			fcppt::string
+			sge::font::text::string
 		>(
-			id_
+			_id
 		)
 	);
 
 	object_.eval(
-		args_
+		_args
 	);
 }
 
 void
 sanguis::server::console::print_line(
-	net::id_type const id_,
-	fcppt::string const &line_
+	net::id_type const _id,
+	fcppt::string const &_line
 )
 {
 	unicast_(
-		id_,	
+		_id,
 		sanguis::messages::create(
 			sanguis::messages::console_print(
 				fcppt::utf8::convert(
-					line_
+					_line
 				)
 			)
 		)

@@ -30,7 +30,8 @@ struct highscore
 	child_container children;
 
 private:
-	void populate_children();
+	void
+	populate_children();
 };
 }
 }

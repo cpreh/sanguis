@@ -11,14 +11,14 @@ template<
 >
 Dest
 convert(
-	Src const &src
+	Src const &_src
 )
 {
 	Dest dest;
 
 	BOOST_FOREACH(
 		typename Src::const_reference elem,
-		src
+		_src
 	)
 		dest.push_back(
 			fcppt::utf8::convert(
@@ -33,27 +33,26 @@ convert(
 
 sanguis::messages::types::string_vector const
 sanguis::messages::serialization::convert_string_vector(
-	sanguis::string_vector const &src
+	sanguis::string_vector const &_src
 )
 {
 	return
-		convert<
+		::convert<
 			sanguis::messages::types::string_vector		
 		>(
-			src
+			_src
 		);
 }
 
 sanguis::string_vector const
 sanguis::messages::serialization::convert_string_vector(
-	messages::types::string_vector const &src
+	messages::types::string_vector const &_src
 )
 {
 	return
-		convert<
+		::convert<
 			sanguis::string_vector
 		>(
-			src
+			_src
 		);
-
 }

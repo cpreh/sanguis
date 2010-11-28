@@ -13,6 +13,7 @@
 #include "../../cyclic_iterator_impl.hpp"
 #include "../../exception.hpp"
 #include <sge/time/millisecond.hpp>
+#include <sge/font/text/lit.hpp>
 #include <sge/console/object.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
@@ -48,7 +49,7 @@ sanguis::client::control::action_handler::action_handler(
 	owned_weapons_(),
 	cheat_kill_conn_(
 		_console.insert(
-			FCPPT_TEXT("kill"),
+			SGE_FONT_TEXT_LIT("kill"),
 			std::tr1::bind(
 				&action_handler::send_cheat,
 				this,
@@ -56,12 +57,12 @@ sanguis::client::control::action_handler::action_handler(
 				std::tr1::placeholders::_1,
 				std::tr1::placeholders::_2
 			),
-			FCPPT_TEXT("Commit suicide")
+			SGE_FONT_TEXT_LIT("Commit suicide")
 		)
 	),
 	cheat_impulse_conn_(
 		_console.insert(
-			FCPPT_TEXT("impulse"),
+			SGE_FONT_TEXT_LIT("impulse"),
 			std::tr1::bind(
 				&action_handler::send_cheat,
 				this,
@@ -69,12 +70,12 @@ sanguis::client::control::action_handler::action_handler(
 				std::tr1::placeholders::_1,
 				std::tr1::placeholders::_2
 			),
-			FCPPT_TEXT("Get all weapons")
+			SGE_FONT_TEXT_LIT("Get all weapons")
 		)
 	),
 	cheat_exp_conn_(
 		_console.insert(
-			FCPPT_TEXT("exp"),
+			SGE_FONT_TEXT_LIT("exp"),
 			std::tr1::bind(
 				&action_handler::send_cheat,
 				this,
@@ -82,7 +83,7 @@ sanguis::client::control::action_handler::action_handler(
 				std::tr1::placeholders::_1,
 				std::tr1::placeholders::_2
 			),
-			FCPPT_TEXT("Get a lot of exp")
+			SGE_FONT_TEXT_LIT("Get a lot of exp")
 		)
 	)
 {

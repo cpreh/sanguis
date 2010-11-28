@@ -1,10 +1,12 @@
 #include "console.hpp"
-#include "../messages/serialization/convert_string_vector.hpp"
 #include "../messages/console_command.hpp"
 #include "../messages/create.hpp"
 #include "../messages/base.hpp"
+#include "../messages/serialization/convert_string_vector.hpp"
+#include "../from_console_arg_list.hpp"
 #include <sge/console/gfx.hpp>
 #include <sge/console/object.hpp>
+#include <sge/font/text/from_fcppt_string.hpp>
 #include <sge/input/keyboard/device.hpp>
 #include <sge/input/keyboard/key_event.hpp>
 #include <fcppt/tr1/functional.hpp>
@@ -43,30 +45,34 @@ sanguis::client::console::console(
 
 fcppt::signal::auto_connection
 sanguis::client::console::register_callback(
-	sge::input::keyboard::key_callback const &_c
+	sge::input::keyboard::key_callback const &_ccallback
 )
 {
 	return 
 		callbacks_.connect(
-			_c
+			_ccallback
 		);
 }
 
 void
 sanguis::client::console::register_server_command(
-	fcppt::string const &name,
-	fcppt::string const &description
+	fcppt::string const &_name,
+	fcppt::string const &_description
 )
 {
 	server_connections_.connect(
 		gfx_.object().insert(
-			name,
+			sge::font::text::from_fcppt_string(
+				_name
+			),
 			std::tr1::bind(
 				&console::server_callback,
 				this,
 				std::tr1::placeholders::_1
 			),
-			description
+			sge::font::text::from_fcppt_string(
+				_description
+			)
 		)
 	);
 }
@@ -87,33 +93,41 @@ sanguis::client::console::gfx() const
 
 void
 sanguis::client::console::input_callback(
-	sge::input::keyboard::key_event const &_k
+	sge::input::keyboard::key_event const &_event
 )
 {
-	if (_k.key().code() == toggler_ && _k.pressed())
+	if(
+		_event.key().code() == toggler_
+		&& _event.pressed()
+	)
 	{
 		gfx_.active(
 			!gfx_.active()
 		);
+
 		return;
 	}
 
-	if (!gfx_.active())
+	if(
+		!gfx_.active()
+	)
 		callbacks_(
-			_k
+			_event
 		);
 }
 
 void
 sanguis::client::console::server_callback(
-	sge::console::arg_list const &args_
+	sge::console::arg_list const &_args
 )
 {
 	send_(
 		sanguis::messages::create(
 			sanguis::messages::console_command(
-				sanguis::messages::serialization::convert_string_vector(
-					args_
+				sanguis::messages::serialization::convert_string_vector(		
+					sanguis::from_console_arg_list(
+						_args
+					)
 				)
 			)
 		)

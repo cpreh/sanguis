@@ -1,14 +1,19 @@
 #include "highscore.hpp"
 #include "../../highscore/read.hpp"
 #include "../../config/homedir.hpp"
-#include <fcppt/algorithm/join_strings.hpp>
+#include <sge/font/text/lit.hpp>
+#include <sge/font/text/from_fcppt_string.hpp>
 #include <sge/gui/widgets/parameters.hpp>
+#include <sge/gui/widgets/parent_data.hpp>
 #include <sge/gui/widgets/label.hpp>
 #include <sge/gui/layouts/grid.hpp>
 #include <sge/gui/layouts/vertical.hpp>
+#include <fcppt/algorithm/join_strings.hpp>
+#include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/io/ifstream.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/lexical_cast.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <boost/foreach.hpp>
 
@@ -49,14 +54,15 @@ sanguis::client::menu::menus::highscore::highscore(
 			.pos(
 				sge::gui::point(0,1)
 			),
-		FCPPT_TEXT("Back")
+		SGE_FONT_TEXT_LIT("Back")
 	),
 	children()
 {
 	populate_children();
 }
 
-void sanguis::client::menu::menus::highscore::populate_children()
+void
+sanguis::client::menu::menus::highscore::populate_children()
 {
 	fcppt::io::ifstream file(
 		config::homedir()/
@@ -73,25 +79,35 @@ void sanguis::client::menu::menus::highscore::populate_children()
 			sanguis::client::highscore::table()
 	);
 
-	children.push_back(
-		new sge::gui::widgets::label(
-			table,
+	fcppt::container::ptr::push_back_unique_ptr(
+		children,
+		fcppt::make_unique_ptr<
+			sge::gui::widgets::label
+		>(
+			sge::gui::widgets::parent_data(
+				table
+			),
 			sge::gui::widgets::parameters()
 				.pos(
 					sge::gui::point(0,0)
 				),
-			FCPPT_TEXT("Name(s)")
+			SGE_FONT_TEXT_LIT("Name(s)")
 		)
 	);
 
-	children.push_back(
-		new sge::gui::widgets::label(
-			table,
+	fcppt::container::ptr::push_back_unique_ptr(
+		children,
+		fcppt::make_unique_ptr<
+			sge::gui::widgets::label
+		>(
+			sge::gui::widgets::parent_data(
+				table
+			),
 			sge::gui::widgets::parameters()
 				.pos(
 					sge::gui::point(1,0)
 				),
-			FCPPT_TEXT("Score")
+			SGE_FONT_TEXT_LIT("Score")
 		)
 	);
 
@@ -101,28 +117,44 @@ void sanguis::client::menu::menus::highscore::populate_children()
 		read_table
 	)
 	{
-		children.push_back(
-			new sge::gui::widgets::label(
-				table,
+		fcppt::container::ptr::push_back_unique_ptr(
+			children,
+			fcppt::make_unique_ptr<
+				sge::gui::widgets::label
+			>(
+				sge::gui::widgets::parent_data(
+					table
+				),
 				sge::gui::widgets::parameters()
 					.pos(
 						sge::gui::point(0,y_pos)
 					),
-				fcppt::algorithm::join_strings(
-					e.names(),
-					FCPPT_TEXT(", ")
+				sge::font::text::from_fcppt_string(
+					fcppt::algorithm::join_strings(
+						e.names(),
+						FCPPT_TEXT(", ")
+					)
 				)
 			)
 		);
 
-		children.push_back(
-			new sge::gui::widgets::label(
-				table,
+		fcppt::container::ptr::push_back_unique_ptr(
+			children,
+			fcppt::make_unique_ptr<
+				sge::gui::widgets::label
+			>(
+				sge::gui::widgets::parent_data(
+					table
+				),
 				sge::gui::widgets::parameters()
 					.pos(
 						sge::gui::point(1,y_pos)
 					),
-				fcppt::lexical_cast<fcppt::string>(e.score())
+				fcppt::lexical_cast<
+					sge::font::text::string
+				>(
+					e.score()
+				)
 			)
 		);
 

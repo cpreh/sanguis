@@ -18,6 +18,8 @@
 #include <sge/renderer/resource_flags_none.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/systems/instance.hpp>
+#include <sge/font/text/from_fcppt_string.hpp>
+#include <sge/font/text/to_fcppt_string.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/object.hpp>
@@ -274,12 +276,14 @@ sanguis::client::menu::object::connection_error(
 	);
 
 	connect_box_.label_.text(
-		FCPPT_TEXT("Connection to \"")+
-		connection_host_+
-		FCPPT_TEXT("\" on port \"")+
-		connection_port_+
-		FCPPT_TEXT("\" failed: \n")+
-		_message
+		sge::font::text::from_fcppt_string(
+			FCPPT_TEXT("Connection to \"")+
+			connection_host_+
+			FCPPT_TEXT("\" on port \"")+
+			connection_port_+
+			FCPPT_TEXT("\" failed: \n")+
+			_message
+		)
 	);
 
 	mover_.reset(
@@ -302,8 +306,13 @@ void
 sanguis::client::menu::object::connect_from_menu()
 {
 	connect(
-		connect_.host_edit.text(),
-		connect_.port_edit.text());
+		sge::font::text::to_fcppt_string(
+			connect_.host_edit.text()
+		),
+		sge::font::text::to_fcppt_string(
+			connect_.port_edit.text()
+		)
+	);
 }
 
 void
@@ -325,11 +334,13 @@ sanguis::client::menu::object::connect(
 	connection_port_ = _port;
 
 	connect_box_.label_.text(
-		FCPPT_TEXT("Connecting to \"")+
-		_host+
-		FCPPT_TEXT("\" on port \"")+
-		_port+
-		FCPPT_TEXT("\"")
+		sge::font::text::from_fcppt_string(
+			FCPPT_TEXT("Connecting to \"")+
+			_host+
+			FCPPT_TEXT("\" on port \"")+
+			_port+
+			FCPPT_TEXT("\"")
+		)
 	);
 
 	callbacks_.connect_(
