@@ -95,7 +95,7 @@ IF (CMAKE_COMPILER_IS_GNUCXX OR COMPILER_IS_CLANGPP)
 	ADD_DEFINITIONS(
 		"-fvisibility=hidden -ansi -pedantic-errors -Wall"
 		"-Wextra -Wconversion -Wfloat-equal -Wredundant-decls"
-		"-Winit-self -Woverloaded-virtual"
+		"-Winit-self -Woverloaded-virtual -Wshadow"
 		"-Wold-style-cast -Wnon-virtual-dtor -Wctor-dtor-privacy -Wsign-promo"
 		"-Wstrict-aliasing=1 -Wmissing-declarations -Wno-long-long"
 	)
