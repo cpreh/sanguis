@@ -16,23 +16,28 @@
 #include <boost/spirit/home/phoenix/object/new.hpp>
 
 sanguis::server::entities::pickups::monster::monster(
-	server::environment::load_context_ptr const load_context,
-	team::type const team_,
-	friend_type::type const ftype
+	server::environment::load_context_ptr const _load_context,
+	team::type const _team,
+	friend_type::type const _ftype
 )
 :
 	pickup(
 		pickup_type::monster,
-		load_context,
-		team_,
+		_load_context,
+		_team,
 		optional_dim()
 	),
-	ftype(ftype)
-{}
+	ftype_(_ftype)
+{
+}
+
+sanguis::server::entities::pickups::monster::~monster()
+{
+}
 
 void
 sanguis::server::entities::pickups::monster::do_pickup(
-	base &receiver
+	base &_receiver
 )
 {
 	environment()->insert(
@@ -41,7 +46,7 @@ sanguis::server::entities::pickups::monster::do_pickup(
 			//fcppt::make_unique_ptr<
 //				entities::friend_
 //			>(
-				ftype,
+				ftype_,
 				environment()->load_context(),
 				damage::no_armor(),
 				health_type(100),
@@ -50,7 +55,7 @@ sanguis::server::entities::pickups::monster::do_pickup(
 					ai::simple
 				>(
 					boost::phoenix::arg_names::arg1,
-					receiver.link()
+					_receiver.link()
 				),
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<

@@ -2,12 +2,12 @@
 #include <fcppt/math/vector/basic_impl.hpp>
 
 sanguis::server::weapons::events::shoot::shoot(
-	entities::with_weapon &from_,
-	pos_type const &to_
+	entities::with_weapon &_from,
+	pos_type const &_to
 )
 :
-	from_(from_),
-	to_(to_)
+	from_(_from),
+	to_(_to)
 {}
 	
 sanguis::server::entities::with_weapon &

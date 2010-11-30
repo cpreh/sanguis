@@ -5,27 +5,27 @@
 #include <fcppt/math/dim/basic_impl.hpp>
 
 sanguis::server::entities::projectiles::aoe_projectile::aoe_projectile(
-	aoe_projectile_type::type const type_,
-	team::type const team_,
-	entities::movement_speed const movement_speed_,
-	dim_type const &dim_,
-	life_time const life_time_,
-	indeterminate::type const indeterminate_,
-	space_unit const aoe_,
-	space_unit const direction_
+	aoe_projectile_type::type const _type,
+	team::type const _team,
+	entities::movement_speed const _movement_speed,
+	dim_type const &_dim,
+	life_time const _life_time,
+	indeterminate::type const _indeterminate,
+	space_unit const _aoe,
+	space_unit const _direction
 )
 :
 	projectile(
 		projectile_type::aoe,
-		team_,
-		movement_speed_,
-		dim_,
-		life_time_,
-		direction_,
-		indeterminate_
+		_team,
+		_movement_speed,
+		_dim,
+		_life_time,
+		_direction,
+		_indeterminate
 	),
-	type_(type_),
-	aoe_(aoe_)
+	type_(_type),
+	aoe_(_aoe)
 {}
 
 sanguis::server::space_unit

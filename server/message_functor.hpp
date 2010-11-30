@@ -22,12 +22,12 @@ public:
 	typedef R result_type;
 
 	message_functor(
-		T &t,
-		sanguis::net::id_type const id
+		T &_value,
+		sanguis::net::id_type const _id
 	)
 	:
-		t(t),
-		id(id)
+		value_(_value),
+		id_(_id)
 	{}
 
 	template<
@@ -35,18 +35,19 @@ public:
 	>
 	R
 	operator()(
-		U const &m
+		U const &_message
 	) const
 	{
-		return t(
-			id,
-			m
+		return value_(
+			id_,
+			_message
 		);
 	}
 
 private:
-	T &t;
-	sanguis::net::id_type const id;
+	T &value_;
+
+	sanguis::net::id_type const id_;
 };
 
 }

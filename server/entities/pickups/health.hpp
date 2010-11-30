@@ -6,6 +6,7 @@
 #include "../health_type.hpp"
 #include "../../environment/load_context_ptr.hpp"
 #include "../../team.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -20,19 +21,24 @@ class health
 :
 	public pickup
 {
+	FCPPT_NONCOPYABLE(
+		health
+	)
 public:
 	health(
 		server::environment::load_context_ptr,
 		team::type team,
 		entities::health_type amount
 	);
+
+	~health();
 private:
 	void
 	do_pickup(
 		base &receiver
 	);
 
-	health_type const amount;
+	health_type const amount_;
 };
 
 }

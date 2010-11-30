@@ -11,22 +11,22 @@
 #include <fcppt/math/dim/basic_impl.hpp>
 
 sanguis::server::entities::pickups::weapon::weapon(
-	server::environment::load_context_ptr const load_context,
-	team::type const team_,
-	weapon_type::type const weapon_type_
+	server::environment::load_context_ptr const _load_context,
+	team::type const _team,
+	weapon_type::type const _weapon_type
 )
 :
 	pickup(
 		pickup_type::weapon,
-		load_context,
-		team_,
-		load_context->entity_dim(
+		_load_context,
+		_team,
+		_load_context->entity_dim(
 			load::weapon_pickup_name(
-				weapon_type_
+				_weapon_type
 			)
 		)
 	),
-	weapon_type_(weapon_type_)
+	weapon_type_(_weapon_type)
 {}
 
 sanguis::weapon_type::type

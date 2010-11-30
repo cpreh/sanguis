@@ -9,12 +9,12 @@ template<
 	typename Class
 >
 sanguis::messages::serialization::read_element<Class>::read_element(
-	std::istream &is,
-	Class &obj
+	std::istream &_is,
+	Class &_obj
 )
 :
-	is(is),
-	obj(obj)
+	is_(_is),
+	obj_(_obj)
 {}
 
 template<
@@ -28,14 +28,16 @@ sanguis::messages::serialization::read_element<Class>::operator()(
 	Role &
 ) const
 {
-	obj. template set<
+	obj_. template set<
 		typename Role::alias
 	>(
 		load<
 			typename majutsu::access_role<
 				Role
 			>::type
-		>::get(is)
+		>::get(
+			is_
+		)
 	);
 }
 

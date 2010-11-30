@@ -25,15 +25,18 @@ sanguis::messages::serialization::reader::operator()() const
 			>
 		>
 	>(
-		read_element<Msg>(
-			is,
+		serialization::read_element<
+			Msg
+		>(
+			is_,
 			obj
 		)
 	);
 
-	return make_concrete(
-		obj
-	);
+	return
+		messages::make_concrete(
+			obj
+		);
 }
 
 #endif

@@ -10,36 +10,36 @@
 #include <fcppt/text.hpp>
 
 sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
-	server::environment::load_context_ptr const load_context,
-	team::type const team_,
-	damage::unit const damage_,
-	space_unit const direction_
+	server::environment::load_context_ptr const _load_context,
+	team::type const _team,
+	damage::unit const _damage,
+	space_unit const _direction
 )
 :
 	projectile(
 		projectile_type::simple_bullet,
-		team_,
+		_team,
 		entities::movement_speed(
 			500
 		),
-		load_context->entity_dim(
+		_load_context->entity_dim(
 			FCPPT_TEXT("bullet")
 		),
 		life_time(
 			10
 		),
-		direction_,
+		_direction,
 		indeterminate::no
 	),
-	damage_(damage_)
+	damage_(_damage)
 {}
 
 void
 sanguis::server::entities::projectiles::simple_bullet::do_damage(
-	with_health &e
+	with_health &_entity
 )
 {
-	e.damage(
+	_entity.damage(
 		damage_,
 		damage::list(
 			damage::piercing = damage::full

@@ -1,10 +1,10 @@
 #include "add.hpp"
 
 sanguis::client::messages::add::add(
-	entity_type::type const type_
+	entity_type::type const _type
 )
 :
-	type_(type_)
+	type_(_type)
 {}
 
 sanguis::client::entity_type::type

@@ -8,24 +8,24 @@
 #include <fcppt/make_auto_ptr.hpp>
 
 sanguis::client::draw2d::entities::aoe_bullet::aoe_bullet(
-	model::parameters const &param,
-	sprite::particle::system &particle_system_,
-	insert_callback const &insert,
-	fcppt::string const &name,
-	funit const aoe
+	model::parameters const &_param,
+	sprite::particle::system &_particle_system,
+	insert_callback const &_insert,
+	fcppt::string const &_name,
+	funit const _aoe
 )
 :
 	model::object(
-		param,
-		name,
+		_param,
+		_name,
 		z_ordering::bullet,
 		model::needs_healthbar::no,
 		model::decay_option::immediate
 	),
-	model_collection_(param.collection()),
-	particle_system_(particle_system_),
-	insert(insert),
-	aoe(aoe)
+	model_collection_(_param.collection()),
+	particle_system_(_particle_system),
+	insert_(_insert),
+	aoe_(_aoe)
 {}
 		
 void
@@ -40,11 +40,11 @@ sanguis::client::draw2d::entities::aoe_bullet::on_decay()
 			),
 			model_collection_,
 			pos(),
-			aoe
+			aoe_
 		)
 	);
 	
-	insert(
+	insert_(
 		explo,
 		client::next_id()
 	);	

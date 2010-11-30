@@ -17,27 +17,31 @@ sanguis::server::entities::pickups::pickup::ptype() const
 	return ptype_;
 }
 
+sanguis::server::entities::pickups::pickup::~pickup()
+{
+}
+
 sanguis::server::entities::pickups::pickup::pickup(
-	pickup_type::type const ptype_,
-	server::environment::load_context_ptr const load_context,
-	team::type const team_,
-	optional_dim const &dim_
+	pickup_type::type const _ptype,
+	server::environment::load_context_ptr const _load_context,
+	team::type const _team,
+	optional_dim const &_dim
 )
 :
 	base(),
 	with_dim(
-		dim_
+		_dim
 		?
-			*dim_
+			*_dim
 		:
-			load_context->entity_dim(
+			_load_context->entity_dim(
 				load::pickup_name(
-					ptype_
+					_ptype
 				)
 			)
 	),
-	team_(team_),
-	ptype_(ptype_),
+	team_(_team),
+	ptype_(_ptype),
 	diff_clock_(),
 	life_timer_(
 		sge::time::second(

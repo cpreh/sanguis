@@ -3,24 +3,24 @@
 #include <algorithm>
 
 sanguis::server::entities::spawns::limited::limited(
-	enemy_type::type const enemy_type_,
-	count_per_wave const count_per_wave_,
-	interval const interval_,
-	limit const limit_
+	enemy_type::type const _enemy_type,
+	count_per_wave const _count_per_wave,
+	interval const _interval,
+	limit const _limit
 )
 :
 	spawn(
-		enemy_type_
+		_enemy_type
 	),
 	diff_clock_(),
-	count_per_wave_(count_per_wave_),
+	count_per_wave_(_count_per_wave),
 	delay_(
-		interval_,
+		_interval,
 		sge::time::activation_state::active,
 		diff_clock_.callback()
 	),
 	spawned_(0),
-	limit_(limit_)
+	limit_(_limit)
 {}
 
 void
@@ -37,11 +37,11 @@ sanguis::server::entities::spawns::limited::unregister(
 
 sanguis::server::entities::spawns::size_type
 sanguis::server::entities::spawns::limited::may_spawn(
-	time_type const time_
+	time_type const _time
 )
 {
 	diff_clock_.update(
-		time_
+		_time
 	);
 
 	return
@@ -65,8 +65,8 @@ sanguis::server::entities::spawns::limited::may_spawn(
 
 void
 sanguis::server::entities::spawns::limited::add_count(
-	size_type const add_
+	size_type const _add
 )
 {
-	spawned_ += add_;	
+	spawned_ += _add;	
 }

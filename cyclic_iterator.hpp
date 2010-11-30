@@ -79,9 +79,10 @@ private:
 	difference_type distance_to(
 		cyclic_iterator<OtherIterator> const &r) const;
 private:
-	container_iterator_type it,
-	                        begin_,
-	                        end_;
+	container_iterator_type
+		it_,
+		begin_,
+		end_;
 };
 
 }

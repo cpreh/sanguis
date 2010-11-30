@@ -1,10 +1,10 @@
 #include "base.hpp"
 	
 sanguis::server::entities::property::base::base(
-	value const base_
+	value const _base
 )
 :
-	base_(base_)
+	base_(_base)
 {}
 
 sanguis::server::entities::property::base::constant_type const
@@ -21,20 +21,20 @@ sanguis::server::entities::property::base::linear()
 
 void
 sanguis::server::entities::property::base::constant(
-	constant_type const &nconstant_
+	constant_type const &_constant
 )
 {
-	constant_ = nconstant_;
+	constant_ = _constant;
 	
 	recalc_max();
 }
 
 void
 sanguis::server::entities::property::base::linear(
-	linear_type const &nlinear_
+	linear_type const &_linear
 )
 {
-	linear_ = nlinear_;
+	linear_ = _linear;
 
 	recalc_max();
 }

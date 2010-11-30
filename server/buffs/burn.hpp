@@ -8,6 +8,7 @@
 #include "../../time_type.hpp"
 #include "buff.hpp"
 #include <sge/time/timer.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -20,6 +21,9 @@ class burn
 :
 	public buff
 {
+	FCPPT_NONCOPYABLE(
+		burn
+	)
 public:
 	burn(
 		damage::unit,
@@ -27,6 +31,8 @@ public:
 		unsigned max_pulses,
 		damage::array const &
 	);
+
+	~burn();
 private:
 	void
 	update(
@@ -35,11 +41,16 @@ private:
 	);
 
 	damage::unit const damage_;
+
 	diff_clock clock_;
-	sge::time::timer pulse_timer;
-	unsigned pulses;
-	unsigned const max_pulses;
-	damage::array const damage_values;
+
+	sge::time::timer pulse_timer_;
+
+	unsigned pulses_;
+
+	unsigned const max_pulses_;
+
+	damage::array const damage_values_;
 };
 
 }

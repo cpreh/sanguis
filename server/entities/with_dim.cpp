@@ -14,10 +14,10 @@ sanguis::server::entities::with_dim::pos() const
 }
 
 sanguis::server::entities::with_dim::with_dim(
-	dim_type const &dim_
+	dim_type const &_dim
 )
 :
-	dim_(dim_)
+	dim_(_dim)
 {}
 
 sanguis::server::entities::with_dim::~with_dim()

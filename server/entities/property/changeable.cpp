@@ -6,48 +6,52 @@
 #include <algorithm>
 
 sanguis::server::entities::property::changeable::changeable(
-	initial const &initial_
+	initial const &_initial
 )
 :
 	base(
-		initial_.base()
+		_initial.base()
 	),
 	current_(
-		initial_.current()
+		_initial.current()
 	),
 	max_(
-		initial_.base()
+		_initial.base()
 	)
 {}
 
 sanguis::server::entities::property::changeable::changeable(
-	value_type const base_,
-	value_type const current_
+	value_type const _base,
+	value_type const _current
 )
 :
 	base(
-		base_
+		_base
 	),
 	current_(
-		current_
+		_current
 	),
 	max_(
-		base_
+		_base
 	)
 {
 	check_current();
 }
 
+sanguis::server::entities::property::changeable::~changeable()
+{
+}
+
 void
 sanguis::server::entities::property::changeable::current(
-	value_type const ncurrent_
+	value_type const _current
 )
 {
 	value_type const old(
 		current()
 	);
 
-	current_ = ncurrent_;
+	current_ = _current;
 
 	if(
 		!fcppt::math::compare(
@@ -76,32 +80,32 @@ sanguis::server::entities::property::changeable::max() const
 
 fcppt::signal::auto_connection
 sanguis::server::entities::property::changeable::register_change_callback(
-	change_callback const &callback_
+	change_callback const &_callback
 )
 {
 	return
 		change_signal_.connect(
-			callback_
+			_callback
 		);
 }
 
 fcppt::signal::auto_connection
 sanguis::server::entities::property::changeable::register_max_change_callback(
-	change_callback const &callback_
+	change_callback const &_callback
 )
 {
 	return
 		max_change_signal_.connect(
-			callback_
+			_callback
 		);
 }
 
 void
 sanguis::server::entities::property::changeable::on_recalc_max(
-	value_type const nmax_
+	value_type const _max
 )
 {
-	max_ = nmax_;
+	max_ = _max;
 
 	max_change_signal_(
 		max()

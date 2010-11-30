@@ -25,7 +25,7 @@ public:
 	value_type
 	get() const;
 private:
-	value_type value;
+	value_type value_;
 };
 
 }

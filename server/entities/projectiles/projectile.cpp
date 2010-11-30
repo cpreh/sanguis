@@ -19,37 +19,34 @@ sanguis::server::entities::projectiles::projectile::ptype() const
 }
 
 sanguis::server::entities::projectiles::projectile::projectile(
-	projectile_type::type const ptype_,
-	team::type const team_,
-	entities::movement_speed const movement_speed_,
-	dim_type const &dim_,
-	life_time const life_time_,
-	space_unit const direction_,
-	indeterminate::type const indeterminate_
+	projectile_type::type const _ptype,
+	team::type const _team,
+	entities::movement_speed const _movement_speed,
+	dim_type const &_dim,
+	life_time const _life_time,
+	space_unit const _direction,
+	indeterminate::type const _indeterminate
 )
 :
 	base(),
 	movable(
 		property::initial_max(
-			movement_speed_
+			_movement_speed
 		),
-		direction_
+		_direction
 	),
 	with_dim(
-		dim_
+		_dim
 	),
-	team_(team_),
+	team_(_team),
 	server_only_(
-		indeterminate_ == indeterminate::yes
+		_indeterminate == indeterminate::yes
 	),
-	type_(
-		entity_type::projectile
-	),
-	ptype_(ptype_),
+	ptype_(_ptype),
 	diff_clock_(),
 	life_timer_(
 		sge::time::second_f(
-			life_time_
+			_life_time
 		),
 		sge::time::activation_state::active,
 		diff_clock_.callback()
@@ -58,11 +55,11 @@ sanguis::server::entities::projectiles::projectile::projectile(
 
 void
 sanguis::server::entities::projectiles::projectile::on_update(
-	time_type const time
+	time_type const _time
 )
 {
 	diff_clock_.update(
-		time
+		_time
 	);
 }
 
@@ -99,7 +96,7 @@ sanguis::server::entities::projectiles::projectile::invulnerable() const
 sanguis::entity_type::type
 sanguis::server::entities::projectiles::projectile::type() const
 {
-	return type_;
+	return entity_type::projectile;
 }
 
 boost::logic::tribool const

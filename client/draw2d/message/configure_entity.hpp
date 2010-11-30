@@ -70,14 +70,14 @@ public:
 	typedef void result_type;
 
 	configure_entity(
-		dispatcher &dispatcher_,
-		entity_id const id_,
-		Message const &message_
+		dispatcher &_dispatcher,
+		entity_id const _id,
+		Message const &_message
 	)
 	:
-		dispatcher_(dispatcher_),
-		id_(id_),
-		message_(message_)
+		dispatcher_(_dispatcher),
+		id_(_id),
+		message_(_message)
 	{}
 
 	template<

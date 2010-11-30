@@ -1,14 +1,14 @@
 #include "parameters.hpp"
 
 sanguis::client::draw2d::entities::model::parameters::parameters(
-	sprite::colored::system &colored_system_,
-	sprite::normal::system &normal_system_,
-	load::model::collection const &collection_
+	sprite::colored::system &_colored_system,
+	sprite::normal::system &_normal_system,
+	load::model::collection const &_collection
 )
 :
-	colored_system_(colored_system_),
-	normal_system_(normal_system_),
-	collection_(collection_)
+	colored_system_(_colored_system),
+	normal_system_(_normal_system),
+	collection_(_collection)
 {}
 
 sanguis::client::draw2d::sprite::colored::system &

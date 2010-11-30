@@ -17,26 +17,30 @@
 
 sge::audio::file_ptr const
 sanguis::load::resource::sounds::load(
-	sound_identifier const &name) const
+	sound_identifier const &_name
+) const
 {
-	return map_get_or_create(
-		sounds_,
-		name, 
-		std::tr1::bind(
-			&sounds::do_load,
-			this,
-			std::tr1::placeholders::_1
-		)
-	);
+	return
+		map_get_or_create(
+			sounds_,
+			_name, 
+			std::tr1::bind(
+				&sounds::do_load,
+				this,
+				std::tr1::placeholders::_1
+			)
+		);
 }
 
 sge::audio::file_ptr const
 sanguis::load::resource::sounds::load_uncached(
-	fcppt::filesystem::path const &path) const
+	fcppt::filesystem::path const &_path
+) const
 {
-	return ml.load(
-		path
-	);
+	return
+		ml_.load(
+			_path
+		);
 }
 
 sanguis::load::resource::sounds::~sounds()
@@ -44,45 +48,54 @@ sanguis::load::resource::sounds::~sounds()
 
 sge::audio::file_ptr const
 sanguis::load::resource::sounds::do_load(
-	sound_identifier const &name
+	sound_identifier const &_name
 ) const
 {
 	fcppt::filesystem::path const sound_path(
-		media_path() / FCPPT_TEXT("sound") / name
+		media_path() / FCPPT_TEXT("sound") / _name
 	);
 
-	return ml.load(
-		sound_path
-	);
+	return
+		ml_.load(
+			sound_path
+		);
 }
 
 // FIXME: Put in a separate function
 sge::audio::sound::base_ptr const
 sanguis::load::resource::sounds::make(
-	sge::audio::file_ptr const file,
-	sound_type::type const type) const
+	sge::audio::file_ptr const _file,
+	sound_type::type const _type
+) const
 {
 	sge::audio::sound::base_ptr sound;
 
 	try
 	{
-		switch(type) 
+		switch(
+			_type
+		) 
 		{
 		case sanguis::load::sound_type::stream:
 			sound = 
-				player->create_nonpositional_stream(
-					file);
+				player_->create_nonpositional_stream(
+					_file
+				);
 		break;
 		case sanguis::load::sound_type::nonstream:
 			{
-			sge::audio::buffer_ptr const buf = 
+			sge::audio::buffer_ptr const buf(
 				map_get_or_create(
 					buffers_,
-					file,
+					_file,
 					std::tr1::bind(
 						&sge::audio::player::create_buffer,
-						player.get(),
-						std::tr1::placeholders::_1));
+						player_.get(),
+						std::tr1::placeholders::_1
+					)
+				)
+			);
+
 			sound = 
 				buf->create_nonpositional();
 			}
@@ -106,7 +119,7 @@ sanguis::load::resource::sounds::make(
 	}
 
 	if(sound)
-		pool.add(
+		pool_.add(
 			sound,
 			sge::audio::stop_mode::continue_playing
 		);
@@ -116,35 +129,44 @@ sanguis::load::resource::sounds::make(
 
 sge::audio::sound::positional_ptr const
 sanguis::load::resource::sounds::make_positional(
-	sge::audio::file_ptr const file,
-	sge::audio::sound::positional_parameters const &params,
-	sound_type::type const type) const
+	sge::audio::file_ptr const _file,
+	sge::audio::sound::positional_parameters const &_params,
+	sound_type::type const _type
+) const
 {
 	sge::audio::sound::positional_ptr sound;
 
 	try
 	{
-		switch(type) 
+		switch(
+			_type
+		)
 		{
 		case sanguis::load::sound_type::stream:
 			sound = 
-				player->create_positional_stream(
-					file,
-					params);
+				player_->create_positional_stream(
+					_file,
+					_params
+				);
 		break;
 		case sanguis::load::sound_type::nonstream:
 		{
-			sge::audio::buffer_ptr const buf = 
+			sge::audio::buffer_ptr const buf(
 				map_get_or_create(
 					buffers_,
-					file,
+					_file,
 					std::tr1::bind(
 						&sge::audio::player::create_buffer,
-						player.get(),
-						std::tr1::placeholders::_1));
+						player_.get(),
+						std::tr1::placeholders::_1
+					)
+				)
+			);
+
 			sound = 
 				buf->create_positional(
-					params);
+					_params
+				);
 		}
 		break;
 		default:
@@ -166,7 +188,7 @@ sanguis::load::resource::sounds::make_positional(
 	}
 
 	if(sound)
-		pool.add(
+		pool_.add(
 			sound,
 			sge::audio::stop_mode::continue_playing
 		);
@@ -175,12 +197,12 @@ sanguis::load::resource::sounds::make_positional(
 }
 
 sanguis::load::resource::sounds::sounds(
-	sge::audio::multi_loader &ml,
-	sge::audio::player_ptr const player,
-	sge::audio::pool &pool
+	sge::audio::multi_loader &_ml,
+	sge::audio::player_ptr const _player,
+	sge::audio::pool &_pool
 )
 :
-	ml(ml),
-	player(player),
-	pool(pool)
+	ml_(_ml),
+	player_(_player),
+	pool_(_pool)
 {}

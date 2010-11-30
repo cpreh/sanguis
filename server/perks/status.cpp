@@ -15,14 +15,14 @@ sanguis::server::perks::status::status()
 {}
 
 sanguis::server::perks::status::status(
-	perk_type::type const type_,
-	level_type const required_player_level_,
-	level_type const required_parent_level_
+	perk_type::type const _type,
+	level_type const _required_player_level,
+	level_type const _required_parent_level
 )
 :
-	type_(type_),
-	required_player_level_(required_player_level_),
-	required_parent_level_(required_parent_level_),
+	type_(_type),
+	required_player_level_(_required_player_level),
+	required_parent_level_(_required_parent_level),
 	level_(0)
 {}
 	

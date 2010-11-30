@@ -11,59 +11,60 @@
 #include <fcppt/text.hpp>
 
 sanguis::client::draw2d::particle::generator::generator(
-	generation_callback const generate_object,
-	point const &pos,
-	time_type const life_time,
-	time_type const frequency,
-	unsigned const spawn_initial,
-	align_type::type const alignment,
-	depth_type const depth,
-	dispersion_range const &dispersion_value,
-	velocity_range const &velocity,
-	rotation_velocity_range const &rot_velocity,
-	movement_type::type const mt
+	generation_callback const _generate_object,
+	point const &_pos,
+	time_type const _life_time,
+	time_type const _frequency,
+	unsigned const _spawn_initial,
+	align_type::type const _alignment,
+	depth_type const _depth,
+	dispersion_range const &_dispersion_value,
+	velocity_range const &_velocity,
+	rotation_velocity_range const &_rot_velocity,
+	movement_type::type const _movement
 )
 :
 	container(
-		pos,
+		_pos,
 		point::null(),
-		depth,
+		_depth,
 		rotation_type(0),
 		rotation_type(0)
 	),
-	generate_object(generate_object),
-	frequency_timer(sge::time::second_f(frequency)),
-	life_timer(sge::time::second_f(life_time)),
-	alignment(alignment),
-	dispersion_angle(
+	clock_(),
+	generate_object_(_generate_object),
+	frequency_timer_(sge::time::second_f(_frequency)),
+	life_timer_(sge::time::second_f(_life_time)),
+	alignment_(_alignment),
+	dispersion_angle_(
 		fcppt::random::make_inclusive_range(
 			static_cast<rotation_type>(0),
 			fcppt::math::twopi<rotation_type>())),
-	dispersion_value(dispersion_value),
-	velocity_angle(
+	dispersion_value_(_dispersion_value),
+	velocity_angle_(
 		fcppt::random::make_inclusive_range(
 			static_cast<rotation_type>(0),
 			fcppt::math::twopi<rotation_type>())),
-	velocity_value(velocity),
-	rot_angle(
+	velocity_value_(_velocity),
+	rot_angle_(
 		fcppt::random::make_inclusive_range(
 			static_cast<rotation_type>(0),
 			fcppt::math::twopi<rotation_type>())),
-	rot_direction(
+	rot_direction_(
 		fcppt::random::make_inclusive_range(
 			static_cast<rotation_type>(0),
 			static_cast<rotation_type>(1))),
-	rot_velocity(rot_velocity),
-	movement(mt)
+	rot_velocity_(_rot_velocity),
+	movement_(_movement)
 {
-	for (unsigned i = 0; i < spawn_initial; ++i)
+	for (unsigned i = 0; i < _spawn_initial; ++i)
 		generate();
 }
 
 void sanguis::client::draw2d::particle::generator::generate()
 {
-	rotation_type const disp_rot = dispersion_angle();
-	point::value_type const disp_value = dispersion_value();
+	rotation_type const disp_rot = dispersion_angle_();
+	point::value_type const disp_value = dispersion_value_();
 
 	point const object_pos(
 		std::cos(disp_rot)*disp_value,
@@ -74,38 +75,38 @@ void sanguis::client::draw2d::particle::generator::generate()
 	point const refpoint = 
 		is_null(diff) 
 			? point(
-				static_cast<point::value_type>(rot_angle()),
-				static_cast<point::value_type>(rot_angle()))
+				static_cast<point::value_type>(rot_angle_()),
+				static_cast<point::value_type>(rot_angle_()))
 			: diff;
 			
 	point const velocity(
 		particle::velocity_from_movement(
-			movement,
+			movement_,
 			refpoint,
-			velocity_angle,
-			velocity_value
+			velocity_angle_,
+			velocity_value_
 		)
 	);
 	
 	rotation_type const rot(
 		particle::rotation_from_alignment(
-			alignment,
+			alignment_,
 			refpoint,
-			rot_angle
+			rot_angle_
 		)
 	);
 
-	base_ptr object = generate_object();
+	base_ptr object = generate_object_();
 
 	object->pos(object_pos);
 	object->vel(velocity);
 	object->rot(rot);
 	/*
 	object->rot_vel(
-		(rot_direction() > sge::su(0.5) 
+		(rot_direction_() > sge::su(0.5) 
 			? sge::su(-1) 
 			: sge::su(1)) * 
-				rot_velocity());
+				rot_velocity_());
 	*/
 	object->rot_vel(static_cast<rotation_type>(0));
 	
@@ -120,13 +121,13 @@ sanguis::client::draw2d::particle::generator::update(
 	depth_type const d
 )
 {
-	clock.update(delta);
+	clock_.update(delta);
 
 	bool const delete_now = container::update(delta,p,r,d);
 
-	if (!life_timer.expired())
+	if (!life_timer_.expired())
 	{
-		if (frequency_timer.update_b())
+		if (frequency_timer_.update_b())
 			generate();
 		
 		return false;

@@ -38,9 +38,9 @@ private:
 
 	sprite::particle::system &particle_system_;
 
-	insert_callback const insert;
+	insert_callback const insert_;
 
-	funit const aoe;
+	funit const aoe_;
 
 };
 

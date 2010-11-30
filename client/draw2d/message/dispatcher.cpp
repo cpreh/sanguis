@@ -35,10 +35,10 @@
 #include <typeinfo>
 
 sanguis::client::draw2d::message::dispatcher::dispatcher(
-	environment &env_
+	environment &_env
 )
 :
-	env_(env_)
+	env_(_env)
 {}
 
 sanguis::client::draw2d::message::dispatcher::~dispatcher()

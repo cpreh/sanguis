@@ -32,7 +32,7 @@
 #include <fcppt/optional_impl.hpp>
 
 sanguis::client::machine::machine(
-	config::settings::object &settings_,
+	config::settings::object &_settings,
 	server_callback const &_server_callback,
 	load::context const &_resources,
 	sge::audio::pool &_sound_pool,
@@ -47,7 +47,7 @@ sanguis::client::machine::machine(
 	awl::mainloop::io_service_ptr const _io_service
 )
 :
-	settings_(settings_),
+	settings_(_settings),
 	resources_(_resources),
 	keyboard_(_keyboard),
 	mouse_(_mouse),

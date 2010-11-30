@@ -3,40 +3,51 @@
 #include <sge/time/second_f.hpp>
 
 sanguis::server::buffs::burn::burn(
-	damage::unit const damage_,
-	time_type const pulse_time,
-	unsigned const max_pulses,
-	damage::array const &damage_values
+	damage::unit const _damage,
+	time_type const _pulse_time,
+	unsigned const _max_pulses,
+	damage::array const &_damage_values
 )
 :
 	buff(),
-	damage_(damage_),
+	damage_(_damage),
 	clock_(),
-	pulse_timer(
+	pulse_timer_(
 		sge::time::second_f(
-			pulse_time
+			_pulse_time
 		),
 		sge::time::activation_state::active,
 		clock_.callback(),
 		sge::time::expiration_state::expired
 	),
-	pulses(0),
-	max_pulses(max_pulses),
-	damage_values(damage_values)
-{}
+	pulses_(0),
+	max_pulses_(_max_pulses),
+	damage_values_(_damage_values)
+{
+}
+
+sanguis::server::buffs::burn::~burn()
+{
+}
 
 void
 sanguis::server::buffs::burn::update(
-	entities::base &ref,
-	time_type const diff
+	entities::base &_ref,
+	time_type const _diff
 )
 {
-	clock_.update(diff);
+	clock_.update(
+		_diff
+	);
 
-	if(!pulse_timer.update_b())
+	if(
+		!pulse_timer_.update_b()
+	)
 		return;
 	
-	if(pulses++ == max_pulses)
+	if(
+		pulses_++ == max_pulses_
+	)
 	{
 		expire();
 		return;
@@ -45,9 +56,9 @@ sanguis::server::buffs::burn::update(
 	dynamic_cast<
 		entities::with_health &
 	>(
-		ref
+		_ref
 	).damage(
 		damage_,
-		damage_values
+		damage_values_
 	);
 }

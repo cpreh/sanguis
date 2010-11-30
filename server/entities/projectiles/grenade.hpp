@@ -55,8 +55,11 @@ private:
 	on_die();
 	
 	diff_clock diff_clock_;
-	sge::time::timer slowdown_time;
+
+	sge::time::timer slowdown_time_;
+
 	damage::unit const damage_;
+
 	pos_type const dest_;
 };
 

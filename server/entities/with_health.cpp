@@ -9,20 +9,20 @@
 
 void
 sanguis::server::entities::with_health::damage(
-	damage::unit const damage_,
-	damage::array const &amounts_
+	damage::unit const _damage,
+	damage::array const &_amounts
 )
 {
         for(
 		damage::array::size_type i = 0;
-		i < amounts_.size();
+		i < _amounts.size();
 		++i
 	)
 		property::subtract(
 			health_,
 			property::from_float(
-				damage_
-				* amounts_[i] * (1 - armor_[i])
+				_damage
+				* _amounts[i] * (1 - armor_[i])
 			)
 		);
 }
@@ -60,16 +60,16 @@ sanguis::server::entities::with_health::max_health() const
 }
 
 sanguis::server::entities::with_health::with_health(
-	entities::health_type const max_health_,
-	damage::armor const &armor_
+	entities::health_type const _max_health,
+	damage::armor const &_armor
 )
 :
 	armor_(
-		armor_
+		_armor
 	),
 	health_(
 		property::initial_max(
-			max_health_
+			_max_health
 		)
 	),
 	regeneration_(
@@ -88,13 +88,13 @@ sanguis::server::entities::with_health::with_health(
 
 void
 sanguis::server::entities::with_health::on_update(
-	time_type const time_
+	time_type const _time
 )
 {
 	entities::property::add(
 		health_,
 		property::from_float(
-			time_
+			_time
 		)
 		* regeneration().current()
 	);
@@ -114,7 +114,7 @@ sanguis::server::entities::with_health::invulnerable() const
 
 void
 sanguis::server::entities::with_health::max_health_change(
-	property::value const value_
+	property::value const _value
 )
 {
 	environment()->max_health_changed(
@@ -122,7 +122,7 @@ sanguis::server::entities::with_health::max_health_change(
 		property::to_float<
 			server::health_type
 		>(
-			value_
+			_value
 		)
 	);
 }

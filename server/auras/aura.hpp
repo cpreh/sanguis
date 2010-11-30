@@ -76,8 +76,11 @@ private:
 	) = 0;
 
 	space_unit const radius_;
+
 	team::type const team_;
+
 	influence::type const influence_;
+
 	entity_id owner_;
 };
 

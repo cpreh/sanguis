@@ -24,7 +24,7 @@ sanguis::server::perks::perk::can_raise_level() const
 
 void
 sanguis::server::perks::perk::raise_level(
-	entities::base &owner_
+	entities::base &_owner
 )
 {
 	if(
@@ -35,7 +35,7 @@ sanguis::server::perks::perk::raise_level(
 		);
 	
 	change(
-		owner_,
+		_owner,
 		1
 	);
 
@@ -52,10 +52,10 @@ sanguis::server::perks::perk::~perk()
 {}
 
 sanguis::server::perks::perk::perk(
-	perk_type::type const type_
+	perk_type::type const _type
 )
 :
-	type_(type_),
+	type_(_type),
 	level_(0)
 {}
 

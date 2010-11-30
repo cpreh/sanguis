@@ -1,12 +1,12 @@
 #include "initial.hpp"
 
 sanguis::server::entities::property::initial::initial(
-	value_type const base_,
-	value_type const current_
+	value_type const _base,
+	value_type const _current
 )
 :
-	base_(base_),
-	current_(current_)
+	base_(_base),
+	current_(_current)
 {}
 
 sanguis::server::entities::property::initial::value_type

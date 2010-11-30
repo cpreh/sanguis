@@ -23,7 +23,8 @@ namespace load
 namespace resource
 {
 
-class sounds {
+class sounds
+{
 	FCPPT_NONCOPYABLE(sounds)
 public:
 	sge::audio::file_ptr const
@@ -77,10 +78,14 @@ private:
 	>
 	buffer_map;
 
-	sge::audio::multi_loader &ml;
-	sge::audio::player_ptr const player;
-	sge::audio::pool &pool;
+	sge::audio::multi_loader &ml_;
+
+	sge::audio::player_ptr const player_;
+
+	sge::audio::pool &pool_;
+
 	mutable sound_map sounds_;
+
 	mutable buffer_map buffers_;
 };
 

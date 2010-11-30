@@ -21,8 +21,8 @@ class read_element
 	)
 public:
 	read_element(
-		std::istream &is,
-		Class &obj
+		std::istream &,
+		Class &
 	);
 
 	template<
@@ -33,8 +33,9 @@ public:
 		Role &
 	) const;
 private:
-	istream &is;
-	Class &obj;
+	istream &is_;
+
+	Class &obj_;
 };
 
 }

@@ -91,8 +91,6 @@ private:
 
 	bool const server_only_;
 
-	entity_type::type const type_;
-
 	projectile_type::type const ptype_;
 
 	diff_clock diff_clock_;

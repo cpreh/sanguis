@@ -29,9 +29,11 @@ public:
 	);
 
 	changeable(
-		value_type base_,
-		value_type current_
+		value_type base,
+		value_type current
 	);
+
+	~changeable();
 
 	void
 	current(

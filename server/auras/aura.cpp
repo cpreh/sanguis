@@ -11,16 +11,16 @@ sanguis::server::auras::aura::~aura()
 
 void
 sanguis::server::auras::aura::owner(
-	entity_id const nowner
+	entity_id const _owner
 )
 {
-	owner_ = nowner;
+	owner_ = _owner;
 }
 
 sge::collision::shapes::container const
 sanguis::server::auras::aura::recreate_shapes(
-	sge::collision::world_ptr const world_,
-	collision::global_groups const &global_groups_
+	sge::collision::world_ptr const _world,
+	collision::global_groups const &_global_groups
 )
 {
 	return 
@@ -29,26 +29,26 @@ sanguis::server::auras::aura::recreate_shapes(
 				sge::collision::shapes::container
 			>(
 				collision::create_circle(
-					world_,
+					_world,
 					*this,
 					radius_
 				)
 			),
 			collision_groups(),
-			global_groups_
+			_global_groups
 		);
 }
 
 sanguis::server::auras::aura::aura(
-	space_unit const radius_,
-	team::type const team_,
-	influence::type const influence_
+	space_unit const _radius,
+	team::type const _team,
+	influence::type const _influence
 )
 :
 	collision::base(),
-	radius_(radius_),
-	team_(team_),
-	influence_(influence_),
+	radius_(_radius),
+	team_(_team),
+	influence_(_influence),
 	owner_(
 		static_cast<entity_id>(-1)
 	) // will also be set later
@@ -72,36 +72,46 @@ sanguis::server::auras::aura::collision_groups() const
 
 boost::logic::tribool const
 sanguis::server::auras::aura::can_collide_with(
-	collision::base const &o
+	collision::base const &_object
 ) const
 {
-	entities::base const *const entity_(
+	entities::base const *const entity(
 		dynamic_cast<
 			entities::base const *
-		>(&o)
+		>(
+			&_object
+		)
 	);
 
 	return
-		entity_
-		&& !entity_->server_only();
+		entity
+		&& !entity->server_only();
 }
 
 void
 sanguis::server::auras::aura::collision_begin(
-	collision::base &b
+	collision::base &_base
 )
 {
 	enter(
-		dynamic_cast<entities::base &>(b)
+		dynamic_cast<
+			entities::base &
+		>(
+			_base
+		)
 	);
 }
 
 void
 sanguis::server::auras::aura::collision_end(
-	collision::base &b
+	collision::base &_base
 )
 {
 	leave(
-		dynamic_cast<entities::base &>(b)
+		dynamic_cast<
+			entities::base &
+		>(
+			_base
+		)
 	);
 }

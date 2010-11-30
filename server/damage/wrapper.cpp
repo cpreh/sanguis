@@ -2,19 +2,20 @@
 #include "meta.hpp"
 
 sanguis::server::damage::wrapper::wrapper(
-	damage_type::type const e
+	damage_type::type const _type
 )
 :
-	e(e)
+	type_(_type)
 {}
 
 sanguis::server::damage::meta const
 sanguis::server::damage::wrapper::operator=(
-	unit const c
+	unit const _unit
 ) const
 {
-	return meta(
-		e,
-		c
-	);
+	return
+		meta(
+			type_,
+			_unit
+		);
 }

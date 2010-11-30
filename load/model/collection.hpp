@@ -33,14 +33,14 @@ private:
 
 	friend class context;
 
-	resource::context const &ctx;
+	resource::context const &ctx_;
 
 	typedef boost::ptr_map<
 		fcppt::string,
 		object
 	> model_map;
 
-	mutable model_map models;
+	mutable model_map models_;
 
 	mutable boost::mutex mutex_;
 };

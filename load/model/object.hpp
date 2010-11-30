@@ -68,11 +68,11 @@ private:
 
 	friend class collection;
 
-	fcppt::filesystem::path const path;
+	fcppt::filesystem::path const path_;
 
-	sge::renderer::dim2 cell_size;
+	sge::renderer::dim2 cell_size_;
 
-	part_map parts;
+	part_map parts_;
 
 	typedef fcppt::random::uniform<
 		part_map::size_type	

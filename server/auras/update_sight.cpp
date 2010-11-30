@@ -4,21 +4,21 @@
 #include <fcppt/optional_impl.hpp>
 
 sanguis::server::auras::update_sight::update_sight(
-	space_unit const radius_,
-	update_sight_function const &enter_,
-	update_sight_function const &leave_
+	space_unit const _radius,
+	update_sight_function const &_enter,
+	update_sight_function const &_leave
 )
 :
 	aura(
-		radius_,
+		_radius,
 		team::neutral,
 		influence::debuff
 	),
 	enter_(
-		enter_	
+		_enter
 	),
 	leave_(
-		leave_
+		_leave
 	)
 {}
 
@@ -35,20 +35,20 @@ sanguis::server::auras::update_sight::collision_groups() const
 
 void
 sanguis::server::auras::update_sight::enter(
-	entities::base &e
+	entities::base &_entity
 )
 {
 	enter_(
-		e.id()
+		_entity.id()
 	);
 }
 
 void
 sanguis::server::auras::update_sight::leave(
-	entities::base &e
+	entities::base &_entity
 )
 {
 	leave_(
-		e.id()
+		_entity.id()
 	);
 }

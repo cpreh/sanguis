@@ -9,13 +9,13 @@
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::projectiles::melee::melee(
-	team::type const team_,
-	damage::unit const damage_
+	team::type const _team,
+	damage::unit const _damage
 )
 :
 	projectile(
 		projectile_type::melee,
-		team_,
+		_team,
 		entities::movement_speed(
 			0
 		),
@@ -29,15 +29,15 @@ sanguis::server::entities::projectiles::melee::melee(
 		static_cast<space_unit>(0),
 		indeterminate::yes
 	),
-	damage_(damage_)
+	damage_(_damage)
 {}
 
 void
 sanguis::server::entities::projectiles::melee::do_damage(
-	with_health &e
+	with_health &_entity
 )
 {
-	e.damage(
+	_entity.damage(
 		damage_,
 		damage::list(
 			damage::normal = damage::full

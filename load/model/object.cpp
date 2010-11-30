@@ -35,22 +35,22 @@ sanguis::load::model::object::~object()
 
 sanguis::load::model::part const &
 sanguis::load::model::object::operator[](
-	fcppt::string const &name
+	fcppt::string const &_name
 ) const
 {
 	part_map::const_iterator const it(
-		parts.find(
-			name
+		parts_.find(
+			_name
 		)
 	);
 
-	if(it == parts.end())
-		throw exception(
+	if(it == parts_.end())
+		throw sanguis::exception(
 			FCPPT_TEXT("Category \"")
-			+ name
+			+ _name
 			+ FCPPT_TEXT("\" not found in ")
 			+ fcppt::filesystem::path_to_string(
-				path
+				path_
 			)
 		);
 	
@@ -69,13 +69,13 @@ sanguis::load::model::object::random_part() const
 			>(
 				fcppt::random::make_last_exclusive_range(
 					static_cast<part_map::size_type>(0),
-					parts.size()
+					parts_.size()
 				)
 			);
 
 	return
 		*boost::next(
-			parts.begin(),
+			parts_.begin(),
 			(*random_part_)()
 		)->second;
 }
@@ -83,48 +83,48 @@ sanguis::load::model::object::random_part() const
 sanguis::load::model::object::size_type
 sanguis::load::model::object::size() const
 {
-	return parts.size();
+	return parts_.size();
 }
 
 sanguis::load::model::object::const_iterator
 sanguis::load::model::object::begin() const
 {
-	return parts.begin();
+	return parts_.begin();
 }
 
 sanguis::load::model::object::const_iterator
 sanguis::load::model::object::end() const
 {
-	return parts.end();
+	return parts_.end();
 }
 
 sge::renderer::dim2 const
 sanguis::load::model::object::dim() const
 {
-	return cell_size;
+	return cell_size_;
 }
 
 sanguis::load::model::object::object(
-	fcppt::filesystem::path const &path,
-	resource::context const &ctx
+	fcppt::filesystem::path const &_path,
+	resource::context const &_ctx
 )
 :
-	path(path),
-	parts()
+	path_(_path),
+	parts_()
 {
 	FCPPT_LOG_DEBUG(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("Entering ")
 			<< fcppt::filesystem::path_to_string(
-				path
+				path_
 			)
 	);
 
 	try
 	{
 		construct(
-			ctx
+			_ctx
 		);
 	}
 	catch(sge::exception const &e)
@@ -134,7 +134,7 @@ sanguis::load::model::object::object(
 			fcppt::log::_
 				<< FCPPT_TEXT("model \"")
 				<< fcppt::filesystem::path_to_string(
-					path
+					path_
 				)
 				<< FCPPT_TEXT("\": \"")
 				<< e.string()
@@ -147,13 +147,13 @@ sanguis::load::model::object::object(
 
 void
 sanguis::load::model::object::construct(
-	resource::context const &ctx
+	resource::context const &_ctx
 )
 {
 	sge::parse::json::object object_return;
 	
 	parse_json(
-		path,
+		path_,
 		object_return
 	);
 
@@ -167,7 +167,7 @@ sanguis::load::model::object::construct(
 		)
 	);
 
-	cell_size = load_dim(
+	cell_size_ = load_dim(
 		header.members
 	);
 
@@ -212,7 +212,7 @@ sanguis::load::model::object::construct(
 
 		if(
 			fcppt::container::ptr::insert_unique_ptr_map(
-				parts,
+				parts_,
 				member.name,
 				fcppt::make_unique_ptr<
 					part
@@ -222,13 +222,13 @@ sanguis::load::model::object::construct(
 					>(
 						member.value
 					),
-					global_parameters(
-						path,
-						ctx.textures(),
-						cell_size,
+					model::global_parameters(
+						path_,
+						_ctx.textures(),
+						cell_size_,
 						opt_delay,
 						texture,
-						ctx.sounds()
+						_ctx.sounds()
 					)
 				)
 			)

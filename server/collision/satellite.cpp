@@ -1,10 +1,10 @@
 #include "satellite.hpp"
 
 sanguis::server::collision::satellite::satellite(
-	collision::base &base_
+	collision::base &_base
 )
 :
-	base_(base_)
+	base_(_base)
 {}
 
 void

@@ -16,11 +16,13 @@ namespace load
 namespace model
 {
 
-class sound {
+class sound
+{
 public:
 	sound(
 		sge::parse::json::member_vector const &,
-		resource::sounds const &);
+		resource::sounds const &
+	);
 	
 	probability_type
 	probability() const;	
@@ -30,9 +32,11 @@ public:
 private:
 	std::tr1::reference_wrapper<
 		resource::sounds const
-	> ctx;
+	> ctx_;
+
 	probability_type probability_;
-	sge::audio::file_ptr file;
+
+	sge::audio::file_ptr file_;
 };
 
 }

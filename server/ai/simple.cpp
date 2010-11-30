@@ -19,8 +19,8 @@
 #include <fcppt/optional.hpp>
 
 sanguis::server::ai::simple::simple(
-	entities::with_ai &me_,
-	entities::auto_weak_link owner_
+	entities::with_ai &_me,
+	entities::auto_weak_link _owner
 )
 :
 	diff_clock_(),
@@ -32,9 +32,9 @@ sanguis::server::ai::simple::simple(
 		diff_clock_.callback(),
 		sge::time::expiration_state::expired
 	),
-	me_(me_),
+	me_(_me),
 	target_(),
-	owner_(owner_),
+	owner_(_owner),
 	potential_targets_()
 {
 	me_.add_aura(

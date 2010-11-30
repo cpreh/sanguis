@@ -1,12 +1,12 @@
 #include "visible.hpp"
 
 sanguis::client::messages::visible::visible(
-	entity_id const id_,
-	bool const visible_
+	entity_id const _id,
+	bool const _visible
 )
 :
-	id_(id_),
-	visible_(visible_)
+	id_(_id),
+	visible_(_visible)
 {}
 
 sanguis::entity_id

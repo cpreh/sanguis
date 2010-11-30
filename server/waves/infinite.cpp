@@ -7,23 +7,23 @@
 #include <fcppt/make_unique_ptr.hpp>
 
 sanguis::server::waves::infinite::infinite(
-	waves::delay const delay_,
-	waves::spawn_interval const spawn_interval_,
-	waves::spawns_per_wave const spawns_per_wave_,
-	enemy_type::type const etype_
+	waves::delay const _delay,
+	waves::spawn_interval const _spawn_interval,
+	waves::spawns_per_wave const _spawns_per_wave,
+	enemy_type::type const _etype
 )
 :
 	diff_clock_(),
 	delay_time_(
 		sge::time::second(
-			delay_
+			_delay
 		),
 		sge::time::activation_state::active,
 		diff_clock_.callback()
 	),
-	spawn_interval_(spawn_interval_),
-	spawns_per_wave_(spawns_per_wave_),
-	etype_(etype_)
+	spawn_interval_(_spawn_interval),
+	spawns_per_wave_(_spawns_per_wave),
+	etype_(_etype)
 {}
 
 sanguis::server::waves::infinite::~infinite()

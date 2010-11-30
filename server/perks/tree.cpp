@@ -20,7 +20,7 @@ struct perk_equal
 		sanguis::server::perks::tree::tree_type const &
 	) const;
 private:
-	sanguis::perk_type::type p;
+	sanguis::perk_type::type type_;
 };
 
 }
@@ -164,7 +164,7 @@ sanguis::server::perks::tree::take(
 	traversal::iterator const it = std::find_if(
 		trav.begin(),
 		trav.end(),
-		perk_equal(
+		::perk_equal(
 			p
 		)
 	);
@@ -209,18 +209,18 @@ namespace
 {
 
 perk_equal::perk_equal(
-	sanguis::perk_type::type const p
+	sanguis::perk_type::type const _type
 )
 :
-	p(p)
+	type_(_type)
 {}
 	
 bool
 perk_equal::operator()(
-	sanguis::server::perks::tree::tree_type const &t
+	sanguis::server::perks::tree::tree_type const &_tree
 ) const
 {
-	return t.value().type() == p;
+	return _tree.value().type() == type_;
 }
 
 }

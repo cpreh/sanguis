@@ -1,12 +1,12 @@
 #include "poll.hpp"
 
 sanguis::server::weapons::events::poll::poll(
-	time_type const time_,
-	entities::with_weapon &owner_
+	time_type const _time,
+	entities::with_weapon &_owner
 )
 :
-	time_(time_),
-	owner_(owner_)
+	time_(_time),
+	owner_(_owner)
 {}
 	
 sanguis::time_type

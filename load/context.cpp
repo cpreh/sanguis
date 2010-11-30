@@ -5,27 +5,27 @@
 #include <fcppt/math/dim/basic_impl.hpp>
 
 sanguis::load::context::context(
-	sge::image::multi_loader &il,
-	sge::renderer::device_ptr const rend,
-	sge::audio::multi_loader &ml,
-	sge::audio::player_ptr const ap,
-	sge::audio::pool &pool
+	sge::image::multi_loader &_il,
+	sge::renderer::device_ptr const _rend,
+	sge::audio::multi_loader &_ml,
+	sge::audio::player_ptr const _ap,
+	sge::audio::pool &_pool
 )
 :
-	il(il),
-	rend(rend),
-	ml(ml),
-	ap(ap),
-	pool(pool),
-	resource_ctx(
-		rend,
-		il,
-		ml,
-		ap,
-		pool
+	il_(_il),
+	rend_(_rend),
+	ml_(_ml),
+	ap_(_ap),
+	pool_(_pool),
+	resource_ctx_(
+		rend_,
+		il_,
+		ml_,
+		ap_,
+		pool_
 	),
-	model_ctx(
-		resource_ctx
+	model_ctx_(
+		resource_ctx_
 	)
 {}
 
@@ -35,32 +35,32 @@ sanguis::load::context::~context()
 sanguis::load::resource::context const &
 sanguis::load::context::resources() const
 {
-	return resource_ctx;
+	return resource_ctx_;
 }
 
 sanguis::load::model::context const &
 sanguis::load::context::models() const
 {
-	return model_ctx;
+	return model_ctx_;
 }
 
 void
 sanguis::load::context::update(
-	time_type const delta
+	time_type const _delta
 ) const
 {
-	resource_ctx.update(
-		delta
+	resource_ctx_.update(
+		_delta
 	);
 }
 
 sge::renderer::dim2 const
 sanguis::load::context::model_dim(
-	fcppt::string const &model_name_
+	fcppt::string const &_model_name
 ) const
 {
 	return
-		model_ctx()[
-			model_name_
+		model_ctx_()[
+			_model_name
 		].dim();
 }

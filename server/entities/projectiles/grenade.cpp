@@ -21,30 +21,30 @@
 #include <algorithm>
 
 sanguis::server::entities::projectiles::grenade::grenade(
-	server::environment::load_context_ptr const load_context_,
-	team::type const team_,
-	damage::unit const damage_,
-	space_unit const aoe_,
-	pos_type const &dest_,
-	space_unit const direction_
+	server::environment::load_context_ptr const _load_context,
+	team::type const _team,
+	damage::unit const _damage,
+	space_unit const _aoe,
+	pos_type const &_dest,
+	space_unit const _direction
 )
 :
 	aoe_projectile(
 		aoe_projectile_type::grenade,
-		team_,
+		_team,
 		entities::movement_speed(500),
-		load_context_->entity_dim(
+		_load_context->entity_dim(
 			FCPPT_TEXT("grenade")
 		),
 		life_time(
 			2
 		),
 		indeterminate::no,
-		aoe_,
-		direction_
+		_aoe,
+		_direction
 	),
 	diff_clock_(),
-	slowdown_time(
+	slowdown_time_(
 		sge::time::millisecond(
 			100
 		),
@@ -52,17 +52,17 @@ sanguis::server::entities::projectiles::grenade::grenade(
 		diff_clock_.callback()
 	),
 	damage_(
-		damage_
+		_damage
 	),
 	dest_(
-		dest_
+		_dest
 	)
 {}
 
 void
 sanguis::server::entities::projectiles::grenade::on_transfer(
 	collision::global_groups const &,
-	collision::create_parameters const &param_
+	collision::create_parameters const &_param
 )
 {
 	movement_speed().current(
@@ -70,7 +70,7 @@ sanguis::server::entities::projectiles::grenade::on_transfer(
 			movement_speed().max(),
 			property::from_float(
 				collision::distance(
-					param_.center(),
+					_param.center(),
 					dest_
 				)
 			)
@@ -86,15 +86,15 @@ sanguis::server::entities::projectiles::grenade::do_damage(
 
 void
 sanguis::server::entities::projectiles::grenade::on_update(
-	time_type const time
+	time_type const _time
 )
 {
 	diff_clock_.update(
-		time
+		_time
 	);
 
 	if(
-		slowdown_time.update_b()
+		slowdown_time_.update_b()
 	)
 		movement_speed().current(
 			movement_speed().current()
@@ -102,7 +102,7 @@ sanguis::server::entities::projectiles::grenade::on_update(
 		);
 	
 	projectile::on_update(
-		time
+		_time
 	);
 }
 
@@ -117,7 +117,7 @@ sanguis::server::entities::projectiles::grenade::on_die()
 				team(),
 				aoe(),
 				damage_,
-				1,
+				1u,
 				static_cast<time_type>(0.1),
 				damage::list(
 					damage::piercing = damage::unit(0.5f)
@@ -126,7 +126,7 @@ sanguis::server::entities::projectiles::grenade::on_die()
 				)
 			)
 		),
-		insert_parameters_pos(
+		entities::insert_parameters_pos(
 			center()
 		)
 	);

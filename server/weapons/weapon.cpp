@@ -33,8 +33,8 @@ sanguis::server::weapons::weapon::type() const
 
 void
 sanguis::server::weapons::weapon::update(
-	time_type const tm,
-	entities::with_weapon &owner
+	time_type const _tm,
+	entities::with_weapon &_owner
 )
 {
 	if(!usable())
@@ -42,16 +42,16 @@ sanguis::server::weapons::weapon::update(
 
 	process_event(
 		events::poll(
-			tm,
-			owner
+			_tm,
+			_owner
 		)
 	);
 }
 
 void
 sanguis::server::weapons::weapon::attack(
-	entities::with_weapon &from,
-	pos_type const &to
+	entities::with_weapon &_from,
+	pos_type const &_to
 )
 {
 	if(!usable())
@@ -59,8 +59,8 @@ sanguis::server::weapons::weapon::attack(
 	
 	process_event(
 		events::shoot(
-			from,
-			to
+			_from,
+			_to
 		)
 	);
 }
@@ -94,71 +94,73 @@ sanguis::server::weapons::weapon::magazine_size() const
 
 bool
 sanguis::server::weapons::weapon::in_range(
-	entities::base const &from,
-	pos_type const &to
+	entities::base const &_from,
+	pos_type const &_to
 ) const
 {
 	return
 		collision::distance(
-			from,
-			to
+			_from,
+			_to
 		) - collision::bounding_circle(
-			from
+			_from
 		)
 		.radius() < range();
 }
 
 void
 sanguis::server::weapons::weapon::attack_speed(
-	space_unit const speed)
+	space_unit const _ias
+)
 {
-	ias_ = speed;
+	ias_ = _ias;
 }
 
 void
 sanguis::server::weapons::weapon::reload_speed(
-	space_unit const speed)
+	space_unit const _irs
+)
 {
-	irs_ = speed;
+	irs_ = _irs;
 }
 
 sanguis::server::weapons::weapon::~weapon()
 {}
 
 sanguis::server::weapons::weapon::weapon(
-	weapon_type::type const type_,
-	weapons::range const range_,
-	weapons::magazine_size const magazine_size_,
-	weapons::magazine_count const magazine_count_,
-	weapons::base_cooldown const nbase_cooldown_,
-	weapons::cast_point const ncast_point_,
-	weapons::reload_time const nreload_time_
+	weapon_type::type const _type,
+	weapons::range const _range,
+	weapons::magazine_size const _magazine_size,
+	weapons::magazine_count const _magazine_count,
+	weapons::base_cooldown const _base_cooldown,
+	weapons::cast_point const _cast_point,
+	weapons::reload_time const _reload_time
 )
 :
-	type_(type_),
-	range_(range_),
+	type_(_type),
+	range_(_range),
 	magazine_used_(0),
-	magazine_count_(magazine_count_),
-	magazine_size_(magazine_size_),
+	magazine_count_(_magazine_count),
+	magazine_size_(_magazine_size),
 	cast_point_(
 		sge::time::second_f(
-			ncast_point_
+			_cast_point
 		)
 	),
 	backswing_time_(
 		sge::time::second_f(
-			nbase_cooldown_ - ncast_point_
+			_base_cooldown - _cast_point
 		)
 	),
 	reload_time_(
 		sge::time::second_f(
-			nreload_time_
+			_reload_time
 		)
 	),
 	ias_(static_cast<space_unit>(0)),
 	irs_(static_cast<space_unit>(0))
 {
-	if(ncast_point_ > nbase_cooldown_)
+	if(_cast_point > _base_cooldown)
 		FCPPT_LOG_WARNING(
 			log(),
 			fcppt::log::_

@@ -1,19 +1,20 @@
 #include "global_parameters.hpp"
 
 sanguis::load::model::global_parameters::global_parameters(
-	fcppt::filesystem::path const &path_,
-	resource::textures const &textures_,
-	sge::renderer::dim2 const &cell_size_,
-	optional_delay const &delay_,
-	optional_texture_identifier const &texture_,
-	resource::sounds const &sounds_)
+	fcppt::filesystem::path const &_path,
+	resource::textures const &_textures,
+	sge::renderer::dim2 const &_cell_size,
+	optional_delay const &_delay,
+	optional_texture_identifier const &_texture,
+	resource::sounds const &_sounds
+)
 :
-	path_(path_),
-	textures_(textures_),
-	cell_size_(cell_size_),
-	delay_(delay_),
-	texture_(texture_),
-	sounds_(sounds_)
+	path_(_path),
+	textures_(_textures),
+	cell_size_(_cell_size),
+	delay_(_delay),
+	texture_(_texture),
+	sounds_(_sounds)
 {}
 
 fcppt::filesystem::path const &
@@ -48,15 +49,17 @@ sanguis::load::model::global_parameters::texture() const
 
 sanguis::load::model::global_parameters const
 sanguis::load::model::global_parameters::new_texture(
-	optional_texture_identifier const &ntex) const
+	optional_texture_identifier const &_tex
+) const
 {
-	return ntex
+	return
+		_tex
 		? global_parameters(
 			path(),
 			textures(),
 			cell_size(),
 			delay(),
-			ntex,
+			_tex,
 			sounds()
 		)
 		: *this;

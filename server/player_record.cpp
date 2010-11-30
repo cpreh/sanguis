@@ -1,11 +1,12 @@
 #include "player_record.hpp"
 
 sanguis::server::player_record::player_record(
-	fcppt::string const &name_,
-	exp_type const exp_)
+	fcppt::string const &_name,
+	exp_type const _exp
+)
 :
-	name_(name_),
-	exp_(exp_)
+	name_(_name),
+	exp_(_exp)
 {}
 	
 fcppt::string const &

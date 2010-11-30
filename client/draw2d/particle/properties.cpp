@@ -2,30 +2,30 @@
 #include <fcppt/minmax_pair_impl.hpp>
 
 sanguis::client::draw2d::particle::properties::properties(
-	funit const anim_speed_,
-	unsigned const spawn_initial_,
-	funit const gen_life_time_,
-	funit const gen_frequency_,
-	align_type::type const align_,
-	dispersion_range const &dispersion_,
-	speed_range const &speed_,
-	rot_speed_range const &rot_speed_,
-	bool const do_fade_,
-	fade_range const &fade_,
-	movement_type::type const movement_
+	funit const _anim_speed,
+	unsigned const _spawn_initial,
+	funit const _gen_life_time,
+	funit const _gen_frequency,
+	align_type::type const _align,
+	dispersion_range const &_dispersion,
+	speed_range const &_speed,
+	rot_speed_range const &_rot_speed,
+	bool const _do_fade,
+	fade_range const &_fade,
+	movement_type::type const _movement
 )
 :
-	anim_speed_(anim_speed_),
-	spawn_initial_(spawn_initial_),
-	gen_life_time_(gen_life_time_),
-	gen_frequency_(gen_frequency_),
-	align_(align_),
-	dispersion_(dispersion_),
-	speed_(speed_),
-	rot_speed_(rot_speed_),
-	do_fade_(do_fade_),
-	fade_(fade_),
-	movement_(movement_)
+	anim_speed_(_anim_speed),
+	spawn_initial_(_spawn_initial),
+	gen_life_time_(_gen_life_time),
+	gen_frequency_(_gen_frequency),
+	align_(_align),
+	dispersion_(_dispersion),
+	speed_(_speed),
+	rot_speed_(_rot_speed),
+	do_fade_(_do_fade),
+	fade_(_fade),
+	movement_(_movement)
 {}
 
 sanguis::client::draw2d::funit

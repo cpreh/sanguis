@@ -28,7 +28,7 @@ public:
 	>
 	auto_ptr operator()() const;
 private:
-	istream &is;
+	istream &is_;
 };
 
 }

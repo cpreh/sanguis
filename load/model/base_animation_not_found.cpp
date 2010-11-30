@@ -2,11 +2,13 @@
 #include <fcppt/text.hpp>
 
 sanguis::load::model::base_animation_not_found::base_animation_not_found(
-	animation_type::type const anim_type_)
+	animation_type::type const _anim_type
+)
 :
 	exception(
-		FCPPT_TEXT("base animation not found!")),
-	anim_type_(anim_type_)
+		FCPPT_TEXT("base animation not found!")
+	),
+	anim_type_(_anim_type)
 {}
 
 sanguis::animation_type::type

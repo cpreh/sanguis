@@ -11,19 +11,19 @@
 
 // TODO: hier animationskram rausnehmen, ggf. friend-Beziehung wegnehmen
 sanguis::client::draw2d::entities::model::part_state::part_state(
-	load::model::part const &part_,
+	load::model::part const &_part,
 	part &_ref,
-	animation_type::type const animation_type_,
-	weapon_type::type const weapon_type_
+	animation_type::type const _animation_type,
+	weapon_type::type const _weapon_type
 )
 :
 	ref_(_ref),
-	anim_(part_[weapon_type_][animation_type_]),
+	anim_(_part[_weapon_type][_animation_type]),
 	sstart(anim_.sounds()[animation_sound_type::start]),
 	srunning(anim_.sounds()[animation_sound_type::running]),
 	send(anim_.sounds()[animation_sound_type::end]),
-	animation_type_(animation_type_),
-	weapon_type_(weapon_type_),
+	animation_type_(_animation_type),
+	weapon_type_(_weapon_type),
 	start_played_(false)
 {
 	init_sound(sstart);

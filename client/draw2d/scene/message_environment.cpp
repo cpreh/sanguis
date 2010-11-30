@@ -4,12 +4,12 @@
 #include "../entities/model/parameters.hpp"
 
 sanguis::client::draw2d::scene::message_environment::message_environment(
-	object &object_,
-	hud &hud_
+	object &_object,
+	hud &_hud
 )
 :
-	object_(object_),
-	hud_(hud_)
+	object_(_object),
+	hud_(_hud)
 {}
 
 sanguis::client::draw2d::scene::message_environment::~message_environment()

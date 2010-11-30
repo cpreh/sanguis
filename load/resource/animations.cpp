@@ -203,7 +203,8 @@ sanguis::load::resource::animations::load_without_frames_file(
 
 
 sanguis::load::resource::animations::animations(
-	textures &textures_)
+	textures &_textures
+)
 :
-	textures_(textures_)
+	textures_(_textures)
 {}

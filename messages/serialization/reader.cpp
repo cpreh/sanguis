@@ -1,7 +1,8 @@
 #include "reader.hpp"
 
 sanguis::messages::serialization::reader::reader(
-	istream &is)
+	istream &_is
+)
 :
-	is(is)
+	is_(_is)
 {}

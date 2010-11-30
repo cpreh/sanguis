@@ -7,10 +7,10 @@
 #include <boost/foreach.hpp>
 
 sanguis::server::entities::exp_area::exp_area(
-	exp_type const exp_
+	exp_type const _exp
 )
 :
-	exp_(exp_),
+	exp_(_exp),
 	player_links_()
 {
 }

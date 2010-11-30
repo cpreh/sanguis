@@ -12,19 +12,23 @@ namespace server
 namespace damage
 {
 
-class meta {
+class meta
+{
 public:
 	meta(
 		damage_type::type,
 		unit
 	);
 	
-	damage_type::type type() const;
+	damage_type::type
+	type() const;
 
-	unit value() const;
+	unit
+	value() const;
 private:
-	damage_type::type e;
-	unit d;
+	damage_type::type type_;
+
+	unit value_;
 
 };
 

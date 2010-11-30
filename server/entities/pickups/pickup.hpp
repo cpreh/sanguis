@@ -11,6 +11,7 @@
 #include "../../../messages/auto_ptr.hpp"
 #include <sge/time/timer.hpp>
 #include <fcppt/optional_fwd.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <boost/logic/tribool_fwd.hpp>
 
 namespace sanguis
@@ -26,16 +27,22 @@ class pickup
 :
 	public with_dim
 {
+	FCPPT_NONCOPYABLE(
+		pickup
+	)
 public:
-	pickup_type::type ptype() const;
+	pickup_type::type
+	ptype() const;
+
+	~pickup();
 protected:
 	typedef fcppt::optional<dim_type> optional_dim;
 
 	pickup(
 		pickup_type::type,
 		server::environment::load_context_ptr,
-		team::type team,
-		optional_dim const &dim
+		team::type,
+		optional_dim const &
 	);
 private:
 	bool
@@ -76,8 +83,11 @@ private:
 	) const;
 
 	server::team::type const team_;
+
 	pickup_type::type const ptype_;
+
 	diff_clock diff_clock_;
+
 	sge::time::timer life_timer_;
 };
 

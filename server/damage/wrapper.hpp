@@ -29,7 +29,7 @@ public:
 		unit
 	) const;
 private:
-	damage_type::type const e;
+	damage_type::type const type_;
 };
 
 }

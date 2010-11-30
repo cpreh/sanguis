@@ -1,23 +1,23 @@
 #include "own_player.hpp"
 
 sanguis::client::draw2d::entities::own_player::own_player(
-	model::parameters const &param_,
-	transform_callback const &transform_
+	model::parameters const &_param,
+	transform_callback const &_transform
 )
 :
 	player(
-		param_
+		_param
 	),
-	transform_(transform_)
+	transform_(_transform)
 {}
 
 void
 sanguis::client::draw2d::entities::own_player::update(
-	time_type const time_
+	time_type const _time
 )
 {
 	player::update(
-		time_
+		_time
 	);
 
 	transform_(

@@ -60,7 +60,7 @@ private:
 
 	void add_me();
 
-	base *ref;
+	base *ref_;
 };
 
 }

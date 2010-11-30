@@ -14,29 +14,29 @@
 #include <fcppt/text.hpp>
 
 sanguis::server::entities::projectiles::rocket::rocket(
-	server::environment::load_context_ptr const load_context_,
-	team::type const team_,
-	damage::unit const damage_,
-	space_unit const aoe_,
-	space_unit const angle_
+	server::environment::load_context_ptr const _load_context,
+	team::type const _team,
+	damage::unit const _damage,
+	space_unit const _aoe,
+	space_unit const _angle
 )
 :
 	aoe_projectile(
 		aoe_projectile_type::rocket,
-		team_,
+		_team,
 		entities::movement_speed(300),
-		load_context_->entity_dim(
+		_load_context->entity_dim(
 			FCPPT_TEXT("rocket")
 		),
 		life_time(
 			10
 		),
 		indeterminate::no,
-		aoe_,
-		angle_
+		_aoe,
+		_angle
 	),
 	damage_(
-		damage_
+		_damage
 	)
 {}
 
@@ -59,7 +59,7 @@ sanguis::server::entities::projectiles::rocket::on_die()
 				team(),
 				aoe(),
 				damage_,
-				1,
+				1u,
 				static_cast<time_type>(0.1),
 				damage::list(
 					damage::fire = damage::full

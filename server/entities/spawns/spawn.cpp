@@ -14,10 +14,10 @@ sanguis::server::entities::spawns::spawn::~spawn()
 }
 
 sanguis::server::entities::spawns::spawn::spawn(
-	enemy_type::type const enemy_type_
+	enemy_type::type const _enemy_type
 )
 :
-	enemy_type_(enemy_type_)
+	enemy_type_(_enemy_type)
 {}
 
 sanguis::server::space_unit
@@ -40,13 +40,13 @@ sanguis::server::entities::spawns::spawn::team() const
 
 void
 sanguis::server::entities::spawns::spawn::on_update(
-	time_type const time_
+	time_type const _time
 )
 {
 	if(
 		size_type const count_ =
 			may_spawn(
-				time_
+				_time
 			)
 	)
 	{

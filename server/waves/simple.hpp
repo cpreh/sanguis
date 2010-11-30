@@ -34,17 +34,22 @@ private:
 		environment::load_context_ptr
 	);
 
-	bool ended() const;
+	bool
+	ended() const;
 
 	diff_clock diff_;
+
 	sge::time::timer
-		delay_timer,
-		spawn_timer;
+		delay_timer_,
+		spawn_timer_;
+
 	unsigned const
-		waves,
-		spawns_per_wave;
-	enemy_type::type const etype;
-	unsigned waves_spawned;
+		waves_,
+		spawns_per_wave_;
+
+	enemy_type::type const etype_;
+
+	unsigned waves_spawned_;
 };
 
 }

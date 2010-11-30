@@ -6,6 +6,7 @@
 #include "../../environment/load_context_ptr.hpp"
 #include "../../team.hpp"
 #include "../../../friend_type.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -20,19 +21,24 @@ class monster
 :
 	public pickup
 {
+	FCPPT_NONCOPYABLE(
+		monster
+	)
 public:
 	monster(
 		server::environment::load_context_ptr,
 		team::type,
 		friend_type::type
 	);
+
+	~monster();
 private:
 	void
 	do_pickup(
 		base &receiver
 	);
 	
-	friend_type::type const ftype;
+	friend_type::type const ftype_;
 };
 
 }

@@ -20,20 +20,22 @@
 #include <boost/foreach.hpp>
 
 sanguis::server::machine::machine(
-	load::context_base const &resources_,
-	sge::collision::system_ptr const collision_,
-	net::port_type const port_
+	load::context_base const &_resources,
+	sge::collision::system_ptr const _collision,
+	net::port_type const _port
 )
 :
 	resources_(
-		resources_
+		_resources
 	),
 	port_(
-		port_
+		_port
 	),
 	net_(
 		net::server::time_resolution(
-			16)),
+			16
+		)
+	),
 	s_conn(
 		net_.register_connect(
 			std::tr1::bind(
@@ -64,7 +66,7 @@ sanguis::server::machine::machine(
 		)
 	),
 	clients_(),
-	collision_(collision_)
+	collision_(_collision)
 {
 }
 

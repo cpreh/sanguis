@@ -5,35 +5,40 @@
 #include <fcppt/optional_impl.hpp>
 
 sanguis::server::entities::pickups::health::health(
-	server::environment::load_context_ptr const load_context,
-	team::type const team_,
-	entities::health_type const amount
+	server::environment::load_context_ptr const _load_context,
+	team::type const _team,
+	entities::health_type const _amount
 )
 :
 	pickup(
 		pickup_type::health,
-		load_context,
-		team_,
+		_load_context,
+		_team,
 		optional_dim()
 	),
-	amount(amount)
-{}
+	amount_(_amount)
+{
+}
+
+sanguis::server::entities::pickups::health::~health()
+{
+}
 
 void
 sanguis::server::entities::pickups::health::do_pickup(
-	base &receiver
+	base &_receiver
 )
 {
-	with_health &with_health_(
+	entities::with_health &with_health(
 		dynamic_cast<
-			with_health &
+			entities::with_health &
 		>(
-			receiver
+			_receiver
 		)
 	);
 	
 	entities::property::add(
-		with_health_.health(),
-		amount
+		with_health.health(),
+		amount_
 	);
 }

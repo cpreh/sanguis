@@ -2,23 +2,23 @@
 #include "spawn.hpp"
 
 sanguis::server::waves::single::single(
-	enemy_type::type const etype_
+	enemy_type::type const _etype
 )
 :
-	etype_(etype_),
+	etype_(_etype),
 	spawned(false)
 {}
 
 void
 sanguis::server::waves::single::process(
 	time_type const,
-	environment::object_ptr const env,
-	environment::load_context_ptr const load_context
+	environment::object_ptr const _env,
+	environment::load_context_ptr const _load_context
 )
 {
 	spawn(
-		env,
-		load_context,
+		_env,
+		_load_context,
 		etype_
 	);
 

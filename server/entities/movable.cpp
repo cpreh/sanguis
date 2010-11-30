@@ -17,10 +17,10 @@ sanguis::server::entities::movable::direction() const
 
 void
 sanguis::server::entities::movable::direction(
-	space_unit const ndirection_
+	space_unit const _direction
 )
 {
-	direction_ = ndirection_;
+	direction_ = _direction;
 
 	speed_change(
 		movement_speed_.current()
@@ -38,15 +38,15 @@ sanguis::server::entities::movable::abs_speed() const
 }
 
 sanguis::server::entities::movable::movable(
-	property::initial const &nmovement_speed_,
-	space_unit const direction_
+	property::initial const &_movement_speed,
+	space_unit const _direction
 )
 :
 	movement_speed_(
-		nmovement_speed_
+		_movement_speed
 	),
 	direction_(
-		direction_
+		_direction
 	),
 	speed_change_(
 		movement_speed_.register_change_callback(
@@ -67,13 +67,13 @@ sanguis::server::entities::movable::initial_direction() const
 
 void
 sanguis::server::entities::movable::speed_change(
-	property::value const s
+	property::value const _speed
 )
 {
 	body_speed(
-		speed_to_abs(
+		entities::speed_to_abs(
 			direction(),
-			s
+			_speed
 		)
 	);
 }

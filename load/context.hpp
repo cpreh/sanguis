@@ -52,14 +52,19 @@ private:
 		fcppt::string const &
 	) const;
 
-	sge::image::multi_loader &il;
-	sge::renderer::device_ptr const rend;
-	sge::audio::multi_loader &ml;
-	sge::audio::player_ptr const ap;
-	sge::audio::pool &pool;
+	sge::image::multi_loader &il_;
 
-	resource::context const resource_ctx;
-	model::context const model_ctx;
+	sge::renderer::device_ptr const rend_;
+
+	sge::audio::multi_loader &ml_;
+
+	sge::audio::player_ptr const ap_;
+
+	sge::audio::pool &pool_;
+
+	resource::context const resource_ctx_;
+
+	model::context const model_ctx_;
 };
 
 }

@@ -2,12 +2,12 @@
 #include <fcppt/math/vector/basic_impl.hpp>
 
 sanguis::server::collision::create_parameters::create_parameters(
-	pos_type const &center_,
-	pos_type const &speed_
+	pos_type const &_center,
+	pos_type const &_speed
 )
 :
-	center_(center_),
-	speed_(speed_)
+	center_(_center),
+	speed_(_speed)
 {}
 
 sanguis::server::pos_type const

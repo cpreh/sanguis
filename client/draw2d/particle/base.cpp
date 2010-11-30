@@ -3,18 +3,18 @@
 #include <fcppt/math/vector/arithmetic.hpp>
 
 sanguis::client::draw2d::particle::base::base(
-	point const &pos_,
-	point const &vel_,
-	depth_type const depth_,
-	rotation_type const rot_,
-	rotation_type const rot_vel_
+	point const &_pos,
+	point const &_vel,
+	depth_type const _depth,
+	rotation_type const _rot,
+	rotation_type const _rot_vel
 )
 :
-	pos_(pos_),
-	vel_(vel_),
-	depth_(depth_),
-	rot_(rot_),
-	rot_vel_(rot_vel_)
+	pos_(_pos),
+	vel_(_vel),
+	depth_(_depth),
+	rot_(_rot),
+	rot_vel_(_rot_vel)
 {}
 
 sanguis::client::draw2d::particle::base::~base()

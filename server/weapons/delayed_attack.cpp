@@ -2,18 +2,18 @@
 #include <fcppt/math/vector/basic_impl.hpp>
 
 sanguis::server::weapons::delayed_attack::delayed_attack(
-	pos_type const &spawn_point_,
-	space_unit const angle_,
-	team::type const team_,
-	server::environment::object_ptr const environment_,
-	pos_type const &dest_
+	pos_type const &_spawn_point,
+	space_unit const _angle,
+	team::type const _team,
+	server::environment::object_ptr const _environment,
+	pos_type const &_dest
 )
 :
-	spawn_point_(spawn_point_),
-	angle_(angle_),
-	team_(team_),
-	environment_(environment_),
-	dest_(dest_)
+	spawn_point_(_spawn_point),
+	angle_(_angle),
+	team_(_team),
+	environment_(_environment),
+	dest_(_dest)
 {}
 
 sanguis::server::pos_type const &

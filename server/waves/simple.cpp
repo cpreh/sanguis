@@ -3,58 +3,66 @@
 #include <sge/time/second_f.hpp>
 
 sanguis::server::waves::simple::simple(
-	time_type const delay,
-	time_type const spawn_interval,
-	unsigned const waves,
-	unsigned const spawns_per_wave,
-	enemy_type::type const etype)
+	time_type const _delay,
+	time_type const _spawn_interval,
+	unsigned const _waves,
+	unsigned const _spawns_per_wave,
+	enemy_type::type const _etype
+)
 :
 	diff_(),
-	delay_timer(
+	delay_timer_(
 		sge::time::second_f(
-			delay),
+			_delay
+		),
 		sge::time::activation_state::active,
-		diff_.callback()),
-	spawn_timer(
+		diff_.callback()
+	),
+	spawn_timer_(
 		sge::time::second_f(
-			spawn_interval),
+			_spawn_interval
+		),
 		sge::time::activation_state::active,
-		diff_.callback()),
-	waves(waves),
-	spawns_per_wave(spawns_per_wave),
-	etype(etype),
-	waves_spawned(0)
+		diff_.callback()
+	),
+	waves_(_waves),
+	spawns_per_wave_(_spawns_per_wave),
+	etype_(_etype),
+	waves_spawned_(0)
 {}
 
 void
 sanguis::server::waves::simple::process(
-	time_type const diff,
-	environment::object_ptr const env,
-	environment::load_context_ptr const load_context
+	time_type const _diff,
+	environment::object_ptr const _env,
+	environment::load_context_ptr const _load_context
 )
 {
-	diff_.update(diff);
+	diff_.update(
+		_diff
+	);
 
-	if(!delay_timer.expired())
+	if(!delay_timer_.expired())
 		return;
 
-	if(!spawn_timer.update_b())
+	if(!spawn_timer_.update_b())
 		return;
 
-	if(waves_spawned == waves)
+	if(waves_spawned_ == waves_)
 		return;
 	
-	++waves_spawned;
+	++waves_spawned_;
 
-	for(unsigned i = 0; i < spawns_per_wave; ++i)
-		spawn(
-			env,
-			load_context,
-			etype
+	for(unsigned i = 0; i < spawns_per_wave_; ++i)
+		waves::spawn(
+			_env,
+			_load_context,
+			etype_
 		);
 }
 
-bool sanguis::server::waves::simple::ended() const
+bool
+sanguis::server::waves::simple::ended() const
 {
-	return waves_spawned == waves;
+	return waves_spawned_ == waves_;
 }

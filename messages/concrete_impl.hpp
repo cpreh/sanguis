@@ -8,10 +8,10 @@ template<
 	typename T
 >
 sanguis::messages::concrete<T>::concrete(
-	T const &value_
+	T const &_value
 )
 :
-	value_(value_)
+	value_(_value)
 {}
 	
 template<
