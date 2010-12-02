@@ -6,26 +6,28 @@
 
 sanguis::client::draw2d::sprite::point const
 sanguis::client::draw2d::virtual_to_screen(
-	sge::renderer::screen_size const &ss,
-	messages::types::pos const &pos
+	sge::renderer::screen_size const &_screen_size,
+	messages::types::pos const &_pos
 )
 {
-	return fcppt::math::vector::structure_cast<
-		sprite::point
-	>(
-		pos
-	);
+	return
+		fcppt::math::vector::structure_cast<
+			sprite::point
+		>(
+			_pos
+		);
 }
 
 sanguis::client::draw2d::sprite::dim const
 sanguis::client::draw2d::virtual_to_screen(
-	sge::renderer::screen_size const &ss,
-	messages::types::dim const &dim
+	sge::renderer::screen_size const &_screen_size,
+	messages::types::dim const &_dim
 )
 {
-	return fcppt::math::dim::structure_cast<
-		sprite::dim
-	>(
-		dim
-	);
+	return
+		fcppt::math::dim::structure_cast<
+			sprite::dim
+		>(
+			_dim
+		);
 }

@@ -10,17 +10,17 @@ sanguis::client::draw2d::sunlight::time_to_gregorian(
 	return
 		boost::gregorian::date(
 			static_cast<
-				boost::gregorian::date::year_type
+				unsigned short
 			>(
 				tm_.tm_year + 1900 // year starts at 1900
 			),
 			static_cast<
-				boost::date_time::months_of_year
+				unsigned short
 			>(
 				tm_.tm_mon + 1 // boost::date_time::Jan is 1
 			),
 			static_cast<
-				boost::gregorian::date::day_type
+				unsigned short
 			>(
 				tm_.tm_mday
 			)

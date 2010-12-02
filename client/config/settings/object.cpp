@@ -6,10 +6,10 @@
 #include <fcppt/text.hpp>
 
 sanguis::client::config::settings::object::object(
-	fcppt::filesystem::path const &path_
+	fcppt::filesystem::path const &_path
 )
 :
-	path_(path_)
+	path_(_path)
 {
 	try
 	{

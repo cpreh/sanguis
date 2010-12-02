@@ -7,10 +7,10 @@
 #include <fcppt/text.hpp>
 
 sanguis::client::config::settings::saver::saver(
-	object const &object_
+	object const &_object
 )
 :
-	object_(object_)
+	object_(_object)
 {}
 
 sanguis::client::config::settings::saver::~saver()
