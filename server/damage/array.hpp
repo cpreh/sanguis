@@ -3,7 +3,7 @@
 
 #include "unit.hpp"
 #include "../../damage_type.hpp"
-#include <fcppt/tr1/array.hpp>
+#include <fcppt/container/array.hpp>
 
 namespace sanguis
 {
@@ -12,7 +12,7 @@ namespace server
 namespace damage
 {
 
-typedef std::tr1::array<
+typedef fcppt::container::array<
 	unit,
 	damage_type::size
 > array;

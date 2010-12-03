@@ -11,8 +11,8 @@
 #include <sge/console/object_fwd.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/time/timer.hpp>
+#include <fcppt/container/array.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
-#include <fcppt/tr1/array.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -92,7 +92,7 @@ private:
 
 	sge::time::timer rotation_timer_;
 
-	typedef std::tr1::array<
+	typedef fcppt::container::array<
 		bool,
 		weapon_type::size
 	> owned_weapons_array;

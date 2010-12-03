@@ -11,9 +11,9 @@
 #include <sge/parse/json/find_member_exn.hpp>
 #include <fcppt/filesystem/exists.hpp>
 #include <fcppt/algorithm/find_exn.hpp>
+#include <fcppt/container/array.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/log/headers.hpp>
-#include <fcppt/tr1/array.hpp>
 #include <fcppt/auto_ptr.hpp>
 #include <fcppt/make_auto_ptr.hpp>
 #include <fcppt/string.hpp>
@@ -24,7 +24,7 @@
 namespace
 {
 
-typedef std::tr1::array<
+typedef fcppt::container::array<
 	fcppt::string,
 	sanguis::animation_type::size
 > animation_type_array;

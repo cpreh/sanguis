@@ -311,10 +311,10 @@ sanguis::server::global::context::update(
 )
 {
 	BOOST_FOREACH(
-		server::world::map::reference world,
+		server::world::map::reference cur_world,
 		worlds_
 	)
-		world.second->update(
+		cur_world.second->update(
 			_delta
 		);
 }

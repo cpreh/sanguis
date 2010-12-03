@@ -11,7 +11,7 @@ namespace net
 namespace detail
 {
 
-// TODO: asio doesn't work well with tr1::array
+// TODO: asio doesn't work well other array types
 typedef boost::array<
 	value_type,
 	4096

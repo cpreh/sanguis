@@ -41,13 +41,15 @@ sanguis::client::draw2d::entities::bullet::bullet(
 
 void
 sanguis::client::draw2d::entities::bullet::update(
-	time_type const time
+	time_type const _time
 )
 {
 	if (!origin)
 		origin = center();
 	
-	model::object::update(time);
+	model::object::update(
+		_time
+	);
 
 	funit const
 		max_tail_length =
@@ -63,7 +65,7 @@ sanguis::client::draw2d::entities::bullet::update(
 			tail_length,
 			static_cast<funit>(at(tail).size().h())
 		),
-		pos(
+		cur_pos(
 			fcppt::math::vector::structure_cast<
 				vector2
 			>(
@@ -72,8 +74,22 @@ sanguis::client::draw2d::entities::bullet::update(
 		),
 		newpos( 
 			is_null(speed())
-			? pos
-			: pos - normalize(speed())*static_cast<funit>(0.5) * length(newsize)
+			?
+				cur_pos
+			:
+				cur_pos
+				-
+				normalize(
+					speed()
+				)
+				*
+				static_cast<
+					funit
+				>(0.5)
+				*
+				length(
+				 	newsize
+				)
 		);
 
 	sge::sprite::center(

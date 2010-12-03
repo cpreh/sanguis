@@ -88,7 +88,7 @@ void sanguis::client::draw2d::particle::generator::generate()
 		)
 	);
 	
-	rotation_type const rot(
+	rotation_type const cur_rot(
 		particle::rotation_from_alignment(
 			alignment_,
 			refpoint,
@@ -100,7 +100,7 @@ void sanguis::client::draw2d::particle::generator::generate()
 
 	object->pos(object_pos);
 	object->vel(velocity);
-	object->rot(rot);
+	object->rot(cur_rot);
 	/*
 	object->rot_vel(
 		(rot_direction_() > sge::su(0.5) 

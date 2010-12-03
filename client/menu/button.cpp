@@ -6,33 +6,49 @@
 #include <fcppt/text.hpp>
 
 sanguis::client::menu::button::button(
-	sge::gui::widgets::parent_data const &parent,
-	sge::image::multi_loader &il,
-	fcppt::filesystem::path const &base,
-	fcppt::string const &name
+	sge::gui::widgets::parent_data const &_parent,
+	sge::image::multi_loader &_il,
+	fcppt::filesystem::path const &_base,
+	fcppt::string const &_name
 )
 :
 	image(
-		parent,
+		_parent,
 		sge::gui::widgets::parameters(),
 		sge::gui::make_image(
-			il.load(
-				base/name/FCPPT_TEXT("normal.png")
+			_il.load(
+				_base
+				/
+				_name
+				/
+				FCPPT_TEXT("normal.png")
 			)
 		),
 		sge::gui::make_image(
-			il.load(
-				base/name/FCPPT_TEXT("hover.png")
+			_il.load(
+				_base
+				/
+				_name
+				/
+				FCPPT_TEXT("hover.png")
 			)
 		),
 		sge::gui::make_image(
-			il.load(
-				base/name/FCPPT_TEXT("keyboard.png")
+			_il.load(
+				_base
+				/
+				_name
+				/
+				FCPPT_TEXT("keyboard.png")
 			)
 		),
 		sge::gui::make_image(
-			il.load(
-				base/name/FCPPT_TEXT("hover_keyboard.png")
+			_il.load(
+				_base
+				/
+				_name
+				/
+				FCPPT_TEXT("hover_keyboard.png")
 			)
 		)
 	)
@@ -41,12 +57,12 @@ sanguis::client::menu::button::button(
 
 void
 sanguis::client::menu::button::process_invalid_area(
-	sge::gui::events::invalid_area const &e
+	sge::gui::events::invalid_area const &_event
 )
 {
 	parent_manager().skin().draw(
 		*this,
-		e
+		_event
 	);
 }
 

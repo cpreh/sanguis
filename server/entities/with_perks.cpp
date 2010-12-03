@@ -11,13 +11,13 @@ sanguis::server::entities::with_perks::add_perk(
 	perks::unique_ptr _ptr
 )
 {
-	perk_type::type const type(
+	perk_type::type const ptype(
 		_ptr->type()
 	);
 
 	perk_container::iterator it(
 		perks_.find(
-			type
+			ptype
 		)
 	);
 
@@ -27,7 +27,7 @@ sanguis::server::entities::with_perks::add_perk(
 		it =
 			fcppt::container::ptr::insert_unique_ptr_map(
 				perks_,
-				type,
+				ptype,
 				move(
 					_ptr
 				)

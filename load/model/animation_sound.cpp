@@ -4,8 +4,8 @@
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/array.hpp>
 #include <fcppt/algorithm/find_exn.hpp>
+#include <fcppt/container/array.hpp>
 #include <fcppt/log/headers.hpp>
-#include <fcppt/tr1/array.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/string.hpp>
 #include <boost/foreach.hpp>
@@ -15,7 +15,7 @@
 namespace
 {
 
-typedef std::tr1::array<
+typedef fcppt::container::array<
 	fcppt::string,
 	sanguis::animation_sound_type::size
 > animation_sound_array;

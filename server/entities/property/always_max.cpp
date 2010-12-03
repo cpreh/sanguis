@@ -1,13 +1,13 @@
 #include "always_max.hpp"
 
 sanguis::server::entities::property::always_max::always_max(
-	value_type const base_
+	value_type const _base
 )
 :
 	base(
-		base_
+		_base
 	),
-	current_(base_)
+	current_(_base)
 {}
 
 sanguis::server::entities::property::always_max::value_type
@@ -18,21 +18,21 @@ sanguis::server::entities::property::always_max::current() const
 
 fcppt::signal::auto_connection
 sanguis::server::entities::property::always_max::register_change_callback(
-	change_callback const &callback_
+	change_callback const &_callback
 )
 {
 	return
 		change_signal_.connect(
-			callback_
+			_callback
 		);
 }
 
 void
 sanguis::server::entities::property::always_max::on_recalc_max(
-	value_type const max_
+	value_type const _max
 )
 {
-	current_ = max_;
+	current_ = _max;
 
 	change_signal_(
 		current()

@@ -10,7 +10,7 @@
 #include <sge/parse/json/get.hpp>
 #include <fcppt/algorithm/find_exn.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
-#include <fcppt/tr1/array.hpp>
+#include <fcppt/container/array.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -23,7 +23,7 @@
 namespace
 {
 
-typedef std::tr1::array<
+typedef fcppt::container::array<
 	fcppt::string,
 	sanguis::weapon_type::size
 > weapon_type_array;

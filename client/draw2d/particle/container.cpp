@@ -4,19 +4,19 @@
 #include <boost/foreach.hpp>
 
 sanguis::client::draw2d::particle::container::container(
-	point const &p,
-	point const &v,
-	depth_type const depth_,
-	rotation_type const rot_,
-	rotation_type const rot_vel_
+	point const &_pos,
+	point const &_velocity,
+	depth_type const _depth,
+	rotation_type const _rot,
+	rotation_type const _rot_vel
 )
 :
 	base(
-		p,
-		v,
-		depth_,
-		rot_,
-		rot_vel_
+		_pos,
+		_velocity,
+		_depth,
+		_rot,
+		_rot_vel
 	)
 {}
 

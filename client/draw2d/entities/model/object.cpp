@@ -214,61 +214,67 @@ sanguis::client::draw2d::entities::model::object::has_health() const
 
 void
 sanguis::client::draw2d::entities::model::object::health(
-	health_type const health
+	health_type const _health
 )
 {
-	health_ = health;
+	health_ = _health;
 
 	update_healthbar();
 }
 
 void
 sanguis::client::draw2d::entities::model::object::max_health(
-	health_type const max_health
+	health_type const _max_health
 )
 {
-	max_health_ = max_health;
+	max_health_ = _max_health;
 	update_healthbar();
 }
 
 void
 sanguis::client::draw2d::entities::model::object::weapon(
-	weapon_type::type const weapon_
+	weapon_type::type const _weapon
 )
 {
-	BOOST_FOREACH(model::part &p, parts)
-		p.weapon(weapon_);
+	BOOST_FOREACH(
+		model::part &cur_part,
+		parts
+	)
+		cur_part.weapon(
+			_weapon
+		);
+
 	change_animation();
 }
 
 void
 sanguis::client::draw2d::entities::model::object::attacking(
-	bool const nattacking_
+	bool const _attacking
 )
 {
-	if(nattacking_ == attacking_)
+	if(_attacking == attacking_)
 		FCPPT_LOG_WARNING(
 			log(),
 			fcppt::log::_ << FCPPT_TEXT("attacking(): value already set!")
 		);
 
-	attacking_ = nattacking_;
+	attacking_ = _attacking;
 
 	change_animation();
 }
 
 void
 sanguis::client::draw2d::entities::model::object::reloading(
-	bool const nreloading_
+	bool const _reloading
 )
 {
-	if(nreloading_ == reloading_)
+	if(_reloading == reloading_)
 		FCPPT_LOG_WARNING(
 			log(),
 			fcppt::log::_ << FCPPT_TEXT("reloading(): value already set!")
 		);
 	
-	reloading_ = nreloading_;
+	reloading_ = _reloading;
 
 	change_animation();
 }
@@ -283,17 +289,20 @@ sanguis::client::draw2d::entities::model::object::change_animation()
 
 void
 sanguis::client::draw2d::entities::model::object::change_animation(
-	animation_type::type const nanim
+	animation_type::type const _anim
 )
 {
-	BOOST_FOREACH(model::part &p, parts)
+	BOOST_FOREACH(
+		model::part &cur_part,
+		parts
+	)
 	{
 		animation_type::type part_anim(
-			nanim
+			_anim
 		);
 
 		while(
-			!p.try_animation(part_anim)
+			!cur_part.try_animation(part_anim)
 		)
 			part_anim = fallback_anim(part_anim);
 	}
@@ -301,10 +310,12 @@ sanguis::client::draw2d::entities::model::object::change_animation(
 
 sanguis::animation_type::type
 sanguis::client::draw2d::entities::model::object::fallback_anim(
-	animation_type::type const anim
+	animation_type::type const _anim
 ) const
 {
-	switch(anim)
+	switch(
+		_anim
+	)
 	{
 	case animation_type::none:
 		return animation_type::size;
@@ -385,11 +396,12 @@ sanguis::client::draw2d::entities::model::object::animations_ended() const
 fcppt::log::object &
 sanguis::client::draw2d::entities::model::object::log()
 {
-	static fcppt::log::object log_(
+	static fcppt::log::object logger(
 		fcppt::log::parameters::inherited(
 			draw2d::log(),
 			FCPPT_TEXT("model")
 		)
 	);
-	return log_;
+
+	return logger;
 }
