@@ -14,13 +14,20 @@ namespace load
 {
 namespace resource
 {
-class animations {
+class animations
+{
 	FCPPT_NONCOPYABLE(animations)
 public:
 	sge::sprite::animation::series const
 	load(
 		fcppt::filesystem::path const &
 	) const;
+
+	explicit animations(
+		textures &
+	);
+
+	~animations();
 private:
 	sge::sprite::animation::series const
 	do_load(
@@ -37,17 +44,13 @@ private:
 		fcppt::filesystem::path const &
 	) const;
 
-	friend class context;
-
-	explicit animations(
-		textures &);
-
 	typedef std::map<
 		fcppt::filesystem::path,
 		sge::sprite::animation::series
 	> animation_map;
 	
-	textures     &textures_;
+	textures &textures_;
+
 	mutable animation_map animations_;
 };
 

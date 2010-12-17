@@ -36,6 +36,18 @@ sanguis::load::resource::animations::load(
 	);
 }
 
+sanguis::load::resource::animations::animations(
+	textures &_textures
+)
+:
+	textures_(_textures)
+{
+}
+
+sanguis::load::resource::animations::~animations()
+{
+}
+
 sge::sprite::animation::series const
 sanguis::load::resource::animations::do_load(
 	fcppt::filesystem::path const &dir) const
@@ -200,11 +212,3 @@ sanguis::load::resource::animations::load_without_frames_file(
 	);
 	return ret; // TODO: can we do this with boost::assign?
 }
-
-
-sanguis::load::resource::animations::animations(
-	textures &_textures
-)
-:
-	textures_(_textures)
-{}

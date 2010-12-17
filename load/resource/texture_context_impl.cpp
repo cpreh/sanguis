@@ -1,9 +1,8 @@
 #include "texture_context_impl.hpp" 
 #include <sge/texture/part_raw.hpp>
 #include <sge/renderer/resource_flags_none.hpp>
-#include <sge/image/create_texture.hpp>
-#include <sge/image/multi_loader.hpp>
-#include <sge/image/file.hpp>
+#include <sge/image2d/multi_loader.hpp>
+#include <sge/image2d/file.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/time/second.hpp>
 #include <fcppt/tr1/functional.hpp>
@@ -13,7 +12,7 @@
 sanguis::load::resource::texture_context_impl::texture_context_impl(
 	fcppt::filesystem::path const &_path,
 	sge::renderer::device_ptr const _rend,
-	sge::image::multi_loader &_il,
+	sge::image2d::multi_loader &_il,
 	sge::renderer::filter::texture const _filter)
 :
 	task_(
@@ -99,10 +98,10 @@ sanguis::load::resource::texture_context_impl::~texture_context_impl()
 sanguis::load::resource::texture_context_impl::future_value const
 sanguis::load::resource::texture_context_impl::task(
 	fcppt::filesystem::path const &_path,
-	sge::image::multi_loader &_il
+	sge::image2d::multi_loader &_il
 )
 {
-	sge::image::file_ptr const p = 
+	sge::image2d::file_ptr const p = 
 		_il.load(
 			_path
 		);

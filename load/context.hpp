@@ -7,7 +7,7 @@
 #include "../time_type.hpp"
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/renderer/dim2.hpp>
-#include <sge/image/multi_loader_fwd.hpp>
+#include <sge/image2d/multi_loader_fwd.hpp>
 #include <sge/audio/player_fwd.hpp>
 #include <sge/audio/multi_loader_fwd.hpp>
 #include <sge/audio/pool_fwd.hpp>
@@ -26,7 +26,7 @@ class context
 	FCPPT_NONCOPYABLE(context)
 public:
 	context(
-		sge::image::multi_loader &,
+		sge::image2d::multi_loader &,
 		sge::renderer::device_ptr,
 		sge::audio::multi_loader &,
 		sge::audio::player_ptr,
@@ -52,7 +52,7 @@ private:
 		fcppt::string const &
 	) const;
 
-	sge::image::multi_loader &il_;
+	sge::image2d::multi_loader &il_;
 
 	sge::renderer::device_ptr const rend_;
 

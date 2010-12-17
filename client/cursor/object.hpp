@@ -4,7 +4,7 @@
 #include "pos_callback.hpp"
 #include "visible_callback.hpp"
 #include <sge/gui/cursor/default.hpp>
-#include <sge/image/multi_loader_fwd.hpp>
+#include <sge/image2d/multi_loader_fwd.hpp>
 #include <sge/renderer/device_ptr.hpp>
 #include <fcppt/signal/object.hpp>
 #include <fcppt/shared_ptr.hpp>
@@ -22,7 +22,7 @@ class object
 {
 public:
 	object(
-		sge::image::multi_loader &,
+		sge::image2d::multi_loader &,
 		sge::renderer::device_ptr
 	);
 

@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_MENU_BUTTON_HPP_INCLUDED
 #define SANGUIS_CLIENT_MENU_BUTTON_HPP_INCLUDED
 
-#include <sge/image/multi_loader_fwd.hpp>
+#include <sge/image2d/multi_loader_fwd.hpp>
 #include <sge/gui/widgets/buttons/image.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <fcppt/string.hpp>
@@ -19,7 +19,7 @@ class button
 public:
 	button(
 		sge::gui::widgets::parent_data const &,
-		sge::image::multi_loader &,
+		sge::image2d::multi_loader &,
 		fcppt::filesystem::path const &,
 		fcppt::string const &
 	);

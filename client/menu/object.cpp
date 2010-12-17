@@ -12,8 +12,8 @@
 #include <sge/sprite/external_system_impl.hpp>
 #include <sge/sprite/render_one.hpp>
 #include <sge/texture/part_raw.hpp>
-#include <sge/image/file.hpp>
-#include <sge/image/multi_loader.hpp>
+#include <sge/image2d/file.hpp>
+#include <sge/image2d/multi_loader.hpp>
 #include <sge/renderer/filter/linear.hpp>
 #include <sge/renderer/resource_flags_none.hpp>
 #include <sge/renderer/device.hpp>
@@ -44,7 +44,7 @@ fcppt::log::object mylogger(
 sanguis::client::menu::object::object(
 	config::settings::object &_settings,
 	sge::renderer::device_ptr const _renderer,
-	sge::image::multi_loader &_image_loader,
+	sge::image2d::multi_loader &_image_loader,
 	sge::font::metrics_ptr const _font_metrics,
 	sge::input::keyboard::device_ptr const _keyboard,
 	sge::input::mouse::device_ptr const _mouse,

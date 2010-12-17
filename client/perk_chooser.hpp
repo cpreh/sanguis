@@ -11,7 +11,7 @@
 #include <sge/gui/widgets/backdrop.hpp>
 #include <sge/gui/widgets/label.hpp>
 #include <sge/gui/manager.hpp>
-#include <sge/image/multi_loader_fwd.hpp>
+#include <sge/image2d/multi_loader_fwd.hpp>
 #include <sge/input/keyboard/device_ptr.hpp>
 #include <sge/input/mouse/device_ptr.hpp>
 #include <sge/renderer/device_ptr.hpp>
@@ -38,7 +38,7 @@ public:
 		sge::renderer::device_ptr,
 		sge::input::keyboard::device_ptr,
 		sge::input::mouse::device_ptr,
-		sge::image::multi_loader &,
+		sge::image2d::multi_loader &,
 		sge::font::metrics_ptr,
 		send_callback const &,
 		sanguis::client::cursor::object_ptr
@@ -76,7 +76,7 @@ private:
 	typedef boost::ptr_vector<sge::gui::widgets::buttons::image> button_container;
 	typedef std::map<perk_type::type,perk_image> image_map;
 
-	sge::image::multi_loader &image_loader_;
+	sge::image2d::multi_loader &image_loader_;
 
 	perk_container perks_;
 	level_type 

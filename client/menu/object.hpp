@@ -18,7 +18,7 @@
 #include <sge/gui/widgets/edit.hpp>
 #include <sge/gui/widgets/label.hpp>
 #include <sge/gui/manager.hpp>
-#include <sge/image/multi_loader_fwd.hpp>
+#include <sge/image2d/multi_loader_fwd.hpp>
 #include <sge/input/keyboard/device_ptr.hpp>
 #include <sge/input/mouse/device_ptr.hpp>
 #include <sge/renderer/device_ptr.hpp>
@@ -51,7 +51,7 @@ public:
 	object(
 		config::settings::object &,
 		sge::renderer::device_ptr,
-		sge::image::multi_loader &,
+		sge::image2d::multi_loader &,
 		sge::font::metrics_ptr,
 		sge::input::keyboard::device_ptr,
 		sge::input::mouse::device_ptr,

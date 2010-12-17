@@ -42,7 +42,7 @@ sanguis::client::machine::machine(
 	sge::input::keyboard::device_ptr const _keyboard,
 	sge::input::mouse::device_ptr const _mouse,
 	sge::renderer::device_ptr const _renderer,
-	sge::image::multi_loader &_image_loader,
+	sge::image2d::multi_loader &_image_loader,
 	sge::audio::player_ptr const _audio_player,
 	awl::mainloop::io_service_ptr const _io_service
 )
@@ -283,7 +283,7 @@ sanguis::client::machine::renderer() const
 	return renderer_;
 }
 
-sge::image::multi_loader &
+sge::image2d::multi_loader &
 sanguis::client::machine::image_loader() const
 {
 	return image_loader_;

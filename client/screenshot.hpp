@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_SCREENSHOT_HPP_INCLUDED
 
 #include <sge/renderer/device_ptr.hpp>
-#include <sge/image/multi_loader_fwd.hpp>
+#include <sge/image2d/multi_loader_fwd.hpp>
 #include <sge/input/keyboard/device_ptr.hpp>
 #include <sge/input/keyboard/key_event_fwd.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
@@ -21,7 +21,7 @@ class screenshot
 public:
 	screenshot(
 		sge::renderer::device_ptr,
-		sge::image::multi_loader const &,
+		sge::image2d::multi_loader const &,
 		sge::input::keyboard::device_ptr
 	);
 

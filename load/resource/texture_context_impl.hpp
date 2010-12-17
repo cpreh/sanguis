@@ -6,8 +6,8 @@
 #include <sge/time/timer.hpp>
 #include <sge/renderer/device_ptr.hpp>
 #include <sge/renderer/filter/texture.hpp>
-#include <sge/image/multi_loader_fwd.hpp>
-#include <sge/image/file_ptr.hpp>
+#include <sge/image2d/multi_loader_fwd.hpp>
+#include <sge/image2d/file_ptr.hpp>
 #include <sge/texture/part_ptr.hpp>
 #include <fcppt/thread/object.hpp>
 #include <fcppt/filesystem/path.hpp>
@@ -27,7 +27,7 @@ public:
 	texture_context_impl(
 		fcppt::filesystem::path const &,
 		sge::renderer::device_ptr,
-		sge::image::multi_loader &,
+		sge::image2d::multi_loader &,
 		sge::renderer::filter::texture
 	);
 	bool update();
@@ -39,7 +39,7 @@ public:
 	bool decayed() const;
 	~texture_context_impl();
 private:
-	typedef sge::image::file_ptr future_value;
+	typedef sge::image2d::file_ptr future_value;
 	boost::packaged_task<future_value> task_;
 	boost::unique_future<future_value> future_;
 	fcppt::thread::object thread_;
@@ -51,7 +51,7 @@ private:
 
 	future_value const task(
 		fcppt::filesystem::path const &,
-		sge::image::multi_loader &
+		sge::image2d::multi_loader &
 	);
 };
 }

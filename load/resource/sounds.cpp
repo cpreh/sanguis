@@ -43,6 +43,17 @@ sanguis::load::resource::sounds::load_uncached(
 		);
 }
 
+sanguis::load::resource::sounds::sounds(
+	sge::audio::multi_loader &_ml,
+	sge::audio::player_ptr const _player,
+	sge::audio::pool &_pool
+)
+:
+	ml_(_ml),
+	player_(_player),
+	pool_(_pool)
+{}
+
 sanguis::load::resource::sounds::~sounds()
 {}
 
@@ -195,14 +206,3 @@ sanguis::load::resource::sounds::make_positional(
 
 	return sound;
 }
-
-sanguis::load::resource::sounds::sounds(
-	sge::audio::multi_loader &_ml,
-	sge::audio::player_ptr const _player,
-	sge::audio::pool &_pool
-)
-:
-	ml_(_ml),
-	player_(_player),
-	pool_(_pool)
-{}

@@ -50,20 +50,18 @@ public:
 		sound_type::type
 	) const;
 
-	~sounds();
-private:
-	sge::audio::file_ptr const
-	do_load(
-		sound_identifier const &
-	) const;
-
 	sounds(
 		sge::audio::multi_loader &,
 		sge::audio::player_ptr,
 		sge::audio::pool &
 	);
 
-	friend class context;
+	~sounds();
+private:
+	sge::audio::file_ptr const
+	do_load(
+		sound_identifier const &
+	) const;
 
 	typedef std::map<
 		sound_identifier,

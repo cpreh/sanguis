@@ -5,7 +5,7 @@
 #include <sge/gui/layouts/horizontal.hpp>
 #include <sge/gui/layouts/vertical.hpp>
 #include <sge/gui/make_image.hpp>
-#include <sge/image/multi_loader.hpp>
+#include <sge/image2d/multi_loader.hpp>
 #include <sge/font/text/from_fcppt_string.hpp>
 #include <sge/font/text/to_fcppt_string.hpp>
 #include <fcppt/make_shared_ptr.hpp>
@@ -27,7 +27,7 @@ sanguis::client::menu::menus::connect::connect(
 	sge::gui::widgets::parent_data const &_parent,
 	fcppt::filesystem::path const &buttons_path,
 	fcppt::filesystem::path const &labels_path,
-	sge::image::multi_loader &image_loader_
+	sge::image2d::multi_loader &image_loader_
 )
 :
 	parent(

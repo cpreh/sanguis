@@ -10,7 +10,7 @@
 #include <sge/texture/part_raw.hpp>
 #include <sge/renderer/filter/linear.hpp>
 #include <sge/renderer/resource_flags_none.hpp>
-#include <sge/image/multi_loader.hpp>
+#include <sge/image2d/multi_loader.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/filesystem/directory_iterator.hpp>
 #include <fcppt/filesystem/extension.hpp>
@@ -85,61 +85,9 @@ void sanguis::load::resource::textures::cleanup(
 	}
 }
 
-sanguis::load::resource::textures::~textures()
-{}
-
-sge::texture::part_ptr const
-sanguis::load::resource::textures::do_load(
-	texture_identifier const &id
-) const
-{
-	if(
-		texture_names.find(id) == texture_names.end()
-	)
-		throw exception(
-			FCPPT_TEXT("no texture for id \"")
-			+ id
-			+ FCPPT_TEXT("\" found")
-		);
-
-	return do_load_inner(
-		sanguis::media_path()
-		/ texture_names[id]
-	);
-}
-
-sanguis::load::resource::texture_context_impl_ptr const
-sanguis::load::resource::textures::do_load_unnamed(
-	fcppt::filesystem::path const &path
-) const
-{
-	return 
-		fcppt::make_shared_ptr<
-			texture_context_impl
-		>(
-			path,
-			texman.renderer(),
-			std::tr1::ref(
-				il
-			),
-			filter
-		);
-}
-
-sge::texture::part_ptr const
-sanguis::load::resource::textures::do_load_inner(
-	fcppt::filesystem::path const &p
-) const
-{
-	return sge::texture::add_image(
-		texman,
-		il.load(p)
-	);
-}
-
 sanguis::load::resource::textures::textures(
 	sge::renderer::device_ptr const _rend,
-	sge::image::multi_loader &_il
+	sge::image2d::multi_loader &_il
 )
 :
 	texman(
@@ -210,3 +158,57 @@ sanguis::load::resource::textures::textures(
 		}
 	}
 }
+
+sanguis::load::resource::textures::~textures()
+{}
+
+sge::texture::part_ptr const
+sanguis::load::resource::textures::do_load(
+	texture_identifier const &id
+) const
+{
+	if(
+		texture_names.find(id) == texture_names.end()
+	)
+		throw exception(
+			FCPPT_TEXT("no texture for id \"")
+			+ id
+			+ FCPPT_TEXT("\" found")
+		);
+
+	return do_load_inner(
+		sanguis::media_path()
+		/ texture_names[id]
+	);
+}
+
+sanguis::load::resource::texture_context_impl_ptr const
+sanguis::load::resource::textures::do_load_unnamed(
+	fcppt::filesystem::path const &path
+) const
+{
+	return 
+		fcppt::make_shared_ptr<
+			texture_context_impl
+		>(
+			path,
+			texman.renderer(),
+			std::tr1::ref(
+				il
+			),
+			filter
+		);
+}
+
+sge::texture::part_ptr const
+sanguis::load::resource::textures::do_load_inner(
+	fcppt::filesystem::path const &p
+) const
+{
+	return sge::texture::add_image(
+		texman,
+		il.load(p)
+	);
+}
+
+

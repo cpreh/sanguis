@@ -8,7 +8,7 @@
 #include <sge/texture/part_ptr.hpp>
 #include <sge/texture/manager.hpp>
 #include <sge/renderer/device_ptr.hpp>
-#include <sge/image/multi_loader_fwd.hpp>
+#include <sge/image2d/multi_loader_fwd.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <map>
@@ -38,9 +38,13 @@ public:
 		time_type
 	) const;
 	
+	textures(
+		sge::renderer::device_ptr,
+		sge::image2d::multi_loader &
+	);
+
 	~textures();
 private:
-	friend class context;
 	friend class animations;
 
 	sge::texture::part_ptr const
@@ -57,11 +61,6 @@ private:
 	do_load_inner(
 		fcppt::filesystem::path const &
 	) const;
-
-	textures(
-		sge::renderer::device_ptr,
-		sge::image::multi_loader &
-	);
 
 	typedef std::map<
 		texture_identifier,
@@ -80,7 +79,7 @@ private:
 
 	mutable sge::texture::manager texman;
 
-	sge::image::multi_loader &il;
+	sge::image2d::multi_loader &il;
 
 	mutable texture_map textures_;
 

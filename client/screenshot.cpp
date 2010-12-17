@@ -17,7 +17,7 @@
 
 sanguis::client::screenshot::screenshot(
 	sge::renderer::device_ptr const _renderer,
-	sge::image::multi_loader const &_loader,
+	sge::image2d::multi_loader const &_loader,
 	sge::input::keyboard::device_ptr const _keyboard
 )
 :

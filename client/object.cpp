@@ -18,8 +18,8 @@
 #include <sge/font/system.hpp>
 #include <sge/image/color/format.hpp>
 #include <sge/image/colors.hpp>
-#include <sge/image/create_texture.hpp>
-#include <sge/image/multi_loader.hpp>
+#include <sge/image2d/create_texture.hpp>
+#include <sge/image2d/multi_loader.hpp>
 #include <sge/renderer/filter/linear.hpp>
 #include <sge/renderer/state/bool.hpp>
 #include <sge/renderer/state/list.hpp>
@@ -93,7 +93,7 @@ sanguis::client::object::object(
 				fcppt::make_shared_ptr<
 					sge::texture::part_raw
 				>(
-					sge::image::create_texture(
+					sge::image2d::create_texture(
 						sanguis::media_path()
 						/ FCPPT_TEXT("console_back.png"),
 						sys_.renderer(),

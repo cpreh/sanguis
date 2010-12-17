@@ -6,7 +6,7 @@
 #include <sge/gui/widgets/base.hpp>
 #include <sge/gui/widgets/graphics.hpp>
 #include <sge/gui/widgets/edit.hpp>
-#include <sge/image/multi_loader_fwd.hpp>
+#include <sge/image2d/multi_loader_fwd.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -28,7 +28,7 @@ public:
 		sge::gui::widgets::parent_data const &,
 		fcppt::filesystem::path const &buttons_path,
 		fcppt::filesystem::path const &labels_path,
-		sge::image::multi_loader &
+		sge::image2d::multi_loader &
 	);
 
 	~connect();

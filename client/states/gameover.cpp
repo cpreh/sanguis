@@ -14,7 +14,7 @@
 #include <sge/gui/widgets/parameters.hpp>
 #include <sge/font/text/lit.hpp>
 #include <sge/font/text/from_fcppt_string.hpp>
-#include <sge/image/loader.hpp>
+#include <sge/image2d/loader.hpp>
 #include <sge/renderer/device.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>

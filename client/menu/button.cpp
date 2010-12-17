@@ -2,12 +2,12 @@
 #include <sge/gui/widgets/parameters.hpp>
 #include <sge/gui/make_image.hpp>
 #include <sge/gui/manager.hpp>
-#include <sge/image/multi_loader.hpp>
+#include <sge/image2d/multi_loader.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::client::menu::button::button(
 	sge::gui::widgets::parent_data const &_parent,
-	sge::image::multi_loader &_il,
+	sge::image2d::multi_loader &_il,
 	fcppt::filesystem::path const &_base,
 	fcppt::string const &_name
 )

@@ -2,6 +2,8 @@
 #include "textures.hpp"
 #include "sounds.hpp"
 #include "animations.hpp"
+#include <fcppt/tr1/functional.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 
 sanguis::load::resource::textures const &
 sanguis::load::resource::context::textures() const
@@ -32,29 +34,43 @@ sanguis::load::resource::context::update(
 }
 
 sanguis::load::resource::context::context(
-	sge::renderer::device_ptr const rend,
-	sge::image::multi_loader &il,
-	sge::audio::multi_loader &ml,
-	sge::audio::player_ptr const ap,
-	sge::audio::pool &pool
+	sge::renderer::device_ptr const _renderer,
+	sge::image2d::multi_loader &_image_loader,
+	sge::audio::multi_loader &_audio_loader,
+	sge::audio::player_ptr const _audio_player,
+	sge::audio::pool &_audio_pool
 )
 :
 	textures_(
-		new resource::textures(
-			rend,
-			il
+		fcppt::make_unique_ptr<
+			resource::textures
+		>(
+			_renderer,
+			std::tr1::ref(
+				_image_loader
+			)
 		)
 	),
 	sounds_(
-		new resource::sounds(
-			ml,
-			ap,
-			pool
+		fcppt::make_unique_ptr<
+			resource::sounds
+		>(
+			std::tr1::ref(
+				_audio_loader
+			),
+			_audio_player,
+			std::tr1::ref(
+				_audio_pool
+			)
 		)
 	),
 	animations_(
-		new resource::animations(
-			*textures_
+		fcppt::make_unique_ptr<
+			resource::animations
+		>(
+			std::tr1::ref(
+				*textures_
+			)
 		)
 	)
 {}

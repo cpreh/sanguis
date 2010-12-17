@@ -11,7 +11,7 @@
 #include <sge/gui/unit.hpp>
 #include <sge/gui/make_image.hpp>
 #include <sge/renderer/device.hpp>
-#include <sge/image/multi_loader.hpp>
+#include <sge/image2d/multi_loader.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
@@ -86,7 +86,7 @@ sanguis::client::perk_chooser::perk_chooser(
 	sge::renderer::device_ptr const _renderer,
 	sge::input::keyboard::device_ptr const _keyboard,
 	sge::input::mouse::device_ptr const _mouse,
-	sge::image::multi_loader &_image_loader,
+	sge::image2d::multi_loader &_image_loader,
 	sge::font::metrics_ptr const _font_metrics,
 	send_callback const &_send_callback,
 	sanguis::client::cursor::object_ptr const _cursor
