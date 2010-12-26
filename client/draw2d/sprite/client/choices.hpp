@@ -3,6 +3,7 @@
 
 #include "type_choices.hpp"
 #include <sge/sprite/choices.hpp>
+#include <sge/sprite/with_dim.hpp>
 #include <sge/sprite/with_repetition.hpp>
 #include <sge/sprite/with_texture.hpp>
 #include <sge/sprite/with_visibility.hpp>
@@ -22,7 +23,8 @@ namespace client
 
 typedef sge::sprite::choices<
 	type_choices,
-	boost::mpl::vector4<
+	boost::mpl::vector5<
+		sge::sprite::with_dim,
 		sge::sprite::with_repetition,
 		sge::sprite::with_texture,
 		sge::sprite::with_visibility,

@@ -3,6 +3,7 @@
 
 #include "type_choices.hpp"
 #include <sge/sprite/choices.hpp>
+#include <sge/sprite/with_dim.hpp>
 #include <sge/sprite/with_rotation.hpp>
 #include <sge/sprite/with_texture.hpp>
 #include <sge/sprite/intrusive/tag.hpp>
@@ -21,7 +22,8 @@ namespace normal
 
 typedef sge::sprite::choices<
 	type_choices,
-	boost::mpl::vector3<
+	boost::mpl::vector4<
+		sge::sprite::with_dim,
 		sge::sprite::with_rotation,
 		sge::sprite::with_texture,
 		sge::sprite::intrusive::tag
