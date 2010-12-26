@@ -121,9 +121,7 @@ sanguis::client::draw2d::scene::object::object(
 		_current_time
 	),
 	default_transform_(
-		sge::renderer::matrix_pixel_to_space<
-			sprite::float_unit
-		>(
+		sge::renderer::matrix_pixel_to_space(
 			rend_->screen_size()
 		)
 	)
