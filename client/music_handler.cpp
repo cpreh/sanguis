@@ -3,13 +3,13 @@
 #include "../media_path.hpp"
 #include "../load/resource/sounds.hpp"
 #include <sge/audio/sound/base.hpp>
-#include <sge/console/gfx.hpp>
 #include <sge/console/object.hpp>
 #include <sge/font/text/lit.hpp>
 #include <sge/exception.hpp>
 #include <fcppt/filesystem/directory_iterator.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
-#include <fcppt/log/headers.hpp>
+#include <fcppt/log/output.hpp>
+#include <fcppt/log/warning.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/lexical_cast.hpp>
