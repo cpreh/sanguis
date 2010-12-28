@@ -317,7 +317,9 @@ sanguis::client::draw2d::scene::object::render_systems()
 
 	sge::renderer::state::scoped const state_(
 		rend_,
-		sge::sprite::render_states()
+		sge::sprite::render_states<
+			client::draw2d::sprite::normal::choices
+		>()
 	);
 
 	rend_->transform(
