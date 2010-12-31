@@ -60,7 +60,7 @@ sanguis::client::console::register_server_command(
 	fcppt::string const &_description
 )
 {
-	server_connections_.connect(
+	server_connections_.add(
 		gfx_.object().insert(
 			sge::font::text::from_fcppt_string(
 				_name

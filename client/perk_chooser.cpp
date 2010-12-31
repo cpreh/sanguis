@@ -286,7 +286,7 @@ sanguis::client::perk_chooser::regenerate_widgets()
 			)
 		);
 
-		connections_.connect(
+		connections_.add(
 			buttons_.back().register_clicked(
 				std::tr1::bind(
 					&perk_chooser::choose_callback,
