@@ -18,7 +18,7 @@
 #include <sge/systems/viewport/manage_resize.hpp>
 #include <sge/window/parameters.hpp>
 #include <sge/extension_set.hpp>
-#include <awl/mainloop/asio/create_io_service.hpp>
+#include <awl/mainloop/asio/create_io_service_base.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/container/bitfield/basic_impl.hpp>
 #include <fcppt/text.hpp>
@@ -37,7 +37,7 @@ sanguis::args::client_sge_options(
 				)
 			)
 			.io_service(
-				awl::mainloop::asio::create_io_service()
+				awl::mainloop::asio::create_io_service_base()
 			)
 		)
 		(

@@ -86,7 +86,7 @@ sanguis::client::object::object(
 		sys_.renderer(),
 		sge::image::colors::white(),
 		font_metrics_,
-		sys_.keyboard_collector(),
+		*sys_.keyboard_collector(),
 		sge::console::sprite_object(
 			sge::console::sprite_parameters()
 			.texture(
