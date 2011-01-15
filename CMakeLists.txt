@@ -17,6 +17,10 @@ IF(${CMAKE_BINARY_DIR} STREQUAL ${CMAKE_SOURCE_DIR})
 	)
 ENDIF()
 
+OPTION(EXTRA_CMAKE_MODULE_PATH "Extra paths to search for cmake modules" "")
+
+SET (CMAKE_MODULE_PATH "${EXTRA_CMAKE_MODULE_PATH}")
+
 # Find Boost
 
 SET (Boost_ADDITIONAL_VERSIONS "1.41" "1.41.0" "1.42" "1.42.0" "1.43" "1.43.0" "1.44" "1.44.0")
@@ -74,6 +78,7 @@ LINK_DIRECTORIES(${FCPPT_LIBRARY_DIRS})
 
 FIND_PACKAGE(
 	SGE REQUIRED
+	COMPONENTS gui fonttext console sprite systems texture
 )
 
 INCLUDE_DIRECTORIES(${SGE_INCLUDE_DIRS})
@@ -154,12 +159,12 @@ TARGET_LINK_LIBRARIES(
 	sanguis
 	${FCPPT_LIBRARIES}
 	${SGE_CORE_LIBRARY}
-	${SGE_GUI_LIBRARY}
-	sgefonttext #FIXME
-	sgeconsole #FIXME
-	sgesprite #FIXMe
-	sgesystems #FIXME
-	sgetexture #FIXME
+	${SGE_gui_LIBRARY}
+	${SGE_fonttext_LIBRARY}
+	${SGE_console_LIBRARY}
+	${SGE_sprite_LIBRARY}
+	${SGE_systems_LIBRARY}
+	${SGE_texture_LIBRARY}
 )
 
 IF(NOT MSVC)
