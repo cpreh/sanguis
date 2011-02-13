@@ -25,32 +25,58 @@ class client
 	FCPPT_NONCOPYABLE(client)
 public:
 	typedef void connect_fun ();
+
 	typedef void disconnect_fun (fcppt::string const &);
+
 	typedef void data_fun (data_type const &);
+
 	typedef fcppt::function::object<connect_fun> connect_function;
+
 	typedef fcppt::function::object<disconnect_fun> disconnect_function;
+
 	typedef fcppt::function::object<data_fun> data_function;
 
 	explicit client(
 		awl::mainloop::io_service_ptr
 	);
 
-	void connect(
+	void
+	connect(
 		hostname_type const &,
-		port_type);
-	void disconnect();
-	void queue(
-		data_type const &);
-	void process();
-	fcppt::signal::auto_connection register_connect(
-		connect_function const &);
-	fcppt::signal::auto_connection register_disconnect(
-		disconnect_function const &);
-	fcppt::signal::auto_connection register_data(
-		data_function const &);
+		port_type
+	);
+
+	void
+	disconnect();
+
+	void
+	queue(
+		data_type const &
+	);
+
+	void
+	process();
+
+	fcppt::signal::auto_connection
+	register_connect(
+		connect_function const &
+	);
+
+	fcppt::signal::auto_connection
+	register_disconnect(
+		disconnect_function const &
+	);
+
+	fcppt::signal::auto_connection
+	register_data(
+		data_function const &
+	);
+
 	~client();
 private:
-	fcppt::scoped_ptr<detail::client_impl> impl_;
+	fcppt::scoped_ptr<
+		detail::client_impl
+	> impl_;
 };
 }
 }

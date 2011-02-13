@@ -36,6 +36,7 @@
 #include <sge/window/instance.hpp>
 
 #include <awl/mainloop/io_service.hpp>
+#include <awl/mainloop/dispatcher.hpp>
 
 #include <fcppt/function/object.hpp>
 #include <fcppt/log/output.hpp>
@@ -165,9 +166,6 @@ sanguis::client::object::object(
 		sge::time::second(1)
 	),
 	server_(),
-	running_(
-		true
-	),
 	scoped_machine_(
 		machine_
 	)
@@ -195,19 +193,9 @@ sanguis::client::object::run()
 {
 	try
 	{
-		register_handler();
+		this->register_handler();
 
-		while(
-			running_
-		)
-		{
-			if(
-				io_service_
-			)
-				io_service_->run_one();
-			else
-				window_->dispatch();
-		}
+		io_service_->run();
 	}
 	catch(
 		fcppt::exception const &_exception
@@ -231,15 +219,12 @@ sanguis::client::object::run()
 void
 sanguis::client::object::register_handler()
 {
-	if(
-		io_service_
-	)
-		io_service_->post(
-			std::tr1::bind(
-				&object::loop_handler,
-				this
-			)
-		);
+	io_service_->post(
+		std::tr1::bind(
+			&object::loop_handler,
+			this
+		)
+	);
 }
 
 void
@@ -261,7 +246,7 @@ sanguis::client::object::loop_handler()
 			&& !server_->running()
 		)
 	)
-		running_ = false;
+		window_->awl_dispatcher()->stop();
 	else
 		register_handler();
 }

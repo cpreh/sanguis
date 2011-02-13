@@ -13,7 +13,7 @@ namespace sanguis
 {
 class log_switcher
 {
-	FCPPT_NONCOPYABLE(log_switcher)
+	FCPPT_NONCOPYABLE(log_switcher);
 public:
 	typedef
 	boost::program_options::options_description &

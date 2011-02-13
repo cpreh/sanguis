@@ -16,7 +16,7 @@ class server_context
 :
 	public context_base
 {
-	FCPPT_NONCOPYABLE(server_context)
+	FCPPT_NONCOPYABLE(server_context);
 public:
 	server_context();
 

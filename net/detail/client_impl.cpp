@@ -36,9 +36,11 @@ sanguis::net::detail::client_impl::client_impl(
 {
 }
 
-void sanguis::net::detail::client_impl::connect(
-	hostname_type const &s,
-	port_type const port)
+void
+sanguis::net::detail::client_impl::connect(
+	hostname_type const &_host,
+	port_type const _port
+)
 {
 	FCPPT_LOG_DEBUG(
 		log(),
@@ -49,9 +51,11 @@ void sanguis::net::detail::client_impl::connect(
 	);
 	
 	boost::asio::ip::tcp::resolver::query query(
-		s,
+		_host,
 		fcppt::lexical_cast<std::string>(
-			port));
+			_port
+		)
+	);
 
 	resolver_.async_resolve(
 		query,

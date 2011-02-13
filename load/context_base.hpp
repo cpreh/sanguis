@@ -13,7 +13,9 @@ namespace load
 
 class context_base
 {
-	FCPPT_NONCOPYABLE(context_base)
+	FCPPT_NONCOPYABLE(
+		context_base
+	);
 protected:
 	context_base();
 public:

@@ -9,7 +9,9 @@ namespace sanguis
 
 class main_object
 {
-	FCPPT_NONCOPYABLE(main_object)
+	FCPPT_NONCOPYABLE(
+		main_object
+	);
 protected:
 	main_object();
 public:

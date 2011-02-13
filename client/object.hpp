@@ -92,8 +92,6 @@ private:
 		server::object
 	> server_;
 
-	bool running_;
-
 	typedef sanguis::scoped_machine<
 		client::machine
 	> scoped_machine;

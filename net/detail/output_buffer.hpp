@@ -14,7 +14,7 @@ namespace detail
 
 class output_buffer
 {
-	FCPPT_NONCOPYABLE(output_buffer)
+	FCPPT_NONCOPYABLE(output_buffer);
 public:
 	output_buffer();
 	~output_buffer();

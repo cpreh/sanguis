@@ -12,8 +12,11 @@ namespace sanguis
 namespace messages
 {
 
-class base {
-	FCPPT_NONCOPYABLE(base)
+class base
+{
+	FCPPT_NONCOPYABLE(
+		base
+	);
 protected:
 	base();
 public:

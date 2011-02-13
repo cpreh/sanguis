@@ -9,8 +9,11 @@
 namespace sanguis
 {
 
-class diff_clock {
-	FCPPT_NONCOPYABLE(diff_clock)
+class diff_clock
+{
+	FCPPT_NONCOPYABLE(
+		diff_clock
+	);
 public:
 	diff_clock();
 

@@ -7,6 +7,7 @@
 #include <sge/renderer/window_parameters.hpp>
 #include <sge/systems/audio_loader.hpp>
 #include <sge/systems/audio_player_default.hpp>
+#include <sge/systems/cursor_option_field.hpp>
 #include <sge/systems/image_loader.hpp>
 #include <sge/systems/input.hpp>
 #include <sge/systems/input_helper.hpp>
@@ -72,7 +73,7 @@ sanguis::args::client_sge_options(
 				)
 				|
 				sge::systems::input_helper::mouse_collector,
-				sge::systems::cursor_grab::off
+				sge::systems::cursor_option_field::null()
 			)
 		)
 		(
