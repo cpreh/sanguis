@@ -447,8 +447,6 @@ SET(
 	src/client/machine.hpp
 	src/client/make_screenshot_path.cpp
 	src/client/make_screenshot_path.hpp
-	src/client/menu/button.cpp
-	src/client/menu/button.hpp
 	src/client/menu/callbacks/cancel_connect.hpp
 	src/client/menu/callbacks/connect.hpp
 	src/client/menu/callbacks/object.cpp
