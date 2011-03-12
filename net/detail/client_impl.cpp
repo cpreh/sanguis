@@ -8,6 +8,7 @@
 #include <fcppt/log/headers.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/from_std_string.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <fcppt/text.hpp>
 #include <boost/asio/buffer.hpp>
@@ -25,11 +26,10 @@ sanguis::net::detail::client_impl::client_impl(
 	resolver_(
 		io_service_
 	),
-	handlers_(0),
-	new_data_(),
-	output_(),
-	connected_(false),
-	sending_(false),
+	received_data_(),
+	send_data_(
+		1024 * 64
+	),
 	connect_signal_(),
 	disconnect_signal_(),
 	data_signal_()
@@ -53,15 +53,19 @@ sanguis::net::detail::client_impl::connect(
 			<< _port
 	);
 	
-	boost::asio::ip::tcp::resolver::query query(
-		_host,
-		fcppt::lexical_cast<std::string>(
-			_port
+	query_.take(
+		fcppt::make_unique_ptr<
+			boost::asio::ip::tcp::resolver::query
+		>(
+			_host,
+			fcppt::lexical_cast<std::string>(
+				_port
+			)
 		)
 	);
 
 	resolver_.async_resolve(
-		query,
+		*query_,
 		std::tr1::bind(
 			&client_impl::resolve_handler,
 			this,
@@ -69,174 +73,197 @@ sanguis::net::detail::client_impl::connect(
 			std::tr1::placeholders::_2
 		)
 	);
-
-	handlers_++;
 }
 
-void sanguis::net::detail::client_impl::disconnect()
+void
+sanguis::net::detail::client_impl::disconnect()
 {
-	clear();
-	/* TODO: should we send this signal here? it could lead to an endless loop
-	 * (in sanguis at least)
-	disconnect_signal_(
-		FCPPT_TEXT("Client disconnected"));
-		*/
+	socket_.close();
+
+	this->clear();
 }
 
-void sanguis::net::detail::client_impl::queue(
-	data_type const &data)
+void
+sanguis::net::detail::client_impl::queue(
+	data_type const &_data
+)
 {
 	output_.push_back(
-		data);
+		_data
+	);
+
+	if(
+		send_data_.capacity()
+		- send_data_.size()
+		<
+		_data.size()
+	)
+	{
+		// not enough space left
+		// TODO: call something here and wait!
+	}
+
+	bool const sending(
+		send_data_.empty()
+	);
+
+	send_data_.insert(
+		_data.begin(),
+		_data.end(),
+		send_data_.end()
+	);
+
+	if(
+		!sending
+	)
+		this->send_data();
 }
 
-void sanguis::net::detail::client_impl::process()
+fcppt::signal::auto_connection
+sanguis::net::detail::client_impl::register_connect(
+	client::connect_function const &_function
+)
 {
-	if (connected_ && !sending_ && output_.characters_left())
-	{
-		data_type const &buffer(
-			output_.buffer()
+	return
+		connect_signal_.connect(
+			_function
 		);
+}
 
-		sending_ = true;
-		socket_.async_send(
-			boost::asio::buffer(
-				buffer.data(),
-				buffer.size()
-			),
-			std::tr1::bind(
-				&sanguis::net::detail::client_impl::write_handler,
-				this,
-				std::tr1::placeholders::_1,
-				std::tr1::placeholders::_2
+fcppt::signal::auto_connection
+sanguis::net::detail::client_impl::register_disconnect(
+	client::disconnect_function const &_function
+)
+{
+	return
+		disconnect_signal_.connect(
+			_function
+		);
+}
+
+fcppt::signal::auto_connection
+sanguis::net::detail::client_impl::register_data(
+	client::data_function const &_function
+)
+{
+	return
+		data_signal_.connect(
+			_function
+		);
+}
+
+void
+sanguis::net::detail::client_impl::resolve_handler(
+	boost::system::error_code const &_error
+	boost::asio::ip::tcp::resolver::iterator _iterator
+)
+{
+	if(
+		_error
+	)
+		throw sanguis::exception(
+			FCPPT_TEXT("client: error resolving address: ")+
+			fcppt::from_std_string(
+				_error.message()
 			)
 		);
 
-		++handlers_;
-	}
-
-	if (!handlers_)
-		return;
-
-	boost::system::error_code e;
-	io_service_.poll(
-		e);
-	if (e)
-		throw exception(
-			FCPPT_TEXT("poll error: ")+
-			fcppt::from_std_string(
-				e.message()));
-}
-
-fcppt::signal::auto_connection sanguis::net::detail::client_impl::register_connect(
-	client::connect_function const &f)
-{
-	return connect_signal_.connect(
-		f);
-}
-
-fcppt::signal::auto_connection sanguis::net::detail::client_impl::register_disconnect(
-	client::disconnect_function const &f)
-{
-	return disconnect_signal_.connect(
-		f);
-}
-
-fcppt::signal::auto_connection sanguis::net::detail::client_impl::register_data(
-	client::data_function const &f)
-{
-	return data_signal_.connect(
-		f);
-}
-
-void sanguis::net::detail::client_impl::resolve_handler(
-	boost::system::error_code const &e,
-	boost::asio::ip::tcp::resolver::iterator i)
-{
-	if (e)
-		throw exception(
-			FCPPT_TEXT("client: error resolving address: ")+
-			fcppt::from_std_string(
-				e.message()));
-
 	FCPPT_LOG_DEBUG(
-		log(),
-		fcppt::log::_ << FCPPT_TEXT("client: resolved domain, trying to connect"));
+		net::log(),
+		fcppt::log::_ << FCPPT_TEXT("client: resolved domain, trying to connect")
+	);
 	
-	boost::asio::ip::tcp::endpoint endpoint = *i;
+	boost::asio::ip::tcp::endpoint const endpoint(
+		*_iterator
+	);
+
 	socket_.async_connect(
 		endpoint,
 		std::tr1::bind(
 			&client_impl::connect_handler,
 			this,
 			std::tr1::placeholders::_1,
-			++i
+			++_iterator
 		)
 	);
-
-	handlers_++;
 }
 
-void sanguis::net::detail::client_impl::handle_error(
-	fcppt::string const &s,
-	boost::system::error_code const &e)
+void
+sanguis::net::detail::client_impl::handle_error(
+	fcppt::string const &_message,
+	boost::system::error_code const &_error
+)
 {
-	clear();
+	this->clear();
 
-	if (!detail::is_disconnect(e))
-	{
-		throw exception(
-			FCPPT_TEXT("error in ")+
-			s+
-			FCPPT_TEXT(": ")+
+	if(
+		!detail::is_disconnect(
+			_error
+		)
+	)
+		throw sanguis::exception(
+			FCPPT_TEXT("error in ") +
+			_message +
+			FCPPT_TEXT(": ") +
 			fcppt::from_std_string(
-				e.message()));
-	}
+				_error.message()
+			)
+		);
+
 		
 	FCPPT_LOG_DEBUG(
-		log(),
+		net::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("client: disconnected (")
-			<< fcppt::from_std_string(e.message()) 
-			<< FCPPT_TEXT(")"));
+			<< fcppt::from_std_string(
+				_error.message())
+
+			<< FCPPT_TEXT(")")
+	);
 
 	disconnect_signal_(
 		fcppt::from_std_string(
-			e.message()
+			_error.message()
 		)
 	);
 }
 
-void sanguis::net::detail::client_impl::read_handler(
-	boost::system::error_code const &e,
-	std::size_t const bytes)
+void
+sanguis::net::detail::client_impl::read_handler(
+	boost::system::error_code const &_error,
+	std::size_t const _bytes
+)
 {
-	--handlers_;
-	
-	if (e)
+	if(
+		_error
+	)
 	{
-		handle_error(
+		this->handle_error(
 			FCPPT_TEXT("client read"),
-			e);
+			_error
+		);
+
 		return;
 	}
 
 	FCPPT_LOG_DEBUG(
-		log(),
+		net::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("client: read ")
-			<< bytes
+			<< _bytes
 			<< FCPPT_TEXT(" bytes.")
 	);
 
 	data_signal_(
-		data_type(
-			new_data_.begin(),
-			new_data_.begin() + bytes));
+		net::data_type(
+			received_data_.begin(),
+			received_data_.begin() + _bytes
+		)
+	);
 
 	socket_.async_receive(
 		boost::asio::buffer(
-			new_data_
+			received_data_
 		),
 		std::tr1::bind(
 			&client_impl::read_handler,
@@ -245,105 +272,99 @@ void sanguis::net::detail::client_impl::read_handler(
 			std::tr1::placeholders::_2
 		)
 	);
-
-	handlers_++;
 }
 
-void sanguis::net::detail::client_impl::write_handler(
-	boost::system::error_code const &e,
-	std::size_t const bytes)
+void
+sanguis::net::detail::client_impl::write_handler(
+	boost::system::error_code const &_error,
+	std::size_t const _bytes
+)
 {
-	handlers_--;
-
-	if (e)
+	if(
+		_error
+	)
 	{
-		handle_error(
+		this->handle_error(
 			FCPPT_TEXT("client write"),
-			e);
+			_error
+		);
+
 		return;
 	}
 
 	FCPPT_LOG_DEBUG(
-		log(),
+		net::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("client: wrote ")
-			<< bytes 
-			<< FCPPT_TEXT(" bytes"));
+			<< _bytes 
+			<< FCPPT_TEXT(" bytes")
+	);
 
-	output_.erase(
-		bytes);
+	send_data_.erase(
+		bytes
+	);
 
 	// are there bytes left to send?
-	if (output_.characters_left())
-	{
-		data_type const &buffer(
-			output_.buffer()
-		);
-
-		socket_.async_send(
-			boost::asio::buffer(
-				buffer.data(),
-				buffer.size()
-			),
-			std::tr1::bind(
-				&client_impl::write_handler,
-				this,
-				std::tr1::placeholders::_1,
-				std::tr1::placeholders::_2
-			)
-		);
-
-		handlers_++;
-	}
-	else
-	{
-		// if no more data is present, set sending to false
-		sending_ = false;
-	}
+	if(
+		!send_data_.empty()
+	)
+		this->send_data();
 }
 
-void sanguis::net::detail::client_impl::connect_handler(
-	boost::system::error_code const &e,
-	boost::asio::ip::tcp::resolver::iterator i)
+void
+sanguis::net::detail::client_impl::connect_handler(
+	boost::system::error_code const &_error
+	boost::asio::ip::tcp::resolver::iterator _iterator
+)
 {
-	handlers_--;
-	if (e)
+	if(
+		_error
+	)
 	{
 		// are we at the end of the endpoint list?
-		if (i == boost::asio::ip::tcp::resolver::iterator())
-			throw exception(
+		if(
+			_iterator == boost::asio::ip::tcp::resolver::iterator()
+		)
+			throw sanguis::exception(
 				FCPPT_TEXT("client: exhausted endpoints: ")+
 				fcppt::from_std_string(
-					e.message()));
+					_error.message()
+				)
+			);
 
 		FCPPT_LOG_DEBUG(
-			log(),
-			fcppt::log::_ << FCPPT_TEXT("client: resolving next endpoint"));
+			net::log(),
+			fcppt::log::_ << FCPPT_TEXT("client: resolving next endpoint")
+		);
 		
-		boost::asio::ip::tcp::endpoint endpoint = *i;
+		boost::asio::ip::tcp::endpoint const endpoint(
+			*_iterator
+		);
+
 		socket_.async_connect(
 			endpoint,
 			std::tr1::bind(
 				&client_impl::connect_handler,
 				this,
 				std::tr1::placeholders::_1,
-				++i
+				++_iterator
 			)
 		);
-		handlers_++;
+
 		return;
 	}
 
 	FCPPT_LOG_DEBUG(
-		log(),
-		fcppt::log::_ << FCPPT_TEXT("client: connected"));
+		net::log(),
+		fcppt::log::_ << FCPPT_TEXT("client: connected")
+	);
 
-	// first connect to true, _then_ call signal
-	connected_ = true;
 	connect_signal_();
+
 	socket_.async_receive(
 		boost::asio::buffer(
-			new_data_),
+			received_data_
+		),
 		std::tr1::bind(
 			&client_impl::read_handler,
 			this,
@@ -351,12 +372,35 @@ void sanguis::net::detail::client_impl::connect_handler(
 			std::tr1::placeholders::_2
 		)
 	);
-
-	handlers_++;
 }
 
-void sanguis::net::detail::client_impl::clear()
+void
+sanguis::net::detail::client_impl::send_data()
 {
-	connected_ = sending_ = false;
+	detail::circular_buffer::const_array_range const array(
+		send_data_.second_array().empty()
+		?
+			send_data_.second_array()
+		:
+			send_data_.first_array()
+	);
+
+	socket_.async_send(
+		boost::asio::buffer(
+			array.first,
+			array.second - array.first
+		),
+		std::tr1::bind(
+			&sanguis::net::detail::client_impl::write_handler,
+			this,
+			std::tr1::placeholders::_1,
+			std::tr1::placeholders::_2
+		)
+	);
+}
+
+void
+sanguis::net::detail::client_impl::clear()
+{
 	output_.clear();
 }

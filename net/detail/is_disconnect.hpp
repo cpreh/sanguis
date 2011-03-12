@@ -13,7 +13,10 @@ namespace net
 namespace detail
 {
 
-bool is_disconnect(boost::system::error_code const &e);
+bool
+is_disconnect(
+	boost::system::error_code const &
+);
 
 }
 }

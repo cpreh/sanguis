@@ -2,7 +2,7 @@
 #define SANGUIS_NET_SERVER_HPP_INCLUDED
 
 #include "detail/server_impl_fwd.hpp"
-#include "id_type.hpp"
+#include "id.hpp"
 #include "data_type.hpp"
 #include "port_type.hpp"
 
@@ -20,11 +20,13 @@ namespace net
 
 class server
 {
-	FCPPT_NONCOPYABLE(server);
+	FCPPT_NONCOPYABLE(
+		server
+	);
 public:
-	typedef void connect_fun (id_type);
-	typedef void disconnect_fun (id_type,fcppt::string const &);
-	typedef void data_fun (id_type,data_type const &);
+	typedef void connect_fun (net::id);
+	typedef void disconnect_fun (net::id,fcppt::string const &);
+	typedef void data_fun (net::id,data_type const &);
 	typedef void timer_fun ();
 	typedef fcppt::function::object<connect_fun> connect_function;
 	typedef fcppt::function::object<disconnect_fun> disconnect_function;
@@ -43,7 +45,7 @@ public:
 
 	void
 	queue(
-		id_type,
+		net::id,
 		data_type const &);
 
 	void

@@ -10,7 +10,7 @@ namespace net
 {
 
 typedef fcppt::container::raw_vector<
-	value_type
+	net::value_type
 > data_type;
 
 }
