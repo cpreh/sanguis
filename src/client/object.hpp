@@ -8,12 +8,11 @@
 #include "../net/port_type.hpp"
 #include "../server/object_fwd.hpp"
 #include "../main_object.hpp"
-#include "../scoped_machine.hpp"
 
 #include <sge/audio/pool.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/console/object.hpp>
-#include <sge/font/text/drawer_ptr.hpp>
+#include <sge/font/text/drawer_3d.hpp>
 #include <sge/font/metrics_ptr.hpp>
 #include <sge/time/timer.hpp>
 #include <sge/systems/instance_fwd.hpp>
@@ -23,6 +22,7 @@
 
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
+#include <fcppt/scoped_state_machine.hpp>
 
 #include <boost/program_options/variables_map.hpp>
 
@@ -35,7 +35,9 @@ class object
 :
 	public main_object
 {
-	FCPPT_NONCOPYABLE(object)
+	FCPPT_NONCOPYABLE(
+		object
+	);
 public:
 	explicit object(
 		sge::systems::instance &,
@@ -70,7 +72,7 @@ private:
 
 	sge::font::metrics_ptr const font_metrics_;
 
-	sge::font::text::drawer_ptr const font_drawer_;
+	sge::font::text::drawer_3d font_drawer_;
 
 	sge::console::object console_;
 
@@ -92,7 +94,7 @@ private:
 		server::object
 	> server_;
 
-	typedef sanguis::scoped_machine<
+	typedef fcppt::scoped_state_machine<
 		client::machine
 	> scoped_machine;
 

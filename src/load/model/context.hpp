@@ -16,7 +16,9 @@ namespace model
 
 class context
 {
-	FCPPT_NONCOPYABLE(context)
+	FCPPT_NONCOPYABLE(
+		context
+	);
 public:
 	collection const &
 	operator()() const;

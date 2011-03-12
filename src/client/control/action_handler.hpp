@@ -26,7 +26,7 @@ class action_handler
 {
 	FCPPT_NONCOPYABLE(
 		action_handler
-	)
+	);
 public:
 	action_handler(
 		client::send_callback const &,

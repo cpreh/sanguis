@@ -19,7 +19,9 @@ namespace settings
 
 class object
 {
-	FCPPT_NONCOPYABLE(object)
+	FCPPT_NONCOPYABLE(
+		object
+	);
 public:
 	explicit object(
 		fcppt::filesystem::path const &

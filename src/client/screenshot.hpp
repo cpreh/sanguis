@@ -17,7 +17,9 @@ namespace client
 
 class screenshot
 {
-	FCPPT_NONCOPYABLE(screenshot)
+	FCPPT_NONCOPYABLE(
+		screenshot
+	);
 public:
 	screenshot(
 		sge::renderer::device_ptr,

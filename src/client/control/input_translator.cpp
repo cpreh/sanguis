@@ -53,7 +53,7 @@ sanguis::client::control::input_translator::key_callback(
 )
 {
 	switch(
-		_event.key().code()
+		_event.key_code()
 	)
 	{
 	case sge::input::keyboard::key_code::a:
@@ -149,7 +149,7 @@ sanguis::client::control::input_translator::direction_event(
 	action_type::type to_send;
 
 	switch(
-		_event.key().code()
+		_event.key_code()
 	)
 	{
 	case sge::input::keyboard::key_code::a:

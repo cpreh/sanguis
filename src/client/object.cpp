@@ -72,12 +72,8 @@ sanguis::client::object::object(
 		)
 	),
 	font_drawer_(
-		fcppt::make_shared_ptr<
-			sge::font::text::drawer_3d
-		>(
-			sys_.renderer(),
-			sge::image::colors::white()
-		)
+		sys_.renderer(),
+		sge::image::colors::white()
 	),
 	console_(
 		FCPPT_TEXT('/')

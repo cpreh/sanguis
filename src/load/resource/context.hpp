@@ -23,7 +23,9 @@ namespace resource
 
 class context
 {
-	FCPPT_NONCOPYABLE(context)
+	FCPPT_NONCOPYABLE(
+		context
+	);
 public:
 	resource::textures const &
 	textures() const;

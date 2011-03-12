@@ -25,7 +25,7 @@ class input_translator
 {
 	FCPPT_NONCOPYABLE(
 		input_translator
-	)
+	);
 public:
 	typedef fcppt::function::object<
 		void (player_action const &)

@@ -15,7 +15,9 @@ namespace settings
 
 class saver
 {
-	FCPPT_NONCOPYABLE(saver)
+	FCPPT_NONCOPYABLE(
+		saver
+	);
 public:
 	explicit saver(
 		object const &
@@ -23,7 +25,7 @@ public:
 
 	~saver();
 private:
-	object const &object_;	
+	settings::object const &object_;	
 };
 
 }

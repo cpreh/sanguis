@@ -97,7 +97,7 @@ sanguis::client::console::input_callback(
 )
 {
 	if(
-		_event.key().code() == toggler_
+		_event.key_code() == toggler_
 		&& _event.pressed()
 	)
 	{

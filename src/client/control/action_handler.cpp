@@ -10,7 +10,6 @@
 #include "../../messages/player_stop_shooting.hpp"
 #include "../../messages/player_change_weapon.hpp"
 #include "../../messages/player_cheat.hpp"
-#include "../../cyclic_iterator_impl.hpp"
 #include "../../exception.hpp"
 #include <sge/time/millisecond.hpp>
 #include <sge/font/text/lit.hpp>
@@ -22,6 +21,7 @@
 #include <fcppt/log/headers.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/function/object.hpp>
+#include <fcppt/cyclic_iterator.hpp>
 #include <fcppt/text.hpp>
 #include <algorithm>
 #include <iterator>
@@ -290,7 +290,7 @@ sanguis::client::control::action_handler::handle_switch_weapon(
 		weapon_index < owned_weapons_.size()
 	);
 
-	typedef cyclic_iterator<
+	typedef fcppt::cyclic_iterator<
 		owned_weapons_array::const_iterator
 	> iterator;
 	

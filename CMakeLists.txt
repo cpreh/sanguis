@@ -78,7 +78,7 @@ LINK_DIRECTORIES(${FCPPT_LIBRARY_DIRS})
 
 FIND_PACKAGE(
 	SGE REQUIRED
-	COMPONENTS gui fonttext console sprite systems texture
+	COMPONENTS cegui fonttext console sprite systems texture
 )
 
 INCLUDE_DIRECTORIES(${SGE_INCLUDE_DIRS})
@@ -121,6 +121,7 @@ SET(
 	${CMAKE_INSTALL_PREFIX}/share/games/sanguis
 )
 
+# TODO: use a config file for this!
 set_source_files_properties(
 	media_path.cpp
 	PROPERTIES
@@ -518,8 +519,6 @@ SET(
 	src/client/states/waiting_for_player.cpp
 	src/client/states/waiting_for_player.hpp
 	src/connect_state.hpp
-	src/cyclic_iterator.hpp
-	src/cyclic_iterator_impl.hpp
 	src/damage_type.hpp
 	src/diff_clock.cpp
 	src/diff_clock.hpp
@@ -905,8 +904,6 @@ SET(
 	src/random.hpp
 	src/rel_angle_to_abs.hpp
 	src/resolution.hpp
-	src/scoped_machine.hpp
-	src/scoped_machine_impl.hpp
 	src/server/ai/auto_weak_link_vector.hpp
 	src/server/ai/base.cpp
 	src/server/ai/base.hpp
@@ -1380,7 +1377,7 @@ TARGET_LINK_LIBRARIES(
 	sanguis
 	${FCPPT_LIBRARIES}
 	${SGE_CORE_LIBRARY}
-	${SGE_gui_LIBRARY}
+	${SGE_cegui_LIBRARY}
 	${SGE_fonttext_LIBRARY}
 	${SGE_console_LIBRARY}
 	${SGE_sprite_LIBRARY}

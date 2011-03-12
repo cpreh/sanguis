@@ -37,7 +37,7 @@ sanguis::client::machine::machine(
 	load::context const &_resources,
 	sge::audio::pool &_sound_pool,
 	sge::font::metrics_ptr const _font_metrics,
-	sge::font::text::drawer_ptr const _font_drawer,
+	sge::font::text::drawer &_font_drawer,
 	sge::console::gfx &_console_gfx,
 	sge::input::keyboard::device_ptr const _keyboard,
 	sge::input::mouse::device_ptr const _mouse,
@@ -319,7 +319,7 @@ sanguis::client::machine::font_metrics() const
 	return font_metrics_;
 }
 
-sge::font::text::drawer_ptr const
+sge::font::text::drawer &
 sanguis::client::machine::font_drawer() const
 {
 	return font_drawer_;

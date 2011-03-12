@@ -22,9 +22,12 @@ namespace sanguis
 {
 namespace client
 {
+
 class console
 {
-	FCPPT_NONCOPYABLE(console)
+	FCPPT_NONCOPYABLE(
+		console
+	);
 public:
 	explicit
 	console(
@@ -63,8 +66,7 @@ private:
 
 	sge::console::gfx &gfx_;
 
-	fcppt::signal::scoped_connection const
-		input_connection_;
+	fcppt::signal::scoped_connection const input_connection_;
 
 	sge::input::keyboard::key_code::type const toggler_;
 

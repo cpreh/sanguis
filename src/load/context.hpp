@@ -23,7 +23,9 @@ class context
 :
 	public context_base
 {
-	FCPPT_NONCOPYABLE(context)
+	FCPPT_NONCOPYABLE(
+		context
+	);
 public:
 	context(
 		sge::image2d::multi_loader &,

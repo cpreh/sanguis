@@ -13,13 +13,16 @@ namespace messages
 template<
 	typename T
 >
-struct make_class {
+struct make_class
+{
 	typedef majutsu::class_<
 		T,
 		majutsu::memory::raw
 	> type;
 
-	FCPPT_RESTRICT_TYPEDEF_STRUCT(make_class)
+	FCPPT_RESTRICT_TYPEDEF_STRUCT(
+		make_class
+	);
 };
 
 }
