@@ -1,0 +1,8 @@
+#!/bin/sh
+update_cmake \
+	CMakeLists.txt \
+	SANGUIS_FILES \
+	src \
+	|| exit -1
+
+mv CMakeLists.txt.new CMakeLists.txt
