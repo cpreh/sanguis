@@ -1,10 +1,8 @@
 #include "client_sge_options.hpp"
 #include "multi_sampling.hpp"
-#include "resolution.hpp"
-#include "window_mode.hpp"
+#include "screen_mode.hpp"
 #include <sge/renderer/parameters.hpp>
 #include <sge/renderer/refresh_rate_dont_care.hpp>
-#include <sge/renderer/window_parameters.hpp>
 #include <sge/systems/audio_loader.hpp>
 #include <sge/systems/audio_player_default.hpp>
 #include <sge/systems/cursor_option_field.hpp>
@@ -15,13 +13,16 @@
 #include <sge/systems/list.hpp>
 #include <sge/systems/parameterless.hpp>
 #include <sge/systems/renderer.hpp>
+#include <sge/renderer/refresh_rate_dont_care.hpp>
 #include <sge/systems/window.hpp>
-#include <sge/systems/viewport/manage_resize.hpp>
-#include <sge/window/parameters.hpp>
+#include <sge/viewport/fill_on_resize.hpp>
+#include <sge/window/dim.hpp>
+#include <sge/window/simple_parameters.hpp>
 #include <sge/extension_set.hpp>
 #include <awl/mainloop/asio/create_io_service_base.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/container/bitfield/basic_impl.hpp>
+#include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/text.hpp>
 
 sge::systems::list const
@@ -29,12 +30,18 @@ sanguis::args::client_sge_options(
 	boost::program_options::variables_map const &_vm
 )
 {
+	sge::window::dim const dimensions(
+		1024,
+		768
+	);
+
 	return
 		sge::systems::list()
 		(
 			sge::systems::window(
-				sge::renderer::window_parameters(
-					FCPPT_TEXT("sanguis")
+				sge::window::simple_parameters(
+					FCPPT_TEXT("sanguis"),
+					dimensions
 				)
 			)
 			.io_service(
@@ -44,18 +51,10 @@ sanguis::args::client_sge_options(
 		(
 			sge::systems::renderer(
 				sge::renderer::parameters(
-					sge::renderer::display_mode(
-						args::resolution(
-							_vm
-						),
-						sge::renderer::bit_depth::depth32,
-						sge::renderer::refresh_rate_dont_care
-					),
-					sge::renderer::depth_buffer::off,
-					sge::renderer::stencil_buffer::off,
-					args::window_mode(
+					args::screen_mode(
 						_vm
 					),
+					sge::renderer::depth_stencil_buffer::off,
 					sge::renderer::vsync::on,
 					sge::renderer::multi_sample_type(
 						args::multi_sampling(
@@ -63,7 +62,7 @@ sanguis::args::client_sge_options(
 						)
 					)
 				),
-				sge::systems::viewport::manage_resize()
+				sge::viewport::fill_on_resize()
 			)
 		)
 		(

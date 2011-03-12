@@ -22,7 +22,7 @@ namespace net
 
 class client
 {
-	FCPPT_NONCOPYABLE(client)
+	FCPPT_NONCOPYABLE(client);
 public:
 	typedef void connect_fun ();
 

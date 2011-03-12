@@ -30,7 +30,7 @@ namespace detail
 
 class client_impl
 {
-	FCPPT_NONCOPYABLE(client_impl)
+	FCPPT_NONCOPYABLE(client_impl);
 public:
 	explicit client_impl(
 		boost::asio::io_service &

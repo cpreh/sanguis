@@ -46,8 +46,11 @@ sanguis::net::detail::client_impl::connect(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("client: resolving hostname ")
-			<< fcppt::from_std_string(s) << FCPPT_TEXT(" on port ")
-			<< port
+			<< fcppt::from_std_string(
+				_host
+			)
+			<< FCPPT_TEXT(" on port ")
+			<< _port
 	);
 	
 	boost::asio::ip::tcp::resolver::query query(

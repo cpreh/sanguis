@@ -18,8 +18,9 @@ namespace sanguis
 namespace net
 {
 
-class server {
-	FCPPT_NONCOPYABLE(server)
+class server
+{
+	FCPPT_NONCOPYABLE(server);
 public:
 	typedef void connect_fun (id_type);
 	typedef void disconnect_fun (id_type,fcppt::string const &);

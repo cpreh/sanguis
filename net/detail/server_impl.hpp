@@ -26,7 +26,7 @@ namespace detail
 
 class server_impl
 {
-	FCPPT_NONCOPYABLE(server_impl)
+	FCPPT_NONCOPYABLE(server_impl);
 public:
 	explicit
 	server_impl(

@@ -16,8 +16,9 @@ namespace net
 namespace detail
 {
 
-class connection {
-	FCPPT_NONCOPYABLE(connection)
+class connection
+{
+	FCPPT_NONCOPYABLE(connection);
 public:
 	connection(
 		id_type,

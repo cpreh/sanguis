@@ -42,14 +42,14 @@ sanguis::args::options()
 			"width",
 			po::value<
 				sge::renderer::screen_unit
-			>()->default_value(1024),
+			>(),
 			"sets the display width"
 		)
 		(
 			"height",
 			po::value<
 				sge::renderer::screen_unit
-			>()->default_value(768),
+			>(),
 			"sets the display height"
 		)
 		(
