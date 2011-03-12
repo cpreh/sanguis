@@ -1,59 +1,21 @@
 #include "object.hpp"
-#include <sge/sprite/object_impl.hpp>
+#include <sge/input/cursor/object.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
 
 sanguis::client::cursor::object::object(
-	sge::image2d::multi_loader &il,
-	sge::renderer::device_ptr const rend
+	sge::input::cursor::object_ptr const _cursor
 )
 : 
-	default_(
-		il,
-		rend
-	),
-	pos_signal_(),
-	visible_signal_()
+	cursor_(_cursor)
 {
-	visible(
-		true
-	);
 }
 
 sanguis::client::cursor::object::~object()
-{}
-
-sge::gui::point const sanguis::client::cursor::object::pos() const
 {
-	return sge::gui::cursor::default_::pos();
 }
 
-void sanguis::client::cursor::object::pos(
-	sge::gui::point const &p) 
+sanguis::client::cursor::point const
+sanguis::client::cursor::object::pos() const
 {
-	pos_signal_(
-		p);
-	sge::gui::cursor::default_::pos(
-		p);
-}
-
-void sanguis::client::cursor::object::visible(
-	bool const n)
-{
-	visible_signal_(
-		n);
-	mutable_sprite().visible(
-		n);
-}
-
-fcppt::signal::auto_connection sanguis::client::cursor::object::register_pos_callback(
-	pos_callback const &p)
-{
-	return pos_signal_.connect(
-		p);
-}
-
-fcppt::signal::auto_connection sanguis::client::cursor::object::register_visible_callback(
-	visible_callback const &p)
-{
-	return visible_signal_.connect(
-		p);
+	return cursor_->position();
 }

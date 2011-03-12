@@ -19,7 +19,9 @@ namespace model
 
 class weapon_category
 {
-	FCPPT_NONCOPYABLE(weapon_category)
+	FCPPT_NONCOPYABLE(
+		weapon_category
+	);
 public:
 	animation const &
 	operator[](

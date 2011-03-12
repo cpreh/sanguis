@@ -8,6 +8,7 @@
 #include "../funit.hpp"
 #include "../../../load/model/collection_fwd.hpp"
 #include <fcppt/function/object.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -22,6 +23,9 @@ class aoe_bullet
 :
 	public model::object
 {
+	FCPPT_NONCOPYABLE(
+		aoe_bullet
+	);
 public:
 	aoe_bullet(
 		model::parameters const &,

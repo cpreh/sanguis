@@ -4,6 +4,7 @@
 #include "message_fwd.hpp"
 #include "../../messages/auto_ptr.hpp"
 #include "../../messages/shared_ptr.hpp"
+#include <fcppt/nonassignable.hpp>
 #include <boost/statechart/event.hpp>
 
 namespace sanguis
@@ -13,12 +14,16 @@ namespace client
 namespace events
 {
 
-struct message
+class message
 :
-	boost::statechart::event<
+	public boost::statechart::event<
 		message
 	>
 {
+	FCPPT_NONASSIGNABLE(
+		message
+	);
+public:
 	explicit message(
 		messages::auto_ptr message
 	);
@@ -28,7 +33,7 @@ struct message
 	messages::shared_ptr const
 	value() const;
 private:
-	messages::shared_ptr value_;
+	messages::shared_ptr const value_;
 };
 
 }

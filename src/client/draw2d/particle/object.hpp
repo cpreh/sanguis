@@ -7,6 +7,7 @@
 #include "../sprite/particle/system.hpp"
 #include "../../../particle_type.hpp"
 #include "../../../diff_clock.hpp"
+#include "../../../time_type.hpp"
 #include "../../../load/model/animation_context_ptr.hpp"
 #include <sge/sprite/object_decl.hpp>
 #include <fcppt/scoped_ptr.hpp>
@@ -24,11 +25,15 @@ namespace particle
 
 class object
 :
-	public base
+	public particle::base
 {
-	FCPPT_NONCOPYABLE(object)
+	FCPPT_NONCOPYABLE(
+		object
+	);
 public:
-	typedef fcppt::optional<time_type> optional_time;
+	typedef fcppt::optional<
+		time_type
+	> optional_time;
 
 	object(
 		particle_type::type,
@@ -40,7 +45,8 @@ public:
 
 	~object();
 
-	bool update(
+	bool
+	update(
 		time_type,
 		point const &,
 		rotation_type,

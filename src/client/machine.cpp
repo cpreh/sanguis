@@ -17,7 +17,6 @@
 #include <sge/console/gfx.hpp>
 #include <sge/renderer/scoped_block.hpp>
 #include <sge/renderer/device.hpp>
-#include <sge/renderer/texture.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/systems/instance.hpp>
 
@@ -40,7 +39,7 @@ sanguis::client::machine::machine(
 	sge::font::text::drawer &_font_drawer,
 	sge::console::gfx &_console_gfx,
 	sge::input::keyboard::device_ptr const _keyboard,
-	sge::input::mouse::device_ptr const _mouse,
+	sge::input::cursor::object_ptr const _cursor,
 	sge::renderer::device_ptr const _renderer,
 	sge::image2d::multi_loader &_image_loader,
 	sge::audio::player_ptr const _audio_player,
@@ -50,7 +49,6 @@ sanguis::client::machine::machine(
 	settings_(_settings),
 	resources_(_resources),
 	keyboard_(_keyboard),
-	mouse_(_mouse),
 	renderer_(_renderer),
 	image_loader_(_image_loader),
 	audio_player_(_audio_player),
@@ -105,19 +103,14 @@ sanguis::client::machine::machine(
 		keyboard_
 	),
 	cursor_(
-		fcppt::make_unique_ptr<
-			sanguis::client::cursor::object
-		>(
-			std::tr1::ref(
-				image_loader_
-			),
-			renderer_
-		)
+		_cursor
 	)
-{}
+{
+}
 
 sanguis::client::machine::~machine()
-{}
+{
+}
 
 void
 sanguis::client::machine::start_server()
@@ -295,12 +288,6 @@ sanguis::client::machine::keyboard() const
 	return keyboard_;
 }
 
-sge::input::mouse::device_ptr const
-sanguis::client::machine::mouse() const
-{
-	return mouse_;
-}
-
 sge::audio::player_ptr const
 sanguis::client::machine::audio_player() const
 {
@@ -337,13 +324,13 @@ sanguis::client::machine::resources() const
 	return resources_;
 }
 
-sanguis::client::cursor::object_ptr const 
+sanguis::client::cursor::object & 
 sanguis::client::machine::cursor()
 {
 	return cursor_;
 }
 
-sanguis::client::cursor::const_object_ptr const 
+sanguis::client::cursor::object const &
 sanguis::client::machine::cursor() const
 {
 	return cursor_;

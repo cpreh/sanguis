@@ -17,7 +17,9 @@ namespace client
 
 class daytime_settings
 {
-	FCPPT_NONCOPYABLE(daytime_settings)
+	FCPPT_NONCOPYABLE(
+		daytime_settings
+	);
 public:
 	explicit
 	daytime_settings(

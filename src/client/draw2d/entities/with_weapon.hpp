@@ -15,7 +15,9 @@ namespace entities
 
 class with_weapon
 {
-	FCPPT_NONCOPYABLE(with_weapon)
+	FCPPT_NONCOPYABLE(
+		with_weapon
+	);
 protected:
 	with_weapon();
 

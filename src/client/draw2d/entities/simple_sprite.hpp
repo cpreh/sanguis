@@ -9,6 +9,7 @@
 #include "../sprite/order.hpp"
 #include <sge/texture/part_ptr.hpp>
 #include <sge/sprite/object_decl.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -24,6 +25,9 @@ class simple_sprite
 	public base,
 	public with_visibility
 {
+	FCPPT_NONCOPYABLE(
+		simple_sprite
+	);
 public:
 	simple_sprite(
 		sprite::client::system &system_,		

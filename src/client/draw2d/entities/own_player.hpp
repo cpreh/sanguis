@@ -6,6 +6,7 @@
 #include "../transform_callback.hpp"
 #include "../../../time_type.hpp"
 #include <fcppt/function/object.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -20,11 +21,16 @@ class own_player
 :
 	public player
 {
+	FCPPT_NONCOPYABLE(
+		own_player
+	);
 public:
 	explicit own_player(
 		model::parameters const &,
 		transform_callback const &
 	);
+
+	~own_player();
 private:
 	void
 	update(

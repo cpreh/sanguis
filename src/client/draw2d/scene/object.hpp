@@ -17,7 +17,7 @@
 #include "../transform_callback.hpp"
 #include "../insert_callback.hpp"
 #include "../../control/environment_fwd.hpp"
-#include "../../cursor/object_ptr.hpp"
+#include "../../cursor/object_fwd.hpp"
 #include "../../messages/add_fwd.hpp"
 #include "../../messages/visible_fwd.hpp"
 #include "../../../load/context_fwd.hpp"
@@ -29,7 +29,7 @@
 #include <sge/renderer/device_ptr.hpp>
 #include <sge/renderer/screen_size.hpp>
 #include <sge/font/metrics_ptr.hpp>
-#include <sge/font/text/drawer_ptr.hpp>
+#include <sge/font/text/drawer_fwd.hpp>
 #include <sge/audio/listener_fwd.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/math/vector/basic_decl.hpp>
@@ -50,15 +50,17 @@ namespace scene
 
 class object
 {
-	FCPPT_NONCOPYABLE(object)
+	FCPPT_NONCOPYABLE(
+		object
+	);
 public:
 	object(
 		load::context const &,
 		sge::renderer::device_ptr,
 		sge::font::metrics_ptr,
-		sge::font::text::drawer_ptr,
+		sge::font::text::drawer &,
 		sge::audio::listener &,
-		client::cursor::object_ptr,
+		client::cursor::object &,
 		std::tm const &initial_time
 	);
 

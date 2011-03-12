@@ -19,7 +19,9 @@ class message_environment
 :
 	public draw2d::message::environment
 {
-	FCPPT_NONCOPYABLE(message_environment)
+	FCPPT_NONCOPYABLE(
+		message_environment
+	);
 public:
 	explicit message_environment(
 		object &,

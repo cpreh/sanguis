@@ -27,7 +27,9 @@ namespace model
 
 class animation
 {
-	FCPPT_NONCOPYABLE(animation)
+	FCPPT_NONCOPYABLE(
+		animation
+	);
 public:
 	animation_sound const &
 	sounds() const;

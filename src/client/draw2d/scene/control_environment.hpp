@@ -5,7 +5,7 @@
 #include "../../control/environment.hpp"
 #include "../../control/direction_vector.hpp"
 #include "../../control/key_scale.hpp"
-#include "../../cursor/object_ptr.hpp"
+#include "../../cursor/object_fwd.hpp"
 #include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -22,11 +22,13 @@ class control_environment
 :
 	public client::control::environment
 {
-	FCPPT_NONCOPYABLE(control_environment)
+	FCPPT_NONCOPYABLE(
+		control_environment
+	);
 public:
 	control_environment(
 		object &,
-		client::cursor::object_ptr
+		client::cursor::object &
 	);
 
 	~control_environment();
@@ -58,7 +60,7 @@ private:
 
 	scene::object &object_;
 
-	client::cursor::object_ptr const cursor_;
+	client::cursor::object &cursor_;
 
 	client::control::direction_vector direction_;
 };

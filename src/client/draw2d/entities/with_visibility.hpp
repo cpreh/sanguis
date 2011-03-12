@@ -14,7 +14,9 @@ namespace entities
 
 class with_visibility
 {
-	FCPPT_NONCOPYABLE(with_visibility)
+	FCPPT_NONCOPYABLE(
+		with_visibility
+	);
 protected:
 	with_visibility();
 

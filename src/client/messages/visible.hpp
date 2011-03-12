@@ -16,11 +16,11 @@ class visible
 {
 	FCPPT_NONASSIGNABLE(
 		visible
-	)
+	);
 public:
 	visible(
 		entity_id,
-		bool visible_
+		bool visible
 	);
 
 	entity_id

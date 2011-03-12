@@ -15,7 +15,9 @@ namespace entities
 
 class with_orientation
 {
-	FCPPT_NONCOPYABLE(with_orientation)
+	FCPPT_NONCOPYABLE(
+		with_orientation
+	);
 protected:
 	with_orientation();
 

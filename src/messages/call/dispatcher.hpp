@@ -4,6 +4,7 @@
 #include "dispatcher_base.hpp"
 #include "../base.hpp"
 #include "../concrete.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -22,21 +23,32 @@ class dispatcher
 		Callee
 	>
 {
+	FCPPT_NONCOPYABLE(
+		dispatcher
+	);
 public:
+	dispatcher()
+	{
+	}
+
+	~dispatcher()
+	{
+	}
+
 	typename Callee::result_type
 	call(
-		Callee &callee_,
-		base const &message_
+		Callee &_callee,
+		base const &_message
 	) const
 	{
 		return
-			callee_(
+			_callee(
 				dynamic_cast<
 					concrete<
 						Message
 					> const &
 				>(
-					message_
+					_message
 				).value()
 			);
 	}

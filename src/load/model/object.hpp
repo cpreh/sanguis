@@ -27,12 +27,17 @@ class object
 		part
 	> part_map;
 
-	FCPPT_NONCOPYABLE(object)
+	FCPPT_NONCOPYABLE(
+		object
+	);
 public:
-	typedef part_map::value_type      value_type;
+	typedef part_map::value_type value_type;
+
 	typedef part_map::const_reference const_reference;
-	typedef part_map::const_iterator  const_iterator;
-	typedef part_map::size_type       size_type;
+
+	typedef part_map::const_iterator const_iterator;
+
+	typedef part_map::size_type size_type;
 
 	~object();
 

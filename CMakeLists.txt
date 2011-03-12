@@ -202,15 +202,10 @@ SET(
 	src/client/control/player_action_fwd.hpp
 	src/client/create.cpp
 	src/client/create.hpp
-	src/client/cursor/const_object_ptr.hpp
 	src/client/cursor/object.cpp
 	src/client/cursor/object.hpp
 	src/client/cursor/object_fwd.hpp
-	src/client/cursor/object_ptr.hpp
-	src/client/cursor/pos_callback.hpp
-	src/client/cursor/pos_fn.hpp
-	src/client/cursor/visible_callback.hpp
-	src/client/cursor/visible_fn.hpp
+	src/client/cursor/point.hpp
 	src/client/daytime_settings.cpp
 	src/client/daytime_settings.hpp
 	src/client/daytime_settings_fwd.hpp

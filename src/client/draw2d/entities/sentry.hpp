@@ -3,6 +3,7 @@
 
 #include "model/object.hpp"
 #include "model/parameters_fwd.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -17,10 +18,15 @@ class sentry
 :
 	public model::object
 {
+	FCPPT_NONCOPYABLE(
+		sentry
+	);
 public:
 	explicit sentry(
 		model::parameters const &
 	);
+
+	~sentry();
 	
 	void
 	orientation(

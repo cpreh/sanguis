@@ -1,13 +1,9 @@
 #ifndef SANGUIS_CLIENT_CURSOR_OBJECT_HPP_INCLUDED
 #define SANGUIS_CLIENT_CURSOR_OBJECT_HPP_INCLUDED
 
-#include "pos_callback.hpp"
-#include "visible_callback.hpp"
-#include <sge/gui/cursor/default.hpp>
-#include <sge/image2d/multi_loader_fwd.hpp>
-#include <sge/renderer/device_ptr.hpp>
-#include <fcppt/signal/object.hpp>
-#include <fcppt/shared_ptr.hpp>
+#include "point.hpp"
+#include <sge/input/cursor/object_ptr.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -17,45 +13,21 @@ namespace cursor
 {
 
 class object
-:
-	public sge::gui::cursor::default_
 {
+	FCPPT_NONCOPYABLE(
+		object
+	);
 public:
-	object(
-		sge::image2d::multi_loader &,
-		sge::renderer::device_ptr
+	explicit object(
+		sge::input::cursor::object_ptr
 	);
 
 	~object();
 
-	sge::gui::point const
+	cursor::point const
 	pos() const;
-
-	void
-	pos(
-		sge::gui::point const &
-	);
-
-	void
-	visible(
-		bool
-	);
-
-	fcppt::signal::auto_connection
-	register_pos_callback(
-		pos_callback const &
-	);
-
-	fcppt::signal::auto_connection
-	register_visible_callback(
-		visible_callback const &
-	);
 private:
-	typedef fcppt::signal::object<pos_fn> pos_signal_type;
-	typedef fcppt::signal::object<visible_fn> visible_signal_type;
-
-	pos_signal_type pos_signal_;
-	visible_signal_type visible_signal_;
+	sge::input::cursor::object_ptr const cursor_;
 };
 
 }

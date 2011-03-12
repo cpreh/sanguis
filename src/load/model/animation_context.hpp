@@ -16,11 +16,12 @@ namespace load
 {
 namespace model
 {
+
 class animation_context
 {
 	FCPPT_NONASSIGNABLE(
 		animation_context
-	)
+	);
 public:
 	typedef fcppt::function::object<
 		void (
@@ -31,20 +32,29 @@ public:
 	animation_context(
 		resource::texture_context const &,
 		frame_cache const &,
-		cache_callback const &);
-	void update();
+		cache_callback const &
+	);
 
-	bool is_finished() const;
+	void
+	update();
+
+	bool
+	is_finished() const;
 
 	sge::sprite::animation::series const &
 	result() const;
 private:
 	resource::texture_context texture_context_;
+
 	frame_cache const &frame_cache_;
+
 	cache_callback cache_callback_;
+
 	bool is_finished_;
+
 	sge::sprite::animation::series animation_;
 };
+
 }
 }
 }

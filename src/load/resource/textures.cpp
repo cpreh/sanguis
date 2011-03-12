@@ -37,28 +37,31 @@ filter(
 
 sge::texture::part_ptr const
 sanguis::load::resource::textures::load(
-	texture_identifier const &id) const
+	texture_identifier const &_id
+) const
 {
-	return map_get_or_create(
-		textures_,
-		id, 
-		std::tr1::bind(
-			&textures::do_load,
-			this,
-			std::tr1::placeholders::_1
-		)
-	);
+	return
+		this->map_get_or_create(
+			textures_,
+			_id, 
+			std::tr1::bind(
+				&textures::do_load,
+				this,
+				std::tr1::placeholders::_1
+			)
+		);
 }
 
 sanguis::load::resource::texture_context const
 sanguis::load::resource::textures::load(
-	fcppt::filesystem::path const &path) const
+	fcppt::filesystem::path const &_path
+) const
 {
 	return 
-		texture_context(
-			map_get_or_create(
-				unnamed_textures,
-				path,
+		resource::texture_context(
+			this->map_get_or_create(
+				unnamed_textures_,
+				_path,
 				std::tr1::bind(
 					&textures::do_load_unnamed,
 					this,
@@ -68,133 +71,197 @@ sanguis::load::resource::textures::load(
 		);
 }
 
-void sanguis::load::resource::textures::cleanup(
-	time_type const delta) const
+void
+sanguis::load::resource::textures::cleanup(
+	time_type const _delta
+) const
 {
 	for(
-		unnamed_texture_map::iterator it(unnamed_textures.begin()), next(it); 
-		it != unnamed_textures.end(); 
+		unnamed_texture_map::iterator it(
+			unnamed_textures_.begin()
+		), next(it); 
+		it != unnamed_textures_.end(); 
 		it = next) 
 	{ 
 		++next; 
+
 		it->second->tick(
-			delta);
-		if (it->second->decayed())
-			unnamed_textures.erase(
-				it);
+			_delta
+		);
+
+		if(
+			it->second->decayed()
+		)
+			unnamed_textures_.erase(
+				it
+			);
 	}
 }
 
 sanguis::load::resource::textures::textures(
-	sge::renderer::device_ptr const _rend,
-	sge::image2d::multi_loader &_il
+	sge::renderer::device_ptr const _renderer,
+	sge::image2d::multi_loader &_image_loader
 )
 :
-	texman(
-		_rend,
+	texture_manager_(
+		_renderer,
 		boost::phoenix::construct<
 			sge::texture::fragmented_unique_ptr
 		>(
 			boost::phoenix::new_<
 				sge::texture::no_fragmented
 			>(
-				_rend,
+				_renderer,
 				sge::image::color::format::rgba8,
 				filter
 			)
 		)
 	),
-	il(
-		_il
+	image_loader_(
+		_mage_loader
 	)
 {
 	// look for .tex files
-	for (fcppt::filesystem::directory_iterator i(sanguis::media_path()), end; i != end; ++i)
+	for(
+		fcppt::filesystem::directory_iterator it(
+			sanguis::media_path()
+		), end;
+		it != end;
+		++it
+	)
 	{
-		fcppt::filesystem::path const &p = i->path();
-		if (!fcppt::filesystem::is_regular(p) || fcppt::filesystem::extension(p) != FCPPT_TEXT(".tex"))
+		fcppt::filesystem::path const &path(
+			iti->path()
+		);
+
+		if(
+			!fcppt::filesystem::is_regular(
+				path
+			)
+			||
+			fcppt::filesystem::extension(
+				path
+			)
+			!= FCPPT_TEXT(".tex")
+		)
 			continue;
 		
 		// and parse line by line
-		fcppt::io::ifstream file(p);
-		if (!file.is_open())
-			throw exception(
+		fcppt::io::ifstream file(
+			path
+		);
+
+		if(
+			!file.is_open()
+		)
+			throw sanguis::exception(
 				FCPPT_TEXT("error opening id file \"")
 				+ fcppt::filesystem::path_to_string(
-					p
+					path
 				)
-				+ FCPPT_TEXT('"'));
+				+ FCPPT_TEXT('"')
+			);
 
 		std::streamsize line_num(0);
+
 		fcppt::string line;
-		while (std::getline(file,line))
+
+		while(
+			std::getline(
+				file,
+				line
+			)
+		)
 		{
 			++line_num;
 
-			boost::algorithm::trim(line);
+			boost::algorithm::trim(
+				line
+			);
 
 			if (line.empty())
 				continue;
 
-			fcppt::string::size_type const equal
-				= line.find(
-					FCPPT_TEXT("="));
+			fcppt::string::size_type const equal(
+				line.find(
+					FCPPT_TEXT("=")
+				)
+			);
 
-			if(equal == fcppt::string::npos)
+			if(
+				equal == fcppt::string::npos
+			)
 			{
 				FCPPT_LOG_WARNING(
 					sanguis::load::log(),
 					fcppt::log::_
 						<< FCPPT_TEXT("Error in .id file \")")
 						<< fcppt::filesystem::path_to_string(
-							p
+							path
 						)
 						<< FCPPT_TEXT("\" in line ")
 						<< line_num
 						<< FCPPT_TEXT('!'));
 				continue;
 			}
-			texture_names[line.substr(0,equal)] = line.substr(equal+1);
+
+			texture_names_[
+				line.substr(
+					0,
+					equal
+				)
+			] =
+				line.substr(
+					equal + 1
+				);
 		}
 	}
 }
 
 sanguis::load::resource::textures::~textures()
-{}
+{
+}
 
 sge::texture::part_ptr const
 sanguis::load::resource::textures::do_load(
-	texture_identifier const &id
+	texture_identifier const &_id
 ) const
 {
 	if(
-		texture_names.find(id) == texture_names.end()
+		texture_names_.find(
+			_id
+		)
+		== texture_names.end()
 	)
-		throw exception(
+		throw sanguis::exception(
 			FCPPT_TEXT("no texture for id \"")
 			+ id
 			+ FCPPT_TEXT("\" found")
 		);
 
-	return do_load_inner(
-		sanguis::media_path()
-		/ texture_names[id]
-	);
+	return
+		this->do_load_inner(
+			sanguis::media_path()
+			/
+			texture_names_[
+				_id
+			]
+		);
 }
 
 sanguis::load::resource::texture_context_impl_ptr const
 sanguis::load::resource::textures::do_load_unnamed(
-	fcppt::filesystem::path const &path
+	fcppt::filesystem::path const &_path
 ) const
 {
 	return 
 		fcppt::make_shared_ptr<
 			texture_context_impl
 		>(
-			path,
-			texman.renderer(),
+			_path,
+			texture_manager_.renderer(),
 			std::tr1::ref(
-				il
+				image_loader_
 			),
 			filter
 		);
@@ -202,13 +269,14 @@ sanguis::load::resource::textures::do_load_unnamed(
 
 sge::texture::part_ptr const
 sanguis::load::resource::textures::do_load_inner(
-	fcppt::filesystem::path const &p
+	fcppt::filesystem::path const &_path
 ) const
 {
-	return sge::texture::add_image(
-		texman,
-		il.load(p)
-	);
+	return
+		sge::texture::add_image(
+			texture_manageR_,
+			image_loader_.load(
+				_path
+			)
+		);
 }
-
-

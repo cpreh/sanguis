@@ -15,7 +15,7 @@ namespace scene
 
 dim2 const
 background_dim(
-	entities::base const &background_
+	entities::base const &background
 );
 
 }

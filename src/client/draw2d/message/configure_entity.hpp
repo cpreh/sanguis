@@ -38,7 +38,7 @@ class configure_entity
 {
 	FCPPT_NONASSIGNABLE(
 		configure_entity
-	)
+	);
 
 	typedef boost::mpl::map<
 		boost::mpl::pair<

@@ -20,8 +20,11 @@ namespace load
 namespace resource
 {
 
-class textures {
-	FCPPT_NONCOPYABLE(textures)
+class textures
+{
+	FCPPT_NONCOPYABLE(
+		textures
+	);
 public:
 	sge::texture::part_ptr const
 	load(
@@ -77,15 +80,15 @@ private:
 		texture_identifier
 	> texture_name_map;
 
-	mutable sge::texture::manager texman;
+	mutable sge::texture::manager texture_manager_;
 
-	sge::image2d::multi_loader &il;
+	sge::image2d::multi_loader &image_loader_;
 
 	mutable texture_map textures_;
 
-	mutable unnamed_texture_map unnamed_textures;
+	mutable unnamed_texture_map unnamed_textures_;
 
-	mutable texture_name_map texture_names;
+	mutable texture_name_map texture_names_;
 };
 
 }

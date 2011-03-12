@@ -21,14 +21,15 @@ class make_instance
 {
 	FCPPT_NONASSIGNABLE(
 		make_instance
-	)
+	);
 public:
 	explicit make_instance(
 		InstanceArray &_instances
 	)
 	:
 		instances_(_instances)
-	{}
+	{
+	}
 	
 	template<
 		typename Msg

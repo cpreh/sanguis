@@ -18,6 +18,7 @@
 #include "../../../health_type.hpp"
 #include "../../../../animation_type.hpp"
 #include <fcppt/log/object_fwd.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
@@ -39,6 +40,9 @@ class object
 	public with_health,
 	public with_weapon
 {
+	FCPPT_NONCOPYABLE(
+		object
+	);
 public:
 	object(
 		parameters const &,

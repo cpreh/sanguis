@@ -22,7 +22,7 @@ class parameters
 {
 	FCPPT_NONASSIGNABLE(
 		parameters
-	)
+	);
 public:
 	explicit parameters(
 		sprite::colored::system &,

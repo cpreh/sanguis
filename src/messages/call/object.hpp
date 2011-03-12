@@ -21,8 +21,11 @@ template<
 	typename Messages,
 	typename Callee
 >
-class object {
-	FCPPT_NONCOPYABLE(object)
+class object
+{
+	FCPPT_NONCOPYABLE(
+		object
+	);
 
 	typedef typename Callee::result_type result_type;
 
@@ -57,25 +60,25 @@ public:
 
 	result_type
 	operator()(
-		base const &message_,
-		Callee &callee_,
-		default_function const &default_function_
+		base const &_message,
+		Callee &_callee,
+		default_function const &_default_function
 	) const
 	{
 		return 
 			instances_.is_null(
-				message_.type()
+				_message.type()
 			)
 			?	
-				default_function_(
-					message_
+				_default_function(
+					_message
 				)
 			:
-				instances_[	
-					message_.type()
+				instances_[
+					_message.type()
 				].call(
-					callee_,
-					message_
+					_callee,
+					_message
 				);
 	}
 private:

@@ -14,7 +14,8 @@ namespace call
 template<
 	typename Result
 >
-struct default_function {
+struct default_function
+{
 	typedef fcppt::function::object<
 		Result (
 			base const &

@@ -4,8 +4,9 @@
 #include "model/object.hpp"
 #include "model/parameters_fwd.hpp"
 #include "../sprite/point.hpp"
-#include <fcppt/string.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
+#include <fcppt/string.hpp>
 
 namespace sanguis
 {
@@ -20,11 +21,16 @@ class bullet
 :
 	public model::object
 {
+	FCPPT_NONCOPYABLE(
+		bullet
+	);
 public:
 	bullet(
 		model::parameters const &,
 		fcppt::string const &name
 	);
+
+	~bullet();
 private:
 	void
 	update(

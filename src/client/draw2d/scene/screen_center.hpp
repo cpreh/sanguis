@@ -16,8 +16,8 @@ namespace scene
 
 vector2 const
 screen_center(
-	sprite::point const &player_center_,
-	sge::renderer::screen_size const &screen_size_
+	sprite::point const &player_center,
+	sge::renderer::screen_size const &
 );
 
 }

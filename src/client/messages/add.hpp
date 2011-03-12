@@ -16,7 +16,7 @@ class add
 {
 	FCPPT_NONASSIGNABLE(
 		add
-	)
+	);
 public:
 	explicit add(
 		entity_type::type

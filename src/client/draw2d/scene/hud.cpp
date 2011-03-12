@@ -4,6 +4,7 @@
 #include <sge/font/text/flags_none.hpp>
 #include <sge/font/text/from_fcppt_string.hpp>
 #include <fcppt/container/bitfield/basic_impl.hpp>
+#include <fcppt/math/box/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/format.hpp>
@@ -11,14 +12,16 @@
 
 sanguis::client::draw2d::scene::hud::hud(
 	sge::font::metrics_ptr const _font_metrics,
-	sge::font::text::drawer_ptr const _font_drawer
+	sge::font::text::drawer &_font_drawer
 )
 :
 	font_metrics_(_font_metrics),
 	font_drawer_(_font_drawer),
 	experience_(0),
-	level_(0)
-{}
+	level_(0),
+	frames_counter_()
+{
+}
 
 void
 sanguis::client::draw2d::scene::hud::experience(
@@ -41,7 +44,7 @@ sanguis::client::draw2d::scene::hud::update(
 	time_type
 )
 { 
-	frames_counter.update();
+	frames_counter_.update();
 
 	sge::font::text::draw(
 		font_metrics_,
@@ -53,11 +56,13 @@ sanguis::client::draw2d::scene::hud::update(
 				)
 				% experience_
 				% level_
-				% frames_counter.frames_str()
+				% frames_counter_.frames_str()
 			).str()
 		),
-		sge::font::pos::null(),
-		sge::font::dim(300, 100), // FIXME
+		sge::font::rect(
+			sge::font::rect::vector::null(),
+			sge::font::rect::dim(300, 100) // FIXME
+		),
 		sge::font::text::align_h::left,
 		sge::font::text::align_v::top,
 		sge::font::text::flags::none

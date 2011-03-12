@@ -15,7 +15,9 @@ namespace entities
 
 class with_health
 {
-	FCPPT_NONCOPYABLE(with_health)
+	FCPPT_NONCOPYABLE(
+		with_health
+	);
 protected:
 	with_health();
 

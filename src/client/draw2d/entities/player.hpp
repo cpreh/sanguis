@@ -7,6 +7,7 @@
 #include "../vector2.hpp"
 #include "../funit.hpp"
 #include "../../../time_type.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -21,10 +22,15 @@ class player
 :
 	public model::object
 {
+	FCPPT_NONCOPYABLE(
+		player
+	);
 public:
 	explicit player(
 		model::parameters const &
 	);
+
+	~player();
 
 	void
 	orientation(

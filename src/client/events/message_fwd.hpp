@@ -8,7 +8,7 @@ namespace client
 namespace events
 {
 
-struct message;
+class message;
 
 }
 }

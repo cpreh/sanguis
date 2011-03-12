@@ -17,7 +17,8 @@ namespace messages
 template<
 	types::message::type Msg
 >
-struct bind_entity_message {
+struct bind_entity_message
+{
 	typedef majutsu::bind<
 		entity_message,
 		boost::mpl::vector2<
@@ -28,7 +29,9 @@ struct bind_entity_message {
 		>
 	> type;
 
-	FCPPT_RESTRICT_TYPEDEF_STRUCT(bind_entity_message)
+	FCPPT_RESTRICT_TYPEDEF_STRUCT(
+		bind_entity_message
+	);
 };
 
 }

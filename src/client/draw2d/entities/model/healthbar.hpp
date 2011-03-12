@@ -23,7 +23,9 @@ namespace model
 
 class healthbar
 {
-	FCPPT_NONCOPYABLE(healthbar)
+	FCPPT_NONCOPYABLE(
+		healthbar
+	);
 public:
 	explicit healthbar(
 		sprite::colored::system &

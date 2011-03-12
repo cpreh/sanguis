@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_SPRITE_POINT_HPP_INCLUDED
 
 #include "unit.hpp"
-#include <sge/sprite/point.hpp>
+#include <sge/sprite/vector.hpp>
 
 namespace sanguis
 {
@@ -13,7 +13,7 @@ namespace draw2d
 namespace sprite
 {
 
-typedef sge::sprite::point<
+typedef sge::sprite::vector<
 	unit
 >::type point;
 

@@ -19,7 +19,9 @@ namespace model
 
 class part
 {
-	FCPPT_NONCOPYABLE(part)
+	FCPPT_NONCOPYABLE(
+		part
+	);
 public:
 	weapon_category const &
 	operator[](

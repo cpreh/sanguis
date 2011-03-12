@@ -25,7 +25,9 @@ template<
 >
 class basic_gradients
 {
-	FCPPT_NONCOPYABLE(basic_gradients)
+	FCPPT_NONCOPYABLE(
+		basic_gradients
+	);
 public:
 	typedef mizuiro::color::object<
 		Format
@@ -38,6 +40,7 @@ public:
 	);
 
 	typedef Locator locator;
+
 	typedef Real real;
 
 	basic_gradients();

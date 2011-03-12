@@ -10,6 +10,7 @@
 #include "../funit.hpp"
 #include "../../../particle_type.hpp"
 #include "../../../load/model/collection_fwd.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -24,6 +25,9 @@ class explosion
 :
 	public base
 {
+	FCPPT_NONCOPYABLE(
+		explosion
+	);
 public:
 	explosion(
 		sprite::particle::system &,

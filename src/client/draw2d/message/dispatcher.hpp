@@ -43,7 +43,9 @@ namespace message
 
 class dispatcher
 {
-	FCPPT_NONCOPYABLE(dispatcher)
+	FCPPT_NONCOPYABLE(
+		dispatcher
+	);
 public:
 	explicit dispatcher(
 		environment &

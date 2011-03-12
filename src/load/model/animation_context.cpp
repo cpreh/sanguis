@@ -48,28 +48,29 @@ sanguis::load::model::animation_context::update()
 
 	animation_ = sge::sprite::animation::series();
 
-	sge::texture::part_ptr const t = 
-		texture_context_.value()->result();
+	sge::texture::part_ptr const part( 
+		texture_context_.value()->result()
+	);
 	
 	cache_callback_(
 		t->area()
 	);
 
 	BOOST_FOREACH(
-		frame_cache::const_reference r,
+		frame_cache::const_reference frame,
 		frame_cache_
 	)
 		animation_.push_back(
 			sge::sprite::animation::entity(
 				sge::time::millisecond(
-					r.delay()
+					frame.delay()
 				),
 				sge::texture::const_part_ptr(
 					fcppt::make_shared_ptr<
 						sge::texture::part_raw
 					>(
-						t->texture(),
-						r.area()
+						part->texture(),
+						frame.area()
 					)
 				)
 			)

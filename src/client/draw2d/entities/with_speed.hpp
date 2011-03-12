@@ -15,7 +15,9 @@ namespace entities
 
 class with_speed
 {
-	FCPPT_NONCOPYABLE(with_speed)
+	FCPPT_NONCOPYABLE(
+		with_speed
+	);
 protected:
 	with_speed();
 

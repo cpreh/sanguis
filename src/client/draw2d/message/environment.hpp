@@ -25,7 +25,9 @@ namespace message
 
 class environment
 {
-	FCPPT_NONCOPYABLE(environment)
+	FCPPT_NONCOPYABLE(
+		environment
+	);
 protected:
 	environment();
 public:

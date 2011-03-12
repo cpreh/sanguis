@@ -11,11 +11,15 @@ namespace call
 template<
 	typename Callee
 >
-class dispatcher_base {
-	FCPPT_NONCOPYABLE(dispatcher_base)
+class dispatcher_base
+{
+	FCPPT_NONCOPYABLE(
+		dispatcher_base
+	);
 protected:
 	dispatcher_base()
-	{}
+	{
+	}
 public:
 	virtual typename Callee::result_type
 	call(
@@ -24,7 +28,8 @@ public:
 	) const = 0;
 
 	virtual ~dispatcher_base()
-	{}
+	{
+	}
 };
 
 }

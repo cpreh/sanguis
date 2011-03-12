@@ -24,7 +24,7 @@
 
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/material.hpp>
-#include <sge/renderer/matrix_pixel_to_space.hpp>
+#include <sge/renderer/matrix4.hpp>
 #include <sge/renderer/state/scoped.hpp>
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/bool.hpp>
@@ -49,6 +49,7 @@
 #include <fcppt/function/object.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/dynamic_cast.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/exception.hpp>
@@ -62,9 +63,9 @@ sanguis::client::draw2d::scene::object::object(
 	load::context const &_resources,
 	sge::renderer::device_ptr const _rend,
 	sge::font::metrics_ptr const _font_metrics,
-	sge::font::text::drawer_ptr const _font_drawer,
+	sge::font::text::drawer &_font_drawer,
 	sge::audio::listener &_audio_listener,
-	client::cursor::object_ptr const _cursor,
+	client::cursor::object &_cursor,
 	std::tm const &_current_time
 )
 :
@@ -100,20 +101,36 @@ sanguis::client::draw2d::scene::object::object(
 		)
 	),
 	message_environment_(
-		new message_environment(
-			*this,
-			hud_
+		fcppt::make_unique_ptr<
+			message_environment
+		>(
+			std::tr1::ref(
+				*this
+			),
+			std::tr1::ref(
+				hud_
+			)
 		)
 	),
 	control_environment_(
-		new scene::control_environment(
-			*this,
-			_cursor
+		fcppt::make_unique_ptr<
+			scene::control_environment
+		>(
+			std::tr1::ref(
+				*this
+			),
+			std::tr1::ref(
+				_cursor
+			)
 		)
 	),
 	message_dispatcher_(
-		new message::dispatcher(
-			*message_environment_
+		fcppt::make_unique_ptr<
+			message::dispatcher
+		>(
+			std::tr1::ref(
+				*message_environment_
+			)
 		)
 	),
 	entities_(),
@@ -121,9 +138,7 @@ sanguis::client::draw2d::scene::object::object(
 		_current_time
 	),
 	default_transform_(
-		sge::renderer::matrix_pixel_to_space(
-			rend_->screen_size()
-		)
+		sge::renderer::matrix4::identity()
 	)
 {
 	rend_->material(
@@ -614,5 +629,6 @@ sanguis::client::draw2d::scene::object::load_collection() const
 sge::renderer::screen_size const
 sanguis::client::draw2d::scene::object::screen_size() const
 {
-	return rend_->screen_size();
+	//FIXME!
+//	return rend_->screen_size();
 }

@@ -9,7 +9,7 @@
 
 sanguis::client::draw2d::dim2 const
 sanguis::client::draw2d::scene::background_dim(
-	entities::base const &background_
+	entities::base const &_background
 )
 {
 	return
@@ -19,11 +19,11 @@ sanguis::client::draw2d::scene::background_dim(
 			fcppt::dynamic_cast_<
 				entities::simple_sprite const &
 			>(
-				background_
+				_background
 			)
 			.object()
 			.texture()
 			->area()
-			.dimension()
+			.size()
 		);
 }

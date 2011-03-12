@@ -29,7 +29,9 @@ namespace model
 
 class part
 {
-	FCPPT_NONCOPYABLE(part)
+	FCPPT_NONCOPYABLE(
+		part
+	);
 public:
 	part(
 		load::model::part const &,

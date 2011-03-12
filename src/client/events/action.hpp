@@ -21,7 +21,7 @@ class action
 {
 	FCPPT_NONASSIGNABLE(
 		action
-	)
+	);
 public:
 	explicit action(
 		control::player_action const &

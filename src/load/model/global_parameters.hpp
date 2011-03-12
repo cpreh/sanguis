@@ -23,7 +23,7 @@ class global_parameters
 {
 	FCPPT_NONASSIGNABLE(
 		global_parameters
-	)
+	);
 public:
 	global_parameters(
 		fcppt::filesystem::path const &,
@@ -58,10 +58,15 @@ public:
 	sounds() const;
 private:
 	fcppt::filesystem::path const path_;
+
 	resource::textures const &textures_;
+
 	sge::renderer::dim2 const cell_size_;
+
 	optional_delay const delay_;
+
 	optional_texture_identifier const texture_;
+
 	resource::sounds const &sounds_;
 };
 

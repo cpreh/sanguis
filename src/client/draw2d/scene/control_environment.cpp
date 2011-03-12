@@ -14,7 +14,7 @@
 
 sanguis::client::draw2d::scene::control_environment::control_environment(
 	object &_object,
-	client::cursor::object_ptr const _cursor
+	client::cursor::object &_cursor
 )
 :
 	object_(_object),
@@ -22,10 +22,12 @@ sanguis::client::draw2d::scene::control_environment::control_environment(
 	direction_(
 		client::control::direction_vector::null()
 	)
-{}
+{
+}
 
 sanguis::client::draw2d::scene::control_environment::~control_environment()
-{}
+{
+}
 
 sanguis::client::control::direction_vector const 
 sanguis::client::draw2d::scene::control_environment::direction() const
@@ -37,7 +39,7 @@ sanguis::client::control::direction_vector const
 sanguis::client::draw2d::scene::control_environment::attack_dest() const
 {
 	return
-		screen_to_virtual(
+		draw2d::screen_to_virtual(
 			object_.screen_size(),
 			-
 			fcppt::math::dim::structure_cast<
@@ -46,7 +48,7 @@ sanguis::client::draw2d::scene::control_environment::attack_dest() const
 				object_.screen_size() / 2u
 			)
 			+ object_.player_center()
-			+ cursor_->pos()
+			+ cursor_.pos()
 		);
 }
 
@@ -62,7 +64,7 @@ sanguis::client::draw2d::scene::control_environment::rotation() const
 	);
 
 	return
-		cursor_->pos() == refpoint
+		cursor_.pos() == refpoint
 		?
 			// FIXME: this should not update the rotation at all!
 			static_cast<control::key_scale>(0)
@@ -71,29 +73,29 @@ sanguis::client::draw2d::scene::control_environment::rotation() const
 				control::key_scale
 			>(
 				refpoint,
-				cursor_->pos()
+				cursor_.pos()
 			);
 }
 
 void
 sanguis::client::draw2d::scene::control_environment::direction_x(
-	client::control::key_scale const x
+	client::control::key_scale const _x
 )
 {
-	update_direction(
+	this->update_direction(
 		direction_.x(),
-		x
+		_x
 	);
 }
 
 void
 sanguis::client::draw2d::scene::control_environment::direction_y(
-	client::control::key_scale const y
+	client::control::key_scale const _y
 )
 {
-	update_direction(
+	this->update_direction(
 		direction_.y(),
-		y
+		_y
 	);
 }
 

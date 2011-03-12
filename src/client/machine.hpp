@@ -2,8 +2,7 @@
 #define SANGUIS_CLIENT_MACHINE_HPP_INCLUDED
 
 #include "states/menu_fwd.hpp"
-#include "cursor/object_ptr.hpp"
-#include "cursor/const_object_ptr.hpp"
+#include "cursor/object.hpp"
 #include "config/settings/object_fwd.hpp"
 #include "events/tick_fwd.hpp"
 #include "states/menu_fwd.hpp"
@@ -23,7 +22,7 @@
 #include <sge/font/metrics_ptr.hpp>
 #include <sge/font/text/drawer_fwd.hpp>
 #include <sge/input/keyboard/device_ptr.hpp>
-#include <sge/input/mouse/device_ptr.hpp>
+#include <sge/input/cursor/object_ptr.hpp>
 #include <sge/image2d/multi_loader_fwd.hpp>
 #include <sge/renderer/device_ptr.hpp>
 
@@ -59,7 +58,7 @@ public:
 		sge::font::text::drawer &,
 		sge::console::gfx &,
 		sge::input::keyboard::device_ptr,
-		sge::input::mouse::device_ptr,
+		sge::input::cursor::object_ptr,
 		sge::renderer::device_ptr,
 		sge::image2d::multi_loader &,
 		sge::audio::player_ptr,
@@ -126,9 +125,6 @@ public:
 	sge::input::keyboard::device_ptr const
 	keyboard() const;
 
-	sge::input::mouse::device_ptr const
-	mouse() const;
-
 	sge::audio::player_ptr const
 	audio_player() const;
 
@@ -147,10 +143,10 @@ public:
 	load::context const &
 	resources() const;
 
-	sanguis::client::cursor::object_ptr const
+	sanguis::client::cursor::object &
 	cursor();
 
-	sanguis::client::cursor::const_object_ptr const
+	sanguis::client::cursor::object const &
 	cursor() const;
 private:
 	config::settings::object &settings_;
@@ -158,8 +154,6 @@ private:
 	load::context const &resources_;
 
 	sge::input::keyboard::device_ptr const keyboard_;
-
-	sge::input::mouse::device_ptr const mouse_;
 
 	sge::renderer::device_ptr const renderer_;
 
@@ -194,7 +188,7 @@ private:
 
 	screenshot screenshot_;
 
-	sanguis::client::cursor::object_ptr const cursor_;
+	sanguis::client::cursor::object cursor_;
 };
 
 }

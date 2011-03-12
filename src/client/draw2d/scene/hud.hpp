@@ -6,7 +6,7 @@
 #include "../../level_type.hpp"
 #include "../../../time_type.hpp"
 #include <sge/font/metrics_ptr.hpp>
-#include <sge/font/text/drawer_ptr.hpp>
+#include <sge/font/text/drawer_fwd.hpp>
 #include <sge/time/frames_counter.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -21,11 +21,13 @@ namespace scene
 
 class hud
 {
-	FCPPT_NONCOPYABLE(hud)
+	FCPPT_NONCOPYABLE(
+		hud
+	);
 public:
 	explicit hud(
 		sge::font::metrics_ptr,
-		sge::font::text::drawer_ptr
+		sge::font::text::drawer &
 	);
 
 	void
@@ -45,13 +47,13 @@ public:
 private:
 	sge::font::metrics_ptr const font_metrics_;
 	
-	sge::font::text::drawer_ptr const font_drawer_;
+	sge::font::text::drawer &font_drawer_;
 
 	exp_type experience_;
 
 	level_type level_;
 
-	sge::time::frames_counter frames_counter;
+	sge::time::frames_counter frames_counter_;
 };
 
 }

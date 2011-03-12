@@ -12,8 +12,9 @@
 #include "../sprite/normal/system.hpp"
 #include "../sprite/index_fwd.hpp"
 #include "../vector2.hpp"
-#include <fcppt/math/vector/basic_decl.hpp>
 #include <sge/sprite/object_decl.hpp>
+#include <fcppt/math/vector/basic_decl.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <vector>
 
 namespace sanguis
@@ -31,6 +32,10 @@ class container
 	public with_orientation,
 	public with_speed
 {
+	FCPPT_NONCOPYABLE(
+		container
+	);
+
 	typedef sprite::normal::object object;
 
 	typedef std::vector<

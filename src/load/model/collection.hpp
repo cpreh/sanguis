@@ -18,7 +18,9 @@ namespace model
 
 class collection
 {
-	FCPPT_NONCOPYABLE(collection)
+	FCPPT_NONCOPYABLE(
+		collection
+	);
 public:
 	object const &
 	operator[](
