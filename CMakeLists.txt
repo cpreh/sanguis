@@ -453,14 +453,6 @@ SET(
 	src/client/menu/callbacks/object.hpp
 	src/client/menu/callbacks/quit.hpp
 	src/client/menu/callbacks/start_server.hpp
-	src/client/menu/menus/connect.cpp
-	src/client/menu/menus/connect.hpp
-	src/client/menu/menus/connect_box.cpp
-	src/client/menu/menus/connect_box.hpp
-	src/client/menu/menus/highscore.cpp
-	src/client/menu/menus/highscore.hpp
-	src/client/menu/menus/main.cpp
-	src/client/menu/menus/main.hpp
 	src/client/menu/mover.cpp
 	src/client/menu/mover.hpp
 	src/client/menu/object.cpp

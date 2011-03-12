@@ -1,10 +1,10 @@
-#ifndef SANGUIS_CLIENT_PERK_CHOOSER_HPP_INCLUDED
-#define SANGUIS_CLIENT_PERK_CHOOSER_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_GUI_PERK_CHOOSER_HPP_INCLUDED
+#define SANGUIS_CLIENT_GUI_PERK_CHOOSER_HPP_INCLUDED
 
 #include "perk_chooser_fwd.hpp"
 #include "level_type.hpp"
-#include "perk_container.hpp"
-#include "cursor/object_ptr.hpp"
+#include "../perk_container.hpp"
+#include "../cursor/object_fwd.hpp"
 #include "../perk_type.hpp"
 #include <sge/font/metrics_ptr.hpp>
 #include <sge/gui/widgets/buttons/image.hpp>
@@ -25,10 +25,14 @@ namespace sanguis
 {
 namespace client
 {
+namespace gui
+{
 
 class perk_chooser
 {
-	FCPPT_NONCOPYABLE(perk_chooser)
+	FCPPT_NONCOPYABLE(
+		perk_chooser
+	);
 public:
 	typedef fcppt::function::object<
 		void (perk_type::type)
@@ -102,6 +106,7 @@ private:
 		perk_type::type);
 };
 
+}
 }
 }
 

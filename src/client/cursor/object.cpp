@@ -19,3 +19,9 @@ sanguis::client::cursor::object::pos() const
 {
 	return cursor_->position();
 }
+
+sge::input::cursor::object_ptr const
+sanguis::client::cursor::object::get() const
+{
+	return cursor_;
+}

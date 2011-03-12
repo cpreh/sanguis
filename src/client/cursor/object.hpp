@@ -26,6 +26,9 @@ public:
 
 	cursor::point const
 	pos() const;
+
+	sge::input::cursor::object_ptr const
+	get() const;
 private:
 	sge::input::cursor::object_ptr const cursor_;
 };
