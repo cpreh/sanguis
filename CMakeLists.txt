@@ -426,6 +426,21 @@ SET(
 	src/client/from_perk_type.hpp
 	src/client/gmtime.cpp
 	src/client/gmtime.hpp
+	src/client/gui/menu/callbacks/cancel_connect.hpp
+	src/client/gui/menu/callbacks/connect.hpp
+	src/client/gui/menu/callbacks/object.cpp
+	src/client/gui/menu/callbacks/object.hpp
+	src/client/gui/menu/callbacks/quit.hpp
+	src/client/gui/menu/callbacks/start_server.hpp
+	src/client/gui/menu/object.cpp
+	src/client/gui/menu/object.hpp
+	src/client/gui/object.cpp
+	src/client/gui/object.hpp
+	src/client/gui/perk_chooser.cpp
+	src/client/gui/perk_chooser.hpp
+	src/client/gui/perk_chooser_activation.cpp
+	src/client/gui/perk_chooser_activation.hpp
+	src/client/gui/perk_chooser_fwd.hpp
 	src/client/health_type.hpp
 	src/client/highscore/entry.cpp
 	src/client/highscore/entry.hpp
@@ -447,16 +462,6 @@ SET(
 	src/client/machine.hpp
 	src/client/make_screenshot_path.cpp
 	src/client/make_screenshot_path.hpp
-	src/client/menu/callbacks/cancel_connect.hpp
-	src/client/menu/callbacks/connect.hpp
-	src/client/menu/callbacks/object.cpp
-	src/client/menu/callbacks/object.hpp
-	src/client/menu/callbacks/quit.hpp
-	src/client/menu/callbacks/start_server.hpp
-	src/client/menu/mover.cpp
-	src/client/menu/mover.hpp
-	src/client/menu/object.cpp
-	src/client/menu/object.hpp
 	src/client/messages/add.cpp
 	src/client/messages/add.hpp
 	src/client/messages/add_fwd.hpp
@@ -471,11 +476,6 @@ SET(
 	src/client/object.hpp
 	src/client/perk_cast.cpp
 	src/client/perk_cast.hpp
-	src/client/perk_chooser.cpp
-	src/client/perk_chooser.hpp
-	src/client/perk_chooser_activation.cpp
-	src/client/perk_chooser_activation.hpp
-	src/client/perk_chooser_fwd.hpp
 	src/client/perk_container.hpp
 	src/client/screenshot.cpp
 	src/client/screenshot.hpp

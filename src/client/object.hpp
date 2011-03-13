@@ -18,7 +18,7 @@
 #include <sge/systems/instance_fwd.hpp>
 #include <sge/window/instance_ptr.hpp>
 
-#include <awl/mainloop/io_service_ptr.hpp>
+#include <awl/mainloop/io_service_shared_ptr.hpp>
 
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
@@ -82,7 +82,7 @@ private:
 
 	sge::window::instance_ptr const window_;
 
-	awl::mainloop::io_service_ptr const io_service_;
+	awl::mainloop::io_service_shared_ptr const io_service_;
 
 	load::context resources_;
 

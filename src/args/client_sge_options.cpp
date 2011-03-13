@@ -20,6 +20,8 @@
 #include <sge/window/simple_parameters.hpp>
 #include <sge/extension_set.hpp>
 #include <awl/mainloop/asio/create_io_service_base.hpp>
+#include <awl/mainloop/io_service_shared_ptr.hpp>
+#include <awl/mainloop/io_service.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/container/bitfield/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
@@ -45,7 +47,9 @@ sanguis::args::client_sge_options(
 				)
 			)
 			.io_service(
-				awl::mainloop::asio::create_io_service_base()
+				awl::mainloop::io_service_shared_ptr(
+					awl::mainloop::asio::create_io_service_base()
+				)
 			)
 		)
 		(

@@ -5,7 +5,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 
 sanguis::net::client::client(
-	awl::mainloop::io_service_ptr const _io_service
+	awl::mainloop::io_service &_io_service
 )
 :
 	impl_(
@@ -13,12 +13,12 @@ sanguis::net::client::client(
 			detail::client_impl
 		>(
 			std::tr1::ref(
-				fcppt::dynamic_pointer_cast<
-					awl::mainloop::asio::io_service
+				dynamic_cast<
+					awl::mainloop::asio::io_service &
 				>(
 					_io_service
 				)
-				->get()
+				.get()
 			)
 		)
 	)

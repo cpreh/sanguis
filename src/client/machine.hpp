@@ -26,7 +26,7 @@
 #include <sge/image2d/multi_loader_fwd.hpp>
 #include <sge/renderer/device_ptr.hpp>
 
-#include <awl/mainloop/io_service_ptr.hpp>
+#include <awl/mainloop/io_service_fwd.hpp>
 
 #include <fcppt/container/raw_vector_decl.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -62,7 +62,7 @@ public:
 		sge::renderer::device_ptr,
 		sge::image2d::multi_loader &,
 		sge::audio::player_ptr,
-		awl::mainloop::io_service_ptr
+		awl::mainloop::io_service &
 	);
 
 	~machine();

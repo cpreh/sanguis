@@ -6,7 +6,7 @@
 #include "port_type.hpp"
 #include "data_type.hpp"
 
-#include <awl/mainloop/io_service_ptr.hpp>
+#include <awl/mainloop/io_service_fwd.hpp>
 
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/function/object_fwd.hpp>
@@ -22,7 +22,9 @@ namespace net
 
 class client
 {
-	FCPPT_NONCOPYABLE(client);
+	FCPPT_NONCOPYABLE(
+		client
+	);
 public:
 	typedef void connect_fun ();
 
@@ -37,7 +39,7 @@ public:
 	typedef fcppt::function::object<data_fun> data_function;
 
 	explicit client(
-		awl::mainloop::io_service_ptr
+		awl::mainloop::io_service &
 	);
 
 	void

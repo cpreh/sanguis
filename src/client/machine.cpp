@@ -43,7 +43,7 @@ sanguis::client::machine::machine(
 	sge::renderer::device_ptr const _renderer,
 	sge::image2d::multi_loader &_image_loader,
 	sge::audio::player_ptr const _audio_player,
-	awl::mainloop::io_service_ptr const _io_service
+	awl::mainloop::io_service &_io_service
 )
 :
 	settings_(_settings),
