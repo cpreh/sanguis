@@ -1,5 +1,5 @@
-#ifndef SANGUIS_NET_DATA_TYPE_HPP_INCLUDED
-#define SANGUIS_NET_DATA_TYPE_HPP_INCLUDED
+#ifndef SANGUIS_NET_DATA_BUFFER_HPP_INCLUDED
+#define SANGUIS_NET_DATA_BUFFER_HPP_INCLUDED
 
 #include "value_type.hpp"
 #include <fcppt/container/raw_vector_fwd.hpp>
@@ -11,9 +11,9 @@ namespace net
 
 typedef fcppt::container::raw_vector<
 	net::value_type
-> data_type;
+> data_buffer;
 
 }
 }
 
-#endif // SANGUIS_NET_DATA_TYPE_HPP_INCLUDED
+#endif

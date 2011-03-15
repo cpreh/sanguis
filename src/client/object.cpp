@@ -265,7 +265,7 @@ sanguis::client::object::loop_handler()
 
 void
 sanguis::client::object::create_server(
-	net::port_type const port_
+	net::port const _port
 )
 {
 	server_.take(
@@ -273,7 +273,7 @@ sanguis::client::object::create_server(
 			server::object
 		>(
 			sys_,
-			port_,
+			_port,
 			resources_
 		)
 	);

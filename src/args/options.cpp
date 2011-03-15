@@ -1,5 +1,5 @@
 #include "options.hpp"
-#include "../net/port_type.hpp"
+#include "../net/port.hpp"
 #include <sge/console/output_line_limit.hpp>
 #include <sge/renderer/multi_sample_type.hpp>
 #include <sge/renderer/no_multi_sampling.hpp>
@@ -82,7 +82,7 @@ sanguis::args::options()
 		(
 			"serverport",
 			po::value<
-				net::port_type
+				net::port
 			>()->default_value(
 				31337
 			),

@@ -12,10 +12,10 @@
 #include "server_callback.hpp"
 #include "../load/context_fwd.hpp"
 #include "../messages/auto_ptr.hpp"
-#include "../net/client.hpp"
-#include "../net/data_type.hpp"
-#include "../net/hostname_type.hpp"
-#include "../net/port_type.hpp"
+#include "../net/client/object.hpp"
+#include "../net/data_buffer.hpp"
+#include "../net/hostname.hpp"
+#include "../net/port.hpp"
 
 #include <sge/audio/player_ptr.hpp>
 #include <sge/audio/pool_fwd.hpp>
@@ -73,8 +73,8 @@ public:
 
 	void
 	connect(
-		net::hostname_type const &,
-		net::port_type
+		net::hostname const &,
+		net::port
 	);
 
 	void
@@ -100,10 +100,10 @@ public:
 	
 	void
 	data_callback(
-		net::data_type const &
+		net::data_buffer const &
 	);
 
-	net::client &
+	net::client::object &
 	net();
 
 	bool
@@ -167,16 +167,16 @@ private:
 
 	sge::audio::player_ptr const audio_player_;
 
-	net::client net_;
+	net::client::object net_;
 
-	fcppt::signal::auto_connection
-		s_conn,
-		s_disconn,
-		s_data;
+	fcppt::signal::auto_connection const
+		s_conn_,
+		s_disconn_,
+		s_data_;
 
-	net::data_type
-		in_buffer,
-		out_buffer;
+	net::data_buffer
+		in_buffer_,
+		out_buffer_;
 
 	sge::audio::pool &sound_pool_;
 

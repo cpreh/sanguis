@@ -830,38 +830,50 @@ SET(
 	src/messages/unpause.hpp
 	src/messages/vector2.hpp
 	src/net/asio.cpp
-	src/net/client.cpp
-	src/net/client.hpp
-	src/net/data_type.hpp
+	src/net/circular_buffer.hpp
+	src/net/client/connect_callback.hpp
+	src/net/client/connect_function.hpp
+	src/net/client/data_callback.hpp
+	src/net/client/data_function.hpp
+	src/net/client/disconnect_callback.hpp
+	src/net/client/disconnect_function.hpp
+	src/net/client/object.cpp
+	src/net/client/object.hpp
+	src/net/client/object_impl.cpp
+	src/net/client/object_impl.hpp
+	src/net/client/object_impl_fwd.hpp
+	src/net/data_buffer.hpp
 	src/net/deserialize.cpp
 	src/net/deserialize.hpp
-	src/net/detail/circular_buffer.hpp
-	src/net/detail/client_impl.cpp
-	src/net/detail/client_impl.hpp
-	src/net/detail/client_impl_fwd.hpp
-	src/net/detail/connection.cpp
-	src/net/detail/connection.hpp
-	src/net/detail/connection_fwd.hpp
-	src/net/detail/exceptions.hpp
-	src/net/detail/is_disconnect.cpp
-	src/net/detail/is_disconnect.hpp
-	src/net/detail/message_header.hpp
-	src/net/detail/message_header_size.hpp
-	src/net/detail/server_impl.cpp
-	src/net/detail/server_impl.hpp
-	src/net/detail/server_impl_fwd.hpp
-	src/net/detail/static_buffer.hpp
 	src/net/exception.cpp
 	src/net/exception.hpp
-	src/net/hostname_type.hpp
+	src/net/hostname.hpp
 	src/net/id.hpp
+	src/net/is_disconnect.cpp
+	src/net/is_disconnect.hpp
 	src/net/log.cpp
 	src/net/log.hpp
-	src/net/port_type.hpp
+	src/net/message_header.hpp
+	src/net/message_header_size.hpp
+	src/net/port.hpp
 	src/net/serialize.cpp
 	src/net/serialize.hpp
-	src/net/server.cpp
-	src/net/server.hpp
+	src/net/server/connect_callback.hpp
+	src/net/server/connect_function.hpp
+	src/net/server/connection.cpp
+	src/net/server/connection.hpp
+	src/net/server/connection_fwd.hpp
+	src/net/server/data_callback.hpp
+	src/net/server/data_function.hpp
+	src/net/server/disconnect_callback.hpp
+	src/net/server/disconnect_function.hpp
+	src/net/server/object.cpp
+	src/net/server/object.hpp
+	src/net/server/object_impl.cpp
+	src/net/server/object_impl.hpp
+	src/net/server/object_impl_fwd.hpp
+	src/net/static_buffer.hpp
+	src/net/stream_exceptions.hpp
 	src/net/value_type.hpp
 	src/particle_type.hpp
 	src/perk_type.hpp

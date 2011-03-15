@@ -2,13 +2,13 @@
 #include "events/message.hpp"
 #include "cursor/object.hpp"
 #include "events/tick.hpp"
-#include "../net/exception.hpp"
 #include "../messages/connect.hpp"
 #include "../messages/disconnect.hpp"
 #include "../messages/create.hpp"
 #include "../messages/base.hpp"
 #include "../messages/net_error.hpp"
 #include "../net/deserialize.hpp"
+#include "../net/exception.hpp"
 #include "../net/serialize.hpp"
 #include "../log.hpp"
 
@@ -57,7 +57,7 @@ sanguis::client::machine::machine(
 	net_(
 		_io_service
 	),
-	s_conn(
+	s_conn_(
 		net_.register_connect(
 			std::tr1::bind(
 				&machine::connect_callback,
@@ -65,7 +65,7 @@ sanguis::client::machine::machine(
 			)
 		)
 	),
-	s_disconn(
+	s_disconn_(
 		net_.register_disconnect(
 			std::tr1::bind(
 				&machine::disconnect_callback,
@@ -74,7 +74,7 @@ sanguis::client::machine::machine(
 			)
 		)
 	),
-	s_data(
+	s_data_(
 		net_.register_data(
 			std::tr1::bind(
 				&machine::data_callback,
@@ -83,6 +83,8 @@ sanguis::client::machine::machine(
 			)
 		)
 	),
+	in_buffer_(),
+	out_buffer_(),
 	sound_pool_(_sound_pool),
 	font_metrics_(_font_metrics),
 	font_drawer_(_font_drawer),
@@ -122,13 +124,13 @@ sanguis::client::machine::start_server()
 
 void
 sanguis::client::machine::connect(
-	net::hostname_type const &hostname,
-	net::port_type const port
+	net::hostname const &_hostname,
+	net::port const _port
 )
 {
 	net_.connect(
-		hostname,
-		port
+		_hostname,
+		_port
 	);
 }
 
@@ -166,33 +168,42 @@ sanguis::client::machine::disconnect_callback(
 
 void
 sanguis::client::machine::process_message(
-	messages::auto_ptr ptr
+	messages::auto_ptr _message
 )
 {
 	process_event(
 		events::message(
-			ptr
+			_message
 		)
 	);
 }
 
 void
 sanguis::client::machine::data_callback(
-	net::data_type const &data
+	net::data_buffer const &_data
 )
 {
 	fcppt::algorithm::append(
-		in_buffer,
-		data
+		in_buffer_,
+		_data
 	);
-	//while (messages::auto_ptr p = deserialize(in_buffer))
-	//	process_message(p);
+	
 	for(;;)
 	{
-		messages::auto_ptr p = net::deserialize(in_buffer);
-		if(!p.get())
+		messages::auto_ptr ret(
+			net::deserialize(
+				in_buffer_
+			)
+		);
+
+		if(
+			!ret.get()
+		)
 			return;
-		process_message(p);
+
+		process_message(
+			ret
+		);
 	}
 }
 
@@ -203,11 +214,11 @@ sanguis::client::machine::send(
 {
 	net::serialize(
 		_message,
-		out_buffer
+		out_buffer_
 	);
 }
 
-sanguis::net::client &
+sanguis::net::client::object &
 sanguis::client::machine::net()
 {
 	return net_;
@@ -219,14 +230,19 @@ sanguis::client::machine::process(
 )
 try
 {
-	if (out_buffer.size())
+	if(
+		out_buffer_.size()
+	)
 	{
-		net_.queue(out_buffer);
-		out_buffer.clear();
+		net_.queue(
+			out_buffer_
+		);
+
+		out_buffer_.clear();
 	}
 
 	{
-		sge::renderer::scoped_block const block_(
+		sge::renderer::scoped_block const block(
 			renderer_
 		);
 
@@ -234,7 +250,9 @@ try
 			_event
 		);
 
-		if (console_gfx_.active())
+		if(
+			console_gfx_.active()
+		)
 			console_gfx_.draw();
 	}
 
@@ -242,19 +260,22 @@ try
 
 	return running_;
 }
-catch (net::exception const &e)
+catch(
+	net::exception const &_error
+)
 {
 	process_event(
 		events::message(
 			messages::create(
 				messages::net_error(
 					fcppt::utf8::convert(
-						e.string()
+						_error.string()
 					)
 				)
 			)
 		)
 	);
+
 	return running_;
 }
 

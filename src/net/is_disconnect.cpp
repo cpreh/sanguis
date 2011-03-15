@@ -1,9 +1,14 @@
 #include "is_disconnect.hpp"
 #include <boost/asio/error.hpp>
 
-bool sanguis::net::detail::is_disconnect(boost::system::error_code const &e)
+bool
+sanguis::net::detail::is_disconnect(
+	boost::system::error_code const &_error
+)
 {
-	switch(e.value()) 
+	switch(	
+		_error.value()
+	)
 	{
 	case boost::asio::error::connection_aborted:
 	case boost::asio::error::connection_reset:

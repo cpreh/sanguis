@@ -1,9 +1,9 @@
 #include "deserialize.hpp"
-#include "data_type.hpp"
+#include "data_buffer.hpp"
 #include "value_type.hpp"
-#include "detail/exceptions.hpp"
-#include "detail/message_header.hpp"
-#include "detail/message_header_size.hpp"
+#include "stream_exceptions.hpp"
+#include "message_header.hpp"
+#include "message_header_size.hpp"
 #include "../messages/serialization/deserialize.hpp"
 #include "../messages/serialization/endianness.hpp"
 #include "../messages/base.hpp"
@@ -20,10 +20,12 @@
 
 sanguis::messages::auto_ptr
 sanguis::net::deserialize(
-	net::data_type &data
+	net::data_buffer &_data
 )
 {
-	if (data.size() < detail::message_header_size)
+	if(
+		_data.size() < net::message_header_size
+	)
 		return messages::auto_ptr();
 
 	typedef boost::iostreams::basic_array_source<
@@ -39,8 +41,8 @@ sanguis::net::deserialize(
 	> stream_type;
 
 	stream_buf buf(
-		data.data(),
-		data.data() + data.size()
+		_data.data(),
+		_data.data() + _data.size()
 	);
 
 	stream_type stream(
@@ -60,9 +62,14 @@ sanguis::net::deserialize(
 		)
 	);
 			
-	FCPPT_ASSERT(message_size > 0);
+	FCPPT_ASSERT(
+		message_size > 0
+	);
 
-	if ((data.size() - detail::message_header_size) < message_size)
+	if(
+		(_data.size() - detail::message_header_size)
+		< message_size
+	)
 		return messages::auto_ptr();
 
 	messages::auto_ptr ret(
@@ -72,11 +79,13 @@ sanguis::net::deserialize(
 		)
 	);
 
-	FCPPT_ASSERT(ret->size() == message_size);
+	FCPPT_ASSERT(
+		ret->size() == message_size
+	);
 
-	net::data_type::size_type const stream_pos(
+	net::data_buffer::size_type const stream_pos(
 		static_cast<
-			net::data_type::size_type
+			net::data_buffer::size_type
 		>(
 			stream.tellg()
 		)
@@ -87,9 +96,9 @@ sanguis::net::deserialize(
 		== stream_pos
 	);
 
-	data.erase(
-		data.begin(),
-		data.begin() + stream_pos
+	_data.erase(
+		_data.begin(),
+		_data.begin() + stream_pos
 	);
 
 	return ret;

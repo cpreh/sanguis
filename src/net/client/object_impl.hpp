@@ -1,49 +1,50 @@
-#ifndef SANGUIS_NET_DETAIL_CLIENT_IMPL_HPP_INCLUDED
-#define SANGUIS_NET_DETAIL_CLIENT_IMPL_HPP_INCLUDED
+#ifndef SANGUIS_NET_CLIENT_OBJECT_IMPL_HPP_INCLUDED
+#define SANGUIS_NET_CLIENT_OBJECT_IMPL_HPP_INCLUDED
 
-#include "client_impl_fwd.hpp"
-#include "circular_buffer.hpp"
-#include "static_buffer.hpp"
-#include "../client.hpp"
-#include "../data_type.hpp"
-#include "../value_type.hpp"
-#include "../port_type.hpp"
-#include "../hostname_type.hpp"
-
+#include "object_impl_fwd.hpp"
+#include "connect_callback.hpp"
+#include "connect_function.hpp"
+#include "data_callback.hpp"
+#include "data_function.hpp"
+#include "disconnect_callback.hpp"
+#include "disconnect_function.hpp"
+#include "../circular_buffer.hpp"
+#include "../static_buffer.hpp"
+#include "../data_buffer.hpp"
+#include "../port.hpp"
+#include "../hostname.hpp"
+#include <fcppt/signal/object.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <fcppt/string.hpp>
-#include <fcppt/signal/object.hpp>
-
 #include <boost/asio/io_service.hpp>
 #include <boost/asio/ip/tcp.hpp>
 #include <boost/system/error_code.hpp>
-#include <boost/ptr_container/ptr_vector.hpp>
 #include <cstddef>
 
 namespace sanguis
 {
 namespace net
 {
-namespace detail
+namespace client
 {
 
-class client_impl
+class object_impl
 {
 	FCPPT_NONCOPYABLE(
-		client_impl
+		object_impl
 	);
 public:
-	explicit client_impl(
+	explicit object_impl(
 		boost::asio::io_service &
 	);
 
-	~client_impl();
+	~object_impl();
 
 	void
 	connect(
-		hostname_type const &,
-		port_type
+		net::hostname const &,
+		net::port
 	);
 
 	void
@@ -51,22 +52,22 @@ public:
 
 	void
 	queue(
-		data_type const &
+		net::data_buffer const &
 	);
 
 	fcppt::signal::auto_connection
 	register_connect(
-		client::connect_function const &
+		client::connect_callback const &
 	);
 
 	fcppt::signal::auto_connection
 	register_disconnect(
-		client::disconnect_function const &
+		client::disconnect_callback const &
 	);
 
 	fcppt::signal::auto_connection
 	register_data(
-		client::data_function const &
+		client::data_callback const &
 	);
 private:
 	// asio vars
@@ -81,21 +82,21 @@ private:
 	> query_;
 
 	// vars
-	detail::static_buffer received_data_;
+	net::static_buffer received_data_;
 
-	detail::circular_buffer send_data_;
+	net::circular_buffer send_data_;
 
 	// signals
 	fcppt::signal::object<
-		client::connect_fun
+		client::connect_function
 	> connect_signal_;
 
 	fcppt::signal::object<
-		client::disconnect_fun
+		client::disconnect_function
 	> disconnect_signal_;
 
 	fcppt::signal::object<
-		client::data_fun
+		client::data_function
 	> data_signal_;
 
 	// handlers
@@ -135,8 +136,9 @@ private:
 	void
 	clear();
 };
+
 }
 }
 }
 
-#endif // SANGUIS_NET_DETAIL_CLIENT_IMPL_HPP_INCLUDED
+#endif

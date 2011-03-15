@@ -1,5 +1,5 @@
-#include "client_impl.hpp"
-#include "is_disconnect.hpp"
+#include "object_impl.hpp"
+#include "../is_disconnect.hpp"
 #include "../exception.hpp"
 #include "../log.hpp"
 #undef max
@@ -13,7 +13,7 @@
 #include <fcppt/text.hpp>
 #include <boost/asio/buffer.hpp>
 
-sanguis::net::detail::client_impl::client_impl(
+sanguis::net::client::object_impl::object_impl(
 	boost::asio::io_service &_io_service
 )
 :
@@ -36,14 +36,18 @@ sanguis::net::detail::client_impl::client_impl(
 {
 }
 
+sanguis::net::client::object_impl::~object_impl()
+{
+}
+
 void
-sanguis::net::detail::client_impl::connect(
-	hostname_type const &_host,
-	port_type const _port
+sanguis::net::client::object_impl::connect(
+	net::hostname const &_host,
+	net::port const _port
 )
 {
 	FCPPT_LOG_DEBUG(
-		log(),
+		net::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("client: resolving hostname ")
 			<< fcppt::from_std_string(
@@ -67,7 +71,7 @@ sanguis::net::detail::client_impl::connect(
 	resolver_.async_resolve(
 		*query_,
 		std::tr1::bind(
-			&client_impl::resolve_handler,
+			&object_impl::resolve_handler,
 			this,
 			std::tr1::placeholders::_1,
 			std::tr1::placeholders::_2
@@ -76,7 +80,7 @@ sanguis::net::detail::client_impl::connect(
 }
 
 void
-sanguis::net::detail::client_impl::disconnect()
+sanguis::net::client::object_impl::disconnect()
 {
 	socket_.close();
 
@@ -84,14 +88,10 @@ sanguis::net::detail::client_impl::disconnect()
 }
 
 void
-sanguis::net::detail::client_impl::queue(
-	data_type const &_data
+sanguis::net::client::object_impl::queue(
+	net::data_buffer const &_data
 )
 {
-	output_.push_back(
-		_data
-	);
-
 	if(
 		send_data_.capacity()
 		- send_data_.size()
@@ -108,9 +108,9 @@ sanguis::net::detail::client_impl::queue(
 	);
 
 	send_data_.insert(
+		send_data_.end(),
 		_data.begin(),
-		_data.end(),
-		send_data_.end()
+		_data.end()
 	);
 
 	if(
@@ -120,8 +120,8 @@ sanguis::net::detail::client_impl::queue(
 }
 
 fcppt::signal::auto_connection
-sanguis::net::detail::client_impl::register_connect(
-	client::connect_function const &_function
+sanguis::net::client::object_impl::register_connect(
+	client::connect_callback const &_function
 )
 {
 	return
@@ -131,8 +131,8 @@ sanguis::net::detail::client_impl::register_connect(
 }
 
 fcppt::signal::auto_connection
-sanguis::net::detail::client_impl::register_disconnect(
-	client::disconnect_function const &_function
+sanguis::net::client::object_impl::register_disconnect(
+	client::disconnect_callback const &_function
 )
 {
 	return
@@ -142,8 +142,8 @@ sanguis::net::detail::client_impl::register_disconnect(
 }
 
 fcppt::signal::auto_connection
-sanguis::net::detail::client_impl::register_data(
-	client::data_function const &_function
+sanguis::net::client::object_impl::register_data(
+	client::data_callback const &_function
 )
 {
 	return
@@ -153,15 +153,15 @@ sanguis::net::detail::client_impl::register_data(
 }
 
 void
-sanguis::net::detail::client_impl::resolve_handler(
-	boost::system::error_code const &_error
+sanguis::net::client::object_impl::resolve_handler(
+	boost::system::error_code const &_error,
 	boost::asio::ip::tcp::resolver::iterator _iterator
 )
 {
 	if(
 		_error
 	)
-		throw sanguis::exception(
+		throw net::exception(
 			FCPPT_TEXT("client: error resolving address: ")+
 			fcppt::from_std_string(
 				_error.message()
@@ -180,7 +180,7 @@ sanguis::net::detail::client_impl::resolve_handler(
 	socket_.async_connect(
 		endpoint,
 		std::tr1::bind(
-			&client_impl::connect_handler,
+			&object_impl::connect_handler,
 			this,
 			std::tr1::placeholders::_1,
 			++_iterator
@@ -189,7 +189,7 @@ sanguis::net::detail::client_impl::resolve_handler(
 }
 
 void
-sanguis::net::detail::client_impl::handle_error(
+sanguis::net::client::object_impl::handle_error(
 	fcppt::string const &_message,
 	boost::system::error_code const &_error
 )
@@ -201,7 +201,7 @@ sanguis::net::detail::client_impl::handle_error(
 			_error
 		)
 	)
-		throw sanguis::exception(
+		throw net::exception(
 			FCPPT_TEXT("error in ") +
 			_message +
 			FCPPT_TEXT(": ") +
@@ -229,7 +229,7 @@ sanguis::net::detail::client_impl::handle_error(
 }
 
 void
-sanguis::net::detail::client_impl::read_handler(
+sanguis::net::client::object_impl::read_handler(
 	boost::system::error_code const &_error,
 	std::size_t const _bytes
 )
@@ -266,7 +266,7 @@ sanguis::net::detail::client_impl::read_handler(
 			received_data_
 		),
 		std::tr1::bind(
-			&client_impl::read_handler,
+			&object_impl::read_handler,
 			this,
 			std::tr1::placeholders::_1,
 			std::tr1::placeholders::_2
@@ -275,7 +275,7 @@ sanguis::net::detail::client_impl::read_handler(
 }
 
 void
-sanguis::net::detail::client_impl::write_handler(
+sanguis::net::client::object_impl::write_handler(
 	boost::system::error_code const &_error,
 	std::size_t const _bytes
 )
@@ -301,10 +301,16 @@ sanguis::net::detail::client_impl::write_handler(
 	);
 
 	send_data_.erase(
-		bytes
+		send_data_.begin(),
+		send_data_.begin()
+		+
+		static_cast<
+			detail::circular_buffer::iterator::difference_type
+		>(
+			_bytes
+		)
 	);
 
-	// are there bytes left to send?
 	if(
 		!send_data_.empty()
 	)
@@ -312,8 +318,8 @@ sanguis::net::detail::client_impl::write_handler(
 }
 
 void
-sanguis::net::detail::client_impl::connect_handler(
-	boost::system::error_code const &_error
+sanguis::net::client::object_impl::connect_handler(
+	boost::system::error_code const &_error,
 	boost::asio::ip::tcp::resolver::iterator _iterator
 )
 {
@@ -325,7 +331,7 @@ sanguis::net::detail::client_impl::connect_handler(
 		if(
 			_iterator == boost::asio::ip::tcp::resolver::iterator()
 		)
-			throw sanguis::exception(
+			throw net::exception(
 				FCPPT_TEXT("client: exhausted endpoints: ")+
 				fcppt::from_std_string(
 					_error.message()
@@ -344,7 +350,7 @@ sanguis::net::detail::client_impl::connect_handler(
 		socket_.async_connect(
 			endpoint,
 			std::tr1::bind(
-				&client_impl::connect_handler,
+				&object_impl::connect_handler,
 				this,
 				std::tr1::placeholders::_1,
 				++_iterator
@@ -366,7 +372,7 @@ sanguis::net::detail::client_impl::connect_handler(
 			received_data_
 		),
 		std::tr1::bind(
-			&client_impl::read_handler,
+			&object_impl::read_handler,
 			this,
 			std::tr1::placeholders::_1,
 			std::tr1::placeholders::_2
@@ -375,23 +381,28 @@ sanguis::net::detail::client_impl::connect_handler(
 }
 
 void
-sanguis::net::detail::client_impl::send_data()
+sanguis::net::client::object_impl::send_data()
 {
 	detail::circular_buffer::const_array_range const array(
-		send_data_.second_array().empty()
+		send_data_.array_two().second == 0u
 		?
-			send_data_.second_array()
+			send_data_.array_one()
 		:
-			send_data_.first_array()
+			send_data_.array_two()
 	);
+
+	if(
+		array.second == 0u
+	)
+		return;
 
 	socket_.async_send(
 		boost::asio::buffer(
 			array.first,
-			array.second - array.first
+			array.second
 		),
 		std::tr1::bind(
-			&sanguis::net::detail::client_impl::write_handler,
+			&sanguis::net::client::object_impl::write_handler,
 			this,
 			std::tr1::placeholders::_1,
 			std::tr1::placeholders::_2
@@ -400,7 +411,7 @@ sanguis::net::detail::client_impl::send_data()
 }
 
 void
-sanguis::net::detail::client_impl::clear()
+sanguis::net::client::object_impl::clear()
 {
-	output_.clear();
+	send_data_.clear();
 }

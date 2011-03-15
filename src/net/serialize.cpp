@@ -1,8 +1,8 @@
 #include "serialize.hpp"
-#include "data_type.hpp"
+#include "data_buffer.hpp"
 #include "value_type.hpp"
-#include "detail/message_header.hpp"
-#include "detail/exceptions.hpp"
+#include "message_header.hpp"
+#include "stream_exceptions.hpp"
 #include "../messages/serialization/endianness.hpp"
 #include "../messages/serialization/serialize.hpp"
 #include "../messages/base.hpp"
@@ -19,14 +19,16 @@
 
 void
 sanguis::net::serialize(
-	messages::auto_ptr message,
-	net::data_type &array
+	messages::auto_ptr _message,
+	net::data_buffer &_data
 )
 {
-	FCPPT_ASSERT(message.get());
+	FCPPT_ASSERT(
+		_message.get()
+	);
 
 	typedef boost::iostreams::back_insert_device<
-		net::data_type
+		net::data_buffer
 	> back_inserter;
 
 	typedef boost::iostreams::stream_buffer<
@@ -38,7 +40,7 @@ sanguis::net::serialize(
 	> stream_type;
 
 	stream_buf buf(
-		array
+		_data
 	);
 
 	stream_type stream(
@@ -53,11 +55,13 @@ sanguis::net::serialize(
 		fcppt::truncation_check_cast<
 			detail::message_header
 		>(
-			message->size()
+			_message->size()
 		)
 	);
 
-	FCPPT_ASSERT(header > 0);
+	FCPPT_ASSERT(
+		header > 0
+	);
 
 	fcppt::io::write(
 		stream,
@@ -67,6 +71,6 @@ sanguis::net::serialize(
 
 	messages::serialization::serialize(
 		stream,
-		message
+		_message
 	);
 }

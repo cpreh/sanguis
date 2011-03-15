@@ -1,5 +1,5 @@
-#ifndef SANGUIS_NET_DETAIL_IS_DISCONNECT_HPP_INCLUDED
-#define SANGUIS_NET_DETAIL_IS_DISCONNECT_HPP_INCLUDED
+#ifndef SANGUIS_NET_IS_DISCONNECT_HPP_INCLUDED
+#define SANGUIS_NET_IS_DISCONNECT_HPP_INCLUDED
 
 #include <boost/system/error_code.hpp>
 
@@ -10,15 +10,12 @@ namespace sanguis
 {
 namespace net
 {
-namespace detail
-{
 
 bool
 is_disconnect(
 	boost::system::error_code const &
 );
 
-}
 }
 }
 

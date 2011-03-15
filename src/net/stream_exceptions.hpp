@@ -1,5 +1,5 @@
-#ifndef SANGUIS_NET_DETAIL_EXCEPTIONS_HPP_INCLUDED
-#define SANGUIS_NET_DETAIL_EXCEPTIONS_HPP_INCLUDED
+#ifndef SANGUIS_NET_STREAM_EXCEPTIONS_HPP_INCLUDED
+#define SANGUIS_NET_STREAM_EXCEPTIONS_HPP_INCLUDED
 
 #include <ios>
 
@@ -7,25 +7,22 @@ namespace sanguis
 {
 namespace net
 {
-namespace detail
-{
 
 template<
 	typename Stream
 >
 void
-exceptions(
-	Stream &stream
+stream_exceptions(
+	Stream &_stream
 )
 {
-	stream.exceptions(
+	_stream.exceptions(
 		std::ios_base::badbit
 		| std::ios_base::failbit
 		| std::ios_base::eofbit
 	);
 }
 
-}
 }
 }
 

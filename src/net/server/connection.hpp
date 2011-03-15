@@ -1,8 +1,8 @@
-#ifndef SANGUIS_NET_DETAIL_CONNECTION_HPP_INCLUDED
-#define SANGUIS_NET_DETAIL_CONNECTION_HPP_INCLUDED
+#ifndef SANGUIS_NET_SERVER_CONNECTION_HPP_INCLUDED
+#define SANGUIS_NET_SERVER_CONNECTION_HPP_INCLUDED
 
-#include "circular_buffer.hpp"
-#include "static_buffer.hpp"
+#include "../circular_buffer.hpp"
+#include "../static_buffer.hpp"
 #include "../value_type.hpp"
 #include "../id.hpp"
 #include <fcppt/noncopyable.hpp>
@@ -13,7 +13,7 @@ namespace sanguis
 {
 namespace net
 {
-namespace detail
+namespace server
 {
 
 class connection
@@ -23,7 +23,7 @@ class connection
 	);
 public:
 	connection(
-		net::id_type,
+		net::id,
 		boost::asio::io_service &
 	);
 
@@ -35,19 +35,19 @@ public:
 	boost::asio::ip::tcp::socket &
 	socket();
 
-	detail::static_buffer &
+	net::static_buffer &
 	received_data();
 
-	detail::circular_buffer &
+	net::circular_buffer &
 	send_data();
 private:
 	net::id const id_;
 
 	boost::asio::ip::tcp::socket socket_;
 
-	detail::static_buffer received_data_;
+	net::static_buffer received_data_;
 
-	detail::circuluar_buffer send_data_;
+	net::circular_buffer send_data_;
 };
 
 }

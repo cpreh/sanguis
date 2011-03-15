@@ -3,61 +3,78 @@
 #include "connection.hpp"
 #include "../log.hpp"
 #include "../exception.hpp"
-#include <fcppt/log/headers.hpp>
-#include <fcppt/from_std_string.hpp>
-#include <fcppt/lexical_cast.hpp>
-#include <fcppt/text.hpp>
 #undef max
 // asio brings in window.h's max macro :(
 #include <fcppt/container/raw_vector_impl.hpp>
+#include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/log/headers.hpp>
+#include <fcppt/from_std_string.hpp>
+#include <fcppt/lexical_cast.hpp>
+#include <fcppt/ref.hpp>
+#include <fcppt/text.hpp>
 #include <boost/spirit/home/phoenix/core/argument.hpp>
 #include <boost/spirit/home/phoenix/operator/comparison.hpp>
 #include <boost/spirit/home/phoenix/operator/self.hpp>
 #include <boost/asio/buffer.hpp>
 #include <boost/asio.hpp>
 #include <boost/foreach.hpp>
-#include <boost/bind.hpp>
 
-sanguis::net::detail::server_impl::server_impl(
-	server::time_resolution const &_timer_duration)
+sanguis::net::detail::server_impl::server_impl()
 :
 	io_service_(),
 	acceptor_(
-		io_service_),
+		io_service_
+	),
 	id_counter_(
-		static_cast<id_type>(
-			0)),
+		static_cast<
+			net::id::value_type
+		>(
+			0u
+		)
+	),
 	new_connection_(),
 	timer_duration_(
-		_timer_duration),
+		_timer_duration
+	),
 	timer_(
-		new boost::asio::deadline_timer(
-			io_service_))
+		fcppt::make_unique_ptr<
+			boost::asio::deadline_timer
+		>(
+			fcppt::ref(
+				io_service_
+			)
+		)
+	)
 {
 	timer_->expires_from_now(
-		_timer_duration);
+		_timer_duration
+	);
 
 	timer_->async_wait(
-		boost::bind(
+		std::tr1::bind(
 			&server_impl::handle_timeout,
 			this,
-			boost::asio::placeholders::error));
+			std::tr1::placeholders::_1
+		)
+	);
 }
 
 void 
 sanguis::net::detail::server_impl::listen(
-	port_type const port)
+	port_type const _port
+)
 {
 	FCPPT_LOG_DEBUG(
-		log(),
+		net::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("server: listening on port ")
-			<< port);
+			<< _port
+	);
 
-	boost::asio::ip::tcp::endpoint endpoint(
+	boost::asio::ip::tcp::endpoint const endpoint(
 		boost::asio::ip::tcp::v4(),
-		port
+		_port
 	);
 
 	acceptor_.open(
@@ -76,20 +93,23 @@ sanguis::net::detail::server_impl::listen(
 
 	acceptor_.listen();
 
-	accept();
+	this->accept();
 }
 
 void 
 sanguis::net::detail::server_impl::queue(
-	data_type const &s)
+	data_type const &_data
+)
 {
 	BOOST_FOREACH(
-		connection_container::reference c,
+		connection_container::reference con,
 		connections_
 	)
 	{
-		c.output_.push_back(
-			s);
+		con.output().push_back(
+			_data
+		);
+
 		if (c.sending_)
 			continue;
 		c.sending_ = true;
@@ -217,15 +237,21 @@ sanguis::net::detail::server_impl::stop()
 void 
 sanguis::net::detail::server_impl::accept()
 {
-	new_connection_.reset(
-		new connection(
-			id_counter_++,
-			io_service_
+	new_connection_.take(
+		fcppt::make_unique_ptr<
+			detail::connection
+		>(
+			net::id(
+				id_counter_++
+			),
+			std::tr1::ref(
+				io_service_
+			)
 		)
 	);
 
 	acceptor_.async_accept(
-		new_connection_->socket_,
+		new_connection_->socket(),
 		std::tr1::bind(
 			&server_impl::accept_handler,
 			this,
@@ -335,53 +361,63 @@ sanguis::net::detail::server_impl::write_handler(
 
 void 
 sanguis::net::detail::server_impl::accept_handler(
-	boost::system::error_code const &e
+	boost::system::error_code const &_error
 )
 {
-	if (e)
+	if(
+		_error
+	)
 	{
 		FCPPT_LOG_DEBUG(
-			log(),
-			fcppt::log::_ << FCPPT_TEXT("server: error while accepting")
+			net::log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("server: error while accepting")
 		);
 
-		throw exception(
-			fcppt::from_std_string(
-				e.message()
-			)
-		);
+		this->accept();
+
+		return;
 	}
 
 	FCPPT_LOG_DEBUG(
-		log(),
-		fcppt::log::_ << FCPPT_TEXT("server: accepting a connection, id is ") << new_connection_->id_
+		net::log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("server: accepting a connection, id is ")
+			<< new_connection_->id()
 	);
 
-	connections_.push_back(
-		new_connection_);
+	fcppt::container::ptr::push_back_unique_ptr(
+		connections_,
+		move(
+			new_connection_
+		)
+	);
 	
-	connection &c = 
-		connections_.back();
+	detail::connection &current_con(
+		connections_.back()
+	);
 
 	// send signal to handlers
 	connect_signal_(
-		c.id_
+		current_conc.id()
 	);
 
-	c.socket_.async_receive(
+	current_con.socket_.async_receive(
 		boost::asio::buffer(
-			c.new_data_
+			current_con.new_data()
 		),
 		std::tr1::bind(
 			&server_impl::read_handler,
 			this,
 			std::tr1::placeholders::_1,
 			std::tr1::placeholders::_2,
-			std::tr1::ref(c)
+			std::tr1::ref(
+				current_con
+			)
 		)
 	);
 
-	accept();
+	this->accept();
 }
 
 void 
@@ -406,7 +442,7 @@ sanguis::net::detail::server_impl::handle_error(
 		);
 
 	FCPPT_LOG_DEBUG(
-		log(),
+		net::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("server: disconnected ")
 			<< c.id_ 
@@ -430,7 +466,8 @@ sanguis::net::detail::server_impl::handle_error(
 
 void
 sanguis::net::detail::server_impl::handle_timeout(
-	boost::system::error_code const &_e)
+	boost::system::error_code const &_error
+)
 {
 	FCPPT_LOG_DEBUG(
 		log(),
@@ -461,8 +498,10 @@ sanguis::net::detail::server_impl::handle_timeout(
 		timer_duration_);
 			
 	timer_->async_wait(
-		boost::bind(
+		std::tr1::bind(
 			&server_impl::handle_timeout,
 			this,
-			boost::asio::placeholders::error));
+			std::tr1::placeholders::_1
+		)
+	);
 }

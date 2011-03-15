@@ -9,7 +9,8 @@ namespace sanguis
 namespace server
 {
 
-struct client_data {
+struct client_data
+{
 	net::data_type in_buffer;
 	net::data_type out_buffer;
 };

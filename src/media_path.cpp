@@ -6,7 +6,7 @@
 #include <fcppt/text.hpp>
 
 #define SANGUIS_FCPPT_TEXT_WRAPPER(\
-		text\
+	text\
 )\
 	FCPPT_TEXT(\
 		text\

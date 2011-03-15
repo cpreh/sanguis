@@ -1,7 +1,7 @@
 #ifndef SANGUIS_ARGS_SERVER_PORT_HPP_INCLUDED
 #define SANGUIS_ARGS_SERVER_PORT_HPP_INCLUDED
 
-#include "../net/port_type.hpp"
+#include "../net/port.hpp"
 #include <boost/program_options/variables_map.hpp>
 
 namespace sanguis
@@ -9,7 +9,7 @@ namespace sanguis
 namespace args
 {
 
-net::port_type
+net::port
 server_port(
 	boost::program_options::variables_map const &
 );

@@ -1,8 +1,11 @@
 #include "exception.hpp"
 
 sanguis::net::exception::exception(
-	fcppt::string const &s)
-: sge::exception(s)
+	fcppt::string const &_message
+s)
+:
+	sanguis::exception(
+		_message
+	)
 {
-
 }

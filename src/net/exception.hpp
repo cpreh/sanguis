@@ -1,17 +1,24 @@
 #ifndef SANGUIS_NET_EXCEPTION_HPP_INCLUDED
 #define SANGUIS_NET_EXCEPTION_HPP_INCLUDED
 
-#include <sge/exception.hpp>
+#include "../exception.hpp"
+#include <fcppt/string.hpp>
 
 namespace sanguis
 {
 namespace net
 {
-class exception : public sge::exception
+
+class exception
+:
+	public sanguis::exception
 {
 public:
-	explicit exception(fcppt::string const &);
+	explicit exception(
+		fcppt::string const &
+	);
 };
+
 }
 }
 

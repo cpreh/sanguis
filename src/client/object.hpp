@@ -7,10 +7,9 @@
 #include "cursor/object.hpp"
 #include "gui/object.hpp"
 #include "../load/context.hpp"
-#include "../net/port_type.hpp"
+#include "../net/port.hpp"
 #include "../server/object_fwd.hpp"
 #include "../main_object.hpp"
-
 #include <sge/audio/pool.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/console/object.hpp>
@@ -19,14 +18,12 @@
 #include <sge/time/timer.hpp>
 #include <sge/systems/instance_fwd.hpp>
 #include <sge/window/instance_ptr.hpp>
-
 #include <awl/mainloop/io_service_shared_ptr.hpp>
-
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <fcppt/scoped_state_machine.hpp>
-
 #include <boost/program_options/variables_map.hpp>
+
 
 namespace sanguis
 {
@@ -59,7 +56,7 @@ private:
 
 	void
 	create_server(
-		net::port_type
+		net::port
 	);
 
 	int
