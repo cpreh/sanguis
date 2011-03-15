@@ -123,7 +123,7 @@ SET(
 
 # TODO: use a config file for this!
 set_source_files_properties(
-	media_path.cpp
+	src/media_path.cpp
 	PROPERTIES
 	COMPILE_FLAGS
 	-DMEDIA_PATH="\\\"${media_path}\\\""

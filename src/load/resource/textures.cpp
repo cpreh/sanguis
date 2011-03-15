@@ -8,7 +8,7 @@
 #include <sge/texture/add_image.hpp>
 #include <sge/texture/no_fragmented.hpp>
 #include <sge/texture/part_raw.hpp>
-#include <sge/renderer/filter/linear.hpp>
+#include <sge/renderer/texture/filter/linear.hpp>
 #include <sge/renderer/resource_flags_none.hpp>
 #include <sge/image2d/multi_loader.hpp>
 #include <fcppt/log/headers.hpp>
@@ -28,9 +28,9 @@
 namespace
 {
 
-sge::renderer::filter::texture const
+sge::renderer::texture::filter::object const
 filter(
-	sge::renderer::filter::linear
+	sge::renderer::texture::filter::linear
 );
 
 }
@@ -41,7 +41,7 @@ sanguis::load::resource::textures::load(
 ) const
 {
 	return
-		this->map_get_or_create(
+		resource::map_get_or_create(
 			textures_,
 			_id, 
 			std::tr1::bind(
@@ -59,7 +59,7 @@ sanguis::load::resource::textures::load(
 {
 	return 
 		resource::texture_context(
-			this->map_get_or_create(
+			resource::map_get_or_create(
 				unnamed_textures_,
 				_path,
 				std::tr1::bind(
@@ -113,12 +113,15 @@ sanguis::load::resource::textures::textures(
 			>(
 				_renderer,
 				sge::image::color::format::rgba8,
-				filter
+				filter,
+				sge::renderer::texture::address_mode2(
+					sge::renderer::texture::address_mode::repeat
+				)
 			)
 		)
 	),
 	image_loader_(
-		_mage_loader
+		_image_loader
 	)
 {
 	// look for .tex files
@@ -131,7 +134,7 @@ sanguis::load::resource::textures::textures(
 	)
 	{
 		fcppt::filesystem::path const &path(
-			iti->path()
+			it->path()
 		);
 
 		if(
@@ -231,11 +234,11 @@ sanguis::load::resource::textures::do_load(
 		texture_names_.find(
 			_id
 		)
-		== texture_names.end()
+		== texture_names_.end()
 	)
 		throw sanguis::exception(
 			FCPPT_TEXT("no texture for id \"")
-			+ id
+			+ _id
 			+ FCPPT_TEXT("\" found")
 		);
 
@@ -274,7 +277,7 @@ sanguis::load::resource::textures::do_load_inner(
 {
 	return
 		sge::texture::add_image(
-			texture_manageR_,
+			texture_manager_,
 			image_loader_.load(
 				_path
 			)

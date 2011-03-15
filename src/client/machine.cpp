@@ -198,11 +198,11 @@ sanguis::client::machine::data_callback(
 
 void
 sanguis::client::machine::send(
-	messages::auto_ptr m
+	messages::auto_ptr _message
 )
 {
 	net::serialize(
-		m,
+		_message,
 		out_buffer
 	);
 }
@@ -224,8 +224,6 @@ try
 		net_.queue(out_buffer);
 		out_buffer.clear();
 	}
-
-	net_.process();
 
 	{
 		sge::renderer::scoped_block const block_(

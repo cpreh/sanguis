@@ -18,7 +18,7 @@ class read_element
 {
 	FCPPT_NONASSIGNABLE(
 		read_element
-	)
+	);
 public:
 	read_element(
 		std::istream &,

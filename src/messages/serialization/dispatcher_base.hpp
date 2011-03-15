@@ -13,8 +13,11 @@ namespace messages
 namespace serialization
 {
 
-struct dispatcher_base {
-	FCPPT_NONCOPYABLE(dispatcher_base)
+struct dispatcher_base
+{
+	FCPPT_NONCOPYABLE(
+		dispatcher_base
+	);
 protected:
 	dispatcher_base();
 public:

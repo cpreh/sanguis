@@ -9,10 +9,10 @@ template<
 >
 sanguis::messages::auto_ptr
 sanguis::messages::serialization::dispatcher<T>::on_dispatch(
-	reader const &d
+	reader const &_reader
 ) const
 {
-	return d.operator()<T>();
+	return _reader.operator()<T>();
 }
 
 #endif

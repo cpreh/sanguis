@@ -15,10 +15,13 @@ namespace serialization
 template<
 	typename T
 >
-struct dispatcher : dispatcher_base {
+struct dispatcher
+:
+	dispatcher_base
+{
 	auto_ptr
 	on_dispatch(
-		reader const &d
+		reader const &
 	) const;
 };
 

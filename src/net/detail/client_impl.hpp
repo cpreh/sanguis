@@ -5,7 +5,6 @@
 #include "circular_buffer.hpp"
 #include "static_buffer.hpp"
 #include "../client.hpp"
-#include "../id_type.hpp"
 #include "../data_type.hpp"
 #include "../value_type.hpp"
 #include "../port_type.hpp"
@@ -78,7 +77,7 @@ private:
 	boost::asio::ip::tcp::resolver resolver_;
 
 	fcppt::scoped_ptr<
-		boost::asio::tcp::resolver::query
+		boost::asio::ip::tcp::resolver::query
 	> query_;
 
 	// vars

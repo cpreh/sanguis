@@ -56,9 +56,6 @@ public:
 		data_type const &
 	);
 
-	void
-	process();
-
 	fcppt::signal::auto_connection
 	register_connect(
 		connect_function const &

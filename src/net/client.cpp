@@ -48,12 +48,6 @@ sanguis::net::client::queue(
 	return impl_->queue(data);
 }
 
-void
-sanguis::net::client::process()
-{
-	return impl_->process();
-}
-
 fcppt::signal::auto_connection
 sanguis::net::client::register_connect(
 	connect_function const &f

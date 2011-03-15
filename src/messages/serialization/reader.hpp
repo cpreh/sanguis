@@ -17,7 +17,7 @@ class reader
 {
 	FCPPT_NONASSIGNABLE(
 		reader
-	)
+	);
 public:
 	explicit reader(
 		istream &

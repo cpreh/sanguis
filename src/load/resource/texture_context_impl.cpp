@@ -1,5 +1,8 @@
 #include "texture_context_impl.hpp" 
 #include <sge/texture/part_raw.hpp>
+#include <sge/renderer/texture/address_mode.hpp>
+#include <sge/renderer/texture/address_mode2.hpp>
+#include <sge/renderer/texture/create_planar_from_view.hpp>
 #include <sge/renderer/resource_flags_none.hpp>
 #include <sge/image2d/multi_loader.hpp>
 #include <sge/image2d/file.hpp>
@@ -67,9 +70,13 @@ sanguis::load::resource::texture_context_impl::update()
 			fcppt::make_shared_ptr<
 				sge::texture::part_raw
 			>(
-				rend_->create_texture(
+				sge::renderer::texture::create_planar_from_view(
+					rend_,
 					future_.get()->view(),
 					filter_,
+					sge::renderer::texture::address_mode2(
+						sge::renderer::texture::address_mode::clamp
+					),
 					sge::renderer::resource_flags::none
 				)
 			);
@@ -77,30 +84,38 @@ sanguis::load::resource::texture_context_impl::update()
 	return true;
 }
 
-void sanguis::load::resource::texture_context_impl::tick(
-	time_type const delta)
+void
+sanguis::load::resource::texture_context_impl::tick(
+	time_type const _delta
+)
 {
 	clock_.update(
-		delta);
+		_delta
+	);
 }
 
-sge::texture::part_ptr const sanguis::load::resource::texture_context_impl::result()
+sge::texture::part_ptr const
+sanguis::load::resource::texture_context_impl::result()
 {
 	return texture_result_;
 }
 
-void sanguis::load::resource::texture_context_impl::kill()
+void
+sanguis::load::resource::texture_context_impl::kill()
 {
 	decay_timer_.activate();
+
 	decay_timer_.reset();
 }
 
-void sanguis::load::resource::texture_context_impl::revive()
+void
+sanguis::load::resource::texture_context_impl::revive()
 {
 	decay_timer_.deactivate();
 }
 
-bool sanguis::load::resource::texture_context_impl::decayed() const
+bool
+sanguis::load::resource::texture_context_impl::decayed() const
 {
 	return 
 		decay_timer_.active() && decay_timer_.expired();

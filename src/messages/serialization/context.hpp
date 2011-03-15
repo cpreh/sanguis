@@ -12,8 +12,11 @@ namespace messages
 namespace serialization
 {
 
-struct context {
-	FCPPT_NONCOPYABLE(context)
+struct context
+{
+	FCPPT_NONCOPYABLE(
+		context
+	);
 public:
 	context();
 

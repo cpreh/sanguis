@@ -14,8 +14,8 @@ namespace serialization
 
 auto_ptr
 deserialize(
-	context const &ctx,
-	istream &stream
+	context const &,
+	istream &
 );
 
 }

@@ -15,7 +15,8 @@ sanguis::messages::serialization::read_element<Class>::read_element(
 :
 	is_(_is),
 	obj_(_obj)
-{}
+{
+}
 
 template<
 	typename Class

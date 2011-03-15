@@ -14,11 +14,15 @@ namespace serialization
 template<
 	typename T
 >
-struct dispatcher_register {
-	FCPPT_NONCOPYABLE(dispatcher_register)
+struct dispatcher_register
+{
+	FCPPT_NONCOPYABLE(
+		dispatcher_register
+	);
 public:
 	explicit dispatcher_register(
-		context &ctx);
+		serialization::context &
+	);
 };
 
 }

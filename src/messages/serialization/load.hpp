@@ -21,15 +21,17 @@ namespace serialization
 template<
 	typename Type
 >
-struct load {
+struct load
+{
 	static typename Type::type
 	get(
-		istream &is
+		istream &_is
 	)
 	{
 		typename Type::type ret;
 
 		raw_container vec(
+			// ADL call
 			needed_size(
 				static_cast<
 					majutsu::concepts::dynamic_memory::tag const *
@@ -41,7 +43,7 @@ struct load {
 			)
 		);
 
-		is.read(
+		_is.read(
 			reinterpret_cast<
 				char *
 			>(
@@ -55,6 +57,7 @@ struct load {
 		);
 
 		return
+			// ADL call
 			make(
 				static_cast<
 					majutsu::concepts::dynamic_memory::tag const *
@@ -79,7 +82,7 @@ struct load<
 > {
 	static typename bindings::dynamic_len<T, A>::type
 	get(
-		istream &is
+		istream &_is
 	)
 	{
 		typedef bindings::dynamic_len<T, A> type;
@@ -96,8 +99,8 @@ struct load<
 			fcppt::io::read<
 				length_type
 			>(
-				is,
-				endianness()
+				_is,
+				serialization::endianness()
 			)
 		);
 		
@@ -115,12 +118,13 @@ struct load<
 			vec.data()
 		);
 
-		is.read(
+		_is.read(
 			reinterpret_cast<char *>(vec.data() + length_sz),
 			sz - length_sz
 		);
 
 		return
+			// ADL call
 			make(
 				static_cast<
 					majutsu::concepts::dynamic_memory::tag const *
