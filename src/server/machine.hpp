@@ -7,11 +7,12 @@
 #include "../load/context_base_fwd.hpp"
 #include "../messages/auto_ptr.hpp"
 #include "../net/server.hpp"
-#include "../net/id_type.hpp"
+#include "../net/id.hpp"
 #include "../tick_event_fwd.hpp"
 #include <sge/collision/system_ptr.hpp>
 #include <fcppt/container/map_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 #include <boost/statechart/state_machine.hpp>
 #include <map>
@@ -28,6 +29,9 @@ struct machine
 		states::running
 	>
 {
+	FCPPT_NONCOPYABLE(
+		machine
+	);
 public:
 	machine(
 		load::context_base const &,
@@ -44,24 +48,24 @@ public:
 
 	void
 	process_message(
-		net::id_type,
+		net::id,
 		messages::auto_ptr
 	);
 
 	void
 	connect_callback(
-		net::id_type
+		net::id
 	);
 
 	void
 	disconnect_callback(
-		net::id_type,
+		net::id,
 		fcppt::string const &
 	);
 
 	void
 	data_callback(
-		net::id_type,
+		net::id,
 		net::data_type const &
 	);
 
@@ -93,13 +97,13 @@ public:
 
 	void
 	send_unicast(
-		net::id_type,
+		net::id,
 		messages::auto_ptr
 	);
 private:
 	typedef fcppt::container::map<
 		std::map<
-			net::id_type,
+			net::id,
 			client_data
 		>
 	> client_map;
@@ -111,9 +115,9 @@ private:
 	net::server net_;
 
 	fcppt::signal::scoped_connection const
-		s_conn,
-		s_disconn,
-		s_data;
+		s_conn_,
+		s_disconn_,
+		s_data_;
 
 	client_map clients_;
 

@@ -8,7 +8,6 @@
 #include "../server/object.hpp"
 #include "../media_path.hpp"
 #include "../time_type.hpp"
-#include "../scoped_machine_impl.hpp"
 
 #include <sge/config/media_path.hpp>
 #include <sge/console/sprite_object.hpp>
@@ -20,7 +19,9 @@
 #include <sge/image/colors.hpp>
 #include <sge/image2d/create_texture.hpp>
 #include <sge/image2d/multi_loader.hpp>
-#include <sge/renderer/filter/linear.hpp>
+#include <sge/renderer/texture/filter/linear.hpp>
+#include <sge/renderer/texture/address_mode2.hpp>
+#include <sge/renderer/texture/address_mode.hpp>
 #include <sge/renderer/state/bool.hpp>
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/trampoline.hpp>
@@ -95,25 +96,28 @@ sanguis::client::object::object(
 						/ FCPPT_TEXT("console_back.png"),
 						sys_.renderer(),
 						sys_.image_loader(),
-						sge::renderer::filter::linear,
+						sge::renderer::texture::filter::linear,
+						sge::renderer::texture::address_mode2(
+							sge::renderer::texture::address_mode::clamp
+						),
 						sge::renderer::resource_flags::none
 					)
 				)
 			)
 			.pos(
-				sge::console::sprite_object::point::null()
+				sge::console::sprite_object::vector::null()
 			)
 			.size(
 				sge::console::sprite_object::dim(
 					static_cast<
 						sge::console::sprite_object::unit
 					>(
-						sys_.renderer()->screen_size().w()
+						1024 // FIXME!
 					),
 					static_cast<
 						sge::console::sprite_object::unit
 					>(
-						sys_.renderer()->screen_size().h() / 2
+						768 / 2 // FIXME!
 					)
 				)
 			)
@@ -139,6 +143,17 @@ sanguis::client::object::object(
 		sys_.audio_player(),
 		sound_pool_
 	),
+	cursor_(
+		sys_.cursor_demuxer()
+	),
+	gui_(
+		sys_.renderer(),
+		sys_.image_loader(),
+		sys_.charconv_system(),
+		sys_.viewport_manager(),
+		sys_.keyboard_collector(),
+		cursor_
+	),
 	machine_(
 		settings_,
 		std::tr1::bind(
@@ -152,11 +167,11 @@ sanguis::client::object::object(
 		font_drawer_,
 		console_gfx_,
 		sys_.keyboard_collector(),
-		sys_.mouse_collector(),
+		cursor_,
 		sys_.renderer(),
 		sys_.image_loader(),
 		sys_.audio_player(),
-		io_service_
+		*io_service_
 	),
 	frame_timer_(
 		sge::time::second(1)
@@ -169,7 +184,7 @@ sanguis::client::object::object(
 	if(	
 		args::multi_sampling(
 			_variables_map
-		)
+		).get()
 		> 0
 	)
 		sys_.renderer()->state(

@@ -58,7 +58,7 @@ sanguis::client::states::running::running(
 	),
 	perk_chooser_(
 		fcppt::make_unique_ptr<
-			client::perk_chooser
+			client::gui::perk::chooser
 		>(
 			context<machine>().renderer(),
 			context<machine>().keyboard(),

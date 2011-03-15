@@ -5,12 +5,12 @@
 #include "../machine.hpp"
 #include "../music_handler.hpp"
 #include "../daytime_settings_fwd.hpp"
-#include "../perk_chooser_fwd.hpp"
 #include "../control/environment_fwd.hpp"
 #include "../draw2d/scene/object_fwd.hpp"
 #include "../draw2d/sprite/point.hpp"
 #include "../events/tick_fwd.hpp"
 #include "../events/message_fwd.hpp"
+#include "../gui/perk/chooser_fwd.hpp"
 #include "../../messages/base.hpp"
 #include "../../messages/add_own_player.hpp"
 #include "../../messages/highscore.hpp"
@@ -49,7 +49,7 @@ class running
 {
 	FCPPT_NONCOPYABLE(
 		running
-	)
+	);
 public:
 	typedef boost::mpl::list2<
 		boost::statechart::custom_reaction<
@@ -121,7 +121,7 @@ public:
 	control::environment &
 	control_environment();
 
-	client::perk_chooser &
+	client::gui::perk::chooser &
 	perk_chooser();
 private:
 	boost::statechart::result
@@ -149,7 +149,7 @@ private:
 	music_handler music_;
 
 	fcppt::scoped_ptr<
-		client::perk_chooser
+		client::gui::perk::chooser
 	> perk_chooser_;
 
 	fcppt::scoped_ptr<

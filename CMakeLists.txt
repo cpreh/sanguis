@@ -444,15 +444,6 @@ SET(
 	src/client/gui/perk/chooser_fwd.hpp
 	src/client/gui/perk/send_callback.hpp
 	src/client/health_type.hpp
-	src/client/highscore/entry.cpp
-	src/client/highscore/entry.hpp
-	src/client/highscore/name_container.hpp
-	src/client/highscore/read.cpp
-	src/client/highscore/read.hpp
-	src/client/highscore/score_type.hpp
-	src/client/highscore/table.hpp
-	src/client/highscore/write.cpp
-	src/client/highscore/write.hpp
 	src/client/id_dont_care.cpp
 	src/client/id_dont_care.hpp
 	src/client/invalid_id.cpp
@@ -483,11 +474,6 @@ SET(
 	src/client/screenshot.hpp
 	src/client/send_callback.hpp
 	src/client/server_callback.hpp
-	src/client/states/args/gameover.cpp
-	src/client/states/args/gameover.hpp
-	src/client/states/args/gameover_fwd.hpp
-	src/client/states/gameover.cpp
-	src/client/states/gameover.hpp
 	src/client/states/has_player.cpp
 	src/client/states/has_player.hpp
 	src/client/states/ingame.cpp
@@ -708,8 +694,6 @@ SET(
 	src/messages/global_context.hpp
 	src/messages/health.cpp
 	src/messages/health.hpp
-	src/messages/highscore.cpp
-	src/messages/highscore.hpp
 	src/messages/instantiate_concrete.hpp
 	src/messages/instantiate_message.hpp
 	src/messages/level_type.hpp
@@ -773,7 +757,6 @@ SET(
 	src/messages/roles/experience.hpp
 	src/messages/roles/friend.hpp
 	src/messages/roles/health.hpp
-	src/messages/roles/highscore.hpp
 	src/messages/roles/max_health.hpp
 	src/messages/roles/perk.hpp
 	src/messages/roles/pickup.hpp
@@ -783,7 +766,6 @@ SET(
 	src/messages/roles/weapon.hpp
 	src/messages/rotate.cpp
 	src/messages/rotate.hpp
-	src/messages/score_type.hpp
 	src/messages/serialization/context.cpp
 	src/messages/serialization/context.hpp
 	src/messages/serialization/context_fwd.hpp
@@ -840,7 +822,6 @@ SET(
 	src/messages/types/message.hpp
 	src/messages/types/message_type.hpp
 	src/messages/types/pos.hpp
-	src/messages/types/score.hpp
 	src/messages/types/size.hpp
 	src/messages/types/space_unit.hpp
 	src/messages/types/string.hpp

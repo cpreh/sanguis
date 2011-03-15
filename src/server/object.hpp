@@ -6,10 +6,10 @@
 #include "../load/context_base_fwd.hpp"
 #include "../net/port_type.hpp"
 #include "../main_object.hpp"
-#include "../scoped_machine.hpp"
 #include <sge/systems/instance_fwd.hpp>
 #include <sge/time/timer.hpp>
 #include <fcppt/thread/object.hpp>
+#include <fcppt/scoped_state_machine.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <boost/thread/thread.hpp>
 
@@ -20,9 +20,11 @@ namespace server
 
 class object
 :
-	public main_object
+	public sanguis::main_object
 {
-	FCPPT_NONCOPYABLE(object)
+	FCPPT_NONCOPYABLE(
+		object
+	);
 public:
 	explicit 
 	object(
@@ -63,7 +65,7 @@ private:
 
 	fcppt::thread::object server_thread_;
 
-	typedef sanguis::scoped_machine<
+	typedef fcppt::scoped_state_machine<
 		server::machine
 	> scoped_machine;
 

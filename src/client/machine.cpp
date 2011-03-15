@@ -39,7 +39,7 @@ sanguis::client::machine::machine(
 	sge::font::text::drawer &_font_drawer,
 	sge::console::gfx &_console_gfx,
 	sge::input::keyboard::device_ptr const _keyboard,
-	sge::input::cursor::object_ptr const _cursor,
+	client::cursor::object &_cursor,
 	sge::renderer::device_ptr const _renderer,
 	sge::image2d::multi_loader &_image_loader,
 	sge::audio::player_ptr const _audio_player,

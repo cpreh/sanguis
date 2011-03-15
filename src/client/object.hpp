@@ -4,6 +4,8 @@
 #include "machine.hpp"
 #include "config/settings/object.hpp"
 #include "config/settings/saver.hpp"
+#include "cursor/object.hpp"
+#include "gui/object.hpp"
 #include "../load/context.hpp"
 #include "../net/port_type.hpp"
 #include "../server/object_fwd.hpp"
@@ -85,6 +87,10 @@ private:
 	awl::mainloop::io_service_shared_ptr const io_service_;
 
 	load::context resources_;
+
+	client::cursor::object cursor_;
+
+	client::gui::object gui_;
 
 	client::machine machine_;
 

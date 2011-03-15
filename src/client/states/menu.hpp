@@ -5,14 +5,15 @@
 #include "../machine.hpp"
 #include "../events/message_fwd.hpp"
 #include "../events/tick_fwd.hpp"
-#include "../menu/object.hpp"
+#include "../gui/menu/object.hpp"
 #include "../../messages/net_error.hpp"
 #include "../../messages/connect.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../messages/connect_state.hpp"
 #include "../../connect_state.hpp"
-#include <fcppt/log/object_fwd.hpp>
 #include <sge/renderer/state/scoped.hpp>
+#include <fcppt/log/object_fwd.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/mpl/list.hpp>
@@ -31,6 +32,9 @@ class menu
 		machine
 	>
 {
+	FCPPT_NONCOPYABLE(
+		menu
+	);
 public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<
@@ -41,7 +45,11 @@ public:
 		>
 	> reactions;
 
-	explicit menu(my_context); 
+	explicit menu(
+		my_context
+	);
+
+	~menu();
 
 	typedef boost::statechart::result result_type;
 
@@ -83,7 +91,7 @@ private:
 	fcppt::log::object &
 	log();
 
-	client::menu::object menu_;
+	client::gui::menu::object menu_;
 
 	connect_state::type connect_state_;
 

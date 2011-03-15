@@ -95,7 +95,7 @@ sanguis::client::screenshot::input_callback(
 	if (!_event.pressed())
 		return;
 
-	if (_event.key().code() != sge::input::keyboard::key_code::print)
+	if (_event.key_code() != sge::input::keyboard::key_code::print)
 		return;
 	
 	active_ = true;

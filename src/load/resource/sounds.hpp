@@ -25,7 +25,9 @@ namespace resource
 
 class sounds
 {
-	FCPPT_NONCOPYABLE(sounds)
+	FCPPT_NONCOPYABLE(
+		sounds
+	);
 public:
 	sge::audio::file_ptr const
 	load(

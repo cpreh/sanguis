@@ -33,7 +33,6 @@ enum type
 	experience,
 	give_weapon,
 	health,
-	highscore,
 	level_up,
 	max_health,
 	move,

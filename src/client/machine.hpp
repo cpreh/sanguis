@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_MACHINE_HPP_INCLUDED
 
 #include "states/menu_fwd.hpp"
-#include "cursor/object.hpp"
+#include "cursor/object_fwd.hpp"
 #include "config/settings/object_fwd.hpp"
 #include "events/tick_fwd.hpp"
 #include "states/menu_fwd.hpp"
@@ -22,7 +22,6 @@
 #include <sge/font/metrics_ptr.hpp>
 #include <sge/font/text/drawer_fwd.hpp>
 #include <sge/input/keyboard/device_ptr.hpp>
-#include <sge/input/cursor/object_ptr.hpp>
 #include <sge/image2d/multi_loader_fwd.hpp>
 #include <sge/renderer/device_ptr.hpp>
 
@@ -58,7 +57,7 @@ public:
 		sge::font::text::drawer &,
 		sge::console::gfx &,
 		sge::input::keyboard::device_ptr,
-		sge::input::cursor::object_ptr,
+		client::cursor::object &,
 		sge::renderer::device_ptr,
 		sge::image2d::multi_loader &,
 		sge::audio::player_ptr,
@@ -188,7 +187,7 @@ private:
 
 	screenshot screenshot_;
 
-	sanguis::client::cursor::object cursor_;
+	sanguis::client::cursor::object &cursor_;
 };
 
 }
