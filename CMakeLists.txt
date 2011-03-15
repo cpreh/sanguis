@@ -436,11 +436,13 @@ SET(
 	src/client/gui/menu/object.hpp
 	src/client/gui/object.cpp
 	src/client/gui/object.hpp
-	src/client/gui/perk_chooser.cpp
-	src/client/gui/perk_chooser.hpp
-	src/client/gui/perk_chooser_activation.cpp
-	src/client/gui/perk_chooser_activation.hpp
-	src/client/gui/perk_chooser_fwd.hpp
+	src/client/gui/object_fwd.hpp
+	src/client/gui/perk/activation.cpp
+	src/client/gui/perk/activation.hpp
+	src/client/gui/perk/chooser.cpp
+	src/client/gui/perk/chooser.hpp
+	src/client/gui/perk/chooser_fwd.hpp
+	src/client/gui/perk/send_callback.hpp
 	src/client/health_type.hpp
 	src/client/highscore/entry.cpp
 	src/client/highscore/entry.hpp

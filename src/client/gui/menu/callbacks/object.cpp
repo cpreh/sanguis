@@ -1,10 +1,11 @@
 #include "object.hpp"
 
-sanguis::client::menu::callbacks::object::object(
-	connect const &_connect,
-	cancel_connect const &_cancel_connect,
-	start_server const &_start_server,
-	quit const &_quit)
+sanguis::client::gui::menu::callbacks::object::object(
+	callbacks::connect const &_connect,
+	callbacks::cancel_connect const &_cancel_connect,
+	callbacks::start_server const &_start_server,
+	callbacks::quit const &_quit
+)
 : 
 	connect_(_connect),
 	cancel_connect_(_cancel_connect),

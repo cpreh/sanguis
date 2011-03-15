@@ -1,35 +1,19 @@
-#include "perk_chooser.hpp"
-#include "from_perk_type.hpp"
-#include "log.hpp"
-#include "cursor/object.hpp"
-#include "../media_path.hpp"
-#include "../resolution_type.hpp"
-#include <sge/font/text/lit.hpp>
-#include <sge/gui/widgets/parameters.hpp>
-#include <sge/gui/skins/standard.hpp>
-#include <sge/gui/layouts/vertical.hpp>
-#include <sge/gui/unit.hpp>
-#include <sge/gui/make_image.hpp>
-#include <sge/renderer/device.hpp>
-#include <sge/image2d/multi_loader.hpp>
-#include <fcppt/container/ptr/push_back_unique_ptr.hpp>
-#include <fcppt/filesystem/path.hpp>
-#include <fcppt/math/dim/arithmetic.hpp>
-#include <fcppt/math/dim/output.hpp>
-#include <fcppt/math/dim/structure_cast.hpp>
-#include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/math/vector/output.hpp>
+#include "chooser.hpp"
+//#include "from_perk_type.hpp"
+#include "../../log.hpp"
+//#include <fcppt/container/ptr/push_back_unique_ptr.hpp>
+//#include <fcppt/filesystem/path.hpp>
+//#include <fcppt/math/dim/arithmetic.hpp>
+//#include <fcppt/math/dim/output.hpp>
+//#include <fcppt/math/dim/structure_cast.hpp>
+//#include <fcppt/math/vector/arithmetic.hpp>
+//#include <fcppt/math/vector/output.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/headers.hpp>
-#include <fcppt/tr1/functional.hpp>
+//#include <fcppt/tr1/functional.hpp>
 #include <fcppt/assert.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/make_shared_ptr.hpp>
-#include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/lexical_cast.hpp>
-#include <boost/foreach.hpp>
-#include <utility>
 
 namespace
 {
@@ -41,9 +25,10 @@ fcppt::log::object mylogger(
 	)
 );
 
+#if 0
 sge::gui::dim const
 dialog_size(
-	sanguis::resolution_type const &resolution_
+	sanguis::resolution_type const &_resolution
 )
 {
 	float const scale_x = 0.4f,
@@ -65,7 +50,7 @@ dialog_size(
 
 sge::gui::point const
 dialog_pos(
-	sanguis::resolution_type const &resolution_
+	sanguis::resolution_type const &_resolution
 )
 {
 	return 
@@ -80,117 +65,100 @@ dialog_pos(
 		) /
 		static_cast<sge::gui::unit>(2);
 }
+#endif
+
 }
 
-sanguis::client::perk_chooser::perk_chooser(
-	sge::renderer::device_ptr const _renderer,
-	sge::input::keyboard::device_ptr const _keyboard,
-	sge::input::mouse::device_ptr const _mouse,
-	sge::image2d::multi_loader &_image_loader,
-	sge::font::metrics_ptr const _font_metrics,
-	send_callback const &_send_callback,
-	sanguis::client::cursor::object_ptr const _cursor
+sanguis::client::gui::perk::chooser::chooser(
+	gui::object &_gui,
+	perk::send_callback const &_send_callback
 )
 :
-	image_loader_(_image_loader),
 	perks_(),
 	current_level_(
-		static_cast<level_type>(0)),
+		static_cast<
+			level_type
+		>(
+			0
+		)
+	),
 	consumed_levels_(
-		static_cast<level_type>(0)),
-	manager_(
-		_renderer,
-		_keyboard,
-		_mouse,
-		sge::gui::skins::ptr(
-			fcppt::make_unique_ptr<
-				sge::gui::skins::standard
-			>(
-				_font_metrics
-			)
-		),
-		_cursor
+		static_cast<
+			level_type
+		>(
+			0
+		)
 	),
-	background_(
-		manager_,
-		sge::gui::widgets::parameters()
-			.pos(
-				dialog_pos(
-					_renderer->screen_size()
-				)
-			)
-			.size(
-				dialog_size(
-					_renderer->screen_size()
-				)
-			)
-			.activation(
-				sge::gui::activation_state::inactive)
-			.layout(
-				fcppt::make_shared_ptr<sge::gui::layouts::vertical>())),
-	perks_left_(
-		background_,
-		sge::gui::widgets::parameters(),
-		SGE_FONT_TEXT_LIT("")
-	),
-	buttons_(),
 	connections_(),
-	dirty_(false),
-	send_callback_(_send_callback),
-	images_()
+	send_callback_(_send_callback)
 {
+#if 0
 	FCPPT_LOG_DEBUG(
 		mylogger,
 		fcppt::log::_
 			<< FCPPT_TEXT("started, dialog size: ")
 			<< background_.size()
 			<< FCPPT_TEXT(", dialog position: ")
-			<< background_.screen_pos());
+			<< background_.screen_pos()
+	);
+#endif
 }
 
 void
-sanguis::client::perk_chooser::process()
+sanguis::client::gui::perk::chooser::process()
 {
-	if (activated())
+#if 0
+	if(activated())
 	{
 		manager_.update();
 		manager_.draw();
 	}
+#endif
 }
 
 void
-sanguis::client::perk_chooser::perks(
-	perk_container const &_perks
+sanguis::client::gui::perk::chooser::perks(
+	client::perk_container const &_perks
 )
 {
 	FCPPT_LOG_DEBUG(
 		mylogger,
-		fcppt::log::_ << FCPPT_TEXT("got new set of perks"));
+		fcppt::log::_ << FCPPT_TEXT("got new set of perks")
+	);
 
 	perks_ = _perks;
+
+#if 0
 	if (activated())
 		regenerate_widgets();
 	else
 		dirty_ = true;
+#endif
 }
 
 void
-sanguis::client::perk_chooser::level_up(
+sanguis::client::gui::perk::chooser::level_up(
 	level_type const _current_level
 )
 {
-	FCPPT_ASSERT(current_level_ <= _current_level);
+	FCPPT_ASSERT(
+		current_level_ <= _current_level
+	);
 
 	current_level_ = _current_level;
+
+#if 0
 	if (activated())
 		regenerate_label();
 	else
 		dirty_ = true;
+#endif
 }
 
 bool
-sanguis::client::perk_chooser::activated() const
+sanguis::client::gui::perk::chooser::activated() const
 {
+#if 0
 	switch (background_.activation())
 	{
 		case sge::gui::activation_state::active:
@@ -199,18 +167,20 @@ sanguis::client::perk_chooser::activated() const
 			return false;
 	}
 	return false;
+#endif
 }
 
 void
-sanguis::client::perk_chooser::activated(
-	bool const _n
+sanguis::client::gui::perk::chooser::activated(
+	bool const _activated
 )
 {
+#if 0
 	FCPPT_LOG_DEBUG(
 		mylogger,
 		fcppt::log::_
 			<< FCPPT_TEXT("set activation to ")
-			<< _n
+			<< _activated
 	);
 
 	background_.activation(
@@ -226,10 +196,11 @@ sanguis::client::perk_chooser::activated(
 		regenerate_widgets();
 		dirty_ = false;
 	}
+#endif
 }
 
 sanguis::client::level_type
-sanguis::client::perk_chooser::levels_left() const
+sanguis::client::gui::perk::chooser::levels_left() const
 {
 	return
 		static_cast<
@@ -241,22 +212,25 @@ sanguis::client::perk_chooser::levels_left() const
 }
 
 void
-sanguis::client::perk_chooser::regenerate_label()
+sanguis::client::gui::perk::chooser::regenerate_label()
 {
+#if 0
 	perks_left_.text(
 		SGE_FONT_TEXT_LIT("Perks left: ")
 		+
 		fcppt::lexical_cast<
 			sge::font::text::string
 		>(
-			levels_left()
+			this->levels_left()
 		)
 	);
+#endif
 }
 
 void
-sanguis::client::perk_chooser::regenerate_widgets()
+sanguis::client::gui::perk::chooser::regenerate_widgets()
 {
+#if 0
 	regenerate_label();
 
 	buttons_.clear();
@@ -296,39 +270,53 @@ sanguis::client::perk_chooser::regenerate_widgets()
 			)
 		);
 	}
+#endif
 }
 
-void sanguis::client::perk_chooser::choose_callback(
-	perk_type::type const p)
+void
+sanguis::client::gui::perk::chooser::choose_callback(
+	perk_type::type const _perk
+)
 {
 	FCPPT_LOG_DEBUG(
 		mylogger,
 		fcppt::log::_
 			<< FCPPT_TEXT("chose perk ")
-			<< p
-			 << FCPPT_TEXT(", levels left: ")
-			 << levels_left()
+			<< _perk
+			<< FCPPT_TEXT(", levels left: ")
+			<< this->levels_left()
 	);
 
-	if (!levels_left())
+	if (
+		!this->levels_left()
+	)
 		return;
 
 	send_callback_(
-		p);
-	consume_level();
+		_perk
+	);
+
+	this->consume_level();
 }
 
-void sanguis::client::perk_chooser::consume_level()
+void
+sanguis::client::gui::perk::chooser::consume_level()
 {
-	FCPPT_ASSERT(levels_left());
+	FCPPT_ASSERT(
+		this->levels_left()
+	);
+
 	consumed_levels_++;
 
+#if 0
 	if (activated())
 		regenerate_label();
 	else
 		dirty_ = true;
+#endif
 }
 
+#if 0
 sanguis::client::perk_chooser::image_map::const_iterator const
 	sanguis::client::perk_chooser::load_from_cache(
 		perk_type::type const r)
@@ -377,3 +365,4 @@ sanguis::client::perk_chooser::image_map::const_iterator const
 
 	return pi;
 }
+#endif

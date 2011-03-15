@@ -37,11 +37,11 @@ sanguis::client::gui::object::object(
 	),
 	keyboard_(
 		syringe_,
-		_keyboard
+		*_keyboard
 	),
 	cursor_(
 		syringe_,
-		_cursor.get()
+		*_cursor.get()
 	)
 {
 }
