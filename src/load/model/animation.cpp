@@ -37,50 +37,59 @@ namespace
 
 sge::renderer::lock_rect const
 calc_rect(
-	sge::renderer::lock_rect const &area,
-	sge::renderer::dim2 const &cell_size,
-	sge::renderer::size_type const index
+	sge::renderer::lock_rect const &_area,
+	sge::renderer::dim2 const &_cell_size,
+	sge::renderer::size_type const _index
 )
 {
-	if (area.dimension().w() == cell_size.w())
+	if(
+		_area.size().w() == _cell_size.w()
+	)
 	{
-		FCPPT_ASSERT(index == static_cast<sge::renderer::size_type>(0));
-		return sge::renderer::lock_rect(
-			sge::renderer::lock_rect::vector::null(),
-			cell_size);
+		FCPPT_ASSERT(
+			_index == static_cast<sge::renderer::size_type>(0)
+		);
+
+		return
+			sge::renderer::lock_rect(
+				sge::renderer::lock_rect::vector::null(),
+				_cell_size
+			);
 	}
 
 	sge::renderer::dim2 const cell_size_edited(
-		cell_size.w()+1,
-		cell_size.h()+1);
+		_cell_size.w() + 1,
+		_cell_size.h() + 1
+	);
 
 	sge::renderer::size_type const cells_per_row(
 		std::max(
-			area.dimension().w() / cell_size_edited.w(),
+			_area.size().w() / cell_size_edited.w(),
 			static_cast<sge::renderer::size_type>(1)
 		)
 	);
 
-	return sge::renderer::lock_rect(
-		sge::renderer::lock_rect::vector(
-			index % cells_per_row,
-			index / cells_per_row
-		) * cell_size_edited + area.pos(),
-		cell_size
-	);
+	return
+		sge::renderer::lock_rect(
+			sge::renderer::lock_rect::vector(
+				_index % cells_per_row,
+				_index / cells_per_row
+			) * cell_size_edited + _area.pos(),
+			_cell_size
+		);
 }
 
 sge::time::unit
 load_delay(
-	sge::parse::json::member_vector const &members,
-	sanguis::load::model::optional_delay const &opt_delay
+	sge::parse::json::member_vector const &_members,
+	sanguis::load::model::optional_delay const &_opt_delay
 )
 {
 	int const *const ret(
 		sge::parse::json::find_member<
 			int	
 		>(
-			members,
+			_members,
 			FCPPT_TEXT("delay")
 		)
 	);
@@ -96,9 +105,9 @@ load_delay(
 			);
 
 	if(
-		opt_delay
+		_opt_delay
 	)
-		return *opt_delay;
+		return *_opt_delay;
 
 	throw sanguis::exception(
 		FCPPT_TEXT("delay not in header but not in specified in leaf TODO either!")
@@ -132,8 +141,10 @@ sanguis::load::model::animation::animation(
 			)
 		).texture();
 
-	if(!_texture)
-		throw exception(
+	if(
+		!_texture
+	)
+		throw sanguis::exception(
 			FCPPT_TEXT("texture not found in ")
 			+ fcppt::filesystem::path_to_string(
 				param_.path()
@@ -181,6 +192,7 @@ sanguis::load::model::animation_context_ptr
 sanguis::load::model::animation::load() const 
 {
 	return 
+		// TODO: make_unique_ptr?
 		animation_context_ptr(
 			new animation_context(
 				param_.textures().load(

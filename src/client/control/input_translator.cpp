@@ -2,18 +2,19 @@
 #include "player_action.hpp"
 #include "axis_direction_max.hpp"
 #include "axis_direction_min.hpp"
+#include "../cursor/object.hpp"
 #include "../../exception.hpp"
 #include <sge/input/keyboard/device.hpp>
 #include <sge/input/keyboard/key_event.hpp>
-#include <sge/input/mouse/axis_event.hpp>
-#include <sge/input/mouse/button_event.hpp>
+#include <sge/input/cursor/button_event.hpp>
+#include <sge/input/cursor/move_event.hpp>
 #include <sge/input/mouse/device.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::client::control::input_translator::input_translator(
 	sge::input::keyboard::device_ptr const _keyboard,
-	sge::input::mouse::device_ptr const _mouse,
+	client::cursor::object &_cursor,
 	post_fun const &_post_message
 )
 :
@@ -28,16 +29,16 @@ sanguis::client::control::input_translator::input_translator(
 		)
 	),
 	axis_connection_(
-		_mouse->axis_callback(
+		_cursor.move_callback(
 			std::tr1::bind(
-				&input_translator::axis_callback,
+				&input_translator::move_callback,
 				this,
 				std::tr1::placeholders::_1
 			)
 		)
 	),
 	button_connection_(
-		_mouse->button_callback(
+		_cursor.button_callback(
 			std::tr1::bind(
 				&input_translator::button_callback,
 				this,
@@ -45,7 +46,8 @@ sanguis::client::control::input_translator::input_translator(
 			)
 		)
 	)
-{}
+{
+}
 
 void
 sanguis::client::control::input_translator::key_callback(
@@ -92,10 +94,11 @@ sanguis::client::control::input_translator::key_callback(
 }
 
 void
-sanguis::client::control::input_translator::axis_callback(
-	sge::input::mouse::axis_event const &_event
+sanguis::client::control::input_translator::move_callback(
+	sge::input::cursor::move_event const &_event
 )
 {
+#if 0
 	switch(
 		_event.axis()
 	)
@@ -115,15 +118,16 @@ sanguis::client::control::input_translator::axis_callback(
 	default:
 		break;
 	}
+#endif
 }
 
 void
 sanguis::client::control::input_translator::button_callback(
-	sge::input::mouse::button_event const &_event
+	sge::input::cursor::button_event const &_event
 )
 {
 	if(
-		_event.button_code() == sge::input::mouse::button_code::left
+		_event.button_code() == sge::input::cursor::button_code::left
 	)
 		post_message_(
 			player_action(
@@ -163,7 +167,7 @@ sanguis::client::control::input_translator::direction_event(
 		to_send = action_type::vertical_move;
 		break;
 	default:
-		throw exception(
+		throw sanguis::exception(
 			FCPPT_TEXT("direction_event: impossible!")
 		);
 	}
@@ -178,7 +182,7 @@ sanguis::client::control::input_translator::direction_event(
 
 void
 sanguis::client::control::input_translator::rotation_event(
-	sge::input::mouse::axis_value const _value,
+	sge::input::cursor::position_unit const _value,
 	action_type::type const _action
 )
 {

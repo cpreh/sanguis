@@ -14,9 +14,12 @@ namespace load
 {
 namespace resource
 {
+
 class animations
 {
-	FCPPT_NONCOPYABLE(animations)
+	FCPPT_NONCOPYABLE(
+		animations
+	);
 public:
 	sge::sprite::animation::series const
 	load(

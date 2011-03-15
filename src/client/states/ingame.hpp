@@ -26,7 +26,7 @@ class ingame
 {
 	FCPPT_NONCOPYABLE(
 		ingame
-	)
+	);
 public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<

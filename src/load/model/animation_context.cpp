@@ -24,13 +24,17 @@ sanguis::load::model::animation_context::animation_context(
 )
 :
 	texture_context_(
-		_texture_context),
+		_texture_context
+	),
 	frame_cache_(
-		_frame_cache),
+		_frame_cache
+	),
 	cache_callback_(
-		_cache_callback),
+		_cache_callback
+	),
 	is_finished_(
-		false),
+		false
+	),
 	animation_()
 {
 }
@@ -53,7 +57,7 @@ sanguis::load::model::animation_context::update()
 	);
 	
 	cache_callback_(
-		t->area()
+		part->area()
 	);
 
 	BOOST_FOREACH(

@@ -4,12 +4,12 @@
 #include "action_type.hpp"
 #include "input_translator_fwd.hpp"
 #include "player_action_fwd.hpp"
+#include "../cursor/object_fwd.hpp"
 #include <sge/input/keyboard/device_ptr.hpp>
 #include <sge/input/keyboard/key_event_fwd.hpp>
-#include <sge/input/mouse/axis_event_fwd.hpp>
-#include <sge/input/mouse/axis_value.hpp>
-#include <sge/input/mouse/button_event_fwd.hpp>
-#include <sge/input/mouse/device_ptr.hpp>
+#include <sge/input/cursor/move_event_fwd.hpp>
+#include <sge/input/cursor/button_event_fwd.hpp>
+#include <sge/input/cursor/position_unit.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -33,7 +33,7 @@ public:
 
 	explicit input_translator(
 		sge::input::keyboard::device_ptr,
-		sge::input::mouse::device_ptr,
+		client::cursor::object &,
 		post_fun const &
 	);
 private:
@@ -43,13 +43,13 @@ private:
 	);
 
 	void
-	axis_callback(
-		sge::input::mouse::axis_event const &
+	move_callback(
+		sge::input::cursor::move_event const &
 	);
 
 	void
 	button_callback(
-		sge::input::mouse::button_event const &
+		sge::input::cursor::button_event const &
 	);
 
 	void
@@ -59,7 +59,7 @@ private:
 
 	void
 	rotation_event(
-		sge::input::mouse::axis_value,
+		sge::input::cursor::position_unit,
 		action_type::type
 	);
 

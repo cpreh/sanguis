@@ -1,5 +1,4 @@
 #include "has_player.hpp"
-//#include "gameover.hpp"
 #include "../control/input_translator.hpp"
 #include "../control/action_handler.hpp"
 #include "../events/action.hpp"
@@ -12,6 +11,7 @@
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 
 sanguis::client::states::has_player::has_player(
@@ -24,7 +24,9 @@ sanguis::client::states::has_player::has_player(
 			control::input_translator
 		>(
 			context<machine>().keyboard(),
-			context<machine>().mouse(),
+			fcppt::ref(
+				context<machine>().cursor()
+			),
 			std::tr1::bind(
 				&states::has_player::handle_player_action,
 				this,

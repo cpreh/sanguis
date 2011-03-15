@@ -28,7 +28,7 @@ class waiting_for_player
 {
 	FCPPT_NONCOPYABLE(
 		waiting_for_player
-	)
+	);
 public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<

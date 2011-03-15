@@ -156,6 +156,7 @@ sanguis::client::object::object(
 	),
 	machine_(
 		settings_,
+		gui_,
 		std::tr1::bind(
 			&object::create_server,
 			this,

@@ -5,6 +5,7 @@
 #include "cursor/object_fwd.hpp"
 #include "config/settings/object_fwd.hpp"
 #include "events/tick_fwd.hpp"
+#include "gui/object_fwd.hpp"
 #include "states/menu_fwd.hpp"
 #include "console.hpp"
 #include "screenshot.hpp"
@@ -50,6 +51,7 @@ class machine
 public:
 	machine(
 		config::settings::object &,
+		client::gui::object &,
 		server_callback const &,
 		load::context const &,
 		sge::audio::pool &,
@@ -147,8 +149,13 @@ public:
 
 	sanguis::client::cursor::object const &
 	cursor() const;
+
+	sanguis::client::gui::object &
+	gui() const;
 private:
 	config::settings::object &settings_;
+
+	client::gui::object &gui_;
 
 	load::context const &resources_;
 

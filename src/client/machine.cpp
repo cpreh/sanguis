@@ -32,6 +32,7 @@
 
 sanguis::client::machine::machine(
 	config::settings::object &_settings,
+	client::gui::object &_gui,
 	server_callback const &_server_callback,
 	load::context const &_resources,
 	sge::audio::pool &_sound_pool,
@@ -47,6 +48,7 @@ sanguis::client::machine::machine(
 )
 :
 	settings_(_settings),
+	gui_(_gui),
 	resources_(_resources),
 	keyboard_(_keyboard),
 	renderer_(_renderer),

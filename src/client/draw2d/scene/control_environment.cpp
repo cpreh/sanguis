@@ -48,7 +48,7 @@ sanguis::client::draw2d::scene::control_environment::attack_dest() const
 				object_.screen_size() / 2u
 			)
 			+ object_.player_center()
-			+ cursor_.pos()
+			+ cursor_.position()
 		);
 }
 
@@ -64,7 +64,7 @@ sanguis::client::draw2d::scene::control_environment::rotation() const
 	);
 
 	return
-		cursor_.pos() == refpoint
+		cursor_.position() == refpoint
 		?
 			// FIXME: this should not update the rotation at all!
 			static_cast<control::key_scale>(0)
@@ -73,7 +73,7 @@ sanguis::client::draw2d::scene::control_environment::rotation() const
 				control::key_scale
 			>(
 				refpoint,
-				cursor_.pos()
+				cursor_.position()
 			);
 }
 

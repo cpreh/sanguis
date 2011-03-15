@@ -3,7 +3,7 @@
 #include "../events/action.hpp"
 #include "../events/message.hpp"
 #include "../events/tick.hpp"
-#include "../perk_chooser.hpp"
+#include "../gui/perk/chooser.hpp"
 
 sanguis::client::states::perk_chooser::perk_chooser(
 	my_context _ctx

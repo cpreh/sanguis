@@ -13,7 +13,8 @@ sanguis::load::resource::texture_context_impl::texture_context_impl(
 	fcppt::filesystem::path const &_path,
 	sge::renderer::device_ptr const _rend,
 	sge::image2d::multi_loader &_il,
-	sge::renderer::filter::texture const _filter)
+	sge::renderer::texture::filter::object const &_filter
+)
 :
 	task_(
 		std::tr1::bind(
@@ -26,38 +27,53 @@ sanguis::load::resource::texture_context_impl::texture_context_impl(
 		)
 	),
 	future_(
-		task_.get_future()),
+		task_.get_future()
+	),
 	thread_(
 		std::tr1::ref(
-			task_)),
-	texture_result_(
-		),
+			task_
+		)
+	),
+	texture_result_(),
 	rend_(
-		_rend),
+		_rend
+	),
 	filter_(
-		_filter),
+		_filter
+	),
 	clock_(),
 	decay_timer_(
 		sge::time::second(
-			10),
+			10
+		),
 		sge::time::activation_state::active,
-		clock_.callback())
-{}
-
-bool sanguis::load::resource::texture_context_impl::update()
+		clock_.callback()
+	)
 {
-	if (!future_.has_value())
+}
+
+bool
+sanguis::load::resource::texture_context_impl::update()
+{
+	if(
+		!future_.has_value()
+	)
 		return false;
-	if (!texture_result_)
-		texture_result_.reset( 
-			new sge::texture::part_raw(
+
+	if(
+		!texture_result_
+	)
+		texture_result_ =
+			fcppt::make_shared_ptr<
+				sge::texture::part_raw
+			>(
 				rend_->create_texture(
 					future_.get()->view(),
 					filter_,
 					sge::renderer::resource_flags::none
 				)
-			)
-		);
+			);
+
 	return true;
 }
 
@@ -101,10 +117,8 @@ sanguis::load::resource::texture_context_impl::task(
 	sge::image2d::multi_loader &_il
 )
 {
-	sge::image2d::file_ptr const p = 
+	return
 		_il.load(
 			_path
 		);
-	
-	return p;
 }

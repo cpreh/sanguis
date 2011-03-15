@@ -24,7 +24,7 @@ class ingame_menu
 {
 	FCPPT_NONCOPYABLE(
 		ingame_menu
-	)
+	);
 public:
 	explicit ingame_menu(
 		my_context

@@ -7,13 +7,11 @@
 #include "../daytime_settings_fwd.hpp"
 #include "../control/environment_fwd.hpp"
 #include "../draw2d/scene/object_fwd.hpp"
-#include "../draw2d/sprite/point.hpp"
 #include "../events/tick_fwd.hpp"
 #include "../events/message_fwd.hpp"
 #include "../gui/perk/chooser_fwd.hpp"
 #include "../../messages/base.hpp"
 #include "../../messages/add_own_player.hpp"
-#include "../../messages/highscore.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../messages/console_print.hpp"
 #include "../../messages/add_console_command.hpp"
@@ -21,10 +19,8 @@
 #include "../../messages/unpause.hpp"
 #include "../../messages/available_perks.hpp"
 #include "../../messages/level_up.hpp"
-#include "../../entity_id.hpp"
 #include "../../perk_type.hpp"
 #include <sge/renderer/state/scoped.hpp>
-#include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <boost/statechart/state.hpp>
@@ -85,11 +81,6 @@ public:
 
 	boost::statechart::result
 	operator()(
-		messages::highscore const &
-	);
-
-	boost::statechart::result
-	operator()(
 		messages::level_up const &
 	);
 
@@ -130,16 +121,6 @@ private:
 	);
 
 	void
-	cursor_pos(
-		draw2d::sprite::point const & // FIXME!
-	);
-
-	void
-	cursor_show(
-		bool show
-	);
-
-	void
 	send_perk_choose(
 		perk_type::type
 	);
@@ -159,12 +140,6 @@ private:
 	fcppt::scoped_ptr<
 		draw2d::scene::object
 	> drawer_;
-
-	entity_id const cursor_id_;
-
-	fcppt::signal::scoped_connection const
-		cursor_pos_conn_,
-		cursor_show_conn_;
 };
 
 }

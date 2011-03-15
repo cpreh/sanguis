@@ -34,13 +34,8 @@ sanguis::client::states::menu::menu(
 	my_base(ctx),
 	menu_(
 		context<machine>().settings(),
-		context<machine>().renderer(),
-		context<machine>().image_loader(),
-		context<machine>().font_metrics(),
-		context<machine>().keyboard(),
-		context<machine>().mouse(),
-		context<machine>().cursor(),
-		client::menu::callbacks::object(
+		context<machine>().gui(),
+		gui::menu::callbacks::object(
 			std::tr1::bind(
 				&menu::connect,
 				this,

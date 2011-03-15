@@ -1,16 +1,14 @@
 #include "running.hpp"
 #include "menu.hpp"
-#include "gameover.hpp"
-#include "args/gameover.hpp"
 #include "../daytime_settings.hpp"
 #include "../entity_type.hpp"
 #include "../log.hpp"
 #include "../perk_cast.hpp"
-#include "../perk_chooser.hpp"
 #include "../cursor/object.hpp"
 #include "../events/menu.hpp"
 #include "../events/message.hpp"
 #include "../events/tick.hpp"
+#include "../gui/perk/chooser.hpp"
 #include "../messages/add.hpp"
 #include "../messages/visible.hpp"
 #include "../draw2d/screen_to_virtual.hpp" // FIXME
@@ -36,6 +34,7 @@
 #include <fcppt/utf8/convert.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <boost/foreach.hpp>
 
@@ -60,19 +59,14 @@ sanguis::client::states::running::running(
 		fcppt::make_unique_ptr<
 			client::gui::perk::chooser
 		>(
-			context<machine>().renderer(),
-			context<machine>().keyboard(),
-			context<machine>().mouse(),
-			std::tr1::ref(
-				context<machine>().image_loader()
+			fcppt::ref(
+				context<machine>().gui()
 			),
-			context<machine>().font_metrics(),
 			std::tr1::bind(
 				&running::send_perk_choose,
 				this,
 				std::tr1::placeholders::_1
-			),
-			context<machine>().cursor()
+			)
 		)
 	),
 	daytime_settings_(
@@ -91,37 +85,16 @@ sanguis::client::states::running::running(
 			context<machine>().resources(),
 			context<machine>().renderer(),
 			context<machine>().font_metrics(),
-			context<machine>().font_drawer(),
-			std::tr1::ref(
+			fcppt::ref(
+				context<machine>().font_drawer()
+			),
+			fcppt::ref(
 				context<machine>().audio_player()->listener()
 			),
-			context<machine>().cursor(),
+			fcppt::ref(
+				context<machine>().cursor()
+			),
 			daytime_settings_->current_time()
-		)
-	),
-	cursor_id_(
-		drawer_->client_message(
-			client::messages::add(
-				client::entity_type::cursor
-			)
-		)
-	),
-	cursor_pos_conn_(
-		context<machine>().cursor()->register_pos_callback(
-			std::tr1::bind(
-				&running::cursor_pos,
-				this,
-				std::tr1::placeholders::_1
-			)
-		)
-	),
-	cursor_show_conn_(
-		context<machine>().cursor()->register_visible_callback(
-			std::tr1::bind(
-				&running::cursor_show,
-				this,
-				std::tr1::placeholders::_1
-			)
 		)
 	)
 {
@@ -165,9 +138,8 @@ sanguis::client::states::running::react(
 )
 {
 	static sanguis::messages::call::object<
-		boost::mpl::vector8<
+		boost::mpl::vector7<
 			sanguis::messages::disconnect,
-			sanguis::messages::highscore,
 			sanguis::messages::level_up,
 			sanguis::messages::console_print,
 			sanguis::messages::add_console_command,
@@ -196,45 +168,6 @@ sanguis::client::states::running::operator()(
 )
 {
 	return transit<menu>();
-}
-
-boost::statechart::result
-sanguis::client::states::running::operator()(
-	sanguis::messages::highscore const &_message
-)
-{
-	FCPPT_LOG_DEBUG(
-		sanguis::client::log(),
-		fcppt::log::_ 
-			<< FCPPT_TEXT("got highscore message, score was: ")
-			<< _message.get<sanguis::messages::roles::highscore>()
-	);
-
-	highscore::name_container names;
-
-	BOOST_FOREACH(
-		sanguis::messages::types::string const &entry,
-		_message.get<sanguis::messages::string_vector>()
-	)
-		names.push_back(
-			fcppt::utf8::convert(
-				entry	
-			)
-		);
-	
-	return
-		transit<
-			gameover
-		>(
-			args::gameover(
-				names,
-				static_cast<
-					highscore::score_type
-				>(
-					_message.get<sanguis::messages::roles::highscore>()
-				)
-			)
-		);
 }
 
 boost::statechart::result
@@ -353,7 +286,7 @@ sanguis::client::states::running::control_environment()
 	return drawer_->control_environment();
 }
 
-sanguis::client::perk_chooser &
+sanguis::client::gui::perk::chooser &
 sanguis::client::states::running::perk_chooser()
 {
 	return *perk_chooser_;
@@ -369,37 +302,6 @@ sanguis::client::states::running::handle_default_msg(
 	);
 
 	return discard_event();
-}
-
-void
-sanguis::client::states::running::cursor_pos(
-	draw2d::sprite::point const &_pos // FIXME
-)
-{
-	drawer_->process_message(
-		*sanguis::messages::create(
-			sanguis::messages::move(
-				cursor_id_,
-				draw2d::screen_to_virtual( // FIXME
-					context<machine>().renderer()->screen_size(),
-					_pos
-				)
-			)
-		)
-	);
-}
-
-void
-sanguis::client::states::running::cursor_show(
-	bool const _show
-)
-{
-	drawer_->client_message(
-		client::messages::visible(
-			cursor_id_,
-			!_show
-		)
-	);
 }
 
 void

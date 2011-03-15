@@ -16,7 +16,7 @@
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/result.hpp>
-#include <boost/mpl/list/list10.hpp>
+#include <boost/mpl/list.hpp>
 
 namespace sanguis
 {
@@ -35,7 +35,7 @@ class has_player
 {
 	FCPPT_NONCOPYABLE(
 		has_player
-	):
+	);
 public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<

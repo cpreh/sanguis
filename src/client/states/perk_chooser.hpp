@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_STATES_PERK_CHOOSER_HPP_INCLUDED
 
 #include "has_player.hpp"
-#include "../perk_chooser_activation.hpp"
+#include "../gui/perk/activation.hpp"
 #include "../events/action_fwd.hpp"
 #include "../events/tick_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
@@ -27,7 +27,7 @@ class perk_chooser
 {
 	FCPPT_NONCOPYABLE(
 		perk_chooser
-	)
+	);
 public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<
@@ -56,7 +56,7 @@ public:
 		events::action const &
 	);
 private:
-	client::perk_chooser_activation chooser_activation_;
+	client::gui::perk::activation chooser_activation_;
 };
 
 }
