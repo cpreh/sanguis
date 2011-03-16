@@ -86,7 +86,12 @@ sanguis::server::entities::with_health::with_health(
 			)
 		)
 	)
-{}
+{
+}
+
+sanguis::server::entities::with_health::~with_health()
+{
+}
 
 void
 sanguis::server::entities::with_health::on_update(

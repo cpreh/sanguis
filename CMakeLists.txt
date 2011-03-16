@@ -1004,6 +1004,7 @@ SET(
 	src/server/damage/wrapper.hpp
 	src/server/damage/wrapper_fwd.hpp
 	src/server/dim_type.hpp
+	src/server/entities/auto_weak_hook.hpp
 	src/server/entities/auto_weak_link.cpp
 	src/server/entities/auto_weak_link.hpp
 	src/server/entities/auto_weak_link_fwd.hpp

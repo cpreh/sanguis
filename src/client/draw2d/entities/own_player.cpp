@@ -9,7 +9,12 @@ sanguis::client::draw2d::entities::own_player::own_player(
 		_param
 	),
 	transform_(_transform)
-{}
+{
+}
+
+sanguis::client::draw2d::entities::own_player::~own_player()
+{
+}
 
 void
 sanguis::client::draw2d::entities::own_player::update(
@@ -21,6 +26,6 @@ sanguis::client::draw2d::entities::own_player::update(
 	);
 
 	transform_(
-		center()
+		this->center()
 	);
 }

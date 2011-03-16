@@ -32,7 +32,12 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 		indeterminate::no
 	),
 	damage_(_damage)
-{}
+{
+}
+
+sanguis::server::entities::projectiles::simple_bullet::~simple_bullet()
+{
+}
 
 void
 sanguis::server::entities::projectiles::simple_bullet::do_damage(
@@ -46,5 +51,5 @@ sanguis::server::entities::projectiles::simple_bullet::do_damage(
 		)
 	);
 
-	expire();
+	this->expire();
 }

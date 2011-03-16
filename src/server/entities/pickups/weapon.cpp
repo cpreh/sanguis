@@ -27,7 +27,12 @@ sanguis::server::entities::pickups::weapon::weapon(
 		)
 	),
 	weapon_type_(_weapon_type)
-{}
+{
+}
+
+sanguis::server::entities::pickups::weapon::~weapon()
+{
+}
 
 sanguis::weapon_type::type
 sanguis::server::entities::pickups::weapon::wtype() const
@@ -40,26 +45,27 @@ sanguis::server::entities::pickups::weapon::add_message(
 	player_id const
 ) const
 {
-	return messages::create(
-		messages::add_weapon_pickup(
-			id(),
-			pos(),
-			angle(),
-			dim(),
-			wtype()
-		)
-	);
+	return
+		messages::create(
+			messages::add_weapon_pickup(
+				this->id(),
+				this->pos(),
+				this->angle(),
+				this->dim(),
+				this->wtype()
+			)
+		);
 }
 
 void
 sanguis::server::entities::pickups::weapon::do_pickup(
-	base &receiver
+	base &_receiver
 )
 {
 	dynamic_cast<
 		with_weapon &
 	>(
-		receiver
+		_receiver
 	)
 	.add_weapon(
 		weapons::create(

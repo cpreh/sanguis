@@ -54,6 +54,10 @@ sanguis::server::entities::projectiles::projectile::projectile(
 {
 }
 
+sanguis::server::entities::projectiles::projectile::~projectile()
+{
+}
+
 void
 sanguis::server::entities::projectiles::projectile::on_update(
 	time_type const _time

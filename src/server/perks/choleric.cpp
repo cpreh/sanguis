@@ -31,6 +31,10 @@ sanguis::server::perks::choleric::choleric()
 {
 }
 
+sanguis::server::perks::choleric::~choleric()
+{
+}
+
 void
 sanguis::server::perks::choleric::update(
 	entities::base &_entity,
@@ -62,7 +66,7 @@ sanguis::server::perks::choleric::update(
 	)
 	{
 		space_unit const angle(
-			rand()
+			rand_()
 		);
 
 		_env->insert(

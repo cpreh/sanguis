@@ -39,7 +39,7 @@ private:
 
 	fcppt::optional<
 		sprite::point
-	> origin;
+	> origin_;
 };
 
 }

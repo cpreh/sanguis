@@ -356,3 +356,9 @@ sanguis::client::machine::cursor() const
 {
 	return cursor_;
 }
+
+sanguis::client::gui::object &
+sanguis::client::machine::gui() const
+{
+	return gui_;
+}

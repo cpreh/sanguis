@@ -4,7 +4,12 @@
 sanguis::server::entities::spawns::hidden::hidden()
 :
 	base()
-{}
+{
+}
+
+sanguis::server::entities::spawns::hidden::~hidden()
+{
+}
 
 bool
 sanguis::server::entities::spawns::hidden::dead() const

@@ -29,7 +29,12 @@ sanguis::server::waves::simple::simple(
 	spawns_per_wave_(_spawns_per_wave),
 	etype_(_etype),
 	waves_spawned_(0)
-{}
+{
+}
+
+sanguis::server::waves::simple::~simple()
+{
+}
 
 void
 sanguis::server::waves::simple::process(
@@ -42,18 +47,28 @@ sanguis::server::waves::simple::process(
 		_diff
 	);
 
-	if(!delay_timer_.expired())
+	if(
+		!delay_timer_.expired()
+	)
 		return;
 
-	if(!spawn_timer_.update_b())
+	if(
+		!spawn_timer_.update_b()
+	)
 		return;
 
-	if(waves_spawned_ == waves_)
+	if(
+		waves_spawned_ == waves_
+	)
 		return;
 	
 	++waves_spawned_;
 
-	for(unsigned i = 0; i < spawns_per_wave_; ++i)
+	for(
+		unsigned i = 0;
+		i < spawns_per_wave_;
+		++i
+	)
 		waves::spawn(
 			_env,
 			_load_context,

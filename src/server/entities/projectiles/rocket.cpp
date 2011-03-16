@@ -38,26 +38,31 @@ sanguis::server::entities::projectiles::rocket::rocket(
 	damage_(
 		_damage
 	)
-{}
+{
+}
+
+sanguis::server::entities::projectiles::rocket::~rocket()
+{
+}
 
 void
 sanguis::server::entities::projectiles::rocket::do_damage(
 	with_health &
 )
 {
-	expire();
+	this->expire();
 }
 
 void
 sanguis::server::entities::projectiles::rocket::on_die()
 {
-	environment()->insert(
+	this->environment()->insert(
 		entities::unique_ptr(
 			fcppt::make_unique_ptr<
 				aoe_damage
 			>(
-				team(),
-				aoe(),
+				this->team(),
+				this->aoe(),
 				damage_,
 				1u,
 				static_cast<time_type>(0.1),
@@ -66,8 +71,8 @@ sanguis::server::entities::projectiles::rocket::on_die()
 				)
 			)
 		),
-		insert_parameters_pos(
-			center()
+		entities::insert_parameters_pos(
+			this->center()
 		)
 	);
 }

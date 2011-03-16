@@ -21,22 +21,28 @@ sanguis::client::draw2d::sprite::index const
 }
 
 sanguis::client::draw2d::entities::bullet::bullet(
-	model::parameters const &param,
-	fcppt::string const &name
+	model::parameters const &_param,
+	fcppt::string const &_name
 )
 :
 	model::object(
-		param,
-		name,
+		_param,
+		_name,
 		z_ordering::bullet,
 		model::needs_healthbar::no,
 		model::decay_option::immediate
 	),
-	origin()
+	origin_()
 {
-	at(tail).w(
+	this->at(
+		tail
+	).w(
 		static_cast<sprite::unit>(3)
 	); // TODO: which value is best here?
+}
+
+sanguis::client::draw2d::entities::bullet::~bullet()
+{
 }
 
 void
@@ -44,56 +50,78 @@ sanguis::client::draw2d::entities::bullet::update(
 	time_type const _time
 )
 {
-	if (!origin)
-		origin = center();
+	if(
+		!origin_
+	)
+		origin_ = this->center();
 	
 	model::object::update(
 		_time
 	);
 
 	funit const
-		max_tail_length =
-			static_cast<funit>(160),
-		tail_length = 
+		max_tail_length(
+			static_cast<
+				funit
+			>(
+				160
+			)
+		),
+		tail_length(
 			std::min(
-				fcppt::math::vector::length<funit>((*origin) - center()),
+				fcppt::math::vector::length<
+					funit
+				>(
+					*origin_ - this->center()
+				),
 				max_tail_length
-			);
+			)
+		);
 
 	vector2 const
 		newsize(
 			tail_length,
-			static_cast<funit>(at(tail).size().h())
+			static_cast<
+				funit
+			>(
+				this->at(
+					tail
+				).size().h()
+			)
 		),
 		cur_pos(
 			fcppt::math::vector::structure_cast<
 				vector2
 			>(
-				center()
+				this->center()
 			)
 		),
 		newpos( 
-			is_null(speed())
+			fcppt::math::vector::is_null(
+				this->speed()
+			)
 			?
 				cur_pos
 			:
 				cur_pos
 				-
-				normalize(
-					speed()
+				fcppt::math::vector::normalize(
+					this->speed()
 				)
 				*
 				static_cast<
 					funit
 				>(0.5)
 				*
-				length(
+				fcppt::math::vector::length(
 				 	newsize
 				)
 		);
 
 	sge::sprite::center(
-		at(tail),
+		this->at(
+			tail
+		),
 		fcppt::math::vector::structure_cast<
 			sprite::point
 		>(
@@ -101,8 +129,12 @@ sanguis::client::draw2d::entities::bullet::update(
 		)
 	);
 
-	at(tail).w(
-		static_cast<sprite::unit>(
+	this->at(
+		tail
+	).w(
+		static_cast<
+			sprite::unit
+		>(
 			tail_length
 		)
 	);

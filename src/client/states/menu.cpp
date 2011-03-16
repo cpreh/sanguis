@@ -69,6 +69,10 @@ sanguis::client::states::menu::menu(
 {
 }
 
+sanguis::client::states::menu::~menu()
+{
+}
+
 boost::statechart::result
 sanguis::client::states::menu::react(
 	events::tick const &_event

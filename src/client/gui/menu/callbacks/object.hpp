@@ -59,4 +59,4 @@ private:
 }
 }
 
-#endif // SANGUIS_CLIENT_MENU_CALLBACKS_OBJECT_HPP_INCLUDED
+#endif

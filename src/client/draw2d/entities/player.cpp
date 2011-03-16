@@ -24,39 +24,58 @@ sanguis::client::draw2d::sprite::index const
 }
 
 sanguis::client::draw2d::entities::player::player(
-	model::parameters const &param
+	model::parameters const &_param
 )
 :
 	model::object(
-		param,
+		_param,
 		FCPPT_TEXT("player"),
 		z_ordering::model_generic,
 		model::needs_healthbar::yes,
 		model::decay_option::delayed
 	),
-	angle_(static_cast<funit>(0)),
+	angle_(
+		static_cast<
+			funit
+		>(
+			0
+		)
+	),
 	target_angle(angle_)
 {
-	at(bottom).order(z_ordering::player_lower);
+	this->at(
+		bottom
+	).order(
+		z_ordering::player_lower
+	);
 	
-	at(top).order(z_ordering::player_upper);
+	this->at(
+		top
+	).order(
+		z_ordering::player_upper
+	);
 	
 	// FIXME: put the rotation point in a config file?
 /*	at(top).rotate_around(
 		player_body_center);*/
 }
 
+sanguis::client::draw2d::entities::player::~player()
+{
+}
 
 void
 sanguis::client::draw2d::entities::player::speed(
-	vector2 const &v
+	vector2 const &_speed
 )
 {
-	model::object::speed(v);
+	model::object::speed(
+		_speed
+	);
 
 	if(
 		!fcppt::math::vector::is_null(
-			v
+			_speed
 		)
 	)
 		model::object::orientation(
@@ -64,7 +83,7 @@ sanguis::client::draw2d::entities::player::speed(
 				funit
 			>(
 				vector2::null(),
-				v
+				_speed
 			),
 			0
 		);
@@ -72,18 +91,23 @@ sanguis::client::draw2d::entities::player::speed(
 
 void
 sanguis::client::draw2d::entities::player::orientation(
-	sprite::rotation_type const u
+	sprite::rotation_type const _orientation
 )
 {
-	model::object::orientation(u, 1); // TODO: better interface for this in model
+	model::object::orientation(
+		_orientation,
+		top.get() // TODO
+	); // TODO: better interface for this in model
 }
 
 void
 sanguis::client::draw2d::entities::player::update(
-	time_type const time
+	time_type const _time
 )
 {
-	model::object::update(time);
+	model::object::update(
+		_time
+	);
 
 	vector2 const
 		leg_center(
@@ -101,27 +125,56 @@ sanguis::client::draw2d::entities::player::update(
 			)
 		);
 
-	sprite::rotation_type const sprite_rotation = at(bottom).rotation();
+	sprite::rotation_type const sprite_rotation(
+		this->at(
+			bottom
+		).rotation()
+	);
 
 	vector2 const new_rotation(
 		fcppt::math::point_rotate(
 			leg_center,
 			vector2(
-				static_cast<funit>(at(bottom).w()/2),
-				static_cast<funit>(at(bottom).h()/2)
+				static_cast<
+					funit
+				>(
+					this->at(
+						bottom
+					).w()
+					/ 2
+				),
+				static_cast<
+					funit
+				>(
+					this->at(
+						bottom
+					).h()
+					/2
+				)
 			),
 			sprite_rotation
 		)
 	);
 
 	vector2 const
-		rot_abs = fcppt::math::vector::structure_cast<
-			vector2
-		>(
-			at(bottom).pos())+new_rotation,
-		top_pos = rot_abs - body_center;
+		rot_abs(
+			fcppt::math::vector::structure_cast<
+				vector2
+			>(
+				this->at(
+					bottom
+				).pos()
+			)
+			+
+			new_rotation
+		),
+		top_pos(
+			rot_abs - body_center
+		);
 
-	at(top).pos(
+	this->at(
+		top
+	).pos(
 		fcppt::math::vector::structure_cast<
 			sprite::point
 		>(

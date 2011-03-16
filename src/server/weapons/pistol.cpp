@@ -29,7 +29,12 @@ sanguis::server::weapons::pistol::pistol(
 	damage_(
 		_damage
 	)
-{}
+{
+}
+
+sanguis::server::weapons::pistol::~pistol()
+{
+}
 
 void
 sanguis::server::weapons::pistol::do_attack(

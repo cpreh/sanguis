@@ -15,11 +15,11 @@ sanguis::client::draw2d::sprite::index const
 }
 
 sanguis::client::draw2d::entities::sentry::sentry(
-	model::parameters const &param_
+	model::parameters const &_param
 )
 :
 	model::object(
-		param_,
+		_param,
 		load::friend_name(
 			friend_type::sentry
 		),
@@ -28,14 +28,30 @@ sanguis::client::draw2d::entities::sentry::sentry(
 		model::decay_option::delayed
 	)
 {
-	at(bottom).order(z_ordering::player_lower);
-	at(top).order(z_ordering::player_upper); // FIXME
+	this->at(
+		bottom
+	).order(
+		z_ordering::player_lower
+	);
+
+	this->at(
+		top
+	).order(
+		z_ordering::player_upper
+	); // FIXME
+}
+
+sanguis::client::draw2d::entities::sentry::~sentry()
+{
 }
 
 void
 sanguis::client::draw2d::entities::sentry::orientation(
-	sprite::rotation_type const rot
+	sprite::rotation_type const _rotation
 )
 {
-	model::object::orientation(rot, 1);
+	model::object::orientation(
+		_rotation,
+		top.get() // TODO
+	);
 }

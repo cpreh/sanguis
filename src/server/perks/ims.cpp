@@ -8,22 +8,27 @@ sanguis::server::perks::ims::ims()
 	perk(
 		perk_type::ims
 	)
-{}
+{
+}
+
+sanguis::server::perks::ims::~ims()
+{
+}
 
 void
 sanguis::server::perks::ims::change(
-	entities::base &entity_,
-	level_diff const diff_
+	entities::base &_entity,
+	level_diff const _diff
 )
 {
 	perks::change_simple<
 		entities::movable
 	>(
 		&entities::property::linear_change,
-		entity_,
+		_entity,
 		&entities::movable::movement_speed,
 		0.1f,
-		diff_
+		_diff
 	);
 }
 

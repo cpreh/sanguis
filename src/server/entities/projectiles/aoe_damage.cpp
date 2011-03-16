@@ -51,17 +51,21 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 	);
 }
 
+sanguis::server::entities::projectiles::aoe_damage::~aoe_damage()
+{
+}
+
 void
 sanguis::server::entities::projectiles::aoe_damage::on_update(
-	time_type const time_
+	time_type const _time
 )
 {
 	projectile::on_update(
-		time_
+		_time
 	);
 
 	with_auras::on_update(
-		time_
+		_time
 	);
 }
 
@@ -69,4 +73,5 @@ void
 sanguis::server::entities::projectiles::aoe_damage::do_damage(
 	with_health &
 )
-{}
+{
+}

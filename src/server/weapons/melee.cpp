@@ -30,7 +30,12 @@ sanguis::server::weapons::melee::melee(
 		)
 	),
 	damage_(_damage)
-{}
+{
+}
+
+sanguis::server::weapons::melee::~melee()
+{
+}
 
 void
 sanguis::server::weapons::melee::do_attack(

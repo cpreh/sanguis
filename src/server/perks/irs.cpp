@@ -8,22 +8,27 @@ sanguis::server::perks::irs::irs()
 	perk(
 		perk_type::irs
 	)
-{}
+{
+}
+
+sanguis::server::perks::irs::~irs()
+{
+}
 
 void
 sanguis::server::perks::irs::change(
-	entities::base &entity_,
-	level_diff const diff_
+	entities::base &_entity,
+	level_diff const _diff
 )
 {
 	perks::change_simple<
 		entities::with_weapon
 	>(
 		&entities::property::linear_change,
-		entity_,
+		_entity,
 		&entities::with_weapon::reload_speed,
 		0.5f,
-		diff_
+		_diff
 	);
 }
 

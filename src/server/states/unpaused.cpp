@@ -31,6 +31,10 @@ sanguis::server::states::unpaused::unpaused()
 {
 }
 
+sanguis::server::states::unpaused::~unpaused()
+{
+}
+
 boost::statechart::result
 sanguis::server::states::unpaused::handle_default_msg(
 	net::id,

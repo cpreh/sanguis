@@ -24,6 +24,10 @@ sanguis::server::entities::spawns::limited::limited(
 {
 }
 
+sanguis::server::entities::spawns::limited::~limited()
+{
+}
+
 void
 sanguis::server::entities::spawns::limited::unregister(
 	entities::base &

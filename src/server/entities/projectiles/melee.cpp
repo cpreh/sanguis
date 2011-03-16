@@ -30,7 +30,12 @@ sanguis::server::entities::projectiles::melee::melee(
 		indeterminate::yes
 	),
 	damage_(_damage)
-{}
+{
+}
+
+sanguis::server::entities::projectiles::melee::~melee()
+{
+}
 
 void
 sanguis::server::entities::projectiles::melee::do_damage(
@@ -44,5 +49,5 @@ sanguis::server::entities::projectiles::melee::do_damage(
 		)
 	);
 
-	expire();
+	this->expire();
 }

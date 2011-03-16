@@ -104,6 +104,10 @@ sanguis::client::gui::perk::chooser::chooser(
 #endif
 }
 
+sanguis::client::gui::perk::chooser::~chooser()
+{
+}
+
 void
 sanguis::client::gui::perk::chooser::process()
 {

@@ -57,7 +57,12 @@ sanguis::server::entities::projectiles::grenade::grenade(
 	dest_(
 		_dest
 	)
-{}
+{
+}
+
+sanguis::server::entities::projectiles::grenade::~grenade()
+{
+}
 
 void
 sanguis::server::entities::projectiles::grenade::on_transfer(
@@ -65,9 +70,9 @@ sanguis::server::entities::projectiles::grenade::on_transfer(
 	collision::create_parameters const &_param
 )
 {
-	movement_speed().current(
+	this->movement_speed().current(
 		std::min(
-			movement_speed().max(),
+			this->movement_speed().max(),
 			property::from_float(
 				collision::distance(
 					_param.center(),
@@ -82,7 +87,8 @@ void
 sanguis::server::entities::projectiles::grenade::do_damage(
 	with_health &
 )
-{}
+{
+}
 
 void
 sanguis::server::entities::projectiles::grenade::on_update(
@@ -96,8 +102,8 @@ sanguis::server::entities::projectiles::grenade::on_update(
 	if(
 		slowdown_time_.update_b()
 	)
-		movement_speed().current(
-			movement_speed().current()
+		this->movement_speed().current(
+			this->movement_speed().current()
 			* 0.9f
 		);
 	
@@ -109,13 +115,13 @@ sanguis::server::entities::projectiles::grenade::on_update(
 void
 sanguis::server::entities::projectiles::grenade::on_die()
 {
-	environment()->insert(
+	this->environment()->insert(
 		entities::unique_ptr(
 			fcppt::make_unique_ptr<
 				aoe_damage
 			>(
-				team(),
-				aoe(),
+				this->team(),
+				this->aoe(),
 				damage_,
 				1u,
 				static_cast<time_type>(0.1),
@@ -127,7 +133,7 @@ sanguis::server::entities::projectiles::grenade::on_die()
 			)
 		),
 		entities::insert_parameters_pos(
-			center()
+			this->center()
 		)
 	);
 }

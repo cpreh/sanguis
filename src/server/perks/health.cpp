@@ -8,22 +8,27 @@ sanguis::server::perks::health::health()
 	perk(
 		perk_type::health
 	)
-{}
+{
+}
+
+sanguis::server::perks::health::~health()
+{
+}
 
 void
 sanguis::server::perks::health::change(
-	entities::base &entity_,
-	level_diff const diff_
+	entities::base &_entity,
+	level_diff const _diff
 )
 {
 	perks::change_simple<
 		entities::with_health
 	>(
 		&entities::property::constant_change,
-		entity_,
+		_entity,
 		&entities::with_health::health,
 		20.f,
-		diff_
+		_diff
 	);
 }
 

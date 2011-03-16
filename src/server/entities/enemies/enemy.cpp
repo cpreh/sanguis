@@ -60,6 +60,10 @@ sanguis::server::entities::enemies::enemy::enemy(
 {
 }
 
+sanguis::server::entities::enemies::enemy::~enemy()
+{
+}
+
 sanguis::enemy_type::type
 sanguis::server::entities::enemies::enemy::etype() const
 {

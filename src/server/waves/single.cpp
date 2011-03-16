@@ -10,6 +10,10 @@ sanguis::server::waves::single::single(
 {
 }
 
+sanguis::server::waves::single::~single()
+{
+}
+
 void
 sanguis::server::waves::single::process(
 	time_type const,

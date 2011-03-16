@@ -26,7 +26,12 @@ sanguis::server::entities::projectiles::aoe_projectile::aoe_projectile(
 	),
 	type_(_type),
 	aoe_(_aoe)
-{}
+{
+}
+
+sanguis::server::entities::projectiles::aoe_projectile::~aoe_projectile()
+{
+}
 
 sanguis::server::space_unit
 sanguis::server::entities::projectiles::aoe_projectile::aoe() const
@@ -39,15 +44,16 @@ sanguis::server::entities::projectiles::aoe_projectile::add_message(
 	player_id const
 ) const
 {
-	return messages::create(
-		messages::add_aoe_projectile(
-			id(),
-			pos(),
-			angle(),
-			dim(),
-			abs_speed(),
-			aoe_,
-			type_
-		)
-	);
+	return
+		messages::create(
+			messages::add_aoe_projectile(
+				this->id(),
+				this->pos(),
+				this->angle(),
+				this->dim(),
+				this->abs_speed(),
+				aoe_,
+				type_
+			)
+		);
 }

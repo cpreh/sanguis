@@ -33,7 +33,12 @@ sanguis::server::weapons::shotgun::shotgun(
 	spread_radius_(_spread_radius),
 	shells_(_shells),
 	damage_(_damage)
-{}
+{
+}
+
+sanguis::server::weapons::shotgun::~shotgun()
+{
+}
 
 void
 sanguis::server::weapons::shotgun::do_attack(
@@ -59,7 +64,9 @@ sanguis::server::weapons::shotgun::do_attack(
 	);
 
 	for(
-		unsigned i = 0; i < shells_; ++i
+		unsigned i = 0;
+		i < shells_;
+		++i
 	)
 	{
 		space_unit const direction_(

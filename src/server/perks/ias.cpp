@@ -8,22 +8,27 @@ sanguis::server::perks::ias::ias()
 	perk(
 		perk_type::ias
 	)
-{}
+{
+}
+
+sanguis::server::perks::ias::~ias()
+{
+}
 
 void
 sanguis::server::perks::ias::change(
-	entities::base &entity_,
-	level_diff const diff_
+	entities::base &_entity,
+	level_diff const _diff
 )
 {
 	perks::change_simple<
 		entities::with_weapon
 	>(
 		&entities::property::linear_change,
-		entity_,
+		_entity,
 		&entities::with_weapon::attack_speed,
 		0.2f,
-		diff_
+		_diff
 	);
 }
 

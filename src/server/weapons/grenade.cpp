@@ -28,6 +28,10 @@ sanguis::server::weapons::grenade::grenade(
 {
 }
 
+sanguis::server::weapons::grenade::~grenade()
+{
+}
+
 void
 sanguis::server::weapons::grenade::do_attack(
 	delayed_attack const &_attack

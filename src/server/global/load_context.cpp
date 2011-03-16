@@ -8,7 +8,12 @@ sanguis::server::global::load_context::load_context(
 )
 :
 	model_context_(_model_context)
-{}
+{
+}
+
+sanguis::server::global::load_context::~load_context()
+{
+}
 
 sanguis::server::dim_type const
 sanguis::server::global::load_context::entity_dim(

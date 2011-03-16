@@ -28,7 +28,12 @@ sanguis::server::weapons::rocket_launcher::rocket_launcher(
 	),
 	damage_(_damage),
 	aoe_(_aoe)
-{}
+{
+}
+
+sanguis::server::weapons::rocket_launcher::~rocket_launcher()
+{
+}
 
 void
 sanguis::server::weapons::rocket_launcher::do_attack(
