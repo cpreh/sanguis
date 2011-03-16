@@ -11,8 +11,9 @@ namespace server
 namespace perks
 {
 
-struct status
+class status
 {
+public:
 	status();
 
 	status(
@@ -37,6 +38,7 @@ struct status
 	type() const;
 private:
 	perk_type::type type_;
+
 	level_type
 		required_player_level_,
 		required_parent_level_,

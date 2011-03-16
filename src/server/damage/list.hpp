@@ -13,7 +13,8 @@ namespace server
 namespace damage
 {
 
-class list {
+class list
+{
 public:
 	explicit list(
 		meta const &
@@ -25,7 +26,8 @@ public:
 	
 	list &
 	operator()(
-		meta const &);
+		meta const &
+	);
 
 	operator array() const;
 private:

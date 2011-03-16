@@ -5,7 +5,7 @@
 #include "send_callback.hpp"
 #include "unicast_callback.hpp"
 #include "console_command_vector.hpp"
-#include "../net/id_type.hpp"
+#include "../net/id.hpp"
 #include <sge/console/object.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/callback.hpp>
@@ -22,7 +22,9 @@ namespace server
 
 class console
 {
-	FCPPT_NONCOPYABLE(console)
+	FCPPT_NONCOPYABLE(
+		console
+	);
 public:
 	explicit console(
 		server::send_callback const &,
@@ -40,13 +42,13 @@ public:
 
 	void
 	eval(
-		net::id_type,
+		net::id,
 		sge::console::arg_list
 	);
 
 	void
 	print_line(
-		net::id_type,
+		net::id,
 		fcppt::string const &
 	);
 

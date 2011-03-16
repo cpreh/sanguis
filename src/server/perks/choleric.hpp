@@ -8,6 +8,7 @@
 #include "../../diff_clock.hpp"
 #include <sge/time/timer.hpp>
 #include <fcppt/random/uniform.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -20,8 +21,13 @@ class choleric
 :
 	public perk
 {
+	FCPPT_NONCOPYABLE(
+		choleric
+	);
 public:
 	choleric();
+
+	~choleric();
 private:
 	void
 	update(
@@ -39,9 +45,11 @@ private:
 		level_diff
 	);
 
-	diff_clock       clock_;
+	diff_clock clock_;
+
 	sge::time::timer shoot_timer;
-	fcppt::random::uniform<space_unit> rand;
+
+	fcppt::random::uniform<space_unit> rand_;
 };
 
 }

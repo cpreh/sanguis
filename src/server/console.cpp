@@ -70,7 +70,7 @@ sanguis::server::console::insert(
 
 void
 sanguis::server::console::eval(
-	net::id_type const _id,
+	net::id const _id,
 	sge::console::arg_list _args
 )
 {
@@ -89,7 +89,7 @@ sanguis::server::console::eval(
 
 void
 sanguis::server::console::print_line(
-	net::id_type const _id,
+	net::id const _id,
 	fcppt::string const &_line
 )
 {

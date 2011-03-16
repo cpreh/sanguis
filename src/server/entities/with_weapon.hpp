@@ -10,6 +10,7 @@
 #include "../../time_type.hpp"
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/math/vector/basic_decl.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
 
 namespace sanguis
@@ -23,10 +24,15 @@ class with_weapon
 :
 	public virtual base
 {
+	FCPPT_NONCOPYABLE(
+		with_weapon
+	);
 protected:
 	explicit with_weapon(
 		weapons::unique_ptr start_weapon
 	);
+
+	~with_weapon();
 
 	virtual void
 	on_update(

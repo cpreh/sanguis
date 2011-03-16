@@ -15,29 +15,38 @@ namespace server
 namespace perks
 {
 
-class tree {
-	FCPPT_NONCOPYABLE(tree)
+class tree
+{
+	FCPPT_NONCOPYABLE(
+		tree
+	);
 public:
 	tree();
+
 	~tree();
 
-	bool choosable(
+	bool
+	choosable(
 		perk_type::type,
-		server::level_type player_level) const;
+		server::level_type player_level
+	) const;
 	
-	void take(
-		perk_type::type);
+	void
+	take(
+		perk_type::type
+	);
 	
 	list const
 	choosables(
-		server::level_type player_level) const;
+		server::level_type player_level
+	) const;
 
 	// public for helper functions
 	typedef fcppt::container::tree::object<
 		status
 	> tree_type;
 private:
-	tree_type impl;
+	tree_type impl_;
 };
 
 }

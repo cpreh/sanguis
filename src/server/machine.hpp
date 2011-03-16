@@ -3,19 +3,20 @@
 
 #include "machine_fwd.hpp"
 #include "states/running_fwd.hpp"
-#include "client_data.hpp"
 #include "../load/context_base_fwd.hpp"
 #include "../messages/auto_ptr.hpp"
-#include "../net/server.hpp"
+#include "../net/server/object.hpp"
+#include "../net/data_buffer.hpp"
 #include "../net/id.hpp"
+#include "../net/port.hpp"
 #include "../tick_event_fwd.hpp"
 #include <sge/collision/system_ptr.hpp>
-#include <fcppt/container/map_decl.hpp>
+#include <fcppt/container/raw_vector_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 #include <boost/statechart/state_machine.hpp>
-#include <map>
+#include <set>
 
 namespace sanguis
 {
@@ -36,7 +37,7 @@ public:
 	machine(
 		load::context_base const &,
 		sge::collision::system_ptr,
-		net::port_type
+		net::port
 	);
 
 	~machine();
@@ -66,7 +67,7 @@ public:
 	void
 	data_callback(
 		net::id,
-		net::data_type const &
+		net::data_buffer const &
 	);
 
 	void
@@ -74,10 +75,10 @@ public:
 		messages::auto_ptr
 	);
 
-	net::port_type
+	net::port
 	port() const;
 
-	net::server &
+	net::server::object &
 	net();
 
 	void 
@@ -101,25 +102,29 @@ public:
 		messages::auto_ptr
 	);
 private:
-	typedef fcppt::container::map<
-		std::map<
-			net::id,
-			client_data
-		>
-	> client_map;
+	void
+	pack_message(
+		messages::auto_ptr
+	);
+
+	typedef std::set<
+		net::id
+	> client_set;
 
 	load::context_base const &resources_;
 
-	net::port_type const port_;
+	net::port const port_;
 
-	net::server net_;
+	net::server::object net_;
+
+	net::data_buffer temp_buffer_;
 
 	fcppt::signal::scoped_connection const
 		s_conn_,
 		s_disconn_,
 		s_data_;
 
-	client_map clients_;
+	client_set clients_;
 
 	sge::collision::system_ptr const collision_;
 };

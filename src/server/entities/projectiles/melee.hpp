@@ -5,6 +5,7 @@
 #include "../with_health.hpp"
 #include "../../damage/unit.hpp"
 #include "../../team.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -19,11 +20,16 @@ class melee
 :
 	public projectile
 {
+	FCPPT_NONCOPYABLE(
+		melee
+	);
 public:
 	melee(
 		team::type team,
 		damage::unit
 	);
+
+	~melee();
 private:
 	void
 	do_damage(

@@ -39,6 +39,6 @@ sanguis::server::entities::pickups::health::do_pickup(
 	
 	entities::property::add(
 		with_health.health(),
-		amount_
+		amount_.get()
 	);
 }

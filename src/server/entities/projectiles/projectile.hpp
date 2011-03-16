@@ -15,6 +15,7 @@
 #include "../../../diff_clock.hpp"
 #include "../../../messages/base.hpp"
 #include <sge/time/timer.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -30,6 +31,9 @@ class projectile
 	public movable,
 	public with_dim
 {
+	FCPPT_NONCOPYABLE(
+		projectile
+	);
 public:
 	projectile_type::type
 	ptype() const;
@@ -43,6 +47,8 @@ protected:
 		space_unit direction,
 		indeterminate::type
 	);
+
+	~projectile();
 	
 	void
 	on_update(

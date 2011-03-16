@@ -49,13 +49,13 @@ sanguis::net::deserialize(
 		&buf
 	);
 
-	detail::exceptions(
+	net::stream_exceptions(
 		stream
 	);
 
-	detail::message_header const message_size(
+	net::message_header const message_size(
 		fcppt::io::read<
-			detail::message_header
+			net::message_header
 		>(
 			stream,
 			messages::serialization::endianness()
@@ -67,7 +67,7 @@ sanguis::net::deserialize(
 	);
 
 	if(
-		(_data.size() - detail::message_header_size)
+		(_data.size() - net::message_header_size)
 		< message_size
 	)
 		return messages::auto_ptr();
@@ -92,7 +92,7 @@ sanguis::net::deserialize(
 	);
 
 	FCPPT_ASSERT(
-		ret->size() + detail::message_header_size
+		ret->size() + net::message_header_size
 		== stream_pos
 	);
 

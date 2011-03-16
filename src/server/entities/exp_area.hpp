@@ -6,6 +6,7 @@
 #include "../exp_type.hpp"
 #include "../../entity_id.hpp"
 #include <fcppt/container/map_decl.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <map>
 
 namespace sanguis
@@ -19,6 +20,9 @@ class exp_area
 :
 	public base
 {
+	FCPPT_NONCOPYABLE(
+		exp_area
+	);
 public:
 	explicit exp_area(
 		exp_type

@@ -23,7 +23,7 @@ class burn
 {
 	FCPPT_NONCOPYABLE(
 		burn
-	)
+	);
 public:
 	burn(
 		damage::unit,

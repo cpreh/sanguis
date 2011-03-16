@@ -23,7 +23,9 @@ class spawn
 :
 	public virtual entities::base
 {
-	FCPPT_NONCOPYABLE(spawn)
+	FCPPT_NONCOPYABLE(
+		spawn
+	);
 public:
 	virtual void
 	unregister(

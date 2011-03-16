@@ -17,7 +17,9 @@ class world_context
 :
 	public world::context
 {
-	FCPPT_NONCOPYABLE(world_context)
+	FCPPT_NONCOPYABLE(
+		world_context
+	);
 public:
 	explicit world_context(
 		global::context &

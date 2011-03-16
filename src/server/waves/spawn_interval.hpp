@@ -13,7 +13,7 @@ namespace waves
 FCPPT_MAKE_STRONG_TYPEDEF(
 	unsigned,
 	spawn_interval
-)
+);
 
 }
 }

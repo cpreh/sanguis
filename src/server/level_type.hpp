@@ -11,7 +11,7 @@ namespace server
 FCPPT_MAKE_STRONG_TYPEDEF(
 	unsigned,
 	level_type
-)
+);
 
 }
 }

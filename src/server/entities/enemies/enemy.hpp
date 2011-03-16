@@ -15,6 +15,7 @@
 #include "../../probability_type.hpp"
 #include "../../exp_type.hpp"
 #include "../../../enemy_type.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -33,6 +34,9 @@ class enemy
 	public with_health,
 	public movable
 {
+	FCPPT_NONCOPYABLE(
+		enemy
+	);
 public:	
 	enemy(
 		enemy_type::type,
@@ -46,6 +50,8 @@ public:
 		exp_type exp,
 		auto_weak_link spawn_owner = auto_weak_link()
 	);
+
+	~enemy();
 
 	enemy_type::type
 	etype() const;
@@ -70,8 +76,11 @@ private:
 	on_die();
 
 	enemy_type::type const etype_;
+
 	probability_type const spawn_chance_;
+
 	exp_type const exp_;
+
 	auto_weak_link const spawn_owner_;
 };
 

@@ -36,7 +36,8 @@ sanguis::server::machine::machine(
 			16
 		)
 	),
-	s_conn(
+	temp_buffer_(),
+	s_conn_(
 		net_.register_connect(
 			std::tr1::bind(
 				&machine::connect_callback,
@@ -45,7 +46,7 @@ sanguis::server::machine::machine(
 			)
 		)
 	),
-	s_disconn(
+	s_disconn_(
 		net_.register_disconnect(
 			std::tr1::bind(
 				&machine::disconnect_callback,
@@ -55,7 +56,7 @@ sanguis::server::machine::machine(
 			)
 		)
 	),
-	s_data(
+	s_data_(
 		net_.register_data(
 			std::tr1::bind(
 				&machine::data_callback,
@@ -76,20 +77,12 @@ sanguis::server::machine::~machine()
 
 void
 sanguis::server::machine::process(
-	tick_event const &t
+	tick_event const &_event
 )
 {
-	BOOST_FOREACH(client_map::reference ref, clients_)
-	{
-		net::data_type &buffer = ref.second.out_buffer;
-		if (buffer.size())
-		{
-			net_.queue(ref.first, buffer);
-			buffer.clear();
-		}
-	}
-
-	process_event(t);
+	this->process_event(
+		_event
+	);
 }
 
 void
@@ -117,10 +110,14 @@ sanguis::server::machine::connect_callback(
 	net::id_type const _id
 )
 {
-	clients_.insert(
-		_id,
-		client_data()
-	);
+	if(
+		!clients_.insert(
+			_id
+		)
+	)
+		throw sanguis::exception(
+			FCPPT_TEXT("Client inserted twice in server!")
+		);
 
 	process_event(
 		message_event(
@@ -169,48 +166,48 @@ sanguis::server::machine::process_message(
 void
 sanguis::server::machine::data_callback(
 	net::id_type const _id,
-	net::data_type const &_data
+	net::data_type &_data
 )
 {
-	fcppt::algorithm::append(
-		clients_[_id].in_buffer,
-		_data
-	);
-
 	for(;;)
 	{
-		messages::auto_ptr p = 
+		messages::auto_ptr message( 
 			net::deserialize(
-				clients_[_id].in_buffer
-			);
+				_data
+			)
+		);
 
-		if(!p.get())
+		if(
+			!message.get()
+		)
 			return;
 
-		process_message(_id, p);
+		this->process_message(
+			_id,
+			message
+		);
 	}
 }
 
 void
 sanguis::server::machine::send_to_all(
-	messages::auto_ptr _m
+	messages::auto_ptr _message
 )
 { 
-	net::data_type m_str;
-
-	net::serialize(
-		_m,
-		m_str
+	this->pack_message(
+		_message
 	);
 
 	BOOST_FOREACH(
-		client_map::reference ref,
+		client_set::value_type id,
 		clients_
 	)
-		fcppt::algorithm::append(
-			ref.second.out_buffer,
-			m_str
+		net_.queue(
+			id,
+			temp_buffer_
 		);
+
+	temp_buffer_.clear();
 }
 
 sanguis::net::port_type
@@ -244,30 +241,44 @@ sanguis::server::machine::collision_system() const
 void
 sanguis::server::machine::send_unicast(
 	net::id_type const _id,
-	messages::auto_ptr _m
+	messages::auto_ptr _message
 )
 try
 {
-	net::data_type ser;
-
-	net::serialize(
-		_m,
-		ser
+	this->pack_message(
+		_message
 	);
 
-	fcppt::algorithm::append(
-		clients_[_id].out_buffer,
-		ser
+	net_.queue(
+		_id,
+		temp_buffer_	
 	);
+
+	temp_buffer_.clear();
 }
 catch(
-	fcppt::exception const &e
+	fcppt::exception const &_error
 )
 {
 	FCPPT_LOG_ERROR(
 		log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("send_unicast failed: ")
-			<< e.string()
+			<< _error.string()
+	);
+}
+
+void
+sanguis::server::machine::pack_message(
+	messages::auto_ptr _message
+)
+{
+	FCPPT_ASSERT(
+		temp_buffer_.empty()
+	);
+
+	net::serialize(
+		_message,
+		temp_buffer_
 	);
 }

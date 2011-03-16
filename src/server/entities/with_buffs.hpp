@@ -21,7 +21,9 @@ class with_buffs
 :
 	public virtual base
 {
-	FCPPT_NONCOPYABLE(with_buffs)
+	FCPPT_NONCOPYABLE(
+		with_buffs
+	);
 public:
 	void
 	add_buff(

@@ -1,6 +1,9 @@
 #include "object_impl.hpp"
-#include "../is_disconnect.hpp"
+#include "../append_to_circular_buffer.hpp"
+#include "../circular_buffer_part.hpp"
+#include "../erase_circular_buffer_front.hpp"
 #include "../exception.hpp"
+#include "../is_disconnect.hpp"
 #include "../log.hpp"
 #undef max
 // asio brings in window.h's max macro :(
@@ -92,26 +95,20 @@ sanguis::net::client::object_impl::queue(
 	net::data_buffer const &_data
 )
 {
+	bool const sending(
+		!send_data_.empty()
+	);
+
 	if(
-		send_data_.capacity()
-		- send_data_.size()
-		<
-		_data.size()
+		!net::append_to_circular_buffer(
+			send_data_,
+			_data
+		)
 	)
 	{
 		// not enough space left
 		// TODO: call something here and wait!
 	}
-
-	bool const sending(
-		send_data_.empty()
-	);
-
-	send_data_.insert(
-		send_data_.end(),
-		_data.begin(),
-		_data.end()
-	);
 
 	if(
 		!sending
@@ -197,7 +194,7 @@ sanguis::net::client::object_impl::handle_error(
 	this->clear();
 
 	if(
-		!detail::is_disconnect(
+		!net::is_disconnect(
 			_error
 		)
 	)
@@ -255,7 +252,7 @@ sanguis::net::client::object_impl::read_handler(
 	);
 
 	data_signal_(
-		net::data_type(
+		net::data_buffer(
 			received_data_.begin(),
 			received_data_.begin() + _bytes
 		)
@@ -300,15 +297,9 @@ sanguis::net::client::object_impl::write_handler(
 			<< FCPPT_TEXT(" bytes")
 	);
 
-	send_data_.erase(
-		send_data_.begin(),
-		send_data_.begin()
-		+
-		static_cast<
-			detail::circular_buffer::iterator::difference_type
-		>(
-			_bytes
-		)
+	net::erase_circular_buffer_front(
+		send_data_,
+		_bytes
 	);
 
 	if(
@@ -383,12 +374,10 @@ sanguis::net::client::object_impl::connect_handler(
 void
 sanguis::net::client::object_impl::send_data()
 {
-	detail::circular_buffer::const_array_range const array(
-		send_data_.array_two().second == 0u
-		?
-			send_data_.array_one()
-		:
-			send_data_.array_two()
+	net::circular_buffer::const_array_range const array(
+		net::circular_buffer_part(
+			send_data_	
+		)
 	);
 
 	if(

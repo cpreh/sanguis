@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_WAVES_DEBUG_HPP_INCLUDED
 
 #include "wave.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -14,8 +15,13 @@ class debug
 :
 	public wave
 {
+	FCPPT_NONCOPYABLE(
+		debug
+	);
 public:
 	debug();
+
+	~debug();
 private:
 	void
 	process(
@@ -27,7 +33,7 @@ private:
 	bool
 	ended() const;
 
-	bool spawned;
+	bool spawned_;
 };
 
 }

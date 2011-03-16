@@ -14,7 +14,7 @@ namespace damage
 FCPPT_MAKE_STRONG_TYPEDEF(
 	space_unit,
 	unit
-)
+);
 
 }
 }

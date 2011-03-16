@@ -17,7 +17,7 @@ namespace spawns
 FCPPT_MAKE_STRONG_TYPEDEF(
 	sge::time::duration,
 	interval
-)
+);
 
 }
 }

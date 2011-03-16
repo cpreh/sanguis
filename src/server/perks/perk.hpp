@@ -18,7 +18,9 @@ namespace perks
 
 class perk
 {
-	FCPPT_NONCOPYABLE(perk)
+	FCPPT_NONCOPYABLE(
+		perk
+	);
 public:
 	virtual void
 	update(

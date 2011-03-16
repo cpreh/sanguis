@@ -17,7 +17,9 @@ class buff
 :
 	public base_hook
 {
-	FCPPT_NONCOPYABLE(buff)
+	FCPPT_NONCOPYABLE(
+		buff
+	);
 public:
 	virtual void
 	update(

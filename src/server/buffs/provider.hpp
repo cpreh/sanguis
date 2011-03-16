@@ -17,7 +17,9 @@ namespace buffs
 
 class provider
 {
-	FCPPT_NONCOPYABLE(provider)
+	FCPPT_NONCOPYABLE(
+		provider
+	);
 public:
 	provider();
 

@@ -21,8 +21,8 @@ sanguis::server::entities::with_health::damage(
 		property::subtract(
 			health_,
 			property::from_float(
-				_damage
-				* _amounts[i] * (1 - armor_[i])
+				_damage.get()
+				* _amounts[i].get() * (1 - armor_[i].get())
 			)
 		);
 }
@@ -42,21 +42,23 @@ sanguis::server::entities::with_health::regeneration()
 sanguis::server::health_type
 sanguis::server::entities::with_health::current_health() const
 {
-	return property::to_float<
-		server::health_type
-	>(
-		health_.current()
-	);
+	return
+		property::to_float<
+			server::health_type
+		>(
+			health_.current()
+		);
 }
 
 sanguis::server::health_type
 sanguis::server::entities::with_health::max_health() const
 {
-	return property::to_float<
-		server::health_type
-	>(
-		health_.max()
-	);
+	return
+		property::to_float<
+			server::health_type
+		>(
+			health_.max()
+		);
 }
 
 sanguis::server::entities::with_health::with_health(
@@ -69,7 +71,7 @@ sanguis::server::entities::with_health::with_health(
 	),
 	health_(
 		property::initial_max(
-			_max_health
+			_max_health.get()
 		)
 	),
 	regeneration_(

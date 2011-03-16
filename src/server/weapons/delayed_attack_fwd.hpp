@@ -7,7 +7,9 @@ namespace server
 {
 namespace weapons
 {
+
 class delayed_attack;
+
 }
 }
 }

@@ -8,6 +8,7 @@
 #include "aoe.hpp"
 #include "cast_point.hpp"
 #include "reload_time.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -16,7 +17,13 @@ namespace server
 namespace weapons
 {
 
-class grenade : public weapon {
+class grenade
+:
+	public weapon
+{
+	FCPPT_NONCOPYABLE(
+		grenade
+	);
 public:
 	grenade(
 		weapon_type::type,
@@ -26,6 +33,8 @@ public:
 		weapons::cast_point,
 		weapons::reload_time
 	);
+	
+	~grenade();
 private:
 	void
 	do_attack(
@@ -33,6 +42,7 @@ private:
 	);
 	
 	weapons::damage const damage_;
+
 	weapons::aoe const aoe_;
 };
 

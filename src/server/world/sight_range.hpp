@@ -11,7 +11,8 @@ namespace server
 namespace world
 {
 
-class sight_range {
+class sight_range
+{
 public:
 	sight_range();
 

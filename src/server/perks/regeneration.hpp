@@ -5,6 +5,7 @@
 #include "level_type.hpp"
 #include "level_diff.hpp"
 #include "../entities/base_fwd.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -17,8 +18,13 @@ class regeneration
 :
 	public perk
 {
+	FCPPT_NONCOPYABLE(
+		regeneration
+	);
 public:
 	regeneration();
+
+	~regeneration();
 private:
 	void
 	change(

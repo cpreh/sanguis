@@ -13,8 +13,11 @@ namespace server
 namespace environment
 {
 
-class load_context {
-	FCPPT_NONCOPYABLE(load_context)
+class load_context
+{
+	FCPPT_NONCOPYABLE(
+		load_context
+	);
 protected:
 	load_context();
 public:

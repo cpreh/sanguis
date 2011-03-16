@@ -9,6 +9,7 @@
 #include "../../team.hpp"
 #include "../../space_unit.hpp"
 #include "../../../time_type.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -24,6 +25,9 @@ class aoe_damage
 	public aoe_projectile,
 	public with_auras
 {
+	FCPPT_NONCOPYABLE(
+		aoe_damage
+	);
 public:
 	aoe_damage(
 		team::type team,
@@ -33,6 +37,8 @@ public:
 		time_type pulse_diff,
 		damage::array const &damage_values
 	);
+
+	~aoe_damage();
 private:
 	void
 	on_update(

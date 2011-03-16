@@ -48,7 +48,7 @@ sanguis::server::entities::enemies::enemy::enemy(
 	),
 	movable(
 		property::initial(
-			_movement_speed,
+			_movement_speed.get(),
 			0
 		),
 		static_cast<space_unit>(0)
@@ -57,7 +57,8 @@ sanguis::server::entities::enemies::enemy::enemy(
 	spawn_chance_(_spawn_chance),
 	exp_(_exp),
 	spawn_owner_(_spawn_owner)
-{}
+{
+}
 
 sanguis::enemy_type::type
 sanguis::server::entities::enemies::enemy::etype() const
@@ -67,19 +68,19 @@ sanguis::server::entities::enemies::enemy::etype() const
 
 void
 sanguis::server::entities::enemies::enemy::on_update(
-	time_type const time_
+	time_type const _time
 )
 {
 	with_ai::on_update(
-		time_
+		_time
 	);
 
 	with_buffs::on_update(
-		time_
+		_time
 	);
 
 	with_health::on_update(
-		time_
+		_time
 	);
 }
 
@@ -88,18 +89,19 @@ sanguis::server::entities::enemies::enemy::add_message(
 	player_id const
 ) const
 {
-	return messages::create(
-		messages::add_enemy(
-			id(),
-			pos(),
-			angle(),
-			dim(),
-			abs_speed(),
-			current_health(),
-			max_health(),
-			etype()
-		)
-	);
+	return
+		messages::create(
+			messages::add_enemy(
+				this->id(),
+				this->pos(),
+				this->angle(),
+				this->dim(),
+				this->abs_speed(),
+				this->current_health(),
+				this->max_health(),
+				this->etype()
+			)
+		);
 }
 
 sanguis::entity_type::type

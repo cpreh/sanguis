@@ -41,7 +41,9 @@ class weapon
 			states::ready
 		> 
 {
-	FCPPT_NONCOPYABLE(weapon)
+	FCPPT_NONCOPYABLE(
+		weapon
+	);
 public:
 	weapons::range const
 	range() const;
@@ -61,9 +63,11 @@ public:
 		entities::with_weapon &owner
 	);
 
-	void stop();
+	void
+	stop();
 
-	void repickup();
+	void
+	repickup();
 
 	weapons::magazine_size const
 	magazine_size() const;
@@ -98,7 +102,8 @@ protected:
 
 	virtual void
 	do_attack(
-		delayed_attack const &) = 0;
+		delayed_attack const &
+	) = 0;
 	
 	time_type
 	ias() const;
@@ -106,7 +111,8 @@ protected:
 	time_type
 	irs() const;
 
-	bool usable() const;
+	bool
+	usable() const;
 private:
 	friend class states::ready;
 	friend class states::reloading;
@@ -153,14 +159,20 @@ private:
 	log();
 
 	weapon_type::type const type_;
+
 	weapons::range const range_;
+
 	magazine_type magazine_used_;
+
 	weapons::magazine_count magazine_count_;
+
 	weapons::magazine_size const magazine_size_;
+
 	sge::time::duration const
 		cast_point_,
 		backswing_time_,
 		reload_time_;
+
 	space_unit
 		ias_,
 		irs_;

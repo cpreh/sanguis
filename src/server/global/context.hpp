@@ -39,7 +39,9 @@ namespace global
 
 class context
 {
-	FCPPT_NONCOPYABLE(context)
+	FCPPT_NONCOPYABLE(
+		context
+	);
 public:
 	context(
 		unicast_callback const &,

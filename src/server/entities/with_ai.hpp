@@ -7,6 +7,7 @@
 #include "../ai/unique_ptr.hpp"
 #include "../ai/create_function.hpp"
 #include "../weapons/unique_ptr.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -20,9 +21,12 @@ class with_ai
 	public with_auras,
 	public with_weapon
 {
+	FCPPT_NONCOPYABLE(
+		with_ai
+	);
 protected:
 	explicit with_ai(
-		ai::create_function const &create_ai_,
+		ai::create_function const &,
 		weapons::unique_ptr start_weapon
 	);
 

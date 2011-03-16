@@ -18,9 +18,11 @@ namespace property
 
 class always_max
 :
-	public base
+	public property::base
 {
-	FCPPT_NONCOPYABLE(always_max)
+	FCPPT_NONCOPYABLE(
+		always_max
+	);
 public:
 	explicit always_max(
 		value_type

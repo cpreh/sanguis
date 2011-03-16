@@ -17,7 +17,7 @@ class create_parameters
 {
 	FCPPT_NONASSIGNABLE(
 		create_parameters
-	)
+	);
 public:
 	create_parameters(
 		pos_type const &center,

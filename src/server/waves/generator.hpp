@@ -20,7 +20,9 @@ namespace waves
 
 class generator
 {
-	FCPPT_NONCOPYABLE(generator)
+	FCPPT_NONCOPYABLE(
+		generator
+	);
 public:
 	explicit generator(
 		server::console &

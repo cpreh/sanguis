@@ -12,8 +12,11 @@ namespace server
 namespace ai
 {
 
-class base {
-	FCPPT_NONCOPYABLE(base)
+class base
+{
+	FCPPT_NONCOPYABLE(
+		base
+	);
 protected:
 	base();
 public:

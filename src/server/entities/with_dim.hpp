@@ -7,6 +7,7 @@
 #include "../pos_type.hpp"
 #include "../space_unit.hpp"
 #include <fcppt/math/dim/basic_decl.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -19,6 +20,9 @@ class with_dim
 :
 	public virtual base
 {
+	FCPPT_NONCOPYABLE(
+		with_dim
+	);
 public:
 	pos_type const
 	pos() const;

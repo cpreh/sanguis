@@ -6,6 +6,7 @@
 #include "../../enemy_type.hpp"
 #include "../../diff_clock.hpp"
 #include <sge/time/timer.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -18,6 +19,9 @@ class simple
 :
 	public wave
 {
+	FCPPT_NONCOPYABLE(
+		simple
+	);
 public:
 	simple(
 		time_type delay,
@@ -26,6 +30,8 @@ public:
 		unsigned spawns_per_wave,
 		enemy_type::type
 	);
+
+	~simple();
 private:
 	void
 	process(

@@ -4,7 +4,7 @@
 #include "machine.hpp"
 #include "object_fwd.hpp"
 #include "../load/context_base_fwd.hpp"
-#include "../net/port_type.hpp"
+#include "../net/port.hpp"
 #include "../main_object.hpp"
 #include <sge/systems/instance_fwd.hpp>
 #include <sge/time/timer.hpp>
@@ -29,7 +29,7 @@ public:
 	explicit 
 	object(
 		sge::systems::instance const &,
-		net::port_type,
+		net::port,
 		load::context_base const &
 	);
 

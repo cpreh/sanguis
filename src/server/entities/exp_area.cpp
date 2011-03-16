@@ -52,8 +52,11 @@ sanguis::server::entities::exp_area::on_die()
 			*ref.second
 		).add_exp(
 			server::exp_type(
-				exp_
-				/ static_cast<exp_type::value_type>(
+				exp_.get()
+				/
+				static_cast<
+					exp_type::value_type
+				>(
 					player_links_.size()
 				)
 			)
@@ -106,35 +109,35 @@ sanguis::server::entities::exp_area::server_only() const
 
 boost::logic::tribool const 
 sanguis::server::entities::exp_area::can_collide_with_entity(
-	base const &entity_
+	base const &_entity
 ) const
 {
 	return
 		dynamic_cast<
 			player const *
 		>(
-			&entity_
+			&_entity
 		)
 		!= 0;
 }
 	
 void
 sanguis::server::entities::exp_area::collision_entity_begin(
-	base &entity_
+	base &_entity
 )
 {
 	player_links_.insert(
-		entity_.id(),
-		entity_.link()
+		_entity.id(),
+		_entity.link()
 	);
 }
 
 void
 sanguis::server::entities::exp_area::collision_entity_end(
-	base &entity_
+	base &_entity
 )
 {
 	player_links_.erase(
-		entity_.id()
+		_entity.id()
 	);
 }

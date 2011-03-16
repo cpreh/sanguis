@@ -23,7 +23,7 @@ class monster
 {
 	FCPPT_NONCOPYABLE(
 		monster
-	)
+	);
 public:
 	monster(
 		server::environment::load_context_ptr,

@@ -4,6 +4,7 @@
 #include <fcppt/container/tree/object_impl.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
 #include <fcppt/log/headers.hpp>
+#include <fcppt/foreach_enumerator.hpp>
 #include <fcppt/text.hpp>
 
 namespace
@@ -27,51 +28,53 @@ private:
 
 sanguis::server::perks::tree::tree()
 :
-	impl(
-		status()
+	impl_(
+		perks::status()
 	)
 {
 	// TODO: do this with assign::
-	impl.push_back(
-		status(
+	impl_.push_back(
+		perks::status(
 			perk_type::choleric,
 			2,
 			0	
 		)
 	);
-	impl.push_back(
-		status(
+	impl_.push_back(
+		perks::status(
 			perk_type::ias,
 			0,
 			0	
 		)
 	);
-	impl.push_back(
-		status(
+	impl_.push_back(
+		perks::status(
 			perk_type::ims,
 			0,
 			0
 		)
 	);
-	impl.push_back(
-		status(
+	impl_.push_back(
+		perks::status(
 			perk_type::irs,
 			0,
 			0
 		)
 	);
-	impl.push_back(
-		status(
+	impl_.push_back(
+		perks::status(
 			perk_type::health,
 			0,
 			0
 		)
 	);
 
-	tree_type &health(impl.back());
+	tree_type &health(
+		impl_.back()
+	);
 
 	health.push_back(
-		status(
+		perks::status(
 			perk_type::regeneration,
 			0,
 			2	
@@ -84,12 +87,12 @@ sanguis::server::perks::tree::~tree()
 
 bool
 sanguis::server::perks::tree::choosable(
-	perk_type::type const p,
-	server::level_type const player_level
+	perk_type::type const _perk,
+	server::level_type const _player_level
 ) const
 {
 	if(
-		p == perk_type::size
+		_perk == perk_type::size
 	)
 		return false;
 
@@ -99,26 +102,29 @@ sanguis::server::perks::tree::choosable(
 	> traversal;
 	
 	traversal trav(
-		impl
+		impl_
 	);
 	
 	traversal::iterator const it(
 		std::find_if(
 			trav.begin(),
 			trav.end(),
-			perk_equal(
-				p
+			::perk_equal(
+				_perk
 			)
 		)
 	);
 	
-	if(it == trav.end())
+	if(
+		it == trav.end()
+	)
 	{
 		FCPPT_LOG_WARNING(
-			log(),
+			server::log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("Perk not found in tree")
 		);
+
 		return false;
 	}
 
@@ -144,12 +150,13 @@ sanguis::server::perks::tree::choosable(
 		)
 			return false;
 	}
+
 	return true;
 }
 
 void
 sanguis::server::perks::tree::take(
-	perk_type::type const p
+	perk_type::type const _perk
 )
 {
 	typedef 
@@ -158,50 +165,53 @@ sanguis::server::perks::tree::take(
 	> traversal;
 	
 	traversal trav(
-		impl
+		impl_
 	);
 	
-	traversal::iterator const it = std::find_if(
-		trav.begin(),
-		trav.end(),
-		::perk_equal(
-			p
+	traversal::iterator const it(
+		std::find_if(
+			trav.begin(),
+			trav.end(),
+			::perk_equal(
+				_perk
+			)
 		)
 	);
 	
-	if(it == trav.end())
-		throw exception(
-			FCPPT_TEXT("Perk not found in the tree!"));
+	if(
+		it == trav.end()
+	)
+		throw sanguis::exception(
+			FCPPT_TEXT("Perk not found in the tree!")
+		);
 	
 	(*it).value().choose();
 }
 
 sanguis::server::perks::list const
 sanguis::server::perks::tree::choosables(
-	server::level_type const player_level
+	server::level_type const _player_level
 ) const
 {
 	// TODO: very wasteful but easy
 	list ret;
 
-	for(unsigned i = 0; i < perk_type::size; ++i)
+	FCPPT_FOREACH_ENUMERATOR(
+		perk,
+		perk_type
+	)
 	{
-		perk_type::type const pt(
-			static_cast<
-				perk_type::type
-			>(
-				i
-			)
-		);
-
 		if(
-			choosable(
-				pt,
+			this->choosable(
+				perk,
 				player_level
 			)
 		)
-			ret.push_back(pt);
+			ret.push_back(
+				perk
+			);
 	}
+
 	return ret;
 }
 

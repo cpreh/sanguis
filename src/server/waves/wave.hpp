@@ -16,7 +16,9 @@ namespace waves
 
 class wave
 {
-	FCPPT_NONCOPYABLE(wave)
+	FCPPT_NONCOPYABLE(
+		wave
+	);
 protected:
 	wave();
 public:

@@ -6,7 +6,8 @@
 sanguis::server::entities::auto_weak_link::auto_weak_link()
 :
 	ref_(0)
-{}
+{
+}
 
 sanguis::server::entities::auto_weak_link::auto_weak_link(
 	base &_ref
@@ -14,88 +15,101 @@ sanguis::server::entities::auto_weak_link::auto_weak_link(
 :
 	ref_(&_ref)
 {
-	add_me();
+	this->add_me();
 }
 
 sanguis::server::entities::auto_weak_link::auto_weak_link(
 	auto_weak_link const &_old
 )
 :
-	auto_hook_type(_old),
+	auto_weak_hook(_old),
 	ref_(_old.ref_)
 {
-	if(_old.is_linked())
-		add_me();
+	if(
+		_old.is_linked()
+	)
+		this->add_me();
 }
 
 sanguis::server::entities::auto_weak_link::~auto_weak_link()
-{}
+{
+}
 
 sanguis::server::entities::auto_weak_link &
 sanguis::server::entities::auto_weak_link::operator=(
 	auto_weak_link const &_old
 )
 {
-	unlink();
-	auto_hook_type::operator=(_old);	
+	this->unlink();
+
+	auto_weak_hook::operator=(
+		_old
+	);
+
 	ref_ = _old.ref_;
 
-	if(_old.is_linked())
-		add_me();
+	if(
+		_old.is_linked()
+	)
+		this->add_me();
+
 	return *this;
 }
 
 void
 sanguis::server::entities::auto_weak_link::unlink()
 {
-	auto_hook_type::unlink();
-	ref_ = 0;
-}
+	auto_weak_hook::unlink();
 
-sanguis::server::entities::auto_weak_link::operator
-sanguis::server::entities::auto_weak_link::unspecified *() const
-{
-	static unspecified unspec;
-	return is_linked()
-		? &unspec
-		: 0;
+	ref_ = 0;
 }
 
 sanguis::server::entities::base &
 sanguis::server::entities::auto_weak_link::operator*() const
 {
-	return checked_ref();
+	return this->checked_ref();
 }
 
 sanguis::server::entities::base *
 sanguis::server::entities::auto_weak_link::operator->() const
 {
-	return get();
+	return this->get();
 }
 
 sanguis::server::entities::base *
 sanguis::server::entities::auto_weak_link::get() const
 {
-	return &checked_ref();
+	return &this->checked_ref();
 }
 
 sanguis::server::entities::base &
 sanguis::server::entities::auto_weak_link::checked_ref() const
 {
-	if(!ref_)
-		throw exception(
+	if(
+		!ref_
+	)
+		throw sanguis::exception(
 			FCPPT_TEXT("Tried to dereference a weak link that is dead!")
 		);
+
 	return *ref_;
 }
 
 void
 sanguis::server::entities::auto_weak_link::add_me()
 {
-	if(!ref_)
+	if(
+		!ref_
+	)
 		return;
 
 	ref_->insert_link(
 		*this
 	);
+}
+
+bool
+sanguis::server::entities::auto_weak_link::boolean_test() const
+{
+	return this->is_linked();
 }

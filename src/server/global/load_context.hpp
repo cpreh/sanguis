@@ -5,6 +5,7 @@
 #include "../dim_type.hpp"
 #include "../string.hpp"
 #include "../../load/context_base.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -17,10 +18,15 @@ class load_context
 :
 	public environment::load_context
 {
+	FCPPT_NONCOPYABLE(
+		load_context
+	);
 public:
 	explicit load_context(
 		load::context_base const &
 	);
+
+	~load_context();
 private:
 	dim_type const
 	entity_dim(

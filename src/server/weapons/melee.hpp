@@ -6,6 +6,7 @@
 #include "range.hpp"
 #include "base_cooldown.hpp"
 #include "damage.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -18,12 +19,17 @@ class melee
 :
 	public weapon
 {
+	FCPPT_NONCOPYABLE(
+		melee
+	);
 public:
 	melee(
 		weapons::range,
 		weapons::base_cooldown,
 		weapons::damage
 	);
+
+	~melee();
 private:
 	void
 	do_attack(

@@ -14,6 +14,7 @@
 #include "../health_type.hpp"
 #include "../../friend_type.hpp"
 #include "../../time_type.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -30,6 +31,9 @@ class friend_
 	public with_health,
 	public movable
 {
+	FCPPT_NONCOPYABLE(
+		friend_
+	);
 public:
 	friend_(
 		friend_type::type,

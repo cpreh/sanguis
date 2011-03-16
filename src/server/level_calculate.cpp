@@ -4,7 +4,7 @@
 
 sanguis::server::level_type
 sanguis::server::level_calculate(
-	exp_type const e,
+	exp_type const _exp,
 	level_type
 )
 {
@@ -20,7 +20,9 @@ sanguis::server::level_calculate(
 				std::sqrt(
 					static_cast<
 						space_unit
-					>(e)
+					>(
+						_exp.get()
+					)
 				)
 			)
 		);

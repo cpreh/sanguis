@@ -18,7 +18,7 @@ class insert_parameters
 {
 	FCPPT_NONASSIGNABLE(
 		insert_parameters
-	)
+	);
 public:
 	insert_parameters(
 		pos_type const &,

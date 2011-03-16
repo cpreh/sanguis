@@ -12,9 +12,9 @@ namespace server
 {
 
 typedef void
-disconnect_function(
+data_function(
 	net::id,
-	net::data_buffer const &
+	net::data_buffer &
 );
 
 }

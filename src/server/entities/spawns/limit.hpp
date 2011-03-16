@@ -15,7 +15,7 @@ namespace spawns
 FCPPT_MAKE_STRONG_TYPEDEF(
 	unsigned,
 	limit
-)
+);
 
 }
 }

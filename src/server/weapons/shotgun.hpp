@@ -7,6 +7,7 @@
 #include "magazine_size.hpp"
 #include "reload_time.hpp"
 #include "damage.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis 
 {
@@ -19,6 +20,9 @@ class shotgun
 :
 	public weapon
 {
+	FCPPT_NONCOPYABLE(
+		shotgun
+	);
 public:
 	shotgun(
 		weapon_type::type,
@@ -29,6 +33,8 @@ public:
 		weapons::magazine_size,
 		weapons::reload_time
 	);
+
+	~shotgun();
 private:
 	void
 	do_attack(

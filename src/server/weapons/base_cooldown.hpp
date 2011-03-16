@@ -14,7 +14,7 @@ namespace weapons
 FCPPT_MAKE_STRONG_TYPEDEF(
 	time_type,
 	base_cooldown
-)
+);
 
 }
 }

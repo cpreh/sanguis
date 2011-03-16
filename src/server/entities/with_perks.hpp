@@ -5,6 +5,7 @@
 #include "../perks/perk_fwd.hpp"
 #include "../perks/unique_ptr.hpp"
 #include "../../perk_type.hpp"
+#include <fcppt/noncopyable.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
 
 namespace sanguis
@@ -18,6 +19,9 @@ class with_perks
 :
 	public virtual base
 {
+	FCPPT_NONCOPYABLE(
+		with_perks
+	);
 public:
 	void
 	add_perk(

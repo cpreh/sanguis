@@ -83,7 +83,7 @@ sanguis::net::client::object::register_disconnect(
 
 fcppt::signal::auto_connection
 sanguis::net::client::object::register_data(
-	net::data_callback const &_callback
+	client::data_callback const &_callback
 )
 {
 	return

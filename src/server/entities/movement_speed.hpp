@@ -14,7 +14,7 @@ namespace entities
 FCPPT_MAKE_STRONG_TYPEDEF(
 	property::value,
 	movement_speed
-)
+);
 
 }
 }

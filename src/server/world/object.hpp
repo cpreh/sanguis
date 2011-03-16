@@ -46,7 +46,9 @@ namespace world
 
 class object
 {
-	FCPPT_NONCOPYABLE(object)
+	FCPPT_NONCOPYABLE(
+		object
+	);
 public:
 	object(
 		context_ptr const global_context_,

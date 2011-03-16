@@ -17,7 +17,9 @@ class environment
 :
 	public server::environment::object
 {
-	FCPPT_NONCOPYABLE(environment)
+	FCPPT_NONCOPYABLE(
+		environment
+	);
 public:
 	explicit environment(
 		world::object &

@@ -67,9 +67,12 @@ try
 		)
 	);
 
-	if (vm.count("help"))
+	if(
+		vm.count("help")
+	)
 	{
 		std::cout << desc << '\n';
+
 		return EXIT_SUCCESS;
 	}
 
@@ -145,23 +148,23 @@ try
 	return obj->run();
 }
 catch(
-	fcppt::exception const &e
+	fcppt::exception const &_error
 )
 {
 	fcppt::io::cerr
 		<< FCPPT_TEXT("caught fcppt exception: ")
-		<< e.string()
+		<< _error.string()
 		<< FCPPT_TEXT('\n');
 
 	return EXIT_FAILURE;
 }
 catch(
-	std::exception const &e
+	std::exception const &_error
 )
 {
 	std::cerr
 		<< "caught standard exception: "
-		<< e.what()
+		<< _error.what()
 		<< '\n';
 
 	return EXIT_FAILURE;

@@ -27,7 +27,7 @@ sanguis::server::entities::player::player(
 	base(),
 	movable(
 		property::initial(
-			_speed,
+			_speed.get(),
 			0
 		),
 		static_cast<space_unit>(0)
@@ -79,7 +79,11 @@ sanguis::server::entities::player::add_exp(
 	exp_type const _exp
 )
 {
-	exp_ += _exp;
+	exp_ =
+		server::exp_type(
+			exp_.get()
+			+ _exp.get()
+		);
 
 	environment()->exp_changed(
 		player_id(),
@@ -92,16 +96,18 @@ sanguis::server::entities::player::add_exp(
 			level_
 		),
 		new_level(
-			level_calculate(
+			server::level_calculate(
 				exp_,
 				old_level
 			)
 		);
 
-	if (new_level == old_level)
+	if(
+		new_level == old_level
+	)
 		return;
 	
-	skill_points_ += new_level - old_level;
+	skill_points_ += new_level.get() - old_level.get();
 
 	level_ = new_level;
 

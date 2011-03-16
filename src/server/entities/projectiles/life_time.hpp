@@ -16,7 +16,7 @@ namespace projectiles
 FCPPT_MAKE_STRONG_TYPEDEF(
 	time_type,
 	life_time
-)
+);
 
 }
 }

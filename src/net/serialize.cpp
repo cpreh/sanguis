@@ -47,13 +47,13 @@ sanguis::net::serialize(
 		&buf
 	);
 
-	detail::exceptions(
+	net::stream_exceptions(
 		stream
 	);
 
-	detail::message_header const header(
+	net::message_header const header(
 		fcppt::truncation_check_cast<
-			detail::message_header
+			net::message_header
 		>(
 			_message->size()
 		)

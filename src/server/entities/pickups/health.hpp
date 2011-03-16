@@ -23,7 +23,7 @@ class health
 {
 	FCPPT_NONCOPYABLE(
 		health
-	)
+	);
 public:
 	health(
 		server::environment::load_context_ptr,

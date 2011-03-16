@@ -9,8 +9,9 @@
 #include "../../space_unit.hpp"
 #include "../../pos_type.hpp"
 #include "../../../diff_clock.hpp"
-#include <fcppt/math/vector/basic_decl.hpp>
 #include <sge/time/timer.hpp>
+#include <fcppt/math/vector/basic_decl.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -25,6 +26,9 @@ class grenade
 :
 	public aoe_projectile
 {
+	FCPPT_NONCOPYABLE(
+		grenade
+	);
 public:
 	grenade(
 		server::environment::load_context_ptr,
@@ -34,6 +38,8 @@ public:
 		pos_type const &dest,
 		space_unit direction
 	);
+
+	~grenade();
 private:
 	void
 	on_transfer(

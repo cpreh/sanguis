@@ -21,7 +21,9 @@ class sentry
 :
 	public weapon
 {
-	FCPPT_NONCOPYABLE(sentry)
+	FCPPT_NONCOPYABLE(
+		sentry
+	);
 public:
 	explicit sentry(
 		weapon_type::type,

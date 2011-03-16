@@ -16,11 +16,15 @@ class single
 :
 	public wave
 {
-	FCPPT_NONCOPYABLE(single)
+	FCPPT_NONCOPYABLE(
+		single
+	);
 public:
 	explicit single(
 		enemy_type::type
 	);
+
+	~single();
 private:
 	void
 	process(
@@ -34,7 +38,7 @@ private:
 
 	enemy_type::type const etype_;
 
-	bool spawned;
+	bool spawned_;
 };
 
 }

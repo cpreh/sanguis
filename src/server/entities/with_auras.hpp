@@ -7,6 +7,7 @@
 #include "../collision/global_groups_fwd.hpp"
 #include <sge/collision/shapes/container.hpp>
 #include <sge/collision/world_ptr.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
 
 namespace sanguis
@@ -20,6 +21,9 @@ class with_auras
 :
 	public virtual base
 {
+	FCPPT_NONCOPYABLE(
+		with_auras
+	);
 public:
 	void
 	add_aura(

@@ -1,6 +1,7 @@
 #include "connection.hpp"
+#include <fcppt/container/raw_vector_impl.hpp>
 
-sanguis::net::detail::connection::connection(
+sanguis::net::server::connection::connection(
 	net::id const _id,
 	boost::asio::io_service &_io_service
 )
@@ -9,35 +10,42 @@ sanguis::net::detail::connection::connection(
 	socket_(
 		_io_service
 	),
-	received_data_(),
-	send_data_()
+	new_data_(),
+	send_data_(),
+	received_data_()
 {
 }
 
-sanguis::net::detail::connection::~connection()
+sanguis::net::server::connection::~connection()
 {
 }
 
 sanguis::net::id const
-sanguis::net::detail::connection::id() const
+sanguis::net::server::connection::id() const
 {
 	return id_;
 }
 
 boost::asio::ip::tcp::socket &
-sanguis::net::detail::connection::socket()
+sanguis::net::server::connection::socket()
 {
 	return socket_;
 }
 
-sanguis::net::detail::static_buffer &
-sanguis::net::detail::connection::received_data()
+sanguis::net::static_buffer &
+sanguis::net::server::connection::new_data()
+{
+	return new_data_;
+}
+
+sanguis::net::data_buffer &
+sanguis::net::server::connection::received_data()
 {
 	return received_data_;
 }
 
-sanguis::net::detail::circular_buffer &
-sanguis::net::detail::connection::send_data()
+sanguis::net::circular_buffer &
+sanguis::net::server::connection::send_data()
 {
 	return send_data_;
 }

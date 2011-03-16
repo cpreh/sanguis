@@ -55,7 +55,7 @@ sanguis::net::server::object::queue(
 
 fcppt::signal::auto_connection 
 sanguis::net::server::object::register_connect(
-	server::connect_function const &_callback
+	server::connect_callback const &_callback
 )
 {
 	return 
@@ -77,7 +77,7 @@ sanguis::net::server::object::register_disconnect(
 
 fcppt::signal::auto_connection 
 sanguis::net::server::object::register_data(
-	server::data_function const &_callback
+	server::data_callback const &_callback
 )
 {
 	return 

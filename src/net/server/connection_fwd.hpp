@@ -5,7 +5,7 @@ namespace sanguis
 {
 namespace net
 {
-namespace detail
+namespace server
 {
 
 class connection;

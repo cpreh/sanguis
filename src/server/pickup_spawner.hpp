@@ -15,8 +15,11 @@ namespace sanguis
 namespace server
 {
 
-class pickup_spawner {
-	FCPPT_NONCOPYABLE(pickup_spawner)
+class pickup_spawner
+{
+	FCPPT_NONCOPYABLE(
+		pickup_spawner
+	);
 public:
 	explicit pickup_spawner(
 		environment::object_ptr
@@ -41,15 +44,15 @@ private:
 		weapon_type::type
 	);
 	
-	environment::object_ptr const env;
+	environment::object_ptr const env_;
 
 	fcppt::random::uniform<
 		probability_type
-	> spawn_prob;
+	> spawn_prob_;
 
-	fcppt::random::actor::normalized rng;
+	fcppt::random::actor::normalized rng_;
 
-	pos_type pos;
+	pos_type pos_;
 };
 
 }

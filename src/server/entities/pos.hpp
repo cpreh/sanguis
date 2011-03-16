@@ -13,8 +13,8 @@ namespace entities
 
 pos_type const
 pos(
-	pos_type const &center_,
-	dim_type const &dim_
+	pos_type const &center,
+	dim_type const &
 );
 
 }

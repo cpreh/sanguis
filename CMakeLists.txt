@@ -829,8 +829,12 @@ SET(
 	src/messages/unpause.cpp
 	src/messages/unpause.hpp
 	src/messages/vector2.hpp
+	src/net/append_to_circular_buffer.cpp
+	src/net/append_to_circular_buffer.hpp
 	src/net/asio.cpp
 	src/net/circular_buffer.hpp
+	src/net/circular_buffer_part.cpp
+	src/net/circular_buffer_part.hpp
 	src/net/client/connect_callback.hpp
 	src/net/client/connect_function.hpp
 	src/net/client/data_callback.hpp
@@ -845,6 +849,8 @@ SET(
 	src/net/data_buffer.hpp
 	src/net/deserialize.cpp
 	src/net/deserialize.hpp
+	src/net/erase_circular_buffer_front.cpp
+	src/net/erase_circular_buffer_front.hpp
 	src/net/exception.cpp
 	src/net/exception.hpp
 	src/net/hostname.hpp
@@ -924,7 +930,6 @@ SET(
 	src/server/cheat.cpp
 	src/server/cheat.hpp
 	src/server/circle_type.hpp
-	src/server/client_data.hpp
 	src/server/collision/assign_groups.cpp
 	src/server/collision/assign_groups.hpp
 	src/server/collision/base.cpp

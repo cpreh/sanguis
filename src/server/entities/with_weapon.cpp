@@ -152,7 +152,7 @@ sanguis::server::entities::with_weapon::add_weapon(
 	);
 
 	weapons::magazine_type const magazine_size(
-		_ptr->magazine_size()
+		_ptr->magazine_size().get()
 	);
 
 	if(

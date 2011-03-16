@@ -12,7 +12,8 @@ namespace projectiles
 
 namespace indeterminate
 {
-enum type {
+enum type
+{
 	yes,
 	no
 };

@@ -12,7 +12,7 @@ namespace server
 FCPPT_MAKE_STRONG_TYPEDEF(
 	space_unit,
 	exp_type
-)
+);
 
 }
 }

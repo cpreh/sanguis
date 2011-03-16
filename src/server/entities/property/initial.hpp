@@ -13,13 +13,14 @@ namespace entities
 namespace property
 {
 
-class initial {
+class initial
+{
 public:
 	typedef property::value value_type;
 
 	initial(
-		value_type base_,
-		value_type current_
+		value_type base,
+		value_type current
 	);
 
 	value_type

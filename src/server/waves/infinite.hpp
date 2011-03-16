@@ -22,7 +22,9 @@ class infinite
 :
 	public wave
 {
-	FCPPT_NONCOPYABLE(infinite)
+	FCPPT_NONCOPYABLE(
+		infinite
+	);
 public:
 	infinite(
 		waves::delay,

@@ -9,6 +9,7 @@
 #include "reload_time.hpp"
 #include "range.hpp"
 #include "damage.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -17,7 +18,13 @@ namespace server
 namespace weapons
 {
 
-class pistol : public weapon {
+class pistol
+:
+	public weapon
+{
+	FCPPT_NONCOPYABLE(
+		pistol
+	);
 public:
 	pistol(
 		weapon_type::type,
@@ -28,6 +35,8 @@ public:
 		weapons::reload_time,
 		weapons::range
 	);
+	
+	~pistol();
 private:
 	void
 	do_attack(

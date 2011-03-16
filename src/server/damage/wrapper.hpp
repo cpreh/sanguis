@@ -18,7 +18,7 @@ class wrapper
 {
 	FCPPT_NONASSIGNABLE(
 		wrapper
-	)
+	);
 public:
 	wrapper(
 		damage_type::type

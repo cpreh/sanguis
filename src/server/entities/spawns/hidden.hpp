@@ -19,9 +19,13 @@ class hidden
 :
 	public virtual base
 {
-	FCPPT_NONCOPYABLE(hidden)
+	FCPPT_NONCOPYABLE(
+		hidden
+	);
 protected:
 	hidden();
+
+	~hidden();
 private:
 	bool
 	dead() const;

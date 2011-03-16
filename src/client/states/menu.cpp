@@ -28,10 +28,12 @@
 #include <ostream>
 
 sanguis::client::states::menu::menu(
-	my_context ctx
+	my_context _ctx
 )
 :
-	my_base(ctx),
+	my_base(
+		_ctx
+	),
 	menu_(
 		context<machine>().settings(),
 		context<machine>().gui(),
@@ -81,7 +83,7 @@ sanguis::client::states::menu::react(
 
 boost::statechart::result
 sanguis::client::states::menu::react(
-	events::message const &m
+	events::message const &_message
 )
 {
 	static messages::call::object<
@@ -95,7 +97,7 @@ sanguis::client::states::menu::react(
 	> dispatcher;
 
 	return dispatcher(
-		*m.value(),
+		*_message.value(),
 		*this,
 		std::tr1::bind(
 			&menu::handle_default_msg,
@@ -115,12 +117,12 @@ sanguis::client::states::menu::handle_default_msg(
 
 boost::statechart::result
 sanguis::client::states::menu::operator()(
-	messages::net_error const &e
+	messages::net_error const &_error
 )
 {
 	menu_.connection_error(
 		fcppt::utf8::convert(
-			e.get<messages::roles::error_message>()
+			_error.get<messages::roles::error_message>()
 		)
 	);
 
@@ -163,7 +165,7 @@ sanguis::client::states::menu::operator()(
 )
 {
 	FCPPT_LOG_DEBUG(
-		log(),
+		client::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("Received connect_state")
 	);
@@ -186,24 +188,26 @@ sanguis::client::states::menu::log()
 
 void
 sanguis::client::states::menu::connect(
-	fcppt::string const &host,
-	fcppt::string const &port
+	fcppt::string const &_host,
+	fcppt::string const &_port
 )
 {
 	try
 	{
 		context<machine>().connect(
 			fcppt::to_std_string(
-				host
+				_host
 			),
 			fcppt::lexical_cast<
-				net::port_type
+				net::port
 			>(
-				port
+				_port
 			)
 		);
 	}
-	catch (fcppt::bad_lexical_cast const &)
+	catch(
+		fcppt::bad_lexical_cast const &
+	)
 	{
 		menu_.connection_error(
 			FCPPT_TEXT("invalid port specification")

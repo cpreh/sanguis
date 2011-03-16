@@ -27,7 +27,9 @@ namespace environment
 
 class object
 {
-	FCPPT_NONCOPYABLE(object)
+	FCPPT_NONCOPYABLE(
+		object
+	);
 protected:
 	object();
 public:

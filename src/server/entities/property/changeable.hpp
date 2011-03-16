@@ -20,9 +20,11 @@ namespace property
 
 class changeable
 :
-	public base
+	public property::base
 {
-	FCPPT_NONCOPYABLE(changeable)
+	FCPPT_NONCOPYABLE(
+		changeable
+	);
 public:
 	explicit changeable(
 		initial const &

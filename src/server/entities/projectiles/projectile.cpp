@@ -31,7 +31,7 @@ sanguis::server::entities::projectiles::projectile::projectile(
 	base(),
 	movable(
 		property::initial_max(
-			_movement_speed
+			_movement_speed.get()
 		),
 		_direction
 	),
@@ -46,12 +46,13 @@ sanguis::server::entities::projectiles::projectile::projectile(
 	diff_clock_(),
 	life_timer_(
 		sge::time::second_f(
-			_life_time
+			_life_time.get()
 		),
 		sge::time::activation_state::active,
 		diff_clock_.callback()
 	)
-{}
+{
+}
 
 void
 sanguis::server::entities::projectiles::projectile::on_update(
@@ -101,29 +102,31 @@ sanguis::server::entities::projectiles::projectile::type() const
 
 boost::logic::tribool const
 sanguis::server::entities::projectiles::projectile::can_collide_with_entity(
-	base const &e
+	base const &_entity
 ) const
 {
-	FCPPT_ASSERT(e.team() != team()); // shouldn't happen for now!
+	FCPPT_ASSERT(
+		_entity.team() != this->team()
+	); // shouldn't happen for now!
 
 	return
-		!e.dead()
-		&& !e.invulnerable();
+		!_entity.dead()
+		&& !_entity.invulnerable();
 }
 
 void
 sanguis::server::entities::projectiles::projectile::collision_entity_begin(
-	base &entity_
+	base &_entity
 )
 {
 	if(
-		!dead()
+		!this->dead()
 	)
-		do_damage(
+		this->do_damage(
 			dynamic_cast<
 				with_health &
 			>(
-				entity_	
+				_entity
 			)
 		);
 }
@@ -133,14 +136,15 @@ sanguis::server::entities::projectiles::projectile::add_message(
 	player_id const
 ) const
 {
-	return messages::create(
-		messages::add_projectile(
-			id(),
-			pos(),
-			angle(),
-			dim(),
-			abs_speed(),
-			ptype()
-		)
-	);
+	return
+		messages::create(
+			messages::add_projectile(
+				this->id(),
+				this->pos(),
+				this->angle(),
+				this->dim(),
+				this->abs_speed(),
+				this->ptype()
+			)
+		);
 }

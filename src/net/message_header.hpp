@@ -7,12 +7,9 @@ namespace sanguis
 {
 namespace net
 {
-namespace detail
-{
 
 typedef boost::uint16_t message_header;
 
-}
 }
 }
 

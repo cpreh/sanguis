@@ -41,29 +41,30 @@ sanguis::server::entities::friend_::friend_(
 	),
 	movable(
 		property::initial(
-			_movement_speed,
+			_movement_speed.get(),
 			0
 		),
 		static_cast<space_unit>(0)
 	),
 	ftype_(_ftype)
-{}
+{
+}
 
 void
 sanguis::server::entities::friend_::on_update(
-	time_type const time_
+	time_type const _time
 )
 {
 	with_ai::on_update(
-		time_
+		_time
 	);
 
 	with_buffs::on_update(
-		time_
+		_time
 	);
 
 	with_health::on_update(
-		time_
+		_time
 	);
 }
 
@@ -84,29 +85,34 @@ sanguis::server::entities::friend_::add_message(
 	server::player_id const
 ) const
 {
-	return messages::create(
-		messages::add_friend(
-			id(),
-			pos(),
-			angle(),
-			dim(),
-			abs_speed(),
-			current_health(),
-			max_health(),
-			ftype_
-		)
-	);
+	return
+		messages::create(
+			messages::add_friend(
+				this->id(),
+				this->pos(),
+				this->angle(),
+				this->dim(),
+				this->abs_speed(),
+				this->current_health(),
+				this->max_health(),
+				ftype_
+			)
+		);
 }
 
 boost::logic::tribool const
 sanguis::server::entities::friend_::can_collide_with_entity(
-	base const &e
+	base const &_entity
 ) const
 {
 	return
 		dynamic_cast<
 			entities::pickups::pickup const *
-		>(&e)
-			? boost::logic::tribool(false)
-			: boost::logic::indeterminate;
+		>(
+			&_entity
+		)
+		?
+			boost::logic::tribool(false)
+		:
+			boost::logic::indeterminate;
 }

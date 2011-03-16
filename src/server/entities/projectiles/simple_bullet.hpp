@@ -7,6 +7,7 @@
 #include "../../damage/unit.hpp"
 #include "../../team.hpp"
 #include "../../space_unit.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -21,6 +22,9 @@ class simple_bullet
 :
 	public projectile
 {
+	FCPPT_NONCOPYABLE(
+		simple_bullet
+	);
 public:
 	simple_bullet(
 		server::environment::load_context_ptr,
@@ -28,6 +32,8 @@ public:
 		damage::unit,
 		space_unit direction
 	);
+
+	~simple_bullet();
 private:
 	void
 	do_damage(

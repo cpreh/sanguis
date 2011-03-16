@@ -1,8 +1,9 @@
 #ifndef SANGUIS_SERVER_ENTITIES_AUTO_WEAK_LINK_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_AUTO_WEAK_LINK_HPP_INCLUDED
 
+#include "auto_weak_hook.hpp"
 #include "base_fwd.hpp"
-#include <boost/intrusive/list_hook.hpp>
+#include <fcppt/safe_bool.hpp>
 
 namespace sanguis
 {
@@ -11,16 +12,13 @@ namespace server
 namespace entities
 {
 
-typedef boost::intrusive::list_base_hook<
-	boost::intrusive::link_mode<
-		boost::intrusive::auto_unlink
-	>
-> auto_hook_type;
-
 class auto_weak_link
 :
-	public auto_hook_type
+	public auto_weak_hook
 {
+	FCPPT_SAFE_BOOL(
+		auto_weak_link
+	)
 public:
 	auto_weak_link();
 
@@ -41,10 +39,6 @@ public:
 
 	void
 	unlink();
-private:
-	struct unspecified {};
-public:
-	operator unspecified *() const;
 
 	base &
 	operator*() const;
@@ -58,7 +52,11 @@ private:
 	base &
 	checked_ref() const;
 
-	void add_me();
+	void
+	add_me();
+
+	bool
+	boolean_test() const;
 
 	base *ref_;
 };

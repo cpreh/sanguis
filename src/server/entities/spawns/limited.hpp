@@ -25,7 +25,9 @@ class limited
 	public spawn,
 	public hidden
 {
-	FCPPT_NONCOPYABLE(limited)
+	FCPPT_NONCOPYABLE(
+		limited
+	);
 public:
 	explicit limited(
 		enemy_type::type,
@@ -33,6 +35,8 @@ public:
 		interval,
 		limit
 	);
+
+	~limited();
 private:
 	void
 	unregister(

@@ -14,7 +14,9 @@ namespace collision
 
 class base
 {
-	FCPPT_NONCOPYABLE(base)
+	FCPPT_NONCOPYABLE(
+		base
+	);
 protected:
 	base();
 public:

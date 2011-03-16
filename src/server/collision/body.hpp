@@ -19,7 +19,9 @@ namespace collision
 
 class body
 {
-	FCPPT_NONCOPYABLE(body)
+	FCPPT_NONCOPYABLE(
+		body
+	);
 protected:
 	body();
 

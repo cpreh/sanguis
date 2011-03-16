@@ -12,6 +12,7 @@
 #include "../damage/array.hpp"
 #include "../damage/armor.hpp"
 #include <fcppt/signal/scoped_connection.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -24,6 +25,9 @@ class with_health
 :
 	public virtual base 
 {
+	FCPPT_NONCOPYABLE(
+		with_health
+	);
 public:
 	void
 	damage(
@@ -47,6 +51,8 @@ protected:
 		entities::health_type max_health,
 		damage::armor const &
 	);
+
+	~with_health();
 
 	void
 	on_update(

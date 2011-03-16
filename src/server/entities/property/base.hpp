@@ -20,7 +20,7 @@ class base
 {
 	FCPPT_NONCOPYABLE(
 		base
-	)
+	);
 public:
 	typedef property::value value_type;
 

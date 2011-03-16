@@ -14,7 +14,8 @@ namespace server
 namespace weapons
 {
 
-class delayed_attack {
+class delayed_attack
+{
 public:
 	delayed_attack(
 		pos_type const &spawn_point,
@@ -40,9 +41,13 @@ public:
 	dest() const;
 private:
 	pos_type spawn_point_;
+
 	space_unit angle_;
+
 	server::team::type team_;
+
 	server::environment::object_ptr environment_;
+
 	pos_type dest_;
 };
 

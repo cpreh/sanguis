@@ -19,28 +19,28 @@ template<
 >
 void
 change_simple(
-	ChangeFunction const &change_function_,
-	entities::base &entity_,
-	ElemFunction const &elem_function_,
-	entities::property::value const factor_,
-	level_diff const diff_
+	ChangeFunction const &_change_function,
+	entities::base &_entity,
+	ElemFunction const &_elem_function,
+	entities::property::value const _factor,
+	level_diff const _diff
 )
 {
-	change_function_(
+	_change_function(
 		(
 			dynamic_cast<
 				Class &
 			>(
-				entity_
+				_entity
 			)
-			.*elem_function_
+			.*_elem_function
 		)(),
-		factor_
+		_factor
 		*
 		static_cast<
 			entities::property::value
 		>(
-			diff_
+			_diff
 		)
 	);
 }

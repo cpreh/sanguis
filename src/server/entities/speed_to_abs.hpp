@@ -14,7 +14,7 @@ namespace entities
 
 pos_type const
 speed_to_abs(
-	space_unit direction_,
+	space_unit direction,
 	property::value
 );
 

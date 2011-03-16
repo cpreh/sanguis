@@ -7,6 +7,7 @@
 #include "../../team.hpp"
 #include "../../../weapon_type.hpp"
 #include "../../../messages/auto_ptr.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -21,12 +22,17 @@ class weapon
 :
 	public pickup
 {
+	FCPPT_NONCOPYABLE(
+		weapon
+	);
 public:
 	weapon(
 		server::environment::load_context_ptr,
 		team::type team,
 		weapon_type::type
 	);
+
+	~weapon();
 	
 	weapon_type::type
 	wtype() const;

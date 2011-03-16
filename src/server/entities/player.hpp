@@ -21,6 +21,7 @@
 #include "../player_id.hpp"
 #include "../../perk_type.hpp"
 #include "../../time_type.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -39,6 +40,9 @@ class player
 	public with_perks,
 	public with_weapon
 {
+	FCPPT_NONCOPYABLE(
+		player
+	);
 public:
 	player(
 		server::environment::load_context_ptr,
@@ -50,7 +54,8 @@ public:
 	);
 
 	// own functions
-	string const name() const;
+	string const
+	name() const;
 
 	void	
 	add_exp(

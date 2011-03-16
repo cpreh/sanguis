@@ -5,6 +5,7 @@
 #include "level_diff.hpp"
 #include "level_type.hpp"
 #include "../entities/base_fwd.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -17,8 +18,13 @@ class ims
 :
 	public perk
 {
+	FCPPT_NONCOPYABLE(
+		ims
+	);
 public:
 	ims();
+
+	~ims();
 private:
 	void
 	change(

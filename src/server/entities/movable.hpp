@@ -8,6 +8,7 @@
 #include "property/value.hpp"
 #include "../space_unit.hpp"
 #include <fcppt/signal/scoped_connection.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -20,6 +21,9 @@ class movable
 :
 	public virtual base
 {
+	FCPPT_NONCOPYABLE(
+		movable
+	);
 public:
 	property::changeable &
 	movement_speed();
@@ -36,8 +40,8 @@ public:
 	abs_speed() const;
 protected:
 	movable(
-		property::initial const &speed_,
-		space_unit direction_ 
+		property::initial const &speed,
+		space_unit direction_
 	);
 private:
 	pos_type const
@@ -52,7 +56,7 @@ private:
 
 	space_unit direction_;
 	
-	fcppt::signal::scoped_connection speed_change_;
+	fcppt::signal::scoped_connection const speed_change_;
 };
 
 }

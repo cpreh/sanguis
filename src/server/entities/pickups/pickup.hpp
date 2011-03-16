@@ -29,7 +29,7 @@ class pickup
 {
 	FCPPT_NONCOPYABLE(
 		pickup
-	)
+	);
 public:
 	pickup_type::type
 	ptype() const;

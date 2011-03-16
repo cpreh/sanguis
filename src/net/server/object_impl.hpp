@@ -3,9 +3,12 @@
 
 #include "object_impl_fwd.hpp"
 #include "connect_callback.hpp"
+#include "connect_function.hpp"
 #include "connection_fwd.hpp"
 #include "data_callback.hpp"
+#include "data_function.hpp"
 #include "disconnect_callback.hpp"
+#include "disconnect_function.hpp"
 #include "../data_buffer.hpp"
 #include "../id.hpp"
 #include "../port.hpp"
@@ -25,13 +28,13 @@ namespace net
 namespace server
 {
 
-class server_impl
+class object_impl
 {
 	FCPPT_NONCOPYABLE(
-		server_impl
+		object_impl
 	);
 public:
-	explicit server_impl(
+	explicit object_impl(
 		boost::asio::io_service &
 	);
 
@@ -83,11 +86,17 @@ private:
 
 	connection_container connections_;
 
-	fcppt::signal::object<server::connect_fun> connect_signal_;
+	fcppt::signal::object<
+		server::connect_function
+	> connect_signal_;
 
-	fcppt::signal::object<server::disconnect_fun> disconnect_signal_;
+	fcppt::signal::object<
+		server::disconnect_function
+	> disconnect_signal_;
 
-	fcppt::signal::object<server::data_fun> data_signal_;
+	fcppt::signal::object<
+		server::data_function
+	> data_signal_;
 
 	void
 	accept();
@@ -116,6 +125,11 @@ private:
 		fcppt::string const &,
 		boost::system::error_code const &,
 		server::connection const &
+	);
+
+	void
+	send_data(
+		server::connection &
 	);
 };
 

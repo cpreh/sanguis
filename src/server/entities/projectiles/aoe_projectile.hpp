@@ -10,6 +10,7 @@
 #include "../../space_unit.hpp"
 #include "../../../messages/auto_ptr.hpp"
 #include "../../../aoe_projectile_type.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -24,6 +25,9 @@ class aoe_projectile
 :
 	public projectile
 {
+	FCPPT_NONCOPYABLE(
+		aoe_projectile
+	);
 protected:
 	aoe_projectile(
 		aoe_projectile_type::type,
@@ -35,6 +39,8 @@ protected:
 		space_unit aoe,
 		space_unit direction
 	);
+
+	~aoe_projectile();
 	
 	space_unit
 	aoe() const;

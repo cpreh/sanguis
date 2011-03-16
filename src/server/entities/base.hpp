@@ -32,7 +32,9 @@ class base
 	public collision::body,
 	public collision::base
 {
-	FCPPT_NONCOPYABLE(base)
+	FCPPT_NONCOPYABLE(
+		base
+	);
 protected:
 	base();
 

@@ -8,6 +8,7 @@
 #include "aoe.hpp"
 #include "magazine_size.hpp"
 #include "reload_time.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -20,8 +21,11 @@ class rocket_launcher
 :
 	public weapon
 {
+	FCPPT_NONCOPYABLE(
+		rocket_launcher
+	);
 public:
-	explicit rocket_launcher(
+	rocket_launcher(
 		weapon_type::type,
 		weapons::base_cooldown,
 		weapons::damage,
@@ -29,6 +33,8 @@ public:
 		weapons::magazine_size,
 		weapons::reload_time
 	);
+
+	~rocket_launcer();
 private:
 	void
 	do_attack(

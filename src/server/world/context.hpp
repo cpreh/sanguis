@@ -18,7 +18,9 @@ namespace world
 
 class context
 {
-	FCPPT_NONCOPYABLE(context)
+	FCPPT_NONCOPYABLE(
+		context
+	);
 protected:
 	context();
 public:

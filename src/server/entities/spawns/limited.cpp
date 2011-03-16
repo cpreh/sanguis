@@ -15,13 +15,14 @@ sanguis::server::entities::spawns::limited::limited(
 	diff_clock_(),
 	count_per_wave_(_count_per_wave),
 	delay_(
-		_interval,
+		_interval.get(),
 		sge::time::activation_state::active,
 		diff_clock_.callback()
 	),
 	spawned_(0),
 	limit_(_limit)
-{}
+{
+}
 
 void
 sanguis::server::entities::spawns::limited::unregister(
@@ -51,12 +52,12 @@ sanguis::server::entities::spawns::limited::may_spawn(
 				static_cast<
 					size_type
 				>(
-					limit_ - spawned_
+					limit_.get() - spawned_
 				),
 				static_cast<
 					size_type
 				>(
-					count_per_wave_
+					count_per_wave_.get()
 				)
 			)
 		:
