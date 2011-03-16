@@ -5,9 +5,10 @@
 #include "states/unpaused.hpp"
 #include "../time_type.hpp"
 #include "../tick_event.hpp"
-#include "../scoped_machine_impl.hpp"
 #include <sge/systems/instance.hpp>
 #include <sge/time/second.hpp>
+#include <awl/mainloop/asio/create_io_service_base.hpp>
+#include <awl/mainloop/io_service.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/exception.hpp>
@@ -15,28 +16,33 @@
 #include <cstdlib>
 
 sanguis::server::object::object(
-	sge::systems::instance const &sys,
-	net::port_type const port_,
-	load::context_base const &load_context
+	sge::systems::instance const &_sys,
+	net::port const _port,
+	load::context_base const &_load_context
 )
 :
+	io_service_(
+		awl::mainloop::asio::create_io_service_base()
+	),
 	frame_timer_(
 		sge::time::second(
 			1
 		)
 	),
 	machine_(
-		load_context,
-		sys.collision_system(),
-		port_
+		_load_context,
+		_sys.collision_system(),
+		_port,
+		*io_service_
 	),
 	timer_connection_(
-		machine_.net().register_timer(
+		// FIXME:!
+		/*machine_.net().register_timer(
 			std::tr1::bind(
 				&object::timer_callback,
 				this
 			)
-		)
+		)*/
 	),
 	running_(
 		true
@@ -57,7 +63,7 @@ sanguis::server::object::object(
 void
 sanguis::server::object::quit()
 {
-	reset_running();
+	this->reset_running();
 
 	machine_.stop();
 }
@@ -65,7 +71,7 @@ sanguis::server::object::quit()
 bool
 sanguis::server::object::running()
 {
-	boost::mutex::scoped_lock const lock_(
+	boost::mutex::scoped_lock const lock(
 		mutex_
 	);
 
@@ -73,12 +79,14 @@ sanguis::server::object::running()
 }
 
 sanguis::server::object::~object()
-{}
+{
+}
 
 int
 sanguis::server::object::run()
 {
 	server_thread_.join();
+
 	return EXIT_SUCCESS;
 }
 
@@ -87,21 +95,22 @@ sanguis::server::object::mainloop()
 {
 	try
 	{
-		while (running())
-			machine_.run();
+		// FIXME: use a deadline_timer here!
+		//while (running())
+		//	machine_.run();
 	}
 	catch(
-		fcppt::exception const &e
+		fcppt::exception const &_exception
 	)
 	{
 		FCPPT_LOG_ERROR(
-			log(),
+			server::log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("Error in server thread: ")
-				<< e.string()
+				<< _exception.string()
 		);
 
-		reset_running();
+		this->reset_running();
 	}
 }
 
@@ -109,7 +118,7 @@ void
 sanguis::server::object::timer_callback()
 {
 	machine_.process(
-		tick_event(
+		sanguis::tick_event(
 			static_cast<
 				time_type
 			>(
@@ -122,7 +131,7 @@ sanguis::server::object::timer_callback()
 void
 sanguis::server::object::reset_running()
 {
-	boost::mutex::scoped_lock const lock_(
+	boost::mutex::scoped_lock const lock(
 		mutex_
 	);
 		

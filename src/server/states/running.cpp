@@ -9,7 +9,6 @@
 #include "../../connect_state.hpp"
 #include "../../messages/call/object.hpp"
 #include "../../messages/serialization/convert_string_vector.hpp"
-#include "../../messages/highscore.hpp"
 #include "../../messages/create.hpp"
 #include "../../cast_enum.hpp"
 #include "../../tick_event.hpp"
@@ -19,18 +18,22 @@
 #include <fcppt/log/headers.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/utf8/convert.hpp>
-#include <fcppt/text.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/exception.hpp>
+#include <fcppt/ref.hpp>
+#include <fcppt/text.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <boost/foreach.hpp>
 #include <algorithm>
 #include <ostream>
 
 sanguis::server::states::running::running(
-	my_context ctx
+	my_context _ctx
 )
 :
-	my_base(ctx),
+	my_base(
+		_ctx
+	),
 	console_(
 		server::make_send_callback(
 			context<machine>()
@@ -40,18 +43,22 @@ sanguis::server::states::running::running(
 		)
 	),
 	global_context_(
-		new global::context(
+		fcppt::make_unique_ptr<
+			global::context
+		>(
 			server::make_unicast_callback(
 				context<machine>()
 			),
 			context<machine>().collision_system(),
 			context<machine>().resources(),
-			console_
+			fcppt::ref(
+				console_
+			)
 		)
 	)
 {
 	FCPPT_LOG_DEBUG(
-		log(),
+		running::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("constructor, listening")
 	);
@@ -60,11 +67,12 @@ sanguis::server::states::running::running(
 }
 
 sanguis::server::states::running::~running()
-{}
+{
+}
 
 boost::statechart::result
 sanguis::server::states::running::react(
-	message_event const &m
+	message_event const &_message
 )
 {
 	typedef message_functor<
@@ -72,9 +80,9 @@ sanguis::server::states::running::react(
 		boost::statechart::result
 	> functor_type;
 	
-	functor_type mf(
+	functor_type functor(
 		*this,
-		m.id()
+		_message.id()
 	);
 
 	static messages::call::object<
@@ -89,29 +97,30 @@ sanguis::server::states::running::react(
 		functor_type
 	> dispatcher;
 
-	return dispatcher(
-		*m.message(),
-		mf,
-		std::tr1::bind(
-			&running::handle_default_msg,
-			this,
-			m.id(),
-			std::tr1::placeholders::_1
-		)
-	);
+	return
+		dispatcher(
+			*_message.message(),
+			functor,
+			std::tr1::bind(
+				&running::handle_default_msg,
+				this,
+				_message.id(),
+				std::tr1::placeholders::_1
+			)
+		);
 }
 
 boost::statechart::result
 sanguis::server::states::running::operator()(
-	net::id_type const net_id,
-	messages::client_info const &m
+	net::id const _id,
+	messages::client_info const &_message
 )
 {
 	global_context_->insert_player(
 		0, // FIXME: which world id?
-		net_id,
+		_id,
 		fcppt::utf8::convert(
-			m.get<
+			_message.get<
 				messages::string
 			>()
 		),
@@ -129,15 +138,15 @@ sanguis::server::states::running::operator()(
 
 boost::statechart::result
 sanguis::server::states::running::operator()(
-	net::id_type const id,
+	net::id const _id,
 	messages::connect const &
 )
 {
 	FCPPT_LOG_INFO(
-		log(),
+		running::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("client ")
-			<< id
+			<< _id
 			<< FCPPT_TEXT(" connected")
 	);
 
@@ -146,13 +155,13 @@ sanguis::server::states::running::operator()(
 
 boost::statechart::result
 sanguis::server::states::running::operator()(
-	net::id_type const _id,
-	messages::console_command const &_msg
+	net::id const _id,
+	messages::console_command const &_message
 )
 {
 	sanguis::string_vector const command(
 		messages::serialization::convert_string_vector(
-			_msg.get<
+			_message.get<
 				messages::string_vector
 			>()
 		)
@@ -164,7 +173,7 @@ sanguis::server::states::running::operator()(
 		return discard_event();
 
 	FCPPT_LOG_DEBUG(
-		log(),
+		running::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("Received console command: ")
 			<< command[0]
@@ -180,13 +189,13 @@ sanguis::server::states::running::operator()(
 		);
 	}
 	catch(
-		fcppt::exception const &error
+		fcppt::exception const &_error
 	)
 	{
 		FCPPT_LOG_ERROR(
-			log(),
+			running::log(),
 			fcppt::log::_
-				<< error.string()
+				<< _error.string()
 		);
 	}
 		
@@ -195,20 +204,20 @@ sanguis::server::states::running::operator()(
 
 boost::statechart::result
 sanguis::server::states::running::operator()(
-	net::id_type const id,
+	net::id const _id,
 	messages::disconnect const &
 )
 {
 	FCPPT_LOG_INFO(
-		log(),
+		running::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("client with id ")
-			<< id
+			<< _id
 			<< FCPPT_TEXT(" disconnected")
 	);
 
 	global_context_->player_disconnect(
-		id
+		_id
 	);
 
 	return discard_event();
@@ -216,15 +225,15 @@ sanguis::server::states::running::operator()(
 
 boost::statechart::result
 sanguis::server::states::running::operator()(
-	net::id_type const id,
-	messages::player_cheat const &p
+	net::id const _id,
+	messages::player_cheat const &_message
 )
 {
 	global_context_->player_cheat(
-		id,
+		_id,
 		SANGUIS_CAST_ENUM(
 			cheat_type,
-			p.get<
+			_message.get<
 				messages::roles::cheat
 			>()
 		)
@@ -235,15 +244,15 @@ sanguis::server::states::running::operator()(
 
 boost::statechart::result
 sanguis::server::states::running::operator()(
-	net::id_type const id,
-	messages::player_choose_perk const &p
+	net::id const _id,
+	messages::player_choose_perk const &_message
 )
 {
 	global_context_->player_choose_perk(
-		id,
+		_id,
 		SANGUIS_CAST_ENUM(
 			perk_type,
-			p.get<
+			_message.get<
 				messages::roles::perk
 			>()
 		)
@@ -260,7 +269,7 @@ sanguis::server::states::running::global_context()
 
 boost::statechart::result
 sanguis::server::states::running::handle_default_msg(
-	net::id_type const,
+	net::id const,
 	messages::base const &
 )
 {

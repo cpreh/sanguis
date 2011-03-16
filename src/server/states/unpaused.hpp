@@ -12,9 +12,8 @@
 #include "../../messages/player_unpause.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../messages/base_fwd.hpp"
-#include "../../net/id_type.hpp"
+#include "../../net/id.hpp"
 #include "running.hpp"
-#include <sge/time/timer.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <boost/mpl/list.hpp>
 #include <boost/statechart/simple_state.hpp>
@@ -35,6 +34,9 @@ class unpaused
 		running
 	>
 {
+	FCPPT_NONCOPYABLE(
+		unpaused
+	);
 public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<
@@ -47,65 +49,74 @@ public:
 	
 	unpaused();
 
-	void add_enemy();
+	~unpaused();
 
 	boost::statechart::result
 	react(
-		tick_event const &);
+		tick_event const &
+	);
 
 	boost::statechart::result
 	react(
-		message_event const &);
+		message_event const &
+	);
 
 	boost::statechart::result
 	operator()(
-		net::id_type,
-		messages::player_attack_dest const &);
+		net::id,
+		messages::player_attack_dest const &
+	);
 
 	boost::statechart::result
 	operator()(
-		net::id_type,
-		messages::player_direction const &);
+		net::id,
+		messages::player_direction const &
+	);
 	
 	boost::statechart::result
 	operator()(
-		net::id_type,
-		messages::player_rotation const &);
+		net::id,
+		messages::player_rotation const &
+	);
 	
 	boost::statechart::result
 	operator()(
-		net::id_type,
-		messages::player_start_shooting const &);
+		net::id,
+		messages::player_start_shooting const &
+	);
 	
 	boost::statechart::result
 	operator()(
-		net::id_type,
-		messages::player_stop_shooting const &);
+		net::id,
+		messages::player_stop_shooting const &
+	);
 	
 	boost::statechart::result
 	operator()(
-		net::id_type,
-		messages::player_change_weapon const &);
+		net::id,
+		messages::player_change_weapon const &
+	);
 
 	boost::statechart::result
 	operator()(
-		net::id_type,
-		messages::player_unpause const &);
+		net::id,
+		messages::player_unpause const &
+	);
 
 	boost::statechart::result
 	operator()(
-		net::id_type,
-		messages::player_pause const &);
+		net::id,
+		messages::player_pause const &
+	);
 private:
 	boost::statechart::result
 	handle_default_msg(
-		net::id_type,
+		net::id,
 		messages::base const &
 	);
 	
-	static fcppt::log::object &log();
-
-	sge::time::timer send_timer;
+	static fcppt::log::object &
+	log();
 };
 
 }

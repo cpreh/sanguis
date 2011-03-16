@@ -47,7 +47,7 @@ private:
 
 	diff_clock clock_;
 
-	sge::time::timer shoot_timer;
+	sge::time::timer shoot_timer_;
 
 	fcppt::random::uniform<space_unit> rand_;
 };

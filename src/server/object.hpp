@@ -11,6 +11,7 @@
 #include <fcppt/thread/object.hpp>
 #include <fcppt/scoped_state_machine.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <awl/mainloop/io_service_scoped_ptr.hpp>
 #include <boost/thread/thread.hpp>
 
 namespace sanguis
@@ -52,6 +53,8 @@ private:
 
 	void
 	reset_running();
+
+	awl::mainloop::io_service_scoped_ptr const io_service_;
 
 	sge::time::timer frame_timer_;
 

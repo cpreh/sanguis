@@ -34,7 +34,7 @@ public:
 		weapons::reload_time
 	);
 
-	~rocket_launcer();
+	~rocket_launcher();
 private:
 	void
 	do_attack(

@@ -164,7 +164,7 @@ private:
 
 	magazine_type magazine_used_;
 
-	weapons::magazine_count magazine_count_;
+	weapons::magazine_count::value_type magazine_count_;
 
 	weapons::magazine_size const magazine_size_;
 

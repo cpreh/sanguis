@@ -1,15 +1,15 @@
 #include "net_id_from_args.hpp"
 #include <fcppt/lexical_cast.hpp>
 
-sanguis::net::id_type
+sanguis::net::id
 sanguis::server::net_id_from_args(
-	sge::console::arg_list const &args_
+	sge::console::arg_list const &_args
 )
 {
 	return
 		fcppt::lexical_cast<
-			net::id_type
+			net::id
 		>(
-			args_.back()
+			_args.back()
 		);
 }

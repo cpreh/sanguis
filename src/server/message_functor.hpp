@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_MESSAGE_FUNCTOR_HPP_INCLUDED
 #define SANGUIS_SERVER_MESSAGE_FUNCTOR_HPP_INCLUDED
 
-#include "../net/id_type.hpp"
+#include "../net/id.hpp"
 #include <fcppt/nonassignable.hpp>
 
 namespace sanguis
@@ -17,18 +17,19 @@ class message_functor
 {
 	FCPPT_NONASSIGNABLE(
 		message_functor
-	)
+	);
 public:
 	typedef R result_type;
 
 	message_functor(
 		T &_value,
-		sanguis::net::id_type const _id
+		sanguis::net::id const _id
 	)
 	:
 		value_(_value),
 		id_(_id)
-	{}
+	{
+	}
 
 	template<
 		typename U
@@ -38,16 +39,17 @@ public:
 		U const &_message
 	) const
 	{
-		return value_(
-			id_,
-			_message
-		);
+		return
+			value_(
+				id_,
+				_message
+			);
 	}
 
 private:
 	T &value_;
 
-	sanguis::net::id_type const id_;
+	sanguis::net::id const id_;
 };
 
 }

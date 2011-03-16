@@ -25,7 +25,7 @@ class shoot
 {
 	FCPPT_NONASSIGNABLE(
 		shoot
-	)
+	);
 public:
 	shoot(
 		entities::with_weapon &from,

@@ -16,17 +16,26 @@
 #include <boost/mpl/vector/vector10.hpp>
 #include <ostream>
 
+sanguis::server::states::paused::paused()
+{
+}
+
+sanguis::server::states::paused::~paused()
+{
+}
+
 // reactions
 boost::statechart::result
 sanguis::server::states::paused::react(
-	tick_event const &)
+	tick_event const &
+)
 {
 	return discard_event();
 }
 
 boost::statechart::result
 sanguis::server::states::paused::react(
-	message_event const &m
+	message_event const &_message
 )
 {
 	typedef message_functor<
@@ -34,9 +43,9 @@ sanguis::server::states::paused::react(
 		boost::statechart::result
 	> functor_type;
 	
-	functor_type mf(
+	functor_type functor(
 		*this,
-		m.id()
+		_message.id()
 	);
 
 	static messages::call::object<
@@ -47,21 +56,22 @@ sanguis::server::states::paused::react(
 		functor_type
 	> dispatcher;
 	
-	return dispatcher(
-		*m.message(),
-		mf,
-		std::tr1::bind(
-			&paused::handle_default_msg,
-			this,
-			m.id(),
-			std::tr1::placeholders::_1
-		)
-	);
+	return
+		dispatcher(
+			*_message.message(),
+			functor,
+			std::tr1::bind(
+				&paused::handle_default_msg,
+				this,
+				_message.id(),
+				std::tr1::placeholders::_1
+			)
+		);
 }
 
 boost::statechart::result
 sanguis::server::states::paused::operator()(
-	net::id_type,
+	net::id,
 	messages::player_unpause const &
 )
 {
@@ -76,20 +86,24 @@ sanguis::server::states::paused::operator()(
 
 boost::statechart::result
 sanguis::server::states::paused::operator()(
-	net::id_type,
-	messages::player_pause const &)
+	net::id,
+	messages::player_pause const &
+)
 {
 	FCPPT_LOG_WARNING(
 		log(),
 		fcppt::log::_
-			<< FCPPT_TEXT("got superfluous pause"));;
+			<< FCPPT_TEXT("got superfluous pause")
+	);
+
 	return discard_event();
 }
 
 boost::statechart::result
 sanguis::server::states::paused::handle_default_msg(
-	net::id_type,
-	messages::base const &)
+	net::id,
+	messages::base const &
+)
 {
 	return forward_event();
 }
@@ -97,11 +111,12 @@ sanguis::server::states::paused::handle_default_msg(
 fcppt::log::object &
 sanguis::server::states::paused::log()
 {
-	static fcppt::log::object log_(
+	static fcppt::log::object my_logger(
 		fcppt::log::parameters::inherited(
 			server::log(),
 			FCPPT_TEXT("paused")
 		)
 	);
-	return log_;
+
+	return my_logger;
 }

@@ -8,7 +8,7 @@
 #include "../../messages/pause.hpp"
 #include "../../messages/base.hpp"
 #include "../../messages/create.hpp"
-#include "../../exception.hpp"
+#include "../../cast_enum.hpp"
 #include "../../tick_event.hpp"
 #include <sge/collision/world.hpp>
 #include <sge/time/second_f.hpp>
@@ -28,17 +28,12 @@
 #include <ostream>
 
 sanguis::server::states::unpaused::unpaused()
-:
-	send_timer(
-		sge::time::second_f(
-			static_cast<sge::time::funit>(0.5)
-		)
-	)
-{}
+{
+}
 
 boost::statechart::result
 sanguis::server::states::unpaused::handle_default_msg(
-	net::id_type,
+	net::id,
 	messages::base const &
 )
 {
@@ -47,15 +42,15 @@ sanguis::server::states::unpaused::handle_default_msg(
 
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
-	net::id_type const id,
-	messages::player_attack_dest const &e
+	net::id const _id,
+	messages::player_attack_dest const &_message
 )
 {
 	context<
 		running
 	>().global_context().player_target(
-		id,
-		e.get<
+		_id,
+		_message.get<
 			messages::roles::attack_dest
 		>()
 	);
@@ -65,28 +60,20 @@ sanguis::server::states::unpaused::operator()(
 
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
-	net::id_type const id,
-	messages::player_change_weapon const &e
+	net::id const _id,
+	messages::player_change_weapon const &_message
 )
 {
-	weapon_type::type const wt(
-		static_cast<
-			weapon_type::type
-		>(
-			e.get<messages::roles::weapon>()
-		)
-	);
-
-	if (wt > weapon_type::size)
-		throw exception(
-			FCPPT_TEXT("got invalid weapon type in player_change_weapon")
-		);
-
 	context<
 		running
 	>().global_context().player_change_weapon(
-		id,
-		wt
+		_id,
+		SANGUIS_CAST_ENUM(
+			weapon_type,
+			_message.get<
+				messages::roles::weapon
+			>()
+		)
 	);
 
 	return discard_event();
@@ -94,15 +81,15 @@ sanguis::server::states::unpaused::operator()(
 
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
-	net::id_type const id,
-	messages::player_rotation const &e
+	net::id const _id,
+	messages::player_rotation const &_message
 )
 {
 	context<
 		running
 	>().global_context().player_angle(
-		id,
-		e.get<messages::roles::angle>()
+		_id,
+		_message.get<messages::roles::angle>()
 	);
 
 	return discard_event();
@@ -110,14 +97,14 @@ sanguis::server::states::unpaused::operator()(
 
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
-	net::id_type const id,
+	net::id const _id,
 	messages::player_start_shooting const &
 )
 {
 	context<
 		running
 	>().global_context().player_change_shooting(
-		id,
+		_id,
 		true
 	);
 
@@ -126,14 +113,14 @@ sanguis::server::states::unpaused::operator()(
 
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
-	net::id_type const id,
+	net::id const _id,
 	messages::player_stop_shooting const &
 )
 {
 	context<
 		running
 	>().global_context().player_change_shooting(
-		id,
+		_id,
 		false
 	);
 
@@ -142,15 +129,15 @@ sanguis::server::states::unpaused::operator()(
 
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
-	net::id_type const id,
-	messages::player_direction const &e
+	net::id const _id,
+	messages::player_direction const &_message
 )
 {
 	context<
 		running
 	>().global_context().player_direction(
-		id,
-		e.get<
+		_id,
+		_message.get<
 			messages::roles::direction
 		>()
 	);
@@ -160,12 +147,12 @@ sanguis::server::states::unpaused::operator()(
 
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
-	net::id_type,
+	net::id,
 	messages::player_unpause const &
 )
 {
 	FCPPT_LOG_WARNING(
-		log(),
+		unpaused::log(),
 		fcppt::log::_ 
 			<< FCPPT_TEXT("received superfluous unpause!")
 	);
@@ -175,7 +162,7 @@ sanguis::server::states::unpaused::operator()(
 
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
-	net::id_type,
+	net::id,
 	messages::player_pause const &
 )
 {
@@ -214,7 +201,7 @@ sanguis::server::states::unpaused::react(
 
 boost::statechart::result
 sanguis::server::states::unpaused::react(
-	message_event const &m
+	message_event const &_message
 )
 {
 	typedef message_functor<
@@ -222,9 +209,9 @@ sanguis::server::states::unpaused::react(
 		boost::statechart::result
 	> functor_type;
 	
-	functor_type mf(
+	functor_type functor(
 		*this,
-		m.id()
+		_message.id()
 	);
 
 	static messages::call::object<
@@ -241,27 +228,28 @@ sanguis::server::states::unpaused::react(
 		functor_type
 	> dispatcher;
 
-	return dispatcher(
-		*m.message(),
-		mf,
-		std::tr1::bind(
-			&unpaused::handle_default_msg,
-			this,
-			m.id(),
-			std::tr1::placeholders::_1
-		)
-	);
+	return
+		dispatcher(
+			*_message.message(),
+			functor,
+			std::tr1::bind(
+				&unpaused::handle_default_msg,
+				this,
+				_message.id(),
+				std::tr1::placeholders::_1
+			)
+		);
 }
 
 fcppt::log::object &
 sanguis::server::states::unpaused::log()
 {
-	static fcppt::log::object log_(
+	static fcppt::log::object my_logger(
 		fcppt::log::parameters::inherited(
 			server::log(),
 			FCPPT_TEXT("unpaused")
 		)
 	);
 
-	return log_;
+	return my_logger;
 }

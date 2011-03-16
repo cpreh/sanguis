@@ -14,7 +14,7 @@ sanguis::server::perks::choleric::choleric()
 		perk_type::choleric
 	),
 	clock_(),
-	shoot_timer(
+	shoot_timer_(
 		sge::time::second_f(
 			5.f
 		),
@@ -22,30 +22,37 @@ sanguis::server::perks::choleric::choleric()
 		clock_.callback(),
 		sge::time::expiration_state::not_expired
 	),
-	rand(
+	rand_(
 		fcppt::random::make_inclusive_range(
 			static_cast<space_unit>(0),
 			fcppt::math::twopi<space_unit>()
 		)
 	)
-{}
+{
+}
 
 void
 sanguis::server::perks::choleric::update(
-	entities::base &e,
-	time_type const time,
-	environment::object_ptr const env
+	entities::base &_entity,
+	time_type const _time,
+	environment::object_ptr const _env
 )
 {
-	clock_.update(time);
+	clock_.update(
+		_time
+	);
 
-	if(!shoot_timer.update_b())
+	if(
+		!shoot_timer_.update_b()
+	)
 		return;
 
 	unsigned const max(
-		can_raise_level()
-		? 3 + level() * 2
-		: 10
+		this->can_raise_level()
+		?
+			3 + this->level() * 2
+		:
+			10
 	);
 
 	for(
@@ -58,15 +65,15 @@ sanguis::server::perks::choleric::update(
 			rand()
 		);
 
-		env->insert(
-			can_raise_level()
+		_env->insert(
+			this->can_raise_level()
 			?
 				entities::unique_ptr(
 					fcppt::make_unique_ptr<
 						entities::projectiles::simple_bullet
 					>(
-						env->load_context(),
-						e.team(),
+						_env->load_context(),
+						_entity.team(),
 						damage::unit(2), // damage
 						angle
 					)
@@ -76,8 +83,8 @@ sanguis::server::perks::choleric::update(
 					fcppt::make_unique_ptr<
 						entities::projectiles::rocket
 					>(
-						env->load_context(),
-						e.team(),
+						_env->load_context(),
+						_entity.team(),
 						damage::unit(5), // damage
 						static_cast<space_unit>(80), // aoe
 						angle
@@ -85,7 +92,7 @@ sanguis::server::perks::choleric::update(
 				)
 			,
 			entities::insert_parameters(
-				e.center(),
+				_entity.center(),
 				angle
 			)
 		);
@@ -103,4 +110,5 @@ sanguis::server::perks::choleric::change(
 	entities::base &,
 	level_diff
 )
-{}
+{
+}

@@ -130,7 +130,12 @@ sanguis::server::perks::tree::choosable(
 
 	if(
 		it->value().required_player_level()
-		> static_cast<level_type>(player_level)
+		>
+		static_cast<
+			level_type
+		>(
+			_player_level.get()
+		)
 	)
 		return false;
 
@@ -204,7 +209,7 @@ sanguis::server::perks::tree::choosables(
 		if(
 			this->choosable(
 				perk,
-				player_level
+				_player_level
 			)
 		)
 			ret.push_back(

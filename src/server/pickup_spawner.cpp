@@ -18,14 +18,14 @@ sanguis::server::pickup_spawner::pickup_spawner(
 	environment::object_ptr const _env
 )
 :
-	env(_env),
-	spawn_prob(
+	env_(_env),
+	spawn_prob_(
 		fcppt::random::make_inclusive_range(
 			static_cast<probability_type>(0),
 			static_cast<probability_type>(1)
 		)
 	),
-	rng(
+	rng_(
 		fcppt::assign::make_container<
 			fcppt::random::actor::container
 		>(
@@ -97,46 +97,49 @@ sanguis::server::pickup_spawner::pickup_spawner(
 			)
 		)
 	),
-	pos(
+	pos_(
 		pos_type::null()
 	)
-{}
+{
+}
 
 sanguis::server::pickup_spawner::~pickup_spawner()
-{}
+{
+}
 
 void
 sanguis::server::pickup_spawner::spawn(
-	probability_type const prob,
-	pos_type const &npos
+	probability_type const _prob,
+	pos_type const &_pos
 )
 {
 	if(
-		spawn_prob()
-		> prob
+		spawn_prob_()
+		> _prob
 	)
 		return;
 	
 	// TODO: this is really ugly! :(
-	pos = npos;
-	rng();
+	pos_ = _pos;
+
+	rng_();
 }
 
 void
 sanguis::server::pickup_spawner::spawn_health()
 {
-	env->insert(
+	env_->insert(
 		entities::unique_ptr(
 			fcppt::make_unique_ptr<
 				entities::pickups::health
 			>(
-				env->load_context(),
+				env_->load_context(),
 				team::players,
 				entities::health_type(10) // FIXME: which health value to use?
 			)
 		),
 		entities::insert_parameters_pos(
-			pos
+			pos_
 		)
 	);
 }
@@ -144,39 +147,39 @@ sanguis::server::pickup_spawner::spawn_health()
 void
 sanguis::server::pickup_spawner::spawn_monster()
 {
-	env->insert(
+	env_->insert(
 		entities::unique_ptr(
 			fcppt::make_unique_ptr<
 				entities::pickups::monster
 			>(
-				env->load_context(),
+				env_->load_context(),
 				team::players,
 				friend_type::spider
 			)
 		),
 		entities::insert_parameters_pos(
-			pos
+			pos_
 		)
 	);
 }
 
 void
 sanguis::server::pickup_spawner::spawn_weapon(
-	weapon_type::type const wtype
+	weapon_type::type const _wtype
 )
 {
-	env->insert(
+	env_->insert(
 		entities::unique_ptr(
 			fcppt::make_unique_ptr<
 				entities::pickups::weapon
 			>(
-				env->load_context(),
+				env_->load_context(),
 				team::players,
-				wtype
+				_wtype
 			)
 		),
 		entities::insert_parameters_pos(
-			pos
+			pos_
 		)
 	);
 }

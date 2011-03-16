@@ -22,7 +22,8 @@
 sanguis::server::machine::machine(
 	load::context_base const &_resources,
 	sge::collision::system_ptr const _collision,
-	net::port_type const _port
+	net::port const _port,
+	awl::mainloop::io_service &_io_service
 )
 :
 	resources_(
@@ -32,9 +33,7 @@ sanguis::server::machine::machine(
 		_port
 	),
 	net_(
-		net::server::time_resolution(
-			16
-		)
+		_io_service
 	),
 	temp_buffer_(),
 	s_conn_(
@@ -86,12 +85,6 @@ sanguis::server::machine::process(
 }
 
 void
-sanguis::server::machine::run()
-{
-	net_.run();
-}
-
-void
 sanguis::server::machine::stop()
 {
 	net_.stop();
@@ -107,13 +100,13 @@ sanguis::server::machine::listen()
 
 void
 sanguis::server::machine::connect_callback(
-	net::id_type const _id
+	net::id const _id
 )
 {
 	if(
 		!clients_.insert(
 			_id
-		)
+		).second
 	)
 		throw sanguis::exception(
 			FCPPT_TEXT("Client inserted twice in server!")
@@ -131,7 +124,7 @@ sanguis::server::machine::connect_callback(
 
 void
 sanguis::server::machine::disconnect_callback(
-	net::id_type const _id,
+	net::id const _id,
 	fcppt::string const &
 )
 {
@@ -151,13 +144,13 @@ sanguis::server::machine::disconnect_callback(
 
 void
 sanguis::server::machine::process_message(
-	net::id_type const _id,
-	messages::auto_ptr _m
+	net::id const _id,
+	messages::auto_ptr _message
 )
 {
 	process_event(
 		message_event(
-			_m,
+			_message,
 			_id
 		)
 	);
@@ -165,8 +158,8 @@ sanguis::server::machine::process_message(
 
 void
 sanguis::server::machine::data_callback(
-	net::id_type const _id,
-	net::data_type &_data
+	net::id const _id,
+	net::data_buffer &_data
 )
 {
 	for(;;)
@@ -210,14 +203,14 @@ sanguis::server::machine::send_to_all(
 	temp_buffer_.clear();
 }
 
-sanguis::net::port_type
+sanguis::net::port
 sanguis::server::machine::port() const
 {
 	return 
 		port_;
 }
 
-sanguis::net::server &
+sanguis::net::server::object &
 sanguis::server::machine::net()
 {
 	return 
@@ -240,7 +233,7 @@ sanguis::server::machine::collision_system() const
 
 void
 sanguis::server::machine::send_unicast(
-	net::id_type const _id,
+	net::id const _id,
 	messages::auto_ptr _message
 )
 try

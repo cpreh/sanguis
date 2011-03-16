@@ -354,7 +354,7 @@ sanguis::server::world::object::exp_changed(
 				static_cast<
 					sanguis::messages::types::exp
 				>(
-					_exp
+					_exp.get()
 				)
 			)
 		)
@@ -373,7 +373,7 @@ sanguis::server::world::object::level_changed(
 		messages::create(
 			messages::level_up(
 				_entity_id,
-				_level
+				_level.get()
 			)
 		)
 	);

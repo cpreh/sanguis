@@ -15,6 +15,7 @@
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
+#include <awl/mainloop/io_service_fwd.hpp>
 #include <boost/statechart/state_machine.hpp>
 #include <set>
 
@@ -37,7 +38,8 @@ public:
 	machine(
 		load::context_base const &,
 		sge::collision::system_ptr,
-		net::port
+		net::port,
+		awl::mainloop::io_service &
 	);
 
 	~machine();
@@ -67,7 +69,7 @@ public:
 	void
 	data_callback(
 		net::id,
-		net::data_buffer const &
+		net::data_buffer &
 	);
 
 	void
@@ -80,9 +82,6 @@ public:
 
 	net::server::object &
 	net();
-
-	void 
-	run();
 
 	void 
 	stop();

@@ -45,7 +45,7 @@ sanguis::server::weapons::rocket_launcher::do_attack(
 				server::damage::unit(
 					damage_
 				),
-				aoe_,
+				aoe_.get(),
 				_attack.angle()
 			)
 		),

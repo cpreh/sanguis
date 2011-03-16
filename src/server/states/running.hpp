@@ -13,8 +13,9 @@
 #include "../../messages/player_cheat.hpp"
 #include "../../messages/player_choose_perk.hpp"
 #include "../../messages/base_fwd.hpp"
-#include "../../net/id_type.hpp"
+#include "../../net/id.hpp"
 #include <fcppt/log/object_fwd.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/result.hpp>
@@ -35,6 +36,9 @@ class running
 		unpaused
 >
 {
+	FCPPT_NONCOPYABLE(
+		running
+	);
 public:
 	typedef boost::statechart::custom_reaction<
 		message_event
@@ -53,37 +57,37 @@ public:
 	
 	boost::statechart::result
 	operator()(
-		net::id_type,
+		net::id,
 		messages::client_info const &
 	);
 
 	boost::statechart::result
 	operator()(
-		net::id_type,
+		net::id,
 		messages::connect const &
 	);
 
 	boost::statechart::result
 	operator()(
-		net::id_type,
+		net::id,
 		messages::console_command const &
 	);
 
 	boost::statechart::result
 	operator()(
-		net::id_type,
+		net::id,
 		messages::disconnect const &
 	);
 
 	boost::statechart::result
 	operator()(
-		net::id_type,
+		net::id,
 		messages::player_cheat const &
 	);
 
 	boost::statechart::result
 	operator()(
-		net::id_type,
+		net::id,
 		messages::player_choose_perk const &
 	);
 
@@ -92,7 +96,7 @@ public:
 private:
 	boost::statechart::result
 	handle_default_msg(
-		net::id_type,
+		net::id,
 		messages::base const &
 	);
 

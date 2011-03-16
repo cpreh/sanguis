@@ -25,7 +25,8 @@ sanguis::server::weapons::grenade::grenade(
 	),
 	damage_(_damage),
 	aoe_(_aoe)
-{}
+{
+}
 
 void
 sanguis::server::weapons::grenade::do_attack(
@@ -42,7 +43,7 @@ sanguis::server::weapons::grenade::do_attack(
 				server::damage::unit(
 					damage_
 				),
-				aoe_,
+				aoe_.get(),
 				_attack.dest(),
 				_attack.angle()
 			)

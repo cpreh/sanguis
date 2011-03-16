@@ -24,7 +24,7 @@ class poll
 {
 	FCPPT_NONASSIGNABLE(
 		poll
-	)
+	);
 public:
 	poll(
 		time_type,

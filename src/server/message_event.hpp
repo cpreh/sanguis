@@ -3,7 +3,7 @@
 
 #include "../messages/auto_ptr.hpp"
 #include "../messages/shared_ptr.hpp"
-#include "../net/id_type.hpp"
+#include "../net/id.hpp"
 #include <fcppt/nonassignable.hpp>
 #include <boost/statechart/event.hpp>
 
@@ -20,11 +20,11 @@ class message_event
 {
 	FCPPT_NONASSIGNABLE(
 		message_event
-	)
+	);
 public:
 	message_event(
-		messages::auto_ptr message,
-		net::id_type id
+		messages::auto_ptr,
+		net::id
 	);
 	
 	~message_event();
@@ -32,11 +32,12 @@ public:
 	messages::shared_ptr const
 	message() const;
 
-	net::id_type
+	net::id
 	id() const;
 private:
 	messages::shared_ptr const message_;
-	net::id_type const id_;
+
+	net::id const id_;
 };
 
 }

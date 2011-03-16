@@ -3,7 +3,7 @@
 
 sanguis::server::message_event::message_event(
 	messages::auto_ptr _message,
-	net::id_type const _id
+	net::id const _id
 )
 :
 	message_(
@@ -13,7 +13,8 @@ sanguis::server::message_event::message_event(
 {}
 
 sanguis::server::message_event::~message_event()
-{}
+{
+}
 
 sanguis::messages::shared_ptr const
 sanguis::server::message_event::message() const
@@ -21,7 +22,7 @@ sanguis::server::message_event::message() const
 	return message_;
 }
 
-sanguis::net::id_type
+sanguis::net::id
 sanguis::server::message_event::id() const
 {
 	return id_;

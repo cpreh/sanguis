@@ -24,7 +24,7 @@ class health
 public:
 	health();
 
-	~healt();
+	~health();
 private:
 	void
 	change(

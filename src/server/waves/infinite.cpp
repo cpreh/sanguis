@@ -16,7 +16,7 @@ sanguis::server::waves::infinite::infinite(
 	diff_clock_(),
 	delay_time_(
 		sge::time::second(
-			_delay
+			_delay.get()
 		),
 		sge::time::activation_state::active,
 		diff_clock_.callback()
@@ -24,10 +24,12 @@ sanguis::server::waves::infinite::infinite(
 	spawn_interval_(_spawn_interval),
 	spawns_per_wave_(_spawns_per_wave),
 	etype_(_etype)
-{}
+{
+}
 
 sanguis::server::waves::infinite::~infinite()
-{}
+{
+}
 
 void
 sanguis::server::waves::infinite::process(
@@ -55,11 +57,11 @@ sanguis::server::waves::infinite::process(
 				>(
 					etype_,
 					entities::spawns::count_per_wave(
-						spawns_per_wave_
+						spawns_per_wave_.get()
 					),
 					entities::spawns::interval(
 						sge::time::second(
-							spawn_interval_
+							spawn_interval_.get()
 						)
 					),
 					entities::spawns::limit(

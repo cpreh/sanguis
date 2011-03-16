@@ -19,6 +19,7 @@
 #include <fcppt/log/global.hpp>
 #include <fcppt/log/level.hpp>
 #include <fcppt/exception.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <fcppt/text.hpp>
 
@@ -114,16 +115,18 @@ try
 
 	typedef fcppt::scoped_ptr<
 		sanguis::load::context_base
-	> server_context_;
+	> server_context;
 
-	server_context_ context_;
+	server_context context;
 
 	// TODO: ugly!
 	if(
 		server_only
 	)
-		context_.reset(
-			new sanguis::load::server_context()
+		context.take(
+			fcppt::make_unique_ptr<
+				sanguis::load::server_context
+			>()
 		);
 	
 	typedef fcppt::scoped_ptr<
@@ -136,7 +139,7 @@ try
 			sanguis::server::create(
 				sys,
 				vm,
-				*context_
+				*context
 			)
 		:
 			sanguis::client::create(

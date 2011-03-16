@@ -6,8 +6,9 @@ sanguis::server::waves::single::single(
 )
 :
 	etype_(_etype),
-	spawned(false)
-{}
+	spawned_(false)
+{
+}
 
 void
 sanguis::server::waves::single::process(
@@ -16,18 +17,17 @@ sanguis::server::waves::single::process(
 	environment::load_context_ptr const _load_context
 )
 {
-	spawn(
+	waves::spawn(
 		_env,
 		_load_context,
 		etype_
 	);
 
-	spawned = true;
+	spawned_ = true;
 }
 
 bool
 sanguis::server::waves::single::ended() const
 {
-	return spawned;
+	return spawned_;
 }
-
