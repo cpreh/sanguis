@@ -1,5 +1,7 @@
 #include "object.hpp"
+#include "../object.hpp"
 #include "../../log.hpp"
+#include "../../../media_path.hpp"
 //#include <sge/font/text/from_fcppt_string.hpp>
 //#include <sge/font/text/to_fcppt_string.hpp>
 //#include <fcppt/assign/make_container.hpp>
@@ -8,6 +10,9 @@
 #include <fcppt/log/headers.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
+#include <CEGUI/elements/CEGUIPushButton.h>
+#include <CEGUI/CEGUIWindowManager.h>
+#include <CEGUI/CEGUIWindow.h>
 
 namespace
 {
@@ -27,7 +32,29 @@ sanguis::client::gui::menu::object::object(
 	callbacks::object const &_callbacks
 )
 : 
-	connections_(),
+	callbacks_(_callbacks),
+	gui_(_gui),
+	scoped_layout_(
+		sanguis::media_path()
+		/ FCPPT_TEXT("gui")
+		/ FCPPT_TEXT("main_menu.layout"),
+		_gui.charconv_system()
+	),
+	quickstart_connection_(
+		CEGUI::WindowManager::getSingleton().getWindow(
+			"Root/FrameWindow/Quickstart"
+		)
+		->subscribeEvent(
+			CEGUI::PushButton::EventClicked,
+			CEGUI::Event::Subscriber(
+				std::tr1::bind(
+					&object::quickstart,
+					this,
+					std::tr1::placeholders::_1
+				)
+			)
+		)
+	)
 #if 0
 		fcppt::assign::make_container<
 			fcppt::signal::connection_manager::container
@@ -83,17 +110,6 @@ sanguis::client::gui::menu::object::object(
 		)
 		(
 			fcppt::signal::shared_connection(
-				connect_.return_.register_clicked(
-					std::tr1::bind(
-						&mover::reset,
-						&mover_,
-						std::tr1::ref(main_.parent)
-					)
-				)
-			)
-		)
-		(
-			fcppt::signal::shared_connection(
 				connect_box_.buttons_retry.register_clicked(
 					std::tr1::bind(
 						&object::connect,
@@ -110,17 +126,6 @@ sanguis::client::gui::menu::object::object(
 		)
 		(
 			fcppt::signal::shared_connection(
-				highscore_.back_button.register_clicked(
-					std::tr1::bind(
-						&mover::reset,
-						&mover_,
-						std::tr1::ref(main_.parent)
-					)
-				)
-			)
-		)
-		(
-			fcppt::signal::shared_connection(
 				connect_box_.buttons_cancel.register_clicked(
 					std::tr1::bind(
 						&object::cancel_connect,
@@ -131,9 +136,6 @@ sanguis::client::gui::menu::object::object(
 		)
 	),
 #endif
-	callbacks_(
-		_callbacks
-	)
 {
 }
 
@@ -146,20 +148,11 @@ sanguis::client::gui::menu::object::process(
 	time_type const _delta
 )
 {
-#if 0
-	mover_.update(
+	gui_.update(
 		_delta
 	);
 
-	manager_.update();
-
-	sge::sprite::render_one(
-		sprite_system_,
-		background_
-	);
-
-	manager_.draw();
-#endif
+	gui_.render();
 }
 
 void
@@ -186,22 +179,23 @@ sanguis::client::gui::menu::object::connection_error(
 			_message
 		)
 	);
-
-	mover_.reset(
-		connect_box_.parent
-	);
 #endif
 }
 
-void
-sanguis::client::gui::menu::object::start_server()
+bool
+sanguis::client::gui::menu::object::quickstart(
+	CEGUI::EventArgs const &
+)
 {
-	callbacks_.start_server()();
+	callbacks_.quickstart()();
 
+	// FIXME: Don't hardocde the port here!
 	this->connect(
 		FCPPT_TEXT("localhost"),
 		FCPPT_TEXT("1337")
 	);
+
+	return true;
 }
 
 void

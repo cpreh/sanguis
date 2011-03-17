@@ -3,13 +3,13 @@
 sanguis::client::gui::menu::callbacks::object::object(
 	callbacks::connect const &_connect,
 	callbacks::cancel_connect const &_cancel_connect,
-	callbacks::start_server const &_start_server,
+	callbacks::quickstart const &_quickstart,
 	callbacks::quit const &_quit
 )
 : 
 	connect_(_connect),
 	cancel_connect_(_cancel_connect),
-	start_server_(_start_server),
+	quickstart_(_quickstart),
 	quit_(_quit)
 {
 }
@@ -26,10 +26,10 @@ sanguis::client::gui::menu::callbacks::object::cancel_connect() const
 	return cancel_connect_;
 }
 
-sanguis::client::gui::menu::callbacks::start_server const &
-sanguis::client::gui::menu::callbacks::object::start_server() const
+sanguis::client::gui::menu::callbacks::quickstart const &
+sanguis::client::gui::menu::callbacks::object::quickstart() const
 {
-	return start_server_;
+	return quickstart_;
 }
 
 sanguis::client::gui::menu::callbacks::quit const &

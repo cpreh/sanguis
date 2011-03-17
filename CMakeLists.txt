@@ -429,8 +429,8 @@ SET(
 	src/client/gui/menu/callbacks/connect.hpp
 	src/client/gui/menu/callbacks/object.cpp
 	src/client/gui/menu/callbacks/object.hpp
+	src/client/gui/menu/callbacks/quickstart.hpp
 	src/client/gui/menu/callbacks/quit.hpp
-	src/client/gui/menu/callbacks/start_server.hpp
 	src/client/gui/menu/object.cpp
 	src/client/gui/menu/object.hpp
 	src/client/gui/object.cpp

@@ -3,7 +3,7 @@
 
 #include "connect.hpp"
 #include "cancel_connect.hpp"
-#include "start_server.hpp"
+#include "quickstart.hpp"
 #include "quit.hpp"
 #include <fcppt/function/object.hpp>
 #include <fcppt/nonassignable.hpp>
@@ -28,7 +28,7 @@ public:
 	object(
 		callbacks::connect const &,
 		callbacks::cancel_connect const &,
-		callbacks::start_server const &,
+		callbacks::quickstart const &,
 		callbacks::quit const &
 	);
 
@@ -38,8 +38,8 @@ public:
 	callbacks::cancel_connect const &
 	cancel_connect() const;
 
-	callbacks::start_server const &
-	start_server() const;
+	callbacks::quickstart const &
+	quickstart() const;
 
 	callbacks::quit const &
 	quit() const;
@@ -48,7 +48,7 @@ private:
 
 	callbacks::cancel_connect const cancel_connect_;
 
-	callbacks::start_server const start_server_;
+	callbacks::quickstart const quickstart_;
 
 	callbacks::quit const quit_;
 };

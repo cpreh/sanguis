@@ -5,9 +5,15 @@
 #include "../object_fwd.hpp"
 #include "../../config/settings/object_fwd.hpp"
 #include "../../../time_type.hpp"
-#include <fcppt/signal/connection_manager.hpp>
+#include <sge/cegui/toolbox/scoped_layout.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
+#include <CEGUI/CEGUIEvent.h>
+
+namespace CEGUI
+{
+class EventArgs;
+}
 
 namespace sanguis
 {
@@ -42,16 +48,23 @@ public:
 		fcppt::string const &message
 	);
 private:
-	fcppt::signal::connection_manager connections_;
-
 	callbacks::object const callbacks_;
+
+	client::gui::object &gui_;
+
+	sge::cegui::toolbox::scoped_layout const scoped_layout_;
+
+	CEGUI::Event::ScopedConnection const
+		quickstart_connection_;
 
 	fcppt::string 
 		connection_host_,
 		connection_port_;
 
-	void
-	start_server();
+	bool
+	quickstart(
+		CEGUI::EventArgs const &
+	);
 
 	void
 	connect_from_menu();
@@ -71,4 +84,4 @@ private:
 }
 }
 
-#endif // SANGUIS_CLIENT_MENU_OBJECT_HPP_INCLUDED
+#endif

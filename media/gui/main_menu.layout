@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout >
+    <Window Type="DefaultWindow" Name="Root" >
+        <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Window Type="TaharezLook/FrameWindow" Name="Root/FrameWindow" >
+            <Property Name="TitlebarFont" Value="DejaVuSans-10" />
+            <Property Name="TitlebarEnabled" Value="True" />
+            <Property Name="UnifiedAreaRect" Value="{{0,0},{1.24176e-009,0},{1,0},{1,0}}" />
+            <AutoWindow NameSuffix="__auto_titlebar__" >
+                <Property Name="Font" Value="DejaVuSans-10" />
+            </AutoWindow>
+            <AutoWindow NameSuffix="__auto_closebutton__" />
+            <Window Type="TaharezLook/Button" Name="Root/FrameWindow/Quickstart" >
+                <Property Name="Text" Value="Quickstart" />
+                <Property Name="UnifiedAreaRect" Value="{{0.183544,0},{0.0426913,0},{0.863924,0},{0.151724,0}}" />
+            </Window>
+            <Window Type="TaharezLook/Button" Name="Root/FrameWindow/Button3" >
+                <Property Name="Text" Value="Quit" />
+                <Property Name="UnifiedAreaRect" Value="{{0.183544,0},{0.827728,0},{0.863924,0},{0.936761,0}}" />
+            </Window>
+            <Window Type="TaharezLook/StaticText" Name="Root/FrameWindow/StaticText" >
+                <Property Name="Text" Value="Address:" />
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="HorzFormatting" Value="HorzCentred" />
+                <Property Name="UnifiedAreaRect" Value="{{0.0363924,0},{0.291286,-4},{0.356013,1},{0.374151,-2}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+                <AutoWindow NameSuffix="__auto_hscrollbar__" >
+                    <AutoWindow NameSuffix="__auto_incbtn__" />
+                    <AutoWindow NameSuffix="__auto_decbtn__" />
+                    <AutoWindow NameSuffix="__auto_thumb__" />
+                </AutoWindow>
+                <AutoWindow NameSuffix="__auto_vscrollbar__" >
+                    <AutoWindow NameSuffix="__auto_incbtn__" />
+                    <AutoWindow NameSuffix="__auto_decbtn__" />
+                    <AutoWindow NameSuffix="__auto_thumb__" />
+                </AutoWindow>
+            </Window>
+            <Window Type="TaharezLook/Editbox" Name="Root/FrameWindow/Editbox" >
+                <Property Name="MaxTextLength" Value="1073741823" />
+                <Property Name="UnifiedAreaRect" Value="{{0.452532,0},{0.282564,0},{0.911392,0},{0.36979,0}}" />
+                <Property Name="TextParsingEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticText" Name="Root/FrameWindow/StaticText2" >
+                <Property Name="Text" Value="Port:" />
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="HorzFormatting" Value="HorzCentred" />
+                <Property Name="UnifiedAreaRect" Value="{{-0.185127,143},{0.443932,-4},{0.134494,144},{0.526797,-2}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+                <AutoWindow NameSuffix="__auto_hscrollbar__" >
+                    <AutoWindow NameSuffix="__auto_incbtn__" />
+                    <AutoWindow NameSuffix="__auto_decbtn__" />
+                    <AutoWindow NameSuffix="__auto_thumb__" />
+                </AutoWindow>
+                <AutoWindow NameSuffix="__auto_vscrollbar__" >
+                    <AutoWindow NameSuffix="__auto_incbtn__" />
+                    <AutoWindow NameSuffix="__auto_decbtn__" />
+                    <AutoWindow NameSuffix="__auto_thumb__" />
+                </AutoWindow>
+            </Window>
+            <Window Type="TaharezLook/Editbox" Name="Root/FrameWindow/Editbox2" >
+                <Property Name="MaxTextLength" Value="1073741823" />
+                <Property Name="UnifiedAreaRect" Value="{{0.452532,0},{0.43521,0},{0.911392,0},{0.522436,0}}" />
+                <Property Name="TextParsingEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/Button" Name="Root/FrameWindow/Button" >
+                <Property Name="Text" Value="Connect" />
+                <Property Name="UnifiedAreaRect" Value="{{0.357595,0},{0.609662,0},{0.705696,0},{0.696889,0}}" />
+            </Window>
+            <Window Type="TaharezLook/GroupBox" Name="Root/FrameWindow/GroupBox" >
+                <Property Name="Text" Value="Join a server" />
+                <Property Name="RiseOnClick" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.0490506,0},{0.190976,0},{0.968354,0},{0.76667,0}}" />
+                <AutoWindow NameSuffix="__auto_contentpane__" />
+            </Window>
+        </Window>
+    </Window>
+</GUILayout>

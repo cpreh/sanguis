@@ -3,6 +3,7 @@
 
 #include "object_fwd.hpp"
 #include "../cursor/object_fwd.hpp"
+#include "../../time_type.hpp"
 #include <sge/cegui/default_cursor.hpp>
 #include <sge/cegui/default_keyboard.hpp>
 #include <sge/cegui/syringe.hpp>
@@ -37,7 +38,20 @@ public:
 	);
 	
 	~object();
+
+	sge::charconv::system_ptr const
+	charconv_system() const;
+
+	void
+	render();
+
+	void
+	update(
+		time_type
+	);
 private:
+	sge::charconv::system_ptr const charconv_system_;
+
 	sge::cegui::system system_;
 
 	sge::cegui::syringe syringe_;

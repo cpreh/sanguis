@@ -1,12 +1,12 @@
 #include "create.hpp"
 #include "object.hpp"
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 
 sanguis::main_object_unique_ptr
 sanguis::client::create(
-	sge::systems::instance &sys,
-	boost::program_options::variables_map const &vm
+	sge::systems::instance &_sys,
+	boost::program_options::variables_map const &_vm
 )
 {
 	return
@@ -14,10 +14,10 @@ sanguis::client::create(
 			fcppt::make_unique_ptr<
 				object
 			>(
-				std::tr1::ref(
-					sys
+				fcppt::ref(
+					_sys
 				),
-				vm
+				_vm
 			)
 		);
 }
