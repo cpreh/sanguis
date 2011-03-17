@@ -49,7 +49,7 @@ sanguis::client::states::menu::menu(
 				this
 			),
 			std::tr1::bind(
-				&machine::start_server,
+				&machine::quickstart,
 				&context<machine>()
 			),
 			std::tr1::bind(
@@ -100,15 +100,16 @@ sanguis::client::states::menu::react(
 		menu
 	> dispatcher;
 
-	return dispatcher(
-		*_message.value(),
-		*this,
-		std::tr1::bind(
-			&menu::handle_default_msg,
-			this,
-			std::tr1::placeholders::_1
-		)
-	);
+	return
+		dispatcher(
+			*_message.value(),
+			*this,
+			std::tr1::bind(
+				&menu::handle_default_msg,
+				this,
+				std::tr1::placeholders::_1
+			)
+		);
 }
 
 boost::statechart::result
@@ -180,14 +181,14 @@ sanguis::client::states::menu::operator()(
 fcppt::log::object &
 sanguis::client::states::menu::log()
 {
-	static fcppt::log::object log_(
+	static fcppt::log::object my_logger(
 		fcppt::log::parameters::inherited(
 			client::log(),
 			FCPPT_TEXT("states::menu")
 		)
 	);
 
-	return log_;
+	return my_logger;
 }
 
 void
@@ -220,9 +221,9 @@ sanguis::client::states::menu::connect(
 }
 
 void
-sanguis::client::states::menu::start_server()
+sanguis::client::states::menu::quickstart()
 {
-	context<machine>().start_server();
+	context<machine>().quickstart();
 }
 
 void

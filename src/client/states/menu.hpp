@@ -104,7 +104,7 @@ private:
 	);
 
 	void
-	start_server();
+	quickstart();
 
 	void
 	cancel_connect();

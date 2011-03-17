@@ -69,7 +69,7 @@ public:
 	~machine();
 
 	void
-	start_server();
+	quickstart();
 
 	void
 	connect(

@@ -117,9 +117,14 @@ sanguis::client::machine::~machine()
 }
 
 void
-sanguis::client::machine::start_server()
+sanguis::client::machine::quickstart()
 {
 	server_callback_(1337); // FIXME
+
+	this->connect(
+		"localhost",
+		1337 // FIXME
+	);
 }
 
 void

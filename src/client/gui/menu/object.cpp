@@ -189,12 +189,6 @@ sanguis::client::gui::menu::object::quickstart(
 {
 	callbacks_.quickstart()();
 
-	// FIXME: Don't hardocde the port here!
-	this->connect(
-		FCPPT_TEXT("localhost"),
-		FCPPT_TEXT("1337")
-	);
-
 	return true;
 }
 

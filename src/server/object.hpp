@@ -64,15 +64,15 @@ private:
 
 	bool running_;
 
-	boost::mutex mutex_;
-
-	fcppt::thread::object server_thread_;
-
 	typedef fcppt::scoped_state_machine<
 		server::machine
 	> scoped_machine;
 
 	scoped_machine scoped_machine_;
+
+	boost::mutex mutex_;
+
+	fcppt::thread::object server_thread_;
 };
 
 }

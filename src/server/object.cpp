@@ -47,15 +47,15 @@ sanguis::server::object::object(
 	running_(
 		true
 	),
+	scoped_machine_(
+		machine_
+	),
 	mutex_(),
 	server_thread_(
 		std::tr1::bind(
 			&object::mainloop,
 			this
 		)
-	),
-	scoped_machine_(
-		machine_
 	)
 {
 }
@@ -96,8 +96,10 @@ sanguis::server::object::mainloop()
 	try
 	{
 		// FIXME: use a deadline_timer here!
-		//while (running())
-		//	machine_.run();
+		while (
+			this->running()
+		)
+			this->timer_callback();
 	}
 	catch(
 		fcppt::exception const &_exception
