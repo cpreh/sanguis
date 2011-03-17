@@ -28,6 +28,7 @@
 #include <sge/sprite/intrusive/system_decl.hpp>
 #include <sge/renderer/device_ptr.hpp>
 #include <sge/renderer/screen_size.hpp>
+#include <sge/renderer/viewport.hpp>
 #include <sge/font/metrics_ptr.hpp>
 #include <sge/font/text/drawer_fwd.hpp>
 #include <sge/audio/listener_fwd.hpp>
@@ -156,6 +157,9 @@ private:
 
 	sge::renderer::screen_size const
 	screen_size() const;
+
+	sge::renderer::viewport const
+	viewport() const;
 
 	load::context const &resources_;
 

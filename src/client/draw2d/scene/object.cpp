@@ -25,6 +25,7 @@
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/material.hpp>
 #include <sge/renderer/matrix4.hpp>
+#include <sge/renderer/onscreen_target.hpp>
 #include <sge/renderer/state/scoped.hpp>
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/bool.hpp>
@@ -33,6 +34,7 @@
 #include <sge/sprite/default_equal.hpp>
 #include <sge/sprite/intrusive/system_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
+#include <sge/sprite/projection_matrix.hpp>
 #include <sge/image/colors.hpp>
 #include <sge/audio/listener.hpp>
 
@@ -42,6 +44,7 @@
 #include <fcppt/math/matrix/static.hpp>
 #include <fcppt/math/matrix/translation.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/construct.hpp>
 #include <fcppt/math/vector/dim.hpp>
@@ -153,11 +156,12 @@ sanguis::client::draw2d::scene::object::object(
 }
 
 sanguis::client::draw2d::scene::object::~object()
-{}
+{
+}
 
 void
 sanguis::client::draw2d::scene::object::process_message(
-	sanguis::messages::base const &m
+	sanguis::messages::base const &_message
 )
 {
 	static sanguis::messages::call::object<
@@ -190,7 +194,7 @@ sanguis::client::draw2d::scene::object::process_message(
 	> dispatcher;
 
 	dispatcher(
-		m,
+		_message,
 		*message_dispatcher_,
 		std::tr1::bind(
 			&message::dispatcher::process_default_msg,
@@ -202,7 +206,7 @@ sanguis::client::draw2d::scene::object::process_message(
 
 sanguis::entity_id
 sanguis::client::draw2d::scene::object::client_message(
-	client::messages::add const &m
+	client::messages::add const &_message
 )
 {
 	typedef std::pair<
@@ -212,12 +216,12 @@ sanguis::client::draw2d::scene::object::client_message(
 	
 	ret_type const ret(
 		entities_.insert(
-			next_id(),
+			client::next_id(),
 			factory::client(
 				client_system(),
 				resources_.resources().textures(),
-				m.type(),
-				screen_size()
+				_message.type(),
+				this->screen_size()
 			)
 		)
 	);
@@ -225,7 +229,7 @@ sanguis::client::draw2d::scene::object::client_message(
 	if(
 		ret.second == false
 	)
-		throw exception(
+		throw sanguis::exception(
 			FCPPT_TEXT("Client object with id already in entity list!")
 		);
 	
@@ -234,7 +238,7 @@ sanguis::client::draw2d::scene::object::client_message(
 	);
 
 	if(
-		m.type() == client::entity_type::background
+		_message.type() == client::entity_type::background
 	)
 		background_id_ = id;
 
@@ -245,59 +249,66 @@ sanguis::client::draw2d::scene::object::client_message(
 
 void
 sanguis::client::draw2d::scene::object::client_message(
-	client::messages::visible const &m
+	client::messages::visible const &_message
 )
 {
 	fcppt::dynamic_cast_<
 		entities::with_visibility &
 	>(
-		entity(
-			m.id()
+		this->entity(
+			_message.id()
 		)
 	).visible(
-		m.get()
+		_message.get()
 	);
 }
 
 void
 sanguis::client::draw2d::scene::object::draw(
-	time_type const delta
+	time_type const _delta
 )
 {
-	time_type const real_delta =
+	time_type const real_delta(
 		paused_
-		? 0
-		: delta;
+		?
+			0
+		:
+			_delta
+	);
 	
 	for(
 		entity_map::iterator it(
 			entities_.begin()
 		),
-		next(it);
+		next(
+			it
+		);
 		it != entities_.end();
 		it = next
 	)
 	{
 		++next;
 
-		entities::base &e = *it->second;
+		entities::base &entity(
+			*it->second
+		);
 
-		e.update(
+		entity.update(
 			real_delta
 		);
 
 		if(
-			e.may_be_removed()
+			entity.may_be_removed()
 		)
 			entities_.erase(
 				it
 			);
 	}
 
-	render_systems();
+	this->render_systems();
 
 	hud_.update(
-		delta
+		_delta
 	);
 }
 
@@ -311,10 +322,10 @@ sanguis::client::draw2d::scene::object::pause(
 
 void
 sanguis::client::draw2d::scene::object::set_time(
-		std::tm const &new_time_
+	std::tm const &_current_time
 )
 {
-	current_time_ = new_time_;
+	current_time_ = _current_time;
 }
 
 sanguis::client::control::environment &
@@ -330,7 +341,7 @@ sanguis::client::draw2d::scene::object::render_systems()
 		background_id_ != invalid_id
 	);
 
-	sge::renderer::state::scoped const state_(
+	sge::renderer::state::scoped const state(
 		rend_,
 		sge::sprite::render_states<
 			client::draw2d::sprite::normal::choices
@@ -338,18 +349,18 @@ sanguis::client::draw2d::scene::object::render_systems()
 	);
 
 	rend_->transform(
+		sge::renderer::matrix_mode::projection,
+		sge::sprite::projection_matrix(
+			this->viewport()
+		)
+	);
+
+	rend_->transform(
 		sge::renderer::matrix_mode::world,
 		default_transform_
 	);
 
-	rend_->transform(
-		sge::renderer::matrix_mode::projection,
-		fcppt::math::matrix::orthogonal_xy<
-			sprite::float_unit
-		>()
-	);
-
-	render_lighting();
+	this->render_lighting();
 
 	for(
 		sprite::order index(
@@ -408,7 +419,7 @@ sanguis::client::draw2d::scene::object::render_lighting()
 	vector2 const translation(
 		scene::screen_center(
 			player_center_,
-			screen_size()
+			this->screen_size()
 		)
 	);
 
@@ -419,7 +430,7 @@ sanguis::client::draw2d::scene::object::render_lighting()
 				-translation
 				/
 				scene::background_dim(
-					entity(
+					this->entity(
 						background_id_
 					)
 				),
@@ -468,8 +479,8 @@ sanguis::client::draw2d::scene::object::render_lighting()
 
 sanguis::client::draw2d::entities::base &
 sanguis::client::draw2d::scene::object::insert(
-	entities::auto_ptr e,
-	entity_id const id
+	entities::auto_ptr _entity,
+	entity_id const _id
 )
 {
 	typedef std::pair<
@@ -479,8 +490,8 @@ sanguis::client::draw2d::scene::object::insert(
 
 	ret_type const ret(
 		entities_.insert(
-			id,
-			e
+			_id,
+			_entity
 		)
 	);
 
@@ -489,10 +500,10 @@ sanguis::client::draw2d::scene::object::insert(
 	)
 	{
 		FCPPT_LOG_ERROR(
-			log(),
+			client::log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("Tried to insert object with id ")
-				<< id
+				<< _id
 				<< FCPPT_TEXT(" twice!")
 		);
 
@@ -514,44 +525,44 @@ sanguis::client::draw2d::scene::object::insert(
 
 void
 sanguis::client::draw2d::scene::object::remove(
-	entity_id const id
+	entity_id const _id
 )
 {
 	if(
 		!entities_.erase(
-			id
+			_id
 		)
 	)
-		throw exception(
+		throw sanguis::exception(
 			(
 				fcppt::format(
 					FCPPT_TEXT("Object with id %1% cannot be removed!")
 				)
-				% id
+				% _id
 			).str()
 		);
 }
 
 sanguis::client::draw2d::entities::base &
 sanguis::client::draw2d::scene::object::entity(
-	entity_id const id
+	entity_id const _id
 )
 {
 	entity_map::iterator const it(
 		entities_.find(
-			id
+			_id
 		)
 	);
 
 	if(
 		it == entities_.end()
 	)
-		throw exception(
+		throw sanguis::exception(
 			(
 				fcppt::format(
 					FCPPT_TEXT("Object with id %1% not in entity map!")
 				)
-				% id
+				% _id
 			).str()
 		);
 	return *it->second;
@@ -565,19 +576,27 @@ sanguis::client::draw2d::scene::object::player_center() const
 
 void
 sanguis::client::draw2d::scene::object::transform(
-	sprite::point const &center_
+	sprite::point const &_player_center
 )
 {
-	player_center_ = center_;
+	player_center_ = _player_center;
 
 	// TODO: abstract this, and why (x,z)?
 	audio_listener_.position(
 		sge::audio::vector(
-			static_cast<sge::audio::scalar>(
+			static_cast<
+				sge::audio::scalar
+			>(
 				player_center_.x()
 			),
-			static_cast<sge::audio::scalar>(0),
-			static_cast<sge::audio::scalar>(
+			static_cast<
+				sge::audio::scalar
+			>(
+				0
+			),
+			static_cast<
+				sge::audio::scalar
+			>(
 				player_center_.y()
 			)
 		)
@@ -629,6 +648,16 @@ sanguis::client::draw2d::scene::object::load_collection() const
 sge::renderer::screen_size const
 sanguis::client::draw2d::scene::object::screen_size() const
 {
-	//FIXME!
-//	return rend_->screen_size();
+	return
+		fcppt::math::dim::structure_cast<
+			sge::renderer::screen_size
+		>(
+			this->viewport().get().size()
+		);
+}
+
+sge::renderer::viewport const
+sanguis::client::draw2d::scene::object::viewport() const
+{
+	return rend_->onscreen_target()->viewport();
 }
