@@ -35,6 +35,8 @@ sanguis::server::console::insert(
 	fcppt::string const &_description
 )
 {
+	// FIXME!
+#if 0
 	send_(
 		messages::create(
 			messages::add_console_command(
@@ -47,6 +49,7 @@ sanguis::server::console::insert(
 			)
 		)
 	);
+#endif
 
 	// TODO: we have to know when a command doesn't exist anymore!
 	known_commands_.push_back(

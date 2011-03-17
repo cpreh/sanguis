@@ -267,11 +267,12 @@ sanguis::server::states::running::handle_default_msg(
 fcppt::log::object &
 sanguis::server::states::running::log()
 {
-	static fcppt::log::object log_(
+	static fcppt::log::object my_logger(
 		fcppt::log::parameters::inherited(
 			server::log(),
 			FCPPT_TEXT("running")
 		)
 	);
-	return log_;
+
+	return my_logger;
 }

@@ -21,7 +21,7 @@ namespace
 fcppt::log::object mylogger(
 	fcppt::log::parameters::inherited(
 		sanguis::client::log(),
-		FCPPT_TEXT("perk chooser: ")
+		FCPPT_TEXT("perk chooser")
 	)
 );
 

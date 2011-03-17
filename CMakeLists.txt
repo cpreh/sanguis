@@ -862,6 +862,8 @@ SET(
 	src/net/message_header.hpp
 	src/net/message_header_size.hpp
 	src/net/port.hpp
+	src/net/send_buffer_size.cpp
+	src/net/send_buffer_size.hpp
 	src/net/serialize.cpp
 	src/net/serialize.hpp
 	src/net/server/connect_callback.hpp
@@ -878,6 +880,7 @@ SET(
 	src/net/server/object_impl.cpp
 	src/net/server/object_impl.hpp
 	src/net/server/object_impl_fwd.hpp
+	src/net/size_type.hpp
 	src/net/static_buffer.hpp
 	src/net/stream_exceptions.hpp
 	src/net/value_type.hpp

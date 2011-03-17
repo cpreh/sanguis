@@ -202,7 +202,7 @@ void
 sanguis::server::machine::send_to_all(
 	messages::auto_ptr _message
 )
-{ 
+{
 	this->pack_message(
 		_message
 	);
@@ -260,7 +260,7 @@ try
 
 	net_.queue(
 		_id,
-		temp_buffer_	
+		temp_buffer_
 	);
 
 	temp_buffer_.clear();

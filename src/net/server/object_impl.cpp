@@ -11,7 +11,10 @@
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/log/headers.hpp>
+#include <fcppt/log/debug.hpp>
+#include <fcppt/log/error.hpp>
+#include <fcppt/log/output.hpp>
+#include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/assert.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/lexical_cast.hpp>
@@ -55,9 +58,9 @@ sanguis::net::server::object_impl::listen(
 )
 {
 	FCPPT_LOG_DEBUG(
-		net::log(),
+		object_impl::log(),
 		fcppt::log::_
-			<< FCPPT_TEXT("server: listening on port ")
+			<< FCPPT_TEXT("listening on port ")
 			<< _port
 	);
 
@@ -126,6 +129,14 @@ sanguis::net::server::object_impl::queue(
 		)
 	)
 	{
+		FCPPT_LOG_ERROR(
+			object_impl::log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("client ")
+				<< _id
+				<< FCPPT_TEXT(" has not enough space left in the send_buffer")
+		);
+
 		// TODO: wait or drop this client?
 	}
 
@@ -222,9 +233,9 @@ sanguis::net::server::object_impl::read_handler(
 	}
 
 	FCPPT_LOG_DEBUG(
-		net::log(),
+		object_impl::log(),
 		fcppt::log::_
-			<< FCPPT_TEXT("server: reading ")
+			<< FCPPT_TEXT("reading ")
 			<< _bytes 
 			<< FCPPT_TEXT(" bytes.")
 	);
@@ -272,7 +283,7 @@ sanguis::net::server::object_impl::write_handler(
 	)
 	{
 		this->handle_error(
-			FCPPT_TEXT("server write"),
+			FCPPT_TEXT("write"),
 			_error,
 			_con
 		);
@@ -281,9 +292,9 @@ sanguis::net::server::object_impl::write_handler(
 	}
 
 	FCPPT_LOG_DEBUG(
-		net::log(),
+		object_impl::log(),
 		fcppt::log::_
-			<< FCPPT_TEXT("server: wrote ")
+			<< FCPPT_TEXT("wrote ")
 			<< _bytes 
 			<< FCPPT_TEXT(" bytes.")
 	);
@@ -315,9 +326,9 @@ sanguis::net::server::object_impl::accept_handler(
 	)
 	{
 		FCPPT_LOG_DEBUG(
-			net::log(),
+			object_impl::log(),
 			fcppt::log::_
-				<< FCPPT_TEXT("server: error while accepting")
+				<< FCPPT_TEXT("error while accepting")
 		);
 
 		this->accept();
@@ -326,9 +337,9 @@ sanguis::net::server::object_impl::accept_handler(
 	}
 
 	FCPPT_LOG_DEBUG(
-		net::log(),
+		object_impl::log(),
 		fcppt::log::_
-			<< FCPPT_TEXT("server: accepting a connection, id is ")
+			<< FCPPT_TEXT("accepting a connection, id is ")
 			<< new_connection_->id()
 	);
 
@@ -404,9 +415,9 @@ sanguis::net::server::object_impl::handle_error(
 		);
 
 	FCPPT_LOG_DEBUG(
-		net::log(),
+		object_impl::log(),
 		fcppt::log::_
-			<< FCPPT_TEXT("server: disconnected ")
+			<< FCPPT_TEXT("disconnected ")
 			<< _con.id() 
 			<< FCPPT_TEXT(" (")
 			<< error_msg
@@ -460,4 +471,17 @@ sanguis::net::server::object_impl::send_data(
 			)
 		)
 	);
+}
+
+fcppt::log::object &
+sanguis::net::server::object_impl::log()
+{
+	static fcppt::log::object my_logger(
+		fcppt::log::parameters::inherited(
+			net::log(),
+			FCPPT_TEXT("server")
+		)
+	);
+
+	return my_logger;
 }

@@ -16,6 +16,7 @@
 #include <boost/asio/ip/tcp.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
 #include <boost/system/error_code.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/signal/object.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/unique_ptr.hpp>
@@ -131,6 +132,10 @@ private:
 	send_data(
 		server::connection &
 	);
+
+	static
+	fcppt::log::object &
+	log();
 };
 
 }

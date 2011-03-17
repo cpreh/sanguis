@@ -13,6 +13,7 @@
 #include "../data_buffer.hpp"
 #include "../port.hpp"
 #include "../hostname.hpp"
+#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/signal/object.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
@@ -135,6 +136,10 @@ private:
 
 	void
 	clear();
+
+	static
+	fcppt::log::object &
+	log();
 };
 
 }

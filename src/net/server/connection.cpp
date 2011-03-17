@@ -1,4 +1,5 @@
 #include "connection.hpp"
+#include "../send_buffer_size.hpp"
 #include <fcppt/container/raw_vector_impl.hpp>
 
 sanguis::net::server::connection::connection(
@@ -11,7 +12,9 @@ sanguis::net::server::connection::connection(
 		_io_service
 	),
 	new_data_(),
-	send_data_(),
+	send_data_(
+		net::send_buffer_size()
+	),
 	received_data_()
 {
 }

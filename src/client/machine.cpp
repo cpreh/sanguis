@@ -230,6 +230,12 @@ sanguis::client::machine::send(
 		_message,
 		out_buffer_
 	);
+
+	net_.queue(
+		out_buffer_
+	);
+
+	out_buffer_.clear();
 }
 
 sanguis::net::client::object &
@@ -244,17 +250,6 @@ sanguis::client::machine::process(
 )
 try
 {
-	if(
-		out_buffer_.size()
-	)
-	{
-		net_.queue(
-			out_buffer_
-		);
-
-		out_buffer_.clear();
-	}
-
 	{
 		sge::renderer::scoped_block const block(
 			renderer_

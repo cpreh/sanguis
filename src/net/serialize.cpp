@@ -2,6 +2,7 @@
 #include "data_buffer.hpp"
 #include "value_type.hpp"
 #include "message_header.hpp"
+#include "message_header_size.hpp"
 #include "stream_exceptions.hpp"
 #include "../messages/serialization/endianness.hpp"
 #include "../messages/serialization/serialize.hpp"
@@ -25,6 +26,10 @@ sanguis::net::serialize(
 {
 	FCPPT_ASSERT(
 		_message.get()
+	);
+
+	FCPPT_ASSERT(
+		_data.empty()
 	);
 
 	typedef boost::iostreams::back_insert_device<

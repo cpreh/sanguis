@@ -5,10 +5,14 @@
 #include "../exception.hpp"
 #include "../is_disconnect.hpp"
 #include "../log.hpp"
+#include "../send_buffer_size.hpp"
 #undef max
 // asio brings in window.h's max macro :(
 #include <fcppt/container/raw_vector_impl.hpp>
-#include <fcppt/log/headers.hpp>
+#include <fcppt/log/debug.hpp>
+#include <fcppt/log/error.hpp>
+#include <fcppt/log/output.hpp>
+#include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -31,7 +35,7 @@ sanguis::net::client::object_impl::object_impl(
 	),
 	received_data_(),
 	send_data_(
-		1024 * 64
+		net::send_buffer_size()
 	),
 	connect_signal_(),
 	disconnect_signal_(),
@@ -50,9 +54,9 @@ sanguis::net::client::object_impl::connect(
 )
 {
 	FCPPT_LOG_DEBUG(
-		net::log(),
+		object_impl::log(),
 		fcppt::log::_
-			<< FCPPT_TEXT("client: resolving hostname ")
+			<< FCPPT_TEXT("resolving hostname ")
 			<< fcppt::from_std_string(
 				_host
 			)
@@ -106,6 +110,12 @@ sanguis::net::client::object_impl::queue(
 		)
 	)
 	{
+		FCPPT_LOG_ERROR(
+			object_impl::log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("Not enough space left in the send_buffer")
+		);
+
 		// not enough space left
 		// TODO: call something here and wait!
 	}
@@ -166,8 +176,8 @@ sanguis::net::client::object_impl::resolve_handler(
 		);
 
 	FCPPT_LOG_DEBUG(
-		net::log(),
-		fcppt::log::_ << FCPPT_TEXT("client: resolved domain, trying to connect")
+		object_impl::log(),
+		fcppt::log::_ << FCPPT_TEXT("resolved domain, trying to connect")
 	);
 	
 	boost::asio::ip::tcp::endpoint const endpoint(
@@ -209,12 +219,12 @@ sanguis::net::client::object_impl::handle_error(
 
 		
 	FCPPT_LOG_DEBUG(
-		net::log(),
+		object_impl::log(),
 		fcppt::log::_
-			<< FCPPT_TEXT("client: disconnected (")
+			<< FCPPT_TEXT("disconnected (")
 			<< fcppt::from_std_string(
-				_error.message())
-
+				_error.message()
+			)
 			<< FCPPT_TEXT(")")
 	);
 
@@ -244,9 +254,9 @@ sanguis::net::client::object_impl::read_handler(
 	}
 
 	FCPPT_LOG_DEBUG(
-		net::log(),
+		object_impl::log(),
 		fcppt::log::_
-			<< FCPPT_TEXT("client: read ")
+			<< FCPPT_TEXT("read ")
 			<< _bytes
 			<< FCPPT_TEXT(" bytes.")
 	);
@@ -282,7 +292,7 @@ sanguis::net::client::object_impl::write_handler(
 	)
 	{
 		this->handle_error(
-			FCPPT_TEXT("client write"),
+			FCPPT_TEXT("write "),
 			_error
 		);
 
@@ -290,9 +300,9 @@ sanguis::net::client::object_impl::write_handler(
 	}
 
 	FCPPT_LOG_DEBUG(
-		net::log(),
+		object_impl::log(),
 		fcppt::log::_
-			<< FCPPT_TEXT("client: wrote ")
+			<< FCPPT_TEXT("wrote ")
 			<< _bytes 
 			<< FCPPT_TEXT(" bytes")
 	);
@@ -330,8 +340,9 @@ sanguis::net::client::object_impl::connect_handler(
 			);
 
 		FCPPT_LOG_DEBUG(
-			net::log(),
-			fcppt::log::_ << FCPPT_TEXT("client: resolving next endpoint")
+			object_impl::log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("resolving next endpoint")
 		);
 		
 		boost::asio::ip::tcp::endpoint const endpoint(
@@ -352,8 +363,9 @@ sanguis::net::client::object_impl::connect_handler(
 	}
 
 	FCPPT_LOG_DEBUG(
-		net::log(),
-		fcppt::log::_ << FCPPT_TEXT("client: connected")
+		object_impl::log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("connected")
 	);
 
 	connect_signal_();
@@ -403,4 +415,17 @@ void
 sanguis::net::client::object_impl::clear()
 {
 	send_data_.clear();
+}
+
+fcppt::log::object &
+sanguis::net::client::object_impl::log()
+{
+	static fcppt::log::object my_logger(
+		fcppt::log::parameters::inherited(
+			net::log(),
+			FCPPT_TEXT("client")
+		)
+	);
+
+	return my_logger;
 }
