@@ -139,6 +139,12 @@ sanguis::client::states::menu::operator()(
 	messages::connect const &
 )
 {
+	FCPPT_LOG_DEBUG(
+		client::log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("menu: connect")
+	);
+		
 	context<machine>().send(
 		messages::create(
 			messages::client_info(

@@ -7,11 +7,12 @@
 fcppt::log::object &
 sanguis::client::log()
 {
-	static fcppt::log::object log_(
+	static fcppt::log::object logger(
 		fcppt::log::parameters::inherited(
 			sanguis::log(),
 			FCPPT_TEXT("client")
 		)
 	);
-	return log_;
+
+	return logger;
 }

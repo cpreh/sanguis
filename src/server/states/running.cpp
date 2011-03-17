@@ -86,9 +86,8 @@ sanguis::server::states::running::react(
 	);
 
 	static messages::call::object<
-		boost::mpl::vector6<
+		boost::mpl::vector5<
 			messages::client_info,
-			messages::connect,
 			messages::console_command,
 			messages::disconnect,
 			messages::player_cheat,
@@ -116,6 +115,12 @@ sanguis::server::states::running::operator()(
 	messages::client_info const &_message
 )
 {
+	FCPPT_LOG_DEBUG(
+		running::log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("client sent client_info")
+	)
+
 	global_context_->insert_player(
 		0, // FIXME: which world id?
 		_id,
@@ -131,23 +136,6 @@ sanguis::server::states::running::operator()(
 			connect_state::unpaused
 		:
 			connect_state::paused
-	);
-
-	return discard_event();
-}
-
-boost::statechart::result
-sanguis::server::states::running::operator()(
-	net::id const _id,
-	messages::connect const &
-)
-{
-	FCPPT_LOG_INFO(
-		running::log(),
-		fcppt::log::_
-			<< FCPPT_TEXT("client ")
-			<< _id
-			<< FCPPT_TEXT(" connected")
 	);
 
 	return discard_event();

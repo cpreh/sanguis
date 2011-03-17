@@ -5,10 +5,10 @@
 
 sanguis::server::world::object_unique_ptr
 sanguis::server::world::random(
-	context_ptr const ctx_,
-	sge::collision::system_ptr const collision_system_,
-	server::environment::load_context_ptr const load_context_,
-	server::console &console_
+	context_ptr const _ctx,
+	sge::collision::system_ptr const _collision_system,
+	server::environment::load_context_ptr const _load_context,
+	server::console &_console
 )
 {
 	// TODO:
@@ -16,11 +16,11 @@ sanguis::server::world::random(
 		fcppt::make_unique_ptr<
 			object
 		>(
-			ctx_,
-			collision_system_,
-			load_context_,
+			_ctx,
+			_collision_system,
+			_load_context,
 			std::tr1::ref(
-				console_
+				_console
 			)
 		);
 }

@@ -99,7 +99,11 @@ sanguis::server::object::mainloop()
 		while (
 			this->running()
 		)
+		{
+			io_service_->poll();
+
 			this->timer_callback();
+		}
 	}
 	catch(
 		fcppt::exception const &_exception

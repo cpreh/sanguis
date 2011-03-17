@@ -9,7 +9,7 @@
 fcppt::log::object &
 sanguis::log()
 {
-	static fcppt::log::object log_(
+	static fcppt::log::object logger(
 		fcppt::log::parameters::root(
 			fcppt::io::cerr
 		)
@@ -20,11 +20,13 @@ sanguis::log()
 			true
 		)
 		.level(
-			fcppt::log::level::warning
+			fcppt::log::level::debug // warning TODO
 		)
 		.context(
-			log_context())
+			sanguis::log_context()
+		)
 		.create()
 	);
-	return log_;
+
+	return logger;
 }

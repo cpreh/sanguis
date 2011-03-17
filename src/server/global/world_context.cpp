@@ -8,10 +8,12 @@ sanguis::server::global::world_context::world_context(
 )
 :
 	global_context_(_global_context)
-{}
+{
+}
 
 sanguis::server::global::world_context::~world_context()
-{}
+{
+}
 
 void
 sanguis::server::global::world_context::transfer_entity(

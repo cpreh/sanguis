@@ -6,7 +6,6 @@
 #include "../message_event_fwd.hpp"
 #include "../machine.hpp"
 #include "../console.hpp"
-#include "../../messages/connect.hpp"
 #include "../../messages/disconnect.hpp"
 #include "../../messages/client_info.hpp"
 #include "../../messages/console_command.hpp"
@@ -59,12 +58,6 @@ public:
 	operator()(
 		net::id,
 		messages::client_info const &
-	);
-
-	boost::statechart::result
-	operator()(
-		net::id,
-		messages::connect const &
 	);
 
 	boost::statechart::result

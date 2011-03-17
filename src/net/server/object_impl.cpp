@@ -232,8 +232,8 @@ sanguis::net::server::object_impl::read_handler(
 	// TODO: optimize!
 	_con.received_data().insert(
 		_con.received_data().end(),
-		_con.received_data().begin(),
-		_con.received_data().begin() + _bytes
+		_con.new_data().begin(),
+		_con.new_data().begin() + _bytes
 	);
 
 	data_signal_(
@@ -396,8 +396,10 @@ sanguis::net::server::object_impl::handle_error(
 		)
 	)
 		throw net::exception(
-			_message +
-			FCPPT_TEXT(" error: ")+
+			_message
+			+
+			FCPPT_TEXT(" error: ")
+			+
 			error_msg
 		);
 

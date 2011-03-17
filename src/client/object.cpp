@@ -214,18 +214,18 @@ sanguis::client::object::run()
 	)
 	{
 		FCPPT_LOG_FATAL(
-			log(),
+			client::log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("Client error: ")
 				<< _exception.string()
 		);
 
-		quit_server();
+		this->quit_server();
 
 		return EXIT_FAILURE;
 	}
 
-	return quit_server();
+	return this->quit_server();
 }
 
 void

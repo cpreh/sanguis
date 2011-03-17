@@ -44,6 +44,8 @@ try
 		sanguis::args::options()
 	);
 
+#if 0
+	// FIXME: why does this not work?
 	sanguis::log_switcher 
 		sge_log(
 			boost::phoenix::ref(
@@ -59,7 +61,7 @@ try
 			FCPPT_TEXT("sanguis"),
 			sanguis::log_context()
 		);
-	
+#endif	
 	boost::program_options::variables_map const vm(
 		sanguis::args::parse(
 			argc,
@@ -98,7 +100,9 @@ try
 			vm
 		)
 	);
+
 	// has to be done after the plugins are loaded
+#if 0
 	sge_log.apply(
 		vm
 	);
@@ -106,6 +110,7 @@ try
 	sanguis_log.apply(
 		vm
 	);
+#endif
 
 	bool const server_only(
 		sanguis::args::server_only(

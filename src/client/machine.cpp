@@ -1,7 +1,7 @@
 #include "machine.hpp"
 #include "events/message.hpp"
-#include "cursor/object.hpp"
 #include "events/tick.hpp"
+#include "log.hpp"
 #include "../messages/connect.hpp"
 #include "../messages/disconnect.hpp"
 #include "../messages/create.hpp"
@@ -10,25 +10,18 @@
 #include "../net/deserialize.hpp"
 #include "../net/exception.hpp"
 #include "../net/serialize.hpp"
-#include "../log.hpp"
 
-#include <sge/audio/player.hpp>
-#include <sge/audio/pool.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/renderer/scoped_block.hpp>
-#include <sge/renderer/device.hpp>
-#include <sge/texture/part_raw.hpp>
 #include <sge/systems/instance.hpp>
 
 #include <fcppt/algorithm/append.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
-#include <fcppt/container/raw_vector_impl.hpp>
-#include <fcppt/math/compare.hpp>
-#include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/log/debug.hpp>
+#include <fcppt/log/output.hpp>
 #include <fcppt/utf8/convert.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/text.hpp>
 
 sanguis::client::machine::machine(
 	config::settings::object &_settings,
@@ -119,6 +112,13 @@ sanguis::client::machine::~machine()
 void
 sanguis::client::machine::quickstart()
 {
+	FCPPT_LOG_DEBUG(
+		client::log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("machine::quickstart()"
+		)
+	);
+
 	server_callback_(1337); // FIXME
 
 	this->connect(
@@ -188,6 +188,15 @@ sanguis::client::machine::data_callback(
 	net::data_buffer const &_data
 )
 {
+	FCPPT_LOG_DEBUG(
+		client::log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("machine::data_callback: ")
+			<< FCPPT_TEXT("Reading ")
+			<< _data.size()
+			<< FCPPT_TEXT(" bytes")
+	)
+
 	fcppt::algorithm::append(
 		in_buffer_,
 		_data

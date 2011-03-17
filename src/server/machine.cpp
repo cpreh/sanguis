@@ -1,5 +1,6 @@
 #include "machine.hpp"
 #include "message_event.hpp"
+#include "log.hpp"
 #include "../tick_event.hpp"
 #include "../messages/create.hpp"
 #include "../messages/connect.hpp"
@@ -7,13 +8,13 @@
 #include "../net/serialize.hpp"
 #include "../net/deserialize.hpp"
 #include "../exception.hpp"
-#include "../log.hpp"
 #include <fcppt/algorithm/append.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/function/object.hpp>
-#include <fcppt/log/output.hpp>
+#include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
+#include <fcppt/log/output.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/text.hpp>
@@ -148,6 +149,13 @@ sanguis::server::machine::process_message(
 	messages::auto_ptr _message
 )
 {
+
+	FCPPT_LOG_DEBUG(
+		server::log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("process_message")
+	);
+
 	process_event(
 		message_event(
 			_message,
@@ -162,6 +170,14 @@ sanguis::server::machine::data_callback(
 	net::data_buffer &_data
 )
 {
+	FCPPT_LOG_DEBUG(
+		server::log(),
+		fcppt::log::_
+			<< _data.size()
+			<< FCPPT_TEXT(" bytes left for ")
+			<< _id
+	);
+
 	for(;;)
 	{
 		messages::auto_ptr message( 
@@ -254,7 +270,7 @@ catch(
 )
 {
 	FCPPT_LOG_ERROR(
-		log(),
+		server::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("send_unicast failed: ")
 			<< _error.string()

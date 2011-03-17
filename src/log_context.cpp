@@ -4,6 +4,7 @@
 fcppt::log::context &
 sanguis::log_context()
 {
-	static fcppt::log::context global_;
-	return global_;
+	static fcppt::log::context context;
+
+	return context;
 }

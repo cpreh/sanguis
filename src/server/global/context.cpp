@@ -67,47 +67,49 @@ sanguis::server::global::context::context(
 	console_(
 		_console
 	)
-{}
+{
+}
 
 sanguis::server::global::context::~context()
-{}
+{
+}
 
 void
 sanguis::server::global::context::insert_player(
-	world_id const world_id_,
-	player_id const player_id_,
-	string const &name,
-	connect_state::type const connect_state_
+	world_id const _world_id,
+	player_id const _player_id,
+	string const &_name,
+	connect_state::type const _connect_state
 )
 {
-	server::world::object &world_(
-		world(
-			world_id_
+	server::world::object &cur_world(
+		this->world(
+			_world_id
 		)	
 	);
 
 	send_unicast_(
-		player_id_,
+		_player_id,
 		messages::create(
 			messages::connect_state(
-				connect_state_
+				_connect_state
 			)
 		)
 	);
 
-	entities::player_unique_ptr player_(
-		create_player(
+	entities::player_unique_ptr player(
+		server::create_player(
 			load_context_,
-			name,
+			_name,
 			send_unicast_,
-			player_id_,
+			_player_id,
 			console_.known_commands()
 		)
 	);
 
 	players_.insert(
-		player_id_,
-		player_.get()
+		_player_id,
+		player.get()
 	);
 
 	// FIXME: where to insert the player?
@@ -115,10 +117,10 @@ sanguis::server::global::context::insert_player(
 		pos_type::null()
 	);
 
-	world_.insert(
+	cur_world.insert(
 		entities::unique_ptr(
 			move(
-				player_
+				player
 			)
 		),
 		entities::insert_parameters(
@@ -127,7 +129,7 @@ sanguis::server::global::context::insert_player(
 		)
 	);
 
-	world_.insert(
+	cur_world.insert(
 		entities::unique_ptr(
 			fcppt::make_unique_ptr<
 				entities::pickups::weapon
@@ -145,162 +147,172 @@ sanguis::server::global::context::insert_player(
 
 void
 sanguis::server::global::context::player_disconnect(
-	player_id const player_id_
+	player_id const _player_id
 )
 {
 	players_[
-		player_id_
+		_player_id
 	]->die();
 }
 
 void
 sanguis::server::global::context::player_target(
-	player_id const player_id_,
-	pos_type const &target_
+	player_id const _player_id,
+	pos_type const &_target
 )
 {
 	players_[
-		player_id_
+		_player_id
 	]->target(
-		target_
+		_target
 	);
 }
 
 void
 sanguis::server::global::context::player_change_weapon(
-	player_id const player_id_,
-	weapon_type::type const wt
+	player_id const _player_id,
+	weapon_type::type const _weapon
 )
 {
 	players_[
-		player_id_
+		_player_id
 	]->change_weapon(
-		wt
+		_weapon
 	);
 }
 
 void
 sanguis::server::global::context::player_angle(
-	player_id const player_id_,
-	space_unit const angle_
+	player_id const _player_id,
+	space_unit const _angle
 )
 {
-	entities::player &player_(
+	entities::player &player(
 		*players_[
-			player_id_
+			_player_id
 		]
 	);
 
-	player_.angle(
-		angle_
+	player.angle(
+		_angle
 	);
 
 	send_unicast_(
-		player_id_,
+		_player_id,
 		message_convert::rotate(
-			player_
+			player
 		)
 	);
 }
 
 void
 sanguis::server::global::context::player_change_shooting(
-	player_id const player_id_,
-	bool const shooting
+	player_id const _player_id,
+	bool const _shooting
 )
 {
 	players_[
-		player_id_
+		_player_id
 	]->aggressive(
-		shooting
+		_shooting
 	);
 }
 
 void
 sanguis::server::global::context::player_direction(
-	player_id const player_id_,
-	pos_type const &dir
+	player_id const _player_id,
+	pos_type const &_dir
 )
 {
-	entities::player &player_(
+	entities::player &player(
 		*players_[
-			player_id_
+			_player_id
 		]
 	);
 
-	if (is_null(dir))
-		player_.movement_speed().current(
+	if(
+		fcppt::math::vector::is_null(
+			_dir
+		)
+	)
+		player.movement_speed().current(
 			static_cast<space_unit>(0)
 		);
 	else
 	{
-		player_.direction(
-			*fcppt::math::vector::to_angle<space_unit>(dir)
+		player.direction(
+			*fcppt::math::vector::to_angle<
+				space_unit
+			>(
+				_dir
+			)
 		);
 		
 		entities::property::current_to_max(
-			player_.movement_speed()
+			player.movement_speed()
 		);
 	}
 
 	send_unicast_(
-		player_id_,
+		_player_id,
 		message_convert::speed(
-			player_
+			player
 		)
 	);
 }
 
 void
 sanguis::server::global::context::player_cheat(
-	player_id const player_id_,
-	cheat_type::type const cheat_
+	player_id const _player_id,
+	cheat_type::type const _cheat
 )
 {
 	server::cheat(
 		*players_[
-			player_id_
+			_player_id
 		],
-		cheat_
+		_cheat
 	);
 }
 
 void
 sanguis::server::global::context::player_choose_perk(
-	player_id const player_id_,
-	perk_type::type const perk_type_
+	player_id const _player_id,
+	perk_type::type const _perk_type
 )
 {
-	entities::player &player_(
+	entities::player &player(
 		*players_[
-			player_id_
+			_player_id
 		]
 	);
 	
 	if(
-		!player_.perk_choosable(
-			perk_type_
+		!player.perk_choosable(
+			_perk_type
 		)
 	)
 	{
 		FCPPT_LOG_WARNING(
-			log(),
+			context::log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("Player with id ")
-				<< player_id_
+				<< _player_id
 				<< FCPPT_TEXT(" tried to take an invalid perk")
-				<< FCPPT_TEXT(" or has no skillpoints left!"));
+				<< FCPPT_TEXT(" or has no skillpoints left!")
+		);
+
 		return;
 	}
 
-	player_.add_perk(
+	player.add_perk(
 		perks::create(
-			perk_type_
+			_perk_type
 		)
 	);
 	
-	send_available_perks(
-		player_,
+	server::send_available_perks(
+		player,
 		send_unicast_
 	);
 }
@@ -340,18 +352,18 @@ sanguis::server::global::context::send_to_player(
 
 void
 sanguis::server::global::context::remove_player(
-	player_id const id_
+	player_id const _id
 )
 {
 	send_unicast_(
-		id_,
+		_id,
 		messages::create(
 			messages::remove_id()
 		)
 	);
 
 	players_.erase(
-		id_
+		_id
 	);
 }
 
@@ -362,7 +374,7 @@ sanguis::server::global::context::transfer_entity(
 	entities::insert_parameters const &_insert_parameters
 )
 {
-	world(
+	this->world(
 		_destination
 	).insert(
 		move(
@@ -374,12 +386,12 @@ sanguis::server::global::context::transfer_entity(
 
 sanguis::server::world::object &
 sanguis::server::global::context::world(
-	world_id const world_id_
+	world_id const _world_id
 )
 {
 	server::world::map::iterator const it(
 		worlds_.find(
-			world_id_	
+			_world_id
 		)
 	);
 
@@ -391,7 +403,7 @@ sanguis::server::global::context::world(
 	return
 		*fcppt::container::ptr::insert_unique_ptr_map(
 			worlds_,
-			world_id_,
+			_world_id,
 			server::world::random(
 				world_context_,
 				collision_system_,
@@ -404,12 +416,12 @@ sanguis::server::global::context::world(
 fcppt::log::object &
 sanguis::server::global::context::log()
 {
-	static fcppt::log::object log_(
+	static fcppt::log::object my_logger(
 		fcppt::log::parameters::inherited(
 			server::log(),
 			FCPPT_TEXT("global::context")
 		)
 	);
 
-	return log_;
+	return my_logger;
 }
