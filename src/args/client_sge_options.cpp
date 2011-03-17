@@ -75,7 +75,7 @@ sanguis::args::client_sge_options(
 					sge::systems::input_helper::keyboard_collector
 				)
 				|
-				sge::systems::input_helper::mouse_collector,
+				sge::systems::input_helper::cursor_demuxer,
 				sge::systems::cursor_option_field::null()
 			)
 		)
