@@ -55,28 +55,18 @@ private:
 	sge::cegui::toolbox::scoped_layout const scoped_layout_;
 
 	CEGUI::Event::ScopedConnection const
-		quickstart_connection_;
-
-	fcppt::string 
-		connection_host_,
-		connection_port_;
+		quickstart_connection_,
+		quit_connection_;
 
 	bool
-	quickstart(
+	handle_quickstart(
 		CEGUI::EventArgs const &
 	);
 
-	void
-	connect_from_menu();
-
-	void
-	connect(
-		fcppt::string const &,
-		fcppt::string const &
+	bool
+	handle_quit(
+		CEGUI::EventArgs const &
 	);
-
-	void
-	cancel_connect();
 };
 
 }

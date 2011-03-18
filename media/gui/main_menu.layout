@@ -15,7 +15,7 @@
                 <Property Name="Text" Value="Quickstart" />
                 <Property Name="UnifiedAreaRect" Value="{{0.183544,0},{0.0426913,0},{0.863924,0},{0.151724,0}}" />
             </Window>
-            <Window Type="TaharezLook/Button" Name="Root/FrameWindow/Button3" >
+            <Window Type="TaharezLook/Button" Name="Root/FrameWindow/Quit" >
                 <Property Name="Text" Value="Quit" />
                 <Property Name="UnifiedAreaRect" Value="{{0.183544,0},{0.827728,0},{0.863924,0},{0.936761,0}}" />
             </Window>

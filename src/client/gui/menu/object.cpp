@@ -48,13 +48,29 @@ sanguis::client::gui::menu::object::object(
 			CEGUI::PushButton::EventClicked,
 			CEGUI::Event::Subscriber(
 				std::tr1::bind(
-					&object::quickstart,
+					&object::handle_quickstart,
+					this,
+					std::tr1::placeholders::_1
+				)
+			)
+		)
+	),
+	quit_connection_(
+		CEGUI::WindowManager::getSingleton().getWindow(
+			"Root/FrameWindow/Quit"
+		)
+		->subscribeEvent(
+			CEGUI::PushButton::EventClicked,
+			CEGUI::Event::Subscriber(
+				std::tr1::bind(
+					&object::handle_quit,
 					this,
 					std::tr1::placeholders::_1
 				)
 			)
 		)
 	)
+	
 #if 0
 		fcppt::assign::make_container<
 			fcppt::signal::connection_manager::container
@@ -183,7 +199,7 @@ sanguis::client::gui::menu::object::connection_error(
 }
 
 bool
-sanguis::client::gui::menu::object::quickstart(
+sanguis::client::gui::menu::object::handle_quickstart(
 	CEGUI::EventArgs const &
 )
 {
@@ -192,10 +208,20 @@ sanguis::client::gui::menu::object::quickstart(
 	return true;
 }
 
+bool
+sanguis::client::gui::menu::object::handle_quit(
+	CEGUI::EventArgs const &
+)
+{
+	callbacks_.quit()();
+
+	return true;
+}
+
+#if 0
 void
 sanguis::client::gui::menu::object::connect_from_menu()
 {
-#if 0
 	this->connect(
 		sge::font::text::to_fcppt_string(
 			connect_.host_edit.text()
@@ -204,16 +230,13 @@ sanguis::client::gui::menu::object::connect_from_menu()
 			connect_.port_edit.text()
 		)
 	);
-#endif
 }
+#endif
 
-void
-sanguis::client::gui::menu::object::connect(
-	fcppt::string const &_host,
-	fcppt::string const &_port
-)
-{
 #if 0
+void
+sanguis::client::gui::menu::object::connect()
+{
 	FCPPT_LOG_DEBUG(
 		mylogger,
 		fcppt::log::_
@@ -244,16 +267,16 @@ sanguis::client::gui::menu::object::connect(
 	mover_.reset(
 		connect_box_.parent
 	);
-#endif
 }
+#endif
 
+#if 0
 void
 sanguis::client::gui::menu::object::cancel_connect()
 {
-#if 0
 	mover_.reset(
 		connect_.parent
 	);
-#endif	
 	callbacks_.cancel_connect()();
 }
+#endif	
