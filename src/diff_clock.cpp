@@ -6,29 +6,37 @@
 
 sanguis::diff_clock::diff_clock()
 :
-	diff_time(0)
-{}
-
-void sanguis::diff_clock::update(
-	time_type const tm)
+	diff_time_(0)
 {
-	diff_time +=
+}
+
+sanguis::diff_clock::~diff_clock()
+{
+}
+
+void
+sanguis::diff_clock::update(
+	time_type const _diff
+)
+{
+	diff_time_ +=
 		sge::time::second_f(
-			tm
+			_diff
 		).count();
 }
 
 sanguis::diff_clock::fun_type const
 sanguis::diff_clock::callback() const
 {
-	return std::tr1::bind(
-		&diff_clock::time,
-		this
-	);
+	return
+		std::tr1::bind(
+			&diff_clock::time,
+			this
+		);
 }
 
 sge::time::unit
 sanguis::diff_clock::time() const
 {
-	return diff_time;
+	return diff_time_;
 }

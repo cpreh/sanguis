@@ -5,9 +5,11 @@
 #include "connect_callback.hpp"
 #include "data_callback.hpp"
 #include "disconnect_callback.hpp"
+#include "timer_callback.hpp"
 #include "../data_buffer.hpp"
 #include "../id.hpp"
 #include "../port.hpp"
+#include <sge/time/duration.hpp>
 #include <awl/mainloop/io_service_fwd.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -26,10 +28,10 @@ class object
 		object
 	);
 public:
-	explicit
 	object(
-		awl::mainloop::io_service &
-	);	
+		awl::mainloop::io_service &,
+		sge::time::duration const &
+	);
 
 	~object();
 
@@ -58,7 +60,12 @@ public:
 	register_data(
 		server::data_callback const &
 	);
-	
+
+	fcppt::signal::auto_connection
+	register_timer(
+		server::timer_callback const &
+	);
+
 	void 
 	stop();
 private:

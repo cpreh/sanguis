@@ -9,17 +9,22 @@
 #include "data_function.hpp"
 #include "disconnect_callback.hpp"
 #include "disconnect_function.hpp"
+#include "timer_callback.hpp"
+#include "timer_function.hpp"
 #include "../data_buffer.hpp"
 #include "../id.hpp"
 #include "../port.hpp"
-#include <boost/asio/io_service.hpp>
-#include <boost/asio/ip/tcp.hpp>
-#include <boost/ptr_container/ptr_map.hpp>
-#include <boost/system/error_code.hpp>
+#include <sge/time/duration.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/signal/object.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/unique_ptr.hpp>
+#include <boost/asio/deadline_timer.hpp>
+#include <boost/asio/io_service.hpp>
+#include <boost/asio/ip/tcp.hpp>
+#include <boost/date_time/posix_time/posix_time_duration.hpp>
+#include <boost/ptr_container/ptr_map.hpp>
+#include <boost/system/error_code.hpp>
 #include <cstddef>
 
 namespace sanguis
@@ -35,8 +40,9 @@ class object_impl
 		object_impl
 	);
 public:
-	explicit object_impl(
-		boost::asio::io_service &
+	object_impl(
+		boost::asio::io_service &,
+		sge::time::duration const &
 	);
 
 	~object_impl();
@@ -65,6 +71,11 @@ public:
 	fcppt::signal::auto_connection
 	register_data(
 		server::data_callback const &
+	);
+
+	fcppt::signal::auto_connection
+	register_timer(
+		server::timer_callback const &
 	);
 
 	void
@@ -99,6 +110,14 @@ private:
 		server::data_function
 	> data_signal_;
 
+	fcppt::signal::object<
+		server::timer_function
+	> timer_signal_;
+
+	boost::posix_time::milliseconds const timer_duration_;
+
+	boost::asio::deadline_timer deadline_timer_;
+
 	void
 	accept();
 
@@ -129,9 +148,15 @@ private:
 	);
 
 	void
+	timer_handler();
+
+	void
 	send_data(
 		server::connection &
 	);
+
+	void
+	reset_timer();
 
 	static
 	fcppt::log::object &

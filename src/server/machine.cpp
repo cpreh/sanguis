@@ -8,6 +8,8 @@
 #include "../net/serialize.hpp"
 #include "../net/deserialize.hpp"
 #include "../exception.hpp"
+#include <sge/time/millisecond.hpp>
+#include <sge/time/second.hpp>
 #include <fcppt/algorithm/append.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
@@ -34,7 +36,15 @@ sanguis::server::machine::machine(
 		_port
 	),
 	net_(
-		_io_service
+		_io_service,
+		sge::time::millisecond(
+			16
+		)
+	),
+	frame_timer_(
+		sge::time::second(
+			1
+		)
 	),
 	temp_buffer_(),
 	s_conn_(
@@ -66,6 +76,16 @@ sanguis::server::machine::machine(
 			)
 		)
 	),
+	s_timer_(
+		net_.register_timer(
+			std::tr1::bind(
+				std::tr1::bind(
+					&machine::timer_callback,
+					this
+				)
+			)
+		)
+	),
 	clients_(),
 	collision_(_collision)
 {
@@ -73,16 +93,6 @@ sanguis::server::machine::machine(
 
 sanguis::server::machine::~machine()
 {
-}
-
-void
-sanguis::server::machine::process(
-	tick_event const &_event
-)
-{
-	this->process_event(
-		_event
-	);
 }
 
 void
@@ -219,20 +229,6 @@ sanguis::server::machine::send_to_all(
 	temp_buffer_.clear();
 }
 
-sanguis::net::port
-sanguis::server::machine::port() const
-{
-	return 
-		port_;
-}
-
-sanguis::net::server::object &
-sanguis::server::machine::net()
-{
-	return 
-		net_;
-}
-
 sanguis::load::context_base const &
 sanguis::server::machine::resources() const
 {
@@ -274,6 +270,20 @@ catch(
 		fcppt::log::_
 			<< FCPPT_TEXT("send_unicast failed: ")
 			<< _error.string()
+	);
+}
+
+void
+sanguis::server::machine::timer_callback()
+{
+	this->process_event(
+		sanguis::tick_event(
+			static_cast<
+				time_type
+			>(
+				frame_timer_.reset()
+			)
+		)
 	);
 }
 

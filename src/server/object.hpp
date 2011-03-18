@@ -7,7 +7,6 @@
 #include "../net/port.hpp"
 #include "../main_object.hpp"
 #include <sge/systems/instance_fwd.hpp>
-#include <sge/time/timer.hpp>
 #include <fcppt/thread/object.hpp>
 #include <fcppt/scoped_state_machine.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -56,11 +55,7 @@ private:
 
 	awl::mainloop::io_service_scoped_ptr const io_service_;
 
-	sge::time::timer frame_timer_;
-
 	server::machine machine_;
-
-	fcppt::signal::scoped_connection const timer_connection_;
 
 	bool running_;
 

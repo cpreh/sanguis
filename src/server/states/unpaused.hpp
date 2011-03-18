@@ -13,6 +13,7 @@
 #include "../../messages/disconnect.hpp"
 #include "../../messages/base_fwd.hpp"
 #include "../../net/id.hpp"
+#include "../../tick_event_fwd.hpp"
 #include "running.hpp"
 #include <fcppt/log/object_fwd.hpp>
 #include <boost/mpl/list.hpp>
@@ -40,7 +41,7 @@ class unpaused
 public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<
-			tick_event
+			sanguis::tick_event
 		>,
 		boost::statechart::custom_reaction<
 			message_event
@@ -53,7 +54,7 @@ public:
 
 	boost::statechart::result
 	react(
-		tick_event const &
+		sanguis::tick_event const &
 	);
 
 	boost::statechart::result

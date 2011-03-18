@@ -3,10 +3,8 @@
 #include "message_event.hpp"
 #include "states/running.hpp"
 #include "states/unpaused.hpp"
-#include "../time_type.hpp"
 #include "../tick_event.hpp"
 #include <sge/systems/instance.hpp>
-#include <sge/time/second.hpp>
 #include <awl/mainloop/asio/create_io_service_base.hpp>
 #include <awl/mainloop/io_service.hpp>
 #include <fcppt/log/headers.hpp>
@@ -24,25 +22,11 @@ sanguis::server::object::object(
 	io_service_(
 		awl::mainloop::asio::create_io_service_base()
 	),
-	frame_timer_(
-		sge::time::second(
-			1
-		)
-	),
 	machine_(
 		_load_context,
 		_sys.collision_system(),
 		_port,
 		*io_service_
-	),
-	timer_connection_(
-		// FIXME:!
-		/*machine_.net().register_timer(
-			std::tr1::bind(
-				&object::timer_callback,
-				this
-			)
-		)*/
 	),
 	running_(
 		true
@@ -95,15 +79,7 @@ sanguis::server::object::mainloop()
 {
 	try
 	{
-		// FIXME: use a deadline_timer here!
-		while (
-			this->running()
-		)
-		{
-			io_service_->poll();
-
-			this->timer_callback();
-		}
+		io_service_->run();
 	}
 	catch(
 		fcppt::exception const &_exception
@@ -118,20 +94,6 @@ sanguis::server::object::mainloop()
 
 		this->reset_running();
 	}
-}
-
-void
-sanguis::server::object::timer_callback()
-{
-	machine_.process(
-		sanguis::tick_event(
-			static_cast<
-				time_type
-			>(
-				frame_timer_.reset()
-			)
-		)
-	);
 }
 
 void

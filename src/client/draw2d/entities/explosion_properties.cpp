@@ -2,8 +2,8 @@
 #include "../particle/align_type.hpp"
 #include "../particle/movement_type.hpp"
 #include "../particle/properties.hpp"
+#include "../particle/particle_type.hpp"
 #include "../funit.hpp"
-#include "../../../particle_type.hpp"
 #include <fcppt/minmax_pair_impl.hpp>
 #include <boost/assign/list_of.hpp>
 
@@ -12,7 +12,7 @@ namespace
 
 sanguis::client::draw2d::particle::property_container const prop_ = boost::assign::map_list_of
 (
-	sanguis::particle_type::flare,
+	sanguis::client::draw2d::particle::particle_type::flare,
 	sanguis::client::draw2d::particle::properties(
 		static_cast<
 			sanguis::client::draw2d::funit
@@ -44,7 +44,7 @@ sanguis::client::draw2d::particle::property_container const prop_ = boost::assig
 	)
 )
 (
-	sanguis::particle_type::smoke,
+	sanguis::client::draw2d::particle::particle_type::smoke,
 	sanguis::client::draw2d::particle::properties(
 		static_cast<
 			sanguis::client::draw2d::funit
@@ -76,7 +76,7 @@ sanguis::client::draw2d::particle::property_container const prop_ = boost::assig
 	)
 )
 (
-	sanguis::particle_type::rubble,
+	sanguis::client::draw2d::particle::particle_type::rubble,
 	sanguis::client::draw2d::particle::properties(
 		static_cast<
 			sanguis::client::draw2d::funit

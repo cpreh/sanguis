@@ -9,8 +9,8 @@
 #include "../net/data_buffer.hpp"
 #include "../net/id.hpp"
 #include "../net/port.hpp"
-#include "../tick_event_fwd.hpp"
 #include <sge/collision/system_ptr.hpp>
+#include <sge/time/timer.hpp>
 #include <fcppt/container/raw_vector_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -45,11 +45,6 @@ public:
 	~machine();
 
 	void
-	process(
-		tick_event const &
-	);
-
-	void
 	process_message(
 		net::id,
 		messages::auto_ptr
@@ -77,12 +72,6 @@ public:
 		messages::auto_ptr
 	);
 
-	net::port
-	port() const;
-
-	net::server::object &
-	net();
-
 	void 
 	stop();
 
@@ -102,6 +91,9 @@ public:
 	);
 private:
 	void
+	timer_callback();
+
+	void
 	pack_message(
 		messages::auto_ptr
 	);
@@ -116,12 +108,15 @@ private:
 
 	net::server::object net_;
 
+	sge::time::timer frame_timer_;
+
 	net::data_buffer temp_buffer_;
 
 	fcppt::signal::scoped_connection const
 		s_conn_,
 		s_disconn_,
-		s_data_;
+		s_data_,
+		s_timer_;
 
 	client_set clients_;
 

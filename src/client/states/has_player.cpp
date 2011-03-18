@@ -5,13 +5,17 @@
 #include "../events/menu.hpp"
 #include "../events/message.hpp"
 #include "../events/tick.hpp"
+#include "../log.hpp"
 #include "../../messages/call/object.hpp"
 #include "../../cast_enum.hpp"
 #include <sge/console/gfx.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
+#include <fcppt/log/debug.hpp>
+#include <fcppt/log/output.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
+#include <fcppt/text.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 
 sanguis::client::states::has_player::has_player(
@@ -51,7 +55,13 @@ sanguis::client::states::has_player::has_player(
 			)
 		)
 	)
-{}
+{
+	FCPPT_LOG_DEBUG(
+		client::log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("Entering has_player")
+	);
+}
 
 sanguis::client::states::has_player::~has_player()
 {

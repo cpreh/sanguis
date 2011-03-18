@@ -4,8 +4,10 @@
 namespace sanguis
 {
 
-namespace enemy_type {
-enum type {
+namespace enemy_type
+{
+enum type
+{
 	wolf_black,
 	wolf_brown,
 	wolf_white,

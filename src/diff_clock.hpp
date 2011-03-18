@@ -17,6 +17,8 @@ class diff_clock
 public:
 	diff_clock();
 
+	~diff_clock();
+
 	void
 	update(
 		time_type
@@ -24,13 +26,14 @@ public:
 	
 	typedef sge::time::callback fun_type;
 
-	fun_type const callback() const;
+	fun_type const
+	callback() const;
 private:
-	sge::time::unit time() const;
+	sge::time::unit
+	time() const;
 
-	sge::time::unit diff_time;
+	sge::time::unit diff_time_;
 };
-
 
 }
 

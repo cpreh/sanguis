@@ -6,7 +6,8 @@ namespace sanguis
 namespace animation_type
 {
 
-enum type {
+enum type
+{
 	none,
 	attacking,
 	walking,

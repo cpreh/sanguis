@@ -3,7 +3,7 @@
 
 #include "property_container.hpp"
 #include "properties_fwd.hpp"
-#include "../../../particle_type.hpp"
+#include "particle_type.hpp"
 
 namespace sanguis
 {
@@ -14,14 +14,17 @@ namespace draw2d
 namespace particle
 {
 
-class property_map {
+class property_map
+{
 public:
 	explicit property_map(
-		property_container const &);
+		property_container const &
+	);
 	
 	properties const &
 	operator[](
-		particle_type::type) const;
+		particle_type::type
+	) const;
 private:
 	property_container container_;	
 };

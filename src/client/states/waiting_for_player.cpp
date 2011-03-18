@@ -4,8 +4,11 @@
 #include "../events/action.hpp"
 #include "../events/message.hpp"
 #include "../events/tick.hpp"
+#include "../log.hpp"
 #include "../../messages/call/object.hpp"
 #include "../../messages/create.hpp"
+#include <fcppt/log/debug.hpp>
+#include <fcppt/log/output.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 
@@ -14,7 +17,13 @@ sanguis::client::states::waiting_for_player::waiting_for_player(
 )
 :
 	my_base(_ctx)
-{}
+{
+	FCPPT_LOG_DEBUG(
+		client::log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("Entering waiting_for_player")
+	);
+}
 
 sanguis::client::states::waiting_for_player::~waiting_for_player()
 {

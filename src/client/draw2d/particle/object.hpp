@@ -2,10 +2,10 @@
 #define SANGUIS_CLIENT_DRAW2D_PARTICLE_OBJECT_HPP_INCLUDED
 
 #include "base.hpp"
+#include "particle_type.hpp"
 #include "../sprite/particle/object.hpp"
 #include "../sprite/particle/texture_animation.hpp"
 #include "../sprite/particle/system.hpp"
-#include "../../../particle_type.hpp"
 #include "../../../diff_clock.hpp"
 #include "../../../time_type.hpp"
 #include "../../../load/model/animation_context_ptr.hpp"

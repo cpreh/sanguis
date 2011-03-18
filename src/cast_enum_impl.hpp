@@ -18,29 +18,35 @@ template<
 >
 Enum
 cast_enum_impl(
-	Value const &value
+	Value const &_value
 )
 {
 	if(
-		value
+		_value
 		>= static_cast<
 			Value
 		>(
 			Size
 		)
 	)
-		throw exception(
+		throw sanguis::exception(
 			FCPPT_TEXT("Received invalid enum: ")
-			+ fcppt::type_name(typeid(Enum))
+			+ fcppt::type_name(
+				typeid(Enum)
+			)
 			+ FCPPT_TEXT(", value = ")
-			+ fcppt::lexical_cast<fcppt::string>(value)
+			+ fcppt::lexical_cast<
+				fcppt::string
+			>(
+				_value
+			)
 		);
 	
 	return
 		static_cast<
 			Enum
 		>(
-			value
+			_value
 		);
 }
 

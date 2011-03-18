@@ -6,7 +6,8 @@ namespace sanguis
 
 namespace damage_type
 {
-enum type {
+enum type
+{
 	normal,
 	piercing,
 	fire,

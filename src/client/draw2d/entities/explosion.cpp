@@ -8,6 +8,7 @@
 #include "../particle/point.hpp"
 #include "../particle/rotation.hpp"
 #include "../particle/z_ordering.hpp"
+#include "../particle/type_to_string.hpp"
 #include "../../../load/model/part.hpp"
 #include "../../../load/model/weapon_category.hpp"
 #include "../../../load/model/object.hpp"
@@ -15,7 +16,6 @@
 #include "../../../load/model/animation.hpp"
 #include "../../../load/model/animation_context.hpp"
 #include "../../../animation_type.hpp"
-#include "../../../from_particle_type.hpp"
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/minmax_pair_impl.hpp>
@@ -133,14 +133,17 @@ sanguis::client::draw2d::entities::explosion::generate_explosion()
 
 sanguis::client::draw2d::particle::base_ptr
 sanguis::client::draw2d::entities::explosion::generate_particle(
-	particle_type::type const t
+	particle::particle_type::type const _particle_type
 )
 {
 	load::model::animation_context_ptr anim(
 		model_collection_
 		[
-			FCPPT_TEXT("particles/")+
-			from_particle_type(t)
+			FCPPT_TEXT("particles/")
+			+
+			particle::type_to_string(
+				_particle_type
+			)
 		]
 		.random_part()
 		[
@@ -154,13 +157,17 @@ sanguis::client::draw2d::entities::explosion::generate_particle(
 	particle::base_ptr ptr;
 	
 	particle::properties const &prop(
-		properties_[t]
+		properties_[
+			_particle_type
+		]
 	);
 
-	if (!prop.do_fade())
+	if(
+		!prop.do_fade()
+	)
 		ptr.reset(
 			new particle::object(
-				t,
+				_particle_type,
 				aoe_,
 				move(
 					anim
@@ -184,7 +191,7 @@ sanguis::client::draw2d::entities::explosion::generate_particle(
 		
 		ptr.reset(
 			new particle::object(
-				t,
+				_particle_type,
 				aoe_,
 				move(
 					anim
@@ -196,7 +203,9 @@ sanguis::client::draw2d::entities::explosion::generate_particle(
 	}
 
 	ptr->depth(
-		particle::z_ordering(t)
+		particle::z_ordering(
+			_particle_type
+		)
 	);
 
 	return ptr;

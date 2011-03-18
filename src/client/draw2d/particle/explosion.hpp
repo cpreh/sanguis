@@ -4,7 +4,7 @@
 #include "container.hpp"
 #include "property_map.hpp"
 #include "base_ptr.hpp"
-#include "../../../particle_type.hpp"
+#include "particle_type.hpp"
 #include <fcppt/function/object_fwd.hpp>
 
 namespace sanguis

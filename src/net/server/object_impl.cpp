@@ -8,6 +8,9 @@
 #include "../log.hpp"
 #undef max
 // asio brings in window.h's max macro :(
+#include <fcppt/chrono/duration_cast.hpp>
+#include <fcppt/chrono/duration_impl.hpp>
+#include <fcppt/chrono/milliseconds.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/tr1/functional.hpp>
@@ -24,7 +27,8 @@
 #include <boost/asio.hpp>
 
 sanguis::net::server::object_impl::object_impl(
-	boost::asio::io_service &_io_service
+	boost::asio::io_service &_io_service,
+	sge::time::duration const &_duration
 )
 :
 	io_service_(
@@ -44,8 +48,20 @@ sanguis::net::server::object_impl::object_impl(
 	connections_(),
 	connect_signal_(),
 	disconnect_signal_(),
-	data_signal_()
+	data_signal_(),
+	timer_signal_(),
+	timer_duration_(
+		fcppt::chrono::duration_cast<
+			fcppt::chrono::milliseconds
+		>(
+			_duration
+		).count()
+	),
+	deadline_timer_(
+		io_service_
+	)
 {
+	this->reset_timer();
 }
 
 sanguis::net::server::object_impl::~object_impl()
@@ -177,6 +193,17 @@ sanguis::net::server::object_impl::register_data(
 {
 	return
 		data_signal_.connect(
+			_callback
+		);
+}
+
+fcppt::signal::auto_connection
+sanguis::net::server::object_impl::register_timer(
+	server::timer_callback const &_callback
+)
+{
+	return
+		timer_signal_.connect(
 			_callback
 		);
 }
@@ -441,6 +468,12 @@ sanguis::net::server::object_impl::handle_error(
 }
 
 void
+sanguis::net::server::object_impl::timer_handler()
+{
+	timer_signal_();
+}
+
+void
 sanguis::net::server::object_impl::send_data(
 	server::connection &_con
 )
@@ -469,6 +502,21 @@ sanguis::net::server::object_impl::send_data(
 			fcppt::ref(
 				_con
 			)
+		)
+	);
+}
+
+void
+sanguis::net::server::object_impl::reset_timer()
+{
+	deadline_timer_.expires_from_now(
+		timer_duration_
+	);
+
+	deadline_timer_.async_wait(
+		std::tr1::bind(
+			&object_impl::timer_handler,
+			this
 		)
 	);
 }

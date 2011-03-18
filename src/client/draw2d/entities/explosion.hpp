@@ -6,9 +6,9 @@
 #include "../particle/container.hpp"
 #include "../particle/property_map.hpp"
 #include "../particle/properties_fwd.hpp"
+#include "../particle/particle_type.hpp"
 #include "../sprite/particle/system.hpp"
 #include "../funit.hpp"
-#include "../../../particle_type.hpp"
 #include "../../../load/model/collection_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
@@ -63,12 +63,12 @@ private:
 
 	particle::base_ptr
 	generate_particle(
-		particle_type::type
+		particle::particle_type::type
 	);
 
 	particle::properties const &
 	properties(
-		particle_type::type const t
+		particle::particle_type::type const t
 	) const;
 	
 	bool

@@ -6,7 +6,8 @@ namespace sanguis
 
 namespace entity_type
 {
-enum type {
+enum type
+{
 	enemy,
 	friend_,
 	pickup,

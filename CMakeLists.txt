@@ -315,6 +315,7 @@ SET(
 	src/client/draw2d/particle/movement_type.hpp
 	src/client/draw2d/particle/object.cpp
 	src/client/draw2d/particle/object.hpp
+	src/client/draw2d/particle/particle_type.hpp
 	src/client/draw2d/particle/point.hpp
 	src/client/draw2d/particle/properties.cpp
 	src/client/draw2d/particle/properties.hpp
@@ -327,6 +328,8 @@ SET(
 	src/client/draw2d/particle/rotation_from_alignment.hpp
 	src/client/draw2d/particle/rotation_velocity_range.hpp
 	src/client/draw2d/particle/time_type.hpp
+	src/client/draw2d/particle/type_to_string.cpp
+	src/client/draw2d/particle/type_to_string.hpp
 	src/client/draw2d/particle/uniform_rotation.hpp
 	src/client/draw2d/particle/uniform_velocity_range.hpp
 	src/client/draw2d/particle/velocity_from_movement.cpp
@@ -502,8 +505,6 @@ SET(
 	src/friend_type.hpp
 	src/from_console_arg_list.cpp
 	src/from_console_arg_list.hpp
-	src/from_particle_type.cpp
-	src/from_particle_type.hpp
 	src/load/aoe_projectile_name.cpp
 	src/load/aoe_projectile_name.hpp
 	src/load/context.cpp
@@ -884,7 +885,6 @@ SET(
 	src/net/static_buffer.hpp
 	src/net/stream_exceptions.hpp
 	src/net/value_type.hpp
-	src/particle_type.hpp
 	src/perk_type.hpp
 	src/pickup_type.hpp
 	src/projectile_type.hpp

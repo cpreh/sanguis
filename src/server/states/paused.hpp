@@ -2,10 +2,12 @@
 #define SANGUIS_SERVER_STATES_PAUSED_HPP_INCLUDED
 
 #include "running.hpp"
+#include "../message_event_fwd.hpp"
 #include "../../messages/player_unpause.hpp"
 #include "../../messages/player_pause.hpp"
 #include "../../messages/base_fwd.hpp"
 #include "../../net/id.hpp"
+#include "../../tick_event_fwd.hpp"
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <boost/mpl/list.hpp>
@@ -32,8 +34,12 @@ class paused
 	);
 public:
 	typedef boost::mpl::list<
-		boost::statechart::custom_reaction<tick_event>,
-		boost::statechart::custom_reaction<message_event> 
+		boost::statechart::custom_reaction<
+			sanguis::tick_event
+		>,
+		boost::statechart::custom_reaction<
+			server::message_event
+		>
 	> reactions;
 	
 	paused();

@@ -5,7 +5,8 @@
 #include <fcppt/ref.hpp>
 
 sanguis::net::server::object::object(
-	awl::mainloop::io_service &_io_service
+	awl::mainloop::io_service &_io_service,
+	sge::time::duration const &_duration
 )
 :	
 	impl_(
@@ -19,7 +20,8 @@ sanguis::net::server::object::object(
 					_io_service
 				)
 				.get()
-			)
+			),
+			_duration
 		)
 	)
 {
@@ -82,6 +84,17 @@ sanguis::net::server::object::register_data(
 {
 	return 
 		impl_->register_data(
+			_callback
+		);
+}
+
+fcppt::signal::auto_connection 
+sanguis::net::server::object::register_timer(
+	server::timer_callback const &_callback
+)
+{
+	return 
+		impl_->register_timer(
 			_callback
 		);
 }

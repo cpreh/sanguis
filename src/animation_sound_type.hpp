@@ -6,7 +6,8 @@ namespace sanguis
 namespace animation_sound_type
 {
 
-enum type {
+enum type
+{
 	start,
 	running,
 	end,

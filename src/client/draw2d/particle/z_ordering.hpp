@@ -1,8 +1,8 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_PARTICLE_Z_ORDERING_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_PARTICLE_Z_ORDERING_HPP_INCLUDED
 
+#include "particle_type.hpp"
 #include "../z_ordering.hpp"
-#include "../../../particle_type.hpp"
 
 namespace sanguis
 {
