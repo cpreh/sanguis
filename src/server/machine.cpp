@@ -3,7 +3,6 @@
 #include "log.hpp"
 #include "../tick_event.hpp"
 #include "../messages/create.hpp"
-#include "../messages/connect.hpp"
 #include "../messages/disconnect.hpp"
 #include "../net/serialize.hpp"
 #include "../net/deserialize.hpp"
@@ -122,15 +121,6 @@ sanguis::server::machine::connect_callback(
 		throw sanguis::exception(
 			FCPPT_TEXT("Client inserted twice in server!")
 		);
-
-	process_event(
-		message_event(
-			messages::create(
-				messages::connect()
-			),
-			_id
-		)
-	);
 }
 
 void

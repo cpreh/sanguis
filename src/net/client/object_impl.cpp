@@ -3,7 +3,6 @@
 #include "../circular_buffer_part.hpp"
 #include "../erase_circular_buffer_front.hpp"
 #include "../exception.hpp"
-#include "../is_disconnect.hpp"
 #include "../log.hpp"
 #include "../send_buffer_size.hpp"
 #undef max
@@ -38,7 +37,7 @@ sanguis::net::client::object_impl::object_impl(
 		net::send_buffer_size()
 	),
 	connect_signal_(),
-	disconnect_signal_(),
+	error_signal_(),
 	data_signal_()
 {
 }
@@ -138,12 +137,12 @@ sanguis::net::client::object_impl::register_connect(
 }
 
 fcppt::signal::auto_connection
-sanguis::net::client::object_impl::register_disconnect(
-	client::disconnect_callback const &_function
+sanguis::net::client::object_impl::register_error(
+	client::error_callback const &_function
 )
 {
 	return
-		disconnect_signal_.connect(
+		error_signal_.connect(
 			_function
 		);
 }
@@ -168,12 +167,17 @@ sanguis::net::client::object_impl::resolve_handler(
 	if(
 		_error
 	)
-		throw net::exception(
+	{
+		this->handle_error(
 			FCPPT_TEXT("client: error resolving address: ")+
 			fcppt::from_std_string(
 				_error.message()
-			)
+			),
+			_error
 		);
+
+		return;
+	}
 
 	FCPPT_LOG_DEBUG(
 		object_impl::log(),
@@ -203,35 +207,19 @@ sanguis::net::client::object_impl::handle_error(
 {
 	this->clear();
 
-	if(
-		!net::is_disconnect(
-			_error
-		)
-	)
-		throw net::exception(
-			FCPPT_TEXT("error in ") +
-			_message +
-			FCPPT_TEXT(": ") +
-			fcppt::from_std_string(
-				_error.message()
-			)
-		);
-
-		
-	FCPPT_LOG_DEBUG(
+	FCPPT_LOG_ERROR(
 		object_impl::log(),
 		fcppt::log::_
-			<< FCPPT_TEXT("disconnected (")
+			<< FCPPT_TEXT("error (")
 			<< fcppt::from_std_string(
 				_error.message()
 			)
 			<< FCPPT_TEXT(")")
 	);
 
-	disconnect_signal_(
-		fcppt::from_std_string(
-			_error.message()
-		)
+	error_signal_(
+		_message,
+		_error
 	);
 }
 
@@ -332,12 +320,15 @@ sanguis::net::client::object_impl::connect_handler(
 		if(
 			_iterator == boost::asio::ip::tcp::resolver::iterator()
 		)
-			throw net::exception(
+		{
+			this->handle_error(
 				FCPPT_TEXT("client: exhausted endpoints: ")+
 				fcppt::from_std_string(
 					_error.message()
-				)
+				),
+				_error
 			);
+		}
 
 		FCPPT_LOG_DEBUG(
 			object_impl::log(),

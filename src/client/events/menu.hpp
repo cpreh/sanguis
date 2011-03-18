@@ -23,4 +23,4 @@ class menu
 }
 }
 
-#endif // SANGUIS_CLIENT_MENU_EVENT_HPP_INCLUDED
+#endif

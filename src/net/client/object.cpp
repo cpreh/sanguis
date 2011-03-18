@@ -71,12 +71,12 @@ sanguis::net::client::object::register_connect(
 }
 
 fcppt::signal::auto_connection
-sanguis::net::client::object::register_disconnect(
-	client::disconnect_callback const &_callback
+sanguis::net::client::object::register_error(
+	client::error_callback const &_callback
 )
 {
 	return
-		impl_->register_disconnect(
+		impl_->register_error(
 			_callback
 		);
 }

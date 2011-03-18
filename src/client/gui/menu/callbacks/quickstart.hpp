@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_GUI_MENU_CALLBACKS_QUICKSTART_HPP_INCLUDED
 #define SANGUIS_CLIENT_GUI_MENU_CALLBACKS_QUICKSTART_HPP_INCLUDED
 
+#include "../../../../net/port.hpp"
 #include <fcppt/function/object_fwd.hpp>
 
 namespace sanguis
@@ -15,7 +16,9 @@ namespace callbacks
 {
 
 typedef fcppt::function::object<
-	void ()
+	void(
+		net::port
+	)
 > quickstart;
 
 }

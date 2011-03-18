@@ -416,11 +416,16 @@ SET(
 	src/client/events/action.cpp
 	src/client/events/action.hpp
 	src/client/events/action_fwd.hpp
+	src/client/events/connected.hpp
+	src/client/events/connected_fwd.hpp
 	src/client/events/menu.hpp
 	src/client/events/menu_fwd.hpp
 	src/client/events/message.cpp
 	src/client/events/message.hpp
 	src/client/events/message_fwd.hpp
+	src/client/events/net_error.cpp
+	src/client/events/net_error.hpp
+	src/client/events/net_error_fwd.hpp
 	src/client/events/tick.hpp
 	src/client/events/tick_fwd.hpp
 	src/client/exp_type.hpp
@@ -668,8 +673,6 @@ SET(
 	src/messages/concrete.hpp
 	src/messages/concrete_fwd.hpp
 	src/messages/concrete_impl.hpp
-	src/messages/connect.cpp
-	src/messages/connect.hpp
 	src/messages/connect_state.cpp
 	src/messages/connect_state.hpp
 	src/messages/console_command.cpp
@@ -709,8 +712,6 @@ SET(
 	src/messages/message_type.hpp
 	src/messages/move.cpp
 	src/messages/move.hpp
-	src/messages/net_error.cpp
-	src/messages/net_error.hpp
 	src/messages/pause.cpp
 	src/messages/pause.hpp
 	src/messages/perk_list.hpp
@@ -840,8 +841,8 @@ SET(
 	src/net/client/connect_function.hpp
 	src/net/client/data_callback.hpp
 	src/net/client/data_function.hpp
-	src/net/client/disconnect_callback.hpp
-	src/net/client/disconnect_function.hpp
+	src/net/client/error_callback.hpp
+	src/net/client/error_function.hpp
 	src/net/client/object.cpp
 	src/net/client/object.hpp
 	src/net/client/object_impl.cpp
@@ -881,6 +882,8 @@ SET(
 	src/net/server/object_impl.cpp
 	src/net/server/object_impl.hpp
 	src/net/server/object_impl_fwd.hpp
+	src/net/server/timer_callback.hpp
+	src/net/server/timer_function.hpp
 	src/net/size_type.hpp
 	src/net/static_buffer.hpp
 	src/net/stream_exceptions.hpp

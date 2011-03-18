@@ -3,12 +3,11 @@
 
 #include "menu_fwd.hpp"
 #include "../machine.hpp"
+#include "../events/connected_fwd.hpp"
 #include "../events/message_fwd.hpp"
+#include "../events/net_error_fwd.hpp"
 #include "../events/tick_fwd.hpp"
 #include "../gui/menu/object.hpp"
-#include "../../messages/net_error.hpp"
-#include "../../messages/connect.hpp"
-#include "../../messages/disconnect.hpp"
 #include "../../messages/connect_state.hpp"
 #include "../../connect_state.hpp"
 #include <sge/renderer/state/scoped.hpp>
@@ -42,6 +41,12 @@ public:
 		>,
 		boost::statechart::custom_reaction<
 			events::message
+		>,
+		boost::statechart::custom_reaction<
+			events::connected
+		>,
+		boost::statechart::custom_reaction<
+			events::net_error
 		>
 	> reactions;
 
@@ -64,23 +69,18 @@ public:
 	);
 
 	boost::statechart::result
+	react(
+		events::connected const &
+	);
+
+	boost::statechart::result
+	react(
+		events::net_error const &
+	);
+
+	boost::statechart::result
 	handle_default_msg(
 		messages::base const &
-	);
-
-	result_type
-	operator()(
-		messages::net_error const &
-	);
-
-	result_type
-	operator()(
-		messages::connect const &
-	);
-
-	result_type
-	operator()(
-		messages::disconnect const &
 	);
 
 	result_type
@@ -102,9 +102,6 @@ private:
 		fcppt::string const &,
 		fcppt::string const &
 	);
-
-	void
-	quickstart();
 
 	void
 	cancel_connect();

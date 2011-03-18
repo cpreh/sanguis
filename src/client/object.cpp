@@ -1,6 +1,8 @@
 #include "object.hpp"
 #include "config/settings/file.hpp"
+#include "events/connected.hpp"
 #include "events/message.hpp"
+#include "events/net_error.hpp"
 #include "events/tick.hpp"
 #include "states/menu.hpp"
 #include "log.hpp"

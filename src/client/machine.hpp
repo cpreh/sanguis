@@ -30,8 +30,10 @@
 
 #include <fcppt/container/raw_vector_decl.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/string.hpp>
 
 #include <boost/statechart/state_machine.hpp>
+#include <boost/system/error_code.hpp>
 
 namespace sanguis
 {
@@ -69,7 +71,9 @@ public:
 	~machine();
 
 	void
-	quickstart();
+	quickstart(
+		net::port
+	);
 
 	void
 	connect(
@@ -85,27 +89,6 @@ public:
 		messages::auto_ptr
 	);
 	
-	void
-	process_message(
-		messages::auto_ptr
-	);
-	
-	void
-	connect_callback();
-	
-	void
-	disconnect_callback(
-		fcppt::string const &
-	);
-	
-	void
-	data_callback(
-		net::data_buffer const &
-	);
-
-	net::client::object &
-	net();
-
 	bool
 	process(
 		events::tick const &
@@ -153,6 +136,20 @@ public:
 	sanguis::client::gui::object &
 	gui() const;
 private:
+	void
+	connect_callback();
+	
+	void
+	error_callback(
+		fcppt::string const &,
+		boost::system::error_code const &
+	);
+	
+	void
+	data_callback(
+		net::data_buffer const &
+	);
+
 	config::settings::object &settings_;
 
 	client::gui::object &gui_;

@@ -134,7 +134,9 @@ sanguis::client::gui::menu::object::handle_quickstart(
 	CEGUI::EventArgs const &
 )
 {
-	callbacks_.quickstart()();
+	callbacks_.quickstart()(
+		31337 // FIXME!
+	);
 
 	return true;
 }

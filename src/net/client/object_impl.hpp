@@ -6,8 +6,8 @@
 #include "connect_function.hpp"
 #include "data_callback.hpp"
 #include "data_function.hpp"
-#include "disconnect_callback.hpp"
-#include "disconnect_function.hpp"
+#include "error_callback.hpp"
+#include "error_function.hpp"
 #include "../circular_buffer.hpp"
 #include "../static_buffer.hpp"
 #include "../data_buffer.hpp"
@@ -62,8 +62,8 @@ public:
 	);
 
 	fcppt::signal::auto_connection
-	register_disconnect(
-		client::disconnect_callback const &
+	register_error(
+		client::error_callback const &
 	);
 
 	fcppt::signal::auto_connection
@@ -93,8 +93,8 @@ private:
 	> connect_signal_;
 
 	fcppt::signal::object<
-		client::disconnect_function
-	> disconnect_signal_;
+		client::error_function
+	> error_signal_;
 
 	fcppt::signal::object<
 		client::data_function

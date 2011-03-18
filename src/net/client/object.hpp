@@ -4,7 +4,7 @@
 #include "object_impl_fwd.hpp"
 #include "connect_callback.hpp"
 #include "data_callback.hpp"
-#include "disconnect_callback.hpp"
+#include "error_callback.hpp"
 #include "../hostname.hpp"
 #include "../port.hpp"
 #include "../data_buffer.hpp"
@@ -52,8 +52,8 @@ public:
 	);
 
 	fcppt::signal::auto_connection
-	register_disconnect(
-		client::disconnect_callback const &
+	register_error(
+		client::error_callback const &
 	);
 
 	fcppt::signal::auto_connection

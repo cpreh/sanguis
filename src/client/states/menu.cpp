@@ -7,10 +7,12 @@
 #include "../../exception.hpp"
 #include "../../cast_enum.hpp"
 #include "../machine.hpp"
-#include "../events/message.hpp"
-#include "../events/tick.hpp"
-#include "../events/menu.hpp"
 #include "../events/action.hpp"
+#include "../events/connected.hpp"
+#include "../events/menu.hpp"
+#include "../events/message.hpp"
+#include "../events/net_error.hpp"
+#include "../events/tick.hpp"
 #include "../log.hpp"
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/var.hpp>
@@ -21,6 +23,7 @@
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/utf8/convert.hpp>
+#include <fcppt/from_std_string.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/to_std_string.hpp>
@@ -50,7 +53,8 @@ sanguis::client::states::menu::menu(
 			),
 			std::tr1::bind(
 				&machine::quickstart,
-				&context<machine>()
+				&context<machine>(),
+				std::tr1::placeholders::_1
 			),
 			std::tr1::bind(
 				&machine::quit,
@@ -91,11 +95,8 @@ sanguis::client::states::menu::react(
 )
 {
 	static messages::call::object<
-		boost::mpl::vector4<
-			messages::connect_state,
-			messages::connect,
-			messages::disconnect,
-			messages::net_error
+		boost::mpl::vector1<
+			messages::connect_state
 		>,
 		menu
 	> dispatcher;
@@ -113,34 +114,12 @@ sanguis::client::states::menu::react(
 }
 
 boost::statechart::result
-sanguis::client::states::menu::handle_default_msg(
-	messages::base const &
-)
-{
-	return forward_event();
-}
-
-boost::statechart::result
-sanguis::client::states::menu::operator()(
-	messages::net_error const &_error
-)
-{
-	menu_.connection_error(
-		fcppt::utf8::convert(
-			_error.get<messages::roles::error_message>()
-		)
-	);
-
-	return discard_event();
-}
-
-boost::statechart::result
-sanguis::client::states::menu::operator()(
-	messages::connect const &
+sanguis::client::states::menu::react(
+	events::connected const &
 )
 {
 	FCPPT_LOG_DEBUG(
-		client::log(),
+		menu::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("menu: connect")
 	);
@@ -149,7 +128,7 @@ sanguis::client::states::menu::operator()(
 		messages::create(
 			messages::client_info(
 				fcppt::utf8::convert(
-					FCPPT_TEXT("player1")
+					FCPPT_TEXT("player1") // TODO!
 				)
 			)
 		)
@@ -159,24 +138,34 @@ sanguis::client::states::menu::operator()(
 }
 
 boost::statechart::result
-sanguis::client::states::menu::operator()(
-	messages::disconnect const &
+sanguis::client::states::menu::react(
+	events::net_error const &_error
 )
 {
 	menu_.connection_error(
-		FCPPT_TEXT("The server closed the connection")
+		fcppt::from_std_string(
+			_error.code().message()
+		)
 	);
 
 	return discard_event();
 }
 
 boost::statechart::result
+sanguis::client::states::menu::handle_default_msg(
+	messages::base const &
+)
+{
+	return forward_event();
+}
+
+boost::statechart::result
 sanguis::client::states::menu::operator()(
-	messages::connect_state const &
+	messages::connect_state const &_state // TODO: do we need this?
 )
 {
 	FCPPT_LOG_DEBUG(
-		client::log(),
+		menu::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("Received connect_state")
 	);
@@ -224,12 +213,6 @@ sanguis::client::states::menu::connect(
 			FCPPT_TEXT("invalid port specification")
 		);
 	}
-}
-
-void
-sanguis::client::states::menu::quickstart()
-{
-	context<machine>().quickstart();
 }
 
 void
