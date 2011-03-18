@@ -4,6 +4,7 @@
 #include "../events/action.hpp"
 #include "../events/menu.hpp"
 #include "../events/message.hpp"
+#include "../events/net_error.hpp"
 #include "../events/tick.hpp"
 #include "../log.hpp"
 #include "../../messages/call/object.hpp"

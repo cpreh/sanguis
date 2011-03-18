@@ -1,8 +1,9 @@
 #include "running.hpp"
 #include "unpaused.hpp"
+#include "../events/disconnect.hpp"
+#include "../events/message.hpp"
 #include "../global/context.hpp"
 #include "../message_functor.hpp"
-#include "../message_event.hpp"
 #include "../log.hpp"
 #include "../make_unicast_callback.hpp"
 #include "../make_send_callback.hpp"
@@ -11,7 +12,6 @@
 #include "../../messages/serialization/convert_string_vector.hpp"
 #include "../../messages/create.hpp"
 #include "../../cast_enum.hpp"
-#include "../../tick_event.hpp"
 #include "../../to_console_arg_list.hpp"
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
@@ -72,7 +72,7 @@ sanguis::server::states::running::~running()
 
 boost::statechart::result
 sanguis::server::states::running::react(
-	message_event const &_message
+	events::message const &_message
 )
 {
 	typedef message_functor<
@@ -86,10 +86,9 @@ sanguis::server::states::running::react(
 	);
 
 	static messages::call::object<
-		boost::mpl::vector5<
+		boost::mpl::vector4<
 			messages::client_info,
 			messages::console_command,
-			messages::disconnect,
 			messages::player_cheat,
 			messages::player_choose_perk
 		>,
@@ -98,7 +97,7 @@ sanguis::server::states::running::react(
 
 	return
 		dispatcher(
-			*_message.message(),
+			*_message.get(),
 			functor,
 			std::tr1::bind(
 				&running::handle_default_msg,
@@ -107,6 +106,26 @@ sanguis::server::states::running::react(
 				std::tr1::placeholders::_1
 			)
 		);
+}
+
+boost::statechart::result
+sanguis::server::states::running::react(
+	events::disconnect const &_message
+)
+{
+	FCPPT_LOG_INFO(
+		running::log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("client with id ")
+			<< _message.id()
+			<< FCPPT_TEXT(" disconnected")
+	);
+
+	global_context_->player_disconnect(
+		_message.id()
+	);
+
+	return discard_event();
 }
 
 boost::statechart::result
@@ -187,27 +206,6 @@ sanguis::server::states::running::operator()(
 		);
 	}
 		
-	return discard_event();
-}
-
-boost::statechart::result
-sanguis::server::states::running::operator()(
-	net::id const _id,
-	messages::disconnect const &
-)
-{
-	FCPPT_LOG_INFO(
-		running::log(),
-		fcppt::log::_
-			<< FCPPT_TEXT("client with id ")
-			<< _id
-			<< FCPPT_TEXT(" disconnected")
-	);
-
-	global_context_->player_disconnect(
-		_id
-	);
-
 	return discard_event();
 }
 

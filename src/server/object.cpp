@@ -1,9 +1,10 @@
 #include "object.hpp"
 #include "log.hpp"
-#include "message_event.hpp"
+#include "events/disconnect.hpp"
+#include "events/message.hpp"
+#include "events/tick.hpp"
 #include "states/running.hpp"
 #include "states/unpaused.hpp"
-#include "../tick_event.hpp"
 #include <sge/systems/instance.hpp>
 #include <awl/mainloop/asio/create_io_service_base.hpp>
 #include <awl/mainloop/io_service.hpp>

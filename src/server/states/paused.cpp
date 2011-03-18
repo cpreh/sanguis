@@ -1,13 +1,14 @@
 #include "paused.hpp"
 #include "unpaused.hpp"
+#include "../events/disconnect.hpp"
+#include "../events/message.hpp"
+#include "../events/tick.hpp"
 #include "../message_functor.hpp"
-#include "../message_event.hpp"
 #include "../log.hpp"
 #include "../../messages/call/object.hpp"
 #include "../../messages/unpause.hpp"
 #include "../../messages/create.hpp"
 #include "../../messages/base.hpp"
-#include "../../tick_event.hpp"
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/object.hpp>
@@ -24,18 +25,9 @@ sanguis::server::states::paused::~paused()
 {
 }
 
-// reactions
 boost::statechart::result
 sanguis::server::states::paused::react(
-	tick_event const &
-)
-{
-	return discard_event();
-}
-
-boost::statechart::result
-sanguis::server::states::paused::react(
-	message_event const &_message
+	events::message const &_message
 )
 {
 	typedef message_functor<
@@ -58,7 +50,7 @@ sanguis::server::states::paused::react(
 	
 	return
 		dispatcher(
-			*_message.message(),
+			*_message.get(),
 			functor,
 			std::tr1::bind(
 				&paused::handle_default_msg,

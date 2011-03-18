@@ -1,5 +1,5 @@
-#ifndef SANGUIS_CLIENT_EVENTS_TICK_HPP_INCLUDED
-#define SANGUIS_CLIENT_EVENTS_TICK_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_EVENTS_TICK_HPP_INCLUDED
+#define SANGUIS_SERVER_EVENTS_TICK_HPP_INCLUDED
 
 #include "tick_fwd.hpp"
 #include "../../time_type.hpp"
@@ -8,7 +8,7 @@
 
 namespace sanguis
 {
-namespace client
+namespace server
 {
 namespace events
 {

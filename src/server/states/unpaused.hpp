@@ -1,7 +1,8 @@
 #ifndef SANGUIS_SERVER_STATES_UNPAUSED_HPP_INCLUDED
 #define SANGUIS_SERVER_STATES_UNPAUSED_HPP_INCLUDED
 
-#include "../message_event_fwd.hpp"
+#include "../events/message_fwd.hpp"
+#include "../events/tick_fwd.hpp"
 #include "../../messages/player_attack_dest.hpp"
 #include "../../messages/player_direction.hpp"
 #include "../../messages/player_rotation.hpp"
@@ -10,10 +11,8 @@
 #include "../../messages/player_change_weapon.hpp"
 #include "../../messages/player_pause.hpp"
 #include "../../messages/player_unpause.hpp"
-#include "../../messages/disconnect.hpp"
 #include "../../messages/base_fwd.hpp"
 #include "../../net/id.hpp"
-#include "../../tick_event_fwd.hpp"
 #include "running.hpp"
 #include <fcppt/log/object_fwd.hpp>
 #include <boost/mpl/list.hpp>
@@ -41,10 +40,10 @@ class unpaused
 public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<
-			sanguis::tick_event
+			events::tick
 		>,
 		boost::statechart::custom_reaction<
-			message_event
+			events::message	
 		> 
 	> reactions;
 	
@@ -54,12 +53,12 @@ public:
 
 	boost::statechart::result
 	react(
-		sanguis::tick_event const &
+		events::tick const &
 	);
 
 	boost::statechart::result
 	react(
-		message_event const &
+		events::message const &
 	);
 
 	boost::statechart::result

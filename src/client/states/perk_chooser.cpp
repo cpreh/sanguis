@@ -2,6 +2,7 @@
 #include "ingame.hpp"
 #include "../events/action.hpp"
 #include "../events/message.hpp"
+#include "../events/net_error.hpp"
 #include "../events/tick.hpp"
 #include "../gui/perk/chooser.hpp"
 

@@ -426,6 +426,7 @@ SET(
 	src/client/events/net_error.cpp
 	src/client/events/net_error.hpp
 	src/client/events/net_error_fwd.hpp
+	src/client/events/tick.cpp
 	src/client/events/tick.hpp
 	src/client/events/tick_fwd.hpp
 	src/client/exp_type.hpp
@@ -683,8 +684,6 @@ SET(
 	src/messages/die.cpp
 	src/messages/die.hpp
 	src/messages/dim.hpp
-	src/messages/disconnect.cpp
-	src/messages/disconnect.hpp
 	src/messages/entity_id.hpp
 	src/messages/entity_message.hpp
 	src/messages/enum.hpp
@@ -1149,6 +1148,15 @@ SET(
 	src/server/environment/object.hpp
 	src/server/environment/object_fwd.hpp
 	src/server/environment/object_ptr.hpp
+	src/server/events/disconnect.cpp
+	src/server/events/disconnect.hpp
+	src/server/events/disconnect_fwd.hpp
+	src/server/events/message.cpp
+	src/server/events/message.hpp
+	src/server/events/message_fwd.hpp
+	src/server/events/tick.cpp
+	src/server/events/tick.hpp
+	src/server/events/tick_fwd.hpp
 	src/server/exp_type.hpp
 	src/server/get_unique_id.cpp
 	src/server/get_unique_id.hpp
@@ -1182,9 +1190,6 @@ SET(
 	src/server/message_convert/rotate.hpp
 	src/server/message_convert/speed.cpp
 	src/server/message_convert/speed.hpp
-	src/server/message_event.cpp
-	src/server/message_event.hpp
-	src/server/message_event_fwd.hpp
 	src/server/message_functor.hpp
 	src/server/net_id_from_args.cpp
 	src/server/net_id_from_args.hpp
@@ -1349,9 +1354,6 @@ SET(
 	src/server/world/sight_range_fwd.hpp
 	src/server/world/sight_range_map.hpp
 	src/string_vector.hpp
-	src/tick_event.cpp
-	src/tick_event.hpp
-	src/tick_event_fwd.hpp
 	src/time_type.hpp
 	src/to_console_arg_list.cpp
 	src/to_console_arg_list.hpp

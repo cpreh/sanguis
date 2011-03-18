@@ -143,7 +143,7 @@ sanguis::client::machine::connect(
 }
 
 void
-sanguis::client::machine::cancel_connect()
+sanguis::client::machine::disconnect()
 {
 	net_.disconnect();
 }

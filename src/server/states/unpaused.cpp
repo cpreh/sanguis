@@ -1,15 +1,16 @@
 #include "unpaused.hpp"
 #include "paused.hpp"
+#include "../events/disconnect.hpp"
+#include "../events/message.hpp"
+#include "../events/tick.hpp"
 #include "../global/context.hpp"
 #include "../message_functor.hpp"
-#include "../message_event.hpp"
 #include "../log.hpp"
 #include "../../messages/call/object.hpp"
 #include "../../messages/pause.hpp"
 #include "../../messages/base.hpp"
 #include "../../messages/create.hpp"
 #include "../../cast_enum.hpp"
-#include "../../tick_event.hpp"
 #include <sge/collision/world.hpp>
 #include <sge/time/second_f.hpp>
 
@@ -191,7 +192,7 @@ sanguis::server::states::unpaused::operator()(
 
 boost::statechart::result
 sanguis::server::states::unpaused::react(
-	tick_event const &_event
+	events::tick const &_event
 )
 {
 	context<
@@ -205,7 +206,7 @@ sanguis::server::states::unpaused::react(
 
 boost::statechart::result
 sanguis::server::states::unpaused::react(
-	message_event const &_message
+	events::message const &_message
 )
 {
 	typedef message_functor<
@@ -234,7 +235,7 @@ sanguis::server::states::unpaused::react(
 
 	return
 		dispatcher(
-			*_message.message(),
+			*_message.get(),
 			functor,
 			std::tr1::bind(
 				&unpaused::handle_default_msg,

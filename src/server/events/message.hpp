@@ -1,9 +1,10 @@
-#ifndef SANGUIS_SERVER_MESSAGE_EVENT_HPP_INCLUDED
-#define SANGUIS_SERVER_MESSAGE_EVENT_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_EVENTS_MESSAGE_HPP_INCLUDED
+#define SANGUIS_SERVER_EVENTS_MESSAGE_HPP_INCLUDED
 
-#include "../messages/auto_ptr.hpp"
-#include "../messages/shared_ptr.hpp"
-#include "../net/id.hpp"
+#include "message_fwd.hpp"
+#include "../../messages/auto_ptr.hpp"
+#include "../../messages/shared_ptr.hpp"
+#include "../../net/id.hpp"
 #include <fcppt/nonassignable.hpp>
 #include <boost/statechart/event.hpp>
 
@@ -11,26 +12,28 @@ namespace sanguis
 {
 namespace server
 {
+namespace events
+{
 
-class message_event
+class message
 :
 	public boost::statechart::event<
-		message_event
+		message
 	>
 {
 	FCPPT_NONASSIGNABLE(
-		message_event
+		message
 	);
 public:
-	message_event(
+	message(
 		messages::auto_ptr,
 		net::id
 	);
 	
-	~message_event();
+	~message();
 	
 	messages::shared_ptr const
-	message() const;
+	get() const;
 
 	net::id
 	id() const;
@@ -40,6 +43,7 @@ private:
 	net::id const id_;
 };
 
+}
 }
 }
 

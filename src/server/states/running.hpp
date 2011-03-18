@@ -2,11 +2,11 @@
 #define SANGUIS_SERVER_STATES_RUNNING_HPP_INCLUDED
 
 #include "unpaused_fwd.hpp"
+#include "../events/disconnect_fwd.hpp"
+#include "../events/message_fwd.hpp"
 #include "../global/context_fwd.hpp"
-#include "../message_event_fwd.hpp"
 #include "../machine.hpp"
 #include "../console.hpp"
-#include "../../messages/disconnect.hpp"
 #include "../../messages/client_info.hpp"
 #include "../../messages/console_command.hpp"
 #include "../../messages/player_cheat.hpp"
@@ -39,8 +39,13 @@ class running
 		running
 	);
 public:
-	typedef boost::statechart::custom_reaction<
-		message_event
+	typedef boost::mpl::list<
+		boost::statechart::custom_reaction<
+			events::message	
+		>,
+		boost::statechart::custom_reaction<
+			events::disconnect
+		>
 	> reactions;
 
 	explicit running(
@@ -51,9 +56,14 @@ public:
 	
 	boost::statechart::result
 	react(
-		message_event const &
+		events::message const &
 	);
-	
+
+	boost::statechart::result
+	react(
+		events::disconnect const &
+	);
+
 	boost::statechart::result
 	operator()(
 		net::id,
@@ -64,12 +74,6 @@ public:
 	operator()(
 		net::id,
 		messages::console_command const &
-	);
-
-	boost::statechart::result
-	operator()(
-		net::id,
-		messages::disconnect const &
 	);
 
 	boost::statechart::result

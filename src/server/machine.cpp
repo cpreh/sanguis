@@ -1,9 +1,10 @@
 #include "machine.hpp"
-#include "message_event.hpp"
 #include "log.hpp"
-#include "../tick_event.hpp"
-#include "../messages/create.hpp"
-#include "../messages/disconnect.hpp"
+#include "events/disconnect.hpp"
+#include "events/message.hpp"
+#include "events/tick.hpp"
+#include "../messages/auto_ptr.hpp"
+#include "../messages/base.hpp"
 #include "../net/serialize.hpp"
 #include "../net/deserialize.hpp"
 #include "../exception.hpp"
@@ -129,11 +130,8 @@ sanguis::server::machine::disconnect_callback(
 	fcppt::string const &
 )
 {
-	process_event(
-		message_event(
-			messages::create(
-				messages::disconnect()
-			),
+	this->process_event(
+		events::disconnect(
 			_id
 		)
 	);
@@ -156,8 +154,8 @@ sanguis::server::machine::process_message(
 			<< FCPPT_TEXT("process_message")
 	);
 
-	process_event(
-		message_event(
+	this->process_event(
+		events::message(
 			_message,
 			_id
 		)
@@ -267,7 +265,7 @@ void
 sanguis::server::machine::timer_callback()
 {
 	this->process_event(
-		sanguis::tick_event(
+		events::tick(
 			static_cast<
 				time_type
 			>(

@@ -82,7 +82,7 @@ public:
 	);
 
 	void
-	cancel_connect();
+	disconnect();
 	
 	void
 	send(

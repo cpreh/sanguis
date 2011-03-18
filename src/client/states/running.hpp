@@ -7,12 +7,12 @@
 #include "../daytime_settings_fwd.hpp"
 #include "../control/environment_fwd.hpp"
 #include "../draw2d/scene/object_fwd.hpp"
-#include "../events/tick_fwd.hpp"
 #include "../events/message_fwd.hpp"
+#include "../events/net_error_fwd.hpp"
+#include "../events/tick_fwd.hpp"
 #include "../gui/perk/chooser_fwd.hpp"
 #include "../../messages/base.hpp"
 #include "../../messages/add_own_player.hpp"
-#include "../../messages/disconnect.hpp"
 #include "../../messages/console_print.hpp"
 #include "../../messages/add_console_command.hpp"
 #include "../../messages/pause.hpp"
@@ -47,12 +47,15 @@ class running
 		running
 	);
 public:
-	typedef boost::mpl::list2<
+	typedef boost::mpl::list3<
 		boost::statechart::custom_reaction<
 			events::tick
 		>,
 		boost::statechart::custom_reaction<
 			events::message
+		>,
+		boost::statechart::custom_reaction<
+			events::net_error
 		>
 	> reactions;
 
@@ -71,13 +74,13 @@ public:
 	react(
 		events::message const &
 	);
-	
-	typedef boost::statechart::result result_type;
 
 	boost::statechart::result
-	operator()(
-		messages::disconnect const &
+	react(	
+		events::net_error const &
 	);
+
+	typedef boost::statechart::result result_type;
 
 	boost::statechart::result
 	operator()(

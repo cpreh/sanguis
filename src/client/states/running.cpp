@@ -140,8 +140,7 @@ sanguis::client::states::running::react(
 )
 {
 	static sanguis::messages::call::object<
-		boost::mpl::vector7<
-			sanguis::messages::disconnect,
+		boost::mpl::vector6<
 			sanguis::messages::level_up,
 			sanguis::messages::console_print,
 			sanguis::messages::add_console_command,
@@ -165,8 +164,8 @@ sanguis::client::states::running::react(
 }
 
 boost::statechart::result
-sanguis::client::states::running::operator()(
-	sanguis::messages::disconnect const &
+sanguis::client::states::running::react(
+	events::net_error const &_error
 )
 {
 	return transit<menu>();

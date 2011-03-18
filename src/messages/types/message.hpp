@@ -28,7 +28,6 @@ enum type
 	console_command,
 	console_print,
 	die,
-	disconnect,
 	experience,
 	give_weapon,
 	health,
