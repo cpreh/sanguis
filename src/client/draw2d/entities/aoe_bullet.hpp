@@ -34,6 +34,8 @@ public:
 		fcppt::string const &name,
 		funit aoe
 	);
+
+	~aoe_bullet();
 private:
 	void
 	on_decay();

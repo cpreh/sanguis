@@ -3,9 +3,9 @@
 #include "model/parameters.hpp"
 #include "../z_ordering.hpp"
 #include "../../next_id.hpp"
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/make_auto_ptr.hpp>
+#include <fcppt/ref.hpp>
 
 sanguis::client::draw2d::entities::aoe_bullet::aoe_bullet(
 	model::parameters const &_param,
@@ -26,8 +26,13 @@ sanguis::client::draw2d::entities::aoe_bullet::aoe_bullet(
 	particle_system_(_particle_system),
 	insert_(_insert),
 	aoe_(_aoe)
-{}
+{
+}
 		
+sanguis::client::draw2d::entities::aoe_bullet::~aoe_bullet()
+{
+}
+
 void
 sanguis::client::draw2d::entities::aoe_bullet::on_decay()
 {
@@ -35,7 +40,7 @@ sanguis::client::draw2d::entities::aoe_bullet::on_decay()
 		fcppt::make_auto_ptr<
 			explosion
 		>(
-			std::tr1::ref(
+			fcppt::ref(
 				particle_system_
 			),
 			model_collection_,

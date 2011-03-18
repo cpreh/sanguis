@@ -56,7 +56,8 @@ private:
 
 	CEGUI::Event::ScopedConnection const
 		quickstart_connection_,
-		quit_connection_;
+		quit_connection_,
+		connect_connection_;
 
 	bool
 	handle_quickstart(
@@ -65,6 +66,11 @@ private:
 
 	bool
 	handle_quit(
+		CEGUI::EventArgs const &
+	);
+
+	bool
+	handle_connect(
 		CEGUI::EventArgs const &
 	);
 };

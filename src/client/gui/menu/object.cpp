@@ -2,9 +2,7 @@
 #include "../object.hpp"
 #include "../../log.hpp"
 #include "../../../media_path.hpp"
-//#include <sge/font/text/from_fcppt_string.hpp>
-//#include <sge/font/text/to_fcppt_string.hpp>
-//#include <fcppt/assign/make_container.hpp>
+#include <sge/cegui/from_cegui_string.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/headers.hpp>
@@ -69,89 +67,22 @@ sanguis::client::gui::menu::object::object(
 				)
 			)
 		)
-	)
-	
-#if 0
-		fcppt::assign::make_container<
-			fcppt::signal::connection_manager::container
-		>
-		(
-			fcppt::signal::shared_connection(
-				main_.connect.register_clicked(
-					std::tr1::bind(
-						&mover::reset,
-						&mover_,
-						std::tr1::ref(connect_.parent)
-					)
-				)
-			)
-		)
-		(
-			fcppt::signal::shared_connection(
-				main_.start.register_clicked(
-					std::tr1::bind(
-						&object::start_server,
-						this
-					)
-				)
-			)
-		)
-		(
-			fcppt::signal::shared_connection(
-				main_.highscore.register_clicked(
-					std::tr1::bind(
-						&mover::reset,
-						&mover_,
-						std::tr1::ref(highscore_.parent)
-					)
-				)
-			)
-		)
-		(
-			fcppt::signal::shared_connection(
-				main_.exit.register_clicked(
-					_callbacks.quit_
-				)
-			)
-		)
-		(
-			fcppt::signal::shared_connection(
-				connect_.connect_.register_clicked(
-					std::tr1::bind(
-						&object::connect_from_menu,
-						this
-					)
-				)
-			)
-		)
-		(
-			fcppt::signal::shared_connection(
-				connect_box_.buttons_retry.register_clicked(
-					std::tr1::bind(
-						&object::connect,
-						this,
-						std::tr1::ref(
-							connection_host_
-						),
-						std::tr1::ref(
-							connection_port_
-						)
-					)
-				)
-			)
-		)
-		(
-			fcppt::signal::shared_connection(
-				connect_box_.buttons_cancel.register_clicked(
-					std::tr1::bind(
-						&object::cancel_connect,
-						this
-					)
-				)
-			)
-		)
 	),
-#endif
+	connect_connection_(
+		CEGUI::WindowManager::getSingleton().getWindow(
+			"Root/FrameWindow/Connect"
+		)
+		->subscribeEvent(
+			CEGUI::PushButton::EventClicked,
+			CEGUI::Event::Subscriber(
+				std::tr1::bind(
+					&object::handle_connect,
+					this,
+					std::tr1::placeholders::_1
+				)
+			)
+		)
+	)
 {
 }
 
@@ -214,6 +145,31 @@ sanguis::client::gui::menu::object::handle_quit(
 )
 {
 	callbacks_.quit()();
+
+	return true;
+}
+
+bool
+sanguis::client::gui::menu::object::handle_connect(
+	CEGUI::EventArgs const &
+)
+{
+	callbacks_.connect()(
+		sge::cegui::from_cegui_string(
+			CEGUI::WindowManager::getSingleton().getWindow(
+				"Root/FrameWindow/Hostname"
+			)
+			->getText(),
+			gui_.charconv_system()
+		),
+		sge::cegui::from_cegui_string(
+			CEGUI::WindowManager::getSingleton().getWindow(
+				"Root/FrameWindow/Port"
+			)
+			->getText(),
+			gui_.charconv_system()
+		)
+	);
 
 	return true;
 }
