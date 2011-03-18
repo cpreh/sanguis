@@ -326,17 +326,17 @@ sanguis::net::server::object_impl::write_handler(
 			<< FCPPT_TEXT(" bytes.")
 	);
 
-	net::circular_buffer &send_data(
+	net::circular_buffer &sent_data(
 		_con.send_data()
 	);
 
 	net::erase_circular_buffer_front(
-		send_data,
+		sent_data,
 		_bytes
 	);
 
 	if(
-		!send_data.empty()
+		!sent_data.empty()
 	)
 		this->send_data(
 			_con

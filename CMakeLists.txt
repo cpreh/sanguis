@@ -104,7 +104,7 @@ IF (CMAKE_COMPILER_IS_GNUCXX OR COMPILER_IS_CLANGPP)
 		"-fvisibility=hidden -ansi -pedantic-errors -Wall"
 		"-Wextra -Wconversion -Wfloat-equal -Wredundant-decls"
 		"-Winit-self -Woverloaded-virtual -Wshadow"
-		"-Wold-style-cast -Wnon-virtual-dtor -Wctor-dtor-privacy -Wsign-promo"
+		"-Wold-style-cast -Wnon-virtual-dtor -Wsign-promo"
 		"-Wstrict-aliasing=1 -Wmissing-declarations -Wno-long-long"
 	)
 	# we don't use long long but boost does :(

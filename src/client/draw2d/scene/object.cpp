@@ -290,16 +290,16 @@ sanguis::client::draw2d::scene::object::draw(
 	{
 		++next;
 
-		entities::base &entity(
+		entities::base &cur_entity(
 			*it->second
 		);
 
-		entity.update(
+		cur_entity.update(
 			real_delta
 		);
 
 		if(
-			entity.may_be_removed()
+			cur_entity.may_be_removed()
 		)
 			entities_.erase(
 				it
