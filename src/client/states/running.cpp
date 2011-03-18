@@ -73,7 +73,7 @@ sanguis::client::states::running::running(
 		fcppt::make_unique_ptr<
 			client::daytime_settings
 		>(
-			std::tr1::ref(
+			fcppt::ref(
 				context<machine>().console().gfx().object()
 			)
 		)

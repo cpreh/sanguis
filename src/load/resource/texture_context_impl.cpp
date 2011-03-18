@@ -10,6 +10,7 @@
 #include <sge/time/second.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_shared_ptr.hpp>
+#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::load::resource::texture_context_impl::texture_context_impl(
@@ -24,7 +25,7 @@ sanguis::load::resource::texture_context_impl::texture_context_impl(
 			&texture_context_impl::task,
 			this,
 			_path,
-			std::tr1::ref(
+			fcppt::ref(
 				_il
 			)
 		)
@@ -33,7 +34,7 @@ sanguis::load::resource::texture_context_impl::texture_context_impl(
 		task_.get_future()
 	),
 	thread_(
-		std::tr1::ref(
+		fcppt::ref(
 			task_
 		)
 	),

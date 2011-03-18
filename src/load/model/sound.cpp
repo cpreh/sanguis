@@ -3,6 +3,7 @@
 #include <sge/parse/json/find_member_exn.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
+#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::load::model::sound::sound(
@@ -11,7 +12,7 @@ sanguis::load::model::sound::sound(
 )
 :
 	ctx_(
-		std::tr1::ref(
+		fcppt::ref(
 			_ctx
 		)
 	),

@@ -1,7 +1,7 @@
 #include "random.hpp"
 #include "object.hpp"
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 
 sanguis::server::world::object_unique_ptr
 sanguis::server::world::random(
@@ -19,7 +19,7 @@ sanguis::server::world::random(
 			_ctx,
 			_collision_system,
 			_load_context,
-			std::tr1::ref(
+			fcppt::ref(
 				_console
 			)
 		);

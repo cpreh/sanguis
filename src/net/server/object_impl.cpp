@@ -405,7 +405,7 @@ sanguis::net::server::object_impl::accept_handler(
 			this,
 			std::tr1::placeholders::_1,
 			std::tr1::placeholders::_2,
-			std::tr1::ref(
+			fcppt::ref(
 				current_con
 			)
 		)

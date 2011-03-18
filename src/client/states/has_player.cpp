@@ -47,10 +47,10 @@ sanguis::client::states::has_player::has_player(
 				&context<machine>(),
 				std::tr1::placeholders::_1
 			),
-			std::tr1::ref(
+			fcppt::ref(
 				context<running>().control_environment()
 			),
-			std::tr1::ref(
+			fcppt::ref(
 				context<machine>().console().gfx().object()
 			)
 		)

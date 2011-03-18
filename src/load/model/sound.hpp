@@ -7,7 +7,7 @@
 #include <sge/parse/json/member_vector.hpp>
 #include <sge/audio/sound/positional_ptr.hpp>
 #include <sge/audio/file_ptr.hpp>
-#include <fcppt/tr1/functional.hpp>
+#include <fcppt/reference_wrapper.hpp>
 
 namespace sanguis
 {
@@ -30,7 +30,7 @@ public:
 	sge::audio::sound::positional_ptr const
 	make() const;
 private:
-	std::tr1::reference_wrapper<
+	fcppt::reference_wrapper<
 		resource::sounds const
 	> ctx_;
 

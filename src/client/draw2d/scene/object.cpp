@@ -51,12 +51,13 @@
 #include <fcppt/log/headers.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/dynamic_cast.hpp>
-#include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/text.hpp>
-#include <fcppt/format.hpp>
-#include <fcppt/exception.hpp>
 #include <fcppt/assert.hpp>
+#include <fcppt/dynamic_cast.hpp>
+#include <fcppt/exception.hpp>
+#include <fcppt/format.hpp>
+#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
+#include <fcppt/text.hpp>
 
 #include <boost/foreach.hpp>
 
@@ -107,10 +108,10 @@ sanguis::client::draw2d::scene::object::object(
 		fcppt::make_unique_ptr<
 			message_environment
 		>(
-			std::tr1::ref(
+			fcppt::ref(
 				*this
 			),
-			std::tr1::ref(
+			fcppt::ref(
 				hud_
 			)
 		)
@@ -119,10 +120,10 @@ sanguis::client::draw2d::scene::object::object(
 		fcppt::make_unique_ptr<
 			scene::control_environment
 		>(
-			std::tr1::ref(
+			fcppt::ref(
 				*this
 			),
-			std::tr1::ref(
+			fcppt::ref(
 				_cursor
 			)
 		)
@@ -131,7 +132,7 @@ sanguis::client::draw2d::scene::object::object(
 		fcppt::make_unique_ptr<
 			message::dispatcher
 		>(
-			std::tr1::ref(
+			fcppt::ref(
 				*message_environment_
 			)
 		)

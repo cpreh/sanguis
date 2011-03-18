@@ -26,9 +26,9 @@
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/math/vector/is_null.hpp>
 #include <fcppt/math/vector/to_angle.hpp>
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
 
@@ -52,7 +52,7 @@ sanguis::server::global::context::context(
 		fcppt::make_shared_ptr<
 			world_context
 		>(
-			std::tr1::ref(
+			fcppt::ref(
 				*this
 			)
 		)

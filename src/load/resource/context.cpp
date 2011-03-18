@@ -2,8 +2,8 @@
 #include "textures.hpp"
 #include "sounds.hpp"
 #include "animations.hpp"
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 
 sanguis::load::resource::textures const &
 sanguis::load::resource::context::textures() const
@@ -46,7 +46,7 @@ sanguis::load::resource::context::context(
 			resource::textures
 		>(
 			_renderer,
-			std::tr1::ref(
+			fcppt::ref(
 				_image_loader
 			)
 		)
@@ -55,11 +55,11 @@ sanguis::load::resource::context::context(
 		fcppt::make_unique_ptr<
 			resource::sounds
 		>(
-			std::tr1::ref(
+			fcppt::ref(
 				_audio_loader
 			),
 			_audio_player,
-			std::tr1::ref(
+			fcppt::ref(
 				_audio_pool
 			)
 		)
@@ -68,7 +68,7 @@ sanguis::load::resource::context::context(
 		fcppt::make_unique_ptr<
 			resource::animations
 		>(
-			std::tr1::ref(
+			fcppt::ref(
 				*textures_
 			)
 		)

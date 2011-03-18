@@ -13,6 +13,7 @@
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/log/headers.hpp>
+#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::client::screenshot::screenshot(
@@ -25,7 +26,7 @@ sanguis::client::screenshot::screenshot(
 		std::tr1::bind(
 			&sge::renderer::screenshot,
 			_renderer,
-			std::tr1::ref(
+			fcppt::ref(
 				_loader
 			),
 			std::tr1::placeholders::_1

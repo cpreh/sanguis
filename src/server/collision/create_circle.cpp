@@ -3,8 +3,8 @@
 #include <sge/collision/shapes/sphere.hpp>
 #include <sge/collision/world.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 
 sge::collision::shapes::base_ptr const
 sanguis::server::collision::create_circle(
@@ -19,7 +19,7 @@ sanguis::server::collision::create_circle(
 				fcppt::make_unique_ptr<
 					satellite
 				>(
-					std::tr1::ref(
+					fcppt::ref(
 						_base
 					)
 				)

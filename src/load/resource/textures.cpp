@@ -18,9 +18,10 @@
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/io/ifstream.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/text.hpp>
-#include <fcppt/string.hpp>
 #include <fcppt/make_shared_ptr.hpp>
+#include <fcppt/ref.hpp>
+#include <fcppt/string.hpp>
+#include <fcppt/text.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/spirit/home/phoenix/object/construct.hpp>
 #include <boost/spirit/home/phoenix/object/new.hpp>
@@ -263,7 +264,7 @@ sanguis::load::resource::textures::do_load_unnamed(
 		>(
 			_path,
 			texture_manager_.renderer(),
-			std::tr1::ref(
+			fcppt::ref(
 				image_loader_
 			),
 			filter
