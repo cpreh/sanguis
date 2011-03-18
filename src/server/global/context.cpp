@@ -82,12 +82,7 @@ sanguis::server::global::context::insert_player(
 	connect_state::type const _connect_state
 )
 {
-	server::world::object &cur_world(
-		this->world(
-			_world_id
-		)	
-	);
-
+	// send this before the world gets created
 	send_unicast_(
 		_player_id,
 		messages::create(
@@ -105,6 +100,13 @@ sanguis::server::global::context::insert_player(
 			_player_id,
 			console_.known_commands()
 		)
+	);
+
+	// currently, this may send console commands
+	server::world::object &cur_world(
+		this->world(
+			_world_id
+		)	
 	);
 
 	players_.insert(
