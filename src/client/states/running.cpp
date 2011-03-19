@@ -235,10 +235,11 @@ sanguis::client::states::running::operator()(
 	FCPPT_LOG_DEBUG(
 		sanguis::client::log(),
 		fcppt::log::_
-			<< FCPPT_TEXT("Got a new console command: ")
+			<< FCPPT_TEXT("Got a new console command: \"")
 			<< name
-			<< FCPPT_TEXT(", description ")
+			<< FCPPT_TEXT("\", description: \"")
 			<< description
+			<< FCPPT_TEXT('"')
 	);
 
 	context<machine>().console().register_server_command(

@@ -39,10 +39,12 @@ sanguis::server::waves::generator::generator(
 		)
 	),
 	waves_()
-{}
+{
+}
 
 sanguis::server::waves::generator::~generator()
-{}
+{
+}
 
 void
 sanguis::server::waves::generator::process(

@@ -37,6 +37,8 @@ public:
 		send_callback const &
 	);
 
+	~console();
+
 	fcppt::signal::auto_connection 
 	register_callback(
 		sge::input::keyboard::key_callback const &

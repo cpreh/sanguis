@@ -2,6 +2,7 @@
 #include "receive_buffer.hpp"
 #include "receive_buffer_part.hpp"
 #include <boost/asio/buffer.hpp>
+#include <algorithm>
 
 boost::asio::mutable_buffers_1 const
 sanguis::net::receive_buffer_for_asio(
@@ -15,6 +16,13 @@ sanguis::net::receive_buffer_for_asio(
 	return
 		boost::asio::mutable_buffers_1(
 			part.begin(),
-			part.size()
+			std::max(
+				part.size(),
+				static_cast<
+					net::receive_buffer::size_type
+				>(
+					4096u
+				)
+			)
 		);
 }

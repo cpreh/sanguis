@@ -41,16 +41,21 @@ sanguis::client::console::console(
 	),
 	callbacks_(),
 	server_connections_()
-{}
+{
+}
+
+sanguis::client::console::~console()
+{
+}
 
 fcppt::signal::auto_connection
 sanguis::client::console::register_callback(
-	sge::input::keyboard::key_callback const &_ccallback
+	sge::input::keyboard::key_callback const &_callback
 )
 {
 	return 
 		callbacks_.connect(
-			_ccallback
+			_callback
 		);
 }
 
