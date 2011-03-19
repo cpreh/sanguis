@@ -67,6 +67,9 @@ public:
 
 	size_type
 	read_size() const;
+
+	size_type
+	capacity() const;
 private:
 	impl_type impl_;
 

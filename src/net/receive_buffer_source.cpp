@@ -45,14 +45,6 @@ sanguis::net::receive_buffer_source::read(
 		_dest
 	);
 
-	container_.erase(
-		static_cast<
-			net::receive_buffer::size_type
-		>(
-			real_count
-		)
-	);
-
 	read_count_ += real_count;
 
 	return real_count;

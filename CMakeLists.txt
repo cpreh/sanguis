@@ -866,6 +866,8 @@ SET(
 	src/net/log.hpp
 	src/net/message_header.hpp
 	src/net/message_header_size.hpp
+	src/net/message_size.cpp
+	src/net/message_size.hpp
 	src/net/port.hpp
 	src/net/receive_buffer.cpp
 	src/net/receive_buffer.hpp
