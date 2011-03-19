@@ -1,4 +1,5 @@
 #include "container.hpp"
+#include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/math/point_rotate.hpp>
 #include <fcppt/math/compare.hpp>
 #include <boost/foreach.hpp>
@@ -42,8 +43,11 @@ sanguis::client::draw2d::particle::container::add(
 	base_ptr _ptr
 )
 {
-	children_.push_back(
-		_ptr
+	fcppt::container::ptr::push_back_unique_ptr(
+		children_,
+		move(
+			_ptr
+		)
 	);
 }
 

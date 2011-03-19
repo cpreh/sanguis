@@ -6,7 +6,7 @@
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/foreach_enumerator.hpp>
-#include <fcppt/make_auto_ptr.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/minmax_pair_impl.hpp>
 
 sanguis::client::draw2d::particle::explosion::explosion(
@@ -38,49 +38,47 @@ sanguis::client::draw2d::particle::explosion::explosion(
 			]
 		);
 
-		base_ptr ptr(
-			fcppt::make_auto_ptr<
-				particle::generator
-			>(
-				std::tr1::bind(
-					_callback,
-					current_type
-				),
-				point::null(),
-				prop.gen_life_time(),
-				prop.gen_frequency(),
-				prop.spawn_initial(),
-				prop.align(),
-				particle::z_ordering(
-					current_type
-				),
-				// TODO: make this less explicit (needs to be done in sge)!
-				dispersion_range(
-					static_cast<
-						dispersion_range::value_type
-					>(
-						prop.dispersion().min()
-					),
-					static_cast<
-						dispersion_range::value_type
-					>(
-						prop.dispersion().max()
-					)
-				),
-				particle::velocity_range(
-					prop.speed().min(),
-					prop.speed().max()
-				),
-				particle::rotation_velocity_range(
-					prop.rot_speed().min(),
-					prop.rot_speed().max()
-				),
-				prop.movement()
-			)
-		);
-
 		this->add(
-			ptr
+			particle::base_ptr(
+				fcppt::make_unique_ptr<
+					particle::generator
+				>(
+					std::tr1::bind(
+						_callback,
+						current_type
+					),
+					point::null(),
+					prop.gen_life_time(),
+					prop.gen_frequency(),
+					prop.spawn_initial(),
+					prop.align(),
+					particle::z_ordering(
+						current_type
+					),
+					// TODO: make this less explicit (needs to be done in sge)!
+					dispersion_range(
+						static_cast<
+							dispersion_range::value_type
+						>(
+							prop.dispersion().min()
+						),
+						static_cast<
+							dispersion_range::value_type
+						>(
+							prop.dispersion().max()
+						)
+					),
+					particle::velocity_range(
+						prop.speed().min(),
+						prop.speed().max()
+					),
+					particle::rotation_velocity_range(
+						prop.rot_speed().min(),
+						prop.rot_speed().max()
+					),
+					prop.movement()
+				)
+			)
 		);
 	}
 }

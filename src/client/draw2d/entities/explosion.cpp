@@ -19,7 +19,9 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/minmax_pair_impl.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
+#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::client::draw2d::entities::explosion::explosion(
@@ -33,7 +35,7 @@ sanguis::client::draw2d::entities::explosion::explosion(
 	particle_system_(_particle_system),
 	model_collection_(_model_collection),
 	pos_(_pos),
-	particles(
+	particles_(
 		particle::point::null(),
 		particle::point::null(),
 		particle::depth(0),
@@ -50,43 +52,48 @@ sanguis::client::draw2d::entities::explosion::explosion(
 		_aoe
 	)
 {
-	particle::base_ptr n(
-		new particle::explosion(
-			properties_,
-			std::tr1::bind(
-				&explosion::generate_particle,
-				this,
-				std::tr1::placeholders::_1
-			),
-			particle::point::null(), // pos
-			//fcppt::math::structure_cast<
-			//	particle::point::value_type
-			//>(pos), // position
-			particle::point::null(), // speed
-			static_cast<particle::depth>(0),
-			static_cast<particle::rotation>(0), // no rotation and...
-			static_cast<particle::rotation>(0)//, // ...no rotation speed
-			//particle_system_
+	particles_.add(
+		particle::base_ptr(
+			fcppt::make_unique_ptr<
+				particle::explosion
+			>(
+				properties_,
+				std::tr1::bind(
+					&explosion::generate_particle,
+					this,
+					std::tr1::placeholders::_1
+				),
+				particle::point::null(), // pos
+				//fcppt::math::structure_cast<
+				//	particle::point::value_type
+				//>(pos), // position
+				particle::point::null(), // speed
+				static_cast<particle::depth>(0),
+				static_cast<particle::rotation>(0), // no rotation and...
+				static_cast<particle::rotation>(0)//, // ...no rotation speed
+				//particle_system_
+			)
 		)
 	);
-
-	particles.add(n);
 }
 
 sanguis::client::draw2d::entities::explosion::~explosion()
-{}
+{
+}
 
 void
 sanguis::client::draw2d::entities::explosion::pos(
 	sprite::point const &
 )
-{}
+{
+}
 
 void
 sanguis::client::draw2d::entities::explosion::dim(
 	sprite::dim const &
 )
-{}
+{
+}
 
 sanguis::client::draw2d::sprite::point const
 sanguis::client::draw2d::entities::explosion::center() const
@@ -96,15 +103,17 @@ sanguis::client::draw2d::entities::explosion::center() const
 
 void
 sanguis::client::draw2d::entities::explosion::update(
-	time_type const delta
+	time_type const _delta
 )
 {
 	ended =
-		particles.update(
-			delta,
+		particles_.update(
+			_delta,
 			fcppt::math::vector::structure_cast<
 				particle::point
-			>(pos_),
+			>(
+				pos_
+			),
 			//particle::point::null(),
 			static_cast<particle::rotation>(0),
 			static_cast<particle::depth>(0)
@@ -114,21 +123,24 @@ sanguis::client::draw2d::entities::explosion::update(
 sanguis::client::draw2d::particle::base_ptr
 sanguis::client::draw2d::entities::explosion::generate_explosion()
 {
-	return particle::base_ptr(
-		new particle::explosion(
-			properties_,
-			std::tr1::bind(
-				&explosion::generate_particle,
-				this,
-				std::tr1::placeholders::_1
-			),
-			particle::point::null(), // position
-			particle::point::null(), // speed
-			static_cast<particle::depth>(0),
-			static_cast<particle::rotation>(0), // no rotation and...
-			static_cast<particle::rotation>(0)  // ...no rotation speed
-		)
-	);
+	return
+		particle::base_ptr(
+			fcppt::make_unique_ptr<
+				particle::explosion
+			>(
+				properties_,
+				std::tr1::bind(
+					&explosion::generate_particle,
+					this,
+					std::tr1::placeholders::_1
+				),
+				particle::point::null(), // position
+				particle::point::null(), // speed
+				static_cast<particle::depth>(0),
+				static_cast<particle::rotation>(0), // no rotation and...
+				static_cast<particle::rotation>(0)  // ...no rotation speed
+			)
+		);
 }
 
 sanguis::client::draw2d::particle::base_ptr
@@ -173,7 +185,9 @@ sanguis::client::draw2d::entities::explosion::generate_particle(
 					anim
 				),
 				particle::object::optional_time(),
-				particle_system_
+				fcppt::ref(
+					particle_system_
+				)
 			)
 		);
 	else
@@ -182,12 +196,12 @@ sanguis::client::draw2d::entities::explosion::generate_particle(
 		fcppt::random::uniform<
 			particle::time_type
 		>
-			rng(
-				particle::fade_time_range(
-					prop.fade().min(),
-					prop.fade().max()
-				)
-			);
+		rng(
+			particle::fade_time_range(
+				prop.fade().min(),
+				prop.fade().max()
+			)
+		);
 		
 		ptr.reset(
 			new particle::object(
@@ -197,7 +211,9 @@ sanguis::client::draw2d::entities::explosion::generate_particle(
 					anim
 				),
 				rng(),
-				particle_system_
+				fcppt::ref(
+					particle_system_
+				)
 			)
 		);
 	}
@@ -208,7 +224,10 @@ sanguis::client::draw2d::entities::explosion::generate_particle(
 		)
 	);
 
-	return ptr;
+	return
+		move(
+			ptr
+		);
 }
 
 bool

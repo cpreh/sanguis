@@ -191,11 +191,17 @@ sanguis::client::draw2d::particle::generator::generate()
 		generate_object_()
 	);
 
-	object->pos(object_pos);
+	object->pos(
+		object_pos
+	);
 
-	object->vel(velocity);
+	object->vel(
+		velocity
+	);
 
-	object->rot(cur_rot);
+	object->rot(
+		cur_rot
+	);
 	
 	/*
 	object->rot_vel(
@@ -213,7 +219,9 @@ sanguis::client::draw2d::particle::generator::generate()
 	);
 	
 	this->add(
-		object
+		move(
+			object
+		)
 	);
 }
 

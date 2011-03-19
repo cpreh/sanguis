@@ -80,7 +80,7 @@ private:
 
 	sprite::point pos_;
 
-	particle::container particles;
+	particle::container particles_;
 
 	particle::property_map properties_;
 
