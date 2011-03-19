@@ -1,13 +1,15 @@
 #include "receive_buffer_source.hpp"
 #include "receive_buffer.hpp"
 #include <fcppt/algorithm/copy_n.hpp>
+#include <fcppt/assert.hpp>
 #include <algorithm>
 
 sanguis::net::receive_buffer_source::receive_buffer_source(
 	net::receive_buffer &_container
 )
 :
-	container_(_container)
+	container_(_container),
+	read_count_(0)
 {
 }
 
@@ -43,5 +45,33 @@ sanguis::net::receive_buffer_source::read(
 		_dest
 	);
 
+	container_.erase(
+		static_cast<
+			net::receive_buffer::size_type
+		>(
+			real_count
+		)
+	);
+
+	read_count_ += real_count;
+
 	return real_count;
+}
+
+std::streampos 
+sanguis::net::receive_buffer_source::seek(
+	boost::iostreams::stream_offset const _offset,
+	std::ios_base::seekdir const _dir
+)
+{
+	// only here for tellg() to work!
+	FCPPT_ASSERT(
+		_offset == 0
+	);
+
+	FCPPT_ASSERT(
+		_dir == std::ios_base::cur
+	);
+
+	return read_count_;		
 }

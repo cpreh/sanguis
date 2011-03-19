@@ -19,7 +19,7 @@ stream_exceptions(
 	_stream.exceptions(
 		std::ios_base::badbit
 		| std::ios_base::failbit
-		| std::ios_base::eofbit
+		//| std::ios_base::eofbit
 	);
 }
 

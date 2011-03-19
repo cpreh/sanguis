@@ -12,6 +12,7 @@
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/text.hpp>
+#include <exception>
 #include <cstdlib>
 
 sanguis::server::object::object(
@@ -92,9 +93,20 @@ sanguis::server::object::mainloop()
 				<< FCPPT_TEXT("Error in server thread: ")
 				<< _exception.string()
 		);
-
-		this->reset_running();
 	}
+	catch(
+		std::exception const &_exception
+	)
+	{
+		FCPPT_LOG_ERROR(
+			server::log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("Error in server thread: ")
+				<< _exception.what()
+		);
+	}
+
+	this->reset_running();
 }
 
 void

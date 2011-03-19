@@ -21,3 +21,21 @@ sanguis::net::receive_buffer_part::end() const
 {
 	return end_;
 }
+
+sanguis::net::receive_buffer_part::size_type
+sanguis::net::receive_buffer_part::size() const
+{
+	return
+		static_cast<
+			size_type
+		>(
+			this->end() - this->begin()
+		);
+}
+
+bool
+sanguis::net::receive_buffer_part::empty() const
+{
+	return
+		this->begin() == this->end();
+}

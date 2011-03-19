@@ -97,12 +97,6 @@ sanguis::server::machine::~machine()
 }
 
 void
-sanguis::server::machine::stop()
-{
-	net_.stop();
-}
-
-void
 sanguis::server::machine::listen()
 {
 	net_.listen(
@@ -111,82 +105,9 @@ sanguis::server::machine::listen()
 }
 
 void
-sanguis::server::machine::connect_callback(
-	net::id const _id
-)
+sanguis::server::machine::stop()
 {
-	if(
-		!clients_.insert(
-			_id
-		).second
-	)
-		throw sanguis::exception(
-			FCPPT_TEXT("Client inserted twice in server!")
-		);
-}
-
-void
-sanguis::server::machine::disconnect_callback(
-	net::id const _id,
-	fcppt::string const &
-)
-{
-	this->process_event(
-		events::disconnect(
-			_id
-		)
-	);
-
-	clients_.erase(
-		_id
-	);
-}
-
-void
-sanguis::server::machine::process_message(
-	net::id const _id,
-	messages::auto_ptr _message
-)
-{
-
-	FCPPT_LOG_DEBUG(
-		server::log(),
-		fcppt::log::_
-			<< FCPPT_TEXT("process_message")
-	);
-
-	this->process_event(
-		events::message(
-			_message,
-			_id
-		)
-	);
-}
-
-void
-sanguis::server::machine::data_callback(
-	net::id const _id,
-	net::receive_buffer &_data
-)
-{
-	for(;;)
-	{
-		messages::auto_ptr message( 
-			net::deserialize(
-				_data
-			)
-		);
-
-		if(
-			!message.get()
-		)
-			return;
-
-		this->process_message(
-			_id,
-			message
-		);
-	}
+	net_.stop();
 }
 
 void
@@ -232,20 +153,6 @@ sanguis::server::machine::send_to_all(
 	}
 }
 
-sanguis::load::context_base const &
-sanguis::server::machine::resources() const
-{
-	return 
-		resources_;
-}
-
-sge::collision::system_ptr const
-sanguis::server::machine::collision_system() const
-{
-	return 
-		collision_;
-}
-
 void
 sanguis::server::machine::send_unicast(
 	net::id const _id,
@@ -276,6 +183,98 @@ sanguis::server::machine::send_unicast(
 	net_.queue_send(
 		_id
 	);
+}
+
+sanguis::load::context_base const &
+sanguis::server::machine::resources() const
+{
+	return 
+		resources_;
+}
+
+sge::collision::system_ptr const
+sanguis::server::machine::collision_system() const
+{
+	return 
+		collision_;
+}
+
+void
+sanguis::server::machine::process_message(
+	net::id const _id,
+	messages::auto_ptr _message
+)
+{
+	FCPPT_LOG_DEBUG(
+		server::log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("process_message")
+	);
+
+	this->process_event(
+		events::message(
+			_message,
+			_id
+		)
+	);
+}
+
+void
+sanguis::server::machine::connect_callback(
+	net::id const _id
+)
+{
+	if(
+		!clients_.insert(
+			_id
+		).second
+	)
+		throw sanguis::exception(
+			FCPPT_TEXT("Client inserted twice in server!")
+		);
+}
+
+void
+sanguis::server::machine::disconnect_callback(
+	net::id const _id,
+	fcppt::string const &
+)
+{
+	this->process_event(
+		events::disconnect(
+			_id
+		)
+	);
+
+	clients_.erase(
+		_id
+	);
+}
+
+void
+sanguis::server::machine::data_callback(
+	net::id const _id,
+	net::receive_buffer &_data
+)
+{
+	for(;;)
+	{
+		messages::auto_ptr message( 
+			net::deserialize(
+				_data
+			)
+		);
+
+		if(
+			!message.get()
+		)
+			return;
+
+		this->process_message(
+			_id,
+			message
+		);
+	}
 }
 
 void

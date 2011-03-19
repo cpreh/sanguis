@@ -18,13 +18,19 @@
 
 #include <istream>
 
+#include <iostream>
+
 sanguis::messages::auto_ptr
 sanguis::net::deserialize(
 	net::receive_buffer &_data
 )
 {
+	net::receive_buffer::size_type const remaining_size(
+		_data.read_size()
+	);
+
 	if(
-		_data.read_size() < net::message_header_size
+		remaining_size < net::message_header_size
 	)
 		return messages::auto_ptr();
 
@@ -60,14 +66,23 @@ sanguis::net::deserialize(
 			messages::serialization::endianness()
 		)
 	);
+
+	FCPPT_ASSERT(
+		static_cast<
+			net::size_type
+		>(
+			stream.gcount()
+		)
+		== net::message_header_size
+	);
 			
 	FCPPT_ASSERT(
 		message_size > 0
 	);
 
 	if(
-		_data.read_size()
-		< message_size
+		remaining_size
+		< (message_size + net::message_header_size)
 	)
 		return messages::auto_ptr();
 
@@ -82,17 +97,15 @@ sanguis::net::deserialize(
 		ret->size() == message_size
 	);
 
-	net::size_type const stream_pos(
+	FCPPT_ASSERT(
 		static_cast<
 			net::size_type
 		>(
 			stream.tellg()
 		)
-	);
-
-	FCPPT_ASSERT(
-		ret->size() + net::message_header_size
-		== stream_pos
+		==
+		net::message_header_size
+		+ ret->size()
 	);
 
 	return ret;

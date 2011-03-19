@@ -21,16 +21,16 @@ sanguis::net::receive_buffer_part const
 sanguis::net::receive_buffer::next_receive_part()
 {
 	return
-		end_ == impl_.data_end()
+		begin_ <= end_
 		?
 			net::receive_buffer_part(
-				impl_.data(),
-				begin_
+				end_,
+				impl_.data_end()
 			)
 		:
 			net::receive_buffer_part(
 				end_,
-				impl_.data_end()
+				begin_
 			);
 }
 
@@ -99,9 +99,9 @@ sanguis::net::receive_buffer::erase(
 		+
 		(
 			(
-				impl_.data()
-				-
 				begin_
+				-
+				impl_.data()
 				+ 
 				static_cast<
 					std::ptrdiff_t

@@ -6,7 +6,9 @@
 #include "../exception.hpp"
 #include "../is_disconnect.hpp"
 #include "../log.hpp"
+#include "../receive_buffer.hpp"
 #include "../receive_buffer_for_asio.hpp"
+#include "../receive_buffer_part.hpp"
 #undef max
 // asio brings in window.h's max macro :(
 #include <fcppt/chrono/duration_cast.hpp>
@@ -378,13 +380,17 @@ sanguis::net::server::object_impl::handle_error(
 			_error
 		)
 	)
+	{
+		// TODO:!
+	/*
 		throw net::exception(
 			_message
 			+
 			FCPPT_TEXT(" error: ")
 			+
 			error_msg
-		);
+		);*/
+	}
 
 	FCPPT_LOG_DEBUG(
 		object_impl::log(),
@@ -458,6 +464,10 @@ sanguis::net::server::object_impl::receive_data(
 	server::connection &_con
 )
 {
+	FCPPT_ASSERT(
+		!_con.received_data().next_receive_part().empty()
+	);
+
 	// receive some more
 	_con.socket().async_receive(
 		net::receive_buffer_for_asio(

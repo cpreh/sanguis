@@ -46,6 +46,29 @@ public:
 	~machine();
 
 	void
+	listen();
+
+	void 
+	stop();
+
+	void
+	send_to_all(
+		messages::auto_ptr
+	);
+
+	void
+	send_unicast(
+		net::id,
+		messages::auto_ptr
+	);
+
+	load::context_base const &
+	resources() const;
+
+	sge::collision::system_ptr const
+	collision_system() const;
+private:
+	void
 	process_message(
 		net::id,
 		messages::auto_ptr
@@ -68,29 +91,6 @@ public:
 		net::receive_buffer &
 	);
 
-	void
-	send_to_all(
-		messages::auto_ptr
-	);
-
-	void 
-	stop();
-
-	void
-	listen();
-
-	load::context_base const &
-	resources() const;
-
-	sge::collision::system_ptr const
-	collision_system() const;
-
-	void
-	send_unicast(
-		net::id,
-		messages::auto_ptr
-	);
-private:
 	void
 	timer_callback();
 

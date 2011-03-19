@@ -5,13 +5,14 @@
 #include "../base.hpp"
 #include "../types/message_type.hpp"
 #include "../../exception.hpp"
+#include <fcppt/assert.hpp>
 #include <fcppt/text.hpp>
 #include <boost/static_assert.hpp>
 
 sanguis::messages::auto_ptr
 sanguis::messages::serialization::deserialize(
-	context const &ctx,
-	istream &stream
+	context const &_ctx,
+	istream &_stream
 )
 {
 	types::message_type type;
@@ -22,36 +23,62 @@ sanguis::messages::serialization::deserialize(
 	);
 
 	// TODO: fix endianness here
-	stream.read(
-		reinterpret_cast<char *>(&type),
+	_stream.read(
+		reinterpret_cast<
+			char *
+		>(
+			&type
+		),
 		sizeof(type)
 	);
 
-	stream.unget();
+	FCPPT_ASSERT(
+		static_cast<
+			std::size_t
+		>(
+			_stream.gcount()
+		)
+		== 
+		sizeof(types::message_type)
+	);
 
-	if(type >= types::message::size)
-		throw exception(
+
+	_stream.unget();
+
+	if(
+		type >= types::message::size
+	)
+		throw sanguis::exception(
 			FCPPT_TEXT("Invalid message received!")
 		);
 
 	types::message::type const casted_type(
-		static_cast<types::message::type>(
+		static_cast<
+			types::message::type
+		>(
 			type
 		)
 	);
 
 	dispatch_map::const_iterator const it(
-		ctx.handlers().find(
+		_ctx.handlers().find(
 			casted_type
 		)
 	);
 
-	if(it == ctx.handlers().end())
-		throw exception(
+	if(
+		it == _ctx.handlers().end()
+	)
+		throw sanguis::exception(
 			FCPPT_TEXT("No handler for a message found.")
 		);
 	
-	reader d(stream);
+	serialization::reader cur_reader(
+		_stream
+	);
 
-	return it->second->on_dispatch(d);
+	return
+		it->second->on_dispatch(
+			cur_reader
+		);
 }

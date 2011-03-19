@@ -23,7 +23,7 @@ public:
 
 	struct category
 	:
-		boost::iostreams::input,
+		boost::iostreams::input_seekable,
 		boost::iostreams::device_tag
 	{
 	};
@@ -37,8 +37,16 @@ public:
 		char *,
 		std::streamsize
 	);
+
+	std::streampos 
+	seek(
+		boost::iostreams::stream_offset,
+		std::ios_base::seekdir
+	);
 private:
 	net::receive_buffer &container_;
+
+	std::streampos read_count_;
 };
 
 }

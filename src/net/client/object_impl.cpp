@@ -5,6 +5,7 @@
 #include "../exception.hpp"
 #include "../log.hpp"
 #include "../receive_buffer_for_asio.hpp"
+#include "../receive_buffer_part.hpp"
 #include "../receive_buffer_size.hpp"
 #include "../send_buffer_size.hpp"
 #undef max
@@ -15,10 +16,11 @@
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/ref.hpp>
+#include <fcppt/assert.hpp>
 #include <fcppt/from_std_string.hpp>
-#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/lexical_cast.hpp>
+#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 #include <boost/asio/buffer.hpp>
 
@@ -384,6 +386,10 @@ sanguis::net::client::object_impl::send_data()
 void
 sanguis::net::client::object_impl::receive_data()
 {
+	FCPPT_ASSERT(
+		!receive_buffer_.next_receive_part().empty()
+	);
+
 	socket_.async_receive(
 		net::receive_buffer_for_asio(
 			receive_buffer_
