@@ -9,6 +9,7 @@
 #include "../net/data_buffer.hpp"
 #include "../net/id.hpp"
 #include "../net/port.hpp"
+#include "../net/receive_buffer_fwd.hpp"
 #include <sge/collision/system_ptr.hpp>
 #include <sge/time/timer.hpp>
 #include <fcppt/container/raw_vector_decl.hpp>
@@ -64,7 +65,7 @@ public:
 	void
 	data_callback(
 		net::id,
-		net::data_buffer &
+		net::receive_buffer &
 	);
 
 	void
@@ -92,11 +93,6 @@ public:
 private:
 	void
 	timer_callback();
-
-	void
-	pack_message(
-		messages::auto_ptr
-	);
 
 	typedef std::set<
 		net::id

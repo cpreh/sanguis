@@ -1,24 +1,25 @@
 #include "append_to_circular_buffer.hpp"
+#include "circular_buffer_space_left.hpp"
 #include <fcppt/algorithm/append.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 
 bool
 sanguis::net::append_to_circular_buffer(
-	net::circular_buffer &_out,
-	net::data_buffer const &_in
+	net::circular_buffer &_dest,
+	net::data_buffer const &_src
 )
 {
 	if(
-		_out.capacity()
-		- _out.size()
-		<
-		_in.size()
+		net::circular_buffer_space_left(
+			_dest
+		)
+		< _src.size()
 	)
 		return false;
 
 	fcppt::algorithm::append(
-		_out,
-		_in
+		_dest,
+		_src
 	);
 
 	return true;

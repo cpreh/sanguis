@@ -1,9 +1,10 @@
-#include "circular_buffer_source.hpp"
+#include "receive_buffer_source.hpp"
+#include "receive_buffer.hpp"
 #include <fcppt/algorithm/copy_n.hpp>
 #include <algorithm>
 
-sanguis::net::circular_buffer_source::circular_buffer_source(
-	net::circular_buffer &_container
+sanguis::net::receive_buffer_source::receive_buffer_source(
+	net::receive_buffer &_container
 )
 :
 	container_(_container)
@@ -11,19 +12,23 @@ sanguis::net::circular_buffer_source::circular_buffer_source(
 }
 
 std::streamsize
-sanguis::net::circular_buffer_source::read(
+sanguis::net::receive_buffer_source::read(
 	char *const _dest,
 	std::streamsize const _count
 )
 {
+	net::receive_buffer::joined_range const range(
+		container_.range()
+	);
+
 	std::streamsize const real_count(
 		std::min(
-			_count,
 			static_cast<
 				std::streamsize
 			>(
-				container_.size()
-			)
+				range.size()
+			),
+			_count
 		)
 	);
 
@@ -33,15 +38,9 @@ sanguis::net::circular_buffer_source::read(
 		return -1;
 
 	fcppt::algorithm::copy_n(
-		container_.begin(),
+		range.begin(),
 		real_count,
 		_dest
-	);
-
-	container_.erase(
-		container_.begin(),
-		container_.begin()
-		+ real_count
 	);
 
 	return real_count;

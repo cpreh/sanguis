@@ -5,9 +5,9 @@
 #include "connect_callback.hpp"
 #include "data_callback.hpp"
 #include "error_callback.hpp"
+#include "../circular_buffer.hpp"
 #include "../hostname.hpp"
 #include "../port.hpp"
-#include "../data_buffer.hpp"
 #include <awl/mainloop/io_service_fwd.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -41,10 +41,11 @@ public:
 	void
 	disconnect();
 
+	net::circular_buffer &
+	send_buffer();
+
 	void
-	queue(
-		net::data_buffer const &
-	);
+	queue_send();
 
 	fcppt::signal::auto_connection
 	register_connect(

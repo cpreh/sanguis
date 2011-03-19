@@ -13,9 +13,9 @@
 #include "../load/context_fwd.hpp"
 #include "../messages/auto_ptr.hpp"
 #include "../net/client/object.hpp"
-#include "../net/data_buffer.hpp"
 #include "../net/hostname.hpp"
 #include "../net/port.hpp"
+#include "../net/receive_buffer_fwd.hpp"
 
 #include <sge/audio/player_ptr.hpp>
 #include <sge/audio/pool_fwd.hpp>
@@ -147,7 +147,7 @@ private:
 	
 	void
 	data_callback(
-		net::data_buffer const &
+		net::receive_buffer &
 	);
 
 	config::settings::object &settings_;
@@ -170,10 +170,6 @@ private:
 		s_conn_,
 		s_disconn_,
 		s_data_;
-
-	net::data_buffer
-		in_buffer_,
-		out_buffer_;
 
 	sge::audio::pool &sound_pool_;
 

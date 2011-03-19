@@ -834,10 +834,12 @@ SET(
 	src/net/append_to_circular_buffer.hpp
 	src/net/asio.cpp
 	src/net/circular_buffer.hpp
-	src/net/circular_buffer_part.cpp
-	src/net/circular_buffer_part.hpp
-	src/net/circular_buffer_source.cpp
-	src/net/circular_buffer_source.hpp
+	src/net/circular_buffer_send_part.cpp
+	src/net/circular_buffer_send_part.hpp
+	src/net/circular_buffer_sink.cpp
+	src/net/circular_buffer_sink.hpp
+	src/net/circular_buffer_space_left.cpp
+	src/net/circular_buffer_space_left.hpp
 	src/net/client/connect_callback.hpp
 	src/net/client/connect_function.hpp
 	src/net/client/data_callback.hpp
@@ -865,10 +867,25 @@ SET(
 	src/net/message_header.hpp
 	src/net/message_header_size.hpp
 	src/net/port.hpp
+	src/net/receive_buffer.cpp
+	src/net/receive_buffer.hpp
+	src/net/receive_buffer_for_asio.cpp
+	src/net/receive_buffer_for_asio.hpp
+	src/net/receive_buffer_fwd.hpp
+	src/net/receive_buffer_part.cpp
+	src/net/receive_buffer_part.hpp
+	src/net/receive_buffer_part_fwd.hpp
+	src/net/receive_buffer_size.cpp
+	src/net/receive_buffer_size.hpp
+	src/net/receive_buffer_source.cpp
+	src/net/receive_buffer_source.hpp
 	src/net/send_buffer_size.cpp
 	src/net/send_buffer_size.hpp
-	src/net/serialize.cpp
-	src/net/serialize.hpp
+	src/net/serialize_impl.hpp
+	src/net/serialize_to_circular_buffer.cpp
+	src/net/serialize_to_circular_buffer.hpp
+	src/net/serialize_to_data_buffer.cpp
+	src/net/serialize_to_data_buffer.hpp
 	src/net/server/connect_callback.hpp
 	src/net/server/connect_function.hpp
 	src/net/server/connection.cpp
@@ -886,7 +903,6 @@ SET(
 	src/net/server/timer_callback.hpp
 	src/net/server/timer_function.hpp
 	src/net/size_type.hpp
-	src/net/static_buffer.hpp
 	src/net/stream_exceptions.hpp
 	src/net/value_type.hpp
 	src/perk_type.hpp

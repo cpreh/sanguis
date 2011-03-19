@@ -1,7 +1,7 @@
-#include "circular_buffer_part.hpp"
+#include "circular_buffer_send_part.hpp"
 
 sanguis::net::circular_buffer::const_array_range const
-sanguis::net::circular_buffer_part(
+sanguis::net::circular_buffer_send_part(
 	net::circular_buffer const &_buffer
 )
 {

@@ -5,7 +5,9 @@
 #include "events/tick.hpp"
 #include "../messages/auto_ptr.hpp"
 #include "../messages/base.hpp"
-#include "../net/serialize.hpp"
+#include "../net/append_to_circular_buffer.hpp"
+#include "../net/serialize_to_circular_buffer.hpp"
+#include "../net/serialize_to_data_buffer.hpp"
 #include "../net/deserialize.hpp"
 #include "../exception.hpp"
 #include <sge/time/millisecond.hpp>
@@ -18,7 +20,6 @@
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/exception.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
 
@@ -165,17 +166,9 @@ sanguis::server::machine::process_message(
 void
 sanguis::server::machine::data_callback(
 	net::id const _id,
-	net::data_buffer &_data
+	net::receive_buffer &_data
 )
 {
-	FCPPT_LOG_DEBUG(
-		server::log(),
-		fcppt::log::_
-			<< _data.size()
-			<< FCPPT_TEXT(" bytes left for ")
-			<< _id
-	);
-
 	for(;;)
 	{
 		messages::auto_ptr message( 
@@ -201,20 +194,42 @@ sanguis::server::machine::send_to_all(
 	messages::auto_ptr _message
 )
 {
-	this->pack_message(
-		_message
+	temp_buffer_.clear();
+
+	net::serialize_to_data_buffer(
+		_message,
+		temp_buffer_
 	);
 
 	BOOST_FOREACH(
 		client_set::value_type id,
 		clients_
 	)
-		net_.queue(
-			id,
-			temp_buffer_
+	{
+		if(
+			!net::append_to_circular_buffer(
+				net_.send_buffer(
+					id
+				),
+				temp_buffer_
+			)
+		)
+		{
+			FCPPT_LOG_ERROR(
+				server::log(),
+				fcppt::log::_
+					<< FCPPT_TEXT("Client ")
+					<< id
+					<< FCPPT_TEXT(" has no space left in machine::send()!")
+			);
+			// TODO!
+			continue;
+		}
+		
+		net_.queue_send(
+			id
 		);
-
-	temp_buffer_.clear();
+	}
 }
 
 sanguis::load::context_base const &
@@ -236,28 +251,30 @@ sanguis::server::machine::send_unicast(
 	net::id const _id,
 	messages::auto_ptr _message
 )
-try
 {
-	this->pack_message(
-		_message
-	);
+	if(
+		!net::serialize_to_circular_buffer(
+			_message,
+			net_.send_buffer(
+				_id
+			)
+		)
+	)
+	{
+		FCPPT_LOG_ERROR(
+			server::log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("Client ")
+				<< _id
+				<< FCPPT_TEXT(" has no space left in machine::send_unicast()!")
+		);
 
-	net_.queue(
-		_id,
-		temp_buffer_
-	);
+		// TODO!
+		return;
+	}
 
-	temp_buffer_.clear();
-}
-catch(
-	fcppt::exception const &_error
-)
-{
-	FCPPT_LOG_ERROR(
-		server::log(),
-		fcppt::log::_
-			<< FCPPT_TEXT("send_unicast failed: ")
-			<< _error.string()
+	net_.queue_send(
+		_id
 	);
 }
 
@@ -272,20 +289,5 @@ sanguis::server::machine::timer_callback()
 				frame_timer_.reset()
 			)
 		)
-	);
-}
-
-void
-sanguis::server::machine::pack_message(
-	messages::auto_ptr _message
-)
-{
-	FCPPT_ASSERT(
-		temp_buffer_.empty()
-	);
-
-	net::serialize(
-		_message,
-		temp_buffer_
 	);
 }

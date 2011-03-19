@@ -1,6 +1,6 @@
 #include "connection.hpp"
 #include "../send_buffer_size.hpp"
-#include <fcppt/container/raw_vector_impl.hpp>
+#include "../receive_buffer_size.hpp"
 
 sanguis::net::server::connection::connection(
 	net::id const _id,
@@ -11,11 +11,13 @@ sanguis::net::server::connection::connection(
 	socket_(
 		_io_service
 	),
-	new_data_(),
 	send_data_(
 		net::send_buffer_size()
 	),
-	received_data_()
+	received_data_(
+		net::receive_buffer_size()
+	),
+	sending_(false)
 {
 }
 
@@ -35,20 +37,20 @@ sanguis::net::server::connection::socket()
 	return socket_;
 }
 
-sanguis::net::static_buffer &
-sanguis::net::server::connection::new_data()
+sanguis::net::circular_buffer &
+sanguis::net::server::connection::send_data()
 {
-	return new_data_;
+	return send_data_;
 }
 
-sanguis::net::data_buffer &
+sanguis::net::receive_buffer &
 sanguis::net::server::connection::received_data()
 {
 	return received_data_;
 }
 
-sanguis::net::circular_buffer &
-sanguis::net::server::connection::send_data()
+bool &
+sanguis::net::server::connection::sending()
 {
-	return send_data_;
+	return sending_;
 }

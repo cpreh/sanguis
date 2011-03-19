@@ -1,11 +1,12 @@
 #include "object_impl.hpp"
 #include "connection.hpp"
 #include "../append_to_circular_buffer.hpp"
-#include "../circular_buffer_part.hpp"
+#include "../circular_buffer_send_part.hpp"
 #include "../erase_circular_buffer_front.hpp"
 #include "../exception.hpp"
 #include "../is_disconnect.hpp"
 #include "../log.hpp"
+#include "../receive_buffer_for_asio.hpp"
 #undef max
 // asio brings in window.h's max macro :(
 #include <fcppt/chrono/duration_cast.hpp>
@@ -104,60 +105,30 @@ sanguis::net::server::object_impl::listen(
 	this->accept();
 }
 
-void 
-sanguis::net::server::object_impl::queue(
-	net::id const _id,
-	net::data_buffer const &_data
+sanguis::net::circular_buffer &
+sanguis::net::server::object_impl::send_buffer(
+	net::id const _id
 )
 {
-	connection_container::iterator const it(
-		connections_.find(
+	return
+		this->connection(
+			_id
+		).send_data();
+}
+
+void 
+sanguis::net::server::object_impl::queue_send(
+	net::id const _id
+)
+{
+	server::connection &con(
+		this->connection(
 			_id
 		)
 	);
 
 	if(
-		it == connections_.end()
-	)
-		throw net::exception(
-			FCPPT_TEXT("Invalid id in server")
-			+
-			fcppt::lexical_cast<
-				fcppt::string
-			>(
-				_id
-			)
-		);
-
-
-	server::connection &con(
-		*it->second
-	);
-
-	bool const sending(
-		!con.send_data().empty()
-	);
-
-	if(
-		!net::append_to_circular_buffer(
-			con.send_data(),
-			_data
-		)
-	)
-	{
-		FCPPT_LOG_ERROR(
-			object_impl::log(),
-			fcppt::log::_
-				<< FCPPT_TEXT("client ")
-				<< _id
-				<< FCPPT_TEXT(" has not enough space left in the send_buffer")
-		);
-
-		// TODO: wait or drop this client?
-	}
-
-	if(
-		!sending
+		!con.sending()
 	)
 		this->send_data(
 			con
@@ -266,14 +237,11 @@ sanguis::net::server::object_impl::read_handler(
 			<< _bytes 
 			<< FCPPT_TEXT(" bytes.")
 	);
-	
-	// TODO: optimize!
-	_con.received_data().insert(
-		_con.received_data().end(),
-		_con.new_data().begin(),
-		_con.new_data().begin() + _bytes
-	);
 
+	_con.received_data().bytes_received(
+		_bytes
+	);
+	
 	data_signal_(
 		_con.id(),
 		fcppt::ref(
@@ -281,20 +249,8 @@ sanguis::net::server::object_impl::read_handler(
 		)
 	);
 
-	// receive some more
-	_con.socket().async_receive(
-		boost::asio::buffer(
-			_con.new_data()
-		),
-		std::tr1::bind(
-			&object_impl::read_handler,
-			this,
-			std::tr1::placeholders::_1,
-			std::tr1::placeholders::_2,
-			fcppt::ref(
-				_con
-			)
-		)
+	this->receive_data(
+		_con
 	);
 }
 
@@ -396,19 +352,8 @@ sanguis::net::server::object_impl::accept_handler(
 		current_con.id()
 	);
 
-	current_con.socket().async_receive(
-		boost::asio::buffer(
-			current_con.new_data()
-		),
-		std::tr1::bind(
-			&object_impl::read_handler,
-			this,
-			std::tr1::placeholders::_1,
-			std::tr1::placeholders::_2,
-			fcppt::ref(
-				current_con
-			)
-		)
+	this->receive_data(
+		current_con
 	);
 
 	this->accept();
@@ -479,13 +424,15 @@ sanguis::net::server::object_impl::send_data(
 )
 {
 	net::circular_buffer::const_array_range const out_data(
-		net::circular_buffer_part(
+		net::circular_buffer_send_part(
 			_con.send_data()
 		)
 	);
 
+	_con.sending() = (out_data.second != 0u);
+
 	if(
-		out_data.second == 0u
+		!_con.sending()
 	)
 		return;
 
@@ -496,6 +443,28 @@ sanguis::net::server::object_impl::send_data(
 		),
 		std::tr1::bind(
 			&object_impl::write_handler,
+			this,
+			std::tr1::placeholders::_1,
+			std::tr1::placeholders::_2,
+			fcppt::ref(
+				_con
+			)
+		)
+	);
+}
+
+void
+sanguis::net::server::object_impl::receive_data(
+	server::connection &_con
+)
+{
+	// receive some more
+	_con.socket().async_receive(
+		net::receive_buffer_for_asio(
+			_con.received_data()
+		),
+		std::tr1::bind(
+			&object_impl::read_handler,
 			this,
 			std::tr1::placeholders::_1,
 			std::tr1::placeholders::_2,
@@ -519,6 +488,33 @@ sanguis::net::server::object_impl::reset_timer()
 			this
 		)
 	);
+}
+
+sanguis::net::server::connection &
+sanguis::net::server::object_impl::connection(
+	net::id const _id
+)
+{
+	connection_container::iterator const it(
+		connections_.find(
+			_id
+		)
+	);
+
+	if(
+		it == connections_.end()
+	)
+		throw net::exception(
+			FCPPT_TEXT("Invalid id in server")
+			+
+			fcppt::lexical_cast<
+				fcppt::string
+			>(
+				_id
+			)
+		);
+	
+	return *it->second;
 }
 
 fcppt::log::object &

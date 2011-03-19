@@ -7,15 +7,15 @@
 #include "../messages/auto_ptr.hpp"
 #include "../messages/base.hpp"
 #include "../net/deserialize.hpp"
-#include "../net/serialize.hpp"
+#include "../net/serialize_to_circular_buffer.hpp"
 
 #include <sge/console/gfx.hpp>
 #include <sge/renderer/scoped_block.hpp>
 #include <sge/systems/instance.hpp>
 
-#include <fcppt/algorithm/append.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/log/debug.hpp>
+#include <fcppt/log/error.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/utf8/convert.hpp>
 #include <fcppt/tr1/functional.hpp>
@@ -75,8 +75,6 @@ sanguis::client::machine::machine(
 			)
 		)
 	),
-	in_buffer_(),
-	out_buffer_(),
 	sound_pool_(_sound_pool),
 	font_metrics_(_font_metrics),
 	font_drawer_(_font_drawer),
@@ -153,16 +151,22 @@ sanguis::client::machine::send(
 	messages::auto_ptr _message
 )
 {
-	net::serialize(
-		_message,
-		out_buffer_
-	);
+	if(
+		!net::serialize_to_circular_buffer(
+			_message,
+			net_.send_buffer()
+		)
+	)
+	{
+		FCPPT_LOG_ERROR(
+			client::log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("Not enough space left in the send_buffer")
+		);
+		// TODO:!
+	}
 
-	net_.queue(
-		out_buffer_
-	);
-
-	out_buffer_.clear();
+	net_.queue_send();
 }
 
 bool
@@ -296,28 +300,14 @@ sanguis::client::machine::error_callback(
 
 void
 sanguis::client::machine::data_callback(
-	net::data_buffer const &_data
+	net::receive_buffer &_data
 )
 {
-	FCPPT_LOG_DEBUG(
-		client::log(),
-		fcppt::log::_
-			<< FCPPT_TEXT("machine::data_callback: ")
-			<< FCPPT_TEXT("Reading ")
-			<< _data.size()
-			<< FCPPT_TEXT(" bytes")
-	)
-
-	fcppt::algorithm::append(
-		in_buffer_,
-		_data
-	);
-	
 	for(;;)
 	{
 		messages::auto_ptr ret(
 			net::deserialize(
-				in_buffer_
+				_data
 			)
 		);
 

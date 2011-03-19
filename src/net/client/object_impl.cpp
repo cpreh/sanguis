@@ -1,9 +1,11 @@
 #include "object_impl.hpp"
 #include "../append_to_circular_buffer.hpp"
-#include "../circular_buffer_part.hpp"
+#include "../circular_buffer_send_part.hpp"
 #include "../erase_circular_buffer_front.hpp"
 #include "../exception.hpp"
 #include "../log.hpp"
+#include "../receive_buffer_for_asio.hpp"
+#include "../receive_buffer_size.hpp"
 #include "../send_buffer_size.hpp"
 #undef max
 // asio brings in window.h's max macro :(
@@ -13,6 +15,7 @@
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/ref.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/lexical_cast.hpp>
@@ -33,13 +36,16 @@ sanguis::net::client::object_impl::object_impl(
 		io_service_
 	),
 	query_(),
-	received_data_(),
-	send_data_(
+	receive_buffer_(
+		net::receive_buffer_size()
+	),
+	send_buffer_(
 		net::send_buffer_size()
 	),
 	connect_signal_(),
 	error_signal_(),
-	data_signal_()
+	data_signal_(),
+	sending_(false)
 {
 }
 
@@ -96,34 +102,17 @@ sanguis::net::client::object_impl::disconnect()
 	this->clear();
 }
 
-void
-sanguis::net::client::object_impl::queue(
-	net::data_buffer const &_data
-)
+sanguis::net::circular_buffer &
+sanguis::net::client::object_impl::send_buffer()
 {
-	bool const sending(
-		!send_data_.empty()
-	);
+	return send_buffer_;
+}
 
+void
+sanguis::net::client::object_impl::queue_send()
+{
 	if(
-		!net::append_to_circular_buffer(
-			send_data_,
-			_data
-		)
-	)
-	{
-		FCPPT_LOG_ERROR(
-			object_impl::log(),
-			fcppt::log::_
-				<< FCPPT_TEXT("Not enough space left in the send_buffer")
-		);
-
-		// not enough space left
-		// TODO: call something here and wait!
-	}
-
-	if(
-		!sending
+		!sending_
 	)
 		this->send_data();
 }
@@ -244,6 +233,10 @@ sanguis::net::client::object_impl::read_handler(
 		return;
 	}
 
+	receive_buffer_.bytes_received(
+		_bytes
+	);
+
 	FCPPT_LOG_DEBUG(
 		object_impl::log(),
 		fcppt::log::_
@@ -253,23 +246,12 @@ sanguis::net::client::object_impl::read_handler(
 	);
 
 	data_signal_(
-		net::data_buffer(
-			received_data_.begin(),
-			received_data_.begin() + _bytes
+		fcppt::ref(
+			receive_buffer_
 		)
 	);
 
-	socket_.async_receive(
-		boost::asio::buffer(
-			received_data_
-		),
-		std::tr1::bind(
-			&object_impl::read_handler,
-			this,
-			std::tr1::placeholders::_1,
-			std::tr1::placeholders::_2
-		)
-	);
+	this->receive_data();
 }
 
 void
@@ -299,12 +281,12 @@ sanguis::net::client::object_impl::write_handler(
 	);
 
 	net::erase_circular_buffer_front(
-		send_data_,
+		send_buffer_,
 		_bytes
 	);
 
 	if(
-		!send_data_.empty()
+		!send_buffer_.empty()
 	)
 		this->send_data();
 }
@@ -366,30 +348,22 @@ sanguis::net::client::object_impl::connect_handler(
 
 	connect_signal_();
 
-	socket_.async_receive(
-		boost::asio::buffer(
-			received_data_
-		),
-		std::tr1::bind(
-			&object_impl::read_handler,
-			this,
-			std::tr1::placeholders::_1,
-			std::tr1::placeholders::_2
-		)
-	);
+	this->receive_data();
 }
 
 void
 sanguis::net::client::object_impl::send_data()
 {
 	net::circular_buffer::const_array_range const array(
-		net::circular_buffer_part(
-			send_data_	
+		net::circular_buffer_send_part(
+			send_buffer_	
 		)
 	);
 
+	sending_ = (array.second != 0u);
+
 	if(
-		array.second == 0u
+		!sending_
 	)
 		return;
 
@@ -408,11 +382,27 @@ sanguis::net::client::object_impl::send_data()
 }
 
 void
+sanguis::net::client::object_impl::receive_data()
+{
+	socket_.async_receive(
+		net::receive_buffer_for_asio(
+			receive_buffer_
+		),
+		std::tr1::bind(
+			&object_impl::read_handler,
+			this,
+			std::tr1::placeholders::_1,
+			std::tr1::placeholders::_2
+		)
+	);
+}
+
+void
 sanguis::net::client::object_impl::clear()
 {
 	query_.reset();
 
-	send_data_.clear();
+	send_buffer_.clear();
 }
 
 fcppt::log::object &

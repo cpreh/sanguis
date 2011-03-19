@@ -48,15 +48,18 @@ sanguis::net::client::object::disconnect()
 	return impl_->disconnect();
 }
 
-void
-sanguis::net::client::object::queue(
-	net::data_buffer const &_data
-)
+
+sanguis::net::circular_buffer &
+sanguis::net::client::object::send_buffer()
 {
 	return
-		impl_->queue(
-			_data
-		);
+		impl_->send_buffer();
+}
+
+void
+sanguis::net::client::object::queue_send()
+{
+	impl_->queue_send();
 }
 
 fcppt::signal::auto_connection

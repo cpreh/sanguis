@@ -11,7 +11,7 @@
 #include "disconnect_function.hpp"
 #include "timer_callback.hpp"
 #include "timer_function.hpp"
-#include "../data_buffer.hpp"
+#include "../circular_buffer.hpp"
 #include "../id.hpp"
 #include "../port.hpp"
 #include <sge/time/duration.hpp>
@@ -52,10 +52,14 @@ public:
 		net::port
 	);
 
+	net::circular_buffer &
+	send_buffer(
+		net::id
+	);
+
 	void
-	queue(
-		net::id,
-		net::data_buffer const &
+	queue_send(
+		net::id
 	);
 
 	fcppt::signal::auto_connection
@@ -156,7 +160,17 @@ private:
 	);
 
 	void
+	receive_data(
+		server::connection &
+	);
+	
+	void
 	reset_timer();
+
+	server::connection &
+	connection(
+		net::id
+	);
 
 	static
 	fcppt::log::object &

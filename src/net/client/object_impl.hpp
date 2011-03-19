@@ -9,8 +9,7 @@
 #include "error_callback.hpp"
 #include "error_function.hpp"
 #include "../circular_buffer.hpp"
-#include "../static_buffer.hpp"
-#include "../data_buffer.hpp"
+#include "../receive_buffer.hpp"
 #include "../port.hpp"
 #include "../hostname.hpp"
 #include <fcppt/log/object_fwd.hpp>
@@ -51,10 +50,11 @@ public:
 	void
 	disconnect();
 
+	net::circular_buffer &
+	send_buffer();
+
 	void
-	queue(
-		net::data_buffer const &
-	);
+	queue_send();
 
 	fcppt::signal::auto_connection
 	register_connect(
@@ -83,9 +83,9 @@ private:
 	> query_;
 
 	// vars
-	net::static_buffer received_data_;
+	net::receive_buffer receive_buffer_;
 
-	net::circular_buffer send_data_;
+	net::circular_buffer send_buffer_;
 
 	// signals
 	fcppt::signal::object<
@@ -99,6 +99,8 @@ private:
 	fcppt::signal::object<
 		client::data_function
 	> data_signal_;
+
+	bool sending_;
 
 	// handlers
 	void
@@ -133,6 +135,9 @@ private:
 
 	void
 	send_data();
+
+	void
+	receive_data();
 
 	void
 	clear();

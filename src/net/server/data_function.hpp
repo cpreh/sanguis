@@ -2,7 +2,7 @@
 #define SANGUIS_NET_SERVER_DATA_FUNCTION_HPP_INCLUDED
 
 #include "../id.hpp"
-#include "../data_buffer.hpp"
+#include "../receive_buffer.hpp"
 
 namespace sanguis
 {
@@ -14,7 +14,7 @@ namespace server
 typedef void
 data_function(
 	net::id,
-	net::data_buffer &
+	net::receive_buffer &
 );
 
 }
