@@ -836,6 +836,8 @@ SET(
 	src/net/circular_buffer.hpp
 	src/net/circular_buffer_part.cpp
 	src/net/circular_buffer_part.hpp
+	src/net/circular_buffer_source.cpp
+	src/net/circular_buffer_source.hpp
 	src/net/client/connect_callback.hpp
 	src/net/client/connect_function.hpp
 	src/net/client/data_callback.hpp

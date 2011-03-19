@@ -32,6 +32,7 @@ sanguis::net::client::object_impl::object_impl(
 	resolver_(
 		io_service_
 	),
+	query_(),
 	received_data_(),
 	send_data_(
 		net::send_buffer_size()
@@ -68,7 +69,9 @@ sanguis::net::client::object_impl::connect(
 			boost::asio::ip::tcp::resolver::query
 		>(
 			_host,
-			fcppt::lexical_cast<std::string>(
+			fcppt::lexical_cast<
+				std::string
+			>(
 				_port
 			)
 		)
@@ -328,6 +331,8 @@ sanguis::net::client::object_impl::connect_handler(
 				),
 				_error
 			);
+
+			return;
 		}
 
 		FCPPT_LOG_DEBUG(
@@ -405,6 +410,8 @@ sanguis::net::client::object_impl::send_data()
 void
 sanguis::net::client::object_impl::clear()
 {
+	query_.reset();
+
 	send_data_.clear();
 }
 

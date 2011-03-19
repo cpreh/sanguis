@@ -178,58 +178,6 @@ sanguis::client::gui::menu::object::handle_connect(
 
 #if 0
 void
-sanguis::client::gui::menu::object::connect_from_menu()
-{
-	this->connect(
-		sge::font::text::to_fcppt_string(
-			connect_.host_edit.text()
-		),
-		sge::font::text::to_fcppt_string(
-			connect_.port_edit.text()
-		)
-	);
-}
-#endif
-
-#if 0
-void
-sanguis::client::gui::menu::object::connect()
-{
-	FCPPT_LOG_DEBUG(
-		mylogger,
-		fcppt::log::_
-			<< FCPPT_TEXT("connecting to ")
-			<< _host 
-			<< FCPPT_TEXT(" on port ")
-			<< _port
-	);
-
-	connection_host_ = _host;
-	connection_port_ = _port;
-
-	connect_box_.label_.text(
-		sge::font::text::from_fcppt_string(
-			FCPPT_TEXT("Connecting to \"")+
-			_host+
-			FCPPT_TEXT("\" on port \"")+
-			_port+
-			FCPPT_TEXT("\"")
-		)
-	);
-
-	callbacks_.connect_(
-		_host,
-		_port
-	);
-	
-	mover_.reset(
-		connect_box_.parent
-	);
-}
-#endif
-
-#if 0
-void
 sanguis::client::gui::menu::object::cancel_connect()
 {
 	mover_.reset(
