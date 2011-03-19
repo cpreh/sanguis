@@ -3,11 +3,11 @@
 
 std::tm const
 sanguis::client::gmtime(
-	std::time_t const time_
+	std::time_t const _time
 )
 {
 	return
 		*std::gmtime(
-			&time_
+			&_time
 		);
 }

@@ -184,7 +184,7 @@ private:
 		model::part
 	> part_vector;
 
-	part_vector parts;
+	part_vector parts_;
 };
 
 }

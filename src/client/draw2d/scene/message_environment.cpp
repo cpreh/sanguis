@@ -4,79 +4,82 @@
 #include "../entities/model/parameters.hpp"
 
 sanguis::client::draw2d::scene::message_environment::message_environment(
-	object &_object,
+	scene::object &_object,
 	hud &_hud
 )
 :
 	object_(_object),
 	hud_(_hud)
-{}
+{
+}
 
 sanguis::client::draw2d::scene::message_environment::~message_environment()
-{}
+{
+}
 
 sanguis::client::draw2d::entities::base &
 sanguis::client::draw2d::scene::message_environment::insert(
-	entities::auto_ptr e_ptr,
-	entity_id const id
+	entities::auto_ptr _entity,
+	entity_id const _id
 )
 {
 	return 
 		object_.insert(
-			e_ptr,
-			id
+			_entity,
+			_id
 		);
 }
 
 void
 sanguis::client::draw2d::scene::message_environment::remove(
-	entity_id const id
+	entity_id const _id
 )
 {
 	object_.remove(
-		id
+		_id
 	);
 }
 
 sanguis::client::draw2d::entities::base &
 sanguis::client::draw2d::scene::message_environment::entity(
-	entity_id const id
+	entity_id const _id
 )
 {
 	return
 		object_.entity(
-			id
+			_id
 		);
 }
 
 void
 sanguis::client::draw2d::scene::message_environment::experience(
-	exp_type const exp
+	exp_type const _exp
 )
 {
 	hud_.experience(
-		exp
+		_exp
 	);
 }
 
 void
 sanguis::client::draw2d::scene::message_environment::level(
-	level_type const level_
+	level_type const _level
 )
 {
 	hud_.level(
-		level_
+		_level
 	);
 }
 
 sanguis::client::draw2d::entities::model::parameters const
 sanguis::client::draw2d::scene::message_environment::model_parameters() const
 {
-	return entities::model::parameters(
-		object_.colored_system(),
-		object_.normal_system(),
-		object_.load_collection()
-	);
+	return
+		entities::model::parameters(
+			object_.colored_system(),
+			object_.normal_system(),
+			object_.load_collection()
+		);
 }
 
 sanguis::client::draw2d::sprite::particle::system &

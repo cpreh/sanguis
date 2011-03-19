@@ -11,7 +11,8 @@ sanguis::client::config::settings::saver::saver(
 )
 :
 	object_(_object)
-{}
+{
+}
 
 sanguis::client::config::settings::saver::~saver()
 {
@@ -20,14 +21,14 @@ sanguis::client::config::settings::saver::~saver()
 		object_.save();	
 	}
 	catch(
-		fcppt::exception const &e
+		fcppt::exception const &_error
 	)
 	{
 		FCPPT_LOG_FATAL(
-			log(),
+			client::log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("Saving your settings failed: ")
-				<< e.string()
+				<< _error.string()
 		);
 	}
 }

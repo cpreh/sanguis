@@ -13,6 +13,7 @@
 namespace sanguis
 {
 
+// TODO: replace by fcppt::math:: stuff?
 template<
 	typename T
 >
@@ -23,33 +24,38 @@ typename boost::enable_if<
 	T
 >::type
 rel_angle_to_abs(
-	T const a
+	T const _angle
 )
 {
 	if(
-		!fcppt::math::is_rel_angle(a)
+		!fcppt::math::is_rel_angle(
+			_angle
+		)
 	)
-		throw exception(
+		throw sanguis::exception(
 			(
 				fcppt::format(
 					FCPPT_TEXT("math::rel_angle_to_abs: relative angle %1% out of range!")
 				)
-				% a
+				% _angle
 			).str()
 		);
 
-	if (
-		fcppt::math::almost_zero(a)
+	if(
+		fcppt::math::almost_zero(
+			_angle
+		)
 	)
 		return static_cast<T>(0);
 
 	return
-		a > static_cast<T>(0)
+		_angle > static_cast<T>(0)
 		?
-			a
+			_angle
 		:
 			fcppt::math::twopi<T>()
-			+ a;
+			+
+			_angle;
 }
 
 }

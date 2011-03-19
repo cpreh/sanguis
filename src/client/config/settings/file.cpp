@@ -5,5 +5,7 @@
 fcppt::filesystem::path const
 sanguis::client::config::settings::file()
 {
-	return homedir() / FCPPT_TEXT("settings.ini");
+	return
+		config::homedir()
+		/ FCPPT_TEXT("settings.ini");
 }

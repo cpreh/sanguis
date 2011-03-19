@@ -25,18 +25,18 @@ sanguis::client::draw2d::scene::hud::hud(
 
 void
 sanguis::client::draw2d::scene::hud::experience(
-	exp_type const nexperience
+	exp_type const _experience
 )
 {
-	experience_ = nexperience;
+	experience_ = _experience;
 }
 
 void
 sanguis::client::draw2d::scene::hud::level(
-	level_type const nlevel
+	level_type const _level
 )
 {
-	level_ = nlevel;
+	level_ = _level;
 }
 
 void

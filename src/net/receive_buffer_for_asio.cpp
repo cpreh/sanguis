@@ -16,7 +16,7 @@ sanguis::net::receive_buffer_for_asio(
 	return
 		boost::asio::mutable_buffers_1(
 			part.begin(),
-			std::max(
+			std::min(
 				part.size(),
 				static_cast<
 					net::receive_buffer::size_type

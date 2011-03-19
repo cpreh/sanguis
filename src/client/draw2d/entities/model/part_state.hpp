@@ -50,9 +50,9 @@ private:
 	load::model::animation const &anim_;
 
 	sge::audio::sound::positional_ptr const
-		sstart,
-		srunning,
-		send;
+		sstart_,
+		srunning_,
+		send_;
 
 	animation_type::type const animation_type_;
 

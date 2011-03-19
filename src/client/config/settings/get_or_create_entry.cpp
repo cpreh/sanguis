@@ -7,34 +7,34 @@
 
 sge::parse::ini::entry &
 sanguis::client::config::settings::get_or_create_entry(
-	sge::parse::ini::section &section_,
-	fcppt::string const &key_,
-	fcppt::string const &default_value_
+	sge::parse::ini::section &_section,
+	fcppt::string const &_key,
+	fcppt::string const &_default_value
 )
 {
-	sge::parse::ini::entry_vector &entries_(
-		section_.entries
+	sge::parse::ini::entry_vector &entries(
+		_section.entries
 	);
 
 	sge::parse::ini::entry_vector::iterator it(
 		std::find_if(
-			entries_.begin(),
-			entries_.end(),
+			entries.begin(),
+			entries.end(),
 			sge::parse::ini::entry_name_equal(
-				key_
+				_key
 			)
 		)
 	);
 
 	if(
-		it == entries_.end()
+		it == entries.end()
 	)
 		it =
-			entries_.insert(
-				entries_.end(),
+			entries.insert(
+				entries.end(),
 				sge::parse::ini::entry(
-					key_,
-					default_value_
+					_key,
+					_default_value
 				)
 			);
 	

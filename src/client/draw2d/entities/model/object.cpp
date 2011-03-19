@@ -9,13 +9,16 @@
 #include "../../../../load/model/collection.hpp"
 #include "../../../../load/model/object.hpp"
 #include "../../../../exception.hpp"
-#include <sge/time/second.hpp>
 #include <sge/sprite/object_impl.hpp>
+#include <sge/time/second.hpp>
+#include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/math/vector/is_null.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
 #include <ostream>
@@ -42,17 +45,23 @@ sanguis::client::draw2d::entities::model::object::object(
 	healthbar_(
 		_needs_healthbar == needs_healthbar::yes
 		?
-			new model::healthbar(
-				_param.colored_system()
+			fcppt::make_unique_ptr<
+				model::healthbar
+			>(
+				fcppt::ref(
+					_param.colored_system()
+				)
 			)
 		:
-			0
+			fcppt::unique_ptr<
+				model::healthbar
+			>()
 	),
 	decay_time_(),
 	decay_option_(_decay_option),
-	parts()
+	parts_()
 {
-	part_vector::size_type i(0);
+	part_vector::size_type index(0);
 
 	load::model::object const &model(
 		_param.collection()[_name]
@@ -71,20 +80,30 @@ sanguis::client::draw2d::entities::model::object::object(
 		it != model.end();
 		++it
 	)
-		parts.push_back(
-			new model::part(
+		fcppt::container::ptr::push_back_unique_ptr(
+			parts_,
+			fcppt::make_unique_ptr<
+				model::part
+			>(
 				*it->second,
-				at(sprite::index(i++))
+				fcppt::ref(
+					this->at(
+						sprite::index(
+							index++
+						)
+					)
+				)
 			)
 		);
 	
-	change_animation(
+	this->change_animation(
 		animation_type::deploying
 	);
 }
 
 sanguis::client::draw2d::entities::model::object::~object()
-{}
+{
+}
 
 sanguis::client::health_type
 sanguis::client::draw2d::entities::model::object::max_health() const
@@ -100,55 +119,69 @@ sanguis::client::draw2d::entities::model::object::health() const
 
 void
 sanguis::client::draw2d::entities::model::object::update(
-	time_type const time
+	time_type const _time
 )
 {
-	container::update(time);
+	container::update(
+		_time
+	);
 
-	if(healthbar_)
+	if(
+		healthbar_
+	)
 		healthbar_->attach_to(
-			master().pos(),
-			master().size()
+			this->master().pos(),
+			this->master().size()
 		);
 	
-	if(decay_time_)
+	if(
+		decay_time_
+	)
 		decay_time_->update(
-			time
+			_time
 		);
 
 	BOOST_FOREACH(
-		model::part &p,
-		parts
+		model::part &cur_part,
+		parts_
 	)
-		p.update(time);
+		cur_part.update(
+			_time
+		);
 }
 
 void
 sanguis::client::draw2d::entities::model::object::orientation(
-	sprite::rotation_type const rot
+	sprite::rotation_type const _rot
 )
 {
 	BOOST_FOREACH(
-		model::part &p,
-		parts
+		model::part &cur_part,
+		parts_
 	)
-		p.orientation(rot);
+		cur_part.orientation(
+			_rot
+		);
 }
 
 void
 sanguis::client::draw2d::entities::model::object::orientation(
-	sprite::rotation_type const rot,
-	size_type const index
+	sprite::rotation_type const _rot,
+	size_type const _index
 )
 {
-	parts.at(index).orientation(rot);	
+	parts_.at(
+		_index
+	).orientation(
+		_rot
+	);	
 }
 
 bool
 sanguis::client::draw2d::entities::model::object::is_decayed() const
 {
 	return
-		animations_ended()
+		this->animations_ended()
 		&& decay_time_
 		&& decay_time_->ended();
 }
@@ -156,42 +189,61 @@ sanguis::client::draw2d::entities::model::object::is_decayed() const
 void
 sanguis::client::draw2d::entities::model::object::on_decay()
 {
-	decay_time_.reset(
-		new decay_time(
+	decay_time_.take(
+		fcppt::make_unique_ptr<
+			model::decay_time
+		>(
 			decay_option_ == decay_option::delayed
-			? sge::time::second(10)
-			: sge::time::second(0)
+			?
+				sge::time::second(10)
+			:
+				sge::time::second(0)
 		)
 	);
 
 	healthbar_.reset();
 
-	change_animation();
+	this->change_animation();
 
-	speed(vector2::null()); // FIXME
+	this->speed(
+		vector2::null()
+	); // FIXME
 }
 
 void
 sanguis::client::draw2d::entities::model::object::speed(
-	vector2 const &s
+	vector2 const &_speed
 )
 {
 	vector2 const old_speed(
-		speed()
+		this->speed()
 	);
 	
-	container::speed(s);
+	container::speed(
+		_speed
+	);
 
-	if(is_null(s) != is_null(old_speed))
-		change_animation();
+	if(
+		fcppt::math::vector::is_null(
+			_speed
+		)
+		!=
+		fcppt::math::vector::is_null(
+			old_speed
+		)
+	)
+		this->change_animation();
 }
 
 sanguis::client::draw2d::entities::model::part &
 sanguis::client::draw2d::entities::model::object::part(
-	sprite::index const &idx
+	sprite::index const &_idx
 )
 {
-	return parts.at(idx.get());
+	return
+		parts_.at(
+			_idx.get()
+		);
 }
 
 bool
@@ -203,13 +255,16 @@ sanguis::client::draw2d::entities::model::object::dead() const
 bool
 sanguis::client::draw2d::entities::model::object::walking() const
 {
-	return !is_null(speed());
+	return
+		!fcppt::math::vector::is_null(
+			this->speed()
+		);
 }
 
 bool
 sanguis::client::draw2d::entities::model::object::has_health() const
 {
-	return max_health() > 0;
+	return this->max_health() > 0;
 }
 
 void
@@ -219,7 +274,7 @@ sanguis::client::draw2d::entities::model::object::health(
 {
 	health_ = _health;
 
-	update_healthbar();
+	this->update_healthbar();
 }
 
 void
@@ -228,7 +283,8 @@ sanguis::client::draw2d::entities::model::object::max_health(
 )
 {
 	max_health_ = _max_health;
-	update_healthbar();
+
+	this->update_healthbar();
 }
 
 void
@@ -238,13 +294,13 @@ sanguis::client::draw2d::entities::model::object::weapon(
 {
 	BOOST_FOREACH(
 		model::part &cur_part,
-		parts
+		parts_
 	)
 		cur_part.weapon(
 			_weapon
 		);
 
-	change_animation();
+	this->change_animation();
 }
 
 void
@@ -252,15 +308,17 @@ sanguis::client::draw2d::entities::model::object::attacking(
 	bool const _attacking
 )
 {
-	if(_attacking == attacking_)
+	if(
+		_attacking == attacking_
+	)
 		FCPPT_LOG_WARNING(
-			log(),
+			object::log(),
 			fcppt::log::_ << FCPPT_TEXT("attacking(): value already set!")
 		);
 
 	attacking_ = _attacking;
 
-	change_animation();
+	this->change_animation();
 }
 
 void
@@ -268,22 +326,24 @@ sanguis::client::draw2d::entities::model::object::reloading(
 	bool const _reloading
 )
 {
-	if(_reloading == reloading_)
+	if(
+		_reloading == reloading_
+	)
 		FCPPT_LOG_WARNING(
-			log(),
+			object::log(),
 			fcppt::log::_ << FCPPT_TEXT("reloading(): value already set!")
 		);
 	
 	reloading_ = _reloading;
 
-	change_animation();
+	this->change_animation();
 }
 
 void
 sanguis::client::draw2d::entities::model::object::change_animation()
 {
-	change_animation(
-		animation()
+	this->change_animation(
+		this->animation()
 	);
 }
 
@@ -294,7 +354,7 @@ sanguis::client::draw2d::entities::model::object::change_animation(
 {
 	BOOST_FOREACH(
 		model::part &cur_part,
-		parts
+		parts_
 	)
 	{
 		animation_type::type part_anim(
@@ -321,7 +381,8 @@ sanguis::client::draw2d::entities::model::object::fallback_anim(
 		return animation_type::size;
 	case animation_type::attacking:
 	case animation_type::reloading:
-		return walking()
+		return
+			this->walking()
 			?
 				animation_type::walking
 			:
@@ -334,7 +395,7 @@ sanguis::client::draw2d::entities::model::object::fallback_anim(
 		break;
 	}
 
-	throw exception(
+	throw sanguis::exception(
 		FCPPT_TEXT("Invalid animation in fallback_anim!")
 	);
 }
@@ -343,7 +404,7 @@ sanguis::animation_type::type
 sanguis::client::draw2d::entities::model::object::animation() const
 {
 	return
-		dead()
+		this->dead()
 		?
 			animation_type::dying
 		:
@@ -355,7 +416,9 @@ sanguis::client::draw2d::entities::model::object::animation() const
 				?
 					animation_type::attacking
 				:
-					is_null(container::speed())
+					fcppt::math::vector::is_null(
+						container::speed()
+					)
 					?
 						animation_type::none
 					:
@@ -365,12 +428,14 @@ sanguis::client::draw2d::entities::model::object::animation() const
 void
 sanguis::client::draw2d::entities::model::object::update_healthbar()
 {
-	if(!healthbar_)
+	if(
+		!healthbar_
+	)
 		return;
 	
 	healthbar_->update_health(
-		health(),
-		max_health()
+		this->health(),
+		this->max_health()
 	);
 }
 
@@ -383,12 +448,14 @@ sanguis::client::draw2d::entities::model::object::animations_ended() const
 	)*/
 	for(
 		part_vector::const_iterator it(
-			parts.begin()
+			parts_.begin()
 		);
-		it != parts.end();
+		it != parts_.end();
 		++it
 	)
-		if(!it->animation_ended())
+		if(
+			!it->animation_ended()
+		)
 			return false;
 	return true;
 }

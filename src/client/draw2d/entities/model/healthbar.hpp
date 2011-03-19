@@ -74,8 +74,8 @@ private:
 	recalc_health();
 
 	sprite::colored::object
-		background,
-		foreground;
+		background_,
+		foreground_;
 	
 	health_type	
 		health_,

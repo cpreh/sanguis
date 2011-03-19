@@ -53,7 +53,7 @@ sanguis::client::config::settings::object::save() const
 			sections_
 		)
 	)
-		throw exception(
+		throw sanguis::exception(
 			FCPPT_TEXT("Writing the settings failed!")
 		);
 }

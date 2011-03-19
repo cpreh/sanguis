@@ -18,19 +18,49 @@ sanguis::client::draw2d::entities::model::part_state::part_state(
 )
 :
 	ref_(_ref),
-	anim_(_part[_weapon_type][_animation_type]),
-	sstart(anim_.sounds()[animation_sound_type::start]),
-	srunning(anim_.sounds()[animation_sound_type::running]),
-	send(anim_.sounds()[animation_sound_type::end]),
+	anim_(
+		_part[
+			_weapon_type
+		][
+			_animation_type
+		]
+	),
+	sstart_(
+		anim_.sounds()[
+			animation_sound_type::start
+		]
+	),
+	srunning_(
+		anim_.sounds()[
+			animation_sound_type::running
+		]
+	),
+	send_(
+		anim_.sounds()[
+			animation_sound_type::end
+		]
+	),
 	animation_type_(_animation_type),
 	weapon_type_(_weapon_type),
 	start_played_(false)
 {
-	init_sound(sstart);
-	init_sound(srunning);
-	init_sound(send);
-	update_sounds();
-	play(sstart);
+	this->init_sound(
+		sstart_
+	);
+
+	this->init_sound(
+		srunning_
+	);
+
+	this->init_sound(
+		send_
+	);
+
+	this->update_sounds();
+
+	this->play(
+		sstart_
+	);
 }
 
 sanguis::animation_type::type
@@ -48,49 +78,67 @@ sanguis::client::draw2d::entities::model::part_state::weapon_type() const
 void
 sanguis::client::draw2d::entities::model::part_state::update()
 {
-	update_sounds();
+	this->update_sounds();
 
 	if(
-		!sstart || 
+		!sstart_ || 
 		(!start_played_ && 
-		sstart->status() == sge::audio::sound::play_status::stopped)
+		sstart_->status() == sge::audio::sound::play_status::stopped)
 	)
 	{
 		start_played_ = true;
-		play(
-			srunning,
-			sge::audio::sound::repeat::loop);
+
+		this->play(
+			srunning_,
+			sge::audio::sound::repeat::loop
+		);
 	}
 }
 
 sanguis::client::draw2d::entities::model::part_state::~part_state()
 {
-	play(send);
+	this->play(
+		send_
+	);
 }
 
 void
 sanguis::client::draw2d::entities::model::part_state::play(
-	sge::audio::sound::positional_ptr const s,
-	sge::audio::sound::repeat::type const ss
+	sge::audio::sound::positional_ptr const _sound,
+	sge::audio::sound::repeat::type const _type
 )
 {
-	if (s)
-		s->play(ss);
+	if(
+		_type
+	)
+		_sound->play(
+			_type
+		);
 }
 
 void
 sanguis::client::draw2d::entities::model::part_state::update_sound(
-	sge::audio::sound::positional_ptr const s
+	sge::audio::sound::positional_ptr const _sound
 )
 {
-	if (s)
-		s->position(
+	if(
+		_sound
+	)
+		_sound->position(
 			sge::audio::vector(
-				static_cast<sge::audio::scalar>(
+				static_cast<
+					sge::audio::scalar
+				>(
 					ref_.object().pos().x()
 				),
-				static_cast<sge::audio::scalar>(0),
-				static_cast<sge::audio::scalar>(
+				static_cast<
+					sge::audio::scalar
+				>(
+					0
+				),
+				static_cast<
+					sge::audio::scalar
+				>(
 					ref_.object().pos().y()
 				)
 			)
@@ -99,10 +147,12 @@ sanguis::client::draw2d::entities::model::part_state::update_sound(
 
 void
 sanguis::client::draw2d::entities::model::part_state::init_sound(
-	sge::audio::sound::positional_ptr const s
+	sge::audio::sound::positional_ptr const _sound
 )
 {
-	if (!s)
+	if(
+		!_sound
+	)
 		return;
 	// TODO!
 #if 0
@@ -119,7 +169,15 @@ sanguis::client::draw2d::entities::model::part_state::init_sound(
 void
 sanguis::client::draw2d::entities::model::part_state::update_sounds()
 {
-	update_sound(sstart);
-	update_sound(srunning);
-	update_sound(send);
+	this->update_sound(
+		sstart_
+	);
+
+	this->update_sound(
+		srunning_
+	);
+
+	this->update_sound(
+		send_
+	);
 }

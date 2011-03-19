@@ -6,18 +6,19 @@
 
 void
 sanguis::client::config::settings::set_key(
-	object &object_,
-	fcppt::string const &section_,
-	fcppt::string const &key_,
-	fcppt::string const &value_
+	settings::object &_object,
+	fcppt::string const &_section,
+	fcppt::string const &_key,
+	fcppt::string const &_value
 )
 {
-	get_or_create_entry(
-		get_or_create_section(
-			object_.sections(),
-			section_
+	settings::get_or_create_entry(
+		settings::get_or_create_section(
+			_object.sections(),
+			_section
 		),
-		key_,
+		_key,
 		FCPPT_TEXT("")
-	).value = value_;
+	).value =
+		_value;
 }

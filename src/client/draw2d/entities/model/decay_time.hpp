@@ -5,6 +5,7 @@
 #include "../../../../diff_clock.hpp"
 #include <sge/time/duration.hpp>
 #include <sge/time/timer.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -19,10 +20,15 @@ namespace model
 
 class decay_time
 {
+	FCPPT_NONCOPYABLE(
+		decay_time
+	);
 public:
 	explicit decay_time(
 		sge::time::duration const &
 	);
+
+	~decay_time();
 
 	void
 	update(

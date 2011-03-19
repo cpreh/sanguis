@@ -7,28 +7,28 @@
 
 sge::parse::ini::section &
 sanguis::client::config::settings::get_or_create_section(
-	sge::parse::ini::section_vector &sections_,
-	fcppt::string const &section_name_
+	sge::parse::ini::section_vector &_sections,
+	fcppt::string const &_section_name
 )
 {
 	sge::parse::ini::section_vector::iterator it(
 		std::find_if(
-			sections_.begin(),
-			sections_.end(),
+			_sections.begin(),
+			_sections.end(),
 			sge::parse::ini::header_name_equal(
-				section_name_
+				_section_name
 			)
 		)
 	);
 
 	if(
-		it == sections_.end()
+		it == _sections.end()
 	)
 		it =
-			sections_.insert(
-				sections_.end(),
+			_sections.insert(
+				_sections.end(),
 				sge::parse::ini::section(
-					section_name_
+					_section_name
 				)
 			);
 	

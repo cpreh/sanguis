@@ -380,17 +380,13 @@ sanguis::net::server::object_impl::handle_error(
 			_error
 		)
 	)
-	{
-		// TODO:!
-	/*
 		throw net::exception(
 			_message
 			+
 			FCPPT_TEXT(" error: ")
 			+
 			error_msg
-		);*/
-	}
+		);
 
 	FCPPT_LOG_DEBUG(
 		object_impl::log(),

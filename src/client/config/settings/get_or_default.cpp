@@ -7,19 +7,19 @@
 
 fcppt::string const
 sanguis::client::config::settings::get_or_default(
-	object &object_,
-	fcppt::string const &section_name_,
-	fcppt::string const &key_,
-	fcppt::string const &default_value_
+	settings::object &_object,
+	fcppt::string const &_section_name,
+	fcppt::string const &_key,
+	fcppt::string const &_default_value
 )
 {
 	return 
-		get_or_create_entry(
-			get_or_create_section(
-				object_.sections(),
-				section_name_
+		settings::get_or_create_entry(
+			settings::get_or_create_section(
+				_object.sections(),
+				_section_name
 			),
-			key_,
-			default_value_
+			_key,
+			_default_value
 		).value;
 }
