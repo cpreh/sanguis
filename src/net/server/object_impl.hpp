@@ -97,7 +97,7 @@ private:
 	net::id::value_type id_counter_;
 
 	fcppt::unique_ptr<
-		connection
+		server::connection
 	> new_connection_;
 
 	connection_container connections_;
