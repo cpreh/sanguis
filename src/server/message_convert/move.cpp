@@ -6,13 +6,14 @@
 
 sanguis::messages::auto_ptr
 sanguis::server::message_convert::move(
-	entities::with_dim const &e
+	entities::with_dim const &_entity
 )
 {
-	return messages::create(
-		messages::move(
-			e.id(),
-			e.pos()
-		)
-	);
+	return
+		messages::create(
+			messages::move(
+				_entity.id(),
+				_entity.pos()
+			)
+		);
 }

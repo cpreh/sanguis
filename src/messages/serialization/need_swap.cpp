@@ -5,5 +5,5 @@
 bool
 sanguis::messages::serialization::need_swap()
 {
-	return endianness() != fcppt::endianness::host_format();
+	return serialization::endianness() != fcppt::endianness::host_format();
 }

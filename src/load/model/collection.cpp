@@ -39,10 +39,6 @@ sanguis::load::model::collection::operator[](
 	return *it->second;	
 }
 
-sanguis::load::model::collection::~collection()
-{
-}
-
 sanguis::load::model::collection::collection(
 	resource::context const &_ctx
 )
@@ -51,3 +47,7 @@ sanguis::load::model::collection::collection(
 	models_(),
 	mutex_()
 {}
+
+sanguis::load::model::collection::~collection()
+{
+}

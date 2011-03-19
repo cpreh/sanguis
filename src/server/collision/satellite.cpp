@@ -5,19 +5,26 @@ sanguis::server::collision::satellite::satellite(
 )
 :
 	base_(_base)
-{}
+{
+}
+
+sanguis::server::collision::satellite::~satellite()
+{
+}
 
 void
 sanguis::server::collision::satellite::position_change(
 	sge::collision::point const &
 )
-{}
+{
+}
 
 void
 sanguis::server::collision::satellite::velocity_change(
 	sge::collision::point const &
 )
-{}
+{
+}
 
 sanguis::server::collision::base &
 sanguis::server::collision::satellite::base()

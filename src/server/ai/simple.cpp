@@ -93,11 +93,11 @@ make_vector_from_angle(
 
 void
 sanguis::server::ai::simple::update(
-	time_type const time_
+	time_type const _time
 )
 {
 	diff_clock_.update(
-		time_
+		_time
 	);
 
 	if(
@@ -199,25 +199,27 @@ sanguis::server::ai::simple::update(
 			)
 	);
 
-	if(angle)
+	if(
+		angle
+	)
 		me_.angle(
 			*angle
 		);
 
 	FCPPT_TRY_DYNAMIC_CAST(
 		entities::movable *,
-		movable_,
+		movable,
 		&me_
 	)
 	{
 		entities::property::changeable &speed(
-			movable_->movement_speed()
+			movable->movement_speed()
 		);
 
 		if(
 			angle
 		)
-			movable_->direction(
+			movable->direction(
 				*angle
 			);
 	
@@ -241,12 +243,12 @@ sanguis::server::ai::simple::update(
 
 void
 sanguis::server::ai::simple::target_enters(
-	entities::base &new_target
+	entities::base &_new_target
 )
 {
 	potential_targets_.insert(
-		new_target.id(),
-		new_target.link()
+		_new_target.id(),
+		_new_target.link()
 	);
 		
 	if(
@@ -264,21 +266,21 @@ sanguis::server::ai::simple::target_enters(
 			me_
 		)
 		> collision::distance(
-			new_target,
+			_new_target,
 			me_
 		)
 	)
 		return;
 			
-	target_ = new_target.link();
+	target_ = _new_target.link();
 }
 
 void
 sanguis::server::ai::simple::target_leaves(
-	entities::base &old_target
+	entities::base &_old_target
 )
 {
 	potential_targets_.erase(
-		old_target.id()
+		_old_target.id()
 	);
 }

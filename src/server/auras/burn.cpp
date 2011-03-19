@@ -21,7 +21,12 @@ sanguis::server::auras::burn::burn(
 	damage_per_pulse_(_damage_per_pulse),
 	damage_values_(_damage_values),
 	provider_()
-{}
+{
+}
+
+sanguis::server::auras::burn::~burn()
+{
+}
 
 void
 sanguis::server::auras::burn::enter(

@@ -7,7 +7,9 @@ namespace server
 {
 namespace collision
 {
+
 class base;
+
 }
 }
 }

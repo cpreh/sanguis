@@ -7,6 +7,7 @@
 #include "../damage/unit.hpp"
 #include "../space_unit.hpp"
 #include "../../time_type.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -19,6 +20,9 @@ class burn
 :
 	public aura
 {
+	FCPPT_NONCOPYABLE(
+		burn
+	);
 public:
 	burn(
 		space_unit radius,
@@ -27,6 +31,8 @@ public:
 		time_type pulse_diff,
 		damage::array const &
 	);
+
+	~burn();
 private:
 	void
 	enter(

@@ -6,13 +6,14 @@
 
 sanguis::messages::auto_ptr
 sanguis::server::message_convert::rotate(
-	entities::base const &e
+	entities::base const &_entity
 )
 {
-	return messages::create(
-		messages::rotate(
-			e.id(),
-			e.angle()
-		)
-	);
+	return
+		messages::create(
+			messages::rotate(
+				_entity.id(),
+				_entity.angle()
+			)
+		);
 }

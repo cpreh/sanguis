@@ -6,6 +6,7 @@
 #include "../team.hpp"
 #include "../update_target_function.hpp"
 #include <fcppt/function/object.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -18,6 +19,9 @@ class aggro
 :
 	public aura
 {
+	FCPPT_NONCOPYABLE(
+		aggro
+	);
 public:
 	aggro(
 		space_unit radius,
@@ -25,6 +29,8 @@ public:
 		update_target_function const &add_target,
 		update_target_function const &remove_target
 	);
+
+	~aggro();
 private:
 	void
 	enter(
@@ -40,7 +46,6 @@ private:
 		add_target_,
 		remove_target_;
 };
-
 
 }
 }

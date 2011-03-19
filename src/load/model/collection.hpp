@@ -27,14 +27,12 @@ public:
 		fcppt::string const &
 	) const;
 
-	~collection();
-private:
 	explicit collection(
 		resource::context const &
 	);
 
-	friend class context;
-
+	~collection();
+private:
 	resource::context const &ctx_;
 
 	typedef boost::ptr_map<

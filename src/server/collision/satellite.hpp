@@ -3,6 +3,7 @@
 
 #include "base_fwd.hpp"
 #include <sge/collision/satellite.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -15,10 +16,15 @@ class satellite
 :
 	public sge::collision::satellite
 {
+	FCPPT_NONCOPYABLE(
+		satellite
+	);
 public:
 	explicit satellite(
 		collision::base &
 	);
+
+	~satellite();
 	
 	void
 	position_change(

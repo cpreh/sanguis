@@ -9,9 +9,9 @@
 
 sanguis::server::entities::auto_weak_link const
 sanguis::server::ai::search_new_target(
-	entities::base const &me_,
-	entities::auto_weak_link const owner_,
-	entity_map const &entities_
+	entities::base const &_me,
+	entities::auto_weak_link const _owner,
+	entity_map const &_entities
 )
 {
 	space_unit distance(
@@ -24,26 +24,28 @@ sanguis::server::ai::search_new_target(
 
 	BOOST_FOREACH(
 		entity_map::const_reference ref,
-		entities_
+		_entities
 	)
 	{
 		entities::auto_weak_link link(
 			ref.second
 		);
 
-		if(!link)
+		if(
+			!link
+		)
 			continue; // TODO: can this happen?
 
 		space_unit const new_distance(
-			owner_
+			_owner
 			?
 				collision::distance(
-					*owner_,
+					*_owner,
 					*link
 				)
 			:
 				collision::distance(
-					me_,
+					_me,
 					*link
 				)
 		);

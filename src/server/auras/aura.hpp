@@ -12,6 +12,7 @@
 #include "../../entity_id.hpp"
 #include <sge/collision/shapes/container.hpp>
 #include <sge/collision/world_ptr.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -24,6 +25,9 @@ class aura
 :
 	public collision::base
 {
+	FCPPT_NONCOPYABLE(
+		aura
+	);
 public:
 	virtual ~aura();
 

@@ -10,7 +10,8 @@ namespace collision
 
 namespace group
 {
-enum type {
+enum type
+{
 	enemy,
 	pickup,	
 	projectile_enemy,

@@ -5,19 +5,19 @@
 
 sanguis::server::collision::group_vector const
 sanguis::server::auras::collision_groups(
-	team::type const team_,
-	influence::type const influence_
+	team::type const _team,
+	influence::type const _influence
 )
 {
 	if (
 		(
-			team_ == team::players
-			&& influence_ == influence::buff
+			_team == team::players
+			&& _influence == influence::buff
 		)
 		||
 		(
-			team_ == team::monsters
-			&& influence_ == influence::debuff
+			_team == team::monsters
+			&& _influence == influence::debuff
 		)
 
 	)
@@ -30,13 +30,13 @@ sanguis::server::auras::collision_groups(
 	
 	if (
 		(
-			team_ == team::players
-			&& influence_ == influence::debuff
+			_team == team::players
+			&& _influence == influence::debuff
 		)
 		||
 		(
-			team_ == team::monsters
-			&& influence_ == influence::buff
+			_team == team::monsters
+			&& _influence == influence::buff
 		)
 
 	)
@@ -47,7 +47,7 @@ sanguis::server::auras::collision_groups(
 				collision::group::projectile_player
 			);
 
-	throw exception(
+	throw sanguis::exception(
 		FCPPT_TEXT("Don't know a collision group for an aura.")
 	);
 }

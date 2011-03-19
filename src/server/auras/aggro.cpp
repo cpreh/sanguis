@@ -19,7 +19,12 @@ sanguis::server::auras::aggro::aggro(
 	remove_target_(
 		_remove_target
 	)
-{}
+{
+}
+
+sanguis::server::auras::aggro::~aggro()
+{
+}
 
 void
 sanguis::server::auras::aggro::enter(

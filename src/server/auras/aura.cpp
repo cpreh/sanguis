@@ -7,7 +7,8 @@
 #include <boost/logic/tribool.hpp>
 
 sanguis::server::auras::aura::~aura()
-{}
+{
+}
 
 void
 sanguis::server::auras::aura::owner(
@@ -52,7 +53,8 @@ sanguis::server::auras::aura::aura(
 	owner_(
 		static_cast<entity_id>(-1)
 	) // will also be set later
-{}
+{
+}
 
 sanguis::entity_id
 sanguis::server::auras::aura::owner() const
@@ -93,7 +95,7 @@ sanguis::server::auras::aura::collision_begin(
 	collision::base &_base
 )
 {
-	enter(
+	this->enter(
 		dynamic_cast<
 			entities::base &
 		>(
@@ -107,7 +109,7 @@ sanguis::server::auras::aura::collision_end(
 	collision::base &_base
 )
 {
-	leave(
+	this->leave(
 		dynamic_cast<
 			entities::base &
 		>(

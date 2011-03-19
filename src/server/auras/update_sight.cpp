@@ -20,7 +20,12 @@ sanguis::server::auras::update_sight::update_sight(
 	leave_(
 		_leave
 	)
-{}
+{
+}
+
+sanguis::server::auras::update_sight::~update_sight()
+{
+}
 
 sanguis::server::collision::group_vector const
 sanguis::server::auras::update_sight::collision_groups() const

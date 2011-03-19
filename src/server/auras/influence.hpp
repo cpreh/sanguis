@@ -7,8 +7,11 @@ namespace server
 {
 namespace auras
 {
-namespace influence {
-enum type {
+
+namespace influence
+{
+enum type
+{
 	buff,
 	debuff
 };

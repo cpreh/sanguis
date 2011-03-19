@@ -6,6 +6,7 @@
 #include "../update_sight_function.hpp"
 #include "../entities/base_fwd.hpp"
 #include <fcppt/function/object.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -18,12 +19,17 @@ class update_sight
 :
 	public aura
 {
+	FCPPT_NONCOPYABLE(
+		update_sight
+	);
 public:
 	update_sight(
 		space_unit radius,
-		update_sight_function const &enter_,
-		update_sight_function const &leave_
+		update_sight_function const &enter,
+		update_sight_function const &leave
 	);
+
+	~update_sight();
 private:
 	collision::group_vector const
 	collision_groups() const;

@@ -6,13 +6,14 @@
 
 sanguis::messages::auto_ptr
 sanguis::server::message_convert::speed(
-	entities::movable const &e
+	entities::movable const &_entity
 )
 {
-	return messages::create(
-		messages::speed(
-			e.id(),
-			e.abs_speed()
-		)
-	);
+	return
+		messages::create(
+			messages::speed(
+				_entity.id(),
+				_entity.abs_speed()
+			)
+		);
 }
