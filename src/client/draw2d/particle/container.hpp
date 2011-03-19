@@ -5,6 +5,7 @@
 #include "base_ptr.hpp"
 #include "time_type.hpp"
 #include "point.hpp"
+#include <fcppt/noncopyable.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
 
 namespace sanguis 
@@ -20,6 +21,9 @@ class container
 :
 	public base
 {
+	FCPPT_NONCOPYABLE(
+		container	
+	);
 public:
 	typedef boost::ptr_list<
 		base
@@ -32,6 +36,8 @@ public:
 		rotation_type,
 		rotation_type
 	);
+
+	~container();
 
 	children_container const &
 	children() const;

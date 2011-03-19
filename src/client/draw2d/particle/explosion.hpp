@@ -21,6 +21,9 @@ class explosion
 :
 	public container
 {
+	FCPPT_NONCOPYABLE(
+		explosion
+	);
 public:
 	typedef fcppt::function::object<
 		base_ptr (particle_type::type)
@@ -35,6 +38,8 @@ public:
 		rotation_type,
 		rotation_type
 	);
+
+	~explosion();
 };
 
 }

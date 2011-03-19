@@ -26,7 +26,8 @@ sanguis::client::draw2d::particle::properties::properties(
 	do_fade_(_do_fade),
 	fade_(_fade),
 	movement_(_movement)
-{}
+{
+}
 
 sanguis::client::draw2d::funit
 sanguis::client::draw2d::particle::properties::anim_speed() const

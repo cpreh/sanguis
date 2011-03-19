@@ -18,7 +18,12 @@ sanguis::client::draw2d::particle::container::container(
 		_rot,
 		_rot_vel
 	)
-{}
+{
+}
+
+sanguis::client::draw2d::particle::container::~container()
+{
+}
 
 sanguis::client::draw2d::particle::container::children_container const &
 sanguis::client::draw2d::particle::container::children() const
@@ -32,40 +37,65 @@ sanguis::client::draw2d::particle::container::children()
 	return children_;
 }
 
-void sanguis::client::draw2d::particle::container::add(
-	base_ptr ptr)
+void
+sanguis::client::draw2d::particle::container::add(
+	base_ptr _ptr
+)
 {
-	children_.push_back(ptr);
+	children_.push_back(
+		_ptr
+	);
 }
 
-bool sanguis::client::draw2d::particle::container::update(
-	time_type const delta,
-	point const &p,
-	rotation_type const r,
-	depth_type const d)
+bool
+sanguis::client::draw2d::particle::container::update(
+	time_type const _delta,
+	point const &_pos,
+	rotation_type const _rot,
+	depth_type const _depth
+)
 {
-	base::update(delta, p, r, d);
+	base::update(
+		_delta,
+		_pos,
+		_rot,
+		_depth
+	);
 
-	point const thispos = fcppt::math::point_rotate(
-		p + base::pos(),
-		p,
-		r + base::rot());
+	point const thispos(
+		fcppt::math::point_rotate(
+			_pos + base::pos(),
+			_pos,
+			_rot + base::rot()
+		)
+	);
 
-	for (children_container::iterator i = children().begin(); 
-	     i != children().end(); 
-		 )
+	for(
+		children_container::iterator it(
+			this->children().begin()
+		);
+		it !=this-> children().end(); 
+	)
 	{
-		if (i->update(
-		    	delta,
-			thispos,
-			r + base::rot(),
-			d + base::depth()))
+		if(
+			it->update(
+			    	_delta,
+				thispos,
+				_rot + base::rot(),
+				_depth + base::depth()
+			)
+		)
 		{
-			i = children().erase(i);
+			it =
+				children().erase(
+					it
+				);
+
 			continue;
 		}
-		++i;
+
+		++it;
 	}
 
-	return children().empty();
+	return this->children().empty();
 }

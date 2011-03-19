@@ -20,33 +20,35 @@ sanguis::client::draw2d::factory::client(
 	case entity_type::size:
 		break;
 	case entity_type::cursor:
-		return simple_sprite(
-			_client_system,
-			_textures,
-			z_ordering::cursor,
-			FCPPT_TEXT("cursor"),
-			static_cast<
-				sprite::client::repetition_type
-			>(
-				1
-			)
-		);
+		return
+			simple_sprite(
+				_client_system,
+				_textures,
+				z_ordering::cursor,
+				FCPPT_TEXT("cursor"),
+				static_cast<
+					sprite::client::repetition_type
+				>(
+					1
+				)
+			);
 	// TODO: do we have to tile the background?
 	case entity_type::background:
-		return simple_sprite(
-			_client_system,
-			_textures,
-			z_ordering::background,
-			FCPPT_TEXT("background"),
-			static_cast<
-				sprite::client::repetition_type
-			>(
-				1
-			)
-		);
+		return
+			simple_sprite(
+				_client_system,
+				_textures,
+				z_ordering::background,
+				FCPPT_TEXT("background"),
+				static_cast<
+					sprite::client::repetition_type
+				>(
+					1
+				)
+			);
 	}
 
-	throw exception(
+	throw sanguis::exception(
 		FCPPT_TEXT("draw::factory::client: missing loading code!")
 	);
 }

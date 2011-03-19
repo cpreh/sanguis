@@ -32,52 +32,143 @@ sanguis::client::draw2d::particle::generator::generator(
 		rotation_type(0)
 	),
 	clock_(),
-	generate_object_(_generate_object),
-	frequency_timer_(sge::time::second_f(_frequency)),
-	life_timer_(sge::time::second_f(_life_time)),
-	alignment_(_alignment),
+	generate_object_(
+		_generate_object
+	),
+	frequency_timer_(
+		sge::time::second_f(
+			_frequency
+		)
+	),
+	life_timer_(
+		sge::time::second_f(
+			_life_time
+		)
+	),
+	alignment_(
+		_alignment
+	),
 	dispersion_angle_(
 		fcppt::random::make_inclusive_range(
-			static_cast<rotation_type>(0),
-			fcppt::math::twopi<rotation_type>())),
-	dispersion_value_(_dispersion_value),
+			static_cast<
+				rotation_type
+			>(
+				0
+			),
+			fcppt::math::twopi<
+				rotation_type
+			>()
+		)
+	),
+	dispersion_value_(
+		_dispersion_value
+	),
 	velocity_angle_(
 		fcppt::random::make_inclusive_range(
-			static_cast<rotation_type>(0),
-			fcppt::math::twopi<rotation_type>())),
-	velocity_value_(_velocity),
+			static_cast<	
+				rotation_type
+			>(
+				0
+			),
+			fcppt::math::twopi<
+				rotation_type
+			>()
+		)
+	),
+	velocity_value_(
+		_velocity
+	),
 	rot_angle_(
 		fcppt::random::make_inclusive_range(
-			static_cast<rotation_type>(0),
-			fcppt::math::twopi<rotation_type>())),
+			static_cast<
+				rotation_type
+			>(
+				0
+			),
+			fcppt::math::twopi<
+				rotation_type
+			>()
+		)
+	),
 	rot_direction_(
 		fcppt::random::make_inclusive_range(
-			static_cast<rotation_type>(0),
-			static_cast<rotation_type>(1))),
-	rot_velocity_(_rot_velocity),
-	movement_(_movement)
+			static_cast<
+				rotation_type
+			>(
+				0
+			),
+			static_cast<
+				rotation_type
+			>(
+				1
+			)
+		)
+	),
+	rot_velocity_(
+		_rot_velocity
+	),
+	movement_(
+		_movement
+	)
 {
-	for (unsigned i = 0; i < _spawn_initial; ++i)
-		generate();
+	for(
+		unsigned i = 0;
+		i < _spawn_initial;
+		++i
+	)
+		this->generate();
 }
 
-void sanguis::client::draw2d::particle::generator::generate()
+sanguis::client::draw2d::particle::generator::~generator()
 {
-	rotation_type const disp_rot = dispersion_angle_();
-	point::value_type const disp_value = dispersion_value_();
+}
+
+void
+sanguis::client::draw2d::particle::generator::generate()
+{
+	rotation_type const disp_rot(
+		dispersion_angle_()
+	);
+
+	point::value_type const disp_value(
+		dispersion_value_()
+	);
 
 	point const object_pos(
-		std::cos(disp_rot)*disp_value,
-		std::sin(disp_rot)*disp_value);
+		std::cos(
+			disp_rot
+		)
+		* disp_value,
+		std::sin(
+			disp_rot
+		)
+		* disp_value
+	);
 	
-	point const &diff = object_pos;
+	point const &diff(
+		object_pos
+	);
 
-	point const refpoint = 
-		is_null(diff) 
-			? point(
-				static_cast<point::value_type>(rot_angle_()),
-				static_cast<point::value_type>(rot_angle_()))
-			: diff;
+	point const refpoint(
+		fcppt::math::vector::is_null(
+			diff
+		)
+		?
+			point(
+				static_cast<
+					point::value_type
+				>(
+					rot_angle_()
+				),
+				static_cast<
+					point::value_type
+				>(
+					rot_angle_()
+				)
+			)
+		:
+			diff
+	);
 			
 	point const velocity(
 		particle::velocity_from_movement(
@@ -96,11 +187,16 @@ void sanguis::client::draw2d::particle::generator::generate()
 		)
 	);
 
-	base_ptr object = generate_object_();
+	base_ptr object(
+		generate_object_()
+	);
 
 	object->pos(object_pos);
+
 	object->vel(velocity);
+
 	object->rot(cur_rot);
+	
 	/*
 	object->rot_vel(
 		(rot_direction_() > sge::su(0.5) 
@@ -108,27 +204,48 @@ void sanguis::client::draw2d::particle::generator::generate()
 			: sge::su(1)) * 
 				rot_velocity_());
 	*/
-	object->rot_vel(static_cast<rotation_type>(0));
+	object->rot_vel(
+		static_cast<
+			rotation_type
+		>(
+			0
+		)
+	);
 	
-	add(object);
+	this->add(
+		object
+	);
 }
 
 bool
 sanguis::client::draw2d::particle::generator::update(
-	time_type const delta,
-	point const &p,
-	rotation_type const r,
-	depth_type const d
+	time_type const _delta,
+	point const &_pos,
+	rotation_type const _rot,
+	depth_type const _depth
 )
 {
-	clock_.update(delta);
+	clock_.update(
+		_delta
+	);
 
-	bool const delete_now = container::update(delta,p,r,d);
+	bool const delete_now(
+		container::update(
+			_delta,
+			_pos,
+			_rot,
+			_depth
+		)
+	);
 
-	if (!life_timer_.expired())
+	if(
+		!life_timer_.expired()
+	)
 	{
-		if (frequency_timer_.update_b())
-			generate();
+		if(
+			frequency_timer_.update_b()
+		)
+			this->generate();
 		
 		return false;
 	}

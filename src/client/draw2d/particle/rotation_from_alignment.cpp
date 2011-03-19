@@ -13,10 +13,12 @@ sanguis::client::draw2d::particle::rotation_from_alignment(
 	uniform_rotation &_rot_angle
 )
 {
-	switch (_alignment)
+	switch (
+		_alignment
+	)
 	{
 		case align_type::none:
-			return  static_cast<rotation>(0);
+			return static_cast<rotation>(0);
 		case align_type::to_center:
 			return
 				fcppt::math::vector::is_null(

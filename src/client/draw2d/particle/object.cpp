@@ -15,7 +15,9 @@
 #include <fcppt/math/point_rotate.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
+#include <fcppt/ref.hpp>
 #include <algorithm>
 
 sanguis::client::draw2d::particle::object::object(
@@ -23,7 +25,7 @@ sanguis::client::draw2d::particle::object::object(
 	funit const _aoe,
 	load::model::animation_context_ptr _animation_context,
 	optional_time const _fade_total,
-	sprite::particle::system &particle_system_
+	sprite::particle::system &_particle_system
 )
 :
 	base(
@@ -36,21 +38,25 @@ sanguis::client::draw2d::particle::object::object(
 	sprite_(
 		sprite::particle::parameters()
 		.system(
-			&particle_system_
+			&_particle_system
 		)
 		.order(
-			z_ordering(
+			particle::z_ordering(
 				_type
 			)
 		)
 		.size(
 			// TODO: maybe resize with respect to the images.dim() ratio here
 			sprite::dim(
-				static_cast<sprite::unit>(
-					2*_aoe
+				static_cast<
+					sprite::unit
+				>(
+					2 * _aoe
 				),
-				static_cast<sprite::unit>(
-					2*_aoe
+				static_cast<
+					sprite::unit
+				>(
+					2 * _aoe
 				)
 			)
 		)
@@ -71,11 +77,15 @@ sanguis::client::draw2d::particle::object::object(
 	),
 	animation_(),
 	fade_total_(
-		_fade_total),
+		_fade_total
+	),
 	fade_remaining_(
 		fade_total_
-			? *fade_total_
-			: static_cast<time_type>(0))
+		?
+			*fade_total_
+		:
+			static_cast<time_type>(0)
+	)
 {
 }
 
@@ -85,33 +95,48 @@ sanguis::client::draw2d::particle::object::~object()
 
 bool
 sanguis::client::draw2d::particle::object::update(
-	time_type const delta,
-	point const &p,
-	rotation_type const r,
-	depth_type const d
+	time_type const _delta,
+	point const &_pos,
+	rotation_type const _rot,
+	depth_type const _depth 
 )
 {
 	animation_context_->update();
-	if (!animation_ && animation_context_->is_finished())
-		animation_.reset(
-			new sprite::particle::texture_animation(
+
+	if(
+		!animation_
+		&& animation_context_->is_finished()
+	)
+		animation_.take(
+			fcppt::make_unique_ptr<
+				sprite::particle::texture_animation
+			>(
 				animation_context_->result(),
 				fade_total_ 
-					? sge::sprite::animation::loop_method::repeat
-					: sge::sprite::animation::loop_method::stop_at_end,
-				sprite_,
+				?
+					sge::sprite::animation::loop_method::repeat
+				:
+					sge::sprite::animation::loop_method::stop_at_end,
+				fcppt::ref(
+					sprite_
+				),
 				clock_.callback()
 			)
 		);
 
-	base::update(delta,p,r,d);
+	base::update(
+		_delta,
+		_pos,
+		_rot,
+		_depth
+	);
 
 	sprite_.z(
-		d + base::depth()
+		_depth + base::depth()
 	);
 
 	sprite_.rotation(
-		base::rot() + r
+		base::rot() + _rot
 	);
 
 	sge::sprite::center( 
@@ -120,28 +145,42 @@ sanguis::client::draw2d::particle::object::update(
 			sprite::point
 		>(
 			fcppt::math::point_rotate(
-				p + base::pos(),
-				p,
-				r + base::rot()
+				_pos + base::pos(),
+				_pos,
+				_rot + base::rot()
 			)
 		)
 	);
 
 	clock_.update(
-		delta
+		_delta
 	);
 
-	bool const ret = animation_ ? animation_->process() : false;
-	if (!fade_total_)
+	bool const ret(
+		animation_
+		?
+			animation_->process()
+		:
+			false
+	);
+
+	if(
+		!fade_total_
+	)
 		return ret;
 	
-	fade_remaining_ -= delta;
+	fade_remaining_ -= _delta;
 
 	funit const ratio(
-		static_cast<funit>(
+		static_cast<
+			funit
+		>(
 			fade_remaining_
 		)
-		/ static_cast<funit>(
+		/
+		static_cast<
+			funit
+		>(
 			*fade_total_
 		)
 	);
@@ -160,5 +199,6 @@ sanguis::client::draw2d::particle::object::update(
 		)
 	);
 
-	return fade_remaining_ < static_cast<funit>(0);
+	return
+		fade_remaining_ < static_cast<funit>(0);
 }

@@ -4,21 +4,22 @@
 
 sanguis::client::draw2d::entities::auto_ptr
 sanguis::client::draw2d::factory::simple_sprite(
-	sprite::client::system &system_,
-	load::resource::textures const &textures_,
-	z_ordering::type const order_,
-	fcppt::string const &texture_name,
-	sprite::client::repetition_type const repeat
+	sprite::client::system &_system,
+	load::resource::textures const &_textures,
+	z_ordering::type const _order,
+	fcppt::string const &_texture_name,
+	sprite::client::repetition_type const _repeat
 )
 {
-	return entities::auto_ptr(
-		new entities::simple_sprite(
-			system_,
-			order_,
-			textures_.load(
-				texture_name
-			),
-			repeat
-		)
-	);
+	return
+		entities::auto_ptr(
+			new entities::simple_sprite(
+				_system,
+				_order,
+				_textures.load(
+					_texture_name
+				),
+				_repeat
+			)
+		);
 }

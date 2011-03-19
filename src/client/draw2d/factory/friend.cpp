@@ -9,37 +9,39 @@
 
 sanguis::client::draw2d::entities::auto_ptr
 sanguis::client::draw2d::factory::friend_(
-	entities::model::parameters const &param,
-	friend_type::type const etype
+	entities::model::parameters const &_param,
+	friend_type::type const _etype
 )
 {
 	switch(
-		etype
+		_etype
 	)
 	{
 	case friend_type::size:
 		break;
 	case friend_type::spider:
-		return entities::auto_ptr(
-			new entities::model::object(
-				param,
-				load::friend_name(
-					etype
-				),
-				z_ordering::model_generic,
-				entities::model::needs_healthbar::yes,
-				entities::model::decay_option::delayed
-			)
-		);
+		return
+			entities::auto_ptr(
+				new entities::model::object(
+					_param,
+					load::friend_name(
+						_etype
+					),
+					z_ordering::model_generic,
+					entities::model::needs_healthbar::yes,
+					entities::model::decay_option::delayed
+				)
+			);
 	case friend_type::sentry:
-		return entities::auto_ptr(
-			new entities::sentry(
-				param
-			)
-		);
+		return
+			entities::auto_ptr(
+				new entities::sentry(
+					_param
+				)
+			);
 	}
 
-	throw exception(
+	throw sanguis::exception(
 		FCPPT_TEXT("Missing factory code in client::draw2d::factory::friend!")
 	);
 }

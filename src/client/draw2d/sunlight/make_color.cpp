@@ -7,7 +7,7 @@
 
 sge::image::color::any::object const
 sanguis::client::draw2d::sunlight::make_color(
-	real const sun_angle
+	real const _sun_angle
 )
 {
 	return
@@ -16,7 +16,7 @@ sanguis::client::draw2d::sunlight::make_color(
 			sge::image::color::rgba32f_format
 		>(
 			day_gradient().interpolate(
-				sun_angle
+				_sun_angle
 			)
 		);
 }

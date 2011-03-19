@@ -293,7 +293,6 @@ SET(
 	src/client/draw2d/message/environment.cpp
 	src/client/draw2d/message/environment.hpp
 	src/client/draw2d/message/environment_fwd.hpp
-	src/client/draw2d/particle/align_type.cpp
 	src/client/draw2d/particle/align_type.hpp
 	src/client/draw2d/particle/base.cpp
 	src/client/draw2d/particle/base.hpp
@@ -311,7 +310,6 @@ SET(
 	src/client/draw2d/particle/generation_callback.hpp
 	src/client/draw2d/particle/generator.cpp
 	src/client/draw2d/particle/generator.hpp
-	src/client/draw2d/particle/movement_type.cpp
 	src/client/draw2d/particle/movement_type.hpp
 	src/client/draw2d/particle/object.cpp
 	src/client/draw2d/particle/object.hpp

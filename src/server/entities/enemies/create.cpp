@@ -23,11 +23,11 @@ sanguis::server::entities::enemies::create(
 	)
 	{
 	case enemy_type::zombie00:
-		return unique_ptr(
+		return entities::unique_ptr(
 			new enemy(
-			//fcppt::make_unique_ptr<
-			//	enemy
-			//>(
+//			fcppt::make_unique_ptr<
+//				enemy
+//			>(
 				_etype,
 				_load_context,
 				damage::no_armor(),

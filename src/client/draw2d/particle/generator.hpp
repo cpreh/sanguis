@@ -29,6 +29,9 @@ class generator
 :
 	public container
 {
+	FCPPT_NONCOPYABLE(
+		generator
+	);
 public:
 	generator(
 		generation_callback,
@@ -44,6 +47,8 @@ public:
 		movement_type::type
 	);
 
+	~generator();
+
 	bool
 	update(
 		time_type,
@@ -52,22 +57,34 @@ public:
 		depth_type
 	);
 private:
+	void
+	generate();
+
 	diff_clock clock_;
+
 	generation_callback generate_object_;
+
 	sge::time::timer frequency_timer_;
+
 	sge::time::timer life_timer_;
+
 	align_type::type const alignment_;
 	
 	fcppt::random::uniform<rotation_type> dispersion_angle_;
-	fcppt::random::uniform<dispersion_range::value_type> dispersion_value_;
-	uniform_rotation velocity_angle_;
-	uniform_velocity_range velocity_value_;
-	uniform_rotation rot_angle_;
-	fcppt::random::uniform<rotation_type> rot_direction_;
-	fcppt::random::uniform<rotation_type> rot_velocity_;
-	movement_type::type const movement_;
 
-	void generate();
+	fcppt::random::uniform<dispersion_range::value_type> dispersion_value_;
+
+	uniform_rotation velocity_angle_;
+
+	uniform_velocity_range velocity_value_;
+
+	uniform_rotation rot_angle_;
+
+	fcppt::random::uniform<rotation_type> rot_direction_;
+
+	fcppt::random::uniform<rotation_type> rot_velocity_;
+
+	movement_type::type const movement_;
 };
 
 }

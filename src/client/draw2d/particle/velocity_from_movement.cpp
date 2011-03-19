@@ -15,7 +15,9 @@ sanguis::client::draw2d::particle::velocity_from_movement(
 	uniform_velocity_range &_velocity_value
 )
 {
-	switch (_movement)
+	switch(
+		_movement
+	)
 	{
 		case movement_type::random:
 		{
@@ -27,7 +29,8 @@ sanguis::client::draw2d::particle::velocity_from_movement(
 				particle::point(
 					std::cos(s_angle),
 					std::sin(s_angle)
-				) * _velocity_value();
+				)
+				* _velocity_value();
 		}
 		case movement_type::shrinking:
 			return

@@ -13,12 +13,12 @@
 
 sanguis::client::draw2d::sunlight::real
 sanguis::client::draw2d::sunlight::sun_angle(
-	std::tm const &current_tm
+	std::tm const &_current_tm
 )
 {
 	boost::gregorian::date const current(
 		sunlight::time_to_gregorian(
-			current_tm
+			_current_tm
 		)
 	);
 
@@ -35,9 +35,9 @@ sanguis::client::draw2d::sunlight::sun_angle(
 
 	real const 
 		hours = 
-			static_cast<real>(current_tm.tm_hour),
+			static_cast<real>(_current_tm.tm_hour),
 		minutes = 
-			static_cast<real>(current_tm.tm_min),
+			static_cast<real>(_current_tm.tm_min),
 		lambda = 
 			7.990,
 		phi = 
@@ -110,7 +110,7 @@ sanguis::client::draw2d::sunlight::sun_angle(
 	)
 	{
 		FCPPT_LOG_ERROR(
-			log(),
+			draw2d::log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("sun angle out of range: ")
 				<< hr_rad

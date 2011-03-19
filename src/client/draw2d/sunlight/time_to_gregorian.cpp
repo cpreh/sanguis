@@ -4,7 +4,7 @@
 
 boost::gregorian::date const
 sanguis::client::draw2d::sunlight::time_to_gregorian(
-	std::tm const &tm_
+	std::tm const &_tm
 )
 {
 	return
@@ -12,17 +12,17 @@ sanguis::client::draw2d::sunlight::time_to_gregorian(
 			static_cast<
 				unsigned short
 			>(
-				tm_.tm_year + 1900 // year starts at 1900
+				_tm.tm_year + 1900 // year starts at 1900
 			),
 			static_cast<
 				unsigned short
 			>(
-				tm_.tm_mon + 1 // boost::date_time::Jan is 1
+				_tm.tm_mon + 1 // boost::date_time::Jan is 1
 			),
 			static_cast<
 				unsigned short
 			>(
-				tm_.tm_mday
+				_tm.tm_mday
 			)
 		);
 }

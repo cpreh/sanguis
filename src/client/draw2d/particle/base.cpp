@@ -15,50 +15,78 @@ sanguis::client::draw2d::particle::base::base(
 	depth_(_depth),
 	rot_(_rot),
 	rot_vel_(_rot_vel)
-{}
+{
+}
 
 sanguis::client::draw2d::particle::base::~base()
-{}
+{
+}
 
-bool sanguis::client::draw2d::particle::base::update(
-	time_type const delta,
+bool
+sanguis::client::draw2d::particle::base::update(
+	time_type const _delta,
 	point const &,
 	rotation_type,
-	depth_type)
+	depth_type
+)
 {
-	pos(pos() + vel() * delta);
-	rot(rot() + rot_vel() * delta);
+	this->pos(
+		this->pos()
+		+
+		this->vel()
+		*
+		_delta
+	);
+
+	this->rot(
+		this->rot()
+		+
+		this->rot_vel()
+		*
+		_delta
+	);
+
 	return false;
 }
 
-void sanguis::client::draw2d::particle::base::pos(
-	point const &p)
+void
+sanguis::client::draw2d::particle::base::pos(
+	point const &_pos
+)
 {
-	pos_ = p;
+	pos_ = _pos;
 }
 
-void sanguis::client::draw2d::particle::base::vel(
-	point const &p)
+void
+sanguis::client::draw2d::particle::base::vel(
+	point const &_vel
+)
 {
-	vel_ = p;
+	vel_ = _vel;
 }
 
-void sanguis::client::draw2d::particle::base::depth(
-	depth_type const p)
+void
+sanguis::client::draw2d::particle::base::depth(
+	depth_type const _depth
+)
 {
-	depth_ = p;
+	depth_ = _depth;
 }
 
-void sanguis::client::draw2d::particle::base::rot(
-	rotation_type const p)
+void
+sanguis::client::draw2d::particle::base::rot(
+	rotation_type const _rot
+)
 {
-	rot_ = p;
+	rot_ = _rot;
 }
 
-void sanguis::client::draw2d::particle::base::rot_vel(
-	rotation_type const p)
+void
+sanguis::client::draw2d::particle::base::rot_vel(
+	rotation_type const _rot_vel
+)
 {
-	rot_vel_ = p;
+	rot_vel_ = _rot_vel;
 }
 
 sanguis::client::draw2d::particle::point const &

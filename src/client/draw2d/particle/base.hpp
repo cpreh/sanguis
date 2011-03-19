@@ -6,6 +6,7 @@
 #include "rotation.hpp"
 #include "time_type.hpp"
 #include <fcppt/math/vector/basic_decl.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -18,8 +19,12 @@ namespace particle
 
 class base
 {
+	FCPPT_NONCOPYABLE(
+		base
+	);
 public:
 	typedef particle::depth depth_type;
+
 	typedef particle::rotation rotation_type;
 protected:
 	base(
@@ -96,9 +101,13 @@ public:
 	rot_vel();
 private:
 	point pos_;
+
 	point vel_;
+
 	depth_type depth_;
+
 	rotation_type rot_;
+
 	rotation_type rot_vel_;
 };
 

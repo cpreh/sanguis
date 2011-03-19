@@ -4,10 +4,12 @@
 
 sanguis::client::draw2d::z_ordering::type
 sanguis::client::draw2d::particle::z_ordering(
-	particle_type::type const p
+	particle_type::type const _type
 )
 {
-	switch (p)
+	switch(
+		_type
+	)
 	{
 	case particle_type::flare:
 		return draw2d::z_ordering::flare;
@@ -19,7 +21,7 @@ sanguis::client::draw2d::particle::z_ordering(
 		break;
 	}
 	
-	throw exception(
+	throw sanguis::exception(
 		FCPPT_TEXT("invalid particle type!")
 	);
 }
