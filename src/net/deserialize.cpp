@@ -77,7 +77,7 @@ sanguis::net::deserialize(
 		)
 		== net::message_header_size
 	);
-			
+
 	FCPPT_ASSERT(
 		message_size > 0
 	);
