@@ -1393,6 +1393,31 @@ SET(
 	src/world_id.hpp
 )
 
+FOREACH(
+	CUR_FILE
+	${SANGUIS_FILES}
+)
+	GET_FILENAME_COMPONENT(
+		REL_PATH
+		${CUR_FILE}
+		PATH
+	)
+
+	STRING(
+		REPLACE
+		"/"
+		"\\"
+		GROUPFOLDER
+		${REL_PATH}
+	)
+
+	SOURCE_GROUP(
+		${GROUPFOLDER}
+		FILES
+		${CUR_FILE}
+	)
+ENDFOREACH()	
+
 ADD_EXECUTABLE(
 	sanguis
 	${SANGUIS_FILES}
