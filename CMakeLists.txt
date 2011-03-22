@@ -1427,17 +1427,7 @@ TARGET_LINK_LIBRARIES(
 	sanguis
 	${FCPPT_LIBRARIES}
 	${AWL_LIBRARY}
-	${SGE_CORE_LIBRARY}
-	${SGE_cegui_LIBRARY}
-	${SGE_config_LIBRARY}
-	${SGE_fonttext_LIBRARY}
-	${SGE_console_LIBRARY}
-	${SGE_parse_LIBRARY}
-	${SGE_sprite_LIBRARY}
-	${SGE_systems_LIBRARY}
-	${SGE_texture_LIBRARY}
-	${SGE_time_LIBRARY}
-	${SGE_viewport_LIBRARY}
+	${SGE_LIBRARIES}
 	${CEGUI_BASE_LIBRARY}
 )
 
