@@ -6,7 +6,7 @@
 sanguis::server::auras::update_sight::update_sight(
 	space_unit const _radius,
 	update_sight_function const &_enter,
-	update_sight_function const &_leave
+	update_sight_function const &_nleave // VC++ doesn't like _leave
 )
 :
 	aura(
@@ -18,7 +18,7 @@ sanguis::server::auras::update_sight::update_sight(
 		_enter
 	),
 	leave_(
-		_leave
+		_nleave
 	)
 {
 }

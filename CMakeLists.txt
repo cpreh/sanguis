@@ -84,7 +84,7 @@ INCLUDE_DIRECTORIES(${AWL_INCLUDE_DIRS})
 
 FIND_PACKAGE(
 	SGE REQUIRED
-	COMPONENTS cegui fonttext console sprite systems texture
+	COMPONENTS cegui config fonttext console parse sprite systems texture time viewport
 )
 
 INCLUDE_DIRECTORIES(${SGE_INCLUDE_DIRS})
@@ -1404,11 +1404,15 @@ TARGET_LINK_LIBRARIES(
 	${AWL_LIBRARY}
 	${SGE_CORE_LIBRARY}
 	${SGE_cegui_LIBRARY}
+	${SGE_config_LIBRARY}
 	${SGE_fonttext_LIBRARY}
 	${SGE_console_LIBRARY}
+	${SGE_parse_LIBRARY}
 	${SGE_sprite_LIBRARY}
 	${SGE_systems_LIBRARY}
 	${SGE_texture_LIBRARY}
+	${SGE_time_LIBRARY}
+	${SGE_viewport_LIBRARY}
 	${CEGUI_BASE_LIBRARY}
 )
 

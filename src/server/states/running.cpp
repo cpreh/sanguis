@@ -2,6 +2,7 @@
 #include "unpaused.hpp"
 #include "../events/disconnect.hpp"
 #include "../events/message.hpp"
+#include "../events/tick.hpp"
 #include "../global/context.hpp"
 #include "../message_functor.hpp"
 #include "../log.hpp"

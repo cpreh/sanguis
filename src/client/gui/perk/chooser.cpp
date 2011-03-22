@@ -172,6 +172,7 @@ sanguis::client::gui::perk::chooser::activated() const
 	}
 	return false;
 #endif
+	return false; // FIXME
 }
 
 void
