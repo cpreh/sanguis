@@ -1,4 +1,5 @@
 #include "object.hpp"
+#include "connection_box.hpp"
 #include "../object.hpp"
 #include "../../log.hpp"
 #include "../../../media_path.hpp"
@@ -7,6 +8,8 @@
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 #include <CEGUI/elements/CEGUIPushButton.h>
 #include <CEGUI/CEGUIWindowManager.h>
@@ -38,9 +41,12 @@ sanguis::client::gui::menu::object::object(
 		/ FCPPT_TEXT("main_menu.layout"),
 		_gui.charconv_system()
 	),
+	scoped_gui_sheet_(
+		scoped_layout_.window()
+	),
 	quickstart_connection_(
 		CEGUI::WindowManager::getSingleton().getWindow(
-			"Root/FrameWindow/Quickstart"
+			"MainMenu/FrameWindow/Quickstart"
 		)
 		->subscribeEvent(
 			CEGUI::PushButton::EventClicked,
@@ -55,7 +61,7 @@ sanguis::client::gui::menu::object::object(
 	),
 	quit_connection_(
 		CEGUI::WindowManager::getSingleton().getWindow(
-			"Root/FrameWindow/Quit"
+			"MainMenu/FrameWindow/Quit"
 		)
 		->subscribeEvent(
 			CEGUI::PushButton::EventClicked,
@@ -70,7 +76,7 @@ sanguis::client::gui::menu::object::object(
 	),
 	connect_connection_(
 		CEGUI::WindowManager::getSingleton().getWindow(
-			"Root/FrameWindow/Connect"
+			"MainMenu/FrameWindow/Connect"
 		)
 		->subscribeEvent(
 			CEGUI::PushButton::EventClicked,
@@ -80,6 +86,26 @@ sanguis::client::gui::menu::object::object(
 					this,
 					std::tr1::placeholders::_1
 				)
+			)
+		)
+	),
+	connection_box_(
+		fcppt::make_unique_ptr<
+			menu::connection_box
+		>(
+			gui_.charconv_system(),
+			fcppt::ref(
+				*CEGUI::WindowManager::getSingleton().getWindow(
+					"MainMenu/FrameWindow"
+				)
+			),
+			std::tr1::bind(
+				&menu::object::handle_cancel_connect,
+				this
+			),
+			std::tr1::bind(
+				&menu::object::handle_retry_connect,
+				this
 			)
 		)
 	)
@@ -107,26 +133,17 @@ sanguis::client::gui::menu::object::connection_error(
 	fcppt::string const &_message
 )
 {
-#if 0
 	FCPPT_LOG_DEBUG(
 		mylogger,
 		fcppt::log::_
 			<< FCPPT_TEXT("got conection error: (")
 			<< _message 
-			<< FCPPT_TEXT(")")
+			<< FCPPT_TEXT(')')
 	);
 
-	connect_box_.label_.text(
-		sge::font::text::from_fcppt_string(
-			FCPPT_TEXT("Connection to \"")+
-			connection_host_+
-			FCPPT_TEXT("\" on port \"")+
-			connection_port_+
-			FCPPT_TEXT("\" failed: \n")+
-			_message
-		)
+	connection_box_->show_error(
+		_message
 	);
-#endif
 }
 
 bool
@@ -156,33 +173,44 @@ sanguis::client::gui::menu::object::handle_connect(
 	CEGUI::EventArgs const &
 )
 {
+	connection_box_->activate();
+
+	this->do_connect();
+
+	return true;
+}
+
+void
+sanguis::client::gui::menu::object::handle_cancel_connect()
+{
+	connection_box_->deactivate();
+
+	callbacks_.cancel_connect()();
+}
+
+void
+sanguis::client::gui::menu::object::handle_retry_connect()
+{
+	this->do_connect();
+}
+
+void
+sanguis::client::gui::menu::object::do_connect()
+{
 	callbacks_.connect()(
 		sge::cegui::from_cegui_string(
 			CEGUI::WindowManager::getSingleton().getWindow(
-				"Root/FrameWindow/Hostname"
+				"MainMenu/FrameWindow/Hostname"
 			)
 			->getText(),
 			gui_.charconv_system()
 		),
 		sge::cegui::from_cegui_string(
 			CEGUI::WindowManager::getSingleton().getWindow(
-				"Root/FrameWindow/Port"
+				"MainMenu/FrameWindow/Port"
 			)
 			->getText(),
 			gui_.charconv_system()
 		)
 	);
-
-	return true;
 }
-
-#if 0
-void
-sanguis::client::gui::menu::object::cancel_connect()
-{
-	mover_.reset(
-		connect_.parent
-	);
-	callbacks_.cancel_connect()();
-}
-#endif	

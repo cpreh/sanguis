@@ -99,6 +99,8 @@ sanguis::net::client::object_impl::connect(
 void
 sanguis::net::client::object_impl::disconnect()
 {
+	resolver_.cancel();
+
 	socket_.close();
 
 	this->clear();

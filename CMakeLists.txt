@@ -455,6 +455,10 @@ SET(
 	src/client/gui/menu/callbacks/object.hpp
 	src/client/gui/menu/callbacks/quickstart.hpp
 	src/client/gui/menu/callbacks/quit.hpp
+	src/client/gui/menu/callbacks/retry_connect.hpp
+	src/client/gui/menu/connection_box.cpp
+	src/client/gui/menu/connection_box.hpp
+	src/client/gui/menu/connection_box_fwd.hpp
 	src/client/gui/menu/object.cpp
 	src/client/gui/menu/object.hpp
 	src/client/gui/object.cpp

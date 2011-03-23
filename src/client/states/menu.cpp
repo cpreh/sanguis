@@ -218,6 +218,5 @@ sanguis::client::states::menu::connect(
 void
 sanguis::client::states::menu::cancel_connect()
 {
-	// TODO: reactivate the gui
 	context<machine>().disconnect();
 }
