@@ -24,9 +24,7 @@
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/utf8/convert.hpp>
 #include <fcppt/from_std_string.hpp>
-#include <fcppt/lexical_cast.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/to_std_string.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <ostream>
 
@@ -42,14 +40,14 @@ sanguis::client::states::menu::menu(
 		context<machine>().gui(),
 		gui::menu::callbacks::object(
 			std::tr1::bind(
-				&menu::connect,
-				this,
+				&machine::connect,
+				&context<machine>(),
 				std::tr1::placeholders::_1,
 				std::tr1::placeholders::_2
 			),
 			std::tr1::bind(
-				&menu::cancel_connect,
-				this
+				&machine::disconnect,
+				&context<machine>()
 			),
 			std::tr1::bind(
 				&machine::quickstart,
@@ -184,39 +182,4 @@ sanguis::client::states::menu::log()
 	);
 
 	return my_logger;
-}
-
-void
-sanguis::client::states::menu::connect(
-	fcppt::string const &_host,
-	fcppt::string const &_port
-)
-{
-	try
-	{
-		context<machine>().connect(
-			fcppt::to_std_string(
-				_host
-			),
-			fcppt::lexical_cast<
-				net::port
-			>(
-				_port
-			)
-		);
-	}
-	catch(
-		fcppt::bad_lexical_cast const &
-	)
-	{
-		menu_.connection_error(
-			FCPPT_TEXT("invalid port specification")
-		);
-	}
-}
-
-void
-sanguis::client::states::menu::cancel_connect()
-{
-	context<machine>().disconnect();
 }

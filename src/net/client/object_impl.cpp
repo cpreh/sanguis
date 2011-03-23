@@ -173,7 +173,8 @@ sanguis::net::client::object_impl::resolve_handler(
 
 	FCPPT_LOG_DEBUG(
 		object_impl::log(),
-		fcppt::log::_ << FCPPT_TEXT("resolved domain, trying to connect")
+		fcppt::log::_
+			<< FCPPT_TEXT("resolved domain, trying to connect")
 	);
 	
 	boost::asio::ip::tcp::endpoint const endpoint(
@@ -206,7 +207,7 @@ sanguis::net::client::object_impl::handle_error(
 			<< fcppt::from_std_string(
 				_error.message()
 			)
-			<< FCPPT_TEXT(")")
+			<< FCPPT_TEXT(')')
 	);
 
 	error_signal_(

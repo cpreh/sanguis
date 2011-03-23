@@ -1,8 +1,9 @@
 #ifndef SANGUIS_CLIENT_GUI_MENU_CALLBACKS_CONNECT_HPP_INCLUDED
 #define SANGUIS_CLIENT_GUI_MENU_CALLBACKS_CONNECT_HPP_INCLUDED
 
+#include "../../../../net/hostname.hpp"
+#include "../../../../net/port.hpp"
 #include <fcppt/function/object_fwd.hpp>
-#include <fcppt/string.hpp>
 
 namespace sanguis
 {
@@ -17,8 +18,8 @@ namespace callbacks
 
 typedef fcppt::function::object<
 	void (
-		fcppt::string const &,
-		fcppt::string const &
+		net::hostname const &,
+		net::port const &
 	)
 > connect;
 

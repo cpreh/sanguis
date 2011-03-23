@@ -16,6 +16,7 @@
 namespace CEGUI
 {
 class EventArgs;
+class Window;
 }
 
 namespace sanguis
@@ -59,10 +60,17 @@ private:
 
 	sge::cegui::toolbox::scoped_gui_sheet const scoped_gui_sheet_;
 
+	CEGUI::Window
+		&connect_button_,
+		&hostname_edit_,
+		&port_edit_;
+
 	CEGUI::Event::ScopedConnection const
 		quickstart_connection_,
 		quit_connection_,
-		connect_connection_;
+		connect_connection_,
+		hostname_change_connection_,
+		port_change_connection_;
 	
 	typedef fcppt::scoped_ptr<
 		menu::connection_box
@@ -82,6 +90,11 @@ private:
 
 	bool
 	handle_connect(
+		CEGUI::EventArgs const &
+	);
+
+	bool
+	handle_text_changed(
 		CEGUI::EventArgs const &
 	);
 
