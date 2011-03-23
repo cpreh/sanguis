@@ -415,6 +415,8 @@ sanguis::net::client::object_impl::clear()
 	send_buffer_.clear();
 
 	receive_buffer_.clear();
+
+	sending_ = false;
 }
 
 fcppt::log::object &
