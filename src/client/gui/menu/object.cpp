@@ -251,6 +251,8 @@ sanguis::client::gui::menu::object::handle_text_changed(
 		(port > 0)
 		&& (port < 65535)
 	);
+
+	return true;
 }
 
 void
