@@ -48,7 +48,7 @@
                         <Property Name="Text" Value="Port:" />
                         <Property Name="FrameEnabled" Value="False" />
                         <Property Name="HorzFormatting" Value="HorzCentred" />
-                        <Property Name="UnifiedAreaRect" Value="{{-0.218755,143},{0.405796,-4},{0.100866,144},{0.488661,-2}}" />
+                        <Property Name="UnifiedAreaRect" Value="{{0.0346225,0},{0.405796,-4},{0.354243,1},{0.488661,-2}}" />
                         <Property Name="BackgroundEnabled" Value="False" />
                         <AutoWindow NameSuffix="__auto_hscrollbar__" >
                             <AutoWindow NameSuffix="__auto_decbtn__" />
