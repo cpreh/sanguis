@@ -73,10 +73,6 @@ sanguis::client::gui::menu::connection_box::connection_box(
 		&root_window_
 	);
 
-	retry_button_.setEnabled(
-		false
-	);
-
 	root_window_.setVisible(
 		false
 	);
@@ -108,6 +104,10 @@ sanguis::client::gui::menu::connection_box::activate()
 {
 	root_window_.setModalState(
 		true
+	);
+
+	retry_button_.setEnabled(
+		false
 	);
 
 	root_window_.setVisible(

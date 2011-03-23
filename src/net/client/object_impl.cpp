@@ -101,6 +101,12 @@ sanguis::net::client::object_impl::disconnect()
 {
 	resolver_.cancel();
 
+#if 0
+	socket_.shutdown(
+		boost::asio::ip::tcp::socket::shutdown_both
+	);
+#endif
+
 	socket_.close();
 
 	this->clear();
@@ -308,6 +314,7 @@ sanguis::net::client::object_impl::connect_handler(
 		// are we at the end of the endpoint list?
 		if(
 			_iterator == boost::asio::ip::tcp::resolver::iterator()
+			|| _error == boost::asio::error::operation_aborted
 		)
 		{
 			this->handle_error(
