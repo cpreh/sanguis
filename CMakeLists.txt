@@ -237,6 +237,7 @@ SET(
 	src/client/draw2d/entities/explosion.hpp
 	src/client/draw2d/entities/explosion_properties.cpp
 	src/client/draw2d/entities/explosion_properties.hpp
+	src/client/draw2d/entities/model/abs_angle_to_rel.hpp
 	src/client/draw2d/entities/model/decay_option.hpp
 	src/client/draw2d/entities/model/decay_time.cpp
 	src/client/draw2d/entities/model/decay_time.hpp
@@ -244,6 +245,7 @@ SET(
 	src/client/draw2d/entities/model/healthbar.cpp
 	src/client/draw2d/entities/model/healthbar.hpp
 	src/client/draw2d/entities/model/healthbar_fwd.hpp
+	src/client/draw2d/entities/model/is_rel_angle.hpp
 	src/client/draw2d/entities/model/needs_healthbar.hpp
 	src/client/draw2d/entities/model/object.cpp
 	src/client/draw2d/entities/model/object.hpp
@@ -257,6 +259,7 @@ SET(
 	src/client/draw2d/entities/model/part_state.cpp
 	src/client/draw2d/entities/model/part_state.hpp
 	src/client/draw2d/entities/model/part_state_fwd.hpp
+	src/client/draw2d/entities/model/rel_angle_to_abs.hpp
 	src/client/draw2d/entities/own_player.cpp
 	src/client/draw2d/entities/own_player.hpp
 	src/client/draw2d/entities/player.cpp
@@ -924,7 +927,6 @@ SET(
 	src/projectile_type.hpp
 	src/random.cpp
 	src/random.hpp
-	src/rel_angle_to_abs.hpp
 	src/resolution.hpp
 	src/server/ai/auto_weak_link_vector.hpp
 	src/server/ai/base.cpp

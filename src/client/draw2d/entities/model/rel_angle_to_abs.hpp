@@ -1,8 +1,8 @@
-#ifndef SANGUIS_REL_ANGLE_TO_ABS_HPP_INCLUDED
-#define SANGUIS_REL_ANGLE_TO_ABS_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_REL_ANGLE_TO_ABS_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_REL_ANGLE_TO_ABS_HPP_INCLUDED
 
-#include "exception.hpp"
-#include <fcppt/math/is_rel_angle.hpp>
+#include "is_rel_angle.hpp"
+#include "../../../../exception.hpp"
 #include <fcppt/math/almost_zero.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/format.hpp>
@@ -12,8 +12,15 @@
 
 namespace sanguis
 {
+namespace client
+{
+namespace draw2d
+{
+namespace entities
+{
+namespace model
+{
 
-// TODO: replace by fcppt::math:: stuff?
 template<
 	typename T
 >
@@ -28,7 +35,7 @@ rel_angle_to_abs(
 )
 {
 	if(
-		!fcppt::math::is_rel_angle(
+		!model::is_rel_angle(
 			_angle
 		)
 	)
@@ -58,6 +65,10 @@ rel_angle_to_abs(
 			_angle;
 }
 
+}
+}
+}
+}
 }
 
 #endif

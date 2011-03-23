@@ -1,5 +1,8 @@
 #include "part.hpp"
 #include "part_state.hpp"
+#include "abs_angle_to_rel.hpp"
+#include "is_rel_angle.hpp"
+#include "rel_angle_to_abs.hpp"
 #include "../../sprite/dim.hpp"
 #include "../../sprite/rotation_type.hpp"
 #include "../../../../load/model/part.hpp"
@@ -8,12 +11,9 @@
 #include "../../../../load/model/weapon_category.hpp"
 #include "../../../../load/model/animation.hpp"
 #include "../../../../exception.hpp"
-#include "../../../../rel_angle_to_abs.hpp"
 #include <sge/sprite/animation/texture_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
-#include <fcppt/math/abs_angle_to_rel.hpp>
-#include <fcppt/math/is_rel_angle.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/compare.hpp>
@@ -188,13 +188,13 @@ sanguis::client::draw2d::entities::model::part::update(
 	funit const
 		// current orientation in [0,2pi]
 		abs_current(
-			sanguis::rel_angle_to_abs(
+			model::rel_angle_to_abs(
 				orientation()
 			)
 		),
 		// target orientation in [0,2pi]
 		abs_target(
-			sanguis::rel_angle_to_abs(
+			model::rel_angle_to_abs(
 				desired_orientation_
 			)
 		);
@@ -302,7 +302,7 @@ sanguis::client::draw2d::entities::model::part::update(
 		)
 		{
 			this->update_orientation(
-				fcppt::math::abs_angle_to_rel(
+				model::abs_angle_to_rel(
 					new_orientation
 				)
 			);
@@ -321,7 +321,7 @@ sanguis::client::draw2d::entities::model::part::update(
 		)
 		{
 			this->update_orientation(
-				fcppt::math::abs_angle_to_rel(
+				model::abs_angle_to_rel(
 					new_orientation
 				)
 			);
@@ -341,12 +341,12 @@ sanguis::client::draw2d::entities::model::part::orientation(
 )
 {
 	if(
-		!fcppt::math::is_rel_angle(
+		!model::is_rel_angle(
 			_rot
 		)
 	)
 		_rot =
-			fcppt::math::abs_angle_to_rel(
+			model::abs_angle_to_rel(
 				_rot
 			);
 
