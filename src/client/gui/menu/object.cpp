@@ -2,9 +2,11 @@
 #include "connection_box.hpp"
 #include "../object.hpp"
 #include "../../log.hpp"
+#include "../../config/settings/get_or_default.hpp"
 #include "../../../media_path.hpp"
 #include "../../../net/port.hpp"
 #include <sge/cegui/from_cegui_string.hpp>
+#include <sge/cegui/to_cegui_string.hpp>
 #include <fcppt/io/istringstream.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/object.hpp>
@@ -13,6 +15,7 @@
 #include <fcppt/lexical_cast.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
+#include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/to_std_string.hpp>
 #include <CEGUI/elements/CEGUIPushButton.h>
@@ -29,6 +32,19 @@ fcppt::log::object mylogger(
 	)
 );
 
+fcppt::string const
+	config_section(
+		FCPPT_TEXT("gui_menu")
+	),
+	config_hostname_key(
+		FCPPT_TEXT("hostname")
+	),
+	config_port_key(
+		FCPPT_TEXT("port")
+	),
+	config_quickstart_port_key(
+		FCPPT_TEXT("quickstartport")
+	);
 }
 
 sanguis::client::gui::menu::object::object(
@@ -37,8 +53,9 @@ sanguis::client::gui::menu::object::object(
 	callbacks::object const &_callbacks
 )
 : 
-	callbacks_(_callbacks),
+	settings_(_settings),
 	gui_(_gui),
+	callbacks_(_callbacks),
 	scoped_layout_(
 		sanguis::media_path()
 		/ FCPPT_TEXT("gui")
@@ -153,6 +170,30 @@ sanguis::client::gui::menu::object::object(
 	connect_button_.setEnabled(
 		false
 	);
+
+	hostname_edit_.setText(
+		sge::cegui::to_cegui_string(
+			client::config::settings::get_or_default(
+				_settings,
+				config_section,
+				config_hostname_key,
+				FCPPT_TEXT("")
+			),
+			gui_.charconv_system()
+		)
+	);
+
+	port_edit_.setText(
+		sge::cegui::to_cegui_string(
+			client::config::settings::get_or_default(
+				_settings,
+				config_section,
+				config_port_key,
+				FCPPT_TEXT("")
+			),
+			gui_.charconv_system()
+		)
+	);
 }
 
 sanguis::client::gui::menu::object::~object()
@@ -195,7 +236,16 @@ sanguis::client::gui::menu::object::handle_quickstart(
 )
 {
 	callbacks_.quickstart()(
-		31337 // FIXME!
+		fcppt::lexical_cast<
+			net::port
+		>(
+			client::config::settings::get_or_default(
+				settings_,
+				config_section,
+				config_quickstart_port_key,
+				FCPPT_TEXT("31337")
+			)
+		)
 	);
 
 	return true;

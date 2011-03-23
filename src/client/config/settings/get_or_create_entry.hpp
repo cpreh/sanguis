@@ -16,9 +16,9 @@ namespace settings
 
 sge::parse::ini::entry &
 get_or_create_entry(
-	sge::parse::ini::section &section_,
-	fcppt::string const &key_,
-	fcppt::string const &default_value_
+	sge::parse::ini::section &section,
+	fcppt::string const &key,
+	fcppt::string const &default_value
 );
 
 }

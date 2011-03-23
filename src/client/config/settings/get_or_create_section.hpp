@@ -16,8 +16,8 @@ namespace settings
 
 sge::parse::ini::section &
 get_or_create_section(
-	sge::parse::ini::section_vector &sections_,
-	fcppt::string const &section_name_
+	sge::parse::ini::section_vector &sections,
+	fcppt::string const &section_name
 );
 
 }

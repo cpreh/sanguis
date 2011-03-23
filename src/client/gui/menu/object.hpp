@@ -52,9 +52,11 @@ public:
 		fcppt::string const &message
 	);
 private:
-	callbacks::object const callbacks_;
+	config::settings::object &settings_;
 
 	client::gui::object &gui_;
+
+	callbacks::object const callbacks_;
 
 	sge::cegui::toolbox::scoped_layout const scoped_layout_;
 

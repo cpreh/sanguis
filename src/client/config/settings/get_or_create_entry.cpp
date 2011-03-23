@@ -40,5 +40,3 @@ sanguis::client::config::settings::get_or_create_entry(
 	
 	return *it;
 }
-
-
