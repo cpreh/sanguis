@@ -99,16 +99,6 @@ sanguis::net::client::object_impl::connect(
 void
 sanguis::net::client::object_impl::disconnect()
 {
-	resolver_.cancel();
-
-#if 0
-	socket_.shutdown(
-		boost::asio::ip::tcp::socket::shutdown_both
-	);
-#endif
-
-	socket_.close();
-
 	this->clear();
 }
 
@@ -318,7 +308,7 @@ sanguis::net::client::object_impl::connect_handler(
 		)
 		{
 			this->handle_error(
-				FCPPT_TEXT("client: exhausted endpoints: ")+
+				FCPPT_TEXT("client: exhausted endpoints or connection aborted: ")+
 				fcppt::from_std_string(
 					_error.message()
 				),
@@ -415,9 +405,15 @@ sanguis::net::client::object_impl::receive_data()
 void
 sanguis::net::client::object_impl::clear()
 {
+	resolver_.cancel();
+
 	query_.reset();
 
+	socket_.close();
+
 	send_buffer_.clear();
+
+	receive_buffer_.clear();
 }
 
 fcppt::log::object &

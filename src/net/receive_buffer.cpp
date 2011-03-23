@@ -166,3 +166,9 @@ sanguis::net::receive_buffer::capacity() const
 	return
 		impl_.size() - 1u;
 }
+
+void
+sanguis::net::receive_buffer::clear()
+{
+	begin_ = end_ = impl_.begin();
+}

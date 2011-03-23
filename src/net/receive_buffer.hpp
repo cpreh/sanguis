@@ -70,6 +70,9 @@ public:
 
 	size_type
 	capacity() const;
+
+	void
+	clear();
 private:
 	impl_type impl_;
 
