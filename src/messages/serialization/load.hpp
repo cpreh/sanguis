@@ -120,7 +120,11 @@ struct load<
 
 		_is.read(
 			reinterpret_cast<char *>(vec.data() + length_sz),
-			sz - length_sz
+			static_cast<
+				std::streamsize
+			>(
+				sz - length_sz
+			)
 		);
 
 		return
