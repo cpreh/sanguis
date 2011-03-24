@@ -2,30 +2,13 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
 
 project (sanguis)
 
-SET (CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS ON)
-
-IF(${CMAKE_BINARY_DIR} STREQUAL ${CMAKE_SOURCE_DIR})
-	MESSAGE(
-		FATAL_ERROR
-		"In-source builds are not permitted. "
-		"Make a separate folder for building:\n"
-		"mkdir build; cd build; cmake ..\n"
-		"Before that, remove the files that cmake"
-		"just created:\nrm -rf CMakeCache.txt CMakeFiles"
-	)
-ENDIF()
-
 OPTION(EXTRA_CMAKE_MODULE_PATH "Extra paths to search for cmake modules" "")
 
-SET(CMAKE_MODULE_PATH "${EXTRA_CMAKE_MODULE_PATH};${CMAKE_SOURCE_DIR}/CMakeModules")
+SET(CMAKE_MODULE_PATH "${EXTRA_CMAKE_MODULE_PATH}")
+
+INCLUDE(FcpptCMakeUtils)
 
 # Find Boost
-
-SET (Boost_ADDITIONAL_VERSIONS "1.41" "1.41.0" "1.42" "1.42.0" "1.43" "1.43.0" "1.44" "1.44.0" "1.45" "1.45.0" "1.46" "1.46.0" "1.46.1")
-
-IF(MSVC)
-	SET(Boost_USE_STATIC_LIBS ON)
-ENDIF()
 
 IF(NOT STATECHART_INCLUDE_DIR)
 	MESSAGE(
@@ -97,45 +80,8 @@ FIND_PACKAGE(
 
 INCLUDE_DIRECTORIES(${CEGUI_INCLUDE_DIRS})
 
-INCLUDE (CheckCXXSourceRuns)
-
-CHECK_CXX_SOURCE_RUNS(
-	"#include <cstdlib>
-	int main()
-	{
-	#ifdef __clang__
-		return EXIT_SUCCESS;
-	#else
-		return EXIT_FAILURE;
-	#endif
-	}
-	"
-	COMPILER_IS_CLANGPP
-)
-
-IF (CMAKE_COMPILER_IS_GNUCXX OR COMPILER_IS_CLANGPP)
-	ADD_DEFINITIONS(
-		"-fvisibility=hidden -ansi -pedantic-errors -Wall"
-		"-Wextra -Wconversion -Wfloat-equal -Wredundant-decls"
-		"-Winit-self -Woverloaded-virtual -Wshadow"
-		"-Wold-style-cast -Wnon-virtual-dtor -Wsign-promo"
-		"-Wstrict-aliasing=1 -Wmissing-declarations -Wno-long-long"
-	)
-	# we don't use long long but boost does :(
-
-	IF (CMAKE_COMPILER_IS_GNUCXX)
-		ADD_DEFINITIONS ("-Wsign-conversion")
-	ENDIF()
-
-	ADD_DEFINITIONS(-D BOOST_FILESYSTEM_NO_DEPRECATED)
-ELSEIF (MSVC)
-	ADD_DEFINITIONS ("/W4 /wd4996 /EHa /D_BIND_TO_CURRENT_VCLIBS_VERSION=1")
-ENDIF ()
-
-ADD_DEFINITIONS(${SGE_CFLAGS})
-
 SET(
-	media_path
+	MEDIA_PATH	
 	${CMAKE_INSTALL_PREFIX}/share/games/sanguis
 )
 
@@ -144,7 +90,7 @@ set_source_files_properties(
 	src/media_path.cpp
 	PROPERTIES
 	COMPILE_FLAGS
-	-DMEDIA_PATH="\\\"${media_path}\\\""
+	-DMEDIA_PATH="\\\"${MEDIA_PATH}\\\""
 )
 
 SET(
