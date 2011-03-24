@@ -418,6 +418,8 @@ void
 sanguis::net::server::object_impl::timer_handler()
 {
 	timer_signal_();
+
+	this->reset_timer();
 }
 
 void

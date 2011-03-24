@@ -142,10 +142,12 @@ sanguis::server::world::object::object(
 	wave_gen_(
 		_console
 	)
-{}
+{
+}
 
 sanguis::server::world::object::~object()
-{}
+{
+}
 
 void
 sanguis::server::world::object::update(
@@ -163,7 +165,9 @@ sanguis::server::world::object::update(
 	);
 
 	// should we send position updates?
-	bool const update_pos = send_timer_.update_b();
+	bool const update_pos(
+		send_timer_.update_b()
+	);
 
 	collision_world_->update(
 		static_cast<
@@ -173,7 +177,7 @@ sanguis::server::world::object::update(
 		)
 	);
 
-	for (
+	for(
 		entity_map::iterator it(
 			entities_.begin()
 		),
@@ -186,7 +190,7 @@ sanguis::server::world::object::update(
 	{
 		++next;
 
-		update_entity(
+		this->update_entity(
 			it,
 			_time,
 			update_pos

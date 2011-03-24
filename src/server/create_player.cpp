@@ -1,4 +1,5 @@
 #include "create_player.hpp"
+#include "log.hpp"
 #include "string.hpp"
 #include "send_available_perks.hpp"
 #include "damage/no_armor.hpp"
@@ -8,6 +9,8 @@
 #include "weapons/weapon.hpp"
 #include "../messages/create.hpp"
 #include "../messages/add_console_command.hpp"
+#include <fcppt/log/debug.hpp>
+#include <fcppt/log/output.hpp>
 #include <fcppt/utf8/convert.hpp>
 #include <fcppt/homogenous_pair_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -22,6 +25,13 @@ sanguis::server::create_player(
 	console_command_vector const &_known_commands
 )
 {
+	FCPPT_LOG_DEBUG(
+		server::log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("Creating player ")
+			<< _player_id
+	);
+
 	entities::player_unique_ptr new_player(
 		fcppt::make_unique_ptr<
 			entities::player

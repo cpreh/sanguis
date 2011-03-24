@@ -17,12 +17,12 @@ sanguis::server::collision::body::body()
 
 void
 sanguis::server::collision::body::body_pos(
-	pos_type const &pos_
+	pos_type const &_pos
 )
 {
 	body_->position(
 		fcppt::math::vector::construct(
-			pos_,
+			_pos,
 			static_cast<
 				space_unit
 			>(0)
@@ -33,21 +33,22 @@ sanguis::server::collision::body::body_pos(
 sanguis::server::pos_type const
 sanguis::server::collision::body::body_pos() const
 {
-	return fcppt::math::vector::narrow_cast<
-		pos_type
-	>(
-		body_->position()
-	);
+	return
+		fcppt::math::vector::narrow_cast<
+			pos_type
+		>(
+			body_->position()
+		);
 }
 
 void
 sanguis::server::collision::body::body_speed(
-	pos_type const &speed_
+	pos_type const &_speed
 )
 {
 	body_->linear_velocity(
 		fcppt::math::vector::construct(
-			speed_,
+			_speed,
 			static_cast<
 				space_unit
 			>(0)
@@ -58,26 +59,27 @@ sanguis::server::collision::body::body_speed(
 sanguis::server::pos_type const
 sanguis::server::collision::body::body_speed() const
 {
-	return fcppt::math::vector::narrow_cast<
-		pos_type
-	>(
-		body_->linear_velocity()
-	);
+	return
+		fcppt::math::vector::narrow_cast<
+			pos_type
+		>(
+			body_->linear_velocity()
+		);
 }
 
 void
 sanguis::server::collision::body::add_shapes(
-	sge::collision::shapes::container const &new_shapes_
+	sge::collision::shapes::container const &_shapes
 )
 {
 	fcppt::algorithm::append(
 		shapes_,
-		new_shapes_
+		_shapes
 	);
 
 	BOOST_FOREACH(
 		sge::collision::shapes::container::const_reference ref,
-		new_shapes_
+		_shapes
 	)
 		body_->add_shape(
 			ref
@@ -86,46 +88,46 @@ sanguis::server::collision::body::add_shapes(
 
 void
 sanguis::server::collision::body::recreate(
-	sge::collision::world_ptr const world_,
-	global_groups const &global_groups_,
-	create_parameters const &create_param_
+	sge::collision::world_ptr const _world,
+	global_groups const &_global_groups,
+	create_parameters const &_create_param
 )
 {
-	sge::collision::shapes::container const new_shapes_(
-		recreate_shapes(
-			world_,
-			global_groups_
+	sge::collision::shapes::container const new_shapes(
+		this->recreate_shapes(
+			_world,
+			_global_groups
 		)
 	);
 
 	shapes_.clear();
 
 	body_ =
-		world_->create_body(
+		_world->create_body(
 			shapes_,
 			fcppt::math::vector::construct(
-				create_param_.center(),
+				_create_param.center(),
 				static_cast<
 					space_unit
 				>(0)
 			),
 			fcppt::math::vector::construct(
-				create_param_.speed(),
+				_create_param.speed(),
 				static_cast<
 					space_unit
 				>(0)
 			)
 		);
 	
-	add_shapes(
-		new_shapes_
+	this->add_shapes(
+		new_shapes
 	);
 }
 
 void
 sanguis::server::collision::body::destroy()
 {
-	on_destroy();
+	this->on_destroy();
 
 	shapes_.clear();
 
