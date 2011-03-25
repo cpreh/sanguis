@@ -2,10 +2,6 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
 
 project (sanguis)
 
-SET (EXTRA_CMAKE_MODULE_PATH "" CACHE PATH "Extra paths to search for cmake modules")
-
-SET(CMAKE_MODULE_PATH "${EXTRA_CMAKE_MODULE_PATH}")
-
 INCLUDE(FcpptCMakeUtils)
 
 SET (STATECHART_INCLUDE_DIR "" CACHE PATH "Include path for statechart")
