@@ -2,13 +2,13 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
 
 project (sanguis)
 
-OPTION(EXTRA_CMAKE_MODULE_PATH "Extra paths to search for cmake modules" "")
+SET (EXTRA_CMAKE_MODULE_PATH "" CACHE PATH "Extra paths to search for cmake modules")
 
 SET(CMAKE_MODULE_PATH "${EXTRA_CMAKE_MODULE_PATH}")
 
 INCLUDE(FcpptCMakeUtils)
 
-# Find Boost
+SET (STATECHART_INCLUDE_DIR "" CACHE PATH "Include path for statechart")
 
 IF(NOT STATECHART_INCLUDE_DIR)
 	MESSAGE(
@@ -22,6 +22,8 @@ INCLUDE_DIRECTORIES(
 	SYSTEM
 	${STATECHART_INCLUDE_DIR}
 )
+
+# Find Boost
 
 FIND_PACKAGE(
 	Boost 1.44.0 REQUIRED COMPONENTS
