@@ -81,12 +81,12 @@ FIND_PACKAGE(
 INCLUDE_DIRECTORIES(${CEGUI_INCLUDE_DIRS})
 
 SET(
-	MEDIA_PATH	
-	${CMAKE_INSTALL_PREFIX}/share/games/sanguis
+	MEDIA_PATH
+	${CMAKE_INSTALL_PREFIX}/share/games/sanguis/media
 )
 
 # TODO: use a config file for this!
-set_source_files_properties(
+SET_SOURCE_FILES_PROPERTIES(
 	src/media_path.cpp
 	PROPERTIES
 	COMPILE_FLAGS
