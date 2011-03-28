@@ -2,6 +2,7 @@
 #define SANGUIS_CREATOR_GEOMETRY_SHAPE_CONTAINER_HPP_INCLUDED
 
 #include <sanguis/creator/geometry/shape_fwd.hpp>
+#include <vector>
 
 namespace sanguis
 {

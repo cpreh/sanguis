@@ -5,6 +5,7 @@
 #include <sanguis/creator/geometry/shape_container.hpp>
 #include <sanguis/creator/geometry/shape.hpp>
 #include <sanguis/creator/symbol.hpp>
+#include <fcppt/nonassignable.hpp>
 
 namespace sanguis
 {
@@ -15,13 +16,20 @@ namespace generator
 
 class result
 {
+	FCPPT_NONASSIGNABLE(
+		result
+	);
 public:
 	SANGUIS_CREATOR_SYMBOL
 	result(
 		geometry::shape_container const &
 	);
+
+	SANGUIS_CREATOR_SYMBOL
+	geometry::shape_container const &
+	shapes() const;
 private:
-	geometry::shape_container shapes_;
+	geometry::shape_container const shapes_;
 };
 
 }

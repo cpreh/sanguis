@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CREATOR_GEOMETRY_POLYGON_HPP_INCLUDED
 #define SANGUIS_CREATOR_GEOMETRY_POLYGON_HPP_INCLUDED
 
-#include <sanguis/creator/geometry/vertex.hpp>
+#include <sanguis/creator/geometry/vertex_fwd.hpp>
 #include <vector>
 
 namespace sanguis
