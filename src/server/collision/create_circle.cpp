@@ -1,31 +1,16 @@
 #include "create_circle.hpp"
-#include "satellite.hpp"
-#include <sge/collision/shapes/sphere.hpp>
-#include <sge/collision/world.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
-#include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/ref.hpp>
+#include <sge/projectile/shapes/circle.hpp>
+#include <fcppt/make_shared_ptr.hpp>
 
-sge::collision::shapes::base_ptr const
+sge::projectile::shapes::base_ptr const
 sanguis::server::collision::create_circle(
-	sge::collision::world_ptr const _world,
-	base &_base,
-	space_unit const _radius
+	server::space_unit const _radius
 )
 {
 	return
-		_world->create_sphere(
-			sge::collision::satellite_ptr(
-				fcppt::make_unique_ptr<
-					satellite
-				>(
-					fcppt::ref(
-						_base
-					)
-				)
-			),
-			_radius,
-			sge::collision::solidity::nonsolid,
-			sge::collision::point::null()
+		fcppt::make_shared_ptr<
+			sge::projectile::shapes::circle
+		>(
+			_radius
 		);
 }

@@ -4,11 +4,12 @@
 #include "body_fwd.hpp"
 #include "global_groups_fwd.hpp"
 #include "create_parameters_fwd.hpp"
-#include "../pos_type.hpp"
-#include <sge/collision/shapes/container.hpp>
-#include <sge/collision/world_ptr.hpp>
-#include <sge/collision/body_ptr.hpp>
+#include "../pos.hpp"
+#include <sge/projectile/shapes/base_ptr.hpp>
+#include <sge/projectile/body/object_fwd.hpp>
+#include <sge/projectile/world_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/scoped_ptr.hpp>
 
 namespace sanguis
 {
@@ -27,49 +28,46 @@ protected:
 
 	void
 	body_pos(
-		pos_type const &
+		server::pos const &
 	);
 
-	pos_type const
+	server::pos const
 	body_pos() const;
 
 	void
 	body_speed(
-		pos_type const &
+		server::pos const &
 	);
 
-	pos_type const
+	server::pos const
 	body_speed() const;
-
-	void
-	add_shapes(
-		sge::collision::shapes::container const &
-	);
 public:
 	void
 	recreate(
-		sge::collision::world_ptr,
-		global_groups const &,
-		create_parameters const &
+		sge::projectile::world &,
+		collision::global_groups const &,
+		collision::create_parameters const &
 	);
 
 	void
 	destroy();
 
-	virtual sge::collision::shapes::container const
-	recreate_shapes(
-		sge::collision::world_ptr,
-		global_groups const &
-	) = 0;
-
 	virtual ~body();
 private:
+	virtual sge::projectile::shapes::base_ptr const
+	recreate_shape(
+		sge::collision::world &,
+		collision::global_groups const &
+	) = 0;
+
 	virtual void
 	on_destroy();
 
-	sge::collision::body_ptr body_;
-	
-	sge::collision::shapes::container shapes_;
+	typedef fcppt::scoped_ptr<
+		sge::projectile::body
+	> body_scoped_ptr;
+
+	body_scoped_ptr body_;
 };
 
 }

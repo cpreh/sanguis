@@ -11,18 +11,13 @@
 #include "../../messages/base.hpp"
 #include "../../messages/create.hpp"
 #include "../../cast_enum.hpp"
-#include <sge/collision/world.hpp>
-#include <sge/time/second_f.hpp>
 
-#include <fcppt/math/vector/to_angle.hpp>
-#include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
-#include <fcppt/math/vector/is_null.hpp>
 #include <fcppt/container/map_impl.hpp>
-#include <fcppt/log/headers.hpp>
+#include <fcppt/log/output.hpp>
+#include <fcppt/log/warning.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
-#include <fcppt/format.hpp>
 #include <fcppt/text.hpp>
 
 #include <boost/mpl/vector/vector10.hpp>

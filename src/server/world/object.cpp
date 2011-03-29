@@ -34,9 +34,7 @@
 #include "../../load/model/collection.hpp"
 #include "../../load/model/object.hpp"
 #include "../../exception.hpp"
-#include <sge/collision/system.hpp>
-#include <sge/collision/world.hpp>
-#include <sge/collision/box.hpp>
+#include <sge/projectile/world.hpp>
 #include <sge/time/second.hpp>
 #include <sge/time/millisecond.hpp>
 #include <fcppt/container/map_impl.hpp>
@@ -46,14 +44,13 @@
 #include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/assert.hpp>
 #include <fcppt/make_shared_ptr.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
 
 sanguis::server::world::object::object(
 	context_ptr const _global_context,
-	sge::collision::system_ptr const _sys,
 	server::environment::load_context_ptr const _load_context,
 	server::console &_console
 )
@@ -65,27 +62,12 @@ sanguis::server::world::object::object(
 		_load_context
 	),
 	collision_world_(
-		_sys->create_world(
-			sge::collision::optional_box(
-				sge::collision::box(
-					// FIXME
-					sge::collision::box::vector(
-						-1000,
-						-1000,
-						0
-					),
-					sge::collision::box::dim(
-						1000,
-						1000,
-						0	
-					)
-				)
-			),
-			sge::collision::constraint::constrain_2d
-		)
+		fcppt::make_unique_ptr<
+			sge::projectile::world
+		>()
 	),
 	collision_groups_(
-		collision_world_
+		*collision_world_
 	),
 	sight_ranges_(),
 	diff_clock_(),
@@ -409,7 +391,7 @@ sanguis::server::world::object::request_transfer(
 		)
 	);
 
-	if (
+	if(
 		it == entities_.end()
 	)
 		throw sanguis::exception(

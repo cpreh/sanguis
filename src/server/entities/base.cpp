@@ -2,13 +2,11 @@
 #include "auto_weak_link.hpp"
 #include "insert_parameters.hpp"
 #include "collision_groups.hpp"
-#include "../collision/assign_groups.hpp"
 #include "../collision/create_parameters.hpp"
 #include "../collision/create_circle.hpp"
 #include "../environment/object.hpp"
 #include "../get_unique_id.hpp"
 #include <fcppt/math/vector/basic_impl.hpp>
-#include <fcppt/assign/make_container.hpp>
 #include <fcppt/assert.hpp>
 #include <boost/logic/tribool.hpp>
 
@@ -23,77 +21,62 @@ sanguis::server::entities::base::base()
 	angle_(0),
 	processed_(false),
 	links_()
-{}
+{
+}
 
-sge::collision::shapes::container const
-sanguis::server::entities::base::recreate_shapes(
-	sge::collision::world_ptr const world_,
-	collision::global_groups const &global_groups_	
-)
+sge::projectile::shape::base_ptr const
+sanguis::server::entities::base::recreate_shape()
 {
 	return
-		collision::assign_groups(
-			fcppt::assign::make_container<
-				sge::collision::shapes::container
-			>(
-				collision::create_circle(
-					world_,
-					*this,
-					radius()
-				)
-			),
-			entities::collision_groups(
-				type(),
-				team()
-			),
-			global_groups_
+		collision::create_circle(
+			this->radius()
 		);
 }
 
 void
 sanguis::server::entities::base::transfer(
-	server::environment::object_ptr const nenvironment,
-	collision::global_groups const &collision_groups_,
-	insert_parameters const &insert_param
+	server::environment::object_ptr const _environment,
+	collision::global_groups const &_collision_groups,
+	insert_parameters const &_insert_param
 )
 {
-	environment_ = nenvironment;
+	environment_ = _environment;
 
 	collision::create_parameters const create_param(
-		insert_param.center(),
-		initial_direction()
+		_insert_param.center(),
+		this->initial_direction()
 	);
 
 	collision::body::recreate(
 		environment_->collision_world(),
-		collision_groups_,
+		_collision_groups,
 		create_param
 	);
 	
-	angle(
-		insert_param.angle()
+	this->angle(
+		_insert_param.angle()
 	);
 
-	on_transfer(
-		collision_groups_,
+	this->on_transfer(
+		_collision_groups,
 		create_param
 	);
 }
 
 void
 sanguis::server::entities::base::update(
-	time_type const time
+	time_type const _time
 )
 {
-	on_update(
-		time
+	this->on_update(
+		_time
 	);
 }
 
 void
 sanguis::server::entities::base::die()
 {
-	on_die();
+	this->on_die();
 }
 
 bool
@@ -111,9 +94,10 @@ sanguis::server::entities::base::may_be_deleted()
 sanguis::server::entities::auto_weak_link const
 sanguis::server::entities::base::link()
 {
-	return auto_weak_link(
-		*this
-	);
+	return
+		auto_weak_link(
+			*this
+		);
 }
 
 sanguis::server::environment::object_ptr const
@@ -155,7 +139,7 @@ sanguis::server::entities::base::angle(
 sanguis::server::pos_type const
 sanguis::server::entities::base::center() const
 {
-	return body_pos();
+	return this->body_pos();
 }
 
 void
@@ -163,11 +147,11 @@ sanguis::server::entities::base::center(
 	pos_type const &_center
 )
 {
-	body_pos(
+	this->body_pos(
 		_center
 	);
 
-	on_center(
+	this->on_center(
 		_center
 	);
 }
@@ -212,66 +196,75 @@ sanguis::server::entities::base::initial_direction() const
 
 void
 sanguis::server::entities::base::insert_link(
-	auto_weak_link &link_
+	auto_weak_link &_link
 )
 {
 	links_.push_back(
-		link_
+		_link
 	);
 }
 
 boost::logic::tribool const
 sanguis::server::entities::base::can_collide_with(
-	collision::base const &base_
+	collision::base const &_base
 ) const
 {
 	base const *const other(
 		dynamic_cast<
 			base const *
 		>(
-			&base_
+			&_base
 		)
 	);
 
-	return other
-		? can_collide_with_entity(*other)
-		: boost::logic::indeterminate;
+	return
+		other
+		?
+			this->can_collide_with_entity(
+				*other
+			)
+		:
+			boost::logic::indeterminate;
 }
 
 void
 sanguis::server::entities::base::collision_begin(
-	collision::base &base_
+	collision::base &_base
 )
 {
 	base *const other(
 		dynamic_cast<
 			base *
 		>(
-			&base_
+			&_base
 		)
 	);
 
-	if(other)
-		collision_entity_begin(
+	if(
+		other
+	)
+		this->collision_entity_begin(
 			*other
 		);
 }
 
 void
 sanguis::server::entities::base::collision_end(
-	collision::base &base_
+	collision::base &_base
 )
 {
 	base *const other(
 		dynamic_cast<
 			base *
 		>(
-			&base_
+			&_base
 		)
 	);
 
-	if(other)
-		collision_entity_end(
+	if(
+		other
+	)
+		this->collision_entity_end(
 			*other
 		);
 }

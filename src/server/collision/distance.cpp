@@ -6,27 +6,38 @@
 
 sanguis::server::space_unit
 sanguis::server::collision::distance(
-	entities::base const &a,
-	entities::base const &b
+	entities::base const &_a,
+	entities::base const &_b
 )
 {
-	return distance(a, b.center());
+	return
+		collision::distance(
+			_a,
+			_b.center()
+		);
 }
 
 sanguis::server::space_unit
 sanguis::server::collision::distance(
-	entities::base const &a,
-	pos_type const &b
+	entities::base const &_a,
+	server::pos const &_b
 )
 {
-	return distance(a.center(), b);
+	return
+		collision::distance(
+			_a.center(),
+			_b
+		);
 }
 
 sanguis::server::space_unit
 sanguis::server::collision::distance(
-	pos_type const &a,
-	pos_type const &b
+	server::pos const &_a,
+	server::pos const &_b
 )
 {
-	return length(a - b);
+	return
+		fcppt::math::vector::length(
+			_a - _b
+		);
 }

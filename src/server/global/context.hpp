@@ -23,7 +23,6 @@
 #include "../../time_type.hpp"
 #include "../../messages/auto_ptr.hpp"
 #include "../../load/context_base_fwd.hpp"
-#include <sge/collision/system_ptr.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/container/map_decl.hpp>
@@ -45,7 +44,6 @@ class context
 public:
 	context(
 		unicast_callback const &,
-		sge::collision::system_ptr,
 		load::context_base const &,
 		server::console &
 	);
@@ -147,8 +145,6 @@ private:
 
 	unicast_callback const send_unicast_;
 
-	sge::collision::system_ptr const collision_system_;
-	
 	world::map worlds_;
 	
 	entities::player_map players_;

@@ -13,11 +13,13 @@
 #include "../collision/body.hpp"
 #include "../collision/global_groups_fwd.hpp"
 #include "../collision/create_parameters_fwd.hpp"
-#include "../environment/object_ptr.hpp"
+#include "../environment/object_fwd.hpp"
 #include "../../messages/auto_ptr.hpp"
 #include "../../entity_id.hpp"
 #include "../../entity_type.hpp"
 #include "../../time_type.hpp"
+#include <sge/projectile/shape/base_ptr.hpp>
+#include <sge/projectile/world_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -38,9 +40,9 @@ class base
 protected:
 	base();
 
-	sge::collision::shapes::container const
-	recreate_shapes(
-		sge::collision::world_ptr,
+	sge::projectile::shape::base_ptr const
+	recreate_shape(
+		sge::collision::world &,
 		collision::global_groups const &
 	);
 public:
@@ -48,7 +50,7 @@ public:
 	
 	void
 	transfer(
-		server::environment::object_ptr,
+		server::environment::object &,
 		collision::global_groups const &,
 		insert_parameters const &
 	);

@@ -10,7 +10,6 @@
 #include "../net/id.hpp"
 #include "../net/port.hpp"
 #include "../net/receive_buffer_fwd.hpp"
-#include <sge/collision/system_ptr.hpp>
 #include <sge/time/timer.hpp>
 #include <fcppt/container/raw_vector_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
@@ -38,7 +37,6 @@ struct machine
 public:
 	machine(
 		load::context_base const &,
-		sge::collision::system_ptr,
 		net::port,
 		awl::mainloop::io_service &
 	);
@@ -64,9 +62,6 @@ public:
 
 	load::context_base const &
 	resources() const;
-
-	sge::collision::system_ptr const
-	collision_system() const;
 private:
 	void
 	process_message(
@@ -115,8 +110,6 @@ private:
 		s_timer_;
 
 	client_set clients_;
-
-	sge::collision::system_ptr const collision_;
 };
 
 }

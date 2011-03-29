@@ -39,13 +39,11 @@
 
 sanguis::server::global::context::context(
 	unicast_callback const &_send_unicast,
-	sge::collision::system_ptr const _collision_system,
 	load::context_base const &_model_context,
 	server::console &_console
 )
 :
 	send_unicast_(_send_unicast),
-	collision_system_(_collision_system),
 	worlds_(),
 	players_(),
 	world_context_(
@@ -408,7 +406,6 @@ sanguis::server::global::context::world(
 			_world_id,
 			server::world::random(
 				world_context_,
-				collision_system_,
 				load_context_,
 				console_
 			)

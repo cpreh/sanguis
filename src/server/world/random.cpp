@@ -6,7 +6,6 @@
 sanguis::server::world::object_unique_ptr
 sanguis::server::world::random(
 	context_ptr const _ctx,
-	sge::collision::system_ptr const _collision_system,
 	server::environment::load_context_ptr const _load_context,
 	server::console &_console
 )
@@ -17,7 +16,6 @@ sanguis::server::world::random(
 			object
 		>(
 			_ctx,
-			_collision_system,
 			_load_context,
 			fcppt::ref(
 				_console

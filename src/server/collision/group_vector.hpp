@@ -12,7 +12,7 @@ namespace collision
 {
 
 typedef std::vector<
-	group::type
+	collision::group::type
 > group_vector;
 
 }

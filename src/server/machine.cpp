@@ -25,7 +25,6 @@
 
 sanguis::server::machine::machine(
 	load::context_base const &_resources,
-	sge::collision::system_ptr const _collision,
 	net::port const _port,
 	awl::mainloop::io_service &_io_service
 )
@@ -87,8 +86,7 @@ sanguis::server::machine::machine(
 			)
 		)
 	),
-	clients_(),
-	collision_(_collision)
+	clients_()
 {
 }
 
@@ -190,13 +188,6 @@ sanguis::server::machine::resources() const
 {
 	return 
 		resources_;
-}
-
-sge::collision::system_ptr const
-sanguis::server::machine::collision_system() const
-{
-	return 
-		collision_;
 }
 
 void

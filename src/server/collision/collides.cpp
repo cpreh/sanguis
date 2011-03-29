@@ -6,24 +6,32 @@
 
 bool
 sanguis::server::collision::collides(
-	entities::base const &a,
-	entities::base const &b
+	entities::base const &_a,
+	entities::base const &_b
 )
 {
-	return intersects(
-		bounding_circle(a),
-		bounding_circle(b)
-	);
+	return
+		fcppt::math::sphere::intersects(
+			collision::bounding_circle(
+				_a
+			),
+			collision::bounding_circle(
+				_b
+			)
+		);
 }
 
 bool
 sanguis::server::collision::collides(
-	entities::base const &a,
-	circle_type const &c
+	entities::base const &_entity,
+	circle_type const &_circle
 )
 {
-	return intersects(
-		bounding_circle(a),
-		c
-	);
+	return
+		fcppt::math::sphere::intersects(
+			collision::bounding_circle(
+				_entity
+			),
+			_circle	
+		);
 }

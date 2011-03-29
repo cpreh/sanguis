@@ -15,7 +15,7 @@
 #include "../../world_id.hpp"
 #include "../../weapon_type.hpp"
 #include "../../entity_id.hpp"
-#include <sge/collision/world_ptr.hpp>
+#include <sge/projectile/world_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -114,7 +114,7 @@ public:
 		player_id
 	) = 0;
 
-	virtual sge::collision::world_ptr const
+	virtual sge::projectile::world &
 	collision_world() const = 0;
 
 	virtual collision::global_groups const &

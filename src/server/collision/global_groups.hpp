@@ -3,9 +3,9 @@
 
 #include "group_map.hpp"
 #include "group.hpp"
-#include <sge/collision/world_ptr.hpp>
-#include <sge/collision/shapes/base_ptr.hpp>
-#include <fcppt/container/map_decl.hpp>
+#include <sge/projectile/group/object_fwd.hpp>
+#include <sge/projectile/world_fwd.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -16,18 +16,22 @@ namespace collision
 
 class global_groups
 {
+	FCPPT_NONCOPYABLE(
+		global_groups
+	);
 public:
 	explicit global_groups(
-		sge::collision::world_ptr
+		sge::projectile::world &
 	);
 
-	void
-	add_to_group(
-		sge::collision::shapes::base_ptr,
-		group::type
+	~global_groups();
+
+	sge::projectile::group::object &
+	group(
+		collision::group::type
 	) const;
 private:
-	group_map groups_;
+	collision::group_map groups_;
 };
 
 }

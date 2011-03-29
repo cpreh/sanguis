@@ -27,12 +27,12 @@
 #include "../../world_id.hpp"
 #include "../../weapon_type.hpp"
 #include "../../messages/auto_ptr.hpp"
-#include <sge/collision/world_ptr.hpp>
-#include <sge/collision/system_ptr.hpp>
+#include <sge/projectile/world_fwd.hpp>
 #include <sge/time/timer.hpp>
 #include <fcppt/container/map_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/scoped_ptr.hpp>
 
 #include "../pickup_spawner.hpp"
 #include "../waves/generator.hpp"
@@ -187,7 +187,11 @@ private:
 
 	server::environment::load_context_ptr const load_context_;
 
-	sge::collision::world_ptr const collision_world_;
+	typedef fcppt::scoped_ptr<
+		sge::projectile::world
+	> collision_world_scoped_ptr;
+
+	collision_world_scoped_ptr const collision_world_;
 
 	server::collision::global_groups const collision_groups_;
 

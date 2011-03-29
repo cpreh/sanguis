@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_COLLISION_COLLIDES_HPP_INCLUDED
 #define SANGUIS_SERVER_COLLISION_COLLIDES_HPP_INCLUDED
 
-#include "../circle_type.hpp"
+#include "../circle.hpp"
 #include "../entities/base_fwd.hpp"
 
 namespace sanguis
@@ -20,7 +20,7 @@ collides(
 bool
 collides(
 	entities::base const &,
-	circle_type const &
+	server::circle const &
 );
 
 }

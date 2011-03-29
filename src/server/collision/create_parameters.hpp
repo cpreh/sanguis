@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_COLLISION_CREATE_PARAMETERS_HPP_INCLUDED
 
 #include "create_parameters_fwd.hpp"
-#include "../pos_type.hpp"
+#include "../pos.hpp"
 #include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/nonassignable.hpp>
 
@@ -20,17 +20,17 @@ class create_parameters
 	);
 public:
 	create_parameters(
-		pos_type const &center,
-		pos_type const &speed
+		server::pos const &center,
+		server::pos const &speed
 	);
 
-	pos_type const
+	server::pos const
 	center() const;
 
-	pos_type const
+	server::pos const
 	speed() const;
 private:
-	pos_type const
+	server::pos const
 		center_,
 		speed_;
 };

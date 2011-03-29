@@ -1,5 +1,5 @@
-#ifndef SANGUIS_SERVER_CIRCLE_TYPE_HPP_INCLUDED
-#define SANGUIS_SERVER_CIRCLE_TYPE_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_CIRCLE_HPP_INCLUDED
+#define SANGUIS_SERVER_CIRCLE_HPP_INCLUDED
 
 #include "space_unit.hpp"
 #include <fcppt/math/sphere/circle.hpp>
@@ -11,7 +11,7 @@ namespace server
 
 typedef fcppt::math::sphere::circle<
 	space_unit
->::type circle_type;
+>::type circle;
 
 }
 }

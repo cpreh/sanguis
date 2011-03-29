@@ -920,9 +920,7 @@ SET(
 	src/server/buffs/unique_ptr.hpp
 	src/server/cheat.cpp
 	src/server/cheat.hpp
-	src/server/circle_type.hpp
-	src/server/collision/assign_groups.cpp
-	src/server/collision/assign_groups.hpp
+	src/server/circle.hpp
 	src/server/collision/base.cpp
 	src/server/collision/base.hpp
 	src/server/collision/base_fwd.hpp
@@ -947,16 +945,20 @@ SET(
 	src/server/collision/execute_end.cpp
 	src/server/collision/execute_end.hpp
 	src/server/collision/execute_function.hpp
+	src/server/collision/from_sge_pos.cpp
+	src/server/collision/from_sge_pos.hpp
 	src/server/collision/global_groups.cpp
 	src/server/collision/global_groups.hpp
 	src/server/collision/global_groups_fwd.hpp
 	src/server/collision/group.hpp
 	src/server/collision/group_map.hpp
 	src/server/collision/group_vector.hpp
-	src/server/collision/satellite.cpp
-	src/server/collision/satellite.hpp
+	src/server/collision/make_groups.cpp
+	src/server/collision/make_groups.hpp
 	src/server/collision/test.cpp
 	src/server/collision/test.hpp
+	src/server/collision/to_sge_pos.cpp
+	src/server/collision/to_sge_pos.hpp
 	src/server/console.cpp
 	src/server/console.hpp
 	src/server/console_command_pair.hpp
@@ -994,7 +996,7 @@ SET(
 	src/server/damage/wrapper.cpp
 	src/server/damage/wrapper.hpp
 	src/server/damage/wrapper_fwd.hpp
-	src/server/dim_type.hpp
+	src/server/dim.hpp
 	src/server/entities/auto_weak_hook.hpp
 	src/server/entities/auto_weak_link.cpp
 	src/server/entities/auto_weak_link.hpp
@@ -1133,7 +1135,6 @@ SET(
 	src/server/environment/object.cpp
 	src/server/environment/object.hpp
 	src/server/environment/object_fwd.hpp
-	src/server/environment/object_ptr.hpp
 	src/server/events/disconnect.cpp
 	src/server/events/disconnect.hpp
 	src/server/events/disconnect_fwd.hpp
@@ -1143,7 +1144,7 @@ SET(
 	src/server/events/tick.cpp
 	src/server/events/tick.hpp
 	src/server/events/tick_fwd.hpp
-	src/server/exp_type.hpp
+	src/server/exp.hpp
 	src/server/get_unique_id.cpp
 	src/server/get_unique_id.hpp
 	src/server/global/context.cpp
@@ -1154,10 +1155,10 @@ SET(
 	src/server/global/world_context.cpp
 	src/server/global/world_context.hpp
 	src/server/global/world_context_fwd.hpp
-	src/server/health_type.hpp
+	src/server/health.hpp
+	src/server/level.hpp
 	src/server/level_calculate.cpp
 	src/server/level_calculate.hpp
-	src/server/level_type.hpp
 	src/server/load_context.hpp
 	src/server/log.cpp
 	src/server/log.hpp
@@ -1214,8 +1215,8 @@ SET(
 	src/server/player_record.cpp
 	src/server/player_record.hpp
 	src/server/player_record_fwd.hpp
-	src/server/pos_type.hpp
-	src/server/probability_type.hpp
+	src/server/pos.hpp
+	src/server/probability.hpp
 	src/server/send_available_perks.cpp
 	src/server/send_available_perks.hpp
 	src/server/send_callback.hpp
