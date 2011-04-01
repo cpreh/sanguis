@@ -2,12 +2,11 @@
 #include "../auras/aura.hpp"
 #include "../environment/object.hpp"
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
-#include <fcppt/ref.hpp>
 #include <boost/foreach.hpp>
 
 void
 sanguis::server::entities::with_auras::add_aura(
-	auras::unique_ptr _ptr
+	auras::unique_ptr _aura
 )
 {
 	fcppt::container::ptr::push_back_unique_ptr(
@@ -59,22 +58,19 @@ sanguis::server::entities::with_auras::on_update(
 {
 }
 
-sanguis::server::collision::ghost_reference_vector const
+void
 sanguis::server::entities::with_auras::recreate_ghosts(
 	collision::ghost_parameters const &_params
 )
 {
-	sanguis::server::collision::ghost_reference_vector ret;
-
 	BOOST_FOREACH(
 		aura_container::reference aura,
 		auras_
 	)
-		ret.push_back(
-			fcppt::ref(
-				aura->recreate(
-					_params
-				)
+		with_ghosts::add_ghost(
+			aura->recreate(
+				_params,
+				this->center()
 			)
 		);
 

@@ -34,20 +34,20 @@ sanguis::server::entities::base::transfer(
 	);
 
 	this->on_transfer(
-		_collision_groups,
 		collision::create_parameters(
 			_insert_param.center(),
 			this->initial_direction(),
 			collision::user_data(
 				*this
-			)
+			),
+			_collision_groups
 		)
 	);
 }
 
 void
 sanguis::server::entities::base::update(
-	time_type const _time
+	sanguis::time_type const _time
 )
 {
 	this->on_update(
@@ -77,7 +77,7 @@ sanguis::server::entities::auto_weak_link const
 sanguis::server::entities::base::link()
 {
 	return
-		auto_weak_link(
+		entities::auto_weak_link(
 			*this
 		);
 }
@@ -124,20 +124,6 @@ sanguis::server::entities::base::center() const
 	return this->body_pos();
 }
 
-void
-sanguis::server::entities::base::center(
-	server::pos const &_center
-)
-{
-	this->body_pos(
-		_center
-	);
-
-	this->on_center(
-		_center
-	);
-}
-
 bool
 sanguis::server::entities::base::server_only() const
 {
@@ -150,14 +136,15 @@ sanguis::server::entities::base::~base()
 
 void
 sanguis::server::entities::base::on_update(
-	time_type
+	server::time_type
 )
 {
 }
 
 void
 sanguis::server::entities::base::on_die()
-{}
+{
+}
 
 void
 sanguis::server::entities::base::on_center(

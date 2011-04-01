@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_AURAS_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_AURAS_HPP_INCLUDED
 
-#include "base.hpp"
+#include "with_body.hpp"
 #include "../auras/aura_fwd.hpp"
 #include "../auras/unique_ptr.hpp"
 #include "../collision/global_groups_fwd.hpp"
@@ -19,7 +19,7 @@ namespace entities
 
 class with_auras
 :
-	public virtual base
+	public virtual with_body
 {
 	FCPPT_NONCOPYABLE(
 		with_auras
@@ -39,7 +39,7 @@ protected:
 		time_type
 	);
 
-	collision::ghost_reference_vector const
+	void
 	recreate_ghosts(
 		collision::ghost_parameters const &
 	);

@@ -5,10 +5,17 @@
 
 sanguis::server::space_unit
 sanguis::server::entities::radius(
-	dim_type const &d)
+	server::dim const &_dim
+)
 {
-	return std::sqrt(
-		fcppt::math::quad(d.w() / 2)
-		+ fcppt::math::quad(d.h() / 2)
-	);
+	return
+		std::sqrt(
+			fcppt::math::quad(
+				_dim.w() / 2
+			)
+			+
+			fcppt::math::quad(
+				_dim.h() / 2
+			)
+		);
 }

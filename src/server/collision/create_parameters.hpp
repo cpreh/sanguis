@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_COLLISION_CREATE_PARAMETERS_HPP_INCLUDED
 
 #include "create_parameters_fwd.hpp"
+#include "global_groups_fwd.hpp"
 #include "user_data.hpp"
 #include "../center.hpp"
 #include "../speed.hpp"
@@ -24,7 +25,8 @@ public:
 	create_parameters(
 		server::center const &,
 		server::speed const &,
-		collision::user_data const &
+		collision::user_data const &,
+		collision::global_groups const &
 	);
 
 	server::center const
@@ -35,12 +37,17 @@ public:
 
 	collision::user_data const &
 	user_data() const;
+
+	collision::global_groups const &
+	global_groups() const;
 private:
 	server::center const center_;
 
 	server::speed const speed_;
 	
 	collision::user_data const user_data_;
+
+	collision::global_groups const &global_groups_;
 };
 
 }

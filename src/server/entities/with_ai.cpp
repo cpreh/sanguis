@@ -16,10 +16,12 @@ sanguis::server::entities::with_ai::with_ai(
 	),
 	create_ai_(_create_ai),
 	ai_()
-{}
+{
+}
 
 sanguis::server::entities::with_ai::~with_ai()
-{}
+{
+}
 
 void
 sanguis::server::entities::with_ai::on_update(
@@ -41,7 +43,6 @@ sanguis::server::entities::with_ai::on_update(
 
 void
 sanguis::server::entities::with_ai::on_transfer(
-	collision::global_groups const &_groups,
 	collision::create_parameters const &_param
 )
 {

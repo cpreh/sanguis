@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_COLLISION_USER_DATA_HPP_INCLUDED
 #define SANGUIS_SERVER_COLLISION_USER_DATA_HPP_INCLUDED
 
-#include "base_fwd.hpp"
+#include "base_base_fwd.hpp"
 #include <fcppt/nonassignable.hpp>
 
 namespace sanguis
@@ -18,13 +18,13 @@ class user_data
 	);
 public:
 	explicit user_data(
-		collision::base &
+		collision::body_base &
 	);
 
-	collision::base &
+	collision::body_base &
 	get() const;
 private:
-	collision::base &data_;
+	collision::body_base &data_;
 };
 
 }

@@ -1,5 +1,9 @@
 #include "body_collision.hpp"
+#include "body_base.hpp"
 #include "from_sge_user_data.hpp"
+#include "user_data.hpp"
+#include <sge/projectile/body/object.hpp>
+#include <boost/logic/tribool.hpp>
 
 namespace
 {
@@ -18,16 +22,16 @@ sanguis::server::collision::body_collision(
 	sge::projectile::body::object const &_b
 )
 {
-	collision::base
+	collision::body_base
 		&base_a(
 			collision::from_sge_user_data(
 				_a.user_data()
-			)
+			).get()
 		),
 		&base_b(
 			collision::from_sge_user_data(
 				_b.user_data()
-			)
+			).get()
 		);
 	
 	execute_collision(
@@ -46,8 +50,8 @@ namespace
 
 void
 execute_collision(
-	sanguis::server::collision::base &_a,
-	sanguis::server::collision::base &_b
+	sanguis::server::collision::body_base &_a,
+	sanguis::server::collision::body_base &_b
 )
 {
 	if(
@@ -55,7 +59,7 @@ execute_collision(
 			_b
 		)
 	)
-		_a.collision(
+		_a.collide(
 			_b
 		);
 }

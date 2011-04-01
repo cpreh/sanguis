@@ -1,7 +1,12 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_GHOSTS_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_GHOSTS_HPP_INCLUDED
 
+#include "base.hpp"
+#include "../collision/create_parameters_fwd.hpp"
 #include "../collision/ghost_fwd.hpp"
+#include "../collision/ghost_unique_ptr.hpp"
+#include "../center.hpp"
+#include <fcppt/noncopyable.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
 
 namespace sanguis
@@ -13,7 +18,7 @@ namespace entities
 
 class with_ghosts
 :
-	public entities::base
+	public virtual entities::base
 {
 	FCPPT_NONCOPYABLE(
 		with_ghosts
@@ -30,20 +35,24 @@ protected:
 
 	void
 	on_transfer(
-		collision::global_groups const &,
 		collision::create_parameters const &
 	);
 
-	collision::ghost_list &
-	ghosts();
+	void
+	update_center(
+		server::center const &
+	);
 private:
 	virtual void
 	recreate_ghosts(
-		collision::global_groups const &_groups,
 		collision::create_parameters const &_params
 	) = 0;
 
-	collision::ghost_list ghosts_;
+	typedef boost::ptr_list<
+		collision::ghost
+	> ghost_List;
+
+	ghost_list ghosts_;
 };
 
 }

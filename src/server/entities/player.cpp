@@ -76,18 +76,18 @@ sanguis::server::entities::player::player(
 
 void
 sanguis::server::entities::player::add_exp(
-	exp_type const _exp
+	server::exp const _exp
 )
 {
 	exp_ =
-		server::exp_type(
+		server::exp(
 			exp_.get()
 			+ _exp.get()
 		);
 
-	environment()->exp_changed(
-		player_id(),
-		id(),
+	this->environment()->exp_changed(
+		this->player_id(),
+		this->id(),
 		exp_
 	);
 
@@ -111,7 +111,7 @@ sanguis::server::entities::player::add_exp(
 
 	level_ = new_level;
 
-	environment()->level_changed(
+	this->environment()->level_changed(
 		player_id(),
 		id(),
 		level_
@@ -192,8 +192,8 @@ sanguis::server::entities::player::player_id() const
 void
 sanguis::server::entities::player::on_die()
 {
-	environment()->remove_player(
-		player_id()
+	this->environment()->remove_player(
+		this->player_id()
 	);
 }
 
@@ -202,8 +202,8 @@ sanguis::server::entities::player::add_sight_range(
 	entity_id const _entity_id
 )
 {
-	environment()->add_sight_range(
-		player_id(),
+	this->environment()->add_sight_range(
+		this->player_id(),
 		_entity_id
 	);
 }
@@ -213,8 +213,8 @@ sanguis::server::entities::player::remove_sight_range(
 	entity_id const _entity_id
 )
 {
-	environment()->remove_sight_range(
-		player_id(),
+	this->environment()->remove_sight_range(
+		this->player_id(),
 		_entity_id
 	);
 }
@@ -247,13 +247,13 @@ sanguis::server::entities::player::add_message(
 ) const
 {
 	return
-		_receiver == player_id()
+		_receiver == this->player_id()
 		?
-			make_add_message<
+			player::make_add_message<
 				messages::add_own_player
 			>()
 		:
-			make_add_message<
+			player::make_add_message<
 				messages::add_player
 			>();
 }
@@ -274,9 +274,9 @@ sanguis::server::entities::player::on_new_weapon(
 	weapon_type::type const _type
 )
 {
-	environment()->got_weapon(
-		player_id(),
-		id(),
+	this->environment()->got_weapon(
+		this->player_id(),
+		this->id(),
 		_type
 	);
 }
@@ -290,13 +290,13 @@ sanguis::server::entities::player::make_add_message() const
 	return
 		messages::create(
 			Message(
-				id(),
-				pos(),
-				angle(),
-				dim(),
-				abs_speed(),
-				current_health(),
-				max_health()
+				this->id(),
+				this->pos(),
+				this->angle(),
+				this->dim(),
+				this->abs_speed(),
+				this->current_health(),
+				this->max_health()
 			)
 		);
 }

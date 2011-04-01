@@ -4,6 +4,7 @@
 #include "ghost_fwd.hpp"
 #include "body_base_fwd.hpp"
 #include "ghost_parameters_fwd.hpp"
+#include "../center.hpp"
 #include "../dim.hpp"
 #include "../pos.hpp"
 #include <sge/projectile/body/object_fwd.hpp>
@@ -32,6 +33,11 @@ protected:
 	);
 public:
 	virtual ~ghost();
+
+	void
+	center(
+		server::center const &
+	);
 private:
 	void
 	body_enter(

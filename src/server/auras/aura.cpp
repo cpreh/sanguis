@@ -1,8 +1,11 @@
 #include "aura.hpp"
 #include "collision_groups.hpp"
-#include "../entities/base.hpp"
-#include <fcppt/assign/make_container.hpp>
-#include <boost/logic/tribool.hpp>
+#include "../collision/circle_ghost.hpp"
+#include "../collision/ghost_unique_ptr.hpp"
+#include "../entities/with_body.hpp"
+#include <fcppt/tr1/functional.hpp>
+#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/optional_impl.hpp>
 
 sanguis::server::auras::aura::~aura()
 {
@@ -16,24 +19,43 @@ sanguis::server::auras::aura::owner(
 	owner_ = _owner;
 }
 
+sanguis::server::collision::ghost_unique_ptr
+sanguis::server::auras::aura::recreate(
+	collision::ghost_parameters const &_params,
+	server::center const &_center
+)
+{
+	return
+		collision::ghost_unique_ptr(
+			fcppt::make_unique_ptr<
+				collision::circle_ghost
+			>(
+				_params,
+				_center,
+				radius_,
+				std::tr1::bind(
+					&aura::on_body_enter,
+					this,
+					std::tr1::placeholders::_1
+				),
+				std::tr1::bind(
+					&aura::on_body_exit,
+					this,
+					std::tr1::placeholders::_1
+				)
+			)
+		);
+}
+
 sanguis::server::auras::aura::aura(
 	space_unit const _radius,
 	team::type const _team,
 	influence::type const _influence
 )
 :
-	collision::circular_ghost(
-		_radius
-	),
 	team_(_team),
 	influence_(_influence),
-	owner_(
-		static_cast<
-			entity_id
-		>(
-			-1
-		)
-	) // will also be set later
+	owner_()
 {
 }
 
@@ -53,32 +75,14 @@ sanguis::server::auras::aura::collision_groups() const
 		);
 }
 
-boost::logic::tribool const
-sanguis::server::auras::aura::can_collide_with(
-	collision::base const &_object
-) const
-{
-	entities::base const *const entity(
-		dynamic_cast<
-			entities::base const *
-		>(
-			&_object
-		)
-	);
-
-	return
-		entity
-		&& !entity->server_only();
-}
-
 void
 sanguis::server::auras::aura::collision_begin(
-	collision::base &_base
+	collsion::body_base &_base
 )
 {
 	this->enter(
 		dynamic_cast<
-			entities::base &
+			entities::with_body &
 		>(
 			_base
 		)
@@ -87,12 +91,12 @@ sanguis::server::auras::aura::collision_begin(
 
 void
 sanguis::server::auras::aura::collision_end(
-	collision::base &_base
+	collsion::body_base &_base
 )
 {
 	this->leave(
 		dynamic_cast<
-			entities::base &
+			entities::with_body &
 		>(
 			_base
 		)

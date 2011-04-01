@@ -2,17 +2,15 @@
 #define SANGUIS_SERVER_AURAS_AURA_HPP_INCLUDED
 
 #include "influence.hpp"
-#include "../pos_type.hpp"
-#include "../space_unit.hpp"
-#include "../entities/base_fwd.hpp"
-#include "../collision/ghost_base.hpp"
+#include "../radius.hpp"
+#include "../entities/with_body_fwd.hpp"
+#include "../collision/body_base_fwd.hpp"
 #include "../collision/ghost_unique_ptr.hpp"
 #include "../collision/group_vector.hpp"
-#include "../collision/global_groups_fwd.hpp"
 #include "../team.hpp"
 #include "../../entity_id.hpp"
-#include <sge/projectile/world_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/optional_decl.hpp>
 
 namespace sanguis
 {
@@ -33,23 +31,23 @@ public:
 	owner(
 		entity_id
 	);
+
+	collision::ghost_unique_ptr
+	recreate(
+		collision::ghost_parameters const &
+	);
 protected:
 	aura(
-		space_unit radius,
-		team::type,
-		influence::type
+		server::radius,
+		server::team::type,
+		auras::influence::type
 	);
 	
-	entity_id
+	sanguis::entity_id
 	owner() const;
 private:
 	virtual collision::group_vector const
 	collision_groups() const;
-
-	boost::logic::tribool const
-	can_collide_with(
-		collision::body_base const &
-	) const;
 
 	void
 	collision_begin(
@@ -63,27 +61,23 @@ private:
 
 	virtual void
 	enter(
-		entities::base &
+		entities::with_body &
 	) = 0;
 
 	virtual void
 	leave(
-		entities::base &
+		entities::with_body &
 	) = 0;
 
-	space_unit const radius_;
+	server::team::type const team_;
 
-	team::type const team_;
+	auras::influence::type const influence_;
 
-	influence::type const influence_;
+	typedef fcppt::optional<
+		sanguis::entity_id
+	> optional_entity_id;
 
-	entity_id owner_;
-
-	typedef fcppt::scoped_ptr<
-		collision::ghost
-	> ghost_scoped_ptr;
-
-	ghost_scoped_ptr ghost_;
+	optional_entity_id owner_;
 };
 
 }

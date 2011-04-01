@@ -5,9 +5,10 @@
 #include "auto_weak_link.hpp"
 #include "insert_parameters_fwd.hpp"
 #include "link_container.hpp"
-#include "../pos.hpp"
+#include "../center.hpp"
 #include "../player_id.hpp"
 #include "../space_unit.hpp"
+#include "../speed.hpp"
 #include "../team.hpp"
 #include "../collision/global_groups_fwd.hpp"
 #include "../environment/object_fwd.hpp"
@@ -15,8 +16,6 @@
 #include "../../entity_id.hpp"
 #include "../../entity_type.hpp"
 #include "../../time_type.hpp"
-#include <sge/projectile/shape/base_ptr.hpp>
-#include <sge/projectile/world_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -40,7 +39,7 @@ public:
 	transfer(
 		server::environment::object &,
 		collision::global_groups const &,
-		insert_parameters const &
+		entities::insert_parameters const &
 	);
 
 	void
@@ -89,13 +88,8 @@ public:
 		server::space_unit
 	);
 
-	server::pos const
-	center() const;
-
-	void
-	center(
-		server::pos const &
-	);
+	virtual server::center const
+	center() const = 0;
 
 	virtual bool
 	server_only() const;
@@ -133,17 +127,11 @@ private:
 	on_die();
 
 	virtual void
-	on_center(
-		server::pos const &
-	);
-
-	virtual void
 	on_transfer(
-		collision::global_groups const &,
 		collision::create_parameters const &
 	);
 
-	virtual server::pos const
+	virtual server::speed const
 	initial_direction() const;
 
 	friend class auto_weak_link;

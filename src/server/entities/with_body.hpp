@@ -2,8 +2,13 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_BODY_HPP_INCLUDED
 
 #include "base.hpp"
+#include "with_ghosts.hpp"
+#include "../collision/body_base.hpp"
 #include "../collision/body_fwd.hpp"
-#include "../../time_type.hpp"
+#include "../collision/create_parameters_fwd.hpp"
+#include "../center.hpp"
+#include <sge/projectile/shapes/base_ptr.hpp>
+#include <sge/projectile/world_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
 
@@ -16,7 +21,8 @@ namespace entities
 
 class with_body
 :
-	public entities::with_ghosts
+	public entities::with_ghosts,
+	public collision::body_base
 {
 	FCPPT_NONCOPYABLE(
 		with_body
@@ -27,20 +33,22 @@ public:
 	~with_body();
 
 	// entities::base overridden functions
+	server::center const
+	center() const;
+
 	void
-	on_update(
-		sanguis::time_type
+	center(
+		server::center const &
 	);
 prviate:
 	void
 	on_transfer(
-		collision::global_groups const &,
 		collision::create_parameters const &
 	);
 
-	virtual void
-	on_center(
-		server::pos const &
+	void
+	on_position_change(
+		server::center const &
 	);
 
 	// own virtual functions

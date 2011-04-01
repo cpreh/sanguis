@@ -1,10 +1,12 @@
 #include "body.hpp"
 #include "create_parameters.hpp"
-#include "from_sge_pos.hpp"
+#include "from_sge_vector.hpp"
 #include "ghost_parameters.hpp"
 #include "global_groups.hpp"
 #include "to_sge_vector.hpp"
 #include "to_sge_user_data.hpp"
+#include "../center.hpp"
+#include "../speed.hpp"
 #include <sge/projectile/body/object.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
@@ -14,11 +16,10 @@
 sanguis::server::collision::body::body(
 	sge::projectile::world &_world,
 	collision::create_parameters const &_create_param,
-	collision::global_groups const &_global_groups,
 	collision::group_vector const &_collision_groups,
 	collision::shape_unique_ptr _shape,
 	collision::solidity const &_solidity,
-	collision::ghost_reference_vector const &_ghost_references
+	collision::position_callback const &_position_callback
 )
 :
 	body_(
@@ -40,14 +41,16 @@ sanguis::server::collision::body::body(
 				sge::projectile::body::angular_velocity(
 					0.f
 				),
-				_shape,
+				move(
+					_shape
+				),
 				sge::projectile::body::rotation(
 					0.f
 				),
 				_solidty.get(),
 				collision::make_groups(
 					_collision_groups,
-					_global_groups
+					_create_params.global_groups()
 				),
 				collision::to_sge_user_data(
 					_create_param.user_data()
@@ -55,16 +58,18 @@ sanguis::server::collision::body::body(
 			)
 		)
 	),
-	position_change_connection_(
+	position_callback_(
+		_position_callback
+	),
+	position_connection_(
 		body_->position_change(
 			std::tr1::bind(
-				&collision::body::on_pos_change,
+				&collision::body::on_position_change,
 				this,
 				std::tr1::placeholders::_1
 			)
 		)
-	),
-	ghosts_references_(_ghost_references)
+	)
 {
 }
 
@@ -73,50 +78,52 @@ sanguis::server::collision::body::~body()
 }
 
 void
-sanguis::server::collision::body::body_pos(
-	server::pos const &_pos
+sanguis::server::collision::body::center(
+	server::center const &_center
 )
 {
 	body_->position(
-		collision::to_sge_pos(
-			_pos
+		sge::projectile::body::position(
+			collision::to_sge_vector(
+				_center.get()
+			)
 		)
 	);
-
-	// TODO: on_position_change here?
 }
 
-sanguis::server::pos const
-sanguis::server::collision::body::body_pos() const
+sanguis::server::center const
+sanguis::server::collision::body::center() const
 {
 	return
-		collision::from_sge_pos(
-			body_->position()
+		server::center(
+			collision::from_sge_vector(
+				body_->position().get()
+			)
 		);
 }
 
 void
-sanguis::server::collision::body::body_speed(
-	server::pos const &_speed
+sanguis::server::collision::body::speed(
+	server::speed const &_speed
 )
 {
 	body_->linear_velocity(
 		sge::projectile::body::linear_velocity(
-			collision::to_sge_pos(
+			collision::to_sge_vector(
 				_speed
 			)
 		)
 	);
 }
 
-sanguis::server::pos_type const
-sanguis::server::collision::body::body_speed() const
+sanguis::server::speed const
+sanguis::server::collision::body::speed() const
 {
 	return
-		fcppt::math::vector::narrow_cast<
-			server::pos
-		>(
-			body_->linear_velocity()
+		server::speed(
+			collision::from_sge_vector(
+				body_->linear_velocity().get()
+			)
 		);
 }
 
@@ -125,11 +132,11 @@ sanguis::server::collision::body::on_position_change(
 	sge::projectile::body::position const &_position
 )
 {
-	BOOST_FOREACH(
-		collision::ghost_reference_vector::value_type ghost,
-		ghosts_references_
-	)
-		ghost.get().position(
-			_postion
-		);
+	position_callback_(
+		server::center(
+			collision::from_sge_vector(
+				_position.get()
+			)
+		)
+	);
 }

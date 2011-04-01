@@ -3,7 +3,11 @@
 
 #include "ghost.hpp"
 #include "ghost_parameters_fwd.hpp"
-#include "../space_unit.hpp"
+#include "body_enter_callback.hpp"
+#include "body_exit_callback.hpp"
+#include "../center.hpp"
+#include "../radius.hpp"
+#include <fcppt/function/object.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -23,8 +27,10 @@ class circle_ghost
 protected:
 	circle_ghost(
 		collision::ghost_parameters const &,
-		server::pos const &center,
-		server::space_unit radius
+		server::center const &,
+		server::radius,
+		collision::body_enter_callback const &,
+		collision::body_exit_callback const &
 	);
 public:
 	virtual ~circle_ghost();
@@ -39,7 +45,11 @@ private:
 		sge::projectile::body::object const &
 	);
 
-	server::space_unit const radius_;
+	server::radius const radius_;
+
+	collision::body_enter_callback const body_enter_callback_;
+
+	collision::body_exi_callback const body_exit_callback_;
 };
 
 }

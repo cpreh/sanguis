@@ -39,7 +39,6 @@ protected:
 private:
 	void
 	on_transfer(
-		collision::global_groups const &,
 		collision::create_parameters const &
 	);
 
