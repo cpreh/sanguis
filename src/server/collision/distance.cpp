@@ -20,7 +20,7 @@ sanguis::server::collision::distance(
 sanguis::server::space_unit
 sanguis::server::collision::distance(
 	entities::base const &_a,
-	server::pos const &_b
+	server::center const &_b
 )
 {
 	return
@@ -32,12 +32,13 @@ sanguis::server::collision::distance(
 
 sanguis::server::space_unit
 sanguis::server::collision::distance(
-	server::pos const &_a,
-	server::pos const &_b
+	server::center const &_a,
+	server::center const &_b
 )
 {
 	return
 		fcppt::math::vector::length(
-			_a - _b
+			_a.get()
+			- _b.get()
 		);
 }

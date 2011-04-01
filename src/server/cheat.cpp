@@ -8,15 +8,19 @@
 
 void
 sanguis::server::cheat(
-	entities::player &p,
-	cheat_type::type const type
+	entities::player &_player,
+	cheat_type::type const _type
 )
 {
-	switch(type)
+	switch(
+		_type
+	)
 	{
 	case cheat_type::exp:
-		p.add_exp(
-			static_cast<exp_type>(100000)
+		_player.add_exp(
+			server::exp(
+				100000
+			)
 		);
 		return;
 	case cheat_type::impulse101:
@@ -30,24 +34,20 @@ sanguis::server::cheat(
 				weapon_type,
 				weapon_type::pistol
 			)
-				p.add_weapon(
+				_player.add_weapon(
 					weapons::create(
-						static_cast<
-							weapon_type::type
-						>(
-							index
-						)
+						index
 					)
 				);
 		return;
 	case cheat_type::kill:
-		p.die();
+		_player.die();
 		return;
 	case cheat_type::size:
 		break;
 	}
 
-	throw exception(
+	throw sanguis::exception(
 		FCPPT_TEXT("Invalid cheat type!")
 	);
 }

@@ -5,11 +5,12 @@
 #include "auto_weak_link.hpp"
 #include "insert_parameters_fwd.hpp"
 #include "link_container.hpp"
+#include "../angle.hpp"
 #include "../center.hpp"
 #include "../player_id.hpp"
-#include "../space_unit.hpp"
 #include "../speed.hpp"
 #include "../team.hpp"
+#include "../collision/create_parameters_fwd.hpp"
 #include "../collision/global_groups_fwd.hpp"
 #include "../environment/object_fwd.hpp"
 #include "../../messages/auto_ptr.hpp"
@@ -65,7 +66,7 @@ public:
 
 	// environment query function // TODO: should this be public?
 	
-	server::environment::object_ptr const
+	server::environment::object &
 	environment() const;
 
 	bool
@@ -80,12 +81,12 @@ public:
 
 	// position and size functions
 
-	server::space_unit
+	server::angle const
 	angle() const;
 
 	void
 	angle(
-		server::space_unit
+		server::angle
 	);
 
 	virtual server::center const
@@ -145,7 +146,7 @@ private:
 
 	entity_id const id_;
 
-	space_unit angle_;
+	server::angle angle_;
 
 	bool processed_;
 	

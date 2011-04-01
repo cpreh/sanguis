@@ -2,13 +2,14 @@
 #include "../buffs/burn.hpp"
 #include "../buffs/unique_ptr.hpp"
 #include "../entities/with_buffs.hpp"
+#include "../entities/with_body.hpp"
 #include <fcppt/make_unique_ptr.hpp>
 
 sanguis::server::auras::burn::burn(
-	space_unit const _radius,
-	team::type const _team,
+	server::radius const _radius,
+	server::team::type const _team,
 	damage::unit const _damage_per_pulse,
-	time_type const _pulse_diff,
+	sanguis::time_type const _pulse_diff,
 	damage::array const &_damage_values
 )
 :
@@ -30,7 +31,7 @@ sanguis::server::auras::burn::~burn()
 
 void
 sanguis::server::auras::burn::enter(
-	entities::base &_entity
+	entities::with_body &_entity
 )
 {
 	provider_.add(
@@ -54,7 +55,7 @@ sanguis::server::auras::burn::enter(
 
 void
 sanguis::server::auras::burn::leave(
-	entities::base &_entity
+	entities::with_body &_entity
 )
 {
 	provider_.remove(

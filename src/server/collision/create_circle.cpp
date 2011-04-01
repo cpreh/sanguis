@@ -1,16 +1,16 @@
 #include "create_circle.hpp"
-#include <sge/projectile/shapes/circle.hpp>
+#include <sge/projectile/shape/circle.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 
-sge::projectile::shapes::base_ptr const
+sge::projectile::shape::shared_base_ptr const
 sanguis::server::collision::create_circle(
-	server::space_unit const _radius
+	server::radius const _radius
 )
 {
 	return
 		fcppt::make_shared_ptr<
-			sge::projectile::shapes::circle
+			sge::projectile::shape::circle
 		>(
-			_radius
+			_radius.get()
 		);
 }

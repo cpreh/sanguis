@@ -6,8 +6,7 @@
 #include "property/changeable.hpp"
 #include "property/always_max.hpp"
 #include "property/value.hpp"
-#include "health_type.hpp"
-#include "../health_type.hpp"
+#include "../health.hpp"
 #include "../damage/unit.hpp"
 #include "../damage/array.hpp"
 #include "../damage/armor.hpp"
@@ -41,14 +40,14 @@ public:
 	property::always_max &
 	regeneration();
 
-	server::health_type
+	server::health const
 	current_health() const;
 
-	server::health_type
+	server::health const
 	max_health() const;
 protected:
 	with_health(
-		entities::health_type max_health,
+		server::health max,
 		damage::armor const &
 	);
 
@@ -61,9 +60,6 @@ protected:
 private:
 	bool
 	dead() const;
-
-	bool
-	invulnerable() const;
 
 	void
 	max_health_change(

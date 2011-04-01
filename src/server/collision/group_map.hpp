@@ -3,7 +3,7 @@
 
 #include "group.hpp"
 #include <sge/projectile/group/object_fwd.hpp>
-#include <boost/ptr_container/ptr_vector.hpp>
+#include <boost/ptr_container/ptr_map.hpp>
 
 namespace sanguis
 {
@@ -12,7 +12,7 @@ namespace server
 namespace collision
 {
 
-typedef boost::ptr_vector<
+typedef boost::ptr_map<
 	collision::group::type,
 	sge::projectile::group::object
 > group_map;

@@ -3,9 +3,11 @@
 
 #include "base.hpp"
 #include "entity_map.hpp"
-#include "../entities/with_ai_fwd.hpp"
 #include "../entities/auto_weak_link.hpp"
+#include "../entities/with_ai_fwd.hpp"
+#include "../entities/with_body_fwd.hpp"
 #include "../../diff_clock.hpp"
+#include "../../time_type.hpp"
 #include <sge/time/timer.hpp>
 #include <fcppt/container/map_decl.hpp>
 
@@ -18,7 +20,7 @@ namespace ai
 
 class simple
 :
-	public base 
+	public ai::base 
 {
 public:
 	simple(
@@ -35,12 +37,12 @@ private:
 
 	void
 	target_enters(
-		entities::base &
+		entities::with_body &
 	);
 
 	void
 	target_leaves(
-		entities::base &
+		entities::with_body &
 	);
 
 	diff_clock diff_clock_;

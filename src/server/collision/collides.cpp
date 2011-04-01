@@ -24,7 +24,7 @@ sanguis::server::collision::collides(
 bool
 sanguis::server::collision::collides(
 	entities::base const &_entity,
-	circle_type const &_circle
+	server::circle const &_circle
 )
 {
 	return
@@ -32,6 +32,6 @@ sanguis::server::collision::collides(
 			collision::bounding_circle(
 				_entity
 			),
-			_circle	
+			_circle
 		);
 }

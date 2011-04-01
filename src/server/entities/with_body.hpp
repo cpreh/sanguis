@@ -1,13 +1,14 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_BODY_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_BODY_HPP_INCLUDED
 
-#include "base.hpp"
+#include "with_body_fwd.hpp"
 #include "with_ghosts.hpp"
 #include "../collision/body_base.hpp"
 #include "../collision/body_fwd.hpp"
 #include "../collision/create_parameters_fwd.hpp"
 #include "../center.hpp"
-#include <sge/projectile/shapes/base_ptr.hpp>
+#include "../speed.hpp"
+#include <sge/projectile/shape/shared_base_ptr.hpp>
 #include <sge/projectile/world_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
@@ -40,7 +41,12 @@ public:
 	center(
 		server::center const &
 	);
-prviate:
+
+	void
+	speed(
+		server::speed const &
+	);
+private:
 	void
 	on_transfer(
 		collision::create_parameters const &
@@ -52,9 +58,9 @@ prviate:
 	);
 
 	// own virtual functions
-	virtual sge::projectile::shapes::base_ptr const
+	virtual sge::projectile::shape::shared_base_ptr const
 	recreate_shape(
-		sge::collision::world &
+		sge::projectile::world &
 	) = 0;
 
 	typedef fcppt::scoped_ptr<

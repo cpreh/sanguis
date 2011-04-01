@@ -39,30 +39,34 @@ sanguis::server::entities::with_health::regeneration()
 	return regeneration_;
 }
 
-sanguis::server::health_type
+sanguis::server::health const
 sanguis::server::entities::with_health::current_health() const
 {
 	return
-		property::to_float<
-			server::health_type
-		>(
-			health_.current()
+		server::health(
+			property::to_float<
+				server::health::value_type
+			>(
+				health_.current()
+			)
 		);
 }
 
-sanguis::server::health_type
+sanguis::server::health const
 sanguis::server::entities::with_health::max_health() const
 {
 	return
-		property::to_float<
-			server::health_type
-		>(
-			health_.max()
+		server::health(
+			property::to_float<
+				server::health::value_type
+			>(
+				health_.max()
+			)
 		);
 }
 
 sanguis::server::entities::with_health::with_health(
-	entities::health_type const _max_health,
+	server::health const _max_health,
 	damage::armor const &_armor
 )
 :
@@ -103,7 +107,7 @@ sanguis::server::entities::with_health::on_update(
 		property::from_float(
 			_time
 		)
-		* regeneration().current()
+		* this->regeneration().current()
 	);
 }
 
@@ -113,23 +117,19 @@ sanguis::server::entities::with_health::dead() const
 	return health_.current() <= 0;
 }
 
-bool
-sanguis::server::entities::with_health::invulnerable() const
-{
-	return false;
-}
-
 void
 sanguis::server::entities::with_health::max_health_change(
 	property::value const _value
 )
 {
-	environment()->max_health_changed(
-		id(),
-		property::to_float<
-			server::health_type
-		>(
-			_value
+	this->environment()->max_health_changed(
+		this->id(),
+		server::health(
+			property::to_float<
+				server::health::value_type
+			>(
+				_value
+			)
 		)
 	);
 }

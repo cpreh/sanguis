@@ -2,7 +2,8 @@
 #define SANGUIS_SERVER_AURAS_AGGRO_HPP_INCLUDED
 
 #include "aura.hpp"
-#include "../space_unit.hpp"
+#include "../entities/with_body_fwd.hpp"
+#include "../radius.hpp"
 #include "../team.hpp"
 #include "../update_target_function.hpp"
 #include <fcppt/function/object.hpp>
@@ -24,22 +25,22 @@ class aggro
 	);
 public:
 	aggro(
-		space_unit radius,
-		team::type,
-		update_target_function const &add_target,
-		update_target_function const &remove_target
+		server::radius,
+		server::team::type,
+		server::update_target_function const &add_target,
+		server::update_target_function const &remove_target
 	);
 
 	~aggro();
 private:
 	void
 	enter(
-		entities::base &target
+		entities::with_body &
 	);
 
 	void
 	leave(
-		entities::base &target
+		entities::with_body &
 	);
 
 	update_target_function const

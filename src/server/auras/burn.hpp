@@ -5,7 +5,8 @@
 #include "../buffs/provider.hpp"
 #include "../damage/array.hpp"
 #include "../damage/unit.hpp"
-#include "../space_unit.hpp"
+#include "../entities/with_body_fwd.hpp"
+#include "../radius.hpp"
 #include "../../time_type.hpp"
 #include <fcppt/noncopyable.hpp>
 
@@ -25,10 +26,10 @@ class burn
 	);
 public:
 	burn(
-		space_unit radius,
-		team::type team,
+		server::radius,
+		server::team::type team,
 		damage::unit damage_per_pules,
-		time_type pulse_diff,
+		sanguis::time_type pulse_diff,
 		damage::array const &
 	);
 
@@ -36,15 +37,15 @@ public:
 private:
 	void
 	enter(
-		entities::base &target
+		entities::with_body &
 	);
 
 	void
 	leave(
-		entities::base &target
+		entities::with_body &
 	);
 	
-	time_type const pulse_diff_;
+	sanguis::time_type const pulse_diff_;
 
 	damage::unit const damage_per_pulse_;
 

@@ -7,7 +7,7 @@
 
 sanguis::server::collision::circle_ghost::circle_ghost(
 	collision::ghost_parameters const &_params,
-	server::pos const &_center,
+	server::center const &_center,
 	server::radius const _radius,
 	collision::body_enter_callback const &_body_enter_callback,
 	collision::body_exit_callback const &_body_exit_callback
@@ -15,15 +15,18 @@ sanguis::server::collision::circle_ghost::circle_ghost(
 :
 	collision::ghost(
 		_params,
-		_center
-		- server::dim(
-			_radius.get(),
-			_radius.get()
+		// TODO: move somewhere else
+		server::pos(
+			_center.get()
+			- server::dim(
+				_radius.get(),
+				_radius.get()
+			)
 		),
 		server::dim(
 			_radius.get(),
 			_radius.get()
-		) * 2
+		) * 2.f
 	),
 	radius_(_radius),
 	body_enter_callback_(_body_enter_callback),
@@ -37,7 +40,7 @@ sanguis::server::collision::circle_ghost::~circle_ghost()
 
 void
 sanguis::server::collision::circle_ghost::on_body_enter(
-	sge::projectile::body::object const &_body
+	collision::body_base &_body
 )
 {
 	// TODO: track objects here and emit body_enter only if they enter the circle
@@ -48,7 +51,7 @@ sanguis::server::collision::circle_ghost::on_body_enter(
 
 void
 sanguis::server::collision::circle_ghost::on_body_exit(
-	sge::projectile::body::object const &_body
+	collision::body_base &_body
 )
 {
 	body_exit_callback_(

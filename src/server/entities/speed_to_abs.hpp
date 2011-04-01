@@ -2,8 +2,8 @@
 #define SANGUIS_SERVER_ENTITIES_SPEED_TO_ABS_HPP_INCLUDED
 
 #include "property/value.hpp"
-#include "../space_unit.hpp"
-#include "../pos_type.hpp"
+#include "../direction.hpp"
+#include "../speed.hpp"
 
 namespace sanguis
 {
@@ -12,9 +12,9 @@ namespace server
 namespace entities
 {
 
-pos_type const
+server::speed const
 speed_to_abs(
-	space_unit direction,
+	server::direction,
 	property::value
 );
 

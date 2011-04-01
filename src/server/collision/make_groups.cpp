@@ -19,7 +19,7 @@ sanguis::server::collision::make_groups(
 	)
 		ret.push_back(
 			fcppt::ref(
-				_global_groups->group(
+				_global_groups.group(
 					*it
 				)
 			)

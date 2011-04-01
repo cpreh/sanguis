@@ -50,7 +50,7 @@ private:
 
 	typedef boost::ptr_list<
 		collision::ghost
-	> ghost_List;
+	> ghost_list;
 
 	ghost_list ghosts_;
 };

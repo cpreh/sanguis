@@ -10,8 +10,8 @@ namespace
 
 void
 execute_collision(
-	sanguis::server::collision::base &,
-	sanguis::server::collision::base &
+	sanguis::server::collision::body_base &,
+	sanguis::server::collision::body_base &
 );
 
 }
@@ -59,7 +59,7 @@ execute_collision(
 			_b
 		)
 	)
-		_a.collide(
+		_a.collision(
 			_b
 		);
 }

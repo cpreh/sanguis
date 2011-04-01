@@ -1,9 +1,8 @@
 #include "aggro.hpp"
-#include <fcppt/assign/make_container.hpp>
 
 sanguis::server::auras::aggro::aggro(
-	space_unit const _radius,
-	team::type const _team,
+	server::radius const _radius,
+	server::team::type const _team,
 	update_target_function const &_add_target,
 	update_target_function const &_remove_target
 )
@@ -28,7 +27,7 @@ sanguis::server::auras::aggro::~aggro()
 
 void
 sanguis::server::auras::aggro::enter(
-	entities::base &_target
+	entities::with_body &_target
 )
 {
 	add_target_(
@@ -38,7 +37,7 @@ sanguis::server::auras::aggro::enter(
 
 void
 sanguis::server::auras::aggro::leave(
-	entities::base &_target
+	entities::with_body &_target
 )
 {
 	remove_target_(

@@ -10,18 +10,8 @@
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
-#include <limits>
-
-namespace
-{
-
-sanguis::server::pos_type const
-target_undefined(
-	std::numeric_limits<sanguis::server::space_unit>::max(),
-	std::numeric_limits<sanguis::server::space_unit>::max());
-
-}
 
 sanguis::server::entities::with_weapon::with_weapon(
 	weapons::unique_ptr _start_weapon
@@ -29,7 +19,7 @@ sanguis::server::entities::with_weapon::with_weapon(
 :
 	base(),
 	weapon_(weapon_type::none),
-	target_(target_undefined),
+	target_(),
 	attacking_(false),
 	reloading_(false),
 	attack_ready_(false),
@@ -99,9 +89,9 @@ sanguis::server::entities::with_weapon::on_update(
 		);
 
 	bool const in_range_(
-		target_ != target_undefined
+		target_
 		&& this->in_range(
-			target_
+			*target_
 		)
 	);
 
@@ -123,7 +113,7 @@ sanguis::server::entities::with_weapon::on_update(
 	)
 		this->active_weapon().attack(
 			*this,
-			target_
+			*target_
 		);
 }
 
@@ -253,7 +243,7 @@ sanguis::server::entities::with_weapon::remove_weapon(
 
 void
 sanguis::server::entities::with_weapon::target(
-	pos_type const &_target
+	server::center const &_target
 )
 {
 	target_ = _target;

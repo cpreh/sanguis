@@ -3,9 +3,8 @@
 
 #include "ghost_parameters_fwd.hpp"
 #include "global_groups_fwd.hpp"
-#include "../pos.hpp"
+#include "group_vector.hpp"
 #include <sge/projectile/world_fwd.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/nonassignable.hpp>
 
 namespace sanguis

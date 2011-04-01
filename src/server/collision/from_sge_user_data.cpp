@@ -8,8 +8,10 @@ sanguis::server::collision::from_sge_user_data(
 {
 	return
 		collision::user_data(
-			_any.get<
+			*boost::any_cast<
 				collision::body_base *
-			>()
+			>(
+				_any
+			)
 		);
 }

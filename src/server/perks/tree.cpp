@@ -88,7 +88,7 @@ sanguis::server::perks::tree::~tree()
 bool
 sanguis::server::perks::tree::choosable(
 	perk_type::type const _perk,
-	server::level_type const _player_level
+	server::level const _player_level
 ) const
 {
 	if(
@@ -195,7 +195,7 @@ sanguis::server::perks::tree::take(
 
 sanguis::server::perks::list const
 sanguis::server::perks::tree::choosables(
-	server::level_type const _player_level
+	server::level const _player_level
 ) const
 {
 	// TODO: very wasteful but easy

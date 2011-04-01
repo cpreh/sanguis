@@ -2,9 +2,10 @@
 #define SANGUIS_SERVER_AURAS_UPDATE_SIGHT_HPP_INCLUDED
 
 #include "aura.hpp"
-#include "../space_unit.hpp"
+#include "../collision/group_vector.hpp"
+#include "../entities/with_body_fwd.hpp"
+#include "../radius.hpp"
 #include "../update_sight_function.hpp"
-#include "../entities/base_fwd.hpp"
 #include <fcppt/function/object.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -24,7 +25,7 @@ class update_sight
 	);
 public:
 	update_sight(
-		space_unit radius,
+		server::radius,
 		update_sight_function const &enter,
 		update_sight_function const &leave
 	);
@@ -36,12 +37,12 @@ private:
 
 	void
 	enter(
-		entities::base &target
+		entities::with_body &
 	);
 
 	void
 	leave(
-		entities::base &target
+		entities::with_body &
 	);
 
 	update_sight_function const

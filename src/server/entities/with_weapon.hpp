@@ -5,12 +5,13 @@
 #include "property/always_max.hpp"
 #include "property/value.hpp"
 #include "../weapons/unique_ptr.hpp"
-#include "../pos_type.hpp"
+#include "../center.hpp"
 #include "../../weapon_type.hpp"
 #include "../../time_type.hpp"
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/optional_decl.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
 
 namespace sanguis
@@ -56,12 +57,12 @@ public:
 
 	void
 	target(
-		pos_type const &
+		server::center const &
 	);
 
 	bool
 	in_range(
-		pos_type const &
+		server::center const &
 	) const;
 
 	bool
@@ -122,7 +123,11 @@ private:
 
 	weapon_type::type weapon_;
 
-	pos_type target_;
+	typedef fcppt::optional<
+		server::center
+	> optional_center;
+
+	optional_center target_;
 
 	bool
 		attacking_,

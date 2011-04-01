@@ -2,12 +2,14 @@
 #include "search_new_target.hpp"
 #include "../auras/aggro.hpp"
 #include "../auras/unique_ptr.hpp"
-#include "../entities/with_ai.hpp"
 #include "../entities/movable.hpp"
-#include "../entities/base.hpp"
+#include "../entities/with_ai.hpp"
+#include "../entities/with_body.hpp"
+#include "../entities/with_health.hpp"
 #include "../entities/property/current_to_max.hpp"
 #include "../collision/collides.hpp"
 #include "../collision/distance.hpp"
+#include "../vector.hpp"
 #include <sge/time/second.hpp>
 #include <fcppt/math/vector/signed_angle_cast.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -42,7 +44,9 @@ sanguis::server::ai::simple::simple(
 			fcppt::make_unique_ptr<
 				auras::aggro
 			>(
-				1000, // TODO
+				server::radius(
+					1000.f // TODO
+				),
 				me_.team(),
 				std::tr1::bind(
 					&simple::target_enters,
@@ -60,7 +64,8 @@ sanguis::server::ai::simple::simple(
 }
 
 sanguis::server::ai::simple::~simple()
-{}
+{
+}
 
 // TODO: move this!
 
@@ -73,18 +78,18 @@ sanguis::server::ai::simple::~simple()
 namespace
 {
 
-sanguis::server::pos_type
+sanguis::server::vector const
 make_vector_from_angle(
-	sanguis::server::space_unit const angle
+	sanguis::server::space_unit const _angle
 )
 {
 	return
-		sanguis::server::pos_type(
+		sanguis::server::vector(
 			std::cos(
-				angle
+				_angle
 			),
 			std::sin(
-				angle
+				_angle
 			)
 		);
 }
@@ -106,8 +111,6 @@ sanguis::server::ai::simple::update(
 		target_
 			= search_new_target(
 				me_,
-				entities::auto_weak_link(),
-				//owner_,
 				potential_targets_
 			);
 
@@ -153,7 +156,9 @@ sanguis::server::ai::simple::update(
 		fcppt::random::make_inclusive_range(
 			static_cast<
 				space_unit
-			>(0),
+			>(
+				0
+			),
 			fcppt::math::twopi<
 				space_unit
 			>()
@@ -173,8 +178,8 @@ sanguis::server::ai::simple::update(
 		)
 	);
 
-	pos_type const fuzzy_target(
-		target_->center()
+	server::vector const fuzzy_target(
+		target_->center().get()
 		+
 		make_vector_from_angle(
 			rng()
@@ -183,18 +188,18 @@ sanguis::server::ai::simple::update(
 	);
 
 	typedef fcppt::optional<
-		space_unit
+		server::space_unit
 	> optional_angle;
 	
 	optional_angle const angle(
-		fuzzy_target == me_.center()
+		fuzzy_target == me_.center().get()
 		?
 			optional_angle()
 		:
 			fcppt::math::vector::signed_angle_cast<
 				space_unit
 			>(
-				me_.center(),
+				me_.center().get(),
 				fuzzy_target
 			)
 	);
@@ -203,7 +208,9 @@ sanguis::server::ai::simple::update(
 		angle
 	)
 		me_.angle(
-			*angle
+			server::angle(
+				*angle
+			)
 		);
 
 	FCPPT_TRY_DYNAMIC_CAST(
@@ -220,7 +227,9 @@ sanguis::server::ai::simple::update(
 			angle
 		)
 			movable->direction(
-				*angle
+				server::direction(
+					*angle
+				)
 			);
 	
 		// don't walk into the enemy
@@ -243,14 +252,27 @@ sanguis::server::ai::simple::update(
 
 void
 sanguis::server::ai::simple::target_enters(
-	entities::base &_new_target
+	entities::with_body &_new_target
 )
 {
+	entities::with_health *const with_health(
+		dynamic_cast<
+			entities::with_health *
+		>(
+			&_new_target
+		)
+	);
+
+	if(
+		!with_health
+	)
+		return;
+
 	potential_targets_.insert(
 		_new_target.id(),
-		_new_target.link()
+		with_health
 	);
-		
+
 	if(
 		target_
 	)
@@ -277,7 +299,7 @@ sanguis::server::ai::simple::target_enters(
 
 void
 sanguis::server::ai::simple::target_leaves(
-	entities::base &_old_target
+	entities::with_body &_old_target
 )
 {
 	potential_targets_.erase(

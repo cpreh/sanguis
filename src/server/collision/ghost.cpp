@@ -1,8 +1,11 @@
 #include "ghost.hpp"
+#include "from_sge_user_data.hpp"
 #include "ghost_parameters.hpp"
 #include "make_groups.hpp"
+#include "user_data.hpp"
 #include "to_sge_dim.hpp"
-#include "to_sge_pos.hpp"
+#include "to_sge_vector.hpp"
+#include <sge/projectile/body/object.hpp>
 #include <sge/projectile/ghost/object.hpp>
 #include <sge/projectile/ghost/parameters.hpp>
 #include <fcppt/tr1/functional.hpp>
@@ -20,9 +23,9 @@ sanguis::server::collision::ghost::ghost(
 		>(
 			sge::projectile::ghost::parameters(
 				_params.world(),
-				sge::projectile::ghost::pos(
-					collision::to_sge_pos(
-						_pos
+				sge::projectile::ghost::position(
+					collision::to_sge_vector(
+						_pos.get()
 					)
 				),
 				sge::projectile::ghost::size(
@@ -71,7 +74,7 @@ sanguis::server::collision::ghost::body_enter(
 	this->on_body_enter(
 		collision::from_sge_user_data(
 			_body.user_data()
-		)
+		).get()
 	);
 }
 
@@ -83,6 +86,6 @@ sanguis::server::collision::ghost::body_exit(
 	this->on_body_exit(
 		collision::from_sge_user_data(
 			_body.user_data()
-		)
+		).get()
 	);
 }

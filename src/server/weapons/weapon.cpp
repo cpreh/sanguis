@@ -53,7 +53,7 @@ sanguis::server::weapons::weapon::update(
 void
 sanguis::server::weapons::weapon::attack(
 	entities::with_weapon &_from,
-	pos_type const &_to
+	server::pos const &_to
 )
 {
 	if(
@@ -101,7 +101,7 @@ sanguis::server::weapons::weapon::magazine_size() const
 bool
 sanguis::server::weapons::weapon::in_range(
 	entities::base const &_from,
-	pos_type const &_to
+	server::pos const &_to
 ) const
 {
 	return

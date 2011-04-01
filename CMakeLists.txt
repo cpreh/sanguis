@@ -893,6 +893,7 @@ SET(
 	src/server/ai/simple.cpp
 	src/server/ai/simple.hpp
 	src/server/ai/unique_ptr.hpp
+	src/server/angle.hpp
 	src/server/auras/aggro.cpp
 	src/server/auras/aggro.hpp
 	src/server/auras/aura.cpp
@@ -918,17 +919,23 @@ SET(
 	src/server/buffs/provider.hpp
 	src/server/buffs/provider_fwd.hpp
 	src/server/buffs/unique_ptr.hpp
+	src/server/center.hpp
 	src/server/cheat.cpp
 	src/server/cheat.hpp
 	src/server/circle.hpp
-	src/server/collision/base.cpp
-	src/server/collision/base.hpp
-	src/server/collision/base_fwd.hpp
 	src/server/collision/body.cpp
 	src/server/collision/body.hpp
+	src/server/collision/body_base.hpp
+	src/server/collision/body_base_fwd.hpp
+	src/server/collision/body_collision.cpp
+	src/server/collision/body_collision.hpp
+	src/server/collision/body_enter_callback.hpp
+	src/server/collision/body_exit_callback.hpp
 	src/server/collision/body_fwd.hpp
 	src/server/collision/bounding_circle.cpp
 	src/server/collision/bounding_circle.hpp
+	src/server/collision/circle_ghost.cpp
+	src/server/collision/circle_ghost.hpp
 	src/server/collision/collides.cpp
 	src/server/collision/collides.hpp
 	src/server/collision/create_circle.cpp
@@ -938,15 +945,16 @@ SET(
 	src/server/collision/create_parameters_fwd.hpp
 	src/server/collision/distance.cpp
 	src/server/collision/distance.hpp
-	src/server/collision/execute.cpp
-	src/server/collision/execute.hpp
-	src/server/collision/execute_begin.cpp
-	src/server/collision/execute_begin.hpp
-	src/server/collision/execute_end.cpp
-	src/server/collision/execute_end.hpp
-	src/server/collision/execute_function.hpp
-	src/server/collision/from_sge_pos.cpp
-	src/server/collision/from_sge_pos.hpp
+	src/server/collision/from_sge_user_data.cpp
+	src/server/collision/from_sge_user_data.hpp
+	src/server/collision/from_sge_vector.cpp
+	src/server/collision/from_sge_vector.hpp
+	src/server/collision/ghost.cpp
+	src/server/collision/ghost.hpp
+	src/server/collision/ghost_fwd.hpp
+	src/server/collision/ghost_parameters.hpp
+	src/server/collision/ghost_parameters_fwd.hpp
+	src/server/collision/ghost_unique_ptr.hpp
 	src/server/collision/global_groups.cpp
 	src/server/collision/global_groups.hpp
 	src/server/collision/global_groups_fwd.hpp
@@ -955,10 +963,18 @@ SET(
 	src/server/collision/group_vector.hpp
 	src/server/collision/make_groups.cpp
 	src/server/collision/make_groups.hpp
-	src/server/collision/test.cpp
-	src/server/collision/test.hpp
-	src/server/collision/to_sge_pos.cpp
-	src/server/collision/to_sge_pos.hpp
+	src/server/collision/position_callback.hpp
+	src/server/collision/solidity.cpp
+	src/server/collision/solidity.hpp
+	src/server/collision/solidity_fwd.hpp
+	src/server/collision/to_sge_dim.cpp
+	src/server/collision/to_sge_dim.hpp
+	src/server/collision/to_sge_user_data.cpp
+	src/server/collision/to_sge_user_data.hpp
+	src/server/collision/to_sge_vector.cpp
+	src/server/collision/to_sge_vector.hpp
+	src/server/collision/user_data.hpp
+	src/server/collision/user_data_fwd.hpp
 	src/server/console.cpp
 	src/server/console.hpp
 	src/server/console_command_pair.hpp
@@ -997,6 +1013,7 @@ SET(
 	src/server/damage/wrapper.hpp
 	src/server/damage/wrapper_fwd.hpp
 	src/server/dim.hpp
+	src/server/direction.hpp
 	src/server/entities/auto_weak_hook.hpp
 	src/server/entities/auto_weak_link.cpp
 	src/server/entities/auto_weak_link.hpp
@@ -1015,7 +1032,6 @@ SET(
 	src/server/entities/exp_area.hpp
 	src/server/entities/friend.cpp
 	src/server/entities/friend.hpp
-	src/server/entities/health_type.hpp
 	src/server/entities/insert_parameters.cpp
 	src/server/entities/insert_parameters.hpp
 	src/server/entities/insert_parameters_fwd.hpp
@@ -1096,6 +1112,7 @@ SET(
 	src/server/entities/property/value.hpp
 	src/server/entities/radius.cpp
 	src/server/entities/radius.hpp
+	src/server/entities/solidity.hpp
 	src/server/entities/spawns/count_per_wave.hpp
 	src/server/entities/spawns/hidden.cpp
 	src/server/entities/spawns/hidden.hpp
@@ -1114,12 +1131,17 @@ SET(
 	src/server/entities/with_ai_fwd.hpp
 	src/server/entities/with_auras.cpp
 	src/server/entities/with_auras.hpp
+	src/server/entities/with_body.cpp
+	src/server/entities/with_body.hpp
+	src/server/entities/with_body_fwd.hpp
 	src/server/entities/with_buffs.cpp
 	src/server/entities/with_buffs.hpp
 	src/server/entities/with_buffs_fwd.hpp
 	src/server/entities/with_dim.cpp
 	src/server/entities/with_dim.hpp
 	src/server/entities/with_dim_fwd.hpp
+	src/server/entities/with_ghosts.cpp
+	src/server/entities/with_ghosts.hpp
 	src/server/entities/with_health.cpp
 	src/server/entities/with_health.hpp
 	src/server/entities/with_health_fwd.hpp
@@ -1217,10 +1239,12 @@ SET(
 	src/server/player_record_fwd.hpp
 	src/server/pos.hpp
 	src/server/probability.hpp
+	src/server/radius.hpp
 	src/server/send_available_perks.cpp
 	src/server/send_available_perks.hpp
 	src/server/send_callback.hpp
 	src/server/space_unit.hpp
+	src/server/speed.hpp
 	src/server/states/paused.cpp
 	src/server/states/paused.hpp
 	src/server/states/running.cpp
@@ -1234,6 +1258,7 @@ SET(
 	src/server/unicast_callback.hpp
 	src/server/update_sight_function.hpp
 	src/server/update_target_function.hpp
+	src/server/vector.hpp
 	src/server/waves/convert_enemy_name.cpp
 	src/server/waves/convert_enemy_name.hpp
 	src/server/waves/count.hpp

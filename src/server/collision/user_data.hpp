@@ -1,7 +1,8 @@
 #ifndef SANGUIS_SERVER_COLLISION_USER_DATA_HPP_INCLUDED
 #define SANGUIS_SERVER_COLLISION_USER_DATA_HPP_INCLUDED
 
-#include "base_base_fwd.hpp"
+#include "user_data_fwd.hpp"
+#include "body_base_fwd.hpp"
 #include <fcppt/nonassignable.hpp>
 
 namespace sanguis

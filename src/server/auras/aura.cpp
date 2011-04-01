@@ -34,12 +34,12 @@ sanguis::server::auras::aura::recreate(
 				_center,
 				radius_,
 				std::tr1::bind(
-					&aura::on_body_enter,
+					&aura::collision_begin,
 					this,
 					std::tr1::placeholders::_1
 				),
 				std::tr1::bind(
-					&aura::on_body_exit,
+					&aura::collision_end,
 					this,
 					std::tr1::placeholders::_1
 				)
@@ -48,11 +48,12 @@ sanguis::server::auras::aura::recreate(
 }
 
 sanguis::server::auras::aura::aura(
-	space_unit const _radius,
+	server::radius const _radius,
 	team::type const _team,
 	influence::type const _influence
 )
 :
+	radius_(_radius),
 	team_(_team),
 	influence_(_influence),
 	owner_()
@@ -62,7 +63,7 @@ sanguis::server::auras::aura::aura(
 sanguis::entity_id
 sanguis::server::auras::aura::owner() const
 {
-	return owner_;
+	return *owner_;
 }
 
 sanguis::server::collision::group_vector const
@@ -77,7 +78,7 @@ sanguis::server::auras::aura::collision_groups() const
 
 void
 sanguis::server::auras::aura::collision_begin(
-	collsion::body_base &_base
+	collision::body_base &_base
 )
 {
 	this->enter(
@@ -91,7 +92,7 @@ sanguis::server::auras::aura::collision_begin(
 
 void
 sanguis::server::auras::aura::collision_end(
-	collsion::body_base &_base
+	collision::body_base &_base
 )
 {
 	this->leave(

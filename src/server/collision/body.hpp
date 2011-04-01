@@ -5,12 +5,12 @@
 #include "create_parameters_fwd.hpp"
 #include "group_vector.hpp"
 #include "position_callback.hpp"
-#include "shape_unique_ptr.hpp"
 #include "solidity_fwd.hpp"
 #include "../center.hpp"
 #include "../speed.hpp"
 #include <sge/projectile/body/object_fwd.hpp>
 #include <sge/projectile/body/position.hpp>
+#include <sge/projectile/shape/shared_base_ptr.hpp>
 #include <sge/projectile/world_fwd.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
@@ -34,7 +34,7 @@ public:
 		sge::projectile::world &,
 		collision::create_parameters const &,
 		collision::group_vector const &,
-		collision::shape_unique_ptr,
+		sge::projectile::shape::shared_base_ptr,
 		collision::solidity const &,
 		collision::position_callback const &
 	);
@@ -63,7 +63,7 @@ private:
 	);
 
 	typedef fcppt::scoped_ptr<
-		sge::projectile::body
+		sge::projectile::body::object
 	> body_scoped_ptr;
 
 	body_scoped_ptr const body_;

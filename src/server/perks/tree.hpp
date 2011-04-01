@@ -3,8 +3,8 @@
 
 #include "status.hpp"
 #include "list.hpp"
+#include "../level.hpp"
 #include "../../perk_type.hpp"
-#include "../level_type.hpp"
 #include <fcppt/container/tree/object_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -28,7 +28,7 @@ public:
 	bool
 	choosable(
 		perk_type::type,
-		server::level_type player_level
+		server::level player_level
 	) const;
 	
 	void
@@ -38,7 +38,7 @@ public:
 	
 	list const
 	choosables(
-		server::level_type player_level
+		server::level player_level
 	) const;
 
 	// public for helper functions

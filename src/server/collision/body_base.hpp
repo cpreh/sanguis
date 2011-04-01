@@ -9,7 +9,7 @@ namespace sanguis
 {
 namespace server
 {
-namespace entities
+namespace collision
 {
 
 class body_base
@@ -28,7 +28,7 @@ public:
 	) = 0;
 
 	virtual void
-	collides(
+	collision(
 		collision::body_base &
 	) = 0;
 };

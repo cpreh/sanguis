@@ -18,8 +18,8 @@ namespace entities
 
 class with_ai
 :
-	public with_auras,
-	public with_weapon
+	public entities::with_auras,
+	public entities::with_weapon
 {
 	FCPPT_NONCOPYABLE(
 		with_ai

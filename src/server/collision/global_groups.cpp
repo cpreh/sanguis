@@ -4,9 +4,10 @@
 #include <sge/projectile/world.hpp>
 #include <sge/projectile/group/object.hpp>
 #include <fcppt/assign/make_container.hpp>
-#include <fcppt/container/ptr/insert_unique_ptr.hpp>
+#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/foreach_enumerator.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
 #include <vector>
@@ -27,7 +28,11 @@ sanguis::server::collision::global_groups::global_groups(
 			index,
 			fcppt::make_unique_ptr<
 				sge::projectile::group::object
-			>()
+			>(
+				fcppt::ref(
+					_world
+				)
+			)
 		);
 	
 	typedef std::vector<
@@ -95,13 +100,13 @@ sanguis::server::collision::global_groups::global_groups(
 		init_map::const_reference ref,
 		init
 	)
-		_world.make_group_collides(
-			groups_[
+		_world.make_groups_collide(
+			this->group(
 				ref.first
-			],
-			groups_[
+			),
+			this->group(
 				ref.second
-			]
+			)
 		);
 }
 
@@ -114,7 +119,7 @@ sanguis::server::collision::global_groups::group(
 	collision::group::type const _group
 ) const
 {
-	collision::group_map::const_iterator const it(
+	collision::group_map::iterator const it(
 		groups_.find(
 			_group
 		)

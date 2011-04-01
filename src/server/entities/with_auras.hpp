@@ -4,9 +4,8 @@
 #include "with_body.hpp"
 #include "../auras/aura_fwd.hpp"
 #include "../auras/unique_ptr.hpp"
-#include "../collision/global_groups_fwd.hpp"
-#include <sge/collision/shapes/container.hpp>
-#include <sge/collision/world_ptr.hpp>
+#include "../collision/ghost_parameters_fwd.hpp"
+#include "../../time_type.hpp"
 #include <fcppt/noncopyable.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
 
@@ -19,7 +18,7 @@ namespace entities
 
 class with_auras
 :
-	public virtual with_body
+	public virtual entities::with_body
 {
 	FCPPT_NONCOPYABLE(
 		with_auras
@@ -36,7 +35,7 @@ protected:
 
 	void
 	on_update(
-		time_type
+		sanguis::time_type
 	);
 
 	void

@@ -1,17 +1,17 @@
 #include "search_new_target.hpp"
 #include "../entities/auto_weak_link.hpp"
 #include "../entities/base.hpp"
+#include "../entities/with_health.hpp"
 #include "../collision/distance.hpp"
 #include <fcppt/container/map_impl.hpp>
-#include <fcppt/assert.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
 #include <boost/foreach.hpp>
 #include <limits>
 
 sanguis::server::entities::auto_weak_link const
 sanguis::server::ai::search_new_target(
 	entities::base const &_me,
-	entities::auto_weak_link const _owner,
-	entity_map const &_entities
+	ai::entity_map const &_entities
 )
 {
 	space_unit distance(
@@ -27,44 +27,26 @@ sanguis::server::ai::search_new_target(
 		_entities
 	)
 	{
-		entities::auto_weak_link link(
-			ref.second
+		entities::with_health &target(
+			*ref.second
 		);
 
-		if(
-			!link
-		)
-			continue; // TODO: can this happen?
-
 		space_unit const new_distance(
-			_owner
-			?
-				collision::distance(
-					*_owner,
-					*link
-				)
-			:
-				collision::distance(
-					_me,
-					*link
-				)
+			collision::distance(
+				_me,
+				target
+			)
 		);
 
 		if(
 			new_distance < distance
-			&& !link->invulnerable()
 		)
 		{
 			distance = new_distance;
 
-			ret = link;
+			ret = target.link();
 		}
 	}
-
-	FCPPT_ASSERT(
-		!ret
-		|| !ret->invulnerable()
-	);
 
 	return ret;
 }

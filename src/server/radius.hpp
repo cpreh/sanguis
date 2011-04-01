@@ -4,12 +4,12 @@
 #include "space_unit.hpp"
 #include <fcppt/strong_typedef.hpp>
 
-namespace sge
+namespace sanguis
 {
 namespace server
 {
 
-FCPPT_MAKE_STRONG_TYPDEF(
+FCPPT_MAKE_STRONG_TYPEDEF(
 	server::space_unit,
 	radius
 );

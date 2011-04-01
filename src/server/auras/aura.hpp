@@ -2,11 +2,13 @@
 #define SANGUIS_SERVER_AURAS_AURA_HPP_INCLUDED
 
 #include "influence.hpp"
-#include "../radius.hpp"
 #include "../entities/with_body_fwd.hpp"
 #include "../collision/body_base_fwd.hpp"
+#include "../collision/ghost_parameters_fwd.hpp"
 #include "../collision/ghost_unique_ptr.hpp"
 #include "../collision/group_vector.hpp"
+#include "../center.hpp"
+#include "../radius.hpp"
 #include "../team.hpp"
 #include "../../entity_id.hpp"
 #include <fcppt/noncopyable.hpp>
@@ -29,12 +31,13 @@ public:
 
 	void
 	owner(
-		entity_id
+		sanguis::entity_id
 	);
 
 	collision::ghost_unique_ptr
 	recreate(
-		collision::ghost_parameters const &
+		collision::ghost_parameters const &,
+		server::center const &
 	);
 protected:
 	aura(
@@ -51,12 +54,12 @@ private:
 
 	void
 	collision_begin(
-		collsion::body_base &
+		collision::body_base &
 	);
 
 	void
 	collision_end(
-		collsion::body_base &
+		collision::body_base &
 	);
 
 	virtual void
@@ -68,6 +71,8 @@ private:
 	leave(
 		entities::with_body &
 	) = 0;
+
+	server::radius const radius_;
 
 	server::team::type const team_;
 

@@ -9,16 +9,16 @@
 #include "with_perks.hpp"
 #include "with_weapon.hpp"
 #include "movement_speed.hpp"
-#include "health_type.hpp"
 #include "../environment/load_context_ptr.hpp"
 #include "../damage/armor.hpp"
 #include "../perks/unique_ptr.hpp"
 #include "../perks/tree.hpp"
 #include "../perks/list.hpp"
-#include "../level_type.hpp"
-#include "../string.hpp"
-#include "../exp_type.hpp"
+#include "../exp.hpp"
+#include "../health.hpp"
+#include "../level.hpp"
 #include "../player_id.hpp"
+#include "../string.hpp"
 #include "../../perk_type.hpp"
 #include "../../time_type.hpp"
 #include <fcppt/noncopyable.hpp>
@@ -46,20 +46,20 @@ class player
 public:
 	player(
 		server::environment::load_context_ptr,
-		entities::health_type,
+		server::health,
 		damage::armor const &,
 		entities::movement_speed,
-		string const &name,
+		server::string const &name,
 		server::player_id
 	);
 
 	// own functions
-	string const
+	server::string const
 	name() const;
 
 	void	
 	add_exp(
-		exp_type
+		server::exp
 	);
 
 	bool
@@ -83,17 +83,17 @@ private:
 
 	void
 	add_sight_range(
-		entity_id
+		sanguis::entity_id
 	);
 
 	void
 	remove_sight_range(
-		entity_id
+		sanguis::entity_id
 	);
 
 	void
 	on_update(
-		time_type
+		sanguis::time_type
 	);
 
 	messages::auto_ptr
@@ -101,7 +101,7 @@ private:
 		server::player_id
 	) const;
 
-	entity_type::type
+	sanguis::entity_type::type
 	type() const;
 
 	server::team::type
@@ -118,13 +118,13 @@ private:
 	messages::auto_ptr
 	make_add_message() const;
 
-	string const name_;
+	server::string const name_;
 
 	server::player_id const player_id_;
 
-	exp_type exp_;
+	server::exp exp_;
 
-	level_type level_;
+	server::level level_;
 
 	unsigned skill_points_;
 

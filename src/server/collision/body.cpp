@@ -3,11 +3,18 @@
 #include "from_sge_vector.hpp"
 #include "ghost_parameters.hpp"
 #include "global_groups.hpp"
+#include "make_groups.hpp"
+#include "solidity.hpp"
 #include "to_sge_vector.hpp"
 #include "to_sge_user_data.hpp"
 #include "../center.hpp"
 #include "../speed.hpp"
+#include <sge/projectile/body/angular_velocity.hpp>
+#include <sge/projectile/body/linear_velocity.hpp>
 #include <sge/projectile/body/object.hpp>
+#include <sge/projectile/body/parameters.hpp>
+#include <sge/projectile/body/position.hpp>
+#include <sge/projectile/body/rotation.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -17,7 +24,7 @@ sanguis::server::collision::body::body(
 	sge::projectile::world &_world,
 	collision::create_parameters const &_create_param,
 	collision::group_vector const &_collision_groups,
-	collision::shape_unique_ptr _shape,
+	sge::projectile::shape::shared_base_ptr const _shape,
 	collision::solidity const &_solidity,
 	collision::position_callback const &_position_callback
 )
@@ -41,16 +48,14 @@ sanguis::server::collision::body::body(
 				sge::projectile::body::angular_velocity(
 					0.f
 				),
-				move(
-					_shape
-				),
+				_shape,
 				sge::projectile::body::rotation(
 					0.f
 				),
-				_solidty.get(),
+				_solidity.get(),
 				collision::make_groups(
 					_collision_groups,
-					_create_params.global_groups()
+					_create_param.global_groups()
 				),
 				collision::to_sge_user_data(
 					_create_param.user_data()
@@ -83,10 +88,8 @@ sanguis::server::collision::body::center(
 )
 {
 	body_->position(
-		sge::projectile::body::position(
-			collision::to_sge_vector(
-				_center.get()
-			)
+		collision::to_sge_vector(
+			_center.get()
 		)
 	);
 }
@@ -97,7 +100,7 @@ sanguis::server::collision::body::center() const
 	return
 		server::center(
 			collision::from_sge_vector(
-				body_->position().get()
+				body_->position()
 			)
 		);
 }
@@ -108,10 +111,8 @@ sanguis::server::collision::body::speed(
 )
 {
 	body_->linear_velocity(
-		sge::projectile::body::linear_velocity(
-			collision::to_sge_vector(
-				_speed
-			)
+		collision::to_sge_vector(
+			_speed.get()
 		)
 	);
 }
@@ -122,7 +123,7 @@ sanguis::server::collision::body::speed() const
 	return
 		server::speed(
 			collision::from_sge_vector(
-				body_->linear_velocity().get()
+				body_->linear_velocity()
 			)
 		);
 }

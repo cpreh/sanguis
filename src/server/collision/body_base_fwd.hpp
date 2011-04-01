@@ -5,7 +5,7 @@ namespace sanguis
 {
 namespace server
 {
-namespace entities
+namespace collision
 {
 
 class body_base;

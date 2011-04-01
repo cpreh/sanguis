@@ -31,7 +31,8 @@ public:
 		collision::group::type
 	) const;
 private:
-	collision::group_map groups_;
+	// TODO: why are the groups in projectile nonconst everywhere?
+	mutable collision::group_map groups_;
 };
 
 }

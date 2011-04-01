@@ -1,10 +1,10 @@
 #include "update_sight.hpp"
-#include "../entities/base.hpp"
+#include "../entities/with_body.hpp"
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/optional_impl.hpp>
 
 sanguis::server::auras::update_sight::update_sight(
-	space_unit const _radius,
+	server::radius const _radius,
 	update_sight_function const &_enter,
 	update_sight_function const &_nleave // VC++ doesn't like _leave
 )
@@ -40,7 +40,7 @@ sanguis::server::auras::update_sight::collision_groups() const
 
 void
 sanguis::server::auras::update_sight::enter(
-	entities::base &_entity
+	entities::with_body &_entity
 )
 {
 	enter_(
@@ -50,7 +50,7 @@ sanguis::server::auras::update_sight::enter(
 
 void
 sanguis::server::auras::update_sight::leave(
-	entities::base &_entity
+	entities::with_body &_entity
 )
 {
 	leave_(

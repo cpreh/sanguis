@@ -15,8 +15,7 @@ namespace ai
 entities::auto_weak_link const
 search_new_target(
 	entities::base const &owner,
-	entities::auto_weak_link owner_,
-	entity_map const &
+	ai::entity_map const &
 );
 
 }

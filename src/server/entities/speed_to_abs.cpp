@@ -4,20 +4,22 @@
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/unit_circle.hpp>
 
-sanguis::server::pos_type const
+sanguis::server::speed const
 sanguis::server::entities::speed_to_abs(
-	space_unit const direction_,
-	property::value const speed_
+	server::direction const _direction,
+	property::value const _speed
 )
 {
 	return
-		fcppt::math::vector::unit_circle(
-			direction_
-		)
-		*
-		property::to_float<
-			space_unit
-		>(
-			speed_
+		server::speed(
+			fcppt::math::vector::unit_circle(
+				_direction.get()
+			)
+			*
+			property::to_float<
+				server::space_unit
+			>(
+				_speed.get()
+			)
 		);
 }

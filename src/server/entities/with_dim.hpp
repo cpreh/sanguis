@@ -3,9 +3,9 @@
 
 #include "with_dim_fwd.hpp"
 #include "base.hpp"
-#include "../dim_type.hpp"
-#include "../pos_type.hpp"
-#include "../space_unit.hpp"
+#include "../dim.hpp"
+#include "../pos.hpp"
+#include "../radius.hpp"
 #include <fcppt/math/dim/basic_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -24,22 +24,22 @@ class with_dim
 		with_dim
 	);
 public:
-	pos_type const
+	server::pos const
 	pos() const;
 protected:
 	explicit with_dim(
-		dim_type const &
+		server::dim const &
 	);
 
 	~with_dim();
 
-	dim_type const &
+	server::dim const &
 	dim() const;
 private:
-	space_unit
+	server::radius const
 	radius() const;
 
-	dim_type const dim_;
+	server::dim const dim_;
 };
 
 }
