@@ -1,6 +1,7 @@
 #include "aura.hpp"
 #include "collision_groups.hpp"
 #include "../collision/circle_ghost.hpp"
+#include "../collision/ghost_parameters.hpp"
 #include "../collision/ghost_unique_ptr.hpp"
 #include "../entities/with_body.hpp"
 #include <fcppt/tr1/functional.hpp>
@@ -21,7 +22,8 @@ sanguis::server::auras::aura::owner(
 
 sanguis::server::collision::ghost_unique_ptr
 sanguis::server::auras::aura::recreate(
-	collision::ghost_parameters const &_params,
+	sge::projectile::world &_world,
+	collision::global_groups const &_global_groups,
 	server::center const &_center
 )
 {
@@ -30,7 +32,11 @@ sanguis::server::auras::aura::recreate(
 			fcppt::make_unique_ptr<
 				collision::circle_ghost
 			>(
-				_params,
+				collision::ghost_parameters(
+					_world,
+					this->collision_groups(),	
+					_global_groups
+				),
 				_center,
 				radius_,
 				std::tr1::bind(

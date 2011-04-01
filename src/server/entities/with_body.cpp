@@ -37,14 +37,13 @@ sanguis::server::entities::with_body::on_transfer(
 		fcppt::make_unique_ptr<
 			collision::body
 		>(
-			this->environment()->collision_world(),
 			_params,
 			entities::collision_groups(
 				this->type(),
 				this->team()
 			),
 			this->recreate_shape(
-				this->environment()->collision_world()
+				_params.world()
 			),
 			entities::solidity(
 				this->type()

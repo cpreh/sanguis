@@ -21,7 +21,6 @@
 #include <boost/foreach.hpp>
 
 sanguis::server::collision::body::body(
-	sge::projectile::world &_world,
 	collision::create_parameters const &_create_param,
 	collision::group_vector const &_collision_groups,
 	sge::projectile::shape::shared_base_ptr const _shape,
@@ -34,7 +33,7 @@ sanguis::server::collision::body::body(
 			sge::projectile::body::object
 		>(
 			sge::projectile::body::parameters(
-				_world,
+				_create_param.world(),
 				sge::projectile::body::position(
 					collision::to_sge_vector(
 						_create_param.center().get()

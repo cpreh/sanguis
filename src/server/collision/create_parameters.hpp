@@ -6,6 +6,7 @@
 #include "user_data.hpp"
 #include "../center.hpp"
 #include "../speed.hpp"
+#include <sge/projectile/world_fwd.hpp>
 #include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/nonassignable.hpp>
 
@@ -23,11 +24,15 @@ class create_parameters
 	);
 public:
 	create_parameters(
+		sge::projectile::world &,
 		server::center const &,
 		server::speed const &,
 		collision::user_data const &,
 		collision::global_groups const &
 	);
+
+	sge::projectile::world &
+	world() const;
 
 	server::center const
 	center() const;
@@ -41,6 +46,8 @@ public:
 	collision::global_groups const &
 	global_groups() const;
 private:
+	sge::projectile::world &world_;
+
 	server::center const center_;
 
 	server::speed const speed_;

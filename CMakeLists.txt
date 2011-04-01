@@ -925,6 +925,7 @@ SET(
 	src/server/circle.hpp
 	src/server/collision/body.cpp
 	src/server/collision/body.hpp
+	src/server/collision/body_base.cpp
 	src/server/collision/body_base.hpp
 	src/server/collision/body_base_fwd.hpp
 	src/server/collision/body_collision.cpp

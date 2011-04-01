@@ -2,9 +2,9 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_AURAS_HPP_INCLUDED
 
 #include "with_body.hpp"
+#include "ghost_parameters_fwd.hpp"
 #include "../auras/aura_fwd.hpp"
 #include "../auras/unique_ptr.hpp"
-#include "../collision/ghost_parameters_fwd.hpp"
 #include "../../time_type.hpp"
 #include <fcppt/noncopyable.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
@@ -40,7 +40,7 @@ protected:
 
 	void
 	recreate_ghosts(
-		collision::ghost_parameters const &
+		entities::ghost_parameters const &
 	);
 private:
 	typedef boost::ptr_list<

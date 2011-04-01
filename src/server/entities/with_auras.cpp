@@ -60,7 +60,7 @@ sanguis::server::entities::with_auras::on_update(
 
 void
 sanguis::server::entities::with_auras::recreate_ghosts(
-	collision::ghost_parameters const &_params
+	entities::ghost_parameters const &_params
 )
 {
 	BOOST_FOREACH(
@@ -69,8 +69,9 @@ sanguis::server::entities::with_auras::recreate_ghosts(
 	)
 		with_ghosts::add_ghost(
 			aura->recreate(
-				_params,
-				this->center()
+				_params.world(),
+				_params.global_groups(),
+				_params.center()
 			)
 		);
 

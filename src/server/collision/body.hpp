@@ -31,7 +31,6 @@ class body
 	);
 public:
 	body(
-		sge::projectile::world &,
 		collision::create_parameters const &,
 		collision::group_vector const &,
 		sge::projectile::shape::shared_base_ptr,

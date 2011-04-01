@@ -35,6 +35,7 @@ sanguis::server::entities::base::transfer(
 
 	this->on_transfer(
 		collision::create_parameters(
+			environment_->collision_world(),
 			_insert_param.center(),
 			this->initial_direction(),
 			collision::user_data(

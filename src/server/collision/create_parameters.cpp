@@ -2,17 +2,25 @@
 #include <fcppt/math/vector/basic_impl.hpp>
 
 sanguis::server::collision::create_parameters::create_parameters(
+	sge::projectile::world &_world,
 	server::center const &_center,
 	server::speed const &_speed,
 	collision::user_data const &_user_data,
 	collision::global_groups const &_global_groups
 )
 :
+	world_(_world),
 	center_(_center),
 	speed_(_speed),
 	user_data_(_user_data),
 	global_groups_(_global_groups)
 {
+}
+
+sge::projectile::world &
+sanguis::server::collision::create_parameters::world() const
+{
+	return world_;
 }
 
 sanguis::server::center const
