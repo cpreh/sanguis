@@ -2,14 +2,14 @@
 
 sanguis::server::collision::group_vector const
 sanguis::server::entities::collision_groups(
-	entity_type::type const type_,
-	team::type const team_
+	entity_type::type const _type,
+	team::type const _team
 )
 {
 	collision::group_vector ret;
 
 	switch(
-		type_
+		_type
 	)
 	{
 	case entity_type::enemy:
@@ -31,7 +31,7 @@ sanguis::server::entities::collision_groups(
 		break;
 	case entity_type::projectile:
 		switch(
-			team_
+			_team
 		)
 		{
 		case team::players:

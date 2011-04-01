@@ -3,9 +3,7 @@
 #include "sight_range.hpp"
 #include "context.hpp"
 #include "prop.hpp"
-#include "../collision/execute.hpp"
-#include "../collision/execute_begin.hpp"
-#include "../collision/execute_end.hpp"
+#include "../collision/body_collision.hpp"
 #include "../collision/test.hpp"
 #include "../collision/satellite.hpp"
 #include "../entities/base.hpp"
@@ -69,6 +67,13 @@ sanguis::server::world::object::object(
 	collision_groups_(
 		*collision_world_
 	),
+	collision_connection_(
+		collision_world_->body_collision(
+			&collision::body_collision,
+			std::tr1::placeholders::_1,
+			std::tr1::placeholders::_2
+		)
+	),
 	sight_ranges_(),
 	diff_clock_(),
 	send_timer_(
@@ -80,35 +85,6 @@ sanguis::server::world::object::object(
 	),
 	entities_(),
 	props_(),
-	collision_connection_begin_(
-		collision_world_->register_begin_callback(
-			std::tr1::bind(
-				collision::execute,
-				std::tr1::placeholders::_1,
-				std::tr1::placeholders::_2,
-				collision::execute_begin()
-			)
-		)
-	),
-	collision_connection_end_(
-		collision_world_->register_end_callback(
-			std::tr1::bind(
-				collision::execute,
-				std::tr1::placeholders::_1,
-				std::tr1::placeholders::_2,
-				collision::execute_end()
-			)
-		)
-	),
-	collision_connection_test_(
-		collision_world_->register_test_callback(
-			std::tr1::bind(
-				collision::test,
-				std::tr1::placeholders::_1,
-				std::tr1::placeholders::_2
-			)
-		)
-	),
 	environment_(
 		fcppt::make_shared_ptr<
 			world::environment
@@ -231,7 +207,7 @@ sanguis::server::world::object::weapon_changed(
 	weapon_type::type const _wt
 )
 {
-	send_entity_specific(
+	this->send_entity_specific(
 		_id,
 		messages::create(
 			messages::change_weapon(
@@ -249,7 +225,7 @@ sanguis::server::world::object::got_weapon(
 	weapon_type::type const _wt
 )
 {
-	send_player_specific(
+	this->send_player_specific(
 		_player_id,
 		messages::create(
 			messages::give_weapon(
@@ -266,7 +242,7 @@ sanguis::server::world::object::attacking_changed(
 	bool const _is_attacking
 )
 {
-	send_entity_specific(
+	this->send_entity_specific(
 		_id,
 		_is_attacking
 		?
@@ -290,7 +266,7 @@ sanguis::server::world::object::reloading_changed(
 	bool const _is_reloading
 )
 {
-	send_entity_specific(
+	this->send_entity_specific(
 		_id,
 		_is_reloading
 		?
@@ -314,7 +290,7 @@ sanguis::server::world::object::max_health_changed(
 	health_type const _health
 )
 {
-	send_entity_specific(
+	this->send_entity_specific(
 		_id,
 		messages::create(
 			messages::max_health(
@@ -332,7 +308,7 @@ sanguis::server::world::object::exp_changed(
 	exp_type const _exp
 )
 {
-	send_player_specific(
+	this->send_player_specific(
 		_player_id,
 		messages::create(
 			messages::experience(
@@ -355,7 +331,7 @@ sanguis::server::world::object::level_changed(
 	level_type const _level
 )
 {
-	send_player_specific(
+	this->send_player_specific(
 		_player_id,
 		messages::create(
 			messages::level_up(
@@ -447,7 +423,7 @@ sanguis::server::world::object::add_sight_range(
 	)
 		return;
 			
-	send_player_specific(
+	this->send_player_specific(
 		_player_id,
 		it->second->add_message(
 			_player_id
@@ -501,7 +477,7 @@ sanguis::server::world::object::remove_sight_range(
 		it != entities_.end()
 	);
 
-	send_player_specific(
+	this->send_player_specific(
 		_player_id,
 		it->second->dead()
 		?
@@ -607,7 +583,7 @@ sanguis::server::world::object::update_entity(
 		entity.dead()
 	)
 	{
-		update_entity_health(
+		this->update_entity_health(
 			entity
 		);
 
@@ -623,15 +599,13 @@ sanguis::server::world::object::update_entity(
 		return;
 	}
 
-
 	if(
 		entity.server_only()
 		|| !_update_pos
 	)
 		return;
 
-
-	send_entity_specific(
+	this->send_entity_specific(
 		entity.id(),
 		message_convert::rotate(
 			entity
@@ -643,7 +617,7 @@ sanguis::server::world::object::update_entity(
 		with_dim,
 		&entity
 	)
-		send_entity_specific(
+		this->send_entity_specific(
 			with_dim->id(),
 			message_convert::move(
 				*with_dim
@@ -655,14 +629,14 @@ sanguis::server::world::object::update_entity(
 		movable,
 		&entity
 	)
-		send_entity_specific(
+		this->send_entity_specific(
 			movable->id(),
 			message_convert::speed(
 				*movable
 			)
 		);
 
-	update_entity_health(
+	this->update_entity_health(
 		entity
 	);
 }
@@ -677,7 +651,7 @@ sanguis::server::world::object::update_entity_health(
 		with_health,
 		&_entity
 	)
-		send_entity_specific(
+		this->send_entity_specific(
 			with_health->id(),
 			message_convert::health(
 				*with_health

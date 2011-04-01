@@ -22,7 +22,7 @@ sanguis::server::entities::movable::direction(
 {
 	direction_ = _direction;
 
-	speed_change(
+	this->speed_change(
 		movement_speed_.current()
 	);
 }
@@ -31,7 +31,7 @@ sanguis::server::pos_type const
 sanguis::server::entities::movable::abs_speed() const
 {
 	return
-		speed_to_abs(
+		entities::speed_to_abs(
 			direction_,
 			movement_speed_.current()
 		);
@@ -42,6 +42,7 @@ sanguis::server::entities::movable::movable(
 	space_unit const _direction
 )
 :
+	entities::with_body(),
 	movement_speed_(
 		_movement_speed
 	),
@@ -62,7 +63,7 @@ sanguis::server::entities::movable::movable(
 sanguis::server::pos_type const
 sanguis::server::entities::movable::initial_direction() const
 {
-	return abs_speed();
+	return this->abs_speed();
 }
 
 void
@@ -70,9 +71,9 @@ sanguis::server::entities::movable::speed_change(
 	property::value const _speed
 )
 {
-	body_speed(
+	this->body_speed(
 		entities::speed_to_abs(
-			direction(),
+			this->direction(),
 			_speed
 		)
 	);

@@ -2,23 +2,31 @@
 #include <fcppt/math/vector/basic_impl.hpp>
 
 sanguis::server::collision::create_parameters::create_parameters(
-	server::pos const &_center,
-	server::pos const &_speed
+	server::center const &_center,
+	server::speed const &_speed,
+	collision::user_data const &_user_data
 )
 :
 	center_(_center),
-	speed_(_speed)
+	speed_(_speed),
+	user_data_(_user_data)
 {
 }
 
-sanguis::server::pos const
+sanguis::server::center const
 sanguis::server::collision::create_parameters::center() const
 {
 	return center_;
 }
 
-sanguis::server::pos const
+sanguis::server::speed const
 sanguis::server::collision::create_parameters::speed() const
 {
 	return speed_;
+}
+
+sanguis::server::collision::user_data const &
+sanguis::server::collision::create_parameters::user_data() const
+{
+	return user_data_;
 }

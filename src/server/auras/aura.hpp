@@ -5,13 +5,13 @@
 #include "../pos_type.hpp"
 #include "../space_unit.hpp"
 #include "../entities/base_fwd.hpp"
-#include "../collision/base.hpp"
+#include "../collision/ghost_base.hpp"
+#include "../collision/ghost_unique_ptr.hpp"
 #include "../collision/group_vector.hpp"
 #include "../collision/global_groups_fwd.hpp"
 #include "../team.hpp"
 #include "../../entity_id.hpp"
-#include <sge/collision/shapes/container.hpp>
-#include <sge/collision/world_ptr.hpp>
+#include <sge/projectile/world_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -22,8 +22,6 @@ namespace auras
 {
 
 class aura
-:
-	public collision::base
 {
 	FCPPT_NONCOPYABLE(
 		aura
@@ -34,12 +32,6 @@ public:
 	void
 	owner(
 		entity_id
-	);
-
-	sge::collision::shapes::container const
-	recreate_shapes(
-		sge::collision::world_ptr,
-		collision::global_groups const &
 	);
 protected:
 	aura(
@@ -56,17 +48,17 @@ private:
 
 	boost::logic::tribool const
 	can_collide_with(
-		collision::base const &
+		collision::body_base const &
 	) const;
 
 	void
 	collision_begin(
-		collision::base &
+		collsion::body_base &
 	);
 
 	void
 	collision_end(
-		collision::base &
+		collsion::body_base &
 	);
 
 	virtual void
@@ -86,6 +78,12 @@ private:
 	influence::type const influence_;
 
 	entity_id owner_;
+
+	typedef fcppt::scoped_ptr<
+		collision::ghost
+	> ghost_scoped_ptr;
+
+	ghost_scoped_ptr ghost_;
 };
 
 }

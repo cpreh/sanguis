@@ -19,7 +19,7 @@ namespace entities
 
 class movable
 :
-	public virtual base
+	public entities::with_body
 {
 	FCPPT_NONCOPYABLE(
 		movable
@@ -28,23 +28,23 @@ public:
 	property::changeable &
 	movement_speed();
 
-	space_unit
+	server::space_unit
 	direction() const;
 
 	void
 	direction(
-		space_unit
+		server::space_unit
 	);
 
-	pos_type const
+	server::pos const
 	abs_speed() const;
 protected:
 	movable(
 		property::initial const &speed,
-		space_unit direction_
+		space_unit direction
 	);
 private:
-	pos_type const
+	server::pos const
 	initial_direction() const;
 
 	void
@@ -54,7 +54,7 @@ private:
 
 	property::changeable movement_speed_;
 
-	space_unit direction_;
+	server::space_unit direction_;
 	
 	fcppt::signal::scoped_connection const speed_change_;
 };

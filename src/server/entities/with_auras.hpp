@@ -39,10 +39,9 @@ protected:
 		time_type
 	);
 
-	sge::collision::shapes::container const
-	recreate_shapes(
-		sge::collision::world_ptr,
-		collision::global_groups const &
+	collision::ghost_reference_vector const
+	recreate_ghosts(
+		collision::ghost_parameters const &
 	);
 private:
 	typedef boost::ptr_list<

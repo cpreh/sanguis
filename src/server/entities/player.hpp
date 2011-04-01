@@ -119,10 +119,15 @@ private:
 	make_add_message() const;
 
 	string const name_;
+
 	server::player_id const player_id_;
+
 	exp_type exp_;
+
 	level_type level_;
+
 	unsigned skill_points_;
+
 	perks::tree perk_tree_;
 };
 

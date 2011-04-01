@@ -30,7 +30,6 @@
 #include <sge/projectile/world_fwd.hpp>
 #include <sge/time/timer.hpp>
 #include <fcppt/container/map_decl.hpp>
-#include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
 
@@ -205,11 +204,6 @@ private:
 
 	prop_container props_;
 
-	fcppt::signal::scoped_connection const
-		collision_connection_begin_,
-		collision_connection_end_,
-		collision_connection_test_;
-	
 	server::environment::object_ptr const environment_;
 
 	server::pickup_spawner pickup_spawner_;

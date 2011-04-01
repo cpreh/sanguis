@@ -4,10 +4,15 @@
 #include "body_fwd.hpp"
 #include "global_groups_fwd.hpp"
 #include "create_parameters_fwd.hpp"
-#include "../pos.hpp"
-#include <sge/projectile/shapes/base_ptr.hpp>
+#include "ghost_reference_vector.hpp"
+#include "group_vector.hpp"
+#include "shape_unique_ptr.hpp"
+#include "solidity_fwd.hpp"
+#include "../center.hpp"
+#include "../speed.hpp"
 #include <sge/projectile/body/object_fwd.hpp>
 #include <sge/projectile/world_fwd.hpp>
+#include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
 
@@ -23,51 +28,47 @@ class body
 	FCPPT_NONCOPYABLE(
 		body
 	);
-protected:
-	body();
-
-	void
-	body_pos(
-		server::pos const &
-	);
-
-	server::pos const
-	body_pos() const;
-
-	void
-	body_speed(
-		server::pos const &
-	);
-
-	server::pos const
-	body_speed() const;
 public:
-	void
-	recreate(
+	body(
 		sge::projectile::world &,
-		collision::global_groups const &,
-		collision::create_parameters const &
+		collision::create_parameters const &,
+		collision::global_groups const &
+		collision::group_vector const &,
+		collision::shape_unique_ptr,
+		collision::solidity const &,
+		collision::ghost_reference_vector const &
 	);
 
+	~body();
+
 	void
-	destroy();
+	center(
+		server::center const &
+	);
 
-	virtual ~body();
+	server::center const
+	center() const;
+
+	void
+	speed(
+		server::speed const &
+	);
+
+	server::speed const
+	speed() const;
 private:
-	virtual sge::projectile::shapes::base_ptr const
-	recreate_shape(
-		sge::collision::world &,
-		collision::global_groups const &
-	) = 0;
-
-	virtual void
-	on_destroy();
+	void
+	on_position_change(
+		sge::projectile::body::position const &
+	);
 
 	typedef fcppt::scoped_ptr<
 		sge::projectile::body
 	> body_scoped_ptr;
 
 	body_scoped_ptr body_;
+
+	ghost_reference_vector ghost_references_;
 };
 
 }

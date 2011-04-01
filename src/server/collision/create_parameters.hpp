@@ -2,7 +2,9 @@
 #define SANGUIS_SERVER_COLLISION_CREATE_PARAMETERS_HPP_INCLUDED
 
 #include "create_parameters_fwd.hpp"
-#include "../pos.hpp"
+#include "user_data.hpp"
+#include "../center.hpp"
+#include "../speed.hpp"
 #include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/nonassignable.hpp>
 
@@ -20,19 +22,25 @@ class create_parameters
 	);
 public:
 	create_parameters(
-		server::pos const &center,
-		server::pos const &speed
+		server::center const &,
+		server::speed const &,
+		collision::user_data const &
 	);
 
-	server::pos const
+	server::center const
 	center() const;
 
-	server::pos const
+	server::speed const
 	speed() const;
+
+	collision::user_data const &
+	user_data() const;
 private:
-	server::pos const
-		center_,
-		speed_;
+	server::center const center_;
+
+	server::speed const speed_;
+	
+	collision::user_data const user_data_;
 };
 
 }

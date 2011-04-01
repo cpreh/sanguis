@@ -7,10 +7,11 @@
 sanguis::server::pos_type const
 sanguis::server::entities::with_dim::pos() const
 {
-	return entities::pos(
-		center(),
-		dim()
-	);
+	return
+		entities::pos(
+			this->center(),
+			this->dim()
+		);
 }
 
 sanguis::server::entities::with_dim::with_dim(
@@ -18,10 +19,12 @@ sanguis::server::entities::with_dim::with_dim(
 )
 :
 	dim_(_dim)
-{}
+{
+}
 
 sanguis::server::entities::with_dim::~with_dim()
-{}
+{
+}
 
 sanguis::server::dim_type const &
 sanguis::server::entities::with_dim::dim() const
@@ -32,7 +35,8 @@ sanguis::server::entities::with_dim::dim() const
 sanguis::server::space_unit
 sanguis::server::entities::with_dim::radius() const
 {
-	return entities::radius(
-		dim()
-	);
+	return
+		entities::radius(
+			this->dim()
+		);
 }

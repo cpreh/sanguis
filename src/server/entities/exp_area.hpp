@@ -18,14 +18,14 @@ namespace entities
 
 class exp_area
 :
-	public base
+	public entities::with_ghosts
 {
 	FCPPT_NONCOPYABLE(
 		exp_area
 	);
 public:
 	explicit exp_area(
-		exp_type
+		server::exp
 	);
 
 	~exp_area();
@@ -33,21 +33,15 @@ private:
 	void
 	on_die();
 
-	space_unit
-	radius() const;
-
 	bool
 	dead() const;
 
-	bool
-	invulnerable() const;
-
 	messages::auto_ptr
 	add_message(
-		player_id
+		server::player_id
 	) const;
 
-	entity_type::type
+	sanguis::entity_type::type
 	type() const;
 
 	server::team::type
@@ -62,21 +56,21 @@ private:
 	) const;
 	
 	void
-	collision_entity_begin(
-		base &
+	collision_begin(
+		entities::with_body &
 	);
 
 	void
 	collision_entity_end(
-		base &
+		entities::with_body &
 	);
 
-	exp_type const exp_;
+	server::exp const exp_;
 
 	typedef fcppt::container::map<
 		std::map<
-			entity_id,
-			auto_weak_link
+			server::entity_id,
+			entities::auto_weak_link
 		>
 	> weak_link_map;
 

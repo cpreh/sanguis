@@ -2,17 +2,14 @@
 #define SANGUIS_SERVER_ENTITIES_BASE_HPP_INCLUDED
 
 #include "base_fwd.hpp"
-#include "link_container.hpp"
 #include "auto_weak_link.hpp"
 #include "insert_parameters_fwd.hpp"
-#include "../pos_type.hpp"
+#include "link_container.hpp"
+#include "../pos.hpp"
+#include "../player_id.hpp"
 #include "../space_unit.hpp"
 #include "../team.hpp"
-#include "../player_id.hpp"
-#include "../collision/base.hpp"
-#include "../collision/body.hpp"
 #include "../collision/global_groups_fwd.hpp"
-#include "../collision/create_parameters_fwd.hpp"
 #include "../environment/object_fwd.hpp"
 #include "../../messages/auto_ptr.hpp"
 #include "../../entity_id.hpp"
@@ -30,21 +27,12 @@ namespace entities
 {
 
 class base
-:
-	public collision::body,
-	public collision::base
 {
 	FCPPT_NONCOPYABLE(
 		base
 	);
 protected:
 	base();
-
-	sge::projectile::shape::base_ptr const
-	recreate_shape(
-		sge::collision::world &,
-		collision::global_groups const &
-	);
 public:
 	// general world functions
 	
@@ -87,39 +75,36 @@ public:
 
 	// entity id function
 	
-	entity_id
+	sanguis::entity_id
 	id() const;
 
 
 	// position and size functions
 
-	space_unit
+	server::space_unit
 	angle() const;
 
 	void
 	angle(
-		space_unit
+		server::space_unit
 	);
 
-	pos_type const
+	server::pos const
 	center() const;
 
 	void
 	center(
-		pos_type const &
+		server::pos const &
 	);
 
-	virtual space_unit
-	radius() const = 0;
+	virtual bool
+	server_only() const;
 
 
 	// life functions
 	
 	virtual bool
 	dead() const = 0;
-
-	virtual bool
-	invulnerable() const = 0;
 
 	// message functions
 	
@@ -137,9 +122,6 @@ public:
 	virtual server::team::type
 	team() const = 0;
 
-	virtual bool
-	server_only() const;
-
 	virtual ~base();
 private:
 	virtual void
@@ -152,7 +134,7 @@ private:
 
 	virtual void
 	on_center(
-		pos_type const &
+		server::pos const &
 	);
 
 	virtual void
@@ -161,7 +143,7 @@ private:
 		collision::create_parameters const &
 	);
 
-	virtual pos_type const
+	virtual server::pos const
 	initial_direction() const;
 
 	friend class auto_weak_link;
@@ -171,37 +153,7 @@ private:
 		auto_weak_link &
 	);
 	
-	boost::logic::tribool const
-	can_collide_with(
-		collision::base const &
-	) const;
-	
-	void
-	collision_begin(
-		collision::base &
-	);
-
-	void
-	collision_end(
-		collision::base &
-	);
-
-	virtual boost::logic::tribool const 
-	can_collide_with_entity(
-		base const &
-	) const;
-	
-	virtual void
-	collision_entity_begin(
-		base &
-	);
-
-	virtual void
-	collision_entity_end(
-		base &
-	);
-
-	environment::object_ptr environment_;
+	environment::object *environment_;
 
 	entity_id const id_;
 

@@ -1,8 +1,8 @@
 #ifndef SANGUIS_SERVER_ENTITIES_POS_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_POS_HPP_INCLUDED
 
-#include "../pos_type.hpp"
-#include "../dim_type.hpp"
+#include "../pos.hpp"
+#include "../dim.hpp"
 
 namespace sanguis
 {
@@ -11,10 +11,10 @@ namespace server
 namespace entities
 {
 
-pos_type const
+server::pos const
 pos(
-	pos_type const &center,
-	dim_type const &
+	server::pos const &center,
+	server::dim const &
 );
 
 }
