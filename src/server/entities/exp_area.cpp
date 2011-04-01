@@ -7,7 +7,7 @@
 #include <boost/foreach.hpp>
 
 sanguis::server::entities::exp_area::exp_area(
-	exp_type const _exp
+	server::exp const _exp
 )
 :
 	exp_(_exp),
@@ -16,7 +16,27 @@ sanguis::server::entities::exp_area::exp_area(
 }
 
 sanguis::server::entities::exp_area::~exp_area()
-{}
+{
+}
+
+void
+sanguis::server::entities::exp_area::recreate_ghosts(
+	entities::ghost_parameters const &_params
+)
+{
+#if 0
+	with_ghosts::add_ghost(
+		fcppt::make_unique_ptr<
+			collision::circle_ghost
+		>(
+			collision::ghost_parameters(
+				_params.world(),
+				_params.global_groups(),
+				_params.center()
+		)
+	);
+#endif
+}
 
 void
 sanguis::server::entities::exp_area::on_die()
@@ -51,11 +71,11 @@ sanguis::server::entities::exp_area::on_die()
 		>(
 			*ref.second
 		).add_exp(
-			server::exp_type(
+			server::exp(
 				exp_.get()
 				/
 				static_cast<
-					exp_type::value_type
+					exp::value_type
 				>(
 					player_links_.size()
 				)
@@ -71,12 +91,6 @@ sanguis::server::entities::exp_area::radius() const
 
 bool
 sanguis::server::entities::exp_area::dead() const
-{
-	return true;
-}
-
-bool
-sanguis::server::entities::exp_area::invulnerable() const
 {
 	return true;
 }
@@ -107,23 +121,9 @@ sanguis::server::entities::exp_area::server_only() const
 	return true;
 }
 
-boost::logic::tribool const 
-sanguis::server::entities::exp_area::can_collide_with_entity(
-	base const &_entity
-) const
-{
-	return
-		dynamic_cast<
-			player const *
-		>(
-			&_entity
-		)
-		!= 0;
-}
-	
 void
-sanguis::server::entities::exp_area::collision_entity_begin(
-	base &_entity
+sanguis::server::entities::exp_area::collision_begin(
+	entities::with_body &_entity
 )
 {
 	player_links_.insert(
@@ -133,8 +133,8 @@ sanguis::server::entities::exp_area::collision_entity_begin(
 }
 
 void
-sanguis::server::entities::exp_area::collision_entity_end(
-	base &_entity
+sanguis::server::entities::exp_area::collision_end(
+	entities::with_body &_entity
 )
 {
 	player_links_.erase(

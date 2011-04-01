@@ -31,7 +31,7 @@ sanguis::server::entities::enemies::create(
 				_etype,
 				_load_context,
 				damage::no_armor(),
-				health_type(9),
+				server::health(9),
 				movement_speed(25),
 				ai::create_simple(),
 				weapons::unique_ptr(
@@ -47,8 +47,8 @@ sanguis::server::entities::enemies::create(
 						weapons::range(1000)
 					)
 				),
-				static_cast<probability_type>(0.25),
-				static_cast<exp_type>(10),
+				server::probability(0.25f),
+				server::exp(10),
 				_spawn
 			)
 		);
@@ -61,7 +61,7 @@ sanguis::server::entities::enemies::create(
 				_etype,
 				_load_context,
 				damage::no_armor(),
-				health_type(3),
+				server::health(3),
 				movement_speed(20),
 				ai::create_simple(),
 				weapons::unique_ptr(
@@ -73,8 +73,8 @@ sanguis::server::entities::enemies::create(
 						weapons::damage(2)
 					)
 				),
-				static_cast<probability_type>(0.25),
-				static_cast<exp_type>(5),
+				server::probability(0.25f),
+				server::exp(5),
 				_spawn
 			)
 		);
@@ -89,7 +89,7 @@ sanguis::server::entities::enemies::create(
 				_etype,
 				_load_context,
 				damage::no_armor(),
-				health_type(3),
+				server::health(3),
 				movement_speed(85),
 				ai::create_simple(),
 				weapons::unique_ptr(
@@ -101,8 +101,8 @@ sanguis::server::entities::enemies::create(
 						weapons::damage(4)
 					)
 				),
-				static_cast<probability_type>(0.25),
-				static_cast<exp_type>(10),
+				server::probability(0.25f),
+				server::exp(10),
 				_spawn
 			)
 		);
@@ -115,7 +115,7 @@ sanguis::server::entities::enemies::create(
 				_etype,
 				_load_context,
 				damage::no_armor(),
-				health_type(500),
+				server::health(500),
 				movement_speed(50),
 				ai::create_simple(),
 				weapons::unique_ptr(
@@ -127,8 +127,8 @@ sanguis::server::entities::enemies::create(
 						weapons::damage(10)
 					)
 				),
-				static_cast<probability_type>(0.75),
-				static_cast<exp_type>(300),
+				server::probability(0.75f),
+				server::exp(300),
 				_spawn
 			)
 		);
@@ -141,7 +141,7 @@ sanguis::server::entities::enemies::create(
 				_etype,
 				_load_context,
 				damage::no_armor(),
-				health_type(1),
+				server::health(1),
 				movement_speed(40),
 				ai::create_simple(),
 				weapons::unique_ptr(
@@ -153,8 +153,8 @@ sanguis::server::entities::enemies::create(
 						weapons::damage(0.5f)
 					)
 				),
-				static_cast<probability_type>(0.1),
-				static_cast<exp_type>(1),
+				server::probability(0.1f),
+				server::exp(1),
 				_spawn
 			)
 		);
@@ -167,7 +167,7 @@ sanguis::server::entities::enemies::create(
 				_etype,
 				_load_context,
 				damage::no_armor(),
-				health_type(12),
+				server::health(12),
 				movement_speed(75),
 				ai::create_simple(),
 				weapons::unique_ptr(
@@ -179,8 +179,8 @@ sanguis::server::entities::enemies::create(
 						weapons::damage(5)
 					)
 				),
-				static_cast<probability_type>(0.5),
-				static_cast<exp_type>(12),
+				server::probability(0.5f),
+				server::exp(12),
 				_spawn
 			)		
 		);

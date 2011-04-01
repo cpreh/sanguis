@@ -1,6 +1,6 @@
 #include "enemy.hpp"
 #include "../exp_area.hpp"
-#include "../insert_parameters_pos.hpp"
+#include "../insert_parameters_center.hpp"
 #include "../property/initial.hpp"
 #include "../spawns/spawn.hpp"
 #include "../../weapons/weapon.hpp"
@@ -19,12 +19,12 @@ sanguis::server::entities::enemies::enemy::enemy(
 	enemy_type::type const _etype,
 	server::environment::load_context_ptr const _load_context,
 	damage::armor const &_armor,
-	entities::health_type const _health,
+	server::health const _health,
 	entities::movement_speed const _movement_speed,
 	ai::create_function const &_ai,
 	weapons::unique_ptr _weapon,
-	probability_type const _spawn_chance,
-	exp_type const _exp,
+	server::probability const _spawn_chance,
+	server::exp const _exp,
 	auto_weak_link const _spawn_owner
 )
 :
@@ -51,7 +51,9 @@ sanguis::server::entities::enemies::enemy::enemy(
 			_movement_speed.get(),
 			0
 		),
-		static_cast<space_unit>(0)
+		server::direction(
+			0
+		)
 	),
 	etype_(_etype),
 	spawn_chance_(_spawn_chance),
@@ -97,12 +99,12 @@ sanguis::server::entities::enemies::enemy::add_message(
 		messages::create(
 			messages::add_enemy(
 				this->id(),
-				this->pos(),
-				this->angle(),
+				this->pos().get(),
+				this->angle().get(),
 				this->dim(),
-				this->abs_speed(),
-				this->current_health(),
-				this->max_health(),
+				this->abs_speed().get(),
+				this->current_health().get(),
+				this->max_health().get(),
 				this->etype()
 			)
 		);
@@ -135,21 +137,21 @@ sanguis::server::entities::enemies::enemy::on_die()
 			*this
 		);
 
-	environment()->insert(
-		unique_ptr(
+	this->environment().insert(
+		entities::unique_ptr(
 			fcppt::make_unique_ptr<
 				entities::exp_area
 			>(
 				exp_
 			)
 		),
-		insert_parameters_pos(
-			center()
+		entities::insert_parameters_center(
+			this->center()
 		)
 	);
 
-	environment()->pickup_chance(
+	this->environment().pickup_chance(
 		spawn_chance_,
-		center()
+		this->center()
 	);
 }

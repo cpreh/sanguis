@@ -9,7 +9,6 @@
 #include "../center.hpp"
 #include "../speed.hpp"
 #include <sge/projectile/shape/shared_base_ptr.hpp>
-#include <sge/projectile/world_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
 
@@ -59,9 +58,7 @@ private:
 
 	// own virtual functions
 	virtual sge::projectile::shape::shared_base_ptr const
-	recreate_shape(
-		sge::projectile::world &
-	) = 0;
+	recreate_shape() = 0;
 
 	typedef fcppt::scoped_ptr<
 		collision::body

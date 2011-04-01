@@ -6,6 +6,7 @@
 #include "group_vector.hpp"
 #include "position_callback.hpp"
 #include "solidity_fwd.hpp"
+#include "user_data_fwd.hpp"
 #include "../center.hpp"
 #include "../speed.hpp"
 #include <sge/projectile/body/object_fwd.hpp>
@@ -35,6 +36,7 @@ public:
 		collision::group_vector const &,
 		sge::projectile::shape::shared_base_ptr,
 		collision::solidity const &,
+		collision::user_data const &,
 		collision::position_callback const &
 	);
 

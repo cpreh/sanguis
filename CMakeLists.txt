@@ -1033,11 +1033,13 @@ SET(
 	src/server/entities/exp_area.hpp
 	src/server/entities/friend.cpp
 	src/server/entities/friend.hpp
+	src/server/entities/ghost_parameters.hpp
+	src/server/entities/ghost_parameters_fwd.hpp
 	src/server/entities/insert_parameters.cpp
 	src/server/entities/insert_parameters.hpp
+	src/server/entities/insert_parameters_center.cpp
+	src/server/entities/insert_parameters_center.hpp
 	src/server/entities/insert_parameters_fwd.hpp
-	src/server/entities/insert_parameters_pos.cpp
-	src/server/entities/insert_parameters_pos.hpp
 	src/server/entities/link_container.hpp
 	src/server/entities/movable.cpp
 	src/server/entities/movable.hpp

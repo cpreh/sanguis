@@ -6,12 +6,12 @@
 #include "../entities/unique_ptr.hpp"
 #include "../entities/insert_parameters_fwd.hpp"
 #include "../collision/global_groups_fwd.hpp"
+#include "../center.hpp"
+#include "../exp.hpp"
+#include "../health.hpp"
+#include "../level.hpp"
 #include "../player_id.hpp"
-#include "../health_type.hpp"
-#include "../exp_type.hpp"
-#include "../level_type.hpp"
-#include "../pos_type.hpp"
-#include "../probability_type.hpp"
+#include "../probability.hpp"
 #include "../../world_id.hpp"
 #include "../../weapon_type.hpp"
 #include "../../entity_id.hpp"
@@ -67,27 +67,27 @@ public:
 	virtual void
 	max_health_changed(
 		entity_id,
-		server::health_type
+		server::health
 	) = 0;
 
 	virtual void
 	exp_changed(
-		player_id,
-		entity_id,
-		exp_type
+		server::player_id,
+		sanguis::entity_id,
+		server::exp
 	) = 0;
 
 	virtual void
 	level_changed(
 		player_id,
 		entity_id,
-		level_type
+		server::level
 	) = 0;
 
 	virtual void
 	pickup_chance(
-		probability_type spawn_chance,
-		pos_type const &center
+		server::probability spawn_chance,
+		server::center const &
 	) = 0;
 
 	virtual void

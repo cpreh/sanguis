@@ -2,8 +2,8 @@
 #define SANGUIS_SERVER_ENTITIES_INSERT_PARAMETERS_HPP_INCLUDED
 
 #include "insert_parameters_fwd.hpp"
-#include "../space_unit.hpp"
-#include "../pos_type.hpp"
+#include "../angle.hpp"
+#include "../center.hpp"
 #include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/nonassignable.hpp>
 
@@ -21,18 +21,19 @@ class insert_parameters
 	);
 public:
 	insert_parameters(
-		pos_type const &,
-		space_unit angle
+		server::center const &,
+		server::angle
 	);
 
-	pos_type const &
+	server::center const &
 	center() const;
 
-	space_unit
+	server::angle const
 	angle() const;
 private:
-	pos_type const center_;
-	space_unit const angle_;
+	server::center const center_;
+
+	server::angle const angle_;
 };
 
 }

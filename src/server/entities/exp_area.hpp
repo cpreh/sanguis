@@ -1,9 +1,11 @@
 #ifndef SANGUIS_SERVER_ENTITIES_EXP_AREA_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_EXP_AREA_HPP_INCLUDED
 
-#include "base.hpp"
 #include "auto_weak_link_fwd.hpp"
-#include "../exp_type.hpp"
+#include "with_ghosts.hpp"
+#include "../collision/ghost_parameters_fwd.hpp"
+#include "../center.hpp"
+#include "../exp.hpp"
 #include "../../entity_id.hpp"
 #include <fcppt/container/map_decl.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -31,6 +33,11 @@ public:
 	~exp_area();
 private:
 	void
+	recreate_ghosts(
+		entities::ghost_parameters const &
+	);
+
+	void
 	on_die();
 
 	bool
@@ -50,11 +57,9 @@ private:
 	bool
 	server_only() const;
 
-	boost::logic::tribool const 
-	can_collide_with_entity(
-		base const &
-	) const;
-	
+	server::center const
+	center() const;
+
 	void
 	collision_begin(
 		entities::with_body &
@@ -69,7 +74,7 @@ private:
 
 	typedef fcppt::container::map<
 		std::map<
-			server::entity_id,
+			sanguis::entity_id,
 			entities::auto_weak_link
 		>
 	> weak_link_map;

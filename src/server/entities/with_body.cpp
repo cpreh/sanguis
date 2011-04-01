@@ -1,5 +1,10 @@
 #include "with_body.hpp"
+#include "collision_groups.hpp"
+#include "solidity.hpp"
+#include "../collision/body.hpp"
+#include "../collision/user_data.hpp"
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 
 sanguis::server::entities::with_body::with_body()
 :
@@ -47,6 +52,9 @@ sanguis::server::entities::with_body::on_transfer(
 			),
 			entities::solidity(
 				this->type()
+			),
+			collision::user_data(
+				*this
 			),
 			std::tr1::bind(
 				&with_body::on_position_change,

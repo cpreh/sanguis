@@ -25,6 +25,7 @@ sanguis::server::collision::body::body(
 	collision::group_vector const &_collision_groups,
 	sge::projectile::shape::shared_base_ptr const _shape,
 	collision::solidity const &_solidity,
+	collision::user_data const &_user_data,
 	collision::position_callback const &_position_callback
 )
 :
@@ -57,7 +58,7 @@ sanguis::server::collision::body::body(
 					_create_param.global_groups()
 				),
 				collision::to_sge_user_data(
-					_create_param.user_data()
+					_user_data
 				)
 			)
 		)

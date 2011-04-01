@@ -1,6 +1,7 @@
 #include "with_dim.hpp"
 #include "radius.hpp"
 #include "pos.hpp"
+#include "../collision/create_circle.hpp"
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 
@@ -32,11 +33,13 @@ sanguis::server::entities::with_dim::dim() const
 	return dim_;
 }
 
-sanguis::server::space_unit
-sanguis::server::entities::with_dim::radius() const
+sge::projectile::shape::shared_base_ptr const
+sanguis::server::entities::with_dim::recreate_shape()
 {
 	return
-		entities::radius(
-			this->dim()
+		collision::create_circle(
+			entities::radius(
+				this->dim()
+			)
 		);
 }

@@ -5,15 +5,15 @@
 #include "../with_buffs.hpp"
 #include "../with_dim.hpp"
 #include "../with_health.hpp"
+#include "../auto_weak_link.hpp"
 #include "../movable.hpp"
 #include "../movement_speed.hpp"
-#include "../health_type.hpp"
-#include "../auto_weak_link.hpp"
 #include "../../ai/create_function.hpp"
-#include "../../weapons/unique_ptr.hpp"
 #include "../../environment/load_context_ptr.hpp"
-#include "../../probability_type.hpp"
-#include "../../exp_type.hpp"
+#include "../../weapons/unique_ptr.hpp"
+#include "../../probability.hpp"
+#include "../../exp.hpp"
+#include "../../health.hpp"
 #include "../../../enemy_type.hpp"
 #include <fcppt/noncopyable.hpp>
 
@@ -42,12 +42,12 @@ public:
 		enemy_type::type,
 		server::environment::load_context_ptr,
 		damage::armor const &,
-		entities::health_type,
+		server::health,
 		entities::movement_speed,
 		ai::create_function const &,
 		weapons::unique_ptr weapon,
-		probability_type spawn_chance,
-		exp_type exp,
+		server::probability spawn_chance,
+		server::exp,
 		auto_weak_link spawn_owner = auto_weak_link()
 	);
 
@@ -77,9 +77,9 @@ private:
 
 	enemy_type::type const etype_;
 
-	probability_type const spawn_chance_;
+	server::probability const spawn_chance_;
 
-	exp_type const exp_;
+	server::exp const exp_;
 
 	auto_weak_link const spawn_owner_;
 };

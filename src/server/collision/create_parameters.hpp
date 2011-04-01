@@ -3,7 +3,6 @@
 
 #include "create_parameters_fwd.hpp"
 #include "global_groups_fwd.hpp"
-#include "user_data.hpp"
 #include "../center.hpp"
 #include "../speed.hpp"
 #include <sge/projectile/world_fwd.hpp>
@@ -27,7 +26,6 @@ public:
 		sge::projectile::world &,
 		server::center const &,
 		server::speed const &,
-		collision::user_data const &,
 		collision::global_groups const &
 	);
 
@@ -40,9 +38,6 @@ public:
 	server::speed const
 	speed() const;
 
-	collision::user_data const &
-	user_data() const;
-
 	collision::global_groups const &
 	global_groups() const;
 private:
@@ -52,8 +47,6 @@ private:
 
 	server::speed const speed_;
 	
-	collision::user_data const user_data_;
-
 	collision::global_groups const &global_groups_;
 };
 
