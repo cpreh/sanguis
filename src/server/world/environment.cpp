@@ -30,7 +30,7 @@ sanguis::server::world::environment::insert(
 
 void
 sanguis::server::world::environment::weapon_changed(
-	entity_id const _id,
+	sanguis::entity_id const _id,
 	weapon_type::type const _weapon
 )
 {
@@ -42,8 +42,8 @@ sanguis::server::world::environment::weapon_changed(
 
 void
 sanguis::server::world::environment::got_weapon(
-	player_id const _player_id,
-	entity_id const _id,
+	server::player_id const _player_id,
+	sanguis::entity_id const _id,
 	weapon_type::type const _weapon
 )
 {
@@ -56,7 +56,7 @@ sanguis::server::world::environment::got_weapon(
 
 void
 sanguis::server::world::environment::attacking_changed(
-	entity_id const _id,
+	sanguis::entity_id const _id,
 	bool const _is_attacking
 )
 {
@@ -68,7 +68,7 @@ sanguis::server::world::environment::attacking_changed(
 
 void
 sanguis::server::world::environment::reloading_changed(
-	entity_id const _id,
+	sanguis::entity_id const _id,
 	bool const _is_reloading
 )
 {
@@ -80,8 +80,8 @@ sanguis::server::world::environment::reloading_changed(
 
 void
 sanguis::server::world::environment::max_health_changed(
-	entity_id const _id,
-	health_type const _health
+	sanguis::entity_id const _id,
+	server::health const _health
 )
 {
 	world_.max_health_changed(
@@ -92,9 +92,9 @@ sanguis::server::world::environment::max_health_changed(
 
 void
 sanguis::server::world::environment::exp_changed(
-	player_id const _player_id,
-	entity_id const _entity_id,
-	exp_type const _exp
+	server::player_id const _player_id,
+	sanguis::entity_id const _entity_id,
+	server::exp const _exp
 )
 {
 	world_.exp_changed(
@@ -106,9 +106,9 @@ sanguis::server::world::environment::exp_changed(
 
 void
 sanguis::server::world::environment::level_changed(
-	player_id const _player_id,
-	entity_id const _entity_id,
-	level_type const _level
+	server::player_id const _player_id,
+	sanguis::entity_id const _entity_id,
+	server::level const _level
 )
 {
 	world_.level_changed(
@@ -120,8 +120,8 @@ sanguis::server::world::environment::level_changed(
 
 void
 sanguis::server::world::environment::pickup_chance(
-	probability_type const _spawn_chance,
-	pos_type const &_center
+	server::probability const _spawn_chance,
+	server::center const &_center
 )
 {
 	world_.pickup_chance(
@@ -132,8 +132,8 @@ sanguis::server::world::environment::pickup_chance(
 
 void
 sanguis::server::world::environment::request_transfer(
-	world_id const _world_id,
-	entity_id const _entity_id,
+	sanguis::world_id const _world_id,
+	sanguis::entity_id const _entity_id,
 	entities::insert_parameters const &_insert_parameters
 )
 {
@@ -146,8 +146,8 @@ sanguis::server::world::environment::request_transfer(
 
 void
 sanguis::server::world::environment::add_sight_range(
-	player_id const _player_id,
-	entity_id const _target_id
+	server::player_id const _player_id,
+	sanguis::entity_id const _target_id
 )
 {
 	world_.add_sight_range(
@@ -158,8 +158,8 @@ sanguis::server::world::environment::add_sight_range(
 
 void
 sanguis::server::world::environment::remove_sight_range(
-	player_id const _player_id,
-	entity_id const _target_id
+	server::player_id const _player_id,
+	sanguis::entity_id const _target_id
 )
 {
 	world_.remove_sight_range(
@@ -170,7 +170,7 @@ sanguis::server::world::environment::remove_sight_range(
 
 void
 sanguis::server::world::environment::remove_player(
-	player_id const _player_id
+	server::player_id const _player_id
 )
 {
 	world_.remove_player(
@@ -178,7 +178,7 @@ sanguis::server::world::environment::remove_player(
 	);
 }
 
-sge::collision::world_ptr const
+sge::projectile::world &
 sanguis::server::world::environment::collision_world() const
 {
 	return world_.collision_world();
@@ -190,7 +190,7 @@ sanguis::server::world::environment::global_collision_groups() const
 	return world_.global_collision_groups();
 }
 
-sanguis::server::environment::load_context_ptr const
+sanguis::server::environment::load_context &
 sanguis::server::world::environment::load_context() const
 {
 	return world_.load_context();

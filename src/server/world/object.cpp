@@ -4,8 +4,6 @@
 #include "context.hpp"
 #include "prop.hpp"
 #include "../collision/body_collision.hpp"
-#include "../collision/test.hpp"
-#include "../collision/satellite.hpp"
 #include "../entities/base.hpp"
 #include "../entities/movable.hpp"
 #include "../entities/with_health.hpp"
@@ -33,7 +31,7 @@
 #include "../../load/model/object.hpp"
 #include "../../exception.hpp"
 #include <sge/projectile/world.hpp>
-#include <sge/time/second.hpp>
+#include <sge/time/second_f.hpp>
 #include <sge/time/millisecond.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
@@ -47,8 +45,8 @@
 #include <boost/foreach.hpp>
 
 sanguis::server::world::object::object(
-	context_ptr const _global_context,
-	server::environment::load_context_ptr const _load_context,
+	world::context &_global_context,
+	server::environment::load_context &_load_context,
 	server::console &_console
 )
 :
@@ -68,9 +66,11 @@ sanguis::server::world::object::object(
 	),
 	collision_connection_(
 		collision_world_->body_collision(
-			&collision::body_collision,
-			std::tr1::placeholders::_1,
-			std::tr1::placeholders::_2
+			std::tr1::bind(
+				&collision::body_collision,
+				std::tr1::placeholders::_1,
+				std::tr1::placeholders::_2
+			)
 		)
 	),
 	sight_ranges_(),
@@ -94,7 +94,7 @@ sanguis::server::world::object::object(
 		)
 	),
 	pickup_spawner_(
-		environment_
+		*environment_
 	),
 	wave_gen_(
 		_console
@@ -117,7 +117,7 @@ sanguis::server::world::object::update(
 
 	wave_gen_.process(
 		_time,
-		environment(),
+		this->environment(),
 		load_context_
 	);
 
@@ -127,9 +127,7 @@ sanguis::server::world::object::update(
 	);
 
 	collision_world_->update(
-		static_cast<
-			sge::time::funit
-		>(
+		sge::time::second_f(
 			_time
 		)
 	);
@@ -166,7 +164,7 @@ sanguis::server::world::object::insert(
 	);
 
 	_entity->transfer(
-		environment_,
+		this->environment(),
 		collision_groups_,
 		_insert_parameters
 	);
@@ -194,15 +192,15 @@ sanguis::server::world::object::insert(
 		);
 }
 
-sanguis::server::environment::object_ptr const
+sanguis::server::environment::object &
 sanguis::server::world::object::environment() const
 {
-	return environment_;
+	return *environment_;
 }
 
 void
 sanguis::server::world::object::weapon_changed(
-	entity_id const _id,
+	sanguis::entity_id const _id,
 	weapon_type::type const _wt
 )
 {
@@ -219,8 +217,8 @@ sanguis::server::world::object::weapon_changed(
 
 void
 sanguis::server::world::object::got_weapon(
-	player_id const _player_id,
-	entity_id const _entity_id,
+	server::player_id const _player_id,
+	sanguis::entity_id const _entity_id,
 	weapon_type::type const _wt
 )
 {
@@ -237,7 +235,7 @@ sanguis::server::world::object::got_weapon(
 
 void
 sanguis::server::world::object::attacking_changed(
-	entity_id const _id,
+	sanguis::entity_id const _id,
 	bool const _is_attacking
 )
 {
@@ -261,7 +259,7 @@ sanguis::server::world::object::attacking_changed(
 
 void
 sanguis::server::world::object::reloading_changed(
-	entity_id const _id,
+	sanguis::entity_id const _id,
 	bool const _is_reloading
 )
 {
@@ -285,8 +283,8 @@ sanguis::server::world::object::reloading_changed(
 
 void
 sanguis::server::world::object::max_health_changed(
-	entity_id const _id,
-	health_type const _health
+	sanguis::entity_id const _id,
+	server::health const _health
 )
 {
 	this->send_entity_specific(
@@ -294,7 +292,7 @@ sanguis::server::world::object::max_health_changed(
 		messages::create(
 			messages::max_health(
 				_id,
-				_health
+				_health.get()
 			)
 		)
 	);
@@ -302,9 +300,9 @@ sanguis::server::world::object::max_health_changed(
 
 void
 sanguis::server::world::object::exp_changed(
-	player_id const _player_id,
-	entity_id const _entity_id,
-	exp_type const _exp
+	server::player_id const _player_id,
+	sanguis::entity_id const _entity_id,
+	server::exp const _exp
 )
 {
 	this->send_player_specific(
@@ -325,9 +323,9 @@ sanguis::server::world::object::exp_changed(
 
 void
 sanguis::server::world::object::level_changed(
-	player_id const _player_id,
-	entity_id const _entity_id,
-	level_type const _level
+	server::player_id const _player_id,
+	sanguis::entity_id const _entity_id,
+	server::level const _level
 )
 {
 	this->send_player_specific(
@@ -343,8 +341,8 @@ sanguis::server::world::object::level_changed(
 
 void
 sanguis::server::world::object::pickup_chance(
-	probability_type const _spawn_chance,
-	pos_type const &_center
+	server::probability const _spawn_chance,
+	server::center const &_center
 )
 {
 	pickup_spawner_.spawn(
@@ -355,8 +353,8 @@ sanguis::server::world::object::pickup_chance(
 
 void
 sanguis::server::world::object::request_transfer(
-	world_id const _world_id,
-	entity_id const _entity_id,
+	sanguis::world_id const _world_id,
+	sanguis::entity_id const _entity_id,
 	entities::insert_parameters const &_insert_parameters
 )
 {
@@ -379,7 +377,7 @@ sanguis::server::world::object::request_transfer(
 		).release()
 	);
 
-	global_context_->transfer_entity(
+	global_context_.transfer_entity(
 		_world_id,
 		move(
 			entity
@@ -390,8 +388,8 @@ sanguis::server::world::object::request_transfer(
 
 void
 sanguis::server::world::object::add_sight_range(
-	player_id const _player_id,
-	entity_id const _target_id
+	server::player_id const _player_id,
+	sanguis::entity_id const _target_id
 )
 {
 	sight_ranges_[
@@ -432,8 +430,8 @@ sanguis::server::world::object::add_sight_range(
 
 void
 sanguis::server::world::object::remove_sight_range(
-	player_id const _player_id,
-	entity_id const _target_id
+	server::player_id const _player_id,
+	sanguis::entity_id const _target_id
 )
 {
 	{
@@ -496,18 +494,18 @@ sanguis::server::world::object::remove_sight_range(
 
 void
 sanguis::server::world::object::remove_player(
-	player_id const _player_id
+	server::player_id const _player_id
 )
 {
-	global_context_->remove_player(
+	global_context_.remove_player(
 		_player_id
 	);
 }
 
-sge::collision::world_ptr const
+sge::projectile::world &
 sanguis::server::world::object::collision_world() const
 {
-	return collision_world_;
+	return *collision_world_;
 }
 
 sanguis::server::collision::global_groups const &
@@ -516,7 +514,7 @@ sanguis::server::world::object::global_collision_groups() const
 	return collision_groups_;
 }
 
-sanguis::server::environment::load_context_ptr const
+sanguis::server::environment::load_context &
 sanguis::server::world::object::load_context() const
 {
 	return load_context_;
@@ -537,7 +535,7 @@ sanguis::server::world::object::send_entity_specific(
 				_id
 			)
 		)
-			global_context_->send_to_player(
+			global_context_.send_to_player(
 				range.first,
 				_msg
 			);
@@ -549,7 +547,7 @@ sanguis::server::world::object::send_player_specific(
 	messages::auto_ptr _msg
 )
 {
-	global_context_->send_to_player(
+	global_context_.send_to_player(
 		_player_id,
 		_msg
 	);
@@ -588,9 +586,6 @@ sanguis::server::world::object::update_entity(
 
 		entity.die();
 		
-		// process collision end before the destructor is called
-		entity.destroy();
-
 		entities_.erase(
 			_it
 		);

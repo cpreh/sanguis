@@ -29,6 +29,7 @@
 #include <sge/projectile/world_fwd.hpp>
 #include <sge/time/timer.hpp>
 #include <fcppt/container/map_decl.hpp>
+#include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
 
@@ -192,6 +193,8 @@ private:
 	collision_world_scoped_ptr const collision_world_;
 
 	server::collision::global_groups const collision_groups_;
+
+	fcppt::signal::scoped_connection const collision_connection_;
 
 	sight_range_map sight_ranges_;
 
