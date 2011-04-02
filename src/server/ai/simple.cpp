@@ -7,7 +7,6 @@
 #include "../entities/with_body.hpp"
 #include "../entities/with_health.hpp"
 #include "../entities/property/current_to_max.hpp"
-#include "../collision/collides.hpp"
 #include "../collision/distance.hpp"
 #include "../vector.hpp"
 #include <sge/time/second.hpp>
@@ -232,21 +231,9 @@ sanguis::server::ai::simple::update(
 				)
 			);
 	
-		// don't walk into the enemy
-		// TODO: this should be done with the collision system
-		if(
-			collision::collides(
-				*target_,
-				me_
-			)
-		)
-			speed.current(
-				0
-			);
-		else
-			entities::property::current_to_max(
-				speed
-			);
+		entities::property::current_to_max(
+			speed
+		);
 	}
 }
 

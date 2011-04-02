@@ -8,7 +8,6 @@
 #include "states/ready.hpp"
 #include "../entities/with_weapon.hpp"
 #include "../collision/distance.hpp"
-#include "../collision/bounding_circle.hpp"
 #include "../../exception.hpp"
 #include <sge/time/second_f.hpp>
 #include <fcppt/math/sphere/basic_impl.hpp>
@@ -108,10 +107,8 @@ sanguis::server::weapons::weapon::in_range(
 		collision::distance(
 			_from,
 			_to
-		) - collision::bounding_circle(
-			_from
 		)
-		.radius() < this->range().get();
+		< this->range().get();
 }
 
 void

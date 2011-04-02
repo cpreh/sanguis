@@ -65,7 +65,7 @@ INCLUDE_DIRECTORIES(${AWL_INCLUDE_DIRS})
 
 FIND_PACKAGE(
 	SGE REQUIRED
-	COMPONENTS cegui config fonttext console parse sprite systems texture time viewport
+	COMPONENTS cegui config fonttext console parse projectile sprite systems texture time viewport
 )
 
 INCLUDE_DIRECTORIES(${SGE_INCLUDE_DIRS})
@@ -934,12 +934,8 @@ SET(
 	src/server/collision/body_enter_callback.hpp
 	src/server/collision/body_exit_callback.hpp
 	src/server/collision/body_fwd.hpp
-	src/server/collision/bounding_circle.cpp
-	src/server/collision/bounding_circle.hpp
 	src/server/collision/circle_ghost.cpp
 	src/server/collision/circle_ghost.hpp
-	src/server/collision/collides.cpp
-	src/server/collision/collides.hpp
 	src/server/collision/create_circle.cpp
 	src/server/collision/create_circle.hpp
 	src/server/collision/create_parameters.cpp
