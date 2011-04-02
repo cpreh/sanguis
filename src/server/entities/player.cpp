@@ -16,11 +16,11 @@
 #include <fcppt/make_unique_ptr.hpp>
 
 sanguis::server::entities::player::player(
-	server::environment::load_context_ptr const _load_context,
-	entities::health_type const _health,
+	server::environment::load_context &_load_context,
+	server::health const _health,
 	damage::armor const &_armor,
 	entities::movement_speed const _speed,
-	string const &_name,
+	server::string const &_name,
 	server::player_id const _player_id
 )
 :
@@ -30,12 +30,14 @@ sanguis::server::entities::player::player(
 			_speed.get(),
 			0
 		),
-		static_cast<space_unit>(0)
+		server::direction(
+			0
+		)
 	),
 	with_auras(),
 	with_buffs(),
 	with_dim(
-		_load_context->entity_dim(
+		_load_context.entity_dim(
 			FCPPT_TEXT("player")
 		)
 	),
@@ -53,7 +55,7 @@ sanguis::server::entities::player::player(
 	level_(0),
 	skill_points_(0)
 {
-	add_aura(
+	this->add_aura(
 		auras::unique_ptr(
 			fcppt::make_unique_ptr<
 				auras::update_sight
@@ -91,7 +93,7 @@ sanguis::server::entities::player::add_exp(
 		exp_
 	);
 
-	level_type const
+	server::level const
 		old_level(
 			level_
 		),
@@ -112,8 +114,8 @@ sanguis::server::entities::player::add_exp(
 	level_ = new_level;
 
 	this->environment()->level_changed(
-		player_id(),
-		id(),
+		this->player_id(),
+		this->id(),
 		level_
 	);
 }
@@ -131,11 +133,13 @@ sanguis::server::entities::player::perk_choosable(
 {
 	return
 		skill_points_
-		&& perk_tree_.choosable(
+		&&
+		perk_tree_.choosable(
 			_perk,
 			level_
 		)
-		&& with_perks::perk_choosable(
+		&&
+		with_perks::perk_choosable(
 			_perk
 		);
 }
@@ -192,7 +196,7 @@ sanguis::server::entities::player::player_id() const
 void
 sanguis::server::entities::player::on_die()
 {
-	this->environment()->remove_player(
+	this->environment().remove_player(
 		this->player_id()
 	);
 }
@@ -202,7 +206,7 @@ sanguis::server::entities::player::add_sight_range(
 	entity_id const _entity_id
 )
 {
-	this->environment()->add_sight_range(
+	this->environment().add_sight_range(
 		this->player_id(),
 		_entity_id
 	);
@@ -210,11 +214,11 @@ sanguis::server::entities::player::add_sight_range(
 
 void
 sanguis::server::entities::player::remove_sight_range(
-	entity_id const _entity_id
+	sanguis::entity_id const _entity_id
 )
 {
 	this->environment()->remove_sight_range(
-		this->player_id(),
+		this.player_id(),
 		_entity_id
 	);
 }

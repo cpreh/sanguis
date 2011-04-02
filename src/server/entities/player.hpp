@@ -9,7 +9,7 @@
 #include "with_perks.hpp"
 #include "with_weapon.hpp"
 #include "movement_speed.hpp"
-#include "../environment/load_context_ptr.hpp"
+#include "../environment/load_context_fwd.hpp"
 #include "../damage/armor.hpp"
 #include "../perks/unique_ptr.hpp"
 #include "../perks/tree.hpp"
@@ -45,7 +45,7 @@ class player
 	);
 public:
 	player(
-		server::environment::load_context_ptr,
+		server::environment::load_context &,
 		server::health,
 		damage::armor const &,
 		entities::movement_speed,

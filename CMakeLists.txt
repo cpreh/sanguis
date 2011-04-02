@@ -1156,7 +1156,6 @@ SET(
 	src/server/environment/load_context.cpp
 	src/server/environment/load_context.hpp
 	src/server/environment/load_context_fwd.hpp
-	src/server/environment/load_context_ptr.hpp
 	src/server/environment/object.cpp
 	src/server/environment/object.hpp
 	src/server/environment/object_fwd.hpp
@@ -1222,7 +1221,6 @@ SET(
 	src/server/perks/irs.cpp
 	src/server/perks/irs.hpp
 	src/server/perks/level_diff.hpp
-	src/server/perks/level_type.hpp
 	src/server/perks/list.hpp
 	src/server/perks/perk.cpp
 	src/server/perks/perk.hpp

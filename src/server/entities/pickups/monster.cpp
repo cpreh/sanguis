@@ -1,5 +1,5 @@
 #include "monster.hpp"
-#include "../insert_parameters_pos.hpp"
+#include "../insert_parameters_center.hpp"
 #include "../friend.hpp"
 #include "../../ai/simple.hpp"
 #include "../../weapons/melee.hpp"
@@ -16,7 +16,7 @@
 #include <boost/spirit/home/phoenix/object/new.hpp>
 
 sanguis::server::entities::pickups::monster::monster(
-	server::environment::load_context_ptr const _load_context,
+	server::environment::load_context &_load_context,
 	team::type const _team,
 	friend_type::type const _ftype
 )
@@ -40,16 +40,16 @@ sanguis::server::entities::pickups::monster::do_pickup(
 	base &_receiver
 )
 {
-	environment()->insert(
+	this->environment().insert(
 		entities::unique_ptr(
 			new entities::friend_(
 			//fcppt::make_unique_ptr<
 //				entities::friend_
 //			>(
 				ftype_,
-				environment()->load_context(),
+				this->environment().load_context(),
 				damage::no_armor(),
-				health_type(100),
+				server::health(100),
 				entities::movement_speed(100),
 				boost::phoenix::new_<
 					ai::simple
@@ -68,8 +68,8 @@ sanguis::server::entities::pickups::monster::do_pickup(
 				)
 			)
 		),
-		entities::insert_parameters_pos(
-			center()
+		entities::insert_parameters_center(
+			this->center()
 		)
 	);
 }

@@ -17,7 +17,7 @@
 
 sanguis::server::entities::enemies::enemy::enemy(
 	enemy_type::type const _etype,
-	server::environment::load_context_ptr const _load_context,
+	server::environment::load_context &_load_context,
 	damage::armor const &_armor,
 	server::health const _health,
 	entities::movement_speed const _movement_speed,
@@ -36,7 +36,7 @@ sanguis::server::entities::enemies::enemy::enemy(
 	),
 	with_buffs(),
 	with_dim(
-		_load_context->entity_dim(
+		_load_context.entity_dim(
 			load::enemy_name(
 				_etype
 			)

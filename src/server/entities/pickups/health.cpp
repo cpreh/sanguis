@@ -5,9 +5,9 @@
 #include <fcppt/optional_impl.hpp>
 
 sanguis::server::entities::pickups::health::health(
-	server::environment::load_context_ptr const _load_context,
+	server::environment::load_context &_load_context,
 	team::type const _team,
-	entities::health_type const _amount
+	server::health const _amount
 )
 :
 	pickup(

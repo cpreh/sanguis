@@ -14,7 +14,7 @@
 sanguis::server::entities::unique_ptr
 sanguis::server::entities::enemies::create(
 	enemy_type::type const _etype,
-	environment::load_context_ptr const _load_context,
+	environment::load_context &_load_context,
 	entities::auto_weak_link const _spawn
 )
 {

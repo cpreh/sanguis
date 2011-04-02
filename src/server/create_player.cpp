@@ -12,13 +12,14 @@
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/utf8/convert.hpp>
+#include <fcppt/ref.hpp>
 #include <fcppt/homogenous_pair_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <boost/foreach.hpp>
 
 sanguis::server::entities::player_unique_ptr
 sanguis::server::create_player(
-	environment::load_context_ptr const _load_context,
+	environment::load_context &_load_context,
 	string const &_name,
 	unicast_callback const &_send_to_player,
 	player_id const _player_id,
@@ -36,7 +37,9 @@ sanguis::server::create_player(
 		fcppt::make_unique_ptr<
 			entities::player
 		>(
-			_load_context,
+			fcppt::ref(
+				_load_context
+			),
 			server::health(100),
 			damage::no_armor(),
 			entities::movement_speed(100),

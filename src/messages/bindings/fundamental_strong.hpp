@@ -1,14 +1,9 @@
-#ifndef SANGUIS_MESSAGES_BINDINGS_FUNDAMENTAL_HPP_INCLUDED
-#define SANGUIS_MESSAGES_BINDINGS_FUNDAMENTAL_HPP_INCLUDED
+#ifndef SANGUIS_MESSAGES_BINDINGS_FUNDAMENTAL_STRONG_HPP_INCLUDED
+#define SANGUIS_MESSAGES_BINDINGS_FUNDAMENTAL_STRONG_HPP_INCLUDED
 
-#include "float.hpp"
-#include "../serialization/endianness.hpp"
-#include "../types/space_unit.hpp"
-#include <fcppt/endianness/to_host.hpp>
-#include <fcppt/endianness/from_host.hpp>
+#include "fundamental.hpp"
 #include <majutsu/concepts/dynamic_memory/tag.hpp>
 #include <majutsu/concepts/static_size.hpp>
-#include <majutsu/fundamental.hpp>
 #include <majutsu/const_raw_pointer.hpp>
 #include <majutsu/raw_pointer.hpp>
 
@@ -22,20 +17,10 @@ namespace bindings
 template<
 	typename T
 >
-struct fundamental
-:
-majutsu::fundamental<
-	T
->
-{};
-
-template<>
-struct fundamental<
-	float
->
-:
-float_
-{};
+struct fundamental_strong 
+{
+	typedef T type;
+};
 
 template<
 	typename Type
@@ -43,7 +28,7 @@ template<
 void
 place(
 	majutsu::concepts::dynamic_memory::tag const *const _tag,
-	bindings::fundamental<
+	bindings::fundamental_strong<
 		Type
 	> const *,
 	Type const &_type,
@@ -53,16 +38,13 @@ place(
 	place(
 		_tag,
 		static_cast<
-			majutsu::fundamental<
-				Type
+			bindings::fundamental<
+				typename Type::value_type
 			> const *
 		>(
 			0
 		),
-		fcppt::endianness::from_host(
-			_type,
-			sanguis::messages::serialization::endianness()
-		),
+		_type.get(),
 		_mem
 	);
 }
@@ -73,26 +55,25 @@ template<
 Type
 make(
 	majutsu::concepts::dynamic_memory::tag const *const _tag,
-	bindings::fundamental<
+	bindings::fundamental_strong<
 		Type
 	> const *,
 	majutsu::const_raw_pointer const _beg
 )
 {
 	return
-		fcppt::endianness::to_host(
+		Type(
 			make(
 				_tag,
 				static_cast<
-					majutsu::fundamental<
-						Type
+					bindings::fundamental<
+						typename Type::value_type
 					> const *
 				>(
 					0
 				),
 				_beg
-			),
-			sanguis::messages::serialization::endianness()
+			)
 		);
 }
 
@@ -109,14 +90,14 @@ template<
 	typename Type
 >
 struct static_size<
-	sanguis::messages::bindings::fundamental<
+	sanguis::messages::bindings::fundamental_strong<
 		Type
 	>
 >
 :
 static_size<
-	majutsu::fundamental<
-		Type
+	sanguis::messages::bindings::fundamental<
+		typename Type::value_type
 	>
 >
 {};

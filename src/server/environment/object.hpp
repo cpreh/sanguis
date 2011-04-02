@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENVIRONMENT_OBJECT_HPP_INCLUDED
 
 #include "object_fwd.hpp"
-#include "load_context_ptr.hpp"
+#include "load_context_fwd.hpp"
 #include "../entities/unique_ptr.hpp"
 #include "../entities/insert_parameters_fwd.hpp"
 #include "../collision/global_groups_fwd.hpp"
@@ -120,7 +120,7 @@ public:
 	virtual collision::global_groups const &
 	global_collision_groups() const = 0;
 
-	virtual load_context_ptr const
+	virtual environment::load_context &
 	load_context() const = 0;
 
 	virtual ~object();

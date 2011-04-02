@@ -5,6 +5,7 @@
 #include "../../../messages/create.hpp"
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/try_dynamic_cast.hpp>
 #include <sge/time/second.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -23,7 +24,7 @@ sanguis::server::entities::pickups::pickup::~pickup()
 
 sanguis::server::entities::pickups::pickup::pickup(
 	pickup_type::type const _ptype,
-	server::environment::load_context_ptr const _load_context,
+	server::environment::load_context &_load_context,
 	team::type const _team,
 	optional_dim const &_dim
 )
@@ -34,7 +35,7 @@ sanguis::server::entities::pickups::pickup::pickup(
 		?
 			*_dim
 		:
-			_load_context->entity_dim(
+			_load_context.entity_dim(
 				load::pickup_name(
 					_ptype
 				)
@@ -50,18 +51,13 @@ sanguis::server::entities::pickups::pickup::pickup(
 		sge::time::activation_state::active,
 		diff_clock_.callback()
 	)
-{}
+{
+}
 
 bool
 sanguis::server::entities::pickups::pickup::dead() const
 {
 	return life_timer_.expired();
-}
-
-bool
-sanguis::server::entities::pickups::pickup::invulnerable() const
-{
-	return true;
 }
 
 sanguis::entity_type::type
@@ -77,39 +73,54 @@ sanguis::server::entities::pickups::pickup::team() const
 }
 
 boost::logic::tribool const
-sanguis::server::entities::pickups::pickup::can_collide_with_entity(
-	base const &e
+sanguis::server::entities::pickups::pickup::can_collide_with(
+	collision::body_base const &_other
 ) const
 {
-	return
-		e.team() == team()
-		&& e.type() == entity_type::player;
+	FCPPT_TRY_DYNAMIC_CAST(
+		entities::base const *,
+		base,
+		&_other
+	)
+	{
+		return
+			base->team() == this->team()
+			&& base->type() == entity_type::player;
+	}
+
+	return false;
 }
 
 void
-sanguis::server::entities::pickups::pickup::collision_entity_begin(
-	base &e
+sanguis::server::entities::pickups::pickup::collision(
+	collision::body_base &_other
 )
 {
 	// if something is spawned by this pickup that can pickup entities itself
 	// we will get an endless loop
-	if(dead())
+	if(
+		this->dead()
+	)
 		return;
 	
 	life_timer_.expire();
 
-	do_pickup(
-		e
+	this->do_pickup(
+		dynamic_cast<
+			entities::base &
+		>(
+			_other
+		)
 	);
 }
 
 void
 sanguis::server::entities::pickups::pickup::on_update(
-	time_type const time
+	time_type const _time
 )
 {
 	diff_clock_.update(
-		time
+		_time
 	);
 }
 
@@ -118,13 +129,14 @@ sanguis::server::entities::pickups::pickup::add_message(
 	player_id const
 ) const
 {
-	return messages::create(
-		messages::add_pickup(
-			id(),
-			pos(),
-			angle(),
-			dim(),
-			ptype()
-		)
-	);
+	return
+		messages::create(
+			messages::add_pickup(
+				this->id(),
+				this->pos().get(),
+				this->angle().get(),
+				this->dim(),
+				this->ptype()
+			)
+		);
 }

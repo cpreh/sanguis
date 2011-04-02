@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_EXP_AREA_HPP_INCLUDED
 
 #include "auto_weak_link_fwd.hpp"
+#include "with_body_fwd.hpp"
 #include "with_ghosts.hpp"
 #include "../collision/ghost_parameters_fwd.hpp"
 #include "../center.hpp"
@@ -66,7 +67,7 @@ private:
 	);
 
 	void
-	collision_entity_end(
+	collision_end(
 		entities::with_body &
 	);
 

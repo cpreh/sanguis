@@ -3,7 +3,7 @@
 
 #include "pickup.hpp"
 #include "../base_fwd.hpp"
-#include "../../environment/load_context_ptr.hpp"
+#include "../../environment/load_context_fwd.hpp"
 #include "../../team.hpp"
 #include "../../../friend_type.hpp"
 #include <fcppt/noncopyable.hpp>
@@ -26,7 +26,7 @@ class monster
 	);
 public:
 	monster(
-		server::environment::load_context_ptr,
+		server::environment::load_context &,
 		team::type,
 		friend_type::type
 	);

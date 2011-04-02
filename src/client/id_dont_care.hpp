@@ -8,7 +8,8 @@ namespace sanguis
 namespace client
 {
 
-entity_id id_dont_care();
+entity_id const
+id_dont_care();
 
 }
 }

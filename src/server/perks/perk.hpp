@@ -1,10 +1,10 @@
 #ifndef SANGUIS_SERVER_PERKS_PERK_HPP_INCLUDED
 #define SANGUIS_SERVER_PERKS_PERK_HPP_INCLUDED
 
-#include "level_type.hpp"
 #include "level_diff.hpp"
 #include "../entities/base_fwd.hpp"
-#include "../environment/object_ptr.hpp"
+#include "../environment/object_fwd.hpp"
+#include "../level.hpp"
 #include "../../time_type.hpp"
 #include "../../perk_type.hpp"
 #include <fcppt/noncopyable.hpp>
@@ -25,8 +25,8 @@ public:
 	virtual void
 	update(
 		entities::base &,
-		time_type,
-		environment::object_ptr
+		sanguis::time_type,
+		environment::object &
 	);
 	
 	bool
@@ -46,21 +46,21 @@ protected:
 		perk_type::type
 	);
 
-	level_type
+	server::level const
 	level() const;
 private:
 	virtual void
 	change(
 		entities::base &,
-		level_diff
+		perks::level_diff
 	) = 0;
 
-	virtual level_type
+	virtual server::level const 
 	max_level() const = 0;
 
 	perk_type::type const type_;
 
-	level_type level_;
+	server::level level_;
 };
 
 }

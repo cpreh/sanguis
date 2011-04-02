@@ -11,8 +11,8 @@
 #include <fcppt/math/dim/basic_impl.hpp>
 
 sanguis::server::entities::pickups::weapon::weapon(
-	server::environment::load_context_ptr const _load_context,
-	team::type const _team,
+	server::environment::load_context &_load_context,
+	server::team::type const _team,
 	weapon_type::type const _weapon_type
 )
 :
@@ -20,7 +20,7 @@ sanguis::server::entities::pickups::weapon::weapon(
 		pickup_type::weapon,
 		_load_context,
 		_team,
-		_load_context->entity_dim(
+		_load_context.entity_dim(
 			load::weapon_pickup_name(
 				_weapon_type
 			)
@@ -49,8 +49,8 @@ sanguis::server::entities::pickups::weapon::add_message(
 		messages::create(
 			messages::add_weapon_pickup(
 				this->id(),
-				this->pos(),
-				this->angle(),
+				this->pos().get(),
+				this->angle().get(),
 				this->dim(),
 				this->wtype()
 			)

@@ -3,8 +3,8 @@
 
 #include "pickup.hpp"
 #include "../base_fwd.hpp"
-#include "../health_type.hpp"
-#include "../../environment/load_context_ptr.hpp"
+#include "../../environment/load_context_fwd.hpp"
+#include "../../health.hpp"
 #include "../../team.hpp"
 #include <fcppt/noncopyable.hpp>
 
@@ -26,9 +26,9 @@ class health
 	);
 public:
 	health(
-		server::environment::load_context_ptr,
+		server::environment::load_context &,
 		team::type team,
-		entities::health_type amount
+		server::health amount
 	);
 
 	~health();
@@ -38,7 +38,7 @@ private:
 		base &receiver
 	);
 
-	health_type const amount_;
+	server::health const amount_;
 };
 
 }

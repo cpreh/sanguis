@@ -7,11 +7,11 @@
 #include "with_health.hpp"
 #include "movable.hpp"
 #include "movement_speed.hpp"
-#include "../environment/load_context_ptr.hpp"
+#include "../environment/load_context_fwd.hpp"
 #include "../damage/armor.hpp"
 #include "../ai/create_function.hpp"
 #include "../weapons/unique_ptr.hpp"
-#include "../health_type.hpp"
+#include "../health.hpp"
 #include "../../friend_type.hpp"
 #include "../../time_type.hpp"
 #include <fcppt/noncopyable.hpp>
@@ -37,9 +37,9 @@ class friend_
 public:
 	friend_(
 		friend_type::type,
-		server::environment::load_context_ptr,
+		server::environment::load_context &,
 		damage::armor const &,
-		health_type health,
+		server::health,
 		entities::movement_speed,
 		ai::create_function const &,
 		weapons::unique_ptr weapon
@@ -59,11 +59,6 @@ private:
 	messages::auto_ptr
 	add_message(
 		server::player_id
-	) const;
-
-	boost::logic::tribool const
-	can_collide_with_entity(
-		base const &
 	) const;
 
 	friend_type::type const ftype_;

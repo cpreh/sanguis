@@ -16,10 +16,10 @@ bool
 sanguis::server::perks::perk::can_raise_level() const
 {
 	FCPPT_ASSERT(
-		level() <= max_level()
+		this->level() <= this->max_level()
 	);
 
-	return level() < max_level();
+	return this->level() < this->max_level();
 }
 
 void
@@ -28,13 +28,13 @@ sanguis::server::perks::perk::raise_level(
 )
 {
 	if(
-		!can_raise_level()
+		!this->can_raise_level()
 	)
-		throw exception(
+		throw sanguis::exception(
 			FCPPT_TEXT("Can't raise perk level!")
 		);
 	
-	change(
+	this->change(
 		_owner,
 		1
 	);
@@ -49,7 +49,8 @@ sanguis::server::perks::perk::type() const
 }
 
 sanguis::server::perks::perk::~perk()
-{}
+{
+}
 
 sanguis::server::perks::perk::perk(
 	perk_type::type const _type
@@ -57,9 +58,10 @@ sanguis::server::perks::perk::perk(
 :
 	type_(_type),
 	level_(0)
-{}
+{
+}
 
-sanguis::server::perks::level_type
+sanguis::server::level const
 sanguis::server::perks::perk::level() const
 {
 	return level_;

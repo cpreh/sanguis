@@ -9,7 +9,7 @@
 #include "../movable.hpp"
 #include "../movement_speed.hpp"
 #include "../../ai/create_function.hpp"
-#include "../../environment/load_context_ptr.hpp"
+#include "../../environment/load_context_fwd.hpp"
 #include "../../weapons/unique_ptr.hpp"
 #include "../../probability.hpp"
 #include "../../exp.hpp"
@@ -40,7 +40,7 @@ class enemy
 public:	
 	enemy(
 		enemy_type::type,
-		server::environment::load_context_ptr,
+		server::environment::load_context &,
 		damage::armor const &,
 		server::health,
 		entities::movement_speed,

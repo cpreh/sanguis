@@ -3,7 +3,7 @@
 
 #include "base_fwd.hpp"
 #include "types/message.hpp"
-#include <majutsu/raw_pointer.hpp>
+#include <majutsu/const_raw_pointer.hpp>
 #include <majutsu/size_type.hpp>
 #include <fcppt/noncopyable.hpp>
 

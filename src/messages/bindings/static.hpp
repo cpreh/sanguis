@@ -3,6 +3,7 @@
 
 #include <majutsu/concepts/dynamic_memory/tag.hpp>
 #include <majutsu/concepts/static_size.hpp>
+#include <majutsu/const_raw_pointer.hpp>
 #include <majutsu/integral_size.hpp>
 #include <majutsu/size_type.hpp>
 #include <majutsu/raw_pointer.hpp>
@@ -18,7 +19,8 @@ template<
 	typename Type,
 	typename Adapted
 >
-struct static_ {
+struct static_
+{
 	typedef Type type;
 };
 
@@ -28,23 +30,23 @@ template<
 >
 void
 place(
-	majutsu::concepts::dynamic_memory::tag const *const tag_,
+	majutsu::concepts::dynamic_memory::tag const *const _tag,
 	static_<
 		Type,
 		Adapted
 	> const *,
-	Type const &value_,
-	majutsu::raw_pointer mem
+	Type const &_value,
+	majutsu::raw_pointer _mem
 )
 {
 	for(
 		typename Type::const_iterator it(
-			value_.begin()
+			_value.begin()
 		);
-		it != value_.end();
-		mem +=
+		it != _value.end();
+		_mem +=
 			needed_size(
-				tag_,
+				_tag,
 				static_cast<
 					Adapted const *
 				>(0),
@@ -53,12 +55,12 @@ place(
 		++it
 	)
 		place(
-			tag_,
+			_tag,
 			static_cast<
 				Adapted const *
 			>(0),
 			*it,
-			mem
+			_mem
 		);
 }
 
@@ -68,12 +70,12 @@ template<
 >
 Type
 make(
-	majutsu::concepts::dynamic_memory::tag const *const tag_,
+	majutsu::concepts::dynamic_memory::tag const *const _tag,
 	static_<
 		Type,
 		Adapted
 	> const *,
-	majutsu::const_raw_pointer mem
+	majutsu::const_raw_pointer _mem
 )
 {
 	Type ret;
@@ -83,9 +85,9 @@ make(
 			ret.begin()
 		);
 		it != ret.end();
-		mem +=
+		_mem +=
 			needed_size(
-				tag_,
+				_tag,
 				static_cast<
 					Adapted const *
 				>(0),
@@ -95,11 +97,11 @@ make(
 	)
 		*it =
 			make(
-				tag_,
+				_tag,
 				static_cast<
 					Adapted const *
 				>(0),
-				mem
+				_mem
 			);
 
 	return ret;

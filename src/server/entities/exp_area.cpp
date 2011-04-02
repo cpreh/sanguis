@@ -35,6 +35,7 @@ sanguis::server::entities::exp_area::recreate_ghosts(
 				_params.center()
 		)
 	);
+	return static_cast<space_unit>(2000); // TODO!
 #endif
 }
 
@@ -81,12 +82,6 @@ sanguis::server::entities::exp_area::on_die()
 				)
 			)
 		);	
-}
-
-sanguis::server::space_unit
-sanguis::server::entities::exp_area::radius() const
-{
-	return static_cast<space_unit>(2000); // TODO!
 }
 
 bool

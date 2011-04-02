@@ -13,9 +13,9 @@
 
 sanguis::server::entities::friend_::friend_(
 	friend_type::type const _ftype,
-	server::environment::load_context_ptr const _load_context,
+	server::environment::load_context &_load_context,
 	damage::armor const &_armor,
-	health_type const _health,
+	server::health const _health,
 	entities::movement_speed const _movement_speed,
 	ai::create_function const &_ai,
 	weapons::unique_ptr _weapon
@@ -29,7 +29,7 @@ sanguis::server::entities::friend_::friend_(
 	),
 	with_buffs(),
 	with_dim(
-		_load_context->entity_dim(
+		_load_context.entity_dim(
 			load::friend_name(
 				_ftype
 			)
@@ -44,7 +44,9 @@ sanguis::server::entities::friend_::friend_(
 			_movement_speed.get(),
 			0
 		),
-		static_cast<space_unit>(0)
+		server::direction(
+			0
+		)
 	),
 	ftype_(_ftype)
 {
@@ -89,30 +91,13 @@ sanguis::server::entities::friend_::add_message(
 		messages::create(
 			messages::add_friend(
 				this->id(),
-				this->pos(),
-				this->angle(),
+				this->pos().get(),
+				this->angle().get(),
 				this->dim(),
-				this->abs_speed(),
-				this->current_health(),
-				this->max_health(),
+				this->abs_speed().get(),
+				this->current_health().get(),
+				this->max_health().get(),
 				ftype_
 			)
 		);
-}
-
-boost::logic::tribool const
-sanguis::server::entities::friend_::can_collide_with_entity(
-	base const &_entity
-) const
-{
-	return
-		dynamic_cast<
-			entities::pickups::pickup const *
-		>(
-			&_entity
-		)
-		?
-			boost::logic::tribool(false)
-		:
-			boost::logic::indeterminate;
 }

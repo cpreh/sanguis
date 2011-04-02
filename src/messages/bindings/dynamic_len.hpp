@@ -6,6 +6,7 @@
 #include <fcppt/endianness/copy_n_to_host.hpp>
 #include <fcppt/truncation_check_cast.hpp>
 #include <majutsu/concepts/dynamic_memory/tag.hpp>
+#include <majutsu/const_raw_pointer.hpp>
 #include <majutsu/size_type.hpp>
 #include <majutsu/raw_pointer.hpp>
 #include <boost/cstdint.hpp>
@@ -22,7 +23,8 @@ template<
 	typename Type,
 	typename Adapted
 >
-struct dynamic_len {
+struct dynamic_len
+{
 	typedef Type type;
 
 	typedef boost::uint16_t length_type;
@@ -34,12 +36,12 @@ template<
 >
 majutsu::size_type
 needed_size(
-	majutsu::concepts::dynamic_memory::tag const *const tag_,
+	majutsu::concepts::dynamic_memory::tag const *const _tag,
 	dynamic_len<
 		Type,
 		Adapted
 	> const *,
-	Type const &value_
+	Type const &_value
 )
 {
 	majutsu::size_type ret(
@@ -53,11 +55,11 @@ needed_size(
 
 	BOOST_FOREACH(
 		typename Type::const_reference elem,
-		value_
+		_value
 	)
 		ret +=
 			needed_size(
-				tag_,
+				_tag,
 				static_cast<
 					Adapted const *
 				>(0),
@@ -73,13 +75,13 @@ template<
 >
 void
 place(
-	majutsu::concepts::dynamic_memory::tag const *const tag_,
+	majutsu::concepts::dynamic_memory::tag const *const _tag,
 	dynamic_len<
 		Type,
 		Adapted
-	> const *const concept_,
-	Type const &value_,
-	majutsu::raw_pointer mem
+	> const *const _concept,
+	Type const &_value,
+	majutsu::raw_pointer _mem
 )
 {
 	typedef typename dynamic_len<
@@ -92,9 +94,9 @@ place(
 			length_type
 		>(
 			needed_size(
-				tag_,
-				concept_,
-				value_
+				_tag,
+				_concept,
+				_value
 			)
 		)
 	);
@@ -106,21 +108,21 @@ place(
 			&sz
 		),
 		sizeof(length_type),
-		mem,
+		_mem,
 		sizeof(length_type),
 		sanguis::messages::serialization::endianness()
 	);
 
-	mem += sizeof(length_type);
+	_mem += sizeof(length_type);
 	
 	for(
 		typename Type::const_iterator it(
-			value_.begin()
+			_value.begin()
 		);
-		it != value_.end();
-		mem +=
+		it != _value.end();
+		_mem +=
 			needed_size(
-				tag_,
+				_tag,
 				static_cast<
 					Adapted const *
 				>(0),
@@ -129,12 +131,12 @@ place(
 		++it
 	)
 		place(
-			tag_,
+			_tag,
 			static_cast<
 				Adapted const *
 			>(0),
 			*it,
-			mem
+			_mem
 		);
 }
 
@@ -144,12 +146,12 @@ template<
 >
 Type 
 make(
-	majutsu::concepts::dynamic_memory::tag const *const tag_,
+	majutsu::concepts::dynamic_memory::tag const *const _tag,
 	dynamic_len<
 		Type,
 		Adapted
 	> const *,
-	majutsu::const_raw_pointer const mem
+	majutsu::const_raw_pointer const _mem
 )
 {
 	typedef typename dynamic_len<
@@ -160,7 +162,7 @@ make(
 	length_type my_size;
 		
 	fcppt::endianness::copy_n_to_host(
-		mem,
+		_mem,
 		sizeof(length_type),
 		reinterpret_cast<
 			majutsu::raw_pointer
@@ -175,14 +177,14 @@ make(
 
 	for(
 		majutsu::const_raw_pointer cur_mem(
-			mem + sizeof(length_type)
+			_mem + sizeof(length_type)
 		);
-		cur_mem != mem + my_size;
+		cur_mem != _mem + my_size;
 	)
 	{
 		typename Type::value_type elem(
 			make(
-				tag_,
+				_tag,
 				static_cast<
 					Adapted const *
 				>(0),
@@ -196,7 +198,7 @@ make(
 
 		cur_mem +=
 			needed_size(
-				tag_,
+				_tag,
 				static_cast<
 					Adapted const *
 				>(0),

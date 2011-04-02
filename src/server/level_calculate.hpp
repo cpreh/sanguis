@@ -1,18 +1,19 @@
 #ifndef SANGUIS_SERVER_LEVEL_CALCULATE_HPP_INCLUDED
 #define SANGUIS_SERVER_LEVEL_CALCULATE_HPP_INCLUDED
 
-#include "level_type.hpp"
-#include "exp_type.hpp"
+#include "exp.hpp"
+#include "level.hpp"
 
 namespace sanguis
 {
 namespace server
 {
 
-level_type
+server::level const
 level_calculate(
-	exp_type,
-	level_type);
+	server::exp,
+	server::level
+);
 
 }
 }

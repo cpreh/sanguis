@@ -3,7 +3,7 @@
 
 #include "pickup.hpp"
 #include "../base_fwd.hpp"
-#include "../../environment/load_context_ptr.hpp"
+#include "../../environment/load_context_fwd.hpp"
 #include "../../team.hpp"
 #include "../../../weapon_type.hpp"
 #include "../../../messages/auto_ptr.hpp"
@@ -27,8 +27,8 @@ class weapon
 	);
 public:
 	weapon(
-		server::environment::load_context_ptr,
-		team::type team,
+		server::environment::load_context &,
+		server::team::type team,
 		weapon_type::type
 	);
 

@@ -2,24 +2,26 @@
 #include "space_unit.hpp"
 #include <cmath>
 
-sanguis::server::level_type
+sanguis::server::level const
 sanguis::server::level_calculate(
-	exp_type const _exp,
-	level_type
+	server::exp const _exp,
+	server::level
 )
 {
 	return
-		level_type(
+		server::level(
 			static_cast<
-				level_type::value_type
+				server::level::value_type
 			>(
 				static_cast<
-					space_unit
-				>(0.3)
+					server::space_unit
+				>(
+					0.3
+				)
 				*
 				std::sqrt(
 					static_cast<
-						space_unit
+						server::space_unit
 					>(
 						_exp.get()
 					)

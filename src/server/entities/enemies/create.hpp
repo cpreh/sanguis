@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_ENEMIES_CREATE_HPP_INCLUDED
 
 #include "../unique_ptr.hpp"
-#include "../../environment/load_context_ptr.hpp"
+#include "../../environment/load_context_fwd.hpp"
 #include "../../entities/auto_weak_link.hpp"
 #include "../../../enemy_type.hpp"
 
@@ -18,7 +18,7 @@ namespace enemies
 entities::unique_ptr
 create(
 	enemy_type::type,
-	environment::load_context_ptr,
+	environment::load_context &,
 	entities::auto_weak_link spawn
 );
 

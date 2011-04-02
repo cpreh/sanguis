@@ -27,47 +27,92 @@ float_type const exp(
 
 fixed_int
 make_fixed(
-	float_type const f
+	float_type const _val
 )
 {
-	return static_cast<fixed_int>(
-		std::log(
-			f + static_cast<float_type>(1)
-		) * exp
-	);
+	return
+		static_cast<
+			fixed_int
+		>(
+			std::log(
+				_val
+				+
+				static_cast<
+					float_type
+				>(
+					1
+				)
+			)
+			* exp
+		);
 }
 
 float_type
 unmake_fixed(
-	fixed_int const i
+	fixed_int const _val
 )
 {
-	return std::exp(
-		static_cast<float_type>(i) / exp
-	) - static_cast<float_type>(1);
+	return
+		std::exp(
+			static_cast<
+				float_type
+			>(
+				_val
+			)
+			/ exp
+		)
+		- static_cast<
+			float_type
+		>(
+			1
+		);
 }
 
 fixed_int
 serialize(
-	float_type const f
+	float_type const _val
 )
 {
-	return f < 0
-		? make_fixed(-f) | sign_bit
-		: make_fixed(f) & ~sign_bit;
+	return
+		_val < 0
+		?
+			make_fixed(
+				_val
+			)
+			| sign_bit
+		:
+			make_fixed(
+				_val
+			)
+			& ~sign_bit;
 }
 
 float_type
 deserialize(
-	fixed_int c
+	fixed_int _val
 )
 {
-	bool const is_signed = c & sign_bit;
-	c &= ~sign_bit;
+	bool const is_signed(
+		_val & sign_bit
+	);
 
-	return is_signed
-		? unmake_fixed(c) * static_cast<float_type>(-1)
-		: unmake_fixed(c);
+	_val &= ~sign_bit;
+
+	return
+		is_signed
+		?
+			unmake_fixed(
+				_val
+			)
+			* static_cast<
+				float_type
+			>(
+				-1
+			)
+		:
+			unmake_fixed(
+				_val
+			);
 }
 
 }
@@ -84,37 +129,39 @@ sanguis::messages::bindings::needed_size(
 
 void
 sanguis::messages::bindings::place(
-	majutsu::concepts::dynamic_memory::tag const *const tag_,
+	majutsu::concepts::dynamic_memory::tag const *const _tag,
 	float_ const *,
-	float_::type const &t,
-	majutsu::raw_pointer const mem
+	float_::type const &_val,
+	majutsu::raw_pointer const _mem
 )
 {
 	place(
-		tag_,
+		_tag,
 		static_cast<
 			adapted const *
 		>(0),
-		serialize(t),
-		mem
+		serialize(
+			_val
+		),
+		_mem
 	);
 }
 
 sanguis::messages::bindings::float_::type
 sanguis::messages::bindings::make(
-	majutsu::concepts::dynamic_memory::tag const *const tag_,
+	majutsu::concepts::dynamic_memory::tag const *const _tag,
 	float_ const *,
-	majutsu::const_raw_pointer const beg
+	majutsu::const_raw_pointer const _beg
 )
 {
 	return
 		deserialize(
 			make(
-				tag_,
+				_tag,
 				static_cast<
 					adapted const *
 				>(0),
-				beg
+				_beg
 			)
 		);
 }
