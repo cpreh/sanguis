@@ -4,8 +4,9 @@
 #include "../entities/projectiles/rocket.hpp"
 #include "../entities/insert_parameters.hpp"
 #include <sge/time/second_f.hpp>
-#include <fcppt/random/make_inclusive_range.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/twopi.hpp>
+#include <fcppt/random/make_inclusive_range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 

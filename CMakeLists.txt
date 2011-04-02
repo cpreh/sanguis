@@ -950,6 +950,7 @@ SET(
 	src/server/collision/ghost.cpp
 	src/server/collision/ghost.hpp
 	src/server/collision/ghost_fwd.hpp
+	src/server/collision/ghost_parameters.cpp
 	src/server/collision/ghost_parameters.hpp
 	src/server/collision/ghost_parameters_fwd.hpp
 	src/server/collision/ghost_unique_ptr.hpp
@@ -971,6 +972,7 @@ SET(
 	src/server/collision/to_sge_user_data.hpp
 	src/server/collision/to_sge_vector.cpp
 	src/server/collision/to_sge_vector.hpp
+	src/server/collision/user_data.cpp
 	src/server/collision/user_data.hpp
 	src/server/collision/user_data_fwd.hpp
 	src/server/console.cpp
@@ -1030,6 +1032,7 @@ SET(
 	src/server/entities/exp_area.hpp
 	src/server/entities/friend.cpp
 	src/server/entities/friend.hpp
+	src/server/entities/ghost_parameters.cpp
 	src/server/entities/ghost_parameters.hpp
 	src/server/entities/ghost_parameters_fwd.hpp
 	src/server/entities/insert_parameters.cpp
@@ -1112,6 +1115,7 @@ SET(
 	src/server/entities/property/value.hpp
 	src/server/entities/radius.cpp
 	src/server/entities/radius.hpp
+	src/server/entities/solidity.cpp
 	src/server/entities/solidity.hpp
 	src/server/entities/spawns/count_per_wave.hpp
 	src/server/entities/spawns/hidden.cpp

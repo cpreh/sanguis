@@ -36,6 +36,16 @@ sanguis::server::entities::with_body::center(
 }
 
 void
+sanguis::server::entities::with_body::speed(
+	server::speed const &_speed
+)
+{
+	collision_body_->speed(
+		_speed
+	);
+}
+
+void
 sanguis::server::entities::with_body::on_transfer(
 	collision::create_parameters const &_params
 )

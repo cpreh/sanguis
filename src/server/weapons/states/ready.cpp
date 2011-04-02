@@ -5,17 +5,25 @@
 #include "../events/stop.hpp"
 #include "../../entities/with_weapon.hpp"
 
+sanguis::server::weapons::states::ready::ready()
+{
+}
+
+sanguis::server::weapons::states::ready::~ready()
+{
+}
+
 boost::statechart::result
 sanguis::server::weapons::states::ready::react(
-	events::shoot const &e
+	events::shoot const &_event
 )
 {
 	if(
 		!context<
 			weapon
 		>().in_range(
-			e.from(),
-			e.to()
+			_event.from(),
+			_event.to()
 		)
 	)
 		return discard_event();
@@ -23,16 +31,18 @@ sanguis::server::weapons::states::ready::react(
 	context<
 		weapon
 	>().init_attack(
-		e.from()
+		_event.from()
 	);
 
 	context<
 		weapon
 	>().post_event(
-		e
+		_event
 	);
 
-	post_event(e);
+	this->post_event(
+		_event
+	);
 
 	return transit<castpoint>();
 }

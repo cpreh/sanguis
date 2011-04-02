@@ -1,8 +1,15 @@
 #include "exp_area.hpp"
 #include "player.hpp"
 #include "auto_weak_link.hpp"
+#include "ghost_parameters.hpp"
+#include "collision_groups.hpp"
+#include "../collision/circle_ghost.hpp"
+#include "../collision/ghost_parameters.hpp"
+#include "../entities/base.hpp"
 #include "../../messages/base.hpp"
 #include <fcppt/container/map_impl.hpp>
+#include <fcppt/tr1/functional.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <boost/logic/tribool.hpp>
 #include <boost/foreach.hpp>
 
@@ -19,24 +26,52 @@ sanguis::server::entities::exp_area::~exp_area()
 {
 }
 
+sanguis::server::center const
+sanguis::server::entities::exp_area::center() const
+{
+	// FIXME: This is not needed anywhere!
+	return
+		server::center(
+			server::center::value_type::null()
+		);
+}
+
 void
 sanguis::server::entities::exp_area::recreate_ghosts(
 	entities::ghost_parameters const &_params
 )
 {
-#if 0
 	with_ghosts::add_ghost(
-		fcppt::make_unique_ptr<
-			collision::circle_ghost
-		>(
-			collision::ghost_parameters(
-				_params.world(),
-				_params.global_groups(),
-				_params.center()
+		collision::ghost_unique_ptr(
+			fcppt::make_unique_ptr<
+				collision::circle_ghost
+			>(
+				collision::ghost_parameters(
+					_params.world(),
+					entities::collision_groups(
+						this->type(),
+						this->team()
+					),
+					_params.global_groups()
+				),
+				_params.center(),
+				server::radius(
+					2000 // TODO
+				),
+				std::tr1::bind(
+					&exp_area::collision_begin,
+					this,
+					std::tr1::placeholders::_1
+				),
+				std::tr1::bind(
+					&exp_area::collision_end,
+					this,
+					std::tr1::placeholders::_1
+				)
+			)
 		)
 	);
-	return static_cast<space_unit>(2000); // TODO!
-#endif
+
 }
 
 void
@@ -118,21 +153,49 @@ sanguis::server::entities::exp_area::server_only() const
 
 void
 sanguis::server::entities::exp_area::collision_begin(
-	entities::with_body &_entity
+	collision::body_base &_entity
 )
 {
+	// TODO: put this back in the base class?
+	entities::base *const base(
+		dynamic_cast<
+			entities::base *
+		>(
+			&_entity
+		)
+	);
+
+	if(
+		!base
+	)
+		return;
+
 	player_links_.insert(
-		_entity.id(),
-		_entity.link()
+		base->id(),
+		base->link()
 	);
 }
 
 void
 sanguis::server::entities::exp_area::collision_end(
-	entities::with_body &_entity
+	collision::body_base &_entity
 )
 {
+	// TODO: put this back in the base class?
+	entities::base *const base(
+		dynamic_cast<
+			entities::base *
+		>(
+			&_entity
+		)
+	);
+
+	if(
+		!base
+	)
+		return;
+
 	player_links_.erase(
-		_entity.id()
+		base->id()
 	);
 }

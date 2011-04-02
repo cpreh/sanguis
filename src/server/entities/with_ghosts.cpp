@@ -55,3 +55,10 @@ sanguis::server::entities::with_ghosts::update_center(
 			_center
 		);
 }
+
+void
+sanguis::server::entities::with_ghosts::recreate_ghosts(
+	entities::ghost_parameters const &
+)
+{
+}

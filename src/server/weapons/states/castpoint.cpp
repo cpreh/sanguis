@@ -28,6 +28,10 @@ sanguis::server::weapons::states::castpoint::castpoint(
 {
 }
 
+sanguis::server::weapons::states::castpoint::~castpoint()
+{
+}
+
 boost::statechart::result
 sanguis::server::weapons::states::castpoint::react(
 	events::shoot const &_event

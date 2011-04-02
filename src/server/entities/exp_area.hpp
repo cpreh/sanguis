@@ -2,8 +2,8 @@
 #define SANGUIS_SERVER_ENTITIES_EXP_AREA_HPP_INCLUDED
 
 #include "auto_weak_link_fwd.hpp"
-#include "with_body_fwd.hpp"
 #include "with_ghosts.hpp"
+#include "../collision/body_base_fwd.hpp"
 #include "../collision/ghost_parameters_fwd.hpp"
 #include "../center.hpp"
 #include "../exp.hpp"
@@ -63,12 +63,12 @@ private:
 
 	void
 	collision_begin(
-		entities::with_body &
+		collision::body_base &
 	);
 
 	void
 	collision_end(
-		entities::with_body &
+		collision::body_base &
 	);
 
 	server::exp const exp_;

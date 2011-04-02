@@ -36,6 +36,9 @@ public:
 
 	~circle_ghost();
 private:
+	server::center const
+	center() const;
+
 	void
 	on_body_enter(
 		collision::body_base &

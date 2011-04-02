@@ -67,6 +67,18 @@ sanguis::server::collision::ghost::~ghost()
 }
 
 void
+sanguis::server::collision::ghost::center(
+	server::center const &_center
+)
+{
+	ghost_->position(
+		collision::to_sge_vector(
+			_center.get()
+		)
+	);
+}
+
+void
 sanguis::server::collision::ghost::body_enter(
 	sge::projectile::body::object const &_body
 )
