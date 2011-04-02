@@ -1,6 +1,6 @@
 #include "rocket.hpp"
 #include "aoe_damage.hpp"
-#include "../insert_parameters_pos.hpp"
+#include "../insert_parameters_center.hpp"
 #include "../../damage/list.hpp"
 #include "../../damage/wrapper.hpp"
 #include "../../damage/meta.hpp"
@@ -14,18 +14,18 @@
 #include <fcppt/text.hpp>
 
 sanguis::server::entities::projectiles::rocket::rocket(
-	server::environment::load_context_ptr const _load_context,
-	team::type const _team,
+	server::environment::load_context &_load_context,
+	server::team::type const _team,
 	damage::unit const _damage,
-	space_unit const _aoe,
-	space_unit const _angle
+	server::radius const _aoe,
+	server::direction const _direction
 )
 :
 	aoe_projectile(
 		aoe_projectile_type::rocket,
 		_team,
 		entities::movement_speed(300),
-		_load_context->entity_dim(
+		_load_context.entity_dim(
 			FCPPT_TEXT("rocket")
 		),
 		life_time(
@@ -33,7 +33,7 @@ sanguis::server::entities::projectiles::rocket::rocket(
 		),
 		indeterminate::no,
 		_aoe,
-		_angle
+		_direction
 	),
 	damage_(
 		_damage
@@ -56,7 +56,7 @@ sanguis::server::entities::projectiles::rocket::do_damage(
 void
 sanguis::server::entities::projectiles::rocket::on_die()
 {
-	this->environment()->insert(
+	this->environment().insert(
 		entities::unique_ptr(
 			fcppt::make_unique_ptr<
 				aoe_damage
@@ -71,7 +71,7 @@ sanguis::server::entities::projectiles::rocket::on_die()
 				)
 			)
 		),
-		entities::insert_parameters_pos(
+		entities::insert_parameters_center(
 			this->center()
 		)
 	);

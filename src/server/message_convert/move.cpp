@@ -13,7 +13,7 @@ sanguis::server::message_convert::move(
 		messages::create(
 			messages::move(
 				_entity.id(),
-				_entity.pos()
+				_entity.pos().get()
 			)
 		);
 }

@@ -6,8 +6,8 @@
 #include "../with_health_fwd.hpp"
 #include "../../damage/unit.hpp"
 #include "../../damage/array.hpp"
+#include "../../radius.hpp"
 #include "../../team.hpp"
-#include "../../space_unit.hpp"
 #include "../../../time_type.hpp"
 #include <fcppt/noncopyable.hpp>
 
@@ -31,7 +31,7 @@ class aoe_damage
 public:
 	aoe_damage(
 		team::type team,
-		space_unit radius,
+		server::radius,
 		damage::unit damage_per_pulse,
 		unsigned pulses,
 		time_type pulse_diff,

@@ -122,7 +122,7 @@ sanguis::server::entities::with_health::max_health_change(
 	property::value const _value
 )
 {
-	this->environment()->max_health_changed(
+	this->environment().max_health_changed(
 		this->id(),
 		server::health(
 			property::to_float<

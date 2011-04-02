@@ -5,6 +5,7 @@
 #include "../events/tick.hpp"
 #include "../message_functor.hpp"
 #include "../log.hpp"
+#include "../player_id_from_net.hpp"
 #include "../../messages/call/object.hpp"
 #include "../../messages/unpause.hpp"
 #include "../../messages/create.hpp"
@@ -55,7 +56,9 @@ sanguis::server::states::paused::react(
 			std::tr1::bind(
 				&paused::handle_default_msg,
 				this,
-				_message.id(),
+				server::player_id_from_net(
+					_message.id()
+				),
 				std::tr1::placeholders::_1
 			)
 		);
@@ -63,7 +66,7 @@ sanguis::server::states::paused::react(
 
 boost::statechart::result
 sanguis::server::states::paused::operator()(
-	net::id,
+	server::player_id,
 	messages::player_unpause const &
 )
 {
@@ -78,7 +81,7 @@ sanguis::server::states::paused::operator()(
 
 boost::statechart::result
 sanguis::server::states::paused::operator()(
-	net::id,
+	server::player_id,
 	messages::player_pause const &
 )
 {
@@ -93,7 +96,7 @@ sanguis::server::states::paused::operator()(
 
 boost::statechart::result
 sanguis::server::states::paused::handle_default_msg(
-	net::id,
+	server::player_id,
 	messages::base const &
 )
 {

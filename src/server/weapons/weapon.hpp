@@ -13,7 +13,7 @@
 #include "states/reloading_fwd.hpp"
 #include "states/backswing_fwd.hpp"
 #include "states/castpoint_fwd.hpp"
-#include "../pos.hpp"
+#include "../vector.hpp"
 #include "../space_unit.hpp"
 #include "../entities/with_weapon_fwd.hpp"
 #include "../entities/base_fwd.hpp"
@@ -51,7 +51,7 @@ public:
 	void
 	attack(
 		entities::with_weapon &from,
-		server::pos const &to
+		server::vector const &to
 	);
 
 	weapon_type::type
@@ -75,7 +75,7 @@ public:
 	bool
 	in_range(
 		entities::base const &from,
-		server::pos const &to
+		server::vector const &to
 	) const;
 
 	void

@@ -2,8 +2,8 @@
 #define SANGUIS_SERVER_PERKS_HEALTH_HPP_INCLUDED
 
 #include "perk.hpp"
-#include "level_type.hpp"
 #include "level_diff.hpp"
+#include "../level.hpp"
 #include "../entities/base_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
@@ -29,10 +29,10 @@ private:
 	void
 	change(
 		entities::base &,
-		level_diff
+		perks::level_diff
 	);
 
-	level_type
+	server::level const	
 	max_level() const;
 };
 

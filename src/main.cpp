@@ -142,7 +142,6 @@ try
 		server_only
 		?
 			sanguis::server::create(
-				sys,
 				vm,
 				*context
 			)

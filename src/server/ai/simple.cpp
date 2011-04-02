@@ -135,7 +135,7 @@ sanguis::server::ai::simple::update(
 	}
 
 	me_.target(
-		target_->center()
+		target_->center().get()
 	);
 
 	if(

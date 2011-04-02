@@ -36,36 +36,56 @@ sanguis::server::perks::tree::tree()
 	impl_.push_back(
 		perks::status(
 			perk_type::choleric,
-			2,
-			0	
+			perks::required_player_level(
+				2
+			),
+			perks::required_parent_level(
+				0
+			)
 		)
 	);
 	impl_.push_back(
 		perks::status(
 			perk_type::ias,
-			0,
-			0	
+			perks::required_player_level(
+				0
+			),
+			perks::required_parent_level(
+				0
+			)
 		)
 	);
 	impl_.push_back(
 		perks::status(
 			perk_type::ims,
-			0,
-			0
+			perks::required_player_level(
+				0
+			),
+			perks::required_parent_level(
+				0
+			)
 		)
 	);
 	impl_.push_back(
 		perks::status(
 			perk_type::irs,
-			0,
-			0
+			perks::required_player_level(
+				0
+			),
+			perks::required_parent_level(
+				0
+			)
 		)
 	);
 	impl_.push_back(
 		perks::status(
 			perk_type::health,
-			0,
-			0
+			perks::required_player_level(
+				0
+			),
+			perks::required_parent_level(
+				0
+			)
 		)
 	);
 
@@ -76,8 +96,12 @@ sanguis::server::perks::tree::tree()
 	health.push_back(
 		perks::status(
 			perk_type::regeneration,
-			0,
-			2	
+			perks::required_player_level(
+				0
+			),
+			perks::required_parent_level(
+				2
+			)
 		)
 	);
 }
@@ -129,13 +153,9 @@ sanguis::server::perks::tree::choosable(
 	}
 
 	if(
-		it->value().required_player_level()
+		it->value().required_player_level().get()
 		>
-		static_cast<
-			level_type
-		>(
-			_player_level.get()
-		)
+		_player_level.get()
 	)
 		return false;
 
@@ -145,13 +165,13 @@ sanguis::server::perks::tree::choosable(
 		pos = &pos->parent()
 	)
 	{
-		status const &status_(
+		perks::status const &cur_status(
 			pos->value()
 		);
 
 		if(
-			status_.required_parent_level()
-			> pos->parent().value().level()
+			cur_status.required_parent_level().get()
+			> pos->parent().value().level().get()
 		)
 			return false;
 	}
@@ -228,7 +248,8 @@ perk_equal::perk_equal(
 )
 :
 	type_(_type)
-{}
+{
+}
 	
 bool
 perk_equal::operator()(

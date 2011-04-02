@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_MESSAGE_FUNCTOR_HPP_INCLUDED
 #define SANGUIS_SERVER_MESSAGE_FUNCTOR_HPP_INCLUDED
 
+#include "player_id_from_net.hpp"
 #include "../net/id.hpp"
 #include <fcppt/nonassignable.hpp>
 
@@ -41,7 +42,9 @@ public:
 	{
 		return
 			value_(
-				id_,
+				server::player_id_from_net(
+					id_
+				),
 				_message
 			);
 	}

@@ -13,32 +13,32 @@ sanguis::server::collision::distance(
 	return
 		collision::distance(
 			_a,
-			_b.center()
+			_b.center().get()
 		);
 }
 
 sanguis::server::space_unit
 sanguis::server::collision::distance(
 	entities::base const &_a,
-	server::center const &_b
+	server::vector const &_b
 )
 {
 	return
 		collision::distance(
-			_a.center(),
+			_a.center().get(),
 			_b
 		);
 }
 
 sanguis::server::space_unit
 sanguis::server::collision::distance(
-	server::center const &_a,
-	server::center const &_b
+	server::vector const &_a,
+	server::vector const &_b
 )
 {
 	return
 		fcppt::math::vector::length(
-			_a.get()
-			- _b.get()
+			_a
+			- _b
 		);
 }

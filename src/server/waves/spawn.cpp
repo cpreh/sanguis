@@ -3,6 +3,9 @@
 #include "../entities/base.hpp"
 #include "../entities/insert_parameters.hpp"
 #include "../environment/object.hpp"
+#include "../angle.hpp"
+#include "../center.hpp"
+#include "../space_unit.hpp"
 #include "../../random.hpp"
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -13,10 +16,10 @@
 
 void
 sanguis::server::waves::spawn(
-	environment::object_ptr const env,
-	environment::load_context_ptr const load_context,
-	enemy_type::type const etype,
-	entities::auto_weak_link const spawn
+	environment::object &_env,
+	environment::load_context &_load_context,
+	enemy_type::type const _etype,
+	entities::auto_weak_link const _spawn
 )
 {
 	// TODO: put this randomizer somewhere else!
@@ -38,8 +41,10 @@ sanguis::server::waves::spawn(
 		)
 	);
 
-	space_unit const
-		rand_angle(rng()),
+	server::space_unit const
+		rand_angle(
+			rng()
+		),
 		radius(
 			static_cast<
 				space_unit
@@ -47,30 +52,38 @@ sanguis::server::waves::spawn(
 				500
 			)
 		),
-		scale(static_cast<space_unit>(1.5)),
-		angle(static_cast<space_unit>(0)
-	);
-	
-	pos_type const
-		center(
-			scale
-			* radius
-			* fcppt::math::vector::unit_circle(
-				rand_angle
+		scale(
+			static_cast<
+				space_unit
+			>(
+				1.5
 			)
-		),
-		pos(
-			center
 		);
 
-	env->insert(
+	server::angle const angle(
+		static_cast<
+			space_unit
+		>(
+			0
+		)
+	);
+	
+	server::center const center(
+		scale
+		* radius
+		* fcppt::math::vector::unit_circle(
+			rand_angle
+		)
+	);
+
+	_env.insert(
 		entities::enemies::create(
-			etype,
-			load_context,
-			spawn
+			_etype,
+			_load_context,
+			_spawn
 		),
 		entities::insert_parameters(
-			pos,
+			center,
 			angle
 		)
 	);

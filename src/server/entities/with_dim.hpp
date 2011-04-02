@@ -40,6 +40,7 @@ private:
 	sge::projectile::shape::shared_base_ptr const
 	recreate_shape();
 
+
 	server::dim const dim_;
 };
 

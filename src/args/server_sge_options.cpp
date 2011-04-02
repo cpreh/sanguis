@@ -5,7 +5,7 @@ sanguis::args::server_sge_options(
 	boost::program_options::variables_map const &
 )
 {
+	// TODO: remove this?
 	return
-		sge::systems::list()
-		(sge::systems::parameterless::collision_system);
+		sge::systems::list();
 }

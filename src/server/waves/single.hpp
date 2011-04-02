@@ -2,7 +2,10 @@
 #define SANGUIS_SERVER_WAVES_SINGLE_HPP_INCLUDED
 
 #include "wave.hpp"
+#include "../environment/load_context_fwd.hpp"
+#include "../environment/object_fwd.hpp"
 #include "../../enemy_type.hpp"
+#include "../../time_type.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -29,8 +32,8 @@ private:
 	void
 	process(
 		time_type diff,
-		environment::object_ptr,
-		environment::load_context_ptr
+		environment::object &,
+		environment::load_context &
 	);
 
 	bool

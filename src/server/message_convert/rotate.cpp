@@ -13,7 +13,7 @@ sanguis::server::message_convert::rotate(
 		messages::create(
 			messages::rotate(
 				_entity.id(),
-				_entity.angle()
+				_entity.angle().get()
 			)
 		);
 }

@@ -6,6 +6,7 @@
 #include "../events/poll_fwd.hpp"
 #include "../../../diff_clock.hpp"
 #include <sge/time/timer.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/result.hpp>
 #include <boost/statechart/custom_reaction.hpp>
@@ -20,26 +21,34 @@ namespace states
 {
 
 class backswing
-: public
-	boost::statechart::state<
+:
+	public boost::statechart::state<
 		backswing,
 		weapon
 	>
 {
+	FCPPT_NONCOPYABLE(
+		backswing
+	);
 public:
 	typedef boost::statechart::custom_reaction<
 		events::poll
 	> reactions;
 
 	explicit backswing(
-		my_context);
+		my_context
+	);
+
+	~backswing();
 	
 	boost::statechart::result
 	react(
-		events::poll const &);
+		events::poll const &
+	);
 private:
 	diff_clock diff_clock_;
-	sge::time::timer cooldown;
+
+	sge::time::timer cooldown_;
 };
 
 }

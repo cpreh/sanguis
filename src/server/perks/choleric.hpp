@@ -3,9 +3,12 @@
 
 #include "perk.hpp"
 #include "level_diff.hpp"
-#include "level_type.hpp"
+#include "../level.hpp"
 #include "../space_unit.hpp"
+#include "../environment/object_fwd.hpp"
+#include "../entities/base_fwd.hpp"
 #include "../../diff_clock.hpp"
+#include "../../time_type.hpp"
 #include <sge/time/timer.hpp>
 #include <fcppt/random/uniform.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -32,24 +35,26 @@ private:
 	void
 	update(
 		entities::base &,
-		time_type,
-		environment::object_ptr
+		sanguis::time_type,
+		environment::object &
 	);
 
-	level_type
+	server::level const
 	max_level() const;
 
 	void
 	change(
 		entities::base &,
-		level_diff
+		perks::level_diff
 	);
 
-	diff_clock clock_;
+	sanguis::diff_clock clock_;
 
 	sge::time::timer shoot_timer_;
 
-	fcppt::random::uniform<space_unit> rand_;
+	fcppt::random::uniform<
+		server::space_unit
+	> rand_;
 };
 
 }

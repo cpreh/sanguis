@@ -14,8 +14,8 @@ sanguis::server::waves::debug::~debug()
 void 
 sanguis::server::waves::debug::process(
 	time_type,
-	environment::object_ptr const _env,
-	environment::load_context_ptr const _load_context
+	environment::object &_env,
+	environment::load_context &_load_context
 )
 {
 	if(
@@ -24,9 +24,9 @@ sanguis::server::waves::debug::process(
 		return;
 
 	for(
-		unsigned i = 0;
-		i < 2;
-		++i
+		unsigned index = 0;
+		index < 2;
+		++index
 	)
 		waves::spawn(
 			_env,
@@ -34,7 +34,7 @@ sanguis::server::waves::debug::process(
 			static_cast<
 				enemy_type::type
 			>(
-				i
+				index
 			)
 		);
 	

@@ -6,7 +6,6 @@
 #include "../load/context_base_fwd.hpp"
 #include "../net/port.hpp"
 #include "../main_object.hpp"
-#include <sge/systems/instance_fwd.hpp>
 #include <fcppt/thread/object.hpp>
 #include <fcppt/scoped_state_machine.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -28,7 +27,6 @@ class object
 public:
 	explicit 
 	object(
-		sge::systems::instance const &,
 		net::port,
 		load::context_base const &
 	);

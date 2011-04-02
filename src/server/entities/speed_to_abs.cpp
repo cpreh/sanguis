@@ -19,7 +19,7 @@ sanguis::server::entities::speed_to_abs(
 			property::to_float<
 				server::space_unit
 			>(
-				_speed.get()
+				_speed
 			)
 		);
 }

@@ -8,11 +8,11 @@ sanguis::server::entities::projectiles::aoe_projectile::aoe_projectile(
 	aoe_projectile_type::type const _type,
 	team::type const _team,
 	entities::movement_speed const _movement_speed,
-	dim_type const &_dim,
+	server::dim const &_dim,
 	life_time const _life_time,
 	indeterminate::type const _indeterminate,
-	space_unit const _aoe,
-	space_unit const _direction
+	server::radius const _aoe,
+	server::direction const _direction
 )
 :
 	projectile(
@@ -33,7 +33,7 @@ sanguis::server::entities::projectiles::aoe_projectile::~aoe_projectile()
 {
 }
 
-sanguis::server::space_unit
+sanguis::server::radius const
 sanguis::server::entities::projectiles::aoe_projectile::aoe() const
 {
 	return aoe_;
@@ -48,11 +48,11 @@ sanguis::server::entities::projectiles::aoe_projectile::add_message(
 		messages::create(
 			messages::add_aoe_projectile(
 				this->id(),
-				this->pos(),
-				this->angle(),
+				this->pos().get(),
+				this->angle().get(),
 				this->dim(),
-				this->abs_speed(),
-				aoe_,
+				this->abs_speed().get(),
+				aoe_.get(),
 				type_
 			)
 		);

@@ -156,7 +156,7 @@ sanguis::server::entities::with_weapon::change_weapon(
 	)
 		attack_ready_ = true;
 
-	this->environment()->weapon_changed(
+	this->environment().weapon_changed(
 		this->id(),
 		weapon_
 	);
@@ -243,7 +243,7 @@ sanguis::server::entities::with_weapon::remove_weapon(
 
 void
 sanguis::server::entities::with_weapon::target(
-	server::center const &_target
+	server::vector const &_target
 )
 {
 	target_ = _target;
@@ -251,7 +251,7 @@ sanguis::server::entities::with_weapon::target(
 
 bool
 sanguis::server::entities::with_weapon::in_range(
-	pos_type const &_center
+	server::vector const &_pos
 ) const
 {
 	return
@@ -259,7 +259,7 @@ sanguis::server::entities::with_weapon::in_range(
 		&&
 		this->active_weapon().in_range(
 			*this,
-			_center
+			_pos
 		);
 }
 
@@ -323,7 +323,7 @@ sanguis::server::entities::with_weapon::start_attacking()
 	)
 		return;
 
-	this->environment()->attacking_changed(
+	this->environment().attacking_changed(
 		this->id(),
 		true
 	);
@@ -336,7 +336,7 @@ sanguis::server::entities::with_weapon::start_reloading()
 {
 	reloading_ = true;
 
-	this->environment()->reloading_changed(
+	this->environment().reloading_changed(
 		this->id(),
 		true
 	);
@@ -347,7 +347,7 @@ sanguis::server::entities::with_weapon::stop_reloading()
 {
 	reloading_ = false;
 
-	this->environment()->reloading_changed(
+	this->environment().reloading_changed(
 		this->id(),
 		false
 	);
@@ -373,7 +373,7 @@ sanguis::server::entities::with_weapon::stop_attacking()
 	)
 		return;
 
-	this->environment()->attacking_changed(
+	this->environment().attacking_changed(
 		this->id(),
 		false
 	);

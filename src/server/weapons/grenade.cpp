@@ -4,6 +4,7 @@
 #include "../entities/projectiles/grenade.hpp"
 #include "../environment/object.hpp"
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 
 sanguis::server::weapons::grenade::grenade(
 	weapon_type::type const _type,
@@ -37,19 +38,25 @@ sanguis::server::weapons::grenade::do_attack(
 	delayed_attack const &_attack
 )
 {
-	_attack.environment()->insert(
+	_attack.environment().insert(
 		entities::unique_ptr(
 			fcppt::make_unique_ptr<
 				entities::projectiles::grenade
 			>(
-				_attack.environment()->load_context(),
+				fcppt::ref(
+					_attack.environment().load_context()
+				),
 				_attack.team(),
 				server::damage::unit(
 					damage_
 				),
-				aoe_.get(),
+				server::radius(
+					aoe_.get()
+				),
 				_attack.dest(),
-				_attack.angle()
+				server::direction(
+					_attack.angle().get()
+				)
 			)
 		),
 		entities::insert_parameters(

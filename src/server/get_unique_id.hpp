@@ -7,7 +7,10 @@ namespace sanguis
 {
 namespace server
 {
-entity_id get_unique_id();
+
+sanguis::entity_id const
+get_unique_id();
+
 }
 }
 

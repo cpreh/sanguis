@@ -61,7 +61,7 @@ private:
 	can_collide_with(
 		collision::body_base const &
 	) const;
-	
+
 	void
 	collision(
 		collision::body_base &

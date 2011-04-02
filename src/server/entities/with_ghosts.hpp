@@ -46,7 +46,7 @@ private:
 	virtual void
 	recreate_ghosts(
 		entities::ghost_parameters const &
-	) = 0;
+	);
 
 	typedef boost::ptr_list<
 		collision::ghost

@@ -5,6 +5,7 @@
 #include "../entities/insert_parameters.hpp"
 #include "../environment/object.hpp"
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 
 sanguis::server::weapons::rocket_launcher::rocket_launcher(
 	weapon_type::type const _type,
@@ -40,18 +41,24 @@ sanguis::server::weapons::rocket_launcher::do_attack(
 	delayed_attack const &_attack
 )
 {
-	_attack.environment()->insert(
+	_attack.environment().insert(
 		entities::unique_ptr(
 			fcppt::make_unique_ptr<
 				entities::projectiles::rocket
 			>(
-				_attack.environment()->load_context(),
+				fcppt::ref(
+					_attack.environment().load_context()
+				),
 				_attack.team(),
 				server::damage::unit(
 					damage_
 				),
-				aoe_.get(),
-				_attack.angle()
+				server::radius(
+					aoe_.get()
+				),
+				server::direction(
+					_attack.angle().get()
+				)
 			)
 		),
 		entities::insert_parameters(

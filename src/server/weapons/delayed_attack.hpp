@@ -1,11 +1,12 @@
 #ifndef SANGUIS_SERVER_WEAPONS_DELAYED_ATTACK_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_DELAYED_ATTACK_HPP_INCLUDED
 
+#include "../angle.hpp"
+#include "../center.hpp"
 #include "../team.hpp"
-#include "../pos_type.hpp"
-#include "../space_unit.hpp"
-#include "../environment/object_ptr.hpp"
-#include <fcppt/math/vector/basic_decl.hpp>
+#include "../vector.hpp"
+#include "../environment/object_fwd.hpp"
+#include <fcppt/math/vector/basic_impl.hpp>
 
 namespace sanguis
 {
@@ -18,37 +19,37 @@ class delayed_attack
 {
 public:
 	delayed_attack(
-		pos_type const &spawn_point,
-		space_unit angle,
+		server::center const &spawn_point,
+		server::angle,
 		server::team::type,
-		server::environment::object_ptr,
-		pos_type const &dest
+		server::environment::object &,
+		server::vector const &dest
 	);
 
-	pos_type const &
+	server::center const &
 	spawn_point() const;
 	
-	space_unit
+	server::angle const
 	angle() const;
 	
 	server::team::type
 	team() const;
 	
-	server::environment::object_ptr const
+	server::environment::object &
 	environment() const;
 	
-	pos_type const &
+	server::vector const &
 	dest() const;
 private:
-	pos_type spawn_point_;
+	server::center spawn_point_;
 
-	space_unit angle_;
+	server::angle angle_;
 
 	server::team::type team_;
 
-	server::environment::object_ptr environment_;
+	server::environment::object &environment_;
 
-	pos_type dest_;
+	server::vector dest_;
 };
 
 }

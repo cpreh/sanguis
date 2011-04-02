@@ -19,14 +19,16 @@ sanguis::server::entities::projectiles::melee::melee(
 		entities::movement_speed(
 			0
 		),
-		dim_type(
+		server::dim(
 			1,
 			1
 		),
 		life_time(
 			1
 		), // short lifetime
-		static_cast<space_unit>(0),
+		server::direction(
+			0
+		),
 		indeterminate::yes
 	),
 	damage_(_damage)

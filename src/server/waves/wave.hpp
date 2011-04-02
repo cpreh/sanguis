@@ -2,8 +2,8 @@
 #define SANGUIS_SERVER_WAVES_WAVE_HPP_INCLUDED
 
 #include "wave_fwd.hpp"
-#include "../environment/object_ptr.hpp"
-#include "../environment/load_context_ptr.hpp"
+#include "../environment/object_fwd.hpp"
+#include "../environment/load_context_fwd.hpp"
 #include "../../time_type.hpp"
 #include <fcppt/noncopyable.hpp>
 
@@ -23,9 +23,9 @@ protected:
 	wave();
 public:
 	virtual void process(
-		time_type diff,
-		environment::object_ptr,
-		environment::load_context_ptr
+		sanguis::time_type diff,
+		environment::object &,
+		environment::load_context &
 	) = 0;
 
 	virtual bool

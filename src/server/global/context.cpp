@@ -26,19 +26,18 @@
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/math/vector/is_null.hpp>
 #include <fcppt/math/vector/to_angle.hpp>
-#include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
 
 #include "../entities/insert_parameters.hpp"
-#include "../entities/insert_parameters_pos.hpp"
+#include "../entities/insert_parameters_center.hpp"
 #include "../entities/pickups/weapon.hpp"
 #include <fcppt/math/dim/basic_impl.hpp>
 
 sanguis::server::global::context::context(
-	unicast_callback const &_send_unicast,
+	server::unicast_callback const &_send_unicast,
 	load::context_base const &_model_context,
 	server::console &_console
 )
@@ -47,7 +46,7 @@ sanguis::server::global::context::context(
 	worlds_(),
 	players_(),
 	world_context_(
-		fcppt::make_shared_ptr<
+		fcppt::make_unique_ptr<
 			world_context
 		>(
 			fcppt::ref(
@@ -56,7 +55,7 @@ sanguis::server::global::context::context(
 		)
 	),
 	load_context_(
-		fcppt::make_shared_ptr<
+		fcppt::make_unique_ptr<
 			load_context
 		>(
 			_model_context
@@ -92,7 +91,7 @@ sanguis::server::global::context::insert_player(
 
 	entities::player_unique_ptr player(
 		server::create_player(
-			load_context_,
+			*load_context_,
 			_name,
 			send_unicast_,
 			_player_id,
@@ -113,8 +112,8 @@ sanguis::server::global::context::insert_player(
 	);
 
 	// FIXME: where to insert the player?
-	pos_type const spawn_pos(
-		pos_type::null()
+	server::center const spawn_pos(
+		server::vector::null()
 	);
 
 	cur_world.insert(
@@ -125,7 +124,9 @@ sanguis::server::global::context::insert_player(
 		),
 		entities::insert_parameters(
 			spawn_pos,
-			0
+			server::angle(
+				0
+			)
 		)
 	);
 
@@ -134,12 +135,14 @@ sanguis::server::global::context::insert_player(
 			fcppt::make_unique_ptr<
 				entities::pickups::weapon
 			>(
-				load_context_,
+				fcppt::ref(
+					*load_context_
+				),
 				team::players,
 				weapon_type::pistol
 			)
 		),
-		entities::insert_parameters_pos(
+		entities::insert_parameters_center(
 			spawn_pos
 		)
 	);
@@ -158,7 +161,7 @@ sanguis::server::global::context::player_disconnect(
 void
 sanguis::server::global::context::player_target(
 	player_id const _player_id,
-	pos_type const &_target
+	server::vector const &_target
 )
 {
 	players_[
@@ -184,7 +187,7 @@ sanguis::server::global::context::player_change_weapon(
 void
 sanguis::server::global::context::player_angle(
 	player_id const _player_id,
-	space_unit const _angle
+	server::angle const _angle
 )
 {
 	entities::player &player(
@@ -219,9 +222,9 @@ sanguis::server::global::context::player_change_shooting(
 }
 
 void
-sanguis::server::global::context::player_direction(
+sanguis::server::global::context::player_speed(
 	player_id const _player_id,
-	pos_type const &_dir
+	server::speed const &_speed
 )
 {
 	entities::player &player(
@@ -232,19 +235,25 @@ sanguis::server::global::context::player_direction(
 
 	if(
 		fcppt::math::vector::is_null(
-			_dir
+			_speed.get()
 		)
 	)
 		player.movement_speed().current(
-			static_cast<space_unit>(0)
+			static_cast<
+				space_unit
+			>(
+				0
+			)
 		);
 	else
 	{
 		player.direction(
-			*fcppt::math::vector::to_angle<
-				space_unit
-			>(
-				_dir
+			server::direction(
+				*fcppt::math::vector::to_angle<
+					server::space_unit
+				>(
+					_speed.get()
+				)
 			)
 		);
 		
@@ -405,8 +414,8 @@ sanguis::server::global::context::world(
 			worlds_,
 			_world_id,
 			server::world::random(
-				world_context_,
-				load_context_,
+				*world_context_,
+				*load_context_,
 				console_
 			)
 		).first->second;

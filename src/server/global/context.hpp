@@ -4,17 +4,18 @@
 #include "context_fwd.hpp"
 #include "world_context_fwd.hpp"
 #include "../world/map.hpp"
-#include "../world/context_ptr.hpp"
+#include "../world/context_fwd.hpp"
 #include "../entities/unique_ptr.hpp"
 #include "../entities/insert_parameters_fwd.hpp"
 #include "../entities/player_map.hpp"
-#include "../environment/load_context_ptr.hpp"
-#include "../unicast_callback.hpp"
-#include "../string.hpp"
-#include "../player_id.hpp"
-#include "../pos_type.hpp"
-#include "../space_unit.hpp"
+#include "../environment/load_context_fwd.hpp"
+#include "../angle.hpp"
 #include "../console_fwd.hpp"
+#include "../player_id.hpp"
+#include "../speed.hpp"
+#include "../string.hpp"
+#include "../unicast_callback.hpp"
+#include "../vector.hpp"
 #include "../../cheat_type.hpp"
 #include "../../connect_state.hpp"
 #include "../../weapon_type.hpp"
@@ -26,7 +27,7 @@
 #include <fcppt/function/object.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/container/map_decl.hpp>
-#include <fcppt/shared_ptr.hpp>
+#include <fcppt/scoped_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -43,7 +44,7 @@ class context
 	);
 public:
 	context(
-		unicast_callback const &,
+		server::unicast_callback const &,
 		load::context_base const &,
 		server::console &
 	);
@@ -52,50 +53,50 @@ public:
 
 	void
 	insert_player(
-		world_id,
-		player_id,
-		string const &name,
-		connect_state::type
+		sanguis::world_id,
+		server::player_id,
+		server::string const &name,
+		sanguis::connect_state::type
 	);
 
 	void
 	player_disconnect(
-		player_id
+		server::player_id
 	);
 
 	void
 	player_target(
-		player_id,
-		pos_type const &
+		server::player_id,
+		server::vector const &
 	);
 
 	void
 	player_change_weapon(
-		player_id,
+		server::player_id,
 		weapon_type::type
 	);
 
 	void
 	player_angle(
-		player_id,
-		space_unit
+		server::player_id,
+		server::angle
 	);
 
 	void
 	player_change_shooting(
-		player_id,
+		server::player_id,
 		bool shooting
 	);
 
 	void
-	player_direction(
-		player_id,
-		pos_type const &
+	player_speed(
+		server::player_id,
+		server::speed const &
 	);
 
 	void
 	player_cheat(
-		player_id,
+		server::player_id,
 		cheat_type::type
 	);
 
@@ -149,9 +150,17 @@ private:
 	
 	entities::player_map players_;
 
-	server::world::context_ptr const world_context_;
+	typedef fcppt::scoped_ptr<
+		server::world::context
+	> world_context_scoped_ptr;
+	
+	world_context_scoped_ptr const world_context_;
 
-	server::environment::load_context_ptr const load_context_;
+	typedef fcppt::scoped_ptr<
+		server::environment::load_context
+	> load_context_scoped_ptr;
+	
+	load_context_scoped_ptr const load_context_;
 
 	server::console &console_;
 };

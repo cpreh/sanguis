@@ -3,7 +3,7 @@
 
 #include "shoot_fwd.hpp"
 #include "../../entities/with_weapon_fwd.hpp"
-#include "../../pos_type.hpp"
+#include "../../vector.hpp"
 #include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/nonassignable.hpp>
 #include <boost/statechart/event.hpp>
@@ -29,18 +29,18 @@ class shoot
 public:
 	shoot(
 		entities::with_weapon &from,
-		pos_type const &to
+		server::vector const &to
 	);
 	
 	entities::with_weapon &
 	from() const;
 
-	pos_type const &
+	server::vector const &
 	to() const;
 private:
 	entities::with_weapon &from_;
 
-	pos_type const to_;
+	server::vector const to_;
 };
 
 }

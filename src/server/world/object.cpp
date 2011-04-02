@@ -41,7 +41,6 @@
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/assert.hpp>
-#include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
@@ -86,7 +85,7 @@ sanguis::server::world::object::object(
 	entities_(),
 	props_(),
 	environment_(
-		fcppt::make_shared_ptr<
+		fcppt::make_unique_ptr<
 			world::environment
 		>(
 			fcppt::ref(

@@ -1,8 +1,9 @@
 #ifndef SANGUIS_SERVER_ENTITIES_POS_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_POS_HPP_INCLUDED
 
-#include "../pos.hpp"
+#include "../center.hpp"
 #include "../dim.hpp"
+#include "../pos.hpp"
 
 namespace sanguis
 {
@@ -13,7 +14,7 @@ namespace entities
 
 server::pos const
 pos(
-	server::pos const &center,
+	server::center const &,
 	server::dim const &
 );
 

@@ -5,7 +5,6 @@
 #include "events/tick.hpp"
 #include "states/running.hpp"
 #include "states/unpaused.hpp"
-#include <sge/systems/instance.hpp>
 #include <awl/mainloop/asio/create_io_service_base.hpp>
 #include <awl/mainloop/io_service.hpp>
 #include <fcppt/log/headers.hpp>
@@ -16,7 +15,6 @@
 #include <cstdlib>
 
 sanguis::server::object::object(
-	sge::systems::instance const &_sys,
 	net::port const _port,
 	load::context_base const &_load_context
 )
@@ -26,7 +24,6 @@ sanguis::server::object::object(
 	),
 	machine_(
 		_load_context,
-		_sys.collision_system(),
 		_port,
 		*io_service_
 	),

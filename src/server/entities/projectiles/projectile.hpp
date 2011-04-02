@@ -7,8 +7,9 @@
 #include "../with_dim.hpp"
 #include "../with_health_fwd.hpp"
 #include "../movement_speed.hpp"
-#include "../../dim_type.hpp"
-#include "../../space_unit.hpp"
+#include "../../collision/body_base_fwd.hpp"
+#include "../../dim.hpp"
+#include "../../direction.hpp"
 #include "../../../entity_type.hpp"
 #include "../../../projectile_type.hpp"
 #include "../../../time_type.hpp"
@@ -42,9 +43,9 @@ protected:
 		projectile_type::type,
 		team::type team,
 		entities::movement_speed,
-		dim_type const &,
-		life_time,
-		space_unit direction,
+		server::dim const &,
+		projectiles::life_time,
+		server::direction,
 		indeterminate::type
 	);
 
@@ -67,20 +68,17 @@ private:
 	bool
 	dead() const;
 
-	bool
-	invulnerable() const;
-
 	virtual entity_type::type
 	type() const;
 
 	virtual boost::logic::tribool const 
-	can_collide_with_entity(
-		base const &
+	can_collide_with(
+		collision::body_base const &
 	) const;
 
 	void
-	collision_entity_begin(
-		base &
+	collision(
+		collision::body_base &
 	);
 
 	virtual void

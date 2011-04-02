@@ -60,7 +60,9 @@ sanguis::server::entities::player::player(
 			fcppt::make_unique_ptr<
 				auras::update_sight
 			>(
-				1000, // FIXME
+				server::radius(
+					1000 // FIXME
+				),
 				std::tr1::bind(
 					&player::add_sight_range,
 					this,
@@ -87,7 +89,7 @@ sanguis::server::entities::player::add_exp(
 			+ _exp.get()
 		);
 
-	this->environment()->exp_changed(
+	this->environment().exp_changed(
 		this->player_id(),
 		this->id(),
 		exp_
@@ -113,7 +115,7 @@ sanguis::server::entities::player::add_exp(
 
 	level_ = new_level;
 
-	this->environment()->level_changed(
+	this->environment().level_changed(
 		this->player_id(),
 		this->id(),
 		level_
@@ -217,8 +219,8 @@ sanguis::server::entities::player::remove_sight_range(
 	sanguis::entity_id const _entity_id
 )
 {
-	this->environment()->remove_sight_range(
-		this.player_id(),
+	this->environment().remove_sight_range(
+		this->player_id(),
 		_entity_id
 	);
 }
@@ -278,7 +280,7 @@ sanguis::server::entities::player::on_new_weapon(
 	weapon_type::type const _type
 )
 {
-	this->environment()->got_weapon(
+	this->environment().got_weapon(
 		this->player_id(),
 		this->id(),
 		_type
@@ -295,12 +297,12 @@ sanguis::server::entities::player::make_add_message() const
 		messages::create(
 			Message(
 				this->id(),
-				this->pos(),
-				this->angle(),
+				this->pos().get(),
+				this->angle().get(),
 				this->dim(),
-				this->abs_speed(),
-				this->current_health(),
-				this->max_health()
+				this->abs_speed().get(),
+				this->current_health().get(),
+				this->max_health().get()
 			)
 		);
 }

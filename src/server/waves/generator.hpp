@@ -2,8 +2,8 @@
 #define SANGUIS_SERVER_WAVES_GENERATOR_HPP_INCLUDED
 
 #include "wave.hpp"
-#include "../environment/object_ptr.hpp"
-#include "../environment/load_context_ptr.hpp"
+#include "../environment/object_fwd.hpp"
+#include "../environment/load_context_fwd.hpp"
 #include "../console_fwd.hpp"
 #include "../../time_type.hpp"
 #include <sge/console/arg_list.hpp>
@@ -33,8 +33,8 @@ public:
 	void
 	process(
 		time_type,
-		environment::object_ptr,
-		environment::load_context_ptr
+		environment::object &,
+		environment::load_context &
 	);
 private:
 	void
@@ -50,7 +50,7 @@ private:
 	fcppt::signal::scoped_connection const spawn_connection_;
 
 	typedef boost::ptr_list<
-		wave
+		waves::wave
 	> wave_list;
 
 	wave_list waves_;

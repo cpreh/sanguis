@@ -6,13 +6,13 @@
 
 sanguis::server::unicast_callback const
 sanguis::server::make_unicast_callback(
-	server::machine &machine_
+	server::machine &_machine
 )
 {
 	return
 		std::tr1::bind(
 			&server::machine::send_unicast,
-			&machine_,
+			&_machine,
 			std::tr1::placeholders::_1,
 			std::tr1::placeholders::_2
 		);

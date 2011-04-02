@@ -8,6 +8,7 @@
 #include "../../random.hpp"
 #include <fcppt/tr1/random.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 
 sanguis::server::weapons::shotgun::shotgun(
 	weapon_type::type const _type,
@@ -58,7 +59,7 @@ sanguis::server::weapons::shotgun::do_attack(
 		// TODO: save the randgen!
 		create_seeded_randgen(),
 		normal_distribution_su(
-			_attack.angle(), // mean value
+			_attack.angle().get(), // mean value
 			spread_radius_ // sigma
 		)
 	);
@@ -69,24 +70,28 @@ sanguis::server::weapons::shotgun::do_attack(
 		++i
 	)
 	{
-		space_unit const direction_(
+		server::angle const angle(
 			rng()
 		);
 
-		_attack.environment()->insert(
+		_attack.environment().insert(
 			entities::unique_ptr(
 				fcppt::make_unique_ptr<
 					entities::projectiles::simple_bullet
 				>(
-					_attack.environment()->load_context(),
+					fcppt::ref(
+						_attack.environment().load_context()
+					),
 					_attack.team(),
 					damage_,
-					direction_
+					server::direction(
+						angle.get()
+					)
 				)
 			),
 			entities::insert_parameters(
 				_attack.spawn_point(),
-				direction_
+				angle	
 			)
 		);
 	}

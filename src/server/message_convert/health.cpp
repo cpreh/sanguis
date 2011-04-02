@@ -13,7 +13,7 @@ sanguis::server::message_convert::health(
 		messages::create(
 			messages::health(
 				_entity.id(),
-				_entity.current_health()
+				_entity.current_health().get()
 			)
 		);
 }

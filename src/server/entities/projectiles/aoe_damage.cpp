@@ -1,6 +1,7 @@
 #include "aoe_damage.hpp"
 #include "../../auras/burn.hpp"
 #include "../../environment/object.hpp"
+#include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -8,7 +9,7 @@
 
 sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 	team::type const _team,
-	space_unit const _radius,
+	server::radius const _radius,
 	damage::unit const _damage_per_pulse,
 	unsigned const _max_pulses,
 	time_type const _pulse_diff,
@@ -19,9 +20,15 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 		aoe_projectile_type::aoe_damage,
 		_team,
 		entities::movement_speed(0),
-		dim_type(
-			_radius * static_cast<space_unit>(2),
-			_radius * static_cast<space_unit>(2)
+		server::dim(
+			_radius.get(),
+			_radius.get()
+		)
+		*
+		static_cast<
+			server::dim::value_type
+		>(
+			2
 		),
 		life_time(
 			_pulse_diff
@@ -33,10 +40,12 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 		),
 		indeterminate::yes,
 		_radius,
-		static_cast<space_unit>(0)
+		server::direction(
+			0
+		)
 	)
 {
-	add_aura(
+	this->add_aura(
 		auras::unique_ptr(
 			fcppt::make_unique_ptr<
 				auras::burn

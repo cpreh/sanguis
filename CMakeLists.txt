@@ -627,6 +627,7 @@ SET(
 	src/messages/bindings/float.cpp
 	src/messages/bindings/float.hpp
 	src/messages/bindings/fundamental.hpp
+	src/messages/bindings/fundamental_strong.hpp
 	src/messages/bindings/static.hpp
 	src/messages/call/default_function.hpp
 	src/messages/call/dispatcher.hpp
@@ -1202,8 +1203,6 @@ SET(
 	src/server/message_convert/speed.cpp
 	src/server/message_convert/speed.hpp
 	src/server/message_functor.hpp
-	src/server/net_id_from_args.cpp
-	src/server/net_id_from_args.hpp
 	src/server/object.cpp
 	src/server/object.hpp
 	src/server/object_fwd.hpp
@@ -1227,6 +1226,8 @@ SET(
 	src/server/perks/perk_fwd.hpp
 	src/server/perks/regeneration.cpp
 	src/server/perks/regeneration.hpp
+	src/server/perks/required_parent_level.hpp
+	src/server/perks/required_player_level.hpp
 	src/server/perks/status.cpp
 	src/server/perks/status.hpp
 	src/server/perks/tree.cpp
@@ -1235,9 +1236,10 @@ SET(
 	src/server/pickup_spawner.cpp
 	src/server/pickup_spawner.hpp
 	src/server/player_id.hpp
-	src/server/player_record.cpp
-	src/server/player_record.hpp
-	src/server/player_record_fwd.hpp
+	src/server/player_id_from_args.cpp
+	src/server/player_id_from_args.hpp
+	src/server/player_id_from_net.cpp
+	src/server/player_id_from_net.hpp
 	src/server/pos.hpp
 	src/server/probability.hpp
 	src/server/radius.hpp
@@ -1346,7 +1348,6 @@ SET(
 	src/server/world/context.cpp
 	src/server/world/context.hpp
 	src/server/world/context_fwd.hpp
-	src/server/world/context_ptr.hpp
 	src/server/world/entity_map.hpp
 	src/server/world/environment.cpp
 	src/server/world/environment.hpp

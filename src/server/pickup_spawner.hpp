@@ -1,9 +1,9 @@
 #ifndef SANGUIS_SERVER_PICKUP_SPAWNER_HPP_INCLUDED
 #define SANGUIS_SERVER_PICKUP_SPAWNER_HPP_INCLUDED
 
-#include "environment/object_ptr.hpp"
-#include "pos_type.hpp"
-#include "probability_type.hpp"
+#include "environment/object_fwd.hpp"
+#include "center.hpp"
+#include "probability.hpp"
 #include "../weapon_type.hpp"
 #include <fcppt/random/actor/normalized.hpp>
 #include <fcppt/random/uniform.hpp>
@@ -22,15 +22,15 @@ class pickup_spawner
 	);
 public:
 	explicit pickup_spawner(
-		environment::object_ptr
+		environment::object &
 	);
 	
 	~pickup_spawner();
 	
 	void
 	spawn(
-		probability_type,
-		pos_type const &pos
+		server::probability,
+		server::center const &
 	);
 private:
 	void
@@ -44,15 +44,15 @@ private:
 		weapon_type::type
 	);
 	
-	environment::object_ptr const env_;
+	environment::object &env_;
 
 	fcppt::random::uniform<
-		probability_type
+		server::probability::value_type
 	> spawn_prob_;
 
 	fcppt::random::actor::normalized rng_;
 
-	pos_type pos_;
+	server::center center_;
 };
 
 }

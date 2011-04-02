@@ -13,7 +13,7 @@ sanguis::server::message_convert::speed(
 		messages::create(
 			messages::speed(
 				_entity.id(),
-				_entity.abs_speed()
+				_entity.abs_speed().get()
 			)
 		);
 }

@@ -4,9 +4,10 @@
 #include "aoe_projectile.hpp"
 #include "../with_health_fwd.hpp"
 #include "../../damage/unit.hpp"
-#include "../../environment/load_context_ptr.hpp"
+#include "../../environment/load_context_fwd.hpp"
+#include "../../direction.hpp"
+#include "../../radius.hpp"
 #include "../../team.hpp"
-#include "../../space_unit.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -27,11 +28,11 @@ class rocket
 	);
 public:
 	rocket(
-		server::environment::load_context_ptr,
-		team::type team,
+		server::environment::load_context &,
+		server::team::type team,
 		damage::unit,
-		space_unit aoe,
-		space_unit angle
+		server::radius aoe,
+		server::direction
 	);
 
 	~rocket();

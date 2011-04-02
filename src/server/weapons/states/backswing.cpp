@@ -8,43 +8,59 @@
 #include "../../entities/with_weapon.hpp"
 
 sanguis::server::weapons::states::backswing::backswing(
-	my_context ctx
+	my_context _ctx
 )
 :
-	my_base(ctx),
+	my_base(
+		_ctx
+	),
 	diff_clock_(),
-	cooldown(
+	cooldown_(
 		context<
 			weapon
 		>().backswing_time(),
 		sge::time::activation_state::active,
 		diff_clock_.callback()
 	)
-{}
+{
+}
+
+sanguis::server::weapons::states::backswing::~backswing()
+{
+}
 
 boost::statechart::result
 sanguis::server::weapons::states::backswing::react(
-	events::poll const &e
+	events::poll const &_event
 )
 {
 	diff_clock_.update(
-		e.time() * context<weapon>().ias()
+		_event.time() * context<weapon>().ias()
 	);
 
-	if(!cooldown.expired())
+	if(
+		!cooldown_.expired()
+	)
 		return discard_event();
 	
 	context<weapon>().use_magazine_item();
 
-	e.owner().attack_ready();
+	_event.owner().attack_ready();
 
-	post_event(e);
+	this->post_event(
+		_event
+	);
 
-	if(context<weapon>().magazine_empty())
+	if(
+		context<weapon>().magazine_empty()
+	)
 	{
-		e.owner().start_reloading();
+		_event.owner().start_reloading();
+
 		context<weapon>().magazine_exhausted();
+
 		return transit<reloading>();
 	}
+
 	return transit<ready>();
 }

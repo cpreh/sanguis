@@ -7,7 +7,7 @@ void
 sanguis::server::perks::perk::update(
 	entities::base &,
 	time_type const,
-	environment::object_ptr const
+	environment::object &
 )
 {
 }
@@ -36,7 +36,9 @@ sanguis::server::perks::perk::raise_level(
 	
 	this->change(
 		_owner,
-		1
+		perks::level_diff(
+			1
+		)
 	);
 
 	++level_;

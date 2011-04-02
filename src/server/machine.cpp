@@ -153,15 +153,19 @@ sanguis::server::machine::send_to_all(
 
 void
 sanguis::server::machine::send_unicast(
-	net::id const _id,
+	server::player_id const _id,
 	messages::auto_ptr _message
 )
 {
+	net::id const net_id(
+		_id.get()
+	);
+
 	if(
 		!net::serialize_to_circular_buffer(
 			_message,
 			net_.send_buffer(
-				_id
+				net_id
 			)
 		)
 	)
@@ -170,7 +174,7 @@ sanguis::server::machine::send_unicast(
 			server::log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("Client ")
-				<< _id
+				<< net_id
 				<< FCPPT_TEXT(" has no space left in machine::send_unicast()!")
 		);
 
@@ -179,7 +183,7 @@ sanguis::server::machine::send_unicast(
 	}
 
 	net_.queue_send(
-		_id
+		net_id
 	);
 }
 

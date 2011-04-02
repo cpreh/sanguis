@@ -1,5 +1,7 @@
 #include "with_auras.hpp"
+#include "ghost_parameters.hpp"
 #include "../auras/aura.hpp"
+#include "../collision/ghost.hpp"
 #include "../environment/object.hpp"
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <boost/foreach.hpp>
@@ -12,7 +14,7 @@ sanguis::server::entities::with_auras::add_aura(
 	fcppt::container::ptr::push_back_unique_ptr(
 		auras_,
 		move(
-			_ptr
+			_aura
 		)
 	);
 
@@ -68,12 +70,10 @@ sanguis::server::entities::with_auras::recreate_ghosts(
 		auras_
 	)
 		with_ghosts::add_ghost(
-			aura->recreate(
+			aura.recreate(
 				_params.world(),
 				_params.global_groups(),
 				_params.center()
 			)
 		);
-
-	return ret;
 }

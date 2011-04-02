@@ -2,6 +2,8 @@
 #define SANGUIS_SERVER_WAVES_SIMPLE_HPP_INCLUDED
 
 #include "wave.hpp"
+#include "../environment/load_context_fwd.hpp"
+#include "../environment/object_fwd.hpp"
 #include "../../time_type.hpp"
 #include "../../enemy_type.hpp"
 #include "../../diff_clock.hpp"
@@ -36,8 +38,8 @@ private:
 	void
 	process(
 		time_type diff,
-		environment::object_ptr,
-		environment::load_context_ptr
+		environment::object &,
+		environment::load_context &
 	);
 
 	bool

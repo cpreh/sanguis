@@ -7,12 +7,12 @@
 #include "../global/context_fwd.hpp"
 #include "../machine.hpp"
 #include "../console.hpp"
+#include "../player_id.hpp"
 #include "../../messages/client_info.hpp"
 #include "../../messages/console_command.hpp"
 #include "../../messages/player_cheat.hpp"
 #include "../../messages/player_choose_perk.hpp"
 #include "../../messages/base_fwd.hpp"
-#include "../../net/id.hpp"
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
@@ -66,25 +66,25 @@ public:
 
 	boost::statechart::result
 	operator()(
-		net::id,
+		server::player_id,
 		messages::client_info const &
 	);
 
 	boost::statechart::result
 	operator()(
-		net::id,
+		server::player_id,
 		messages::console_command const &
 	);
 
 	boost::statechart::result
 	operator()(
-		net::id,
+		server::player_id,
 		messages::player_cheat const &
 	);
 
 	boost::statechart::result
 	operator()(
-		net::id,
+		server::player_id,
 		messages::player_choose_perk const &
 	);
 
@@ -93,7 +93,7 @@ public:
 private:
 	boost::statechart::result
 	handle_default_msg(
-		net::id,
+		server::player_id,
 		messages::base const &
 	);
 

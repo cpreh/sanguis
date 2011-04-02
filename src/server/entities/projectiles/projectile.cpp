@@ -20,11 +20,11 @@ sanguis::server::entities::projectiles::projectile::ptype() const
 
 sanguis::server::entities::projectiles::projectile::projectile(
 	projectile_type::type const _ptype,
-	team::type const _team,
+	server::team::type const _team,
 	entities::movement_speed const _movement_speed,
-	dim_type const &_dim,
+	server::dim const &_dim,
 	life_time const _life_time,
-	space_unit const _direction,
+	server::direction const _direction,
 	indeterminate::type const _indeterminate
 )
 :
@@ -92,12 +92,6 @@ sanguis::server::entities::projectiles::projectile::dead() const
 	return life_timer_.expired();
 }
 
-bool
-sanguis::server::entities::projectiles::projectile::invulnerable() const
-{
-	return true;
-}
-
 sanguis::entity_type::type
 sanguis::server::entities::projectiles::projectile::type() const
 {
@@ -105,22 +99,40 @@ sanguis::server::entities::projectiles::projectile::type() const
 }
 
 boost::logic::tribool const
-sanguis::server::entities::projectiles::projectile::can_collide_with_entity(
-	base const &_entity
+sanguis::server::entities::projectiles::projectile::can_collide_with(
+	collision::body_base const &_other
 ) const
 {
+	entities::base const *base(
+		dynamic_cast<
+			entities::base const *
+		>(
+			&_other
+		)
+	);
+
+	if(
+		!base
+	)
+		return false;
+
 	FCPPT_ASSERT(
-		_entity.team() != this->team()
+		base->team() != this->team()
 	); // shouldn't happen for now!
 
 	return
-		!_entity.dead()
-		&& !_entity.invulnerable();
+		!base->dead()
+		&&
+		dynamic_cast<
+			entities::with_health const *
+		>(
+			base
+		);
 }
 
 void
-sanguis::server::entities::projectiles::projectile::collision_entity_begin(
-	base &_entity
+sanguis::server::entities::projectiles::projectile::collision(
+	collision::body_base &_other
 )
 {
 	if(
@@ -130,7 +142,7 @@ sanguis::server::entities::projectiles::projectile::collision_entity_begin(
 			dynamic_cast<
 				with_health &
 			>(
-				_entity
+				_other
 			)
 		);
 }
@@ -144,10 +156,10 @@ sanguis::server::entities::projectiles::projectile::add_message(
 		messages::create(
 			messages::add_projectile(
 				this->id(),
-				this->pos(),
-				this->angle(),
+				this->pos().get(),
+				this->angle().get(),
 				this->dim(),
-				this->abs_speed(),
+				this->abs_speed().get(),
 				this->ptype()
 			)
 		);

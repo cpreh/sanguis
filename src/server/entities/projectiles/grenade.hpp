@@ -4,10 +4,11 @@
 #include "aoe_projectile.hpp"
 #include "../with_health_fwd.hpp"
 #include "../../damage/unit.hpp"
-#include "../../environment/load_context_ptr.hpp"
+#include "../../environment/load_context_fwd.hpp"
+#include "../../direction.hpp"
+#include "../../vector.hpp"
+#include "../../radius.hpp"
 #include "../../team.hpp"
-#include "../../space_unit.hpp"
-#include "../../pos_type.hpp"
 #include "../../../diff_clock.hpp"
 #include <sge/time/timer.hpp>
 #include <fcppt/math/vector/basic_decl.hpp>
@@ -31,12 +32,12 @@ class grenade
 	);
 public:
 	grenade(
-		server::environment::load_context_ptr,
-		team::type,
+		server::environment::load_context &,
+		server::team::type,
 		damage::unit,
-		space_unit aoe,
-		pos_type const &dest,
-		space_unit direction
+		server::radius aoe,
+		server::vector const &dest,
+		server::direction
 	);
 
 	~grenade();
@@ -66,7 +67,7 @@ private:
 
 	damage::unit const damage_;
 
-	pos_type const dest_;
+	server::vector const dest_;
 };
 
 }

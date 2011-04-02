@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_GHOST_PARAMETERS_HPP_INCLUDED
 
 #include "ghost_parameters_fwd.hpp"
-#include "global_groups_fwd.hpp"
+#include "../collision/global_groups_fwd.hpp"
 #include "../center.hpp"
 #include <sge/projectile/world_fwd.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>

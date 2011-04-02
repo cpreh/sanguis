@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_GLOBAL_LOAD_CONTEXT_HPP_INCLUDED
 
 #include "../environment/load_context.hpp"
-#include "../dim_type.hpp"
+#include "../dim.hpp"
 #include "../string.hpp"
 #include "../../load/context_base.hpp"
 #include <fcppt/noncopyable.hpp>
@@ -28,7 +28,7 @@ public:
 
 	~load_context();
 private:
-	dim_type const
+	server::dim const
 	entity_dim(
 		string const &model_name
 	) const;

@@ -5,7 +5,7 @@
 #include "property/always_max.hpp"
 #include "property/value.hpp"
 #include "../weapons/unique_ptr.hpp"
-#include "../center.hpp"
+#include "../vector.hpp"
 #include "../../weapon_type.hpp"
 #include "../../time_type.hpp"
 #include <fcppt/signal/scoped_connection.hpp>
@@ -57,12 +57,12 @@ public:
 
 	void
 	target(
-		server::center const &
+		server::vector const &
 	);
 
 	bool
 	in_range(
-		server::center const &
+		server::vector const &
 	) const;
 
 	bool
@@ -124,10 +124,10 @@ private:
 	weapon_type::type weapon_;
 
 	typedef fcppt::optional<
-		server::center
-	> optional_center;
+		server::vector
+	> optional_vector;
 
-	optional_center target_;
+	optional_vector target_;
 
 	bool
 		attacking_,

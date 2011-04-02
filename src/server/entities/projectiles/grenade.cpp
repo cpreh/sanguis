@@ -1,6 +1,6 @@
 #include "grenade.hpp"
 #include "aoe_damage.hpp"
-#include "../insert_parameters_pos.hpp"
+#include "../insert_parameters_center.hpp"
 #include "../property/from_float.hpp"
 #include "../../collision/create_parameters.hpp"
 #include "../../damage/list.hpp"
@@ -21,19 +21,19 @@
 #include <algorithm>
 
 sanguis::server::entities::projectiles::grenade::grenade(
-	server::environment::load_context_ptr const _load_context,
+	server::environment::load_context &_load_context,
 	team::type const _team,
 	damage::unit const _damage,
-	space_unit const _aoe,
-	pos_type const &_dest,
-	space_unit const _direction
+	server::radius const _aoe,
+	server::vector const &_dest,
+	server::direction const _direction
 )
 :
 	aoe_projectile(
 		aoe_projectile_type::grenade,
 		_team,
 		entities::movement_speed(500),
-		_load_context->entity_dim(
+		_load_context.entity_dim(
 			FCPPT_TEXT("grenade")
 		),
 		life_time(
@@ -75,7 +75,7 @@ sanguis::server::entities::projectiles::grenade::on_transfer(
 			this->movement_speed().max(),
 			property::from_float(
 				collision::distance(
-					_param.center(),
+					_param.center().get(),
 					dest_
 				)
 			)
@@ -115,7 +115,7 @@ sanguis::server::entities::projectiles::grenade::on_update(
 void
 sanguis::server::entities::projectiles::grenade::on_die()
 {
-	this->environment()->insert(
+	this->environment().insert(
 		entities::unique_ptr(
 			fcppt::make_unique_ptr<
 				aoe_damage
@@ -132,7 +132,7 @@ sanguis::server::entities::projectiles::grenade::on_die()
 				)
 			)
 		),
-		entities::insert_parameters_pos(
+		entities::insert_parameters_center(
 			this->center()
 		)
 	);

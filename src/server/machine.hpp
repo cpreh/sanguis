@@ -3,6 +3,7 @@
 
 #include "machine_fwd.hpp"
 #include "states/running_fwd.hpp"
+#include "player_id.hpp"
 #include "../load/context_base_fwd.hpp"
 #include "../messages/auto_ptr.hpp"
 #include "../net/server/object.hpp"
@@ -56,7 +57,7 @@ public:
 
 	void
 	send_unicast(
-		net::id,
+		server::player_id,
 		messages::auto_ptr
 	);
 

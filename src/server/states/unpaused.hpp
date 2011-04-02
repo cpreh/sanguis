@@ -1,8 +1,10 @@
 #ifndef SANGUIS_SERVER_STATES_UNPAUSED_HPP_INCLUDED
 #define SANGUIS_SERVER_STATES_UNPAUSED_HPP_INCLUDED
 
+#include "running.hpp"
 #include "../events/message_fwd.hpp"
 #include "../events/tick_fwd.hpp"
+#include "../player_id.hpp"
 #include "../../messages/player_attack_dest.hpp"
 #include "../../messages/player_direction.hpp"
 #include "../../messages/player_rotation.hpp"
@@ -12,8 +14,6 @@
 #include "../../messages/player_pause.hpp"
 #include "../../messages/player_unpause.hpp"
 #include "../../messages/base_fwd.hpp"
-#include "../../net/id.hpp"
-#include "running.hpp"
 #include <fcppt/log/object_fwd.hpp>
 #include <boost/mpl/list.hpp>
 #include <boost/statechart/simple_state.hpp>
@@ -63,55 +63,55 @@ public:
 
 	boost::statechart::result
 	operator()(
-		net::id,
+		server::player_id,
 		messages::player_attack_dest const &
 	);
 
 	boost::statechart::result
 	operator()(
-		net::id,
+		server::player_id,
 		messages::player_direction const &
 	);
 	
 	boost::statechart::result
 	operator()(
-		net::id,
+		server::player_id,
 		messages::player_rotation const &
 	);
 	
 	boost::statechart::result
 	operator()(
-		net::id,
+		server::player_id,
 		messages::player_start_shooting const &
 	);
 	
 	boost::statechart::result
 	operator()(
-		net::id,
+		server::player_id,
 		messages::player_stop_shooting const &
 	);
 	
 	boost::statechart::result
 	operator()(
-		net::id,
+		server::player_id,
 		messages::player_change_weapon const &
 	);
 
 	boost::statechart::result
 	operator()(
-		net::id,
+		server::player_id,
 		messages::player_unpause const &
 	);
 
 	boost::statechart::result
 	operator()(
-		net::id,
+		server::player_id,
 		messages::player_pause const &
 	);
 private:
 	boost::statechart::result
 	handle_default_msg(
-		net::id,
+		server::player_id,
 		messages::base const &
 	);
 	

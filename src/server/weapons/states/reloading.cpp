@@ -7,36 +7,46 @@
 #include "../../entities/with_weapon.hpp"
 
 sanguis::server::weapons::states::reloading::reloading(
-	my_context ctx)
+	my_context _ctx
+)
 :
-	my_base(ctx),
+	my_base(
+		_ctx
+	),
 	diff_clock_(),
-	reload_time(
+	reload_time_(
 		context<
 			weapon
 		>().reload_time(),
 		sge::time::activation_state::active,
 		diff_clock_.callback()
 	)
-{}
+{
+}
+
+sanguis::server::weapons::states::reloading::~reloading()
+{
+}
 
 boost::statechart::result
 sanguis::server::weapons::states::reloading::react(
-	events::poll const &e
+	events::poll const &_event
 )
 {
 	diff_clock_.update(
-		e.time() * context<weapon>().irs()
+		_event.time() * context<weapon>().irs()
 	);
 
-	if(!reload_time.expired())
+	if(
+		!reload_time_.expired()
+	)
 		return discard_event();
 	
 	context<
 		weapon
 	>().reset_magazine();
 
-	e.owner().stop_reloading();
+	_event.owner().stop_reloading();
 
 	return transit<ready>();
 }
@@ -46,7 +56,7 @@ sanguis::server::weapons::states::reloading::react(
 	events::stop const &
 )
 {
-	reload_time.reset();	
+	reload_time_.reset();	
 
 	return discard_event();
 }
@@ -56,7 +66,7 @@ sanguis::server::weapons::states::reloading::react(
 	events::reset const &
 )
 {
-	reload_time.expire();
+	reload_time_.expire();
 	
 	return discard_event();
 }

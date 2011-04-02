@@ -32,8 +32,11 @@ sanguis::server::perks::irs::change(
 	);
 }
 
-sanguis::server::perks::level_type
+sanguis::server::level const
 sanguis::server::perks::irs::max_level() const
 {
-	return 4;
+	return
+		server::level(
+			4
+		);
 }

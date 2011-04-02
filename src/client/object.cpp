@@ -274,7 +274,6 @@ sanguis::client::object::create_server(
 		fcppt::make_unique_ptr<
 			server::object
 		>(
-			sys_,
 			_port,
 			resources_
 		)

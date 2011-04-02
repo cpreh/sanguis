@@ -6,6 +6,7 @@
 #include "../entities/projectiles/simple_bullet.hpp"
 #include "../environment/object.hpp"
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 
 sanguis::server::weapons::pistol::pistol(
 	weapon_type::type const _type,
@@ -41,15 +42,19 @@ sanguis::server::weapons::pistol::do_attack(
 	delayed_attack const &_attack
 )
 {
-	_attack.environment()->insert(
+	_attack.environment().insert(
 		entities::unique_ptr(
 			fcppt::make_unique_ptr<
 				entities::projectiles::simple_bullet
 			>(
-				_attack.environment()->load_context(),
+				fcppt::ref(
+					_attack.environment().load_context()
+				),
 				_attack.team(),
 				damage_,
-				_attack.angle()
+				server::direction(
+					_attack.angle().get()
+				)
 			)
 		),
 		entities::insert_parameters(

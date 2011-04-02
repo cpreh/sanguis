@@ -17,8 +17,8 @@ sanguis::server::perks::status::status()
 
 sanguis::server::perks::status::status(
 	perk_type::type const _type,
-	server::level const _required_player_level,
-	server::level const _required_parent_level
+	perks::required_player_level const _required_player_level,
+	perks::required_parent_level const _required_parent_level
 )
 :
 	type_(_type),
@@ -38,18 +38,19 @@ sanguis::server::perks::status::choose()
 	++level_;
 }
 
-sanguis::server::perks::level const
+sanguis::server::perks::required_player_level const
 sanguis::server::perks::status::required_player_level() const
 {
 	return required_player_level_;
 }
 
-sanguis::server::perks::level const
+sanguis::server::perks::required_parent_level const
 sanguis::server::perks::status::required_parent_level() const
 {
 	return required_parent_level_;
 }
-sanguis::server::perks::level const
+
+sanguis::server::level const
 sanguis::server::perks::status::level() const
 {
 	return level_;

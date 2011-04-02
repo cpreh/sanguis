@@ -10,60 +10,68 @@
 #include <fcppt/optional_impl.hpp>
 
 sanguis::server::weapons::states::castpoint::castpoint(
-	my_context ctx
+	my_context _ctx
 )
 :
-	my_base(ctx),
+	my_base(
+		_ctx
+	),
 	diff_clock_(),
-	attack_time(
+	attack_time_(
 		context<
 			weapon
 		>().cast_point(),
 		sge::time::activation_state::active,
 		diff_clock_.callback()
 	),
-	attack_dest()
-{}
-
+	attack_dest_()
+{
+}
 
 boost::statechart::result
 sanguis::server::weapons::states::castpoint::react(
-	events::shoot const &e
+	events::shoot const &_event
 )
 {
-	attack_dest = e.to();
+	// TODO: use constructor instead!
+	attack_dest_ = _event.to();
+
 	return discard_event();
 }
 
 boost::statechart::result
 sanguis::server::weapons::states::castpoint::react(
-	events::poll const &e
+	events::poll const &_event
 )
 {
 	diff_clock_.update(
-		e.time() * context<weapon>().ias()
+		_event.time() * context<weapon>().ias()
 	);
 
-	if(!attack_time.expired())
+	if(
+		!attack_time_.expired()
+	)
 		return discard_event();
 	
 	context<
 		weapon
 	>().do_attack(
 		delayed_attack(
-			e.owner().center(),
-			e.owner().angle(),
-			e.owner().team(),
-			e.owner().environment(),
-			*attack_dest
+			_event.owner().center(),
+			_event.owner().angle(),
+			_event.owner().team(),
+			_event.owner().environment(),
+			*attack_dest_
 		)
 	);
 
 	context<weapon>().on_castpoint(
-		e.owner()
+		_event.owner()
 	);
 
-	post_event(e);
+	this->post_event(
+		_event
+	);
 
 	return transit<backswing>();
 }

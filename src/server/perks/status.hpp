@@ -1,6 +1,8 @@
 #ifndef SANGUIS_SERVER_PERKS_STATUS_HPP_INCLUDED
 #define SANGUIS_SERVER_PERKS_STATUS_HPP_INCLUDED
 
+#include "required_player_level.hpp"
+#include "required_parent_level.hpp"
 #include "../level.hpp"
 #include "../../perk_type.hpp"
 
@@ -18,17 +20,17 @@ public:
 
 	status(
 		perk_type::type,
-		server::level required_player_level,
-		server::level required_parent_level
+		perks::required_player_level,
+		perks::required_parent_level
 	);
 	
 	void
 	choose();
 
-	server::level const
+	perks::required_player_level const
 	required_player_level() const;
 
-	server::level const
+	perks::required_parent_level const
 	required_parent_level() const;
 
 	server::level const
@@ -39,10 +41,11 @@ public:
 private:
 	perk_type::type type_;
 
-	server::level
-		required_player_level_,
-		required_parent_level_,
-		level_;
+	perks::required_player_level required_player_level_;
+
+	perks::required_parent_level required_parent_level_;
+
+	server::level level_;
 };
 
 }

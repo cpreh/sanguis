@@ -5,7 +5,7 @@
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 
-sanguis::server::pos_type const
+sanguis::server::pos const
 sanguis::server::entities::with_dim::pos() const
 {
 	return
@@ -16,7 +16,7 @@ sanguis::server::entities::with_dim::pos() const
 }
 
 sanguis::server::entities::with_dim::with_dim(
-	dim_type const &_dim
+	server::dim const &_dim
 )
 :
 	dim_(_dim)
@@ -27,7 +27,7 @@ sanguis::server::entities::with_dim::~with_dim()
 {
 }
 
-sanguis::server::dim_type const &
+sanguis::server::dim const &
 sanguis::server::entities::with_dim::dim() const
 {
 	return dim_;

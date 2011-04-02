@@ -8,6 +8,7 @@
 #include "../log.hpp"
 #include "../make_unicast_callback.hpp"
 #include "../make_send_callback.hpp"
+#include "../player_id_from_net.hpp"
 #include "../../connect_state.hpp"
 #include "../../messages/call/object.hpp"
 #include "../../messages/serialization/convert_string_vector.hpp"
@@ -50,7 +51,6 @@ sanguis::server::states::running::running(
 			server::make_unicast_callback(
 				context<machine>()
 			),
-			context<machine>().collision_system(),
 			context<machine>().resources(),
 			fcppt::ref(
 				console_
@@ -103,7 +103,9 @@ sanguis::server::states::running::react(
 			std::tr1::bind(
 				&running::handle_default_msg,
 				this,
-				_message.id(),
+				server::player_id_from_net(
+					_message.id()
+				),
 				std::tr1::placeholders::_1
 			)
 		);
@@ -123,7 +125,9 @@ sanguis::server::states::running::react(
 	);
 
 	global_context_->player_disconnect(
-		_message.id()
+		server::player_id_from_net(
+			_message.id()
+		)
 	);
 
 	return discard_event();
@@ -131,7 +135,7 @@ sanguis::server::states::running::react(
 
 boost::statechart::result
 sanguis::server::states::running::operator()(
-	net::id const _id,
+	server::player_id const _id,
 	messages::client_info const &_message
 )
 {
@@ -142,7 +146,9 @@ sanguis::server::states::running::operator()(
 	)
 
 	global_context_->insert_player(
-		0, // FIXME: which world id?
+		sanguis::world_id(
+			0 // FIXME: which world id?
+		),
 		_id,
 		fcppt::utf8::convert(
 			_message.get<
@@ -163,7 +169,7 @@ sanguis::server::states::running::operator()(
 
 boost::statechart::result
 sanguis::server::states::running::operator()(
-	net::id const _id,
+	server::player_id const _id,
 	messages::console_command const &_message
 )
 {
@@ -212,7 +218,7 @@ sanguis::server::states::running::operator()(
 
 boost::statechart::result
 sanguis::server::states::running::operator()(
-	net::id const _id,
+	server::player_id const _id,
 	messages::player_cheat const &_message
 )
 {
@@ -231,7 +237,7 @@ sanguis::server::states::running::operator()(
 
 boost::statechart::result
 sanguis::server::states::running::operator()(
-	net::id const _id,
+	server::player_id const _id,
 	messages::player_choose_perk const &_message
 )
 {
@@ -256,7 +262,7 @@ sanguis::server::states::running::global_context()
 
 boost::statechart::result
 sanguis::server::states::running::handle_default_msg(
-	net::id const,
+	server::player_id const,
 	messages::base const &
 )
 {

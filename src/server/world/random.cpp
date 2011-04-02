@@ -5,8 +5,8 @@
 
 sanguis::server::world::object_unique_ptr
 sanguis::server::world::random(
-	context_ptr const _ctx,
-	server::environment::load_context_ptr const _load_context,
+	world::context &_ctx,
+	server::environment::load_context &_load_context,
 	server::console &_console
 )
 {
@@ -15,8 +15,12 @@ sanguis::server::world::random(
 		fcppt::make_unique_ptr<
 			object
 		>(
-			_ctx,
-			_load_context,
+			fcppt::ref(
+				_ctx
+			),
+			fcppt::ref(
+				_load_context
+			),
 			fcppt::ref(
 				_console
 			)

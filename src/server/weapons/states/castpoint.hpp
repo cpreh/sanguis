@@ -6,10 +6,11 @@
 #include "../events/poll_fwd.hpp"
 #include "../events/shoot_fwd.hpp"
 #include "../events/stop_fwd.hpp"
-#include "../../pos_type.hpp"
+#include "../../vector.hpp"
 #include "../../../diff_clock.hpp"
 #include <sge/time/timer.hpp>
 #include <fcppt/math/vector/basic_decl.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/result.hpp>
@@ -26,12 +27,15 @@ namespace states
 {
 
 class castpoint
-: public
-	boost::statechart::state<
+:
+	public boost::statechart::state<
 		castpoint,
 		weapon
 	>
 {
+	FCPPT_NONCOPYABLE(
+		castpoint
+	);
 public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<
@@ -46,25 +50,33 @@ public:
 	> reactions;
 
 	explicit castpoint(
-		my_context);
+		my_context
+	);
+
+	~castpoint();
 
 	boost::statechart::result
 	react(
-		events::shoot const &);
+		events::shoot const &
+	);
 	
 	boost::statechart::result
 	react(
-		events::poll const &);
+		events::poll const &
+	);
 
 	boost::statechart::result
 	react(
-		events::stop const &);
+		events::stop const &
+	);
 private:
 	diff_clock diff_clock_;
-	sge::time::timer attack_time;
+
+	sge::time::timer attack_time_;
+
 	fcppt::optional<
-		pos_type
-	> attack_dest;
+		server::vector	
+	> attack_dest_;
 };
 
 }

@@ -48,16 +48,16 @@ sanguis::server::weapons::sentry::do_attack(
 	delayed_attack const &_attack
 )
 {
-	_attack.environment()->insert(
+	_attack.environment().insert(
 		entities::unique_ptr(
 			new entities::friend_(
 //			fcppt::make_unique_ptr<
 //				entities::friend_
 //			>(
 				friend_type::sentry,
-				_attack.environment()->load_context(),
+				_attack.environment().load_context(),
 				damage::no_armor(),
-				entities::health_type(100),
+				server::health(100),
 				entities::movement_speed(0),
 				ai::create_simple(),
 				weapons::unique_ptr(
@@ -66,7 +66,9 @@ sanguis::server::weapons::sentry::do_attack(
 			)
 		),
 		entities::insert_parameters(
-			_attack.dest(),
+			server::center(
+				_attack.dest()
+			),
 			_attack.angle()
 		)
 	);

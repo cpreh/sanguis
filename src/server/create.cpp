@@ -5,9 +5,8 @@
 
 sanguis::main_object_unique_ptr
 sanguis::server::create(
-	sge::systems::instance const &sys,
-	boost::program_options::variables_map const &vm,
-	load::context_base const &context
+	boost::program_options::variables_map const &_vm,
+	load::context_base const &_context
 )
 {
 	return
@@ -15,11 +14,10 @@ sanguis::server::create(
 			fcppt::make_unique_ptr<
 				object
 			>(
-				sys,
 				args::server_port(
-					vm
+					_vm
 				),
-				context
+				_context
 			)
 		);
 }

@@ -4,7 +4,7 @@
 #include "make.hpp"
 #include "convert_enemy_name.hpp"
 #include "../console.hpp"
-#include "../net_id_from_args.hpp"
+#include "../player_id_from_args.hpp"
 #include <sge/font/text/to_fcppt_string.hpp>
 #include <sge/font/text/lit.hpp>
 #include <sge/font/text/string.hpp>
@@ -49,8 +49,8 @@ sanguis::server::waves::generator::~generator()
 void
 sanguis::server::waves::generator::process(
 	time_type const _diff,
-	environment::object_ptr const _env,
-	environment::load_context_ptr const _load_context
+	environment::object &_env,
+	environment::load_context &_load_context
 )
 {
 	for(
@@ -64,7 +64,9 @@ sanguis::server::waves::generator::process(
 			_load_context
 		);
 
-		if(it->ended())
+		if(
+			it->ended()
+		)
 			it = waves_.erase(it);
 		else
 			++it;
@@ -92,7 +94,7 @@ try
 	)
 	{
 		console_.print_line(
-			server::net_id_from_args(
+			server::player_id_from_args(
 				_args
 			),
 			FCPPT_TEXT("Invalid parameter count for spawn command.")
@@ -156,7 +158,7 @@ try
 	else
 	{
 		console_.print_line(
-			server::net_id_from_args(
+			server::player_id_from_args(
 				_args
 			),
 			FCPPT_TEXT("Invalid argument for spawn command.")
@@ -168,7 +170,7 @@ catch(
 )
 {
 	console_.print_line(
-		server::net_id_from_args(
+		server::player_id_from_args(
 			_args
 		),
 		error.string()

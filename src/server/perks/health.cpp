@@ -32,8 +32,11 @@ sanguis::server::perks::health::change(
 	);
 }
 
-sanguis::server::perks::level_type
+sanguis::server::level const
 sanguis::server::perks::health::max_level() const
 {
-	return 10;
+	return
+		server::level(
+			10
+		);
 }

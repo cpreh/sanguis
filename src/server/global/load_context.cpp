@@ -15,14 +15,14 @@ sanguis::server::global::load_context::~load_context()
 {
 }
 
-sanguis::server::dim_type const
+sanguis::server::dim const
 sanguis::server::global::load_context::entity_dim(
 	string const &_model_name
 ) const
 {
 	return
 		fcppt::math::dim::structure_cast<
-			dim_type
+			server::dim
 		>(
 			model_context_.model_dim(
 				_model_name

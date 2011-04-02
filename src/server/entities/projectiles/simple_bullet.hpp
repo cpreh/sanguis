@@ -3,10 +3,10 @@
 
 #include "projectile.hpp"
 #include "../with_health_fwd.hpp"
-#include "../../environment/load_context_ptr.hpp"
+#include "../../environment/load_context_fwd.hpp"
 #include "../../damage/unit.hpp"
+#include "../../direction.hpp"
 #include "../../team.hpp"
-#include "../../space_unit.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -27,10 +27,10 @@ class simple_bullet
 	);
 public:
 	simple_bullet(
-		server::environment::load_context_ptr,
-		team::type,
+		server::environment::load_context &,
+		server::team::type,
 		damage::unit,
-		space_unit direction
+		server::direction
 	);
 
 	~simple_bullet();

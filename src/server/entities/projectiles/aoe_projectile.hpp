@@ -5,9 +5,10 @@
 #include "life_time.hpp"
 #include "indeterminate.hpp"
 #include "../movement_speed.hpp"
+#include "../../dim.hpp"
+#include "../../direction.hpp"
+#include "../../radius.hpp"
 #include "../../team.hpp"
-#include "../../dim_type.hpp"
-#include "../../space_unit.hpp"
 #include "../../../messages/auto_ptr.hpp"
 #include "../../../aoe_projectile_type.hpp"
 #include <fcppt/noncopyable.hpp>
@@ -31,18 +32,18 @@ class aoe_projectile
 protected:
 	aoe_projectile(
 		aoe_projectile_type::type,
-		team::type,
+		server::team::type,
 		entities::movement_speed,
-		dim_type const &dim,
+		server::dim const &,
 		life_time,
 		indeterminate::type,
-		space_unit aoe,
-		space_unit direction
+		server::radius,
+		server::direction
 	);
 
 	~aoe_projectile();
 	
-	space_unit
+	server::radius const
 	aoe() const;
 private:
 	messages::auto_ptr
@@ -52,7 +53,7 @@ private:
 
 	aoe_projectile_type::type const type_;
 
-	space_unit const aoe_;
+	server::radius const aoe_;
 };
 
 }

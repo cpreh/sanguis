@@ -2,9 +2,9 @@
 #define SANGUIS_SERVER_PERKS_IRS_HPP_INCLUDED
 
 #include "perk.hpp"
-#include "level_type.hpp"
 #include "level_diff.hpp"
 #include "../entities/base_fwd.hpp"
+#include "../level.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -32,7 +32,7 @@ private:
 		level_diff
 	);
 
-	level_type
+	server::level const
 	max_level() const;
 };
 

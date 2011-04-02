@@ -4,6 +4,7 @@
 #include "ready_fwd.hpp"
 #include "../weapon.hpp"
 #include "../events/shoot_fwd.hpp"
+#include <fcppt/noncopyable.hpp>
 #include <boost/statechart/simple_state.hpp>
 #include <boost/statechart/result.hpp>
 #include <boost/statechart/custom_reaction.hpp>
@@ -19,12 +20,15 @@ namespace states
 {
 
 class ready
-: public
-	boost::statechart::simple_state<
+:
+	public boost::statechart::simple_state<
 		ready,
 		weapon
 	>
 {
+	FCPPT_NONCOPYABLE(
+		ready
+	);
 public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<
@@ -32,9 +36,14 @@ public:
 		>
 	> reactions;
 
+	ready();
+
+	~ready();
+
 	boost::statechart::result
 	react(
-		events::shoot const &);
+		events::shoot const &
+	);
 };
 
 }

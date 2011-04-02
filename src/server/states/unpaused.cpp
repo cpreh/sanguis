@@ -6,6 +6,7 @@
 #include "../global/context.hpp"
 #include "../message_functor.hpp"
 #include "../log.hpp"
+#include "../player_id_from_net.hpp"
 #include "../../messages/call/object.hpp"
 #include "../../messages/pause.hpp"
 #include "../../messages/base.hpp"
@@ -33,7 +34,7 @@ sanguis::server::states::unpaused::~unpaused()
 
 boost::statechart::result
 sanguis::server::states::unpaused::handle_default_msg(
-	net::id,
+	server::player_id,
 	messages::base const &
 )
 {
@@ -42,7 +43,7 @@ sanguis::server::states::unpaused::handle_default_msg(
 
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
-	net::id const _id,
+	server::player_id const _id,
 	messages::player_attack_dest const &_message
 )
 {
@@ -60,7 +61,7 @@ sanguis::server::states::unpaused::operator()(
 
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
-	net::id const _id,
+	server::player_id const _id,
 	messages::player_change_weapon const &_message
 )
 {
@@ -81,7 +82,7 @@ sanguis::server::states::unpaused::operator()(
 
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
-	net::id const _id,
+	server::player_id const _id,
 	messages::player_rotation const &_message
 )
 {
@@ -89,7 +90,9 @@ sanguis::server::states::unpaused::operator()(
 		running
 	>().global_context().player_angle(
 		_id,
-		_message.get<messages::roles::angle>()
+		server::angle(
+			_message.get<messages::roles::angle>()
+		)
 	);
 
 	return discard_event();
@@ -97,7 +100,7 @@ sanguis::server::states::unpaused::operator()(
 
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
-	net::id const _id,
+	server::player_id const _id,
 	messages::player_start_shooting const &
 )
 {
@@ -113,7 +116,7 @@ sanguis::server::states::unpaused::operator()(
 
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
-	net::id const _id,
+	server::player_id const _id,
 	messages::player_stop_shooting const &
 )
 {
@@ -129,17 +132,19 @@ sanguis::server::states::unpaused::operator()(
 
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
-	net::id const _id,
+	server::player_id const _id,
 	messages::player_direction const &_message
 )
 {
 	context<
 		running
-	>().global_context().player_direction(
+	>().global_context().player_speed(
 		_id,
-		_message.get<
-			messages::roles::direction
-		>()
+		server::speed(
+			_message.get<
+				messages::roles::direction
+			>()
+		)
 	);
 
 	return discard_event();
@@ -147,7 +152,7 @@ sanguis::server::states::unpaused::operator()(
 
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
-	net::id,
+	server::player_id,
 	messages::player_unpause const &
 )
 {
@@ -162,7 +167,7 @@ sanguis::server::states::unpaused::operator()(
 
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
-	net::id,
+	server::player_id,
 	messages::player_pause const &
 )
 {
@@ -235,7 +240,9 @@ sanguis::server::states::unpaused::react(
 			std::tr1::bind(
 				&unpaused::handle_default_msg,
 				this,
-				_message.id(),
+				server::player_id_from_net(
+					_message.id()
+				),
 				std::tr1::placeholders::_1
 			)
 		);

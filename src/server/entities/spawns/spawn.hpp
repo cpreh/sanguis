@@ -3,7 +3,7 @@
 
 #include "size_type.hpp"
 #include "../base.hpp"
-#include "../../space_unit.hpp"
+#include "../../center.hpp"
 #include "../../team.hpp"
 #include "../../../enemy_type.hpp"
 #include "../../../entity_type.hpp"
@@ -38,14 +38,14 @@ protected:
 		enemy_type::type
 	);
 private:
-	space_unit
-	radius() const;
-
 	entity_type::type
 	type() const;
 
 	server::team::type
 	team() const;
+
+	server::center const
+	center() const;
 
 	void
 	on_update(

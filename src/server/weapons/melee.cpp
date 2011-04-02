@@ -3,7 +3,7 @@
 #include "unlimited_magazine_size.hpp"
 #include "unlimited_magazine_count.hpp"
 #include "../environment/object.hpp"
-#include "../entities/insert_parameters_pos.hpp"
+#include "../entities/insert_parameters_center.hpp"
 #include "../entities/base.hpp"
 #include "../entities/with_weapon.hpp"
 #include "../entities/movable.hpp"
@@ -42,7 +42,7 @@ sanguis::server::weapons::melee::do_attack(
 	delayed_attack const &_attack
 )
 {
-	_attack.environment()->insert(
+	_attack.environment().insert(
 		entities::unique_ptr(
 			fcppt::make_unique_ptr<
 				entities::projectiles::melee
@@ -51,8 +51,10 @@ sanguis::server::weapons::melee::do_attack(
 				damage_
 			)
 		),
-		entities::insert_parameters_pos(
-			_attack.dest()
+		entities::insert_parameters_center(
+			server::center(
+				_attack.dest()
+			)
 		)
 	);
 }

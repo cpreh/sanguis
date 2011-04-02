@@ -39,8 +39,8 @@ sanguis::server::waves::simple::~simple()
 void
 sanguis::server::waves::simple::process(
 	time_type const _diff,
-	environment::object_ptr const _env,
-	environment::load_context_ptr const _load_context
+	environment::object &_env,
+	environment::load_context &_load_context
 )
 {
 	diff_.update(

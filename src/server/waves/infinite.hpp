@@ -5,6 +5,8 @@
 #include "delay.hpp"
 #include "spawn_interval.hpp"
 #include "spawns_per_wave.hpp"
+#include "../environment/load_context_fwd.hpp"
+#include "../environment/object_fwd.hpp"
 #include "../../diff_clock.hpp"
 #include "../../enemy_type.hpp"
 #include "../../time_type.hpp"
@@ -38,8 +40,8 @@ private:
 	void
 	process(
 		time_type diff,
-		environment::object_ptr,
-		environment::load_context_ptr
+		environment::object &,
+		environment::load_context &
 	);
 	
 	bool

@@ -1,6 +1,6 @@
 #include "infinite.hpp"
 #include "../entities/spawns/limited.hpp"
-#include "../entities/insert_parameters_pos.hpp"
+#include "../entities/insert_parameters_center.hpp"
 #include "../environment/object.hpp"
 #include <sge/time/second.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
@@ -34,8 +34,8 @@ sanguis::server::waves::infinite::~infinite()
 void
 sanguis::server::waves::infinite::process(
 	time_type const _diff,
-	environment::object_ptr const _env,
-	environment::load_context_ptr const
+	environment::object &_env,
+	environment::load_context &
 )
 {
 	// TODO: the waves system must be replaced sometime
@@ -50,7 +50,7 @@ sanguis::server::waves::infinite::process(
 	{
 		delay_time_.deactivate();
 
-		_env->insert(
+		_env.insert(
 			entities::unique_ptr(
 				fcppt::make_unique_ptr<
 					entities::spawns::limited
@@ -69,8 +69,10 @@ sanguis::server::waves::infinite::process(
 					) // TODO!
 				)
 			),
-			entities::insert_parameters_pos(
-				pos_type::null() // TODO!
+			entities::insert_parameters_center(
+				server::center(
+					server::center::value_type::null() // TODO!
+				)
 			)
 		);
 	}

@@ -2,7 +2,9 @@
 #include "collision_groups.hpp"
 #include "solidity.hpp"
 #include "../collision/body.hpp"
+#include "../collision/create_parameters.hpp"
 #include "../collision/user_data.hpp"
+#include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
@@ -20,7 +22,7 @@ sanguis::server::center const
 sanguis::server::entities::with_body::center() const
 {
 	return
-		body_->center();
+		collision_body_->center();
 }
 
 void
@@ -28,7 +30,7 @@ sanguis::server::entities::with_body::center(
 	server::center const &_center
 )
 {
-	body_->center(
+	collision_body_->center(
 		_center
 	);
 }
@@ -38,7 +40,7 @@ sanguis::server::entities::with_body::on_transfer(
 	collision::create_parameters const &_params
 )
 {
-	collison_body_.take(
+	collision_body_.take(
 		fcppt::make_unique_ptr<
 			collision::body
 		>(
@@ -47,9 +49,7 @@ sanguis::server::entities::with_body::on_transfer(
 				this->type(),
 				this->team()
 			),
-			this->recreate_shape(
-				_params.world()
-			),
+			this->recreate_shape(),
 			entities::solidity(
 				this->type()
 			),

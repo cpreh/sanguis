@@ -17,8 +17,8 @@ sanguis::server::waves::single::~single()
 void
 sanguis::server::waves::single::process(
 	time_type const,
-	environment::object_ptr const _env,
-	environment::load_context_ptr const _load_context
+	environment::object &_env,
+	environment::load_context &_load_context
 )
 {
 	waves::spawn(

@@ -20,7 +20,7 @@ sanguis::server::entities::with_ghosts::add_ghost(
 	collision::ghost_unique_ptr _ghost
 )
 {
-	fcppt::container::ptr::push_back_unqiue_ptr(
+	fcppt::container::ptr::push_back_unique_ptr(
 		ghosts_,
 		move(
 			_ghost
@@ -48,7 +48,7 @@ sanguis::server::entities::with_ghosts::update_center(
 )
 {
 	BOOST_FOREACH(
-		ghost_list::value_type &ghost,
+		ghost_list::reference ghost,
 		ghosts_
 	)
 		ghost.center(

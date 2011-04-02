@@ -8,6 +8,7 @@
 #include "../events/reset_fwd.hpp"
 #include "../../../diff_clock.hpp"
 #include <sge/time/timer.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/result.hpp>
 #include <boost/statechart/custom_reaction.hpp>
@@ -23,12 +24,15 @@ namespace states
 {
 
 class reloading
-: public
-	boost::statechart::state<
+:
+	public boost::statechart::state<
 		reloading,
 		weapon
 	>
 {
+	FCPPT_NONCOPYABLE(
+		reloading
+	);
 public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<
@@ -43,22 +47,29 @@ public:
 	> reactions;
 
 	explicit reloading(
-		my_context);
+		my_context
+	);
+
+	~reloading();
 	
 	boost::statechart::result
 	react(
-		events::poll const &);
+		events::poll const &
+	);
 
 	boost::statechart::result
 	react(
-		events::stop const &);
+		events::stop const &
+	);
 	
 	boost::statechart::result
 	react(
-		events::reset const &);
+		events::reset const &
+	);
 private:
 	diff_clock diff_clock_;
-	sge::time::timer reload_time;
+
+	sge::time::timer reload_time_;
 };
 
 }

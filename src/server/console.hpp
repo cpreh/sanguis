@@ -5,7 +5,7 @@
 #include "send_callback.hpp"
 #include "unicast_callback.hpp"
 #include "console_command_vector.hpp"
-#include "../net/id.hpp"
+#include "player_id.hpp"
 #include <sge/console/object.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/callback.hpp>
@@ -42,13 +42,13 @@ public:
 
 	void
 	eval(
-		net::id,
+		server::player_id,
 		sge::console::arg_list
 	);
 
 	void
 	print_line(
-		net::id,
+		server::player_id,
 		fcppt::string const &
 	);
 

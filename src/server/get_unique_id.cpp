@@ -1,7 +1,12 @@
 #include "get_unique_id.hpp"
 
-sanguis::entity_id sanguis::server::get_unique_id()
+sanguis::entity_id const
+sanguis::server::get_unique_id()
 {
-	static entity_id id = 0;
-	return static_cast<entity_id>(id++);
+	// TODO: this should not bere here!
+	static sanguis::entity_id id(
+		0u
+	);
+
+	return id++;
 }

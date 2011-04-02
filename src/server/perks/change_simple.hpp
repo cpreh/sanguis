@@ -40,7 +40,7 @@ change_simple(
 		static_cast<
 			entities::property::value
 		>(
-			_diff
+			_diff.get()
 		)
 	);
 }
