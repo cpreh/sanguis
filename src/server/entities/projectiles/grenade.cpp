@@ -66,7 +66,6 @@ sanguis::server::entities::projectiles::grenade::~grenade()
 
 void
 sanguis::server::entities::projectiles::grenade::on_transfer(
-	collision::global_groups const &,
 	collision::create_parameters const &_param
 )
 {
@@ -80,6 +79,10 @@ sanguis::server::entities::projectiles::grenade::on_transfer(
 				)
 			)
 		)
+	);
+
+	with_body::on_transfer(
+		_param
 	);
 }
 

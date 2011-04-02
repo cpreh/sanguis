@@ -45,12 +45,12 @@ public:
 	speed(
 		server::speed const &
 	);
-private:
+protected:
 	void
 	on_transfer(
 		collision::create_parameters const &
 	);
-
+private:
 	void
 	on_position_change(
 		server::center const &

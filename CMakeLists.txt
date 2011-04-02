@@ -96,8 +96,6 @@ SET(
 	src/animation_sound_type.hpp
 	src/animation_type.hpp
 	src/aoe_projectile_type.hpp
-	src/args/client_sge_options.cpp
-	src/args/client_sge_options.hpp
 	src/args/log_level.cpp
 	src/args/log_level.hpp
 	src/args/multi_sampling.cpp
@@ -115,8 +113,6 @@ SET(
 	src/args/server_only.hpp
 	src/args/server_port.cpp
 	src/args/server_port.hpp
-	src/args/server_sge_options.cpp
-	src/args/server_sge_options.hpp
 	src/args/sge_options.cpp
 	src/args/sge_options.hpp
 	src/cast_enum.hpp

@@ -20,12 +20,12 @@ class body_base
 protected:
 	body_base();
 public:
-	~body_base();
+	virtual ~body_base();
 
 	virtual boost::logic::tribool const
 	can_collide_with(
 		collision::body_base const &
-	);
+	) const;
 
 	virtual void
 	collision(

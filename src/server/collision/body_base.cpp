@@ -12,7 +12,7 @@ sanguis::server::collision::body_base::~body_base()
 boost::logic::tribool const
 sanguis::server::collision::body_base::can_collide_with(
 	collision::body_base const &
-)
+) const
 {
 	return boost::logic::indeterminate;
 }
