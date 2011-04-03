@@ -112,6 +112,6 @@ sanguis::server::object::reset_running()
 	boost::mutex::scoped_lock const lock(
 		mutex_
 	);
-		
+
 	running_ = false;
 }

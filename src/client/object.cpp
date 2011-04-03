@@ -260,7 +260,11 @@ sanguis::client::object::loop_handler()
 			&& !server_->running()
 		)
 	)
+	{
 		window_->awl_dispatcher()->stop();
+
+		io_service_->stop();
+	}
 	else
 		this->register_handler();
 }
