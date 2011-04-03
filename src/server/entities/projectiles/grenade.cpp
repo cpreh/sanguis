@@ -1,6 +1,7 @@
 #include "grenade.hpp"
 #include "aoe_damage.hpp"
 #include "../insert_parameters_center.hpp"
+#include "../transfer_parameters.hpp"
 #include "../property/from_float.hpp"
 #include "../../collision/create_parameters.hpp"
 #include "../../damage/list.hpp"
@@ -66,7 +67,7 @@ sanguis::server::entities::projectiles::grenade::~grenade()
 
 void
 sanguis::server::entities::projectiles::grenade::on_transfer(
-	collision::create_parameters const &_param
+	entities::transfer_parameters const &_param
 )
 {
 	this->movement_speed().current(
@@ -74,7 +75,7 @@ sanguis::server::entities::projectiles::grenade::on_transfer(
 			this->movement_speed().max(),
 			property::from_float(
 				collision::distance(
-					_param.center().get(),
+					_param.create_parameters().center().get(),
 					dest_
 				)
 			)

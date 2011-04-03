@@ -5,11 +5,10 @@
 #include "auto_weak_link.hpp"
 #include "insert_parameters_fwd.hpp"
 #include "link_container.hpp"
-#include "../angle.hpp"
+#include "transfer_parameters_fwd.hpp"
 #include "../center.hpp"
 #include "../player_id.hpp"
 #include "../team.hpp"
-#include "../collision/create_parameters_fwd.hpp"
 #include "../collision/global_groups_fwd.hpp"
 #include "../environment/object_fwd.hpp"
 #include "../../messages/auto_ptr.hpp"
@@ -80,14 +79,6 @@ public:
 
 	// position and size functions
 
-	server::angle const
-	angle() const;
-
-	void
-	angle(
-		server::angle
-	);
-
 	virtual server::center const
 	center() const = 0;
 
@@ -128,7 +119,7 @@ private:
 
 	virtual void
 	on_transfer(
-		collision::create_parameters const &
+		entities::transfer_parameters const &
 	);
 
 	friend class auto_weak_link;
@@ -141,8 +132,6 @@ private:
 	environment::object *environment_;
 
 	entity_id const id_;
-
-	server::angle angle_;
 
 	bool processed_;
 	

@@ -1,5 +1,6 @@
 #include "with_ghosts.hpp"
 #include "ghost_parameters.hpp"
+#include "transfer_parameters.hpp"
 #include "../collision/create_parameters.hpp"
 #include "../collision/ghost.hpp"
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
@@ -30,14 +31,14 @@ sanguis::server::entities::with_ghosts::add_ghost(
 
 void
 sanguis::server::entities::with_ghosts::on_transfer(
-	collision::create_parameters const &_params
+	entities::transfer_parameters const &_params
 )
 {
 	this->recreate_ghosts(
 		entities::ghost_parameters(
-			_params.world(),
-			_params.global_groups(),
-			_params.center()
+			_params.create_parameters().world(),
+			_params.create_parameters().global_groups(),
+			_params.create_parameters().center()
 		)
 	);
 }

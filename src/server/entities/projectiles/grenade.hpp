@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_PROJECTILES_GRENADE_HPP_INCLUDED
 
 #include "aoe_projectile.hpp"
+#include "../transfer_parameters_fwd.hpp"
 #include "../with_health_fwd.hpp"
 #include "../../damage/unit.hpp"
 #include "../../environment/load_context_fwd.hpp"
@@ -44,7 +45,7 @@ public:
 private:
 	void
 	on_transfer(
-		collision::create_parameters const &
+		entities::transfer_parameters const &
 	);
 
 	void

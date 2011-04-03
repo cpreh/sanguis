@@ -3,6 +3,7 @@
 
 #include "base.hpp"
 #include "ghost_parameters_fwd.hpp"
+#include "transfer_parameters_fwd.hpp"
 #include "../collision/ghost_fwd.hpp"
 #include "../collision/ghost_unique_ptr.hpp"
 #include "../center.hpp"
@@ -35,7 +36,7 @@ protected:
 
 	void
 	on_transfer(
-		collision::create_parameters const &
+		entities::transfer_parameters const &
 	);
 
 	void

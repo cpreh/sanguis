@@ -1,6 +1,7 @@
 #include "base.hpp"
 #include "auto_weak_link.hpp"
 #include "insert_parameters.hpp"
+#include "transfer_parameters.hpp"
 #include "../collision/create_parameters.hpp"
 #include "../environment/object.hpp"
 #include "../get_unique_id.hpp"
@@ -13,7 +14,6 @@ sanguis::server::entities::base::base()
 	id_(
 		server::get_unique_id()
 	),
-	angle_(0),
 	processed_(false),
 	links_()
 {
@@ -28,15 +28,14 @@ sanguis::server::entities::base::transfer(
 {
 	environment_ = &_environment;
 
-	this->angle(
-		_insert_param.angle()
-	);
-
 	this->on_transfer(
-		collision::create_parameters(
-			environment_->collision_world(),
-			_insert_param.center(),
-			_collision_groups
+		entities::transfer_parameters(
+			collision::create_parameters(
+				environment_->collision_world(),
+				_insert_param.center(),
+				_collision_groups
+			),
+			_insert_param.angle()
 		)
 	);
 }
@@ -100,20 +99,6 @@ sanguis::server::entities::base::id() const
 	return id_;
 }
 
-sanguis::server::angle const
-sanguis::server::entities::base::angle() const
-{
-	return angle_;
-}
-
-void
-sanguis::server::entities::base::angle(
-	server::angle const _angle
-)
-{
-	angle_ = _angle;
-}
-
 bool
 sanguis::server::entities::base::server_only() const
 {
@@ -138,7 +123,7 @@ sanguis::server::entities::base::on_die()
 
 void
 sanguis::server::entities::base::on_transfer(
-	collision::create_parameters const &
+	entities::transfer_parameters const &
 )
 {
 }

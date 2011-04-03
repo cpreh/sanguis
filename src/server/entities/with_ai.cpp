@@ -43,12 +43,16 @@ sanguis::server::entities::with_ai::on_update(
 
 void
 sanguis::server::entities::with_ai::on_transfer(
-	collision::create_parameters const &_param
+	collision::transfer_parameters const &_param
 )
 {
 	ai_.reset(
 		create_ai_(
 			*this
 		)
+	);
+
+	with_body::on_transfer(
+		_param
 	);
 }

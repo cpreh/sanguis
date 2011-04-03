@@ -2,10 +2,11 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_BODY_HPP_INCLUDED
 
 #include "with_body_fwd.hpp"
+#include "transfer_parameters_fwd.hpp"
 #include "with_ghosts.hpp"
 #include "../collision/body_base.hpp"
 #include "../collision/body_fwd.hpp"
-#include "../collision/create_parameters_fwd.hpp"
+#include "../angle.hpp"
 #include "../center.hpp"
 #include "../speed.hpp"
 #include <sge/projectile/shape/shared_base_ptr.hpp>
@@ -37,6 +38,10 @@ public:
 	server::center const
 	center() const;
 
+	// own functions
+	server::angle const
+	angle() const;
+
 	void
 	center(
 		server::center const &
@@ -46,10 +51,15 @@ public:
 	speed(
 		server::speed const &
 	);
+
+	void
+	angle(
+		server::angle
+	);
 protected:
 	void
 	on_transfer(
-		collision::create_parameters const &
+		entities::transfer_parameters const &
 	);
 private:
 	void
@@ -90,6 +100,8 @@ private:
 	> body_scoped_ptr;
 
 	body_scoped_ptr collision_body_;
+
+	server::angle angle_;
 };
 
 }

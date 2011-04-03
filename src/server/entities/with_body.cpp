@@ -1,8 +1,8 @@
 #include "with_body.hpp"
 #include "collision_groups.hpp"
 #include "solidity.hpp"
+#include "transfer_parameters.hpp"
 #include "../collision/body.hpp"
-#include "../collision/create_parameters.hpp"
 #include "../collision/user_data.hpp"
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
@@ -13,12 +13,19 @@
 
 sanguis::server::entities::with_body::with_body()
 :
-	collision_body_()	
+	collision_body_(),
+	angle_(0)
 {
 }
 
 sanguis::server::entities::with_body::~with_body()
 {
+}
+
+sanguis::server::angle const
+sanguis::server::entities::with_body::angle() const
+{
+	return angle_;
 }
 
 sanguis::server::center const
@@ -61,15 +68,27 @@ sanguis::server::entities::with_body::speed(
 }
 
 void
-sanguis::server::entities::with_body::on_transfer(
-	collision::create_parameters const &_params
+sanguis::server::entities::with_body::angle(
+	server::angle const _angle
 )
 {
+	angle_ = _angle;
+}
+
+void
+sanguis::server::entities::with_body::on_transfer(
+	entities::transfer_parameters const &_params
+)
+{
+	this->angle(
+		_params.angle()
+	);
+
 	collision_body_.take(
 		fcppt::make_unique_ptr<
 			collision::body
 		>(
-			_params,
+			_params.create_parameters(),
 			this->initial_direction(),
 			entities::collision_groups(
 				this->type(),
