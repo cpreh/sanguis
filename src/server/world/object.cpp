@@ -164,12 +164,6 @@ sanguis::server::world::object::insert(
 		_entity->id()
 	);
 
-	_entity->transfer(
-		this->environment(),
-		collision_groups_,
-		_insert_parameters
-	);
-
 	typedef std::pair<
 		entity_map::iterator,
 		bool
@@ -191,6 +185,12 @@ sanguis::server::world::object::insert(
 		throw sanguis::exception(
 			FCPPT_TEXT("Double insert of entity!")
 		);
+
+	ret.first->second->transfer(
+		this->environment(),
+		collision_groups_,
+		_insert_parameters
+	);
 }
 
 sanguis::server::environment::object &
@@ -398,7 +398,7 @@ sanguis::server::world::object::add_sight_range(
 	].add(
 		_target_id
 	);
-	
+
 	entity_map::iterator const it(
 		entities_.find(
 			_target_id

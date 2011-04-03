@@ -36,7 +36,6 @@ sanguis::server::entities::base::transfer(
 		collision::create_parameters(
 			environment_->collision_world(),
 			_insert_param.center(),
-			this->initial_direction(),
 			_collision_groups
 		)
 	);
@@ -142,15 +141,6 @@ sanguis::server::entities::base::on_transfer(
 	collision::create_parameters const &
 )
 {
-}
-
-sanguis::server::speed const
-sanguis::server::entities::base::initial_direction() const
-{
-	return
-		server::speed(
-			server::speed::value_type::null()
-		);
 }
 
 void

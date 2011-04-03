@@ -4,13 +4,11 @@
 sanguis::server::collision::create_parameters::create_parameters(
 	sge::projectile::world &_world,
 	server::center const &_center,
-	server::speed const &_speed,
 	collision::global_groups const &_global_groups
 )
 :
 	world_(_world),
 	center_(_center),
-	speed_(_speed),
 	global_groups_(_global_groups)
 {
 }
@@ -25,12 +23,6 @@ sanguis::server::center const
 sanguis::server::collision::create_parameters::center() const
 {
 	return center_;
-}
-
-sanguis::server::speed const
-sanguis::server::collision::create_parameters::speed() const
-{
-	return speed_;
 }
 
 sanguis::server::collision::global_groups const &

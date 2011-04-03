@@ -33,6 +33,7 @@ class body
 public:
 	body(
 		collision::create_parameters const &,
+		server::speed const &,
 		collision::group_vector const &,
 		sge::projectile::shape::shared_base_ptr,
 		collision::solidity const &,

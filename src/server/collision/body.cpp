@@ -22,6 +22,7 @@
 
 sanguis::server::collision::body::body(
 	collision::create_parameters const &_create_param,
+	server::speed const &_speed,
 	collision::group_vector const &_collision_groups,
 	sge::projectile::shape::shared_base_ptr const _shape,
 	collision::solidity const &_solidity,
@@ -42,7 +43,7 @@ sanguis::server::collision::body::body(
 				),
 				sge::projectile::body::linear_velocity(
 					collision::to_sge_vector(
-						_create_param.speed().get()
+						_speed.get()
 					)
 				),
 				sge::projectile::body::angular_velocity(

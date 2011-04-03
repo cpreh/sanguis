@@ -78,6 +78,10 @@ private:
 	);
 
 	// own virtual functions
+	
+	virtual server::speed const
+	initial_direction() const;
+
 	virtual sge::projectile::shape::shared_base_ptr const
 	recreate_shape() = 0;
 

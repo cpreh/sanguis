@@ -8,6 +8,7 @@
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
+#include <fcppt/assert.hpp>
 #include <boost/logic/tribool.hpp>
 
 sanguis::server::entities::with_body::with_body()
@@ -23,6 +24,10 @@ sanguis::server::entities::with_body::~with_body()
 sanguis::server::center const
 sanguis::server::entities::with_body::center() const
 {
+	FCPPT_ASSERT(
+		collision_body_
+	);
+
 	return
 		collision_body_->center();
 }
@@ -32,6 +37,10 @@ sanguis::server::entities::with_body::center(
 	server::center const &_center
 )
 {
+	FCPPT_ASSERT(
+		collision_body_
+	);
+
 	collision_body_->center(
 		_center
 	);
@@ -42,6 +51,10 @@ sanguis::server::entities::with_body::speed(
 	server::speed const &_speed
 )
 {
+	FCPPT_ASSERT(
+		collision_body_
+	);
+
 	collision_body_->speed(
 		_speed
 	);
@@ -57,6 +70,7 @@ sanguis::server::entities::with_body::on_transfer(
 			collision::body
 		>(
 			_params,
+			this->initial_direction(),
 			entities::collision_groups(
 				this->type(),
 				this->team()
@@ -137,4 +151,13 @@ sanguis::server::entities::with_body::collision_with_body(
 	entities::with_body &
 )
 {
+}
+
+sanguis::server::speed const
+sanguis::server::entities::with_body::initial_direction() const
+{
+	return
+		server::speed(
+			server::speed::value_type::null()
+		);
 }

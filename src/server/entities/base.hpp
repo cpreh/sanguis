@@ -8,7 +8,6 @@
 #include "../angle.hpp"
 #include "../center.hpp"
 #include "../player_id.hpp"
-#include "../speed.hpp"
 #include "../team.hpp"
 #include "../collision/create_parameters_fwd.hpp"
 #include "../collision/global_groups_fwd.hpp"
@@ -131,9 +130,6 @@ private:
 	on_transfer(
 		collision::create_parameters const &
 	);
-
-	virtual server::speed const
-	initial_direction() const;
 
 	friend class auto_weak_link;
 
