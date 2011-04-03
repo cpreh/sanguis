@@ -26,20 +26,16 @@ sanguis::server::entities::with_auras::add_aura(
 		this->id()
 	);
 
-	// FIXME!
-#if 0
 	if(
 		this->is_in_world()
 	)
-		collision::body::add_shapes(
-			this->recreate_ghosts(
-				
-			ref.recreate_shapes(
-				environment()->collision_world(),
-				environment()->global_collision_groups()
+		with_ghosts::add_ghost(
+			ref.recreate(
+				this->environment().collision_world(),
+				this->environment().global_collision_groups(),
+				this->center()
 			)
 		);
-#endif
 }
 
 sanguis::server::entities::with_auras::with_auras()
