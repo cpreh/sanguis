@@ -5,7 +5,6 @@
 #include "../../../messages/create.hpp"
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
-#include <fcppt/try_dynamic_cast.hpp>
 #include <sge/time/second.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -73,27 +72,18 @@ sanguis::server::entities::pickups::pickup::team() const
 }
 
 boost::logic::tribool const
-sanguis::server::entities::pickups::pickup::can_collide_with(
-	collision::body_base const &_other
+sanguis::server::entities::pickups::pickup::can_collide_with_body(
+	entities::with_body const &_body
 ) const
 {
-	FCPPT_TRY_DYNAMIC_CAST(
-		entities::base const *,
-		base,
-		&_other
-	)
-	{
-		return
-			base->team() == this->team()
-			&& base->type() == entity_type::player;
-	}
-
-	return false;
+	return
+		_body.team() == this->team()
+		&& _body.type() == entity_type::player;
 }
 
 void
-sanguis::server::entities::pickups::pickup::collision(
-	collision::body_base &_other
+sanguis::server::entities::pickups::pickup::collision_with_body(
+	entities::with_body &_body
 )
 {
 	// if something is spawned by this pickup that can pickup entities itself
@@ -106,11 +96,7 @@ sanguis::server::entities::pickups::pickup::collision(
 	life_timer_.expire();
 
 	this->do_pickup(
-		dynamic_cast<
-			entities::base &
-		>(
-			_other
-		)
+		_body
 	);
 }
 

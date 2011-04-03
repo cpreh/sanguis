@@ -1,9 +1,9 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PICKUPS_PICKUP_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PICKUPS_PICKUP_HPP_INCLUDED
 
-#include "../with_dim.hpp"
 #include "../base_fwd.hpp"
-#include "../../collision/body_base_fwd.hpp"
+#include "../with_body_fwd.hpp"
+#include "../with_dim.hpp"
 #include "../../environment/load_context_fwd.hpp"
 #include "../../dim.hpp"
 #include "../../team.hpp"
@@ -58,13 +58,13 @@ private:
 	team() const;
 
 	boost::logic::tribool const
-	can_collide_with(
-		collision::body_base const &
+	can_collide_with_body(
+		entities::with_body const &
 	) const;
 
 	void
-	collision(
-		collision::body_base &
+	collision_with_body(
+		entities::with_body &
 	);
 
 	void
@@ -74,7 +74,7 @@ private:
 	
 	virtual void
 	do_pickup(
-		base &receiver
+		entities::base &receiver
 	) = 0;
 
 	messages::auto_ptr

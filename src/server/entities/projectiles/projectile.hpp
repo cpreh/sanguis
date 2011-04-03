@@ -4,10 +4,10 @@
 #include "indeterminate.hpp"
 #include "life_time.hpp"
 #include "../movable.hpp"
+#include "../with_body_fwd.hpp"
 #include "../with_dim.hpp"
 #include "../with_health_fwd.hpp"
 #include "../movement_speed.hpp"
-#include "../../collision/body_base_fwd.hpp"
 #include "../../dim.hpp"
 #include "../../direction.hpp"
 #include "../../../entity_type.hpp"
@@ -72,13 +72,13 @@ private:
 	type() const;
 
 	virtual boost::logic::tribool const 
-	can_collide_with(
-		collision::body_base const &
+	can_collide_with_body(
+		entities::with_body const &
 	) const;
 
 	void
-	collision(
-		collision::body_base &
+	collision_with_body(
+		entities::with_body &
 	);
 
 	virtual void

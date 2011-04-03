@@ -99,40 +99,27 @@ sanguis::server::entities::projectiles::projectile::type() const
 }
 
 boost::logic::tribool const
-sanguis::server::entities::projectiles::projectile::can_collide_with(
-	collision::body_base const &_other
+sanguis::server::entities::projectiles::projectile::can_collide_with_body(
+	entities::with_body const &_other
 ) const
 {
-	entities::base const *base(
-		dynamic_cast<
-			entities::base const *
-		>(
-			&_other
-		)
-	);
-
-	if(
-		!base
-	)
-		return false;
-
 	FCPPT_ASSERT(
-		base->team() != this->team()
+		_other.team() != this->team()
 	); // shouldn't happen for now!
 
 	return
-		!base->dead()
+		!_other.dead()
 		&&
 		dynamic_cast<
 			entities::with_health const *
 		>(
-			base
+			&_other
 		);
 }
 
 void
-sanguis::server::entities::projectiles::projectile::collision(
-	collision::body_base &_other
+sanguis::server::entities::projectiles::projectile::collision_with_body(
+	entities::with_body &_other
 )
 {
 	if(

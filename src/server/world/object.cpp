@@ -39,6 +39,7 @@
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/assert.hpp>
+#include <fcppt/format.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
@@ -187,7 +188,7 @@ sanguis::server::world::object::insert(
 	if(
 		!ret.second
 	)
-		throw exception(
+		throw sanguis::exception(
 			FCPPT_TEXT("Double insert of entity!")
 		);
 }
@@ -408,7 +409,13 @@ sanguis::server::world::object::add_sight_range(
 		it == entities_.end()
 	)
 		throw sanguis::exception(
-			FCPPT_TEXT("can't get entity for sight update!")
+			(
+				fcppt::format(
+					FCPPT_TEXT("Can't get entity %1% for sight update with player %2%!")
+				)
+				% _target_id
+				% _player_id
+			).str()
 		);
 
 	entities::base &entity(
@@ -585,7 +592,7 @@ sanguis::server::world::object::update_entity(
 		);
 
 		entity.die();
-		
+
 		entities_.erase(
 			_it
 		);

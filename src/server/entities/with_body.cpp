@@ -7,6 +7,8 @@
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/try_dynamic_cast.hpp>
+#include <boost/logic/tribool.hpp>
 
 sanguis::server::entities::with_body::with_body()
 :
@@ -87,4 +89,52 @@ sanguis::server::entities::with_body::on_position_change(
 	with_ghosts::update_center(
 		_center
 	);
+}
+
+boost::logic::tribool const
+sanguis::server::entities::with_body::can_collide_with(
+	collision::body_base const &_body_base
+) const
+{
+	FCPPT_TRY_DYNAMIC_CAST(
+		entities::with_body const *,
+		entity,
+		&_body_base
+	)
+		return
+			this->can_collide_with_body(
+				*entity
+			);
+	
+	return boost::logic::indeterminate;
+}
+
+void
+sanguis::server::entities::with_body::collide(
+	collision::body_base &_body_base
+)
+{
+	FCPPT_TRY_DYNAMIC_CAST(
+		entities::with_body *,
+		entity,
+		&_body_base
+	)
+		this->collision_with_body(
+			*entity
+		);
+}
+
+boost::logic::tribool const
+sanguis::server::entities::with_body::can_collide_with_body(
+	entities::with_body const &
+) const
+{
+	return boost::logic::indeterminate;
+}
+
+void
+sanguis::server::entities::with_body::collision_with_body(
+	entities::with_body &
+)
+{
 }

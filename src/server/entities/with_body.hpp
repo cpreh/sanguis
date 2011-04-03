@@ -11,6 +11,7 @@
 #include <sge/projectile/shape/shared_base_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
+#include <boost/logic/tribool_fwd.hpp>
 
 namespace sanguis
 {
@@ -54,6 +55,26 @@ private:
 	void
 	on_position_change(
 		server::center const &
+	);
+
+	boost::logic::tribool const
+	can_collide_with(
+		collision::body_base const &
+	) const;
+
+	void
+	collide(
+		collision::body_base &
+	);
+
+	virtual boost::logic::tribool const
+	can_collide_with_body(
+		entities::with_body const &
+	) const;
+
+	virtual void
+	collision_with_body(
+		entities::with_body &
 	);
 
 	// own virtual functions
