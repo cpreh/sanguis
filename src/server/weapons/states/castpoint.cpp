@@ -10,6 +10,8 @@
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/optional_impl.hpp>
 
+#include <fcppt/preprocessor/fixme.hpp>
+
 sanguis::server::weapons::states::castpoint::castpoint(
 	my_context _ctx
 )
@@ -58,6 +60,8 @@ sanguis::server::weapons::states::castpoint::react(
 	)
 		return discard_event();
 	
+	FCPPT_PP_FIXME("Don't cast to with_body here!")
+
 	context<
 		weapon
 	>().do_attack(

@@ -1033,9 +1033,6 @@ SET(
 	src/server/entities/insert_parameters_center.hpp
 	src/server/entities/insert_parameters_fwd.hpp
 	src/server/entities/link_container.hpp
-	src/server/entities/movable.cpp
-	src/server/entities/movable.hpp
-	src/server/entities/movable_fwd.hpp
 	src/server/entities/movement_speed.hpp
 	src/server/entities/nonsolid.cpp
 	src/server/entities/nonsolid.hpp
@@ -1146,6 +1143,9 @@ SET(
 	src/server/entities/with_health_fwd.hpp
 	src/server/entities/with_perks.cpp
 	src/server/entities/with_perks.hpp
+	src/server/entities/with_velocity.cpp
+	src/server/entities/with_velocity.hpp
+	src/server/entities/with_velocity_fwd.hpp
 	src/server/entities/with_weapon.cpp
 	src/server/entities/with_weapon.hpp
 	src/server/entities/with_weapon_fwd.hpp

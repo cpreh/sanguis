@@ -91,7 +91,7 @@ sanguis::server::entities::base::has_environment() const
 		environment_ != 0;
 }
 
-sanguis::entity_id
+sanguis::entity_id const
 sanguis::server::entities::base::id() const
 {
 	return id_;

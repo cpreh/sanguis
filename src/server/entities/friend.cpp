@@ -41,7 +41,7 @@ sanguis::server::entities::friend_::friend_(
 		_health,
 		_armor
 	),
-	movable(
+	with_velocity(
 		property::initial(
 			_movement_speed.get(),
 			0

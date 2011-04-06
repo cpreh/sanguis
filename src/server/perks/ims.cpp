@@ -1,7 +1,7 @@
 #include "ims.hpp"
 #include "change_simple.hpp"
 #include "../entities/property/linear_change.hpp"
-#include "../entities/movable.hpp"
+#include "../entities/with_velocity.hpp"
 
 sanguis::server::perks::ims::ims()
 :
@@ -22,11 +22,11 @@ sanguis::server::perks::ims::change(
 )
 {
 	perks::change_simple<
-		entities::movable
+		entities::with_velocity
 	>(
 		&entities::property::linear_change,
 		_entity,
-		&entities::movable::movement_speed,
+		&entities::with_velocity::movement_speed,
 		0.1f,
 		_diff
 	);

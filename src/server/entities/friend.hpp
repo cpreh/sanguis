@@ -5,7 +5,7 @@
 #include "with_buffs.hpp"
 #include "with_dim.hpp"
 #include "with_health.hpp"
-#include "movable.hpp"
+#include "with_velocity.hpp"
 #include "movement_speed.hpp"
 #include "../environment/load_context_fwd.hpp"
 #include "../damage/armor.hpp"
@@ -29,7 +29,7 @@ class friend_
 	public with_buffs,
 	public with_dim,
 	public with_health,
-	public movable
+	public with_velocity
 {
 	FCPPT_NONCOPYABLE(
 		friend_

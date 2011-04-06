@@ -2,10 +2,10 @@
 #include "search_new_target.hpp"
 #include "../auras/aggro.hpp"
 #include "../auras/unique_ptr.hpp"
-#include "../entities/movable.hpp"
 #include "../entities/with_ai.hpp"
 #include "../entities/with_body.hpp"
 #include "../entities/with_health.hpp"
+#include "../entities/with_velocity.hpp"
 #include "../entities/property/current_to_max.hpp"
 #include "../collision/distance.hpp"
 #include "../vector.hpp"
@@ -122,7 +122,7 @@ sanguis::server::ai::simple::update(
 		);
 
 		FCPPT_TRY_DYNAMIC_CAST(
-			entities::movable *,
+			entities::with_velocity *,
 			movable_,
 			&me_
 		)
@@ -220,7 +220,7 @@ sanguis::server::ai::simple::update(
 	}
 
 	FCPPT_TRY_DYNAMIC_CAST(
-		entities::movable *,
+		entities::with_velocity *,
 		movable,
 		&me_
 	)

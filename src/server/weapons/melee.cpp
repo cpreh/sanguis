@@ -6,7 +6,7 @@
 #include "../entities/insert_parameters_center.hpp"
 #include "../entities/base.hpp"
 #include "../entities/with_weapon.hpp"
-#include "../entities/movable.hpp"
+#include "../entities/with_velocity.hpp"
 #include "../entities/projectiles/melee.hpp"
 #include <fcppt/make_unique_ptr.hpp>
 
@@ -64,9 +64,9 @@ sanguis::server::weapons::melee::on_init_attack(
 	entities::with_weapon &_owner
 )
 {
-	entities::movable *const movable(
+	entities::with_velocity *const movable(
 		dynamic_cast<
-			entities::movable *
+			entities::with_velocity *
 		>(
 			&_owner
 		)
@@ -87,9 +87,9 @@ sanguis::server::weapons::melee::on_castpoint(
 	entities::with_weapon &_owner
 )
 {
-	entities::movable *const movable(
+	entities::with_velocity *const movable(
 		dynamic_cast<
-			entities::movable *
+			entities::with_velocity *
 		>(
 			&_owner
 		)

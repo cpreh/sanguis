@@ -1,7 +1,7 @@
-#ifndef SANGUIS_SERVER_ENTITIES_MOVABLE_HPP_INCLUDED
-#define SANGUIS_SERVER_ENTITIES_MOVABLE_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_ENTITIES_WITH_VELOCITY_HPP_INCLUDED
+#define SANGUIS_SERVER_ENTITIES_WITH_VELOCITY_HPP_INCLUDED
 
-#include "movable_fwd.hpp"
+#include "with_velocity_fwd.hpp"
 #include "base.hpp"
 #include "property/initial_fwd.hpp"
 #include "property/changeable.hpp"
@@ -18,12 +18,12 @@ namespace server
 namespace entities
 {
 
-class movable
+class with_velocity
 :
 	public virtual entities::base
 {
 	FCPPT_NONCOPYABLE(
-		movable
+		with_velocity
 	);
 public:
 	property::changeable &
@@ -40,9 +40,9 @@ public:
 	server::speed const
 	abs_speed() const;
 
-	virtual ~movable();
+	virtual ~with_velocity();
 protected:
-	movable(
+	with_velocity(
 		property::initial const &speed,
 		server::direction
 	);

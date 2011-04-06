@@ -26,15 +26,6 @@ sanguis::server::entities::player::player(
 )
 :
 	base(),
-	movable(
-		property::initial(
-			_speed.get(),
-			0
-		),
-		server::direction(
-			0
-		)
-	),
 	with_auras(),
 	with_buffs(),
 	with_dim(
@@ -48,6 +39,15 @@ sanguis::server::entities::player::player(
 		_armor
 	),
 	with_perks(),
+	with_velocity(
+		property::initial(
+			_speed.get(),
+			0
+		),
+		server::direction(
+			0
+		)
+	),
 	with_weapon(
 		weapons::unique_ptr()
 	),

@@ -5,8 +5,8 @@
 #include "../with_buffs.hpp"
 #include "../with_dim.hpp"
 #include "../with_health.hpp"
+#include "../with_velocity.hpp"
 #include "../auto_weak_link.hpp"
-#include "../movable.hpp"
 #include "../movement_speed.hpp"
 #include "../../ai/create_function.hpp"
 #include "../../environment/load_context_fwd.hpp"
@@ -32,7 +32,7 @@ class enemy
 	public with_buffs,
 	public with_dim,
 	public with_health,
-	public movable
+	public with_velocity
 {
 	FCPPT_NONCOPYABLE(
 		enemy

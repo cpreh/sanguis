@@ -3,10 +3,10 @@
 
 #include "indeterminate.hpp"
 #include "life_time.hpp"
-#include "../movable.hpp"
 #include "../with_body_fwd.hpp"
 #include "../with_dim.hpp"
 #include "../with_health_fwd.hpp"
+#include "../with_velocity.hpp"
 #include "../movement_speed.hpp"
 #include "../../dim.hpp"
 #include "../../direction.hpp"
@@ -29,8 +29,8 @@ namespace projectiles
 
 class projectile
 :
-	public movable,
-	public with_dim
+	public with_dim,
+	public with_velocity
 {
 	FCPPT_NONCOPYABLE(
 		projectile

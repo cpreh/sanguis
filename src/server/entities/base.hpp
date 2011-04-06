@@ -73,7 +73,7 @@ public:
 
 	// entity id function
 	
-	sanguis::entity_id
+	sanguis::entity_id const
 	id() const;
 
 

@@ -30,15 +30,15 @@ sanguis::server::entities::projectiles::projectile::projectile(
 )
 :
 	base(),
-	movable(
+	with_dim(
+		entities::nonsolid(),
+		_dim
+	),
+	with_velocity(
 		property::initial_max(
 			_movement_speed.get()
 		),
 		_direction
-	),
-	with_dim(
-		entities::nonsolid(),
-		_dim
 	),
 	team_(_team),
 	server_only_(
