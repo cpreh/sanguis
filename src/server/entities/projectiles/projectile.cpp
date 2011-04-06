@@ -1,5 +1,6 @@
 #include "projectile.hpp"
 #include "../property/initial_max.hpp"
+#include "../nonsolid.hpp"
 #include "../with_health.hpp"
 #include "../../damage/no_armor.hpp"
 #include "../../damage/list.hpp"
@@ -36,6 +37,7 @@ sanguis::server::entities::projectiles::projectile::projectile(
 		_direction
 	),
 	with_dim(
+		entities::nonsolid(),
 		_dim
 	),
 	team_(_team),

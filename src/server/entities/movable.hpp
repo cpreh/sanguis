@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_MOVABLE_HPP_INCLUDED
 
 #include "movable_fwd.hpp"
-#include "with_body.hpp"
+#include "base.hpp"
 #include "property/initial_fwd.hpp"
 #include "property/changeable.hpp"
 #include "property/value.hpp"
@@ -20,7 +20,7 @@ namespace entities
 
 class movable
 :
-	public virtual entities::with_body
+	public virtual entities::base
 {
 	FCPPT_NONCOPYABLE(
 		movable

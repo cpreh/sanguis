@@ -2,9 +2,11 @@
 #define SANGUIS_SERVER_ENTITIES_TRANSFER_PARAMETERS_HPP_INCLUDED
 
 #include "transfer_parameters_fwd.hpp"
-#include "../collision/create_parameters.hpp"
+#include "../collision/global_groups_fwd.hpp"
 #include "../angle.hpp"
-#include <fcppt/math/vector/basic_decl.hpp>
+#include "../center.hpp"
+#include <sge/projectile/world_fwd.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/nonassignable.hpp>
 
 namespace sanguis
@@ -21,17 +23,29 @@ class transfer_parameters
 	);
 public:
 	transfer_parameters(
-		collision::create_parameters const &,
+		sge::projectile::world &,
+		server::center const &,
+		collision::global_groups const &,
 		server::angle
 	);
 
-	collision::create_parameters const &
-	create_parameters() const;
+	sge::projectile::world &
+	world() const;
+
+	server::center const
+	center() const;
+
+	collision::global_groups const &
+	global_groups() const;
 
 	server::angle const
 	angle() const;
 private:
-	collision::create_parameters const create_parameters_;
+	sge::projectile::world &world_;
+
+	server::center const center_;
+
+	collision::global_groups const &global_groups_;
 
 	server::angle const angle_;
 };

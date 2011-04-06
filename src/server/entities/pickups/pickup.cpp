@@ -1,4 +1,5 @@
 #include "pickup.hpp"
+#include "../nonsolid.hpp"
 #include "../../environment/load_context.hpp"
 #include "../../../load/pickup_name.hpp"
 #include "../../../messages/add_pickup.hpp"
@@ -30,6 +31,7 @@ sanguis::server::entities::pickups::pickup::pickup(
 :
 	base(),
 	with_dim(
+		entities::nonsolid(),
 		_dim
 		?
 			*_dim

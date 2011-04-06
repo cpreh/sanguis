@@ -6,7 +6,7 @@
 #include <fcppt/math/vector/dim.hpp>
 
 sanguis::server::collision::circle_ghost::circle_ghost(
-	collision::ghost_parameters const &_params,
+	collision::group_vector const &_groups,
 	server::center const &_center,
 	server::radius const _radius,
 	collision::body_enter_callback const &_body_enter_callback,
@@ -14,7 +14,7 @@ sanguis::server::collision::circle_ghost::circle_ghost(
 )
 :
 	collision::ghost(
-		_params,
+		_groups,
 		// TODO: move somewhere else
 		server::pos(
 			_center.get()

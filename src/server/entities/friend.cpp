@@ -1,9 +1,10 @@
 #include "friend.hpp"
+#include "default_solid.hpp"
 #include "pickups/pickup.hpp"
 #include "property/initial.hpp"
-#include "../weapons/weapon.hpp"
 #include "../ai/base.hpp"
 #include "../environment/load_context.hpp"
+#include "../weapons/weapon.hpp"
 #include "../../load/friend_name.hpp"
 #include "../../messages/add_friend.hpp"
 #include "../../messages/create.hpp"
@@ -29,6 +30,7 @@ sanguis::server::entities::friend_::friend_(
 	),
 	with_buffs(),
 	with_dim(
+		entities::default_solid(),
 		_load_context.entity_dim(
 			load::friend_name(
 				_ftype

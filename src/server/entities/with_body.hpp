@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_BODY_HPP_INCLUDED
 
 #include "with_body_fwd.hpp"
+#include "body_parameters_fwd.hpp"
 #include "transfer_parameters_fwd.hpp"
 #include "with_ghosts.hpp"
 #include "../collision/body_base.hpp"
@@ -9,7 +10,7 @@
 #include "../angle.hpp"
 #include "../center.hpp"
 #include "../speed.hpp"
-#include <sge/projectile/shape/shared_base_ptr.hpp>
+#include <sge/projectile/body/scoped_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <boost/logic/tribool_fwd.hpp>
@@ -23,14 +24,16 @@ namespace entities
 
 class with_body
 :
-	public entities::with_ghosts,
+	public virtual entities::with_ghosts,
 	public collision::body_base
 {
 	FCPPT_NONCOPYABLE(
 		with_body
 	);
 public:
-	with_body();
+	explicit with_body(
+		entities::body_parameters const &
+	);
 
 	~with_body();
 
@@ -92,16 +95,17 @@ private:
 	virtual server::speed const
 	initial_direction() const;
 
-	virtual sge::projectile::shape::shared_base_ptr const
-	recreate_shape() = 0;
-
 	typedef fcppt::scoped_ptr<
 		collision::body
 	> body_scoped_ptr;
 
 	body_scoped_ptr collision_body_;
 
-	server::angle angle_;
+	typedef fcppt::scoped_ptr<
+		sge::projectile::body::scoped
+	> scoped_body_scope_ptr;
+
+	scoped_body_scope_ptr scoped_body_;
 };
 
 }

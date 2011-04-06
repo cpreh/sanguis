@@ -1,12 +1,12 @@
 #include "rotate.hpp"
-#include "../entities/base.hpp"
+#include "../entities/with_body.hpp"
 #include "../../messages/create.hpp"
 #include "../../messages/base.hpp"
 #include "../../messages/rotate.hpp"
 
 sanguis::messages::auto_ptr
 sanguis::server::message_convert::rotate(
-	entities::base const &_entity
+	entities::with_body const &_entity
 )
 {
 	return

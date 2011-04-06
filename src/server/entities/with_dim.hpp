@@ -3,10 +3,9 @@
 
 #include "with_dim_fwd.hpp"
 #include "with_body.hpp"
+#include "../collision/solidity_fwd.hpp"
 #include "../dim.hpp"
 #include "../pos.hpp"
-#include "../radius.hpp"
-#include <sge/projectile/shape/shared_base_ptr.hpp>
 #include <fcppt/math/dim/basic_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -19,7 +18,7 @@ namespace entities
 
 class with_dim
 :
-	public virtual entities::with_body 
+	public entities::with_body
 {
 	FCPPT_NONCOPYABLE(
 		with_dim
@@ -29,6 +28,7 @@ public:
 	pos() const;
 protected:
 	explicit with_dim(
+		collision::solidity const &,
 		server::dim const &
 	);
 
@@ -37,10 +37,6 @@ protected:
 	server::dim const &
 	dim() const;
 private:
-	sge::projectile::shape::shared_base_ptr const
-	recreate_shape();
-
-
 	server::dim const dim_;
 };
 

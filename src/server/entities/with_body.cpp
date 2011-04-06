@@ -1,20 +1,48 @@
 #include "with_body.hpp"
+#include "body_parameters.hpp"
 #include "collision_groups.hpp"
-#include "solidity.hpp"
 #include "transfer_parameters.hpp"
 #include "../collision/body.hpp"
+#include "../collision/make_groups.hpp"
 #include "../collision/user_data.hpp"
+#include <sge/projectile/body/scoped.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
-#include <fcppt/assert.hpp>
 #include <boost/logic/tribool.hpp>
 
-sanguis::server::entities::with_body::with_body()
+sanguis::server::entities::with_body::with_body(
+	entities::body_parameters const &_params
+)
 :
-	collision_body_(),
-	angle_(0)
+	collision_body_(
+		fcppt::make_unique_ptr<
+			collision::body
+		>(
+			server::center(
+				server::center::value_type::null()
+			),
+			server::speed(
+				server::speed::value_type::null()
+			),
+			server::angle(
+				0
+			),
+			_params.shape(),
+			_params.solidity(),
+			collision::user_data(
+				*this
+			),
+			std::tr1::bind(
+				&with_body::on_position_change,
+				this,
+				std::tr1::placeholders::_1
+			)
+		)
+	),
+	scoped_body_()
 {
 }
 
@@ -25,16 +53,13 @@ sanguis::server::entities::with_body::~with_body()
 sanguis::server::angle const
 sanguis::server::entities::with_body::angle() const
 {
-	return angle_;
+	return
+		collision_body_->angle();
 }
 
 sanguis::server::center const
 sanguis::server::entities::with_body::center() const
 {
-	FCPPT_ASSERT(
-		collision_body_
-	);
-
 	return
 		collision_body_->center();
 }
@@ -44,10 +69,6 @@ sanguis::server::entities::with_body::center(
 	server::center const &_center
 )
 {
-	FCPPT_ASSERT(
-		collision_body_
-	);
-
 	collision_body_->center(
 		_center
 	);
@@ -58,10 +79,6 @@ sanguis::server::entities::with_body::speed(
 	server::speed const &_speed
 )
 {
-	FCPPT_ASSERT(
-		collision_body_
-	);
-
 	collision_body_->speed(
 		_speed
 	);
@@ -72,7 +89,9 @@ sanguis::server::entities::with_body::angle(
 	server::angle const _angle
 )
 {
-	angle_ = _angle;
+	collision_body_->angle(
+		_angle
+	);
 }
 
 void
@@ -80,31 +99,30 @@ sanguis::server::entities::with_body::on_transfer(
 	entities::transfer_parameters const &_params
 )
 {
-	this->angle(
+	collision_body_->angle(
 		_params.angle()
 	);
 
-	collision_body_.take(
+	collision_body_->center(
+		_params.center()
+	);
+
+	scoped_body_.take(
 		fcppt::make_unique_ptr<
-			collision::body
+			sge::projectile::body::scoped
 		>(
-			_params.create_parameters(),
-			this->initial_direction(),
-			entities::collision_groups(
-				this->type(),
-				this->team()
+			fcppt::ref(
+				_params.world()
 			),
-			this->recreate_shape(),
-			entities::solidity(
-				this->type()
+			fcppt::ref(
+				collision_body_->get()
 			),
-			collision::user_data(
-				*this
-			),
-			std::tr1::bind(
-				&with_body::on_position_change,
-				this,
-				std::tr1::placeholders::_1
+			collision::make_groups(
+				entities::collision_groups(
+					this->type(),
+					this->team()
+				),
+				_params.global_groups()
 			)
 		)
 	);

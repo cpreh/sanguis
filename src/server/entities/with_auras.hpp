@@ -1,8 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_AURAS_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_AURAS_HPP_INCLUDED
 
-#include "with_body.hpp"
-#include "ghost_parameters_fwd.hpp"
+#include "with_ghosts.hpp"
 #include "../auras/aura_fwd.hpp"
 #include "../auras/unique_ptr.hpp"
 #include "../../time_type.hpp"
@@ -18,7 +17,7 @@ namespace entities
 
 class with_auras
 :
-	public virtual entities::with_body
+	public virtual entities::with_ghosts
 {
 	FCPPT_NONCOPYABLE(
 		with_auras
@@ -36,11 +35,6 @@ protected:
 	void
 	on_update(
 		sanguis::time_type
-	);
-
-	void
-	recreate_ghosts(
-		entities::ghost_parameters const &
 	);
 private:
 	typedef boost::ptr_list<

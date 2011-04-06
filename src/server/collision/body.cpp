@@ -1,9 +1,5 @@
 #include "body.hpp"
-#include "create_parameters.hpp"
 #include "from_sge_vector.hpp"
-#include "ghost_parameters.hpp"
-#include "global_groups.hpp"
-#include "make_groups.hpp"
 #include "solidity.hpp"
 #include "to_sge_vector.hpp"
 #include "to_sge_user_data.hpp"
@@ -21,9 +17,9 @@
 #include <boost/foreach.hpp>
 
 sanguis::server::collision::body::body(
-	collision::create_parameters const &_create_param,
+	server::center const &_center,
 	server::speed const &_speed,
-	collision::group_vector const &_collision_groups,
+	server::angle const _angle,
 	sge::projectile::shape::shared_base_ptr const _shape,
 	collision::solidity const &_solidity,
 	collision::user_data const &_user_data,
@@ -35,10 +31,9 @@ sanguis::server::collision::body::body(
 			sge::projectile::body::object
 		>(
 			sge::projectile::body::parameters(
-				_create_param.world(),
 				sge::projectile::body::position(
 					collision::to_sge_vector(
-						_create_param.center().get()
+						_center.get()
 					)
 				),
 				sge::projectile::body::linear_velocity(
@@ -51,13 +46,9 @@ sanguis::server::collision::body::body(
 				),
 				_shape,
 				sge::projectile::body::rotation(
-					0.f
+					_angle.get() // TODO: convert?
 				),
 				_solidity.get(),
-				collision::make_groups(
-					_collision_groups,
-					_create_param.global_groups()
-				),
 				collision::to_sge_user_data(
 					_user_data
 				)
@@ -127,6 +118,31 @@ sanguis::server::collision::body::speed() const
 				body_->linear_velocity()
 			)
 		);
+}
+
+void
+sanguis::server::collision::body::angle(
+	server::angle const &_angle
+)
+{
+	body_->rotation(
+		_angle.get()
+	);
+}
+
+sanguis::server::angle const
+sanguis::server::collision::body::angle() const
+{
+	return
+		server::angle(
+			body_->rotation()
+		);
+}
+
+sge::projectile::body::object &
+sanguis::server::collision::body::get()
+{
+	return *body_;
 }
 
 void

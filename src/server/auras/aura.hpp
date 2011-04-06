@@ -5,13 +5,11 @@
 #include "../entities/with_body_fwd.hpp"
 #include "../collision/body_base_fwd.hpp"
 #include "../collision/ghost_unique_ptr.hpp"
-#include "../collision/global_groups_fwd.hpp"
 #include "../collision/group_vector.hpp"
 #include "../center.hpp"
 #include "../radius.hpp"
 #include "../team.hpp"
 #include "../../entity_id.hpp"
-#include <sge/projectile/world_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
 
@@ -37,8 +35,6 @@ public:
 
 	collision::ghost_unique_ptr
 	recreate(
-		sge::projectile::world &,
-		collision::global_groups const &,
 		server::center const &
 	);
 protected:

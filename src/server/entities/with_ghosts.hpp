@@ -2,11 +2,13 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_GHOSTS_HPP_INCLUDED
 
 #include "base.hpp"
-#include "ghost_parameters_fwd.hpp"
 #include "transfer_parameters_fwd.hpp"
 #include "../collision/ghost_fwd.hpp"
 #include "../collision/ghost_unique_ptr.hpp"
+#include "../collision/global_groups_fwd.hpp"
 #include "../center.hpp"
+#include <sge/projectile/ghost/scoped_fwd.hpp>
+#include <sge/projectile/world_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
 
@@ -44,9 +46,11 @@ protected:
 		server::center const &
 	);
 private:
-	virtual void
-	recreate_ghosts(
-		entities::ghost_parameters const &
+	void
+	insert_ghost(
+		collision::ghost &,
+		sge::projectile::world &,
+		collision::global_groups const &
 	);
 
 	typedef boost::ptr_list<
@@ -54,6 +58,12 @@ private:
 	> ghost_list;
 
 	ghost_list ghosts_;
+
+	typedef boost::ptr_list<
+		sge::projectile::ghost::scoped
+	> scoped_ghost_list;
+
+	scoped_ghost_list scoped_ghosts_;
 };
 
 }

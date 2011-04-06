@@ -38,10 +38,12 @@ protected:
 		time_type
 	);
 private:
+#if 0
 	void
 	on_transfer(
 		entities::transfer_parameters const &
 	);
+#endif
 
 	ai::create_function const create_ai_;
 

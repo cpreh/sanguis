@@ -1,4 +1,5 @@
 #include "player.hpp"
+#include "default_solid.hpp"
 #include "property/initial.hpp"
 #include "../perks/perk.hpp"
 #include "../weapons/weapon.hpp"
@@ -37,6 +38,7 @@ sanguis::server::entities::player::player(
 	with_auras(),
 	with_buffs(),
 	with_dim(
+		entities::default_solid(),
 		_load_context.entity_dim(
 			FCPPT_TEXT("player")
 		)

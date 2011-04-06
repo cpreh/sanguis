@@ -2,7 +2,6 @@
 #include "auto_weak_link.hpp"
 #include "insert_parameters.hpp"
 #include "transfer_parameters.hpp"
-#include "../collision/create_parameters.hpp"
 #include "../environment/object.hpp"
 #include "../get_unique_id.hpp"
 #include <fcppt/math/vector/basic_impl.hpp>
@@ -30,11 +29,9 @@ sanguis::server::entities::base::transfer(
 
 	this->on_transfer(
 		entities::transfer_parameters(
-			collision::create_parameters(
-				environment_->collision_world(),
-				_insert_param.center(),
-				_collision_groups
-			),
+			environment_->collision_world(),
+			_insert_param.center(),
+			_collision_groups,
 			_insert_param.angle()
 		)
 	);
@@ -81,16 +78,17 @@ sanguis::server::environment::object &
 sanguis::server::entities::base::environment() const
 {
 	FCPPT_ASSERT(
-		environment_
+		this->has_environment()
 	);
 
 	return *environment_;
 }
 
 bool
-sanguis::server::entities::base::is_in_world() const
+sanguis::server::entities::base::has_environment() const
 {
-	return environment_;	
+	return
+		environment_ != 0;
 }
 
 sanguis::entity_id

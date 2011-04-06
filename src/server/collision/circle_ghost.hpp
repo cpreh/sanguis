@@ -2,10 +2,10 @@
 #define SANGUIS_SERVER_COLLISION_CIRCLE_GHOST_HPP_INCLUDED
 
 #include "body_base_fwd.hpp"
-#include "ghost.hpp"
-#include "ghost_parameters_fwd.hpp"
 #include "body_enter_callback.hpp"
 #include "body_exit_callback.hpp"
+#include "ghost.hpp"
+#include "group_vector.hpp"
 #include "../center.hpp"
 #include "../radius.hpp"
 #include <fcppt/function/object.hpp>
@@ -27,7 +27,7 @@ class circle_ghost
 	);
 public:
 	circle_ghost(
-		collision::ghost_parameters const &,
+		collision::group_vector const &,
 		server::center const &,
 		server::radius,
 		collision::body_enter_callback const &,

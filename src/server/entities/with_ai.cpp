@@ -41,6 +41,7 @@ sanguis::server::entities::with_ai::on_update(
 	);
 }
 
+#if 0
 void
 sanguis::server::entities::with_ai::on_transfer(
 	collision::transfer_parameters const &_param
@@ -52,7 +53,8 @@ sanguis::server::entities::with_ai::on_transfer(
 		)
 	);
 
-	with_body::on_transfer(
+	with_ghosts::on_transfer(
 		_param
 	);
 }
+#endif

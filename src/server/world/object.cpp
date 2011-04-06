@@ -606,12 +606,17 @@ sanguis::server::world::object::update_entity(
 	)
 		return;
 
-	this->send_entity_specific(
-		entity.id(),
-		message_convert::rotate(
-			entity
-		)
-	);
+	FCPPT_TRY_DYNAMIC_CAST(
+		entities::with_body const *,
+		with_body,
+		&entity
+	)
+		this->send_entity_specific(
+			with_body->id(),
+			message_convert::rotate(
+				*with_body
+			)
+		);
 
 	FCPPT_TRY_DYNAMIC_CAST(
 		entities::with_dim const *,

@@ -2,11 +2,10 @@
 #define SANGUIS_SERVER_COLLISION_BODY_HPP_INCLUDED
 
 #include "body_fwd.hpp"
-#include "create_parameters_fwd.hpp"
-#include "group_vector.hpp"
 #include "position_callback.hpp"
 #include "solidity_fwd.hpp"
 #include "user_data_fwd.hpp"
+#include "../angle.hpp"
 #include "../center.hpp"
 #include "../speed.hpp"
 #include <sge/projectile/body/object_fwd.hpp>
@@ -32,9 +31,9 @@ class body
 	);
 public:
 	body(
-		collision::create_parameters const &,
+		server::center const &,
 		server::speed const &,
-		collision::group_vector const &,
+		server::angle,
 		sge::projectile::shape::shared_base_ptr,
 		collision::solidity const &,
 		collision::user_data const &,
@@ -58,6 +57,17 @@ public:
 
 	server::speed const
 	speed() const;
+
+	void
+	angle(
+		server::angle const &
+	);
+
+	server::angle const
+	angle() const;
+
+	sge::projectile::body::object &
+	get();
 private:
 	void
 	on_position_change(

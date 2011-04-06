@@ -1,6 +1,5 @@
 #include "ghost.hpp"
 #include "from_sge_user_data.hpp"
-#include "ghost_parameters.hpp"
 #include "make_groups.hpp"
 #include "user_data.hpp"
 #include "to_sge_dim.hpp"
@@ -12,17 +11,17 @@
 #include <fcppt/make_unique_ptr.hpp>
 
 sanguis::server::collision::ghost::ghost(
-	collision::ghost_parameters const &_params,
+	collision::group_vector const &_groups,
 	server::pos const &_pos,
 	server::dim const &_size
 )
 :
+	groups_(_groups),
 	ghost_(
 		fcppt::make_unique_ptr<
 			sge::projectile::ghost::object
 		>(
 			sge::projectile::ghost::parameters(
-				_params.world(),
 				sge::projectile::ghost::position(
 					collision::to_sge_vector(
 						_pos.get()
@@ -32,12 +31,7 @@ sanguis::server::collision::ghost::ghost(
 					collision::to_sge_dim(
 						_size
 					)
-				),
-				collision::make_groups(
-					_params.groups(),
-					_params.global_groups()
-				),
-				sge::projectile::ghost::user_data()
+				)
 			)
 		)
 	),
@@ -76,6 +70,18 @@ sanguis::server::collision::ghost::center(
 			_center.get()
 		)
 	);
+}
+
+sanguis::server::collision::group_vector const &
+sanguis::server::collision::ghost::groups() const
+{
+	return groups_;
+}
+
+sge::projectile::ghost::object &
+sanguis::server::collision::ghost::get()
+{
+	return *ghost_;
 }
 
 void

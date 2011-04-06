@@ -1,7 +1,9 @@
 #include "movable.hpp"
 #include "speed_to_abs.hpp"
+#include "with_body.hpp"
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/try_dynamic_cast.hpp>
 
 sanguis::server::entities::property::changeable &
 sanguis::server::entities::movable::movement_speed()
@@ -46,7 +48,7 @@ sanguis::server::entities::movable::movable(
 	server::direction const _direction
 )
 :
-	entities::with_body(),
+	entities::base(),
 	movement_speed_(
 		_movement_speed
 	),
@@ -76,10 +78,16 @@ sanguis::server::entities::movable::speed_change(
 	property::value const _speed
 )
 {
-	this->speed(
-		entities::speed_to_abs(
-			this->direction(),
-			_speed
-		)
-	);
+	// TODO: ugly cross cast, this should be avoided somehow!
+	FCPPT_TRY_DYNAMIC_CAST(
+		entities::with_body *,
+		with_body,
+		this
+	)
+		with_body->speed(
+			entities::speed_to_abs(
+				this->direction(),
+				_speed
+			)
+		);
 }

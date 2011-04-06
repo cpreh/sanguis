@@ -206,11 +206,18 @@ sanguis::server::ai::simple::update(
 	if(
 		angle
 	)
-		me_.angle(
-			server::angle(
-				*angle
-			)
-		);
+	{
+		FCPPT_TRY_DYNAMIC_CAST(
+			entities::with_body *,
+			with_body,
+			&me_
+		)
+			with_body->angle(
+				server::angle(
+					*angle
+				)
+			);
+	}
 
 	FCPPT_TRY_DYNAMIC_CAST(
 		entities::movable *,

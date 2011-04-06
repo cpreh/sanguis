@@ -3,7 +3,7 @@
 
 #include "ghost_fwd.hpp"
 #include "body_base_fwd.hpp"
-#include "ghost_parameters_fwd.hpp"
+#include "group_vector.hpp"
 #include "../center.hpp"
 #include "../dim.hpp"
 #include "../pos.hpp"
@@ -27,7 +27,7 @@ class ghost
 	);
 protected:
 	ghost(
-		collision::ghost_parameters const &,
+		collision::group_vector const &,
 		server::pos const &,
 		server::dim const &
 	);
@@ -38,6 +38,12 @@ public:
 	center(
 		server::center const &
 	);
+
+	collision::group_vector const &
+	groups() const;
+
+	sge::projectile::ghost::object &
+	get();
 private:
 	void
 	body_enter(
@@ -62,6 +68,8 @@ private:
 	typedef fcppt::scoped_ptr<
 		sge::projectile::ghost::object
 	> ghost_scoped_ptr;
+
+	collision::group_vector const groups_;
 
 	ghost_scoped_ptr ghost_;
 

@@ -1,13 +1,12 @@
 #include "exp_area.hpp"
 #include "player.hpp"
 #include "auto_weak_link.hpp"
-#include "ghost_parameters.hpp"
 #include "collision_groups.hpp"
 #include "../collision/circle_ghost.hpp"
-#include "../collision/ghost_parameters.hpp"
 #include "../entities/base.hpp"
 #include "../../messages/base.hpp"
 #include <fcppt/container/map_impl.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <boost/logic/tribool.hpp>
@@ -17,44 +16,22 @@ sanguis::server::entities::exp_area::exp_area(
 	server::exp const _exp
 )
 :
+	entities::with_ghosts(),
 	exp_(_exp),
 	player_links_()
 {
-}
-
-sanguis::server::entities::exp_area::~exp_area()
-{
-}
-
-sanguis::server::center const
-sanguis::server::entities::exp_area::center() const
-{
-	// FIXME: This is not needed anywhere!
-	return
-		server::center(
-			server::center::value_type::null()
-		);
-}
-
-void
-sanguis::server::entities::exp_area::recreate_ghosts(
-	entities::ghost_parameters const &_params
-)
-{
-	with_ghosts::add_ghost(
+	this->add_ghost(
 		collision::ghost_unique_ptr(
 			fcppt::make_unique_ptr<
 				collision::circle_ghost
 			>(
-				collision::ghost_parameters(
-					_params.world(),
-					entities::collision_groups(
-						this->type(),
-						this->team()
-					),
-					_params.global_groups()
+				entities::collision_groups(
+					this->type(),
+					this->team()
 				),
-				_params.center(),
+				server::center(
+					server::center::value_type::null()
+				),
 				server::radius(
 					2000 // TODO
 				),
@@ -71,7 +48,20 @@ sanguis::server::entities::exp_area::recreate_ghosts(
 			)
 		)
 	);
+}
 
+sanguis::server::entities::exp_area::~exp_area()
+{
+}
+
+sanguis::server::center const
+sanguis::server::entities::exp_area::center() const
+{
+	// FIXME: This is not needed anywhere!
+	return
+		server::center(
+			server::center::value_type::null()
+		);
 }
 
 void

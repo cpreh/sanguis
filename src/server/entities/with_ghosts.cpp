@@ -1,9 +1,12 @@
 #include "with_ghosts.hpp"
-#include "ghost_parameters.hpp"
 #include "transfer_parameters.hpp"
-#include "../collision/create_parameters.hpp"
 #include "../collision/ghost.hpp"
+#include "../collision/make_groups.hpp"
+#include "../environment/object.hpp"
+#include <sge/projectile/ghost/scoped.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 #include <boost/foreach.hpp>
 
 sanguis::server::entities::with_ghosts::with_ghosts()
@@ -27,6 +30,15 @@ sanguis::server::entities::with_ghosts::add_ghost(
 			_ghost
 		)
 	);
+
+	if(
+		this->has_environment()
+	)
+		this->insert_ghost(
+			ghosts_.back(),
+			this->environment().collision_world(),
+			this->environment().global_collision_groups()
+		);
 }
 
 void
@@ -34,13 +46,17 @@ sanguis::server::entities::with_ghosts::on_transfer(
 	entities::transfer_parameters const &_params
 )
 {
-	this->recreate_ghosts(
-		entities::ghost_parameters(
-			_params.create_parameters().world(),
-			_params.create_parameters().global_groups(),
-			_params.create_parameters().center()
-		)
-	);
+	scoped_ghosts_.clear();
+
+	BOOST_FOREACH(
+		ghost_list::reference ghost,
+		ghosts_
+	)
+		this->insert_ghost(
+			ghost,
+			_params.world(),
+			_params.global_groups()
+		);
 }
 
 void
@@ -58,8 +74,27 @@ sanguis::server::entities::with_ghosts::update_center(
 }
 
 void
-sanguis::server::entities::with_ghosts::recreate_ghosts(
-	entities::ghost_parameters const &
+sanguis::server::entities::with_ghosts::insert_ghost(
+	collision::ghost &_ghost,
+	sge::projectile::world &_world,
+	collision::global_groups const &_global_groups
 )
 {
+	fcppt::container::ptr::push_back_unique_ptr(
+		scoped_ghosts_,
+		fcppt::make_unique_ptr<
+			sge::projectile::ghost::scoped
+		>(
+			fcppt::ref(
+				_world
+			),
+			fcppt::ref(
+				_ghost.get()
+			),
+			collision::make_groups(
+				_ghost.groups(),
+				_global_groups
+			)
+		)
+	);
 }

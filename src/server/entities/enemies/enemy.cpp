@@ -1,12 +1,13 @@
 #include "enemy.hpp"
 #include "../exp_area.hpp"
+#include "../default_solid.hpp"
 #include "../insert_parameters_center.hpp"
 #include "../property/initial.hpp"
 #include "../spawns/spawn.hpp"
-#include "../../weapons/weapon.hpp"
 #include "../../ai/base.hpp"
 #include "../../environment/load_context.hpp"
 #include "../../environment/object.hpp"
+#include "../../weapons/weapon.hpp"
 #include "../../../random.hpp"
 #include "../../../load/enemy_name.hpp"
 #include "../../../messages/add_enemy.hpp"
@@ -36,6 +37,7 @@ sanguis::server::entities::enemies::enemy::enemy(
 	),
 	with_buffs(),
 	with_dim(
+		entities::default_solid(),
 		_load_context.entity_dim(
 			load::enemy_name(
 				_etype

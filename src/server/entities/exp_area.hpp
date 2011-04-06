@@ -4,7 +4,6 @@
 #include "auto_weak_link_fwd.hpp"
 #include "with_ghosts.hpp"
 #include "../collision/body_base_fwd.hpp"
-#include "../collision/ghost_parameters_fwd.hpp"
 #include "../center.hpp"
 #include "../exp.hpp"
 #include "../../entity_id.hpp"
@@ -33,11 +32,6 @@ public:
 
 	~exp_area();
 private:
-	void
-	recreate_ghosts(
-		entities::ghost_parameters const &
-	);
-
 	void
 	on_die();
 

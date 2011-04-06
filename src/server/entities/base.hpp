@@ -68,7 +68,7 @@ public:
 	environment() const;
 
 	bool
-	is_in_world() const;
+	has_environment() const;
 
 
 	// entity id function

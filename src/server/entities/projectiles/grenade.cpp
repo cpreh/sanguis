@@ -3,7 +3,6 @@
 #include "../insert_parameters_center.hpp"
 #include "../transfer_parameters.hpp"
 #include "../property/from_float.hpp"
-#include "../../collision/create_parameters.hpp"
 #include "../../damage/list.hpp"
 #include "../../damage/meta.hpp"
 #include "../../damage/wrapper.hpp"
@@ -75,7 +74,7 @@ sanguis::server::entities::projectiles::grenade::on_transfer(
 			this->movement_speed().max(),
 			property::from_float(
 				collision::distance(
-					_param.create_parameters().center().get(),
+					_param.center().get(),
 					dest_
 				)
 			)

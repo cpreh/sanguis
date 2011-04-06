@@ -934,9 +934,6 @@ SET(
 	src/server/collision/circle_ghost.hpp
 	src/server/collision/create_circle.cpp
 	src/server/collision/create_circle.hpp
-	src/server/collision/create_parameters.cpp
-	src/server/collision/create_parameters.hpp
-	src/server/collision/create_parameters_fwd.hpp
 	src/server/collision/distance.cpp
 	src/server/collision/distance.hpp
 	src/server/collision/from_sge_user_data.cpp
@@ -946,9 +943,6 @@ SET(
 	src/server/collision/ghost.cpp
 	src/server/collision/ghost.hpp
 	src/server/collision/ghost_fwd.hpp
-	src/server/collision/ghost_parameters.cpp
-	src/server/collision/ghost_parameters.hpp
-	src/server/collision/ghost_parameters_fwd.hpp
 	src/server/collision/ghost_unique_ptr.hpp
 	src/server/collision/global_groups.cpp
 	src/server/collision/global_groups.hpp
@@ -1017,8 +1011,13 @@ SET(
 	src/server/entities/base.cpp
 	src/server/entities/base.hpp
 	src/server/entities/base_fwd.hpp
+	src/server/entities/body_parameters.cpp
+	src/server/entities/body_parameters.hpp
+	src/server/entities/body_parameters_fwd.hpp
 	src/server/entities/collision_groups.cpp
 	src/server/entities/collision_groups.hpp
+	src/server/entities/default_solid.cpp
+	src/server/entities/default_solid.hpp
 	src/server/entities/enemies/create.cpp
 	src/server/entities/enemies/create.hpp
 	src/server/entities/enemies/enemy.cpp
@@ -1028,9 +1027,6 @@ SET(
 	src/server/entities/exp_area.hpp
 	src/server/entities/friend.cpp
 	src/server/entities/friend.hpp
-	src/server/entities/ghost_parameters.cpp
-	src/server/entities/ghost_parameters.hpp
-	src/server/entities/ghost_parameters_fwd.hpp
 	src/server/entities/insert_parameters.cpp
 	src/server/entities/insert_parameters.hpp
 	src/server/entities/insert_parameters_center.cpp
@@ -1041,6 +1037,8 @@ SET(
 	src/server/entities/movable.hpp
 	src/server/entities/movable_fwd.hpp
 	src/server/entities/movement_speed.hpp
+	src/server/entities/nonsolid.cpp
+	src/server/entities/nonsolid.hpp
 	src/server/entities/pickups/health.cpp
 	src/server/entities/pickups/health.hpp
 	src/server/entities/pickups/monster.cpp
@@ -1111,8 +1109,6 @@ SET(
 	src/server/entities/property/value.hpp
 	src/server/entities/radius.cpp
 	src/server/entities/radius.hpp
-	src/server/entities/solidity.cpp
-	src/server/entities/solidity.hpp
 	src/server/entities/spawns/count_per_wave.hpp
 	src/server/entities/spawns/hidden.cpp
 	src/server/entities/spawns/hidden.hpp
@@ -1125,6 +1121,9 @@ SET(
 	src/server/entities/spawns/spawn.hpp
 	src/server/entities/speed_to_abs.cpp
 	src/server/entities/speed_to_abs.hpp
+	src/server/entities/transfer_parameters.cpp
+	src/server/entities/transfer_parameters.hpp
+	src/server/entities/transfer_parameters_fwd.hpp
 	src/server/entities/unique_ptr.hpp
 	src/server/entities/with_ai.cpp
 	src/server/entities/with_ai.hpp
