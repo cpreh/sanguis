@@ -160,9 +160,9 @@ private:
 
 	server::console &console_;
 
-	world::map worlds_;
-	
 	entities::player_map players_;
+
+	world::map worlds_;
 };
 
 }

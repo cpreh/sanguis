@@ -62,8 +62,8 @@ sanguis::server::global::context::context(
 	console_(
 		_console
 	),
-	worlds_(),
-	players_()
+	players_(),
+	worlds_()
 {
 }
 
