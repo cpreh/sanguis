@@ -49,6 +49,10 @@ sanguis::client::control::input_translator::input_translator(
 {
 }
 
+sanguis::client::control::input_translator::~input_translator()
+{
+}
+
 void
 sanguis::client::control::input_translator::key_callback(
 	sge::input::keyboard::key_event const &_event

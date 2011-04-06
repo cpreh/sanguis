@@ -36,6 +36,8 @@ public:
 		client::cursor::object &,
 		post_fun const &
 	);
+
+	~input_translator();
 private:
 	void
 	key_callback(

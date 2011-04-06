@@ -32,7 +32,10 @@ sanguis::client::states::ingame::react(
 	case control::action_type::perk_menu:
 		return transit<states::perk_chooser>();
 	case control::action_type::escape:
-		return transit<states::ingame_menu>();
+		context<machine>().quit();
+
+		return discard_event();
+		//return transit<states::ingame_menu>();
 	default:
 		// forward the event to the inner state, so it can be processed normally
 		return forward_event();
