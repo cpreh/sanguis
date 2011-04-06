@@ -59,6 +59,10 @@ sanguis::server::entities::with_ghosts::on_transfer(
 			_params.world(),
 			_params.global_groups()
 		);
+	
+	this->update_center(
+		_params.center()
+	);
 }
 
 void

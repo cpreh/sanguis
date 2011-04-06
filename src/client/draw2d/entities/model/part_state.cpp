@@ -109,7 +109,7 @@ sanguis::client::draw2d::entities::model::part_state::play(
 )
 {
 	if(
-		_type
+		_sound
 	)
 		_sound->play(
 			_type
