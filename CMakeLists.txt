@@ -1029,6 +1029,8 @@ SET(
 	src/server/entities/exp_area.hpp
 	src/server/entities/friend.cpp
 	src/server/entities/friend.hpp
+	src/server/entities/ifaces/with_angle.cpp
+	src/server/entities/ifaces/with_angle.hpp
 	src/server/entities/ifaces/with_body.cpp
 	src/server/entities/ifaces/with_body.hpp
 	src/server/entities/ifaces/with_velocity.cpp

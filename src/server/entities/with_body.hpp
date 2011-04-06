@@ -5,6 +5,7 @@
 #include "body_parameters_fwd.hpp"
 #include "transfer_parameters_fwd.hpp"
 #include "with_ghosts.hpp"
+#include "ifaces/with_angle.hpp"
 #include "ifaces/with_body.hpp"
 #include "../collision/body_base.hpp"
 #include "../collision/body_fwd.hpp"
@@ -27,6 +28,7 @@ class with_body
 :
 	public virtual entities::with_ghosts,
 	protected virtual ifaces::with_body,
+	public virtual ifaces::with_angle,
 	public collision::body_base
 {
 	FCPPT_NONCOPYABLE(
@@ -43,10 +45,11 @@ public:
 	server::center const
 	center() const;
 
-	// own functions
+	// ifaces::with_angle overridden functions
 	server::angle const
 	angle() const;
 
+	// own functions
 	void
 	center(
 		server::center const &
@@ -62,6 +65,7 @@ public:
 		server::angle
 	);
 protected:
+	// entities::base::on_transfer
 	void
 	on_transfer(
 		entities::transfer_parameters const &
@@ -72,6 +76,7 @@ private:
 		server::center const &
 	);
 
+	// collision::body_base
 	boost::logic::tribool const
 	can_collide_with(
 		collision::body_base const &
@@ -92,6 +97,7 @@ private:
 		entities::with_body &
 	);
 
+	// ifaces::with_body
 	void
 	reset_speed(
 		server::speed const &

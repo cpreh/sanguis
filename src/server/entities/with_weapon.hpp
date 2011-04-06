@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_WEAPON_HPP_INCLUDED
 
 #include "base.hpp"
+#include "ifaces/with_angle.hpp"
 #include "property/always_max.hpp"
 #include "property/value.hpp"
 #include "../weapons/unique_ptr.hpp"
@@ -23,7 +24,8 @@ namespace entities
 
 class with_weapon
 :
-	public virtual base
+	public virtual base,
+	public virtual ifaces::with_angle
 {
 	FCPPT_NONCOPYABLE(
 		with_weapon
