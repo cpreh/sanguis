@@ -34,6 +34,9 @@ public:
 		damage::array const &
 	);
 
+	void
+	kill();
+
 	property::changeable &
 	health();
 

@@ -146,10 +146,6 @@ private:
 
 	unicast_callback const send_unicast_;
 
-	world::map worlds_;
-	
-	entities::player_map players_;
-
 	typedef fcppt::scoped_ptr<
 		server::world::context
 	> world_context_scoped_ptr;
@@ -163,6 +159,10 @@ private:
 	load_context_scoped_ptr const load_context_;
 
 	server::console &console_;
+
+	world::map worlds_;
+	
+	entities::player_map players_;
 };
 
 }

@@ -33,7 +33,7 @@ public:
 	~exp_area();
 private:
 	void
-	on_die();
+	on_remove();
 
 	bool
 	dead() const;

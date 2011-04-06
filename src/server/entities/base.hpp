@@ -47,15 +47,8 @@ public:
 	);
 
 	void
-	die();
+	destroy();
 
-	bool
-	processed() const;
-	
-	void
-	may_be_deleted();
-
-	
 	// linking with other objects
 	
 	auto_weak_link const
@@ -115,7 +108,10 @@ private:
 	);
 
 	virtual void
-	on_die();
+	on_remove();
+
+	virtual void
+	on_destroy();
 
 	virtual void
 	on_transfer(
@@ -132,8 +128,6 @@ private:
 	environment::object *environment_;
 
 	entity_id const id_;
-
-	bool processed_;
 	
 	link_container links_;
 };

@@ -62,7 +62,7 @@ sanguis::server::entities::exp_area::center() const
 }
 
 void
-sanguis::server::entities::exp_area::on_die()
+sanguis::server::entities::exp_area::on_remove()
 {
 	for(
 		weak_link_map::iterator it(

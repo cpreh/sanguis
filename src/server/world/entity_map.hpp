@@ -13,7 +13,7 @@ namespace world
 {
 
 typedef boost::ptr_map<
-	entity_id,
+	sanguis::entity_id,
 	entities::base
 > entity_map;
 

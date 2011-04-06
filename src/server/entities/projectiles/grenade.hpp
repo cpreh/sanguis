@@ -59,7 +59,7 @@ private:
 	);
 	
 	void
-	on_die();
+	on_remove();
 	
 	diff_clock diff_clock_;
 

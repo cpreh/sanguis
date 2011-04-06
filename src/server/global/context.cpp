@@ -43,11 +43,9 @@ sanguis::server::global::context::context(
 )
 :
 	send_unicast_(_send_unicast),
-	worlds_(),
-	players_(),
 	world_context_(
 		fcppt::make_unique_ptr<
-			world_context
+			global::world_context
 		>(
 			fcppt::ref(
 				*this
@@ -63,7 +61,9 @@ sanguis::server::global::context::context(
 	),
 	console_(
 		_console
-	)
+	),
+	worlds_(),
+	players_()
 {
 }
 
@@ -155,7 +155,7 @@ sanguis::server::global::context::player_disconnect(
 {
 	players_[
 		_player_id
-	]->die();
+	]->kill();
 }
 
 void

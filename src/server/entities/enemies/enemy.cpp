@@ -125,7 +125,7 @@ sanguis::server::entities::enemies::enemy::team() const
 }
 
 void
-sanguis::server::entities::enemies::enemy::on_die()
+sanguis::server::entities::enemies::enemy::on_remove()
 {
 	if(
 		spawn_owner_

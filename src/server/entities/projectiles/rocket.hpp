@@ -43,7 +43,7 @@ private:
 	);
 
 	void
-	on_die();
+	on_remove();
 	
 	damage::unit const damage_;
 };

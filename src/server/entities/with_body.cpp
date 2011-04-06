@@ -8,8 +8,9 @@
 #include <sge/projectile/body/scoped.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/ref.hpp>
+#include <fcppt/assert.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
 #include <boost/logic/tribool.hpp>
 
@@ -48,6 +49,9 @@ sanguis::server::entities::with_body::with_body(
 
 sanguis::server::entities::with_body::~with_body()
 {
+	FCPPT_ASSERT(
+		!scoped_body_
+	);
 }
 
 sanguis::server::angle const
@@ -130,6 +134,14 @@ sanguis::server::entities::with_body::on_transfer(
 	with_ghosts::on_transfer(
 		_params
 	);
+}
+
+void
+sanguis::server::entities::with_body::on_destroy()
+{
+	scoped_body_.reset();	
+
+	with_ghosts::on_destroy();
 }
 
 void

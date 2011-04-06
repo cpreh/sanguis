@@ -5,18 +5,23 @@
 #include "../environment/object.hpp"
 #include <sge/projectile/ghost/scoped.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
+#include <fcppt/assert.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 #include <boost/foreach.hpp>
 
 sanguis::server::entities::with_ghosts::with_ghosts()
 :
-	ghosts_()
+	ghosts_(),
+	scoped_ghosts_()
 {
 }
 
 sanguis::server::entities::with_ghosts::~with_ghosts()
 {
+	FCPPT_ASSERT(
+		scoped_ghosts_.empty()
+	);
 }
 
 void
@@ -63,6 +68,12 @@ sanguis::server::entities::with_ghosts::on_transfer(
 	this->update_center(
 		_params.center()
 	);
+}
+
+void
+sanguis::server::entities::with_ghosts::on_destroy()
+{
+	scoped_ghosts_.clear();	
 }
 
 void

@@ -195,6 +195,12 @@ sanguis::client::machine::process(
 void
 sanguis::client::machine::quit()
 {
+	FCPPT_LOG_DEBUG(
+		client::log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("Exiting the client!")
+	);
+
 	running_ = false;
 }
 

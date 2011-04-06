@@ -55,7 +55,7 @@ sanguis::server::entities::projectiles::rocket::do_damage(
 }
 
 void
-sanguis::server::entities::projectiles::rocket::on_die()
+sanguis::server::entities::projectiles::rocket::on_remove()
 {
 	this->environment().insert(
 		entities::unique_ptr(

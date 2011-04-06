@@ -85,8 +85,6 @@ sanguis::server::world::object::object(
 		sge::time::activation_state::active,
 		diff_clock_.callback()
 	),
-	entities_(),
-	props_(),
 	environment_(
 		fcppt::make_unique_ptr<
 			world::environment
@@ -96,6 +94,8 @@ sanguis::server::world::object::object(
 			)
 		)
 	),
+	entities_(),
+	props_(),
 	pickup_spawner_(
 		*environment_
 	),
@@ -107,6 +107,12 @@ sanguis::server::world::object::object(
 
 sanguis::server::world::object::~object()
 {
+	// FIXME!!!
+	BOOST_FOREACH(
+		entity_map::value_type ref,
+		entities_
+	)
+		ref.second->destroy();
 }
 
 void
@@ -578,14 +584,6 @@ sanguis::server::world::object::update_entity(
 	);
 
 	if(
-		!entity.processed()
-	)
-	{
-		entity.may_be_deleted();
-
-		return;
-	}
-	else if(
 		entity.dead()
 	)
 	{
@@ -593,7 +591,7 @@ sanguis::server::world::object::update_entity(
 			entity
 		);
 
-		entity.die();
+		entity.destroy();
 
 		entities_.erase(
 			_it

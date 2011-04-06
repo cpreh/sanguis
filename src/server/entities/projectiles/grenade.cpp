@@ -116,7 +116,7 @@ sanguis::server::entities::projectiles::grenade::on_update(
 }
 
 void
-sanguis::server::entities::projectiles::grenade::on_die()
+sanguis::server::entities::projectiles::grenade::on_remove()
 {
 	this->environment().insert(
 		entities::unique_ptr(

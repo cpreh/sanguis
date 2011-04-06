@@ -73,7 +73,7 @@ private:
 	team() const;
 
 	void
-	on_die();
+	on_remove();
 
 	enemy_type::type const etype_;
 

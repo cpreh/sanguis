@@ -198,7 +198,7 @@ sanguis::server::entities::player::player_id() const
 }
 
 void
-sanguis::server::entities::player::on_die()
+sanguis::server::entities::player::on_remove()
 {
 	this->environment().remove_player(
 		this->player_id()

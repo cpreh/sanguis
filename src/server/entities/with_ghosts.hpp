@@ -42,6 +42,9 @@ protected:
 	);
 
 	void
+	on_destroy();
+
+	void
 	update_center(
 		server::center const &
 	);

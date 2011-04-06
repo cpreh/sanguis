@@ -41,7 +41,7 @@ sanguis::server::cheat(
 				);
 		return;
 	case cheat_type::kill:
-		_player.die();
+		_player.kill();
 		return;
 	case cheat_type::size:
 		break;

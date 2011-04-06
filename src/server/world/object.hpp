@@ -202,15 +202,15 @@ private:
 
 	sge::time::timer send_timer_;
 
-	entity_map entities_;
-
-	prop_container props_;
-
 	typedef fcppt::scoped_ptr<
 		server::environment::object
 	> environment_scoped_ptr;
 
 	environment_scoped_ptr const environment_;
+
+	entity_map entities_;
+
+	prop_container props_;
 
 	server::pickup_spawner pickup_spawner_;
 

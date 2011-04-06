@@ -13,7 +13,6 @@ sanguis::server::entities::base::base()
 	id_(
 		server::get_unique_id()
 	),
-	processed_(false),
 	links_()
 {
 }
@@ -48,21 +47,11 @@ sanguis::server::entities::base::update(
 }
 
 void
-sanguis::server::entities::base::die()
+sanguis::server::entities::base::destroy()
 {
-	this->on_die();
-}
+	this->on_remove();
 
-bool
-sanguis::server::entities::base::processed() const
-{
-	return processed_;
-}
-	
-void
-sanguis::server::entities::base::may_be_deleted()
-{
-	processed_ = true;
+	this->on_destroy();
 }
 
 sanguis::server::entities::auto_weak_link const
@@ -115,7 +104,12 @@ sanguis::server::entities::base::on_update(
 }
 
 void
-sanguis::server::entities::base::on_die()
+sanguis::server::entities::base::on_remove()
+{
+}
+
+void
+sanguis::server::entities::base::on_destroy()
 {
 }
 

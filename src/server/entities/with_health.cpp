@@ -27,6 +27,14 @@ sanguis::server::entities::with_health::damage(
 		);
 }
 
+void
+sanguis::server::entities::with_health::kill()
+{
+	health_.current(
+		0
+	);
+}
+
 sanguis::server::entities::property::changeable &
 sanguis::server::entities::with_health::health()
 {

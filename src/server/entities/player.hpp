@@ -81,7 +81,7 @@ public:
 	player_id() const;
 private:
 	void
-	on_die();
+	on_remove();
 
 	void
 	add_sight_range(
