@@ -6,7 +6,6 @@
 #include "../collision/body_base_fwd.hpp"
 #include "../collision/ghost_unique_ptr.hpp"
 #include "../collision/group_vector.hpp"
-#include "../center.hpp"
 #include "../radius.hpp"
 #include "../team.hpp"
 #include "../../entity_id.hpp"
@@ -34,9 +33,7 @@ public:
 	);
 
 	collision::ghost_unique_ptr
-	recreate(
-		server::center const &
-	);
+	recreate();
 protected:
 	aura(
 		server::radius,

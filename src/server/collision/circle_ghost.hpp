@@ -6,7 +6,6 @@
 #include "body_exit_callback.hpp"
 #include "ghost.hpp"
 #include "group_vector.hpp"
-#include "../center.hpp"
 #include "../radius.hpp"
 #include <fcppt/function/object.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -28,7 +27,6 @@ class circle_ghost
 public:
 	circle_ghost(
 		collision::group_vector const &,
-		server::center const &,
 		server::radius,
 		collision::body_enter_callback const &,
 		collision::body_exit_callback const &
@@ -36,9 +34,6 @@ public:
 
 	~circle_ghost();
 private:
-	server::center const
-	center() const;
-
 	void
 	on_body_enter(
 		collision::body_base &

@@ -7,7 +7,6 @@
 
 sanguis::server::collision::circle_ghost::circle_ghost(
 	collision::group_vector const &_groups,
-	server::center const &_center,
 	server::radius const _radius,
 	collision::body_enter_callback const &_body_enter_callback,
 	collision::body_exit_callback const &_body_exit_callback
@@ -15,14 +14,6 @@ sanguis::server::collision::circle_ghost::circle_ghost(
 :
 	collision::ghost(
 		_groups,
-		// TODO: move somewhere else
-		server::pos(
-			_center.get()
-			- server::dim(
-				_radius.get(),
-				_radius.get()
-			)
-		),
 		server::dim(
 			_radius.get(),
 			_radius.get()

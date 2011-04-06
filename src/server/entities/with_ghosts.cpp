@@ -31,6 +31,8 @@ sanguis::server::entities::with_ghosts::add_ghost(
 		)
 	);
 
+	// FIXME: update the center!
+
 	if(
 		this->has_environment()
 	)

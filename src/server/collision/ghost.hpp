@@ -6,7 +6,6 @@
 #include "group_vector.hpp"
 #include "../center.hpp"
 #include "../dim.hpp"
-#include "../pos.hpp"
 #include <sge/projectile/body/object_fwd.hpp>
 #include <sge/projectile/ghost/object_fwd.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
@@ -28,7 +27,6 @@ class ghost
 protected:
 	ghost(
 		collision::group_vector const &,
-		server::pos const &,
 		server::dim const &
 	);
 public:

@@ -27,9 +27,7 @@ sanguis::server::entities::with_auras::add_aura(
 	);
 
 	with_ghosts::add_ghost(
-		ref.recreate(
-			this->center()
-		)
+		ref.recreate()
 	);
 }
 

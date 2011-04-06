@@ -12,7 +12,6 @@
 
 sanguis::server::collision::ghost::ghost(
 	collision::group_vector const &_groups,
-	server::pos const &_pos,
 	server::dim const &_size
 )
 :
@@ -23,9 +22,7 @@ sanguis::server::collision::ghost::ghost(
 		>(
 			sge::projectile::ghost::parameters(
 				sge::projectile::ghost::position(
-					collision::to_sge_vector(
-						_pos.get()
-					)
+					sge::projectile::vector2::null()
 				),
 				sge::projectile::ghost::size(
 					collision::to_sge_dim(

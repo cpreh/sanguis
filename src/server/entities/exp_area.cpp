@@ -29,9 +29,6 @@ sanguis::server::entities::exp_area::exp_area(
 					this->type(),
 					this->team()
 				),
-				server::center(
-					server::center::value_type::null()
-				),
 				server::radius(
 					2000 // TODO
 				),

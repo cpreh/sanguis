@@ -20,9 +20,7 @@ sanguis::server::auras::aura::owner(
 }
 
 sanguis::server::collision::ghost_unique_ptr
-sanguis::server::auras::aura::recreate(
-	server::center const &_center
-)
+sanguis::server::auras::aura::recreate()
 {
 	return
 		collision::ghost_unique_ptr(
@@ -30,7 +28,6 @@ sanguis::server::auras::aura::recreate(
 				collision::circle_ghost
 			>(
 				this->collision_groups(),
-				_center,
 				radius_,
 				std::tr1::bind(
 					&aura::collision_begin,
