@@ -5,6 +5,7 @@
 #include "body_parameters_fwd.hpp"
 #include "transfer_parameters_fwd.hpp"
 #include "with_ghosts.hpp"
+#include "ifaces/with_body.hpp"
 #include "../collision/body_base.hpp"
 #include "../collision/body_fwd.hpp"
 #include "../angle.hpp"
@@ -25,6 +26,7 @@ namespace entities
 class with_body
 :
 	public virtual entities::with_ghosts,
+	protected virtual ifaces::with_body,
 	public collision::body_base
 {
 	FCPPT_NONCOPYABLE(
@@ -90,10 +92,10 @@ private:
 		entities::with_body &
 	);
 
-	// own virtual functions
-	
-	virtual server::speed const
-	initial_direction() const;
+	void
+	reset_speed(
+		server::speed const &
+	);
 
 	typedef fcppt::scoped_ptr<
 		collision::body

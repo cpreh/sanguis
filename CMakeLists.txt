@@ -1014,6 +1014,8 @@ SET(
 	src/server/entities/body_parameters.cpp
 	src/server/entities/body_parameters.hpp
 	src/server/entities/body_parameters_fwd.hpp
+	src/server/entities/body_velocity_combiner.cpp
+	src/server/entities/body_velocity_combiner.hpp
 	src/server/entities/collision_groups.cpp
 	src/server/entities/collision_groups.hpp
 	src/server/entities/default_solid.cpp
@@ -1027,6 +1029,10 @@ SET(
 	src/server/entities/exp_area.hpp
 	src/server/entities/friend.cpp
 	src/server/entities/friend.hpp
+	src/server/entities/ifaces/with_body.cpp
+	src/server/entities/ifaces/with_body.hpp
+	src/server/entities/ifaces/with_velocity.cpp
+	src/server/entities/ifaces/with_velocity.hpp
 	src/server/entities/insert_parameters.cpp
 	src/server/entities/insert_parameters.hpp
 	src/server/entities/insert_parameters_center.cpp

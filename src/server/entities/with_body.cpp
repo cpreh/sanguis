@@ -190,11 +190,12 @@ sanguis::server::entities::with_body::collision_with_body(
 {
 }
 
-sanguis::server::speed const
-sanguis::server::entities::with_body::initial_direction() const
+void
+sanguis::server::entities::with_body::reset_speed(
+	server::speed const &_speed
+)
 {
-	return
-		server::speed(
-			server::speed::value_type::null()
-		);
+	this->speed(
+		_speed
+	);
 }

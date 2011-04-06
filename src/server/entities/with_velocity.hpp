@@ -3,6 +3,7 @@
 
 #include "with_velocity_fwd.hpp"
 #include "base.hpp"
+#include "ifaces/with_velocity.hpp"
 #include "property/initial_fwd.hpp"
 #include "property/changeable.hpp"
 #include "property/value.hpp"
@@ -20,7 +21,8 @@ namespace entities
 
 class with_velocity
 :
-	public virtual entities::base
+	public virtual entities::base,
+	protected virtual ifaces::with_velocity
 {
 	FCPPT_NONCOPYABLE(
 		with_velocity
@@ -47,9 +49,6 @@ protected:
 		server::direction
 	);
 private:
-	server::speed const
-	initial_direction() const;
-
 	void
 	speed_change(
 		property::value

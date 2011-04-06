@@ -1,0 +1,37 @@
+#ifndef SANGUIS_SERVER_ENTITIES_IFACES_WITH_BODY_HPP_INCLUDED
+#define SANGUIS_SERVER_ENTITIES_IFACES_WITH_BODY_HPP_INCLUDED
+
+#include "../../speed.hpp"
+#include <fcppt/noncopyable.hpp>
+
+namespace sanguis
+{
+namespace server
+{
+namespace entities
+{
+namespace ifaces
+{
+
+class with_body
+{
+	FCPPT_NONCOPYABLE(
+		with_body
+	);
+protected:
+	with_body();
+
+	virtual void
+	reset_speed(
+		server::speed const &
+	) = 0;
+public:
+	virtual ~with_body();
+};
+
+}
+}
+}
+}
+
+#endif

@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PLAYER_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PLAYER_HPP_INCLUDED
 
+#include "body_velocity_combiner.hpp"
 #include "with_auras.hpp"
 #include "with_buffs.hpp"
 #include "with_dim.hpp"
@@ -32,6 +33,7 @@ namespace entities
 
 class player
 :
+	private body_velocity_combiner,
 	public with_auras,
 	public with_buffs,
 	public with_dim,
