@@ -1,7 +1,6 @@
 #include "args/log_level.hpp"
 #include "args/options.hpp"
 #include "args/parse.hpp"
-#include "args/sge_options.hpp"
 #include "args/server_only.hpp"
 #include "client/create.hpp"
 #include "load/server_context.hpp"
@@ -12,7 +11,6 @@
 #include "main_object.hpp"
 
 #include <sge/log/global_context.hpp>
-#include <sge/systems/instance.hpp>
 
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/log/activate_levels.hpp>
@@ -95,12 +93,6 @@ try
 		log_level
 	);
 
-	sge::systems::instance sys(
-		sanguis::args::sge_options(
-			vm
-		)
-	);
-
 	// has to be done after the plugins are loaded
 #if 0
 	sge_log.apply(
@@ -147,7 +139,6 @@ try
 			)
 		:
 			sanguis::client::create(
-				sys,
 				vm
 			)
 		);

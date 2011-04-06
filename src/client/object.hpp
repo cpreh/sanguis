@@ -16,7 +16,7 @@
 #include <sge/font/text/drawer_3d.hpp>
 #include <sge/font/metrics_ptr.hpp>
 #include <sge/time/timer.hpp>
-#include <sge/systems/instance_fwd.hpp>
+#include <sge/systems/instance.hpp>
 #include <sge/window/instance_ptr.hpp>
 #include <awl/mainloop/io_service_shared_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -39,7 +39,6 @@ class object
 	);
 public:
 	explicit object(
-		sge::systems::instance &,
 		boost::program_options::variables_map const &
 	);
 
@@ -67,7 +66,7 @@ private:
 
 	config::settings::saver saver_;
 
-	sge::systems::instance &sys_;
+	sge::systems::instance const sys_;
 
 	sge::font::metrics_ptr const font_metrics_;
 

@@ -7,6 +7,7 @@
 #include "states/menu.hpp"
 #include "log.hpp"
 #include "../args/multi_sampling.hpp"
+#include "../args/sge_options.hpp"
 #include "../server/object.hpp"
 #include "../media_path.hpp"
 #include "../time_type.hpp"
@@ -55,7 +56,6 @@
 #include <cstdlib>
 
 sanguis::client::object::object(
-	sge::systems::instance &_sys,
 	boost::program_options::variables_map const &_variables_map
 )
 :
@@ -65,7 +65,11 @@ sanguis::client::object::object(
 	saver_(
 		settings_
 	),
-	sys_(_sys),
+	sys_(
+		args::sge_options(
+			_variables_map
+		)
+	),
 	font_metrics_(
 		sys_.font_system()->create_font(
 			sge::config::media_path()
