@@ -1351,6 +1351,7 @@ SET(
 	src/server/world/context.cpp
 	src/server/world/context.hpp
 	src/server/world/context_fwd.hpp
+	src/server/world/entity_map.cpp
 	src/server/world/entity_map.hpp
 	src/server/world/environment.cpp
 	src/server/world/environment.hpp

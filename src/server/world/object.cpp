@@ -34,7 +34,6 @@
 #include <sge/time/second_f.hpp>
 #include <sge/time/millisecond.hpp>
 #include <fcppt/container/map_impl.hpp>
-#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/math/box/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
@@ -107,12 +106,6 @@ sanguis::server::world::object::object(
 
 sanguis::server::world::object::~object()
 {
-	// FIXME!!!
-	BOOST_FOREACH(
-		entity_map::value_type ref,
-		entities_
-	)
-		ref.second->destroy();
 }
 
 void
@@ -178,8 +171,7 @@ sanguis::server::world::object::insert(
 	> return_type;
 	
 	return_type const ret(
-		fcppt::container::ptr::insert_unique_ptr_map(
-			entities_,
+		entities_.insert(
 			id,
 			move(
 				_entity
@@ -383,7 +375,7 @@ sanguis::server::world::object::request_transfer(
 	entities::unique_ptr entity(
 		entities_.release(
 			it
-		).release()
+		)
 	);
 
 	global_context_.transfer_entity(
@@ -590,8 +582,6 @@ sanguis::server::world::object::update_entity(
 		this->update_entity_health(
 			entity
 		);
-
-		entity.destroy();
 
 		entities_.erase(
 			_it
