@@ -9,6 +9,7 @@
 #include "../net/serialize_to_circular_buffer.hpp"
 #include "../net/serialize_to_data_buffer.hpp"
 #include "../net/deserialize.hpp"
+#include "../net/server/connection_id_container.hpp"
 #include "../exception.hpp"
 #include <sge/time/millisecond.hpp>
 #include <sge/time/second.hpp>
@@ -85,8 +86,7 @@ sanguis::server::machine::machine(
 				)
 			)
 		)
-	),
-	clients_()
+	)
 {
 }
 
@@ -121,13 +121,13 @@ sanguis::server::machine::send_to_all(
 	);
 
 	BOOST_FOREACH(
-		client_set::value_type id,
-		clients_
+		net::server::connection_id_container::value_type id,
+		net_.connections()
 	)
 	{
 		if(
 			!net::append_to_circular_buffer(
-				net_.send_buffer(
+				*net_.send_buffer(
 					id
 				),
 				temp_buffer_
@@ -161,12 +161,31 @@ sanguis::server::machine::send_unicast(
 		_id.get()
 	);
 
+	net::circular_buffer *const buffer(
+		net_.send_buffer(
+			net_id
+		)
+	);
+
+	if(
+		!buffer
+	)
+	{
+		FCPPT_LOG_ERROR(
+			server::log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("Client ")
+				<< net_id
+				<< FCPPT_TEXT(" is gone.")
+		);
+
+		return;
+	}
+
 	if(
 		!net::serialize_to_circular_buffer(
 			_message,
-			net_.send_buffer(
-				net_id
-			)
+			*buffer
 		)
 	)
 	{
@@ -219,14 +238,7 @@ sanguis::server::machine::connect_callback(
 	net::id const _id
 )
 {
-	if(
-		!clients_.insert(
-			_id
-		).second
-	)
-		throw sanguis::exception(
-			FCPPT_TEXT("Client inserted twice in server!")
-		);
+	// WTF
 }
 
 void
@@ -239,10 +251,6 @@ sanguis::server::machine::disconnect_callback(
 		events::disconnect(
 			_id
 		)
-	);
-
-	clients_.erase(
-		_id
 	);
 }
 

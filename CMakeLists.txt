@@ -856,7 +856,9 @@ SET(
 	src/net/server/connect_function.hpp
 	src/net/server/connection.cpp
 	src/net/server/connection.hpp
+	src/net/server/connection_container.hpp
 	src/net/server/connection_fwd.hpp
+	src/net/server/connection_id_container.hpp
 	src/net/server/data_callback.hpp
 	src/net/server/data_function.hpp
 	src/net/server/disconnect_callback.hpp

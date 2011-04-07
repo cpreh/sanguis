@@ -42,7 +42,7 @@ sanguis::net::server::object::listen(
 		);
 }
 
-sanguis::net::circular_buffer &
+sanguis::net::circular_buffer *
 sanguis::net::server::object::send_buffer(
 	net::id const _id
 )
@@ -51,6 +51,13 @@ sanguis::net::server::object::send_buffer(
 		impl_->send_buffer(
 			_id
 		);
+}
+
+sanguis::net::server::connection_id_container const
+sanguis::net::server::object::connections() const
+{
+	return
+		impl_->connections();
 }
 
 void 

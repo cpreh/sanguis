@@ -156,6 +156,10 @@ sanguis::server::global::context::player_disconnect(
 	players_[
 		_player_id
 	]->kill();
+
+	players_.erase(
+		_player_id
+	);
 }
 
 void

@@ -3,6 +3,7 @@
 
 #include "object_impl_fwd.hpp"
 #include "connect_callback.hpp"
+#include "connection_id_container.hpp"
 #include "data_callback.hpp"
 #include "disconnect_callback.hpp"
 #include "timer_callback.hpp"
@@ -40,10 +41,13 @@ public:
 		net::port
 	);
 
-	net::circular_buffer &
+	net::circular_buffer *
 	send_buffer(
 		net::id
 	);
+
+	server::connection_id_container const
+	connections() const;
 
 	void
 	queue_send(

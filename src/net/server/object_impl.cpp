@@ -4,7 +4,6 @@
 #include "../circular_buffer_send_part.hpp"
 #include "../erase_circular_buffer_front.hpp"
 #include "../exception.hpp"
-#include "../is_disconnect.hpp"
 #include "../log.hpp"
 #include "../receive_buffer.hpp"
 #include "../receive_buffer_for_asio.hpp"
@@ -23,11 +22,11 @@
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/assert.hpp>
 #include <fcppt/from_std_string.hpp>
-#include <fcppt/lexical_cast.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 #include <boost/asio/buffer.hpp>
 #include <boost/asio.hpp>
+#include <boost/range/adaptor/map.hpp>
 
 sanguis::net::server::object_impl::object_impl(
 	boost::asio::io_service &_io_service,
@@ -107,15 +106,32 @@ sanguis::net::server::object_impl::listen(
 	this->accept();
 }
 
-sanguis::net::circular_buffer &
+sanguis::net::circular_buffer *
 sanguis::net::server::object_impl::send_buffer(
 	net::id const _id
 )
 {
-	return
-		this->connection(
+	connection_container::iterator const it(
+		connections_.find(
 			_id
-		).send_data();
+		)
+	);
+
+	return
+		it == connections_.end()
+		?
+			0
+		:
+			&it->second->send_data();
+}
+
+sanguis::net::server::connection_id_container const
+sanguis::net::server::object_impl::connections() const
+{
+	return
+		boost::adaptors::keys(
+			connections_
+		);
 }
 
 void 
@@ -123,10 +139,18 @@ sanguis::net::server::object_impl::queue_send(
 	net::id const _id
 )
 {
-	server::connection &con(
-		this->connection(
+	connection_container::iterator const it(
+		connections_.find(
 			_id
 		)
+	);
+
+	FCPPT_ASSERT(
+		it != connections_.end()
+	);
+
+	server::connection &con(
+		*it->second
 	);
 
 	if(
@@ -369,24 +393,13 @@ sanguis::net::server::object_impl::handle_error(
 )
 {
 	fcppt::string const error_msg(
+		_message
+		+ FCPPT_TEXT(": ")
+		+
 		fcppt::from_std_string(
 			_error.message()
 		)
 	);
-
-	// do we have an error or a disconnect...
-	if(
-		net::is_disconnect(
-			_error
-		)
-	)
-		throw net::exception(
-			_message
-			+
-			FCPPT_TEXT(" error: ")
-			+
-			error_msg
-		);
 
 	FCPPT_LOG_DEBUG(
 		object_impl::log(),
@@ -398,12 +411,6 @@ sanguis::net::server::object_impl::handle_error(
 			<< FCPPT_TEXT(")")
 	);
 
-	// ...else remove connection
-	disconnect_signal_(
-		_con.id(),
-		error_msg
-	);
-
 	if(
 		!connections_.erase(
 			_con.id()
@@ -412,6 +419,12 @@ sanguis::net::server::object_impl::handle_error(
 		throw net::exception(
 			FCPPT_TEXT("Invalid erase in net::server!")
 		);
+
+	// ...else remove connection
+	disconnect_signal_(
+		_con.id(),
+		error_msg
+	);
 }
 
 void
@@ -496,33 +509,6 @@ sanguis::net::server::object_impl::reset_timer()
 			this
 		)
 	);
-}
-
-sanguis::net::server::connection &
-sanguis::net::server::object_impl::connection(
-	net::id const _id
-)
-{
-	connection_container::iterator const it(
-		connections_.find(
-			_id
-		)
-	);
-
-	if(
-		it == connections_.end()
-	)
-		throw net::exception(
-			FCPPT_TEXT("Invalid id in server")
-			+
-			fcppt::lexical_cast<
-				fcppt::string
-			>(
-				_id
-			)
-		);
-	
-	return *it->second;
 }
 
 fcppt::log::object &

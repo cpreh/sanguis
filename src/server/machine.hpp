@@ -18,7 +18,6 @@
 #include <fcppt/string.hpp>
 #include <awl/mainloop/io_service_fwd.hpp>
 #include <boost/statechart/state_machine.hpp>
-#include <set>
 
 namespace sanguis
 {
@@ -90,10 +89,6 @@ private:
 	void
 	timer_callback();
 
-	typedef std::set<
-		net::id
-	> client_set;
-
 	load::context_base const &resources_;
 
 	net::port const port_;
@@ -109,8 +104,6 @@ private:
 		s_disconn_,
 		s_data_,
 		s_timer_;
-
-	client_set clients_;
 };
 
 }
