@@ -3,6 +3,7 @@
 #include "../object.hpp"
 #include "../../log.hpp"
 #include "../../config/settings/get_or_default.hpp"
+#include "../../config/settings/set_key.hpp"
 #include "../../../media_path.hpp"
 #include "../../../net/port.hpp"
 #include <sge/cegui/from_cegui_string.hpp>
@@ -198,6 +199,25 @@ sanguis::client::gui::menu::object::object(
 
 sanguis::client::gui::menu::object::~object()
 {
+	client::config::settings::set_key(
+		settings_,
+		config_section,
+		config_port_key,
+		sge::cegui::from_cegui_string(
+			port_edit_.getText(),
+			gui_.charconv_system()
+		)
+	);
+
+	client::config::settings::set_key(
+		settings_,
+		config_section,
+		config_hostname_key,
+		sge::cegui::from_cegui_string(
+			hostname_edit_.getText(),
+			gui_.charconv_system()
+		)
+	);
 }
 
 void
