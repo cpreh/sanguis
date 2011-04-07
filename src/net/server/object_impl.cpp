@@ -411,18 +411,22 @@ sanguis::net::server::object_impl::handle_error(
 			<< FCPPT_TEXT(")")
 	);
 
+	net::id const id(
+		_con.id()
+	);
+
+	// remove the connection first, so really nothing will be sent anymore
 	if(
 		!connections_.erase(
-			_con.id()
+			id
 		)
 	)
 		throw net::exception(
 			FCPPT_TEXT("Invalid erase in net::server!")
 		);
 
-	// ...else remove connection
 	disconnect_signal_(
-		_con.id(),
+		id,
 		error_msg
 	);
 }
