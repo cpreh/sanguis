@@ -130,6 +130,7 @@ sanguis::server::global::context::insert_player(
 		)
 	);
 
+#if 0
 	cur_world.insert(
 		entities::unique_ptr(
 			fcppt::make_unique_ptr<
@@ -146,6 +147,7 @@ sanguis::server::global::context::insert_player(
 			spawn_pos
 		)
 	);
+#endif
 }
 
 void

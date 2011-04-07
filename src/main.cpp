@@ -31,6 +31,12 @@
 
 #include <cstdlib>
 
+#include <fcppt/log/context.hpp>
+#include <fcppt/log/location.hpp>
+#include <fcppt/log/object.hpp>
+#include <fcppt/log/activate_levels.hpp>
+#include <fcppt/tr1/functional.hpp>
+
 int
 main(
 	int argc,
@@ -40,6 +46,17 @@ try
 {
 	boost::program_options::options_description desc(
 		sanguis::args::options()
+	);
+
+	sge::log::global_context().apply(
+		fcppt::log::location(
+			FCPPT_TEXT("projectile")
+		),
+                std::tr1::bind(
+			&fcppt::log::activate_levels,
+			std::tr1::placeholders::_1,
+			fcppt::log::level::verbose
+		)
 	);
 
 #if 0
