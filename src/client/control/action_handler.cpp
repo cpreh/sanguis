@@ -108,36 +108,36 @@ sanguis::client::control::action_handler::handle_player_action(
 	)
 	{
 	case action_type::horizontal_move:
-		handle_move_x(
+		this->handle_move_x(
 			scale
 		);
 
 		return;
 	case action_type::vertical_move:
-		handle_move_y(
+		this->handle_move_y(
 			scale
 		);
 
 		return;
 	case action_type::horizontal_look:
 	case action_type::vertical_look:
-		update_rotation();
+		this->update_rotation();
 
 		return;
 	case action_type::shoot:
-		handle_shooting(
+		this->handle_shooting(
 			scale
 		);
 
 		return;
 	case action_type::switch_weapon_forwards:
-		handle_switch_weapon(
+		this->handle_switch_weapon(
 			true
 		);
 
 		return;
 	case action_type::switch_weapon_backwards:
-		handle_switch_weapon(
+		this->handle_switch_weapon(
 			false
 		);
 
@@ -166,7 +166,7 @@ sanguis::client::control::action_handler::give_player_weapon(
 	if(
 		current_weapon_ == weapon_type::size
 	)
-		change_weapon(
+		this->change_weapon(
 			_weapon_type
 		);
 }
@@ -180,7 +180,7 @@ sanguis::client::control::action_handler::handle_move_x(
 		_scale
 	);
 
-	update_direction();
+	this->update_direction();
 }
 
 void
@@ -192,7 +192,7 @@ sanguis::client::control::action_handler::handle_move_y(
 		_scale
 	);
 
-	update_direction();
+	this->update_direction();
 }
 
 void
@@ -312,7 +312,7 @@ sanguis::client::control::action_handler::handle_switch_weapon(
 	else
 		while(!*--it) ;
 
-	change_weapon(
+	this->change_weapon(
 		static_cast<
 			weapon_type::type
 		>(

@@ -14,6 +14,7 @@
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/output.hpp>
+#include <fcppt/log/verbose.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/assert.hpp>
@@ -238,7 +239,7 @@ sanguis::net::client::object_impl::read_handler(
 		_bytes
 	);
 
-	FCPPT_LOG_DEBUG(
+	FCPPT_LOG_VERBOSE(
 		object_impl::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("read ")
@@ -273,7 +274,7 @@ sanguis::net::client::object_impl::write_handler(
 		return;
 	}
 
-	FCPPT_LOG_DEBUG(
+	FCPPT_LOG_VERBOSE(
 		object_impl::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("wrote ")
@@ -290,6 +291,8 @@ sanguis::net::client::object_impl::write_handler(
 		!send_buffer_.empty()
 	)
 		this->send_data();
+	else
+		sending_ = false;
 }
 
 void

@@ -20,6 +20,7 @@
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/output.hpp>
+#include <fcppt/log/verbose.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
@@ -219,7 +220,7 @@ sanguis::server::machine::process_message(
 	messages::auto_ptr _message
 )
 {
-	FCPPT_LOG_DEBUG(
+	FCPPT_LOG_VERBOSE(
 		server::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("process_message")
