@@ -25,12 +25,12 @@ public:
 	virtual boost::logic::tribool const
 	can_collide_with(
 		collision::body_base const &
-	) const;
+	) const = 0;
 
 	virtual void
 	collision(
 		collision::body_base &
-	);
+	) = 0;
 };
 
 }

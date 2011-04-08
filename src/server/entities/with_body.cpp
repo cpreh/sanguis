@@ -173,7 +173,7 @@ sanguis::server::entities::with_body::can_collide_with(
 }
 
 void
-sanguis::server::entities::with_body::collide(
+sanguis::server::entities::with_body::collision(
 	collision::body_base &_body_base
 )
 {

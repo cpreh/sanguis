@@ -86,7 +86,7 @@ private:
 	) const;
 
 	void
-	collide(
+	collision(
 		collision::body_base &
 	);
 
