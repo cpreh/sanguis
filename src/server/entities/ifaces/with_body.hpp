@@ -25,6 +25,10 @@ protected:
 	reset_speed(
 		server::speed const &
 	) = 0;
+
+	virtual
+	server::speed const
+	initial_speed() const;
 public:
 	virtual ~with_body();
 };

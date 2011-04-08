@@ -77,3 +77,10 @@ sanguis::server::entities::with_velocity::speed_change(
 		)
 	);
 }
+
+sanguis::server::speed const
+sanguis::server::entities::with_velocity::initial_abs_speed() const
+{
+	return
+		this->abs_speed();
+}

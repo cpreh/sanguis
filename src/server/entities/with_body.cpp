@@ -111,6 +111,10 @@ sanguis::server::entities::with_body::on_transfer(
 		_params.center()
 	);
 
+	collision_body_->speed(
+		this->initial_speed()
+	);
+
 	scoped_body_.take(
 		fcppt::make_unique_ptr<
 			sge::projectile::body::scoped

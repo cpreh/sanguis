@@ -30,6 +30,9 @@ private:
 	on_speed_change(
 		server::speed const &
 	);
+
+	server::speed const
+	initial_speed() const;
 };
 
 }

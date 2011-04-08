@@ -54,6 +54,9 @@ private:
 		property::value
 	);
 
+	server::speed const
+	initial_abs_speed() const;
+
 	property::changeable movement_speed_;
 
 	server::direction direction_;

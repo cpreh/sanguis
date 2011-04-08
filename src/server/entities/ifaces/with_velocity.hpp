@@ -25,6 +25,9 @@ protected:
 	on_speed_change(
 		server::speed const &
 	);
+
+	virtual server::speed const
+	initial_abs_speed() const = 0;
 public:
 	virtual ~with_velocity();
 };
