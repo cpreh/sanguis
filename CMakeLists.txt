@@ -142,6 +142,8 @@ SET(
 	src/client/control/action_handler.cpp
 	src/client/control/action_handler.hpp
 	src/client/control/action_handler_fwd.hpp
+	src/client/control/action_visitor.cpp
+	src/client/control/action_visitor.hpp
 	src/client/control/actions/any.cpp
 	src/client/control/actions/any.hpp
 	src/client/control/actions/any_fwd.hpp

@@ -1,5 +1,7 @@
 #include "action_handler.hpp"
+#include "action_visitor.hpp"
 #include "environment.hpp"
+#include "actions/any.hpp"
 #include "actions/binary.hpp"
 #include "actions/cursor.hpp"
 #include "actions/nullary.hpp"
@@ -16,12 +18,14 @@
 #include <sge/time/millisecond.hpp>
 #include <sge/font/text/lit.hpp>
 #include <sge/console/object.hpp>
+#include <fcppt/function/object.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/function/object.hpp>
+#include <fcppt/variant/apply_unary.hpp>
+#include <fcppt/variant/object_impl.hpp>
 #include <fcppt/cyclic_iterator.hpp>
 #include <fcppt/text.hpp>
 #include <algorithm>
@@ -107,7 +111,12 @@ sanguis::client::control::action_handler::handle_action(
 	control::actions::any const &_action
 )
 {
-	// TODO!
+	fcppt::variant::apply_unary(
+		control::action_visitor(
+			*this
+		),
+		_action.get()
+	);
 }
 
 void

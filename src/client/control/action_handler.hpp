@@ -51,7 +51,7 @@ public:
 	give_player_weapon(
 		sanguis::weapon_type::type
 	);
-private:
+
 	void
 	handle_binary_action(
 		control::actions::binary const &
@@ -71,7 +71,7 @@ private:
 	handle_scale_action(
 		control::actions::scale const &
 	);
-
+private:
 	void
 	handle_move_x(
 		control::key_scale
