@@ -41,7 +41,6 @@ enum type
 	player_choose_perk,
 	player_direction,
 	player_pause,
-	player_rotation,
 	player_start_shooting,
 	player_stop_shooting,
 	player_unpause,

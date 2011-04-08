@@ -83,24 +83,6 @@ sanguis::server::states::unpaused::operator()(
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
 	server::player_id const _id,
-	messages::player_rotation const &_message
-)
-{
-	context<
-		running
-	>().global_context().player_angle(
-		_id,
-		server::angle(
-			_message.get<messages::roles::angle>()
-		)
-	);
-
-	return discard_event();
-}
-
-boost::statechart::result
-sanguis::server::states::unpaused::operator()(
-	server::player_id const _id,
 	messages::player_start_shooting const &
 )
 {
@@ -220,9 +202,8 @@ sanguis::server::states::unpaused::react(
 	);
 
 	static messages::call::object<
-		boost::mpl::vector8<
+		boost::mpl::vector7<
 			messages::player_attack_dest,
-			messages::player_rotation,
 			messages::player_start_shooting,
 			messages::player_stop_shooting,
 			messages::player_change_weapon,

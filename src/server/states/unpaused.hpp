@@ -7,7 +7,6 @@
 #include "../player_id.hpp"
 #include "../../messages/player_attack_dest.hpp"
 #include "../../messages/player_direction.hpp"
-#include "../../messages/player_rotation.hpp"
 #include "../../messages/player_start_shooting.hpp"
 #include "../../messages/player_stop_shooting.hpp"
 #include "../../messages/player_change_weapon.hpp"
@@ -71,12 +70,6 @@ public:
 	operator()(
 		server::player_id,
 		messages::player_direction const &
-	);
-	
-	boost::statechart::result
-	operator()(
-		server::player_id,
-		messages::player_rotation const &
 	);
 	
 	boost::statechart::result

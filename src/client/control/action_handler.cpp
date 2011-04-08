@@ -8,7 +8,6 @@
 #include "../../messages/create.hpp"
 #include "../../messages/player_attack_dest.hpp"
 #include "../../messages/player_direction.hpp"
-#include "../../messages/player_rotation.hpp"
 #include "../../messages/player_start_shooting.hpp"
 #include "../../messages/player_stop_shooting.hpp"
 #include "../../messages/player_change_weapon.hpp"

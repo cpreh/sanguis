@@ -9,7 +9,6 @@
 #include "../entities/insert_parameters_fwd.hpp"
 #include "../entities/player_map.hpp"
 #include "../environment/load_context_fwd.hpp"
-#include "../angle.hpp"
 #include "../console_fwd.hpp"
 #include "../player_id.hpp"
 #include "../speed.hpp"
@@ -74,12 +73,6 @@ public:
 	player_change_weapon(
 		server::player_id,
 		weapon_type::type
-	);
-
-	void
-	player_angle(
-		server::player_id,
-		server::angle
 	);
 
 	void

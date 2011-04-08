@@ -11,11 +11,12 @@
 #include "../perks/create.hpp"
 #include "../perks/perk.hpp"
 #include "../weapons/weapon.hpp"
+#include "../angle.hpp"
+#include "../console.hpp"
 #include "../create_player.hpp"
 #include "../cheat.hpp"
 #include "../send_available_perks.hpp"
 #include "../log.hpp"
-#include "../console.hpp"
 #include "../../messages/remove_id.hpp"
 #include "../../messages/connect_state.hpp"
 #include "../../messages/create.hpp"
@@ -24,7 +25,9 @@
 #include <fcppt/log/object.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
+#include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/math/vector/is_null.hpp>
+#include <fcppt/math/vector/signed_angle.hpp>
 #include <fcppt/math/vector/to_angle.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
@@ -166,10 +169,41 @@ sanguis::server::global::context::player_target(
 	server::vector const &_target
 )
 {
-	players_[
-		_player_id
-	]->target(
+	// handles rotation as well
+	entities::player &player(
+		*players_[
+			_player_id
+		]
+	);
+
+	player.target(
 		_target
+	);
+
+	server::vector const player_center(
+		player.center().get()
+	);
+
+	if(
+		player_center
+		== _target
+	)
+		return;
+
+	player.angle(
+		server::angle(
+			fcppt::math::vector::signed_angle(
+				player_center,
+				_target
+			)
+		)
+	);
+
+	send_unicast_(
+		_player_id,
+		message_convert::rotate(
+			player
+		)
 	);
 }
 
@@ -183,30 +217,6 @@ sanguis::server::global::context::player_change_weapon(
 		_player_id
 	]->change_weapon(
 		_weapon
-	);
-}
-
-void
-sanguis::server::global::context::player_angle(
-	player_id const _player_id,
-	server::angle const _angle
-)
-{
-	entities::player &player(
-		*players_[
-			_player_id
-		]
-	);
-
-	player.angle(
-		_angle
-	);
-
-	send_unicast_(
-		_player_id,
-		message_convert::rotate(
-			player
-		)
 	);
 }
 
@@ -249,6 +259,7 @@ sanguis::server::global::context::player_speed(
 		);
 	else
 	{
+		// FIXME: don't set the speed to max!
 		player.direction(
 			server::direction(
 				*fcppt::math::vector::to_angle<

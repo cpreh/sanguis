@@ -712,8 +712,6 @@ SET(
 	src/messages/player_direction.hpp
 	src/messages/player_pause.cpp
 	src/messages/player_pause.hpp
-	src/messages/player_rotation.cpp
-	src/messages/player_rotation.hpp
 	src/messages/player_start_shooting.cpp
 	src/messages/player_start_shooting.hpp
 	src/messages/player_stop_shooting.cpp
