@@ -5,7 +5,7 @@
 #include "ingame_fwd.hpp"
 #include "../control/input_translator_fwd.hpp"
 #include "../control/action_handler_fwd.hpp"
-#include "../control/player_action_fwd.hpp"
+#include "../control/actions/any_fwd.hpp"
 #include "../events/message_fwd.hpp"
 #include "../events/action_fwd.hpp"
 #include "../../messages/base_fwd.hpp"
@@ -76,7 +76,7 @@ public:
 private:
 	void
 	handle_player_action(
-		control::player_action const &
+		control::actions::any const &
 	);
 
 	boost::statechart::result

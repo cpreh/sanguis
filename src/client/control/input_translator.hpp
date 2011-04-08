@@ -2,11 +2,8 @@
 #define SANGUIS_CLIENT_CONTROL_INPUT_TRANSLATOR_HPP_INCLUDED
 
 #include "input_translator_fwd.hpp"
-#include "actions/binary_callback.hpp"
-#include "actions/cursor_callback.hpp"
-#include "actions/nullary_callback.hpp"
+#include "actions/callback.hpp"
 #include "actions/nullary_type.hpp"
-#include "actions/scale_callback.hpp"
 #include "../cursor/object_fwd.hpp"
 #include <sge/input/keyboard/device_ptr.hpp>
 #include <sge/input/keyboard/key_event_fwd.hpp>
@@ -33,10 +30,7 @@ public:
 	input_translator(
 		sge::input::keyboard::device_ptr,
 		client::cursor::object &,
-		actions::binary_callback const &,
-		actions::cursor_callback const &,
-		actions::nullary_callback const &,
-		actions::scale_callback const &
+		actions::callback const &
 	);
 
 	~input_translator();
@@ -67,13 +61,7 @@ private:
 		actions::nullary_type::type
 	);
 
-	actions::binary_callback const binary_callback_;
-
-	actions::cursor_callback const cursor_callback_;
-
-	actions::nullary_callback const nullary_callback_;
-
-	actions::scale_callback const scale_callback_;
+	actions::callback const callback_;
 
 	fcppt::signal::scoped_connection const
 		key_connection_,

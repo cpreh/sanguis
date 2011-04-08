@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_EVENTS_ACTION_HPP_INCLUDED
 
 #include "action_fwd.hpp"
-#include "../control/player_action.hpp"
+#include "../control/actions/any.hpp"
 #include <fcppt/nonassignable.hpp>
 #include <boost/statechart/event.hpp>
 
@@ -24,13 +24,13 @@ class action
 	);
 public:
 	explicit action(
-		control::player_action const &
+		client::control::actions::any const &
 	);
 
-	control::player_action
+	client::control::actions::any const
 	value() const;
 private:
-	control::player_action const value_;
+	client::control::actions::any const value_;
 };
 
 }

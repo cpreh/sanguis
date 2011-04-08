@@ -1,10 +1,15 @@
 #include "ingame.hpp"
 #include "ingame_menu.hpp"
 #include "perk_chooser.hpp"
+#include "../control/actions/nullary.hpp"
+#include "../control/actions/nullary_type.hpp"
+#include "../control/actions/variant.hpp"
 #include "../events/action.hpp"
 #include "../events/message.hpp"
 #include "../events/net_error.hpp"
 #include "../events/tick.hpp"
+#include <fcppt/variant/holds_type.hpp>
+#include <fcppt/variant/object_impl.hpp>
 
 sanguis::client::states::ingame::ingame(
 	my_context _ctx
@@ -28,19 +33,37 @@ sanguis::client::states::ingame::react(
 	events::action const &_event
 )
 {
+	control::actions::variant const action(
+		_event.value().get()
+	);
+
+	if(
+		!fcppt::variant::holds_type<
+			control::actions::nullary
+		>(
+			action
+		)
+	)
+		return forward_event();
+
 	switch(
-		_event.value().type()
+		action.get<
+			control::actions::nullary
+		>().type()
 	)
 	{
-	case control::action_type::perk_menu:
-		return transit<states::perk_chooser>();
-	case control::action_type::escape:
+	case control::actions::nullary_type::perk_menu:
+		return discard_event(); // FIXME
+		//return transit<states::perk_chooser>();
+	case control::actions::nullary_type::escape:
 		context<machine>().quit();
 
 		return discard_event();
 		//return transit<states::ingame_menu>();
 	default:
+		break;
 		// forward the event to the inner state, so it can be processed normally
-		return forward_event();
 	}
+
+	return forward_event();
 }

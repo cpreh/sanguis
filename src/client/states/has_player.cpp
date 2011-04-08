@@ -98,7 +98,7 @@ sanguis::client::states::has_player::react(
 	events::action const &_event
 )
 {
-	action_handler_->handle_player_action(
+	action_handler_->handle_action(
 		_event.value()
 	);
 
@@ -130,10 +130,10 @@ sanguis::client::states::has_player::operator()(
 
 void
 sanguis::client::states::has_player::handle_player_action(
-	control::player_action const &_action
+	control::actions::any const &_action
 )
 {
-	post_event(
+	this->post_event(
 		events::action(
 			_action
 		)

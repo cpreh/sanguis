@@ -142,22 +142,26 @@ SET(
 	src/client/control/action_handler.cpp
 	src/client/control/action_handler.hpp
 	src/client/control/action_handler_fwd.hpp
+	src/client/control/actions/any.cpp
+	src/client/control/actions/any.hpp
+	src/client/control/actions/any_fwd.hpp
+	src/client/control/actions/binary.cpp
 	src/client/control/actions/binary.hpp
-	src/client/control/actions/binary_callback.hpp
 	src/client/control/actions/binary_fwd.hpp
 	src/client/control/actions/binary_type.hpp
+	src/client/control/actions/callback.hpp
+	src/client/control/actions/cursor.cpp
 	src/client/control/actions/cursor.hpp
-	src/client/control/actions/cursor_callback.hpp
 	src/client/control/actions/cursor_fwd.hpp
+	src/client/control/actions/nullary.cpp
 	src/client/control/actions/nullary.hpp
-	src/client/control/actions/nullary_callback.hpp
 	src/client/control/actions/nullary_fwd.hpp
 	src/client/control/actions/nullary_type.hpp
 	src/client/control/actions/scale.cpp
 	src/client/control/actions/scale.hpp
-	src/client/control/actions/scale_callback.hpp
 	src/client/control/actions/scale_fwd.hpp
 	src/client/control/actions/scale_type.hpp
+	src/client/control/actions/variant.hpp
 	src/client/control/attack_dest.hpp
 	src/client/control/axis_direction_max.cpp
 	src/client/control/axis_direction_max.hpp

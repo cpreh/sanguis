@@ -103,6 +103,31 @@ sanguis::client::control::action_handler::~action_handler()
 {
 }
 
+void
+sanguis::client::control::action_handler::handle_action(
+	control::actions::any const &_action
+)
+{
+	// TODO!
+}
+
+void
+sanguis::client::control::action_handler::give_player_weapon(
+	weapon_type::type const _weapon_type
+)
+{
+	owned_weapons_.at(
+		_weapon_type
+	) = true;
+
+	// we don't own any weapon so take this one
+	if(
+		current_weapon_ == weapon_type::size
+	)
+		this->change_weapon(
+			_weapon_type
+		);
+}
 
 void
 sanguis::client::control::action_handler::handle_binary_action(
@@ -212,24 +237,6 @@ sanguis::client::control::action_handler::handle_scale_action(
 	throw sanguis::exception(
 		FCPPT_TEXT("Invalid scale_action in action_handler!")
 	);
-}
-
-void
-sanguis::client::control::action_handler::give_player_weapon(
-	weapon_type::type const _weapon_type
-)
-{
-	owned_weapons_.at(
-		_weapon_type
-	) = true;
-
-	// we don't own any weapon so take this one
-	if(
-		current_weapon_ == weapon_type::size
-	)
-		this->change_weapon(
-			_weapon_type
-		);
 }
 
 void

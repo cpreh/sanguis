@@ -38,6 +38,8 @@ sanguis::client::states::perk_chooser::react(
 	events::action const &_event
 )
 {
+	return discard_event(); // FIXME
+#if 0
 	switch(
 		_event.value().type()
 	)
@@ -48,4 +50,5 @@ sanguis::client::states::perk_chooser::react(
 	default:
 		return discard_event(); // throw all other input away
 	}
+#endif
 }

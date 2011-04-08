@@ -5,6 +5,7 @@
 #include "direction_vector.hpp"
 #include "environment_fwd.hpp"
 #include "key_scale.hpp"
+#include "actions/any_fwd.hpp"
 #include "actions/binary_fwd.hpp"
 #include "actions/cursor_fwd.hpp"
 #include "actions/nullary_fwd.hpp"
@@ -42,6 +43,16 @@ public:
 	~action_handler();
 
 	void
+	handle_action(
+		control::actions::any const &
+	);
+
+	void
+	give_player_weapon(
+		sanguis::weapon_type::type
+	);
+private:
+	void
 	handle_binary_action(
 		control::actions::binary const &
 	);
@@ -59,11 +70,6 @@ public:
 	void
 	handle_scale_action(
 		control::actions::scale const &
-	);
-private:
-	void
-	give_player_weapon(
-		weapon_type::type
 	);
 
 	void
