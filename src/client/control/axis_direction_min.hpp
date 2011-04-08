@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_CONTROL_AXIS_DIRECTION_MIN_HPP_INCLUDED
 #define SANGUIS_CLIENT_CONTROL_AXIS_DIRECTION_MIN_HPP_INCLUDED
 
-#include "key_scale.hpp"
+#include "scalar.hpp"
 
 namespace sanguis
 {
@@ -10,7 +10,7 @@ namespace client
 namespace control
 {
 
-key_scale
+control::scalar
 axis_direction_min();
 
 }

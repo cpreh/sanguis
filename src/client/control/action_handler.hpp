@@ -5,6 +5,7 @@
 #include "direction_vector.hpp"
 #include "environment_fwd.hpp"
 #include "key_scale.hpp"
+#include "scalar.hpp"
 #include "actions/any_fwd.hpp"
 #include "actions/binary_fwd.hpp"
 #include "actions/cursor_fwd.hpp"
@@ -73,17 +74,10 @@ public:
 	);
 private:
 	void
-	handle_move_x(
+	update_direction(
+		control::scalar &,
 		control::key_scale
 	);
-
-	void
-	handle_move_y(
-		control::key_scale
-	);
-
-	void
-	update_direction();
 
 	void 
 	update_rotation();

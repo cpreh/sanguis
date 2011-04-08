@@ -1,5 +1,7 @@
 #include "action_handler.hpp"
 #include "action_visitor.hpp"
+#include "axis_direction_max.hpp"
+#include "axis_direction_min.hpp"
 #include "environment.hpp"
 #include "actions/any.hpp"
 #include "actions/binary.hpp"
@@ -22,6 +24,7 @@
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/clamp.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/variant/apply_unary.hpp>
@@ -229,13 +232,15 @@ sanguis::client::control::action_handler::handle_scale_action(
 	)
 	{
 	case actions::scale_type::horizontal_move:
-		this->handle_move_x(
+		this->update_direction(
+			direction_.x(),
 			scale
 		);
 
 		return;
 	case actions::scale_type::vertical_move:
-		this->handle_move_y(
+		this->update_direction(
+			direction_.y(),
 			scale
 		);
 
@@ -248,28 +253,19 @@ sanguis::client::control::action_handler::handle_scale_action(
 }
 
 void
-sanguis::client::control::action_handler::handle_move_x(
-	key_scale const _scale
+sanguis::client::control::action_handler::update_direction(
+	control::scalar &_result,
+	control::key_scale const _scale
 )
 {
-	direction_.x() = _scale;
+	_result += _scale;
 
-	this->update_direction();
-}
+	fcppt::math::clamp(
+		_result,
+		control::axis_direction_min(),
+		control::axis_direction_max()
+	);
 
-void
-sanguis::client::control::action_handler::handle_move_y(
-	key_scale const _scale
-)
-{
-	direction_.y() = _scale;
-
-	this->update_direction();
-}
-
-void
-sanguis::client::control::action_handler::update_direction()
-{
 	send_(
 		sanguis::messages::create(
 			sanguis::messages::player_direction(
