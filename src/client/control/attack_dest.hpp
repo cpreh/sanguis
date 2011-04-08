@@ -1,5 +1,5 @@
-#ifndef SANGUIS_CLIENT_CONTROL_DIRECTION_VECTOR_HPP_INCLUDED
-#define SANGUIS_CLIENT_CONTROL_DIRECTION_VECTOR_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_CONTROL_ATTACK_DEST_HPP_INCLUDED
+#define SANGUIS_CLIENT_CONTROL_ATTACK_DEST_HPP_INCLUDED
 
 #include "scalar.hpp"
 #include <fcppt/math/vector/static.hpp>
@@ -14,7 +14,7 @@ namespace control
 typedef fcppt::math::vector::static_<
 	control::scalar,
 	2
->::type direction_vector;
+>::type attack_dest;
 
 }
 }

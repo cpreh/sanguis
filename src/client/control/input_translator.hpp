@@ -1,9 +1,12 @@
 #ifndef SANGUIS_CLIENT_CONTROL_INPUT_TRANSLATOR_HPP_INCLUDED
 #define SANGUIS_CLIENT_CONTROL_INPUT_TRANSLATOR_HPP_INCLUDED
 
-#include "action_type.hpp"
 #include "input_translator_fwd.hpp"
-#include "player_action_fwd.hpp"
+#include "actions/binary_callback.hpp"
+#include "actions/cursor_callback.hpp"
+#include "actions/nullary_callback.hpp"
+#include "actions/nullary_type.hpp"
+#include "actions/scale_callback.hpp"
 #include "../cursor/object_fwd.hpp"
 #include <sge/input/keyboard/device_ptr.hpp>
 #include <sge/input/keyboard/key_event_fwd.hpp>
@@ -27,14 +30,13 @@ class input_translator
 		input_translator
 	);
 public:
-	typedef fcppt::function::object<
-		void (player_action const &)
-	> post_fun;
-
-	explicit input_translator(
+	input_translator(
 		sge::input::keyboard::device_ptr,
 		client::cursor::object &,
-		post_fun const &
+		actions::binary_callback const &,
+		actions::cursor_callback const &,
+		actions::nullary_callback const &,
+		actions::scale_callback const &
 	);
 
 	~input_translator();
@@ -60,28 +62,18 @@ private:
 	);
 
 	void
-	rotation_event(
-		sge::input::cursor::position_unit,
-		action_type::type
-	);
-
-	void
-	weapon_switch_event(
+	nullary_event(
 		bool pressed,
-		action_type::type
+		actions::nullary_type::type
 	);
 
-	void
-	perk_event(
-		bool pressed
-	);
+	actions::binary_callback const binary_callback_;
 
-	void
-	escape_event(
-		bool pressed
-	);
+	actions::cursor_callback const cursor_callback_;
 
-	post_fun const post_message_;
+	actions::nullary_callback const nullary_callback_;
+
+	actions::scale_callback const scale_callback_;
 
 	fcppt::signal::scoped_connection const
 		key_connection_,

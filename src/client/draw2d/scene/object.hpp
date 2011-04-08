@@ -17,7 +17,6 @@
 #include "../transform_callback.hpp"
 #include "../insert_callback.hpp"
 #include "../../control/environment_fwd.hpp"
-#include "../../cursor/object_fwd.hpp"
 #include "../../messages/add_fwd.hpp"
 #include "../../messages/visible_fwd.hpp"
 #include "../../../load/context_fwd.hpp"
@@ -61,7 +60,6 @@ public:
 		sge::font::metrics_ptr,
 		sge::font::text::drawer &,
 		sge::audio::listener &,
-		client::cursor::object &,
 		std::tm const &initial_time
 	);
 

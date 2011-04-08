@@ -4,7 +4,6 @@
 #include "../entity_type.hpp"
 #include "../log.hpp"
 #include "../perk_cast.hpp"
-#include "../cursor/object.hpp"
 #include "../events/connected.hpp"
 #include "../events/menu.hpp"
 #include "../events/message.hpp"
@@ -92,9 +91,6 @@ sanguis::client::states::running::running(
 			),
 			fcppt::ref(
 				context<machine>().audio_player()->listener()
-			),
-			fcppt::ref(
-				context<machine>().cursor()
 			),
 			daytime_settings_->current_time()
 		)

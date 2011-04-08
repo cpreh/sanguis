@@ -4,6 +4,7 @@
 #include "ingame_fwd.hpp"
 #include "has_player.hpp"
 #include "../events/action_fwd.hpp"
+#include "../cursor/scoped.hpp"
 #include <fcppt/noncopyable.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
@@ -46,6 +47,8 @@ public:
 	react(
 		events::action const &
 	);
+private:
+	client::cursor::scoped const scoped_cursor_;
 };
 
 }

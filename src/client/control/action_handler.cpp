@@ -1,6 +1,9 @@
 #include "action_handler.hpp"
-#include "player_action.hpp"
 #include "environment.hpp"
+#include "actions/binary.hpp"
+#include "actions/cursor.hpp"
+#include "actions/nullary.hpp"
+#include "actions/scale.hpp"
 #include "../log.hpp"
 #include "../../messages/create.hpp"
 #include "../../messages/player_attack_dest.hpp"
@@ -14,10 +17,9 @@
 #include <sge/time/millisecond.hpp>
 #include <sge/font/text/lit.hpp>
 #include <sge/console/object.hpp>
-#include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
-#include <fcppt/math/almost_zero.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/function/object.hpp>
@@ -47,6 +49,9 @@ sanguis::client::control::action_handler::action_handler(
 		)
 	),
 	owned_weapons_(),
+	direction_(
+		control::direction_vector::null()
+	),
 	cheat_kill_conn_(
 		_console.insert(
 			SGE_FONT_TEXT_LIT("kill"),
@@ -94,64 +99,120 @@ sanguis::client::control::action_handler::action_handler(
 	);
 }
 
+sanguis::client::control::action_handler::~action_handler()
+{
+}
+
+
 void
-sanguis::client::control::action_handler::handle_player_action(
-	player_action const &_action
+sanguis::client::control::action_handler::handle_binary_action(
+	control::actions::binary const &_action
 )
 {
-	key_scale const scale(
-		_action.scale()
+	switch(
+		_action.type()
+	)
+	{
+	case actions::binary_type::shoot:
+		this->handle_shooting(
+			_action.value()
+		);
+		return;
+	}
+
+
+	throw sanguis::exception(
+		FCPPT_TEXT("Invalid binary_action in action_handler!")
+	);
+}
+
+void
+sanguis::client::control::action_handler::handle_cursor_action(
+	control::actions::cursor const &_action
+)
+{
+	if(
+		!rotation_timer_.update_b()
+	)
+		return;
+	
+	send_(
+		sanguis::messages::create(
+			sanguis::messages::player_attack_dest(
+				fcppt::math::vector::structure_cast<
+					sanguis::messages::types::vector2
+				>(
+					environment_.translate_attack_dest(
+						_action.position()
+					)
+				)
+			)
+		)
+	);
+}
+
+void
+sanguis::client::control::action_handler::handle_nullary_action(
+	control::actions::nullary const &_action
+)
+{
+	switch(
+		_action.type()
+	)
+	{
+	case actions::nullary_type::switch_weapon_forwards:
+		this->handle_switch_weapon(
+			true
+		);
+
+		return;
+	case actions::nullary_type::switch_weapon_backwards:
+		this->handle_switch_weapon(
+			false
+		);
+
+		return;
+	case actions::nullary_type::perk_menu:
+	case actions::nullary_type::escape:
+		break;
+	}
+
+	throw sanguis::exception(
+		FCPPT_TEXT("Invalid nullary_action in action_handler!")
+	);
+}
+
+void
+sanguis::client::control::action_handler::handle_scale_action(
+	control::actions::scale const &_action
+)
+{
+	control::key_scale const scale(
+		_action.get()
 	);
 
 	switch(
 		_action.type()
 	)
 	{
-	case action_type::horizontal_move:
+	case actions::scale_type::horizontal_move:
 		this->handle_move_x(
 			scale
 		);
 
 		return;
-	case action_type::vertical_move:
+	case actions::scale_type::vertical_move:
 		this->handle_move_y(
 			scale
 		);
 
 		return;
-	case action_type::horizontal_look:
-	case action_type::vertical_look:
-		this->update_rotation();
-
-		return;
-	case action_type::shoot:
-		this->handle_shooting(
-			scale
-		);
-
-		return;
-	case action_type::switch_weapon_forwards:
-		this->handle_switch_weapon(
-			true
-		);
-
-		return;
-	case action_type::switch_weapon_backwards:
-		this->handle_switch_weapon(
-			false
-		);
-
-		return;
-	case action_type::perk_menu:
-	case action_type::escape:
-		throw sanguis::exception(
-			FCPPT_TEXT("Invalid action in action_handler!")
-		);
 	}
-}
 
-sanguis::client::control::action_handler::~action_handler()
-{}
+	throw sanguis::exception(
+		FCPPT_TEXT("Invalid scale_action in action_handler!")
+	);
+}
 
 void
 sanguis::client::control::action_handler::give_player_weapon(
@@ -176,9 +237,7 @@ sanguis::client::control::action_handler::handle_move_x(
 	key_scale const _scale
 )
 {
-	environment_.direction_x(
-		_scale
-	);
+	direction_.x() = _scale;
 
 	this->update_direction();
 }
@@ -188,9 +247,7 @@ sanguis::client::control::action_handler::handle_move_y(
 	key_scale const _scale
 )
 {
-	environment_.direction_y(
-		_scale
-	);
+	direction_.y() = _scale;
 
 	this->update_direction();
 }
@@ -204,40 +261,7 @@ sanguis::client::control::action_handler::update_direction()
 				fcppt::math::vector::structure_cast<
 					sanguis::messages::types::vector2
 				>(
-					environment_.direction()
-				)
-			)
-		)
-	);
-}
-
-void
-sanguis::client::control::action_handler::update_rotation()
-{
-	// FIXME: the rotation is still handled in the cursor
-
-	if(
-		!rotation_timer_.update_b()
-	)
-		return;
-	
-	// TODO: maybe we can kick rotation
-	// and the server can calculate it from the attack dest
-	send_(
-		sanguis::messages::create(
-			sanguis::messages::player_rotation(
-				environment_.rotation()
-			)
-		)
-	);
-
-	send_(
-		sanguis::messages::create(
-			sanguis::messages::player_attack_dest(
-				fcppt::math::vector::structure_cast<
-					sanguis::messages::types::vector2
-				>(
-					environment_.attack_dest()
+					direction_
 				)
 			)
 		)
@@ -246,23 +270,21 @@ sanguis::client::control::action_handler::update_rotation()
 
 void
 sanguis::client::control::action_handler::handle_shooting(
-	key_scale const _scale
+	bool const _value
 )
 {
 	if(
-		fcppt::math::almost_zero(
-			_scale
-		)
+		_value
 	)
 		send_(
 			sanguis::messages::create(
-				sanguis::messages::player_stop_shooting()
+				sanguis::messages::player_start_shooting()
 			)
 		);
 	else
 		send_(
 			sanguis::messages::create(
-				sanguis::messages::player_start_shooting()
+				sanguis::messages::player_stop_shooting()
 			)
 		);
 }

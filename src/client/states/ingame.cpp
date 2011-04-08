@@ -12,6 +12,9 @@ sanguis::client::states::ingame::ingame(
 :
 	my_base(
 		_ctx
+	),
+	scoped_cursor_(
+		context<machine>().cursor()
 	)
 {
 }

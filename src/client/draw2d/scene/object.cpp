@@ -69,7 +69,6 @@ sanguis::client::draw2d::scene::object::object(
 	sge::font::metrics_ptr const _font_metrics,
 	sge::font::text::drawer &_font_drawer,
 	sge::audio::listener &_audio_listener,
-	client::cursor::object &_cursor,
 	std::tm const &_current_time
 )
 :
@@ -122,9 +121,6 @@ sanguis::client::draw2d::scene::object::object(
 		>(
 			fcppt::ref(
 				*this
-			),
-			fcppt::ref(
-				_cursor
 			)
 		)
 	),

@@ -70,6 +70,12 @@ sanguis::client::cursor::object::active(
 	active_ = _active;
 }
 
+bool
+sanguis::client::cursor::object::active() const
+{
+	return active_;
+}
+
 sge::input::cursor::position const
 sanguis::client::cursor::object::position() const
 {

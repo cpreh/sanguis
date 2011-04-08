@@ -142,11 +142,29 @@ SET(
 	src/client/control/action_handler.cpp
 	src/client/control/action_handler.hpp
 	src/client/control/action_handler_fwd.hpp
-	src/client/control/action_type.hpp
+	src/client/control/actions/binary.hpp
+	src/client/control/actions/binary_callback.hpp
+	src/client/control/actions/binary_fwd.hpp
+	src/client/control/actions/binary_type.hpp
+	src/client/control/actions/cursor.hpp
+	src/client/control/actions/cursor_callback.hpp
+	src/client/control/actions/cursor_fwd.hpp
+	src/client/control/actions/nullary.hpp
+	src/client/control/actions/nullary_callback.hpp
+	src/client/control/actions/nullary_fwd.hpp
+	src/client/control/actions/nullary_type.hpp
+	src/client/control/actions/scale.cpp
+	src/client/control/actions/scale.hpp
+	src/client/control/actions/scale_callback.hpp
+	src/client/control/actions/scale_fwd.hpp
+	src/client/control/actions/scale_type.hpp
+	src/client/control/attack_dest.hpp
 	src/client/control/axis_direction_max.cpp
 	src/client/control/axis_direction_max.hpp
 	src/client/control/axis_direction_min.cpp
 	src/client/control/axis_direction_min.hpp
+	src/client/control/cursor_position.hpp
+	src/client/control/cursor_unit.hpp
 	src/client/control/direction_vector.hpp
 	src/client/control/environment.cpp
 	src/client/control/environment.hpp
@@ -155,14 +173,14 @@ SET(
 	src/client/control/input_translator.hpp
 	src/client/control/input_translator_fwd.hpp
 	src/client/control/key_scale.hpp
-	src/client/control/player_action.cpp
-	src/client/control/player_action.hpp
-	src/client/control/player_action_fwd.hpp
+	src/client/control/scalar.hpp
 	src/client/create.cpp
 	src/client/create.hpp
 	src/client/cursor/object.cpp
 	src/client/cursor/object.hpp
 	src/client/cursor/object_fwd.hpp
+	src/client/cursor/scoped.cpp
+	src/client/cursor/scoped.hpp
 	src/client/daytime_settings.cpp
 	src/client/daytime_settings.hpp
 	src/client/daytime_settings_fwd.hpp

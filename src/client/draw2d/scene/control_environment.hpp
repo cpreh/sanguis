@@ -2,11 +2,9 @@
 #define SANGUIS_CLIENT_DRAW2D_SCENE_CONTROL_ENVIRONMENT_HPP_INCLUDED
 
 #include "object_fwd.hpp"
+#include "../../control/attack_dest.hpp"
+#include "../../control/cursor_position.hpp"
 #include "../../control/environment.hpp"
-#include "../../control/direction_vector.hpp"
-#include "../../control/key_scale.hpp"
-#include "../../cursor/object_fwd.hpp"
-#include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -26,43 +24,18 @@ class control_environment
 		control_environment
 	);
 public:
-	control_environment(
-		object &,
-		client::cursor::object &
+	explicit control_environment(
+		draw2d::scene::object &
 	);
 
 	~control_environment();
+
+	client::control::attack_dest const 
+	translate_attack_dest(
+		client::control::cursor_position const &	
+	) const;
 private:
-	client::control::direction_vector const 
-	direction() const;
-
-	client::control::direction_vector const
-	attack_dest() const;
-
-	client::control::key_scale
-	rotation() const;
-
-	void
-	direction_x(
-		client::control::key_scale
-	); 
-
-	void
-	direction_y(
-		client::control::key_scale
-	);
-
-	void
-	update_direction(
-		client::control::key_scale &ref,
-		client::control::key_scale diff
-	);
-
-	scene::object &object_;
-
-	client::cursor::object &cursor_;
-
-	client::control::direction_vector direction_;
+	draw2d::scene::object &object_;
 };
 
 }

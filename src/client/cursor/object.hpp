@@ -52,6 +52,9 @@ public:
 		bool
 	);
 
+	bool
+	active() const;
+
 	sge::input::cursor::object_ptr const
 	get() const;
 private:

@@ -2,8 +2,8 @@
 #define SANGUIS_CLIENT_CONTROL_ENVIRONMENT_HPP_INCLUDED
 
 #include "environment_fwd.hpp"
-#include "direction_vector.hpp"
-#include "key_scale.hpp"
+#include "attack_dest.hpp"
+#include "cursor_position.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -21,24 +21,10 @@ class environment
 protected:
 	environment();
 public:
-	virtual direction_vector const 
-	direction() const = 0;
-
-	virtual direction_vector const
-	attack_dest() const = 0;
-
-	virtual key_scale
-	rotation() const = 0;
-
-	virtual void
-	direction_x(
-		key_scale
-	) = 0;
-
-	virtual void
-	direction_y(
-		key_scale
-	) = 0;
+	virtual control::attack_dest const 
+	translate_attack_dest(
+		control::cursor_position const &	
+	) const = 0;
 
 	virtual ~environment();
 };

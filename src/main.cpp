@@ -48,6 +48,7 @@ try
 		sanguis::args::options()
 	);
 
+#if 0
 	sge::log::global_context().apply(
 		fcppt::log::location(
 			FCPPT_TEXT("projectile")
@@ -58,6 +59,7 @@ try
 			fcppt::log::level::verbose
 		)
 	);
+#endif
 
 #if 0
 	// FIXME: why does this not work?
