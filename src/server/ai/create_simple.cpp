@@ -3,16 +3,21 @@
 #include "../entities/auto_weak_link.hpp"
 #include <fcppt/function/object.hpp>
 #include <boost/spirit/home/phoenix/core/argument.hpp>
+#include <boost/spirit/home/phoenix/object/construct.hpp>
 #include <boost/spirit/home/phoenix/object/new.hpp>
 
 sanguis::server::ai::create_function const
 sanguis::server::ai::create_simple()
 {
 	return
-		boost::phoenix::new_<
-			simple
+		boost::phoenix::construct<
+			ai::unique_ptr
 		>(
-			boost::phoenix::arg_names::arg1,
-			entities::auto_weak_link()
+			boost::phoenix::new_<
+				simple
+			>(
+				boost::phoenix::arg_names::arg1,
+				entities::auto_weak_link()
+			)
 		);
 }

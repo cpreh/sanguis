@@ -10,7 +10,7 @@ namespace server
 namespace ai
 {
 
-create_function const
+ai::create_function const
 create_simple();
 
 }

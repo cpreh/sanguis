@@ -108,6 +108,9 @@ private:
 	);
 
 	virtual void
+	on_create();
+
+	virtual void
 	on_remove();
 
 	virtual void

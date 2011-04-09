@@ -1,12 +1,13 @@
 #ifndef SANGUIS_SERVER_ENTITIES_ENEMIES_ENEMY_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_ENEMIES_ENEMY_HPP_INCLUDED
 
+#include "../auto_weak_link.hpp"
+#include "../body_velocity_combiner.hpp"
 #include "../with_ai.hpp"
 #include "../with_buffs.hpp"
 #include "../with_dim.hpp"
 #include "../with_health.hpp"
 #include "../with_velocity.hpp"
-#include "../auto_weak_link.hpp"
 #include "../movement_speed.hpp"
 #include "../../ai/create_function.hpp"
 #include "../../environment/load_context_fwd.hpp"
@@ -28,6 +29,7 @@ namespace enemies
 
 class enemy
 :
+	private body_velocity_combiner,
 	public with_ai,
 	public with_buffs,
 	public with_dim,

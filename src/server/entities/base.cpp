@@ -24,6 +24,10 @@ sanguis::server::entities::base::transfer(
 	entities::insert_parameters const &_insert_param
 )
 {
+	bool const create(
+		environment_ == 0
+	);
+
 	environment_ = &_environment;
 
 	this->on_transfer(
@@ -34,6 +38,11 @@ sanguis::server::entities::base::transfer(
 			_insert_param.angle()
 		)
 	);
+
+	if(
+		create
+	)
+		this->on_create();
 }
 
 void
@@ -100,6 +109,11 @@ void
 sanguis::server::entities::base::on_update(
 	sanguis::time_type
 )
+{
+}
+
+void
+sanguis::server::entities::base::on_create()
 {
 }
 

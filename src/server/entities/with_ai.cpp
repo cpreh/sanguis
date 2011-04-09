@@ -1,6 +1,7 @@
 #include "with_ai.hpp"
 #include "../weapons/weapon.hpp"
 #include "../ai/base.hpp"
+#include <fcppt/assert.hpp>
 
 sanguis::server::entities::with_ai::with_ai(
 	ai::create_function const &_create_ai,
@@ -36,25 +37,21 @@ sanguis::server::entities::with_ai::on_update(
 		_time
 	);
 
+	FCPPT_ASSERT(
+		ai_
+	);
+
 	ai_->update(
 		_time
 	);
 }
 
-#if 0
 void
-sanguis::server::entities::with_ai::on_transfer(
-	collision::transfer_parameters const &_param
-)
+sanguis::server::entities::with_ai::on_create()
 {
-	ai_.reset(
+	ai_.take(
 		create_ai_(
 			*this
 		)
 	);
-
-	with_ghosts::on_transfer(
-		_param
-	);
 }
-#endif

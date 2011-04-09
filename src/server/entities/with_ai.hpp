@@ -2,10 +2,9 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_AI_HPP_INCLUDED
 
 #include "with_ai_fwd.hpp"
-#include "transfer_parameters_fwd.hpp"
 #include "with_auras.hpp"
 #include "with_weapon.hpp"
-#include "../ai/unique_ptr.hpp"
+#include "../ai/scoped_ptr.hpp"
 #include "../ai/create_function.hpp"
 #include "../weapons/unique_ptr.hpp"
 #include <fcppt/noncopyable.hpp>
@@ -38,16 +37,12 @@ protected:
 		time_type
 	);
 private:
-#if 0
 	void
-	on_transfer(
-		entities::transfer_parameters const &
-	);
-#endif
+	on_create();
 
 	ai::create_function const create_ai_;
 
-	ai::unique_ptr ai_;
+	ai::scoped_ptr ai_;
 };
 
 }
