@@ -4,13 +4,13 @@
 #include "collision_groups.hpp"
 #include "../collision/circle_ghost.hpp"
 #include "../entities/base.hpp"
+#include "../entities/player.hpp"
 #include "../../messages/base.hpp"
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
-#include <fcppt/tr1/functional.hpp>
+#include <fcppt/dynamic_cast.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <boost/logic/tribool.hpp>
-#include <boost/foreach.hpp>
 
 sanguis::server::entities::exp_area::exp_area(
 	server::exp const _exp
@@ -32,16 +32,8 @@ sanguis::server::entities::exp_area::exp_area(
 				server::radius(
 					2000 // TODO
 				),
-				std::tr1::bind(
-					&exp_area::collision_begin,
-					this,
-					std::tr1::placeholders::_1
-				),
-				std::tr1::bind(
-					&exp_area::collision_end,
-					this,
-					std::tr1::placeholders::_1
-				)
+				this->body_enter_callback(),
+				this->body_exit_callback()
 			)
 		)
 	);
@@ -85,14 +77,17 @@ sanguis::server::entities::exp_area::on_remove()
 			);
 	}
 
-	BOOST_FOREACH(
-		weak_link_map::reference ref,
-		player_links_
+	for(
+		weak_link_map::iterator it(
+			player_links_.begin()
+		);
+		it != player_links_.end();
+		++it
 	)
-		dynamic_cast<
+		fcppt::dynamic_cast_<
 			player &
 		>(
-			*ref.second
+			*it->second
 		).add_exp(
 			server::exp(
 				exp_.get()
@@ -138,51 +133,48 @@ sanguis::server::entities::exp_area::server_only() const
 	return true;
 }
 
+boost::logic::tribool const
+sanguis::server::entities::exp_area::can_collide_with(
+	collision::body_base const &_base
+) const
+{
+	return
+		dynamic_cast<
+			entities::player const *
+		>(
+			&_base
+		);
+}
+
 void
-sanguis::server::entities::exp_area::collision_begin(
-	collision::body_base &_entity
+sanguis::server::entities::exp_area::body_enter(
+	collision::body_base &_body
 )
 {
-	// TODO: put this back in the base class?
-	entities::base *const base(
+	entities::base &entity(
 		dynamic_cast<
-			entities::base *
+			entities::base &
 		>(
-			&_entity
+			_body
 		)
 	);
 
-	if(
-		!base
-	)
-		return;
-
 	player_links_.insert(
-		base->id(),
-		base->link()
+		entity.id(),
+		entity.link()
 	);
 }
 
 void
-sanguis::server::entities::exp_area::collision_end(
-	collision::body_base &_entity
+sanguis::server::entities::exp_area::body_exit(
+	collision::body_base &_body
 )
 {
-	// TODO: put this back in the base class?
-	entities::base *const base(
-		dynamic_cast<
-			entities::base *
-		>(
-			&_entity
-		)
-	);
-
-	if(
-		!base
-	)
-		return;
-
 	player_links_.erase(
-		base->id()
+		dynamic_cast<
+			entities::base const &
+		>(
+			_body
+		).id()
 	);
 }

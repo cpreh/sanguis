@@ -460,6 +460,7 @@ SET(
 	src/client/messages/visible_fwd.hpp
 	src/client/music_handler.cpp
 	src/client/music_handler.hpp
+	src/client/music_handler_fwd.hpp
 	src/client/next_id.cpp
 	src/client/next_id.hpp
 	src/client/object.cpp
@@ -952,6 +953,7 @@ SET(
 	src/server/collision/body_base.cpp
 	src/server/collision/body_base.hpp
 	src/server/collision/body_base_fwd.hpp
+	src/server/collision/body_callback.hpp
 	src/server/collision/body_collision.cpp
 	src/server/collision/body_collision.hpp
 	src/server/collision/body_enter_callback.hpp
@@ -969,6 +971,8 @@ SET(
 	src/server/collision/from_sge_vector.hpp
 	src/server/collision/ghost.cpp
 	src/server/collision/ghost.hpp
+	src/server/collision/ghost_base.cpp
+	src/server/collision/ghost_base.hpp
 	src/server/collision/ghost_fwd.hpp
 	src/server/collision/ghost_unique_ptr.hpp
 	src/server/collision/global_groups.cpp

@@ -4,6 +4,7 @@
 #include "influence.hpp"
 #include "../entities/with_body_fwd.hpp"
 #include "../collision/body_base_fwd.hpp"
+#include "../collision/ghost_base.hpp"
 #include "../collision/ghost_unique_ptr.hpp"
 #include "../collision/group_vector.hpp"
 #include "../radius.hpp"
@@ -11,6 +12,7 @@
 #include "../../entity_id.hpp"
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
+#include <boost/logic/tribool_fwd.hpp>
 
 namespace sanguis
 {
@@ -20,6 +22,8 @@ namespace auras
 {
 
 class aura
+:
+	private collision::ghost_base
 {
 	FCPPT_NONCOPYABLE(
 		aura
@@ -47,13 +51,18 @@ private:
 	virtual collision::group_vector const
 	collision_groups() const;
 
+	boost::logic::tribool const
+	can_collide_with(
+		collision::body_base const &
+	) const;
+
 	void
-	collision_begin(
+	body_enter(
 		collision::body_base &
 	);
 
 	void
-	collision_end(
+	body_exit(
 		collision::body_base &
 	);
 

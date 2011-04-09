@@ -35,7 +35,7 @@ sanguis::server::collision::circle_ghost::on_body_enter(
 )
 {
 	// TODO: track objects here and emit body_enter only if they enter the circle
-	body_enter_callback_(
+	body_enter_callback_.get()(
 		_body
 	);
 }
@@ -45,7 +45,7 @@ sanguis::server::collision::circle_ghost::on_body_exit(
 	collision::body_base &_body
 )
 {
-	body_exit_callback_(
+	body_exit_callback_.get()(
 		_body
 	);
 }

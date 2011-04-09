@@ -4,11 +4,13 @@
 #include "auto_weak_link_fwd.hpp"
 #include "with_ghosts.hpp"
 #include "../collision/body_base_fwd.hpp"
+#include "../collision/ghost_base.hpp"
 #include "../center.hpp"
 #include "../exp.hpp"
 #include "../../entity_id.hpp"
 #include <fcppt/container/map_decl.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <boost/logic/tribool_fwd.hpp>
 #include <map>
 
 namespace sanguis
@@ -20,7 +22,8 @@ namespace entities
 
 class exp_area
 :
-	public entities::with_ghosts
+	public entities::with_ghosts,
+	private collision::ghost_base
 {
 	FCPPT_NONCOPYABLE(
 		exp_area
@@ -55,13 +58,18 @@ private:
 	server::center const
 	center() const;
 
+	boost::logic::tribool const
+	can_collide_with(
+		collision::body_base const &
+	) const;
+
 	void
-	collision_begin(
+	body_enter(
 		collision::body_base &
 	);
 
 	void
-	collision_end(
+	body_exit(
 		collision::body_base &
 	);
 

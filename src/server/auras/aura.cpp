@@ -3,9 +3,9 @@
 #include "../collision/circle_ghost.hpp"
 #include "../collision/ghost_unique_ptr.hpp"
 #include "../entities/with_body.hpp"
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
+#include <boost/logic/tribool.hpp>
 
 sanguis::server::auras::aura::~aura()
 {
@@ -29,16 +29,8 @@ sanguis::server::auras::aura::recreate()
 			>(
 				this->collision_groups(),
 				radius_,
-				std::tr1::bind(
-					&aura::collision_begin,
-					this,
-					std::tr1::placeholders::_1
-				),
-				std::tr1::bind(
-					&aura::collision_end,
-					this,
-					std::tr1::placeholders::_1
-				)
+				this->body_enter_callback(),
+				this->body_exit_callback()
 			)
 		);
 }
@@ -72,8 +64,16 @@ sanguis::server::auras::aura::collision_groups() const
 		);
 }
 
+boost::logic::tribool const
+sanguis::server::auras::aura::can_collide_with(
+	collision::body_base const &
+) const
+{
+	return true;
+}
+
 void
-sanguis::server::auras::aura::collision_begin(
+sanguis::server::auras::aura::body_enter(
 	collision::body_base &_base
 )
 {
@@ -87,7 +87,7 @@ sanguis::server::auras::aura::collision_begin(
 }
 
 void
-sanguis::server::auras::aura::collision_end(
+sanguis::server::auras::aura::body_exit(
 	collision::body_base &_base
 )
 {
