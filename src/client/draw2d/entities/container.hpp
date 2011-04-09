@@ -59,6 +59,7 @@ public:
 	pos() const;
 protected:
 	typedef sprite_vector::iterator iterator;
+
 	typedef sprite_vector::const_iterator const_iterator;
 
 	// entity overrides
@@ -133,7 +134,7 @@ private:
 		speed_,
 		pos_;
 	
-	sprite_vector sprites;
+	sprite_vector sprites_;
 };
 
 }

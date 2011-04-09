@@ -27,7 +27,7 @@ class own_player
 public:
 	explicit own_player(
 		model::parameters const &,
-		transform_callback const &
+		draw2d::transform_callback const &
 	);
 
 	~own_player();
@@ -37,7 +37,7 @@ private:
 		time_type
 	);
 
-	transform_callback const transform_;
+	draw2d::transform_callback const transform_;
 };
 
 }

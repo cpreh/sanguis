@@ -50,9 +50,7 @@ private:
 	using container::orientation;
 	using container::speed;
 
-	funit
-		angle_,
-		target_angle;
+	funit angle_;
 };
 
 }

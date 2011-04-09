@@ -12,28 +12,38 @@
 #include <boost/foreach.hpp>
 
 sanguis::client::draw2d::entities::container::container(
-	sprite::normal::system &normal_system_,
-	size_type const sz,
-	sprite::order const order
+	sprite::normal::system &_normal_system,
+	size_type const _size,
+	sprite::order const _order
 )
 :
 	base(),
 	with_orientation(),
 	with_speed(),
-	speed_(vector2::null()),
-	pos_(vector2::null())
+	speed_(
+		vector2::null()
+	),
+	pos_(
+		vector2::null()
+	)
 {
-	sprites.reserve(sz);
+	sprites_.reserve(
+		_size
+	);
 
-	for(size_type i = 0; i < sz; ++i)
-		sprites.push_back(
+	for(
+		size_type i = 0;
+		i < _size;
+		++i
+	)
+		sprites_.push_back(
 			object(
 				sprite::normal::parameters()
 				.system(
-					&normal_system_
+					&_normal_system
 				)
 				.order(
-					order
+					_order
 				)
 				.elements()
 			)
@@ -47,25 +57,28 @@ sanguis::client::draw2d::entities::container::~container()
 sanguis::client::draw2d::sprite::point const
 sanguis::client::draw2d::entities::container::center() const
 {
-	return sge::sprite::center(
-		master()
-	);
+	return
+		sge::sprite::center(
+			this->master()
+		);
 }
 
 sanguis::client::draw2d::sprite::point const
 sanguis::client::draw2d::entities::container::pos() const
 {
-	return master().pos();
+	return
+		this->master().pos();
 }
 
 void
 sanguis::client::draw2d::entities::container::update(
-	time_type const time
+	time_type const _time
 )
 {
-	pos_ += time * speed();
+	pos_ +=
+		_time * this->speed();
 
-	update_pos(
+	this->update_pos(
 		fcppt::math::vector::structure_cast<
 			sprite::point
 		>(
@@ -76,48 +89,62 @@ sanguis::client::draw2d::entities::container::update(
 
 void
 sanguis::client::draw2d::entities::container::pos(
-	sprite::point const &p
+	sprite::point const &_pos
 )
 {
-	pos_ = fcppt::math::vector::structure_cast<
-		vector2
-	>(
-		p
-	);
+	pos_ =
+		fcppt::math::vector::structure_cast<
+			vector2
+		>(
+			_pos
+		);
 
-	update_pos(p);
+	this->update_pos(
+		_pos
+	);
 }
 
 void
 sanguis::client::draw2d::entities::container::dim(
-	sprite::dim const &d
+	sprite::dim const &_dim
 )
 {
-	BOOST_FOREACH(object &s, sprites)
-		s.size(d);
+	BOOST_FOREACH(
+		object &cur,
+		sprites_
+	)
+		cur.size(
+			_dim
+		);
 }
 
 void
 sanguis::client::draw2d::entities::container::orientation(
-	sprite::rotation_type const o
+	sprite::rotation_type const _orientation
 )
 {
-	BOOST_FOREACH(object &s, sprites)
-		s.rotation(o);
+	BOOST_FOREACH(
+		object &cur,
+		sprites_
+	)
+		cur.rotation(
+			_orientation
+		);
 }
 
 sanguis::client::draw2d::sprite::rotation_type
 sanguis::client::draw2d::entities::container::orientation() const
 {
-	return master().rotation();
+	return
+		this->master().rotation();
 }
 
 void
 sanguis::client::draw2d::entities::container::speed(
-	vector2 const &s
+	vector2 const &_speed
 )
 {
-	speed_ = s;
+	speed_ = _speed;
 }
 
 sanguis::client::draw2d::vector2 const
@@ -128,63 +155,80 @@ sanguis::client::draw2d::entities::container::speed() const
 
 sanguis::client::draw2d::entities::container::object &
 sanguis::client::draw2d::entities::container::at(
-	sprite::index const &i
+	sprite::index const &_index
 )
 {
-	return sprites.at(i.get());
+	return
+		sprites_.at(
+			_index.get()
+		);
 }
 
 sanguis::client::draw2d::entities::container::object const &
 sanguis::client::draw2d::entities::container::at(
-	sprite::index const &i
+	sprite::index const &_index
 ) const
 {
-	return sprites.at(i.get());
+	return
+		sprites_.at(
+			_index.get()
+		);
 }
 
 sanguis::client::draw2d::entities::container::object &
 sanguis::client::draw2d::entities::container::master()
 {
-	return at(
-		sprite::index(0)
-	);
+	return
+		this->at(
+			sprite::index(0)
+		);
 }
 
 sanguis::client::draw2d::entities::container::object const &
 sanguis::client::draw2d::entities::container::master() const
 {
-	return const_cast<container &>(*this).master();
+	return
+		const_cast<
+			container &
+		>(
+			*this
+		).master();
 }
 
 sanguis::client::draw2d::entities::container::iterator
 sanguis::client::draw2d::entities::container::begin()
 {
-	return sprites.begin();
+	return sprites_.begin();
 }
 
 sanguis::client::draw2d::entities::container::iterator
 sanguis::client::draw2d::entities::container::end()
 {
-	return sprites.end();
+	return sprites_.end();
 }
 
 sanguis::client::draw2d::entities::container::const_iterator
 sanguis::client::draw2d::entities::container::begin() const
 {
-	return sprites.begin();
+	return sprites_.begin();
 }
 
 sanguis::client::draw2d::entities::container::const_iterator
 sanguis::client::draw2d::entities::container::end() const
 {
-	return sprites.end();
+	return sprites_.end();
 }
 
 void
 sanguis::client::draw2d::entities::container::update_pos(
-	sprite::point const &p
+	sprite::point const &_pos
 )
 {
-	BOOST_FOREACH(object &s, sprites)
-		s.pos(p);
+	BOOST_FOREACH(
+		object &cur,
+		sprites_
+	)
+		cur.pos(
+			_pos
+		);
 }

@@ -40,8 +40,7 @@ sanguis::client::draw2d::entities::player::player(
 		>(
 			0
 		)
-	),
-	target_angle(angle_)
+	)
 {
 	this->at(
 		bottom
@@ -54,10 +53,6 @@ sanguis::client::draw2d::entities::player::player(
 	).order(
 		z_ordering::player_upper
 	);
-	
-	// FIXME: put the rotation point in a config file?
-/*	at(top).rotate_around(
-		player_body_center);*/
 }
 
 sanguis::client::draw2d::entities::player::~player()
