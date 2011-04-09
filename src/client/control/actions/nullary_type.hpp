@@ -14,10 +14,11 @@ namespace nullary_type
 {
 enum type
 {
-	switch_weapon_forwards,
-	switch_weapon_backwards,
+	console,
+	escape,
 	perk_menu,
-	escape	
+	switch_weapon_forwards,
+	switch_weapon_backwards
 };
 }
 

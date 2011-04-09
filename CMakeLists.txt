@@ -136,9 +136,11 @@ SET(
 	src/client/config/settings/saver.hpp
 	src/client/config/settings/set_key.cpp
 	src/client/config/settings/set_key.hpp
-	src/client/console.cpp
-	src/client/console.hpp
-	src/client/console_fwd.hpp
+	src/client/console/activation.cpp
+	src/client/console/activation.hpp
+	src/client/console/object.cpp
+	src/client/console/object.hpp
+	src/client/console/object_fwd.hpp
 	src/client/control/action_handler.cpp
 	src/client/control/action_handler.hpp
 	src/client/control/action_handler_fwd.hpp
@@ -465,10 +467,10 @@ SET(
 	src/client/perk_cast.cpp
 	src/client/perk_cast.hpp
 	src/client/perk_container.hpp
-	src/client/screenshot.cpp
-	src/client/screenshot.hpp
 	src/client/send_callback.hpp
 	src/client/server_callback.hpp
+	src/client/states/console.cpp
+	src/client/states/console.hpp
 	src/client/states/has_player.cpp
 	src/client/states/has_player.hpp
 	src/client/states/ingame.cpp
@@ -909,6 +911,7 @@ SET(
 	src/server/ai/create_simple.cpp
 	src/server/ai/create_simple.hpp
 	src/server/ai/entity_map.hpp
+	src/server/ai/scoped_ptr.hpp
 	src/server/ai/search_new_target.cpp
 	src/server/ai/search_new_target.hpp
 	src/server/ai/simple.cpp

@@ -3,9 +3,10 @@
 
 #include "ingame_fwd.hpp"
 #include "../machine.hpp"
-#include "../music_handler.hpp"
+#include "../music_handler_fwd.hpp"
 #include "../daytime_settings_fwd.hpp"
 #include "../control/environment_fwd.hpp"
+#include "../console/object_fwd.hpp"
 #include "../draw2d/scene/object_fwd.hpp"
 #include "../events/message_fwd.hpp"
 #include "../events/net_error_fwd.hpp"
@@ -117,6 +118,9 @@ public:
 
 	client::gui::perk::chooser &
 	perk_chooser();
+
+	client::console::object &
+	console();
 private:
 	boost::statechart::result
 	handle_default_msg(
@@ -130,7 +134,9 @@ private:
 
 	sge::renderer::state::scoped const renderer_state_;
 
-	music_handler music_;
+	fcppt::scoped_ptr<
+		client::console::object
+	> console_;
 
 	fcppt::scoped_ptr<
 		client::gui::perk::chooser
@@ -143,6 +149,10 @@ private:
 	fcppt::scoped_ptr<
 		draw2d::scene::object
 	> drawer_;
+
+	fcppt::scoped_ptr<
+		client::music_handler
+	> music_;
 };
 
 }

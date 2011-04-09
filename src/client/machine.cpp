@@ -79,23 +79,8 @@ sanguis::client::machine::machine(
 	font_metrics_(_font_metrics),
 	font_drawer_(_font_drawer),
 	console_gfx_(_console_gfx),
-	console_(
-		_console_gfx,
-		keyboard_,
-		sge::input::keyboard::key_code::f1,
-		std::tr1::bind(
-			&machine::send,
-			this,
-			std::tr1::placeholders::_1
-		)
-	),
 	running_(true),
 	server_callback_(_server_callback),
-	screenshot_(
-		renderer_,
-		image_loader_,
-		keyboard_
-	),
 	cursor_(
 		_cursor
 	)
@@ -182,13 +167,6 @@ sanguis::client::machine::process(
 		_event
 	);
 
-	if(
-		console_gfx_.active()
-	)
-		console_gfx_.draw();
-
-	screenshot_.process();
-
 	return running_;
 }
 
@@ -252,10 +230,10 @@ sanguis::client::machine::font_drawer() const
 	return font_drawer_;
 }
 
-sanguis::client::console &
-sanguis::client::machine::console()
+sge::console::gfx &
+sanguis::client::machine::console_gfx()
 {
-	return console_;
+	return console_gfx_;
 }
 
 sanguis::load::context const &

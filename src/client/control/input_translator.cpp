@@ -92,6 +92,12 @@ sanguis::client::control::input_translator::key_callback(
 			_event
 		);
 		break;
+	case sge::input::keyboard::key_code::f1:
+		this->nullary_event(
+			_event.pressed(),
+			actions::nullary_type::console
+		);
+		break;
 	case sge::input::keyboard::key_code::x:
 		this->nullary_event(
 			_event.pressed(),

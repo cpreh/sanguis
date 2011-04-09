@@ -1,6 +1,7 @@
 #include "has_player.hpp"
-#include "../control/input_translator.hpp"
 #include "../control/action_handler.hpp"
+#include "../control/input_translator.hpp"
+#include "../console/object.hpp"
 #include "../events/action.hpp"
 #include "../events/menu.hpp"
 #include "../events/message.hpp"
@@ -9,7 +10,6 @@
 #include "../log.hpp"
 #include "../../messages/call/object.hpp"
 #include "../../cast_enum.hpp"
-#include <sge/console/gfx.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/output.hpp>
@@ -52,7 +52,7 @@ sanguis::client::states::has_player::has_player(
 				context<running>().control_environment()
 			),
 			fcppt::ref(
-				context<machine>().console().gfx().object()
+				context<running>().console().sge_console()
 			)
 		)
 	)

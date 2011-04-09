@@ -3,7 +3,9 @@
 #include "../daytime_settings.hpp"
 #include "../entity_type.hpp"
 #include "../log.hpp"
+#include "../music_handler.hpp"
 #include "../perk_cast.hpp"
+#include "../console/object.hpp"
 #include "../events/connected.hpp"
 #include "../events/menu.hpp"
 #include "../events/message.hpp"
@@ -22,13 +24,12 @@
 #include "../../cast_enum.hpp"
 #include <sge/audio/pool.hpp>
 #include <sge/audio/player.hpp>
-#include <sge/console/gfx.hpp>
 #include <sge/console/object.hpp>
+#include <sge/font/text/from_fcppt_string.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/state/trampoline.hpp>
-#include <sge/font/text/from_fcppt_string.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
@@ -52,9 +53,19 @@ sanguis::client::states::running::running(
 			(sge::renderer::state::bool_::clear_backbuffer = false)
 			(sge::renderer::state::bool_::clear_zbuffer = false)
 	),
-	music_(
-		context<machine>().console().gfx().object(),
-		context<machine>().resources().resources().sounds()
+	console_(
+		fcppt::make_unique_ptr<
+			client::console::object
+		>(
+			fcppt::ref(
+				context<machine>().console_gfx()
+			),
+			std::tr1::bind(
+				&machine::send,
+				&context<machine>(),
+				std::tr1::placeholders::_1
+			)
+		)
 	),
 	perk_chooser_(
 		fcppt::make_unique_ptr<
@@ -75,7 +86,7 @@ sanguis::client::states::running::running(
 			client::daytime_settings
 		>(
 			fcppt::ref(
-				context<machine>().console().gfx().object()
+				console_->sge_console()
 			)
 		)
 	),
@@ -94,6 +105,16 @@ sanguis::client::states::running::running(
 			),
 			daytime_settings_->current_time()
 		)
+	),
+	music_(
+		fcppt::make_unique_ptr<
+			client::music_handler
+		>(
+			fcppt::ref(
+				console_->sge_console()
+			),
+			context<machine>().resources().resources().sounds()
+		)
 	)
 {
 	drawer_->client_message(
@@ -104,7 +125,8 @@ sanguis::client::states::running::running(
 }
 
 sanguis::client::states::running::~running()
-{}
+{
+}
 
 boost::statechart::result
 sanguis::client::states::running::react(
@@ -119,13 +141,15 @@ sanguis::client::states::running::react(
 		_event.delta()
 	);
 
+	console_->draw();
+
 	context<machine>().resources().update(
 		_event.delta()
 	);
 
 	context<machine>().sound_pool().update();
 
-	music_.process();
+	music_->process();
 
 	return discard_event();
 }
@@ -194,7 +218,7 @@ sanguis::client::states::running::operator()(
 	sanguis::messages::console_print const &_message
 )
 {
-	context<machine>().console().gfx().object().emit_message(
+	console_->sge_console().emit_message(
 		sge::font::text::from_fcppt_string(
 			fcppt::utf8::convert(
 				_message.get<
@@ -238,7 +262,7 @@ sanguis::client::states::running::operator()(
 			<< FCPPT_TEXT('"')
 	);
 
-	context<machine>().console().register_server_command(
+	console_->register_server_command(
 		name,
 		description
 	);
@@ -294,6 +318,12 @@ sanguis::client::gui::perk::chooser &
 sanguis::client::states::running::perk_chooser()
 {
 	return *perk_chooser_;
+}
+
+sanguis::client::console::object &
+sanguis::client::states::running::console()
+{
+	return *console_;
 }
 
 boost::statechart::result

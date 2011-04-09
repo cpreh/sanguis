@@ -44,8 +44,6 @@ public:
 
 	~perk_chooser();
 
-	typedef boost::statechart::result result_type;
-
 	boost::statechart::result
 	react(
 		events::tick const &
@@ -56,7 +54,7 @@ public:
 		events::action const &
 	);
 private:
-	client::gui::perk::activation chooser_activation_;
+	client::gui::perk::activation const chooser_activation_;
 };
 
 }

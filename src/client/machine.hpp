@@ -1,14 +1,11 @@
 #ifndef SANGUIS_CLIENT_MACHINE_HPP_INCLUDED
 #define SANGUIS_CLIENT_MACHINE_HPP_INCLUDED
 
-#include "states/menu_fwd.hpp"
 #include "cursor/object_fwd.hpp"
 #include "config/settings/object_fwd.hpp"
 #include "events/tick_fwd.hpp"
 #include "gui/object_fwd.hpp"
 #include "states/menu_fwd.hpp"
-#include "console.hpp"
-#include "screenshot.hpp"
 #include "server_callback.hpp"
 #include "../load/context_fwd.hpp"
 #include "../messages/auto_ptr.hpp"
@@ -28,7 +25,7 @@
 
 #include <awl/mainloop/io_service_fwd.hpp>
 
-#include <fcppt/container/raw_vector_decl.hpp>
+#include <fcppt/function/object.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 
@@ -54,7 +51,7 @@ public:
 	machine(
 		config::settings::object &,
 		client::gui::object &,
-		server_callback const &,
+		client::server_callback const &,
 		load::context const &,
 		sge::audio::pool &,
 		sge::font::metrics_ptr,
@@ -121,8 +118,8 @@ public:
 	sge::font::text::drawer &
 	font_drawer() const;
 
-	sanguis::client::console &
-	console();
+	sge::console::gfx &
+	console_gfx();
 	
 	load::context const &
 	resources() const;
@@ -179,13 +176,9 @@ private:
 
 	sge::console::gfx &console_gfx_;
 	
-	sanguis::client::console console_;
-
 	bool running_;
 
-	server_callback const server_callback_;
-
-	screenshot screenshot_;
+	client::server_callback const server_callback_;
 
 	sanguis::client::cursor::object &cursor_;
 };

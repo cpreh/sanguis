@@ -1,7 +1,6 @@
-#include "ingame.hpp"
 #include "console.hpp"
-#include "ingame_menu.hpp"
-#include "perk_chooser.hpp"
+#include "has_player.hpp"
+#include "ingame.hpp"
 #include "../control/actions/nullary.hpp"
 #include "../control/actions/nullary_type.hpp"
 #include "../control/actions/variant.hpp"
@@ -12,25 +11,25 @@
 #include <fcppt/variant/holds_type.hpp>
 #include <fcppt/variant/object_impl.hpp>
 
-sanguis::client::states::ingame::ingame(
+sanguis::client::states::console::console(
 	my_context _ctx
 )
 :
 	my_base(
 		_ctx
 	),
-	scoped_cursor_(
-		context<machine>().cursor()
+	console_activation_(
+		context<states::running>().console()
 	)
 {
 }
 
-sanguis::client::states::ingame::~ingame()
+sanguis::client::states::console::~console()
 {
 }
 
 boost::statechart::result
-sanguis::client::states::ingame::react(
+sanguis::client::states::console::react(
 	events::action const &_event
 )
 {
@@ -53,20 +52,11 @@ sanguis::client::states::ingame::react(
 		)
 		{
 		case control::actions::nullary_type::console:
-			return transit<states::console>();
-		case control::actions::nullary_type::perk_menu:
-			return discard_event(); // FIXME
-			//return transit<states::perk_chooser>();
-		case control::actions::nullary_type::escape:
-			context<machine>().quit();
-
-			return this->discard_event();
-			//return transit<states::ingame_menu>();
+			return transit<states::ingame>();
 		default:
 			break;
-			// forward the event to the inner state, so it can be processed normally
 		}
 	}
 
-	return this->forward_event();
+	return this->discard_event();
 }

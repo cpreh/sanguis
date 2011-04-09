@@ -210,6 +210,7 @@ sanguis::client::control::action_handler::handle_nullary_action(
 		return;
 	case actions::nullary_type::perk_menu:
 	case actions::nullary_type::escape:
+	case actions::nullary_type::console:
 		break;
 	}
 

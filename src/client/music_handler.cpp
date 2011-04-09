@@ -34,52 +34,75 @@ sanguis::client::music_handler::music_handler(
 		)
 	),
 	current_()
-{}
-
-void sanguis::client::music_handler::process()
 {
-	if (!current_)
-		return;
-	
-	if (current_->status() == sge::audio::sound::play_status::stopped)
-		next_title();
 }
 
-void sanguis::client::music_handler::next_title()
+sanguis::client::music_handler::~music_handler()
+{
+}
+
+void
+sanguis::client::music_handler::process()
+{
+	if(
+		!current_
+	)
+		return;
+	
+	if(
+		current_->status() == sge::audio::sound::play_status::stopped
+	)
+		this->next_title();
+}
+
+void 
+sanguis::client::music_handler::next_title()
 {
 	sge::audio::sound::base_ptr const old(
 		current_
 	);
 	
-	current_ = load_random();
+	current_ = this->load_random();
 	
-	if(!current_)
+	if(
+		!current_
+	)
 		return;
 	
-	if(old)
+	if(
+		old
+	)
 		current_->gain(
-			old->gain());
+			old->gain()
+		);
 	
-	current_->play(sge::audio::sound::repeat::once);
+	current_->play(
+		sge::audio::sound::repeat::once
+	);
 }
 
 void
 sanguis::client::music_handler::volume(
-	sge::console::arg_list const &a,
-	sge::console::object &o
+	sge::console::arg_list const &_args,
+	sge::console::object &_object
 )
 {
-	if (!current_)
+	if(
+		!current_
+	)
 	{
-		o.emit_error(
+		_object.emit_error(
 			SGE_FONT_TEXT_LIT("no music files registered, makes no sense to set a volume")
 		);
+
 		return;
 	}
 
-	if (a.size() != 2)
+	if(
+		_args.size() != 2
+	)
 	{
-		o.emit_error(
+		_object.emit_error(
 			SGE_FONT_TEXT_LIT("invalid number of arguments")
 		);
 		return;
@@ -91,13 +114,15 @@ sanguis::client::music_handler::volume(
 			fcppt::lexical_cast<
 				sge::audio::scalar
 			>(
-				a[1]
+				_args[1]
 			)
 		);
 	}
-	catch (fcppt::bad_lexical_cast const &)
+	catch(
+		fcppt::bad_lexical_cast const &
+	)
 	{
-		o.emit_error(
+		_object.emit_error(
 			SGE_FONT_TEXT_LIT("invalid numeric argument")
 		);
 	}
@@ -109,31 +134,35 @@ sanguis::client::music_handler::load_random() const
 	// TODO: choose a random one!
 	for(
 		fcppt::filesystem::directory_iterator it(
-			media_path() / FCPPT_TEXT("music")
+			sanguis::media_path()
+			/ FCPPT_TEXT("music")
 		);
 		it != fcppt::filesystem::directory_iterator();
 		++it
 	)
 		try
 		{
-			return resource_.make(
-				resource_.load_uncached(
-					*it
-				),
-				load::sound_type::stream
-			);
+			return
+				resource_.make(
+					resource_.load_uncached(
+						*it
+					),
+					load::sound_type::stream
+				);
 		}
-		catch(sge::exception const &e)
+		catch(
+			sge::exception const &_error
+		)
 		{
 			FCPPT_LOG_WARNING(
-				log(),
+				client::log(),
 				fcppt::log::_
 					<< FCPPT_TEXT("Music file \"")
 					<< fcppt::filesystem::path_to_string(
 						it->path()
 					)
 					<< FCPPT_TEXT("\" failed to load: \"")
-					<< e.string()
+					<< _error.string()
 					<< FCPPT_TEXT("\"!")
 			);
 		}
