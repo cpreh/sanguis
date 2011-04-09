@@ -213,7 +213,9 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 )
 {
 	env_.experience(
-		_message.get<sanguis::messages::roles::experience>()
+		client::exp(
+			_message.get<sanguis::messages::roles::experience>()
+		)
 	);
 }
 
@@ -229,7 +231,9 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			_message.get<sanguis::messages::roles::entity_id>()
 		)
 	).health(
-		_message.get<sanguis::messages::roles::health>()
+		client::health(
+			_message.get<sanguis::messages::roles::health>()
+		)
 	);
 }
 
@@ -239,7 +243,9 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 )
 {
 	env_.level(
-		_message.get<sanguis::messages::level_type>()
+		client::level(
+			_message.get<sanguis::messages::level_type>()
+		)
 	);
 }
 
@@ -255,7 +261,9 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			_message.get<sanguis::messages::roles::entity_id>()
 		)
 	).max_health(
-		_message.get<sanguis::messages::roles::max_health>()
+		client::health(
+			_message.get<sanguis::messages::roles::max_health>()
+		)
 	);
 }
 

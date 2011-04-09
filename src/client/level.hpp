@@ -1,12 +1,12 @@
-#ifndef SANGUIS_SERVER_LEVEL_HPP_INCLUDED
-#define SANGUIS_SERVER_LEVEL_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_LEVEL_HPP_INCLUDED
+#define SANGUIS_CLIENT_LEVEL_HPP_INCLUDED
 
 #include "../messages/types/level.hpp"
 #include <fcppt/strong_typedef.hpp>
 
 namespace sanguis
 {
-namespace server
+namespace client
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(

@@ -6,7 +6,7 @@
 #include "../../sprite/dim.hpp"
 #include "../../sprite/colored/object.hpp"
 #include "../../sprite/colored/system.hpp"
-#include "../../../health_type.hpp"
+#include "../../../health.hpp"
 #include <sge/sprite/object_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -35,14 +35,14 @@ public:
 	
 	void
 	update_health(
-		health_type health,
-		health_type max_health
+		client::health health,
+		client::health max_health
 	);
 
-	health_type
+	client::health const
 	max_health() const;
 
-	health_type
+	client::health const	
 	health() const;
 
 	void
@@ -67,7 +67,7 @@ private:
 	sprite::dim const
 	inner_dim() const;
 
-	health_type	
+	client::health const
 	remaining_health() const;
 
 	void
@@ -77,7 +77,7 @@ private:
 		background_,
 		foreground_;
 	
-	health_type	
+	client::health
 		health_,
 		max_health_;
 };

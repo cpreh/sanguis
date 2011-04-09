@@ -15,7 +15,7 @@
 #include "../../sprite/order.hpp"
 #include "../../sprite/rotation_type.hpp"
 #include "../../vector2.hpp"
-#include "../../../health_type.hpp"
+#include "../../../health.hpp"
 #include "../../../../animation_type.hpp"
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -55,10 +55,10 @@ public:
 	~object();
 
 	// with_health overrides
-	health_type
+	client::health const
 	max_health() const;
 
-	health_type
+	client::health const	
 	health() const;
 protected:
 	virtual void
@@ -112,12 +112,12 @@ private:
 	// with_health overrides
 	void
 	health(
-		health_type
+		client::health
 	);
 
 	void
 	max_health(
-		health_type
+		client::health
 	);
 
 	// with_weapon overrides
@@ -166,7 +166,7 @@ private:
 		attacking_,
 		reloading_;
 
-	health_type
+	client::health
 		health_,
 		max_health_;
 

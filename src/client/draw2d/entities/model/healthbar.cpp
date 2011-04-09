@@ -73,8 +73,8 @@ sanguis::client::draw2d::entities::model::healthbar::~healthbar()
 
 void
 sanguis::client::draw2d::entities::model::healthbar::update_health(
-	health_type const _health,
-	health_type const _max_health
+	client::health const _health,
+	client::health const _max_health
 )
 {
 	health_ = _health;
@@ -84,13 +84,13 @@ sanguis::client::draw2d::entities::model::healthbar::update_health(
 	this->recalc_health();
 }
 
-sanguis::client::health_type
+sanguis::client::health const
 sanguis::client::draw2d::entities::model::healthbar::health() const
 {
 	return health_;
 }
 
-sanguis::client::health_type
+sanguis::client::health const
 sanguis::client::draw2d::entities::model::healthbar::max_health() const
 {
 	return max_health_;
@@ -172,7 +172,7 @@ sanguis::client::draw2d::entities::model::healthbar::inner_dim() const
 		);
 }
 
-sanguis::client::health_type
+sanguis::client::health const
 sanguis::client::draw2d::entities::model::healthbar::remaining_health() const
 {
 	return health_ / max_health_;
@@ -188,7 +188,7 @@ sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 
 	if(
 		fcppt::math::almost_zero(
-			max_health_
+			max_health_.get()
 		)
 	)
 		// TODO!
@@ -199,11 +199,11 @@ sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 			sprite::unit
 		>(
 			static_cast<
-				health_type
+				client::health::value_type
 			>(
 				this->inner_dim().w()
 			)
-			* this->remaining_health()
+			* this->remaining_health().get()
 		)
 	);
 
@@ -212,15 +212,15 @@ sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 			(sge::image::color::init::red %=
 				std::min(
 					static_cast<
-						health_type
+						client::health::value_type
 					>(
 						2.0 - 
 						2.0
 						*
-						this->remaining_health()
+						this->remaining_health().get()
 					),
 					static_cast<
-						health_type
+						client::health::value_type
 					>(
 						1
 					)
@@ -229,14 +229,14 @@ sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 			(sge::image::color::init::green %=
 				std::min(
 					static_cast<
-						health_type
+						client::health::value_type
 					>(
 						1.4
 						*
-						this->remaining_health()
+						this->remaining_health().get()
 					),
 					static_cast<
-						health_type
+						client::health::value_type
 					>(
 						0.7
 					)

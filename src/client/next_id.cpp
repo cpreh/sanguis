@@ -1,8 +1,16 @@
 #include "next_id.hpp"
-#include "invalid_id.hpp"
+#include <limits>
 
-sanguis::entity_id sanguis::client::next_id()
+// FIXME: this should not be here!
+sanguis::entity_id const
+sanguis::client::next_id()
 {
-	static entity_id id(invalid_id);
-	return --id;
+	static sanguis::entity_id id(
+		std::numeric_limits<
+			sanguis::entity_id::value_type
+		>::max()
+	);
+
+	return
+		--id;
 }

@@ -53,7 +53,7 @@ sanguis::client::draw2d::scene::message_environment::entity(
 
 void
 sanguis::client::draw2d::scene::message_environment::experience(
-	exp_type const _exp
+	client::exp const _exp
 )
 {
 	hud_.experience(
@@ -63,7 +63,7 @@ sanguis::client::draw2d::scene::message_environment::experience(
 
 void
 sanguis::client::draw2d::scene::message_environment::level(
-	level_type const _level
+	client::level const _level
 )
 {
 	hud_.level(

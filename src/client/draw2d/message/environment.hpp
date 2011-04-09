@@ -8,8 +8,8 @@
 #include "../sprite/particle/system.hpp"
 #include "../insert_callback.hpp"
 #include "../transform_callback.hpp"
-#include "../../exp_type.hpp"
-#include "../../level_type.hpp"
+#include "../../exp.hpp"
+#include "../../level.hpp"
 #include "../../../entity_id.hpp"
 #include <sge/renderer/screen_size.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -49,12 +49,12 @@ public:
 
 	virtual void
 	experience(
-		exp_type
+		client::exp
 	) = 0;
 
 	virtual void
 	level(
-		level_type
+		client::level
 	) = 0;
 
 	virtual entities::model::parameters const

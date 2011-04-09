@@ -4,6 +4,8 @@
 #include "message_environment_fwd.hpp"
 #include "object_fwd.hpp"
 #include "hud_fwd.hpp"
+#include "../../exp.hpp"
+#include "../../level.hpp"
 #include "../message/environment.hpp"
 
 namespace sanguis
@@ -48,12 +50,12 @@ private:
 
 	void
 	experience(
-		exp_type
+		client::exp
 	);
 
 	void
 	level(
-		level_type
+		client::level
 	);
 
 	entities::model::parameters const

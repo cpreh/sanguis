@@ -194,9 +194,7 @@ sanguis::client::states::running::operator()(
 	);
 
 	perk_chooser_->level_up(
-		static_cast<
-			level_type
-		>(
+		client::level(
 			_message.get<sanguis::messages::level_type>()
 		)
 	);

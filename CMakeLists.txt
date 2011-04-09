@@ -412,7 +412,7 @@ SET(
 	src/client/events/tick.cpp
 	src/client/events/tick.hpp
 	src/client/events/tick_fwd.hpp
-	src/client/exp_type.hpp
+	src/client/exp.hpp
 	src/client/from_perk_type.cpp
 	src/client/from_perk_type.hpp
 	src/client/gmtime.cpp
@@ -438,18 +438,14 @@ SET(
 	src/client/gui/perk/chooser.hpp
 	src/client/gui/perk/chooser_fwd.hpp
 	src/client/gui/perk/send_callback.hpp
-	src/client/health_type.hpp
+	src/client/health.hpp
 	src/client/id_dont_care.cpp
 	src/client/id_dont_care.hpp
-	src/client/invalid_id.cpp
-	src/client/invalid_id.hpp
-	src/client/level_type.hpp
+	src/client/level.hpp
 	src/client/log.cpp
 	src/client/log.hpp
 	src/client/machine.cpp
 	src/client/machine.hpp
-	src/client/make_screenshot_path.cpp
-	src/client/make_screenshot_path.hpp
 	src/client/music_handler.cpp
 	src/client/music_handler.hpp
 	src/client/music_handler_fwd.hpp

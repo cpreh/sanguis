@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_HEALTH_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_HEALTH_HPP_INCLUDED
 
-#include "../../health_type.hpp"
+#include "../../health.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -25,18 +25,18 @@ protected:
 public:
 	virtual void
 	health(
-		health_type
+		client::health
 	) = 0;
 
 	virtual void
 	max_health(
-		health_type
+		client::health
 	) = 0;
 
-	virtual health_type 
+	virtual client::health const
 	health() const = 0;
 
-	virtual health_type 
+	virtual client::health const
 	max_health() const = 0;
 };
 

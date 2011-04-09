@@ -105,13 +105,13 @@ sanguis::client::draw2d::entities::model::object::~object()
 {
 }
 
-sanguis::client::health_type
+sanguis::client::health const
 sanguis::client::draw2d::entities::model::object::max_health() const
 {
 	return max_health_;
 }
 
-sanguis::client::health_type
+sanguis::client::health const
 sanguis::client::draw2d::entities::model::object::health() const
 {
 	return health_;
@@ -249,7 +249,8 @@ sanguis::client::draw2d::entities::model::object::part(
 bool
 sanguis::client::draw2d::entities::model::object::dead() const
 {
-	return decay_time_ != 0;
+	return
+		decay_time_ != 0;
 }
 
 bool
@@ -264,12 +265,13 @@ sanguis::client::draw2d::entities::model::object::walking() const
 bool
 sanguis::client::draw2d::entities::model::object::has_health() const
 {
-	return this->max_health() > 0;
+	return
+		this->max_health().get() > 0;
 }
 
 void
 sanguis::client::draw2d::entities::model::object::health(
-	health_type const _health
+	client::health const _health
 )
 {
 	health_ = _health;
@@ -279,7 +281,7 @@ sanguis::client::draw2d::entities::model::object::health(
 
 void
 sanguis::client::draw2d::entities::model::object::max_health(
-	health_type const _max_health
+	client::health const _max_health
 )
 {
 	max_health_ = _max_health;
@@ -442,10 +444,6 @@ sanguis::client::draw2d::entities::model::object::update_healthbar()
 bool
 sanguis::client::draw2d::entities::model::object::animations_ended() const
 {
-	/*BOOST_FOREACH(
-		part_vector::const_reference part,
-		parts
-	)*/
 	for(
 		part_vector::const_iterator it(
 			parts_.begin()

@@ -76,18 +76,10 @@ sanguis::client::gui::perk::chooser::chooser(
 :
 	perks_(),
 	current_level_(
-		static_cast<
-			level_type
-		>(
-			0
-		)
+		0
 	),
 	consumed_levels_(
-		static_cast<
-			level_type
-		>(
-			0
-		)
+		0
 	),
 	connections_(),
 	send_callback_(_send_callback)
@@ -142,7 +134,7 @@ sanguis::client::gui::perk::chooser::perks(
 
 void
 sanguis::client::gui::perk::chooser::level_up(
-	level_type const _current_level
+	client::level const _current_level
 )
 {
 	FCPPT_ASSERT(
@@ -204,16 +196,12 @@ sanguis::client::gui::perk::chooser::activated(
 #endif
 }
 
-sanguis::client::level_type
+sanguis::client::level const
 sanguis::client::gui::perk::chooser::levels_left() const
 {
 	return
-		static_cast<
-			level_type
-		>(
-			current_level_
-			- consumed_levels_
-		);
+		current_level_
+		- consumed_levels_;
 }
 
 void
@@ -292,8 +280,8 @@ sanguis::client::gui::perk::chooser::choose_callback(
 			<< this->levels_left()
 	);
 
-	if (
-		!this->levels_left()
+	if(
+		this->levels_left().get() == 0
 	)
 		return;
 
@@ -308,7 +296,7 @@ void
 sanguis::client::gui::perk::chooser::consume_level()
 {
 	FCPPT_ASSERT(
-		this->levels_left()
+		this->levels_left().get() != 0
 	);
 
 	consumed_levels_++;

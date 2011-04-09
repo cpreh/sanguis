@@ -2,8 +2,8 @@
 #define SANGUIS_CLIENT_DRAW2D_SCENE_HUD_HPP_INCLUDED
 
 #include "hud_fwd.hpp"
-#include "../../exp_type.hpp"
-#include "../../level_type.hpp"
+#include "../../exp.hpp"
+#include "../../level.hpp"
 #include "../../../time_type.hpp"
 #include <sge/font/metrics_ptr.hpp>
 #include <sge/font/text/drawer_fwd.hpp>
@@ -32,12 +32,12 @@ public:
 
 	void
 	experience(
-		exp_type
+		client::exp
 	);
 
 	void
 	level(
-		level_type
+		client::level
 	);
 
 	void
@@ -49,9 +49,9 @@ private:
 	
 	sge::font::text::drawer &font_drawer_;
 
-	exp_type experience_;
+	client::exp experience_;
 
-	level_type level_;
+	client::level level_;
 
 	sge::time::frames_counter frames_counter_;
 };

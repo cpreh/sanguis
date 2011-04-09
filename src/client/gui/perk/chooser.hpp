@@ -4,7 +4,7 @@
 #include "chooser_fwd.hpp"
 #include "send_callback.hpp"
 #include "../object_fwd.hpp"
-#include "../../level_type.hpp"
+#include "../../level.hpp"
 #include "../../perk_container.hpp"
 #include "../../../perk_type.hpp"
 #include <fcppt/signal/connection_manager.hpp>
@@ -45,7 +45,7 @@ public:
 
 	void
 	level_up(
-		client::level_type
+		client::level
 	);
 
 	bool
@@ -58,7 +58,7 @@ public:
 private:
 	client::perk_container perks_;
 
-	client::level_type 
+	client::level
 		current_level_,
 		consumed_levels_;
 
@@ -66,7 +66,7 @@ private:
 
 	perk::send_callback const send_callback_;
 
-	level_type
+	client::level const
 	levels_left() const;
 
 	void

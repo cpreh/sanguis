@@ -8,7 +8,8 @@ namespace sanguis
 namespace client
 {
 
-entity_id next_id();
+sanguis::entity_id const
+next_id();
 
 }
 }
