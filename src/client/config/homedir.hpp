@@ -9,9 +9,12 @@ namespace client
 {
 namespace config
 {
-fcppt::filesystem::path const homedir();
+
+fcppt::filesystem::path const
+homedir();
+
 }
 }
 }
 
-#endif // SANGUIS_CLIENT_CONFIG_HOMEDIR_HPP_INCLUDED
+#endif

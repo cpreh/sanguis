@@ -11,7 +11,8 @@ namespace client
 
 fcppt::string const
 from_perk_type(
-	perk_type::type);
+	perk_type::type
+);
 
 }
 }

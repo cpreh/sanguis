@@ -20,7 +20,9 @@ sanguis::client::perk_cast(
 		);
 
 		target.push_back(
-			static_cast<perk_type::type>(
+			static_cast<
+				perk_type::type
+			>(
 				elem
 			)
 		);

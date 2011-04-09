@@ -4,9 +4,12 @@
 
 fcppt::string const
 sanguis::client::from_perk_type(
-	perk_type::type const s)
+	perk_type::type const _type
+)
 {
-	switch (s)
+	switch(
+		_type
+	)
 	{
 		case perk_type::choleric:
 			return FCPPT_TEXT("choleric");
@@ -24,7 +27,7 @@ sanguis::client::from_perk_type(
 			break;
 	}
 
-	throw exception(
+	throw sanguis::exception(
 		FCPPT_TEXT("invalid perk type in from_perk_type!")
 	);
 }

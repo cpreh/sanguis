@@ -5,7 +5,8 @@
 fcppt::filesystem::path const
 sanguis::client::config::homedir()
 {
-	return sge::config::find_config_path(
-		FCPPT_TEXT("sanguis")
-	);
+	return
+		sge::config::find_config_path(
+			FCPPT_TEXT("sanguis")
+		);
 }
