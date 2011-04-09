@@ -1,7 +1,6 @@
 #include "entity_map.hpp"
 #include "../entities/base.hpp"
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
-#include <boost/foreach.hpp>
 
 sanguis::server::world::entity_map::entity_map()
 :
@@ -11,11 +10,14 @@ sanguis::server::world::entity_map::entity_map()
 
 sanguis::server::world::entity_map::~entity_map()
 {
-	BOOST_FOREACH(
-		impl::reference ref,
-		impl_
+	for(
+		impl::iterator it(
+			impl_.begin()
+		);
+		it != impl_.end();
+		++it
 	)
-		ref.second->destroy();
+		it->second->destroy();
 }
 
 sanguis::server::world::entity_map::insert_return_type const

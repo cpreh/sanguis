@@ -36,12 +36,12 @@ protected:
 		collision::ghost_unique_ptr
 	);
 
-	void
+	virtual void
 	on_transfer(
 		entities::transfer_parameters const &
 	);
 
-	void
+	virtual void
 	on_destroy();
 
 	void
