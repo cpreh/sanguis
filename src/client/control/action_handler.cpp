@@ -259,13 +259,12 @@ sanguis::client::control::action_handler::update_direction(
 	control::key_scale const _scale
 )
 {
-	_result += _scale;
-
-	fcppt::math::clamp(
-		_result,
-		control::axis_direction_min(),
-		control::axis_direction_max()
-	);
+	_result =
+		fcppt::math::clamp(
+			_result + _scale,
+			control::axis_direction_min(),
+			control::axis_direction_max()
+		);
 
 	send_(
 		sanguis::messages::create(
