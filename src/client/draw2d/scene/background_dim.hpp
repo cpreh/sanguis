@@ -1,8 +1,8 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_BACKGROUND_DIM_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_BACKGROUND_DIM_HPP_INCLUDED
 
-#include "../dim2.hpp"
-#include "../entities/base_fwd.hpp"
+#include <sge/renderer/screen_size.hpp>
+#include <sge/renderer/device_ptr.hpp>
 
 namespace sanguis
 {
@@ -13,9 +13,9 @@ namespace draw2d
 namespace scene
 {
 
-dim2 const
+sge::renderer::screen_size const
 background_dim(
-	entities::base const &background
+	sge::renderer::device_ptr
 );
 
 }

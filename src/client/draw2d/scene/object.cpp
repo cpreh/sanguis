@@ -1,27 +1,22 @@
 #include "object.hpp"
-#include "message_environment.hpp"
-#include "control_environment.hpp"
-#include "screen_center.hpp"
+#include "background.hpp"
 #include "background_dim.hpp"
+#include "control_environment.hpp"
+#include "hud.hpp"
+#include "message_environment.hpp"
+#include "screen_center.hpp"
 #include "../message/dispatcher.hpp"
-#include "../factory/client.hpp"
 #include "../sprite/order.hpp"
 #include "../sprite/float_unit.hpp"
-#include "../entities/with_visibility.hpp"
 #include "../sunlight/make_color.hpp"
 #include "../sunlight/sun_angle.hpp"
-#include "../z_ordering.hpp"
 #include "../vector2.hpp"
-#include "../../invalid_id.hpp"
-#include "../../next_id.hpp"
-#include "../../log.hpp"
-#include "../../messages/add.hpp"
-#include "../../messages/visible.hpp"
-#include "../../../messages/call/object.hpp"
-#include "../../../messages/role_name.hpp"
-#include "../../../exception.hpp"
+#include "../z_ordering.hpp"
 #include "../../../load/context.hpp"
+#include "../../../messages/call/object.hpp"
+#include "../../../exception.hpp"
 
+#include <sge/image/colors.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/material.hpp>
 #include <sge/renderer/matrix4.hpp>
@@ -35,32 +30,20 @@
 #include <sge/sprite/intrusive/system_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/projection_matrix.hpp>
-#include <sge/image/colors.hpp>
 #include <sge/audio/listener.hpp>
 
 #include <fcppt/math/matrix/arithmetic.hpp>
 #include <fcppt/math/matrix/basic_impl.hpp>
-#include <fcppt/math/matrix/orthogonal_xy.hpp>
 #include <fcppt/math/matrix/static.hpp>
 #include <fcppt/math/matrix/translation.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
-#include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/math/vector/construct.hpp>
-#include <fcppt/math/vector/dim.hpp>
-#include <fcppt/log/headers.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/assert.hpp>
-#include <fcppt/dynamic_cast.hpp>
-#include <fcppt/exception.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
-
-#include <boost/foreach.hpp>
-
 #include <utility>
 
 sanguis::client::draw2d::scene::object::object(
@@ -69,7 +52,8 @@ sanguis::client::draw2d::scene::object::object(
 	sge::font::metrics_ptr const _font_metrics,
 	sge::font::text::drawer &_font_drawer,
 	sge::audio::listener &_audio_listener,
-	std::tm const &_current_time
+	std::tm const &_current_time,
+	sge::viewport::manager &_viewport_manager
 )
 :
 	resources_(_resources),
@@ -79,12 +63,17 @@ sanguis::client::draw2d::scene::object::object(
 	client_system_(rend_),
 	particle_system_(rend_),
 	hud_(
-		_font_metrics,
-		_font_drawer
+		fcppt::make_unique_ptr<
+			scene::hud
+		>(
+			_font_metrics,
+			fcppt::ref(
+				_font_drawer
+			)
+		)
 	),
 	audio_listener_(_audio_listener),
 	paused_(false),
-	background_id_(invalid_id),
 	player_center_(
 		sprite::point::null()
 	),
@@ -111,7 +100,7 @@ sanguis::client::draw2d::scene::object::object(
 				*this
 			),
 			fcppt::ref(
-				hud_
+				*hud_
 			)
 		)
 	),
@@ -139,6 +128,19 @@ sanguis::client::draw2d::scene::object::object(
 	),
 	default_transform_(
 		sge::renderer::matrix4::identity()
+	),
+	background_(
+		fcppt::make_unique_ptr<
+			scene::background
+		>(
+			_resources,
+			fcppt::ref(
+				client_system_
+			),
+			fcppt::ref(
+				_viewport_manager
+			)
+		)
 	)
 {
 	rend_->material(
@@ -201,65 +203,6 @@ sanguis::client::draw2d::scene::object::process_message(
 	);
 }
 
-sanguis::entity_id
-sanguis::client::draw2d::scene::object::client_message(
-	client::messages::add const &_message
-)
-{
-	typedef std::pair<
-		entity_map::iterator,
-		bool
-	> ret_type;
-	
-	ret_type const ret(
-		entities_.insert(
-			client::next_id(),
-			factory::client(
-				client_system(),
-				resources_.resources().textures(),
-				_message.type(),
-				this->screen_size()
-			)
-		)
-	);
-	
-	if(
-		ret.second == false
-	)
-		throw sanguis::exception(
-			FCPPT_TEXT("Client object with id already in entity list!")
-		);
-	
-	entity_id const id(
-		ret.first->first
-	);
-
-	if(
-		_message.type() == client::entity_type::background
-	)
-		background_id_ = id;
-
-	// FIXME: configure the object here, too!
-	//
-	return id;
-}
-
-void
-sanguis::client::draw2d::scene::object::client_message(
-	client::messages::visible const &_message
-)
-{
-	fcppt::dynamic_cast_<
-		entities::with_visibility &
-	>(
-		this->entity(
-			_message.id()
-		)
-	).visible(
-		_message.get()
-	);
-}
-
 void
 sanguis::client::draw2d::scene::object::draw(
 	time_type const _delta
@@ -304,7 +247,7 @@ sanguis::client::draw2d::scene::object::draw(
 
 	this->render_systems();
 
-	hud_.update(
+	hud_->update(
 		_delta
 	);
 }
@@ -334,10 +277,6 @@ sanguis::client::draw2d::scene::object::control_environment() const
 void
 sanguis::client::draw2d::scene::object::render_systems()
 {
-	FCPPT_ASSERT(
-		background_id_ != invalid_id
-	);
-
 	sge::renderer::state::scoped const state(
 		rend_,
 		sge::sprite::render_states<
@@ -387,11 +326,6 @@ sanguis::client::draw2d::scene::object::render_systems()
 		sge::renderer::matrix_mode::world,
 		default_transform_
 	);
-
-	client_system_.render_advanced(
-		z_ordering::cursor,
-		sge::sprite::default_equal()
-	);
 }
 
 void
@@ -420,34 +354,8 @@ sanguis::client::draw2d::scene::object::render_lighting()
 		)
 	);
 
-	rend_->transform(
-		sge::renderer::matrix_mode::texture,
-		fcppt::math::matrix::translation(
-			fcppt::math::vector::construct(
-				-translation
-				/
-				scene::background_dim(
-					this->entity(
-						background_id_
-					)
-				),
-				0.f
-			)
-		)
-	);
-
-	client_system_.render_advanced(
-		z_ordering::background,
-		sge::sprite::default_equal()
-	);
-
-	rend_->transform(
-		sge::renderer::matrix_mode::texture,
-		fcppt::math::matrix::static_<
-			sprite::float_unit,
-			4,
-			4
-		>::type::identity()
+	background_->render(
+		translation
 	);
 
 	rend_->transform(
@@ -457,7 +365,11 @@ sanguis::client::draw2d::scene::object::render_lighting()
 		fcppt::math::matrix::translation(
 			translation.x(),
 			translation.y(),
-			static_cast<sprite::float_unit>(0)
+			static_cast<
+				sprite::float_unit
+			>(
+				0
+			)
 		)
 	);
 	
@@ -495,27 +407,14 @@ sanguis::client::draw2d::scene::object::insert(
 	if(
 		!ret.second
 	)
-	{
-		FCPPT_LOG_ERROR(
-			client::log(),
-			fcppt::log::_
-				<< FCPPT_TEXT("Tried to insert object with id ")
-				<< _id
-				<< FCPPT_TEXT(" twice!")
-		);
-
-		// FIXME: why does this still happen?
-#if 0
-		throw exception(
+		throw sanguis::exception(
 			(
 				fcppt::format(
 					FCPPT_TEXT("draw: Tried to insert object with id %1% twice!")
 				)
-				% id
+				% _id
 			).str()
 		);
-#endif
-	}
 	
 	return *ret.first->second;
 }
@@ -562,6 +461,7 @@ sanguis::client::draw2d::scene::object::entity(
 				% _id
 			).str()
 		);
+
 	return *it->second;
 }
 
@@ -646,10 +546,8 @@ sge::renderer::screen_size const
 sanguis::client::draw2d::scene::object::screen_size() const
 {
 	return
-		fcppt::math::dim::structure_cast<
-			sge::renderer::screen_size
-		>(
-			this->viewport().get().size()
+		scene::background_dim(
+			rend_
 		);
 }
 

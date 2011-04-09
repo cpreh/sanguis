@@ -22,6 +22,7 @@
 #include <sge/input/keyboard/device_ptr.hpp>
 #include <sge/image2d/multi_loader_fwd.hpp>
 #include <sge/renderer/device_ptr.hpp>
+#include <sge/viewport/manager_fwd.hpp>
 
 #include <awl/mainloop/io_service_fwd.hpp>
 
@@ -62,7 +63,8 @@ public:
 		sge::renderer::device_ptr,
 		sge::image2d::multi_loader &,
 		sge::audio::player_ptr,
-		awl::mainloop::io_service &
+		awl::mainloop::io_service &,
+		sge::viewport::manager &
 	);
 
 	~machine();
@@ -132,6 +134,9 @@ public:
 
 	sanguis::client::gui::object &
 	gui() const;
+
+	sge::viewport::manager &
+	viewport_manager() const;
 private:
 	void
 	connect_callback();
@@ -160,6 +165,8 @@ private:
 	sge::image2d::multi_loader &image_loader_;
 
 	sge::audio::player_ptr const audio_player_;
+
+	sge::viewport::manager &viewport_manager_;
 
 	net::client::object net_;
 

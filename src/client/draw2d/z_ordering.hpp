@@ -23,7 +23,6 @@ enum type {
 	rubble,
 	healthbar_lower,
 	healthbar_upper,
-	cursor,
 	size
 };
 

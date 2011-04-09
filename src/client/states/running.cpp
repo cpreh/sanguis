@@ -1,7 +1,6 @@
 #include "running.hpp"
 #include "menu.hpp"
 #include "../daytime_settings.hpp"
-#include "../entity_type.hpp"
 #include "../log.hpp"
 #include "../music_handler.hpp"
 #include "../perk_cast.hpp"
@@ -12,16 +11,11 @@
 #include "../events/net_error.hpp"
 #include "../events/tick.hpp"
 #include "../gui/perk/chooser.hpp"
-#include "../messages/add.hpp"
-#include "../messages/visible.hpp"
-#include "../draw2d/screen_to_virtual.hpp" // FIXME
 #include "../draw2d/scene/object.hpp"
 #include "../../messages/call/object.hpp"
-#include "../../messages/move.hpp"
 #include "../../messages/create.hpp"
 #include "../../messages/player_choose_perk.hpp"
 #include "../../load/context.hpp"
-#include "../../cast_enum.hpp"
 #include <sge/audio/pool.hpp>
 #include <sge/audio/player.hpp>
 #include <sge/console/object.hpp>
@@ -30,15 +24,14 @@
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/state/trampoline.hpp>
+#include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/debug.hpp>
-#include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/utf8/convert.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 #include <boost/mpl/vector/vector10.hpp>
-#include <boost/foreach.hpp>
 
 sanguis::client::states::running::running(
 	my_context _ctx
@@ -103,7 +96,10 @@ sanguis::client::states::running::running(
 			fcppt::ref(
 				context<machine>().audio_player()->listener()
 			),
-			daytime_settings_->current_time()
+			daytime_settings_->current_time(),
+			fcppt::ref(
+				context<machine>().viewport_manager()
+			)
 		)
 	),
 	music_(
@@ -117,11 +113,6 @@ sanguis::client::states::running::running(
 		)
 	)
 {
-	drawer_->client_message(
-		client::messages::add(
-			client::entity_type::background
-		)
-	);
 }
 
 sanguis::client::states::running::~running()

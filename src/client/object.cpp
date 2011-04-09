@@ -178,7 +178,8 @@ sanguis::client::object::object(
 		sys_.renderer(),
 		sys_.image_loader(),
 		sys_.audio_player(),
-		*io_service_
+		*io_service_,
+		sys_.viewport_manager()
 	),
 	frame_timer_(
 		sge::time::second(1)

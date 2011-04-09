@@ -237,8 +237,6 @@ SET(
 	src/client/draw2d/entities/player_fwd.hpp
 	src/client/draw2d/entities/sentry.cpp
 	src/client/draw2d/entities/sentry.hpp
-	src/client/draw2d/entities/simple_sprite.cpp
-	src/client/draw2d/entities/simple_sprite.hpp
 	src/client/draw2d/entities/with_health.cpp
 	src/client/draw2d/entities/with_health.hpp
 	src/client/draw2d/entities/with_orientation.cpp
@@ -251,8 +249,6 @@ SET(
 	src/client/draw2d/entities/with_weapon.hpp
 	src/client/draw2d/factory/aoe_projectile.cpp
 	src/client/draw2d/factory/aoe_projectile.hpp
-	src/client/draw2d/factory/client.cpp
-	src/client/draw2d/factory/client.hpp
 	src/client/draw2d/factory/enemy.cpp
 	src/client/draw2d/factory/enemy.hpp
 	src/client/draw2d/factory/friend.cpp
@@ -265,8 +261,6 @@ SET(
 	src/client/draw2d/factory/player.hpp
 	src/client/draw2d/factory/projectile.cpp
 	src/client/draw2d/factory/projectile.hpp
-	src/client/draw2d/factory/simple_sprite.cpp
-	src/client/draw2d/factory/simple_sprite.hpp
 	src/client/draw2d/factory/weapon_pickup.cpp
 	src/client/draw2d/factory/weapon_pickup.hpp
 	src/client/draw2d/funit.hpp
@@ -322,8 +316,13 @@ SET(
 	src/client/draw2d/particle/velocity_range.hpp
 	src/client/draw2d/particle/z_ordering.cpp
 	src/client/draw2d/particle/z_ordering.hpp
+	src/client/draw2d/scene/background.cpp
+	src/client/draw2d/scene/background.hpp
 	src/client/draw2d/scene/background_dim.cpp
 	src/client/draw2d/scene/background_dim.hpp
+	src/client/draw2d/scene/background_fwd.hpp
+	src/client/draw2d/scene/background_repetition.cpp
+	src/client/draw2d/scene/background_repetition.hpp
 	src/client/draw2d/scene/control_environment.cpp
 	src/client/draw2d/scene/control_environment.hpp
 	src/client/draw2d/scene/hud.cpp
@@ -397,7 +396,6 @@ SET(
 	src/client/draw2d/virtual_to_screen.cpp
 	src/client/draw2d/virtual_to_screen.hpp
 	src/client/draw2d/z_ordering.hpp
-	src/client/entity_type.hpp
 	src/client/events/action.cpp
 	src/client/events/action.hpp
 	src/client/events/action_fwd.hpp
@@ -452,12 +450,6 @@ SET(
 	src/client/machine.hpp
 	src/client/make_screenshot_path.cpp
 	src/client/make_screenshot_path.hpp
-	src/client/messages/add.cpp
-	src/client/messages/add.hpp
-	src/client/messages/add_fwd.hpp
-	src/client/messages/visible.cpp
-	src/client/messages/visible.hpp
-	src/client/messages/visible_fwd.hpp
 	src/client/music_handler.cpp
 	src/client/music_handler.hpp
 	src/client/music_handler_fwd.hpp

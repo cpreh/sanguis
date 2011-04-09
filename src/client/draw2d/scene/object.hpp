@@ -2,35 +2,35 @@
 #define SANGUIS_CLIENT_DRAW2D_SCENE_OBJECT_HPP_INCLUDED
 
 #include "object_fwd.hpp"
-#include "hud.hpp"
+#include "background_fwd.hpp"
+#include "hud_fwd.hpp"
 #include "message_environment_fwd.hpp"
-#include "../message/environment_fwd.hpp"
-#include "../message/dispatcher_fwd.hpp"
 #include "../entities/auto_ptr.hpp"
 #include "../entities/base_fwd.hpp"
+#include "../message/environment_fwd.hpp"
+#include "../message/dispatcher_fwd.hpp"
 #include "../sprite/client/system.hpp"
 #include "../sprite/normal/system.hpp"
 #include "../sprite/colored/system.hpp"
 #include "../sprite/particle/system.hpp"
 #include "../sprite/point.hpp"
 #include "../sprite/matrix.hpp"
-#include "../transform_callback.hpp"
 #include "../insert_callback.hpp"
+#include "../transform_callback.hpp"
 #include "../../control/environment_fwd.hpp"
-#include "../../messages/add_fwd.hpp"
-#include "../../messages/visible_fwd.hpp"
 #include "../../../load/context_fwd.hpp"
 #include "../../../load/model/collection_fwd.hpp"
 #include "../../../messages/base.hpp"
 #include "../../../entity_id.hpp"
 #include "../../../time_type.hpp"
-#include <sge/sprite/intrusive/system_decl.hpp>
+#include <sge/audio/listener_fwd.hpp>
+#include <sge/font/metrics_ptr.hpp>
+#include <sge/font/text/drawer_fwd.hpp>
 #include <sge/renderer/device_ptr.hpp>
 #include <sge/renderer/screen_size.hpp>
 #include <sge/renderer/viewport.hpp>
-#include <sge/font/metrics_ptr.hpp>
-#include <sge/font/text/drawer_fwd.hpp>
-#include <sge/audio/listener_fwd.hpp>
+#include <sge/sprite/intrusive/system_decl.hpp>
+#include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/math/matrix/basic_decl.hpp>
@@ -60,7 +60,8 @@ public:
 		sge::font::metrics_ptr,
 		sge::font::text::drawer &,
 		sge::audio::listener &,
-		std::tm const &initial_time
+		std::tm const &initial_time,
+		sge::viewport::manager &
 	);
 
 	~object();
@@ -68,16 +69,6 @@ public:
 	void
 	process_message(
 		sanguis::messages::base const &
-	);
-
-	entity_id
-	client_message(
-		sanguis::client::messages::add const &
-	);
-
-	void
-	client_message(
-		sanguis::client::messages::visible const &
 	);
 
 	void
@@ -111,17 +102,17 @@ private:
 	entities::base &	
 	insert(
 		entities::auto_ptr,
-		entity_id
+		sanguis::entity_id
 	);
 
 	void
 	remove(
-		entity_id
+		sanguis::entity_id
 	);
 
 	entities::base &
 	entity(
-		entity_id
+		sanguis::entity_id
 	);
 
 	sprite::point const
@@ -171,13 +162,13 @@ private:
 
 	sprite::particle::system particle_system_;
 
-	hud hud_;
+	fcppt::scoped_ptr<
+		scene::hud
+	> const hud_;
 
 	sge::audio::listener &audio_listener_;
 
 	bool paused_;
-
-	entity_id background_id_;
 
 	sprite::point player_center_;
 
@@ -187,18 +178,18 @@ private:
 
 	fcppt::scoped_ptr<
 		message::environment
-	> message_environment_;
+	> const message_environment_;
 
 	fcppt::scoped_ptr<
 		control::environment
-	> control_environment_;
+	> const control_environment_;
 
 	fcppt::scoped_ptr<
 		message::dispatcher
-	> message_dispatcher_;
+	> const message_dispatcher_;
 
 	typedef boost::ptr_map<
-		entity_id,
+		sanguis::entity_id,
 		entities::base
 	> entity_map;
 
@@ -207,6 +198,10 @@ private:
 	std::tm current_time_;
 
 	sprite::matrix const default_transform_;
+
+	fcppt::scoped_ptr<
+		scene::background
+	> const background_;
 };
 
 }

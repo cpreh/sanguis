@@ -35,7 +35,8 @@ sanguis::client::machine::machine(
 	sge::renderer::device_ptr const _renderer,
 	sge::image2d::multi_loader &_image_loader,
 	sge::audio::player_ptr const _audio_player,
-	awl::mainloop::io_service &_io_service
+	awl::mainloop::io_service &_io_service,
+	sge::viewport::manager &_viewport_manager
 )
 :
 	settings_(_settings),
@@ -45,6 +46,7 @@ sanguis::client::machine::machine(
 	renderer_(_renderer),
 	image_loader_(_image_loader),
 	audio_player_(_audio_player),
+	viewport_manager_(_viewport_manager),
 	net_(
 		_io_service
 	),
@@ -258,6 +260,12 @@ sanguis::client::gui::object &
 sanguis::client::machine::gui() const
 {
 	return gui_;
+}
+
+sge::viewport::manager &
+sanguis::client::machine::viewport_manager() const
+{
+	return viewport_manager_;
 }
 
 void
