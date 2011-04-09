@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_FRIEND_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_FRIEND_HPP_INCLUDED
 
+#include "body_velocity_combiner.hpp"
 #include "with_ai.hpp"
 #include "with_buffs.hpp"
 #include "with_dim.hpp"
@@ -25,6 +26,7 @@ namespace entities
 
 class friend_
 :
+	private body_velocity_combiner,
 	public with_ai,
 	public with_buffs,
 	public with_dim,
