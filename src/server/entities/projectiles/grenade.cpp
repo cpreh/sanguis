@@ -81,7 +81,7 @@ sanguis::server::entities::projectiles::grenade::on_transfer(
 		)
 	);
 
-	with_body::on_transfer(
+	entities::with_body::on_transfer(
 		_param
 	);
 }

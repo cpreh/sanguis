@@ -7,4 +7,8 @@ sanguis::creator::generator::car_park(
 	generator::parameters const &
 )
 {
+	return
+		generator::result(
+			geometry::shape_container()
+		); // FIXME:
 }

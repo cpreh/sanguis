@@ -19,6 +19,9 @@ class disconnect
 		disconnect
 	>
 {
+	FCPPT_NONASSIGNABLE(
+		disconnect
+	);
 public:
 	explicit disconnect(
 		net::id
