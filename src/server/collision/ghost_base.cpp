@@ -1,6 +1,7 @@
 #include "ghost_base.hpp"
 #include <fcppt/function/object.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <boost/logic/tribool.hpp>
 
 sanguis::server::collision::ghost_base::ghost_base()
 {
@@ -42,9 +43,14 @@ sanguis::server::collision::ghost_base::collision_begin(
 	collision::body_base &_body
 )
 {
-	this->body_enter(
-		_body
-	);
+	if(
+		this->can_collide_with(
+			_body
+		)
+	)
+		this->body_enter(
+			_body
+		);
 }
 
 void
@@ -52,7 +58,12 @@ sanguis::server::collision::ghost_base::collision_end(
 	collision::body_base &_body
 )
 {
-	this->body_exit(
-		_body
-	);
+	if(
+		this->can_collide_with(
+			_body
+		)
+	)
+		this->body_exit(
+			_body
+		);
 }
