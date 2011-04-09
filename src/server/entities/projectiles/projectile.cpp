@@ -85,7 +85,7 @@ sanguis::server::entities::projectiles::projectile::team() const
 bool
 sanguis::server::entities::projectiles::projectile::server_only() const
 {
-	return server_only_;	
+	return server_only_;
 }
 
 bool
@@ -141,6 +141,10 @@ sanguis::server::entities::projectiles::projectile::add_message(
 	player_id const
 ) const
 {
+	FCPPT_ASSERT(
+		!this->server_only()
+	);
+
 	return
 		messages::create(
 			messages::add_projectile(

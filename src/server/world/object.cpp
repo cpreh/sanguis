@@ -481,6 +481,11 @@ sanguis::server::world::object::remove_sight_range(
 		it != entities_.end()
 	);
 
+	if(
+		it->second->server_only()
+	)
+		return;
+
 	this->send_player_specific(
 		_player_id,
 		it->second->dead()
@@ -579,10 +584,6 @@ sanguis::server::world::object::update_entity(
 		entity.dead()
 	)
 	{
-		this->update_entity_health(
-			entity
-		);
-
 		entities_.erase(
 			_it
 		);
@@ -634,20 +635,10 @@ sanguis::server::world::object::update_entity(
 			)
 		);
 
-	this->update_entity_health(
-		entity
-	);
-}
-
-void
-sanguis::server::world::object::update_entity_health(
-	entities::base &_entity
-)
-{
 	FCPPT_TRY_DYNAMIC_CAST(
 		entities::with_health const *,
 		with_health,
-		&_entity
+		&entity
 	)
 		this->send_entity_specific(
 			with_health->id(),

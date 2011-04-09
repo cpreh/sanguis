@@ -177,11 +177,6 @@ private:
 		bool update_pos
 	);
 
-	void
-	update_entity_health(
-		entities::base &
-	);
-
 	world::context &global_context_;
 
 	server::environment::load_context &load_context_;
