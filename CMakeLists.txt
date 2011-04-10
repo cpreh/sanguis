@@ -321,8 +321,8 @@ SET(
 	src/client/draw2d/scene/background_dim.cpp
 	src/client/draw2d/scene/background_dim.hpp
 	src/client/draw2d/scene/background_fwd.hpp
-	src/client/draw2d/scene/background_repetition.cpp
-	src/client/draw2d/scene/background_repetition.hpp
+	src/client/draw2d/scene/background_texture_coordinates.cpp
+	src/client/draw2d/scene/background_texture_coordinates.hpp
 	src/client/draw2d/scene/control_environment.cpp
 	src/client/draw2d/scene/control_environment.hpp
 	src/client/draw2d/scene/hud.cpp
@@ -341,8 +341,8 @@ SET(
 	src/client/draw2d/sprite/client/choices.hpp
 	src/client/draw2d/sprite/client/object.hpp
 	src/client/draw2d/sprite/client/parameters.hpp
-	src/client/draw2d/sprite/client/repetition_type.hpp
 	src/client/draw2d/sprite/client/system.hpp
+	src/client/draw2d/sprite/client/texture_coordinates.hpp
 	src/client/draw2d/sprite/client/type_choices.hpp
 	src/client/draw2d/sprite/colored/choices.hpp
 	src/client/draw2d/sprite/colored/color.hpp
@@ -371,7 +371,6 @@ SET(
 	src/client/draw2d/sprite/particle/texture_animation.hpp
 	src/client/draw2d/sprite/particle/type_choices.hpp
 	src/client/draw2d/sprite/point.hpp
-	src/client/draw2d/sprite/repetition.hpp
 	src/client/draw2d/sprite/rotation_type.hpp
 	src/client/draw2d/sprite/unit.hpp
 	src/client/draw2d/sunlight/basic_gradients.hpp

@@ -4,7 +4,7 @@
 #include "type_choices.hpp"
 #include <sge/sprite/choices.hpp>
 #include <sge/sprite/with_dim.hpp>
-#include <sge/sprite/with_repetition.hpp>
+#include <sge/sprite/with_texture_coordinates.hpp>
 #include <sge/sprite/with_texture.hpp>
 #include <sge/sprite/with_visibility.hpp>
 #include <sge/sprite/intrusive/tag.hpp>
@@ -25,7 +25,7 @@ typedef sge::sprite::choices<
 	type_choices,
 	boost::mpl::vector5<
 		sge::sprite::with_dim,
-		sge::sprite::with_repetition,
+		sge::sprite::with_texture_coordinates,
 		sge::sprite::with_texture,
 		sge::sprite::with_visibility,
 		sge::sprite::intrusive::tag

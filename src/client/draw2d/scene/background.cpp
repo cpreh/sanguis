@@ -1,6 +1,6 @@
 #include "background.hpp"
 #include "background_dim.hpp"
-#include "background_repetition.hpp"
+#include "background_texture_coordinates.hpp"
 #include "../sprite/client/parameters.hpp"
 #include "../sprite/dim.hpp"
 #include "../sprite/point.hpp"
@@ -9,8 +9,6 @@
 #include "../../../load/resource/context.hpp"
 #include "../../../load/resource/textures.hpp"
 #include "../../../load/resource/texture_identifier.hpp"
-#include <sge/renderer/matrix_mode.hpp>
-#include <sge/renderer/scoped_transform.hpp>
 #include <sge/sprite/default_equal.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/parameters_impl.hpp>
@@ -18,10 +16,7 @@
 #include <sge/viewport/manager.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
-#include <fcppt/math/matrix/translation.hpp>
-#include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
-#include <fcppt/math/vector/construct.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 
@@ -62,8 +57,9 @@ sanguis::client::draw2d::scene::background::background(
 		.order(
 			draw2d::z_ordering::background
 		)
-		.repetition(
-			scene::background_repetition(
+		.texture_coordinates(
+			scene::background_texture_coordinates(
+				draw2d::vector2::null(),
 				client_system_.renderer(),
 				texture_
 			)
@@ -93,32 +89,11 @@ sanguis::client::draw2d::scene::background::render(
 	draw2d::vector2 const &_translation
 )
 {
-	sge::renderer::scoped_transform const transform(
-		client_system_.renderer(),
-		sge::renderer::matrix_mode::texture,
-		fcppt::math::matrix::translation(
-			fcppt::math::vector::construct(
-				(
-					-_translation
-					/
-					fcppt::math::dim::structure_cast<
-						draw2d::vector2
-					>(
-						scene::background_dim(
-							client_system_.renderer()
-						)
-					)
-				)
-				*
-				(
-					scene::background_repetition(
-						client_system_.renderer(),
-						texture_
-					)
-				)
-				,
-				0.f
-			)
+	sprite_.texture_coordinates(
+		scene::background_texture_coordinates(
+			_translation,
+			client_system_.renderer(),
+			texture_
 		)
 	);
 
@@ -138,13 +113,6 @@ sanguis::client::draw2d::scene::background::reset_viewport()
 			scene::background_dim(
 				client_system_.renderer()
 			)
-		)
-	);
-
-	sprite_.repeat(
-		scene::background_repetition(
-			client_system_.renderer(),
-			texture_
 		)
 	);
 }
