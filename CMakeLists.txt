@@ -439,8 +439,6 @@ SET(
 	src/client/gui/perk/chooser_fwd.hpp
 	src/client/gui/perk/send_callback.hpp
 	src/client/health.hpp
-	src/client/id_dont_care.cpp
-	src/client/id_dont_care.hpp
 	src/client/level.hpp
 	src/client/log.cpp
 	src/client/log.hpp

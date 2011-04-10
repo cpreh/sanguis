@@ -5,7 +5,6 @@
 #include "decay_time.hpp"
 #include "../../log.hpp"
 #include "../../sprite/index.hpp"
-#include "../../../id_dont_care.hpp"
 #include "../../../../load/model/collection.hpp"
 #include "../../../../load/model/object.hpp"
 #include "../../../../exception.hpp"

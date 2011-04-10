@@ -4,7 +4,6 @@
 #include "../../sprite/colored/color.hpp"
 #include "../../sprite/colored/color_format.hpp"
 #include "../../sprite/unit.hpp"
-#include "../../../id_dont_care.hpp"
 #include "../../../../exception.hpp"
 #include <fcppt/format.hpp>
 #include <fcppt/math/almost_zero.hpp>
