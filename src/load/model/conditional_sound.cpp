@@ -7,38 +7,53 @@
 #include <fcppt/text.hpp>
 
 sanguis::load::model::conditional_sound::conditional_sound(
-	sge::parse::json::member_vector const &members,
-	resource::sounds const &ctx
+	sge::parse::json::member_vector const &_members,
+	resource::sounds const &_ctx
 )
 :
-	range(
+	range_(
 		static_cast<
-			probability_type
+			load::probability_type
 		>(
 			sge::parse::json::find_member_exn<
 				double
 			>(
-				members,
+				_members,
 				FCPPT_TEXT("prob")
 			)
 		)
 	),
-	rng(
-		fcppt::random::inclusive_range<probability_type>(
-			static_cast<probability_type>(0),
-			static_cast<probability_type>(1)
+	rng_(
+		fcppt::random::inclusive_range<
+			load::probability_type
+		>(
+			static_cast<
+				load::probability_type
+			>(
+				0
+			),
+			static_cast<
+				load::probability_type
+			>(
+				1
+			)
 		)
 	),
 	random_sound_(
 		sge::parse::json::find_member_exn<
 			sge::parse::json::array
 		>(
-			members,
+			_members,
 			FCPPT_TEXT("elements")
 		).elements,
-		ctx
+		_ctx
 	)
-{}
+{
+}
+
+sanguis::load::model::conditional_sound::~conditional_sound()
+{
+}
 
 sge::audio::sound::positional_ptr const
 sanguis::load::model::conditional_sound::random() const
@@ -46,10 +61,14 @@ sanguis::load::model::conditional_sound::random() const
 	// avoid the corner case in which the probability is 1
 	return
 		fcppt::math::compare(
-			range,
-			static_cast<probability_type>(1)
+			range_,
+			static_cast<
+				load::probability_type
+			>(
+				1
+			)
 		)
-		|| rng() < range
+		|| rng_() < range_
 		?
 			random_sound_.random()
 		:

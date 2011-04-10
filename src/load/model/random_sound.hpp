@@ -6,8 +6,9 @@
 #include "../resource/sounds_fwd.hpp"
 #include "../probability_type.hpp"
 #include <sge/parse/json/element_vector.hpp>
-#include <fcppt/random/uniform.hpp>
 #include <sge/audio/sound/positional_ptr.hpp>
+#include <fcppt/random/uniform.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <vector>
 
 namespace sanguis
@@ -17,11 +18,18 @@ namespace load
 namespace model
 {
 
-class random_sound {
+class random_sound
+{
+	FCPPT_NONCOPYABLE(
+		random_sound
+	);
 public:
 	random_sound(
 		sge::parse::json::element_vector const &,
-		resource::sounds const &);
+		resource::sounds const &
+	);
+	
+	~random_sound();
 
 	sge::audio::sound::positional_ptr const
 	random() const;
@@ -29,14 +37,14 @@ private:
 	sound_container sounds_;
 
 	typedef std::vector<
-		probability_type
+		load::probability_type
 	> range_vector;
 
-	range_vector ranges;
+	range_vector ranges_;
 
 	mutable fcppt::random::uniform<
-		probability_type
-	> rng; 
+		load::probability_type
+	> rng_;
 };
 
 }

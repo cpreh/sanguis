@@ -10,7 +10,6 @@ enum type
 {
 	start,
 	middle,
-	end,
 	size
 };
 

@@ -3,20 +3,17 @@
 #include "global_parameters.hpp"
 #include "find_texture.hpp"
 #include "animation_context.hpp"
-#include "../log.hpp"
 #include "../resource/texture_context.hpp"
 #include "../resource/textures.hpp"
 #include "../resource/texture_context_impl.hpp"
 #include "../../exception.hpp"
 #include <sge/renderer/dim2.hpp>
-#include <sge/parse/json/get.hpp>
+#include <sge/parse/json/get_unsigned.hpp>
 #include <sge/parse/json/find_member.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/texture/part_raw.hpp>
-#include <sge/time/millisecond.hpp>
-#include <sge/exception.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -27,10 +24,9 @@
 #include <fcppt/math/box/output.hpp>
 #include <fcppt/math/box/contains.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/make_shared_ptr.hpp>
-#include <fcppt/log/headers.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/lexical_cast.hpp>
+#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/text.hpp>
 
 namespace
 {
@@ -163,22 +159,23 @@ sanguis::load::model::animation::animation(
 			)
 		);
 
-		// TODO: this should be a scoped_ptr
 		if(
 			sounds_object
 		)
-			sounds_ =
-				fcppt::make_shared_ptr<
-					animation_sound
+			sounds_.take(
+				fcppt::make_unique_ptr<
+					model::animation_sound
 				>(
 					sounds_object->members,
 					param_.sounds()
-				);
+				)
+			);
 		else
-			sounds_ =
-				fcppt::make_shared_ptr<
+			sounds_.take(
+				fcppt::make_unique_ptr<
 					animation_sound
-				>();
+				>()
+			);
 	}
 }
 
@@ -213,7 +210,9 @@ sanguis::load::model::animation::fill_cache(
 	sge::renderer::lock_rect const &_area
 ) const
 {
-	if (!frame_cache_.empty())
+	if(
+		!frame_cache_.empty()
+	)
 		return;
 
 	// range must be specified
@@ -226,25 +225,38 @@ sanguis::load::model::animation::fill_cache(
 		).elements
 	);
 
-	if(range.size() < 2)
-		throw exception(
+	if(
+		range.size() < 2
+	)
+		throw sanguis::exception(
 			FCPPT_TEXT("range has too few elements in TODO")
 		);
 
 	sge::renderer::size_type const
 		begin(
-			sge::parse::json::get<
-				int
+			sge::parse::json::get_unsigned<
+				sge::renderer::size_type
 			>(
 				range[0]
 			)
 		),
 		end(
-			sge::parse::json::get<
-				int	
+			sge::parse::json::get_unsigned<
+				sge::renderer::size_type
 			>(
 				range[1]
 			)
+		);
+	
+	if(
+		begin >= end
+	)
+		throw sanguis::exception(
+			FCPPT_TEXT("begin/end invalid: begin = ")
+			+ fcppt::lexical_cast<fcppt::string>(begin)
+			+ FCPPT_TEXT(", end = ")
+			+ fcppt::lexical_cast<fcppt::string>(end)
+			+ FCPPT_TEXT(" in TODO!")
 		);
 
 	sge::time::unit const delay(
@@ -254,23 +266,27 @@ sanguis::load::model::animation::fill_cache(
 		)
 	);
 
-	for(sge::renderer::size_type i = begin; i != end; ++i)
+	for(
+		sge::renderer::size_type index = begin;
+		index != end;
+		++index
+	)
 	{
 		sge::renderer::lock_rect const cur_area(
 			calc_rect(
 				_area,
 				param_.cell_size(),
-				i
+				index
 			)
 		);
 
 		if(
-			!contains(
+			!fcppt::math::box::contains(
 				_area,
 				cur_area
 			)
 		)
-			throw exception(
+			throw sanguis::exception(
 				FCPPT_TEXT("Rect out of bounds in TODO")
 				FCPPT_TEXT(". Whole area of texture is ")
 				+ fcppt::lexical_cast<fcppt::string>(_area)

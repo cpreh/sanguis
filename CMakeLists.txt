@@ -520,6 +520,7 @@ SET(
 	src/load/model/collection_fwd.hpp
 	src/load/model/conditional_sound.cpp
 	src/load/model/conditional_sound.hpp
+	src/load/model/conditional_sound_fwd.hpp
 	src/load/model/context.cpp
 	src/load/model/context.hpp
 	src/load/model/context_fwd.hpp

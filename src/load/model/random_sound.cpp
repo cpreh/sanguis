@@ -12,16 +12,17 @@
 #include <fcppt/text.hpp>
 #include <fcppt/assert.hpp>
 #include <boost/foreach.hpp>
-#include <numeric>
 #include <functional>
+#include <numeric>
 
 sanguis::load::model::random_sound::random_sound(
-	sge::parse::json::element_vector const &elements,
-	resource::sounds const &ctx)
+	sge::parse::json::element_vector const &_elements,
+	resource::sounds const &_ctx
+)
 :
-	rng(
+	rng_(
 		fcppt::random::inclusive_range<
-			probability_type	
+			load::probability_type	
 		>(
 			0,
 			1
@@ -30,22 +31,24 @@ sanguis::load::model::random_sound::random_sound(
 {
 	BOOST_FOREACH(
 		sge::parse::json::element_vector::const_reference ref,
-		elements
+		_elements
 	)
 	{
 		sounds_.push_back(
-			sound(			
+			model::sound(			
 				sge::parse::json::get<
 					sge::parse::json::object
 				>(
 					ref
 				).members,
-				ctx
+				_ctx
 			)
 		);
 	}
 
-	if(sounds_.empty())
+	if(
+		sounds_.empty()
+	)
 		return;
 
 	probability_type const normalization(
@@ -59,11 +62,11 @@ sanguis::load::model::random_sound::random_sound(
 			),
 			std::tr1::bind(
 				std::plus<
-					probability_type
+					load::probability_type
 				>(),
 				std::tr1::placeholders::_1,
 				std::tr1::bind(
-					&sound::probability,
+					&model::sound::probability,
 					std::tr1::placeholders::_2
 				)
 			)
@@ -75,40 +78,51 @@ sanguis::load::model::random_sound::random_sound(
 			normalization
 		)
 	)
-		throw exception(
+		throw sanguis::exception(
 			FCPPT_TEXT("sound probabilities are 0!")
 		);
 
 	BOOST_FOREACH(
-		sound_container::const_reference r,
+		sound_container::const_reference ref,
 		sounds_
 	)
-		ranges.push_back(
-			r.probability() / normalization
+		ranges_.push_back(
+			ref.probability()
+			/ normalization
 		);
 	
-	FCPPT_ASSERT(ranges.size() == sounds_.size());
+	FCPPT_ASSERT(
+		ranges_.size() == sounds_.size()
+	);
+}
+
+sanguis::load::model::random_sound::~random_sound()
+{
 }
 
 sge::audio::sound::positional_ptr const
 sanguis::load::model::random_sound::random() const
 {
-	if(sounds_.empty())
+	if(
+		sounds_.empty()
+	)
 		return sge::audio::sound::positional_ptr();
 	
-	probability_type const number(
-		rng()
+	load::probability_type const number(
+		rng_()
 	);
 
 	for(
-		range_vector::size_type i = 0;
-		i < ranges.size();
-		++i
+		range_vector::size_type index = 0;
+		index < ranges_.size();
+		++index
 	)
-		if(number < ranges[i])
-			return sounds_[i].make();
+		if(
+			number < ranges_[index]
+		)
+			return sounds_[index].make();
 	
-	throw exception(
+	throw sanguis::exception(
 		FCPPT_TEXT("probability didn't match any sounds!")
 	);
 }

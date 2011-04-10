@@ -12,7 +12,7 @@ namespace model
 {
 
 typedef std::vector<
-	sound
+	model::sound
 > sound_container;
 
 }

@@ -15,7 +15,7 @@
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/member_vector.hpp>
 #include <sge/parse/json/member.hpp>
-#include <fcppt/shared_ptr.hpp>
+#include <fcppt/scoped_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -34,21 +34,21 @@ public:
 	animation_sound const &
 	sounds() const;
 
-	animation_context_ptr
+	model::animation_context_ptr
 	load() const;
 
 	~animation();
 
 	animation(
 		sge::parse::json::object const &,
-		global_parameters const &
+		model::global_parameters const &
 	);
 private:
 	sge::parse::json::object object_;
 
-	global_parameters param_;
+	model::global_parameters param_;
 
-	fcppt::shared_ptr<
+	fcppt::scoped_ptr<
 		animation_sound
 	> sounds_;
 

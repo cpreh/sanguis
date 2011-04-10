@@ -9,8 +9,6 @@
 #include <fcppt/assign/make_array.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 
-// TODO: when to play the end sound?
-
 sanguis::client::draw2d::entities::model::part_state::part_state(
 	load::model::part const &_part,
 	animation_type::type const _animation_type,
@@ -33,11 +31,6 @@ sanguis::client::draw2d::entities::model::part_state::part_state(
 		(
 			anim_.sounds()[
 				animation_sound_type::middle
-			]
-		)
-		(
-			anim_.sounds()[
-				animation_sound_type::end
 			]
 		)
 	),
