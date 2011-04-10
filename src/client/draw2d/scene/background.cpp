@@ -21,6 +21,7 @@
 #include <fcppt/math/matrix/translation.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/construct.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 
@@ -97,15 +98,25 @@ sanguis::client::draw2d::scene::background::render(
 		sge::renderer::matrix_mode::texture,
 		fcppt::math::matrix::translation(
 			fcppt::math::vector::construct(
-				-_translation
-				/
-				fcppt::math::dim::structure_cast<
-					draw2d::vector2
-				>(
-					scene::background_dim(
-						client_system_.renderer()
+				(
+					-_translation
+					/
+					fcppt::math::dim::structure_cast<
+						draw2d::vector2
+					>(
+						scene::background_dim(
+							client_system_.renderer()
+						)
 					)
-				),
+				)
+				*
+				(
+					scene::background_repetition(
+						client_system_.renderer(),
+						texture_
+					)
+				)
+				,
 				0.f
 			)
 		)
