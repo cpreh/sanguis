@@ -10,7 +10,6 @@
 #include "../net/port.hpp"
 #include "../server/object_fwd.hpp"
 #include "../main_object.hpp"
-#include <sge/audio/pool.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/console/object.hpp>
 #include <sge/font/text/drawer_3d.hpp>
@@ -75,8 +74,6 @@ private:
 	sge::console::object console_;
 
 	sge::console::gfx console_gfx_;
-
-	sge::audio::pool sound_pool_;
 
 	sge::window::instance_ptr const window_;
 

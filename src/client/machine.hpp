@@ -15,7 +15,6 @@
 #include "../net/receive_buffer_fwd.hpp"
 
 #include <sge/audio/player_ptr.hpp>
-#include <sge/audio/pool_fwd.hpp>
 #include <sge/console/gfx_fwd.hpp>
 #include <sge/font/metrics_ptr.hpp>
 #include <sge/font/text/drawer_fwd.hpp>
@@ -54,7 +53,6 @@ public:
 		client::gui::object &,
 		client::server_callback const &,
 		load::context const &,
-		sge::audio::pool &,
 		sge::font::metrics_ptr,
 		sge::font::text::drawer &,
 		sge::console::gfx &,
@@ -110,9 +108,6 @@ public:
 
 	sge::audio::player_ptr const
 	audio_player() const;
-
-	sge::audio::pool &
-	sound_pool();
 
 	sge::font::metrics_ptr const
 	font_metrics() const;
@@ -174,8 +169,6 @@ private:
 		s_conn_,
 		s_disconn_,
 		s_data_;
-
-	sge::audio::pool &sound_pool_;
 
 	sge::font::metrics_ptr const font_metrics_;
 

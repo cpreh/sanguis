@@ -4,7 +4,6 @@
 #include "sound_identifier.hpp"
 #include "../sound_type.hpp"
 #include <sge/audio/multi_loader_fwd.hpp>
-#include <sge/audio/pool_fwd.hpp>
 #include <sge/audio/exception.hpp>
 #include <sge/audio/player_ptr.hpp>
 #include <sge/audio/buffer_ptr.hpp>
@@ -54,8 +53,7 @@ public:
 
 	sounds(
 		sge::audio::multi_loader &,
-		sge::audio::player_ptr,
-		sge::audio::pool &
+		sge::audio::player_ptr
 	);
 
 	~sounds();
@@ -81,8 +79,6 @@ private:
 	sge::audio::multi_loader &ml_;
 
 	sge::audio::player_ptr const player_;
-
-	sge::audio::pool &pool_;
 
 	mutable sound_map sounds_;
 

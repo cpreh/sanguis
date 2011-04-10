@@ -61,7 +61,7 @@ public:
 	);
 
 	bool
-	animation_ended() const;
+	ended() const;
 
 	sprite::normal::object &
 	object();
@@ -69,8 +69,6 @@ public:
 	sprite::normal::object const &
 	object() const;
 private:
-	friend class part_state;
-
 	typedef fcppt::scoped_ptr<
 		load::model::animation_context
 	> animation_context_ptr;
@@ -121,7 +119,7 @@ private:
 
 	scoped_texture_animation animation_;
 
-	bool ended_;
+	bool animation_ended_;
 };
 
 }

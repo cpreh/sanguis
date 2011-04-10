@@ -9,7 +9,7 @@ namespace animation_sound_type
 enum type
 {
 	start,
-	running,
+	middle,
 	end,
 	size
 };

@@ -26,7 +26,6 @@ sanguis::client::machine::machine(
 	client::gui::object &_gui,
 	server_callback const &_server_callback,
 	load::context const &_resources,
-	sge::audio::pool &_sound_pool,
 	sge::font::metrics_ptr const _font_metrics,
 	sge::font::text::drawer &_font_drawer,
 	sge::console::gfx &_console_gfx,
@@ -77,7 +76,6 @@ sanguis::client::machine::machine(
 			)
 		)
 	),
-	sound_pool_(_sound_pool),
 	font_metrics_(_font_metrics),
 	font_drawer_(_font_drawer),
 	console_gfx_(_console_gfx),
@@ -212,12 +210,6 @@ sge::audio::player_ptr const
 sanguis::client::machine::audio_player() const
 {
 	return audio_player_;
-}
-
-sge::audio::pool &
-sanguis::client::machine::sound_pool()
-{
-	return sound_pool_;
 }
 
 sge::font::metrics_ptr const

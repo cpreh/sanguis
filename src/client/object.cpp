@@ -135,7 +135,6 @@ sanguis::client::object::object(
 			sge::console::output_line_limit
 		>()
 	),
-	sound_pool_(),
 	window_(
 		sys_.window()
 	),
@@ -146,8 +145,7 @@ sanguis::client::object::object(
 		sys_.image_loader(),
 		sys_.renderer(),
 		sys_.audio_loader(),
-		sys_.audio_player(),
-		sound_pool_
+		sys_.audio_player()
 	),
 	cursor_(
 		sys_.cursor_demuxer()
@@ -169,7 +167,6 @@ sanguis::client::object::object(
 			std::tr1::placeholders::_1
 		),
 		resources_,
-		sound_pool_,
 		font_metrics_,
 		font_drawer_,
 		console_gfx_,

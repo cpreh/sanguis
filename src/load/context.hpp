@@ -10,7 +10,6 @@
 #include <sge/image2d/multi_loader_fwd.hpp>
 #include <sge/audio/player_fwd.hpp>
 #include <sge/audio/multi_loader_fwd.hpp>
-#include <sge/audio/pool_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 
@@ -31,8 +30,7 @@ public:
 		sge::image2d::multi_loader &,
 		sge::renderer::device_ptr,
 		sge::audio::multi_loader &,
-		sge::audio::player_ptr,
-		sge::audio::pool &
+		sge::audio::player_ptr
 	);
 
 	~context();
@@ -61,8 +59,6 @@ private:
 	sge::audio::multi_loader &ml_;
 
 	sge::audio::player_ptr const ap_;
-
-	sge::audio::pool &pool_;
 
 	resource::context const resource_ctx_;
 

@@ -67,12 +67,6 @@ sanguis::client::draw2d::entities::model::object::object(
 		_param.collection()[_name]
 	);
 
-	/*
-	BOOST_FOREACH(
-		load::model::object::value_type const &ref,
-		model//_param.collection()[_name]
-	)
-	*/
 	for(
 		load::model::object::const_iterator it(
 			model.begin()
@@ -452,7 +446,7 @@ sanguis::client::draw2d::entities::model::object::animations_ended() const
 		++it
 	)
 		if(
-			!it->animation_ended()
+			!it->ended()
 		)
 			return false;
 	return true;

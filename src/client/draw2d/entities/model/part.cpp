@@ -57,7 +57,7 @@ sanguis::client::draw2d::entities::model::part::part(
 	state_(),
 	animation_context_(),
 	animation_(),
-	ended_(
+	animation_ended_(
 		false
 	)
 {
@@ -154,20 +154,22 @@ sanguis::client::draw2d::entities::model::part::update(
 					sprite::dim
 				>(
 					animation_->series().begin()->dim()
-				) // TODO
+				)
 			);
 		}
 	}
 	
 	if(
 		state_
-	)
-		state_->update();
+	) 
+		state_->update(
+			this->object().pos()
+		);
 
 	if(
 		animation_
 	)
-		ended_ = animation_->process() || ended_;
+		animation_ended_ = animation_->process() || animation_ended_;
 
 	if(
 		fcppt::math::compare(
@@ -364,9 +366,9 @@ sanguis::client::draw2d::entities::model::part::orientation(
 }
 
 bool
-sanguis::client::draw2d::entities::model::part::animation_ended() const
+sanguis::client::draw2d::entities::model::part::ended() const
 {
-	return ended_;
+	return animation_ended_;
 }
 
 sanguis::client::draw2d::sprite::normal::object &
@@ -395,22 +397,20 @@ sanguis::client::draw2d::entities::model::part::load_animation(
 			_atype
 		].load()
 	);
+
+	if(
+		state_
+	)
+		state_->stop();
 	
 	state_.take(
 		fcppt::make_unique_ptr<
 			model::part_state
 		>(
 			load_part_,
-			fcppt::ref(
-				*this // FIXME: this can be removed now
-			),
 			_atype,
 			weapon_
 		)
-			/*
-			state_
-				? state_->weapon_type()
-				: weapon_)*/
 	);
 }
 

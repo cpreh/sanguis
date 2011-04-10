@@ -16,7 +16,6 @@
 #include "../../messages/create.hpp"
 #include "../../messages/player_choose_perk.hpp"
 #include "../../load/context.hpp"
-#include <sge/audio/pool.hpp>
 #include <sge/audio/player.hpp>
 #include <sge/console/object.hpp>
 #include <sge/font/text/from_fcppt_string.hpp>
@@ -137,8 +136,6 @@ sanguis::client::states::running::react(
 	context<machine>().resources().update(
 		_event.delta()
 	);
-
-	context<machine>().sound_pool().update();
 
 	music_->process();
 

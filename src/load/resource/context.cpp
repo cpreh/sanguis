@@ -37,8 +37,7 @@ sanguis::load::resource::context::context(
 	sge::renderer::device_ptr const _renderer,
 	sge::image2d::multi_loader &_image_loader,
 	sge::audio::multi_loader &_audio_loader,
-	sge::audio::player_ptr const _audio_player,
-	sge::audio::pool &_audio_pool
+	sge::audio::player_ptr const _audio_player
 )
 :
 	textures_(
@@ -58,10 +57,7 @@ sanguis::load::resource::context::context(
 			fcppt::ref(
 				_audio_loader
 			),
-			_audio_player,
-			fcppt::ref(
-				_audio_pool
-			)
+			_audio_player
 		)
 	),
 	animations_(

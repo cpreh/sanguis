@@ -8,21 +8,18 @@ sanguis::load::context::context(
 	sge::image2d::multi_loader &_il,
 	sge::renderer::device_ptr const _rend,
 	sge::audio::multi_loader &_ml,
-	sge::audio::player_ptr const _ap,
-	sge::audio::pool &_pool
+	sge::audio::player_ptr const _ap
 )
 :
 	il_(_il),
 	rend_(_rend),
 	ml_(_ml),
 	ap_(_ap),
-	pool_(_pool),
 	resource_ctx_(
 		rend_,
 		il_,
 		ml_,
-		ap_,
-		pool_
+		ap_
 	),
 	model_ctx_(
 		resource_ctx_

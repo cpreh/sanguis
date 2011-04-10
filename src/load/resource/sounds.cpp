@@ -4,7 +4,6 @@
 #include "../../exception.hpp"
 #include "../../media_path.hpp"
 #include <sge/audio/player.hpp>
-#include <sge/audio/pool.hpp>
 #include <sge/audio/multi_loader.hpp>
 #include <sge/audio/buffer.hpp>
 #include <sge/audio/sound/base.hpp>
@@ -45,13 +44,11 @@ sanguis::load::resource::sounds::load_uncached(
 
 sanguis::load::resource::sounds::sounds(
 	sge::audio::multi_loader &_ml,
-	sge::audio::player_ptr const _player,
-	sge::audio::pool &_pool
+	sge::audio::player_ptr const _player
 )
 :
 	ml_(_ml),
-	player_(_player),
-	pool_(_pool)
+	player_(_player)
 {}
 
 sanguis::load::resource::sounds::~sounds()
@@ -129,12 +126,6 @@ sanguis::load::resource::sounds::make(
 		sound = sge::audio::sound::base_ptr();
 	}
 
-	if(sound)
-		pool_.add(
-			sound,
-			sge::audio::stop_mode::continue_playing
-		);
-
 	return sound;
 }
 
@@ -197,12 +188,6 @@ sanguis::load::resource::sounds::make_positional(
 		);
 		sound = sge::audio::sound::positional_ptr();
 	}
-
-	if(sound)
-		pool_.add(
-			sound,
-			sge::audio::stop_mode::continue_playing
-		);
 
 	return sound;
 }
