@@ -2,10 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_SCREEN_TO_VIRTUAL_HPP_INCLUDED
 
 #include "sprite/point.hpp"
-#include "sprite/dim.hpp"
-#include "../../messages/types/pos.hpp"
-#include "../../messages/types/dim.hpp"
-#include <sge/renderer/screen_size.hpp>
+#include "../../messages/types/vector2.hpp"
 
 namespace sanguis
 {
@@ -14,16 +11,9 @@ namespace client
 namespace draw2d
 {
 
-sanguis::messages::types::pos const
+sanguis::messages::types::vector2 const
 screen_to_virtual(
-	sge::renderer::screen_size const &,
 	sprite::point const &
-);
-
-sanguis::messages::types::dim const
-screen_to_virtual(
-	sge::renderer::screen_size const &,
-	sprite::dim const &
 );
 
 }

@@ -1,8 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_BASE_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_BASE_HPP_INCLUDED
 
-#include "../sprite/point.hpp"
-#include "../sprite/dim.hpp"
+#include "../sprite/center.hpp"
 #include "../../../time_type.hpp"
 #include <fcppt/noncopyable.hpp>
 
@@ -35,16 +34,11 @@ public:
 	may_be_removed() const;
 	
 	virtual void
-	pos(
-		sprite::point const &
+	center(
+		sprite::center const &
 	) = 0;
 
-	virtual void
-	dim(
-		sprite::dim const &
-	) = 0;
-
-	virtual sprite::point const
+	virtual sprite::center const
 	center() const = 0;
 
 	virtual ~base();

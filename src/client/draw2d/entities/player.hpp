@@ -4,8 +4,8 @@
 #include "model/parameters_fwd.hpp"
 #include "model/object.hpp"
 #include "../sprite/rotation_type.hpp"
-#include "../vector2.hpp"
 #include "../funit.hpp"
+#include "../speed.hpp"
 #include "../../../time_type.hpp"
 #include <fcppt/noncopyable.hpp>
 
@@ -39,7 +39,7 @@ public:
 
 	void
 	speed(
-		vector2 const &
+		draw2d::speed const &
 	);
 protected:
 	void
@@ -50,7 +50,7 @@ private:
 	using container::orientation;
 	using container::speed;
 
-	funit angle_;
+	draw2d::funit angle_;
 };
 
 }

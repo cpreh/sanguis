@@ -192,6 +192,7 @@ SET(
 	src/client/daytime_settings.cpp
 	src/client/daytime_settings.hpp
 	src/client/daytime_settings_fwd.hpp
+	src/client/draw2d/center.hpp
 	src/client/draw2d/dim2.hpp
 	src/client/draw2d/entities/aoe_bullet.cpp
 	src/client/draw2d/entities/aoe_bullet.hpp
@@ -338,6 +339,8 @@ SET(
 	src/client/draw2d/scene/screen_center.hpp
 	src/client/draw2d/screen_to_virtual.cpp
 	src/client/draw2d/screen_to_virtual.hpp
+	src/client/draw2d/speed.hpp
+	src/client/draw2d/sprite/center.hpp
 	src/client/draw2d/sprite/client/choices.hpp
 	src/client/draw2d/sprite/client/object.hpp
 	src/client/draw2d/sprite/client/parameters.hpp
@@ -661,7 +664,6 @@ SET(
 	src/messages/create.hpp
 	src/messages/die.cpp
 	src/messages/die.hpp
-	src/messages/dim.hpp
 	src/messages/entity_id.hpp
 	src/messages/entity_message.hpp
 	src/messages/enum.hpp
@@ -710,18 +712,16 @@ SET(
 	src/messages/player_stop_shooting.hpp
 	src/messages/player_unpause.cpp
 	src/messages/player_unpause.hpp
-	src/messages/pos.hpp
 	src/messages/remove.cpp
 	src/messages/remove.hpp
 	src/messages/remove_id.cpp
 	src/messages/remove_id.hpp
-	src/messages/resize.cpp
-	src/messages/resize.hpp
 	src/messages/role_name.hpp
 	src/messages/roles/angle.hpp
 	src/messages/roles/aoe.hpp
 	src/messages/roles/aoe_projectile.hpp
 	src/messages/roles/attack_dest.hpp
+	src/messages/roles/center.hpp
 	src/messages/roles/cheat.hpp
 	src/messages/roles/command_description.hpp
 	src/messages/roles/command_name.hpp
@@ -790,14 +790,12 @@ SET(
 	src/messages/string.hpp
 	src/messages/string_vector.hpp
 	src/messages/types/char.hpp
-	src/messages/types/dim.hpp
 	src/messages/types/enum.hpp
 	src/messages/types/enum_vector.hpp
 	src/messages/types/exp.hpp
 	src/messages/types/level.hpp
 	src/messages/types/message.hpp
 	src/messages/types/message_type.hpp
-	src/messages/types/pos.hpp
 	src/messages/types/size.hpp
 	src/messages/types/space_unit.hpp
 	src/messages/types/string.hpp
@@ -1034,6 +1032,8 @@ SET(
 	src/server/entities/body_parameters_fwd.hpp
 	src/server/entities/body_velocity_combiner.cpp
 	src/server/entities/body_velocity_combiner.hpp
+	src/server/entities/circle_from_dim.cpp
+	src/server/entities/circle_from_dim.hpp
 	src/server/entities/collision_groups.cpp
 	src/server/entities/collision_groups.hpp
 	src/server/entities/default_solid.cpp
@@ -1075,8 +1075,6 @@ SET(
 	src/server/entities/player_fwd.hpp
 	src/server/entities/player_map.hpp
 	src/server/entities/player_unique_ptr.hpp
-	src/server/entities/pos.cpp
-	src/server/entities/pos.hpp
 	src/server/entities/projectiles/aoe_damage.cpp
 	src/server/entities/projectiles/aoe_damage.hpp
 	src/server/entities/projectiles/aoe_projectile.cpp
@@ -1159,9 +1157,6 @@ SET(
 	src/server/entities/with_buffs.cpp
 	src/server/entities/with_buffs.hpp
 	src/server/entities/with_buffs_fwd.hpp
-	src/server/entities/with_dim.cpp
-	src/server/entities/with_dim.hpp
-	src/server/entities/with_dim_fwd.hpp
 	src/server/entities/with_ghosts.cpp
 	src/server/entities/with_ghosts.hpp
 	src/server/entities/with_health.cpp
@@ -1261,7 +1256,6 @@ SET(
 	src/server/player_id_from_args.hpp
 	src/server/player_id_from_net.cpp
 	src/server/player_id_from_net.hpp
-	src/server/pos.hpp
 	src/server/probability.hpp
 	src/server/radius.hpp
 	src/server/send_available_perks.cpp

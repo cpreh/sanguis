@@ -48,9 +48,8 @@ sanguis::server::entities::projectiles::aoe_projectile::add_message(
 		messages::create(
 			messages::add_aoe_projectile(
 				this->id(),
-				this->pos().get(),
+				this->center().get(),
 				this->angle().get(),
-				this->dim(),
 				this->abs_speed().get(),
 				aoe_.get(),
 				type_

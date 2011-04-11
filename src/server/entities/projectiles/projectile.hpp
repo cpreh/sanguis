@@ -4,8 +4,7 @@
 #include "indeterminate.hpp"
 #include "life_time.hpp"
 #include "../body_velocity_combiner.hpp"
-#include "../with_body_fwd.hpp"
-#include "../with_dim.hpp"
+#include "../with_body.hpp"
 #include "../with_health_fwd.hpp"
 #include "../with_velocity.hpp"
 #include "../movement_speed.hpp"
@@ -31,7 +30,7 @@ namespace projectiles
 class projectile
 :
 	private body_velocity_combiner,
-	public with_dim,
+	public with_body,
 	public with_velocity
 {
 	FCPPT_NONCOPYABLE(

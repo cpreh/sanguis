@@ -1,6 +1,7 @@
 #include "enemy.hpp"
-#include "../exp_area.hpp"
+#include "../circle_from_dim.hpp"
 #include "../default_solid.hpp"
+#include "../exp_area.hpp"
 #include "../insert_parameters_center.hpp"
 #include "../property/initial.hpp"
 #include "../spawns/spawn.hpp"
@@ -35,15 +36,17 @@ sanguis::server::entities::enemies::enemy::enemy(
 			_weapon
 		)
 	),
-	with_buffs(),
-	with_dim(
-		entities::default_solid(),
-		_load_context.entity_dim(
-			load::enemy_name(
-				_etype
-			)
+	with_body(
+		entities::circle_from_dim(
+			_load_context.entity_dim(
+				load::enemy_name(
+					_etype
+				)
+			),
+			entities::default_solid()
 		)
 	),	
+	with_buffs(),
 	with_health(
 		_health,
 		_armor
@@ -101,9 +104,8 @@ sanguis::server::entities::enemies::enemy::add_message(
 		messages::create(
 			messages::add_enemy(
 				this->id(),
-				this->pos().get(),
+				this->center().get(),
 				this->angle().get(),
-				this->dim(),
 				this->abs_speed().get(),
 				this->current_health().get(),
 				this->max_health().get(),

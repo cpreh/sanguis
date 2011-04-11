@@ -14,6 +14,7 @@
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/object.hpp>
+#include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/is_null.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -23,7 +24,7 @@
 #include <ostream>
 
 sanguis::client::draw2d::entities::model::object::object(
-	parameters const &_param,
+	model::parameters const &_param,
 	fcppt::string const &_name,
 	sprite::order const _order,
 	needs_healthbar::type const _needs_healthbar,
@@ -33,7 +34,12 @@ sanguis::client::draw2d::entities::model::object::object(
 	container(
 		_param.normal_system(),
 		_param.collection()[_name].size(),
-		_order
+		_order,
+		fcppt::math::dim::structure_cast<
+			sprite::dim
+		>(
+			_param.collection()[_name].dim()
+		)
 	),
 	with_health(),
 	with_weapon(),
@@ -199,16 +205,18 @@ sanguis::client::draw2d::entities::model::object::on_decay()
 	this->change_animation();
 
 	this->speed(
-		vector2::null()
+		draw2d::speed(
+			draw2d::speed::value_type::null()
+		)
 	); // FIXME
 }
 
 void
 sanguis::client::draw2d::entities::model::object::speed(
-	vector2 const &_speed
+	draw2d::speed const &_speed
 )
 {
-	vector2 const old_speed(
+	draw2d::speed const old_speed(
 		this->speed()
 	);
 	
@@ -218,11 +226,11 @@ sanguis::client::draw2d::entities::model::object::speed(
 
 	if(
 		fcppt::math::vector::is_null(
-			_speed
+			_speed.get()
 		)
 		!=
 		fcppt::math::vector::is_null(
-			old_speed
+			old_speed.get()
 		)
 	)
 		this->change_animation();
@@ -251,7 +259,7 @@ sanguis::client::draw2d::entities::model::object::walking() const
 {
 	return
 		!fcppt::math::vector::is_null(
-			this->speed()
+			this->speed().get()
 		);
 }
 
@@ -411,13 +419,11 @@ sanguis::client::draw2d::entities::model::object::animation() const
 				?
 					animation_type::attacking
 				:
-					fcppt::math::vector::is_null(
-						container::speed()
-					)
+					this->walking()
 					?
-						animation_type::none
+						animation_type::walking
 					:
-						animation_type::walking;
+						animation_type::none;
 }
 
 void

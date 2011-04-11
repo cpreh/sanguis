@@ -2,7 +2,7 @@
 
 sanguis::client::draw2d::entities::own_player::own_player(
 	model::parameters const &_param,
-	transform_callback const &_transform
+	draw2d::transform_callback const &_transform
 )
 :
 	player(

@@ -44,7 +44,7 @@ sanguis::client::draw2d::entities::aoe_bullet::on_decay()
 				particle_system_
 			),
 			model_collection_,
-			pos(),
+			this->center(),
 			aoe_
 		)
 	);

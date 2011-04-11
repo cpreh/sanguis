@@ -99,9 +99,3 @@ sanguis::client::draw2d::scene::message_environment::transform_callback() const
 {
 	return object_.transform_callback();
 }
-
-sge::renderer::screen_size const
-sanguis::client::draw2d::scene::message_environment::screen_size() const
-{
-	return object_.screen_size();
-}

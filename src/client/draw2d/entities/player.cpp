@@ -61,7 +61,7 @@ sanguis::client::draw2d::entities::player::~player()
 
 void
 sanguis::client::draw2d::entities::player::speed(
-	vector2 const &_speed
+	draw2d::speed const &_speed
 )
 {
 	model::object::speed(
@@ -69,16 +69,14 @@ sanguis::client::draw2d::entities::player::speed(
 	);
 
 	if(
-		!fcppt::math::vector::is_null(
-			_speed
-		)
+		this->walking()
 	)
 		model::object::orientation(
 			fcppt::math::vector::signed_angle_cast<
 				funit
 			>(
 				vector2::null(),
-				_speed
+				_speed.get()
 			),
 			0
 		);

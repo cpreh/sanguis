@@ -16,9 +16,9 @@ namespace messages
 
 typedef majutsu::composite<
 	boost::mpl::vector3<
-		add_with_speed,
+		messages::add_with_speed,
 		majutsu::role<
-			space_unit,
+			messages::space_unit,
 			roles::health
 		>,
 		majutsu::role<

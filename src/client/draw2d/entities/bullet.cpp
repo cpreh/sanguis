@@ -1,6 +1,10 @@
 #include "bullet.hpp"
-#include "../sprite/unit.hpp"
 #include "../sprite/index.hpp"
+#include "../sprite/point.hpp"
+#include "../sprite/unit.hpp"
+#include "../center.hpp"
+#include "../funit.hpp"
+#include "../vector2.hpp"
 #include "../z_ordering.hpp"
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/center.hpp>
@@ -59,10 +63,10 @@ sanguis::client::draw2d::entities::bullet::update(
 		_time
 	);
 
-	funit const
+	draw2d::funit const
 		max_tail_length(
 			static_cast<
-				funit
+				draw2d::funit
 			>(
 				160
 			)
@@ -72,51 +76,56 @@ sanguis::client::draw2d::entities::bullet::update(
 				fcppt::math::vector::length<
 					funit
 				>(
-					*origin_ - this->center()
+					(
+						*origin_ - this->center()
+					).get()
 				),
 				max_tail_length
 			)
 		);
 
-	vector2 const
-		newsize(
-			tail_length,
-			static_cast<
-				funit
-			>(
-				this->at(
-					tail
-				).size().h()
-			)
-		),
-		cur_pos(
-			fcppt::math::vector::structure_cast<
-				vector2
-			>(
-				this->center()
-			)
-		),
-		newpos( 
-			fcppt::math::vector::is_null(
-				this->speed()
-			)
-			?
-				cur_pos
-			:
-				cur_pos
+	draw2d::center const cur_center(
+		fcppt::math::vector::structure_cast<
+			draw2d::center::value_type
+		>(
+			this->center().get()
+		)
+	);
+	
+	draw2d::center const new_center( 
+		fcppt::math::vector::is_null(
+			this->speed().get()
+		)
+		?
+			cur_center
+		:
+			draw2d::center(
+				cur_center.get()
 				-
 				fcppt::math::vector::normalize(
-					this->speed()
+					this->speed().get()
 				)
 				*
 				static_cast<
 					funit
-				>(0.5)
+				>(
+					0.5
+				)
 				*
 				fcppt::math::vector::length(
-				 	newsize
+					draw2d::vector2(
+						tail_length,
+						static_cast<
+							funit
+						>(
+							this->at(
+								tail
+							).size().h()
+						)
+					)
 				)
-		);
+			)
+	);
 
 	sge::sprite::center(
 		this->at(
@@ -125,7 +134,7 @@ sanguis::client::draw2d::entities::bullet::update(
 		fcppt::math::vector::structure_cast<
 			sprite::point
 		>(
-			newpos
+			new_center.get()
 		)
 	);
 

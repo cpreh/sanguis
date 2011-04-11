@@ -26,8 +26,8 @@ class message_environment
 	);
 public:
 	explicit message_environment(
-		object &,
-		hud &
+		scene::object &,
+		scene::hud &
 	);
 
 	~message_environment();
@@ -70,12 +70,9 @@ private:
 	draw2d::transform_callback const &
 	transform_callback() const;
 
-	sge::renderer::screen_size const
-	screen_size() const;
+	scene::object &object_;
 
-	object &object_;
-
-	hud &hud_;
+	scene::hud &hud_;
 };
 
 }

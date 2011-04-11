@@ -1,4 +1,5 @@
 #include "pickup.hpp"
+#include "../circle_from_dim.hpp"
 #include "../nonsolid.hpp"
 #include "../../environment/load_context.hpp"
 #include "../../../load/pickup_name.hpp"
@@ -30,17 +31,19 @@ sanguis::server::entities::pickups::pickup::pickup(
 )
 :
 	base(),
-	with_dim(
-		entities::nonsolid(),
-		_dim
-		?
-			*_dim
-		:
-			_load_context.entity_dim(
-				load::pickup_name(
-					_ptype
-				)
-			)
+	with_body(
+		entities::circle_from_dim(
+			_dim
+			?
+				*_dim
+			:
+				_load_context.entity_dim(
+					load::pickup_name(
+						_ptype
+					)
+				),
+			entities::nonsolid()
+		)
 	),
 	team_(_team),
 	ptype_(_ptype),
@@ -121,9 +124,8 @@ sanguis::server::entities::pickups::pickup::add_message(
 		messages::create(
 			messages::add_pickup(
 				this->id(),
-				this->pos().get(),
+				this->center().get(),
 				this->angle().get(),
-				this->dim(),
 				this->ptype()
 			)
 		);

@@ -4,8 +4,8 @@
 #include "../auto_weak_link.hpp"
 #include "../body_velocity_combiner.hpp"
 #include "../with_ai.hpp"
+#include "../with_body.hpp"
 #include "../with_buffs.hpp"
-#include "../with_dim.hpp"
 #include "../with_health.hpp"
 #include "../with_velocity.hpp"
 #include "../movement_speed.hpp"
@@ -31,8 +31,8 @@ class enemy
 :
 	private body_velocity_combiner,
 	public with_ai,
+	public with_body,
 	public with_buffs,
-	public with_dim,
 	public with_health,
 	public with_velocity
 {

@@ -2,15 +2,13 @@
 #define SANGUIS_CLIENT_DRAW2D_MESSAGE_CONFIGURE_ENTITY_HPP_INCLUDED
 
 #include "dispatcher.hpp"
-#include "../../../messages/pos.hpp"
 #include "../../../messages/move.hpp"
 #include "../../../messages/rotate.hpp"
 #include "../../../messages/max_health.hpp"
 #include "../../../messages/health.hpp"
 #include "../../../messages/speed.hpp"
-#include "../../../messages/dim.hpp"
-#include "../../../messages/resize.hpp"
 #include "../../../messages/roles/angle.hpp"
+#include "../../../messages/roles/center.hpp"
 #include "../../../messages/roles/max_health.hpp"
 #include "../../../messages/roles/health.hpp"
 #include "../../../messages/roles/speed.hpp"
@@ -42,7 +40,7 @@ class configure_entity
 
 	typedef boost::mpl::map<
 		boost::mpl::pair<
-			messages::pos,
+			messages::roles::center,
 			messages::move
 		>,
 		boost::mpl::pair<
@@ -60,10 +58,6 @@ class configure_entity
 		boost::mpl::pair<
 			messages::roles::speed,
 			messages::speed
-		>,
-		boost::mpl::pair<
-			messages::dim,
-			messages::resize
 		>
 	> mapping;
 public:

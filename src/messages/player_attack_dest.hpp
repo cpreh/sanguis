@@ -3,7 +3,7 @@
 
 #include "bind_player_message.hpp"
 #include "make_class.hpp"
-#include "pos.hpp"
+#include "vector2.hpp"
 #include "types/message.hpp"
 #include "roles/attack_dest.hpp"
 #include <majutsu/composite.hpp>
@@ -21,7 +21,7 @@ typedef majutsu::composite<
 			types::message::player_attack_dest
 		>::type,
 		majutsu::role<
-			pos,
+			messages::vector2,
 			roles::attack_dest
 		>
 	>

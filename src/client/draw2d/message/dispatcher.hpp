@@ -22,7 +22,6 @@
 #include "../../../messages/max_health.hpp"
 #include "../../../messages/move.hpp"
 #include "../../../messages/remove.hpp"
-#include "../../../messages/resize.hpp"
 #include "../../../messages/rotate.hpp"
 #include "../../../messages/start_attacking.hpp"
 #include "../../../messages/stop_attacking.hpp"
@@ -133,11 +132,6 @@ public:
 	result_type
 	operator()(
 		sanguis::messages::remove const &
-	);
-
-	result_type
-	operator()(
-		sanguis::messages::resize const &
 	);
 
 	result_type

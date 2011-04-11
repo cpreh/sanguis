@@ -75,7 +75,7 @@ sanguis::client::draw2d::scene::object::object(
 	audio_listener_(_audio_listener),
 	paused_(false),
 	player_center_(
-		sprite::point::null()
+		sprite::center::value_type::null()
 	),
 	transform_callback_(
 		std::tr1::bind(
@@ -164,7 +164,7 @@ sanguis::client::draw2d::scene::object::process_message(
 )
 {
 	static sanguis::messages::call::object<
-		boost::mpl::vector23<
+		boost::mpl::vector22<
 			sanguis::messages::add_aoe_projectile,
 			sanguis::messages::add_enemy,
 			sanguis::messages::add_friend,
@@ -181,7 +181,6 @@ sanguis::client::draw2d::scene::object::process_message(
 			sanguis::messages::max_health,
 			sanguis::messages::move,
 			sanguis::messages::remove,
-			sanguis::messages::resize,
 			sanguis::messages::rotate,
 			sanguis::messages::start_attacking,
 			sanguis::messages::stop_attacking,
@@ -347,7 +346,7 @@ sanguis::client::draw2d::scene::object::render_lighting()
 		)
 	);
 
-	vector2 const translation(
+	draw2d::vector2 const translation(
 		scene::screen_center(
 			player_center_,
 			this->screen_size()
@@ -465,7 +464,7 @@ sanguis::client::draw2d::scene::object::entity(
 	return *it->second;
 }
 
-sanguis::client::draw2d::sprite::point const
+sanguis::client::draw2d::sprite::center const
 sanguis::client::draw2d::scene::object::player_center() const
 {
 	return player_center_;
@@ -473,7 +472,7 @@ sanguis::client::draw2d::scene::object::player_center() const
 
 void
 sanguis::client::draw2d::scene::object::transform(
-	sprite::point const &_player_center
+	sprite::center const &_player_center
 )
 {
 	player_center_ = _player_center;
@@ -484,7 +483,7 @@ sanguis::client::draw2d::scene::object::transform(
 			static_cast<
 				sge::audio::scalar
 			>(
-				player_center_.x()
+				player_center_.get().x()
 			),
 			static_cast<
 				sge::audio::scalar
@@ -494,7 +493,7 @@ sanguis::client::draw2d::scene::object::transform(
 			static_cast<
 				sge::audio::scalar
 			>(
-				player_center_.y()
+				player_center_.get().y()
 			)
 		)
 	);

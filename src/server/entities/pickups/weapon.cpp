@@ -49,9 +49,8 @@ sanguis::server::entities::pickups::weapon::add_message(
 		messages::create(
 			messages::add_weapon_pickup(
 				this->id(),
-				this->pos().get(),
+				this->center().get(),
 				this->angle().get(),
-				this->dim(),
 				this->wtype()
 			)
 		);

@@ -5,7 +5,6 @@
 #include "prop.hpp"
 #include "../collision/body_collision.hpp"
 #include "../entities/base.hpp"
-#include "../entities/with_dim.hpp"
 #include "../entities/with_health.hpp"
 #include "../entities/with_velocity.hpp"
 #include "../entities/player.hpp"
@@ -43,8 +42,6 @@
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 #include <boost/foreach.hpp>
-
-#include <fcppt/preprocessor/fixme.hpp>
 
 sanguis::server::world::object::object(
 	world::context &_global_context,
@@ -609,31 +606,26 @@ sanguis::server::world::object::update_entity(
 			)
 		);
 
-	FCPPT_PP_FIXME("with_dim is wrong here!")
-
-	FCPPT_TRY_DYNAMIC_CAST(
-		entities::with_dim const *,
-		with_dim,
-		&entity
-	)
-		this->send_entity_specific(
-			with_dim->id(),
-			message_convert::move(
-				*with_dim
-			)
-		);
-
 	FCPPT_TRY_DYNAMIC_CAST(
 		entities::with_velocity const *,
 		movable,
 		&entity
 	)
+	{
 		this->send_entity_specific(
 			movable->id(),
 			message_convert::speed(
 				*movable
 			)
 		);
+
+		this->send_entity_specific(
+			movable->id(),
+			message_convert::move(
+				*movable
+			)
+		);
+	}
 
 	FCPPT_TRY_DYNAMIC_CAST(
 		entities::with_health const *,

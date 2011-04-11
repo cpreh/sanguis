@@ -1,4 +1,5 @@
 #include "player.hpp"
+#include "circle_from_dim.hpp"
 #include "default_solid.hpp"
 #include "property/initial.hpp"
 #include "../perks/perk.hpp"
@@ -27,13 +28,15 @@ sanguis::server::entities::player::player(
 :
 	base(),
 	with_auras(),
-	with_buffs(),
-	with_dim(
-		entities::default_solid(),
-		_load_context.entity_dim(
-			FCPPT_TEXT("player")
+	with_body(
+		entities::circle_from_dim(
+			_load_context.entity_dim(
+				FCPPT_TEXT("player")
+			),
+			entities::default_solid()
 		)
 	),
+	with_buffs(),
 	with_health(
 		_health,
 		_armor
@@ -299,9 +302,8 @@ sanguis::server::entities::player::make_add_message() const
 		messages::create(
 			Message(
 				this->id(),
-				this->pos().get(),
+				this->center().get(),
 				this->angle().get(),
-				this->dim(),
 				this->abs_speed().get(),
 				this->current_health().get(),
 				this->max_health().get()

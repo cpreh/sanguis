@@ -8,6 +8,7 @@
 #include "../particle/properties_fwd.hpp"
 #include "../particle/particle_type.hpp"
 #include "../sprite/particle/system.hpp"
+#include "../sprite/center.hpp"
 #include "../funit.hpp"
 #include "../../../load/model/collection_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
@@ -32,7 +33,7 @@ public:
 	explosion(
 		sprite::particle::system &,
 		load::model::collection const &,
-		sprite::point const &pos,
+		sprite::center const &,
 		funit aoe
 	);
 
@@ -46,16 +47,11 @@ private:
 	);
 
 	void
-	pos(
-		sprite::point const &
+	center(
+		sprite::center const &
 	);
 
-	void
-	dim(
-		sprite::dim const &
-	);
-
-	sprite::point const
+	sprite::center const
 	center() const;
 
 	particle::base_ptr
@@ -78,15 +74,15 @@ private:
 
 	load::model::collection const &model_collection_;
 
-	sprite::point pos_;
-
 	particle::container particles_;
 
 	particle::property_map properties_;
 
-	bool ended;
+	sprite::center const center_;
 
 	funit aoe_;
+
+	bool ended;
 };
 
 }

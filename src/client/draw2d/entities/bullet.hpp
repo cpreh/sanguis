@@ -3,7 +3,7 @@
 
 #include "model/object.hpp"
 #include "model/parameters_fwd.hpp"
-#include "../sprite/point.hpp"
+#include "../sprite/center.hpp"
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
 #include <fcppt/string.hpp>
@@ -38,7 +38,7 @@ private:
 	);
 
 	fcppt::optional<
-		sprite::point
+		sprite::center
 	> origin_;
 };
 

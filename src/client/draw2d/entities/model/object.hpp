@@ -14,7 +14,7 @@
 #include "../../sprite/index_fwd.hpp"
 #include "../../sprite/order.hpp"
 #include "../../sprite/rotation_type.hpp"
-#include "../../vector2.hpp"
+#include "../../speed.hpp"
 #include "../../../health.hpp"
 #include "../../../../animation_type.hpp"
 #include <fcppt/log/object_fwd.hpp>
@@ -90,7 +90,7 @@ protected:
 	// with_speed overrides
 	virtual void
 	speed(
-		vector2 const &
+		draw2d::speed const &
 	);
 
 	using container::speed;

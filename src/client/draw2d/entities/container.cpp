@@ -14,17 +14,18 @@
 sanguis::client::draw2d::entities::container::container(
 	sprite::normal::system &_normal_system,
 	size_type const _size,
-	sprite::order const _order
+	sprite::order const _order,
+	sprite::dim const &_dim
 )
 :
 	base(),
 	with_orientation(),
 	with_speed(),
 	speed_(
-		vector2::null()
+		draw2d::speed::value_type::null()
 	),
-	pos_(
-		vector2::null()
+	center_(
+		draw2d::center::value_type::null()
 	)
 {
 	sprites_.reserve(
@@ -32,9 +33,9 @@ sanguis::client::draw2d::entities::container::container(
 	);
 
 	for(
-		size_type i = 0;
-		i < _size;
-		++i
+		size_type index = 0;
+		index < _size;
+		++index
 	)
 		sprites_.push_back(
 			object(
@@ -45,6 +46,9 @@ sanguis::client::draw2d::entities::container::container(
 				.order(
 					_order
 				)
+				.size(
+					_dim
+				)
 				.elements()
 			)
 		);
@@ -54,20 +58,15 @@ sanguis::client::draw2d::entities::container::~container()
 {
 }
 
-sanguis::client::draw2d::sprite::point const
+sanguis::client::draw2d::sprite::center const
 sanguis::client::draw2d::entities::container::center() const
 {
 	return
-		sge::sprite::center(
-			this->master()
+		draw2d::sprite::center(
+			sge::sprite::center(
+				this->master()
+			)
 		);
-}
-
-sanguis::client::draw2d::sprite::point const
-sanguis::client::draw2d::entities::container::pos() const
-{
-	return
-		this->master().pos();
 }
 
 void
@@ -75,47 +74,39 @@ sanguis::client::draw2d::entities::container::update(
 	time_type const _time
 )
 {
-	pos_ +=
-		_time * this->speed();
+	center_ +=
+		draw2d::center(
+			_time * this->speed().get()
+		);
 
-	this->update_pos(
-		fcppt::math::vector::structure_cast<
-			sprite::point
-		>(
-			pos_
+	this->update_center(
+		sprite::center(
+			fcppt::math::vector::structure_cast<
+				sprite::center::value_type
+			>(
+				center_.get()
+			)
 		)
 	);
 }
 
 void
-sanguis::client::draw2d::entities::container::pos(
-	sprite::point const &_pos
+sanguis::client::draw2d::entities::container::center(
+	sprite::center const &_center
 )
 {
-	pos_ =
-		fcppt::math::vector::structure_cast<
-			vector2
-		>(
-			_pos
+	center_ =
+		draw2d::center(
+			fcppt::math::vector::structure_cast<
+				draw2d::center::value_type
+			>(
+				_center.get()
+			)
 		);
 
-	this->update_pos(
-		_pos
+	this->update_center(
+		_center
 	);
-}
-
-void
-sanguis::client::draw2d::entities::container::dim(
-	sprite::dim const &_dim
-)
-{
-	BOOST_FOREACH(
-		object &cur,
-		sprites_
-	)
-		cur.size(
-			_dim
-		);
 }
 
 void
@@ -141,13 +132,13 @@ sanguis::client::draw2d::entities::container::orientation() const
 
 void
 sanguis::client::draw2d::entities::container::speed(
-	vector2 const &_speed
+	draw2d::speed const &_speed
 )
 {
 	speed_ = _speed;
 }
 
-sanguis::client::draw2d::vector2 const
+sanguis::client::draw2d::speed const
 sanguis::client::draw2d::entities::container::speed() const
 {
 	return speed_;
@@ -220,15 +211,16 @@ sanguis::client::draw2d::entities::container::end() const
 }
 
 void
-sanguis::client::draw2d::entities::container::update_pos(
-	sprite::point const &_pos
+sanguis::client::draw2d::entities::container::update_center(
+	sprite::center const &_center
 )
 {
 	BOOST_FOREACH(
 		object &cur,
 		sprites_
 	)
-		cur.pos(
-			_pos
+		sge::sprite::center(
+			cur,
+			_center.get()
 		);
 }

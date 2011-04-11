@@ -13,7 +13,7 @@
 #include "../sprite/normal/system.hpp"
 #include "../sprite/colored/system.hpp"
 #include "../sprite/particle/system.hpp"
-#include "../sprite/point.hpp"
+#include "../sprite/center.hpp"
 #include "../sprite/matrix.hpp"
 #include "../insert_callback.hpp"
 #include "../transform_callback.hpp"
@@ -115,12 +115,12 @@ private:
 		sanguis::entity_id
 	);
 
-	sprite::point const
+	sprite::center const
 	player_center() const;
 
 	void
 	transform(
-		sprite::point const &
+		sprite::center const &
 	);
 
 	draw2d::transform_callback const &
@@ -170,7 +170,7 @@ private:
 
 	bool paused_;
 
-	sprite::point player_center_;
+	sprite::center player_center_;
 
 	draw2d::transform_callback const transform_callback_;
 

@@ -2,8 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_PICKUPS_PICKUP_HPP_INCLUDED
 
 #include "../base_fwd.hpp"
-#include "../with_body_fwd.hpp"
-#include "../with_dim.hpp"
+#include "../with_body.hpp"
 #include "../../environment/load_context_fwd.hpp"
 #include "../../dim.hpp"
 #include "../../team.hpp"
@@ -26,7 +25,7 @@ namespace pickups
 
 class pickup
 :
-	public entities::with_dim
+	public entities::with_body
 {
 	FCPPT_NONCOPYABLE(
 		pickup

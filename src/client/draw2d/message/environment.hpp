@@ -11,7 +11,6 @@
 #include "../../exp.hpp"
 #include "../../level.hpp"
 #include "../../../entity_id.hpp"
-#include <sge/renderer/screen_size.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -68,9 +67,6 @@ public:
 
 	virtual draw2d::transform_callback const &
 	transform_callback() const = 0;
-
-	virtual sge::renderer::screen_size const
-	screen_size() const = 0;
 
 	virtual ~environment();
 };

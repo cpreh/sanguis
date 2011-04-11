@@ -1,6 +1,7 @@
 #include "projectile.hpp"
 #include "../property/initial_max.hpp"
 #include "../nonsolid.hpp"
+#include "../circle_from_dim.hpp"
 #include "../with_health.hpp"
 #include "../../damage/no_armor.hpp"
 #include "../../damage/list.hpp"
@@ -30,9 +31,11 @@ sanguis::server::entities::projectiles::projectile::projectile(
 )
 :
 	base(),
-	with_dim(
-		entities::nonsolid(),
-		_dim
+	with_body(
+		entities::circle_from_dim(
+			_dim,
+			entities::nonsolid()
+		)
 	),
 	with_velocity(
 		property::initial_max(
@@ -149,9 +152,8 @@ sanguis::server::entities::projectiles::projectile::add_message(
 		messages::create(
 			messages::add_projectile(
 				this->id(),
-				this->pos().get(),
+				this->center().get(),
 				this->angle().get(),
-				this->dim(),
 				this->abs_speed().get(),
 				this->ptype()
 			)

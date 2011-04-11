@@ -25,14 +25,13 @@ sanguis::client::draw2d::scene::control_environment::translate_attack_dest(
 {
 	return
 		draw2d::screen_to_virtual(
-			object_.screen_size(),
 			-
 			fcppt::math::dim::structure_cast<
 				sprite::point
 			>(
 				object_.screen_size() / 2u
 			)
-			+ object_.player_center()
+			+ object_.player_center().get()
 			+ _cursor_position
 		);
 }

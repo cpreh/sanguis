@@ -27,14 +27,13 @@
 sanguis::client::draw2d::entities::explosion::explosion(
 	sprite::particle::system &_particle_system,
 	load::model::collection const &_model_collection,
-	sprite::point const &_pos,
+	sprite::center const &_center,
 	funit const _aoe
 )
 :
 	base(),
 	particle_system_(_particle_system),
 	model_collection_(_model_collection),
-	pos_(_pos),
 	particles_(
 		particle::point::null(),
 		particle::point::null(),
@@ -45,11 +44,14 @@ sanguis::client::draw2d::entities::explosion::explosion(
 	properties_(
 		explosion_properties()
 	),
-	ended(
-		false
+	center_(
+		_center
 	),
 	aoe_(
 		_aoe
+	),
+	ended(
+		false
 	)
 {
 	particles_.add(
@@ -82,23 +84,16 @@ sanguis::client::draw2d::entities::explosion::~explosion()
 }
 
 void
-sanguis::client::draw2d::entities::explosion::pos(
-	sprite::point const &
+sanguis::client::draw2d::entities::explosion::center(
+	sprite::center const &
 )
 {
 }
 
-void
-sanguis::client::draw2d::entities::explosion::dim(
-	sprite::dim const &
-)
-{
-}
-
-sanguis::client::draw2d::sprite::point const
+sanguis::client::draw2d::sprite::center const
 sanguis::client::draw2d::entities::explosion::center() const
 {
-	return pos_;
+	return center_;
 }
 
 void
@@ -112,7 +107,7 @@ sanguis::client::draw2d::entities::explosion::update(
 			fcppt::math::vector::structure_cast<
 				particle::point
 			>(
-				pos_
+				center_.get() // FIXME!
 			),
 			//particle::point::null(),
 			static_cast<particle::rotation>(0),

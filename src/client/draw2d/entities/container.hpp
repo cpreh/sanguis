@@ -4,14 +4,15 @@
 #include "base.hpp"
 #include "with_orientation.hpp"
 #include "with_speed.hpp"
-#include "../sprite/point.hpp"
+#include "../sprite/center.hpp"
 #include "../sprite/dim.hpp"
 #include "../sprite/order.hpp"
 #include "../sprite/rotation_type.hpp"
 #include "../sprite/normal/object.hpp"
 #include "../sprite/normal/system.hpp"
 #include "../sprite/index_fwd.hpp"
-#include "../vector2.hpp"
+#include "../center.hpp"
+#include "../speed.hpp"
 #include <sge/sprite/object_decl.hpp>
 #include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -47,16 +48,14 @@ public:
 	container(
 		sprite::normal::system &,
 		size_type num_sprites,
-		sprite::order
+		sprite::order,
+		sprite::dim const &
 	);
 
 	~container();
 	
-	sprite::point const
+	sprite::center const
 	center() const;
-
-	sprite::point const
-	pos() const;
 protected:
 	typedef sprite_vector::iterator iterator;
 
@@ -69,13 +68,8 @@ protected:
 	);
 
 	virtual void
-	pos(
-		sprite::point const &
-	);
-
-	virtual void
-	dim(
-		sprite::dim const &
+	center(
+		sprite::center const &
 	);
 
 	// with_orientation overrides
@@ -90,10 +84,10 @@ protected:
 	// with_speed overrides
 	virtual void
 	speed(
-		vector2 const &
+		draw2d::speed const &
 	);
 	
-	vector2 const
+	draw2d::speed const
 	speed() const;
 
 	// own functions
@@ -126,13 +120,13 @@ protected:
 	end() const;
 private:
 	void
-	update_pos(
-		sprite::point const &
+	update_center(
+		sprite::center const &
 	);
 
-	vector2
-		speed_,
-		pos_;
+	draw2d::speed speed_;
+
+	draw2d::center center_;
 	
 	sprite_vector sprites_;
 };

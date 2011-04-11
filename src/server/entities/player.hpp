@@ -3,8 +3,8 @@
 
 #include "body_velocity_combiner.hpp"
 #include "with_auras.hpp"
+#include "with_body.hpp"
 #include "with_buffs.hpp"
-#include "with_dim.hpp"
 #include "with_health.hpp"
 #include "with_perks.hpp"
 #include "with_velocity.hpp"
@@ -35,8 +35,8 @@ class player
 :
 	private body_velocity_combiner,
 	public with_auras,
+	public with_body,
 	public with_buffs,
-	public with_dim,
 	public with_health,
 	public with_perks,
 	public with_velocity,

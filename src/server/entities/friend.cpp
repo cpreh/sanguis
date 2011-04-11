@@ -1,4 +1,5 @@
 #include "friend.hpp"
+#include "circle_from_dim.hpp"
 #include "default_solid.hpp"
 #include "pickups/pickup.hpp"
 #include "property/initial.hpp"
@@ -28,15 +29,17 @@ sanguis::server::entities::friend_::friend_(
 			_weapon
 		)
 	),
-	with_buffs(),
-	with_dim(
-		entities::default_solid(),
-		_load_context.entity_dim(
-			load::friend_name(
-				_ftype
-			)
+	with_body(
+		entities::circle_from_dim(
+			_load_context.entity_dim(
+				load::friend_name(
+					_ftype
+				)
+			),
+			entities::default_solid()
 		)
 	),
+	with_buffs(),
 	with_health(
 		_health,
 		_armor
@@ -93,9 +96,8 @@ sanguis::server::entities::friend_::add_message(
 		messages::create(
 			messages::add_friend(
 				this->id(),
-				this->pos().get(),
+				this->center().get(),
 				this->angle().get(),
-				this->dim(),
 				this->abs_speed().get(),
 				this->current_health().get(),
 				this->max_health().get(),

@@ -8,12 +8,12 @@
 
 sanguis::client::draw2d::vector2 const
 sanguis::client::draw2d::scene::screen_center(
-	sprite::point const &_player_center,
+	sprite::center const &_player_center,
 	sge::renderer::screen_size const &_screen_size
 )
 {
 	sprite::point const translation_center(
-		-_player_center
+		-_player_center.get()
 		+
 		fcppt::math::dim::structure_cast<
 			fcppt::math::dim::static_<
