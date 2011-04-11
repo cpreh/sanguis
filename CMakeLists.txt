@@ -796,7 +796,6 @@ SET(
 	src/messages/types/level.hpp
 	src/messages/types/message.hpp
 	src/messages/types/message_type.hpp
-	src/messages/types/size.hpp
 	src/messages/types/space_unit.hpp
 	src/messages/types/string.hpp
 	src/messages/types/string_vector.hpp
