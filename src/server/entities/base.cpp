@@ -56,10 +56,14 @@ sanguis::server::entities::base::update(
 }
 
 void
-sanguis::server::entities::base::destroy()
+sanguis::server::entities::base::remove()
 {
 	this->on_remove();
+}
 
+void
+sanguis::server::entities::base::destroy()
+{
 	this->on_destroy();
 }
 

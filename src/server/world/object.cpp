@@ -581,6 +581,8 @@ sanguis::server::world::object::update_entity(
 		entity.dead()
 	)
 	{
+		_it->second->remove();
+
 		entities_.erase(
 			_it
 		);

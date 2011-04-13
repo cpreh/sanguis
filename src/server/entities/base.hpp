@@ -47,6 +47,9 @@ public:
 	);
 
 	void
+	remove();
+
+	void
 	destroy();
 
 	// linking with other objects
