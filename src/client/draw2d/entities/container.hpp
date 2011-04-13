@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_CONTAINER_HPP_INCLUDED
 
 #include "base.hpp"
+#include "with_center.hpp"
 #include "with_orientation.hpp"
 #include "with_speed.hpp"
 #include "../sprite/center.hpp"
@@ -30,6 +31,7 @@ namespace entities
 class container
 :
 	public base,
+	public with_center,
 	public with_orientation,
 	public with_speed
 {

@@ -84,19 +84,6 @@ sanguis::client::draw2d::entities::explosion::~explosion()
 }
 
 void
-sanguis::client::draw2d::entities::explosion::center(
-	sprite::center const &
-)
-{
-}
-
-sanguis::client::draw2d::sprite::center const
-sanguis::client::draw2d::entities::explosion::center() const
-{
-	return center_;
-}
-
-void
 sanguis::client::draw2d::entities::explosion::update(
 	time_type const _delta
 )

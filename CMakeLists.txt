@@ -238,6 +238,8 @@ SET(
 	src/client/draw2d/entities/player_fwd.hpp
 	src/client/draw2d/entities/sentry.cpp
 	src/client/draw2d/entities/sentry.hpp
+	src/client/draw2d/entities/with_center.cpp
+	src/client/draw2d/entities/with_center.hpp
 	src/client/draw2d/entities/with_health.cpp
 	src/client/draw2d/entities/with_health.hpp
 	src/client/draw2d/entities/with_orientation.cpp

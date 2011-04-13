@@ -46,14 +46,6 @@ private:
 		time_type
 	);
 
-	void
-	center(
-		sprite::center const &
-	);
-
-	sprite::center const
-	center() const;
-
 	particle::base_ptr
 	generate_explosion();
 

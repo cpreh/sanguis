@@ -1,6 +1,7 @@
 #include "dispatcher.hpp"
 #include "environment.hpp"
 #include "configure_entity.hpp"
+#include "../entities/with_center.hpp"
 #include "../entities/with_health.hpp"
 #include "../entities/with_orientation.hpp"
 #include "../entities/with_speed.hpp"
@@ -275,8 +276,12 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	sanguis::messages::move const &_message
 )
 {
-	this->entity(
-		_message.get<sanguis::messages::roles::entity_id>()
+	fcppt::dynamic_cast_<
+		entities::with_center &
+	>(
+		this->entity(
+			_message.get<sanguis::messages::roles::entity_id>()
+		)
 	).center(
 		draw2d::sprite::center(
 			draw2d::virtual_to_screen(

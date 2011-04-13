@@ -12,7 +12,7 @@ sanguis::client::draw2d::entities::base::base()
 void
 sanguis::client::draw2d::entities::base::decay()
 {
-	on_decay();
+	this->on_decay();
 }
 
 bool
@@ -20,7 +20,7 @@ sanguis::client::draw2d::entities::base::may_be_removed() const
 {
 	return
 		removed_
-		|| is_decayed();
+		|| this->is_decayed();
 }
 
 sanguis::client::draw2d::entities::base::~base()

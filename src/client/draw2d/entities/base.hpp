@@ -33,14 +33,6 @@ public:
 	bool
 	may_be_removed() const;
 	
-	virtual void
-	center(
-		sprite::center const &
-	) = 0;
-
-	virtual sprite::center const
-	center() const = 0;
-
 	virtual ~base();
 private:
 	virtual void
