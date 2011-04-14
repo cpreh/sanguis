@@ -437,12 +437,9 @@ SET(
 	src/client/gui/object.cpp
 	src/client/gui/object.hpp
 	src/client/gui/object_fwd.hpp
-	src/client/gui/perk/activation.cpp
-	src/client/gui/perk/activation.hpp
 	src/client/gui/perk/chooser.cpp
 	src/client/gui/perk/chooser.hpp
 	src/client/gui/perk/chooser_fwd.hpp
-	src/client/gui/perk/send_callback.hpp
 	src/client/health.hpp
 	src/client/level.hpp
 	src/client/log.cpp
@@ -456,9 +453,17 @@ SET(
 	src/client/next_id.hpp
 	src/client/object.cpp
 	src/client/object.hpp
-	src/client/perk_cast.cpp
-	src/client/perk_cast.hpp
-	src/client/perk_container.hpp
+	src/client/perk/cast.cpp
+	src/client/perk/cast.hpp
+	src/client/perk/change_callback.hpp
+	src/client/perk/change_function.hpp
+	src/client/perk/container.hpp
+	src/client/perk/level_callback.hpp
+	src/client/perk/level_function.hpp
+	src/client/perk/send_callback.hpp
+	src/client/perk/state.cpp
+	src/client/perk/state.hpp
+	src/client/perk/state_fwd.hpp
 	src/client/send_callback.hpp
 	src/client/server_callback.hpp
 	src/client/states/console.cpp

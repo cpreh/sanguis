@@ -119,6 +119,10 @@ sanguis::server::global::context::insert_player(
 		server::vector::null()
 	);
 
+	entities::player &player_ref(
+		*player
+	);
+
 	cur_world.insert(
 		entities::unique_ptr(
 			move(
@@ -148,6 +152,12 @@ sanguis::server::global::context::insert_player(
 		entities::insert_parameters_center(
 			spawn_pos
 		)
+	);
+
+	// send this after the player has been created
+	server::send_available_perks(
+		player_ref,
+		send_unicast_
 	);
 }
 

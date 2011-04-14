@@ -11,16 +11,13 @@
 #include "../events/message_fwd.hpp"
 #include "../events/net_error_fwd.hpp"
 #include "../events/tick_fwd.hpp"
-#include "../gui/perk/chooser_fwd.hpp"
 #include "../../messages/base.hpp"
 #include "../../messages/add_own_player.hpp"
 #include "../../messages/console_print.hpp"
 #include "../../messages/add_console_command.hpp"
 #include "../../messages/pause.hpp"
 #include "../../messages/unpause.hpp"
-#include "../../messages/available_perks.hpp"
 #include "../../messages/level_up.hpp"
-#include "../../perk_type.hpp"
 #include <sge/renderer/state/scoped.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
@@ -108,16 +105,8 @@ public:
 		messages::unpause const &
 	);
 
-	result_type
-	operator()(
-		messages::available_perks const &
-	);
-
 	control::environment &
 	control_environment();
-
-	client::gui::perk::chooser &
-	perk_chooser();
 
 	client::console::object &
 	console();
@@ -127,20 +116,11 @@ private:
 		messages::base const &
 	);
 
-	void
-	send_perk_choose(
-		perk_type::type
-	);
-
 	sge::renderer::state::scoped const renderer_state_;
 
 	fcppt::scoped_ptr<
 		client::console::object
 	> console_;
-
-	fcppt::scoped_ptr<
-		client::gui::perk::chooser
-	> perk_chooser_;
 
 	fcppt::scoped_ptr<
 		client::daytime_settings

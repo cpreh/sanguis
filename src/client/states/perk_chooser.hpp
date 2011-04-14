@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_STATES_PERK_CHOOSER_HPP_INCLUDED
 
 #include "has_player.hpp"
-#include "../gui/perk/activation.hpp"
+#include "../gui/perk/chooser.hpp"
 #include "../events/action_fwd.hpp"
 #include "../events/tick_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
@@ -46,15 +46,15 @@ public:
 
 	boost::statechart::result
 	react(
-		events::tick const &
+		events::action const &
 	);
 
 	boost::statechart::result
 	react(
-		events::action const &
+		events::tick const &
 	);
 private:
-	client::gui::perk::activation const chooser_activation_;
+	client::gui::perk::chooser perk_chooser_gui_;
 };
 
 }

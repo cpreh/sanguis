@@ -13,24 +13,15 @@ sanguis::client::states::perk_chooser::perk_chooser(
 	my_base(
 		_ctx
 	),
-	chooser_activation_(
-		context<running>().perk_chooser()
+	perk_chooser_gui_(
+		context<machine>().gui(),
+		context<has_player>().perk_state()
 	)
 {
 }
 
 sanguis::client::states::perk_chooser::~perk_chooser()
 {
-}
-
-boost::statechart::result
-sanguis::client::states::perk_chooser::react(
-	events::tick const &
-)
-{
-	context<running>().perk_chooser().process();
-
-	return forward_event();
 }
 
 boost::statechart::result
@@ -51,4 +42,16 @@ sanguis::client::states::perk_chooser::react(
 		return discard_event(); // throw all other input away
 	}
 #endif
+}
+
+boost::statechart::result
+sanguis::client::states::perk_chooser::react(
+	events::tick const &_event
+)
+{
+	perk_chooser_gui_.process(
+		_event.delta()
+	);
+
+	return forward_event();
 }

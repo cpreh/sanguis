@@ -3,18 +3,15 @@
 #include "../daytime_settings.hpp"
 #include "../log.hpp"
 #include "../music_handler.hpp"
-#include "../perk_cast.hpp"
 #include "../console/object.hpp"
 #include "../events/connected.hpp"
 #include "../events/menu.hpp"
 #include "../events/message.hpp"
 #include "../events/net_error.hpp"
 #include "../events/tick.hpp"
-#include "../gui/perk/chooser.hpp"
 #include "../draw2d/scene/object.hpp"
 #include "../../messages/call/object.hpp"
 #include "../../messages/create.hpp"
-#include "../../messages/player_choose_perk.hpp"
 #include "../../load/context.hpp"
 #include <sge/audio/player.hpp>
 #include <sge/console/object.hpp>
@@ -55,20 +52,6 @@ sanguis::client::states::running::running(
 			std::tr1::bind(
 				&machine::send,
 				&context<machine>(),
-				std::tr1::placeholders::_1
-			)
-		)
-	),
-	perk_chooser_(
-		fcppt::make_unique_ptr<
-			client::gui::perk::chooser
-		>(
-			fcppt::ref(
-				context<machine>().gui()
-			),
-			std::tr1::bind(
-				&running::send_perk_choose,
-				this,
 				std::tr1::placeholders::_1
 			)
 		)
@@ -148,13 +131,12 @@ sanguis::client::states::running::react(
 )
 {
 	static sanguis::messages::call::object<
-		boost::mpl::vector6<
+		boost::mpl::vector5<
 			sanguis::messages::level_up,
 			sanguis::messages::console_print,
 			sanguis::messages::add_console_command,
 			sanguis::messages::pause,
-			sanguis::messages::unpause,
-			sanguis::messages::available_perks
+			sanguis::messages::unpause
 		>,
 		running
 	> dispatcher;
@@ -187,12 +169,6 @@ sanguis::client::states::running::operator()(
 	drawer_->process_message(
 		*sanguis::messages::create(
 			_message
-		)
-	);
-
-	perk_chooser_->level_up(
-		client::level(
-			_message.get<sanguis::messages::level_type>()
 		)
 	);
 
@@ -280,30 +256,10 @@ sanguis::client::states::running::operator()(
 	return discard_event();
 }
 
-boost::statechart::result
-sanguis::client::states::running::operator()(
-	sanguis::messages::available_perks const &_message
-)
-{
-	perk_chooser_->perks(
-		client::perk_cast(
-			_message.get<sanguis::messages::perk_list>()
-		)
-	);
-
-	return discard_event();
-}
-
 sanguis::client::control::environment &
 sanguis::client::states::running::control_environment()
 {
 	return drawer_->control_environment();
-}
-
-sanguis::client::gui::perk::chooser &
-sanguis::client::states::running::perk_chooser()
-{
-	return *perk_chooser_;
 }
 
 sanguis::client::console::object &
@@ -322,18 +278,4 @@ sanguis::client::states::running::handle_default_msg(
 	);
 
 	return discard_event();
-}
-
-void
-sanguis::client::states::running::send_perk_choose(
-	perk_type::type const _perk_type
-)
-{
-	context<machine>().send(
-		sanguis::messages::create(
-			sanguis::messages::player_choose_perk(
-				_perk_type
-			)
-		)
-	);
 }

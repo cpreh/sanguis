@@ -7,19 +7,19 @@
 
 void
 sanguis::server::send_available_perks(
-	entities::player const &p,
-	unicast_callback const &send
+	entities::player const &_player,
+	server::unicast_callback const &_send
 )
 {
 	perks::list const &list(
-		p.available_perks()
+		_player.available_perks()
 	);
 
-	send(
-		p.player_id(),
+	_send(
+		_player.player_id(),
 		messages::create(
 			messages::available_perks(
-				p.id(),
+				_player.id(),
 				messages::types::enum_vector(
 					list.begin(),
 					list.end()

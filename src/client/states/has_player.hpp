@@ -8,9 +8,13 @@
 #include "../control/actions/any_fwd.hpp"
 #include "../events/message_fwd.hpp"
 #include "../events/action_fwd.hpp"
+#include "../perk/state_fwd.hpp"
+#include "../../messages/available_perks.hpp"
 #include "../../messages/base_fwd.hpp"
-#include "../../messages/remove_id.hpp"
 #include "../../messages/give_weapon.hpp"
+#include "../../messages/level_up.hpp"
+#include "../../messages/remove_id.hpp"
+#include "../../perk_type.hpp"
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <boost/statechart/state.hpp>
@@ -66,13 +70,26 @@ public:
 
 	result_type
 	operator()(
+		messages::available_perks const &
+	);
+
+	result_type
+	operator()(
 		messages::give_weapon const &
+	);
+
+	result_type
+	operator()(
+		messages::level_up const &
 	);
 
 	result_type
 	operator()(
 		messages::remove_id const &
 	);
+
+	perk::state &
+	perk_state();
 private:
 	void
 	handle_player_action(
@@ -84,6 +101,11 @@ private:
 		sanguis::messages::base const &
 	);
 
+	void
+	send_perk_choose(
+		sanguis::perk_type::type
+	);
+
 	fcppt::scoped_ptr<
 		control::input_translator
 	> input_translator_;
@@ -91,6 +113,10 @@ private:
 	fcppt::scoped_ptr<
 		control::action_handler
 	> action_handler_;
+
+	fcppt::scoped_ptr<
+		perk::state
+	> perk_state_;
 };
 
 }

@@ -1,14 +1,14 @@
-#include "perk_cast.hpp"
+#include "cast.hpp"
 #include <fcppt/container/raw_vector.hpp>
 #include <fcppt/assert.hpp>
 #include <boost/foreach.hpp>
 
-sanguis::client::perk_container const
-sanguis::client::perk_cast(
+sanguis::client::perk::container const
+sanguis::client::perk::cast(
 	messages::types::enum_vector const &_perks
 )
 {
-	perk_container target;
+	perk::container target;
 
 	BOOST_FOREACH(
 		messages::types::enum_vector::const_reference elem,

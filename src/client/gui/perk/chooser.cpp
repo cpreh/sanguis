@@ -1,17 +1,11 @@
 #include "chooser.hpp"
+#include "../../perk/state.hpp"
 //#include "from_perk_type.hpp"
 #include "../../log.hpp"
-//#include <fcppt/container/ptr/push_back_unique_ptr.hpp>
-//#include <fcppt/filesystem/path.hpp>
-//#include <fcppt/math/dim/arithmetic.hpp>
-//#include <fcppt/math/dim/output.hpp>
-//#include <fcppt/math/dim/structure_cast.hpp>
-//#include <fcppt/math/vector/arithmetic.hpp>
-//#include <fcppt/math/vector/output.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/headers.hpp>
-//#include <fcppt/tr1/functional.hpp>
+#include <fcppt/tr1/functional.hpp>
 #include <fcppt/assert.hpp>
 #include <fcppt/text.hpp>
 
@@ -71,19 +65,36 @@ dialog_pos(
 
 sanguis::client::gui::perk::chooser::chooser(
 	gui::object &_gui,
-	perk::send_callback const &_send_callback
+	client::perk::state &_state
 )
 :
-	perks_(),
-	current_level_(
-		0
+	state_(_state),
+	perk_connection_(
+		_state.register_perks_change(
+			std::tr1::bind(
+				&gui::perk::chooser::perks,
+				this,
+				std::tr1::placeholders::_1
+			)
+		)
 	),
-	consumed_levels_(
-		0
-	),
-	connections_(),
-	send_callback_(_send_callback)
+	level_connection_(
+		_state.register_level_change(
+			std::tr1::bind(
+				&gui::perk::chooser::level,
+				this,
+				std::tr1::placeholders::_1
+			)
+		)
+	)
 {
+	this->perks(
+		_state.perks()
+	);
+
+	this->level(
+		_state.level()
+	);
 #if 0
 	FCPPT_LOG_DEBUG(
 		mylogger,
@@ -101,7 +112,9 @@ sanguis::client::gui::perk::chooser::~chooser()
 }
 
 void
-sanguis::client::gui::perk::chooser::process()
+sanguis::client::gui::perk::chooser::process(
+	time_type const _time
+)
 {
 #if 0
 	if(activated())
@@ -114,7 +127,7 @@ sanguis::client::gui::perk::chooser::process()
 
 void
 sanguis::client::gui::perk::chooser::perks(
-	client::perk_container const &_perks
+	client::perk::container const &_perks
 )
 {
 	FCPPT_LOG_DEBUG(
@@ -122,9 +135,9 @@ sanguis::client::gui::perk::chooser::perks(
 		fcppt::log::_ << FCPPT_TEXT("got new set of perks")
 	);
 
+#if 0
 	perks_ = _perks;
 
-#if 0
 	if (activated())
 		regenerate_widgets();
 	else
@@ -133,91 +146,10 @@ sanguis::client::gui::perk::chooser::perks(
 }
 
 void
-sanguis::client::gui::perk::chooser::level_up(
-	client::level const _current_level
+sanguis::client::gui::perk::chooser::level(
+	client::level const _level
 )
 {
-	FCPPT_ASSERT(
-		current_level_ <= _current_level
-	);
-
-	current_level_ = _current_level;
-
-#if 0
-	if (activated())
-		regenerate_label();
-	else
-		dirty_ = true;
-#endif
-}
-
-bool
-sanguis::client::gui::perk::chooser::activated() const
-{
-#if 0
-	switch (background_.activation())
-	{
-		case sge::gui::activation_state::active:
-			return true;
-		case sge::gui::activation_state::inactive:
-			return false;
-	}
-	return false;
-#endif
-	return false; // FIXME
-}
-
-void
-sanguis::client::gui::perk::chooser::activated(
-	bool const _activated
-)
-{
-#if 0
-	FCPPT_LOG_DEBUG(
-		mylogger,
-		fcppt::log::_
-			<< FCPPT_TEXT("set activation to ")
-			<< _activated
-	);
-
-	background_.activation(
-		_n
-		?
-			sge::gui::activation_state::active
-		:
-			sge::gui::activation_state::inactive
-	);
-	
-	if (_n && dirty_)
-	{
-		regenerate_widgets();
-		dirty_ = false;
-	}
-#endif
-}
-
-sanguis::client::level const
-sanguis::client::gui::perk::chooser::levels_left() const
-{
-	return
-		current_level_
-		- consumed_levels_;
-}
-
-void
-sanguis::client::gui::perk::chooser::regenerate_label()
-{
-#if 0
-	perks_left_.text(
-		SGE_FONT_TEXT_LIT("Perks left: ")
-		+
-		fcppt::lexical_cast<
-			sge::font::text::string
-		>(
-			this->levels_left()
-		)
-	);
-#endif
 }
 
 void
@@ -266,6 +198,7 @@ sanguis::client::gui::perk::chooser::regenerate_widgets()
 #endif
 }
 
+#if 0
 void
 sanguis::client::gui::perk::chooser::choose_callback(
 	perk_type::type const _perk
@@ -299,6 +232,8 @@ sanguis::client::gui::perk::chooser::consume_level()
 		this->levels_left().get() != 0
 	);
 
+	state_.consume_level();
+
 	consumed_levels_++;
 
 #if 0
@@ -308,6 +243,7 @@ sanguis::client::gui::perk::chooser::consume_level()
 		dirty_ = true;
 #endif
 }
+#endif
 
 #if 0
 sanguis::client::perk_chooser::image_map::const_iterator const
