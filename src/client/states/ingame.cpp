@@ -55,8 +55,7 @@ sanguis::client::states::ingame::react(
 		case control::actions::nullary_type::console:
 			return transit<states::console>();
 		case control::actions::nullary_type::perk_menu:
-			return discard_event(); // FIXME
-			//return transit<states::perk_chooser>();
+			return transit<states::perk_chooser>();
 		case control::actions::nullary_type::escape:
 			context<machine>().quit();
 
@@ -64,7 +63,6 @@ sanguis::client::states::ingame::react(
 			//return transit<states::ingame_menu>();
 		default:
 			break;
-			// forward the event to the inner state, so it can be processed normally
 		}
 	}
 

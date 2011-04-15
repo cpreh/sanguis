@@ -5,6 +5,8 @@
 #include "../events/net_error.hpp"
 #include "../events/tick.hpp"
 #include "../gui/perk/chooser.hpp"
+#include <fcppt/variant/holds_type.hpp>
+#include <fcppt/variant/object_impl.hpp>
 
 sanguis::client::states::perk_chooser::perk_chooser(
 	my_context _ctx
@@ -29,19 +31,32 @@ sanguis::client::states::perk_chooser::react(
 	events::action const &_event
 )
 {
-	return discard_event(); // FIXME
-#if 0
-	switch(
-		_event.value().type()
+	control::actions::variant const action(
+		_event.value().get()
+	);
+
+	if(
+		fcppt::variant::holds_type<
+			control::actions::nullary
+		>(
+			action
+		)
 	)
 	{
-	case control::action_type::perk_menu:
-	case control::action_type::escape:
-		return transit<states::ingame>();
-	default:
-		return discard_event(); // throw all other input away
+		switch(
+			action.get<
+				control::actions::nullary
+			>().type()
+		)
+		{
+		case control::actions::nullary_type::perk_menu:
+			return transit<states::ingame>();
+		default:
+			break;
+		}
 	}
-#endif
+
+	return this->forward_event();
 }
 
 boost::statechart::result
