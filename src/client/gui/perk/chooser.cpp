@@ -1,69 +1,18 @@
 #include "chooser.hpp"
+#include "item.hpp"
 #include "../object.hpp"
 #include "../../perk/state.hpp"
 //#include "from_perk_type.hpp"
-#include "../../log.hpp"
 #include "../../../media_path.hpp"
-#include <fcppt/log/parameters/inherited.hpp>
-#include <fcppt/log/object.hpp>
-#include <fcppt/log/headers.hpp>
+#include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/assert.hpp>
+#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
-
-namespace
-{
-
-fcppt::log::object mylogger(
-	fcppt::log::parameters::inherited(
-		sanguis::client::log(),
-		FCPPT_TEXT("perk chooser")
-	)
-);
-
-#if 0
-sge::gui::dim const
-dialog_size(
-	sanguis::resolution_type const &_resolution
-)
-{
-	float const scale_x = 0.4f,
-	            scale_y = 0.8f;
-	
-	return sge::gui::dim(
-		static_cast<sge::gui::unit>(
-			static_cast<float>(
-				resolution_.w()
-			) * scale_x
-		),
-		static_cast<sge::gui::unit>(
-			static_cast<float>(
-				resolution_.h()
-			) * scale_y
-		)
-	);
-}
-
-sge::gui::point const
-dialog_pos(
-	sanguis::resolution_type const &_resolution
-)
-{
-	return 
-		fcppt::math::dim::structure_cast<sge::gui::point>(
-			resolution_
-		) /
-		static_cast<sge::gui::unit>(2) -
-		fcppt::math::dim::structure_cast<sge::gui::point>(
-			dialog_size(
-				resolution_
-			)
-		) /
-		static_cast<sge::gui::unit>(2);
-}
-#endif
-
-}
+#include <boost/foreach.hpp>
+#include <CEGUI/elements/CEGUITree.h>
+#include <CEGUI/CEGUIWindowManager.h>
 
 sanguis::client::gui::perk::chooser::chooser(
 	gui::object &_gui,
@@ -98,7 +47,17 @@ sanguis::client::gui::perk::chooser::chooser(
 	),
 	scoped_gui_sheet_(
 		scoped_layout_.window()
-	)
+	),
+	tree_widget_(
+		dynamic_cast<
+			CEGUI::Tree &
+		>(
+			*CEGUI::WindowManager::getSingleton().getWindow(
+				"PerkChooser/Tree"
+			)
+		)
+	),
+	items_()
 {
 	this->perks(
 		_state.perks()
@@ -107,16 +66,6 @@ sanguis::client::gui::perk::chooser::chooser(
 	this->level(
 		_state.level()
 	);
-#if 0
-	FCPPT_LOG_DEBUG(
-		mylogger,
-		fcppt::log::_
-			<< FCPPT_TEXT("started, dialog size: ")
-			<< background_.size()
-			<< FCPPT_TEXT(", dialog position: ")
-			<< background_.screen_pos()
-	);
-#endif
 }
 
 sanguis::client::gui::perk::chooser::~chooser()
@@ -144,10 +93,26 @@ sanguis::client::gui::perk::chooser::perks(
 	client::perk::container const &_perks
 )
 {
-	FCPPT_LOG_DEBUG(
-		mylogger,
-		fcppt::log::_ << FCPPT_TEXT("got new set of perks")
-	);
+	items_.clear();
+
+	BOOST_FOREACH(
+		client::perk::container::value_type cur,
+		_perks
+	)
+		fcppt::container::ptr::push_back_unique_ptr(
+			items_,
+			fcppt::make_unique_ptr<
+				perk::item
+			>(
+				fcppt::ref(
+					tree_widget_
+				),
+				fcppt::ref(
+					gui_
+				),
+				cur
+			)
+		);
 
 #if 0
 	perks_ = _perks;
@@ -218,15 +183,6 @@ sanguis::client::gui::perk::chooser::choose_callback(
 	perk_type::type const _perk
 )
 {
-	FCPPT_LOG_DEBUG(
-		mylogger,
-		fcppt::log::_
-			<< FCPPT_TEXT("chose perk ")
-			<< _perk
-			<< FCPPT_TEXT(", levels left: ")
-			<< this->levels_left()
-	);
-
 	if(
 		this->levels_left().get() == 0
 	)

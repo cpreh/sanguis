@@ -422,8 +422,6 @@ SET(
 	src/client/events/tick.hpp
 	src/client/events/tick_fwd.hpp
 	src/client/exp.hpp
-	src/client/from_perk_type.cpp
-	src/client/from_perk_type.hpp
 	src/client/gmtime.cpp
 	src/client/gmtime.hpp
 	src/client/gui/menu/callbacks/cancel_connect.hpp
@@ -444,6 +442,9 @@ SET(
 	src/client/gui/perk/chooser.cpp
 	src/client/gui/perk/chooser.hpp
 	src/client/gui/perk/chooser_fwd.hpp
+	src/client/gui/perk/item.cpp
+	src/client/gui/perk/item.hpp
+	src/client/gui/perk/item_fwd.hpp
 	src/client/health.hpp
 	src/client/level.hpp
 	src/client/log.cpp
@@ -468,6 +469,8 @@ SET(
 	src/client/perk/state.cpp
 	src/client/perk/state.hpp
 	src/client/perk/state_fwd.hpp
+	src/client/perk/to_string.cpp
+	src/client/perk/to_string.hpp
 	src/client/send_callback.hpp
 	src/client/server_callback.hpp
 	src/client/states/console.cpp
