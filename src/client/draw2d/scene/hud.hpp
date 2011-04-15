@@ -41,9 +41,7 @@ public:
 	);
 
 	void
-	update(
-		time_type
-	);
+	draw();
 private:
 	sge::font::metrics_ptr const font_metrics_;
 	

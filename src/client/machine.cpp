@@ -2,6 +2,7 @@
 #include "events/connected.hpp"
 #include "events/message.hpp"
 #include "events/net_error.hpp"
+#include "events/render.hpp"
 #include "events/tick.hpp"
 #include "log.hpp"
 #include "../messages/auto_ptr.hpp"
@@ -156,18 +157,28 @@ sanguis::client::machine::send(
 
 bool
 sanguis::client::machine::process(
-	events::tick const &_event
+	sanguis::time_type const _time
 )
+{
+	this->process_event(
+		events::tick(
+			_time
+		)
+	);
+
+	return running_;
+}
+
+void
+sanguis::client::machine::draw()
 {
 	sge::renderer::scoped_block const block(
 		renderer_
 	);
 
 	this->process_event(
-		_event
+		events::render()
 	);
-
-	return running_;
 }
 
 void

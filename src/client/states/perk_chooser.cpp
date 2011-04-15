@@ -3,6 +3,8 @@
 #include "../events/action.hpp"
 #include "../events/message.hpp"
 #include "../events/net_error.hpp"
+#include "../events/overlay.hpp"
+#include "../events/render.hpp"
 #include "../events/tick.hpp"
 #include "../gui/perk/chooser.hpp"
 #include <fcppt/variant/holds_type.hpp>
@@ -61,6 +63,16 @@ sanguis::client::states::perk_chooser::react(
 
 boost::statechart::result
 sanguis::client::states::perk_chooser::react(
+	events::overlay const &
+)
+{
+	perk_chooser_gui_.draw();
+
+	return this->discard_event();
+}
+
+boost::statechart::result
+sanguis::client::states::perk_chooser::react(
 	events::tick const &_event
 )
 {
@@ -68,5 +80,5 @@ sanguis::client::states::perk_chooser::react(
 		_event.delta()
 	);
 
-	return forward_event();
+	return this->discard_event();
 }

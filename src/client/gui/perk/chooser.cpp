@@ -1,7 +1,9 @@
 #include "chooser.hpp"
+#include "../object.hpp"
 #include "../../perk/state.hpp"
 //#include "from_perk_type.hpp"
 #include "../../log.hpp"
+#include "../../../media_path.hpp"
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/headers.hpp>
@@ -68,6 +70,7 @@ sanguis::client::gui::perk::chooser::chooser(
 	client::perk::state &_state
 )
 :
+	gui_(_gui),
 	state_(_state),
 	perk_connection_(
 		_state.register_perks_change(
@@ -86,6 +89,15 @@ sanguis::client::gui::perk::chooser::chooser(
 				std::tr1::placeholders::_1
 			)
 		)
+	),
+	scoped_layout_(
+		sanguis::media_path()
+		/ FCPPT_TEXT("gui")
+		/ FCPPT_TEXT("perk_chooser.layout"),
+		_gui.charconv_system()
+	),
+	scoped_gui_sheet_(
+		scoped_layout_.window()
 	)
 {
 	this->perks(
@@ -113,16 +125,18 @@ sanguis::client::gui::perk::chooser::~chooser()
 
 void
 sanguis::client::gui::perk::chooser::process(
-	time_type const _time
+	time_type const _delta
 )
 {
-#if 0
-	if(activated())
-	{
-		manager_.update();
-		manager_.draw();
-	}
-#endif
+	gui_.update(
+		_delta
+	);
+}
+
+void
+sanguis::client::gui::perk::chooser::draw()
+{
+	gui_.render();
 }
 
 void
@@ -152,10 +166,10 @@ sanguis::client::gui::perk::chooser::level(
 {
 }
 
+#if 0
 void
 sanguis::client::gui::perk::chooser::regenerate_widgets()
 {
-#if 0
 	regenerate_label();
 
 	buttons_.clear();
@@ -195,8 +209,8 @@ sanguis::client::gui::perk::chooser::regenerate_widgets()
 			)
 		);
 	}
-#endif
 }
+#endif
 
 #if 0
 void

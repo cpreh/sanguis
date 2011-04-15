@@ -4,6 +4,7 @@
 #include "has_player.hpp"
 #include "../gui/perk/chooser.hpp"
 #include "../events/action_fwd.hpp"
+#include "../events/overlay_fwd.hpp"
 #include "../events/tick_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 #include <boost/statechart/state.hpp>
@@ -29,12 +30,15 @@ class perk_chooser
 		perk_chooser
 	);
 public:
-	typedef boost::mpl::list<
-		boost::statechart::custom_reaction<
-			events::tick
-		>,
+	typedef boost::mpl::list3<
 		boost::statechart::custom_reaction<
 			events::action
+		>,
+		boost::statechart::custom_reaction<
+			events::overlay
+		>,
+		boost::statechart::custom_reaction<
+			events::tick
 		>
 	> reactions;
 
@@ -47,6 +51,11 @@ public:
 	boost::statechart::result
 	react(
 		events::action const &
+	);
+
+	boost::statechart::result
+	react(
+		events::overlay const &
 	);
 
 	boost::statechart::result

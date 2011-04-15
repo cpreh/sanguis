@@ -10,6 +10,7 @@
 #include "../draw2d/scene/object_fwd.hpp"
 #include "../events/message_fwd.hpp"
 #include "../events/net_error_fwd.hpp"
+#include "../events/render_fwd.hpp"
 #include "../events/tick_fwd.hpp"
 #include "../../messages/base.hpp"
 #include "../../messages/add_own_player.hpp"
@@ -45,9 +46,12 @@ class running
 		running
 	);
 public:
-	typedef boost::mpl::list3<
+	typedef boost::mpl::list4<
 		boost::statechart::custom_reaction<
 			events::tick
+		>,
+		boost::statechart::custom_reaction<
+			events::render
 		>,
 		boost::statechart::custom_reaction<
 			events::message
@@ -66,6 +70,11 @@ public:
 	boost::statechart::result
 	react(
 		events::tick const &
+	);
+
+	boost::statechart::result
+	react(
+		events::render const &
 	);
 
 	boost::statechart::result

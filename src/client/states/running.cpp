@@ -8,6 +8,8 @@
 #include "../events/menu.hpp"
 #include "../events/message.hpp"
 #include "../events/net_error.hpp"
+#include "../events/overlay.hpp"
+#include "../events/render.hpp"
 #include "../events/tick.hpp"
 #include "../draw2d/scene/object.hpp"
 #include "../../messages/call/object.hpp"
@@ -106,23 +108,35 @@ sanguis::client::states::running::react(
 	events::tick const &_event
 )
 {
+	context<machine>().resources().update(
+		_event.delta()
+	);
+
 	drawer_->set_time(
 		daytime_settings_->current_time()
 	);
 
-	drawer_->draw(
-		_event.delta()
-	);
-
-	console_->draw();
-
-	context<machine>().resources().update(
+	drawer_->update(
 		_event.delta()
 	);
 
 	music_->process();
 
-	return discard_event();
+	return this->discard_event();
+}
+
+boost::statechart::result
+sanguis::client::states::running::react(
+	events::render const &
+)
+{
+	drawer_->draw();
+
+	this->post_event(
+		events::overlay()
+	);
+
+	return this->discard_event();
 }
 
 boost::statechart::result

@@ -40,9 +40,7 @@ sanguis::client::draw2d::scene::hud::level(
 }
 
 void
-sanguis::client::draw2d::scene::hud::update(
-	time_type
-)
+sanguis::client::draw2d::scene::hud::draw()
 { 
 	frames_counter_.update();
 

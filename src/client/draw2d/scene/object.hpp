@@ -72,9 +72,12 @@ public:
 	);
 
 	void
-	draw(
+	update(
 		time_type
 	);
+
+	void
+	draw();
 
 	void
 	pause(

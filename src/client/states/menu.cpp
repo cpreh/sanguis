@@ -12,6 +12,7 @@
 #include "../events/menu.hpp"
 #include "../events/message.hpp"
 #include "../events/net_error.hpp"
+#include "../events/render.hpp"
 #include "../events/tick.hpp"
 #include "../log.hpp"
 #include <sge/renderer/state/list.hpp>
@@ -83,6 +84,16 @@ sanguis::client::states::menu::react(
 	menu_.process(
 		_event.delta()
 	);
+
+	return discard_event();
+}
+
+boost::statechart::result
+sanguis::client::states::menu::react(
+	events::render const &
+)
+{
+	menu_.draw();
 
 	return discard_event();
 }

@@ -7,7 +7,10 @@
 #include "../events/action.hpp"
 #include "../events/message.hpp"
 #include "../events/net_error.hpp"
+#include "../events/overlay.hpp"
+#include "../events/render.hpp"
 #include "../events/tick.hpp"
+#include "../console/object.hpp"
 #include <fcppt/variant/holds_type.hpp>
 #include <fcppt/variant/object_impl.hpp>
 
@@ -57,6 +60,16 @@ sanguis::client::states::console::react(
 			break;
 		}
 	}
+
+	return this->discard_event();
+}
+
+boost::statechart::result
+sanguis::client::states::console::react(
+	events::overlay const &
+)
+{
+	context<running>().console().draw();
 
 	return this->discard_event();
 }

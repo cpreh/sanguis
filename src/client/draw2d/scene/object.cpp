@@ -203,7 +203,7 @@ sanguis::client::draw2d::scene::object::process_message(
 }
 
 void
-sanguis::client::draw2d::scene::object::draw(
+sanguis::client::draw2d::scene::object::update(
 	time_type const _delta
 )
 {
@@ -243,12 +243,14 @@ sanguis::client::draw2d::scene::object::draw(
 				it
 			);
 	}
+}
 
+void
+sanguis::client::draw2d::scene::object::draw()
+{
 	this->render_systems();
 
-	hud_->update(
-		_delta
-	);
+	hud_->draw();
 }
 
 void

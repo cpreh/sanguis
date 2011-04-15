@@ -8,8 +8,15 @@
 #include "../../perk/state_fwd.hpp"
 #include "../../../perk_type.hpp"
 #include "../../../time_type.hpp"
+#include <sge/cegui/toolbox/scoped_gui_sheet.hpp>
+#include <sge/cegui/toolbox/scoped_layout.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
+
+namespace CEGUI
+{
+class Window;
+}
 
 namespace sanguis
 {
@@ -37,6 +44,9 @@ public:
 	process(
 		time_type
 	);
+
+	void
+	draw();
 private:
 	void
 	perks(
@@ -48,17 +58,17 @@ private:
 		client::level
 	);
 
+	gui::object &gui_;
+
 	client::perk::state &state_;
 
 	fcppt::signal::scoped_connection const
 		perk_connection_,
 		level_connection_;
 
-	client::level const
-	levels_left() const;
+	sge::cegui::toolbox::scoped_layout const scoped_layout_;
 
-	void
-	regenerate_widgets();
+	sge::cegui::toolbox::scoped_gui_sheet const scoped_gui_sheet_;
 };
 
 }

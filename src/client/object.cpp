@@ -248,12 +248,11 @@ sanguis::client::object::loop_handler()
 {
 	if(
 		!machine_.process(
-			events::tick(
-				static_cast<
-					time_type
-				>(
-					frame_timer_.reset()
-				)
+			// TODO
+			static_cast<
+				time_type
+			>(
+				frame_timer_.reset()
 			)
 		)
 		||
@@ -266,9 +265,13 @@ sanguis::client::object::loop_handler()
 		window_->awl_dispatcher()->stop();
 
 		io_service_->stop();
+
+		return;
 	}
-	else
-		this->register_handler();
+
+	machine_.draw();
+
+	this->register_handler();
 }
 
 void

@@ -3,7 +3,6 @@
 
 #include "cursor/object_fwd.hpp"
 #include "config/settings/object_fwd.hpp"
-#include "events/tick_fwd.hpp"
 #include "gui/object_fwd.hpp"
 #include "states/menu_fwd.hpp"
 #include "server_callback.hpp"
@@ -13,6 +12,7 @@
 #include "../net/hostname.hpp"
 #include "../net/port.hpp"
 #include "../net/receive_buffer_fwd.hpp"
+#include "../time_type.hpp"
 
 #include <sge/audio/player_ptr.hpp>
 #include <sge/console/gfx_fwd.hpp>
@@ -88,8 +88,11 @@ public:
 	
 	bool
 	process(
-		events::tick const &
+		sanguis::time_type
 	);
+
+	void
+	draw();
 
 	void
 	quit();

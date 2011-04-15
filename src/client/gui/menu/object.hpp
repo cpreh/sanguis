@@ -48,6 +48,9 @@ public:
 	);
 
 	void
+	draw();
+
+	void
 	connection_error(
 		fcppt::string const &message
 	);

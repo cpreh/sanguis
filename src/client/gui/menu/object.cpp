@@ -228,7 +228,11 @@ sanguis::client::gui::menu::object::process(
 	gui_.update(
 		_delta
 	);
+}
 
+void
+sanguis::client::gui::menu::object::draw()
+{
 	gui_.render();
 }
 

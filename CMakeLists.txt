@@ -414,6 +414,10 @@ SET(
 	src/client/events/net_error.cpp
 	src/client/events/net_error.hpp
 	src/client/events/net_error_fwd.hpp
+	src/client/events/overlay.hpp
+	src/client/events/overlay_fwd.hpp
+	src/client/events/render.hpp
+	src/client/events/render_fwd.hpp
 	src/client/events/tick.cpp
 	src/client/events/tick.hpp
 	src/client/events/tick_fwd.hpp

@@ -4,7 +4,9 @@
 #include "has_player.hpp"
 #include "../console/activation.hpp"
 #include "../events/action_fwd.hpp"
+#include "../events/overlay_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
+#include <boost/mpl/list/list10.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/result.hpp>
@@ -27,8 +29,13 @@ class console
 		console
 	);
 public:
-	typedef boost::statechart::custom_reaction<
-		events::action
+	typedef boost::mpl::list2<
+		boost::statechart::custom_reaction<
+			events::action
+		>,
+		boost::statechart::custom_reaction<
+			events::overlay
+		>
 	> reactions;
 
 	explicit console(
@@ -40,6 +47,11 @@ public:
 	boost::statechart::result
 	react(
 		events::action const &
+	);
+
+	boost::statechart::result
+	react(
+		events::overlay const &
 	);
 private:
 	client::console::activation const console_activation_;
