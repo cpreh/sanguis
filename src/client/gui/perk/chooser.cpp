@@ -139,6 +139,11 @@ sanguis::client::gui::perk::chooser::handle_selection_changed(
 	CEGUI::EventArgs const &
 )
 {
+	if(
+		state_.levels_left().get() == 0
+	)
+		return true;
+
 	CEGUI::TreeItem *const selected(
 		tree_widget_.getFirstSelectedItem()
 	);

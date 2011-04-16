@@ -55,6 +55,9 @@ public:
 	client::level const
 	level() const;
 
+	client::level const
+	levels_left() const;
+
 	fcppt::signal::auto_connection
 	register_level_change(
 		perk::level_callback const &

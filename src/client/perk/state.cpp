@@ -84,6 +84,14 @@ sanguis::client::perk::state::level() const
 	return current_level_;
 }
 
+sanguis::client::level const
+sanguis::client::perk::state::levels_left() const
+{
+	return
+		current_level_
+		- consumed_levels_;
+}
+
 fcppt::signal::auto_connection
 sanguis::client::perk::state::register_level_change(
 	perk::level_callback const &_callback
