@@ -11,9 +11,10 @@
 #include "../../../time_type.hpp"
 #include <sge/cegui/toolbox/scoped_gui_sheet.hpp>
 #include <sge/cegui/toolbox/scoped_layout.hpp>
-#include <boost/ptr_container/ptr_vector.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <boost/ptr_container/ptr_vector.hpp>
+#include <CEGUI/CEGUIEvent.h>
 
 namespace CEGUI
 {
@@ -60,6 +61,11 @@ private:
 		client::level
 	);
 
+	bool
+	handle_selection_changed(
+		CEGUI::EventArgs const &
+	);
+
 	gui::object &gui_;
 
 	client::perk::state &state_;
@@ -73,6 +79,9 @@ private:
 	sge::cegui::toolbox::scoped_gui_sheet const scoped_gui_sheet_;
 
 	CEGUI::Tree &tree_widget_;
+
+	CEGUI::Event::ScopedConnection const
+		selection_connection_;
 
 	typedef boost::ptr_vector<
 		perk::item

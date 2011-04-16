@@ -37,6 +37,8 @@ public:
 private:
 	CEGUI::Tree &tree_;
 
+	sanguis::perk_type::type const perk_type_;
+
 	CEGUI::TreeItem widget_;
 };
 

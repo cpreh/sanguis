@@ -57,6 +57,18 @@ sanguis::client::gui::perk::chooser::chooser(
 			)
 		)
 	),
+	selection_connection_(
+		tree_widget_.subscribeEvent(
+			CEGUI::Tree::EventSelectionChanged,
+			CEGUI::Event::Subscriber(
+				std::tr1::bind(
+					&chooser::handle_selection_changed,
+					this,
+					std::tr1::placeholders::_1
+				)
+			)
+		)
+	),
 	items_()
 {
 	this->perks(
@@ -113,15 +125,6 @@ sanguis::client::gui::perk::chooser::perks(
 				cur
 			)
 		);
-
-#if 0
-	perks_ = _perks;
-
-	if (activated())
-		regenerate_widgets();
-	else
-		dirty_ = true;
-#endif
 }
 
 void
@@ -131,51 +134,28 @@ sanguis::client::gui::perk::chooser::level(
 {
 }
 
-#if 0
-void
-sanguis::client::gui::perk::chooser::regenerate_widgets()
+bool
+sanguis::client::gui::perk::chooser::handle_selection_changed(
+	CEGUI::EventArgs const &
+)
 {
-	regenerate_label();
+	CEGUI::TreeItem *const selected(
+		tree_widget_.getFirstSelectedItem()
+	);
 
-	buttons_.clear();
-
-	connections_.clear();
-
-	BOOST_FOREACH(perk_container::const_reference r,perks_)
-	{
-		image_map::const_iterator const pi = 
-			load_from_cache(
-				r
-			);
-
-		fcppt::container::ptr::push_back_unique_ptr(
-			buttons_,
-			fcppt::make_unique_ptr<
-				sge::gui::widgets::buttons::image
+	if(
+		selected
+	)
+		state_.choose_perk(
+			*static_cast<
+				sanguis::perk_type::type const *
 			>(
-				sge::gui::widgets::parent_data(
-					background_
-				),
-				sge::gui::widgets::parameters(),
-				pi->second.normal,
-				pi->second.hover,
-				pi->second.hover,
-				pi->second.hover
+				selected->getUserData()
 			)
 		);
 
-		connections_.add(
-			buttons_.back().register_clicked(
-				std::tr1::bind(
-					&perk_chooser::choose_callback,
-					this,
-					r
-				)
-			)
-		);
-	}
+	return true;
 }
-#endif
 
 #if 0
 void

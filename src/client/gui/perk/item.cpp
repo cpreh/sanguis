@@ -7,19 +7,24 @@
 sanguis::client::gui::perk::item::item(
 	CEGUI::Tree &_tree,
 	client::gui::object &_gui,
-	sanguis::perk_type::type const _type
+	sanguis::perk_type::type const _perk_type
 )
 :
 	tree_(_tree),
+	perk_type_(_perk_type),
 	widget_(
 		sge::cegui::to_cegui_string(
 			client::perk::to_string(
-				_type
+				_perk_type
 			),
 			_gui.charconv_system()
 		),
 		0, // item id
-		0, // user data
+		const_cast<
+			sanguis::perk_type::type *
+		>(
+			&perk_type_
+		), // user data
 		false, // enabled
 		false // auto delete
 	)
