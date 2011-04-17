@@ -159,7 +159,7 @@ sanguis::client::states::has_player::operator()(
 {
 	perk_state_->level(
 		client::level(
-			_message.get<sanguis::messages::level_type>()
+			_message.get<sanguis::messages::level>()
 		)
 	);
 

@@ -48,18 +48,27 @@ sanguis::server::send_available_perks(
 		it != trav.end();
 		++it
 	)
+	{
+		perks::tree::status const &info(
+			it->value()
+		);
+
 		nodes.push_back(
 			messages::perk_tree_node(
 				static_cast<
 					messages::types::enum_
 				>(
-					it->value().type()
+					info.type()
 				),
+				info.required_player_level().get(),
+				info.required_parent_level().get(),
+				info.max_level().get(),
 				::make_children(
 					*it
 				)
 			)
 		);
+	}
 
 	_send(
 		_player.player_id(),

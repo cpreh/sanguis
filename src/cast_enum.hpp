@@ -7,7 +7,7 @@
 	enum_,\
 	value_\
 )\
-cast_enum_impl<\
+sanguis::cast_enum_impl<\
 	enum_::type,\
 	enum_::size\
 >(\

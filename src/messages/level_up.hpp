@@ -3,7 +3,7 @@
 
 #include "types/message.hpp"
 #include "bind_entity_message.hpp"
-#include "level_type.hpp"
+#include "level.hpp"
 #include "make_class.hpp"
 #include <majutsu/composite.hpp>
 #include <majutsu/role.hpp>
@@ -14,19 +14,17 @@ namespace sanguis
 namespace messages
 {
 
-typedef majutsu::composite<
-	boost::mpl::vector2<
-		bind_entity_message<
-			types::message::level_up
-		>::type,
-		majutsu::role<
-			level_type
-		>
-	>
-> level_up_elements;
-
 typedef make_class<
-	level_up_elements
+	 majutsu::composite<
+		boost::mpl::vector2<
+			bind_entity_message<
+				types::message::level_up
+			>::type,
+			majutsu::role<
+				messages::level
+			>
+		>
+	> 
 >::type level_up;
 
 }

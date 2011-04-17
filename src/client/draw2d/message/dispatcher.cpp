@@ -248,7 +248,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 {
 	env_.level(
 		client::level(
-			_message.get<sanguis::messages::level_type>()
+			_message.get<sanguis::messages::level>()
 		)
 	);
 }

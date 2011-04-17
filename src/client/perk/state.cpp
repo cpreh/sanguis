@@ -1,4 +1,5 @@
 #include "state.hpp"
+#include "info.hpp"
 #include "../log.hpp"
 #include <fcppt/container/tree/object_impl.hpp>
 #include <fcppt/log/error.hpp>

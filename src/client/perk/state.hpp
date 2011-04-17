@@ -4,6 +4,7 @@
 #include "state_fwd.hpp"
 #include "change_callback.hpp"
 #include "change_function.hpp"
+#include "info.hpp"
 #include "level_callback.hpp"
 #include "level_function.hpp"
 #include "send_callback.hpp"

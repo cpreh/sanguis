@@ -460,10 +460,16 @@ SET(
 	src/client/object.hpp
 	src/client/perk/change_callback.hpp
 	src/client/perk/change_function.hpp
+	src/client/perk/info.cpp
+	src/client/perk/info.hpp
+	src/client/perk/info_fwd.hpp
 	src/client/perk/level_callback.hpp
 	src/client/perk/level_function.hpp
 	src/client/perk/make_tree.cpp
 	src/client/perk/make_tree.hpp
+	src/client/perk/max_level.hpp
+	src/client/perk/required_parent_level.hpp
+	src/client/perk/required_player_level.hpp
 	src/client/perk/send_callback.hpp
 	src/client/perk/state.cpp
 	src/client/perk/state.hpp
@@ -684,7 +690,7 @@ SET(
 	src/messages/entity_id.hpp
 	src/messages/entity_message.hpp
 	src/messages/enum.hpp
-	src/messages/exp_type.hpp
+	src/messages/exp.hpp
 	src/messages/experience.cpp
 	src/messages/experience.hpp
 	src/messages/give_weapon.cpp
@@ -695,7 +701,7 @@ SET(
 	src/messages/health.hpp
 	src/messages/instantiate_concrete.hpp
 	src/messages/instantiate_message.hpp
-	src/messages/level_type.hpp
+	src/messages/level.hpp
 	src/messages/level_up.cpp
 	src/messages/level_up.hpp
 	src/messages/make_class.hpp
@@ -754,11 +760,14 @@ SET(
 	src/messages/roles/friend.hpp
 	src/messages/roles/health.hpp
 	src/messages/roles/max_health.hpp
+	src/messages/roles/max_perk_level.hpp
 	src/messages/roles/perk.hpp
 	src/messages/roles/perk_children.hpp
 	src/messages/roles/perk_label.hpp
 	src/messages/roles/pickup.hpp
 	src/messages/roles/projectile.hpp
+	src/messages/roles/required_perk_parent_level.hpp
+	src/messages/roles/required_perk_player_level.hpp
 	src/messages/roles/speed.hpp
 	src/messages/roles/type.hpp
 	src/messages/roles/weapon.hpp
@@ -1271,6 +1280,7 @@ SET(
 	src/server/perks/tree/create.hpp
 	src/server/perks/tree/equal.cpp
 	src/server/perks/tree/equal.hpp
+	src/server/perks/tree/max_level.hpp
 	src/server/perks/tree/object.hpp
 	src/server/perks/tree/required_parent_level.hpp
 	src/server/perks/tree/required_player_level.hpp

@@ -23,7 +23,8 @@ cast_enum_impl(
 {
 	if(
 		_value
-		>= static_cast<
+		>
+		static_cast<
 			Value
 		>(
 			Size
@@ -38,7 +39,11 @@ cast_enum_impl(
 			+ fcppt::lexical_cast<
 				fcppt::string
 			>(
-				_value
+				static_cast<
+					unsigned long
+				>(
+					_value
+				)
 			)
 		);
 	
