@@ -13,8 +13,8 @@
 #include "../environment/load_context_fwd.hpp"
 #include "../damage/armor.hpp"
 #include "../perks/unique_ptr.hpp"
-#include "../perks/tree.hpp"
-#include "../perks/list.hpp"
+#include "../perks/tree/object.hpp"
+#include "../perks/tree/status.hpp"
 #include "../exp.hpp"
 #include "../health.hpp"
 #include "../level.hpp"
@@ -22,6 +22,7 @@
 #include "../string.hpp"
 #include "../../perk_type.hpp"
 #include "../../time_type.hpp"
+#include <fcppt/container/tree/object_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -74,8 +75,8 @@ public:
 		perks::unique_ptr
 	);
 	
-	perks::list const
-	available_perks() const;
+	perks::tree::object const &
+	perk_tree() const;
 
 	server::player_id 
 	player_id() const;
@@ -130,7 +131,7 @@ private:
 
 	unsigned skill_points_;
 
-	perks::tree perk_tree_;
+	perks::tree::object perk_tree_;
 };
 
 }

@@ -15,20 +15,18 @@ namespace sanguis
 namespace messages
 {
 
-typedef majutsu::composite<
-	boost::mpl::vector2<
-		bind_entity_message<
-			types::message::change_weapon
-		>::type,
-		majutsu::role<
-			enum_,
-			roles::weapon
+typedef messages::make_class<
+	majutsu::composite<
+		boost::mpl::vector2<
+			bind_entity_message<
+				types::message::change_weapon
+			>::type,
+			majutsu::role<
+				enum_,
+				roles::weapon
+			>
 		>
 	>
-> change_weapon_elements;
-
-typedef make_class<
-	change_weapon_elements
 >::type change_weapon;
 
 }

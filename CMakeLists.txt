@@ -655,6 +655,7 @@ SET(
 	src/messages/bindings/float.hpp
 	src/messages/bindings/fundamental.hpp
 	src/messages/bindings/fundamental_strong.hpp
+	src/messages/bindings/self.hpp
 	src/messages/bindings/static.hpp
 	src/messages/call/default_function.hpp
 	src/messages/call/dispatcher.hpp
@@ -708,6 +709,9 @@ SET(
 	src/messages/pause.cpp
 	src/messages/pause.hpp
 	src/messages/perk_list.hpp
+	src/messages/perk_tree.hpp
+	src/messages/perk_tree_node.hpp
+	src/messages/perk_tree_node_list.hpp
 	src/messages/player_attack_dest.cpp
 	src/messages/player_attack_dest.hpp
 	src/messages/player_change_weapon.cpp
@@ -749,6 +753,8 @@ SET(
 	src/messages/roles/health.hpp
 	src/messages/roles/max_health.hpp
 	src/messages/roles/perk.hpp
+	src/messages/roles/perk_children.hpp
+	src/messages/roles/perk_label.hpp
 	src/messages/roles/pickup.hpp
 	src/messages/roles/projectile.hpp
 	src/messages/roles/speed.hpp
@@ -1249,18 +1255,25 @@ SET(
 	src/server/perks/irs.cpp
 	src/server/perks/irs.hpp
 	src/server/perks/level_diff.hpp
-	src/server/perks/list.hpp
 	src/server/perks/perk.cpp
 	src/server/perks/perk.hpp
 	src/server/perks/perk_fwd.hpp
 	src/server/perks/regeneration.cpp
 	src/server/perks/regeneration.hpp
-	src/server/perks/required_parent_level.hpp
-	src/server/perks/required_player_level.hpp
-	src/server/perks/status.cpp
-	src/server/perks/status.hpp
-	src/server/perks/tree.cpp
-	src/server/perks/tree.hpp
+	src/server/perks/tree/choosable.cpp
+	src/server/perks/tree/choosable.hpp
+	src/server/perks/tree/choose.cpp
+	src/server/perks/tree/choose.hpp
+	src/server/perks/tree/create.cpp
+	src/server/perks/tree/create.hpp
+	src/server/perks/tree/equal.cpp
+	src/server/perks/tree/equal.hpp
+	src/server/perks/tree/object.hpp
+	src/server/perks/tree/required_parent_level.hpp
+	src/server/perks/tree/required_player_level.hpp
+	src/server/perks/tree/status.cpp
+	src/server/perks/tree/status.hpp
+	src/server/perks/tree/status_fwd.hpp
 	src/server/perks/unique_ptr.hpp
 	src/server/pickup_spawner.cpp
 	src/server/pickup_spawner.hpp

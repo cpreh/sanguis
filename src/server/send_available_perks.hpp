@@ -12,7 +12,7 @@ namespace server
 void
 send_available_perks(
 	entities::player const &,
-	unicast_callback const &
+	server::unicast_callback const &
 );
 
 }

@@ -2,7 +2,7 @@
 #include <fcppt/assert.hpp>
 #include <limits>
 
-sanguis::server::perks::status::status()
+sanguis::server::perks::tree::status::status()
 :
 	type_(perk_type::size),
 	required_player_level_(0),
@@ -15,10 +15,10 @@ sanguis::server::perks::status::status()
 {
 }
 
-sanguis::server::perks::status::status(
+sanguis::server::perks::tree::status::status(
 	perk_type::type const _type,
-	perks::required_player_level const _required_player_level,
-	perks::required_parent_level const _required_parent_level
+	tree::required_player_level const _required_player_level,
+	tree::required_parent_level const _required_parent_level
 )
 :
 	type_(_type),
@@ -29,7 +29,7 @@ sanguis::server::perks::status::status(
 }
 	
 void
-sanguis::server::perks::status::choose()
+sanguis::server::perks::tree::status::choose()
 {
 	FCPPT_ASSERT(
 		this->type() != perk_type::size
@@ -38,26 +38,26 @@ sanguis::server::perks::status::choose()
 	++level_;
 }
 
-sanguis::server::perks::required_player_level const
-sanguis::server::perks::status::required_player_level() const
+sanguis::server::perks::tree::required_player_level const
+sanguis::server::perks::tree::status::required_player_level() const
 {
 	return required_player_level_;
 }
 
-sanguis::server::perks::required_parent_level const
-sanguis::server::perks::status::required_parent_level() const
+sanguis::server::perks::tree::required_parent_level const
+sanguis::server::perks::tree::status::required_parent_level() const
 {
 	return required_parent_level_;
 }
 
 sanguis::server::level const
-sanguis::server::perks::status::level() const
+sanguis::server::perks::tree::status::level() const
 {
 	return level_;
 }
 
 sanguis::perk_type::type
-sanguis::server::perks::status::type() const
+sanguis::server::perks::tree::status::type() const
 {
 	return type_;
 }

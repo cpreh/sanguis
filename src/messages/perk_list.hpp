@@ -11,8 +11,8 @@ namespace messages
 {
 
 typedef bindings::dynamic_len<
-	types::enum_vector,
-	enum_
+	messages::types::enum_vector,
+	messages::enum_
 > perk_list;
 
 }

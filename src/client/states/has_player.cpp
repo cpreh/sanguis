@@ -128,11 +128,13 @@ sanguis::client::states::has_player::operator()(
 	sanguis::messages::available_perks const &_message
 )
 {
+#if 0
 	perk_state_->perks(
 		client::perk::cast(
 			_message.get<sanguis::messages::perk_list>()
 		)
 	);
+#endif
 
 	return discard_event();
 }

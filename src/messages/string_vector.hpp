@@ -11,8 +11,8 @@ namespace messages
 {
 
 typedef bindings::dynamic_len<
-	types::string_vector,
-	string
+	messages::types::string_vector,
+	messages::string
 > string_vector;
 
 }

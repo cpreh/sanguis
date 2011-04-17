@@ -3,6 +3,9 @@
 #include "default_solid.hpp"
 #include "property/initial.hpp"
 #include "../perks/perk.hpp"
+#include "../perks/tree/create.hpp"
+#include "../perks/tree/choosable.hpp"
+#include "../perks/tree/choose.hpp"
 #include "../weapons/weapon.hpp"
 #include "../environment/object.hpp"
 #include "../environment/load_context.hpp"
@@ -11,6 +14,7 @@
 #include "../../messages/add_player.hpp"
 #include "../../messages/add_own_player.hpp"
 #include "../../messages/create.hpp"
+#include <fcppt/container/tree/object_impl.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
@@ -58,7 +62,10 @@ sanguis::server::entities::player::player(
 	player_id_(_player_id),
 	exp_(0),
 	level_(0),
-	skill_points_(0)
+	skill_points_(0),
+	perk_tree_(
+		perks::tree::create()
+	)
 {
 	this->add_aura(
 		auras::unique_ptr(
@@ -141,7 +148,8 @@ sanguis::server::entities::player::perk_choosable(
 	return
 		skill_points_
 		&&
-		perk_tree_.choosable(
+		perks::tree::choosable(
+			perk_tree_,
 			_perk,
 			level_
 		)
@@ -156,7 +164,8 @@ sanguis::server::entities::player::add_perk(
 	perks::unique_ptr _ptr
 )
 {
-	perk_tree_.take(
+	perks::tree::choose(
+		perk_tree_,
 		_ptr->type()
 	);
 
@@ -169,29 +178,10 @@ sanguis::server::entities::player::add_perk(
 	--skill_points_;
 }
 
-sanguis::server::perks::list const
-sanguis::server::entities::player::available_perks() const
+sanguis::server::perks::tree::object const &
+sanguis::server::entities::player::perk_tree() const
 {
-	perks::list ret(
-		perk_tree_.choosables(
-			level_
-		)
-	);
-
-	for(
-		perks::list::iterator it = ret.begin();
-		it != ret.end();
-	)
-		if(
-			!with_perks::perk_choosable(
-				*it
-			)
-		)
-			it = ret.erase(it);
-		else
-			++it;
-	
-	return ret;
+	return perk_tree_;
 }
 
 sanguis::server::player_id

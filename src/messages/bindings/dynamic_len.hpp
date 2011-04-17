@@ -37,7 +37,7 @@ template<
 majutsu::size_type
 needed_size(
 	majutsu::concepts::dynamic_memory::tag const *const _tag,
-	dynamic_len<
+	bindings::dynamic_len<
 		Type,
 		Adapted
 	> const *,
@@ -46,7 +46,7 @@ needed_size(
 {
 	majutsu::size_type ret(
 		sizeof(
-			typename dynamic_len<
+			typename bindings::dynamic_len<
 				Type,
 				Adapted
 			>::length_type
@@ -76,7 +76,7 @@ template<
 void
 place(
 	majutsu::concepts::dynamic_memory::tag const *const _tag,
-	dynamic_len<
+	bindings::dynamic_len<
 		Type,
 		Adapted
 	> const *const _concept,
@@ -147,7 +147,7 @@ template<
 Type 
 make(
 	majutsu::concepts::dynamic_memory::tag const *const _tag,
-	dynamic_len<
+	bindings::dynamic_len<
 		Type,
 		Adapted
 	> const *,
