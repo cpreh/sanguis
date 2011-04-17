@@ -29,9 +29,6 @@ public:
 		environment::object &
 	);
 	
-	bool
-	can_raise_level() const;
-	
 	void
 	raise_level(
 		entities::base &
@@ -54,9 +51,6 @@ private:
 		entities::base &,
 		perks::level_diff
 	) = 0;
-
-	virtual server::level const 
-	max_level() const = 0;
 
 	perk_type::type const type_;
 

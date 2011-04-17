@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_PERK_CHANGE_FUNCTION_HPP_INCLUDED
 #define SANGUIS_CLIENT_PERK_CHANGE_FUNCTION_HPP_INCLUDED
 
-#include "container.hpp"
+#include "tree.hpp"
 
 namespace sanguis
 {
@@ -12,7 +12,7 @@ namespace perk
 
 typedef void
 change_function(
-	perk::container const &
+	perk::tree const &
 );
 
 }

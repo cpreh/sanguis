@@ -3,7 +3,6 @@
 
 #include "perk.hpp"
 #include "level_diff.hpp"
-#include "../level.hpp"
 #include "../entities/base_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
@@ -31,9 +30,6 @@ private:
 		entities::base &,
 		level_diff
 	);
-
-	server::level const
-	max_level() const;
 };
 
 }

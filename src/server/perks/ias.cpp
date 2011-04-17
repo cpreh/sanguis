@@ -31,12 +31,3 @@ sanguis::server::perks::ias::change(
 		_diff
 	);
 }
-
-sanguis::server::level const
-sanguis::server::perks::ias::max_level() const
-{
-	return
-		server::level(
-			8
-		);
-}

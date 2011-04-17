@@ -36,11 +36,6 @@ protected:
 	on_update(
 		time_type
 	);
-
-	virtual bool
-	perk_choosable(
-		perk_type::type
-	) const;
 private:
 	typedef boost::ptr_map<
 		perk_type::type,

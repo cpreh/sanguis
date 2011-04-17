@@ -16,6 +16,9 @@ sanguis::server::perks::tree::create()
 			),
 			tree::required_parent_level(
 				0
+			),
+			tree::max_level(
+				10
 			)
 		)
 	);
@@ -27,6 +30,9 @@ sanguis::server::perks::tree::create()
 			),
 			tree::required_parent_level(
 				0
+			),
+			tree::max_level(
+				8
 			)
 		)
 	);
@@ -38,6 +44,9 @@ sanguis::server::perks::tree::create()
 			),
 			tree::required_parent_level(
 				0
+			),
+			tree::max_level(
+				7
 			)
 		)
 	);
@@ -49,6 +58,9 @@ sanguis::server::perks::tree::create()
 			),
 			tree::required_parent_level(
 				0
+			),
+			tree::max_level(
+				4
 			)
 		)
 	);
@@ -60,6 +72,9 @@ sanguis::server::perks::tree::create()
 			),
 			tree::required_parent_level(
 				0
+			),
+			tree::max_level(
+				10
 			)
 		)
 	);
@@ -76,6 +91,9 @@ sanguis::server::perks::tree::create()
 			),
 			tree::required_parent_level(
 				2
+			),
+			tree::max_level(
+				3
 			)
 		)
 	);

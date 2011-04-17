@@ -4,12 +4,13 @@
 #include "state_fwd.hpp"
 #include "change_callback.hpp"
 #include "change_function.hpp"
-#include "container.hpp"
 #include "level_callback.hpp"
 #include "level_function.hpp"
 #include "send_callback.hpp"
+#include "tree.hpp"
 #include "../level.hpp"
 #include "../../perk_type.hpp"
+#include <fcppt/container/tree/object_decl.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/object.hpp>
@@ -36,7 +37,7 @@ public:
 
 	void
 	perks(
-		perk::container const &
+		perk::tree const &
 	);
 
 	void
@@ -49,7 +50,7 @@ public:
 		sanguis::perk_type::type	
 	);
 
-	perk::container const &
+	perk::tree const &
 	perks();
 
 	client::level const
@@ -70,7 +71,7 @@ public:
 private:
 	perk::send_callback const send_callback_;
 
-	client::perk::container perks_;
+	client::perk::tree perks_;
 
 	client::level
 		current_level_,

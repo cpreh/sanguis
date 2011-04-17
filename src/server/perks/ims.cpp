@@ -31,12 +31,3 @@ sanguis::server::perks::ims::change(
 		_diff
 	);
 }
-
-sanguis::server::level const
-sanguis::server::perks::ims::max_level() const
-{
-	return
-		server::level(
-			7
-		);
-}

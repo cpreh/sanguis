@@ -4,7 +4,6 @@
 #include "perk.hpp"
 #include "level_diff.hpp"
 #include "../entities/base_fwd.hpp"
-#include "../level.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -31,9 +30,6 @@ private:
 		entities::base &,
 		level_diff
 	);
-
-	server::level const
-	max_level() const;
 };
 
 }

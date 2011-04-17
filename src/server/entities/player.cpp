@@ -152,10 +152,6 @@ sanguis::server::entities::player::perk_choosable(
 			perk_tree_,
 			_perk,
 			level_
-		)
-		&&
-		with_perks::perk_choosable(
-			_perk
 		);
 }
 

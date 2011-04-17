@@ -5,8 +5,8 @@
 #include "item_fwd.hpp"
 #include "../object_fwd.hpp"
 #include "../../level.hpp"
-#include "../../perk/container.hpp"
 #include "../../perk/state_fwd.hpp"
+#include "../../perk/tree.hpp"
 #include "../../../perk_type.hpp"
 #include "../../../time_type.hpp"
 #include <sge/cegui/toolbox/scoped_gui_sheet.hpp>
@@ -53,7 +53,7 @@ public:
 private:
 	void
 	perks(
-		client::perk::container const &
+		client::perk::tree const &
 	);
 
 	void

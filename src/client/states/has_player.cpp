@@ -9,7 +9,7 @@
 #include "../events/render.hpp"
 #include "../events/tick.hpp"
 #include "../log.hpp"
-#include "../perk/cast.hpp"
+#include "../perk/make_tree.hpp"
 #include "../perk/state.hpp"
 #include "../../messages/call/object.hpp"
 #include "../../messages/create.hpp"
@@ -128,13 +128,11 @@ sanguis::client::states::has_player::operator()(
 	sanguis::messages::available_perks const &_message
 )
 {
-#if 0
 	perk_state_->perks(
-		client::perk::cast(
-			_message.get<sanguis::messages::perk_list>()
+		client::perk::make_tree(
+			_message.get<sanguis::messages::perk_tree>()
 		)
 	);
-#endif
 
 	return discard_event();
 }

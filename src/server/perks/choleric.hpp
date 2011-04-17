@@ -3,7 +3,6 @@
 
 #include "perk.hpp"
 #include "level_diff.hpp"
-#include "../level.hpp"
 #include "../space_unit.hpp"
 #include "../environment/object_fwd.hpp"
 #include "../entities/base_fwd.hpp"
@@ -38,9 +37,6 @@ private:
 		sanguis::time_type,
 		environment::object &
 	);
-
-	server::level const
-	max_level() const;
 
 	void
 	change(

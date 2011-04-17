@@ -2,9 +2,9 @@
 #include "item.hpp"
 #include "../object.hpp"
 #include "../../perk/state.hpp"
-//#include "from_perk_type.hpp"
 #include "../../../media_path.hpp"
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
+#include <fcppt/container/tree/object_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/assert.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -102,11 +102,12 @@ sanguis::client::gui::perk::chooser::draw()
 
 void
 sanguis::client::gui::perk::chooser::perks(
-	client::perk::container const &_perks
+	client::perk::tree const &_perks
 )
 {
 	items_.clear();
 
+#if 0
 	BOOST_FOREACH(
 		client::perk::container::value_type cur,
 		_perks
@@ -125,6 +126,7 @@ sanguis::client::gui::perk::chooser::perks(
 				cur
 			)
 		);
+#endif
 }
 
 void

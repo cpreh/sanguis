@@ -31,12 +31,3 @@ sanguis::server::perks::regeneration::change(
 		_diff
 	);
 }
-
-sanguis::server::level const
-sanguis::server::perks::regeneration::max_level() const
-{
-	return
-		server::level(
-			3
-		);
-}

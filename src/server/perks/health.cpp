@@ -31,12 +31,3 @@ sanguis::server::perks::health::change(
 		_diff
 	);
 }
-
-sanguis::server::level const
-sanguis::server::perks::health::max_level() const
-{
-	return
-		server::level(
-			10
-		);
-}

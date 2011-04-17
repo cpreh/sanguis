@@ -1,7 +1,4 @@
 #include "perk.hpp"
-#include "../../exception.hpp"
-#include <fcppt/text.hpp>
-#include <fcppt/assert.hpp>
 
 void
 sanguis::server::perks::perk::update(
@@ -12,28 +9,11 @@ sanguis::server::perks::perk::update(
 {
 }
 
-bool
-sanguis::server::perks::perk::can_raise_level() const
-{
-	FCPPT_ASSERT(
-		this->level() <= this->max_level()
-	);
-
-	return this->level() < this->max_level();
-}
-
 void
 sanguis::server::perks::perk::raise_level(
 	entities::base &_owner
 )
 {
-	if(
-		!this->can_raise_level()
-	)
-		throw sanguis::exception(
-			FCPPT_TEXT("Can't raise perk level!")
-		);
-	
 	this->change(
 		_owner,
 		perks::level_diff(

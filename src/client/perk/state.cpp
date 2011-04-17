@@ -1,5 +1,6 @@
 #include "state.hpp"
 #include "../log.hpp"
+#include <fcppt/container/tree/object_impl.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/text.hpp>
@@ -23,7 +24,7 @@ sanguis::client::perk::state::~state()
 
 void
 sanguis::client::perk::state::perks(
-	perk::container const &_perks
+	perk::tree const &_perks
 )
 {
 	perks_ = _perks;
@@ -72,7 +73,7 @@ sanguis::client::perk::state::choose_perk(
 	);
 }
 
-sanguis::client::perk::container const &
+sanguis::client::perk::tree const &
 sanguis::client::perk::state::perks()
 {
 	return perks_;

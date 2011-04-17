@@ -53,18 +53,26 @@ sanguis::server::perks::choleric::update(
 	)
 		return;
 
-	unsigned const max(
-		this->can_raise_level()
+	server::level const rocket_level(
+		10
+	);
+
+	bool const spawn_bullets(
+		this->level() < rocket_level
+	);
+
+	unsigned const count(
+		spawn_bullets
 		?
 			3 + this->level().get() * 2
 		:
-			10
+			this->level().get()
 	);
 
 	for(
-		unsigned i = 0;
-		i < max;
-		++i
+		unsigned index = 0;
+		index < count;
+		++index
 	)
 	{
 		server::direction const direction(
@@ -72,7 +80,7 @@ sanguis::server::perks::choleric::update(
 		);
 
 		_env.insert(
-			this->can_raise_level()
+			spawn_bullets
 			?
 				entities::unique_ptr(
 					fcppt::make_unique_ptr<
@@ -111,15 +119,6 @@ sanguis::server::perks::choleric::update(
 			)
 		);
 	}
-}
-
-sanguis::server::level const
-sanguis::server::perks::choleric::max_level() const
-{
-	return
-		server::level(
-			10
-		);
 }
 
 void

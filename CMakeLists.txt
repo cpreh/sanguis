@@ -458,19 +458,19 @@ SET(
 	src/client/next_id.hpp
 	src/client/object.cpp
 	src/client/object.hpp
-	src/client/perk/cast.cpp
-	src/client/perk/cast.hpp
 	src/client/perk/change_callback.hpp
 	src/client/perk/change_function.hpp
-	src/client/perk/container.hpp
 	src/client/perk/level_callback.hpp
 	src/client/perk/level_function.hpp
+	src/client/perk/make_tree.cpp
+	src/client/perk/make_tree.hpp
 	src/client/perk/send_callback.hpp
 	src/client/perk/state.cpp
 	src/client/perk/state.hpp
 	src/client/perk/state_fwd.hpp
 	src/client/perk/to_string.cpp
 	src/client/perk/to_string.hpp
+	src/client/perk/tree.hpp
 	src/client/send_callback.hpp
 	src/client/server_callback.hpp
 	src/client/states/console.cpp
@@ -784,6 +784,7 @@ SET(
 	src/messages/serialization/instantiate_message.hpp
 	src/messages/serialization/istream.hpp
 	src/messages/serialization/load.hpp
+	src/messages/serialization/make_object.hpp
 	src/messages/serialization/need_swap.cpp
 	src/messages/serialization/need_swap.hpp
 	src/messages/serialization/ostream.hpp

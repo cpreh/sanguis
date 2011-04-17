@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_PERKS_TREE_STATUS_HPP_INCLUDED
 
 #include "status_fwd.hpp"
+#include "max_level.hpp"
 #include "required_player_level.hpp"
 #include "required_parent_level.hpp"
 #include "../../level.hpp"
@@ -24,7 +25,8 @@ public:
 	status(
 		perk_type::type,
 		tree::required_player_level,
-		tree::required_parent_level
+		tree::required_parent_level,
+		tree::max_level
 	);
 	
 	void
@@ -35,6 +37,9 @@ public:
 
 	tree::required_parent_level const
 	required_parent_level() const;
+
+	tree::max_level const
+	max_level() const;
 
 	server::level const
 	level() const;
@@ -47,6 +52,8 @@ private:
 	tree::required_player_level required_player_level_;
 
 	tree::required_parent_level required_parent_level_;
+
+	tree::max_level max_level_;
 
 	server::level level_;
 };
