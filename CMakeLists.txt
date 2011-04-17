@@ -651,10 +651,12 @@ SET(
 	src/messages/bind_entity_message.hpp
 	src/messages/bind_player_message.hpp
 	src/messages/bindings/dynamic_len.hpp
+	src/messages/bindings/extract_length.hpp
 	src/messages/bindings/float.cpp
 	src/messages/bindings/float.hpp
 	src/messages/bindings/fundamental.hpp
 	src/messages/bindings/fundamental_strong.hpp
+	src/messages/bindings/put_length.hpp
 	src/messages/bindings/self.hpp
 	src/messages/bindings/static.hpp
 	src/messages/call/default_function.hpp

@@ -20,7 +20,7 @@ class reader
 	);
 public:
 	explicit reader(
-		istream &
+		serialization::istream &
 	);
 
 	template<
@@ -28,7 +28,7 @@ public:
 	>
 	auto_ptr operator()() const;
 private:
-	istream &is_;
+	serialization::istream &is_;
 };
 
 }

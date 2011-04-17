@@ -79,7 +79,8 @@ struct load<
 		T,
 		A
 	>
-> {
+>
+{
 	static typename bindings::dynamic_len<T, A>::type
 	get(
 		istream &_is

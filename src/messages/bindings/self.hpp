@@ -2,15 +2,16 @@
 #define SANGUIS_MESSAGES_BINDINGS_SELF_HPP_INCLUDED
 
 #include "dynamic_len.hpp"
-#include "../serialization/endianness.hpp"
+#include "extract_length.hpp"
+#include "put_length.hpp"
+#include "../serialization/make_object.hpp"
 #include <fcppt/algorithm/copy_n.hpp>
-#include <fcppt/endianness/copy_n_from_host.hpp>
-#include <fcppt/endianness/copy_n_to_host.hpp>
-#include <fcppt/truncation_check_cast.hpp>
 #include <majutsu/concepts/dynamic_memory/tag.hpp>
 #include <majutsu/const_raw_pointer.hpp>
 #include <majutsu/size_type.hpp>
 #include <majutsu/raw_pointer.hpp>
+#include <boost/iostreams/device/array.hpp>
+#include <boost/iostreams/stream_buffer.hpp>
 
 namespace sanguis
 {
@@ -66,35 +67,12 @@ place(
 	majutsu::raw_pointer _mem
 )
 {
-	typedef typename bindings::self<
-		Type
-	>::length_type length_type;
-
-	length_type const sz(
-		fcppt::truncation_check_cast<
-			length_type
-		>(
-			needed_size(
-				_tag,
-				_concept,
-				_value
-			)
-		)
+	bindings::put_length(
+		_tag,
+		_concept,
+		_value,
+		_mem
 	);
-
-	fcppt::endianness::copy_n_from_host(
-		reinterpret_cast<
-			majutsu::const_raw_pointer
-		>(
-			&sz
-		),
-		sizeof(length_type),
-		_mem,
-		sizeof(length_type),
-		sanguis::messages::serialization::endianness()
-	);
-
-	_mem += sizeof(length_type);
 	
 	fcppt::algorithm::copy_n(
 		_value.memory().data(),
@@ -108,10 +86,10 @@ template<
 >
 Type 
 make(
-	majutsu::concepts::dynamic_memory::tag const *,
+	majutsu::concepts::dynamic_memory::tag const *const _tag,
 	bindings::self<
 		Type
-	> const *,
+	> const *const _concept,
 	majutsu::const_raw_pointer const _mem
 )
 {
@@ -119,29 +97,37 @@ make(
 		Type
 	>::length_type length_type;
 
-	length_type my_size;
-		
-	fcppt::endianness::copy_n_to_host(
-		_mem,
-		sizeof(length_type),
+	length_type const length(
+		bindings::extract_length(
+			_tag,
+			_concept,
+			_mem
+		)
+	);
+
+	typedef boost::iostreams::stream_buffer<
+		boost::iostreams::array_source
+	> streambuf;
+
+	streambuf buffer(
 		reinterpret_cast<
-			majutsu::raw_pointer
+			char const *
 		>(
-			&my_size
+			_mem + sizeof(length_type)
 		),
-		sizeof(length_type),
-		sanguis::messages::serialization::endianness()
+		length  - sizeof(length_type)
 	);
 
-	Type ret;
-
-	fcppt::algorithm::copy_n(
-		_mem,
-		my_size,
-		ret.memory().data()
+	std::istream stream(
+		&buffer
 	);
 
-	return ret;
+	return 
+		messages::serialization::make_object<
+			Type
+		>(
+			stream
+		);
 }
 
 }
