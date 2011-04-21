@@ -9,34 +9,20 @@
 #include "../args/multi_sampling.hpp"
 #include "../args/sge_options.hpp"
 #include "../server/object.hpp"
-#include "../media_path.hpp"
 #include "../time_type.hpp"
 
 #include <sge/config/media_path.hpp>
-#include <sge/console/sprite_object.hpp>
-#include <sge/console/sprite_parameters.hpp>
-#include <sge/font/text/drawer_3d.hpp>
 #include <sge/font/size_type.hpp>
 #include <sge/font/system.hpp>
-#include <sge/image/color/format.hpp>
 #include <sge/image/colors.hpp>
-#include <sge/image2d/create_texture.hpp>
-#include <sge/image2d/multi_loader.hpp>
-#include <sge/renderer/texture/filter/linear.hpp>
-#include <sge/renderer/texture/address_mode2.hpp>
-#include <sge/renderer/texture/address_mode.hpp>
 #include <sge/renderer/state/bool.hpp>
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/trampoline.hpp>
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/device.hpp>
-#include <sge/renderer/resource_flags_none.hpp>
-#include <sge/sprite/object_impl.hpp>
-#include <sge/sprite/parameters_impl.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/time/second.hpp>
 #include <sge/time/timer.hpp>
-#include <sge/texture/part_raw.hpp>
 #include <sge/window/instance.hpp>
 
 #include <awl/mainloop/io_service.hpp>
@@ -45,12 +31,9 @@
 #include <fcppt/function/object.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/fatal.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/text.hpp>
 
 #include <cstdlib>
@@ -88,47 +71,10 @@ sanguis::client::object::object(
 	console_gfx_(
 		console_,
 		sys_.renderer(),
-		sge::image::colors::white(),
 		font_metrics_,
+		sys_.image_loader(),
 		*sys_.keyboard_collector(),
-		sge::console::sprite_object(
-			sge::console::sprite_parameters()
-			.texture(
-				fcppt::make_shared_ptr<
-					sge::texture::part_raw
-				>(
-					sge::image2d::create_texture(
-						sanguis::media_path()
-						/ FCPPT_TEXT("console_back.png"),
-						sys_.renderer(),
-						sys_.image_loader(),
-						sge::renderer::texture::filter::linear,
-						sge::renderer::texture::address_mode2(
-							sge::renderer::texture::address_mode::clamp
-						),
-						sge::renderer::resource_flags::none
-					)
-				)
-			)
-			.pos(
-				sge::console::sprite_object::vector::null()
-			)
-			.size(
-				sge::console::sprite_object::dim(
-					static_cast<
-						sge::console::sprite_object::unit
-					>(
-						1024 // FIXME!
-					),
-					static_cast<
-						sge::console::sprite_object::unit
-					>(
-						768 / 2 // FIXME!
-					)
-				)
-			)
-			.elements()
-		),
+		sys_.viewport_manager(),
 		_variables_map[
 			"history-size"
 		].as<
@@ -169,7 +115,7 @@ sanguis::client::object::object(
 		resources_,
 		font_metrics_,
 		font_drawer_,
-		console_gfx_,
+		console_gfx_.get(),
 		sys_.keyboard_collector(),
 		cursor_,
 		sys_.renderer(),

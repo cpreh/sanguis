@@ -138,6 +138,8 @@ SET(
 	src/client/config/settings/set_key.hpp
 	src/client/console/activation.cpp
 	src/client/console/activation.hpp
+	src/client/console/gfx.cpp
+	src/client/console/gfx.hpp
 	src/client/console/object.cpp
 	src/client/console/object.hpp
 	src/client/console/object_fwd.hpp

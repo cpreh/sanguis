@@ -4,13 +4,13 @@
 #include "machine.hpp"
 #include "config/settings/object.hpp"
 #include "config/settings/saver.hpp"
+#include "console/gfx.hpp"
 #include "cursor/object.hpp"
 #include "gui/object.hpp"
 #include "../load/context.hpp"
 #include "../net/port.hpp"
 #include "../server/object_fwd.hpp"
 #include "../main_object.hpp"
-#include <sge/console/gfx.hpp>
 #include <sge/console/object.hpp>
 #include <sge/font/text/drawer_3d.hpp>
 #include <sge/font/metrics_ptr.hpp>
@@ -73,7 +73,7 @@ private:
 
 	sge::console::object console_;
 
-	sge::console::gfx console_gfx_;
+	client::console::gfx console_gfx_;
 
 	sge::window::instance_ptr const window_;
 
