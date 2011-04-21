@@ -8,7 +8,6 @@
 #include "actions/cursor.hpp"
 #include "actions/nullary.hpp"
 #include "actions/scale.hpp"
-#include "../log.hpp"
 #include "../../messages/create.hpp"
 #include "../../messages/player_attack_dest.hpp"
 #include "../../messages/player_direction.hpp"
@@ -25,7 +24,6 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/clamp.hpp>
-#include <fcppt/log/headers.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/variant/apply_unary.hpp>
 #include <fcppt/variant/object_impl.hpp>
@@ -208,15 +206,12 @@ sanguis::client::control::action_handler::handle_nullary_action(
 		);
 
 		return;
+	// There are some actions we don't handle
 	case actions::nullary_type::perk_menu:
 	case actions::nullary_type::escape:
 	case actions::nullary_type::console:
 		break;
 	}
-
-	throw sanguis::exception(
-		FCPPT_TEXT("Invalid nullary_action in action_handler!")
-	);
 }
 
 void
