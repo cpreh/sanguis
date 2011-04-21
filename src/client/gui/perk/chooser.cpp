@@ -5,10 +5,12 @@
 #include "../../perk/state.hpp"
 #include "../../../media_path.hpp"
 #include "../../../perk_type.hpp"
+#include <sge/cegui/to_cegui_string.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/lexical_cast.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/nonassignable.hpp>
 #include <fcppt/ref.hpp>
@@ -83,6 +85,11 @@ sanguis::client::gui::perk::chooser::chooser(
 			)
 		)
 	),
+	level_widget_(
+		*CEGUI::WindowManager::getSingleton().getWindow(
+			"PerkChooser/Level"
+		)
+	),
 	selection_connection_(
 		tree_widget_.subscribeEvent(
 			CEGUI::Tree::EventSelectionChanged,
@@ -102,7 +109,7 @@ sanguis::client::gui::perk::chooser::chooser(
 	);
 
 	this->level(
-		_state.level()
+		_state.player_level()
 	);
 }
 
@@ -211,6 +218,16 @@ sanguis::client::gui::perk::chooser::level(
 	client::level const _level
 )
 {
+	level_widget_.setText(
+		sge::cegui::to_cegui_string(
+			fcppt::lexical_cast<
+				fcppt::string
+			>(
+				_level
+			),
+			gui_.charconv_system()
+		)
+	);
 }
 
 bool

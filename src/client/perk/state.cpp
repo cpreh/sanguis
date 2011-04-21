@@ -15,6 +15,7 @@ sanguis::client::perk::state::state(
 	perks_(),
 	current_level_(0),
 	consumed_levels_(0),
+	perk_levels_(),
 	level_signal_(),
 	change_signal_()
 {
@@ -41,7 +42,7 @@ sanguis::client::perk::state::perks(
 }
 
 void
-sanguis::client::perk::state::level(
+sanguis::client::perk::state::player_level(
 	client::level const _level
 )
 {
@@ -73,6 +74,10 @@ sanguis::client::perk::state::choose_perk(
 	}
 
 	++consumed_levels_;
+
+	++perk_levels_[
+		_type
+	];
 	
 	send_callback_(
 		_type
@@ -90,7 +95,7 @@ sanguis::client::perk::state::perks()
 }
 
 sanguis::client::level const
-sanguis::client::perk::state::level() const
+sanguis::client::perk::state::player_level() const
 {
 	return current_level_;
 }
@@ -101,6 +106,17 @@ sanguis::client::perk::state::levels_left() const
 	return
 		current_level_
 		- consumed_levels_;
+}
+
+sanguis::client::level const
+sanguis::client::perk::state::perk_level(
+	sanguis::perk_type::type const _perk_type
+) const
+{
+	return
+		perk_levels_[
+			_perk_type
+		];
 }
 
 fcppt::signal::auto_connection

@@ -17,6 +17,7 @@
 #include <fcppt/signal/object.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
+#include <map>
 
 namespace sanguis
 {
@@ -43,7 +44,7 @@ public:
 	);
 
 	void
-	level(
+	player_level(
 		client::level
 	);
 
@@ -56,10 +57,15 @@ public:
 	perks();
 
 	client::level const
-	level() const;
+	player_level() const;
 
 	client::level const
 	levels_left() const;
+
+	client::level const
+	perk_level(
+		sanguis::perk_type::type
+	) const;
 
 	fcppt::signal::auto_connection
 	register_level_change(
@@ -82,6 +88,13 @@ private:
 	client::level
 		current_level_,
 		consumed_levels_;
+	
+	typedef std::map<
+		sanguis::perk_type::type,
+		client::level
+	> perk_level_map;
+
+	mutable perk_level_map perk_levels_;
 	
 	fcppt::signal::object<
 		perk::level_function

@@ -19,6 +19,7 @@
 namespace CEGUI
 {
 class Tree;
+class Window;
 }
 
 namespace sanguis
@@ -79,6 +80,8 @@ private:
 	sge::cegui::toolbox::scoped_gui_sheet const scoped_gui_sheet_;
 
 	CEGUI::Tree &tree_widget_;
+
+	CEGUI::Window &level_widget_;
 
 	CEGUI::Event::ScopedConnection const
 		selection_connection_;
