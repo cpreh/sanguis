@@ -4,6 +4,7 @@
 #include <fcppt/container/tree/object_impl.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/output.hpp>
+#include <fcppt/assert.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::client::perk::state::state(
@@ -25,13 +26,17 @@ sanguis::client::perk::state::~state()
 
 void
 sanguis::client::perk::state::perks(
-	perk::tree const &_perks
+	perk::tree_unique_ptr _perks
 )
 {
-	perks_ = _perks;
+	perks_.take(
+		move(
+			_perks
+		)
+	);
 
 	change_signal_(
-		_perks
+		*perks_
 	);
 }
 
@@ -77,7 +82,11 @@ sanguis::client::perk::state::choose_perk(
 sanguis::client::perk::tree const &
 sanguis::client::perk::state::perks()
 {
-	return perks_;
+	FCPPT_ASSERT(
+		perks_
+	);
+
+	return *perks_;
 }
 
 sanguis::client::level const

@@ -10,6 +10,7 @@
 #include <fcppt/container/tree/pre_order.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/assert.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/nonassignable.hpp>
 #include <boost/foreach.hpp>
 
@@ -41,7 +42,7 @@ private:
 
 }
 
-sanguis::client::perk::tree const
+sanguis::client::perk::tree_unique_ptr
 sanguis::client::perk::make_tree(
 	messages::perk_tree_node_list const &_list
 )
@@ -53,9 +54,13 @@ sanguis::client::perk::make_tree(
 	);
 
 	// start with the dummy head, the server will always send one
-	perk::tree ret(
-		::make_info(
-			_list.front()
+	perk::tree_unique_ptr ret(
+		fcppt::make_unique_ptr<
+			perk::tree
+		>(
+			::make_info(
+				_list.front()
+			)
 		)
 	);
 
@@ -69,7 +74,7 @@ sanguis::client::perk::make_tree(
 		> traversal;
 
 		traversal trav(
-			ret
+			*ret
 		);
 
 		traversal::iterator const pos(
@@ -107,7 +112,10 @@ sanguis::client::perk::make_tree(
 			);
 	}
 
-	return ret;
+	return
+		move(
+			ret
+		);
 }
 
 namespace

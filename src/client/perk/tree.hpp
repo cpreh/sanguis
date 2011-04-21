@@ -12,7 +12,7 @@ namespace perk
 {
 
 typedef fcppt::container::tree::object<
-	perk::info
+	client::perk::info
 > tree;
 
 }

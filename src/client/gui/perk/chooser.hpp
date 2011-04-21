@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_GUI_PERK_CHOOSER_HPP_INCLUDED
 
 #include "chooser_fwd.hpp"
-#include "item_fwd.hpp"
+#include "item_tree.hpp"
 #include "../object_fwd.hpp"
 #include "../../level.hpp"
 #include "../../perk/state_fwd.hpp"
@@ -11,9 +11,9 @@
 #include "../../../time_type.hpp"
 #include <sge/cegui/toolbox/scoped_gui_sheet.hpp>
 #include <sge/cegui/toolbox/scoped_layout.hpp>
+#include <fcppt/container/tree/object_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <boost/ptr_container/ptr_vector.hpp>
 #include <CEGUI/CEGUIEvent.h>
 
 namespace CEGUI
@@ -83,11 +83,7 @@ private:
 	CEGUI::Event::ScopedConnection const
 		selection_connection_;
 
-	typedef boost::ptr_vector<
-		perk::item
-	> item_vector;
-
-	item_vector items_;
+	gui::perk::item_tree items_;
 };
 
 }

@@ -1,21 +1,25 @@
 #include "item.hpp"
+#include "node.hpp"
 #include "../object.hpp"
+#include "../../perk/info.hpp"
 #include "../../perk/to_string.hpp"
 #include <sge/cegui/to_cegui_string.hpp>
 #include <CEGUI/elements/CEGUITree.h>
 
 sanguis::client::gui::perk::item::item(
-	CEGUI::Tree &_tree,
+	client::gui::perk::node const &_parent,
 	client::gui::object &_gui,
-	sanguis::perk_type::type const _perk_type
+	client::perk::info const &_info
 )
 :
-	tree_(_tree),
-	perk_type_(_perk_type),
+	parent_(_parent),
+	perk_type_(
+		_info.type()
+	),
 	widget_(
 		sge::cegui::to_cegui_string(
 			client::perk::to_string(
-				_perk_type
+				perk_type_
 			),
 			_gui.charconv_system()
 		),
@@ -29,14 +33,26 @@ sanguis::client::gui::perk::item::item(
 		false // auto delete
 	)
 {
-	tree_.addItem(
-		&widget_
+	parent_.add_item(
+		widget_
 	);
 }
 
 sanguis::client::gui::perk::item::~item()
 {
-	tree_.removeItem(
-		&widget_
+	parent_.remove_item(
+		widget_
 	);
+}
+
+sanguis::perk_type::type
+sanguis::client::gui::perk::item::perk_type() const
+{
+	return perk_type_;
+}
+
+CEGUI::TreeItem &
+sanguis::client::gui::perk::item::widget()
+{
+	return widget_;
 }

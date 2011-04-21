@@ -6,6 +6,7 @@
 #include "../perks/tree/create.hpp"
 #include "../perks/tree/choosable.hpp"
 #include "../perks/tree/choose.hpp"
+#include "../perks/tree/status.hpp"
 #include "../weapons/weapon.hpp"
 #include "../environment/object.hpp"
 #include "../environment/load_context.hpp"
@@ -90,6 +91,10 @@ sanguis::server::entities::player::player(
 	);
 }
 
+sanguis::server::entities::player::~player()
+{
+}
+
 void
 sanguis::server::entities::player::add_exp(
 	server::exp const _exp
@@ -149,7 +154,7 @@ sanguis::server::entities::player::perk_choosable(
 		skill_points_
 		&&
 		perks::tree::choosable(
-			perk_tree_,
+			*perk_tree_,
 			_perk,
 			level_
 		);
@@ -161,7 +166,7 @@ sanguis::server::entities::player::add_perk(
 )
 {
 	perks::tree::choose(
-		perk_tree_,
+		*perk_tree_,
 		_ptr->type()
 	);
 
@@ -177,7 +182,7 @@ sanguis::server::entities::player::add_perk(
 sanguis::server::perks::tree::object const &
 sanguis::server::entities::player::perk_tree() const
 {
-	return perk_tree_;
+	return *perk_tree_;
 }
 
 sanguis::server::player_id

@@ -445,6 +445,10 @@ SET(
 	src/client/gui/perk/item.cpp
 	src/client/gui/perk/item.hpp
 	src/client/gui/perk/item_fwd.hpp
+	src/client/gui/perk/item_tree.hpp
+	src/client/gui/perk/node.cpp
+	src/client/gui/perk/node.hpp
+	src/client/gui/perk/node_variant.hpp
 	src/client/health.hpp
 	src/client/level.hpp
 	src/client/log.cpp
@@ -477,6 +481,7 @@ SET(
 	src/client/perk/to_string.cpp
 	src/client/perk/to_string.hpp
 	src/client/perk/tree.hpp
+	src/client/perk/tree_unique_ptr.hpp
 	src/client/send_callback.hpp
 	src/client/server_callback.hpp
 	src/client/states/console.cpp
@@ -1282,6 +1287,7 @@ SET(
 	src/server/perks/tree/equal.hpp
 	src/server/perks/tree/max_level.hpp
 	src/server/perks/tree/object.hpp
+	src/server/perks/tree/object_unique_ptr.hpp
 	src/server/perks/tree/required_parent_level.hpp
 	src/server/perks/tree/required_player_level.hpp
 	src/server/perks/tree/status.cpp

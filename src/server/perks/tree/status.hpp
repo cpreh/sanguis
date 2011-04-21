@@ -20,8 +20,6 @@ namespace tree
 class status
 {
 public:
-	status();
-
 	status(
 		perk_type::type,
 		tree::required_player_level,

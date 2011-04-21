@@ -1,20 +1,5 @@
 #include "status.hpp"
 #include <fcppt/assert.hpp>
-#include <limits>
-
-sanguis::server::perks::tree::status::status()
-:
-	type_(perk_type::size),
-	required_player_level_(0),
-	required_parent_level_(0),
-	max_level_(0),
-	level_(
-		std::numeric_limits<
-			server::level::value_type
-		>::max()
-	)
-{
-}
 
 sanguis::server::perks::tree::status::status(
 	perk_type::type const _type,

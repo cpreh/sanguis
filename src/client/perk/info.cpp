@@ -1,9 +1,5 @@
 #include "info.hpp"
 
-sanguis::client::perk::info::info()
-{
-}
-
 sanguis::client::perk::info::info(
 	sanguis::perk_type::type const _type
 )

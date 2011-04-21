@@ -16,8 +16,6 @@ namespace perk
 class info
 {
 public:
-	info();
-
 	explicit info(
 		sanguis::perk_type::type
 	);

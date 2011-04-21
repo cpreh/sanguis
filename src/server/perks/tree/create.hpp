@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_PERKS_TREE_CREATE_HPP_INCLUDED
 #define SANGUIS_SERVER_PERKS_TREE_CREATE_HPP_INCLUDED
 
-#include "object.hpp"
+#include "object_unique_ptr.hpp"
 
 namespace sanguis
 {
@@ -12,7 +12,7 @@ namespace perks
 namespace tree
 {
 
-tree::object const
+tree::object_unique_ptr
 create();
 
 }

@@ -1,14 +1,34 @@
 #include "create.hpp"
 #include "status.hpp"
+#include "object_unique_ptr.hpp"
+#include "object.hpp"
 #include <fcppt/container/tree/object_impl.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 
-sanguis::server::perks::tree::object const
+sanguis::server::perks::tree::object_unique_ptr
 sanguis::server::perks::tree::create()
 {
-	tree::object ret;
+	// dummy head
+	tree::object_unique_ptr ret(
+		fcppt::make_unique_ptr<
+			tree::object
+		>(
+			tree::status(
+				perk_type::size,
+				tree::required_player_level(
+					0
+				),
+				tree::required_parent_level(
+					0
+				),
+				tree::max_level(
+					0
+				)
+			)
+		)
+	);
 
-	// TODO: do this with assign::
-	ret.push_back(
+	ret->push_back(
 		tree::status(
 			perk_type::choleric,
 			tree::required_player_level(
@@ -22,7 +42,8 @@ sanguis::server::perks::tree::create()
 			)
 		)
 	);
-	ret.push_back(
+
+	ret->push_back(
 		tree::status(
 			perk_type::ias,
 			tree::required_player_level(
@@ -36,7 +57,8 @@ sanguis::server::perks::tree::create()
 			)
 		)
 	);
-	ret.push_back(
+
+	ret->push_back(
 		tree::status(
 			perk_type::ims,
 			tree::required_player_level(
@@ -50,7 +72,8 @@ sanguis::server::perks::tree::create()
 			)
 		)
 	);
-	ret.push_back(
+
+	ret->push_back(
 		tree::status(
 			perk_type::irs,
 			tree::required_player_level(
@@ -64,7 +87,8 @@ sanguis::server::perks::tree::create()
 			)
 		)
 	);
-	ret.push_back(
+
+	ret->push_back(
 		tree::status(
 			perk_type::health,
 			tree::required_player_level(
@@ -80,7 +104,7 @@ sanguis::server::perks::tree::create()
 	);
 
 	tree::object &health(
-		ret.back()
+		ret->back()
 	);
 
 	health.push_back(
@@ -98,5 +122,8 @@ sanguis::server::perks::tree::create()
 		)
 	);
 
-	return ret;
+	return
+		move(
+			ret
+		);
 }

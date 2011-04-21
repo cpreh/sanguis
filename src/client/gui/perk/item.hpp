@@ -2,15 +2,12 @@
 #define SANGUIS_CLIENT_GUI_PERK_ITEM_HPP_INCLUDED
 
 #include "item_fwd.hpp"
+#include "node.hpp"
 #include "../object_fwd.hpp"
+#include "../../perk/info_fwd.hpp"
 #include "../../../perk_type.hpp"
 #include <CEGUI/elements/CEGUITreeItem.h>
 #include <fcppt/noncopyable.hpp>
-
-namespace CEGUI
-{
-class Tree;
-}
 
 namespace sanguis
 {
@@ -28,14 +25,20 @@ class item
 	);
 public:
 	item(
-		CEGUI::Tree &,
+		gui::perk::node const &,
 		client::gui::object &,
-		sanguis::perk_type::type
+		client::perk::info const &
 	);
 
 	~item();
+
+	sanguis::perk_type::type
+	perk_type() const;
+
+	CEGUI::TreeItem &
+	widget();
 private:
-	CEGUI::Tree &tree_;
+	perk::node const parent_;
 
 	sanguis::perk_type::type const perk_type_;
 

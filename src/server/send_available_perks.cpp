@@ -1,5 +1,6 @@
 #include "send_available_perks.hpp"
 #include "entities/player.hpp"
+#include "perks/tree/status.hpp"
 #include "../messages/available_perks.hpp"
 #include "../messages/create.hpp"
 #include "../messages/enum.hpp"

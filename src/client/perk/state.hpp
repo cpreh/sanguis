@@ -9,13 +9,14 @@
 #include "level_function.hpp"
 #include "send_callback.hpp"
 #include "tree.hpp"
+#include "tree_unique_ptr.hpp"
 #include "../level.hpp"
 #include "../../perk_type.hpp"
-#include <fcppt/container/tree/object_decl.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/object.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/scoped_ptr.hpp>
 
 namespace sanguis
 {
@@ -38,7 +39,7 @@ public:
 
 	void
 	perks(
-		perk::tree const &
+		perk::tree_unique_ptr
 	);
 
 	void
@@ -72,7 +73,11 @@ public:
 private:
 	perk::send_callback const send_callback_;
 
-	client::perk::tree perks_;
+	typedef fcppt::scoped_ptr<
+		perk::tree
+	> tree_scoped_ptr;
+	
+	tree_scoped_ptr perks_;
 
 	client::level
 		current_level_,

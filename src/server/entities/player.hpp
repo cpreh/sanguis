@@ -14,7 +14,6 @@
 #include "../damage/armor.hpp"
 #include "../perks/unique_ptr.hpp"
 #include "../perks/tree/object.hpp"
-#include "../perks/tree/status.hpp"
 #include "../exp.hpp"
 #include "../health.hpp"
 #include "../level.hpp"
@@ -22,7 +21,7 @@
 #include "../string.hpp"
 #include "../../perk_type.hpp"
 #include "../../time_type.hpp"
-#include <fcppt/container/tree/object_decl.hpp>
+#include <fcppt/scoped_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -55,6 +54,8 @@ public:
 		server::string const &name,
 		server::player_id
 	);
+
+	~player();
 
 	// own functions
 	server::string const
@@ -131,7 +132,11 @@ private:
 
 	unsigned skill_points_;
 
-	perks::tree::object perk_tree_;
+	typedef fcppt::scoped_ptr<
+		perks::tree::object
+	> perk_tree_scoped_ptr;
+	
+	perk_tree_scoped_ptr perk_tree_;
 };
 
 }

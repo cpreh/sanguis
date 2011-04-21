@@ -16,6 +16,7 @@
 #include "../../messages/player_choose_perk.hpp"
 #include "../../cast_enum.hpp"
 #include <fcppt/container/raw_vector_impl.hpp>
+#include <fcppt/container/tree/object_impl.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/tr1/functional.hpp>
