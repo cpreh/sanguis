@@ -8,12 +8,26 @@
 #include <sge/renderer/texture/filter/linear.hpp>
 #include <sge/renderer/texture/address_mode2.hpp>
 #include <sge/renderer/texture/address_mode.hpp>
+#include <sge/renderer/device.hpp>
+#include <sge/renderer/onscreen_target.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/viewport/manager.hpp>
+#include <fcppt/math/box/basic_impl.hpp>
+#include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_shared_ptr.hpp>
+
+namespace
+{
+
+sge::console::sprite_object::dim const
+make_sprite_dim(
+	sge::renderer::device_ptr
+);
+
+}
 
 sanguis::client::console::gfx::gfx(
 	sge::console::object &_console,
@@ -55,17 +69,8 @@ sanguis::client::console::gfx::gfx(
 				sge::console::sprite_object::vector::null()
 			)
 			.size(
-				sge::console::sprite_object::dim(
-					static_cast<
-						sge::console::sprite_object::unit
-					>(
-						1024 // FIXME!
-					),
-					static_cast<
-						sge::console::sprite_object::unit
-					>(
-						768 / 2 // FIXME!
-					)
+				::make_sprite_dim(
+					renderer_
 				)
 			)
 			.elements()
@@ -96,4 +101,41 @@ sanguis::client::console::gfx::get()
 void
 sanguis::client::console::gfx::on_resize()
 {
+	impl_.background_sprite().size(
+		::make_sprite_dim(
+			renderer_
+		)
+	);
+}
+
+namespace
+{
+
+sge::console::sprite_object::dim const
+make_sprite_dim(
+	sge::renderer::device_ptr const _device
+)
+{
+	sge::renderer::pixel_rect::dim const viewport_dim(
+		_device->onscreen_target()->viewport().get().size()
+	);
+
+	return
+		sge::console::sprite_object::dim(
+			static_cast<
+				sge::console::sprite_object::dim::value_type
+			>(
+				viewport_dim.w()
+			),
+			static_cast<
+				sge::console::sprite_object::dim::value_type
+			>(
+				viewport_dim.h()
+				/
+				2
+			)
+		);
+
+}
+
 }
