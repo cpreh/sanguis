@@ -1,4 +1,5 @@
 #include "make_tree.hpp"
+#include "compare.hpp"
 #include "info.hpp"
 #include "max_level.hpp"
 #include "required_parent_level.hpp"
@@ -11,7 +12,6 @@
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/assert.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/nonassignable.hpp>
 #include <boost/foreach.hpp>
 
 namespace
@@ -21,24 +21,6 @@ sanguis::client::perk::info const
 make_info(
 	sanguis::messages::perk_tree_node const &
 );
-
-class compare_perk
-{
-	FCPPT_NONASSIGNABLE(
-		compare_perk
-	);
-public:
-	explicit compare_perk(
-		sanguis::perk_type::type
-	);
-
-	bool
-	operator()(
-		sanguis::client::perk::tree const &
-	) const;
-private:
-	sanguis::perk_type::type const type_;
-};
 
 }
 
@@ -81,7 +63,7 @@ sanguis::client::perk::make_tree(
 			fcppt::algorithm::find_if_exn(
 				trav.begin(),
 				trav.end(),
-				::compare_perk(
+				client::perk::compare(
 					SANGUIS_CAST_ENUM(
 						perk_type,
 						cur.get<
@@ -150,22 +132,6 @@ make_info(
 				>()
 			)
 		);
-}
-
-compare_perk::compare_perk(
-	sanguis::perk_type::type const _type
-)
-:
-	type_(_type)
-{
-}
-
-bool
-compare_perk::operator()(
-	sanguis::client::perk::tree const &_tree
-) const
-{
-	return _tree.value().type() == type_;
 }
 
 }

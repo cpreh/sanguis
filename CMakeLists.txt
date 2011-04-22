@@ -466,6 +466,8 @@ SET(
 	src/client/object.hpp
 	src/client/perk/change_callback.hpp
 	src/client/perk/change_function.hpp
+	src/client/perk/compare.cpp
+	src/client/perk/compare.hpp
 	src/client/perk/info.cpp
 	src/client/perk/info.hpp
 	src/client/perk/info_fwd.hpp

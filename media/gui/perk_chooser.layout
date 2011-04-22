@@ -13,16 +13,24 @@
 		<Property Name="SizingBorderThickness" Value="8.0" />
 
 		<Window Type="TaharezLook/StaticText" Name="PerkChooser/TopText">
-			<Property Name="ID" Value="1" />
 			<Property Name="UnifiedPosition" Value="{{0.02,0},{0.00,0}}" />
 			<Property Name="UnifiedSize" Value="{{0.9,0},{0.07,0}}" />
-			<Property Name="Text" Value="Level: " />
 		</Window>
 
 		<Window Type="TaharezLook/Tree" Name="PerkChooser/Tree">
-			<Property Name="ID" Value="2" />
 			<Property Name="UnifiedPosition" Value="{{0,0},{0.07,0}}" />
-			<Property Name="UnifiedSize" Value="{{0.96,0},{0.90,0}}" />
+			<Property Name="UnifiedSize" Value="{{0.96,0},{0.7,0}}" />
+		</Window>
+
+		<Window Type="TaharezLook/StaticText" Name="PerkChooser/BottomText">
+			<Property Name="UnifiedPosition" Value="{{0.02,0},{0.8,0}}" />
+			<Property Name="UnifiedSize" Value="{{0.9,0},{0.07,0}}" />
+		</Window>
+
+		<Window Type="TaharezLook/Button" Name="PerkChooser/ChooseButton">
+			<Property Name="UnifiedPosition" Value="{{0.02,0},{0.9,0}}" />
+			<Property Name="UnifiedSize" Value="{{0.3,0},{0.07,0}}" />
+			<Property Name="Text" Value="Choose Perk"/>
 		</Window>
 	</Window>
 </GUILayout>

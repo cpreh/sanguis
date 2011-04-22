@@ -2,10 +2,14 @@
 #include "item.hpp"
 #include "item_tree.hpp"
 #include "../object.hpp"
+#include "../../perk/compare.hpp"
+#include "../../perk/info.hpp"
 #include "../../perk/state.hpp"
+#include "../../perk/to_string.hpp"
 #include "../../../media_path.hpp"
 #include "../../../perk_type.hpp"
 #include <sge/cegui/to_cegui_string.hpp>
+#include <fcppt/algorithm/find_if_exn.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
@@ -13,8 +17,10 @@
 #include <fcppt/lexical_cast.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/nonassignable.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
+#include <CEGUI/elements/CEGUIPushButton.h>
 #include <CEGUI/elements/CEGUITree.h>
 #include <CEGUI/CEGUIWindowManager.h>
 #include <algorithm>
@@ -85,9 +91,14 @@ sanguis::client::gui::perk::chooser::chooser(
 			)
 		)
 	),
-	top_widget_(
+	top_text_(
 		*CEGUI::WindowManager::getSingleton().getWindow(
 			"PerkChooser/TopText"
+		)
+	),
+	bottom_text_(
+		*CEGUI::WindowManager::getSingleton().getWindow(
+			"PerkChooser/BottomText"
 		)
 	),
 	selection_connection_(
@@ -96,6 +107,20 @@ sanguis::client::gui::perk::chooser::chooser(
 			CEGUI::Event::Subscriber(
 				std::tr1::bind(
 					&chooser::handle_selection_changed,
+					this,
+					std::tr1::placeholders::_1
+				)
+			)
+		)
+	),
+	choose_connection_(
+		CEGUI::WindowManager::getSingleton().getWindow(
+			"PerkChooser/ChooseButton"
+		)->subscribeEvent(
+			CEGUI::PushButton::EventClicked,
+			CEGUI::Event::Subscriber(
+				std::tr1::bind(
+					&chooser::handle_perk_choose,
 					this,
 					std::tr1::placeholders::_1
 				)
@@ -218,13 +243,13 @@ sanguis::client::gui::perk::chooser::level(
 	client::level
 )
 {
-	this->update_top_widget();
+	this->update_top_text();
 }
 
 void
-sanguis::client::gui::perk::chooser::update_top_widget()
+sanguis::client::gui::perk::chooser::update_top_text()
 {
-	top_widget_.setText(
+	top_text_.setText(
 		sge::cegui::to_cegui_string(
 			FCPPT_TEXT("Level: ")
 			+
@@ -246,8 +271,72 @@ sanguis::client::gui::perk::chooser::update_top_widget()
 	);
 }
 
+void
+sanguis::client::gui::perk::chooser::update_bottom_text(
+	sanguis::perk_type::type const _perk_type
+)
+{
+	typedef fcppt::container::tree::pre_order<
+		client::perk::tree const
+	> traversal;
+
+	traversal trav(
+		state_.perks()
+	);
+
+	client::perk::info const &info(
+		fcppt::algorithm::find_if_exn(
+			trav.begin(),
+			trav.end(),
+			client::perk::compare(
+				_perk_type
+			)
+		)->value()
+	);
+
+	bottom_text_.setText(
+		sge::cegui::to_cegui_string(
+			FCPPT_TEXT('(')
+			+
+			client::perk::to_string(
+				_perk_type
+			)
+			+
+			FCPPT_TEXT(") level: ")
+			+
+			fcppt::lexical_cast<
+				fcppt::string
+			>(
+				state_.perk_level(
+					_perk_type
+				)
+			),
+			gui_.charconv_system()
+		)
+	);
+}
+
 bool
 sanguis::client::gui::perk::chooser::handle_selection_changed(
+	CEGUI::EventArgs const &
+)
+{
+	optional_perk const selected(
+		this->selected_perk()
+	);
+
+	if(
+		selected
+	)
+		this->update_bottom_text(
+			*selected
+		);
+
+	return true;
+}
+
+bool
+sanguis::client::gui::perk::chooser::handle_perk_choose(
 	CEGUI::EventArgs const &
 )
 {
@@ -256,8 +345,8 @@ sanguis::client::gui::perk::chooser::handle_selection_changed(
 	)
 		return true;
 
-	CEGUI::TreeItem *const selected(
-		tree_widget_.getFirstSelectedItem()
+	optional_perk const selected(
+		this->selected_perk()
 	);
 
 	if(
@@ -265,17 +354,38 @@ sanguis::client::gui::perk::chooser::handle_selection_changed(
 	)
 	{
 		state_.choose_perk(
-			*static_cast<
-				sanguis::perk_type::type const *
-			>(
-				selected->getUserData()
-			)
+			*selected
 		);
 
-		this->update_top_widget();
+		this->update_top_text();
+
+		this->update_bottom_text(
+			*selected
+		);
 	}
 
 	return true;
+}
+
+sanguis::client::gui::perk::chooser::optional_perk const
+sanguis::client::gui::perk::chooser::selected_perk() const
+{
+	CEGUI::TreeItem *const selected(
+		tree_widget_.getFirstSelectedItem()
+	);
+
+	return
+		selected
+		?
+			optional_perk(
+				*static_cast<
+					sanguis::perk_type::type const *
+				>(
+					selected->getUserData()
+				)
+			)
+		:
+			optional_perk();
 }
 
 namespace

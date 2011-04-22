@@ -54,7 +54,7 @@ public:
 	);
 
 	perk::tree const &
-	perks();
+	perks() const;
 
 	client::level const
 	player_level() const;

@@ -85,7 +85,7 @@ sanguis::client::perk::state::choose_perk(
 }
 
 sanguis::client::perk::tree const &
-sanguis::client::perk::state::perks()
+sanguis::client::perk::state::perks() const
 {
 	FCPPT_ASSERT(
 		perks_

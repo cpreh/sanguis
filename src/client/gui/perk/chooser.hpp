@@ -14,6 +14,7 @@
 #include <fcppt/container/tree/object_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/optional_fwd.hpp>
 #include <CEGUI/CEGUIEvent.h>
 
 namespace CEGUI
@@ -63,12 +64,29 @@ private:
 	);
 
 	void
-	update_top_widget();
+	update_top_text();
+
+	void
+	update_bottom_text(
+		sanguis::perk_type::type
+	);
 
 	bool
 	handle_selection_changed(
 		CEGUI::EventArgs const &
 	);
+
+	bool
+	handle_perk_choose(
+		CEGUI::EventArgs const &
+	);
+
+	typedef fcppt::optional<
+		perk_type::type
+	> optional_perk;
+
+	optional_perk const
+	selected_perk() const;
 
 	gui::object &gui_;
 
@@ -84,10 +102,13 @@ private:
 
 	CEGUI::Tree &tree_widget_;
 
-	CEGUI::Window &top_widget_;
+	CEGUI::Window &top_text_;
+
+	CEGUI::Window &bottom_text_;
 
 	CEGUI::Event::ScopedConnection const
-		selection_connection_;
+		selection_connection_,
+		choose_connection_;
 
 	gui::perk::item_tree items_;
 };
