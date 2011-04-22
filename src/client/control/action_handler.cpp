@@ -33,7 +33,7 @@
 #include <iterator>
 
 sanguis::client::control::action_handler::action_handler(
-	send_callback const &_send,
+	client::send_callback const &_send,
 	control::environment &_environment,
 	sge::console::object &_console
 )

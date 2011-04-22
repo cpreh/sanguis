@@ -98,13 +98,13 @@ sanguis::client::control::input_translator::key_callback(
 			actions::nullary_type::console
 		);
 		break;
-	case sge::input::keyboard::key_code::x:
+	case sge::input::keyboard::key_code::c:
 		this->nullary_event(
 			_event.pressed(),
 			actions::nullary_type::switch_weapon_forwards
 		);
 		break;
-	case sge::input::keyboard::key_code::c:
+	case sge::input::keyboard::key_code::x:
 		this->nullary_event(
 			_event.pressed(),
 			actions::nullary_type::switch_weapon_backwards

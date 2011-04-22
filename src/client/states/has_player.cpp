@@ -8,9 +8,10 @@
 #include "../events/net_error.hpp"
 #include "../events/render.hpp"
 #include "../events/tick.hpp"
-#include "../log.hpp"
 #include "../perk/make_tree.hpp"
 #include "../perk/state.hpp"
+#include "../log.hpp"
+#include "../make_send_callback.hpp"
 #include "../../messages/call/object.hpp"
 #include "../../messages/create.hpp"
 #include "../../messages/player_choose_perk.hpp"
@@ -49,10 +50,8 @@ sanguis::client::states::has_player::has_player(
 		fcppt::make_unique_ptr<
 			control::action_handler
 		>(
-			std::tr1::bind(
-				&machine::send,
-				&context<machine>(),
-				std::tr1::placeholders::_1
+			client::make_send_callback(
+				context<machine>()
 			),
 			fcppt::ref(
 				context<running>().control_environment()
