@@ -18,7 +18,7 @@ perk::choosable_state::type
 choosable(
 	sanguis::perk_type::type,
 	perk::tree const &,
-	perk::level_map &,
+	perk::level_map const &,
 	client::level player_level
 );
 

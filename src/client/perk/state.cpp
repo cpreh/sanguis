@@ -123,6 +123,12 @@ sanguis::client::perk::state::perk_level(
 		];
 }
 
+sanguis::client::perk::level_map const &
+sanguis::client::perk::state::perk_levels() const
+{
+	return perk_levels_;
+}
+
 fcppt::signal::auto_connection
 sanguis::client::perk::state::register_level_change(
 	perk::level_callback const &_callback

@@ -67,6 +67,9 @@ public:
 		sanguis::perk_type::type
 	) const;
 
+	perk::level_map const &
+	perk_levels() const;
+
 	fcppt::signal::auto_connection
 	register_level_change(
 		perk::level_callback const &

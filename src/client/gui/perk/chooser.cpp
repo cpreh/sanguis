@@ -1,19 +1,24 @@
 #include "chooser.hpp"
+#include "choosable_item_color.hpp"
 #include "item.hpp"
 #include "item_tree.hpp"
+#include "item_user_data.hpp"
 #include "../object.hpp"
+#include "../../perk/choosable.hpp"
 #include "../../perk/find_info.hpp"
 #include "../../perk/info.hpp"
 #include "../../perk/state.hpp"
 #include "../../perk/to_string.hpp"
 #include "../../../media_path.hpp"
 #include "../../../perk_type.hpp"
+#include <sge/cegui/to_cegui_color.hpp>
 #include <sge/cegui/to_cegui_string.hpp>
 #include <fcppt/algorithm/find_if_exn.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/variant/object_impl.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/nonassignable.hpp>
@@ -236,6 +241,8 @@ sanguis::client::gui::perk::chooser::perks(
 				)
 			);
 	}
+
+	this->update_tree_data();
 }
 
 void
@@ -313,6 +320,50 @@ sanguis::client::gui::perk::chooser::update_bottom_text(
 	);
 }
 
+void
+sanguis::client::gui::perk::chooser::update_tree_data()
+{
+	typedef fcppt::container::tree::pre_order<
+		gui::perk::item_tree
+	> traversal;
+
+	traversal trav(
+		items_
+	);
+
+	for(
+		traversal::iterator it(
+			trav.begin()
+		);
+		it != trav.end();
+		++it
+	)
+	{
+		// skip the tree itself
+		if(
+			!it->has_parent()
+		)
+			continue;
+
+		CEGUI::TreeItem &widget(
+			it->value().widget()
+		);
+
+		widget.setTextColours(
+			sge::cegui::to_cegui_color(
+				gui::perk::choosable_item_color(
+					client::perk::choosable(
+						it->value().perk_type(),
+						state_.perks(),
+						state_.perk_levels(),
+						state_.player_level()
+					)
+				)
+			)
+		);
+	}
+}
+
 bool
 sanguis::client::gui::perk::chooser::handle_selection_changed(
 	CEGUI::EventArgs const &
@@ -364,6 +415,8 @@ sanguis::client::gui::perk::chooser::handle_perk_choose(
 		*selected
 	);
 
+	this->update_tree_data();
+
 	return true;
 }
 
@@ -378,10 +431,8 @@ sanguis::client::gui::perk::chooser::selected_perk() const
 		selected
 		?
 			optional_perk(
-				*static_cast<
-					sanguis::perk_type::type const *
-				>(
-					selected->getUserData()
+				gui::perk::item_user_data(
+					*selected
 				)
 			)
 		:

@@ -71,6 +71,9 @@ private:
 		sanguis::perk_type::type
 	);
 
+	void
+	update_tree_data();
+
 	bool
 	handle_selection_changed(
 		CEGUI::EventArgs const &

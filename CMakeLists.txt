@@ -441,6 +441,8 @@ SET(
 	src/client/gui/object.cpp
 	src/client/gui/object.hpp
 	src/client/gui/object_fwd.hpp
+	src/client/gui/perk/choosable_item_color.cpp
+	src/client/gui/perk/choosable_item_color.hpp
 	src/client/gui/perk/chooser.cpp
 	src/client/gui/perk/chooser.hpp
 	src/client/gui/perk/chooser_fwd.hpp
@@ -448,6 +450,8 @@ SET(
 	src/client/gui/perk/item.hpp
 	src/client/gui/perk/item_fwd.hpp
 	src/client/gui/perk/item_tree.hpp
+	src/client/gui/perk/item_user_data.cpp
+	src/client/gui/perk/item_user_data.hpp
 	src/client/gui/perk/node.cpp
 	src/client/gui/perk/node.hpp
 	src/client/gui/perk/node_variant.hpp
