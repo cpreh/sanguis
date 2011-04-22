@@ -36,6 +36,11 @@ sanguis::client::gui::perk::item::item(
 	parent_.add_item(
 		widget_
 	);
+
+	if(
+		!widget_.getIsOpen()
+	)
+		widget_.toggleIsOpen();
 }
 
 sanguis::client::gui::perk::item::~item()
