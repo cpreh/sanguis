@@ -4,7 +4,7 @@
 #include "chooser_fwd.hpp"
 #include "item_tree.hpp"
 #include "../object_fwd.hpp"
-#include "../../level.hpp"
+#include "../../player_level.hpp"
 #include "../../perk/state_fwd.hpp"
 #include "../../perk/tree.hpp"
 #include "../../../perk_type.hpp"
@@ -60,7 +60,7 @@ private:
 
 	void
 	level(
-		client::level
+		client::player_level
 	);
 
 	void

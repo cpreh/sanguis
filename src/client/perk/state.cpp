@@ -44,7 +44,7 @@ sanguis::client::perk::state::perks(
 
 void
 sanguis::client::perk::state::player_level(
-	client::level const _level
+	client::player_level const _level
 )
 {
 	current_level_ = _level;
@@ -59,11 +59,6 @@ sanguis::client::perk::state::choose_perk(
 	sanguis::perk_type::type const _type
 )
 {
-	if(
-		consumed_levels_ == current_level_
-	)
-		return false;
-	
 	if(
 		this->choosable(
 			_type
@@ -95,7 +90,7 @@ sanguis::client::perk::state::perks() const
 	return *perks_;
 }
 
-sanguis::client::level const
+sanguis::client::player_level const
 sanguis::client::perk::state::player_level() const
 {
 	return current_level_;
@@ -105,11 +100,11 @@ sanguis::client::level const
 sanguis::client::perk::state::levels_left() const
 {
 	return
-		current_level_
+		current_level_.get()
 		- consumed_levels_;
 }
 
-sanguis::client::level const
+sanguis::client::perk::level const
 sanguis::client::perk::state::perk_level(
 	sanguis::perk_type::type const _perk_type
 ) const

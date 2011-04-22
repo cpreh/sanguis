@@ -5,6 +5,7 @@
 #include "level_map.hpp"
 #include "tree.hpp"
 #include "../level.hpp"
+#include "../player_level.hpp"
 #include "../../perk_type.hpp"
 
 namespace sanguis
@@ -19,7 +20,7 @@ choosable(
 	sanguis::perk_type::type,
 	perk::tree const &,
 	perk::level_map const &,
-	client::level player_level,
+	client::player_level,
 	client::level perks_chosen
 );
 

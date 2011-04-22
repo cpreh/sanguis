@@ -9,10 +9,12 @@
 #include "level_callback.hpp"
 #include "level_function.hpp"
 #include "level_map.hpp"
+#include "level.hpp"
 #include "send_callback.hpp"
 #include "tree.hpp"
 #include "tree_unique_ptr.hpp"
 #include "../level.hpp"
+#include "../player_level.hpp"
 #include "../../perk_type.hpp"
 #include <fcppt/function/object.hpp>
 #include <fcppt/signal/auto_connection.hpp>
@@ -46,7 +48,7 @@ public:
 
 	void
 	player_level(
-		client::level
+		client::player_level
 	);
 
 	bool
@@ -57,13 +59,13 @@ public:
 	perk::tree const &
 	perks() const;
 
-	client::level const
+	client::player_level const
 	player_level() const;
 
 	client::level const
 	levels_left() const;
 
-	client::level const
+	perk::level const
 	perk_level(
 		sanguis::perk_type::type
 	) const;
@@ -94,9 +96,9 @@ private:
 	
 	tree_scoped_ptr perks_;
 
-	client::level
-		current_level_,
-		consumed_levels_;
+	client::player_level current_level_;
+
+	client::level consumed_levels_;
 	
 	mutable perk::level_map perk_levels_;
 	

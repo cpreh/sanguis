@@ -1,5 +1,5 @@
 #include "chooser.hpp"
-#include "choosable_item_color.hpp"
+#include "item_color.hpp"
 #include "item.hpp"
 #include "item_tree.hpp"
 #include "item_user_data.hpp"
@@ -254,7 +254,7 @@ sanguis::client::gui::perk::chooser::perks(
 
 void
 sanguis::client::gui::perk::chooser::level(
-	client::level
+	client::player_level
 )
 {
 	this->update_top_text();
@@ -358,7 +358,7 @@ sanguis::client::gui::perk::chooser::update_tree_data()
 
 		widget.setTextColours(
 			sge::cegui::to_cegui_color(
-				gui::perk::choosable_item_color(
+				gui::perk::item_color(
 					state_.choosable(
 						it->value().perk_type()
 					)

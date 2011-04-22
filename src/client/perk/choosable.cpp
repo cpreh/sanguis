@@ -1,12 +1,15 @@
 #include "choosable.hpp"
 #include "find_info.hpp"
 #include "info.hpp"
+#include "level.hpp"
+#include "level_map.hpp"
+#include "../../perk_type.hpp"
 #include <fcppt/container/tree/object_impl.hpp>
 
 namespace
 {
 
-sanguis::client::level const
+sanguis::client::perk::level const
 perk_level(
 	sanguis::perk_type::type,
 	sanguis::client::perk::level_map const &
@@ -19,12 +22,12 @@ sanguis::client::perk::choosable(
 	sanguis::perk_type::type const _type,
 	perk::tree const &_tree,
 	perk::level_map const &_levels,
-	client::level const _player_level,
+	client::player_level const _player_level,
 	client::level const _perks_chosen
 )
 {
 	if(
-		_player_level
+		_player_level.get()
 		==
 		_perks_chosen
 	)
@@ -71,7 +74,7 @@ sanguis::client::perk::choosable(
 namespace
 {
 
-sanguis::client::level const
+sanguis::client::perk::level const
 perk_level(
 	sanguis::perk_type::type const _type,
 	sanguis::client::perk::level_map const &_map
@@ -86,7 +89,7 @@ perk_level(
 	return
 		it == _map.end()
 		?
-			sanguis::client::level(
+			sanguis::client::perk::level(
 				0
 			)
 		:

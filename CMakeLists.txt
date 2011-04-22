@@ -441,13 +441,13 @@ SET(
 	src/client/gui/object.cpp
 	src/client/gui/object.hpp
 	src/client/gui/object_fwd.hpp
-	src/client/gui/perk/choosable_item_color.cpp
-	src/client/gui/perk/choosable_item_color.hpp
 	src/client/gui/perk/chooser.cpp
 	src/client/gui/perk/chooser.hpp
 	src/client/gui/perk/chooser_fwd.hpp
 	src/client/gui/perk/item.cpp
 	src/client/gui/perk/item.hpp
+	src/client/gui/perk/item_color.cpp
+	src/client/gui/perk/item_color.hpp
 	src/client/gui/perk/item_fwd.hpp
 	src/client/gui/perk/item_tree.hpp
 	src/client/gui/perk/item_user_data.cpp
@@ -480,6 +480,7 @@ SET(
 	src/client/perk/info.cpp
 	src/client/perk/info.hpp
 	src/client/perk/info_fwd.hpp
+	src/client/perk/level.hpp
 	src/client/perk/level_callback.hpp
 	src/client/perk/level_function.hpp
 	src/client/perk/level_map.hpp
@@ -496,6 +497,7 @@ SET(
 	src/client/perk/to_string.hpp
 	src/client/perk/tree.hpp
 	src/client/perk/tree_unique_ptr.hpp
+	src/client/player_level.hpp
 	src/client/send_callback.hpp
 	src/client/server_callback.hpp
 	src/client/states/console.cpp

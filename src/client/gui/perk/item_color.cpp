@@ -1,11 +1,11 @@
-#include "choosable_item_color.hpp"
+#include "item_color.hpp"
 #include "../../../exception.hpp"
 #include <sge/image/colors.hpp>
 #include <fcppt/variant/object_impl.hpp>
 #include <fcppt/text.hpp>
 
 sge::image::color::any::object const
-sanguis::client::gui::perk::choosable_item_color(
+sanguis::client::gui::perk::item_color(
 	client::perk::choosable_state::type const _state
 )
 {
