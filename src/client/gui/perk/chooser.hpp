@@ -62,6 +62,9 @@ private:
 		client::level
 	);
 
+	void
+	update_top_widget();
+
 	bool
 	handle_selection_changed(
 		CEGUI::EventArgs const &
@@ -81,7 +84,7 @@ private:
 
 	CEGUI::Tree &tree_widget_;
 
-	CEGUI::Window &level_widget_;
+	CEGUI::Window &top_widget_;
 
 	CEGUI::Event::ScopedConnection const
 		selection_connection_;

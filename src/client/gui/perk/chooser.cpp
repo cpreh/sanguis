@@ -85,9 +85,9 @@ sanguis::client::gui::perk::chooser::chooser(
 			)
 		)
 	),
-	level_widget_(
+	top_widget_(
 		*CEGUI::WindowManager::getSingleton().getWindow(
-			"PerkChooser/Level"
+			"PerkChooser/TopText"
 		)
 	),
 	selection_connection_(
@@ -215,15 +215,31 @@ sanguis::client::gui::perk::chooser::perks(
 
 void
 sanguis::client::gui::perk::chooser::level(
-	client::level const _level
+	client::level
 )
 {
-	level_widget_.setText(
+	this->update_top_widget();
+}
+
+void
+sanguis::client::gui::perk::chooser::update_top_widget()
+{
+	top_widget_.setText(
 		sge::cegui::to_cegui_string(
+			FCPPT_TEXT("Level: ")
+			+
 			fcppt::lexical_cast<
 				fcppt::string
 			>(
-				_level
+				state_.player_level()
+			)
+			+
+			FCPPT_TEXT(", Perks to choose: ")
+			+
+			fcppt::lexical_cast<
+				fcppt::string
+			>(
+				state_.levels_left()
 			),
 			gui_.charconv_system()
 		)
@@ -247,6 +263,7 @@ sanguis::client::gui::perk::chooser::handle_selection_changed(
 	if(
 		selected
 	)
+	{
 		state_.choose_perk(
 			*static_cast<
 				sanguis::perk_type::type const *
@@ -254,6 +271,9 @@ sanguis::client::gui::perk::chooser::handle_selection_changed(
 				selected->getUserData()
 			)
 		);
+
+		this->update_top_widget();
+	}
 
 	return true;
 }
