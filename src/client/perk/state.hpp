@@ -7,6 +7,7 @@
 #include "info.hpp"
 #include "level_callback.hpp"
 #include "level_function.hpp"
+#include "level_map.hpp"
 #include "send_callback.hpp"
 #include "tree.hpp"
 #include "tree_unique_ptr.hpp"
@@ -17,7 +18,6 @@
 #include <fcppt/signal/object.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
-#include <map>
 
 namespace sanguis
 {
@@ -48,7 +48,7 @@ public:
 		client::level
 	);
 
-	void
+	bool
 	choose_perk(
 		sanguis::perk_type::type	
 	);
@@ -89,12 +89,7 @@ private:
 		current_level_,
 		consumed_levels_;
 	
-	typedef std::map<
-		sanguis::perk_type::type,
-		client::level
-	> perk_level_map;
-
-	mutable perk_level_map perk_levels_;
+	mutable perk::level_map perk_levels_;
 	
 	fcppt::signal::object<
 		perk::level_function

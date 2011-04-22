@@ -1,4 +1,5 @@
 #include "state.hpp"
+#include "choosable.hpp"
 #include "info.hpp"
 #include "../log.hpp"
 #include <fcppt/container/tree/object_impl.hpp>
@@ -53,7 +54,7 @@ sanguis::client::perk::state::player_level(
 	);
 }
 
-void
+bool
 sanguis::client::perk::state::choose_perk(
 	sanguis::perk_type::type const _type
 )
@@ -61,17 +62,18 @@ sanguis::client::perk::state::choose_perk(
 	if(
 		consumed_levels_ == current_level_
 	)
-	{
-		FCPPT_LOG_ERROR(
-			client::log(),
-			fcppt::log::_
-				<< FCPPT_TEXT("Cannot choose a perk because no level up is left! ")
-				<< FCPPT_TEXT("The current level is ")
-				<< current_level_
-		);
-
-		return;
-	}
+		return false;
+	
+	if(
+		client::perk::choosable(
+			_type,
+			this->perks(),
+			perk_levels_,
+			current_level_
+		)
+		!= perk::choosable_state::ok
+	)
+		return false;
 
 	++consumed_levels_;
 
@@ -82,6 +84,8 @@ sanguis::client::perk::state::choose_perk(
 	send_callback_(
 		_type
 	);
+
+	return true;
 }
 
 sanguis::client::perk::tree const &

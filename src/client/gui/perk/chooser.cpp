@@ -2,7 +2,7 @@
 #include "item.hpp"
 #include "item_tree.hpp"
 #include "../object.hpp"
-#include "../../perk/compare.hpp"
+#include "../../perk/find_info.hpp"
 #include "../../perk/info.hpp"
 #include "../../perk/state.hpp"
 #include "../../perk/to_string.hpp"
@@ -276,22 +276,11 @@ sanguis::client::gui::perk::chooser::update_bottom_text(
 	sanguis::perk_type::type const _perk_type
 )
 {
-	typedef fcppt::container::tree::pre_order<
-		client::perk::tree const
-	> traversal;
-
-	traversal trav(
-		state_.perks()
-	);
-
 	client::perk::info const &info(
-		fcppt::algorithm::find_if_exn(
-			trav.begin(),
-			trav.end(),
-			client::perk::compare(
-				_perk_type
-			)
-		)->value()
+		client::perk::find_info(
+			_perk_type,
+			state_.perks()
+		).value()
 	);
 
 	bottom_text_.setText(
@@ -358,19 +347,22 @@ sanguis::client::gui::perk::chooser::handle_perk_choose(
 	);
 
 	if(
-		selected
+		!selected
 	)
-	{
-		state_.choose_perk(
-			*selected
-		);
+		return true;
 
-		this->update_top_text();
-
-		this->update_bottom_text(
+	if(
+		!state_.choose_perk(
 			*selected
-		);
-	}
+		)
+	)
+		return true;
+
+	this->update_top_text();
+
+	this->update_bottom_text(
+		*selected
+	);
 
 	return true;
 }

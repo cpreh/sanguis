@@ -466,13 +466,19 @@ SET(
 	src/client/object.hpp
 	src/client/perk/change_callback.hpp
 	src/client/perk/change_function.hpp
+	src/client/perk/choosable.cpp
+	src/client/perk/choosable.hpp
+	src/client/perk/choosable_state.hpp
 	src/client/perk/compare.cpp
 	src/client/perk/compare.hpp
+	src/client/perk/find_info.cpp
+	src/client/perk/find_info.hpp
 	src/client/perk/info.cpp
 	src/client/perk/info.hpp
 	src/client/perk/info_fwd.hpp
 	src/client/perk/level_callback.hpp
 	src/client/perk/level_function.hpp
+	src/client/perk/level_map.hpp
 	src/client/perk/make_tree.cpp
 	src/client/perk/make_tree.hpp
 	src/client/perk/max_level.hpp
