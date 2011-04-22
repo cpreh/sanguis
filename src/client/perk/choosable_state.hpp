@@ -15,7 +15,8 @@ enum type
 	ok,
 	parent_level,
 	player_level,
-	max_level
+	max_level,
+	level_up
 };
 }
 

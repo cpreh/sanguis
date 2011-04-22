@@ -4,7 +4,6 @@
 #include "item_tree.hpp"
 #include "item_user_data.hpp"
 #include "../object.hpp"
-#include "../../perk/choosable.hpp"
 #include "../../perk/find_info.hpp"
 #include "../../perk/info.hpp"
 #include "../../perk/state.hpp"
@@ -60,6 +59,7 @@ sanguis::client::gui::perk::chooser::chooser(
 :
 	gui_(_gui),
 	state_(_state),
+	active_perk_(),
 	perk_connection_(
 		_state.register_perks_change(
 			std::tr1::bind(
@@ -106,6 +106,11 @@ sanguis::client::gui::perk::chooser::chooser(
 			"PerkChooser/BottomText"
 		)
 	),
+	choose_button_(
+		*CEGUI::WindowManager::getSingleton().getWindow(
+			"PerkChooser/ChooseButton"
+		)
+	),
 	selection_connection_(
 		tree_widget_.subscribeEvent(
 			CEGUI::Tree::EventSelectionChanged,
@@ -119,9 +124,7 @@ sanguis::client::gui::perk::chooser::chooser(
 		)
 	),
 	choose_connection_(
-		CEGUI::WindowManager::getSingleton().getWindow(
-			"PerkChooser/ChooseButton"
-		)->subscribeEvent(
+		choose_button_.subscribeEvent(
 			CEGUI::PushButton::EventClicked,
 			CEGUI::Event::Subscriber(
 				std::tr1::bind(
@@ -134,6 +137,10 @@ sanguis::client::gui::perk::chooser::chooser(
 	),
 	items_()
 {
+	choose_button_.setEnabled(
+		false
+	);
+
 	this->perks(
 		_state.perks()
 	);
@@ -352,11 +359,8 @@ sanguis::client::gui::perk::chooser::update_tree_data()
 		widget.setTextColours(
 			sge::cegui::to_cegui_color(
 				gui::perk::choosable_item_color(
-					client::perk::choosable(
-						it->value().perk_type(),
-						state_.perks(),
-						state_.perk_levels(),
-						state_.player_level()
+					state_.choosable(
+						it->value().perk_type()
 					)
 				)
 			)
@@ -364,21 +368,60 @@ sanguis::client::gui::perk::chooser::update_tree_data()
 	}
 }
 
+void
+sanguis::client::gui::perk::chooser::update_choose_button(
+	sanguis::perk_type::type const _perk_type
+)
+{
+	choose_button_.setEnabled(
+		state_.choosable(
+			_perk_type
+		)
+		== client::perk::choosable_state::ok
+	);
+}
+
 bool
 sanguis::client::gui::perk::chooser::handle_selection_changed(
 	CEGUI::EventArgs const &
 )
 {
-	optional_perk const selected(
-		this->selected_perk()
+	CEGUI::TreeItem *const selected(
+		tree_widget_.getFirstSelectedItem()
 	);
 
 	if(
 		selected
 	)
-		this->update_bottom_text(
-			*selected
+	{
+		sanguis::perk_type::type const perk_type(
+			gui::perk::item_user_data(
+				*selected
+			)
 		);
+
+		active_perk_ = perk_type;
+
+		this->update_bottom_text(
+			perk_type
+		);
+
+		this->update_choose_button(
+			perk_type
+		);
+	}
+	else
+	{
+		active_perk_.reset();
+
+		bottom_text_.setText(
+			CEGUI::String()
+		);
+
+		choose_button_.setEnabled(
+			false
+		);
+	}
 
 	return true;
 }
@@ -393,18 +436,14 @@ sanguis::client::gui::perk::chooser::handle_perk_choose(
 	)
 		return true;
 
-	optional_perk const selected(
-		this->selected_perk()
-	);
-
 	if(
-		!selected
+		!active_perk_
 	)
 		return true;
 
 	if(
 		!state_.choose_perk(
-			*selected
+			*active_perk_
 		)
 	)
 		return true;
@@ -412,31 +451,16 @@ sanguis::client::gui::perk::chooser::handle_perk_choose(
 	this->update_top_text();
 
 	this->update_bottom_text(
-		*selected
+		*active_perk_
 	);
 
 	this->update_tree_data();
 
-	return true;
-}
-
-sanguis::client::gui::perk::chooser::optional_perk const
-sanguis::client::gui::perk::chooser::selected_perk() const
-{
-	CEGUI::TreeItem *const selected(
-		tree_widget_.getFirstSelectedItem()
+	this->update_choose_button(
+		*active_perk_
 	);
 
-	return
-		selected
-		?
-			optional_perk(
-				gui::perk::item_user_data(
-					*selected
-				)
-			)
-		:
-			optional_perk();
+	return true;
 }
 
 namespace

@@ -65,11 +65,8 @@ sanguis::client::perk::state::choose_perk(
 		return false;
 	
 	if(
-		client::perk::choosable(
-			_type,
-			this->perks(),
-			perk_levels_,
-			current_level_
+		this->choosable(
+			_type
 		)
 		!= perk::choosable_state::ok
 	)
@@ -127,6 +124,21 @@ sanguis::client::perk::level_map const &
 sanguis::client::perk::state::perk_levels() const
 {
 	return perk_levels_;
+}
+
+sanguis::client::perk::choosable_state::type
+sanguis::client::perk::state::choosable(
+	sanguis::perk_type::type const _type
+) const
+{
+	return
+		client::perk::choosable(
+			_type,
+			this->perks(),
+			perk_levels_,
+			current_level_,
+			consumed_levels_
+		);
 }
 
 fcppt::signal::auto_connection

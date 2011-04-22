@@ -4,6 +4,7 @@
 #include "state_fwd.hpp"
 #include "change_callback.hpp"
 #include "change_function.hpp"
+#include "choosable_state.hpp"
 #include "info.hpp"
 #include "level_callback.hpp"
 #include "level_function.hpp"
@@ -69,6 +70,11 @@ public:
 
 	perk::level_map const &
 	perk_levels() const;
+
+	perk::choosable_state::type
+	choosable(
+		sanguis::perk_type::type
+	) const;
 
 	fcppt::signal::auto_connection
 	register_level_change(

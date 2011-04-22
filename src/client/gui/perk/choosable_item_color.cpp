@@ -20,6 +20,8 @@ sanguis::client::gui::perk::choosable_item_color(
 		return sge::image::colors::red();
 	case client::perk::choosable_state::max_level:
 		return sge::image::colors::blue();
+	case client::perk::choosable_state::level_up:
+		return sge::image::colors::gray();
 	}
 
 	throw sanguis::exception(
