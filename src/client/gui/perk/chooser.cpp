@@ -310,6 +310,14 @@ sanguis::client::gui::perk::chooser::update_bottom_text(
 				state_.perk_level(
 					_perk_type
 				)
+			)
+			+
+			FCPPT_TEXT(", max level: ")
+			+
+			fcppt::lexical_cast<
+				fcppt::string
+			>(
+				info.max_level()
 			),
 			gui_.charconv_system()
 		)
