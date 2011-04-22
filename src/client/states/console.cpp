@@ -1,6 +1,7 @@
 #include "console.hpp"
 #include "has_player.hpp"
 #include "ingame.hpp"
+#include "../make_send_callback.hpp"
 #include "../control/actions/nullary.hpp"
 #include "../control/actions/nullary_type.hpp"
 #include "../control/actions/variant.hpp"
@@ -11,6 +12,7 @@
 #include "../events/render.hpp"
 #include "../events/tick.hpp"
 #include "../console/object.hpp"
+#include <fcppt/function/object.hpp>
 #include <fcppt/variant/holds_type.hpp>
 #include <fcppt/variant/object_impl.hpp>
 
@@ -20,6 +22,11 @@ sanguis::client::states::console::console(
 :
 	my_base(
 		_ctx
+	),
+	pause_(
+		client::make_send_callback(
+			context<machine>()
+		)
 	),
 	console_activation_(
 		context<states::running>().console()

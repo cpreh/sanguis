@@ -2,6 +2,7 @@
 #include "menu.hpp"
 #include "../daytime_settings.hpp"
 #include "../log.hpp"
+#include "../make_send_callback.hpp"
 #include "../music_handler.hpp"
 #include "../console/object.hpp"
 #include "../events/connected.hpp"
@@ -51,10 +52,8 @@ sanguis::client::states::running::running(
 			fcppt::ref(
 				context<machine>().console_gfx()
 			),
-			std::tr1::bind(
-				&machine::send,
-				&context<machine>(),
-				std::tr1::placeholders::_1
+			client::make_send_callback(
+				context<machine>()
 			)
 		)
 	),

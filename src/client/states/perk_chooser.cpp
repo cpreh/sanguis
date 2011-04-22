@@ -1,5 +1,6 @@
 #include "perk_chooser.hpp"
 #include "ingame.hpp"
+#include "../make_send_callback.hpp"
 #include "../events/action.hpp"
 #include "../events/message.hpp"
 #include "../events/net_error.hpp"
@@ -7,6 +8,7 @@
 #include "../events/render.hpp"
 #include "../events/tick.hpp"
 #include "../gui/perk/chooser.hpp"
+#include <fcppt/function/object.hpp>
 #include <fcppt/variant/holds_type.hpp>
 #include <fcppt/variant/object_impl.hpp>
 
@@ -16,6 +18,11 @@ sanguis::client::states::perk_chooser::perk_chooser(
 :
 	my_base(
 		_ctx
+	),
+	pause_(
+		client::make_send_callback(
+			context<machine>()
+		)
 	),
 	perk_chooser_gui_(
 		context<machine>().gui(),

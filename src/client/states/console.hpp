@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_STATES_CONSOLE_HPP_INCLUDED
 
 #include "has_player.hpp"
+#include "../scoped_pause.hpp"
 #include "../console/activation.hpp"
 #include "../events/action_fwd.hpp"
 #include "../events/overlay_fwd.hpp"
@@ -54,6 +55,8 @@ public:
 		events::overlay const &
 	);
 private:
+	client::scoped_pause const pause_;
+
 	client::console::activation const console_activation_;
 };
 

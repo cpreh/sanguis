@@ -29,7 +29,7 @@ sanguis::client::gui::perk::item::item(
 		>(
 			&perk_type_
 		), // user data
-		false, // enabled
+		false, // disabled
 		false // auto delete
 	)
 {

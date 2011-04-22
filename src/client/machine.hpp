@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_MACHINE_HPP_INCLUDED
 #define SANGUIS_CLIENT_MACHINE_HPP_INCLUDED
 
+#include "machine_fwd.hpp"
 #include "cursor/object_fwd.hpp"
 #include "config/settings/object_fwd.hpp"
 #include "gui/object_fwd.hpp"

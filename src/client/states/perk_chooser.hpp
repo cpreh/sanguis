@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_STATES_PERK_CHOOSER_HPP_INCLUDED
 
 #include "has_player.hpp"
+#include "../scoped_pause.hpp"
 #include "../gui/perk/chooser.hpp"
 #include "../events/action_fwd.hpp"
 #include "../events/overlay_fwd.hpp"
@@ -63,6 +64,8 @@ public:
 		events::tick const &
 	);
 private:
+	client::scoped_pause const pause_;
+
 	client::gui::perk::chooser perk_chooser_gui_;
 };
 

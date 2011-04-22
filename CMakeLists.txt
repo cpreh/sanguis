@@ -461,6 +461,9 @@ SET(
 	src/client/log.hpp
 	src/client/machine.cpp
 	src/client/machine.hpp
+	src/client/machine_fwd.hpp
+	src/client/make_send_callback.cpp
+	src/client/make_send_callback.hpp
 	src/client/music_handler.cpp
 	src/client/music_handler.hpp
 	src/client/music_handler_fwd.hpp
@@ -498,6 +501,8 @@ SET(
 	src/client/perk/tree.hpp
 	src/client/perk/tree_unique_ptr.hpp
 	src/client/player_level.hpp
+	src/client/scoped_pause.cpp
+	src/client/scoped_pause.hpp
 	src/client/send_callback.hpp
 	src/client/server_callback.hpp
 	src/client/states/console.cpp
