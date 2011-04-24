@@ -300,7 +300,6 @@ SET(
 	src/client/draw2d/particle/explosion.hpp
 	src/client/draw2d/particle/fade_time_range.hpp
 	src/client/draw2d/particle/fade_type.hpp
-	src/client/draw2d/particle/funit.hpp
 	src/client/draw2d/particle/generation_callback.hpp
 	src/client/draw2d/particle/generator.cpp
 	src/client/draw2d/particle/generator.hpp
@@ -308,7 +307,6 @@ SET(
 	src/client/draw2d/particle/object.cpp
 	src/client/draw2d/particle/object.hpp
 	src/client/draw2d/particle/particle_type.hpp
-	src/client/draw2d/particle/point.hpp
 	src/client/draw2d/particle/properties.cpp
 	src/client/draw2d/particle/properties.hpp
 	src/client/draw2d/particle/properties_fwd.hpp
@@ -318,8 +316,8 @@ SET(
 	src/client/draw2d/particle/rotation.hpp
 	src/client/draw2d/particle/rotation_from_alignment.cpp
 	src/client/draw2d/particle/rotation_from_alignment.hpp
+	src/client/draw2d/particle/rotation_speed.hpp
 	src/client/draw2d/particle/rotation_velocity_range.hpp
-	src/client/draw2d/particle/time_type.hpp
 	src/client/draw2d/particle/type_to_string.cpp
 	src/client/draw2d/particle/type_to_string.hpp
 	src/client/draw2d/particle/uniform_rotation.hpp

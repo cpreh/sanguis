@@ -1,10 +1,12 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_PARTICLE_BASE_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_PARTICLE_BASE_HPP_INCLUDED
 
-#include "point.hpp"
 #include "depth.hpp"
 #include "rotation.hpp"
-#include "time_type.hpp"
+#include "rotation_speed.hpp"
+#include "../center.hpp"
+#include "../speed.hpp"
+#include "../../../time_type.hpp"
 #include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -22,93 +24,74 @@ class base
 	FCPPT_NONCOPYABLE(
 		base
 	);
-public:
-	typedef particle::depth depth_type;
-
-	typedef particle::rotation rotation_type;
 protected:
 	base(
-		point const &,
-		point const &,
-		depth_type,
-		rotation_type,
-		rotation_type
+		draw2d::center const &,
+		draw2d::speed const &,
+		particle::depth,
+		particle::rotation,
+		particle::rotation_speed
 	);
 public:
 	virtual ~base();
 
 	virtual void
-	pos(
-		point const &
+	center(
+		draw2d::center const &
 	);
 
 	virtual void
-	vel(
-		point const &
+	speed(
+		draw2d::speed const &
 	);
 
 	virtual void
 	depth(
-		depth_type
+		particle::depth
 	);
 
 	virtual void
 	rot(
-		rotation_type
+		particle::rotation
 	);
 
 	virtual void
-	rot_vel(
-		rotation_type
+	rot_speed(
+		particle::rotation_speed
 	);
 
 	virtual bool
 	update(
-		time_type,
-		point const &,
-		rotation_type,
-		depth_type
+		sanguis::time_type,
+		draw2d::center const &,
+		particle::rotation,
+		particle::depth
 	);
 
-	point const &
-	pos() const;
+	draw2d::center const &
+	center() const;
 
-	point &
-	pos();
+	draw2d::speed const &
+	speed() const;
 
-	point const &
-	vel() const;
-
-	point &
-	vel();
-
-	depth_type const &
+	particle::depth const &
 	depth() const;
 
-	depth_type &
-	depth();
-
-	rotation_type const &
+	particle::rotation const &
 	rot() const;
 
-	rotation_type &
-	rot();
-
-	rotation_type const &
-	rot_vel() const;
-
-	rotation_type &
-	rot_vel();
+	particle::rotation_speed const &
+	rot_speed() const;
 private:
-	point pos_;
+	draw2d::center center_;
 
-	point vel_;
+	draw2d::speed speed_;
 
-	depth_type depth_;
+	particle::depth depth_;
 
-	rotation_type rot_;
+	particle::rotation rot_;
 
-	rotation_type rot_vel_;
+	particle::rotation_speed rot_speed_;
 };
 
 }

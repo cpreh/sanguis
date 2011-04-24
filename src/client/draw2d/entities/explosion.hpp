@@ -70,8 +70,6 @@ private:
 
 	particle::property_map properties_;
 
-	sprite::center const center_;
-
 	draw2d::aoe aoe_;
 
 	bool ended_;

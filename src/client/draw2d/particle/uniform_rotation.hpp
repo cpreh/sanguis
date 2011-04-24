@@ -14,7 +14,7 @@ namespace particle
 {
 
 typedef	fcppt::random::uniform<
-	rotation
+	particle::rotation::value_type
 > uniform_rotation;
 
 }

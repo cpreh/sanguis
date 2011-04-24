@@ -2,11 +2,14 @@
 #define SANGUIS_CLIENT_DRAW2D_PARTICLE_OBJECT_HPP_INCLUDED
 
 #include "base.hpp"
+#include "depth.hpp"
 #include "particle_type.hpp"
+#include "rotation.hpp"
 #include "../sprite/particle/object.hpp"
 #include "../sprite/particle/texture_animation.hpp"
 #include "../sprite/particle/system.hpp"
 #include "../aoe.hpp"
+#include "../center.hpp"
 #include "../../../diff_clock.hpp"
 #include "../../../time_type.hpp"
 #include "../../../load/model/animation_context_ptr.hpp"
@@ -33,7 +36,7 @@ class object
 	);
 public:
 	typedef fcppt::optional<
-		time_type
+		sanguis::time_type
 	> optional_time;
 
 	object(
@@ -48,15 +51,15 @@ public:
 
 	bool
 	update(
-		time_type,
-		point const &,
-		rotation_type,
-		depth_type
+		sanguis::time_type,
+		draw2d::center const &,
+		particle::rotation,
+		particle::depth
 	);
 private:
 	draw2d::sprite::particle::object sprite_;
 
-	diff_clock clock_;
+	sanguis::diff_clock clock_;
 
 	load::model::animation_context_ptr animation_context_;
 
@@ -66,7 +69,7 @@ private:
 
 	optional_time fade_total_;
 
-	time_type fade_remaining_;
+	sanguis::time_type fade_remaining_;
 };
 
 }

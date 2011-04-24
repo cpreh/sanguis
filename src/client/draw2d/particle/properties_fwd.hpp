@@ -10,7 +10,7 @@ namespace draw2d
 namespace particle
 {
 
-struct properties;
+class properties;
 
 }
 }

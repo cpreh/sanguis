@@ -14,7 +14,7 @@ namespace particle
 {
 
 typedef fcppt::random::inclusive_range<
-	rotation
+	particle::rotation::value_type
 > rotation_velocity_range;
 
 }

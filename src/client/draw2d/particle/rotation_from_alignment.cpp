@@ -6,35 +6,45 @@
 #include <fcppt/random/uniform_impl.hpp>
 #include <fcppt/text.hpp>
 
-sanguis::client::draw2d::particle::rotation
+sanguis::client::draw2d::particle::rotation const
 sanguis::client::draw2d::particle::rotation_from_alignment(
-	align_type::type const _alignment,
-	point const &_refpoint,
-	uniform_rotation &_rot_angle
+	particle::align_type::type const _alignment,
+	draw2d::center const &_refpoint,
+	particle::uniform_rotation &_rot_angle
 )
 {
-	switch (
+	switch(
 		_alignment
 	)
 	{
 		case align_type::none:
-			return static_cast<rotation>(0);
+			return
+				particle::rotation(
+					0
+				);
 		case align_type::to_center:
 			return
 				fcppt::math::vector::is_null(
-					_refpoint
+					_refpoint.get()
 				)
 				?
-					static_cast<rotation>(0)
+					particle::rotation(
+						0
+					)
 				:
-					fcppt::math::vector::signed_angle_cast<
-						rotation
-					>(
-						point::null(),
-						_refpoint
+					particle::rotation(
+						fcppt::math::vector::signed_angle_cast<
+							particle::rotation::value_type
+						>(
+							draw2d::center::value_type::null(),
+							_refpoint.get()
+						)
 					);
 		case align_type::random:
-			return _rot_angle();
+			return
+				particle::rotation(
+					_rot_angle()
+				);
 		case align_type::size:
 			break;
 	}

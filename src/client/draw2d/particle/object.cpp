@@ -13,27 +13,39 @@
 #include <sge/image/color/rgba8.hpp>
 #include <sge/image/color/init.hpp>
 #include <fcppt/math/point_rotate.hpp>
-#include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/math/dim/arithmetic.hpp>
+#include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/ref.hpp>
 #include <algorithm>
 
 sanguis::client::draw2d::particle::object::object(
-	particle_type::type const _type,
+	particle::particle_type::type const _type,
 	draw2d::aoe const _aoe,
 	load::model::animation_context_ptr _animation_context,
-	optional_time const _fade_total,
+	object::optional_time const _fade_total,
 	sprite::particle::system &_particle_system
 )
 :
-	base(
-		point::null(),
-		point::null(),
-		depth_type(0),
-		rotation_type(0),
-		rotation_type(0)
+	particle::base(
+		draw2d::center(
+			draw2d::center::value_type::null()
+		),
+		draw2d::speed(
+			draw2d::speed::value_type::null()
+		),
+		particle::depth(
+			0
+		),
+		particle::rotation(
+			0
+		),
+		particle::rotation_speed(
+			0
+		)
 	),
 	sprite_(
 		sprite::particle::parameters()
@@ -46,18 +58,16 @@ sanguis::client::draw2d::particle::object::object(
 			)
 		)
 		.size(
-			// TODO: maybe resize with respect to the images.dim() ratio here
-			sprite::dim(
-				static_cast<
-					sprite::unit
-				>(
-					2 * _aoe.get()
-				),
-				static_cast<
-					sprite::unit
-				>(
-					2 * _aoe.get()
-				)
+			fcppt::math::dim::fill<
+				sprite::dim::dim_wrapper::value
+			>(
+				2
+			)
+			*
+			static_cast<
+				sprite::unit
+			>(
+				_aoe.get()
 			)
 		)
 		.color(
@@ -95,18 +105,23 @@ sanguis::client::draw2d::particle::object::~object()
 
 bool
 sanguis::client::draw2d::particle::object::update(
-	time_type const _delta,
-	point const &_pos,
-	rotation_type const _rot,
-	depth_type const _depth 
+	sanguis::time_type const _delta,
+	draw2d::center const &_center,
+	particle::rotation const _rot,
+	particle::depth const _depth 
 )
 {
 	animation_context_->update();
 
 	if(
 		!animation_
-		&& animation_context_->is_finished()
 	)
+	{
+		if(
+			!animation_context_->is_finished()
+		)
+			return false;
+
 		animation_.take(
 			fcppt::make_unique_ptr<
 				sprite::particle::texture_animation
@@ -123,20 +138,21 @@ sanguis::client::draw2d::particle::object::update(
 				clock_.callback()
 			)
 		);
+	}
 
 	base::update(
 		_delta,
-		_pos,
+		_center,
 		_rot,
 		_depth
 	);
 
 	sprite_.z(
-		_depth + base::depth()
+		(_depth + base::depth()).get()
 	);
 
 	sprite_.rotation(
-		base::rot() + _rot
+		(base::rot() + _rot).get()
 	);
 
 	sge::sprite::center( 
@@ -145,9 +161,9 @@ sanguis::client::draw2d::particle::object::update(
 			sprite::point
 		>(
 			fcppt::math::point_rotate(
-				_pos + base::pos(),
-				_pos,
-				_rot + base::rot()
+				(_center + base::center()).get(),
+				_center.get(),
+				(_rot + base::rot()).get()
 			)
 		)
 	);
@@ -157,11 +173,7 @@ sanguis::client::draw2d::particle::object::update(
 	);
 
 	bool const ret(
-		animation_
-		?
-			animation_->process()
-		:
-			false
+		animation_->process()
 	);
 
 	if(
@@ -200,5 +212,11 @@ sanguis::client::draw2d::particle::object::update(
 	);
 
 	return
-		fade_remaining_ < static_cast<funit>(0);
+		fade_remaining_
+		<
+		static_cast<
+			sanguis::time_type
+		>(
+			0
+		);
 }

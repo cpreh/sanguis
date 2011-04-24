@@ -2,9 +2,10 @@
 #define SANGUIS_CLIENT_DRAW2D_PARTICLE_VELOCITY_FROM_MOVEMENT_HPP_INCLUDED
 
 #include "movement_type.hpp"
-#include "point.hpp"
 #include "uniform_rotation.hpp"
 #include "uniform_velocity_range.hpp"
+#include "../center.hpp"
+#include "../speed.hpp"
 
 namespace sanguis
 {
@@ -15,12 +16,12 @@ namespace draw2d
 namespace particle
 {
 
-particle::point const
+draw2d::speed const
 velocity_from_movement(
-	movement_type::type,
-	point const &_refpoint,
-	uniform_rotation &_velocity_angle,
-	uniform_velocity_range &_velocity_value
+	particle::movement_type::type,
+	draw2d::center const &,
+	particle::uniform_rotation &,
+	particle::uniform_velocity_range &
 );
 
 }

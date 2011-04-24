@@ -3,8 +3,12 @@
 
 #include "base.hpp"
 #include "base_ptr.hpp"
-#include "time_type.hpp"
-#include "point.hpp"
+#include "depth.hpp"
+#include "rotation.hpp"
+#include "rotation_speed.hpp"
+#include "../center.hpp"
+#include "../speed.hpp"
+#include "../../../time_type.hpp"
 #include <fcppt/noncopyable.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
 
@@ -30,11 +34,11 @@ public:
 	> children_container;
 
 	container(
-		point const &pos,
-		point const &speed,
-		depth_type,
-		rotation_type,
-		rotation_type
+		draw2d::center const &,
+		draw2d::speed const &,
+		particle::depth,
+		particle::rotation,
+		particle::rotation_speed
 	);
 
 	~container();
@@ -47,22 +51,22 @@ public:
 
 	void
 	add(
-		base_ptr ptr
+		base_ptr
 	);
 
 	bool
 	update(
-		time_type,
-		point const &,
-		rotation_type,
-		depth_type
+		sanguis::time_type,
+		draw2d::center const &,
+		particle::rotation,
+		particle::depth
 	);
 
-	using base::pos;
-	using base::vel;
+	using base::center;
+	using base::speed;
 	using base::depth;
 	using base::rot;
-	using base::rot_vel;
+	using base::rot_speed;
 private:
 	children_container children_;
 };

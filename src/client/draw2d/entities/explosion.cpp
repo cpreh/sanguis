@@ -5,10 +5,11 @@
 #include "../particle/fade_time_range.hpp"
 #include "../particle/properties.hpp"
 #include "../particle/object.hpp"
-#include "../particle/point.hpp"
 #include "../particle/rotation.hpp"
 #include "../particle/z_ordering.hpp"
 #include "../particle/type_to_string.hpp"
+#include "../center.hpp"
+#include "../speed.hpp"
 #include "../../../load/model/part.hpp"
 #include "../../../load/model/weapon_category.hpp"
 #include "../../../load/model/object.hpp"
@@ -32,20 +33,35 @@ sanguis::client::draw2d::entities::explosion::explosion(
 )
 :
 	entities::own(),
-	particle_system_(_particle_system),
-	model_collection_(_model_collection),
+	particle_system_(
+		_particle_system
+	),
+	model_collection_(
+		_model_collection
+	),
 	particles_(
-		particle::point::null(),
-		particle::point::null(),
-		particle::depth(0),
-		particle::rotation(0),
-		particle::rotation(0)
+		draw2d::center(
+			fcppt::math::vector::structure_cast<
+				draw2d::center::value_type
+			>(
+				_center.get()
+			)
+		),
+		draw2d::speed(
+			draw2d::speed::value_type::null()
+		),
+		particle::depth(
+			0
+		),
+		particle::rotation(
+			0
+		),
+		particle::rotation_speed(
+			0
+		)
 	),
 	properties_(
 		entities::explosion_properties()
-	),
-	center_(
-		_center
 	),
 	aoe_(
 		_aoe
@@ -65,19 +81,21 @@ sanguis::client::draw2d::entities::explosion::~explosion()
 
 void
 sanguis::client::draw2d::entities::explosion::update(
-	time_type const _delta
+	sanguis::time_type const _delta
 )
 {
 	ended_ =
 		particles_.update(
 			_delta,
-			fcppt::math::vector::structure_cast<
-				particle::point
-			>(
-				center_.get() // FIXME!
+			draw2d::center(
+				draw2d::center::value_type::null()
 			),
-			static_cast<particle::rotation>(0),
-			static_cast<particle::depth>(0)
+			particle::rotation(
+				0
+			),
+			particle::depth(
+				0
+			)
 		);
 }
 
@@ -101,11 +119,15 @@ sanguis::client::draw2d::entities::explosion::generate_explosion()
 					this,
 					std::tr1::placeholders::_1
 				),
-				particle::point::null(), // position
-				particle::point::null(), // speed
-				static_cast<particle::depth>(0),
-				static_cast<particle::rotation>(0), // no rotation and...
-				static_cast<particle::rotation>(0)  // ...no rotation speed
+				draw2d::center(
+					draw2d::center::value_type::null()
+				),
+				draw2d::speed(
+					draw2d::speed::value_type::null()
+				),
+				particle::depth(0),
+				particle::rotation(0),
+				particle::rotation_speed(0)
 			)
 		);
 }
@@ -161,7 +183,7 @@ sanguis::client::draw2d::entities::explosion::generate_particle(
 	{
 		// FIXME: this should not be here!
 		fcppt::random::uniform<
-			particle::time_type
+			sanguis::time_type
 		>
 		rng(
 			particle::fade_time_range(
@@ -186,8 +208,10 @@ sanguis::client::draw2d::entities::explosion::generate_particle(
 	}
 
 	ptr->depth(
-		particle::z_ordering(
-			_particle_type
+		particle::depth(
+			particle::z_ordering(
+				_particle_type
+			)
 		)
 	);
 

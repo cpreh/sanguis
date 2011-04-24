@@ -1,35 +1,42 @@
 #include "generator.hpp"
 #include "object.hpp"
-#include "velocity_from_movement.hpp"
 #include "rotation_from_alignment.hpp"
-#include <sge/time/second_f.hpp>
+#include "velocity_from_movement.hpp"
 #include <fcppt/random/make_inclusive_range.hpp>
 #include <fcppt/math/twopi.hpp>
+#include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/is_null.hpp>
-#include <sge/exception.hpp>
+#include <fcppt/math/vector/unit_circle.hpp>
+#include <sge/time/second_f.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::client::draw2d::particle::generator::generator(
-	generation_callback const _generate_object,
-	point const &_pos,
-	time_type const _life_time,
-	time_type const _frequency,
+	particle::generation_callback const _generate_object,
+	draw2d::center const &_center,
+	sanguis::time_type const _life_time,
+	sanguis::time_type const _frequency,
 	unsigned const _spawn_initial,
-	align_type::type const _alignment,
-	depth_type const _depth,
-	dispersion_range const &_dispersion_value,
-	velocity_range const &_velocity,
-	rotation_velocity_range const &_rot_velocity,
-	movement_type::type const _movement
+	particle::align_type::type const _alignment,
+	particle::depth const _depth,
+	particle::dispersion_range const &_dispersion_value,
+	particle::velocity_range const &_velocity,
+	particle::rotation_velocity_range const &_rot_velocity,
+	particle::movement_type::type const _movement
 )
 :
-	container(
-		_pos,
-		point::null(),
+	particle::container(
+		_center,
+		draw2d::speed(
+			draw2d::speed::value_type::null()
+		),
 		_depth,
-		rotation_type(0),
-		rotation_type(0)
+		particle::rotation(
+			0
+		),
+		particle::rotation_speed(
+			0
+		)
 	),
 	clock_(),
 	generate_object_(
@@ -51,12 +58,12 @@ sanguis::client::draw2d::particle::generator::generator(
 	dispersion_angle_(
 		fcppt::random::make_inclusive_range(
 			static_cast<
-				rotation_type
+				particle::rotation::value_type
 			>(
 				0
 			),
 			fcppt::math::twopi<
-				rotation_type
+				particle::rotation::value_type
 			>()
 		)
 	),
@@ -66,12 +73,12 @@ sanguis::client::draw2d::particle::generator::generator(
 	velocity_angle_(
 		fcppt::random::make_inclusive_range(
 			static_cast<	
-				rotation_type
+				particle::rotation::value_type
 			>(
 				0
 			),
 			fcppt::math::twopi<
-				rotation_type
+				particle::rotation::value_type
 			>()
 		)
 	),
@@ -81,24 +88,24 @@ sanguis::client::draw2d::particle::generator::generator(
 	rot_angle_(
 		fcppt::random::make_inclusive_range(
 			static_cast<
-				rotation_type
+				particle::rotation::value_type
 			>(
 				0
 			),
 			fcppt::math::twopi<
-				rotation_type
+				particle::rotation::value_type
 			>()
 		)
 	),
 	rot_direction_(
 		fcppt::random::make_inclusive_range(
 			static_cast<
-				rotation_type
+				particle::rotation::value_type
 			>(
 				0
 			),
 			static_cast<
-				rotation_type
+				particle::rotation::value_type
 			>(
 				1
 			)
@@ -126,51 +133,37 @@ sanguis::client::draw2d::particle::generator::~generator()
 void
 sanguis::client::draw2d::particle::generator::generate()
 {
-	rotation_type const disp_rot(
+	particle::rotation const disp_rot(
 		dispersion_angle_()
 	);
 
-	point::value_type const disp_value(
+	draw2d::funit const disp_value(
 		dispersion_value_()
 	);
 
-	point const object_pos(
-		std::cos(
-			disp_rot
-		)
-		* disp_value,
-		std::sin(
-			disp_rot
+	draw2d::center const object_pos(
+		fcppt::math::vector::unit_circle(
+			disp_rot.get()
 		)
 		* disp_value
 	);
 	
-	point const &diff(
-		object_pos
-	);
-
-	point const refpoint(
+	draw2d::center const refpoint(
 		fcppt::math::vector::is_null(
-			diff
+			object_pos.get()
 		)
 		?
-			point(
-				static_cast<
-					point::value_type
-				>(
-					rot_angle_()
-				),
-				static_cast<
-					point::value_type
-				>(
+			draw2d::center(
+				draw2d::center::value_type(
+					rot_angle_(),
 					rot_angle_()
 				)
 			)
 		:
-			diff
+			object_pos
 	);
 			
-	point const velocity(
+	draw2d::speed const velocity(
 		particle::velocity_from_movement(
 			movement_,
 			refpoint,
@@ -179,28 +172,24 @@ sanguis::client::draw2d::particle::generator::generate()
 		)
 	);
 	
-	rotation_type const cur_rot(
+	base_ptr object(
+		generate_object_()
+	);
+
+	object->center(
+		object_pos
+	);
+
+	object->speed(
+		velocity
+	);
+
+	object->rot(
 		particle::rotation_from_alignment(
 			alignment_,
 			refpoint,
 			rot_angle_
 		)
-	);
-
-	base_ptr object(
-		generate_object_()
-	);
-
-	object->pos(
-		object_pos
-	);
-
-	object->vel(
-		velocity
-	);
-
-	object->rot(
-		cur_rot
 	);
 	
 	/*
@@ -210,10 +199,8 @@ sanguis::client::draw2d::particle::generator::generate()
 			: sge::su(1)) * 
 				rot_velocity_());
 	*/
-	object->rot_vel(
-		static_cast<
-			rotation_type
-		>(
+	object->rot_speed(
+		particle::rotation_speed(
 			0
 		)
 	);
@@ -227,10 +214,10 @@ sanguis::client::draw2d::particle::generator::generate()
 
 bool
 sanguis::client::draw2d::particle::generator::update(
-	time_type const _delta,
-	point const &_pos,
-	rotation_type const _rot,
-	depth_type const _depth
+	sanguis::time_type const _delta,
+	draw2d::center const &_pos,
+	particle::rotation const _rot,
+	particle::depth const _depth
 )
 {
 	clock_.update(

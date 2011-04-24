@@ -1,10 +1,15 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_PARTICLE_EXPLOSION_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_PARTICLE_EXPLOSION_HPP_INCLUDED
 
-#include "container.hpp"
-#include "property_map.hpp"
 #include "base_ptr.hpp"
+#include "container.hpp"
+#include "depth.hpp"
 #include "particle_type.hpp"
+#include "property_map.hpp"
+#include "rotation.hpp"
+#include "rotation_speed.hpp"
+#include "../center.hpp"
+#include "../speed.hpp"
 #include <fcppt/function/object_fwd.hpp>
 
 namespace sanguis
@@ -19,7 +24,7 @@ namespace particle
 // explosion is a container spawning three generators
 class explosion
 :
-	public container
+	public particle::container
 {
 	FCPPT_NONCOPYABLE(
 		explosion
@@ -32,11 +37,11 @@ public:
 	explosion(
 		property_map const &,
 		callback const &,
-		point const &pos,
-		point const &speed,
-		depth_type,
-		rotation_type,
-		rotation_type
+		draw2d::center const &,
+		draw2d::speed const &,
+		particle::depth,
+		particle::rotation,
+		particle::rotation_speed
 	);
 
 	~explosion();

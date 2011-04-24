@@ -3,18 +3,18 @@
 #include <fcppt/math/vector/arithmetic.hpp>
 
 sanguis::client::draw2d::particle::base::base(
-	point const &_pos,
-	point const &_vel,
-	depth_type const _depth,
-	rotation_type const _rot,
-	rotation_type const _rot_vel
+	draw2d::center const &_center,
+	draw2d::speed const &_speed,
+	particle::depth const _depth,
+	particle::rotation const _rot,
+	particle::rotation_speed const _rot_speed
 )
 :
-	pos_(_pos),
-	vel_(_vel),
+	center_(_center),
+	speed_(_speed),
 	depth_(_depth),
 	rot_(_rot),
-	rot_vel_(_rot_vel)
+	rot_speed_(_rot_speed)
 {
 }
 
@@ -25,49 +25,53 @@ sanguis::client::draw2d::particle::base::~base()
 bool
 sanguis::client::draw2d::particle::base::update(
 	time_type const _delta,
-	point const &,
-	rotation_type,
-	depth_type
+	draw2d::center const &,
+	particle::rotation,
+	particle::depth
 )
 {
-	this->pos(
-		this->pos()
-		+
-		this->vel()
-		*
-		_delta
+	this->center(
+		draw2d::center(
+			this->center().get()
+			+
+			this->speed().get()
+			*
+			_delta
+		)
 	);
 
 	this->rot(
-		this->rot()
-		+
-		this->rot_vel()
-		*
-		_delta
+		particle::rotation(
+			this->rot().get()
+			+
+			this->rot_speed().get()
+			*
+			_delta
+		)
 	);
 
 	return false;
 }
 
 void
-sanguis::client::draw2d::particle::base::pos(
-	point const &_pos
+sanguis::client::draw2d::particle::base::center(
+	draw2d::center const &_center
 )
 {
-	pos_ = _pos;
+	center_ = _center;
 }
 
 void
-sanguis::client::draw2d::particle::base::vel(
-	point const &_vel
+sanguis::client::draw2d::particle::base::speed(
+	draw2d::speed const &_speed
 )
 {
-	vel_ = _vel;
+	speed_ = _speed;
 }
 
 void
 sanguis::client::draw2d::particle::base::depth(
-	depth_type const _depth
+	particle::depth const _depth
 )
 {
 	depth_ = _depth;
@@ -75,76 +79,46 @@ sanguis::client::draw2d::particle::base::depth(
 
 void
 sanguis::client::draw2d::particle::base::rot(
-	rotation_type const _rot
+	particle::rotation const _rot
 )
 {
 	rot_ = _rot;
 }
 
 void
-sanguis::client::draw2d::particle::base::rot_vel(
-	rotation_type const _rot_vel
+sanguis::client::draw2d::particle::base::rot_speed(
+	particle::rotation_speed const _rot_speed
 )
 {
-	rot_vel_ = _rot_vel;
+	rot_speed_ = _rot_speed;
 }
 
-sanguis::client::draw2d::particle::point const &
-sanguis::client::draw2d::particle::base::pos() const
+sanguis::client::draw2d::center const &
+sanguis::client::draw2d::particle::base::center() const
 {
-	return pos_;
+	return center_;
 }
 
-sanguis::client::draw2d::particle::point &
-sanguis::client::draw2d::particle::base::pos()
+sanguis::client::draw2d::speed const &
+sanguis::client::draw2d::particle::base::speed() const
 {
-	return pos_;
+	return speed_;
 }
 
-sanguis::client::draw2d::particle::point const &
-sanguis::client::draw2d::particle::base::vel() const
-{
-	return vel_;
-}
-
-sanguis::client::draw2d::particle::point &
-sanguis::client::draw2d::particle::base::vel()
-{
-	return vel_;
-}
-
-sanguis::client::draw2d::particle::base::depth_type const &
+sanguis::client::draw2d::particle::depth const &
 sanguis::client::draw2d::particle::base::depth() const
 {
 	return depth_;
 }
 
-sanguis::client::draw2d::particle::base::depth_type &
-sanguis::client::draw2d::particle::base::depth()
-{
-	return depth_;
-}
-
-sanguis::client::draw2d::particle::base::rotation_type const &
+sanguis::client::draw2d::particle::rotation const &
 sanguis::client::draw2d::particle::base::rot() const
 {
 	return rot_;
 }
 
-sanguis::client::draw2d::particle::base::rotation_type &
-sanguis::client::draw2d::particle::base::rot()
+sanguis::client::draw2d::particle::rotation_speed const &
+sanguis::client::draw2d::particle::base::rot_speed() const
 {
-	return rot_;
-}
-
-sanguis::client::draw2d::particle::base::rotation_type const &
-sanguis::client::draw2d::particle::base::rot_vel() const
-{
-	return rot_vel_;
-}
-
-sanguis::client::draw2d::particle::base::rotation_type &
-sanguis::client::draw2d::particle::base::rot_vel()
-{
-	return rot_vel_;
+	return rot_speed_;
 }
