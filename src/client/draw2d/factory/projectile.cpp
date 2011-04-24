@@ -1,9 +1,10 @@
 #include "projectile.hpp"
 #include "../entities/bullet.hpp"
 #include "../../../exception.hpp"
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 
-sanguis::client::draw2d::entities::auto_ptr
+sanguis::client::draw2d::entities::unique_ptr
 sanguis::client::draw2d::factory::projectile(
 	entities::model::parameters const &_param,
 	projectile_type::type const _ptype
@@ -19,8 +20,10 @@ sanguis::client::draw2d::factory::projectile(
 		break;
 	case projectile_type::simple_bullet:
 		return
-			entities::auto_ptr(
-				new entities::bullet(
+			entities::unique_ptr(
+				fcppt::make_unique_ptr<
+					entities::bullet
+				>(
 					_param,
 					FCPPT_TEXT("bullet")
 				)

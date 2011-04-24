@@ -3,10 +3,10 @@
 
 #include "environment_fwd.hpp"
 #include "../entities/base_fwd.hpp"
-#include "../entities/auto_ptr.hpp"
+#include "../entities/unique_ptr.hpp"
 #include "../entities/model/parameters_fwd.hpp"
 #include "../sprite/particle/system.hpp"
-#include "../insert_callback.hpp"
+#include "../insert_own_callback.hpp"
 #include "../transform_callback.hpp"
 #include "../../exp.hpp"
 #include "../../level.hpp"
@@ -32,7 +32,7 @@ protected:
 public:
 	virtual entities::base &
 	insert(
-		entities::auto_ptr,
+		entities::unique_ptr,
 		entity_id
 	) = 0;
 
@@ -62,8 +62,8 @@ public:
 	virtual sprite::particle::system &
 	particle_system() const = 0;
 
-	virtual draw2d::insert_callback const &
-	insert_callback() const = 0;
+	virtual draw2d::insert_own_callback const &
+	insert_own_callback() const = 0;
 
 	virtual draw2d::transform_callback const &
 	transform_callback() const = 0;

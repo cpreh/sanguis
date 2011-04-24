@@ -4,6 +4,7 @@
 #include "../../../pickup_type.hpp"
 #include "../../../exception.hpp"
 #include "../../../load/pickup_name.hpp"
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 
 namespace
@@ -16,15 +17,17 @@ get_texture(
 
 }
 
-sanguis::client::draw2d::entities::auto_ptr
+sanguis::client::draw2d::entities::unique_ptr
 sanguis::client::draw2d::factory::pickup(
 	entities::model::parameters const &_param,
 	pickup_type::type const _ptype
 )
 {
 	return
-		entities::auto_ptr(
-			new entities::model::object(
+		entities::unique_ptr(
+			fcppt::make_unique_ptr<
+				entities::model::object
+			>(
 				_param,
 				get_texture(
 					_ptype

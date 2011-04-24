@@ -194,11 +194,11 @@ SET(
 	src/client/daytime_settings.cpp
 	src/client/daytime_settings.hpp
 	src/client/daytime_settings_fwd.hpp
+	src/client/draw2d/aoe.hpp
 	src/client/draw2d/center.hpp
 	src/client/draw2d/dim2.hpp
 	src/client/draw2d/entities/aoe_bullet.cpp
 	src/client/draw2d/entities/aoe_bullet.hpp
-	src/client/draw2d/entities/auto_ptr.hpp
 	src/client/draw2d/entities/base.cpp
 	src/client/draw2d/entities/base.hpp
 	src/client/draw2d/entities/base_fwd.hpp
@@ -236,6 +236,10 @@ SET(
 	src/client/draw2d/entities/model/sound_state.cpp
 	src/client/draw2d/entities/model/sound_state.hpp
 	src/client/draw2d/entities/model/sound_state_fwd.hpp
+	src/client/draw2d/entities/own.cpp
+	src/client/draw2d/entities/own.hpp
+	src/client/draw2d/entities/own_auto_ptr.hpp
+	src/client/draw2d/entities/own_fwd.hpp
 	src/client/draw2d/entities/own_player.cpp
 	src/client/draw2d/entities/own_player.hpp
 	src/client/draw2d/entities/player.cpp
@@ -243,6 +247,7 @@ SET(
 	src/client/draw2d/entities/player_fwd.hpp
 	src/client/draw2d/entities/sentry.cpp
 	src/client/draw2d/entities/sentry.hpp
+	src/client/draw2d/entities/unique_ptr.hpp
 	src/client/draw2d/entities/with_center.cpp
 	src/client/draw2d/entities/with_center.hpp
 	src/client/draw2d/entities/with_health.cpp
@@ -272,7 +277,7 @@ SET(
 	src/client/draw2d/factory/weapon_pickup.cpp
 	src/client/draw2d/factory/weapon_pickup.hpp
 	src/client/draw2d/funit.hpp
-	src/client/draw2d/insert_callback.hpp
+	src/client/draw2d/insert_own_callback.hpp
 	src/client/draw2d/log.cpp
 	src/client/draw2d/log.hpp
 	src/client/draw2d/message/configure_entity.hpp
@@ -470,8 +475,6 @@ SET(
 	src/client/music_handler.cpp
 	src/client/music_handler.hpp
 	src/client/music_handler_fwd.hpp
-	src/client/next_id.cpp
-	src/client/next_id.hpp
 	src/client/object.cpp
 	src/client/object.hpp
 	src/client/perk/change_callback.hpp

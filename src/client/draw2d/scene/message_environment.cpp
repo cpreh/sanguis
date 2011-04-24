@@ -2,6 +2,7 @@
 #include "object.hpp"
 #include "hud.hpp"
 #include "../entities/model/parameters.hpp"
+#include "../entities/base.hpp"
 
 sanguis::client::draw2d::scene::message_environment::message_environment(
 	scene::object &_object,
@@ -19,13 +20,15 @@ sanguis::client::draw2d::scene::message_environment::~message_environment()
 
 sanguis::client::draw2d::entities::base &
 sanguis::client::draw2d::scene::message_environment::insert(
-	entities::auto_ptr _entity,
+	entities::unique_ptr _entity,
 	entity_id const _id
 )
 {
 	return 
 		object_.insert(
-			_entity,
+			move(
+				_entity
+			),
 			_id
 		);
 }
@@ -88,10 +91,10 @@ sanguis::client::draw2d::scene::message_environment::particle_system() const
 	return object_.particle_system();
 }
 
-sanguis::client::draw2d::insert_callback const &
-sanguis::client::draw2d::scene::message_environment::insert_callback() const
+sanguis::client::draw2d::insert_own_callback const &
+sanguis::client::draw2d::scene::message_environment::insert_own_callback() const
 {
-	return object_.insert_callback();
+	return object_.insert_own_callback();
 }
 
 sanguis::client::draw2d::transform_callback const &

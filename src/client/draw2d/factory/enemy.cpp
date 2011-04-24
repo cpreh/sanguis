@@ -3,16 +3,19 @@
 #include "../z_ordering.hpp"
 #include "../../../enemy_type.hpp"
 #include "../../../load/enemy_name.hpp"
+#include <fcppt/make_unique_ptr.hpp>
 
-sanguis::client::draw2d::entities::auto_ptr
+sanguis::client::draw2d::entities::unique_ptr
 sanguis::client::draw2d::factory::enemy(
 	entities::model::parameters const &_param,
 	enemy_type::type const _etype
 )
 {
 	return
-		entities::auto_ptr(
-			new entities::model::object(
+		entities::unique_ptr(
+			fcppt::make_unique_ptr<
+				entities::model::object
+			>(
 				_param,
 				load::enemy_name(
 					_etype

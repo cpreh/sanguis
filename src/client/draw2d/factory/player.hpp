@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_FACTORY_PLAYER_HPP_INCLUDED
 
 #include "../entities/model/parameters_fwd.hpp"
-#include "../entities/auto_ptr.hpp"
+#include "../entities/unique_ptr.hpp"
 
 namespace sanguis
 {
@@ -13,7 +13,7 @@ namespace draw2d
 namespace factory
 {
 
-entities::auto_ptr
+entities::unique_ptr
 player(
 	entities::model::parameters const &
 );

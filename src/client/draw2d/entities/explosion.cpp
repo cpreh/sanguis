@@ -28,10 +28,10 @@ sanguis::client::draw2d::entities::explosion::explosion(
 	sprite::particle::system &_particle_system,
 	load::model::collection const &_model_collection,
 	sprite::center const &_center,
-	funit const _aoe
+	draw2d::aoe const _aoe
 )
 :
-	base(),
+	entities::own(),
 	particle_system_(_particle_system),
 	model_collection_(_model_collection),
 	particles_(
@@ -79,6 +79,12 @@ sanguis::client::draw2d::entities::explosion::update(
 			static_cast<particle::rotation>(0),
 			static_cast<particle::depth>(0)
 		);
+}
+
+bool
+sanguis::client::draw2d::entities::explosion::may_be_removed() const
+{
+	return ended_;
 }
 
 sanguis::client::draw2d::particle::base_ptr
@@ -189,10 +195,4 @@ sanguis::client::draw2d::entities::explosion::generate_particle(
 		move(
 			ptr
 		);
-}
-
-bool
-sanguis::client::draw2d::entities::explosion::is_decayed() const
-{
-	return ended_;
 }

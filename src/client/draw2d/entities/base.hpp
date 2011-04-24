@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_BASE_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_BASE_HPP_INCLUDED
 
-#include "../sprite/center.hpp"
+#include "base_fwd.hpp"
 #include "../../../time_type.hpp"
 #include <fcppt/noncopyable.hpp>
 

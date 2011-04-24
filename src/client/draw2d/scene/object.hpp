@@ -5,8 +5,10 @@
 #include "background_fwd.hpp"
 #include "hud_fwd.hpp"
 #include "message_environment_fwd.hpp"
-#include "../entities/auto_ptr.hpp"
 #include "../entities/base_fwd.hpp"
+#include "../entities/own_auto_ptr.hpp"
+#include "../entities/own_fwd.hpp"
+#include "../entities/unique_ptr.hpp"
 #include "../message/environment_fwd.hpp"
 #include "../message/dispatcher_fwd.hpp"
 #include "../sprite/client/system.hpp"
@@ -15,7 +17,7 @@
 #include "../sprite/particle/system.hpp"
 #include "../sprite/center.hpp"
 #include "../sprite/matrix.hpp"
-#include "../insert_callback.hpp"
+#include "../insert_own_callback.hpp"
 #include "../transform_callback.hpp"
 #include "../../control/environment_fwd.hpp"
 #include "../../../load/context_fwd.hpp"
@@ -36,6 +38,7 @@
 #include <fcppt/math/matrix/basic_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
+#include <boost/ptr_container/ptr_list.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
 #include <ctime>
 
@@ -104,8 +107,13 @@ private:
 
 	entities::base &	
 	insert(
-		entities::auto_ptr,
+		entities::unique_ptr,
 		sanguis::entity_id
+	);
+
+	entities::own &
+	insert_own(
+		entities::own_auto_ptr
 	);
 
 	void
@@ -129,8 +137,8 @@ private:
 	draw2d::transform_callback const &
 	transform_callback() const;
 
-	draw2d::insert_callback const &
-	insert_callback() const;
+	draw2d::insert_own_callback const &
+	insert_own_callback() const;
 
 	sprite::normal::system &
 	normal_system();
@@ -177,7 +185,7 @@ private:
 
 	draw2d::transform_callback const transform_callback_;
 
-	draw2d::insert_callback const insert_callback_;
+	draw2d::insert_own_callback const insert_own_callback_;
 
 	fcppt::scoped_ptr<
 		message::environment
@@ -196,7 +204,13 @@ private:
 		entities::base
 	> entity_map;
 
+	typedef boost::ptr_list<
+		entities::own
+	> own_entity_list;
+
 	entity_map entities_;
+
+	own_entity_list own_entities_;
 
 	std::tm current_time_;
 

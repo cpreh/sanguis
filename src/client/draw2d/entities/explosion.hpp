@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_EXPLOSION_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_EXPLOSION_HPP_INCLUDED
 
-#include "base.hpp"
+#include "own.hpp"
 #include "../particle/base_ptr.hpp"
 #include "../particle/container.hpp"
 #include "../particle/property_map.hpp"
@@ -9,7 +9,7 @@
 #include "../particle/particle_type.hpp"
 #include "../sprite/particle/system.hpp"
 #include "../sprite/center.hpp"
-#include "../funit.hpp"
+#include "../aoe.hpp"
 #include "../../../load/model/collection_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
@@ -24,7 +24,7 @@ namespace entities
 
 class explosion
 :
-	public base
+	public entities::own
 {
 	FCPPT_NONCOPYABLE(
 		explosion
@@ -34,7 +34,7 @@ public:
 		sprite::particle::system &,
 		load::model::collection const &,
 		sprite::center const &,
-		funit aoe
+		draw2d::aoe
 	);
 
 	~explosion();
@@ -45,6 +45,9 @@ private:
 	update(
 		time_type
 	);
+
+	bool
+	may_be_removed() const;
 
 	particle::base_ptr
 	generate_explosion();
@@ -59,9 +62,6 @@ private:
 		particle::particle_type::type const t
 	) const;
 	
-	bool
-	is_decayed() const;
-
 	sprite::particle::system &particle_system_;
 
 	load::model::collection const &model_collection_;
@@ -72,7 +72,7 @@ private:
 
 	sprite::center const center_;
 
-	funit aoe_;
+	draw2d::aoe aoe_;
 
 	bool ended_;
 };

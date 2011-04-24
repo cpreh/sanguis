@@ -22,7 +22,7 @@
 
 sanguis::client::draw2d::particle::object::object(
 	particle_type::type const _type,
-	funit const _aoe,
+	draw2d::aoe const _aoe,
 	load::model::animation_context_ptr _animation_context,
 	optional_time const _fade_total,
 	sprite::particle::system &_particle_system
@@ -51,12 +51,12 @@ sanguis::client::draw2d::particle::object::object(
 				static_cast<
 					sprite::unit
 				>(
-					2 * _aoe
+					2 * _aoe.get()
 				),
 				static_cast<
 					sprite::unit
 				>(
-					2 * _aoe
+					2 * _aoe.get()
 				)
 			)
 		)

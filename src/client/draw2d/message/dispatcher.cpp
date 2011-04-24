@@ -1,6 +1,7 @@
 #include "dispatcher.hpp"
 #include "environment.hpp"
 #include "configure_entity.hpp"
+#include "../entities/base.hpp"
 #include "../entities/with_center.hpp"
 #include "../entities/with_health.hpp"
 #include "../entities/with_orientation.hpp"
@@ -16,6 +17,7 @@
 #include "../factory/own_player.hpp"
 #include "../factory/weapon_pickup.hpp"
 #include "../sprite/center.hpp"
+#include "../aoe.hpp"
 #include "../log.hpp"
 #include "../speed.hpp"
 #include "../vector2.hpp"
@@ -59,12 +61,14 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		factory::aoe_projectile(
 			env_.model_parameters(),
 			env_.particle_system(),
-			env_.insert_callback(),
+			env_.insert_own_callback(),
 			SANGUIS_CAST_ENUM(
 				aoe_projectile_type,
 				_message.get<sanguis::messages::roles::aoe_projectile>()
 			),
-			_message.get<sanguis::messages::roles::aoe>()
+			draw2d::aoe(
+				_message.get<sanguis::messages::roles::aoe>()
+			)
 		),
 		_message
 	);
@@ -428,7 +432,7 @@ template<
 >
 void
 sanguis::client::draw2d::message::dispatcher::configure_new_object(
-	entities::auto_ptr _ptr,
+	entities::unique_ptr _ptr,
 	Msg const &_message
 )
 {
@@ -437,7 +441,9 @@ sanguis::client::draw2d::message::dispatcher::configure_new_object(
 	);
 
 	env_.insert(
-		_ptr,
+		move(
+			_ptr
+		),
 		id
 	);
 

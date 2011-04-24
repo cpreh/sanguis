@@ -34,7 +34,7 @@ public:
 private:
 	entities::base &
 	insert(
-		entities::auto_ptr,
+		entities::unique_ptr,
 		entity_id
 	);
 
@@ -64,8 +64,8 @@ private:
 	sprite::particle::system &
 	particle_system() const;
 
-	draw2d::insert_callback const &
-	insert_callback() const;
+	draw2d::insert_own_callback const &
+	insert_own_callback() const;
 
 	draw2d::transform_callback const &
 	transform_callback() const;

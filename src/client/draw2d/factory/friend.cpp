@@ -5,9 +5,10 @@
 #include "../../../load/friend_name.hpp"
 #include "../../../friend_type.hpp"
 #include "../../../exception.hpp"
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 
-sanguis::client::draw2d::entities::auto_ptr
+sanguis::client::draw2d::entities::unique_ptr
 sanguis::client::draw2d::factory::friend_(
 	entities::model::parameters const &_param,
 	friend_type::type const _etype
@@ -21,8 +22,10 @@ sanguis::client::draw2d::factory::friend_(
 		break;
 	case friend_type::spider:
 		return
-			entities::auto_ptr(
-				new entities::model::object(
+			entities::unique_ptr(
+				fcppt::make_unique_ptr<
+					entities::model::object
+				>(
 					_param,
 					load::friend_name(
 						_etype
@@ -34,8 +37,10 @@ sanguis::client::draw2d::factory::friend_(
 			);
 	case friend_type::sentry:
 		return
-			entities::auto_ptr(
-				new entities::sentry(
+			entities::unique_ptr(
+				fcppt::make_unique_ptr<
+					entities::sentry
+				>(
 					_param
 				)
 			);

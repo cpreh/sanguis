@@ -1,18 +1,18 @@
 #include "aoe_bullet.hpp"
 #include "explosion.hpp"
+#include "own_auto_ptr.hpp"
 #include "model/parameters.hpp"
 #include "../z_ordering.hpp"
-#include "../../next_id.hpp"
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/make_auto_ptr.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/ref.hpp>
 
 sanguis::client::draw2d::entities::aoe_bullet::aoe_bullet(
 	model::parameters const &_param,
 	sprite::particle::system &_particle_system,
-	insert_callback const &_insert,
+	draw2d::insert_own_callback const &_insert,
 	fcppt::string const &_name,
-	funit const _aoe
+	draw2d::aoe const _aoe
 )
 :
 	model::object(
@@ -36,9 +36,9 @@ sanguis::client::draw2d::entities::aoe_bullet::~aoe_bullet()
 void
 sanguis::client::draw2d::entities::aoe_bullet::on_decay()
 {
-	entities::auto_ptr explo(
+	entities::own_auto_ptr explo(
 		fcppt::make_auto_ptr<
-			explosion
+			entities::explosion
 		>(
 			fcppt::ref(
 				particle_system_
@@ -50,8 +50,7 @@ sanguis::client::draw2d::entities::aoe_bullet::on_decay()
 	);
 	
 	insert_(
-		explo,
-		client::next_id()
+		explo
 	);	
 	
 	model::object::on_decay();

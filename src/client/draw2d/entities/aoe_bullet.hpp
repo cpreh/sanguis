@@ -4,8 +4,8 @@
 #include "model/parameters_fwd.hpp"
 #include "model/object.hpp"
 #include "../sprite/particle/system.hpp"
-#include "../insert_callback.hpp"
-#include "../funit.hpp"
+#include "../aoe.hpp"
+#include "../insert_own_callback.hpp"
 #include "../../../load/model/collection_fwd.hpp"
 #include <fcppt/function/object.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -30,9 +30,9 @@ public:
 	aoe_bullet(
 		model::parameters const &,
 		sprite::particle::system &,
-		insert_callback const &,
+		draw2d::insert_own_callback const &,
 		fcppt::string const &name,
-		funit aoe
+		draw2d::aoe
 	);
 
 	~aoe_bullet();
@@ -44,9 +44,9 @@ private:
 
 	sprite::particle::system &particle_system_;
 
-	insert_callback const insert_;
+	draw2d::insert_own_callback const insert_;
 
-	funit const aoe_;
+	draw2d::aoe const aoe_;
 
 };
 

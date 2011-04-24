@@ -5,6 +5,8 @@
 #include "hud.hpp"
 #include "message_environment.hpp"
 #include "screen_center.hpp"
+#include "../entities/base.hpp"
+#include "../entities/own.hpp"
 #include "../message/dispatcher.hpp"
 #include "../sprite/order.hpp"
 #include "../sprite/float_unit.hpp"
@@ -32,6 +34,7 @@
 #include <sge/sprite/projection_matrix.hpp>
 #include <sge/audio/listener.hpp>
 
+#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/math/matrix/arithmetic.hpp>
 #include <fcppt/math/matrix/basic_impl.hpp>
 #include <fcppt/math/matrix/static.hpp>
@@ -84,12 +87,11 @@ sanguis::client::draw2d::scene::object::object(
 			std::tr1::placeholders::_1
 		)
 	),
-	insert_callback_(
+	insert_own_callback_(
 		std::tr1::bind(
-			&object::insert,
+			&object::insert_own,
 			this,
-			std::tr1::placeholders::_1,
-			std::tr1::placeholders::_2
+			std::tr1::placeholders::_1
 		)
 	),
 	message_environment_(
@@ -123,6 +125,7 @@ sanguis::client::draw2d::scene::object::object(
 		)
 	),
 	entities_(),
+	own_entities_(),
 	current_time_(
 		_current_time
 	),
@@ -242,6 +245,28 @@ sanguis::client::draw2d::scene::object::update(
 			entities_.erase(
 				it
 			);
+	}
+
+	for(
+		own_entity_list::iterator it(
+			own_entities_.begin()
+		);
+		it != own_entities_.end();
+	)
+	{
+		it->update(
+			real_delta
+		);
+
+		if(
+			it->may_be_removed()
+		)
+			it = 
+				own_entities_.erase(
+					it
+				);
+		else
+			++it;
 	}
 }
 
@@ -389,7 +414,7 @@ sanguis::client::draw2d::scene::object::render_lighting()
 
 sanguis::client::draw2d::entities::base &
 sanguis::client::draw2d::scene::object::insert(
-	entities::auto_ptr _entity,
+	entities::unique_ptr _entity,
 	entity_id const _id
 )
 {
@@ -399,9 +424,12 @@ sanguis::client::draw2d::scene::object::insert(
 	> ret_type;
 
 	ret_type const ret(
-		entities_.insert(
+		fcppt::container::ptr::insert_unique_ptr_map(
+			entities_,
 			_id,
-			_entity
+			move(
+				_entity
+			)
 		)
 	);
 
@@ -418,6 +446,18 @@ sanguis::client::draw2d::scene::object::insert(
 		);
 	
 	return *ret.first->second;
+}
+
+sanguis::client::draw2d::entities::own &
+sanguis::client::draw2d::scene::object::insert_own(
+	entities::own_auto_ptr _entity
+)
+{
+	own_entities_.push_back(
+		_entity
+	);
+
+	return own_entities_.back();
 }
 
 void
@@ -507,10 +547,10 @@ sanguis::client::draw2d::scene::object::transform_callback() const
 	return transform_callback_;
 }
 
-sanguis::client::draw2d::insert_callback const &
-sanguis::client::draw2d::scene::object::insert_callback() const
+sanguis::client::draw2d::insert_own_callback const &
+sanguis::client::draw2d::scene::object::insert_own_callback() const
 {
-	return insert_callback_;
+	return insert_own_callback_;
 }
 
 sanguis::client::draw2d::sprite::normal::system &

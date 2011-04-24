@@ -3,8 +3,8 @@
 
 #include "dispatcher_fwd.hpp"
 #include "environment_fwd.hpp"
-#include "../entities/auto_ptr.hpp"
 #include "../entities/base_fwd.hpp"
+#include "../entities/unique_ptr.hpp"
 #include "../../../messages/add_aoe_projectile.hpp"
 #include "../../../messages/add_enemy.hpp"
 #include "../../../messages/add_friend.hpp"
@@ -174,7 +174,7 @@ private:
 	>
 	void
 	configure_new_object(
-		entities::auto_ptr,
+		entities::unique_ptr,
 		Msg const &
 	);
 

@@ -6,6 +6,7 @@
 #include "../sprite/particle/object.hpp"
 #include "../sprite/particle/texture_animation.hpp"
 #include "../sprite/particle/system.hpp"
+#include "../aoe.hpp"
 #include "../../../diff_clock.hpp"
 #include "../../../time_type.hpp"
 #include "../../../load/model/animation_context_ptr.hpp"
@@ -37,7 +38,7 @@ public:
 
 	object(
 		particle_type::type,
-		funit aoe,
+		draw2d::aoe,
 		load::model::animation_context_ptr,
 		optional_time fade_time,
 		sprite::particle::system &
