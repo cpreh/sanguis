@@ -97,6 +97,8 @@ sanguis::client::draw2d::entities::model::part::weapon(
 	// which model has to reset
 	weapon_ = _weapon;
 
+	animation_type_ = sanguis::animation_type::size;
+
 	sound_state_.reset();
 }
 

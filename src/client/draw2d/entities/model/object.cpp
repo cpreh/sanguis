@@ -208,7 +208,7 @@ sanguis::client::draw2d::entities::model::object::on_decay()
 		draw2d::speed(
 			draw2d::speed::value_type::null()
 		)
-	); // FIXME
+	);
 }
 
 void
