@@ -365,9 +365,14 @@ sanguis::client::draw2d::entities::model::object::change_animation(
 		);
 
 		while(
-			!cur_part.try_animation(part_anim)
+			!cur_part.try_animation(
+				part_anim
+			)
 		)
-			part_anim = fallback_anim(part_anim);
+			part_anim =
+				this->fallback_anim(
+					part_anim
+				);
 	}
 }
 

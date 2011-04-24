@@ -32,7 +32,7 @@ sanguis::messages::serialization::read_element<Class>::operator()(
 	obj_. template set<
 		typename Role::alias
 	>(
-		load<
+		messages::serialization::load<
 			typename majutsu::access_role<
 				Role
 			>::type

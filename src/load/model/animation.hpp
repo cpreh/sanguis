@@ -31,7 +31,7 @@ class animation
 		animation
 	);
 public:
-	animation_sound const &
+	model::animation_sound const &
 	sounds() const;
 
 	model::animation_context_ptr

@@ -42,7 +42,7 @@ sanguis::client::draw2d::entities::explosion::explosion(
 		particle::rotation(0)
 	),
 	properties_(
-		explosion_properties()
+		entities::explosion_properties()
 	),
 	center_(
 		_center
@@ -50,32 +50,12 @@ sanguis::client::draw2d::entities::explosion::explosion(
 	aoe_(
 		_aoe
 	),
-	ended(
+	ended_(
 		false
 	)
 {
 	particles_.add(
-		particle::base_ptr(
-			fcppt::make_unique_ptr<
-				particle::explosion
-			>(
-				properties_,
-				std::tr1::bind(
-					&explosion::generate_particle,
-					this,
-					std::tr1::placeholders::_1
-				),
-				particle::point::null(), // pos
-				//fcppt::math::structure_cast<
-				//	particle::point::value_type
-				//>(pos), // position
-				particle::point::null(), // speed
-				static_cast<particle::depth>(0),
-				static_cast<particle::rotation>(0), // no rotation and...
-				static_cast<particle::rotation>(0)//, // ...no rotation speed
-				//particle_system_
-			)
-		)
+		this->generate_explosion()
 	);
 }
 
@@ -88,7 +68,7 @@ sanguis::client::draw2d::entities::explosion::update(
 	time_type const _delta
 )
 {
-	ended =
+	ended_ =
 		particles_.update(
 			_delta,
 			fcppt::math::vector::structure_cast<
@@ -96,7 +76,6 @@ sanguis::client::draw2d::entities::explosion::update(
 			>(
 				center_.get() // FIXME!
 			),
-			//particle::point::null(),
 			static_cast<particle::rotation>(0),
 			static_cast<particle::depth>(0)
 		);
@@ -215,5 +194,5 @@ sanguis::client::draw2d::entities::explosion::generate_particle(
 bool
 sanguis::client::draw2d::entities::explosion::is_decayed() const
 {
-	return ended;
+	return ended_;
 }

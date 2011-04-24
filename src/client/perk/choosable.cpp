@@ -26,13 +26,6 @@ sanguis::client::perk::choosable(
 	client::level const _perks_chosen
 )
 {
-	if(
-		_player_level.get()
-		==
-		_perks_chosen
-	)
-		return perk::choosable_state::level_up;
-
 	perk::tree const &node(
 		perk::find_info(
 			_type,
@@ -68,6 +61,13 @@ sanguis::client::perk::choosable(
 	)
 		return perk::choosable_state::player_level;
 	
+	if(
+		_player_level.get()
+		==
+		_perks_chosen
+	)
+		return perk::choosable_state::level_up;
+
 	return perk::choosable_state::ok;
 }
 

@@ -210,7 +210,8 @@ SET(
 	src/client/draw2d/entities/explosion.hpp
 	src/client/draw2d/entities/explosion_properties.cpp
 	src/client/draw2d/entities/explosion_properties.hpp
-	src/client/draw2d/entities/model/abs_angle_to_rel.hpp
+	src/client/draw2d/entities/model/clamp_orientation.cpp
+	src/client/draw2d/entities/model/clamp_orientation.hpp
 	src/client/draw2d/entities/model/decay_option.hpp
 	src/client/draw2d/entities/model/decay_time.cpp
 	src/client/draw2d/entities/model/decay_time.hpp
@@ -218,21 +219,23 @@ SET(
 	src/client/draw2d/entities/model/healthbar.cpp
 	src/client/draw2d/entities/model/healthbar.hpp
 	src/client/draw2d/entities/model/healthbar_fwd.hpp
-	src/client/draw2d/entities/model/is_rel_angle.hpp
+	src/client/draw2d/entities/model/loop_method.cpp
+	src/client/draw2d/entities/model/loop_method.hpp
 	src/client/draw2d/entities/model/needs_healthbar.hpp
 	src/client/draw2d/entities/model/object.cpp
 	src/client/draw2d/entities/model/object.hpp
 	src/client/draw2d/entities/model/object_fwd.hpp
+	src/client/draw2d/entities/model/orientation.cpp
+	src/client/draw2d/entities/model/orientation.hpp
 	src/client/draw2d/entities/model/parameters.cpp
 	src/client/draw2d/entities/model/parameters.hpp
 	src/client/draw2d/entities/model/parameters_fwd.hpp
 	src/client/draw2d/entities/model/part.cpp
 	src/client/draw2d/entities/model/part.hpp
 	src/client/draw2d/entities/model/part_fwd.hpp
-	src/client/draw2d/entities/model/part_state.cpp
-	src/client/draw2d/entities/model/part_state.hpp
-	src/client/draw2d/entities/model/part_state_fwd.hpp
-	src/client/draw2d/entities/model/rel_angle_to_abs.hpp
+	src/client/draw2d/entities/model/sound_state.cpp
+	src/client/draw2d/entities/model/sound_state.hpp
+	src/client/draw2d/entities/model/sound_state_fwd.hpp
 	src/client/draw2d/entities/own_player.cpp
 	src/client/draw2d/entities/own_player.hpp
 	src/client/draw2d/entities/player.cpp

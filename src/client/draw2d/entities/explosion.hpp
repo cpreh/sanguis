@@ -74,7 +74,7 @@ private:
 
 	funit aoe_;
 
-	bool ended;
+	bool ended_;
 };
 
 }

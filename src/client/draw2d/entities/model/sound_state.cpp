@@ -1,57 +1,38 @@
-#include "part_state.hpp"
-#include "../../../../load/model/animation.hpp"
-#include "../../../../load/model/part.hpp"
+#include "sound_state.hpp"
 #include "../../../../load/model/animation_sound.hpp"
-#include "../../../../load/model/weapon_category.hpp"
 #include "../../../../animation_sound_type.hpp"
 #include <sge/sprite/object_impl.hpp>
 #include <sge/audio/sound/positional.hpp>
 #include <fcppt/assign/make_array.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 
-sanguis::client::draw2d::entities::model::part_state::part_state(
-	load::model::part const &_part,
-	animation_type::type const _animation_type,
-	weapon_type::type const _weapon_type
+sanguis::client::draw2d::entities::model::sound_state::sound_state(
+	load::model::animation_sound const &_sounds
 )
 :
-	anim_(
-		_part[
-			_weapon_type
-		][
-			_animation_type
-		]
-	),
 	sounds_(
 		fcppt::assign::make_array(
-			anim_.sounds()[
+			_sounds[
 				animation_sound_type::start
 			]
 		)
 		(
-			anim_.sounds()[
+			_sounds[
 				animation_sound_type::middle
 			]
 		)
 	),
 	current_sound_index_(
 		sanguis::animation_sound_type::start
-	),
-	animation_type_(_animation_type)
+	)
 {
 	this->play(
 		sge::audio::sound::repeat::once
 	);
 }
 
-sanguis::animation_type::type
-sanguis::client::draw2d::entities::model::part_state::animation_type() const
-{
-	return animation_type_;
-}
-
 void
-sanguis::client::draw2d::entities::model::part_state::update(
+sanguis::client::draw2d::entities::model::sound_state::update(
 	draw2d::sprite::point const &_pos
 )
 {
@@ -101,7 +82,7 @@ sanguis::client::draw2d::entities::model::part_state::update(
 }
 
 void
-sanguis::client::draw2d::entities::model::part_state::stop()
+sanguis::client::draw2d::entities::model::sound_state::stop()
 {
 	if(
 		this->current_sound()
@@ -109,12 +90,12 @@ sanguis::client::draw2d::entities::model::part_state::stop()
 		this->current_sound()->stop();
 }
 
-sanguis::client::draw2d::entities::model::part_state::~part_state()
+sanguis::client::draw2d::entities::model::sound_state::~sound_state()
 {
 }
 
 void
-sanguis::client::draw2d::entities::model::part_state::play(
+sanguis::client::draw2d::entities::model::sound_state::play(
 	sge::audio::sound::repeat::type const _type
 )
 {
@@ -129,7 +110,7 @@ sanguis::client::draw2d::entities::model::part_state::play(
 }
 
 sge::audio::sound::positional_ptr const
-sanguis::client::draw2d::entities::model::part_state::current_sound() const
+sanguis::client::draw2d::entities::model::sound_state::current_sound() const
 {
 	return
 		sounds_[

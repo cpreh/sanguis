@@ -1,13 +1,10 @@
-#ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_PART_STATE_HPP_INCLUDED
-#define SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_PART_STATE_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_SOUND_STATE_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_SOUND_STATE_HPP_INCLUDED
 
-#include "part_state_fwd.hpp"
+#include "sound_state_fwd.hpp"
 #include "../../sprite/point.hpp"
-#include "../../../../load/model/part_fwd.hpp"
-#include "../../../../load/model/animation_fwd.hpp"
-#include "../../../../animation_type.hpp"
+#include "../../../../load/model/animation_sound_fwd.hpp"
 #include "../../../../animation_sound_type.hpp"
-#include "../../../../weapon_type.hpp"
 #include <sge/audio/sound/positional_ptr.hpp>
 #include <sge/audio/sound/repeat.hpp>
 #include <fcppt/container/array_decl.hpp>
@@ -24,20 +21,15 @@ namespace entities
 namespace model
 {
 
-class part_state
+class sound_state
 {
 	FCPPT_NONCOPYABLE(
-		part_state
+		sound_state
 	);
 public:
-	part_state(
-		load::model::part const &,
-		animation_type::type,
-		weapon_type::type
+	explicit sound_state(
+		load::model::animation_sound const &
 	);
-
-	sanguis::animation_type::type
-	animation_type() const;
 
 	void
 	update(
@@ -47,10 +39,8 @@ public:
 	void
 	stop();
 
-	~part_state();
+	~sound_state();
 private:
-	load::model::animation const &anim_;
-
 	typedef fcppt::container::array<
 		sge::audio::sound::positional_ptr,
 		sanguis::animation_sound_type::size
@@ -59,8 +49,6 @@ private:
 	sound_array const sounds_;
 
 	sanguis::animation_sound_type::type current_sound_index_;
-
-	animation_type::type const animation_type_;
 
 	void
 	play(
