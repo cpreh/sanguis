@@ -3,7 +3,7 @@
 
 #include "model/parameters_fwd.hpp"
 #include "model/object.hpp"
-#include "../sprite/rotation_type.hpp"
+#include "../sprite/rotation.hpp"
 #include "../funit.hpp"
 #include "../speed.hpp"
 #include "../../../time_type.hpp"
@@ -34,7 +34,7 @@ public:
 
 	void
 	orientation(
-		sprite::rotation_type
+		sprite::rotation
 	);
 
 	void

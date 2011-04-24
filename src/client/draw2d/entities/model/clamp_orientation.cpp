@@ -3,18 +3,18 @@
 #include <fcppt/math/twopi.hpp>
 #include <cmath>
 
-sanguis::client::draw2d::sprite::rotation_type
+sanguis::client::draw2d::sprite::rotation
 sanguis::client::draw2d::entities::model::clamp_orientation(
-	sprite::rotation_type const _orientation
+	sprite::rotation const _orientation
 )
 {
-	sprite::rotation_type const twopi(
+	sprite::rotation const twopi(
 		fcppt::math::twopi<
-			sprite::rotation_type
+			sprite::rotation
 		>()
 	);
 
-	sprite::rotation_type const clamped(
+	sprite::rotation const clamped(
 		fcppt::math::mod(
 			_orientation,
 			twopi

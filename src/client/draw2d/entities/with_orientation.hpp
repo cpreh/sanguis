@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_ORIENTATION_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_ORIENTATION_HPP_INCLUDED
 
-#include "../sprite/rotation_type.hpp"
+#include "../sprite/rotation.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -25,10 +25,10 @@ protected:
 public:
 	virtual void
 	orientation(
-		sprite::rotation_type
+		sprite::rotation
 	) = 0;
 
-	virtual sprite::rotation_type
+	virtual sprite::rotation
 	orientation() const = 0;
 };
 

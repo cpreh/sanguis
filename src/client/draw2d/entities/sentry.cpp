@@ -47,7 +47,7 @@ sanguis::client::draw2d::entities::sentry::~sentry()
 
 void
 sanguis::client::draw2d::entities::sentry::orientation(
-	sprite::rotation_type const _rotation
+	sprite::rotation const _rotation
 )
 {
 	model::object::orientation(

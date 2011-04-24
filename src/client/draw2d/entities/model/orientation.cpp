@@ -15,16 +15,16 @@ sanguis::client::draw2d::funit const twopi(
 
 void
 assert_range(
-	sanguis::client::draw2d::sprite::rotation_type
+	sanguis::client::draw2d::sprite::rotation
 );
 
 }
 
-sanguis::client::draw2d::sprite::rotation_type
+sanguis::client::draw2d::sprite::rotation
 sanguis::client::draw2d::entities::model::orientation(
 	sanguis::time_type const _time,
-	sprite::rotation_type const _orientation,
-	sprite::rotation_type const _desired_orientation
+	sprite::rotation const _orientation,
+	sprite::rotation const _desired_orientation
 )
 {
 	::assert_range(
@@ -144,7 +144,7 @@ namespace
 
 void
 assert_range(
-	sanguis::client::draw2d::sprite::rotation_type const _value
+	sanguis::client::draw2d::sprite::rotation const _value
 )
 {
 	FCPPT_ASSERT(

@@ -3,6 +3,7 @@
 
 #include "model/object.hpp"
 #include "model/parameters_fwd.hpp"
+#include "../sprite/rotation.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -30,7 +31,7 @@ public:
 	
 	void
 	orientation(
-		sprite::rotation_type
+		sprite::rotation
 	);
 private:
 	using container::orientation;

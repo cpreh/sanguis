@@ -384,7 +384,7 @@ SET(
 	src/client/draw2d/sprite/particle/texture_animation.hpp
 	src/client/draw2d/sprite/particle/type_choices.hpp
 	src/client/draw2d/sprite/point.hpp
-	src/client/draw2d/sprite/rotation_type.hpp
+	src/client/draw2d/sprite/rotation.hpp
 	src/client/draw2d/sprite/unit.hpp
 	src/client/draw2d/sunlight/basic_gradients.hpp
 	src/client/draw2d/sunlight/basic_gradients_fwd.hpp

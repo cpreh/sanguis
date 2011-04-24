@@ -111,7 +111,7 @@ sanguis::client::draw2d::entities::container::center(
 
 void
 sanguis::client::draw2d::entities::container::orientation(
-	sprite::rotation_type const _orientation
+	sprite::rotation const _orientation
 )
 {
 	BOOST_FOREACH(
@@ -123,7 +123,7 @@ sanguis::client::draw2d::entities::container::orientation(
 		);
 }
 
-sanguis::client::draw2d::sprite::rotation_type
+sanguis::client::draw2d::sprite::rotation
 sanguis::client::draw2d::entities::container::orientation() const
 {
 	return

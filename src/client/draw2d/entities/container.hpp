@@ -8,7 +8,7 @@
 #include "../sprite/center.hpp"
 #include "../sprite/dim.hpp"
 #include "../sprite/order.hpp"
-#include "../sprite/rotation_type.hpp"
+#include "../sprite/rotation.hpp"
 #include "../sprite/normal/object.hpp"
 #include "../sprite/normal/system.hpp"
 #include "../sprite/index_fwd.hpp"
@@ -77,10 +77,10 @@ protected:
 	// with_orientation overrides
 	virtual void
 	orientation(
-		sprite::rotation_type
+		sprite::rotation
 	);
 
-	sprite::rotation_type
+	sprite::rotation
 	orientation() const;
 
 	// with_speed overrides

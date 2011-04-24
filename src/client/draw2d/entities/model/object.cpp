@@ -151,7 +151,7 @@ sanguis::client::draw2d::entities::model::object::update(
 
 void
 sanguis::client::draw2d::entities::model::object::orientation(
-	sprite::rotation_type const _rot
+	sprite::rotation const _rot
 )
 {
 	BOOST_FOREACH(
@@ -165,7 +165,7 @@ sanguis::client::draw2d::entities::model::object::orientation(
 
 void
 sanguis::client::draw2d::entities::model::object::orientation(
-	sprite::rotation_type const _rot,
+	sprite::rotation const _rot,
 	size_type const _index
 )
 {

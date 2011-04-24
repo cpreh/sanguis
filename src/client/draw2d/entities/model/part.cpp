@@ -4,7 +4,7 @@
 #include "orientation.hpp"
 #include "sound_state.hpp"
 #include "../../sprite/dim.hpp"
-#include "../../sprite/rotation_type.hpp"
+#include "../../sprite/rotation.hpp"
 #include "../../../../load/model/part.hpp"
 #include "../../../../load/model/base_animation_not_found.hpp"
 #include "../../../../load/model/animation_context.hpp"
@@ -182,7 +182,7 @@ sanguis::client::draw2d::entities::model::part::update(
 
 void
 sanguis::client::draw2d::entities::model::part::orientation(
-	sprite::rotation_type _rot
+	sprite::rotation _rot
 )
 {
 	_rot =
@@ -254,7 +254,7 @@ sanguis::client::draw2d::entities::model::part::load_animation(
 
 void
 sanguis::client::draw2d::entities::model::part::update_orientation(
-	sprite::rotation_type const _rot
+	sprite::rotation const _rot
 )
 {
 	ref_.rotation(
@@ -262,7 +262,7 @@ sanguis::client::draw2d::entities::model::part::update_orientation(
 	);
 }
 
-sanguis::client::draw2d::sprite::rotation_type
+sanguis::client::draw2d::sprite::rotation
 sanguis::client::draw2d::entities::model::part::orientation() const
 {
 	return ref_.rotation();

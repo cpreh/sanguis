@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_CLAMP_ORIENTATION_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_CLAMP_ORIENTATION_HPP_INCLUDED
 
-#include "../../sprite/rotation_type.hpp"
+#include "../../sprite/rotation.hpp"
 
 namespace sanguis
 {
@@ -14,9 +14,9 @@ namespace entities
 namespace model
 {
 
-sprite::rotation_type
+sprite::rotation
 clamp_orientation(
-	sprite::rotation_type
+	sprite::rotation
 );
 
 }

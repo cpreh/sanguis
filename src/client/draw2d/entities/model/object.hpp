@@ -13,7 +13,7 @@
 #include "../with_weapon.hpp"
 #include "../../sprite/index_fwd.hpp"
 #include "../../sprite/order.hpp"
-#include "../../sprite/rotation_type.hpp"
+#include "../../sprite/rotation.hpp"
 #include "../../speed.hpp"
 #include "../../../health.hpp"
 #include "../../../../animation_type.hpp"
@@ -69,14 +69,14 @@ protected:
 	// with_orientation overrides
 	virtual void
 	orientation(
-		sprite::rotation_type
+		sprite::rotation
 	);
 
 	using container::orientation;
 
 	void
 	orientation(
-		sprite::rotation_type,
+		sprite::rotation,
 		size_type index
 	);
 	

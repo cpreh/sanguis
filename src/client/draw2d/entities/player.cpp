@@ -84,7 +84,7 @@ sanguis::client::draw2d::entities::player::speed(
 
 void
 sanguis::client::draw2d::entities::player::orientation(
-	sprite::rotation_type const _orientation
+	sprite::rotation const _orientation
 )
 {
 	model::object::orientation(
@@ -118,7 +118,7 @@ sanguis::client::draw2d::entities::player::update(
 			)
 		);
 
-	sprite::rotation_type const sprite_rotation(
+	sprite::rotation const sprite_rotation(
 		this->at(
 			bottom
 		).rotation()

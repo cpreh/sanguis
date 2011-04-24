@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_ORIENTATION_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_ORIENTATION_HPP_INCLUDED
 
-#include "../../sprite/rotation_type.hpp"
+#include "../../sprite/rotation.hpp"
 #include "../../../../time_type.hpp"
 
 namespace sanguis
@@ -15,11 +15,11 @@ namespace entities
 namespace model
 {
 
-sprite::rotation_type
+sprite::rotation
 orientation(
 	sanguis::time_type,
-	sprite::rotation_type orientation,
-	sprite::rotation_type desired_orientation
+	sprite::rotation orientation,
+	sprite::rotation desired_orientation
 );
 
 }

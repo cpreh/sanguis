@@ -4,7 +4,7 @@
 #include "sound_state_fwd.hpp"
 #include "../../sprite/normal/object.hpp"
 #include "../../sprite/normal/texture_animation.hpp"
-#include "../../sprite/rotation_type.hpp"
+#include "../../sprite/rotation.hpp"
 #include "../../../../animation_type.hpp"
 #include "../../../../diff_clock.hpp"
 #include "../../../../time_type.hpp"
@@ -56,7 +56,7 @@ public:
 
 	void
 	orientation(
-		sprite::rotation_type
+		sprite::rotation
 	);
 
 	bool
@@ -79,16 +79,16 @@ private:
 	
 	void
 	update_orientation(
-		sprite::rotation_type
+		sprite::rotation
 	);
 
-	sprite::rotation_type
+	sprite::rotation
 	orientation() const;
 
 	diff_clock anim_diff_clock_;
 
 	typedef fcppt::optional<
-		sprite::rotation_type
+		sprite::rotation
 	> optional_rotation;
 
 	optional_rotation desired_orientation_;
