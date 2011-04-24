@@ -8,13 +8,24 @@ sanguis::client::draw2d::entities::model::clamp_orientation(
 	sprite::rotation_type const _orientation
 )
 {
+	sprite::rotation_type const twopi(
+		fcppt::math::twopi<
+			sprite::rotation_type
+		>()
+	);
+
+	sprite::rotation_type const clamped(
+		fcppt::math::mod(
+			_orientation,
+			twopi
+		)
+	);
+
 	return
-		std::abs(
-			fcppt::math::mod(
-				_orientation,
-				fcppt::math::twopi<
-					sprite::rotation_type
-				>()
-			)
-		);
+		clamped < 0
+		?
+			clamped
+			+ twopi
+		:
+			clamped;
 }
