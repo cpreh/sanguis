@@ -5,7 +5,7 @@
 #include "../environment/object_fwd.hpp"
 #include "../environment/load_context_fwd.hpp"
 #include "../console_fwd.hpp"
-#include "../../time_type.hpp"
+#include "../../time_delta_fwd.hpp"
 #include <sge/console/arg_list.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -32,7 +32,7 @@ public:
 
 	void
 	process(
-		time_type,
+		sanguis::time_delta const &,
 		environment::object &,
 		environment::load_context &
 	);

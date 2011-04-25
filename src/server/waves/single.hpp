@@ -5,7 +5,7 @@
 #include "../environment/load_context_fwd.hpp"
 #include "../environment/object_fwd.hpp"
 #include "../../enemy_type.hpp"
-#include "../../time_type.hpp"
+#include "../../time_delta_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -31,7 +31,7 @@ public:
 private:
 	void
 	process(
-		time_type diff,
+		sanguis::time_delta const &,
 		environment::object &,
 		environment::load_context &
 	);

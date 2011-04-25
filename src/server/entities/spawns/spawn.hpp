@@ -7,7 +7,7 @@
 #include "../../team.hpp"
 #include "../../../enemy_type.hpp"
 #include "../../../entity_type.hpp"
-#include "../../../time_type.hpp"
+#include "../../../time_delta_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -49,12 +49,12 @@ private:
 
 	void
 	on_update(
-		time_type
+		sanguis::time_delta const &
 	);
 
 	virtual size_type 
 	may_spawn(
-		time_type
+		sanguis::time_delta const &
 	) = 0;
 
 	virtual void

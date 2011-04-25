@@ -95,7 +95,7 @@ sanguis::client::draw2d::entities::player::orientation(
 
 void
 sanguis::client::draw2d::entities::player::update(
-	time_type const _time
+	sanguis::time_delta const &_time
 )
 {
 	model::object::update(

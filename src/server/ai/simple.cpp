@@ -10,9 +10,10 @@
 #include "../collision/distance.hpp"
 #include "../vector.hpp"
 #include <sge/time/second.hpp>
-#include <fcppt/math/vector/signed_angle_cast.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/comparison.hpp>
+#include <fcppt/math/vector/signed_angle_cast.hpp>
+#include <fcppt/math/vector/unit_circle.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
@@ -72,32 +73,10 @@ sanguis::server::ai::simple::~simple()
 #include <fcppt/random/uniform.hpp>
 #include <fcppt/random/make_inclusive_range.hpp>
 #include <fcppt/math/twopi.hpp>
-#include <cmath>
-
-namespace
-{
-
-sanguis::server::vector const
-make_vector_from_angle(
-	sanguis::server::space_unit const _angle
-)
-{
-	return
-		sanguis::server::vector(
-			std::cos(
-				_angle
-			),
-			std::sin(
-				_angle
-			)
-		);
-}
-
-}
 
 void
 sanguis::server::ai::simple::update(
-	time_type const _time
+	sanguis::time_delta const &_time
 )
 {
 	diff_clock_.update(
@@ -180,7 +159,7 @@ sanguis::server::ai::simple::update(
 	server::vector const fuzzy_target(
 		target_->center().get()
 		+
-		make_vector_from_angle(
+		fcppt::math::vector::unit_circle(
 			rng()
 		)
 		* distance / 50.f

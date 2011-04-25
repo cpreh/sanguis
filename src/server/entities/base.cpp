@@ -47,7 +47,7 @@ sanguis::server::entities::base::transfer(
 
 void
 sanguis::server::entities::base::update(
-	sanguis::time_type const _time
+	sanguis::time_delta const &_time
 )
 {
 	this->on_update(
@@ -111,7 +111,7 @@ sanguis::server::entities::base::~base()
 
 void
 sanguis::server::entities::base::on_update(
-	sanguis::time_type
+	sanguis::time_delta const &
 )
 {
 }

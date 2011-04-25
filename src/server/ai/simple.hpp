@@ -7,7 +7,7 @@
 #include "../entities/with_ai_fwd.hpp"
 #include "../entities/with_body_fwd.hpp"
 #include "../../diff_clock.hpp"
-#include "../../time_type.hpp"
+#include "../../time_delta_fwd.hpp"
 #include <sge/time/timer.hpp>
 #include <fcppt/container/map_decl.hpp>
 
@@ -32,7 +32,7 @@ public:
 private:
 	void
 	update(
-		time_type
+		sanguis::time_delta const &
 	);
 
 	void

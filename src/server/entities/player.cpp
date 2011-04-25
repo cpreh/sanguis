@@ -223,7 +223,7 @@ sanguis::server::entities::player::remove_sight_range(
 
 void
 sanguis::server::entities::player::on_update(
-	time_type const _time
+	sanguis::time_delta const &_time
 )
 {
 	with_buffs::on_update(

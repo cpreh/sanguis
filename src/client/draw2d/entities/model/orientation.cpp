@@ -1,4 +1,5 @@
 #include "orientation.hpp"
+#include "../../../../time_to_second.hpp"
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/assert.hpp>
 #include <algorithm>
@@ -22,7 +23,7 @@ assert_range(
 
 sanguis::client::draw2d::sprite::rotation
 sanguis::client::draw2d::entities::model::orientation(
-	sanguis::time_type const _time,
+	sanguis::time_delta const &_time,
 	sprite::rotation const _orientation,
 	sprite::rotation const _desired_orientation
 )
@@ -104,7 +105,14 @@ sanguis::client::draw2d::entities::model::orientation(
 	);
 
 	funit const new_orientation(
-		_orientation + dir * _time * turning_speed
+		_orientation
+		+
+		dir
+		*
+		sanguis::time_to_second(
+			_time
+		)
+		* turning_speed
 	);
 	
 	// This fixes the "epilepsy" bug. Imagine the current orientation being 10,

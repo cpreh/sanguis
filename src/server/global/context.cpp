@@ -349,7 +349,7 @@ sanguis::server::global::context::player_choose_perk(
 
 void
 sanguis::server::global::context::update(
-	time_type const _delta
+	sanguis::time_delta const &_delta
 )
 {
 	BOOST_FOREACH(

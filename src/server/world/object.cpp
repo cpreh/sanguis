@@ -29,6 +29,7 @@
 #include "../../load/model/collection.hpp"
 #include "../../load/model/object.hpp"
 #include "../../exception.hpp"
+#include "../../time_to_second.hpp"
 #include <sge/projectile/world.hpp>
 #include <sge/time/second_f.hpp>
 #include <sge/time/millisecond.hpp>
@@ -107,7 +108,7 @@ sanguis::server::world::object::~object()
 
 void
 sanguis::server::world::object::update(
-	time_type const _time
+	sanguis::time_delta const &_time
 )
 {
 	diff_clock_.update(
@@ -127,7 +128,9 @@ sanguis::server::world::object::update(
 
 	collision_world_->update(
 		sge::time::second_f(
-			_time
+			sanguis::time_to_second(
+				_time
+			)
 		)
 	);
 
@@ -565,7 +568,7 @@ sanguis::server::world::object::send_player_specific(
 void
 sanguis::server::world::object::update_entity(
 	entity_map::iterator const _it,
-	time_type const _time,
+	sanguis::time_delta const &_time,
 	bool const _update_pos
 )
 {

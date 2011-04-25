@@ -13,7 +13,7 @@ sanguis::server::waves::debug::~debug()
 
 void 
 sanguis::server::waves::debug::process(
-	time_type,
+	sanguis::time_delta const &,
 	environment::object &_env,
 	environment::load_context &_load_context
 )

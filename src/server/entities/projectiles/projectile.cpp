@@ -7,6 +7,7 @@
 #include "../../damage/list.hpp"
 #include "../../../messages/add_projectile.hpp"
 #include "../../../messages/create.hpp"
+#include "../../../time_to_second.hpp"
 #include <sge/time/second_f.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
@@ -51,7 +52,9 @@ sanguis::server::entities::projectiles::projectile::projectile(
 	diff_clock_(),
 	life_timer_(
 		sge::time::second_f(
-			_life_time.get()
+			sanguis::time_to_second(
+				_life_time.get()
+			)
 		),
 		sge::time::activation_state::active,
 		diff_clock_.callback()
@@ -65,7 +68,7 @@ sanguis::server::entities::projectiles::projectile::~projectile()
 
 void
 sanguis::server::entities::projectiles::projectile::on_update(
-	time_type const _time
+	sanguis::time_delta const &_time
 )
 {
 	diff_clock_.update(

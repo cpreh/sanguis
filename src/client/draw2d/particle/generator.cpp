@@ -2,26 +2,28 @@
 #include "object.hpp"
 #include "rotation_from_alignment.hpp"
 #include "velocity_from_movement.hpp"
+#include "../../../time_to_second.hpp"
 #include <fcppt/random/make_inclusive_range.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/is_null.hpp>
 #include <fcppt/math/vector/unit_circle.hpp>
+#include <fcppt/minmax_pair_impl.hpp>
 #include <sge/time/second_f.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::client::draw2d::particle::generator::generator(
 	particle::generation_callback const _generate_object,
 	draw2d::center const &_center,
-	sanguis::time_type const _life_time,
-	sanguis::time_type const _frequency,
-	unsigned const _spawn_initial,
+	particle::gen_life_time const &_life_time,
+	particle::gen_frequency const &_frequency,
+	particle::spawn_initial const _spawn_initial,
 	particle::align_type::type const _alignment,
 	particle::depth const _depth,
 	particle::dispersion_range const &_dispersion_value,
-	particle::velocity_range const &_velocity,
-	particle::rotation_velocity_range const &_rot_velocity,
+	particle::speed_range const &_velocity,
+	particle::rot_speed_range const &_rot_velocity,
 	particle::movement_type::type const _movement
 )
 :
@@ -44,12 +46,16 @@ sanguis::client::draw2d::particle::generator::generator(
 	),
 	frequency_timer_(
 		sge::time::second_f(
-			_frequency
+			sanguis::time_to_second(
+				_frequency.get()
+			)
 		)
 	),
 	life_timer_(
 		sge::time::second_f(
-			_life_time
+			sanguis::time_to_second(
+				_life_time.get()
+			)
 		)
 	),
 	alignment_(
@@ -68,7 +74,10 @@ sanguis::client::draw2d::particle::generator::generator(
 		)
 	),
 	dispersion_value_(
-		_dispersion_value
+		fcppt::random::make_inclusive_range(
+			_dispersion_value.get().min(),
+			_dispersion_value.get().max()
+		)
 	),
 	velocity_angle_(
 		fcppt::random::make_inclusive_range(
@@ -83,7 +92,10 @@ sanguis::client::draw2d::particle::generator::generator(
 		)
 	),
 	velocity_value_(
-		_velocity
+		fcppt::random::make_inclusive_range(
+			_velocity.get().min(),
+			_velocity.get().max()
+		)
 	),
 	rot_angle_(
 		fcppt::random::make_inclusive_range(
@@ -112,16 +124,21 @@ sanguis::client::draw2d::particle::generator::generator(
 		)
 	),
 	rot_velocity_(
-		_rot_velocity
+		fcppt::random::make_inclusive_range(
+			_rot_velocity.get().min(),
+			_rot_velocity.get().max()
+		)
 	),
 	movement_(
 		_movement
 	)
 {
 	for(
-		unsigned i = 0;
-		i < _spawn_initial;
-		++i
+		spawn_initial index(
+			0
+		);
+		index < _spawn_initial;
+		++index
 	)
 		this->generate();
 }
@@ -192,13 +209,6 @@ sanguis::client::draw2d::particle::generator::generate()
 		)
 	);
 	
-	/*
-	object->rot_vel(
-		(rot_direction_() > sge::su(0.5) 
-			? sge::su(-1) 
-			: sge::su(1)) * 
-				rot_velocity_());
-	*/
 	object->rot_speed(
 		particle::rotation_speed(
 			0
@@ -214,7 +224,7 @@ sanguis::client::draw2d::particle::generator::generate()
 
 bool
 sanguis::client::draw2d::particle::generator::update(
-	sanguis::time_type const _delta,
+	sanguis::time_delta const &_delta,
 	draw2d::center const &_pos,
 	particle::rotation const _rot,
 	particle::depth const _depth

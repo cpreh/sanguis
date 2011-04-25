@@ -11,6 +11,7 @@
 #include "../net/deserialize.hpp"
 #include "../net/server/connection_id_container.hpp"
 #include "../exception.hpp"
+#include "../time_from_second.hpp"
 #include <sge/time/millisecond.hpp>
 #include <sge/time/second.hpp>
 #include <fcppt/algorithm/append.hpp>
@@ -286,9 +287,7 @@ sanguis::server::machine::timer_callback()
 {
 	this->process_event(
 		events::tick(
-			static_cast<
-				time_type
-			>(
+			sanguis::time_from_second(
 				frame_timer_.reset()
 			)
 		)

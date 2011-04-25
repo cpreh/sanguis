@@ -1,9 +1,10 @@
 #include "aoe_damage.hpp"
 #include "../../auras/burn.hpp"
 #include "../../environment/object.hpp"
+#include <fcppt/chrono/duration_arithmetic.hpp>
+#include <fcppt/container/map_impl.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
-#include <fcppt/container/map_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
 
@@ -12,7 +13,7 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 	server::radius const _radius,
 	damage::unit const _damage_per_pulse,
 	unsigned const _max_pulses,
-	time_type const _pulse_diff,
+	sanguis::time_delta const &_pulse_diff,
 	damage::array const &_damage_values
 )
 :
@@ -30,10 +31,11 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 		>(
 			2
 		),
-		life_time(
+		projectiles::life_time(
 			_pulse_diff
-			* static_cast<
-				time_type
+			*
+			static_cast<
+				sanguis::time_delta::rep
 			>(
 				_max_pulses
 			)
@@ -62,20 +64,6 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 
 sanguis::server::entities::projectiles::aoe_damage::~aoe_damage()
 {
-}
-
-void
-sanguis::server::entities::projectiles::aoe_damage::on_update(
-	time_type const _time
-)
-{
-	projectile::on_update(
-		_time
-	);
-
-	with_auras::on_update(
-		_time
-	);
 }
 
 void

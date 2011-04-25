@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PROJECTILES_LIFE_TIME_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PROJECTILES_LIFE_TIME_HPP_INCLUDED
 
-#include "../../../time_type.hpp"
+#include "../../../time_delta.hpp"
 #include <fcppt/strong_typedef.hpp>
 
 namespace sanguis
@@ -14,7 +14,7 @@ namespace projectiles
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
-	time_type,
+	sanguis::time_delta,
 	life_time
 );
 

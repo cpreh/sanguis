@@ -23,10 +23,10 @@ sanguis::server::weapons::melee::melee(
 		unlimited_magazine_count,
 		_base_cooldown,
 		weapons::cast_point(
-			0
+			0.f
 		),
 		weapons::reload_time(
-			0
+			0.f
 		)
 	),
 	damage_(_damage)

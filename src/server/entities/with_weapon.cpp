@@ -67,7 +67,7 @@ sanguis::server::entities::with_weapon::~with_weapon()
 
 void
 sanguis::server::entities::with_weapon::on_update(
-	time_type const _time
+	sanguis::time_delta const &_time
 )
 {
 	// change to the first weapon if we have any

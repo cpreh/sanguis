@@ -1,12 +1,18 @@
 #include "decay_time.hpp"
+#include "../../../../time_to_second.hpp"
+#include <sge/time/second_f.hpp>
 
 sanguis::client::draw2d::entities::model::decay_time::decay_time(
-	sge::time::duration const &_duration
+	sanguis::time_delta const &_duration
 )
 :
 	diff_clock_(),
 	timer_(
-		_duration
+		sge::time::second_f(
+			sanguis::time_to_second(
+				_duration
+			)
+		)
 	)
 {
 }
@@ -17,7 +23,7 @@ sanguis::client::draw2d::entities::model::decay_time::~decay_time()
 
 void
 sanguis::client::draw2d::entities::model::decay_time::update(
-	time_type const _time
+	sanguis::time_delta const _time
 )
 {
 	diff_clock_.update(

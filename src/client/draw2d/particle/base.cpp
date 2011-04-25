@@ -1,4 +1,6 @@
 #include "base.hpp"
+#include "../../../time_unit.hpp"
+#include "../../../time_to_second.hpp"
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 
@@ -24,19 +26,25 @@ sanguis::client::draw2d::particle::base::~base()
 
 bool
 sanguis::client::draw2d::particle::base::update(
-	time_type const _delta,
+	sanguis::time_delta const &_delta,
 	draw2d::center const &,
 	particle::rotation,
 	particle::depth
 )
 {
+	sanguis::time_unit const time_unit(
+		sanguis::time_to_second(
+			_delta
+		)
+	);
+
 	this->center(
 		draw2d::center(
 			this->center().get()
 			+
 			this->speed().get()
 			*
-			_delta
+			time_unit
 		)
 	);
 
@@ -46,7 +54,7 @@ sanguis::client::draw2d::particle::base::update(
 			+
 			this->rot_speed().get()
 			*
-			_delta
+			time_unit
 		)
 	);
 

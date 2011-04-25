@@ -4,6 +4,7 @@
 #include "../../damage/meta.hpp"
 #include "../../damage/normal.hpp"
 #include "../../damage/full.hpp"
+#include "../../../time_from_second.hpp"
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <boost/assign/list_of.hpp>
@@ -23,8 +24,10 @@ sanguis::server::entities::projectiles::melee::melee(
 			1,
 			1
 		),
-		life_time(
-			1
+		projectiles::life_time(
+			sanguis::time_from_second(
+				1.f
+			)
 		), // short lifetime
 		server::direction(
 			0

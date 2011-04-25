@@ -17,7 +17,7 @@
 #include "../space_unit.hpp"
 #include "../entities/with_weapon_fwd.hpp"
 #include "../entities/base_fwd.hpp"
-#include "../../time_type.hpp"
+#include "../../time_delta_fwd.hpp"
 #include "../../messages/base.hpp"
 #include "../../weapon_type.hpp"
 #include <sge/time/duration.hpp>
@@ -59,7 +59,7 @@ public:
 
 	void
 	update(
-		time_type,
+		sanguis::time_delta const &,
 		entities::with_weapon &owner
 	);
 
@@ -105,10 +105,10 @@ protected:
 		delayed_attack const &
 	) = 0;
 	
-	time_type
+	server::space_unit
 	ias() const;
 
-	time_type
+	server::space_unit
 	irs() const;
 
 	bool
@@ -173,7 +173,7 @@ private:
 		backswing_time_,
 		reload_time_;
 
-	space_unit
+	server::space_unit
 		ias_,
 		irs_;
 };

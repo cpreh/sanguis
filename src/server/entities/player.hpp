@@ -20,7 +20,7 @@
 #include "../player_id.hpp"
 #include "../string.hpp"
 #include "../../perk_type.hpp"
-#include "../../time_type.hpp"
+#include "../../time_delta_fwd.hpp"
 #include <fcppt/scoped_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -97,7 +97,7 @@ private:
 
 	void
 	on_update(
-		sanguis::time_type
+		sanguis::time_delta const &
 	);
 
 	messages::auto_ptr

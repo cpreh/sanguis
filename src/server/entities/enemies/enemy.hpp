@@ -16,6 +16,7 @@
 #include "../../exp.hpp"
 #include "../../health.hpp"
 #include "../../../enemy_type.hpp"
+#include "../../../time_delta_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -60,7 +61,7 @@ public:
 private:
 	void
 	on_update(
-		time_type
+		sanguis::time_delta const &
 	);
 
 	messages::auto_ptr

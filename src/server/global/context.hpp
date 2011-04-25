@@ -20,7 +20,7 @@
 #include "../../weapon_type.hpp"
 #include "../../world_id.hpp"
 #include "../../perk_type.hpp"
-#include "../../time_type.hpp"
+#include "../../time_delta_fwd.hpp"
 #include "../../messages/auto_ptr.hpp"
 #include "../../load/context_base_fwd.hpp"
 #include <fcppt/function/object.hpp>
@@ -101,7 +101,7 @@ public:
 
 	void
 	update(
-		time_type
+		sanguis::time_delta const &
 	);
 
 	entities::player_map::size_type

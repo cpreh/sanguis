@@ -15,8 +15,8 @@ namespace particle
 {
 
 typedef std::map<
-	particle_type::type,
-	properties
+	particle::particle_type::type,
+	particle::properties
 > property_container;
 
 }

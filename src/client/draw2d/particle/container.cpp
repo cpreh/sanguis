@@ -53,7 +53,7 @@ sanguis::client::draw2d::particle::container::add(
 
 bool
 sanguis::client::draw2d::particle::container::update(
-	sanguis::time_type const _delta,
+	sanguis::time_delta const &_delta,
 	draw2d::center const &_center,
 	particle::rotation const _rot,
 	particle::depth const _depth

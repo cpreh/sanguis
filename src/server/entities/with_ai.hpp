@@ -7,6 +7,7 @@
 #include "../ai/scoped_ptr.hpp"
 #include "../ai/create_function.hpp"
 #include "../weapons/unique_ptr.hpp"
+#include "../../time_delta_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -34,7 +35,7 @@ protected:
 
 	virtual void
 	on_update(
-		time_type
+		sanguis::time_delta const &
 	);
 private:
 	void

@@ -7,7 +7,7 @@
 #include "../environment/object_fwd.hpp"
 #include "../entities/base_fwd.hpp"
 #include "../../diff_clock.hpp"
-#include "../../time_type.hpp"
+#include "../../time_delta_fwd.hpp"
 #include <sge/time/timer.hpp>
 #include <fcppt/random/uniform.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -34,7 +34,7 @@ private:
 	void
 	update(
 		entities::base &,
-		sanguis::time_type,
+		sanguis::time_delta const &,
 		environment::object &
 	);
 

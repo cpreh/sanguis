@@ -6,6 +6,7 @@
 #include "../../damage/piercing.hpp"
 #include "../../damage/full.hpp"
 #include "../../environment/load_context.hpp"
+#include "../../../time_from_second.hpp"
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/text.hpp>
 
@@ -25,8 +26,10 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 		_load_context.entity_dim(
 			FCPPT_TEXT("bullet")
 		),
-		life_time(
-			10
+		projectiles::life_time(
+			sanguis::time_from_second(
+				10.f
+			)
 		),
 		_direction,
 		indeterminate::no

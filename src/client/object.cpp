@@ -9,7 +9,7 @@
 #include "../args/multi_sampling.hpp"
 #include "../args/sge_options.hpp"
 #include "../server/object.hpp"
-#include "../time_type.hpp"
+#include "../time_from_second.hpp"
 
 #include <sge/config/media_path.hpp>
 #include <sge/font/size_type.hpp>
@@ -194,10 +194,7 @@ sanguis::client::object::loop_handler()
 {
 	if(
 		!machine_.process(
-			// TODO
-			static_cast<
-				time_type
-			>(
+			sanguis::time_from_second(
 				frame_timer_.reset()
 			)
 		)

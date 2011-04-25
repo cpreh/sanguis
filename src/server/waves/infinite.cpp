@@ -33,7 +33,7 @@ sanguis::server::waves::infinite::~infinite()
 
 void
 sanguis::server::waves::infinite::process(
-	time_type const _diff,
+	sanguis::time_delta const &_diff,
 	environment::object &_env,
 	environment::load_context &
 )

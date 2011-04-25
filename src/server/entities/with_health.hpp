@@ -10,6 +10,7 @@
 #include "../damage/unit.hpp"
 #include "../damage/array.hpp"
 #include "../damage/armor.hpp"
+#include "../../time_delta_fwd.hpp"
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -58,7 +59,7 @@ protected:
 
 	void
 	on_update(
-		time_type
+		sanguis::time_delta const &
 	);
 private:
 	bool

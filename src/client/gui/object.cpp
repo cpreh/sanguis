@@ -3,8 +3,8 @@
 #include <sge/cegui/load_context.hpp>
 #include <sge/config/media_path.hpp>
 #include <sge/time/duration.hpp>
-#include <sge/time/second_f.hpp>
 #include <fcppt/chrono/duration_cast.hpp>
+#include <fcppt/chrono/duration_impl.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::client::gui::object::object(
@@ -68,16 +68,14 @@ sanguis::client::gui::object::render()
 
 void
 sanguis::client::gui::object::update(
-	time_type const _time
+	sanguis::time_delta const &_time
 )
 {
 	system_.update(
 	        fcppt::chrono::duration_cast<
 			sge::time::duration
 		>(
-			sge::time::second_f(
-				_time
-			)
+			_time
 		)
 	);
 }

@@ -88,7 +88,7 @@ sanguis::load::resource::texture_context_impl::update()
 
 void
 sanguis::load::resource::texture_context_impl::tick(
-	time_type const _delta
+	sanguis::time_delta const &_delta
 )
 {
 	clock_.update(

@@ -5,6 +5,8 @@
 #include "../sprite/point.hpp"
 #include "../sprite/dim.hpp"
 #include "../../../load/model/animation_context.hpp"
+#include "../../../time_from_second.hpp"
+#include "../../../time_to_second.hpp"
 #include <sge/sprite/animation/texture_impl.hpp>
 #include <sge/sprite/intrusive/system_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
@@ -12,6 +14,9 @@
 #include <sge/sprite/center.hpp>
 #include <sge/image/color/rgba8.hpp>
 #include <sge/image/color/init.hpp>
+#include <fcppt/chrono/duration_arithmetic.hpp>
+#include <fcppt/chrono/duration_comparison.hpp>
+#include <fcppt/chrono/duration_impl.hpp>
 #include <fcppt/math/point_rotate.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/fill.hpp>
@@ -94,7 +99,9 @@ sanguis::client::draw2d::particle::object::object(
 		?
 			*fade_total_
 		:
-			static_cast<time_type>(0)
+			sanguis::time_from_second(
+				0
+			)
 	)
 {
 }
@@ -105,7 +112,7 @@ sanguis::client::draw2d::particle::object::~object()
 
 bool
 sanguis::client::draw2d::particle::object::update(
-	sanguis::time_type const _delta,
+	sanguis::time_delta const &_delta,
 	draw2d::center const &_center,
 	particle::rotation const _rot,
 	particle::depth const _depth 
@@ -183,17 +190,21 @@ sanguis::client::draw2d::particle::object::update(
 	
 	fade_remaining_ -= _delta;
 
-	funit const ratio(
+	draw2d::funit const ratio(
 		static_cast<
-			funit
+			draw2d::funit
 		>(
-			fade_remaining_
+			sanguis::time_to_second(
+				fade_remaining_
+			)
 		)
 		/
 		static_cast<
-			funit
+			draw2d::funit
 		>(
-			*fade_total_
+			sanguis::time_to_second(
+				*fade_total_
+			)
 		)
 	);
 
@@ -214,9 +225,7 @@ sanguis::client::draw2d::particle::object::update(
 	return
 		fade_remaining_
 		<
-		static_cast<
-			sanguis::time_type
-		>(
+		sanguis::time_from_second(
 			0
 		);
 }

@@ -24,7 +24,7 @@
 #include "../../../load/model/collection_fwd.hpp"
 #include "../../../messages/base.hpp"
 #include "../../../entity_id.hpp"
-#include "../../../time_type.hpp"
+#include "../../../time_delta_fwd.hpp"
 #include <sge/audio/listener_fwd.hpp>
 #include <sge/font/metrics_ptr.hpp>
 #include <sge/font/text/drawer_fwd.hpp>
@@ -76,7 +76,7 @@ public:
 
 	void
 	update(
-		time_type
+		sanguis::time_delta const &
 	);
 
 	void

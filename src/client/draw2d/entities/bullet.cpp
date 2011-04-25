@@ -51,7 +51,7 @@ sanguis::client::draw2d::entities::bullet::~bullet()
 
 void
 sanguis::client::draw2d::entities::bullet::update(
-	time_type const _time
+	sanguis::time_delta const &_time
 )
 {
 	if(

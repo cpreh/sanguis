@@ -1,7 +1,7 @@
 #include "poll.hpp"
 
 sanguis::server::weapons::events::poll::poll(
-	time_type const _time,
+	sanguis::time_delta const &_time,
 	entities::with_weapon &_owner
 )
 :
@@ -9,7 +9,7 @@ sanguis::server::weapons::events::poll::poll(
 	owner_(_owner)
 {}
 	
-sanguis::time_type
+sanguis::time_delta const &
 sanguis::server::weapons::events::poll::time() const
 {
 	return time_;

@@ -1,28 +1,26 @@
 #include "explosion.hpp"
+#include "explosion_particle.hpp"
 #include "explosion_properties.hpp"
 #include "../particle/explosion.hpp"
 #include "../particle/depth.hpp"
 #include "../particle/fade_time_range.hpp"
 #include "../particle/properties.hpp"
-#include "../particle/object.hpp"
 #include "../particle/rotation.hpp"
 #include "../particle/z_ordering.hpp"
 #include "../particle/type_to_string.hpp"
 #include "../center.hpp"
 #include "../speed.hpp"
-#include "../../../load/model/part.hpp"
-#include "../../../load/model/weapon_category.hpp"
-#include "../../../load/model/object.hpp"
-#include "../../../load/model/collection.hpp"
 #include "../../../load/model/animation.hpp"
 #include "../../../load/model/animation_context.hpp"
+#include "../../../load/model/collection.hpp"
+#include "../../../load/model/object.hpp"
+#include "../../../load/model/part.hpp"
+#include "../../../load/model/weapon_category.hpp"
 #include "../../../animation_type.hpp"
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/minmax_pair_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/optional_impl.hpp>
-#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::client::draw2d::entities::explosion::explosion(
@@ -81,7 +79,7 @@ sanguis::client::draw2d::entities::explosion::~explosion()
 
 void
 sanguis::client::draw2d::entities::explosion::update(
-	sanguis::time_type const _delta
+	sanguis::time_delta const &_delta
 )
 {
 	ended_ =
@@ -137,75 +135,31 @@ sanguis::client::draw2d::entities::explosion::generate_particle(
 	particle::particle_type::type const _particle_type
 )
 {
-	load::model::animation_context_ptr anim(
-		model_collection_
-		[
-			FCPPT_TEXT("particles/")
-			+
-			particle::type_to_string(
+	particle::base_ptr ptr(
+		entities::explosion_particle(
+			_particle_type,
+			particle_system_,
+			aoe_,
+			properties_[
 				_particle_type
-			)
-		]
-		.random_part()
-		[
-			weapon_type::none
-		]
-		[
-			animation_type::none
-		].load()
-	);
-	
-	particle::base_ptr ptr;
-	
-	particle::properties const &prop(
-		properties_[
-			_particle_type
-		]
-	);
-
-	if(
-		!prop.do_fade()
-	)
-		ptr.reset(
-			new particle::object(
-				_particle_type,
-				aoe_,
-				move(
-					anim
-				),
-				particle::object::optional_time(),
-				fcppt::ref(
-					particle_system_
+			],
+			model_collection_
+			[
+				FCPPT_TEXT("particles/")
+				+
+				particle::type_to_string(
+					_particle_type
 				)
-			)
-		);
-	else
-	{
-		// FIXME: this should not be here!
-		fcppt::random::uniform<
-			sanguis::time_type
-		>
-		rng(
-			particle::fade_time_range(
-				prop.fade().min(),
-				prop.fade().max()
-			)
-		);
-		
-		ptr.reset(
-			new particle::object(
-				_particle_type,
-				aoe_,
-				move(
-					anim
-				),
-				rng(),
-				fcppt::ref(
-					particle_system_
-				)
-			)
-		);
-	}
+			]
+			.random_part()
+			[
+				weapon_type::none
+			]
+			[
+				animation_type::none
+			].load()
+		)
+	);
 
 	ptr->depth(
 		particle::depth(

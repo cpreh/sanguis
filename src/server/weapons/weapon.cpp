@@ -9,7 +9,10 @@
 #include "../entities/with_weapon.hpp"
 #include "../collision/distance.hpp"
 #include "../../exception.hpp"
+#include "../../time_to_second.hpp"
 #include <sge/time/second_f.hpp>
+#include <fcppt/chrono/duration_arithmetic.hpp>
+#include <fcppt/chrono/duration_comparison.hpp>
 #include <fcppt/math/sphere/basic_impl.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
@@ -32,7 +35,7 @@ sanguis::server::weapons::weapon::type() const
 
 void
 sanguis::server::weapons::weapon::update(
-	time_type const _tm,
+	sanguis::time_delta const &_time,
 	entities::with_weapon &_owner
 )
 {
@@ -43,7 +46,7 @@ sanguis::server::weapons::weapon::update(
 
 	this->process_event(
 		events::poll(
-			_tm,
+			_time,
 			_owner
 		)
 	);
@@ -149,17 +152,23 @@ sanguis::server::weapons::weapon::weapon(
 	magazine_size_(_magazine_size),
 	cast_point_(
 		sge::time::second_f(
-			_cast_point.get()
+			sanguis::time_to_second(
+				_cast_point.get()
+			)
 		)
 	),
 	backswing_time_(
 		sge::time::second_f(
-			_base_cooldown.get() - _cast_point.get()
+			sanguis::time_to_second(
+				_base_cooldown.get() - _cast_point.get()
+			)
 		)
 	),
 	reload_time_(
 		sge::time::second_f(
-			_reload_time.get()
+			sanguis::time_to_second(
+				_reload_time.get()
+			)
 		)
 	),
 	ias_(
@@ -197,13 +206,13 @@ sanguis::server::weapons::weapon::weapon(
 	this->initiate();
 }
 
-sanguis::time_type
+sanguis::server::space_unit
 sanguis::server::weapons::weapon::ias() const
 {
 	return ias_;
 }
 
-sanguis::time_type
+sanguis::server::space_unit
 sanguis::server::weapons::weapon::irs() const
 {
 	return irs_;

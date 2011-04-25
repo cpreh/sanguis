@@ -6,6 +6,7 @@
 #include "../events/poll.hpp"
 #include "../events/stop.hpp"
 #include "../../entities/with_weapon.hpp"
+#include <fcppt/chrono/duration_arithmetic.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/optional_impl.hpp>
 

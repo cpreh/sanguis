@@ -45,12 +45,12 @@ sanguis::server::entities::spawns::spawn::center() const
 
 void
 sanguis::server::entities::spawns::spawn::on_update(
-	time_type const _time
+	sanguis::time_delta const &_time
 )
 {
 	if(
 		size_type const count_ =
-			may_spawn(
+			this->may_spawn(
 				_time
 			)
 	)

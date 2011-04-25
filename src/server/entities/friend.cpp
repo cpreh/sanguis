@@ -59,7 +59,7 @@ sanguis::server::entities::friend_::friend_(
 
 void
 sanguis::server::entities::friend_::on_update(
-	time_type const _time
+	sanguis::time_delta const &_time
 )
 {
 	with_ai::on_update(

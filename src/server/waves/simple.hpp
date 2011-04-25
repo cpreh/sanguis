@@ -4,7 +4,7 @@
 #include "wave.hpp"
 #include "../environment/load_context_fwd.hpp"
 #include "../environment/object_fwd.hpp"
-#include "../../time_type.hpp"
+#include "../../time_delta_fwd.hpp"
 #include "../../enemy_type.hpp"
 #include "../../diff_clock.hpp"
 #include <sge/time/timer.hpp>
@@ -26,8 +26,8 @@ class simple
 	);
 public:
 	simple(
-		time_type delay,
-		time_type spawn_interval,
+		sanguis::time_delta const &delay,
+		sanguis::time_delta const &spawn_interval,
 		unsigned waves,
 		unsigned spawns_per_wave,
 		enemy_type::type
@@ -37,7 +37,7 @@ public:
 private:
 	void
 	process(
-		time_type diff,
+		sanguis::time_delta const &,
 		environment::object &,
 		environment::load_context &
 	);

@@ -2,6 +2,7 @@
 #define SANGUIS_LOAD_RESOURCE_TEXTURE_CONTEXT_IMPL_HPP_INCLUDED
 
 #include "../../diff_clock.hpp"
+#include "../../time_delta_fwd.hpp"
 #include "texture_context_fwd.hpp"
 #include <sge/time/timer.hpp>
 #include <sge/renderer/device_ptr.hpp>
@@ -39,7 +40,7 @@ public:
 
 	void
 	tick(
-		time_type
+		sanguis::time_delta const &
 	);
 
 	sge::texture::part_ptr const

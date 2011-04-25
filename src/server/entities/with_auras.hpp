@@ -4,7 +4,6 @@
 #include "with_ghosts.hpp"
 #include "../auras/aura_fwd.hpp"
 #include "../auras/unique_ptr.hpp"
-#include "../../time_type.hpp"
 #include <fcppt/noncopyable.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
 
@@ -31,11 +30,6 @@ protected:
 	with_auras();
 
 	~with_auras();
-
-	void
-	on_update(
-		sanguis::time_type
-	);
 private:
 	typedef boost::ptr_list<
 		auras::aura

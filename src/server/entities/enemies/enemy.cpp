@@ -79,7 +79,7 @@ sanguis::server::entities::enemies::enemy::etype() const
 
 void
 sanguis::server::entities::enemies::enemy::on_update(
-	time_type const _time
+	sanguis::time_delta const &_time
 )
 {
 	with_ai::on_update(

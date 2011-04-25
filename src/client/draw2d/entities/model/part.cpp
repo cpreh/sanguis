@@ -104,7 +104,7 @@ sanguis::client::draw2d::entities::model::part::weapon(
 
 void
 sanguis::client::draw2d::entities::model::part::update(
-	time_type const _time
+	sanguis::time_delta const &_time
 )
 {
 	anim_diff_clock_.update(

@@ -7,7 +7,7 @@
 #include "../../sprite/rotation.hpp"
 #include "../../../../animation_type.hpp"
 #include "../../../../diff_clock.hpp"
-#include "../../../../time_type.hpp"
+#include "../../../../time_delta_fwd.hpp"
 #include "../../../../weapon_type.hpp"
 #include "../../../../load/model/part_fwd.hpp"
 #include "../../../../load/model/animation_context_fwd.hpp"
@@ -51,7 +51,7 @@ public:
 
 	void
 	update(
-		time_type
+		sanguis::time_delta const &
 	);
 
 	void

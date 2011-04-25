@@ -107,7 +107,7 @@ sanguis::server::entities::pickups::pickup::collision_with_body(
 
 void
 sanguis::server::entities::pickups::pickup::on_update(
-	time_type const _time
+	sanguis::time_delta const &_time
 )
 {
 	diff_clock_.update(

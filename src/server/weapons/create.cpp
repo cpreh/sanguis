@@ -35,7 +35,7 @@ sanguis::server::weapons::create(
 					damage(5),
 					cast_point(0.2f),
 					magazine_size(18),
-					reload_time(2),
+					reload_time(2.f),
 					range(1000)
 				)
 			);
@@ -50,7 +50,7 @@ sanguis::server::weapons::create(
 					damage(5),
 					cast_point(0.2f),
 					magazine_size(36),
-					reload_time(4),
+					reload_time(4.f),
 					range(1000)
 				)
 			);
@@ -61,12 +61,12 @@ sanguis::server::weapons::create(
 					shotgun
 				>(
 					_type,
-					base_cooldown(1),
+					base_cooldown(1.f),
 					static_cast<space_unit>(0.2), // spread radius
 					10u, // shells
 					damage(1),
 					magazine_size(8),
-					reload_time(3)
+					reload_time(3.f)
 				)
 			);
 	case weapon_type::rocket_launcher:
@@ -94,7 +94,7 @@ sanguis::server::weapons::create(
 					damage(20),
 					aoe(180),
 					cast_point(0.1f),
-					reload_time(1)
+					reload_time(1.f)
 				)
 			);
 	case weapon_type::sentry:
@@ -104,9 +104,9 @@ sanguis::server::weapons::create(
 					sentry
 				>(
 					_type,
-					base_cooldown(5),
-					cast_point(2),
-					reload_time(0),
+					base_cooldown(5.f),
+					cast_point(2.f),
+					reload_time(0.f),
 					boost::phoenix::new_<
 						weapons::pistol
 					>(
@@ -115,7 +115,7 @@ sanguis::server::weapons::create(
 						damage(2),
 						cast_point(0.2f),
 						unlimited_magazine_size,
-						reload_time(0),
+						reload_time(0.f),
 						range(1000)
 					)
 				)

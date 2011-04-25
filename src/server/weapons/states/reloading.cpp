@@ -5,6 +5,7 @@
 #include "../events/stop.hpp"
 #include "../events/reset.hpp"
 #include "../../entities/with_weapon.hpp"
+#include <fcppt/chrono/duration_arithmetic.hpp>
 
 sanguis::server::weapons::states::reloading::reloading(
 	my_context _ctx

@@ -16,7 +16,7 @@ sanguis::server::waves::single::~single()
 
 void
 sanguis::server::waves::single::process(
-	time_type const,
+	sanguis::time_delta const &,
 	environment::object &_env,
 	environment::load_context &_load_context
 )

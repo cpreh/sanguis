@@ -8,6 +8,7 @@
 #include "../../damage/full.hpp"
 #include "../../environment/object.hpp"
 #include "../../environment/load_context.hpp"
+#include "../../../time_from_second.hpp"
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
@@ -29,8 +30,10 @@ sanguis::server::entities::projectiles::rocket::rocket(
 		_load_context.entity_dim(
 			FCPPT_TEXT("rocket")
 		),
-		life_time(
-			10
+		projectiles::life_time(
+			sanguis::time_from_second(
+				10.f
+			)
 		),
 		indeterminate::no,
 		_aoe,
@@ -66,7 +69,9 @@ sanguis::server::entities::projectiles::rocket::on_remove()
 				this->aoe(),
 				damage_,
 				1u,
-				static_cast<time_type>(0.1),
+				sanguis::time_from_second(
+					0.1f
+				),
 				damage::list(
 					damage::fire = damage::full
 				)

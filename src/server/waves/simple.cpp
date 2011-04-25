@@ -1,10 +1,11 @@
 #include "simple.hpp"
 #include "spawn.hpp"
+#include "../../time_to_second.hpp"
 #include <sge/time/second_f.hpp>
 
 sanguis::server::waves::simple::simple(
-	time_type const _delay,
-	time_type const _spawn_interval,
+	sanguis::time_delta const &_delay,
+	sanguis::time_delta const &_spawn_interval,
 	unsigned const _waves,
 	unsigned const _spawns_per_wave,
 	enemy_type::type const _etype
@@ -13,14 +14,18 @@ sanguis::server::waves::simple::simple(
 	diff_(),
 	delay_timer_(
 		sge::time::second_f(
-			_delay
+			sanguis::time_to_second(
+				_delay
+			)
 		),
 		sge::time::activation_state::active,
 		diff_.callback()
 	),
 	spawn_timer_(
 		sge::time::second_f(
-			_spawn_interval
+			sanguis::time_to_second(
+				_spawn_interval
+			)
 		),
 		sge::time::activation_state::active,
 		diff_.callback()
@@ -38,7 +43,7 @@ sanguis::server::waves::simple::~simple()
 
 void
 sanguis::server::waves::simple::process(
-	time_type const _diff,
+	sanguis::time_delta const &_diff,
 	environment::object &_env,
 	environment::load_context &_load_context
 )

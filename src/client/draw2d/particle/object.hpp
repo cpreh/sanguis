@@ -11,12 +11,13 @@
 #include "../aoe.hpp"
 #include "../center.hpp"
 #include "../../../diff_clock.hpp"
-#include "../../../time_type.hpp"
+#include "../../../time_delta.hpp"
 #include "../../../load/model/animation_context_ptr.hpp"
 #include <sge/sprite/object_decl.hpp>
-#include <fcppt/scoped_ptr.hpp>
-#include <fcppt/optional_decl.hpp>
+#include <fcppt/chrono/duration_decl.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/optional_decl.hpp>
+#include <fcppt/scoped_ptr.hpp>
 
 namespace sanguis
 {
@@ -36,7 +37,7 @@ class object
 	);
 public:
 	typedef fcppt::optional<
-		sanguis::time_type
+		sanguis::time_delta
 	> optional_time;
 
 	object(
@@ -51,7 +52,7 @@ public:
 
 	bool
 	update(
-		sanguis::time_type,
+		sanguis::time_delta const &,
 		draw2d::center const &,
 		particle::rotation,
 		particle::depth
@@ -69,7 +70,7 @@ private:
 
 	optional_time fade_total_;
 
-	sanguis::time_type fade_remaining_;
+	sanguis::time_delta fade_remaining_;
 };
 
 }

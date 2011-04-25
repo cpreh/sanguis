@@ -7,6 +7,7 @@
 #include "../../weapons/unique_ptr.hpp"
 #include "../../ai/create_simple.hpp"
 #include "../../../exception.hpp"
+#include "../../../time_from_second.hpp"
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
@@ -39,11 +40,23 @@ sanguis::server::entities::enemies::create(
 						weapons::pistol
 					>(
 						weapon_type::pistol,
-						weapons::base_cooldown(1),
+						weapons::base_cooldown(
+							sanguis::time_from_second(
+								1.f
+							)
+						),
 						weapons::damage(1),
-						weapons::cast_point(0),
+						weapons::cast_point(
+							sanguis::time_from_second(
+								0
+							)
+						),
 						weapons::magazine_size(3),
-						weapons::reload_time(15),
+						weapons::reload_time(
+							sanguis::time_from_second(
+								15.f
+							)
+						),
 						weapons::range(1000)
 					)
 				),
@@ -69,7 +82,11 @@ sanguis::server::entities::enemies::create(
 						weapons::melee
 					>(
 						weapons::range(75),
-						weapons::base_cooldown(2),
+						weapons::base_cooldown(
+							sanguis::time_from_second(
+								2.f
+							)
+						),
 						weapons::damage(2)
 					)
 				),
@@ -97,7 +114,11 @@ sanguis::server::entities::enemies::create(
 						weapons::melee
 					>(
 						weapons::range(75),
-						weapons::base_cooldown(1),
+						weapons::base_cooldown(
+							sanguis::time_from_second(
+								1.f
+							)
+						),
 						weapons::damage(4)
 					)
 				),
@@ -123,7 +144,11 @@ sanguis::server::entities::enemies::create(
 						weapons::melee
 					>(
 						weapons::range(100),
-						weapons::base_cooldown(1),
+						weapons::base_cooldown(
+							sanguis::time_from_second(
+								1.f
+							)
+						),
 						weapons::damage(10)
 					)
 				),
@@ -149,7 +174,11 @@ sanguis::server::entities::enemies::create(
 						weapons::melee
 					>(
 						weapons::range(75),
-						weapons::base_cooldown(1),
+						weapons::base_cooldown(
+							sanguis::time_from_second(
+								1.f
+							)
+						),
 						weapons::damage(0.5f)
 					)
 				),
@@ -175,7 +204,11 @@ sanguis::server::entities::enemies::create(
 						weapons::melee
 					>(
 						weapons::range(75),
-						weapons::base_cooldown(2),
+						weapons::base_cooldown(
+							sanguis::time_from_second(
+								2.f
+							)
+						),
 						weapons::damage(5)
 					)
 				),

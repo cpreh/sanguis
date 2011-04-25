@@ -8,7 +8,7 @@
 #include "../../damage/array.hpp"
 #include "../../radius.hpp"
 #include "../../team.hpp"
-#include "../../../time_type.hpp"
+#include "../../../time_delta_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -34,17 +34,12 @@ public:
 		server::radius,
 		damage::unit damage_per_pulse,
 		unsigned pulses,
-		time_type pulse_diff,
+		sanguis::time_delta const &pulse_diff,
 		damage::array const &damage_values
 	);
 
 	~aoe_damage();
 private:
-	void
-	on_update(
-		time_type
-	);
-
 	void
 	do_damage(
 		with_health &

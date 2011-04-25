@@ -14,7 +14,7 @@
 #include "../weapons/unique_ptr.hpp"
 #include "../health.hpp"
 #include "../../friend_type.hpp"
-#include "../../time_type.hpp"
+#include "../../time_delta_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -49,7 +49,7 @@ public:
 private:
 	void
 	on_update(
-		time_type
+		sanguis::time_delta const &
 	);
 
 	entity_type::type

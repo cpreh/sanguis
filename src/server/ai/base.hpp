@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_AI_BASE_HPP_INCLUDED
 
 #include "base_fwd.hpp"
-#include "../../time_type.hpp"
+#include "../../time_delta_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -22,7 +22,7 @@ protected:
 public:
 	virtual void
 	update(
-		time_type
+		sanguis::time_delta const &
 	) = 0;
 	
 	virtual ~base();

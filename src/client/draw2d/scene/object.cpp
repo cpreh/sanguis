@@ -17,6 +17,7 @@
 #include "../../../load/context.hpp"
 #include "../../../messages/call/object.hpp"
 #include "../../../exception.hpp"
+#include "../../../time_from_second.hpp"
 
 #include <sge/image/colors.hpp>
 #include <sge/renderer/device.hpp>
@@ -207,13 +208,15 @@ sanguis::client::draw2d::scene::object::process_message(
 
 void
 sanguis::client::draw2d::scene::object::update(
-	time_type const _delta
+	sanguis::time_delta const &_delta
 )
 {
-	time_type const real_delta(
+	sanguis::time_delta const real_delta(
 		paused_
 		?
-			0
+			sanguis::time_from_second(
+				0
+			)
 		:
 			_delta
 	);

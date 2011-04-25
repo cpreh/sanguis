@@ -6,7 +6,7 @@
 #include "rotation_speed.hpp"
 #include "../center.hpp"
 #include "../speed.hpp"
-#include "../../../time_type.hpp"
+#include "../../../time_delta_fwd.hpp"
 #include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -62,7 +62,7 @@ public:
 
 	virtual bool
 	update(
-		sanguis::time_type,
+		sanguis::time_delta const &,
 		draw2d::center const &,
 		particle::rotation,
 		particle::depth

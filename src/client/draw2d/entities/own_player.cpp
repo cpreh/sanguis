@@ -18,7 +18,7 @@ sanguis::client::draw2d::entities::own_player::~own_player()
 
 void
 sanguis::client::draw2d::entities::own_player::update(
-	time_type const _time
+	sanguis::time_delta const &_time
 )
 {
 	player::update(

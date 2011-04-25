@@ -74,7 +74,7 @@ sanguis::load::resource::textures::load(
 
 void
 sanguis::load::resource::textures::cleanup(
-	time_type const _delta
+	sanguis::time_delta const &_delta
 ) const
 {
 	for(

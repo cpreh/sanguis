@@ -10,10 +10,10 @@
 #include "../movement_speed.hpp"
 #include "../../dim.hpp"
 #include "../../direction.hpp"
+#include "../../../diff_clock.hpp"
 #include "../../../entity_type.hpp"
 #include "../../../projectile_type.hpp"
-#include "../../../time_type.hpp"
-#include "../../../diff_clock.hpp"
+#include "../../../time_delta_fwd.hpp"
 #include "../../../messages/base.hpp"
 #include <sge/time/timer.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -54,7 +54,7 @@ protected:
 	
 	void
 	on_update(
-		time_type
+		sanguis::time_delta const &
 	);
 
 	void

@@ -2,6 +2,7 @@
 #include "../sprite/normal/object.hpp"
 #include "../sprite/normal/parameters.hpp"
 #include "../sprite/index.hpp"
+#include "../../../time_to_second.hpp"
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/sprite/intrusive/system_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
@@ -71,12 +72,16 @@ sanguis::client::draw2d::entities::container::center() const
 
 void
 sanguis::client::draw2d::entities::container::update(
-	time_type const _time
+	sanguis::time_delta const &_time
 )
 {
 	center_ +=
 		draw2d::center(
-			_time * this->speed().get()
+			sanguis::time_to_second(
+				_time
+			)
+			*
+			this->speed().get()
 		);
 
 	this->update_center(

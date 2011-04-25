@@ -208,6 +208,8 @@ SET(
 	src/client/draw2d/entities/container.hpp
 	src/client/draw2d/entities/explosion.cpp
 	src/client/draw2d/entities/explosion.hpp
+	src/client/draw2d/entities/explosion_particle.cpp
+	src/client/draw2d/entities/explosion_particle.hpp
 	src/client/draw2d/entities/explosion_properties.cpp
 	src/client/draw2d/entities/explosion_properties.hpp
 	src/client/draw2d/entities/model/clamp_orientation.cpp
@@ -288,6 +290,7 @@ SET(
 	src/client/draw2d/message/environment.hpp
 	src/client/draw2d/message/environment_fwd.hpp
 	src/client/draw2d/particle/align_type.hpp
+	src/client/draw2d/particle/anim_speed.hpp
 	src/client/draw2d/particle/base.cpp
 	src/client/draw2d/particle/base.hpp
 	src/client/draw2d/particle/base_fwd.hpp
@@ -298,8 +301,13 @@ SET(
 	src/client/draw2d/particle/dispersion_range.hpp
 	src/client/draw2d/particle/explosion.cpp
 	src/client/draw2d/particle/explosion.hpp
+	src/client/draw2d/particle/explosion_callback.hpp
+	src/client/draw2d/particle/fade.hpp
+	src/client/draw2d/particle/fade_range.hpp
 	src/client/draw2d/particle/fade_time_range.hpp
-	src/client/draw2d/particle/fade_type.hpp
+	src/client/draw2d/particle/funit_range.hpp
+	src/client/draw2d/particle/gen_frequency.hpp
+	src/client/draw2d/particle/gen_life_time.hpp
 	src/client/draw2d/particle/generation_callback.hpp
 	src/client/draw2d/particle/generator.cpp
 	src/client/draw2d/particle/generator.hpp
@@ -313,18 +321,20 @@ SET(
 	src/client/draw2d/particle/property_container.hpp
 	src/client/draw2d/particle/property_map.cpp
 	src/client/draw2d/particle/property_map.hpp
+	src/client/draw2d/particle/rot_speed_range.hpp
 	src/client/draw2d/particle/rotation.hpp
 	src/client/draw2d/particle/rotation_from_alignment.cpp
 	src/client/draw2d/particle/rotation_from_alignment.hpp
 	src/client/draw2d/particle/rotation_speed.hpp
-	src/client/draw2d/particle/rotation_velocity_range.hpp
+	src/client/draw2d/particle/spawn_initial.hpp
+	src/client/draw2d/particle/speed_range.hpp
 	src/client/draw2d/particle/type_to_string.cpp
 	src/client/draw2d/particle/type_to_string.hpp
 	src/client/draw2d/particle/uniform_rotation.hpp
 	src/client/draw2d/particle/uniform_velocity_range.hpp
+	src/client/draw2d/particle/unit_range.hpp
 	src/client/draw2d/particle/velocity_from_movement.cpp
 	src/client/draw2d/particle/velocity_from_movement.hpp
-	src/client/draw2d/particle/velocity_range.hpp
 	src/client/draw2d/particle/z_ordering.cpp
 	src/client/draw2d/particle/z_ordering.hpp
 	src/client/draw2d/scene/background.cpp
@@ -1454,7 +1464,13 @@ SET(
 	src/server/world/sight_range_fwd.hpp
 	src/server/world/sight_range_map.hpp
 	src/string_vector.hpp
-	src/time_type.hpp
+	src/time_delta.hpp
+	src/time_delta_fwd.hpp
+	src/time_from_second.cpp
+	src/time_from_second.hpp
+	src/time_to_second.cpp
+	src/time_to_second.hpp
+	src/time_unit.hpp
 	src/to_console_arg_list.cpp
 	src/to_console_arg_list.hpp
 	src/weapon_type.hpp

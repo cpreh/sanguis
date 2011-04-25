@@ -22,7 +22,7 @@
 #include "../probability.hpp"
 #include "../string.hpp"
 #include "../../diff_clock.hpp"
-#include "../../time_type.hpp"
+#include "../../time_delta_fwd.hpp"
 #include "../../world_id.hpp"
 #include "../../weapon_type.hpp"
 #include "../../messages/auto_ptr.hpp"
@@ -59,7 +59,7 @@ public:
 
 	void
 	update(
-		time_type
+		sanguis::time_delta const &
 	);
 
 	void
@@ -173,7 +173,7 @@ private:
 	void
 	update_entity(
 		entity_map::iterator,
-		time_type,
+		sanguis::time_delta const &,
 		bool update_pos
 	);
 

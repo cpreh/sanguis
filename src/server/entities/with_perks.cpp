@@ -53,7 +53,7 @@ sanguis::server::entities::with_perks::~with_perks()
 
 void
 sanguis::server::entities::with_perks::on_update(
-	time_type const _time
+	sanguis::time_delta const &_time
 )
 {
 	BOOST_FOREACH(

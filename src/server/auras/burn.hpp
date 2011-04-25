@@ -7,7 +7,7 @@
 #include "../damage/unit.hpp"
 #include "../entities/with_body_fwd.hpp"
 #include "../radius.hpp"
-#include "../../time_type.hpp"
+#include "../../time_delta.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -29,7 +29,7 @@ public:
 		server::radius,
 		server::team::type team,
 		damage::unit damage_per_pules,
-		sanguis::time_type pulse_diff,
+		sanguis::time_delta const &pulse_diff,
 		damage::array const &
 	);
 
@@ -45,7 +45,7 @@ private:
 		entities::with_body &
 	);
 	
-	sanguis::time_type const pulse_diff_;
+	sanguis::time_delta const pulse_diff_;
 
 	damage::unit const damage_per_pulse_;
 

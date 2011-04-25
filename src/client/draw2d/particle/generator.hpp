@@ -6,16 +6,20 @@
 #include "depth.hpp"
 #include "dispersion_range.hpp"
 #include "generation_callback.hpp"
+#include "gen_frequency.hpp"
+#include "gen_life_time.hpp"
 #include "movement_type.hpp"
 #include "uniform_rotation.hpp"
 #include "uniform_velocity_range.hpp"
 #include "rotation.hpp"
 #include "rotation_speed.hpp"
-#include "rotation_velocity_range.hpp"
-#include "velocity_range.hpp"
+#include "rot_speed_range.hpp"
+#include "spawn_initial.hpp"
+#include "speed_range.hpp"
 #include "../../../diff_clock.hpp"
-#include "../../../time_type.hpp"
+#include "../../../time_delta_fwd.hpp"
 #include <fcppt/random/uniform.hpp>
+#include <fcppt/minmax_pair_decl.hpp>
 #include <sge/time/timer.hpp>
 
 namespace sanguis
@@ -29,7 +33,7 @@ namespace particle
 
 class generator
 :
-	public container
+	public particle::container
 {
 	FCPPT_NONCOPYABLE(
 		generator
@@ -38,22 +42,22 @@ public:
 	generator(
 		particle::generation_callback,
 		draw2d::center const &,
-		sanguis::time_type life_time,
-		sanguis::time_type spawn_frequency,
-		unsigned spawn_initial,
+		particle::gen_life_time const &,
+		particle::gen_frequency const &,
+		particle::spawn_initial,
 		particle::align_type::type,
 		particle::depth,
 		particle::dispersion_range const &,
-		particle::velocity_range const &,
-		particle::rotation_velocity_range const &,
-		movement_type::type
+		particle::speed_range const &,
+		particle::rot_speed_range const &,
+		particle::movement_type::type
 	);
 
 	~generator();
 
 	bool
 	update(
-		sanguis::time_type,
+		sanguis::time_delta const &,
 		draw2d::center const &,
 		particle::rotation,
 		particle::depth
@@ -77,7 +81,7 @@ private:
 	> dispersion_angle_;
 
 	fcppt::random::uniform<
-		dispersion_range::value_type
+		particle::dispersion_range::value_type::value_type
 	> dispersion_value_;
 
 	particle::uniform_rotation velocity_angle_;

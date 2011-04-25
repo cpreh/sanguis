@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_OWN_HPP_INCLUDED
 
 #include "own_fwd.hpp"
-#include "../../../time_type.hpp"
+#include "../../../time_delta_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -24,7 +24,7 @@ protected:
 public:
 	virtual void
 	update(
-		time_type
+		sanguis::time_delta const &
 	) = 0;
 
 	virtual bool

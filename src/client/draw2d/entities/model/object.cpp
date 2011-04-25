@@ -118,7 +118,7 @@ sanguis::client::draw2d::entities::model::object::health() const
 
 void
 sanguis::client::draw2d::entities::model::object::update(
-	time_type const _time
+	sanguis::time_delta const &_time
 )
 {
 	container::update(

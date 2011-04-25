@@ -8,7 +8,7 @@
 #include "../weapons/unique_ptr.hpp"
 #include "../vector.hpp"
 #include "../../weapon_type.hpp"
-#include "../../time_type.hpp"
+#include "../../time_delta_fwd.hpp"
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -39,7 +39,7 @@ protected:
 
 	virtual void
 	on_update(
-		time_type
+		sanguis::time_delta const &
 	);
 public:
 	void

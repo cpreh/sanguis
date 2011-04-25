@@ -5,6 +5,7 @@
 #include "property/subtract.hpp"
 #include "property/initial_max.hpp"
 #include "../environment/object.hpp"
+#include "../../time_to_second.hpp"
 #include <fcppt/tr1/functional.hpp>
 
 void
@@ -107,13 +108,15 @@ sanguis::server::entities::with_health::~with_health()
 
 void
 sanguis::server::entities::with_health::on_update(
-	time_type const _time
+	sanguis::time_delta const &_time
 )
 {
 	entities::property::add(
 		health_,
 		property::from_float(
-			_time
+			sanguis::time_to_second(
+				_time
+			)
 		)
 		* this->regeneration().current()
 	);

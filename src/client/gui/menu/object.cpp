@@ -222,7 +222,7 @@ sanguis::client::gui::menu::object::~object()
 
 void
 sanguis::client::gui::menu::object::process(
-	time_type const _delta
+	sanguis::time_delta const &_delta
 )
 {
 	gui_.update(

@@ -11,7 +11,7 @@
 
 sanguis::client::draw2d::particle::explosion::explosion(
 	particle::property_map const &_properties,
-	explosion::callback const &_callback,
+	particle::explosion_callback const &_callback,
 	draw2d::center const &_center,
 	draw2d::speed const &_speed,
 	particle::depth const _depth,
@@ -59,27 +59,9 @@ sanguis::client::draw2d::particle::explosion::explosion(
 							current_type
 						)
 					),
-					// TODO: make this less explicit (needs to be done in sge)!
-					particle::dispersion_range(
-						static_cast<
-							dispersion_range::value_type
-						>(
-							prop.dispersion().min()
-						),
-						static_cast<
-							dispersion_range::value_type
-						>(
-							prop.dispersion().max()
-						)
-					),
-					particle::velocity_range(
-						prop.speed().min(),
-						prop.speed().max()
-					),
-					particle::rotation_velocity_range(
-						prop.rot_speed().min(),
-						prop.rot_speed().max()
-					),
+					prop.dispersion(),
+					prop.speed(),
+					prop.rot_speed(),
 					prop.movement()
 				)
 			)

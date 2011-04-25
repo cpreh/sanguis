@@ -6,7 +6,7 @@
 #include "../sprite/rotation.hpp"
 #include "../funit.hpp"
 #include "../speed.hpp"
-#include "../../../time_type.hpp"
+#include "../../../time_delta_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -44,7 +44,7 @@ public:
 protected:
 	void
 	update(
-		time_type
+		sanguis::time_delta const &
 	);
 private:
 	using container::orientation;

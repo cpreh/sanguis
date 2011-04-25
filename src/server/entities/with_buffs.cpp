@@ -37,7 +37,7 @@ sanguis::server::entities::with_buffs::~with_buffs()
 
 void
 sanguis::server::entities::with_buffs::on_update(
-	time_type const _time
+	sanguis::time_delta const &_time
 )
 {
 	BOOST_FOREACH(

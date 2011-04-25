@@ -8,6 +8,7 @@
 #include "../../damage/list.hpp"
 #include "../../../load/friend_name.hpp"
 #include "../../../load/context.hpp"
+#include "../../../time_from_second.hpp"
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -67,7 +68,11 @@ sanguis::server::entities::pickups::monster::do_pickup(
 						weapons::melee
 					>(
 						weapons::range(100),
-						weapons::base_cooldown(1),
+						weapons::base_cooldown(
+							sanguis::time_from_second(
+								1.f
+							)
+						),
 						weapons::damage(5)
 					)
 				)

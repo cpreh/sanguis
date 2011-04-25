@@ -25,11 +25,11 @@ sanguis::load::resource::context::animations() const
 
 void
 sanguis::load::resource::context::update(
-	time_type const delta
+	sanguis::time_delta const &_delta
 ) const
 {
 	textures_->cleanup(
-		delta
+		_delta
 	);
 }
 

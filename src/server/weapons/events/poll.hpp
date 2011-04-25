@@ -3,7 +3,7 @@
 
 #include "poll_fwd.hpp"
 #include "../../entities/with_weapon_fwd.hpp"
-#include "../../../time_type.hpp"
+#include "../../../time_delta.hpp"
 #include <fcppt/nonassignable.hpp>
 #include <boost/statechart/event.hpp>
 
@@ -27,17 +27,17 @@ class poll
 	);
 public:
 	poll(
-		time_type,
+		sanguis::time_delta const &,
 		entities::with_weapon &owner
 	);
 	
-	time_type
+	sanguis::time_delta const &
 	time() const;
 
 	entities::with_weapon &
 	owner() const;
 private:
-	time_type const time_;
+	sanguis::time_delta const time_;
 
 	entities::with_weapon &owner_;
 };

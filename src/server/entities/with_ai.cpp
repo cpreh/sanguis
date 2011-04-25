@@ -26,13 +26,9 @@ sanguis::server::entities::with_ai::~with_ai()
 
 void
 sanguis::server::entities::with_ai::on_update(
-	time_type const _time
+	sanguis::time_delta const &_time
 )
 {
-	with_auras::on_update(
-		_time
-	);
-
 	with_weapon::on_update(
 		_time
 	);

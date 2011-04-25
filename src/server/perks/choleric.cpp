@@ -40,7 +40,7 @@ sanguis::server::perks::choleric::~choleric()
 void
 sanguis::server::perks::choleric::update(
 	entities::base &_entity,
-	sanguis::time_type const _time,
+	sanguis::time_delta const &_time,
 	environment::object &_env
 )
 {

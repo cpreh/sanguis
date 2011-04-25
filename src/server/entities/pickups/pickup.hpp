@@ -6,9 +6,10 @@
 #include "../../environment/load_context_fwd.hpp"
 #include "../../dim.hpp"
 #include "../../team.hpp"
-#include "../../../pickup_type.hpp"
-#include "../../../diff_clock.hpp"
 #include "../../../messages/auto_ptr.hpp"
+#include "../../../diff_clock.hpp"
+#include "../../../pickup_type.hpp"
+#include "../../../time_delta_fwd.hpp"
 #include <sge/time/timer.hpp>
 #include <fcppt/optional_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -68,7 +69,7 @@ private:
 
 	void
 	on_update(
-		time_type
+		sanguis::time_delta const &
 	);
 	
 	virtual void

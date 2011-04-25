@@ -14,6 +14,7 @@
 #include "../sprite/index_fwd.hpp"
 #include "../center.hpp"
 #include "../speed.hpp"
+#include "../../../time_delta_fwd.hpp"
 #include <sge/sprite/object_decl.hpp>
 #include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -66,7 +67,7 @@ protected:
 	// entity overrides
 	virtual void
 	update(
-		time_type
+		sanguis::time_delta const &
 	);
 
 	virtual void

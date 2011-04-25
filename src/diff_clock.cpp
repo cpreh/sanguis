@@ -1,7 +1,6 @@
 #include "diff_clock.hpp"
-#include <sge/time/duration.hpp>
+#include "time_to_second.hpp"
 #include <sge/time/second_f.hpp>
-#include <fcppt/chrono/duration_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 
 sanguis::diff_clock::diff_clock()
@@ -16,16 +15,18 @@ sanguis::diff_clock::~diff_clock()
 
 void
 sanguis::diff_clock::update(
-	time_type const _diff
+	sanguis::time_delta const &_diff
 )
 {
 	diff_time_ +=
 		sge::time::second_f(
-			_diff
+			sanguis::time_to_second(
+				_diff
+			)
 		).count();
 }
 
-sanguis::diff_clock::fun_type const
+sge::time::callback const
 sanguis::diff_clock::callback() const
 {
 	return

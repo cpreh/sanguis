@@ -11,6 +11,7 @@
 #include "../sprite/center.hpp"
 #include "../aoe.hpp"
 #include "../../../load/model/collection_fwd.hpp"
+#include "../../../time_delta_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -43,7 +44,7 @@ private:
 	
 	void
 	update(
-		time_type
+		sanguis::time_delta const &
 	);
 
 	bool

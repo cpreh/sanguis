@@ -1,7 +1,7 @@
 #ifndef SANGUIS_LOAD_RESOURCE_CONTEXT_HPP_INCLUDED
 #define SANGUIS_LOAD_RESOURCE_CONTEXT_HPP_INCLUDED
 
-#include "../../time_type.hpp"
+#include "../../time_delta_fwd.hpp"
 #include "../context_fwd.hpp"
 #include "textures_fwd.hpp"
 #include "sounds_fwd.hpp"
@@ -37,7 +37,7 @@ public:
 
 	void
 	update(
-		time_type
+		sanguis::time_delta const &
 	) const;
 private:
 	friend class load::context;

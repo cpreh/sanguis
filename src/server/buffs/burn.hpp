@@ -5,7 +5,7 @@
 #include "../damage/array.hpp"
 #include "../damage/unit.hpp"
 #include "../../diff_clock.hpp"
-#include "../../time_type.hpp"
+#include "../../time_delta_fwd.hpp"
 #include "buff.hpp"
 #include <sge/time/timer.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -27,7 +27,7 @@ class burn
 public:
 	burn(
 		damage::unit,
-		time_type pulse_time,
+		time_delta const &pulse_time,
 		unsigned max_pulses,
 		damage::array const &
 	);
@@ -37,7 +37,7 @@ private:
 	void
 	update(
 		entities::base &,
-		time_type
+		sanguis::time_delta const &
 	);
 
 	damage::unit const damage_;

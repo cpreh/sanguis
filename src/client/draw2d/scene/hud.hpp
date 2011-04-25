@@ -4,7 +4,6 @@
 #include "hud_fwd.hpp"
 #include "../../exp.hpp"
 #include "../../level.hpp"
-#include "../../../time_type.hpp"
 #include <sge/font/metrics_ptr.hpp>
 #include <sge/font/text/drawer_fwd.hpp>
 #include <sge/time/frames_counter.hpp>

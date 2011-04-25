@@ -42,7 +42,7 @@ sanguis::server::entities::spawns::limited::unregister(
 
 sanguis::server::entities::spawns::size_type
 sanguis::server::entities::spawns::limited::may_spawn(
-	time_type const _time
+	sanguis::time_delta const &_time
 )
 {
 	diff_clock_.update(

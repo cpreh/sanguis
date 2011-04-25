@@ -5,6 +5,7 @@
 #include "../perks/perk_fwd.hpp"
 #include "../perks/unique_ptr.hpp"
 #include "../../perk_type.hpp"
+#include "../../time_delta_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
 
@@ -34,7 +35,7 @@ protected:
 
 	void
 	on_update(
-		time_type
+		sanguis::time_delta const &
 	);
 private:
 	typedef boost::ptr_map<

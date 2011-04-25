@@ -17,6 +17,7 @@
 #include "../../speed.hpp"
 #include "../../../health.hpp"
 #include "../../../../animation_type.hpp"
+#include "../../../../time_delta_fwd.hpp"
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
@@ -63,7 +64,7 @@ public:
 protected:
 	virtual void
 	update(
-		time_type
+		sanguis::time_delta const &
 	);
 
 	// with_orientation overrides

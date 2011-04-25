@@ -3,7 +3,7 @@
 
 #include "decay_time_fwd.hpp"
 #include "../../../../diff_clock.hpp"
-#include <sge/time/duration.hpp>
+#include "../../../../time_delta_fwd.hpp"
 #include <sge/time/timer.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -25,14 +25,14 @@ class decay_time
 	);
 public:
 	explicit decay_time(
-		sge::time::duration const &
+		sanguis::time_delta const &
 	);
 
 	~decay_time();
 
 	void
 	update(
-		time_type
+		sanguis::time_delta
 	);
 
 	bool

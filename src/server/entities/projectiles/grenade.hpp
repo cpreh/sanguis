@@ -11,6 +11,7 @@
 #include "../../radius.hpp"
 #include "../../team.hpp"
 #include "../../../diff_clock.hpp"
+#include "../../../time_delta_fwd.hpp"
 #include <sge/time/timer.hpp>
 #include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -55,7 +56,7 @@ private:
 	
 	void
 	on_update(
-		time_type
+		sanguis::time_delta const &
 	);
 	
 	void

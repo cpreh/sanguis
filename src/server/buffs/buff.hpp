@@ -3,7 +3,7 @@
 
 #include "base_hook.hpp"
 #include "../entities/base_fwd.hpp"
-#include "../../time_type.hpp"
+#include "../../time_delta_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -24,7 +24,7 @@ public:
 	virtual void
 	update(
 		entities::base &,
-		time_type
+		sanguis::time_delta const &
 	) = 0;
 
 	bool

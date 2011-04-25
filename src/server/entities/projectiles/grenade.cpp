@@ -11,6 +11,7 @@
 #include "../../collision/distance.hpp"
 #include "../../environment/object.hpp"
 #include "../../environment/load_context.hpp"
+#include "../../../time_from_second.hpp"
 #include <sge/time/millisecond.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
@@ -36,8 +37,10 @@ sanguis::server::entities::projectiles::grenade::grenade(
 		_load_context.entity_dim(
 			FCPPT_TEXT("grenade")
 		),
-		life_time(
-			2
+		projectiles::life_time(
+			sanguis::time_from_second(
+				2.f
+			)
 		),
 		indeterminate::no,
 		_aoe,
@@ -95,7 +98,7 @@ sanguis::server::entities::projectiles::grenade::do_damage(
 
 void
 sanguis::server::entities::projectiles::grenade::on_update(
-	time_type const _time
+	sanguis::time_delta const &_time
 )
 {
 	diff_clock_.update(
@@ -121,13 +124,15 @@ sanguis::server::entities::projectiles::grenade::on_remove()
 	this->environment().insert(
 		entities::unique_ptr(
 			fcppt::make_unique_ptr<
-				aoe_damage
+				projectiles::aoe_damage
 			>(
 				this->team(),
 				this->aoe(),
 				damage_,
 				1u,
-				static_cast<time_type>(0.1),
+				sanguis::time_from_second(
+					0.1f
+				),
 				damage::list(
 					damage::piercing = damage::unit(0.5f)
 				)(

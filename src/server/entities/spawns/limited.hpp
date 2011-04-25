@@ -8,6 +8,7 @@
 #include "spawn.hpp"
 #include "../../../diff_clock.hpp"
 #include "../../../enemy_type.hpp"
+#include "../../../time_delta_fwd.hpp"
 #include <sge/time/timer.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -45,7 +46,7 @@ private:
 
 	size_type
 	may_spawn(
-		time_type
+		sanguis::time_delta const &
 	);
 
 	void
