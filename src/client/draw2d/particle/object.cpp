@@ -118,12 +118,12 @@ sanguis::client::draw2d::particle::object::update(
 	particle::depth const _depth 
 )
 {
-	animation_context_->update();
-
 	if(
 		!animation_
 	)
 	{
+		animation_context_->update();
+
 		if(
 			!animation_context_->is_finished()
 		)
@@ -215,7 +215,11 @@ sanguis::client::draw2d::particle::object::update(
 			(sge::image::color::init::blue %= 1.0)
 			(sge::image::color::init::alpha %=
 				std::max(
-					static_cast<funit>(0),
+					static_cast<
+						draw2d::funit
+					>(
+						0
+					),
 					ratio
 				)
 			)

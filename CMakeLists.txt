@@ -1271,7 +1271,6 @@ SET(
 	src/server/level.hpp
 	src/server/level_calculate.cpp
 	src/server/level_calculate.hpp
-	src/server/load_context.hpp
 	src/server/log.cpp
 	src/server/log.hpp
 	src/server/machine.cpp

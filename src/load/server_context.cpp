@@ -19,13 +19,13 @@ sanguis::load::server_context::~server_context()
 
 sge::renderer::dim2 const
 sanguis::load::server_context::model_dim(
-	fcppt::string const &model_name
+	fcppt::string const &_model_name
 ) const
 {
 	{
 		dim_map::const_iterator const it(
 			dims_.find(
-				model_name
+				_model_name
 			)
 		);
 
@@ -39,7 +39,7 @@ sanguis::load::server_context::model_dim(
 
 	model::parse_json(
 		model::make_path(
-			model_name
+			_model_name
 		),
 		object_return
 	);
@@ -52,7 +52,7 @@ sanguis::load::server_context::model_dim(
 	return_type const ret(
 		dims_.insert(
 			std::make_pair(
-				model_name,
+				_model_name,
 				model::load_dim(
 					model::json_header(
 						object_return.members
