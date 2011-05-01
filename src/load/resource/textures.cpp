@@ -100,19 +100,23 @@ sanguis::load::resource::textures::cleanup(
 }
 
 sanguis::load::resource::textures::textures(
-	sge::renderer::device_ptr const _renderer,
+	sge::renderer::device &_renderer,
 	sge::image2d::multi_loader &_image_loader
 )
 :
+	renderer_(
+		_renderer
+	),
 	texture_manager_(
-		_renderer,
 		boost::phoenix::construct<
 			sge::texture::fragmented_unique_ptr
 		>(
 			boost::phoenix::new_<
 				sge::texture::no_fragmented
 			>(
-				_renderer,
+				fcppt::ref(
+					_renderer
+				),
 				sge::image::color::format::rgba8,
 				filter,
 				sge::renderer::texture::address_mode2(
@@ -263,7 +267,9 @@ sanguis::load::resource::textures::do_load_unnamed(
 			texture_context_impl
 		>(
 			_path,
-			texture_manager_.renderer(),
+			fcppt::ref(
+				renderer_
+			),
 			fcppt::ref(
 				image_loader_
 			),
@@ -279,7 +285,7 @@ sanguis::load::resource::textures::do_load_inner(
 	return
 		sge::texture::add_image(
 			texture_manager_,
-			image_loader_.load(
+			*image_loader_.load(
 				_path
 			)
 		);

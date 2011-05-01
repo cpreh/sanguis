@@ -6,9 +6,9 @@
 #include "textures_fwd.hpp"
 #include "sounds_fwd.hpp"
 #include "animations_fwd.hpp"
-#include <sge/renderer/device_ptr.hpp>
+#include <sge/renderer/device_fwd.hpp>
 #include <sge/image2d/multi_loader_fwd.hpp>
-#include <sge/audio/player_ptr.hpp>
+#include <sge/audio/player_fwd.hpp>
 #include <sge/audio/multi_loader_fwd.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -43,10 +43,10 @@ private:
 	friend class load::context;
 
 	context(
-		sge::renderer::device_ptr,
+		sge::renderer::device &,
 		sge::image2d::multi_loader &,
 		sge::audio::multi_loader &,
-		sge::audio::player_ptr
+		sge::audio::player &
 	);
 
 	~context();

@@ -10,22 +10,49 @@ namespace load
 {
 namespace resource
 {
+
 template<
 	typename Key, 
 	typename Mapped, 
 	typename Comp, 
 	typename Alloc, 
-	typename Fun>
-Mapped& map_get_or_create(
-	std::map<Key, Mapped, Comp, Alloc>& map, 
-	Key const& key, 
-	Fun const& creator)
+	typename Fun
+>
+Mapped &
+map_get_or_create(
+	std::map<Key, Mapped, Comp, Alloc> &_map, 
+	Key const &_key, 
+	Fun const &_creator
+)
 {
-	typename std::map<Key, Mapped, Comp, Alloc>::iterator it = map.find(key);
-	return it != map.end() 
-		? it->second 
-		: map.insert(std::make_pair(key, creator(key))).first->second;
+	typedef typename std::map<
+		Key,
+		Mapped,
+		Comp,
+		Alloc
+	>::iterator iterator;
+	
+	iterator const it(
+		_map.find(
+			_key
+		)
+	);
+
+	return
+		it != _map.end() 
+		?
+			it->second 
+		:
+			_map.insert(
+				std::make_pair(
+					_key,
+					_creator(
+						_key
+					)
+				)
+			).first->second;
 }
+
 }
 }
 }

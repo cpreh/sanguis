@@ -16,7 +16,7 @@
 #include <sge/font/metrics_ptr.hpp>
 #include <sge/time/timer.hpp>
 #include <sge/systems/instance.hpp>
-#include <sge/window/instance_ptr.hpp>
+#include <sge/window/instance_fwd.hpp>
 #include <awl/mainloop/io_service_shared_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
@@ -75,7 +75,7 @@ private:
 
 	client::console::gfx console_gfx_;
 
-	sge::window::instance_ptr const window_;
+	sge::window::instance &window_;
 
 	awl::mainloop::io_service_shared_ptr const io_service_;
 

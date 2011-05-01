@@ -52,8 +52,8 @@
 
 sanguis::client::draw2d::scene::object::object(
 	load::context const &_resources,
-	sge::renderer::device_ptr const _rend,
-	sge::font::metrics_ptr const _font_metrics,
+	sge::renderer::device &_rend,
+	sge::font::metrics &_font_metrics,
 	sge::font::text::drawer &_font_drawer,
 	sge::audio::listener &_audio_listener,
 	std::tm const &_current_time,
@@ -70,7 +70,9 @@ sanguis::client::draw2d::scene::object::object(
 		fcppt::make_unique_ptr<
 			scene::hud
 		>(
-			_font_metrics,
+			fcppt::ref(
+				_font_metrics
+			),
 			fcppt::ref(
 				_font_drawer
 			)
@@ -147,7 +149,7 @@ sanguis::client::draw2d::scene::object::object(
 		)
 	)
 {
-	rend_->material(
+	rend_.material(
 		sge::renderer::material(
 			sge::image::colors::black(),
 			sge::image::colors::white(),
@@ -313,14 +315,14 @@ sanguis::client::draw2d::scene::object::render_systems()
 		>()
 	);
 
-	rend_->transform(
+	rend_.transform(
 		sge::renderer::matrix_mode::projection,
 		sge::sprite::projection_matrix(
 			this->viewport()
 		)
 	);
 
-	rend_->transform(
+	rend_.transform(
 		sge::renderer::matrix_mode::world,
 		default_transform_
 	);
@@ -351,7 +353,7 @@ sanguis::client::draw2d::scene::object::render_systems()
 			sge::sprite::default_equal()
 		);
 
-	rend_->transform(
+	rend_.transform(
 		sge::renderer::matrix_mode::world,
 		default_transform_
 	);
@@ -387,7 +389,7 @@ sanguis::client::draw2d::scene::object::render_lighting()
 		translation
 	);
 
-	rend_->transform(
+	rend_.transform(
 		sge::renderer::matrix_mode::world,
 		default_transform_
 		*
@@ -598,5 +600,5 @@ sanguis::client::draw2d::scene::object::screen_size() const
 sge::renderer::viewport const
 sanguis::client::draw2d::scene::object::viewport() const
 {
-	return rend_->onscreen_target()->viewport();
+	return rend_.onscreen_target().viewport();
 }

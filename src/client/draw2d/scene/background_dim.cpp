@@ -7,13 +7,13 @@
 
 sge::renderer::screen_size const
 sanguis::client::draw2d::scene::background_dim(
-	sge::renderer::device_ptr const _device
+	sge::renderer::device &_device
 )
 {
 	return
 		fcppt::math::dim::structure_cast<
 			sge::renderer::screen_size
 		>(
-			_device->onscreen_target()->viewport().get().size()
+			_device.onscreen_target().viewport().get().size()
 		);
 }

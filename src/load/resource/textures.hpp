@@ -7,7 +7,7 @@
 #include "texture_context.hpp"
 #include <sge/texture/part_ptr.hpp>
 #include <sge/texture/manager.hpp>
-#include <sge/renderer/device_ptr.hpp>
+#include <sge/renderer/device_fwd.hpp>
 #include <sge/image2d/multi_loader_fwd.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -42,7 +42,7 @@ public:
 	) const;
 	
 	textures(
-		sge::renderer::device_ptr,
+		sge::renderer::device &,
 		sge::image2d::multi_loader &
 	);
 
@@ -79,6 +79,8 @@ private:
 		texture_identifier,
 		texture_identifier
 	> texture_name_map;
+
+	sge::renderer::device &renderer_;
 
 	mutable sge::texture::manager texture_manager_;
 

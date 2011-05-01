@@ -4,7 +4,7 @@
 #include "hud_fwd.hpp"
 #include "../../exp.hpp"
 #include "../../level.hpp"
-#include <sge/font/metrics_ptr.hpp>
+#include <sge/font/metrics_fwd.hpp>
 #include <sge/font/text/drawer_fwd.hpp>
 #include <sge/time/frames_counter.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -25,7 +25,7 @@ class hud
 	);
 public:
 	explicit hud(
-		sge::font::metrics_ptr,
+		sge::font::metrics &,
 		sge::font::text::drawer &
 	);
 
@@ -42,7 +42,7 @@ public:
 	void
 	draw();
 private:
-	sge::font::metrics_ptr const font_metrics_;
+	sge::font::metrics &font_metrics_;
 	
 	sge::font::text::drawer &font_drawer_;
 

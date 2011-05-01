@@ -9,7 +9,7 @@
 #include <CEGUI/CEGUIWindow.h>
 
 sanguis::client::gui::menu::connection_box::connection_box(
-	sge::charconv::system_ptr const _charconv_system,
+	sge::charconv::system &_charconv_system,
 	CEGUI::Window &_parent_window,
 	callbacks::cancel_connect const &_cancel_connect,
 	callbacks::retry_connect const &_retry_connect

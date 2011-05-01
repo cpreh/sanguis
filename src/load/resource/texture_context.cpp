@@ -8,15 +8,18 @@ sanguis::load::resource::texture_context::texture_context()
 }
 
 sanguis::load::resource::texture_context::texture_context(
-	texture_context_impl_ptr const &_value)
+	texture_context_impl_ptr const &_value
+)
 :
 	value_(	
-		_value)
+		_value
+	)
 {
 	value_->revive();
 }
 
-sanguis::load::resource::texture_context_impl_ptr const sanguis::load::resource::texture_context::value() const
+sanguis::load::resource::texture_context_impl_ptr const
+sanguis::load::resource::texture_context::value() const
 {
 	return value_;
 }

@@ -54,7 +54,7 @@ sanguis::client::object::object(
 		)
 	),
 	font_metrics_(
-		sys_.font_system()->create_font(
+		sys_.font_system().create_font(
 			sge::config::media_path()
 			/ FCPPT_TEXT("fonts")
 			/ FCPPT_TEXT("default.ttf"),
@@ -71,9 +71,9 @@ sanguis::client::object::object(
 	console_gfx_(
 		console_,
 		sys_.renderer(),
-		font_metrics_,
+		*font_metrics_,
 		sys_.image_loader(),
-		*sys_.keyboard_collector(),
+		sys_.keyboard_collector(),
 		sys_.viewport_manager(),
 		_variables_map[
 			"history-size"
@@ -85,7 +85,7 @@ sanguis::client::object::object(
 		sys_.window()
 	),
 	io_service_(
-		sys_.window()->awl_io_service()
+		sys_.window().awl_io_service()
 	),
 	resources_(
 		sys_.image_loader(),
@@ -113,7 +113,7 @@ sanguis::client::object::object(
 			std::tr1::placeholders::_1
 		),
 		resources_,
-		font_metrics_,
+		*font_metrics_,
 		font_drawer_,
 		console_gfx_.get(),
 		sys_.keyboard_collector(),
@@ -138,7 +138,7 @@ sanguis::client::object::object(
 		).get()
 		> 0
 	)
-		sys_.renderer()->state(
+		sys_.renderer().state(
 			sge::renderer::state::list
 			(
 				sge::renderer::state::bool_::enable_multi_sampling = true
@@ -205,7 +205,7 @@ sanguis::client::object::loop_handler()
 		)
 	)
 	{
-		window_->awl_dispatcher()->stop();
+		window_.awl_dispatcher()->stop();
 
 		io_service_->stop();
 

@@ -71,13 +71,17 @@ sanguis::client::states::running::running(
 			draw2d::scene::object
 		>(
 			context<machine>().resources(),
-			context<machine>().renderer(),
-			context<machine>().font_metrics(),
+			fcppt::ref(
+				context<machine>().renderer()
+			),
+			fcppt::ref(
+				context<machine>().font_metrics()
+			),
 			fcppt::ref(
 				context<machine>().font_drawer()
 			),
 			fcppt::ref(
-				context<machine>().audio_player()->listener()
+				context<machine>().audio_player().listener()
 			),
 			daytime_settings_->current_time(),
 			fcppt::ref(

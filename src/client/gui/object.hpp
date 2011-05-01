@@ -8,10 +8,10 @@
 #include <sge/cegui/default_keyboard.hpp>
 #include <sge/cegui/syringe.hpp>
 #include <sge/cegui/system.hpp>
-#include <sge/renderer/device_ptr.hpp>
+#include <sge/renderer/device_fwd.hpp>
 #include <sge/image2d/multi_loader_fwd.hpp>
-#include <sge/input/keyboard/device_ptr.hpp>
-#include <sge/charconv/system_ptr.hpp>
+#include <sge/input/keyboard/device_fwd.hpp>
+#include <sge/charconv/system_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -29,17 +29,17 @@ class object
 	);
 public:
 	object(
-		sge::renderer::device_ptr,
+		sge::renderer::device &,
 		sge::image2d::multi_loader &,
-		sge::charconv::system_ptr,
+		sge::charconv::system &,
 		sge::viewport::manager &,
-		sge::input::keyboard::device_ptr,
+		sge::input::keyboard::device &,
 		client::cursor::object &
 	);
 	
 	~object();
 
-	sge::charconv::system_ptr const
+	sge::charconv::system &
 	charconv_system() const;
 
 	void
@@ -50,7 +50,7 @@ public:
 		sanguis::time_delta const &
 	);
 private:
-	sge::charconv::system_ptr const charconv_system_;
+	sge::charconv::system &charconv_system_;
 
 	sge::cegui::system system_;
 

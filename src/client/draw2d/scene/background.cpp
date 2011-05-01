@@ -61,7 +61,7 @@ sanguis::client::draw2d::scene::background::background(
 			scene::background_texture_coordinates(
 				draw2d::vector2::null(),
 				client_system_.renderer(),
-				texture_
+				*texture_
 			)
 		)
 		.visible(
@@ -93,7 +93,7 @@ sanguis::client::draw2d::scene::background::render(
 		scene::background_texture_coordinates(
 			_translation,
 			client_system_.renderer(),
-			texture_
+			*texture_
 		)
 	);
 

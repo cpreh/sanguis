@@ -5,13 +5,14 @@
 #include "../sound_type.hpp"
 #include <sge/audio/multi_loader_fwd.hpp>
 #include <sge/audio/exception.hpp>
-#include <sge/audio/player_ptr.hpp>
+#include <sge/audio/player_fwd.hpp>
 #include <sge/audio/buffer_ptr.hpp>
 #include <sge/audio/sound/base_ptr.hpp>
 #include <sge/audio/sound/positional_ptr.hpp>
 #include <sge/audio/sound/positional_parameters.hpp>
 #include <sge/audio/file_ptr.hpp>
 #include <fcppt/filesystem/path.hpp>
+#include <fcppt/function/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <map>
 
@@ -28,9 +29,16 @@ class sounds
 		sounds
 	);
 public:
+	sounds(
+		sge::audio::multi_loader &,
+		sge::audio::player &
+	);
+
+	~sounds();
+
 	sge::audio::file_ptr const
 	load(
-		sound_identifier const &
+		resource::sound_identifier const &
 	) const;
 	
 	sge::audio::file_ptr const
@@ -50,14 +58,22 @@ public:
 		sge::audio::sound::positional_parameters const &,
 		sound_type::type
 	) const;
-
-	sounds(
-		sge::audio::multi_loader &,
-		sge::audio::player_ptr
-	);
-
-	~sounds();
 private:
+	template<
+		typename Ret
+	>
+	Ret const
+	make_impl(
+		sge::audio::file_ptr,
+		sound_type::type,
+		fcppt::function::object<
+			Ret (sge::audio::file &)
+		> const &,
+		fcppt::function::object<
+			Ret (sge::audio::buffer *)
+		> const &
+	) const;
+
 	sge::audio::file_ptr const
 	do_load(
 		sound_identifier const &
@@ -78,7 +94,7 @@ private:
 
 	sge::audio::multi_loader &ml_;
 
-	sge::audio::player_ptr const player_;
+	sge::audio::player &player_;
 
 	mutable sound_map sounds_;
 

@@ -35,14 +35,14 @@ key_scale_value(
 }
 
 sanguis::client::control::input_translator::input_translator(
-	sge::input::keyboard::device_ptr const _keyboard,
+	sge::input::keyboard::device &_keyboard,
 	client::cursor::object &_cursor,
 	actions::callback const &_callback
 )
 :
 	callback_(_callback),
 	key_connection_(
-		_keyboard->key_callback(
+		_keyboard.key_callback(
 			std::tr1::bind(
 				&input_translator::key_callback,
 				this,

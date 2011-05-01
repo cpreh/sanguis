@@ -11,8 +11,8 @@
 sanguis::client::draw2d::sprite::client::texture_coordinates const
 sanguis::client::draw2d::scene::background_texture_coordinates(
 	draw2d::vector2 const &_translation,
-	sge::renderer::device_ptr const _device,
-	sge::texture::const_part_ptr const _texture
+	sge::renderer::device &_device,
+	sge::texture::part const &_texture
 )
 {
 	typedef sprite::client::texture_coordinates coordinates;
@@ -32,7 +32,7 @@ sanguis::client::draw2d::scene::background_texture_coordinates(
 		fcppt::math::dim::structure_cast<
 			pos_type
 		>(
-			_texture->size()
+			_texture.size()
 		)
 	);
 

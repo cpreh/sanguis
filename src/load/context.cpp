@@ -6,9 +6,9 @@
 
 sanguis::load::context::context(
 	sge::image2d::multi_loader &_il,
-	sge::renderer::device_ptr const _rend,
+	sge::renderer::device &_rend,
 	sge::audio::multi_loader &_ml,
-	sge::audio::player_ptr const _ap
+	sge::audio::player &_ap
 )
 :
 	il_(_il),

@@ -24,15 +24,15 @@ namespace
 
 sge::console::sprite_object::dim const
 make_sprite_dim(
-	sge::renderer::device_ptr
+	sge::renderer::device &
 );
 
 }
 
 sanguis::client::console::gfx::gfx(
 	sge::console::object &_console,
-	sge::renderer::device_ptr const _renderer,
-	sge::font::metrics_ptr const _font_metrics,
+	sge::renderer::device &_renderer,
+	sge::font::metrics &_font_metrics,
 	sge::image2d::multi_loader &_image_loader,
 	sge::input::keyboard::device &_keyboard,
 	sge::viewport::manager &_viewport_manager,
@@ -113,11 +113,11 @@ namespace
 
 sge::console::sprite_object::dim const
 make_sprite_dim(
-	sge::renderer::device_ptr const _device
+	sge::renderer::device &_device
 )
 {
 	sge::renderer::pixel_rect::dim const viewport_dim(
-		_device->onscreen_target()->viewport().get().size()
+		_device.onscreen_target().viewport().get().size()
 	);
 
 	return
@@ -135,7 +135,6 @@ make_sprite_dim(
 				2
 			)
 		);
-
 }
 
 }

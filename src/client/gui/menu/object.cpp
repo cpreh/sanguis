@@ -151,7 +151,9 @@ sanguis::client::gui::menu::object::object(
 		fcppt::make_unique_ptr<
 			menu::connection_box
 		>(
-			gui_.charconv_system(),
+			fcppt::ref(
+				gui_.charconv_system()
+			),
 			fcppt::ref(
 				*CEGUI::WindowManager::getSingleton().getWindow(
 					"MainMenu/FrameWindow"

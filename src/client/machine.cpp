@@ -27,14 +27,14 @@ sanguis::client::machine::machine(
 	client::gui::object &_gui,
 	server_callback const &_server_callback,
 	load::context const &_resources,
-	sge::font::metrics_ptr const _font_metrics,
+	sge::font::metrics &_font_metrics,
 	sge::font::text::drawer &_font_drawer,
 	sge::console::gfx &_console_gfx,
-	sge::input::keyboard::device_ptr const _keyboard,
+	sge::input::keyboard::device &_keyboard,
 	client::cursor::object &_cursor,
-	sge::renderer::device_ptr const _renderer,
+	sge::renderer::device &_renderer,
 	sge::image2d::multi_loader &_image_loader,
-	sge::audio::player_ptr const _audio_player,
+	sge::audio::player &_audio_player,
 	awl::mainloop::io_service &_io_service,
 	sge::viewport::manager &_viewport_manager
 )
@@ -199,7 +199,7 @@ sanguis::client::machine::settings()
 	return settings_;
 }
 
-sge::renderer::device_ptr const
+sge::renderer::device &
 sanguis::client::machine::renderer() const
 {
 	return renderer_;
@@ -211,19 +211,19 @@ sanguis::client::machine::image_loader() const
 	return image_loader_;
 }
 
-sge::input::keyboard::device_ptr const
+sge::input::keyboard::device &
 sanguis::client::machine::keyboard() const
 {
 	return keyboard_;
 }
 
-sge::audio::player_ptr const
+sge::audio::player &
 sanguis::client::machine::audio_player() const
 {
 	return audio_player_;
 }
 
-sge::font::metrics_ptr const
+sge::font::metrics &
 sanguis::client::machine::font_metrics() const
 {
 	return font_metrics_;

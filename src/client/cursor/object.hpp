@@ -7,7 +7,7 @@
 #include <sge/input/cursor/move_callback.hpp>
 #include <sge/input/cursor/move_event_fwd.hpp>
 #include <sge/input/cursor/move_signal.hpp>
-#include <sge/input/cursor/object_ptr.hpp>
+#include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/cursor/position.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/connection_manager.hpp>
@@ -29,7 +29,7 @@ class object
 	);
 public:
 	explicit object(
-		sge::input::cursor::object_ptr
+		sge::input::cursor::object &
 	);
 
 	~object();
@@ -55,7 +55,7 @@ public:
 	bool
 	active() const;
 
-	sge::input::cursor::object_ptr const
+	sge::input::cursor::object &
 	get() const;
 private:
 	void
@@ -68,7 +68,7 @@ private:
 		sge::input::cursor::move_event const &
 	);
 
-	sge::input::cursor::object_ptr const cursor_;
+	sge::input::cursor::object &cursor_;
 
 	sge::input::cursor::button_signal button_signal_;
 

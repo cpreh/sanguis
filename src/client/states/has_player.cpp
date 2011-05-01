@@ -35,7 +35,9 @@ sanguis::client::states::has_player::has_player(
 		fcppt::make_unique_ptr<
 			control::input_translator
 		>(
-			context<machine>().keyboard(),
+			fcppt::ref(
+				context<machine>().keyboard()
+			),
 			fcppt::ref(
 				context<machine>().cursor()
 			),

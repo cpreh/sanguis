@@ -34,17 +34,19 @@ sanguis::load::resource::context::update(
 }
 
 sanguis::load::resource::context::context(
-	sge::renderer::device_ptr const _renderer,
+	sge::renderer::device &_renderer,
 	sge::image2d::multi_loader &_image_loader,
 	sge::audio::multi_loader &_audio_loader,
-	sge::audio::player_ptr const _audio_player
+	sge::audio::player &_audio_player
 )
 :
 	textures_(
 		fcppt::make_unique_ptr<
 			resource::textures
 		>(
-			_renderer,
+			fcppt::ref(
+				_renderer
+			),
 			fcppt::ref(
 				_image_loader
 			)
@@ -57,7 +59,9 @@ sanguis::load::resource::context::context(
 			fcppt::ref(
 				_audio_loader
 			),
-			_audio_player
+			fcppt::ref(
+				_audio_player
+			)
 		)
 	),
 	animations_(

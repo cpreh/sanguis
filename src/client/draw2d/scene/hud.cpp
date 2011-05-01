@@ -11,7 +11,7 @@
 #include <fcppt/text.hpp>
 
 sanguis::client::draw2d::scene::hud::hud(
-	sge::font::metrics_ptr const _font_metrics,
+	sge::font::metrics &_font_metrics,
 	sge::font::text::drawer &_font_drawer
 )
 :

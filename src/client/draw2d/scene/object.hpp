@@ -26,9 +26,9 @@
 #include "../../../entity_id.hpp"
 #include "../../../time_delta_fwd.hpp"
 #include <sge/audio/listener_fwd.hpp>
-#include <sge/font/metrics_ptr.hpp>
+#include <sge/font/metrics_fwd.hpp>
 #include <sge/font/text/drawer_fwd.hpp>
-#include <sge/renderer/device_ptr.hpp>
+#include <sge/renderer/device_fwd.hpp>
 #include <sge/renderer/screen_size.hpp>
 #include <sge/renderer/viewport.hpp>
 #include <sge/sprite/intrusive/system_decl.hpp>
@@ -59,8 +59,8 @@ class object
 public:
 	object(
 		load::context const &,
-		sge::renderer::device_ptr,
-		sge::font::metrics_ptr,
+		sge::renderer::device &,
+		sge::font::metrics &,
 		sge::font::text::drawer &,
 		sge::audio::listener &,
 		std::tm const &initial_time,
@@ -163,7 +163,7 @@ private:
 
 	load::context const &resources_;
 
-	sge::renderer::device_ptr const rend_;
+	sge::renderer::device &rend_;
 
 	sprite::normal::system normal_system_;
 

@@ -6,14 +6,14 @@
 #include <fcppt/tr1/functional.hpp>
 
 sanguis::client::cursor::object::object(
-	sge::input::cursor::object_ptr const _cursor
+	sge::input::cursor::object &_cursor
 )
 : 
 	cursor_(_cursor),
 	button_signal_(),
 	move_signal_(),
 	button_connection_(
-		cursor_->button_callback(
+		cursor_.button_callback(
 			std::tr1::bind(
 				&object::on_button,
 				this,
@@ -22,7 +22,7 @@ sanguis::client::cursor::object::object(
 		)
 	),
 	move_connection_(
-		cursor_->move_callback(
+		cursor_.move_callback(
 			std::tr1::bind(
 				&object::on_move,
 				this,
@@ -79,10 +79,10 @@ sanguis::client::cursor::object::active() const
 sge::input::cursor::position const
 sanguis::client::cursor::object::position() const
 {
-	return cursor_->position();
+	return cursor_.position();
 }
 
-sge::input::cursor::object_ptr const
+sge::input::cursor::object &
 sanguis::client::cursor::object::get() const
 {
 	return cursor_;

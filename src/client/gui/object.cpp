@@ -8,11 +8,11 @@
 #include <fcppt/text.hpp>
 
 sanguis::client::gui::object::object(
-	sge::renderer::device_ptr const _renderer,
+	sge::renderer::device &_renderer,
 	sge::image2d::multi_loader &_image_loader,
-	sge::charconv::system_ptr const _charconv_system,
+	sge::charconv::system &_charconv_system,
 	sge::viewport::manager &_viewport_manager,
-	sge::input::keyboard::device_ptr const _keyboard,
+	sge::input::keyboard::device &_keyboard,
 	client::cursor::object &_cursor
 )
 :
@@ -41,11 +41,11 @@ sanguis::client::gui::object::object(
 	),
 	keyboard_(
 		syringe_,
-		*_keyboard
+		_keyboard
 	),
 	cursor_(
 		syringe_,
-		*_cursor.get()
+		_cursor.get()
 	)
 {
 }
@@ -54,7 +54,7 @@ sanguis::client::gui::object::~object()
 {
 }
 
-sge::charconv::system_ptr const
+sge::charconv::system &
 sanguis::client::gui::object::charconv_system() const
 {
 	return charconv_system_;

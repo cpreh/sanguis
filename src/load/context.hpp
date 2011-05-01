@@ -28,9 +28,9 @@ class context
 public:
 	context(
 		sge::image2d::multi_loader &,
-		sge::renderer::device_ptr,
+		sge::renderer::device &,
 		sge::audio::multi_loader &,
-		sge::audio::player_ptr
+		sge::audio::player &
 	);
 
 	~context();
@@ -54,11 +54,11 @@ private:
 
 	sge::image2d::multi_loader &il_;
 
-	sge::renderer::device_ptr const rend_;
+	sge::renderer::device &rend_;
 
 	sge::audio::multi_loader &ml_;
 
-	sge::audio::player_ptr const ap_;
+	sge::audio::player &ap_;
 
 	resource::context const resource_ctx_;
 

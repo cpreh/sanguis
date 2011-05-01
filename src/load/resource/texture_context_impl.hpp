@@ -5,7 +5,7 @@
 #include "../../time_delta_fwd.hpp"
 #include "texture_context_fwd.hpp"
 #include <sge/time/timer.hpp>
-#include <sge/renderer/device_ptr.hpp>
+#include <sge/renderer/device_fwd.hpp>
 #include <sge/renderer/texture/filter/object.hpp>
 #include <sge/image2d/multi_loader_fwd.hpp>
 #include <sge/image2d/file_ptr.hpp>
@@ -30,7 +30,7 @@ class texture_context_impl
 public:
 	texture_context_impl(
 		fcppt::filesystem::path const &,
-		sge::renderer::device_ptr,
+		sge::renderer::device &,
 		sge::image2d::multi_loader &,
 		sge::renderer::texture::filter::object const &
 	);
@@ -67,7 +67,7 @@ private:
 
 	sge::texture::part_ptr texture_result_;
 
-	sge::renderer::device_ptr const rend_;
+	sge::renderer::device &rend_;
 
 	sge::renderer::texture::filter::object const filter_;
 

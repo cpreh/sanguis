@@ -15,7 +15,7 @@
 
 sanguis::load::resource::texture_context_impl::texture_context_impl(
 	fcppt::filesystem::path const &_path,
-	sge::renderer::device_ptr const _rend,
+	sge::renderer::device &_rend,
 	sge::image2d::multi_loader &_il,
 	sge::renderer::texture::filter::object const &_filter
 )

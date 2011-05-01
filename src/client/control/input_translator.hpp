@@ -5,7 +5,7 @@
 #include "actions/callback.hpp"
 #include "actions/nullary_type.hpp"
 #include "../cursor/object_fwd.hpp"
-#include <sge/input/keyboard/device_ptr.hpp>
+#include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/input/keyboard/key_event_fwd.hpp>
 #include <sge/input/cursor/move_event_fwd.hpp>
 #include <sge/input/cursor/button_event_fwd.hpp>
@@ -28,7 +28,7 @@ class input_translator
 	);
 public:
 	input_translator(
-		sge::input::keyboard::device_ptr,
+		sge::input::keyboard::device &,
 		client::cursor::object &,
 		actions::callback const &
 	);
