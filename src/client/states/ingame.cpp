@@ -8,6 +8,7 @@
 #include "../events/action.hpp"
 #include "../events/message.hpp"
 #include "../events/net_error.hpp"
+#include "../events/overlay.hpp"
 #include "../events/render.hpp"
 #include "../events/tick.hpp"
 #include <fcppt/variant/holds_type.hpp>
