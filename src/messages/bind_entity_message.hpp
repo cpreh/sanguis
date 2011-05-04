@@ -6,7 +6,6 @@
 #include "types/message.hpp"
 #include <majutsu/bind.hpp>
 #include <majutsu/placeholder.hpp>
-#include <fcppt/restrict_typedef_struct.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 
 namespace sanguis
@@ -28,10 +27,6 @@ struct bind_entity_message
 			majutsu::placeholder
 		>
 	> type;
-
-	FCPPT_RESTRICT_TYPEDEF_STRUCT(
-		bind_entity_message
-	);
 };
 
 }
