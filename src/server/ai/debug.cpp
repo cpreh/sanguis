@@ -14,8 +14,7 @@
 #include <fcppt/try_dynamic_cast.hpp>
 
 sanguis::server::ai::debug::debug(
-	entities::with_ai &_me,
-	entities::auto_weak_link
+	entities::with_ai &_me
 )
 :
 	me_(_me)

@@ -14,9 +14,6 @@
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <boost/spirit/home/phoenix/core/argument.hpp>
-#include <boost/spirit/home/phoenix/object/construct.hpp>
-#include <boost/spirit/home/phoenix/object/new.hpp>
 
 sanguis::server::entities::pickups::monster::monster(
 	server::environment::load_context &_load_context,
@@ -57,17 +54,6 @@ sanguis::server::entities::pickups::monster::do_pickup(
 				ai::create_simple(
 					_receiver.link()
 				),
-				/*
-				boost::phoenix::construct<
-					ai::unique_ptr
-				>(
-					boost::phoenix::new_<
-						ai::simple
-					>(
-						boost::phoenix::arg_names::arg1,
-						_receiver.link()
-					)
-				),*/
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<
 						weapons::melee
