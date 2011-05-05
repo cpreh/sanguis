@@ -1,8 +1,9 @@
 #include "sentry.hpp"
 #include "delayed_attack.hpp"
-#include "../ai/create_simple.hpp"
+#include "../ai/create_simple_without_owner.hpp"
 #include "../damage/no_armor.hpp"
 #include "../damage/list.hpp"
+#include "../entities/auto_weak_link.hpp"
 #include "../entities/friend.hpp"
 #include "../entities/insert_parameters.hpp"
 #include "../environment/object.hpp"
@@ -59,7 +60,7 @@ sanguis::server::weapons::sentry::do_attack(
 				damage::no_armor(),
 				server::health(100),
 				entities::movement_speed(0),
-				ai::create_simple(),
+				ai::create_simple_without_owner(),
 				weapons::unique_ptr(
 					sentry_weapon_()
 				)

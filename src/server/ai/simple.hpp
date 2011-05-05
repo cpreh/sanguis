@@ -10,6 +10,7 @@
 #include "../../time_delta_fwd.hpp"
 #include <sge/time/timer.hpp>
 #include <fcppt/container/map_decl.hpp>
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -22,6 +23,9 @@ class simple
 :
 	public ai::base 
 {
+	FCPPT_NONCOPYABLE(
+		simple
+	);
 public:
 	simple(
 		entities::with_ai &me,

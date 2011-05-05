@@ -7,7 +7,9 @@
 #include <boost/spirit/home/phoenix/object/new.hpp>
 
 sanguis::server::ai::create_function const
-sanguis::server::ai::create_simple()
+sanguis::server::ai::create_simple(
+	entities::auto_weak_link const &_link
+)
 {
 	return
 		boost::phoenix::construct<
@@ -17,7 +19,7 @@ sanguis::server::ai::create_simple()
 				simple
 			>(
 				boost::phoenix::arg_names::arg1,
-				entities::auto_weak_link()
+				_link
 			)
 		);
 }

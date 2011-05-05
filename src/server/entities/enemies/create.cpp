@@ -5,7 +5,7 @@
 #include "../../weapons/melee.hpp"
 #include "../../weapons/pistol.hpp"
 #include "../../weapons/unique_ptr.hpp"
-#include "../../ai/create_simple.hpp"
+#include "../../ai/create_simple_without_owner.hpp"
 #include "../../../exception.hpp"
 #include "../../../time_from_second.hpp"
 #include <fcppt/container/map_impl.hpp>
@@ -34,7 +34,7 @@ sanguis::server::entities::enemies::create(
 				damage::no_armor(),
 				server::health(9),
 				movement_speed(0.5f),
-				ai::create_simple(),
+				ai::create_simple_without_owner(),
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<
 						weapons::pistol
@@ -76,7 +76,7 @@ sanguis::server::entities::enemies::create(
 				damage::no_armor(),
 				server::health(3),
 				movement_speed(0.4f),
-				ai::create_simple(),
+				ai::create_simple_without_owner(),
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<
 						weapons::melee
@@ -108,7 +108,7 @@ sanguis::server::entities::enemies::create(
 				damage::no_armor(),
 				server::health(3),
 				movement_speed(1.7f),
-				ai::create_simple(),
+				ai::create_simple_without_owner(),
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<
 						weapons::melee
@@ -138,7 +138,7 @@ sanguis::server::entities::enemies::create(
 				damage::no_armor(),
 				server::health(500),
 				movement_speed(1.f),
-				ai::create_simple(),
+				ai::create_simple_without_owner(),
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<
 						weapons::melee
@@ -168,7 +168,7 @@ sanguis::server::entities::enemies::create(
 				damage::no_armor(),
 				server::health(1),
 				movement_speed(0.8f),
-				ai::create_simple(),
+				ai::create_simple_without_owner(),
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<
 						weapons::melee
@@ -198,7 +198,7 @@ sanguis::server::entities::enemies::create(
 				damage::no_armor(),
 				server::health(12),
 				movement_speed(1.5f),
-				ai::create_simple(),
+				ai::create_simple_without_owner(),
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<
 						weapons::melee

@@ -1,7 +1,7 @@
 #include "monster.hpp"
 #include "../insert_parameters_center.hpp"
 #include "../friend.hpp"
-#include "../../ai/simple.hpp"
+#include "../../ai/create_simple.hpp"
 #include "../../weapons/melee.hpp"
 #include "../../environment/object.hpp"
 #include "../../damage/no_armor.hpp"
@@ -9,6 +9,7 @@
 #include "../../../load/friend_name.hpp"
 #include "../../../load/context.hpp"
 #include "../../../time_from_second.hpp"
+#include <fcppt/function/object.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -53,6 +54,10 @@ sanguis::server::entities::pickups::monster::do_pickup(
 				damage::no_armor(),
 				server::health(100),
 				entities::movement_speed(2),
+				ai::create_simple(
+					_receiver.link()
+				),
+				/*
 				boost::phoenix::construct<
 					ai::unique_ptr
 				>(
@@ -62,7 +67,7 @@ sanguis::server::entities::pickups::monster::do_pickup(
 						boost::phoenix::arg_names::arg1,
 						_receiver.link()
 					)
-				),
+				),*/
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<
 						weapons::melee

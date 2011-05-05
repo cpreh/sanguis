@@ -6,11 +6,16 @@
 #include "../entities/with_body.hpp"
 #include "../entities/with_health.hpp"
 #include "../entities/with_velocity.hpp"
+#include "../entities/property/changeable_fwd.hpp"
 #include "../entities/property/current_to_max.hpp"
 #include "../collision/distance.hpp"
+#include "../angle.hpp"
+#include "../direction.hpp"
+#include "../space_unit.hpp"
 #include "../vector.hpp"
 #include <sge/time/second.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/math/vector/signed_angle_cast.hpp>
 #include <fcppt/math/vector/unit_circle.hpp>
@@ -87,7 +92,7 @@ sanguis::server::ai::simple::update(
 		!target_ && !potential_targets_.empty()
 	)
 		target_
-			= search_new_target(
+			= ai::search_new_target(
 				me_,
 				potential_targets_
 			);
@@ -168,7 +173,7 @@ sanguis::server::ai::simple::update(
 	typedef fcppt::optional<
 		server::space_unit
 	> optional_angle;
-	
+
 	optional_angle const angle(
 		fuzzy_target == me_.center().get()
 		?

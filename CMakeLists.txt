@@ -975,6 +975,10 @@ SET(
 	src/server/ai/create_function.hpp
 	src/server/ai/create_simple.cpp
 	src/server/ai/create_simple.hpp
+	src/server/ai/create_simple_without_owner.cpp
+	src/server/ai/create_simple_without_owner.hpp
+	src/server/ai/debug.cpp
+	src/server/ai/debug.hpp
 	src/server/ai/entity_map.hpp
 	src/server/ai/scoped_ptr.hpp
 	src/server/ai/search_new_target.cpp
