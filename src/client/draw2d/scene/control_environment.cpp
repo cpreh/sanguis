@@ -1,10 +1,12 @@
 #include "control_environment.hpp"
 #include "object.hpp"
-#include "../screen_to_virtual.hpp"
+#include "../translate/vector_from_client.hpp"
+#include "../vector2.hpp"
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
 
 sanguis::client::draw2d::scene::control_environment::control_environment(
 	draw2d::scene::object &_object
@@ -24,14 +26,18 @@ sanguis::client::draw2d::scene::control_environment::translate_attack_dest(
 ) const
 {
 	return
-		draw2d::screen_to_virtual(
-			-
-			fcppt::math::dim::structure_cast<
-				sprite::point
+		draw2d::translate::vector_from_client(
+			fcppt::math::vector::structure_cast<
+				draw2d::vector2
 			>(
-				object_.screen_size() / 2u
+				-
+				fcppt::math::dim::structure_cast<
+					sprite::point
+				>(
+					object_.screen_size() / 2u
+				)
+				+ object_.player_center().get()
+				+ _cursor_position
 			)
-			+ object_.player_center().get()
-			+ _cursor_position
 		);
 }

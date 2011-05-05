@@ -357,8 +357,6 @@ SET(
 	src/client/draw2d/scene/object_fwd.hpp
 	src/client/draw2d/scene/screen_center.cpp
 	src/client/draw2d/scene/screen_center.hpp
-	src/client/draw2d/screen_to_virtual.cpp
-	src/client/draw2d/screen_to_virtual.hpp
 	src/client/draw2d/speed.hpp
 	src/client/draw2d/sprite/center.hpp
 	src/client/draw2d/sprite/client/choices.hpp
@@ -414,10 +412,18 @@ SET(
 	src/client/draw2d/sunlight/time_to_gregorian.cpp
 	src/client/draw2d/sunlight/time_to_gregorian.hpp
 	src/client/draw2d/transform_callback.hpp
+	src/client/draw2d/translate/pixels_per_meter.cpp
+	src/client/draw2d/translate/pixels_per_meter.hpp
+	src/client/draw2d/translate/scalar_from_client.cpp
+	src/client/draw2d/translate/scalar_from_client.hpp
+	src/client/draw2d/translate/scalar_to_client.cpp
+	src/client/draw2d/translate/scalar_to_client.hpp
+	src/client/draw2d/translate/vector_from_client.cpp
+	src/client/draw2d/translate/vector_from_client.hpp
+	src/client/draw2d/translate/vector_to_client.cpp
+	src/client/draw2d/translate/vector_to_client.hpp
 	src/client/draw2d/unit.hpp
 	src/client/draw2d/vector2.hpp
-	src/client/draw2d/virtual_to_screen.cpp
-	src/client/draw2d/virtual_to_screen.hpp
 	src/client/draw2d/z_ordering.hpp
 	src/client/events/action.cpp
 	src/client/events/action.hpp

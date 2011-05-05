@@ -17,11 +17,12 @@
 #include "../factory/own_player.hpp"
 #include "../factory/weapon_pickup.hpp"
 #include "../sprite/center.hpp"
+#include "../translate/scalar_to_client.hpp"
+#include "../translate/vector_to_client.hpp"
 #include "../aoe.hpp"
 #include "../log.hpp"
 #include "../speed.hpp"
 #include "../vector2.hpp"
-#include "../virtual_to_screen.hpp"
 #include "../../../messages/base.hpp"
 #include "../../../messages/role_name.hpp"
 #include "../../../cast_enum.hpp"
@@ -67,7 +68,9 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 				_message.get<sanguis::messages::roles::aoe_projectile>()
 			),
 			draw2d::aoe(
-				_message.get<sanguis::messages::roles::aoe>()
+				draw2d::translate::scalar_to_client(
+					_message.get<sanguis::messages::roles::aoe>()
+				)
 			)
 		),
 		_message
@@ -288,8 +291,12 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		)
 	).center(
 		draw2d::sprite::center(
-			draw2d::virtual_to_screen(
-				_message.get<sanguis::messages::roles::center>()
+			fcppt::math::vector::structure_cast<
+				draw2d::sprite::point
+			>(
+				draw2d::translate::vector_to_client(
+					_message.get<sanguis::messages::roles::center>()
+				)
 			)
 		)
 	);
@@ -334,12 +341,8 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		)
 	).speed(
 		draw2d::speed(
-			fcppt::math::vector::structure_cast<
-				draw2d::vector2
-			>(
-				draw2d::virtual_to_screen(
-					_message.get<sanguis::messages::roles::speed>()
-				)
+			draw2d::translate::vector_to_client(
+				_message.get<sanguis::messages::roles::speed>()
 			)
 		)
 	);
