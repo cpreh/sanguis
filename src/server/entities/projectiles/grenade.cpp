@@ -33,7 +33,7 @@ sanguis::server::entities::projectiles::grenade::grenade(
 	aoe_projectile(
 		aoe_projectile_type::grenade,
 		_team,
-		entities::movement_speed(500),
+		entities::movement_speed(10),
 		_load_context.entity_dim(
 			FCPPT_TEXT("grenade")
 		),

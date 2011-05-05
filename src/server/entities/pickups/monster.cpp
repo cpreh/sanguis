@@ -52,7 +52,7 @@ sanguis::server::entities::pickups::monster::do_pickup(
 				this->environment().load_context(),
 				damage::no_armor(),
 				server::health(100),
-				entities::movement_speed(100),
+				entities::movement_speed(2),
 				boost::phoenix::construct<
 					ai::unique_ptr
 				>(
@@ -67,7 +67,7 @@ sanguis::server::entities::pickups::monster::do_pickup(
 					fcppt::make_unique_ptr<
 						weapons::melee
 					>(
-						weapons::range(100),
+						weapons::range(2),
 						weapons::base_cooldown(
 							sanguis::time_from_second(
 								1.f

@@ -105,7 +105,7 @@ sanguis::server::perks::choleric::update(
 						_entity.team(),
 						damage::unit(5), // damage
 						server::radius(
-							80
+							1.6f
 						),
 						direction
 					)

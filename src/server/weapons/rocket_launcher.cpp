@@ -18,7 +18,7 @@ sanguis::server::weapons::rocket_launcher::rocket_launcher(
 :
 	weapon(
 		_type,
-		weapons::range(1000), // FIXME
+		weapons::range(20), // FIXME
 		_magazine_size,
 		unlimited_magazine_count,
 		_base_cooldown,

@@ -962,6 +962,8 @@ SET(
 	src/net/value_type.hpp
 	src/perk_type.hpp
 	src/pickup_type.hpp
+	src/pixels_per_meter.cpp
+	src/pixels_per_meter.hpp
 	src/projectile_type.hpp
 	src/random.cpp
 	src/random.hpp

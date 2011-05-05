@@ -21,7 +21,7 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 		projectile_type::simple_bullet,
 		_team,
 		entities::movement_speed(
-			500
+			10
 		),
 		_load_context.entity_dim(
 			FCPPT_TEXT("bullet")

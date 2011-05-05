@@ -33,7 +33,7 @@ sanguis::server::entities::enemies::create(
 				_load_context,
 				damage::no_armor(),
 				server::health(9),
-				movement_speed(25),
+				movement_speed(0.5f),
 				ai::create_simple(),
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<
@@ -57,7 +57,7 @@ sanguis::server::entities::enemies::create(
 								15.f
 							)
 						),
-						weapons::range(1000)
+						weapons::range(20)
 					)
 				),
 				server::probability(0.25f),
@@ -75,13 +75,13 @@ sanguis::server::entities::enemies::create(
 				_load_context,
 				damage::no_armor(),
 				server::health(3),
-				movement_speed(20),
+				movement_speed(0.4f),
 				ai::create_simple(),
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<
 						weapons::melee
 					>(
-						weapons::range(75),
+						weapons::range(1.5f),
 						weapons::base_cooldown(
 							sanguis::time_from_second(
 								2.f
@@ -107,13 +107,13 @@ sanguis::server::entities::enemies::create(
 				_load_context,
 				damage::no_armor(),
 				server::health(3),
-				movement_speed(85),
+				movement_speed(1.7f),
 				ai::create_simple(),
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<
 						weapons::melee
 					>(
-						weapons::range(75),
+						weapons::range(1.5f),
 						weapons::base_cooldown(
 							sanguis::time_from_second(
 								1.f
@@ -137,13 +137,13 @@ sanguis::server::entities::enemies::create(
 				_load_context,
 				damage::no_armor(),
 				server::health(500),
-				movement_speed(50),
+				movement_speed(1.f),
 				ai::create_simple(),
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<
 						weapons::melee
 					>(
-						weapons::range(100),
+						weapons::range(2.f),
 						weapons::base_cooldown(
 							sanguis::time_from_second(
 								1.f
@@ -167,13 +167,13 @@ sanguis::server::entities::enemies::create(
 				_load_context,
 				damage::no_armor(),
 				server::health(1),
-				movement_speed(40),
+				movement_speed(0.8f),
 				ai::create_simple(),
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<
 						weapons::melee
 					>(
-						weapons::range(75),
+						weapons::range(1.5f),
 						weapons::base_cooldown(
 							sanguis::time_from_second(
 								1.f
@@ -197,13 +197,13 @@ sanguis::server::entities::enemies::create(
 				_load_context,
 				damage::no_armor(),
 				server::health(12),
-				movement_speed(75),
+				movement_speed(1.5f),
 				ai::create_simple(),
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<
 						weapons::melee
 					>(
-						weapons::range(75),
+						weapons::range(1.5f),
 						weapons::base_cooldown(
 							sanguis::time_from_second(
 								2.f

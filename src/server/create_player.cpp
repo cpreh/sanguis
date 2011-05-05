@@ -57,7 +57,7 @@ sanguis::server::create_player(
 			),
 			server::health(100),
 			damage::no_armor(),
-			entities::movement_speed(100),
+			entities::movement_speed(2),
 			_name,
 			_player_id
 		);

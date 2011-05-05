@@ -26,7 +26,7 @@ sanguis::server::entities::projectiles::rocket::rocket(
 	aoe_projectile(
 		aoe_projectile_type::rocket,
 		_team,
-		entities::movement_speed(300),
+		entities::movement_speed(6),
 		_load_context.entity_dim(
 			FCPPT_TEXT("rocket")
 		),

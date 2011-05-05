@@ -36,7 +36,7 @@ sanguis::server::weapons::create(
 					cast_point(0.2f),
 					magazine_size(18),
 					reload_time(2.f),
-					range(1000)
+					range(20)
 				)
 			);
 	case weapon_type::dual_pistol:
@@ -51,7 +51,7 @@ sanguis::server::weapons::create(
 					cast_point(0.2f),
 					magazine_size(36),
 					reload_time(4.f),
-					range(1000)
+					range(20)
 				)
 			);
 	case weapon_type::shotgun:
@@ -78,7 +78,7 @@ sanguis::server::weapons::create(
 					_type,
 					base_cooldown(0.8f),
 					damage(9),
-					aoe(120), 
+					aoe(2.4f), 
 					magazine_size(1),
 					reload_time(1.8f)
 				)
@@ -92,7 +92,7 @@ sanguis::server::weapons::create(
 					_type,
 					base_cooldown(0.7f),
 					damage(20),
-					aoe(180),
+					aoe(3.6f),
 					cast_point(0.1f),
 					reload_time(1.f)
 				)
@@ -116,7 +116,7 @@ sanguis::server::weapons::create(
 						cast_point(0.2f),
 						unlimited_magazine_size,
 						reload_time(0.f),
-						range(1000)
+						range(20)
 					)
 				)
 			);

@@ -17,7 +17,7 @@ sanguis::server::weapons::grenade::grenade(
 :
 	weapon(
 		_type,
-		weapons::range(1000), // FIXME
+		weapons::range(20.f), // FIXME
 		weapons::magazine_size(1),
 		weapons::magazine_count(1),
 		_base_cooldown,

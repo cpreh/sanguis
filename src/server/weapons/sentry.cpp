@@ -21,7 +21,7 @@ sanguis::server::weapons::sentry::sentry(
 	weapon(
 		_type,
 		weapons::range(
-			1000
+			20
 		), // FIXME
 		weapons::magazine_size(
 			1
