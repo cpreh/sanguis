@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CREATOR_GEOMETRY_TEXTURE_NAME_HPP_INCLUDED
 #define SANGUIS_CREATOR_GEOMETRY_TEXTURE_NAME_HPP_INCLUDED
 
-#include <string>
+#include <fcppt/string.hpp>
 
 namespace sanguis
 {
@@ -10,7 +10,7 @@ namespace creator
 namespace geometry
 {
 
-typedef std::string texture_name;
+typedef fcppt::string texture_name;
 
 }
 }
