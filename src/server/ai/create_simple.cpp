@@ -16,7 +16,7 @@ sanguis::server::ai::create_simple(
 			ai::unique_ptr
 		>(
 			boost::phoenix::new_<
-				simple
+				ai::simple
 			>(
 				boost::phoenix::arg_names::arg1,
 				_link

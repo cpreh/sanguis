@@ -2,7 +2,6 @@
 #include "environment.hpp"
 #include "sight_range.hpp"
 #include "context.hpp"
-#include "prop.hpp"
 #include "../collision/body_collision.hpp"
 #include "../entities/base.hpp"
 #include "../entities/with_health.hpp"
@@ -92,7 +91,6 @@ sanguis::server::world::object::object(
 		)
 	),
 	entities_(),
-	props_(),
 	pickup_spawner_(
 		*environment_
 	),

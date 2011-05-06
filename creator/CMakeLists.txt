@@ -15,6 +15,8 @@ SET(
 	include/sanguis/creator/generator/result.hpp
 	include/sanguis/creator/generator/result_fwd.hpp
 	include/sanguis/creator/generator/seed.hpp
+	include/sanguis/creator/generator/serialize.hpp
+	include/sanguis/creator/geometry/depth.hpp
 	include/sanguis/creator/geometry/polygon.hpp
 	include/sanguis/creator/geometry/rect.hpp
 	include/sanguis/creator/geometry/shape.hpp
@@ -37,6 +39,17 @@ SET(
 	src/generator/parameters.cpp
 	src/generator/randgen.cpp
 	src/generator/result.cpp
+	src/generator/serialization/polygon.cpp
+	src/generator/serialization/polygon.hpp
+	src/generator/serialization/result.cpp
+	src/generator/serialization/result.hpp
+	src/generator/serialization/shape.cpp
+	src/generator/serialization/shape.hpp
+	src/generator/serialization/shape_container.cpp
+	src/generator/serialization/shape_container.hpp
+	src/generator/serialization/vertex.cpp
+	src/generator/serialization/vertex.hpp
+	src/generator/serialize.cpp
 	src/geometry/shape.cpp
 	src/geometry/vertex.cpp
 )
@@ -54,4 +67,10 @@ ADD_LIBRARY(
 	sanguiscreator
 	SHARED
 	${SANGUIS_CREATOR_FILES}
+)
+
+TARGET_LINK_LIBRARIES(
+	sanguiscreator
+	${FCPPT_LIBRARY}
+	${SGE_parse_LIBRARY}
 )

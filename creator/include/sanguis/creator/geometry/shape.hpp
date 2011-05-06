@@ -2,6 +2,7 @@
 #define SANGUIS_CREATOR_GEOMETRY_SHAPE_HPP_INCLUDED
 
 #include <sanguis/creator/geometry/shape_fwd.hpp>
+#include <sanguis/creator/geometry/depth.hpp>
 #include <sanguis/creator/geometry/polygon.hpp>
 #include <sanguis/creator/geometry/solidity.hpp>
 #include <sanguis/creator/geometry/texture_name.hpp>
@@ -23,6 +24,7 @@ public:
 	shape(
 		geometry::polygon const &,
 		geometry::solidity::type,
+		geometry::depth,
 		geometry::texture_name const &
 	);
 
@@ -35,12 +37,18 @@ public:
 	solidity() const;
 
 	SANGUIS_CREATOR_SYMBOL
+	geometry::depth const
+	depth() const;
+
+	SANGUIS_CREATOR_SYMBOL
 	geometry::texture_name const &
 	texture_name() const;
 private:
 	geometry::polygon polygon_;
 
 	geometry::solidity::type solidity_;
+
+	geometry::depth depth_;
 
 	geometry::texture_name texture_name_;
 };

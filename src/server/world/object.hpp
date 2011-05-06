@@ -4,7 +4,6 @@
 #include "object_fwd.hpp"
 #include "context_fwd.hpp"
 #include "environment_fwd.hpp"
-#include "prop_container.hpp"
 #include "entity_map.hpp"
 #include "sight_range_map.hpp"
 #include "../entities/unique_ptr.hpp"
@@ -204,8 +203,6 @@ private:
 	environment_scoped_ptr const environment_;
 
 	entity_map entities_;
-
-	prop_container props_;
 
 	server::pickup_spawner pickup_spawner_;
 

@@ -3,7 +3,6 @@
 #include "../ai/create_simple_without_owner.hpp"
 #include "../damage/no_armor.hpp"
 #include "../damage/list.hpp"
-#include "../entities/auto_weak_link.hpp"
 #include "../entities/friend.hpp"
 #include "../entities/insert_parameters.hpp"
 #include "../environment/object.hpp"

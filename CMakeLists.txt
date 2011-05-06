@@ -1464,9 +1464,6 @@ SET(
 	src/server/world/object.hpp
 	src/server/world/object_fwd.hpp
 	src/server/world/object_unique_ptr.hpp
-	src/server/world/prop.hpp
-	src/server/world/prop_container.hpp
-	src/server/world/prop_fwd.hpp
 	src/server/world/random.cpp
 	src/server/world/random.hpp
 	src/server/world/sight_range.cpp
