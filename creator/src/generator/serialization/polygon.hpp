@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CREATOR_GENERATOR_SERIALIZATION_POLYGON_HPP_INCLUDED
 #define SANGUIS_CREATOR_GENERATOR_SERIALIZATION_POLYGON_HPP_INCLUDED
 
-#include <sanguis/creator/geometry/polygon.hpp>
+#include <sanguis/creator/geometry/polygon_fwd.hpp>
 #include <sge/parse/json/array_fwd.hpp>
 
 namespace sanguis

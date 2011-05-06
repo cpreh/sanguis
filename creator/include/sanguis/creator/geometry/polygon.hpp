@@ -1,22 +1,7 @@
 #ifndef SANGUIS_CREATOR_GEOMETRY_POLYGON_HPP_INCLUDED
 #define SANGUIS_CREATOR_GEOMETRY_POLYGON_HPP_INCLUDED
 
-#include <sanguis/creator/geometry/vertex_fwd.hpp>
-#include <vector>
-
-namespace sanguis
-{
-namespace creator
-{
-namespace geometry
-{
-
-typedef std::vector<
-	geometry::vertex
-> polygon;
-
-}
-}
-}
+#include <sanguis/creator/geometry/polygon_fwd.hpp>
+#include <sanguis/creator/geometry/vertex.hpp>
 
 #endif

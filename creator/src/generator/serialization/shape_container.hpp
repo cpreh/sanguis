@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CREATOR_GENERATOR_SERIALIZATION_SHAPE_CONTAINER_HPP_INCLUDED
 #define SANGUIS_CREATOR_GENERATOR_SERIALIZATION_SHAPE_CONTAINER_HPP_INCLUDED
 
-#include <sanguis/creator/geometry/shape_container.hpp>
+#include <sanguis/creator/geometry/shape_container_fwd.hpp>
 #include <sge/parse/json/array_fwd.hpp>
 
 namespace sanguis

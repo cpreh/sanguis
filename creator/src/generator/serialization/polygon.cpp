@@ -1,7 +1,6 @@
 #include "polygon.hpp"
 #include "vertex.hpp"
 #include <sanguis/creator/geometry/polygon.hpp>
-#include <sanguis/creator/geometry/vertex.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/element_vector.hpp>
 #include <sge/parse/json/object.hpp>

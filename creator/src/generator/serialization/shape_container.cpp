@@ -1,6 +1,6 @@
 #include "shape_container.hpp"
 #include "shape.hpp"
-#include <sanguis/creator/geometry/shape.hpp>
+#include <sanguis/creator/geometry/shape_container.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/element_vector.hpp>
 #include <sge/parse/json/object.hpp>

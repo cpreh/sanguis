@@ -1,6 +1,7 @@
 #include "shape.hpp"
 #include "polygon.hpp"
 #include <sanguis/creator/geometry/shape.hpp>
+#include <sge/parse/json/convert/from_enum.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/int_type.hpp>
 #include <sge/parse/json/member.hpp>
@@ -29,9 +30,7 @@ sanguis::creator::generator::serialization::shape(
 			(
 				sge::parse::json::member(
 					FCPPT_TEXT("solidity"),
-					static_cast<
-						sge::parse::json::int_type
-					>(
+					sge::parse::json::convert::from_enum(
 						_shape.solidity()
 					)
 				)

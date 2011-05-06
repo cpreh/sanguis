@@ -4,7 +4,9 @@ INCLUDE_DIRECTORIES(
 
 SET(
 	SANGUIS_CREATOR_INCLUDE_FILES
+	include/sanguis/creator/exception.hpp
 	include/sanguis/creator/generator/car_park.hpp
+	include/sanguis/creator/generator/deserialize.hpp
 	include/sanguis/creator/generator/opening.hpp
 	include/sanguis/creator/generator/opening_container.hpp
 	include/sanguis/creator/generator/parameters.hpp
@@ -18,9 +20,11 @@ SET(
 	include/sanguis/creator/generator/serialize.hpp
 	include/sanguis/creator/geometry/depth.hpp
 	include/sanguis/creator/geometry/polygon.hpp
+	include/sanguis/creator/geometry/polygon_fwd.hpp
 	include/sanguis/creator/geometry/rect.hpp
 	include/sanguis/creator/geometry/shape.hpp
 	include/sanguis/creator/geometry/shape_container.hpp
+	include/sanguis/creator/geometry/shape_container_fwd.hpp
 	include/sanguis/creator/geometry/shape_fwd.hpp
 	include/sanguis/creator/geometry/solidity.hpp
 	include/sanguis/creator/geometry/texture_name.hpp
@@ -35,7 +39,19 @@ SET(
 
 SET(
 	SANGUIS_CREATOR_SRC_FILES
+	src/exception.cpp
 	src/generator/car_park.cpp
+	src/generator/deserialization/polygon.cpp
+	src/generator/deserialization/polygon.hpp
+	src/generator/deserialization/result.cpp
+	src/generator/deserialization/result.hpp
+	src/generator/deserialization/shape.cpp
+	src/generator/deserialization/shape.hpp
+	src/generator/deserialization/shape_container.cpp
+	src/generator/deserialization/shape_container.hpp
+	src/generator/deserialization/vertex.cpp
+	src/generator/deserialization/vertex.hpp
+	src/generator/deserialize.cpp
 	src/generator/parameters.cpp
 	src/generator/randgen.cpp
 	src/generator/result.cpp
@@ -71,6 +87,7 @@ ADD_LIBRARY(
 
 TARGET_LINK_LIBRARIES(
 	sanguiscreator
-	${FCPPT_LIBRARY}
+	${FCPPT_LIBRARIES}
+	${SGE_CORE_LIBRARY}
 	${SGE_parse_LIBRARY}
 )

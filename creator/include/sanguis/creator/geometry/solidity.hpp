@@ -13,7 +13,8 @@ namespace solidity
 enum type
 {
 	solid,
-	non_solid
+	non_solid,
+	size
 };
 }
 
