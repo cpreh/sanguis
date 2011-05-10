@@ -50,7 +50,7 @@ sanguis::server::ai::simple::simple(
 				auras::aggro
 			>(
 				server::radius(
-					1000.f // TODO
+					20.f // TODO
 				),
 				me_.team(),
 				std::tr1::bind(
