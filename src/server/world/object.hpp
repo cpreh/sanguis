@@ -25,7 +25,9 @@
 #include "../../world_id.hpp"
 #include "../../weapon_type.hpp"
 #include "../../messages/auto_ptr.hpp"
+#include <sanguis/creator/generator/result_fwd.hpp>
 #include <sge/projectile/world_fwd.hpp>
+#include <sge/projectile/body/object_fwd.hpp>
 #include <sge/time/timer.hpp>
 #include <fcppt/container/map_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
@@ -51,7 +53,8 @@ public:
 	object(
 		world::context &,
 		server::environment::load_context &,
-		server::console &
+		server::console &,
+		sanguis::creator::generator::result const &
 	);
 
 	~object();
@@ -192,7 +195,7 @@ private:
 
 	sight_range_map sight_ranges_;
 
-	diff_clock diff_clock_;
+	sanguis::diff_clock diff_clock_;
 
 	sge::time::timer send_timer_;
 
@@ -207,6 +210,12 @@ private:
 	server::pickup_spawner pickup_spawner_;
 
 	waves::generator wave_gen_; // TODO: this doesn't belong here, only for testing!
+
+	typedef fcppt::scoped_ptr<
+		sge::projectile::body::object
+	> collision_body_scoped_ptr;
+
+	collision_body_scoped_ptr static_body_;
 };
 
 }

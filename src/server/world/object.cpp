@@ -1,7 +1,8 @@
 #include "object.hpp"
+#include "context.hpp"
+#include "create_static_body.hpp"
 #include "environment.hpp"
 #include "sight_range.hpp"
-#include "context.hpp"
 #include "../collision/body_collision.hpp"
 #include "../entities/base.hpp"
 #include "../entities/with_health.hpp"
@@ -29,6 +30,8 @@
 #include "../../load/model/object.hpp"
 #include "../../exception.hpp"
 #include "../../time_to_second.hpp"
+#include <sanguis/creator/generator/result.hpp>
+#include <sge/projectile/body/object.hpp>
 #include <sge/projectile/time_increment.hpp>
 #include <sge/projectile/world.hpp>
 #include <sge/time/second_f.hpp>
@@ -47,7 +50,8 @@
 sanguis::server::world::object::object(
 	world::context &_global_context,
 	server::environment::load_context &_load_context,
-	server::console &_console
+	server::console &_console,
+	sanguis::creator::generator::result const &_generated_world
 )
 :
 	global_context_(
@@ -97,6 +101,11 @@ sanguis::server::world::object::object(
 	),
 	wave_gen_(
 		_console
+	),
+	static_body_(
+		world::create_static_body(
+			_generated_world.shapes()
+		)
 	)
 {
 }

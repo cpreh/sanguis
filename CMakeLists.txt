@@ -78,6 +78,9 @@ FIND_PACKAGE(
 
 INCLUDE_DIRECTORIES(${CEGUI_INCLUDE_DIRS})
 
+
+INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/creator/include)
+
 SET(
 	MEDIA_PATH
 	${CMAKE_INSTALL_PREFIX}/share/games/sanguis/media
@@ -1454,6 +1457,8 @@ SET(
 	src/server/world/context.cpp
 	src/server/world/context.hpp
 	src/server/world/context_fwd.hpp
+	src/server/world/create_static_body.cpp
+	src/server/world/create_static_body.hpp
 	src/server/world/entity_map.cpp
 	src/server/world/entity_map.hpp
 	src/server/world/environment.cpp
@@ -1496,6 +1501,7 @@ ADD_EXECUTABLE(
 
 TARGET_LINK_LIBRARIES(
 	sanguis
+	sanguiscreator
 	${FCPPT_LIBRARIES}
 	${AWL_LIBRARY}
 	${SGE_LIBRARIES}
