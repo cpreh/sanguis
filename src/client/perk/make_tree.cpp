@@ -12,7 +12,6 @@
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/assert.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <boost/foreach.hpp>
 
 namespace
 {
@@ -46,9 +45,12 @@ sanguis::client::perk::make_tree(
 		)
 	);
 
-	BOOST_FOREACH(
-		messages::perk_tree_node_list::const_reference cur,
-		_list
+	for(
+		messages::perk_tree_node_list::const_iterator it(
+			_list.begin()
+		);
+		it != _list.end();
+		++it
 	)
 	{
 		typedef fcppt::container::tree::pre_order<
@@ -66,7 +68,7 @@ sanguis::client::perk::make_tree(
 				client::perk::compare(
 					SANGUIS_CAST_ENUM(
 						perk_type,
-						cur.get<
+						it->get<
 							messages::roles::perk_label
 						>()
 					)
@@ -76,19 +78,26 @@ sanguis::client::perk::make_tree(
 
 		pos->value(
 			::make_info(
-				cur
+				*it
 			)
 		);
 
-		BOOST_FOREACH(
-			messages::types::enum_vector::const_reference child,
-			cur.get<messages::roles::perk_children>()
+		messages::types::enum_vector const &children(
+			it->get<messages::roles::perk_children>()
+		);
+
+		for(
+			messages::types::enum_vector::const_iterator child_it(
+				children.begin()
+			);
+			child_it != children.end();
+			++child_it
 		)
 			pos->push_back(
 				perk::info(
 					SANGUIS_CAST_ENUM(
 						perk_type,
-						child	
+						*child_it
 					)
 				)
 			);

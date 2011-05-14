@@ -24,7 +24,6 @@
 #include <fcppt/log/verbose.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
-#include <boost/foreach.hpp>
 
 sanguis::server::machine::machine(
 	load::context_base const &_resources,
@@ -122,11 +121,22 @@ sanguis::server::machine::send_to_all(
 		temp_buffer_
 	);
 
-	BOOST_FOREACH(
-		net::server::connection_id_container::value_type id,
+	net::server::connection_id_container const &connections(
 		net_.connections()
+	);
+
+	for(
+		net::server::connection_id_container::const_iterator it(
+			connections.begin()
+		);
+		it != connections.end();
+		++it
 	)
 	{
+		net::id const id(
+			*it
+		);
+
 		if(
 			!net::append_to_circular_buffer(
 				*net_.send_buffer(
