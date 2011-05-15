@@ -14,19 +14,17 @@ namespace sanguis
 namespace messages
 {
 
-typedef majutsu::composite<
-	boost::mpl::vector2<
-		make_message_id<
-			types::message::client_info
-		>::type,
-		majutsu::role<
-			string
+typedef messages::make_class<
+	majutsu::composite<
+		boost::mpl::vector2<
+			messages::make_message_id<
+				types::message::client_info
+			>::type,
+			majutsu::role<
+				messages::string
+			>
 		>
-	>
-> client_info_elements;
-
-typedef make_class<
-	client_info_elements
+	> 
 >::type client_info;
 
 }

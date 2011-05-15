@@ -12,16 +12,17 @@
 #include "../message_convert/rotate.hpp"
 #include "../message_convert/move.hpp"
 #include "../message_convert/health.hpp"
-#include "../../messages/create.hpp"
-#include "../../messages/remove.hpp"
-#include "../../messages/die.hpp"
 #include "../../messages/change_weapon.hpp"
+#include "../../messages/change_world.hpp"
+#include "../../messages/create.hpp"
+#include "../../messages/die.hpp"
 #include "../../messages/experience.hpp"
 #include "../../messages/give_weapon.hpp"
 #include "../../messages/level_up.hpp"
+#include "../../messages/remove.hpp"
 #include "../../messages/start_attacking.hpp"
-#include "../../messages/stop_attacking.hpp"
 #include "../../messages/start_reloading.hpp"
+#include "../../messages/stop_attacking.hpp"
 #include "../../messages/stop_reloading.hpp"
 #include "../../messages/max_health.hpp"
 #include "../../messages/types/exp.hpp"
@@ -39,21 +40,29 @@
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/math/box/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/utf8/convert.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/assert.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
-#include <boost/foreach.hpp>
 
 sanguis::server::world::object::object(
+	sanguis::world_id const _id,
 	world::context &_global_context,
 	server::environment::load_context &_load_context,
 	server::console &_console,
 	sanguis::creator::generator::result const &_generated_world
 )
 :
+	id_(_id),
+	seed_(
+		_generated_world.seed()
+	),
+	generator_name_(
+		_generated_world.name()
+	),
 	global_context_(
 		_global_context
 	),
@@ -201,6 +210,24 @@ sanguis::server::world::object::insert(
 		collision_groups_,
 		_insert_parameters
 	);
+
+	FCPPT_TRY_DYNAMIC_CAST(
+		entities::player const *,
+		player_ret,
+		ret.first->second
+	)
+		this->send_player_specific(
+			player_ret->player_id(),
+			messages::create(
+				messages::change_world(
+					id_,
+					seed_,
+					fcppt::utf8::convert(
+						generator_name_.get()
+					)
+				)
+			)
+		);
 }
 
 sanguis::server::environment::object &
@@ -548,17 +575,20 @@ sanguis::server::world::object::send_entity_specific(
 	messages::auto_ptr _msg
 )
 {
-	BOOST_FOREACH(
-		sight_range_map::const_reference range,
-		sight_ranges_
+	for(
+		sight_range_map::const_iterator it(
+			sight_ranges_.begin()
+		);
+		it != sight_ranges_.end();
+		++it
 	)
 		if(
-			range.second.contains(
+			it->second.contains(
 				_id
 			)
 		)
 			global_context_.send_to_player(
-				range.first,
+				it->first,
 				_msg
 			);
 }

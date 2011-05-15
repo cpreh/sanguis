@@ -23,6 +23,7 @@ enum type
 	add_weapon_pickup,
 	available_perks,
 	change_weapon,
+	change_world,
 	client_info,
 	connect_state,
 	console_command,

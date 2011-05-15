@@ -2,6 +2,8 @@
 #define SANGUIS_CREATOR_GENERATOR_RESULT_HPP_INCLUDED
 
 #include <sanguis/creator/generator/result_fwd.hpp>
+#include <sanguis/creator/generator/name.hpp>
+#include <sanguis/creator/generator/seed.hpp>
 #include <sanguis/creator/geometry/shape_container.hpp>
 #include <sanguis/creator/geometry/shape.hpp>
 #include <sanguis/creator/symbol.hpp>
@@ -22,14 +24,28 @@ class result
 public:
 	SANGUIS_CREATOR_SYMBOL
 	result(
-		geometry::shape_container const &
+		geometry::shape_container const &,
+		generator::seed const &,
+		generator::name const &
 	);
 
 	SANGUIS_CREATOR_SYMBOL
 	geometry::shape_container const &
 	shapes() const;
+
+	SANGUIS_CREATOR_SYMBOL
+	generator::seed const
+	seed() const;
+
+	SANGUIS_CREATOR_SYMBOL
+	generator::name const &
+	name() const;
 private:
 	geometry::shape_container const shapes_;
+
+	generator::seed const seed_;
+
+	generator::name const name_;
 };
 
 }

@@ -721,6 +721,8 @@ SET(
 	src/messages/call/object.hpp
 	src/messages/change_weapon.cpp
 	src/messages/change_weapon.hpp
+	src/messages/change_world.cpp
+	src/messages/change_world.hpp
 	src/messages/char_type.hpp
 	src/messages/client_info.cpp
 	src/messages/client_info.hpp
@@ -807,6 +809,7 @@ SET(
 	src/messages/roles/error_message.hpp
 	src/messages/roles/experience.hpp
 	src/messages/roles/friend.hpp
+	src/messages/roles/generator_name.hpp
 	src/messages/roles/health.hpp
 	src/messages/roles/max_health.hpp
 	src/messages/roles/max_perk_level.hpp
@@ -822,6 +825,7 @@ SET(
 	src/messages/roles/weapon.hpp
 	src/messages/rotate.cpp
 	src/messages/rotate.hpp
+	src/messages/seed.hpp
 	src/messages/serialization/context.cpp
 	src/messages/serialization/context.hpp
 	src/messages/serialization/context_fwd.hpp
@@ -884,6 +888,7 @@ SET(
 	src/messages/unpause.cpp
 	src/messages/unpause.hpp
 	src/messages/vector2.hpp
+	src/messages/world_id.hpp
 	src/net/append_to_circular_buffer.cpp
 	src/net/append_to_circular_buffer.hpp
 	src/net/asio.cpp

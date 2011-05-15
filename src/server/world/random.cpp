@@ -62,6 +62,7 @@ sanguis::server::world::random(
 		fcppt::make_unique_ptr<
 			object
 		>(
+			sanguis::world_id(0), // FIXME!
 			fcppt::ref(
 				_ctx
 			),

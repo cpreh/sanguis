@@ -25,7 +25,9 @@
 #include "../../world_id.hpp"
 #include "../../weapon_type.hpp"
 #include "../../messages/auto_ptr.hpp"
+#include <sanguis/creator/generator/name.hpp>
 #include <sanguis/creator/generator/result_fwd.hpp>
+#include <sanguis/creator/generator/seed.hpp>
 #include <sge/projectile/world_fwd.hpp>
 #include <sge/projectile/body/object_fwd.hpp>
 #include <sge/time/timer.hpp>
@@ -51,6 +53,7 @@ class object
 	);
 public:
 	object(
+		sanguis::world_id,
 		world::context &,
 		server::environment::load_context &,
 		server::console &,
@@ -178,6 +181,12 @@ private:
 		sanguis::time_delta const &,
 		bool update_pos
 	);
+
+	sanguis::world_id const id_;
+
+	sanguis::creator::generator::seed const seed_;
+
+	sanguis::creator::generator::name const generator_name_;
 
 	world::context &global_context_;
 
