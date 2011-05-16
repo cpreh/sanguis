@@ -4,9 +4,10 @@
 #include <sanguis/creator/generator/result_fwd.hpp>
 #include <sanguis/creator/generator/name.hpp>
 #include <sanguis/creator/generator/seed.hpp>
+#include <sanguis/creator/generator/size.hpp>
 #include <sanguis/creator/geometry/shape_container.hpp>
-#include <sanguis/creator/geometry/shape.hpp>
 #include <sanguis/creator/symbol.hpp>
+#include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/nonassignable.hpp>
 
 namespace sanguis
@@ -22,11 +23,11 @@ class result
 		result
 	);
 public:
-	SANGUIS_CREATOR_SYMBOL
 	result(
 		geometry::shape_container const &,
 		generator::seed const &,
-		generator::name const &
+		generator::name const &,
+		generator::size const &
 	);
 
 	SANGUIS_CREATOR_SYMBOL
@@ -40,12 +41,18 @@ public:
 	SANGUIS_CREATOR_SYMBOL
 	generator::name const &
 	name() const;
+
+	SANGUIS_CREATOR_SYMBOL
+	generator::size const &
+	size() const;
 private:
 	geometry::shape_container const shapes_;
 
 	generator::seed const seed_;
 
 	generator::name const name_;
+	
+	generator::size const size_;
 };
 
 }

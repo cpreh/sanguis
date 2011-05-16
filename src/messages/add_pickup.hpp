@@ -16,15 +16,15 @@ namespace sanguis
 namespace messages
 {
 
-typedef make_class<
+typedef messages::make_class<
 	majutsu::composite<
 		boost::mpl::vector3<
-			bind_entity_message<
+			messages::bind_entity_message<
 				types::message::add_pickup
 			>::type,
-			add_elements_base,
+			messages::add_elements_base,
 			majutsu::role<
-				enum_,
+				messages::enum_,
 				roles::pickup
 			>
 		>

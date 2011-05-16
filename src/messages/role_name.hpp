@@ -9,7 +9,8 @@ namespace messages
 template<
 	typename Role
 >
-struct role_name {
+struct role_name
+{
 	typedef typename Role::alias type;
 };
 

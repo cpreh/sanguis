@@ -10,6 +10,7 @@
 #include "../transform_callback.hpp"
 #include "../../exp.hpp"
 #include "../../level.hpp"
+#include "../../world_parameters_fwd.hpp"
 #include "../../../entity_id.hpp"
 #include <fcppt/noncopyable.hpp>
 
@@ -33,17 +34,17 @@ public:
 	virtual entities::base &
 	insert(
 		entities::unique_ptr,
-		entity_id
+		sanguis::entity_id
 	) = 0;
 
 	virtual void
 	remove(
-		entity_id
+		sanguis::entity_id
 	) = 0;
 
 	virtual entities::base &
 	entity(
-		entity_id
+		sanguis::entity_id
 	) = 0;
 
 	virtual void
@@ -54,6 +55,11 @@ public:
 	virtual void
 	level(
 		client::level
+	) = 0;
+
+	virtual void
+	change_world(
+		client::world_parameters const &
 	) = 0;
 
 	virtual entities::model::parameters const

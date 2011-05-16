@@ -18,15 +18,15 @@ namespace sanguis
 namespace messages
 {
 
-typedef make_class<
+typedef messages::make_class<
 	majutsu::composite<
 		boost::mpl::vector4<
-			bind_entity_message<
+			messages::bind_entity_message<
 				types::message::add_aoe_projectile
 			>::type,
-			add_with_speed,
+			messages::add_with_speed,
 			majutsu::role<
-				space_unit,
+				messages::space_unit,
 				roles::aoe
 			>,
 			majutsu::role<

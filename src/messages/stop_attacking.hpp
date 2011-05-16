@@ -10,12 +10,10 @@ namespace sanguis
 namespace messages
 {
 
-typedef bind_entity_message<
-	types::message::stop_attacking
->::type stop_attacking_elements;
-
-typedef make_class<
-	stop_attacking_elements
+typedef messages::make_class<
+	messages::bind_entity_message<
+		types::message::stop_attacking
+	>::type
 >::type stop_attacking;
 
 }

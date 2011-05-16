@@ -9,7 +9,9 @@ namespace sanguis
 namespace messages
 {
 
-typedef fcppt::auto_ptr<base> auto_ptr;
+typedef fcppt::auto_ptr<
+	messages::base
+> auto_ptr;
 
 }
 }

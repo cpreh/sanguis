@@ -18,11 +18,11 @@ namespace messages
 typedef messages::make_class<
 	majutsu::composite<
 		boost::mpl::vector2<
-			bind_entity_message<
+			messages::bind_entity_message<
 				types::message::change_weapon
 			>::type,
 			majutsu::role<
-				enum_,
+				messages::enum_,
 				roles::weapon
 			>
 		>

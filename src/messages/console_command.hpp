@@ -14,14 +14,14 @@ namespace sanguis
 namespace messages
 {
 
-typedef make_class<
+typedef messages::make_class<
 	majutsu::composite<
 		boost::mpl::vector2<
-			make_message_id<
+			messages::make_message_id<
 				types::message::console_command
 			>::type,
 			majutsu::role<
-				string_vector
+				messages::string_vector
 			>
 		>
 	>

@@ -23,14 +23,18 @@
 #include "../log.hpp"
 #include "../speed.hpp"
 #include "../vector2.hpp"
+#include "../../world_parameters.hpp"
 #include "../../../messages/base.hpp"
 #include "../../../messages/role_name.hpp"
 #include "../../../cast_enum.hpp"
+#include <sanguis/creator/generator/name.hpp>
+#include <sanguis/creator/generator/top_parameters.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/log/headers.hpp>
+#include <fcppt/utf8/convert.hpp>
 #include <fcppt/dynamic_cast.hpp>
 #include <fcppt/type_name.hpp>
 #include <fcppt/text.hpp>
@@ -42,7 +46,7 @@
 #include <typeinfo>
 
 sanguis::client::draw2d::message::dispatcher::dispatcher(
-	environment &_env
+	message::environment &_env
 )
 :
 	env_(_env)
@@ -204,6 +208,35 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		SANGUIS_CAST_ENUM(
 			weapon_type,
 			_message.get<sanguis::messages::roles::weapon>()
+		)
+	);
+}
+
+sanguis::client::draw2d::message::dispatcher::result_type
+sanguis::client::draw2d::message::dispatcher::operator()(
+	sanguis::messages::change_world const &_message
+)
+{
+	env_.change_world(
+		client::world_parameters(
+			_message.get<
+				messages::world_id
+			>(),
+			sanguis::creator::generator::top_parameters(
+				sanguis::creator::generator::name(
+					fcppt::utf8::convert(
+						_message.get<
+							messages::roles::generator_name
+						>()
+					)
+				),
+				_message.get<
+					messages::seed
+				>(),
+				_message.get<
+					messages::roles::world_size
+				>()
+			)
 		)
 	);
 }

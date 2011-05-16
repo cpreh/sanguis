@@ -15,20 +15,18 @@ namespace sanguis
 namespace messages
 {
 
-typedef majutsu::composite<
-	boost::mpl::vector2<
-		bind_player_message<
-			types::message::player_choose_perk
-		>::type,
-		majutsu::role<
-			enum_,
-			roles::perk
+typedef messages::make_class<
+	majutsu::composite<
+		boost::mpl::vector2<
+			messages::bind_player_message<
+				types::message::player_choose_perk
+			>::type,
+			majutsu::role<
+				messages::enum_,
+				roles::perk
+			>
 		>
 	>
-> player_choose_perk_elements;
-
-typedef make_class<
-	player_choose_perk_elements
 >::type player_choose_perk;
 
 }

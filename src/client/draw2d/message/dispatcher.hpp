@@ -15,6 +15,7 @@
 #include "../../../messages/add_weapon_pickup.hpp"
 #include "../../../messages/base_fwd.hpp"
 #include "../../../messages/change_weapon.hpp"
+#include "../../../messages/change_world.hpp"
 #include "../../../messages/die.hpp"
 #include "../../../messages/experience.hpp"
 #include "../../../messages/health.hpp"
@@ -47,7 +48,7 @@ class dispatcher
 	);
 public:
 	explicit dispatcher(
-		environment &
+		message::environment &
 	);
 
 	~dispatcher();
@@ -97,6 +98,11 @@ public:
 	result_type
 	operator()(
 		sanguis::messages::change_weapon const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::change_world const &
 	);
 
 	result_type

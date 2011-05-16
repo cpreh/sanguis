@@ -15,20 +15,18 @@ namespace sanguis
 namespace messages
 {
 
-typedef majutsu::composite<
-	boost::mpl::vector2<
-		bind_entity_message<
-			types::message::health
-		>::type,
-		majutsu::role<
-			space_unit,
-			roles::health
+typedef messages::make_class<
+	majutsu::composite<
+		boost::mpl::vector2<
+			messages::bind_entity_message<
+				types::message::health
+			>::type,
+			majutsu::role<
+				messages::space_unit,
+				roles::health
+			>
 		>
-	>
-> health_elements;
-
-typedef make_class<
-	health_elements
+	> 
 >::type health;
 
 }

@@ -4,9 +4,11 @@
 #include "message_environment_fwd.hpp"
 #include "object_fwd.hpp"
 #include "hud_fwd.hpp"
+#include "world_fwd.hpp"
+#include "../message/environment.hpp"
 #include "../../exp.hpp"
 #include "../../level.hpp"
-#include "../message/environment.hpp"
+#include "../../world_parameters_fwd.hpp"
 
 namespace sanguis
 {
@@ -25,9 +27,10 @@ class message_environment
 		message_environment
 	);
 public:
-	explicit message_environment(
+	message_environment(
 		scene::object &,
-		scene::hud &
+		scene::hud &,
+		scene::world &
 	);
 
 	~message_environment();
@@ -40,12 +43,12 @@ private:
 
 	void
 	remove(
-		entity_id
+		sanguis::entity_id
 	);
 
 	entities::base &
 	entity(
-		entity_id
+		sanguis::entity_id
 	);
 
 	void
@@ -56,6 +59,11 @@ private:
 	void
 	level(
 		client::level
+	);
+
+	void
+	change_world(
+		client::world_parameters const &
 	);
 
 	entities::model::parameters const
@@ -73,6 +81,8 @@ private:
 	scene::object &object_;
 
 	scene::hud &hud_;
+
+	scene::world &world_;
 };
 
 }

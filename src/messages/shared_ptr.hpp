@@ -9,7 +9,9 @@ namespace sanguis
 namespace messages
 {
 
-typedef fcppt::shared_ptr<base> shared_ptr;
+typedef fcppt::shared_ptr<
+	messages::base
+> shared_ptr;
 
 }
 }

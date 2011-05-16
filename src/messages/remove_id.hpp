@@ -10,8 +10,8 @@ namespace sanguis
 namespace messages
 {
 
-typedef make_class<
-	make_message_id<
+typedef messages::make_class<
+	messages::make_message_id<
 		types::message::remove_id
 	>::type
 >::type remove_id;

@@ -15,10 +15,10 @@ namespace sanguis
 namespace messages
 {
 
-typedef make_class<
+typedef messages::make_class<
 	majutsu::composite<
 		boost::mpl::vector2<
-			bind_entity_message<
+			messages::bind_entity_message<
 				types::message::experience
 			>::type,
 			majutsu::role<

@@ -10,8 +10,8 @@ namespace sanguis
 namespace messages
 {
 
-typedef make_class<
-	make_player_message<
+typedef messages::make_class<
+	messages::make_player_message<
 		types::message::add_own_player
 	>::type
 >::type add_own_player;

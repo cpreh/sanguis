@@ -15,9 +15,9 @@ namespace messages
 
 typedef majutsu::composite<
 	boost::mpl::vector2<
-		message_type,
+		messages::message_type,
 		majutsu::role<
-			entity_id,
+			messages::entity_id,
 			roles::entity_id
 		>
 	>

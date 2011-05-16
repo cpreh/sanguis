@@ -15,20 +15,18 @@ namespace sanguis
 namespace messages
 {
 
-typedef majutsu::composite<
-	boost::mpl::vector2<
-		bind_entity_message<
-			types::message::speed
-		>::type,
-		majutsu::role<
-			vector2,
-			roles::speed
+typedef messages::make_class<
+	majutsu::composite<
+		boost::mpl::vector2<
+			messages::bind_entity_message<
+				types::message::speed
+			>::type,
+			majutsu::role<
+				messages::vector2,
+				roles::speed
+			>
 		>
 	>
-> speed_elements;
-
-typedef make_class<
-	speed_elements
 >::type speed;
 
 }

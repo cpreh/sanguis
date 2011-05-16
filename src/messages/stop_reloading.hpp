@@ -10,12 +10,10 @@ namespace sanguis
 namespace messages
 {
 
-typedef bind_entity_message<
-	types::message::stop_reloading
->::type stop_reloading_elements;
-
-typedef make_class<
-	stop_reloading_elements
+typedef messages::make_class<
+	messages::bind_entity_message<
+		types::message::stop_reloading
+	>::type
 >::type stop_reloading;
 
 }

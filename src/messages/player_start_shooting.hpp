@@ -10,12 +10,10 @@ namespace sanguis
 namespace messages
 {
 
-typedef bind_player_message<
-	types::message::player_start_shooting
->::type player_start_shooting_elements;
-
-typedef make_class<
-	player_start_shooting_elements
+typedef messages::make_class<
+	messages::bind_player_message<
+		types::message::player_start_shooting
+	>::type
 >::type player_start_shooting;
 
 }

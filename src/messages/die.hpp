@@ -10,8 +10,8 @@ namespace sanguis
 namespace messages
 {
 
-typedef make_class<
-	bind_entity_message<
+typedef messages::make_class<
+	messages::bind_entity_message<
 		types::message::die
 	>::type
 >::type die;

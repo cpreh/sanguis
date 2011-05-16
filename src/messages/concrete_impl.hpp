@@ -12,8 +12,16 @@ sanguis::messages::concrete<T>::concrete(
 )
 :
 	value_(_value)
-{}
-	
+{
+}
+
+template<
+	typename T
+>
+sanguis::messages::concrete<T>::~concrete()
+{
+}
+
 template<
 	typename T
 >
@@ -32,7 +40,8 @@ sanguis::messages::concrete<T>::type() const
 	return
 		static_cast<
 			types::message::type
-		>(	message_id<
+		>(
+			messages::message_id<
 				typename T::types
 			>::type::value
 		);

@@ -3,6 +3,8 @@
 #include <sanguis/creator/generator/name.hpp>
 #include <sanguis/creator/generator/result.hpp>
 #include <sanguis/creator/generator/seed.hpp>
+#include <sanguis/creator/generator/size.hpp>
+#include <sge/parse/json/convert/to_static_container.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
 #include <sge/parse/json/int_type.hpp>
@@ -39,6 +41,16 @@ sanguis::creator::generator::deserialization::result(
 				>(
 					_object.members,
 					FCPPT_TEXT("name")
+				)
+			),
+			sge::parse::json::convert::to_static_container<
+				generator::size
+			>(
+				sge::parse::json::find_member_exn<
+					sge::parse::json::array
+				>(
+					_object.members,
+					FCPPT_TEXT("size")
 				)
 			)
 		);

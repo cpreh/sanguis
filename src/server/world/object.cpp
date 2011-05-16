@@ -38,7 +38,7 @@
 #include <sge/time/second_f.hpp>
 #include <sge/time/millisecond.hpp>
 #include <fcppt/container/map_impl.hpp>
-#include <fcppt/math/box/basic_impl.hpp>
+#include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/utf8/convert.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
@@ -62,6 +62,9 @@ sanguis::server::world::object::object(
 	),
 	generator_name_(
 		_generated_world.name()
+	),
+	size_(
+		_generated_world.size()
 	),
 	global_context_(
 		_global_context
@@ -224,7 +227,8 @@ sanguis::server::world::object::insert(
 					seed_,
 					fcppt::utf8::convert(
 						generator_name_.get()
-					)
+					),
+					size_
 				)
 			)
 		);

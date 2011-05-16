@@ -19,9 +19,9 @@ template<
 struct bind_entity_message
 {
 	typedef majutsu::bind<
-		entity_message,
+		messages::entity_message,
 		boost::mpl::vector2<
-			typename make_message_id<
+			typename messages::make_message_id<
 				Msg
 			>::type,
 			majutsu::placeholder

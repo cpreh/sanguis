@@ -16,7 +16,7 @@ template<
 >
 struct bind_player_message
 :
-make_message_id<
+messages::make_message_id<
 	Msg
 >
 {};

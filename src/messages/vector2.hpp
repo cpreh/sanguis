@@ -11,8 +11,8 @@ namespace messages
 {
 
 typedef bindings::static_<
-	types::vector2,
-	space_unit
+	messages::types::vector2,
+	messages::space_unit
 > vector2;
 
 }

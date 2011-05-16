@@ -5,6 +5,7 @@
 #include "hud.hpp"
 #include "message_environment.hpp"
 #include "screen_center.hpp"
+#include "world.hpp"
 #include "../entities/base.hpp"
 #include "../entities/own.hpp"
 #include "../message/dispatcher.hpp"
@@ -78,6 +79,12 @@ sanguis::client::draw2d::scene::object::object(
 			)
 		)
 	),
+	world_(
+		fcppt::make_unique_ptr<
+			scene::world
+		>(
+		)
+	),
 	audio_listener_(_audio_listener),
 	paused_(false),
 	player_center_(
@@ -106,6 +113,9 @@ sanguis::client::draw2d::scene::object::object(
 			),
 			fcppt::ref(
 				*hud_
+			),
+			fcppt::ref(
+				*world_
 			)
 		)
 	),
@@ -170,7 +180,7 @@ sanguis::client::draw2d::scene::object::process_message(
 )
 {
 	static sanguis::messages::call::object<
-		boost::mpl::vector22<
+		boost::mpl::vector23<
 			sanguis::messages::add_aoe_projectile,
 			sanguis::messages::add_enemy,
 			sanguis::messages::add_friend,
@@ -180,6 +190,7 @@ sanguis::client::draw2d::scene::object::process_message(
 			sanguis::messages::add_projectile,
 			sanguis::messages::add_weapon_pickup,
 			sanguis::messages::change_weapon,
+			sanguis::messages::change_world,
 			sanguis::messages::die,
 			sanguis::messages::experience,
 			sanguis::messages::health,

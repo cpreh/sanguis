@@ -5,6 +5,7 @@
 #include "background_fwd.hpp"
 #include "hud_fwd.hpp"
 #include "message_environment_fwd.hpp"
+#include "world_fwd.hpp"
 #include "../entities/base_fwd.hpp"
 #include "../entities/own_auto_ptr.hpp"
 #include "../entities/own_fwd.hpp"
@@ -177,6 +178,10 @@ private:
 		scene::hud
 	> const hud_;
 
+	fcppt::scoped_ptr<
+		scene::world
+	> const world_;
+		
 	sge::audio::listener &audio_listener_;
 
 	bool paused_;

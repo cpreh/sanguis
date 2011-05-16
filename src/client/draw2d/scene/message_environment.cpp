@@ -1,16 +1,19 @@
 #include "message_environment.hpp"
-#include "object.hpp"
 #include "hud.hpp"
+#include "object.hpp"
+#include "world.hpp"
 #include "../entities/model/parameters.hpp"
 #include "../entities/base.hpp"
 
 sanguis::client::draw2d::scene::message_environment::message_environment(
 	scene::object &_object,
-	hud &_hud
+	scene::hud &_hud,
+	scene::world &_world
 )
 :
 	object_(_object),
-	hud_(_hud)
+	hud_(_hud),
+	world_(_world)
 {
 }
 
@@ -21,7 +24,7 @@ sanguis::client::draw2d::scene::message_environment::~message_environment()
 sanguis::client::draw2d::entities::base &
 sanguis::client::draw2d::scene::message_environment::insert(
 	entities::unique_ptr _entity,
-	entity_id const _id
+	sanguis::entity_id const _id
 )
 {
 	return 
@@ -35,7 +38,7 @@ sanguis::client::draw2d::scene::message_environment::insert(
 
 void
 sanguis::client::draw2d::scene::message_environment::remove(
-	entity_id const _id
+	sanguis::entity_id const _id
 )
 {
 	object_.remove(
@@ -45,7 +48,7 @@ sanguis::client::draw2d::scene::message_environment::remove(
 
 sanguis::client::draw2d::entities::base &
 sanguis::client::draw2d::scene::message_environment::entity(
-	entity_id const _id
+	sanguis::entity_id const _id
 )
 {
 	return
@@ -71,6 +74,16 @@ sanguis::client::draw2d::scene::message_environment::level(
 {
 	hud_.level(
 		_level
+	);
+}
+
+void
+sanguis::client::draw2d::scene::message_environment::change_world(
+	client::world_parameters const &_param
+)
+{
+	world_.change(
+		_param
 	);
 }
 

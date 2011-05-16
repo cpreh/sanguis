@@ -360,6 +360,9 @@ SET(
 	src/client/draw2d/scene/object_fwd.hpp
 	src/client/draw2d/scene/screen_center.cpp
 	src/client/draw2d/scene/screen_center.hpp
+	src/client/draw2d/scene/world.cpp
+	src/client/draw2d/scene/world.hpp
+	src/client/draw2d/scene/world_fwd.hpp
 	src/client/draw2d/speed.hpp
 	src/client/draw2d/sprite/center.hpp
 	src/client/draw2d/sprite/client/choices.hpp
@@ -547,6 +550,9 @@ SET(
 	src/client/states/running.hpp
 	src/client/states/waiting_for_player.cpp
 	src/client/states/waiting_for_player.hpp
+	src/client/world_parameters.cpp
+	src/client/world_parameters.hpp
+	src/client/world_parameters_fwd.hpp
 	src/connect_state.hpp
 	src/damage_type.hpp
 	src/diff_clock.cpp
@@ -738,6 +744,7 @@ SET(
 	src/messages/create.hpp
 	src/messages/die.cpp
 	src/messages/die.hpp
+	src/messages/dim2.hpp
 	src/messages/entity_id.hpp
 	src/messages/entity_message.hpp
 	src/messages/enum.hpp
@@ -823,6 +830,7 @@ SET(
 	src/messages/roles/speed.hpp
 	src/messages/roles/type.hpp
 	src/messages/roles/weapon.hpp
+	src/messages/roles/world_size.hpp
 	src/messages/rotate.cpp
 	src/messages/rotate.hpp
 	src/messages/seed.hpp
@@ -861,6 +869,7 @@ SET(
 	src/messages/serialization/serialize.cpp
 	src/messages/serialization/serialize.hpp
 	src/messages/shared_ptr.hpp
+	src/messages/size.hpp
 	src/messages/space_unit.hpp
 	src/messages/speed.cpp
 	src/messages/speed.hpp
@@ -875,12 +884,14 @@ SET(
 	src/messages/string.hpp
 	src/messages/string_vector.hpp
 	src/messages/types/char.hpp
+	src/messages/types/dim2.hpp
 	src/messages/types/enum.hpp
 	src/messages/types/enum_vector.hpp
 	src/messages/types/exp.hpp
 	src/messages/types/level.hpp
 	src/messages/types/message.hpp
 	src/messages/types/message_type.hpp
+	src/messages/types/size.hpp
 	src/messages/types/space_unit.hpp
 	src/messages/types/string.hpp
 	src/messages/types/string_vector.hpp

@@ -28,10 +28,12 @@
 #include <sanguis/creator/generator/name.hpp>
 #include <sanguis/creator/generator/result_fwd.hpp>
 #include <sanguis/creator/generator/seed.hpp>
+#include <sanguis/creator/generator/size.hpp>
 #include <sge/projectile/world_fwd.hpp>
 #include <sge/projectile/body/object_fwd.hpp>
 #include <sge/time/timer.hpp>
 #include <fcppt/container/map_decl.hpp>
+#include <fcppt/math/dim/basic_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
@@ -187,6 +189,8 @@ private:
 	sanguis::creator::generator::seed const seed_;
 
 	sanguis::creator::generator::name const generator_name_;
+
+	sanguis::creator::generator::size const size_;
 
 	world::context &global_context_;
 

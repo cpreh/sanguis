@@ -12,7 +12,7 @@ namespace types
 {
 
 typedef fcppt::math::vector::static_<
-	space_unit,
+	types::space_unit,
 	2u
 >::type vector2;
 

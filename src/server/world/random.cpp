@@ -5,13 +5,21 @@
 
 #include "../../exception.hpp"
 #include <sanguis/creator/generator/deserialize.hpp>
+#include <sanguis/creator/generator/generate.hpp>
+#include <sanguis/creator/generator/name.hpp>
 #include <sanguis/creator/generator/result.hpp>
+#include <sanguis/creator/generator/seed.hpp>
+#include <sanguis/creator/generator/serialize.hpp>
+#include <sanguis/creator/generator/top_parameters.hpp>
+#include <sanguis/creator/generator/size.hpp>
 #include <sge/config/find_cache_path.hpp>
 #include <fcppt/filesystem/create_directories_recursive.hpp>
 #include <fcppt/filesystem/exists.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
+#include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/io/ifstream.hpp>
+#include <fcppt/io/ofstream.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::server::world::object_unique_ptr
@@ -41,6 +49,35 @@ sanguis::server::world::random(
 		cache_path
 		/ FCPPT_TEXT("world01")
 	);
+
+	if(
+		!fcppt::filesystem::exists(
+			world_path
+		)
+	)
+	{
+		fcppt::io::ofstream stream(
+			world_path
+		);
+
+		sanguis::creator::generator::serialize(
+			stream,
+			sanguis::creator::generator::generate(
+				sanguis::creator::generator::top_parameters(
+					sanguis::creator::generator::name(
+						FCPPT_TEXT("car_park")
+					),
+					sanguis::creator::generator::seed(
+						0
+					),
+					sanguis::creator::generator::size(
+						4000u,
+						4000u
+					)
+				)
+			)
+		);
+	}
 
 	fcppt::io::ifstream stream(
 		world_path

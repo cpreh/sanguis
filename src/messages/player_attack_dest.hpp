@@ -15,20 +15,18 @@ namespace sanguis
 namespace messages
 {
 
-typedef majutsu::composite<
-	boost::mpl::vector2<
-		bind_player_message<
-			types::message::player_attack_dest
-		>::type,
-		majutsu::role<
-			messages::vector2,
-			roles::attack_dest
+typedef messages::make_class<
+	majutsu::composite<
+		boost::mpl::vector2<
+			messages::bind_player_message<
+				types::message::player_attack_dest
+			>::type,
+			majutsu::role<
+				messages::vector2,
+				roles::attack_dest
+			>
 		>
-	>
-> player_attack_dest_elements;
-
-typedef make_class<
-	player_attack_dest_elements
+	> 
 >::type player_attack_dest;
 
 }

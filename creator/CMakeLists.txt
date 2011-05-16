@@ -7,6 +7,8 @@ SET(
 	include/sanguis/creator/exception.hpp
 	include/sanguis/creator/generator/car_park.hpp
 	include/sanguis/creator/generator/deserialize.hpp
+	include/sanguis/creator/generator/generate.hpp
+	include/sanguis/creator/generator/name.hpp
 	include/sanguis/creator/generator/opening.hpp
 	include/sanguis/creator/generator/opening_container.hpp
 	include/sanguis/creator/generator/parameters.hpp
@@ -18,6 +20,9 @@ SET(
 	include/sanguis/creator/generator/result_fwd.hpp
 	include/sanguis/creator/generator/seed.hpp
 	include/sanguis/creator/generator/serialize.hpp
+	include/sanguis/creator/generator/size.hpp
+	include/sanguis/creator/generator/top_parameters.hpp
+	include/sanguis/creator/generator/top_parameters_fwd.hpp
 	include/sanguis/creator/geometry/depth.hpp
 	include/sanguis/creator/geometry/polygon.hpp
 	include/sanguis/creator/geometry/polygon_fwd.hpp
@@ -52,6 +57,7 @@ SET(
 	src/generator/deserialization/vertex.cpp
 	src/generator/deserialization/vertex.hpp
 	src/generator/deserialize.cpp
+	src/generator/generate.cpp
 	src/generator/parameters.cpp
 	src/generator/randgen.cpp
 	src/generator/result.cpp
@@ -66,6 +72,7 @@ SET(
 	src/generator/serialization/vertex.cpp
 	src/generator/serialization/vertex.hpp
 	src/generator/serialize.cpp
+	src/generator/top_parameters.cpp
 	src/geometry/shape.cpp
 	src/geometry/vertex.cpp
 )

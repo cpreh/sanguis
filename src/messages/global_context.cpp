@@ -5,5 +5,6 @@ sanguis::messages::serialization::context &
 sanguis::messages::global_context()
 {
 	static serialization::context ctx;
+
 	return ctx;
 }

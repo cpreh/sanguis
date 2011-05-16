@@ -19,10 +19,10 @@ struct make_player_message
 {
 	typedef majutsu::composite<
 		boost::mpl::vector2<
-			typename bind_entity_message<
+			typename messages::bind_entity_message<
 				Type
 			>::type,
-			add_with_health
+			messages::add_with_health
 		>
 	> type;
 };

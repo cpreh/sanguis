@@ -22,7 +22,7 @@ typedef majutsu::composite<
 			roles::health
 		>,
 		majutsu::role<
-			space_unit,
+			messages::space_unit,
 			roles::max_health
 		>
 	>

@@ -15,20 +15,18 @@ namespace sanguis
 namespace messages
 {
 
-typedef majutsu::composite<
-	boost::mpl::vector2<
-		bind_entity_message<
-			types::message::rotate
-		>::type,
-		majutsu::role<
-			space_unit,
-			roles::angle
+typedef messages::make_class<
+	majutsu::composite<
+		boost::mpl::vector2<
+			messages::bind_entity_message<
+				types::message::rotate
+			>::type,
+			majutsu::role<
+				messages::space_unit,
+				roles::angle
+			>
 		>
 	>
-> rotate_elements;
-
-typedef make_class<
-	rotate_elements
 >::type rotate;
 
 }

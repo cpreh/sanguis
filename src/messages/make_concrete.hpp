@@ -12,16 +12,19 @@ namespace messages
 template<
 	typename T
 >
-auto_ptr
+messages::auto_ptr
 make_concrete(
-	T const &value
+	T const &_value
 )
 {
-	return auto_ptr(
-		new concrete<T>(
-			value
-		)
-	);
+	return
+		messages::auto_ptr(
+			new messages::concrete<
+				T
+			>(
+				_value
+			)
+		);
 }
 
 }

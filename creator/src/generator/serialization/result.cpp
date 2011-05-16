@@ -1,6 +1,7 @@
 #include "result.hpp"
 #include "shape_container.hpp"
 #include <sanguis/creator/generator/result.hpp>
+#include <sge/parse/json/convert/from_container.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/int_type.hpp>
 #include <sge/parse/json/member.hpp>
@@ -42,6 +43,14 @@ sanguis::creator::generator::serialization::result(
 					FCPPT_TEXT("name"),
 					sge::parse::json::string(
 						_result.name().get()
+					)
+				)
+			)
+			(
+				sge::parse::json::member(
+					FCPPT_TEXT("size"),
+					sge::parse::json::convert::from_container(
+						_result.size()
 					)
 				)
 			)

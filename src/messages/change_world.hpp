@@ -2,7 +2,9 @@
 #define SANGUIS_MESSAGES_CHANGE_WORLD_HPP_INCLUDED
 
 #include "roles/generator_name.hpp"
+#include "roles/world_size.hpp"
 #include "types/message.hpp"
+#include "dim2.hpp"
 #include "make_class.hpp"
 #include "make_message_id.hpp"
 #include "seed.hpp"
@@ -19,7 +21,7 @@ namespace messages
 
 typedef messages::make_class<
 	majutsu::composite<
-		boost::mpl::vector4<
+		boost::mpl::vector5<
 			messages::make_message_id<
 				types::message::change_world
 			>::type,
@@ -32,6 +34,10 @@ typedef messages::make_class<
 			majutsu::role<
 				messages::string,
 				roles::generator_name
+			>,
+			majutsu::role<
+				messages::dim2,
+				roles::world_size
 			>
 		>
 	>

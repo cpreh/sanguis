@@ -12,16 +12,14 @@ namespace sanguis
 namespace messages
 {
 
-typedef majutsu::composite<
-	boost::mpl::vector1<
-		make_message_id<
-			types::message::unpause
-		>::type
+typedef messages::make_class<
+	majutsu::composite<
+		boost::mpl::vector1<
+			messages::make_message_id<
+				types::message::unpause
+			>::type
+		>
 	>
-> unpause_elements;
-
-typedef make_class<
-	unpause_elements
 >::type unpause;
 
 }

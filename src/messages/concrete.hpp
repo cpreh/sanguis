@@ -2,6 +2,7 @@
 #define SANGUIS_MESSAGES_CONCRETE_HPP_INCLUDED
 
 #include "base.hpp"
+#include <fcppt/noncopyable.hpp>
 
 namespace sanguis
 {
@@ -13,12 +14,17 @@ template<
 >
 class concrete
 :
-	public base
+	public messages::base
 {
+	FCPPT_NONCOPYABLE(
+		concrete
+	);
 public:
 	explicit concrete(
 		T const &
 	);
+
+	~concrete();
 	
 	T const &
 	value() const;
