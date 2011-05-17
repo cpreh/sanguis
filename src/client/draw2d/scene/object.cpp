@@ -83,6 +83,9 @@ sanguis::client::draw2d::scene::object::object(
 		fcppt::make_unique_ptr<
 			scene::world
 		>(
+			fcppt::ref(
+				_rend
+			)
 		)
 	),
 	audio_listener_(_audio_listener),
@@ -397,6 +400,10 @@ sanguis::client::draw2d::scene::object::render_lighting()
 	);
 
 	background_->render(
+		translation
+	);
+
+	world_->draw(
 		translation
 	);
 

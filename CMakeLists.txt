@@ -363,6 +363,9 @@ SET(
 	src/client/draw2d/scene/world.cpp
 	src/client/draw2d/scene/world.hpp
 	src/client/draw2d/scene/world_fwd.hpp
+	src/client/draw2d/scene/world_state.cpp
+	src/client/draw2d/scene/world_state.hpp
+	src/client/draw2d/scene/world_state_fwd.hpp
 	src/client/draw2d/speed.hpp
 	src/client/draw2d/sprite/center.hpp
 	src/client/draw2d/sprite/client/choices.hpp
