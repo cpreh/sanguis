@@ -366,6 +366,8 @@ SET(
 	src/client/draw2d/scene/world/batch_grid.hpp
 	src/client/draw2d/scene/world/batch_grid_unique_ptr.hpp
 	src/client/draw2d/scene/world/batch_size.hpp
+	src/client/draw2d/scene/world/envelope.cpp
+	src/client/draw2d/scene/world/envelope.hpp
 	src/client/draw2d/scene/world/generate_batches.cpp
 	src/client/draw2d/scene/world/generate_batches.hpp
 	src/client/draw2d/scene/world/object.cpp

@@ -2,13 +2,16 @@
 #include "batch.hpp"
 #include "batch_grid.hpp"
 #include "batch_size.hpp"
+#include "envelope.hpp"
 //#include "../../../../load/resource/textures.hpp"
 #include <sanguis/creator/generator/generate.hpp>
 #include <sanguis/creator/generator/result.hpp>
 #include <sanguis/creator/generator/size.hpp>
-//#include <sanguis/creator/geometry/shape_container.hpp>
+#include <sanguis/creator/geometry/rect.hpp>
+#include <sanguis/creator/geometry/shape_container.hpp>
 #include <fcppt/algorithm/array_map.hpp>
 #include <fcppt/container/grid/object_impl.hpp>
+#include <fcppt/math/box/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/round_div_int.hpp>
@@ -49,6 +52,27 @@ sanguis::client::draw2d::scene::world::generate_batches(
 			)
 		)
 	);
+
+	sanguis::creator::geometry::shape_container const &shapes(
+		generated.shapes()
+	);
+
+	for(
+		sanguis::creator::geometry::shape_container::const_iterator shape_it(
+			shapes.begin()
+		);
+		shape_it != shapes.end();
+		++shape_it
+	)
+	{
+		sanguis::creator::geometry::rect const envelope(
+			world::envelope(
+				shape_it->polygon()
+			)
+		);
+
+		
+	}
 
 	return
 		move(
