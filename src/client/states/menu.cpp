@@ -18,7 +18,6 @@
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/state/trampoline.hpp>
-#include <sge/image/colors.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
@@ -65,9 +64,8 @@ sanguis::client::states::menu::menu(
 	renderer_state_(
 		context<machine>().renderer(),
 		sge::renderer::state::list
-			(sge::renderer::state::bool_::clear_backbuffer = true)
-			(sge::renderer::state::bool_::clear_zbuffer = false)
-			(sge::renderer::state::color::clear_color = sge::image::colors::black())
+			(sge::renderer::state::bool_::clear_back_buffer = false)
+			(sge::renderer::state::bool_::clear_depth_buffer = false)
 	)
 {
 }

@@ -42,8 +42,8 @@ sanguis::client::states::running::running(
 	renderer_state_(
 		context<machine>().renderer(),
 		sge::renderer::state::list
-			(sge::renderer::state::bool_::clear_backbuffer = false)
-			(sge::renderer::state::bool_::clear_zbuffer = false)
+			(sge::renderer::state::bool_::clear_back_buffer = false)
+			(sge::renderer::state::bool_::clear_depth_buffer = false)
 	),
 	console_(
 		fcppt::make_unique_ptr<
