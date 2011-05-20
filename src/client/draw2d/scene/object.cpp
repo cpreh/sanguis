@@ -5,7 +5,7 @@
 #include "hud.hpp"
 #include "message_environment.hpp"
 #include "screen_center.hpp"
-#include "world.hpp"
+#include "world/object.hpp"
 #include "../entities/base.hpp"
 #include "../entities/own.hpp"
 #include "../message/dispatcher.hpp"
@@ -16,6 +16,7 @@
 #include "../vector2.hpp"
 #include "../z_ordering.hpp"
 #include "../../../load/context.hpp"
+#include "../../../load/resource/context.hpp"
 #include "../../../messages/call/object.hpp"
 #include "../../../exception.hpp"
 #include "../../../time_from_second.hpp"
@@ -81,11 +82,12 @@ sanguis::client::draw2d::scene::object::object(
 	),
 	world_(
 		fcppt::make_unique_ptr<
-			scene::world
+			scene::world::object
 		>(
 			fcppt::ref(
 				_rend
-			)
+			),
+			_resources.resources().textures()
 		)
 	),
 	audio_listener_(_audio_listener),

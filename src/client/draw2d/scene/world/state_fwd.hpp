@@ -9,9 +9,12 @@ namespace draw2d
 {
 namespace scene
 {
+namespace world
+{
 
-class world_state;
+class state;
 
+}
 }
 }
 }

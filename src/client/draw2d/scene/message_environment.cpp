@@ -1,14 +1,14 @@
 #include "message_environment.hpp"
 #include "hud.hpp"
 #include "object.hpp"
-#include "world.hpp"
+#include "world/object.hpp"
 #include "../entities/model/parameters.hpp"
 #include "../entities/base.hpp"
 
 sanguis::client::draw2d::scene::message_environment::message_environment(
 	scene::object &_object,
 	scene::hud &_hud,
-	scene::world &_world
+	scene::world::object &_world
 )
 :
 	object_(_object),

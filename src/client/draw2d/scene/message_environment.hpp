@@ -4,7 +4,7 @@
 #include "message_environment_fwd.hpp"
 #include "object_fwd.hpp"
 #include "hud_fwd.hpp"
-#include "world_fwd.hpp"
+#include "world/object_fwd.hpp"
 #include "../message/environment.hpp"
 #include "../../exp.hpp"
 #include "../../level.hpp"
@@ -30,7 +30,7 @@ public:
 	message_environment(
 		scene::object &,
 		scene::hud &,
-		scene::world &
+		scene::world::object &
 	);
 
 	~message_environment();
@@ -82,7 +82,7 @@ private:
 
 	scene::hud &hud_;
 
-	scene::world &world_;
+	scene::world::object &world_;
 };
 
 }

@@ -360,12 +360,23 @@ SET(
 	src/client/draw2d/scene/object_fwd.hpp
 	src/client/draw2d/scene/screen_center.cpp
 	src/client/draw2d/scene/screen_center.hpp
-	src/client/draw2d/scene/world.cpp
-	src/client/draw2d/scene/world.hpp
-	src/client/draw2d/scene/world_fwd.hpp
-	src/client/draw2d/scene/world_state.cpp
-	src/client/draw2d/scene/world_state.hpp
-	src/client/draw2d/scene/world_state_fwd.hpp
+	src/client/draw2d/scene/world/batch.cpp
+	src/client/draw2d/scene/world/batch.hpp
+	src/client/draw2d/scene/world/batch_fwd.hpp
+	src/client/draw2d/scene/world/batch_grid.hpp
+	src/client/draw2d/scene/world/batch_grid_unique_ptr.hpp
+	src/client/draw2d/scene/world/batch_size.hpp
+	src/client/draw2d/scene/world/generate_batches.cpp
+	src/client/draw2d/scene/world/generate_batches.hpp
+	src/client/draw2d/scene/world/object.cpp
+	src/client/draw2d/scene/world/object.hpp
+	src/client/draw2d/scene/world/object_fwd.hpp
+	src/client/draw2d/scene/world/state.cpp
+	src/client/draw2d/scene/world/state.hpp
+	src/client/draw2d/scene/world/state_fwd.hpp
+	src/client/draw2d/scene/world/texture_slice.hpp
+	src/client/draw2d/scene/world/texture_slice_fwd.hpp
+	src/client/draw2d/scene/world/texture_slice_vector.hpp
 	src/client/draw2d/speed.hpp
 	src/client/draw2d/sprite/center.hpp
 	src/client/draw2d/sprite/client/choices.hpp
