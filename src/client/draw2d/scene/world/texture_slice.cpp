@@ -19,7 +19,7 @@ sanguis::client::draw2d::scene::world::texture_slice::first_vertex() const
 }
 
 sge::renderer::vertex_count const
-sanguis::client::draw2d::scene::world::texture_slice::vertex_count()
+sanguis::client::draw2d::scene::world::texture_slice::vertex_count() const
 {
 	return vertex_count_;
 }

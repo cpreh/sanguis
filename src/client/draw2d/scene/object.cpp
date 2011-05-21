@@ -405,10 +405,6 @@ sanguis::client::draw2d::scene::object::render_lighting()
 		translation
 	);
 
-	world_->draw(
-		translation
-	);
-
 	rend_.transform(
 		sge::renderer::matrix_mode::world,
 		default_transform_
@@ -424,6 +420,10 @@ sanguis::client::draw2d::scene::object::render_lighting()
 		)
 	);
 	
+	world_->draw(
+		translation
+	);
+
 	for(
 		sprite::order index(
 			z_ordering::corpses

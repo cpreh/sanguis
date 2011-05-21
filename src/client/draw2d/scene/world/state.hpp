@@ -47,6 +47,8 @@ public:
 private:
 	sge::renderer::device &renderer_;
 
+	sge::renderer::vertex_declaration const &vertex_declaration_;
+
 	typedef fcppt::scoped_ptr<
 		world::batch_grid
 	> batch_grid_scoped_ptr;

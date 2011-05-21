@@ -30,7 +30,7 @@ public:
 	first_vertex() const;
 
 	sge::renderer::vertex_count const
-	vertex_count();
+	vertex_count() const;
 
 	sge::texture::const_part_ptr const
 	texture() const;

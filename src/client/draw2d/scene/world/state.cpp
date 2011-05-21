@@ -3,6 +3,7 @@
 #include "batch_grid.hpp"
 #include "generate_batches.hpp"
 #include "../../../world_parameters.hpp"
+#include <sge/renderer/scoped_vertex_declaration.hpp>
 #include <fcppt/container/grid/object_impl.hpp>
 
 sanguis::client::draw2d::scene::world::state::state(
@@ -13,6 +14,7 @@ sanguis::client::draw2d::scene::world::state::state(
 )
 :
 	renderer_(_renderer),
+	vertex_declaration_(_vertex_declaration),
 	batches_(
 		world::generate_batches(
 			_renderer,
@@ -33,5 +35,10 @@ sanguis::client::draw2d::scene::world::state::draw(
 	draw2d::vector2 const &_translation
 )
 {
-	
+	sge::renderer::scoped_vertex_declaration const scoped_decl(
+		renderer_,
+		vertex_declaration_
+	);
+
+	// TODO!
 }

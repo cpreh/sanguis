@@ -4,6 +4,7 @@
 #include "batch_fwd.hpp"
 #include "texture_slice_vector.hpp"
 #include "texture_slice.hpp"
+#include <sge/renderer/device_fwd.hpp>
 #include <sge/renderer/vertex_buffer_ptr.hpp>
 
 namespace sanguis
@@ -25,6 +26,11 @@ public:
 	batch(
 		sge::renderer::vertex_buffer_ptr,
 		world::texture_slice_vector const &
+	);
+
+	void
+	render(
+		sge::renderer::device &
 	);
 private:
 	sge::renderer::vertex_buffer_ptr vertex_buffer_;
