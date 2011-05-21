@@ -1,5 +1,4 @@
 #include "daytime_settings.hpp"
-#include "gmtime.hpp"
 #include <sge/console/object.hpp>
 #include <sge/font/text/lit.hpp>
 #include <sge/font/text/to_fcppt_string.hpp>
@@ -9,6 +8,7 @@
 #include <fcppt/chrono/duration_arithmetic.hpp>
 #include <fcppt/chrono/duration_impl.hpp>
 #include <fcppt/io/istringstream.hpp>
+#include <fcppt/time/gmtime.hpp>
 #include <fcppt/time/parse_date.hpp>
 #include <fcppt/time/parse_time.hpp>
 #include <fcppt/tr1/functional.hpp>
@@ -163,7 +163,7 @@ sanguis::client::daytime_settings::current_time()
 	);
 
 	std::tm const local_time(
-		client::gmtime(
+		fcppt::time::gmtime(
 			clock::to_time_t(
 				time_begin_
 				+ (

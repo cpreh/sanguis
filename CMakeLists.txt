@@ -478,8 +478,6 @@ SET(
 	src/client/events/tick.hpp
 	src/client/events/tick_fwd.hpp
 	src/client/exp.hpp
-	src/client/gmtime.cpp
-	src/client/gmtime.hpp
 	src/client/gui/menu/callbacks/cancel_connect.hpp
 	src/client/gui/menu/callbacks/connect.hpp
 	src/client/gui/menu/callbacks/object.cpp
