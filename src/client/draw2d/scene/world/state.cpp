@@ -7,13 +7,16 @@
 
 sanguis::client::draw2d::scene::world::state::state(
 	sge::renderer::device &_renderer,
-	client::world_parameters const &_parameters,
-	load::resource::textures const &_textures
+	load::resource::textures const &_textures,
+	sge::renderer::vertex_declaration const &_vertex_declaration,
+	client::world_parameters const &_parameters
 )
 :
 	renderer_(_renderer),
 	batches_(
 		world::generate_batches(
+			_renderer,
+			_vertex_declaration,
 			_parameters.top_parameters(),
 			_textures
 		)

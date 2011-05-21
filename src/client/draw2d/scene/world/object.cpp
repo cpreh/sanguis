@@ -1,5 +1,8 @@
 #include "object.hpp"
 #include "state.hpp"
+#include "vf/format.hpp"
+#include <sge/renderer/vf/dynamic/make_format.hpp>
+#include <sge/renderer/device.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 
@@ -10,6 +13,13 @@ sanguis::client::draw2d::scene::world::object::object(
 :
 	renderer_(_renderer),
 	textures_(_textures),
+	vertex_declaration_(
+		renderer_.create_vertex_declaration(
+			sge::renderer::vf::dynamic::make_format<
+				world::vf::format
+			>()
+		)
+	),
 	state_()
 {
 }
@@ -43,8 +53,9 @@ sanguis::client::draw2d::scene::world::object::change(
 			fcppt::ref(
 				renderer_
 			),
-			_param,
-			textures_
+			textures_,
+			*vertex_declaration_,
+			_param
 		)
 	);
 }

@@ -7,6 +7,7 @@
 #include "../../../world_parameters_fwd.hpp"
 #include "../../../../load/resource/textures_fwd.hpp"
 #include <sge/renderer/device_fwd.hpp>
+#include <sge/renderer/vertex_declaration_fwd.hpp>
 #include <fcppt/container/grid/object_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
@@ -32,8 +33,9 @@ public:
 
 	state(
 		sge::renderer::device &,
-		client::world_parameters const &,
-		load::resource::textures const &
+		load::resource::textures const &,
+		sge::renderer::vertex_declaration const &,
+		client::world_parameters const &
 	);
 
 	~state();

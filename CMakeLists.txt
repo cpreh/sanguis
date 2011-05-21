@@ -370,15 +370,25 @@ SET(
 	src/client/draw2d/scene/world/envelope.hpp
 	src/client/draw2d/scene/world/generate_batches.cpp
 	src/client/draw2d/scene/world/generate_batches.hpp
+	src/client/draw2d/scene/world/make_batch.cpp
+	src/client/draw2d/scene/world/make_batch.hpp
 	src/client/draw2d/scene/world/object.cpp
 	src/client/draw2d/scene/world/object.hpp
 	src/client/draw2d/scene/world/object_fwd.hpp
+	src/client/draw2d/scene/world/sort_shapes.cpp
+	src/client/draw2d/scene/world/sort_shapes.hpp
 	src/client/draw2d/scene/world/state.cpp
 	src/client/draw2d/scene/world/state.hpp
 	src/client/draw2d/scene/world/state_fwd.hpp
+	src/client/draw2d/scene/world/texture_slice.cpp
 	src/client/draw2d/scene/world/texture_slice.hpp
 	src/client/draw2d/scene/world/texture_slice_fwd.hpp
 	src/client/draw2d/scene/world/texture_slice_vector.hpp
+	src/client/draw2d/scene/world/vf/format.hpp
+	src/client/draw2d/scene/world/vf/format_part.hpp
+	src/client/draw2d/scene/world/vf/pos.hpp
+	src/client/draw2d/scene/world/vf/scalar.hpp
+	src/client/draw2d/scene/world/vf/texpos.hpp
 	src/client/draw2d/speed.hpp
 	src/client/draw2d/sprite/center.hpp
 	src/client/draw2d/sprite/client/choices.hpp

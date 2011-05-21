@@ -3,7 +3,7 @@
 #include "batch_grid.hpp"
 #include "batch_size.hpp"
 #include "envelope.hpp"
-//#include "../../../../load/resource/textures.hpp"
+#include "make_batch.hpp"
 #include <sanguis/creator/generator/generate.hpp>
 #include <sanguis/creator/generator/result.hpp>
 #include <sanguis/creator/generator/size.hpp>
@@ -13,13 +13,18 @@
 #include <fcppt/container/grid/object_impl.hpp>
 #include <fcppt/math/box/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/round_div_int.hpp>
+#include <fcppt/math/vector/dim.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <iterator>
 
 sanguis::client::draw2d::scene::world::batch_grid_unique_ptr
 sanguis::client::draw2d::scene::world::generate_batches(
+	sge::renderer::device &_renderer,
+	sge::renderer::vertex_declaration const &_vertex_declaration,
 	sanguis::creator::generator::top_parameters const &_parameters,
 	load::resource::textures const &_textures
 )
@@ -57,6 +62,15 @@ sanguis::client::draw2d::scene::world::generate_batches(
 		generated.shapes()
 	);
 
+	typedef fcppt::container::grid::object<
+		sanguis::creator::geometry::shape_container,
+		2
+	> shape_container_grid;
+
+	shape_container_grid temp_grid(
+		ret->size()
+	);
+
 	for(
 		sanguis::creator::geometry::shape_container::const_iterator shape_it(
 			shapes.begin()
@@ -71,8 +85,77 @@ sanguis::client::draw2d::scene::world::generate_batches(
 			)
 		);
 
-		
+		sanguis::creator::geometry::rect::dim const batch_dim(
+			fcppt::math::dim::fill<
+				sanguis::creator::geometry::rect::dim::dim_wrapper::value
+			>(
+				world::batch_size
+			)
+		);
+
+		sanguis::creator::geometry::vector const
+			lower_bound(
+				envelope.pos()
+				/
+				batch_dim
+			),
+			upper_bound(
+				(
+					envelope.pos()
+					+ envelope.size()
+				)
+				/ batch_dim
+			);
+
+	// TODO: we need better iteration mechanisms for grid!
+		for(
+			sanguis::creator::geometry::vector::value_type pos_y(
+				lower_bound.y()
+			);
+			pos_y != upper_bound.y();
+			++pos_y
+		)
+			for(
+				sanguis::creator::geometry::vector::value_type pos_x(
+					lower_bound.x()
+				);
+				pos_x != upper_bound.x();
+				++pos_x
+			)
+				temp_grid[
+					shape_container_grid::dim(
+						pos_x,
+						pos_y
+					)
+				].push_back(
+					*shape_it
+				);
 	}
+
+	for(
+		shape_container_grid::const_iterator it(
+			temp_grid.begin()
+		);
+		it != temp_grid.end();
+		++it
+	)
+		*(
+			ret->begin() +
+			std::distance(
+				static_cast<
+					shape_container_grid const &
+				>(
+					temp_grid
+				).begin(),
+				it
+			)
+		) =
+			world::make_batch(
+				_renderer,
+				_vertex_declaration,
+				_textures,
+				*it
+			);
 
 	return
 		move(

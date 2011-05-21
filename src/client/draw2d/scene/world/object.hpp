@@ -7,6 +7,7 @@
 #include "../../../world_parameters_fwd.hpp"
 #include "../../../../load/resource/textures_fwd.hpp"
 #include <sge/renderer/device_fwd.hpp>
+#include <sge/renderer/vertex_declaration_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
 
@@ -47,6 +48,8 @@ private:
 	sge::renderer::device &renderer_;
 
 	load::resource::textures const &textures_;
+
+	sge::renderer::vertex_declaration_ptr const vertex_declaration_;
 
 	typedef fcppt::scoped_ptr<
 		scene::world::state
