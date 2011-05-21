@@ -8,6 +8,7 @@
 #include <sge/font/text/drawer_fwd.hpp>
 #include <sge/time/frames_counter.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <ctime>
 
 namespace sanguis
 {
@@ -24,9 +25,10 @@ class hud
 		hud
 	);
 public:
-	explicit hud(
+	hud(
 		sge::font::metrics &,
-		sge::font::text::drawer &
+		sge::font::text::drawer &,
+		std::tm const &
 	);
 
 	void
@@ -40,6 +42,11 @@ public:
 	);
 
 	void
+	time(
+		std::tm const &
+	);
+
+	void
 	draw();
 private:
 	sge::font::metrics &font_metrics_;
@@ -49,6 +56,8 @@ private:
 	client::exp experience_;
 
 	client::level level_;
+
+	std::tm time_;
 
 	sge::time::frames_counter frames_counter_;
 };

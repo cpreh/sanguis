@@ -77,7 +77,8 @@ sanguis::client::draw2d::scene::object::object(
 			),
 			fcppt::ref(
 				_font_drawer
-			)
+			),
+			_current_time
 		)
 	),
 	world_(
@@ -313,6 +314,10 @@ sanguis::client::draw2d::scene::object::set_time(
 )
 {
 	current_time_ = _current_time;
+
+	hud_->time(
+		current_time_
+	);
 }
 
 sanguis::client::control::environment &

@@ -152,21 +152,22 @@ sanguis::client::daytime_settings::daytime_settings(
 }
 
 sanguis::client::daytime_settings::~daytime_settings()
-{}
+{
+}
 
 std::tm const
 sanguis::client::daytime_settings::current_time()
 {
-	time_point const time_(
+	time_point const time_now(
 		daytime_settings::now()
 	);
 
-	std::tm const localtime_(
+	std::tm const local_time(
 		client::gmtime(
 			clock::to_time_t(
 				time_begin_
 				+ (
-					time_
+					time_now
 					- time_begin_
 				)
 				* speedup_
@@ -174,7 +175,7 @@ sanguis::client::daytime_settings::current_time()
 		)
 	);
 
-	std::tm result_time_(
+	std::tm result_time(
 		current_time_
 	);
 
@@ -188,14 +189,14 @@ sanguis::client::daytime_settings::current_time()
 			zipped_vec
 		>(
 			zipped_vec(
-				result_time_,
-				localtime_
+				result_time,
+				local_time
 			)
 		),
 		overwrite_members()
 	);
 
-	return result_time_;
+	return result_time;
 }
 
 void
