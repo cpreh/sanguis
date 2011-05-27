@@ -119,7 +119,7 @@ sanguis::load::resource::sounds::make_impl(
 	sge::audio::file_ptr const _file,
 	sound_type::type const _type,
 	fcppt::function::object<
-		Ret (sge::audio::file &)
+		Ret (sge::audio::file_ptr)
 	> const &_make_normal,
 	fcppt::function::object<
 		Ret (sge::audio::buffer *)
@@ -134,7 +134,7 @@ try
 	case sanguis::load::sound_type::stream:
 		return
 			_make_normal(
-				*_file
+				_file
 			);
 	case sanguis::load::sound_type::nonstream:
 		return

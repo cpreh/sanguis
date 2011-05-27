@@ -67,7 +67,7 @@ private:
 		sge::audio::file_ptr,
 		sound_type::type,
 		fcppt::function::object<
-			Ret (sge::audio::file &)
+			Ret (sge::audio::file_ptr)
 		> const &,
 		fcppt::function::object<
 			Ret (sge::audio::buffer *)
