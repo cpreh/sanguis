@@ -40,5 +40,16 @@ sanguis::client::draw2d::scene::world::state::draw(
 		vertex_declaration_
 	);
 
-	// TODO!
+	// TODO: draw batches with the stencil buffer
+	// Also check which are not visible
+	for(
+		batch_grid::iterator batch_it(
+			batches_->begin()
+		);
+		batch_it != batches_->end();
+		++batch_it
+	)
+		batch_it->draw(
+			renderer_
+		);
 }

@@ -21,7 +21,7 @@ sanguis::client::draw2d::scene::world::batch::batch(
 }
 
 void
-sanguis::client::draw2d::scene::world::batch::render(
+sanguis::client::draw2d::scene::world::batch::draw(
 	sge::renderer::device &_renderer
 )
 {

@@ -29,7 +29,7 @@ public:
 	);
 
 	void
-	render(
+	draw(
 		sge::renderer::device &
 	);
 private:
