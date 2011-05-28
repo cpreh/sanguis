@@ -45,7 +45,7 @@ sanguis::client::draw2d::scene::world::batch::draw(
 			)
 		);
 
-		_renderer.render(
+		_renderer.render_nonindexed(
 			it->first_vertex(),
 			it->vertex_count(),
 			sge::renderer::nonindexed_primitive_type::triangle
