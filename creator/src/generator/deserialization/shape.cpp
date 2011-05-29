@@ -33,7 +33,7 @@ sanguis::creator::generator::deserialization::shape(
 			>(
 				sge::parse::json::find_member_value_exn(
 					_object.members,
-					FCPPT_TEXT("polygon")
+					FCPPT_TEXT("solidity")
 				),
 				geometry::solidity::size
 			),

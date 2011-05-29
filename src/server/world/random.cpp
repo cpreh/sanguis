@@ -50,11 +50,14 @@ sanguis::server::world::random(
 		/ FCPPT_TEXT("world01")
 	);
 
+	// overwrite the world file just for testing
+#if 0
 	if(
 		!fcppt::filesystem::exists(
 			world_path
 		)
 	)
+#endif
 	{
 		fcppt::io::ofstream stream(
 			world_path
