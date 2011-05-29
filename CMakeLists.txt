@@ -366,6 +366,8 @@ SET(
 	src/client/draw2d/scene/world/batch_grid.hpp
 	src/client/draw2d/scene/world/batch_grid_unique_ptr.hpp
 	src/client/draw2d/scene/world/batch_size.hpp
+	src/client/draw2d/scene/world/clamp_pos.cpp
+	src/client/draw2d/scene/world/clamp_pos.hpp
 	src/client/draw2d/scene/world/envelope.cpp
 	src/client/draw2d/scene/world/envelope.hpp
 	src/client/draw2d/scene/world/generate_batches.cpp
@@ -377,6 +379,11 @@ SET(
 	src/client/draw2d/scene/world/object_fwd.hpp
 	src/client/draw2d/scene/world/sort_shapes.cpp
 	src/client/draw2d/scene/world/sort_shapes.hpp
+	src/client/draw2d/scene/world/sprite/choices.hpp
+	src/client/draw2d/scene/world/sprite/object.hpp
+	src/client/draw2d/scene/world/sprite/parameters.hpp
+	src/client/draw2d/scene/world/sprite/system.hpp
+	src/client/draw2d/scene/world/sprite/type_choices.hpp
 	src/client/draw2d/scene/world/state.cpp
 	src/client/draw2d/scene/world/state.hpp
 	src/client/draw2d/scene/world/state_fwd.hpp

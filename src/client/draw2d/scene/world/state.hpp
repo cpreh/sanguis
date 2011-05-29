@@ -3,11 +3,15 @@
 
 #include "state_fwd.hpp"
 #include "batch_grid.hpp"
+#include "sprite/object.hpp"
+#include "sprite/system.hpp"
 #include "../../vector2.hpp"
 #include "../../../world_parameters_fwd.hpp"
 #include "../../../../load/resource/textures_fwd.hpp"
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/renderer/vertex_declaration_fwd.hpp>
+#include <sge/sprite/external_system_decl.hpp>
+#include <sge/sprite/object_decl.hpp>
 #include <fcppt/container/grid/object_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
@@ -54,6 +58,10 @@ private:
 	> batch_grid_scoped_ptr;
 
 	batch_grid_scoped_ptr const batches_;
+
+	world::sprite::system stencil_sprite_system_;
+
+	world::sprite::object stencil_sprite_;
 };
 
 }

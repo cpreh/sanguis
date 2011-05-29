@@ -58,7 +58,7 @@ sanguis::args::sge_options(
 					args::screen_mode(
 						_vm
 					),
-					sge::renderer::depth_stencil_buffer::off,
+					sge::renderer::depth_stencil_buffer::d24s8,
 					sge::renderer::vsync::on,
 					sge::renderer::multi_sample_type(
 						args::multi_sampling(
