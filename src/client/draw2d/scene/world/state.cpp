@@ -8,6 +8,8 @@
 #include "sprite/parameters.hpp"
 #include "../../vector2.hpp"
 #include "../../../world_parameters.hpp"
+#include <sge/renderer/clear_flags.hpp>
+#include <sge/renderer/clear_flags_field.hpp>
 #include <sge/renderer/scoped_vertex_declaration.hpp>
 #include <sge/renderer/viewport_size.hpp>
 #include <sge/renderer/state/int.hpp>
@@ -171,6 +173,15 @@ sanguis::client::draw2d::scene::world::state::draw(
 		)
 		(
 			sge::renderer::state::int_::stencil_ref = 0
+		)
+		(
+			sge::renderer::state::int_::stencil_buffer_clear_val = 0
+		)
+	);
+
+	renderer_.clear(
+		sge::renderer::clear_flags_field(
+			sge::renderer::clear_flags::stencil_buffer
 		)
 	);
 
