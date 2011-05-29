@@ -6,6 +6,7 @@
 #include "generate_batches.hpp"
 #include "sprite/object.hpp"
 #include "sprite/parameters.hpp"
+#include "../../vector2.hpp"
 #include "../../../world_parameters.hpp"
 #include <sge/renderer/scoped_vertex_declaration.hpp>
 #include <sge/renderer/viewport_size.hpp>
@@ -25,8 +26,10 @@
 #include <fcppt/math/dim/transform.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/math/vector/transform.hpp>
 #include <fcppt/math/round_div_int.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <algorithm>
 
 sanguis::client::draw2d::scene::world::state::state(
 	sge::renderer::device &_renderer,
@@ -102,7 +105,16 @@ sanguis::client::draw2d::scene::world::state::draw(
 			fcppt::math::vector::structure_cast<
 				batch_grid::dim
 			>(
-				_translation
+				fcppt::math::vector::transform(
+					_translation,
+					std::tr1::bind(
+						std::max<
+							draw2d::vector2::value_type
+						>,
+						std::tr1::placeholders::_1,
+						0
+					)
+				)
 			)
 		),
 		half_viewport(
