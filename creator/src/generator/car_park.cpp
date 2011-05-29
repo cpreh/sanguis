@@ -59,11 +59,11 @@ sanguis::creator::generator::car_park(
 					(
 						geometry::vertex(
 							geometry::vector(
-								50,
+								0,
 								50
 							),
 							geometry::texture_point(
-								0.5f,
+								0,
 								0.5f
 							)
 						)
