@@ -4,21 +4,26 @@
 #include "batch_size.hpp"
 #include "envelope.hpp"
 #include "make_batch.hpp"
+#include "../../../../exception.hpp"
 #include <sanguis/creator/generator/generate.hpp>
 #include <sanguis/creator/generator/result.hpp>
 #include <sanguis/creator/generator/size.hpp>
 #include <sanguis/creator/geometry/rect.hpp>
 #include <sanguis/creator/geometry/shape_container.hpp>
 #include <fcppt/algorithm/array_map.hpp>
+#include <fcppt/container/grid/in_range.hpp>
 #include <fcppt/container/grid/object_impl.hpp>
 #include <fcppt/math/box/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/dim/fill.hpp>
+#include <fcppt/math/dim/output.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/round_div_int.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/format.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/text.hpp>
 #include <iterator>
 
 sanguis::client::draw2d::scene::world::batch_grid_unique_ptr
@@ -107,29 +112,50 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				/ batch_dim
 			);
 
-	// TODO: we need better iteration mechanisms for grid!
+		// TODO: we need better iteration mechanisms for grid!
 		for(
 			sanguis::creator::geometry::vector::value_type pos_y(
 				lower_bound.y()
 			);
-			pos_y != upper_bound.y();
+			pos_y <= upper_bound.y();
 			++pos_y
 		)
 			for(
 				sanguis::creator::geometry::vector::value_type pos_x(
 					lower_bound.x()
 				);
-				pos_x != upper_bound.x();
+				pos_x <= upper_bound.x();
 				++pos_x
 			)
-				temp_grid[
-					shape_container_grid::dim(
-						pos_x,
-						pos_y
+			{
+				shape_container_grid::dim const pos(
+					pos_x,
+					pos_y
+				);
+
+				if(
+					!fcppt::container::grid::in_range(
+						temp_grid,
+						pos
 					)
+				)
+					throw sanguis::exception(
+						(
+							fcppt::format(
+								FCPPT_TEXT("Tried to insert a shape at position %1%,")
+								FCPPT_TEXT(" but the grid size is only %2%!")
+							)
+							% pos
+							% temp_grid.size()
+						).str()
+					);
+
+				temp_grid[
+					pos
 				].push_back(
 					*shape_it
 				);
+			}
 	}
 
 	for(

@@ -3,6 +3,7 @@
 
 #include "batch_grid.hpp"
 #include "batch.hpp"
+#include "signed_pos.hpp"
 #include <fcppt/container/grid/object_decl.hpp>
 #include <fcppt/math/dim/basic_decl.hpp>
 
@@ -17,10 +18,10 @@ namespace scene
 namespace world
 {
 
-batch_grid::dim const
+world::batch_grid::dim const
 clamp_pos(
-	batch_grid::dim const &pos,
-	batch_grid::dim const &size
+	world::signed_pos const &pos,
+	world::batch_grid::dim const &size
 );
 
 }

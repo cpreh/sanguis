@@ -50,6 +50,15 @@ sanguis::client::draw2d::scene::world::make_batch(
 	sanguis::creator::geometry::shape_container _shapes
 )
 {
+	if(
+		_shapes.empty()
+	)
+		return
+			world::batch(
+				sge::renderer::vertex_buffer_ptr(),
+				world::texture_slice_vector()
+			);
+
 	std::sort(
 		_shapes.begin(),
 		_shapes.end(),

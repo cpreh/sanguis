@@ -4,6 +4,7 @@
 #include "batch_size.hpp"
 #include "clamp_pos.hpp"
 #include "generate_batches.hpp"
+#include "signed_pos.hpp"
 #include "sprite/object.hpp"
 #include "sprite/parameters.hpp"
 #include "../../vector2.hpp"
@@ -20,9 +21,10 @@
 #include <sge/sprite/external_system_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/parameters_impl.hpp>
-#include <sge/sprite/render_one.hpp>
+#include <sge/sprite/render_one_advanced.hpp>
 #include <fcppt/container/grid/object_impl.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
+#include <fcppt/math/dim/comparison.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/dim/transform.hpp>
@@ -31,6 +33,7 @@
 #include <fcppt/math/vector/transform.hpp>
 #include <fcppt/math/round_div_int.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/assert.hpp>
 #include <algorithm>
 
 sanguis::client::draw2d::scene::world::state::state(
@@ -80,11 +83,11 @@ sanguis::client::draw2d::scene::world::state::draw(
 	draw2d::vector2 const &_translation
 )
 {
-	sge::renderer::scoped_vertex_declaration const scoped_decl(
-		renderer_,
-		vertex_declaration_
-	);
-	
+	if(
+		batches_->empty()
+	)
+		return;
+
 	sge::renderer::screen_size const viewport_size(
 		sge::renderer::viewport_size(
 			renderer_
@@ -94,18 +97,18 @@ sanguis::client::draw2d::scene::world::state::draw(
 	// translation is the middle of the screen, so the visible part is
 	// (translation - viewport_size / 2, translation + viewport_size / 2)
 
-	batch_grid::size_type const batch_size_trans(
+	world::signed_pos::value_type const batch_size_trans(
 		static_cast<
-			batch_grid::size_type
+			world::signed_pos::value_type
 		>(
 			world::batch_size
 		)
 	);
 
-	batch_grid::dim const
+	world::signed_pos const
 		int_translation(
 			fcppt::math::vector::structure_cast<
-				batch_grid::dim
+				world::signed_pos
 			>(
 				fcppt::math::vector::transform(
 					_translation,
@@ -121,17 +124,19 @@ sanguis::client::draw2d::scene::world::state::draw(
 		),
 		half_viewport(
 			fcppt::math::dim::structure_cast<
-				batch_grid::dim
+				world::signed_pos
 			>(
 				viewport_size
 			)
 			/
 			static_cast<
-				batch_grid::size_type
+				world::signed_pos::value_type
 			>(
 				2
 			)
-		),
+		);
+	
+	world::batch_grid::dim const
 		lower(
 			world::clamp_pos(
 				(
@@ -177,12 +182,26 @@ sanguis::client::draw2d::scene::world::state::draw(
 		(
 			sge::renderer::state::int_::stencil_buffer_clear_val = 0
 		)
+		(
+			sge::renderer::state::bool_::enable_alpha_blending = true
+		)
+		(
+			sge::renderer::state::source_blend_func::src_alpha
+		)
+		(
+			sge::renderer::state::dest_blend_func::inv_src_alpha
+		)
+
 	);
 
 	renderer_.clear(
 		sge::renderer::clear_flags_field(
 			sge::renderer::clear_flags::stencil_buffer
 		)
+	);
+
+	FCPPT_ASSERT(
+		lower <= upper
 	);
 
 	for(
@@ -226,16 +245,21 @@ sanguis::client::draw2d::scene::world::state::draw(
 							= sge::renderer::state::stencil_op_value::inc_sat
 					)
 				);
-					
-				sge::sprite::render_one(
+
+				sge::sprite::render_one_advanced(
 					stencil_sprite_system_,
 					stencil_sprite_
 				);
 			}
 
-			(*batches_)[
+			sge::renderer::scoped_vertex_declaration const scoped_decl(
+				renderer_,
+				vertex_declaration_
+			);
+	
+			(*batches_).at(
 				pos
-			].draw(
+			).draw(
 				renderer_
 			);
 		}

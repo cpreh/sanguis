@@ -47,8 +47,8 @@ sanguis::creator::generator::car_park(
 					(
 						geometry::vertex(
 							geometry::vector(
-								100,
-								100
+								2000,
+								2000
 							),
 							geometry::texture_point(
 								1,
@@ -60,7 +60,7 @@ sanguis::creator::generator::car_park(
 						geometry::vertex(
 							geometry::vector(
 								0,
-								50
+								1000
 							),
 							geometry::texture_point(
 								0,
@@ -82,8 +82,8 @@ sanguis::creator::generator::car_park(
 				FCPPT_TEXT("car_park")
 			),
 			generator::size(
-				1024,
-				1024
+				3000,
+				3000	
 			)
 		);
 }

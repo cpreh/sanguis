@@ -25,6 +25,11 @@ sanguis::client::draw2d::scene::world::batch::draw(
 	sge::renderer::device &_renderer
 )
 {
+	if(
+		!vertex_buffer_
+	)
+		return;
+
 	sge::renderer::scoped_vertex_buffer const scoped_buffer(
 		_renderer,
 		*vertex_buffer_
