@@ -93,9 +93,6 @@ sanguis::client::draw2d::scene::world::state::draw(
 		)
 	);
 
-	// translation is the middle of the screen, so the visible part is
-	// (translation - viewport_size / 2, translation + viewport_size / 2)
-
 	world::signed_pos::value_type const batch_size_trans(
 		static_cast<
 			world::signed_pos::value_type
@@ -170,7 +167,6 @@ sanguis::client::draw2d::scene::world::state::draw(
 		(
 			sge::renderer::state::dest_blend_func::inv_src_alpha
 		)
-
 	);
 
 	renderer_.clear(

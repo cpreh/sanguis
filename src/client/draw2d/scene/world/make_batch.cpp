@@ -91,107 +91,116 @@ sanguis::client::draw2d::scene::world::make_batch(
 
 	world::texture_slice_vector texture_slices;
 
-	if(
-		!_shapes.empty()
+	sge::renderer::scoped_vertex_lock const vblock(
+		*vertex_buffer,
+		sge::renderer::lock_mode::writeonly
+	);
+
+	typedef sge::renderer::vf::view<
+		world::vf::format_part
+	> vf_view;
+
+	vf_view const vertices(
+		vblock.value()
+	);
+
+	vf_view::iterator vb_it(
+		vertices.begin()
+	);
+
+	sge::renderer::size_type cur_vertex(0u);
+
+	sanguis::creator::geometry::texture_name cur_texture(
+		_shapes[0].texture_name()
+	);
+
+	sge::renderer::size_type num_vertices(0u);
+
+	for(
+		sanguis::creator::geometry::shape_container::const_iterator shape_it(
+			_shapes.begin()
+		);
+		shape_it != _shapes.end();
+		++shape_it
 	)
 	{
-		sge::renderer::scoped_vertex_lock const vblock(
-			*vertex_buffer,
-			sge::renderer::lock_mode::writeonly
+		sanguis::creator::geometry::polygon const &poly(
+			shape_it->polygon()
 		);
-
-		typedef sge::renderer::vf::view<
-			world::vf::format_part
-		> vf_view;
-
-		vf_view const vertices(
-			vblock.value()
-		);
-
-		vf_view::iterator vb_it(
-			vertices.begin()
-		);
-
-		sge::renderer::size_type cur_vertex(0u);
-
-		sanguis::creator::geometry::texture_name cur_texture(
-			_shapes[0].texture_name()
-		);
-
-		sge::renderer::size_type num_vertices(0u);
 
 		for(
-			sanguis::creator::geometry::shape_container::const_iterator shape_it(
-				_shapes.begin()
+			sanguis::creator::geometry::polygon::const_iterator poly_it(
+				poly.begin()
 			);
-			shape_it != _shapes.end();
-			++shape_it
+			poly_it != poly.end();
+			++poly_it
 		)
 		{
-			sanguis::creator::geometry::polygon const &poly(
-				shape_it->polygon()
+			(*vb_it).set<
+				world::vf::pos
+			>(
+				fcppt::math::vector::structure_cast<
+					world::vf::pos::packed_type
+				>(
+					poly_it->pos()
+				)
 			);
 
-			for(
-				sanguis::creator::geometry::polygon::const_iterator poly_it(
-					poly.begin()
-				);
-				poly_it != poly.end();
-				++poly_it
-			)
-			{
-				(*vb_it).set<
-					world::vf::pos
+			(*vb_it).set<
+				world::vf::texpos
+			>(
+				fcppt::math::vector::structure_cast<
+					world::vf::texpos::packed_type
 				>(
-					fcppt::math::vector::structure_cast<
-						world::vf::pos::packed_type
-					>(
-						poly_it->pos()
-					)
-				);
+					poly_it->texcoords()
+				)
+			);
 
-				(*vb_it).set<
-					world::vf::texpos
-				>(
-					fcppt::math::vector::structure_cast<
-						world::vf::texpos::packed_type
-					>(
-						poly_it->texcoords()
-					)
-				);
-
-				++vb_it;
-			}
-
-			if(
-				shape_it->texture_name()
-				!= cur_texture
-			)
-			{
-				texture_slices.push_back(
-					world::texture_slice(
-						sge::renderer::first_vertex(
-							cur_vertex
-						),
-						sge::renderer::vertex_count(
-							num_vertices
-						),
-						_textures.load(
-							cur_texture // TODO!
-						)
-					)
-				);
-
-				cur_texture = shape_it->texture_name();
-
-				cur_vertex += num_vertices;
-
-				num_vertices = 0;
-			}
-
-			num_vertices += poly.size();
+			++vb_it;
 		}
+
+		if(
+			shape_it->texture_name()
+			!= cur_texture
+		)
+		{
+			texture_slices.push_back(
+				world::texture_slice(
+					sge::renderer::first_vertex(
+						cur_vertex
+					),
+					sge::renderer::vertex_count(
+						num_vertices
+					),
+					_textures.load(
+						cur_texture // TODO!
+					)
+				)
+			);
+
+			cur_texture = shape_it->texture_name();
+
+			cur_vertex += num_vertices;
+
+			num_vertices = 0;
+		}
+
+		num_vertices += poly.size();
 	}
+
+	texture_slices.push_back(
+		world::texture_slice(
+			sge::renderer::first_vertex(
+				cur_vertex
+			),
+			sge::renderer::vertex_count(
+				num_vertices
+			),
+			_textures.load(
+				cur_texture
+			)
+		)
+	);
 
 	return
 		world::batch(
