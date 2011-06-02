@@ -146,7 +146,7 @@ sanguis::server::world::object::update(
 		send_timer_.update_b()
 	);
 
-	collision_world_->update(
+	collision_world_->update_continuous(
 		sge::projectile::time_increment(
 			sge::time::second_f(
 				sanguis::time_to_second(
