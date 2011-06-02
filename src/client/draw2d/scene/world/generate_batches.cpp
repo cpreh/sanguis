@@ -111,7 +111,30 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				)
 				/ batch_dim
 			);
+#if 0
+		sanguis::creator::geometry::polygon const &poly(
+			shape_it->polygon()
+		);
 
+		typedef std::vector<
+			sanguis::creator::geometry::vector
+		> vector2_container;
+
+		vector2_container converted;
+
+		converted.reserve(
+			poly.size()
+		);
+
+		sge::projectile::shape::triangle_set const new_triangles(
+			sge::projectile::triangulation::triangulate<
+				sge::projectile::shape::triangle_set
+			>(
+				converted,
+				0.01f // TODO!
+			)
+		);
+#endif
 		// TODO: we need better iteration mechanisms for grid!
 		for(
 			sanguis::creator::geometry::vector::value_type pos_y(

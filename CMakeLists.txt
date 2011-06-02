@@ -377,6 +377,7 @@ SET(
 	src/client/draw2d/scene/world/object.cpp
 	src/client/draw2d/scene/world/object.hpp
 	src/client/draw2d/scene/world/object_fwd.hpp
+	src/client/draw2d/scene/world/signed_pos.hpp
 	src/client/draw2d/scene/world/sort_shapes.cpp
 	src/client/draw2d/scene/world/sort_shapes.hpp
 	src/client/draw2d/scene/world/sprite/choices.hpp

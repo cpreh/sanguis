@@ -35,6 +35,8 @@ SET(
 	include/sanguis/creator/geometry/texture_name.hpp
 	include/sanguis/creator/geometry/texture_point.hpp
 	include/sanguis/creator/geometry/texture_unit.hpp
+	include/sanguis/creator/geometry/triangulate/polygon.hpp
+	include/sanguis/creator/geometry/triangulate/transform_function.hpp
 	include/sanguis/creator/geometry/unit.hpp
 	include/sanguis/creator/geometry/vector.hpp
 	include/sanguis/creator/geometry/vertex.hpp
