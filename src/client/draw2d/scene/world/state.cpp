@@ -199,6 +199,17 @@ sanguis::client::draw2d::scene::world::state::draw(
 				pos_y
 			);
 
+			sge::renderer::scoped_vertex_declaration const scoped_decl(
+				renderer_,
+				vertex_declaration_
+			);
+	
+			(*batches_).at(
+				pos
+			).draw(
+				renderer_
+			);
+
 			stencil_sprite_.pos(
 				fcppt::math::dim::structure_cast<
 					world::sprite::object::vector
@@ -226,16 +237,5 @@ sanguis::client::draw2d::scene::world::state::draw(
 					stencil_sprite_
 				);
 			}
-
-			sge::renderer::scoped_vertex_declaration const scoped_decl(
-				renderer_,
-				vertex_declaration_
-			);
-	
-			(*batches_).at(
-				pos
-			).draw(
-				renderer_
-			);
 		}
 }
