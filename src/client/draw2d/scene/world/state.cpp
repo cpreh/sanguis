@@ -7,6 +7,7 @@
 #include "signed_pos.hpp"
 #include "sprite/object.hpp"
 #include "sprite/parameters.hpp"
+#include "../background_dim.hpp"
 #include "../../vector2.hpp"
 #include "../../../world_parameters.hpp"
 #include <sge/renderer/clear_flags.hpp>
@@ -30,11 +31,9 @@
 #include <fcppt/math/dim/transform.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
-#include <fcppt/math/vector/transform.hpp>
 #include <fcppt/math/round_div_int.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/assert.hpp>
-#include <algorithm>
 
 sanguis::client::draw2d::scene::world::state::state(
 	sge::renderer::device &_renderer,
@@ -110,40 +109,14 @@ sanguis::client::draw2d::scene::world::state::draw(
 			fcppt::math::vector::structure_cast<
 				world::signed_pos
 			>(
-				fcppt::math::vector::transform(
-					_translation,
-					std::tr1::bind(
-						std::max<
-							draw2d::vector2::value_type
-						>,
-						std::tr1::placeholders::_1,
-						0
-					)
-				)
-			)
-		),
-		half_viewport(
-			fcppt::math::dim::structure_cast<
-				world::signed_pos
-			>(
-				viewport_size
-			)
-			/
-			static_cast<
-				world::signed_pos::value_type
-			>(
-				2
+				-_translation
 			)
 		);
-	
+
 	world::batch_grid::dim const
 		lower(
 			world::clamp_pos(
-				(
-					int_translation
-					-
-					half_viewport
-				)
+				int_translation
 				/
 				batch_size_trans
 				,
@@ -156,7 +129,13 @@ sanguis::client::draw2d::scene::world::state::draw(
 					(
 						int_translation
 						+
-						half_viewport
+						fcppt::math::dim::structure_cast<
+							world::signed_pos
+						>(
+							scene::background_dim(
+								renderer_
+							)
+						)
 					),
 					std::tr1::bind(
 						fcppt::math::round_div_int<
