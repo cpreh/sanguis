@@ -2,6 +2,7 @@
 #include "../entities/model/object.hpp"
 #include "../z_ordering.hpp"
 #include "../../../load/weapon_pickup_name.hpp"
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 sanguis::client::draw2d::entities::unique_ptr
@@ -15,7 +16,9 @@ sanguis::client::draw2d::factory::weapon_pickup(
 			fcppt::make_unique_ptr<
 				entities::model::object
 			>(
-				_param,
+				fcppt::cref(
+					_param
+				),
 				load::weapon_pickup_name(
 					_weapon
 				),

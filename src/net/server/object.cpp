@@ -1,6 +1,7 @@
 #include "object.hpp"
 #include "object_impl.hpp"
 #include <awl/mainloop/asio/io_service.hpp>
+#include <fcppt/chrono/duration_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 

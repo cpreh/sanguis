@@ -1,6 +1,7 @@
 #include "projectile.hpp"
 #include "../entities/bullet.hpp"
 #include "../../../exception.hpp"
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 
@@ -24,7 +25,9 @@ sanguis::client::draw2d::factory::projectile(
 				fcppt::make_unique_ptr<
 					entities::bullet
 				>(
-					_param,
+					fcppt::cref(
+						_param
+					),
 					FCPPT_TEXT("bullet")
 				)
 			);

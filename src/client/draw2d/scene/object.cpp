@@ -46,6 +46,7 @@
 #include <fcppt/function/object.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/assert.hpp>
+#include <fcppt/cref.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
@@ -88,7 +89,9 @@ sanguis::client::draw2d::scene::object::object(
 			fcppt::ref(
 				_rend
 			),
-			_resources.resources().textures()
+			fcppt::cref(
+				_resources.resources().textures()
+			)
 		)
 	),
 	audio_listener_(_audio_listener),
@@ -155,7 +158,9 @@ sanguis::client::draw2d::scene::object::object(
 		fcppt::make_unique_ptr<
 			scene::background
 		>(
-			_resources,
+			fcppt::cref(
+				_resources
+			),
 			fcppt::ref(
 				client_system_
 			),

@@ -1,5 +1,6 @@
 #include "player.hpp"
 #include "../entities/player.hpp"
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 sanguis::client::draw2d::entities::unique_ptr
@@ -12,7 +13,9 @@ sanguis::client::draw2d::factory::player(
 			fcppt::make_unique_ptr<
 				entities::player
 			>(
-				_param
+				fcppt::cref(
+					_param
+				)
 			)
 		);
 }

@@ -34,6 +34,7 @@
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/fatal.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/cref.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
@@ -229,7 +230,9 @@ sanguis::client::object::create_server(
 			server::object
 		>(
 			_port,
-			resources_
+			fcppt::cref(
+				resources_
+			)
 		)
 	);
 }

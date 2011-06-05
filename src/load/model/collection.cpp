@@ -2,6 +2,7 @@
 #include "make_path.hpp"
 #include "object.hpp"
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 sanguis::load::model::object const &
@@ -32,7 +33,9 @@ sanguis::load::model::collection::operator[](
 					model::make_path(
 						_name
 					),
-					ctx_
+					fcppt::cref(
+						ctx_
+					)
 				)
 			).first;
 

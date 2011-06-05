@@ -1,6 +1,7 @@
 #include "create.hpp"
 #include "object.hpp"
 #include "../args/server_port.hpp"
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 sanguis::main_object_unique_ptr
@@ -17,7 +18,9 @@ sanguis::server::create(
 				args::server_port(
 					_vm
 				),
-				_context
+				fcppt::cref(
+					_context
+				)
 			)
 		);
 }

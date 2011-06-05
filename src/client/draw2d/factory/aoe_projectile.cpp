@@ -2,8 +2,9 @@
 #include "../entities/aoe_bullet.hpp"
 #include "../../../load/aoe_projectile_name.hpp"
 #include "../../../exception.hpp"
-#include <fcppt/ref.hpp>
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::client::draw2d::entities::unique_ptr
@@ -29,7 +30,9 @@ sanguis::client::draw2d::factory::aoe_projectile(
 				fcppt::make_unique_ptr<
 					entities::aoe_bullet
 				>(
-					_param,
+					fcppt::cref(
+						_param
+					),
 					fcppt::ref(
 						_particle_system
 					),

@@ -3,6 +3,7 @@
 #include "vf/format.hpp"
 #include <sge/renderer/vf/dynamic/make_format.hpp>
 #include <sge/renderer/device.hpp>
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 
@@ -53,9 +54,15 @@ sanguis::client::draw2d::scene::world::object::change(
 			fcppt::ref(
 				renderer_
 			),
-			textures_,
-			*vertex_declaration_,
-			_param
+			fcppt::cref(
+				textures_
+			),
+			fcppt::cref(
+				*vertex_declaration_
+			),
+			fcppt::cref(
+				_param
+			)
 		)
 	);
 }

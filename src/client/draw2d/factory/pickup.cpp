@@ -4,6 +4,7 @@
 #include "../../../pickup_type.hpp"
 #include "../../../exception.hpp"
 #include "../../../load/pickup_name.hpp"
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 
@@ -28,7 +29,9 @@ sanguis::client::draw2d::factory::pickup(
 			fcppt::make_unique_ptr<
 				entities::model::object
 			>(
-				_param,
+				fcppt::cref(
+					_param
+				),
 				get_texture(
 					_ptype
 				),

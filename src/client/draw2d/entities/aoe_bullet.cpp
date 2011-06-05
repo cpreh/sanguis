@@ -3,6 +3,8 @@
 #include "own_auto_ptr.hpp"
 #include "model/parameters.hpp"
 #include "../z_ordering.hpp"
+#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/cref.hpp>
 #include <fcppt/make_auto_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/ref.hpp>
@@ -43,7 +45,9 @@ sanguis::client::draw2d::entities::aoe_bullet::on_decay()
 			fcppt::ref(
 				particle_system_
 			),
-			model_collection_,
+			fcppt::cref(
+				model_collection_
+			),
 			this->center(),
 			aoe_
 		)

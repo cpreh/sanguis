@@ -5,6 +5,7 @@
 #include "../../../load/friend_name.hpp"
 #include "../../../friend_type.hpp"
 #include "../../../exception.hpp"
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 
@@ -26,7 +27,9 @@ sanguis::client::draw2d::factory::friend_(
 				fcppt::make_unique_ptr<
 					entities::model::object
 				>(
-					_param,
+					fcppt::cref(
+						_param
+					),
 					load::friend_name(
 						_etype
 					),
@@ -41,7 +44,9 @@ sanguis::client::draw2d::factory::friend_(
 				fcppt::make_unique_ptr<
 					entities::sentry
 				>(
-					_param
+					fcppt::cref(
+						_param
+					)
 				)
 			);
 	}

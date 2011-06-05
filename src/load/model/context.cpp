@@ -1,5 +1,6 @@
 #include "context.hpp"
 #include "collection.hpp"
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 sanguis::load::model::collection const &
@@ -16,7 +17,9 @@ sanguis::load::model::context::context(
 		fcppt::make_unique_ptr<
 			model::collection
 		>(
-			_ctx
+			fcppt::cref(
+				_ctx
+			)
 		)
 	)
 {

@@ -15,6 +15,7 @@
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/compare.hpp>
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/ref.hpp>
@@ -242,12 +243,14 @@ sanguis::client::draw2d::entities::model::part::load_animation(
 		fcppt::make_unique_ptr<
 			model::sound_state
 		>(
-			load_part_[
-				weapon_
-			]
-			[
-				_atype
-			].sounds()
+			fcppt::cref(
+				load_part_[
+					weapon_
+				]
+				[
+					_atype
+				].sounds()
+			)
 		)
 	);
 }

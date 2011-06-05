@@ -17,6 +17,7 @@
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/is_null.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
@@ -84,7 +85,9 @@ sanguis::client::draw2d::entities::model::object::object(
 			fcppt::make_unique_ptr<
 				model::part
 			>(
-				*it->second,
+				fcppt::cref(
+					*it->second
+				),
 				fcppt::ref(
 					this->at(
 						sprite::index(

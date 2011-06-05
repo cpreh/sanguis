@@ -29,6 +29,7 @@
 #include <fcppt/math/vector/is_null.hpp>
 #include <fcppt/math/vector/signed_angle.hpp>
 #include <fcppt/math/vector/to_angle.hpp>
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
@@ -59,7 +60,9 @@ sanguis::server::global::context::context(
 		fcppt::make_unique_ptr<
 			load_context
 		>(
-			_model_context
+			fcppt::cref(
+				_model_context
+			)
 		)
 	),
 	console_(

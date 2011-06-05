@@ -22,6 +22,7 @@
 #include <fcppt/utf8/convert.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/exception.hpp>
+#include <fcppt/cref.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -51,7 +52,9 @@ sanguis::server::states::running::running(
 			server::make_unicast_callback(
 				context<machine>()
 			),
-			context<machine>().resources(),
+			fcppt::cref(
+				context<machine>().resources()
+			),
 			fcppt::ref(
 				console_
 			)

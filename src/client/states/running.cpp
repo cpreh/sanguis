@@ -28,6 +28,7 @@
 #include <fcppt/log/debug.hpp>
 #include <fcppt/utf8/convert.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -70,7 +71,9 @@ sanguis::client::states::running::running(
 		fcppt::make_unique_ptr<
 			draw2d::scene::object
 		>(
-			context<machine>().resources(),
+			fcppt::cref(
+				context<machine>().resources()
+			),
 			fcppt::ref(
 				context<machine>().renderer()
 			),
@@ -96,7 +99,9 @@ sanguis::client::states::running::running(
 			fcppt::ref(
 				console_->sge_console()
 			),
-			context<machine>().resources().resources().sounds()
+			fcppt::cref(
+				context<machine>().resources().resources().sounds()
+			)
 		)
 	)
 {

@@ -9,6 +9,7 @@
 #include <fcppt/container/array.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/warning.hpp>
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
@@ -105,7 +106,9 @@ sanguis::load::model::animation_sound::animation_sound(
 					>(
 						ref.value
 					).members,
-					_ctx
+					fcppt::cref(
+						_ctx
+					)
 				)
 			).second == false
 		)

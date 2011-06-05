@@ -24,6 +24,7 @@
 #include <fcppt/math/box/output.hpp>
 #include <fcppt/math/box/contains.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/cref.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
@@ -167,7 +168,9 @@ sanguis::load::model::animation::animation(
 					model::animation_sound
 				>(
 					sounds_object->members,
-					param_.sounds()
+					fcppt::cref(
+						param_.sounds()
+					)
 				)
 			);
 		else
