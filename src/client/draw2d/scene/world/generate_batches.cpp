@@ -207,7 +207,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 			);
 
 	return
-		move(
+		fcppt::move(
 			ret
 		);
 }
