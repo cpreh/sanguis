@@ -1,6 +1,5 @@
 #include "convert_string_vector.hpp"
 #include <fcppt/utf8/convert.hpp>
-#include <boost/foreach.hpp>
 
 namespace
 {
@@ -16,13 +15,16 @@ convert(
 {
 	Dest dest;
 
-	BOOST_FOREACH(
-		typename Src::const_reference elem,
-		_src
+	for(
+		typename Src::const_iterator elem_it(
+			_src.begin()
+		);
+		elem_it != _src.end();
+		++elem_it
 	)
 		dest.push_back(
 			fcppt::utf8::convert(
-				elem
+				*elem_it
 			)
 		);
 	

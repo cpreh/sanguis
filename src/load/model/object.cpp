@@ -12,10 +12,10 @@
 #include "../resource/context.hpp"
 #include "../resource/textures.hpp"
 #include "../log.hpp"
-#include <sge/parse/json/object.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
+#include <sge/parse/json/object.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/filesystem/is_directory.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
@@ -27,8 +27,6 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <boost/next_prior.hpp>
-#include <boost/foreach.hpp>
-#include <utility>
 
 sanguis::load::model::object::~object()
 {}
@@ -44,7 +42,9 @@ sanguis::load::model::object::operator[](
 		)
 	);
 
-	if(it == parts_.end())
+	if(
+		it == parts_.end()
+	)
 		throw sanguis::exception(
 			FCPPT_TEXT("Category \"")
 			+ _name
@@ -183,26 +183,35 @@ sanguis::load::model::object::construct(
 		)
 	);
 
-	BOOST_FOREACH(
-		sge::parse::json::element_vector::const_reference r,
+	sge::parse::json::array const &parts_array(
 		sge::parse::json::find_member_exn<
 			sge::parse::json::array
 		>(
 			global_entries,
 			FCPPT_TEXT("parts")
-		).elements
+		)
+	);
+
+	for(
+		sge::parse::json::element_vector::const_iterator it(
+			parts_array.elements.begin()
+		);
+		it != parts_array.elements.end();
+		++it
 	)
 	{
 		sge::parse::json::member_vector const &inner_members(
 			sge::parse::json::get<
 				sge::parse::json::object
 			>(
-				r
+				*it
 			).members
 		);
 
-		if(inner_members.size() != 1)
-			throw exception(
+		if(
+			inner_members.size() != 1
+		)
+			throw sanguis::exception(
 				FCPPT_TEXT("inner members of the part array have to contain exactly one element!")
 			);
 

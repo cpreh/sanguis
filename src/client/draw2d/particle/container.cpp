@@ -2,7 +2,6 @@
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/math/point_rotate.hpp>
 #include <fcppt/math/compare.hpp>
-#include <boost/foreach.hpp>
 
 sanguis::client::draw2d::particle::container::container(
 	draw2d::center const &_center,

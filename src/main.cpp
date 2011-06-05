@@ -7,7 +7,6 @@
 #include "server/create.hpp"
 #include "log.hpp"
 #include "log_context.hpp"
-#include "log_switcher.hpp"
 #include "main_object.hpp"
 
 #include <sge/log/global_context.hpp>
@@ -61,24 +60,6 @@ try
 	);
 #endif
 
-#if 0
-	// FIXME: why does this not work?
-	sanguis::log_switcher 
-		sge_log(
-			boost::phoenix::ref(
-				desc
-			),
-			FCPPT_TEXT("sge"),
-			sge::log::global_context()
-		),
-		sanguis_log(
-			boost::phoenix::ref(
-				desc
-			),
-			FCPPT_TEXT("sanguis"),
-			sanguis::log_context()
-		);
-#endif	
 	boost::program_options::variables_map const vm(
 		sanguis::args::parse(
 			argc,

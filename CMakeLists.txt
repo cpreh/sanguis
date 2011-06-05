@@ -703,8 +703,6 @@ SET(
 	src/log.hpp
 	src/log_context.cpp
 	src/log_context.hpp
-	src/log_switcher.cpp
-	src/log_switcher.hpp
 	src/main.cpp
 	src/main_object.cpp
 	src/main_object.hpp

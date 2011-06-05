@@ -8,7 +8,6 @@
 #include <fcppt/assert.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
-#include <boost/foreach.hpp>
 
 sanguis::server::entities::with_ghosts::with_ghosts()
 :
@@ -57,12 +56,15 @@ sanguis::server::entities::with_ghosts::on_transfer(
 {
 	scoped_ghosts_.clear();
 
-	BOOST_FOREACH(
-		ghost_list::reference ghost,
-		ghosts_
+	for(
+		ghost_list::iterator ghost_it(
+			ghosts_.begin()
+		);
+		ghost_it != ghosts_.end();
+		++ghost_it
 	)
 		this->insert_ghost(
-			ghost,
+			*ghost_it,
 			_params.world(),
 			_params.global_groups()
 		);
@@ -83,11 +85,14 @@ sanguis::server::entities::with_ghosts::update_center(
 	server::center const &_center
 )
 {
-	BOOST_FOREACH(
-		ghost_list::reference ghost,
-		ghosts_
+	for(
+		ghost_list::iterator ghost_it(
+			ghosts_.begin()
+		);
+		ghost_it != ghosts_.end();
+		++ghost_it
 	)
-		ghost.center(
+		ghost_it->center(
 			_center
 		);
 }

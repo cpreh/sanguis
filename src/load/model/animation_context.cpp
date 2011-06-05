@@ -14,8 +14,6 @@
 #include <sge/parse/json/find_member.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/make_shared_ptr.hpp>
-#include <sge/time/unit.hpp>
-#include <boost/foreach.hpp>
 
 sanguis::load::model::animation_context::animation_context(
 	resource::texture_context const &_texture_context,
@@ -60,21 +58,24 @@ sanguis::load::model::animation_context::update()
 		part->area()
 	);
 
-	BOOST_FOREACH(
-		frame_cache::const_reference frame,
-		frame_cache_
+	for(
+		frame_cache::const_iterator frame_it(
+			frame_cache_.begin()
+		);
+		frame_it != frame_cache_.end();
+		++frame_it
 	)
 		animation_.push_back(
 			sge::sprite::animation::entity(
 				sge::time::millisecond(
-					frame.delay()
+					frame_it->delay()
 				),
 				sge::texture::const_part_ptr(
 					fcppt::make_shared_ptr<
 						sge::texture::part_raw
 					>(
 						part->texture(),
-						frame.area()
+						frame_it->area()
 					)
 				)
 			)

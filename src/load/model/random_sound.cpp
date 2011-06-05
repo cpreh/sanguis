@@ -11,7 +11,6 @@
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert.hpp>
-#include <boost/foreach.hpp>
 #include <functional>
 #include <numeric>
 
@@ -29,9 +28,12 @@ sanguis::load::model::random_sound::random_sound(
 		)
 	)
 {
-	BOOST_FOREACH(
-		sge::parse::json::element_vector::const_reference ref,
-		_elements
+	for(
+		sge::parse::json::element_vector::const_iterator it(
+			_elements.begin()
+		);
+		it != _elements.end();
+		++it
 	)
 	{
 		sounds_.push_back(
@@ -39,7 +41,7 @@ sanguis::load::model::random_sound::random_sound(
 				sge::parse::json::get<
 					sge::parse::json::object
 				>(
-					ref
+					*it
 				).members,
 				_ctx
 			)
@@ -82,12 +84,15 @@ sanguis::load::model::random_sound::random_sound(
 			FCPPT_TEXT("sound probabilities are 0!")
 		);
 
-	BOOST_FOREACH(
-		sound_container::const_reference ref,
-		sounds_
+	for(
+		sound_container::const_iterator it(
+			sounds_.begin()
+		);
+		it != sounds_.end();
+		++it
 	)
 		ranges_.push_back(
-			ref.probability()
+			it->probability()
 			/ normalization
 		);
 	

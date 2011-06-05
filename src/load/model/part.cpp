@@ -17,7 +17,6 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/string.hpp>
-#include <boost/foreach.hpp>
 #include <iterator>
 
 namespace
@@ -101,26 +100,35 @@ sanguis::load::model::part::part(
 			members
 		)
 	);
-			
-	BOOST_FOREACH(
-		sge::parse::json::element_vector::const_reference r,
+
+	sge::parse::json::array const &weapons_array(
 		sge::parse::json::find_member_exn<
 			sge::parse::json::array
 		>(
 			members,
 			FCPPT_TEXT("weapon_categories")
-		).elements
+		)
+	);
+
+	for(
+		sge::parse::json::element_vector::const_iterator it(
+			weapons_array.elements.begin()
+		);
+		it != weapons_array.elements.end();
+		++it
 	)
 	{
 		sge::parse::json::member_vector const &inner_members(
 			sge::parse::json::get<
 				sge::parse::json::object
 			>(
-				r
+				*it
 			).members
 		);
 
-		if(inner_members.size() != 1)
+		if(
+			inner_members.size() != 1
+		)
 			throw exception(
 				FCPPT_TEXT("inner members of the weapon category array have to contain exactly one element!")
 			);

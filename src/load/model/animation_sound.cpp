@@ -13,7 +13,6 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
-#include <boost/foreach.hpp>
 #include <iterator>
 
 namespace
@@ -87,16 +86,19 @@ sanguis::load::model::animation_sound::animation_sound(
 :
 	sounds_()
 {
-	BOOST_FOREACH(
-		sge::parse::json::member_vector::const_reference ref,
-		_members
+	for(
+		sge::parse::json::member_vector::const_iterator it(
+			_members.begin()
+		);
+		it != _members.end();
+		++it
 	)
 	{
 		if(
 			fcppt::container::ptr::insert_unique_ptr_map(
 				sounds_,
 				::find_sound_type(
-					ref.name
+					it->name
 				),
 				fcppt::make_unique_ptr<
 					model::conditional_sound
@@ -104,7 +106,7 @@ sanguis::load::model::animation_sound::animation_sound(
 					sge::parse::json::get<
 						sge::parse::json::object
 					>(
-						ref.value
+						it->value
 					).members,
 					fcppt::cref(
 						_ctx

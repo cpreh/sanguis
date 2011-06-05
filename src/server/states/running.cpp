@@ -26,9 +26,6 @@
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 #include <boost/mpl/vector/vector10.hpp>
-#include <boost/foreach.hpp>
-#include <algorithm>
-#include <ostream>
 
 sanguis::server::states::running::running(
 	my_context _ctx

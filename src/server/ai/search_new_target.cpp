@@ -5,7 +5,6 @@
 #include "../collision/distance.hpp"
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
-#include <boost/foreach.hpp>
 #include <limits>
 
 sanguis::server::entities::auto_weak_link const
@@ -22,13 +21,16 @@ sanguis::server::ai::search_new_target(
 
 	entities::auto_weak_link ret;
 
-	BOOST_FOREACH(
-		entity_map::const_reference ref,
-		_entities
+	for(
+		entity_map::const_iterator it(
+			_entities.begin()
+		);
+		it != _entities.end();
+		++it
 	)
 	{
 		entities::with_health &target(
-			*ref.second
+			*it->second
 		);
 
 		space_unit const new_distance(

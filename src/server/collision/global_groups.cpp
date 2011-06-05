@@ -9,7 +9,6 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
-#include <boost/foreach.hpp>
 #include <vector>
 #include <utility>
 
@@ -96,16 +95,19 @@ sanguis::server::collision::global_groups::global_groups(
 		)
 	);
 
-	BOOST_FOREACH(
-		init_map::const_reference ref,
-		init
+	for(
+		init_map::const_iterator it(
+			init.begin()
+		);
+		it != init.end();
+		++it
 	)
 		_world.make_groups_collide(
 			this->group(
-				ref.first
+				it->first
 			),
 			this->group(
-				ref.second
+				it->second
 			)
 		);
 }

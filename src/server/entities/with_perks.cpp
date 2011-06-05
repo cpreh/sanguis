@@ -1,10 +1,6 @@
 #include "with_perks.hpp"
 #include "../perks/perk.hpp"
-#include "../log.hpp"
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
-#include <fcppt/log/headers.hpp>
-#include <fcppt/text.hpp>
-#include <boost/foreach.hpp>
 
 void
 sanguis::server::entities::with_perks::add_perk(
@@ -56,11 +52,14 @@ sanguis::server::entities::with_perks::on_update(
 	sanguis::time_delta const &_time
 )
 {
-	BOOST_FOREACH(
-		perk_container::reference cur,
-		perks_
+	for(
+		perk_container::iterator it(
+			perks_.begin()
+		);
+		it != perks_.end();
+		++it
 	)
-		cur.second->update(
+		it->second->update(
 			*this,
 			_time,
 			this->environment()

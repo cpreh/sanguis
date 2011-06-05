@@ -33,7 +33,6 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
-#include <boost/foreach.hpp>
 
 #include "../entities/insert_parameters.hpp"
 #include "../entities/insert_parameters_center.hpp"
@@ -355,11 +354,14 @@ sanguis::server::global::context::update(
 	sanguis::time_delta const &_delta
 )
 {
-	BOOST_FOREACH(
-		server::world::map::reference cur_world,
-		worlds_
+	for(
+		server::world::map::iterator world_it(
+			worlds_.begin()
+		);
+		world_it != worlds_.end();
+		++world_it
 	)
-		cur_world.second->update(
+		world_it->second->update(
 			_delta
 		);
 }

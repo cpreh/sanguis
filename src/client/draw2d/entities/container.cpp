@@ -10,7 +10,6 @@
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
-#include <boost/foreach.hpp>
 
 sanguis::client::draw2d::entities::container::container(
 	sprite::normal::system &_normal_system,
@@ -119,11 +118,14 @@ sanguis::client::draw2d::entities::container::orientation(
 	sprite::rotation const _orientation
 )
 {
-	BOOST_FOREACH(
-		object &cur,
-		sprites_
+	for(
+		sprite_vector::iterator it(
+			sprites_.begin()
+		);
+		it != sprites_.end();
+		++it
 	)
-		cur.rotation(
+		it->rotation(
 			_orientation
 		);
 }
@@ -220,12 +222,15 @@ sanguis::client::draw2d::entities::container::update_center(
 	sprite::center const &_center
 )
 {
-	BOOST_FOREACH(
-		object &cur,
-		sprites_
+	for(
+		sprite_vector::iterator it(
+			sprites_.begin()
+		);
+		it != sprites_.end();
+		++it
 	)
 		sge::sprite::center(
-			cur,
+			*it,
 			_center.get()
 		);
 }

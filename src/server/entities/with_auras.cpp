@@ -4,7 +4,6 @@
 #include "../environment/object.hpp"
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
-#include <boost/foreach.hpp>
 
 void
 sanguis::server::entities::with_auras::add_aura(

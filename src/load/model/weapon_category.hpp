@@ -45,7 +45,7 @@ private:
 		animation
 	> animation_map;
 
-	animation_map animations;
+	animation_map animations_;
 };
 
 }

@@ -12,7 +12,6 @@
 #include <fcppt/ref.hpp>
 #include <fcppt/homogenous_pair_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <boost/foreach.hpp>
 
 sanguis::server::entities::player_unique_ptr
 sanguis::server::create_player(
@@ -30,19 +29,22 @@ sanguis::server::create_player(
 			<< _player_id
 	);
 
-	BOOST_FOREACH(
-		console_command_vector::const_reference elem,
-		_known_commands
+	for(
+		console_command_vector::const_iterator elem_it(
+			_known_commands.begin()
+		);
+		elem_it != _known_commands.end();
+		++elem_it
 	)
 		_send_to_player(
 			_player_id,
 			messages::create(
 				messages::add_console_command(
 					fcppt::utf8::convert(
-						elem.first
+						elem_it->first
 					),
 					fcppt::utf8::convert(
-						elem.second
+						elem_it->second
 					)
 				)
 			)

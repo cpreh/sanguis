@@ -21,8 +21,6 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
-#include <boost/foreach.hpp>
-#include <ostream>
 
 sanguis::client::draw2d::entities::model::object::object(
 	model::parameters const &_param,
@@ -143,11 +141,14 @@ sanguis::client::draw2d::entities::model::object::update(
 			_time
 		);
 
-	BOOST_FOREACH(
-		model::part &cur_part,
-		parts_
+	for(
+		part_vector::iterator it(
+			parts_.begin()
+		);
+		it != parts_.end();
+		++it
 	)
-		cur_part.update(
+		it->update(
 			_time
 		);
 }
@@ -157,11 +158,14 @@ sanguis::client::draw2d::entities::model::object::orientation(
 	sprite::rotation const _rot
 )
 {
-	BOOST_FOREACH(
-		model::part &cur_part,
-		parts_
+	for(
+		part_vector::iterator it(
+			parts_.begin()
+		);
+		it != parts_.end();
+		++it
 	)
-		cur_part.orientation(
+		it->orientation(
 			_rot
 		);
 }
@@ -298,11 +302,14 @@ sanguis::client::draw2d::entities::model::object::weapon(
 	weapon_type::type const _weapon
 )
 {
-	BOOST_FOREACH(
-		model::part &cur_part,
-		parts_
+	for(
+		part_vector::iterator it(
+			parts_.begin()
+		);
+		it != parts_.end();
+		++it
 	)
-		cur_part.weapon(
+		it->weapon(
 			_weapon
 		);
 
@@ -358,9 +365,12 @@ sanguis::client::draw2d::entities::model::object::change_animation(
 	animation_type::type const _anim
 )
 {
-	BOOST_FOREACH(
-		model::part &cur_part,
-		parts_
+	for(
+		part_vector::iterator it(
+			parts_.begin()
+		);
+		it != parts_.end();
+		++it
 	)
 	{
 		animation_type::type part_anim(
@@ -368,7 +378,7 @@ sanguis::client::draw2d::entities::model::object::change_animation(
 		);
 
 		while(
-			!cur_part.try_animation(
+			!it->try_animation(
 				part_anim
 			)
 		)

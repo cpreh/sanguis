@@ -1,7 +1,6 @@
 #include "with_buffs.hpp"
 #include "../buffs/buff.hpp"
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
-#include <boost/foreach.hpp>
 
 void
 sanguis::server::entities::with_buffs::add_buff(
@@ -40,11 +39,14 @@ sanguis::server::entities::with_buffs::on_update(
 	sanguis::time_delta const &_time
 )
 {
-	BOOST_FOREACH(
-		buffs::list::reference ref,
-		buffs_
+	for(
+		buffs::list::iterator it(
+			buffs_.begin()
+		);
+		it != buffs_.end();
+		++it
 	)
-		ref.update(
+		it->update(
 			*this,
 			_time
 		);

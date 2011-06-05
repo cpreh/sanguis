@@ -8,7 +8,6 @@
 #include <majutsu/raw_pointer.hpp>
 #include <majutsu/size_type.hpp>
 #include <boost/cstdint.hpp>
-#include <boost/foreach.hpp>
 
 namespace sanguis
 {
@@ -51,9 +50,12 @@ needed_size(
 		)
 	);
 
-	BOOST_FOREACH(
-		typename Type::const_reference elem,
-		_value
+	for(
+		typename Type::const_iterator elem_it(
+			_value.begin()
+		);
+		elem_it != _value.end();
+		++elem_it
 	)
 		ret +=
 			needed_size(
@@ -61,7 +63,7 @@ needed_size(
 				static_cast<
 					Adapted const *
 				>(0),
-				elem
+				*elem_it
 			);
 
 	return ret;
