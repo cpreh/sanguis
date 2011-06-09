@@ -3,6 +3,7 @@
 
 #include <sanguis/creator/geometry/triangulate/transform_function.hpp>
 #include <sanguis/creator/geometry/polygon.hpp>
+#include <sge/projectile/triangulation/default_tag.hpp>
 #include <sge/projectile/triangulation/triangulate.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -59,6 +60,7 @@ polygon(
 
 	return
 		sge::projectile::triangulation::triangulate<
+			sge::projectile::triangulation::default_tag, // TODO!
 			ResultContainer
 		>(
 			converted,
