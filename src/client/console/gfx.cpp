@@ -3,11 +3,11 @@
 #include <sge/console/sprite_object.hpp>
 #include <sge/console/sprite_parameters.hpp>
 #include <sge/image/colors.hpp>
-#include <sge/image2d/create_texture.hpp>
 #include <sge/renderer/resource_flags_none.hpp>
 #include <sge/renderer/texture/filter/linear.hpp>
 #include <sge/renderer/texture/address_mode2.hpp>
 #include <sge/renderer/texture/address_mode.hpp>
+#include <sge/renderer/texture/create_planar_from_path.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/onscreen_target.hpp>
 #include <sge/sprite/object_impl.hpp>
@@ -52,7 +52,7 @@ sanguis::client::console::gfx::gfx(
 				fcppt::make_shared_ptr<
 					sge::texture::part_raw
 				>(
-					sge::image2d::create_texture(
+					sge::renderer::texture::create_planar_from_path(
 						sanguis::media_path()
 						/ FCPPT_TEXT("console_back.png"),
 						renderer_,

@@ -65,7 +65,8 @@ INCLUDE_DIRECTORIES(${Awl_INCLUDE_DIRS})
 
 FIND_PACKAGE(
 	SGE REQUIRED
-	COMPONENTS cegui config fonttext console parse projectile sprite systems texture time viewport
+	COMPONENTS audio cegui config fonttext console image image2d input
+	parse projectile renderer sprite systems texture time viewport window
 )
 
 INCLUDE_DIRECTORIES(${SGE_INCLUDE_DIRS})
