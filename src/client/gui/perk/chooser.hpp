@@ -15,7 +15,7 @@
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
-#include <CEGUI/CEGUIEvent.h>
+#include <CEGUIEvent.h>
 
 namespace CEGUI
 {

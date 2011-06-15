@@ -4,7 +4,7 @@
 #include "../../perk/info.hpp"
 #include "../../perk/to_string.hpp"
 #include <sge/cegui/to_cegui_string.hpp>
-#include <CEGUI/elements/CEGUITree.h>
+#include <elements/CEGUITree.h>
 
 sanguis::client::gui::perk::item::item(
 	client::gui::perk::node const &_parent,

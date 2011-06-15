@@ -11,7 +11,7 @@
 #include <fcppt/scoped_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
-#include <CEGUI/CEGUIEvent.h>
+#include <CEGUIEvent.h>
 
 namespace CEGUI
 {

@@ -1,8 +1,8 @@
 #include "node.hpp"
 #include <fcppt/variant/apply_unary.hpp>
 #include <fcppt/nonassignable.hpp>
-#include <CEGUI/elements/CEGUITreeItem.h>
-#include <CEGUI/elements/CEGUITree.h>
+#include <elements/CEGUITreeItem.h>
+#include <elements/CEGUITree.h>
 
 namespace
 {

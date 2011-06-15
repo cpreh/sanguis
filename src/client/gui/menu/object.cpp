@@ -19,9 +19,9 @@
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/to_std_string.hpp>
-#include <CEGUI/elements/CEGUIPushButton.h>
-#include <CEGUI/CEGUIWindowManager.h>
-#include <CEGUI/CEGUIWindow.h>
+#include <elements/CEGUIPushButton.h>
+#include <CEGUIWindowManager.h>
+#include <CEGUIWindow.h>
 
 namespace
 {

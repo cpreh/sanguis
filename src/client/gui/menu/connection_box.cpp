@@ -4,9 +4,9 @@
 #include <sge/cegui/to_cegui_string.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
-#include <CEGUI/elements/CEGUIPushButton.h>
-#include <CEGUI/CEGUIWindowManager.h>
-#include <CEGUI/CEGUIWindow.h>
+#include <elements/CEGUIPushButton.h>
+#include <CEGUIWindowManager.h>
+#include <CEGUIWindow.h>
 
 sanguis::client::gui::menu::connection_box::connection_box(
 	sge::charconv::system &_charconv_system,

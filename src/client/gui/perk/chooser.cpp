@@ -24,10 +24,10 @@
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
-#include <CEGUI/elements/CEGUIPushButton.h>
-#include <CEGUI/elements/CEGUITree.h>
-#include <CEGUI/CEGUIWindowManager.h>
 #include <algorithm>
+#include <elements/CEGUIPushButton.h>
+#include <elements/CEGUITree.h>
+#include <CEGUIWindowManager.h>
 
 namespace
 {

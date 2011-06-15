@@ -6,8 +6,8 @@
 #include "../object_fwd.hpp"
 #include "../../perk/info_fwd.hpp"
 #include "../../../perk_type.hpp"
-#include <CEGUI/elements/CEGUITreeItem.h>
 #include <fcppt/noncopyable.hpp>
+#include <elements/CEGUITreeItem.h>
 
 namespace sanguis
 {

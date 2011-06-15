@@ -9,7 +9,7 @@
 #include <fcppt/function/object.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
-#include <CEGUI/CEGUIEvent.h>
+#include <CEGUIEvent.h>
 
 namespace CEGUI
 {

@@ -1,5 +1,5 @@
 #include "item_user_data.hpp"
-#include <CEGUI/elements/CEGUITreeItem.h>
+#include <elements/CEGUITreeItem.h>
 
 sanguis::perk_type::type
 sanguis::client::gui::perk::item_user_data(
