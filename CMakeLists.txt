@@ -78,7 +78,7 @@ INCLUDE_DIRECTORIES(
 
 FIND_PACKAGE(
 	SGE REQUIRED
-	COMPONENTS audio cegui config fonttext console image image2d input
+	COMPONENTS audio cegui config console fonttext image image2d input
 	parse projectile renderer sprite systems texture time viewport window
 )
 
@@ -105,12 +105,15 @@ SET(
 	${INSTALL_DATA_DIR}/media
 )
 
-# TODO: use a config file for this!
-SET_SOURCE_FILES_PROPERTIES(
-	src/media_path.cpp
-	PROPERTIES
-	COMPILE_FLAGS
-	-DMEDIA_PATH="\\\"${INSTALL_MEDIA_DIR}\\\""
+INCLUDE(
+	SGECustomPath
+)
+
+SGE_CONFIG_ADD_CUSTOM_PATH(
+	sanguis	
+	media
+	${CMAKE_SOURCE_DIR}/media
+	${INSTALL_MEDIA_DIR}
 )
 
 SET(
