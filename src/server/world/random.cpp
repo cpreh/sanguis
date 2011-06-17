@@ -12,7 +12,7 @@
 #include <sanguis/creator/generator/serialize.hpp>
 #include <sanguis/creator/generator/top_parameters.hpp>
 #include <sanguis/creator/generator/size.hpp>
-#include <sge/config/find_cache_path.hpp>
+#include <sge/config/cache_path.hpp>
 #include <fcppt/filesystem/create_directories_recursive.hpp>
 #include <fcppt/filesystem/exists.hpp>
 #include <fcppt/filesystem/path.hpp>
@@ -31,7 +31,7 @@ sanguis::server::world::random(
 {
 	// TODO: move this out of here!
 	fcppt::filesystem::path const cache_path(
-		sge::config::find_cache_path(
+		sge::config::cache_path(
 			FCPPT_TEXT("sanguis")
 		)
 	);
