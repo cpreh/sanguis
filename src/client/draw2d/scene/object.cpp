@@ -22,10 +22,15 @@
 #include "../../../time_from_second.hpp"
 
 #include <sge/image/colors.hpp>
+#include <sge/renderer/ambient_color.hpp>
 #include <sge/renderer/device.hpp>
+#include <sge/renderer/diffuse_color.hpp>
+#include <sge/renderer/emissive_color.hpp>
 #include <sge/renderer/material.hpp>
 #include <sge/renderer/matrix4.hpp>
 #include <sge/renderer/onscreen_target.hpp>
+#include <sge/renderer/specular_color.hpp>
+#include <sge/renderer/shininess.hpp>
 #include <sge/renderer/state/scoped.hpp>
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/bool.hpp>
@@ -172,11 +177,21 @@ sanguis::client::draw2d::scene::object::object(
 {
 	rend_.material(
 		sge::renderer::material(
-			sge::image::colors::black(),
-			sge::image::colors::white(),
-			sge::image::colors::black(),
-			sge::image::colors::black(),
-			0.
+			sge::renderer::diffuse_color(
+				sge::image::colors::black()
+			),
+			sge::renderer::ambient_color(
+				sge::image::colors::white()
+			),
+			sge::renderer::specular_color(
+				sge::image::colors::black()
+			),
+			sge::renderer::emissive_color(
+				sge::image::colors::black()
+			),
+			sge::renderer::shininess(
+				0.f
+			)
 		)
 	);
 }
