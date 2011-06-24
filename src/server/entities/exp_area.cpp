@@ -143,7 +143,8 @@ sanguis::server::entities::exp_area::can_collide_with(
 			entities::player const *
 		>(
 			&_base
-		);
+		)
+		!= 0;
 }
 
 void

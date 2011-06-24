@@ -3,6 +3,7 @@
 
 #include "node_variant.hpp"
 #include <fcppt/variant/object_impl.hpp>
+#include <fcppt/nonassignable.hpp>
 
 namespace CEGUI
 {
@@ -20,6 +21,9 @@ namespace perk
 
 class node
 {
+	FCPPT_NONASSIGNABLE(
+		node
+	);
 public:
 	explicit node(
 		gui::perk::node_variant const &
