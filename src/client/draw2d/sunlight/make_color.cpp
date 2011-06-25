@@ -2,6 +2,7 @@
 #include "day_gradient.hpp"
 #include "gradients.hpp"
 #include <sge/image/color/rgba32f_format.hpp>
+#include <sge/image/color/any/object.hpp>
 #include <mizuiro/color/convert.hpp>
 #include <fcppt/variant/object_impl.hpp>
 
@@ -12,11 +13,13 @@ sanguis::client::draw2d::sunlight::make_color(
 {
 	return
 		// convert into something that sge::image::color::any supports
-		mizuiro::color::convert<
-			sge::image::color::rgba32f_format
-		>(
-			day_gradient().interpolate(
-				_sun_angle
+		sge::image::color::any::object(
+			mizuiro::color::convert<
+				sge::image::color::rgba32f_format
+			>(
+				day_gradient().interpolate(
+					_sun_angle
+				)
 			)
 		);
 }

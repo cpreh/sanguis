@@ -6,6 +6,7 @@
 #include <sge/renderer/resource_flags_none.hpp>
 #include <sge/image2d/multi_loader.hpp>
 #include <sge/image2d/file.hpp>
+#include <sge/image2d/view/const_object.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/time/second.hpp>
 #include <fcppt/tr1/functional.hpp>
