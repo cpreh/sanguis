@@ -58,12 +58,14 @@ sanguis::client::gui::menu::object::object(
 	gui_(_gui),
 	callbacks_(_callbacks),
 	scoped_layout_(
+		gui_.system(),
 		sanguis::media_path()
 		/ FCPPT_TEXT("gui")
 		/ FCPPT_TEXT("main_menu.layout"),
 		_gui.charconv_system()
 	),
 	scoped_gui_sheet_(
+		gui_.system(),
 		scoped_layout_.window()
 	),
 	connect_button_(
@@ -152,7 +154,7 @@ sanguis::client::gui::menu::object::object(
 			menu::connection_box
 		>(
 			fcppt::ref(
-				gui_.charconv_system()
+				gui_
 			),
 			fcppt::ref(
 				*CEGUI::WindowManager::getSingleton().getWindow(

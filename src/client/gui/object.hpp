@@ -41,6 +41,9 @@ public:
 
 	sge::charconv::system &
 	charconv_system() const;
+	
+	sge::cegui::system &
+	system();
 
 	void
 	render();

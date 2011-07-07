@@ -9,16 +9,19 @@
 #include <CEGUIWindow.h>
 
 sanguis::client::gui::menu::connection_box::connection_box(
-	sge::charconv::system &_charconv_system,
+	client::gui::object &_gui,
 	CEGUI::Window &_parent_window,
 	callbacks::cancel_connect const &_cancel_connect,
 	callbacks::retry_connect const &_retry_connect
 )
 :
-	charconv_system_(_charconv_system),
+	charconv_system_(
+		_gui.charconv_system()
+	),
 	cancel_connect_(_cancel_connect),
 	retry_connect_(_retry_connect),
 	scoped_layout_(
+		_gui.system(),
 		sanguis::media_path()
 		/ FCPPT_TEXT("gui")
 		/ FCPPT_TEXT("connection_box.layout"),

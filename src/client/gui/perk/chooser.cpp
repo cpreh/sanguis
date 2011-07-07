@@ -79,12 +79,14 @@ sanguis::client::gui::perk::chooser::chooser(
 		)
 	),
 	scoped_layout_(
+		gui_.system(),
 		sanguis::media_path()
 		/ FCPPT_TEXT("gui")
 		/ FCPPT_TEXT("perk_chooser.layout"),
 		_gui.charconv_system()
 	),
 	scoped_gui_sheet_(
+		gui_.system(),
 		scoped_layout_.window()
 	),
 	tree_widget_(

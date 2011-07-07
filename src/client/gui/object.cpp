@@ -60,6 +60,12 @@ sanguis::client::gui::object::charconv_system() const
 	return charconv_system_;
 }
 
+sge::cegui::system &
+sanguis::client::gui::object::system()
+{
+	return system_;
+}
+
 void
 sanguis::client::gui::object::render()
 {

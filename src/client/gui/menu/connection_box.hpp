@@ -4,6 +4,7 @@
 #include "callbacks/cancel_connect.hpp"
 #include "callbacks/retry_connect.hpp"
 #include "connection_box_fwd.hpp"
+#include "../object_fwd.hpp"
 #include <sge/charconv/system_fwd.hpp>
 #include <sge/cegui/toolbox/scoped_layout.hpp>
 #include <fcppt/function/object.hpp>
@@ -33,7 +34,7 @@ class connection_box
 	);
 public:
 	connection_box(
-		sge::charconv::system &,
+		client::gui::object &,
 		CEGUI::Window &parent_window,
 		callbacks::cancel_connect const &,
 		callbacks::retry_connect const &
