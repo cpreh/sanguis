@@ -40,7 +40,7 @@
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/utf8/convert.hpp>
+#include <fcppt/utf8/from_fcppt_string.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/assert.hpp>
 #include <fcppt/format.hpp>
@@ -225,7 +225,7 @@ sanguis::server::world::object::insert(
 				messages::change_world(
 					id_,
 					seed_,
-					fcppt::utf8::convert(
+					fcppt::utf8::from_fcppt_string(
 						generator_name_.get()
 					),
 					size_

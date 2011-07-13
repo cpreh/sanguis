@@ -1,16 +1,19 @@
 #include "convert_string_vector.hpp"
-#include <fcppt/utf8/convert.hpp>
+#include <fcppt/utf8/from_fcppt_string.hpp>
+#include <fcppt/utf8/to_fcppt_string.hpp>
 
 namespace
 {
 
 template<
 	typename Dest,
-	typename Src
+	typename Src,
+	typename ConvertString
 >
 Dest
 convert(
-	Src const &_src
+	Src const &_src,
+	ConvertString const &_convert_string
 )
 {
 	Dest dest;
@@ -23,7 +26,7 @@ convert(
 		++elem_it
 	)
 		dest.push_back(
-			fcppt::utf8::convert(
+			_convert_string(
 				*elem_it
 			)
 		);
@@ -42,7 +45,8 @@ sanguis::messages::serialization::convert_string_vector(
 		::convert<
 			sanguis::messages::types::string_vector		
 		>(
-			_src
+			_src,
+			fcppt::utf8::from_fcppt_string
 		);
 }
 
@@ -55,6 +59,7 @@ sanguis::messages::serialization::convert_string_vector(
 		::convert<
 			sanguis::string_vector
 		>(
-			_src
+			_src,
+			fcppt::utf8::to_fcppt_string
 		);
 }

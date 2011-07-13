@@ -6,7 +6,7 @@
 #include <sge/font/text/from_fcppt_string.hpp>
 #include <sge/font/text/string.hpp>
 #include <fcppt/function/object.hpp>
-#include <fcppt/utf8/convert.hpp>
+#include <fcppt/utf8/from_fcppt_string.hpp>
 #include <fcppt/homogenous_pair_impl.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <fcppt/string.hpp>
@@ -38,10 +38,10 @@ sanguis::server::console::insert(
 	send_(
 		messages::create(
 			messages::add_console_command(
-				fcppt::utf8::convert(
+				fcppt::utf8::from_fcppt_string(
 					_command
 				),
-				fcppt::utf8::convert(
+				fcppt::utf8::from_fcppt_string(
 					_description
 				)
 			)
@@ -97,7 +97,7 @@ sanguis::server::console::print_line(
 		_id,
 		sanguis::messages::create(
 			sanguis::messages::console_print(
-				fcppt::utf8::convert(
+				fcppt::utf8::from_fcppt_string(
 					_line
 				)
 			)

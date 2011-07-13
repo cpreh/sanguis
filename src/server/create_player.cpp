@@ -8,7 +8,7 @@
 #include "../messages/create.hpp"
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/output.hpp>
-#include <fcppt/utf8/convert.hpp>
+#include <fcppt/utf8/from_fcppt_string.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/homogenous_pair_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -40,10 +40,10 @@ sanguis::server::create_player(
 			_player_id,
 			messages::create(
 				messages::add_console_command(
-					fcppt::utf8::convert(
+					fcppt::utf8::from_fcppt_string(
 						elem_it->first
 					),
-					fcppt::utf8::convert(
+					fcppt::utf8::from_fcppt_string(
 						elem_it->second
 					)
 				)

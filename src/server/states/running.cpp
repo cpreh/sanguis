@@ -19,7 +19,7 @@
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/utf8/convert.hpp>
+#include <fcppt/utf8/to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/cref.hpp>
@@ -150,7 +150,7 @@ sanguis::server::states::running::operator()(
 			0 // FIXME: which world id?
 		),
 		_id,
-		fcppt::utf8::convert(
+		fcppt::utf8::to_fcppt_string(
 			_message.get<
 				messages::string
 			>()

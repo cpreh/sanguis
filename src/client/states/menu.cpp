@@ -22,7 +22,7 @@
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/utf8/convert.hpp>
+#include <fcppt/utf8/from_fcppt_string.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/text.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -134,7 +134,7 @@ sanguis::client::states::menu::react(
 	context<machine>().send(
 		messages::create(
 			messages::client_info(
-				fcppt::utf8::convert(
+				fcppt::utf8::from_fcppt_string(
 					FCPPT_TEXT("player1") // TODO!
 				)
 			)

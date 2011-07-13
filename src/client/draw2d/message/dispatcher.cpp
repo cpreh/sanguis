@@ -34,7 +34,7 @@
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/log/headers.hpp>
-#include <fcppt/utf8/convert.hpp>
+#include <fcppt/utf8/to_fcppt_string.hpp>
 #include <fcppt/dynamic_cast.hpp>
 #include <fcppt/type_name.hpp>
 #include <fcppt/text.hpp>
@@ -224,7 +224,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			>(),
 			sanguis::creator::generator::top_parameters(
 				sanguis::creator::generator::name(
-					fcppt::utf8::convert(
+					fcppt::utf8::to_fcppt_string(
 						_message.get<
 							messages::roles::generator_name
 						>()
