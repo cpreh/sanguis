@@ -1,10 +1,10 @@
 #ifndef SANGUIS_LOAD_MODEL_ANIMATION_CONTEXT_HPP_INCLUDED
 #define SANGUIS_LOAD_MODEL_ANIMATION_CONTEXT_HPP_INCLUDED
 
-#include "animation_context_fwd.hpp"
-#include "frame_cache_fwd.hpp"
-#include "../resource/texture_context.hpp"
-#include <sge/sprite/animation/series.hpp>
+#include "context_fwd.hpp"
+#include "../frame_cache_fwd.hpp"
+#include "../../resource/animation/series.hpp"
+#include "../../resource/texture_context.hpp"
 #include <sge/renderer/lock_rect.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/nonassignable.hpp>
@@ -16,11 +16,13 @@ namespace load
 {
 namespace model
 {
+namespace animation
+{
 
-class animation_context
+class context
 {
 	FCPPT_NONASSIGNABLE(
-		animation_context
+		context
 	);
 public:
 	typedef fcppt::function::object<
@@ -29,11 +31,13 @@ public:
 		)
 	> cache_callback;
 
-	animation_context(
+	context(
 		resource::texture_context const &,
 		frame_cache const &,
 		cache_callback const &
 	);
+
+	~context();
 
 	void
 	update();
@@ -41,7 +45,7 @@ public:
 	bool
 	is_finished() const;
 
-	sge::sprite::animation::series const &
+	resource::animation::series const &
 	result() const;
 private:
 	resource::texture_context texture_context_;
@@ -52,9 +56,10 @@ private:
 
 	bool is_finished_;
 
-	sge::sprite::animation::series animation_;
+	resource::animation::series animation_;
 };
 
+}
 }
 }
 }

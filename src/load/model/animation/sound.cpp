@@ -1,6 +1,6 @@
-#include "animation_sound.hpp"
-#include "conditional_sound.hpp"
-#include "../log.hpp"
+#include "sound.hpp"
+#include "../conditional_sound.hpp"
+#include "../../log.hpp"
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/object.hpp>
@@ -51,11 +51,11 @@ find_sound_type(
 }
 
 sge::audio::sound::positional_ptr const
-sanguis::load::model::animation_sound::operator[](
+sanguis::load::model::animation::sound::operator[](
 	animation_sound_type::type const _sound_type
 ) const
 {
-	animation_sound_map::const_iterator const it(
+	sound_map::const_iterator const it(
 		sounds_.find(
 			_sound_type
 		)
@@ -69,17 +69,17 @@ sanguis::load::model::animation_sound::operator[](
 			it->second->random();
 }
 
-sanguis::load::model::animation_sound::animation_sound()
+sanguis::load::model::animation::sound::sound()
 :
 	sounds_()
 {
 }
 
-sanguis::load::model::animation_sound::~animation_sound()
+sanguis::load::model::animation::sound::~sound()
 {
 }
 
-sanguis::load::model::animation_sound::animation_sound(
+sanguis::load::model::animation::sound::sound(
 	sge::parse::json::member_vector const &_members,
 	resource::sounds const &_ctx
 )

@@ -6,7 +6,7 @@
 #include "../particle/properties_fwd.hpp"
 #include "../sprite/particle/system.hpp"
 #include "../aoe.hpp"
-#include "../../../load/model/animation_context_ptr.hpp"
+#include "../../../load/model/animation/context_ptr.hpp"
 
 namespace sanguis
 {
@@ -23,7 +23,7 @@ explosion_particle(
 	sprite::particle::system &,
 	draw2d::aoe,
 	particle::properties const &,
-	sanguis::load::model::animation_context_ptr
+	sanguis::load::model::animation::context_ptr
 );
 
 }

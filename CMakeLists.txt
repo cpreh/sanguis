@@ -420,6 +420,10 @@ SET(
 	src/client/draw2d/scene/world/vf/scalar.hpp
 	src/client/draw2d/scene/world/vf/texpos.hpp
 	src/client/draw2d/speed.hpp
+	src/client/draw2d/sprite/animation/loop_method.hpp
+	src/client/draw2d/sprite/animation/texture_decl.hpp
+	src/client/draw2d/sprite/animation/texture_fwd.hpp
+	src/client/draw2d/sprite/animation/texture_impl.hpp
 	src/client/draw2d/sprite/center.hpp
 	src/client/draw2d/sprite/client/choices.hpp
 	src/client/draw2d/sprite/client/object.hpp
@@ -633,16 +637,16 @@ SET(
 	src/load/friend_name.hpp
 	src/load/log.cpp
 	src/load/log.hpp
-	src/load/model/animation.cpp
-	src/load/model/animation.hpp
-	src/load/model/animation_context.cpp
-	src/load/model/animation_context.hpp
-	src/load/model/animation_context_fwd.hpp
-	src/load/model/animation_context_ptr.hpp
-	src/load/model/animation_fwd.hpp
-	src/load/model/animation_sound.cpp
-	src/load/model/animation_sound.hpp
-	src/load/model/animation_sound_fwd.hpp
+	src/load/model/animation/context.cpp
+	src/load/model/animation/context.hpp
+	src/load/model/animation/context_fwd.hpp
+	src/load/model/animation/context_ptr.hpp
+	src/load/model/animation/object.cpp
+	src/load/model/animation/object.hpp
+	src/load/model/animation/object_fwd.hpp
+	src/load/model/animation/sound.cpp
+	src/load/model/animation/sound.hpp
+	src/load/model/animation/sound_fwd.hpp
 	src/load/model/base_animation_not_found.cpp
 	src/load/model/base_animation_not_found.hpp
 	src/load/model/collection.cpp
@@ -698,6 +702,13 @@ SET(
 	src/load/pickup_name.cpp
 	src/load/pickup_name.hpp
 	src/load/probability_type.hpp
+	src/load/resource/animation/entity.cpp
+	src/load/resource/animation/entity.hpp
+	src/load/resource/animation/entity_fwd.hpp
+	src/load/resource/animation/entity_vector.hpp
+	src/load/resource/animation/series.cpp
+	src/load/resource/animation/series.hpp
+	src/load/resource/animation/series_fwd.hpp
 	src/load/resource/animations.cpp
 	src/load/resource/animations.hpp
 	src/load/resource/animations_fwd.hpp

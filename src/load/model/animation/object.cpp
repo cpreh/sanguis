@@ -1,12 +1,12 @@
-#include "animation.hpp"
-#include "animation_sound.hpp"
-#include "global_parameters.hpp"
-#include "find_texture.hpp"
-#include "animation_context.hpp"
-#include "../resource/texture_context.hpp"
-#include "../resource/textures.hpp"
-#include "../resource/texture_context_impl.hpp"
-#include "../../exception.hpp"
+#include "object.hpp"
+#include "context.hpp"
+#include "sound.hpp"
+#include "../global_parameters.hpp"
+#include "../find_texture.hpp"
+#include "../../resource/texture_context.hpp"
+#include "../../resource/textures.hpp"
+#include "../../resource/texture_context_impl.hpp"
+#include "../../../exception.hpp"
 #include <sge/renderer/dim2.hpp>
 #include <sge/parse/json/get_unsigned.hpp>
 #include <sge/parse/json/find_member.hpp>
@@ -113,11 +113,11 @@ load_delay(
 
 }
 
-sanguis::load::model::animation::~animation()
+sanguis::load::model::animation::object::~object()
 {
 }
 
-sanguis::load::model::animation::animation(
+sanguis::load::model::animation::object::object(
 	sge::parse::json::object const &_object,
 	global_parameters const &_param
 )
@@ -165,7 +165,7 @@ sanguis::load::model::animation::animation(
 		)
 			sounds_.take(
 				fcppt::make_unique_ptr<
-					model::animation_sound
+					model::animation::sound
 				>(
 					sounds_object->members,
 					fcppt::cref(
@@ -176,31 +176,31 @@ sanguis::load::model::animation::animation(
 		else
 			sounds_.take(
 				fcppt::make_unique_ptr<
-					animation_sound
+					animation::sound
 				>()
 			);
 	}
 }
 
-sanguis::load::model::animation_sound const &
-sanguis::load::model::animation::sounds() const
+sanguis::load::model::animation::sound const &
+sanguis::load::model::animation::object::sounds() const
 {
 	return *sounds_;
 }
 
-sanguis::load::model::animation_context_ptr
-sanguis::load::model::animation::load() const 
+sanguis::load::model::animation::context_ptr
+sanguis::load::model::animation::object::load() const 
 {
 	return 
 		// TODO: make_unique_ptr?
-		animation_context_ptr(
-			new animation_context(
+		animation::context_ptr(
+			new animation::context(
 				param_.textures().load(
 					param_.path() / texture_
 				),
 				frame_cache_,
 				std::tr1::bind(
-					&animation::fill_cache,
+					&object::fill_cache,
 					this,
 					std::tr1::placeholders::_1
 				)
@@ -209,7 +209,7 @@ sanguis::load::model::animation::load() const
 }
 
 void
-sanguis::load::model::animation::fill_cache(
+sanguis::load::model::animation::object::fill_cache(
 	sge::renderer::lock_rect const &_area
 ) const
 {

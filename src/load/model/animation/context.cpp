@@ -1,10 +1,10 @@
-#include "animation_context.hpp"
-#include "global_parameters.hpp"
-#include "frame_cache.hpp"
-#include "../resource/texture_context_impl.hpp"
-#include "../../exception.hpp"
-#include <sge/sprite/animation/series.hpp>
-#include <sge/sprite/animation/entity.hpp>
+#include "context.hpp"
+#include "../global_parameters.hpp"
+#include "../frame_cache.hpp"
+#include "../../resource/animation/entity.hpp"
+#include "../../resource/animation/series.hpp"
+#include "../../resource/texture_context_impl.hpp"
+#include "../../../exception.hpp"
 #include <sge/time/millisecond.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/texture/part_fwd.hpp>
@@ -15,7 +15,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 
-sanguis::load::model::animation_context::animation_context(
+sanguis::load::model::animation::context::context(
 	resource::texture_context const &_texture_context,
 	frame_cache const &_frame_cache,
 	cache_callback const &_cache_callback
@@ -37,8 +37,12 @@ sanguis::load::model::animation_context::animation_context(
 {
 }
 
+sanguis::load::model::animation::context::~context()
+{
+}
+
 void
-sanguis::load::model::animation_context::update()
+sanguis::load::model::animation::context::update()
 {
 	if (is_finished_)
 		return;
@@ -48,7 +52,7 @@ sanguis::load::model::animation_context::update()
 	
 	is_finished_ = true;
 
-	animation_ = sge::sprite::animation::series();
+	animation_ = resource::animation::series();
 
 	sge::texture::part_ptr const part( 
 		texture_context_.value()->result()
@@ -66,7 +70,7 @@ sanguis::load::model::animation_context::update()
 		++frame_it
 	)
 		animation_.push_back(
-			sge::sprite::animation::entity(
+			resource::animation::entity(
 				sge::time::millisecond(
 					frame_it->delay()
 				),
@@ -83,13 +87,13 @@ sanguis::load::model::animation_context::update()
 }
 
 bool
-sanguis::load::model::animation_context::is_finished() const
+sanguis::load::model::animation::context::is_finished() const
 {
 	return is_finished_;
 }
 
-sge::sprite::animation::series const &
-sanguis::load::model::animation_context::result() const
+sanguis::load::resource::animation::series const &
+sanguis::load::model::animation::context::result() const
 {
 	return animation_;
 }

@@ -2,7 +2,7 @@
 #include "base_animation_not_found.hpp"
 #include "global_parameters.hpp"
 #include "find_texture.hpp"
-#include "animation.hpp"
+#include "animation/object.hpp"
 #include "../log.hpp"
 #include "../../exception.hpp"
 #include <sge/parse/json/array.hpp>
@@ -59,7 +59,7 @@ find_animation_type(
 
 }
 
-sanguis::load::model::animation const &
+sanguis::load::model::animation::object const &
 sanguis::load::model::weapon_category::operator[](
 	animation_type::type const _anim
 ) const
@@ -161,11 +161,11 @@ sanguis::load::model::weapon_category::weapon_category(
 		);
 
 		fcppt::auto_ptr<
-			animation
+			animation::object
 		>
 		to_insert(
 			fcppt::make_auto_ptr<
-				animation
+				animation::object
 			>(
 				sge::parse::json::get<
 					sge::parse::json::object

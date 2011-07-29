@@ -4,7 +4,7 @@
 #include "../particle/properties.hpp"
 #include "../../../time_delta.hpp"
 #include "../../../time_unit.hpp"
-#include "../../../load/model/animation_context.hpp"
+#include "../../../load/model/animation/context.hpp"
 #include <fcppt/random/uniform.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -16,7 +16,7 @@ sanguis::client::draw2d::entities::explosion_particle(
 	sprite::particle::system &_particle_system,
 	draw2d::aoe const _aoe,
 	particle::properties const &_prop,
-	sanguis::load::model::animation_context_ptr _anim
+	sanguis::load::model::animation::context_ptr _anim
 )
 {
 	if(

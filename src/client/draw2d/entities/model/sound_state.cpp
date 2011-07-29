@@ -1,5 +1,5 @@
 #include "sound_state.hpp"
-#include "../../../../load/model/animation_sound.hpp"
+#include "../../../../load/model/animation/sound.hpp"
 #include "../../../../animation_sound_type.hpp"
 #include <sge/sprite/object_impl.hpp>
 #include <sge/audio/sound/positional.hpp>
@@ -7,7 +7,7 @@
 #include <fcppt/math/dim/structure_cast.hpp>
 
 sanguis::client::draw2d::entities::model::sound_state::sound_state(
-	load::model::animation_sound const &_sounds
+	load::model::animation::sound const &_sounds
 )
 :
 	sounds_(

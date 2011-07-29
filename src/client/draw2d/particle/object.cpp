@@ -1,13 +1,13 @@
 #include "object.hpp"
 #include "z_ordering.hpp"
+#include "../sprite/animation/texture_impl.hpp"
 #include "../sprite/particle/parameters.hpp"
 #include "../sprite/particle/texture_animation.hpp"
 #include "../sprite/point.hpp"
 #include "../sprite/dim.hpp"
-#include "../../../load/model/animation_context.hpp"
+#include "../../../load/model/animation/context.hpp"
 #include "../../../time_from_second.hpp"
 #include "../../../time_to_second.hpp"
-#include <sge/sprite/animation/texture_impl.hpp>
 #include <sge/sprite/intrusive/system_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/parameters_impl.hpp>
@@ -30,7 +30,7 @@
 sanguis::client::draw2d::particle::object::object(
 	particle::particle_type::type const _type,
 	draw2d::aoe const _aoe,
-	load::model::animation_context_ptr _animation_context,
+	load::model::animation::context_ptr _animation_context,
 	object::optional_time const _fade_total,
 	sprite::particle::system &_particle_system
 )
@@ -136,9 +136,9 @@ sanguis::client::draw2d::particle::object::update(
 				animation_context_->result(),
 				fade_total_ 
 				?
-					sge::sprite::animation::loop_method::repeat
+					sprite::animation::loop_method::repeat
 				:
-					sge::sprite::animation::loop_method::stop_at_end,
+					sprite::animation::loop_method::stop_at_end,
 				fcppt::ref(
 					sprite_
 				),

@@ -3,7 +3,7 @@
 
 #include "sound_state_fwd.hpp"
 #include "../../sprite/point.hpp"
-#include "../../../../load/model/animation_sound_fwd.hpp"
+#include "../../../../load/model/animation/sound_fwd.hpp"
 #include "../../../../animation_sound_type.hpp"
 #include <sge/audio/sound/positional_ptr.hpp>
 #include <sge/audio/sound/repeat.hpp>
@@ -28,7 +28,7 @@ class sound_state
 	);
 public:
 	explicit sound_state(
-		load::model::animation_sound const &
+		load::model::animation::sound const &
 	);
 
 	void

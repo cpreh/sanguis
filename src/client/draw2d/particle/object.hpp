@@ -12,7 +12,7 @@
 #include "../center.hpp"
 #include "../../../diff_clock.hpp"
 #include "../../../time_delta.hpp"
-#include "../../../load/model/animation_context_ptr.hpp"
+#include "../../../load/model/animation/context_ptr.hpp"
 #include <sge/sprite/object_decl.hpp>
 #include <fcppt/chrono/duration_decl.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -43,7 +43,7 @@ public:
 	object(
 		particle_type::type,
 		draw2d::aoe,
-		load::model::animation_context_ptr,
+		load::model::animation::context_ptr,
 		optional_time fade_time,
 		sprite::particle::system &
 	);
@@ -62,7 +62,7 @@ private:
 
 	sanguis::diff_clock clock_;
 
-	load::model::animation_context_ptr animation_context_;
+	load::model::animation::context_ptr animation_context_;
 
 	fcppt::scoped_ptr<
 		sprite::particle::texture_animation

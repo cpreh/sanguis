@@ -2,7 +2,7 @@
 #define SANGUIS_LOAD_RESOURCE_ANIMATIONS_HPP_INCLUDED
 
 #include "textures_fwd.hpp"
-#include <sge/sprite/animation/series.hpp>
+#include "animation/series.hpp"
 #include <sge/texture/part_fwd.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -21,7 +21,7 @@ class animations
 		animations
 	);
 public:
-	sge::sprite::animation::series const
+	animation::series const
 	load(
 		fcppt::filesystem::path const &
 	) const;
@@ -32,7 +32,7 @@ public:
 
 	~animations();
 private:
-	sge::sprite::animation::series const
+	animation::series const
 	do_load(
 		fcppt::filesystem::path const &
 	) const;
@@ -42,14 +42,14 @@ private:
 		fcppt::filesystem::path const &
 	) const;
 	
-	sge::sprite::animation::series const
+	animation::series const
 	load_without_frames_file(
 		fcppt::filesystem::path const &
 	) const;
 
 	typedef std::map<
 		fcppt::filesystem::path,
-		sge::sprite::animation::series
+		animation::series
 	> animation_map;
 	
 	textures &textures_;

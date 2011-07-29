@@ -1,15 +1,15 @@
-#ifndef SANGUIS_LOAD_MODEL_ANIMATION_HPP_INCLUDED
-#define SANGUIS_LOAD_MODEL_ANIMATION_HPP_INCLUDED
+#ifndef SANGUIS_LOAD_MODEL_ANIMATION_OBJECT_HPP_INCLUDED
+#define SANGUIS_LOAD_MODEL_ANIMATION_OBJECT_HPP_INCLUDED
 
-#include "animation_fwd.hpp"
-#include "global_parameters.hpp"
-#include "frame_cache.hpp"
-#include "animation_sound_fwd.hpp"
-#include "animation_context_ptr.hpp"
-#include "../resource/texture_context.hpp"
-#include "../resource/texture_identifier.hpp"
-#include "../resource/context_fwd.hpp"
-#include "animation_context_fwd.hpp"
+#include "object_fwd.hpp"
+#include "context_fwd.hpp"
+#include "context_ptr.hpp"
+#include "sound_fwd.hpp"
+#include "../global_parameters.hpp"
+#include "../frame_cache.hpp"
+#include "../../resource/texture_context.hpp"
+#include "../../resource/texture_identifier.hpp"
+#include "../../resource/context_fwd.hpp"
 #include <sge/texture/part_fwd.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/array.hpp>
@@ -24,22 +24,24 @@ namespace load
 {
 namespace model
 {
+namespace animation
+{
 
-class animation
+class object
 {
 	FCPPT_NONCOPYABLE(
-		animation
+		object
 	);
 public:
-	model::animation_sound const &
+	model::animation::sound const &
 	sounds() const;
 
-	model::animation_context_ptr
+	model::animation::context_ptr
 	load() const;
 
-	~animation();
+	~object();
 
-	animation(
+	object(
 		sge::parse::json::object const &,
 		model::global_parameters const &
 	);
@@ -49,7 +51,7 @@ private:
 	model::global_parameters param_;
 
 	fcppt::scoped_ptr<
-		animation_sound
+		animation::sound
 	> sounds_;
 
 	mutable frame_cache frame_cache_;
@@ -62,6 +64,7 @@ private:
 	) const;
 };
 
+}
 }
 }
 }

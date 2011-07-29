@@ -3,14 +3,14 @@
 #include "loop_method.hpp"
 #include "orientation.hpp"
 #include "sound_state.hpp"
+#include "../../sprite/animation/texture_impl.hpp"
 #include "../../sprite/dim.hpp"
 #include "../../sprite/rotation.hpp"
+#include "../../../../load/model/animation/context.hpp"
+#include "../../../../load/model/animation/object.hpp"
 #include "../../../../load/model/part.hpp"
 #include "../../../../load/model/base_animation_not_found.hpp"
-#include "../../../../load/model/animation_context.hpp"
 #include "../../../../load/model/weapon_category.hpp"
-#include "../../../../load/model/animation.hpp"
-#include <sge/sprite/animation/texture_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/dim.hpp>

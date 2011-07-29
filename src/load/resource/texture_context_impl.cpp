@@ -3,6 +3,7 @@
 #include <sge/renderer/texture/address_mode.hpp>
 #include <sge/renderer/texture/address_mode2.hpp>
 #include <sge/renderer/texture/create_planar_from_view.hpp>
+#include <sge/renderer/texture/mipmap/off.hpp>
 #include <sge/renderer/resource_flags_none.hpp>
 #include <sge/image2d/multi_loader.hpp>
 #include <sge/image2d/file.hpp>
@@ -17,8 +18,7 @@
 sanguis::load::resource::texture_context_impl::texture_context_impl(
 	fcppt::filesystem::path const &_path,
 	sge::renderer::device &_rend,
-	sge::image2d::multi_loader &_il,
-	sge::renderer::texture::filter::object const &_filter
+	sge::image2d::multi_loader &_il
 )
 :
 	task_(
@@ -43,9 +43,6 @@ sanguis::load::resource::texture_context_impl::texture_context_impl(
 	texture_result_(),
 	rend_(
 		_rend
-	),
-	filter_(
-		_filter
 	),
 	clock_(),
 	decay_timer_(
@@ -76,7 +73,7 @@ sanguis::load::resource::texture_context_impl::update()
 				sge::renderer::texture::create_planar_from_view(
 					rend_,
 					future_.get()->view(),
-					filter_,
+					sge::renderer::texture::mipmap::off(),
 					sge::renderer::texture::address_mode2(
 						sge::renderer::texture::address_mode::clamp
 					),

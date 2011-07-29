@@ -8,7 +8,7 @@
 #include <sge/texture/add_image.hpp>
 #include <sge/texture/no_fragmented.hpp>
 #include <sge/texture/part_raw.hpp>
-#include <sge/renderer/texture/filter/linear.hpp>
+#include <sge/renderer/texture/mipmap/off.hpp>
 #include <sge/renderer/resource_flags_none.hpp>
 #include <sge/image2d/multi_loader.hpp>
 #include <fcppt/log/headers.hpp>
@@ -25,16 +25,6 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/spirit/home/phoenix/object/construct.hpp>
 #include <boost/spirit/home/phoenix/object/new.hpp>
-
-namespace
-{
-
-sge::renderer::texture::filter::object const
-filter(
-	sge::renderer::texture::filter::linear
-);
-
-}
 
 sge::texture::part_ptr const
 sanguis::load::resource::textures::load(
@@ -118,7 +108,7 @@ sanguis::load::resource::textures::textures(
 					_renderer
 				),
 				sge::image::color::format::rgba8,
-				filter,
+				sge::renderer::texture::mipmap::off(),
 				sge::renderer::texture::address_mode2(
 					sge::renderer::texture::address_mode::repeat
 				)
@@ -272,8 +262,7 @@ sanguis::load::resource::textures::do_load_unnamed(
 			),
 			fcppt::ref(
 				image_loader_
-			),
-			filter
+			)
 		);
 }
 

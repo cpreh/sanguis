@@ -10,7 +10,7 @@
 #include "../../../../time_delta_fwd.hpp"
 #include "../../../../weapon_type.hpp"
 #include "../../../../load/model/part_fwd.hpp"
-#include "../../../../load/model/animation_context_fwd.hpp"
+#include "../../../../load/model/animation/context_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
 #include <fcppt/scoped_ptr.hpp>
@@ -69,7 +69,7 @@ public:
 	object() const;
 private:
 	typedef fcppt::scoped_ptr<
-		load::model::animation_context
+		load::model::animation::context
 	> animation_context_ptr;
 	
 	void

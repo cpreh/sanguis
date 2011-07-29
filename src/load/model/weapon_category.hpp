@@ -2,8 +2,8 @@
 #define SANGUIS_LOAD_MODEL_WEAPON_CATEGORY_HPP_INCLUDED
 
 #include "weapon_category_fwd.hpp"
-#include "animation_fwd.hpp"
 #include "global_parameters_fwd.hpp"
+#include "animation/object_fwd.hpp"
 #include "../resource/context_fwd.hpp"
 #include "../../animation_type.hpp"
 #include <sge/parse/json/object_fwd.hpp>
@@ -23,7 +23,7 @@ class weapon_category
 		weapon_category
 	);
 public:
-	animation const &
+	animation::object const &
 	operator[](
 		animation_type::type
 	) const;
@@ -42,7 +42,7 @@ public:
 private:
 	typedef boost::ptr_map<
 		animation_type::type,
-		animation
+		animation::object
 	> animation_map;
 
 	animation_map animations_;

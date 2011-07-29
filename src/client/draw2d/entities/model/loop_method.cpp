@@ -2,7 +2,7 @@
 #include "../../../../exception.hpp"
 #include <fcppt/text.hpp>
 
-sge::sprite::animation::loop_method::type
+sanguis::client::draw2d::sprite::animation::loop_method::type
 sanguis::client::draw2d::entities::model::loop_method(
 	animation_type::type const _atype
 )
@@ -15,10 +15,10 @@ sanguis::client::draw2d::entities::model::loop_method(
 	case animation_type::walking:
 	case animation_type::attacking:
 	case animation_type::reloading:
-		return sge::sprite::animation::loop_method::repeat;
+		return sanguis::client::draw2d::sprite::animation::loop_method::repeat;
 	case animation_type::dying:
 	case animation_type::deploying:
-		return sge::sprite::animation::loop_method::stop_at_end;
+		return sanguis::client::draw2d::sprite::animation::loop_method::stop_at_end;
 	case animation_type::size:
 		break;
 	}

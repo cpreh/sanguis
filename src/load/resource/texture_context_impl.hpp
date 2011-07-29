@@ -6,7 +6,6 @@
 #include "texture_context_fwd.hpp"
 #include <sge/time/timer.hpp>
 #include <sge/renderer/device_fwd.hpp>
-#include <sge/renderer/texture/filter/object.hpp>
 #include <sge/image2d/multi_loader_fwd.hpp>
 #include <sge/image2d/file_ptr.hpp>
 #include <sge/texture/part_ptr.hpp>
@@ -31,8 +30,7 @@ public:
 	texture_context_impl(
 		fcppt::filesystem::path const &,
 		sge::renderer::device &,
-		sge::image2d::multi_loader &,
-		sge::renderer::texture::filter::object const &
+		sge::image2d::multi_loader &
 	);
 
 	bool
@@ -68,8 +66,6 @@ private:
 	sge::texture::part_ptr texture_result_;
 
 	sge::renderer::device &rend_;
-
-	sge::renderer::texture::filter::object const filter_;
 
 	diff_clock clock_;
 

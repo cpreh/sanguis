@@ -7,7 +7,12 @@ namespace load
 {
 namespace model
 {
-class animation_sound;
+namespace animation
+{
+
+class sound;
+
+}
 }
 }
 }

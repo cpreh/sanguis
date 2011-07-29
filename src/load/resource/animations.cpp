@@ -21,7 +21,7 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 
-sge::sprite::animation::series const
+sanguis::load::resource::animation::series const
 sanguis::load::resource::animations::load(
 	fcppt::filesystem::path const &dir) const
 {
@@ -48,7 +48,7 @@ sanguis::load::resource::animations::~animations()
 {
 }
 
-sge::sprite::animation::series const
+sanguis::load::resource::animation::series const
 sanguis::load::resource::animations::do_load(
 	fcppt::filesystem::path const &dir) const
 {
@@ -108,7 +108,7 @@ sanguis::load::resource::animations::do_load(
 	else
 		file.seekg(0, std::ios_base::beg);
 	
-	sge::sprite::animation::series anim;
+	animation::series anim;
 
 	unsigned lineno = const_delay ? 2 : 1;
 	while (std::getline(file,line))
@@ -151,7 +151,7 @@ sanguis::load::resource::animations::do_load(
 		}
 
 		anim.push_back(
-			sge::sprite::animation::entity(
+			animation::entity(
 				delay,
 				load_texture(
 					dir / filename
@@ -172,7 +172,7 @@ sanguis::load::resource::animations::load_texture(
 	return textures_.do_load_inner(p);	
 }
 
-sge::sprite::animation::series const
+sanguis::load::resource::animation::series const
 sanguis::load::resource::animations::load_without_frames_file(
 	fcppt::filesystem::path const &dir) const
 {
@@ -202,9 +202,9 @@ sanguis::load::resource::animations::load_without_frames_file(
 				<< FCPPT_TEXT("\" although there is more than one file!")
 				<< FCPPT_TEXT(" Just taking the first image."));
 
-	sge::sprite::animation::series ret;
+	animation::series ret;
 	ret.push_back(
-		sge::sprite::animation::entity(
+		animation::entity(
 			sge::time::millisecond(
 				static_cast<sge::time::unit>(1)),
 			load_texture(first_path)

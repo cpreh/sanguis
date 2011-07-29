@@ -2,7 +2,7 @@
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/nonindexed_primitive_type.hpp>
 #include <sge/renderer/scoped_vertex_buffer.hpp>
-#include <sge/renderer/stage_type.hpp>
+#include <sge/renderer/stage.hpp>
 #include <sge/renderer/texture/planar.hpp>
 #include <sge/texture/part.hpp>
 
@@ -45,7 +45,7 @@ sanguis::client::draw2d::scene::world::batch::draw(
 	{
 		_renderer.texture(
 			it->texture()->texture().get(),
-			sge::renderer::stage_type(
+			sge::renderer::stage(
 				0u
 			)
 		);

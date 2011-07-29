@@ -1,7 +1,7 @@
 #ifndef SANGUIS_LOAD_MODEL_ANIMATION_CONTEXT_PTR_HPP_INCLUDED
 #define SANGUIS_LOAD_MODEL_ANIMATION_CONTEXT_PTR_HPP_INCLUDED
 
-#include "animation_context_fwd.hpp"
+#include "context_fwd.hpp"
 #include <fcppt/unique_ptr.hpp>
 
 namespace sanguis
@@ -10,11 +10,14 @@ namespace load
 {
 namespace model
 {
+namespace animation
+{
 
 typedef fcppt::unique_ptr<
-	animation_context
-> animation_context_ptr;
+	animation::context
+> context_ptr;
 
+}
 }
 }
 }
