@@ -15,9 +15,11 @@ sanguis::server::entities::spawns::spawn::~spawn()
 }
 
 sanguis::server::entities::spawns::spawn::spawn(
+	sanguis::diff_clock const &_diff_clock,
 	enemy_type::type const _enemy_type
 )
 :
+	diff_clock_(_diff_clock),
 	enemy_type_(_enemy_type)
 {
 }
@@ -44,15 +46,11 @@ sanguis::server::entities::spawns::spawn::center() const
 }
 
 void
-sanguis::server::entities::spawns::spawn::on_update(
-	sanguis::time_delta const &_time
-)
+sanguis::server::entities::spawns::spawn::on_update()
 {
 	if(
 		size_type const count_ =
-			this->may_spawn(
-				_time
-			)
+			this->may_spawn()
 	)
 	{
 		for(
@@ -61,6 +59,7 @@ sanguis::server::entities::spawns::spawn::on_update(
 			++i
 		)
 			waves::spawn(
+				diff_clock_,
 				this->environment(),
 				this->environment().load_context(),
 				enemy_type_,

@@ -2,17 +2,19 @@
 #include <fcppt/math/box/basic_impl.hpp>
 
 sanguis::load::model::frame_cache_value::frame_cache_value(
-	sge::time::unit const _delay,
+	sanguis::duration const &_delay,
 	sge::renderer::lock_rect const &_area)
 :
 	delay_(
-		_delay),
+		_delay
+	),
 	area_(
-		_area)
+		_area
+	)
 {
 }
 
-sge::time::unit
+sanguis::duration const &
 sanguis::load::model::frame_cache_value::delay() const
 {
 	return delay_;

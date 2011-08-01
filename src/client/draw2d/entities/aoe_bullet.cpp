@@ -24,6 +24,7 @@ sanguis::client::draw2d::entities::aoe_bullet::aoe_bullet(
 		model::needs_healthbar::no,
 		model::decay_option::immediate
 	),
+	diff_clock_(_param.diff_clock()),
 	model_collection_(_param.collection()),
 	particle_system_(_particle_system),
 	insert_(_insert),
@@ -42,6 +43,9 @@ sanguis::client::draw2d::entities::aoe_bullet::on_decay()
 		fcppt::make_auto_ptr<
 			entities::explosion
 		>(
+			fcppt::cref(
+				diff_clock_
+			),
 			fcppt::ref(
 				particle_system_
 			),

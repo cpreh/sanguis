@@ -17,7 +17,7 @@
 #include "../../speed.hpp"
 #include "../../../health.hpp"
 #include "../../../../animation_type.hpp"
-#include "../../../../time_delta_fwd.hpp"
+#include "../../../../diff_clock_fwd.hpp"
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
@@ -46,7 +46,7 @@ class object
 	);
 public:
 	object(
-		parameters const &,
+		model::parameters const &,
 		fcppt::string const &name,
 		sprite::order,
 		needs_healthbar::type,
@@ -63,9 +63,7 @@ public:
 	health() const;
 protected:
 	virtual void
-	update(
-		sanguis::time_delta const &
-	);
+	update();
 
 	// with_orientation overrides
 	virtual void
@@ -162,6 +160,8 @@ private:
 
 	static fcppt::log::object &
 	log();
+
+	sanguis::diff_clock const &diff_clock_;
 
 	bool
 		attacking_,

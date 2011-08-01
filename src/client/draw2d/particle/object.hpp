@@ -10,11 +10,11 @@
 #include "../sprite/particle/system.hpp"
 #include "../aoe.hpp"
 #include "../center.hpp"
-#include "../../../diff_clock.hpp"
-#include "../../../time_delta.hpp"
+#include "../../../diff_clock_fwd.hpp"
+#include "../../../diff_timer.hpp"
+#include "../../../duration.hpp"
 #include "../../../load/model/animation/context_ptr.hpp"
 #include <sge/sprite/object_decl.hpp>
-#include <fcppt/chrono/duration_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
 #include <fcppt/scoped_ptr.hpp>
@@ -37,10 +37,11 @@ class object
 	);
 public:
 	typedef fcppt::optional<
-		sanguis::time_delta
+		sanguis::duration
 	> optional_time;
 
 	object(
+		sanguis::diff_clock const &,
 		particle_type::type,
 		draw2d::aoe,
 		load::model::animation::context_ptr,
@@ -52,15 +53,14 @@ public:
 
 	bool
 	update(
-		sanguis::time_delta const &,
 		draw2d::center const &,
 		particle::rotation,
 		particle::depth
 	);
 private:
-	draw2d::sprite::particle::object sprite_;
+	sanguis::diff_clock const &diff_clock_;
 
-	sanguis::diff_clock clock_;
+	draw2d::sprite::particle::object sprite_;
 
 	load::model::animation::context_ptr animation_context_;
 
@@ -70,7 +70,7 @@ private:
 
 	optional_time fade_total_;
 
-	sanguis::time_delta fade_remaining_;
+	sanguis::diff_timer fade_timer_;
 };
 
 }

@@ -19,7 +19,6 @@
 #include "../../../load/resource/context.hpp"
 #include "../../../messages/call/object.hpp"
 #include "../../../exception.hpp"
-#include "../../../time_from_second.hpp"
 
 #include <sge/image/colors.hpp>
 #include <sge/renderer/ambient_color.hpp>
@@ -68,6 +67,7 @@ sanguis::client::draw2d::scene::object::object(
 	sge::viewport::manager &_viewport_manager
 )
 :
+	diff_clock_(),
 	resources_(_resources),
 	rend_(_rend),
 	normal_system_(rend_),
@@ -247,18 +247,15 @@ sanguis::client::draw2d::scene::object::process_message(
 
 void
 sanguis::client::draw2d::scene::object::update(
-	sanguis::time_delta const &_delta
+	sanguis::duration const &_delta
 )
 {
-	sanguis::time_delta const real_delta(
-		paused_
-		?
-			sanguis::time_from_second(
-				0
-			)
-		:
+	if(
+		!paused_
+	)
+		diff_clock_.update(
 			_delta
-	);
+		);
 	
 	for(
 		entity_map::iterator it(
@@ -277,9 +274,7 @@ sanguis::client::draw2d::scene::object::update(
 			*it->second
 		);
 
-		cur_entity.update(
-			real_delta
-		);
+		cur_entity.update();
 
 		if(
 			cur_entity.may_be_removed()
@@ -296,9 +291,7 @@ sanguis::client::draw2d::scene::object::update(
 		it != own_entities_.end();
 	)
 	{
-		it->update(
-			real_delta
-		);
+		it->update();
 
 		if(
 			it->may_be_removed()
@@ -589,6 +582,12 @@ sanguis::client::draw2d::scene::object::transform(
 			)
 		)
 	);
+}
+
+sanguis::diff_clock const &
+sanguis::client::draw2d::scene::object::diff_clock() const
+{
+	return diff_clock_;
 }
 
 sanguis::client::draw2d::transform_callback const &

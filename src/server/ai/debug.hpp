@@ -3,7 +3,6 @@
 
 #include "base.hpp"
 #include "../entities/with_ai_fwd.hpp"
-#include "../../time_delta_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -28,9 +27,7 @@ public:
 	~debug();
 private:
 	void
-	update(
-		sanguis::time_delta const &
-	);
+	update();
 
 	entities::with_ai &me_;
 };

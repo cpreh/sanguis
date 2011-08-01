@@ -4,7 +4,6 @@
 #include "wave_fwd.hpp"
 #include "../environment/object_fwd.hpp"
 #include "../environment/load_context_fwd.hpp"
-#include "../../time_delta_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -24,7 +23,6 @@ protected:
 public:
 	virtual void
 	process(
-		sanguis::time_delta const &,
 		environment::object &,
 		environment::load_context &
 	) = 0;

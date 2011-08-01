@@ -14,17 +14,16 @@
 #include "timer_callback.hpp"
 #include "timer_function.hpp"
 #include "../circular_buffer.hpp"
+#include "../duration.hpp"
 #include "../id.hpp"
 #include "../port.hpp"
-#include <sge/time/duration.hpp>
+#include <fcppt/chrono/asio/deadline_timer.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/signal/object.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/unique_ptr.hpp>
-#include <boost/asio/deadline_timer.hpp>
 #include <boost/asio/io_service.hpp>
 #include <boost/asio/ip/tcp.hpp>
-#include <boost/date_time/posix_time/posix_time_duration.hpp>
 #include <boost/system/error_code.hpp>
 #include <cstddef>
 
@@ -43,7 +42,7 @@ class object_impl
 public:
 	object_impl(
 		boost::asio::io_service &,
-		sge::time::duration const &
+		net::duration const &
 	);
 
 	~object_impl();
@@ -117,9 +116,9 @@ private:
 		server::timer_function
 	> timer_signal_;
 
-	boost::posix_time::milliseconds const timer_duration_;
+	net::duration const timer_duration_;
 
-	boost::asio::deadline_timer deadline_timer_;
+	fcppt::chrono::asio::deadline_timer deadline_timer_;
 
 	void
 	accept();

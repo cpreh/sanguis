@@ -14,6 +14,7 @@
 #include <boost/logic/tribool.hpp>
 
 sanguis::server::entities::friend_::friend_(
+	sanguis::diff_clock const &_diff_clock,
 	friend_type::type const _ftype,
 	server::environment::load_context &_load_context,
 	damage::armor const &_armor,
@@ -24,6 +25,7 @@ sanguis::server::entities::friend_::friend_(
 )
 :
 	with_ai(
+		_diff_clock,
 		_ai,
 		move(
 			_weapon
@@ -41,6 +43,7 @@ sanguis::server::entities::friend_::friend_(
 	),
 	with_buffs(),
 	with_health(
+		_diff_clock,
 		_health,
 		_armor
 	),
@@ -58,21 +61,13 @@ sanguis::server::entities::friend_::friend_(
 }
 
 void
-sanguis::server::entities::friend_::on_update(
-	sanguis::time_delta const &_time
-)
+sanguis::server::entities::friend_::on_update()
 {
-	with_ai::on_update(
-		_time
-	);
+	with_ai::on_update();
 
-	with_buffs::on_update(
-		_time
-	);
+	with_buffs::on_update();
 
-	with_health::on_update(
-		_time
-	);
+	with_health::on_update();
 }
 
 sanguis::entity_type::type

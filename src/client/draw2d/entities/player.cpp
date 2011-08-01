@@ -94,13 +94,9 @@ sanguis::client::draw2d::entities::player::orientation(
 }
 
 void
-sanguis::client::draw2d::entities::player::update(
-	sanguis::time_delta const &_time
-)
+sanguis::client::draw2d::entities::player::update()
 {
-	model::object::update(
-		_time
-	);
+	model::object::update();
 
 	vector2 const
 		leg_center(

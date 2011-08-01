@@ -7,6 +7,7 @@
 #include "../sprite/particle/system.hpp"
 #include "../aoe.hpp"
 #include "../../../load/model/animation/context_ptr.hpp"
+#include "../../../diff_clock_fwd.hpp"
 
 namespace sanguis
 {
@@ -19,6 +20,7 @@ namespace entities
 
 particle::base_ptr
 explosion_particle(
+	sanguis::diff_clock const &,
 	particle::particle_type::type,
 	sprite::particle::system &,
 	draw2d::aoe,

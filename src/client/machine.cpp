@@ -156,7 +156,7 @@ sanguis::client::machine::send(
 
 bool
 sanguis::client::machine::process(
-	sanguis::time_delta const &_time
+	sanguis::duration const &_time
 )
 {
 	this->process_event(

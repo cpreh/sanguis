@@ -11,7 +11,7 @@ namespace load
 namespace model
 {
 
-optional_delay const
+model::optional_delay const
 load_delay(
 	sge::parse::json::member_vector const &
 );

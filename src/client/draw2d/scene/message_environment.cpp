@@ -92,6 +92,7 @@ sanguis::client::draw2d::scene::message_environment::model_parameters() const
 {
 	return
 		entities::model::parameters(
+			object_.diff_clock(),
 			object_.colored_system(),
 			object_.normal_system(),
 			object_.load_collection()

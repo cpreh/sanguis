@@ -16,9 +16,10 @@
 #include "../../messages/player_change_weapon.hpp"
 #include "../../messages/player_cheat.hpp"
 #include "../../exception.hpp"
-#include <sge/time/millisecond.hpp>
-#include <sge/font/text/lit.hpp>
 #include <sge/console/object.hpp>
+#include <sge/font/text/lit.hpp>
+#include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/chrono/milliseconds.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -48,8 +49,10 @@ sanguis::client::control::action_handler::action_handler(
 		weapon_type::size
 	),
 	rotation_timer_(
-		sge::time::millisecond(
-			100
+		sanguis::timer::parameters(
+			fcppt::chrono::milliseconds(
+				100
+			)
 		)
 	),
 	owned_weapons_(),
@@ -166,7 +169,9 @@ sanguis::client::control::action_handler::handle_cursor_action(
 )
 {
 	if(
-		!rotation_timer_.update_b()
+		!sge::timer::reset_when_expired(
+			rotation_timer_
+		)
 	)
 		return;
 	

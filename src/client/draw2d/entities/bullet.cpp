@@ -50,18 +50,14 @@ sanguis::client::draw2d::entities::bullet::~bullet()
 }
 
 void
-sanguis::client::draw2d::entities::bullet::update(
-	sanguis::time_delta const &_time
-)
+sanguis::client::draw2d::entities::bullet::update()
 {
 	if(
 		!origin_
 	)
 		origin_ = this->center();
 	
-	model::object::update(
-		_time
-	);
+	model::object::update();
 
 	draw2d::funit const
 		max_tail_length(

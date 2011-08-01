@@ -5,6 +5,7 @@
 #include "../base_fwd.hpp"
 #include "../../environment/load_context_fwd.hpp"
 #include "../../team.hpp"
+#include "../../../diff_clock_fwd.hpp"
 #include "../../../friend_type.hpp"
 #include <fcppt/noncopyable.hpp>
 
@@ -26,6 +27,7 @@ class monster
 	);
 public:
 	monster(
+		sanguis::diff_clock const &,
 		server::environment::load_context &,
 		team::type,
 		friend_type::type
@@ -37,6 +39,8 @@ private:
 	do_pickup(
 		base &receiver
 	);
+
+	sanguis::diff_clock const &diff_clock_;
 	
 	friend_type::type const ftype_;
 };

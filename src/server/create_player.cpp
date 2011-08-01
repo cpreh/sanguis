@@ -9,12 +9,14 @@
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/utf8/from_fcppt_string.hpp>
-#include <fcppt/ref.hpp>
+#include <fcppt/cref.hpp>
 #include <fcppt/homogenous_pair_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 
 sanguis::server::entities::player_unique_ptr
 sanguis::server::create_player(
+	sanguis::diff_clock const &_diff_clock,
 	environment::load_context &_load_context,
 	server::string const &_name,
 	server::unicast_callback const &_send_to_player,
@@ -54,6 +56,9 @@ sanguis::server::create_player(
 		fcppt::make_unique_ptr<
 			entities::player
 		>(
+			fcppt::cref(
+				_diff_clock
+			),
 			fcppt::ref(
 				_load_context
 			),

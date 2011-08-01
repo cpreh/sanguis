@@ -5,15 +5,16 @@
 #include "../sprite/particle/texture_animation.hpp"
 #include "../sprite/point.hpp"
 #include "../sprite/dim.hpp"
+#include "../funit.hpp"
 #include "../../../load/model/animation/context.hpp"
-#include "../../../time_from_second.hpp"
-#include "../../../time_to_second.hpp"
+#include "../../../duration_second.hpp"
+#include <sge/image/color/rgba8.hpp>
+#include <sge/image/color/init.hpp>
 #include <sge/sprite/intrusive/system_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/sprite/center.hpp>
-#include <sge/image/color/rgba8.hpp>
-#include <sge/image/color/init.hpp>
+#include <sge/timer/remaining_fractional.hpp>
 #include <fcppt/chrono/duration_arithmetic.hpp>
 #include <fcppt/chrono/duration_comparison.hpp>
 #include <fcppt/chrono/duration_impl.hpp>
@@ -23,11 +24,12 @@
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/cref.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/ref.hpp>
-#include <algorithm>
 
 sanguis::client::draw2d::particle::object::object(
+	sanguis::diff_clock const &_diff_clock,
 	particle::particle_type::type const _type,
 	draw2d::aoe const _aoe,
 	load::model::animation::context_ptr _animation_context,
@@ -36,6 +38,7 @@ sanguis::client::draw2d::particle::object::object(
 )
 :
 	particle::base(
+		_diff_clock,
 		draw2d::center(
 			draw2d::center::value_type::null()
 		),
@@ -51,6 +54,9 @@ sanguis::client::draw2d::particle::object::object(
 		particle::rotation_speed(
 			0
 		)
+	),
+	diff_clock_(
+		_diff_clock
 	),
 	sprite_(
 		sprite::particle::parameters()
@@ -94,14 +100,17 @@ sanguis::client::draw2d::particle::object::object(
 	fade_total_(
 		_fade_total
 	),
-	fade_remaining_(
-		fade_total_
-		?
-			*fade_total_
-		:
-			sanguis::time_from_second(
-				0
-			)
+	fade_timer_(
+		sanguis::diff_timer::parameters(
+			_diff_clock,
+			fade_total_
+			?
+				*fade_total_
+			:
+				sanguis::duration_second(
+					0
+				)
+		)
 	)
 {
 }
@@ -112,7 +121,6 @@ sanguis::client::draw2d::particle::object::~object()
 
 bool
 sanguis::client::draw2d::particle::object::update(
-	sanguis::time_delta const &_delta,
 	draw2d::center const &_center,
 	particle::rotation const _rot,
 	particle::depth const _depth 
@@ -142,13 +150,14 @@ sanguis::client::draw2d::particle::object::update(
 				fcppt::ref(
 					sprite_
 				),
-				clock_.callback()
+				fcppt::cref(
+					diff_clock_
+				)
 			)
 		);
 	}
 
 	base::update(
-		_delta,
 		_center,
 		_rot,
 		_depth
@@ -175,10 +184,6 @@ sanguis::client::draw2d::particle::object::update(
 		)
 	);
 
-	clock_.update(
-		_delta
-	);
-
 	bool const ret(
 		animation_->process()
 	);
@@ -188,48 +193,21 @@ sanguis::client::draw2d::particle::object::update(
 	)
 		return ret;
 	
-	fade_remaining_ -= _delta;
-
-	draw2d::funit const ratio(
-		static_cast<
-			draw2d::funit
-		>(
-			sanguis::time_to_second(
-				fade_remaining_
-			)
-		)
-		/
-		static_cast<
-			draw2d::funit
-		>(
-			sanguis::time_to_second(
-				*fade_total_
-			)
-		)
-	);
-
 	sprite_.color(
 		sge::image::color::rgba8(
 			(sge::image::color::init::red %= 1.0)
 			(sge::image::color::init::green %= 1.0)
 			(sge::image::color::init::blue %= 1.0)
 			(sge::image::color::init::alpha %=
-				std::max(
-					static_cast<
-						draw2d::funit
-					>(
-						0
-					),
-					ratio
+				sge::timer::remaining_fractional<
+					draw2d::funit
+				>(
+					fade_timer_
 				)
 			)
 		)
 	);
 
 	return
-		fade_remaining_
-		<
-		sanguis::time_from_second(
-			0
-		);
+		fade_timer_.expired();
 }

@@ -7,10 +7,12 @@
 #include "../environment/object.hpp"
 #include "../../random.hpp"
 #include <fcppt/tr1/random.hpp>
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 
 sanguis::server::weapons::shotgun::shotgun(
+	sanguis::diff_clock const &_diff_clock,
 	weapon_type::type const _type,
 	weapons::base_cooldown const _base_cooldown,
 	space_unit const _spread_radius,
@@ -21,6 +23,7 @@ sanguis::server::weapons::shotgun::shotgun(
 )
 :
 	weapon(
+		_diff_clock,
 		_type,
 		weapons::range(20), // FIXME
 		_magazine_size,
@@ -79,6 +82,9 @@ sanguis::server::weapons::shotgun::do_attack(
 				fcppt::make_unique_ptr<
 					entities::projectiles::simple_bullet
 				>(
+					fcppt::cref(
+						this->diff_clock()
+					),
 					fcppt::ref(
 						_attack.environment().load_context()
 					),

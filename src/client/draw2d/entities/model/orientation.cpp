@@ -1,5 +1,4 @@
 #include "orientation.hpp"
-#include "../../../../time_to_second.hpp"
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/assert.hpp>
 #include <algorithm>
@@ -23,7 +22,7 @@ assert_range(
 
 sanguis::client::draw2d::sprite::rotation
 sanguis::client::draw2d::entities::model::orientation(
-	sanguis::time_delta const &_time,
+	draw2d::funit const _delta,
 	sprite::rotation const _orientation,
 	sprite::rotation const _desired_orientation
 )
@@ -109,9 +108,7 @@ sanguis::client::draw2d::entities::model::orientation(
 		+
 		dir
 		*
-		sanguis::time_to_second(
-			_time
-		)
+		_delta
 		* turning_speed
 	);
 	

@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <fcppt/chrono/duration_impl.hpp>
 
 sanguis::load::resource::animation::entity::entity(
-	sge::time::duration const &_res,
+	sanguis::duration const &_res,
 	sge::texture::const_part_ptr const _tex
 )
 :
@@ -33,7 +33,7 @@ sanguis::load::resource::animation::entity::entity(
 {
 }
 
-sge::time::unit
+sanguis::duration const
 sanguis::load::resource::animation::entity::delay() const
 {
 	return delay_;

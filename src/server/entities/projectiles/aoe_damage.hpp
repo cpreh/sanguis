@@ -8,7 +8,8 @@
 #include "../../damage/array.hpp"
 #include "../../radius.hpp"
 #include "../../team.hpp"
-#include "../../../time_delta_fwd.hpp"
+#include "../../../diff_clock_fwd.hpp"
+#include "../../../duration_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -30,11 +31,12 @@ class aoe_damage
 	);
 public:
 	aoe_damage(
+		sanguis::diff_clock const &,
 		team::type team,
 		server::radius,
 		damage::unit damage_per_pulse,
 		unsigned pulses,
-		sanguis::time_delta const &pulse_diff,
+		sanguis::duration const &pulse_diff,
 		damage::array const &damage_values
 	);
 

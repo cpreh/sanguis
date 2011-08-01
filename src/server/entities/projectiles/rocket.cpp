@@ -8,14 +8,16 @@
 #include "../../damage/full.hpp"
 #include "../../environment/object.hpp"
 #include "../../environment/load_context.hpp"
-#include "../../../time_from_second.hpp"
+#include "../../../duration_second.hpp"
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::server::entities::projectiles::rocket::rocket(
+	sanguis::diff_clock const &_diff_clock,
 	server::environment::load_context &_load_context,
 	server::team::type const _team,
 	damage::unit const _damage,
@@ -24,6 +26,7 @@ sanguis::server::entities::projectiles::rocket::rocket(
 )
 :
 	aoe_projectile(
+		_diff_clock,
 		aoe_projectile_type::rocket,
 		_team,
 		entities::movement_speed(6),
@@ -31,13 +34,16 @@ sanguis::server::entities::projectiles::rocket::rocket(
 			FCPPT_TEXT("rocket")
 		),
 		projectiles::life_time(
-			sanguis::time_from_second(
+			sanguis::duration_second(
 				10.f
 			)
 		),
 		indeterminate::no,
 		_aoe,
 		_direction
+	),
+	diff_clock_(
+		_diff_clock
 	),
 	damage_(
 		_damage
@@ -65,11 +71,14 @@ sanguis::server::entities::projectiles::rocket::on_remove()
 			fcppt::make_unique_ptr<
 				aoe_damage
 			>(
+				fcppt::cref(
+					diff_clock_
+				),
 				this->team(),
 				this->aoe(),
 				damage_,
 				1u,
-				sanguis::time_from_second(
+				sanguis::duration_second(
 					0.1f
 				),
 				damage::list(

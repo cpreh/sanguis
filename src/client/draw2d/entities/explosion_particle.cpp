@@ -2,16 +2,17 @@
 #include "../particle/fade_time_range.hpp"
 #include "../particle/object.hpp"
 #include "../particle/properties.hpp"
-#include "../../../time_delta.hpp"
-#include "../../../time_unit.hpp"
+#include "../../../duration.hpp"
 #include "../../../load/model/animation/context.hpp"
 #include <fcppt/random/uniform.hpp>
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/ref.hpp>
 
 sanguis::client::draw2d::particle::base_ptr
 sanguis::client::draw2d::entities::explosion_particle(
+	sanguis::diff_clock const &_diff_clock,
 	particle::particle_type::type const _particle_type,
 	sprite::particle::system &_particle_system,
 	draw2d::aoe const _aoe,
@@ -27,6 +28,9 @@ sanguis::client::draw2d::entities::explosion_particle(
 				fcppt::make_unique_ptr<
 					particle::object
 				>(
+					fcppt::cref(
+						_diff_clock
+					),
 					_particle_type,
 					_aoe,
 					move(
@@ -54,12 +58,15 @@ sanguis::client::draw2d::entities::explosion_particle(
 			fcppt::make_unique_ptr<
 				particle::object
 			>(
+				fcppt::cref(
+					_diff_clock
+				),
 				_particle_type,
 				_aoe,
 				move(
 					_anim
 				),
-				sanguis::time_delta(
+				sanguis::duration(
 					rng()
 				),
 				fcppt::ref(

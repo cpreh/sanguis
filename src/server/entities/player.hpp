@@ -19,8 +19,8 @@
 #include "../level.hpp"
 #include "../player_id.hpp"
 #include "../string.hpp"
+#include "../../diff_clock_fwd.hpp"
 #include "../../perk_type.hpp"
-#include "../../time_delta_fwd.hpp"
 #include <fcppt/scoped_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -47,6 +47,7 @@ class player
 	);
 public:
 	player(
+		sanguis::diff_clock const &,
 		server::environment::load_context &,
 		server::health,
 		damage::armor const &,
@@ -96,9 +97,7 @@ private:
 	);
 
 	void
-	on_update(
-		sanguis::time_delta const &
-	);
+	on_update();
 
 	messages::auto_ptr
 	add_message(

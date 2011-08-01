@@ -6,10 +6,9 @@
 #include "interval.hpp"
 #include "limit.hpp"
 #include "spawn.hpp"
-#include "../../../diff_clock.hpp"
+#include "../../../diff_clock_fwd.hpp"
+#include "../../../diff_timer.hpp"
 #include "../../../enemy_type.hpp"
-#include "../../../time_delta_fwd.hpp"
-#include <sge/time/timer.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -30,7 +29,8 @@ class limited
 		limited
 	);
 public:
-	explicit limited(
+	limited(
+		sanguis::diff_clock const &,
 		enemy_type::type,
 		count_per_wave,
 		interval,
@@ -45,20 +45,16 @@ private:
 	);
 
 	size_type
-	may_spawn(
-		sanguis::time_delta const &
-	);
+	may_spawn();
 
 	void
 	add_count(
 		size_type
 	);
 
-	diff_clock diff_clock_;
-
 	count_per_wave const count_per_wave_;
 
-	sge::time::timer delay_;
+	sanguis::diff_timer delay_timer_;
 
 	size_type spawned_;
 

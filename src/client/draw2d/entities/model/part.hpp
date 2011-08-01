@@ -6,8 +6,8 @@
 #include "../../sprite/normal/texture_animation.hpp"
 #include "../../sprite/rotation.hpp"
 #include "../../../../animation_type.hpp"
-#include "../../../../diff_clock.hpp"
-#include "../../../../time_delta_fwd.hpp"
+#include "../../../../diff_clock_fwd.hpp"
+#include "../../../../diff_timer.hpp"
 #include "../../../../weapon_type.hpp"
 #include "../../../../load/model/part_fwd.hpp"
 #include "../../../../load/model/animation/context_fwd.hpp"
@@ -33,6 +33,7 @@ class part
 	);
 public:
 	part(
+		sanguis::diff_clock const &,
 		load::model::part const &,
 		sprite::normal::object &ref
 	);
@@ -50,9 +51,7 @@ public:
 	);
 
 	void
-	update(
-		sanguis::time_delta const &
-	);
+	update();
 
 	void
 	orientation(
@@ -85,7 +84,9 @@ private:
 	sprite::rotation
 	orientation() const;
 
-	diff_clock anim_diff_clock_;
+	sanguis::diff_clock const &diff_clock_;
+
+	sanguis::diff_timer rotation_timer_;
 
 	typedef fcppt::optional<
 		sprite::rotation

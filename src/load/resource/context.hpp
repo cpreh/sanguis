@@ -1,7 +1,6 @@
 #ifndef SANGUIS_LOAD_RESOURCE_CONTEXT_HPP_INCLUDED
 #define SANGUIS_LOAD_RESOURCE_CONTEXT_HPP_INCLUDED
 
-#include "../../time_delta_fwd.hpp"
 #include "../context_fwd.hpp"
 #include "textures_fwd.hpp"
 #include "sounds_fwd.hpp"
@@ -34,11 +33,6 @@ public:
 
 	resource::animations const &
 	animations() const;
-
-	void
-	update(
-		sanguis::time_delta const &
-	) const;
 private:
 	friend class load::context;
 

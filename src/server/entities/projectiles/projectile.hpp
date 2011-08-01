@@ -10,12 +10,11 @@
 #include "../movement_speed.hpp"
 #include "../../dim.hpp"
 #include "../../direction.hpp"
-#include "../../../diff_clock.hpp"
+#include "../../../diff_clock_fwd.hpp"
+#include "../../../diff_timer.hpp"
 #include "../../../entity_type.hpp"
 #include "../../../projectile_type.hpp"
-#include "../../../time_delta_fwd.hpp"
 #include "../../../messages/base.hpp"
-#include <sge/time/timer.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -41,6 +40,7 @@ public:
 	ptype() const;
 protected:
 	projectile(
+		sanguis::diff_clock const &,
 		projectile_type::type,
 		team::type team,
 		entities::movement_speed,
@@ -52,11 +52,6 @@ protected:
 
 	~projectile();
 	
-	void
-	on_update(
-		sanguis::time_delta const &
-	);
-
 	void
 	expire();
 
@@ -98,9 +93,7 @@ private:
 
 	projectile_type::type const ptype_;
 
-	diff_clock diff_clock_;
-
-	sge::time::timer life_timer_;
+	sanguis::diff_timer life_timer_;
 };
 
 }

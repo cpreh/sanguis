@@ -14,6 +14,8 @@
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/texture/part_raw.hpp>
+#include <fcppt/chrono/duration_cast.hpp>
+#include <fcppt/chrono/milliseconds.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -76,7 +78,7 @@ calc_rect(
 		);
 }
 
-sge::time::unit
+sanguis::duration const
 load_delay(
 	sge::parse::json::member_vector const &_members,
 	sanguis::load::model::optional_delay const &_opt_delay
@@ -95,10 +97,12 @@ load_delay(
 		ret
 	)
 		return
-			static_cast<
-				sge::time::unit
+			fcppt::chrono::duration_cast<
+				sanguis::duration
 			>(
-				*ret
+				fcppt::chrono::milliseconds(
+					*ret
+				)
 			);
 
 	if(
@@ -262,8 +266,8 @@ sanguis::load::model::animation::object::fill_cache(
 			+ FCPPT_TEXT(" in TODO!")
 		);
 
-	sge::time::unit const delay(
-		load_delay(
+	sanguis::duration const delay(
+		::load_delay(
 			object_.members,
 			param_.delay()
 		)
@@ -300,7 +304,7 @@ sanguis::load::model::animation::object::fill_cache(
 			);
 
 		frame_cache_.push_back(
-			frame_cache_value(
+			model::frame_cache_value(
 				delay,
 				cur_area
 			)

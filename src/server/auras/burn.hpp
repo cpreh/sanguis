@@ -7,7 +7,8 @@
 #include "../damage/unit.hpp"
 #include "../entities/with_body_fwd.hpp"
 #include "../radius.hpp"
-#include "../../time_delta.hpp"
+#include "../../diff_clock_fwd.hpp"
+#include "../../duration.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -26,10 +27,11 @@ class burn
 	);
 public:
 	burn(
+		sanguis::diff_clock const &,
 		server::radius,
 		server::team::type team,
 		damage::unit damage_per_pules,
-		sanguis::time_delta const &pulse_diff,
+		sanguis::duration const &pulse_diff,
 		damage::array const &
 	);
 
@@ -44,8 +46,10 @@ private:
 	leave(
 		entities::with_body &
 	);
+
+	sanguis::diff_clock const &diff_clock_;
 	
-	sanguis::time_delta const pulse_diff_;
+	sanguis::duration const pulse_diff_;
 
 	damage::unit const damage_per_pulse_;
 

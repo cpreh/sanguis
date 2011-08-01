@@ -46,13 +46,9 @@ sanguis::server::entities::base::transfer(
 }
 
 void
-sanguis::server::entities::base::update(
-	sanguis::time_delta const &_time
-)
+sanguis::server::entities::base::update()
 {
-	this->on_update(
-		_time
-	);
+	this->on_update();
 }
 
 void
@@ -110,9 +106,7 @@ sanguis::server::entities::base::~base()
 }
 
 void
-sanguis::server::entities::base::on_update(
-	sanguis::time_delta const &
-)
+sanguis::server::entities::base::on_update()
 {
 }
 

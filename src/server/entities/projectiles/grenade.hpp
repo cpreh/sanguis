@@ -10,9 +10,7 @@
 #include "../../vector.hpp"
 #include "../../radius.hpp"
 #include "../../team.hpp"
-#include "../../../diff_clock.hpp"
-#include "../../../time_delta_fwd.hpp"
-#include <sge/time/timer.hpp>
+#include "../../../diff_clock_fwd.hpp"
 #include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -34,6 +32,7 @@ class grenade
 	);
 public:
 	grenade(
+		sanguis::diff_clock const &,
 		server::environment::load_context &,
 		server::team::type,
 		damage::unit,
@@ -55,16 +54,14 @@ private:
 	);
 	
 	void
-	on_update(
-		sanguis::time_delta const &
-	);
+	on_update();
 	
 	void
 	on_remove();
-	
-	diff_clock diff_clock_;
 
-	sge::time::timer slowdown_time_;
+	sanguis::diff_clock const &diff_clock_;
+	
+	sanguis::diff_timer slowdown_timer_;
 
 	damage::unit const damage_;
 

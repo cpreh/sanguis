@@ -20,8 +20,9 @@
 #include "../player_id.hpp"
 #include "../probability.hpp"
 #include "../string.hpp"
-#include "../../diff_clock.hpp"
-#include "../../time_delta_fwd.hpp"
+#include "../../diff_clock_fwd.hpp"
+#include "../../diff_timer.hpp"
+#include "../../timer.hpp"
 #include "../../world_id.hpp"
 #include "../../weapon_type.hpp"
 #include "../../messages/auto_ptr.hpp"
@@ -31,7 +32,6 @@
 #include <sanguis/creator/generator/size.hpp>
 #include <sge/projectile/world_fwd.hpp>
 #include <sge/projectile/body/object_fwd.hpp>
-#include <sge/time/timer.hpp>
 #include <fcppt/container/map_decl.hpp>
 #include <fcppt/math/dim/basic_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
@@ -55,6 +55,7 @@ class object
 	);
 public:
 	object(
+		sanguis::diff_clock const &,
 		sanguis::world_id,
 		world::context &,
 		server::environment::load_context &,
@@ -65,9 +66,7 @@ public:
 	~object();
 
 	void
-	update(
-		sanguis::time_delta const &
-	);
+	update();
 
 	void
 	insert(
@@ -180,7 +179,6 @@ private:
 	void
 	update_entity(
 		entity_map::iterator,
-		sanguis::time_delta const &,
 		bool update_pos
 	);
 
@@ -208,9 +206,9 @@ private:
 
 	sight_range_map sight_ranges_;
 
-	sanguis::diff_clock diff_clock_;
+	sanguis::diff_timer projectile_timer_;
 
-	sge::time::timer send_timer_;
+	sanguis::timer send_timer_;
 
 	typedef fcppt::scoped_ptr<
 		server::environment::object

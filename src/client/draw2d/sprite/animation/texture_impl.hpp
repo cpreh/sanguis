@@ -24,8 +24,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "texture_decl.hpp"
 #include "../../../../exception.hpp"
 #include <sge/sprite/object.hpp>
-#include <sge/time/second.hpp>
 #include <fcppt/chrono/duration_impl.hpp>
+#include <fcppt/chrono/seconds.hpp>
 #include <fcppt/text.hpp>
 #include <boost/next_prior.hpp>
 
@@ -36,17 +36,18 @@ sanguis::client::draw2d::sprite::animation::texture<Choices>::texture(
 	sanguis::load::resource::animation::series const &_series,
 	animation::loop_method::type const _action,
 	object &_spr,
-	sge::time::callback const &_time_function
+	sanguis::diff_clock const &_diff_clock
 )
 :
 	series_(_series),
 	action_(_action),
 	cur_timer_(
-		sge::time::second(
-			0
-		),
-		sge::time::activation_state::active,
-		_time_function
+		sanguis::diff_timer::parameters(
+			_diff_clock,
+			fcppt::chrono::seconds(
+				0
+			)
+		)
 	),
 	spr_(_spr),
 	pos_(series_.begin())
@@ -83,9 +84,7 @@ sanguis::client::draw2d::sprite::animation::texture<Choices>::process()
 	++pos_;
 
 	cur_timer_.interval(
-		sge::time::duration(
-			pos_->delay()
-		)
+		pos_->delay()
 	);
 
 	spr_.texture(
@@ -108,9 +107,7 @@ sanguis::client::draw2d::sprite::animation::texture<Choices>::reset()
 	pos_ = series_.begin();
 
 	cur_timer_.interval(
-		sge::time::duration(
-			series_.begin()->delay()
-		)
+		series_.begin()->delay()
 	);
 }
 

@@ -11,10 +11,10 @@
 #include "../net/port.hpp"
 #include "../server/object_fwd.hpp"
 #include "../main_object.hpp"
+#include "../timer.hpp"
 #include <sge/console/object.hpp>
 #include <sge/font/text/drawer_3d.hpp>
 #include <sge/font/metrics_ptr.hpp>
-#include <sge/time/timer.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/window/instance_fwd.hpp>
 #include <awl/mainloop/io_service_shared_ptr.hpp>
@@ -22,7 +22,6 @@
 #include <fcppt/scoped_ptr.hpp>
 #include <fcppt/scoped_state_machine.hpp>
 #include <boost/program_options/variables_map.hpp>
-
 
 namespace sanguis
 {
@@ -87,7 +86,7 @@ private:
 
 	client::machine machine_;
 
-	sge::time::timer frame_timer_;
+	sanguis::timer frame_timer_;
 
 	fcppt::scoped_ptr<
 		server::object

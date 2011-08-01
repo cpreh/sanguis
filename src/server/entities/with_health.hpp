@@ -10,7 +10,8 @@
 #include "../damage/unit.hpp"
 #include "../damage/array.hpp"
 #include "../damage/armor.hpp"
-#include "../../time_delta_fwd.hpp"
+#include "../../diff_clock_fwd.hpp"
+#include "../../diff_timer.hpp"
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -51,6 +52,7 @@ public:
 	max_health() const;
 protected:
 	with_health(
+		sanguis::diff_clock const &,
 		server::health max,
 		damage::armor const &
 	);
@@ -58,9 +60,7 @@ protected:
 	~with_health();
 
 	void
-	on_update(
-		sanguis::time_delta const &
-	);
+	on_update();
 private:
 	bool
 	dead() const;
@@ -76,6 +76,8 @@ private:
 
 	property::always_max regeneration_;
 	
+	sanguis::diff_timer regeneration_timer_;
+
 	fcppt::signal::scoped_connection const max_health_change_;
 };
 

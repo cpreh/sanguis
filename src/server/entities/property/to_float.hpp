@@ -17,10 +17,10 @@ template<
 >
 Float
 to_float(
-	value const &value_
+	value const &_value
 )
 {
-	return static_cast<Float>(value_);
+	return static_cast<Float>(_value);
 	/*
 	return boost::rational_cast<
 		Float

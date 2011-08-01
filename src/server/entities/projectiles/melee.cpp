@@ -4,17 +4,19 @@
 #include "../../damage/meta.hpp"
 #include "../../damage/normal.hpp"
 #include "../../damage/full.hpp"
-#include "../../../time_from_second.hpp"
+#include "../../../duration_second.hpp"
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::projectiles::melee::melee(
+	sanguis::diff_clock const &_diff_clock,
 	team::type const _team,
 	damage::unit const _damage
 )
 :
 	projectile(
+		_diff_clock,
 		projectile_type::melee,
 		_team,
 		entities::movement_speed(
@@ -25,7 +27,7 @@ sanguis::server::entities::projectiles::melee::melee(
 			1
 		),
 		projectiles::life_time(
-			sanguis::time_from_second(
+			sanguis::duration_second(
 				1.f
 			)
 		), // short lifetime

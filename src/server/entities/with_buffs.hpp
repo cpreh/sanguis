@@ -6,7 +6,6 @@
 #include "../buffs/list.hpp"
 #include "../buffs/buff.hpp" // for buffs::list
 #include "../buffs/unique_ptr.hpp"
-#include "../../time_delta_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
 
@@ -40,9 +39,7 @@ protected:
 	~with_buffs();
 
 	void
-	on_update(
-		sanguis::time_delta const &
-	);
+	on_update();
 private:
 	buffs::list buffs_;
 

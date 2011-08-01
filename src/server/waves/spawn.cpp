@@ -16,6 +16,7 @@
 
 void
 sanguis::server::waves::spawn(
+	sanguis::diff_clock const &_diff_clock,
 	environment::object &_env,
 	environment::load_context &_load_context,
 	enemy_type::type const _etype,
@@ -78,6 +79,7 @@ sanguis::server::waves::spawn(
 
 	_env.insert(
 		entities::enemies::create(
+			_diff_clock,
 			_etype,
 			_load_context,
 			_spawn

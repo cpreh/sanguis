@@ -6,7 +6,8 @@
 #include "rotation_speed.hpp"
 #include "../center.hpp"
 #include "../speed.hpp"
-#include "../../../time_delta_fwd.hpp"
+#include "../../../diff_clock_fwd.hpp"
+#include "../../../diff_timer.hpp"
 #include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -26,6 +27,7 @@ class base
 	);
 protected:
 	base(
+		sanguis::diff_clock const &,
 		draw2d::center const &,
 		draw2d::speed const &,
 		particle::depth,
@@ -62,7 +64,6 @@ public:
 
 	virtual bool
 	update(
-		sanguis::time_delta const &,
 		draw2d::center const &,
 		particle::rotation,
 		particle::depth
@@ -92,6 +93,8 @@ private:
 	particle::rotation rot_;
 
 	particle::rotation_speed rot_speed_;
+
+	sanguis::diff_timer diff_timer_;
 };
 
 }

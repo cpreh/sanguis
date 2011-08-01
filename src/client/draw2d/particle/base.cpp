@@ -1,10 +1,12 @@
 #include "base.hpp"
-#include "../../../time_unit.hpp"
-#include "../../../time_to_second.hpp"
+#include "../funit.hpp"
+#include <sge/timer/elapsed_fractional_and_reset.hpp>
+#include <fcppt/chrono/seconds.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 
 sanguis::client::draw2d::particle::base::base(
+	sanguis::diff_clock const &_diff_clock,
 	draw2d::center const &_center,
 	draw2d::speed const &_speed,
 	particle::depth const _depth,
@@ -16,7 +18,15 @@ sanguis::client::draw2d::particle::base::base(
 	speed_(_speed),
 	depth_(_depth),
 	rot_(_rot),
-	rot_speed_(_rot_speed)
+	rot_speed_(_rot_speed),
+	diff_timer_(
+		sanguis::diff_timer::parameters(
+			_diff_clock,
+			fcppt::chrono::seconds(
+				1
+			)
+		)
+	)
 {
 }
 
@@ -26,15 +36,16 @@ sanguis::client::draw2d::particle::base::~base()
 
 bool
 sanguis::client::draw2d::particle::base::update(
-	sanguis::time_delta const &_delta,
 	draw2d::center const &,
 	particle::rotation,
 	particle::depth
 )
 {
-	sanguis::time_unit const time_unit(
-		sanguis::time_to_second(
-			_delta
+	draw2d::funit const diff(
+		sge::timer::elapsed_fractional_and_reset<
+			draw2d::funit
+		>(
+			diff_timer_
 		)
 	);
 
@@ -44,7 +55,7 @@ sanguis::client::draw2d::particle::base::update(
 			+
 			this->speed().get()
 			*
-			time_unit
+			diff
 		)
 	);
 
@@ -54,7 +65,7 @@ sanguis::client::draw2d::particle::base::update(
 			+
 			this->rot_speed().get()
 			*
-			time_unit
+			diff
 		)
 	);
 

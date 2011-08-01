@@ -9,8 +9,6 @@
 #include "../entities/with_weapon.hpp"
 #include "../collision/distance.hpp"
 #include "../../exception.hpp"
-#include "../../time_to_second.hpp"
-#include <sge/time/second_f.hpp>
 #include <fcppt/chrono/duration_arithmetic.hpp>
 #include <fcppt/chrono/duration_comparison.hpp>
 #include <fcppt/math/sphere/basic_impl.hpp>
@@ -35,7 +33,6 @@ sanguis::server::weapons::weapon::type() const
 
 void
 sanguis::server::weapons::weapon::update(
-	sanguis::time_delta const &_time,
 	entities::with_weapon &_owner
 )
 {
@@ -46,7 +43,6 @@ sanguis::server::weapons::weapon::update(
 
 	this->process_event(
 		events::poll(
-			_time,
 			_owner
 		)
 	);
@@ -116,7 +112,7 @@ sanguis::server::weapons::weapon::in_range(
 
 void
 sanguis::server::weapons::weapon::attack_speed(
-	space_unit const _ias
+	sanguis::time_unit const _ias
 )
 {
 	ias_ = _ias;
@@ -124,7 +120,7 @@ sanguis::server::weapons::weapon::attack_speed(
 
 void
 sanguis::server::weapons::weapon::reload_speed(
-	space_unit const _irs
+	sanguis::time_unit const _irs
 )
 {
 	irs_ = _irs;
@@ -136,6 +132,7 @@ sanguis::server::weapons::weapon::~weapon()
 }
 
 sanguis::server::weapons::weapon::weapon(
+	sanguis::diff_clock const &_diff_clock,
 	weapon_type::type const _type,
 	weapons::range const _range,
 	weapons::magazine_size const _magazine_size,
@@ -145,45 +142,26 @@ sanguis::server::weapons::weapon::weapon(
 	weapons::reload_time const _reload_time
 )
 :
+	diff_clock_(_diff_clock),
 	type_(_type),
 	range_(_range),
 	magazine_used_(0),
 	magazine_count_(_magazine_count.get()),
 	magazine_size_(_magazine_size),
 	cast_point_(
-		sge::time::second_f(
-			sanguis::time_to_second(
-				_cast_point.get()
-			)
-		)
+		_cast_point
 	),
 	backswing_time_(
-		sge::time::second_f(
-			sanguis::time_to_second(
-				_base_cooldown.get() - _cast_point.get()
-			)
-		)
+		_base_cooldown.get() - _cast_point.get()
 	),
 	reload_time_(
-		sge::time::second_f(
-			sanguis::time_to_second(
-				_reload_time.get()
-			)
-		)
+		_reload_time.get()
 	),
 	ias_(
-		static_cast<
-			space_unit
-		>(
-			0
-		)
+		0.f
 	),
 	irs_(
-		static_cast<
-			space_unit
-		>(
-			0
-		)
+		0.f
 	)
 {
 	if(
@@ -206,22 +184,16 @@ sanguis::server::weapons::weapon::weapon(
 	this->initiate();
 }
 
-sanguis::server::space_unit
-sanguis::server::weapons::weapon::ias() const
-{
-	return ias_;
-}
-
-sanguis::server::space_unit
-sanguis::server::weapons::weapon::irs() const
-{
-	return irs_;
-}
-
 bool
 sanguis::server::weapons::weapon::usable() const
 {
 	return magazine_count_ > 0;
+}
+
+sanguis::diff_clock const &
+sanguis::server::weapons::weapon::diff_clock() const
+{
+	return diff_clock_;
 }
 
 void
@@ -256,22 +228,31 @@ sanguis::server::weapons::weapon::magazine_exhausted()
 		--magazine_count_;
 }
 
-sge::time::duration const
+sanguis::server::weapons::cast_point const
 sanguis::server::weapons::weapon::cast_point() const
 {
-	return cast_point_;
+	return
+		weapons::cast_point(
+			cast_point_.get() * ias_
+		);
 }
 
-sge::time::duration const
+sanguis::server::weapons::backswing_time const
 sanguis::server::weapons::weapon::backswing_time() const
 {
-	return backswing_time_;
+	return
+		weapons::backswing_time(
+			backswing_time_.get() * ias_
+		);
 }
 
-sge::time::duration const
+sanguis::server::weapons::reload_time const
 sanguis::server::weapons::weapon::reload_time() const
 {
-	return reload_time_;
+	return
+		weapons::reload_time(
+			reload_time_.get() * irs_
+		);
 }
 
 void

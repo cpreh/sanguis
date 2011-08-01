@@ -5,6 +5,7 @@
 #include "../with_health.hpp"
 #include "../../damage/unit.hpp"
 #include "../../team.hpp"
+#include "../../../diff_clock_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -25,6 +26,7 @@ class melee
 	);
 public:
 	melee(
+		sanguis::diff_clock const &,
 		team::type team,
 		damage::unit
 	);

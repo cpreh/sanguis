@@ -4,7 +4,6 @@
 #include "context_base.hpp"
 #include "model/context.hpp"
 #include "resource/context.hpp"
-#include "../time_delta_fwd.hpp"
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/renderer/dim2.hpp>
 #include <sge/image2d/multi_loader_fwd.hpp>
@@ -40,11 +39,6 @@ public:
 
 	model::context const &
 	models() const;
-
-	void
-	update(
-		sanguis::time_delta const &
-	) const;
 private:
 	// context_base overrides
 	sge::renderer::dim2 const

@@ -4,6 +4,7 @@
 #include "../environment/object_fwd.hpp"
 #include "../environment/load_context_fwd.hpp"
 #include "../entities/auto_weak_link.hpp"
+#include "../../diff_clock_fwd.hpp"
 #include "../../enemy_type.hpp"
 
 namespace sanguis
@@ -15,6 +16,7 @@ namespace waves
 
 void
 spawn(
+	sanguis::diff_clock const &,
 	environment::object &,
 	environment::load_context &,
 	enemy_type::type,

@@ -5,7 +5,7 @@
 #include "../environment/object_fwd.hpp"
 #include "../environment/load_context_fwd.hpp"
 #include "../console_fwd.hpp"
-#include "../../time_delta_fwd.hpp"
+#include "../../diff_clock_fwd.hpp"
 #include <sge/console/arg_list.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -24,7 +24,8 @@ class generator
 		generator
 	);
 public:
-	explicit generator(
+	generator(
+		sanguis::diff_clock const &,
 		server::console &
 	);
 
@@ -32,7 +33,6 @@ public:
 
 	void
 	process(
-		sanguis::time_delta const &,
 		environment::object &,
 		environment::load_context &
 	);
@@ -44,6 +44,8 @@ private:
 
 	void
 	spawn_all();
+
+	sanguis::diff_clock const &diff_clock_;
 
 	server::console &console_;
 

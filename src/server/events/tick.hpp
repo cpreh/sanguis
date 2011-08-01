@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_EVENTS_TICK_HPP_INCLUDED
 
 #include "tick_fwd.hpp"
-#include "../../time_delta.hpp"
+#include "../../duration.hpp"
 #include <fcppt/nonassignable.hpp>
 #include <boost/statechart/event.hpp>
 
@@ -24,13 +24,13 @@ class tick
 	);
 public:
 	explicit tick(
-		sanguis::time_delta const &
+		sanguis::duration const &
 	);
 
-	sanguis::time_delta const &
+	sanguis::duration const &
 	delta() const;
 private:
-	sanguis::time_delta const delta_;
+	sanguis::duration const delta_;
 };
 
 }

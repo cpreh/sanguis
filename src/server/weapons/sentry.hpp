@@ -7,6 +7,7 @@
 #include "cast_point.hpp"
 #include "reload_time.hpp"
 #include "create_function.hpp"
+#include "../../diff_clock_fwd.hpp"
 #include <fcppt/function/object.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -25,7 +26,8 @@ class sentry
 		sentry
 	);
 public:
-	explicit sentry(
+	sentry(
+		sanguis::diff_clock const &,
 		weapon_type::type,
 		weapons::base_cooldown,
 		weapons::cast_point,

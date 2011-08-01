@@ -62,33 +62,6 @@ sanguis::load::resource::textures::load(
 		);
 }
 
-void
-sanguis::load::resource::textures::cleanup(
-	sanguis::time_delta const &_delta
-) const
-{
-	for(
-		unnamed_texture_map::iterator it(
-			unnamed_textures_.begin()
-		), next(it); 
-		it != unnamed_textures_.end(); 
-		it = next) 
-	{ 
-		++next; 
-
-		it->second->tick(
-			_delta
-		);
-
-		if(
-			it->second->decayed()
-		)
-			unnamed_textures_.erase(
-				it
-			);
-	}
-}
-
 sanguis::load::resource::textures::textures(
 	sge::renderer::device &_renderer,
 	sge::image2d::multi_loader &_image_loader

@@ -2,6 +2,8 @@
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/find_member.hpp>
 #include <sge/parse/json/object.hpp>
+#include <fcppt/chrono/duration_cast.hpp>
+#include <fcppt/chrono/milliseconds.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 
@@ -23,7 +25,14 @@ sanguis::load::model::load_delay(
 		ret
 		?
 			optional_delay(
-				*ret
+				fcppt::chrono::duration_cast<
+					sanguis::duration
+				>(
+					// FIXME: we shouldn't tell multiple times that these are milliseconds!
+					fcppt::chrono::milliseconds(
+						*ret
+					)
+				)
 			)
 		:
 			optional_delay();

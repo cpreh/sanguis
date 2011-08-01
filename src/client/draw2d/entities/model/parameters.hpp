@@ -5,6 +5,7 @@
 #include "../../sprite/normal/system.hpp"
 #include "../../sprite/colored/system.hpp"
 #include "../../../../load/model/collection_fwd.hpp"
+#include "../../../../diff_clock_fwd.hpp"
 #include <fcppt/nonassignable.hpp>
 
 namespace sanguis
@@ -24,11 +25,15 @@ class parameters
 		parameters
 	);
 public:
-	explicit parameters(
+	parameters(
+		sanguis::diff_clock const &,
 		sprite::colored::system &,
 		sprite::normal::system &,
 		load::model::collection const &
 	);
+
+	sanguis::diff_clock const &
+	diff_clock() const;
 
 	sprite::colored::system &
 	colored_system() const;
@@ -39,6 +44,8 @@ public:
 	load::model::collection const &
 	collection() const;
 private:
+	sanguis::diff_clock const &diff_clock_;
+
 	sprite::colored::system &colored_system_;
 
 	sprite::normal::system &normal_system_;

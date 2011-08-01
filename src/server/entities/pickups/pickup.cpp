@@ -5,9 +5,9 @@
 #include "../../../load/pickup_name.hpp"
 #include "../../../messages/add_pickup.hpp"
 #include "../../../messages/create.hpp"
+#include <fcppt/chrono/seconds.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
-#include <sge/time/second.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
@@ -24,6 +24,7 @@ sanguis::server::entities::pickups::pickup::~pickup()
 }
 
 sanguis::server::entities::pickups::pickup::pickup(
+	sanguis::diff_clock const &_diff_clock,
 	pickup_type::type const _ptype,
 	server::environment::load_context &_load_context,
 	team::type const _team,
@@ -47,13 +48,13 @@ sanguis::server::entities::pickups::pickup::pickup(
 	),
 	team_(_team),
 	ptype_(_ptype),
-	diff_clock_(),
 	life_timer_(
-		sge::time::second(
-			30
-		),
-		sge::time::activation_state::active,
-		diff_clock_.callback()
+		sanguis::diff_timer::parameters(
+			_diff_clock,
+			fcppt::chrono::seconds(
+				30
+			)
+		)
 	)
 {
 }
@@ -98,20 +99,12 @@ sanguis::server::entities::pickups::pickup::collision_with_body(
 	)
 		return;
 	
-	life_timer_.expire();
+	life_timer_.expired(
+		true
+	);
 
 	this->do_pickup(
 		_body
-	);
-}
-
-void
-sanguis::server::entities::pickups::pickup::on_update(
-	sanguis::time_delta const &_time
-)
-{
-	diff_clock_.update(
-		_time
 	);
 }
 

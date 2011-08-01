@@ -12,13 +12,16 @@
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 
 sanguis::server::pickup_spawner::pickup_spawner(
+	sanguis::diff_clock const &_diff_clock,
 	environment::object &_env
 )
 :
+	diff_clock_(_diff_clock),
 	env_(_env),
 	spawn_prob_(
 		fcppt::random::make_inclusive_range(
@@ -142,6 +145,9 @@ sanguis::server::pickup_spawner::spawn_health()
 			fcppt::make_unique_ptr<
 				entities::pickups::health
 			>(
+				fcppt::cref(
+					diff_clock_
+				),
 				fcppt::ref(
 					env_.load_context()
 				),
@@ -163,6 +169,9 @@ sanguis::server::pickup_spawner::spawn_monster()
 			fcppt::make_unique_ptr<
 				entities::pickups::monster
 			>(
+				fcppt::cref(
+					diff_clock_
+				),
 				fcppt::ref(
 					env_.load_context()
 				),
@@ -186,6 +195,9 @@ sanguis::server::pickup_spawner::spawn_weapon(
 			fcppt::make_unique_ptr<
 				entities::pickups::weapon
 			>(
+				fcppt::cref(
+					diff_clock_
+				),
 				fcppt::ref(
 					env_.load_context()
 				),

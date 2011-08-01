@@ -1,34 +1,28 @@
 #include "simple.hpp"
 #include "spawn.hpp"
-#include "../../time_to_second.hpp"
-#include <sge/time/second_f.hpp>
+#include <sge/timer/reset_when_expired.hpp>
 
 sanguis::server::waves::simple::simple(
-	sanguis::time_delta const &_delay,
-	sanguis::time_delta const &_spawn_interval,
+	sanguis::diff_clock const &_diff_clock,
+	waves::delay const &_delay,
+	waves::spawn_interval const &_spawn_interval,
 	unsigned const _waves,
 	unsigned const _spawns_per_wave,
 	enemy_type::type const _etype
 )
 :
-	diff_(),
+	diff_clock_(_diff_clock),
 	delay_timer_(
-		sge::time::second_f(
-			sanguis::time_to_second(
-				_delay
-			)
-		),
-		sge::time::activation_state::active,
-		diff_.callback()
+		sanguis::diff_timer::parameters(
+			_diff_clock,
+			_delay.get()
+		)
 	),
 	spawn_timer_(
-		sge::time::second_f(
-			sanguis::time_to_second(
-				_spawn_interval
-			)
-		),
-		sge::time::activation_state::active,
-		diff_.callback()
+		sanguis::diff_timer::parameters(
+			_diff_clock,
+			_spawn_interval.get()
+		)
 	),
 	waves_(_waves),
 	spawns_per_wave_(_spawns_per_wave),
@@ -43,22 +37,19 @@ sanguis::server::waves::simple::~simple()
 
 void
 sanguis::server::waves::simple::process(
-	sanguis::time_delta const &_diff,
 	environment::object &_env,
 	environment::load_context &_load_context
 )
 {
-	diff_.update(
-		_diff
-	);
-
 	if(
 		!delay_timer_.expired()
 	)
 		return;
 
 	if(
-		!spawn_timer_.update_b()
+		!sge::timer::reset_when_expired(
+			spawn_timer_
+		)
 	)
 		return;
 
@@ -75,6 +66,7 @@ sanguis::server::waves::simple::process(
 		++i
 	)
 		waves::spawn(
+			diff_clock_,
 			_env,
 			_load_context,
 			etype_

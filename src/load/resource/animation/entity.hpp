@@ -22,8 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define SANGUIS_LOAD_RESOURCE_ANIMATION_ENTITY_HPP_INCLUDED
 
 #include "entity_fwd.hpp"
-#include <sge/time/unit.hpp>
-#include <sge/time/duration.hpp>
+#include "../../../duration.hpp"
 #include <sge/texture/const_part_ptr.hpp>
 #include <sge/renderer/dim2.hpp>
 
@@ -40,11 +39,11 @@ class entity
 {
 public:
 	entity(
-		sge::time::duration const &delay,
+		sanguis::duration const &delay,
 		sge::texture::const_part_ptr
 	);
 
-	sge::time::unit
+	sanguis::duration const
 	delay() const;
 
 	sge::texture::const_part_ptr const
@@ -58,7 +57,7 @@ public:
 	sge::renderer::dim2 const
 	dim() const;
 private:
-	sge::time::unit delay_;
+	sanguis::duration delay_;
 
 	sge::texture::const_part_ptr tex_;
 };

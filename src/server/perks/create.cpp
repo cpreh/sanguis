@@ -7,11 +7,13 @@
 #include "irs.hpp"
 #include "regeneration.hpp"
 #include "../../exception.hpp"
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::server::perks::unique_ptr
 sanguis::server::perks::create(
+	sanguis::diff_clock const &_diff_clock,
 	perk_type::type const _type
 )
 {
@@ -24,7 +26,11 @@ sanguis::server::perks::create(
 			unique_ptr(
 				fcppt::make_unique_ptr<
 					choleric
-				>()
+				>(
+					fcppt::cref(
+						_diff_clock
+					)
+				)
 			);
 	case perk_type::health:
 		return

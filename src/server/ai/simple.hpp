@@ -6,9 +6,8 @@
 #include "../entities/auto_weak_link.hpp"
 #include "../entities/with_ai_fwd.hpp"
 #include "../entities/with_body_fwd.hpp"
-#include "../../diff_clock.hpp"
-#include "../../time_delta_fwd.hpp"
-#include <sge/time/timer.hpp>
+#include "../../diff_clock_fwd.hpp"
+#include "../../diff_timer.hpp"
 #include <fcppt/container/map_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -28,6 +27,7 @@ class simple
 	);
 public:
 	simple(
+		sanguis::diff_clock const &,
 		entities::with_ai &me,
 		entities::auto_weak_link owner
 	);
@@ -35,9 +35,7 @@ public:
 	~simple();
 private:
 	void
-	update(
-		sanguis::time_delta const &
-	);
+	update();
 
 	void
 	target_enters(
@@ -49,9 +47,7 @@ private:
 		entities::with_body &
 	);
 
-	diff_clock diff_clock_;
-
-	sge::time::timer pos_timer_;
+	sanguis::diff_timer pos_timer_;
 
 	entities::with_ai &me_;
 

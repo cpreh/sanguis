@@ -11,6 +11,7 @@
 #include "../../team.hpp"
 #include "../../../messages/auto_ptr.hpp"
 #include "../../../aoe_projectile_type.hpp"
+#include "../../../diff_clock_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -31,6 +32,7 @@ class aoe_projectile
 	);
 protected:
 	aoe_projectile(
+		sanguis::diff_clock const &,
 		aoe_projectile_type::type,
 		server::team::type,
 		entities::movement_speed,

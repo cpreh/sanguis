@@ -5,10 +5,12 @@
 #include "../entities/insert_parameters.hpp"
 #include "../entities/projectiles/simple_bullet.hpp"
 #include "../environment/object.hpp"
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 
 sanguis::server::weapons::pistol::pistol(
+	sanguis::diff_clock const &_diff_clock,
 	weapon_type::type const _type,
 	weapons::base_cooldown const _base_cooldown,
 	weapons::damage const _damage,
@@ -19,6 +21,7 @@ sanguis::server::weapons::pistol::pistol(
 )
 :
 	weapon(
+		_diff_clock,
 		_type,
 		_range,
 		_magazine_size,
@@ -47,6 +50,9 @@ sanguis::server::weapons::pistol::do_attack(
 			fcppt::make_unique_ptr<
 				entities::projectiles::simple_bullet
 			>(
+				fcppt::cref(
+					this->diff_clock()
+				),
 				fcppt::ref(
 					_attack.environment().load_context()
 				),

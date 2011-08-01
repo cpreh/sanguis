@@ -11,7 +11,7 @@
 #include "../sprite/center.hpp"
 #include "../aoe.hpp"
 #include "../../../load/model/collection_fwd.hpp"
-#include "../../../time_delta_fwd.hpp"
+#include "../../../diff_clock_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -32,6 +32,7 @@ class explosion
 	);
 public:
 	explosion(
+		sanguis::diff_clock const &,
 		sprite::particle::system &,
 		load::model::collection const &,
 		sprite::center const &,
@@ -43,9 +44,7 @@ private:
 	// base overrides
 	
 	void
-	update(
-		sanguis::time_delta const &
-	);
+	update();
 
 	bool
 	may_be_removed() const;
@@ -62,6 +61,8 @@ private:
 	properties(
 		particle::particle_type::type const t
 	) const;
+
+	sanguis::diff_clock const &diff_clock_;
 	
 	sprite::particle::system &particle_system_;
 

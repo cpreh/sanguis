@@ -3,7 +3,6 @@
 
 #include "poll_fwd.hpp"
 #include "../../entities/with_weapon_fwd.hpp"
-#include "../../../time_delta.hpp"
 #include <fcppt/nonassignable.hpp>
 #include <boost/statechart/event.hpp>
 
@@ -26,19 +25,13 @@ class poll
 		poll
 	);
 public:
-	poll(
-		sanguis::time_delta const &,
+	explicit poll(
 		entities::with_weapon &owner
 	);
 	
-	sanguis::time_delta const &
-	time() const;
-
 	entities::with_weapon &
 	owner() const;
 private:
-	sanguis::time_delta const time_;
-
 	entities::with_weapon &owner_;
 };
 

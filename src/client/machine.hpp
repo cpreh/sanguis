@@ -13,7 +13,7 @@
 #include "../net/hostname.hpp"
 #include "../net/port.hpp"
 #include "../net/receive_buffer_fwd.hpp"
-#include "../time_delta_fwd.hpp"
+#include "../duration_fwd.hpp"
 
 #include <sge/audio/player_fwd.hpp>
 #include <sge/console/gfx_fwd.hpp>
@@ -89,7 +89,7 @@ public:
 	
 	bool
 	process(
-		sanguis::time_delta const &
+		sanguis::duration const &
 	);
 
 	void

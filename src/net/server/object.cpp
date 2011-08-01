@@ -1,13 +1,13 @@
 #include "object.hpp"
 #include "object_impl.hpp"
+#include "../duration.hpp"
 #include <awl/mainloop/asio/io_service.hpp>
-#include <fcppt/chrono/duration_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 
 sanguis::net::server::object::object(
 	awl::mainloop::io_service &_io_service,
-	sge::time::duration const &_duration
+	net::duration const &_duration
 )
 :	
 	impl_(

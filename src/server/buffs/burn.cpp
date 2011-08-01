@@ -1,27 +1,25 @@
 #include "burn.hpp"
 #include "../entities/with_health.hpp"
-#include "../../time_to_second.hpp"
-#include <sge/time/second_f.hpp>
+#include <sge/timer/reset_when_expired.hpp>
 
 sanguis::server::buffs::burn::burn(
+	sanguis::diff_clock const &_diff_clock,
 	damage::unit const _damage,
-	sanguis::time_delta const &_pulse_time,
+	sanguis::duration const &_pulse_time,
 	unsigned const _max_pulses,
 	damage::array const &_damage_values
 )
 :
 	buff(),
 	damage_(_damage),
-	clock_(),
 	pulse_timer_(
-		sge::time::second_f(
-			sanguis::time_to_second(
-				_pulse_time
-			)
-		),
-		sge::time::activation_state::active,
-		clock_.callback(),
-		sge::time::expiration_state::expired
+		sanguis::diff_timer::parameters(
+			_diff_clock,
+			_pulse_time
+		)
+		.expired(
+			true
+		)
 	),
 	pulses_(0),
 	max_pulses_(_max_pulses),
@@ -35,16 +33,13 @@ sanguis::server::buffs::burn::~burn()
 
 void
 sanguis::server::buffs::burn::update(
-	entities::base &_ref,
-	sanguis::time_delta const &_diff
+	entities::base &_ref
 )
 {
-	clock_.update(
-		_diff
-	);
-
 	if(
-		!pulse_timer_.update_b()
+		!sge::timer::reset_when_expired(
+			pulse_timer_
+		)
 	)
 		return;
 	
@@ -52,7 +47,8 @@ sanguis::server::buffs::burn::update(
 		pulses_++ == max_pulses_
 	)
 	{
-		expire();
+		this->expire();
+
 		return;
 	}
 

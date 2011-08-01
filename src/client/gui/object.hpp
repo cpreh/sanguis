@@ -3,7 +3,7 @@
 
 #include "object_fwd.hpp"
 #include "../cursor/object_fwd.hpp"
-#include "../../time_delta_fwd.hpp"
+#include "../../duration_fwd.hpp"
 #include <sge/cegui/default_cursor.hpp>
 #include <sge/cegui/default_keyboard.hpp>
 #include <sge/cegui/syringe.hpp>
@@ -50,7 +50,7 @@ public:
 
 	void
 	update(
-		sanguis::time_delta const &
+		sanguis::duration const &
 	);
 private:
 	sge::charconv::system &charconv_system_;

@@ -11,6 +11,7 @@
 #include <boost/assign/list_of.hpp>
 
 sanguis::server::weapons::sentry::sentry(
+	sanguis::diff_clock const &_diff_clock,
 	weapon_type::type const _type,
 	weapons::base_cooldown const _base_cooldown,
 	weapons::cast_point const _cast_point,
@@ -19,6 +20,7 @@ sanguis::server::weapons::sentry::sentry(
 )
 :
 	weapon(
+		_diff_clock,
 		_type,
 		weapons::range(
 			20
@@ -54,12 +56,15 @@ sanguis::server::weapons::sentry::do_attack(
 //			fcppt::make_unique_ptr<
 //				entities::friend_
 //			>(
+				this->diff_clock(),
 				friend_type::sentry,
 				_attack.environment().load_context(),
 				damage::no_armor(),
 				server::health(100),
 				entities::movement_speed(0),
-				ai::create_simple_without_owner(),
+				ai::create_simple_without_owner(
+					this->diff_clock()
+				),
 				weapons::unique_ptr(
 					sentry_weapon_()
 				)

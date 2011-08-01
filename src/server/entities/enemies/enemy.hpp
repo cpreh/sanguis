@@ -15,8 +15,8 @@
 #include "../../probability.hpp"
 #include "../../exp.hpp"
 #include "../../health.hpp"
+#include "../../../diff_clock_fwd.hpp"
 #include "../../../enemy_type.hpp"
-#include "../../../time_delta_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -42,6 +42,7 @@ class enemy
 	);
 public:	
 	enemy(
+		sanguis::diff_clock const &,
 		enemy_type::type,
 		server::environment::load_context &,
 		damage::armor const &,
@@ -60,9 +61,7 @@ public:
 	etype() const;
 private:
 	void
-	on_update(
-		sanguis::time_delta const &
-	);
+	on_update();
 
 	messages::auto_ptr
 	add_message(

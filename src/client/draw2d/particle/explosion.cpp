@@ -5,11 +5,13 @@
 #include <fcppt/function/object.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/cref.hpp>
 #include <fcppt/foreach_enumerator.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/minmax_pair_impl.hpp>
 
 sanguis::client::draw2d::particle::explosion::explosion(
+	sanguis::diff_clock const &_diff_clock,
 	particle::property_map const &_properties,
 	particle::explosion_callback const &_callback,
 	draw2d::center const &_center,
@@ -20,6 +22,7 @@ sanguis::client::draw2d::particle::explosion::explosion(
 )
 :
 	particle::container(
+		_diff_clock,
 		_center,
 		_speed,
 		_depth,
@@ -43,6 +46,9 @@ sanguis::client::draw2d::particle::explosion::explosion(
 				fcppt::make_unique_ptr<
 					particle::generator
 				>(
+					fcppt::cref(
+						_diff_clock
+					),
 					std::tr1::bind(
 						_callback,
 						current_type

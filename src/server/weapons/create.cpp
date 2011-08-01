@@ -7,12 +7,14 @@
 #include "sentry.hpp"
 #include "unlimited_magazine_size.hpp"
 #include "../../exception.hpp"
-#include <fcppt/text.hpp>
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/text.hpp>
 #include <boost/spirit/home/phoenix/object/new.hpp>
 
 sanguis::server::weapons::unique_ptr
 sanguis::server::weapons::create(
+	sanguis::diff_clock const  &_diff_clock,
 	weapon_type::type const _type
 )
 {
@@ -30,6 +32,9 @@ sanguis::server::weapons::create(
 				fcppt::make_unique_ptr<
 					pistol
 				>(
+					fcppt::cref(
+						_diff_clock
+					),
 					_type,
 					base_cooldown(0.5f),
 					damage(5),
@@ -45,6 +50,9 @@ sanguis::server::weapons::create(
 				fcppt::make_unique_ptr<
 					pistol
 				>(
+					fcppt::cref(
+						_diff_clock
+					),
 					_type,
 					base_cooldown(0.33f),
 					damage(5),
@@ -60,6 +68,9 @@ sanguis::server::weapons::create(
 				fcppt::make_unique_ptr<
 					shotgun
 				>(
+					fcppt::cref(
+						_diff_clock
+					),
 					_type,
 					base_cooldown(1.f),
 					static_cast<space_unit>(0.2), // spread radius
@@ -75,6 +86,9 @@ sanguis::server::weapons::create(
 				fcppt::make_unique_ptr<
 					rocket_launcher
 				>(
+					fcppt::cref(
+						_diff_clock
+					),
 					_type,
 					base_cooldown(0.8f),
 					damage(9),
@@ -89,6 +103,9 @@ sanguis::server::weapons::create(
 				fcppt::make_unique_ptr<
 					grenade
 				>(
+					fcppt::cref(
+						_diff_clock
+					),
 					_type,
 					base_cooldown(0.7f),
 					damage(20),
@@ -103,6 +120,9 @@ sanguis::server::weapons::create(
 				fcppt::make_unique_ptr<
 					sentry
 				>(
+					fcppt::cref(
+						_diff_clock
+					),
 					_type,
 					base_cooldown(5.f),
 					cast_point(2.f),
@@ -110,6 +130,9 @@ sanguis::server::weapons::create(
 					boost::phoenix::new_<
 						weapons::pistol
 					>(
+						fcppt::cref(
+							_diff_clock
+						),
 						weapon_type::pistol,
 						base_cooldown(0.3f),
 						damage(2),

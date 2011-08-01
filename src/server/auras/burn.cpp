@@ -3,13 +3,15 @@
 #include "../buffs/unique_ptr.hpp"
 #include "../entities/with_buffs.hpp"
 #include "../entities/with_body.hpp"
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 sanguis::server::auras::burn::burn(
+	sanguis::diff_clock const &_diff_clock,
 	server::radius const _radius,
 	server::team::type const _team,
 	damage::unit const _damage_per_pulse,
-	sanguis::time_delta const &_pulse_diff,
+	sanguis::duration const &_pulse_diff,
 	damage::array const &_damage_values
 )
 :
@@ -18,6 +20,7 @@ sanguis::server::auras::burn::burn(
 		_team,
 		influence::debuff
 	),
+	diff_clock_(_diff_clock),
 	pulse_diff_(_pulse_diff),
 	damage_per_pulse_(_damage_per_pulse),
 	damage_values_(_damage_values),
@@ -44,6 +47,9 @@ sanguis::server::auras::burn::enter(
 			fcppt::make_unique_ptr<
 				buffs::burn
 			>(
+				fcppt::cref(
+					diff_clock_
+				),
 				damage_per_pulse_,
 				pulse_diff_,
 				1u,

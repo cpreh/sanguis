@@ -24,8 +24,9 @@
 #include "../../../load/context_fwd.hpp"
 #include "../../../load/model/collection_fwd.hpp"
 #include "../../../messages/base.hpp"
+#include "../../../diff_clock.hpp"
+#include "../../../duration_fwd.hpp"
 #include "../../../entity_id.hpp"
-#include "../../../time_delta_fwd.hpp"
 #include <sge/audio/listener_fwd.hpp>
 #include <sge/font/metrics_fwd.hpp>
 #include <sge/font/text/drawer_fwd.hpp>
@@ -77,7 +78,7 @@ public:
 
 	void
 	update(
-		sanguis::time_delta const &
+		sanguis::duration const &
 	);
 
 	void
@@ -135,6 +136,9 @@ private:
 		sprite::center const &
 	);
 
+	sanguis::diff_clock const &
+	diff_clock() const;
+
 	draw2d::transform_callback const &
 	transform_callback() const;
 
@@ -161,6 +165,8 @@ private:
 
 	sge::renderer::viewport const
 	viewport() const;
+
+	sanguis::diff_clock diff_clock_;
 
 	load::context const &resources_;
 

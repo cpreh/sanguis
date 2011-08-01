@@ -5,6 +5,7 @@
 #include "context_fwd.hpp"
 #include "../environment/load_context_fwd.hpp"
 #include "../console_fwd.hpp"
+#include "../../diff_clock_fwd.hpp"
 
 namespace sanguis
 {
@@ -15,6 +16,7 @@ namespace world
 
 object_unique_ptr
 random(
+	sanguis::diff_clock const &,
 	world::context &,
 	server::environment::load_context &,
 	server::console &

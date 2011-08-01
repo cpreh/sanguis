@@ -8,6 +8,7 @@
 
 void
 sanguis::server::cheat(
+	sanguis::diff_clock const &_diff_clock,
 	entities::player &_player,
 	cheat_type::type const _type
 )
@@ -36,6 +37,7 @@ sanguis::server::cheat(
 			)
 				_player.add_weapon(
 					weapons::create(
+						_diff_clock,
 						index
 					)
 				);

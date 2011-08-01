@@ -7,13 +7,15 @@
 #include "../../weapons/unique_ptr.hpp"
 #include "../../ai/create_simple_without_owner.hpp"
 #include "../../../exception.hpp"
-#include "../../../time_from_second.hpp"
+#include "../../../duration_second.hpp"
 #include <fcppt/container/map_impl.hpp>
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::server::entities::unique_ptr
 sanguis::server::entities::enemies::create(
+	sanguis::diff_clock const &_diff_clock,
 	enemy_type::type const _etype,
 	environment::load_context &_load_context,
 	entities::auto_weak_link const _spawn
@@ -29,31 +31,37 @@ sanguis::server::entities::enemies::create(
 //			fcppt::make_unique_ptr<
 //				enemy
 //			>(
+				_diff_clock,
 				_etype,
 				_load_context,
 				damage::no_armor(),
 				server::health(9),
 				movement_speed(0.5f),
-				ai::create_simple_without_owner(),
+				ai::create_simple_without_owner(
+					_diff_clock
+				),
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<
 						weapons::pistol
 					>(
+						fcppt::cref(
+							_diff_clock
+						),
 						weapon_type::pistol,
 						weapons::base_cooldown(
-							sanguis::time_from_second(
+							sanguis::duration_second(
 								1.f
 							)
 						),
 						weapons::damage(1),
 						weapons::cast_point(
-							sanguis::time_from_second(
+							sanguis::duration_second(
 								0
 							)
 						),
 						weapons::magazine_size(3),
 						weapons::reload_time(
-							sanguis::time_from_second(
+							sanguis::duration_second(
 								15.f
 							)
 						),
@@ -71,19 +79,25 @@ sanguis::server::entities::enemies::create(
 //			fcppt::make_unique_ptr<
 //				enemy
 //			>(
+				_diff_clock,
 				_etype,
 				_load_context,
 				damage::no_armor(),
 				server::health(3),
 				movement_speed(0.4f),
-				ai::create_simple_without_owner(),
+				ai::create_simple_without_owner(
+					_diff_clock
+				),
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<
 						weapons::melee
 					>(
+						fcppt::cref(
+							_diff_clock
+						),
 						weapons::range(1.5f),
 						weapons::base_cooldown(
-							sanguis::time_from_second(
+							sanguis::duration_second(
 								2.f
 							)
 						),
@@ -103,19 +117,25 @@ sanguis::server::entities::enemies::create(
 			//fcppt::make_unique_ptr<
 			//	enemy
 			//>(
+				_diff_clock,
 				_etype,
 				_load_context,
 				damage::no_armor(),
 				server::health(3),
 				movement_speed(1.7f),
-				ai::create_simple_without_owner(),
+				ai::create_simple_without_owner(
+					_diff_clock
+				),
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<
 						weapons::melee
 					>(
+						fcppt::cref(
+							_diff_clock
+						),
 						weapons::range(1.5f),
 						weapons::base_cooldown(
-							sanguis::time_from_second(
+							sanguis::duration_second(
 								1.f
 							)
 						),
@@ -133,19 +153,25 @@ sanguis::server::entities::enemies::create(
 			//fcppt::make_unique_ptr<
 			//	enemy
 			//>(
+				_diff_clock,
 				_etype,
 				_load_context,
 				damage::no_armor(),
 				server::health(500),
 				movement_speed(1.f),
-				ai::create_simple_without_owner(),
+				ai::create_simple_without_owner(
+					_diff_clock
+				),
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<
 						weapons::melee
 					>(
+						fcppt::cref(
+							_diff_clock
+						),
 						weapons::range(2.f),
 						weapons::base_cooldown(
-							sanguis::time_from_second(
+							sanguis::duration_second(
 								1.f
 							)
 						),
@@ -163,19 +189,25 @@ sanguis::server::entities::enemies::create(
 			//fcppt::make_unique_ptr<
 			//	enemy
 			//>(
+				_diff_clock,
 				_etype,
 				_load_context,
 				damage::no_armor(),
 				server::health(1),
 				movement_speed(0.8f),
-				ai::create_simple_without_owner(),
+				ai::create_simple_without_owner(
+					_diff_clock
+				),
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<
 						weapons::melee
 					>(
+						fcppt::cref(
+							_diff_clock
+						),
 						weapons::range(1.5f),
 						weapons::base_cooldown(
-							sanguis::time_from_second(
+							sanguis::duration_second(
 								1.f
 							)
 						),
@@ -193,19 +225,25 @@ sanguis::server::entities::enemies::create(
 			//fcppt::make_unique_ptr<
 			//	enemy
 			//>(
+				_diff_clock,
 				_etype,
 				_load_context,
 				damage::no_armor(),
 				server::health(12),
 				movement_speed(1.5f),
-				ai::create_simple_without_owner(),
+				ai::create_simple_without_owner(
+					_diff_clock
+				),
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<
 						weapons::melee
 					>(
+						fcppt::cref(
+							_diff_clock
+						),
 						weapons::range(1.5f),
 						weapons::base_cooldown(
-							sanguis::time_from_second(
+							sanguis::duration_second(
 								2.f
 							)
 						),

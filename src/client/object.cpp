@@ -11,7 +11,7 @@
 #include "../args/multi_sampling.hpp"
 #include "../args/sge_options.hpp"
 #include "../server/object.hpp"
-#include "../time_from_second.hpp"
+#include "../duration.hpp"
 
 #include <sge/config/media_path.hpp>
 #include <sge/font/size_type.hpp>
@@ -23,13 +23,13 @@
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/systems/instance.hpp>
-#include <sge/time/second.hpp>
-#include <sge/time/timer.hpp>
+#include <sge/timer/elapsed_and_reset.hpp>
 #include <sge/window/instance.hpp>
 
 #include <awl/mainloop/io_service.hpp>
 #include <awl/mainloop/dispatcher.hpp>
 
+#include <fcppt/chrono/seconds.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/fatal.hpp>
@@ -128,7 +128,11 @@ sanguis::client::object::object(
 		sys_.viewport_manager()
 	),
 	frame_timer_(
-		sge::time::second(1)
+		sanguis::timer::parameters(
+			fcppt::chrono::seconds(
+				1
+			)
+		)
 	),
 	server_(),
 	scoped_machine_(
@@ -197,8 +201,10 @@ sanguis::client::object::loop_handler()
 {
 	if(
 		!machine_.process(
-			sanguis::time_from_second(
-				frame_timer_.reset()
+			sge::timer::elapsed_and_reset<
+				sanguis::duration
+			>(
+				frame_timer_
 			)
 		)
 		||

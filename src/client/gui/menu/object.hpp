@@ -5,7 +5,7 @@
 #include "connection_box_fwd.hpp"
 #include "../object_fwd.hpp"
 #include "../../config/settings/object_fwd.hpp"
-#include "../../../time_delta_fwd.hpp"
+#include "../../../duration_fwd.hpp"
 #include <sge/cegui/toolbox/scoped_gui_sheet.hpp>
 #include <sge/cegui/toolbox/scoped_layout.hpp>
 #include <fcppt/scoped_ptr.hpp>
@@ -44,7 +44,7 @@ public:
 
 	void
 	process(
-		sanguis::time_delta const &
+		sanguis::duration const &
 	);
 
 	void

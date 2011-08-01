@@ -41,16 +41,6 @@ sanguis::load::context::models() const
 	return model_ctx_;
 }
 
-void
-sanguis::load::context::update(
-	sanguis::time_delta const &_delta
-) const
-{
-	resource_ctx_.update(
-		_delta
-	);
-}
-
 sge::renderer::dim2 const
 sanguis::load::context::model_dim(
 	fcppt::string const &_model_name

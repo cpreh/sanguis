@@ -7,10 +7,9 @@
 #include "../../dim.hpp"
 #include "../../team.hpp"
 #include "../../../messages/auto_ptr.hpp"
-#include "../../../diff_clock.hpp"
+#include "../../../diff_clock_fwd.hpp"
+#include "../../../diff_timer.hpp"
 #include "../../../pickup_type.hpp"
-#include "../../../time_delta_fwd.hpp"
-#include <sge/time/timer.hpp>
 #include <fcppt/optional_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <boost/logic/tribool_fwd.hpp>
@@ -42,6 +41,7 @@ protected:
 	> optional_dim;
 
 	pickup(
+		sanguis::diff_clock const &,
 		pickup_type::type,
 		server::environment::load_context &,
 		team::type,
@@ -67,11 +67,6 @@ private:
 		entities::with_body &
 	);
 
-	void
-	on_update(
-		sanguis::time_delta const &
-	);
-	
 	virtual void
 	do_pickup(
 		entities::base &receiver
@@ -86,9 +81,7 @@ private:
 
 	pickup_type::type const ptype_;
 
-	diff_clock diff_clock_;
-
-	sge::time::timer life_timer_;
+	sanguis::diff_timer life_timer_;
 };
 
 }

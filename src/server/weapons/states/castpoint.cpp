@@ -6,7 +6,6 @@
 #include "../events/poll.hpp"
 #include "../events/stop.hpp"
 #include "../../entities/with_weapon.hpp"
-#include <fcppt/chrono/duration_arithmetic.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/optional_impl.hpp>
 
@@ -17,13 +16,15 @@ sanguis::server::weapons::states::castpoint::castpoint(
 	my_base(
 		_ctx
 	),
-	diff_clock_(),
 	attack_time_(
-		context<
-			weapon
-		>().cast_point(),
-		sge::time::activation_state::active,
-		diff_clock_.callback()
+		sanguis::diff_timer::parameters(
+			context<
+				weapon
+			>().diff_clock(),
+			context<
+				weapon
+			>().cast_point().get()
+		)
 	),
 	attack_dest_()
 {
@@ -49,10 +50,6 @@ sanguis::server::weapons::states::castpoint::react(
 	events::poll const &_event
 )
 {
-	diff_clock_.update(
-		_event.time() * context<weapon>().ias()
-	);
-
 	if(
 		!attack_time_.expired()
 	)

@@ -2,16 +2,19 @@
 #include "../sprite/normal/object.hpp"
 #include "../sprite/normal/parameters.hpp"
 #include "../sprite/index.hpp"
-#include "../../../time_to_second.hpp"
+#include "../funit.hpp"
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/sprite/intrusive/system_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/center.hpp>
+#include <sge/timer/elapsed_fractional_and_reset.hpp>
+#include <fcppt/chrono/seconds.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 
 sanguis::client::draw2d::entities::container::container(
+	sanguis::diff_clock const &_diff_clock,
 	sprite::normal::system &_normal_system,
 	size_type const _size,
 	sprite::order const _order,
@@ -26,6 +29,15 @@ sanguis::client::draw2d::entities::container::container(
 	),
 	center_(
 		draw2d::center::value_type::null()
+	),
+	sprites_(),
+	move_timer_(
+		sanguis::diff_timer::parameters(
+			_diff_clock,
+			fcppt::chrono::seconds(
+				1
+			)
+		)
 	)
 {
 	sprites_.reserve(
@@ -70,14 +82,14 @@ sanguis::client::draw2d::entities::container::center() const
 }
 
 void
-sanguis::client::draw2d::entities::container::update(
-	sanguis::time_delta const &_time
-)
+sanguis::client::draw2d::entities::container::update()
 {
 	center_ +=
 		draw2d::center(
-			sanguis::time_to_second(
-				_time
+			sge::timer::elapsed_fractional_and_reset<
+				draw2d::funit
+			>(
+				move_timer_
 			)
 			*
 			this->speed().get()

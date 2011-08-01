@@ -2,7 +2,7 @@
 #include "object.hpp"
 #include "rotation_from_alignment.hpp"
 #include "velocity_from_movement.hpp"
-#include "../../../time_to_second.hpp"
+#include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/random/make_inclusive_range.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -10,10 +10,10 @@
 #include <fcppt/math/vector/is_null.hpp>
 #include <fcppt/math/vector/unit_circle.hpp>
 #include <fcppt/minmax_pair_impl.hpp>
-#include <sge/time/second_f.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::client::draw2d::particle::generator::generator(
+	sanguis::diff_clock const &_diff_clock,
 	particle::generation_callback const _generate_object,
 	draw2d::center const &_center,
 	particle::gen_life_time const &_life_time,
@@ -28,6 +28,7 @@ sanguis::client::draw2d::particle::generator::generator(
 )
 :
 	particle::container(
+		_diff_clock,
 		_center,
 		draw2d::speed(
 			draw2d::speed::value_type::null()
@@ -40,22 +41,19 @@ sanguis::client::draw2d::particle::generator::generator(
 			0
 		)
 	),
-	clock_(),
 	generate_object_(
 		_generate_object
 	),
 	frequency_timer_(
-		sge::time::second_f(
-			sanguis::time_to_second(
-				_frequency.get()
-			)
+		sanguis::diff_timer::parameters(
+			_diff_clock,
+			_frequency.get()
 		)
 	),
 	life_timer_(
-		sge::time::second_f(
-			sanguis::time_to_second(
-				_life_time.get()
-			)
+		sanguis::diff_timer::parameters(
+			_diff_clock,
+			_life_time.get()
 		)
 	),
 	alignment_(
@@ -224,19 +222,13 @@ sanguis::client::draw2d::particle::generator::generate()
 
 bool
 sanguis::client::draw2d::particle::generator::update(
-	sanguis::time_delta const &_delta,
 	draw2d::center const &_pos,
 	particle::rotation const _rot,
 	particle::depth const _depth
 )
 {
-	clock_.update(
-		_delta
-	);
-
 	bool const delete_now(
 		container::update(
-			_delta,
 			_pos,
 			_rot,
 			_depth
@@ -248,7 +240,9 @@ sanguis::client::draw2d::particle::generator::update(
 	)
 	{
 		if(
-			frequency_timer_.update_b()
+			sge::timer::reset_when_expired(
+				frequency_timer_
+			)
 		)
 			this->generate();
 		

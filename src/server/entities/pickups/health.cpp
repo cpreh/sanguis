@@ -5,12 +5,14 @@
 #include <fcppt/optional_impl.hpp>
 
 sanguis::server::entities::pickups::health::health(
+	sanguis::diff_clock const &_diff_clock,
 	server::environment::load_context &_load_context,
 	team::type const _team,
 	server::health const _amount
 )
 :
 	pickup(
+		_diff_clock,
 		pickup_type::health,
 		_load_context,
 		_team,

@@ -11,7 +11,7 @@
 #include "../net/id.hpp"
 #include "../net/port.hpp"
 #include "../net/receive_buffer_fwd.hpp"
-#include <sge/time/timer.hpp>
+#include "../timer.hpp"
 #include <fcppt/container/raw_vector_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -95,7 +95,7 @@ private:
 
 	net::server::object net_;
 
-	sge::time::timer frame_timer_;
+	sanguis::timer frame_timer_;
 
 	net::data_buffer temp_buffer_;
 

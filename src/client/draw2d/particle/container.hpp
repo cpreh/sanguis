@@ -8,7 +8,7 @@
 #include "rotation_speed.hpp"
 #include "../center.hpp"
 #include "../speed.hpp"
-#include "../../../time_delta_fwd.hpp"
+#include "../../../diff_clock_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
 
@@ -34,6 +34,7 @@ public:
 	> children_container;
 
 	container(
+		sanguis::diff_clock const &,
 		draw2d::center const &,
 		draw2d::speed const &,
 		particle::depth,
@@ -56,7 +57,6 @@ public:
 
 	bool
 	update(
-		sanguis::time_delta const &,
 		draw2d::center const &,
 		particle::rotation,
 		particle::depth

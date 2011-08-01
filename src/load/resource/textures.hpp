@@ -1,7 +1,6 @@
 #ifndef SANGUIS_LOAD_RESOURCE_TEXTURES_HPP_INCLUDED
 #define SANGUIS_LOAD_RESOURCE_TEXTURES_HPP_INCLUDED
 
-#include "../../time_delta_fwd.hpp"
 #include "texture_identifier.hpp"
 #include "texture_context_fwd.hpp"
 #include "texture_context.hpp"
@@ -34,11 +33,6 @@ public:
 	texture_context const
 	load(
 		fcppt::filesystem::path const &
-	) const;
-	
-	void
-	cleanup(
-		sanguis::time_delta const &
 	) const;
 	
 	textures(

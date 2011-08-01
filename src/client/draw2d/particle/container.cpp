@@ -4,6 +4,7 @@
 #include <fcppt/math/compare.hpp>
 
 sanguis::client::draw2d::particle::container::container(
+	sanguis::diff_clock const &_diff_clock,
 	draw2d::center const &_center,
 	draw2d::speed const &_speed,
 	particle::depth const _depth,
@@ -12,6 +13,7 @@ sanguis::client::draw2d::particle::container::container(
 )
 :
 	particle::base(
+		_diff_clock,
 		_center,
 		_speed,
 		_depth,
@@ -52,14 +54,12 @@ sanguis::client::draw2d::particle::container::add(
 
 bool
 sanguis::client::draw2d::particle::container::update(
-	sanguis::time_delta const &_delta,
 	draw2d::center const &_center,
 	particle::rotation const _rot,
 	particle::depth const _depth
 )
 {
 	base::update(
-		_delta,
 		_center,
 		_rot,
 		_depth
@@ -82,7 +82,6 @@ sanguis::client::draw2d::particle::container::update(
 	{
 		if(
 			it->update(
-			    	_delta,
 				this_center,
 				_rot + base::rot(),
 				_depth + base::depth()

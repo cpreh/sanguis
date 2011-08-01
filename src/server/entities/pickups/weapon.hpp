@@ -5,8 +5,9 @@
 #include "../base_fwd.hpp"
 #include "../../environment/load_context_fwd.hpp"
 #include "../../team.hpp"
-#include "../../../weapon_type.hpp"
 #include "../../../messages/auto_ptr.hpp"
+#include "../../../diff_clock_fwd.hpp"
+#include "../../../weapon_type.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -27,6 +28,7 @@ class weapon
 	);
 public:
 	weapon(
+		sanguis::diff_clock const &,
 		server::environment::load_context &,
 		server::team::type team,
 		weapon_type::type
@@ -46,6 +48,8 @@ private:
 	do_pickup(
 		base &receiver
 	);
+
+	sanguis::diff_clock const &diff_clock_;
 
 	weapon_type::type const weapon_type_;
 };

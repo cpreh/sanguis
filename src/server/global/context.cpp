@@ -45,6 +45,7 @@ sanguis::server::global::context::context(
 	server::console &_console
 )
 :
+	diff_clock_(),
 	send_unicast_(_send_unicast),
 	world_context_(
 		fcppt::make_unique_ptr<
@@ -96,6 +97,7 @@ sanguis::server::global::context::insert_player(
 
 	entities::player_unique_ptr player(
 		server::create_player(
+			diff_clock_,
 			*load_context_,
 			_name,
 			send_unicast_,
@@ -144,6 +146,9 @@ sanguis::server::global::context::insert_player(
 			fcppt::make_unique_ptr<
 				entities::pickups::weapon
 			>(
+				fcppt::cref(
+					diff_clock_
+				),
 				fcppt::ref(
 					*load_context_
 				),
@@ -300,6 +305,7 @@ sanguis::server::global::context::player_cheat(
 )
 {
 	server::cheat(
+		diff_clock_,
 		*players_[
 			_player_id
 		],
@@ -339,6 +345,7 @@ sanguis::server::global::context::player_choose_perk(
 
 	player.add_perk(
 		perks::create(
+			diff_clock_,
 			_perk_type
 		)
 	);
@@ -351,9 +358,13 @@ sanguis::server::global::context::player_choose_perk(
 
 void
 sanguis::server::global::context::update(
-	sanguis::time_delta const &_delta
+	sanguis::duration const &_diff
 )
 {
+	diff_clock_.update(
+		_diff
+	);
+
 	for(
 		server::world::map::iterator world_it(
 			worlds_.begin()
@@ -361,9 +372,7 @@ sanguis::server::global::context::update(
 		world_it != worlds_.end();
 		++world_it
 	)
-		world_it->second->update(
-			_delta
-		);
+		world_it->second->update();
 }
 
 sanguis::server::entities::player_map::size_type
@@ -440,6 +449,7 @@ sanguis::server::global::context::world(
 			worlds_,
 			_world_id,
 			server::world::random(
+				diff_clock_,
 				*world_context_,
 				*load_context_,
 				console_

@@ -1,10 +1,7 @@
 #ifndef SANGUIS_LOAD_RESOURCE_TEXTURE_CONTEXT_IMPL_HPP_INCLUDED
 #define SANGUIS_LOAD_RESOURCE_TEXTURE_CONTEXT_IMPL_HPP_INCLUDED
 
-#include "../../diff_clock.hpp"
-#include "../../time_delta_fwd.hpp"
 #include "texture_context_fwd.hpp"
-#include <sge/time/timer.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image2d/multi_loader_fwd.hpp>
 #include <sge/image2d/file_ptr.hpp>
@@ -36,22 +33,8 @@ public:
 	bool
 	update();
 
-	void
-	tick(
-		sanguis::time_delta const &
-	);
-
 	sge::texture::part_ptr const
 	result();
-
-	void
-	kill();
-
-	void
-	revive();
-
-	bool
-	decayed() const;
 
 	~texture_context_impl();
 private:
@@ -66,10 +49,6 @@ private:
 	sge::texture::part_ptr texture_result_;
 
 	sge::renderer::device &rend_;
-
-	diff_clock clock_;
-
-	sge::time::timer decay_timer_;
 
 	future_value const task(
 		fcppt::filesystem::path const &,

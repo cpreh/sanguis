@@ -7,8 +7,7 @@
 #include "../events/shoot_fwd.hpp"
 #include "../events/stop_fwd.hpp"
 #include "../../vector.hpp"
-#include "../../../diff_clock.hpp"
-#include <sge/time/timer.hpp>
+#include "../../../diff_timer.hpp"
 #include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
@@ -70,9 +69,7 @@ public:
 		events::stop const &
 	);
 private:
-	diff_clock diff_clock_;
-
-	sge::time::timer attack_time_;
+	sanguis::diff_timer attack_time_;
 
 	fcppt::optional<
 		server::vector	

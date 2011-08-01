@@ -1,5 +1,6 @@
 #include "random.hpp"
 #include "object.hpp"
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 
@@ -24,6 +25,7 @@
 
 sanguis::server::world::object_unique_ptr
 sanguis::server::world::random(
+	sanguis::diff_clock const &_diff_clock,
 	world::context &_ctx,
 	server::environment::load_context &_load_context,
 	server::console &_console
@@ -102,6 +104,9 @@ sanguis::server::world::random(
 		fcppt::make_unique_ptr<
 			object
 		>(
+			fcppt::cref(
+				_diff_clock
+			),
 			sanguis::world_id(0), // FIXME!
 			fcppt::ref(
 				_ctx

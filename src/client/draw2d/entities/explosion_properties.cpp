@@ -11,7 +11,7 @@
 #include "../particle/rot_speed_range.hpp"
 #include "../particle/spawn_initial.hpp"
 #include "../particle/speed_range.hpp"
-#include "../../../time_from_second.hpp"
+#include "../../../duration_second.hpp"
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/minmax_pair_impl.hpp>
 #include <utility>
@@ -33,12 +33,12 @@ sanguis::client::draw2d::particle::property_container const prop_(
 					5
 				),
 				sanguis::client::draw2d::particle::gen_life_time(
-					sanguis::time_from_second(
+					sanguis::duration_second(
 						0
 					)
 				),
 				sanguis::client::draw2d::particle::gen_frequency(
-					sanguis::time_from_second(
+					sanguis::duration_second(
 						0
 					)
 				),
@@ -85,12 +85,12 @@ sanguis::client::draw2d::particle::property_container const prop_(
 					9
 				),
 				sanguis::client::draw2d::particle::gen_life_time(
-					sanguis::time_from_second(
+					sanguis::duration_second(
 						0
 					)
 				),
 				sanguis::client::draw2d::particle::gen_frequency(
-					sanguis::time_from_second(
+					sanguis::duration_second(
 						0
 					)
 				),
@@ -137,12 +137,12 @@ sanguis::client::draw2d::particle::property_container const prop_(
 					0
 				),
 				sanguis::client::draw2d::particle::gen_life_time(
-					sanguis::time_from_second(
+					sanguis::duration_second(
 						0
 					)
 				),
 				sanguis::client::draw2d::particle::gen_frequency(
-					sanguis::time_from_second(
+					sanguis::duration_second(
 						0
 					)
 				),

@@ -5,9 +5,9 @@
 #include "../base.hpp"
 #include "../../center.hpp"
 #include "../../team.hpp"
+#include "../../../diff_clock_fwd.hpp"
 #include "../../../enemy_type.hpp"
 #include "../../../entity_type.hpp"
-#include "../../../time_delta_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -34,7 +34,8 @@ public:
 
 	~spawn();
 protected:
-	explicit spawn(
+	spawn(
+		sanguis::diff_clock const &,
 		enemy_type::type
 	);
 private:
@@ -48,19 +49,17 @@ private:
 	center() const;
 
 	void
-	on_update(
-		sanguis::time_delta const &
-	);
+	on_update();
 
 	virtual size_type 
-	may_spawn(
-		sanguis::time_delta const &
-	) = 0;
+	may_spawn() = 0;
 
 	virtual void
 	add_count(
 		size_type
 	) = 0;
+
+	sanguis::diff_clock const &diff_clock_;
 
 	enemy_type::type const enemy_type_;
 };

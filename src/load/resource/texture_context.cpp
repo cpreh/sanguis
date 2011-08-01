@@ -15,7 +15,6 @@ sanguis::load::resource::texture_context::texture_context(
 		_value
 	)
 {
-	value_->revive();
 }
 
 sanguis::load::resource::texture_context_impl_ptr const
@@ -26,9 +25,4 @@ sanguis::load::resource::texture_context::value() const
 
 sanguis::load::resource::texture_context::~texture_context()
 {
-	if (!value_)
-		return;
-
-	if (value_.use_count() == 2)
-		value_->kill();
 }

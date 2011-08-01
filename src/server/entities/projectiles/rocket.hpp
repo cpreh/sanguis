@@ -8,6 +8,7 @@
 #include "../../direction.hpp"
 #include "../../radius.hpp"
 #include "../../team.hpp"
+#include "../../../diff_clock_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -28,6 +29,7 @@ class rocket
 	);
 public:
 	rocket(
+		sanguis::diff_clock const &,
 		server::environment::load_context &,
 		server::team::type team,
 		damage::unit,
@@ -44,6 +46,8 @@ private:
 
 	void
 	on_remove();
+
+	sanguis::diff_clock const &diff_clock_;
 	
 	damage::unit const damage_;
 };

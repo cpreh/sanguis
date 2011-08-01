@@ -1,7 +1,7 @@
 #ifndef SANGUIS_LOAD_MODEL_OPTIONAL_DELAY_HPP_INCLUDED
 #define SANGUIS_LOAD_MODEL_OPTIONAL_DELAY_HPP_INCLUDED
 
-#include <sge/time/unit.hpp>
+#include "../../duration.hpp"
 #include <fcppt/optional_fwd.hpp>
 
 namespace sanguis
@@ -12,7 +12,7 @@ namespace model
 {
 
 typedef fcppt::optional<
-	sge::time::unit
+	sanguis::duration
 > optional_delay;
 
 }

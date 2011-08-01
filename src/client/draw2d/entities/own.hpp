@@ -2,7 +2,6 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_OWN_HPP_INCLUDED
 
 #include "own_fwd.hpp"
-#include "../../../time_delta_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -23,9 +22,7 @@ protected:
 	own();
 public:
 	virtual void
-	update(
-		sanguis::time_delta const &
-	) = 0;
+	update() = 0;
 
 	virtual bool
 	may_be_removed() const = 0;

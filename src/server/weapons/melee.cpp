@@ -8,15 +8,18 @@
 #include "../entities/with_weapon.hpp"
 #include "../entities/with_velocity.hpp"
 #include "../entities/projectiles/melee.hpp"
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 sanguis::server::weapons::melee::melee(
+	sanguis::diff_clock const &_diff_clock,
 	weapons::range const _range,
 	weapons::base_cooldown const _base_cooldown,
 	weapons::damage const _damage
 )
 :
 	weapon(
+		_diff_clock,
 		weapon_type::melee,
 		_range,
 		unlimited_magazine_size,
@@ -47,6 +50,9 @@ sanguis::server::weapons::melee::do_attack(
 			fcppt::make_unique_ptr<
 				entities::projectiles::melee
 			>(
+				fcppt::cref(
+					this->diff_clock()
+				),
 				_attack.team(),
 				damage_
 			)

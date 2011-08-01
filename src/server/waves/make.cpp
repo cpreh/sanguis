@@ -2,27 +2,33 @@
 #include "debug.hpp"
 #include "wave.hpp"
 #include "../../exception.hpp"
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::server::waves::unique_ptr
 sanguis::server::waves::make(
-	fcppt::string const &name
+	sanguis::diff_clock const &_diff_clock,
+	fcppt::string const &_name
 )
 {
 	// TODO: add more!
 	if(
-		name == FCPPT_TEXT("debug")
+		_name == FCPPT_TEXT("debug")
 	)
 		return
 			unique_ptr(
 				fcppt::make_unique_ptr<
 					debug
-				>()
+				>(
+					fcppt::cref(
+						_diff_clock
+					)
+				)
 			);
 	throw
-		exception(
+		sanguis::exception(
 			FCPPT_TEXT("Invalid wave ")
-			+ name
+			+ _name
 		);
 }

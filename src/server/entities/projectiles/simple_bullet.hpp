@@ -7,6 +7,7 @@
 #include "../../damage/unit.hpp"
 #include "../../direction.hpp"
 #include "../../team.hpp"
+#include "../../../diff_clock_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -27,6 +28,7 @@ class simple_bullet
 	);
 public:
 	simple_bullet(
+		sanguis::diff_clock const &,
 		server::environment::load_context &,
 		server::team::type,
 		damage::unit,

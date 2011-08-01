@@ -4,6 +4,7 @@
 #include "environment/object_fwd.hpp"
 #include "center.hpp"
 #include "probability.hpp"
+#include "../diff_clock_fwd.hpp"
 #include "../weapon_type.hpp"
 #include <fcppt/random/actor/normalized.hpp>
 #include <fcppt/random/uniform.hpp>
@@ -21,7 +22,8 @@ class pickup_spawner
 		pickup_spawner
 	);
 public:
-	explicit pickup_spawner(
+	pickup_spawner(
+		sanguis::diff_clock const &,
 		environment::object &
 	);
 	
@@ -43,6 +45,8 @@ private:
 	spawn_weapon(
 		weapon_type::type
 	);
+
+	sanguis::diff_clock const &diff_clock_;
 	
 	environment::object &env_;
 

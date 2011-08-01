@@ -2,27 +2,27 @@
 #define SANGUIS_SERVER_WEAPONS_WEAPON_HPP_INCLUDED
 
 #include "weapon_fwd.hpp"
-#include "range.hpp"
+#include "backswing_time.hpp"
+#include "base_cooldown.hpp"
+#include "cast_point.hpp"
 #include "delayed_attack_fwd.hpp"
 #include "magazine_size.hpp"
 #include "magazine_count.hpp"
-#include "base_cooldown.hpp"
-#include "cast_point.hpp"
+#include "range.hpp"
 #include "reload_time.hpp"
 #include "states/ready_fwd.hpp"
 #include "states/reloading_fwd.hpp"
 #include "states/backswing_fwd.hpp"
 #include "states/castpoint_fwd.hpp"
 #include "../vector.hpp"
-#include "../space_unit.hpp"
 #include "../entities/with_weapon_fwd.hpp"
 #include "../entities/base_fwd.hpp"
-#include "../../time_delta_fwd.hpp"
 #include "../../messages/base.hpp"
+#include "../../diff_clock_fwd.hpp"
+#include "../../duration.hpp"
+#include "../../time_unit.hpp"
 #include "../../weapon_type.hpp"
-#include <sge/time/duration.hpp>
 #include <fcppt/log/object_fwd.hpp>
-#include <fcppt/chrono/duration_impl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <boost/statechart/state_machine.hpp>
 
@@ -59,7 +59,6 @@ public:
 
 	void
 	update(
-		sanguis::time_delta const &,
 		entities::with_weapon &owner
 	);
 
@@ -80,17 +79,18 @@ public:
 
 	void
 	attack_speed(
-		space_unit
+		sanguis::time_unit	
 	);
 
 	void
 	reload_speed(
-		space_unit
+		sanguis::time_unit	
 	);
 
 	virtual ~weapon();
 protected:
 	weapon(
+		sanguis::diff_clock const &,
 		weapon_type::type,
 		weapons::range,
 		weapons::magazine_size,
@@ -105,14 +105,11 @@ protected:
 		delayed_attack const &
 	) = 0;
 	
-	server::space_unit
-	ias() const;
-
-	server::space_unit
-	irs() const;
-
 	bool
 	usable() const;
+
+	sanguis::diff_clock const &
+	diff_clock() const;
 private:
 	friend class states::ready;
 	friend class states::reloading;
@@ -131,13 +128,13 @@ private:
 	void
 	magazine_exhausted();
 
-	sge::time::duration const
+	weapons::cast_point const
 	cast_point() const;
 
-	sge::time::duration const
+	weapons::backswing_time const
 	backswing_time() const;
 
-	sge::time::duration const
+	weapons::reload_time const
 	reload_time() const;
 
 	virtual void
@@ -158,6 +155,8 @@ private:
 	static fcppt::log::object &
 	log();
 
+	sanguis::diff_clock const &diff_clock_;
+
 	weapon_type::type const type_;
 
 	weapons::range const range_;
@@ -168,12 +167,13 @@ private:
 
 	weapons::magazine_size const magazine_size_;
 
-	sge::time::duration const
-		cast_point_,
-		backswing_time_,
-		reload_time_;
+	weapons::cast_point const cast_point_;
 
-	server::space_unit
+	weapons::backswing_time const backswing_time_;
+
+	weapons::reload_time const reload_time_;
+
+	sanguis::time_unit
 		ias_,
 		irs_;
 };

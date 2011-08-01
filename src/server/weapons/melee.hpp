@@ -6,6 +6,7 @@
 #include "range.hpp"
 #include "base_cooldown.hpp"
 #include "damage.hpp"
+#include "../../diff_clock_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -24,6 +25,7 @@ class melee
 	);
 public:
 	melee(
+		sanguis::diff_clock const &,
 		weapons::range,
 		weapons::base_cooldown,
 		weapons::damage

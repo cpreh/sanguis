@@ -13,11 +13,12 @@
 #include "actions/scale_fwd.hpp"
 #include "../send_callback.hpp"
 #include "../../cheat_type.hpp"
+#include "../../timer.hpp"
 #include "../../weapon_type.hpp"
 #include <sge/console/object_fwd.hpp>
 #include <sge/console/arg_list.hpp>
-#include <sge/time/timer.hpp>
 #include <fcppt/container/array.hpp>
+#include <fcppt/function/object.hpp>
 #include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -110,7 +111,7 @@ private:
 
 	weapon_type::type current_weapon_;
 
-	sge::time::timer rotation_timer_;
+	sanguis::timer rotation_timer_;
 
 	typedef fcppt::container::array<
 		bool,

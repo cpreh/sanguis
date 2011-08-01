@@ -1,8 +1,11 @@
 #include "debug.hpp"
 #include "spawn.hpp"
 
-sanguis::server::waves::debug::debug()
+sanguis::server::waves::debug::debug(
+	sanguis::diff_clock const &_diff_clock
+)
 :
+	diff_clock_(_diff_clock),
 	spawned_(false)
 {
 }
@@ -13,7 +16,6 @@ sanguis::server::waves::debug::~debug()
 
 void 
 sanguis::server::waves::debug::process(
-	sanguis::time_delta const &,
 	environment::object &_env,
 	environment::load_context &_load_context
 )
@@ -29,6 +31,7 @@ sanguis::server::waves::debug::process(
 		++index
 	)
 		waves::spawn(
+			diff_clock_,
 			_env,
 			_load_context,
 			static_cast<

@@ -611,10 +611,16 @@ SET(
 	src/client/world_parameters.cpp
 	src/client/world_parameters.hpp
 	src/client/world_parameters_fwd.hpp
+	src/clock.hpp
 	src/connect_state.hpp
 	src/damage_type.hpp
-	src/diff_clock.cpp
 	src/diff_clock.hpp
+	src/diff_clock_fwd.hpp
+	src/diff_timer.hpp
+	src/duration.hpp
+	src/duration_fwd.hpp
+	src/duration_second.cpp
+	src/duration_second.hpp
 	src/enemy_type.hpp
 	src/entity_id.hpp
 	src/entity_type.hpp
@@ -987,6 +993,8 @@ SET(
 	src/net/data_buffer.hpp
 	src/net/deserialize.cpp
 	src/net/deserialize.hpp
+	src/net/duration.hpp
+	src/net/duration_fwd.hpp
 	src/net/erase_circular_buffer_front.cpp
 	src/net/erase_circular_buffer_front.hpp
 	src/net/exception.cpp
@@ -1475,6 +1483,7 @@ SET(
 	src/server/waves/wave.hpp
 	src/server/waves/wave_fwd.hpp
 	src/server/weapons/aoe.hpp
+	src/server/weapons/backswing_time.hpp
 	src/server/weapons/base_cooldown.hpp
 	src/server/weapons/cast_point.hpp
 	src/server/weapons/create.cpp
@@ -1556,13 +1565,8 @@ SET(
 	src/server/world/sight_range_fwd.hpp
 	src/server/world/sight_range_map.hpp
 	src/string_vector.hpp
-	src/time_delta.hpp
-	src/time_delta_fwd.hpp
-	src/time_from_second.cpp
-	src/time_from_second.hpp
-	src/time_to_second.cpp
-	src/time_to_second.hpp
 	src/time_unit.hpp
+	src/timer.hpp
 	src/to_console_arg_list.cpp
 	src/to_console_arg_list.hpp
 	src/weapon_type.hpp

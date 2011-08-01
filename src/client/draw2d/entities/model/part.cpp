@@ -6,12 +6,15 @@
 #include "../../sprite/animation/texture_impl.hpp"
 #include "../../sprite/dim.hpp"
 #include "../../sprite/rotation.hpp"
+#include "../../funit.hpp"
 #include "../../../../load/model/animation/context.hpp"
 #include "../../../../load/model/animation/object.hpp"
 #include "../../../../load/model/part.hpp"
 #include "../../../../load/model/base_animation_not_found.hpp"
 #include "../../../../load/model/weapon_category.hpp"
 #include <sge/sprite/object_impl.hpp>
+#include <sge/timer/elapsed_fractional_and_reset.hpp>
+#include <fcppt/chrono/seconds.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/compare.hpp>
@@ -21,11 +24,22 @@
 #include <fcppt/ref.hpp>
 
 sanguis::client::draw2d::entities::model::part::part(
+	sanguis::diff_clock const &_diff_clock,
 	load::model::part const& _load_part,
 	sprite::normal::object &_ref
 )
 :
-	anim_diff_clock_(),
+	diff_clock_(
+		_diff_clock
+	),
+	rotation_timer_(
+		sanguis::diff_timer::parameters(
+			_diff_clock,
+			fcppt::chrono::seconds(
+				1
+			)
+		)
+	),
 	desired_orientation_(),
 	load_part_(
 		_load_part
@@ -104,14 +118,8 @@ sanguis::client::draw2d::entities::model::part::weapon(
 }
 
 void
-sanguis::client::draw2d::entities::model::part::update(
-	sanguis::time_delta const &_time
-)
+sanguis::client::draw2d::entities::model::part::update()
 {
-	anim_diff_clock_.update(
-		_time
-	);
-	
 	if(
 		!animation_ && animation_context_
 	)
@@ -133,7 +141,9 @@ sanguis::client::draw2d::entities::model::part::update(
 					fcppt::ref(
 						ref_
 					),
-					anim_diff_clock_.callback()
+					fcppt::cref(
+						diff_clock_
+					)
 				)
 			);
 
@@ -174,7 +184,11 @@ sanguis::client::draw2d::entities::model::part::update(
 
 	this->update_orientation(
 		model::orientation(
-			_time,
+			sge::timer::elapsed_fractional_and_reset<
+				draw2d::funit
+			>(
+				rotation_timer_
+			),
 			this->orientation(),
 			*desired_orientation_
 		)

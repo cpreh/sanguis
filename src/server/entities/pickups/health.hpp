@@ -6,6 +6,7 @@
 #include "../../environment/load_context_fwd.hpp"
 #include "../../health.hpp"
 #include "../../team.hpp"
+#include "../../../diff_clock_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -26,6 +27,7 @@ class health
 	);
 public:
 	health(
+		sanguis::diff_clock const &,
 		server::environment::load_context &,
 		team::type team,
 		server::health amount

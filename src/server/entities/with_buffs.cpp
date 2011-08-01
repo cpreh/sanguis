@@ -35,9 +35,7 @@ sanguis::server::entities::with_buffs::~with_buffs()
 {}
 
 void
-sanguis::server::entities::with_buffs::on_update(
-	sanguis::time_delta const &_time
-)
+sanguis::server::entities::with_buffs::on_update()
 {
 	for(
 		buffs::list::iterator it(
@@ -47,8 +45,7 @@ sanguis::server::entities::with_buffs::on_update(
 		++it
 	)
 		it->update(
-			*this,
-			_time
+			*this
 		);
 
 	for(
@@ -59,8 +56,7 @@ sanguis::server::entities::with_buffs::on_update(
 	)
 	{
 		it->update(
-			*this,
-			_time
+			*this
 		);
 
 		if(

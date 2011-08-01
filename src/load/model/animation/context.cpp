@@ -5,7 +5,6 @@
 #include "../../resource/animation/series.hpp"
 #include "../../resource/texture_context_impl.hpp"
 #include "../../../exception.hpp"
-#include <sge/time/millisecond.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <sge/renderer/size_type.hpp>
@@ -71,9 +70,7 @@ sanguis::load::model::animation::context::update()
 	)
 		animation_.push_back(
 			resource::animation::entity(
-				sge::time::millisecond(
-					frame_it->delay()
-				),
+				frame_it->delay(),
 				sge::texture::const_part_ptr(
 					fcppt::make_shared_ptr<
 						sge::texture::part_raw

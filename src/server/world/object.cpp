@@ -30,13 +30,14 @@
 #include "../../load/model/collection.hpp"
 #include "../../load/model/object.hpp"
 #include "../../exception.hpp"
-#include "../../time_to_second.hpp"
 #include <sanguis/creator/generator/result.hpp>
 #include <sge/projectile/body/object.hpp>
 #include <sge/projectile/time_increment.hpp>
 #include <sge/projectile/world.hpp>
-#include <sge/time/second_f.hpp>
-#include <sge/time/millisecond.hpp>
+#include <sge/timer/elapsed_and_reset.hpp>
+#include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/chrono/milliseconds.hpp>
+#include <fcppt/chrono/seconds.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
@@ -49,6 +50,7 @@
 #include <fcppt/text.hpp>
 
 sanguis::server::world::object::object(
+	sanguis::diff_clock const &_diff_clock,
 	sanguis::world_id const _id,
 	world::context &_global_context,
 	server::environment::load_context &_load_context,
@@ -90,13 +92,20 @@ sanguis::server::world::object::object(
 		)
 	),
 	sight_ranges_(),
-	diff_clock_(),
+	projectile_timer_(
+		sanguis::diff_timer::parameters(
+			_diff_clock,
+			fcppt::chrono::seconds(
+				1
+			)
+		)
+	),
 	send_timer_(
-		sge::time::millisecond(
-			500
-		),
-		sge::time::activation_state::active,
-		diff_clock_.callback()
+		sanguis::timer::parameters(
+			fcppt::chrono::milliseconds(
+				500
+			)
+		)
 	),
 	environment_(
 		fcppt::make_unique_ptr<
@@ -109,9 +118,11 @@ sanguis::server::world::object::object(
 	),
 	entities_(),
 	pickup_spawner_(
+		_diff_clock,
 		*environment_
 	),
 	wave_gen_(
+		_diff_clock,
 		_console
 	),
 	static_body_(
@@ -127,31 +138,26 @@ sanguis::server::world::object::~object()
 }
 
 void
-sanguis::server::world::object::update(
-	sanguis::time_delta const &_time
-)
+sanguis::server::world::object::update()
 {
-	diff_clock_.update(
-		_time
-	);
-
 	wave_gen_.process(
-		_time,
 		this->environment(),
 		load_context_
 	);
 
 	// should we send position updates?
 	bool const update_pos(
-		send_timer_.update_b()
+		sge::timer::reset_when_expired(
+			send_timer_
+		)
 	);
 
 	collision_world_->update_continuous(
 		sge::projectile::time_increment(
-			sge::time::second_f(
-				sanguis::time_to_second(
-					_time
-				)
+			sge::timer::elapsed_and_reset<
+				sge::projectile::duration
+			>(
+				projectile_timer_
 			)
 		)
 	);
@@ -171,7 +177,6 @@ sanguis::server::world::object::update(
 
 		this->update_entity(
 			it,
-			_time,
 			update_pos
 		);
 	}
@@ -612,7 +617,6 @@ sanguis::server::world::object::send_player_specific(
 void
 sanguis::server::world::object::update_entity(
 	entity_map::iterator const _it,
-	sanguis::time_delta const &_time,
 	bool const _update_pos
 )
 {
@@ -620,9 +624,7 @@ sanguis::server::world::object::update_entity(
 		*_it->second
 	);
 
-	entity.update(
-		_time
-	);
+	entity.update();
 
 	if(
 		entity.dead()

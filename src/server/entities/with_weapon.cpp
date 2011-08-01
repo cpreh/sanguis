@@ -14,10 +14,12 @@
 #include <fcppt/text.hpp>
 
 sanguis::server::entities::with_weapon::with_weapon(
+	sanguis::diff_clock const &_diff_clock,
 	weapons::unique_ptr _start_weapon
 )
 :
 	base(),
+	diff_clock_(_diff_clock),
 	weapon_(weapon_type::none),
 	target_(),
 	attacking_(false),
@@ -66,9 +68,7 @@ sanguis::server::entities::with_weapon::~with_weapon()
 }
 
 void
-sanguis::server::entities::with_weapon::on_update(
-	sanguis::time_delta const &_time
-)
+sanguis::server::entities::with_weapon::on_update()
 {
 	// change to the first weapon if we have any
 	if(
@@ -84,7 +84,6 @@ sanguis::server::entities::with_weapon::on_update(
 		this->has_weapon()
 	)
 		this->active_weapon().update(
-			_time,
 			*this
 		);
 
@@ -184,6 +183,7 @@ sanguis::server::entities::with_weapon::add_weapon(
 		return
 			this->add_weapon(
 				weapons::create(
+					diff_clock_,
 					weapon_type::dual_pistol
 				)
 			);

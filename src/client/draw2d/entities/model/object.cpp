@@ -7,9 +7,9 @@
 #include "../../sprite/index.hpp"
 #include "../../../../load/model/collection.hpp"
 #include "../../../../load/model/object.hpp"
+#include "../../../../duration_second.hpp"
 #include "../../../../exception.hpp"
 #include <sge/sprite/object_impl.hpp>
-#include <sge/time/second.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/log/headers.hpp>
@@ -31,6 +31,7 @@ sanguis::client::draw2d::entities::model::object::object(
 )
 :
 	container(
+		_param.diff_clock(),
 		_param.normal_system(),
 		_param.collection()[_name].size(),
 		_order,
@@ -42,6 +43,7 @@ sanguis::client::draw2d::entities::model::object::object(
 	),
 	with_health(),
 	with_weapon(),
+	diff_clock_(_param.diff_clock()),
 	attacking_(false),
 	reloading_(false),
 	health_(0),
@@ -84,6 +86,9 @@ sanguis::client::draw2d::entities::model::object::object(
 				model::part
 			>(
 				fcppt::cref(
+					diff_clock_
+				),
+				fcppt::cref(
 					*it->second
 				),
 				fcppt::ref(
@@ -118,13 +123,9 @@ sanguis::client::draw2d::entities::model::object::health() const
 }
 
 void
-sanguis::client::draw2d::entities::model::object::update(
-	sanguis::time_delta const &_time
-)
+sanguis::client::draw2d::entities::model::object::update()
 {
-	container::update(
-		_time
-	);
+	container::update();
 
 	if(
 		healthbar_
@@ -134,13 +135,6 @@ sanguis::client::draw2d::entities::model::object::update(
 			this->master().size()
 		);
 	
-	if(
-		decay_time_
-	)
-		decay_time_->update(
-			_time
-		);
-
 	for(
 		part_vector::iterator it(
 			parts_.begin()
@@ -148,9 +142,7 @@ sanguis::client::draw2d::entities::model::object::update(
 		it != parts_.end();
 		++it
 	)
-		it->update(
-			_time
-		);
+		it->update();
 }
 
 void
@@ -199,11 +191,14 @@ sanguis::client::draw2d::entities::model::object::on_decay()
 		fcppt::make_unique_ptr<
 			model::decay_time
 		>(
+			fcppt::cref(
+				diff_clock_
+			),
 			decay_option_ == decay_option::delayed
 			?
-				sge::time::second(10)
+				sanguis::duration_second(10)
 			:
-				sge::time::second(0)
+				sanguis::duration_second(0)
 		)
 	);
 

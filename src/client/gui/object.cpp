@@ -1,8 +1,8 @@
 #include "object.hpp"
 #include "../cursor/object.hpp"
+#include <sge/cegui/duration.hpp>
 #include <sge/cegui/load_context.hpp>
 #include <sge/config/media_path.hpp>
-#include <sge/time/duration.hpp>
 #include <fcppt/chrono/duration_cast.hpp>
 #include <fcppt/chrono/duration_impl.hpp>
 #include <fcppt/text.hpp>
@@ -74,12 +74,12 @@ sanguis::client::gui::object::render()
 
 void
 sanguis::client::gui::object::update(
-	sanguis::time_delta const &_time
+	sanguis::duration const &_time
 )
 {
 	system_.update(
 	        fcppt::chrono::duration_cast<
-			sge::time::duration
+			sge::cegui::duration
 		>(
 			_time
 		)

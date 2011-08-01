@@ -7,8 +7,6 @@
 #include "../../damage/list.hpp"
 #include "../../../messages/add_projectile.hpp"
 #include "../../../messages/create.hpp"
-#include "../../../time_to_second.hpp"
-#include <sge/time/second_f.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -22,6 +20,7 @@ sanguis::server::entities::projectiles::projectile::ptype() const
 }
 
 sanguis::server::entities::projectiles::projectile::projectile(
+	sanguis::diff_clock const &_diff_clock,
 	projectile_type::type const _ptype,
 	server::team::type const _team,
 	entities::movement_speed const _movement_speed,
@@ -49,15 +48,11 @@ sanguis::server::entities::projectiles::projectile::projectile(
 		_indeterminate == indeterminate::yes
 	),
 	ptype_(_ptype),
-	diff_clock_(),
 	life_timer_(
-		sge::time::second_f(
-			sanguis::time_to_second(
-				_life_time.get()
-			)
-		),
-		sge::time::activation_state::active,
-		diff_clock_.callback()
+		sanguis::diff_timer::parameters(
+			_diff_clock,
+			_life_time.get()
+		)
 	)
 {
 }
@@ -67,19 +62,11 @@ sanguis::server::entities::projectiles::projectile::~projectile()
 }
 
 void
-sanguis::server::entities::projectiles::projectile::on_update(
-	sanguis::time_delta const &_time
-)
-{
-	diff_clock_.update(
-		_time
-	);
-}
-
-void
 sanguis::server::entities::projectiles::projectile::expire()
 {
-	life_timer_.expire();
+	life_timer_.expired(
+		true
+	);
 }
 
 sanguis::server::team::type

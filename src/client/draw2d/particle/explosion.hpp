@@ -9,6 +9,7 @@
 #include "rotation_speed.hpp"
 #include "../center.hpp"
 #include "../speed.hpp"
+#include "../../../diff_clock_fwd.hpp"
 
 namespace sanguis
 {
@@ -29,6 +30,7 @@ class explosion
 	);
 public:
 	explosion(
+		sanguis::diff_clock const &,
 		particle::property_map const &,
 		particle::explosion_callback const &,
 		draw2d::center const &,

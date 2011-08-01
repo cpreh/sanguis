@@ -6,7 +6,7 @@
 #include "../../level.hpp"
 #include <sge/font/metrics_fwd.hpp>
 #include <sge/font/text/drawer_fwd.hpp>
-#include <sge/time/frames_counter.hpp>
+#include <sge/timer/frames_counter.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <ctime>
 
@@ -59,7 +59,7 @@ private:
 
 	std::tm time_;
 
-	sge::time::frames_counter frames_counter_;
+	sge::timer::frames_counter frames_counter_;
 };
 
 }

@@ -9,7 +9,6 @@
 #include <sge/image2d/file.hpp>
 #include <sge/image2d/view/const_object.hpp>
 #include <sge/renderer/device.hpp>
-#include <sge/time/second.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/ref.hpp>
@@ -43,14 +42,6 @@ sanguis::load::resource::texture_context_impl::texture_context_impl(
 	texture_result_(),
 	rend_(
 		_rend
-	),
-	clock_(),
-	decay_timer_(
-		sge::time::second(
-			10
-		),
-		sge::time::activation_state::active,
-		clock_.callback()
 	)
 {
 }
@@ -84,41 +75,10 @@ sanguis::load::resource::texture_context_impl::update()
 	return true;
 }
 
-void
-sanguis::load::resource::texture_context_impl::tick(
-	sanguis::time_delta const &_delta
-)
-{
-	clock_.update(
-		_delta
-	);
-}
-
 sge::texture::part_ptr const
 sanguis::load::resource::texture_context_impl::result()
 {
 	return texture_result_;
-}
-
-void
-sanguis::load::resource::texture_context_impl::kill()
-{
-	decay_timer_.activate();
-
-	decay_timer_.reset();
-}
-
-void
-sanguis::load::resource::texture_context_impl::revive()
-{
-	decay_timer_.deactivate();
-}
-
-bool
-sanguis::load::resource::texture_context_impl::decayed() const
-{
-	return 
-		decay_timer_.active() && decay_timer_.expired();
 }
 
 sanguis::load::resource::texture_context_impl::~texture_context_impl()

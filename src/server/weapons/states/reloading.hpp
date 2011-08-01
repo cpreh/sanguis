@@ -6,8 +6,7 @@
 #include "../events/poll_fwd.hpp"
 #include "../events/stop_fwd.hpp"
 #include "../events/reset_fwd.hpp"
-#include "../../../diff_clock.hpp"
-#include <sge/time/timer.hpp>
+#include "../../../diff_timer.hpp"
 #include <fcppt/noncopyable.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/result.hpp>
@@ -67,9 +66,7 @@ public:
 		events::reset const &
 	);
 private:
-	diff_clock diff_clock_;
-
-	sge::time::timer reload_time_;
+	sanguis::diff_timer reload_time_;
 };
 
 }

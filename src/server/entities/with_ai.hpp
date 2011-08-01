@@ -7,7 +7,7 @@
 #include "../ai/scoped_ptr.hpp"
 #include "../ai/create_function.hpp"
 #include "../weapons/unique_ptr.hpp"
-#include "../../time_delta_fwd.hpp"
+#include "../../diff_clock_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -26,7 +26,8 @@ class with_ai
 		with_ai
 	);
 protected:
-	explicit with_ai(
+	with_ai(
+		sanguis::diff_clock const &,
 		ai::create_function const &,
 		weapons::unique_ptr start_weapon
 	);
@@ -34,9 +35,7 @@ protected:
 	~with_ai();
 
 	virtual void
-	on_update(
-		sanguis::time_delta const &
-	);
+	on_update();
 private:
 	void
 	on_create();

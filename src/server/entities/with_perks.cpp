@@ -48,9 +48,7 @@ sanguis::server::entities::with_perks::~with_perks()
 {}
 
 void
-sanguis::server::entities::with_perks::on_update(
-	sanguis::time_delta const &_time
-)
+sanguis::server::entities::with_perks::on_update()
 {
 	for(
 		perk_container::iterator it(
@@ -61,7 +59,6 @@ sanguis::server::entities::with_perks::on_update(
 	)
 		it->second->update(
 			*this,
-			_time,
 			this->environment()
 		);
 }

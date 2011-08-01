@@ -5,6 +5,7 @@
 #include <fcppt/math/dim/basic_impl.hpp>
 
 sanguis::server::entities::projectiles::aoe_projectile::aoe_projectile(
+	sanguis::diff_clock const &_diff_clock,
 	aoe_projectile_type::type const _type,
 	team::type const _team,
 	entities::movement_speed const _movement_speed,
@@ -16,6 +17,7 @@ sanguis::server::entities::projectiles::aoe_projectile::aoe_projectile(
 )
 :
 	projectile(
+		_diff_clock,
 		projectile_type::aoe,
 		_team,
 		_movement_speed,

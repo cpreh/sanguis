@@ -3,26 +3,30 @@
 #include "../entities/projectiles/simple_bullet.hpp"
 #include "../entities/projectiles/rocket.hpp"
 #include "../entities/insert_parameters.hpp"
-#include <sge/time/second_f.hpp>
+#include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/chrono/seconds.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/random/make_inclusive_range.hpp>
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 
-sanguis::server::perks::choleric::choleric()
+sanguis::server::perks::choleric::choleric(
+	sanguis::diff_clock const &_diff_clock
+)
 :
 	perk(
 		perk_type::choleric
 	),
-	clock_(),
+	diff_clock_(_diff_clock),
 	shoot_timer_(
-		sge::time::second_f(
-			5.f
-		),
-		sge::time::activation_state::active,
-		clock_.callback(),
-		sge::time::expiration_state::not_expired
+		sanguis::diff_timer::parameters(
+			_diff_clock,
+			fcppt::chrono::seconds(
+				5
+			)
+		)
 	),
 	rand_(
 		fcppt::random::make_inclusive_range(
@@ -40,16 +44,13 @@ sanguis::server::perks::choleric::~choleric()
 void
 sanguis::server::perks::choleric::update(
 	entities::base &_entity,
-	sanguis::time_delta const &_time,
 	environment::object &_env
 )
 {
-	clock_.update(
-		_time
-	);
-
 	if(
-		!shoot_timer_.update_b()
+		!sge::timer::reset_when_expired(
+			shoot_timer_
+		)
 	)
 		return;
 
@@ -86,6 +87,9 @@ sanguis::server::perks::choleric::update(
 					fcppt::make_unique_ptr<
 						entities::projectiles::simple_bullet
 					>(
+						fcppt::cref(
+							diff_clock_
+						),
 						fcppt::ref(
 							_env.load_context()
 						),
@@ -99,6 +103,9 @@ sanguis::server::perks::choleric::update(
 					fcppt::make_unique_ptr<
 						entities::projectiles::rocket
 					>(
+						fcppt::cref(
+							diff_clock_
+						),
 						fcppt::ref(
 							_env.load_context()
 						),

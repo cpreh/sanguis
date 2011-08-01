@@ -5,7 +5,9 @@
 #include "property/subtract.hpp"
 #include "property/initial_max.hpp"
 #include "../environment/object.hpp"
-#include "../../time_to_second.hpp"
+#include "../space_unit.hpp"
+#include <sge/timer/elapsed_fractional_and_reset.hpp>
+#include <fcppt/chrono/seconds.hpp>
 #include <fcppt/tr1/functional.hpp>
 
 void
@@ -75,6 +77,7 @@ sanguis::server::entities::with_health::max_health() const
 }
 
 sanguis::server::entities::with_health::with_health(
+	sanguis::diff_clock const &_diff_clock,
 	server::health const _max_health,
 	damage::armor const &_armor
 )
@@ -89,6 +92,14 @@ sanguis::server::entities::with_health::with_health(
 	),
 	regeneration_(
 		0
+	),
+	regeneration_timer_(
+		sanguis::diff_timer::parameters(
+			_diff_clock,
+			fcppt::chrono::seconds(
+				1
+			)
+		)
 	),
 	max_health_change_(
 		health_.register_max_change_callback(
@@ -107,15 +118,15 @@ sanguis::server::entities::with_health::~with_health()
 }
 
 void
-sanguis::server::entities::with_health::on_update(
-	sanguis::time_delta const &_time
-)
+sanguis::server::entities::with_health::on_update()
 {
 	entities::property::add(
 		health_,
 		property::from_float(
-			sanguis::time_to_second(
-				_time
+			sge::timer::elapsed_fractional_and_reset<
+				server::space_unit
+			>(
+				regeneration_timer_
 			)
 		)
 		* this->regeneration().current()

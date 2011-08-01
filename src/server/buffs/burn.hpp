@@ -4,10 +4,10 @@
 #include "../space_unit.hpp"
 #include "../damage/array.hpp"
 #include "../damage/unit.hpp"
-#include "../../diff_clock.hpp"
-#include "../../time_delta_fwd.hpp"
+#include "../../diff_clock_fwd.hpp"
+#include "../../diff_timer.hpp"
+#include "../../duration_fwd.hpp"
 #include "buff.hpp"
-#include <sge/time/timer.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -26,8 +26,9 @@ class burn
 	);
 public:
 	burn(
+		sanguis::diff_clock const &,
 		damage::unit,
-		time_delta const &pulse_time,
+		sanguis::duration const &pulse_time,
 		unsigned max_pulses,
 		damage::array const &
 	);
@@ -36,15 +37,12 @@ public:
 private:
 	void
 	update(
-		entities::base &,
-		sanguis::time_delta const &
+		entities::base &
 	);
 
 	damage::unit const damage_;
 
-	diff_clock clock_;
-
-	sge::time::timer pulse_timer_;
+	sanguis::diff_timer pulse_timer_;
 
 	unsigned pulses_;
 

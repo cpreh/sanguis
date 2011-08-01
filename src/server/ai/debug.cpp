@@ -26,9 +26,7 @@ sanguis::server::ai::debug::~debug()
 }
 
 void
-sanguis::server::ai::debug::update(
-	sanguis::time_delta const &
-)
+sanguis::server::ai::debug::update()
 {
 	typedef fcppt::optional<
 		server::space_unit

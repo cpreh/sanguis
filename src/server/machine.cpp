@@ -10,11 +10,12 @@
 #include "../net/serialize_to_data_buffer.hpp"
 #include "../net/deserialize.hpp"
 #include "../net/server/connection_id_container.hpp"
+#include "../duration.hpp"
 #include "../exception.hpp"
-#include "../time_from_second.hpp"
-#include <sge/time/millisecond.hpp>
-#include <sge/time/second.hpp>
+#include <sge/timer/elapsed_and_reset.hpp>
 #include <fcppt/algorithm/append.hpp>
+#include <fcppt/chrono/milliseconds.hpp>
+#include <fcppt/chrono/seconds.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/function/object.hpp>
@@ -39,13 +40,15 @@ sanguis::server::machine::machine(
 	),
 	net_(
 		_io_service,
-		sge::time::millisecond(
+		fcppt::chrono::milliseconds(
 			16
 		)
 	),
 	frame_timer_(
-		sge::time::second(
-			1
+		sanguis::timer::parameters(
+			fcppt::chrono::seconds(
+				1
+			)
 		)
 	),
 	temp_buffer_(),
@@ -297,8 +300,10 @@ sanguis::server::machine::timer_callback()
 {
 	this->process_event(
 		events::tick(
-			sanguis::time_from_second(
-				frame_timer_.reset()
+			sge::timer::elapsed_and_reset<
+				sanguis::duration
+			>(
+				frame_timer_
 			)
 		)
 	);

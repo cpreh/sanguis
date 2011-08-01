@@ -16,11 +16,11 @@
 #include "rot_speed_range.hpp"
 #include "spawn_initial.hpp"
 #include "speed_range.hpp"
-#include "../../../diff_clock.hpp"
-#include "../../../time_delta_fwd.hpp"
+#include "../../../diff_clock_fwd.hpp"
+#include "../../../diff_timer.hpp"
+#include <fcppt/function/object.hpp>
 #include <fcppt/random/uniform.hpp>
 #include <fcppt/minmax_pair_decl.hpp>
-#include <sge/time/timer.hpp>
 
 namespace sanguis
 {
@@ -40,6 +40,7 @@ class generator
 	);
 public:
 	generator(
+		sanguis::diff_clock const &,
 		particle::generation_callback,
 		draw2d::center const &,
 		particle::gen_life_time const &,
@@ -57,7 +58,6 @@ public:
 
 	bool
 	update(
-		sanguis::time_delta const &,
 		draw2d::center const &,
 		particle::rotation,
 		particle::depth
@@ -66,13 +66,11 @@ private:
 	void
 	generate();
 
-	sanguis::diff_clock clock_;
-
 	particle::generation_callback generate_object_;
 
-	sge::time::timer frequency_timer_;
+	sanguis::diff_timer frequency_timer_;
 
-	sge::time::timer life_timer_;
+	sanguis::diff_timer life_timer_;
 
 	particle::align_type::type const alignment_;
 	

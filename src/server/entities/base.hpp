@@ -14,7 +14,6 @@
 #include "../../messages/auto_ptr.hpp"
 #include "../../entity_id.hpp"
 #include "../../entity_type.hpp"
-#include "../../time_delta_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -42,9 +41,7 @@ public:
 	);
 
 	void
-	update(
-		sanguis::time_delta const &
-	);
+	update();
 
 	void
 	remove();
@@ -106,9 +103,7 @@ public:
 	virtual ~base();
 private:
 	virtual void
-	on_update(
-		sanguis::time_delta const &
-	);
+	on_update();
 
 	virtual void
 	on_create();

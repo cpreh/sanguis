@@ -7,8 +7,8 @@
 #include "property/value.hpp"
 #include "../weapons/unique_ptr.hpp"
 #include "../vector.hpp"
+#include "../../diff_clock_fwd.hpp"
 #include "../../weapon_type.hpp"
-#include "../../time_delta_fwd.hpp"
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -31,16 +31,15 @@ class with_weapon
 		with_weapon
 	);
 protected:
-	explicit with_weapon(
+	with_weapon(
+		sanguis::diff_clock const &,
 		weapons::unique_ptr start_weapon
 	);
 
 	~with_weapon();
 
 	virtual void
-	on_update(
-		sanguis::time_delta const &
-	);
+	on_update();
 public:
 	void
 	change_weapon(
@@ -115,6 +114,8 @@ private:
 	on_new_weapon(
 		weapon_type::type
 	);
+
+	sanguis::diff_clock const &diff_clock_;
 
 	typedef boost::ptr_map<
 		weapon_type::type,

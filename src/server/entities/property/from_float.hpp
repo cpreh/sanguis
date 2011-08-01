@@ -22,10 +22,10 @@ template<
 >
 value 
 from_float(
-	Float const float_
+	Float const _float
 )
 {
-	return static_cast<value>(float_);
+	return static_cast<value>(_float);
 #if 0
 	if(
 		fcppt::math::almost_zero(

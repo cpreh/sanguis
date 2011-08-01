@@ -4,8 +4,7 @@
 #include "backswing_fwd.hpp"
 #include "../weapon.hpp"
 #include "../events/poll_fwd.hpp"
-#include "../../../diff_clock.hpp"
-#include <sge/time/timer.hpp>
+#include "../../../diff_timer.hpp"
 #include <fcppt/noncopyable.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/result.hpp>
@@ -46,9 +45,7 @@ public:
 		events::poll const &
 	);
 private:
-	diff_clock diff_clock_;
-
-	sge::time::timer cooldown_;
+	sanguis::diff_timer cooldown_;
 };
 
 }

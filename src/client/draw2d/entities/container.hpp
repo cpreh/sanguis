@@ -14,7 +14,8 @@
 #include "../sprite/index_fwd.hpp"
 #include "../center.hpp"
 #include "../speed.hpp"
-#include "../../../time_delta_fwd.hpp"
+#include "../../../diff_clock_fwd.hpp"
+#include "../../../diff_timer.hpp"
 #include <sge/sprite/object_decl.hpp>
 #include <fcppt/math/vector/basic_decl.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -49,6 +50,7 @@ public:
 	typedef sprite_vector::size_type size_type;
 
 	container(
+		sanguis::diff_clock const &,
 		sprite::normal::system &,
 		size_type num_sprites,
 		sprite::order,
@@ -66,9 +68,7 @@ protected:
 
 	// entity overrides
 	virtual void
-	update(
-		sanguis::time_delta const &
-	);
+	update();
 
 	virtual void
 	center(
@@ -132,6 +132,8 @@ private:
 	draw2d::center center_;
 	
 	sprite_vector sprites_;
+
+	sanguis::diff_timer move_timer_;
 };
 
 }

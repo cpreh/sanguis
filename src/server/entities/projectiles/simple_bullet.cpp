@@ -6,11 +6,12 @@
 #include "../../damage/piercing.hpp"
 #include "../../damage/full.hpp"
 #include "../../environment/load_context.hpp"
-#include "../../../time_from_second.hpp"
+#include "../../../duration_second.hpp"
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
+	sanguis::diff_clock const &_diff_clock,
 	server::environment::load_context &_load_context,
 	server::team::type const _team,
 	damage::unit const _damage,
@@ -18,6 +19,7 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 )
 :
 	projectile(
+		_diff_clock,
 		projectile_type::simple_bullet,
 		_team,
 		entities::movement_speed(
@@ -27,7 +29,7 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 			FCPPT_TEXT("bullet")
 		),
 		projectiles::life_time(
-			sanguis::time_from_second(
+			sanguis::duration_second(
 				10.f
 			)
 		),

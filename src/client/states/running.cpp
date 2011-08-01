@@ -116,10 +116,6 @@ sanguis::client::states::running::react(
 	events::tick const &_event
 )
 {
-	context<machine>().resources().update(
-		_event.delta()
-	);
-
 	drawer_->set_time(
 		daytime_settings_->current_time()
 	);

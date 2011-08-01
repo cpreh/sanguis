@@ -2,12 +2,13 @@
 #define SANGUIS_SERVER_WAVES_SIMPLE_HPP_INCLUDED
 
 #include "wave.hpp"
+#include "delay.hpp"
+#include "spawn_interval.hpp"
 #include "../environment/load_context_fwd.hpp"
 #include "../environment/object_fwd.hpp"
-#include "../../time_delta_fwd.hpp"
 #include "../../enemy_type.hpp"
-#include "../../diff_clock.hpp"
-#include <sge/time/timer.hpp>
+#include "../../diff_clock_fwd.hpp"
+#include "../../diff_timer.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -26,8 +27,9 @@ class simple
 	);
 public:
 	simple(
-		sanguis::time_delta const &delay,
-		sanguis::time_delta const &spawn_interval,
+		sanguis::diff_clock const &,
+		waves::delay const &,
+		waves::spawn_interval const &,
 		unsigned waves,
 		unsigned spawns_per_wave,
 		enemy_type::type
@@ -37,7 +39,6 @@ public:
 private:
 	void
 	process(
-		sanguis::time_delta const &,
 		environment::object &,
 		environment::load_context &
 	);
@@ -45,9 +46,9 @@ private:
 	bool
 	ended() const;
 
-	diff_clock diff_;
+	sanguis::diff_clock const &diff_clock_;
 
-	sge::time::timer
+	sanguis::diff_timer
 		delay_timer_,
 		spawn_timer_;
 

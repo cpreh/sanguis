@@ -8,6 +8,7 @@
 #include "aoe.hpp"
 #include "cast_point.hpp"
 #include "reload_time.hpp"
+#include "../../diff_clock_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -26,6 +27,7 @@ class grenade
 	);
 public:
 	grenade(
+		sanguis::diff_clock const &,
 		weapon_type::type,
 		weapons::base_cooldown,
 		weapons::damage,

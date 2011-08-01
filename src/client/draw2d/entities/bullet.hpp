@@ -4,7 +4,6 @@
 #include "model/object.hpp"
 #include "model/parameters_fwd.hpp"
 #include "../sprite/center.hpp"
-#include "../../../time_delta_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
 #include <fcppt/string.hpp>
@@ -34,9 +33,7 @@ public:
 	~bullet();
 private:
 	void
-	update(
-		sanguis::time_delta const &
-	);
+	update();
 
 	fcppt::optional<
 		sprite::center

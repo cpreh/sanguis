@@ -3,10 +3,12 @@
 #include "../entities/insert_parameters.hpp"
 #include "../entities/projectiles/grenade.hpp"
 #include "../environment/object.hpp"
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 
 sanguis::server::weapons::grenade::grenade(
+	sanguis::diff_clock const &_diff_clock,
 	weapon_type::type const _type,
 	weapons::base_cooldown const _base_cooldown,
 	weapons::damage const _damage,
@@ -16,6 +18,7 @@ sanguis::server::weapons::grenade::grenade(
 )
 :
 	weapon(
+		_diff_clock,
 		_type,
 		weapons::range(20.f), // FIXME
 		weapons::magazine_size(1),
@@ -43,6 +46,9 @@ sanguis::server::weapons::grenade::do_attack(
 			fcppt::make_unique_ptr<
 				entities::projectiles::grenade
 			>(
+				fcppt::cref(
+					this->diff_clock()
+				),
 				fcppt::ref(
 					_attack.environment().load_context()
 				),

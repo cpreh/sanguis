@@ -24,9 +24,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "texture_fwd.hpp"
 #include "loop_method.hpp"
 #include "../../../../load/resource/animation/series.hpp"
+#include "../../../../diff_clock_fwd.hpp"
+#include "../../../../diff_timer.hpp"
 #include <sge/sprite/object_fwd.hpp>
-#include <sge/time/timer.hpp>
-#include <sge/time/callback.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -57,7 +57,7 @@ public:
 		load::resource::animation::series const &,
 		sprite::animation::loop_method::type,
 		object &init_sprite,
-		sge::time::callback const &time_fun
+		sanguis::diff_clock const &
 	);
 
 	bool
@@ -76,7 +76,7 @@ private:
 
 	sprite::animation::loop_method::type action_;
 
-	sge::time::timer cur_timer_;
+	sanguis::diff_timer cur_timer_;
 
 	object &spr_;
 

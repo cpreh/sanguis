@@ -158,7 +158,7 @@ sanguis::client::gui::perk::chooser::~chooser()
 
 void
 sanguis::client::gui::perk::chooser::process(
-	sanguis::time_delta const &_delta
+	sanguis::duration const &_delta
 )
 {
 	gui_.update(

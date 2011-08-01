@@ -11,17 +11,20 @@
 #include "../../collision/distance.hpp"
 #include "../../environment/object.hpp"
 #include "../../environment/load_context.hpp"
-#include "../../../time_from_second.hpp"
-#include <sge/time/millisecond.hpp>
+#include "../../../duration_second.hpp"
+#include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/chrono/milliseconds.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
+#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <algorithm>
 
 sanguis::server::entities::projectiles::grenade::grenade(
+	sanguis::diff_clock const &_diff_clock,
 	server::environment::load_context &_load_context,
 	team::type const _team,
 	damage::unit const _damage,
@@ -31,6 +34,7 @@ sanguis::server::entities::projectiles::grenade::grenade(
 )
 :
 	aoe_projectile(
+		_diff_clock,
 		aoe_projectile_type::grenade,
 		_team,
 		entities::movement_speed(10),
@@ -38,7 +42,7 @@ sanguis::server::entities::projectiles::grenade::grenade(
 			FCPPT_TEXT("grenade")
 		),
 		projectiles::life_time(
-			sanguis::time_from_second(
+			sanguis::duration_second(
 				2.f
 			)
 		),
@@ -46,13 +50,14 @@ sanguis::server::entities::projectiles::grenade::grenade(
 		_aoe,
 		_direction
 	),
-	diff_clock_(),
-	slowdown_time_(
-		sge::time::millisecond(
-			100
-		),
-		sge::time::activation_state::active,
-		diff_clock_.callback()
+	diff_clock_(_diff_clock),
+	slowdown_timer_(
+		sanguis::diff_timer::parameters(
+			_diff_clock,
+			fcppt::chrono::milliseconds(
+				100
+			)
+		)
 	),
 	damage_(
 		_damage
@@ -97,25 +102,17 @@ sanguis::server::entities::projectiles::grenade::do_damage(
 }
 
 void
-sanguis::server::entities::projectiles::grenade::on_update(
-	sanguis::time_delta const &_time
-)
+sanguis::server::entities::projectiles::grenade::on_update()
 {
-	diff_clock_.update(
-		_time
-	);
-
 	if(
-		slowdown_time_.update_b()
+		sge::timer::reset_when_expired(
+			slowdown_timer_
+		)
 	)
 		this->movement_speed().current(
 			this->movement_speed().current()
 			* 0.9f
 		);
-	
-	projectile::on_update(
-		_time
-	);
 }
 
 void
@@ -126,11 +123,14 @@ sanguis::server::entities::projectiles::grenade::on_remove()
 			fcppt::make_unique_ptr<
 				projectiles::aoe_damage
 			>(
+				fcppt::cref(
+					diff_clock_
+				),
 				this->team(),
 				this->aoe(),
 				damage_,
 				1u,
-				sanguis::time_from_second(
+				sanguis::duration_second(
 					0.1f
 				),
 				damage::list(

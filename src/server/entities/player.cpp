@@ -23,6 +23,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 
 sanguis::server::entities::player::player(
+	sanguis::diff_clock const &_diff_clock,
 	server::environment::load_context &_load_context,
 	server::health const _health,
 	damage::armor const &_armor,
@@ -43,6 +44,7 @@ sanguis::server::entities::player::player(
 	),
 	with_buffs(),
 	with_health(
+		_diff_clock,
 		_health,
 		_armor
 	),
@@ -57,6 +59,7 @@ sanguis::server::entities::player::player(
 		)
 	),
 	with_weapon(
+		_diff_clock,
 		weapons::unique_ptr()
 	),
 	name_(_name),
@@ -222,25 +225,15 @@ sanguis::server::entities::player::remove_sight_range(
 }
 
 void
-sanguis::server::entities::player::on_update(
-	sanguis::time_delta const &_time
-)
+sanguis::server::entities::player::on_update()
 {
-	with_buffs::on_update(
-		_time
-	);
+	with_buffs::on_update();
 
-	with_health::on_update(
-		_time
-	);
+	with_health::on_update();
 
-	with_perks::on_update(
-		_time
-	);
+	with_perks::on_update();
 
-	with_weapon::on_update(
-		_time
-	);
+	with_weapon::on_update();
 }
 
 sanguis::messages::auto_ptr

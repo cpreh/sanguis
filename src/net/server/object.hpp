@@ -8,9 +8,9 @@
 #include "disconnect_callback.hpp"
 #include "timer_callback.hpp"
 #include "../circular_buffer.hpp"
+#include "../duration_fwd.hpp"
 #include "../id.hpp"
 #include "../port.hpp"
-#include <sge/time/duration.hpp>
 #include <awl/mainloop/io_service_fwd.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -31,7 +31,7 @@ class object
 public:
 	object(
 		awl::mainloop::io_service &,
-		sge::time::duration const &
+		net::duration const &
 	);
 
 	~object();

@@ -2,8 +2,10 @@
 #include "../weapons/weapon.hpp"
 #include "../ai/base.hpp"
 #include <fcppt/assert.hpp>
+#include <fcppt/move.hpp>
 
 sanguis::server::entities::with_ai::with_ai(
+	sanguis::diff_clock const &_diff_clock,
 	ai::create_function const &_create_ai,
 	weapons::unique_ptr _start_weapon
 )
@@ -11,7 +13,8 @@ sanguis::server::entities::with_ai::with_ai(
 	base(),
 	with_auras(),
 	with_weapon(
-		move(
+		_diff_clock,
+		fcppt::move(
 			_start_weapon
 		)
 	),
@@ -25,21 +28,15 @@ sanguis::server::entities::with_ai::~with_ai()
 }
 
 void
-sanguis::server::entities::with_ai::on_update(
-	sanguis::time_delta const &_time
-)
+sanguis::server::entities::with_ai::on_update()
 {
-	with_weapon::on_update(
-		_time
-	);
+	with_weapon::on_update();
 
 	FCPPT_ASSERT(
 		ai_
 	);
 
-	ai_->update(
-		_time
-	);
+	ai_->update();
 }
 
 void

@@ -1,8 +1,10 @@
 #include "limited.hpp"
+#include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/assert.hpp>
 #include <algorithm>
 
 sanguis::server::entities::spawns::limited::limited(
+	sanguis::diff_clock const &_diff_clock,
 	enemy_type::type const _enemy_type,
 	count_per_wave const _count_per_wave,
 	interval const _interval,
@@ -10,14 +12,15 @@ sanguis::server::entities::spawns::limited::limited(
 )
 :
 	spawn(
+		_diff_clock,
 		_enemy_type
 	),
-	diff_clock_(),
 	count_per_wave_(_count_per_wave),
-	delay_(
-		_interval.get(),
-		sge::time::activation_state::active,
-		diff_clock_.callback()
+	delay_timer_(
+		sanguis::diff_timer::parameters(
+			_diff_clock,
+			_interval.get()
+		)
 	),
 	spawned_(0),
 	limit_(_limit)
@@ -41,16 +44,12 @@ sanguis::server::entities::spawns::limited::unregister(
 }
 
 sanguis::server::entities::spawns::size_type
-sanguis::server::entities::spawns::limited::may_spawn(
-	sanguis::time_delta const &_time
-)
+sanguis::server::entities::spawns::limited::may_spawn()
 {
-	diff_clock_.update(
-		_time
-	);
-
 	return
-		delay_.update_b()
+		sge::timer::reset_when_expired(
+			delay_timer_
+		)
 		?
 			std::min(
 				static_cast<
@@ -73,5 +72,5 @@ sanguis::server::entities::spawns::limited::add_count(
 	size_type const _add
 )
 {
-	spawned_ += _add;	
+	spawned_ += _add;
 }

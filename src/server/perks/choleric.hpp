@@ -6,9 +6,8 @@
 #include "../space_unit.hpp"
 #include "../environment/object_fwd.hpp"
 #include "../entities/base_fwd.hpp"
-#include "../../diff_clock.hpp"
-#include "../../time_delta_fwd.hpp"
-#include <sge/time/timer.hpp>
+#include "../../diff_clock_fwd.hpp"
+#include "../../diff_timer.hpp"
 #include <fcppt/random/uniform.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -27,14 +26,15 @@ class choleric
 		choleric
 	);
 public:
-	choleric();
+	explicit choleric(
+		sanguis::diff_clock const &
+	);
 
 	~choleric();
 private:
 	void
 	update(
 		entities::base &,
-		sanguis::time_delta const &,
 		environment::object &
 	);
 
@@ -44,9 +44,9 @@ private:
 		perks::level_diff
 	);
 
-	sanguis::diff_clock clock_;
+	sanguis::diff_clock const &diff_clock_;
 
-	sge::time::timer shoot_timer_;
+	sanguis::diff_timer shoot_timer_;
 
 	fcppt::random::uniform<
 		server::space_unit

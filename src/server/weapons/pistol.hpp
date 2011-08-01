@@ -9,6 +9,7 @@
 #include "reload_time.hpp"
 #include "range.hpp"
 #include "damage.hpp"
+#include "../../diff_clock_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -27,6 +28,7 @@ class pistol
 	);
 public:
 	pistol(
+		sanguis::diff_clock const &,
 		weapon_type::type,
 		weapons::base_cooldown,
 		weapons::damage,

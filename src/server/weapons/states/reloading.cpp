@@ -5,7 +5,6 @@
 #include "../events/stop.hpp"
 #include "../events/reset.hpp"
 #include "../../entities/with_weapon.hpp"
-#include <fcppt/chrono/duration_arithmetic.hpp>
 
 sanguis::server::weapons::states::reloading::reloading(
 	my_context _ctx
@@ -14,13 +13,15 @@ sanguis::server::weapons::states::reloading::reloading(
 	my_base(
 		_ctx
 	),
-	diff_clock_(),
 	reload_time_(
-		context<
-			weapon
-		>().reload_time(),
-		sge::time::activation_state::active,
-		diff_clock_.callback()
+		sanguis::diff_timer::parameters(
+			context<
+				weapon
+			>().diff_clock(),
+			context<
+				weapon
+			>().reload_time().get()
+		)
 	)
 {
 }
@@ -34,10 +35,6 @@ sanguis::server::weapons::states::reloading::react(
 	events::poll const &_event
 )
 {
-	diff_clock_.update(
-		_event.time() * context<weapon>().irs()
-	);
-
 	if(
 		!reload_time_.expired()
 	)
@@ -67,7 +64,9 @@ sanguis::server::weapons::states::reloading::react(
 	events::reset const &
 )
 {
-	reload_time_.expire();
+	reload_time_.expired(	
+		true
+	);
 	
 	return discard_event();
 }

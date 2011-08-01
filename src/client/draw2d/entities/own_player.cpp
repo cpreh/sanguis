@@ -17,13 +17,9 @@ sanguis::client::draw2d::entities::own_player::~own_player()
 }
 
 void
-sanguis::client::draw2d::entities::own_player::update(
-	sanguis::time_delta const &_time
-)
+sanguis::client::draw2d::entities::own_player::update()
 {
-	player::update(
-		_time
-	);
+	player::update();
 
 	transform_(
 		this->center()

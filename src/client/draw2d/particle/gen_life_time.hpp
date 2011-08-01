@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_PARTICLE_GEN_LIFE_TIME_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_PARTICLE_GEN_LIFE_TIME_HPP_INCLUDED
 
-#include "../../../time_delta.hpp"
+#include "../../../duration.hpp"
 #include <fcppt/strong_typedef.hpp>
 
 namespace sanguis
@@ -14,7 +14,7 @@ namespace particle
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
-	sanguis::time_delta,
+	sanguis::duration,
 	gen_life_time
 );
 

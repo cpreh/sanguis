@@ -5,7 +5,6 @@
 #include "../entities/base_fwd.hpp"
 #include "../environment/object_fwd.hpp"
 #include "../level.hpp"
-#include "../../time_delta_fwd.hpp"
 #include "../../perk_type.hpp"
 #include <fcppt/noncopyable.hpp>
 
@@ -25,7 +24,6 @@ public:
 	virtual void
 	update(
 		entities::base &,
-		sanguis::time_delta const &,
 		environment::object &
 	);
 	

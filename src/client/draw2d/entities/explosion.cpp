@@ -19,11 +19,13 @@
 #include "../../../animation_type.hpp"
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/cref.hpp>
 #include <fcppt/minmax_pair_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::client::draw2d::entities::explosion::explosion(
+	sanguis::diff_clock const &_diff_clock,
 	sprite::particle::system &_particle_system,
 	load::model::collection const &_model_collection,
 	sprite::center const &_center,
@@ -31,6 +33,7 @@ sanguis::client::draw2d::entities::explosion::explosion(
 )
 :
 	entities::own(),
+	diff_clock_(_diff_clock),
 	particle_system_(
 		_particle_system
 	),
@@ -38,6 +41,7 @@ sanguis::client::draw2d::entities::explosion::explosion(
 		_model_collection
 	),
 	particles_(
+		_diff_clock,
 		draw2d::center(
 			fcppt::math::vector::structure_cast<
 				draw2d::center::value_type
@@ -78,13 +82,10 @@ sanguis::client::draw2d::entities::explosion::~explosion()
 }
 
 void
-sanguis::client::draw2d::entities::explosion::update(
-	sanguis::time_delta const &_delta
-)
+sanguis::client::draw2d::entities::explosion::update()
 {
 	ended_ =
 		particles_.update(
-			_delta,
 			draw2d::center(
 				draw2d::center::value_type::null()
 			),
@@ -111,6 +112,9 @@ sanguis::client::draw2d::entities::explosion::generate_explosion()
 			fcppt::make_unique_ptr<
 				particle::explosion
 			>(
+				fcppt::cref(
+					diff_clock_
+				),
 				properties_,
 				std::tr1::bind(
 					&explosion::generate_particle,
@@ -137,6 +141,7 @@ sanguis::client::draw2d::entities::explosion::generate_particle(
 {
 	particle::base_ptr ptr(
 		entities::explosion_particle(
+			diff_clock_,
 			_particle_type,
 			particle_system_,
 			aoe_,

@@ -7,6 +7,7 @@
 #include "../aoe.hpp"
 #include "../insert_own_callback.hpp"
 #include "../../../load/model/collection_fwd.hpp"
+#include "../../../diff_clock_fwd.hpp"
 #include <fcppt/function/object.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -39,6 +40,8 @@ public:
 private:
 	void
 	on_decay();
+
+	sanguis::diff_clock const &diff_clock_;
 
 	load::model::collection const &model_collection_;
 

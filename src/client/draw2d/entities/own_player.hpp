@@ -4,7 +4,6 @@
 #include "player.hpp"
 #include "model/parameters_fwd.hpp"
 #include "../transform_callback.hpp"
-#include "../../../time_delta_fwd.hpp"
 #include <fcppt/function/object.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -33,9 +32,7 @@ public:
 	~own_player();
 private:
 	void
-	update(
-		sanguis::time_delta const &
-	);
+	update();
 
 	draw2d::transform_callback const transform_;
 };

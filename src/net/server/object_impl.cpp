@@ -10,6 +10,7 @@
 #include "../receive_buffer_part.hpp"
 #undef max
 // asio brings in window.h's max macro :(
+#include <fcppt/chrono/asio/expires_from_now_any.hpp>
 #include <fcppt/chrono/duration_cast.hpp>
 #include <fcppt/chrono/duration_impl.hpp>
 #include <fcppt/chrono/milliseconds.hpp>
@@ -31,7 +32,7 @@
 
 sanguis::net::server::object_impl::object_impl(
 	boost::asio::io_service &_io_service,
-	sge::time::duration const &_duration
+	net::duration const &_timer_duration
 )
 :
 	io_service_(
@@ -54,11 +55,7 @@ sanguis::net::server::object_impl::object_impl(
 	data_signal_(),
 	timer_signal_(),
 	timer_duration_(
-		fcppt::chrono::duration_cast<
-			fcppt::chrono::milliseconds
-		>(
-			_duration
-		).count()
+		_timer_duration
 	),
 	deadline_timer_(
 		io_service_
@@ -506,7 +503,8 @@ sanguis::net::server::object_impl::receive_data(
 void
 sanguis::net::server::object_impl::reset_timer()
 {
-	deadline_timer_.expires_from_now(
+	fcppt::chrono::asio::expires_from_now_any(
+		deadline_timer_,
 		timer_duration_
 	);
 

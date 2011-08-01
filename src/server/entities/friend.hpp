@@ -13,8 +13,8 @@
 #include "../ai/create_function.hpp"
 #include "../weapons/unique_ptr.hpp"
 #include "../health.hpp"
+#include "../../diff_clock_fwd.hpp"
 #include "../../friend_type.hpp"
-#include "../../time_delta_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -38,6 +38,7 @@ class friend_
 	);
 public:
 	friend_(
+		sanguis::diff_clock const &,
 		friend_type::type,
 		server::environment::load_context &,
 		damage::armor const &,
@@ -48,9 +49,7 @@ public:
 	);
 private:
 	void
-	on_update(
-		sanguis::time_delta const &
-	);
+	on_update();
 
 	entity_type::type
 	type() const;

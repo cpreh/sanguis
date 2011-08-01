@@ -8,7 +8,7 @@
 #include "../../perk/state_fwd.hpp"
 #include "../../perk/tree.hpp"
 #include "../../../perk_type.hpp"
-#include "../../../time_delta_fwd.hpp"
+#include "../../../duration_fwd.hpp"
 #include <sge/cegui/toolbox/scoped_gui_sheet.hpp>
 #include <sge/cegui/toolbox/scoped_layout.hpp>
 #include <fcppt/container/tree/object_decl.hpp>
@@ -47,7 +47,7 @@ public:
 
 	void
 	process(
-		sanguis::time_delta const &
+		sanguis::duration const &
 	);
 
 	void

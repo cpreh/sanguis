@@ -3,7 +3,6 @@
 void
 sanguis::server::perks::perk::update(
 	entities::base &,
-	sanguis::time_delta const &,
 	environment::object &
 )
 {

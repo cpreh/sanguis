@@ -2,10 +2,12 @@
 #include "textures.hpp"
 #include "map_get_or_create.hpp"
 #include "../log.hpp"
+#include "../../duration.hpp"
+#include "../../duration_second.hpp"
 #include "../../exception.hpp"
-#include <sge/time/millisecond.hpp>
-#include <sge/time/duration.hpp>
-#include <fcppt/log/headers.hpp>
+#include <fcppt/chrono/duration_cast.hpp>
+#include <fcppt/chrono/milliseconds.hpp>
+#include <fcppt/chrono/rep.hpp>
 #include <fcppt/filesystem/exists.hpp>
 #include <fcppt/filesystem/is_directory.hpp>
 #include <fcppt/filesystem/is_regular.hpp>
@@ -14,6 +16,7 @@
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/io/ifstream.hpp>
 #include <fcppt/io/istringstream.hpp>
+#include <fcppt/log/headers.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -88,20 +91,24 @@ sanguis::load::resource::animations::do_load(
 		);
 
 	fcppt::optional<
-		sge::time::duration
+		sanguis::duration
 	> const_delay;
 
 	if (boost::algorithm::starts_with(line,FCPPT_TEXT("frame_length ")))
 		const_delay =
-			sge::time::millisecond(
-				fcppt::lexical_cast<
-					sge::time::unit
-				>(
-					line.substr(
-						fcppt::string(
-							FCPPT_TEXT("frame_length ")
+			fcppt::chrono::duration_cast<
+				sanguis::duration
+			>(
+				fcppt::chrono::milliseconds(
+					fcppt::lexical_cast<
+						fcppt::chrono::rep
+					>(
+						line.substr(
+							fcppt::string(
+								FCPPT_TEXT("frame_length ")
+							)
+							.length()
 						)
-						.length()
 					)
 				)
 			);
@@ -118,13 +125,13 @@ sanguis::load::resource::animations::do_load(
 		if (line.empty())
 			continue;
 
-		sge::time::duration delay(0);
+		sanguis::duration delay(0);
 		fcppt::string filename = line;
 
 		if (!const_delay)
 		{
 			fcppt::io::istringstream ss(line);
-			sge::time::unit temp_delay;
+			fcppt::chrono::rep temp_delay;
 			ss >> temp_delay >> std::ws;
 			if (!ss)
 				throw exception(
@@ -143,7 +150,14 @@ sanguis::load::resource::animations::do_load(
 						ss.tellg()
 					)
 				);
-			delay = sge::time::millisecond(temp_delay);
+			delay =
+				fcppt::chrono::duration_cast<
+					sanguis::duration
+				>(
+					fcppt::chrono::milliseconds(
+						temp_delay
+					)
+				);
 		}
 		else
 		{
@@ -205,8 +219,9 @@ sanguis::load::resource::animations::load_without_frames_file(
 	animation::series ret;
 	ret.push_back(
 		animation::entity(
-			sge::time::millisecond(
-				static_cast<sge::time::unit>(1)),
+			sanguis::duration_second(
+				1.f
+			),
 			load_texture(first_path)
 		)
 	);

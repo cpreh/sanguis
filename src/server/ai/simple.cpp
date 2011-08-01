@@ -13,7 +13,8 @@
 #include "../direction.hpp"
 #include "../space_unit.hpp"
 #include "../vector.hpp"
-#include <sge/time/second.hpp>
+#include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/chrono/seconds.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/comparison.hpp>
@@ -26,18 +27,21 @@
 #include <fcppt/optional.hpp>
 
 sanguis::server::ai::simple::simple(
+	sanguis::diff_clock const &_diff_clock,
 	entities::with_ai &_me,
 	entities::auto_weak_link _owner
 )
 :
-	diff_clock_(),
 	pos_timer_(
-		sge::time::second(
-			0 // TODO	
-		),
-		sge::time::activation_state::active,
-		diff_clock_.callback(),
-		sge::time::expiration_state::expired
+		sanguis::diff_timer::parameters(
+			_diff_clock,
+			fcppt::chrono::seconds(
+				0 // TODO
+			)
+		)
+		.expired(
+			true
+		)
 	),
 	me_(_me),
 	target_(),
@@ -74,20 +78,13 @@ sanguis::server::ai::simple::~simple()
 
 // TODO: move this!
 
-#include <sge/time/second_f.hpp>
 #include <fcppt/random/uniform.hpp>
 #include <fcppt/random/make_inclusive_range.hpp>
 #include <fcppt/math/twopi.hpp>
 
 void
-sanguis::server::ai::simple::update(
-	sanguis::time_delta const &_time
-)
+sanguis::server::ai::simple::update()
 {
-	diff_clock_.update(
-		_time
-	);
-
 	if(
 		!target_ && !potential_targets_.empty()
 	)
@@ -122,7 +119,9 @@ sanguis::server::ai::simple::update(
 	);
 
 	if(
-		!pos_timer_.update_b()
+		!sge::timer::reset_when_expired(
+			pos_timer_
+		)
 	)
 		return;
 
@@ -148,7 +147,7 @@ sanguis::server::ai::simple::update(
 		)
 	);
 
-	space_unit const distance(
+	server::space_unit const distance(
 		collision::distance(
 			*target_,
 			me_
@@ -156,7 +155,9 @@ sanguis::server::ai::simple::update(
 	);
 
 	pos_timer_.interval(
-		sge::time::second_f(
+		fcppt::chrono::duration<
+			server::space_unit
+		>(
 			distance * (1.f + rng()) / 1000.f // TODO!
 		)
 	);
