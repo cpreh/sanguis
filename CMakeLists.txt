@@ -79,7 +79,7 @@ INCLUDE_DIRECTORIES(
 FIND_PACKAGE(
 	SGE REQUIRED
 	COMPONENTS audio cegui config console fonttext image image2d input
-	parse projectile renderer sprite systems texture time viewport window
+	parse projectile renderer sprite systems texture viewport window
 )
 
 INCLUDE_DIRECTORIES(
