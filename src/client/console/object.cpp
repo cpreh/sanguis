@@ -74,7 +74,7 @@ sanguis::client::console::object::draw()
 	if(
 		this->active()
 	)
-		gfx_.draw();
+		gfx_.render();
 }
 	
 sge::console::object &
