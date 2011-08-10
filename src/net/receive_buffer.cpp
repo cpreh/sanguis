@@ -71,7 +71,7 @@ sanguis::net::receive_buffer::bytes_received(
 		end_ == impl_.end()
 	)
 		end_ = impl_.begin();
-	
+
 	FCPPT_ASSERT(
 		begin_ != end_
 	);
@@ -132,7 +132,7 @@ sanguis::net::receive_buffer::erase(
 				begin_
 				-
 				impl_.data()
-				+ 
+				+
 				static_cast<
 					std::ptrdiff_t
 				>(

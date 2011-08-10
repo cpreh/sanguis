@@ -77,7 +77,7 @@ sanguis::client::draw2d::particle::container::update(
 		children_container::iterator it(
 			this->children().begin()
 		);
-		it !=this-> children().end(); 
+		it !=this-> children().end();
 	)
 	{
 		if(

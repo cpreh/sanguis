@@ -83,7 +83,7 @@ sanguis::creator::generator::car_park(
 			),
 			generator::size(
 				3000,
-				3000	
+				3000
 			)
 		);
 }

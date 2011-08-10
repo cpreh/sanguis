@@ -27,7 +27,7 @@ extract_length(
 	typedef typename Concept::length_type length_type;
 
 	length_type ret;
-		
+
 	fcppt::endianness::copy_n_to_host(
 		_memory,
 		sizeof(length_type),

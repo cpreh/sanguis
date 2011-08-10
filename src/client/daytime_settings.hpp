@@ -86,7 +86,7 @@ private:
 		time_speed_con_,
 		reset_day_con_,
 		reset_time_con_;
-	
+
 	std::tm current_time_;
 };
 

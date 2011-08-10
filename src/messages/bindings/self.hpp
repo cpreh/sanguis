@@ -73,7 +73,7 @@ place(
 		_value,
 		_mem
 	);
-	
+
 	fcppt::algorithm::copy_n(
 		_value.memory().data(),
 		_value.memory().size(),
@@ -84,7 +84,7 @@ place(
 template<
 	typename Type
 >
-Type 
+Type
 make(
 	majutsu::concepts::dynamic_memory::tag const *const _tag,
 	bindings::self<
@@ -122,7 +122,7 @@ make(
 		&buffer
 	);
 
-	return 
+	return
 		messages::serialization::make_object<
 			Type
 		>(

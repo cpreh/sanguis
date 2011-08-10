@@ -19,7 +19,7 @@ public:
 		damage_type::type,
 		unit
 	);
-	
+
 	damage_type::type
 	type() const;
 

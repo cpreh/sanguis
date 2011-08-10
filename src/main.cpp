@@ -125,7 +125,7 @@ try
 				sanguis::load::server_context
 			>()
 		);
-	
+
 	typedef fcppt::scoped_ptr<
 		sanguis::main_object
 	> main_object_scoped_ptr;
@@ -142,7 +142,7 @@ try
 				vm
 			)
 		);
-	
+
 	return obj->run();
 }
 catch(

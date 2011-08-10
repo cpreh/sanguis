@@ -51,7 +51,7 @@ private:
 	generator::seed const seed_;
 
 	generator::name const name_;
-	
+
 	generator::size const size_;
 };
 

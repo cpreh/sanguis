@@ -21,15 +21,15 @@ sanguis::server::perks::tree::choosable(
 	)
 		return false;
 
-	typedef 
+	typedef
 	fcppt::container::tree::pre_order<
 		tree::object const
 	> traversal;
-	
+
 	traversal trav(
 		_tree
 	);
-	
+
 	traversal::iterator const it(
 		std::find_if(
 			trav.begin(),
@@ -39,7 +39,7 @@ sanguis::server::perks::tree::choosable(
 			)
 		)
 	);
-	
+
 	if(
 		it == trav.end()
 	)

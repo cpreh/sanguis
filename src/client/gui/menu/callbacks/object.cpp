@@ -6,7 +6,7 @@ sanguis::client::gui::menu::callbacks::object::object(
 	callbacks::quickstart const &_quickstart,
 	callbacks::quit const &_quit
 )
-: 
+:
 	connect_(_connect),
 	cancel_connect_(_cancel_connect),
 	quickstart_(_quickstart),

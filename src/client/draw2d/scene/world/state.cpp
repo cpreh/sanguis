@@ -203,7 +203,7 @@ sanguis::client::draw2d::scene::world::state::draw(
 				renderer_,
 				vertex_declaration_
 			);
-	
+
 			(*batches_).at(
 				pos
 			).draw(

@@ -80,7 +80,7 @@ sanguis::server::states::running::react(
 		running,
 		boost::statechart::result
 	> functor_type;
-	
+
 	functor_type functor(
 		*this,
 		_message.id()
@@ -212,7 +212,7 @@ sanguis::server::states::running::operator()(
 				<< _error.string()
 		);
 	}
-		
+
 	return discard_event();
 }
 

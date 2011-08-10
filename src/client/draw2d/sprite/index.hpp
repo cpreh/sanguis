@@ -21,7 +21,7 @@ public:
 	explicit index(
 		value_type
 	);
-	
+
 	value_type
 	get() const;
 private:

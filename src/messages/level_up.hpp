@@ -24,7 +24,7 @@ typedef messages::make_class<
 				messages::level
 			>
 		>
-	> 
+	>
 >::type level_up;
 
 }

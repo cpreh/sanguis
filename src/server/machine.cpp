@@ -159,7 +159,7 @@ sanguis::server::machine::send_to_all(
 			// TODO!
 			continue;
 		}
-		
+
 		net_.queue_send(
 			id
 		);
@@ -224,7 +224,7 @@ sanguis::server::machine::send_unicast(
 sanguis::load::context_base const &
 sanguis::server::machine::resources() const
 {
-	return 
+	return
 		resources_;
 }
 
@@ -277,7 +277,7 @@ sanguis::server::machine::data_callback(
 {
 	for(;;)
 	{
-		messages::auto_ptr message( 
+		messages::auto_ptr message(
 			net::deserialize(
 				_data
 			)

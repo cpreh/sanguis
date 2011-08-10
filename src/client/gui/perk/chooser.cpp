@@ -494,16 +494,16 @@ sanguis::client::perk_chooser::image_map::const_iterator const
 	sanguis::client::perk_chooser::load_from_cache(
 		perk_type::type const r)
 {
-	fcppt::filesystem::path const p = 
+	fcppt::filesystem::path const p =
 		media_path()/
 		FCPPT_TEXT("menu")/
 		FCPPT_TEXT("buttons")/
 		FCPPT_TEXT("perks");
 
-	fcppt::filesystem::path const base = 
+	fcppt::filesystem::path const base =
 		p/from_perk_type(r);
 
-	image_map::const_iterator pi = 
+	image_map::const_iterator pi =
 		images_.find(
 			r
 		);
@@ -513,7 +513,7 @@ sanguis::client::perk_chooser::image_map::const_iterator const
 
 	perk_image new_image;
 
-	new_image.normal = 
+	new_image.normal =
 		sge::gui::make_image(
 			image_loader_.load(
 				base/
@@ -521,7 +521,7 @@ sanguis::client::perk_chooser::image_map::const_iterator const
 			)
 		);
 
-	new_image.hover = 
+	new_image.hover =
 		sge::gui::make_image(
 			image_loader_.load(
 				base/

@@ -29,7 +29,7 @@ public:
 	operator[](
 		sanguis::animation_sound_type::type
 	) const;
-	
+
 	sound();
 
 	sound(

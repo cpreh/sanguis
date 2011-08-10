@@ -74,7 +74,7 @@ public:
 		server::timer_callback const &
 	);
 
-	void 
+	void
 	stop();
 private:
 	fcppt::scoped_ptr<

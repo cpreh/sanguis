@@ -73,7 +73,7 @@ private:
 	sanguis::diff_timer life_timer_;
 
 	particle::align_type::type const alignment_;
-	
+
 	fcppt::random::uniform<
 		particle::rotation::value_type
 	> dispersion_angle_;

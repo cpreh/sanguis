@@ -4,7 +4,7 @@
 #include "unit_range.hpp"
 #include <fcppt/strong_typedef.hpp>
 
-namespace sanguis 
+namespace sanguis
 {
 namespace client
 {

@@ -37,7 +37,7 @@ public:
 
 	linear_type const
 	linear();
-	
+
 	void
 	constant(
 		constant_type const &

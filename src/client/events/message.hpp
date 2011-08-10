@@ -27,7 +27,7 @@ public:
 	explicit message(
 		messages::auto_ptr message
 	);
-	
+
 	~message();
 
 	messages::shared_ptr const

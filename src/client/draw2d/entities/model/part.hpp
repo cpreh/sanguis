@@ -70,12 +70,12 @@ private:
 	typedef fcppt::scoped_ptr<
 		load::model::animation::context
 	> animation_context_ptr;
-	
+
 	void
 	load_animation(
 		animation_type::type
 	);
-	
+
 	void
 	update_orientation(
 		sprite::rotation
@@ -109,7 +109,7 @@ private:
 	sound_state_ptr sound_state_;
 
 	animation_context_ptr animation_context_;
-	
+
 	typedef fcppt::scoped_ptr<
 		sprite::normal::texture_animation
 	> scoped_texture_animation;

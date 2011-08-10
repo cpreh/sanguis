@@ -58,7 +58,7 @@ sanguis::server::weapons::weapon::attack(
 		!this->usable()
 	)
 		return;
-	
+
 	this->process_event(
 		events::shoot(
 			_from,

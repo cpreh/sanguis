@@ -34,7 +34,7 @@ sanguis::load::resource::textures::load(
 	return
 		resource::map_get_or_create(
 			textures_,
-			_id, 
+			_id,
 			std::tr1::bind(
 				&textures::do_load,
 				this,
@@ -48,7 +48,7 @@ sanguis::load::resource::textures::load(
 	fcppt::filesystem::path const &_path
 ) const
 {
-	return 
+	return
 		resource::texture_context(
 			resource::map_get_or_create(
 				unnamed_textures_,
@@ -116,7 +116,7 @@ sanguis::load::resource::textures::textures(
 			!= FCPPT_TEXT(".tex")
 		)
 			continue;
-		
+
 		// and parse line by line
 		fcppt::io::ifstream file(
 			path
@@ -225,7 +225,7 @@ sanguis::load::resource::textures::do_load_unnamed(
 	fcppt::filesystem::path const &_path
 ) const
 {
-	return 
+	return
 		fcppt::make_shared_ptr<
 			texture_context_impl
 		>(

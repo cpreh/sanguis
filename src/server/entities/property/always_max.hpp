@@ -42,7 +42,7 @@ private:
 	);
 
 	value_type current_;
-	
+
 	change_signal change_signal_;
 };
 

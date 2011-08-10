@@ -30,7 +30,7 @@ sanguis::load::resource::animations::load(
 {
 	return map_get_or_create(
 		animations_,
-		dir, 
+		dir,
 		std::tr1::bind(
 			&animations::do_load,
 			this,
@@ -79,7 +79,7 @@ sanguis::load::resource::animations::do_load(
 				framesfile
 			)
 			+ FCPPT_TEXT("\""));
-	
+
 	// read first line, determine if it has constant frame time
 	fcppt::string line;
 	if (!std::getline(file,line))
@@ -114,7 +114,7 @@ sanguis::load::resource::animations::do_load(
 			);
 	else
 		file.seekg(0, std::ios_base::beg);
-	
+
 	animation::series anim;
 
 	unsigned lineno = const_delay ? 2 : 1;
@@ -175,7 +175,7 @@ sanguis::load::resource::animations::do_load(
 
 		++lineno;
 	}
-		
+
 	return anim;
 }
 
@@ -183,7 +183,7 @@ sge::texture::const_part_ptr const
 sanguis::load::resource::animations::load_texture(
 	fcppt::filesystem::path const &p) const
 {
-	return textures_.do_load_inner(p);	
+	return textures_.do_load_inner(p);
 }
 
 sanguis::load::resource::animation::series const
@@ -193,7 +193,7 @@ sanguis::load::resource::animations::load_without_frames_file(
 	fcppt::filesystem::directory_iterator const first_file(
 		fcppt::filesystem::first_file(
 			dir));
-	
+
 	if(first_file == fcppt::filesystem::directory_iterator())
 		throw sanguis::exception(
 			fcppt::filesystem::path_to_string(
@@ -201,7 +201,7 @@ sanguis::load::resource::animations::load_without_frames_file(
 			)
 			+ FCPPT_TEXT(" is empty!")
 		);
-	
+
 	fcppt::filesystem::path const first_path(
 		*first_file);
 

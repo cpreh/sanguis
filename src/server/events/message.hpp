@@ -29,9 +29,9 @@ public:
 		messages::auto_ptr,
 		net::id
 	);
-	
+
 	~message();
-	
+
 	messages::shared_ptr const
 	get() const;
 

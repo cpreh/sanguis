@@ -12,7 +12,7 @@ namespace types
 {
 
 typedef std::vector<
-	types::string	
+	types::string
 > string_vector;
 
 }

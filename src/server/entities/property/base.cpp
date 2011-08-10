@@ -1,5 +1,5 @@
 #include "base.hpp"
-	
+
 sanguis::server::entities::property::base::base(
 	value const _base
 )
@@ -25,7 +25,7 @@ sanguis::server::entities::property::base::constant(
 )
 {
 	constant_ = _constant;
-	
+
 	recalc_max();
 }
 

@@ -253,7 +253,7 @@ sanguis::server::entities::enemies::create(
 				server::probability(0.5f),
 				server::exp(12),
 				_spawn
-			)		
+			)
 		);
 	case enemy_type::size:
 		break;

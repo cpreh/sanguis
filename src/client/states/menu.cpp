@@ -130,7 +130,7 @@ sanguis::client::states::menu::react(
 		fcppt::log::_
 			<< FCPPT_TEXT("menu: connect")
 	);
-		
+
 	context<machine>().send(
 		messages::create(
 			messages::client_info(

@@ -26,7 +26,7 @@ typedef messages::make_class<
 				roles::health
 			>
 		>
-	> 
+	>
 >::type health;
 
 }

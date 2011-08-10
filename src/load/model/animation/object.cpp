@@ -86,7 +86,7 @@ load_delay(
 {
 	int const *const ret(
 		sge::parse::json::find_member<
-			int	
+			int
 		>(
 			_members,
 			FCPPT_TEXT("delay")
@@ -135,7 +135,7 @@ sanguis::load::model::animation::object::object(
 	sounds_(),
 	texture_()
 {
-	optional_texture_identifier _texture = 
+	optional_texture_identifier _texture =
 		param_.new_texture(
 			find_texture(
 				object_.members
@@ -151,7 +151,7 @@ sanguis::load::model::animation::object::object(
 				param_.path()
 			)
 		);
-	
+
 	texture_ = *_texture;
 
 	{
@@ -193,9 +193,9 @@ sanguis::load::model::animation::object::sounds() const
 }
 
 sanguis::load::model::animation::context_ptr
-sanguis::load::model::animation::object::load() const 
+sanguis::load::model::animation::object::load() const
 {
-	return 
+	return
 		// TODO: make_unique_ptr?
 		animation::context_ptr(
 			new animation::context(
@@ -254,7 +254,7 @@ sanguis::load::model::animation::object::fill_cache(
 				range[1]
 			)
 		);
-	
+
 	if(
 		begin >= end
 	)

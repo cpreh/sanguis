@@ -21,8 +21,8 @@ protected:
 	base();
 public:
 	virtual ~base();
-	
-	virtual types::message::type 
+
+	virtual types::message::type
 	type() const = 0;
 
 	virtual majutsu::const_raw_pointer

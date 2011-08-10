@@ -23,7 +23,7 @@ protected:
 	ghost_base();
 
 	virtual ~ghost_base();
-	
+
 	virtual boost::logic::tribool const
 	can_collide_with(
 		collision::body_base const &

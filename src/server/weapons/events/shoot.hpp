@@ -31,7 +31,7 @@ public:
 		entities::with_weapon &from,
 		server::vector const &to
 	);
-	
+
 	entities::with_weapon &
 	from() const;
 

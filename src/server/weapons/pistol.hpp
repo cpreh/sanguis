@@ -37,7 +37,7 @@ public:
 		weapons::reload_time,
 		weapons::range
 	);
-	
+
 	~pistol();
 private:
 	void

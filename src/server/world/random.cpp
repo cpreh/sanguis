@@ -46,7 +46,7 @@ sanguis::server::world::random(
 		fcppt::filesystem::create_directories_recursive(
 			cache_path
 		);
-	
+
 	fcppt::filesystem::path const world_path(
 		cache_path
 		/ FCPPT_TEXT("world01")

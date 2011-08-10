@@ -47,7 +47,7 @@ public:
 	);
 
 	typedef boost::iterator_range<
-		const_pointer	
+		const_pointer
 	> iterator_range;
 
 	typedef boost::joined_range<

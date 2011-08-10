@@ -110,7 +110,7 @@ INCLUDE(
 )
 
 SGE_CONFIG_ADD_CUSTOM_PATH(
-	sanguis	
+	sanguis
 	media
 	${CMAKE_SOURCE_DIR}/media
 	${INSTALL_MEDIA_DIR}

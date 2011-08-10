@@ -28,7 +28,7 @@ public:
 		sge::parse::json::element_vector const &,
 		resource::sounds const &
 	);
-	
+
 	~random_sound();
 
 	sge::audio::sound::positional_ptr const

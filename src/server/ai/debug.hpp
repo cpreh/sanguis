@@ -14,7 +14,7 @@ namespace ai
 
 class debug
 :
-	public ai::base 
+	public ai::base
 {
 	FCPPT_NONCOPYABLE(
 		debug

@@ -19,7 +19,7 @@ typedef messages::make_class<
 				types::message::pause
 			>::type
 		>
-	> 
+	>
 >::type pause;
 
 }

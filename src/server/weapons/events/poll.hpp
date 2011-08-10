@@ -28,7 +28,7 @@ public:
 	explicit poll(
 		entities::with_weapon &owner
 	);
-	
+
 	entities::with_weapon &
 	owner() const;
 private:

@@ -57,7 +57,7 @@ sanguis::server::waves::simple::process(
 		waves_spawned_ == waves_
 	)
 		return;
-	
+
 	++waves_spawned_;
 
 	for(

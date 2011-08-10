@@ -14,7 +14,7 @@ class add_visitor
 	);
 public:
 	explicit add_visitor(
-		CEGUI::TreeItem &	
+		CEGUI::TreeItem &
 	);
 
 	typedef void result_type;
@@ -37,7 +37,7 @@ struct remove_visitor
 	);
 public:
 	explicit remove_visitor(
-		CEGUI::TreeItem &	
+		CEGUI::TreeItem &
 	);
 
 	typedef void result_type;

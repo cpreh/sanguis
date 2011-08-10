@@ -10,7 +10,7 @@ sanguis::server::events::message::message(
 		// TODO: this is not safe!
 		_message.release()
 	),
-	id_(_id) 
+	id_(_id)
 {
 }
 

@@ -81,12 +81,12 @@ public:
 
 	void
 	disconnect();
-	
+
 	void
 	send(
 		messages::auto_ptr
 	);
-	
+
 	bool
 	process(
 		sanguis::duration const &
@@ -121,7 +121,7 @@ public:
 
 	sge::console::gfx &
 	console_gfx();
-	
+
 	load::context const &
 	resources() const;
 
@@ -139,13 +139,13 @@ public:
 private:
 	void
 	connect_callback();
-	
+
 	void
 	error_callback(
 		fcppt::string const &,
 		boost::system::error_code const &
 	);
-	
+
 	void
 	data_callback(
 		net::receive_buffer &
@@ -179,7 +179,7 @@ private:
 	sge::font::text::drawer &font_drawer_;
 
 	sge::console::gfx &console_gfx_;
-	
+
 	bool running_;
 
 	client::server_callback const server_callback_;

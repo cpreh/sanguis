@@ -104,7 +104,7 @@ struct load<
 				serialization::endianness()
 			)
 		);
-		
+
 		raw_container vec(
 			sz + length_sz
 		);

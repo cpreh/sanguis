@@ -222,7 +222,7 @@ sanguis::server::ai::simple::update()
 					*angle
 				)
 			);
-	
+
 		entities::property::current_to_max(
 			speed
 		);
@@ -256,7 +256,7 @@ sanguis::server::ai::simple::target_enters(
 		target_
 	)
 		return;
-	
+
 	// if we already have a target
 	// and the new target is farther away
 	// do nothing
@@ -272,7 +272,7 @@ sanguis::server::ai::simple::target_enters(
 		)
 	)
 		return;
-			
+
 	target_ = _new_target.link();
 }
 

@@ -37,7 +37,7 @@ poly_count(
 	sanguis::creator::geometry::shape const &_shape
 )
 {
-	return _shape.polygon().size();	
+	return _shape.polygon().size();
 }
 
 }

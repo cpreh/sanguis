@@ -33,7 +33,7 @@ public:
 		optional_texture_identifier const &,
 		resource::sounds const &
 	);
-	
+
 	fcppt::filesystem::path const &
 	path() const;
 
@@ -53,7 +53,7 @@ public:
 	new_texture(
 		optional_texture_identifier const &
 	) const;
-	
+
 	resource::sounds const &
 	sounds() const;
 private:

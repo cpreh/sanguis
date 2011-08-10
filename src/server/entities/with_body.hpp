@@ -70,7 +70,7 @@ protected:
 	on_transfer(
 		entities::transfer_parameters const &
 	);
-	
+
 	void
 	on_destroy();
 private:

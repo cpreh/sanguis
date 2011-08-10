@@ -32,7 +32,7 @@ public:
 	);
 
 	~healthbar();
-	
+
 	void
 	update_health(
 		client::health health,
@@ -42,7 +42,7 @@ public:
 	client::health const
 	max_health() const;
 
-	client::health const	
+	client::health const
 	health() const;
 
 	void
@@ -76,7 +76,7 @@ private:
 	sprite::colored::object
 		background_,
 		foreground_;
-	
+
 	client::health
 		health_,
 		max_health_;

@@ -51,7 +51,7 @@ private:
 	void
 	on_update();
 
-	virtual size_type 
+	virtual size_type
 	may_spawn() = 0;
 
 	virtual void

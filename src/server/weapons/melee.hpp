@@ -37,12 +37,12 @@ private:
 	do_attack(
 		delayed_attack const &
 	);
-	
+
 	void
 	on_init_attack(
 		entities::with_weapon &owner
 	);
-	
+
 	void
 	on_castpoint(
 		entities::with_weapon &owner

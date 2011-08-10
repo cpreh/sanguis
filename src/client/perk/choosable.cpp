@@ -54,13 +54,13 @@ sanguis::client::perk::choosable(
 		node.value().required_parent_level().get()
 	)
 		return perk::choosable_state::parent_level;
-	
+
 	if(
 		node.value().required_player_level().get()
 		> _player_level
 	)
 		return perk::choosable_state::player_level;
-	
+
 	if(
 		_player_level.get()
 		==

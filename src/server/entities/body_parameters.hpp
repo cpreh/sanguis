@@ -23,7 +23,7 @@ public:
 		sge::projectile::shape::shared_base_ptr,
 		collision::solidity const &
 	);
-	
+
 	sge::projectile::shape::shared_base_ptr const
 	shape() const;
 

@@ -26,9 +26,9 @@ public:
 		sanguis::diff_clock const &,
 		environment::object &
 	);
-	
+
 	~pickup_spawner();
-	
+
 	void
 	spawn(
 		server::probability,
@@ -47,7 +47,7 @@ private:
 	);
 
 	sanguis::diff_clock const &diff_clock_;
-	
+
 	environment::object &env_;
 
 	fcppt::random::uniform<

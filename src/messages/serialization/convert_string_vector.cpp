@@ -30,7 +30,7 @@ convert(
 				*elem_it
 			)
 		);
-	
+
 	return dest;
 }
 
@@ -43,7 +43,7 @@ sanguis::messages::serialization::convert_string_vector(
 {
 	return
 		::convert<
-			sanguis::messages::types::string_vector		
+			sanguis::messages::types::string_vector
 		>(
 			_src,
 			fcppt::utf8::from_fcppt_string

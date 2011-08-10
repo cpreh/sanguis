@@ -27,7 +27,7 @@ sanguis::server::weapons::states::ready::react(
 		)
 	)
 		return discard_event();
-	
+
 	context<
 		weapon
 	>().init_attack(

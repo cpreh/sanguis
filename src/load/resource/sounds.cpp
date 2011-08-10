@@ -40,7 +40,7 @@ sanguis::load::resource::sounds::load(
 	return
 		resource::map_get_or_create(
 			sounds_,
-			_name, 
+			_name,
 			std::tr1::bind(
 				&sounds::do_load,
 				this,
@@ -129,7 +129,7 @@ try
 {
 	switch(
 		_type
-	) 
+	)
 	{
 	case sanguis::load::sound_type::stream:
 		return

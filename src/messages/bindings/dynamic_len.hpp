@@ -90,7 +90,7 @@ place(
 		_value,
 		_mem
 	);
-	
+
 	for(
 		typename Type::const_iterator it(
 			_value.begin()
@@ -120,7 +120,7 @@ template<
 	typename Type,
 	typename Adapted
 >
-Type 
+Type
 make(
 	majutsu::concepts::dynamic_memory::tag const *const _tag,
 	bindings::dynamic_len<

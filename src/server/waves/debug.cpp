@@ -14,7 +14,7 @@ sanguis::server::waves::debug::~debug()
 {
 }
 
-void 
+void
 sanguis::server::waves::debug::process(
 	environment::object &_env,
 	environment::load_context &_load_context
@@ -40,7 +40,7 @@ sanguis::server::waves::debug::process(
 				index
 			)
 		);
-	
+
 	spawned_ = true;
 }
 

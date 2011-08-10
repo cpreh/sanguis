@@ -11,12 +11,12 @@ namespace particle
 {
 namespace align_type
 {
-enum type 
-{ 
+enum type
+{
 	none,
 	to_center,
 	random,
-	size 
+	size
 };
 }
 

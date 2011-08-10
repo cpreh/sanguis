@@ -12,7 +12,7 @@ namespace entities
 namespace model
 {
 
-class object; 
+class object;
 
 }
 }

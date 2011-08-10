@@ -44,7 +44,7 @@ protected:
 		server::team::type,
 		auras::influence::type
 	);
-	
+
 	sanguis::entity_id
 	owner() const;
 private:

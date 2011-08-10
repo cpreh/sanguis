@@ -25,7 +25,7 @@ sanguis::messages::serialization::dispatcher_register<T>::dispatcher_register(
 	typedef fcppt::unique_ptr<
 		dispatcher_base
 	> dispatcher_base_unique_ptr;
-	
+
 	typedef typename boost::mpl::at_c<
 		typename T::memory_type::types,
 		0
@@ -42,7 +42,7 @@ sanguis::messages::serialization::dispatcher_register<T>::dispatcher_register(
 			),
 			dispatcher_base_unique_ptr(
 				fcppt::make_unique_ptr<
-					dispatcher<T>	
+					dispatcher<T>
 				>()
 			)
 		).second

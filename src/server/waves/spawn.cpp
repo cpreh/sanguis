@@ -24,7 +24,7 @@ sanguis::server::waves::spawn(
 )
 {
 	// TODO: put this randomizer somewhere else!
-	
+
 	typedef std::tr1::uniform_real<
 		space_unit
 	> uniform_su;
@@ -68,7 +68,7 @@ sanguis::server::waves::spawn(
 			0
 		)
 	);
-	
+
 	server::center const center(
 		scale
 		* radius

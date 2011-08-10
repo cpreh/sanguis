@@ -35,7 +35,7 @@ sanguis::server::states::paused::react(
 		paused,
 		boost::statechart::result
 	> functor_type;
-	
+
 	functor_type functor(
 		*this,
 		_message.id()
@@ -48,7 +48,7 @@ sanguis::server::states::paused::react(
 		>,
 		functor_type
 	> dispatcher;
-	
+
 	return
 		dispatcher(
 			*_message.get(),

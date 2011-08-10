@@ -41,7 +41,7 @@ class running
 public:
 	typedef boost::mpl::list<
 		boost::statechart::custom_reaction<
-			events::message	
+			events::message
 		>,
 		boost::statechart::custom_reaction<
 			events::disconnect
@@ -53,7 +53,7 @@ public:
 	);
 
 	~running();
-	
+
 	boost::statechart::result
 	react(
 		events::message const &

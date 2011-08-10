@@ -57,11 +57,11 @@ sanguis::creator::generator::generate(
 			+ _param.name().get()
 			+ FCPPT_TEXT(" not found!")
 		);
-	
+
 	generator::randgen gen(
 		_param.seed()
 	);
-	
+
 	return
 		it->second(
 			generator::parameters(

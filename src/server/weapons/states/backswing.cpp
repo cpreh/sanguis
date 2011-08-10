@@ -40,7 +40,7 @@ sanguis::server::weapons::states::backswing::react(
 		!cooldown_.expired()
 	)
 		return discard_event();
-	
+
 	context<weapon>().use_magazine_item();
 
 	_event.owner().attack_ready();

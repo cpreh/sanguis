@@ -12,7 +12,7 @@
 #include <fcppt/noncopyable.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
 
-namespace sanguis 
+namespace sanguis
 {
 namespace client
 {
@@ -26,7 +26,7 @@ class container
 	public base
 {
 	FCPPT_NONCOPYABLE(
-		container	
+		container
 	);
 public:
 	typedef boost::ptr_list<

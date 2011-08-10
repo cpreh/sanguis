@@ -52,15 +52,15 @@ private:
 	do_damage(
 		with_health &
 	);
-	
+
 	void
 	on_update();
-	
+
 	void
 	on_remove();
 
 	sanguis::diff_clock const &diff_clock_;
-	
+
 	sanguis::diff_timer slowdown_timer_;
 
 	damage::unit const damage_;

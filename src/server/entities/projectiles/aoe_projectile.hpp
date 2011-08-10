@@ -44,7 +44,7 @@ protected:
 	);
 
 	~aoe_projectile();
-	
+
 	server::radius const
 	aoe() const;
 private:

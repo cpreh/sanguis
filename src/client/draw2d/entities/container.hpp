@@ -58,7 +58,7 @@ public:
 	);
 
 	~container();
-	
+
 	sprite::center const
 	center() const;
 protected:
@@ -89,7 +89,7 @@ protected:
 	speed(
 		draw2d::speed const &
 	);
-	
+
 	draw2d::speed const
 	speed() const;
 
@@ -130,7 +130,7 @@ private:
 	draw2d::speed speed_;
 
 	draw2d::center center_;
-	
+
 	sprite_vector sprites_;
 
 	sanguis::diff_timer move_timer_;

@@ -24,7 +24,7 @@ sanguis::server::buffs::provider::add(
 		map::iterator,
 		bool
 	> ret_type;
-	
+
 	ret_type const ret(
 		fcppt::container::ptr::insert_unique_ptr_map(
 			buffs_,
@@ -41,7 +41,7 @@ sanguis::server::buffs::provider::add(
 		throw exception(
 			FCPPT_TEXT("Double buff insertion!")
 		);
-	
+
 	_entity.add_buff(
 		*ret.first->second
 	);
@@ -64,7 +64,7 @@ sanguis::server::buffs::provider::remove(
 		throw exception(
 			FCPPT_TEXT("No buff for an entity!")
 		);
-	
+
 	map::auto_type reclaimed(
 		buffs_.release(
 			it

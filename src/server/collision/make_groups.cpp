@@ -24,6 +24,6 @@ sanguis::server::collision::make_groups(
 				)
 			)
 		);
-	
+
 	return ret;
 }

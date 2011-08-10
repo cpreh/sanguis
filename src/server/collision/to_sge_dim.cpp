@@ -7,7 +7,7 @@ sanguis::server::collision::to_sge_dim(
 	server::dim const &_dim
 )
 {
-	return	
+	return
 		fcppt::math::dim::structure_cast<
 			sge::projectile::dim2
 		>(

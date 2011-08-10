@@ -54,7 +54,7 @@ private:
 	play(
 		sge::audio::sound::repeat::type
 	);
-	
+
 	sge::audio::sound::positional_ptr const
 	current_sound() const;
 };

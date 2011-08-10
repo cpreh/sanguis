@@ -17,7 +17,7 @@ sanguis::creator::generator::serialization::polygon(
 				sge::parse::json::element_vector
 			>(
 				_polygon,
-				serialization::vertex	
+				serialization::vertex
 			)
 		);
 }

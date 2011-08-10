@@ -84,5 +84,5 @@ sanguis::client::states::waiting_for_player::handle_default_msg(
 	sanguis::messages::base const &
 )
 {
-	return forward_event();	
+	return forward_event();
 }

@@ -20,7 +20,7 @@ sanguis::client::draw2d::particle::z_ordering(
 	case particle_type::size:
 		break;
 	}
-	
+
 	throw sanguis::exception(
 		FCPPT_TEXT("invalid particle type!")
 	);

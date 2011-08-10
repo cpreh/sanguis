@@ -58,7 +58,7 @@ sanguis::client::draw2d::sprite::animation::texture<Choices>::texture(
 		throw sanguis::exception(
 			FCPPT_TEXT("animation::texture series is empty!")
 		);
-	
+
 	reset();
 }
 
@@ -103,7 +103,7 @@ sanguis::client::draw2d::sprite::animation::texture<Choices>::reset()
 	spr_.texture(
 		series_.begin()->tex()
 	);
-	
+
 	pos_ = series_.begin();
 
 	cur_timer_.interval(

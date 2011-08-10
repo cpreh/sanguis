@@ -68,7 +68,7 @@ sanguis::net::server::object_impl::~object_impl()
 {
 }
 
-void 
+void
 sanguis::net::server::object_impl::listen(
 	net::port const _port
 )
@@ -132,7 +132,7 @@ sanguis::net::server::object_impl::connections() const
 		);
 }
 
-void 
+void
 sanguis::net::server::object_impl::queue_send(
 	net::id const _id
 )
@@ -181,7 +181,7 @@ sanguis::net::server::object_impl::register_disconnect(
 		);
 }
 
-fcppt::signal::auto_connection 
+fcppt::signal::auto_connection
 sanguis::net::server::object_impl::register_data(
 	server::data_callback const &_callback
 )
@@ -203,13 +203,13 @@ sanguis::net::server::object_impl::register_timer(
 		);
 }
 
-void 
+void
 sanguis::net::server::object_impl::stop()
 {
 	io_service_.stop();
 }
 
-void 
+void
 sanguis::net::server::object_impl::accept()
 {
 	new_connection_ =
@@ -234,7 +234,7 @@ sanguis::net::server::object_impl::accept()
 	);
 }
 
-void 
+void
 sanguis::net::server::object_impl::read_handler(
 	boost::system::error_code const &_error,
 	std::size_t const _bytes,
@@ -258,14 +258,14 @@ sanguis::net::server::object_impl::read_handler(
 		object_impl::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("reading ")
-			<< _bytes 
+			<< _bytes
 			<< FCPPT_TEXT(" bytes.")
 	);
 
 	_con.received_data().bytes_received(
 		_bytes
 	);
-	
+
 	data_signal_(
 		_con.id(),
 		fcppt::ref(
@@ -278,7 +278,7 @@ sanguis::net::server::object_impl::read_handler(
 	);
 }
 
-void 
+void
 sanguis::net::server::object_impl::write_handler(
 	boost::system::error_code const &_error,
 	std::size_t const _bytes,
@@ -302,7 +302,7 @@ sanguis::net::server::object_impl::write_handler(
 		object_impl::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("wrote ")
-			<< _bytes 
+			<< _bytes
 			<< FCPPT_TEXT(" bytes.")
 	);
 
@@ -325,7 +325,7 @@ sanguis::net::server::object_impl::write_handler(
 		_con.sending() = false;
 }
 
-void 
+void
 sanguis::net::server::object_impl::accept_handler(
 	boost::system::error_code const &_error
 )
@@ -372,7 +372,7 @@ sanguis::net::server::object_impl::accept_handler(
 		throw net::exception(
 			FCPPT_TEXT("Double insert in net::server!")
 		);
-	
+
 	// send signal to handlers
 	connect_signal_(
 		current_con.id()
@@ -385,7 +385,7 @@ sanguis::net::server::object_impl::accept_handler(
 	this->accept();
 }
 
-void 
+void
 sanguis::net::server::object_impl::handle_error(
 	fcppt::string const &_message,
 	boost::system::error_code const &_error,
@@ -405,7 +405,7 @@ sanguis::net::server::object_impl::handle_error(
 		object_impl::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("disconnected ")
-			<< _con.id() 
+			<< _con.id()
 			<< FCPPT_TEXT(" (")
 			<< error_msg
 			<< FCPPT_TEXT(")")

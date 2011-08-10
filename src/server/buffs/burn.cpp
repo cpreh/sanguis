@@ -42,7 +42,7 @@ sanguis::server::buffs::burn::update(
 		)
 	)
 		return;
-	
+
 	if(
 		pulses_++ == max_pulses_
 	)

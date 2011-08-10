@@ -70,7 +70,7 @@ public:
 	);
 
 	~object();
-	
+
 	void
 	process_message(
 		sanguis::messages::base const &
@@ -107,7 +107,7 @@ private:
 	void
 	render_lighting();
 
-	entities::base &	
+	entities::base &
 	insert(
 		entities::unique_ptr,
 		sanguis::entity_id
@@ -187,7 +187,7 @@ private:
 	fcppt::scoped_ptr<
 		scene::world::object
 	> const world_;
-		
+
 	sge::audio::listener &audio_listener_;
 
 	bool paused_;

@@ -24,7 +24,7 @@ public:
 		sge::console::object &,
 		load::resource::sounds const &
 	);
-	
+
 	~music_handler();
 
 	void
@@ -38,7 +38,7 @@ private:
 		sge::console::arg_list const &,
 		sge::console::object &
 	);
-	
+
 	sge::audio::sound::base_ptr const
 	load_random() const;
 

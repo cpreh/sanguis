@@ -13,7 +13,7 @@ namespace weapons
 
 FCPPT_MAKE_STRONG_TYPEDEF(
 	sanguis::duration,
-	cast_point	
+	cast_point
 );
 
 }

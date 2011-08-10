@@ -36,12 +36,12 @@ public:
 		sge::input::keyboard::device &,
 		client::cursor::object &
 	);
-	
+
 	~object();
 
 	sge::charconv::system &
 	charconv_system() const;
-	
+
 	sge::cegui::system &
 	system();
 

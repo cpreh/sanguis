@@ -48,7 +48,7 @@ private:
 	);
 
 	sanguis::diff_clock const &diff_clock_;
-	
+
 	sanguis::duration const pulse_diff_;
 
 	damage::unit const damage_per_pulse_;

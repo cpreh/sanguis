@@ -10,7 +10,7 @@ sanguis::server::weapons::events::shoot::shoot(
 	to_(_to)
 {
 }
-	
+
 sanguis::server::entities::with_weapon &
 sanguis::server::weapons::events::shoot::from() const
 {

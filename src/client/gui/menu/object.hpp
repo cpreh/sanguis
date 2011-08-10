@@ -76,7 +76,7 @@ private:
 		connect_connection_,
 		hostname_change_connection_,
 		port_change_connection_;
-	
+
 	typedef fcppt::scoped_ptr<
 		menu::connection_box
 	> scoped_connection_box_ptr;

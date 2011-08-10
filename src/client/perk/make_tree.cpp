@@ -29,7 +29,7 @@ sanguis::client::perk::make_tree(
 )
 {
 	// this code highly depends on the order in which the server serializes the tree
-	
+
 	FCPPT_ASSERT(
 		!_list.empty()
 	);

@@ -44,7 +44,7 @@ public:
 		sanguis::entity_id,
 		entities::unique_ptr
 	);
-	
+
 	iterator
 	begin();
 

@@ -41,7 +41,7 @@ private:
 	do_damage(
 		with_health &
 	);
-	
+
 	damage::unit const damage_;
 };
 

@@ -98,7 +98,7 @@ sanguis::server::entities::pickups::pickup::collision_with_body(
 		this->dead()
 	)
 		return;
-	
+
 	life_timer_.expired(
 		true
 	);

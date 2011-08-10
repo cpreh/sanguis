@@ -23,7 +23,7 @@ public:
 	wrapper(
 		damage_type::type
 	);
-	
+
 	meta const
 	operator=(
 		unit

@@ -38,7 +38,7 @@ sanguis::messages::serialization::deserialize(
 		>(
 			_stream.gcount()
 		)
-		== 
+		==
 		sizeof(types::message_type)
 	);
 
@@ -72,7 +72,7 @@ sanguis::messages::serialization::deserialize(
 		throw sanguis::exception(
 			FCPPT_TEXT("No handler for a message found.")
 		);
-	
+
 	serialization::reader cur_reader(
 		_stream
 	);

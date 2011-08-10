@@ -13,7 +13,7 @@ sanguis::client::config::settings::get_or_default(
 	fcppt::string const &_default_value
 )
 {
-	return 
+	return
 		settings::get_or_create_entry(
 			settings::get_or_create_section(
 				_object.sections(),

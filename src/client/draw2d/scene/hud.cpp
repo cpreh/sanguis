@@ -54,7 +54,7 @@ sanguis::client::draw2d::scene::hud::time(
 
 void
 sanguis::client::draw2d::scene::hud::draw()
-{ 
+{
 	frames_counter_.update();
 
 	fcppt::io::ostringstream time_stream;

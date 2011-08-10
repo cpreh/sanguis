@@ -41,7 +41,7 @@ private:
 	do_attack(
 		delayed_attack const &
 	);
-	
+
 	create_function const sentry_weapon_;
 };
 

@@ -21,7 +21,7 @@ sanguis::load::model::random_sound::random_sound(
 :
 	rng_(
 		fcppt::random::inclusive_range<
-			load::probability_type	
+			load::probability_type
 		>(
 			0,
 			1
@@ -37,7 +37,7 @@ sanguis::load::model::random_sound::random_sound(
 	)
 	{
 		sounds_.push_back(
-			model::sound(			
+			model::sound(
 				sge::parse::json::get<
 					sge::parse::json::object
 				>(
@@ -95,7 +95,7 @@ sanguis::load::model::random_sound::random_sound(
 			it->probability()
 			/ normalization
 		);
-	
+
 	FCPPT_ASSERT(
 		ranges_.size() == sounds_.size()
 	);
@@ -112,7 +112,7 @@ sanguis::load::model::random_sound::random() const
 		sounds_.empty()
 	)
 		return sge::audio::sound::positional_ptr();
-	
+
 	load::probability_type const number(
 		rng_()
 	);
@@ -126,7 +126,7 @@ sanguis::load::model::random_sound::random() const
 			number < ranges_[index]
 		)
 			return sounds_[index].make();
-	
+
 	throw sanguis::exception(
 		FCPPT_TEXT("probability didn't match any sounds!")
 	);

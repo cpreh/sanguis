@@ -60,7 +60,7 @@ sanguis::load::model::animation::sound::operator[](
 			_sound_type
 		)
 	);
-	
+
 	return
 		it == sounds_.end()
 		?

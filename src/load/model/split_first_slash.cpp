@@ -17,7 +17,7 @@ sanguis::load::model::split_first_slash(
 			FCPPT_TEXT("No / found in ")
 			+ s
 		);
-	
+
 	return split_pair(
 		fcppt::string(
 			s.substr(

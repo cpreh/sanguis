@@ -39,7 +39,7 @@ class running
 	public boost::statechart::state<
 		running,
 		machine,
-		ingame	
+		ingame
 	>
 {
 	FCPPT_NONCOPYABLE(
@@ -83,7 +83,7 @@ public:
 	);
 
 	boost::statechart::result
-	react(	
+	react(
 		events::net_error const &
 	);
 
@@ -98,7 +98,7 @@ public:
 	operator()(
 		messages::console_print const &
 	);
-	
+
 	boost::statechart::result
 	operator()(
 		messages::add_console_command const &

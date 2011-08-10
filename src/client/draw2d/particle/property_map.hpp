@@ -20,13 +20,13 @@ public:
 	explicit property_map(
 		property_container const &
 	);
-	
+
 	properties const &
 	operator[](
 		particle_type::type
 	) const;
 private:
-	property_container container_;	
+	property_container container_;
 };
 
 }

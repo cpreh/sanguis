@@ -42,10 +42,10 @@ public:
 			events::tick
 		>,
 		boost::statechart::custom_reaction<
-			events::message	
-		> 
+			events::message
+		>
 	> reactions;
-	
+
 	unpaused();
 
 	~unpaused();
@@ -71,19 +71,19 @@ public:
 		server::player_id,
 		messages::player_direction const &
 	);
-	
+
 	boost::statechart::result
 	operator()(
 		server::player_id,
 		messages::player_start_shooting const &
 	);
-	
+
 	boost::statechart::result
 	operator()(
 		server::player_id,
 		messages::player_stop_shooting const &
 	);
-	
+
 	boost::statechart::result
 	operator()(
 		server::player_id,
@@ -107,7 +107,7 @@ private:
 		server::player_id,
 		messages::base const &
 	);
-	
+
 	static fcppt::log::object &
 	log();
 };

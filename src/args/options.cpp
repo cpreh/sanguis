@@ -88,6 +88,6 @@ sanguis::args::options()
 			),
 			"the server port"
 		);
-	
+
 	return desc;
 }

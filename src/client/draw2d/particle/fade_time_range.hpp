@@ -4,7 +4,7 @@
 #include "../../../time_unit.hpp"
 #include <fcppt/random/inclusive_range.hpp>
 
-namespace sanguis 
+namespace sanguis
 {
 namespace client
 {

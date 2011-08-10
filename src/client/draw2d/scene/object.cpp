@@ -256,7 +256,7 @@ sanguis::client::draw2d::scene::object::update(
 		diff_clock_.update(
 			_delta
 		);
-	
+
 	for(
 		entity_map::iterator it(
 			entities_.begin()
@@ -296,7 +296,7 @@ sanguis::client::draw2d::scene::object::update(
 		if(
 			it->may_be_removed()
 		)
-			it = 
+			it =
 				own_entities_.erase(
 					it
 				);
@@ -437,7 +437,7 @@ sanguis::client::draw2d::scene::object::render_lighting()
 			)
 		)
 	);
-	
+
 	world_->draw(
 		translation
 	);
@@ -487,7 +487,7 @@ sanguis::client::draw2d::scene::object::insert(
 				% _id
 			).str()
 		);
-	
+
 	return *ret.first->second;
 }
 

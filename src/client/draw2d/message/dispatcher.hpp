@@ -188,7 +188,7 @@ private:
 	entity(
 		entity_id
 	);
-	
+
 	environment &env_;
 };
 

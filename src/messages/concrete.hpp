@@ -25,7 +25,7 @@ public:
 	);
 
 	~concrete();
-	
+
 	T const &
 	value() const;
 private:

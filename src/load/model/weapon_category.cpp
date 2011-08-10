@@ -64,7 +64,7 @@ sanguis::load::model::weapon_category::operator[](
 	animation_type::type const _anim
 ) const
 {
-	animation_map::const_iterator const 
+	animation_map::const_iterator const
 		it(
 			animations_.find(
 				_anim
@@ -82,7 +82,7 @@ sanguis::load::model::weapon_category::operator[](
 		throw sanguis::exception(
 			FCPPT_TEXT("Default animation not found in TODO")
 		);
-		
+
 	throw model::base_animation_not_found(
 		_anim
 	);
@@ -93,14 +93,14 @@ sanguis::load::model::weapon_category::has_animation(
 	animation_type::type const _anim
 ) const
 {
-	animation_map::const_iterator const 
+	animation_map::const_iterator const
 		it(
 			animations_.find(
 				_anim
 			)
 		);
 
-	return 
+	return
 		it != animations_.end();
 }
 

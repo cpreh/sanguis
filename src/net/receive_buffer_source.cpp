@@ -50,7 +50,7 @@ sanguis::net::receive_buffer_source::read(
 	return real_count;
 }
 
-std::streampos 
+std::streampos
 sanguis::net::receive_buffer_source::seek(
 	boost::iostreams::stream_offset const _offset,
 	std::ios_base::seekdir const _dir
@@ -65,5 +65,5 @@ sanguis::net::receive_buffer_source::seek(
 		_dir == std::ios_base::cur
 	);
 
-	return read_count_;		
+	return read_count_;
 }

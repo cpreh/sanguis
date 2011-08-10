@@ -26,7 +26,7 @@ typedef messages::make_class<
 				roles::max_health
 			>
 		>
-	> 
+	>
 >::type max_health;
 
 }

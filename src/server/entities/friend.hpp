@@ -56,7 +56,7 @@ private:
 
 	server::team::type
 	team() const;
-	
+
 	messages::auto_ptr
 	add_message(
 		server::player_id

@@ -26,7 +26,7 @@ public:
 		tree::required_parent_level,
 		tree::max_level
 	);
-	
+
 	void
 	choose();
 

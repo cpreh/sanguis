@@ -79,7 +79,7 @@ sanguis::client::draw2d::particle::generator::generator(
 	),
 	velocity_angle_(
 		fcppt::random::make_inclusive_range(
-			static_cast<	
+			static_cast<
 				particle::rotation::value_type
 			>(
 				0
@@ -162,7 +162,7 @@ sanguis::client::draw2d::particle::generator::generate()
 		)
 		* disp_value
 	);
-	
+
 	draw2d::center const refpoint(
 		fcppt::math::vector::is_null(
 			object_pos.get()
@@ -177,7 +177,7 @@ sanguis::client::draw2d::particle::generator::generate()
 		:
 			object_pos
 	);
-			
+
 	draw2d::speed const velocity(
 		particle::velocity_from_movement(
 			movement_,
@@ -186,7 +186,7 @@ sanguis::client::draw2d::particle::generator::generate()
 			velocity_value_
 		)
 	);
-	
+
 	base_ptr object(
 		generate_object_()
 	);
@@ -206,13 +206,13 @@ sanguis::client::draw2d::particle::generator::generate()
 			rot_angle_
 		)
 	);
-	
+
 	object->rot_speed(
 		particle::rotation_speed(
 			0
 		)
 	);
-	
+
 	this->add(
 		move(
 			object
@@ -245,7 +245,7 @@ sanguis::client::draw2d::particle::generator::update(
 			)
 		)
 			this->generate();
-		
+
 		return false;
 	}
 

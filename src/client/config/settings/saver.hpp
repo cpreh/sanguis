@@ -25,12 +25,12 @@ public:
 
 	~saver();
 private:
-	settings::object const &object_;	
+	settings::object const &object_;
 };
 
 }
 }
 }
 }
-		
+
 #endif

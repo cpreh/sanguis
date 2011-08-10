@@ -15,7 +15,7 @@ namespace property
 
 initial const
 initial_max(
-	value 
+	value
 );
 
 }

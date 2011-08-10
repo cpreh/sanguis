@@ -22,7 +22,7 @@ sanguis::load::model::parse_json(
 		)
 	);
 
-	
+
 	if(
 		!sge::parse::json::parse_file(
 			file,
@@ -33,7 +33,7 @@ sanguis::load::model::parse_json(
 		FCPPT_LOG_WARNING(
 			sanguis::load::log(),
 			fcppt::log::_
-				<< file 
+				<< file
 				<< FCPPT_TEXT(" contains errors!")
 			);
 	}

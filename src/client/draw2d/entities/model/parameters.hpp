@@ -49,7 +49,7 @@ private:
 	sprite::colored::system &colored_system_;
 
 	sprite::normal::system &normal_system_;
-	
+
 	load::model::collection const &collection_;
 };
 

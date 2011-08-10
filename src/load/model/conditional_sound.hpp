@@ -29,7 +29,7 @@ public:
 	);
 
 	~conditional_sound();
-	
+
 	sge::audio::sound::positional_ptr const
 	random() const;
 private:

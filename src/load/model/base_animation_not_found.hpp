@@ -15,7 +15,7 @@ class base_animation_not_found : public exception {
 public:
 	base_animation_not_found(
 		animation_type::type);
-	
+
 	animation_type::type anim_type() const;
 private:
 	animation_type::type anim_type_;

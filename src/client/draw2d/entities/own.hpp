@@ -16,7 +16,7 @@ namespace entities
 class own
 {
 	FCPPT_NONCOPYABLE(
-		own	
+		own
 	);
 protected:
 	own();

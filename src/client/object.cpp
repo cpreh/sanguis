@@ -139,7 +139,7 @@ sanguis::client::object::object(
 		machine_
 	)
 {
-	if(	
+	if(
 		args::multi_sampling(
 			_variables_map
 		).get()

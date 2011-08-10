@@ -100,7 +100,7 @@ sanguis::client::draw2d::entities::model::object::object(
 				)
 			)
 		);
-	
+
 	this->change_animation(
 		animation_type::deploying
 	);
@@ -134,7 +134,7 @@ sanguis::client::draw2d::entities::model::object::update()
 			this->master().pos(),
 			this->master().size()
 		);
-	
+
 	for(
 		part_vector::iterator it(
 			parts_.begin()
@@ -172,7 +172,7 @@ sanguis::client::draw2d::entities::model::object::orientation(
 		_index
 	).orientation(
 		_rot
-	);	
+	);
 }
 
 bool
@@ -221,7 +221,7 @@ sanguis::client::draw2d::entities::model::object::speed(
 	draw2d::speed const old_speed(
 		this->speed()
 	);
-	
+
 	container::speed(
 		_speed
 	);
@@ -341,7 +341,7 @@ sanguis::client::draw2d::entities::model::object::reloading(
 			object::log(),
 			fcppt::log::_ << FCPPT_TEXT("reloading(): value already set!")
 		);
-	
+
 	reloading_ = _reloading;
 
 	this->change_animation();
@@ -446,7 +446,7 @@ sanguis::client::draw2d::entities::model::object::update_healthbar()
 		!healthbar_
 	)
 		return;
-	
+
 	healthbar_->update_health(
 		this->health(),
 		this->max_health()

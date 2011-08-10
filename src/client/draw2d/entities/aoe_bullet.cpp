@@ -31,7 +31,7 @@ sanguis::client::draw2d::entities::aoe_bullet::aoe_bullet(
 	aoe_(_aoe)
 {
 }
-		
+
 sanguis::client::draw2d::entities::aoe_bullet::~aoe_bullet()
 {
 }
@@ -56,10 +56,10 @@ sanguis::client::draw2d::entities::aoe_bullet::on_decay()
 			aoe_
 		)
 	);
-	
+
 	insert_(
 		explo
-	);	
-	
+	);
+
 	model::object::on_decay();
 }

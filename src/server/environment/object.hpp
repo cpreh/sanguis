@@ -33,7 +33,7 @@ class object
 protected:
 	object();
 public:
-	virtual void 
+	virtual void
 	insert(
 		entities::unique_ptr,
 		entities::insert_parameters const &

@@ -69,7 +69,7 @@ private:
 	value_type
 		current_,
 		max_;
-	
+
 	change_signal
 		change_signal_,
 		max_change_signal_;

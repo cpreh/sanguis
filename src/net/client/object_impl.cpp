@@ -72,7 +72,7 @@ sanguis::net::client::object_impl::connect(
 			<< FCPPT_TEXT(" on port ")
 			<< _port
 	);
-	
+
 	query_.take(
 		fcppt::make_unique_ptr<
 			boost::asio::ip::tcp::resolver::query
@@ -177,7 +177,7 @@ sanguis::net::client::object_impl::resolve_handler(
 		fcppt::log::_
 			<< FCPPT_TEXT("resolved domain, trying to connect")
 	);
-	
+
 	boost::asio::ip::tcp::endpoint const endpoint(
 		*_iterator
 	);
@@ -278,7 +278,7 @@ sanguis::net::client::object_impl::write_handler(
 		object_impl::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("wrote ")
-			<< _bytes 
+			<< _bytes
 			<< FCPPT_TEXT(" bytes")
 	);
 
@@ -327,7 +327,7 @@ sanguis::net::client::object_impl::connect_handler(
 			fcppt::log::_
 				<< FCPPT_TEXT("resolving next endpoint")
 		);
-		
+
 		boost::asio::ip::tcp::endpoint const endpoint(
 			*_iterator
 		);
@@ -361,7 +361,7 @@ sanguis::net::client::object_impl::send_data()
 {
 	net::circular_buffer::const_array_range const array(
 		net::circular_buffer_send_part(
-			send_buffer_	
+			send_buffer_
 		)
 	);
 

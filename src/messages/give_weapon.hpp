@@ -26,7 +26,7 @@ typedef messages::make_class<
 				roles::weapon
 			>
 		>
-	> 
+	>
 >::type give_weapon;
 
 }

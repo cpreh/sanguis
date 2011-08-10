@@ -39,7 +39,7 @@ sanguis::client::draw2d::entities::model::orientation(
 	// angle on a "line":
 	//
 	// 0 |--------c------------t------------| 2pi
-	// 
+	//
 	//    ...dist    abs_dist           swap_...
 	//
 	// The abs_dist below is the "direct" distance from 'c' to 't'. The swap_dist
@@ -49,16 +49,16 @@ sanguis::client::draw2d::entities::model::orientation(
 	//
 
 	funit const
-		// this is the "inner distance" from 
+		// this is the "inner distance" from
 		abs_dist(
 			std::abs(
 				_desired_orientation - _orientation
 			)
 		),
 		swap_dist(
-			(_orientation > _desired_orientation) 
+			(_orientation > _desired_orientation)
 			?
-				::twopi - _orientation + _desired_orientation 
+				::twopi - _orientation + _desired_orientation
 			:
 				::twopi - _desired_orientation + _orientation
 		),
@@ -70,8 +70,8 @@ sanguis::client::draw2d::entities::model::orientation(
 		);
 
 	FCPPT_ASSERT(
-		abs_dist >= static_cast<funit>(0) && 
-		swap_dist >= static_cast<funit>(0) && 
+		abs_dist >= static_cast<funit>(0) &&
+		swap_dist >= static_cast<funit>(0) &&
 		min_dist >= static_cast<funit>(0)
 	);
 
@@ -111,7 +111,7 @@ sanguis::client::draw2d::entities::model::orientation(
 		_delta
 		* turning_speed
 	);
-	
+
 	// This fixes the "epilepsy" bug. Imagine the current orientation being 10,
 	// the desired orientation being 20 and "time" is relatively large in the
 	// above assignment. So we might not get orientation values of 15 or 18
@@ -159,7 +159,7 @@ assert_range(
 		>(
 			0
 		)
-		&& 
+		&&
 		_value <= ::twopi
 	);
 }

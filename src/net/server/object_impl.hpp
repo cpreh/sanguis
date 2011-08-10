@@ -74,7 +74,7 @@ public:
 	register_disconnect(
 		server::disconnect_callback const &
 	);
-	
+
 	fcppt::signal::auto_connection
 	register_data(
 		server::data_callback const &
@@ -161,7 +161,7 @@ private:
 	receive_data(
 		server::connection &
 	);
-	
+
 	void
 	reset_timer();
 

@@ -58,7 +58,7 @@ public:
 	react(
 		events::shoot const &
 	);
-	
+
 	boost::statechart::result
 	react(
 		events::poll const &
@@ -72,7 +72,7 @@ private:
 	sanguis::diff_timer attack_time_;
 
 	fcppt::optional<
-		server::vector	
+		server::vector
 	> attack_dest_;
 };
 

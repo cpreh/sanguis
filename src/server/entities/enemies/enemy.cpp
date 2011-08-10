@@ -47,7 +47,7 @@ sanguis::server::entities::enemies::enemy::enemy(
 			),
 			entities::default_solid()
 		)
-	),	
+	),
 	with_buffs(),
 	with_health(
 		_diff_clock,

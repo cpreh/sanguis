@@ -41,7 +41,7 @@ private:
 	load_texture(
 		fcppt::filesystem::path const &
 	) const;
-	
+
 	animation::series const
 	load_without_frames_file(
 		fcppt::filesystem::path const &
@@ -51,7 +51,7 @@ private:
 		fcppt::filesystem::path,
 		animation::series
 	> animation_map;
-	
+
 	textures &textures_;
 
 	mutable animation_map animations_;

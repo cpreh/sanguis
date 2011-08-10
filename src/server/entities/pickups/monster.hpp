@@ -41,7 +41,7 @@ private:
 	);
 
 	sanguis::diff_clock const &diff_clock_;
-	
+
 	friend_type::type const ftype_;
 };
 

@@ -72,7 +72,7 @@ sanguis::client::perk::state::choose_perk(
 	++perk_levels_[
 		_type
 	];
-	
+
 	send_callback_(
 		_type
 	);

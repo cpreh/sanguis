@@ -79,12 +79,12 @@ sanguis::client::draw2d::entities::model::part::try_animation(
 		weapon_ == weapon_type::size
 	)
 		weapon_ = weapon_type::none;
-	
+
 	if(
 		animation_type_ == _atype
 	)
 		return true;
-	
+
 	if(
 		!load_part_[
 			weapon_
@@ -156,10 +156,10 @@ sanguis::client::draw2d::entities::model::part::update()
 			);
 		}
 	}
-	
+
 	if(
 		sound_state_
-	) 
+	)
 		sound_state_->update(
 			this->object().pos()
 		);
@@ -173,7 +173,7 @@ sanguis::client::draw2d::entities::model::part::update()
 		!desired_orientation_
 	)
 		return;
-	
+
 	if(
 		fcppt::math::compare(
 			this->orientation(),
@@ -252,7 +252,7 @@ sanguis::client::draw2d::entities::model::part::load_animation(
 		sound_state_
 	)
 		sound_state_->stop();
-	
+
 	sound_state_.take(
 		fcppt::make_unique_ptr<
 			model::sound_state

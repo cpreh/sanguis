@@ -17,7 +17,7 @@ namespace bindings
 template<
 	typename T
 >
-struct fundamental_strong 
+struct fundamental_strong
 {
 	typedef T type;
 };

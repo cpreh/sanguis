@@ -48,7 +48,7 @@ private:
 	on_remove();
 
 	sanguis::diff_clock const &diff_clock_;
-	
+
 	damage::unit const damage_;
 };
 

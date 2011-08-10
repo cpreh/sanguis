@@ -6,7 +6,7 @@ sanguis::net::is_disconnect(
 	boost::system::error_code const &_error
 )
 {
-	switch(	
+	switch(
 		_error.value()
 	)
 	{

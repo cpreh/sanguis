@@ -48,15 +48,15 @@ sanguis::load::model::animation::context::update()
 
 	if (!texture_context_.value()->update())
 		return;
-	
+
 	is_finished_ = true;
 
 	animation_ = resource::animation::series();
 
-	sge::texture::part_ptr const part( 
+	sge::texture::part_ptr const part(
 		texture_context_.value()->result()
 	);
-	
+
 	cache_callback_(
 		part->area()
 	);

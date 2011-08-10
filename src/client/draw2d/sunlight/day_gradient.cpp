@@ -97,7 +97,7 @@ struct color
 		);
 	}
 } global;
-	
+
 }
 
 sanguis::client::draw2d::sunlight::gradients const &

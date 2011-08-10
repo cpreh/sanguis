@@ -12,7 +12,7 @@ namespace waves
 
 FCPPT_MAKE_STRONG_TYPEDEF(
 	unsigned,
-	spawns_per_wave	
+	spawns_per_wave
 );
 
 }

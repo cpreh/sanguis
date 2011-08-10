@@ -31,11 +31,11 @@ sanguis::server::send_available_perks(
 		_player.perk_tree()
 	);
 
-	typedef 
+	typedef
 	fcppt::container::tree::pre_order<
 		perks::tree::object const
 	> traversal;
-	
+
 	traversal trav(
 		tree
 	);

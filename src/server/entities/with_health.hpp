@@ -24,7 +24,7 @@ namespace entities
 
 class with_health
 :
-	public virtual base 
+	public virtual base
 {
 	FCPPT_NONCOPYABLE(
 		with_health
@@ -75,7 +75,7 @@ private:
 	property::changeable health_;
 
 	property::always_max regeneration_;
-	
+
 	sanguis::diff_timer regeneration_timer_;
 
 	fcppt::signal::scoped_connection const max_health_change_;

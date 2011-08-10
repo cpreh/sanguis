@@ -32,7 +32,7 @@ protected:
 	base();
 public:
 	// general world functions
-	
+
 	void
 	transfer(
 		server::environment::object &,
@@ -50,13 +50,13 @@ public:
 	destroy();
 
 	// linking with other objects
-	
+
 	auto_weak_link const
 	link();
 
 
 	// environment query function // TODO: should this be public?
-	
+
 	server::environment::object &
 	environment() const;
 
@@ -65,7 +65,7 @@ public:
 
 
 	// entity id function
-	
+
 	sanguis::entity_id const
 	id() const;
 
@@ -80,12 +80,12 @@ public:
 
 
 	// life functions
-	
+
 	virtual bool
 	dead() const = 0;
 
 	// message functions
-	
+
 	virtual messages::auto_ptr
 	add_message(
 		player_id
@@ -93,7 +93,7 @@ public:
 
 
 	// type query
-	
+
 	virtual entity_type::type
 	type() const = 0;
 
@@ -125,11 +125,11 @@ private:
 	insert_link(
 		auto_weak_link &
 	);
-	
+
 	environment::object *environment_;
 
 	entity_id const id_;
-	
+
 	link_container links_;
 };
 

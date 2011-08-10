@@ -15,7 +15,7 @@ sanguis::server::perks::tree::status::status(
 	level_(0)
 {
 }
-	
+
 void
 sanguis::server::perks::tree::status::choose()
 {

@@ -98,7 +98,7 @@ sanguis::server::entities::exp_area::on_remove()
 					player_links_.size()
 				)
 			)
-		);	
+		);
 }
 
 bool

@@ -23,7 +23,7 @@ public:
 	explicit equal(
 		sanguis::perk_type::type
 	);
-	
+
 	bool
 	operator()(
 		tree::object const &

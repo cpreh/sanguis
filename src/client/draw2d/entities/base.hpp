@@ -29,7 +29,7 @@ public:
 
 	bool
 	may_be_removed() const;
-	
+
 	virtual ~base();
 private:
 	virtual void

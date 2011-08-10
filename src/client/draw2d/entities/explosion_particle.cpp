@@ -42,7 +42,7 @@ sanguis::client::draw2d::entities::explosion_particle(
 					)
 				)
 			);
-	
+
 	fcppt::random::uniform<
 		sanguis::time_unit
 	>
@@ -52,7 +52,7 @@ sanguis::client::draw2d::entities::explosion_particle(
 			_prop.fade_range().get().max()
 		)
 	);
-	
+
 	return
 		particle::base_ptr(
 			fcppt::make_unique_ptr<

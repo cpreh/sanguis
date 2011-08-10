@@ -21,7 +21,7 @@ sanguis::client::draw2d::particle::property_map::operator[](
 			_type
 		)
 	);
-	
+
 	// TODO: maybe provide a default here?
 	if(
 		it == container_.end()

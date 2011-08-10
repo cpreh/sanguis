@@ -4,7 +4,7 @@
 #include "base_ptr.hpp"
 #include <fcppt/function/object_fwd.hpp>
 
-namespace sanguis 
+namespace sanguis
 {
 namespace client
 {

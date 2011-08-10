@@ -26,7 +26,7 @@ typedef messages::make_class<
 				roles::attack_dest
 			>
 		>
-	> 
+	>
 >::type player_attack_dest;
 
 }

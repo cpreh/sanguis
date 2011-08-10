@@ -39,7 +39,7 @@ sanguis::client::states::running::running(
 :
 	my_base(
 		_ctx
-	), 
+	),
 	renderer_state_(
 		context<machine>().renderer(),
 		sge::renderer::state::list
@@ -208,7 +208,7 @@ sanguis::client::states::running::operator()(
 		)
 	);
 
-	return discard_event();	
+	return discard_event();
 }
 
 boost::statechart::result

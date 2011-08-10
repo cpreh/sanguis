@@ -10,7 +10,7 @@
 #include "../../diff_clock_fwd.hpp"
 #include <fcppt/noncopyable.hpp>
 
-namespace sanguis 
+namespace sanguis
 {
 namespace server
 {
@@ -42,7 +42,7 @@ private:
 	do_attack(
 		delayed_attack const &
 	);
-	
+
 	space_unit const spread_radius_;
 
 	unsigned const shells_;

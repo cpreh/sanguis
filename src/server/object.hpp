@@ -25,7 +25,7 @@ class object
 		object
 	);
 public:
-	explicit 
+	explicit
 	object(
 		net::port,
 		load::context_base const &

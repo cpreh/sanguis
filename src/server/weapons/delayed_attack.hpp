@@ -28,16 +28,16 @@ public:
 
 	server::center const &
 	spawn_point() const;
-	
+
 	server::angle const
 	angle() const;
-	
+
 	server::team::type
 	team() const;
-	
+
 	server::environment::object &
 	environment() const;
-	
+
 	server::vector const &
 	dest() const;
 private:

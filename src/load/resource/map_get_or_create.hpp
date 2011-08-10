@@ -12,16 +12,16 @@ namespace resource
 {
 
 template<
-	typename Key, 
-	typename Mapped, 
-	typename Comp, 
-	typename Alloc, 
+	typename Key,
+	typename Mapped,
+	typename Comp,
+	typename Alloc,
 	typename Fun
 >
 Mapped &
 map_get_or_create(
-	std::map<Key, Mapped, Comp, Alloc> &_map, 
-	Key const &_key, 
+	std::map<Key, Mapped, Comp, Alloc> &_map,
+	Key const &_key,
 	Fun const &_creator
 )
 {
@@ -31,7 +31,7 @@ map_get_or_create(
 		Comp,
 		Alloc
 	>::iterator iterator;
-	
+
 	iterator const it(
 		_map.find(
 			_key
@@ -39,9 +39,9 @@ map_get_or_create(
 	);
 
 	return
-		it != _map.end() 
+		it != _map.end()
 		?
-			it->second 
+			it->second
 		:
 			_map.insert(
 				std::make_pair(

@@ -24,6 +24,6 @@ sanguis::load::model::make_path(
 			+ name
 			+ FCPPT_TEXT(" not found!")
 		);
-	
+
 	return path;
-}	
+}

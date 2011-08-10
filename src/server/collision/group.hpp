@@ -13,7 +13,7 @@ namespace group
 enum type
 {
 	enemy,
-	pickup,	
+	pickup,
 	projectile_enemy,
 	projectile_player,
 	player,

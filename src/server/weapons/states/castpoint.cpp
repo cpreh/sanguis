@@ -54,7 +54,7 @@ sanguis::server::weapons::states::castpoint::react(
 		!attack_time_.expired()
 	)
 		return discard_event();
-	
+
 	context<
 		weapon
 	>().do_attack(

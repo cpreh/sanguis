@@ -14,7 +14,7 @@ namespace entities
 {
 
 typedef fcppt::auto_ptr<
-	entities::own	
+	entities::own
 > own_auto_ptr;
 
 }

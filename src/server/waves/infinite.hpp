@@ -34,7 +34,7 @@ public:
 		waves::spawns_per_wave,
 		enemy_type::type
 	);
-	
+
 	~infinite();
 private:
 	void
@@ -42,7 +42,7 @@ private:
 		environment::object &,
 		environment::load_context &
 	);
-	
+
 	bool
 	ended() const;
 

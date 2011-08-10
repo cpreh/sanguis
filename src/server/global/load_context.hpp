@@ -11,7 +11,7 @@ namespace sanguis
 {
 namespace server
 {
-namespace global 
+namespace global
 {
 
 class load_context
@@ -32,7 +32,7 @@ private:
 	entity_dim(
 		string const &model_name
 	) const;
-	
+
 	load::context_base const &model_context_;
 };
 

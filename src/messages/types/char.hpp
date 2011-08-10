@@ -10,7 +10,7 @@ namespace messages
 namespace types
 {
 
-typedef fcppt::utf8::char_type char_; 
+typedef fcppt::utf8::char_type char_;
 
 }
 }

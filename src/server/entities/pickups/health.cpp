@@ -38,7 +38,7 @@ sanguis::server::entities::pickups::health::do_pickup(
 			_receiver
 		)
 	);
-	
+
 	entities::property::add(
 		with_health.health(),
 		amount_.get()

@@ -12,7 +12,7 @@ namespace particle
 
 FCPPT_MAKE_STRONG_TYPEDEF(
 	bool,
-	fade	
+	fade
 );
 
 }

@@ -196,7 +196,7 @@ sanguis::server::world::object::insert(
 		entity_map::iterator,
 		bool
 	> return_type;
-	
+
 	return_type const ret(
 		entities_.insert(
 			id,
@@ -472,7 +472,7 @@ sanguis::server::world::object::add_sight_range(
 		entity.server_only()
 	)
 		return;
-			
+
 	this->send_player_specific(
 		_player_id,
 		it->second->add_message(
@@ -513,10 +513,10 @@ sanguis::server::world::object::remove_sight_range(
 				sight_it
 			);
 	}
-	
+
 	// if an entity has been removed
 	// we have to tell the client that it is dead instead
-	
+
 	entity_map::const_iterator const it(
 		entities_.find(
 			_target_id

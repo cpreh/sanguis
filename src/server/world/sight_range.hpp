@@ -16,7 +16,7 @@ class sight_range
 public:
 	sight_range();
 
-	void	
+	void
 	add(
 		entity_id
 	);

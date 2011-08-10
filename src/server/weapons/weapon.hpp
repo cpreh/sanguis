@@ -39,7 +39,7 @@ class weapon
 		boost::statechart::state_machine<
 			weapon,
 			states::ready
-		> 
+		>
 {
 	FCPPT_NONCOPYABLE(
 		weapon
@@ -79,12 +79,12 @@ public:
 
 	void
 	attack_speed(
-		sanguis::time_unit	
+		sanguis::time_unit
 	);
 
 	void
 	reload_speed(
-		sanguis::time_unit	
+		sanguis::time_unit
 	);
 
 	virtual ~weapon();
@@ -104,7 +104,7 @@ protected:
 	do_attack(
 		delayed_attack const &
 	) = 0;
-	
+
 	bool
 	usable() const;
 

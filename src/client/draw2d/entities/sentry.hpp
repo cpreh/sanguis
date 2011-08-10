@@ -28,7 +28,7 @@ public:
 	);
 
 	~sentry();
-	
+
 	void
 	orientation(
 		sprite::rotation

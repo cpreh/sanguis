@@ -53,7 +53,7 @@ sanguis::load::model::object::operator[](
 				path_
 			)
 		);
-	
+
 	return *it->second;
 }
 
@@ -151,7 +151,7 @@ sanguis::load::model::object::construct(
 )
 {
 	sge::parse::json::object object_return;
-	
+
 	parse_json(
 		path_,
 		object_return

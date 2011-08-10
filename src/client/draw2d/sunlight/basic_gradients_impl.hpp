@@ -60,26 +60,26 @@ sanguis::client::draw2d::sunlight::basic_gradients<Value, Locator, Real>::interp
 		values_.size() > static_cast<typename value_map::size_type>(1)
 	);
 
-	typename value_map::const_iterator upper = 
+	typename value_map::const_iterator upper =
 		values_.lower_bound(
 			r
 		);
-	
+
 	if (upper == values_.end())
 		--upper;
-	
-	typename value_map::const_iterator lower = 
+
+	typename value_map::const_iterator lower =
 		boost::prior(
 			upper
 		);
-	
-	locator const 
-		range = 
+
+	locator const
+		range =
 			upper->first - lower->first,
-		distance = 
+		distance =
 			r-lower->first;
 
-	real const normalized = 
+	real const normalized =
 		static_cast<real>(distance)
 		/
 		static_cast<real>(range);

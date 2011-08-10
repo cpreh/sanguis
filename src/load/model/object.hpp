@@ -45,7 +45,7 @@ public:
 	operator[](
 		fcppt::string const &
 	) const;
-	
+
 	part const &
 	random_part() const;
 
@@ -80,7 +80,7 @@ private:
 	part_map parts_;
 
 	typedef fcppt::random::uniform<
-		part_map::size_type	
+		part_map::size_type
 	> part_rand;
 
 	mutable fcppt::shared_ptr<

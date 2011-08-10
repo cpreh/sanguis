@@ -25,6 +25,6 @@ sanguis::client::draw2d::factory::weapon_pickup(
 				z_ordering::pickup,
 				entities::model::needs_healthbar::no,
 				entities::model::decay_option::immediate
-			)	
+			)
 		);
 }

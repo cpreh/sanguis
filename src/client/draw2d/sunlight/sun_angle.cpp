@@ -27,47 +27,47 @@ sanguis::client::draw2d::sunlight::sun_angle(
 		boost::gregorian::Jan,
 		1
 	);
-	
+
 	boost::gregorian::date_period const d(
 		equinox,
 		current
 	);
 
-	real const 
-		hours = 
+	real const
+		hours =
 			static_cast<real>(_current_tm.tm_hour),
-		minutes = 
+		minutes =
 			static_cast<real>(_current_tm.tm_min),
-		lambda = 
+		lambda =
 			7.990,
-		phi = 
+		phi =
 			fcppt::math::deg_to_rad(52.2493),
-		fracminutes = 
+		fracminutes =
 			minutes/60.0,
-		fracday = 
+		fracday =
 			((hours < 12.0 ? (12.0+hours) : (hours-12))+fracminutes)/24.0,
-		n = 
+		n =
 			d.length().days() - (hours < 12.0 ? 1.0 : 0.0) + fracday,
-		L = 
+		L =
 			(std::fmod(280.460+0.9856474*n,360.0)),
-		g = 
+		g =
 			fcppt::math::deg_to_rad(std::fmod(357.528+0.9856003*n,360.0)),
 		ekliptik =
 			fcppt::math::deg_to_rad(L + 1.915 * std::sin(g) + 0.020 * std::sin(2.0*g)),
-		e = 
+		e =
 			fcppt::math::deg_to_rad(23.439-0.0000004*n),
-		alpha_arg = 
+		alpha_arg =
 			std::cos(e)*std::sin(ekliptik)/std::cos(ekliptik),
-		alpha_raw = 
+		alpha_raw =
 			fcppt::math::rad_to_deg(std::atan(alpha_arg)),
 		alpha =
 			alpha_raw + (std::cos(ekliptik) < 0.0 ? 180.0 : 0.0),
-		delta = 
+		delta =
 			std::asin(std::sin(e)*std::sin(ekliptik)),
-		t0 = 
+		t0 =
 				//(current.julian_day()-2451545.0)/36525.0,
 			((current.julian_day() - 1 + 0.5)-2451545.0)/36525.0,
-		sternzeit = 
+		sternzeit =
 			std::fmod(
 				6.697376
 				+ 2400.05134
@@ -76,13 +76,13 @@ sanguis::client::draw2d::sunlight::sun_angle(
 				* (hours + fracminutes),
 				24.0
 			),
-		sternzeit_k = 
+		sternzeit_k =
 			sternzeit*15.0,
-		stw = 
+		stw =
 			sternzeit_k + lambda,
-		tau = 
+		tau =
 			fcppt::math::deg_to_rad(stw - alpha),
-		h = 
+		h =
 			fcppt::math::rad_to_deg(
 				std::asin(
 					std::cos(delta)
@@ -92,9 +92,9 @@ sanguis::client::draw2d::sunlight::sun_angle(
 					* std::sin(phi)
 				)
 			),
-		R = 
+		R =
 			1.02/std::tan(fcppt::math::deg_to_rad(h + 10.3/(h+5.11))),
-		hr = 
+		hr =
 			h + R/60.0,
 		hr_rad =
 			fcppt::math::deg_to_rad(

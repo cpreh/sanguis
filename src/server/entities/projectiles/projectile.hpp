@@ -51,7 +51,7 @@ protected:
 	);
 
 	~projectile();
-	
+
 	void
 	expire();
 
@@ -67,7 +67,7 @@ private:
 	virtual entity_type::type
 	type() const;
 
-	virtual boost::logic::tribool const 
+	virtual boost::logic::tribool const
 	can_collide_with_body(
 		entities::with_body const &
 	) const;

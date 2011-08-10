@@ -27,7 +27,7 @@ sanguis::client::draw2d::scene::message_environment::insert(
 	sanguis::entity_id const _id
 )
 {
-	return 
+	return
 		object_.insert(
 			move(
 				_entity

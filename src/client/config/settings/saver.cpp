@@ -18,7 +18,7 @@ sanguis::client::config::settings::saver::~saver()
 {
 	try
 	{
-		object_.save();	
+		object_.save();
 	}
 	catch(
 		fcppt::exception const &_error

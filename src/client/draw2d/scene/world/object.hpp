@@ -25,7 +25,7 @@ namespace world
 class object
 {
 	FCPPT_NONCOPYABLE(
-		object	
+		object
 	);
 public:
 	object(

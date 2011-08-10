@@ -35,14 +35,14 @@ public:
 		weapons::cast_point,
 		weapons::reload_time
 	);
-	
+
 	~grenade();
 private:
 	void
 	do_attack(
 		delayed_attack const &
 	);
-	
+
 	weapons::damage const damage_;
 
 	weapons::aoe const aoe_;

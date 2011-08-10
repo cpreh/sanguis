@@ -46,7 +46,7 @@ cast_enum_impl(
 				)
 			)
 		);
-	
+
 	return
 		static_cast<
 			Enum

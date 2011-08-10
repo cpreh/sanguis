@@ -43,7 +43,7 @@ sanguis::client::draw2d::entities::model::healthbar::healthbar(
 		)
 		.color(
 			sge::image::color::any::convert<
-				sprite::colored::color_format	
+				sprite::colored::color_format
 			>(
 				sge::image::colors::black()
 			)
@@ -149,7 +149,7 @@ sanguis::client::draw2d::entities::model::healthbar::dim(
 	this->recalc_health();
 }
 
-sanguis::client::draw2d::sprite::point const 
+sanguis::client::draw2d::sprite::point const
 sanguis::client::draw2d::entities::model::healthbar::inner_pos() const
 {
 	return
@@ -160,7 +160,7 @@ sanguis::client::draw2d::entities::model::healthbar::inner_pos() const
 		);
 }
 
-sanguis::client::draw2d::sprite::dim const 
+sanguis::client::draw2d::sprite::dim const
 sanguis::client::draw2d::entities::model::healthbar::inner_dim() const
 {
 	return
@@ -192,7 +192,7 @@ sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 	)
 		// TODO!
 		return;
-	
+
 	foreground_.w(
 		static_cast<
 			sprite::unit
@@ -213,7 +213,7 @@ sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 					static_cast<
 						client::health::value_type
 					>(
-						2.0 - 
+						2.0 -
 						2.0
 						*
 						this->remaining_health().get()

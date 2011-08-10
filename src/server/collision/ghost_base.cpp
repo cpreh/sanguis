@@ -22,7 +22,7 @@ sanguis::server::collision::ghost_base::body_enter_callback()
 				std::tr1::placeholders::_1
 			)
 		);
-			
+
 }
 
 sanguis::server::collision::body_exit_callback const

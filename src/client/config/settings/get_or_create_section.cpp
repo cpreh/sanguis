@@ -31,6 +31,6 @@ sanguis::client::config::settings::get_or_create_section(
 					_section_name
 				)
 			);
-	
+
 	return *it;
 }

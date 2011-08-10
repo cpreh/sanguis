@@ -92,7 +92,7 @@ sanguis::server::weapons::create(
 					_type,
 					base_cooldown(0.8f),
 					damage(9),
-					aoe(2.4f), 
+					aoe(2.4f),
 					magazine_size(1),
 					reload_time(1.8f)
 				)

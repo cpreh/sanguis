@@ -65,11 +65,11 @@ public:
 		default_function const &_default_function
 	) const
 	{
-		return 
+		return
 			instances_.is_null(
 				_message.type()
 			)
-			?	
+			?
 				_default_function(
 					_message
 				)

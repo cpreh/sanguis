@@ -68,7 +68,7 @@ sanguis::server::entities::with_ghosts::on_transfer(
 			_params.world(),
 			_params.global_groups()
 		);
-	
+
 	this->update_center(
 		_params.center()
 	);
@@ -77,7 +77,7 @@ sanguis::server::entities::with_ghosts::on_transfer(
 void
 sanguis::server::entities::with_ghosts::on_destroy()
 {
-	scoped_ghosts_.clear();	
+	scoped_ghosts_.clear();
 }
 
 void

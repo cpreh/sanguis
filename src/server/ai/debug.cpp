@@ -40,7 +40,7 @@ sanguis::server::ai::debug::update()
 			server::vector::null()
 		)
 	);
-		
+
 	if(
 		angle
 	)
@@ -75,7 +75,7 @@ sanguis::server::ai::debug::update()
 					*angle
 				)
 			);
-	
+
 		entities::property::current_to_max(
 			speed
 		);

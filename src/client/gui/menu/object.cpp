@@ -53,7 +53,7 @@ sanguis::client::gui::menu::object::object(
 	client::gui::object &_gui,
 	callbacks::object const &_callbacks
 )
-: 
+:
 	settings_(_settings),
 	gui_(_gui),
 	callbacks_(_callbacks),
@@ -249,7 +249,7 @@ sanguis::client::gui::menu::object::connection_error(
 		mylogger,
 		fcppt::log::_
 			<< FCPPT_TEXT("got conection error: (")
-			<< _message 
+			<< _message
 			<< FCPPT_TEXT(')')
 	);
 

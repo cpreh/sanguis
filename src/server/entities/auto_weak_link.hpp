@@ -29,7 +29,7 @@ public:
 	auto_weak_link(
 		auto_weak_link const &
 	);
-	
+
 	~auto_weak_link();
 
 	auto_weak_link &

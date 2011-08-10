@@ -52,7 +52,7 @@ public:
 		locator,
 		value const &
 	);
-	
+
 	value const
 	interpolate(
 		locator

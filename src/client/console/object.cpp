@@ -76,7 +76,7 @@ sanguis::client::console::object::draw()
 	)
 		gfx_.render();
 }
-	
+
 sge::console::object &
 sanguis::client::console::object::sge_console()
 {
@@ -92,7 +92,7 @@ sanguis::client::console::object::server_callback(
 	send_(
 		sanguis::messages::create(
 			sanguis::messages::console_command(
-				sanguis::messages::serialization::convert_string_vector(		
+				sanguis::messages::serialization::convert_string_vector(
 					sanguis::from_console_arg_list(
 						_args
 					)

@@ -13,7 +13,7 @@ namespace weapons
 
 FCPPT_MAKE_STRONG_TYPEDEF(
 	sanguis::duration,
-	reload_time	
+	reload_time
 );
 
 }

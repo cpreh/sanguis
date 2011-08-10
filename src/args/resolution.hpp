@@ -9,7 +9,7 @@ namespace sanguis
 namespace args
 {
 
-args::optional_resolution const 
+args::optional_resolution const
 resolution(
 	boost::program_options::variables_map const &
 );

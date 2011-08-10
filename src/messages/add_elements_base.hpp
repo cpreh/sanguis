@@ -18,7 +18,7 @@ typedef majutsu::composite<
 	boost::mpl::vector2<
 		majutsu::role<
 			messages::vector2,
-			roles::center	
+			roles::center
 		>,
 		majutsu::role<
 			messages::space_unit,

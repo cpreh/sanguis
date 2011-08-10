@@ -35,7 +35,7 @@ public:
 	);
 
 	~weapon();
-	
+
 	weapon_type::type
 	wtype() const;
 private:

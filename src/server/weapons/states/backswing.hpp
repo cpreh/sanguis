@@ -39,7 +39,7 @@ public:
 	);
 
 	~backswing();
-	
+
 	boost::statechart::result
 	react(
 		events::poll const &

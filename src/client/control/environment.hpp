@@ -21,9 +21,9 @@ class environment
 protected:
 	environment();
 public:
-	virtual control::attack_dest const 
+	virtual control::attack_dest const
 	translate_attack_dest(
-		control::cursor_position const &	
+		control::cursor_position const &
 	) const = 0;
 
 	virtual ~environment();

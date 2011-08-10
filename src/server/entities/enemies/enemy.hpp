@@ -40,7 +40,7 @@ class enemy
 	FCPPT_NONCOPYABLE(
 		enemy
 	);
-public:	
+public:
 	enemy(
 		sanguis::diff_clock const &,
 		enemy_type::type,

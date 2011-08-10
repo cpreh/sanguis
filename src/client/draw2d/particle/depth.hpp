@@ -4,7 +4,7 @@
 #include "../funit.hpp"
 #include <fcppt/strong_typedef.hpp>
 
-namespace sanguis 
+namespace sanguis
 {
 namespace client
 {

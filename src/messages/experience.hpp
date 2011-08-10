@@ -26,7 +26,7 @@ typedef messages::make_class<
 				roles::experience
 			>
 		>
-	> 
+	>
 >::type experience;
 
 }

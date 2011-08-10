@@ -80,7 +80,7 @@ private:
 		control::key_scale
 	);
 
-	void 
+	void
 	update_rotation();
 
 	void
@@ -97,7 +97,7 @@ private:
 	change_weapon(
 		weapon_type::type
 	);
-	
+
 	void
 	send_cheat(
 		cheat_type::type,
@@ -117,7 +117,7 @@ private:
 		bool,
 		weapon_type::size
 	> owned_weapons_array;
-	
+
 	owned_weapons_array owned_weapons_;
 
 	control::direction_vector direction_;

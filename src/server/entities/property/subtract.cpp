@@ -18,7 +18,7 @@ sanguis::server::entities::property::subtract(
 	);
 
 	changeable_.current(
-		sub > changeable_.current() 
+		sub > changeable_.current()
 		?
 			0
 		:

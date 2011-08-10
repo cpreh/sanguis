@@ -4,7 +4,7 @@
 #include <fcppt/io/ostream.hpp>
 #include <fcppt/io/istream.hpp>
 
-namespace sanguis 
+namespace sanguis
 {
 namespace client
 {

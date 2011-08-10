@@ -49,7 +49,7 @@ sanguis::client::gui::object::object(
 	)
 {
 }
-	
+
 sanguis::client::gui::object::~object()
 {
 }

@@ -174,7 +174,7 @@ sanguis::client::control::action_handler::handle_cursor_action(
 		)
 	)
 		return;
-	
+
 	send_(
 		sanguis::messages::create(
 			sanguis::messages::player_attack_dest(
@@ -326,7 +326,7 @@ sanguis::client::control::action_handler::handle_switch_weapon(
 	typedef fcppt::cyclic_iterator<
 		owned_weapons_array::const_iterator
 	> iterator;
-	
+
 	iterator it(
 		owned_weapons_.begin()
 		+ static_cast<

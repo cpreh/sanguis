@@ -31,14 +31,14 @@ sanguis::load::model::load_dim(
 		throw sanguis::exception(
 			FCPPT_TEXT("Insufficient members in cell_dimensions!")
 		);
-	
+
 	return
 		sge::renderer::dim2(
 			static_cast<
 				sge::renderer::size_type
 			>(
 				sge::parse::json::get<
-					int	
+					int
 				>(
 					elements[0]
 				)
@@ -47,7 +47,7 @@ sanguis::load::model::load_dim(
 				sge::renderer::size_type
 			>(
 				sge::parse::json::get<
-					int	
+					int
 				>(
 					elements[1]
 				)

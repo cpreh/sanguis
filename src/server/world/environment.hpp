@@ -63,7 +63,7 @@ public:
 		sanguis::entity_id,
 		server::health
 	);
-	
+
 	void
 	exp_changed(
 		server::player_id,
@@ -117,7 +117,7 @@ public:
 	server::environment::load_context &
 	load_context() const;
 private:
-	world::object &world_;	
+	world::object &world_;
 };
 
 }

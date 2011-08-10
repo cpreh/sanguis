@@ -91,7 +91,7 @@ sanguis::client::daytime_settings::daytime_settings(
 				&daytime_settings::change_day,
 				this,
 				std::tr1::placeholders::_1,
-				std::tr1::placeholders::_2 
+				std::tr1::placeholders::_2
 			),
 			SGE_FONT_TEXT_LIT("Sets the current day to a fixed value.")
 		)
@@ -147,7 +147,7 @@ sanguis::client::daytime_settings::daytime_settings(
 {
 	boost::fusion::for_each(
 		current_time_,
-		boost::phoenix::arg_names::arg1 = invalid_value 
+		boost::phoenix::arg_names::arg1 = invalid_value
 	);
 }
 

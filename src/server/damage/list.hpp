@@ -19,11 +19,11 @@ public:
 	explicit list(
 		meta const &
 	);
-	
+
 	explicit list(
-		unit	
+		unit
 	);
-	
+
 	list &
 	operator()(
 		meta const &

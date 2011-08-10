@@ -123,7 +123,7 @@ bool
 sanguis::client::draw2d::particle::object::update(
 	draw2d::center const &_center,
 	particle::rotation const _rot,
-	particle::depth const _depth 
+	particle::depth const _depth
 )
 {
 	if(
@@ -142,7 +142,7 @@ sanguis::client::draw2d::particle::object::update(
 				sprite::particle::texture_animation
 			>(
 				animation_context_->result(),
-				fade_total_ 
+				fade_total_
 				?
 					sprite::animation::loop_method::repeat
 				:
@@ -171,7 +171,7 @@ sanguis::client::draw2d::particle::object::update(
 		(base::rot() + _rot).get()
 	);
 
-	sge::sprite::center( 
+	sge::sprite::center(
 		sprite_,
 		fcppt::math::vector::structure_cast<
 			sprite::point
@@ -192,7 +192,7 @@ sanguis::client::draw2d::particle::object::update(
 		!fade_total_
 	)
 		return ret;
-	
+
 	sprite_.color(
 		sge::image::color::rgba8(
 			(sge::image::color::init::red %= 1.0)

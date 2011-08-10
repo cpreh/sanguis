@@ -47,7 +47,7 @@ sanguis::client::draw2d::entities::player::player(
 	).order(
 		z_ordering::player_lower
 	);
-	
+
 	this->at(
 		top
 	).order(

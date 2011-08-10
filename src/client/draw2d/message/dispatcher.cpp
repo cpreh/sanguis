@@ -123,7 +123,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	this->configure_new_object(
 		factory::own_player(
 			env_.model_parameters(),
-			env_.transform_callback()	
+			env_.transform_callback()
 		),
 		_message
 	);

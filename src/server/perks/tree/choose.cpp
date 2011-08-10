@@ -12,31 +12,31 @@ sanguis::server::perks::tree::choose(
 	sanguis::perk_type::type const _perk
 )
 {
-	typedef 
+	typedef
 	fcppt::container::tree::pre_order<
 		tree::object
 	> traversal;
-	
+
 	traversal trav(
 		_tree
 	);
-	
+
 	traversal::iterator const it(
 		std::find_if(
 			trav.begin(),
 			trav.end(),
-			tree::equal(	
+			tree::equal(
 				_perk
 			)
 		)
 	);
-	
+
 	if(
 		it == trav.end()
 	)
 		throw sanguis::exception(
 			FCPPT_TEXT("Perk not found in the tree!")
 		);
-	
+
 	(*it).value().choose();
 }

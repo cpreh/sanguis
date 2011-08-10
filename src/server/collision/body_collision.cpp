@@ -33,7 +33,7 @@ sanguis::server::collision::body_collision(
 				_b.user_data()
 			).get()
 		);
-	
+
 	execute_collision(
 		base_a,
 		base_b

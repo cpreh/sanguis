@@ -35,7 +35,7 @@ namespace entities
 namespace model
 {
 
-class object 
+class object
 :
 	public container,
 	public with_health,
@@ -59,7 +59,7 @@ public:
 	client::health const
 	max_health() const;
 
-	client::health const	
+	client::health const
 	health() const;
 protected:
 	virtual void
@@ -78,11 +78,11 @@ protected:
 		sprite::rotation,
 		size_type index
 	);
-	
+
 	// base overrides
 	bool
 	is_decayed() const;
-	
+
 	virtual void
 	on_decay();
 

@@ -34,7 +34,7 @@ public:
 	load(
 		fcppt::filesystem::path const &
 	) const;
-	
+
 	textures(
 		sge::renderer::device &,
 		sge::image2d::multi_loader &
@@ -48,7 +48,7 @@ private:
 	do_load(
 		texture_identifier const &
 	) const;
-	
+
 	texture_context_impl_ptr const
 	do_load_unnamed(
 		fcppt::filesystem::path const &

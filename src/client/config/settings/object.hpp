@@ -40,7 +40,7 @@ public:
 private:
 	fcppt::filesystem::path const path_;
 
-	sge::parse::ini::section_vector sections_;	
+	sge::parse::ini::section_vector sections_;
 };
 
 }

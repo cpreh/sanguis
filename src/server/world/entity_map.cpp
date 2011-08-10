@@ -35,7 +35,7 @@ sanguis::server::world::entity_map::insert(
 			)
 		);
 }
-	
+
 sanguis::server::world::entity_map::iterator
 sanguis::server::world::entity_map::begin()
 {
@@ -77,7 +77,7 @@ sanguis::server::world::entity_map::erase(
 	iterator const _it
 )
 {
-	_it->second->destroy();	
+	_it->second->destroy();
 
 	impl_.erase(
 		_it

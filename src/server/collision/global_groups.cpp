@@ -33,7 +33,7 @@ sanguis::server::collision::global_groups::global_groups(
 				)
 			)
 		);
-	
+
 	typedef std::vector<
 		std::pair<
 			group::type,
@@ -133,6 +133,6 @@ sanguis::server::collision::global_groups::group(
 		throw sanguis::exception(
 			FCPPT_TEXT("Missing collision group in server!")
 		);
-	
+
 	return *it->second;
 }

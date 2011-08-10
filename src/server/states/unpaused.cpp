@@ -140,7 +140,7 @@ sanguis::server::states::unpaused::operator()(
 {
 	FCPPT_LOG_WARNING(
 		unpaused::log(),
-		fcppt::log::_ 
+		fcppt::log::_
 			<< FCPPT_TEXT("received superfluous unpause!")
 	);
 
@@ -168,7 +168,7 @@ sanguis::server::states::unpaused::operator()(
 			messages::pause()
 		)
 	);
-	
+
 	return transit<paused>();
 }
 
@@ -195,7 +195,7 @@ sanguis::server::states::unpaused::react(
 		unpaused,
 		boost::statechart::result
 	> functor_type;
-	
+
 	functor_type functor(
 		*this,
 		_message.id()

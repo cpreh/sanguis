@@ -143,7 +143,7 @@ sanguis::server::entities::with_body::on_transfer(
 void
 sanguis::server::entities::with_body::on_destroy()
 {
-	scoped_body_.reset();	
+	scoped_body_.reset();
 
 	with_ghosts::on_destroy();
 }
@@ -172,7 +172,7 @@ sanguis::server::entities::with_body::can_collide_with(
 			this->can_collide_with_body(
 				*entity
 			);
-	
+
 	return boost::logic::indeterminate;
 }
 

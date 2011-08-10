@@ -13,7 +13,7 @@ namespace weapons
 namespace events
 {
 
-class stop 
+class stop
 :
 	public boost::statechart::event<
 		stop

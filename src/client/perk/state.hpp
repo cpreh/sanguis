@@ -53,7 +53,7 @@ public:
 
 	bool
 	choose_perk(
-		sanguis::perk_type::type	
+		sanguis::perk_type::type
 	);
 
 	perk::tree const &
@@ -93,15 +93,15 @@ private:
 	typedef fcppt::scoped_ptr<
 		perk::tree
 	> tree_scoped_ptr;
-	
+
 	tree_scoped_ptr perks_;
 
 	client::player_level current_level_;
 
 	client::level consumed_levels_;
-	
+
 	mutable perk::level_map perk_levels_;
-	
+
 	fcppt::signal::object<
 		perk::level_function
 	> level_signal_;

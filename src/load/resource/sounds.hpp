@@ -40,12 +40,12 @@ public:
 	load(
 		resource::sound_identifier const &
 	) const;
-	
+
 	sge::audio::file_ptr const
 	load_uncached(
 		fcppt::filesystem::path const &
 	) const;
-	
+
 	sge::audio::sound::base_ptr const
 	make(
 		sge::audio::file_ptr,

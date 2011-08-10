@@ -9,7 +9,7 @@ sanguis::net::server::object::object(
 	awl::mainloop::io_service &_io_service,
 	net::duration const &_duration
 )
-:	
+:
 	impl_(
 		fcppt::make_unique_ptr<
 			server::object_impl
@@ -32,12 +32,12 @@ sanguis::net::server::object::~object()
 {
 }
 
-void 
+void
 sanguis::net::server::object::listen(
 	net::port const _port
 )
 {
-	return 
+	return
 		impl_->listen(
 			_port
 		);
@@ -61,64 +61,64 @@ sanguis::net::server::object::connections() const
 		impl_->connections();
 }
 
-void 
+void
 sanguis::net::server::object::queue_send(
 	net::id const _id
 )
 {
-	return 
+	return
 		impl_->queue_send(
 			_id
 		);
 }
 
-fcppt::signal::auto_connection 
+fcppt::signal::auto_connection
 sanguis::net::server::object::register_connect(
 	server::connect_callback const &_callback
 )
 {
-	return 
+	return
 		impl_->register_connect(
 			_callback
 		);
 }
 
-fcppt::signal::auto_connection 
+fcppt::signal::auto_connection
 sanguis::net::server::object::register_disconnect(
 	server::disconnect_callback const &_callback
 )
 {
-	return 
+	return
 		impl_->register_disconnect(
 			_callback
 		);
 }
 
-fcppt::signal::auto_connection 
+fcppt::signal::auto_connection
 sanguis::net::server::object::register_data(
 	server::data_callback const &_callback
 )
 {
-	return 
+	return
 		impl_->register_data(
 			_callback
 		);
 }
 
-fcppt::signal::auto_connection 
+fcppt::signal::auto_connection
 sanguis::net::server::object::register_timer(
 	server::timer_callback const &_callback
 )
 {
-	return 
+	return
 		impl_->register_timer(
 			_callback
 		);
 }
 
-void 
+void
 sanguis::net::server::object::stop()
 {
-	return 
+	return
 		impl_->stop();
 }

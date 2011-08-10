@@ -22,7 +22,7 @@ class ingame
 :
 	public boost::statechart::state<
 		ingame,
-		has_player	
+		has_player
 	>
 {
 	FCPPT_NONCOPYABLE(

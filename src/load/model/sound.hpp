@@ -23,9 +23,9 @@ public:
 		sge::parse::json::member_vector const &,
 		resource::sounds const &
 	);
-	
+
 	probability_type
-	probability() const;	
+	probability() const;
 
 	sge::audio::sound::positional_ptr const
 	make() const;

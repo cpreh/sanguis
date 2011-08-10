@@ -56,7 +56,7 @@ sanguis::client::draw2d::entities::bullet::update()
 		!origin_
 	)
 		origin_ = this->center();
-	
+
 	model::object::update();
 
 	draw2d::funit const
@@ -87,8 +87,8 @@ sanguis::client::draw2d::entities::bullet::update()
 			this->center().get()
 		)
 	);
-	
-	draw2d::center const new_center( 
+
+	draw2d::center const new_center(
 		fcppt::math::vector::is_null(
 			this->speed().get()
 		)

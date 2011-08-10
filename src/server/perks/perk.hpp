@@ -26,12 +26,12 @@ public:
 		entities::base &,
 		environment::object &
 	);
-	
+
 	void
 	raise_level(
 		entities::base &
 	);
-	
+
 	perk_type::type
 	type() const;
 

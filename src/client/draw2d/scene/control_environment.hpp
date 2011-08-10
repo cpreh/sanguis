@@ -30,9 +30,9 @@ public:
 
 	~control_environment();
 
-	client::control::attack_dest const 
+	client::control::attack_dest const
 	translate_attack_dest(
-		client::control::cursor_position const &	
+		client::control::cursor_position const &
 	) const;
 private:
 	draw2d::scene::object &object_;

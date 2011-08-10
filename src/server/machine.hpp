@@ -46,7 +46,7 @@ public:
 	void
 	listen();
 
-	void 
+	void
 	stop();
 
 	void

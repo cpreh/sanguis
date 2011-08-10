@@ -90,7 +90,7 @@ sanguis::server::entities::player::player(
 					std::tr1::placeholders::_1
 				)
 			)
-		)	
+		)
 	);
 }
 
@@ -130,7 +130,7 @@ sanguis::server::entities::player::add_exp(
 		new_level == old_level
 	)
 		return;
-	
+
 	skill_points_ += new_level.get() - old_level.get();
 
 	level_ = new_level;

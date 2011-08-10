@@ -48,7 +48,7 @@ public:
 
 	void
 	draw();
-	
+
 	sge::console::object &
 	sge_console();
 private:

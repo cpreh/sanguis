@@ -8,7 +8,7 @@
 sanguis::client::cursor::object::object(
 	sge::input::cursor::object &_cursor
 )
-: 
+:
 	cursor_(_cursor),
 	button_signal_(),
 	move_signal_(),

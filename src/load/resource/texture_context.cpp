@@ -11,7 +11,7 @@ sanguis::load::resource::texture_context::texture_context(
 	texture_context_impl_ptr const &_value
 )
 :
-	value_(	
+	value_(
 		_value
 	)
 {

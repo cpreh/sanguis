@@ -110,7 +110,7 @@ sanguis::server::global::context::insert_player(
 	server::world::object &cur_world(
 		this->world(
 			_world_id
-		)	
+		)
 	);
 
 	players_.insert(
@@ -284,7 +284,7 @@ sanguis::server::global::context::player_speed(
 				)
 			)
 		);
-		
+
 		entities::property::current_to_max(
 			player.movement_speed()
 		);
@@ -324,7 +324,7 @@ sanguis::server::global::context::player_choose_perk(
 			_player_id
 		]
 	);
-	
+
 	if(
 		!player.perk_choosable(
 			_perk_type
@@ -349,7 +349,7 @@ sanguis::server::global::context::player_choose_perk(
 			_perk_type
 		)
 	);
-	
+
 	server::send_available_perks(
 		player,
 		send_unicast_
@@ -443,7 +443,7 @@ sanguis::server::global::context::world(
 		it != worlds_.end()
 	)
 		return *it->second;
-	
+
 	return
 		*fcppt::container::ptr::insert_unique_ptr_map(
 			worlds_,

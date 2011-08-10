@@ -20,7 +20,7 @@ namespace ai
 
 class simple
 :
-	public ai::base 
+	public ai::base
 {
 	FCPPT_NONCOPYABLE(
 		simple

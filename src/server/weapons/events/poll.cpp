@@ -6,7 +6,7 @@ sanguis::server::weapons::events::poll::poll(
 :
 	owner_(_owner)
 {}
-	
+
 sanguis::server::entities::with_weapon &
 sanguis::server::weapons::events::poll::owner() const
 {

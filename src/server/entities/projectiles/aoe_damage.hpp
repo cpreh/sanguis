@@ -46,7 +46,7 @@ private:
 	do_damage(
 		with_health &
 	);
-};	
+};
 
 }
 }

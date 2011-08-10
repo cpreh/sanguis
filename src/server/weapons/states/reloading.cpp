@@ -39,7 +39,7 @@ sanguis::server::weapons::states::reloading::react(
 		!reload_time_.expired()
 	)
 		return discard_event();
-	
+
 	context<
 		weapon
 	>().reset_magazine();
@@ -54,7 +54,7 @@ sanguis::server::weapons::states::reloading::react(
 	events::stop const &
 )
 {
-	reload_time_.reset();	
+	reload_time_.reset();
 
 	return discard_event();
 }
@@ -64,9 +64,9 @@ sanguis::server::weapons::states::reloading::react(
 	events::reset const &
 )
 {
-	reload_time_.expired(	
+	reload_time_.expired(
 		true
 	);
-	
+
 	return discard_event();
 }

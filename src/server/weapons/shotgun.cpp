@@ -97,7 +97,7 @@ sanguis::server::weapons::shotgun::do_attack(
 			),
 			entities::insert_parameters(
 				_attack.spawn_point(),
-				angle	
+				angle
 			)
 		);
 	}

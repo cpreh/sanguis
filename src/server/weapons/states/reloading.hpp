@@ -50,7 +50,7 @@ public:
 	);
 
 	~reloading();
-	
+
 	boost::statechart::result
 	react(
 		events::poll const &
@@ -60,7 +60,7 @@ public:
 	react(
 		events::stop const &
 	);
-	
+
 	boost::statechart::result
 	react(
 		events::reset const &

@@ -42,7 +42,7 @@ public:
 	~explosion();
 private:
 	// base overrides
-	
+
 	void
 	update();
 
@@ -63,7 +63,7 @@ private:
 	) const;
 
 	sanguis::diff_clock const &diff_clock_;
-	
+
 	sprite::particle::system &particle_system_;
 
 	load::model::collection const &model_collection_;

@@ -119,7 +119,7 @@ try
 		:
 			1u
 	);
-	
+
 	if(
 		action == SGE_FONT_TEXT_LIT("wave")
 	)

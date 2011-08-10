@@ -14,7 +14,7 @@ template<
 	typename T,
 	typename Real
 >
-T const 
+T const
 lerp(
 	T const &a,
 	T const &b,

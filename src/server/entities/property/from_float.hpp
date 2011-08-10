@@ -20,7 +20,7 @@ namespace property
 template<
 	typename Float
 >
-value 
+value
 from_float(
 	Float const _float
 )
@@ -93,7 +93,7 @@ from_float(
 				den_exp * pot
 			)
 		);
-	
+
 	std::cerr << "dexp: " << dexp <<  ", pot: " << pot << ", float_: " << float_ <<  ", frac: " << frac << ", exp: " << exp << ", num: " << num << ", den: " << den << '\n';
 
 	if(

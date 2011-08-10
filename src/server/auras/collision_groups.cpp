@@ -27,7 +27,7 @@ sanguis::server::auras::collision_groups(
 			>(
 				collision::group::projectile_enemy
 			);
-	
+
 	if (
 		(
 			_team == team::players

@@ -38,7 +38,7 @@ public:
 		std::streamsize
 	);
 
-	std::streampos 
+	std::streampos
 	seek(
 		boost::iostreams::stream_offset,
 		std::ios_base::seekdir

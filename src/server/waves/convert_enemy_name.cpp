@@ -13,7 +13,7 @@ sanguis::server::waves::convert_enemy_name(
 		name == FCPPT_TEXT(#x)\
 	)\
 		return enemy_type::x;
-	
+
 	SANGUIS_NAME_CASE(wolf_black)
 	SANGUIS_NAME_CASE(wolf_brown)
 	SANGUIS_NAME_CASE(wolf_white)

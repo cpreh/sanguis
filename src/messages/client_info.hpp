@@ -24,7 +24,7 @@ typedef messages::make_class<
 				messages::string
 			>
 		>
-	> 
+	>
 >::type client_info;
 
 }

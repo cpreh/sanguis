@@ -42,7 +42,7 @@ private:
 	do_attack(
 		delayed_attack const &
 	);
-	
+
 	weapons::damage const damage_;
 
 	weapons::aoe const aoe_;

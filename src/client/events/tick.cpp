@@ -2,9 +2,9 @@
 
 sanguis::client::events::tick::tick(
 	sanguis::duration const &_delta
-) 
+)
 :
-	delta_(_delta) 
+	delta_(_delta)
 {
 }
 

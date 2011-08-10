@@ -50,7 +50,7 @@ public:
 	draw();
 private:
 	sge::font::metrics &font_metrics_;
-	
+
 	sge::font::text::drawer &font_drawer_;
 
 	client::exp experience_;

@@ -30,7 +30,7 @@ public:
 		instances_(_instances)
 	{
 	}
-	
+
 	template<
 		typename Msg
 	>
@@ -64,6 +64,6 @@ private:
 
 }
 }
-} 
+}
 
 #endif

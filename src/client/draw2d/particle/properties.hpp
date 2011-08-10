@@ -80,7 +80,7 @@ public:
 	movement() const;
 private:
 	particle::anim_speed const anim_speed_;
-	
+
 	particle::spawn_initial const spawn_initial_;
 
 	particle::gen_life_time const gen_life_time_;

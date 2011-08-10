@@ -37,7 +37,7 @@ public:
 			events::message
 		>
 	> reactions;
-	
+
 	paused();
 
 	~paused();
@@ -53,7 +53,7 @@ public:
 		server::player_id,
 		messages::player_unpause const &
 	);
-	
+
 	boost::statechart::result
 	operator()(
 		server::player_id,

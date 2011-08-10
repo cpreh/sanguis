@@ -246,7 +246,7 @@ sanguis::client::machine::resources() const
 	return resources_;
 }
 
-sanguis::client::cursor::object & 
+sanguis::client::cursor::object &
 sanguis::client::machine::cursor()
 {
 	return cursor_;

@@ -145,13 +145,13 @@ private:
 	typedef fcppt::scoped_ptr<
 		server::world::context
 	> world_context_scoped_ptr;
-	
+
 	world_context_scoped_ptr const world_context_;
 
 	typedef fcppt::scoped_ptr<
 		server::environment::load_context
 	> load_context_scoped_ptr;
-	
+
 	load_context_scoped_ptr const load_context_;
 
 	server::console &console_;

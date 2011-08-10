@@ -48,34 +48,34 @@ sanguis::client::music_handler::process()
 		!current_
 	)
 		return;
-	
+
 	if(
 		current_->status() == sge::audio::sound::play_status::stopped
 	)
 		this->next_title();
 }
 
-void 
+void
 sanguis::client::music_handler::next_title()
 {
 	sge::audio::sound::base_ptr const old(
 		current_
 	);
-	
+
 	current_ = this->load_random();
-	
+
 	if(
 		!current_
 	)
 		return;
-	
+
 	if(
 		old
 	)
 		current_->gain(
 			old->gain()
 		);
-	
+
 	current_->play(
 		sge::audio::sound::repeat::once
 	);
@@ -166,6 +166,6 @@ sanguis::client::music_handler::load_random() const
 					<< FCPPT_TEXT("\"!")
 			);
 		}
-	
+
 	return sge::audio::sound::base_ptr();
 }

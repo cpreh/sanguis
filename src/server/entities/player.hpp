@@ -62,7 +62,7 @@ public:
 	server::string const
 	name() const;
 
-	void	
+	void
 	add_exp(
 		server::exp
 	);
@@ -71,16 +71,16 @@ public:
 	perk_choosable(
 		perk_type::type
 	) const;
-	
+
 	void
 	add_perk(
 		perks::unique_ptr
 	);
-	
+
 	perks::tree::object const &
 	perk_tree() const;
 
-	server::player_id 
+	server::player_id
 	player_id() const;
 private:
 	void
@@ -134,7 +134,7 @@ private:
 	typedef fcppt::scoped_ptr<
 		perks::tree::object
 	> perk_tree_scoped_ptr;
-	
+
 	perk_tree_scoped_ptr perk_tree_;
 };
 

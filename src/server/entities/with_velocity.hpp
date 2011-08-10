@@ -60,7 +60,7 @@ private:
 	property::changeable movement_speed_;
 
 	server::direction direction_;
-	
+
 	fcppt::signal::scoped_connection const speed_change_;
 };
 

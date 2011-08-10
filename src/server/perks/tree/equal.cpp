@@ -9,7 +9,7 @@ sanguis::server::perks::tree::equal::equal(
 	type_(_type)
 {
 }
-	
+
 bool
 sanguis::server::perks::tree::equal::operator()(
 	tree::object const &_tree

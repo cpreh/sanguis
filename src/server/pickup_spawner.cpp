@@ -130,7 +130,7 @@ sanguis::server::pickup_spawner::spawn(
 		> _prob.get()
 	)
 		return;
-	
+
 	// TODO: this is really ugly! :(
 	center_ = _center;
 
@@ -180,7 +180,7 @@ sanguis::server::pickup_spawner::spawn_monster()
 			)
 		),
 		entities::insert_parameters_center(
-			center_	
+			center_
 		)
 	);
 }
@@ -206,7 +206,7 @@ sanguis::server::pickup_spawner::spawn_weapon(
 			)
 		),
 		entities::insert_parameters_center(
-			center_	
+			center_
 		)
 	);
 }
