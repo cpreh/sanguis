@@ -2,10 +2,10 @@
 #include "choosable.hpp"
 #include "info.hpp"
 #include "../log.hpp"
+#include <fcppt/assert/pre.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/output.hpp>
-#include <fcppt/assert.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::client::perk::state::state(
@@ -83,7 +83,7 @@ sanguis::client::perk::state::choose_perk(
 sanguis::client::perk::tree const &
 sanguis::client::perk::state::perks() const
 {
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_PRE(
 		perks_
 	);
 

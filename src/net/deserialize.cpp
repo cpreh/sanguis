@@ -10,11 +10,12 @@
 #include "../messages/serialization/endianness.hpp"
 #include "../messages/base.hpp"
 #include "../messages/global_context.hpp"
+#include "../exception.hpp"
 
+#include <fcppt/assert/throw.hpp>
+#include <fcppt/assert/throw_message.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/io/read.hpp>
-#include <fcppt/assert.hpp>
-#include <fcppt/assert_message.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/text.hpp>
 
@@ -69,24 +70,27 @@ sanguis::net::deserialize(
 		)
 	);
 
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_THROW(
 		static_cast<
 			net::size_type
 		>(
 			stream.gcount()
 		)
-		== net::message_header_size
+		== net::message_header_size,
+		sanguis::exception
 	);
 
-	FCPPT_ASSERT(
-		message_size > 0
+	FCPPT_ASSERT_THROW(
+		message_size > 0,
+		sanguis::exception
 	);
 
-	FCPPT_ASSERT_MESSAGE(
+	FCPPT_ASSERT_THROW_MESSAGE(
 		net::message_size(
 			message_size
 		)
 		<= _data.capacity(),
+		sanguis::exception,
 		(
 			fcppt::format(
 				FCPPT_TEXT("Received message size %1% is too big for the buffer!")
@@ -111,8 +115,9 @@ sanguis::net::deserialize(
 		)
 	);
 
-	FCPPT_ASSERT(
-		ret->size() == message_size
+	FCPPT_ASSERT_THROW(
+		ret->size() == message_size,
+		sanguis::exception
 	);
 
 	net::size_type const bytes_read(
@@ -123,11 +128,12 @@ sanguis::net::deserialize(
 		)
 	);
 
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_THROW(
 		bytes_read
 		==
 		net::message_header_size
-		+ ret->size()
+		+ ret->size(),
+		sanguis::exception
 	);
 
 	_data.erase(

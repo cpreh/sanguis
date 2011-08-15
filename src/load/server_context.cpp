@@ -5,8 +5,8 @@
 #include "model/parse_json.hpp"
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
+#include <fcppt/assert/error.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
-#include <fcppt/assert.hpp>
 #include <utility>
 
 sanguis::load::server_context::server_context()
@@ -62,7 +62,7 @@ sanguis::load::server_context::model_dim(
 		)
 	);
 
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_ERROR(
 		ret.second != false
 	);
 

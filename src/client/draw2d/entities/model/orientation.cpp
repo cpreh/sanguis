@@ -1,6 +1,6 @@
 #include "orientation.hpp"
 #include <fcppt/math/twopi.hpp>
-#include <fcppt/assert.hpp>
+#include <fcppt/assert/error.hpp>
 #include <algorithm>
 #include <cmath>
 
@@ -69,7 +69,7 @@ sanguis::client::draw2d::entities::model::orientation(
 			)
 		);
 
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_ERROR(
 		abs_dist >= static_cast<funit>(0) &&
 		swap_dist >= static_cast<funit>(0) &&
 		min_dist >= static_cast<funit>(0)
@@ -152,7 +152,7 @@ assert_range(
 	sanguis::client::draw2d::sprite::rotation const _value
 )
 {
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_ERROR(
 		_value >=
 		static_cast<
 			sanguis::client::draw2d::funit

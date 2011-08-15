@@ -36,6 +36,8 @@
 #include <sge/projectile/world.hpp>
 #include <sge/timer/elapsed_and_reset.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/assert/error.hpp>
+#include <fcppt/assert/pre.hpp>
 #include <fcppt/chrono/milliseconds.hpp>
 #include <fcppt/chrono/seconds.hpp>
 #include <fcppt/container/map_impl.hpp>
@@ -43,7 +45,6 @@
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/utf8/from_fcppt_string.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
-#include <fcppt/assert.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
@@ -494,7 +495,7 @@ sanguis::server::world::object::remove_sight_range(
 			)
 		);
 
-		FCPPT_ASSERT(
+		FCPPT_ASSERT_PRE(
 			sight_it != sight_ranges_.end()
 		);
 
@@ -523,7 +524,7 @@ sanguis::server::world::object::remove_sight_range(
 		)
 	);
 
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_ERROR(
 		it != entities_.end()
 	);
 

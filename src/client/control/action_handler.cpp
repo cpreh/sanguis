@@ -19,6 +19,7 @@
 #include <sge/console/object.hpp>
 #include <sge/font/text/lit.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/assert/error.hpp>
 #include <fcppt/chrono/milliseconds.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
@@ -319,7 +320,7 @@ sanguis::client::control::action_handler::handle_switch_weapon(
 		)
 	);
 
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_ERROR(
 		weapon_index < owned_weapons_.size()
 	);
 

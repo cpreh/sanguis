@@ -10,6 +10,7 @@
 #include "../receive_buffer_part.hpp"
 #undef max
 // asio brings in window.h's max macro :(
+#include <fcppt/assert/pre.hpp>
 #include <fcppt/chrono/asio/expires_from_now_any.hpp>
 #include <fcppt/chrono/duration_cast.hpp>
 #include <fcppt/chrono/duration_impl.hpp>
@@ -22,7 +23,6 @@
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/verbose.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
-#include <fcppt/assert.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
@@ -143,7 +143,7 @@ sanguis::net::server::object_impl::queue_send(
 		)
 	);
 
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_PRE(
 		it != connections_.end()
 	);
 
@@ -352,7 +352,7 @@ sanguis::net::server::object_impl::accept_handler(
 			<< new_connection_->id()
 	);
 
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_PRE(
 		new_connection_
 	);
 
@@ -479,7 +479,7 @@ sanguis::net::server::object_impl::receive_data(
 	server::connection &_con
 )
 {
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_PRE(
 		!_con.received_data().next_receive_part().empty()
 	);
 

@@ -1,7 +1,7 @@
 #include "receive_buffer_source.hpp"
 #include "receive_buffer.hpp"
 #include <fcppt/algorithm/copy_n.hpp>
-#include <fcppt/assert.hpp>
+#include <fcppt/assert/pre.hpp>
 #include <algorithm>
 
 sanguis::net::receive_buffer_source::receive_buffer_source(
@@ -57,11 +57,11 @@ sanguis::net::receive_buffer_source::seek(
 )
 {
 	// only here for tellg() to work!
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_PRE(
 		_offset == 0
 	);
 
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_PRE(
 		_dir == std::ios_base::cur
 	);
 

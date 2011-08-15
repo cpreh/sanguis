@@ -9,6 +9,7 @@
 #include "../entities/with_weapon.hpp"
 #include "../collision/distance.hpp"
 #include "../../exception.hpp"
+#include <fcppt/assert/error.hpp>
 #include <fcppt/chrono/duration_arithmetic.hpp>
 #include <fcppt/chrono/duration_comparison.hpp>
 #include <fcppt/math/sphere/basic_impl.hpp>
@@ -207,7 +208,7 @@ sanguis::server::weapons::weapon::use_magazine_item()
 {
 	++magazine_used_;
 
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_ERROR(
 		magazine_used_ <= magazine_size_.get()
 	);
 }

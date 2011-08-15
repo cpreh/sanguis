@@ -7,10 +7,10 @@
 #include "../../cast_enum.hpp"
 #include "../../perk_type.hpp"
 #include <fcppt/algorithm/find_if_exn.hpp>
+#include <fcppt/assert/pre.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
-#include <fcppt/assert.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 namespace
@@ -30,7 +30,7 @@ sanguis::client::perk::make_tree(
 {
 	// this code highly depends on the order in which the server serializes the tree
 
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_PRE(
 		!_list.empty()
 	);
 

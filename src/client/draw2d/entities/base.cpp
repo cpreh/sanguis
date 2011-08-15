@@ -1,8 +1,4 @@
 #include "base.hpp"
-#include "../log.hpp"
-#include <fcppt/log/headers.hpp>
-#include <fcppt/assert.hpp>
-#include <fcppt/text.hpp>
 
 sanguis::client::draw2d::entities::base::base()
 :

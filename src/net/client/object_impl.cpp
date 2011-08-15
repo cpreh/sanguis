@@ -10,6 +10,7 @@
 #include "../send_buffer_size.hpp"
 #undef max
 // asio brings in window.h's max macro :(
+#include <fcppt/assert/pre.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
@@ -17,7 +18,6 @@
 #include <fcppt/log/verbose.hpp>
 #include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/assert.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -389,7 +389,7 @@ sanguis::net::client::object_impl::send_data()
 void
 sanguis::net::client::object_impl::receive_data()
 {
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_PRE(
 		!receive_buffer_.next_receive_part().empty()
 	);
 

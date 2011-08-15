@@ -7,9 +7,9 @@
 #include "../messages/serialization/serialize.hpp"
 #include "../messages/base.hpp"
 
+#include <fcppt/assert/pre.hpp>
 #include <fcppt/io/write.hpp>
 #include <fcppt/truncation_check_cast.hpp>
-#include <fcppt/assert.hpp>
 
 #include <ostream>
 
@@ -27,7 +27,7 @@ serialize_impl(
 	Streambuf &_streambuf
 )
 {
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_PRE(
 		_message.get()
 	);
 
@@ -47,7 +47,7 @@ serialize_impl(
 		)
 	);
 
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_PRE(
 		header > 0
 	);
 

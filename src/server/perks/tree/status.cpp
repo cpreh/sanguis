@@ -1,5 +1,5 @@
 #include "status.hpp"
-#include <fcppt/assert.hpp>
+#include <fcppt/assert/pre.hpp>
 
 sanguis::server::perks::tree::status::status(
 	perk_type::type const _type,
@@ -19,11 +19,11 @@ sanguis::server::perks::tree::status::status(
 void
 sanguis::server::perks::tree::status::choose()
 {
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_PRE(
 		this->type() != perk_type::size
 	);
 
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_PRE(
 		level_.get() < max_level_.get()
 	);
 

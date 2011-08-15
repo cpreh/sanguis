@@ -4,8 +4,8 @@
 #include "transfer_parameters.hpp"
 #include "../environment/object.hpp"
 #include "../get_unique_id.hpp"
+#include <fcppt/assert/pre.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
-#include <fcppt/assert.hpp>
 
 sanguis::server::entities::base::base()
 :
@@ -75,7 +75,7 @@ sanguis::server::entities::base::link()
 sanguis::server::environment::object &
 sanguis::server::entities::base::environment() const
 {
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_PRE(
 		this->has_environment()
 	);
 

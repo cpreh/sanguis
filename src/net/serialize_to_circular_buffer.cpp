@@ -2,7 +2,7 @@
 #include "circular_buffer_sink.hpp"
 #include "message_size.hpp"
 #include "serialize_impl.hpp"
-#include <fcppt/assert_message.hpp>
+#include <fcppt/assert/pre_message.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/text.hpp>
 #include <boost/iostreams/stream_buffer.hpp>
@@ -13,7 +13,7 @@ sanguis::net::serialize_to_circular_buffer(
 	net::circular_buffer &_buffer
 )
 {
-	FCPPT_ASSERT_MESSAGE(
+	FCPPT_ASSERT_PRE_MESSAGE(
 		_buffer.capacity()
 		>=
 		net::message_size(

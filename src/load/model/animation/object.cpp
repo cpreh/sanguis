@@ -14,6 +14,7 @@
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/texture/part_raw.hpp>
+#include <fcppt/assert/error.hpp>
 #include <fcppt/chrono/duration_cast.hpp>
 #include <fcppt/chrono/milliseconds.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
@@ -45,7 +46,7 @@ calc_rect(
 		_area.size().w() == _cell_size.w()
 	)
 	{
-		FCPPT_ASSERT(
+		FCPPT_ASSERT_ERROR(
 			_index == static_cast<sge::renderer::size_type>(0)
 		);
 

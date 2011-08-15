@@ -7,10 +7,10 @@
 #include "../../damage/list.hpp"
 #include "../../../messages/add_projectile.hpp"
 #include "../../../messages/create.hpp"
+#include <fcppt/assert/pre.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/optional_impl.hpp>
-#include <fcppt/assert.hpp>
 #include <boost/logic/tribool.hpp>
 
 sanguis::projectile_type::type
@@ -98,7 +98,7 @@ sanguis::server::entities::projectiles::projectile::can_collide_with_body(
 	entities::with_body const &_other
 ) const
 {
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_PRE(
 		_other.team() != this->team()
 	); // shouldn't happen for now!
 
@@ -134,7 +134,7 @@ sanguis::server::entities::projectiles::projectile::add_message(
 	player_id const
 ) const
 {
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_PRE(
 		!this->server_only()
 	);
 

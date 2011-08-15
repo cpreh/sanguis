@@ -4,8 +4,8 @@
 #include "../collision/make_groups.hpp"
 #include "../environment/object.hpp"
 #include <sge/projectile/ghost/scoped.hpp>
+#include <fcppt/assert/pre.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
-#include <fcppt/assert.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 
@@ -18,7 +18,7 @@ sanguis::server::entities::with_ghosts::with_ghosts()
 
 sanguis::server::entities::with_ghosts::~with_ghosts()
 {
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_PRE(
 		scoped_ghosts_.empty()
 	);
 }

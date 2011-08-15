@@ -23,6 +23,7 @@
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/sprite/render_one_advanced.hpp>
+#include <fcppt/assert/error.hpp>
 #include <fcppt/container/grid/object_impl.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/comparison.hpp>
@@ -33,7 +34,6 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/round_div_int.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/assert.hpp>
 
 sanguis::client::draw2d::scene::world::state::state(
 	sge::renderer::device &_renderer,
@@ -175,7 +175,7 @@ sanguis::client::draw2d::scene::world::state::draw(
 		)
 	);
 
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_ERROR(
 		lower <= upper
 	);
 

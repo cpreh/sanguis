@@ -7,8 +7,8 @@
 #include <mizuiro/color/operators/scalar_multiply.hpp>
 #include <mizuiro/color/operators/subtract.hpp>
 #include <mizuiro/color/object_impl.hpp>
+#include <fcppt/assert/error.hpp>
 #include <fcppt/container/map_impl.hpp>
-#include <fcppt/assert.hpp>
 #include <boost/next_prior.hpp>
 
 template<
@@ -56,7 +56,7 @@ sanguis::client::draw2d::sunlight::basic_gradients<Value, Locator, Real>::interp
 	locator const r
 ) const
 {
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_ERROR(
 		values_.size() > static_cast<typename value_map::size_type>(1)
 	);
 

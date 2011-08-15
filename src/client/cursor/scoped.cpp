@@ -1,6 +1,7 @@
 #include "scoped.hpp"
 #include "object.hpp"
-#include <fcppt/assert.hpp>
+#include <fcppt/assert/error.hpp>
+#include <fcppt/assert/pre.hpp>
 
 sanguis::client::cursor::scoped::scoped(
 	cursor::object &_cursor
@@ -8,7 +9,7 @@ sanguis::client::cursor::scoped::scoped(
 :
 	cursor_(_cursor)
 {
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_PRE(
 		!cursor_.active()
 	);
 
@@ -19,7 +20,7 @@ sanguis::client::cursor::scoped::scoped(
 
 sanguis::client::cursor::scoped::~scoped()
 {
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_ERROR(
 		cursor_.active()
 	);
 

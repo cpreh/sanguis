@@ -6,9 +6,9 @@
 #include "../collision/make_groups.hpp"
 #include "../collision/user_data.hpp"
 #include <sge/projectile/body/scoped.hpp>
+#include <fcppt/assert/pre.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/assert.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
@@ -49,7 +49,7 @@ sanguis::server::entities::with_body::with_body(
 
 sanguis::server::entities::with_body::~with_body()
 {
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_PRE(
 		!scoped_body_
 	);
 }

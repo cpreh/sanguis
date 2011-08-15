@@ -1,6 +1,6 @@
 #include "limited.hpp"
 #include <sge/timer/reset_when_expired.hpp>
-#include <fcppt/assert.hpp>
+#include <fcppt/assert/pre.hpp>
 #include <algorithm>
 
 sanguis::server::entities::spawns::limited::limited(
@@ -36,7 +36,7 @@ sanguis::server::entities::spawns::limited::unregister(
 	entities::base &
 )
 {
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_PRE(
 		spawned_ > 0
 	);
 

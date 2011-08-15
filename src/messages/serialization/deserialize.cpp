@@ -5,7 +5,7 @@
 #include "../base.hpp"
 #include "../types/message_type.hpp"
 #include "../../exception.hpp"
-#include <fcppt/assert.hpp>
+#include <fcppt/assert/throw.hpp>
 #include <fcppt/text.hpp>
 #include <boost/static_assert.hpp>
 
@@ -32,16 +32,16 @@ sanguis::messages::serialization::deserialize(
 		sizeof(type)
 	);
 
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_THROW(
 		static_cast<
 			std::size_t
 		>(
 			_stream.gcount()
 		)
 		==
-		sizeof(types::message_type)
+		sizeof(types::message_type),
+		sanguis::exception
 	);
-
 
 	_stream.unget();
 

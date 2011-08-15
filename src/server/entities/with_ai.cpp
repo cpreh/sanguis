@@ -1,7 +1,7 @@
 #include "with_ai.hpp"
 #include "../weapons/weapon.hpp"
 #include "../ai/base.hpp"
-#include <fcppt/assert.hpp>
+#include <fcppt/assert/pre.hpp>
 #include <fcppt/move.hpp>
 
 sanguis::server::entities::with_ai::with_ai(
@@ -32,7 +32,7 @@ sanguis::server::entities::with_ai::on_update()
 {
 	with_weapon::on_update();
 
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_PRE(
 		ai_
 	);
 

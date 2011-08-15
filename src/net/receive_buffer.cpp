@@ -1,7 +1,8 @@
 #include "receive_buffer.hpp"
 #include "receive_buffer_part.hpp"
+#include <fcppt/assert/error.hpp>
+#include <fcppt/assert/pre.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
-#include <fcppt/assert.hpp>
 #include <boost/next_prior.hpp>
 #include <cstddef>
 
@@ -55,7 +56,7 @@ sanguis::net::receive_buffer::bytes_received(
 	size_type const _size
 )
 {
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_PRE(
 		static_cast<
 			size_type
 		>
@@ -72,7 +73,7 @@ sanguis::net::receive_buffer::bytes_received(
 	)
 		end_ = impl_.begin();
 
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_ERROR(
 		begin_ != end_
 	);
 }

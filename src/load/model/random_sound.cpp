@@ -6,11 +6,11 @@
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
+#include <fcppt/assert/error.hpp>
 #include <fcppt/random/inclusive_range.hpp>
 #include <fcppt/math/almost_zero.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assert.hpp>
 #include <functional>
 #include <numeric>
 
@@ -96,7 +96,7 @@ sanguis::load::model::random_sound::random_sound(
 			/ normalization
 		);
 
-	FCPPT_ASSERT(
+	FCPPT_ASSERT_ERROR(
 		ranges_.size() == sounds_.size()
 	);
 }
