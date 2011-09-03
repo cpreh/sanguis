@@ -9,13 +9,13 @@
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
-#include <fcppt/filesystem/exists.hpp>
 #include <fcppt/algorithm/find_exn.hpp>
 #include <fcppt/container/array.hpp>
+#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
+#include <fcppt/filesystem/exists.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/log/headers.hpp>
-#include <fcppt/auto_ptr.hpp>
-#include <fcppt/make_auto_ptr.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <iterator>
@@ -160,30 +160,24 @@ sanguis::load::model::weapon_category::weapon_category(
 			inner_members[0]
 		);
 
-		fcppt::auto_ptr<
-			animation::object
-		>
-		to_insert(
-			fcppt::make_auto_ptr<
-				animation::object
-			>(
-				sge::parse::json::get<
-					sge::parse::json::object
-				>(
-					member.value
-				),
-				_param.new_texture(
-					texture
-				)
-			)
-		);
-
 		if(
-			animations_.insert(
+			fcppt::container::ptr::insert_unique_ptr_map(
+				animations_,
 				find_animation_type(
 					member.name
 				),
-				to_insert
+				fcppt::make_unique_ptr<
+					animation::object
+				>(
+					sge::parse::json::get<
+						sge::parse::json::object
+					>(
+						member.value
+					),
+					_param.new_texture(
+						texture
+					)
+				)
 			).second == false
 		)
 			FCPPT_LOG_WARNING(

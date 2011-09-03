@@ -5,6 +5,7 @@
 #include "../message_id.hpp"
 #include <fcppt/nonassignable.hpp>
 #include <fcppt/make_auto_ptr.hpp>
+#include <memory>
 
 namespace sanguis
 {
@@ -42,7 +43,7 @@ public:
 			Msg
 		> dispatcher;
 
-		fcppt::auto_ptr<
+		std::auto_ptr<
 			dispatcher
 		> ptr(
 			fcppt::make_auto_ptr<

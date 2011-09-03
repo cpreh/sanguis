@@ -2,14 +2,14 @@
 #define SANGUIS_MESSAGES_AUTO_PTR_HPP_INCLUDED
 
 #include "base_fwd.hpp"
-#include <fcppt/auto_ptr.hpp>
+#include <memory>
 
 namespace sanguis
 {
 namespace messages
 {
 
-typedef fcppt::auto_ptr<
+typedef std::auto_ptr<
 	messages::base
 > auto_ptr;
 
