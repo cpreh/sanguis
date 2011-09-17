@@ -18,7 +18,6 @@
 #include "../../../health.hpp"
 #include "../../../../animation_type.hpp"
 #include "../../../../diff_clock_fwd.hpp"
-#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/scoped_ptr.hpp>
@@ -157,9 +156,6 @@ private:
 
 	bool
 	animations_ended() const;
-
-	static fcppt::log::object &
-	log();
 
 	sanguis::diff_clock const &diff_clock_;
 

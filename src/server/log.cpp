@@ -1,23 +1,13 @@
 #include "log.hpp"
-#include "../log.hpp"
-#include <fcppt/log/parameters/inherited.hpp>
-#include <fcppt/log/object.hpp>
-#include <fcppt/text.hpp>
+#include "log_location.hpp"
+#include "../log_parameters.hpp"
+#include <sge/log/declare_lib_base.hpp>
+#include <fcppt/log/parameters/all.hpp>
+#include <fcppt/log/location.hpp>
 
-namespace
-{
-
-fcppt::log::object log_(
-	fcppt::log::parameters::inherited(
-		sanguis::log(),
-		FCPPT_TEXT("server")
+SGE_LOG_DECLARE_LIB_BASE(
+	sanguis::server::log,
+	sanguis::log_parameters(
+		sanguis::server::log_location()
 	)
-);
-
-}
-
-fcppt::log::object &
-sanguis::server::log()
-{
-	return log_;
-}
+)

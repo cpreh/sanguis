@@ -1,17 +1,16 @@
 #include "log.hpp"
-#include "../log.hpp"
-#include <fcppt/log/parameters/inherited.hpp>
-#include <fcppt/log/object.hpp>
+#include "../log_location.hpp"
+#include "../log_parameters.hpp"
+#include <sge/log/declare_lib_base.hpp>
+#include <fcppt/log/parameters/all.hpp>
+#include <fcppt/log/location.hpp>
 #include <fcppt/text.hpp>
 
-fcppt::log::object &
-sanguis::load::log()
-{
-	static fcppt::log::object log_(
-		fcppt::log::parameters::inherited(
-			sanguis::log(),
-			FCPPT_TEXT("load")
-		)
-	);
-	return log_;
-}
+SGE_LOG_DECLARE_LIB_BASE(
+	sanguis::load::log,
+	sanguis::log_parameters(
+		sanguis::log_location()
+		/
+		FCPPT_TEXT("load")
+	)
+)

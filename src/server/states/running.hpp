@@ -13,7 +13,6 @@
 #include "../../messages/player_cheat.hpp"
 #include "../../messages/player_choose_perk.hpp"
 #include "../../messages/base_fwd.hpp"
-#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <boost/statechart/state.hpp>
@@ -96,9 +95,6 @@ private:
 		server::player_id,
 		messages::base const &
 	);
-
-	static fcppt::log::object
-	&log();
 
 	sanguis::server::console console_;
 

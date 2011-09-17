@@ -1,11 +1,6 @@
 #include "menu.hpp"
 #include "waiting_for_player.hpp"
-#include "../../messages/base.hpp"
-#include "../../messages/create.hpp"
-#include "../../messages/client_info.hpp"
-#include "../../messages/call/object.hpp"
-#include "../../exception.hpp"
-#include "../../cast_enum.hpp"
+#include "log_location.hpp"
 #include "../machine.hpp"
 #include "../events/action.hpp"
 #include "../events/connected.hpp"
@@ -14,19 +9,40 @@
 #include "../events/net_error.hpp"
 #include "../events/render.hpp"
 #include "../events/tick.hpp"
-#include "../log.hpp"
+#include "../../messages/base.hpp"
+#include "../../messages/create.hpp"
+#include "../../messages/client_info.hpp"
+#include "../../messages/call/object.hpp"
+#include "../../cast_enum.hpp"
+#include "../../exception.hpp"
+#include "../../log_parameters.hpp"
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/state/trampoline.hpp>
 #include <fcppt/function/object.hpp>
+#include <fcppt/log/parameters/all.hpp>
 #include <fcppt/log/headers.hpp>
-#include <fcppt/log/parameters/inherited.hpp>
+#include <fcppt/log/location.hpp>
+#include <fcppt/log/object.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/utf8/from_fcppt_string.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/text.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <ostream>
+
+namespace
+{
+
+fcppt::log::object logger(
+	sanguis::log_parameters(
+		sanguis::client::states::log_location()
+		/
+		FCPPT_TEXT("menu")
+	)
+);
+
+}
 
 sanguis::client::states::menu::menu(
 	my_context _ctx
@@ -126,7 +142,7 @@ sanguis::client::states::menu::react(
 )
 {
 	FCPPT_LOG_DEBUG(
-		menu::log(),
+		::logger,
 		fcppt::log::_
 			<< FCPPT_TEXT("menu: connect")
 	);
@@ -172,23 +188,10 @@ sanguis::client::states::menu::operator()(
 )
 {
 	FCPPT_LOG_DEBUG(
-		menu::log(),
+		::logger,
 		fcppt::log::_
 			<< FCPPT_TEXT("Received connect_state")
 	);
 
 	return transit<waiting_for_player>();
-}
-
-fcppt::log::object &
-sanguis::client::states::menu::log()
-{
-	static fcppt::log::object my_logger(
-		fcppt::log::parameters::inherited(
-			client::log(),
-			FCPPT_TEXT("states::menu")
-		)
-	);
-
-	return my_logger;
 }

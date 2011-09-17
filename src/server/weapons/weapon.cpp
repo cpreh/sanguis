@@ -1,5 +1,5 @@
 #include "weapon.hpp"
-#include "log.hpp"
+#include "log_location.hpp"
 #include "unlimited_magazine_count.hpp"
 #include "events/poll.hpp"
 #include "events/reset.hpp"
@@ -9,16 +9,32 @@
 #include "../entities/with_weapon.hpp"
 #include "../collision/distance.hpp"
 #include "../../exception.hpp"
+#include "../../log_parameters.hpp"
 #include <fcppt/assert/error.hpp>
 #include <fcppt/chrono/duration_arithmetic.hpp>
 #include <fcppt/chrono/duration_comparison.hpp>
 #include <fcppt/math/sphere/basic_impl.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
-#include <fcppt/log/parameters/inherited.hpp>
+#include <fcppt/log/parameters/all.hpp>
+#include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
-#include <fcppt/log/headers.hpp>
+#include <fcppt/log/output.hpp>
+#include <fcppt/log/warning.hpp>
 #include <fcppt/text.hpp>
 #include <ostream>
+
+namespace
+{
+
+fcppt::log::object logger(
+	sanguis::log_parameters(
+		sanguis::server::weapons::log_location()
+		/
+		FCPPT_TEXT("weapon")
+	)
+);
+
+}
 
 sanguis::server::weapons::range const
 sanguis::server::weapons::weapon::range() const
@@ -169,7 +185,7 @@ sanguis::server::weapons::weapon::weapon(
 		_cast_point.get() > _base_cooldown.get()
 	)
 		FCPPT_LOG_WARNING(
-			weapon::log(),
+			::logger,
 			fcppt::log::_
 				<< FCPPT_TEXT("A weapon's cast point interval is bigger than its cooldown!")
 	);
@@ -280,17 +296,4 @@ sanguis::server::weapons::weapon::on_castpoint(
 	entities::with_weapon &
 )
 {
-}
-
-fcppt::log::object &
-sanguis::server::weapons::weapon::log()
-{
-	static fcppt::log::object my_logger(
-		fcppt::log::parameters::inherited(
-			weapons::log(),
-			FCPPT_TEXT("weapon")
-		)
-	);
-
-	return my_logger;
 }

@@ -1,32 +1,13 @@
 #include "log.hpp"
-#include "log_context.hpp"
-#include <fcppt/log/object.hpp>
-#include <fcppt/log/parameters/root.hpp>
+#include "log_location.hpp"
+#include "log_parameters.hpp"
+#include <sge/log/declare_lib_base.hpp>
 #include <fcppt/log/parameters/all.hpp>
-#include <fcppt/io/cerr.hpp>
-#include <fcppt/text.hpp>
+#include <fcppt/log/location.hpp>
 
-fcppt::log::object &
-sanguis::log()
-{
-	static fcppt::log::object logger(
-		fcppt::log::parameters::root(
-			fcppt::io::cerr
-		)
-		.prefix(
-			FCPPT_TEXT("sanguis")
-		)
-		.enabled(
-			true
-		)
-		.level(
-			fcppt::log::level::debug // warning TODO
-		)
-		.context(
-			sanguis::log_context()
-		)
-		.create()
-	);
-
-	return logger;
-}
+SGE_LOG_DECLARE_LIB_BASE(
+	sanguis::log,
+	sanguis::log_parameters(
+		sanguis::log_location()
+	)
+)

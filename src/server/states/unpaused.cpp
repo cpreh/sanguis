@@ -1,28 +1,41 @@
 #include "unpaused.hpp"
 #include "paused.hpp"
+#include "log_location.hpp"
 #include "../events/disconnect.hpp"
 #include "../events/message.hpp"
 #include "../events/tick.hpp"
 #include "../global/context.hpp"
 #include "../message_functor.hpp"
-#include "../log.hpp"
 #include "../player_id_from_net.hpp"
 #include "../../messages/call/object.hpp"
 #include "../../messages/pause.hpp"
 #include "../../messages/base.hpp"
 #include "../../messages/create.hpp"
 #include "../../cast_enum.hpp"
-
+#include "../../log_parameters.hpp"
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
+#include <fcppt/log/parameters/all.hpp>
+#include <fcppt/log/location.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/log/parameters/inherited.hpp>
 #include <fcppt/text.hpp>
-
 #include <boost/mpl/vector/vector10.hpp>
 #include <ostream>
+
+namespace
+{
+
+fcppt::log::object logger(
+	sanguis::log_parameters(
+		sanguis::server::states::log_location()
+		/
+		FCPPT_TEXT("unpaused")
+	)
+);
+
+}
 
 sanguis::server::states::unpaused::unpaused()
 {
@@ -139,7 +152,7 @@ sanguis::server::states::unpaused::operator()(
 )
 {
 	FCPPT_LOG_WARNING(
-		unpaused::log(),
+		::logger,
 		fcppt::log::_
 			<< FCPPT_TEXT("received superfluous unpause!")
 	);
@@ -227,17 +240,4 @@ sanguis::server::states::unpaused::react(
 				std::tr1::placeholders::_1
 			)
 		);
-}
-
-fcppt::log::object &
-sanguis::server::states::unpaused::log()
-{
-	static fcppt::log::object my_logger(
-		fcppt::log::parameters::inherited(
-			server::log(),
-			FCPPT_TEXT("unpaused")
-		)
-	);
-
-	return my_logger;
 }

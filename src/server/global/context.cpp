@@ -16,13 +16,16 @@
 #include "../create_player.hpp"
 #include "../cheat.hpp"
 #include "../send_available_perks.hpp"
-#include "../log.hpp"
+#include "../log_location.hpp"
 #include "../../messages/remove_id.hpp"
 #include "../../messages/connect_state.hpp"
 #include "../../messages/create.hpp"
-#include <fcppt/log/parameters/inherited.hpp>
-#include <fcppt/log/headers.hpp>
+#include "../../log_parameters.hpp"
+#include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
+#include <fcppt/log/output.hpp>
+#include <fcppt/log/warning.hpp>
+#include <fcppt/log/parameters/all.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/math/vector/comparison.hpp>
@@ -38,6 +41,21 @@
 #include "../entities/insert_parameters_center.hpp"
 #include "../entities/pickups/weapon.hpp"
 #include <fcppt/math/dim/basic_impl.hpp>
+
+namespace
+{
+
+fcppt::log::object logger(
+	sanguis::log_parameters(
+		sanguis::server::log_location()
+		/
+		FCPPT_TEXT("global")
+		/
+		FCPPT_TEXT("context")
+	)
+);
+
+}
 
 sanguis::server::global::context::context(
 	server::unicast_callback const &_send_unicast,
@@ -332,7 +350,7 @@ sanguis::server::global::context::player_choose_perk(
 	)
 	{
 		FCPPT_LOG_WARNING(
-			context::log(),
+			::logger,
 			fcppt::log::_
 				<< FCPPT_TEXT("Player with id ")
 				<< _player_id
@@ -455,17 +473,4 @@ sanguis::server::global::context::world(
 				console_
 			)
 		).first->second;
-}
-
-fcppt::log::object &
-sanguis::server::global::context::log()
-{
-	static fcppt::log::object my_logger(
-		fcppt::log::parameters::inherited(
-			server::log(),
-			FCPPT_TEXT("global::context")
-		)
-	);
-
-	return my_logger;
 }

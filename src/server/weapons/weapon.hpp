@@ -22,7 +22,6 @@
 #include "../../duration.hpp"
 #include "../../time_unit.hpp"
 #include "../../weapon_type.hpp"
-#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <boost/statechart/state_machine.hpp>
 
@@ -151,9 +150,6 @@ private:
 	on_castpoint(
 		entities::with_weapon &owner
 	);
-
-	static fcppt::log::object &
-	log();
 
 	sanguis::diff_clock const &diff_clock_;
 

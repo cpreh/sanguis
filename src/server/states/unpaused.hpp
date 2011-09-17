@@ -13,7 +13,6 @@
 #include "../../messages/player_pause.hpp"
 #include "../../messages/player_unpause.hpp"
 #include "../../messages/base_fwd.hpp"
-#include <fcppt/log/object_fwd.hpp>
 #include <boost/mpl/list.hpp>
 #include <boost/statechart/simple_state.hpp>
 #include <boost/statechart/result.hpp>
@@ -107,9 +106,6 @@ private:
 		server::player_id,
 		messages::base const &
 	);
-
-	static fcppt::log::object &
-	log();
 };
 
 }

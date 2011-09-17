@@ -307,6 +307,8 @@ SET(
 	src/client/draw2d/insert_own_callback.hpp
 	src/client/draw2d/log.cpp
 	src/client/draw2d/log.hpp
+	src/client/draw2d/log_location.cpp
+	src/client/draw2d/log_location.hpp
 	src/client/draw2d/message/configure_entity.hpp
 	src/client/draw2d/message/dispatcher.cpp
 	src/client/draw2d/message/dispatcher.hpp
@@ -545,6 +547,8 @@ SET(
 	src/client/level.hpp
 	src/client/log.cpp
 	src/client/log.hpp
+	src/client/log_location.cpp
+	src/client/log_location.hpp
 	src/client/machine.cpp
 	src/client/machine.hpp
 	src/client/machine_fwd.hpp
@@ -599,6 +603,8 @@ SET(
 	src/client/states/ingame_menu.cpp
 	src/client/states/ingame_menu.hpp
 	src/client/states/ingame_menu_fwd.hpp
+	src/client/states/log_location.cpp
+	src/client/states/log_location.hpp
 	src/client/states/menu.cpp
 	src/client/states/menu.hpp
 	src/client/states/menu_fwd.hpp
@@ -744,6 +750,10 @@ SET(
 	src/log.hpp
 	src/log_context.cpp
 	src/log_context.hpp
+	src/log_location.cpp
+	src/log_location.hpp
+	src/log_parameters.cpp
+	src/log_parameters.hpp
 	src/main.cpp
 	src/main_object.cpp
 	src/main_object.hpp
@@ -1005,6 +1015,8 @@ SET(
 	src/net/is_disconnect.hpp
 	src/net/log.cpp
 	src/net/log.hpp
+	src/net/log_location.cpp
+	src/net/log_location.hpp
 	src/net/message_header.hpp
 	src/net/message_header_size.hpp
 	src/net/message_size.cpp
@@ -1375,6 +1387,8 @@ SET(
 	src/server/level_calculate.hpp
 	src/server/log.cpp
 	src/server/log.hpp
+	src/server/log_location.cpp
+	src/server/log_location.hpp
 	src/server/machine.cpp
 	src/server/machine.hpp
 	src/server/machine_fwd.hpp
@@ -1444,6 +1458,8 @@ SET(
 	src/server/send_callback.hpp
 	src/server/space_unit.hpp
 	src/server/speed.hpp
+	src/server/states/log_location.cpp
+	src/server/states/log_location.hpp
 	src/server/states/paused.cpp
 	src/server/states/paused.hpp
 	src/server/states/running.cpp
@@ -1507,6 +1523,8 @@ SET(
 	src/server/weapons/grenade.hpp
 	src/server/weapons/log.cpp
 	src/server/weapons/log.hpp
+	src/server/weapons/log_location.cpp
+	src/server/weapons/log_location.hpp
 	src/server/weapons/magazine_count.hpp
 	src/server/weapons/magazine_size.hpp
 	src/server/weapons/magazine_type.hpp

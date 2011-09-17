@@ -18,7 +18,6 @@
 #include "../id.hpp"
 #include "../port.hpp"
 #include <fcppt/chrono/asio/deadline_timer.hpp>
-#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/signal/object.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/unique_ptr.hpp>
@@ -169,10 +168,6 @@ private:
 	connection(
 		net::id
 	);
-
-	static
-	fcppt::log::object &
-	log();
 };
 
 }

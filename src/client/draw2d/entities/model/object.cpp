@@ -3,15 +3,17 @@
 #include "parameters.hpp"
 #include "healthbar.hpp"
 #include "decay_time.hpp"
-#include "../../log.hpp"
+#include "../../log_location.hpp"
 #include "../../sprite/index.hpp"
 #include "../../../../load/model/collection.hpp"
 #include "../../../../load/model/object.hpp"
 #include "../../../../duration_second.hpp"
 #include "../../../../exception.hpp"
+#include "../../../../log_parameters.hpp"
 #include <sge/sprite/object_impl.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
-#include <fcppt/log/parameters/inherited.hpp>
+#include <fcppt/log/parameters/all.hpp>
+#include <fcppt/log/location.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
@@ -21,6 +23,19 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
+
+namespace
+{
+
+fcppt::log::object logger(
+	sanguis::log_parameters(
+		sanguis::client::draw2d::log_location()
+		/
+		FCPPT_TEXT("model")
+	)
+);
+
+}
 
 sanguis::client::draw2d::entities::model::object::object(
 	model::parameters const &_param,
@@ -320,7 +335,7 @@ sanguis::client::draw2d::entities::model::object::attacking(
 		_attacking == attacking_
 	)
 		FCPPT_LOG_WARNING(
-			object::log(),
+			::logger,
 			fcppt::log::_ << FCPPT_TEXT("attacking(): value already set!")
 		);
 
@@ -338,7 +353,7 @@ sanguis::client::draw2d::entities::model::object::reloading(
 		_reloading == reloading_
 	)
 		FCPPT_LOG_WARNING(
-			object::log(),
+			::logger,
 			fcppt::log::_ << FCPPT_TEXT("reloading(): value already set!")
 		);
 
@@ -468,17 +483,4 @@ sanguis::client::draw2d::entities::model::object::animations_ended() const
 		)
 			return false;
 	return true;
-}
-
-fcppt::log::object &
-sanguis::client::draw2d::entities::model::object::log()
-{
-	static fcppt::log::object logger(
-		fcppt::log::parameters::inherited(
-			draw2d::log(),
-			FCPPT_TEXT("model")
-		)
-	);
-
-	return logger;
 }

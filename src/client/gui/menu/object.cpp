@@ -1,17 +1,19 @@
 #include "object.hpp"
 #include "connection_box.hpp"
 #include "../object.hpp"
-#include "../../log.hpp"
 #include "../../config/settings/get_or_default.hpp"
 #include "../../config/settings/set_key.hpp"
+#include "../../log_location.hpp"
+#include "../../../log_parameters.hpp"
 #include "../../../media_path.hpp"
 #include "../../../net/port.hpp"
 #include <sge/cegui/from_cegui_string.hpp>
 #include <sge/cegui/to_cegui_string.hpp>
 #include <fcppt/io/istringstream.hpp>
-#include <fcppt/log/parameters/inherited.hpp>
-#include <fcppt/log/object.hpp>
+#include <fcppt/log/parameters/all.hpp>
 #include <fcppt/log/headers.hpp>
+#include <fcppt/log/location.hpp>
+#include <fcppt/log/object.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -26,10 +28,13 @@
 namespace
 {
 
-fcppt::log::object mylogger(
-	fcppt::log::parameters::inherited(
-		sanguis::client::log(),
-		FCPPT_TEXT("menu: object")
+fcppt::log::object logger(
+	sanguis::log_parameters(
+		sanguis::client::log_location()
+		/
+		FCPPT_TEXT("menu")
+		/
+		FCPPT_TEXT("object")
 	)
 );
 
@@ -246,7 +251,7 @@ sanguis::client::gui::menu::object::connection_error(
 )
 {
 	FCPPT_LOG_DEBUG(
-		mylogger,
+		::logger,
 		fcppt::log::_
 			<< FCPPT_TEXT("got conection error: (")
 			<< _message

@@ -12,7 +12,6 @@
 #include "../../messages/connect_state.hpp"
 #include "../../connect_state.hpp"
 #include <sge/renderer/state/scoped.hpp>
-#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
@@ -97,9 +96,6 @@ public:
 		messages::connect_state const &
 	);
 private:
-	fcppt::log::object &
-	log();
-
 	client::gui::menu::object menu_;
 
 	connect_state::type connect_state_;
