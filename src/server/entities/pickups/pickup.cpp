@@ -1,17 +1,19 @@
-#include "pickup.hpp"
-#include "../circle_from_dim.hpp"
-#include "../nonsolid.hpp"
-#include "../../environment/load_context.hpp"
-#include "../../../load/pickup_name.hpp"
-#include "../../../messages/add_pickup.hpp"
-#include "../../../messages/create.hpp"
+#include <sanguis/server/entities/pickups/pickup.hpp>
+#include <sanguis/server/entities/circle_from_dim.hpp>
+#include <sanguis/server/entities/nonsolid.hpp>
+#include <sanguis/server/environment/load_context.hpp>
+#include <sanguis/load/pickup_name.hpp>
+#include <sanguis/messages/add_pickup.hpp>
+#include <sanguis/messages/create.hpp>
 #include <fcppt/chrono/seconds.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::pickup_type::type
 sanguis::server::entities::pickups::pickup::ptype() const

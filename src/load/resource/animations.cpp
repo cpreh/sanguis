@@ -1,10 +1,10 @@
-#include "animations.hpp"
-#include "textures.hpp"
-#include "map_get_or_create.hpp"
-#include "../log.hpp"
-#include "../../duration.hpp"
-#include "../../duration_second.hpp"
-#include "../../exception.hpp"
+#include <sanguis/load/resource/animations.hpp>
+#include <sanguis/load/resource/textures.hpp>
+#include <sanguis/load/resource/map_get_or_create.hpp>
+#include <sanguis/load/log.hpp>
+#include <sanguis/duration.hpp>
+#include <sanguis/duration_second.hpp>
+#include <sanguis/exception.hpp>
 #include <fcppt/chrono/duration_cast.hpp>
 #include <fcppt/chrono/milliseconds.hpp>
 #include <fcppt/chrono/rep.hpp>
@@ -21,8 +21,10 @@
 #include <fcppt/lexical_cast.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/predicate.hpp>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::load::resource::animation::series const
 sanguis::load::resource::animations::load(

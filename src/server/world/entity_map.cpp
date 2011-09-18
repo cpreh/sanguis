@@ -1,5 +1,5 @@
-#include "entity_map.hpp"
-#include "../entities/base.hpp"
+#include <sanguis/server/world/entity_map.hpp>
+#include <sanguis/server/entities/base.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 
 sanguis::server::world::entity_map::entity_map()

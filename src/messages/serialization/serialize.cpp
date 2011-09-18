@@ -1,7 +1,9 @@
-#include "serialize.hpp"
-#include "../base.hpp"
+#include <sanguis/messages/serialization/serialize.hpp>
+#include <sanguis/messages/base.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <iosfwd>
 #include <ostream>
+#include <fcppt/config/external_end.hpp>
 
 void
 sanguis::messages::serialization::serialize(

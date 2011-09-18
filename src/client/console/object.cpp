@@ -1,9 +1,9 @@
-#include "object.hpp"
-#include "../../messages/base.hpp"
-#include "../../messages/create.hpp"
-#include "../../messages/console_command.hpp"
-#include "../../messages/serialization/convert_string_vector.hpp"
-#include "../../from_console_arg_list.hpp"
+#include <sanguis/client/console/object.hpp>
+#include <sanguis/messages/base.hpp>
+#include <sanguis/messages/create.hpp>
+#include <sanguis/messages/console_command.hpp>
+#include <sanguis/messages/serialization/convert_string_vector.hpp>
+#include <sanguis/from_console_arg_list.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/console/object.hpp>
 #include <sge/font/text/from_fcppt_string.hpp>

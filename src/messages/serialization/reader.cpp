@@ -1,4 +1,4 @@
-#include "reader.hpp"
+#include <sanguis/messages/serialization/reader.hpp>
 
 sanguis::messages::serialization::reader::reader(
 	istream &_is

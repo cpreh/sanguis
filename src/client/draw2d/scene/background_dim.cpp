@@ -1,4 +1,4 @@
-#include "background_dim.hpp"
+#include <sanguis/client/draw2d/scene/background_dim.hpp>
 #include <sge/renderer/viewport_size.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 

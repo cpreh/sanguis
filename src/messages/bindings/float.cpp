@@ -1,7 +1,9 @@
-#include "float.hpp"
-#include "fundamental.hpp"
+#include <sanguis/messages/bindings/float.hpp>
+#include <sanguis/messages/bindings/fundamental.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/cstdint.hpp>
 #include <cmath>
+#include <fcppt/config/external_end.hpp>
 
 namespace
 {

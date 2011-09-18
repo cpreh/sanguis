@@ -1,7 +1,7 @@
-#include "infinite.hpp"
-#include "../entities/spawns/limited.hpp"
-#include "../entities/insert_parameters_center.hpp"
-#include "../environment/object.hpp"
+#include <sanguis/server/waves/infinite.hpp>
+#include <sanguis/server/entities/spawns/limited.hpp>
+#include <sanguis/server/entities/insert_parameters_center.hpp>
+#include <sanguis/server/environment/object.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/cref.hpp>

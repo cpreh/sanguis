@@ -1,5 +1,5 @@
-#include "sight_range.hpp"
-#include "../../exception.hpp"
+#include <sanguis/server/world/sight_range.hpp>
+#include <sanguis/exception.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::server::world::sight_range::sight_range()

@@ -1,5 +1,5 @@
-#include "wrapper.hpp"
-#include "meta.hpp"
+#include <sanguis/server/damage/wrapper.hpp>
+#include <sanguis/server/damage/meta.hpp>
 
 sanguis::server::damage::wrapper::wrapper(
 	damage_type::type const _type

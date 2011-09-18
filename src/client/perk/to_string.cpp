@@ -1,5 +1,7 @@
-#include "to_string.hpp"
-#include "../../exception.hpp"
+#include <sanguis/client/perk/to_string.hpp>
+#include <sanguis/perk_type.hpp>
+#include <fcppt/assert/unreachable.hpp>
+#include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 
 fcppt::string const
@@ -27,7 +29,5 @@ sanguis::client::perk::to_string(
 		break;
 	}
 
-	throw sanguis::exception(
-		FCPPT_TEXT("invalid perk type in perk::to_string!")
-	);
+	FCPPT_ASSERT_UNREACHABLE
 }

@@ -1,4 +1,4 @@
-#include "with_center.hpp"
+#include <sanguis/client/draw2d/entities/with_center.hpp>
 
 sanguis::client::draw2d::entities::with_center::with_center()
 {

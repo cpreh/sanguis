@@ -1,10 +1,12 @@
-#include "options.hpp"
-#include "../net/port.hpp"
+#include <sanguis/args/options.hpp>
+#include <sanguis/net/port.hpp>
 #include <sge/console/output_line_limit.hpp>
 #include <sge/renderer/multi_sample_type.hpp>
 #include <sge/renderer/no_multi_sampling.hpp>
 #include <sge/renderer/screen_unit.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <string>
+#include <fcppt/config/external_end.hpp>
 
 boost::program_options::options_description const
 sanguis::args::options()

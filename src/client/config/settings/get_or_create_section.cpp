@@ -1,9 +1,11 @@
-#include "get_or_create_section.hpp"
+#include <sanguis/client/config/settings/get_or_create_section.hpp>
 #include <sge/parse/ini/section.hpp>
 #include <sge/parse/ini/section_vector.hpp>
 #include <sge/parse/ini/entry.hpp>
 #include <sge/parse/ini/header_name_equal.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <algorithm>
+#include <fcppt/config/external_end.hpp>
 
 sge::parse::ini::section &
 sanguis::client::config::settings::get_or_create_section(

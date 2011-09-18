@@ -1,4 +1,4 @@
-#include "batch.hpp"
+#include <sanguis/client/draw2d/scene/world/batch.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/nonindexed_primitive_type.hpp>
 #include <sge/renderer/scoped_vertex_buffer.hpp>

@@ -1,16 +1,18 @@
-#include "exp_area.hpp"
-#include "player.hpp"
-#include "auto_weak_link.hpp"
-#include "collision_groups.hpp"
-#include "../collision/circle_ghost.hpp"
-#include "../entities/base.hpp"
-#include "../entities/player.hpp"
-#include "../../messages/base.hpp"
+#include <sanguis/server/entities/exp_area.hpp>
+#include <sanguis/server/entities/player.hpp>
+#include <sanguis/server/entities/auto_weak_link.hpp>
+#include <sanguis/server/entities/collision_groups.hpp>
+#include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/player.hpp>
+#include <sanguis/server/collision/circle_ghost.hpp>
+#include <sanguis/messages/base.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/dynamic_cast.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::server::entities::exp_area::exp_area(
 	server::exp const _exp

@@ -1,17 +1,19 @@
-#include "friend.hpp"
-#include "circle_from_dim.hpp"
-#include "default_solid.hpp"
-#include "pickups/pickup.hpp"
-#include "property/initial.hpp"
-#include "../ai/base.hpp"
-#include "../environment/load_context.hpp"
-#include "../weapons/weapon.hpp"
-#include "../../load/friend_name.hpp"
-#include "../../messages/add_friend.hpp"
-#include "../../messages/create.hpp"
+#include <sanguis/server/entities/friend.hpp>
+#include <sanguis/server/entities/circle_from_dim.hpp>
+#include <sanguis/server/entities/default_solid.hpp>
+#include <sanguis/server/entities/pickups/pickup.hpp>
+#include <sanguis/server/entities/property/initial.hpp>
+#include <sanguis/server/ai/base.hpp>
+#include <sanguis/server/environment/load_context.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/load/friend_name.hpp>
+#include <sanguis/messages/add_friend.hpp>
+#include <sanguis/messages/create.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::server::entities::friend_::friend_(
 	sanguis::diff_clock const &_diff_clock,

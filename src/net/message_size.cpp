@@ -1,5 +1,5 @@
-#include "message_size.hpp"
-#include "message_header_size.hpp"
+#include <sanguis/net/message_size.hpp>
+#include <sanguis/net/message_header_size.hpp>
 
 sanguis::net::size_type
 sanguis::net::message_size(

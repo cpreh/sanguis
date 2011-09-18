@@ -1,7 +1,9 @@
-#include "limited.hpp"
+#include <sanguis/server/entities/spawns/limited.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/assert/pre.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <algorithm>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::server::entities::spawns::limited::limited(
 	sanguis::diff_clock const &_diff_clock,

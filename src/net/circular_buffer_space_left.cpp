@@ -1,4 +1,4 @@
-#include "circular_buffer_space_left.hpp"
+#include <sanguis/net/circular_buffer_space_left.hpp>
 
 sanguis::net::size_type
 sanguis::net::circular_buffer_space_left(

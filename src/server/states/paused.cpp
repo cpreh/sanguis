@@ -1,16 +1,16 @@
-#include "paused.hpp"
-#include "unpaused.hpp"
-#include "log_location.hpp"
-#include "../events/disconnect.hpp"
-#include "../events/message.hpp"
-#include "../events/tick.hpp"
-#include "../message_functor.hpp"
-#include "../player_id_from_net.hpp"
-#include "../../messages/call/object.hpp"
-#include "../../messages/unpause.hpp"
-#include "../../messages/create.hpp"
-#include "../../messages/base.hpp"
-#include "../../log_parameters.hpp"
+#include <sanguis/server/states/paused.hpp>
+#include <sanguis/server/states/unpaused.hpp>
+#include <sanguis/server/states/log_location.hpp>
+#include <sanguis/server/events/disconnect.hpp>
+#include <sanguis/server/events/message.hpp>
+#include <sanguis/server/events/tick.hpp>
+#include <sanguis/server/message_functor.hpp>
+#include <sanguis/server/player_id_from_net.hpp>
+#include <sanguis/messages/call/object.hpp>
+#include <sanguis/messages/unpause.hpp>
+#include <sanguis/messages/create.hpp>
+#include <sanguis/messages/base.hpp>
+#include <sanguis/log_parameters.hpp>
 #include <fcppt/log/parameters/all.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
@@ -18,8 +18,10 @@
 #include <fcppt/log/warning.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <ostream>
+#include <fcppt/config/external_end.hpp>
 
 namespace
 {

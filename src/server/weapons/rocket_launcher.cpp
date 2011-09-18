@@ -1,9 +1,9 @@
-#include "rocket_launcher.hpp"
-#include "delayed_attack.hpp"
-#include "unlimited_magazine_count.hpp"
-#include "../entities/projectiles/rocket.hpp"
-#include "../entities/insert_parameters.hpp"
-#include "../environment/object.hpp"
+#include <sanguis/server/weapons/rocket_launcher.hpp>
+#include <sanguis/server/weapons/delayed_attack.hpp>
+#include <sanguis/server/weapons/unlimited_magazine_count.hpp>
+#include <sanguis/server/entities/projectiles/rocket.hpp>
+#include <sanguis/server/entities/insert_parameters.hpp>
+#include <sanguis/server/environment/object.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>

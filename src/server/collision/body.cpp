@@ -1,10 +1,10 @@
-#include "body.hpp"
-#include "from_sge_vector.hpp"
-#include "solidity.hpp"
-#include "to_sge_vector.hpp"
-#include "to_sge_user_data.hpp"
-#include "../center.hpp"
-#include "../speed.hpp"
+#include <sanguis/server/collision/body.hpp>
+#include <sanguis/server/collision/from_sge_vector.hpp>
+#include <sanguis/server/collision/solidity.hpp>
+#include <sanguis/server/collision/to_sge_vector.hpp>
+#include <sanguis/server/collision/to_sge_user_data.hpp>
+#include <sanguis/server/center.hpp>
+#include <sanguis/server/speed.hpp>
 #include <sge/projectile/body/angular_velocity.hpp>
 #include <sge/projectile/body/linear_velocity.hpp>
 #include <sge/projectile/body/object.hpp>

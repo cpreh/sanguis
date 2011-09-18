@@ -1,9 +1,9 @@
-#include "choosable.hpp"
-#include "find_info.hpp"
-#include "info.hpp"
-#include "level.hpp"
-#include "level_map.hpp"
-#include "../../perk_type.hpp"
+#include <sanguis/client/perk/choosable.hpp>
+#include <sanguis/client/perk/find_info.hpp>
+#include <sanguis/client/perk/info.hpp>
+#include <sanguis/client/perk/level.hpp>
+#include <sanguis/client/perk/level_map.hpp>
+#include <sanguis/perk_type.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
 
 namespace

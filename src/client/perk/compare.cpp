@@ -1,5 +1,5 @@
-#include "compare.hpp"
-#include "info.hpp"
+#include <sanguis/client/perk/compare.hpp>
+#include <sanguis/client/perk/info.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
 
 sanguis::client::perk::compare::compare(

@@ -1,18 +1,18 @@
-#include "unpaused.hpp"
-#include "paused.hpp"
-#include "log_location.hpp"
-#include "../events/disconnect.hpp"
-#include "../events/message.hpp"
-#include "../events/tick.hpp"
-#include "../global/context.hpp"
-#include "../message_functor.hpp"
-#include "../player_id_from_net.hpp"
-#include "../../messages/call/object.hpp"
-#include "../../messages/pause.hpp"
-#include "../../messages/base.hpp"
-#include "../../messages/create.hpp"
-#include "../../cast_enum.hpp"
-#include "../../log_parameters.hpp"
+#include <sanguis/server/states/unpaused.hpp>
+#include <sanguis/server/states/paused.hpp>
+#include <sanguis/server/states/log_location.hpp>
+#include <sanguis/server/events/disconnect.hpp>
+#include <sanguis/server/events/message.hpp>
+#include <sanguis/server/events/tick.hpp>
+#include <sanguis/server/global/context.hpp>
+#include <sanguis/server/message_functor.hpp>
+#include <sanguis/server/player_id_from_net.hpp>
+#include <sanguis/messages/call/object.hpp>
+#include <sanguis/messages/pause.hpp>
+#include <sanguis/messages/base.hpp>
+#include <sanguis/messages/create.hpp>
+#include <sanguis/cast_enum.hpp>
+#include <sanguis/log_parameters.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/log/parameters/all.hpp>
@@ -21,8 +21,10 @@
 #include <fcppt/log/warning.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <ostream>
+#include <fcppt/config/external_end.hpp>
 
 namespace
 {

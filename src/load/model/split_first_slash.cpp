@@ -1,34 +1,38 @@
-#include "split_first_slash.hpp"
-#include "../../exception.hpp"
+#include <sanguis/load/model/split_first_slash.hpp>
+#include <sanguis/exception.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::load::model::split_pair const
 sanguis::load::model::split_first_slash(
-	fcppt::string const &s)
+	fcppt::string const &_string
+)
 {
 	fcppt::string::size_type const sz(
-		s.find(
+		_string.find(
 			FCPPT_TEXT('/')
 		)
 	);
 
-	if(sz == fcppt::string::npos)
-		throw exception(
+	if(
+		sz == fcppt::string::npos
+	)
+		throw sanguis::exception(
 			FCPPT_TEXT("No / found in ")
-			+ s
+			+ _string
 		);
 
-	return split_pair(
-		fcppt::string(
-			s.substr(
-				0,
-				sz
+	return
+		model::split_pair(
+			fcppt::string(
+				_string.substr(
+					0,
+					sz
+				)
+			),
+			fcppt::string(
+				_string.substr(
+					sz + 1
+				)
 			)
-		),
-		fcppt::string(
-			s.substr(
-				sz + 1
-			)
-		)
-	);
+		);
 }

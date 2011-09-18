@@ -1,4 +1,4 @@
-#include "user_data.hpp"
+#include <sanguis/server/collision/user_data.hpp>
 
 sanguis::server::collision::user_data::user_data(
 	collision::body_base &_data

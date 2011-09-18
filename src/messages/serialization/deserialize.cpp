@@ -1,13 +1,15 @@
-#include "deserialize.hpp"
-#include "context.hpp"
-#include "reader.hpp"
-#include "dispatcher_base.hpp"
-#include "../base.hpp"
-#include "../types/message_type.hpp"
-#include "../../exception.hpp"
+#include <sanguis/messages/serialization/deserialize.hpp>
+#include <sanguis/messages/serialization/context.hpp>
+#include <sanguis/messages/serialization/dispatcher_base.hpp>
+#include <sanguis/messages/serialization/reader.hpp>
+#include <sanguis/messages/types/message_type.hpp>
+#include <sanguis/messages/base.hpp>
+#include <sanguis/exception.hpp>
 #include <fcppt/assert/throw.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/static_assert.hpp>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::messages::auto_ptr
 sanguis::messages::serialization::deserialize(

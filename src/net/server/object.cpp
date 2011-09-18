@@ -1,6 +1,6 @@
-#include "object.hpp"
-#include "object_impl.hpp"
-#include "../duration.hpp"
+#include <sanguis/net/server/object.hpp>
+#include <sanguis/net/server/object_impl.hpp>
+#include <sanguis/net/duration.hpp>
 #include <awl/mainloop/asio/io_service.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>

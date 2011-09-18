@@ -1,8 +1,8 @@
-#include "enemy.hpp"
-#include "../entities/model/object.hpp"
-#include "../z_ordering.hpp"
-#include "../../../enemy_type.hpp"
-#include "../../../load/enemy_name.hpp"
+#include <sanguis/client/draw2d/factory/enemy.hpp>
+#include <sanguis/client/draw2d/entities/model/object.hpp>
+#include <sanguis/client/draw2d/z_ordering.hpp>
+#include <sanguis/enemy_type.hpp>
+#include <sanguis/load/enemy_name.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 

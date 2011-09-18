@@ -1,18 +1,20 @@
-#include "object.hpp"
-#include "log.hpp"
-#include "events/disconnect.hpp"
-#include "events/message.hpp"
-#include "events/tick.hpp"
-#include "states/running.hpp"
-#include "states/unpaused.hpp"
+#include <sanguis/server/object.hpp>
+#include <sanguis/server/log.hpp>
+#include <sanguis/server/events/disconnect.hpp>
+#include <sanguis/server/events/message.hpp>
+#include <sanguis/server/events/tick.hpp>
+#include <sanguis/server/states/running.hpp>
+#include <sanguis/server/states/unpaused.hpp>
 #include <awl/mainloop/asio/create_io_service_base.hpp>
 #include <awl/mainloop/io_service.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <exception>
 #include <cstdlib>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::server::object::object(
 	net::port const _port,

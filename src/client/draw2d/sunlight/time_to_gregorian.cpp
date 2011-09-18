@@ -1,6 +1,8 @@
-#include "time_to_gregorian.hpp"
+#include <sanguis/client/draw2d/sunlight/time_to_gregorian.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/date_time/date_defs.hpp>
 #include <ctime>
+#include <fcppt/config/external_end.hpp>
 
 boost::gregorian::date const
 sanguis::client::draw2d::sunlight::time_to_gregorian(

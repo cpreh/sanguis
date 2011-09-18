@@ -1,4 +1,4 @@
-#include "base.hpp"
+#include <sanguis/server/ai/base.hpp>
 
 sanguis::server::ai::base::base()
 {}

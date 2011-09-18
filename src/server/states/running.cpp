@@ -1,21 +1,21 @@
-#include "running.hpp"
-#include "unpaused.hpp"
-#include "log_location.hpp"
-#include "../events/disconnect.hpp"
-#include "../events/message.hpp"
-#include "../events/tick.hpp"
-#include "../global/context.hpp"
-#include "../message_functor.hpp"
-#include "../make_unicast_callback.hpp"
-#include "../make_send_callback.hpp"
-#include "../player_id_from_net.hpp"
-#include "../../connect_state.hpp"
-#include "../../messages/call/object.hpp"
-#include "../../messages/serialization/convert_string_vector.hpp"
-#include "../../messages/create.hpp"
-#include "../../cast_enum.hpp"
-#include "../../log_parameters.hpp"
-#include "../../to_console_arg_list.hpp"
+#include <sanguis/server/states/running.hpp>
+#include <sanguis/server/states/unpaused.hpp>
+#include <sanguis/server/states/log_location.hpp>
+#include <sanguis/server/events/disconnect.hpp>
+#include <sanguis/server/events/message.hpp>
+#include <sanguis/server/events/tick.hpp>
+#include <sanguis/server/global/context.hpp>
+#include <sanguis/server/message_functor.hpp>
+#include <sanguis/server/make_unicast_callback.hpp>
+#include <sanguis/server/make_send_callback.hpp>
+#include <sanguis/server/player_id_from_net.hpp>
+#include <sanguis/connect_state.hpp>
+#include <sanguis/messages/call/object.hpp>
+#include <sanguis/messages/serialization/convert_string_vector.hpp>
+#include <sanguis/messages/create.hpp>
+#include <sanguis/cast_enum.hpp>
+#include <sanguis/log_parameters.hpp>
+#include <sanguis/to_console_arg_list.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/log/parameters/all.hpp>
 #include <fcppt/log/debug.hpp>
@@ -31,7 +31,9 @@
 #include <fcppt/cref.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
+#include <fcppt/config/external_end.hpp>
 
 namespace
 {

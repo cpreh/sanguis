@@ -1,11 +1,10 @@
-#include "aoe_projectile.hpp"
-#include "../entities/aoe_bullet.hpp"
-#include "../../../load/aoe_projectile_name.hpp"
-#include "../../../exception.hpp"
+#include <sanguis/client/draw2d/factory/aoe_projectile.hpp>
+#include <sanguis/client/draw2d/entities/aoe_bullet.hpp>
+#include <sanguis/load/aoe_projectile_name.hpp>
+#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
-#include <fcppt/text.hpp>
 
 sanguis::client::draw2d::entities::unique_ptr
 sanguis::client::draw2d::factory::aoe_projectile(
@@ -45,7 +44,5 @@ sanguis::client::draw2d::factory::aoe_projectile(
 			);
 	}
 
-	throw sanguis::exception(
-		FCPPT_TEXT("draw::factory::aoe_projectile: missing loading code!")
-	);
+	FCPPT_ASSERT_UNREACHABLE
 }

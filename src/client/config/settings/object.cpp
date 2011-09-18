@@ -1,6 +1,6 @@
-#include "object.hpp"
-#include "../../log.hpp"
-#include "../../../exception.hpp"
+#include <sanguis/client/config/settings/object.hpp>
+#include <sanguis/client/log.hpp>
+#include <sanguis/exception.hpp>
 #include <sge/parse/ini/output/to_file.hpp>
 #include <sge/parse/ini/parse_file.hpp>
 #include <sge/parse/exception.hpp>

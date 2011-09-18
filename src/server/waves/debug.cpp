@@ -1,5 +1,5 @@
-#include "debug.hpp"
-#include "spawn.hpp"
+#include <sanguis/server/waves/debug.hpp>
+#include <sanguis/server/waves/spawn.hpp>
 
 sanguis::server::waves::debug::debug(
 	sanguis::diff_clock const &_diff_clock

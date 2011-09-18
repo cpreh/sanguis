@@ -1,4 +1,4 @@
-#include "transfer_parameters.hpp"
+#include <sanguis/server/entities/transfer_parameters.hpp>
 
 sanguis::server::entities::transfer_parameters::transfer_parameters(
 	sge::projectile::world &_world,

@@ -1,6 +1,6 @@
-#include "with_ai.hpp"
-#include "../weapons/weapon.hpp"
-#include "../ai/base.hpp"
+#include <sanguis/server/entities/with_ai.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/ai/base.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/move.hpp>
 

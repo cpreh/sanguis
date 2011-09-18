@@ -1,5 +1,5 @@
-#include "player_id_from_args.hpp"
-#include "player_id_from_net.hpp"
+#include <sanguis/server/player_id_from_args.hpp>
+#include <sanguis/server/player_id_from_net.hpp>
 #include <fcppt/lexical_cast.hpp>
 
 sanguis::server::player_id const

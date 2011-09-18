@@ -1,12 +1,12 @@
-#include "make_batch.hpp"
-#include "batch.hpp"
-#include "sort_shapes.hpp"
-#include "texture_slice.hpp"
-#include "texture_slice_vector.hpp"
-#include "vf/format_part.hpp"
-#include "vf/pos.hpp"
-#include "vf/texpos.hpp"
-#include "../../../../load/resource/textures.hpp"
+#include <sanguis/client/draw2d/scene/world/make_batch.hpp>
+#include <sanguis/client/draw2d/scene/world/batch.hpp>
+#include <sanguis/client/draw2d/scene/world/sort_shapes.hpp>
+#include <sanguis/client/draw2d/scene/world/texture_slice.hpp>
+#include <sanguis/client/draw2d/scene/world/texture_slice_vector.hpp>
+#include <sanguis/client/draw2d/scene/world/vf/format_part.hpp>
+#include <sanguis/client/draw2d/scene/world/vf/pos.hpp>
+#include <sanguis/client/draw2d/scene/world/vf/texpos.hpp>
+#include <sanguis/load/resource/textures.hpp>
 #include <sanguis/creator/geometry/polygon.hpp>
 #include <sanguis/creator/geometry/shape.hpp>
 #include <sanguis/creator/geometry/shape_container.hpp>
@@ -23,11 +23,13 @@
 #include <sge/renderer/vf/vertex.hpp>
 #include <sge/renderer/vf/view.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/spirit/home/phoenix/bind/bind_function.hpp>
 #include <boost/spirit/home/phoenix/core/argument.hpp>
 #include <boost/spirit/home/phoenix/operator/arithmetic.hpp>
 #include <algorithm>
 #include <numeric>
+#include <fcppt/config/external_end.hpp>
 
 namespace
 {

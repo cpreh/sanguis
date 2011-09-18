@@ -1,5 +1,5 @@
-#include "object.hpp"
-#include "../cursor/object.hpp"
+#include <sanguis/client/gui/object.hpp>
+#include <sanguis/client/cursor/object.hpp>
 #include <sge/cegui/duration.hpp>
 #include <sge/cegui/load_context.hpp>
 #include <sge/config/media_path.hpp>

@@ -1,10 +1,10 @@
-#include "generator.hpp"
-#include "infinite.hpp"
-#include "single.hpp"
-#include "make.hpp"
-#include "convert_enemy_name.hpp"
-#include "../console.hpp"
-#include "../player_id_from_args.hpp"
+#include <sanguis/server/waves/generator.hpp>
+#include <sanguis/server/waves/infinite.hpp>
+#include <sanguis/server/waves/single.hpp>
+#include <sanguis/server/waves/make.hpp>
+#include <sanguis/server/waves/convert_enemy_name.hpp>
+#include <sanguis/server/console.hpp>
+#include <sanguis/server/player_id_from_args.hpp>
 #include <sge/font/text/to_fcppt_string.hpp>
 #include <sge/font/text/lit.hpp>
 #include <sge/font/text/string.hpp>
@@ -14,9 +14,11 @@
 #include <fcppt/exception.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/assign/ptr_list_inserter.hpp>
+#include <fcppt/config/external_end.hpp>
 
-#include "../log.hpp"
+#include <sanguis/server/log.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/lexical_cast.hpp>
 

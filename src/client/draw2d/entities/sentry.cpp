@@ -1,7 +1,7 @@
-#include "sentry.hpp"
-#include "../z_ordering.hpp"
-#include "../sprite/index.hpp"
-#include "../../../load/friend_name.hpp"
+#include <sanguis/client/draw2d/entities/sentry.hpp>
+#include <sanguis/client/draw2d/z_ordering.hpp>
+#include <sanguis/client/draw2d/sprite/index.hpp>
+#include <sanguis/load/friend_name.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/intrusive/system_impl.hpp>
 

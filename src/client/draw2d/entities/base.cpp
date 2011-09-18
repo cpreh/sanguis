@@ -1,9 +1,10 @@
-#include "base.hpp"
+#include <sanguis/client/draw2d/entities/base.hpp>
 
 sanguis::client::draw2d::entities::base::base()
 :
 	removed_(false)
-{}
+{
+}
 
 void
 sanguis::client::draw2d::entities::base::decay()
@@ -20,7 +21,8 @@ sanguis::client::draw2d::entities::base::may_be_removed() const
 }
 
 sanguis::client::draw2d::entities::base::~base()
-{}
+{
+}
 
 void
 sanguis::client::draw2d::entities::base::on_decay()

@@ -1,4 +1,4 @@
-#include "constant.hpp"
+#include <sanguis/server/entities/property/constant.hpp>
 
 sanguis::server::entities::property::constant::constant()
 :
@@ -9,10 +9,10 @@ sanguis::server::entities::property::constant::constant()
 
 void
 sanguis::server::entities::property::constant::change(
-	value_type const add_
+	value_type const _add
 )
 {
-	value_ += add_;
+	value_ += _add;
 }
 
 sanguis::server::entities::property::constant::value_type

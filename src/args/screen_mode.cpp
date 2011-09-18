@@ -1,6 +1,6 @@
-#include "screen_mode.hpp"
-#include "optional_resolution.hpp"
-#include "resolution.hpp"
+#include <sanguis/args/screen_mode.hpp>
+#include <sanguis/args/optional_resolution.hpp>
+#include <sanguis/args/resolution.hpp>
 #include <sge/renderer/bit_depth.hpp>
 #include <sge/renderer/display_mode.hpp>
 #include <sge/renderer/refresh_rate_dont_care.hpp>

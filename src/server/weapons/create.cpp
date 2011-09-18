@@ -1,16 +1,19 @@
-#include "create.hpp"
-#include "pistol.hpp"
-#include "shotgun.hpp"
-#include "rocket_launcher.hpp"
-#include "weapon.hpp"
-#include "grenade.hpp"
-#include "sentry.hpp"
-#include "unlimited_magazine_size.hpp"
-#include "../../exception.hpp"
+#include <sanguis/server/weapons/create.hpp>
+#include <sanguis/server/weapons/pistol.hpp>
+#include <sanguis/server/weapons/shotgun.hpp>
+#include <sanguis/server/weapons/rocket_launcher.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/weapons/grenade.hpp>
+#include <sanguis/server/weapons/sentry.hpp>
+#include <sanguis/server/weapons/unlimited_magazine_size.hpp>
+#include <sanguis/exception.hpp>
+#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/spirit/home/phoenix/object/new.hpp>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::server::weapons::unique_ptr
 sanguis::server::weapons::create(
@@ -148,7 +151,5 @@ sanguis::server::weapons::create(
 		break;
 	}
 
-	throw sanguis::exception(
-		FCPPT_TEXT("Cannot create weapon for given weapon type!")
-	);
+	FCPPT_ASSERT_UNREACHABLE
 }

@@ -1,7 +1,7 @@
-#include "make.hpp"
-#include "debug.hpp"
-#include "wave.hpp"
-#include "../../exception.hpp"
+#include <sanguis/server/waves/make.hpp>
+#include <sanguis/server/waves/debug.hpp>
+#include <sanguis/server/waves/wave.hpp>
+#include <sanguis/exception.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>

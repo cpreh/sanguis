@@ -1,21 +1,21 @@
-#include "menu.hpp"
-#include "waiting_for_player.hpp"
-#include "log_location.hpp"
-#include "../machine.hpp"
-#include "../events/action.hpp"
-#include "../events/connected.hpp"
-#include "../events/menu.hpp"
-#include "../events/message.hpp"
-#include "../events/net_error.hpp"
-#include "../events/render.hpp"
-#include "../events/tick.hpp"
-#include "../../messages/base.hpp"
-#include "../../messages/create.hpp"
-#include "../../messages/client_info.hpp"
-#include "../../messages/call/object.hpp"
-#include "../../cast_enum.hpp"
-#include "../../exception.hpp"
-#include "../../log_parameters.hpp"
+#include <sanguis/client/states/menu.hpp>
+#include <sanguis/client/states/waiting_for_player.hpp>
+#include <sanguis/client/states/log_location.hpp>
+#include <sanguis/client/machine.hpp>
+#include <sanguis/client/events/action.hpp>
+#include <sanguis/client/events/connected.hpp>
+#include <sanguis/client/events/menu.hpp>
+#include <sanguis/client/events/message.hpp>
+#include <sanguis/client/events/net_error.hpp>
+#include <sanguis/client/events/render.hpp>
+#include <sanguis/client/events/tick.hpp>
+#include <sanguis/messages/base.hpp>
+#include <sanguis/messages/create.hpp>
+#include <sanguis/messages/client_info.hpp>
+#include <sanguis/messages/call/object.hpp>
+#include <sanguis/cast_enum.hpp>
+#include <sanguis/exception.hpp>
+#include <sanguis/log_parameters.hpp>
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/var.hpp>
 #include <sge/renderer/state/trampoline.hpp>
@@ -28,8 +28,10 @@
 #include <fcppt/utf8/from_fcppt_string.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <ostream>
+#include <fcppt/config/external_end.hpp>
 
 namespace
 {

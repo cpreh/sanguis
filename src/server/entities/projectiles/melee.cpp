@@ -1,13 +1,12 @@
-#include "melee.hpp"
-#include "../../damage/list.hpp"
-#include "../../damage/wrapper.hpp"
-#include "../../damage/meta.hpp"
-#include "../../damage/normal.hpp"
-#include "../../damage/full.hpp"
-#include "../../../duration_second.hpp"
+#include <sanguis/server/entities/projectiles/melee.hpp>
+#include <sanguis/server/damage/list.hpp>
+#include <sanguis/server/damage/wrapper.hpp>
+#include <sanguis/server/damage/meta.hpp>
+#include <sanguis/server/damage/normal.hpp>
+#include <sanguis/server/damage/full.hpp>
+#include <sanguis/duration_second.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
-#include <boost/assign/list_of.hpp>
 
 sanguis::server::entities::projectiles::melee::melee(
 	sanguis::diff_clock const &_diff_clock,

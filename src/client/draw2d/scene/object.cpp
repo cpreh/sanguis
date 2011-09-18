@@ -1,25 +1,25 @@
-#include "object.hpp"
-#include "background.hpp"
-#include "background_dim.hpp"
-#include "control_environment.hpp"
-#include "hud.hpp"
-#include "message_environment.hpp"
-#include "screen_center.hpp"
-#include "world/object.hpp"
-#include "../entities/base.hpp"
-#include "../entities/own.hpp"
-#include "../message/dispatcher.hpp"
-#include "../sprite/order.hpp"
-#include "../sprite/float_unit.hpp"
-#include "../sunlight/make_color.hpp"
-#include "../sunlight/sun_angle.hpp"
-#include "../vector2.hpp"
-#include "../z_ordering.hpp"
-#include "../../../load/context.hpp"
-#include "../../../load/resource/context.hpp"
-#include "../../../messages/call/object.hpp"
-#include "../../../exception.hpp"
-
+#include <sanguis/client/draw2d/scene/object.hpp>
+#include <sanguis/client/draw2d/scene/background.hpp>
+#include <sanguis/client/draw2d/scene/background_dim.hpp>
+#include <sanguis/client/draw2d/scene/control_environment.hpp>
+#include <sanguis/client/draw2d/scene/hud.hpp>
+#include <sanguis/client/draw2d/scene/message_environment.hpp>
+#include <sanguis/client/draw2d/scene/screen_center.hpp>
+#include <sanguis/client/draw2d/scene/world/object.hpp>
+#include <sanguis/client/draw2d/entities/base.hpp>
+#include <sanguis/client/draw2d/entities/own.hpp>
+#include <sanguis/client/draw2d/message/dispatcher.hpp>
+#include <sanguis/client/draw2d/sprite/order.hpp>
+#include <sanguis/client/draw2d/sprite/float_unit.hpp>
+#include <sanguis/client/draw2d/sunlight/make_color.hpp>
+#include <sanguis/client/draw2d/sunlight/sun_angle.hpp>
+#include <sanguis/client/draw2d/vector2.hpp>
+#include <sanguis/client/draw2d/z_ordering.hpp>
+#include <sanguis/load/context.hpp>
+#include <sanguis/load/resource/context.hpp>
+#include <sanguis/messages/call/object.hpp>
+#include <sanguis/exception.hpp>
+#include <sge/audio/listener.hpp>
 #include <sge/image/colors.hpp>
 #include <sge/renderer/ambient_color.hpp>
 #include <sge/renderer/device.hpp>
@@ -39,8 +39,6 @@
 #include <sge/sprite/intrusive/system_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/projection_matrix.hpp>
-#include <sge/audio/listener.hpp>
-
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/math/matrix/arithmetic.hpp>
 #include <fcppt/math/matrix/basic_impl.hpp>
@@ -54,7 +52,10 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <utility>
+#include <ctime>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::client::draw2d::scene::object::object(
 	load::context const &_resources,

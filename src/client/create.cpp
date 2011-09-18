@@ -1,5 +1,5 @@
-#include "create.hpp"
-#include "object.hpp"
+#include <sanguis/client/create.hpp>
+#include <sanguis/client/object.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 sanguis::main_object_unique_ptr

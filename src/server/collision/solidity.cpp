@@ -1,4 +1,4 @@
-#include "solidity.hpp"
+#include <sanguis/server/collision/solidity.hpp>
 
 sanguis::server::collision::solidity::solidity(
 	sge::projectile::body::solidity::variant const &_solidity

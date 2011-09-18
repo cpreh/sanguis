@@ -1,7 +1,7 @@
-#include "state.hpp"
-#include "choosable.hpp"
-#include "info.hpp"
-#include "../log.hpp"
+#include <sanguis/client/perk/state.hpp>
+#include <sanguis/client/perk/choosable.hpp>
+#include <sanguis/client/perk/info.hpp>
+#include <sanguis/client/log.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
 #include <fcppt/log/error.hpp>

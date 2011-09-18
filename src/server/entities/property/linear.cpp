@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PROPERTY_LINEAR_IMPL_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PROPERTY_LINEAR_IMPL_HPP_INCLUDED
 
-#include "linear.hpp"
+#include <sanguis/server/entities/property/linear.hpp>
 
 sanguis::server::entities::property::linear::linear()
 :
@@ -12,10 +12,10 @@ sanguis::server::entities::property::linear::linear()
 
 void
 sanguis::server::entities::property::linear::change(
-	value_type const add_
+	value_type const _add
 )
 {
-	value_ += add_;
+	value_ += _add;
 }
 
 sanguis::server::entities::property::linear::value_type

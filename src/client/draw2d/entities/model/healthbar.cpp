@@ -1,10 +1,10 @@
-#include "healthbar.hpp"
-#include "../../z_ordering.hpp"
-#include "../../sprite/colored/parameters.hpp"
-#include "../../sprite/colored/color.hpp"
-#include "../../sprite/colored/color_format.hpp"
-#include "../../sprite/unit.hpp"
-#include "../../../../exception.hpp"
+#include <sanguis/client/draw2d/entities/model/healthbar.hpp>
+#include <sanguis/client/draw2d/z_ordering.hpp>
+#include <sanguis/client/draw2d/sprite/colored/parameters.hpp>
+#include <sanguis/client/draw2d/sprite/colored/color.hpp>
+#include <sanguis/client/draw2d/sprite/colored/color_format.hpp>
+#include <sanguis/client/draw2d/sprite/unit.hpp>
+#include <sanguis/exception.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/math/almost_zero.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -18,7 +18,9 @@
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/intrusive/system_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <algorithm>
+#include <fcppt/config/external_end.hpp>
 
 namespace
 {

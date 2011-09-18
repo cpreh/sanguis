@@ -1,7 +1,9 @@
-#include "clamp_orientation.hpp"
+#include <sanguis/client/draw2d/entities/model/clamp_orientation.hpp>
 #include <fcppt/math/mod.hpp>
 #include <fcppt/math/twopi.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <cmath>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::client::draw2d::sprite::rotation
 sanguis::client::draw2d::entities::model::clamp_orientation(

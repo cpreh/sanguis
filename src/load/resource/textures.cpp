@@ -1,10 +1,10 @@
-#include "textures.hpp"
-#include "texture_context.hpp"
-#include "texture_context_impl.hpp"
-#include "map_get_or_create.hpp"
-#include "../log.hpp"
-#include "../../exception.hpp"
-#include "../../media_path.hpp"
+#include <sanguis/load/resource/textures.hpp>
+#include <sanguis/load/resource/texture_context.hpp>
+#include <sanguis/load/resource/texture_context_impl.hpp>
+#include <sanguis/load/resource/map_get_or_create.hpp>
+#include <sanguis/load/log.hpp>
+#include <sanguis/exception.hpp>
+#include <sanguis/media_path.hpp>
 #include <sge/texture/add_image.hpp>
 #include <sge/texture/no_fragmented.hpp>
 #include <sge/texture/part_raw.hpp>
@@ -22,9 +22,11 @@
 #include <fcppt/ref.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/spirit/home/phoenix/object/construct.hpp>
 #include <boost/spirit/home/phoenix/object/new.hpp>
+#include <fcppt/config/external_end.hpp>
 
 sge::texture::part_ptr const
 sanguis::load::resource::textures::load(

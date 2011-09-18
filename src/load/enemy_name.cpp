@@ -1,13 +1,15 @@
-#include "enemy_name.hpp"
-#include "../exception.hpp"
+#include <sanguis/load/enemy_name.hpp>
+#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/text.hpp>
 
 fcppt::string const
 sanguis::load::enemy_name(
-	enemy_type::type const etype
+	enemy_type::type const _type
 )
 {
-	switch(etype)
+	switch(
+		_type
+	)
 	{
 	case enemy_type::wolf_black:
 		return FCPPT_TEXT("wolf_black");
@@ -29,7 +31,5 @@ sanguis::load::enemy_name(
 		break;
 	}
 
-	throw exception(
-		FCPPT_TEXT("load::enemy_name: missing loading code!")
-	);
+	FCPPT_ASSERT_UNREACHABLE
 }

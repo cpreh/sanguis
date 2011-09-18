@@ -1,4 +1,4 @@
-#include "media_path.hpp"
+#include <sanguis/media_path.hpp>
 #include <sanguis/build/media_path.hpp>
 
 fcppt::filesystem::path const

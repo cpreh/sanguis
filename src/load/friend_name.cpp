@@ -1,13 +1,15 @@
-#include "friend_name.hpp"
-#include "../exception.hpp"
+#include <sanguis/load/friend_name.hpp>
+#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/text.hpp>
 
 fcppt::string const
 sanguis::load::friend_name(
-	friend_type::type const etype
+	friend_type::type const _type
 )
 {
-	switch(etype)
+	switch(
+		_type
+	)
 	{
 	case friend_type::spider:
 		return FCPPT_TEXT("friendly_spider");
@@ -17,7 +19,5 @@ sanguis::load::friend_name(
 		break;
 	}
 
-	throw exception(
-		FCPPT_TEXT("load::friend_name: missing loading code!")
-	);
+	FCPPT_ASSERT_UNREACHABLE
 }

@@ -1,4 +1,4 @@
-#include "wave.hpp"
+#include <sanguis/server/waves/wave.hpp>
 
 sanguis::server::waves::wave::wave()
 {}

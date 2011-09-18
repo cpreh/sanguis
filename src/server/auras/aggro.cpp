@@ -1,4 +1,4 @@
-#include "aggro.hpp"
+#include <sanguis/server/auras/aggro.hpp>
 
 sanguis::server::auras::aggro::aggro(
 	server::radius const _radius,

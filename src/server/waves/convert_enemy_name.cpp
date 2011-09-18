@@ -1,18 +1,19 @@
-#include "convert_enemy_name.hpp"
-#include "../../exception.hpp"
+#include <sanguis/server/waves/convert_enemy_name.hpp>
+#include <sanguis/exception.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::enemy_type::type
 sanguis::server::waves::convert_enemy_name(
-	fcppt::string const &name
+	fcppt::string const &_name
 )
 {
-	// TODO: we really need a strong enum class that can do this!
-#define SANGUIS_NAME_CASE(x) \
+#define SANGUIS_NAME_CASE(\
+	name \
+) \
 	if(\
-		name == FCPPT_TEXT(#x)\
+		_name == FCPPT_TEXT(#name)\
 	)\
-		return enemy_type::x;
+		return enemy_type::name;
 
 	SANGUIS_NAME_CASE(wolf_black)
 	SANGUIS_NAME_CASE(wolf_brown)
@@ -23,9 +24,10 @@ sanguis::server::waves::convert_enemy_name(
 	SANGUIS_NAME_CASE(skeleton)
 	SANGUIS_NAME_CASE(maggot)
 
-	throw exception(
-		FCPPT_TEXT("Invalid enemy name ")
-		+ name
-	);
+	throw
+		sanguis::exception(
+			FCPPT_TEXT("Invalid enemy name ")
+			+ _name
+		);
 #undef SANGUIS_NAME_CASE
 }

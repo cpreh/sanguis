@@ -1,7 +1,7 @@
-#include "explosion.hpp"
-#include "generator.hpp"
-#include "properties.hpp"
-#include "z_ordering.hpp"
+#include <sanguis/client/draw2d/particle/explosion.hpp>
+#include <sanguis/client/draw2d/particle/generator.hpp>
+#include <sanguis/client/draw2d/particle/properties.hpp>
+#include <sanguis/client/draw2d/particle/z_ordering.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>

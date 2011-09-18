@@ -1,10 +1,10 @@
-#include "with_body.hpp"
-#include "body_parameters.hpp"
-#include "collision_groups.hpp"
-#include "transfer_parameters.hpp"
-#include "../collision/body.hpp"
-#include "../collision/make_groups.hpp"
-#include "../collision/user_data.hpp"
+#include <sanguis/server/entities/with_body.hpp>
+#include <sanguis/server/entities/body_parameters.hpp>
+#include <sanguis/server/entities/collision_groups.hpp>
+#include <sanguis/server/entities/transfer_parameters.hpp>
+#include <sanguis/server/collision/body.hpp>
+#include <sanguis/server/collision/make_groups.hpp>
+#include <sanguis/server/collision/user_data.hpp>
 #include <sge/projectile/body/scoped.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
@@ -12,7 +12,9 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::server::entities::with_body::with_body(
 	entities::body_parameters const &_params

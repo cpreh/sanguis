@@ -1,4 +1,4 @@
-#include "is_disconnect.hpp"
+#include <sanguis/net/is_disconnect.hpp>
 #include <boost/asio/error.hpp>
 
 bool

@@ -1,15 +1,17 @@
-#include "sun_angle.hpp"
-#include "time_to_gregorian.hpp"
-#include "../log.hpp"
+#include <sanguis/client/draw2d/sunlight/sun_angle.hpp>
+#include <sanguis/client/draw2d/sunlight/time_to_gregorian.hpp>
+#include <sanguis/client/draw2d/log.hpp>
 #include <fcppt/math/deg_to_rad.hpp>
 #include <fcppt/math/rad_to_deg.hpp>
 #include <fcppt/math/pi.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/date_time/gregorian/gregorian_types.hpp>
 #include <cmath>
 #include <ctime>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::client::draw2d::sunlight::real
 sanguis::client::draw2d::sunlight::sun_angle(

@@ -1,4 +1,4 @@
-#include "index.hpp"
+#include <sanguis/client/draw2d/sprite/index.hpp>
 
 sanguis::client::draw2d::sprite::index::index(
 	value_type const _value

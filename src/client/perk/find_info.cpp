@@ -1,6 +1,6 @@
-#include "find_info.hpp"
-#include "compare.hpp"
-#include "info.hpp"
+#include <sanguis/client/perk/find_info.hpp>
+#include <sanguis/client/perk/compare.hpp>
+#include <sanguis/client/perk/info.hpp>
 #include <fcppt/algorithm/find_if_exn.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
 #include <fcppt/container/tree/pre_order.hpp>

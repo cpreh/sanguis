@@ -1,9 +1,9 @@
-#include "explosion_particle.hpp"
-#include "../particle/fade_time_range.hpp"
-#include "../particle/object.hpp"
-#include "../particle/properties.hpp"
-#include "../../../duration.hpp"
-#include "../../../load/model/animation/context.hpp"
+#include <sanguis/client/draw2d/entities/explosion_particle.hpp>
+#include <sanguis/client/draw2d/particle/fade_time_range.hpp>
+#include <sanguis/client/draw2d/particle/object.hpp>
+#include <sanguis/client/draw2d/particle/properties.hpp>
+#include <sanguis/duration.hpp>
+#include <sanguis/load/model/animation/context.hpp>
 #include <fcppt/random/uniform.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>

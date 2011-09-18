@@ -1,5 +1,5 @@
-#include "change_world.hpp"
-#include "instantiate_message.hpp"
+#include <sanguis/messages/change_world.hpp>
+#include <sanguis/messages/instantiate_message.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 
 SANGUIS_MESSAGES_INSTANTIATE_MESSAGE(

@@ -1,6 +1,6 @@
-#include "spawn.hpp"
-#include "../../environment/object.hpp"
-#include "../../waves/spawn.hpp"
+#include <sanguis/server/entities/spawns/spawn.hpp>
+#include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/waves/spawn.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 
 void

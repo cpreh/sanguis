@@ -1,12 +1,12 @@
-#include "server_port.hpp"
+#include <sanguis/args/server_port.hpp>
 
 sanguis::net::port
 sanguis::args::server_port(
-	boost::program_options::variables_map const &vm
+	boost::program_options::variables_map const &_vm
 )
 {
 	return
-		vm["serverport"].as<
+		_vm["serverport"].as<
 			net::port
 		>();
 }

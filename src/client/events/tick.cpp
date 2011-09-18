@@ -1,4 +1,4 @@
-#include "tick.hpp"
+#include <sanguis/client/events/tick.hpp>
 
 sanguis::client::events::tick::tick(
 	sanguis::duration const &_delta

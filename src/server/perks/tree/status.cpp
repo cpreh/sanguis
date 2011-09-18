@@ -1,4 +1,4 @@
-#include "status.hpp"
+#include <sanguis/server/perks/tree/status.hpp>
 #include <fcppt/assert/pre.hpp>
 
 sanguis::server::perks::tree::status::status(

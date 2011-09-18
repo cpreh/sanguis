@@ -1,4 +1,4 @@
-#include "to_sge_vector.hpp"
+#include <sanguis/server/collision/to_sge_vector.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 

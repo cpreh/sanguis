@@ -1,4 +1,4 @@
-#include "delayed_attack.hpp"
+#include <sanguis/server/weapons/delayed_attack.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 
 sanguis::server::weapons::delayed_attack::delayed_attack(

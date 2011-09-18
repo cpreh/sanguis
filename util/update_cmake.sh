@@ -18,9 +18,10 @@ function update_cmake_file()
 }
 
 update_cmake_file \
-	CMakeLists.txt \
+	src/CMakeLists.txt \
 	SANGUIS_FILES \
 	src \
+	include \
 
 pushd creator > /dev/null
 

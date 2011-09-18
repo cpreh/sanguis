@@ -1,4 +1,4 @@
-#include "info.hpp"
+#include <sanguis/client/perk/info.hpp>
 
 sanguis::client::perk::info::info(
 	sanguis::perk_type::type const _type

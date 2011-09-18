@@ -1,10 +1,12 @@
-#include "item.hpp"
-#include "node.hpp"
-#include "../object.hpp"
-#include "../../perk/info.hpp"
-#include "../../perk/to_string.hpp"
+#include <sanguis/client/gui/perk/item.hpp>
+#include <sanguis/client/gui/perk/node.hpp>
+#include <sanguis/client/gui/object.hpp>
+#include <sanguis/client/perk/info.hpp>
+#include <sanguis/client/perk/to_string.hpp>
 #include <sge/cegui/to_cegui_string.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <elements/CEGUITree.h>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::client::gui::perk::item::item(
 	client::gui::perk::node const &_parent,

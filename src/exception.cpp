@@ -1,4 +1,4 @@
-#include "exception.hpp"
+#include <sanguis/exception.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::exception::exception(

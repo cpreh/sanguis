@@ -1,6 +1,6 @@
-#include "item_color.hpp"
-#include "../../../exception.hpp"
+#include <sanguis/client/gui/perk/item_color.hpp>
 #include <sge/image/colors.hpp>
+#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/variant/object_impl.hpp>
 #include <fcppt/text.hpp>
 
@@ -24,7 +24,5 @@ sanguis::client::gui::perk::item_color(
 		return sge::image::colors::gray();
 	}
 
-	throw sanguis::exception(
-		FCPPT_TEXT("Invalid perk::choosable_state!")
-	);
+	FCPPT_ASSERT_UNREACHABLE
 }

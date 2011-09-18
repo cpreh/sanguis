@@ -1,4 +1,4 @@
-#include "global_parameters.hpp"
+#include <sanguis/load/model/global_parameters.hpp>
 
 sanguis::load::model::global_parameters::global_parameters(
 	fcppt::filesystem::path const &_path,
@@ -54,15 +54,18 @@ sanguis::load::model::global_parameters::new_texture(
 {
 	return
 		_tex
-		? global_parameters(
-			path(),
-			textures(),
-			cell_size(),
-			delay(),
-			_tex,
-			sounds()
+		?
+			model::global_parameters(
+				this->path(),
+				this->textures(),
+				this->cell_size(),
+				this->delay(),
+				_tex,
+				this->sounds()
 		)
-		: *this;
+		:
+			*this
+		;
 }
 
 sanguis::load::resource::sounds const &

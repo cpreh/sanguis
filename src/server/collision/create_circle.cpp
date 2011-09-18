@@ -1,4 +1,4 @@
-#include "create_circle.hpp"
+#include <sanguis/server/collision/create_circle.hpp>
 #include <sge/projectile/shape/circle.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 

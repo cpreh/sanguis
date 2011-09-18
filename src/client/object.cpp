@@ -1,18 +1,17 @@
-#include "object.hpp"
-#include "config/settings/file.hpp"
-#include "events/connected.hpp"
-#include "events/message.hpp"
-#include "events/net_error.hpp"
-#include "events/overlay.hpp"
-#include "events/render.hpp"
-#include "events/tick.hpp"
-#include "states/menu.hpp"
-#include "log.hpp"
-#include "../args/multi_sampling.hpp"
-#include "../args/sge_options.hpp"
-#include "../server/object.hpp"
-#include "../duration.hpp"
-
+#include <sanguis/client/object.hpp>
+#include <sanguis/client/config/settings/file.hpp>
+#include <sanguis/client/events/connected.hpp>
+#include <sanguis/client/events/message.hpp>
+#include <sanguis/client/events/net_error.hpp>
+#include <sanguis/client/events/overlay.hpp>
+#include <sanguis/client/events/render.hpp>
+#include <sanguis/client/events/tick.hpp>
+#include <sanguis/client/states/menu.hpp>
+#include <sanguis/client/log.hpp>
+#include <sanguis/args/multi_sampling.hpp>
+#include <sanguis/args/sge_options.hpp>
+#include <sanguis/server/object.hpp>
+#include <sanguis/duration.hpp>
 #include <sge/config/media_path.hpp>
 #include <sge/font/size_type.hpp>
 #include <sge/font/system.hpp>
@@ -25,10 +24,8 @@
 #include <sge/systems/instance.hpp>
 #include <sge/timer/elapsed_and_reset.hpp>
 #include <sge/window/instance.hpp>
-
 #include <awl/mainloop/io_service.hpp>
 #include <awl/mainloop/dispatcher.hpp>
-
 #include <fcppt/chrono/seconds.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/log/output.hpp>
@@ -38,8 +35,9 @@
 #include <fcppt/exception.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
-
+#include <fcppt/config/external_begin.hpp>
 #include <cstdlib>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::client::object::object(
 	boost::program_options::variables_map const &_variables_map

@@ -1,4 +1,4 @@
-#include "nullary.hpp"
+#include <sanguis/client/control/actions/nullary.hpp>
 
 sanguis::client::control::actions::nullary::nullary(
 	actions::nullary_type::type const _type

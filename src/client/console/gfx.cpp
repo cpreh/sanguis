@@ -1,5 +1,5 @@
-#include "gfx.hpp"
-#include "../../media_path.hpp"
+#include <sanguis/client/console/gfx.hpp>
+#include <sanguis/media_path.hpp>
 #include <sge/console/sprite_object.hpp>
 #include <sge/console/sprite_parameters.hpp>
 #include <sge/image/colors.hpp>

@@ -1,5 +1,5 @@
-#include "equal.hpp"
-#include "status.hpp"
+#include <sanguis/server/perks/tree/equal.hpp>
+#include <sanguis/server/perks/tree/status.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
 
 sanguis::server::perks::tree::equal::equal(

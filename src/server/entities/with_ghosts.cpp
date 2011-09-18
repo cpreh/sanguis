@@ -1,8 +1,8 @@
-#include "with_ghosts.hpp"
-#include "transfer_parameters.hpp"
-#include "../collision/ghost.hpp"
-#include "../collision/make_groups.hpp"
-#include "../environment/object.hpp"
+#include <sanguis/server/entities/with_ghosts.hpp>
+#include <sanguis/server/entities/transfer_parameters.hpp>
+#include <sanguis/server/collision/ghost.hpp>
+#include <sanguis/server/collision/make_groups.hpp>
+#include <sanguis/server/environment/object.hpp>
 #include <sge/projectile/ghost/scoped.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>

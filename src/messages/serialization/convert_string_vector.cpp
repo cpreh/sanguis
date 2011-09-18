@@ -1,4 +1,4 @@
-#include "convert_string_vector.hpp"
+#include <sanguis/messages/serialization/convert_string_vector.hpp>
 #include <fcppt/utf8/from_fcppt_string.hpp>
 #include <fcppt/utf8/to_fcppt_string.hpp>
 

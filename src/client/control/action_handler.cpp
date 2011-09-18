@@ -1,21 +1,21 @@
-#include "action_handler.hpp"
-#include "action_visitor.hpp"
-#include "axis_direction_max.hpp"
-#include "axis_direction_min.hpp"
-#include "environment.hpp"
-#include "actions/any.hpp"
-#include "actions/binary.hpp"
-#include "actions/cursor.hpp"
-#include "actions/nullary.hpp"
-#include "actions/scale.hpp"
-#include "../../messages/create.hpp"
-#include "../../messages/player_attack_dest.hpp"
-#include "../../messages/player_direction.hpp"
-#include "../../messages/player_start_shooting.hpp"
-#include "../../messages/player_stop_shooting.hpp"
-#include "../../messages/player_change_weapon.hpp"
-#include "../../messages/player_cheat.hpp"
-#include "../../exception.hpp"
+#include <sanguis/client/control/action_handler.hpp>
+#include <sanguis/client/control/action_visitor.hpp>
+#include <sanguis/client/control/axis_direction_max.hpp>
+#include <sanguis/client/control/axis_direction_min.hpp>
+#include <sanguis/client/control/environment.hpp>
+#include <sanguis/client/control/actions/any.hpp>
+#include <sanguis/client/control/actions/binary.hpp>
+#include <sanguis/client/control/actions/cursor.hpp>
+#include <sanguis/client/control/actions/nullary.hpp>
+#include <sanguis/client/control/actions/scale.hpp>
+#include <sanguis/messages/create.hpp>
+#include <sanguis/messages/player_attack_dest.hpp>
+#include <sanguis/messages/player_direction.hpp>
+#include <sanguis/messages/player_start_shooting.hpp>
+#include <sanguis/messages/player_stop_shooting.hpp>
+#include <sanguis/messages/player_change_weapon.hpp>
+#include <sanguis/messages/player_cheat.hpp>
+#include <sanguis/exception.hpp>
 #include <sge/console/object.hpp>
 #include <sge/font/text/lit.hpp>
 #include <sge/timer/reset_when_expired.hpp>
@@ -31,8 +31,10 @@
 #include <fcppt/variant/object_impl.hpp>
 #include <fcppt/cyclic_iterator.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <iterator>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::client::control::action_handler::action_handler(
 	client::send_callback const &_send,

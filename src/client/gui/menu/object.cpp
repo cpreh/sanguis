@@ -1,12 +1,12 @@
-#include "object.hpp"
-#include "connection_box.hpp"
-#include "../object.hpp"
-#include "../../config/settings/get_or_default.hpp"
-#include "../../config/settings/set_key.hpp"
-#include "../../log_location.hpp"
-#include "../../../log_parameters.hpp"
-#include "../../../media_path.hpp"
-#include "../../../net/port.hpp"
+#include <sanguis/client/gui/menu/object.hpp>
+#include <sanguis/client/gui/menu/connection_box.hpp>
+#include <sanguis/client/gui/object.hpp>
+#include <sanguis/client/config/settings/get_or_default.hpp>
+#include <sanguis/client/config/settings/set_key.hpp>
+#include <sanguis/client/log_location.hpp>
+#include <sanguis/net/port.hpp>
+#include <sanguis/log_parameters.hpp>
+#include <sanguis/media_path.hpp>
 #include <sge/cegui/from_cegui_string.hpp>
 #include <sge/cegui/to_cegui_string.hpp>
 #include <fcppt/io/istringstream.hpp>
@@ -21,9 +21,11 @@
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/to_std_string.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <elements/CEGUIPushButton.h>
 #include <CEGUIWindowManager.h>
 #include <CEGUIWindow.h>
+#include <fcppt/config/external_end.hpp>
 
 namespace
 {

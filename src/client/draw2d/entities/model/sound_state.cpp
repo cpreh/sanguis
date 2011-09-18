@@ -1,6 +1,6 @@
-#include "sound_state.hpp"
-#include "../../../../load/model/animation/sound.hpp"
-#include "../../../../animation_sound_type.hpp"
+#include <sanguis/client/draw2d/entities/model/sound_state.hpp>
+#include <sanguis/load/model/animation/sound.hpp>
+#include <sanguis/animation_sound_type.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/audio/sound/positional.hpp>
 #include <fcppt/assign/make_array.hpp>

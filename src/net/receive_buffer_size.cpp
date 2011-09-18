@@ -1,4 +1,4 @@
-#include "receive_buffer_size.hpp"
+#include <sanguis/net/receive_buffer_size.hpp>
 
 sanguis::net::size_type
 sanguis::net::receive_buffer_size()

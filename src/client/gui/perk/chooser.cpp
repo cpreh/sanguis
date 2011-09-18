@@ -1,15 +1,15 @@
-#include "chooser.hpp"
-#include "item_color.hpp"
-#include "item.hpp"
-#include "item_tree.hpp"
-#include "item_user_data.hpp"
-#include "../object.hpp"
-#include "../../perk/find_info.hpp"
-#include "../../perk/info.hpp"
-#include "../../perk/state.hpp"
-#include "../../perk/to_string.hpp"
-#include "../../../media_path.hpp"
-#include "../../../perk_type.hpp"
+#include <sanguis/client/gui/perk/chooser.hpp>
+#include <sanguis/client/gui/perk/item_color.hpp>
+#include <sanguis/client/gui/perk/item.hpp>
+#include <sanguis/client/gui/perk/item_tree.hpp>
+#include <sanguis/client/gui/perk/item_user_data.hpp>
+#include <sanguis/client/gui/object.hpp>
+#include <sanguis/client/perk/find_info.hpp>
+#include <sanguis/client/perk/info.hpp>
+#include <sanguis/client/perk/state.hpp>
+#include <sanguis/client/perk/to_string.hpp>
+#include <sanguis/media_path.hpp>
+#include <sanguis/perk_type.hpp>
 #include <sge/cegui/to_cegui_color.hpp>
 #include <sge/cegui/to_cegui_string.hpp>
 #include <fcppt/algorithm/find_if_exn.hpp>
@@ -24,10 +24,12 @@
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <elements/CEGUIPushButton.h>
 #include <elements/CEGUITree.h>
 #include <CEGUIWindowManager.h>
+#include <fcppt/config/external_end.hpp>
 
 namespace
 {

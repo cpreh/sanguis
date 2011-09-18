@@ -1,8 +1,10 @@
-#include "orientation.hpp"
+#include <sanguis/client/draw2d/entities/model/orientation.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/assert/error.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <cmath>
+#include <fcppt/config/external_end.hpp>
 
 namespace
 {

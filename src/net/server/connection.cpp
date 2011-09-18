@@ -1,6 +1,6 @@
-#include "connection.hpp"
-#include "../send_buffer_size.hpp"
-#include "../receive_buffer_size.hpp"
+#include <sanguis/net/server/connection.hpp>
+#include <sanguis/net/send_buffer_size.hpp>
+#include <sanguis/net/receive_buffer_size.hpp>
 
 sanguis::net::server::connection::connection(
 	net::id const _id,

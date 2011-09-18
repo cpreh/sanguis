@@ -1,11 +1,13 @@
-#include "search_new_target.hpp"
-#include "../entities/auto_weak_link.hpp"
-#include "../entities/base.hpp"
-#include "../entities/with_health.hpp"
-#include "../collision/distance.hpp"
+#include <sanguis/server/ai/search_new_target.hpp>
+#include <sanguis/server/entities/auto_weak_link.hpp>
+#include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/with_health.hpp>
+#include <sanguis/server/collision/distance.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <limits>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::server::entities::auto_weak_link const
 sanguis::server::ai::search_new_target(

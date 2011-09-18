@@ -1,7 +1,7 @@
-#include "load_context.hpp"
-#include "../space_unit.hpp"
-#include "../../load/context_base.hpp"
-#include "../../pixels_per_meter.hpp"
+#include <sanguis/server/global/load_context.hpp>
+#include <sanguis/server/space_unit.hpp>
+#include <sanguis/load/context_base.hpp>
+#include <sanguis/pixels_per_meter.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>

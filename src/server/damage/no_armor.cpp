@@ -1,13 +1,13 @@
-#include "no_armor.hpp"
-#include "list.hpp"
-#include "all.hpp"
+#include <sanguis/server/damage/no_armor.hpp>
+#include <sanguis/server/damage/list.hpp>
+#include <sanguis/server/damage/all.hpp>
 
 sanguis::server::damage::list const
 sanguis::server::damage::no_armor()
 {
 	return
-		all(
-			unit(
+		damage::all(
+			damage::unit(
 				0
 			)
 		);

@@ -1,5 +1,4 @@
-#include "buff.hpp"
-#include <typeinfo>
+#include <sanguis/server/buffs/buff.hpp>
 
 bool
 sanguis::server::buffs::buff::expired() const

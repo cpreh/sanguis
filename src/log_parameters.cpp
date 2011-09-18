@@ -1,5 +1,5 @@
-#include "log_parameters.hpp"
-#include "log_context.hpp"
+#include <sanguis/log_parameters.hpp>
+#include <sanguis/log_context.hpp>
 #include <fcppt/io/clog.hpp>
 #include <fcppt/log/parameters/all.hpp>
 #include <fcppt/log/parameters/with_context.hpp>

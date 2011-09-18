@@ -1,4 +1,4 @@
-#include "net_error.hpp"
+#include <sanguis/client/events/net_error.hpp>
 
 sanguis::client::events::net_error::net_error(
 	fcppt::string const &_message,

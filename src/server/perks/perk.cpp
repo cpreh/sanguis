@@ -1,4 +1,4 @@
-#include "perk.hpp"
+#include <sanguis/server/perks/perk.hpp>
 
 void
 sanguis::server::perks::perk::update(

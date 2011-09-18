@@ -1,6 +1,6 @@
-#include "z_ordering.hpp"
-#include "../../../exception.hpp"
-#include <fcppt/text.hpp>
+#include <sanguis/client/draw2d/particle/z_ordering.hpp>
+#include <sanguis/client/draw2d/z_ordering.hpp>
+#include <fcppt/assert/unreachable.hpp>
 
 sanguis::client::draw2d::z_ordering::type
 sanguis::client::draw2d::particle::z_ordering(
@@ -21,7 +21,5 @@ sanguis::client::draw2d::particle::z_ordering(
 		break;
 	}
 
-	throw sanguis::exception(
-		FCPPT_TEXT("invalid particle type!")
-	);
+	FCPPT_ASSERT_UNREACHABLE
 }

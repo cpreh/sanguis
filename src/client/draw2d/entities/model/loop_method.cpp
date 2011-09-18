@@ -1,6 +1,5 @@
-#include "loop_method.hpp"
-#include "../../../../exception.hpp"
-#include <fcppt/text.hpp>
+#include <sanguis/client/draw2d/entities/model/loop_method.hpp>
+#include <fcppt/assert/unreachable.hpp>
 
 sanguis::client::draw2d::sprite::animation::loop_method::type
 sanguis::client::draw2d::entities::model::loop_method(
@@ -23,7 +22,5 @@ sanguis::client::draw2d::entities::model::loop_method(
 		break;
 	}
 
-	throw sanguis::exception(
-		FCPPT_TEXT("Invalid animation_type in model_part!")
-	);
+	FCPPT_ASSERT_UNREACHABLE
 }

@@ -1,5 +1,5 @@
-#include "circular_buffer_sink.hpp"
-#include "circular_buffer_space_left.hpp"
+#include <sanguis/net/circular_buffer_sink.hpp>
+#include <sanguis/net/circular_buffer_space_left.hpp>
 
 sanguis::net::circular_buffer_sink::circular_buffer_sink(
 	net::circular_buffer &_container

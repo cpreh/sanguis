@@ -1,5 +1,5 @@
-#include "create_static_body.hpp"
-#include "../../pixels_per_meter.hpp"
+#include <sanguis/server/world/create_static_body.hpp>
+#include <sanguis/pixels_per_meter.hpp>
 #include <sanguis/creator/geometry/shape_container.hpp>
 #include <sanguis/creator/geometry/solidity.hpp>
 #include <sanguis/creator/geometry/triangulate/polygon.hpp>

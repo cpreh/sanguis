@@ -1,5 +1,5 @@
-#include "action_visitor.hpp"
-#include "action_handler.hpp"
+#include <sanguis/client/control/action_visitor.hpp>
+#include <sanguis/client/control/action_handler.hpp>
 
 sanguis::client::control::action_visitor::action_visitor(
 	control::action_handler &_handler

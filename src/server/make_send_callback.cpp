@@ -1,6 +1,6 @@
-#include "make_send_callback.hpp"
-#include "machine.hpp"
-#include "../messages/base.hpp"
+#include <sanguis/server/make_send_callback.hpp>
+#include <sanguis/server/machine.hpp>
+#include <sanguis/messages/base.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/function/object.hpp>
 

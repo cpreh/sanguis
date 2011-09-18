@@ -1,4 +1,4 @@
-#include "binary.hpp"
+#include <sanguis/client/control/actions/binary.hpp>
 
 sanguis::client::control::actions::binary::binary(
 	actions::binary_type::type const _type,

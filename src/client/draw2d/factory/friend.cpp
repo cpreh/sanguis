@@ -1,13 +1,12 @@
-#include "friend.hpp"
-#include "../entities/model/object.hpp"
-#include "../entities/sentry.hpp"
-#include "../z_ordering.hpp"
-#include "../../../load/friend_name.hpp"
-#include "../../../friend_type.hpp"
-#include "../../../exception.hpp"
+#include <sanguis/client/draw2d/factory/friend.hpp>
+#include <sanguis/client/draw2d/entities/model/object.hpp>
+#include <sanguis/client/draw2d/entities/sentry.hpp>
+#include <sanguis/client/draw2d/z_ordering.hpp>
+#include <sanguis/load/friend_name.hpp>
+#include <sanguis/friend_type.hpp>
+#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/text.hpp>
 
 sanguis::client::draw2d::entities::unique_ptr
 sanguis::client::draw2d::factory::friend_(
@@ -51,7 +50,5 @@ sanguis::client::draw2d::factory::friend_(
 			);
 	}
 
-	throw sanguis::exception(
-		FCPPT_TEXT("Missing factory code in client::draw2d::factory::friend!")
-	);
+	FCPPT_ASSERT_UNREACHABLE
 }

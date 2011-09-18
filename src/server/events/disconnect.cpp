@@ -1,4 +1,4 @@
-#include "disconnect.hpp"
+#include <sanguis/server/events/disconnect.hpp>
 
 sanguis::server::events::disconnect::disconnect(
 	net::id const _id

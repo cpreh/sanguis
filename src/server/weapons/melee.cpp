@@ -1,13 +1,13 @@
-#include "melee.hpp"
-#include "delayed_attack.hpp"
-#include "unlimited_magazine_size.hpp"
-#include "unlimited_magazine_count.hpp"
-#include "../environment/object.hpp"
-#include "../entities/insert_parameters_center.hpp"
-#include "../entities/base.hpp"
-#include "../entities/with_weapon.hpp"
-#include "../entities/with_velocity.hpp"
-#include "../entities/projectiles/melee.hpp"
+#include <sanguis/server/weapons/melee.hpp>
+#include <sanguis/server/weapons/delayed_attack.hpp>
+#include <sanguis/server/weapons/unlimited_magazine_size.hpp>
+#include <sanguis/server/weapons/unlimited_magazine_count.hpp>
+#include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/entities/insert_parameters_center.hpp>
+#include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/with_weapon.hpp>
+#include <sanguis/server/entities/with_velocity.hpp>
+#include <sanguis/server/entities/projectiles/melee.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 

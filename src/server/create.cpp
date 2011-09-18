@@ -1,6 +1,6 @@
-#include "create.hpp"
-#include "object.hpp"
-#include "../args/server_port.hpp"
+#include <sanguis/server/create.hpp>
+#include <sanguis/server/object.hpp>
+#include <sanguis/args/server_port.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 

@@ -1,8 +1,10 @@
-#include "receive_buffer_source.hpp"
-#include "receive_buffer.hpp"
+#include <sanguis/net/receive_buffer_source.hpp>
+#include <sanguis/net/receive_buffer.hpp>
 #include <fcppt/algorithm/copy_n.hpp>
 #include <fcppt/assert/pre.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <algorithm>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::net::receive_buffer_source::receive_buffer_source(
 	net::receive_buffer &_container

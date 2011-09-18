@@ -1,6 +1,6 @@
-#include "projectile.hpp"
-#include "../entities/bullet.hpp"
-#include "../../../exception.hpp"
+#include <sanguis/client/draw2d/factory/projectile.hpp>
+#include <sanguis/client/draw2d/entities/bullet.hpp>
+#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
@@ -33,7 +33,5 @@ sanguis::client::draw2d::factory::projectile(
 			);
 	}
 
-	throw sanguis::exception(
-		FCPPT_TEXT("draw::factory::projectile: missing loading code!")
-	);
+	FCPPT_ASSERT_UNREACHABLE
 }

@@ -1,5 +1,5 @@
-#include "to_sge_user_data.hpp"
-#include "user_data.hpp"
+#include <sanguis/server/collision/to_sge_user_data.hpp>
+#include <sanguis/server/collision/user_data.hpp>
 
 boost::any const
 sanguis::server::collision::to_sge_user_data(

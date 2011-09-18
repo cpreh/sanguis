@@ -1,8 +1,10 @@
-#include "node.hpp"
+#include <sanguis/client/gui/perk/node.hpp>
 #include <fcppt/variant/apply_unary.hpp>
 #include <fcppt/nonassignable.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <elements/CEGUITreeItem.h>
 #include <elements/CEGUITree.h>
+#include <fcppt/config/external_end.hpp>
 
 namespace
 {

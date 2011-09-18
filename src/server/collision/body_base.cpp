@@ -1,4 +1,4 @@
-#include "body_base.hpp"
+#include <sanguis/server/collision/body_base.hpp>
 
 sanguis::server::collision::body_base::body_base()
 {

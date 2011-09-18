@@ -1,19 +1,17 @@
-#include "machine.hpp"
-#include "events/connected.hpp"
-#include "events/message.hpp"
-#include "events/net_error.hpp"
-#include "events/render.hpp"
-#include "events/tick.hpp"
-#include "log.hpp"
-#include "../messages/auto_ptr.hpp"
-#include "../messages/base.hpp"
-#include "../net/deserialize.hpp"
-#include "../net/serialize_to_circular_buffer.hpp"
-
+#include <sanguis/client/machine.hpp>
+#include <sanguis/client/events/connected.hpp>
+#include <sanguis/client/events/message.hpp>
+#include <sanguis/client/events/net_error.hpp>
+#include <sanguis/client/events/render.hpp>
+#include <sanguis/client/events/tick.hpp>
+#include <sanguis/client/log.hpp>
+#include <sanguis/messages/auto_ptr.hpp>
+#include <sanguis/messages/base.hpp>
+#include <sanguis/net/deserialize.hpp>
+#include <sanguis/net/serialize_to_circular_buffer.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/renderer/scoped_block.hpp>
 #include <sge/systems/instance.hpp>
-
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>

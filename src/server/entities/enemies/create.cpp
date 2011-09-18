@@ -1,17 +1,16 @@
-#include "create.hpp"
-#include "enemy.hpp"
-#include "../../damage/no_armor.hpp"
-#include "../../damage/list.hpp"
-#include "../../weapons/melee.hpp"
-#include "../../weapons/pistol.hpp"
-#include "../../weapons/unique_ptr.hpp"
-#include "../../ai/create_simple_without_owner.hpp"
-#include "../../../exception.hpp"
-#include "../../../duration_second.hpp"
+#include <sanguis/server/entities/enemies/create.hpp>
+#include <sanguis/server/entities/enemies/enemy.hpp>
+#include <sanguis/server/damage/no_armor.hpp>
+#include <sanguis/server/damage/list.hpp>
+#include <sanguis/server/weapons/melee.hpp>
+#include <sanguis/server/weapons/pistol.hpp>
+#include <sanguis/server/weapons/unique_ptr.hpp>
+#include <sanguis/server/ai/create_simple_without_owner.hpp>
+#include <sanguis/duration_second.hpp>
+#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/text.hpp>
 
 sanguis::server::entities::unique_ptr
 sanguis::server::entities::enemies::create(
@@ -259,7 +258,5 @@ sanguis::server::entities::enemies::create(
 		break;
 	}
 
-	throw exception(
-		FCPPT_TEXT("Invalid enemy_type in factory!")
-	);
+	FCPPT_ASSERT_UNREACHABLE
 }

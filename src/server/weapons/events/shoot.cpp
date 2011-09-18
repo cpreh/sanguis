@@ -1,4 +1,4 @@
-#include "shoot.hpp"
+#include <sanguis/server/weapons/events/shoot.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 
 sanguis::server::weapons::events::shoot::shoot(

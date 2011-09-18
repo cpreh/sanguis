@@ -1,17 +1,17 @@
-#include "object.hpp"
-#include "find_texture.hpp"
-#include "global_parameters.hpp"
-#include "json_header.hpp"
-#include "load_delay.hpp"
-#include "load_dim.hpp"
-#include "optional_delay.hpp"
-#include "parse_json.hpp"
-#include "split_first_slash.hpp"
-#include "part.hpp"
-#include "../../exception.hpp"
-#include "../resource/context.hpp"
-#include "../resource/textures.hpp"
-#include "../log.hpp"
+#include <sanguis/load/model/object.hpp>
+#include <sanguis/load/model/find_texture.hpp>
+#include <sanguis/load/model/global_parameters.hpp>
+#include <sanguis/load/model/json_header.hpp>
+#include <sanguis/load/model/load_delay.hpp>
+#include <sanguis/load/model/load_dim.hpp>
+#include <sanguis/load/model/optional_delay.hpp>
+#include <sanguis/load/model/parse_json.hpp>
+#include <sanguis/load/model/split_first_slash.hpp>
+#include <sanguis/load/model/part.hpp>
+#include <sanguis/load/resource/context.hpp>
+#include <sanguis/load/resource/textures.hpp>
+#include <sanguis/load/log.hpp>
+#include <sanguis/exception.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
@@ -26,10 +26,13 @@
 #include <fcppt/random/make_last_exclusive_range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/next_prior.hpp>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::load::model::object::~object()
-{}
+{
+}
 
 sanguis::load::model::part const &
 sanguis::load::model::object::operator[](

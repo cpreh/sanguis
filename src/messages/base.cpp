@@ -1,4 +1,4 @@
-#include "base.hpp"
+#include <sanguis/messages/base.hpp>
 
 sanguis::messages::base::base()
 {

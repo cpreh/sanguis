@@ -1,9 +1,11 @@
-#include "changeable.hpp"
-#include "initial.hpp"
-#include "../../../exception.hpp"
+#include <sanguis/server/entities/property/changeable.hpp>
+#include <sanguis/server/entities/property/initial.hpp>
+#include <sanguis/exception.hpp>
 #include <fcppt/math/compare.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <algorithm>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::server::entities::property::changeable::changeable(
 	initial const &_initial

@@ -1,18 +1,20 @@
-#include "add.hpp"
-#include "changeable.hpp"
+#include <sanguis/server/entities/property/add.hpp>
+#include <sanguis/server/entities/property/changeable.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <algorithm>
+#include <fcppt/config/external_end.hpp>
 
 void
 sanguis::server::entities::property::add(
-	changeable &changeable_,
-	value const &value_
+	changeable &_changeable,
+	value const &_value
 )
 {
-	changeable_.current(
+	_changeable.current(
 		std::min(
-			changeable_.max(),
-			changeable_.current()
-			+ value_
+			_changeable.max(),
+			_changeable.current()
+			+ _value
 		)
 	);
 }

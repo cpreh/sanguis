@@ -1,10 +1,10 @@
-#include "weapon_category.hpp"
-#include "base_animation_not_found.hpp"
-#include "global_parameters.hpp"
-#include "find_texture.hpp"
-#include "animation/object.hpp"
-#include "../log.hpp"
-#include "../../exception.hpp"
+#include <sanguis/load/model/weapon_category.hpp>
+#include <sanguis/load/model/base_animation_not_found.hpp>
+#include <sanguis/load/model/global_parameters.hpp>
+#include <sanguis/load/model/find_texture.hpp>
+#include <sanguis/load/model/animation/object.hpp>
+#include <sanguis/load/log.hpp>
+#include <sanguis/exception.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/get.hpp>
@@ -18,7 +18,9 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <iterator>
+#include <fcppt/config/external_end.hpp>
 
 namespace
 {

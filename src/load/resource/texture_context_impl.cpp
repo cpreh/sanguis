@@ -1,4 +1,4 @@
-#include "texture_context_impl.hpp"
+#include <sanguis/load/resource/texture_context_impl.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/renderer/texture/address_mode.hpp>
 #include <sge/renderer/texture/address_mode2.hpp>

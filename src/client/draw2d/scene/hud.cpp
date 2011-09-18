@@ -1,4 +1,4 @@
-#include "hud.hpp"
+#include <sanguis/client/draw2d/scene/hud.hpp>
 #include <sge/font/text/part.hpp>
 #include <sge/font/text/draw.hpp>
 #include <sge/font/text/flags_none.hpp>

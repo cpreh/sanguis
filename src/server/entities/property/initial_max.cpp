@@ -1,15 +1,15 @@
-#include "initial_max.hpp"
-#include "initial.hpp"
-#include "value.hpp"
+#include <sanguis/server/entities/property/initial_max.hpp>
+#include <sanguis/server/entities/property/initial.hpp>
+#include <sanguis/server/entities/property/value.hpp>
 
 sanguis::server::entities::property::initial const
 sanguis::server::entities::property::initial_max(
-	value  const base_
+	value  const _base
 )
 {
 	return
-		initial(
-			base_,
-			base_
+		property::initial(
+			_base,
+			_base
 		);
 }

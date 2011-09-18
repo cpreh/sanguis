@@ -1,5 +1,5 @@
-#include "context.hpp"
-#include "collection.hpp"
+#include <sanguis/load/model/context.hpp>
+#include <sanguis/load/model/collection.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 

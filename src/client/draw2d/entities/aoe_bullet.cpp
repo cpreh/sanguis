@@ -1,8 +1,8 @@
-#include "aoe_bullet.hpp"
-#include "explosion.hpp"
-#include "own_auto_ptr.hpp"
-#include "model/parameters.hpp"
-#include "../z_ordering.hpp"
+#include <sanguis/client/draw2d/entities/aoe_bullet.hpp>
+#include <sanguis/client/draw2d/entities/explosion.hpp>
+#include <sanguis/client/draw2d/entities/own_auto_ptr.hpp>
+#include <sanguis/client/draw2d/entities/model/parameters.hpp>
+#include <sanguis/client/draw2d/z_ordering.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_auto_ptr.hpp>

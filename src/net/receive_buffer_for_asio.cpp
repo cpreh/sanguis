@@ -1,8 +1,10 @@
-#include "receive_buffer_for_asio.hpp"
-#include "receive_buffer.hpp"
-#include "receive_buffer_part.hpp"
+#include <sanguis/net/receive_buffer_for_asio.hpp>
+#include <sanguis/net/receive_buffer.hpp>
+#include <sanguis/net/receive_buffer_part.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/asio/buffer.hpp>
 #include <algorithm>
+#include <fcppt/config/external_end.hpp>
 
 boost::asio::mutable_buffers_1 const
 sanguis::net::receive_buffer_for_asio(

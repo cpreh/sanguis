@@ -1,5 +1,5 @@
-#include "circle_ghost.hpp"
-#include "../dim.hpp"
+#include <sanguis/server/collision/circle_ghost.hpp>
+#include <sanguis/server/dim.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>

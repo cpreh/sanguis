@@ -1,13 +1,15 @@
-#include "aoe_projectile_name.hpp"
-#include "../exception.hpp"
+#include <sanguis/load/aoe_projectile_name.hpp>
+#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/text.hpp>
 
 fcppt::string const
 sanguis::load::aoe_projectile_name(
-	aoe_projectile_type::type const ptype
+	aoe_projectile_type::type const _type
 )
 {
-	switch(ptype)
+	switch(
+		_type
+	)
 	{
 	case aoe_projectile_type::grenade:
 		return FCPPT_TEXT("grenade");
@@ -18,7 +20,5 @@ sanguis::load::aoe_projectile_name(
 		break;
 	}
 
-	throw exception(
-		FCPPT_TEXT("load::aoe_projectile_name: missing loading code!")
-	);
+	FCPPT_ASSERT_UNREACHABLE
 }

@@ -1,15 +1,14 @@
-#include "create.hpp"
-#include "perk.hpp"
-#include "choleric.hpp"
-#include "health.hpp"
-#include "ias.hpp"
-#include "ims.hpp"
-#include "irs.hpp"
-#include "regeneration.hpp"
-#include "../../exception.hpp"
+#include <sanguis/server/perks/create.hpp>
+#include <sanguis/server/perks/perk.hpp>
+#include <sanguis/server/perks/choleric.hpp>
+#include <sanguis/server/perks/health.hpp>
+#include <sanguis/server/perks/ias.hpp>
+#include <sanguis/server/perks/ims.hpp>
+#include <sanguis/server/perks/irs.hpp>
+#include <sanguis/server/perks/regeneration.hpp>
+#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/text.hpp>
 
 sanguis::server::perks::unique_ptr
 sanguis::server::perks::create(
@@ -71,8 +70,5 @@ sanguis::server::perks::create(
 		break;
 	}
 
-	throw exception(
-		FCPPT_TEXT("Invalid perk type!")
-	);
-
+	FCPPT_ASSERT_UNREACHABLE
 }

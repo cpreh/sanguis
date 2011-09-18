@@ -1,7 +1,7 @@
-#include "speed.hpp"
-#include "../entities/with_velocity.hpp"
-#include "../../messages/speed.hpp"
-#include "../../messages/create.hpp"
+#include <sanguis/server/message_convert/speed.hpp>
+#include <sanguis/server/entities/with_velocity.hpp>
+#include <sanguis/messages/speed.hpp>
+#include <sanguis/messages/create.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 
 sanguis::messages::auto_ptr

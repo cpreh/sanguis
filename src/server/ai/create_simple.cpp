@@ -1,11 +1,13 @@
-#include "create_simple.hpp"
-#include "simple.hpp"
-#include "../entities/auto_weak_link.hpp"
+#include <sanguis/server/ai/create_simple.hpp>
+#include <sanguis/server/ai/simple.hpp>
+#include <sanguis/server/entities/auto_weak_link.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/cref.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/spirit/home/phoenix/core/argument.hpp>
 #include <boost/spirit/home/phoenix/object/construct.hpp>
 #include <boost/spirit/home/phoenix/object/new.hpp>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::server::ai::create_function const
 sanguis::server::ai::create_simple(

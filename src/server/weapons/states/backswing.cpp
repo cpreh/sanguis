@@ -1,11 +1,11 @@
-#include "backswing.hpp"
-#include "reloading.hpp"
-#include "ready.hpp"
-#include "../events/poll.hpp"
-#include "../events/shoot.hpp"
-#include "../events/stop.hpp"
-#include "../events/reset.hpp"
-#include "../../entities/with_weapon.hpp"
+#include <sanguis/server/weapons/states/backswing.hpp>
+#include <sanguis/server/weapons/states/reloading.hpp>
+#include <sanguis/server/weapons/states/ready.hpp>
+#include <sanguis/server/weapons/events/poll.hpp>
+#include <sanguis/server/weapons/events/shoot.hpp>
+#include <sanguis/server/weapons/events/stop.hpp>
+#include <sanguis/server/weapons/events/reset.hpp>
+#include <sanguis/server/entities/with_weapon.hpp>
 
 sanguis::server::weapons::states::backswing::backswing(
 	my_context _ctx

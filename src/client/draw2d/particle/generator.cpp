@@ -1,7 +1,7 @@
-#include "generator.hpp"
-#include "object.hpp"
-#include "rotation_from_alignment.hpp"
-#include "velocity_from_movement.hpp"
+#include <sanguis/client/draw2d/particle/generator.hpp>
+#include <sanguis/client/draw2d/particle/object.hpp>
+#include <sanguis/client/draw2d/particle/rotation_from_alignment.hpp>
+#include <sanguis/client/draw2d/particle/velocity_from_movement.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/random/make_inclusive_range.hpp>
 #include <fcppt/math/twopi.hpp>

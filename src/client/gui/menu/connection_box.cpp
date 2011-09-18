@@ -1,12 +1,14 @@
-#include "connection_box.hpp"
-#include "../object.hpp"
-#include "../../../media_path.hpp"
+#include <sanguis/client/gui/menu/connection_box.hpp>
+#include <sanguis/client/gui/object.hpp>
+#include <sanguis/media_path.hpp>
 #include <sge/cegui/to_cegui_string.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <elements/CEGUIPushButton.h>
 #include <CEGUIWindowManager.h>
 #include <CEGUIWindow.h>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::client::gui::menu::connection_box::connection_box(
 	client::gui::object &_gui,

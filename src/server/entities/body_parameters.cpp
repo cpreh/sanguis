@@ -1,4 +1,4 @@
-#include "body_parameters.hpp"
+#include <sanguis/server/entities/body_parameters.hpp>
 
 sanguis::server::entities::body_parameters::body_parameters(
 	sge::projectile::shape::shared_base_ptr const _shape,

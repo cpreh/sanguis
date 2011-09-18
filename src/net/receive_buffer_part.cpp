@@ -1,4 +1,4 @@
-#include "receive_buffer_part.hpp"
+#include <sanguis/net/receive_buffer_part.hpp>
 
 sanguis::net::receive_buffer_part::receive_buffer_part(
 	pointer const _begin,

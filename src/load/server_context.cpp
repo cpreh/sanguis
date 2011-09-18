@@ -1,13 +1,15 @@
-#include "server_context.hpp"
-#include "model/json_header.hpp"
-#include "model/load_dim.hpp"
-#include "model/make_path.hpp"
-#include "model/parse_json.hpp"
+#include <sanguis/load/server_context.hpp>
+#include <sanguis/load/model/json_header.hpp>
+#include <sanguis/load/model/load_dim.hpp>
+#include <sanguis/load/model/make_path.hpp>
+#include <sanguis/load/model/parse_json.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <utility>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::load::server_context::server_context()
 :

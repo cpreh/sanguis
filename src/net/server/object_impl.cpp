@@ -1,14 +1,14 @@
-#include "object_impl.hpp"
-#include "connection.hpp"
-#include "../append_to_circular_buffer.hpp"
-#include "../circular_buffer_send_part.hpp"
-#include "../erase_circular_buffer_front.hpp"
-#include "../exception.hpp"
-#include "../log_location.hpp"
-#include "../receive_buffer.hpp"
-#include "../receive_buffer_for_asio.hpp"
-#include "../receive_buffer_part.hpp"
-#include "../../log_parameters.hpp"
+#include <sanguis/net/server/object_impl.hpp>
+#include <sanguis/net/server/connection.hpp>
+#include <sanguis/net/append_to_circular_buffer.hpp>
+#include <sanguis/net/circular_buffer_send_part.hpp>
+#include <sanguis/net/erase_circular_buffer_front.hpp>
+#include <sanguis/net/exception.hpp>
+#include <sanguis/net/log_location.hpp>
+#include <sanguis/net/receive_buffer.hpp>
+#include <sanguis/net/receive_buffer_for_asio.hpp>
+#include <sanguis/net/receive_buffer_part.hpp>
+#include <sanguis/log_parameters.hpp>
 #undef max
 // asio brings in window.h's max macro :(
 #include <fcppt/assert/pre.hpp>
@@ -28,9 +28,11 @@
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/asio/buffer.hpp>
 #include <boost/asio.hpp>
 #include <boost/range/adaptor/map.hpp>
+#include <fcppt/config/external_end.hpp>
 
 namespace
 {

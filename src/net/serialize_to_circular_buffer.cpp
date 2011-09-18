@@ -1,11 +1,13 @@
-#include "serialize_to_circular_buffer.hpp"
-#include "circular_buffer_sink.hpp"
-#include "message_size.hpp"
-#include "serialize_impl.hpp"
+#include <sanguis/net/serialize_to_circular_buffer.hpp>
+#include <sanguis/net/circular_buffer_sink.hpp>
+#include <sanguis/net/message_size.hpp>
+#include <sanguis/net/serialize_impl.hpp>
 #include <fcppt/assert/pre_message.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/iostreams/stream_buffer.hpp>
+#include <fcppt/config/external_end.hpp>
 
 bool
 sanguis::net::serialize_to_circular_buffer(

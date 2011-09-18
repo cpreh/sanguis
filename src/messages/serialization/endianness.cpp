@@ -1,4 +1,4 @@
-#include "endianness.hpp"
+#include <sanguis/messages/serialization/endianness.hpp>
 
 fcppt::endianness::format::type
 sanguis::messages::serialization::endianness()

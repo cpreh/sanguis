@@ -1,6 +1,6 @@
-#include "environment.hpp"
-#include "object.hpp"
-#include "../entities/base.hpp"
+#include <sanguis/server/world/environment.hpp>
+#include <sanguis/server/world/object.hpp>
+#include <sanguis/server/entities/base.hpp>
 
 sanguis::server::world::environment::environment(
 	world::object &_world

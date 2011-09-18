@@ -1,9 +1,8 @@
-#include "get_or_default.hpp"
-#include "get_or_create_section.hpp"
-#include "get_or_create_entry.hpp"
-#include "object.hpp"
+#include <sanguis/client/config/settings/get_or_default.hpp>
+#include <sanguis/client/config/settings/get_or_create_section.hpp>
+#include <sanguis/client/config/settings/get_or_create_entry.hpp>
+#include <sanguis/client/config/settings/object.hpp>
 #include <sge/parse/ini/entry.hpp>
-#include <algorithm>
 
 fcppt::string const
 sanguis::client::config::settings::get_or_default(

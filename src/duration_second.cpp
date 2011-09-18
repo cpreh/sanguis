@@ -1,4 +1,4 @@
-#include "duration_second.hpp"
+#include <sanguis/duration_second.hpp>
 
 sanguis::duration const
 sanguis::duration_second(

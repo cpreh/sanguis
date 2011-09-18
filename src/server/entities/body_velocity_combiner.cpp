@@ -1,4 +1,4 @@
-#include "body_velocity_combiner.hpp"
+#include <sanguis/server/entities/body_velocity_combiner.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 
 sanguis::server::entities::body_velocity_combiner::body_velocity_combiner()

@@ -1,5 +1,5 @@
-#include "single.hpp"
-#include "spawn.hpp"
+#include <sanguis/server/waves/single.hpp>
+#include <sanguis/server/waves/spawn.hpp>
 
 sanguis::server::waves::single::single(
 	sanguis::diff_clock const &_diff_clock,

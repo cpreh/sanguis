@@ -1,21 +1,21 @@
-#include "linear_change.hpp"
-#include "base.hpp"
+#include <sanguis/server/entities/property/linear_change.hpp>
+#include <sanguis/server/entities/property/base.hpp>
 
 void
 sanguis::server::entities::property::linear_change(
-	base &base_,
-	value const &value_
+	base &_base,
+	value const &_value
 )
 {
-	base::linear_type linear_(
-		base_.linear()
+	base::linear_type linear_value(
+		_base.linear()
 	);
 
-	linear_.change(
-		value_
+	linear_value.change(
+		_value
 	);
 
-	base_.linear(
-		linear_
+	_base.linear(
+		linear_value
 	);
 }

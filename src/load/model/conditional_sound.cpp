@@ -1,9 +1,9 @@
-#include "conditional_sound.hpp"
-#include <fcppt/random/inclusive_range.hpp>
+#include <sanguis/load/model/conditional_sound.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
 #include <fcppt/math/compare.hpp>
+#include <fcppt/random/inclusive_range.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::load::model::conditional_sound::conditional_sound(

@@ -1,7 +1,7 @@
-#include "choose.hpp"
-#include "equal.hpp"
-#include "status.hpp"
-#include "../../../exception.hpp"
+#include <sanguis/server/perks/tree/choose.hpp>
+#include <sanguis/server/perks/tree/equal.hpp>
+#include <sanguis/server/perks/tree/status.hpp>
+#include <sanguis/exception.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
 #include <fcppt/text.hpp>

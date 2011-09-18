@@ -1,6 +1,6 @@
-#include "sge_options.hpp"
-#include "multi_sampling.hpp"
-#include "screen_mode.hpp"
+#include <sanguis/args/sge_options.hpp>
+#include <sanguis/args/multi_sampling.hpp>
+#include <sanguis/args/screen_mode.hpp>
 #include <sge/renderer/parameters.hpp>
 #include <sge/renderer/refresh_rate_dont_care.hpp>
 #include <sge/systems/audio_loader.hpp>

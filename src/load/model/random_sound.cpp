@@ -1,8 +1,8 @@
-#include "random_sound.hpp"
-#include "sound.hpp"
-#include "../resource/context.hpp"
-#include "../resource/sounds.hpp"
-#include "../../exception.hpp"
+#include <sanguis/load/model/random_sound.hpp>
+#include <sanguis/load/model/sound.hpp>
+#include <sanguis/load/resource/context.hpp>
+#include <sanguis/load/resource/sounds.hpp>
+#include <sanguis/exception.hpp>
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
@@ -11,8 +11,10 @@
 #include <fcppt/math/almost_zero.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <numeric>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::load::model::random_sound::random_sound(
 	sge::parse::json::element_vector const &_elements,

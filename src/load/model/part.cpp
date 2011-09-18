@@ -1,9 +1,9 @@
-#include "part.hpp"
-#include "find_texture.hpp"
-#include "global_parameters.hpp"
-#include "weapon_category.hpp"
-#include "../log.hpp"
-#include "../../exception.hpp"
+#include <sanguis/load/model/part.hpp>
+#include <sanguis/load/model/find_texture.hpp>
+#include <sanguis/load/model/global_parameters.hpp>
+#include <sanguis/load/model/weapon_category.hpp>
+#include <sanguis/load/log.hpp>
+#include <sanguis/exception.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
@@ -17,7 +17,9 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <iterator>
+#include <fcppt/config/external_end.hpp>
 
 namespace
 {
@@ -40,7 +42,7 @@ weapon_type_array const weapon_types = {
 
 sanguis::weapon_type::type
 find_weapon_type(
-	fcppt::string const &str
+	fcppt::string const &_str
 )
 {
 	return
@@ -52,7 +54,7 @@ find_weapon_type(
 				fcppt::algorithm::find_exn(
 					weapon_types.begin(),
 					weapon_types.end(),
-					str
+					_str
 				)
 			)
 		);
@@ -62,18 +64,24 @@ find_weapon_type(
 
 sanguis::load::model::weapon_category const &
 sanguis::load::model::part::operator[](
-	weapon_type::type const t
+	weapon_type::type const _type
 ) const
 {
 	category_map::const_iterator const it(
-		categories.find(t)
+		categories_.find(
+			_type
+		)
 	);
 
-	if(it != categories.end())
+	if(
+		it != categories_.end()
+	)
 		return *it->second;
 
-	if(t == weapon_type::none)
-		throw exception(
+	if(
+		_type == weapon_type::none
+	)
+		throw sanguis::exception(
 			FCPPT_TEXT("Unarmed weapon model missing in TODO")
 		);
 
@@ -85,18 +93,18 @@ sanguis::load::model::part::~part()
 }
 
 sanguis::load::model::part::part(
-	sge::parse::json::object const &object,
-	global_parameters const &param
+	sge::parse::json::object const &_object,
+	global_parameters const &_param
 )
 :
-	categories()
+	categories_()
 {
 	sge::parse::json::member_vector const &members(
-		object.members
+		_object.members
 	);
 
 	optional_texture_identifier const texture(
-		find_texture(
+		model::find_texture(
 			members
 		)
 	);
@@ -139,7 +147,7 @@ sanguis::load::model::part::part(
 
 		if(
 			fcppt::container::ptr::insert_unique_ptr_map(
-				categories,
+				categories_,
 				find_weapon_type(
 					member.name
 				),
@@ -151,14 +159,14 @@ sanguis::load::model::part::part(
 					>(
 						member.value
 					),
-					param.new_texture(
+					_param.new_texture(
 						texture
 					)
 				)
 			).second == false
 		)
 			FCPPT_LOG_WARNING(
-				log(),
+				load::log(),
 				fcppt::log::_
 					<< FCPPT_TEXT("Double insert in part!")
 			);

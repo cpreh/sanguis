@@ -1,4 +1,4 @@
-#include "action.hpp"
+#include <sanguis/client/events/action.hpp>
 
 sanguis::client::events::action::action(
 	client::control::actions::any const &_value

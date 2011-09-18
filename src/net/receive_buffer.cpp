@@ -1,10 +1,12 @@
-#include "receive_buffer.hpp"
-#include "receive_buffer_part.hpp"
+#include <sanguis/net/receive_buffer.hpp>
+#include <sanguis/net/receive_buffer_part.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/next_prior.hpp>
 #include <cstddef>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::net::receive_buffer::receive_buffer(
 	size_type const _size

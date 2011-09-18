@@ -1,9 +1,12 @@
-#include "server_only.hpp"
+#include <sanguis/args/server_only.hpp>
 
 bool
 sanguis::args::server_only(
-	boost::program_options::variables_map const &vm
+	boost::program_options::variables_map const &_vm
 )
 {
-	return vm["serveronly"].as<bool>();
+	return
+		_vm["serveronly"].as<
+			bool
+		>();
 }

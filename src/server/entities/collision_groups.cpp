@@ -1,4 +1,4 @@
-#include "collision_groups.hpp"
+#include <sanguis/server/entities/collision_groups.hpp>
 
 sanguis::server::collision::group_vector const
 sanguis::server::entities::collision_groups(

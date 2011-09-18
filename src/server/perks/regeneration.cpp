@@ -1,7 +1,7 @@
-#include "regeneration.hpp"
-#include "change_simple.hpp"
-#include "../entities/property/constant_change.hpp"
-#include "../entities/with_health.hpp"
+#include <sanguis/server/perks/regeneration.hpp>
+#include <sanguis/server/perks/change_simple.hpp>
+#include <sanguis/server/entities/property/constant_change.hpp>
+#include <sanguis/server/entities/with_health.hpp>
 
 sanguis::server::perks::regeneration::regeneration()
 :

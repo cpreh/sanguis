@@ -1,5 +1,5 @@
-#include "sound.hpp"
-#include "../resource/sounds.hpp"
+#include <sanguis/load/model/sound.hpp>
+#include <sanguis/load/resource/sounds.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>

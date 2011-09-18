@@ -1,10 +1,10 @@
-#include "context.hpp"
-#include "../global_parameters.hpp"
-#include "../frame_cache.hpp"
-#include "../../resource/animation/entity.hpp"
-#include "../../resource/animation/series.hpp"
-#include "../../resource/texture_context_impl.hpp"
-#include "../../../exception.hpp"
+#include <sanguis/load/model/animation/context.hpp>
+#include <sanguis/load/model/global_parameters.hpp>
+#include <sanguis/load/model/frame_cache.hpp>
+#include <sanguis/load/resource/animation/entity.hpp>
+#include <sanguis/load/resource/animation/series.hpp>
+#include <sanguis/load/resource/texture_context_impl.hpp>
+#include <sanguis/exception.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <sge/renderer/size_type.hpp>

@@ -1,4 +1,4 @@
-#include "exception.hpp"
+#include <sanguis/net/exception.hpp>
 
 sanguis::net::exception::exception(
 	fcppt::string const &_message

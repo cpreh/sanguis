@@ -1,7 +1,7 @@
-#include "circle_from_dim.hpp"
-#include "body_parameters.hpp"
-#include "radius.hpp"
-#include "../collision/create_circle.hpp"
+#include <sanguis/server/entities/circle_from_dim.hpp>
+#include <sanguis/server/entities/body_parameters.hpp>
+#include <sanguis/server/entities/radius.hpp>
+#include <sanguis/server/collision/create_circle.hpp>
 
 sanguis::server::entities::body_parameters const
 sanguis::server::entities::circle_from_dim(

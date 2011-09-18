@@ -1,4 +1,4 @@
-#include "any.hpp"
+#include <sanguis/client/control/actions/any.hpp>
 
 sanguis::client::control::actions::any::any(
 	actions::variant const &_variant

@@ -1,5 +1,5 @@
-#include "simple.hpp"
-#include "spawn.hpp"
+#include <sanguis/server/waves/simple.hpp>
+#include <sanguis/server/waves/spawn.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 
 sanguis::server::waves::simple::simple(

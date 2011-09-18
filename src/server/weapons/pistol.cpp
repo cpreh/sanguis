@@ -1,10 +1,10 @@
-#include "pistol.hpp"
-#include "delayed_attack.hpp"
-#include "unlimited_magazine_count.hpp"
-#include "../entities/base.hpp"
-#include "../entities/insert_parameters.hpp"
-#include "../entities/projectiles/simple_bullet.hpp"
-#include "../environment/object.hpp"
+#include <sanguis/server/weapons/pistol.hpp>
+#include <sanguis/server/weapons/delayed_attack.hpp>
+#include <sanguis/server/weapons/unlimited_magazine_count.hpp>
+#include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/insert_parameters.hpp>
+#include <sanguis/server/entities/projectiles/simple_bullet.hpp>
+#include <sanguis/server/environment/object.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>

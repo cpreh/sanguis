@@ -1,5 +1,5 @@
-#include "append_to_circular_buffer.hpp"
-#include "circular_buffer_space_left.hpp"
+#include <sanguis/net/append_to_circular_buffer.hpp>
+#include <sanguis/net/circular_buffer_space_left.hpp>
 #include <fcppt/algorithm/append.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 

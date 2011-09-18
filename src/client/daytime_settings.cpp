@@ -1,4 +1,4 @@
-#include "daytime_settings.hpp"
+#include <sanguis/client/daytime_settings.hpp>
 #include <sge/console/object.hpp>
 #include <sge/font/text/lit.hpp>
 #include <sge/font/text/to_fcppt_string.hpp>
@@ -15,6 +15,7 @@
 #include <fcppt/exception.hpp>
 #include <fcppt/lexical_cast.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/fusion/adapted/struct/adapt_struct.hpp>
 #include <boost/fusion/algorithm/iteration/for_each.hpp>
 #include <boost/fusion/container/vector.hpp>
@@ -23,6 +24,7 @@
 #include <boost/spirit/home/phoenix/core/argument.hpp>
 #include <boost/spirit/home/phoenix/operator/self.hpp>
 #include <ctime>
+#include <fcppt/config/external_end.hpp>
 
 namespace
 {

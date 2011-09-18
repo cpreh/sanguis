@@ -1,5 +1,5 @@
-#include "file.hpp"
-#include "../homedir.hpp"
+#include <sanguis/client/config/settings/file.hpp>
+#include <sanguis/client/config/homedir.hpp>
 #include <fcppt/text.hpp>
 
 fcppt::filesystem::path const

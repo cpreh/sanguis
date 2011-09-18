@@ -1,28 +1,14 @@
-#include "subtract.hpp"
-#include "changeable.hpp"
+#include <sanguis/server/entities/property/subtract.hpp>
+#include <sanguis/server/entities/property/changeable.hpp>
 
 void
 sanguis::server::entities::property::subtract(
-	changeable &changeable_,
-	value const &value_
+	changeable &_changeable,
+	value const &_value
 )
 {
-	changeable_.current(
-		changeable_.current()
-		- value_
+	_changeable.current(
+		_changeable.current()
+		- _value
 	);
-#if 0
-	value const sub(
-		changeable_.current()
-		- value_
-	);
-
-	changeable_.current(
-		sub > changeable_.current()
-		?
-			0
-		:
-			sub
-	);
-#endif
 }

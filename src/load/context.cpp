@@ -1,7 +1,7 @@
-#include "context.hpp"
-#include "model/object.hpp"
-#include "model/context.hpp"
-#include "model/collection.hpp"
+#include <sanguis/load/context.hpp>
+#include <sanguis/load/model/object.hpp>
+#include <sanguis/load/model/context.hpp>
+#include <sanguis/load/model/collection.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 
 sanguis::load::context::context(

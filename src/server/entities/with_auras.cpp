@@ -1,7 +1,7 @@
-#include "with_auras.hpp"
-#include "../auras/aura.hpp"
-#include "../collision/ghost.hpp"
-#include "../environment/object.hpp"
+#include <sanguis/server/entities/with_auras.hpp>
+#include <sanguis/server/auras/aura.hpp>
+#include <sanguis/server/collision/ghost.hpp>
+#include <sanguis/server/environment/object.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 

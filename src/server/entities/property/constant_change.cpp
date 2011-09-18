@@ -1,21 +1,21 @@
-#include "constant_change.hpp"
-#include "base.hpp"
+#include <sanguis/server/entities/property/constant_change.hpp>
+#include <sanguis/server/entities/property/base.hpp>
 
 void
 sanguis::server::entities::property::constant_change(
-	base &base_,
-	value const &value_
+	property::base &_base,
+	property::value const &_value
 )
 {
-	base::constant_type constant_(
-		base_.constant()
+	base::constant_type constant_value(
+		_base.constant()
 	);
 
-	constant_.change(
-		value_
+	constant_value.change(
+		_value
 	);
 
-	base_.constant(
-		constant_
+	_base.constant(
+		constant_value
 	);
 }

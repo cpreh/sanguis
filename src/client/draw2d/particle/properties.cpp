@@ -1,4 +1,4 @@
-#include "properties.hpp"
+#include <sanguis/client/draw2d/particle/properties.hpp>
 #include <fcppt/minmax_pair_impl.hpp>
 
 sanguis::client::draw2d::particle::properties::properties(

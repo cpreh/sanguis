@@ -1,7 +1,7 @@
-#include "console.hpp"
-#include "../messages/add_console_command.hpp"
-#include "../messages/console_print.hpp"
-#include "../messages/create.hpp"
+#include <sanguis/server/console.hpp>
+#include <sanguis/messages/add_console_command.hpp>
+#include <sanguis/messages/console_print.hpp>
+#include <sanguis/messages/create.hpp>
 #include <sge/font/text/lit.hpp>
 #include <sge/font/text/from_fcppt_string.hpp>
 #include <sge/font/text/string.hpp>

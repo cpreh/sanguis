@@ -1,5 +1,5 @@
-#include "burn.hpp"
-#include "../entities/with_health.hpp"
+#include <sanguis/server/buffs/burn.hpp>
+#include <sanguis/server/entities/with_health.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 
 sanguis::server::buffs::burn::burn(

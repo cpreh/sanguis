@@ -1,27 +1,26 @@
-#include "deserialize.hpp"
-#include "receive_buffer_source.hpp"
-#include "size_type.hpp"
-#include "value_type.hpp"
-#include "stream_exceptions.hpp"
-#include "message_header.hpp"
-#include "message_header_size.hpp"
-#include "message_size.hpp"
-#include "../messages/serialization/deserialize.hpp"
-#include "../messages/serialization/endianness.hpp"
-#include "../messages/base.hpp"
-#include "../messages/global_context.hpp"
-#include "../exception.hpp"
-
+#include <sanguis/net/deserialize.hpp>
+#include <sanguis/net/receive_buffer_source.hpp>
+#include <sanguis/net/size_type.hpp>
+#include <sanguis/net/value_type.hpp>
+#include <sanguis/net/stream_exceptions.hpp>
+#include <sanguis/net/message_header.hpp>
+#include <sanguis/net/message_header_size.hpp>
+#include <sanguis/net/message_size.hpp>
+#include <sanguis/messages/serialization/deserialize.hpp>
+#include <sanguis/messages/serialization/endianness.hpp>
+#include <sanguis/messages/base.hpp>
+#include <sanguis/messages/global_context.hpp>
+#include <sanguis/exception.hpp>
 #include <fcppt/assert/throw.hpp>
 #include <fcppt/assert/throw_message.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/io/read.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/text.hpp>
-
+#include <fcppt/config/external_begin.hpp>
 #include <boost/iostreams/stream_buffer.hpp>
-
 #include <istream>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::messages::auto_ptr
 sanguis::net::deserialize(

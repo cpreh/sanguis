@@ -1,6 +1,6 @@
-#include "global_groups.hpp"
-#include "group.hpp"
-#include "../../exception.hpp"
+#include <sanguis/server/collision/global_groups.hpp>
+#include <sanguis/server/collision/group.hpp>
+#include <sanguis/exception.hpp>
 #include <sge/projectile/world.hpp>
 #include <sge/projectile/group/object.hpp>
 #include <fcppt/assign/make_container.hpp>
@@ -9,8 +9,10 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <vector>
 #include <utility>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::server::collision::global_groups::global_groups(
 	sge::projectile::world &_world

@@ -1,9 +1,11 @@
-#include "get_or_create_entry.hpp"
+#include <sanguis/client/config/settings/get_or_create_entry.hpp>
 #include <sge/parse/ini/entry_vector.hpp>
 #include <sge/parse/ini/entry.hpp>
 #include <sge/parse/ini/section.hpp>
 #include <sge/parse/ini/entry_name_equal.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <algorithm>
+#include <fcppt/config/external_end.hpp>
 
 sge::parse::ini::entry &
 sanguis::client::config::settings::get_or_create_entry(

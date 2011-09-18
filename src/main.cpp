@@ -1,16 +1,14 @@
-#include "args/log_level.hpp"
-#include "args/options.hpp"
-#include "args/parse.hpp"
-#include "args/server_only.hpp"
-#include "client/create.hpp"
-#include "load/server_context.hpp"
-#include "server/create.hpp"
-#include "log.hpp"
-#include "log_context.hpp"
-#include "main_object.hpp"
-
-#include <sge/log/global_context.hpp>
-
+#include <sanguis/args/log_level.hpp>
+#include <sanguis/args/options.hpp>
+#include <sanguis/args/parse.hpp>
+#include <sanguis/args/server_only.hpp>
+#include <sanguis/client/create.hpp>
+#include <sanguis/load/server_context.hpp>
+#include <sanguis/server/create.hpp>
+#include <sanguis/log.hpp>
+#include <sanguis/log_context.hpp>
+#include <sanguis/main_object.hpp>
+//#include <sge/log/global_context.hpp>
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/log/activate_levels.hpp>
 #include <fcppt/log/global.hpp>
@@ -19,16 +17,14 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <fcppt/text.hpp>
-
+#include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/options_description.hpp>
 #include <boost/program_options/variables_map.hpp>
-#include <boost/spirit/home/phoenix/core/reference.hpp>
-
 #include <exception>
 #include <iostream>
 #include <ostream>
-
 #include <cstdlib>
+#include <fcppt/config/external_end.hpp>
 
 #include <fcppt/log/context.hpp>
 #include <fcppt/log/location.hpp>

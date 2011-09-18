@@ -1,4 +1,4 @@
-#include "object.hpp"
+#include <sanguis/client/cursor/object.hpp>
 #include <sge/input/cursor/object.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>

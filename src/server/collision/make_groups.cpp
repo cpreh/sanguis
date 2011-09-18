@@ -1,5 +1,5 @@
-#include "make_groups.hpp"
-#include "global_groups.hpp"
+#include <sanguis/server/collision/make_groups.hpp>
+#include <sanguis/server/collision/global_groups.hpp>
 #include <fcppt/ref.hpp>
 
 sge::projectile::group::sequence const

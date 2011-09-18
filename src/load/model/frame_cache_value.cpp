@@ -1,9 +1,10 @@
-#include "frame_cache_value.hpp"
+#include <sanguis/load/model/frame_cache_value.hpp>
 #include <fcppt/math/box/basic_impl.hpp>
 
 sanguis::load::model::frame_cache_value::frame_cache_value(
 	sanguis::duration const &_delay,
-	sge::renderer::lock_rect const &_area)
+	sge::renderer::lock_rect const &_area
+)
 :
 	delay_(
 		_delay

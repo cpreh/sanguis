@@ -1,7 +1,7 @@
-#include "control_environment.hpp"
-#include "object.hpp"
-#include "../translate/vector_from_client.hpp"
-#include "../vector2.hpp"
+#include <sanguis/client/draw2d/scene/control_environment.hpp>
+#include <sanguis/client/draw2d/scene/object.hpp>
+#include <sanguis/client/draw2d/translate/vector_from_client.hpp>
+#include <sanguis/client/draw2d/vector2.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>

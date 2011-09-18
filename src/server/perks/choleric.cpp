@@ -1,8 +1,8 @@
-#include "choleric.hpp"
-#include "../environment/object.hpp"
-#include "../entities/projectiles/simple_bullet.hpp"
-#include "../entities/projectiles/rocket.hpp"
-#include "../entities/insert_parameters.hpp"
+#include <sanguis/server/perks/choleric.hpp>
+#include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/entities/projectiles/simple_bullet.hpp>
+#include <sanguis/server/entities/projectiles/rocket.hpp>
+#include <sanguis/server/entities/insert_parameters.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/chrono/seconds.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>

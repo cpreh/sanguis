@@ -1,5 +1,5 @@
-#include "day_gradient.hpp"
-#include "gradients.hpp"
+#include <sanguis/client/draw2d/sunlight/day_gradient.hpp>
+#include <sanguis/client/draw2d/sunlight/gradients.hpp>
 #include <mizuiro/color/object.hpp>
 #include <mizuiro/color/init/red.hpp>
 #include <mizuiro/color/init/blue.hpp>

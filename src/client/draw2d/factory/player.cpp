@@ -1,5 +1,5 @@
-#include "player.hpp"
-#include "../entities/player.hpp"
+#include <sanguis/client/draw2d/factory/player.hpp>
+#include <sanguis/client/draw2d/entities/player.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 

@@ -1,5 +1,5 @@
-#include "need_swap.hpp"
-#include "endianness.hpp"
+#include <sanguis/messages/serialization/need_swap.hpp>
+#include <sanguis/messages/serialization/endianness.hpp>
 #include <fcppt/endianness/host_format.hpp>
 
 bool

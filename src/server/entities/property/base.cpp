@@ -1,4 +1,4 @@
-#include "base.hpp"
+#include <sanguis/server/entities/property/base.hpp>
 
 sanguis::server::entities::property::base::base(
 	value const _base
@@ -45,7 +45,7 @@ sanguis::server::entities::property::base::~base()
 void
 sanguis::server::entities::property::base::recalc_max()
 {
-	on_recalc_max(
+	this->on_recalc_max(
 		(base_ + constant_.value())
 		* linear_.value()
 	);

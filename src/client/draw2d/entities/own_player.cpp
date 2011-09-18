@@ -1,4 +1,4 @@
-#include "own_player.hpp"
+#include <sanguis/client/draw2d/entities/own_player.hpp>
 
 sanguis::client::draw2d::entities::own_player::own_player(
 	model::parameters const &_param,

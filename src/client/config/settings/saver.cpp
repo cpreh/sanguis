@@ -1,13 +1,13 @@
-#include "saver.hpp"
-#include "object.hpp"
-#include "../../log.hpp"
+#include <sanguis/client/config/settings/saver.hpp>
+#include <sanguis/client/config/settings/object.hpp>
+#include <sanguis/client/log.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/fatal.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::client::config::settings::saver::saver(
-	object const &_object
+	settings::object const &_object
 )
 :
 	object_(_object)

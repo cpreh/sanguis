@@ -1,4 +1,4 @@
-#include "screen_center.hpp"
+#include <sanguis/client/draw2d/scene/screen_center.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>

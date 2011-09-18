@@ -1,5 +1,5 @@
-#include "with_perks.hpp"
-#include "../perks/perk.hpp"
+#include <sanguis/server/entities/with_perks.hpp>
+#include <sanguis/server/perks/perk.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 
 void

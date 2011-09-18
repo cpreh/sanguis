@@ -1,4 +1,4 @@
-#include "cursor.hpp"
+#include <sanguis/client/control/actions/cursor.hpp>
 
 sanguis::client::control::actions::cursor::cursor(
 	control::cursor_position const &_position

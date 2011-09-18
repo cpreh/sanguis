@@ -1,4 +1,4 @@
-#include "erase_circular_buffer_front.hpp"
+#include <sanguis/net/erase_circular_buffer_front.hpp>
 
 void
 sanguis::net::erase_circular_buffer_front(

@@ -1,6 +1,6 @@
-#include "sound.hpp"
-#include "../conditional_sound.hpp"
-#include "../../log.hpp"
+#include <sanguis/load/model/animation/sound.hpp>
+#include <sanguis/load/model/conditional_sound.hpp>
+#include <sanguis/load/log.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/object.hpp>
@@ -13,7 +13,9 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <iterator>
+#include <fcppt/config/external_end.hpp>
 
 namespace
 {

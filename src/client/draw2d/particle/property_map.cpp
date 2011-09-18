@@ -1,6 +1,6 @@
-#include "property_map.hpp"
-#include "properties.hpp"
-#include "../../../exception.hpp"
+#include <sanguis/client/draw2d/particle/property_map.hpp>
+#include <sanguis/client/draw2d/particle/properties.hpp>
+#include <sanguis/exception.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::client::draw2d::particle::property_map::property_map(

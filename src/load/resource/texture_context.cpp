@@ -1,5 +1,5 @@
-#include "texture_context.hpp"
-#include "texture_context_impl.hpp"
+#include <sanguis/load/resource/texture_context.hpp>
+#include <sanguis/load/resource/texture_context_impl.hpp>
 
 sanguis::load::resource::texture_context::texture_context()
 :

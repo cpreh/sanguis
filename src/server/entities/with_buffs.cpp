@@ -1,5 +1,5 @@
-#include "with_buffs.hpp"
-#include "../buffs/buff.hpp"
+#include <sanguis/server/entities/with_buffs.hpp>
+#include <sanguis/server/buffs/buff.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 
 void

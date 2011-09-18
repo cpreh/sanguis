@@ -1,4 +1,4 @@
-#include "parameters.hpp"
+#include <sanguis/client/draw2d/entities/model/parameters.hpp>
 
 sanguis::client::draw2d::entities::model::parameters::parameters(
 	sanguis::diff_clock const &_diff_clock,

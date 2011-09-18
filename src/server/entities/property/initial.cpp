@@ -1,4 +1,4 @@
-#include "initial.hpp"
+#include <sanguis/server/entities/property/initial.hpp>
 
 sanguis::server::entities::property::initial::initial(
 	value_type const _base,

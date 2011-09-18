@@ -1,9 +1,9 @@
-#include "ghost.hpp"
-#include "from_sge_user_data.hpp"
-#include "make_groups.hpp"
-#include "user_data.hpp"
-#include "to_sge_dim.hpp"
-#include "to_sge_vector.hpp"
+#include <sanguis/server/collision/ghost.hpp>
+#include <sanguis/server/collision/from_sge_user_data.hpp>
+#include <sanguis/server/collision/make_groups.hpp>
+#include <sanguis/server/collision/user_data.hpp>
+#include <sanguis/server/collision/to_sge_dim.hpp>
+#include <sanguis/server/collision/to_sge_vector.hpp>
 #include <sge/projectile/body/object.hpp>
 #include <sge/projectile/ghost/object.hpp>
 #include <sge/projectile/ghost/parameters.hpp>

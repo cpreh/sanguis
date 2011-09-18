@@ -1,6 +1,6 @@
-#include "auto_weak_link.hpp"
-#include "base.hpp"
-#include "../../exception.hpp"
+#include <sanguis/server/entities/auto_weak_link.hpp>
+#include <sanguis/server/entities/base.hpp>
+#include <sanguis/exception.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::server::entities::auto_weak_link::auto_weak_link()

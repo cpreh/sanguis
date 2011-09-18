@@ -1,7 +1,7 @@
-#include "set_key.hpp"
-#include "object.hpp"
-#include "get_or_create_section.hpp"
-#include "get_or_create_entry.hpp"
+#include <sanguis/client/config/settings/set_key.hpp>
+#include <sanguis/client/config/settings/object.hpp>
+#include <sanguis/client/config/settings/get_or_create_section.hpp>
+#include <sanguis/client/config/settings/get_or_create_entry.hpp>
 #include <fcppt/text.hpp>
 
 void

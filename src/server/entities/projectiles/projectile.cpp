@@ -1,17 +1,19 @@
-#include "projectile.hpp"
-#include "../property/initial_max.hpp"
-#include "../nonsolid.hpp"
-#include "../circle_from_dim.hpp"
-#include "../with_health.hpp"
-#include "../../damage/no_armor.hpp"
-#include "../../damage/list.hpp"
-#include "../../../messages/add_projectile.hpp"
-#include "../../../messages/create.hpp"
+#include <sanguis/server/entities/projectiles/projectile.hpp>
+#include <sanguis/server/entities/property/initial_max.hpp>
+#include <sanguis/server/entities/nonsolid.hpp>
+#include <sanguis/server/entities/circle_from_dim.hpp>
+#include <sanguis/server/entities/with_health.hpp>
+#include <sanguis/server/damage/no_armor.hpp>
+#include <sanguis/server/damage/list.hpp>
+#include <sanguis/messages/add_projectile.hpp>
+#include <sanguis/messages/create.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/optional_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::projectile_type::type
 sanguis::server::entities::projectiles::projectile::ptype() const

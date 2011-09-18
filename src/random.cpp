@@ -1,4 +1,4 @@
-#include "random.hpp"
+#include <sanguis/random.hpp>
 #include <sge/timer/clocks/standard.hpp>
 #include <fcppt/chrono/time_point_impl.hpp>
 

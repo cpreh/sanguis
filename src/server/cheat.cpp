@@ -1,10 +1,9 @@
-#include "cheat.hpp"
-#include "entities/player.hpp"
-#include "weapons/create.hpp"
-#include "weapons/weapon.hpp"
-#include "../exception.hpp"
+#include <sanguis/server/cheat.hpp>
+#include <sanguis/server/entities/player.hpp>
+#include <sanguis/server/weapons/create.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/foreach_enumerator_start.hpp>
-#include <fcppt/text.hpp>
+#include <fcppt/assert/unreachable.hpp>
 
 void
 sanguis::server::cheat(
@@ -49,7 +48,5 @@ sanguis::server::cheat(
 		break;
 	}
 
-	throw sanguis::exception(
-		FCPPT_TEXT("Invalid cheat type!")
-	);
+	FCPPT_ASSERT_UNREACHABLE
 }

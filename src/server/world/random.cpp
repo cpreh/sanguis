@@ -1,10 +1,10 @@
-#include "random.hpp"
-#include "object.hpp"
+#include <sanguis/server/world/random.hpp>
+#include <sanguis/server/world/object.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 
-#include "../../exception.hpp"
+#include <sanguis/exception.hpp>
 #include <sanguis/creator/generator/deserialize.hpp>
 #include <sanguis/creator/generator/generate.hpp>
 #include <sanguis/creator/generator/name.hpp>

@@ -1,13 +1,15 @@
-#include "pickup_name.hpp"
-#include "../exception.hpp"
+#include <sanguis/load/pickup_name.hpp>
+#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/text.hpp>
 
 fcppt::string const
 sanguis::load::pickup_name(
-	pickup_type::type const ptype
+	pickup_type::type const _type
 )
 {
-	switch(ptype)
+	switch(
+		_type
+	)
 	{
 	case pickup_type::health:
 		return fcppt::string(
@@ -22,7 +24,5 @@ sanguis::load::pickup_name(
 		break;
 	}
 
-	throw exception(
-		FCPPT_TEXT("load::pickup_name: missing loading code!")
-	);
+	FCPPT_ASSERT_UNREACHABLE
 }

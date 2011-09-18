@@ -1,10 +1,11 @@
-#include "provider.hpp"
-#include "buff.hpp"
-#include "../entities/with_buffs.hpp"
-#include "../../exception.hpp"
+#include <sanguis/server/buffs/provider.hpp>
+#include <sanguis/server/buffs/buff.hpp>
+#include <sanguis/server/entities/with_buffs.hpp>
+#include <fcppt/assert/error.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
-#include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <utility>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::server::buffs::provider::provider()
 :
@@ -35,12 +36,9 @@ sanguis::server::buffs::provider::add(
 		)
 	);
 
-	if(
-		!ret.second
+	FCPPT_ASSERT_ERROR(
+		ret.second
 	)
-		throw exception(
-			FCPPT_TEXT("Double buff insertion!")
-		);
 
 	_entity.add_buff(
 		*ret.first->second
@@ -58,12 +56,9 @@ sanguis::server::buffs::provider::remove(
 		)
 	);
 
-	if(
-		it == buffs_.end()
+	FCPPT_ASSERT_ERROR(
+		it != buffs_.end()
 	)
-		throw exception(
-			FCPPT_TEXT("No buff for an entity!")
-		);
 
 	map::auto_type reclaimed(
 		buffs_.release(

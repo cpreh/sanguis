@@ -1,8 +1,8 @@
-#include "container.hpp"
-#include "../sprite/normal/object.hpp"
-#include "../sprite/normal/parameters.hpp"
-#include "../sprite/index.hpp"
-#include "../funit.hpp"
+#include <sanguis/client/draw2d/entities/container.hpp>
+#include <sanguis/client/draw2d/sprite/normal/object.hpp>
+#include <sanguis/client/draw2d/sprite/normal/parameters.hpp>
+#include <sanguis/client/draw2d/sprite/index.hpp>
+#include <sanguis/client/draw2d/funit.hpp>
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/sprite/intrusive/system_impl.hpp>
 #include <sge/sprite/object_impl.hpp>

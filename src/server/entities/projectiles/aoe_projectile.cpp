@@ -1,6 +1,6 @@
-#include "aoe_projectile.hpp"
-#include "../../../messages/add_aoe_projectile.hpp"
-#include "../../../messages/create.hpp"
+#include <sanguis/server/entities/projectiles/aoe_projectile.hpp>
+#include <sanguis/messages/add_aoe_projectile.hpp>
+#include <sanguis/messages/create.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 

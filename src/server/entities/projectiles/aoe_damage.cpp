@@ -1,6 +1,6 @@
-#include "aoe_damage.hpp"
-#include "../../auras/burn.hpp"
-#include "../../environment/object.hpp"
+#include <sanguis/server/entities/projectiles/aoe_damage.hpp>
+#include <sanguis/server/auras/burn.hpp>
+#include <sanguis/server/environment/object.hpp>
 #include <fcppt/chrono/duration_arithmetic.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>

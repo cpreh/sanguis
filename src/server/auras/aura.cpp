@@ -1,11 +1,13 @@
-#include "aura.hpp"
-#include "collision_groups.hpp"
-#include "../collision/circle_ghost.hpp"
-#include "../collision/ghost_unique_ptr.hpp"
-#include "../entities/with_body.hpp"
+#include <sanguis/server/auras/aura.hpp>
+#include <sanguis/server/auras/collision_groups.hpp>
+#include <sanguis/server/collision/circle_ghost.hpp>
+#include <sanguis/server/collision/ghost_unique_ptr.hpp>
+#include <sanguis/server/entities/with_body.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::server::auras::aura::~aura()
 {

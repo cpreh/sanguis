@@ -1,10 +1,10 @@
-#include "generate_batches.hpp"
-#include "batch.hpp"
-#include "batch_grid.hpp"
-#include "batch_size.hpp"
-#include "envelope.hpp"
-#include "make_batch.hpp"
-#include "../../../../exception.hpp"
+#include <sanguis/client/draw2d/scene/world/generate_batches.hpp>
+#include <sanguis/client/draw2d/scene/world/batch.hpp>
+#include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
+#include <sanguis/client/draw2d/scene/world/batch_size.hpp>
+#include <sanguis/client/draw2d/scene/world/envelope.hpp>
+#include <sanguis/client/draw2d/scene/world/make_batch.hpp>
+#include <sanguis/exception.hpp>
 #include <sanguis/creator/generator/generate.hpp>
 #include <sanguis/creator/generator/result.hpp>
 #include <sanguis/creator/generator/size.hpp>
@@ -24,7 +24,9 @@
 #include <fcppt/format.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <iterator>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::client::draw2d::scene::world::batch_grid_unique_ptr
 sanguis::client::draw2d::scene::world::generate_batches(

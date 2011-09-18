@@ -1,15 +1,15 @@
-#include "weapon.hpp"
-#include "log_location.hpp"
-#include "unlimited_magazine_count.hpp"
-#include "events/poll.hpp"
-#include "events/reset.hpp"
-#include "events/shoot.hpp"
-#include "events/stop.hpp"
-#include "states/ready.hpp"
-#include "../entities/with_weapon.hpp"
-#include "../collision/distance.hpp"
-#include "../../exception.hpp"
-#include "../../log_parameters.hpp"
+#include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/weapons/log_location.hpp>
+#include <sanguis/server/weapons/unlimited_magazine_count.hpp>
+#include <sanguis/server/weapons/events/poll.hpp>
+#include <sanguis/server/weapons/events/reset.hpp>
+#include <sanguis/server/weapons/events/shoot.hpp>
+#include <sanguis/server/weapons/events/stop.hpp>
+#include <sanguis/server/weapons/states/ready.hpp>
+#include <sanguis/server/entities/with_weapon.hpp>
+#include <sanguis/server/collision/distance.hpp>
+#include <sanguis/exception.hpp>
+#include <sanguis/log_parameters.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/chrono/duration_arithmetic.hpp>
 #include <fcppt/chrono/duration_comparison.hpp>
@@ -21,7 +21,6 @@
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/text.hpp>
-#include <ostream>
 
 namespace
 {

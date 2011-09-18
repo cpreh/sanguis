@@ -1,9 +1,9 @@
-#include "message_environment.hpp"
-#include "hud.hpp"
-#include "object.hpp"
-#include "world/object.hpp"
-#include "../entities/model/parameters.hpp"
-#include "../entities/base.hpp"
+#include <sanguis/client/draw2d/scene/message_environment.hpp>
+#include <sanguis/client/draw2d/scene/hud.hpp>
+#include <sanguis/client/draw2d/scene/object.hpp>
+#include <sanguis/client/draw2d/scene/world/object.hpp>
+#include <sanguis/client/draw2d/entities/model/parameters.hpp>
+#include <sanguis/client/draw2d/entities/base.hpp>
 
 sanguis::client::draw2d::scene::message_environment::message_environment(
 	scene::object &_object,

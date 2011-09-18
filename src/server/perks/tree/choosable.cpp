@@ -1,13 +1,15 @@
-#include "choosable.hpp"
-#include "equal.hpp"
-#include "status.hpp"
-#include "../../log.hpp"
+#include <sanguis/server/perks/tree/choosable.hpp>
+#include <sanguis/server/perks/tree/equal.hpp>
+#include <sanguis/server/perks/tree/status.hpp>
+#include <sanguis/server/log.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <algorithm>
+#include <fcppt/config/external_end.hpp>
 
 bool
 sanguis::server::perks::tree::choosable(

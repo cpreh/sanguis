@@ -1,7 +1,7 @@
-#include "ims.hpp"
-#include "change_simple.hpp"
-#include "../entities/property/linear_change.hpp"
-#include "../entities/with_velocity.hpp"
+#include <sanguis/server/perks/ims.hpp>
+#include <sanguis/server/perks/change_simple.hpp>
+#include <sanguis/server/entities/property/linear_change.hpp>
+#include <sanguis/server/entities/with_velocity.hpp>
 
 sanguis::server::perks::ims::ims()
 :

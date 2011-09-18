@@ -1,7 +1,7 @@
-#include "weapon_pickup.hpp"
-#include "../entities/model/object.hpp"
-#include "../z_ordering.hpp"
-#include "../../../load/weapon_pickup_name.hpp"
+#include <sanguis/client/draw2d/factory/weapon_pickup.hpp>
+#include <sanguis/client/draw2d/entities/model/object.hpp>
+#include <sanguis/client/draw2d/z_ordering.hpp>
+#include <sanguis/load/weapon_pickup_name.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 

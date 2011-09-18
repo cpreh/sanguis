@@ -1,4 +1,4 @@
-#include "envelope.hpp"
+#include <sanguis/client/draw2d/scene/world/envelope.hpp>
 #include <sanguis/creator/geometry/rect.hpp>
 #include <fcppt/math/box/basic_impl.hpp>
 #include <fcppt/math/box/extend_bounding_box.hpp>

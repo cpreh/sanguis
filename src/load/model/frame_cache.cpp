@@ -1,4 +1,4 @@
-#include "frame_cache.hpp"
+#include <sanguis/load/model/frame_cache.hpp>
 #include <fcppt/math/box/basic_impl.hpp>
 
 void sanguis::load::model::frame_cache::push_back(

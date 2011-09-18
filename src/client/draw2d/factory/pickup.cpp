@@ -1,9 +1,10 @@
-#include "pickup.hpp"
-#include "../entities/model/object.hpp"
-#include "../z_ordering.hpp"
-#include "../../../pickup_type.hpp"
-#include "../../../exception.hpp"
-#include "../../../load/pickup_name.hpp"
+#include <sanguis/client/draw2d/factory/pickup.hpp>
+#include <sanguis/client/draw2d/entities/model/object.hpp>
+#include <sanguis/client/draw2d/z_ordering.hpp>
+#include <sanguis/pickup_type.hpp>
+#include <sanguis/exception.hpp>
+#include <sanguis/load/pickup_name.hpp>
+#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
@@ -68,9 +69,7 @@ get_texture(
 		break;
 	}
 
-	throw sanguis::exception(
-		FCPPT_TEXT("draw::factory::pickup: missing loading code!")
-	);
+	FCPPT_ASSERT_UNREACHABLE
 }
 
 }

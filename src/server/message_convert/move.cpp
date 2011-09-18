@@ -1,7 +1,7 @@
-#include "move.hpp"
-#include "../entities/with_velocity.hpp"
-#include "../../messages/move.hpp"
-#include "../../messages/create.hpp"
+#include <sanguis/server/message_convert/move.hpp>
+#include <sanguis/server/entities/with_velocity.hpp>
+#include <sanguis/messages/move.hpp>
+#include <sanguis/messages/create.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 
 sanguis::messages::auto_ptr

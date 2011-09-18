@@ -1,12 +1,12 @@
-#include "simple_bullet.hpp"
-#include "../with_health.hpp"
-#include "../../damage/list.hpp"
-#include "../../damage/wrapper.hpp"
-#include "../../damage/meta.hpp"
-#include "../../damage/piercing.hpp"
-#include "../../damage/full.hpp"
-#include "../../environment/load_context.hpp"
-#include "../../../duration_second.hpp"
+#include <sanguis/server/entities/projectiles/simple_bullet.hpp>
+#include <sanguis/server/entities/with_health.hpp>
+#include <sanguis/server/damage/list.hpp>
+#include <sanguis/server/damage/wrapper.hpp>
+#include <sanguis/server/damage/meta.hpp>
+#include <sanguis/server/damage/piercing.hpp>
+#include <sanguis/server/damage/full.hpp>
+#include <sanguis/server/environment/load_context.hpp>
+#include <sanguis/duration_second.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/text.hpp>
 

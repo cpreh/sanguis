@@ -1,7 +1,7 @@
-#include "context.hpp"
-#include "textures.hpp"
-#include "sounds.hpp"
-#include "animations.hpp"
+#include <sanguis/load/resource/context.hpp>
+#include <sanguis/load/resource/textures.hpp>
+#include <sanguis/load/resource/sounds.hpp>
+#include <sanguis/load/resource/animations.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 

@@ -1,6 +1,6 @@
-#include "object.hpp"
-#include "state.hpp"
-#include "vf/format.hpp"
+#include <sanguis/client/draw2d/scene/world/object.hpp>
+#include <sanguis/client/draw2d/scene/world/state.hpp>
+#include <sanguis/client/draw2d/scene/world/vf/format.hpp>
 #include <sge/renderer/vf/dynamic/make_format.hpp>
 #include <sge/renderer/device.hpp>
 #include <fcppt/cref.hpp>

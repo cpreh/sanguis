@@ -1,7 +1,7 @@
-#include "player.hpp"
-#include "../z_ordering.hpp"
-#include "../sprite/index.hpp"
-#include "../sprite/point.hpp"
+#include <sanguis/client/draw2d/entities/player.hpp>
+#include <sanguis/client/draw2d/z_ordering.hpp>
+#include <sanguis/client/draw2d/sprite/index.hpp>
+#include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>

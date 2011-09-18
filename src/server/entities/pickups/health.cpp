@@ -1,6 +1,6 @@
-#include "health.hpp"
-#include "../with_health.hpp"
-#include "../property/add.hpp"
+#include <sanguis/server/entities/pickups/health.hpp>
+#include <sanguis/server/entities/with_health.hpp>
+#include <sanguis/server/entities/property/add.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/optional_impl.hpp>
 

@@ -1,20 +1,23 @@
-#include "list.hpp"
-#include "meta.hpp"
+#include <sanguis/server/damage/list.hpp>
+#include <sanguis/server/damage/meta.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <algorithm>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::server::damage::list::list(
-	unit const t
+	unit const _value
 )
 {
 	std::fill(
 		array_.begin(),
 		array_.end(),
-		t
+		_value
 	);
 }
 
 sanguis::server::damage::list::list(
-	meta const &m)
+	meta const &_meta
+)
 {
 	std::fill(
 		array_.begin(),
@@ -22,14 +25,16 @@ sanguis::server::damage::list::list(
 		unit(0)
 	);
 
-	array_[m.type()] = m.value();
+	array_[_meta.type()] = _meta.value();
 }
 
 sanguis::server::damage::list &
 sanguis::server::damage::list::operator()(
-	meta const &m)
+	meta const &_meta
+)
 {
-	array_[m.type()] = m.value();
+	array_[_meta.type()] = _meta.value();
+
 	return *this;
 }
 

@@ -1,4 +1,4 @@
-#include "get_unique_id.hpp"
+#include <sanguis/server/get_unique_id.hpp>
 
 sanguis::entity_id const
 sanguis::server::get_unique_id()

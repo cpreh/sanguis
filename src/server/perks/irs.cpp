@@ -1,7 +1,7 @@
-#include "irs.hpp"
-#include "change_simple.hpp"
-#include "../entities/property/linear_change.hpp"
-#include "../entities/with_weapon.hpp"
+#include <sanguis/server/perks/irs.hpp>
+#include <sanguis/server/perks/change_simple.hpp>
+#include <sanguis/server/entities/property/linear_change.hpp>
+#include <sanguis/server/entities/with_weapon.hpp>
 
 sanguis::server::perks::irs::irs()
 :

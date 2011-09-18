@@ -1,4 +1,4 @@
-#include "insert_parameters.hpp"
+#include <sanguis/server/entities/insert_parameters.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 
 sanguis::server::entities::insert_parameters::insert_parameters(

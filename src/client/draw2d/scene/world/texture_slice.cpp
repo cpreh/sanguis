@@ -1,4 +1,4 @@
-#include "texture_slice.hpp"
+#include <sanguis/client/draw2d/scene/world/texture_slice.hpp>
 
 sanguis::client::draw2d::scene::world::texture_slice::texture_slice(
 	sge::renderer::first_vertex const _first_vertex,

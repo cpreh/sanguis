@@ -1,4 +1,4 @@
-#include "object.hpp"
+#include <sanguis/client/gui/menu/callbacks/object.hpp>
 
 sanguis::client::gui::menu::callbacks::object::object(
 	callbacks::connect const &_connect,

@@ -1,4 +1,4 @@
-#include "with_body.hpp"
+#include <sanguis/server/entities/ifaces/with_body.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 
 sanguis::server::entities::ifaces::with_body::with_body()

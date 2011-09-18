@@ -1,9 +1,11 @@
-#include "body_collision.hpp"
-#include "body_base.hpp"
-#include "from_sge_user_data.hpp"
-#include "user_data.hpp"
+#include <sanguis/server/collision/body_collision.hpp>
+#include <sanguis/server/collision/body_base.hpp>
+#include <sanguis/server/collision/from_sge_user_data.hpp>
+#include <sanguis/server/collision/user_data.hpp>
 #include <sge/projectile/body/object.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
+#include <fcppt/config/external_end.hpp>
 
 namespace
 {

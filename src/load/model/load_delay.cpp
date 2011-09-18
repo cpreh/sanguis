@@ -1,4 +1,4 @@
-#include "load_delay.hpp"
+#include <sanguis/load/model/load_delay.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/find_member.hpp>
 #include <sge/parse/json/object.hpp>
@@ -9,14 +9,14 @@
 
 sanguis::load::model::optional_delay const
 sanguis::load::model::load_delay(
-	sge::parse::json::member_vector const &entries
+	sge::parse::json::member_vector const &_entries
 )
 {
 	int const *const ret(
 		sge::parse::json::find_member<
 			int
 		>(
-			entries,
+			_entries,
 			FCPPT_TEXT("delay")
 		)
 	);
@@ -24,7 +24,7 @@ sanguis::load::model::load_delay(
 	return
 		ret
 		?
-			optional_delay(
+			model::optional_delay(
 				fcppt::chrono::duration_cast<
 					sanguis::duration
 				>(
@@ -35,5 +35,6 @@ sanguis::load::model::load_delay(
 				)
 			)
 		:
-			optional_delay();
+			model::optional_delay()
+		;
 }

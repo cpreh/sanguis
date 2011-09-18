@@ -1,5 +1,5 @@
-#include "message.hpp"
-#include "../../messages/base.hpp"
+#include <sanguis/client/events/message.hpp>
+#include <sanguis/messages/base.hpp>
 
 sanguis::client::events::message::message(
 	messages::auto_ptr _value

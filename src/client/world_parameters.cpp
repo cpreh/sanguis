@@ -1,4 +1,6 @@
-#include "world_parameters.hpp"
+#include <sanguis/client/world_parameters.hpp>
+#include <sanguis/creator/generator/top_parameters_fwd.hpp>
+#include <sanguis/world_id.hpp>
 
 sanguis::client::world_parameters::world_parameters(
 	sanguis::world_id const _world_id,

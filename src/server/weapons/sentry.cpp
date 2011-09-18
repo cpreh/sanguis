@@ -1,14 +1,13 @@
-#include "sentry.hpp"
-#include "delayed_attack.hpp"
-#include "../ai/create_simple_without_owner.hpp"
-#include "../damage/no_armor.hpp"
-#include "../damage/list.hpp"
-#include "../entities/friend.hpp"
-#include "../entities/insert_parameters.hpp"
-#include "../environment/object.hpp"
+#include <sanguis/server/weapons/sentry.hpp>
+#include <sanguis/server/weapons/delayed_attack.hpp>
+#include <sanguis/server/ai/create_simple_without_owner.hpp>
+#include <sanguis/server/damage/no_armor.hpp>
+#include <sanguis/server/damage/list.hpp>
+#include <sanguis/server/entities/friend.hpp>
+#include <sanguis/server/entities/insert_parameters.hpp>
+#include <sanguis/server/environment/object.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <boost/assign/list_of.hpp>
 
 sanguis::server::weapons::sentry::sentry(
 	sanguis::diff_clock const &_diff_clock,

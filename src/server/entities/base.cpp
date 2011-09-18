@@ -1,9 +1,9 @@
-#include "base.hpp"
-#include "auto_weak_link.hpp"
-#include "insert_parameters.hpp"
-#include "transfer_parameters.hpp"
-#include "../environment/object.hpp"
-#include "../get_unique_id.hpp"
+#include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/auto_weak_link.hpp>
+#include <sanguis/server/entities/insert_parameters.hpp>
+#include <sanguis/server/entities/transfer_parameters.hpp>
+#include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/get_unique_id.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 

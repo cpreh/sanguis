@@ -1,0 +1,151 @@
+#ifndef SANGUIS_NET_CLIENT_OBJECT_IMPL_HPP_INCLUDED
+#define SANGUIS_NET_CLIENT_OBJECT_IMPL_HPP_INCLUDED
+
+#include <sanguis/net/client/object_impl_fwd.hpp>
+#include <sanguis/net/client/connect_callback.hpp>
+#include <sanguis/net/client/connect_function.hpp>
+#include <sanguis/net/client/data_callback.hpp>
+#include <sanguis/net/client/data_function.hpp>
+#include <sanguis/net/client/error_callback.hpp>
+#include <sanguis/net/client/error_function.hpp>
+#include <sanguis/net/circular_buffer.hpp>
+#include <sanguis/net/receive_buffer.hpp>
+#include <sanguis/net/port.hpp>
+#include <sanguis/net/hostname.hpp>
+#include <fcppt/signal/object.hpp>
+#include <fcppt/noncopyable.hpp>
+#include <fcppt/scoped_ptr.hpp>
+#include <fcppt/string.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/asio/io_service.hpp>
+#include <boost/asio/ip/tcp.hpp>
+#include <boost/system/error_code.hpp>
+#include <cstddef>
+#include <fcppt/config/external_end.hpp>
+
+namespace sanguis
+{
+namespace net
+{
+namespace client
+{
+
+class object_impl
+{
+	FCPPT_NONCOPYABLE(
+		object_impl
+	);
+public:
+	explicit object_impl(
+		boost::asio::io_service &
+	);
+
+	~object_impl();
+
+	void
+	connect(
+		net::hostname const &,
+		net::port
+	);
+
+	void
+	disconnect();
+
+	net::circular_buffer &
+	send_buffer();
+
+	void
+	queue_send();
+
+	fcppt::signal::auto_connection
+	register_connect(
+		client::connect_callback const &
+	);
+
+	fcppt::signal::auto_connection
+	register_error(
+		client::error_callback const &
+	);
+
+	fcppt::signal::auto_connection
+	register_data(
+		client::data_callback const &
+	);
+private:
+	// asio vars
+	boost::asio::io_service &io_service_;
+
+	boost::asio::ip::tcp::socket socket_;
+
+	boost::asio::ip::tcp::resolver resolver_;
+
+	fcppt::scoped_ptr<
+		boost::asio::ip::tcp::resolver::query
+	> query_;
+
+	// vars
+	net::receive_buffer receive_buffer_;
+
+	net::circular_buffer send_buffer_;
+
+	// signals
+	fcppt::signal::object<
+		client::connect_function
+	> connect_signal_;
+
+	fcppt::signal::object<
+		client::error_function
+	> error_signal_;
+
+	fcppt::signal::object<
+		client::data_function
+	> data_signal_;
+
+	bool sending_;
+
+	// handlers
+	void
+	handle_error(
+		fcppt::string const &,
+		boost::system::error_code const &
+	);
+
+	void
+	read_handler(
+		boost::system::error_code const &,
+		std::size_t
+	);
+
+	void
+	write_handler(
+		boost::system::error_code const &,
+		std::size_t
+	);
+
+	void
+	resolve_handler(
+		boost::system::error_code const &,
+		boost::asio::ip::tcp::resolver::iterator
+	);
+
+	void
+	connect_handler(
+		boost::system::error_code const &,
+		boost::asio::ip::tcp::resolver::iterator
+	);
+
+	void
+	send_data();
+
+	void
+	receive_data();
+
+	void
+	clear();
+};
+
+}
+}
+}
+
+#endif

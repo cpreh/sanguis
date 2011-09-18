@@ -1,4 +1,4 @@
-#include "scale.hpp"
+#include <sanguis/client/control/actions/scale.hpp>
 
 sanguis::client::control::actions::scale::scale(
 	scale_type::type const _type,

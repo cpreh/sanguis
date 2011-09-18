@@ -1,8 +1,8 @@
-#include "grenade.hpp"
-#include "delayed_attack.hpp"
-#include "../entities/insert_parameters.hpp"
-#include "../entities/projectiles/grenade.hpp"
-#include "../environment/object.hpp"
+#include <sanguis/server/weapons/grenade.hpp>
+#include <sanguis/server/weapons/delayed_attack.hpp>
+#include <sanguis/server/entities/insert_parameters.hpp>
+#include <sanguis/server/entities/projectiles/grenade.hpp>
+#include <sanguis/server/environment/object.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>

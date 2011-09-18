@@ -1,4 +1,4 @@
-#include "player_id_from_net.hpp"
+#include <sanguis/server/player_id_from_net.hpp>
 
 sanguis::server::player_id const
 sanguis::server::player_id_from_net(

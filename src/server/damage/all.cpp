@@ -1,12 +1,13 @@
-#include "all.hpp"
-#include "list.hpp"
+#include <sanguis/server/damage/all.hpp>
+#include <sanguis/server/damage/list.hpp>
 
 sanguis::server::damage::list const
 sanguis::server::damage::all(
-	unit const v
+	damage::unit const _value
 )
 {
-	return list(
-		v
-	);
+	return
+		damage::list(
+			_value
+		);
 }

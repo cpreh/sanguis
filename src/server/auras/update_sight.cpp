@@ -1,5 +1,5 @@
-#include "update_sight.hpp"
-#include "../entities/with_body.hpp"
+#include <sanguis/server/auras/update_sight.hpp>
+#include <sanguis/server/entities/with_body.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/optional_impl.hpp>
 

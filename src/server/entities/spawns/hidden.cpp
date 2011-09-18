@@ -1,5 +1,5 @@
-#include "hidden.hpp"
-#include "../../../messages/base.hpp"
+#include <sanguis/server/entities/spawns/hidden.hpp>
+#include <sanguis/messages/base.hpp>
 
 sanguis::server::entities::spawns::hidden::hidden()
 :

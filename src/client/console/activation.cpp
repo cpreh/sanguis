@@ -1,5 +1,5 @@
-#include "activation.hpp"
-#include "object.hpp"
+#include <sanguis/client/console/activation.hpp>
+#include <sanguis/client/console/object.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/pre.hpp>
 

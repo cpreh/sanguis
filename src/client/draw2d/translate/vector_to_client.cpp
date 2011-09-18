@@ -1,5 +1,5 @@
-#include "vector_to_client.hpp"
-#include "scalar_to_client.hpp"
+#include <sanguis/client/draw2d/translate/vector_to_client.hpp>
+#include <sanguis/client/draw2d/translate/scalar_to_client.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/transform.hpp>

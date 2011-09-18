@@ -1,7 +1,7 @@
-#include "music_handler.hpp"
-#include "log.hpp"
-#include "../media_path.hpp"
-#include "../load/resource/sounds.hpp"
+#include <sanguis/client/music_handler.hpp>
+#include <sanguis/client/log.hpp>
+#include <sanguis/media_path.hpp>
+#include <sanguis/load/resource/sounds.hpp>
 #include <sge/audio/sound/base.hpp>
 #include <sge/console/object.hpp>
 #include <sge/font/text/lit.hpp>

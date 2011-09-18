@@ -1,13 +1,15 @@
-#include "weapon_pickup_name.hpp"
-#include "../exception.hpp"
+#include <sanguis/load/weapon_pickup_name.hpp>
+#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/text.hpp>
 
 fcppt::string const
 sanguis::load::weapon_pickup_name(
-	weapon_type::type const wtype
+	weapon_type::type const _type
 )
 {
-	switch(wtype)
+	switch(
+		_type
+	)
 	{
 	case weapon_type::pistol:
 		return FCPPT_TEXT("pickups/pistol");
@@ -26,7 +28,5 @@ sanguis::load::weapon_pickup_name(
 		break;
 	}
 
-	throw exception(
-		FCPPT_TEXT("load::weapon_pickup_name: missing loading code!")
-	);
+	FCPPT_ASSERT_UNREACHABLE
 }

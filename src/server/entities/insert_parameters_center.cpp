@@ -1,6 +1,6 @@
-#include "insert_parameters_center.hpp"
-#include "insert_parameters.hpp"
-#include "../angle.hpp"
+#include <sanguis/server/entities/insert_parameters_center.hpp>
+#include <sanguis/server/entities/insert_parameters.hpp>
+#include <sanguis/server/angle.hpp>
 
 sanguis::server::entities::insert_parameters const
 sanguis::server::entities::insert_parameters_center(

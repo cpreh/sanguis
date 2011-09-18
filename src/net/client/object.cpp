@@ -1,5 +1,5 @@
-#include "object.hpp"
-#include "object_impl.hpp"
+#include <sanguis/net/client/object.hpp>
+#include <sanguis/net/client/object_impl.hpp>
 #include <awl/mainloop/asio/io_service.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>

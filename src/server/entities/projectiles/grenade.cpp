@@ -1,17 +1,17 @@
-#include "grenade.hpp"
-#include "aoe_damage.hpp"
-#include "../insert_parameters_center.hpp"
-#include "../transfer_parameters.hpp"
-#include "../property/from_float.hpp"
-#include "../../damage/list.hpp"
-#include "../../damage/meta.hpp"
-#include "../../damage/wrapper.hpp"
-#include "../../damage/piercing.hpp"
-#include "../../damage/fire.hpp"
-#include "../../collision/distance.hpp"
-#include "../../environment/object.hpp"
-#include "../../environment/load_context.hpp"
-#include "../../../duration_second.hpp"
+#include <sanguis/server/entities/projectiles/grenade.hpp>
+#include <sanguis/server/entities/projectiles/aoe_damage.hpp>
+#include <sanguis/server/entities/insert_parameters_center.hpp>
+#include <sanguis/server/entities/transfer_parameters.hpp>
+#include <sanguis/server/entities/property/from_float.hpp>
+#include <sanguis/server/collision/distance.hpp>
+#include <sanguis/server/damage/list.hpp>
+#include <sanguis/server/damage/meta.hpp>
+#include <sanguis/server/damage/wrapper.hpp>
+#include <sanguis/server/damage/piercing.hpp>
+#include <sanguis/server/damage/fire.hpp>
+#include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/environment/load_context.hpp>
+#include <sanguis/duration_second.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/chrono/milliseconds.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
@@ -21,7 +21,9 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/optional_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <algorithm>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::server::entities::projectiles::grenade::grenade(
 	sanguis::diff_clock const &_diff_clock,

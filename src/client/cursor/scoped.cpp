@@ -1,5 +1,5 @@
-#include "scoped.hpp"
-#include "object.hpp"
+#include <sanguis/client/cursor/scoped.hpp>
+#include <sanguis/client/cursor/object.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/pre.hpp>
 

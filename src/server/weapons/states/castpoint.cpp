@@ -1,11 +1,11 @@
-#include "castpoint.hpp"
-#include "backswing.hpp"
-#include "ready.hpp"
-#include "../delayed_attack.hpp"
-#include "../events/shoot.hpp"
-#include "../events/poll.hpp"
-#include "../events/stop.hpp"
-#include "../../entities/with_weapon.hpp"
+#include <sanguis/server/weapons/states/castpoint.hpp>
+#include <sanguis/server/weapons/states/backswing.hpp>
+#include <sanguis/server/weapons/states/ready.hpp>
+#include <sanguis/server/weapons/delayed_attack.hpp>
+#include <sanguis/server/weapons/events/shoot.hpp>
+#include <sanguis/server/weapons/events/poll.hpp>
+#include <sanguis/server/weapons/events/stop.hpp>
+#include <sanguis/server/entities/with_weapon.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/optional_impl.hpp>
 

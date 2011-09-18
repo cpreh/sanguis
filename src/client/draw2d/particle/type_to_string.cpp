@@ -1,6 +1,5 @@
-#include "type_to_string.hpp"
-#include "../../../exception.hpp"
-#include <fcppt/text.hpp>
+#include <sanguis/client/draw2d/particle/type_to_string.hpp>
+#include <fcppt/assert/unreachable.hpp>
 
 fcppt::string const
 sanguis::client::draw2d::particle::type_to_string(
@@ -11,17 +10,15 @@ sanguis::client::draw2d::particle::type_to_string(
 		_type
 	)
 	{
-		case particle_type::flare:
-			return FCPPT_TEXT("flare");
-		case particle_type::smoke:
-			return FCPPT_TEXT("smoke");
-		case particle_type::rubble:
-			return FCPPT_TEXT("rubble");
-		case particle_type::size:
-			break;
+	case particle_type::flare:
+		return FCPPT_TEXT("flare");
+	case particle_type::smoke:
+		return FCPPT_TEXT("smoke");
+	case particle_type::rubble:
+		return FCPPT_TEXT("rubble");
+	case particle_type::size:
+		break;
 	}
 
-	throw sanguis::exception(
-		FCPPT_TEXT("invalid enumeration value for particle type")
-	);
+	FCPPT_ASSERT_UNREACHABLE
 }

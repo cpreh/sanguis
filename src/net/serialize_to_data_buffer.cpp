@@ -1,9 +1,11 @@
-#include "serialize_to_data_buffer.hpp"
-#include "serialize_impl.hpp"
-#include "data_buffer.hpp"
+#include <sanguis/net/serialize_to_data_buffer.hpp>
+#include <sanguis/net/serialize_impl.hpp>
+#include <sanguis/net/data_buffer.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/iostreams/stream_buffer.hpp>
 #include <boost/iostreams/device/back_inserter.hpp>
+#include <fcppt/config/external_end.hpp>
 
 bool
 sanguis::net::serialize_to_data_buffer(

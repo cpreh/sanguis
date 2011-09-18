@@ -1,4 +1,4 @@
-#include "find_texture.hpp"
+#include <sanguis/load/model/find_texture.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/find_member.hpp>

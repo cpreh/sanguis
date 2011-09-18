@@ -1,6 +1,8 @@
-#include "level_calculate.hpp"
-#include "space_unit.hpp"
+#include <sanguis/server/level_calculate.hpp>
+#include <sanguis/server/space_unit.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <cmath>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::server::level const
 sanguis::server::level_calculate(

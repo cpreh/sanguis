@@ -1,7 +1,6 @@
-#include "collision_groups.hpp"
-#include "../../exception.hpp"
+#include <sanguis/server/auras/collision_groups.hpp>
+#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/assign/make_container.hpp>
-#include <fcppt/text.hpp>
 
 sanguis::server::collision::group_vector const
 sanguis::server::auras::collision_groups(
@@ -47,7 +46,5 @@ sanguis::server::auras::collision_groups(
 				collision::group::projectile_player
 			);
 
-	throw sanguis::exception(
-		FCPPT_TEXT("Don't know a collision group for an aura.")
-	);
+	FCPPT_ASSERT_UNREACHABLE
 }

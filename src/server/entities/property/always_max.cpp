@@ -1,4 +1,4 @@
-#include "always_max.hpp"
+#include <sanguis/server/entities/property/always_max.hpp>
 
 sanguis::server::entities::property::always_max::always_max(
 	value_type const _base

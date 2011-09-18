@@ -1,8 +1,8 @@
-#include "sounds.hpp"
-#include "map_get_or_create.hpp"
-#include "../log.hpp"
-#include "../../exception.hpp"
-#include "../../media_path.hpp"
+#include <sanguis/load/resource/sounds.hpp>
+#include <sanguis/load/resource/map_get_or_create.hpp>
+#include <sanguis/load/log.hpp>
+#include <sanguis/exception.hpp>
+#include <sanguis/media_path.hpp>
 #include <sge/audio/player.hpp>
 #include <sge/audio/multi_loader.hpp>
 #include <sge/audio/buffer.hpp>
@@ -14,9 +14,11 @@
 #include <fcppt/log/headers.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/spirit/home/phoenix/bind/bind_member_function.hpp>
 #include <boost/spirit/home/phoenix/core/argument.hpp>
 #include <boost/spirit/home/phoenix/operator/self.hpp>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::load::resource::sounds::sounds(
 	sge::audio::multi_loader &_ml,

@@ -1,8 +1,8 @@
-#include "burn.hpp"
-#include "../buffs/burn.hpp"
-#include "../buffs/unique_ptr.hpp"
-#include "../entities/with_buffs.hpp"
-#include "../entities/with_body.hpp"
+#include <sanguis/server/auras/burn.hpp>
+#include <sanguis/server/buffs/burn.hpp>
+#include <sanguis/server/buffs/unique_ptr.hpp>
+#include <sanguis/server/entities/with_buffs.hpp>
+#include <sanguis/server/entities/with_body.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 

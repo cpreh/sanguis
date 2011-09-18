@@ -1,6 +1,6 @@
-#include "collection.hpp"
-#include "make_path.hpp"
-#include "object.hpp"
+#include <sanguis/load/model/collection.hpp>
+#include <sanguis/load/model/make_path.hpp>
+#include <sanguis/load/model/object.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>

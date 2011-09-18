@@ -1,7 +1,7 @@
-#include "scoped_pause.hpp"
-#include "../messages/create.hpp"
-#include "../messages/player_pause.hpp"
-#include "../messages/player_unpause.hpp"
+#include <sanguis/client/scoped_pause.hpp>
+#include <sanguis/messages/create.hpp>
+#include <sanguis/messages/player_pause.hpp>
+#include <sanguis/messages/player_unpause.hpp>
 
 sanguis::client::scoped_pause::scoped_pause(
 	client::send_callback const &_send

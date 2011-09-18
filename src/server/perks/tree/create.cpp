@@ -1,7 +1,7 @@
-#include "create.hpp"
-#include "status.hpp"
-#include "object_unique_ptr.hpp"
-#include "object.hpp"
+#include <sanguis/server/perks/tree/create.hpp>
+#include <sanguis/server/perks/tree/status.hpp>
+#include <sanguis/server/perks/tree/object_unique_ptr.hpp>
+#include <sanguis/server/perks/tree/object.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 

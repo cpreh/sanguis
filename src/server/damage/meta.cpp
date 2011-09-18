@@ -1,4 +1,4 @@
-#include "meta.hpp"
+#include <sanguis/server/damage/meta.hpp>
 
 sanguis::server::damage::meta::meta(
 	damage_type::type const _type,
