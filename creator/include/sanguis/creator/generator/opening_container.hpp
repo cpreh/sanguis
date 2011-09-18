@@ -2,7 +2,9 @@
 #define SANGUIS_CREATOR_GENERATOR_OPENING_CONTAINER_HPP_INCLUDED
 
 #include <sanguis/creator/generator/opening.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <vector>
+#include <fcppt/config/external_end.hpp>
 
 namespace sanguis
 {

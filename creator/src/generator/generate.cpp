@@ -9,8 +9,10 @@
 #include <sanguis/creator/exception.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <map>
 #include <utility>
+#include <fcppt/config/external_end.hpp>
 
 namespace
 {

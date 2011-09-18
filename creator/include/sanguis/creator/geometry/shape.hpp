@@ -8,7 +8,9 @@
 #include <sanguis/creator/geometry/texture_name.hpp>
 #include <sanguis/creator/geometry/vertex.hpp>
 #include <sanguis/creator/symbol.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <vector>
+#include <fcppt/config/external_end.hpp>
 
 namespace sanguis
 {
