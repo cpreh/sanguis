@@ -29,7 +29,7 @@ private:
 
 	template<
 		typename T
-	> friend struct dispatcher_register;
+	> friend class dispatcher_register;
 };
 
 }

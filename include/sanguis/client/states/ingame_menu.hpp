@@ -32,7 +32,7 @@ public:
 		my_context
 	);
 
-	~ingame_menu();
+	virtual ~ingame_menu();
 };
 
 }

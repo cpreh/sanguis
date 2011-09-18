@@ -45,7 +45,7 @@ public:
 		my_context
 	);
 
-	~waiting_for_player();
+	virtual ~waiting_for_player();
 
 	boost::statechart::result
 	react(

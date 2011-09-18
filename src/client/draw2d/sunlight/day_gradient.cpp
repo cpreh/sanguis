@@ -1,5 +1,6 @@
 #include <sanguis/client/draw2d/sunlight/day_gradient.hpp>
 #include <sanguis/client/draw2d/sunlight/gradients.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <mizuiro/color/object.hpp>
 #include <mizuiro/color/init/red.hpp>
 #include <mizuiro/color/init/blue.hpp>
@@ -7,8 +8,12 @@
 
 namespace
 {
-struct color
+class color
 {
+	FCPPT_NONCOPYABLE(
+		color
+	);
+public:
 	sanguis::client::draw2d::sunlight::gradients grads;
 
 	typedef sanguis::client::draw2d::sunlight::gradients::value color_point;
@@ -95,6 +100,10 @@ struct color
 				(mizuiro::color::init::blue %= 0.219608)
 			)
 		);
+	}
+
+	~color()
+	{
 	}
 } global;
 

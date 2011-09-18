@@ -40,7 +40,7 @@ public:
 
 	ready();
 
-	~ready();
+	virtual ~ready();
 
 	boost::statechart::result
 	react(

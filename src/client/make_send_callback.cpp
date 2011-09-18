@@ -1,5 +1,6 @@
 #include <sanguis/client/make_send_callback.hpp>
 #include <sanguis/client/machine.hpp>
+#include <sanguis/messages/base.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/tr1/functional.hpp>
 

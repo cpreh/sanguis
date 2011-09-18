@@ -54,7 +54,7 @@ public:
 		my_context
 	);
 
-	~running();
+	virtual ~running();
 
 	boost::statechart::result
 	react(

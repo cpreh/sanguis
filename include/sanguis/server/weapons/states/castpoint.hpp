@@ -54,7 +54,7 @@ public:
 		my_context
 	);
 
-	~castpoint();
+	virtual ~castpoint();
 
 	boost::statechart::result
 	react(

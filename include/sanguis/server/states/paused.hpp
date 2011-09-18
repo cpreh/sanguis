@@ -41,7 +41,7 @@ public:
 
 	paused();
 
-	~paused();
+	virtual ~paused();
 
 	// reactions
 	boost::statechart::result

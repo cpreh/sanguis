@@ -59,7 +59,7 @@ public:
 		my_context
 	);
 
-	~menu();
+	virtual ~menu();
 
 	typedef boost::statechart::result result_type;
 

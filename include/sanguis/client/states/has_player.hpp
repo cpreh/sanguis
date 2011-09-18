@@ -56,7 +56,7 @@ public:
 		my_context
 	);
 
-	~has_player();
+	virtual ~has_player();
 
 	boost::statechart::result
 	react(

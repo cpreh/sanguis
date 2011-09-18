@@ -45,7 +45,7 @@ public:
 		my_context
 	);
 
-	~console();
+	virtual ~console();
 
 	boost::statechart::result
 	react(

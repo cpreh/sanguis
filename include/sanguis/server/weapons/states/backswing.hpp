@@ -40,7 +40,7 @@ public:
 		my_context
 	);
 
-	~backswing();
+	virtual ~backswing();
 
 	boost::statechart::result
 	react(

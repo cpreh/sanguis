@@ -49,7 +49,7 @@ public:
 
 	unpaused();
 
-	~unpaused();
+	virtual ~unpaused();
 
 	boost::statechart::result
 	react(

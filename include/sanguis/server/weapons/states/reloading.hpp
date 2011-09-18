@@ -51,7 +51,7 @@ public:
 		my_context
 	);
 
-	~reloading();
+	virtual ~reloading();
 
 	boost::statechart::result
 	react(

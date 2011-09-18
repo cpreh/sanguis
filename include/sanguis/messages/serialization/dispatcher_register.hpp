@@ -14,7 +14,7 @@ namespace serialization
 template<
 	typename T
 >
-struct dispatcher_register
+class dispatcher_register
 {
 	FCPPT_NONCOPYABLE(
 		dispatcher_register

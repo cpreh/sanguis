@@ -41,7 +41,7 @@ public:
 		my_context
 	);
 
-	~ingame();
+	virtual ~ingame();
 
 	typedef boost::statechart::result result_type;
 

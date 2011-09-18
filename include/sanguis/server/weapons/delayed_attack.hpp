@@ -7,6 +7,7 @@
 #include <sanguis/server/vector.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/nonassignable.hpp>
 
 namespace sanguis
 {
@@ -17,6 +18,9 @@ namespace weapons
 
 class delayed_attack
 {
+	FCPPT_NONASSIGNABLE(
+		delayed_attack
+	);
 public:
 	delayed_attack(
 		server::center const &spawn_point,
