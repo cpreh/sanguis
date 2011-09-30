@@ -145,7 +145,7 @@ catch(
 	fcppt::exception const &_error
 )
 {
-	fcppt::io::cerr
+	fcppt::io::cerr()
 		<< FCPPT_TEXT("caught fcppt exception: ")
 		<< _error.string()
 		<< FCPPT_TEXT('\n');

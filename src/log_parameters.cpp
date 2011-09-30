@@ -14,7 +14,7 @@ sanguis::log_parameters(
 	return
 		fcppt::log::parameters::with_context(
 			sanguis::log_context(),
-			fcppt::io::clog,
+			fcppt::io::clog(),
 			_location
 		)
 		.level_defaults(
