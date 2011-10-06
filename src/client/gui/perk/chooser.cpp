@@ -18,7 +18,7 @@
 #include <fcppt/container/tree/pre_order.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/variant/object_impl.hpp>
-#include <fcppt/lexical_cast.hpp>
+#include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/nonassignable.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -271,17 +271,13 @@ sanguis::client::gui::perk::chooser::update_top_text()
 		sge::cegui::to_cegui_string(
 			FCPPT_TEXT("Level: ")
 			+
-			fcppt::lexical_cast<
-				fcppt::string
-			>(
+			fcppt::insert_to_fcppt_string(
 				state_.player_level()
 			)
 			+
 			FCPPT_TEXT(", Perks to choose: ")
 			+
-			fcppt::lexical_cast<
-				fcppt::string
-			>(
+			fcppt::insert_to_fcppt_string(
 				state_.levels_left()
 			),
 			gui_.charconv_system()
@@ -311,9 +307,7 @@ sanguis::client::gui::perk::chooser::update_bottom_text(
 			+
 			FCPPT_TEXT(") level: ")
 			+
-			fcppt::lexical_cast<
-				fcppt::string
-			>(
+			fcppt::insert_to_fcppt_string(
 				state_.perk_level(
 					_perk_type
 				)
@@ -321,9 +315,7 @@ sanguis::client::gui::perk::chooser::update_bottom_text(
 			+
 			FCPPT_TEXT(", max level: ")
 			+
-			fcppt::lexical_cast<
-				fcppt::string
-			>(
+			fcppt::insert_to_fcppt_string(
 				info.max_level()
 			),
 			gui_.charconv_system()

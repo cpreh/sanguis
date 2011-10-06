@@ -2,13 +2,16 @@
 #include <sanguis/messages/add_console_command.hpp>
 #include <sanguis/messages/console_print.hpp>
 #include <sanguis/messages/create.hpp>
+#include <sge/console/callback/function.hpp>
+#include <sge/console/callback/name.hpp>
+#include <sge/console/callback/parameters.hpp>
 #include <sge/font/text/lit.hpp>
 #include <sge/font/text/from_fcppt_string.hpp>
 #include <sge/font/text/string.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/utf8/from_fcppt_string.hpp>
 #include <fcppt/homogenous_pair_impl.hpp>
-#include <fcppt/lexical_cast.hpp>
+#include <fcppt/insert_to_string.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 
@@ -31,7 +34,7 @@ sanguis::server::console::~console()
 fcppt::signal::auto_connection
 sanguis::server::console::insert(
 	fcppt::string const &_command,
-	sge::console::callback const &_callback,
+	sge::console::callback::function const &_callback,
 	fcppt::string const &_description
 )
 {
@@ -58,12 +61,18 @@ sanguis::server::console::insert(
 
 	return
 		object_.insert(
-			sge::font::text::from_fcppt_string(
-				_command
-			),
-			_callback,
-			sge::font::text::from_fcppt_string(
-				_description
+			sge::console::callback::parameters(
+				_callback,
+				sge::console::callback::name(
+					sge::font::text::from_fcppt_string(
+						_command
+					)
+				)
+			)
+			.short_description(
+				sge::font::text::from_fcppt_string(
+					_description
+				)
 			)
 		);
 }
@@ -75,7 +84,7 @@ sanguis::server::console::eval(
 )
 {
 	_args.push_back(
-		fcppt::lexical_cast<
+		fcppt::insert_to_string<
 			sge::font::text::string
 		>(
 			_id

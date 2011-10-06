@@ -1,5 +1,7 @@
 #include <sanguis/client/daytime_settings.hpp>
 #include <sge/console/object.hpp>
+#include <sge/console/callback/name.hpp>
+#include <sge/console/callback/parameters.hpp>
 #include <sge/font/text/lit.hpp>
 #include <sge/font/text/to_fcppt_string.hpp>
 #include <fcppt/chrono/system_clock.hpp>
@@ -12,8 +14,7 @@
 #include <fcppt/time/parse_date.hpp>
 #include <fcppt/time/parse_time.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/exception.hpp>
-#include <fcppt/lexical_cast.hpp>
+#include <fcppt/extract_from_string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/fusion/adapted/struct/adapt_struct.hpp>
@@ -88,62 +89,92 @@ sanguis::client::daytime_settings::daytime_settings(
 	speedup_(1),
 	day_con_(
 		_console.insert(
-			SGE_FONT_TEXT_LIT("day"),
-			std::tr1::bind(
-				&daytime_settings::change_day,
-				this,
-				std::tr1::placeholders::_1,
-				std::tr1::placeholders::_2
-			),
-			SGE_FONT_TEXT_LIT("Sets the current day to a fixed value.")
+			sge::console::callback::parameters(
+				std::tr1::bind(
+					&daytime_settings::change_day,
+					this,
+					std::tr1::placeholders::_1,
+					std::tr1::placeholders::_2
+				),
+				sge::console::callback::name(
+					SGE_FONT_TEXT_LIT("day")
+				)
+			)
+			.short_description(
+				SGE_FONT_TEXT_LIT("Sets the current day to a fixed value.")
+			)
 		)
 	),
 	time_con_(
 		_console.insert(
-			SGE_FONT_TEXT_LIT("time"),
-			std::tr1::bind(
-				&daytime_settings::change_time,
-				this,
-				std::tr1::placeholders::_1,
-				std::tr1::placeholders::_2
-			),
-			SGE_FONT_TEXT_LIT("Sets the current time to a fixed value.")
+			sge::console::callback::parameters(
+				std::tr1::bind(
+					&daytime_settings::change_time,
+					this,
+					std::tr1::placeholders::_1,
+					std::tr1::placeholders::_2
+				),
+				sge::console::callback::name(
+					SGE_FONT_TEXT_LIT("time")
+				)
+			)
+			.short_description(
+				SGE_FONT_TEXT_LIT("Sets the current time to a fixed value.")
+			)
 		)
 	),
 	time_speed_con_(
 		_console.insert(
-			SGE_FONT_TEXT_LIT("time_speed"),
-			std::tr1::bind(
-				&daytime_settings::change_time_speed,
-				this,
-				std::tr1::placeholders::_1,
-				std::tr1::placeholders::_2
-			),
-			SGE_FONT_TEXT_LIT("Sets the current time speedup. Use a value of 1 to reset this.")
+			sge::console::callback::parameters(
+				std::tr1::bind(
+					&daytime_settings::change_time_speed,
+					this,
+					std::tr1::placeholders::_1,
+					std::tr1::placeholders::_2
+				),
+				sge::console::callback::name(
+					SGE_FONT_TEXT_LIT("time_speed")
+				)
+			)
+			.short_description(
+				SGE_FONT_TEXT_LIT("Sets the current time speedup. Use a value of 1 to reset this.")
+			)
 		)
 	),
 	reset_day_con_(
 		_console.insert(
-			SGE_FONT_TEXT_LIT("reset_day"),
-			std::tr1::bind(
-				&daytime_settings::reset_day,
-				this,
-				std::tr1::placeholders::_1,
-				std::tr1::placeholders::_2
-			),
-			SGE_FONT_TEXT_LIT("Resets to the current day.")
+			sge::console::callback::parameters(
+				std::tr1::bind(
+					&daytime_settings::reset_day,
+					this,
+					std::tr1::placeholders::_1,
+					std::tr1::placeholders::_2
+				),
+				sge::console::callback::name(
+					SGE_FONT_TEXT_LIT("reset_day")
+				)
+			)
+			.short_description(
+				SGE_FONT_TEXT_LIT("Resets to the current day.")
+			)
 		)
 	),
 	reset_time_con_(
 		_console.insert(
-			SGE_FONT_TEXT_LIT("reset_time"),
-			std::tr1::bind(
-				&daytime_settings::reset_time,
-				this,
-				std::tr1::placeholders::_1,
-				std::tr1::placeholders::_2
-			),
-			SGE_FONT_TEXT_LIT("Resets to the current time.")
+			sge::console::callback::parameters(
+				std::tr1::bind(
+					&daytime_settings::reset_time,
+					this,
+					std::tr1::placeholders::_1,
+					std::tr1::placeholders::_2
+				),
+				sge::console::callback::name(
+					SGE_FONT_TEXT_LIT("reset_time")
+				)
+			)
+			.short_description(
+				SGE_FONT_TEXT_LIT("Resets to the current time.")
+			)
 		)
 	)
 {
@@ -286,39 +317,48 @@ sanguis::client::daytime_settings::change_time_speed(
 		return;
 	}
 
-	try
-	{
-		time_rep const speedup(
-			fcppt::lexical_cast<
-				time_rep
-			>(
-				_args[1]
-			)
-		);
+	typedef fcppt::optional<
+		time_rep
+	> optional_time_rep;
 
-		if(
-			speedup < 1
+
+	optional_time_rep const opt_speedup(
+		fcppt::extract_from_string<
+			time_rep
+		>(
+			_args[1]
 		)
-		{
-			_object.emit_error(
-				SGE_FONT_TEXT_LIT("speedup needs to be > 0")
-			);
+	);
 
-			return;
-		}
-
-		speedup_ = speedup;
-
-		time_begin_ = daytime_settings::now();
-	}
-	catch(
-		fcppt::exception const &
+	if(
+		!opt_speedup
 	)
 	{
 		_object.emit_error(
 			SGE_FONT_TEXT_LIT("You need to pass an int argument to the time_speed command: ")
 		);
+
+		return;
 	}
+
+	time_rep const speedup(
+		*opt_speedup
+	);
+
+	if(
+		speedup < 1
+	)
+	{
+		_object.emit_error(
+			SGE_FONT_TEXT_LIT("speedup needs to be > 0")
+		);
+
+		return;
+	}
+
+	speedup_ = speedup;
+
+	time_begin_ = daytime_settings::now();
 }
 
 void

@@ -8,7 +8,7 @@
 #include <sanguis/server/player_id.hpp>
 #include <sge/console/object.hpp>
 #include <sge/console/arg_list.hpp>
-#include <sge/console/callback.hpp>
+#include <sge/console/callback/function.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/homogenous_pair_decl.hpp>
 #include <fcppt/function/object.hpp>
@@ -36,7 +36,7 @@ public:
 	fcppt::signal::auto_connection
 	insert(
 		fcppt::string const &command,
-		sge::console::callback const &,
+		sge::console::callback::function const &,
 		fcppt::string const &description
 	);
 

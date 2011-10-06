@@ -28,7 +28,7 @@
 #include <fcppt/math/box/contains.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/cref.hpp>
-#include <fcppt/lexical_cast.hpp>
+#include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 
@@ -261,9 +261,13 @@ sanguis::load::model::animation::object::fill_cache(
 	)
 		throw sanguis::exception(
 			FCPPT_TEXT("begin/end invalid: begin = ")
-			+ fcppt::lexical_cast<fcppt::string>(begin)
+			+ fcppt::insert_to_fcppt_string(
+				begin
+			)
 			+ FCPPT_TEXT(", end = ")
-			+ fcppt::lexical_cast<fcppt::string>(end)
+			+ fcppt::insert_to_fcppt_string(
+				end
+			)
 			+ FCPPT_TEXT(" in TODO!")
 		);
 
@@ -297,11 +301,17 @@ sanguis::load::model::animation::object::fill_cache(
 			throw sanguis::exception(
 				FCPPT_TEXT("Rect out of bounds in TODO")
 				FCPPT_TEXT(". Whole area of texture is ")
-				+ fcppt::lexical_cast<fcppt::string>(_area)
+				+ fcppt::insert_to_fcppt_string(
+					_area
+				)
 				+ FCPPT_TEXT(" but the inner area is ")
-				+ fcppt::lexical_cast<fcppt::string>(cur_area)
+				+ fcppt::insert_to_fcppt_string(
+					cur_area
+				)
 				+ FCPPT_TEXT(". This happened when trying to load index ")
-				+ fcppt::lexical_cast<fcppt::string>(begin)
+				+ fcppt::insert_to_fcppt_string(
+					begin
+				)
 			);
 
 		frame_cache_.push_back(

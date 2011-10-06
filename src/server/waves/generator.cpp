@@ -20,7 +20,7 @@
 
 #include <sanguis/server/log.hpp>
 #include <fcppt/log/headers.hpp>
-#include <fcppt/lexical_cast.hpp>
+#include <fcppt/extract_from_string_exn.hpp>
 
 // NOTE: be careful when we move this class because
 // it should not register the functions more than once
@@ -113,7 +113,7 @@ try
 	unsigned const count(
 		_args.size() == 5u
 		?
-			fcppt::lexical_cast<
+			fcppt::extract_from_string_exn<
 				unsigned
 			>(
 				_args[3]

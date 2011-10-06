@@ -9,14 +9,15 @@
 #include <sanguis/media_path.hpp>
 #include <sge/cegui/from_cegui_string.hpp>
 #include <sge/cegui/to_cegui_string.hpp>
-#include <fcppt/io/istringstream.hpp>
 #include <fcppt/log/parameters/all.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/lexical_cast.hpp>
+#include <fcppt/extract_from_string.hpp>
+#include <fcppt/extract_from_string_exn.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
@@ -271,7 +272,7 @@ sanguis::client::gui::menu::object::handle_quickstart(
 )
 {
 	callbacks_.quickstart()(
-		fcppt::lexical_cast<
+		fcppt::extract_from_string_exn<
 			net::port
 		>(
 			client::config::settings::get_or_default(
@@ -313,28 +314,30 @@ sanguis::client::gui::menu::object::handle_text_changed(
 	CEGUI::EventArgs const &
 )
 {
-	// TODO: we should create a lexical_cast that returns an optional
-	fcppt::io::istringstream stream(
-		sge::cegui::from_cegui_string(
-			port_edit_.getText(),
-			gui_.charconv_system()
+	typedef unsigned long port_type;
+
+	typedef fcppt::optional<
+		port_type
+	> optional_port;
+
+	optional_port const opt_port(
+		fcppt::extract_from_string<
+			port_type
+		>(
+			sge::cegui::from_cegui_string(
+				port_edit_.getText(),
+				gui_.charconv_system()
+			)
 		)
 	);
 
-	unsigned long port;
-
-	bool const convert_success(
-		(stream >> port)
-		&& stream.eof()
-	);
-
 	connect_button_.setEnabled(
-		convert_success
+		opt_port
 		&&
 		!hostname_edit_.getText().empty()
 		&&
-		(port > 0)
-		&& (port < 65535)
+		(*opt_port > 0)
+		&& (*opt_port < 65535)
 	);
 
 	return true;
@@ -364,7 +367,7 @@ sanguis::client::gui::menu::object::do_connect()
 				gui_.charconv_system()
 			)
 		),
-		fcppt::lexical_cast<
+		fcppt::extract_from_string_exn<
 			net::port
 		>(
 			sge::cegui::from_cegui_string(

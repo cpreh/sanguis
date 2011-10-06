@@ -18,7 +18,8 @@
 #include <fcppt/io/istringstream.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/lexical_cast.hpp>
+#include <fcppt/extract_from_string_exn.hpp>
+#include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -102,7 +103,7 @@ sanguis::load::resource::animations::do_load(
 				sanguis::duration
 			>(
 				fcppt::chrono::milliseconds(
-					fcppt::lexical_cast<
+					fcppt::extract_from_string_exn<
 						fcppt::chrono::rep
 					>(
 						line.substr(
@@ -135,10 +136,13 @@ sanguis::load::resource::animations::do_load(
 			fcppt::io::istringstream ss(line);
 			fcppt::chrono::rep temp_delay;
 			ss >> temp_delay >> std::ws;
+
 			if (!ss)
-				throw exception(
+				throw sanguis::exception(
 					FCPPT_TEXT("invalid line ")
-					+ fcppt::lexical_cast<fcppt::string>(lineno)
+					+ fcppt::insert_to_fcppt_string(
+						lineno
+					)
 					+ FCPPT_TEXT(" in animation ")
 					+ fcppt::filesystem::path_to_string(
 						dir

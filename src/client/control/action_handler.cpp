@@ -17,6 +17,8 @@
 #include <sanguis/messages/player_cheat.hpp>
 #include <sanguis/exception.hpp>
 #include <sge/console/object.hpp>
+#include <sge/console/callback/name.hpp>
+#include <sge/console/callback/parameters.hpp>
 #include <sge/font/text/lit.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/assert/error.hpp>
@@ -64,41 +66,59 @@ sanguis::client::control::action_handler::action_handler(
 	),
 	cheat_kill_conn_(
 		_console.insert(
-			SGE_FONT_TEXT_LIT("kill"),
-			std::tr1::bind(
-				&action_handler::send_cheat,
-				this,
-				cheat_type::kill,
-				std::tr1::placeholders::_1,
-				std::tr1::placeholders::_2
-			),
-			SGE_FONT_TEXT_LIT("Commit suicide")
+			sge::console::callback::parameters(
+				std::tr1::bind(
+					&action_handler::send_cheat,
+					this,
+					cheat_type::kill,
+					std::tr1::placeholders::_1,
+					std::tr1::placeholders::_2
+				),
+				sge::console::callback::name(
+					SGE_FONT_TEXT_LIT("kill")
+				)
+			)
+			.short_description(
+				SGE_FONT_TEXT_LIT("Commit suicide")
+			)
 		)
 	),
 	cheat_impulse_conn_(
 		_console.insert(
-			SGE_FONT_TEXT_LIT("impulse"),
-			std::tr1::bind(
-				&action_handler::send_cheat,
-				this,
-				cheat_type::impulse101,
-				std::tr1::placeholders::_1,
-				std::tr1::placeholders::_2
-			),
-			SGE_FONT_TEXT_LIT("Get all weapons")
+			sge::console::callback::parameters(
+				std::tr1::bind(
+					&action_handler::send_cheat,
+					this,
+					cheat_type::impulse101,
+					std::tr1::placeholders::_1,
+					std::tr1::placeholders::_2
+				),
+				sge::console::callback::name(
+					SGE_FONT_TEXT_LIT("impulse")
+				)
+			)
+			.short_description(
+				SGE_FONT_TEXT_LIT("Get all weapons")
+			)
 		)
 	),
 	cheat_exp_conn_(
 		_console.insert(
-			SGE_FONT_TEXT_LIT("exp"),
-			std::tr1::bind(
-				&action_handler::send_cheat,
-				this,
-				cheat_type::exp,
-				std::tr1::placeholders::_1,
-				std::tr1::placeholders::_2
-			),
-			SGE_FONT_TEXT_LIT("Get a lot of exp")
+			sge::console::callback::parameters(
+				std::tr1::bind(
+					&action_handler::send_cheat,
+					this,
+					cheat_type::exp,
+					std::tr1::placeholders::_1,
+					std::tr1::placeholders::_2
+				),
+				sge::console::callback::name(
+					SGE_FONT_TEXT_LIT("exp")
+				)
+			)
+			.short_description(
+				SGE_FONT_TEXT_LIT("Get a lot of exp")
+			)
 		)
 	)
 {

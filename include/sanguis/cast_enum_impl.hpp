@@ -2,8 +2,7 @@
 #define SANGUIS_CAST_ENUM_IMPL_HPP_INCLUDED
 
 #include <sanguis/exception.hpp>
-#include <fcppt/lexical_cast.hpp>
-#include <fcppt/string.hpp>
+#include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/type_name.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -38,9 +37,7 @@ cast_enum_impl(
 				typeid(Enum)
 			)
 			+ FCPPT_TEXT(", value = ")
-			+ fcppt::lexical_cast<
-				fcppt::string
-			>(
+			+ fcppt::insert_to_fcppt_string(
 				static_cast<
 					unsigned long
 				>(

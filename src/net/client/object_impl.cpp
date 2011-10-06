@@ -21,7 +21,7 @@
 #include <fcppt/log/parameters/all.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/from_std_string.hpp>
-#include <fcppt/lexical_cast.hpp>
+#include <fcppt/insert_to_std_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
@@ -95,9 +95,7 @@ sanguis::net::client::object_impl::connect(
 			boost::asio::ip::tcp::resolver::query
 		>(
 			_host,
-			fcppt::lexical_cast<
-				std::string
-			>(
+			fcppt::insert_to_std_string(
 				_port
 			)
 		)

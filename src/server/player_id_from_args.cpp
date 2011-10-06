@@ -1,6 +1,6 @@
 #include <sanguis/server/player_id_from_args.hpp>
 #include <sanguis/server/player_id_from_net.hpp>
-#include <fcppt/lexical_cast.hpp>
+#include <fcppt/extract_from_string_exn.hpp>
 
 sanguis::server::player_id const
 sanguis::server::player_id_from_args(
@@ -9,7 +9,7 @@ sanguis::server::player_id_from_args(
 {
 	return
 		server::player_id_from_net(
-			fcppt::lexical_cast<
+			fcppt::extract_from_string_exn<
 				net::id
 			>(
 				_args.back()

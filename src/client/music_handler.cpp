@@ -3,7 +3,10 @@
 #include <sanguis/media_path.hpp>
 #include <sanguis/load/resource/sounds.hpp>
 #include <sge/audio/sound/base.hpp>
+#include <sge/audio/scalar.hpp>
 #include <sge/console/object.hpp>
+#include <sge/console/callback/name.hpp>
+#include <sge/console/callback/parameters.hpp>
 #include <sge/font/text/lit.hpp>
 #include <sge/exception.hpp>
 #include <fcppt/filesystem/directory_iterator.hpp>
@@ -11,9 +14,9 @@
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/extract_from_string.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/lexical_cast.hpp>
-#include <fcppt/bad_lexical_cast.hpp>
 
 sanguis::client::music_handler::music_handler(
 	sge::console::object &_console,
@@ -22,15 +25,23 @@ sanguis::client::music_handler::music_handler(
 	resource_(_resource),
 	volume_connection_(
 		_console.insert(
-			SGE_FONT_TEXT_LIT("music_volume"),
-			std::tr1::bind(
-				&music_handler::volume,
-				this,
-				std::tr1::placeholders::_1,
-				std::tr1::placeholders::_2
-			),
-			SGE_FONT_TEXT_LIT("Changes the music volume"),
-			SGE_FONT_TEXT_LIT("Usage: /music_volume p\np is a value in [0,100] which specifies the volume in percent")
+			sge::console::callback::parameters(
+				std::tr1::bind(
+					&music_handler::volume,
+					this,
+					std::tr1::placeholders::_1,
+					std::tr1::placeholders::_2
+				),
+				sge::console::callback::name(
+					SGE_FONT_TEXT_LIT("music_volume")
+				)
+			)
+			.short_description(
+				SGE_FONT_TEXT_LIT("Changes the music volume")
+			)
+			.long_description(
+				SGE_FONT_TEXT_LIT("Usage: /music_volume p\np is a value in [0,100] which specifies the volume in percent")
+			)
 		)
 	),
 	current_()
@@ -108,24 +119,28 @@ sanguis::client::music_handler::volume(
 		return;
 	}
 
-	try
-	{
-		current_->gain(
-			fcppt::lexical_cast<
-				sge::audio::scalar
-			>(
-				_args[1]
-			)
-		);
-	}
-	catch(
-		fcppt::bad_lexical_cast const &
+	typedef fcppt::optional<
+		sge::audio::scalar
+	> optional_scalar;
+
+	optional_scalar const opt_gain(
+		fcppt::extract_from_string<
+			sge::audio::scalar
+		>(
+			_args[1]
+		)
+	);
+
+	if(
+		!opt_gain
 	)
-	{
 		_object.emit_error(
 			SGE_FONT_TEXT_LIT("invalid numeric argument")
 		);
-	}
+	else
+		current_->gain(
+			*opt_gain
+		);
 }
 
 sge::audio::sound::base_ptr const

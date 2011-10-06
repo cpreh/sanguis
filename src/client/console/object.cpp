@@ -6,6 +6,8 @@
 #include <sanguis/from_console_arg_list.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/console/object.hpp>
+#include <sge/console/callback/name.hpp>
+#include <sge/console/callback/parameters.hpp>
 #include <sge/font/text/from_fcppt_string.hpp>
 #include <fcppt/tr1/functional.hpp>
 
@@ -36,16 +38,22 @@ sanguis::client::console::object::register_server_command(
 {
 	server_connections_.add(
 		gfx_.object().insert(
-			sge::font::text::from_fcppt_string(
-				_name
-			),
-			std::tr1::bind(
-				&object::server_callback,
-				this,
-				std::tr1::placeholders::_1
-			),
-			sge::font::text::from_fcppt_string(
-				_description
+			sge::console::callback::parameters(
+				std::tr1::bind(
+					&object::server_callback,
+					this,
+					std::tr1::placeholders::_1
+				),
+				sge::console::callback::name(
+					sge::font::text::from_fcppt_string(
+						_name
+					)
+				)
+			)
+			.short_description(
+				sge::font::text::from_fcppt_string(
+					_description
+				)
 			)
 		)
 	);
