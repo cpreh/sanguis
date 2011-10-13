@@ -3,6 +3,7 @@ SET(
 	include/sanguis/animation_sound_type.hpp
 	include/sanguis/animation_type.hpp
 	include/sanguis/aoe_projectile_type.hpp
+	include/sanguis/apply_log_level.hpp
 	include/sanguis/args/log_level.hpp
 	include/sanguis/args/multi_sampling.hpp
 	include/sanguis/args/optional_resolution.hpp
@@ -1013,6 +1014,7 @@ SET(
 	include/sanguis/to_console_arg_list.hpp
 	include/sanguis/weapon_type.hpp
 	include/sanguis/world_id.hpp
+	src/apply_log_level.cpp
 	src/args/log_level.cpp
 	src/args/multi_sampling.cpp
 	src/args/options.cpp

@@ -38,7 +38,7 @@ sanguis::args::options()
 			>()->default_value(
 				std::string("warning")
 			),
-			"sets the maximum logging level (one of debug, info, warning, error, fatal in that order)"
+			"sets the maximum logging level (one of verbose, debug, info, warning, error, fatal in that order)"
 		)
 		(
 			"width",

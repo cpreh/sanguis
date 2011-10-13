@@ -9,7 +9,6 @@
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/time/output_tm.hpp>
-#include <fcppt/default_locale.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/text.hpp>
 
@@ -58,10 +57,6 @@ sanguis::client::draw2d::scene::hud::draw()
 	frames_counter_.update();
 
 	fcppt::io::ostringstream time_stream;
-
-	time_stream.imbue(
-		fcppt::default_locale()
-	);
 
 	fcppt::time::output_tm(
 		time_stream,

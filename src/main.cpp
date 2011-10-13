@@ -5,14 +5,15 @@
 #include <sanguis/client/create.hpp>
 #include <sanguis/load/server_context.hpp>
 #include <sanguis/server/create.hpp>
-#include <sanguis/log.hpp>
+#include <sanguis/apply_log_level.hpp>
 #include <sanguis/log_context.hpp>
+#include <sanguis/log_location.hpp>
 #include <sanguis/main_object.hpp>
-//#include <sge/log/global_context.hpp>
+#include <sge/log/global_context.hpp>
+#include <sge/log/location.hpp>
 #include <fcppt/io/cerr.hpp>
-#include <fcppt/log/activate_levels.hpp>
-#include <fcppt/log/global.hpp>
 #include <fcppt/log/level.hpp>
+#include <fcppt/log/location.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/scoped_ptr.hpp>
@@ -26,12 +27,6 @@
 #include <cstdlib>
 #include <fcppt/config/external_end.hpp>
 
-#include <fcppt/log/context.hpp>
-#include <fcppt/log/location.hpp>
-#include <fcppt/log/object.hpp>
-#include <fcppt/log/activate_levels.hpp>
-#include <fcppt/tr1/functional.hpp>
-
 int
 main(
 	int argc,
@@ -42,19 +37,6 @@ try
 	boost::program_options::options_description desc(
 		sanguis::args::options()
 	);
-
-#if 0
-	sge::log::global_context().apply(
-		fcppt::log::location(
-			FCPPT_TEXT("projectile")
-		),
-                std::tr1::bind(
-			&fcppt::log::activate_levels,
-			std::tr1::placeholders::_1,
-			fcppt::log::level::verbose
-		)
-	);
-#endif
 
 	boost::program_options::variables_map const vm(
 		sanguis::args::parse(
@@ -79,26 +61,11 @@ try
 		)
 	);
 
-	fcppt::log::activate_levels(
-		fcppt::log::global(),
+	sanguis::apply_log_level(
+		sanguis::log_location(),
+		sanguis::log_context(),
 		log_level
 	);
-
-	fcppt::log::activate_levels(
-		sanguis::log(),
-		log_level
-	);
-
-	// has to be done after the plugins are loaded
-#if 0
-	sge_log.apply(
-		vm
-	);
-
-	sanguis_log.apply(
-		vm
-	);
-#endif
 
 	bool const server_only(
 		sanguis::args::server_only(
@@ -138,6 +105,13 @@ try
 				vm
 			)
 		);
+
+	// TODO: this should be done right after sge::systems is constructed
+	sanguis::apply_log_level(
+		sge::log::location(),
+		sge::log::global_context(),
+		log_level
+	);
 
 	return obj->run();
 }

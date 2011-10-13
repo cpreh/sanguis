@@ -177,7 +177,8 @@ sanguis::net::client::object_impl::resolve_handler(
 	)
 	{
 		this->handle_error(
-			FCPPT_TEXT("client: error resolving address: ")+
+			FCPPT_TEXT("resolving address: ")
+			+
 			fcppt::from_std_string(
 				_error.message()
 			),
@@ -219,7 +220,8 @@ sanguis::net::client::object_impl::handle_error(
 	FCPPT_LOG_ERROR(
 		::logger,
 		fcppt::log::_
-			<< FCPPT_TEXT("error (")
+			<< _message
+			<< FCPPT_TEXT(" (")
 			<< fcppt::from_std_string(
 				_error.message()
 			)
@@ -243,7 +245,7 @@ sanguis::net::client::object_impl::read_handler(
 	)
 	{
 		this->handle_error(
-			FCPPT_TEXT("client read"),
+			FCPPT_TEXT("read"),
 			_error
 		);
 
@@ -327,7 +329,7 @@ sanguis::net::client::object_impl::connect_handler(
 		)
 		{
 			this->handle_error(
-				FCPPT_TEXT("client: exhausted endpoints or connection aborted: ")+
+				FCPPT_TEXT("exhausted endpoints or connection aborted: ")+
 				fcppt::from_std_string(
 					_error.message()
 				),
