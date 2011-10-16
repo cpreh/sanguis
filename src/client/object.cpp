@@ -229,6 +229,15 @@ sanguis::client::object::create_server(
 	net::port const _port
 )
 {
+	if(
+		server_
+	)
+	{
+		this->quit_server();
+
+		server_.reset();
+	}
+
 	server_.take(
 		fcppt::make_unique_ptr<
 			server::object
