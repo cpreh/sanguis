@@ -210,13 +210,13 @@ sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 
 	foreground_.color(
 		sprite::colored::color(
-			(sge::image::color::init::red %=
+			(sge::image::color::init::red() %=
 				std::min(
 					static_cast<
 						client::health::value_type
 					>(
-						2.0 -
-						2.0
+						2.0f -
+						2.0f
 						*
 						this->remaining_health().get()
 					),
@@ -227,24 +227,24 @@ sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 					)
 				)
 			)
-			(sge::image::color::init::green %=
+			(sge::image::color::init::green() %=
 				std::min(
 					static_cast<
 						client::health::value_type
 					>(
-						1.4
+						1.4f
 						*
 						this->remaining_health().get()
 					),
 					static_cast<
 						client::health::value_type
 					>(
-						0.7
+						0.7f
 					)
 				)
 			)
-			(sge::image::color::init::blue %= 0.0)
-			(sge::image::color::init::alpha %= 1.0)
+			(sge::image::color::init::blue() %= 0.0)
+			(sge::image::color::init::alpha() %= 1.0)
 		)
 	);
 }

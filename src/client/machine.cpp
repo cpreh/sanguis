@@ -97,8 +97,7 @@ sanguis::client::machine::quickstart(
 	FCPPT_LOG_DEBUG(
 		client::log(),
 		fcppt::log::_
-			<< FCPPT_TEXT("machine::quickstart()"
-		)
+			<< FCPPT_TEXT("machine::quickstart()")
 	);
 
 	server_callback_(

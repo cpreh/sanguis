@@ -83,10 +83,10 @@ sanguis::client::draw2d::particle::object::object(
 		)
 		.color(
 			sge::image::color::rgba8(
-				(sge::image::color::init::red %= 1.0)
-				(sge::image::color::init::green %= 1.0)
-				(sge::image::color::init::blue %= 1.0)
-				(sge::image::color::init::alpha %= 1.0)
+				(sge::image::color::init::red() %= 1.0)
+				(sge::image::color::init::green() %= 1.0)
+				(sge::image::color::init::blue() %= 1.0)
+				(sge::image::color::init::alpha() %= 1.0)
 			)
 		)
 		.elements()
@@ -195,10 +195,10 @@ sanguis::client::draw2d::particle::object::update(
 
 	sprite_.color(
 		sge::image::color::rgba8(
-			(sge::image::color::init::red %= 1.0)
-			(sge::image::color::init::green %= 1.0)
-			(sge::image::color::init::blue %= 1.0)
-			(sge::image::color::init::alpha %=
+			(sge::image::color::init::red() %= 1.0)
+			(sge::image::color::init::green() %= 1.0)
+			(sge::image::color::init::blue() %= 1.0)
+			(sge::image::color::init::alpha() %=
 				sge::timer::remaining_fractional<
 					draw2d::funit
 				>(
