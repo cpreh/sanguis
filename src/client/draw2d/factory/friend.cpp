@@ -50,5 +50,5 @@ sanguis::client::draw2d::factory::friend_(
 			);
 	}
 
-	FCPPT_ASSERT_UNREACHABLE
+	FCPPT_ASSERT_UNREACHABLE;
 }

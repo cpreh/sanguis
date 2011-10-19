@@ -45,5 +45,5 @@ sanguis::client::draw2d::particle::velocity_from_movement(
 		break;
 	}
 
-	FCPPT_ASSERT_UNREACHABLE
+	FCPPT_ASSERT_UNREACHABLE;
 }

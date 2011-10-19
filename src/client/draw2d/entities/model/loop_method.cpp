@@ -22,5 +22,5 @@ sanguis::client::draw2d::entities::model::loop_method(
 		break;
 	}
 
-	FCPPT_ASSERT_UNREACHABLE
+	FCPPT_ASSERT_UNREACHABLE;
 }

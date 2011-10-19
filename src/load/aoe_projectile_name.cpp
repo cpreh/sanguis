@@ -20,5 +20,5 @@ sanguis::load::aoe_projectile_name(
 		break;
 	}
 
-	FCPPT_ASSERT_UNREACHABLE
+	FCPPT_ASSERT_UNREACHABLE;
 }

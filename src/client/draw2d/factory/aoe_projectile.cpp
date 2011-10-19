@@ -44,5 +44,5 @@ sanguis::client::draw2d::factory::aoe_projectile(
 			);
 	}
 
-	FCPPT_ASSERT_UNREACHABLE
+	FCPPT_ASSERT_UNREACHABLE;
 }

@@ -24,5 +24,5 @@ sanguis::load::pickup_name(
 		break;
 	}
 
-	FCPPT_ASSERT_UNREACHABLE
+	FCPPT_ASSERT_UNREACHABLE;
 }

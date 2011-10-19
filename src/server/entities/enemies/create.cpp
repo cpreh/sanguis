@@ -258,5 +258,5 @@ sanguis::server::entities::enemies::create(
 		break;
 	}
 
-	FCPPT_ASSERT_UNREACHABLE
+	FCPPT_ASSERT_UNREACHABLE;
 }

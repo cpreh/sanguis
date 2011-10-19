@@ -28,5 +28,5 @@ sanguis::load::weapon_pickup_name(
 		break;
 	}
 
-	FCPPT_ASSERT_UNREACHABLE
+	FCPPT_ASSERT_UNREACHABLE;
 }

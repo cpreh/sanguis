@@ -29,5 +29,5 @@ sanguis::client::perk::to_string(
 		break;
 	}
 
-	FCPPT_ASSERT_UNREACHABLE
+	FCPPT_ASSERT_UNREACHABLE;
 }

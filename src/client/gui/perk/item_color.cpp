@@ -24,5 +24,5 @@ sanguis::client::gui::perk::item_color(
 		return sge::image::colors::gray();
 	}
 
-	FCPPT_ASSERT_UNREACHABLE
+	FCPPT_ASSERT_UNREACHABLE;
 }

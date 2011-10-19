@@ -46,5 +46,5 @@ sanguis::server::auras::collision_groups(
 				collision::group::projectile_player
 			);
 
-	FCPPT_ASSERT_UNREACHABLE
+	FCPPT_ASSERT_UNREACHABLE;
 }

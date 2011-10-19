@@ -48,5 +48,5 @@ sanguis::client::draw2d::particle::rotation_from_alignment(
 		break;
 	}
 
-	FCPPT_ASSERT_UNREACHABLE
+	FCPPT_ASSERT_UNREACHABLE;
 }

@@ -38,7 +38,7 @@ sanguis::server::buffs::provider::add(
 
 	FCPPT_ASSERT_ERROR(
 		ret.second
-	)
+	);
 
 	_entity.add_buff(
 		*ret.first->second
@@ -58,7 +58,7 @@ sanguis::server::buffs::provider::remove(
 
 	FCPPT_ASSERT_ERROR(
 		it != buffs_.end()
-	)
+	);
 
 	map::auto_type reclaimed(
 		buffs_.release(
