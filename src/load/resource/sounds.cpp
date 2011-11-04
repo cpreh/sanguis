@@ -7,6 +7,7 @@
 #include <sge/audio/multi_loader.hpp>
 #include <sge/audio/buffer.hpp>
 #include <sge/audio/sound/base.hpp>
+#include <sge/audio/sound/nonpositional_parameters.hpp>
 #include <sge/audio/sound/positional.hpp>
 #include <sge/audio/bad_sound_alloc.hpp>
 #include <fcppt/filesystem/path.hpp>
@@ -77,11 +78,13 @@ sanguis::load::resource::sounds::make(
 			std::tr1::bind(
 				&sge::audio::player::create_nonpositional_stream,
 				&player_,
-				std::tr1::placeholders::_1
+				std::tr1::placeholders::_1,
+				sge::audio::sound::nonpositional_parameters()
 			),
 			std::tr1::bind(
 				&sge::audio::buffer::create_nonpositional,
-				std::tr1::placeholders::_1
+				std::tr1::placeholders::_1,
+				sge::audio::sound::nonpositional_parameters()
 			)
 		);
 }
