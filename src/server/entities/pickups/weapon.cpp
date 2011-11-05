@@ -17,14 +17,16 @@ sanguis::server::entities::pickups::weapon::weapon(
 	weapon_type::type const _weapon_type
 )
 :
-	pickup(
+	pickups::pickup(
 		_diff_clock,
 		pickup_type::weapon,
 		_load_context,
 		_team,
-		_load_context.entity_dim(
-			load::weapon_pickup_name(
-				_weapon_type
+		pickup::optional_dim(
+			_load_context.entity_dim(
+				load::weapon_pickup_name(
+					_weapon_type
+				)
 			)
 		)
 	),

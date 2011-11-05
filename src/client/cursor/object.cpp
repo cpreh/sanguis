@@ -1,5 +1,6 @@
 #include <sanguis/client/cursor/object.hpp>
 #include <sge/input/cursor/object.hpp>
+#include <sge/input/cursor/optional_position.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/signal/object_impl.hpp>
@@ -74,12 +75,6 @@ bool
 sanguis::client::cursor::object::active() const
 {
 	return active_;
-}
-
-sge::input::cursor::position const
-sanguis::client::cursor::object::position() const
-{
-	return cursor_.position();
 }
 
 sge::input::cursor::object &

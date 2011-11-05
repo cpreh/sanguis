@@ -45,7 +45,9 @@ sanguis::client::draw2d::scene::world::batch::draw(
 	)
 	{
 		_renderer.texture(
-			*it->texture()->texture(),
+			sge::renderer::texture::const_optional_base(
+				*it->texture()->texture()
+			),
 			sge::renderer::stage(
 				0u
 			)

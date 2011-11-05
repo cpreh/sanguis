@@ -180,11 +180,13 @@ sanguis::server::ai::simple::update()
 		?
 			optional_angle()
 		:
-			fcppt::math::vector::signed_angle_cast<
-				space_unit
-			>(
-				me_.center().get(),
-				fuzzy_target
+			optional_angle(
+				fcppt::math::vector::signed_angle_cast<
+					space_unit
+				>(
+					me_.center().get(),
+					fuzzy_target
+				)
 			)
 	);
 

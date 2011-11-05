@@ -66,8 +66,10 @@ sanguis::client::draw2d::entities::explosion_particle(
 				move(
 					_anim
 				),
-				sanguis::duration(
-					rng()
+				draw2d::particle::object::optional_time(
+					sanguis::duration(
+						rng()
+					)
 				),
 				fcppt::ref(
 					_particle_system

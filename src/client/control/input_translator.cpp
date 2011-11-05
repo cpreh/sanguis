@@ -132,10 +132,15 @@ sanguis::client::control::input_translator::move_callback(
 	sge::input::cursor::move_event const &_event
 )
 {
+	if(
+		!_event.position()
+	)
+		return;
+
 	callback_(
 		actions::any(
 			actions::cursor(
-				_event.position()
+				*_event.position()
 			)
 		)
 	);
