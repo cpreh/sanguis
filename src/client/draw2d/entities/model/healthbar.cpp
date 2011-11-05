@@ -41,7 +41,7 @@ sanguis::client::draw2d::entities::model::healthbar::healthbar(
 			z_ordering::healthbar_lower
 		)
 		.system(
-			&_sys
+			_sys
 		)
 		.color(
 			sge::image::color::any::convert<
@@ -58,7 +58,7 @@ sanguis::client::draw2d::entities::model::healthbar::healthbar(
 			z_ordering::healthbar_upper
 		)
 		.system(
-			&_sys
+			_sys
 		)
 		.elements()
 	),

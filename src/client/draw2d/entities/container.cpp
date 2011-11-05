@@ -53,7 +53,7 @@ sanguis::client::draw2d::entities::container::container(
 			object(
 				sprite::normal::parameters()
 				.system(
-					&_normal_system
+					_normal_system
 				)
 				.order(
 					_order

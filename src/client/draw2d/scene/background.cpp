@@ -37,7 +37,7 @@ sanguis::client::draw2d::scene::background::background(
 	sprite_(
 		draw2d::sprite::client::parameters()
 		.system(
-			&client_system_
+			client_system_
 		)
 		.pos(
 			draw2d::sprite::point::null()

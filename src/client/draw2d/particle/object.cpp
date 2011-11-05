@@ -61,7 +61,7 @@ sanguis::client::draw2d::particle::object::object(
 	sprite_(
 		sprite::particle::parameters()
 		.system(
-			&_particle_system
+			_particle_system
 		)
 		.order(
 			particle::z_ordering(
