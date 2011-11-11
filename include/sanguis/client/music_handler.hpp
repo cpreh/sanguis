@@ -3,10 +3,12 @@
 
 #include <sanguis/client/music_handler_fwd.hpp>
 #include <sanguis/load/resource/sounds_fwd.hpp>
+#include <sge/audio/scalar.hpp>
 #include <sge/audio/sound/base_ptr.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/object_fwd.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -48,6 +50,11 @@ private:
 
 	sge::audio::sound::base_ptr current_;
 
+	typedef fcppt::optional<
+		sge::audio::scalar
+	> optional_scalar;
+
+	optional_scalar gain_;
 };
 
 }

@@ -15,7 +15,6 @@
 #include <fcppt/log/warning.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/extract_from_string.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::client::music_handler::music_handler(
@@ -44,7 +43,8 @@ sanguis::client::music_handler::music_handler(
 			)
 		)
 	),
-	current_()
+	current_(),
+	gain_()
 {
 }
 
@@ -69,10 +69,6 @@ sanguis::client::music_handler::process()
 void
 sanguis::client::music_handler::next_title()
 {
-	sge::audio::sound::base_ptr const old(
-		current_
-	);
-
 	current_ = this->load_random();
 
 	if(
@@ -81,10 +77,10 @@ sanguis::client::music_handler::next_title()
 		return;
 
 	if(
-		old
+		gain_
 	)
 		current_->gain(
-			old->gain()
+			*gain_
 		);
 
 	current_->play(
@@ -119,27 +115,22 @@ sanguis::client::music_handler::volume(
 		return;
 	}
 
-	typedef fcppt::optional<
-		sge::audio::scalar
-	> optional_scalar;
-
-	optional_scalar const opt_gain(
+	gain_ =
 		fcppt::extract_from_string<
 			sge::audio::scalar
 		>(
 			_args[1]
-		)
-	);
+		);
 
 	if(
-		!opt_gain
+		!gain_
 	)
 		_object.emit_error(
 			SGE_FONT_TEXT_LIT("invalid numeric argument")
 		);
 	else
 		current_->gain(
-			*opt_gain
+			*gain_
 		);
 }
 
