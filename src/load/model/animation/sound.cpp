@@ -82,14 +82,14 @@ sanguis::load::model::animation::sound::~sound()
 }
 
 sanguis::load::model::animation::sound::sound(
-	sge::parse::json::member_vector const &_members,
+	sge::parse::json::member_map const &_members,
 	resource::sounds const &_ctx
 )
 :
 	sounds_()
 {
 	for(
-		sge::parse::json::member_vector::const_iterator it(
+		sge::parse::json::member_map::const_iterator it(
 			_members.begin()
 		);
 		it != _members.end();
@@ -100,7 +100,7 @@ sanguis::load::model::animation::sound::sound(
 			fcppt::container::ptr::insert_unique_ptr_map(
 				sounds_,
 				::find_sound_type(
-					it->name
+					it->first
 				),
 				fcppt::make_unique_ptr<
 					model::conditional_sound
@@ -108,7 +108,7 @@ sanguis::load::model::animation::sound::sound(
 					sge::parse::json::get<
 						sge::parse::json::object
 					>(
-						it->value
+						it->second
 					).members,
 					fcppt::cref(
 						_ctx

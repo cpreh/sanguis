@@ -5,7 +5,7 @@
 #include <sanguis/load/model/random_sound.hpp>
 #include <sanguis/load/resource/sounds_fwd.hpp>
 #include <sanguis/load/probability_type.hpp>
-#include <sge/parse/json/member_vector.hpp>
+#include <sge/parse/json/member_map.hpp>
 #include <sge/audio/sound/positional_ptr.hpp>
 #include <fcppt/random/uniform.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -24,7 +24,7 @@ class conditional_sound
 	);
 public:
 	conditional_sound(
-		sge::parse::json::member_vector const &,
+		sge::parse::json::member_map const &,
 		resource::sounds const &
 	);
 

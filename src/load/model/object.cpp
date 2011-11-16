@@ -15,6 +15,8 @@
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
+#include <sge/parse/json/member.hpp>
+#include <sge/parse/json/member_map.hpp>
 #include <sge/parse/json/object.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/filesystem/is_directory.hpp>
@@ -160,7 +162,7 @@ sanguis::load::model::object::construct(
 		object_return
 	);
 
-	sge::parse::json::member_vector const &global_entries(
+	sge::parse::json::member_map const &global_entries(
 		object_return.members
 	);
 
@@ -203,7 +205,7 @@ sanguis::load::model::object::construct(
 		++it
 	)
 	{
-		sge::parse::json::member_vector const &inner_members(
+		sge::parse::json::member_map const &inner_members(
 			sge::parse::json::get<
 				sge::parse::json::object
 			>(
@@ -219,20 +221,20 @@ sanguis::load::model::object::construct(
 			);
 
 		sge::parse::json::member const &member(
-			inner_members[0]
+			*inner_members.begin()
 		);
 
 		if(
 			fcppt::container::ptr::insert_unique_ptr_map(
 				parts_,
-				member.name,
+				member.first,
 				fcppt::make_unique_ptr<
 					part
 				>(
 					sge::parse::json::get<
 						sge::parse::json::object
 					>(
-						member.value
+						member.second
 					),
 					model::global_parameters(
 						path_,

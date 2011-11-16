@@ -4,7 +4,7 @@
 #include <sanguis/load/model/sound_fwd.hpp>
 #include <sanguis/load/probability_type.hpp>
 #include <sanguis/load/resource/sounds_fwd.hpp>
-#include <sge/parse/json/member_vector.hpp>
+#include <sge/parse/json/member_map.hpp>
 #include <sge/audio/sound/positional_ptr.hpp>
 #include <sge/audio/file_ptr.hpp>
 #include <fcppt/reference_wrapper.hpp>
@@ -20,7 +20,7 @@ class sound
 {
 public:
 	sound(
-		sge::parse::json::member_vector const &,
+		sge::parse::json::member_map const &,
 		resource::sounds const &
 	);
 

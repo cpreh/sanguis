@@ -5,6 +5,7 @@
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/int_type.hpp>
 #include <sge/parse/json/member.hpp>
+#include <sge/parse/json/member_map.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/string.hpp>
 #include <fcppt/assign/make_container.hpp>
@@ -18,7 +19,7 @@ sanguis::creator::generator::serialization::shape(
 	return
 		sge::parse::json::object(
 			fcppt::assign::make_container<
-				sge::parse::json::member_vector
+				sge::parse::json::member_map
 			>(
 				sge::parse::json::member(
 					FCPPT_TEXT("polygon"),

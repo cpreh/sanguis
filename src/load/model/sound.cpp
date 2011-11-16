@@ -7,7 +7,7 @@
 #include <fcppt/text.hpp>
 
 sanguis::load::model::sound::sound(
-	sge::parse::json::member_vector const &_members,
+	sge::parse::json::member_map const &_members,
 	resource::sounds const &_ctx
 )
 :

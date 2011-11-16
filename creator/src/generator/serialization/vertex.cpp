@@ -3,7 +3,7 @@
 #include <sge/parse/json/convert/from_container.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/member.hpp>
-#include <sge/parse/json/member_vector.hpp>
+#include <sge/parse/json/member_map.hpp>
 #include <sge/parse/json/object.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/text.hpp>
@@ -16,7 +16,7 @@ sanguis::creator::generator::serialization::vertex(
 	return
 		sge::parse::json::object(
 			fcppt::assign::make_container<
-				sge::parse::json::member_vector
+				sge::parse::json::member_map
 			>(
 				sge::parse::json::member(
 					FCPPT_TEXT("pos"),

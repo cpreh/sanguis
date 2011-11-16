@@ -9,10 +9,14 @@
 
 sanguis::load::model::optional_delay const
 sanguis::load::model::load_delay(
-	sge::parse::json::member_vector const &_entries
+	sge::parse::json::member_map const &_entries
 )
 {
-	int const *const ret(
+	typedef fcppt::optional<
+		int const &
+	> optional_int_ref;
+
+	optional_int_ref const ret(
 		sge::parse::json::find_member<
 			int
 		>(

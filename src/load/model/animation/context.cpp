@@ -7,12 +7,9 @@
 #include <sanguis/exception.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/texture/part_fwd.hpp>
-#include <sge/renderer/size_type.hpp>
-#include <sge/parse/json/member_vector.hpp>
-#include <sge/parse/json/element_vector.hpp>
-#include <sge/parse/json/find_member.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/make_shared_ptr.hpp>
+
 
 sanguis::load::model::animation::context::context(
 	resource::texture_context const &_texture_context,

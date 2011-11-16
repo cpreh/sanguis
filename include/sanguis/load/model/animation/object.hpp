@@ -12,9 +12,6 @@
 #include <sanguis/load/resource/context_fwd.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <sge/parse/json/object.hpp>
-#include <sge/parse/json/array.hpp>
-#include <sge/parse/json/member_vector.hpp>
-#include <sge/parse/json/member.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 

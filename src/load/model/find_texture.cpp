@@ -8,10 +8,14 @@
 
 sanguis::load::model::optional_texture_identifier const
 sanguis::load::model::find_texture(
-	sge::parse::json::member_vector const &members
+	sge::parse::json::member_map const &members
 )
 {
-	fcppt::string const *const ret(
+	typedef fcppt::optional<
+		fcppt::string const &
+	> optional_string;
+
+	optional_string const ret(
 		sge::parse::json::find_member<
 			fcppt::string
 		>(

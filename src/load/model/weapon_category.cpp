@@ -6,9 +6,11 @@
 #include <sanguis/load/log.hpp>
 #include <sanguis/exception.hpp>
 #include <sge/parse/json/array.hpp>
-#include <sge/parse/json/object.hpp>
-#include <sge/parse/json/get.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
+#include <sge/parse/json/get.hpp>
+#include <sge/parse/json/member.hpp>
+#include <sge/parse/json/member_map.hpp>
+#include <sge/parse/json/object.hpp>
 #include <fcppt/algorithm/find_exn.hpp>
 #include <fcppt/container/array.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
@@ -116,7 +118,7 @@ sanguis::load::model::weapon_category::weapon_category(
 :
 	animations_()
 {
-	sge::parse::json::member_vector const &members(
+	sge::parse::json::member_map const &members(
 		_object.members
 	);
 
@@ -143,7 +145,7 @@ sanguis::load::model::weapon_category::weapon_category(
 		++it
 	)
 	{
-		sge::parse::json::member_vector const &inner_members(
+		sge::parse::json::member_map const &inner_members(
 			sge::parse::json::get<
 				sge::parse::json::object
 			>(
@@ -159,14 +161,14 @@ sanguis::load::model::weapon_category::weapon_category(
 			);
 
 		sge::parse::json::member const &member(
-			inner_members[0]
+			*inner_members.begin()
 		);
 
 		if(
 			fcppt::container::ptr::insert_unique_ptr_map(
 				animations_,
 				find_animation_type(
-					member.name
+					member.first
 				),
 				fcppt::make_unique_ptr<
 					animation::object
@@ -174,7 +176,7 @@ sanguis::load::model::weapon_category::weapon_category(
 					sge::parse::json::get<
 						sge::parse::json::object
 					>(
-						member.value
+						member.second
 					),
 					_param.new_texture(
 						texture

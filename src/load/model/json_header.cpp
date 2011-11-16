@@ -6,7 +6,7 @@
 
 sge::parse::json::object const &
 sanguis::load::model::json_header(
-	sge::parse::json::member_vector const &_global_entries
+	sge::parse::json::member_map const &_global_entries
 )
 {
 	return

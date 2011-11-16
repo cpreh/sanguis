@@ -8,6 +8,8 @@
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
 #include <sge/parse/json/get.hpp>
+#include <sge/parse/json/member.hpp>
+#include <sge/parse/json/member_map.hpp>
 #include <fcppt/algorithm/find_exn.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/container/array.hpp>
@@ -99,7 +101,7 @@ sanguis::load::model::part::part(
 :
 	categories_()
 {
-	sge::parse::json::member_vector const &members(
+	sge::parse::json::member_map const &members(
 		_object.members
 	);
 
@@ -126,7 +128,7 @@ sanguis::load::model::part::part(
 		++it
 	)
 	{
-		sge::parse::json::member_vector const &inner_members(
+		sge::parse::json::member_map const &inner_members(
 			sge::parse::json::get<
 				sge::parse::json::object
 			>(
@@ -137,19 +139,19 @@ sanguis::load::model::part::part(
 		if(
 			inner_members.size() != 1
 		)
-			throw exception(
+			throw sanguis::exception(
 				FCPPT_TEXT("inner members of the weapon category array have to contain exactly one element!")
 			);
 
 		sge::parse::json::member const &member(
-			inner_members[0]
+			*inner_members.begin()
 		);
 
 		if(
 			fcppt::container::ptr::insert_unique_ptr_map(
 				categories_,
 				find_weapon_type(
-					member.name
+					member.first
 				),
 				fcppt::make_unique_ptr<
 					weapon_category
@@ -157,7 +159,7 @@ sanguis::load::model::part::part(
 					sge::parse::json::get<
 						sge::parse::json::object
 					>(
-						member.value
+						member.second
 					),
 					_param.new_texture(
 						texture

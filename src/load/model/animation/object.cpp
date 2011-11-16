@@ -8,9 +8,11 @@
 #include <sanguis/load/resource/texture_context_impl.hpp>
 #include <sanguis/exception.hpp>
 #include <sge/renderer/dim2.hpp>
+#include <sge/parse/json/const_optional_object_ref.hpp>
 #include <sge/parse/json/get_unsigned.hpp>
 #include <sge/parse/json/find_member.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
+#include <sge/parse/json/member_map.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/texture/part_raw.hpp>
@@ -81,11 +83,15 @@ calc_rect(
 
 sanguis::duration const
 load_delay(
-	sge::parse::json::member_vector const &_members,
+	sge::parse::json::member_map const &_members,
 	sanguis::load::model::optional_delay const &_opt_delay
 )
 {
-	int const *const ret(
+	typedef fcppt::optional<
+		int const &
+	> optional_int;
+
+	optional_int const ret(
 		sge::parse::json::find_member<
 			int
 		>(
@@ -156,7 +162,7 @@ sanguis::load::model::animation::object::object(
 	texture_ = *_texture;
 
 	{
-		sge::parse::json::object const *const sounds_object(
+		sge::parse::json::const_optional_object_ref const sounds_object(
 			sge::parse::json::find_member<
 				sge::parse::json::object
 			>(

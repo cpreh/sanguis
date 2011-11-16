@@ -6,7 +6,7 @@
 #include <sanguis/load/resource/sounds_fwd.hpp>
 #include <sanguis/animation_sound_type.hpp>
 #include <sge/audio/sound/positional_ptr.hpp>
-#include <sge/parse/json/member_vector.hpp>
+#include <sge/parse/json/member_map.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
@@ -35,7 +35,7 @@ public:
 	sound();
 
 	sound(
-		sge::parse::json::member_vector const &,
+		sge::parse::json::member_map const &,
 		resource::sounds const &
 	);
 

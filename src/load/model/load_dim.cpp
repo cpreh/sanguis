@@ -11,7 +11,7 @@
 
 sge::renderer::dim2 const
 sanguis::load::model::load_dim(
-	sge::parse::json::member_vector const &_entries
+	sge::parse::json::member_map const &_entries
 )
 {
 	sge::parse::json::array const &array(
