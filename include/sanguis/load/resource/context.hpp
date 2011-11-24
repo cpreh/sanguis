@@ -6,9 +6,9 @@
 #include <sanguis/load/resource/sounds_fwd.hpp>
 #include <sanguis/load/context_fwd.hpp>
 #include <sge/renderer/device_fwd.hpp>
-#include <sge/image2d/multi_loader_fwd.hpp>
+#include <sge/image2d/system_fwd.hpp>
 #include <sge/audio/player_fwd.hpp>
-#include <sge/audio/multi_loader_fwd.hpp>
+#include <sge/audio/loader_fwd.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -38,8 +38,8 @@ private:
 
 	context(
 		sge::renderer::device &,
-		sge::image2d::multi_loader &,
-		sge::audio::multi_loader &,
+		sge::image2d::system &,
+		sge::audio::loader &,
 		sge::audio::player &
 	);
 

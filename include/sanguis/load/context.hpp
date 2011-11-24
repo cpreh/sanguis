@@ -6,9 +6,9 @@
 #include <sanguis/load/resource/context.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/renderer/dim2.hpp>
-#include <sge/image2d/multi_loader_fwd.hpp>
+#include <sge/image2d/system_fwd.hpp>
 #include <sge/audio/player_fwd.hpp>
-#include <sge/audio/multi_loader_fwd.hpp>
+#include <sge/audio/loader_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 
@@ -26,9 +26,9 @@ class context
 	);
 public:
 	context(
-		sge::image2d::multi_loader &,
+		sge::image2d::system &,
 		sge::renderer::device &,
-		sge::audio::multi_loader &,
+		sge::audio::loader &,
 		sge::audio::player &
 	);
 
@@ -46,11 +46,11 @@ private:
 		fcppt::string const &
 	) const;
 
-	sge::image2d::multi_loader &il_;
+	sge::image2d::system &il_;
 
 	sge::renderer::device &rend_;
 
-	sge::audio::multi_loader &ml_;
+	sge::audio::loader &ml_;
 
 	sge::audio::player &ap_;
 

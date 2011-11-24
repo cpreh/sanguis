@@ -19,7 +19,7 @@
 #include <sge/font/metrics_fwd.hpp>
 #include <sge/font/text/drawer_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
-#include <sge/image2d/multi_loader_fwd.hpp>
+#include <sge/image2d/system_fwd.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <awl/mainloop/io_service_fwd.hpp>
@@ -58,7 +58,7 @@ public:
 		sge::input::keyboard::device &,
 		client::cursor::object &,
 		sge::renderer::device &,
-		sge::image2d::multi_loader &,
+		sge::image2d::system &,
 		sge::audio::player &,
 		awl::mainloop::io_service &,
 		sge::viewport::manager &
@@ -102,7 +102,7 @@ public:
 	sge::renderer::device &
 	renderer() const;
 
-	sge::image2d::multi_loader &
+	sge::image2d::system &
 	image_loader() const;
 
 	sge::input::keyboard::device &
@@ -159,7 +159,7 @@ private:
 
 	sge::renderer::device &renderer_;
 
-	sge::image2d::multi_loader &image_loader_;
+	sge::image2d::system &image_loader_;
 
 	sge::audio::player &audio_player_;
 

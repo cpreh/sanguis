@@ -5,9 +5,9 @@
 #include <fcppt/math/dim/basic_impl.hpp>
 
 sanguis::load::context::context(
-	sge::image2d::multi_loader &_il,
+	sge::image2d::system &_il,
 	sge::renderer::device &_rend,
-	sge::audio::multi_loader &_ml,
+	sge::audio::loader &_ml,
 	sge::audio::player &_ap
 )
 :

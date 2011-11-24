@@ -7,7 +7,7 @@
 #include <sge/texture/part_ptr.hpp>
 #include <sge/texture/manager.hpp>
 #include <sge/renderer/device_fwd.hpp>
-#include <sge/image2d/multi_loader_fwd.hpp>
+#include <sge/image2d/system_fwd.hpp>
 #include <fcppt/filesystem/path.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -39,7 +39,7 @@ public:
 
 	textures(
 		sge::renderer::device &,
-		sge::image2d::multi_loader &
+		sge::image2d::system &
 	);
 
 	~textures();
@@ -80,7 +80,7 @@ private:
 
 	mutable sge::texture::manager texture_manager_;
 
-	sge::image2d::multi_loader &image_loader_;
+	sge::image2d::system &image_loader_;
 
 	mutable texture_map textures_;
 

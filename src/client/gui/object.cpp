@@ -9,7 +9,7 @@
 
 sanguis::client::gui::object::object(
 	sge::renderer::device &_renderer,
-	sge::image2d::multi_loader &_image_loader,
+	sge::image2d::system &_image_loader,
 	sge::charconv::system &_charconv_system,
 	sge::viewport::manager &_viewport_manager,
 	sge::input::keyboard::device &_keyboard,

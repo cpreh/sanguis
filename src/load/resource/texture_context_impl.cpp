@@ -5,8 +5,8 @@
 #include <sge/renderer/texture/create_planar_from_view.hpp>
 #include <sge/renderer/texture/mipmap/off.hpp>
 #include <sge/renderer/resource_flags_none.hpp>
-#include <sge/image2d/multi_loader.hpp>
 #include <sge/image2d/file.hpp>
+#include <sge/image2d/system.hpp>
 #include <sge/image2d/view/const_object.hpp>
 #include <sge/renderer/device.hpp>
 #include <fcppt/tr1/functional.hpp>
@@ -17,7 +17,7 @@
 sanguis::load::resource::texture_context_impl::texture_context_impl(
 	fcppt::filesystem::path const &_path,
 	sge::renderer::device &_rend,
-	sge::image2d::multi_loader &_il
+	sge::image2d::system &_il
 )
 :
 	task_(
@@ -89,7 +89,7 @@ sanguis::load::resource::texture_context_impl::~texture_context_impl()
 sanguis::load::resource::texture_context_impl::future_value const
 sanguis::load::resource::texture_context_impl::task(
 	fcppt::filesystem::path const &_path,
-	sge::image2d::multi_loader &_il
+	sge::image2d::system &_il
 )
 {
 	return

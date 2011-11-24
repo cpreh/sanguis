@@ -25,8 +25,8 @@ sanguis::load::resource::context::animations() const
 
 sanguis::load::resource::context::context(
 	sge::renderer::device &_renderer,
-	sge::image2d::multi_loader &_image_loader,
-	sge::audio::multi_loader &_audio_loader,
+	sge::image2d::system &_image_loader,
+	sge::audio::loader &_audio_loader,
 	sge::audio::player &_audio_player
 )
 :

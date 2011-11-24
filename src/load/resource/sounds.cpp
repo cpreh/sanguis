@@ -3,9 +3,9 @@
 #include <sanguis/load/log.hpp>
 #include <sanguis/exception.hpp>
 #include <sanguis/media_path.hpp>
-#include <sge/audio/player.hpp>
-#include <sge/audio/multi_loader.hpp>
 #include <sge/audio/buffer.hpp>
+#include <sge/audio/loader.hpp>
+#include <sge/audio/player.hpp>
 #include <sge/audio/sound/base.hpp>
 #include <sge/audio/sound/nonpositional_parameters.hpp>
 #include <sge/audio/sound/positional.hpp>
@@ -22,7 +22,7 @@
 #include <fcppt/config/external_end.hpp>
 
 sanguis::load::resource::sounds::sounds(
-	sge::audio::multi_loader &_ml,
+	sge::audio::loader &_ml,
 	sge::audio::player &_player
 )
 :

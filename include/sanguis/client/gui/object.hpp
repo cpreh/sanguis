@@ -9,7 +9,7 @@
 #include <sge/cegui/syringe.hpp>
 #include <sge/cegui/system.hpp>
 #include <sge/renderer/device_fwd.hpp>
-#include <sge/image2d/multi_loader_fwd.hpp>
+#include <sge/image2d/system_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/charconv/system_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
@@ -30,7 +30,7 @@ class object
 public:
 	object(
 		sge::renderer::device &,
-		sge::image2d::multi_loader &,
+		sge::image2d::system &,
 		sge::charconv::system &,
 		sge::viewport::manager &,
 		sge::input::keyboard::device &,

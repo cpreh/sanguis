@@ -33,7 +33,7 @@ sanguis::client::console::gfx::gfx(
 	sge::console::object &_console,
 	sge::renderer::device &_renderer,
 	sge::font::metrics &_font_metrics,
-	sge::image2d::multi_loader &_image_loader,
+	sge::image2d::system &_image_loader,
 	sge::input::keyboard::device &_keyboard,
 	sge::viewport::manager &_viewport_manager,
 	sge::console::output_line_limit const _history_size

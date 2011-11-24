@@ -73,7 +73,7 @@ sanguis::client::object::object(
 		console_,
 		sys_.renderer(),
 		*font_metrics_,
-		sys_.image_loader(),
+		sys_.image_system(),
 		sys_.keyboard_collector(),
 		sys_.viewport_manager(),
 		_variables_map[
@@ -89,7 +89,7 @@ sanguis::client::object::object(
 		sys_.window().awl_io_service()
 	),
 	resources_(
-		sys_.image_loader(),
+		sys_.image_system(),
 		sys_.renderer(),
 		sys_.audio_loader(),
 		sys_.audio_player()
@@ -99,7 +99,7 @@ sanguis::client::object::object(
 	),
 	gui_(
 		sys_.renderer(),
-		sys_.image_loader(),
+		sys_.image_system(),
 		sys_.charconv_system(),
 		sys_.viewport_manager(),
 		sys_.keyboard_collector(),
@@ -120,7 +120,7 @@ sanguis::client::object::object(
 		sys_.keyboard_collector(),
 		cursor_,
 		sys_.renderer(),
-		sys_.image_loader(),
+		sys_.image_system(),
 		sys_.audio_player(),
 		*io_service_,
 		sys_.viewport_manager()

@@ -5,7 +5,7 @@
 #include <sge/console/object_fwd.hpp>
 #include <sge/console/output_line_limit.hpp>
 #include <sge/font/metrics_fwd.hpp>
-#include <sge/image2d/multi_loader_fwd.hpp>
+#include <sge/image2d/system_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
@@ -29,7 +29,7 @@ public:
 		sge::console::object &,
 		sge::renderer::device &,
 		sge::font::metrics &,
-		sge::image2d::multi_loader &,
+		sge::image2d::system &,
 		sge::input::keyboard::device &,
 		sge::viewport::manager &,
 		sge::console::output_line_limit

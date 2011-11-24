@@ -10,7 +10,7 @@
 #include <sge/texture/part_raw.hpp>
 #include <sge/renderer/texture/mipmap/off.hpp>
 #include <sge/renderer/resource_flags_none.hpp>
-#include <sge/image2d/multi_loader.hpp>
+#include <sge/image2d/system.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/filesystem/directory_iterator.hpp>
 #include <fcppt/filesystem/extension.hpp>
@@ -66,7 +66,7 @@ sanguis::load::resource::textures::load(
 
 sanguis::load::resource::textures::textures(
 	sge::renderer::device &_renderer,
-	sge::image2d::multi_loader &_image_loader
+	sge::image2d::system &_image_loader
 )
 :
 	renderer_(

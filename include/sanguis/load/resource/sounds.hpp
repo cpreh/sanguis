@@ -3,10 +3,10 @@
 
 #include <sanguis/load/resource/sound_identifier.hpp>
 #include <sanguis/load/sound_type.hpp>
-#include <sge/audio/multi_loader_fwd.hpp>
-#include <sge/audio/exception.hpp>
-#include <sge/audio/player_fwd.hpp>
 #include <sge/audio/buffer_ptr.hpp>
+#include <sge/audio/exception.hpp>
+#include <sge/audio/loader_fwd.hpp>
+#include <sge/audio/player_fwd.hpp>
 #include <sge/audio/sound/base_ptr.hpp>
 #include <sge/audio/sound/positional_ptr.hpp>
 #include <sge/audio/sound/positional_parameters.hpp>
@@ -32,7 +32,7 @@ class sounds
 	);
 public:
 	sounds(
-		sge::audio::multi_loader &,
+		sge::audio::loader &,
 		sge::audio::player &
 	);
 
@@ -94,7 +94,7 @@ private:
 	>
 	buffer_map;
 
-	sge::audio::multi_loader &ml_;
+	sge::audio::loader &ml_;
 
 	sge::audio::player &player_;
 

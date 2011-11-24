@@ -3,8 +3,8 @@
 
 #include <sanguis/load/resource/texture_context_fwd.hpp>
 #include <sge/renderer/device_fwd.hpp>
-#include <sge/image2d/multi_loader_fwd.hpp>
 #include <sge/image2d/file_ptr.hpp>
+#include <sge/image2d/system_fwd.hpp>
 #include <sge/texture/part_ptr.hpp>
 #include <fcppt/thread/object.hpp>
 #include <fcppt/filesystem/path.hpp>
@@ -29,7 +29,7 @@ public:
 	texture_context_impl(
 		fcppt::filesystem::path const &,
 		sge::renderer::device &,
-		sge::image2d::multi_loader &
+		sge::image2d::system &
 	);
 
 	bool
@@ -54,7 +54,7 @@ private:
 
 	future_value const task(
 		fcppt::filesystem::path const &,
-		sge::image2d::multi_loader &
+		sge::image2d::system &
 	);
 };
 

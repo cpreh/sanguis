@@ -30,7 +30,7 @@ sanguis::client::machine::machine(
 	sge::input::keyboard::device &_keyboard,
 	client::cursor::object &_cursor,
 	sge::renderer::device &_renderer,
-	sge::image2d::multi_loader &_image_loader,
+	sge::image2d::system &_image_loader,
 	sge::audio::player &_audio_player,
 	awl::mainloop::io_service &_io_service,
 	sge::viewport::manager &_viewport_manager
@@ -201,7 +201,7 @@ sanguis::client::machine::renderer() const
 	return renderer_;
 }
 
-sge::image2d::multi_loader &
+sge::image2d::system &
 sanguis::client::machine::image_loader() const
 {
 	return image_loader_;
