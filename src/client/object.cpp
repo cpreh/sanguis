@@ -8,7 +8,6 @@
 #include <sanguis/client/events/tick.hpp>
 #include <sanguis/client/states/menu.hpp>
 #include <sanguis/client/log.hpp>
-#include <sanguis/args/multi_sampling.hpp>
 #include <sanguis/args/sge_options.hpp>
 #include <sanguis/server/object.hpp>
 #include <sanguis/duration.hpp>
@@ -16,10 +15,6 @@
 #include <sge/font/size_type.hpp>
 #include <sge/font/system.hpp>
 #include <sge/image/colors.hpp>
-#include <sge/renderer/state/bool.hpp>
-#include <sge/renderer/state/list.hpp>
-#include <sge/renderer/state/trampoline.hpp>
-#include <sge/renderer/state/var.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/timer/elapsed_and_reset.hpp>
@@ -137,18 +132,6 @@ sanguis::client::object::object(
 		machine_
 	)
 {
-	if(
-		args::multi_sampling(
-			_variables_map
-		).get()
-		> 0
-	)
-		sys_.renderer().state(
-			sge::renderer::state::list
-			(
-				sge::renderer::state::bool_::enable_multi_sampling = true
-			)
-		);
 }
 
 sanguis::client::object::~object()
