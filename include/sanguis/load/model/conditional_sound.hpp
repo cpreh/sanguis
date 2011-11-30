@@ -9,6 +9,7 @@
 #include <sge/audio/sound/positional_ptr.hpp>
 #include <fcppt/random/uniform.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/optional_decl.hpp>
 
 namespace sanguis
 {
@@ -33,7 +34,11 @@ public:
 	sge::audio::sound::positional_ptr const
 	random() const;
 private:
-	load::probability_type range_;
+	typedef fcppt::optional<
+		double
+	> optional_probability;
+
+	optional_probability const range_;
 
 	mutable fcppt::random::uniform<
 		load::probability_type

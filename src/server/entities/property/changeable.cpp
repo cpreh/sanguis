@@ -1,7 +1,7 @@
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <sanguis/server/entities/property/initial.hpp>
 #include <sanguis/exception.hpp>
-#include <fcppt/math/compare.hpp>
+#include <fcppt/math/diff.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
@@ -50,19 +50,25 @@ sanguis::server::entities::property::changeable::current(
 )
 {
 	value_type const old(
-		current()
+		this->current()
 	);
 
 	current_ = _current;
 
 	if(
-		!fcppt::math::compare(
+		fcppt::math::diff(
 			old,
-			current()
+			this->current()
+		)
+		<
+		static_cast<
+			value_type
+		>(
+			0.001f
 		)
 	)
 		change_signal_(
-			current()
+			this->current()
 		);
 
 	check_current();
@@ -113,7 +119,7 @@ sanguis::server::entities::property::changeable::on_recalc_max(
 		max()
 	);
 
-	current(
+	this->current(
 		std::min(
 			current_,
 			max_

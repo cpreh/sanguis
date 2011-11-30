@@ -8,7 +8,6 @@
 #include <sge/parse/json/object.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/random/inclusive_range.hpp>
-#include <fcppt/math/almost_zero.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -55,12 +54,12 @@ sanguis::load::model::random_sound::random_sound(
 	)
 		return;
 
-	probability_type const normalization(
+	load::probability_type const normalization(
 		std::accumulate(
 			sounds_.begin(),
 			sounds_.end(),
 			static_cast<
-				probability_type
+				load::probability_type
 			>(
 				0
 			),
@@ -78,12 +77,16 @@ sanguis::load::model::random_sound::random_sound(
 	);
 
 	if(
-		fcppt::math::almost_zero(
-			normalization
+		normalization
+		<=
+		static_cast<
+			load::probability_type
+		>(
+			0.001f
 		)
 	)
 		throw sanguis::exception(
-			FCPPT_TEXT("sound probabilities are 0!")
+			FCPPT_TEXT("sound probabilities are (almost) 0!")
 		);
 
 	for(

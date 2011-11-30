@@ -1,9 +1,10 @@
 #include <sanguis/load/model/conditional_sound.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
+#include <sge/parse/json/find_member.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
-#include <fcppt/math/compare.hpp>
 #include <fcppt/random/inclusive_range.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::load::model::conditional_sound::conditional_sound(
@@ -12,15 +13,11 @@ sanguis::load::model::conditional_sound::conditional_sound(
 )
 :
 	range_(
-		static_cast<
-			load::probability_type
+		sge::parse::json::find_member<
+			double
 		>(
-			sge::parse::json::find_member_exn<
-				double
-			>(
-				_members,
-				FCPPT_TEXT("prob")
-			)
+			_members,
+			FCPPT_TEXT("prob")
 		)
 	),
 	rng_(
@@ -60,15 +57,14 @@ sanguis::load::model::conditional_sound::random() const
 {
 	// avoid the corner case in which the probability is 1
 	return
-		fcppt::math::compare(
-			range_,
-			static_cast<
-				load::probability_type
-			>(
-				1
-			)
+		!range_
+		|| rng_()
+		<
+		static_cast<
+			load::probability_type
+		>(
+			*range_
 		)
-		|| rng_() < range_
 		?
 			random_sound_.random()
 		:

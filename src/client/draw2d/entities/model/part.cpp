@@ -17,7 +17,7 @@
 #include <fcppt/chrono/seconds.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/dim.hpp>
-#include <fcppt/math/compare.hpp>
+#include <fcppt/math/diff.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -175,9 +175,15 @@ sanguis::client::draw2d::entities::model::part::update()
 		return;
 
 	if(
-		fcppt::math::compare(
+		fcppt::math::diff(
 			this->orientation(),
 			*desired_orientation_
+		)
+		<
+		static_cast<
+			sprite::rotation
+		>(
+			0.001
 		)
 	)
 		return;

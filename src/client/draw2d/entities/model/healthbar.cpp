@@ -3,10 +3,10 @@
 #include <sanguis/client/draw2d/sprite/colored/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/colored/color.hpp>
 #include <sanguis/client/draw2d/sprite/colored/color_format.hpp>
+#include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/unit.hpp>
 #include <sanguis/exception.hpp>
 #include <fcppt/format.hpp>
-#include <fcppt/math/almost_zero.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
@@ -145,7 +145,7 @@ sanguis::client::draw2d::entities::model::healthbar::dim(
 	);
 
 	foreground_.size(
-		inner_dim()
+		this->inner_dim()
 	);
 
 	this->recalc_health();
@@ -188,12 +188,25 @@ sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 		return;
 
 	if(
-		fcppt::math::almost_zero(
-			max_health_.get()
+		max_health_.get()
+		<
+		static_cast<
+			sprite::unit
+		>(
+			0.01f
 		)
 	)
-		// TODO!
+	{
+		foreground_.size(
+			sprite::dim::null()
+		);
+
+		background_.size(
+			sprite::dim::null()
+		);
+
 		return;
+	}
 
 	foreground_.w(
 		static_cast<

@@ -8,9 +8,9 @@
 #include <sanguis/load/model/collection.hpp>
 #include <sanguis/load/model/object.hpp>
 #include <sanguis/duration_second.hpp>
-#include <sanguis/exception.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sge/sprite/object_impl.hpp>
+#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/log/parameters/all.hpp>
 #include <fcppt/log/location.hpp>
@@ -426,9 +426,7 @@ sanguis::client::draw2d::entities::model::object::fallback_anim(
 		break;
 	}
 
-	throw sanguis::exception(
-		FCPPT_TEXT("Invalid animation in fallback_anim!")
-	);
+	FCPPT_ASSERT_UNREACHABLE;
 }
 
 sanguis::animation_type::type
