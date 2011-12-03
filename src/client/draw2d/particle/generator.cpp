@@ -1,3 +1,4 @@
+#include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/particle/generator.hpp>
 #include <sanguis/client/draw2d/particle/object.hpp>
 #include <sanguis/client/draw2d/particle/rotation_from_alignment.hpp>
@@ -7,8 +8,8 @@
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
-#include <fcppt/math/vector/is_null.hpp>
-#include <fcppt/math/vector/unit_circle.hpp>
+#include <fcppt/math/vector/hypersphere_to_cartesian.hpp>
+#include <fcppt/math/vector/static.hpp>
 #include <fcppt/minmax_pair_impl.hpp>
 #include <fcppt/text.hpp>
 
@@ -157,15 +158,24 @@ sanguis::client::draw2d::particle::generator::generate()
 	);
 
 	draw2d::center const object_pos(
-		fcppt::math::vector::unit_circle(
-			disp_rot.get()
+		fcppt::math::vector::hypersphere_to_cartesian(
+			fcppt::math::vector::static_<
+				draw2d::funit,
+				1
+			>::type(
+				disp_rot.get()
+			)
 		)
 		* disp_value
 	);
 
 	draw2d::center const refpoint(
-		fcppt::math::vector::is_null(
-			object_pos.get()
+		disp_value
+		<
+		static_cast<
+			draw2d::funit
+		>(
+			0.0001f
 		)
 		?
 			draw2d::center(

@@ -16,6 +16,7 @@
 #include <sanguis/server/create_player.hpp>
 #include <sanguis/server/cheat.hpp>
 #include <sanguis/server/send_available_perks.hpp>
+#include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/log_location.hpp>
 #include <sanguis/messages/remove_id.hpp>
 #include <sanguis/messages/connect_state.hpp>
@@ -28,10 +29,10 @@
 #include <fcppt/log/parameters/all.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
+#include <fcppt/math/vector/atan2.hpp>
 #include <fcppt/math/vector/comparison.hpp>
-#include <fcppt/math/vector/is_null.hpp>
-#include <fcppt/math/vector/signed_angle.hpp>
-#include <fcppt/math/vector/to_angle.hpp>
+#include <fcppt/math/vector/length.hpp>
+#include <fcppt/math/vector/signed_angle_between.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
@@ -225,7 +226,7 @@ sanguis::server::global::context::player_target(
 
 	player.angle(
 		server::angle(
-			fcppt::math::vector::signed_angle(
+			fcppt::math::vector::signed_angle_between(
 				player_center,
 				_target
 			)
@@ -279,8 +280,14 @@ sanguis::server::global::context::player_speed(
 	);
 
 	if(
-		fcppt::math::vector::is_null(
+		fcppt::math::vector::length(
 			_speed.get()
+		)
+		<
+		static_cast<
+			server::space_unit
+		>(
+			0.0001f
 		)
 	)
 		player.movement_speed().current(
@@ -295,9 +302,7 @@ sanguis::server::global::context::player_speed(
 		// FIXME: don't set the speed to max!
 		player.direction(
 			server::direction(
-				*fcppt::math::vector::to_angle<
-					server::space_unit
-				>(
+				fcppt::math::vector::atan2(
 					_speed.get()
 				)
 			)

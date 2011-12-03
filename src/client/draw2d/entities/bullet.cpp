@@ -4,13 +4,13 @@
 #include <sanguis/client/draw2d/sprite/unit.hpp>
 #include <sanguis/client/draw2d/center.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
+#include <sanguis/client/draw2d/speed_is_null.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/center.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/math/vector/is_null.hpp>
 #include <fcppt/math/vector/normalize.hpp>
 #include <fcppt/math/vector/length.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -70,7 +70,7 @@ sanguis::client::draw2d::entities::bullet::update()
 		tail_length(
 			std::min(
 				fcppt::math::vector::length<
-					funit
+					draw2d::funit
 				>(
 					(
 						*origin_ - this->center()
@@ -89,8 +89,8 @@ sanguis::client::draw2d::entities::bullet::update()
 	);
 
 	draw2d::center const new_center(
-		fcppt::math::vector::is_null(
-			this->speed().get()
+		client::draw2d::speed_is_null(
+			this->speed()
 		)
 		?
 			cur_center
@@ -103,7 +103,7 @@ sanguis::client::draw2d::entities::bullet::update()
 				)
 				*
 				static_cast<
-					funit
+					draw2d::funit
 				>(
 					0.5
 				)
@@ -112,7 +112,7 @@ sanguis::client::draw2d::entities::bullet::update()
 					draw2d::vector2(
 						tail_length,
 						static_cast<
-							funit
+							draw2d::funit
 						>(
 							this->at(
 								tail

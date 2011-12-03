@@ -18,8 +18,9 @@
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/comparison.hpp>
-#include <fcppt/math/vector/signed_angle_cast.hpp>
-#include <fcppt/math/vector/unit_circle.hpp>
+#include <fcppt/math/vector/hypersphere_to_cartesian.hpp>
+#include <fcppt/math/vector/signed_angle_between_cast.hpp>
+#include <fcppt/math/vector/static.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
@@ -165,8 +166,13 @@ sanguis::server::ai::simple::update()
 	server::vector const fuzzy_target(
 		target_->center().get()
 		+
-		fcppt::math::vector::unit_circle(
-			rng()
+		fcppt::math::vector::hypersphere_to_cartesian(
+			fcppt::math::vector::static_<
+				server::space_unit,
+				1
+			>::type(
+				rng()
+			)
 		)
 		* distance / 50.f
 	);
@@ -181,7 +187,7 @@ sanguis::server::ai::simple::update()
 			optional_angle()
 		:
 			optional_angle(
-				fcppt::math::vector::signed_angle_cast<
+				fcppt::math::vector::signed_angle_between_cast<
 					space_unit
 				>(
 					me_.center().get(),

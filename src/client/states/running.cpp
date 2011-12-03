@@ -20,9 +20,8 @@
 #include <sge/console/object.hpp>
 #include <sge/font/text/from_fcppt_string.hpp>
 #include <sge/renderer/device.hpp>
+#include <sge/renderer/state/bool.hpp>
 #include <sge/renderer/state/list.hpp>
-#include <sge/renderer/state/var.hpp>
-#include <sge/renderer/state/trampoline.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/debug.hpp>

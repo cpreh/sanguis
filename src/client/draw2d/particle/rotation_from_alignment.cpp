@@ -1,8 +1,9 @@
+#include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/particle/rotation_from_alignment.hpp>
 #include <fcppt/assert/unreachable.hpp>
-#include <fcppt/math/vector/signed_angle_cast.hpp>
+#include <fcppt/math/vector/signed_angle_between_cast.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
-#include <fcppt/math/vector/is_null.hpp>
+#include <fcppt/math/vector/length.hpp>
 #include <fcppt/random/uniform_impl.hpp>
 
 sanguis::client::draw2d::particle::rotation const
@@ -23,8 +24,14 @@ sanguis::client::draw2d::particle::rotation_from_alignment(
 			);
 	case align_type::to_center:
 		return
-			fcppt::math::vector::is_null(
+			fcppt::math::vector::length(
 				_refpoint.get()
+			)
+			<
+			static_cast<
+				draw2d::funit
+			>(
+				0.0001f
 			)
 			?
 				particle::rotation(
@@ -32,7 +39,7 @@ sanguis::client::draw2d::particle::rotation_from_alignment(
 				)
 			:
 				particle::rotation(
-					fcppt::math::vector::signed_angle_cast<
+					fcppt::math::vector::signed_angle_between_cast<
 						particle::rotation::value_type
 					>(
 						draw2d::center::value_type::null(),

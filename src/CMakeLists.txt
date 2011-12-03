@@ -204,6 +204,7 @@ SET(
 	include/sanguis/client/draw2d/scene/world/vf/scalar.hpp
 	include/sanguis/client/draw2d/scene/world/vf/texpos.hpp
 	include/sanguis/client/draw2d/speed.hpp
+	include/sanguis/client/draw2d/speed_is_null.hpp
 	include/sanguis/client/draw2d/sprite/animation/loop_method.hpp
 	include/sanguis/client/draw2d/sprite/animation/texture_decl.hpp
 	include/sanguis/client/draw2d/sprite/animation/texture_fwd.hpp
@@ -1116,6 +1117,7 @@ SET(
 	src/client/draw2d/scene/world/sort_shapes.cpp
 	src/client/draw2d/scene/world/state.cpp
 	src/client/draw2d/scene/world/texture_slice.cpp
+	src/client/draw2d/speed_is_null.cpp
 	src/client/draw2d/sprite/index.cpp
 	src/client/draw2d/sunlight/day_gradient.cpp
 	src/client/draw2d/sunlight/gradients.cpp

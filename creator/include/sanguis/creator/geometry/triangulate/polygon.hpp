@@ -5,9 +5,9 @@
 #include <sanguis/creator/geometry/polygon.hpp>
 #include <sge/projectile/triangulation/default_tag.hpp>
 #include <sge/projectile/triangulation/triangulate.hpp>
+#include <fcppt/algorithm/array_map.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
-#include <fcppt/math/vector/transform.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
@@ -50,7 +50,9 @@ polygon(
 		++poly_it
 	)
 		converted.push_back(
-			fcppt::math::vector::transform(
+			fcppt::algorithm::array_map<
+				point_type
+			>(
 				fcppt::math::vector::structure_cast<
 					point_type
 				>(

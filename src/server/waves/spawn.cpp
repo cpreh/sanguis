@@ -6,13 +6,16 @@
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/space_unit.hpp>
+#include <sanguis/server/vector.hpp>
 #include <sanguis/random.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
-#include <fcppt/math/vector/unit_circle.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/tr1/random.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <cmath>
+#include <fcppt/config/external_end.hpp>
 
 void
 sanguis::server::waves::spawn(
@@ -72,8 +75,14 @@ sanguis::server::waves::spawn(
 	server::center const center(
 		scale
 		* radius
-		* fcppt::math::vector::unit_circle(
-			rand_angle
+		*
+		server::vector(
+			std::cos(
+				rand_angle
+			),
+			std::sin(
+				rand_angle
+			)
 		)
 	);
 

@@ -1,8 +1,9 @@
+#include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/translate/vector_to_client.hpp>
 #include <sanguis/client/draw2d/translate/scalar_to_client.hpp>
+#include <fcppt/algorithm/array_map.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
-#include <fcppt/math/vector/transform.hpp>
 
 sanguis::client::draw2d::vector2 const
 sanguis::client::draw2d::translate::vector_to_client(
@@ -13,7 +14,9 @@ sanguis::client::draw2d::translate::vector_to_client(
 		fcppt::math::vector::structure_cast<
 			draw2d::vector2
 		>(
-			fcppt::math::vector::transform(
+			fcppt::algorithm::array_map<
+				draw2d::vector2
+			>(
 				_vec,
 				&translate::scalar_to_client
 			)

@@ -14,8 +14,11 @@
 #include <sge/renderer/clear_flags_field.hpp>
 #include <sge/renderer/scoped_vertex_declaration.hpp>
 #include <sge/renderer/viewport_size.hpp>
+#include <sge/renderer/state/bool.hpp>
+#include <sge/renderer/state/dest_blend_func.hpp>
 #include <sge/renderer/state/int.hpp>
 #include <sge/renderer/state/scoped.hpp>
+#include <sge/renderer/state/source_blend_func.hpp>
 #include <sge/renderer/state/stencil_func.hpp>
 #include <sge/renderer/state/stencil_op.hpp>
 #include <sge/renderer/state/stencil_op_value.hpp>
@@ -23,13 +26,13 @@
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/sprite/render_one_advanced.hpp>
+#include <fcppt/algorithm/array_map.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/container/grid/object_impl.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/comparison.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
-#include <fcppt/math/dim/transform.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/round_div_int.hpp>
@@ -122,7 +125,9 @@ sanguis::client::draw2d::scene::world::state::draw(
 		),
 		upper(
 			world::clamp_pos(
-				fcppt::math::dim::transform(
+				fcppt::algorithm::array_map<
+					world::signed_pos
+				>(
 					(
 						int_translation
 						+

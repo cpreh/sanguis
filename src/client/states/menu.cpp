@@ -16,9 +16,8 @@
 #include <sanguis/cast_enum.hpp>
 #include <sanguis/exception.hpp>
 #include <sanguis/log_parameters.hpp>
+#include <sge/renderer/state/bool.hpp>
 #include <sge/renderer/state/list.hpp>
-#include <sge/renderer/state/var.hpp>
-#include <sge/renderer/state/trampoline.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/log/parameters/all.hpp>
 #include <fcppt/log/headers.hpp>

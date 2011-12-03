@@ -30,11 +30,10 @@
 #include <sge/renderer/onscreen_target.hpp>
 #include <sge/renderer/specular_color.hpp>
 #include <sge/renderer/shininess.hpp>
-#include <sge/renderer/state/scoped.hpp>
-#include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/bool.hpp>
-#include <sge/renderer/state/trampoline.hpp>
-#include <sge/renderer/state/var.hpp>
+#include <sge/renderer/state/color.hpp>
+#include <sge/renderer/state/list.hpp>
+#include <sge/renderer/state/scoped.hpp>
 #include <sge/sprite/default_equal.hpp>
 #include <sge/sprite/intrusive/system_impl.hpp>
 #include <sge/sprite/object_impl.hpp>

@@ -1,9 +1,11 @@
+#include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/particle/velocity_from_movement.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/hypersphere_to_cartesian.hpp>
 #include <fcppt/math/vector/normalize.hpp>
-#include <fcppt/math/vector/unit_circle.hpp>
+#include <fcppt/math/vector/static.hpp>
 #include <fcppt/random/uniform_impl.hpp>
 #include <fcppt/text.hpp>
 
@@ -22,8 +24,13 @@ sanguis::client::draw2d::particle::velocity_from_movement(
 	case movement_type::random:
 		return
 			draw2d::speed(
-				fcppt::math::vector::unit_circle(
-					_velocity_angle()
+				fcppt::math::vector::hypersphere_to_cartesian(
+					fcppt::math::vector::static_<
+						draw2d::funit,
+						1
+					>::type(
+						_velocity_angle()
+					)
 				)
 				* _velocity_value()
 			);

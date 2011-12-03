@@ -3,8 +3,9 @@
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/healthbar.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_time.hpp>
-#include <sanguis/client/draw2d/log_location.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
+#include <sanguis/client/draw2d/log_location.hpp>
+#include <sanguis/client/draw2d/speed_is_null.hpp>
 #include <sanguis/load/model/collection.hpp>
 #include <sanguis/load/model/object.hpp>
 #include <sanguis/duration_second.hpp>
@@ -17,7 +18,6 @@
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
-#include <fcppt/math/vector/is_null.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -242,12 +242,12 @@ sanguis::client::draw2d::entities::model::object::speed(
 	);
 
 	if(
-		fcppt::math::vector::is_null(
-			_speed.get()
+		draw2d::speed_is_null(
+			_speed
 		)
 		!=
-		fcppt::math::vector::is_null(
-			old_speed.get()
+		draw2d::speed_is_null(
+			old_speed
 		)
 	)
 		this->change_animation();
@@ -275,8 +275,8 @@ bool
 sanguis::client::draw2d::entities::model::object::walking() const
 {
 	return
-		!fcppt::math::vector::is_null(
-			this->speed().get()
+		!draw2d::speed_is_null(
+			this->speed()
 		);
 }
 
