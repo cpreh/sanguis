@@ -29,13 +29,13 @@
 #include <fcppt/algorithm/array_map.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/container/grid/object_impl.hpp>
+#include <fcppt/math/ceil_div.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/comparison.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
-#include <fcppt/math/round_div_int.hpp>
 #include <fcppt/tr1/functional.hpp>
 
 sanguis::client::draw2d::scene::world::state::state(
@@ -140,7 +140,7 @@ sanguis::client::draw2d::scene::world::state::draw(
 						)
 					),
 					std::tr1::bind(
-						fcppt::math::round_div_int<
+						fcppt::math::ceil_div<
 							batch_grid::size_type
 						>,
 						std::tr1::placeholders::_1,

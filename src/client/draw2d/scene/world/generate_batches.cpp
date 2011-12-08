@@ -13,12 +13,12 @@
 #include <fcppt/algorithm/array_map.hpp>
 #include <fcppt/container/grid/in_range.hpp>
 #include <fcppt/container/grid/object_impl.hpp>
+#include <fcppt/math/ceil_div.hpp>
 #include <fcppt/math/box/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/dim/output.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
-#include <fcppt/math/round_div_int.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/format.hpp>
@@ -54,7 +54,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				>(
 					generated.size(),
 					std::tr1::bind(
-						fcppt::math::round_div_int<
+						fcppt::math::ceil_div<
 							sanguis::creator::generator::size::value_type
 						>,
 						std::tr1::placeholders::_1,
