@@ -12,8 +12,9 @@
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
-#include <fcppt/tr1/random.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/random/uniform_real.hpp>
+#include <boost/random/variate_generator.hpp>
 #include <cmath>
 #include <fcppt/config/external_end.hpp>
 
@@ -28,11 +29,11 @@ sanguis::server::waves::spawn(
 {
 	// TODO: put this randomizer somewhere else!
 
-	typedef std::tr1::uniform_real<
+	typedef boost::uniform_real<
 		space_unit
 	> uniform_su;
 
-	typedef std::tr1::variate_generator<
+	typedef boost::random::variate_generator<
 		rand_gen_type,
 		uniform_su
 	> rng_type;

@@ -14,7 +14,7 @@
 #include <sge/projectile/body/user_data.hpp>
 #include <sge/projectile/body/solidity/solid.hpp>
 #include <sge/projectile/shape/triangle_mesh.hpp>
-#include <sge/projectile/shape/triangle_set.hpp>
+#include <sge/projectile/shape/triangle_sequence.hpp>
 #include <sge/projectile/vector2.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/comparison.hpp>
@@ -46,7 +46,7 @@ sanguis::server::world::create_static_body(
 	sanguis::creator::geometry::shape_container const &_shapes
 )
 {
-	sge::projectile::shape::triangle_set triangles;
+	sge::projectile::shape::triangle_sequence triangles;
 
 	for(
 		sanguis::creator::geometry::shape_container::const_iterator shape_it(
@@ -63,9 +63,9 @@ sanguis::server::world::create_static_body(
 		)
 			continue;
 
-		sge::projectile::shape::triangle_set const new_triangles(
+		sge::projectile::shape::triangle_sequence const new_triangles(
 			sanguis::creator::geometry::triangulate::polygon<
-				sge::projectile::shape::triangle_set
+				sge::projectile::shape::triangle_sequence
 			>(
 				shape_it->polygon(),
 				transform_coords
@@ -73,6 +73,7 @@ sanguis::server::world::create_static_body(
 		);
 
 		triangles.insert(
+			triangles.end(),
 			new_triangles.begin(),
 			new_triangles.end()
 		);

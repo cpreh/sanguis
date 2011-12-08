@@ -6,10 +6,13 @@
 #include <sanguis/server/entities/projectiles/simple_bullet.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/random.hpp>
-#include <fcppt/tr1/random.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/random/normal_distribution.hpp>
+#include <boost/random/variate_generator.hpp>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::server::weapons::shotgun::shotgun(
 	sanguis::diff_clock const &_diff_clock,
@@ -49,11 +52,11 @@ sanguis::server::weapons::shotgun::do_attack(
 	delayed_attack const &_attack
 )
 {
-	typedef std::tr1::normal_distribution<
+	typedef boost::random::normal_distribution<
 		space_unit
 	> normal_distribution_su;
 
-	typedef std::tr1::variate_generator<
+	typedef boost::random::variate_generator<
 		rand_gen_type,
 		normal_distribution_su
 	> rng_type;
