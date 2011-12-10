@@ -89,7 +89,6 @@ sanguis::client::draw2d::particle::object::object(
 				(sge::image::color::init::alpha() %= 1.0)
 			)
 		)
-		.elements()
 	),
 	animation_context_(
 		move(

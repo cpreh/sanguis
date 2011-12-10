@@ -73,7 +73,6 @@ sanguis::client::console::gfx::gfx(
 					renderer_
 				)
 			)
-			.elements()
 		),
 		_history_size
 	),

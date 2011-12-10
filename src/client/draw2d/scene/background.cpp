@@ -67,7 +67,6 @@ sanguis::client::draw2d::scene::background::background(
 		.visible(
 			true
 		)
-		.elements()
 	),
 	viewport_connection_(
 		_viewport_manager.manage_callback(

@@ -71,7 +71,6 @@ sanguis::client::draw2d::scene::world::state::state(
 				)
 			)
 		)
-		.elements()
 	)
 {
 }

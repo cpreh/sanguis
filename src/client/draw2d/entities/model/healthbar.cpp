@@ -50,7 +50,6 @@ sanguis::client::draw2d::entities::model::healthbar::healthbar(
 				sge::image::colors::black()
 			)
 		)
-		.elements()
 	),
 	foreground_(
 		sprite::colored::parameters()
@@ -60,7 +59,6 @@ sanguis::client::draw2d::entities::model::healthbar::healthbar(
 		.system(
 			_sys
 		)
-		.elements()
 	),
 	health_(0),
 	max_health_(0)

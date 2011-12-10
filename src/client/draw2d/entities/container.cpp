@@ -61,7 +61,6 @@ sanguis::client::draw2d::entities::container::container(
 				.size(
 					_dim
 				)
-				.elements()
 			)
 		);
 }
