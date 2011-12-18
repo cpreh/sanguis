@@ -16,8 +16,7 @@
 #include <sge/font/text/drawer_3d.hpp>
 #include <sge/font/metrics_ptr.hpp>
 #include <sge/systems/instance.hpp>
-#include <sge/window/instance_fwd.hpp>
-#include <awl/mainloop/io_service_shared_ptr.hpp>
+#include <awl/mainloop/io_service_scoped_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <fcppt/scoped_state_machine.hpp>
@@ -66,6 +65,8 @@ private:
 
 	config::settings::saver saver_;
 
+	awl::mainloop::io_service_scoped_ptr const io_service_;
+
 	sge::systems::instance const sys_;
 
 	sge::font::metrics_ptr const font_metrics_;
@@ -75,10 +76,6 @@ private:
 	sge::console::object console_;
 
 	client::console::gfx console_gfx_;
-
-	sge::window::instance &window_;
-
-	awl::mainloop::io_service_shared_ptr const io_service_;
 
 	load::context resources_;
 

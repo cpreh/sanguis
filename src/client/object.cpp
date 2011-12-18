@@ -18,9 +18,9 @@
 #include <sge/renderer/device.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/timer/elapsed_and_reset.hpp>
-#include <sge/window/instance.hpp>
 #include <awl/mainloop/io_service.hpp>
 #include <awl/mainloop/dispatcher.hpp>
+#include <awl/mainloop/asio/create_io_service_base.hpp>
 #include <fcppt/chrono/seconds.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/log/output.hpp>
@@ -44,9 +44,13 @@ sanguis::client::object::object(
 	saver_(
 		settings_
 	),
+	io_service_(
+		awl::mainloop::asio::create_io_service_base()
+	),
 	sys_(
 		args::sge_options(
-			_variables_map
+			_variables_map,
+			*io_service_
 		)
 	),
 	font_metrics_(
@@ -76,12 +80,6 @@ sanguis::client::object::object(
 		].as<
 			sge::console::output_line_limit
 		>()
-	),
-	window_(
-		sys_.window()
-	),
-	io_service_(
-		sys_.window().awl_io_service()
 	),
 	resources_(
 		sys_.image_system(),
@@ -195,7 +193,7 @@ sanguis::client::object::loop_handler()
 		)
 	)
 	{
-		window_.awl_dispatcher()->stop();
+		sys_.awl_dispatcher().stop();
 
 		io_service_->stop();
 

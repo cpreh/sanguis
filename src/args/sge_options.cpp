@@ -8,21 +8,20 @@
 #include <sge/systems/audio_loader.hpp>
 #include <sge/systems/audio_player_default.hpp>
 #include <sge/systems/cursor_option_field.hpp>
+#include <sge/systems/font.hpp>
 #include <sge/systems/image2d.hpp>
 #include <sge/systems/input.hpp>
 #include <sge/systems/input_helper.hpp>
 #include <sge/systems/input_helper_field.hpp>
 #include <sge/systems/list.hpp>
-#include <sge/systems/parameterless.hpp>
 #include <sge/systems/renderer.hpp>
 #include <sge/renderer/refresh_rate_dont_care.hpp>
 #include <sge/systems/window.hpp>
 #include <sge/viewport/fill_on_resize.hpp>
 #include <sge/window/dim.hpp>
-#include <sge/window/simple_parameters.hpp>
-#include <awl/mainloop/asio/create_io_service_base.hpp>
-#include <awl/mainloop/io_service_shared_ptr.hpp>
-#include <awl/mainloop/io_service.hpp>
+#include <sge/window/parameters.hpp>
+#include <sge/window/title.hpp>
+#include <awl/mainloop/io_service_fwd.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/container/bitfield/basic_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
@@ -30,7 +29,8 @@
 
 sge::systems::list const
 sanguis::args::sge_options(
-	boost::program_options::variables_map const &_vm
+	boost::program_options::variables_map const &_vm,
+	awl::mainloop::io_service &_io_service
 )
 {
 	sge::window::dim const dimensions(
@@ -42,15 +42,15 @@ sanguis::args::sge_options(
 		sge::systems::list()
 		(
 			sge::systems::window(
-				sge::window::simple_parameters(
-					FCPPT_TEXT("sanguis"),
+				sge::window::parameters(
+					sge::window::title(
+						FCPPT_TEXT("sanguis")
+					),
 					dimensions
 				)
 			)
 			.io_service(
-				awl::mainloop::io_service_shared_ptr(
-					awl::mainloop::asio::create_io_service_base()
-				)
+				_io_service
 			)
 		)
 		(
@@ -110,6 +110,6 @@ sanguis::args::sge_options(
 			sge::systems::audio_player_default()
 		)
 		(
-			sge::systems::parameterless::font // TODO: make sure that we can load truetype fonts, use a multi loader here as well!
+			sge::systems::font() // TODO: make sure that we can load truetype fonts, use a multi loader here as well!
 		);
 }
