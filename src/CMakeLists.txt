@@ -1493,7 +1493,9 @@ ADD_EXECUTABLE(
 TARGET_LINK_LIBRARIES(
 	sanguis
 	sanguiscreator
-	${Fcppt_LIBRARIES}
+	${Fcppt_core_LIBRARIES}
+	${Fcppt_filesystem_LIBRARIES}
+	${Fcppt_thread_LIBRARIES}
 	${Awl_LIBRARIES}
 	${SGE_LIBRARIES}
 	${CEGUI_LIBRARIES}
