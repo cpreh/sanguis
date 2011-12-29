@@ -3,6 +3,7 @@
 #include <sanguis/args/screen_mode.hpp>
 #include <sge/media/extension.hpp>
 #include <sge/media/extension_set.hpp>
+#include <sge/media/optional_extension_set.hpp>
 #include <sge/renderer/parameters.hpp>
 #include <sge/renderer/refresh_rate_dont_care.hpp>
 #include <sge/systems/audio_loader.hpp>
@@ -85,11 +86,13 @@ sanguis::args::sge_options(
 				sge::image::capabilities_field(
 					sge::image::capabilities::threadsafe
 				),
-				fcppt::assign::make_container<
-					sge::media::extension_set
-				>(
-					sge::media::extension(
-						FCPPT_TEXT("png")
+				sge::media::optional_extension_set(
+					fcppt::assign::make_container<
+						sge::media::extension_set
+					>(
+						sge::media::extension(
+							FCPPT_TEXT("png")
+						)
 					)
 				)
 			)
@@ -97,11 +100,13 @@ sanguis::args::sge_options(
 		(
 			sge::systems::audio_loader(
 				sge::audio::loader_capabilities_field::null(),
-				fcppt::assign::make_container<
-					sge::media::extension_set
-				>(
-					sge::media::extension(
-						FCPPT_TEXT("ogg")
+				sge::media::optional_extension_set(
+					fcppt::assign::make_container<
+						sge::media::extension_set
+					>(
+						sge::media::extension(
+							FCPPT_TEXT("ogg")
+						)
 					)
 				)
 			)
