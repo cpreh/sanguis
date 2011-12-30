@@ -1,7 +1,5 @@
 #include <sanguis/load/resource/texture_context_impl.hpp>
 #include <sge/texture/part_raw.hpp>
-#include <sge/renderer/texture/address_mode.hpp>
-#include <sge/renderer/texture/address_mode2.hpp>
 #include <sge/renderer/texture/create_planar_from_view.hpp>
 #include <sge/renderer/texture/mipmap/off.hpp>
 #include <sge/renderer/resource_flags_none.hpp>
@@ -65,9 +63,6 @@ sanguis::load::resource::texture_context_impl::update()
 					rend_,
 					future_.get()->view(),
 					sge::renderer::texture::mipmap::off(),
-					sge::renderer::texture::address_mode2(
-						sge::renderer::texture::address_mode::clamp
-					),
 					sge::renderer::resource_flags::none
 				)
 			);

@@ -83,10 +83,7 @@ sanguis::load::resource::textures::textures(
 					_renderer
 				),
 				sge::image::color::format::rgba8,
-				sge::renderer::texture::mipmap::off(),
-				sge::renderer::texture::address_mode2(
-					sge::renderer::texture::address_mode::repeat
-				)
+				sge::renderer::texture::mipmap::off()
 			)
 		)
 	),
