@@ -89,6 +89,7 @@ FIND_PACKAGE(
 	cegui
 	config
 	console
+	core
 	fonttext
 	image
 	image2d
