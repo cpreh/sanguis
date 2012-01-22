@@ -16,7 +16,7 @@ namespace client
 {
 
 typedef sge::sprite::object<
-	choices
+	client::choices
 > object;
 
 }

@@ -1,8 +1,8 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SPRITE_ROTATION_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SPRITE_ROTATION_HPP_INCLUDED
 
-#include <sanguis/client/draw2d/sprite/float_unit.hpp>
-#include <sge/sprite/rotation_type.hpp>
+#include <sanguis/client/draw2d/sprite/type_choices.hpp>
+#include <sge/sprite/types/rotation.hpp>
 
 namespace sanguis
 {
@@ -13,8 +13,8 @@ namespace draw2d
 namespace sprite
 {
 
-typedef sge::sprite::rotation_type<
-	sprite::float_unit
+typedef sge::sprite::types::rotation<
+	sprite::type_choices
 >::type rotation;
 
 }

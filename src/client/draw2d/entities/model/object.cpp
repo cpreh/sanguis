@@ -11,6 +11,7 @@
 #include <sanguis/duration_second.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sge/sprite/object_impl.hpp>
+#include <fcppt/assert/pre.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/log/parameters/all.hpp>
@@ -40,7 +41,7 @@ fcppt::log::object logger(
 sanguis::client::draw2d::entities::model::object::object(
 	model::parameters const &_param,
 	fcppt::string const &_name,
-	sprite::order const _order,
+	entities::order_vector const &_orders,
 	needs_healthbar::type const _needs_healthbar,
 	decay_option::type const _decay_option
 )
@@ -48,8 +49,7 @@ sanguis::client::draw2d::entities::model::object::object(
 	container(
 		_param.diff_clock(),
 		_param.normal_system(),
-		_param.collection()[_name].size(),
-		_order,
+		_orders,
 		fcppt::math::dim::structure_cast<
 			sprite::dim
 		>(
@@ -82,6 +82,12 @@ sanguis::client::draw2d::entities::model::object::object(
 	decay_option_(_decay_option),
 	parts_()
 {
+	FCPPT_ASSERT_PRE(
+		_param.collection()[_name].size()
+		==
+		_orders.size()
+	);
+
 	part_vector::size_type index(0);
 
 	load::model::object const &model(
@@ -180,11 +186,11 @@ sanguis::client::draw2d::entities::model::object::orientation(
 void
 sanguis::client::draw2d::entities::model::object::orientation(
 	sprite::rotation const _rot,
-	size_type const _index
+	sprite::index const _index
 )
 {
 	parts_.at(
-		_index
+		_index.get()
 	).orientation(
 		_rot
 	);

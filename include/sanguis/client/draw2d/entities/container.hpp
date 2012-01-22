@@ -2,12 +2,12 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_CONTAINER_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/entities/base.hpp>
+#include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/with_center.hpp>
 #include <sanguis/client/draw2d/entities/with_orientation.hpp>
 #include <sanguis/client/draw2d/entities/with_speed.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
-#include <sanguis/client/draw2d/sprite/order.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system.hpp>
@@ -49,13 +49,10 @@ class container
 		object
 	> sprite_vector;
 public:
-	typedef sprite_vector::size_type size_type;
-
 	container(
 		sanguis::diff_clock const &,
 		sprite::normal::system &,
-		size_type num_sprites,
-		sprite::order,
+		entities::order_vector const &,
 		sprite::dim const &
 	);
 

@@ -16,7 +16,7 @@ namespace client
 {
 
 typedef sge::sprite::parameters<
-	choices
+	client::choices
 > parameters;
 
 }

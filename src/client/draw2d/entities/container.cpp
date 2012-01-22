@@ -2,11 +2,12 @@
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/draw2d/sprite/normal/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
+#include <sanguis/client/draw2d/sprite/system_decl.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sge/sprite/parameters_impl.hpp>
-#include <sge/sprite/intrusive/system_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/center.hpp>
+#include <sge/sprite/intrusive/connection.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
 #include <fcppt/chrono/seconds.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
@@ -16,8 +17,7 @@
 sanguis::client::draw2d::entities::container::container(
 	sanguis::diff_clock const &_diff_clock,
 	sprite::normal::system &_normal_system,
-	size_type const _size,
-	sprite::order const _order,
+	entities::order_vector const &_orders,
 	sprite::dim const &_dim
 )
 :
@@ -41,22 +41,23 @@ sanguis::client::draw2d::entities::container::container(
 	)
 {
 	sprites_.reserve(
-		_size
+		_orders.size()
 	);
 
 	for(
-		size_type index = 0;
-		index < _size;
-		++index
+		entities::order_vector::const_iterator it(
+			_orders.begin()
+		);
+		it != _orders.end();
+		++it
 	)
 		sprites_.push_back(
 			object(
 				sprite::normal::parameters()
-				.system(
-					_normal_system
-				)
-				.order(
-					_order
+				.connection(
+					_normal_system.connection(
+						*it
+					)
 				)
 				.size(
 					_dim

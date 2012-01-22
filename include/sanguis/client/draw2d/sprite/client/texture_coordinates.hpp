@@ -1,8 +1,8 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SPRITE_CLIENT_TEXTURE_COORDINATES_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SPRITE_CLIENT_TEXTURE_COORDINATES_HPP_INCLUDED
 
-#include <sanguis/client/draw2d/sprite/client/type_choices.hpp>
-#include <sge/sprite/texture_coordinates.hpp>
+#include <sanguis/client/draw2d/sprite/type_choices.hpp>
+#include <sge/sprite/types/texture_coordinates.hpp>
 
 namespace sanguis
 {
@@ -15,8 +15,8 @@ namespace sprite
 namespace client
 {
 
-typedef sge::sprite::texture_coordinates<
-	sprite::client::type_choices::float_type
+typedef sge::sprite::types::texture_coordinates<
+	sprite::type_choices
 >::type texture_coordinates;
 
 }

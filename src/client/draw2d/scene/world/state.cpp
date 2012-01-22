@@ -22,10 +22,16 @@
 #include <sge/renderer/state/stencil_func.hpp>
 #include <sge/renderer/state/stencil_op.hpp>
 #include <sge/renderer/state/stencil_op_value.hpp>
-#include <sge/sprite/external_system_impl.hpp>
+#include <sge/sprite/buffers_option.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/parameters_impl.hpp>
-#include <sge/sprite/render_one_advanced.hpp>
+#include <sge/sprite/system_impl.hpp>
+#include <sge/sprite/render/geometry_options.hpp>
+#include <sge/sprite/render/matrix_options.hpp>
+#include <sge/sprite/render/one_with_options.hpp>
+#include <sge/sprite/render/options.hpp>
+#include <sge/sprite/render/state_options.hpp>
+#include <sge/sprite/render/vertex_options.hpp>
 #include <fcppt/algorithm/array_map.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/container/grid/object_impl.hpp>
@@ -56,7 +62,8 @@ sanguis::client::draw2d::scene::world::state::state(
 		)
 	),
 	stencil_sprite_system_(
-		renderer_
+		renderer_,
+		sge::sprite::buffers_option::dynamic
 	),
 	stencil_sprite_(
 		world::sprite::parameters()
@@ -203,16 +210,18 @@ sanguis::client::draw2d::scene::world::state::draw(
 				pos_y
 			);
 
-			sge::renderer::scoped_vertex_declaration const scoped_decl(
-				renderer_,
-				vertex_declaration_
-			);
+			{
+				sge::renderer::scoped_vertex_declaration const scoped_decl(
+					renderer_,
+					vertex_declaration_
+				);
 
-			(*batches_).at(
-				pos
-			).draw(
-				renderer_
-			);
+				(*batches_).at(
+					pos
+				).draw(
+					renderer_
+				);
+			}
 
 			stencil_sprite_.pos(
 				fcppt::math::dim::structure_cast<
@@ -236,9 +245,16 @@ sanguis::client::draw2d::scene::world::state::draw(
 					)
 				);
 
-				sge::sprite::render_one_advanced(
-					stencil_sprite_system_,
-					stencil_sprite_
+				sge::sprite::render::one_with_options<
+					sge::sprite::render::options<
+						sge::sprite::render::geometry_options::fill,
+						sge::sprite::render::matrix_options::nothing,
+						sge::sprite::render::state_options::nothing,
+						sge::sprite::render::vertex_options::declaration_and_buffer
+					>
+				>(
+					stencil_sprite_,
+					stencil_sprite_system_.buffers()
 				);
 			}
 		}

@@ -9,6 +9,7 @@
 #include <sanguis/client/draw2d/entities/model/needs_healthbar.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/container.hpp>
+#include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/with_health.hpp>
 #include <sanguis/client/draw2d/entities/with_weapon.hpp>
 #include <sanguis/client/draw2d/sprite/index_fwd.hpp>
@@ -49,7 +50,7 @@ public:
 	object(
 		model::parameters const &,
 		fcppt::string const &name,
-		sprite::order,
+		entities::order_vector const &,
 		needs_healthbar::type,
 		decay_option::type
 	);
@@ -77,7 +78,7 @@ protected:
 	void
 	orientation(
 		sprite::rotation,
-		size_type index
+		sprite::index
 	);
 
 	// base overrides

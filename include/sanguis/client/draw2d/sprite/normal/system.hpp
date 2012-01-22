@@ -1,8 +1,8 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SPRITE_NORMAL_SYSTEM_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SPRITE_NORMAL_SYSTEM_HPP_INCLUDED
 
+#include <sanguis/client/draw2d/sprite/system_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/normal/choices.hpp>
-#include <sge/sprite/system.hpp>
 
 namespace sanguis
 {
@@ -15,9 +15,9 @@ namespace sprite
 namespace normal
 {
 
-typedef sge::sprite::system<
-	choices
->::type system;
+typedef sanguis::client::draw2d::sprite::system<
+	normal::choices
+> system;
 
 }
 }

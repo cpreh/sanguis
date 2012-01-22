@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_SPRITE_SYSTEM_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/scene/world/sprite/choices.hpp>
-#include <sge/sprite/system.hpp>
+#include <sge/sprite/system_fwd.hpp>
 
 namespace sanguis
 {
@@ -19,7 +19,7 @@ namespace sprite
 
 typedef sge::sprite::system<
 	sprite::choices
->::type system;
+> system;
 
 }
 }

@@ -5,12 +5,13 @@
 #include <sanguis/client/draw2d/sprite/particle/texture_animation.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
+#include <sanguis/client/draw2d/sprite/system_decl.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/load/model/animation/context.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sge/image/color/rgba8.hpp>
 #include <sge/image/color/init.hpp>
-#include <sge/sprite/intrusive/system_impl.hpp>
+#include <sge/sprite/intrusive/connection.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/sprite/center.hpp>
@@ -60,12 +61,11 @@ sanguis::client::draw2d::particle::object::object(
 	),
 	sprite_(
 		sprite::particle::parameters()
-		.system(
-			_particle_system
-		)
-		.order(
-			particle::z_ordering(
-				_type
+		.connection(
+			_particle_system.connection(
+				particle::z_ordering(
+					_type
+				)
 			)
 		)
 		.size(

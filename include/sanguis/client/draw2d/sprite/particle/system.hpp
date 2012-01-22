@@ -1,8 +1,8 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SPRITE_PARTICLE_SYSTEM_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SPRITE_PARTICLE_SYSTEM_HPP_INCLUDED
 
+#include <sanguis/client/draw2d/sprite/system_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/particle/choices.hpp>
-#include <sge/sprite/system.hpp>
 
 namespace sanguis
 {
@@ -15,9 +15,9 @@ namespace sprite
 namespace particle
 {
 
-typedef sge::sprite::system<
-	choices
->::type system;
+typedef sanguis::client::draw2d::sprite::system<
+	particle::choices
+> system;
 
 }
 }

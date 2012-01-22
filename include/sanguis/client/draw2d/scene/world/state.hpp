@@ -10,7 +10,7 @@
 #include <sanguis/load/resource/textures_fwd.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/renderer/vertex_declaration_fwd.hpp>
-#include <sge/sprite/external_system_decl.hpp>
+#include <sge/sprite/system_decl.hpp>
 #include <sge/sprite/object_decl.hpp>
 #include <fcppt/container/grid/object_decl.hpp>
 #include <fcppt/noncopyable.hpp>

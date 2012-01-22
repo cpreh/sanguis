@@ -12,6 +12,7 @@
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/message/environment_fwd.hpp>
 #include <sanguis/client/draw2d/message/dispatcher_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/system_decl.hpp>
 #include <sanguis/client/draw2d/sprite/client/system.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system.hpp>
 #include <sanguis/client/draw2d/sprite/colored/system.hpp>
@@ -33,7 +34,6 @@
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/renderer/screen_size.hpp>
 #include <sge/renderer/viewport.hpp>
-#include <sge/sprite/intrusive/system_decl.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/math/vector/basic_decl.hpp>

@@ -9,6 +9,7 @@
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/center.hpp>
+#include <fcppt/assign/make_container.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/normalize.hpp>
@@ -32,7 +33,13 @@ sanguis::client::draw2d::entities::bullet::bullet(
 	model::object(
 		_param,
 		_name,
-		z_ordering::bullet,
+		fcppt::assign::make_container<
+			entities::order_vector
+		>(
+			z_ordering::bullet
+		)(
+			z_ordering::bullet
+		),
 		model::needs_healthbar::no,
 		model::decay_option::immediate
 	),

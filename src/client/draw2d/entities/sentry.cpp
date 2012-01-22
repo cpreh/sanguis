@@ -2,8 +2,7 @@
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
 #include <sanguis/load/friend_name.hpp>
-#include <sge/sprite/object_impl.hpp>
-#include <sge/sprite/intrusive/system_impl.hpp>
+#include <fcppt/assign/make_container.hpp>
 
 namespace
 {
@@ -23,22 +22,17 @@ sanguis::client::draw2d::entities::sentry::sentry(
 		load::friend_name(
 			friend_type::sentry
 		),
-		z_ordering::model_generic,
+		fcppt::assign::make_container<
+			entities::order_vector
+		>(
+			z_ordering::player_lower
+		)(
+			z_ordering::player_upper
+		),
 		model::needs_healthbar::yes,
 		model::decay_option::delayed
 	)
 {
-	this->at(
-		bottom
-	).order(
-		z_ordering::player_lower
-	);
-
-	this->at(
-		top
-	).order(
-		z_ordering::player_upper
-	); // FIXME
 }
 
 sanguis::client::draw2d::entities::sentry::~sentry()
@@ -52,6 +46,6 @@ sanguis::client::draw2d::entities::sentry::orientation(
 {
 	model::object::orientation(
 		_rotation,
-		top.get() // TODO
+		top // TODO
 	);
 }

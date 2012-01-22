@@ -4,15 +4,15 @@
 #include <sanguis/client/draw2d/sprite/client/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
+#include <sanguis/client/draw2d/sprite/system_decl.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/load/context.hpp>
 #include <sanguis/load/resource/context.hpp>
 #include <sanguis/load/resource/textures.hpp>
 #include <sanguis/load/resource/texture_identifier.hpp>
-#include <sge/sprite/default_equal.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/parameters_impl.hpp>
-#include <sge/sprite/intrusive/system_impl.hpp>
+#include <sge/sprite/intrusive/connection.hpp>
 #include <sge/viewport/manager.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
@@ -36,8 +36,10 @@ sanguis::client::draw2d::scene::background::background(
 	),
 	sprite_(
 		draw2d::sprite::client::parameters()
-		.system(
-			client_system_
+		.connection(
+			client_system_.connection(
+				draw2d::z_ordering::background
+			)
 		)
 		.pos(
 			draw2d::sprite::point::null()
@@ -53,9 +55,6 @@ sanguis::client::draw2d::scene::background::background(
 		)
 		.texture(
 			texture_
-		)
-		.order(
-			draw2d::z_ordering::background
 		)
 		.texture_coordinates(
 			scene::background_texture_coordinates(
@@ -96,9 +95,8 @@ sanguis::client::draw2d::scene::background::render(
 		)
 	);
 
-	client_system_.render_advanced(
-		draw2d::z_ordering::background,
-		sge::sprite::default_equal()
+	client_system_.render(
+		draw2d::z_ordering::background
 	);
 }
 

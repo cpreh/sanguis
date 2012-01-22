@@ -2,8 +2,8 @@
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_SPRITE_CHOICES_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/scene/world/sprite/type_choices.hpp>
-#include <sge/sprite/choices.hpp>
-#include <sge/sprite/with_dim.hpp>
+#include <sge/sprite/config/choices.hpp>
+#include <sge/sprite/config/normal_size.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -21,11 +21,10 @@ namespace world
 namespace sprite
 {
 
-typedef sge::sprite::choices<
+typedef sge::sprite::config::choices<
 	sprite::type_choices,
-	boost::mpl::vector1<
-		sge::sprite::with_dim
-	>
+	sge::sprite::config::normal_size,
+	boost::mpl::vector0<>
 > choices;
 
 }

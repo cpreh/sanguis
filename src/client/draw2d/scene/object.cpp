@@ -34,10 +34,9 @@
 #include <sge/renderer/state/color.hpp>
 #include <sge/renderer/state/list.hpp>
 #include <sge/renderer/state/scoped.hpp>
-#include <sge/sprite/default_equal.hpp>
-#include <sge/sprite/intrusive/system_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/projection_matrix.hpp>
+#include <sge/sprite/render/states.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/math/matrix/arithmetic.hpp>
 #include <fcppt/math/matrix/basic_impl.hpp>
@@ -47,6 +46,7 @@
 #include <fcppt/function/object.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/cref.hpp>
+#include <fcppt/foreach_enumerator_start_end.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
@@ -68,12 +68,24 @@ sanguis::client::draw2d::scene::object::object(
 )
 :
 	diff_clock_(),
-	resources_(_resources),
-	rend_(_rend),
-	normal_system_(rend_),
-	colored_system_(rend_),
-	client_system_(rend_),
-	particle_system_(rend_),
+	resources_(
+		_resources
+	),
+	rend_(
+		_rend
+	),
+	normal_system_(
+		rend_
+	),
+	colored_system_(
+		rend_
+	),
+	client_system_(
+		rend_
+	),
+	particle_system_(
+		rend_
+	),
 	hud_(
 		fcppt::make_unique_ptr<
 			scene::hud
@@ -99,8 +111,12 @@ sanguis::client::draw2d::scene::object::object(
 			)
 		)
 	),
-	audio_listener_(_audio_listener),
-	paused_(false),
+	audio_listener_(
+		_audio_listener
+	),
+	paused_(
+		false
+	),
 	player_center_(
 		sprite::center::value_type::null()
 	),
@@ -344,7 +360,7 @@ sanguis::client::draw2d::scene::object::render_systems()
 {
 	sge::renderer::state::scoped const state(
 		rend_,
-		sge::sprite::render_states<
+		sge::sprite::render::states<
 			client::draw2d::sprite::normal::choices
 		>()
 	);
@@ -363,28 +379,24 @@ sanguis::client::draw2d::scene::object::render_systems()
 
 	this->render_lighting();
 
-	for(
-		sprite::order index(
-			z_ordering::smoke
-		);
-		index <= z_ordering::rubble;
-		++index
+	FCPPT_FOREACH_ENUMERATOR_START_END(
+		index,
+		z_ordering,
+		z_ordering::smoke,
+		z_ordering::rubble
 	)
-		particle_system_.render_advanced(
-			index,
-			sge::sprite::default_equal()
+		particle_system_.render(
+			index
 		);
 
-	for(
-		sprite::order index(
-			z_ordering::healthbar_lower
-		);
-		index <= z_ordering::healthbar_upper;
-		++index
+	FCPPT_FOREACH_ENUMERATOR_START_END(
+		index,
+		z_ordering,
+		z_ordering::healthbar_lower,
+		z_ordering::healthbar_upper
 	)
-		colored_system_.render_advanced(
-			index,
-			sge::sprite::default_equal()
+		colored_system_.render(
+			index
 		);
 
 	rend_.transform(
@@ -442,16 +454,14 @@ sanguis::client::draw2d::scene::object::render_lighting()
 		translation
 	);
 
-	for(
-		sprite::order index(
-			z_ordering::corpses
-		);
-		index <= z_ordering::player_upper;
-		++index
+	FCPPT_FOREACH_ENUMERATOR_START_END(
+		index,
+		z_ordering,
+		z_ordering::corpses,
+		z_ordering::player_upper
 	)
-		normal_system_.render_advanced(
-			index,
-			sge::sprite::default_equal()
+		normal_system_.render(
+			index
 		);
 }
 

@@ -95,6 +95,7 @@ SET(
 	include/sanguis/client/draw2d/entities/model/part_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/sound_state.hpp
 	include/sanguis/client/draw2d/entities/model/sound_state_fwd.hpp
+	include/sanguis/client/draw2d/entities/order_vector.hpp
 	include/sanguis/client/draw2d/entities/own.hpp
 	include/sanguis/client/draw2d/entities/own_auto_ptr.hpp
 	include/sanguis/client/draw2d/entities/own_fwd.hpp
@@ -215,14 +216,12 @@ SET(
 	include/sanguis/client/draw2d/sprite/client/parameters.hpp
 	include/sanguis/client/draw2d/sprite/client/system.hpp
 	include/sanguis/client/draw2d/sprite/client/texture_coordinates.hpp
-	include/sanguis/client/draw2d/sprite/client/type_choices.hpp
 	include/sanguis/client/draw2d/sprite/colored/choices.hpp
 	include/sanguis/client/draw2d/sprite/colored/color.hpp
 	include/sanguis/client/draw2d/sprite/colored/color_format.hpp
 	include/sanguis/client/draw2d/sprite/colored/object.hpp
 	include/sanguis/client/draw2d/sprite/colored/parameters.hpp
 	include/sanguis/client/draw2d/sprite/colored/system.hpp
-	include/sanguis/client/draw2d/sprite/colored/type_choices.hpp
 	include/sanguis/client/draw2d/sprite/dim.hpp
 	include/sanguis/client/draw2d/sprite/float_unit.hpp
 	include/sanguis/client/draw2d/sprite/index.hpp
@@ -233,16 +232,20 @@ SET(
 	include/sanguis/client/draw2d/sprite/normal/parameters.hpp
 	include/sanguis/client/draw2d/sprite/normal/system.hpp
 	include/sanguis/client/draw2d/sprite/normal/texture_animation.hpp
-	include/sanguis/client/draw2d/sprite/normal/type_choices.hpp
 	include/sanguis/client/draw2d/sprite/order.hpp
 	include/sanguis/client/draw2d/sprite/particle/choices.hpp
+	include/sanguis/client/draw2d/sprite/particle/color.hpp
+	include/sanguis/client/draw2d/sprite/particle/color_format.hpp
 	include/sanguis/client/draw2d/sprite/particle/object.hpp
 	include/sanguis/client/draw2d/sprite/particle/parameters.hpp
 	include/sanguis/client/draw2d/sprite/particle/system.hpp
 	include/sanguis/client/draw2d/sprite/particle/texture_animation.hpp
-	include/sanguis/client/draw2d/sprite/particle/type_choices.hpp
 	include/sanguis/client/draw2d/sprite/point.hpp
 	include/sanguis/client/draw2d/sprite/rotation.hpp
+	include/sanguis/client/draw2d/sprite/system_decl.hpp
+	include/sanguis/client/draw2d/sprite/system_fwd.hpp
+	include/sanguis/client/draw2d/sprite/system_impl.hpp
+	include/sanguis/client/draw2d/sprite/type_choices.hpp
 	include/sanguis/client/draw2d/sprite/unit.hpp
 	include/sanguis/client/draw2d/sunlight/basic_gradients.hpp
 	include/sanguis/client/draw2d/sunlight/basic_gradients_fwd.hpp
@@ -1118,7 +1121,11 @@ SET(
 	src/client/draw2d/scene/world/state.cpp
 	src/client/draw2d/scene/world/texture_slice.cpp
 	src/client/draw2d/speed_is_null.cpp
+	src/client/draw2d/sprite/client/system.cpp
+	src/client/draw2d/sprite/colored/system.cpp
 	src/client/draw2d/sprite/index.cpp
+	src/client/draw2d/sprite/normal/system.cpp
+	src/client/draw2d/sprite/particle/system.cpp
 	src/client/draw2d/sunlight/day_gradient.cpp
 	src/client/draw2d/sunlight/gradients.cpp
 	src/client/draw2d/sunlight/make_color.cpp

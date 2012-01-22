@@ -1,9 +1,11 @@
+#include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/player.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assign/make_container.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/signed_angle_between_cast.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
@@ -29,7 +31,13 @@ sanguis::client::draw2d::entities::player::player(
 	model::object(
 		_param,
 		FCPPT_TEXT("player"),
-		z_ordering::model_generic,
+		fcppt::assign::make_container<
+			entities::order_vector
+		>(
+			z_ordering::player_lower
+		)(
+			z_ordering::player_upper
+		),
 		model::needs_healthbar::yes,
 		model::decay_option::delayed
 	),
@@ -41,17 +49,6 @@ sanguis::client::draw2d::entities::player::player(
 		)
 	)
 {
-	this->at(
-		bottom
-	).order(
-		z_ordering::player_lower
-	);
-
-	this->at(
-		top
-	).order(
-		z_ordering::player_upper
-	);
 }
 
 sanguis::client::draw2d::entities::player::~player()
@@ -77,7 +74,7 @@ sanguis::client::draw2d::entities::player::speed(
 				vector2::null(),
 				_speed.get()
 			),
-			0
+			bottom
 		);
 }
 
@@ -88,7 +85,7 @@ sanguis::client::draw2d::entities::player::orientation(
 {
 	model::object::orientation(
 		_orientation,
-		top.get() // TODO
+		top // TODO
 	); // TODO: better interface for this in model
 }
 

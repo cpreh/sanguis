@@ -1,13 +1,14 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SPRITE_CLIENT_CHOICES_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SPRITE_CLIENT_CHOICES_HPP_INCLUDED
 
-#include <sanguis/client/draw2d/sprite/client/type_choices.hpp>
-#include <sge/sprite/choices.hpp>
-#include <sge/sprite/with_dim.hpp>
-#include <sge/sprite/with_texture_coordinates.hpp>
-#include <sge/sprite/with_texture.hpp>
-#include <sge/sprite/with_visibility.hpp>
-#include <sge/sprite/intrusive/tag.hpp>
+#include <sanguis/client/draw2d/sprite/type_choices.hpp>
+#include <sge/sprite/config/choices.hpp>
+#include <sge/sprite/config/intrusive.hpp>
+#include <sge/sprite/config/normal_size.hpp>
+#include <sge/sprite/config/texture_coordinates.hpp>
+#include <sge/sprite/config/texture_level_count.hpp>
+#include <sge/sprite/config/with_texture.hpp>
+#include <sge/sprite/config/with_visibility.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -23,14 +24,18 @@ namespace sprite
 namespace client
 {
 
-typedef sge::sprite::choices<
-	type_choices,
-	boost::mpl::vector5<
-		sge::sprite::with_dim,
-		sge::sprite::with_texture_coordinates,
-		sge::sprite::with_texture,
-		sge::sprite::with_visibility,
-		sge::sprite::intrusive::tag
+typedef sge::sprite::config::choices<
+	sprite::type_choices,
+	sge::sprite::config::normal_size,
+	boost::mpl::vector3<
+		sge::sprite::config::with_texture<
+			sge::sprite::config::texture_level_count<
+				1u
+			>,
+			sge::sprite::config::texture_coordinates::custom
+		>,
+		sge::sprite::config::with_visibility,
+		sge::sprite::config::intrusive
 	>
 > choices;
 

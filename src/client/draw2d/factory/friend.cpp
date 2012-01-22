@@ -1,9 +1,11 @@
 #include <sanguis/client/draw2d/factory/friend.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
+#include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/sentry.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/load/friend_name.hpp>
 #include <sanguis/friend_type.hpp>
+#include <fcppt/assign/make_container.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -32,7 +34,11 @@ sanguis::client::draw2d::factory::friend_(
 					load::friend_name(
 						_etype
 					),
-					z_ordering::model_generic,
+					fcppt::assign::make_container<
+						entities::order_vector
+					>(
+						z_ordering::model_generic
+					),
 					entities::model::needs_healthbar::yes,
 					entities::model::decay_option::delayed
 				)

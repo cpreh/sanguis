@@ -1,8 +1,10 @@
 #include <sanguis/client/draw2d/entities/aoe_bullet.hpp>
 #include <sanguis/client/draw2d/entities/explosion.hpp>
+#include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/own_auto_ptr.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
+#include <fcppt/assign/make_container.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_auto_ptr.hpp>
@@ -20,7 +22,11 @@ sanguis::client::draw2d::entities::aoe_bullet::aoe_bullet(
 	model::object(
 		_param,
 		_name,
-		z_ordering::bullet,
+		fcppt::assign::make_container<
+			entities::order_vector
+		>(
+			z_ordering::bullet
+		),
 		model::needs_healthbar::no,
 		model::decay_option::immediate
 	),
