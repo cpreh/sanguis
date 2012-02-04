@@ -189,10 +189,10 @@ SET(
 	include/sanguis/client/draw2d/scene/world/object_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/signed_pos.hpp
 	include/sanguis/client/draw2d/scene/world/sort_shapes.hpp
+	include/sanguis/client/draw2d/scene/world/sprite/buffers.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/choices.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/object.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/parameters.hpp
-	include/sanguis/client/draw2d/scene/world/sprite/system.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/type_choices.hpp
 	include/sanguis/client/draw2d/scene/world/state.hpp
 	include/sanguis/client/draw2d/scene/world/state_fwd.hpp

@@ -4,16 +4,19 @@
 #include <sanguis/client/draw2d/sprite/order.hpp>
 #include <sanguis/client/draw2d/sprite/system_decl.hpp>
 #include <sge/renderer/device_fwd.hpp>
-#include <sge/sprite/buffers_option.hpp>
-#include <sge/sprite/system_impl.hpp>
+#include <sge/sprite/buffers/option.hpp>
+#include <sge/sprite/buffers/parameters.hpp>
+#include <sge/sprite/buffers/single_impl.hpp>
+#include <sge/sprite/buffers/with_declaration_impl.hpp>
 #include <sge/sprite/compare/default.hpp>
 #include <sge/sprite/intrusive/ordered_collection_impl.hpp>
-#include <sge/sprite/render/geometry_options.hpp>
+#include <sge/sprite/process/geometry_options.hpp>
+#include <sge/sprite/process/options.hpp>
+#include <sge/sprite/process/with_options.hpp>
 #include <sge/sprite/render/matrix_options.hpp>
 #include <sge/sprite/render/options.hpp>
 #include <sge/sprite/render/state_options.hpp>
 #include <sge/sprite/render/vertex_options.hpp>
-#include <sge/sprite/render/with_options.hpp>
 
 template<
 	typename Choices
@@ -24,9 +27,9 @@ sanguis::client::draw2d::sprite::system<
 	sge::renderer::device &_renderer
 )
 :
-	system_(
+	buffers_(
 		_renderer,
-		sge::sprite::buffers_option::dynamic
+		sge::sprite::buffers::option::dynamic
 	),
 	collection_()
 {
@@ -70,18 +73,20 @@ sanguis::client::draw2d::sprite::system<
 	sprite::order const _order
 )
 {
-	sge::sprite::render::with_options<
-		sge::sprite::render::options<
-			sge::sprite::render::geometry_options::fill,
-			sge::sprite::render::matrix_options::nothing,
-			sge::sprite::render::state_options::nothing,
-			sge::sprite::render::vertex_options::declaration_and_buffer
+	sge::sprite::process::with_options<
+		sge::sprite::process::options<
+			sge::sprite::process::geometry_options::fill,
+			sge::sprite::render::options<
+				sge::sprite::render::matrix_options::nothing,
+				sge::sprite::render::state_options::nothing,
+				sge::sprite::render::vertex_options::declaration_and_buffer
+			>
 		>
 	>(
 		collection_.get(
 			_order
 		).range(),
-		system_.buffers(),
+		buffers_.buffers(),
 		sge::sprite::compare::default_()
 	);
 }
@@ -94,7 +99,7 @@ sanguis::client::draw2d::sprite::system<
 	Choices
 >::renderer() const
 {
-	return system_.buffers().renderer();
+	return buffers_.parameters().renderer();
 }
 
 #endif

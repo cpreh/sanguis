@@ -22,13 +22,15 @@
 #include <sge/renderer/state/stencil_func.hpp>
 #include <sge/renderer/state/stencil_op.hpp>
 #include <sge/renderer/state/stencil_op_value.hpp>
-#include <sge/sprite/buffers_option.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/parameters_impl.hpp>
-#include <sge/sprite/system_impl.hpp>
-#include <sge/sprite/render/geometry_options.hpp>
+#include <sge/sprite/buffers/option.hpp>
+#include <sge/sprite/buffers/single_impl.hpp>
+#include <sge/sprite/buffers/with_declaration_impl.hpp>
+#include <sge/sprite/process/geometry_options.hpp>
+#include <sge/sprite/process/one_with_options.hpp>
+#include <sge/sprite/process/options.hpp>
 #include <sge/sprite/render/matrix_options.hpp>
-#include <sge/sprite/render/one_with_options.hpp>
 #include <sge/sprite/render/options.hpp>
 #include <sge/sprite/render/state_options.hpp>
 #include <sge/sprite/render/vertex_options.hpp>
@@ -61,9 +63,9 @@ sanguis::client::draw2d::scene::world::state::state(
 			_textures
 		)
 	),
-	stencil_sprite_system_(
+	stencil_sprite_buffers_(
 		renderer_,
-		sge::sprite::buffers_option::dynamic
+		sge::sprite::buffers::option::dynamic
 	),
 	stencil_sprite_(
 		world::sprite::parameters()
@@ -245,16 +247,18 @@ sanguis::client::draw2d::scene::world::state::draw(
 					)
 				);
 
-				sge::sprite::render::one_with_options<
-					sge::sprite::render::options<
-						sge::sprite::render::geometry_options::fill,
-						sge::sprite::render::matrix_options::nothing,
-						sge::sprite::render::state_options::nothing,
-						sge::sprite::render::vertex_options::declaration_and_buffer
+				sge::sprite::process::one_with_options<
+					sge::sprite::process::options<
+						sge::sprite::process::geometry_options::fill,
+						sge::sprite::render::options<
+							sge::sprite::render::matrix_options::nothing,
+							sge::sprite::render::state_options::nothing,
+							sge::sprite::render::vertex_options::declaration_and_buffer
+						>
 					>
 				>(
 					stencil_sprite_,
-					stencil_sprite_system_.buffers()
+					stencil_sprite_buffers_.buffers()
 				);
 			}
 		}

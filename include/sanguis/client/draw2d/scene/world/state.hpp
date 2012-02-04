@@ -3,15 +3,16 @@
 
 #include <sanguis/client/draw2d/scene/world/state_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
+#include <sanguis/client/draw2d/scene/world/sprite/buffers.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/object.hpp>
-#include <sanguis/client/draw2d/scene/world/sprite/system.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/load/resource/textures_fwd.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/renderer/vertex_declaration_fwd.hpp>
-#include <sge/sprite/system_decl.hpp>
 #include <sge/sprite/object_decl.hpp>
+#include <sge/sprite/buffers/single_decl.hpp>
+#include <sge/sprite/buffers/with_declaration_decl.hpp>
 #include <fcppt/container/grid/object_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
@@ -59,7 +60,7 @@ private:
 
 	batch_grid_scoped_ptr const batches_;
 
-	world::sprite::system stencil_sprite_system_;
+	world::sprite::buffers stencil_sprite_buffers_;
 
 	world::sprite::object stencil_sprite_;
 };

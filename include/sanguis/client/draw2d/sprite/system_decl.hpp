@@ -5,7 +5,8 @@
 #include <sanguis/client/draw2d/sprite/system_fwd.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/sprite/intrusive/ordered_collection_decl.hpp>
-#include <sge/sprite/system_decl.hpp>
+#include <sge/sprite/buffers/single_decl.hpp>
+#include <sge/sprite/buffers/with_declaration_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -53,11 +54,13 @@ public:
 	sge::renderer::device &
 	renderer() const;
 private:
-	typedef sge::sprite::system<
-		Choices
-	> sge_system;
+	typedef sge::sprite::buffers::with_declaration<
+		sge::sprite::buffers::single<
+			Choices
+		>
+	> sge_buffers;
 
-	sge_system system_;
+	sge_buffers buffers_;
 
 	collection collection_;
 };

@@ -8,7 +8,6 @@
 #include <sge/sprite/config/texture_coordinates.hpp>
 #include <sge/sprite/config/texture_level_count.hpp>
 #include <sge/sprite/config/with_texture.hpp>
-#include <sge/sprite/config/with_visibility.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -27,14 +26,13 @@ namespace client
 typedef sge::sprite::config::choices<
 	sprite::type_choices,
 	sge::sprite::config::normal_size,
-	boost::mpl::vector3<
+	boost::mpl::vector2<
 		sge::sprite::config::with_texture<
 			sge::sprite::config::texture_level_count<
 				1u
 			>,
 			sge::sprite::config::texture_coordinates::custom
 		>,
-		sge::sprite::config::with_visibility,
 		sge::sprite::config::intrusive
 	>
 > choices;
