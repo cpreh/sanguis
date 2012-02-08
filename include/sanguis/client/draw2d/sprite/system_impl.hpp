@@ -86,7 +86,7 @@ sanguis::client::draw2d::sprite::system<
 		collection_.get(
 			_order
 		).range(),
-		buffers_.buffers(),
+		buffers_,
 		sge::sprite::compare::default_()
 	);
 }

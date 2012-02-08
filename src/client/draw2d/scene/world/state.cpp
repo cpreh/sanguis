@@ -258,7 +258,7 @@ sanguis::client::draw2d::scene::world::state::draw(
 					>
 				>(
 					stencil_sprite_,
-					stencil_sprite_buffers_.buffers()
+					stencil_sprite_buffers_
 				);
 			}
 		}
