@@ -249,7 +249,7 @@ sanguis::client::draw2d::scene::world::state::draw(
 
 				sge::sprite::process::one_with_options<
 					sge::sprite::process::options<
-						sge::sprite::process::geometry_options::fill,
+						sge::sprite::process::geometry_options::update,
 						sge::sprite::render::options<
 							sge::sprite::render::matrix_options::nothing,
 							sge::sprite::render::state_options::nothing,

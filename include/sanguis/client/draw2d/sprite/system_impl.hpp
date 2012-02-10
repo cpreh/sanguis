@@ -9,7 +9,7 @@
 #include <sge/sprite/buffers/single_impl.hpp>
 #include <sge/sprite/buffers/with_declaration_impl.hpp>
 #include <sge/sprite/compare/default.hpp>
-#include <sge/sprite/intrusive/ordered_collection_impl.hpp>
+#include <sge/sprite/intrusive/ordered/collection_impl.hpp>
 #include <sge/sprite/process/geometry_options.hpp>
 #include <sge/sprite/process/options.hpp>
 #include <sge/sprite/process/with_options.hpp>
@@ -75,7 +75,7 @@ sanguis::client::draw2d::sprite::system<
 {
 	sge::sprite::process::with_options<
 		sge::sprite::process::options<
-			sge::sprite::process::geometry_options::fill,
+			sge::sprite::process::geometry_options::update,
 			sge::sprite::render::options<
 				sge::sprite::render::matrix_options::nothing,
 				sge::sprite::render::state_options::nothing,

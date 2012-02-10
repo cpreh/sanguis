@@ -4,7 +4,7 @@
 #include <sanguis/client/draw2d/sprite/order.hpp>
 #include <sanguis/client/draw2d/sprite/system_fwd.hpp>
 #include <sge/renderer/device_fwd.hpp>
-#include <sge/sprite/intrusive/ordered_collection_decl.hpp>
+#include <sge/sprite/intrusive/ordered/collection_decl.hpp>
 #include <sge/sprite/buffers/single_decl.hpp>
 #include <sge/sprite/buffers/with_declaration_decl.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -27,7 +27,7 @@ class system
 		system
 	);
 
-	typedef sge::sprite::intrusive::ordered_collection<
+	typedef sge::sprite::intrusive::ordered::collection<
 		Choices,
 		sprite::order
 	> collection;
