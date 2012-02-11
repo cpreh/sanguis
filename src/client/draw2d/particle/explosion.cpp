@@ -8,7 +8,7 @@
 #include <fcppt/cref.hpp>
 #include <fcppt/foreach_enumerator.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/minmax_pair_impl.hpp>
+#include <fcppt/homogenous_pair_impl.hpp>
 
 sanguis::client::draw2d::particle::explosion::explosion(
 	sanguis::diff_clock const &_diff_clock,

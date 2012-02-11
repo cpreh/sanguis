@@ -3,7 +3,7 @@
 
 #include <sanguis/client/draw2d/particle/funit_range.hpp>
 #include <fcppt/random/uniform_fwd.hpp>
-#include <fcppt/minmax_pair_decl.hpp>
+#include <fcppt/homogenous_pair_decl.hpp>
 
 namespace sanguis
 {

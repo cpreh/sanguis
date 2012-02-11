@@ -1,5 +1,5 @@
 #include <sanguis/client/draw2d/particle/properties.hpp>
-#include <fcppt/minmax_pair_impl.hpp>
+#include <fcppt/homogenous_pair_impl.hpp>
 
 sanguis::client::draw2d::particle::properties::properties(
 	particle::anim_speed const _anim_speed,

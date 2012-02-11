@@ -10,7 +10,7 @@
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/hypersphere_to_cartesian.hpp>
 #include <fcppt/math/vector/static.hpp>
-#include <fcppt/minmax_pair_impl.hpp>
+#include <fcppt/homogenous_pair_impl.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::client::draw2d::particle::generator::generator(
@@ -74,8 +74,8 @@ sanguis::client::draw2d::particle::generator::generator(
 	),
 	dispersion_value_(
 		fcppt::random::make_inclusive_range(
-			_dispersion_value.get().min(),
-			_dispersion_value.get().max()
+			_dispersion_value.get().first,
+			_dispersion_value.get().second
 		)
 	),
 	velocity_angle_(
@@ -92,8 +92,8 @@ sanguis::client::draw2d::particle::generator::generator(
 	),
 	velocity_value_(
 		fcppt::random::make_inclusive_range(
-			_velocity.get().min(),
-			_velocity.get().max()
+			_velocity.get().first,
+			_velocity.get().second
 		)
 	),
 	rot_angle_(
@@ -124,8 +124,8 @@ sanguis::client::draw2d::particle::generator::generator(
 	),
 	rot_velocity_(
 		fcppt::random::make_inclusive_range(
-			_rot_velocity.get().min(),
-			_rot_velocity.get().max()
+			_rot_velocity.get().first,
+			_rot_velocity.get().second
 		)
 	),
 	movement_(

@@ -13,7 +13,7 @@
 #include <sanguis/client/draw2d/particle/speed_range.hpp>
 #include <sanguis/duration_second.hpp>
 #include <fcppt/assign/make_container.hpp>
-#include <fcppt/minmax_pair_impl.hpp>
+#include <fcppt/homogenous_pair_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>

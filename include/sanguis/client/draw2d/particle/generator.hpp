@@ -20,7 +20,7 @@
 #include <sanguis/diff_timer.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/random/uniform.hpp>
-#include <fcppt/minmax_pair_decl.hpp>
+#include <fcppt/homogenous_pair_decl.hpp>
 
 namespace sanguis
 {

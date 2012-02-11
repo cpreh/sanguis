@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_PARTICLE_FUNIT_RANGE_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/funit.hpp>
-#include <fcppt/minmax_pair_fwd.hpp>
+#include <fcppt/homogenous_pair_fwd.hpp>
 
 namespace sanguis
 {
@@ -13,7 +13,7 @@ namespace draw2d
 namespace particle
 {
 
-typedef fcppt::minmax_pair<
+typedef fcppt::homogenous_pair<
 	draw2d::funit
 > funit_range;
 

@@ -48,8 +48,8 @@ sanguis::client::draw2d::entities::explosion_particle(
 	>
 	rng(
 		particle::fade_time_range(
-			_prop.fade_range().get().min(),
-			_prop.fade_range().get().max()
+			_prop.fade_range().get().first,
+			_prop.fade_range().get().second
 		)
 	);
 

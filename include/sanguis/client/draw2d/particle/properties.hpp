@@ -15,7 +15,7 @@
 #include <sanguis/client/draw2d/particle/speed_range.hpp>
 #include <fcppt/chrono/duration_impl.hpp>
 #include <fcppt/nonassignable.hpp>
-#include <fcppt/minmax_pair_impl.hpp>
+#include <fcppt/homogenous_pair_impl.hpp>
 
 namespace sanguis
 {
