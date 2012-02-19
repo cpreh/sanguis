@@ -22,6 +22,7 @@
 #include <sge/image2d/system_fwd.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
+#include <sge/window/system_fwd.hpp>
 #include <awl/mainloop/io_service_fwd.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -52,6 +53,7 @@ public:
 		client::gui::object &,
 		client::server_callback const &,
 		load::context const &,
+		sge::window::system &,
 		sge::font::metrics &,
 		sge::font::text::drawer &,
 		sge::console::gfx &,
@@ -172,13 +174,13 @@ private:
 		s_disconn_,
 		s_data_;
 
+	sge::window::system &window_system_;
+
 	sge::font::metrics &font_metrics_;
 
 	sge::font::text::drawer &font_drawer_;
 
 	sge::console::gfx &console_gfx_;
-
-	bool running_;
 
 	client::server_callback const server_callback_;
 

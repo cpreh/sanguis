@@ -12,6 +12,8 @@
 #include <sge/console/gfx.hpp>
 #include <sge/renderer/scoped_block.hpp>
 #include <sge/systems/instance.hpp>
+#include <sge/window/system.hpp>
+#include <awl/main/exit_success.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
@@ -24,6 +26,7 @@ sanguis::client::machine::machine(
 	client::gui::object &_gui,
 	server_callback const &_server_callback,
 	load::context const &_resources,
+	sge::window::system &_window_system,
 	sge::font::metrics &_font_metrics,
 	sge::font::text::drawer &_font_drawer,
 	sge::console::gfx &_console_gfx,
@@ -74,10 +77,10 @@ sanguis::client::machine::machine(
 			)
 		)
 	),
+	window_system_(_window_system),
 	font_metrics_(_font_metrics),
 	font_drawer_(_font_drawer),
 	console_gfx_(_console_gfx),
-	running_(true),
 	server_callback_(_server_callback),
 	cursor_(
 		_cursor
@@ -162,7 +165,7 @@ sanguis::client::machine::process(
 		)
 	);
 
-	return running_;
+	return window_system_.running();
 }
 
 void
@@ -186,7 +189,9 @@ sanguis::client::machine::quit()
 			<< FCPPT_TEXT("Exiting the client!")
 	);
 
-	running_ = false;
+	window_system_.quit(
+		awl::main::exit_success()
+	);
 }
 
 sanguis::client::config::settings::object &

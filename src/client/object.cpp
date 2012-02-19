@@ -18,6 +18,7 @@
 #include <sge/renderer/device.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/timer/elapsed_and_reset.hpp>
+#include <sge/window/system.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/exit_failure.hpp>
 #include <awl/main/exit_success.hpp>
@@ -110,6 +111,7 @@ sanguis::client::object::object(
 			std::tr1::placeholders::_1
 		),
 		resources_,
+		sys_.window_system(),
 		*font_metrics_,
 		font_drawer_,
 		console_gfx_.get(),
@@ -164,7 +166,18 @@ sanguis::client::object::run()
 		return awl::main::exit_failure();
 	}
 
-	return this->quit_server();
+	awl::main::exit_code const server_ret(
+		this->quit_server()
+	);
+
+	return
+		server_ret
+		==
+		awl::main::exit_failure()
+		?
+			awl::main::exit_failure()
+		:
+			sys_.window_system().exit_code();
 }
 
 void
