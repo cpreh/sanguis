@@ -18,6 +18,9 @@
 #include <sge/renderer/device.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/timer/elapsed_and_reset.hpp>
+#include <awl/main/exit_code.hpp>
+#include <awl/main/exit_failure.hpp>
+#include <awl/main/exit_success.hpp>
 #include <awl/mainloop/io_service.hpp>
 #include <awl/mainloop/dispatcher.hpp>
 #include <awl/mainloop/asio/create_io_service_base.hpp>
@@ -136,7 +139,7 @@ sanguis::client::object::~object()
 {
 }
 
-int
+awl::main::exit_code const
 sanguis::client::object::run()
 {
 	try
@@ -158,7 +161,7 @@ sanguis::client::object::run()
 
 		this->quit_server();
 
-		return EXIT_FAILURE;
+		return awl::main::exit_failure();
 	}
 
 	return this->quit_server();
@@ -231,7 +234,7 @@ sanguis::client::object::create_server(
 	);
 }
 
-int
+awl::main::exit_code const
 sanguis::client::object::quit_server()
 {
 	if(
@@ -244,5 +247,6 @@ sanguis::client::object::quit_server()
 		?
 			server_->run()
 		:
-			EXIT_SUCCESS;
+			awl::main::exit_success()
+		;
 }

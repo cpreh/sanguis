@@ -1488,20 +1488,25 @@ FCPPT_UTILS_APPEND_SOURCE_DIR_AND_MAKE_GROUPS(
 	SANGUIS_FILES_ABS
 )
 
-INCLUDE_DIRECTORIES(
+include(
+	AwlMainGenerator
+)
+
+include_directories(
 	${CMAKE_SOURCE_DIR}/include
 )
 
-ADD_EXECUTABLE(
+awl_utils_add_portable_executable(
 	sanguis
+	"sanguis::main"
 	${SANGUIS_FILES_ABS}
 )
 
-ADD_DEFINITIONS(
+add_definitions(
 	${Awl_DEFINITIONS}
 )
 
-TARGET_LINK_LIBRARIES(
+target_link_libraries(
 	sanguis
 	sanguiscreator
 	${Fcppt_core_LIBRARIES}

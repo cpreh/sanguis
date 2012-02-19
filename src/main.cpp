@@ -8,9 +8,14 @@
 #include <sanguis/apply_log_level.hpp>
 #include <sanguis/log_context.hpp>
 #include <sanguis/log_location.hpp>
+#include <sanguis/main.hpp>
 #include <sanguis/main_object.hpp>
 #include <sge/log/global_context.hpp>
 #include <sge/log/location.hpp>
+#include <awl/main/exit_code.hpp>
+#include <awl/main/exit_failure.hpp>
+#include <awl/main/exit_success.hpp>
+#include <awl/main/function_context.hpp>
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/log/level.hpp>
 #include <fcppt/log/location.hpp>
@@ -27,10 +32,9 @@
 #include <cstdlib>
 #include <fcppt/config/external_end.hpp>
 
-int
-main(
-	int argc,
-	char *argv[]
+awl::main::exit_code const
+sanguis::main(
+	awl::main::function_context const &_function_context
 )
 try
 {
@@ -40,8 +44,8 @@ try
 
 	boost::program_options::variables_map const vm(
 		sanguis::args::parse(
-			argc,
-			argv,
+			_function_context.argc(),
+			_function_context.argv(),
 			desc
 		)
 	);
@@ -52,7 +56,7 @@ try
 	{
 		std::cout << desc << '\n';
 
-		return EXIT_SUCCESS;
+		return awl::main::exit_success();
 	}
 
 	fcppt::log::level::type const log_level(
@@ -124,7 +128,7 @@ catch(
 		<< _error.string()
 		<< FCPPT_TEXT('\n');
 
-	return EXIT_FAILURE;
+	return awl::main::exit_failure();
 }
 catch(
 	std::exception const &_error
@@ -135,5 +139,5 @@ catch(
 		<< _error.what()
 		<< '\n';
 
-	return EXIT_FAILURE;
+	return awl::main::exit_failure();
 }

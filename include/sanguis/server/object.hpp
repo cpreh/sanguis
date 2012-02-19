@@ -9,10 +9,12 @@
 #include <fcppt/thread/object.hpp>
 #include <fcppt/scoped_state_machine.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <awl/main/exit_code.hpp>
 #include <awl/mainloop/io_service_scoped_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/thread/thread.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -36,7 +38,7 @@ public:
 	void
 	quit();
 
-	int
+	awl::main::exit_code const
 	run();
 
 	bool
@@ -53,11 +55,11 @@ private:
 	void
 	reset_running();
 
+	bool running_;
+
 	awl::mainloop::io_service_scoped_ptr const io_service_;
 
 	server::machine machine_;
-
-	bool running_;
 
 	typedef fcppt::scoped_state_machine<
 		server::machine

@@ -5,6 +5,8 @@
 #include <sanguis/server/events/tick.hpp>
 #include <sanguis/server/states/running.hpp>
 #include <sanguis/server/states/unpaused.hpp>
+#include <awl/main/exit_code.hpp>
+#include <awl/main/exit_success.hpp>
 #include <awl/mainloop/asio/create_io_service_base.hpp>
 #include <awl/mainloop/io_service.hpp>
 #include <fcppt/log/headers.hpp>
@@ -21,6 +23,9 @@ sanguis::server::object::object(
 	load::context_base const &_load_context
 )
 :
+	running_(
+		true
+	),
 	io_service_(
 		awl::mainloop::asio::create_io_service_base()
 	),
@@ -28,9 +33,6 @@ sanguis::server::object::object(
 		_load_context,
 		_port,
 		*io_service_
-	),
-	running_(
-		true
 	),
 	scoped_machine_(
 		machine_
@@ -67,12 +69,12 @@ sanguis::server::object::~object()
 {
 }
 
-int
+awl::main::exit_code const
 sanguis::server::object::run()
 {
 	server_thread_.join();
 
-	return EXIT_SUCCESS;
+	return awl::main::exit_success();
 }
 
 void

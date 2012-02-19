@@ -16,6 +16,7 @@
 #include <sge/font/text/drawer_3d.hpp>
 #include <sge/font/metrics_ptr.hpp>
 #include <sge/systems/instance.hpp>
+#include <awl/main/exit_code.hpp>
 #include <awl/mainloop/io_service_scoped_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
@@ -43,7 +44,7 @@ public:
 
 	~object();
 private:
-	int
+	awl::main::exit_code const
 	run();
 
 	void
@@ -57,7 +58,7 @@ private:
 		net::port
 	);
 
-	int
+	awl::main::exit_code const
 	quit_server();
 
 	// declare the config stuff first, so they are destroyed last
