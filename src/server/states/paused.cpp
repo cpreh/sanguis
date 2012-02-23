@@ -11,7 +11,7 @@
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/base.hpp>
 #include <sanguis/log_parameters.hpp>
-#include <fcppt/log/parameters/all.hpp>
+#include <fcppt/log/parameters/object.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/output.hpp>

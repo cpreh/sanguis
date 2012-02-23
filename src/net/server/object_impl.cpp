@@ -24,7 +24,7 @@
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/verbose.hpp>
-#include <fcppt/log/parameters/all.hpp>
+#include <fcppt/log/parameters/object.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>

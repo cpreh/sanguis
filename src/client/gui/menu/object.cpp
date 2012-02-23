@@ -9,7 +9,7 @@
 #include <sanguis/media_path.hpp>
 #include <sge/cegui/from_cegui_string.hpp>
 #include <sge/cegui/to_cegui_string.hpp>
-#include <fcppt/log/parameters/all.hpp>
+#include <fcppt/log/parameters/object.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>

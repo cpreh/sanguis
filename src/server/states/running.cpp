@@ -17,7 +17,7 @@
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/to_console_arg_list.hpp>
 #include <fcppt/container/map_impl.hpp>
-#include <fcppt/log/parameters/all.hpp>
+#include <fcppt/log/parameters/object.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/info.hpp>

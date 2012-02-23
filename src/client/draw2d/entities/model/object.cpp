@@ -14,7 +14,7 @@
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
-#include <fcppt/log/parameters/all.hpp>
+#include <fcppt/log/parameters/object.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/object.hpp>

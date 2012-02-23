@@ -15,7 +15,7 @@
 #include <sanguis/log_parameters.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
-#include <fcppt/log/parameters/all.hpp>
+#include <fcppt/log/parameters/object.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/warning.hpp>
