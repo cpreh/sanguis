@@ -376,6 +376,7 @@ SET(
 	include/sanguis/load/context_base_fwd.hpp
 	include/sanguis/load/context_fwd.hpp
 	include/sanguis/load/enemy_name.hpp
+	include/sanguis/load/first_file.hpp
 	include/sanguis/load/friend_name.hpp
 	include/sanguis/load/log.hpp
 	include/sanguis/load/model/animation/context.hpp
@@ -418,6 +419,7 @@ SET(
 	include/sanguis/load/model/split_pair.hpp
 	include/sanguis/load/model/weapon_category.hpp
 	include/sanguis/load/model/weapon_category_fwd.hpp
+	include/sanguis/load/next_file.hpp
 	include/sanguis/load/pickup_name.hpp
 	include/sanguis/load/probability_type.hpp
 	include/sanguis/load/resource/animation/entity.hpp
@@ -440,12 +442,14 @@ SET(
 	include/sanguis/load/resource/textures.hpp
 	include/sanguis/load/resource/textures_fwd.hpp
 	include/sanguis/load/server_context.hpp
+	include/sanguis/load/skip_directories.hpp
 	include/sanguis/load/sound_type.hpp
 	include/sanguis/load/weapon_pickup_name.hpp
 	include/sanguis/log.hpp
 	include/sanguis/log_context.hpp
 	include/sanguis/log_location.hpp
 	include/sanguis/log_parameters.hpp
+	include/sanguis/main.hpp
 	include/sanguis/main_object.hpp
 	include/sanguis/main_object_fwd.hpp
 	include/sanguis/main_object_unique_ptr.hpp
@@ -579,7 +583,6 @@ SET(
 	include/sanguis/messages/serialization/istream.hpp
 	include/sanguis/messages/serialization/load.hpp
 	include/sanguis/messages/serialization/make_object.hpp
-	include/sanguis/messages/serialization/need_swap.hpp
 	include/sanguis/messages/serialization/ostream.hpp
 	include/sanguis/messages/serialization/raw_container.hpp
 	include/sanguis/messages/serialization/read_element.hpp
@@ -1180,6 +1183,7 @@ SET(
 	src/load/context.cpp
 	src/load/context_base.cpp
 	src/load/enemy_name.cpp
+	src/load/first_file.cpp
 	src/load/friend_name.cpp
 	src/load/log.cpp
 	src/load/model/animation/context.cpp
@@ -1204,6 +1208,7 @@ SET(
 	src/load/model/sound.cpp
 	src/load/model/split_first_slash.cpp
 	src/load/model/weapon_category.cpp
+	src/load/next_file.cpp
 	src/load/pickup_name.cpp
 	src/load/resource/animation/entity.cpp
 	src/load/resource/animation/series.cpp
@@ -1214,6 +1219,7 @@ SET(
 	src/load/resource/texture_context_impl.cpp
 	src/load/resource/textures.cpp
 	src/load/server_context.cpp
+	src/load/skip_directories.cpp
 	src/load/weapon_pickup_name.cpp
 	src/log.cpp
 	src/log_context.cpp
@@ -1266,7 +1272,6 @@ SET(
 	src/messages/serialization/deserialize.cpp
 	src/messages/serialization/dispatcher_base.cpp
 	src/messages/serialization/endianness.cpp
-	src/messages/serialization/need_swap.cpp
 	src/messages/serialization/reader.cpp
 	src/messages/serialization/serialize.cpp
 	src/messages/speed.cpp

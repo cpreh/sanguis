@@ -1,7 +1,9 @@
 #include <sanguis/load/resource/animations.hpp>
 #include <sanguis/load/resource/textures.hpp>
 #include <sanguis/load/resource/map_get_or_create.hpp>
+#include <sanguis/load/first_file.hpp>
 #include <sanguis/load/log.hpp>
+#include <sanguis/load/next_file.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/exception.hpp>
@@ -11,8 +13,6 @@
 #include <fcppt/filesystem/exists.hpp>
 #include <fcppt/filesystem/is_directory.hpp>
 #include <fcppt/filesystem/is_regular.hpp>
-#include <fcppt/filesystem/next_file.hpp>
-#include <fcppt/filesystem/first_file.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/io/ifstream.hpp>
 #include <fcppt/io/istringstream.hpp>
@@ -197,7 +197,7 @@ sanguis::load::resource::animations::load_without_frames_file(
 	fcppt::filesystem::path const &dir) const
 {
 	fcppt::filesystem::directory_iterator const first_file(
-		fcppt::filesystem::first_file(
+		sanguis::load::first_file(
 			dir));
 
 	if(first_file == fcppt::filesystem::directory_iterator())
@@ -211,7 +211,7 @@ sanguis::load::resource::animations::load_without_frames_file(
 	fcppt::filesystem::path const first_path(
 		*first_file);
 
-	if(fcppt::filesystem::next_file(first_file) != fcppt::filesystem::directory_iterator())
+	if(sanguis::load::next_file(first_file) != fcppt::filesystem::directory_iterator())
 		FCPPT_LOG_WARNING(
 			log(),
 			fcppt::log::_
