@@ -17,6 +17,7 @@
 #include <sanguis/messages/create.hpp>
 #include <sanguis/load/context.hpp>
 #include <sge/audio/player.hpp>
+#include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <sge/console/object.hpp>
 #include <sge/font/text/from_fcppt_string.hpp>
 #include <sge/renderer/device.hpp>
@@ -25,7 +26,6 @@
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/debug.hpp>
-#include <fcppt/utf8/to_fcppt_string.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -54,6 +54,9 @@ sanguis::client::states::running::running(
 			fcppt::ref(
 				context<machine>().console_gfx()
 			),
+			fcppt::ref(
+				context<machine>().charconv_system()
+			),
 			client::make_send_callback(
 				context<machine>()
 			)
@@ -77,6 +80,9 @@ sanguis::client::states::running::running(
 			),
 			fcppt::ref(
 				context<machine>().renderer()
+			),
+			fcppt::ref(
+				context<machine>().charconv_system()
 			),
 			fcppt::ref(
 				context<machine>().font_metrics()
@@ -201,7 +207,8 @@ sanguis::client::states::running::operator()(
 {
 	console_->sge_console().emit_message(
 		sge::font::text::from_fcppt_string(
-			fcppt::utf8::to_fcppt_string(
+			sge::charconv::utf8_string_to_fcppt(
+				context<machine>().charconv_system(),
 				_message.get<
 					sanguis::messages::string
 				>()
@@ -219,14 +226,16 @@ sanguis::client::states::running::operator()(
 {
 	fcppt::string const
 		name(
-			fcppt::utf8::to_fcppt_string(
+			sge::charconv::utf8_string_to_fcppt(
+				context<machine>().charconv_system(),
 				_message.get<
 					sanguis::messages::roles::command_name
 				>()
 			)
 		),
 		description(
-			fcppt::utf8::to_fcppt_string(
+			sge::charconv::utf8_string_to_fcppt(
+				context<machine>().charconv_system(),
 				_message.get<
 					sanguis::messages::roles::command_description
 				>()

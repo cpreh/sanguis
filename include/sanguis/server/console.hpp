@@ -6,6 +6,7 @@
 #include <sanguis/server/unicast_callback.hpp>
 #include <sanguis/server/console_command_vector.hpp>
 #include <sanguis/server/player_id.hpp>
+#include <sge/charconv/system_fwd.hpp>
 #include <sge/console/object.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/callback/function.hpp>
@@ -26,7 +27,8 @@ class console
 		console
 	);
 public:
-	explicit console(
+	console(
+		sge::charconv::system &,
 		server::send_callback const &,
 		server::unicast_callback const &
 	);
@@ -56,6 +58,8 @@ public:
 	known_commands() const;
 private:
 	sge::console::object object_;
+
+	sge::charconv::system &charconv_system_;
 
 	server::send_callback const send_;
 

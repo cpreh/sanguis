@@ -9,6 +9,7 @@
 #include <sanguis/messages/base.hpp>
 #include <sanguis/net/deserialize.hpp>
 #include <sanguis/net/serialize_to_circular_buffer.hpp>
+#include <sge/charconv/system_fwd.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/renderer/scoped_block.hpp>
 #include <sge/systems/instance.hpp>
@@ -33,6 +34,7 @@ sanguis::client::machine::machine(
 	sge::input::keyboard::device &_keyboard,
 	client::cursor::object &_cursor,
 	sge::renderer::device &_renderer,
+	sge::charconv::system &_charconv_system,
 	sge::image2d::system &_image_loader,
 	sge::audio::player &_audio_player,
 	awl::mainloop::io_service &_io_service,
@@ -44,6 +46,7 @@ sanguis::client::machine::machine(
 	resources_(_resources),
 	keyboard_(_keyboard),
 	renderer_(_renderer),
+	charconv_system_(_charconv_system),
 	image_loader_(_image_loader),
 	audio_player_(_audio_player),
 	viewport_manager_(_viewport_manager),
@@ -204,6 +207,12 @@ sge::renderer::device &
 sanguis::client::machine::renderer() const
 {
 	return renderer_;
+}
+
+sge::charconv::system &
+sanguis::client::machine::charconv_system() const
+{
+	return charconv_system_;
 }
 
 sge::image2d::system &

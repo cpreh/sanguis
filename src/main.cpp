@@ -3,13 +3,13 @@
 #include <sanguis/args/parse.hpp>
 #include <sanguis/args/server_only.hpp>
 #include <sanguis/client/create.hpp>
-#include <sanguis/load/server_context.hpp>
-#include <sanguis/server/create.hpp>
+#include <sanguis/server/create_original.hpp>
 #include <sanguis/apply_log_level.hpp>
 #include <sanguis/log_context.hpp>
 #include <sanguis/log_location.hpp>
 #include <sanguis/main.hpp>
 #include <sanguis/main_object.hpp>
+#include <sanguis/main_object_scoped_ptr.hpp>
 #include <sge/log/global_context.hpp>
 #include <sge/log/location.hpp>
 #include <awl/main/exit_code.hpp>
@@ -20,8 +20,6 @@
 #include <fcppt/log/level.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/exception.hpp>
-#include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/scoped_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/options_description.hpp>
@@ -29,8 +27,8 @@
 #include <exception>
 #include <iostream>
 #include <ostream>
-#include <cstdlib>
 #include <fcppt/config/external_end.hpp>
+
 
 awl::main::exit_code const
 sanguis::main(
@@ -71,38 +69,13 @@ try
 		log_level
 	);
 
-	bool const server_only(
+	sanguis::main_object_scoped_ptr const obj(
 		sanguis::args::server_only(
 			vm
 		)
-	);
-
-	typedef fcppt::scoped_ptr<
-		sanguis::load::context_base
-	> server_context;
-
-	server_context context;
-
-	// TODO: ugly!
-	if(
-		server_only
-	)
-		context.take(
-			fcppt::make_unique_ptr<
-				sanguis::load::server_context
-			>()
-		);
-
-	typedef fcppt::scoped_ptr<
-		sanguis::main_object
-	> main_object_scoped_ptr;
-
-	main_object_scoped_ptr obj(
-		server_only
 		?
-			sanguis::server::create(
-				vm,
-				*context
+			sanguis::server::create_original(
+				vm
 			)
 		:
 			sanguis::client::create(

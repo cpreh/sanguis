@@ -16,6 +16,7 @@
 #include <sanguis/cast_enum.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/to_console_arg_list.hpp>
+#include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/log/parameters/object.hpp>
 #include <fcppt/log/debug.hpp>
@@ -25,7 +26,6 @@
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/utf8/to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/cref.hpp>
@@ -56,6 +56,7 @@ sanguis::server::states::running::running(
 		_ctx
 	),
 	console_(
+		context<machine>().charconv_system(),
 		server::make_send_callback(
 			context<machine>()
 		),
@@ -72,6 +73,9 @@ sanguis::server::states::running::running(
 			),
 			fcppt::cref(
 				context<machine>().resources()
+			),
+			fcppt::ref(
+				context<machine>().charconv_system()
 			),
 			fcppt::ref(
 				console_
@@ -171,7 +175,8 @@ sanguis::server::states::running::operator()(
 			0 // FIXME: which world id?
 		),
 		_id,
-		fcppt::utf8::to_fcppt_string(
+		sge::charconv::utf8_string_to_fcppt(
+			context<machine>().charconv_system(),
 			_message.get<
 				messages::string
 			>()
@@ -196,6 +201,7 @@ sanguis::server::states::running::operator()(
 {
 	sanguis::string_vector const command(
 		messages::serialization::convert_string_vector(
+			context<machine>().charconv_system(),
 			_message.get<
 				messages::string_vector
 			>()

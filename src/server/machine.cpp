@@ -28,12 +28,16 @@
 
 sanguis::server::machine::machine(
 	load::context_base const &_resources,
+	sge::charconv::system &_charconv_system,
 	net::port const _port,
 	awl::mainloop::io_service &_io_service
 )
 :
 	resources_(
 		_resources
+	),
+	charconv_system_(
+		_charconv_system
 	),
 	port_(
 		_port
@@ -226,6 +230,13 @@ sanguis::server::machine::resources() const
 {
 	return
 		resources_;
+}
+
+sge::charconv::system &
+sanguis::server::machine::charconv_system() const
+{
+	return
+		charconv_system_;
 }
 
 void

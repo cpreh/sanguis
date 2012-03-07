@@ -30,6 +30,7 @@
 #include <sanguis/creator/generator/result_fwd.hpp>
 #include <sanguis/creator/generator/seed.hpp>
 #include <sanguis/creator/generator/size.hpp>
+#include <sge/charconv/system_fwd.hpp>
 #include <sge/projectile/world_fwd.hpp>
 #include <sge/projectile/body/object_fwd.hpp>
 #include <fcppt/container/map_decl.hpp>
@@ -59,6 +60,7 @@ public:
 		sanguis::world_id,
 		world::context &,
 		server::environment::load_context &,
+		sge::charconv::system &,
 		server::console &,
 		sanguis::creator::generator::result const &
 	);
@@ -193,6 +195,8 @@ private:
 	world::context &global_context_;
 
 	server::environment::load_context &load_context_;
+
+	sge::charconv::system &charconv_system_;
 
 	typedef fcppt::scoped_ptr<
 		sge::projectile::world

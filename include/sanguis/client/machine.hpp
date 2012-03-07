@@ -15,6 +15,7 @@
 #include <sanguis/net/receive_buffer_fwd.hpp>
 #include <sanguis/duration_fwd.hpp>
 #include <sge/audio/player_fwd.hpp>
+#include <sge/charconv/system_fwd.hpp>
 #include <sge/console/gfx_fwd.hpp>
 #include <sge/font/metrics_fwd.hpp>
 #include <sge/font/text/drawer_fwd.hpp>
@@ -60,6 +61,7 @@ public:
 		sge::input::keyboard::device &,
 		client::cursor::object &,
 		sge::renderer::device &,
+		sge::charconv::system &,
 		sge::image2d::system &,
 		sge::audio::player &,
 		awl::mainloop::io_service &,
@@ -103,6 +105,9 @@ public:
 
 	sge::renderer::device &
 	renderer() const;
+
+	sge::charconv::system &
+	charconv_system() const;
 
 	sge::image2d::system &
 	image_loader() const;
@@ -160,6 +165,8 @@ private:
 	sge::input::keyboard::device &keyboard_;
 
 	sge::renderer::device &renderer_;
+
+	sge::charconv::system &charconv_system_;
 
 	sge::image2d::system &image_loader_;
 

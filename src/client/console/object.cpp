@@ -13,11 +13,15 @@
 
 sanguis::client::console::object::object(
 	sge::console::gfx &_gfx,
+	sge::charconv::system &_charconv_system,
 	client::send_callback const &_send
 )
 :
 	gfx_(
 		_gfx
+	),
+	charconv_system_(
+		_charconv_system
 	),
 	send_(
 		_send
@@ -101,6 +105,7 @@ sanguis::client::console::object::server_callback(
 		sanguis::messages::create(
 			sanguis::messages::console_command(
 				sanguis::messages::serialization::convert_string_vector(
+					charconv_system_,
 					sanguis::from_console_arg_list(
 						_args
 					)

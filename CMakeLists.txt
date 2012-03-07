@@ -87,6 +87,7 @@ FIND_PACKAGE(
 	COMPONENTS
 	audio
 	cegui
+	charconv
 	config
 	console
 	core

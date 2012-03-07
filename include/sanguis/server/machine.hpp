@@ -12,6 +12,7 @@
 #include <sanguis/net/port.hpp>
 #include <sanguis/net/receive_buffer_fwd.hpp>
 #include <sanguis/timer.hpp>
+#include <sge/charconv/system_fwd.hpp>
 #include <fcppt/container/raw_vector_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -39,6 +40,7 @@ struct machine
 public:
 	machine(
 		load::context_base const &,
+		sge::charconv::system &,
 		net::port,
 		awl::mainloop::io_service &
 	);
@@ -64,6 +66,9 @@ public:
 
 	load::context_base const &
 	resources() const;
+
+	sge::charconv::system &
+	charconv_system() const;
 private:
 	void
 	process_message(
@@ -92,6 +97,8 @@ private:
 	timer_callback();
 
 	load::context_base const &resources_;
+
+	sge::charconv::system &charconv_system_;
 
 	net::port const port_;
 

@@ -452,6 +452,7 @@ SET(
 	include/sanguis/main.hpp
 	include/sanguis/main_object.hpp
 	include/sanguis/main_object_fwd.hpp
+	include/sanguis/main_object_scoped_ptr.hpp
 	include/sanguis/main_object_unique_ptr.hpp
 	include/sanguis/media_path.hpp
 	include/sanguis/messages/add_aoe_projectile.hpp
@@ -750,6 +751,7 @@ SET(
 	include/sanguis/server/console_command_vector.hpp
 	include/sanguis/server/console_fwd.hpp
 	include/sanguis/server/create.hpp
+	include/sanguis/server/create_original.hpp
 	include/sanguis/server/create_player.hpp
 	include/sanguis/server/damage/all.hpp
 	include/sanguis/server/damage/armor.hpp
@@ -897,6 +899,7 @@ SET(
 	include/sanguis/server/message_functor.hpp
 	include/sanguis/server/object.hpp
 	include/sanguis/server/object_fwd.hpp
+	include/sanguis/server/original_object.hpp
 	include/sanguis/server/perks/change_simple.hpp
 	include/sanguis/server/perks/choleric.hpp
 	include/sanguis/server/perks/create.hpp
@@ -1341,6 +1344,7 @@ SET(
 	src/server/collision/user_data.cpp
 	src/server/console.cpp
 	src/server/create.cpp
+	src/server/create_original.cpp
 	src/server/create_player.cpp
 	src/server/damage/all.cpp
 	src/server/damage/fire.cpp
@@ -1429,6 +1433,7 @@ SET(
 	src/server/message_convert/rotate.cpp
 	src/server/message_convert/speed.cpp
 	src/server/object.cpp
+	src/server/original_object.cpp
 	src/server/perks/choleric.cpp
 	src/server/perks/create.cpp
 	src/server/perks/health.cpp

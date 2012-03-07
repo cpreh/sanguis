@@ -8,6 +8,7 @@
 #include <sge/renderer/refresh_rate_dont_care.hpp>
 #include <sge/systems/audio_loader.hpp>
 #include <sge/systems/audio_player_default.hpp>
+#include <sge/systems/charconv.hpp>
 #include <sge/systems/cursor_option_field.hpp>
 #include <sge/systems/font.hpp>
 #include <sge/systems/image2d.hpp>
@@ -116,5 +117,8 @@ sanguis::args::sge_options(
 		)
 		(
 			sge::systems::font() // TODO: make sure that we can load truetype fonts, use a multi loader here as well!
+		)
+		(
+			sge::systems::charconv()
 		);
 }

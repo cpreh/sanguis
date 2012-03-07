@@ -22,6 +22,7 @@
 #include <sanguis/messages/connect_state.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/log_parameters.hpp>
+#include <sge/charconv/system_fwd.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/output.hpp>
@@ -61,6 +62,7 @@ fcppt::log::object logger(
 sanguis::server::global::context::context(
 	server::unicast_callback const &_send_unicast,
 	load::context_base const &_model_context,
+	sge::charconv::system &_charconv_system,
 	server::console &_console
 )
 :
@@ -83,6 +85,9 @@ sanguis::server::global::context::context(
 				_model_context
 			)
 		)
+	),
+	charconv_system_(
+		_charconv_system
 	),
 	console_(
 		_console
@@ -118,6 +123,7 @@ sanguis::server::global::context::insert_player(
 		server::create_player(
 			diff_clock_,
 			*load_context_,
+			charconv_system_,
 			_name,
 			send_unicast_,
 			_player_id,
@@ -475,6 +481,7 @@ sanguis::server::global::context::world(
 				diff_clock_,
 				*world_context_,
 				*load_context_,
+				charconv_system_,
 				console_
 			)
 		).first->second;

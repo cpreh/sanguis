@@ -30,6 +30,7 @@
 #include <sanguis/messages/stop_reloading.hpp>
 #include <sanguis/messages/speed.hpp>
 #include <sanguis/entity_id.hpp>
+#include <sge/charconv/system_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -47,8 +48,9 @@ class dispatcher
 		dispatcher
 	);
 public:
-	explicit dispatcher(
-		message::environment &
+	dispatcher(
+		message::environment &,
+		sge::charconv::system &
 	);
 
 	~dispatcher();
@@ -189,7 +191,9 @@ private:
 		entity_id
 	);
 
-	environment &env_;
+	message::environment &env_;
+
+	sge::charconv::system &charconv_system_;
 };
 
 }

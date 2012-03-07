@@ -2,6 +2,8 @@
 #include <sanguis/messages/add_console_command.hpp>
 #include <sanguis/messages/console_print.hpp>
 #include <sanguis/messages/create.hpp>
+#include <sge/charconv/fcppt_string_to_utf8.hpp>
+#include <sge/charconv/system_fwd.hpp>
 #include <sge/console/callback/function.hpp>
 #include <sge/console/callback/name.hpp>
 #include <sge/console/callback/parameters.hpp>
@@ -9,19 +11,22 @@
 #include <sge/font/text/from_fcppt_string.hpp>
 #include <sge/font/text/string.hpp>
 #include <fcppt/function/object.hpp>
-#include <fcppt/utf8/from_fcppt_string.hpp>
 #include <fcppt/homogenous_pair_impl.hpp>
 #include <fcppt/insert_to_string.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::server::console::console(
+	sge::charconv::system &_charconv_system,
 	server::send_callback const &_send,
 	server::unicast_callback const &_unicast
 )
 :
 	object_(
 		SGE_FONT_TEXT_LIT('/') // TODO: is this right?
+	),
+	charconv_system_(
+		_charconv_system
 	),
 	send_(_send),
 	unicast_(_unicast),
@@ -41,10 +46,12 @@ sanguis::server::console::insert(
 	send_(
 		messages::create(
 			messages::add_console_command(
-				fcppt::utf8::from_fcppt_string(
+				sge::charconv::fcppt_string_to_utf8(
+					charconv_system_,
 					_command
 				),
-				fcppt::utf8::from_fcppt_string(
+				sge::charconv::fcppt_string_to_utf8(
+					charconv_system_,
 					_description
 				)
 			)
@@ -106,7 +113,8 @@ sanguis::server::console::print_line(
 		_id,
 		sanguis::messages::create(
 			sanguis::messages::console_print(
-				fcppt::utf8::from_fcppt_string(
+				sge::charconv::fcppt_string_to_utf8(
+					charconv_system_,
 					_line
 				)
 			)

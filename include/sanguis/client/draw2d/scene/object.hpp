@@ -29,6 +29,7 @@
 #include <sanguis/duration_fwd.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sge/audio/listener_fwd.hpp>
+#include <sge/charconv/system_fwd.hpp>
 #include <sge/font/metrics_fwd.hpp>
 #include <sge/font/text/drawer_fwd.hpp>
 #include <sge/renderer/device_fwd.hpp>
@@ -64,6 +65,7 @@ public:
 	object(
 		load::context const &,
 		sge::renderer::device &,
+		sge::charconv::system &,
 		sge::font::metrics &,
 		sge::font::text::drawer &,
 		sge::audio::listener &,

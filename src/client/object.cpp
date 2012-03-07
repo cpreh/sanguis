@@ -33,6 +33,7 @@
 #include <fcppt/cref.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstdlib>
@@ -118,6 +119,7 @@ sanguis::client::object::object(
 		sys_.keyboard_collector(),
 		cursor_,
 		sys_.renderer(),
+		sys_.charconv_system(),
 		sys_.image_system(),
 		sys_.audio_player(),
 		*io_service_,
@@ -242,6 +244,9 @@ sanguis::client::object::create_server(
 			_port,
 			fcppt::cref(
 				resources_
+			),
+			fcppt::ref(
+				sys_.charconv_system()
 			)
 		)
 	);

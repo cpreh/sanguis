@@ -31,6 +31,8 @@
 #include <sanguis/load/model/object.hpp>
 #include <sanguis/exception.hpp>
 #include <sanguis/creator/generator/result.hpp>
+#include <sge/charconv/fcppt_string_to_utf8.hpp>
+#include <sge/charconv/system_fwd.hpp>
 #include <sge/projectile/body/object.hpp>
 #include <sge/projectile/time_increment.hpp>
 #include <sge/projectile/world.hpp>
@@ -43,7 +45,6 @@
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/utf8/from_fcppt_string.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -55,6 +56,7 @@ sanguis::server::world::object::object(
 	sanguis::world_id const _id,
 	world::context &_global_context,
 	server::environment::load_context &_load_context,
+	sge::charconv::system &_charconv_system,
 	server::console &_console,
 	sanguis::creator::generator::result const &_generated_world
 )
@@ -74,6 +76,9 @@ sanguis::server::world::object::object(
 	),
 	load_context_(
 		_load_context
+	),
+	charconv_system_(
+		_charconv_system
 	),
 	collision_world_(
 		fcppt::make_unique_ptr<
@@ -231,7 +236,8 @@ sanguis::server::world::object::insert(
 				messages::change_world(
 					id_,
 					seed_,
-					fcppt::utf8::from_fcppt_string(
+					sge::charconv::fcppt_string_to_utf8(
+						charconv_system_,
 						generator_name_.get()
 					),
 					size_

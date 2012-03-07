@@ -1,5 +1,6 @@
 #include <sanguis/server/world/random.hpp>
 #include <sanguis/server/world/object.hpp>
+#include <sge/charconv/system_fwd.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
@@ -28,6 +29,7 @@ sanguis::server::world::random(
 	sanguis::diff_clock const &_diff_clock,
 	world::context &_ctx,
 	server::environment::load_context &_load_context,
+	sge::charconv::system &_charconv_system,
 	server::console &_console
 )
 {
@@ -102,7 +104,7 @@ sanguis::server::world::random(
 	// TODO:
 	return
 		fcppt::make_unique_ptr<
-			object
+			sanguis::server::world::object
 		>(
 			fcppt::cref(
 				_diff_clock
@@ -113,6 +115,9 @@ sanguis::server::world::random(
 			),
 			fcppt::ref(
 				_load_context
+			),
+			fcppt::ref(
+				_charconv_system
 			),
 			fcppt::ref(
 				_console

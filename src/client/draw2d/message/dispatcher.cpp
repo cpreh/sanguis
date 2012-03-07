@@ -29,12 +29,13 @@
 #include <sanguis/cast_enum.hpp>
 #include <sanguis/creator/generator/name.hpp>
 #include <sanguis/creator/generator/top_parameters.hpp>
+#include <sge/charconv/system_fwd.hpp>
+#include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/log/headers.hpp>
-#include <fcppt/utf8/to_fcppt_string.hpp>
 #include <fcppt/dynamic_cast.hpp>
 #include <fcppt/type_name.hpp>
 #include <fcppt/text.hpp>
@@ -48,10 +49,16 @@
 #include <fcppt/config/external_end.hpp>
 
 sanguis::client::draw2d::message::dispatcher::dispatcher(
-	message::environment &_env
+	sanguis::client::draw2d::message::environment &_env,
+	sge::charconv::system &_charconv_system
 )
 :
-	env_(_env)
+	env_(
+		_env
+	),
+	charconv_system_(
+		_charconv_system
+	)
 {
 }
 
@@ -226,7 +233,8 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			>(),
 			sanguis::creator::generator::top_parameters(
 				sanguis::creator::generator::name(
-					fcppt::utf8::to_fcppt_string(
+					sge::charconv::utf8_string_to_fcppt(
+						charconv_system_,
 						_message.get<
 							messages::roles::generator_name
 						>()

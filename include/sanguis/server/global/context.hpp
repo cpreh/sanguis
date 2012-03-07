@@ -24,6 +24,7 @@
 #include <sanguis/world_id.hpp>
 #include <sanguis/messages/auto_ptr.hpp>
 #include <sanguis/load/context_base_fwd.hpp>
+#include <sge/charconv/system_fwd.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/container/map_decl.hpp>
@@ -46,6 +47,7 @@ public:
 	context(
 		server::unicast_callback const &,
 		load::context_base const &,
+		sge::charconv::system &,
 		server::console &
 	);
 
@@ -153,6 +155,8 @@ private:
 	> load_context_scoped_ptr;
 
 	load_context_scoped_ptr const load_context_;
+
+	sge::charconv::system &charconv_system_;
 
 	server::console &console_;
 

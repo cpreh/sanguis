@@ -16,6 +16,7 @@
 #include <sanguis/cast_enum.hpp>
 #include <sanguis/exception.hpp>
 #include <sanguis/log_parameters.hpp>
+#include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <sge/renderer/state/bool.hpp>
 #include <sge/renderer/state/list.hpp>
 #include <fcppt/function/object.hpp>
@@ -24,7 +25,6 @@
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/utf8/from_fcppt_string.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -151,7 +151,8 @@ sanguis::client::states::menu::react(
 	context<machine>().send(
 		messages::create(
 			messages::client_info(
-				fcppt::utf8::from_fcppt_string(
+				sge::charconv::fcppt_string_to_utf8(
+					context<machine>().charconv_system(),
 					FCPPT_TEXT("player1") // TODO!
 				)
 			)

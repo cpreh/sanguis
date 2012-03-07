@@ -20,6 +20,7 @@
 #include <sanguis/messages/call/object.hpp>
 #include <sanguis/exception.hpp>
 #include <sge/audio/listener.hpp>
+#include <sge/charconv/system_fwd.hpp>
 #include <sge/image/colors.hpp>
 #include <sge/renderer/ambient_color.hpp>
 #include <sge/renderer/device.hpp>
@@ -60,6 +61,7 @@
 sanguis::client::draw2d::scene::object::object(
 	load::context const &_resources,
 	sge::renderer::device &_rend,
+	sge::charconv::system &_charconv_system,
 	sge::font::metrics &_font_metrics,
 	sge::font::text::drawer &_font_drawer,
 	sge::audio::listener &_audio_listener,
@@ -164,6 +166,9 @@ sanguis::client::draw2d::scene::object::object(
 		>(
 			fcppt::ref(
 				*message_environment_
+			),
+			fcppt::ref(
+				_charconv_system
 			)
 		)
 	),
