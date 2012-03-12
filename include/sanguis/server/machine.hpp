@@ -6,6 +6,7 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/load/context_base_fwd.hpp>
 #include <sanguis/messages/auto_ptr.hpp>
+#include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/net/server/object.hpp>
 #include <sanguis/net/data_buffer.hpp>
 #include <sanguis/net/id.hpp>
@@ -55,13 +56,13 @@ public:
 
 	void
 	send_to_all(
-		messages::auto_ptr
+		messages::base const &
 	);
 
 	void
 	send_unicast(
 		server::player_id,
-		messages::auto_ptr
+		messages::base const &
 	);
 
 	load::context_base const &

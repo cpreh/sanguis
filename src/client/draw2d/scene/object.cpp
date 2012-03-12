@@ -252,8 +252,8 @@ sanguis::client::draw2d::scene::object::process_message(
 			sanguis::messages::stop_reloading,
 			sanguis::messages::speed
 		>,
-		message::dispatcher
-	> dispatcher;
+		sanguis::client::draw2d::message::dispatcher
+	>::type dispatcher;
 
 	dispatcher(
 		_message,

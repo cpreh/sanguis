@@ -123,7 +123,7 @@ sanguis::client::states::menu::react(
 			messages::connect_state
 		>,
 		menu
-	> dispatcher;
+	>::type dispatcher;
 
 	return
 		dispatcher(
@@ -149,7 +149,7 @@ sanguis::client::states::menu::react(
 	);
 
 	context<machine>().send(
-		messages::create(
+		*messages::create(
 			messages::client_info(
 				sge::charconv::fcppt_string_to_utf8(
 					context<machine>().charconv_system(),

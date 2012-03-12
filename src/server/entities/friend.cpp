@@ -55,7 +55,7 @@ sanguis::server::entities::friend_::friend_(
 			0
 		),
 		server::direction(
-			0
+			0.f
 		)
 	),
 	ftype_(_ftype)

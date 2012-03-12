@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_GLOBAL_WORLD_CONTEXT_HPP_INCLUDED
 #define SANGUIS_SERVER_GLOBAL_WORLD_CONTEXT_HPP_INCLUDED
 
+#include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/server/global/world_context_fwd.hpp>
 #include <sanguis/server/global/context_fwd.hpp>
 #include <sanguis/server/world/context.hpp>
@@ -37,7 +38,7 @@ public:
 	void
 	send_to_player(
 		player_id,
-		messages::auto_ptr
+		messages::base const &
 	);
 
 	void

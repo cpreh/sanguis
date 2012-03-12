@@ -1,3 +1,5 @@
+#include <sanguis/client/level.hpp>
+#include <sanguis/client/player_level.hpp>
 #include <sanguis/client/perk/make_tree.hpp>
 #include <sanguis/client/perk/compare.hpp>
 #include <sanguis/client/perk/info.hpp>
@@ -126,19 +128,31 @@ make_info(
 				>()
 			),
 			sanguis::client::perk::required_parent_level(
-				_node.get<
-					sanguis::messages::roles::required_perk_parent_level
-				>()
+				sanguis::client::perk::level(
+					sanguis::client::level(
+						_node.get<
+							sanguis::messages::roles::required_perk_parent_level
+						>()
+					)
+				)
 			),
 			sanguis::client::perk::required_player_level(
-				_node.get<
-					sanguis::messages::roles::required_perk_player_level
-				>()
+				sanguis::client::player_level(
+					sanguis::client::level(
+						_node.get<
+							sanguis::messages::roles::required_perk_player_level
+						>()
+					)
+				)
 			),
 			sanguis::client::perk::max_level(
-				_node.get<
-					sanguis::messages::roles::max_perk_level
-				>()
+				sanguis::client::perk::level(
+					sanguis::client::level(
+						_node.get<
+							sanguis::messages::roles::max_perk_level
+						>()
+					)
+				)
 			)
 		);
 }

@@ -73,7 +73,7 @@ sanguis::server::send_available_perks(
 
 	_send(
 		_player.player_id(),
-		messages::create(
+		*messages::create(
 			messages::available_perks(
 				_player.id(),
 				nodes

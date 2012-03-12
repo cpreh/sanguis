@@ -23,7 +23,9 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 		_diff_clock,
 		aoe_projectile_type::aoe_damage,
 		_team,
-		entities::movement_speed(0),
+		entities::movement_speed(
+			0.f
+		),
 		server::dim(
 			_radius.get(),
 			_radius.get()
@@ -46,7 +48,7 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 		indeterminate::yes,
 		_radius,
 		server::direction(
-			0
+			0.f
 		)
 	)
 {

@@ -8,7 +8,7 @@ namespace sanguis
 namespace messages
 {
 
-serialization::context &
+sanguis::messages::serialization::context &
 global_context();
 
 }

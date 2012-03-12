@@ -1,3 +1,4 @@
+#include <sanguis/client/level.hpp>
 #include <sanguis/client/perk/choosable.hpp>
 #include <sanguis/client/perk/find_info.hpp>
 #include <sanguis/client/perk/info.hpp>
@@ -90,7 +91,9 @@ perk_level(
 		it == _map.end()
 		?
 			sanguis::client::perk::level(
-				0
+				sanguis::client::level(
+					0u
+				)
 			)
 		:
 			it->second;

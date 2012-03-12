@@ -37,8 +37,12 @@ sanguis::server::perks::perk::perk(
 	perk_type::type const _type
 )
 :
-	type_(_type),
-	level_(0)
+	type_(
+		_type
+	),
+	level_(
+		0u
+	)
 {
 }
 

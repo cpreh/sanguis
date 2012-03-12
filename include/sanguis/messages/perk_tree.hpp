@@ -3,18 +3,19 @@
 
 #include <sanguis/messages/perk_tree_node_list.hpp>
 #include <sanguis/messages/perk_tree_node.hpp>
-#include <sanguis/messages/bindings/dynamic_len.hpp>
 #include <sanguis/messages/bindings/self.hpp>
+#include <alda/bindings/dynamic_len.hpp>
+
 
 namespace sanguis
 {
 namespace messages
 {
 
-typedef bindings::dynamic_len<
-	messages::perk_tree_node_list,
-	bindings::self<
-		messages::perk_tree_node
+typedef alda::bindings::dynamic_len<
+	sanguis::messages::perk_tree_node_list,
+	sanguis::messages::bindings::self<
+		sanguis::messages::perk_tree_node
 	>
 > perk_tree;
 

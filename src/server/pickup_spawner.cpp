@@ -152,7 +152,9 @@ sanguis::server::pickup_spawner::spawn_health()
 					env_.load_context()
 				),
 				team::players,
-				server::health(10) // FIXME: which health value to use?
+				server::health(
+					10.f
+				) // FIXME: which health value to use?
 			)
 		),
 		entities::insert_parameters_center(

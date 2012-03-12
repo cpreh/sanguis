@@ -18,11 +18,21 @@ sanguis::client::draw2d::scene::hud::hud(
 	std::tm const &_time
 )
 :
-	font_metrics_(_font_metrics),
-	font_drawer_(_font_drawer),
-	experience_(0),
-	level_(0),
-	time_(_time),
+	font_metrics_(
+		_font_metrics
+	),
+	font_drawer_(
+		_font_drawer
+	),
+	experience_(
+		0u
+	),
+	level_(
+		0u
+	),
+	time_(
+		_time
+	),
 	frames_counter_()
 {
 }

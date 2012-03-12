@@ -1,8 +1,9 @@
 #ifndef SANGUIS_MESSAGES_SERIALIZATION_SERIALIZE_HPP_INCLUDED
 #define SANGUIS_MESSAGES_SERIALIZATION_SERIALIZE_HPP_INCLUDED
 
-#include <sanguis/messages/serialization/ostream.hpp>
-#include <sanguis/messages/auto_ptr.hpp>
+#include <sanguis/messages/base_fwd.hpp>
+#include <alda/serialization/ostream.hpp>
+
 
 namespace sanguis
 {
@@ -13,8 +14,8 @@ namespace serialization
 
 void
 serialize(
-	serialization::ostream &,
-	messages::auto_ptr
+	alda::serialization::ostream &,
+	sanguis::messages::base const &
 );
 
 }

@@ -19,7 +19,7 @@ sanguis::server::cheat(
 	case cheat_type::exp:
 		_player.add_exp(
 			server::exp(
-				100000
+				100000.f
 			)
 		);
 		return;

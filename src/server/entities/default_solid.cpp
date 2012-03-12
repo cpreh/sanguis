@@ -10,7 +10,7 @@ sanguis::server::entities::default_solid()
 		collision::solidity(
 			sge::projectile::body::solidity::solid(
 				sge::projectile::body::mass(
-					1
+					1.f
 				)
 			)
 		);

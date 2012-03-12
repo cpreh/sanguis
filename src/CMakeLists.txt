@@ -473,26 +473,16 @@ SET(
 	include/sanguis/messages/base_fwd.hpp
 	include/sanguis/messages/bind_entity_message.hpp
 	include/sanguis/messages/bind_player_message.hpp
-	include/sanguis/messages/bindings/dynamic_len.hpp
-	include/sanguis/messages/bindings/extract_length.hpp
 	include/sanguis/messages/bindings/float.hpp
-	include/sanguis/messages/bindings/fundamental.hpp
 	include/sanguis/messages/bindings/fundamental_strong.hpp
-	include/sanguis/messages/bindings/put_length.hpp
 	include/sanguis/messages/bindings/self.hpp
 	include/sanguis/messages/bindings/static.hpp
-	include/sanguis/messages/call/default_function.hpp
-	include/sanguis/messages/call/dispatcher.hpp
-	include/sanguis/messages/call/dispatcher_base.hpp
-	include/sanguis/messages/call/make_instance.hpp
 	include/sanguis/messages/call/object.hpp
+	include/sanguis/messages/call/object_fwd.hpp
 	include/sanguis/messages/change_weapon.hpp
 	include/sanguis/messages/change_world.hpp
 	include/sanguis/messages/char_type.hpp
 	include/sanguis/messages/client_info.hpp
-	include/sanguis/messages/concrete.hpp
-	include/sanguis/messages/concrete_fwd.hpp
-	include/sanguis/messages/concrete_impl.hpp
 	include/sanguis/messages/connect_state.hpp
 	include/sanguis/messages/console_command.hpp
 	include/sanguis/messages/console_print.hpp
@@ -507,17 +497,14 @@ SET(
 	include/sanguis/messages/give_weapon.hpp
 	include/sanguis/messages/global_context.hpp
 	include/sanguis/messages/health.hpp
-	include/sanguis/messages/instantiate_concrete.hpp
 	include/sanguis/messages/instantiate_message.hpp
 	include/sanguis/messages/level.hpp
 	include/sanguis/messages/level_up.hpp
 	include/sanguis/messages/make_class.hpp
-	include/sanguis/messages/make_concrete.hpp
 	include/sanguis/messages/make_message_id.hpp
 	include/sanguis/messages/make_player_message.hpp
 	include/sanguis/messages/max_health.hpp
 	include/sanguis/messages/message_id.hpp
-	include/sanguis/messages/message_type.hpp
 	include/sanguis/messages/move.hpp
 	include/sanguis/messages/pause.hpp
 	include/sanguis/messages/perk_list.hpp
@@ -563,35 +550,14 @@ SET(
 	include/sanguis/messages/roles/required_perk_parent_level.hpp
 	include/sanguis/messages/roles/required_perk_player_level.hpp
 	include/sanguis/messages/roles/speed.hpp
-	include/sanguis/messages/roles/type.hpp
 	include/sanguis/messages/roles/weapon.hpp
 	include/sanguis/messages/roles/world_size.hpp
 	include/sanguis/messages/rotate.hpp
 	include/sanguis/messages/seed.hpp
-	include/sanguis/messages/serialization/context.hpp
 	include/sanguis/messages/serialization/context_fwd.hpp
 	include/sanguis/messages/serialization/convert_string_vector.hpp
 	include/sanguis/messages/serialization/deserialize.hpp
-	include/sanguis/messages/serialization/dispatch_map.hpp
-	include/sanguis/messages/serialization/dispatcher.hpp
-	include/sanguis/messages/serialization/dispatcher_base.hpp
-	include/sanguis/messages/serialization/dispatcher_base_fwd.hpp
-	include/sanguis/messages/serialization/dispatcher_impl.hpp
-	include/sanguis/messages/serialization/dispatcher_register.hpp
-	include/sanguis/messages/serialization/dispatcher_register_impl.hpp
-	include/sanguis/messages/serialization/endianness.hpp
 	include/sanguis/messages/serialization/instantiate_message.hpp
-	include/sanguis/messages/serialization/istream.hpp
-	include/sanguis/messages/serialization/load.hpp
-	include/sanguis/messages/serialization/make_object.hpp
-	include/sanguis/messages/serialization/ostream.hpp
-	include/sanguis/messages/serialization/raw_container.hpp
-	include/sanguis/messages/serialization/read_element.hpp
-	include/sanguis/messages/serialization/read_element_impl.hpp
-	include/sanguis/messages/serialization/reader.hpp
-	include/sanguis/messages/serialization/reader_fwd.hpp
-	include/sanguis/messages/serialization/reader_impl.hpp
-	include/sanguis/messages/serialization/register_class.hpp
 	include/sanguis/messages/serialization/serialize.hpp
 	include/sanguis/messages/shared_ptr.hpp
 	include/sanguis/messages/size.hpp
@@ -603,6 +569,7 @@ SET(
 	include/sanguis/messages/stop_reloading.hpp
 	include/sanguis/messages/string.hpp
 	include/sanguis/messages/string_vector.hpp
+	include/sanguis/messages/types/alda_type.hpp
 	include/sanguis/messages/types/char.hpp
 	include/sanguis/messages/types/dim2.hpp
 	include/sanguis/messages/types/enum.hpp
@@ -1273,9 +1240,7 @@ SET(
 	src/messages/serialization/context.cpp
 	src/messages/serialization/convert_string_vector.cpp
 	src/messages/serialization/deserialize.cpp
-	src/messages/serialization/dispatcher_base.cpp
-	src/messages/serialization/endianness.cpp
-	src/messages/serialization/reader.cpp
+	src/messages/serialization/details.cpp
 	src/messages/serialization/serialize.cpp
 	src/messages/speed.cpp
 	src/messages/start_attacking.cpp

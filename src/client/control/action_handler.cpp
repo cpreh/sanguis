@@ -199,7 +199,7 @@ sanguis::client::control::action_handler::handle_cursor_action(
 		return;
 
 	send_(
-		sanguis::messages::create(
+		*sanguis::messages::create(
 			sanguis::messages::player_attack_dest(
 				fcppt::math::vector::structure_cast<
 					sanguis::messages::types::vector2
@@ -290,7 +290,7 @@ sanguis::client::control::action_handler::update_direction(
 		);
 
 	send_(
-		sanguis::messages::create(
+		*sanguis::messages::create(
 			sanguis::messages::player_direction(
 				fcppt::math::vector::structure_cast<
 					sanguis::messages::types::vector2
@@ -311,13 +311,13 @@ sanguis::client::control::action_handler::handle_shooting(
 		_value
 	)
 		send_(
-			sanguis::messages::create(
+			*sanguis::messages::create(
 				sanguis::messages::player_start_shooting()
 			)
 		);
 	else
 		send_(
-			sanguis::messages::create(
+			*sanguis::messages::create(
 				sanguis::messages::player_stop_shooting()
 			)
 		);
@@ -392,7 +392,7 @@ sanguis::client::control::action_handler::change_weapon(
 	current_weapon_ = _weapon_type;
 
 	send_(
-		sanguis::messages::create(
+		*sanguis::messages::create(
 			sanguis::messages::player_change_weapon(
 				current_weapon_
 			)
@@ -408,7 +408,7 @@ sanguis::client::control::action_handler::send_cheat(
 )
 {
 	send_(
-		sanguis::messages::create(
+		*sanguis::messages::create(
 			sanguis::messages::player_cheat(
 				_cheat
 			)

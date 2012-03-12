@@ -29,6 +29,8 @@ sanguis::server::weapons::create(
 		throw sanguis::exception(
 			FCPPT_TEXT("Please create melee weapons directly, not through the weapon factory!")
 		);
+		// FIXME!
+/*
 	case weapon_type::pistol:
 		return
 			unique_ptr(
@@ -146,6 +148,7 @@ sanguis::server::weapons::create(
 					)
 				)
 			);
+*/
 	case weapon_type::none:
 	case weapon_type::size:
 		break;

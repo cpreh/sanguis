@@ -8,7 +8,7 @@
 #include <sanguis/client/states/menu_fwd.hpp>
 #include <sanguis/client/server_callback.hpp>
 #include <sanguis/load/context_fwd.hpp>
-#include <sanguis/messages/auto_ptr.hpp>
+#include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/net/client/object.hpp>
 #include <sanguis/net/hostname.hpp>
 #include <sanguis/net/port.hpp>
@@ -86,7 +86,7 @@ public:
 
 	void
 	send(
-		messages::auto_ptr
+		messages::base const &
 	);
 
 	bool

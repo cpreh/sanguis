@@ -43,7 +43,7 @@ sanguis::client::states::waiting_for_player::react(
 			sanguis::messages::add_own_player
 		>,
 		waiting_for_player
-	> dispatcher;
+	>::type dispatcher;
 
 	return
 		dispatcher(

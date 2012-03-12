@@ -16,13 +16,13 @@ sanguis::server::perks::tree::create()
 			tree::status(
 				perk_type::size,
 				tree::required_player_level(
-					0
+					0u
 				),
 				tree::required_parent_level(
-					0
+					0u
 				),
 				tree::max_level(
-					0
+					0u
 				)
 			)
 		)
@@ -32,13 +32,13 @@ sanguis::server::perks::tree::create()
 		tree::status(
 			perk_type::choleric,
 			tree::required_player_level(
-				2
+				2u
 			),
 			tree::required_parent_level(
-				0
+				0u
 			),
 			tree::max_level(
-				10
+				10u
 			)
 		)
 	);
@@ -47,13 +47,13 @@ sanguis::server::perks::tree::create()
 		tree::status(
 			perk_type::ias,
 			tree::required_player_level(
-				0
+				0u
 			),
 			tree::required_parent_level(
-				0
+				0u
 			),
 			tree::max_level(
-				8
+				8U
 			)
 		)
 	);
@@ -62,13 +62,13 @@ sanguis::server::perks::tree::create()
 		tree::status(
 			perk_type::ims,
 			tree::required_player_level(
-				0
+				0u
 			),
 			tree::required_parent_level(
-				0
+				0u
 			),
 			tree::max_level(
-				7
+				7u
 			)
 		)
 	);
@@ -77,13 +77,13 @@ sanguis::server::perks::tree::create()
 		tree::status(
 			perk_type::irs,
 			tree::required_player_level(
-				0
+				0u
 			),
 			tree::required_parent_level(
-				0
+				0u
 			),
 			tree::max_level(
-				4
+				4u
 			)
 		)
 	);
@@ -92,13 +92,13 @@ sanguis::server::perks::tree::create()
 		tree::status(
 			perk_type::health,
 			tree::required_player_level(
-				0
+				0u
 			),
 			tree::required_parent_level(
-				0
+				0u
 			),
 			tree::max_level(
-				10
+				10u
 			)
 		)
 	);
@@ -111,13 +111,13 @@ sanguis::server::perks::tree::create()
 		tree::status(
 			perk_type::regeneration,
 			tree::required_player_level(
-				0
+				0u
 			),
 			tree::required_parent_level(
-				2
+				2u
 			),
 			tree::max_level(
-				3
+				3u
 			)
 		)
 	);

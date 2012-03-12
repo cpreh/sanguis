@@ -55,7 +55,7 @@ sanguis::server::entities::player::player(
 			0
 		),
 		server::direction(
-			0
+			0.f
 		)
 	),
 	with_weapon(
@@ -64,9 +64,9 @@ sanguis::server::entities::player::player(
 	),
 	name_(_name),
 	player_id_(_player_id),
-	exp_(0),
-	level_(0),
-	skill_points_(0),
+	exp_(0.f),
+	level_(0u),
+	skill_points_(0u),
 	perk_tree_(
 		perks::tree::create()
 	)
@@ -77,7 +77,7 @@ sanguis::server::entities::player::player(
 				auras::update_sight
 			>(
 				server::radius(
-					1000 // FIXME
+					1000.f // FIXME
 				),
 				std::tr1::bind(
 					&player::add_sight_range,

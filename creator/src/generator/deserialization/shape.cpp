@@ -11,6 +11,7 @@
 #include <sge/parse/json/int_type.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/string.hpp>
+#include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::creator::geometry::shape const
@@ -37,7 +38,9 @@ sanguis::creator::generator::deserialization::shape(
 				),
 				geometry::solidity::size
 			),
-			geometry::depth(
+			fcppt::strong_typedef_construct_cast<
+				geometry::depth
+			>(
 				sge::parse::json::find_member_exn<
 					sge::parse::json::int_type
 				>(

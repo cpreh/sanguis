@@ -3,9 +3,9 @@
 
 #include <sanguis/net/value_type.hpp>
 #include <sanguis/net/message_header.hpp>
-#include <sanguis/messages/serialization/endianness.hpp>
-#include <sanguis/messages/serialization/serialize.hpp>
 #include <sanguis/messages/base.hpp>
+#include <sanguis/messages/serialization/serialize.hpp>
+#include <alda/endianness.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/io/write.hpp>
 #include <fcppt/truncation_check_cast.hpp>
@@ -23,14 +23,10 @@ template<
 >
 bool
 serialize_impl(
-	messages::auto_ptr _message,
+	messages::base const &_message,
 	Streambuf &_streambuf
 )
 {
-	FCPPT_ASSERT_PRE(
-		_message.get()
-	);
-
 	typedef std::basic_ostream<
 		net::value_type
 	> stream_type;
@@ -43,7 +39,7 @@ serialize_impl(
 		fcppt::truncation_check_cast<
 			net::message_header
 		>(
-			_message->size()
+			_message.size()
 		)
 	);
 
@@ -54,7 +50,7 @@ serialize_impl(
 	fcppt::io::write(
 		stream,
 		header,
-		messages::serialization::endianness()
+		alda::endianness()
 	);
 
 	messages::serialization::serialize(

@@ -1,8 +1,8 @@
 #ifndef SANGUIS_MESSAGES_MAKE_CLASS_HPP_INCLUDED
 #define SANGUIS_MESSAGES_MAKE_CLASS_HPP_INCLUDED
 
-#include <majutsu/memory/raw.hpp>
-#include <majutsu/class.hpp>
+#include <alda/message/make_class.hpp>
+
 
 namespace sanguis
 {
@@ -13,11 +13,11 @@ template<
 	typename T
 >
 struct make_class
+:
+alda::message::make_class<
+	T
+>
 {
-	typedef majutsu::class_<
-		T,
-		majutsu::memory::raw
-	> type;
 };
 
 }

@@ -1,11 +1,12 @@
 #ifndef SANGUIS_MESSAGES_BINDINGS_FUNDAMENTAL_STRONG_HPP_INCLUDED
 #define SANGUIS_MESSAGES_BINDINGS_FUNDAMENTAL_STRONG_HPP_INCLUDED
 
-#include <sanguis/messages/bindings/fundamental.hpp>
+#include <alda/bindings/fundamental.hpp>
 #include <majutsu/concepts/dynamic_memory/tag.hpp>
 #include <majutsu/concepts/static_size.hpp>
 #include <majutsu/const_raw_pointer.hpp>
 #include <majutsu/raw_pointer.hpp>
+
 
 namespace sanguis
 {
@@ -28,7 +29,7 @@ template<
 void
 place(
 	majutsu::concepts::dynamic_memory::tag const *const _tag,
-	bindings::fundamental_strong<
+	sanguis::messages::bindings::fundamental_strong<
 		Type
 	> const *,
 	Type const &_type,
@@ -38,7 +39,7 @@ place(
 	place(
 		_tag,
 		static_cast<
-			bindings::fundamental<
+			alda::bindings::fundamental<
 				typename Type::value_type
 			> const *
 		>(
@@ -55,7 +56,7 @@ template<
 Type
 make(
 	majutsu::concepts::dynamic_memory::tag const *const _tag,
-	bindings::fundamental_strong<
+	sanguis::messages::bindings::fundamental_strong<
 		Type
 	> const *,
 	majutsu::const_raw_pointer const _beg
@@ -66,7 +67,7 @@ make(
 			make(
 				_tag,
 				static_cast<
-					bindings::fundamental<
+					alda::bindings::fundamental<
 						typename Type::value_type
 					> const *
 				>(
@@ -96,7 +97,7 @@ struct static_size<
 >
 :
 static_size<
-	sanguis::messages::bindings::fundamental<
+	alda::bindings::fundamental<
 		typename Type::value_type
 	>
 >

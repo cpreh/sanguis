@@ -1,3 +1,4 @@
+#include <sanguis/duration_second.hpp>
 #include <sanguis/server/weapons/rocket_launcher.hpp>
 #include <sanguis/server/weapons/delayed_attack.hpp>
 #include <sanguis/server/weapons/unlimited_magazine_count.hpp>
@@ -21,12 +22,16 @@ sanguis::server::weapons::rocket_launcher::rocket_launcher(
 	weapon(
 		_diff_clock,
 		_type,
-		weapons::range(20), // FIXME
+		weapons::range(
+			20.f
+		), // FIXME
 		_magazine_size,
 		unlimited_magazine_count,
 		_base_cooldown,
 		weapons::cast_point(
-			0.5f
+			sanguis::duration_second(
+				0.5f
+			)
 		), // FIXME
 		_reload_time
 	),

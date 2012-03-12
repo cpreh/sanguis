@@ -1,5 +1,5 @@
 #include <sanguis/messages/bindings/float.hpp>
-#include <sanguis/messages/bindings/fundamental.hpp>
+#include <alda/bindings/fundamental.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/cstdint.hpp>
 #include <cmath>
@@ -9,9 +9,10 @@ namespace
 {
 
 typedef boost::uint32_t fixed_int;
+
 typedef sanguis::messages::bindings::float_::type float_type;
 
-typedef sanguis::messages::bindings::fundamental<
+typedef alda::bindings::fundamental<
 	fixed_int
 > adapted;
 

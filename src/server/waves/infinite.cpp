@@ -66,7 +66,7 @@ sanguis::server::waves::infinite::process(
 						spawn_interval_.get()
 					),
 					entities::spawns::limit(
-						10
+						10u
 					) // TODO!
 				)
 			),

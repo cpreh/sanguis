@@ -34,7 +34,7 @@ sanguis::server::entities::enemies::create(
 				_etype,
 				_load_context,
 				damage::no_armor(),
-				server::health(9),
+				server::health(9.f),
 				movement_speed(0.5f),
 				ai::create_simple_without_owner(
 					_diff_clock
@@ -52,23 +52,23 @@ sanguis::server::entities::enemies::create(
 								1.f
 							)
 						),
-						weapons::damage(1),
+						weapons::damage(1.f),
 						weapons::cast_point(
 							sanguis::duration_second(
 								0
 							)
 						),
-						weapons::magazine_size(3),
+						weapons::magazine_size(3u),
 						weapons::reload_time(
 							sanguis::duration_second(
 								15.f
 							)
 						),
-						weapons::range(20)
+						weapons::range(20.f)
 					)
 				),
 				server::probability(0.25f),
-				server::exp(10),
+				server::exp(10.f),
 				_spawn
 			)
 		);
@@ -82,7 +82,7 @@ sanguis::server::entities::enemies::create(
 				_etype,
 				_load_context,
 				damage::no_armor(),
-				server::health(3),
+				server::health(3.f),
 				movement_speed(0.4f),
 				ai::create_simple_without_owner(
 					_diff_clock
@@ -100,11 +100,11 @@ sanguis::server::entities::enemies::create(
 								2.f
 							)
 						),
-						weapons::damage(2)
+						weapons::damage(2.f)
 					)
 				),
 				server::probability(0.25f),
-				server::exp(5),
+				server::exp(5.f),
 				_spawn
 			)
 		);
@@ -120,7 +120,7 @@ sanguis::server::entities::enemies::create(
 				_etype,
 				_load_context,
 				damage::no_armor(),
-				server::health(3),
+				server::health(3.f),
 				movement_speed(1.7f),
 				ai::create_simple_without_owner(
 					_diff_clock
@@ -138,11 +138,11 @@ sanguis::server::entities::enemies::create(
 								1.f
 							)
 						),
-						weapons::damage(4)
+						weapons::damage(4.f)
 					)
 				),
 				server::probability(0.25f),
-				server::exp(10),
+				server::exp(10.f),
 				_spawn
 			)
 		);
@@ -156,7 +156,7 @@ sanguis::server::entities::enemies::create(
 				_etype,
 				_load_context,
 				damage::no_armor(),
-				server::health(500),
+				server::health(500.f),
 				movement_speed(1.f),
 				ai::create_simple_without_owner(
 					_diff_clock
@@ -174,11 +174,11 @@ sanguis::server::entities::enemies::create(
 								1.f
 							)
 						),
-						weapons::damage(10)
+						weapons::damage(10.f)
 					)
 				),
 				server::probability(0.75f),
-				server::exp(300),
+				server::exp(300.f),
 				_spawn
 			)
 		);
@@ -192,7 +192,7 @@ sanguis::server::entities::enemies::create(
 				_etype,
 				_load_context,
 				damage::no_armor(),
-				server::health(1),
+				server::health(1.f),
 				movement_speed(0.8f),
 				ai::create_simple_without_owner(
 					_diff_clock
@@ -214,7 +214,7 @@ sanguis::server::entities::enemies::create(
 					)
 				),
 				server::probability(0.1f),
-				server::exp(1),
+				server::exp(1.f),
 				_spawn
 			)
 		);
@@ -228,7 +228,7 @@ sanguis::server::entities::enemies::create(
 				_etype,
 				_load_context,
 				damage::no_armor(),
-				server::health(12),
+				server::health(12.f),
 				movement_speed(1.5f),
 				ai::create_simple_without_owner(
 					_diff_clock
@@ -246,11 +246,11 @@ sanguis::server::entities::enemies::create(
 								2.f
 							)
 						),
-						weapons::damage(5)
+						weapons::damage(5.f)
 					)
 				),
 				server::probability(0.5f),
-				server::exp(12),
+				server::exp(12.f),
 				_spawn
 			)
 		);

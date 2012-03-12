@@ -56,8 +56,8 @@ sanguis::server::entities::pickups::monster::do_pickup(
 				ftype_,
 				this->environment().load_context(),
 				damage::no_armor(),
-				server::health(100),
-				entities::movement_speed(2),
+				server::health(100.f),
+				entities::movement_speed(2.f),
 				ai::create_simple(
 					diff_clock_,
 					_receiver.link()
@@ -69,13 +69,13 @@ sanguis::server::entities::pickups::monster::do_pickup(
 						fcppt::cref(
 							diff_clock_
 						),
-						weapons::range(2),
+						weapons::range(2.f),
 						weapons::base_cooldown(
 							sanguis::duration_second(
 								1.f
 							)
 						),
-						weapons::damage(5)
+						weapons::damage(5.f)
 					)
 				)
 			)

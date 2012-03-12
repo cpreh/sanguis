@@ -179,7 +179,7 @@ sanguis::server::states::unpaused::operator()(
 	context<
 		machine
 	>().send_to_all(
-		messages::create(
+		*messages::create(
 			messages::pause()
 		)
 	);
@@ -227,7 +227,7 @@ sanguis::server::states::unpaused::react(
 			messages::player_direction
 		>,
 		functor_type
-	> dispatcher;
+	>::type dispatcher;
 
 	return
 		dispatcher(

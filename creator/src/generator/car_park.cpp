@@ -70,14 +70,16 @@ sanguis::creator::generator::car_park(
 					),
 					geometry::solidity::solid,
 					geometry::depth(
-						0
+						0u
 					),
 					geometry::texture_name(
 						FCPPT_TEXT("asphalt")
 					)
 				)
 			),
-			generator::seed(0),
+			generator::seed(
+				0u
+			),
 			generator::name(
 				FCPPT_TEXT("car_park")
 			),

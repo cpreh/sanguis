@@ -29,7 +29,9 @@ sanguis::server::entities::projectiles::rocket::rocket(
 		_diff_clock,
 		aoe_projectile_type::rocket,
 		_team,
-		entities::movement_speed(6),
+		entities::movement_speed(
+			6.f
+		),
 		_load_context.entity_dim(
 			FCPPT_TEXT("rocket")
 		),

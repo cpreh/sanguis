@@ -1,9 +1,7 @@
 #include <sanguis/messages/base.hpp>
+#include <alda/message/instantiate_base.hpp>
 
-sanguis::messages::base::base()
-{
-}
 
-sanguis::messages::base::~base()
-{
-}
+ALDA_MESSAGE_INSTANTIATE_BASE(
+	sanguis::messages::types::alda_type
+);

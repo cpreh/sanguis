@@ -6,7 +6,7 @@
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/world_id.hpp>
-#include <sanguis/messages/auto_ptr.hpp>
+#include <sanguis/messages/base_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -34,7 +34,7 @@ public:
 	virtual void
 	send_to_player(
 		player_id,
-		messages::auto_ptr
+		messages::base const &
 	) = 0;
 
 	virtual void

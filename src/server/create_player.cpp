@@ -42,7 +42,7 @@ sanguis::server::create_player(
 	)
 		_send_to_player(
 			_player_id,
-			messages::create(
+			*messages::create(
 				messages::add_console_command(
 					sge::charconv::fcppt_string_to_utf8(
 						_charconv_system,
@@ -66,9 +66,9 @@ sanguis::server::create_player(
 			fcppt::ref(
 				_load_context
 			),
-			server::health(100),
+			server::health(100.f),
 			damage::no_armor(),
-			entities::movement_speed(2),
+			entities::movement_speed(2.f),
 			_name,
 			_player_id
 		);

@@ -25,7 +25,7 @@
 #include <sanguis/timer.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/weapon_type.hpp>
-#include <sanguis/messages/auto_ptr.hpp>
+#include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/creator/generator/name.hpp>
 #include <sanguis/creator/generator/result_fwd.hpp>
 #include <sanguis/creator/generator/seed.hpp>
@@ -169,13 +169,13 @@ private:
 	void
 	send_entity_specific(
 		entity_id,
-		messages::auto_ptr
+		messages::base const &
 	);
 
 	void
 	send_player_specific(
 		player_id,
-		messages::auto_ptr
+		messages::base const &
 	);
 
 	void

@@ -1,3 +1,4 @@
+#include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/net/serialize_to_data_buffer.hpp>
 #include <sanguis/net/serialize_impl.hpp>
 #include <sanguis/net/data_buffer.hpp>
@@ -9,7 +10,7 @@
 
 bool
 sanguis::net::serialize_to_data_buffer(
-	messages::auto_ptr _message,
+	messages::base const &_message,
 	net::data_buffer &_buffer
 )
 {

@@ -60,8 +60,12 @@ sanguis::client::draw2d::entities::model::healthbar::healthbar(
 			)
 		)
 	),
-	health_(0),
-	max_health_(0)
+	health_(
+		0.f
+	),
+	max_health_(
+		0.f
+	)
 {
 	this->recalc_health();
 }

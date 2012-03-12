@@ -75,7 +75,7 @@ sanguis::server::world::random(
 						FCPPT_TEXT("car_park")
 					),
 					sanguis::creator::generator::seed(
-						0
+						0u
 					),
 					sanguis::creator::generator::size(
 						4000u,
@@ -109,7 +109,9 @@ sanguis::server::world::random(
 			fcppt::cref(
 				_diff_clock
 			),
-			sanguis::world_id(0), // FIXME!
+			sanguis::world_id(
+				0u
+			), // FIXME!
 			fcppt::ref(
 				_ctx
 			),

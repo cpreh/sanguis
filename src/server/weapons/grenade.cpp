@@ -21,8 +21,8 @@ sanguis::server::weapons::grenade::grenade(
 		_diff_clock,
 		_type,
 		weapons::range(20.f), // FIXME
-		weapons::magazine_size(1),
-		weapons::magazine_count(1),
+		weapons::magazine_size(1u),
+		weapons::magazine_count(1u),
 		_base_cooldown,
 		_cast_point,
 		_reload_time

@@ -60,7 +60,7 @@ sanguis::server::entities::enemies::enemy::enemy(
 			0
 		),
 		server::direction(
-			0
+			0.f
 		)
 	),
 	etype_(_etype),

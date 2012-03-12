@@ -24,6 +24,7 @@
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/verbose.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/move.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::server::machine::machine(
@@ -118,7 +119,7 @@ sanguis::server::machine::stop()
 
 void
 sanguis::server::machine::send_to_all(
-	messages::auto_ptr _message
+	messages::base const &_message
 )
 {
 	temp_buffer_.clear();
@@ -173,7 +174,7 @@ sanguis::server::machine::send_to_all(
 void
 sanguis::server::machine::send_unicast(
 	server::player_id const _id,
-	messages::auto_ptr _message
+	messages::base const &_message
 )
 {
 	net::id const net_id(
@@ -253,7 +254,9 @@ sanguis::server::machine::process_message(
 
 	this->process_event(
 		events::message(
-			_message,
+			fcppt::move(
+				_message
+			),
 			_id
 		)
 	);
@@ -301,7 +304,9 @@ sanguis::server::machine::data_callback(
 
 		this->process_message(
 			_id,
-			message
+			fcppt::move(
+				message
+			)
 		);
 	}
 }

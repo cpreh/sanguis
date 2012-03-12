@@ -1,7 +1,8 @@
 #include <sanguis/server/global/world_context.hpp>
 #include <sanguis/server/global/context.hpp>
 #include <sanguis/server/entities/base.hpp>
-#include <sanguis/messages/base.hpp>
+#include <sanguis/messages/base_fwd.hpp>
+
 
 sanguis::server::global::world_context::world_context(
 	global::context &_global_context
@@ -34,7 +35,7 @@ sanguis::server::global::world_context::transfer_entity(
 void
 sanguis::server::global::world_context::send_to_player(
 	player_id const _player_id,
-	messages::auto_ptr _msg
+	messages::base const &_msg
 )
 {
 	global_context_.send_to_player(

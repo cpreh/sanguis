@@ -119,7 +119,7 @@ sanguis::server::states::running::react(
 			messages::player_choose_perk
 		>,
 		functor_type
-	> dispatcher;
+	>::type dispatcher;
 
 	return
 		dispatcher(
@@ -172,7 +172,7 @@ sanguis::server::states::running::operator()(
 
 	global_context_->insert_player(
 		sanguis::world_id(
-			0 // FIXME: which world id?
+			0u // FIXME: which world id?
 		),
 		_id,
 		sge::charconv::utf8_string_to_fcppt(

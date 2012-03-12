@@ -1,3 +1,4 @@
+#include <sanguis/messages/base.hpp>
 #include <sanguis/net/serialize_to_circular_buffer.hpp>
 #include <sanguis/net/circular_buffer_sink.hpp>
 #include <sanguis/net/message_size.hpp>
@@ -11,7 +12,7 @@
 
 bool
 sanguis::net::serialize_to_circular_buffer(
-	messages::auto_ptr _message,
+	messages::base const &_message,
 	net::circular_buffer &_buffer
 )
 {
@@ -19,13 +20,13 @@ sanguis::net::serialize_to_circular_buffer(
 		_buffer.capacity()
 		>=
 		net::message_size(
-			_message->size()
+			_message.size()
 		),
 		(
 			fcppt::format(
 				FCPPT_TEXT("Send message size %1% is too big for the buffer!")
 			)
-			% _message->size()
+			% _message.size()
 		).str()
 	);
 

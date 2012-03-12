@@ -58,11 +58,21 @@ sanguis::client::draw2d::entities::model::object::object(
 	),
 	with_health(),
 	with_weapon(),
-	diff_clock_(_param.diff_clock()),
-	attacking_(false),
-	reloading_(false),
-	health_(0),
-	max_health_(0),
+	diff_clock_(
+		_param.diff_clock()
+	),
+	attacking_(
+		false
+	),
+	reloading_(
+		false
+	),
+	health_(
+		0.f
+	),
+	max_health_(
+		0.f
+	),
 	healthbar_(
 		_needs_healthbar == needs_healthbar::yes
 		?

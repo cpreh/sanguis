@@ -1,3 +1,4 @@
+#include <sanguis/duration_second.hpp>
 #include <sanguis/server/waves/generator.hpp>
 #include <sanguis/server/waves/infinite.hpp>
 #include <sanguis/server/waves/single.hpp>
@@ -193,11 +194,24 @@ sanguis::server::waves::generator::spawn_all()
 		fcppt::cref(
 			diff_clock_
 		),
-		delay(60),
-		spawn_interval(40),
-		spawns_per_wave(5),
+		waves::delay(
+			sanguis::duration_second(
+				60.f
+			)
+		),
+		waves::spawn_interval(
+			sanguis::duration_second(
+				40
+			)
+		),
+		waves::spawns_per_wave(
+			5u
+		),
 		enemy_type::spider
-	)(
+	);
+	// FIXME:
+#if 0
+	(
 		fcppt::cref(
 			diff_clock_
 		),
@@ -278,4 +292,5 @@ sanguis::server::waves::generator::spawn_all()
 		spawns_per_wave(3),
 		enemy_type::skeleton
 	);
+#endif
 }

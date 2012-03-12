@@ -1,6 +1,7 @@
 #include <sanguis/client/perk/state.hpp>
 #include <sanguis/client/perk/choosable.hpp>
 #include <sanguis/client/perk/info.hpp>
+#include <sanguis/client/level.hpp>
 #include <sanguis/client/log.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
@@ -14,8 +15,14 @@ sanguis::client::perk::state::state(
 :
 	send_callback_(_send_callback),
 	perks_(),
-	current_level_(0),
-	consumed_levels_(0),
+	current_level_(
+		sanguis::client::level(
+			0u
+		)
+	),
+	consumed_levels_(
+		0u
+	),
 	perk_levels_(),
 	level_signal_(),
 	change_signal_()

@@ -8,7 +8,7 @@ sanguis::server::damage::no_armor()
 	return
 		damage::all(
 			damage::unit(
-				0
+				0.f
 			)
 		);
 }

@@ -36,10 +36,10 @@ sanguis::client::draw2d::particle::generator::generator(
 		),
 		_depth,
 		particle::rotation(
-			0
+			0.f
 		),
 		particle::rotation_speed(
-			0
+			0.f
 		)
 	),
 	generate_object_(
@@ -134,7 +134,7 @@ sanguis::client::draw2d::particle::generator::generator(
 {
 	for(
 		spawn_initial index(
-			0
+			0u
 		);
 		index < _spawn_initial;
 		++index
@@ -219,7 +219,7 @@ sanguis::client::draw2d::particle::generator::generate()
 
 	object->rot_speed(
 		particle::rotation_speed(
-			0
+			0.f
 		)
 	);
 

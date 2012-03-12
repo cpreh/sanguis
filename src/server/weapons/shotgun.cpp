@@ -1,3 +1,5 @@
+#include <sanguis/duration_second.hpp>
+#include <sanguis/random.hpp>
 #include <sanguis/server/weapons/shotgun.hpp>
 #include <sanguis/server/weapons/delayed_attack.hpp>
 #include <sanguis/server/weapons/unlimited_magazine_count.hpp>
@@ -5,7 +7,6 @@
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/projectiles/simple_bullet.hpp>
 #include <sanguis/server/environment/object.hpp>
-#include <sanguis/random.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
@@ -28,12 +29,16 @@ sanguis::server::weapons::shotgun::shotgun(
 	weapon(
 		_diff_clock,
 		_type,
-		weapons::range(20), // FIXME
+		weapons::range(
+			20.f
+		), // FIXME
 		_magazine_size,
 		unlimited_magazine_count,
 		_base_cooldown,
 		weapons::cast_point(
-			0.5f
+			sanguis::duration_second(
+				0.5f
+			)
 		), // FIXME
 		_reload_time
 	),

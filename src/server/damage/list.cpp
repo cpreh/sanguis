@@ -22,7 +22,9 @@ sanguis::server::damage::list::list(
 	std::fill(
 		array_.begin(),
 		array_.end(),
-		unit(0)
+		damage::unit(
+			0.f
+		)
 	);
 
 	array_[_meta.type()] = _meta.value();

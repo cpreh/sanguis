@@ -1,5 +1,7 @@
+#include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/messages/serialization/serialize.hpp>
-#include <sanguis/messages/base.hpp>
+#include <alda/serialization/ostream.hpp>
+#include <alda/serialization/serialize.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <iosfwd>
 #include <ostream>
@@ -7,20 +9,12 @@
 
 void
 sanguis::messages::serialization::serialize(
-	ostream &_stream,
-	auto_ptr _msg
+	alda::serialization::ostream &_stream,
+	sanguis::messages::base const &_message
 )
 {
-	_stream.write(
-		reinterpret_cast<
-			ostream::char_type const *
-		>(
-			_msg->data()
-		),
-		static_cast<
-			std::streamsize
-		>(
-			_msg->size()
-		)
+	alda::serialization::serialize(
+		_stream,
+		_message
 	);
 }

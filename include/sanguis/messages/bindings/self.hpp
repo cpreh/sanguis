@@ -1,10 +1,13 @@
 #ifndef SANGUIS_MESSAGES_BINDINGS_SELF_HPP_INCLUDED
 #define SANGUIS_MESSAGES_BINDINGS_SELF_HPP_INCLUDED
 
-#include <sanguis/messages/bindings/dynamic_len.hpp>
-#include <sanguis/messages/bindings/extract_length.hpp>
-#include <sanguis/messages/bindings/put_length.hpp>
-#include <sanguis/messages/serialization/make_object.hpp>
+#include <alda/bindings/dynamic_len.hpp>
+// TODO:
+#include <alda/bindings/detail/extract_length.hpp>
+// TODO:
+#include <alda/bindings/detail/put_length.hpp>
+// TODO:
+#include <alda/serialization/detail/read/make_object.hpp>
 #include <fcppt/algorithm/copy_n.hpp>
 #include <majutsu/concepts/dynamic_memory/tag.hpp>
 #include <majutsu/const_raw_pointer.hpp>
@@ -27,7 +30,7 @@ template<
 >
 struct self
 :
-bindings::dynamic_len<
+alda::bindings::dynamic_len<
 	Type,
 	Type
 >
@@ -69,7 +72,7 @@ place(
 	majutsu::raw_pointer _mem
 )
 {
-	bindings::put_length(
+	alda::bindings::detail::put_length(
 		_tag,
 		_concept,
 		_value,
@@ -100,7 +103,7 @@ make(
 	>::length_type length_type;
 
 	length_type const length(
-		bindings::extract_length(
+		alda::bindings::detail::extract_length(
 			_tag,
 			_concept,
 			_mem
@@ -125,7 +128,7 @@ make(
 	);
 
 	return
-		messages::serialization::make_object<
+		alda::serialization::detail::read::make_object<
 			Type
 		>(
 			stream

@@ -32,7 +32,7 @@ sanguis::client::draw2d::particle::property_container const prop_(
 					0.03f
 				),
 				sanguis::client::draw2d::particle::spawn_initial(
-					5
+					5u
 				),
 				sanguis::client::draw2d::particle::gen_life_time(
 					sanguis::duration_second(
@@ -84,7 +84,7 @@ sanguis::client::draw2d::particle::property_container const prop_(
 					0.04f
 				),
 				sanguis::client::draw2d::particle::spawn_initial(
-					9
+					9u
 				),
 				sanguis::client::draw2d::particle::gen_life_time(
 					sanguis::duration_second(
@@ -136,7 +136,7 @@ sanguis::client::draw2d::particle::property_container const prop_(
 					0.03f
 				),
 				sanguis::client::draw2d::particle::spawn_initial(
-					0
+					0u
 				),
 				sanguis::client::draw2d::particle::gen_life_time(
 					sanguis::duration_second(

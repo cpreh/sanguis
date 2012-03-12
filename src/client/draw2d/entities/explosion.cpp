@@ -53,13 +53,13 @@ sanguis::client::draw2d::entities::explosion::explosion(
 			draw2d::speed::value_type::null()
 		),
 		particle::depth(
-			0
+			0.f
 		),
 		particle::rotation(
-			0
+			0.f
 		),
 		particle::rotation_speed(
-			0
+			0.f
 		)
 	),
 	properties_(
@@ -90,10 +90,10 @@ sanguis::client::draw2d::entities::explosion::update()
 				draw2d::center::value_type::null()
 			),
 			particle::rotation(
-				0
+				0.f
 			),
 			particle::depth(
-				0
+				0.f
 			)
 		);
 }
@@ -127,9 +127,15 @@ sanguis::client::draw2d::entities::explosion::generate_explosion()
 				draw2d::speed(
 					draw2d::speed::value_type::null()
 				),
-				particle::depth(0),
-				particle::rotation(0),
-				particle::rotation_speed(0)
+				particle::depth(
+					0.f
+				),
+				particle::rotation(
+					0.f
+				),
+				particle::rotation_speed(
+					0.f
+				)
 			)
 		);
 }

@@ -47,13 +47,13 @@ sanguis::client::draw2d::particle::object::object(
 			draw2d::speed::value_type::null()
 		),
 		particle::depth(
-			0
+			0.f
 		),
 		particle::rotation(
-			0
+			0.f
 		),
 		particle::rotation_speed(
-			0
+			0.f
 		)
 	),
 	diff_clock_(

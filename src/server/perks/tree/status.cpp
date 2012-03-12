@@ -8,11 +8,21 @@ sanguis::server::perks::tree::status::status(
 	tree::max_level const _max_level
 )
 :
-	type_(_type),
-	required_player_level_(_required_player_level),
-	required_parent_level_(_required_parent_level),
-	max_level_(_max_level),
-	level_(0)
+	type_(
+		_type
+	),
+	required_player_level_(
+		_required_player_level
+	),
+	required_parent_level_(
+		_required_parent_level
+	),
+	max_level_(
+		_max_level
+	),
+	level_(
+		0u
+	)
 {
 }
 

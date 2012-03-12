@@ -20,7 +20,7 @@ sanguis::client::draw2d::particle::rotation_from_alignment(
 	case align_type::none:
 		return
 			particle::rotation(
-				0
+				0.f
 			);
 	case align_type::to_center:
 		return
@@ -35,7 +35,7 @@ sanguis::client::draw2d::particle::rotation_from_alignment(
 			)
 			?
 				particle::rotation(
-					0
+					0.f
 				)
 			:
 				particle::rotation(

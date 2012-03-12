@@ -10,8 +10,10 @@
 #include <sanguis/client/events/tick.hpp>
 #include <sanguis/client/perk/make_tree.hpp>
 #include <sanguis/client/perk/state.hpp>
+#include <sanguis/client/level.hpp>
 #include <sanguis/client/log.hpp>
 #include <sanguis/client/make_send_callback.hpp>
+#include <sanguis/client/player_level.hpp>
 #include <sanguis/messages/call/object.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/player_choose_perk.hpp>
@@ -101,7 +103,7 @@ sanguis::client::states::has_player::react(
 			sanguis::messages::give_weapon
 		>,
 		has_player
-	> dispatcher;
+	>::type dispatcher;
 
 	return
 		dispatcher(
@@ -163,7 +165,9 @@ sanguis::client::states::has_player::operator()(
 {
 	perk_state_->player_level(
 		client::player_level(
-			_message.get<sanguis::messages::level>()
+			client::level(
+				_message.get<sanguis::messages::level>()
+			)
 		)
 	);
 
@@ -210,7 +214,7 @@ sanguis::client::states::has_player::send_perk_choose(
 )
 {
 	context<machine>().send(
-		messages::create(
+		*messages::create(
 			messages::player_choose_perk(
 				_type
 			)

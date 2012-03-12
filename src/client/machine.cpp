@@ -20,6 +20,7 @@
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/move.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::client::machine::machine(
@@ -136,7 +137,7 @@ sanguis::client::machine::disconnect()
 
 void
 sanguis::client::machine::send(
-	messages::auto_ptr _message
+	messages::base const &_message
 )
 {
 	if(
@@ -323,7 +324,9 @@ sanguis::client::machine::data_callback(
 
 		this->process_event(
 			events::message(
-				ret
+				fcppt::move(
+					ret
+				)
 			)
 		);
 	}

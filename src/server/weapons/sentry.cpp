@@ -22,13 +22,13 @@ sanguis::server::weapons::sentry::sentry(
 		_diff_clock,
 		_type,
 		weapons::range(
-			20
+			20.f
 		), // FIXME
 		weapons::magazine_size(
-			1
+			1U
 		),
 		weapons::magazine_count(
-			1
+			1u
 		),
 		_base_cooldown,
 		_cast_point,
@@ -59,8 +59,12 @@ sanguis::server::weapons::sentry::do_attack(
 				friend_type::sentry,
 				_attack.environment().load_context(),
 				damage::no_armor(),
-				server::health(100),
-				entities::movement_speed(0),
+				server::health(
+					100.f
+				),
+				entities::movement_speed(
+					0.f
+				),
 				ai::create_simple_without_owner(
 					this->diff_clock()
 				),

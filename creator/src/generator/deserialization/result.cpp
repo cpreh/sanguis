@@ -10,6 +10,7 @@
 #include <sge/parse/json/int_type.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/string.hpp>
+#include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::creator::generator::result const
@@ -27,7 +28,9 @@ sanguis::creator::generator::deserialization::result(
 					FCPPT_TEXT("shapes")
 				)
 			),
-			generator::seed(
+			fcppt::strong_typedef_construct_cast<
+				generator::seed
+			>(
 				sge::parse::json::find_member_exn<
 					sge::parse::json::int_type
 				>(

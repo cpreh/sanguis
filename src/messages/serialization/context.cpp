@@ -1,16 +1,8 @@
-#include <sanguis/messages/serialization/context.hpp>
-#include <sanguis/messages/serialization/dispatcher_base.hpp>
+#include <sanguis/messages/serialization/context_fwd.hpp>
+#include <sanguis/messages/types/alda_type.hpp>
+#include <alda/serialization/instantiate_context.hpp>
 
-sanguis::messages::serialization::context::context()
-{
-}
 
-sanguis::messages::serialization::context::~context()
-{
-}
-
-sanguis::messages::serialization::dispatch_map const &
-sanguis::messages::serialization::context::handlers() const
-{
-	return handlers_;
-}
+ALDA_SERIALIZATION_INSTANTIATE_CONTEXT(
+	sanguis::messages::types::alda_type
+);

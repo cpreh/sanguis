@@ -7,15 +7,16 @@
 #include <sanguis/net/message_header_size.hpp>
 #include <sanguis/net/message_size.hpp>
 #include <sanguis/messages/serialization/deserialize.hpp>
-#include <sanguis/messages/serialization/endianness.hpp>
 #include <sanguis/messages/base.hpp>
 #include <sanguis/messages/global_context.hpp>
 #include <sanguis/exception.hpp>
+#include <alda/endianness.hpp>
 #include <fcppt/assert/throw.hpp>
 #include <fcppt/assert/throw_message.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/io/read.hpp>
 #include <fcppt/format.hpp>
+#include <fcppt/move.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/iostreams/stream_buffer.hpp>
@@ -61,11 +62,11 @@ sanguis::net::deserialize(
 	);
 
 	net::message_header const message_size(
-		fcppt::io::read<
+		*fcppt::io::read<
 			net::message_header
 		>(
 			stream,
-			messages::serialization::endianness()
+			alda::endianness()
 		)
 	);
 
@@ -139,5 +140,8 @@ sanguis::net::deserialize(
 		bytes_read
 	);
 
-	return ret;
+	return
+		fcppt::move(
+			ret
+		);
 }

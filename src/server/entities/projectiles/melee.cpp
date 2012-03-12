@@ -19,7 +19,7 @@ sanguis::server::entities::projectiles::melee::melee(
 		projectile_type::melee,
 		_team,
 		entities::movement_speed(
-			0
+			0.f
 		),
 		server::dim(
 			1,
@@ -31,7 +31,7 @@ sanguis::server::entities::projectiles::melee::melee(
 			)
 		), // short lifetime
 		server::direction(
-			0
+			0.f
 		),
 		indeterminate::yes
 	),

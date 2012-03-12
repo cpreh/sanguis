@@ -55,7 +55,7 @@ sanguis::server::perks::choleric::update(
 		return;
 
 	server::level const rocket_level(
-		10
+		10u
 	);
 
 	bool const spawn_bullets(
@@ -94,7 +94,9 @@ sanguis::server::perks::choleric::update(
 							_env.load_context()
 						),
 						_entity.team(),
-						damage::unit(2), // damage
+						damage::unit(
+							2.f
+						),
 						direction
 					)
 				)
@@ -110,7 +112,9 @@ sanguis::server::perks::choleric::update(
 							_env.load_context()
 						),
 						_entity.team(),
-						damage::unit(5), // damage
+						damage::unit(
+							5.f
+						),
 						server::radius(
 							1.6f
 						),

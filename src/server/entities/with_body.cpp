@@ -31,7 +31,7 @@ sanguis::server::entities::with_body::with_body(
 				server::speed::value_type::null()
 			),
 			server::angle(
-				0
+				0.f
 			),
 			_params.shape(),
 			_params.solidity(),

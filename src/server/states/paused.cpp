@@ -65,7 +65,7 @@ sanguis::server::states::paused::react(
 			messages::player_unpause
 		>,
 		functor_type
-	> dispatcher;
+	>::type dispatcher;
 
 	return
 		dispatcher(
@@ -89,7 +89,7 @@ sanguis::server::states::paused::operator()(
 )
 {
 	context<machine>().send_to_all(
-		messages::create(
+		*messages::create(
 			messages::unpause()
 		)
 	);

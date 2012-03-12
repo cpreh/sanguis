@@ -2,7 +2,9 @@
 #define SANGUIS_MESSAGES_CREATE_HPP_INCLUDED
 
 #include <sanguis/messages/auto_ptr.hpp>
-#include <sanguis/messages/concrete.hpp>
+#include <sanguis/messages/types/alda_type.hpp>
+#include <alda/message/make_concrete_ptr.hpp>
+
 
 namespace sanguis
 {
@@ -18,12 +20,10 @@ create(
 )
 {
 	return
-		messages::auto_ptr(
-			new messages::concrete<
-				T
-			>(
-				_value
-			)
+		alda::message::make_concrete_ptr<
+			sanguis::messages::types::alda_type
+		>(
+			_value
 		);
 }
 

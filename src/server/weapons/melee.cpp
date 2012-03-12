@@ -1,3 +1,4 @@
+#include <sanguis/duration_second.hpp>
 #include <sanguis/server/weapons/melee.hpp>
 #include <sanguis/server/weapons/delayed_attack.hpp>
 #include <sanguis/server/weapons/unlimited_magazine_size.hpp>
@@ -26,10 +27,14 @@ sanguis::server::weapons::melee::melee(
 		unlimited_magazine_count,
 		_base_cooldown,
 		weapons::cast_point(
-			0.f
+			sanguis::duration_second(
+				0.f
+			)
 		),
 		weapons::reload_time(
-			0.f
+			sanguis::duration_second(
+				0.f
+			)
 		)
 	),
 	damage_(_damage)

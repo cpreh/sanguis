@@ -232,7 +232,7 @@ sanguis::server::world::object::insert(
 	)
 		this->send_player_specific(
 			player_ret->player_id(),
-			messages::create(
+			*messages::create(
 				messages::change_world(
 					id_,
 					seed_,
@@ -260,7 +260,7 @@ sanguis::server::world::object::weapon_changed(
 {
 	this->send_entity_specific(
 		_id,
-		messages::create(
+		*messages::create(
 			messages::change_weapon(
 				_id,
 				_wt
@@ -278,7 +278,7 @@ sanguis::server::world::object::got_weapon(
 {
 	this->send_player_specific(
 		_player_id,
-		messages::create(
+		*messages::create(
 			messages::give_weapon(
 				_entity_id,
 				_wt
@@ -297,13 +297,13 @@ sanguis::server::world::object::attacking_changed(
 		_id,
 		_is_attacking
 		?
-			messages::create(
+			*messages::create(
 				messages::start_attacking(
 					_id
 				)
 			)
 		:
-			messages::create(
+			*messages::create(
 				messages::stop_attacking(
 					_id
 				)
@@ -321,13 +321,13 @@ sanguis::server::world::object::reloading_changed(
 		_id,
 		_is_reloading
 		?
-			messages::create(
+			*messages::create(
 				messages::start_reloading(
 					_id
 				)
 			)
 		:
-			messages::create(
+			*messages::create(
 				messages::stop_reloading(
 					_id
 				)
@@ -343,7 +343,7 @@ sanguis::server::world::object::max_health_changed(
 {
 	this->send_entity_specific(
 		_id,
-		messages::create(
+		*messages::create(
 			messages::max_health(
 				_id,
 				_health.get()
@@ -361,7 +361,7 @@ sanguis::server::world::object::exp_changed(
 {
 	this->send_player_specific(
 		_player_id,
-		messages::create(
+		*messages::create(
 			messages::experience(
 				_entity_id,
 				// round EXP
@@ -384,7 +384,7 @@ sanguis::server::world::object::level_changed(
 {
 	this->send_player_specific(
 		_player_id,
-		messages::create(
+		*messages::create(
 			messages::level_up(
 				_entity_id,
 				_level.get()
@@ -482,7 +482,7 @@ sanguis::server::world::object::add_sight_range(
 
 	this->send_player_specific(
 		_player_id,
-		it->second->add_message(
+		*it->second->add_message(
 			_player_id
 		)
 	);
@@ -543,13 +543,13 @@ sanguis::server::world::object::remove_sight_range(
 		_player_id,
 		it->second->dead()
 		?
-			messages::create(
+			*messages::create(
 				messages::die(
 					_target_id
 				)
 			)
 		:
-			messages::create(
+			*messages::create(
 				messages::remove(
 					_target_id
 				)
@@ -588,7 +588,7 @@ sanguis::server::world::object::load_context() const
 void
 sanguis::server::world::object::send_entity_specific(
 	entity_id const _id,
-	messages::auto_ptr _msg
+	messages::base const &_msg
 )
 {
 	for(
@@ -612,7 +612,7 @@ sanguis::server::world::object::send_entity_specific(
 void
 sanguis::server::world::object::send_player_specific(
 	player_id const _player_id,
-	messages::auto_ptr _msg
+	messages::base const &_msg
 )
 {
 	global_context_.send_to_player(
@@ -659,7 +659,7 @@ sanguis::server::world::object::update_entity(
 	)
 		this->send_entity_specific(
 			with_body->id(),
-			message_convert::rotate(
+			*message_convert::rotate(
 				*with_body
 			)
 		);
@@ -672,14 +672,14 @@ sanguis::server::world::object::update_entity(
 	{
 		this->send_entity_specific(
 			movable->id(),
-			message_convert::speed(
+			*message_convert::speed(
 				*movable
 			)
 		);
 
 		this->send_entity_specific(
 			movable->id(),
-			message_convert::move(
+			*message_convert::move(
 				*movable
 			)
 		);
@@ -692,7 +692,7 @@ sanguis::server::world::object::update_entity(
 	)
 		this->send_entity_specific(
 			with_health->id(),
-			message_convert::health(
+			*message_convert::health(
 				*with_health
 			)
 		);

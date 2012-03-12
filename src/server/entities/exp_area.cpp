@@ -32,7 +32,7 @@ sanguis::server::entities::exp_area::exp_area(
 					this->team()
 				),
 				server::radius(
-					2000 // TODO
+					2000.f // TODO
 				),
 				this->body_enter_callback(),
 				this->body_exit_callback()

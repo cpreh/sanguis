@@ -18,9 +18,10 @@
 #include <sanguis/server/send_available_perks.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/log_location.hpp>
-#include <sanguis/messages/remove_id.hpp>
+#include <sanguis/messages/base.hpp>
 #include <sanguis/messages/connect_state.hpp>
 #include <sanguis/messages/create.hpp>
+#include <sanguis/messages/remove_id.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sge/charconv/system_fwd.hpp>
 #include <fcppt/log/location.hpp>
@@ -110,9 +111,9 @@ sanguis::server::global::context::insert_player(
 )
 {
 	// send this before the world gets created
-	send_unicast_(
+	this->send_to_player(
 		_player_id,
-		messages::create(
+		*messages::create(
 			messages::connect_state(
 				_connect_state
 			)
@@ -161,7 +162,7 @@ sanguis::server::global::context::insert_player(
 		entities::insert_parameters(
 			spawn_pos,
 			server::angle(
-				0
+				0.f
 			)
 		)
 	);
@@ -239,9 +240,9 @@ sanguis::server::global::context::player_target(
 		)
 	);
 
-	send_unicast_(
+	this->send_to_player(
 		_player_id,
-		message_convert::rotate(
+		*message_convert::rotate(
 			player
 		)
 	);
@@ -319,9 +320,9 @@ sanguis::server::global::context::player_speed(
 		);
 	}
 
-	send_unicast_(
+	this->send_to_player(
 		_player_id,
-		message_convert::speed(
+		*message_convert::speed(
 			player
 		)
 	);
@@ -413,7 +414,7 @@ sanguis::server::global::context::player_count() const
 void
 sanguis::server::global::context::send_to_player(
 	player_id const _player_id,
-	messages::auto_ptr _msg
+	messages::base const &_msg
 )
 {
 	// TODO: we probably want to map this id to a net::id_type
@@ -428,9 +429,9 @@ sanguis::server::global::context::remove_player(
 	player_id const _id
 )
 {
-	send_unicast_(
+	this->send_to_player(
 		_id,
-		messages::create(
+		*messages::create(
 			messages::remove_id()
 		)
 	);

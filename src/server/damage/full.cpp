@@ -2,5 +2,5 @@
 
 sanguis::server::damage::unit const
 sanguis::server::damage::full(
-	1
+	1.f
 );

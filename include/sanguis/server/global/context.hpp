@@ -22,7 +22,7 @@
 #include <sanguis/perk_type.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/world_id.hpp>
-#include <sanguis/messages/auto_ptr.hpp>
+#include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/load/context_base_fwd.hpp>
 #include <sge/charconv/system_fwd.hpp>
 #include <fcppt/function/object.hpp>
@@ -117,7 +117,7 @@ private:
 	void
 	send_to_player(
 		player_id,
-		messages::auto_ptr
+		messages::base const &
 	);
 
 	void

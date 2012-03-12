@@ -1,10 +1,9 @@
 #include <sanguis/messages/global_context.hpp>
-#include <sanguis/messages/serialization/context.hpp>
+#include <sanguis/messages/types/alda_type.hpp>
+#include <alda/serialization/define_context_function.hpp>
 
-sanguis::messages::serialization::context &
-sanguis::messages::global_context()
-{
-	static serialization::context ctx;
 
-	return ctx;
-}
+ALDA_SERIALIZATION_DEFINE_CONTEXT_FUNCTION(
+	sanguis::messages::types::alda_type,
+	sanguis::messages::global_context
+)
