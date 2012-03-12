@@ -1,13 +1,23 @@
+#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/duration_second.hpp>
+#include <sanguis/weapon_type.hpp>
+#include <sanguis/server/weapons/base_cooldown.hpp>
+#include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/create.hpp>
+#include <sanguis/server/weapons/damage.hpp>
+#include <sanguis/server/weapons/magazine_size.hpp>
+#include <sanguis/server/weapons/grenade.hpp>
 #include <sanguis/server/weapons/pistol.hpp>
 #include <sanguis/server/weapons/shotgun.hpp>
+#include <sanguis/server/weapons/range.hpp>
+#include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/rocket_launcher.hpp>
-#include <sanguis/server/weapons/weapon.hpp>
-#include <sanguis/server/weapons/grenade.hpp>
 #include <sanguis/server/weapons/sentry.hpp>
+#include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/unlimited_magazine_size.hpp>
-#include <sanguis/exception.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/assert/unreachable.hpp>
+#include <fcppt/assert/unreachable_message.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
@@ -26,14 +36,13 @@ sanguis::server::weapons::create(
 	)
 	{
 	case weapon_type::melee:
-		throw sanguis::exception(
+		FCPPT_ASSERT_UNREACHABLE_MESSAGE(
 			FCPPT_TEXT("Please create melee weapons directly, not through the weapon factory!")
 		);
-		// FIXME!
-/*
+		break;
 	case weapon_type::pistol:
 		return
-			unique_ptr(
+			weapons::unique_ptr(
 				fcppt::make_unique_ptr<
 					pistol
 				>(
@@ -41,14 +50,34 @@ sanguis::server::weapons::create(
 						_diff_clock
 					),
 					_type,
-					base_cooldown(0.5f),
-					damage(5),
-					cast_point(0.2f),
-					magazine_size(18),
-					reload_time(2.f),
-					range(20)
+					weapons::base_cooldown(
+						sanguis::duration_second(
+							0.5f
+						)
+					),
+					weapons::damage(
+						5.f
+					),
+					weapons::cast_point(
+						sanguis::duration_second(
+							0.2f
+						)
+					),
+					weapons::magazine_size(
+						18u
+					),
+					weapons::reload_time(
+						sanguis::duration_second(
+							2.f
+						)
+					),
+					weapons::range(
+						20.f
+					)
 				)
 			);
+		// FIXME!
+/*
 	case weapon_type::dual_pistol:
 		return
 			unique_ptr(
