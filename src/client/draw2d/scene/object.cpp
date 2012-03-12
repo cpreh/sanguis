@@ -2,6 +2,7 @@
 #include <sanguis/client/draw2d/scene/background.hpp>
 #include <sanguis/client/draw2d/scene/background_dim.hpp>
 #include <sanguis/client/draw2d/scene/control_environment.hpp>
+#include <sanguis/client/draw2d/scene/foreach_z_ordering.hpp>
 #include <sanguis/client/draw2d/scene/hud.hpp>
 #include <sanguis/client/draw2d/scene/message_environment.hpp>
 #include <sanguis/client/draw2d/scene/screen_center.hpp>
@@ -47,7 +48,6 @@
 #include <fcppt/function/object.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/cref.hpp>
-#include <fcppt/foreach_enumerator_start_end.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
@@ -384,9 +384,8 @@ sanguis::client::draw2d::scene::object::render_systems()
 
 	this->render_lighting();
 
-	FCPPT_FOREACH_ENUMERATOR_START_END(
+	SANGUIS_CLIENT_DRAW2D_SCENE_FOREACH_Z_ORDERING(
 		index,
-		z_ordering,
 		z_ordering::smoke,
 		z_ordering::rubble
 	)
@@ -394,9 +393,8 @@ sanguis::client::draw2d::scene::object::render_systems()
 			index
 		);
 
-	FCPPT_FOREACH_ENUMERATOR_START_END(
+	SANGUIS_CLIENT_DRAW2D_SCENE_FOREACH_Z_ORDERING(
 		index,
-		z_ordering,
 		z_ordering::healthbar_lower,
 		z_ordering::healthbar_upper
 	)
@@ -459,9 +457,8 @@ sanguis::client::draw2d::scene::object::render_lighting()
 		translation
 	);
 
-	FCPPT_FOREACH_ENUMERATOR_START_END(
+	SANGUIS_CLIENT_DRAW2D_SCENE_FOREACH_Z_ORDERING(
 		index,
-		z_ordering,
 		z_ordering::corpses,
 		z_ordering::player_upper
 	)

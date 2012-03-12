@@ -169,6 +169,7 @@ SET(
 	include/sanguis/client/draw2d/scene/background_fwd.hpp
 	include/sanguis/client/draw2d/scene/background_texture_coordinates.hpp
 	include/sanguis/client/draw2d/scene/control_environment.hpp
+	include/sanguis/client/draw2d/scene/foreach_z_ordering.hpp
 	include/sanguis/client/draw2d/scene/hud.hpp
 	include/sanguis/client/draw2d/scene/hud_fwd.hpp
 	include/sanguis/client/draw2d/scene/message_environment.hpp
