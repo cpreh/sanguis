@@ -189,7 +189,11 @@ void
 sanguis::server::waves::generator::spawn_all()
 {
 	// TODO: somehow put this in a configuration file!
-	boost::assign::ptr_push_back<waves::infinite>(waves_)
+	boost::assign::ptr_push_back<
+		waves::infinite
+	>(
+		waves_
+	)
 	(
 		fcppt::cref(
 			diff_clock_
@@ -208,89 +212,185 @@ sanguis::server::waves::generator::spawn_all()
 			5u
 		),
 		enemy_type::spider
-	);
-	// FIXME:
-#if 0
-	(
+	)(
 		fcppt::cref(
 			diff_clock_
 		),
-		delay(0),
-		spawn_interval(9),
-		spawns_per_wave(15),
+		waves::delay(
+			sanguis::duration_second(
+				0.f
+			)
+		),
+		waves::spawn_interval(
+			sanguis::duration_second(
+				9.f
+			)
+		),
+		waves::spawns_per_wave(
+			15u
+		),
 		enemy_type::maggot
 	)(
 		fcppt::cref(
 			diff_clock_
 		),
-		delay(50),
-		spawn_interval(20),
-		spawns_per_wave(10),
+		waves::delay(
+			sanguis::duration_second(
+				50.f
+			)
+		),
+		waves::spawn_interval(
+			sanguis::duration_second(
+				20
+			)
+		),
+		waves::spawns_per_wave(
+			10u
+		),
 		enemy_type::maggot
 	)(
 		fcppt::cref(
 			diff_clock_
 		),
-		delay(0),
-		spawn_interval(30),
-		spawns_per_wave(8),
+		waves::delay(
+			sanguis::duration_second(
+				0.f
+			)
+		),
+		waves::spawn_interval(
+			sanguis::duration_second(
+				30.f
+			)
+		),
+		waves::spawns_per_wave(
+			8u
+		),
 		enemy_type::zombie01
 	)(
 		fcppt::cref(
 			diff_clock_
 		),
-		delay(0),
-		spawn_interval(30),
-		spawns_per_wave(8),
+		waves::delay(
+			sanguis::duration_second(
+				0.f
+			)
+		),
+		waves::spawn_interval(
+			sanguis::duration_second(
+				30.f
+			)
+		),
+		waves::spawns_per_wave(
+			8u
+		),
 		enemy_type::zombie01
 	)(
 		fcppt::cref(
 			diff_clock_
 		),
-		delay(90),
-		spawn_interval(60),
-		spawns_per_wave(7),
+		waves::delay(
+			sanguis::duration_second(
+				90.f
+			)
+		),
+		waves::spawn_interval(
+			sanguis::duration_second(
+				60
+			)
+		),
+		waves::spawns_per_wave(
+			7u
+		),
 		enemy_type::zombie00
 	)(
 		fcppt::cref(
 			diff_clock_
 		),
-		delay(45),
-		spawn_interval(30),
-		spawns_per_wave(3),
+		waves::delay(
+			sanguis::duration_second(
+				45.f
+			)
+		),
+		waves::spawn_interval(
+			sanguis::duration_second(
+				30.f
+			)
+		),
+		waves::spawns_per_wave(
+			3u
+		),
 		enemy_type::wolf_brown
 	)(
 		fcppt::cref(
 			diff_clock_
 		),
-		delay(80),
-		spawn_interval(30),
-		spawns_per_wave(3),
+		waves::delay(
+			sanguis::duration_second(
+				80.f
+			)
+		),
+		waves::spawn_interval(
+			sanguis::duration_second(
+				30.f
+			)
+		),
+		waves::spawns_per_wave(
+			3u
+		),
 		enemy_type::wolf_white
 	)(
 		fcppt::cref(
 			diff_clock_
 		),
-		delay(120),
-		spawn_interval(30),
-		spawns_per_wave(3),
+		waves::delay(
+			sanguis::duration_second(
+				120.f
+			)
+		),
+		waves::spawn_interval(
+			sanguis::duration_second(
+				30.f
+			)
+		),
+		waves::spawns_per_wave(
+			3u
+		),
 		enemy_type::wolf_black
 	)(
 		fcppt::cref(
 			diff_clock_
 		),
-		delay(130),
-		spawn_interval(80),
-		spawns_per_wave(6),
+		waves::delay(
+			sanguis::duration_second(
+				130.f
+			)
+		),
+		waves::spawn_interval(
+			sanguis::duration_second(
+				80.f
+			)
+		),
+		waves::spawns_per_wave(
+			6u
+		),
 		enemy_type::spider
 	)(
 		fcppt::cref(
 			diff_clock_
 		),
-		delay(180),
-		spawn_interval(120),
-		spawns_per_wave(3),
+		waves::delay(
+			sanguis::duration_second(
+				180.f
+			)
+		),
+		waves::spawn_interval(
+			sanguis::duration_second(
+				120.f
+			)
+		),
+		waves::spawns_per_wave(
+			3u
+		),
 		enemy_type::skeleton
 	);
-#endif
 }

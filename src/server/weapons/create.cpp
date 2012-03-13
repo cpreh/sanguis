@@ -1,6 +1,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/weapon_type.hpp>
+#include <sanguis/server/weapons/aoe.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/create.hpp>
@@ -44,7 +45,7 @@ sanguis::server::weapons::create(
 		return
 			weapons::unique_ptr(
 				fcppt::make_unique_ptr<
-					pistol
+					weapons::pistol
 				>(
 					fcppt::cref(
 						_diff_clock
@@ -76,91 +77,165 @@ sanguis::server::weapons::create(
 					)
 				)
 			);
-		// FIXME!
-/*
 	case weapon_type::dual_pistol:
 		return
-			unique_ptr(
+			weapons::unique_ptr(
 				fcppt::make_unique_ptr<
-					pistol
+					weapons::pistol
 				>(
 					fcppt::cref(
 						_diff_clock
 					),
 					_type,
-					base_cooldown(0.33f),
-					damage(5),
-					cast_point(0.2f),
-					magazine_size(36),
-					reload_time(4.f),
-					range(20)
+					weapons::base_cooldown(
+						sanguis::duration_second(
+							0.33f
+						)
+					),
+					weapons::damage(
+						5.f
+					),
+					weapons::cast_point(
+						sanguis::duration_second(
+							0.2f
+						)
+					),
+					weapons::magazine_size(
+						36u
+					),
+					weapons::reload_time(
+						sanguis::duration_second(
+							4.f
+						)
+					),
+					weapons::range(
+						20.f
+					)
 				)
 			);
 	case weapon_type::shotgun:
 		return
-			unique_ptr(
+			weapons::unique_ptr(
 				fcppt::make_unique_ptr<
-					shotgun
+					weapons::shotgun
 				>(
 					fcppt::cref(
 						_diff_clock
 					),
 					_type,
-					base_cooldown(1.f),
-					static_cast<space_unit>(0.2), // spread radius
-					10u, // shells
-					damage(1),
-					magazine_size(8),
-					reload_time(3.f)
+					weapons::base_cooldown(
+						sanguis::duration_second(
+							1.f
+						)
+					),
+					weapons::shotgun::spread_radius(
+						0.2f
+					),
+					weapons::shotgun::shells(
+						10u
+					),
+					weapons::damage(
+						1.f
+					),
+					weapons::magazine_size(
+						8u
+					),
+					weapons::reload_time(
+						sanguis::duration_second(
+							3.f
+						)
+					)
 				)
 			);
 	case weapon_type::rocket_launcher:
 		return
-			unique_ptr(
+			weapons::unique_ptr(
 				fcppt::make_unique_ptr<
-					rocket_launcher
+					weapons::rocket_launcher
 				>(
 					fcppt::cref(
 						_diff_clock
 					),
 					_type,
-					base_cooldown(0.8f),
-					damage(9),
-					aoe(2.4f),
-					magazine_size(1),
-					reload_time(1.8f)
+					weapons::base_cooldown(
+						sanguis::duration_second(
+							0.8f
+						)
+					),
+					weapons::damage(
+						9.f
+					),
+					weapons::aoe(
+						2.4f
+					),
+					weapons::magazine_size(
+						1u
+					),
+					weapons::reload_time(
+						sanguis::duration_second(
+							1.8f
+						)
+					)
 				)
 			);
 	case weapon_type::grenade:
 		return
-			unique_ptr(
+			weapons::unique_ptr(
 				fcppt::make_unique_ptr<
-					grenade
+					weapons::grenade
 				>(
 					fcppt::cref(
 						_diff_clock
 					),
 					_type,
-					base_cooldown(0.7f),
-					damage(20),
-					aoe(3.6f),
-					cast_point(0.1f),
-					reload_time(1.f)
+					weapons::base_cooldown(
+						sanguis::duration_second(
+							0.7f
+						)
+					),
+					weapons::damage(
+						20.f
+					),
+					weapons::aoe(
+						3.6f
+					),
+					weapons::cast_point(
+						sanguis::duration_second(
+							0.1f
+						)
+					),
+					weapons::reload_time(
+						sanguis::duration_second(
+							1.f
+						)
+					)
 				)
 			);
 	case weapon_type::sentry:
 		return
-			unique_ptr(
+			weapons::unique_ptr(
 				fcppt::make_unique_ptr<
-					sentry
+					weapons::sentry
 				>(
 					fcppt::cref(
 						_diff_clock
 					),
 					_type,
-					base_cooldown(5.f),
-					cast_point(2.f),
-					reload_time(0.f),
+					weapons::base_cooldown(
+						sanguis::duration_second(
+							5.f
+						)
+					),
+					weapons::cast_point(
+						sanguis::duration_second(
+							2.f
+						)
+					),
+					weapons::reload_time(
+						sanguis::duration_second(
+							0.f
+						)
+					),
 					boost::phoenix::new_<
 						weapons::pistol
 					>(
@@ -168,16 +243,31 @@ sanguis::server::weapons::create(
 							_diff_clock
 						),
 						weapon_type::pistol,
-						base_cooldown(0.3f),
-						damage(2),
-						cast_point(0.2f),
-						unlimited_magazine_size,
-						reload_time(0.f),
-						range(20)
+						weapons::base_cooldown(
+							sanguis::duration_second(
+								0.3f
+							)
+						),
+						weapons::damage(
+							2.f
+						),
+						weapons::cast_point(
+							sanguis::duration_second(
+								0.2f
+							)
+						),
+						weapons::unlimited_magazine_size,
+						weapons::reload_time(
+							sanguis::duration_second(
+								0.f
+							)
+						),
+						weapons::range(
+							20.f
+						)
 					)
 				)
 			);
-*/
 	case weapon_type::none:
 	case weapon_type::size:
 		break;

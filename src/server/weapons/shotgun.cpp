@@ -19,14 +19,14 @@ sanguis::server::weapons::shotgun::shotgun(
 	sanguis::diff_clock const &_diff_clock,
 	weapon_type::type const _type,
 	weapons::base_cooldown const _base_cooldown,
-	space_unit const _spread_radius,
-	unsigned const _shells,
+	shotgun::spread_radius const _spread_radius,
+	shotgun::shells const _shells,
 	weapons::damage const _damage,
 	weapons::magazine_size const _magazine_size,
 	weapons::reload_time const _reload_time
 )
 :
-	weapon(
+	weapons::weapon(
 		_diff_clock,
 		_type,
 		weapons::range(
@@ -42,9 +42,15 @@ sanguis::server::weapons::shotgun::shotgun(
 		), // FIXME
 		_reload_time
 	),
-	spread_radius_(_spread_radius),
-	shells_(_shells),
-	damage_(_damage)
+	spread_radius_(
+		_spread_radius
+	),
+	shells_(
+		_shells
+	),
+	damage_(
+		_damage
+	)
 {
 }
 
@@ -71,14 +77,16 @@ sanguis::server::weapons::shotgun::do_attack(
 		create_seeded_randgen(),
 		normal_distribution_su(
 			_attack.angle().get(), // mean value
-			spread_radius_ // sigma
+			spread_radius_.get() // sigma
 		)
 	);
 
 	for(
-		unsigned i = 0;
-		i < shells_;
-		++i
+		shells::value_type index(
+			0u
+		);
+		index < shells_.get();
+		++index
 	)
 	{
 		server::angle const angle(
