@@ -19,9 +19,7 @@
 #include <sge/parse/json/member_map.hpp>
 #include <sge/parse/json/object.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
-#include <fcppt/filesystem/is_directory.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
-#include <fcppt/filesystem/stem.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/log/headers.hpp>
@@ -30,6 +28,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/next_prior.hpp>
+#include <boost/filesystem/path.hpp>
 #include <fcppt/config/external_end.hpp>
 
 sanguis::load::model::object::~object()
@@ -110,7 +109,7 @@ sanguis::load::model::object::dim() const
 }
 
 sanguis::load::model::object::object(
-	fcppt::filesystem::path const &_path,
+	boost::filesystem::path const &_path,
 	resource::context const &_ctx
 )
 :

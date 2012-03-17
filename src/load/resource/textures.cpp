@@ -12,9 +12,7 @@
 #include <sge/renderer/resource_flags_none.hpp>
 #include <sge/image2d/system.hpp>
 #include <fcppt/log/headers.hpp>
-#include <fcppt/filesystem/directory_iterator.hpp>
 #include <fcppt/filesystem/extension.hpp>
-#include <fcppt/filesystem/is_regular.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/io/ifstream.hpp>
 #include <fcppt/tr1/functional.hpp>
@@ -24,6 +22,8 @@
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/algorithm/string/trim.hpp>
+#include <boost/filesystem/operations.hpp>
+#include <boost/filesystem/path.hpp>
 #include <boost/spirit/home/phoenix/object/construct.hpp>
 #include <boost/spirit/home/phoenix/object/new.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -47,7 +47,7 @@ sanguis::load::resource::textures::load(
 
 sanguis::load::resource::texture_context const
 sanguis::load::resource::textures::load(
-	fcppt::filesystem::path const &_path
+	boost::filesystem::path const &_path
 ) const
 {
 	return
@@ -93,19 +93,19 @@ sanguis::load::resource::textures::textures(
 {
 	// look for .tex files
 	for(
-		fcppt::filesystem::directory_iterator it(
+		boost::filesystem::directory_iterator it(
 			sanguis::media_path()
 		), end;
 		it != end;
 		++it
 	)
 	{
-		fcppt::filesystem::path const &path(
+		boost::filesystem::path const &path(
 			it->path()
 		);
 
 		if(
-			!fcppt::filesystem::is_regular(
+			!boost::filesystem::is_regular_file(
 				path
 			)
 			||
@@ -221,7 +221,7 @@ sanguis::load::resource::textures::do_load(
 
 sanguis::load::resource::texture_context_impl_ptr const
 sanguis::load::resource::textures::do_load_unnamed(
-	fcppt::filesystem::path const &_path
+	boost::filesystem::path const &_path
 ) const
 {
 	return
@@ -240,7 +240,7 @@ sanguis::load::resource::textures::do_load_unnamed(
 
 sge::texture::part_ptr const
 sanguis::load::resource::textures::do_load_inner(
-	fcppt::filesystem::path const &_path
+	boost::filesystem::path const &_path
 ) const
 {
 	return

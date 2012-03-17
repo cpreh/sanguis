@@ -1,7 +1,10 @@
 #include <sanguis/load/model/global_parameters.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/filesystem/path.hpp>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::load::model::global_parameters::global_parameters(
-	fcppt::filesystem::path const &_path,
+	boost::filesystem::path const &_path,
 	resource::textures const &_textures,
 	sge::renderer::dim2 const &_cell_size,
 	optional_delay const &_delay,
@@ -17,7 +20,7 @@ sanguis::load::model::global_parameters::global_parameters(
 	sounds_(_sounds)
 {}
 
-fcppt::filesystem::path const &
+boost::filesystem::path const &
 sanguis::load::model::global_parameters::path() const
 {
 	return path_;

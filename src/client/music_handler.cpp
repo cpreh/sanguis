@@ -9,13 +9,16 @@
 #include <sge/console/callback/parameters.hpp>
 #include <sge/font/text/lit.hpp>
 #include <sge/exception.hpp>
-#include <fcppt/filesystem/directory_iterator.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/extract_from_string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/filesystem/operations.hpp>
+#include <fcppt/config/external_end.hpp>
+
 
 sanguis::client::music_handler::music_handler(
 	sge::console::object &_console,
@@ -139,11 +142,11 @@ sanguis::client::music_handler::load_random() const
 {
 	// TODO: choose a random one!
 	for(
-		fcppt::filesystem::directory_iterator it(
+		boost::filesystem::directory_iterator it(
 			sanguis::media_path()
 			/ FCPPT_TEXT("music")
 		);
-		it != fcppt::filesystem::directory_iterator();
+		it != boost::filesystem::directory_iterator();
 		++it
 	)
 		try

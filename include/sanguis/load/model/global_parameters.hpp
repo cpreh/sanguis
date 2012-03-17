@@ -7,10 +7,12 @@
 #include <sanguis/load/resource/textures_fwd.hpp>
 #include <sanguis/load/resource/sounds_fwd.hpp>
 #include <sge/renderer/dim2.hpp>
-#include <fcppt/filesystem/path.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/nonassignable.hpp>
 #include <fcppt/optional_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/filesystem/path.hpp>
+#include <fcppt/config/external_end.hpp>
 
 namespace sanguis
 {
@@ -26,7 +28,7 @@ class global_parameters
 	);
 public:
 	global_parameters(
-		fcppt::filesystem::path const &,
+		boost::filesystem::path const &,
 		resource::textures const &,
 		sge::renderer::dim2 const &cell_size,
 		optional_delay const &,
@@ -34,7 +36,7 @@ public:
 		resource::sounds const &
 	);
 
-	fcppt::filesystem::path const &
+	boost::filesystem::path const &
 	path() const;
 
 	resource::textures const &
@@ -57,7 +59,7 @@ public:
 	resource::sounds const &
 	sounds() const;
 private:
-	fcppt::filesystem::path const path_;
+	boost::filesystem::path const path_;
 
 	resource::textures const &textures_;
 

@@ -1,16 +1,18 @@
 #include <sanguis/load/next_file.hpp>
 #include <sanguis/load/skip_directories.hpp>
-#include <fcppt/filesystem/is_regular.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/filesystem/operations.hpp>
+#include <fcppt/config/external_end.hpp>
 
 
-fcppt::filesystem::directory_iterator const
+boost::filesystem::directory_iterator const
 sanguis::load::next_file(
-	fcppt::filesystem::directory_iterator _it
+	boost::filesystem::directory_iterator _it
 )
 {
 	if(
-		_it != fcppt::filesystem::directory_iterator()
-		&& fcppt::filesystem::is_regular(*_it)
+		_it != boost::filesystem::directory_iterator()
+		&& boost::filesystem::is_regular_file(*_it)
 	)
 		++_it;
 

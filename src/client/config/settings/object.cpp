@@ -10,9 +10,12 @@
 #include <fcppt/log/info.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/filesystem/path.hpp>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::client::config::settings::object::object(
-	fcppt::filesystem::path const &_path
+	boost::filesystem::path const &_path
 )
 :
 	path_(_path)

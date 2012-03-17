@@ -11,9 +11,12 @@
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/filesystem/path.hpp>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::load::resource::texture_context_impl::texture_context_impl(
-	fcppt::filesystem::path const &_path,
+	boost::filesystem::path const &_path,
 	sge::renderer::device &_rend,
 	sge::image2d::system &_il
 )
@@ -83,7 +86,7 @@ sanguis::load::resource::texture_context_impl::~texture_context_impl()
 
 sanguis::load::resource::texture_context_impl::future_value const
 sanguis::load::resource::texture_context_impl::task(
-	fcppt::filesystem::path const &_path,
+	boost::filesystem::path const &_path,
 	sge::image2d::system &_il
 )
 {

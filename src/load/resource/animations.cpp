@@ -10,9 +10,6 @@
 #include <fcppt/chrono/duration_cast.hpp>
 #include <fcppt/chrono/milliseconds.hpp>
 #include <fcppt/chrono/rep.hpp>
-#include <fcppt/filesystem/exists.hpp>
-#include <fcppt/filesystem/is_directory.hpp>
-#include <fcppt/filesystem/is_regular.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/io/ifstream.hpp>
 #include <fcppt/io/istringstream.hpp>
@@ -25,11 +22,13 @@
 #include <fcppt/config/external_begin.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/predicate.hpp>
+#include <boost/filesystem/operations.hpp>
+#include <boost/filesystem/path.hpp>
 #include <fcppt/config/external_end.hpp>
 
 sanguis::load::resource::animation::series const
 sanguis::load::resource::animations::load(
-	fcppt::filesystem::path const &dir) const
+	boost::filesystem::path const &dir) const
 {
 	return map_get_or_create(
 		animations_,
@@ -56,9 +55,9 @@ sanguis::load::resource::animations::~animations()
 
 sanguis::load::resource::animation::series const
 sanguis::load::resource::animations::do_load(
-	fcppt::filesystem::path const &dir) const
+	boost::filesystem::path const &dir) const
 {
-	if (!fcppt::filesystem::exists(dir) || !fcppt::filesystem::is_directory(dir))
+	if (!boost::filesystem::exists(dir) || !boost::filesystem::is_directory(dir))
 		throw exception(
 			FCPPT_TEXT("directory for animation \"")
 			+ fcppt::filesystem::path_to_string(
@@ -67,10 +66,10 @@ sanguis::load::resource::animations::do_load(
 			+ FCPPT_TEXT("\" doesn't exist")
 		);
 
-	fcppt::filesystem::path const framesfile = dir / FCPPT_TEXT("frames");
+	boost::filesystem::path const framesfile = dir / FCPPT_TEXT("frames");
 
 	// look for frames file inside directory
-	if (!fcppt::filesystem::exists(framesfile) || !fcppt::filesystem::is_regular(framesfile))
+	if (!boost::filesystem::exists(framesfile) || !boost::filesystem::is_regular_file(framesfile))
 		return load_without_frames_file(dir);
 	//
 	// and parse line by line
@@ -187,20 +186,20 @@ sanguis::load::resource::animations::do_load(
 
 sge::texture::const_part_ptr const
 sanguis::load::resource::animations::load_texture(
-	fcppt::filesystem::path const &p) const
+	boost::filesystem::path const &p) const
 {
 	return textures_.do_load_inner(p);
 }
 
 sanguis::load::resource::animation::series const
 sanguis::load::resource::animations::load_without_frames_file(
-	fcppt::filesystem::path const &dir) const
+	boost::filesystem::path const &dir) const
 {
-	fcppt::filesystem::directory_iterator const first_file(
+	boost::filesystem::directory_iterator const first_file(
 		sanguis::load::first_file(
 			dir));
 
-	if(first_file == fcppt::filesystem::directory_iterator())
+	if(first_file == boost::filesystem::directory_iterator())
 		throw sanguis::exception(
 			fcppt::filesystem::path_to_string(
 				dir
@@ -208,10 +207,10 @@ sanguis::load::resource::animations::load_without_frames_file(
 			+ FCPPT_TEXT(" is empty!")
 		);
 
-	fcppt::filesystem::path const first_path(
+	boost::filesystem::path const first_path(
 		*first_file);
 
-	if(sanguis::load::next_file(first_file) != fcppt::filesystem::directory_iterator())
+	if(sanguis::load::next_file(first_file) != boost::filesystem::directory_iterator())
 		FCPPT_LOG_WARNING(
 			log(),
 			fcppt::log::_

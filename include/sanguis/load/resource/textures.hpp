@@ -8,9 +8,9 @@
 #include <sge/texture/manager.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image2d/system_fwd.hpp>
-#include <fcppt/filesystem/path.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/filesystem/path.hpp>
 #include <map>
 #include <fcppt/config/external_end.hpp>
 
@@ -34,7 +34,7 @@ public:
 
 	texture_context const
 	load(
-		fcppt::filesystem::path const &
+		boost::filesystem::path const &
 	) const;
 
 	textures(
@@ -53,12 +53,12 @@ private:
 
 	texture_context_impl_ptr const
 	do_load_unnamed(
-		fcppt::filesystem::path const &
+		boost::filesystem::path const &
 	) const;
 
 	sge::texture::part_ptr const
 	do_load_inner(
-		fcppt::filesystem::path const &
+		boost::filesystem::path const &
 	) const;
 
 	typedef std::map<
@@ -67,7 +67,7 @@ private:
 	> texture_map;
 
 	typedef std::map<
-		fcppt::filesystem::path,
+		boost::filesystem::path,
 		texture_context_impl_ptr
 	> unnamed_texture_map;
 

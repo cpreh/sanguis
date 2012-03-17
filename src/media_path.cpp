@@ -1,7 +1,10 @@
 #include <sanguis/media_path.hpp>
 #include <sanguis/build/media_path.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/filesystem/path.hpp>
+#include <fcppt/config/external_end.hpp>
 
-fcppt::filesystem::path const
+boost::filesystem::path const
 sanguis::media_path()
 {
 	// TODO: cache this somewhere?

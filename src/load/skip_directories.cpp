@@ -1,15 +1,17 @@
 #include <sanguis/load/skip_directories.hpp>
-#include <fcppt/filesystem/is_directory.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/filesystem/operations.hpp>
+#include <fcppt/config/external_end.hpp>
 
 
-fcppt::filesystem::directory_iterator const
+boost::filesystem::directory_iterator const
 sanguis::load::skip_directories(
-	fcppt::filesystem::directory_iterator _it
+	boost::filesystem::directory_iterator _it
 )
 {
 	while(
-		_it != fcppt::filesystem::directory_iterator()
-		&& fcppt::filesystem::is_directory(*_it)
+		_it != boost::filesystem::directory_iterator()
+		&& boost::filesystem::is_directory(*_it)
 	)
 		++_it;
 

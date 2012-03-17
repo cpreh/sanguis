@@ -11,10 +11,10 @@
 #include <sge/audio/sound/positional_ptr.hpp>
 #include <sge/audio/sound/positional_parameters.hpp>
 #include <sge/audio/file_ptr.hpp>
-#include <fcppt/filesystem/path.hpp>
 #include <fcppt/function/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/filesystem/path.hpp>
 #include <map>
 #include <fcppt/config/external_end.hpp>
 
@@ -45,7 +45,7 @@ public:
 
 	sge::audio::file_ptr const
 	load_uncached(
-		fcppt::filesystem::path const &
+		boost::filesystem::path const &
 	) const;
 
 	sge::audio::sound::base_ptr const

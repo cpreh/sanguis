@@ -14,7 +14,6 @@
 #include <fcppt/algorithm/find_exn.hpp>
 #include <fcppt/container/array.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
-#include <fcppt/filesystem/exists.hpp>
 #include <fcppt/math/vector/basic_impl.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/make_unique_ptr.hpp>

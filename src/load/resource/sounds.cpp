@@ -10,12 +10,12 @@
 #include <sge/audio/sound/nonpositional_parameters.hpp>
 #include <sge/audio/sound/positional.hpp>
 #include <sge/audio/bad_sound_alloc.hpp>
-#include <fcppt/filesystem/path.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/filesystem/path.hpp>
 #include <boost/spirit/home/phoenix/bind/bind_member_function.hpp>
 #include <boost/spirit/home/phoenix/core/argument.hpp>
 #include <boost/spirit/home/phoenix/operator/self.hpp>
@@ -54,7 +54,7 @@ sanguis::load::resource::sounds::load(
 
 sge::audio::file_ptr const
 sanguis::load::resource::sounds::load_uncached(
-	fcppt::filesystem::path const &_path
+	boost::filesystem::path const &_path
 ) const
 {
 	return

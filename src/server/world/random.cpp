@@ -15,14 +15,16 @@
 #include <sanguis/creator/generator/top_parameters.hpp>
 #include <sanguis/creator/generator/size.hpp>
 #include <sge/config/cache_path.hpp>
-#include <fcppt/filesystem/create_directories_recursive.hpp>
-#include <fcppt/filesystem/exists.hpp>
-#include <fcppt/filesystem/path.hpp>
+#include <fcppt/filesystem/create_directories_recursive_exn.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/math/dim/basic_impl.hpp>
 #include <fcppt/io/ifstream.hpp>
 #include <fcppt/io/ofstream.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/filesystem/operations.hpp>
+#include <boost/filesystem/path.hpp>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::server::world::object_unique_ptr
 sanguis::server::world::random(
@@ -34,22 +36,22 @@ sanguis::server::world::random(
 )
 {
 	// TODO: move this out of here!
-	fcppt::filesystem::path const cache_path(
+	boost::filesystem::path const cache_path(
 		sge::config::cache_path(
 			FCPPT_TEXT("sanguis")
 		)
 	);
 
 	if(
-		!fcppt::filesystem::exists(
+		!boost::filesystem::exists(
 			cache_path
 		)
 	)
-		fcppt::filesystem::create_directories_recursive(
+		fcppt::filesystem::create_directories_recursive_exn(
 			cache_path
 		);
 
-	fcppt::filesystem::path const world_path(
+	boost::filesystem::path const world_path(
 		cache_path
 		/ FCPPT_TEXT("world01")
 	);
@@ -57,7 +59,7 @@ sanguis::server::world::random(
 	// overwrite the world file just for testing
 #if 0
 	if(
-		!fcppt::filesystem::exists(
+		!boost::filesystem::exists(
 			world_path
 		)
 	)

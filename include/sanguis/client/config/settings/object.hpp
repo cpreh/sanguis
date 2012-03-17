@@ -5,8 +5,10 @@
 #include <sge/parse/ini/section_vector.hpp>
 #include <sge/parse/ini/section.hpp>
 #include <sge/parse/ini/entry.hpp>
-#include <fcppt/filesystem/path.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/filesystem/path.hpp>
+#include <fcppt/config/external_end.hpp>
 
 namespace sanguis
 {
@@ -24,7 +26,7 @@ class object
 	);
 public:
 	explicit object(
-		fcppt::filesystem::path const &
+		boost::filesystem::path const &
 	);
 
 	~object();
@@ -38,7 +40,7 @@ public:
 	void
 	save() const;
 private:
-	fcppt::filesystem::path const path_;
+	boost::filesystem::path const path_;
 
 	sge::parse::ini::section_vector sections_;
 };

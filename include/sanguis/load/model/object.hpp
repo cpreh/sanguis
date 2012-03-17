@@ -5,13 +5,13 @@
 #include <sanguis/load/model/part_fwd.hpp>
 #include <sanguis/load/resource/context_fwd.hpp>
 #include <fcppt/random/uniform.hpp>
-#include <fcppt/filesystem/path.hpp>
 #include <sge/renderer/dim2.hpp>
 #include <fcppt/math/dim/basic_decl.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/shared_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/filesystem/path.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
 #include <fcppt/config/external_end.hpp>
 
@@ -64,7 +64,7 @@ public:
 	dim() const;
 
 	object(
-		fcppt::filesystem::path const &,
+		boost::filesystem::path const &,
 		resource::context const &
 	);
 private:
@@ -75,7 +75,7 @@ private:
 
 	friend class collection;
 
-	fcppt::filesystem::path const path_;
+	boost::filesystem::path const path_;
 
 	sge::renderer::dim2 cell_size_;
 

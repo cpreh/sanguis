@@ -7,9 +7,9 @@
 #include <sge/image2d/system_fwd.hpp>
 #include <sge/texture/part_ptr.hpp>
 #include <fcppt/thread/object.hpp>
-#include <fcppt/filesystem/path.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/filesystem/path.hpp>
 #include <boost/thread/future.hpp>
 #include <fcppt/config/external_end.hpp>
 
@@ -27,7 +27,7 @@ class texture_context_impl
 	);
 public:
 	texture_context_impl(
-		fcppt::filesystem::path const &,
+		boost::filesystem::path const &,
 		sge::renderer::device &,
 		sge::image2d::system &
 	);
@@ -53,7 +53,7 @@ private:
 	sge::renderer::device &rend_;
 
 	future_value const task(
-		fcppt::filesystem::path const &,
+		boost::filesystem::path const &,
 		sge::image2d::system &
 	);
 };

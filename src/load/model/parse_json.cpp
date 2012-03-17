@@ -1,18 +1,20 @@
 #include <sanguis/load/model/parse_json.hpp>
 #include <sanguis/load/log.hpp>
 #include <sge/parse/json/parse_file.hpp>
-#include <fcppt/filesystem/path.hpp>
 #include <fcppt/filesystem/stem.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/filesystem/path.hpp>
+#include <fcppt/config/external_end.hpp>
 
 void
 sanguis::load::model::parse_json(
-	fcppt::filesystem::path const &_path,
+	boost::filesystem::path const &_path,
 	sge::parse::json::object &_object_return
 )
 {
-	fcppt::filesystem::path const file(
+	boost::filesystem::path const file(
 		_path
 		/
 		(

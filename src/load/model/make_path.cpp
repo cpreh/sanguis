@@ -1,23 +1,25 @@
 #include <sanguis/load/model/make_path.hpp>
 #include <sanguis/exception.hpp>
 #include <sanguis/media_path.hpp>
-#include <fcppt/filesystem/exists.hpp>
-#include <fcppt/filesystem/path.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/filesystem/operations.hpp>
+#include <boost/filesystem/path.hpp>
+#include <fcppt/config/external_end.hpp>
 
-fcppt::filesystem::path const
+boost::filesystem::path const
 sanguis::load::model::make_path(
 	fcppt::string const &_name
 )
 {
-	fcppt::filesystem::path const path(
+	boost::filesystem::path const path(
 		sanguis::media_path()
 		/
 		_name
 	);
 
 	if(
-		!fcppt::filesystem::exists(
+		!boost::filesystem::exists(
 			path
 		)
 	)

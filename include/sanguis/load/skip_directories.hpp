@@ -1,7 +1,9 @@
 #ifndef SANGUIS_LOAD_SKIP_DIRECTORIES_HPP_INCLUDED
 #define SANGUIS_LOAD_SKIP_DIRECTORIES_HPP_INCLUDED
 
-#include <fcppt/filesystem/directory_iterator.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/filesystem/operations.hpp>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -9,9 +11,9 @@ namespace sanguis
 namespace load
 {
 
-fcppt::filesystem::directory_iterator const
+boost::filesystem::directory_iterator const
 skip_directories(
-	fcppt::filesystem::directory_iterator
+	boost::filesystem::directory_iterator
 );
 
 }
