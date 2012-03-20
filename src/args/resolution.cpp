@@ -1,6 +1,6 @@
 #include <sanguis/args/resolution.hpp>
 #include <sge/renderer/screen_unit.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/optional_impl.hpp>
 
 sanguis::args::optional_resolution const

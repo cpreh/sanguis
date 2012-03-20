@@ -20,6 +20,8 @@
 #include <sanguis/load/resource/context.hpp>
 #include <sanguis/messages/call/object.hpp>
 #include <sanguis/exception.hpp>
+#include <sanguis/random_generator.hpp>
+#include <sanguis/random_seed.hpp>
 #include <sge/audio/listener.hpp>
 #include <sge/charconv/system_fwd.hpp>
 #include <sge/image/colors.hpp>
@@ -41,7 +43,7 @@
 #include <sge/sprite/render/states.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/math/matrix/arithmetic.hpp>
-#include <fcppt/math/matrix/basic_impl.hpp>
+#include <fcppt/math/matrix/object_impl.hpp>
 #include <fcppt/math/matrix/static.hpp>
 #include <fcppt/math/matrix/translation.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -70,6 +72,9 @@ sanguis::client::draw2d::scene::object::object(
 )
 :
 	diff_clock_(),
+	random_generator_(
+		sanguis::random_seed()
+	),
 	resources_(
 		_resources
 	),
@@ -600,6 +605,12 @@ sanguis::diff_clock const &
 sanguis::client::draw2d::scene::object::diff_clock() const
 {
 	return diff_clock_;
+}
+
+sanguis::random_generator &
+sanguis::client::draw2d::scene::object::random_generator()
+{
+	return random_generator_;
 }
 
 sanguis::client::draw2d::transform_callback const &

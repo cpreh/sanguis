@@ -10,7 +10,7 @@
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/center.hpp>
 #include <fcppt/assign/make_container.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/normalize.hpp>
 #include <fcppt/math/vector/length.hpp>

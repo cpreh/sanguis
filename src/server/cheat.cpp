@@ -1,3 +1,4 @@
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/cheat.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/weapons/create.hpp>
@@ -8,6 +9,7 @@
 void
 sanguis::server::cheat(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	entities::player &_player,
 	cheat_type::type const _type
 )
@@ -37,6 +39,7 @@ sanguis::server::cheat(
 				_player.add_weapon(
 					weapons::create(
 						_diff_clock,
+						_random_generator,
 						index
 					)
 				);

@@ -1,3 +1,4 @@
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/client/draw2d/entities/explosion.hpp>
 #include <sanguis/client/draw2d/entities/explosion_particle.hpp>
 #include <sanguis/client/draw2d/entities/explosion_properties.hpp>
@@ -22,10 +23,12 @@
 #include <fcppt/cref.hpp>
 #include <fcppt/homogenous_pair_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::client::draw2d::entities::explosion::explosion(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	sprite::particle::system &_particle_system,
 	load::model::collection const &_model_collection,
 	sprite::center const &_center,
@@ -33,7 +36,12 @@ sanguis::client::draw2d::entities::explosion::explosion(
 )
 :
 	entities::own(),
-	diff_clock_(_diff_clock),
+	diff_clock_(
+		_diff_clock
+	),
+	random_generator_(
+		_random_generator
+	),
 	particle_system_(
 		_particle_system
 	),
@@ -115,6 +123,9 @@ sanguis::client::draw2d::entities::explosion::generate_explosion()
 				fcppt::cref(
 					diff_clock_
 				),
+				fcppt::ref(
+					random_generator_
+				),
 				properties_,
 				std::tr1::bind(
 					&explosion::generate_particle,
@@ -148,6 +159,7 @@ sanguis::client::draw2d::entities::explosion::generate_particle(
 	particle::base_ptr ptr(
 		entities::explosion_particle(
 			diff_clock_,
+			random_generator_,
 			_particle_type,
 			particle_system_,
 			aoe_,

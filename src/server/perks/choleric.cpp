@@ -1,3 +1,4 @@
+#include <sanguis/random_generator.hpp>
 #include <sanguis/server/perks/choleric.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/entities/projectiles/simple_bullet.hpp>
@@ -5,15 +6,17 @@
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/chrono/seconds.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/twopi.hpp>
-#include <fcppt/random/make_inclusive_range.hpp>
+#include <fcppt/random/variate_impl.hpp>
+#include <fcppt/random/distribution/uniform_real_impl.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 
 sanguis::server::perks::choleric::choleric(
-	sanguis::diff_clock const &_diff_clock
+	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator
 )
 :
 	perk(
@@ -29,9 +32,16 @@ sanguis::server::perks::choleric::choleric(
 		)
 	),
 	rand_(
-		fcppt::random::make_inclusive_range(
-			static_cast<space_unit>(0),
-			fcppt::math::twopi<space_unit>()
+		_random_generator,
+		choleric::distribution(
+			choleric::distribution::min(
+				0.f
+			),
+			choleric::distribution::sup(
+				fcppt::math::twopi<
+					server::space_unit
+				>()
+			)
 		)
 	)
 {

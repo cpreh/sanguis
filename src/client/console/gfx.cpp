@@ -12,8 +12,8 @@
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/viewport/manager.hpp>
-#include <fcppt/math/box/basic_impl.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/box/object_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 

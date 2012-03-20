@@ -2,7 +2,7 @@
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/messages/speed.hpp>
 #include <sanguis/messages/create.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 
 sanguis::messages::auto_ptr
 sanguis::server::message_convert::speed(

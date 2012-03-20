@@ -1,13 +1,14 @@
+#include <sanguis/random_generator.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/particle/velocity_from_movement.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/vector/hypersphere_to_cartesian.hpp>
 #include <fcppt/math/vector/normalize.hpp>
 #include <fcppt/math/vector/static.hpp>
-#include <fcppt/random/uniform_impl.hpp>
-#include <fcppt/text.hpp>
+#include <fcppt/random/variate_impl.hpp>
+#include <fcppt/random/distribution/uniform_real_impl.hpp>
 
 sanguis::client::draw2d::speed const
 sanguis::client::draw2d::particle::velocity_from_movement(

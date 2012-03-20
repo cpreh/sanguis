@@ -22,16 +22,17 @@
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/math/dim/output.hpp>
-#include <fcppt/math/box/basic_impl.hpp>
+#include <fcppt/math/box/object_impl.hpp>
 #include <fcppt/math/box/output.hpp>
 #include <fcppt/math/box/contains.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 
 namespace
@@ -130,7 +131,7 @@ sanguis::load::model::animation::object::~object()
 
 sanguis::load::model::animation::object::object(
 	sge::parse::json::object const &_object,
-	global_parameters const &_param
+	model::global_parameters const &_param
 )
 :
 	object_(
@@ -178,6 +179,9 @@ sanguis::load::model::animation::object::object(
 				fcppt::make_unique_ptr<
 					model::animation::sound
 				>(
+					fcppt::ref(
+						param_.random_generator()
+					),
 					sounds_object->members,
 					fcppt::cref(
 						param_.sounds()

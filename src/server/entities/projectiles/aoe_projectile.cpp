@@ -1,8 +1,8 @@
 #include <sanguis/server/entities/projectiles/aoe_projectile.hpp>
 #include <sanguis/messages/add_aoe_projectile.hpp>
 #include <sanguis/messages/create.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 
 sanguis::server::entities::projectiles::aoe_projectile::aoe_projectile(
 	sanguis::diff_clock const &_diff_clock,

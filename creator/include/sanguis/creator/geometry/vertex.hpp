@@ -5,7 +5,7 @@
 #include <sanguis/creator/geometry/vector.hpp>
 #include <sanguis/creator/geometry/texture_point.hpp>
 #include <sanguis/creator/symbol.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 
 namespace sanguis
 {

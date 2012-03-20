@@ -10,7 +10,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
-#include <fcppt/math/vector/basic_decl.hpp>
+#include <fcppt/math/vector/object_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
 #include <fcppt/config/external_begin.hpp>

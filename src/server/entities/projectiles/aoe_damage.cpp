@@ -4,7 +4,7 @@
 #include <fcppt/chrono/duration_arithmetic.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/optional_impl.hpp>

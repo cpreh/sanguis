@@ -14,8 +14,8 @@
 #include <fcppt/container/grid/in_range.hpp>
 #include <fcppt/container/grid/object_impl.hpp>
 #include <fcppt/math/ceil_div.hpp>
-#include <fcppt/math/box/basic_impl.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/box/object_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/dim/output.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>

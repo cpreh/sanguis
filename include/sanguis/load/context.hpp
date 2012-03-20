@@ -1,6 +1,7 @@
 #ifndef SANGUIS_LOAD_CONTEXT_HPP_INCLUDED
 #define SANGUIS_LOAD_CONTEXT_HPP_INCLUDED
 
+#include <sanguis/random_generator.hpp>
 #include <sanguis/load/context_base.hpp>
 #include <sanguis/load/model/context.hpp>
 #include <sanguis/load/resource/context.hpp>
@@ -53,6 +54,8 @@ private:
 	sge::audio::loader &ml_;
 
 	sge::audio::player &ap_;
+
+	sanguis::random_generator random_generator_;
 
 	resource::context const resource_ctx_;
 

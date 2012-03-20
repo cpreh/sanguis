@@ -5,11 +5,15 @@
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/probability.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
-#include <fcppt/random/actor/normalized.hpp>
-#include <fcppt/random/uniform.hpp>
-#include <fcppt/math/vector/basic_decl.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/function/object.hpp>
+#include <fcppt/random/variate_decl.hpp>
+#include <fcppt/random/distribution/uniform_real_decl.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <vector>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 namespace sanguis
 {
@@ -24,6 +28,7 @@ class pickup_spawner
 public:
 	pickup_spawner(
 		sanguis::diff_clock const &,
+		sanguis::random_generator &,
 		environment::object &
 	);
 
@@ -36,27 +41,56 @@ public:
 	);
 private:
 	void
-	spawn_health();
+	spawn_health(
+		server::center const &
+	);
 
 	void
-	spawn_monster();
+	spawn_monster(
+		server::center const &
+	);
 
 	void
 	spawn_weapon(
+		server::center const &,
 		weapon_type::type
 	);
 
 	sanguis::diff_clock const &diff_clock_;
 
+	sanguis::random_generator &random_generator_;
+
 	environment::object &env_;
 
-	fcppt::random::uniform<
+	typedef fcppt::random::distribution::uniform_real<
 		server::probability::value_type
-	> spawn_prob_;
+	> real_distribution;
 
-	fcppt::random::actor::normalized rng_;
+	typedef fcppt::random::variate<
+		sanguis::random_generator,
+		real_distribution
+	> real_variate;
 
-	server::center center_;
+	typedef fcppt::function::object<
+		void (
+			server::center const &
+		)
+	> spawn_function;
+
+	typedef std::pair<
+		server::probability,
+		spawn_function
+	> spawn_pair;
+
+	typedef std::vector<
+		spawn_pair
+	> spawn_vector;
+
+	spawn_vector const spawns_;
+
+	real_variate
+		spawn_prob_,
+		spawn_value_;
 };
 
 }

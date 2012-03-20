@@ -7,7 +7,7 @@
 #include <sanguis/server/collision/user_data.hpp>
 #include <sge/projectile/body/scoped.hpp>
 #include <fcppt/assert/pre.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>

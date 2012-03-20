@@ -1,8 +1,9 @@
+#include <sanguis/random_seed.hpp>
 #include <sanguis/load/context.hpp>
 #include <sanguis/load/model/object.hpp>
 #include <sanguis/load/model/context.hpp>
 #include <sanguis/load/model/collection.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 
 sanguis::load::context::context(
 	sge::image2d::system &_il,
@@ -15,6 +16,9 @@ sanguis::load::context::context(
 	rend_(_rend),
 	ml_(_ml),
 	ap_(_ap),
+	random_generator_(
+		sanguis::random_seed()
+	),
 	resource_ctx_(
 		rend_,
 		il_,
@@ -22,7 +26,8 @@ sanguis::load::context::context(
 		ap_
 	),
 	model_ctx_(
-		resource_ctx_
+		resource_ctx_,
+		random_generator_
 	)
 {}
 

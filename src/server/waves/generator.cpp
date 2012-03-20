@@ -14,9 +14,15 @@
 #include <fcppt/cref.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
+#if defined(BOOST_ASSIGN_MAX_PARAMS)
+#undef BOOST_ASSIGN_MAX_PARAMS
+#endif
+#define BOOST_ASSIGN_MAX_PARAMS 6
 #include <boost/assign/ptr_list_inserter.hpp>
+#undef BOOST_ASSIGN_MAX_PARAMS
 #include <fcppt/config/external_end.hpp>
 
 #include <sanguis/server/log.hpp>
@@ -28,11 +34,19 @@
 
 sanguis::server::waves::generator::generator(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	server::console &_console
 )
 :
-	diff_clock_(_diff_clock),
-	console_(_console),
+	diff_clock_(
+		_diff_clock
+	),
+	random_generator_(
+		_random_generator
+	),
+	console_(
+		_console
+	),
 	spawn_connection_(
 		console_.insert(
 			FCPPT_TEXT("spawn"),
@@ -135,6 +149,7 @@ try
 				waves_,
 				waves::make(
 					diff_clock_,
+					random_generator_,
 					sge::font::text::to_fcppt_string(
 						_args[2]
 					)
@@ -155,6 +170,9 @@ try
 				>(
 					fcppt::cref(
 						diff_clock_
+					),
+					fcppt::ref(
+						random_generator_
 					),
 					convert_enemy_name(
 						sge::font::text::to_fcppt_string(
@@ -198,6 +216,9 @@ sanguis::server::waves::generator::spawn_all()
 		fcppt::cref(
 			diff_clock_
 		),
+		fcppt::ref(
+			random_generator_
+		),
 		waves::delay(
 			sanguis::duration_second(
 				60.f
@@ -215,6 +236,9 @@ sanguis::server::waves::generator::spawn_all()
 	)(
 		fcppt::cref(
 			diff_clock_
+		),
+		fcppt::ref(
+			random_generator_
 		),
 		waves::delay(
 			sanguis::duration_second(
@@ -234,6 +258,9 @@ sanguis::server::waves::generator::spawn_all()
 		fcppt::cref(
 			diff_clock_
 		),
+		fcppt::ref(
+			random_generator_
+		),
 		waves::delay(
 			sanguis::duration_second(
 				50.f
@@ -252,23 +279,8 @@ sanguis::server::waves::generator::spawn_all()
 		fcppt::cref(
 			diff_clock_
 		),
-		waves::delay(
-			sanguis::duration_second(
-				0.f
-			)
-		),
-		waves::spawn_interval(
-			sanguis::duration_second(
-				30.f
-			)
-		),
-		waves::spawns_per_wave(
-			8u
-		),
-		enemy_type::zombie01
-	)(
-		fcppt::cref(
-			diff_clock_
+		fcppt::ref(
+			random_generator_
 		),
 		waves::delay(
 			sanguis::duration_second(
@@ -287,6 +299,30 @@ sanguis::server::waves::generator::spawn_all()
 	)(
 		fcppt::cref(
 			diff_clock_
+		),
+		fcppt::ref(
+			random_generator_
+		),
+		waves::delay(
+			sanguis::duration_second(
+				0.f
+			)
+		),
+		waves::spawn_interval(
+			sanguis::duration_second(
+				30.f
+			)
+		),
+		waves::spawns_per_wave(
+			8u
+		),
+		enemy_type::zombie01
+	)(
+		fcppt::cref(
+			diff_clock_
+		),
+		fcppt::ref(
+			random_generator_
 		),
 		waves::delay(
 			sanguis::duration_second(
@@ -306,6 +342,9 @@ sanguis::server::waves::generator::spawn_all()
 		fcppt::cref(
 			diff_clock_
 		),
+		fcppt::ref(
+			random_generator_
+		),
 		waves::delay(
 			sanguis::duration_second(
 				45.f
@@ -323,6 +362,9 @@ sanguis::server::waves::generator::spawn_all()
 	)(
 		fcppt::cref(
 			diff_clock_
+		),
+		fcppt::ref(
+			random_generator_
 		),
 		waves::delay(
 			sanguis::duration_second(
@@ -342,6 +384,9 @@ sanguis::server::waves::generator::spawn_all()
 		fcppt::cref(
 			diff_clock_
 		),
+		fcppt::ref(
+			random_generator_
+		),
 		waves::delay(
 			sanguis::duration_second(
 				120.f
@@ -360,6 +405,9 @@ sanguis::server::waves::generator::spawn_all()
 		fcppt::cref(
 			diff_clock_
 		),
+		fcppt::ref(
+			random_generator_
+		),
 		waves::delay(
 			sanguis::duration_second(
 				130.f
@@ -377,6 +425,9 @@ sanguis::server::waves::generator::spawn_all()
 	)(
 		fcppt::cref(
 			diff_clock_
+		),
+		fcppt::ref(
+			random_generator_
 		),
 		waves::delay(
 			sanguis::duration_second(

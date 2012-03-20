@@ -37,9 +37,9 @@ public:
 
 	~weapon_category();
 
-	explicit weapon_category(
+	weapon_category(
 		sge::parse::json::object const &,
-		global_parameters const &
+		model::global_parameters const &
 	);
 private:
 	typedef boost::ptr_map<

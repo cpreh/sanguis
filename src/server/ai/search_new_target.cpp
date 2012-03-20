@@ -4,7 +4,7 @@
 #include <sanguis/server/entities/with_health.hpp>
 #include <sanguis/server/collision/distance.hpp>
 #include <fcppt/container/map_impl.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <limits>
 #include <fcppt/config/external_end.hpp>

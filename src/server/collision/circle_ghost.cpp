@@ -1,8 +1,8 @@
 #include <sanguis/server/collision/circle_ghost.hpp>
 #include <sanguis/server/dim.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/vector/dim.hpp>
 
 sanguis::server::collision::circle_ghost::circle_ghost(

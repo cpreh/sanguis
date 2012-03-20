@@ -1,6 +1,6 @@
 #include <sanguis/server/collision/distance.hpp>
 #include <sanguis/server/entities/base.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/length.hpp>
 

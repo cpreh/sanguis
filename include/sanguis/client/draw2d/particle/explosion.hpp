@@ -10,6 +10,7 @@
 #include <sanguis/client/draw2d/center.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 
 namespace sanguis
 {
@@ -31,6 +32,7 @@ class explosion
 public:
 	explosion(
 		sanguis::diff_clock const &,
+		sanguis::random_generator &,
 		particle::property_map const &,
 		particle::explosion_callback const &,
 		draw2d::center const &,

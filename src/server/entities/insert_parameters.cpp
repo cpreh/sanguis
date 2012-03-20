@@ -1,5 +1,5 @@
 #include <sanguis/server/entities/insert_parameters.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 
 sanguis::server::entities::insert_parameters::insert_parameters(
 	server::center const &_center,

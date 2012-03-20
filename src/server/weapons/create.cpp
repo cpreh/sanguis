@@ -1,5 +1,6 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/duration_second.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/weapons/aoe.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
@@ -21,6 +22,7 @@
 #include <fcppt/assert/unreachable_message.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/spirit/home/phoenix/object/new.hpp>
@@ -29,6 +31,7 @@
 sanguis::server::weapons::unique_ptr
 sanguis::server::weapons::create(
 	sanguis::diff_clock const  &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	weapon_type::type const _type
 )
 {
@@ -219,6 +222,9 @@ sanguis::server::weapons::create(
 				>(
 					fcppt::cref(
 						_diff_clock
+					),
+					fcppt::ref(
+						_random_generator
 					),
 					_type,
 					weapons::base_cooldown(

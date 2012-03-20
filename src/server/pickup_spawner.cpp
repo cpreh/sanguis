@@ -1,4 +1,7 @@
+#include <sanguis/random_generator.hpp>
+#include <sanguis/server/center.hpp>
 #include <sanguis/server/pickup_spawner.hpp>
+#include <sanguis/server/probability.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
@@ -6,111 +9,178 @@
 #include <sanguis/server/entities/pickups/health.hpp>
 #include <sanguis/server/entities/pickups/monster.hpp>
 #include <sanguis/server/entities/pickups/weapon.hpp>
-#include <fcppt/random/actor/element.hpp>
-#include <fcppt/random/actor/container.hpp>
-#include <fcppt/random/make_inclusive_range.hpp>
 #include <fcppt/assign/make_container.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
+#include <fcppt/random/variate_impl.hpp>
+#include <fcppt/random/distribution/uniform_real_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
+#include <fcppt/strong_typedef_assignment.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/spirit/home/phoenix/bind/bind_member_variable.hpp>
+#include <boost/spirit/home/phoenix/core/argument.hpp>
+#include <boost/spirit/home/phoenix/operator/arithmetic.hpp>
+#include <numeric>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::server::pickup_spawner::pickup_spawner(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	environment::object &_env
 )
 :
-	diff_clock_(_diff_clock),
-	env_(_env),
-	spawn_prob_(
-		fcppt::random::make_inclusive_range(
-			static_cast<
-				server::probability::value_type
-			>(
-				0
-			),
-			static_cast<
-				server::probability::value_type
-			>(
-				1
-			)
-		)
+	diff_clock_(
+		_diff_clock
 	),
-	rng_(
+	random_generator_(
+		_random_generator
+	),
+	env_(
+		_env
+	),
+	spawns_(
 		fcppt::assign::make_container<
-			fcppt::random::actor::container
+			spawn_vector
 		>(
-			fcppt::random::actor::element(
-				static_cast<fcppt::random::actor::float_type>(4),
-				std::tr1::bind(
-					&pickup_spawner::spawn_health,
-					this
+			std::make_pair(
+				server::probability(
+					4.f
+				),
+				pickup_spawner::spawn_function(
+					std::tr1::bind(
+						&pickup_spawner::spawn_health,
+						this,
+						std::tr1::placeholders::_1
+					)
 				)
 			)
 		)
 		(
-			fcppt::random::actor::element(
-				static_cast<fcppt::random::actor::float_type>(0.3),
-				std::tr1::bind(
-					&pickup_spawner::spawn_monster,
-					this
+			std::make_pair(
+				server::probability(
+					0.3f
+				),
+				pickup_spawner::spawn_function(
+					std::tr1::bind(
+						&pickup_spawner::spawn_monster,
+						this,
+						std::tr1::placeholders::_1
+					)
 				)
 			)
 		)
 		(
-			fcppt::random::actor::element(
-				static_cast<fcppt::random::actor::float_type>(2),
-				std::tr1::bind(
-					&pickup_spawner::spawn_weapon,
-					this,
-					sanguis::weapon_type::pistol
+			std::make_pair(
+				server::probability(
+					2.f
+				),
+				pickup_spawner::spawn_function(
+					std::tr1::bind(
+						&pickup_spawner::spawn_weapon,
+						this,
+						std::tr1::placeholders::_1,
+						sanguis::weapon_type::pistol
+					)
 				)
 			)
 		)
 		(
-			fcppt::random::actor::element(
-				static_cast<fcppt::random::actor::float_type>(0.8),
-				std::tr1::bind(
-					&pickup_spawner::spawn_weapon,
-					this,
-					sanguis::weapon_type::shotgun
+			std::make_pair(
+				server::probability(
+					0.8f
+				),
+				pickup_spawner::spawn_function(
+					std::tr1::bind(
+						&pickup_spawner::spawn_weapon,
+						this,
+						std::tr1::placeholders::_1,
+						sanguis::weapon_type::shotgun
+					)
 				)
 			)
 		)
 		(
-			fcppt::random::actor::element(
-				static_cast<fcppt::random::actor::float_type>(1),
-				std::tr1::bind(
-					&pickup_spawner::spawn_weapon,
-					this,
-					sanguis::weapon_type::rocket_launcher
+			std::make_pair(
+				server::probability(
+					1.f
+				),
+				pickup_spawner::spawn_function(
+					std::tr1::bind(
+						&pickup_spawner::spawn_weapon,
+						this,
+						std::tr1::placeholders::_1,
+						sanguis::weapon_type::rocket_launcher
+					)
 				)
 			)
 		)
 		(
-			fcppt::random::actor::element(
-				static_cast<fcppt::random::actor::float_type>(4),
-				std::tr1::bind(
-					&pickup_spawner::spawn_weapon,
-					this,
-					sanguis::weapon_type::grenade
+			std::make_pair(
+				server::probability(
+					4.f
+				),
+				pickup_spawner::spawn_function(
+					std::tr1::bind(
+						&pickup_spawner::spawn_weapon,
+						this,
+						std::tr1::placeholders::_1,
+						sanguis::weapon_type::grenade
+					)
 				)
 			)
 		)
 		(
-			fcppt::random::actor::element(
-				static_cast<fcppt::random::actor::float_type>(0.3),
-				std::tr1::bind(
-					&pickup_spawner::spawn_weapon,
-					this,
-					sanguis::weapon_type::sentry
+			std::make_pair(
+				server::probability(
+					0.3f
+				),
+				pickup_spawner::spawn_function(
+					std::tr1::bind(
+						&pickup_spawner::spawn_weapon,
+						this,
+						std::tr1::placeholders::_1,
+						sanguis::weapon_type::sentry
+					)
 				)
 			)
 		)
 	),
-	center_(
-		server::center::value_type::null()
+	spawn_prob_(
+		_random_generator,
+		real_distribution(
+			real_distribution::min(
+				0.f
+			),
+			real_distribution::sup(
+				1.f
+			)
+		)
+	),
+	spawn_value_(
+		_random_generator,
+		real_distribution(
+			real_distribution::min(
+				0.f
+			),
+			real_distribution::sup(
+				std::accumulate(
+					spawns_.begin(),
+					spawns_.end(),
+					server::probability(
+						0.f
+					),
+					boost::phoenix::bind(
+						&spawn_pair::first,
+						boost::phoenix::arg_names::_2
+					)
+					+
+					boost::phoenix::arg_names::_1
+				).get()
+			)
+		)
 	)
 {
 }
@@ -131,14 +201,41 @@ sanguis::server::pickup_spawner::spawn(
 	)
 		return;
 
-	// TODO: this is really ugly! :(
-	center_ = _center;
+	server::probability const value(
+		spawn_value_()
+	);
 
-	rng_();
+	server::probability cur(
+		0.f
+	);
+
+	for(
+		spawn_vector::const_iterator it(
+			spawns_.begin()
+		);
+		it != spawns_.end();
+		++it
+	)
+	{
+		cur += it->first;
+
+		if(
+			cur < value
+		)
+		{
+			it->second(
+				_center
+			);
+
+			return;
+		}
+	}
 }
 
 void
-sanguis::server::pickup_spawner::spawn_health()
+sanguis::server::pickup_spawner::spawn_health(
+	server::center const &_center
+)
 {
 	env_.insert(
 		entities::unique_ptr(
@@ -158,13 +255,15 @@ sanguis::server::pickup_spawner::spawn_health()
 			)
 		),
 		entities::insert_parameters_center(
-			center_
+			_center
 		)
 	);
 }
 
 void
-sanguis::server::pickup_spawner::spawn_monster()
+sanguis::server::pickup_spawner::spawn_monster(
+	server::center const &_center
+)
 {
 	env_.insert(
 		entities::unique_ptr(
@@ -175,6 +274,9 @@ sanguis::server::pickup_spawner::spawn_monster()
 					diff_clock_
 				),
 				fcppt::ref(
+					random_generator_
+				),
+				fcppt::ref(
 					env_.load_context()
 				),
 				team::players,
@@ -182,13 +284,14 @@ sanguis::server::pickup_spawner::spawn_monster()
 			)
 		),
 		entities::insert_parameters_center(
-			center_
+			_center
 		)
 	);
 }
 
 void
 sanguis::server::pickup_spawner::spawn_weapon(
+	server::center const &_center,
 	weapon_type::type const _wtype
 )
 {
@@ -208,7 +311,7 @@ sanguis::server::pickup_spawner::spawn_weapon(
 			)
 		),
 		entities::insert_parameters_center(
-			center_
+			_center
 		)
 	);
 }

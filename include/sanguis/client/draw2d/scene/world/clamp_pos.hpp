@@ -5,7 +5,7 @@
 #include <sanguis/client/draw2d/scene/world/batch.hpp>
 #include <sanguis/client/draw2d/scene/world/signed_pos.hpp>
 #include <fcppt/container/grid/object_decl.hpp>
-#include <fcppt/math/dim/basic_decl.hpp>
+#include <fcppt/math/dim/object_decl.hpp>
 
 namespace sanguis
 {

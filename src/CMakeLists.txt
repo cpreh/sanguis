@@ -649,7 +649,9 @@ SET(
 	include/sanguis/pickup_type.hpp
 	include/sanguis/pixels_per_meter.hpp
 	include/sanguis/projectile_type.hpp
-	include/sanguis/random.hpp
+	include/sanguis/random_generator.hpp
+	include/sanguis/random_generator_fwd.hpp
+	include/sanguis/random_seed.hpp
 	include/sanguis/resolution.hpp
 	include/sanguis/server/ai/base.hpp
 	include/sanguis/server/ai/base_fwd.hpp
@@ -1275,7 +1277,7 @@ SET(
 	src/net/server/object.cpp
 	src/net/server/object_impl.cpp
 	src/pixels_per_meter.cpp
-	src/random.cpp
+	src/random_seed.cpp
 	src/server/ai/base.cpp
 	src/server/ai/create_simple.cpp
 	src/server/ai/create_simple_without_owner.cpp

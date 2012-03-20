@@ -1,3 +1,4 @@
+#include <sanguis/random_generator.hpp>
 #include <sanguis/server/waves/spawn.hpp>
 #include <sanguis/server/entities/enemies/create.hpp>
 #include <sanguis/server/entities/base.hpp>
@@ -7,42 +8,46 @@
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/vector.hpp>
-#include <sanguis/random.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
+#include <fcppt/random/variate.hpp>
+#include <fcppt/random/distribution/uniform_real.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/random/uniform_real.hpp>
-#include <boost/random/variate_generator.hpp>
 #include <cmath>
 #include <fcppt/config/external_end.hpp>
 
 void
 sanguis::server::waves::spawn(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	environment::object &_env,
 	environment::load_context &_load_context,
 	enemy_type::type const _etype,
 	entities::auto_weak_link const _spawn
 )
 {
-	// TODO: put this randomizer somewhere else!
+	typedef fcppt::random::distribution::uniform_real<
+		server::space_unit
+	> angle_distribution;
 
-	typedef boost::uniform_real<
-		space_unit
-	> uniform_su;
-
-	typedef boost::random::variate_generator<
-		rand_gen_type,
-		uniform_su
+	typedef fcppt::random::variate<
+		sanguis::random_generator,
+		angle_distribution
 	> rng_type;
 
-	static rng_type rng(
-		create_seeded_randgen(),
-		uniform_su(
-			static_cast<space_unit>(0),
-			fcppt::math::twopi<space_unit>()
+	rng_type rng(
+		_random_generator,
+		angle_distribution(
+			angle_distribution::min(
+				0.f
+			),
+			angle_distribution::sup(
+				fcppt::math::twopi<
+					server::space_unit
+				>()
+			)
 		)
 	);
 
@@ -90,6 +95,7 @@ sanguis::server::waves::spawn(
 	_env.insert(
 		entities::enemies::create(
 			_diff_clock,
+			_random_generator,
 			_etype,
 			_load_context,
 			_spawn

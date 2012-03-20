@@ -8,7 +8,7 @@
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
-#include <fcppt/math/vector/basic_decl.hpp>
+#include <fcppt/math/vector/object_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis

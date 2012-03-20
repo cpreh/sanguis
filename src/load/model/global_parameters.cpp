@@ -4,6 +4,7 @@
 #include <fcppt/config/external_end.hpp>
 
 sanguis::load::model::global_parameters::global_parameters(
+	sanguis::random_generator &_random_generator,
 	boost::filesystem::path const &_path,
 	resource::textures const &_textures,
 	sge::renderer::dim2 const &_cell_size,
@@ -12,6 +13,7 @@ sanguis::load::model::global_parameters::global_parameters(
 	resource::sounds const &_sounds
 )
 :
+	random_generator_(_random_generator),
 	path_(_path),
 	textures_(_textures),
 	cell_size_(_cell_size),
@@ -19,6 +21,12 @@ sanguis::load::model::global_parameters::global_parameters(
 	texture_(_texture),
 	sounds_(_sounds)
 {}
+
+sanguis::random_generator &
+sanguis::load::model::global_parameters::random_generator() const
+{
+	return random_generator_;
+}
 
 boost::filesystem::path const &
 sanguis::load::model::global_parameters::path() const
@@ -59,6 +67,7 @@ sanguis::load::model::global_parameters::new_texture(
 		_tex
 		?
 			model::global_parameters(
+				this->random_generator(),
 				this->path(),
 				this->textures(),
 				this->cell_size(),

@@ -1,10 +1,11 @@
 #ifndef SANGUIS_LOAD_MODEL_ANIMATION_SOUND_HPP_INCLUDED
 #define SANGUIS_LOAD_MODEL_ANIMATION_SOUND_HPP_INCLUDED
 
+#include <sanguis/animation_sound_type.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/load/model/animation/sound_fwd.hpp>
 #include <sanguis/load/model/conditional_sound_fwd.hpp>
 #include <sanguis/load/resource/sounds_fwd.hpp>
-#include <sanguis/animation_sound_type.hpp>
 #include <sge/audio/sound/positional_ptr.hpp>
 #include <sge/parse/json/member_map.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -35,6 +36,7 @@ public:
 	sound();
 
 	sound(
+		sanguis::random_generator &,
 		sge::parse::json::member_map const &,
 		resource::sounds const &
 	);

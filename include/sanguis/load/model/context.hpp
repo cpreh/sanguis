@@ -1,6 +1,7 @@
 #ifndef SANGUIS_LOAD_MODEL_CONTEXT_HPP_INCLUDED
 #define SANGUIS_LOAD_MODEL_CONTEXT_HPP_INCLUDED
 
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/load/model/collection_fwd.hpp>
 #include <sanguis/load/context_fwd.hpp>
 #include <sanguis/load/resource/context_fwd.hpp>
@@ -25,8 +26,9 @@ public:
 private:
 	friend class load::context;
 
-	explicit context(
-		resource::context const &
+	context(
+		resource::context const &,
+		sanguis::random_generator &
 	);
 
 	~context();

@@ -1,3 +1,4 @@
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/load/model/weapon_category.hpp>
 #include <sanguis/load/model/base_animation_not_found.hpp>
 #include <sanguis/load/model/global_parameters.hpp>
@@ -14,7 +15,7 @@
 #include <fcppt/algorithm/find_exn.hpp>
 #include <fcppt/container/array.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/string.hpp>

@@ -8,6 +8,7 @@
 #include <sanguis/client/draw2d/aoe.hpp>
 #include <sanguis/load/model/animation/context_ptr.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 
 namespace sanguis
 {
@@ -21,6 +22,7 @@ namespace entities
 particle::base_ptr
 explosion_particle(
 	sanguis::diff_clock const &,
+	sanguis::random_generator &,
 	particle::particle_type::type,
 	sprite::particle::system &,
 	draw2d::aoe,

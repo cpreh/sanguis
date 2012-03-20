@@ -14,9 +14,9 @@
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/sprite/intrusive/connection.hpp>
 #include <sge/viewport/manager.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 

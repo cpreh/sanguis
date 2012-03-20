@@ -13,7 +13,7 @@
 #include <sanguis/messages/create.hpp>
 #include <sanguis/cast_enum.hpp>
 #include <sanguis/log_parameters.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/log/parameters/object.hpp>
 #include <fcppt/log/location.hpp>

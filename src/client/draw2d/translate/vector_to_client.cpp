@@ -2,7 +2,7 @@
 #include <sanguis/client/draw2d/translate/vector_to_client.hpp>
 #include <sanguis/client/draw2d/translate/scalar_to_client.hpp>
 #include <fcppt/algorithm/array_map.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 
 sanguis::client::draw2d::vector2 const

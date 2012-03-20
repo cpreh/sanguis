@@ -2,7 +2,7 @@
 #include <sge/input/cursor/object.hpp>
 #include <sge/input/cursor/optional_position.hpp>
 #include <fcppt/function/object.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/signal/object_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 

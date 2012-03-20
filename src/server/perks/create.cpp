@@ -1,3 +1,4 @@
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/perks/create.hpp>
 #include <sanguis/server/perks/perk.hpp>
 #include <sanguis/server/perks/choleric.hpp>
@@ -9,10 +10,12 @@
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 
 sanguis::server::perks::unique_ptr
 sanguis::server::perks::create(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	perk_type::type const _type
 )
 {
@@ -28,6 +31,9 @@ sanguis::server::perks::create(
 				>(
 					fcppt::cref(
 						_diff_clock
+					),
+					fcppt::ref(
+						_random_generator
 					)
 				)
 			);

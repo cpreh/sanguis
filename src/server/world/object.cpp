@@ -43,7 +43,7 @@
 #include <fcppt/chrono/milliseconds.hpp>
 #include <fcppt/chrono/seconds.hpp>
 #include <fcppt/container/map_impl.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/format.hpp>

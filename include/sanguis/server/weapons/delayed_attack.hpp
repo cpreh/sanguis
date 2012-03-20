@@ -6,7 +6,7 @@
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/vector.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/nonassignable.hpp>
 
 namespace sanguis

@@ -9,8 +9,8 @@
 #include <sanguis/load/friend_name.hpp>
 #include <sanguis/messages/add_friend.hpp>
 #include <sanguis/messages/create.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
 #include <fcppt/config/external_end.hpp>

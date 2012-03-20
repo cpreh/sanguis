@@ -10,7 +10,7 @@
 #include <sge/sprite/intrusive/connection.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
 #include <fcppt/chrono/seconds.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 

@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include <sanguis/load/resource/animation/entity.hpp>
 #include <sge/texture/part.hpp>
-#include <fcppt/math/box/basic_impl.hpp>
+#include <fcppt/math/box/object_impl.hpp>
 #include <fcppt/chrono/duration_impl.hpp>
 
 sanguis::load::resource::animation::entity::entity(

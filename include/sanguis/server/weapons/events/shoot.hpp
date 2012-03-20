@@ -4,7 +4,7 @@
 #include <sanguis/server/weapons/events/shoot_fwd.hpp>
 #include <sanguis/server/entities/with_weapon_fwd.hpp>
 #include <sanguis/server/vector.hpp>
-#include <fcppt/math/vector/basic_decl.hpp>
+#include <fcppt/math/vector/object_decl.hpp>
 #include <fcppt/nonassignable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/event.hpp>

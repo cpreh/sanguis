@@ -3,7 +3,7 @@
 
 #include <sanguis/duration.hpp>
 #include <sge/renderer/lock_rect.hpp>
-#include <fcppt/math/box/basic_decl.hpp>
+#include <fcppt/math/box/object_decl.hpp>
 
 namespace sanguis
 {

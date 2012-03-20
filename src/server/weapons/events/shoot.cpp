@@ -1,5 +1,5 @@
 #include <sanguis/server/weapons/events/shoot.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 
 sanguis::server::weapons::events::shoot::shoot(
 	entities::with_weapon &_from,

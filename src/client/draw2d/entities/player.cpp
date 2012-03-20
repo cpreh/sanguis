@@ -8,7 +8,7 @@
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/signed_angle_between_cast.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/point_rotate.hpp>
 
 namespace

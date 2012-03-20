@@ -1,13 +1,16 @@
+#include <sanguis/random_generator.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/particle/generator.hpp>
 #include <sanguis/client/draw2d/particle/object.hpp>
 #include <sanguis/client/draw2d/particle/rotation_from_alignment.hpp>
 #include <sanguis/client/draw2d/particle/velocity_from_movement.hpp>
 #include <sge/timer/reset_when_expired.hpp>
-#include <fcppt/random/make_inclusive_range.hpp>
+#include <fcppt/random/variate_impl.hpp>
+#include <fcppt/random/distribution/uniform_int_impl.hpp>
+#include <fcppt/random/distribution/uniform_real_impl.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/vector/hypersphere_to_cartesian.hpp>
 #include <fcppt/math/vector/static.hpp>
 #include <fcppt/homogenous_pair_impl.hpp>
@@ -15,6 +18,7 @@
 
 sanguis::client::draw2d::particle::generator::generator(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	particle::generation_callback const _generate_object,
 	draw2d::center const &_center,
 	particle::gen_life_time const &_life_time,
@@ -61,71 +65,64 @@ sanguis::client::draw2d::particle::generator::generator(
 		_alignment
 	),
 	dispersion_angle_(
-		fcppt::random::make_inclusive_range(
-			static_cast<
-				particle::rotation::value_type
-			>(
-				0
+		_random_generator,
+		particle::uniform_rotation::distribution(
+			particle::uniform_rotation::distribution::min(
+				0.f
 			),
-			fcppt::math::twopi<
-				particle::rotation::value_type
-			>()
-		)
-	),
-	dispersion_value_(
-		fcppt::random::make_inclusive_range(
-			_dispersion_value.get().first,
-			_dispersion_value.get().second
-		)
-	),
-	velocity_angle_(
-		fcppt::random::make_inclusive_range(
-			static_cast<
-				particle::rotation::value_type
-			>(
-				0
-			),
-			fcppt::math::twopi<
-				particle::rotation::value_type
-			>()
-		)
-	),
-	velocity_value_(
-		fcppt::random::make_inclusive_range(
-			_velocity.get().first,
-			_velocity.get().second
-		)
-	),
-	rot_angle_(
-		fcppt::random::make_inclusive_range(
-			static_cast<
-				particle::rotation::value_type
-			>(
-				0
-			),
-			fcppt::math::twopi<
-				particle::rotation::value_type
-			>()
-		)
-	),
-	rot_direction_(
-		fcppt::random::make_inclusive_range(
-			static_cast<
-				particle::rotation::value_type
-			>(
-				0
-			),
-			static_cast<
-				particle::rotation::value_type
-			>(
-				1
+			particle::uniform_rotation::distribution::sup(
+				fcppt::math::twopi<
+					particle::rotation::value_type
+				>()
 			)
 		)
 	),
-	rot_velocity_(
-		fcppt::random::make_inclusive_range(
-			_rot_velocity.get().first,
-			_rot_velocity.get().second
+	dispersion_value_(
+		_random_generator,
+		dispersion_distribution(
+			dispersion_distribution::min(
+				_dispersion_value.get().first
+			),
+			dispersion_distribution::max(
+				_dispersion_value.get().second
+			)
+		)
+	),
+	velocity_angle_(
+		_random_generator,
+		particle::uniform_rotation::distribution(
+			particle::uniform_rotation::distribution::min(
+				0.f
+			),
+			particle::uniform_rotation::distribution::sup(
+				fcppt::math::twopi<
+					particle::rotation::value_type
+				>()
+			)
+		)
+	),
+	velocity_value_(
+		_random_generator,
+		particle::uniform_velocity_range::distribution(
+			particle::uniform_velocity_range::distribution::min(
+				_velocity.get().first
+			),
+			particle::uniform_velocity_range::distribution::sup(
+				_velocity.get().second
+			)
+		)
+	),
+	rot_angle_(
+		_random_generator,
+		particle::uniform_rotation::distribution(
+			particle::uniform_rotation::distribution::min(
+				0.f
+			),
+			particle::uniform_rotation::distribution::sup(
+				fcppt::math::twopi<
+					particle::rotation::value_type
+				>()
+			)
 		)
 	),
 	movement_(

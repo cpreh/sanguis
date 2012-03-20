@@ -25,8 +25,8 @@
 #include <sge/window/title.hpp>
 #include <awl/mainloop/io_service_fwd.hpp>
 #include <fcppt/assign/make_container.hpp>
-#include <fcppt/container/bitfield/basic_impl.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/container/bitfield/object_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/text.hpp>
 
 sge::systems::list const

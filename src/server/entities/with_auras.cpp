@@ -3,7 +3,7 @@
 #include <sanguis/server/collision/ghost.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 
 void
 sanguis::server::entities::with_auras::add_aura(

@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_PARTICLE_FADE_TIME_RANGE_HPP_INCLUDED
 
 #include <sanguis/time_unit.hpp>
-#include <fcppt/random/inclusive_range.hpp>
+#include <fcppt/random/distribution/uniform_real_fwd.hpp>
 
 namespace sanguis
 {
@@ -13,7 +13,7 @@ namespace draw2d
 namespace particle
 {
 
-typedef fcppt::random::inclusive_range<
+typedef fcppt::random::distribution::uniform_real<
 	sanguis::time_unit
 > fade_time_range;
 

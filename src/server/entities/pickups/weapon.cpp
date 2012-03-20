@@ -1,3 +1,4 @@
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/entities/pickups/weapon.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
@@ -7,11 +8,12 @@
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/add_weapon_pickup.hpp>
 #include <fcppt/optional_impl.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 
 sanguis::server::entities::pickups::weapon::weapon(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	server::environment::load_context &_load_context,
 	server::team::type const _team,
 	weapon_type::type const _weapon_type
@@ -30,8 +32,15 @@ sanguis::server::entities::pickups::weapon::weapon(
 			)
 		)
 	),
-	diff_clock_(_diff_clock),
-	weapon_type_(_weapon_type)
+	diff_clock_(
+		_diff_clock
+	),
+	random_generator_(
+		_random_generator
+	),
+	weapon_type_(
+		_weapon_type
+	)
 {
 }
 
@@ -74,6 +83,7 @@ sanguis::server::entities::pickups::weapon::do_pickup(
 	.add_weapon(
 		weapons::create(
 			diff_clock_,
+			random_generator_,
 			weapon_type_
 		)
 	);

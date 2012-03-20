@@ -1,10 +1,13 @@
+#include <sanguis/random_generator.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/particle/rotation_from_alignment.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/math/vector/signed_angle_between_cast.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/vector/length.hpp>
-#include <fcppt/random/uniform_impl.hpp>
+#include <fcppt/random/variate_impl.hpp>
+#include <fcppt/random/distribution/uniform_real_impl.hpp>
+
 
 sanguis::client::draw2d::particle::rotation const
 sanguis::client::draw2d::particle::rotation_from_alignment(

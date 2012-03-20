@@ -2,11 +2,19 @@
 #include <sanguis/server/waves/spawn.hpp>
 
 sanguis::server::waves::debug::debug(
-	sanguis::diff_clock const &_diff_clock
+	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator
 )
 :
-	diff_clock_(_diff_clock),
-	spawned_(false)
+	diff_clock_(
+		_diff_clock
+	),
+	random_generator_(
+		_random_generator
+	),
+	spawned_(
+		false
+	)
 {
 }
 
@@ -32,6 +40,7 @@ sanguis::server::waves::debug::process(
 	)
 		waves::spawn(
 			diff_clock_,
+			random_generator_,
 			_env,
 			_load_context,
 			static_cast<

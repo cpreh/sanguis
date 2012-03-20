@@ -1,13 +1,15 @@
+#include <sanguis/exception.hpp>
+#include <sanguis/random_generator.hpp>
 #include <sanguis/load/model/random_sound.hpp>
 #include <sanguis/load/model/sound.hpp>
 #include <sanguis/load/resource/context.hpp>
 #include <sanguis/load/resource/sounds.hpp>
-#include <sanguis/exception.hpp>
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/random/inclusive_range.hpp>
+#include <fcppt/random/variate_impl.hpp>
+#include <fcppt/random/distribution/uniform_real_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -16,16 +18,20 @@
 #include <fcppt/config/external_end.hpp>
 
 sanguis::load::model::random_sound::random_sound(
+	sanguis::random_generator &_random_generator,
 	sge::parse::json::element_vector const &_elements,
 	resource::sounds const &_ctx
 )
 :
 	rng_(
-		fcppt::random::inclusive_range<
-			load::probability_type
-		>(
-			0,
-			1
+		_random_generator,
+		distribution(
+			distribution::min(
+				0.f
+			),
+			distribution::sup(
+				1.f
+			)
 		)
 	)
 {

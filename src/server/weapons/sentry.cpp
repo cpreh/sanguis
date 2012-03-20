@@ -11,6 +11,7 @@
 
 sanguis::server::weapons::sentry::sentry(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	weapon_type::type const _type,
 	weapons::base_cooldown const _base_cooldown,
 	weapons::cast_point const _cast_point,
@@ -33,6 +34,9 @@ sanguis::server::weapons::sentry::sentry(
 		_base_cooldown,
 		_cast_point,
 		_reload_time
+	),
+	random_generator_(
+		_random_generator
 	),
 	sentry_weapon_(
 		_sentry_weapon
@@ -66,7 +70,8 @@ sanguis::server::weapons::sentry::do_attack(
 					0.f
 				),
 				ai::create_simple_without_owner(
-					this->diff_clock()
+					this->diff_clock(),
+					random_generator_
 				),
 				weapons::unique_ptr(
 					sentry_weapon_()

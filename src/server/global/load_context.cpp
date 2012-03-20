@@ -3,7 +3,7 @@
 #include <sanguis/load/context_base.hpp>
 #include <sanguis/pixels_per_meter.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 
 sanguis::server::global::load_context::load_context(

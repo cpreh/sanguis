@@ -4,7 +4,7 @@
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
-#include <fcppt/math/vector/basic_decl.hpp>
+#include <fcppt/math/vector/object_decl.hpp>
 #include <fcppt/nonassignable.hpp>
 
 namespace sanguis

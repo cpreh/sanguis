@@ -9,15 +9,17 @@
 #include <sanguis/load/friend_name.hpp>
 #include <sanguis/load/context.hpp>
 #include <sanguis/duration_second.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <fcppt/function/object.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/cref.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/optional_impl.hpp>
 
 sanguis::server::entities::pickups::monster::monster(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	server::environment::load_context &_load_context,
 	team::type const _team,
 	friend_type::type const _ftype
@@ -30,8 +32,15 @@ sanguis::server::entities::pickups::monster::monster(
 		_team,
 		optional_dim()
 	),
-	diff_clock_(_diff_clock),
-	ftype_(_ftype)
+	diff_clock_(
+		_diff_clock
+	),
+	random_generator_(
+		_random_generator
+	),
+	ftype_(
+		_ftype
+	)
 {
 }
 
@@ -60,6 +69,7 @@ sanguis::server::entities::pickups::monster::do_pickup(
 				entities::movement_speed(2.f),
 				ai::create_simple(
 					diff_clock_,
+					random_generator_,
 					_receiver.link()
 				),
 				weapons::unique_ptr(

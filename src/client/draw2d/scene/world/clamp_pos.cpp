@@ -2,7 +2,7 @@
 #include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
 #include <sanguis/client/draw2d/scene/world/signed_pos.hpp>
 #include <fcppt/container/grid/size_type.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/math/clamp.hpp>
 
 sanguis::client::draw2d::scene::world::batch_grid::dim const

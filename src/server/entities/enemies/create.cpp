@@ -7,6 +7,8 @@
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/ai/create_simple_without_owner.hpp>
 #include <sanguis/duration_second.hpp>
+#include <sanguis/enemy_type.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/cref.hpp>
@@ -15,6 +17,7 @@
 sanguis::server::entities::unique_ptr
 sanguis::server::entities::enemies::create(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	enemy_type::type const _etype,
 	environment::load_context &_load_context,
 	entities::auto_weak_link const _spawn
@@ -37,7 +40,8 @@ sanguis::server::entities::enemies::create(
 				server::health(9.f),
 				movement_speed(0.5f),
 				ai::create_simple_without_owner(
-					_diff_clock
+					_diff_clock,
+					_random_generator
 				),
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<
@@ -85,7 +89,8 @@ sanguis::server::entities::enemies::create(
 				server::health(3.f),
 				movement_speed(0.4f),
 				ai::create_simple_without_owner(
-					_diff_clock
+					_diff_clock,
+					_random_generator
 				),
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<
@@ -123,7 +128,8 @@ sanguis::server::entities::enemies::create(
 				server::health(3.f),
 				movement_speed(1.7f),
 				ai::create_simple_without_owner(
-					_diff_clock
+					_diff_clock,
+					_random_generator
 				),
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<
@@ -159,7 +165,8 @@ sanguis::server::entities::enemies::create(
 				server::health(500.f),
 				movement_speed(1.f),
 				ai::create_simple_without_owner(
-					_diff_clock
+					_diff_clock,
+					_random_generator
 				),
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<
@@ -195,7 +202,8 @@ sanguis::server::entities::enemies::create(
 				server::health(1.f),
 				movement_speed(0.8f),
 				ai::create_simple_without_owner(
-					_diff_clock
+					_diff_clock,
+					_random_generator
 				),
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<
@@ -231,7 +239,8 @@ sanguis::server::entities::enemies::create(
 				server::health(12.f),
 				movement_speed(1.5f),
 				ai::create_simple_without_owner(
-					_diff_clock
+					_diff_clock,
+					_random_generator
 				),
 				weapons::unique_ptr(
 					fcppt::make_unique_ptr<

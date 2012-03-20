@@ -9,6 +9,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/enemy_type.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -31,6 +32,7 @@ class limited
 public:
 	limited(
 		sanguis::diff_clock const &,
+		sanguis::random_generator &,
 		enemy_type::type,
 		count_per_wave,
 		interval,

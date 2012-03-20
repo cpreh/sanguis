@@ -1,5 +1,5 @@
 #include <sanguis/load/model/frame_cache.hpp>
-#include <fcppt/math/box/basic_impl.hpp>
+#include <fcppt/math/box/object_impl.hpp>
 
 void sanguis::load::model::frame_cache::push_back(
 	frame_cache_value const &v)

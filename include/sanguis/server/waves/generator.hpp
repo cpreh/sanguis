@@ -6,6 +6,7 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/console_fwd.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sge/console/arg_list.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -28,6 +29,7 @@ class generator
 public:
 	generator(
 		sanguis::diff_clock const &,
+		sanguis::random_generator &,
 		server::console &
 	);
 
@@ -48,6 +50,8 @@ private:
 	spawn_all();
 
 	sanguis::diff_clock const &diff_clock_;
+
+	sanguis::random_generator &random_generator_;
 
 	server::console &console_;
 

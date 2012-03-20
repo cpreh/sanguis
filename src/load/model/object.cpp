@@ -1,3 +1,5 @@
+#include <sanguis/exception.hpp>
+#include <sanguis/random_generator.hpp>
 #include <sanguis/load/model/object.hpp>
 #include <sanguis/load/model/find_texture.hpp>
 #include <sanguis/load/model/global_parameters.hpp>
@@ -11,7 +13,6 @@
 #include <sanguis/load/resource/context.hpp>
 #include <sanguis/load/resource/textures.hpp>
 #include <sanguis/load/log.hpp>
-#include <sanguis/exception.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
@@ -20,11 +21,13 @@
 #include <sge/parse/json/object.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/log/headers.hpp>
-#include <fcppt/random/make_last_exclusive_range.hpp>
+#include <fcppt/random/variate.hpp>
+#include <fcppt/random/distribution/uniform_int.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/next_prior.hpp>
@@ -67,15 +70,23 @@ sanguis::load::model::object::random_part() const
 	if(
 		!random_part_
 	)
-		random_part_ =
+		random_part_.take(
 			fcppt::make_unique_ptr<
 				part_rand
 			>(
-				fcppt::random::make_last_exclusive_range(
-					static_cast<part_map::size_type>(0),
-					parts_.size()
+				fcppt::ref(
+					random_generator_
+				),
+				part_map_distribution(
+					part_map_distribution::min(
+						0u
+					),
+					part_map_distribution::max(
+						parts_.size() - 1u
+					)
 				)
-			);
+			)
+		);
 
 	return
 		*boost::next(
@@ -110,11 +121,18 @@ sanguis::load::model::object::dim() const
 
 sanguis::load::model::object::object(
 	boost::filesystem::path const &_path,
-	resource::context const &_ctx
+	resource::context const &_ctx,
+	sanguis::random_generator &_random_generator
 )
 :
-	path_(_path),
-	parts_()
+	path_(
+		_path
+	),
+	random_generator_(
+		_random_generator
+	),
+	parts_(),
+	random_part_()
 {
 	FCPPT_LOG_DEBUG(
 		log(),
@@ -127,7 +145,7 @@ sanguis::load::model::object::object(
 
 	try
 	{
-		construct(
+		this->construct(
 			_ctx
 		);
 	}
@@ -236,6 +254,7 @@ sanguis::load::model::object::construct(
 						member.second
 					),
 					model::global_parameters(
+						random_generator_,
 						path_,
 						_ctx.textures(),
 						cell_size_,

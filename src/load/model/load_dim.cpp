@@ -6,7 +6,7 @@
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/renderer/size_type.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/text.hpp>
 
 sge::renderer::dim2 const

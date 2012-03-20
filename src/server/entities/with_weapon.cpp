@@ -7,7 +7,7 @@
 #include <sanguis/messages/create.hpp>
 #include <sanguis/exception.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -183,6 +183,7 @@ sanguis::server::entities::with_weapon::add_weapon(
 		return
 			this->add_weapon(
 				weapons::create(
+					// TODO: don't take this from here!
 					diff_clock_,
 					weapon_type::dual_pistol
 				)

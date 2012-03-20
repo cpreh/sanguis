@@ -1,13 +1,14 @@
 #ifndef SANGUIS_LOAD_MODEL_GLOBAL_PARAMETERS_HPP_INCLUDED
 #define SANGUIS_LOAD_MODEL_GLOBAL_PARAMETERS_HPP_INCLUDED
 
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/load/model/global_parameters_fwd.hpp>
 #include <sanguis/load/model/optional_delay.hpp>
 #include <sanguis/load/model/optional_texture_identifier.hpp>
 #include <sanguis/load/resource/textures_fwd.hpp>
 #include <sanguis/load/resource/sounds_fwd.hpp>
 #include <sge/renderer/dim2.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/nonassignable.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -28,6 +29,7 @@ class global_parameters
 	);
 public:
 	global_parameters(
+		sanguis::random_generator &,
 		boost::filesystem::path const &,
 		resource::textures const &,
 		sge::renderer::dim2 const &cell_size,
@@ -35,6 +37,9 @@ public:
 		optional_texture_identifier const &,
 		resource::sounds const &
 	);
+
+	sanguis::random_generator &
+	random_generator() const;
 
 	boost::filesystem::path const &
 	path() const;
@@ -59,6 +64,8 @@ public:
 	resource::sounds const &
 	sounds() const;
 private:
+	sanguis::random_generator &random_generator_;
+
 	boost::filesystem::path const path_;
 
 	resource::textures const &textures_;

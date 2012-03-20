@@ -1,5 +1,5 @@
 #include <sanguis/load/model/frame_cache_value.hpp>
-#include <fcppt/math/box/basic_impl.hpp>
+#include <fcppt/math/box/object_impl.hpp>
 
 sanguis::load::model::frame_cache_value::frame_cache_value(
 	sanguis::duration const &_delay,

@@ -7,6 +7,7 @@
 
 sanguis::server::entities::spawns::limited::limited(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	enemy_type::type const _enemy_type,
 	count_per_wave const _count_per_wave,
 	interval const _interval,
@@ -15,9 +16,12 @@ sanguis::server::entities::spawns::limited::limited(
 :
 	spawn(
 		_diff_clock,
+		_random_generator,
 		_enemy_type
 	),
-	count_per_wave_(_count_per_wave),
+	count_per_wave_(
+		_count_per_wave
+	),
 	delay_timer_(
 		sanguis::diff_timer::parameters(
 			_diff_clock,

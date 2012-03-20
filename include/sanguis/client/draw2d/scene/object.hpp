@@ -28,6 +28,7 @@
 #include <sanguis/diff_clock.hpp>
 #include <sanguis/duration_fwd.hpp>
 #include <sanguis/entity_id.hpp>
+#include <sanguis/random_generator.hpp>
 #include <sge/audio/listener_fwd.hpp>
 #include <sge/charconv/system_fwd.hpp>
 #include <sge/font/metrics_fwd.hpp>
@@ -37,8 +38,8 @@
 #include <sge/renderer/viewport.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/function/object.hpp>
-#include <fcppt/math/vector/basic_decl.hpp>
-#include <fcppt/math/matrix/basic_decl.hpp>
+#include <fcppt/math/vector/object_decl.hpp>
+#include <fcppt/math/matrix/object_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -143,6 +144,9 @@ private:
 	sanguis::diff_clock const &
 	diff_clock() const;
 
+	sanguis::random_generator &
+	random_generator();
+
 	draw2d::transform_callback const &
 	transform_callback() const;
 
@@ -171,6 +175,8 @@ private:
 	viewport() const;
 
 	sanguis::diff_clock diff_clock_;
+
+	sanguis::random_generator random_generator_;
 
 	load::context const &resources_;
 

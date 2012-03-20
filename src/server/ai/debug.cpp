@@ -8,7 +8,7 @@
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/vector.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/vector/signed_angle_between_cast.hpp>
 #include <fcppt/optional.hpp>
 #include <fcppt/try_dynamic_cast.hpp>

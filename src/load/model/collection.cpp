@@ -1,9 +1,11 @@
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/load/model/collection.hpp>
 #include <sanguis/load/model/make_path.hpp>
 #include <sanguis/load/model/object.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 
 sanguis::load::model::object const &
 sanguis::load::model::collection::operator[](
@@ -35,6 +37,9 @@ sanguis::load::model::collection::operator[](
 					),
 					fcppt::cref(
 						ctx_
+					),
+					fcppt::ref(
+						random_generator_
 					)
 				)
 			).first;
@@ -43,13 +48,20 @@ sanguis::load::model::collection::operator[](
 }
 
 sanguis::load::model::collection::collection(
-	resource::context const &_ctx
+	resource::context const &_ctx,
+	sanguis::random_generator &_random_generator
 )
 :
-	ctx_(_ctx),
+	ctx_(
+		_ctx
+	),
+	random_generator_(
+		_random_generator
+	),
 	models_(),
 	mutex_()
-{}
+{
+}
 
 sanguis::load::model::collection::~collection()
 {

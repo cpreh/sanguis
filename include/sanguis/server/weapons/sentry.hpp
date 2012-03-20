@@ -8,6 +8,7 @@
 #include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/create_function.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -28,6 +29,7 @@ class sentry
 public:
 	sentry(
 		sanguis::diff_clock const &,
+		sanguis::random_generator &,
 		weapon_type::type,
 		weapons::base_cooldown,
 		weapons::cast_point,
@@ -41,6 +43,8 @@ private:
 	do_attack(
 		delayed_attack const &
 	);
+
+	sanguis::random_generator &random_generator_;
 
 	create_function const sentry_weapon_;
 };

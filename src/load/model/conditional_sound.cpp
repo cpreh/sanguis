@@ -1,13 +1,16 @@
+#include <sanguis/random_generator.hpp>
 #include <sanguis/load/model/conditional_sound.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/find_member.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
-#include <fcppt/random/inclusive_range.hpp>
+#include <fcppt/random/variate_impl.hpp>
+#include <fcppt/random/distribution/uniform_real_impl.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::load::model::conditional_sound::conditional_sound(
+	sanguis::random_generator &_random_generator,
 	sge::parse::json::member_map const &_members,
 	resource::sounds const &_ctx
 )
@@ -21,22 +24,18 @@ sanguis::load::model::conditional_sound::conditional_sound(
 		)
 	),
 	rng_(
-		fcppt::random::inclusive_range<
-			load::probability_type
-		>(
-			static_cast<
-				load::probability_type
-			>(
-				0
+		_random_generator,
+		distribution(
+			distribution::min(
+				0.f
 			),
-			static_cast<
-				load::probability_type
-			>(
-				1
+			distribution::sup(
+				1.f
 			)
 		)
 	),
 	random_sound_(
+		_random_generator,
 		sge::parse::json::find_member_exn<
 			sge::parse::json::array
 		>(

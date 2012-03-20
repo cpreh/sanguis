@@ -6,7 +6,7 @@
 #include <sanguis/creator/generator/name.hpp>
 #include <sanguis/creator/generator/size.hpp>
 #include <sanguis/creator/symbol.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/nonassignable.hpp>
 
 namespace sanguis

@@ -11,7 +11,7 @@
 #include <sge/projectile/body/parameters.hpp>
 #include <sge/projectile/body/position.hpp>
 #include <sge/projectile/body/rotation.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 

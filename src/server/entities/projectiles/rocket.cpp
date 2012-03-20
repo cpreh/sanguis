@@ -10,8 +10,8 @@
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/duration_second.hpp>
 #include <fcppt/container/map_impl.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>

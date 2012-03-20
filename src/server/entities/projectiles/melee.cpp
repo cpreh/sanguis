@@ -5,7 +5,7 @@
 #include <sanguis/server/damage/normal.hpp>
 #include <sanguis/server/damage/full.hpp>
 #include <sanguis/duration_second.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
 
 sanguis::server::entities::projectiles::melee::melee(

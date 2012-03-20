@@ -3,12 +3,22 @@
 
 sanguis::server::waves::single::single(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	enemy_type::type const _etype
 )
 :
-	diff_clock_(_diff_clock),
-	etype_(_etype),
-	spawned_(false)
+	diff_clock_(
+		_diff_clock
+	),
+	random_generator_(
+		_random_generator
+	),
+	etype_(
+		_etype
+	),
+	spawned_(
+		false
+	)
 {
 }
 
@@ -24,6 +34,7 @@ sanguis::server::waves::single::process(
 {
 	waves::spawn(
 		diff_clock_,
+		random_generator_,
 		_env,
 		_load_context,
 		etype_

@@ -3,6 +3,7 @@
 
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
 
 namespace sanguis
@@ -15,6 +16,7 @@ namespace weapons
 unique_ptr
 create(
 	sanguis::diff_clock const &,
+	sanguis::random_generator &,
 	weapon_type::type
 );
 

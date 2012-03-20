@@ -6,8 +6,8 @@
 #include <sanguis/creator/generator/randgen_fwd.hpp>
 #include <sanguis/creator/geometry/rect.hpp>
 #include <sanguis/creator/symbol.hpp>
-#include <fcppt/math/box/basic_impl.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/box/object_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/nonassignable.hpp>
 
 namespace sanguis

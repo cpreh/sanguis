@@ -17,8 +17,8 @@
 #include <sge/sprite/intrusive/connection.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>

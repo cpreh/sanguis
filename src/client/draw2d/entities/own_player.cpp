@@ -1,5 +1,5 @@
 #include <sanguis/client/draw2d/entities/own_player.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 
 sanguis::client::draw2d::entities::own_player::own_player(
 	model::parameters const &_param,

@@ -2,7 +2,7 @@
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
 #include <fcppt/chrono/seconds.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 
 sanguis::client::draw2d::particle::base::base(

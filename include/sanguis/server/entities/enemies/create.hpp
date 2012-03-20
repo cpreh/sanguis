@@ -6,6 +6,7 @@
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/enemy_type.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 
 namespace sanguis
 {
@@ -19,6 +20,7 @@ namespace enemies
 entities::unique_ptr
 create(
 	sanguis::diff_clock const &,
+	sanguis::random_generator &,
 	enemy_type::type,
 	environment::load_context &,
 	entities::auto_weak_link spawn

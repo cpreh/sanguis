@@ -9,12 +9,11 @@
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
-#include <sanguis/random.hpp>
 #include <sanguis/load/enemy_name.hpp>
 #include <sanguis/messages/add_enemy.hpp>
 #include <sanguis/messages/create.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 sanguis::server::entities::enemies::enemy::enemy(

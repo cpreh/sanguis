@@ -11,6 +11,7 @@
 #include <fcppt/log/warning.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/ref.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -82,6 +83,7 @@ sanguis::load::model::animation::sound::~sound()
 }
 
 sanguis::load::model::animation::sound::sound(
+	sanguis::random_generator &_random_generator,
 	sge::parse::json::member_map const &_members,
 	resource::sounds const &_ctx
 )
@@ -105,6 +107,9 @@ sanguis::load::model::animation::sound::sound(
 				fcppt::make_unique_ptr<
 					model::conditional_sound
 				>(
+					fcppt::ref(
+						_random_generator
+					),
 					sge::parse::json::get<
 						sge::parse::json::object
 					>(

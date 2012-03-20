@@ -1,3 +1,4 @@
+#include <sanguis/random_generator.hpp>
 #include <sanguis/server/ai/simple.hpp>
 #include <sanguis/server/ai/search_new_target.hpp>
 #include <sanguis/server/auras/aggro.hpp>
@@ -15,13 +16,16 @@
 #include <sanguis/server/vector.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/chrono/seconds.hpp>
+#include <fcppt/math/twopi.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/math/vector/hypersphere_to_cartesian.hpp>
 #include <fcppt/math/vector/signed_angle_between_cast.hpp>
 #include <fcppt/math/vector/static.hpp>
 #include <fcppt/container/map_impl.hpp>
+#include <fcppt/random/variate_impl.hpp>
+#include <fcppt/random/distribution/uniform_real_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -29,6 +33,7 @@
 
 sanguis::server::ai::simple::simple(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	entities::with_ai &_me,
 	entities::auto_weak_link _owner
 )
@@ -47,7 +52,31 @@ sanguis::server::ai::simple::simple(
 	me_(_me),
 	target_(),
 	owner_(_owner),
-	potential_targets_()
+	potential_targets_(),
+	timer_rng_(
+		_random_generator,
+		distribution(
+			distribution::min(
+				0.f
+			),
+			distribution::sup(
+				2.f
+			)
+		)
+	),
+	fuzzy_target_rng_(
+		_random_generator,
+		distribution(
+			distribution::min(
+				0.f
+			),
+			distribution::sup(
+				fcppt::math::twopi<
+					server::space_unit
+				>()
+			)
+		)
+	)
 {
 	me_.add_aura(
 		auras::unique_ptr(
@@ -76,12 +105,6 @@ sanguis::server::ai::simple::simple(
 sanguis::server::ai::simple::~simple()
 {
 }
-
-// TODO: move this!
-
-#include <fcppt/random/uniform.hpp>
-#include <fcppt/random/make_inclusive_range.hpp>
-#include <fcppt/math/twopi.hpp>
 
 void
 sanguis::server::ai::simple::update()
@@ -130,24 +153,6 @@ sanguis::server::ai::simple::update()
 		true
 	);
 
-	typedef fcppt::random::uniform<
-		space_unit
-	> rng_type;
-
-	// FIXME!
-	static rng_type rng(
-		fcppt::random::make_inclusive_range(
-			static_cast<
-				space_unit
-			>(
-				0
-			),
-			fcppt::math::twopi<
-				space_unit
-			>()
-		)
-	);
-
 	server::space_unit const distance(
 		collision::distance(
 			*target_,
@@ -159,7 +164,14 @@ sanguis::server::ai::simple::update()
 		fcppt::chrono::duration<
 			server::space_unit
 		>(
-			distance * (1.f + rng()) / 1000.f // TODO!
+			distance
+			*
+			(
+				1.f
+				+
+				timer_rng_()
+			)
+			/ 1000.f // TODO!
 		)
 	);
 
@@ -171,7 +183,7 @@ sanguis::server::ai::simple::update()
 				server::space_unit,
 				1
 			>::type(
-				rng()
+				fuzzy_target_rng_()
 			)
 		)
 		* distance / 50.f

@@ -1,5 +1,5 @@
 #include <sanguis/server/weapons/delayed_attack.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 
 sanguis::server::weapons::delayed_attack::delayed_attack(
 	server::center const &_spawn_point,

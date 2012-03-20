@@ -7,7 +7,7 @@
 #include <sanguis/server/collision/circle_ghost.hpp>
 #include <sanguis/messages/base.hpp>
 #include <fcppt/container/map_impl.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/dynamic_cast.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>

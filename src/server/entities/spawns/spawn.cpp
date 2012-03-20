@@ -1,7 +1,7 @@
 #include <sanguis/server/entities/spawns/spawn.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/waves/spawn.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 
 void
 sanguis::server::entities::spawns::spawn::unregister(
@@ -16,11 +16,19 @@ sanguis::server::entities::spawns::spawn::~spawn()
 
 sanguis::server::entities::spawns::spawn::spawn(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	enemy_type::type const _enemy_type
 )
 :
-	diff_clock_(_diff_clock),
-	enemy_type_(_enemy_type)
+	diff_clock_(
+		_diff_clock
+	),
+	random_generator_(
+		_random_generator
+	),
+	enemy_type_(
+		_enemy_type
+	)
 {
 }
 
@@ -60,6 +68,7 @@ sanguis::server::entities::spawns::spawn::on_update()
 		)
 			waves::spawn(
 				diff_clock_,
+				random_generator_,
 				this->environment(),
 				this->environment().load_context(),
 				enemy_type_,

@@ -14,7 +14,7 @@
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/container/array.hpp>
 #include <fcppt/log/headers.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
@@ -96,7 +96,7 @@ sanguis::load::model::part::~part()
 
 sanguis::load::model::part::part(
 	sge::parse::json::object const &_object,
-	global_parameters const &_param
+	model::global_parameters const &_param
 )
 :
 	categories_()

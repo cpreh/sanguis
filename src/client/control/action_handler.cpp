@@ -24,9 +24,9 @@
 #include <fcppt/assert/error.hpp>
 #include <fcppt/chrono/milliseconds.hpp>
 #include <fcppt/function/object.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/math/clamp.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/variant/apply_unary.hpp>

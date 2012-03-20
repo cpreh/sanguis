@@ -1,6 +1,9 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_PARTICLE_GENERATOR_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_PARTICLE_GENERATOR_HPP_INCLUDED
 
+#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/diff_timer.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/client/draw2d/particle/align_type.hpp>
 #include <sanguis/client/draw2d/particle/container.hpp>
 #include <sanguis/client/draw2d/particle/depth.hpp>
@@ -16,11 +19,12 @@
 #include <sanguis/client/draw2d/particle/rot_speed_range.hpp>
 #include <sanguis/client/draw2d/particle/spawn_initial.hpp>
 #include <sanguis/client/draw2d/particle/speed_range.hpp>
-#include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/diff_timer.hpp>
-#include <fcppt/function/object.hpp>
-#include <fcppt/random/uniform.hpp>
 #include <fcppt/homogenous_pair_decl.hpp>
+#include <fcppt/function/object.hpp>
+#include <fcppt/random/variate_decl.hpp>
+#include <fcppt/random/distribution/uniform_int_decl.hpp>
+#include <fcppt/random/distribution/uniform_real_decl.hpp>
+
 
 namespace sanguis
 {
@@ -41,6 +45,7 @@ class generator
 public:
 	generator(
 		sanguis::diff_clock const &,
+		sanguis::random_generator &,
 		particle::generation_callback,
 		draw2d::center const &,
 		particle::gen_life_time const &,
@@ -74,12 +79,15 @@ private:
 
 	particle::align_type::type const alignment_;
 
-	fcppt::random::uniform<
-		particle::rotation::value_type
-	> dispersion_angle_;
+	particle::uniform_rotation dispersion_angle_;
 
-	fcppt::random::uniform<
+	typedef fcppt::random::distribution::uniform_int<
 		particle::dispersion_range::value_type::value_type
+	> dispersion_distribution;
+
+	fcppt::random::variate<
+		sanguis::random_generator,
+		dispersion_distribution
 	> dispersion_value_;
 
 	particle::uniform_rotation velocity_angle_;
@@ -87,14 +95,6 @@ private:
 	particle::uniform_velocity_range velocity_value_;
 
 	particle::uniform_rotation rot_angle_;
-
-	fcppt::random::uniform<
-		particle::rotation::value_type
-	> rot_direction_;
-
-	fcppt::random::uniform<
-		particle::rotation_speed::value_type
-	> rot_velocity_;
 
 	particle::movement_type::type const movement_;
 };

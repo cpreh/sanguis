@@ -7,7 +7,7 @@
 #include <sanguis/server/damage/full.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/duration_second.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::server::entities::projectiles::simple_bullet::simple_bullet(

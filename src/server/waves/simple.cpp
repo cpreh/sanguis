@@ -4,6 +4,7 @@
 
 sanguis::server::waves::simple::simple(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	waves::delay const &_delay,
 	waves::spawn_interval const &_spawn_interval,
 	unsigned const _waves,
@@ -11,7 +12,12 @@ sanguis::server::waves::simple::simple(
 	enemy_type::type const _etype
 )
 :
-	diff_clock_(_diff_clock),
+	diff_clock_(
+		_diff_clock
+	),
+	random_generator_(
+		_random_generator
+	),
 	delay_timer_(
 		sanguis::diff_timer::parameters(
 			_diff_clock,
@@ -24,10 +30,18 @@ sanguis::server::waves::simple::simple(
 			_spawn_interval.get()
 		)
 	),
-	waves_(_waves),
-	spawns_per_wave_(_spawns_per_wave),
-	etype_(_etype),
-	waves_spawned_(0)
+	waves_(
+		_waves
+	),
+	spawns_per_wave_(
+		_spawns_per_wave
+	),
+	etype_(
+		_etype
+	),
+	waves_spawned_(
+		0u
+	)
 {
 }
 
@@ -67,6 +81,7 @@ sanguis::server::waves::simple::process(
 	)
 		waves::spawn(
 			diff_clock_,
+			random_generator_,
 			_env,
 			_load_context,
 			etype_

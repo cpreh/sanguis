@@ -3,7 +3,7 @@
 
 #include <sanguis/client/control/actions/cursor_fwd.hpp>
 #include <sanguis/client/control/cursor_position.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 
 namespace sanguis
 {

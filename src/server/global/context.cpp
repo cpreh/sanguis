@@ -23,6 +23,7 @@
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/remove_id.hpp>
 #include <sanguis/log_parameters.hpp>
+#include <sanguis/random_seed.hpp>
 #include <sge/charconv/system_fwd.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
@@ -43,7 +44,7 @@
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/pickups/weapon.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 
 namespace
 {
@@ -68,6 +69,9 @@ sanguis::server::global::context::context(
 )
 :
 	diff_clock_(),
+	random_generator_(
+		sanguis::random_seed()
+	),
 	send_unicast_(_send_unicast),
 	world_context_(
 		fcppt::make_unique_ptr<
@@ -376,6 +380,7 @@ sanguis::server::global::context::player_choose_perk(
 	player.add_perk(
 		perks::create(
 			diff_clock_,
+			random_generator_,
 			_perk_type
 		)
 	);

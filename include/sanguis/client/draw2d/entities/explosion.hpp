@@ -1,6 +1,8 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_EXPLOSION_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_EXPLOSION_HPP_INCLUDED
 
+#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/client/draw2d/entities/own.hpp>
 #include <sanguis/client/draw2d/particle/base_ptr.hpp>
 #include <sanguis/client/draw2d/particle/container.hpp>
@@ -11,7 +13,6 @@
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/aoe.hpp>
 #include <sanguis/load/model/collection_fwd.hpp>
-#include <sanguis/diff_clock_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -33,6 +34,7 @@ class explosion
 public:
 	explosion(
 		sanguis::diff_clock const &,
+		sanguis::random_generator &,
 		sprite::particle::system &,
 		load::model::collection const &,
 		sprite::center const &,
@@ -63,6 +65,8 @@ private:
 	) const;
 
 	sanguis::diff_clock const &diff_clock_;
+
+	sanguis::random_generator &random_generator_;
 
 	sprite::particle::system &particle_system_;
 

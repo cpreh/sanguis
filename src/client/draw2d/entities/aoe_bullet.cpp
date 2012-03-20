@@ -5,7 +5,7 @@
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <fcppt/assign/make_container.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_auto_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -30,11 +30,24 @@ sanguis::client::draw2d::entities::aoe_bullet::aoe_bullet(
 		model::needs_healthbar::no,
 		model::decay_option::immediate
 	),
-	diff_clock_(_param.diff_clock()),
-	model_collection_(_param.collection()),
-	particle_system_(_particle_system),
-	insert_(_insert),
-	aoe_(_aoe)
+	diff_clock_(
+		_param.diff_clock()
+	),
+	random_generator_(
+		_param.random_generator()
+	),
+	model_collection_(
+		_param.collection()
+	),
+	particle_system_(
+		_particle_system
+	),
+	insert_(
+		_insert
+	),
+	aoe_(
+		_aoe
+	)
 {
 }
 
@@ -51,6 +64,9 @@ sanguis::client::draw2d::entities::aoe_bullet::on_decay()
 		>(
 			fcppt::cref(
 				diff_clock_
+			),
+			fcppt::ref(
+				random_generator_
 			),
 			fcppt::ref(
 				particle_system_

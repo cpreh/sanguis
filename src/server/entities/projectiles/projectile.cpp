@@ -8,8 +8,8 @@
 #include <sanguis/messages/add_projectile.hpp>
 #include <sanguis/messages/create.hpp>
 #include <fcppt/assert/pre.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>

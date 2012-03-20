@@ -16,8 +16,8 @@
 #include <sanguis/messages/add_own_player.hpp>
 #include <sanguis/messages/create.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/make_unique_ptr.hpp>

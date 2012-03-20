@@ -3,8 +3,10 @@
 #include <sanguis/client/draw2d/particle/object.hpp>
 #include <sanguis/client/draw2d/particle/properties.hpp>
 #include <sanguis/duration.hpp>
+#include <sanguis/random_generator.hpp>
 #include <sanguis/load/model/animation/context.hpp>
-#include <fcppt/random/uniform.hpp>
+#include <fcppt/random/variate.hpp>
+#include <fcppt/random/distribution/uniform_real.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -13,6 +15,7 @@
 sanguis::client::draw2d::particle::base_ptr
 sanguis::client::draw2d::entities::explosion_particle(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_rng,
 	particle::particle_type::type const _particle_type,
 	sprite::particle::system &_particle_system,
 	draw2d::aoe const _aoe,
@@ -43,13 +46,19 @@ sanguis::client::draw2d::entities::explosion_particle(
 				)
 			);
 
-	fcppt::random::uniform<
-		sanguis::time_unit
+	fcppt::random::variate<
+		sanguis::random_generator,
+		particle::fade_time_range
 	>
 	rng(
+		_rng,
 		particle::fade_time_range(
-			_prop.fade_range().get().first,
-			_prop.fade_range().get().second
+			particle::fade_time_range::min(
+				_prop.fade_range().get().first
+			),
+			particle::fade_time_range::sup(
+				_prop.fade_range().get().second
+			)
 		)
 	);
 

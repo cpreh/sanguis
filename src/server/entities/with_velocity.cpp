@@ -1,6 +1,6 @@
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/speed_to_abs.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 
 sanguis::server::entities::property::changeable &

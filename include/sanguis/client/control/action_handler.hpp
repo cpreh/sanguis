@@ -19,7 +19,7 @@
 #include <sge/console/arg_list.hpp>
 #include <fcppt/container/array.hpp>
 #include <fcppt/function/object.hpp>
-#include <fcppt/math/vector/basic_decl.hpp>
+#include <fcppt/math/vector/object_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
 

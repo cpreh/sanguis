@@ -20,6 +20,7 @@
 #include <sanguis/diff_clock.hpp>
 #include <sanguis/duration_fwd.hpp>
 #include <sanguis/perk_type.hpp>
+#include <sanguis/random_generator.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/messages/base_fwd.hpp>
@@ -141,6 +142,8 @@ private:
 	log();
 
 	sanguis::diff_clock diff_clock_;
+
+	sanguis::random_generator random_generator_;
 
 	unicast_callback const send_unicast_;
 

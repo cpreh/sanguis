@@ -1,17 +1,20 @@
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/client/draw2d/particle/explosion.hpp>
 #include <sanguis/client/draw2d/particle/generator.hpp>
 #include <sanguis/client/draw2d/particle/properties.hpp>
 #include <sanguis/client/draw2d/particle/z_ordering.hpp>
 #include <fcppt/function/object.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/foreach_enumerator.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/homogenous_pair_impl.hpp>
+#include <fcppt/ref.hpp>
 
 sanguis::client::draw2d::particle::explosion::explosion(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	particle::property_map const &_properties,
 	particle::explosion_callback const &_callback,
 	draw2d::center const &_center,
@@ -48,6 +51,9 @@ sanguis::client::draw2d::particle::explosion::explosion(
 				>(
 					fcppt::cref(
 						_diff_clock
+					),
+					fcppt::ref(
+						_random_generator
 					),
 					std::tr1::bind(
 						_callback,

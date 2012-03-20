@@ -6,7 +6,7 @@
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>

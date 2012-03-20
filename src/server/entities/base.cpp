@@ -5,7 +5,7 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/get_unique_id.hpp>
 #include <fcppt/assert/pre.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 
 sanguis::server::entities::base::base()
 :
