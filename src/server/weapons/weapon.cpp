@@ -13,8 +13,8 @@
 #include <fcppt/assert/error.hpp>
 #include <fcppt/chrono/duration_arithmetic.hpp>
 #include <fcppt/chrono/duration_comparison.hpp>
-#include <fcppt/math/sphere/basic_impl.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/sphere/object_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/log/parameters/object.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>

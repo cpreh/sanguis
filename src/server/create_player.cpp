@@ -1,3 +1,5 @@
+#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/create_player.hpp>
 #include <sanguis/server/log.hpp>
 #include <sanguis/server/string.hpp>
@@ -18,6 +20,7 @@
 sanguis::server::entities::player_unique_ptr
 sanguis::server::create_player(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	environment::load_context &_load_context,
 	sge::charconv::system &_charconv_system,
 	server::string const &_name,
@@ -62,6 +65,9 @@ sanguis::server::create_player(
 		>(
 			fcppt::cref(
 				_diff_clock
+			),
+			fcppt::ref(
+				_random_generator
 			),
 			fcppt::ref(
 				_load_context

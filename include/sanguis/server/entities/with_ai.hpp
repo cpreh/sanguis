@@ -8,6 +8,7 @@
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -28,6 +29,7 @@ class with_ai
 protected:
 	with_ai(
 		sanguis::diff_clock const &,
+		sanguis::random_generator &,
 		ai::create_function const &,
 		weapons::unique_ptr start_weapon
 	);

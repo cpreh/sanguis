@@ -1,5 +1,5 @@
 #include <sanguis/duration_second.hpp>
-#include <sanguis/random.hpp>
+#include <sanguis/random_generator.hpp>
 #include <sanguis/server/weapons/shotgun.hpp>
 #include <sanguis/server/weapons/delayed_attack.hpp>
 #include <sanguis/server/weapons/unlimited_magazine_count.hpp>
@@ -10,13 +10,13 @@
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <boost/random/normal_distribution.hpp>
-#include <boost/random/variate_generator.hpp>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/random/variate.hpp>
+#include <fcppt/random/distribution/normal.hpp>
+
 
 sanguis::server::weapons::shotgun::shotgun(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	weapon_type::type const _type,
 	weapons::base_cooldown const _base_cooldown,
 	shotgun::spread_radius const _spread_radius,
@@ -42,6 +42,9 @@ sanguis::server::weapons::shotgun::shotgun(
 		), // FIXME
 		_reload_time
 	),
+	random_generator_(
+		_random_generator
+	),
 	spread_radius_(
 		_spread_radius
 	),
@@ -63,21 +66,22 @@ sanguis::server::weapons::shotgun::do_attack(
 	delayed_attack const &_attack
 )
 {
-	typedef boost::random::normal_distribution<
-		space_unit
-	> normal_distribution_su;
+	typedef fcppt::random::distribution::normal<
+		server::space_unit
+	> angle_distribution;
 
-	typedef boost::random::variate_generator<
-		rand_gen_type,
-		normal_distribution_su
-	> rng_type;
-
-	rng_type rng(
-		// TODO: save the randgen!
-		create_seeded_randgen(),
-		normal_distribution_su(
-			_attack.angle().get(), // mean value
-			spread_radius_.get() // sigma
+	fcppt::random::variate<
+		sanguis::random_generator,
+		angle_distribution
+	> angle_rng(
+		random_generator_,
+		angle_distribution(
+			angle_distribution::mean(
+				_attack.angle().get()
+			),
+			angle_distribution::sigma(
+				spread_radius_.get()
+			)
 		)
 	);
 
@@ -90,7 +94,7 @@ sanguis::server::weapons::shotgun::do_attack(
 	)
 	{
 		server::angle const angle(
-			rng()
+			angle_rng()
 		);
 
 		_attack.environment().insert(

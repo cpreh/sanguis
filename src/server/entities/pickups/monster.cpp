@@ -16,6 +16,7 @@
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
+#include <fcppt/ref.hpp>
 
 sanguis::server::entities::pickups::monster::monster(
 	sanguis::diff_clock const &_diff_clock,
@@ -61,6 +62,9 @@ sanguis::server::entities::pickups::monster::do_pickup(
 //			>(
 				fcppt::cref(
 					diff_clock_
+				),
+				fcppt::ref(
+					random_generator_
 				),
 				ftype_,
 				this->environment().load_context(),

@@ -6,6 +6,7 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/console_fwd.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sge/charconv/system_fwd.hpp>
 
 
@@ -19,6 +20,7 @@ namespace world
 world::object_unique_ptr
 random(
 	sanguis::diff_clock const &,
+	sanguis::random_generator &,
 	world::context &,
 	server::environment::load_context &,
 	sge::charconv::system &,

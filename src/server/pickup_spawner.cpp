@@ -304,6 +304,9 @@ sanguis::server::pickup_spawner::spawn_weapon(
 					diff_clock_
 				),
 				fcppt::ref(
+					random_generator_
+				),
+				fcppt::ref(
 					env_.load_context()
 				),
 				team::players,

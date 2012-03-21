@@ -17,6 +17,7 @@
 
 sanguis::server::entities::friend_::friend_(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	friend_type::type const _ftype,
 	server::environment::load_context &_load_context,
 	damage::armor const &_armor,
@@ -28,6 +29,7 @@ sanguis::server::entities::friend_::friend_(
 :
 	with_ai(
 		_diff_clock,
+		_random_generator,
 		_ai,
 		move(
 			_weapon

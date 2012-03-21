@@ -15,11 +15,13 @@
 
 sanguis::server::entities::with_weapon::with_weapon(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	weapons::unique_ptr _start_weapon
 )
 :
 	base(),
 	diff_clock_(_diff_clock),
+	random_generator_(_random_generator),
 	weapon_(weapon_type::none),
 	target_(),
 	attacking_(false),
@@ -183,8 +185,8 @@ sanguis::server::entities::with_weapon::add_weapon(
 		return
 			this->add_weapon(
 				weapons::create(
-					// TODO: don't take this from here!
 					diff_clock_,
+					random_generator_,
 					weapon_type::dual_pistol
 				)
 			);

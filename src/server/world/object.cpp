@@ -53,6 +53,7 @@
 
 sanguis::server::world::object::object(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	sanguis::world_id const _id,
 	world::context &_global_context,
 	server::environment::load_context &_load_context,
@@ -125,10 +126,12 @@ sanguis::server::world::object::object(
 	entities_(),
 	pickup_spawner_(
 		_diff_clock,
+		_random_generator,
 		*environment_
 	),
 	wave_gen_(
 		_diff_clock,
+		_random_generator,
 		_console
 	),
 	static_body_(

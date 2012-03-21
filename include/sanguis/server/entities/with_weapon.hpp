@@ -8,6 +8,7 @@
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/vector.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/math/vector/object_decl.hpp>
@@ -35,6 +36,7 @@ class with_weapon
 protected:
 	with_weapon(
 		sanguis::diff_clock const &,
+		sanguis::random_generator &,
 		weapons::unique_ptr start_weapon
 	);
 
@@ -118,6 +120,8 @@ private:
 	);
 
 	sanguis::diff_clock const &diff_clock_;
+
+	sanguis::random_generator &random_generator_;
 
 	typedef boost::ptr_map<
 		weapon_type::type,

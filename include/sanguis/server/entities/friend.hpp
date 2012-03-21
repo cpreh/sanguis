@@ -15,6 +15,7 @@
 #include <sanguis/server/health.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/friend_type.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -39,6 +40,7 @@ class friend_
 public:
 	friend_(
 		sanguis::diff_clock const &,
+		sanguis::random_generator &,
 		friend_type::type,
 		server::environment::load_context &,
 		damage::armor const &,

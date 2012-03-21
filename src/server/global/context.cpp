@@ -127,6 +127,7 @@ sanguis::server::global::context::insert_player(
 	entities::player_unique_ptr player(
 		server::create_player(
 			diff_clock_,
+			random_generator_,
 			*load_context_,
 			charconv_system_,
 			_name,
@@ -178,6 +179,9 @@ sanguis::server::global::context::insert_player(
 			>(
 				fcppt::cref(
 					diff_clock_
+				),
+				fcppt::ref(
+					random_generator_
 				),
 				fcppt::ref(
 					*load_context_
@@ -340,6 +344,7 @@ sanguis::server::global::context::player_cheat(
 {
 	server::cheat(
 		diff_clock_,
+		random_generator_,
 		*players_[
 			_player_id
 		],
@@ -485,6 +490,7 @@ sanguis::server::global::context::world(
 			_world_id,
 			server::world::random(
 				diff_clock_,
+				random_generator_,
 				*world_context_,
 				*load_context_,
 				charconv_system_,

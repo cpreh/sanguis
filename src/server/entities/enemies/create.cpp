@@ -34,6 +34,7 @@ sanguis::server::entities::enemies::create(
 //				enemy
 //			>(
 				_diff_clock,
+				_random_generator,
 				_etype,
 				_load_context,
 				damage::no_armor(),
@@ -83,6 +84,7 @@ sanguis::server::entities::enemies::create(
 //				enemy
 //			>(
 				_diff_clock,
+				_random_generator,
 				_etype,
 				_load_context,
 				damage::no_armor(),
@@ -122,6 +124,7 @@ sanguis::server::entities::enemies::create(
 			//	enemy
 			//>(
 				_diff_clock,
+				_random_generator,
 				_etype,
 				_load_context,
 				damage::no_armor(),
@@ -159,6 +162,7 @@ sanguis::server::entities::enemies::create(
 			//	enemy
 			//>(
 				_diff_clock,
+				_random_generator,
 				_etype,
 				_load_context,
 				damage::no_armor(),
@@ -196,6 +200,7 @@ sanguis::server::entities::enemies::create(
 			//	enemy
 			//>(
 				_diff_clock,
+				_random_generator,
 				_etype,
 				_load_context,
 				damage::no_armor(),
@@ -233,6 +238,7 @@ sanguis::server::entities::enemies::create(
 			//	enemy
 			//>(
 				_diff_clock,
+				_random_generator,
 				_etype,
 				_load_context,
 				damage::no_armor(),

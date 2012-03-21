@@ -60,6 +60,7 @@ sanguis::server::weapons::sentry::do_attack(
 //				entities::friend_
 //			>(
 				this->diff_clock(),
+				random_generator_,
 				friend_type::sentry,
 				_attack.environment().load_context(),
 				damage::no_armor(),

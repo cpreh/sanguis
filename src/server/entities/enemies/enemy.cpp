@@ -18,6 +18,7 @@
 
 sanguis::server::entities::enemies::enemy::enemy(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	enemy_type::type const _etype,
 	server::environment::load_context &_load_context,
 	damage::armor const &_armor,
@@ -32,6 +33,7 @@ sanguis::server::entities::enemies::enemy::enemy(
 :
 	with_ai(
 		_diff_clock,
+		_random_generator,
 		_ai,
 		move(
 			_weapon

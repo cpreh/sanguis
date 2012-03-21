@@ -24,6 +24,7 @@
 
 sanguis::server::entities::player::player(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	server::environment::load_context &_load_context,
 	server::health const _health,
 	damage::armor const &_armor,
@@ -60,6 +61,7 @@ sanguis::server::entities::player::player(
 	),
 	with_weapon(
 		_diff_clock,
+		_random_generator,
 		weapons::unique_ptr()
 	),
 	name_(_name),

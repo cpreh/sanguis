@@ -9,6 +9,7 @@
 #include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/strong_typedef.hpp>
 
@@ -39,6 +40,7 @@ public:
 
 	shotgun(
 		sanguis::diff_clock const &,
+		sanguis::random_generator &,
 		weapon_type::type,
 		weapons::base_cooldown,
 		spread_radius,
@@ -54,6 +56,8 @@ private:
 	do_attack(
 		delayed_attack const &
 	);
+
+	sanguis::random_generator &random_generator_;
 
 	spread_radius const spread_radius_;
 

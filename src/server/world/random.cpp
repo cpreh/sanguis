@@ -17,7 +17,7 @@
 #include <sge/config/cache_path.hpp>
 #include <fcppt/filesystem/create_directories_recursive_exn.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
-#include <fcppt/math/dim/basic_impl.hpp>
+#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/io/ifstream.hpp>
 #include <fcppt/io/ofstream.hpp>
 #include <fcppt/text.hpp>
@@ -29,6 +29,7 @@
 sanguis::server::world::object_unique_ptr
 sanguis::server::world::random(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	world::context &_ctx,
 	server::environment::load_context &_load_context,
 	sge::charconv::system &_charconv_system,
@@ -110,6 +111,9 @@ sanguis::server::world::random(
 		>(
 			fcppt::cref(
 				_diff_clock
+			),
+			fcppt::ref(
+				_random_generator
 			),
 			sanguis::world_id(
 				0u

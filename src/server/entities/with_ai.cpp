@@ -6,6 +6,7 @@
 
 sanguis::server::entities::with_ai::with_ai(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	ai::create_function const &_create_ai,
 	weapons::unique_ptr _start_weapon
 )
@@ -14,6 +15,7 @@ sanguis::server::entities::with_ai::with_ai(
 	with_auras(),
 	with_weapon(
 		_diff_clock,
+		_random_generator,
 		fcppt::move(
 			_start_weapon
 		)

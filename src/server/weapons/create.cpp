@@ -125,6 +125,9 @@ sanguis::server::weapons::create(
 					fcppt::cref(
 						_diff_clock
 					),
+					fcppt::ref(
+						_random_generator
+					),
 					_type,
 					weapons::base_cooldown(
 						sanguis::duration_second(

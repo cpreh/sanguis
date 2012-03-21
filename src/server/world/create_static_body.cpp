@@ -16,7 +16,7 @@
 #include <sge/projectile/shape/triangle_mesh.hpp>
 #include <sge/projectile/shape/triangle_sequence.hpp>
 #include <sge/projectile/vector2.hpp>
-#include <fcppt/math/vector/basic_impl.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/make_unique_ptr.hpp>

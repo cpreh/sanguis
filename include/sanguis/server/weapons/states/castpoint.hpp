@@ -8,7 +8,7 @@
 #include <sanguis/server/weapons/events/stop_fwd.hpp>
 #include <sanguis/server/vector.hpp>
 #include <sanguis/diff_timer.hpp>
-#include <fcppt/math/vector/basic_decl.hpp>
+#include <fcppt/math/vector/object_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
 #include <fcppt/config/external_begin.hpp>

@@ -17,6 +17,7 @@
 #include <sanguis/server/health.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/enemy_type.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -43,6 +44,7 @@ class enemy
 public:
 	enemy(
 		sanguis::diff_clock const &,
+		sanguis::random_generator &,
 		enemy_type::type,
 		server::environment::load_context &,
 		damage::armor const &,

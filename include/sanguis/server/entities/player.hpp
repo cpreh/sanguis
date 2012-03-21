@@ -21,6 +21,7 @@
 #include <sanguis/server/string.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/perk_type.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -48,6 +49,7 @@ class player
 public:
 	player(
 		sanguis::diff_clock const &,
+		sanguis::random_generator &,
 		server::environment::load_context &,
 		server::health,
 		damage::armor const &,

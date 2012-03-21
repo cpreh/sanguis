@@ -22,6 +22,7 @@
 #include <sanguis/server/string.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/timer.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/weapon_type.hpp>
@@ -57,6 +58,7 @@ class object
 public:
 	object(
 		sanguis::diff_clock const &,
+		sanguis::random_generator &,
 		sanguis::world_id,
 		world::context &,
 		server::environment::load_context &,

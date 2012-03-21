@@ -8,6 +8,7 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/console_command_vector.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sge/charconv/system_fwd.hpp>
 
 
@@ -19,6 +20,7 @@ namespace server
 entities::player_unique_ptr
 create_player(
 	sanguis::diff_clock const &,
+	sanguis::random_generator &,
 	environment::load_context &,
 	sge::charconv::system &,
 	server::string const &name,
