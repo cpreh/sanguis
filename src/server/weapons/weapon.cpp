@@ -11,8 +11,6 @@
 #include <sanguis/exception.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/chrono/duration_arithmetic.hpp>
-#include <fcppt/chrono/duration_comparison.hpp>
 #include <fcppt/math/sphere/object_impl.hpp>
 #include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/log/parameters/object.hpp>

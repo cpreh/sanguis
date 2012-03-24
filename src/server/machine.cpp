@@ -14,8 +14,6 @@
 #include <sanguis/exception.hpp>
 #include <sge/timer/elapsed_and_reset.hpp>
 #include <fcppt/algorithm/append.hpp>
-#include <fcppt/chrono/milliseconds.hpp>
-#include <fcppt/chrono/seconds.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/function/object.hpp>
@@ -26,6 +24,9 @@
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/move.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/chrono/duration.hpp>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::server::machine::machine(
 	load::context_base const &_resources,
@@ -45,13 +46,13 @@ sanguis::server::machine::machine(
 	),
 	net_(
 		_io_service,
-		fcppt::chrono::milliseconds(
+		boost::chrono::milliseconds(
 			16
 		)
 	),
 	frame_timer_(
 		sanguis::timer::parameters(
-			fcppt::chrono::seconds(
+			boost::chrono::seconds(
 				1
 			)
 		)

@@ -22,7 +22,6 @@
 #include <sge/font/text/lit.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/chrono/milliseconds.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -34,6 +33,7 @@
 #include <fcppt/cyclic_iterator.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/chrono/duration.hpp>
 #include <algorithm>
 #include <iterator>
 #include <fcppt/config/external_end.hpp>
@@ -55,7 +55,7 @@ sanguis::client::control::action_handler::action_handler(
 	),
 	rotation_timer_(
 		sanguis::timer::parameters(
-			fcppt::chrono::milliseconds(
+			boost::chrono::milliseconds(
 				100
 			)
 		)

@@ -3,9 +3,10 @@
 #include <sge/cegui/duration.hpp>
 #include <sge/cegui/load_context.hpp>
 #include <sge/config/media_path.hpp>
-#include <fcppt/chrono/duration_cast.hpp>
-#include <fcppt/chrono/duration_impl.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/chrono/duration.hpp>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::client::gui::object::object(
 	sge::renderer::device &_renderer,
@@ -78,7 +79,7 @@ sanguis::client::gui::object::update(
 )
 {
 	system_.update(
-	        fcppt::chrono::duration_cast<
+		boost::chrono::duration_cast<
 			sge::cegui::duration
 		>(
 			_time

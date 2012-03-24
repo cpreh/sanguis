@@ -17,8 +17,6 @@
 #include <sge/parse/json/object.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/chrono/duration_cast.hpp>
-#include <fcppt/chrono/milliseconds.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -34,6 +32,9 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/chrono/duration.hpp>
+#include <fcppt/config/external_end.hpp>
 
 namespace
 {
@@ -105,10 +106,10 @@ load_delay(
 		ret
 	)
 		return
-			fcppt::chrono::duration_cast<
+			boost::chrono::duration_cast<
 				sanguis::duration
 			>(
-				fcppt::chrono::milliseconds(
+				boost::chrono::milliseconds(
 					*ret
 				)
 			);

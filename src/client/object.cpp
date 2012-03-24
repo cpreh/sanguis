@@ -25,7 +25,6 @@
 #include <awl/mainloop/io_service.hpp>
 #include <awl/mainloop/dispatcher.hpp>
 #include <awl/mainloop/asio/create_io_service_base.hpp>
-#include <fcppt/chrono/seconds.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/fatal.hpp>
@@ -36,6 +35,7 @@
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/chrono/duration.hpp>
 #include <cstdlib>
 #include <fcppt/config/external_end.hpp>
 
@@ -127,7 +127,7 @@ sanguis::client::object::object(
 	),
 	frame_timer_(
 		sanguis::timer::parameters(
-			fcppt::chrono::seconds(
+			boost::chrono::seconds(
 				1
 			)
 		)

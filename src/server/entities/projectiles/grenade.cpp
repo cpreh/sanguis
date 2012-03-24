@@ -13,7 +13,6 @@
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sge/timer/reset_when_expired.hpp>
-#include <fcppt/chrono/milliseconds.hpp>
 #include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
@@ -22,6 +21,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/chrono/duration.hpp>
 #include <algorithm>
 #include <fcppt/config/external_end.hpp>
 
@@ -54,11 +54,13 @@ sanguis::server::entities::projectiles::grenade::grenade(
 		_aoe,
 		_direction
 	),
-	diff_clock_(_diff_clock),
+	diff_clock_(
+		_diff_clock
+	),
 	slowdown_timer_(
 		sanguis::diff_timer::parameters(
 			_diff_clock,
-			fcppt::chrono::milliseconds(
+			boost::chrono::milliseconds(
 				100
 			)
 		)

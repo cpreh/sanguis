@@ -18,7 +18,7 @@
 #include <sanguis/cheat_type.hpp>
 #include <sanguis/connect_state.hpp>
 #include <sanguis/diff_clock.hpp>
-#include <sanguis/duration_fwd.hpp>
+#include <sanguis/duration.hpp>
 #include <sanguis/perk_type.hpp>
 #include <sanguis/random_generator.hpp>
 #include <sanguis/weapon_type.hpp>

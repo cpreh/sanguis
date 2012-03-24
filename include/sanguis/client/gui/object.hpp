@@ -3,7 +3,7 @@
 
 #include <sanguis/client/gui/object_fwd.hpp>
 #include <sanguis/client/cursor/object_fwd.hpp>
-#include <sanguis/duration_fwd.hpp>
+#include <sanguis/duration.hpp>
 #include <sge/cegui/default_cursor.hpp>
 #include <sge/cegui/default_keyboard.hpp>
 #include <sge/cegui/syringe.hpp>

@@ -24,6 +24,7 @@
 #include <sanguis/messages/remove_id.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/random_seed.hpp>
+#include <sanguis/update_diff_clock.hpp>
 #include <sge/charconv/system_fwd.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
@@ -401,7 +402,8 @@ sanguis::server::global::context::update(
 	sanguis::duration const &_diff
 )
 {
-	diff_clock_.update(
+	sanguis::update_diff_clock(
+		diff_clock_,
 		_diff
 	);
 

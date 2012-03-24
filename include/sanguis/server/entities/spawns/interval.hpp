@@ -2,8 +2,8 @@
 #define SANGUIS_SERVER_ENTITIES_SPAWNS_INTERVAL_HPP_INCLUDED
 
 #include <sanguis/duration.hpp>
-#include <fcppt/chrono/duration_decl.hpp>
 #include <fcppt/make_strong_typedef.hpp>
+
 
 namespace sanguis
 {

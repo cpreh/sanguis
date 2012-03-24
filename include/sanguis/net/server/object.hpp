@@ -8,7 +8,7 @@
 #include <sanguis/net/server/disconnect_callback.hpp>
 #include <sanguis/net/server/timer_callback.hpp>
 #include <sanguis/net/circular_buffer.hpp>
-#include <sanguis/net/duration_fwd.hpp>
+#include <sanguis/net/duration.hpp>
 #include <sanguis/net/id.hpp>
 #include <sanguis/net/port.hpp>
 #include <awl/mainloop/io_service_fwd.hpp>

@@ -14,7 +14,6 @@
 #include <sanguis/load/model/weapon_category.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
-#include <fcppt/chrono/seconds.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/diff.hpp>
@@ -22,6 +21,9 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/ref.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/chrono/duration.hpp>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::client::draw2d::entities::model::part::part(
 	sanguis::diff_clock const &_diff_clock,
@@ -35,7 +37,7 @@ sanguis::client::draw2d::entities::model::part::part(
 	rotation_timer_(
 		sanguis::diff_timer::parameters(
 			_diff_clock,
-			fcppt::chrono::seconds(
+			boost::chrono::seconds(
 				1
 			)
 		)

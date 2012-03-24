@@ -5,13 +5,13 @@
 #include <sanguis/load/pickup_name.hpp>
 #include <sanguis/messages/add_pickup.hpp>
 #include <sanguis/messages/create.hpp>
-#include <fcppt/chrono/seconds.hpp>
 #include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/chrono/duration.hpp>
 #include <boost/logic/tribool.hpp>
 #include <fcppt/config/external_end.hpp>
 
@@ -53,7 +53,7 @@ sanguis::server::entities::pickups::pickup::pickup(
 	life_timer_(
 		sanguis::diff_timer::parameters(
 			_diff_clock,
-			fcppt::chrono::seconds(
+			boost::chrono::seconds(
 				30
 			)
 		)

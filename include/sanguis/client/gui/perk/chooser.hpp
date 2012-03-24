@@ -8,7 +8,7 @@
 #include <sanguis/client/perk/state_fwd.hpp>
 #include <sanguis/client/perk/tree.hpp>
 #include <sanguis/perk_type.hpp>
-#include <sanguis/duration_fwd.hpp>
+#include <sanguis/duration.hpp>
 #include <sge/cegui/toolbox/scoped_gui_sheet.hpp>
 #include <sge/cegui/toolbox/scoped_layout.hpp>
 #include <fcppt/container/tree/object_decl.hpp>

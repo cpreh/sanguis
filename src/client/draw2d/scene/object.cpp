@@ -22,6 +22,7 @@
 #include <sanguis/exception.hpp>
 #include <sanguis/random_generator.hpp>
 #include <sanguis/random_seed.hpp>
+#include <sanguis/update_diff_clock.hpp>
 #include <sge/audio/listener.hpp>
 #include <sge/charconv/system_fwd.hpp>
 #include <sge/image/colors.hpp>
@@ -279,7 +280,8 @@ sanguis::client::draw2d::scene::object::update(
 	if(
 		!paused_
 	)
-		diff_clock_.update(
+		sanguis::update_diff_clock(
+			diff_clock_,
 			_delta
 		);
 

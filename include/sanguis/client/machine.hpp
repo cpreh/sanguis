@@ -13,7 +13,7 @@
 #include <sanguis/net/hostname.hpp>
 #include <sanguis/net/port.hpp>
 #include <sanguis/net/receive_buffer_fwd.hpp>
-#include <sanguis/duration_fwd.hpp>
+#include <sanguis/duration.hpp>
 #include <sge/audio/player_fwd.hpp>
 #include <sge/charconv/system_fwd.hpp>
 #include <sge/console/gfx_fwd.hpp>

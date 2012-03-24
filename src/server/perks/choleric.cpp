@@ -5,7 +5,6 @@
 #include <sanguis/server/entities/projectiles/rocket.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sge/timer/reset_when_expired.hpp>
-#include <fcppt/chrono/seconds.hpp>
 #include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/random/variate_impl.hpp>
@@ -13,6 +12,9 @@
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/chrono/duration.hpp>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::server::perks::choleric::choleric(
 	sanguis::diff_clock const &_diff_clock,
@@ -26,7 +28,7 @@ sanguis::server::perks::choleric::choleric(
 	shoot_timer_(
 		sanguis::diff_timer::parameters(
 			_diff_clock,
-			fcppt::chrono::seconds(
+			boost::chrono::seconds(
 				5
 			)
 		)

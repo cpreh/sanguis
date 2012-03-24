@@ -4,7 +4,7 @@
 #include <sanguis/client/draw2d/entities/model/decay_time_fwd.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
-#include <sanguis/duration_fwd.hpp>
+#include <sanguis/duration.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis

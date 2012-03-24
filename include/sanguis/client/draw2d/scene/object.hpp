@@ -26,7 +26,7 @@
 #include <sanguis/load/model/collection_fwd.hpp>
 #include <sanguis/messages/base.hpp>
 #include <sanguis/diff_clock.hpp>
-#include <sanguis/duration_fwd.hpp>
+#include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sanguis/random_generator.hpp>
 #include <sge/audio/listener_fwd.hpp>

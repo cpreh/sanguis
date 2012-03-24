@@ -16,9 +16,6 @@
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/sprite/center.hpp>
 #include <sge/timer/remaining_fractional.hpp>
-#include <fcppt/chrono/duration_arithmetic.hpp>
-#include <fcppt/chrono/duration_comparison.hpp>
-#include <fcppt/chrono/duration_impl.hpp>
 #include <fcppt/math/point_rotate.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/fill.hpp>

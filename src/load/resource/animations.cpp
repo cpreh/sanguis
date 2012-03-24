@@ -7,9 +7,6 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/exception.hpp>
-#include <fcppt/chrono/duration_cast.hpp>
-#include <fcppt/chrono/milliseconds.hpp>
-#include <fcppt/chrono/rep.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/io/ifstream.hpp>
 #include <fcppt/io/istringstream.hpp>
@@ -20,8 +17,10 @@
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/cstdint.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/predicate.hpp>
+#include <boost/chrono/duration.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -98,12 +97,12 @@ sanguis::load::resource::animations::do_load(
 
 	if (boost::algorithm::starts_with(line,FCPPT_TEXT("frame_length ")))
 		const_delay =
-			fcppt::chrono::duration_cast<
+			boost::chrono::duration_cast<
 				sanguis::duration
 			>(
-				fcppt::chrono::milliseconds(
+				boost::chrono::milliseconds(
 					fcppt::extract_from_string_exn<
-						fcppt::chrono::rep
+						boost::int_least64_t
 					>(
 						line.substr(
 							fcppt::string(
@@ -133,7 +132,7 @@ sanguis::load::resource::animations::do_load(
 		if (!const_delay)
 		{
 			fcppt::io::istringstream ss(line);
-			fcppt::chrono::rep temp_delay;
+			boost::int_least64_t temp_delay;
 			ss >> temp_delay >> std::ws;
 
 			if (!ss)
@@ -156,10 +155,10 @@ sanguis::load::resource::animations::do_load(
 					)
 				);
 			delay =
-				fcppt::chrono::duration_cast<
+				boost::chrono::duration_cast<
 					sanguis::duration
 				>(
-					fcppt::chrono::milliseconds(
+					boost::chrono::milliseconds(
 						temp_delay
 					)
 				);

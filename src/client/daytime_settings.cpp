@@ -4,11 +4,6 @@
 #include <sge/console/callback/parameters.hpp>
 #include <sge/font/text/lit.hpp>
 #include <sge/font/text/to_fcppt_string.hpp>
-#include <fcppt/chrono/system_clock.hpp>
-#include <fcppt/chrono/time_point_arithmetic.hpp>
-#include <fcppt/chrono/time_point_impl.hpp>
-#include <fcppt/chrono/duration_arithmetic.hpp>
-#include <fcppt/chrono/duration_impl.hpp>
 #include <fcppt/io/istringstream.hpp>
 #include <fcppt/time/gmtime.hpp>
 #include <fcppt/time/parse_date.hpp>

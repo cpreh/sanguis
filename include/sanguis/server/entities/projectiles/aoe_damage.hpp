@@ -9,7 +9,7 @@
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/duration_fwd.hpp>
+#include <sanguis/duration.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis

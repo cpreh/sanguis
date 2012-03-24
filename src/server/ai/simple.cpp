@@ -15,7 +15,6 @@
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/vector.hpp>
 #include <sge/timer/reset_when_expired.hpp>
-#include <fcppt/chrono/seconds.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/object_impl.hpp>
@@ -30,6 +29,10 @@
 #include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/chrono/duration.hpp>
+#include <fcppt/config/external_end.hpp>
+
 
 sanguis::server::ai::simple::simple(
 	sanguis::diff_clock const &_diff_clock,
@@ -41,7 +44,7 @@ sanguis::server::ai::simple::simple(
 	pos_timer_(
 		sanguis::diff_timer::parameters(
 			_diff_clock,
-			fcppt::chrono::seconds(
+			boost::chrono::seconds(
 				0 // TODO
 			)
 		)
@@ -161,7 +164,7 @@ sanguis::server::ai::simple::update()
 	);
 
 	pos_timer_.interval(
-		fcppt::chrono::duration<
+		boost::chrono::duration<
 			server::space_unit
 		>(
 			distance

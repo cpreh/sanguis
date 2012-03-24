@@ -9,10 +9,12 @@
 #include <sge/sprite/center.hpp>
 #include <sge/sprite/intrusive/connection.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
-#include <fcppt/chrono/seconds.hpp>
 #include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/chrono/duration.hpp>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::client::draw2d::entities::container::container(
 	sanguis::diff_clock const &_diff_clock,
@@ -34,7 +36,7 @@ sanguis::client::draw2d::entities::container::container(
 	move_timer_(
 		sanguis::diff_timer::parameters(
 			_diff_clock,
-			fcppt::chrono::seconds(
+			boost::chrono::seconds(
 				1
 			)
 		)

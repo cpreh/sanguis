@@ -40,8 +40,6 @@
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/pre.hpp>
-#include <fcppt/chrono/milliseconds.hpp>
-#include <fcppt/chrono/seconds.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
@@ -50,6 +48,9 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/chrono/duration.hpp>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::server::world::object::object(
 	sanguis::diff_clock const &_diff_clock,
@@ -102,14 +103,14 @@ sanguis::server::world::object::object(
 	projectile_timer_(
 		sanguis::diff_timer::parameters(
 			_diff_clock,
-			fcppt::chrono::seconds(
+			boost::chrono::seconds(
 				1
 			)
 		)
 	),
 	send_timer_(
 		sanguis::timer::parameters(
-			fcppt::chrono::milliseconds(
+			boost::chrono::milliseconds(
 				500
 			)
 		)

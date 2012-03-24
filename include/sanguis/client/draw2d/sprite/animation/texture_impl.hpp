@@ -24,11 +24,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <sanguis/client/draw2d/sprite/animation/texture_decl.hpp>
 #include <sanguis/exception.hpp>
 #include <sge/sprite/object.hpp>
-#include <fcppt/chrono/duration_impl.hpp>
-#include <fcppt/chrono/seconds.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/next_prior.hpp>
+#include <boost/chrono/duration.hpp>
 #include <fcppt/config/external_end.hpp>
 
 template<
@@ -46,7 +45,7 @@ sanguis::client::draw2d::sprite::animation::texture<Choices>::texture(
 	cur_timer_(
 		sanguis::diff_timer::parameters(
 			_diff_clock,
-			fcppt::chrono::seconds(
+			boost::chrono::seconds(
 				0
 			)
 		)

@@ -5,7 +5,7 @@
 #include <sanguis/client/gui/menu/connection_box_fwd.hpp>
 #include <sanguis/client/gui/object_fwd.hpp>
 #include <sanguis/client/config/settings/object_fwd.hpp>
-#include <sanguis/duration_fwd.hpp>
+#include <sanguis/duration.hpp>
 #include <sge/cegui/toolbox/scoped_gui_sheet.hpp>
 #include <sge/cegui/toolbox/scoped_layout.hpp>
 #include <fcppt/scoped_ptr.hpp>

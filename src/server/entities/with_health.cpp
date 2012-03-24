@@ -7,8 +7,11 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
-#include <fcppt/chrono/seconds.hpp>
 #include <fcppt/tr1/functional.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/chrono/duration.hpp>
+#include <fcppt/config/external_end.hpp>
+
 
 void
 sanguis::server::entities::with_health::damage(
@@ -96,7 +99,7 @@ sanguis::server::entities::with_health::with_health(
 	regeneration_timer_(
 		sanguis::diff_timer::parameters(
 			_diff_clock,
-			fcppt::chrono::seconds(
+			boost::chrono::seconds(
 				1
 			)
 		)

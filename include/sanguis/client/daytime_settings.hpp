@@ -5,10 +5,9 @@
 #include <sge/console/object_fwd.hpp>
 #include <sge/console/arg_list.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
-#include <fcppt/chrono/system_clock.hpp>
-#include <fcppt/chrono/time_point_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/chrono/system_clocks.hpp>
 #include <ctime>
 #include <fcppt/config/external_end.hpp>
 
@@ -33,7 +32,7 @@ public:
 	std::tm const
 	current_time();
 private:
-	typedef fcppt::chrono::system_clock clock;
+	typedef boost::chrono::system_clock clock;
 
 	typedef clock::time_point time_point;
 

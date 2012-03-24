@@ -21,7 +21,8 @@ INCLUDE_DIRECTORIES(
 # Find Boost
 
 FIND_PACKAGE(
-	Boost 1.44.0 REQUIRED COMPONENTS
+	Boost 1.47.0 REQUIRED COMPONENTS
+	chrono
 	iostreams
 	program_options
 	system

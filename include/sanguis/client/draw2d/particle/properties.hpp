@@ -13,7 +13,6 @@
 #include <sanguis/client/draw2d/particle/rot_speed_range.hpp>
 #include <sanguis/client/draw2d/particle/spawn_initial.hpp>
 #include <sanguis/client/draw2d/particle/speed_range.hpp>
-#include <fcppt/chrono/duration_impl.hpp>
 #include <fcppt/nonassignable.hpp>
 #include <fcppt/homogenous_pair_impl.hpp>
 

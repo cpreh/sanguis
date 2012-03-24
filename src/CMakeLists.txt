@@ -363,7 +363,6 @@ SET(
 	include/sanguis/diff_clock_fwd.hpp
 	include/sanguis/diff_timer.hpp
 	include/sanguis/duration.hpp
-	include/sanguis/duration_fwd.hpp
 	include/sanguis/duration_second.hpp
 	include/sanguis/enemy_type.hpp
 	include/sanguis/entity_id.hpp
@@ -604,7 +603,6 @@ SET(
 	include/sanguis/net/data_buffer.hpp
 	include/sanguis/net/deserialize.hpp
 	include/sanguis/net/duration.hpp
-	include/sanguis/net/duration_fwd.hpp
 	include/sanguis/net/erase_circular_buffer_front.hpp
 	include/sanguis/net/exception.hpp
 	include/sanguis/net/hostname.hpp
@@ -992,6 +990,7 @@ SET(
 	include/sanguis/time_unit.hpp
 	include/sanguis/timer.hpp
 	include/sanguis/to_console_arg_list.hpp
+	include/sanguis/update_diff_clock.hpp
 	include/sanguis/weapon_type.hpp
 	include/sanguis/world_id.hpp
 	src/apply_log_level.cpp
@@ -1459,6 +1458,7 @@ SET(
 	src/server/world/random.cpp
 	src/server/world/sight_range.cpp
 	src/to_console_arg_list.cpp
+	src/update_diff_clock.cpp
 )
 
 FCPPT_UTILS_APPEND_SOURCE_DIR_AND_MAKE_GROUPS(
@@ -1487,6 +1487,7 @@ add_definitions(
 target_link_libraries(
 	sanguis
 	sanguiscreator
+	${Boost_CHRONO_LIBRARY}
 	${Fcppt_core_LIBRARIES}
 	${Fcppt_filesystem_LIBRARIES}
 	${Fcppt_thread_LIBRARIES}

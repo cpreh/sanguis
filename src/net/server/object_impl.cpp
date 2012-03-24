@@ -13,9 +13,6 @@
 // asio brings in window.h's max macro :(
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/chrono/asio/expires_from_now_any.hpp>
-#include <fcppt/chrono/duration_cast.hpp>
-#include <fcppt/chrono/duration_impl.hpp>
-#include <fcppt/chrono/milliseconds.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/tr1/functional.hpp>
