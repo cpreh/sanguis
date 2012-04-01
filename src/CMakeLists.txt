@@ -1494,6 +1494,7 @@ target_link_libraries(
 	${Awl_LIBRARIES}
 	${SGE_LIBRARIES}
 	${CEGUI_LIBRARIES}
+	${Alda_LIBRARIES}
 )
 
 IF(NOT MSVC)
