@@ -2,6 +2,11 @@
 #define SANGUIS_MESSAGES_BINDINGS_FUNDAMENTAL_STRONG_HPP_INCLUDED
 
 #include <alda/bindings/fundamental.hpp>
+#include <alda/serialization/istream.hpp>
+#include <alda/serialization/detail/read/load.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <majutsu/concepts/dynamic_memory/tag.hpp>
 #include <majutsu/concepts/static_size.hpp>
 #include <majutsu/const_raw_pointer.hpp>
@@ -87,6 +92,9 @@ namespace majutsu
 namespace concepts
 {
 
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)
+
 template<
 	typename Type
 >
@@ -103,6 +111,55 @@ static_size<
 >
 {};
 
+FCPPT_PP_POP_WARNING
+
+}
+}
+
+namespace alda
+{
+namespace serialization
+{
+namespace detail
+{
+namespace read
+{
+
+template<
+	typename Type
+>
+struct load<
+	sanguis::messages::bindings::fundamental_strong<
+		Type
+	>
+>
+{
+	static typename
+	sanguis::messages::bindings::fundamental_strong<
+		Type
+	>::type const
+	get(
+		alda::serialization::istream &_is
+	)
+	{
+		return
+			typename
+			sanguis::messages::bindings::fundamental_strong<
+				Type
+			>::type(
+				alda::serialization::detail::read::load<
+					alda::bindings::fundamental<
+						typename Type::value_type
+					>
+				>::get(
+					_is
+				)
+			);
+	}
+};
+
+}
+}
 }
 }
 

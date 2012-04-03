@@ -9,6 +9,9 @@
 // TODO:
 #include <alda/serialization/detail/read/make_object.hpp>
 #include <fcppt/algorithm/copy_n.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <majutsu/concepts/dynamic_memory/tag.hpp>
 #include <majutsu/const_raw_pointer.hpp>
 #include <majutsu/size_type.hpp>
@@ -25,6 +28,9 @@ namespace messages
 namespace bindings
 {
 
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)
+
 template<
 	typename Type
 >
@@ -36,6 +42,8 @@ alda::bindings::dynamic_len<
 >
 {
 };
+
+FCPPT_PP_POP_WARNING
 
 template<
 	typename Type

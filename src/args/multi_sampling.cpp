@@ -7,7 +7,9 @@ sanguis::args::multi_sampling(
 )
 {
 	return
-		_vm["multisamples"].as<
-			sge::renderer::multi_sample_type
-		>();
+		sge::renderer::multi_sample_type(
+			_vm["multisamples"].as<
+				sge::renderer::multi_sample_type::value_type
+			>()
+		);
 }

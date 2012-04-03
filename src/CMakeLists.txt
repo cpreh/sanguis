@@ -476,7 +476,6 @@ SET(
 	include/sanguis/messages/bindings/float.hpp
 	include/sanguis/messages/bindings/fundamental_strong.hpp
 	include/sanguis/messages/bindings/self.hpp
-	include/sanguis/messages/bindings/static.hpp
 	include/sanguis/messages/call/object.hpp
 	include/sanguis/messages/call/object_fwd.hpp
 	include/sanguis/messages/change_weapon.hpp

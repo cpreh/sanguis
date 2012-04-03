@@ -1,5 +1,8 @@
+#include <sanguis/net/id.hpp>
+#include <sanguis/server/player_id.hpp>
 #include <sanguis/server/player_id_from_args.hpp>
 #include <sanguis/server/player_id_from_net.hpp>
+#include <sge/console/arg_list.hpp>
 #include <fcppt/extract_from_string_exn.hpp>
 
 sanguis::server::player_id const
@@ -9,10 +12,12 @@ sanguis::server::player_id_from_args(
 {
 	return
 		server::player_id_from_net(
-			fcppt::extract_from_string_exn<
-				net::id
-			>(
-				_args.back()
+			sanguis::net::id(
+				fcppt::extract_from_string_exn<
+					sanguis::net::id::value_type
+				>(
+					_args.back()
+				)
 			)
 		);
 }

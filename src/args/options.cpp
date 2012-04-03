@@ -66,9 +66,9 @@ sanguis::args::options()
 		(
 			"multisamples",
 			po::value<
-				sge::renderer::multi_sample_type
+				sge::renderer::multi_sample_type::value_type
 			>()->default_value(
-				sge::renderer::no_multi_sampling
+				sge::renderer::no_multi_sampling.get()
 			),
 			"sets the number of samples done for anti aliasing"
 		)
@@ -84,7 +84,7 @@ sanguis::args::options()
 		(
 			"serverport",
 			po::value<
-				net::port
+				sanguis::net::port
 			>()->default_value(
 				31337
 			),

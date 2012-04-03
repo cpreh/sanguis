@@ -1,3 +1,4 @@
+#include <sanguis/client/perk/level.hpp>
 #include <sanguis/client/perk/state.hpp>
 #include <sanguis/client/perk/choosable.hpp>
 #include <sanguis/client/perk/info.hpp>
@@ -8,6 +9,9 @@
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::client::perk::state::state(
 	perk::send_callback const &_send_callback
@@ -76,9 +80,16 @@ sanguis::client::perk::state::choose_perk(
 
 	++consumed_levels_;
 
-	++perk_levels_[
-		_type
-	];
+	++perk_levels_.insert(
+		std::make_pair(
+			_type,
+			sanguis::client::perk::level(
+				sanguis::client::level(
+					0u
+				)
+			)
+		)
+	).first->second;
 
 	send_callback_(
 		_type
@@ -117,9 +128,16 @@ sanguis::client::perk::state::perk_level(
 ) const
 {
 	return
-		perk_levels_[
-			_perk_type
-		];
+		perk_levels_.insert(
+			std::make_pair(
+				_perk_type,
+				sanguis::client::perk::level(
+					sanguis::client::level(
+						0u
+					)
+				)
+			)
+		).first->second;
 }
 
 sanguis::client::perk::level_map const &
