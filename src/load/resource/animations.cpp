@@ -171,6 +171,7 @@ sanguis::load::resource::animations::do_load(
 		anim.push_back(
 			animation::entity(
 				delay,
+				sge::renderer::texture::planar_shared_ptr(),
 				load_texture(
 					dir / filename
 				)
@@ -183,7 +184,7 @@ sanguis::load::resource::animations::do_load(
 	return anim;
 }
 
-sge::texture::const_part_ptr const
+sge::texture::const_part_shared_ptr const
 sanguis::load::resource::animations::load_texture(
 	boost::filesystem::path const &p) const
 {
@@ -226,6 +227,7 @@ sanguis::load::resource::animations::load_without_frames_file(
 			sanguis::duration_second(
 				1.f
 			),
+			sge::renderer::texture::planar_shared_ptr(),
 			load_texture(first_path)
 		)
 	);

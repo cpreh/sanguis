@@ -3,6 +3,7 @@
 #include <sanguis/animation_sound_type.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/audio/sound/positional.hpp>
+#include <sge/audio/sound/positional_shared_ptr.hpp>
 #include <fcppt/assign/make_array.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 
@@ -12,14 +13,18 @@ sanguis::client::draw2d::entities::model::sound_state::sound_state(
 :
 	sounds_(
 		fcppt::assign::make_array(
-			_sounds[
-				animation_sound_type::start
-			]
+			sge::audio::sound::positional_shared_ptr(
+				_sounds[
+					animation_sound_type::start
+				]
+			)
 		)
 		(
-			_sounds[
-				animation_sound_type::middle
-			]
+			sge::audio::sound::positional_shared_ptr(
+				_sounds[
+					animation_sound_type::middle
+				]
+			)
 		)
 	),
 	current_sound_index_(
@@ -109,11 +114,11 @@ sanguis::client::draw2d::entities::model::sound_state::play(
 	);
 }
 
-sge::audio::sound::positional_ptr const
+sge::audio::sound::positional *
 sanguis::client::draw2d::entities::model::sound_state::current_sound() const
 {
 	return
 		sounds_[
 			current_sound_index_
-		];
+		].get();
 }

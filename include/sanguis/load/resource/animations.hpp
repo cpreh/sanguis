@@ -3,7 +3,7 @@
 
 #include <sanguis/load/resource/textures_fwd.hpp>
 #include <sanguis/load/resource/animation/series.hpp>
-#include <sge/texture/part_fwd.hpp>
+#include <sge/texture/const_part_shared_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
@@ -39,7 +39,7 @@ private:
 		boost::filesystem::path const &
 	) const;
 
-	sge::texture::const_part_ptr const
+	sge::texture::const_part_shared_ptr const
 	load_texture(
 		boost::filesystem::path const &
 	) const;

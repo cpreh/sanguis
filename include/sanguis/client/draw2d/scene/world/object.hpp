@@ -7,9 +7,9 @@
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/load/resource/textures_fwd.hpp>
 #include <sge/renderer/device_fwd.hpp>
-#include <sge/renderer/vertex_declaration_ptr.hpp>
+#include <sge/renderer/vertex_declaration_scoped_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/scoped_ptr.hpp>
+#include <fcppt/scoped_ptr_impl.hpp>
 
 namespace sanguis
 {
@@ -49,7 +49,7 @@ private:
 
 	load::resource::textures const &textures_;
 
-	sge::renderer::vertex_declaration_ptr const vertex_declaration_;
+	sge::renderer::vertex_declaration_scoped_ptr const vertex_declaration_;
 
 	typedef fcppt::scoped_ptr<
 		scene::world::state

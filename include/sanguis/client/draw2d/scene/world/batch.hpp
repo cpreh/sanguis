@@ -5,7 +5,7 @@
 #include <sanguis/client/draw2d/scene/world/texture_slice_vector.hpp>
 #include <sanguis/client/draw2d/scene/world/texture_slice.hpp>
 #include <sge/renderer/device_fwd.hpp>
-#include <sge/renderer/vertex_buffer_ptr.hpp>
+#include <sge/renderer/vertex_buffer_shared_ptr.hpp>
 
 namespace sanguis
 {
@@ -24,7 +24,7 @@ public:
 	batch();
 
 	batch(
-		sge::renderer::vertex_buffer_ptr,
+		sge::renderer::vertex_buffer_shared_ptr,
 		world::texture_slice_vector const &
 	);
 
@@ -33,7 +33,7 @@ public:
 		sge::renderer::device &
 	);
 private:
-	sge::renderer::vertex_buffer_ptr vertex_buffer_;
+	sge::renderer::vertex_buffer_shared_ptr vertex_buffer_;
 
 	world::texture_slice_vector texture_slices_;
 };

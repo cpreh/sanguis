@@ -17,7 +17,8 @@
 #include <sge/renderer/resource_flags_none.hpp>
 #include <sge/renderer/scoped_vertex_lock.hpp>
 #include <sge/renderer/size_type.hpp>
-#include <sge/renderer/vertex_buffer_ptr.hpp>
+#include <sge/renderer/vertex_buffer.hpp>
+#include <sge/renderer/vertex_buffer_shared_ptr.hpp>
 #include <sge/renderer/vertex_count.hpp>
 #include <sge/renderer/vf/dynamic/part_index.hpp>
 #include <sge/renderer/vf/iterator.hpp>
@@ -61,7 +62,7 @@ sanguis::client::draw2d::scene::world::make_batch(
 	)
 		return
 			world::batch(
-				sge::renderer::vertex_buffer_ptr(),
+				sge::renderer::vertex_buffer_shared_ptr(),
 				world::texture_slice_vector()
 			);
 
@@ -71,7 +72,7 @@ sanguis::client::draw2d::scene::world::make_batch(
 		world::sort_shapes
 	);
 
-	sge::renderer::vertex_buffer_ptr const vertex_buffer(
+	sge::renderer::vertex_buffer_shared_ptr const vertex_buffer(
 		_renderer.create_vertex_buffer(
 			_vertex_declaration,
 			sge::renderer::vf::dynamic::part_index(

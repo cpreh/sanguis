@@ -26,7 +26,9 @@ sanguis::client::draw2d::scene::background::background(
 	sge::viewport::manager &_viewport_manager
 )
 :
-	client_system_(_client_system),
+	client_system_(
+		_client_system
+	),
 	texture_(
 		_load_context.resources().textures().load(
 			load::resource::texture_identifier(

@@ -5,8 +5,10 @@
 #include <sanguis/load/resource/animation/series.hpp>
 #include <sanguis/load/resource/texture_context_impl.hpp>
 #include <sanguis/exception.hpp>
+#include <sge/renderer/texture/planar.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/texture/part_fwd.hpp>
+#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 
@@ -50,12 +52,12 @@ sanguis::load::model::animation::context::update()
 
 	animation_ = resource::animation::series();
 
-	sge::texture::part_ptr const part(
+	sge::renderer::texture::planar_shared_ptr const texture(
 		texture_context_.value()->result()
 	);
 
 	cache_callback_(
-		part->area()
+		texture->area()
 	);
 
 	for(
@@ -68,11 +70,14 @@ sanguis::load::model::animation::context::update()
 		animation_.push_back(
 			resource::animation::entity(
 				frame_it->delay(),
-				sge::texture::const_part_ptr(
+				texture,
+				sge::texture::const_part_shared_ptr(
 					fcppt::make_shared_ptr<
 						sge::texture::part_raw
 					>(
-						part->texture(),
+						fcppt::ref(
+							*texture
+						),
 						frame_it->area()
 					)
 				)

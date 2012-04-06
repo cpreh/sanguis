@@ -6,6 +6,7 @@
 #include <sge/renderer/resource_flags_none.hpp>
 #include <sge/renderer/texture/mipmap/off.hpp>
 #include <sge/renderer/texture/create_planar_from_path.hpp>
+#include <sge/renderer/texture/planar.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/onscreen_target.hpp>
 #include <sge/sprite/object_impl.hpp>
@@ -16,6 +17,7 @@
 #include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_shared_ptr.hpp>
+#include <fcppt/ref.hpp>
 
 namespace
 {
@@ -37,7 +39,19 @@ sanguis::client::console::gfx::gfx(
 	sge::console::output_line_limit const _history_size
 )
 :
-	renderer_(_renderer),
+	renderer_(
+		_renderer
+	),
+	texture_(
+		sge::renderer::texture::create_planar_from_path(
+			sanguis::media_path()
+			/ FCPPT_TEXT("console_back.png"),
+			renderer_,
+			_image_loader,
+			sge::renderer::texture::mipmap::off(),
+			sge::renderer::resource_flags::none
+		)
+	),
 	impl_(
 		_console,
 		renderer_,
@@ -50,13 +64,8 @@ sanguis::client::console::gfx::gfx(
 				fcppt::make_shared_ptr<
 					sge::texture::part_raw
 				>(
-					sge::renderer::texture::create_planar_from_path(
-						sanguis::media_path()
-						/ FCPPT_TEXT("console_back.png"),
-						renderer_,
-						_image_loader,
-						sge::renderer::texture::mipmap::off(),
-						sge::renderer::resource_flags::none
+					fcppt::ref(
+						*texture_
 					)
 				)
 			)

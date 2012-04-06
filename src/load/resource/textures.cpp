@@ -10,6 +10,7 @@
 #include <sge/texture/part_raw.hpp>
 #include <sge/renderer/texture/mipmap/off.hpp>
 #include <sge/renderer/resource_flags_none.hpp>
+#include <sge/image2d/file.hpp>
 #include <sge/image2d/system.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/filesystem/extension.hpp>
@@ -28,7 +29,7 @@
 #include <boost/spirit/home/phoenix/object/new.hpp>
 #include <fcppt/config/external_end.hpp>
 
-sge::texture::part_ptr const
+sge::texture::const_part_shared_ptr const
 sanguis::load::resource::textures::load(
 	texture_identifier const &_id
 ) const
@@ -192,7 +193,7 @@ sanguis::load::resource::textures::~textures()
 {
 }
 
-sge::texture::part_ptr const
+sge::texture::const_part_shared_ptr const
 sanguis::load::resource::textures::do_load(
 	texture_identifier const &_id
 ) const
@@ -238,16 +239,18 @@ sanguis::load::resource::textures::do_load_unnamed(
 		);
 }
 
-sge::texture::part_ptr const
+sge::texture::const_part_shared_ptr const
 sanguis::load::resource::textures::do_load_inner(
 	boost::filesystem::path const &_path
 ) const
 {
 	return
-		sge::texture::add_image(
-			texture_manager_,
-			*image_loader_.load(
-				_path
+		sge::texture::const_part_shared_ptr(
+			sge::texture::add_image(
+				texture_manager_,
+				*image_loader_.load(
+					_path
+				)
 			)
 		);
 }

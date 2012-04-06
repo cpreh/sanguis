@@ -4,6 +4,7 @@
 #include <sanguis/load/model/sound.hpp>
 #include <sanguis/load/resource/context.hpp>
 #include <sanguis/load/resource/sounds.hpp>
+#include <sge/audio/sound/positional.hpp>
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
@@ -116,13 +117,13 @@ sanguis::load::model::random_sound::~random_sound()
 {
 }
 
-sge::audio::sound::positional_ptr const
+sge::audio::sound::positional_unique_ptr
 sanguis::load::model::random_sound::random() const
 {
 	if(
 		sounds_.empty()
 	)
-		return sge::audio::sound::positional_ptr();
+		return sge::audio::sound::positional_unique_ptr();
 
 	load::probability_type const number(
 		rng_()

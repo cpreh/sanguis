@@ -1,6 +1,7 @@
 #include <sanguis/load/model/animation/sound.hpp>
 #include <sanguis/load/model/conditional_sound.hpp>
 #include <sanguis/load/log.hpp>
+#include <sge/audio/sound/positional.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/object.hpp>
@@ -53,7 +54,7 @@ find_sound_type(
 
 }
 
-sge::audio::sound::positional_ptr const
+sge::audio::sound::positional_unique_ptr
 sanguis::load::model::animation::sound::operator[](
 	animation_sound_type::type const _sound_type
 ) const
@@ -67,7 +68,7 @@ sanguis::load::model::animation::sound::operator[](
 	return
 		it == sounds_.end()
 		?
-			sge::audio::sound::positional_ptr()
+			sge::audio::sound::positional_unique_ptr()
 		:
 			it->second->random();
 }

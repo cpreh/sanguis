@@ -4,7 +4,8 @@
 #include <sanguis/client/music_handler_fwd.hpp>
 #include <sanguis/load/resource/sounds_fwd.hpp>
 #include <sge/audio/scalar.hpp>
-#include <sge/audio/sound/base_ptr.hpp>
+#include <sge/audio/sound/base_scoped_ptr.hpp>
+#include <sge/audio/sound/base_unique_ptr.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/object_fwd.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
@@ -41,14 +42,14 @@ private:
 		sge::console::object &
 	);
 
-	sge::audio::sound::base_ptr const
+	sge::audio::sound::base_unique_ptr
 	load_random() const;
 
 	load::resource::sounds const &resource_;
 
 	fcppt::signal::scoped_connection const volume_connection_;
 
-	sge::audio::sound::base_ptr current_;
+	sge::audio::sound::base_scoped_ptr current_;
 
 	typedef fcppt::optional<
 		sge::audio::scalar

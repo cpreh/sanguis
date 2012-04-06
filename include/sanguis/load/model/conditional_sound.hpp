@@ -7,7 +7,7 @@
 #include <sanguis/load/resource/sounds_fwd.hpp>
 #include <sanguis/load/probability_type.hpp>
 #include <sge/parse/json/member_map.hpp>
-#include <sge/audio/sound/positional_ptr.hpp>
+#include <sge/audio/sound/positional_unique_ptr.hpp>
 #include <fcppt/random/variate_decl.hpp>
 #include <fcppt/random/distribution/uniform_real_decl.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -34,7 +34,7 @@ public:
 
 	~conditional_sound();
 
-	sge::audio::sound::positional_ptr const
+	sge::audio::sound::positional_unique_ptr
 	random() const;
 private:
 	typedef fcppt::optional<

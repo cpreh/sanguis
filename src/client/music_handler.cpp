@@ -72,7 +72,9 @@ sanguis::client::music_handler::process()
 void
 sanguis::client::music_handler::next_title()
 {
-	current_ = this->load_random();
+	current_.take(
+		this->load_random()
+	);
 
 	if(
 		!current_
@@ -137,7 +139,7 @@ sanguis::client::music_handler::volume(
 		);
 }
 
-sge::audio::sound::base_ptr const
+sge::audio::sound::base_unique_ptr
 sanguis::client::music_handler::load_random() const
 {
 	// TODO: choose a random one!
@@ -153,7 +155,7 @@ sanguis::client::music_handler::load_random() const
 		{
 			return
 				resource_.make(
-					resource_.load_uncached(
+					*resource_.load_path(
 						*it
 					),
 					load::sound_type::stream
@@ -176,5 +178,5 @@ sanguis::client::music_handler::load_random() const
 			);
 		}
 
-	return sge::audio::sound::base_ptr();
+	return sge::audio::sound::base_unique_ptr();
 }

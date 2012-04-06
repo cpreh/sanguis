@@ -3,6 +3,7 @@
 #include <sanguis/client/draw2d/scene/world/vf/format.hpp>
 #include <sge/renderer/vf/dynamic/make_format.hpp>
 #include <sge/renderer/device.hpp>
+#include <sge/renderer/vertex_declaration.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>

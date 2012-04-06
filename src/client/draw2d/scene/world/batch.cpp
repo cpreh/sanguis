@@ -2,22 +2,29 @@
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/nonindexed_primitive_type.hpp>
 #include <sge/renderer/scoped_vertex_buffer.hpp>
-#include <sge/renderer/texture/const_optional_base.hpp>
+#include <sge/renderer/texture/const_optional_base_ref.hpp>
 #include <sge/renderer/texture/planar.hpp>
 #include <sge/renderer/texture/stage.hpp>
 #include <sge/texture/part.hpp>
 
 sanguis::client::draw2d::scene::world::batch::batch()
+:
+	vertex_buffer_(),
+	texture_slices_()
 {
 }
 
 sanguis::client::draw2d::scene::world::batch::batch(
-	sge::renderer::vertex_buffer_ptr const _vertex_buffer,
+	sge::renderer::vertex_buffer_shared_ptr const _vertex_buffer,
 	world::texture_slice_vector const &_texture_slices
 )
 :
-	vertex_buffer_(_vertex_buffer),
-	texture_slices_(_texture_slices)
+	vertex_buffer_(
+		_vertex_buffer
+	),
+	texture_slices_(
+		_texture_slices
+	)
 {
 }
 
@@ -45,8 +52,8 @@ sanguis::client::draw2d::scene::world::batch::draw(
 	)
 	{
 		_renderer.texture(
-			sge::renderer::texture::const_optional_base(
-				*it->texture()->texture()
+			sge::renderer::texture::const_optional_base_ref(
+				it->texture()->texture()
 			),
 			sge::renderer::texture::stage(
 				0u

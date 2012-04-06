@@ -7,7 +7,7 @@
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/load/context_fwd.hpp>
 #include <sge/sprite/object_decl.hpp>
-#include <sge/texture/const_part_ptr.hpp>
+#include <sge/texture/const_part_shared_ptr.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -45,7 +45,7 @@ private:
 
 	draw2d::sprite::client::system &client_system_;
 
-	sge::texture::const_part_ptr const texture_;
+	sge::texture::const_part_shared_ptr const texture_;
 
 	draw2d::sprite::client::object sprite_;
 

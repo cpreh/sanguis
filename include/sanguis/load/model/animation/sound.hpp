@@ -6,7 +6,7 @@
 #include <sanguis/load/model/animation/sound_fwd.hpp>
 #include <sanguis/load/model/conditional_sound_fwd.hpp>
 #include <sanguis/load/resource/sounds_fwd.hpp>
-#include <sge/audio/sound/positional_ptr.hpp>
+#include <sge/audio/sound/positional_unique_ptr.hpp>
 #include <sge/parse/json/member_map.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -28,7 +28,7 @@ class sound
 		sound
 	);
 public:
-	sge::audio::sound::positional_ptr const
+	sge::audio::sound::positional_unique_ptr
 	operator[](
 		sanguis::animation_sound_type::type
 	) const;

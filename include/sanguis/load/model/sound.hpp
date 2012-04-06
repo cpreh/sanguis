@@ -5,8 +5,8 @@
 #include <sanguis/load/probability_type.hpp>
 #include <sanguis/load/resource/sounds_fwd.hpp>
 #include <sge/parse/json/member_map.hpp>
-#include <sge/audio/sound/positional_ptr.hpp>
-#include <sge/audio/file_ptr.hpp>
+#include <sge/audio/sound/positional_unique_ptr.hpp>
+#include <sge/audio/file_shared_ptr.hpp>
 #include <fcppt/reference_wrapper.hpp>
 
 namespace sanguis
@@ -27,7 +27,7 @@ public:
 	probability_type
 	probability() const;
 
-	sge::audio::sound::positional_ptr const
+	sge::audio::sound::positional_unique_ptr
 	make() const;
 private:
 	fcppt::reference_wrapper<
@@ -36,7 +36,7 @@ private:
 
 	probability_type probability_;
 
-	sge::audio::file_ptr file_;
+	sge::audio::file_shared_ptr file_;
 };
 
 }

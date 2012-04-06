@@ -24,11 +24,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 sanguis::load::resource::animation::entity::entity(
 	sanguis::duration const &_res,
-	sge::texture::const_part_ptr const _tex
+	sge::renderer::texture::planar_shared_ptr const _tex,
+	sge::texture::const_part_shared_ptr const _tex_part
 )
 :
 	delay_(_res.count()),
-	tex_(_tex)
+	tex_(_tex),
+	tex_part_(_tex_part)
 {
 }
 
@@ -38,22 +40,25 @@ sanguis::load::resource::animation::entity::delay() const
 	return delay_;
 }
 
-sge::texture::const_part_ptr const
+sge::texture::const_part_shared_ptr const
 sanguis::load::resource::animation::entity::tex() const
 {
-	return tex_;
+	return tex_part_;
 }
 
 void
 sanguis::load::resource::animation::entity::tex(
-	sge::texture::const_part_ptr const _tex
+	sge::renderer::texture::planar_shared_ptr const _tex,
+	sge::texture::const_part_shared_ptr const _tex_part
 )
 {
 	tex_ = _tex;
+
+	tex_part_ = _tex_part;
 }
 
 sge::renderer::dim2 const
 sanguis::load::resource::animation::entity::dim() const
 {
-	return tex_->area().size();
+	return tex_part_->area().size();
 }

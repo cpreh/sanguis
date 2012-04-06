@@ -5,7 +5,7 @@
 #include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/load/model/animation/sound_fwd.hpp>
 #include <sanguis/animation_sound_type.hpp>
-#include <sge/audio/sound/positional_ptr.hpp>
+#include <sge/audio/sound/positional_shared_ptr.hpp>
 #include <sge/audio/sound/repeat.hpp>
 #include <fcppt/container/array_decl.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -42,7 +42,7 @@ public:
 	~sound_state();
 private:
 	typedef fcppt::container::array<
-		sge::audio::sound::positional_ptr,
+		sge::audio::sound::positional_shared_ptr,
 		sanguis::animation_sound_type::size
 	> sound_array;
 
@@ -55,7 +55,7 @@ private:
 		sge::audio::sound::repeat::type
 	);
 
-	sge::audio::sound::positional_ptr const
+	sge::audio::sound::positional *
 	current_sound() const;
 };
 

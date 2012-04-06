@@ -1,6 +1,6 @@
 #include <sanguis/load/resource/texture_context_impl.hpp>
-#include <sge/texture/part_raw.hpp>
 #include <sge/renderer/texture/create_planar_from_view.hpp>
+#include <sge/renderer/texture/planar.hpp>
 #include <sge/renderer/texture/mipmap/off.hpp>
 #include <sge/renderer/resource_flags_none.hpp>
 #include <sge/image2d/file.hpp>
@@ -8,7 +8,6 @@
 #include <sge/image2d/view/const_object.hpp>
 #include <sge/renderer/device.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -59,9 +58,7 @@ sanguis::load::resource::texture_context_impl::update()
 		!texture_result_
 	)
 		texture_result_ =
-			fcppt::make_shared_ptr<
-				sge::texture::part_raw
-			>(
+			sge::renderer::texture::planar_shared_ptr(
 				sge::renderer::texture::create_planar_from_view(
 					rend_,
 					future_.get()->view(),
@@ -73,7 +70,7 @@ sanguis::load::resource::texture_context_impl::update()
 	return true;
 }
 
-sge::texture::part_ptr const
+sge::renderer::texture::planar_shared_ptr const
 sanguis::load::resource::texture_context_impl::result()
 {
 	return texture_result_;
@@ -91,7 +88,9 @@ sanguis::load::resource::texture_context_impl::task(
 )
 {
 	return
-		_il.load(
-			_path
+		sanguis::load::resource::texture_context_impl::future_value(
+			_il.load(
+				_path
+			)
 		);
 }

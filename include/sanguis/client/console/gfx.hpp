@@ -8,6 +8,7 @@
 #include <sge/image2d/system_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/device_fwd.hpp>
+#include <sge/renderer/texture/planar_scoped_ptr.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -44,6 +45,8 @@ private:
 	on_resize();
 
 	sge::renderer::device &renderer_;
+
+	sge::renderer::texture::planar_scoped_ptr const texture_;
 
 	sge::console::gfx impl_;
 

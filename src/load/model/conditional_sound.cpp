@@ -1,5 +1,6 @@
 #include <sanguis/random_generator.hpp>
 #include <sanguis/load/model/conditional_sound.hpp>
+#include <sge/audio/sound/positional.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/find_member.hpp>
@@ -51,7 +52,7 @@ sanguis::load::model::conditional_sound::~conditional_sound()
 {
 }
 
-sge::audio::sound::positional_ptr const
+sge::audio::sound::positional_unique_ptr
 sanguis::load::model::conditional_sound::random() const
 {
 	// avoid the corner case in which the probability is 1
@@ -67,5 +68,5 @@ sanguis::load::model::conditional_sound::random() const
 		?
 			random_sound_.random()
 		:
-			sge::audio::sound::positional_ptr();
+			sge::audio::sound::positional_unique_ptr();
 }

@@ -14,7 +14,7 @@
 #include <sanguis/timer.hpp>
 #include <sge/console/object.hpp>
 #include <sge/font/text/drawer_3d.hpp>
-#include <sge/font/metrics_ptr.hpp>
+#include <sge/font/metrics_scoped_ptr.hpp>
 #include <sge/systems/instance.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/mainloop/io_service_scoped_ptr.hpp>
@@ -70,7 +70,7 @@ private:
 
 	sge::systems::instance const sys_;
 
-	sge::font::metrics_ptr const font_metrics_;
+	sge::font::metrics_scoped_ptr const font_metrics_;
 
 	sge::font::text::drawer_3d font_drawer_;
 

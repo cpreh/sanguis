@@ -3,7 +3,7 @@
 sanguis::client::draw2d::scene::world::texture_slice::texture_slice(
 	sge::renderer::first_vertex const _first_vertex,
 	sge::renderer::vertex_count const _vertex_count,
-	sge::texture::const_part_ptr const _texture
+	sge::texture::const_part_shared_ptr const _texture
 )
 :
 	first_vertex_(_first_vertex),
@@ -24,7 +24,7 @@ sanguis::client::draw2d::scene::world::texture_slice::vertex_count() const
 	return vertex_count_;
 }
 
-sge::texture::const_part_ptr const
+sge::texture::const_part_shared_ptr const
 sanguis::client::draw2d::scene::world::texture_slice::texture() const
 {
 	return texture_;

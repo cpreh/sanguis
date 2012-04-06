@@ -1,5 +1,6 @@
 #include <sanguis/load/model/sound.hpp>
 #include <sanguis/load/resource/sounds.hpp>
+#include <sge/audio/sound/positional.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
@@ -46,12 +47,12 @@ sanguis::load::model::sound::probability() const
 	return probability_;
 }
 
-sge::audio::sound::positional_ptr const
+sge::audio::sound::positional_unique_ptr
 sanguis::load::model::sound::make() const
 {
 	return
 		ctx_.get().make_positional(
-			file_,
+			*file_,
 			sge::audio::sound::positional_parameters(),
 			sound_type::nonstream
 		);

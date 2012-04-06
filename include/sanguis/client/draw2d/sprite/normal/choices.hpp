@@ -8,6 +8,7 @@
 #include <sge/sprite/config/normal_size.hpp>
 #include <sge/sprite/config/texture_coordinates.hpp>
 #include <sge/sprite/config/texture_level_count.hpp>
+#include <sge/sprite/config/texture_ownership.hpp>
 #include <sge/sprite/config/with_rotation.hpp>
 #include <sge/sprite/config/with_texture.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -38,7 +39,8 @@ typedef sge::sprite::config::choices<
 			sge::sprite::config::texture_level_count<
 				1u
 			>,
-			sge::sprite::config::texture_coordinates::automatic
+			sge::sprite::config::texture_coordinates::automatic,
+			sge::sprite::config::texture_ownership::shared
 		>,
 		sge::sprite::config::intrusive
 	>

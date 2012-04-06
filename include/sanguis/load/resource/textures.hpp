@@ -4,7 +4,7 @@
 #include <sanguis/load/resource/texture_identifier.hpp>
 #include <sanguis/load/resource/texture_context_fwd.hpp>
 #include <sanguis/load/resource/texture_context.hpp>
-#include <sge/texture/part_ptr.hpp>
+#include <sge/texture/const_part_shared_ptr.hpp>
 #include <sge/texture/manager.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image2d/system_fwd.hpp>
@@ -27,7 +27,7 @@ class textures
 		textures
 	);
 public:
-	sge::texture::part_ptr const
+	sge::texture::const_part_shared_ptr const
 	load(
 		texture_identifier const &
 	) const;
@@ -46,7 +46,7 @@ public:
 private:
 	friend class animations;
 
-	sge::texture::part_ptr const
+	sge::texture::const_part_shared_ptr const
 	do_load(
 		texture_identifier const &
 	) const;
@@ -56,14 +56,14 @@ private:
 		boost::filesystem::path const &
 	) const;
 
-	sge::texture::part_ptr const
+	sge::texture::const_part_shared_ptr const
 	do_load_inner(
 		boost::filesystem::path const &
 	) const;
 
 	typedef std::map<
 		texture_identifier,
-		sge::texture::part_ptr
+		sge::texture::const_part_shared_ptr
 	> texture_map;
 
 	typedef std::map<

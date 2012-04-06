@@ -12,6 +12,7 @@
 #include <sanguis/server/object.hpp>
 #include <sanguis/duration.hpp>
 #include <sge/config/media_path.hpp>
+#include <sge/font/metrics.hpp>
 #include <sge/font/size_type.hpp>
 #include <sge/font/system.hpp>
 #include <sge/image/colors.hpp>
