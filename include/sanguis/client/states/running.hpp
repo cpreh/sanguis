@@ -3,7 +3,6 @@
 
 #include <sanguis/client/states/ingame_fwd.hpp>
 #include <sanguis/client/machine.hpp>
-#include <sanguis/client/music_handler_fwd.hpp>
 #include <sanguis/client/daytime_settings_fwd.hpp>
 #include <sanguis/client/control/environment_fwd.hpp>
 #include <sanguis/client/console/object_fwd.hpp>
@@ -140,10 +139,6 @@ private:
 	fcppt::scoped_ptr<
 		draw2d::scene::object
 	> drawer_;
-
-	fcppt::scoped_ptr<
-		client::music_handler
-	> music_;
 };
 
 }

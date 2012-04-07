@@ -9,8 +9,7 @@ sanguis::load::model::global_parameters::global_parameters(
 	resource::textures const &_textures,
 	sge::renderer::dim2 const &_cell_size,
 	optional_delay const &_delay,
-	optional_texture_identifier const &_texture,
-	resource::sounds const &_sounds
+	optional_texture_identifier const &_texture
 )
 :
 	random_generator_(_random_generator),
@@ -18,8 +17,7 @@ sanguis::load::model::global_parameters::global_parameters(
 	textures_(_textures),
 	cell_size_(_cell_size),
 	delay_(_delay),
-	texture_(_texture),
-	sounds_(_sounds)
+	texture_(_texture)
 {}
 
 sanguis::random_generator &
@@ -72,16 +70,9 @@ sanguis::load::model::global_parameters::new_texture(
 				this->textures(),
 				this->cell_size(),
 				this->delay(),
-				_tex,
-				this->sounds()
+				_tex
 		)
 		:
 			*this
 		;
-}
-
-sanguis::load::resource::sounds const &
-sanguis::load::model::global_parameters::sounds() const
-{
-	return sounds_;
 }

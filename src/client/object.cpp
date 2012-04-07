@@ -89,9 +89,7 @@ sanguis::client::object::object(
 	),
 	resources_(
 		sys_.image_system(),
-		sys_.renderer(),
-		sys_.audio_loader(),
-		sys_.audio_player()
+		sys_.renderer()
 	),
 	cursor_(
 		sys_.cursor_demuxer()
@@ -122,7 +120,6 @@ sanguis::client::object::object(
 		sys_.renderer(),
 		sys_.charconv_system(),
 		sys_.image_system(),
-		sys_.audio_player(),
 		*io_service_,
 		sys_.viewport_manager()
 	),

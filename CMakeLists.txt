@@ -86,7 +86,6 @@ INCLUDE_DIRECTORIES(
 FIND_PACKAGE(
 	SGE REQUIRED
 	COMPONENTS
-	audio
 	cegui
 	charconv
 	config

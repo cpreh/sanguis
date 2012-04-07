@@ -93,8 +93,6 @@ SET(
 	include/sanguis/client/draw2d/entities/model/parameters_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/part.hpp
 	include/sanguis/client/draw2d/entities/model/part_fwd.hpp
-	include/sanguis/client/draw2d/entities/model/sound_state.hpp
-	include/sanguis/client/draw2d/entities/model/sound_state_fwd.hpp
 	include/sanguis/client/draw2d/entities/order_vector.hpp
 	include/sanguis/client/draw2d/entities/own.hpp
 	include/sanguis/client/draw2d/entities/own_auto_ptr.hpp
@@ -313,8 +311,6 @@ SET(
 	include/sanguis/client/machine.hpp
 	include/sanguis/client/machine_fwd.hpp
 	include/sanguis/client/make_send_callback.hpp
-	include/sanguis/client/music_handler.hpp
-	include/sanguis/client/music_handler_fwd.hpp
 	include/sanguis/client/object.hpp
 	include/sanguis/client/perk/change_callback.hpp
 	include/sanguis/client/perk/change_function.hpp
@@ -384,13 +380,9 @@ SET(
 	include/sanguis/load/model/animation/context_ptr.hpp
 	include/sanguis/load/model/animation/object.hpp
 	include/sanguis/load/model/animation/object_fwd.hpp
-	include/sanguis/load/model/animation/sound.hpp
-	include/sanguis/load/model/animation/sound_fwd.hpp
 	include/sanguis/load/model/base_animation_not_found.hpp
 	include/sanguis/load/model/collection.hpp
 	include/sanguis/load/model/collection_fwd.hpp
-	include/sanguis/load/model/conditional_sound.hpp
-	include/sanguis/load/model/conditional_sound_fwd.hpp
 	include/sanguis/load/model/context.hpp
 	include/sanguis/load/model/context_fwd.hpp
 	include/sanguis/load/model/find_texture.hpp
@@ -410,11 +402,7 @@ SET(
 	include/sanguis/load/model/parse_json.hpp
 	include/sanguis/load/model/part.hpp
 	include/sanguis/load/model/part_fwd.hpp
-	include/sanguis/load/model/random_sound.hpp
 	include/sanguis/load/model/remove_slash.hpp
-	include/sanguis/load/model/sound.hpp
-	include/sanguis/load/model/sound_container.hpp
-	include/sanguis/load/model/sound_fwd.hpp
 	include/sanguis/load/model/split_first_slash.hpp
 	include/sanguis/load/model/split_pair.hpp
 	include/sanguis/load/model/weapon_category.hpp
@@ -432,9 +420,6 @@ SET(
 	include/sanguis/load/resource/context.hpp
 	include/sanguis/load/resource/context_fwd.hpp
 	include/sanguis/load/resource/map_get_or_create.hpp
-	include/sanguis/load/resource/sound_identifier.hpp
-	include/sanguis/load/resource/sounds.hpp
-	include/sanguis/load/resource/sounds_fwd.hpp
 	include/sanguis/load/resource/texture_context.hpp
 	include/sanguis/load/resource/texture_context_fwd.hpp
 	include/sanguis/load/resource/texture_context_impl.hpp
@@ -443,7 +428,6 @@ SET(
 	include/sanguis/load/resource/textures_fwd.hpp
 	include/sanguis/load/server_context.hpp
 	include/sanguis/load/skip_directories.hpp
-	include/sanguis/load/sound_type.hpp
 	include/sanguis/load/weapon_pickup_name.hpp
 	include/sanguis/log.hpp
 	include/sanguis/log_context.hpp
@@ -1043,7 +1027,6 @@ SET(
 	src/client/draw2d/entities/model/orientation.cpp
 	src/client/draw2d/entities/model/parameters.cpp
 	src/client/draw2d/entities/model/part.cpp
-	src/client/draw2d/entities/model/sound_state.cpp
 	src/client/draw2d/entities/own.cpp
 	src/client/draw2d/entities/own_player.cpp
 	src/client/draw2d/entities/player.cpp
@@ -1127,7 +1110,6 @@ SET(
 	src/client/log_location.cpp
 	src/client/machine.cpp
 	src/client/make_send_callback.cpp
-	src/client/music_handler.cpp
 	src/client/object.cpp
 	src/client/perk/choosable.cpp
 	src/client/perk/compare.cpp
@@ -1159,10 +1141,8 @@ SET(
 	src/load/log.cpp
 	src/load/model/animation/context.cpp
 	src/load/model/animation/object.cpp
-	src/load/model/animation/sound.cpp
 	src/load/model/base_animation_not_found.cpp
 	src/load/model/collection.cpp
-	src/load/model/conditional_sound.cpp
 	src/load/model/context.cpp
 	src/load/model/find_texture.cpp
 	src/load/model/frame_cache.cpp
@@ -1175,8 +1155,6 @@ SET(
 	src/load/model/object.cpp
 	src/load/model/parse_json.cpp
 	src/load/model/part.cpp
-	src/load/model/random_sound.cpp
-	src/load/model/sound.cpp
 	src/load/model/split_first_slash.cpp
 	src/load/model/weapon_category.cpp
 	src/load/next_file.cpp
@@ -1185,7 +1163,6 @@ SET(
 	src/load/resource/animation/series.cpp
 	src/load/resource/animations.cpp
 	src/load/resource/context.cpp
-	src/load/resource/sounds.cpp
 	src/load/resource/texture_context.cpp
 	src/load/resource/texture_context_impl.cpp
 	src/load/resource/textures.cpp

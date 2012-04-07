@@ -7,23 +7,17 @@
 
 sanguis::load::context::context(
 	sge::image2d::system &_il,
-	sge::renderer::device &_rend,
-	sge::audio::loader &_ml,
-	sge::audio::player &_ap
+	sge::renderer::device &_rend
 )
 :
 	il_(_il),
 	rend_(_rend),
-	ml_(_ml),
-	ap_(_ap),
 	random_generator_(
 		sanguis::random_seed()
 	),
 	resource_ctx_(
 		rend_,
-		il_,
-		ml_,
-		ap_
+		il_
 	),
 	model_ctx_(
 		resource_ctx_,

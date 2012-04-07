@@ -37,7 +37,6 @@ sanguis::client::machine::machine(
 	sge::renderer::device &_renderer,
 	sge::charconv::system &_charconv_system,
 	sge::image2d::system &_image_loader,
-	sge::audio::player &_audio_player,
 	awl::mainloop::io_service &_io_service,
 	sge::viewport::manager &_viewport_manager
 )
@@ -49,7 +48,6 @@ sanguis::client::machine::machine(
 	renderer_(_renderer),
 	charconv_system_(_charconv_system),
 	image_loader_(_image_loader),
-	audio_player_(_audio_player),
 	viewport_manager_(_viewport_manager),
 	net_(
 		_io_service
@@ -226,12 +224,6 @@ sge::input::keyboard::device &
 sanguis::client::machine::keyboard() const
 {
 	return keyboard_;
-}
-
-sge::audio::player &
-sanguis::client::machine::audio_player() const
-{
-	return audio_player_;
 }
 
 sge::font::metrics &

@@ -1,6 +1,5 @@
 #include <sanguis/load/model/animation/object.hpp>
 #include <sanguis/load/model/animation/context.hpp>
-#include <sanguis/load/model/animation/sound.hpp>
 #include <sanguis/load/model/global_parameters.hpp>
 #include <sanguis/load/model/find_texture.hpp>
 #include <sanguis/load/resource/texture_context.hpp>
@@ -27,10 +26,7 @@
 #include <fcppt/math/box/output.hpp>
 #include <fcppt/math/box/contains.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/cref.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
-#include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
@@ -141,7 +137,6 @@ sanguis::load::model::animation::object::object(
 	param_(
 		_param
 	),
-	sounds_(),
 	texture_()
 {
 	optional_texture_identifier _texture =
@@ -162,46 +157,6 @@ sanguis::load::model::animation::object::object(
 		);
 
 	texture_ = *_texture;
-
-	{
-		sge::parse::json::const_optional_object_ref const sounds_object(
-			sge::parse::json::find_member<
-				sge::parse::json::object
-			>(
-				object_.members,
-				FCPPT_TEXT("sounds")
-			)
-		);
-
-		if(
-			sounds_object
-		)
-			sounds_.take(
-				fcppt::make_unique_ptr<
-					model::animation::sound
-				>(
-					fcppt::ref(
-						param_.random_generator()
-					),
-					sounds_object->members,
-					fcppt::cref(
-						param_.sounds()
-					)
-				)
-			);
-		else
-			sounds_.take(
-				fcppt::make_unique_ptr<
-					animation::sound
-				>()
-			);
-	}
-}
-
-sanguis::load::model::animation::sound const &
-sanguis::load::model::animation::object::sounds() const
-{
-	return *sounds_;
 }
 
 sanguis::load::model::animation::context_ptr

@@ -6,8 +6,6 @@
 #include <sge/media/optional_extension_set.hpp>
 #include <sge/renderer/parameters.hpp>
 #include <sge/renderer/refresh_rate_dont_care.hpp>
-#include <sge/systems/audio_loader.hpp>
-#include <sge/systems/audio_player_default.hpp>
 #include <sge/systems/charconv.hpp>
 #include <sge/systems/cursor_option_field.hpp>
 #include <sge/systems/font.hpp>
@@ -97,23 +95,6 @@ sanguis::args::sge_options(
 					)
 				)
 			)
-		)
-		(
-			sge::systems::audio_loader(
-				sge::audio::loader_capabilities_field::null(),
-				sge::media::optional_extension_set(
-					fcppt::assign::make_container<
-						sge::media::extension_set
-					>(
-						sge::media::extension(
-							FCPPT_TEXT("ogg")
-						)
-					)
-				)
-			)
-		)
-		(
-			sge::systems::audio_player_default()
 		)
 		(
 			sge::systems::font() // TODO: make sure that we can load truetype fonts, use a multi loader here as well!

@@ -1,7 +1,6 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_PART_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_PART_HPP_INCLUDED
 
-#include <sanguis/client/draw2d/entities/model/sound_state_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/draw2d/sprite/normal/texture_animation.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
@@ -101,12 +100,6 @@ private:
 	sanguis::animation_type::type animation_type_;
 
 	weapon_type::type weapon_;
-
-	typedef fcppt::scoped_ptr<
-		model::sound_state
-	> sound_state_ptr;
-
-	sound_state_ptr sound_state_;
 
 	animation_context_ptr animation_context_;
 

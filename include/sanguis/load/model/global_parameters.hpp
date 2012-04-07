@@ -6,7 +6,6 @@
 #include <sanguis/load/model/optional_delay.hpp>
 #include <sanguis/load/model/optional_texture_identifier.hpp>
 #include <sanguis/load/resource/textures_fwd.hpp>
-#include <sanguis/load/resource/sounds_fwd.hpp>
 #include <sge/renderer/dim2.hpp>
 #include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/nonassignable.hpp>
@@ -34,8 +33,7 @@ public:
 		resource::textures const &,
 		sge::renderer::dim2 const &cell_size,
 		optional_delay const &,
-		optional_texture_identifier const &,
-		resource::sounds const &
+		optional_texture_identifier const &
 	);
 
 	sanguis::random_generator &
@@ -60,9 +58,6 @@ public:
 	new_texture(
 		optional_texture_identifier const &
 	) const;
-
-	resource::sounds const &
-	sounds() const;
 private:
 	sanguis::random_generator &random_generator_;
 
@@ -75,8 +70,6 @@ private:
 	optional_delay const delay_;
 
 	optional_texture_identifier const texture_;
-
-	resource::sounds const &sounds_;
 };
 
 }

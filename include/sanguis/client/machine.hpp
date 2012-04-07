@@ -14,7 +14,6 @@
 #include <sanguis/net/port.hpp>
 #include <sanguis/net/receive_buffer_fwd.hpp>
 #include <sanguis/duration.hpp>
-#include <sge/audio/player_fwd.hpp>
 #include <sge/charconv/system_fwd.hpp>
 #include <sge/console/gfx_fwd.hpp>
 #include <sge/font/metrics_fwd.hpp>
@@ -63,7 +62,6 @@ public:
 		sge::renderer::device &,
 		sge::charconv::system &,
 		sge::image2d::system &,
-		sge::audio::player &,
 		awl::mainloop::io_service &,
 		sge::viewport::manager &
 	);
@@ -114,9 +112,6 @@ public:
 
 	sge::input::keyboard::device &
 	keyboard() const;
-
-	sge::audio::player &
-	audio_player() const;
 
 	sge::font::metrics &
 	font_metrics() const;
@@ -169,8 +164,6 @@ private:
 	sge::charconv::system &charconv_system_;
 
 	sge::image2d::system &image_loader_;
-
-	sge::audio::player &audio_player_;
 
 	sge::viewport::manager &viewport_manager_;
 

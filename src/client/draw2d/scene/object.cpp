@@ -23,7 +23,6 @@
 #include <sanguis/random_generator.hpp>
 #include <sanguis/random_seed.hpp>
 #include <sanguis/update_diff_clock.hpp>
-#include <sge/audio/listener.hpp>
 #include <sge/charconv/system_fwd.hpp>
 #include <sge/image/colors.hpp>
 #include <sge/renderer/ambient_color.hpp>
@@ -67,7 +66,6 @@ sanguis::client::draw2d::scene::object::object(
 	sge::charconv::system &_charconv_system,
 	sge::font::metrics &_font_metrics,
 	sge::font::text::drawer &_font_drawer,
-	sge::audio::listener &_audio_listener,
 	std::tm const &_current_time,
 	sge::viewport::manager &_viewport_manager
 )
@@ -118,9 +116,6 @@ sanguis::client::draw2d::scene::object::object(
 				_resources.resources().textures()
 			)
 		)
-	),
-	audio_listener_(
-		_audio_listener
 	),
 	paused_(
 		false
@@ -580,27 +575,6 @@ sanguis::client::draw2d::scene::object::transform(
 )
 {
 	player_center_ = _player_center;
-
-	// TODO: abstract this, and why (x,z)?
-	audio_listener_.position(
-		sge::audio::vector(
-			static_cast<
-				sge::audio::scalar
-			>(
-				player_center_.get().x()
-			),
-			static_cast<
-				sge::audio::scalar
-			>(
-				0
-			),
-			static_cast<
-				sge::audio::scalar
-			>(
-				player_center_.get().y()
-			)
-		)
-	);
 }
 
 sanguis::diff_clock const &

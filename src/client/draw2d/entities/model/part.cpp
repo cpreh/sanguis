@@ -2,7 +2,6 @@
 #include <sanguis/client/draw2d/entities/model/clamp_orientation.hpp>
 #include <sanguis/client/draw2d/entities/model/loop_method.hpp>
 #include <sanguis/client/draw2d/entities/model/orientation.hpp>
-#include <sanguis/client/draw2d/entities/model/sound_state.hpp>
 #include <sanguis/client/draw2d/sprite/animation/texture_impl.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
@@ -55,7 +54,6 @@ sanguis::client::draw2d::entities::model::part::part(
 	weapon_(
 		weapon_type::none
 	),
-	sound_state_(),
 	animation_context_(),
 	animation_(),
 	animation_ended_(
@@ -115,8 +113,6 @@ sanguis::client::draw2d::entities::model::part::weapon(
 	weapon_ = _weapon;
 
 	animation_type_ = sanguis::animation_type::size;
-
-	sound_state_.reset();
 }
 
 void
@@ -158,13 +154,6 @@ sanguis::client::draw2d::entities::model::part::update()
 			);
 		}
 	}
-
-	if(
-		sound_state_
-	)
-		sound_state_->update(
-			this->object().pos()
-		);
 
 	if(
 		animation_
@@ -254,26 +243,6 @@ sanguis::client::draw2d::entities::model::part::load_animation(
 		][
 			_atype
 		].load()
-	);
-
-	if(
-		sound_state_
-	)
-		sound_state_->stop();
-
-	sound_state_.take(
-		fcppt::make_unique_ptr<
-			model::sound_state
-		>(
-			fcppt::cref(
-				load_part_[
-					weapon_
-				]
-				[
-					_atype
-				].sounds()
-			)
-		)
 	);
 }
 

@@ -3,7 +3,6 @@
 #include <sanguis/client/daytime_settings.hpp>
 #include <sanguis/client/log.hpp>
 #include <sanguis/client/make_send_callback.hpp>
-#include <sanguis/client/music_handler.hpp>
 #include <sanguis/client/console/object.hpp>
 #include <sanguis/client/draw2d/scene/object.hpp>
 #include <sanguis/client/events/connected.hpp>
@@ -16,7 +15,6 @@
 #include <sanguis/messages/call/object.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/load/context.hpp>
-#include <sge/audio/player.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <sge/console/object.hpp>
 #include <sge/font/text/from_fcppt_string.hpp>
@@ -90,24 +88,9 @@ sanguis::client::states::running::running(
 			fcppt::ref(
 				context<machine>().font_drawer()
 			),
-			fcppt::ref(
-				context<machine>().audio_player().listener()
-			),
 			daytime_settings_->current_time(),
 			fcppt::ref(
 				context<machine>().viewport_manager()
-			)
-		)
-	),
-	music_(
-		fcppt::make_unique_ptr<
-			client::music_handler
-		>(
-			fcppt::ref(
-				console_->sge_console()
-			),
-			fcppt::cref(
-				context<machine>().resources().resources().sounds()
 			)
 		)
 	)
@@ -130,8 +113,6 @@ sanguis::client::states::running::react(
 	drawer_->update(
 		_event.delta()
 	);
-
-	music_->process();
 
 	return this->discard_event();
 }

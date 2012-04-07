@@ -4,7 +4,6 @@
 #include <sanguis/load/model/animation/object_fwd.hpp>
 #include <sanguis/load/model/animation/context_fwd.hpp>
 #include <sanguis/load/model/animation/context_ptr.hpp>
-#include <sanguis/load/model/animation/sound_fwd.hpp>
 #include <sanguis/load/model/global_parameters.hpp>
 #include <sanguis/load/model/frame_cache.hpp>
 #include <sanguis/load/resource/texture_context.hpp>
@@ -12,7 +11,6 @@
 #include <sanguis/load/resource/context_fwd.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <sge/parse/json/object.hpp>
-#include <fcppt/scoped_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis
@@ -30,9 +28,6 @@ class object
 		object
 	);
 public:
-	model::animation::sound const &
-	sounds() const;
-
 	model::animation::context_ptr
 	load() const;
 
@@ -46,10 +41,6 @@ private:
 	sge::parse::json::object object_;
 
 	model::global_parameters param_;
-
-	fcppt::scoped_ptr<
-		animation::sound
-	> sounds_;
 
 	mutable frame_cache frame_cache_;
 

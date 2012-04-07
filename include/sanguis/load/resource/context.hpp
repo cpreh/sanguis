@@ -3,12 +3,9 @@
 
 #include <sanguis/load/resource/textures_fwd.hpp>
 #include <sanguis/load/resource/animations_fwd.hpp>
-#include <sanguis/load/resource/sounds_fwd.hpp>
 #include <sanguis/load/context_fwd.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image2d/system_fwd.hpp>
-#include <sge/audio/player_fwd.hpp>
-#include <sge/audio/loader_fwd.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -28,9 +25,6 @@ public:
 	resource::textures const &
 	textures() const;
 
-	resource::sounds const &
-	sounds() const;
-
 	resource::animations const &
 	animations() const;
 private:
@@ -38,24 +32,18 @@ private:
 
 	context(
 		sge::renderer::device &,
-		sge::image2d::system &,
-		sge::audio::loader &,
-		sge::audio::player &
+		sge::image2d::system &
 	);
 
 	~context();
 
 	fcppt::scoped_ptr<
 		resource::textures
-	> textures_;
-
-	fcppt::scoped_ptr<
-		resource::sounds
-	> sounds_;
+	> const textures_;
 
 	fcppt::scoped_ptr<
 		resource::animations
-	> animations_;
+	> const animations_;
 };
 
 }

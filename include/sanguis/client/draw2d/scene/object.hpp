@@ -29,7 +29,6 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sanguis/random_generator.hpp>
-#include <sge/audio/listener_fwd.hpp>
 #include <sge/charconv/system_fwd.hpp>
 #include <sge/font/metrics_fwd.hpp>
 #include <sge/font/text/drawer_fwd.hpp>
@@ -69,7 +68,6 @@ public:
 		sge::charconv::system &,
 		sge::font::metrics &,
 		sge::font::text::drawer &,
-		sge::audio::listener &,
 		std::tm const &initial_time,
 		sge::viewport::manager &
 	);
@@ -197,8 +195,6 @@ private:
 	fcppt::scoped_ptr<
 		scene::world::object
 	> const world_;
-
-	sge::audio::listener &audio_listener_;
 
 	bool paused_;
 
