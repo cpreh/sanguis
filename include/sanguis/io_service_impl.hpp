@@ -1,0 +1,32 @@
+#ifndef SANGUIS_IO_SERVICE_IMPL_HPP_INCLUDED
+#define SANGUIS_IO_SERVICE_IMPL_HPP_INCLUDED
+
+#include <sanguis/io_service_impl_fwd.hpp>
+#include <fcppt/noncopyable.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/asio/io_service.hpp>
+#include <fcppt/config/external_end.hpp>
+
+
+namespace sanguis
+{
+
+class io_service_impl
+{
+	FCPPT_NONCOPYABLE(
+		io_service_impl
+	);
+public:
+	io_service_impl();
+
+	~io_service_impl();
+
+	boost::asio::io_service &
+	get();
+private:
+	boost::asio::io_service io_service_;
+};
+
+}
+
+#endif

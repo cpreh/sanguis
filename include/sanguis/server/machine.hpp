@@ -12,13 +12,13 @@
 #include <sanguis/net/id.hpp>
 #include <sanguis/net/port.hpp>
 #include <sanguis/net/receive_buffer_fwd.hpp>
+#include <sanguis/io_service_fwd.hpp>
 #include <sanguis/timer.hpp>
 #include <sge/charconv/system_fwd.hpp>
 #include <fcppt/container/raw_vector_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
-#include <awl/mainloop/io_service_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/state_machine.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -43,7 +43,7 @@ public:
 		load::context_base const &,
 		sge::charconv::system &,
 		net::port,
-		awl::mainloop::io_service &
+		sanguis::io_service &
 	);
 
 	~machine();

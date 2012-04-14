@@ -1,6 +1,7 @@
 #ifndef SANGUIS_NET_SERVER_OBJECT_HPP_INCLUDED
 #define SANGUIS_NET_SERVER_OBJECT_HPP_INCLUDED
 
+#include <sanguis/io_service_fwd.hpp>
 #include <sanguis/net/server/object_impl_fwd.hpp>
 #include <sanguis/net/server/connect_callback.hpp>
 #include <sanguis/net/server/connection_id_container.hpp>
@@ -11,7 +12,6 @@
 #include <sanguis/net/duration.hpp>
 #include <sanguis/net/id.hpp>
 #include <sanguis/net/port.hpp>
-#include <awl/mainloop/io_service_fwd.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
@@ -30,7 +30,7 @@ class object
 	);
 public:
 	object(
-		awl::mainloop::io_service &,
+		sanguis::io_service &,
 		net::duration const &
 	);
 

@@ -37,7 +37,7 @@ sanguis::client::machine::machine(
 	sge::renderer::device &_renderer,
 	sge::charconv::system &_charconv_system,
 	sge::image2d::system &_image_loader,
-	awl::mainloop::io_service &_io_service,
+	sanguis::io_service &_io_service,
 	sge::viewport::manager &_viewport_manager
 )
 :
@@ -167,7 +167,7 @@ sanguis::client::machine::process(
 		)
 	);
 
-	return window_system_.running();
+	return window_system_.poll();
 }
 
 void

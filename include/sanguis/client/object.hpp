@@ -10,6 +10,7 @@
 #include <sanguis/load/context.hpp>
 #include <sanguis/net/port.hpp>
 #include <sanguis/server/object_fwd.hpp>
+#include <sanguis/io_service.hpp>
 #include <sanguis/main_object.hpp>
 #include <sanguis/timer.hpp>
 #include <sge/console/object.hpp>
@@ -17,13 +18,13 @@
 #include <sge/font/metrics_scoped_ptr.hpp>
 #include <sge/systems/instance.hpp>
 #include <awl/main/exit_code.hpp>
-#include <awl/mainloop/io_service_scoped_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <fcppt/scoped_state_machine.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/variables_map.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -66,7 +67,7 @@ private:
 
 	config::settings::saver saver_;
 
-	awl::mainloop::io_service_scoped_ptr const io_service_;
+	sanguis::io_service io_service_;
 
 	sge::systems::instance const sys_;
 

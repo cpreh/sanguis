@@ -23,9 +23,6 @@
 #include <awl/main/exit_code.hpp>
 #include <awl/main/exit_failure.hpp>
 #include <awl/main/exit_success.hpp>
-#include <awl/mainloop/io_service.hpp>
-#include <awl/mainloop/dispatcher.hpp>
-#include <awl/mainloop/asio/create_io_service_base.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/fatal.hpp>
@@ -50,13 +47,10 @@ sanguis::client::object::object(
 	saver_(
 		settings_
 	),
-	io_service_(
-		awl::mainloop::asio::create_io_service_base()
-	),
+	io_service_(),
 	sys_(
 		args::sge_options(
-			_variables_map,
-			*io_service_
+			_variables_map
 		)
 	),
 	font_metrics_(
@@ -120,7 +114,7 @@ sanguis::client::object::object(
 		sys_.renderer(),
 		sys_.charconv_system(),
 		sys_.image_system(),
-		*io_service_,
+		io_service_,
 		sys_.viewport_manager()
 	),
 	frame_timer_(
@@ -148,7 +142,7 @@ sanguis::client::object::run()
 	{
 		this->register_handler();
 
-		io_service_->run();
+		io_service_.run();
 	}
 	catch(
 		fcppt::exception const &_exception
@@ -183,7 +177,7 @@ sanguis::client::object::run()
 void
 sanguis::client::object::register_handler()
 {
-	io_service_->post(
+	io_service_.post(
 		std::tr1::bind(
 			&object::loop_handler,
 			this
@@ -209,9 +203,7 @@ sanguis::client::object::loop_handler()
 		)
 	)
 	{
-		sys_.awl_dispatcher().stop();
-
-		io_service_->stop();
+		io_service_.stop();
 
 		return;
 	}

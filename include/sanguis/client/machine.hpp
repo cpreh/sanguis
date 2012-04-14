@@ -14,6 +14,7 @@
 #include <sanguis/net/port.hpp>
 #include <sanguis/net/receive_buffer_fwd.hpp>
 #include <sanguis/duration.hpp>
+#include <sanguis/io_service_fwd.hpp>
 #include <sge/charconv/system_fwd.hpp>
 #include <sge/console/gfx_fwd.hpp>
 #include <sge/font/metrics_fwd.hpp>
@@ -23,7 +24,6 @@
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <sge/window/system_fwd.hpp>
-#include <awl/mainloop/io_service_fwd.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
@@ -62,7 +62,7 @@ public:
 		sge::renderer::device &,
 		sge::charconv::system &,
 		sge::image2d::system &,
-		awl::mainloop::io_service &,
+		sanguis::io_service &,
 		sge::viewport::manager &
 	);
 

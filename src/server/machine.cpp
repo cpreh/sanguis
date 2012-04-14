@@ -32,7 +32,7 @@ sanguis::server::machine::machine(
 	load::context_base const &_resources,
 	sge::charconv::system &_charconv_system,
 	net::port const _port,
-	awl::mainloop::io_service &_io_service
+	sanguis::io_service &_io_service
 )
 :
 	resources_(

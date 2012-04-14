@@ -8,8 +8,6 @@
 #include <sge/charconv/system_fwd.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/exit_success.hpp>
-#include <awl/mainloop/asio/create_io_service_base.hpp>
-#include <awl/mainloop/io_service.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/exception.hpp>
@@ -28,14 +26,12 @@ sanguis::server::object::object(
 	running_(
 		true
 	),
-	io_service_(
-		awl::mainloop::asio::create_io_service_base()
-	),
+	io_service_(),
 	machine_(
 		_load_context,
 		_charconv_system,
 		_port,
-		*io_service_
+		io_service_
 	),
 	scoped_machine_(
 		machine_
@@ -85,7 +81,7 @@ sanguis::server::object::mainloop()
 {
 	try
 	{
-		io_service_->run();
+		io_service_.run();
 	}
 	catch(
 		fcppt::exception const &_exception

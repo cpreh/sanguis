@@ -1,12 +1,13 @@
+#include <sanguis/io_service.hpp>
+#include <sanguis/io_service_impl.hpp>
 #include <sanguis/net/server/object.hpp>
 #include <sanguis/net/server/object_impl.hpp>
 #include <sanguis/net/duration.hpp>
-#include <awl/mainloop/asio/io_service.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 
 sanguis::net::server::object::object(
-	awl::mainloop::io_service &_io_service,
+	sanguis::io_service &_io_service,
 	net::duration const &_duration
 )
 :
@@ -15,12 +16,7 @@ sanguis::net::server::object::object(
 			server::object_impl
 		>(
 			fcppt::ref(
-				dynamic_cast<
-					awl::mainloop::asio::io_service &
-				>(
-					_io_service
-				)
-				.get()
+				_io_service.impl().get()
 			),
 			_duration
 		)

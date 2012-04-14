@@ -21,7 +21,6 @@
 #include <sge/window/dim.hpp>
 #include <sge/window/parameters.hpp>
 #include <sge/window/title.hpp>
-#include <awl/mainloop/io_service_fwd.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/container/bitfield/object_impl.hpp>
 #include <fcppt/math/dim/object_impl.hpp>
@@ -29,8 +28,7 @@
 
 sge::systems::list const
 sanguis::args::sge_options(
-	boost::program_options::variables_map const &_vm,
-	awl::mainloop::io_service &_io_service
+	boost::program_options::variables_map const &_vm
 )
 {
 	sge::window::dim const dimensions(
@@ -48,9 +46,6 @@ sanguis::args::sge_options(
 					),
 					dimensions
 				)
-			)
-			.io_service(
-				_io_service
 			)
 		)
 		(

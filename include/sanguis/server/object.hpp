@@ -6,12 +6,12 @@
 #include <sanguis/load/context_base_fwd.hpp>
 #include <sanguis/net/port.hpp>
 #include <sanguis/main_object.hpp>
+#include <sanguis/io_service.hpp>
 #include <sge/charconv/system_fwd.hpp>
 #include <fcppt/thread/object.hpp>
 #include <fcppt/scoped_state_machine.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <awl/main/exit_code.hpp>
-#include <awl/mainloop/io_service_scoped_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/thread/thread.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -58,7 +58,7 @@ private:
 
 	bool running_;
 
-	awl::mainloop::io_service_scoped_ptr const io_service_;
+	sanguis::io_service io_service_;
 
 	server::machine machine_;
 

@@ -366,6 +366,11 @@ SET(
 	include/sanguis/exception.hpp
 	include/sanguis/friend_type.hpp
 	include/sanguis/from_console_arg_list.hpp
+	include/sanguis/io_service.hpp
+	include/sanguis/io_service_callback.hpp
+	include/sanguis/io_service_fwd.hpp
+	include/sanguis/io_service_impl.hpp
+	include/sanguis/io_service_impl_fwd.hpp
 	include/sanguis/load/aoe_projectile_name.hpp
 	include/sanguis/load/context.hpp
 	include/sanguis/load/context_base.hpp
@@ -1132,6 +1137,8 @@ SET(
 	src/duration_second.cpp
 	src/exception.cpp
 	src/from_console_arg_list.cpp
+	src/io_service.cpp
+	src/io_service_impl.cpp
 	src/load/aoe_projectile_name.cpp
 	src/load/context.cpp
 	src/load/context_base.cpp
