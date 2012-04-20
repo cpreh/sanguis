@@ -3,9 +3,10 @@
 #include <sanguis/args/resolution.hpp>
 #include <sge/renderer/bit_depth.hpp>
 #include <sge/renderer/display_mode.hpp>
+#include <sge/renderer/fullscreen.hpp>
 #include <sge/renderer/refresh_rate_dont_care.hpp>
 #include <sge/renderer/screen_mode.hpp>
-#include <sge/renderer/visual_depth.hpp>
+#include <sge/renderer/windowed.hpp>
 #include <fcppt/variant/object_impl.hpp>
 #include <fcppt/optional_impl.hpp>
 
@@ -24,14 +25,18 @@ sanguis::args::screen_mode(
 		res
 		?
 			sge::renderer::screen_mode(
-				sge::renderer::display_mode(
-					*res,
-					sge::renderer::bit_depth::depth32,
-					sge::renderer::refresh_rate_dont_care
+				sge::renderer::fullscreen(
+					sge::renderer::display_mode(
+						*res,
+						sge::renderer::bit_depth::depth32,
+						sge::renderer::refresh_rate_dont_care
+					)
 				)
 			)
 		:
 			sge::renderer::screen_mode(
-				sge::renderer::visual_depth::depth32
+				sge::renderer::windowed(
+					sge::renderer::bit_depth::depth32
+				)
 			);
 }
