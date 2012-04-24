@@ -17,8 +17,6 @@
 #include <sanguis/exception.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
-#include <sge/renderer/state/bool.hpp>
-#include <sge/renderer/state/list.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/log/parameters/object.hpp>
 #include <fcppt/log/headers.hpp>
@@ -77,13 +75,7 @@ sanguis::client::states::menu::menu(
 			)
 		)
 	),
-	connect_state_(),
-	renderer_state_(
-		context<machine>().renderer(),
-		sge::renderer::state::list
-			(sge::renderer::state::bool_::clear_back_buffer = false)
-			(sge::renderer::state::bool_::clear_depth_buffer = false)
-	)
+	connect_state_()
 {
 }
 

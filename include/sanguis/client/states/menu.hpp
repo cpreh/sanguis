@@ -11,7 +11,6 @@
 #include <sanguis/client/gui/menu/object.hpp>
 #include <sanguis/messages/connect_state.hpp>
 #include <sanguis/connect_state.hpp>
-#include <sge/renderer/state/scoped.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/state.hpp>
@@ -101,8 +100,6 @@ private:
 	client::gui::menu::object menu_;
 
 	connect_state::type connect_state_;
-
-	sge::renderer::state::scoped const renderer_state_;
 };
 
 }

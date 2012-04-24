@@ -10,10 +10,11 @@
 #include <sanguis/client/draw2d/scene/background_dim.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/world_parameters.hpp>
-#include <sge/renderer/clear_flags.hpp>
-#include <sge/renderer/clear_flags_field.hpp>
+#include <sge/renderer/active_target.hpp>
 #include <sge/renderer/scoped_vertex_declaration.hpp>
+#include <sge/renderer/target_base.hpp>
 #include <sge/renderer/viewport_size.hpp>
+#include <sge/renderer/clear/parameters.hpp>
 #include <sge/renderer/state/bool.hpp>
 #include <sge/renderer/state/dest_blend_func.hpp>
 #include <sge/renderer/state/int.hpp>
@@ -165,11 +166,8 @@ sanguis::client::draw2d::scene::world::state::draw(
 		(
 			sge::renderer::state::stencil_func::equal
 		)
-		(
+                (
 			sge::renderer::state::int_::stencil_ref = 0
-		)
-		(
-			sge::renderer::state::int_::stencil_buffer_clear_val = 0
 		)
 		(
 			sge::renderer::state::bool_::enable_alpha_blending = true
@@ -182,9 +180,12 @@ sanguis::client::draw2d::scene::world::state::draw(
 		)
 	);
 
-	renderer_.clear(
-		sge::renderer::clear_flags_field(
-			sge::renderer::clear_flags::stencil_buffer
+	sge::renderer::active_target(
+		renderer_
+	).clear(
+		sge::renderer::clear::parameters()
+		.stencil_buffer(
+			0
 		)
 	);
 

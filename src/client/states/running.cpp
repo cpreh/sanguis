@@ -19,8 +19,6 @@
 #include <sge/console/object.hpp>
 #include <sge/font/text/from_fcppt_string.hpp>
 #include <sge/renderer/device.hpp>
-#include <sge/renderer/state/bool.hpp>
-#include <sge/renderer/state/list.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/debug.hpp>
@@ -38,12 +36,6 @@ sanguis::client::states::running::running(
 :
 	my_base(
 		_ctx
-	),
-	renderer_state_(
-		context<machine>().renderer(),
-		sge::renderer::state::list
-			(sge::renderer::state::bool_::clear_back_buffer = false)
-			(sge::renderer::state::bool_::clear_depth_buffer = false)
 	),
 	console_(
 		fcppt::make_unique_ptr<

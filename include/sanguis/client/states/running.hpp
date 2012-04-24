@@ -18,7 +18,6 @@
 #include <sanguis/messages/pause.hpp>
 #include <sanguis/messages/unpause.hpp>
 #include <sanguis/messages/level_up.hpp>
-#include <sge/renderer/state/scoped.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -125,8 +124,6 @@ private:
 	handle_default_msg(
 		messages::base const &
 	);
-
-	sge::renderer::state::scoped const renderer_state_;
 
 	fcppt::scoped_ptr<
 		client::console::object
