@@ -1101,6 +1101,8 @@ SET(
 	src/client/events/action.cpp
 	src/client/events/message.cpp
 	src/client/events/net_error.cpp
+	src/client/events/overlay.cpp
+	src/client/events/render.cpp
 	src/client/events/tick.cpp
 	src/client/gui/menu/callbacks/object.cpp
 	src/client/gui/menu/connection_box.cpp

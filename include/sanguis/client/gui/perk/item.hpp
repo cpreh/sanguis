@@ -8,7 +8,7 @@
 #include <sanguis/perk_type.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <elements/CEGUITreeItem.h>
+#include <CEGUI/widgets/TreeItem.h>
 #include <fcppt/config/external_end.hpp>
 
 namespace sanguis

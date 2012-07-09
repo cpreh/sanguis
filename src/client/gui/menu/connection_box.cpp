@@ -5,10 +5,10 @@
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <CEGUI/WindowManager.h>
 #include <CEGUI/Window.h>
 #include <CEGUI/widgets/PushButton.h>
 #include <fcppt/config/external_end.hpp>
+
 
 sanguis::client::gui::menu::connection_box::connection_box(
 	client::gui::object &_gui,
@@ -29,23 +29,21 @@ sanguis::client::gui::menu::connection_box::connection_box(
 		/ FCPPT_TEXT("connection_box.layout")
 	),
 	root_window_(
-		*CEGUI::WindowManager::getSingleton().getWindow(
-			"ConnectionBox"
-		)
+		scoped_layout_.window()
 	),
 	cancel_button_(
-		*CEGUI::WindowManager::getSingleton().getWindow(
-			"ConnectionBox/Cancel"
+		*root_window_.getChild(
+			"Cancel"
 		)
 	),
 	retry_button_(
-		*CEGUI::WindowManager::getSingleton().getWindow(
-			"ConnectionBox/Retry"
+		*root_window_.getChild(
+			"Retry"
 		)
 	),
 	message_text_(
-		*CEGUI::WindowManager::getSingleton().getWindow(
-			"ConnectionBox/MessageText"
+		*root_window_.getChild(
+			"MessageText"
 		)
 	),
 	cancel_connect_connection_(
@@ -73,7 +71,7 @@ sanguis::client::gui::menu::connection_box::connection_box(
 		)
 	)
 {
-	_parent_window.addChildWindow(
+	_parent_window.addChild(
 		&root_window_
 	);
 

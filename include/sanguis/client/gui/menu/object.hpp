@@ -8,12 +8,14 @@
 #include <sanguis/duration.hpp>
 #include <sge/cegui/toolbox/scoped_gui_sheet.hpp>
 #include <sge/cegui/toolbox/scoped_layout.hpp>
+#include <sge/renderer/context/object_fwd.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <CEGUIEvent.h>
+#include <CEGUI/Event.h>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace CEGUI
 {
@@ -50,7 +52,9 @@ public:
 	);
 
 	void
-	draw();
+	draw(
+		sge::renderer::context::object &
+	);
 
 	void
 	connection_error(

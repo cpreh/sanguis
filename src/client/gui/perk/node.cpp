@@ -2,8 +2,8 @@
 #include <fcppt/variant/apply_unary.hpp>
 #include <fcppt/nonassignable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <elements/CEGUITreeItem.h>
-#include <elements/CEGUITree.h>
+#include <CEGUI/widgets/Tree.h>
+#include <CEGUI/widgets/TreeItem.h>
 #include <fcppt/config/external_end.hpp>
 
 namespace

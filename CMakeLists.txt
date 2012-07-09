@@ -102,6 +102,7 @@ FIND_PACKAGE(
 	sprite
 	systems
 	texture
+	timer
 	viewport
 	window
 )

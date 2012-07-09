@@ -97,10 +97,12 @@ sanguis::client::states::menu::react(
 
 boost::statechart::result
 sanguis::client::states::menu::react(
-	events::render const &
+	events::render const &_event
 )
 {
-	menu_.draw();
+	menu_.draw(
+		_event.context()
+	);
 
 	return discard_event();
 }

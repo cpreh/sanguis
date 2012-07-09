@@ -5,7 +5,7 @@
 #include <sanguis/client/perk/to_string.hpp>
 #include <sge/cegui/to_cegui_string.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <elements/CEGUITree.h>
+#include <CEGUI/widgets/Tree.h>
 #include <fcppt/config/external_end.hpp>
 
 sanguis::client::gui::perk::item::item(
@@ -14,7 +14,9 @@ sanguis::client::gui::perk::item::item(
 	client::perk::info const &_info
 )
 :
-	parent_(_parent),
+	parent_(
+		_parent
+		),
 	perk_type_(
 		_info.type()
 	),

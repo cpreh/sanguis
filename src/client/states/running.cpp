@@ -111,13 +111,17 @@ sanguis::client::states::running::react(
 
 boost::statechart::result
 sanguis::client::states::running::react(
-	events::render const &
+	events::render const &_event
 )
 {
-	drawer_->draw();
+	drawer_->draw(
+		_event.context()
+	);
 
 	this->post_event(
-		events::overlay()
+		events::overlay(
+			_event.context()
+		)
 	);
 
 	return this->discard_event();

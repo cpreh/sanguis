@@ -5,6 +5,7 @@
 #include <fcppt/variant/object_impl.hpp>
 #include <fcppt/nonassignable.hpp>
 
+
 namespace CEGUI
 {
 class TreeItem;

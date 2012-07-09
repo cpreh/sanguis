@@ -11,7 +11,9 @@
 #include <sanguis/net/serialize_to_circular_buffer.hpp>
 #include <sge/charconv/system_fwd.hpp>
 #include <sge/console/gfx.hpp>
-#include <sge/renderer/scoped_block.hpp>
+#include <sge/renderer/device.hpp>
+#include <sge/renderer/context/scoped.hpp>
+#include <sge/renderer/target/onscreen.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/window/system.hpp>
 #include <awl/main/exit_success.hpp>
@@ -173,12 +175,15 @@ sanguis::client::machine::process(
 void
 sanguis::client::machine::draw()
 {
-	sge::renderer::scoped_block const block(
-		renderer_
+	sge::renderer::context::scoped const block(
+		renderer_,
+		renderer_.onscreen_target()
 	);
 
 	this->process_event(
-		events::render()
+		events::render(
+			block.get()
+		)
 	);
 }
 

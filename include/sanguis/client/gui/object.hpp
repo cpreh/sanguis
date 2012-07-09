@@ -8,10 +8,11 @@
 #include <sge/cegui/default_keyboard.hpp>
 #include <sge/cegui/syringe.hpp>
 #include <sge/cegui/system.hpp>
-#include <sge/renderer/device_fwd.hpp>
+#include <sge/charconv/system_fwd.hpp>
 #include <sge/image2d/system_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
-#include <sge/charconv/system_fwd.hpp>
+#include <sge/renderer/device_fwd.hpp>
+#include <sge/renderer/context/object_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -46,7 +47,9 @@ public:
 	system();
 
 	void
-	render();
+	render(
+		sge::renderer::context::object &
+	);
 
 	void
 	update(

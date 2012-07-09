@@ -1,6 +1,6 @@
 #include <sanguis/client/gui/perk/item_user_data.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <elements/CEGUITreeItem.h>
+#include <CEGUI/widgets/TreeItem.h>
 #include <fcppt/config/external_end.hpp>
 
 sanguis::perk_type::type

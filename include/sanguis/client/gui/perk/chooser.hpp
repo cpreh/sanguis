@@ -11,13 +11,15 @@
 #include <sanguis/duration.hpp>
 #include <sge/cegui/toolbox/scoped_gui_sheet.hpp>
 #include <sge/cegui/toolbox/scoped_layout.hpp>
+#include <sge/renderer/context/object_fwd.hpp>
 #include <fcppt/container/tree/object_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <CEGUIEvent.h>
+#include <CEGUI/Event.h>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace CEGUI
 {
@@ -53,7 +55,9 @@ public:
 	);
 
 	void
-	draw();
+	draw(
+		sge::renderer::context::object &
+	);
 private:
 	void
 	perks(

@@ -73,10 +73,12 @@ sanguis::client::states::console::react(
 
 boost::statechart::result
 sanguis::client::states::console::react(
-	events::overlay const &
+	events::overlay const &_event
 )
 {
-	context<running>().console().draw();
+	context<running>().console().draw(
+		_event.context()
+	);
 
 	return this->discard_event();
 }

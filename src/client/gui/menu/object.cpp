@@ -9,6 +9,7 @@
 #include <sanguis/media_path.hpp>
 #include <sge/cegui/from_cegui_string.hpp>
 #include <sge/cegui/to_cegui_string.hpp>
+#include <sge/renderer/context/object_fwd.hpp>
 #include <fcppt/log/parameters/object.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/location.hpp>
@@ -23,9 +24,8 @@
 #include <fcppt/text.hpp>
 #include <fcppt/to_std_string.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <elements/CEGUIPushButton.h>
-#include <CEGUIWindowManager.h>
-#include <CEGUIWindow.h>
+#include <CEGUI/Window.h>
+#include <CEGUI/widgets/PushButton.h>
 #include <fcppt/config/external_end.hpp>
 
 namespace
@@ -62,38 +62,43 @@ sanguis::client::gui::menu::object::object(
 	callbacks::object const &_callbacks
 )
 :
-	settings_(_settings),
-	gui_(_gui),
-	callbacks_(_callbacks),
+	settings_(
+		_settings
+	),
+	gui_(
+		_gui
+	),
+	callbacks_(
+		_callbacks
+	),
 	scoped_layout_(
 		gui_.system(),
 		sanguis::media_path()
 		/ FCPPT_TEXT("gui")
-		/ FCPPT_TEXT("main_menu.layout"),
-		_gui.charconv_system()
+		/ FCPPT_TEXT("main_menu.layout")
 	),
 	scoped_gui_sheet_(
 		gui_.system(),
 		scoped_layout_.window()
 	),
 	connect_button_(
-		*CEGUI::WindowManager::getSingleton().getWindow(
-			"MainMenu/FrameWindow/Connect"
+		*scoped_layout_.window().getChild(
+			"FrameWindow/Connect"
 		)
 	),
 	hostname_edit_(
-		*CEGUI::WindowManager::getSingleton().getWindow(
-			"MainMenu/FrameWindow/Hostname"
+		*scoped_layout_.window().getChild(
+			"FrameWindow/Hostname"
 		)
 	),
 	port_edit_(
-		*CEGUI::WindowManager::getSingleton().getWindow(
-			"MainMenu/FrameWindow/Port"
+		*scoped_layout_.window().getChild(
+			"FrameWindow/Port"
 		)
 	),
 	quickstart_connection_(
-		CEGUI::WindowManager::getSingleton().getWindow(
-			"MainMenu/FrameWindow/Quickstart"
+		scoped_layout_.window().getChild(
+			"FrameWindow/Quickstart"
 		)
 		->subscribeEvent(
 			CEGUI::PushButton::EventClicked,
@@ -107,8 +112,8 @@ sanguis::client::gui::menu::object::object(
 		)
 	),
 	quit_connection_(
-		CEGUI::WindowManager::getSingleton().getWindow(
-			"MainMenu/FrameWindow/Quit"
+		scoped_layout_.window().getChild(
+			"FrameWindow/Quit"
 		)
 		->subscribeEvent(
 			CEGUI::PushButton::EventClicked,
@@ -165,8 +170,8 @@ sanguis::client::gui::menu::object::object(
 				gui_
 			),
 			fcppt::ref(
-				*CEGUI::WindowManager::getSingleton().getWindow(
-					"MainMenu/FrameWindow"
+				*scoped_layout_.window().getChild(
+					"FrameWindow"
 				)
 			),
 			std::tr1::bind(
@@ -243,9 +248,13 @@ sanguis::client::gui::menu::object::process(
 }
 
 void
-sanguis::client::gui::menu::object::draw()
+sanguis::client::gui::menu::object::draw(
+	sge::renderer::context::object &_render_context
+)
 {
-	gui_.render();
+	gui_.render(
+		_render_context
+	);
 }
 
 void

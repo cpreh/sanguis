@@ -70,10 +70,12 @@ sanguis::client::states::perk_chooser::react(
 
 boost::statechart::result
 sanguis::client::states::perk_chooser::react(
-	events::overlay const &
+	events::overlay const &_event
 )
 {
-	perk_chooser_gui_.draw();
+	perk_chooser_gui_.draw(
+		_event.context()
+	);
 
 	return this->discard_event();
 }

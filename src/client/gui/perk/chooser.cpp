@@ -12,6 +12,7 @@
 #include <sanguis/perk_type.hpp>
 #include <sge/cegui/to_cegui_color.hpp>
 #include <sge/cegui/to_cegui_string.hpp>
+#include <sge/renderer/context/object_fwd.hpp>
 #include <fcppt/algorithm/find_if_exn.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
@@ -25,10 +26,9 @@
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <CEGUI/widgets/PushButton.h>
+#include <CEGUI/widgets/Tree.h>
 #include <algorithm>
-#include <elements/CEGUIPushButton.h>
-#include <elements/CEGUITree.h>
-#include <CEGUIWindowManager.h>
 #include <fcppt/config/external_end.hpp>
 
 namespace
@@ -59,8 +59,12 @@ sanguis::client::gui::perk::chooser::chooser(
 	client::perk::state &_state
 )
 :
-	gui_(_gui),
-	state_(_state),
+	gui_(
+		_gui
+	),
+	state_(
+		_state
+	),
 	active_perk_(),
 	perk_connection_(
 		_state.register_perks_change(
@@ -84,8 +88,7 @@ sanguis::client::gui::perk::chooser::chooser(
 		gui_.system(),
 		sanguis::media_path()
 		/ FCPPT_TEXT("gui")
-		/ FCPPT_TEXT("perk_chooser.layout"),
-		_gui.charconv_system()
+		/ FCPPT_TEXT("perk_chooser.layout")
 	),
 	scoped_gui_sheet_(
 		gui_.system(),
@@ -95,24 +98,24 @@ sanguis::client::gui::perk::chooser::chooser(
 		dynamic_cast<
 			CEGUI::Tree &
 		>(
-			*CEGUI::WindowManager::getSingleton().getWindow(
-				"PerkChooser/Tree"
+			*scoped_layout_.window().getChild(
+				"Tree"
 			)
 		)
 	),
 	top_text_(
-		*CEGUI::WindowManager::getSingleton().getWindow(
-			"PerkChooser/TopText"
+		*scoped_layout_.window().getChild(
+			"TopText"
 		)
 	),
 	bottom_text_(
-		*CEGUI::WindowManager::getSingleton().getWindow(
-			"PerkChooser/BottomText"
+		*scoped_layout_.window().getChild(
+			"BottomText"
 		)
 	),
 	choose_button_(
-		*CEGUI::WindowManager::getSingleton().getWindow(
-			"PerkChooser/ChooseButton"
+		*scoped_layout_.window().getChild(
+			"ChooseButton"
 		)
 	),
 	selection_connection_(
@@ -169,9 +172,13 @@ sanguis::client::gui::perk::chooser::process(
 }
 
 void
-sanguis::client::gui::perk::chooser::draw()
+sanguis::client::gui::perk::chooser::draw(
+	sge::renderer::context::object &_render_context
+)
 {
-	gui_.render();
+	gui_.render(
+		_render_context
+	);
 }
 
 void
