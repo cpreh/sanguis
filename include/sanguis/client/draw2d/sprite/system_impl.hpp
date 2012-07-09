@@ -4,6 +4,7 @@
 #include <sanguis/client/draw2d/sprite/order.hpp>
 #include <sanguis/client/draw2d/sprite/system_decl.hpp>
 #include <sge/renderer/device_fwd.hpp>
+#include <sge/renderer/context/object_fwd.hpp>
 #include <sge/sprite/buffers/option.hpp>
 #include <sge/sprite/buffers/parameters.hpp>
 #include <sge/sprite/buffers/single_impl.hpp>
@@ -70,6 +71,7 @@ void
 sanguis::client::draw2d::sprite::system<
 	Choices
 >::render(
+	sge::renderer::context::object &_render_context,
 	sprite::order const _order
 )
 {
@@ -83,6 +85,7 @@ sanguis::client::draw2d::sprite::system<
 			>
 		>
 	>(
+		_render_context,
 		collection_.get(
 			_order
 		).range(),
@@ -99,7 +102,7 @@ sanguis::client::draw2d::sprite::system<
 	Choices
 >::renderer() const
 {
-	return buffers_.parameters().renderer();
+	return buffers_.parameters().device();
 }
 
 #endif

@@ -10,11 +10,9 @@
 #include <sanguis/client/draw2d/scene/background_dim.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/world_parameters.hpp>
-#include <sge/renderer/active_target.hpp>
 #include <sge/renderer/scoped_vertex_declaration.hpp>
-#include <sge/renderer/target_base.hpp>
-#include <sge/renderer/viewport_size.hpp>
 #include <sge/renderer/clear/parameters.hpp>
+#include <sge/renderer/context/object.hpp>
 #include <sge/renderer/state/bool.hpp>
 #include <sge/renderer/state/dest_blend_func.hpp>
 #include <sge/renderer/state/int.hpp>
@@ -54,7 +52,9 @@ sanguis::client::draw2d::scene::world::state::state(
 	client::world_parameters const &_parameters
 )
 :
-	renderer_(_renderer),
+	renderer_(
+		_renderer
+	),
 	vertex_declaration_(_vertex_declaration),
 	batches_(
 		world::generate_batches(
@@ -91,6 +91,7 @@ sanguis::client::draw2d::scene::world::state::~state()
 
 void
 sanguis::client::draw2d::scene::world::state::draw(
+	sge::renderer::context::object &_render_context,
 	draw2d::vector2 const &_translation
 )
 {
@@ -98,12 +99,6 @@ sanguis::client::draw2d::scene::world::state::draw(
 		batches_->empty()
 	)
 		return;
-
-	sge::renderer::screen_size const viewport_size(
-		sge::renderer::viewport_size(
-			renderer_
-		)
-	);
 
 	world::signed_pos::value_type const batch_size_trans(
 		static_cast<
@@ -161,7 +156,7 @@ sanguis::client::draw2d::scene::world::state::draw(
 		);
 
 	sge::renderer::state::scoped const scoped_state(
-		renderer_,
+		_render_context,
 		sge::renderer::state::list
 		(
 			sge::renderer::state::stencil_func::equal
@@ -180,9 +175,7 @@ sanguis::client::draw2d::scene::world::state::draw(
 		)
 	);
 
-	sge::renderer::active_target(
-		renderer_
-	).clear(
+	_render_context.clear(
 		sge::renderer::clear::parameters()
 		.stencil_buffer(
 			0
@@ -215,14 +208,14 @@ sanguis::client::draw2d::scene::world::state::draw(
 
 			{
 				sge::renderer::scoped_vertex_declaration const scoped_decl(
-					renderer_,
+					_render_context,
 					vertex_declaration_
 				);
 
 				(*batches_).at(
 					pos
 				).draw(
-					renderer_
+					_render_context
 				);
 			}
 
@@ -237,7 +230,7 @@ sanguis::client::draw2d::scene::world::state::draw(
 
 			{
 				sge::renderer::state::scoped const scoped_state_inner(
-					renderer_,
+					_render_context,
 					sge::renderer::state::list
 					(
 						sge::renderer::state::stencil_func::never
@@ -258,6 +251,7 @@ sanguis::client::draw2d::scene::world::state::draw(
 						>
 					>
 				>(
+					_render_context,
 					stencil_sprite_,
 					stencil_sprite_buffers_
 				);

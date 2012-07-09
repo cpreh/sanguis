@@ -8,8 +8,10 @@
 #include <sanguis/load/resource/textures_fwd.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/renderer/vertex_declaration_scoped_ptr.hpp>
+#include <sge/renderer/context/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
+
 
 namespace sanguis
 {
@@ -37,6 +39,7 @@ public:
 
 	void
 	draw(
+		sge::renderer::context::object &,
 		draw2d::vector2 const &translation
 	);
 

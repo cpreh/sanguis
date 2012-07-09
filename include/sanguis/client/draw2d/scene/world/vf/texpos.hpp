@@ -2,7 +2,9 @@
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_VF_TEXPOS_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/scene/world/vf/scalar.hpp>
+#include <sge/renderer/vf/index.hpp>
 #include <sge/renderer/vf/texpos.hpp>
+
 
 namespace sanguis
 {
@@ -18,8 +20,11 @@ namespace vf
 {
 
 typedef sge::renderer::vf::texpos<
-	vf::scalar,
-	2
+	sanguis::client::draw2d::scene::world::vf::scalar,
+	2,
+	sge::renderer::vf::index<
+		0u
+	>
 > texpos;
 
 }

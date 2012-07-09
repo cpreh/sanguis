@@ -3,6 +3,7 @@
 #include <sge/font/text/draw.hpp>
 #include <sge/font/text/flags_none.hpp>
 #include <sge/font/text/from_fcppt_string.hpp>
+#include <sge/renderer/context/object_fwd.hpp>
 #include <fcppt/container/bitfield/object_impl.hpp>
 #include <fcppt/io/ostringstream.hpp>
 #include <fcppt/math/box/object_impl.hpp>
@@ -62,7 +63,9 @@ sanguis::client::draw2d::scene::hud::time(
 }
 
 void
-sanguis::client::draw2d::scene::hud::draw()
+sanguis::client::draw2d::scene::hud::draw(
+	sge::renderer::context::object &_render_context
+)
 {
 	frames_counter_.update();
 
@@ -74,6 +77,7 @@ sanguis::client::draw2d::scene::hud::draw()
 	);
 
 	sge::font::text::draw(
+		_render_context,
 		font_metrics_,
 		font_drawer_,
 		sge::font::text::from_fcppt_string(

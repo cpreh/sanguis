@@ -33,8 +33,9 @@
 #include <sge/font/metrics_fwd.hpp>
 #include <sge/font/text/drawer_fwd.hpp>
 #include <sge/renderer/device_fwd.hpp>
-#include <sge/renderer/screen_size.hpp>
-#include <sge/renderer/viewport.hpp>
+#include <sge/renderer/screen_size_fwd.hpp>
+#include <sge/renderer/context/object_fwd.hpp>
+#include <sge/renderer/target/viewport.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/math/vector/object_decl.hpp>
@@ -46,6 +47,7 @@
 #include <boost/ptr_container/ptr_map.hpp>
 #include <ctime>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -85,7 +87,9 @@ public:
 	);
 
 	void
-	draw();
+	draw(
+		sge::renderer::context::object &
+	);
 
 	void
 	pause(
@@ -105,10 +109,14 @@ private:
 	friend class control_environment;
 
 	void
-	render_systems();
+	render_systems(
+		sge::renderer::context::object &
+	);
 
 	void
-	render_lighting();
+	render_lighting(
+		sge::renderer::context::object &
+	);
 
 	entities::base &
 	insert(
@@ -169,7 +177,7 @@ private:
 	sge::renderer::screen_size const
 	screen_size() const;
 
-	sge::renderer::viewport const
+	sge::renderer::target::viewport const
 	viewport() const;
 
 	sanguis::diff_clock diff_clock_;

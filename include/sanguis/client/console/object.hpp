@@ -7,6 +7,7 @@
 #include <sge/console/arg_list.hpp>
 #include <sge/console/gfx_fwd.hpp>
 #include <sge/console/object_fwd.hpp>
+#include <sge/renderer/context/object_fwd.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/signal/connection_manager.hpp>
 #include <fcppt/string.hpp>
@@ -48,7 +49,9 @@ public:
 	active() const;
 
 	void
-	draw();
+	draw(
+		sge::renderer::context::object &
+	);
 
 	sge::console::object &
 	sge_console();

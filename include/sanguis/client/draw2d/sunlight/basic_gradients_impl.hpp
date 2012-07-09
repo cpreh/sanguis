@@ -3,6 +3,7 @@
 
 #include <sanguis/client/draw2d/sunlight/basic_gradients.hpp>
 #include <sanguis/client/draw2d/sunlight/lerp.hpp>
+#include <sge/image/color/object.hpp>
 #include <mizuiro/color/operators/add.hpp>
 #include <mizuiro/color/operators/scalar_multiply.hpp>
 #include <mizuiro/color/operators/subtract.hpp>
@@ -12,6 +13,7 @@
 #include <fcppt/config/external_begin.hpp>
 #include <boost/next_prior.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 template<
 	typename Value,

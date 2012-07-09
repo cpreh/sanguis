@@ -1,6 +1,9 @@
 #include <sanguis/client/draw2d/scene/background_dim.hpp>
-#include <sge/renderer/viewport_size.hpp>
-#include <fcppt/math/dim/structure_cast.hpp>
+#include <sge/renderer/device.hpp>
+#include <sge/renderer/screen_size.hpp>
+#include <sge/renderer/target/onscreen.hpp>
+#include <sge/renderer/target/viewport_size.hpp>
+
 
 sge::renderer::screen_size const
 sanguis::client::draw2d::scene::background_dim(
@@ -8,7 +11,7 @@ sanguis::client::draw2d::scene::background_dim(
 )
 {
 	return
-		sge::renderer::viewport_size(
-			_device
+		sge::renderer::target::viewport_size(
+			_device.onscreen_target()
 		);
 }

@@ -11,7 +11,7 @@
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <CEGUIEvent.h>
+#include <CEGUI/Event.h>
 #include <fcppt/config/external_end.hpp>
 
 namespace CEGUI

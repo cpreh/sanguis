@@ -5,9 +5,9 @@
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <elements/CEGUIPushButton.h>
-#include <CEGUIWindowManager.h>
-#include <CEGUIWindow.h>
+#include <CEGUI/WindowManager.h>
+#include <CEGUI/Window.h>
+#include <CEGUI/widgets/PushButton.h>
 #include <fcppt/config/external_end.hpp>
 
 sanguis::client::gui::menu::connection_box::connection_box(
@@ -26,8 +26,7 @@ sanguis::client::gui::menu::connection_box::connection_box(
 		_gui.system(),
 		sanguis::media_path()
 		/ FCPPT_TEXT("gui")
-		/ FCPPT_TEXT("connection_box.layout"),
-		charconv_system_
+		/ FCPPT_TEXT("connection_box.layout")
 	),
 	root_window_(
 		*CEGUI::WindowManager::getSingleton().getWindow(

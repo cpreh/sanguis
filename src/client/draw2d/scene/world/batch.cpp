@@ -1,11 +1,12 @@
 #include <sanguis/client/draw2d/scene/world/batch.hpp>
-#include <sge/renderer/device.hpp>
-#include <sge/renderer/nonindexed_primitive_type.hpp>
+#include <sge/renderer/primitive_type.hpp>
 #include <sge/renderer/scoped_vertex_buffer.hpp>
+#include <sge/renderer/context/object.hpp>
 #include <sge/renderer/texture/const_optional_base_ref.hpp>
 #include <sge/renderer/texture/planar.hpp>
 #include <sge/renderer/texture/stage.hpp>
 #include <sge/texture/part.hpp>
+
 
 sanguis::client::draw2d::scene::world::batch::batch()
 :
@@ -30,7 +31,7 @@ sanguis::client::draw2d::scene::world::batch::batch(
 
 void
 sanguis::client::draw2d::scene::world::batch::draw(
-	sge::renderer::device &_renderer
+	sge::renderer::context::object &_render_context
 )
 {
 	if(
@@ -39,7 +40,7 @@ sanguis::client::draw2d::scene::world::batch::draw(
 		return;
 
 	sge::renderer::scoped_vertex_buffer const scoped_buffer(
-		_renderer,
+		_render_context,
 		*vertex_buffer_
 	);
 
@@ -51,7 +52,7 @@ sanguis::client::draw2d::scene::world::batch::draw(
 		++it
 	)
 	{
-		_renderer.texture(
+		_render_context.texture(
 			sge::renderer::texture::const_optional_base_ref(
 				it->texture()->texture()
 			),
@@ -60,10 +61,10 @@ sanguis::client::draw2d::scene::world::batch::draw(
 			)
 		);
 
-		_renderer.render_nonindexed(
+		_render_context.render_nonindexed(
 			it->first_vertex(),
 			it->vertex_count(),
-			sge::renderer::nonindexed_primitive_type::triangle
+			sge::renderer::primitive_type::triangle_list
 		);
 	}
 }

@@ -6,6 +6,7 @@
 #include <sanguis/client/level.hpp>
 #include <sge/font/metrics_fwd.hpp>
 #include <sge/font/text/drawer_fwd.hpp>
+#include <sge/renderer/context/object_fwd.hpp>
 #include <sge/timer/frames_counter.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -49,7 +50,9 @@ public:
 	);
 
 	void
-	draw();
+	draw(
+		sge::renderer::context::object &
+	);
 private:
 	sge::font::metrics &font_metrics_;
 

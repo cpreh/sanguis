@@ -4,6 +4,7 @@
 #include <sge/media/extension.hpp>
 #include <sge/media/extension_set.hpp>
 #include <sge/media/optional_extension_set.hpp>
+#include <sge/renderer/multi_samples.hpp>
 #include <sge/renderer/parameters.hpp>
 #include <sge/renderer/refresh_rate_dont_care.hpp>
 #include <sge/systems/charconv.hpp>
@@ -56,7 +57,7 @@ sanguis::args::sge_options(
 					),
 					sge::renderer::depth_stencil_buffer::d24s8,
 					sge::renderer::vsync::on,
-					sge::renderer::multi_sample_type(
+					sge::renderer::multi_samples(
 						args::multi_sampling(
 							_vm
 						)

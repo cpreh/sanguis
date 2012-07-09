@@ -6,6 +6,7 @@
 #include <sanguis/client/draw2d/sprite/client/system.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/load/context_fwd.hpp>
+#include <sge/renderer/context/object_fwd.hpp>
 #include <sge/sprite/object_decl.hpp>
 #include <sge/texture/const_part_shared_ptr.hpp>
 #include <sge/viewport/manager_fwd.hpp>
@@ -37,6 +38,7 @@ public:
 
 	void
 	render(
+		sge::renderer::context::object &,
 		draw2d::vector2 const &translation
 	);
 private:

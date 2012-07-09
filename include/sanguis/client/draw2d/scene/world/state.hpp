@@ -10,6 +10,7 @@
 #include <sanguis/load/resource/textures_fwd.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/renderer/vertex_declaration_fwd.hpp>
+#include <sge/renderer/context/object_fwd.hpp>
 #include <sge/sprite/object_decl.hpp>
 #include <sge/sprite/buffers/single_decl.hpp>
 #include <sge/sprite/buffers/with_declaration_decl.hpp>
@@ -47,6 +48,7 @@ public:
 
 	void
 	draw(
+		sge::renderer::context::object &,
 		draw2d::vector2 const &translation
 	);
 private:

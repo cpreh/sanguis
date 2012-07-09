@@ -1,12 +1,14 @@
 #include <sanguis/args/options.hpp>
 #include <sanguis/net/port.hpp>
 #include <sge/console/output_line_limit.hpp>
-#include <sge/renderer/multi_sample_type.hpp>
+#include <sge/renderer/multi_samples_value.hpp>
 #include <sge/renderer/no_multi_sampling.hpp>
 #include <sge/renderer/screen_unit.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/program_options/options_description.hpp>
 #include <string>
 #include <fcppt/config/external_end.hpp>
+
 
 boost::program_options::options_description const
 sanguis::args::options()
@@ -66,7 +68,7 @@ sanguis::args::options()
 		(
 			"multisamples",
 			po::value<
-				sge::renderer::multi_sample_type::value_type
+				sge::renderer::multi_samples_value
 			>()->default_value(
 				sge::renderer::no_multi_sampling.get()
 			),

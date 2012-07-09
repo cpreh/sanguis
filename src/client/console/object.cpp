@@ -9,6 +9,7 @@
 #include <sge/console/callback/name.hpp>
 #include <sge/console/callback/parameters.hpp>
 #include <sge/font/text/from_fcppt_string.hpp>
+#include <sge/renderer/context/object_fwd.hpp>
 #include <fcppt/tr1/functional.hpp>
 
 sanguis::client::console::object::object(
@@ -81,12 +82,16 @@ sanguis::client::console::object::active() const
 }
 
 void
-sanguis::client::console::object::draw()
+sanguis::client::console::object::draw(
+	sge::renderer::context::object &_context
+)
 {
 	if(
 		this->active()
 	)
-		gfx_.render();
+		gfx_.render(
+			_context
+		);
 }
 
 sge::console::object &

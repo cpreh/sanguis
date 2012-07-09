@@ -3,18 +3,18 @@
 #include <sge/console/sprite_object.hpp>
 #include <sge/console/sprite_parameters.hpp>
 #include <sge/image/colors.hpp>
+#include <sge/renderer/device.hpp>
+#include <sge/renderer/screen_size.hpp>
 #include <sge/renderer/resource_flags_none.hpp>
+#include <sge/renderer/target/onscreen.hpp>
+#include <sge/renderer/target/viewport_size.hpp>
 #include <sge/renderer/texture/mipmap/off.hpp>
 #include <sge/renderer/texture/create_planar_from_path.hpp>
 #include <sge/renderer/texture/planar.hpp>
-#include <sge/renderer/device.hpp>
-#include <sge/renderer/onscreen_target.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/viewport/manager.hpp>
-#include <fcppt/math/box/object_impl.hpp>
-#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/ref.hpp>
@@ -119,8 +119,10 @@ make_sprite_dim(
 	sge::renderer::device &_device
 )
 {
-	sge::renderer::pixel_rect::dim const viewport_dim(
-		_device.onscreen_target().viewport().get().size()
+	sge::renderer::screen_size const viewport_dim(
+		sge::renderer::target::viewport_size(
+			_device.onscreen_target()
+		)
 	);
 
 	return

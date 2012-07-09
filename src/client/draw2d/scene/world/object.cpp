@@ -4,9 +4,11 @@
 #include <sge/renderer/vf/dynamic/make_format.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/vertex_declaration.hpp>
+#include <sge/renderer/context/object_fwd.hpp>
 #include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
+
 
 sanguis::client::draw2d::scene::world::object::object(
 	sge::renderer::device &_renderer,
@@ -32,6 +34,7 @@ sanguis::client::draw2d::scene::world::object::~object()
 
 void
 sanguis::client::draw2d::scene::world::object::draw(
+	sge::renderer::context::object &_render_context,
 	draw2d::vector2 const &_translation
 )
 {
@@ -39,6 +42,7 @@ sanguis::client::draw2d::scene::world::object::draw(
 		state_
 	)
 		state_->draw(
+			_render_context,
 			_translation
 		);
 }

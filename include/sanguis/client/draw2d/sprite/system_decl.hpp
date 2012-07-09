@@ -4,10 +4,12 @@
 #include <sanguis/client/draw2d/sprite/order.hpp>
 #include <sanguis/client/draw2d/sprite/system_fwd.hpp>
 #include <sge/renderer/device_fwd.hpp>
+#include <sge/renderer/context/object_fwd.hpp>
 #include <sge/sprite/intrusive/ordered/collection_decl.hpp>
 #include <sge/sprite/buffers/single_decl.hpp>
 #include <sge/sprite/buffers/with_declaration_decl.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -48,7 +50,8 @@ public:
 
 	void
 	render(
-		sprite::order
+		sge::renderer::context::object &,
+		sanguis::client::draw2d::sprite::order
 	);
 
 	sge::renderer::device &

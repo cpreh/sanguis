@@ -10,6 +10,7 @@
 #include <sanguis/load/resource/context.hpp>
 #include <sanguis/load/resource/textures.hpp>
 #include <sanguis/load/resource/texture_identifier.hpp>
+#include <sge/renderer/context/object_fwd.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/sprite/intrusive/connection.hpp>
@@ -84,6 +85,7 @@ sanguis::client::draw2d::scene::background::~background()
 
 void
 sanguis::client::draw2d::scene::background::render(
+	sge::renderer::context::object &_render_context,
 	draw2d::vector2 const &_translation
 )
 {
@@ -96,6 +98,7 @@ sanguis::client::draw2d::scene::background::render(
 	);
 
 	client_system_.render(
+		_render_context,
 		draw2d::z_ordering::background
 	);
 }
