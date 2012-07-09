@@ -4,6 +4,10 @@
 #include <sanguis/server/buffs/base_hook.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
+
 
 namespace sanguis
 {
@@ -12,9 +16,12 @@ namespace server
 namespace buffs
 {
 
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)
+
 class buff
 :
-	public base_hook
+	public sanguis::server::buffs::base_hook
 {
 	FCPPT_NONCOPYABLE(
 		buff
@@ -37,6 +44,8 @@ protected:
 private:
 	bool expired_;
 };
+
+FCPPT_PP_POP_WARNING
 
 }
 }

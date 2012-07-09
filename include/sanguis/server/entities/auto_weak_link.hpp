@@ -4,6 +4,10 @@
 #include <sanguis/server/entities/auto_weak_hook.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <fcppt/safe_bool.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
+
 
 namespace sanguis
 {
@@ -12,9 +16,12 @@ namespace server
 namespace entities
 {
 
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)
+
 class auto_weak_link
 :
-	public auto_weak_hook
+	public sanguis::server::entities::auto_weak_hook
 {
 	FCPPT_SAFE_BOOL(
 		auto_weak_link
@@ -60,6 +67,8 @@ private:
 
 	base *ref_;
 };
+
+FCPPT_PP_POP_WARNING
 
 }
 }

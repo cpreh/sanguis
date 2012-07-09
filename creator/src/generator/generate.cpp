@@ -32,7 +32,9 @@ generator_map const generators(
 		generator_map
 	>(
 		std::make_pair(
-			FCPPT_TEXT("car_park"),
+			sanguis::creator::generator::name(
+				FCPPT_TEXT("car_park")
+			),
 			&sanguis::creator::generator::car_park
 		)
 	)
