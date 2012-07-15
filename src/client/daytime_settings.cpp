@@ -11,6 +11,7 @@
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/extract_from_string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/fusion/adapted/struct/adapt_struct.hpp>
 #include <boost/fusion/algorithm/iteration/for_each.hpp>
