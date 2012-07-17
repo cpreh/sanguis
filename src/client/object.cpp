@@ -15,6 +15,7 @@
 #include <sge/font/metrics.hpp>
 #include <sge/font/size_type.hpp>
 #include <sge/font/system.hpp>
+#include <sge/font/text/set_matrices.hpp>
 #include <sge/image/colors.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/systems/instance.hpp>
@@ -63,7 +64,10 @@ sanguis::client::object::object(
 	),
 	font_drawer_(
 		sys_.renderer(),
-		sge::image::colors::white()
+		sge::image::colors::white(),
+		sge::font::text::set_matrices(
+			true
+		)
 	),
 	console_(
 		FCPPT_TEXT('/')
