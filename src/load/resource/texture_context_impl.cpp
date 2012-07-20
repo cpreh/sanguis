@@ -2,7 +2,7 @@
 #include <sge/renderer/texture/create_planar_from_view.hpp>
 #include <sge/renderer/texture/planar.hpp>
 #include <sge/renderer/texture/mipmap/off.hpp>
-#include <sge/renderer/resource_flags_none.hpp>
+#include <sge/renderer/resource_flags_field.hpp>
 #include <sge/image2d/file.hpp>
 #include <sge/image2d/system.hpp>
 #include <sge/image2d/view/const_object.hpp>
@@ -63,7 +63,7 @@ sanguis::load::resource::texture_context_impl::update()
 					rend_,
 					future_.get()->view(),
 					sge::renderer::texture::mipmap::off(),
-					sge::renderer::resource_flags::none
+					sge::renderer::resource_flags_field::null()
 				)
 			);
 

@@ -9,7 +9,6 @@
 #include <sge/texture/no_fragmented.hpp>
 #include <sge/texture/part_raw.hpp>
 #include <sge/renderer/texture/mipmap/off.hpp>
-#include <sge/renderer/resource_flags_none.hpp>
 #include <sge/image2d/file.hpp>
 #include <sge/image2d/system.hpp>
 #include <fcppt/log/headers.hpp>

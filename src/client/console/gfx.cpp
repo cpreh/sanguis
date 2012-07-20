@@ -5,7 +5,7 @@
 #include <sge/image/colors.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/screen_size.hpp>
-#include <sge/renderer/resource_flags_none.hpp>
+#include <sge/renderer/resource_flags_field.hpp>
 #include <sge/renderer/target/onscreen.hpp>
 #include <sge/renderer/target/viewport_size.hpp>
 #include <sge/renderer/texture/mipmap/off.hpp>
@@ -49,7 +49,7 @@ sanguis::client::console::gfx::gfx(
 			renderer_,
 			_image_loader,
 			sge::renderer::texture::mipmap::off(),
-			sge::renderer::resource_flags::none
+			sge::renderer::resource_flags_field::null()
 		)
 	),
 	impl_(
