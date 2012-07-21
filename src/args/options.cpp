@@ -1,8 +1,7 @@
 #include <sanguis/args/options.hpp>
 #include <sanguis/net/port.hpp>
 #include <sge/console/output_line_limit.hpp>
-#include <sge/renderer/multi_samples_value.hpp>
-#include <sge/renderer/no_multi_sampling.hpp>
+#include <sge/renderer/pixel_format/multi_samples_value.hpp>
 #include <sge/renderer/screen_unit.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/options_description.hpp>
@@ -68,9 +67,9 @@ sanguis::args::options()
 		(
 			"multisamples",
 			po::value<
-				sge::renderer::multi_samples_value
+				sge::renderer::pixel_format::multi_samples_value
 			>()->default_value(
-				sge::renderer::no_multi_sampling.get()
+				0u
 			),
 			"sets the number of samples done for anti aliasing"
 		)

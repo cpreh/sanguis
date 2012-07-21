@@ -1,12 +1,10 @@
-#include <sanguis/args/sge_options.hpp>
+#include <sanguis/args/display_mode.hpp>
 #include <sanguis/args/multi_sampling.hpp>
-#include <sanguis/args/screen_mode.hpp>
+#include <sanguis/args/sge_options.hpp>
 #include <sge/media/extension.hpp>
 #include <sge/media/extension_set.hpp>
 #include <sge/media/optional_extension_set.hpp>
-#include <sge/renderer/multi_samples.hpp>
-#include <sge/renderer/parameters.hpp>
-#include <sge/renderer/refresh_rate_dont_care.hpp>
+#include <sge/renderer/parameters/object.hpp>
 #include <sge/systems/charconv.hpp>
 #include <sge/systems/cursor_option_field.hpp>
 #include <sge/systems/font.hpp>
@@ -16,7 +14,6 @@
 #include <sge/systems/input_helper_field.hpp>
 #include <sge/systems/list.hpp>
 #include <sge/systems/renderer.hpp>
-#include <sge/renderer/refresh_rate_dont_care.hpp>
 #include <sge/systems/window.hpp>
 #include <sge/viewport/fill_on_resize.hpp>
 #include <sge/window/dim.hpp>
@@ -51,16 +48,18 @@ sanguis::args::sge_options(
 		)
 		(
 			sge::systems::renderer(
-				sge::renderer::parameters(
-					args::screen_mode(
-						_vm
-					),
-					sge::renderer::depth_stencil_buffer::d24s8,
-					sge::renderer::vsync::on,
-					sge::renderer::multi_samples(
-						args::multi_sampling(
+				sge::renderer::parameters::object(
+					sge::renderer::pixel_format::object(
+						sge::renderer::pixel_format::color::depth32,
+						sge::renderer::pixel_format::depth_stencil::d24s8,
+						sanguis::args::multi_sampling(
 							_vm
-						)
+						),
+						sge::renderer::pixel_format::srgb::no
+					),
+					sge::renderer::parameters::vsync::on,
+					sanguis::args::display_mode(
+						_vm
 					)
 				),
 				sge::viewport::fill_on_resize()

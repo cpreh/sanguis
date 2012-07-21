@@ -4,13 +4,13 @@ SET(
 	include/sanguis/animation_type.hpp
 	include/sanguis/aoe_projectile_type.hpp
 	include/sanguis/apply_log_level.hpp
+	include/sanguis/args/display_mode.hpp
 	include/sanguis/args/log_level.hpp
 	include/sanguis/args/multi_sampling.hpp
 	include/sanguis/args/optional_resolution.hpp
 	include/sanguis/args/options.hpp
 	include/sanguis/args/parse.hpp
 	include/sanguis/args/resolution.hpp
-	include/sanguis/args/screen_mode.hpp
 	include/sanguis/args/server_only.hpp
 	include/sanguis/args/server_port.hpp
 	include/sanguis/args/sge_options.hpp
@@ -982,12 +982,12 @@ SET(
 	include/sanguis/weapon_type.hpp
 	include/sanguis/world_id.hpp
 	src/apply_log_level.cpp
+	src/args/display_mode.cpp
 	src/args/log_level.cpp
 	src/args/multi_sampling.cpp
 	src/args/options.cpp
 	src/args/parse.cpp
 	src/args/resolution.cpp
-	src/args/screen_mode.cpp
 	src/args/server_only.cpp
 	src/args/server_port.cpp
 	src/args/sge_options.cpp
