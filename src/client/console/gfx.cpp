@@ -13,7 +13,7 @@
 #include <sge/renderer/texture/planar.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/parameters_impl.hpp>
-#include <sge/texture/part_raw.hpp>
+#include <sge/texture/part_raw_ref.hpp>
 #include <sge/viewport/manager.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_shared_ptr.hpp>
@@ -62,7 +62,7 @@ sanguis::client::console::gfx::gfx(
 			sge::console::sprite_parameters()
 			.texture(
 				fcppt::make_shared_ptr<
-					sge::texture::part_raw
+					sge::texture::part_raw_ref
 				>(
 					fcppt::ref(
 						*texture_

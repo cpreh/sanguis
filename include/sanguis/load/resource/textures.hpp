@@ -5,7 +5,6 @@
 #include <sanguis/load/resource/texture_context_fwd.hpp>
 #include <sanguis/load/resource/texture_context.hpp>
 #include <sge/texture/const_part_shared_ptr.hpp>
-#include <sge/texture/manager.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/image2d/system_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -77,8 +76,6 @@ private:
 	> texture_name_map;
 
 	sge::renderer::device &renderer_;
-
-	mutable sge::texture::manager texture_manager_;
 
 	sge::image2d::system &image_loader_;
 

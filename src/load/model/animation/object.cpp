@@ -14,7 +14,6 @@
 #include <sge/parse/json/member_map.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
-#include <sge/texture/part_raw.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/math/vector/dim.hpp>

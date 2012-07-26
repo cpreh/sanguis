@@ -6,7 +6,7 @@
 #include <sanguis/load/resource/texture_context_impl.hpp>
 #include <sanguis/exception.hpp>
 #include <sge/renderer/texture/planar.hpp>
-#include <sge/texture/part_raw.hpp>
+#include <sge/texture/part_raw_ref.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
@@ -73,7 +73,7 @@ sanguis::load::model::animation::context::update()
 				texture,
 				sge::texture::const_part_shared_ptr(
 					fcppt::make_shared_ptr<
-						sge::texture::part_raw
+						sge::texture::part_raw_ref
 					>(
 						fcppt::ref(
 							*texture

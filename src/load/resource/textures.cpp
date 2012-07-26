@@ -5,18 +5,20 @@
 #include <sanguis/load/log.hpp>
 #include <sanguis/exception.hpp>
 #include <sanguis/media_path.hpp>
-#include <sge/texture/add_image.hpp>
-#include <sge/texture/no_fragmented.hpp>
-#include <sge/texture/part_raw.hpp>
-#include <sge/renderer/texture/mipmap/off.hpp>
 #include <sge/image2d/file.hpp>
 #include <sge/image2d/system.hpp>
+#include <sge/renderer/resource_flags_field.hpp>
+#include <sge/renderer/texture/create_planar_from_path.hpp>
+#include <sge/renderer/texture/planar.hpp>
+#include <sge/renderer/texture/mipmap/off.hpp>
+#include <sge/texture/part_raw_ptr.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/filesystem/extension.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/io/ifstream.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_shared_ptr.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
@@ -24,8 +26,6 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
-#include <boost/spirit/home/phoenix/object/construct.hpp>
-#include <boost/spirit/home/phoenix/object/new.hpp>
 #include <fcppt/config/external_end.hpp>
 
 sge::texture::const_part_shared_ptr const
@@ -71,21 +71,6 @@ sanguis::load::resource::textures::textures(
 :
 	renderer_(
 		_renderer
-	),
-	texture_manager_(
-		boost::phoenix::construct<
-			sge::texture::fragmented_unique_ptr
-		>(
-			boost::phoenix::new_<
-				sge::texture::no_fragmented
-			>(
-				fcppt::ref(
-					_renderer
-				),
-				sge::image::color::format::rgba8,
-				sge::renderer::texture::mipmap::off()
-			)
-		)
 	),
 	image_loader_(
 		_image_loader
@@ -245,10 +230,15 @@ sanguis::load::resource::textures::do_load_inner(
 {
 	return
 		sge::texture::const_part_shared_ptr(
-			sge::texture::add_image(
-				texture_manager_,
-				*image_loader_.load(
-					_path
+			fcppt::make_unique_ptr<
+				sge::texture::part_raw_ptr
+			>(
+				sge::renderer::texture::create_planar_from_path(
+					_path,
+					renderer_,
+					image_loader_,
+					sge::renderer::texture::mipmap::off(),
+					sge::renderer::resource_flags_field::null()
 				)
 			)
 		);
