@@ -91,7 +91,8 @@ FIND_PACKAGE(
 	config
 	console
 	core
-	fonttext
+	font
+	fontdraw
 	image
 	image2d
 	input

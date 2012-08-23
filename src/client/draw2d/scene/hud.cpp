@@ -1,29 +1,31 @@
 #include <sanguis/client/draw2d/scene/hud.hpp>
-#include <sge/font/text/part.hpp>
-#include <sge/font/text/draw.hpp>
-#include <sge/font/text/flags_none.hpp>
-#include <sge/font/text/from_fcppt_string.hpp>
+#include <sge/font/align_h.hpp>
+#include <sge/font/from_fcppt_string.hpp>
+#include <sge/font/object_fwd.hpp>
+#include <sge/font/text_parameters.hpp>
+#include <sge/font/vector.hpp>
+#include <sge/font/draw/simple.hpp>
+#include <sge/image/colors.hpp>
+#include <sge/image/color/any/object.hpp>
+#include <sge/renderer/device_fwd.hpp>
 #include <sge/renderer/context/object_fwd.hpp>
 #include <fcppt/container/bitfield/object_impl.hpp>
 #include <fcppt/io/ostringstream.hpp>
-#include <fcppt/math/box/object_impl.hpp>
-#include <fcppt/math/dim/object_impl.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/time/output_tm.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/text.hpp>
 
 sanguis::client::draw2d::scene::hud::hud(
-	sge::font::metrics &_font_metrics,
-	sge::font::text::drawer &_font_drawer,
+	sge::font::object &_font_object,
+	sge::renderer::device &_renderer,
 	std::tm const &_time
 )
 :
-	font_metrics_(
-		_font_metrics
+	font_object_(
+		_font_object
 	),
-	font_drawer_(
-		_font_drawer
+	renderer_(
+		_renderer
 	),
 	experience_(
 		0u
@@ -76,11 +78,11 @@ sanguis::client::draw2d::scene::hud::draw(
 		time_
 	);
 
-	sge::font::text::draw(
+	sge::font::draw::simple(
+		renderer_,
 		_render_context,
-		font_metrics_,
-		font_drawer_,
-		sge::font::text::from_fcppt_string(
+		font_object_,
+		sge::font::from_fcppt_string(
 			(
 				fcppt::format(
 					FCPPT_TEXT("exp: %1%, level: %2%, fps: %3%")
@@ -93,12 +95,13 @@ sanguis::client::draw2d::scene::hud::draw(
 			FCPPT_TEXT("\ntime: ")
 			+ time_stream.str()
 		),
-		sge::font::rect(
-			sge::font::rect::vector::null(),
-			sge::font::rect::dim(300, 100) // FIXME
+		sge::font::text_parameters(
+			sge::font::align_h::left
+		)
+		.max_width(
+			300 // FIXME
 		),
-		sge::font::text::align_h::left,
-		sge::font::text::align_v::top,
-		sge::font::text::flags::none
+		sge::font::vector::null(),
+		sge::image::colors::white()
 	);
 }

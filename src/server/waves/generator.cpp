@@ -6,9 +6,9 @@
 #include <sanguis/server/waves/convert_enemy_name.hpp>
 #include <sanguis/server/console.hpp>
 #include <sanguis/server/player_id_from_args.hpp>
-#include <sge/font/text/to_fcppt_string.hpp>
-#include <sge/font/text/lit.hpp>
-#include <sge/font/text/string.hpp>
+#include <sge/font/lit.hpp>
+#include <sge/font/string.hpp>
+#include <sge/font/to_fcppt_string.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/cref.hpp>
@@ -99,7 +99,7 @@ try
 {
 	if(
 		_args.size() == 3u
-		&& _args[1] == SGE_FONT_TEXT_LIT("all")
+		&& _args[1] == SGE_FONT_LIT("all")
 	)
 	{
 		spawn_all();
@@ -121,7 +121,7 @@ try
 		return;
 	}
 
-	sge::font::text::string const action(
+	sge::font::string const action(
 		_args[1]
 	);
 
@@ -138,7 +138,7 @@ try
 	);
 
 	if(
-		action == SGE_FONT_TEXT_LIT("wave")
+		action == SGE_FONT_LIT("wave")
 	)
 		for(
 			unsigned i = 0;
@@ -150,13 +150,13 @@ try
 				waves::make(
 					diff_clock_,
 					random_generator_,
-					sge::font::text::to_fcppt_string(
+					sge::font::to_fcppt_string(
 						_args[2]
 					)
 				)
 			);
 	else if(
-		action == SGE_FONT_TEXT_LIT("enemy")
+		action == SGE_FONT_LIT("enemy")
 	)
 		for(
 			unsigned i = 0;
@@ -175,7 +175,7 @@ try
 						random_generator_
 					),
 					convert_enemy_name(
-						sge::font::text::to_fcppt_string(
+						sge::font::to_fcppt_string(
 							_args[2]
 						)
 					)

@@ -8,7 +8,7 @@
 #include <sge/console/object.hpp>
 #include <sge/console/callback/name.hpp>
 #include <sge/console/callback/parameters.hpp>
-#include <sge/font/text/from_fcppt_string.hpp>
+#include <sge/font/from_fcppt_string.hpp>
 #include <sge/renderer/context/object_fwd.hpp>
 #include <fcppt/tr1/functional.hpp>
 
@@ -50,13 +50,13 @@ sanguis::client::console::object::register_server_command(
 					std::tr1::placeholders::_1
 				),
 				sge::console::callback::name(
-					sge::font::text::from_fcppt_string(
+					sge::font::from_fcppt_string(
 						_name
 					)
 				)
 			)
 			.short_description(
-				sge::font::text::from_fcppt_string(
+				sge::font::from_fcppt_string(
 					_description
 				)
 			)

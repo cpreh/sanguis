@@ -14,8 +14,7 @@
 #include <sanguis/main_object.hpp>
 #include <sanguis/timer.hpp>
 #include <sge/console/object.hpp>
-#include <sge/font/text/drawer_3d.hpp>
-#include <sge/font/metrics_scoped_ptr.hpp>
+#include <sge/font/object_scoped_ptr.hpp>
 #include <sge/systems/instance.hpp>
 #include <awl/main/exit_code.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -71,9 +70,7 @@ private:
 
 	sge::systems::instance const sys_;
 
-	sge::font::metrics_scoped_ptr const font_metrics_;
-
-	sge::font::text::drawer_3d font_drawer_;
+	sge::font::object_scoped_ptr const font_object_;
 
 	sge::console::object console_;
 

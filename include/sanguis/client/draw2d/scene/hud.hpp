@@ -4,8 +4,8 @@
 #include <sanguis/client/draw2d/scene/hud_fwd.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/level.hpp>
-#include <sge/font/metrics_fwd.hpp>
-#include <sge/font/text/drawer_fwd.hpp>
+#include <sge/font/object_fwd.hpp>
+#include <sge/renderer/device_fwd.hpp>
 #include <sge/renderer/context/object_fwd.hpp>
 #include <sge/timer/frames_counter.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -29,8 +29,8 @@ class hud
 	);
 public:
 	hud(
-		sge::font::metrics &,
-		sge::font::text::drawer &,
+		sge::font::object &,
+		sge::renderer::device &,
 		std::tm const &
 	);
 
@@ -54,9 +54,9 @@ public:
 		sge::renderer::context::object &
 	);
 private:
-	sge::font::metrics &font_metrics_;
+	sge::font::object &font_object_;
 
-	sge::font::text::drawer &font_drawer_;
+	sge::renderer::device &renderer_;
 
 	client::exp experience_;
 

@@ -2,8 +2,8 @@
 #include <sge/console/object.hpp>
 #include <sge/console/callback/name.hpp>
 #include <sge/console/callback/parameters.hpp>
-#include <sge/font/text/lit.hpp>
-#include <sge/font/text/to_fcppt_string.hpp>
+#include <sge/font/lit.hpp>
+#include <sge/font/to_fcppt_string.hpp>
 #include <fcppt/io/istringstream.hpp>
 #include <fcppt/time/gmtime.hpp>
 #include <fcppt/time/parse_date.hpp>
@@ -93,11 +93,11 @@ sanguis::client::daytime_settings::daytime_settings(
 					std::tr1::placeholders::_2
 				),
 				sge::console::callback::name(
-					SGE_FONT_TEXT_LIT("day")
+					SGE_FONT_LIT("day")
 				)
 			)
 			.short_description(
-				SGE_FONT_TEXT_LIT("Sets the current day to a fixed value.")
+				SGE_FONT_LIT("Sets the current day to a fixed value.")
 			)
 		)
 	),
@@ -111,11 +111,11 @@ sanguis::client::daytime_settings::daytime_settings(
 					std::tr1::placeholders::_2
 				),
 				sge::console::callback::name(
-					SGE_FONT_TEXT_LIT("time")
+					SGE_FONT_LIT("time")
 				)
 			)
 			.short_description(
-				SGE_FONT_TEXT_LIT("Sets the current time to a fixed value.")
+				SGE_FONT_LIT("Sets the current time to a fixed value.")
 			)
 		)
 	),
@@ -129,11 +129,11 @@ sanguis::client::daytime_settings::daytime_settings(
 					std::tr1::placeholders::_2
 				),
 				sge::console::callback::name(
-					SGE_FONT_TEXT_LIT("time_speed")
+					SGE_FONT_LIT("time_speed")
 				)
 			)
 			.short_description(
-				SGE_FONT_TEXT_LIT("Sets the current time speedup. Use a value of 1 to reset this.")
+				SGE_FONT_LIT("Sets the current time speedup. Use a value of 1 to reset this.")
 			)
 		)
 	),
@@ -147,11 +147,11 @@ sanguis::client::daytime_settings::daytime_settings(
 					std::tr1::placeholders::_2
 				),
 				sge::console::callback::name(
-					SGE_FONT_TEXT_LIT("reset_day")
+					SGE_FONT_LIT("reset_day")
 				)
 			)
 			.short_description(
-				SGE_FONT_TEXT_LIT("Resets to the current day.")
+				SGE_FONT_LIT("Resets to the current day.")
 			)
 		)
 	),
@@ -165,11 +165,11 @@ sanguis::client::daytime_settings::daytime_settings(
 					std::tr1::placeholders::_2
 				),
 				sge::console::callback::name(
-					SGE_FONT_TEXT_LIT("reset_time")
+					SGE_FONT_LIT("reset_time")
 				)
 			)
 			.short_description(
-				SGE_FONT_TEXT_LIT("Resets to the current time.")
+				SGE_FONT_LIT("Resets to the current time.")
 			)
 		)
 	)
@@ -239,14 +239,14 @@ sanguis::client::daytime_settings::change_day(
 	)
 	{
 		_object.emit_error(
-			SGE_FONT_TEXT_LIT("The date command needs one argument!")
+			SGE_FONT_LIT("The date command needs one argument!")
 		);
 
 		return;
 	}
 
 	fcppt::io::istringstream iss(
-		sge::font::text::to_fcppt_string(
+		sge::font::to_fcppt_string(
 			_args[1]
 		)
 	);
@@ -258,7 +258,7 @@ sanguis::client::daytime_settings::change_day(
 		)
 	)
 		_object.emit_error(
-			SGE_FONT_TEXT_LIT("Day parsing failed.")
+			SGE_FONT_LIT("Day parsing failed.")
 		);
 }
 
@@ -273,14 +273,14 @@ sanguis::client::daytime_settings::change_time(
 	)
 	{
 		_object.emit_error(
-			SGE_FONT_TEXT_LIT("The time command needs one argument!")
+			SGE_FONT_LIT("The time command needs one argument!")
 		);
 
 		return;
 	}
 
 	fcppt::io::istringstream iss(
-		sge::font::text::to_fcppt_string(
+		sge::font::to_fcppt_string(
 			_args[1]
 		)
 	);
@@ -292,7 +292,7 @@ sanguis::client::daytime_settings::change_time(
 		)
 	)
 		_object.emit_error(
-			SGE_FONT_TEXT_LIT("Time parsing failed.")
+			SGE_FONT_LIT("Time parsing failed.")
 		);
 }
 
@@ -307,7 +307,7 @@ sanguis::client::daytime_settings::change_time_speed(
 	)
 	{
 		_object.emit_error(
-			SGE_FONT_TEXT_LIT("The time_speed command needs one argument!")
+			SGE_FONT_LIT("The time_speed command needs one argument!")
 		);
 
 		return;
@@ -331,7 +331,7 @@ sanguis::client::daytime_settings::change_time_speed(
 	)
 	{
 		_object.emit_error(
-			SGE_FONT_TEXT_LIT("You need to pass an int argument to the time_speed command: ")
+			SGE_FONT_LIT("You need to pass an int argument to the time_speed command: ")
 		);
 
 		return;
@@ -346,7 +346,7 @@ sanguis::client::daytime_settings::change_time_speed(
 	)
 	{
 		_object.emit_error(
-			SGE_FONT_TEXT_LIT("speedup needs to be > 0")
+			SGE_FONT_LIT("speedup needs to be > 0")
 		);
 
 		return;
@@ -368,7 +368,7 @@ sanguis::client::daytime_settings::reset_day(
 	)
 	{
 		_object.emit_error(
-			SGE_FONT_TEXT_LIT("Dangling arguments for reset_day!")
+			SGE_FONT_LIT("Dangling arguments for reset_day!")
 		);
 
 		return;
@@ -392,7 +392,7 @@ sanguis::client::daytime_settings::reset_time(
 	)
 	{
 		_object.emit_error(
-			SGE_FONT_TEXT_LIT("Dangling arguments for reset_time!")
+			SGE_FONT_LIT("Dangling arguments for reset_time!")
 		);
 
 		return;

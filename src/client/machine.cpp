@@ -11,6 +11,7 @@
 #include <sanguis/net/serialize_to_circular_buffer.hpp>
 #include <sge/charconv/system_fwd.hpp>
 #include <sge/console/gfx.hpp>
+#include <sge/font/object_fwd.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/context/scoped.hpp>
 #include <sge/renderer/target/onscreen.hpp>
@@ -31,8 +32,7 @@ sanguis::client::machine::machine(
 	server_callback const &_server_callback,
 	load::context const &_resources,
 	sge::window::system &_window_system,
-	sge::font::metrics &_font_metrics,
-	sge::font::text::drawer &_font_drawer,
+	sge::font::object &_font_object,
 	sge::console::gfx &_console_gfx,
 	sge::input::keyboard::device &_keyboard,
 	client::cursor::object &_cursor,
@@ -81,9 +81,12 @@ sanguis::client::machine::machine(
 			)
 		)
 	),
-	window_system_(_window_system),
-	font_metrics_(_font_metrics),
-	font_drawer_(_font_drawer),
+	window_system_(
+		_window_system
+	),
+	font_object_(
+		_font_object
+	),
 	console_gfx_(_console_gfx),
 	server_callback_(_server_callback),
 	cursor_(
@@ -231,16 +234,10 @@ sanguis::client::machine::keyboard() const
 	return keyboard_;
 }
 
-sge::font::metrics &
-sanguis::client::machine::font_metrics() const
+sge::font::object &
+sanguis::client::machine::font_object() const
 {
-	return font_metrics_;
-}
-
-sge::font::text::drawer &
-sanguis::client::machine::font_drawer() const
-{
-	return font_drawer_;
+	return font_object_;
 }
 
 sge::console::gfx &

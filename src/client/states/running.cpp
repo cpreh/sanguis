@@ -17,7 +17,7 @@
 #include <sanguis/load/context.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <sge/console/object.hpp>
-#include <sge/font/text/from_fcppt_string.hpp>
+#include <sge/font/from_fcppt_string.hpp>
 #include <sge/renderer/device.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/log/output.hpp>
@@ -75,10 +75,7 @@ sanguis::client::states::running::running(
 				context<machine>().charconv_system()
 			),
 			fcppt::ref(
-				context<machine>().font_metrics()
-			),
-			fcppt::ref(
-				context<machine>().font_drawer()
+				context<machine>().font_object()
 			),
 			daytime_settings_->current_time(),
 			fcppt::ref(
@@ -183,7 +180,7 @@ sanguis::client::states::running::operator()(
 )
 {
 	console_->sge_console().emit_message(
-		sge::font::text::from_fcppt_string(
+		sge::font::from_fcppt_string(
 			sge::charconv::utf8_string_to_fcppt(
 				context<machine>().charconv_system(),
 				_message.get<

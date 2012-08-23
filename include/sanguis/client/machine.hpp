@@ -17,8 +17,7 @@
 #include <sanguis/io_service_fwd.hpp>
 #include <sge/charconv/system_fwd.hpp>
 #include <sge/console/gfx_fwd.hpp>
-#include <sge/font/metrics_fwd.hpp>
-#include <sge/font/text/drawer_fwd.hpp>
+#include <sge/font/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/image2d/system_fwd.hpp>
 #include <sge/renderer/device_fwd.hpp>
@@ -54,8 +53,7 @@ public:
 		client::server_callback const &,
 		load::context const &,
 		sge::window::system &,
-		sge::font::metrics &,
-		sge::font::text::drawer &,
+		sge::font::object &,
 		sge::console::gfx &,
 		sge::input::keyboard::device &,
 		client::cursor::object &,
@@ -113,11 +111,8 @@ public:
 	sge::input::keyboard::device &
 	keyboard() const;
 
-	sge::font::metrics &
-	font_metrics() const;
-
-	sge::font::text::drawer &
-	font_drawer() const;
+	sge::font::object &
+	font_object() const;
 
 	sge::console::gfx &
 	console_gfx();
@@ -176,9 +171,7 @@ private:
 
 	sge::window::system &window_system_;
 
-	sge::font::metrics &font_metrics_;
-
-	sge::font::text::drawer &font_drawer_;
+	sge::font::object &font_object_;
 
 	sge::console::gfx &console_gfx_;
 

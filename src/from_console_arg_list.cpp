@@ -1,5 +1,5 @@
 #include <sanguis/from_console_arg_list.hpp>
-#include <sge/font/text/to_fcppt_string.hpp>
+#include <sge/font/to_fcppt_string.hpp>
 #include <fcppt/algorithm/map.hpp>
 
 sanguis::string_vector const
@@ -12,6 +12,6 @@ sanguis::from_console_arg_list(
 			sanguis::string_vector
 		>(
 			_list,
-			&sge::font::text::to_fcppt_string
+			&sge::font::to_fcppt_string
 		);
 }

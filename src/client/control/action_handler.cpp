@@ -19,7 +19,7 @@
 #include <sge/console/object.hpp>
 #include <sge/console/callback/name.hpp>
 #include <sge/console/callback/parameters.hpp>
-#include <sge/font/text/lit.hpp>
+#include <sge/font/lit.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/function/object.hpp>
@@ -75,11 +75,11 @@ sanguis::client::control::action_handler::action_handler(
 					std::tr1::placeholders::_2
 				),
 				sge::console::callback::name(
-					SGE_FONT_TEXT_LIT("kill")
+					SGE_FONT_LIT("kill")
 				)
 			)
 			.short_description(
-				SGE_FONT_TEXT_LIT("Commit suicide")
+				SGE_FONT_LIT("Commit suicide")
 			)
 		)
 	),
@@ -94,11 +94,11 @@ sanguis::client::control::action_handler::action_handler(
 					std::tr1::placeholders::_2
 				),
 				sge::console::callback::name(
-					SGE_FONT_TEXT_LIT("impulse")
+					SGE_FONT_LIT("impulse")
 				)
 			)
 			.short_description(
-				SGE_FONT_TEXT_LIT("Get all weapons")
+				SGE_FONT_LIT("Get all weapons")
 			)
 		)
 	),
@@ -113,11 +113,11 @@ sanguis::client::control::action_handler::action_handler(
 					std::tr1::placeholders::_2
 				),
 				sge::console::callback::name(
-					SGE_FONT_TEXT_LIT("exp")
+					SGE_FONT_LIT("exp")
 				)
 			)
 			.short_description(
-				SGE_FONT_TEXT_LIT("Get a lot of exp")
+				SGE_FONT_LIT("Get a lot of exp")
 			)
 		)
 	)

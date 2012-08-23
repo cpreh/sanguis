@@ -30,8 +30,7 @@
 #include <sanguis/entity_id.hpp>
 #include <sanguis/random_generator.hpp>
 #include <sge/charconv/system_fwd.hpp>
-#include <sge/font/metrics_fwd.hpp>
-#include <sge/font/text/drawer_fwd.hpp>
+#include <sge/font/object_fwd.hpp>
 #include <sge/renderer/device_fwd.hpp>
 #include <sge/renderer/screen_size_fwd.hpp>
 #include <sge/renderer/context/object_fwd.hpp>
@@ -68,8 +67,7 @@ public:
 		load::context const &,
 		sge::renderer::device &,
 		sge::charconv::system &,
-		sge::font::metrics &,
-		sge::font::text::drawer &,
+		sge::font::object &,
 		std::tm const &initial_time,
 		sge::viewport::manager &
 	);
@@ -186,7 +184,7 @@ private:
 
 	load::context const &resources_;
 
-	sge::renderer::device &rend_;
+	sge::renderer::device &renderer_;
 
 	sprite::normal::system normal_system_;
 

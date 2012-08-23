@@ -2,6 +2,7 @@
 #include <sanguis/media_path.hpp>
 #include <sge/console/sprite_object.hpp>
 #include <sge/console/sprite_parameters.hpp>
+#include <sge/font/object_fwd.hpp>
 #include <sge/image/colors.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/renderer/screen_size.hpp>
@@ -15,9 +16,10 @@
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/texture/part_raw_ref.hpp>
 #include <sge/viewport/manager.hpp>
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/ref.hpp>
+#include <fcppt/tr1/functional.hpp>
+#include <fcppt/signal/auto_connection.hpp>
 
 namespace
 {
@@ -32,7 +34,7 @@ make_sprite_dim(
 sanguis::client::console::gfx::gfx(
 	sge::console::object &_console,
 	sge::renderer::device &_renderer,
-	sge::font::metrics &_font_metrics,
+	sge::font::object &_font_object,
 	sge::image2d::system &_image_loader,
 	sge::input::keyboard::device &_keyboard,
 	sge::viewport::manager &_viewport_manager,
@@ -56,7 +58,7 @@ sanguis::client::console::gfx::gfx(
 		_console,
 		renderer_,
 		sge::image::colors::white(),
-		_font_metrics,
+		_font_object,
 		_keyboard,
 		sge::console::sprite_object(
 			sge::console::sprite_parameters()

@@ -24,6 +24,7 @@
 #include <sanguis/random_seed.hpp>
 #include <sanguis/update_diff_clock.hpp>
 #include <sge/charconv/system_fwd.hpp>
+#include <sge/font/object_fwd.hpp>
 #include <sge/image/colors.hpp>
 #include <sge/renderer/ambient_color.hpp>
 #include <sge/renderer/device.hpp>
@@ -63,10 +64,9 @@
 
 sanguis::client::draw2d::scene::object::object(
 	load::context const &_resources,
-	sge::renderer::device &_rend,
+	sge::renderer::device &_renderer,
 	sge::charconv::system &_charconv_system,
-	sge::font::metrics &_font_metrics,
-	sge::font::text::drawer &_font_drawer,
+	sge::font::object &_font_object,
 	std::tm const &_current_time,
 	sge::viewport::manager &_viewport_manager
 )
@@ -78,30 +78,30 @@ sanguis::client::draw2d::scene::object::object(
 	resources_(
 		_resources
 	),
-	rend_(
-		_rend
+	renderer_(
+		_renderer
 	),
 	normal_system_(
-		rend_
+		renderer_
 	),
 	colored_system_(
-		rend_
+		renderer_
 	),
 	client_system_(
-		rend_
+		renderer_
 	),
 	particle_system_(
-		rend_
+		renderer_
 	),
 	hud_(
 		fcppt::make_unique_ptr<
 			scene::hud
 		>(
 			fcppt::ref(
-				_font_metrics
+				_font_object
 			),
 			fcppt::ref(
-				_font_drawer
+				renderer_
 			),
 			_current_time
 		)
@@ -111,7 +111,7 @@ sanguis::client::draw2d::scene::object::object(
 			scene::world::object
 		>(
 			fcppt::ref(
-				_rend
+				renderer_
 			),
 			fcppt::cref(
 				_resources.resources().textures()
@@ -655,12 +655,12 @@ sanguis::client::draw2d::scene::object::screen_size() const
 {
 	return
 		sanguis::client::draw2d::scene::background_dim(
-			rend_
+			renderer_
 		);
 }
 
 sge::renderer::target::viewport const
 sanguis::client::draw2d::scene::object::viewport() const
 {
-	return rend_.onscreen_target().viewport();
+	return renderer_.onscreen_target().viewport();
 }

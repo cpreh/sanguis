@@ -12,11 +12,9 @@
 #include <sanguis/server/object.hpp>
 #include <sanguis/duration.hpp>
 #include <sge/config/media_path.hpp>
-#include <sge/font/metrics.hpp>
-#include <sge/font/size_type.hpp>
+#include <sge/font/object.hpp>
+#include <sge/font/parameters.hpp>
 #include <sge/font/system.hpp>
-#include <sge/font/text/set_matrices.hpp>
-#include <sge/image/colors.hpp>
 #include <sge/renderer/device.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/timer/elapsed_and_reset.hpp>
@@ -54,19 +52,9 @@ sanguis::client::object::object(
 			_variables_map
 		)
 	),
-	font_metrics_(
+	font_object_(
 		sys_.font_system().create_font(
-			sge::config::media_path()
-			/ FCPPT_TEXT("fonts")
-			/ FCPPT_TEXT("default.ttf"),
-			static_cast<sge::font::size_type>(15)
-		)
-	),
-	font_drawer_(
-		sys_.renderer(),
-		sge::image::colors::white(),
-		sge::font::text::set_matrices(
-			true
+			sge::font::parameters()
 		)
 	),
 	console_(
@@ -75,7 +63,7 @@ sanguis::client::object::object(
 	console_gfx_(
 		console_,
 		sys_.renderer(),
-		*font_metrics_,
+		*font_object_,
 		sys_.image_system(),
 		sys_.keyboard_collector(),
 		sys_.viewport_manager(),
@@ -110,8 +98,7 @@ sanguis::client::object::object(
 		),
 		resources_,
 		sys_.window_system(),
-		*font_metrics_,
-		font_drawer_,
+		*font_object_,
 		console_gfx_.get(),
 		sys_.keyboard_collector(),
 		cursor_,

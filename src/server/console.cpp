@@ -7,9 +7,9 @@
 #include <sge/console/callback/function.hpp>
 #include <sge/console/callback/name.hpp>
 #include <sge/console/callback/parameters.hpp>
-#include <sge/font/text/lit.hpp>
-#include <sge/font/text/from_fcppt_string.hpp>
-#include <sge/font/text/string.hpp>
+#include <sge/font/lit.hpp>
+#include <sge/font/from_fcppt_string.hpp>
+#include <sge/font/string.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/homogenous_pair_impl.hpp>
 #include <fcppt/insert_to_string.hpp>
@@ -23,7 +23,7 @@ sanguis::server::console::console(
 )
 :
 	object_(
-		SGE_FONT_TEXT_LIT('/') // TODO: is this right?
+		SGE_FONT_LIT('/') // TODO: is this right?
 	),
 	charconv_system_(
 		_charconv_system
@@ -71,13 +71,13 @@ sanguis::server::console::insert(
 			sge::console::callback::parameters(
 				_callback,
 				sge::console::callback::name(
-					sge::font::text::from_fcppt_string(
+					sge::font::from_fcppt_string(
 						_command
 					)
 				)
 			)
 			.short_description(
-				sge::font::text::from_fcppt_string(
+				sge::font::from_fcppt_string(
 					_description
 				)
 			)
@@ -92,7 +92,7 @@ sanguis::server::console::eval(
 {
 	_args.push_back(
 		fcppt::insert_to_string<
-			sge::font::text::string
+			sge::font::string
 		>(
 			_id
 		)

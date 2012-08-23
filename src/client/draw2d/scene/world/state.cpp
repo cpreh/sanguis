@@ -243,17 +243,17 @@ sanguis::client::draw2d::scene::world::state::draw(
 
 				sge::sprite::process::one_with_options<
 					sge::sprite::process::options<
-						sge::sprite::process::geometry_options::update,
-						sge::sprite::render::options<
-							sge::sprite::render::matrix_options::nothing,
-							sge::sprite::render::state_options::nothing,
-							sge::sprite::render::vertex_options::declaration_and_buffer
-						>
+						sge::sprite::process::geometry_options::update
 					>
 				>(
 					_render_context,
 					stencil_sprite_,
-					stencil_sprite_buffers_
+					stencil_sprite_buffers_,
+					sge::sprite::render::options(
+						sge::sprite::render::matrix_options::nothing,
+						sge::sprite::render::state_options::nothing,
+						sge::sprite::render::vertex_options::declaration_and_buffer
+					)
 				);
 			}
 		}

@@ -77,12 +77,7 @@ sanguis::client::draw2d::sprite::system<
 {
 	sge::sprite::process::with_options<
 		sge::sprite::process::options<
-			sge::sprite::process::geometry_options::update,
-			sge::sprite::render::options<
-				sge::sprite::render::matrix_options::nothing,
-				sge::sprite::render::state_options::nothing,
-				sge::sprite::render::vertex_options::declaration_and_buffer
-			>
+			sge::sprite::process::geometry_options::update
 		>
 	>(
 		_render_context,
@@ -90,7 +85,12 @@ sanguis::client::draw2d::sprite::system<
 			_order
 		).range(),
 		buffers_,
-		sge::sprite::compare::default_()
+		sge::sprite::compare::default_(),
+		sge::sprite::render::options(
+			sge::sprite::render::matrix_options::nothing,
+			sge::sprite::render::state_options::nothing,
+			sge::sprite::render::vertex_options::declaration_and_buffer
+		)
 	);
 }
 
