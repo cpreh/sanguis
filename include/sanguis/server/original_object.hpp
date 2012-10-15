@@ -4,10 +4,12 @@
 #include <sanguis/main_object.hpp>
 #include <sanguis/main_object_scoped_ptr.hpp>
 #include <sanguis/load/server_context.hpp>
-#include <sge/systems/instance.hpp>
+#include <sge/systems/instance_decl.hpp>
+#include <sge/systems/with_charconv.hpp>
 #include <awl/main/exit_code.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/mpl/vector/vector10.hpp>
 #include <boost/program_options/variables_map.hpp>
 #include <fcppt/config/external_end.hpp>
 
@@ -35,7 +37,13 @@ public:
 	awl::main::exit_code const
 	run();
 private:
-	sge::systems::instance systems_;
+	typedef sge::systems::instance<
+		boost::mpl::vector1<
+			sge::systems::with_charconv
+		>
+	> server_systems;
+
+	server_systems const systems_;
 
 	sanguis::load::server_context load_context_;
 

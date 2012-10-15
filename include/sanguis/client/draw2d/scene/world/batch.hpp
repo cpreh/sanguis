@@ -5,7 +5,7 @@
 #include <sanguis/client/draw2d/scene/world/texture_slice_vector.hpp>
 #include <sanguis/client/draw2d/scene/world/texture_slice.hpp>
 #include <sge/renderer/vertex_buffer_shared_ptr.hpp>
-#include <sge/renderer/context/object_fwd.hpp>
+#include <sge/renderer/context/core_fwd.hpp>
 
 
 namespace sanguis
@@ -31,7 +31,7 @@ public:
 
 	void
 	draw(
-		sge::renderer::context::object &
+		sge::renderer::context::core &
 	);
 private:
 	sge::renderer::vertex_buffer_shared_ptr vertex_buffer_;

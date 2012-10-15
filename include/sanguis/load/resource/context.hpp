@@ -4,10 +4,11 @@
 #include <sanguis/load/resource/textures_fwd.hpp>
 #include <sanguis/load/resource/animations_fwd.hpp>
 #include <sanguis/load/context_fwd.hpp>
-#include <sge/renderer/device_fwd.hpp>
+#include <sge/renderer/device/core_fwd.hpp>
 #include <sge/image2d/system_fwd.hpp>
-#include <fcppt/scoped_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/scoped_ptr_impl.hpp>
+
 
 namespace sanguis
 {
@@ -31,7 +32,7 @@ private:
 	friend class load::context;
 
 	context(
-		sge::renderer::device &,
+		sge::renderer::device::core &,
 		sge::image2d::system &
 	);
 

@@ -1,21 +1,26 @@
+#include <sanguis/client/send_callback.hpp>
 #include <sanguis/client/console/object.hpp>
 #include <sanguis/messages/base.hpp>
 #include <sanguis/messages/console_command.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/serialization/convert_string_vector.hpp>
 #include <sanguis/from_console_arg_list.hpp>
+#include <sge/charconv/system_fwd.hpp>
+#include <sge/console/arg_list.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/console/object.hpp>
 #include <sge/console/callback/name.hpp>
 #include <sge/console/callback/parameters.hpp>
 #include <sge/font/from_fcppt_string.hpp>
-#include <sge/renderer/context/object_fwd.hpp>
+#include <sge/renderer/context/ffp_fwd.hpp>
+#include <fcppt/string.hpp>
 #include <fcppt/tr1/functional.hpp>
+
 
 sanguis::client::console::object::object(
 	sge::console::gfx &_gfx,
 	sge::charconv::system &_charconv_system,
-	client::send_callback const &_send
+	sanguis::client::send_callback const &_send
 )
 :
 	gfx_(
@@ -83,7 +88,7 @@ sanguis::client::console::object::active() const
 
 void
 sanguis::client::console::object::draw(
-	sge::renderer::context::object &_context
+	sge::renderer::context::ffp &_context
 )
 {
 	if(

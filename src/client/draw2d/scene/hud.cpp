@@ -7,8 +7,8 @@
 #include <sge/font/draw/simple.hpp>
 #include <sge/image/colors.hpp>
 #include <sge/image/color/any/object.hpp>
-#include <sge/renderer/device_fwd.hpp>
-#include <sge/renderer/context/object_fwd.hpp>
+#include <sge/renderer/context/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/container/bitfield/object_impl.hpp>
 #include <fcppt/io/ostringstream.hpp>
 #include <fcppt/time/output_tm.hpp>
@@ -17,7 +17,7 @@
 
 sanguis::client::draw2d::scene::hud::hud(
 	sge::font::object &_font_object,
-	sge::renderer::device &_renderer,
+	sge::renderer::device::ffp &_renderer,
 	std::tm const &_time
 )
 :
@@ -66,7 +66,7 @@ sanguis::client::draw2d::scene::hud::time(
 
 void
 sanguis::client::draw2d::scene::hud::draw(
-	sge::renderer::context::object &_render_context
+	sge::renderer::context::ffp &_render_context
 )
 {
 	frames_counter_.update();

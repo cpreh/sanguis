@@ -5,6 +5,7 @@
 #include <sanguis/load/model/parse_json.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
+#include <sge/parse/json/start.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -37,13 +38,13 @@ sanguis::load::server_context::model_dim(
 			return it->second;
 	}
 
-	sge::parse::json::object object_return;
+	sge::parse::json::start start_return;
 
 	model::parse_json(
 		model::make_path(
 			_model_name
 		),
-		object_return
+		start_return
 	);
 
 	typedef std::pair<
@@ -57,7 +58,7 @@ sanguis::load::server_context::model_dim(
 				_model_name,
 				model::load_dim(
 					model::json_header(
-						object_return.members
+						start_return.object().members
 					).members
 				)
 			)

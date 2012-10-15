@@ -1,6 +1,7 @@
 #include <sanguis/client/draw2d/scene/world/generate_batches.hpp>
 #include <sanguis/client/draw2d/scene/world/batch.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
+#include <sanguis/client/draw2d/scene/world/batch_grid_unique_ptr.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_size.hpp>
 #include <sanguis/client/draw2d/scene/world/envelope.hpp>
 #include <sanguis/client/draw2d/scene/world/make_batch.hpp>
@@ -10,6 +11,8 @@
 #include <sanguis/creator/generator/size.hpp>
 #include <sanguis/creator/geometry/rect.hpp>
 #include <sanguis/creator/geometry/shape_container.hpp>
+#include <sge/renderer/vertex_declaration_fwd.hpp>
+#include <sge/renderer/device/core_fwd.hpp>
 #include <fcppt/algorithm/array_map.hpp>
 #include <fcppt/container/grid/in_range.hpp>
 #include <fcppt/container/grid/object_impl.hpp>
@@ -30,7 +33,7 @@
 
 sanguis::client::draw2d::scene::world::batch_grid_unique_ptr
 sanguis::client::draw2d::scene::world::generate_batches(
-	sge::renderer::device &_renderer,
+	sge::renderer::device::core &_renderer,
 	sge::renderer::vertex_declaration const &_vertex_declaration,
 	sanguis::creator::generator::top_parameters const &_parameters,
 	load::resource::textures const &_textures

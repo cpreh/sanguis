@@ -4,9 +4,9 @@
 #include <sge/console/sprite_parameters.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/image/colors.hpp>
-#include <sge/renderer/device.hpp>
 #include <sge/renderer/screen_size.hpp>
 #include <sge/renderer/resource_flags_field.hpp>
+#include <sge/renderer/device/ffp.hpp>
 #include <sge/renderer/target/onscreen.hpp>
 #include <sge/renderer/target/viewport_size.hpp>
 #include <sge/renderer/texture/mipmap/off.hpp>
@@ -21,19 +21,20 @@
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 
+
 namespace
 {
 
 sge::console::sprite_object::dim const
 make_sprite_dim(
-	sge::renderer::device &
+	sge::renderer::device::ffp &
 );
 
 }
 
 sanguis::client::console::gfx::gfx(
 	sge::console::object &_console,
-	sge::renderer::device &_renderer,
+	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font_object,
 	sge::image2d::system &_image_loader,
 	sge::input::keyboard::device &_keyboard,
@@ -118,7 +119,7 @@ namespace
 
 sge::console::sprite_object::dim const
 make_sprite_dim(
-	sge::renderer::device &_device
+	sge::renderer::device::ffp &_device
 )
 {
 	sge::renderer::screen_size const viewport_dim(

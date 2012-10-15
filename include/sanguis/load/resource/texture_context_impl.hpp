@@ -2,7 +2,7 @@
 #define SANGUIS_LOAD_RESOURCE_TEXTURE_CONTEXT_IMPL_HPP_INCLUDED
 
 #include <sanguis/load/resource/texture_context_fwd.hpp>
-#include <sge/renderer/device_fwd.hpp>
+#include <sge/renderer/device/core_fwd.hpp>
 #include <sge/renderer/texture/planar_shared_ptr.hpp>
 #include <sge/image2d/file_shared_ptr.hpp>
 #include <sge/image2d/system_fwd.hpp>
@@ -29,7 +29,7 @@ class texture_context_impl
 public:
 	texture_context_impl(
 		boost::filesystem::path const &,
-		sge::renderer::device &,
+		sge::renderer::device::core &,
 		sge::image2d::system &
 	);
 
@@ -51,7 +51,7 @@ private:
 
 	sge::renderer::texture::planar_shared_ptr texture_result_;
 
-	sge::renderer::device &rend_;
+	sge::renderer::device::core &rend_;
 
 	future_value const task(
 		boost::filesystem::path const &,

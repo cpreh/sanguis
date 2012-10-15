@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_OBJECT_HPP_INCLUDED
 
 #include <sanguis/client/machine.hpp>
+#include <sanguis/client/systems_fwd.hpp>
 #include <sanguis/client/config/settings/object.hpp>
 #include <sanguis/client/config/settings/saver.hpp>
 #include <sanguis/client/console/gfx.hpp>
@@ -15,10 +16,9 @@
 #include <sanguis/timer.hpp>
 #include <sge/console/object.hpp>
 #include <sge/font/object_scoped_ptr.hpp>
-#include <sge/systems/instance.hpp>
 #include <awl/main/exit_code.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/scoped_ptr.hpp>
+#include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/scoped_state_machine.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/variables_map.hpp>
@@ -68,7 +68,11 @@ private:
 
 	sanguis::io_service io_service_;
 
-	sge::systems::instance const sys_;
+	typedef fcppt::scoped_ptr<
+		sanguis::client::systems
+	> systems_scoped_ptr;
+
+	systems_scoped_ptr const sys_;
 
 	sge::font::object_scoped_ptr const font_object_;
 

@@ -65,7 +65,7 @@ sanguis::load::resource::textures::load(
 }
 
 sanguis::load::resource::textures::textures(
-	sge::renderer::device &_renderer,
+	sge::renderer::device::core &_renderer,
 	sge::image2d::system &_image_loader
 )
 :

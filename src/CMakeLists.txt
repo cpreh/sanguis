@@ -13,7 +13,6 @@ SET(
 	include/sanguis/args/resolution.hpp
 	include/sanguis/args/server_only.hpp
 	include/sanguis/args/server_port.hpp
-	include/sanguis/args/sge_options.hpp
 	include/sanguis/cast_enum.hpp
 	include/sanguis/cast_enum_impl.hpp
 	include/sanguis/cheat_type.hpp
@@ -62,6 +61,7 @@ SET(
 	include/sanguis/client/control/key_scale.hpp
 	include/sanguis/client/control/scalar.hpp
 	include/sanguis/client/create.hpp
+	include/sanguis/client/create_systems.hpp
 	include/sanguis/client/cursor/object.hpp
 	include/sanguis/client/cursor/object_fwd.hpp
 	include/sanguis/client/cursor/scoped.hpp
@@ -350,6 +350,9 @@ SET(
 	include/sanguis/client/states/perk_chooser.hpp
 	include/sanguis/client/states/running.hpp
 	include/sanguis/client/states/waiting_for_player.hpp
+	include/sanguis/client/systems.hpp
+	include/sanguis/client/systems_fwd.hpp
+	include/sanguis/client/systems_unique_ptr.hpp
 	include/sanguis/client/world_parameters.hpp
 	include/sanguis/client/world_parameters_fwd.hpp
 	include/sanguis/clock.hpp
@@ -990,7 +993,6 @@ SET(
 	src/args/resolution.cpp
 	src/args/server_only.cpp
 	src/args/server_port.cpp
-	src/args/sge_options.cpp
 	src/client/config/homedir.cpp
 	src/client/config/settings/file.cpp
 	src/client/config/settings/get_or_create_entry.cpp
@@ -1014,6 +1016,7 @@ SET(
 	src/client/control/environment.cpp
 	src/client/control/input_translator.cpp
 	src/client/create.cpp
+	src/client/create_systems.cpp
 	src/client/cursor/object.cpp
 	src/client/cursor/scoped.cpp
 	src/client/daytime_settings.cpp

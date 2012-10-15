@@ -5,7 +5,9 @@
 #include <sge/renderer/display_mode/optional_dimensions.hpp>
 #include <sge/renderer/display_mode/optional_object.hpp>
 #include <sge/renderer/display_mode/optional_refresh_rate.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/program_options/variables_map.hpp>
+#include <fcppt/config/external_end.hpp>
 
 
 sge::renderer::display_mode::optional_object const

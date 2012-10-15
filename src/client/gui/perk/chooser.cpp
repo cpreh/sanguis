@@ -12,7 +12,7 @@
 #include <sanguis/perk_type.hpp>
 #include <sge/cegui/to_cegui_color.hpp>
 #include <sge/cegui/to_cegui_string.hpp>
-#include <sge/renderer/context/object_fwd.hpp>
+#include <sge/renderer/context/ffp_fwd.hpp>
 #include <fcppt/algorithm/find_if_exn.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
@@ -173,7 +173,7 @@ sanguis::client::gui::perk::chooser::process(
 
 void
 sanguis::client::gui::perk::chooser::draw(
-	sge::renderer::context::object &_render_context
+	sge::renderer::context::ffp &_render_context
 )
 {
 	gui_.render(

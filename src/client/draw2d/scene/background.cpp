@@ -10,7 +10,7 @@
 #include <sanguis/load/resource/context.hpp>
 #include <sanguis/load/resource/textures.hpp>
 #include <sanguis/load/resource/texture_identifier.hpp>
-#include <sge/renderer/context/object_fwd.hpp>
+#include <sge/renderer/context/core_fwd.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/sprite/intrusive/connection.hpp>
@@ -22,9 +22,10 @@
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 
+
 sanguis::client::draw2d::scene::background::background(
-	load::context const &_load_context,
-	sprite::client::system &_client_system,
+	sanguis::load::context const &_load_context,
+	sanguis::client::draw2d::sprite::client::system &_client_system,
 	sge::viewport::manager &_viewport_manager
 )
 :
@@ -85,7 +86,7 @@ sanguis::client::draw2d::scene::background::~background()
 
 void
 sanguis::client::draw2d::scene::background::render(
-	sge::renderer::context::object &_render_context,
+	sge::renderer::context::core &_render_context,
 	draw2d::vector2 const &_translation
 )
 {

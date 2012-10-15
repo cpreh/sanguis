@@ -1,7 +1,7 @@
 #include <sanguis/client/draw2d/scene/world/batch.hpp>
 #include <sge/renderer/primitive_type.hpp>
 #include <sge/renderer/scoped_vertex_buffer.hpp>
-#include <sge/renderer/context/object.hpp>
+#include <sge/renderer/context/core.hpp>
 #include <sge/renderer/texture/const_optional_base_ref.hpp>
 #include <sge/renderer/texture/planar.hpp>
 #include <sge/renderer/texture/stage.hpp>
@@ -31,7 +31,7 @@ sanguis::client::draw2d::scene::world::batch::batch(
 
 void
 sanguis::client::draw2d::scene::world::batch::draw(
-	sge::renderer::context::object &_render_context
+	sge::renderer::context::core &_render_context
 )
 {
 	if(

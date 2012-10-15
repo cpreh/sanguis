@@ -6,9 +6,9 @@
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/load/resource/textures_fwd.hpp>
-#include <sge/renderer/device_fwd.hpp>
 #include <sge/renderer/vertex_declaration_scoped_ptr.hpp>
-#include <sge/renderer/context/object_fwd.hpp>
+#include <sge/renderer/context/core_fwd.hpp>
+#include <sge/renderer/device/core_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
 
@@ -31,31 +31,31 @@ class object
 	);
 public:
 	object(
-		sge::renderer::device &,
-		load::resource::textures const &
+		sge::renderer::device::core &,
+		sanguis::load::resource::textures const &
 	);
 
 	~object();
 
 	void
 	draw(
-		sge::renderer::context::object &,
-		draw2d::vector2 const &translation
+		sge::renderer::context::core &,
+		sanguis::client::draw2d::vector2 const &translation
 	);
 
 	void
 	change(
-		client::world_parameters const &
+		sanguis::client::world_parameters const &
 	);
 private:
-	sge::renderer::device &renderer_;
+	sge::renderer::device::core &renderer_;
 
-	load::resource::textures const &textures_;
+	sanguis::load::resource::textures const &textures_;
 
 	sge::renderer::vertex_declaration_scoped_ptr const vertex_declaration_;
 
 	typedef fcppt::scoped_ptr<
-		scene::world::state
+		sanguis::client::draw2d::scene::world::state
 	> state_scoped_ptr;
 
 	state_scoped_ptr state_;

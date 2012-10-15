@@ -11,7 +11,7 @@
 void
 sanguis::load::model::parse_json(
 	boost::filesystem::path const &_path,
-	sge::parse::json::object &_object_return
+	sge::parse::json::start &_start_return
 )
 {
 	boost::filesystem::path const file(
@@ -29,7 +29,7 @@ sanguis::load::model::parse_json(
 	if(
 		!sge::parse::json::parse_file(
 			file,
-			_object_return
+			_start_return
 		)
 	)
 	{

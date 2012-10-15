@@ -19,6 +19,7 @@
 #include <sge/parse/json/member.hpp>
 #include <sge/parse/json/member_map.hpp>
 #include <sge/parse/json/object.hpp>
+#include <sge/parse/json/start.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/math/dim/object_impl.hpp>
@@ -172,15 +173,15 @@ sanguis::load::model::object::construct(
 	resource::context const &_ctx
 )
 {
-	sge::parse::json::object object_return;
+	sge::parse::json::start start_return;
 
-	parse_json(
+	sanguis::load::model::parse_json(
 		path_,
-		object_return
+		start_return
 	);
 
 	sge::parse::json::member_map const &global_entries(
-		object_return.members
+		start_return.object().members
 	);
 
 	sge::parse::json::object const &header(

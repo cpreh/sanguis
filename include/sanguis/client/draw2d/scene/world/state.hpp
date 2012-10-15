@@ -5,18 +5,23 @@
 #include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/buffers.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/object.hpp>
+#include <sanguis/client/draw2d/scene/world/sprite/state.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/load/resource/textures_fwd.hpp>
-#include <sge/renderer/device_fwd.hpp>
 #include <sge/renderer/vertex_declaration_fwd.hpp>
-#include <sge/renderer/context/object_fwd.hpp>
+#include <sge/renderer/context/core_fwd.hpp>
+#include <sge/renderer/device/core_fwd.hpp>
+#include <sge/renderer/state/core/blend/object_scoped_ptr.hpp>
+#include <sge/renderer/state/core/depth_stencil/object_scoped_ptr.hpp>
 #include <sge/sprite/object_decl.hpp>
 #include <sge/sprite/buffers/single_decl.hpp>
 #include <sge/sprite/buffers/with_declaration_decl.hpp>
+#include <sge/sprite/state/object_decl.hpp>
 #include <fcppt/container/grid/object_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
+
 
 namespace sanguis
 {
@@ -38,7 +43,7 @@ public:
 	state();
 
 	state(
-		sge::renderer::device &,
+		sge::renderer::device::core &,
 		load::resource::textures const &,
 		sge::renderer::vertex_declaration const &,
 		client::world_parameters const &
@@ -48,11 +53,11 @@ public:
 
 	void
 	draw(
-		sge::renderer::context::object &,
-		draw2d::vector2 const &translation
+		sge::renderer::context::core &,
+		sanguis::client::draw2d::vector2 const &translation
 	);
 private:
-	sge::renderer::device &renderer_;
+	sge::renderer::device::core &renderer_;
 
 	sge::renderer::vertex_declaration const &vertex_declaration_;
 
@@ -62,9 +67,17 @@ private:
 
 	batch_grid_scoped_ptr const batches_;
 
-	world::sprite::buffers stencil_sprite_buffers_;
+	sanguis::client::draw2d::scene::world::sprite::buffers stencil_sprite_buffers_;
 
-	world::sprite::object stencil_sprite_;
+	sanguis::client::draw2d::scene::world::sprite::state stencil_sprite_states_;
+
+	sanguis::client::draw2d::scene::world::sprite::object stencil_sprite_;
+
+	sge::renderer::state::core::depth_stencil::object_scoped_ptr const batch_stencil_state_;
+
+	sge::renderer::state::core::depth_stencil::object_scoped_ptr const mask_stencil_state_;
+
+	sge::renderer::state::core::blend::object_scoped_ptr const blend_state_;
 };
 
 }

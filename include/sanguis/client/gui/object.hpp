@@ -11,10 +11,11 @@
 #include <sge/charconv/system_fwd.hpp>
 #include <sge/image2d/system_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
-#include <sge/renderer/device_fwd.hpp>
-#include <sge/renderer/context/object_fwd.hpp>
+#include <sge/renderer/context/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -30,7 +31,7 @@ class object
 	);
 public:
 	object(
-		sge::renderer::device &,
+		sge::renderer::device::ffp &,
 		sge::image2d::system &,
 		sge::charconv::system &,
 		sge::viewport::manager &,
@@ -48,7 +49,7 @@ public:
 
 	void
 	render(
-		sge::renderer::context::object &
+		sge::renderer::context::ffp &
 	);
 
 	void

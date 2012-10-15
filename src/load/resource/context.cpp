@@ -17,7 +17,7 @@ sanguis::load::resource::context::animations() const
 }
 
 sanguis::load::resource::context::context(
-	sge::renderer::device &_renderer,
+	sge::renderer::device::core &_renderer,
 	sge::image2d::system &_image_loader
 )
 :

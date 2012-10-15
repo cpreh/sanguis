@@ -1,8 +1,9 @@
 #include <sanguis/main_object.hpp>
 #include <sanguis/server/create.hpp>
 #include <sanguis/server/original_object.hpp>
-#include <sge/systems/charconv.hpp>
-#include <sge/systems/list.hpp>
+#include <sge/systems/empty_list.hpp>
+#include <sge/systems/make_empty_list.hpp>
+#include <sge/systems/instance_impl.hpp>
 #include <awl/main/exit_code.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/variables_map.hpp>
@@ -14,9 +15,7 @@ sanguis::server::original_object::original_object(
 )
 :
 	systems_(
-		sge::systems::list(
-			sge::systems::charconv()
-		)
+		sge::systems::make_empty_list()
 	),
 	load_context_(),
 	object_(

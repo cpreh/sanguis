@@ -9,7 +9,7 @@
 #include <sanguis/media_path.hpp>
 #include <sge/cegui/from_cegui_string.hpp>
 #include <sge/cegui/to_cegui_string.hpp>
-#include <sge/renderer/context/object_fwd.hpp>
+#include <sge/renderer/context/ffp_fwd.hpp>
 #include <fcppt/log/parameters/object.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/location.hpp>
@@ -249,7 +249,7 @@ sanguis::client::gui::menu::object::process(
 
 void
 sanguis::client::gui::menu::object::draw(
-	sge::renderer::context::object &_render_context
+	sge::renderer::context::ffp &_render_context
 )
 {
 	gui_.render(

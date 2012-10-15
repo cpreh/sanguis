@@ -18,7 +18,6 @@
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <sge/console/object.hpp>
 #include <sge/font/from_fcppt_string.hpp>
-#include <sge/renderer/device.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/debug.hpp>

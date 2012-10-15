@@ -7,11 +7,12 @@
 #include <sge/console/arg_list.hpp>
 #include <sge/console/gfx_fwd.hpp>
 #include <sge/console/object_fwd.hpp>
-#include <sge/renderer/context/object_fwd.hpp>
+#include <sge/renderer/context/ffp_fwd.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/signal/connection_manager.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -29,7 +30,7 @@ public:
 	object(
 		sge::console::gfx &,
 		sge::charconv::system &,
-		client::send_callback const &
+		sanguis::client::send_callback const &
 	);
 
 	~object();
@@ -50,7 +51,7 @@ public:
 
 	void
 	draw(
-		sge::renderer::context::object &
+		sge::renderer::context::ffp &
 	);
 
 	sge::console::object &

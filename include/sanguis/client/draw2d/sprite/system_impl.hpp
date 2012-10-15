@@ -2,9 +2,11 @@
 #define SANGUIS_CLIENT_DRAW2D_SPRITE_SYSTEM_IMPL_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/sprite/order.hpp>
+#include <sanguis/client/draw2d/sprite/state.hpp>
+#include <sanguis/client/draw2d/sprite/state_choices.hpp>
 #include <sanguis/client/draw2d/sprite/system_decl.hpp>
-#include <sge/renderer/device_fwd.hpp>
-#include <sge/renderer/context/object_fwd.hpp>
+#include <sge/renderer/context/core_fwd.hpp>
+#include <sge/renderer/device/core_fwd.hpp>
 #include <sge/sprite/buffers/option.hpp>
 #include <sge/sprite/buffers/parameters.hpp>
 #include <sge/sprite/buffers/single_impl.hpp>
@@ -14,10 +16,10 @@
 #include <sge/sprite/process/geometry_options.hpp>
 #include <sge/sprite/process/options.hpp>
 #include <sge/sprite/process/with_options.hpp>
-#include <sge/sprite/render/matrix_options.hpp>
-#include <sge/sprite/render/options.hpp>
-#include <sge/sprite/render/state_options.hpp>
-#include <sge/sprite/render/vertex_options.hpp>
+#include <sge/sprite/state/default_options.hpp>
+#include <sge/sprite/state/object_impl.hpp>
+#include <sge/sprite/state/parameters.hpp>
+
 
 template<
 	typename Choices
@@ -25,9 +27,13 @@ template<
 sanguis::client::draw2d::sprite::system<
 	Choices
 >::system(
-	sge::renderer::device &_renderer
+	sge::renderer::device::core &_renderer,
+	sanguis::client::draw2d::sprite::state &_state
 )
 :
+	state_(
+		_state
+	),
 	buffers_(
 		_renderer,
 		sge::sprite::buffers::option::dynamic
@@ -55,7 +61,7 @@ sanguis::client::draw2d::sprite::system<
 sanguis::client::draw2d::sprite::system<
 	Choices
 >::connection(
-	sprite::order const _order
+	sanguis::client::draw2d::sprite::order const _order
 )
 {
 	return
@@ -71,8 +77,8 @@ void
 sanguis::client::draw2d::sprite::system<
 	Choices
 >::render(
-	sge::renderer::context::object &_render_context,
-	sprite::order const _order
+	sge::renderer::context::core &_render_context,
+	sanguis::client::draw2d::sprite::order const _order
 )
 {
 	sge::sprite::process::with_options<
@@ -86,18 +92,19 @@ sanguis::client::draw2d::sprite::system<
 		).range(),
 		buffers_,
 		sge::sprite::compare::default_(),
-		sge::sprite::render::options(
-			sge::sprite::render::matrix_options::nothing,
-			sge::sprite::render::state_options::nothing,
-			sge::sprite::render::vertex_options::declaration_and_buffer
-		)
+		state_,
+		sge::sprite::state::default_options<
+			sanguis::client::draw2d::sprite::state_choices
+		>()
+		.no_blend_state()
+		.no_rasterizer_state()
 	);
 }
 
 template<
 	typename Choices
 >
-sge::renderer::device &
+sge::renderer::device::core &
 sanguis::client::draw2d::sprite::system<
 	Choices
 >::renderer() const

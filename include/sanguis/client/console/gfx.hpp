@@ -7,11 +7,12 @@
 #include <sge/font/object_fwd.hpp>
 #include <sge/image2d/system_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
-#include <sge/renderer/device_fwd.hpp>
+#include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/renderer/texture/planar_scoped_ptr.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -28,7 +29,7 @@ class gfx
 public:
 	gfx(
 		sge::console::object &,
-		sge::renderer::device &,
+		sge::renderer::device::ffp &,
 		sge::font::object &,
 		sge::image2d::system &,
 		sge::input::keyboard::device &,
@@ -44,7 +45,7 @@ private:
 	void
 	on_resize();
 
-	sge::renderer::device &renderer_;
+	sge::renderer::device::ffp &renderer_;
 
 	sge::renderer::texture::planar_scoped_ptr const texture_;
 

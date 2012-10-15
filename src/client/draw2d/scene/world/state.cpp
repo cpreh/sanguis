@@ -12,15 +12,22 @@
 #include <sanguis/client/world_parameters.hpp>
 #include <sge/renderer/scoped_vertex_declaration.hpp>
 #include <sge/renderer/clear/parameters.hpp>
-#include <sge/renderer/context/object.hpp>
-#include <sge/renderer/state/bool.hpp>
-#include <sge/renderer/state/dest_blend_func.hpp>
-#include <sge/renderer/state/int.hpp>
-#include <sge/renderer/state/scoped.hpp>
-#include <sge/renderer/state/source_blend_func.hpp>
-#include <sge/renderer/state/stencil_func.hpp>
-#include <sge/renderer/state/stencil_op.hpp>
-#include <sge/renderer/state/stencil_op_value.hpp>
+#include <sge/renderer/context/core.hpp>
+#include <sge/renderer/device/core_fwd.hpp>
+#include <sge/renderer/state/core/blend/alpha_enabled.hpp>
+#include <sge/renderer/state/core/blend/combined.hpp>
+#include <sge/renderer/state/core/blend/dest.hpp>
+#include <sge/renderer/state/core/blend/object.hpp>
+#include <sge/renderer/state/core/blend/parameters.hpp>
+#include <sge/renderer/state/core/blend/scoped.hpp>
+#include <sge/renderer/state/core/blend/source.hpp>
+#include <sge/renderer/state/core/blend/write_mask_all.hpp>
+#include <sge/renderer/state/core/depth_stencil/parameters.hpp>
+#include <sge/renderer/state/core/depth_stencil/object.hpp>
+#include <sge/renderer/state/core/depth_stencil/scoped.hpp>
+#include <sge/renderer/state/core/depth_stencil/stencil/combined_simple.hpp>
+#include <sge/renderer/state/core/depth_stencil/stencil/func.hpp>
+#include <sge/renderer/state/core/depth_stencil/stencil/op.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/sprite/buffers/option.hpp>
@@ -29,10 +36,9 @@
 #include <sge/sprite/process/geometry_options.hpp>
 #include <sge/sprite/process/one_with_options.hpp>
 #include <sge/sprite/process/options.hpp>
-#include <sge/sprite/render/matrix_options.hpp>
-#include <sge/sprite/render/options.hpp>
-#include <sge/sprite/render/state_options.hpp>
-#include <sge/sprite/render/vertex_options.hpp>
+#include <sge/sprite/state/default_options.hpp>
+#include <sge/sprite/state/object_impl.hpp>
+#include <sge/sprite/state/parameters.hpp>
 #include <fcppt/algorithm/array_map.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/container/grid/object_impl.hpp>
@@ -45,8 +51,9 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/tr1/functional.hpp>
 
+
 sanguis::client::draw2d::scene::world::state::state(
-	sge::renderer::device &_renderer,
+	sge::renderer::device::core &_renderer,
 	load::resource::textures const &_textures,
 	sge::renderer::vertex_declaration const &_vertex_declaration,
 	client::world_parameters const &_parameters
@@ -55,7 +62,9 @@ sanguis::client::draw2d::scene::world::state::state(
 	renderer_(
 		_renderer
 	),
-	vertex_declaration_(_vertex_declaration),
+	vertex_declaration_(
+		_vertex_declaration
+	),
 	batches_(
 		world::generate_batches(
 			_renderer,
@@ -67,6 +76,12 @@ sanguis::client::draw2d::scene::world::state::state(
 	stencil_sprite_buffers_(
 		renderer_,
 		sge::sprite::buffers::option::dynamic
+	),
+	stencil_sprite_states_(
+		renderer_,
+		sge::sprite::state::parameters<
+			sanguis::client::draw2d::scene::world::sprite::state_choices
+		>()
 	),
 	stencil_sprite_(
 		world::sprite::parameters()
@@ -81,6 +96,44 @@ sanguis::client::draw2d::scene::world::state::state(
 				)
 			)
 		)
+	),
+	batch_stencil_state_(
+		renderer_.create_depth_stencil_state(
+			sge::renderer::state::core::depth_stencil::parameters(
+				sge::renderer::state::core::depth_stencil::depth::off(),
+				sge::renderer::state::core::depth_stencil::stencil::combined_simple(
+					sge::renderer::state::core::depth_stencil::stencil::func::less
+				)
+				.to_enabled()
+			)
+		)
+	),
+	mask_stencil_state_(
+		renderer_.create_depth_stencil_state(
+			sge::renderer::state::core::depth_stencil::parameters(
+				sge::renderer::state::core::depth_stencil::depth::off(),
+				sge::renderer::state::core::depth_stencil::stencil::combined_simple(
+					sge::renderer::state::core::depth_stencil::stencil::func::never
+				)
+				.fail_op(
+					sge::renderer::state::core::depth_stencil::stencil::op::inc_sat
+				)
+				.to_enabled()
+			)
+		)
+	),
+	blend_state_(
+		renderer_.create_blend_state(
+			sge::renderer::state::core::blend::parameters(
+				sge::renderer::state::core::blend::alpha_enabled(
+					sge::renderer::state::core::blend::combined(
+						sge::renderer::state::core::blend::source::src_alpha,
+						sge::renderer::state::core::blend::dest::inv_src_alpha
+					)
+				),
+				sge::renderer::state::core::blend::write_mask_all()
+			)
+		)
 	)
 {
 }
@@ -91,7 +144,7 @@ sanguis::client::draw2d::scene::world::state::~state()
 
 void
 sanguis::client::draw2d::scene::world::state::draw(
-	sge::renderer::context::object &_render_context,
+	sge::renderer::context::core &_render_context,
 	draw2d::vector2 const &_translation
 )
 {
@@ -138,7 +191,7 @@ sanguis::client::draw2d::scene::world::state::draw(
 						fcppt::math::dim::structure_cast<
 							world::signed_pos
 						>(
-							scene::background_dim(
+							sanguis::client::draw2d::scene::background_dim(
 								renderer_
 							)
 						)
@@ -155,31 +208,16 @@ sanguis::client::draw2d::scene::world::state::draw(
 			)
 		);
 
-	sge::renderer::state::scoped const scoped_state(
-		_render_context,
-		sge::renderer::state::list
-		(
-			sge::renderer::state::stencil_func::equal
-		)
-                (
-			sge::renderer::state::int_::stencil_ref = 0
-		)
-		(
-			sge::renderer::state::bool_::enable_alpha_blending = true
-		)
-		(
-			sge::renderer::state::source_blend_func::src_alpha
-		)
-		(
-			sge::renderer::state::dest_blend_func::inv_src_alpha
-		)
-	);
-
 	_render_context.clear(
 		sge::renderer::clear::parameters()
 		.stencil_buffer(
 			0
 		)
+	);
+
+	sge::renderer::state::core::blend::scoped const scoped_blend(
+		_render_context,
+		*blend_state_
 	);
 
 	FCPPT_ASSERT_ERROR(
@@ -212,6 +250,11 @@ sanguis::client::draw2d::scene::world::state::draw(
 					vertex_declaration_
 				);
 
+				sge::renderer::state::core::depth_stencil::scoped const scoped_stencil(
+					_render_context,
+					*batch_stencil_state_
+				);
+
 				(*batches_).at(
 					pos
 				).draw(
@@ -229,16 +272,9 @@ sanguis::client::draw2d::scene::world::state::draw(
 			);
 
 			{
-				sge::renderer::state::scoped const scoped_state_inner(
+				sge::renderer::state::core::depth_stencil::scoped const scoped_stencil(
 					_render_context,
-					sge::renderer::state::list
-					(
-						sge::renderer::state::stencil_func::never
-					)
-					(
-						sge::renderer::state::stencil_op::stencil_fail
-							= sge::renderer::state::stencil_op_value::inc_sat
-					)
+					*mask_stencil_state_
 				);
 
 				sge::sprite::process::one_with_options<
@@ -249,11 +285,10 @@ sanguis::client::draw2d::scene::world::state::draw(
 					_render_context,
 					stencil_sprite_,
 					stencil_sprite_buffers_,
-					sge::sprite::render::options(
-						sge::sprite::render::matrix_options::nothing,
-						sge::sprite::render::state_options::nothing,
-						sge::sprite::render::vertex_options::declaration_and_buffer
-					)
+					stencil_sprite_states_,
+					sge::sprite::state::default_options<
+						sanguis::client::draw2d::scene::world::sprite::state_choices
+					>()
 				);
 			}
 		}

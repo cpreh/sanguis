@@ -1,5 +1,5 @@
-#include <sanguis/client/draw2d/scene/world/make_batch.hpp>
 #include <sanguis/client/draw2d/scene/world/batch.hpp>
+#include <sanguis/client/draw2d/scene/world/make_batch.hpp>
 #include <sanguis/client/draw2d/scene/world/sort_shapes.hpp>
 #include <sanguis/client/draw2d/scene/world/texture_slice.hpp>
 #include <sanguis/client/draw2d/scene/world/texture_slice_vector.hpp>
@@ -11,7 +11,6 @@
 #include <sanguis/creator/geometry/shape.hpp>
 #include <sanguis/creator/geometry/shape_container.hpp>
 #include <sanguis/creator/geometry/texture_name.hpp>
-#include <sge/renderer/device.hpp>
 #include <sge/renderer/first_vertex.hpp>
 #include <sge/renderer/lock_mode.hpp>
 #include <sge/renderer/resource_flags_field.hpp>
@@ -20,6 +19,8 @@
 #include <sge/renderer/vertex_buffer.hpp>
 #include <sge/renderer/vertex_buffer_shared_ptr.hpp>
 #include <sge/renderer/vertex_count.hpp>
+#include <sge/renderer/vertex_declaration_fwd.hpp>
+#include <sge/renderer/device/core.hpp>
 #include <sge/renderer/vf/dynamic/part_index.hpp>
 #include <sge/renderer/vf/iterator.hpp>
 #include <sge/renderer/vf/vertex.hpp>
@@ -51,7 +52,7 @@ poly_count(
 
 sanguis::client::draw2d::scene::world::batch const
 sanguis::client::draw2d::scene::world::make_batch(
-	sge::renderer::device &_renderer,
+	sge::renderer::device::core &_renderer,
 	sge::renderer::vertex_declaration const &_vertex_declaration,
 	load::resource::textures const &_textures,
 	sanguis::creator::geometry::shape_container _shapes

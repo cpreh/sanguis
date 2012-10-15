@@ -6,12 +6,13 @@
 #include <sanguis/client/draw2d/sprite/client/system.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/load/context_fwd.hpp>
-#include <sge/renderer/context/object_fwd.hpp>
+#include <sge/renderer/context/core_fwd.hpp>
 #include <sge/sprite/object_decl.hpp>
 #include <sge/texture/const_part_shared_ptr.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -29,8 +30,8 @@ class background
 	);
 public:
 	background(
-		load::context const &,
-		sprite::client::system &,
+		sanguis::load::context const &,
+		sanguis::client::draw2d::sprite::client::system &,
 		sge::viewport::manager &
 	);
 
@@ -38,18 +39,18 @@ public:
 
 	void
 	render(
-		sge::renderer::context::object &,
-		draw2d::vector2 const &translation
+		sge::renderer::context::core &,
+		sanguis::client::draw2d::vector2 const &translation
 	);
 private:
 	void
 	reset_viewport();
 
-	draw2d::sprite::client::system &client_system_;
+	sanguis::client::draw2d::sprite::client::system &client_system_;
 
 	sge::texture::const_part_shared_ptr const texture_;
 
-	draw2d::sprite::client::object sprite_;
+	sanguis::client::draw2d::sprite::client::object sprite_;
 
 	fcppt::signal::scoped_connection const viewport_connection_;
 };

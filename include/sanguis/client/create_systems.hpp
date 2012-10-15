@@ -1,18 +1,19 @@
-#ifndef SANGUIS_ARGS_SGE_OPTIONS_HPP_INCLUDED
-#define SANGUIS_ARGS_SGE_OPTIONS_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_CREATE_SYSTEMS_HPP_INCLUDED
+#define SANGUIS_CLIENT_CREATE_SYSTEMS_HPP_INCLUDED
 
-#include <sge/systems/list.hpp>
+#include <sanguis/client/systems_unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/variables_map.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
-namespace args
+namespace client
 {
 
-sge::systems::list const
-sge_options(
+sanguis::client::systems_unique_ptr
+create_systems(
 	boost::program_options::variables_map const &
 );
 

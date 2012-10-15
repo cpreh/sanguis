@@ -5,7 +5,7 @@
 #include <sanguis/load/resource/texture_context_fwd.hpp>
 #include <sanguis/load/resource/texture_context.hpp>
 #include <sge/texture/const_part_shared_ptr.hpp>
-#include <sge/renderer/device_fwd.hpp>
+#include <sge/renderer/device/core_fwd.hpp>
 #include <sge/image2d/system_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -37,7 +37,7 @@ public:
 	) const;
 
 	textures(
-		sge::renderer::device &,
+		sge::renderer::device::core &,
 		sge::image2d::system &
 	);
 
@@ -75,7 +75,7 @@ private:
 		texture_identifier
 	> texture_name_map;
 
-	sge::renderer::device &renderer_;
+	sge::renderer::device::core &renderer_;
 
 	sge::image2d::system &image_loader_;
 

@@ -11,7 +11,7 @@
 #include <sanguis/duration.hpp>
 #include <sge/cegui/toolbox/scoped_gui_sheet.hpp>
 #include <sge/cegui/toolbox/scoped_layout.hpp>
-#include <sge/renderer/context/object_fwd.hpp>
+#include <sge/renderer/context/ffp_fwd.hpp>
 #include <fcppt/container/tree/object_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -56,7 +56,7 @@ public:
 
 	void
 	draw(
-		sge::renderer::context::object &
+		sge::renderer::context::ffp &
 	);
 private:
 	void

@@ -6,7 +6,7 @@
 #include <sge/image2d/file.hpp>
 #include <sge/image2d/system.hpp>
 #include <sge/image2d/view/const_object.hpp>
-#include <sge/renderer/device.hpp>
+#include <sge/renderer/device/core.hpp>
 #include <fcppt/tr1/functional.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
@@ -16,7 +16,7 @@
 
 sanguis::load::resource::texture_context_impl::texture_context_impl(
 	boost::filesystem::path const &_path,
-	sge::renderer::device &_rend,
+	sge::renderer::device::core &_rend,
 	sge::image2d::system &_il
 )
 :

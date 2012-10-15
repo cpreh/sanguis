@@ -5,8 +5,8 @@
 #include <sanguis/load/context_base.hpp>
 #include <sanguis/load/model/context.hpp>
 #include <sanguis/load/resource/context.hpp>
-#include <sge/renderer/device_fwd.hpp>
 #include <sge/renderer/dim2.hpp>
+#include <sge/renderer/device/core_fwd.hpp>
 #include <sge/image2d/system_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
@@ -26,7 +26,7 @@ class context
 public:
 	context(
 		sge::image2d::system &,
-		sge::renderer::device &
+		sge::renderer::device::core &
 	);
 
 	~context();
@@ -45,7 +45,7 @@ private:
 
 	sge::image2d::system &il_;
 
-	sge::renderer::device &rend_;
+	sge::renderer::device::core &rend_;
 
 	sanguis::random_generator random_generator_;
 

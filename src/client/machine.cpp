@@ -12,8 +12,8 @@
 #include <sge/charconv/system_fwd.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/font/object_fwd.hpp>
-#include <sge/renderer/device.hpp>
-#include <sge/renderer/context/scoped.hpp>
+#include <sge/renderer/context/scoped_ffp.hpp>
+#include <sge/renderer/device/ffp.hpp>
 #include <sge/renderer/target/onscreen.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/window/system.hpp>
@@ -26,31 +26,48 @@
 #include <fcppt/move.hpp>
 #include <fcppt/text.hpp>
 
+
 sanguis::client::machine::machine(
-	config::settings::object &_settings,
-	client::gui::object &_gui,
-	server_callback const &_server_callback,
-	load::context const &_resources,
+	sanguis::client::config::settings::object &_settings,
+	sanguis::client::gui::object &_gui,
+	sanguis::client::server_callback const &_server_callback,
+	sanguis::load::context const &_resources,
 	sge::window::system &_window_system,
 	sge::font::object &_font_object,
 	sge::console::gfx &_console_gfx,
 	sge::input::keyboard::device &_keyboard,
-	client::cursor::object &_cursor,
-	sge::renderer::device &_renderer,
+	sanguis::client::cursor::object &_cursor,
+	sge::renderer::device::ffp &_renderer,
 	sge::charconv::system &_charconv_system,
 	sge::image2d::system &_image_loader,
 	sanguis::io_service &_io_service,
 	sge::viewport::manager &_viewport_manager
 )
 :
-	settings_(_settings),
-	gui_(_gui),
-	resources_(_resources),
-	keyboard_(_keyboard),
-	renderer_(_renderer),
-	charconv_system_(_charconv_system),
-	image_loader_(_image_loader),
-	viewport_manager_(_viewport_manager),
+	settings_(
+		_settings
+	),
+	gui_(
+		_gui
+	),
+	resources_(
+		_resources
+	),
+	keyboard_(
+		_keyboard
+	),
+	renderer_(
+		_renderer
+	),
+	charconv_system_(
+		_charconv_system
+	),
+	image_loader_(
+		_image_loader
+	),
+	viewport_manager_(
+		_viewport_manager
+	),
 	net_(
 		_io_service
 	),
@@ -87,8 +104,12 @@ sanguis::client::machine::machine(
 	font_object_(
 		_font_object
 	),
-	console_gfx_(_console_gfx),
-	server_callback_(_server_callback),
+	console_gfx_(
+		_console_gfx
+	),
+	server_callback_(
+		_server_callback
+	),
 	cursor_(
 		_cursor
 	)
@@ -101,7 +122,7 @@ sanguis::client::machine::~machine()
 
 void
 sanguis::client::machine::quickstart(
-	net::port const _port
+	sanguis::net::port const _port
 )
 {
 	FCPPT_LOG_DEBUG(
@@ -122,8 +143,8 @@ sanguis::client::machine::quickstart(
 
 void
 sanguis::client::machine::connect(
-	net::hostname const &_hostname,
-	net::port const _port
+	sanguis::net::hostname const &_hostname,
+	sanguis::net::port const _port
 )
 {
 	net_.connect(
@@ -140,7 +161,7 @@ sanguis::client::machine::disconnect()
 
 void
 sanguis::client::machine::send(
-	messages::base const &_message
+	sanguis::messages::base const &_message
 )
 {
 	if(
@@ -178,13 +199,13 @@ sanguis::client::machine::process(
 void
 sanguis::client::machine::draw()
 {
-	sge::renderer::context::scoped const block(
+	sge::renderer::context::scoped_ffp const block(
 		renderer_,
 		renderer_.onscreen_target()
 	);
 
 	this->process_event(
-		events::render(
+		sanguis::client::events::render(
 			block.get()
 		)
 	);
@@ -210,7 +231,7 @@ sanguis::client::machine::settings()
 	return settings_;
 }
 
-sge::renderer::device &
+sge::renderer::device::ffp &
 sanguis::client::machine::renderer() const
 {
 	return renderer_;

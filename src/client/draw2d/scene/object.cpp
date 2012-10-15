@@ -1,3 +1,5 @@
+#include <sanguis/client/draw2d/vector2.hpp>
+#include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/scene/object.hpp>
 #include <sanguis/client/draw2d/scene/background.hpp>
 #include <sanguis/client/draw2d/scene/background_dim.hpp>
@@ -12,10 +14,9 @@
 #include <sanguis/client/draw2d/message/dispatcher.hpp>
 #include <sanguis/client/draw2d/sprite/order.hpp>
 #include <sanguis/client/draw2d/sprite/float_unit.hpp>
+#include <sanguis/client/draw2d/sprite/state_choices.hpp>
 #include <sanguis/client/draw2d/sunlight/make_color.hpp>
 #include <sanguis/client/draw2d/sunlight/sun_angle.hpp>
-#include <sanguis/client/draw2d/vector2.hpp>
-#include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/load/context.hpp>
 #include <sanguis/load/resource/context.hpp>
 #include <sanguis/messages/call/object.hpp>
@@ -26,24 +27,34 @@
 #include <sge/charconv/system_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/image/colors.hpp>
-#include <sge/renderer/ambient_color.hpp>
-#include <sge/renderer/device.hpp>
-#include <sge/renderer/diffuse_color.hpp>
-#include <sge/renderer/emissive_color.hpp>
-#include <sge/renderer/material.hpp>
-#include <sge/renderer/matrix4.hpp>
-#include <sge/renderer/specular_color.hpp>
-#include <sge/renderer/shininess.hpp>
-#include <sge/renderer/context/object.hpp>
-#include <sge/renderer/state/bool.hpp>
-#include <sge/renderer/state/color.hpp>
-#include <sge/renderer/state/list.hpp>
-#include <sge/renderer/state/scoped.hpp>
+#include <sge/renderer/context/ffp.hpp>
+#include <sge/renderer/device/ffp.hpp>
+#include <sge/renderer/state/ffp/lighting/ambient_color.hpp>
+#include <sge/renderer/state/ffp/lighting/diffuse_color.hpp>
+#include <sge/renderer/state/ffp/lighting/specular_color.hpp>
+#include <sge/renderer/state/ffp/lighting/object.hpp>
+#include <sge/renderer/state/ffp/lighting/object_scoped_ptr.hpp>
+#include <sge/renderer/state/ffp/lighting/parameters.hpp>
+#include <sge/renderer/state/ffp/lighting/scoped.hpp>
+#include <sge/renderer/state/ffp/lighting/material/emissive_color.hpp>
+#include <sge/renderer/state/ffp/lighting/material/object.hpp>
+#include <sge/renderer/state/ffp/lighting/material/parameters.hpp>
+#include <sge/renderer/state/ffp/lighting/material/scoped.hpp>
+#include <sge/renderer/state/ffp/lighting/material/shininess.hpp>
+#include <sge/renderer/state/ffp/transform/mode.hpp>
+#include <sge/renderer/state/ffp/transform/object.hpp>
+#include <sge/renderer/state/ffp/transform/object_scoped_ptr.hpp>
+#include <sge/renderer/state/ffp/transform/parameters.hpp>
+#include <sge/renderer/state/ffp/transform/scoped.hpp>
 #include <sge/renderer/target/onscreen.hpp>
 #include <sge/renderer/target/viewport.hpp>
+#include <sge/sprite/matrix.hpp>
 #include <sge/sprite/object_impl.hpp>
+#include <sge/sprite/optional_matrix.hpp>
 #include <sge/sprite/projection_matrix.hpp>
-#include <sge/sprite/render/states.hpp>
+#include <sge/sprite/state/default_options.hpp>
+#include <sge/sprite/state/object_impl.hpp>
+#include <sge/sprite/state/scoped.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/math/matrix/arithmetic.hpp>
 #include <fcppt/math/matrix/translation.hpp>
@@ -63,8 +74,8 @@
 
 
 sanguis::client::draw2d::scene::object::object(
-	load::context const &_resources,
-	sge::renderer::device &_renderer,
+	sanguis::load::context const &_resources,
+	sge::renderer::device::ffp &_renderer,
 	sge::charconv::system &_charconv_system,
 	sge::font::object &_font_object,
 	std::tm const &_current_time,
@@ -81,17 +92,27 @@ sanguis::client::draw2d::scene::object::object(
 	renderer_(
 		_renderer
 	),
+	sprite_states_(
+		renderer_,
+		sge::sprite::state::parameters<
+			sanguis::client::draw2d::sprite::state_choices
+		>()
+	),
 	normal_system_(
-		renderer_
+		renderer_,
+		sprite_states_
 	),
 	colored_system_(
-		renderer_
+		renderer_,
+		sprite_states_
 	),
 	client_system_(
-		renderer_
+		renderer_,
+		sprite_states_
 	),
 	particle_system_(
-		renderer_
+		renderer_,
+		sprite_states_
 	),
 	hud_(
 		fcppt::make_unique_ptr<
@@ -179,9 +200,6 @@ sanguis::client::draw2d::scene::object::object(
 	current_time_(
 		_current_time
 	),
-	default_transform_(
-		sge::renderer::matrix4::identity()
-	),
 	background_(
 		fcppt::make_unique_ptr<
 			scene::background
@@ -194,6 +212,27 @@ sanguis::client::draw2d::scene::object::object(
 			),
 			fcppt::ref(
 				_viewport_manager
+			)
+		)
+	),
+	material_state_(
+		renderer_.create_material_state(
+			sge::renderer::state::ffp::lighting::material::parameters(
+				sge::renderer::state::ffp::lighting::diffuse_color(
+					sge::image::colors::black()
+				),
+				sge::renderer::state::ffp::lighting::ambient_color(
+					sge::image::colors::white()
+				),
+				sge::renderer::state::ffp::lighting::specular_color(
+					sge::image::colors::black()
+				),
+				sge::renderer::state::ffp::lighting::material::emissive_color(
+					sge::image::colors::black()
+				),
+				sge::renderer::state::ffp::lighting::material::shininess(
+					0.f
+				)
 			)
 		)
 	)
@@ -312,7 +351,7 @@ sanguis::client::draw2d::scene::object::update(
 
 void
 sanguis::client::draw2d::scene::object::draw(
-	sge::renderer::context::object &_render_context
+	sge::renderer::context::ffp &_render_context
 )
 {
 	this->render_systems(
@@ -352,51 +391,129 @@ sanguis::client::draw2d::scene::object::control_environment() const
 
 void
 sanguis::client::draw2d::scene::object::render_systems(
-	sge::renderer::context::object &_render_context
+	sge::renderer::context::ffp &_render_context
 )
 {
-	sge::renderer::state::scoped const state(
-		_render_context,
-		sge::sprite::render::states<
-			client::draw2d::sprite::normal::choices
-		>()
-	);
-
-	_render_context.material(
-		sge::renderer::material(
-			sge::renderer::diffuse_color(
-				sge::image::colors::black()
-			),
-			sge::renderer::ambient_color(
-				sge::image::colors::white()
-			),
-			sge::renderer::specular_color(
-				sge::image::colors::black()
-			),
-			sge::renderer::emissive_color(
-				sge::image::colors::black()
-			),
-			sge::renderer::shininess(
-				0.f
-			)
-		)
-	);
-
-	_render_context.transform(
-		sge::renderer::matrix_mode::projection,
+	sge::sprite::optional_matrix const projection_matrix(
 		sge::sprite::projection_matrix(
 			this->viewport()
 		)
 	);
 
-	_render_context.transform(
-		sge::renderer::matrix_mode::world,
-		default_transform_
+	if(
+		!projection_matrix
+	)
+		return;
+
+	sge::renderer::state::ffp::transform::object_scoped_ptr const projection_state(
+		renderer_.create_transform_state(
+			sge::renderer::state::ffp::transform::parameters(
+				*projection_matrix
+			)
+		)
 	);
 
-	this->render_lighting(
-		_render_context
+	sge::renderer::state::ffp::transform::scoped const scoped_projection(
+		_render_context,
+		sge::renderer::state::ffp::transform::mode::projection,
+		*projection_state
 	);
+
+	sge::sprite::state::scoped<
+		sanguis::client::draw2d::sprite::state_choices
+	> const scoped_state(
+		renderer_,
+		_render_context,
+		sge::sprite::state::default_options<
+			sanguis::client::draw2d::sprite::state_choices
+		>(),
+		sprite_states_
+	);
+
+	sanguis::client::draw2d::vector2 const translation(
+		sanguis::client::draw2d::scene::screen_center(
+			player_center_,
+			this->screen_size()
+		)
+	);
+
+	sge::renderer::state::ffp::transform::object_scoped_ptr const transform_state(
+		renderer_.create_transform_state(
+			sge::renderer::state::ffp::transform::parameters(
+				fcppt::math::matrix::translation(
+					translation.x(),
+					translation.y(),
+					static_cast<
+						sanguis::client::draw2d::sprite::float_unit
+					>(
+						0
+					)
+				)
+			)
+		)
+	);
+
+	{
+		sge::renderer::state::ffp::lighting::material::scoped const scoped_material(
+			_render_context,
+			*material_state_
+		);
+
+		sge::renderer::state::ffp::lighting::object_scoped_ptr const lighting_state(
+			renderer_.create_lighting_state(
+				sge::renderer::state::ffp::lighting::parameters(
+					sge::renderer::state::ffp::lighting::enabled(
+						sge::renderer::state::ffp::lighting::ambient_color(
+							sanguis::client::draw2d::sunlight::make_color(
+								sanguis::client::draw2d::sunlight::sun_angle(
+									current_time_
+								)
+							)
+						)
+					)
+				)
+			)
+		);
+
+		sge::renderer::state::ffp::lighting::scoped const scoped_lighting(
+			_render_context,
+			*lighting_state
+		);
+
+		background_->render(
+			_render_context,
+			translation
+		);
+
+		// TODO: scope this using a scoped_ptr!
+		sge::renderer::state::ffp::transform::scoped const scoped_transform(
+			_render_context,
+			sge::renderer::state::ffp::transform::mode::world,
+			*transform_state
+		);
+
+		world_->draw(
+			_render_context,
+			translation
+		);
+
+		SANGUIS_CLIENT_DRAW2D_SCENE_FOREACH_Z_ORDERING(
+			index,
+			z_ordering::corpses,
+			z_ordering::player_upper
+		)
+			normal_system_.render(
+				_render_context,
+				index
+			);
+	}
+
+	sge::renderer::state::ffp::transform::scoped const scoped_transform(
+		_render_context,
+		sge::renderer::state::ffp::transform::mode::world,
+		*transform_state
+	);
+
 
 	SANGUIS_CLIENT_DRAW2D_SCENE_FOREACH_Z_ORDERING(
 		index,
@@ -414,75 +531,6 @@ sanguis::client::draw2d::scene::object::render_systems(
 		z_ordering::healthbar_upper
 	)
 		colored_system_.render(
-			_render_context,
-			index
-		);
-
-	_render_context.transform(
-		sge::renderer::matrix_mode::world,
-		default_transform_
-	);
-}
-
-void
-sanguis::client::draw2d::scene::object::render_lighting(
-	sge::renderer::context::object &_render_context
-)
-{
-	sge::renderer::state::scoped const state(
-		_render_context,
-		sge::renderer::state::list
-		(
-			sge::renderer::state::bool_::enable_lighting = true
-		)
-		(
-			sge::renderer::state::color::ambient_light_color
-				= sunlight::make_color(
-					sunlight::sun_angle(
-						current_time_
-					)
-				)
-		)
-	);
-
-	draw2d::vector2 const translation(
-		scene::screen_center(
-			player_center_,
-			this->screen_size()
-		)
-	);
-
-	background_->render(
-		_render_context,
-		translation
-	);
-
-	_render_context.transform(
-		sge::renderer::matrix_mode::world,
-		default_transform_
-		*
-		fcppt::math::matrix::translation(
-			translation.x(),
-			translation.y(),
-			static_cast<
-				sprite::float_unit
-			>(
-				0
-			)
-		)
-	);
-
-	world_->draw(
-		_render_context,
-		translation
-	);
-
-	SANGUIS_CLIENT_DRAW2D_SCENE_FOREACH_Z_ORDERING(
-		index,
-		z_ordering::corpses,
-		z_ordering::player_upper
-	)
-		normal_system_.render(
 			_render_context,
 			index
 		);

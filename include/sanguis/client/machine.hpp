@@ -20,7 +20,7 @@
 #include <sge/font/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/image2d/system_fwd.hpp>
-#include <sge/renderer/device_fwd.hpp>
+#include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <sge/window/system_fwd.hpp>
 #include <fcppt/function/object.hpp>
@@ -39,8 +39,8 @@ namespace client
 class machine
 :
 	public boost::statechart::state_machine<
-		machine,
-		states::menu
+		sanguis::client::machine,
+		sanguis::client::states::menu
 	>
 {
 	FCPPT_NONCOPYABLE(
@@ -48,16 +48,16 @@ class machine
 	);
 public:
 	machine(
-		config::settings::object &,
-		client::gui::object &,
-		client::server_callback const &,
-		load::context const &,
+		sanguis::client::config::settings::object &,
+		sanguis::client::gui::object &,
+		sanguis::client::server_callback const &,
+		sanguis::load::context const &,
 		sge::window::system &,
 		sge::font::object &,
 		sge::console::gfx &,
 		sge::input::keyboard::device &,
-		client::cursor::object &,
-		sge::renderer::device &,
+		sanguis::client::cursor::object &,
+		sge::renderer::device::ffp &,
 		sge::charconv::system &,
 		sge::image2d::system &,
 		sanguis::io_service &,
@@ -68,13 +68,13 @@ public:
 
 	void
 	quickstart(
-		net::port
+		sanguis::net::port
 	);
 
 	void
 	connect(
-		net::hostname const &,
-		net::port
+		sanguis::net::hostname const &,
+		sanguis::net::port
 	);
 
 	void
@@ -82,7 +82,7 @@ public:
 
 	void
 	send(
-		messages::base const &
+		sanguis::messages::base const &
 	);
 
 	bool
@@ -96,10 +96,10 @@ public:
 	void
 	quit();
 
-	config::settings::object &
+	sanguis::client::config::settings::object &
 	settings();
 
-	sge::renderer::device &
+	sge::renderer::device::ffp &
 	renderer() const;
 
 	sge::charconv::system &
@@ -117,7 +117,7 @@ public:
 	sge::console::gfx &
 	console_gfx();
 
-	load::context const &
+	sanguis::load::context const &
 	resources() const;
 
 	sanguis::client::cursor::object &
@@ -143,18 +143,18 @@ private:
 
 	void
 	data_callback(
-		net::receive_buffer &
+		sanguis::net::receive_buffer &
 	);
 
-	config::settings::object &settings_;
+	sanguis::client::config::settings::object &settings_;
 
-	client::gui::object &gui_;
+	sanguis::client::gui::object &gui_;
 
-	load::context const &resources_;
+	sanguis::load::context const &resources_;
 
 	sge::input::keyboard::device &keyboard_;
 
-	sge::renderer::device &renderer_;
+	sge::renderer::device::ffp &renderer_;
 
 	sge::charconv::system &charconv_system_;
 
@@ -162,7 +162,7 @@ private:
 
 	sge::viewport::manager &viewport_manager_;
 
-	net::client::object net_;
+	sanguis::net::client::object net_;
 
 	fcppt::signal::auto_connection const
 		s_conn_,
@@ -175,7 +175,7 @@ private:
 
 	sge::console::gfx &console_gfx_;
 
-	client::server_callback const server_callback_;
+	sanguis::client::server_callback const server_callback_;
 
 	sanguis::client::cursor::object &cursor_;
 };

@@ -8,10 +8,11 @@
 #include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 
+
 sanguis::client::draw2d::sprite::client::texture_coordinates const
 sanguis::client::draw2d::scene::background_texture_coordinates(
-	draw2d::vector2 const &_translation,
-	sge::renderer::device &_device,
+	sanguis::client::draw2d::vector2 const &_translation,
+	sge::renderer::device::core &_device,
 	sge::texture::part const &_texture
 )
 {

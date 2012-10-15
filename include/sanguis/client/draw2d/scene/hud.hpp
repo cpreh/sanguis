@@ -5,8 +5,8 @@
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/level.hpp>
 #include <sge/font/object_fwd.hpp>
-#include <sge/renderer/device_fwd.hpp>
-#include <sge/renderer/context/object_fwd.hpp>
+#include <sge/renderer/context/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/timer/frames_counter.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -30,7 +30,7 @@ class hud
 public:
 	hud(
 		sge::font::object &,
-		sge::renderer::device &,
+		sge::renderer::device::ffp &,
 		std::tm const &
 	);
 
@@ -51,12 +51,12 @@ public:
 
 	void
 	draw(
-		sge::renderer::context::object &
+		sge::renderer::context::ffp &
 	);
 private:
 	sge::font::object &font_object_;
 
-	sge::renderer::device &renderer_;
+	sge::renderer::device::ffp &renderer_;
 
 	client::exp experience_;
 

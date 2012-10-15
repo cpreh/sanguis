@@ -7,7 +7,7 @@
 
 sanguis::load::context::context(
 	sge::image2d::system &_il,
-	sge::renderer::device &_rend
+	sge::renderer::device::core &_rend
 )
 :
 	il_(_il),

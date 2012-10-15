@@ -3,7 +3,7 @@
 #include <sge/cegui/duration.hpp>
 #include <sge/cegui/load_context.hpp>
 #include <sge/config/media_path.hpp>
-#include <sge/renderer/context/object_fwd.hpp>
+#include <sge/renderer/context/ffp_fwd.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
@@ -11,7 +11,7 @@
 
 
 sanguis::client::gui::object::object(
-	sge::renderer::device &_renderer,
+	sge::renderer::device::ffp &_renderer,
 	sge::image2d::system &_image_loader,
 	sge::charconv::system &_charconv_system,
 	sge::viewport::manager &_viewport_manager,
@@ -71,7 +71,7 @@ sanguis::client::gui::object::system()
 
 void
 sanguis::client::gui::object::render(
-	sge::renderer::context::object &_render_context
+	sge::renderer::context::ffp &_render_context
 )
 {
 	system_.render(
