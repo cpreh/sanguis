@@ -192,6 +192,8 @@ SET(
 	include/sanguis/client/draw2d/scene/world/sprite/choices.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/object.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/parameters.hpp
+	include/sanguis/client/draw2d/scene/world/sprite/state.hpp
+	include/sanguis/client/draw2d/scene/world/sprite/state_choices.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/type_choices.hpp
 	include/sanguis/client/draw2d/scene/world/state.hpp
 	include/sanguis/client/draw2d/scene/world/state_fwd.hpp
@@ -241,6 +243,8 @@ SET(
 	include/sanguis/client/draw2d/sprite/particle/texture_animation.hpp
 	include/sanguis/client/draw2d/sprite/point.hpp
 	include/sanguis/client/draw2d/sprite/rotation.hpp
+	include/sanguis/client/draw2d/sprite/state.hpp
+	include/sanguis/client/draw2d/sprite/state_choices.hpp
 	include/sanguis/client/draw2d/sprite/system_decl.hpp
 	include/sanguis/client/draw2d/sprite/system_fwd.hpp
 	include/sanguis/client/draw2d/sprite/system_impl.hpp
@@ -495,7 +499,6 @@ SET(
 	include/sanguis/messages/make_message_id.hpp
 	include/sanguis/messages/make_player_message.hpp
 	include/sanguis/messages/max_health.hpp
-	include/sanguis/messages/message_id.hpp
 	include/sanguis/messages/move.hpp
 	include/sanguis/messages/pause.hpp
 	include/sanguis/messages/perk_list.hpp
