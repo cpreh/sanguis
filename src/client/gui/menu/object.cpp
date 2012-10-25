@@ -83,22 +83,22 @@ sanguis::client::gui::menu::object::object(
 	),
 	connect_button_(
 		*scoped_layout_.window().getChild(
-			"FrameWindow/Connect"
+			"GroupBox/Connect"
 		)
 	),
 	hostname_edit_(
 		*scoped_layout_.window().getChild(
-			"FrameWindow/Hostname"
+			"GroupBox/Hostname"
 		)
 	),
 	port_edit_(
 		*scoped_layout_.window().getChild(
-			"FrameWindow/Port"
+			"GroupBox/Port"
 		)
 	),
 	quickstart_connection_(
 		scoped_layout_.window().getChild(
-			"FrameWindow/Quickstart"
+			"Quickstart"
 		)
 		->subscribeEvent(
 			CEGUI::PushButton::EventClicked,
@@ -113,7 +113,7 @@ sanguis::client::gui::menu::object::object(
 	),
 	quit_connection_(
 		scoped_layout_.window().getChild(
-			"FrameWindow/Quit"
+			"Quit"
 		)
 		->subscribeEvent(
 			CEGUI::PushButton::EventClicked,
@@ -164,15 +164,13 @@ sanguis::client::gui::menu::object::object(
 	),
 	connection_box_(
 		fcppt::make_unique_ptr<
-			menu::connection_box
+			sanguis::client::gui::menu::connection_box
 		>(
 			fcppt::ref(
 				gui_
 			),
 			fcppt::ref(
-				*scoped_layout_.window().getChild(
-					"FrameWindow"
-				)
+				scoped_layout_.window()
 			),
 			std::tr1::bind(
 				&menu::object::handle_cancel_connect,
