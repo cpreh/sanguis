@@ -8,7 +8,6 @@
 #include <sanguis/main_object.hpp>
 #include <sanguis/io_service.hpp>
 #include <sge/charconv/system_fwd.hpp>
-#include <fcppt/thread/object.hpp>
 #include <fcppt/scoped_state_machine.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <awl/main/exit_code.hpp>
@@ -70,7 +69,7 @@ private:
 
 	boost::mutex mutex_;
 
-	fcppt::thread::object server_thread_;
+	boost::thread server_thread_;
 };
 
 }

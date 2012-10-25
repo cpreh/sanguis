@@ -1461,6 +1461,10 @@ include(
 	AwlMainGenerator
 )
 
+add_definitions(
+	"-DBOOST_THREAD_VERSION=3"
+)
+
 include_directories(
 	${CMAKE_SOURCE_DIR}/include
 )

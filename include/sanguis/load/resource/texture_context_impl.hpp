@@ -7,12 +7,13 @@
 #include <sge/image2d/file_shared_ptr.hpp>
 #include <sge/image2d/system_fwd.hpp>
 #include <sge/texture/part_shared_ptr.hpp>
-#include <fcppt/thread/object.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/thread/future.hpp>
+#include <boost/thread/thread.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -47,7 +48,7 @@ private:
 
 	boost::unique_future<future_value> future_;
 
-	fcppt::thread::object thread_;
+	boost::thread thread_;
 
 	sge::renderer::texture::planar_shared_ptr texture_result_;
 

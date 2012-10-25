@@ -1,72 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<GUILayout >
-	<Window Type="DefaultWindow" Name="MainMenu" >
-		<Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
-		<Window Type="TaharezLook/FrameWindow" Name="MainMenu/FrameWindow" >
-			<Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
-			<Property Name="CloseButtonEnabled" Value="False" />
-			<Property Name="SizingEnabled" Value="False" />
-			<Property Name="DragMovingEnabled" Value="False" />
-			<Property Name="RollUpEnabled" Value="False" />
-			<Window Type="TaharezLook/Button" Name="MainMenu/FrameWindow/Quickstart" >
-				<Property Name="Text" Value="Quickstart" />
-				<Property Name="UnifiedAreaRect" Value="{{0.183544,0},{0.0426913,0},{0.863924,0},{0.151724,0}}" />
+<GUILayout version="4">
+	<Window name="MainMenu" type="DefaultWindow">
+		<Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+		<Window name="FrameWindow" type="TaharezLook/FrameWindow">
+			<Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+			<Property name="CloseButtonEnabled" value="False" />
+			<Property name="SizingEnabled" value="False" />
+			<Property name="DragMovingEnabled" value="False" />
+			<Property name="RollUpEnabled" value="False" />
+			<Window name="Quickstart" type="TaharezLook/Button">
+				<Property name="Text" value="Quickstart" />
+				<Property name="Area" value="{{0.183544,0},{0.0426913,0},{0.863924,0},{0.151724,0}}" />
 			</Window>
-			<Window Type="TaharezLook/Button" Name="MainMenu/FrameWindow/Quit" >
-				<Property Name="Text" Value="Quit" />
-				<Property Name="UnifiedAreaRect" Value="{{0.183544,0},{0.827728,0},{0.863924,0},{0.936761,0}}" />
+			<Window name="Quit" type="TaharezLook/Button">
+				<Property name="Text" value="Quit" />
+				<Property name="Area" value="{{0.183544,0},{0.827728,0},{0.863924,0},{0.936761,0}}" />
 			</Window>
-			<Window Type="TaharezLook/GroupBox" Name="MainMenu/FrameWindow/GroupBox" >
-				<Property Name="Text" Value="Join a server" />
-				<Property Name="RiseOnClick" Value="False" />
-				<Property Name="UnifiedAreaRect" Value="{{0.0474683,0},{0.20406,0},{0.966772,0},{0.779754,0}}" />
-				<AutoWindow NameSuffix="__auto_contentpane__" >
-					<Window Type="TaharezLook/Editbox" Name="MainMenu/FrameWindow/Hostname" >
-						<Property Name="MaxTextLength" Value="1073741823" />
-						<Property Name="UnifiedAreaRect" Value="{{0.422256,0},{0.0749369,0},{0.881116,0},{0.246909,0}}" />
-						<Property Name="TextParsingEnabled" Value="False" />
-					</Window>
-					<Window Type="TaharezLook/StaticText" Name="MainMenu/FrameWindow/StaticText" >
-						<Property Name="Text" Value="Address:" />
-						<Property Name="FrameEnabled" Value="False" />
-						<Property Name="HorzFormatting" Value="HorzCentred" />
-						<Property Name="UnifiedAreaRect" Value="{{0.0346225,0},{0.130269,-4},{0.354243,1},{0.213134,-2}}" />
-						<Property Name="BackgroundEnabled" Value="False" />
-						<AutoWindow NameSuffix="__auto_hscrollbar__" >
-							<AutoWindow NameSuffix="__auto_decbtn__" />
-							<AutoWindow NameSuffix="__auto_thumb__" />
-						</AutoWindow>
-						<AutoWindow NameSuffix="__auto_vscrollbar__" >
-							<AutoWindow NameSuffix="__auto_decbtn__" />
-							<AutoWindow NameSuffix="__auto_thumb__" />
-						</AutoWindow>
-					</Window>
-					<Window Type="TaharezLook/StaticText" Name="MainMenu/FrameWindow/StaticText2" >
-						<Property Name="Text" Value="Port:" />
-						<Property Name="FrameEnabled" Value="False" />
-						<Property Name="HorzFormatting" Value="HorzCentred" />
-						<Property Name="UnifiedAreaRect" Value="{{0.0346225,0},{0.405796,-4},{0.354243,1},{0.488661,-2}}" />
-						<Property Name="BackgroundEnabled" Value="False" />
-						<AutoWindow NameSuffix="__auto_hscrollbar__" >
-							<AutoWindow NameSuffix="__auto_decbtn__" />
-							<AutoWindow NameSuffix="__auto_thumb__" />
-						</AutoWindow>
-						<AutoWindow NameSuffix="__auto_vscrollbar__" >
-							<AutoWindow NameSuffix="__auto_decbtn__" />
-							<AutoWindow NameSuffix="__auto_thumb__" />
-						</AutoWindow>
-					</Window>
-					<Window Type="TaharezLook/Editbox" Name="MainMenu/FrameWindow/Port" >
-						<Property Name="MaxTextLength" Value="1073741823" />
-						<Property Name="UnifiedAreaRect" Value="{{0.420486,0},{0.357255,0},{0.877576,0},{0.529226,0}}" />
-						<Property Name="TextParsingEnabled" Value="False" />
-					</Window>
-					<Window Type="TaharezLook/Button" Name="MainMenu/FrameWindow/Connect" >
-						<Property Name="Text" Value="Connect" />
-						<Property Name="UnifiedAreaRect" Value="{{0.292108,0},{0.685933,0},{0.746404,0},{0.874855,0}}" />
-					</Window>
-				</AutoWindow>
+			<Window name="GroupBox" type="TaharezLook/GroupBox">
+				<Property name="Text" value="Join a server" />
+				<Property name="RiseOnClickEnabled" value="False" />
+				<Property name="Area" value="{{0.0474683,0},{0.20406,0},{0.966772,0},{0.779754,0}}" />
+				<Window name="FrameWindow/Hostname" type="TaharezLook/Editbox">
+					<Property name="MaxTextLength" value="1073741823" />
+					<Property name="Area" value="{{0.422256,0},{0.0749369,0},{0.881116,0},{0.246909,0}}" />
+					<Property name="TextParsingEnabled" value="False" />
+				</Window>
+				<Window name="FrameWindow/StaticText" type="TaharezLook/StaticText">
+					<Property name="Text" value="Address:" />
+					<Property name="FrameEnabled" value="False" />
+					<Property name="HorzFormatting" value="HorzCentred" />
+					<Property name="Area" value="{{0.0346225,0},{0.130269,-4},{0.354243,1},{0.213134,-2}}" />
+					<Property name="BackgroundEnabled" value="False" />
+					<AutoWindow namePath="__auto_hscrollbar__">
+						<AutoWindow namePath="__auto_decbtn__" />
+						<AutoWindow namePath="__auto_thumb__" />
+					</AutoWindow>
+					<AutoWindow namePath="__auto_vscrollbar__">
+						<AutoWindow namePath="__auto_decbtn__" />
+						<AutoWindow namePath="__auto_thumb__" />
+					</AutoWindow>
+				</Window>
+				<Window name="FrameWindow/StaticText2" type="TaharezLook/StaticText">
+					<Property name="Text" value="Port:" />
+					<Property name="FrameEnabled" value="False" />
+					<Property name="HorzFormatting" value="HorzCentred" />
+					<Property name="Area" value="{{0.0346225,0},{0.405796,-4},{0.354243,1},{0.488661,-2}}" />
+					<Property name="BackgroundEnabled" value="False" />
+					<AutoWindow namePath="__auto_hscrollbar__">
+						<AutoWindow namePath="__auto_decbtn__" />
+						<AutoWindow namePath="__auto_thumb__" />
+					</AutoWindow>
+					<AutoWindow namePath="__auto_vscrollbar__">
+						<AutoWindow namePath="__auto_decbtn__" />
+						<AutoWindow namePath="__auto_thumb__" />
+					</AutoWindow>
+				</Window>
+				<Window name="FrameWindow/Port" type="TaharezLook/Editbox">
+					<Property name="MaxTextLength" value="1073741823" />
+					<Property name="Area" value="{{0.420486,0},{0.357255,0},{0.877576,0},{0.529226,0}}" />
+					<Property name="TextParsingEnabled" value="False" />
+				</Window>
+				<Window name="FrameWindow/Connect" type="TaharezLook/Button">
+					<Property name="Text" value="Connect" />
+					<Property name="Area" value="{{0.292108,0},{0.685933,0},{0.746404,0},{0.874855,0}}" />
+				</Window>
 			</Window>
 		</Window>
 	</Window>

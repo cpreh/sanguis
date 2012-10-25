@@ -34,8 +34,7 @@ sanguis::load::resource::texture_context_impl::texture_context_impl(
 		task_.get_future()
 	),
 	thread_(
-		// FIXME: boost::ref doesn't work here!
-		std::tr1::ref(
+		fcppt::ref(
 			task_
 		)
 	),
