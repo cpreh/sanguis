@@ -46,7 +46,7 @@ private:
 
 	boost::packaged_task<future_value> task_;
 
-	boost::unique_future<future_value> future_;
+	boost::future<future_value> future_;
 
 	boost::thread thread_;
 
