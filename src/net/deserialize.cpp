@@ -1,7 +1,5 @@
 #include <sanguis/net/deserialize.hpp>
 #include <sanguis/net/receive_buffer_source.hpp>
-#include <sanguis/net/size_type.hpp>
-#include <sanguis/net/value_type.hpp>
 #include <sanguis/net/stream_exceptions.hpp>
 #include <sanguis/net/message_header.hpp>
 #include <sanguis/net/message_header_size.hpp>
@@ -11,6 +9,9 @@
 #include <sanguis/messages/global_context.hpp>
 #include <sanguis/exception.hpp>
 #include <alda/endianness.hpp>
+#include <alda/net/size_type.hpp>
+#include <alda/net/value_type.hpp>
+#include <alda/net/buffer/circular_receive/object.hpp>
 #include <fcppt/assert/throw.hpp>
 #include <fcppt/assert/throw_message.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
@@ -23,29 +24,30 @@
 #include <istream>
 #include <fcppt/config/external_end.hpp>
 
+
 sanguis::messages::auto_ptr
 sanguis::net::deserialize(
-	net::receive_buffer &_data
+	alda::net::buffer::circular_receive::object &_data
 )
 {
-	net::receive_buffer::size_type const remaining_size(
+	alda::net::buffer::circular_receive::object::size_type const remaining_size(
 		_data.read_size()
 	);
 
 	if(
-		remaining_size < net::message_header_size
+		remaining_size < sanguis::net::message_header_size::value
 	)
-		return messages::auto_ptr();
+		return sanguis::messages::auto_ptr();
 
 	typedef boost::iostreams::stream_buffer<
-		net::receive_buffer_source
+		sanguis::net::receive_buffer_source
 	> stream_buf;
 
 	typedef std::basic_istream<
-		net::value_type
+		alda::net::value_type
 	> stream_type;
 
-	net::receive_buffer_source source(
+	sanguis::net::receive_buffer_source source(
 		_data
 	);
 
@@ -57,13 +59,13 @@ sanguis::net::deserialize(
 		&buf
 	);
 
-	net::stream_exceptions(
+	sanguis::net::stream_exceptions(
 		stream
 	);
 
-	net::message_header const message_size(
+	sanguis::net::message_header const message_size(
 		*fcppt::io::read<
-			net::message_header
+			sanguis::net::message_header
 		>(
 			stream,
 			alda::endianness()
@@ -72,11 +74,11 @@ sanguis::net::deserialize(
 
 	FCPPT_ASSERT_THROW(
 		static_cast<
-			net::size_type
+			alda::net::size_type
 		>(
 			stream.gcount()
 		)
-		== net::message_header_size,
+		== sanguis::net::message_header_size::value,
 		sanguis::exception
 	);
 
@@ -86,7 +88,7 @@ sanguis::net::deserialize(
 	);
 
 	FCPPT_ASSERT_THROW_MESSAGE(
-		net::message_size(
+		sanguis::net::message_size(
 			message_size
 		)
 		<= _data.capacity(),
@@ -102,15 +104,15 @@ sanguis::net::deserialize(
 	if(
 		remaining_size
 		<
-		net::message_size(
+		sanguis::net::message_size(
 			message_size
 		)
 	)
-		return messages::auto_ptr();
+		return sanguis::messages::auto_ptr();
 
-	messages::auto_ptr ret(
-		messages::serialization::deserialize(
-			messages::global_context(),
+	sanguis::messages::auto_ptr ret(
+		sanguis::messages::serialization::deserialize(
+			sanguis::messages::global_context(),
 			stream
 		)
 	);
@@ -120,9 +122,9 @@ sanguis::net::deserialize(
 		sanguis::exception
 	);
 
-	net::size_type const bytes_read(
+	alda::net::size_type const bytes_read(
 		static_cast<
-			net::size_type
+			alda::net::size_type
 		>(
 			stream.tellg()
 		)
@@ -131,7 +133,7 @@ sanguis::net::deserialize(
 	FCPPT_ASSERT_THROW(
 		bytes_read
 		==
-		net::message_header_size
+		sanguis::net::message_header_size::value
 		+ ret->size(),
 		sanguis::exception
 	);

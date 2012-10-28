@@ -1,17 +1,18 @@
 #ifndef SANGUIS_NET_DESERIALIZE_HPP_INCLUDED
 #define SANGUIS_NET_DESERIALIZE_HPP_INCLUDED
 
-#include <sanguis/net/receive_buffer.hpp>
 #include <sanguis/messages/auto_ptr.hpp>
+#include <alda/net/buffer/circular_receive/object_fwd.hpp>
+
 
 namespace sanguis
 {
 namespace net
 {
 
-messages::auto_ptr
+sanguis::messages::auto_ptr
 deserialize(
-	net::receive_buffer &
+	alda::net::buffer::circular_receive::object &
 );
 
 }

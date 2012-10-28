@@ -1,6 +1,7 @@
 #include <sanguis/io_service_callback.hpp>
 #include <sanguis/io_service.hpp>
 #include <sanguis/io_service_impl.hpp>
+#include <alda/net/io_service_wrapper.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/function/object.hpp>
 
@@ -24,7 +25,7 @@ sanguis::io_service::post(
 	sanguis::io_service_callback const &_callback
 )
 {
-	impl_->get().post(
+	this->impl().get().post(
 		_callback
 	);
 }
@@ -32,17 +33,17 @@ sanguis::io_service::post(
 void
 sanguis::io_service::run()
 {
-	impl_->get().run();
+	this->impl().get().run();
 }
 
 void
 sanguis::io_service::stop()
 {
-	impl_->get().stop();
+	this->impl().get().stop();
 }
 
-sanguis::io_service_impl &
-sanguis::io_service::impl()
+alda::net::io_service_wrapper const &
+sanguis::io_service::impl() const
 {
-	return *impl_;
+	return impl_->get();
 }

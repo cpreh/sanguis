@@ -1,13 +1,17 @@
 #ifndef SANGUIS_NET_CIRCULAR_BUFFER_SINK_HPP_INCLUDED
 #define SANGUIS_NET_CIRCULAR_BUFFER_SINK_HPP_INCLUDED
 
-#include <sanguis/net/circular_buffer.hpp>
-#include <sanguis/net/value_type.hpp>
+#include <alda/net/value_type.hpp>
+#include <alda/net/buffer/circular_send/object_fwd.hpp>
 #include <fcppt/nonassignable.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/iostreams/concepts.hpp>
-#include <ios>
+#include <iosfwd>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -20,8 +24,11 @@ class circular_buffer_sink
 		circular_buffer_sink
 	);
 public:
-	typedef net::value_type
+	typedef alda::net::value_type
 	char_type;
+
+	FCPPT_PP_PUSH_WARNING
+	FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)
 
 	struct category
 	:
@@ -30,8 +37,11 @@ public:
 	{
 	};
 
-	explicit circular_buffer_sink(
-		net::circular_buffer &
+	FCPPT_PP_POP_WARNING
+
+	explicit
+	circular_buffer_sink(
+		alda::net::buffer::circular_send::object &
 	);
 
 	std::streamsize
@@ -40,7 +50,7 @@ public:
 		std::streamsize
 	);
 private:
-	net::circular_buffer &container_;
+	alda::net::buffer::circular_send::object &container_;
 };
 
 }

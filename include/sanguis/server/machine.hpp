@@ -1,27 +1,28 @@
 #ifndef SANGUIS_SERVER_MACHINE_HPP_INCLUDED
 #define SANGUIS_SERVER_MACHINE_HPP_INCLUDED
 
-#include <sanguis/server/machine_fwd.hpp>
-#include <sanguis/server/states/running_fwd.hpp>
-#include <sanguis/server/player_id.hpp>
+#include <sanguis/io_service_fwd.hpp>
+#include <sanguis/timer.hpp>
 #include <sanguis/load/context_base_fwd.hpp>
 #include <sanguis/messages/auto_ptr.hpp>
 #include <sanguis/messages/base_fwd.hpp>
-#include <sanguis/net/server/object.hpp>
 #include <sanguis/net/data_buffer.hpp>
-#include <sanguis/net/id.hpp>
-#include <sanguis/net/port.hpp>
-#include <sanguis/net/receive_buffer_fwd.hpp>
-#include <sanguis/io_service_fwd.hpp>
-#include <sanguis/timer.hpp>
+#include <sanguis/server/machine_fwd.hpp>
+#include <sanguis/server/player_id.hpp>
+#include <sanguis/server/timer.hpp>
+#include <sanguis/server/states/running_fwd.hpp>
 #include <sge/charconv/system_fwd.hpp>
-#include <fcppt/container/raw_vector_decl.hpp>
+#include <alda/net/id.hpp>
+#include <alda/net/port.hpp>
+#include <alda/net/buffer/circular_receive/object_fwd.hpp>
+#include <alda/net/server/object.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/state_machine.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -31,8 +32,8 @@ namespace server
 struct machine
 :
 	public boost::statechart::state_machine<
-		machine,
-		states::running
+		sanguis::server::machine,
+		sanguis::server::states::running
 	>
 {
 	FCPPT_NONCOPYABLE(
@@ -40,9 +41,9 @@ struct machine
 	);
 public:
 	machine(
-		load::context_base const &,
+		sanguis::load::context_base const &,
 		sge::charconv::system &,
-		net::port,
+		alda::net::port,
 		sanguis::io_service &
 	);
 
@@ -56,16 +57,16 @@ public:
 
 	void
 	send_to_all(
-		messages::base const &
+		sanguis::messages::base const &
 	);
 
 	void
 	send_unicast(
-		server::player_id,
-		messages::base const &
+		sanguis::server::player_id,
+		sanguis::messages::base const &
 	);
 
-	load::context_base const &
+	sanguis::load::context_base const &
 	resources() const;
 
 	sge::charconv::system &
@@ -73,25 +74,25 @@ public:
 private:
 	void
 	process_message(
-		net::id,
-		messages::auto_ptr
+		alda::net::id,
+		sanguis::messages::auto_ptr
 	);
 
 	void
 	connect_callback(
-		net::id
+		alda::net::id
 	);
 
 	void
 	disconnect_callback(
-		net::id,
+		alda::net::id,
 		fcppt::string const &
 	);
 
 	void
 	data_callback(
-		net::id,
-		net::receive_buffer &
+		alda::net::id,
+		alda::net::buffer::circular_receive::object &
 	);
 
 	void
@@ -101,19 +102,22 @@ private:
 
 	sge::charconv::system &charconv_system_;
 
-	net::port const port_;
+	alda::net::port const port_;
 
-	net::server::object net_;
+	sanguis::io_service &io_service_;
+
+	alda::net::server::object net_;
 
 	sanguis::timer frame_timer_;
 
-	net::data_buffer temp_buffer_;
+	sanguis::net::data_buffer temp_buffer_;
 
 	fcppt::signal::scoped_connection const
 		s_conn_,
 		s_disconn_,
-		s_data_,
-		s_timer_;
+		s_data_;
+
+	sanguis::server::timer timer_;
 };
 
 }

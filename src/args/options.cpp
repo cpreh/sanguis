@@ -1,8 +1,8 @@
 #include <sanguis/args/options.hpp>
-#include <sanguis/net/port.hpp>
 #include <sge/console/output_line_limit.hpp>
 #include <sge/renderer/pixel_format/multi_samples_value.hpp>
 #include <sge/renderer/screen_unit.hpp>
+#include <alda/net/port.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/options_description.hpp>
 #include <string>
@@ -85,7 +85,7 @@ sanguis::args::options()
 		(
 			"serverport",
 			po::value<
-				sanguis::net::port
+				alda::net::port::value_type
 			>()->default_value(
 				31337
 			),

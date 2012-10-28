@@ -1,16 +1,22 @@
 #include <sanguis/server/events/message.hpp>
+#include <sanguis/messages/auto_ptr.hpp>
 #include <sanguis/messages/base.hpp>
+#include <sanguis/messages/shared_ptr.hpp>
+#include <alda/net/id.hpp>
+
 
 sanguis::server::events::message::message(
-	messages::auto_ptr _message,
-	net::id const _id
+	sanguis::messages::auto_ptr _message,
+	alda::net::id const _id
 )
 :
 	message_(
 		// TODO: this is not safe!
 		_message.release()
 	),
-	id_(_id)
+	id_(
+		_id
+	)
 {
 }
 
@@ -24,7 +30,7 @@ sanguis::server::events::message::get() const
 	return message_;
 }
 
-sanguis::net::id
+alda::net::id const
 sanguis::server::events::message::id() const
 {
 	return id_;

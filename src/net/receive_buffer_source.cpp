@@ -1,17 +1,25 @@
 #include <sanguis/net/receive_buffer_source.hpp>
-#include <sanguis/net/receive_buffer.hpp>
+#include <alda/net/buffer/circular_receive/object.hpp>
 #include <fcppt/algorithm/copy_n.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/iostreams/concepts.hpp>
 #include <algorithm>
+#include <ios>
+#include <iosfwd>
 #include <fcppt/config/external_end.hpp>
 
+
 sanguis::net::receive_buffer_source::receive_buffer_source(
-	net::receive_buffer &_container
+	alda::net::buffer::circular_receive::object &_container
 )
 :
-	container_(_container),
-	read_count_(0)
+	container_(
+		_container
+	),
+	read_count_(
+		0
+	)
 {
 }
 
@@ -21,7 +29,7 @@ sanguis::net::receive_buffer_source::read(
 	std::streamsize const _count
 )
 {
-	net::receive_buffer::joined_range const range(
+	alda::net::buffer::circular_receive::object::joined_range const range(
 		container_.range()
 	);
 

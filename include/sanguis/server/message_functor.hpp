@@ -2,8 +2,9 @@
 #define SANGUIS_SERVER_MESSAGE_FUNCTOR_HPP_INCLUDED
 
 #include <sanguis/server/player_id_from_net.hpp>
-#include <sanguis/net/id.hpp>
+#include <alda/net/id.hpp>
 #include <fcppt/nonassignable.hpp>
+
 
 namespace sanguis
 {
@@ -24,11 +25,15 @@ public:
 
 	message_functor(
 		T &_value,
-		sanguis::net::id const _id
+		alda::net::id const _id
 	)
 	:
-		value_(_value),
-		id_(_id)
+		value_(
+			_value
+		),
+		id_(
+			_id
+		)
 	{
 	}
 
@@ -42,7 +47,7 @@ public:
 	{
 		return
 			value_(
-				server::player_id_from_net(
+				sanguis::server::player_id_from_net(
 					id_
 				),
 				_message
@@ -52,7 +57,7 @@ public:
 private:
 	T &value_;
 
-	sanguis::net::id const id_;
+	alda::net::id const id_;
 };
 
 }

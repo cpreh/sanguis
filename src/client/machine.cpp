@@ -1,30 +1,49 @@
+#include <sanguis/duration.hpp>
+#include <sanguis/io_service.hpp>
 #include <sanguis/client/machine.hpp>
+#include <sanguis/client/config/settings/object_fwd.hpp>
 #include <sanguis/client/events/connected.hpp>
 #include <sanguis/client/events/message.hpp>
 #include <sanguis/client/events/net_error.hpp>
 #include <sanguis/client/events/render.hpp>
 #include <sanguis/client/events/tick.hpp>
+#include <sanguis/client/gui/object_fwd.hpp>
 #include <sanguis/client/log.hpp>
 #include <sanguis/messages/auto_ptr.hpp>
 #include <sanguis/messages/base.hpp>
+#include <sanguis/load/context_fwd.hpp>
 #include <sanguis/net/deserialize.hpp>
+#include <sanguis/net/send_buffer_size.hpp>
 #include <sanguis/net/serialize_to_circular_buffer.hpp>
+#include <sanguis/net/receive_buffer_size.hpp>
 #include <sge/charconv/system_fwd.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/font/object_fwd.hpp>
+#include <sge/image2d/system_fwd.hpp>
+#include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/context/scoped_ffp.hpp>
 #include <sge/renderer/device/ffp.hpp>
 #include <sge/renderer/target/onscreen.hpp>
 #include <sge/systems/instance.hpp>
+#include <sge/viewport/manager_fwd.hpp>
 #include <sge/window/system.hpp>
 #include <awl/main/exit_success.hpp>
+#include <alda/net/host.hpp>
+#include <alda/net/parameters.hpp>
+#include <alda/net/port.hpp>
+#include <alda/net/buffer/circular_receive/object_fwd.hpp>
+#include <fcppt/move.hpp>
+#include <fcppt/string.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/output.hpp>
+#include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/move.hpp>
-#include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/system/error_code.hpp>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::machine::machine(
@@ -69,7 +88,11 @@ sanguis::client::machine::machine(
 		_viewport_manager
 	),
 	net_(
-		_io_service
+		alda::net::parameters(
+			_io_service.impl(),
+			sanguis::net::send_buffer_size(),
+			sanguis::net::receive_buffer_size()
+		)
 	),
 	s_conn_(
 		net_.register_connect(
@@ -122,11 +145,11 @@ sanguis::client::machine::~machine()
 
 void
 sanguis::client::machine::quickstart(
-	sanguis::net::port const _port
+	alda::net::port const _port
 )
 {
 	FCPPT_LOG_DEBUG(
-		client::log(),
+		sanguis::client::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("machine::quickstart()")
 	);
@@ -136,19 +159,21 @@ sanguis::client::machine::quickstart(
 	);
 
 	this->connect(
-		"localhost",
+		alda::net::host(
+			"localhost"
+		),
 		_port
 	);
 }
 
 void
 sanguis::client::machine::connect(
-	sanguis::net::hostname const &_hostname,
-	sanguis::net::port const _port
+	alda::net::host const &_host,
+	alda::net::port const _port
 )
 {
 	net_.connect(
-		_hostname,
+		_host,
 		_port
 	);
 }
@@ -165,14 +190,14 @@ sanguis::client::machine::send(
 )
 {
 	if(
-		!net::serialize_to_circular_buffer(
+		!sanguis::net::serialize_to_circular_buffer(
 			_message,
 			net_.send_buffer()
 		)
 	)
 	{
 		FCPPT_LOG_ERROR(
-			client::log(),
+			sanguis::client::log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("Not enough space left in the send_buffer")
 		);
@@ -301,7 +326,7 @@ void
 sanguis::client::machine::connect_callback()
 {
 	this->process_event(
-		events::connected()
+		sanguis::client::events::connected()
 	);
 }
 
@@ -321,13 +346,13 @@ sanguis::client::machine::error_callback(
 
 void
 sanguis::client::machine::data_callback(
-	net::receive_buffer &_data
+	alda::net::buffer::circular_receive::object &_data
 )
 {
 	for(;;)
 	{
-		messages::auto_ptr ret(
-			net::deserialize(
+		sanguis::messages::auto_ptr ret(
+			sanguis::net::deserialize(
 				_data
 			)
 		);
@@ -338,7 +363,7 @@ sanguis::client::machine::data_callback(
 			return;
 
 		this->process_event(
-			events::message(
+			sanguis::client::events::message(
 				fcppt::move(
 					ret
 				)

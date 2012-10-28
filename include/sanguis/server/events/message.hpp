@@ -4,11 +4,12 @@
 #include <sanguis/server/events/message_fwd.hpp>
 #include <sanguis/messages/auto_ptr.hpp>
 #include <sanguis/messages/shared_ptr.hpp>
-#include <sanguis/net/id.hpp>
+#include <alda/net/id.hpp>
 #include <fcppt/nonassignable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -28,21 +29,21 @@ class message
 	);
 public:
 	message(
-		messages::auto_ptr,
-		net::id
+		sanguis::messages::auto_ptr,
+		alda::net::id
 	);
 
 	~message();
 
-	messages::shared_ptr const
+	sanguis::messages::shared_ptr const
 	get() const;
 
-	net::id
+	alda::net::id const
 	id() const;
 private:
-	messages::shared_ptr const message_;
+	sanguis::messages::shared_ptr const message_;
 
-	net::id const id_;
+	alda::net::id const id_;
 };
 
 }

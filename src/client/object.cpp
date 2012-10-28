@@ -1,3 +1,5 @@
+#include <sanguis/duration.hpp>
+#include <sanguis/main_object.hpp>
 #include <sanguis/client/create_systems.hpp>
 #include <sanguis/client/log.hpp>
 #include <sanguis/client/object.hpp>
@@ -11,13 +13,13 @@
 #include <sanguis/client/events/tick.hpp>
 #include <sanguis/client/states/menu.hpp>
 #include <sanguis/server/object.hpp>
-#include <sanguis/duration.hpp>
 #include <sge/config/media_path.hpp>
 #include <sge/font/object.hpp>
 #include <sge/font/parameters.hpp>
 #include <sge/font/system.hpp>
 #include <sge/timer/elapsed_and_reset.hpp>
 #include <sge/window/system.hpp>
+#include <alda/net/port.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/exit_failure.hpp>
 #include <awl/main/exit_success.hpp>
@@ -32,7 +34,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
-#include <cstdlib>
+#include <boost/program_options/variables_map.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -40,6 +42,7 @@ sanguis::client::object::object(
 	boost::program_options::variables_map const &_variables_map
 )
 :
+	sanguis::main_object(),
 	settings_(
 		client::config::settings::file()
 	),
@@ -92,7 +95,7 @@ sanguis::client::object::object(
 		settings_,
 		gui_,
 		std::tr1::bind(
-			&object::create_server,
+			&sanguis::client::object::create_server,
 			this,
 			std::tr1::placeholders::_1
 		),
@@ -206,7 +209,7 @@ sanguis::client::object::loop_handler()
 
 void
 sanguis::client::object::create_server(
-	net::port const _port
+	alda::net::port const _port
 )
 {
 	if(

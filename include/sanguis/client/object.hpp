@@ -9,13 +9,13 @@
 #include <sanguis/client/cursor/object.hpp>
 #include <sanguis/client/gui/object.hpp>
 #include <sanguis/load/context.hpp>
-#include <sanguis/net/port.hpp>
 #include <sanguis/server/object_fwd.hpp>
 #include <sanguis/io_service.hpp>
 #include <sanguis/main_object.hpp>
 #include <sanguis/timer.hpp>
 #include <sge/console/object.hpp>
 #include <sge/font/object_scoped_ptr.hpp>
+#include <alda/net/port.hpp>
 #include <awl/main/exit_code.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
@@ -32,13 +32,14 @@ namespace client
 
 class object
 :
-	public main_object
+	public sanguis::main_object
 {
 	FCPPT_NONCOPYABLE(
 		object
 	);
 public:
-	explicit object(
+	explicit
+	object(
 		boost::program_options::variables_map const &
 	);
 
@@ -55,16 +56,16 @@ private:
 
 	void
 	create_server(
-		net::port
+		alda::net::port
 	);
 
 	awl::main::exit_code const
 	quit_server();
 
 	// declare the config stuff first, so they are destroyed last
-	config::settings::object settings_;
+	sanguis::client::config::settings::object settings_;
 
-	config::settings::saver saver_;
+	sanguis::client::config::settings::saver saver_;
 
 	sanguis::io_service io_service_;
 
@@ -78,24 +79,24 @@ private:
 
 	sge::console::object console_;
 
-	client::console::gfx console_gfx_;
+	sanguis::client::console::gfx console_gfx_;
 
-	load::context resources_;
+	sanguis::load::context resources_;
 
-	client::cursor::object cursor_;
+	sanguis::client::cursor::object cursor_;
 
-	client::gui::object gui_;
+	sanguis::client::gui::object gui_;
 
-	client::machine machine_;
+	sanguis::client::machine machine_;
 
 	sanguis::timer frame_timer_;
 
 	fcppt::scoped_ptr<
-		server::object
+		sanguis::server::object
 	> server_;
 
 	typedef fcppt::scoped_state_machine<
-		client::machine
+		sanguis::client::machine
 	> scoped_machine;
 
 	scoped_machine scoped_machine_;

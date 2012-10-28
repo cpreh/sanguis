@@ -4,12 +4,13 @@
 #include <sanguis/client/config/settings/get_or_default.hpp>
 #include <sanguis/client/config/settings/set_key.hpp>
 #include <sanguis/client/log_location.hpp>
-#include <sanguis/net/port.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/media_path.hpp>
 #include <sge/cegui/from_cegui_string.hpp>
 #include <sge/cegui/to_cegui_string.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
+#include <alda/net/host.hpp>
+#include <alda/net/port.hpp>
 #include <fcppt/log/parameters/object.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/location.hpp>
@@ -279,14 +280,16 @@ sanguis::client::gui::menu::object::handle_quickstart(
 )
 {
 	callbacks_.quickstart()(
-		fcppt::extract_from_string_exn<
-			net::port
-		>(
-			client::config::settings::get_or_default(
-				settings_,
-				config_section,
-				config_quickstart_port_key,
-				FCPPT_TEXT("31337")
+		alda::net::port(
+			fcppt::extract_from_string_exn<
+				alda::net::port::value_type
+			>(
+				client::config::settings::get_or_default(
+					settings_,
+					config_section,
+					config_quickstart_port_key,
+					FCPPT_TEXT("31337")
+				)
 			)
 		)
 	);
@@ -368,18 +371,22 @@ void
 sanguis::client::gui::menu::object::do_connect()
 {
 	callbacks_.connect()(
-		fcppt::to_std_string(
-			sge::cegui::from_cegui_string(
-				hostname_edit_.getText(),
-				gui_.charconv_system()
+		alda::net::host(
+			fcppt::to_std_string(
+				sge::cegui::from_cegui_string(
+					hostname_edit_.getText(),
+					gui_.charconv_system()
+				)
 			)
 		),
-		fcppt::extract_from_string_exn<
-			net::port
-		>(
-			sge::cegui::from_cegui_string(
-				port_edit_.getText(),
-				gui_.charconv_system()
+		alda::net::port(
+			fcppt::extract_from_string_exn<
+				alda::net::port::value_type
+			>(
+				sge::cegui::from_cegui_string(
+					port_edit_.getText(),
+					gui_.charconv_system()
+				)
 			)
 		)
 	);

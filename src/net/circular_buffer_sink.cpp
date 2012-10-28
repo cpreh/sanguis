@@ -1,11 +1,17 @@
 #include <sanguis/net/circular_buffer_sink.hpp>
-#include <sanguis/net/circular_buffer_space_left.hpp>
+#include <alda/net/buffer/circular_send/object.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <iosfwd>
+#include <fcppt/config/external_end.hpp>
+
 
 sanguis::net::circular_buffer_sink::circular_buffer_sink(
-	net::circular_buffer &_container
+	alda::net::buffer::circular_send::object &_container
 )
 :
-	container_(_container)
+	container_(
+		_container
+	)
 {
 }
 
@@ -20,16 +26,14 @@ sanguis::net::circular_buffer_sink::write(
 		static_cast<
 			std::streamsize
 		>(
-			net::circular_buffer_space_left(
-				container_
-			)
+			container_.space_left()
 		)
 		< _size
 	)
 		return -1;
 
-	container_.insert(
-		container_.end(),
+	container_.get().insert(
+		container_.get().end(),
 		_data,
 		_data + _size
 	);

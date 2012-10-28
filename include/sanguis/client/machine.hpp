@@ -9,10 +9,6 @@
 #include <sanguis/client/server_callback.hpp>
 #include <sanguis/load/context_fwd.hpp>
 #include <sanguis/messages/base_fwd.hpp>
-#include <sanguis/net/client/object.hpp>
-#include <sanguis/net/hostname.hpp>
-#include <sanguis/net/port.hpp>
-#include <sanguis/net/receive_buffer_fwd.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/io_service_fwd.hpp>
 #include <sge/charconv/system_fwd.hpp>
@@ -23,13 +19,19 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <sge/window/system_fwd.hpp>
+#include <alda/net/host.hpp>
+#include <alda/net/port.hpp>
+#include <alda/net/buffer/circular_receive/object_fwd.hpp>
+#include <alda/net/client/object.hpp>
 #include <fcppt/function/object.hpp>
+#include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/state_machine.hpp>
 #include <boost/system/error_code.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -68,13 +70,13 @@ public:
 
 	void
 	quickstart(
-		sanguis::net::port
+		alda::net::port
 	);
 
 	void
 	connect(
-		sanguis::net::hostname const &,
-		sanguis::net::port
+		alda::net::host const &,
+		alda::net::port
 	);
 
 	void
@@ -143,7 +145,7 @@ private:
 
 	void
 	data_callback(
-		sanguis::net::receive_buffer &
+		alda::net::buffer::circular_receive::object &
 	);
 
 	sanguis::client::config::settings::object &settings_;
@@ -162,9 +164,9 @@ private:
 
 	sge::viewport::manager &viewport_manager_;
 
-	sanguis::net::client::object net_;
+	alda::net::client::object net_;
 
-	fcppt::signal::auto_connection const
+	fcppt::signal::scoped_connection const
 		s_conn_,
 		s_disconn_,
 		s_data_;

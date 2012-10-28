@@ -1,13 +1,18 @@
 #ifndef SANGUIS_NET_RECEIVE_BUFFER_SOURCE_HPP_INCLUDED
 #define SANGUIS_NET_RECEIVE_BUFFER_SOURCE_HPP_INCLUDED
 
-#include <sanguis/net/receive_buffer_fwd.hpp>
-#include <sanguis/net/value_type.hpp>
+#include <alda/net/value_type.hpp>
+#include <alda/net/buffer/circular_receive/object_fwd.hpp>
 #include <fcppt/nonassignable.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/iostreams/concepts.hpp>
 #include <ios>
+#include <iosfwd>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -21,7 +26,10 @@ class receive_buffer_source
 	);
 public:
 	typedef
-	net::value_type char_type;
+	alda::net::value_type char_type;
+
+	FCPPT_PP_PUSH_WARNING
+	FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)
 
 	struct category
 	:
@@ -30,8 +38,11 @@ public:
 	{
 	};
 
-	explicit receive_buffer_source(
-		net::receive_buffer &
+	FCPPT_PP_POP_WARNING
+
+	explicit
+	receive_buffer_source(
+		alda::net::buffer::circular_receive::object &
 	);
 
 	std::streamsize
@@ -46,7 +57,7 @@ public:
 		std::ios_base::seekdir
 	);
 private:
-	net::receive_buffer &container_;
+	alda::net::buffer::circular_receive::object &container_;
 
 	std::streampos read_count_;
 };

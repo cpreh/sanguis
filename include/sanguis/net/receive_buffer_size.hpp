@@ -1,14 +1,15 @@
 #ifndef SANGUIS_NET_RECEIVE_BUFFER_SIZE_HPP_INCLUDED
 #define SANGUIS_NET_RECEIVE_BUFFER_SIZE_HPP_INCLUDED
 
-#include <sanguis/net/size_type.hpp>
+#include <alda/net/buffer/max_receive_size.hpp>
+
 
 namespace sanguis
 {
 namespace net
 {
 
-net::size_type
+alda::net::buffer::max_receive_size const
 receive_buffer_size();
 
 }

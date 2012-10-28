@@ -4,10 +4,10 @@
 #include <sanguis/server/machine.hpp>
 #include <sanguis/server/object_fwd.hpp>
 #include <sanguis/load/context_base_fwd.hpp>
-#include <sanguis/net/port.hpp>
 #include <sanguis/main_object.hpp>
 #include <sanguis/io_service.hpp>
 #include <sge/charconv/system_fwd.hpp>
+#include <alda/net/port.hpp>
 #include <fcppt/scoped_state_machine.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <awl/main/exit_code.hpp>
@@ -30,8 +30,8 @@ class object
 	);
 public:
 	object(
-		net::port,
-		load::context_base const &,
+		alda::net::port,
+		sanguis::load::context_base const &,
 		sge::charconv::system &
 	);
 
@@ -62,7 +62,7 @@ private:
 	server::machine machine_;
 
 	typedef fcppt::scoped_state_machine<
-		server::machine
+		sanguis::server::machine
 	> scoped_machine;
 
 	scoped_machine scoped_machine_;

@@ -581,62 +581,24 @@ SET(
 	include/sanguis/messages/vector2.hpp
 	include/sanguis/messages/world_id.hpp
 	include/sanguis/net/append_to_circular_buffer.hpp
-	include/sanguis/net/circular_buffer.hpp
-	include/sanguis/net/circular_buffer_send_part.hpp
 	include/sanguis/net/circular_buffer_sink.hpp
-	include/sanguis/net/circular_buffer_space_left.hpp
-	include/sanguis/net/client/connect_callback.hpp
-	include/sanguis/net/client/connect_function.hpp
-	include/sanguis/net/client/data_callback.hpp
-	include/sanguis/net/client/data_function.hpp
-	include/sanguis/net/client/error_callback.hpp
-	include/sanguis/net/client/error_function.hpp
-	include/sanguis/net/client/object.hpp
-	include/sanguis/net/client/object_impl.hpp
-	include/sanguis/net/client/object_impl_fwd.hpp
 	include/sanguis/net/data_buffer.hpp
+	include/sanguis/net/data_buffer_fwd.hpp
 	include/sanguis/net/deserialize.hpp
-	include/sanguis/net/duration.hpp
-	include/sanguis/net/erase_circular_buffer_front.hpp
 	include/sanguis/net/exception.hpp
-	include/sanguis/net/hostname.hpp
-	include/sanguis/net/id.hpp
 	include/sanguis/net/is_disconnect.hpp
 	include/sanguis/net/log.hpp
 	include/sanguis/net/log_location.hpp
 	include/sanguis/net/message_header.hpp
 	include/sanguis/net/message_header_size.hpp
 	include/sanguis/net/message_size.hpp
-	include/sanguis/net/port.hpp
-	include/sanguis/net/receive_buffer.hpp
-	include/sanguis/net/receive_buffer_for_asio.hpp
-	include/sanguis/net/receive_buffer_fwd.hpp
-	include/sanguis/net/receive_buffer_part.hpp
-	include/sanguis/net/receive_buffer_part_fwd.hpp
 	include/sanguis/net/receive_buffer_size.hpp
 	include/sanguis/net/receive_buffer_source.hpp
 	include/sanguis/net/send_buffer_size.hpp
 	include/sanguis/net/serialize_impl.hpp
 	include/sanguis/net/serialize_to_circular_buffer.hpp
 	include/sanguis/net/serialize_to_data_buffer.hpp
-	include/sanguis/net/server/connect_callback.hpp
-	include/sanguis/net/server/connect_function.hpp
-	include/sanguis/net/server/connection.hpp
-	include/sanguis/net/server/connection_container.hpp
-	include/sanguis/net/server/connection_fwd.hpp
-	include/sanguis/net/server/connection_id_container.hpp
-	include/sanguis/net/server/data_callback.hpp
-	include/sanguis/net/server/data_function.hpp
-	include/sanguis/net/server/disconnect_callback.hpp
-	include/sanguis/net/server/disconnect_function.hpp
-	include/sanguis/net/server/object.hpp
-	include/sanguis/net/server/object_impl.hpp
-	include/sanguis/net/server/object_impl_fwd.hpp
-	include/sanguis/net/server/timer_callback.hpp
-	include/sanguis/net/server/timer_function.hpp
-	include/sanguis/net/size_type.hpp
 	include/sanguis/net/stream_exceptions.hpp
-	include/sanguis/net/value_type.hpp
 	include/sanguis/perk_type.hpp
 	include/sanguis/pickup_type.hpp
 	include/sanguis/pixels_per_meter.hpp
@@ -903,6 +865,14 @@ SET(
 	include/sanguis/server/states/unpaused_fwd.hpp
 	include/sanguis/server/string.hpp
 	include/sanguis/server/team.hpp
+	include/sanguis/server/timer.hpp
+	include/sanguis/server/timer_callback.hpp
+	include/sanguis/server/timer_callback_fwd.hpp
+	include/sanguis/server/timer_duration.hpp
+	include/sanguis/server/timer_function.hpp
+	include/sanguis/server/timer_fwd.hpp
+	include/sanguis/server/timer_impl.hpp
+	include/sanguis/server/timer_impl_fwd.hpp
 	include/sanguis/server/unicast_callback.hpp
 	include/sanguis/server/update_sight_function.hpp
 	include/sanguis/server/update_target_function.hpp
@@ -1243,29 +1213,18 @@ SET(
 	src/messages/unpause.cpp
 	src/net/append_to_circular_buffer.cpp
 	src/net/asio.cpp
-	src/net/circular_buffer_send_part.cpp
 	src/net/circular_buffer_sink.cpp
-	src/net/circular_buffer_space_left.cpp
-	src/net/client/object.cpp
-	src/net/client/object_impl.cpp
 	src/net/deserialize.cpp
-	src/net/erase_circular_buffer_front.cpp
 	src/net/exception.cpp
 	src/net/is_disconnect.cpp
 	src/net/log.cpp
 	src/net/log_location.cpp
 	src/net/message_size.cpp
-	src/net/receive_buffer.cpp
-	src/net/receive_buffer_for_asio.cpp
-	src/net/receive_buffer_part.cpp
 	src/net/receive_buffer_size.cpp
 	src/net/receive_buffer_source.cpp
 	src/net/send_buffer_size.cpp
 	src/net/serialize_to_circular_buffer.cpp
 	src/net/serialize_to_data_buffer.cpp
-	src/net/server/connection.cpp
-	src/net/server/object.cpp
-	src/net/server/object_impl.cpp
 	src/pixels_per_meter.cpp
 	src/random_seed.cpp
 	src/server/ai/base.cpp
@@ -1413,6 +1372,8 @@ SET(
 	src/server/states/paused.cpp
 	src/server/states/running.cpp
 	src/server/states/unpaused.cpp
+	src/server/timer.cpp
+	src/server/timer_impl.cpp
 	src/server/waves/convert_enemy_name.cpp
 	src/server/waves/debug.cpp
 	src/server/waves/generator.cpp

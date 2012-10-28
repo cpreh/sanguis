@@ -2,11 +2,12 @@
 #define SANGUIS_SERVER_EVENTS_DISCONNECT_HPP_INCLUDED
 
 #include <sanguis/server/events/disconnect_fwd.hpp>
-#include <sanguis/net/id.hpp>
+#include <alda/net/id.hpp>
 #include <fcppt/nonassignable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -25,14 +26,15 @@ class disconnect
 		disconnect
 	);
 public:
-	explicit disconnect(
-		net::id
+	explicit
+	disconnect(
+		alda::net::id
 	);
 
-	net::id
+	alda::net::id const
 	id() const;
 private:
-	net::id const id_;
+	alda::net::id const id_;
 };
 
 }

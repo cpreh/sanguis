@@ -1,37 +1,45 @@
-#include <sanguis/server/machine.hpp>
-#include <sanguis/server/log.hpp>
-#include <sanguis/server/events/disconnect.hpp>
-#include <sanguis/server/events/message.hpp>
-#include <sanguis/server/events/tick.hpp>
+#include <sanguis/duration.hpp>
+#include <sanguis/io_service.hpp>
+#include <sanguis/load/context_base_fwd.hpp>
 #include <sanguis/messages/auto_ptr.hpp>
 #include <sanguis/messages/base.hpp>
 #include <sanguis/net/append_to_circular_buffer.hpp>
+#include <sanguis/net/receive_buffer_size.hpp>
+#include <sanguis/net/send_buffer_size.hpp>
 #include <sanguis/net/serialize_to_circular_buffer.hpp>
 #include <sanguis/net/serialize_to_data_buffer.hpp>
 #include <sanguis/net/deserialize.hpp>
-#include <sanguis/net/server/connection_id_container.hpp>
-#include <sanguis/duration.hpp>
-#include <sanguis/exception.hpp>
+#include <sanguis/server/machine.hpp>
+#include <sanguis/server/log.hpp>
+#include <sanguis/server/player_id.hpp>
+#include <sanguis/server/events/disconnect.hpp>
+#include <sanguis/server/events/message.hpp>
+#include <sanguis/server/events/tick.hpp>
+#include <sge/charconv/system_fwd.hpp>
 #include <sge/timer/elapsed_and_reset.hpp>
-#include <fcppt/algorithm/append.hpp>
-#include <fcppt/container/raw_vector_impl.hpp>
-#include <fcppt/container/map_impl.hpp>
-#include <fcppt/function/object.hpp>
-#include <fcppt/log/debug.hpp>
+#include <alda/net/id.hpp>
+#include <alda/net/parameters.hpp>
+#include <alda/net/port.hpp>
+#include <alda/net/buffer/circular_receive/object_fwd.hpp>
+#include <alda/net/buffer/circular_send/optional_ref.hpp>
+#include <alda/net/server/connection_id_container.hpp>
+#include <fcppt/move.hpp>
+#include <fcppt/string.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/verbose.hpp>
+#include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/tr1/functional.hpp>
-#include <fcppt/move.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 sanguis::server::machine::machine(
-	load::context_base const &_resources,
+	sanguis::load::context_base const &_resources,
 	sge::charconv::system &_charconv_system,
-	net::port const _port,
+	alda::net::port const _port,
 	sanguis::io_service &_io_service
 )
 :
@@ -44,10 +52,14 @@ sanguis::server::machine::machine(
 	port_(
 		_port
 	),
+	io_service_(
+		_io_service
+	),
 	net_(
-		_io_service,
-		boost::chrono::milliseconds(
-			16
+		alda::net::parameters(
+			io_service_.impl(),
+			sanguis::net::send_buffer_size(),
+			sanguis::net::receive_buffer_size()
 		)
 	),
 	frame_timer_(
@@ -87,14 +99,16 @@ sanguis::server::machine::machine(
 			)
 		)
 	),
-	s_timer_(
-		net_.register_timer(
+	timer_(
+		io_service_,
+		std::tr1::bind(
 			std::tr1::bind(
-				std::tr1::bind(
-					&machine::timer_callback,
-					this
-				)
+				&machine::timer_callback,
+				this
 			)
+		),
+		boost::chrono::milliseconds(
+			16
 		)
 	)
 {
@@ -115,39 +129,39 @@ sanguis::server::machine::listen()
 void
 sanguis::server::machine::stop()
 {
-	net_.stop();
+	io_service_.stop();
 }
 
 void
 sanguis::server::machine::send_to_all(
-	messages::base const &_message
+	sanguis::messages::base const &_message
 )
 {
 	temp_buffer_.clear();
 
-	net::serialize_to_data_buffer(
+	sanguis::net::serialize_to_data_buffer(
 		_message,
 		temp_buffer_
 	);
 
-	net::server::connection_id_container const &connections(
+	alda::net::server::connection_id_container const &connections(
 		net_.connections()
 	);
 
 	for(
-		net::server::connection_id_container::const_iterator it(
+		alda::net::server::connection_id_container::const_iterator it(
 			connections.begin()
 		);
 		it != connections.end();
 		++it
 	)
 	{
-		net::id const id(
+		alda::net::id const id(
 			*it
 		);
 
 		if(
-			!net::append_to_circular_buffer(
+			!sanguis::net::append_to_circular_buffer(
 				*net_.send_buffer(
 					id
 				),
@@ -156,7 +170,7 @@ sanguis::server::machine::send_to_all(
 		)
 		{
 			FCPPT_LOG_ERROR(
-				server::log(),
+				sanguis::server::log(),
 				fcppt::log::_
 					<< FCPPT_TEXT("Client ")
 					<< id
@@ -174,15 +188,15 @@ sanguis::server::machine::send_to_all(
 
 void
 sanguis::server::machine::send_unicast(
-	server::player_id const _id,
-	messages::base const &_message
+	sanguis::server::player_id const _id,
+	sanguis::messages::base const &_message
 )
 {
-	net::id const net_id(
+	alda::net::id const net_id(
 		_id.get()
 	);
 
-	net::circular_buffer *const buffer(
+	alda::net::buffer::circular_send::optional_ref const buffer(
 		net_.send_buffer(
 			net_id
 		)
@@ -193,7 +207,7 @@ sanguis::server::machine::send_unicast(
 	)
 	{
 		FCPPT_LOG_ERROR(
-			server::log(),
+			sanguis::server::log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("Client ")
 				<< net_id
@@ -204,14 +218,14 @@ sanguis::server::machine::send_unicast(
 	}
 
 	if(
-		!net::serialize_to_circular_buffer(
+		!sanguis::net::serialize_to_circular_buffer(
 			_message,
 			*buffer
 		)
 	)
 	{
 		FCPPT_LOG_ERROR(
-			server::log(),
+			sanguis::server::log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("Client ")
 				<< net_id
@@ -243,18 +257,18 @@ sanguis::server::machine::charconv_system() const
 
 void
 sanguis::server::machine::process_message(
-	net::id const _id,
-	messages::auto_ptr _message
+	alda::net::id const _id,
+	sanguis::messages::auto_ptr _message
 )
 {
 	FCPPT_LOG_VERBOSE(
-		server::log(),
+		sanguis::server::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("process_message")
 	);
 
 	this->process_event(
-		events::message(
+		sanguis::server::events::message(
 			fcppt::move(
 				_message
 			),
@@ -265,7 +279,7 @@ sanguis::server::machine::process_message(
 
 void
 sanguis::server::machine::connect_callback(
-	net::id const _id
+	alda::net::id const _id
 )
 {
 	// WTF
@@ -273,12 +287,12 @@ sanguis::server::machine::connect_callback(
 
 void
 sanguis::server::machine::disconnect_callback(
-	net::id const _id,
+	alda::net::id const _id,
 	fcppt::string const &
 )
 {
 	this->process_event(
-		events::disconnect(
+		sanguis::server::events::disconnect(
 			_id
 		)
 	);
@@ -286,14 +300,14 @@ sanguis::server::machine::disconnect_callback(
 
 void
 sanguis::server::machine::data_callback(
-	net::id const _id,
-	net::receive_buffer &_data
+	alda::net::id const _id,
+	alda::net::buffer::circular_receive::object &_data
 )
 {
 	for(;;)
 	{
-		messages::auto_ptr message(
-			net::deserialize(
+		sanguis::messages::auto_ptr message(
+			sanguis::net::deserialize(
 				_data
 			)
 		);
@@ -316,7 +330,7 @@ void
 sanguis::server::machine::timer_callback()
 {
 	this->process_event(
-		events::tick(
+		sanguis::server::events::tick(
 			sge::timer::elapsed_and_reset<
 				sanguis::duration
 			>(

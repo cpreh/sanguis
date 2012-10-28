@@ -4,6 +4,7 @@
 #include <sanguis/io_service_callback.hpp>
 #include <sanguis/io_service_fwd.hpp>
 #include <sanguis/io_service_impl_fwd.hpp>
+#include <alda/net/io_service_wrapper_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
 
@@ -32,8 +33,8 @@ public:
 	void
 	stop();
 
-	sanguis::io_service_impl &
-	impl();
+	alda::net::io_service_wrapper const &
+	impl() const;
 private:
 	typedef fcppt::scoped_ptr<
 		sanguis::io_service_impl

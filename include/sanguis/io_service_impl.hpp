@@ -2,6 +2,7 @@
 #define SANGUIS_IO_SERVICE_IMPL_HPP_INCLUDED
 
 #include <sanguis/io_service_impl_fwd.hpp>
+#include <alda/net/io_service_wrapper.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/asio/io_service.hpp>
@@ -21,10 +22,12 @@ public:
 
 	~io_service_impl();
 
-	boost::asio::io_service &
-	get();
+	alda::net::io_service_wrapper const &
+	get() const;
 private:
 	boost::asio::io_service io_service_;
+
+	alda::net::io_service_wrapper const wrapper_;
 };
 
 }

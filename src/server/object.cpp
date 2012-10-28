@@ -1,3 +1,4 @@
+#include <sanguis/load/context_base_fwd.hpp>
 #include <sanguis/server/object.hpp>
 #include <sanguis/server/log.hpp>
 #include <sanguis/server/events/disconnect.hpp>
@@ -6,20 +7,23 @@
 #include <sanguis/server/states/running.hpp>
 #include <sanguis/server/states/unpaused.hpp>
 #include <sge/charconv/system_fwd.hpp>
+#include <alda/net/port.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/exit_success.hpp>
-#include <fcppt/log/headers.hpp>
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/log/error.hpp>
+#include <fcppt/log/output.hpp>
+#include <fcppt/tr1/functional.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <exception>
 #include <cstdlib>
 #include <fcppt/config/external_end.hpp>
 
+
 sanguis::server::object::object(
-	net::port const _port,
-	load::context_base const &_load_context,
+	alda::net::port const _port,
+	sanguis::load::context_base const &_load_context,
 	sge::charconv::system &_charconv_system
 )
 :
@@ -88,7 +92,7 @@ sanguis::server::object::mainloop()
 	)
 	{
 		FCPPT_LOG_ERROR(
-			server::log(),
+			sanguis::server::log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("Error in server thread: ")
 				<< _exception.string()
@@ -99,7 +103,7 @@ sanguis::server::object::mainloop()
 	)
 	{
 		FCPPT_LOG_ERROR(
-			server::log(),
+			sanguis::server::log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("Error in server thread: ")
 				<< _exception.what()
