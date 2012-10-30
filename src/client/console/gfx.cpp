@@ -11,6 +11,7 @@
 #include <sge/renderer/target/viewport_size.hpp>
 #include <sge/renderer/texture/mipmap/off.hpp>
 #include <sge/renderer/texture/create_planar_from_path.hpp>
+#include <sge/renderer/texture/emulate_srgb.hpp>
 #include <sge/renderer/texture/planar.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/parameters_impl.hpp>
@@ -52,7 +53,8 @@ sanguis::client::console::gfx::gfx(
 			renderer_,
 			_image_loader,
 			sge::renderer::texture::mipmap::off(),
-			sge::renderer::resource_flags_field::null()
+			sge::renderer::resource_flags_field::null(),
+			sge::renderer::texture::emulate_srgb::yes
 		)
 	),
 	impl_(

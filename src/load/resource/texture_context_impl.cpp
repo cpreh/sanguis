@@ -1,5 +1,6 @@
 #include <sanguis/load/resource/texture_context_impl.hpp>
 #include <sge/renderer/texture/create_planar_from_view.hpp>
+#include <sge/renderer/texture/emulate_srgb.hpp>
 #include <sge/renderer/texture/planar.hpp>
 #include <sge/renderer/texture/mipmap/off.hpp>
 #include <sge/renderer/resource_flags_field.hpp>
@@ -62,7 +63,8 @@ sanguis::load::resource::texture_context_impl::update()
 					rend_,
 					future_.get()->view(),
 					sge::renderer::texture::mipmap::off(),
-					sge::renderer::resource_flags_field::null()
+					sge::renderer::resource_flags_field::null(),
+					sge::renderer::texture::emulate_srgb::yes
 				)
 			);
 

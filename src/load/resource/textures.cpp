@@ -9,6 +9,7 @@
 #include <sge/image2d/system.hpp>
 #include <sge/renderer/resource_flags_field.hpp>
 #include <sge/renderer/texture/create_planar_from_path.hpp>
+#include <sge/renderer/texture/emulate_srgb.hpp>
 #include <sge/renderer/texture/planar.hpp>
 #include <sge/renderer/texture/mipmap/off.hpp>
 #include <sge/texture/part_raw_ptr.hpp>
@@ -238,7 +239,8 @@ sanguis::load::resource::textures::do_load_inner(
 					renderer_,
 					image_loader_,
 					sge::renderer::texture::mipmap::off(),
-					sge::renderer::resource_flags_field::null()
+					sge::renderer::resource_flags_field::null(),
+					sge::renderer::texture::emulate_srgb::yes
 				)
 			)
 		);
