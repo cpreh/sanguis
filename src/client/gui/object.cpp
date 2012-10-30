@@ -4,6 +4,7 @@
 #include <sge/cegui/load_context.hpp>
 #include <sge/config/media_path.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
+#include <sge/renderer/texture/emulate_srgb.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
@@ -37,7 +38,8 @@ sanguis::client::gui::object::object(
 		_image_loader,
 		charconv_system_,
 		_viewport_manager,
-		sge::cegui::cursor_visibility::invisible
+		sge::cegui::cursor_visibility::invisible,
+		sge::renderer::texture::emulate_srgb::no
 	),
 	syringe_(
 		system_
