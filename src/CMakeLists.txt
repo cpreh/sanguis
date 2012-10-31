@@ -3,6 +3,7 @@ SET(
 	include/sanguis/animation_sound_type.hpp
 	include/sanguis/animation_type.hpp
 	include/sanguis/aoe_projectile_type.hpp
+	include/sanguis/app_name.hpp
 	include/sanguis/apply_log_level.hpp
 	include/sanguis/args/display_mode.hpp
 	include/sanguis/args/log_level.hpp
@@ -356,6 +357,7 @@ SET(
 	include/sanguis/client/world_parameters.hpp
 	include/sanguis/client/world_parameters_fwd.hpp
 	include/sanguis/clock.hpp
+	include/sanguis/config_app_name.hpp
 	include/sanguis/connect_state.hpp
 	include/sanguis/damage_type.hpp
 	include/sanguis/diff_clock.hpp
@@ -953,6 +955,7 @@ SET(
 	include/sanguis/update_diff_clock.hpp
 	include/sanguis/weapon_type.hpp
 	include/sanguis/world_id.hpp
+	src/app_name.cpp
 	src/apply_log_level.cpp
 	src/args/display_mode.cpp
 	src/args/log_level.cpp
@@ -1104,6 +1107,7 @@ SET(
 	src/client/states/running.cpp
 	src/client/states/waiting_for_player.cpp
 	src/client/world_parameters.cpp
+	src/config_app_name.cpp
 	src/duration_second.cpp
 	src/exception.cpp
 	src/from_console_arg_list.cpp

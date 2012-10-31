@@ -5,6 +5,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/ref.hpp>
 
+#include <sanguis/config_app_name.hpp>
 #include <sanguis/exception.hpp>
 #include <sanguis/creator/generator/deserialize.hpp>
 #include <sanguis/creator/generator/generate.hpp>
@@ -39,7 +40,7 @@ sanguis::server::world::random(
 	// TODO: move this out of here!
 	boost::filesystem::path const cache_path(
 		sge::config::cache_path(
-			FCPPT_TEXT("sanguis")
+			sanguis::config_app_name()
 		)
 	);
 

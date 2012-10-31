@@ -1,3 +1,4 @@
+#include <sanguis/app_name.hpp>
 #include <sanguis/args/display_mode.hpp>
 #include <sanguis/args/multi_sampling.hpp>
 #include <sanguis/client/create_systems.hpp>
@@ -47,7 +48,7 @@ sanguis::client::create_systems(
 				sge::systems::window(
 					sge::window::parameters(
 						sge::window::title(
-							FCPPT_TEXT("sanguis")
+							sanguis::app_name()
 						),
 						dimensions
 					)
