@@ -4,6 +4,7 @@
 #include <sge/parse/exception.hpp>
 #include <sge/parse/result.hpp>
 #include <sge/parse/result_code.hpp>
+#include <sge/parse/ini/start.hpp>
 #include <sge/parse/ini/output/to_file.hpp>
 #include <sge/parse/ini/parse_file.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
@@ -71,16 +72,16 @@ sanguis::client::config::settings::object::~object()
 {
 }
 
-sge::parse::ini::section_vector &
+sge::parse::ini::start &
 sanguis::client::config::settings::object::sections()
 {
-	return start_.sections;
+	return start_;
 }
 
-sge::parse::ini::section_vector const &
+sge::parse::ini::start const &
 sanguis::client::config::settings::object::sections() const
 {
-	return start_.sections;
+	return start_;
 }
 
 void

@@ -2,7 +2,6 @@
 #define SANGUIS_CLIENT_CONFIG_SETTINGS_OBJECT_HPP_INCLUDED
 
 #include <sanguis/client/config/settings/object_fwd.hpp>
-#include <sge/parse/ini/section_vector.hpp>
 #include <sge/parse/ini/start.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -25,16 +24,17 @@ class object
 		object
 	);
 public:
-	explicit object(
+	explicit
+	object(
 		boost::filesystem::path const &
 	);
 
 	~object();
 
-	sge::parse::ini::section_vector &
+	sge::parse::ini::start &
 	sections();
 
-	sge::parse::ini::section_vector const &
+	sge::parse::ini::start const &
 	sections() const;
 
 	void

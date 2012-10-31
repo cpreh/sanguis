@@ -1,13 +1,18 @@
+#include <sanguis/log_parameters.hpp>
+#include <sanguis/media_path.hpp>
+#include <sanguis/client/log_location.hpp>
+#include <sanguis/client/config/settings/object.hpp>
 #include <sanguis/client/gui/menu/object.hpp>
 #include <sanguis/client/gui/menu/connection_box.hpp>
 #include <sanguis/client/gui/object.hpp>
-#include <sanguis/client/config/settings/get_or_default.hpp>
-#include <sanguis/client/config/settings/set_key.hpp>
-#include <sanguis/client/log_location.hpp>
-#include <sanguis/log_parameters.hpp>
-#include <sanguis/media_path.hpp>
 #include <sge/cegui/from_cegui_string.hpp>
 #include <sge/cegui/to_cegui_string.hpp>
+#include <sge/parse/ini/entry_name.hpp>
+#include <sge/parse/ini/get_or_create.hpp>
+#include <sge/parse/ini/section_name.hpp>
+#include <sge/parse/ini/set_or_create.hpp>
+#include <sge/parse/ini/string.hpp>
+#include <sge/parse/ini/value.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <alda/net/host.hpp>
 #include <alda/net/port.hpp>
@@ -42,10 +47,12 @@ fcppt::log::object logger(
 	)
 );
 
-fcppt::string const
-	config_section(
-		FCPPT_TEXT("gui_menu")
-	),
+sge::parse::ini::section_name const
+config_section(
+	FCPPT_TEXT("gui_menu")
+);
+
+sge::parse::ini::entry_name const
 	config_hostname_key(
 		FCPPT_TEXT("hostname")
 	),
@@ -190,24 +197,28 @@ sanguis::client::gui::menu::object::object(
 
 	hostname_edit_.setText(
 		sge::cegui::to_cegui_string(
-			client::config::settings::get_or_default(
-				_settings,
+			sge::parse::ini::get_or_create(
+				_settings.sections(),
 				config_section,
 				config_hostname_key,
-				FCPPT_TEXT("")
-			),
+				sge::parse::ini::value(
+					sge::parse::ini::string()
+				)
+			).get(),
 			gui_.charconv_system()
 		)
 	);
 
 	port_edit_.setText(
 		sge::cegui::to_cegui_string(
-			client::config::settings::get_or_default(
-				_settings,
+			sge::parse::ini::get_or_create(
+				_settings.sections(),
 				config_section,
 				config_port_key,
-				FCPPT_TEXT("")
-			),
+				sge::parse::ini::value(
+					sge::parse::ini::string()
+				)
+			).get(),
 			gui_.charconv_system()
 		)
 	);
@@ -215,23 +226,27 @@ sanguis::client::gui::menu::object::object(
 
 sanguis::client::gui::menu::object::~object()
 {
-	client::config::settings::set_key(
-		settings_,
+	sge::parse::ini::set_or_create(
+		settings_.sections(),
 		config_section,
 		config_port_key,
-		sge::cegui::from_cegui_string(
-			port_edit_.getText(),
-			gui_.charconv_system()
+		sge::parse::ini::value(
+			sge::cegui::from_cegui_string(
+				port_edit_.getText(),
+				gui_.charconv_system()
+			)
 		)
 	);
 
-	client::config::settings::set_key(
-		settings_,
+	sge::parse::ini::set_or_create(
+		settings_.sections(),
 		config_section,
 		config_hostname_key,
-		sge::cegui::from_cegui_string(
-			hostname_edit_.getText(),
-			gui_.charconv_system()
+		sge::parse::ini::value(
+			sge::cegui::from_cegui_string(
+				hostname_edit_.getText(),
+				gui_.charconv_system()
+			)
 		)
 	);
 }
@@ -284,12 +299,14 @@ sanguis::client::gui::menu::object::handle_quickstart(
 			fcppt::extract_from_string_exn<
 				alda::net::port::value_type
 			>(
-				client::config::settings::get_or_default(
-					settings_,
+				sge::parse::ini::get_or_create(
+					settings_.sections(),
 					config_section,
 					config_quickstart_port_key,
-					FCPPT_TEXT("31337")
-				)
+					sge::parse::ini::value(
+						FCPPT_TEXT("31337")
+					)
+				).get()
 			)
 		)
 	);

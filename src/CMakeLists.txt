@@ -18,14 +18,10 @@ SET(
 	include/sanguis/cheat_type.hpp
 	include/sanguis/client/config/homedir.hpp
 	include/sanguis/client/config/settings/file.hpp
-	include/sanguis/client/config/settings/get_or_create_entry.hpp
-	include/sanguis/client/config/settings/get_or_create_section.hpp
-	include/sanguis/client/config/settings/get_or_default.hpp
 	include/sanguis/client/config/settings/object.hpp
 	include/sanguis/client/config/settings/object_fwd.hpp
 	include/sanguis/client/config/settings/optional_section.hpp
 	include/sanguis/client/config/settings/saver.hpp
-	include/sanguis/client/config/settings/set_key.hpp
 	include/sanguis/client/console/activation.hpp
 	include/sanguis/client/console/gfx.hpp
 	include/sanguis/client/console/object.hpp
@@ -968,12 +964,8 @@ SET(
 	src/args/server_port.cpp
 	src/client/config/homedir.cpp
 	src/client/config/settings/file.cpp
-	src/client/config/settings/get_or_create_entry.cpp
-	src/client/config/settings/get_or_create_section.cpp
-	src/client/config/settings/get_or_default.cpp
 	src/client/config/settings/object.cpp
 	src/client/config/settings/saver.cpp
-	src/client/config/settings/set_key.cpp
 	src/client/console/activation.cpp
 	src/client/console/gfx.cpp
 	src/client/console/object.cpp
