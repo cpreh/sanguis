@@ -1,9 +1,11 @@
 #include <sanguis/client/config/settings/object.hpp>
 #include <sanguis/client/log.hpp>
 #include <sanguis/exception.hpp>
+#include <sge/parse/exception.hpp>
+#include <sge/parse/result.hpp>
+#include <sge/parse/result_code.hpp>
 #include <sge/parse/ini/output/to_file.hpp>
 #include <sge/parse/ini/parse_file.hpp>
-#include <sge/parse/exception.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
@@ -18,7 +20,10 @@ sanguis::client::config::settings::object::object(
 	boost::filesystem::path const &_path
 )
 :
-	path_(_path)
+	path_(
+		_path
+	),
+	start_()
 {
 	FCPPT_LOG_DEBUG(
 		client::log(),
@@ -32,13 +37,15 @@ sanguis::client::config::settings::object::object(
 	try
 	{
 		if(
-			!sge::parse::ini::parse_file(
+			sge::parse::ini::parse_file(
 				path_,
-				sections_
-			)
+				start_
+			).result_code()
+			!=
+			sge::parse::result_code::ok
 		)
 		{
-			sections_.clear();
+			start_.sections.clear();
 
 			FCPPT_LOG_INFO(
 				client::log(),
@@ -67,13 +74,13 @@ sanguis::client::config::settings::object::~object()
 sge::parse::ini::section_vector &
 sanguis::client::config::settings::object::sections()
 {
-	return sections_;
+	return start_.sections;
 }
 
 sge::parse::ini::section_vector const &
 sanguis::client::config::settings::object::sections() const
 {
-	return sections_;
+	return start_.sections;
 }
 
 void
@@ -91,7 +98,7 @@ sanguis::client::config::settings::object::save() const
 	if(
 		!sge::parse::ini::output::to_file(
 			path_,
-			sections_
+			start_
 		)
 	)
 	{

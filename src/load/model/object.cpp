@@ -173,11 +173,10 @@ sanguis::load::model::object::construct(
 	resource::context const &_ctx
 )
 {
-	sge::parse::json::start start_return;
-
-	sanguis::load::model::parse_json(
-		path_,
-		start_return
+	sge::parse::json::start const start_return(
+		sanguis::load::model::parse_json(
+			path_
+		)
 	);
 
 	sge::parse::json::member_map const &global_entries(

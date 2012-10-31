@@ -3,12 +3,12 @@
 
 #include <sanguis/client/config/settings/object_fwd.hpp>
 #include <sge/parse/ini/section_vector.hpp>
-#include <sge/parse/ini/section.hpp>
-#include <sge/parse/ini/entry.hpp>
+#include <sge/parse/ini/start.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -42,7 +42,7 @@ public:
 private:
 	boost::filesystem::path const path_;
 
-	sge::parse::ini::section_vector sections_;
+	sge::parse::ini::start start_;
 };
 
 }

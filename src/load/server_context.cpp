@@ -38,13 +38,13 @@ sanguis::load::server_context::model_dim(
 			return it->second;
 	}
 
-	sge::parse::json::start start_return;
 
-	model::parse_json(
-		model::make_path(
-			_model_name
-		),
-		start_return
+	sge::parse::json::start const start_return(
+		model::parse_json(
+			model::make_path(
+				_model_name
+			)
+		)
 	);
 
 	typedef std::pair<

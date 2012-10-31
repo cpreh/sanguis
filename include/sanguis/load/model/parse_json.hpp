@@ -6,6 +6,7 @@
 #include <boost/filesystem/path.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 namespace load
@@ -13,10 +14,9 @@ namespace load
 namespace model
 {
 
-void
+sge::parse::json::start const
 parse_json(
-	boost::filesystem::path const &,
-	sge::parse::json::start &
+	boost::filesystem::path const &
 );
 
 }
