@@ -9,6 +9,7 @@
 #include <sge/image/color/any/object.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/renderer/texture/emulate_srgb.hpp>
 #include <fcppt/container/bitfield/object_impl.hpp>
 #include <fcppt/io/ostringstream.hpp>
 #include <fcppt/time/output_tm.hpp>
@@ -102,6 +103,7 @@ sanguis::client::draw2d::scene::hud::draw(
 			300 // FIXME
 		),
 		sge::font::vector::null(),
-		sge::image::colors::white()
+		sge::image::colors::white(),
+		sge::renderer::texture::emulate_srgb::no
 	);
 }
