@@ -315,7 +315,6 @@ sanguis::server::global::context::player_speed(
 		);
 	else
 	{
-		// FIXME: don't set the speed to max!
 		player.direction(
 			server::direction(
 				fcppt::math::vector::atan2(
@@ -324,6 +323,7 @@ sanguis::server::global::context::player_speed(
 			)
 		);
 
+		// FIXME: don't set the speed to max!
 		entities::property::current_to_max(
 			player.movement_speed()
 		);

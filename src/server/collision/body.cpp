@@ -108,6 +108,7 @@ sanguis::server::collision::body::speed(
 	);
 }
 
+
 sanguis::server::speed const
 sanguis::server::collision::body::speed() const
 {

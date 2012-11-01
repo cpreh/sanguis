@@ -6,8 +6,9 @@
 #include <sanguis/server/entities/property/initial_fwd.hpp>
 #include <sanguis/server/entities/property/change_callback.hpp>
 #include <sanguis/server/entities/property/change_signal.hpp>
-#include <fcppt/signal/auto_connection.hpp>
+#include <fcppt/signal/auto_connection_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -20,57 +21,58 @@ namespace property
 
 class changeable
 :
-	public property::base
+	public sanguis::server::entities::property::base
 {
 	FCPPT_NONCOPYABLE(
 		changeable
 	);
 public:
-	explicit changeable(
-		initial const &
+	explicit
+	changeable(
+		sanguis::server::entities::property::initial const &
 	);
 
 	changeable(
-		value_type base,
-		value_type current
+		sanguis::server::entities::property::base::value_type base,
+		sanguis::server::entities::property::base::value_type current
 	);
 
 	~changeable();
 
 	void
 	current(
-		value_type
+		sanguis::server::entities::property::base::value_type
 	);
 
-	value_type
+	sanguis::server::entities::property::base::value_type
 	current() const;
 
-	value_type
+	sanguis::server::entities::property::base::value_type
 	max() const;
 
 	fcppt::signal::auto_connection
 	register_change_callback(
-		change_callback const &
+		sanguis::server::entities::property::change_callback const &
 	);
 
 	fcppt::signal::auto_connection
 	register_max_change_callback(
-		change_callback const &
+		sanguis::server::entities::property::change_callback const &
 	);
 private:
 	void
 	on_recalc_max(
-		value_type
+		sanguis::server::entities::property::base::value_type
 	);
 
 	void
 	check_current();
 
-	value_type
+	sanguis::server::entities::property::base::value_type
 		current_,
 		max_;
 
-	change_signal
+	sanguis::server::entities::property::change_signal
 		change_signal_,
 		max_change_signal_;
 };

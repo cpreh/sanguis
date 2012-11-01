@@ -1,17 +1,21 @@
+#include <sanguis/server/entities/property/base.hpp>
+#include <sanguis/server/entities/property/change_callback.hpp>
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <sanguis/server/entities/property/initial.hpp>
 #include <sanguis/exception.hpp>
-#include <fcppt/math/diff.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/math/diff.hpp>
+#include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <fcppt/config/external_end.hpp>
 
+
 sanguis::server::entities::property::changeable::changeable(
-	initial const &_initial
+	sanguis::server::entities::property::initial const &_initial
 )
 :
-	base(
+	sanguis::server::entities::property::base(
 		_initial.base()
 	),
 	current_(
@@ -19,12 +23,15 @@ sanguis::server::entities::property::changeable::changeable(
 	),
 	max_(
 		_initial.base()
-	)
-{}
+	),
+	change_signal_(),
+	max_change_signal_()
+{
+}
 
 sanguis::server::entities::property::changeable::changeable(
-	value_type const _base,
-	value_type const _current
+	sanguis::server::entities::property::base::value_type const _base,
+	sanguis::server::entities::property::base::value_type const _current
 )
 :
 	base(
@@ -35,9 +42,11 @@ sanguis::server::entities::property::changeable::changeable(
 	),
 	max_(
 		_base
-	)
+	),
+	change_signal_(),
+	max_change_signal_()
 {
-	check_current();
+	this->check_current();
 }
 
 sanguis::server::entities::property::changeable::~changeable()
@@ -46,10 +55,10 @@ sanguis::server::entities::property::changeable::~changeable()
 
 void
 sanguis::server::entities::property::changeable::current(
-	value_type const _current
+	sanguis::server::entities::property::base::value_type const _current
 )
 {
-	value_type const old(
+	sanguis::server::entities::property::base::value_type const old(
 		this->current()
 	);
 
@@ -60,7 +69,7 @@ sanguis::server::entities::property::changeable::current(
 			old,
 			this->current()
 		)
-		<
+		>
 		static_cast<
 			value_type
 		>(
@@ -71,7 +80,7 @@ sanguis::server::entities::property::changeable::current(
 			this->current()
 		);
 
-	check_current();
+	this->check_current();
 }
 
 sanguis::server::entities::property::changeable::value_type
@@ -110,7 +119,7 @@ sanguis::server::entities::property::changeable::register_max_change_callback(
 
 void
 sanguis::server::entities::property::changeable::on_recalc_max(
-	value_type const _max
+	sanguis::server::entities::property::base::value_type const _max
 )
 {
 	max_ = _max;
@@ -133,7 +142,7 @@ sanguis::server::entities::property::changeable::check_current()
 	if(
 		current_ > max_
 	)
-		throw exception(
+		throw sanguis::exception(
 			FCPPT_TEXT("current > max")
 		);
 }
