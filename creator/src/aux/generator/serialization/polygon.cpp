@@ -1,14 +1,15 @@
-#include "polygon.hpp"
-#include "vertex.hpp"
+#include <sanguis/creator/aux/generator/serialization/polygon.hpp>
+#include <sanguis/creator/aux/generator/serialization/vertex.hpp>
 #include <sanguis/creator/geometry/polygon.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/element_vector.hpp>
 #include <sge/parse/json/object.hpp>
 #include <fcppt/algorithm/map.hpp>
 
+
 sge::parse::json::array const
-sanguis::creator::generator::serialization::polygon(
-	geometry::polygon const &_polygon
+sanguis::creator::aux::generator::serialization::polygon(
+	sanguis::creator::geometry::polygon const &_polygon
 )
 {
 	return
@@ -17,7 +18,7 @@ sanguis::creator::generator::serialization::polygon(
 				sge::parse::json::element_vector
 			>(
 				_polygon,
-				serialization::vertex
+				sanguis::creator::aux::generator::serialization::vertex
 			)
 		);
 }

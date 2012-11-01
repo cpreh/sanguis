@@ -1,4 +1,4 @@
-#include "vertex.hpp"
+#include <sanguis/creator/aux/generator/serialization/vertex.hpp>
 #include <sanguis/creator/geometry/vertex.hpp>
 #include <sge/parse/json/convert/from_container.hpp>
 #include <sge/parse/json/array.hpp>
@@ -8,9 +8,10 @@
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/text.hpp>
 
+
 sge::parse::json::object const
-sanguis::creator::generator::serialization::vertex(
-	geometry::vertex const &_vertex
+sanguis::creator::aux::generator::serialization::vertex(
+	sanguis::creator::geometry::vertex const &_vertex
 )
 {
 	return

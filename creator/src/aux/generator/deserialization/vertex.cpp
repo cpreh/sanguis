@@ -1,4 +1,4 @@
-#include "vertex.hpp"
+#include <sanguis/creator/aux/generator/deserialization/vertex.hpp>
 #include <sanguis/creator/geometry/vector.hpp>
 #include <sanguis/creator/geometry/vertex.hpp>
 #include <sanguis/creator/geometry/texture_point.hpp>
@@ -8,15 +8,16 @@
 #include <sge/parse/json/object.hpp>
 #include <fcppt/text.hpp>
 
+
 sanguis::creator::geometry::vertex const
-sanguis::creator::generator::deserialization::vertex(
+sanguis::creator::aux::generator::deserialization::vertex(
 	sge::parse::json::object const &_object
 )
 {
 	return
-		geometry::vertex(
+		sanguis::creator::geometry::vertex(
 			sge::parse::json::convert::to_static_container<
-				geometry::vector
+				sanguis::creator::geometry::vector
 			>(
 				sge::parse::json::find_member_exn<
 					sge::parse::json::array
@@ -26,7 +27,7 @@ sanguis::creator::generator::deserialization::vertex(
 				)
 			),
 			sge::parse::json::convert::to_static_container<
-				geometry::texture_point
+				sanguis::creator::geometry::texture_point
 			>(
 				sge::parse::json::find_member_exn<
 					sge::parse::json::array

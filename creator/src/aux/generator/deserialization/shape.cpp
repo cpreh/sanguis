@@ -1,5 +1,5 @@
-#include "shape.hpp"
-#include "polygon.hpp"
+#include <sanguis/creator/aux/generator/deserialization/shape.hpp>
+#include <sanguis/creator/aux/generator/deserialization/polygon.hpp>
 #include <sanguis/creator/geometry/depth.hpp>
 #include <sanguis/creator/geometry/shape.hpp>
 #include <sanguis/creator/geometry/solidity.hpp>
@@ -14,14 +14,15 @@
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
 
+
 sanguis::creator::geometry::shape const
-sanguis::creator::generator::deserialization::shape(
+sanguis::creator::aux::generator::deserialization::shape(
 	sge::parse::json::object const &_object
 )
 {
 	return
-		geometry::shape(
-			deserialization::polygon(
+		sanguis::creator::geometry::shape(
+			sanguis::creator::aux::generator::deserialization::polygon(
 				sge::parse::json::find_member_exn<
 					sge::parse::json::array
 				>(
@@ -30,16 +31,16 @@ sanguis::creator::generator::deserialization::shape(
 				)
 			),
 			sge::parse::json::convert::to_enum<
-				geometry::solidity::type
+				sanguis::creator::geometry::solidity::type
 			>(
 				sge::parse::json::find_member_value_exn(
 					_object.members,
 					FCPPT_TEXT("solidity")
 				),
-				geometry::solidity::size
+				sanguis::creator::geometry::solidity::size
 			),
 			fcppt::strong_typedef_construct_cast<
-				geometry::depth
+				sanguis::creator::geometry::depth
 			>(
 				sge::parse::json::find_member_exn<
 					sge::parse::json::int_type
@@ -48,7 +49,7 @@ sanguis::creator::generator::deserialization::shape(
 					FCPPT_TEXT("depth")
 				)
 			),
-			geometry::texture_name(
+			sanguis::creator::geometry::texture_name(
 				sge::parse::json::find_member_exn<
 					sge::parse::json::string
 				>(

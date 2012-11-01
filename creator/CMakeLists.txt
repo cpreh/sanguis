@@ -1,8 +1,12 @@
-INCLUDE_DIRECTORIES(
+include_directories(
 	"${CMAKE_CURRENT_SOURCE_DIR}/include"
 )
 
-SET(
+include_directories(
+	"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
+)
+
+set(
 	SANGUIS_CREATOR_INCLUDE_FILES
 	include/sanguis/creator/exception.hpp
 	include/sanguis/creator/generator/car_park.hpp
@@ -46,62 +50,62 @@ SET(
 
 SET(
 	SANGUIS_CREATOR_SRC_FILES
+	src/aux/generator/deserialization/polygon.cpp
+	src/aux/generator/deserialization/result.cpp
+	src/aux/generator/deserialization/shape.cpp
+	src/aux/generator/deserialization/shape_container.cpp
+	src/aux/generator/deserialization/vertex.cpp
+	src/aux/generator/serialization/polygon.cpp
+	src/aux/generator/serialization/result.cpp
+	src/aux/generator/serialization/shape.cpp
+	src/aux/generator/serialization/shape_container.cpp
+	src/aux/generator/serialization/vertex.cpp
 	src/exception.cpp
 	src/generator/car_park.cpp
-	src/generator/deserialization/polygon.cpp
-	src/generator/deserialization/polygon.hpp
-	src/generator/deserialization/result.cpp
-	src/generator/deserialization/result.hpp
-	src/generator/deserialization/shape.cpp
-	src/generator/deserialization/shape.hpp
-	src/generator/deserialization/shape_container.cpp
-	src/generator/deserialization/shape_container.hpp
-	src/generator/deserialization/vertex.cpp
-	src/generator/deserialization/vertex.hpp
 	src/generator/deserialize.cpp
 	src/generator/generate.cpp
 	src/generator/parameters.cpp
 	src/generator/randgen.cpp
 	src/generator/result.cpp
-	src/generator/serialization/polygon.cpp
-	src/generator/serialization/polygon.hpp
-	src/generator/serialization/result.cpp
-	src/generator/serialization/result.hpp
-	src/generator/serialization/shape.cpp
-	src/generator/serialization/shape.hpp
-	src/generator/serialization/shape_container.cpp
-	src/generator/serialization/shape_container.hpp
-	src/generator/serialization/vertex.cpp
-	src/generator/serialization/vertex.hpp
 	src/generator/serialize.cpp
 	src/generator/top_parameters.cpp
 	src/geometry/shape.cpp
 	src/geometry/vertex.cpp
+	src/include/sanguis/creator/aux/generator/deserialization/polygon.hpp
+	src/include/sanguis/creator/aux/generator/deserialization/result.hpp
+	src/include/sanguis/creator/aux/generator/deserialization/shape.hpp
+	src/include/sanguis/creator/aux/generator/deserialization/shape_container.hpp
+	src/include/sanguis/creator/aux/generator/deserialization/vertex.hpp
+	src/include/sanguis/creator/aux/generator/serialization/polygon.hpp
+	src/include/sanguis/creator/aux/generator/serialization/result.hpp
+	src/include/sanguis/creator/aux/generator/serialization/shape.hpp
+	src/include/sanguis/creator/aux/generator/serialization/shape_container.hpp
+	src/include/sanguis/creator/aux/generator/serialization/vertex.hpp
 )
 
-SET(
+set(
 	SANGUIS_CREATOR_FILES
 	"${SANGUIS_CREATOR_INCLUDE_FILES};${SANGUIS_CREATOR_SRC_FILES}"
 )
 
-FCPPT_UTILS_ADD_SOURCE_GROUPS(
+fcppt_utils_add_source_groups(
 	"${SANGUIS_CREATOR_FILES}"
 )
 
-ADD_LIBRARY(
+add_library(
 	sanguiscreator
 	SHARED
 	${SANGUIS_CREATOR_FILES}
 )
 
-TARGET_LINK_LIBRARIES(
+target_link_libraries(
 	sanguiscreator
 	${Fcppt_core_LIBRARIES}
 	${SGE_CORE_LIBRARY}
 	${SGE_PARSE_LIBRARY}
 )
 
-INSTALL(
+install(
 	TARGETS
 	sanguiscreator
 	DESTINATION

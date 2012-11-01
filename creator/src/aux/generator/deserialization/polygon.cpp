@@ -1,6 +1,6 @@
-#include "shape_container.hpp"
-#include "shape.hpp"
-#include <sanguis/creator/geometry/shape_container.hpp>
+#include <sanguis/creator/aux/generator/deserialization/polygon.hpp>
+#include <sanguis/creator/aux/generator/deserialization/vertex.hpp>
+#include <sanguis/creator/geometry/polygon.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/object.hpp>
@@ -8,18 +8,19 @@
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/tr1/functional.hpp>
 
-sanguis::creator::geometry::shape_container const
-sanguis::creator::generator::deserialization::shape_container(
+
+sanguis::creator::geometry::polygon const
+sanguis::creator::aux::generator::deserialization::polygon(
 	sge::parse::json::array const &_array
 )
 {
 	return
 		fcppt::algorithm::map<
-			geometry::shape_container
+			sanguis::creator::geometry::polygon
 		>(
 			_array.elements,
 			std::tr1::bind(
-				&deserialization::shape,
+				&sanguis::creator::aux::generator::deserialization::vertex,
 				std::tr1::bind(
 					sge::parse::json::get<
 						sge::parse::json::object,

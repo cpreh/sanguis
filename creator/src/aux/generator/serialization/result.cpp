@@ -1,5 +1,5 @@
-#include "result.hpp"
-#include "shape_container.hpp"
+#include <sanguis/creator/aux/generator/serialization/result.hpp>
+#include <sanguis/creator/aux/generator/serialization/shape_container.hpp>
 #include <sanguis/creator/generator/result.hpp>
 #include <sge/parse/json/convert/from_container.hpp>
 #include <sge/parse/json/array.hpp>
@@ -11,9 +11,10 @@
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/text.hpp>
 
+
 sge::parse::json::object const
-sanguis::creator::generator::serialization::result(
-	generator::result const &_result
+sanguis::creator::aux::generator::serialization::result(
+	sanguis::creator::generator::result const &_result
 )
 {
 	return
@@ -23,7 +24,7 @@ sanguis::creator::generator::serialization::result(
 			>(
 				sge::parse::json::member(
 					FCPPT_TEXT("shapes"),
-					serialization::shape_container(
+					sanguis::creator::aux::generator::serialization::shape_container(
 						_result.shapes()
 					)
 				)

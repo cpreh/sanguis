@@ -8,4 +8,4 @@ check_includes src SANGUIS_
 
 check_includes creator/include
 
-check_includes creator/src SANGUIS_CREATOR_
+check_includes creator/src/include

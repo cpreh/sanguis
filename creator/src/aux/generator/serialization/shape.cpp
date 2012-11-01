@@ -1,5 +1,5 @@
-#include "shape.hpp"
-#include "polygon.hpp"
+#include <sanguis/creator/aux/generator/serialization/shape.hpp>
+#include <sanguis/creator/aux/generator/serialization/polygon.hpp>
 #include <sanguis/creator/geometry/shape.hpp>
 #include <sge/parse/json/convert/from_enum.hpp>
 #include <sge/parse/json/array.hpp>
@@ -11,9 +11,10 @@
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/text.hpp>
 
+
 sge::parse::json::object const
-sanguis::creator::generator::serialization::shape(
-	geometry::shape const &_shape
+sanguis::creator::aux::generator::serialization::shape(
+	sanguis::creator::geometry::shape const &_shape
 )
 {
 	return
@@ -23,7 +24,7 @@ sanguis::creator::generator::serialization::shape(
 			>(
 				sge::parse::json::member(
 					FCPPT_TEXT("polygon"),
-					serialization::polygon(
+					sanguis::creator::aux::generator::serialization::polygon(
 						_shape.polygon()
 					)
 				)

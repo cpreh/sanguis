@@ -1,12 +1,12 @@
-#include "deserialization/result.hpp"
+#include <sanguis/creator/exception.hpp>
+#include <sanguis/creator/aux/generator/deserialization/result.hpp>
 #include <sanguis/creator/generator/deserialize.hpp>
 #include <sanguis/creator/generator/result.hpp>
-#include <sanguis/creator/exception.hpp>
 #include <sge/parse/result_code.hpp>
 #include <sge/parse/result.hpp>
 #include <sge/parse/json/array.hpp>
-#include <sge/parse/json/start.hpp>
 #include <sge/parse/json/parse_stream.hpp>
+#include <sge/parse/json/start.hpp>
 #include <fcppt/text.hpp>
 
 
@@ -36,7 +36,7 @@ sanguis::creator::generator::deserialize(
 		);
 
 	return
-		sanguis::creator::generator::deserialization::result(
+		sanguis::creator::aux::generator::deserialization::result(
 			result.object()
 		);
 }

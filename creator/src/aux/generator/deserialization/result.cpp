@@ -1,5 +1,5 @@
-#include "result.hpp"
-#include "shape_container.hpp"
+#include <sanguis/creator/aux/generator/deserialization/result.hpp>
+#include <sanguis/creator/aux/generator/deserialization/shape_container.hpp>
 #include <sanguis/creator/generator/name.hpp>
 #include <sanguis/creator/generator/result.hpp>
 #include <sanguis/creator/generator/seed.hpp>
@@ -13,14 +13,15 @@
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
 
+
 sanguis::creator::generator::result const
-sanguis::creator::generator::deserialization::result(
+sanguis::creator::aux::generator::deserialization::result(
 	sge::parse::json::object const &_object
 )
 {
 	return
-		generator::result(
-			deserialization::shape_container(
+		sanguis::creator::generator::result(
+			sanguis::creator::aux::generator::deserialization::shape_container(
 				sge::parse::json::find_member_exn<
 					sge::parse::json::array
 				>(
@@ -29,7 +30,7 @@ sanguis::creator::generator::deserialization::result(
 				)
 			),
 			fcppt::strong_typedef_construct_cast<
-				generator::seed
+				sanguis::creator::generator::seed
 			>(
 				sge::parse::json::find_member_exn<
 					sge::parse::json::int_type
@@ -38,7 +39,7 @@ sanguis::creator::generator::deserialization::result(
 					FCPPT_TEXT("seed")
 				)
 			),
-			generator::name(
+			sanguis::creator::generator::name(
 				sge::parse::json::find_member_exn<
 					sge::parse::json::string
 				>(
@@ -47,7 +48,7 @@ sanguis::creator::generator::deserialization::result(
 				)
 			),
 			sge::parse::json::convert::to_static_container<
-				generator::size
+				sanguis::creator::generator::size
 			>(
 				sge::parse::json::find_member_exn<
 					sge::parse::json::array
