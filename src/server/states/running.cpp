@@ -1,3 +1,7 @@
+#include <sanguis/server/make_unicast_callback.hpp>
+#include <sanguis/server/make_send_callback.hpp>
+#include <sanguis/server/message_functor.hpp>
+#include <sanguis/server/player_id_from_net.hpp>
 #include <sanguis/server/states/running.hpp>
 #include <sanguis/server/states/unpaused.hpp>
 #include <sanguis/server/states/log_location.hpp>
@@ -5,10 +9,6 @@
 #include <sanguis/server/events/message.hpp>
 #include <sanguis/server/events/tick.hpp>
 #include <sanguis/server/global/context.hpp>
-#include <sanguis/server/message_functor.hpp>
-#include <sanguis/server/make_unicast_callback.hpp>
-#include <sanguis/server/make_send_callback.hpp>
-#include <sanguis/server/player_id_from_net.hpp>
 #include <sanguis/connect_state.hpp>
 #include <sanguis/messages/call/object.hpp>
 #include <sanguis/messages/serialization/convert_string_vector.hpp>
@@ -128,9 +128,7 @@ sanguis::server::states::running::react(
 			std::tr1::bind(
 				&running::handle_default_msg,
 				this,
-				server::player_id_from_net(
-					_message.id()
-				),
+				_message.id(),
 				std::tr1::placeholders::_1
 			)
 		);
@@ -149,8 +147,9 @@ sanguis::server::states::running::react(
 			<< FCPPT_TEXT(" disconnected")
 	);
 
+	// We would have to disconnect all players associated with that connection here
 	global_context_->player_disconnect(
-		server::player_id_from_net(
+		sanguis::server::player_id_from_net(
 			_message.id()
 		)
 	);
@@ -164,6 +163,13 @@ sanguis::server::states::running::operator()(
 	messages::client_info const &_message
 )
 {
+	if(
+		this->global_context().has_player(
+			_id
+		)
+	)
+		return this->discard_event();
+
 	FCPPT_LOG_DEBUG(
 		::logger,
 		fcppt::log::_
@@ -199,6 +205,13 @@ sanguis::server::states::running::operator()(
 	messages::console_command const &_message
 )
 {
+	if(
+		!this->global_context().has_player(
+			_id
+		)
+	)
+		return this->discard_event();
+
 	sanguis::string_vector const command(
 		messages::serialization::convert_string_vector(
 			context<machine>().charconv_system(),
@@ -211,7 +224,7 @@ sanguis::server::states::running::operator()(
 	if(
 		command.empty()
 	)
-		return discard_event();
+		return this->discard_event();
 
 	FCPPT_LOG_DEBUG(
 		::logger,
@@ -249,6 +262,13 @@ sanguis::server::states::running::operator()(
 	messages::player_cheat const &_message
 )
 {
+	if(
+		!this->global_context().has_player(
+			_id
+		)
+	)
+		return this->discard_event();
+
 	global_context_->player_cheat(
 		_id,
 		SANGUIS_CAST_ENUM(
@@ -268,6 +288,13 @@ sanguis::server::states::running::operator()(
 	messages::player_choose_perk const &_message
 )
 {
+	if(
+		!this->global_context().has_player(
+			_id
+		)
+	)
+		return this->discard_event();
+
 	global_context_->player_choose_perk(
 		_id,
 		SANGUIS_CAST_ENUM(

@@ -1,13 +1,13 @@
+#include <sanguis/server/player_id.hpp>
 #include <sanguis/server/events/message.hpp>
 #include <sanguis/messages/auto_ptr.hpp>
 #include <sanguis/messages/base.hpp>
 #include <sanguis/messages/shared_ptr.hpp>
-#include <alda/net/id.hpp>
 
 
 sanguis::server::events::message::message(
 	sanguis::messages::auto_ptr _message,
-	alda::net::id const _id
+	sanguis::server::player_id const _id
 )
 :
 	message_(
@@ -30,7 +30,7 @@ sanguis::server::events::message::get() const
 	return message_;
 }
 
-alda::net::id const
+sanguis::server::player_id const
 sanguis::server::events::message::id() const
 {
 	return id_;

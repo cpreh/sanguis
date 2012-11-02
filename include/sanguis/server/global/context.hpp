@@ -110,6 +110,11 @@ public:
 
 	entities::player_map::size_type
 	player_count() const;
+
+	bool
+	has_player(
+		sanguis::server::player_id
+	) const;
 private:
 	friend class world_context;
 

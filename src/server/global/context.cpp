@@ -73,7 +73,9 @@ sanguis::server::global::context::context(
 	random_generator_(
 		sanguis::random_seed()
 	),
-	send_unicast_(_send_unicast),
+	send_unicast_(
+		_send_unicast
+	),
 	world_context_(
 		fcppt::make_unique_ptr<
 			global::world_context
@@ -421,6 +423,17 @@ sanguis::server::entities::player_map::size_type
 sanguis::server::global::context::player_count() const
 {
 	return players_.size();
+}
+
+bool
+sanguis::server::global::context::has_player(
+	sanguis::server::player_id const _player_id
+) const
+{
+	return
+		players_.contains(
+			_player_id
+		);
 }
 
 void

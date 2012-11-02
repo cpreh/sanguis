@@ -1,8 +1,7 @@
 #ifndef SANGUIS_SERVER_MESSAGE_FUNCTOR_HPP_INCLUDED
 #define SANGUIS_SERVER_MESSAGE_FUNCTOR_HPP_INCLUDED
 
-#include <sanguis/server/player_id_from_net.hpp>
-#include <alda/net/id.hpp>
+#include <sanguis/server/player_id.hpp>
 #include <fcppt/nonassignable.hpp>
 
 
@@ -12,8 +11,8 @@ namespace server
 {
 
 template<
-	typename T,
-	typename R
+	typename Functor,
+	typename Result
 >
 class message_functor
 {
@@ -21,15 +20,15 @@ class message_functor
 		message_functor
 	);
 public:
-	typedef R result_type;
+	typedef Result result_type;
 
 	message_functor(
-		T &_value,
-		alda::net::id const _id
+		Functor &_functor,
+		sanguis::server::player_id const _id
 	)
 	:
-		value_(
-			_value
+		functor_(
+			_functor
 		),
 		id_(
 			_id
@@ -38,26 +37,23 @@ public:
 	}
 
 	template<
-		typename U
+		typename Message
 	>
-	R
+	Result
 	operator()(
-		U const &_message
+		Message const &_message
 	) const
 	{
 		return
-			value_(
-				sanguis::server::player_id_from_net(
-					id_
-				),
+			functor_(
+				id_,
 				_message
 			);
 	}
-
 private:
-	T &value_;
+	Functor &functor_;
 
-	alda::net::id const id_;
+	sanguis::server::player_id const id_;
 };
 
 }

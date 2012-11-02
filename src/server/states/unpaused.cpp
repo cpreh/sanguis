@@ -1,12 +1,13 @@
-#include <sanguis/server/states/unpaused.hpp>
 #include <sanguis/server/states/paused.hpp>
+#include <sanguis/server/states/running.hpp>
+#include <sanguis/server/states/unpaused.hpp>
 #include <sanguis/server/states/log_location.hpp>
 #include <sanguis/server/events/disconnect.hpp>
 #include <sanguis/server/events/message.hpp>
 #include <sanguis/server/events/tick.hpp>
 #include <sanguis/server/global/context.hpp>
 #include <sanguis/server/message_functor.hpp>
-#include <sanguis/server/player_id_from_net.hpp>
+#include <sanguis/server/player_id.hpp>
 #include <sanguis/messages/call/object.hpp>
 #include <sanguis/messages/pause.hpp>
 #include <sanguis/messages/base.hpp>
@@ -206,6 +207,16 @@ sanguis::server::states::unpaused::react(
 	events::message const &_message
 )
 {
+	if(
+		!this->context<
+			sanguis::server::states::running
+		>().global_context().has_player(
+			_message.id()
+		)
+	)
+		return
+			this->forward_event();
+
 	typedef message_functor<
 		unpaused,
 		boost::statechart::result
@@ -236,9 +247,7 @@ sanguis::server::states::unpaused::react(
 			std::tr1::bind(
 				&unpaused::handle_default_msg,
 				this,
-				server::player_id_from_net(
-					_message.id()
-				),
+				_message.id(),
 				std::tr1::placeholders::_1
 			)
 		);

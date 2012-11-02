@@ -12,6 +12,7 @@
 #include <sanguis/server/machine.hpp>
 #include <sanguis/server/log.hpp>
 #include <sanguis/server/player_id.hpp>
+#include <sanguis/server/player_id_from_net.hpp>
 #include <sanguis/server/events/disconnect.hpp>
 #include <sanguis/server/events/message.hpp>
 #include <sanguis/server/events/tick.hpp>
@@ -272,7 +273,9 @@ sanguis::server::machine::process_message(
 			fcppt::move(
 				_message
 			),
-			_id
+			sanguis::server::player_id_from_net(
+				_id
+			)
 		)
 	);
 }
