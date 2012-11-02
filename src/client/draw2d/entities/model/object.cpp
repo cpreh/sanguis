@@ -1,11 +1,12 @@
+#include <sanguis/client/draw2d/log_location.hpp>
+#include <sanguis/client/draw2d/speed_is_null.hpp>
+#include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/draw2d/entities/model/part.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/healthbar.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_time.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
-#include <sanguis/client/draw2d/log_location.hpp>
-#include <sanguis/client/draw2d/speed_is_null.hpp>
 #include <sanguis/load/model/collection.hpp>
 #include <sanguis/load/model/object.hpp>
 #include <sanguis/duration_second.hpp>
@@ -36,6 +37,30 @@ fcppt::log::object logger(
 	)
 );
 
+sanguis::client::draw2d::entities::order_vector const
+expand_orders(
+	sanguis::client::draw2d::entities::order_vector _orders,
+	sanguis::load::model::object::size_type const _size
+)
+{
+	FCPPT_ASSERT_PRE(
+		!_orders.empty()
+	);
+
+	FCPPT_ASSERT_PRE(
+		_orders.size()
+		<=
+		_size
+	);
+
+	_orders.resize(
+		_size,
+		_orders.back()
+	);
+
+	return _orders;
+}
+
 }
 
 sanguis::client::draw2d::entities::model::object::object(
@@ -49,7 +74,10 @@ sanguis::client::draw2d::entities::model::object::object(
 	container(
 		_param.diff_clock(),
 		_param.normal_system(),
-		_orders,
+		expand_orders(
+			_orders,
+			_param.collection()[_name].size()
+		),
 		fcppt::math::dim::structure_cast<
 			sprite::dim
 		>(
@@ -92,12 +120,6 @@ sanguis::client::draw2d::entities::model::object::object(
 	decay_option_(_decay_option),
 	parts_()
 {
-	FCPPT_ASSERT_PRE(
-		_param.collection()[_name].size()
-		==
-		_orders.size()
-	);
-
 	part_vector::size_type index(0);
 
 	load::model::object const &model(
