@@ -12,7 +12,6 @@
 #include <sge/renderer/vertex_declaration_fwd.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
-#include <sge/renderer/state/core/blend/object_scoped_ptr.hpp>
 #include <sge/renderer/state/core/depth_stencil/object_scoped_ptr.hpp>
 #include <sge/sprite/object_decl.hpp>
 #include <sge/sprite/buffers/single_decl.hpp>
@@ -76,8 +75,6 @@ private:
 	sge::renderer::state::core::depth_stencil::object_scoped_ptr const batch_stencil_state_;
 
 	sge::renderer::state::core::depth_stencil::object_scoped_ptr const mask_stencil_state_;
-
-	sge::renderer::state::core::blend::object_scoped_ptr const blend_state_;
 };
 
 }

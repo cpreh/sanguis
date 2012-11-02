@@ -14,14 +14,6 @@
 #include <sge/renderer/clear/parameters.hpp>
 #include <sge/renderer/context/core.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
-#include <sge/renderer/state/core/blend/alpha_enabled.hpp>
-#include <sge/renderer/state/core/blend/combined.hpp>
-#include <sge/renderer/state/core/blend/dest.hpp>
-#include <sge/renderer/state/core/blend/object.hpp>
-#include <sge/renderer/state/core/blend/parameters.hpp>
-#include <sge/renderer/state/core/blend/scoped.hpp>
-#include <sge/renderer/state/core/blend/source.hpp>
-#include <sge/renderer/state/core/blend/write_mask_all.hpp>
 #include <sge/renderer/state/core/depth_stencil/parameters.hpp>
 #include <sge/renderer/state/core/depth_stencil/object.hpp>
 #include <sge/renderer/state/core/depth_stencil/scoped.hpp>
@@ -121,19 +113,6 @@ sanguis::client::draw2d::scene::world::state::state(
 				.to_enabled()
 			)
 		)
-	),
-	blend_state_(
-		renderer_.create_blend_state(
-			sge::renderer::state::core::blend::parameters(
-				sge::renderer::state::core::blend::alpha_enabled(
-					sge::renderer::state::core::blend::combined(
-						sge::renderer::state::core::blend::source::src_alpha,
-						sge::renderer::state::core::blend::dest::inv_src_alpha
-					)
-				),
-				sge::renderer::state::core::blend::write_mask_all()
-			)
-		)
 	)
 {
 }
@@ -215,10 +194,6 @@ sanguis::client::draw2d::scene::world::state::draw(
 		)
 	);
 
-	sge::renderer::state::core::blend::scoped const scoped_blend(
-		_render_context,
-		*blend_state_
-	);
 
 	FCPPT_ASSERT_ERROR(
 		lower <= upper
