@@ -14,6 +14,7 @@
 #include <fcppt/ref.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/assign/make_container.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 
 
 sanguis::client::draw2d::entities::aoe_bullet::aoe_bullet(
