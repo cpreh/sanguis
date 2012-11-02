@@ -132,27 +132,9 @@ sanguis::client::object::~object()
 awl::main::exit_code const
 sanguis::client::object::run()
 {
-	try
-	{
-		this->register_handler();
+	this->register_handler();
 
-		io_service_.run();
-	}
-	catch(
-		fcppt::exception const &_exception
-	)
-	{
-		FCPPT_LOG_FATAL(
-			client::log(),
-			fcppt::log::_
-				<< FCPPT_TEXT("Client error: ")
-				<< _exception.string()
-		);
-
-		this->quit_server();
-
-		return awl::main::exit_failure();
-	}
+	io_service_.run();
 
 	awl::main::exit_code const server_ret(
 		this->quit_server()
@@ -173,7 +155,7 @@ sanguis::client::object::register_handler()
 {
 	io_service_.post(
 		std::tr1::bind(
-			&object::loop_handler,
+			&sanguis::client::object::loop_handler,
 			this
 		)
 	);
@@ -183,26 +165,49 @@ void
 sanguis::client::object::loop_handler()
 {
 	if(
-		!machine_.process(
-			sge::timer::elapsed_and_reset<
-				sanguis::duration
-			>(
-				frame_timer_
+		server_
+		&& !server_->running()
+	)
+		sys_->window_system().quit(
+			awl::main::exit_failure()
+		);
+
+	try
+	{
+		if(
+			!machine_.process(
+				sge::timer::elapsed_and_reset<
+					sanguis::duration
+				>(
+					frame_timer_
+				)
 			)
 		)
-		||
-		(
-			server_
-			&& !server_->running()
-		)
+		{
+			io_service_.stop();
+
+			return;
+		}
+
+		machine_.draw();
+	}
+	catch(
+		fcppt::exception const &_exception
 	)
 	{
-		io_service_.stop();
+		FCPPT_LOG_FATAL(
+			sanguis::client::log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("Client error: ")
+				<< _exception.string()
+		);
 
-		return;
+		sys_->window_system().quit(
+			awl::main::exit_failure()
+		);
+
+		this->quit_server();
 	}
-
-	machine_.draw();
 
 	this->register_handler();
 }
