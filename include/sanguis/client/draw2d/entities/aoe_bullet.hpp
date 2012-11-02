@@ -5,12 +5,12 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
-#include <sanguis/client/draw2d/sprite/particle/system.hpp>
 #include <sanguis/client/draw2d/aoe.hpp>
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
 #include <sanguis/load/model/collection_fwd.hpp>
-#include <fcppt/function/object.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/function/object.hpp>
+
 
 namespace sanguis
 {
@@ -23,18 +23,17 @@ namespace entities
 
 class aoe_bullet
 :
-	public model::object
+	public sanguis::client::draw2d::entities::model::object
 {
 	FCPPT_NONCOPYABLE(
 		aoe_bullet
 	);
 public:
 	aoe_bullet(
-		model::parameters const &,
-		sprite::particle::system &,
-		draw2d::insert_own_callback const &,
+		sanguis::client::draw2d::entities::model::parameters const &,
+		sanguis::client::draw2d::insert_own_callback const &,
 		fcppt::string const &name,
-		draw2d::aoe
+		sanguis::client::draw2d::aoe
 	);
 
 	~aoe_bullet();
@@ -46,13 +45,11 @@ private:
 
 	sanguis::random_generator &random_generator_;
 
-	load::model::collection const &model_collection_;
+	sanguis::load::model::collection const &model_collection_;
 
-	sprite::particle::system &particle_system_;
+	sanguis::client::draw2d::insert_own_callback const insert_;
 
-	draw2d::insert_own_callback const insert_;
-
-	draw2d::aoe const aoe_;
+	sanguis::client::draw2d::aoe const aoe_;
 
 };
 

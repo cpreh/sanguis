@@ -110,10 +110,6 @@ sanguis::client::draw2d::scene::object::object(
 		renderer_,
 		sprite_states_
 	),
-	particle_system_(
-		renderer_,
-		sprite_states_
-	),
 	hud_(
 		fcppt::make_unique_ptr<
 			scene::hud
@@ -514,17 +510,6 @@ sanguis::client::draw2d::scene::object::render_systems(
 		*transform_state
 	);
 
-
-	SANGUIS_CLIENT_DRAW2D_SCENE_FOREACH_Z_ORDERING(
-		index,
-		z_ordering::smoke,
-		z_ordering::rubble
-	)
-		particle_system_.render(
-			_render_context,
-			index
-		);
-
 	SANGUIS_CLIENT_DRAW2D_SCENE_FOREACH_Z_ORDERING(
 		index,
 		z_ordering::healthbar_lower,
@@ -684,12 +669,6 @@ sanguis::client::draw2d::sprite::client::system &
 sanguis::client::draw2d::scene::object::client_system()
 {
 	return client_system_;
-}
-
-sanguis::client::draw2d::sprite::particle::system &
-sanguis::client::draw2d::scene::object::particle_system()
-{
-	return particle_system_;
 }
 
 sanguis::load::model::collection const &

@@ -19,9 +19,6 @@ enum type
 	bullet,
 	pickup,
 	player_upper,
-	smoke,
-	flare,
-	rubble,
 	healthbar_lower,
 	healthbar_upper,
 	size

@@ -5,7 +5,6 @@
 #include <sanguis/client/draw2d/entities/base_fwd.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
-#include <sanguis/client/draw2d/sprite/particle/system.hpp>
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
 #include <sanguis/client/draw2d/transform_callback.hpp>
 #include <sanguis/client/exp.hpp>
@@ -64,9 +63,6 @@ public:
 
 	virtual entities::model::parameters const
 	model_parameters() const = 0;
-
-	virtual sprite::particle::system &
-	particle_system() const = 0;
 
 	virtual draw2d::insert_own_callback const &
 	insert_own_callback() const = 0;

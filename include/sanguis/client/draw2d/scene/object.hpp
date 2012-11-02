@@ -16,7 +16,6 @@
 #include <sanguis/client/draw2d/sprite/client/system.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system.hpp>
 #include <sanguis/client/draw2d/sprite/colored/system.hpp>
-#include <sanguis/client/draw2d/sprite/particle/system.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/state.hpp>
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
@@ -162,9 +161,6 @@ private:
 	sanguis::client::draw2d::sprite::client::system &
 	client_system();
 
-	sanguis::client::draw2d::sprite::particle::system &
-	particle_system();
-
 	sanguis::load::model::collection const &
 	load_collection() const;
 
@@ -189,8 +185,6 @@ private:
 	sanguis::client::draw2d::sprite::colored::system colored_system_;
 
 	sanguis::client::draw2d::sprite::client::system client_system_;
-
-	sanguis::client::draw2d::sprite::particle::system particle_system_;
 
 	fcppt::scoped_ptr<
 		sanguis::client::draw2d::scene::hud

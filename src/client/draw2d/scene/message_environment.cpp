@@ -100,12 +100,6 @@ sanguis::client::draw2d::scene::message_environment::model_parameters() const
 		);
 }
 
-sanguis::client::draw2d::sprite::particle::system &
-sanguis::client::draw2d::scene::message_environment::particle_system() const
-{
-	return object_.particle_system();
-}
-
 sanguis::client::draw2d::insert_own_callback const &
 sanguis::client::draw2d::scene::message_environment::insert_own_callback() const
 {

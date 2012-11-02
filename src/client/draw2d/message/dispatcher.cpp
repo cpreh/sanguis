@@ -74,7 +74,6 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	this->configure_new_object(
 		factory::aoe_projectile(
 			env_.model_parameters(),
-			env_.particle_system(),
 			env_.insert_own_callback(),
 			SANGUIS_CAST_ENUM(
 				aoe_projectile_type,

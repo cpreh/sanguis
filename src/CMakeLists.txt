@@ -73,8 +73,6 @@ SET(
 	include/sanguis/client/draw2d/entities/bullet.hpp
 	include/sanguis/client/draw2d/entities/container.hpp
 	include/sanguis/client/draw2d/entities/explosion.hpp
-	include/sanguis/client/draw2d/entities/explosion_particle.hpp
-	include/sanguis/client/draw2d/entities/explosion_properties.hpp
 	include/sanguis/client/draw2d/entities/model/clamp_orientation.hpp
 	include/sanguis/client/draw2d/entities/model/decay_option.hpp
 	include/sanguis/client/draw2d/entities/model/decay_time.hpp
@@ -122,43 +120,6 @@ SET(
 	include/sanguis/client/draw2d/message/dispatcher_fwd.hpp
 	include/sanguis/client/draw2d/message/environment.hpp
 	include/sanguis/client/draw2d/message/environment_fwd.hpp
-	include/sanguis/client/draw2d/particle/align_type.hpp
-	include/sanguis/client/draw2d/particle/anim_speed.hpp
-	include/sanguis/client/draw2d/particle/base.hpp
-	include/sanguis/client/draw2d/particle/base_fwd.hpp
-	include/sanguis/client/draw2d/particle/base_ptr.hpp
-	include/sanguis/client/draw2d/particle/container.hpp
-	include/sanguis/client/draw2d/particle/depth.hpp
-	include/sanguis/client/draw2d/particle/dispersion_range.hpp
-	include/sanguis/client/draw2d/particle/explosion.hpp
-	include/sanguis/client/draw2d/particle/explosion_callback.hpp
-	include/sanguis/client/draw2d/particle/fade.hpp
-	include/sanguis/client/draw2d/particle/fade_range.hpp
-	include/sanguis/client/draw2d/particle/fade_time_range.hpp
-	include/sanguis/client/draw2d/particle/funit_range.hpp
-	include/sanguis/client/draw2d/particle/gen_frequency.hpp
-	include/sanguis/client/draw2d/particle/gen_life_time.hpp
-	include/sanguis/client/draw2d/particle/generation_callback.hpp
-	include/sanguis/client/draw2d/particle/generator.hpp
-	include/sanguis/client/draw2d/particle/movement_type.hpp
-	include/sanguis/client/draw2d/particle/object.hpp
-	include/sanguis/client/draw2d/particle/particle_type.hpp
-	include/sanguis/client/draw2d/particle/properties.hpp
-	include/sanguis/client/draw2d/particle/properties_fwd.hpp
-	include/sanguis/client/draw2d/particle/property_container.hpp
-	include/sanguis/client/draw2d/particle/property_map.hpp
-	include/sanguis/client/draw2d/particle/rot_speed_range.hpp
-	include/sanguis/client/draw2d/particle/rotation.hpp
-	include/sanguis/client/draw2d/particle/rotation_from_alignment.hpp
-	include/sanguis/client/draw2d/particle/rotation_speed.hpp
-	include/sanguis/client/draw2d/particle/spawn_initial.hpp
-	include/sanguis/client/draw2d/particle/speed_range.hpp
-	include/sanguis/client/draw2d/particle/type_to_string.hpp
-	include/sanguis/client/draw2d/particle/uniform_rotation.hpp
-	include/sanguis/client/draw2d/particle/uniform_velocity_range.hpp
-	include/sanguis/client/draw2d/particle/unit_range.hpp
-	include/sanguis/client/draw2d/particle/velocity_from_movement.hpp
-	include/sanguis/client/draw2d/particle/z_ordering.hpp
 	include/sanguis/client/draw2d/scene/background.hpp
 	include/sanguis/client/draw2d/scene/background_dim.hpp
 	include/sanguis/client/draw2d/scene/background_fwd.hpp
@@ -231,13 +192,6 @@ SET(
 	include/sanguis/client/draw2d/sprite/normal/system.hpp
 	include/sanguis/client/draw2d/sprite/normal/texture_animation.hpp
 	include/sanguis/client/draw2d/sprite/order.hpp
-	include/sanguis/client/draw2d/sprite/particle/choices.hpp
-	include/sanguis/client/draw2d/sprite/particle/color.hpp
-	include/sanguis/client/draw2d/sprite/particle/color_format.hpp
-	include/sanguis/client/draw2d/sprite/particle/object.hpp
-	include/sanguis/client/draw2d/sprite/particle/parameters.hpp
-	include/sanguis/client/draw2d/sprite/particle/system.hpp
-	include/sanguis/client/draw2d/sprite/particle/texture_animation.hpp
 	include/sanguis/client/draw2d/sprite/point.hpp
 	include/sanguis/client/draw2d/sprite/rotation.hpp
 	include/sanguis/client/draw2d/sprite/state.hpp
@@ -992,8 +946,6 @@ SET(
 	src/client/draw2d/entities/bullet.cpp
 	src/client/draw2d/entities/container.cpp
 	src/client/draw2d/entities/explosion.cpp
-	src/client/draw2d/entities/explosion_particle.cpp
-	src/client/draw2d/entities/explosion_properties.cpp
 	src/client/draw2d/entities/model/clamp_orientation.cpp
 	src/client/draw2d/entities/model/decay_time.cpp
 	src/client/draw2d/entities/model/healthbar.cpp
@@ -1024,17 +976,6 @@ SET(
 	src/client/draw2d/log_location.cpp
 	src/client/draw2d/message/dispatcher.cpp
 	src/client/draw2d/message/environment.cpp
-	src/client/draw2d/particle/base.cpp
-	src/client/draw2d/particle/container.cpp
-	src/client/draw2d/particle/explosion.cpp
-	src/client/draw2d/particle/generator.cpp
-	src/client/draw2d/particle/object.cpp
-	src/client/draw2d/particle/properties.cpp
-	src/client/draw2d/particle/property_map.cpp
-	src/client/draw2d/particle/rotation_from_alignment.cpp
-	src/client/draw2d/particle/type_to_string.cpp
-	src/client/draw2d/particle/velocity_from_movement.cpp
-	src/client/draw2d/particle/z_ordering.cpp
 	src/client/draw2d/scene/background.cpp
 	src/client/draw2d/scene/background_dim.cpp
 	src/client/draw2d/scene/background_texture_coordinates.cpp
@@ -1057,7 +998,6 @@ SET(
 	src/client/draw2d/sprite/colored/system.cpp
 	src/client/draw2d/sprite/index.cpp
 	src/client/draw2d/sprite/normal/system.cpp
-	src/client/draw2d/sprite/particle/system.cpp
 	src/client/draw2d/sunlight/day_gradient.cpp
 	src/client/draw2d/sunlight/gradients.cpp
 	src/client/draw2d/sunlight/make_color.cpp

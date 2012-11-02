@@ -69,9 +69,6 @@ private:
 	entities::model::parameters const
 	model_parameters() const;
 
-	sprite::particle::system &
-	particle_system() const;
-
 	draw2d::insert_own_callback const &
 	insert_own_callback() const;
 
