@@ -40,7 +40,9 @@ sanguis::client::control::input_translator::input_translator(
 	actions::callback const &_callback
 )
 :
-	callback_(_callback),
+	callback_(
+		_callback
+	),
 	key_connection_(
 		_keyboard.key_callback(
 			std::tr1::bind(

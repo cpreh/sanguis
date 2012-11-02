@@ -467,7 +467,6 @@ SET(
 	include/sanguis/messages/base_fwd.hpp
 	include/sanguis/messages/bind_entity_message.hpp
 	include/sanguis/messages/bind_player_message.hpp
-	include/sanguis/messages/bindings/float.hpp
 	include/sanguis/messages/bindings/fundamental_strong.hpp
 	include/sanguis/messages/bindings/self.hpp
 	include/sanguis/messages/call/object.hpp
@@ -1168,7 +1167,6 @@ SET(
 	src/messages/add_weapon_pickup.cpp
 	src/messages/available_perks.cpp
 	src/messages/base.cpp
-	src/messages/bindings/float.cpp
 	src/messages/change_weapon.cpp
 	src/messages/change_world.cpp
 	src/messages/client_info.cpp
