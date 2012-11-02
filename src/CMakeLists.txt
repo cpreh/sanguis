@@ -1385,6 +1385,7 @@ target_link_libraries(
 	${SGE_LIBRARIES}
 	${CEGUI_LIBRARIES}
 	${Alda_LIBRARIES}
+	${FcpptThreads_LIBRARIES}
 )
 
 IF(NOT MSVC)

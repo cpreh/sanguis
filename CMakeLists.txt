@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
 project (sanguis)
 
@@ -61,6 +61,16 @@ ADD_DEFINITIONS(
 
 INCLUDE_DIRECTORIES(
 	${Fcppt_INCLUDE_DIRS}
+)
+
+# Find Threads
+
+find_package(
+	FcpptThreads REQUIRED
+)
+
+add_definitions(
+	${FcpptThreads_DEFINITIONS}
 )
 
 # Find AWL
