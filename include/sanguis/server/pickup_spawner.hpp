@@ -1,12 +1,12 @@
 #ifndef SANGUIS_SERVER_PICKUP_SPAWNER_HPP_INCLUDED
 #define SANGUIS_SERVER_PICKUP_SPAWNER_HPP_INCLUDED
 
-#include <sanguis/server/environment/object_fwd.hpp>
-#include <sanguis/server/center.hpp>
-#include <sanguis/server/probability.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
+#include <sanguis/server/center.hpp>
+#include <sanguis/server/probability.hpp>
+#include <sanguis/server/environment/object_fwd.hpp>
 #include <fcppt/function/object.hpp>
 #include <fcppt/random/variate_decl.hpp>
 #include <fcppt/random/distribution/uniform_real_decl.hpp>
@@ -14,6 +14,7 @@
 #include <vector>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -29,41 +30,41 @@ public:
 	pickup_spawner(
 		sanguis::diff_clock const &,
 		sanguis::random_generator &,
-		environment::object &
+		sanguis::server::environment::object &
 	);
 
 	~pickup_spawner();
 
 	void
 	spawn(
-		server::probability,
-		server::center const &
+		sanguis::server::probability,
+		sanguis::server::center const &
 	);
 private:
 	void
 	spawn_health(
-		server::center const &
+		sanguis::server::center const &
 	);
 
 	void
 	spawn_monster(
-		server::center const &
+		sanguis::server::center const &
 	);
 
 	void
 	spawn_weapon(
-		server::center const &,
-		weapon_type::type
+		sanguis::server::center const &,
+		sanguis::weapon_type::type
 	);
 
 	sanguis::diff_clock const &diff_clock_;
 
 	sanguis::random_generator &random_generator_;
 
-	environment::object &env_;
+	sanguis::server::environment::object &env_;
 
 	typedef fcppt::random::distribution::uniform_real<
-		server::probability::value_type
+		sanguis::server::probability::value_type
 	> real_distribution;
 
 	typedef fcppt::random::variate<
@@ -73,12 +74,12 @@ private:
 
 	typedef fcppt::function::object<
 		void (
-			server::center const &
+			sanguis::server::center const &
 		)
 	> spawn_function;
 
 	typedef std::pair<
-		server::probability,
+		sanguis::server::probability,
 		spawn_function
 	> spawn_pair;
 
