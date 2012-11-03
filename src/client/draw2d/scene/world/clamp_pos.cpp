@@ -2,6 +2,7 @@
 #include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
 #include <sanguis/client/draw2d/scene/world/signed_pos.hpp>
 #include <fcppt/container/grid/size_type.hpp>
+#include <fcppt/assert/pre.hpp>
 #include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/math/clamp.hpp>
 
@@ -11,6 +12,12 @@ sanguis::client::draw2d::scene::world::clamp_pos(
 	batch_grid::dim const &_size
 )
 {
+	FCPPT_ASSERT_PRE(
+		_size.content()
+		!=
+		0u
+	);
+
 	world::batch_grid::dim ret;
 
 	for(

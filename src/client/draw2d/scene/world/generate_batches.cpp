@@ -1,3 +1,4 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/client/draw2d/scene/world/generate_batches.hpp>
 #include <sanguis/client/draw2d/scene/world/batch.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
@@ -5,12 +6,16 @@
 #include <sanguis/client/draw2d/scene/world/batch_size.hpp>
 #include <sanguis/client/draw2d/scene/world/envelope.hpp>
 #include <sanguis/client/draw2d/scene/world/make_batch.hpp>
-#include <sanguis/exception.hpp>
+#include <sanguis/client/draw2d/scene/world/triangle_traits/access_element.hpp>
+#include <sanguis/client/draw2d/scene/world/triangle_traits/insert_result.hpp>
+#include <sanguis/client/draw2d/scene/world/triangle_traits/scalar.hpp>
+#include <sanguis/client/draw2d/scene/world/triangle_traits/tag.hpp>
 #include <sanguis/creator/generator/generate.hpp>
 #include <sanguis/creator/generator/result.hpp>
 #include <sanguis/creator/generator/size.hpp>
 #include <sanguis/creator/geometry/rect.hpp>
 #include <sanguis/creator/geometry/shape_container.hpp>
+#include <sge/projectile/triangulation/triangulate.hpp>
 #include <sge/renderer/vertex_declaration_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <fcppt/algorithm/array_map.hpp>
@@ -91,7 +96,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 	)
 	{
 		sanguis::creator::geometry::rect const envelope(
-			world::envelope(
+			sanguis::client::draw2d::scene::world::envelope(
 				shape_it->polygon()
 			)
 		);
@@ -118,30 +123,20 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				/ batch_dim
 			);
 
-#if 0
-		sanguis::creator::geometry::polygon const &poly(
-			shape_it->polygon()
-		);
-
-		typedef std::vector<
-			sanguis::creator::geometry::vector
-		> vector2_container;
-
-		vector2_container converted;
-
-		converted.reserve(
-			poly.size()
-		);
-
-		sge::projectile::shape::triangle_set const new_triangles(
+		/*
+		sanguis::creator::geometry::shape const new_shape(
 			sge::projectile::triangulation::triangulate<
-				sge::projectile::shape::triangle_set
+				sanguis::client::draw2d::scene::world::triangle_traits::tag,
+				sanguis::creator::geometry::polygon
 			>(
-				converted,
-				0.01f // TODO!
-			)
-		);
-#endif
+				shape_it->polygon(),
+				0
+			),
+			shape_it->solidity(),
+			shape_it->depth(),
+			shape_it->texture_name()
+		);*/
+
 		// TODO: we need better iteration mechanisms for grid!
 		for(
 			sanguis::creator::geometry::vector::value_type pos_y(
@@ -184,6 +179,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 					pos
 				].push_back(
 					*shape_it
+					//new_shape
 				);
 			}
 	}
