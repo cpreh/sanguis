@@ -1,31 +1,32 @@
 #ifndef SANGUIS_SERVER_WEAPONS_WEAPON_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_WEAPON_HPP_INCLUDED
 
+#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/time_unit.hpp>
+#include <sanguis/weapon_type.hpp>
+#include <sanguis/messages/base_fwd.hpp>
+#include <sanguis/server/vector_fwd.hpp>
+#include <sanguis/server/entities/base_fwd.hpp>
+#include <sanguis/server/entities/with_weapon_fwd.hpp>
 #include <sanguis/server/weapons/weapon_fwd.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/delayed_attack_fwd.hpp>
-#include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/magazine_count.hpp>
+#include <sanguis/server/weapons/magazine_size.hpp>
+#include <sanguis/server/weapons/magazine_type.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/states/ready_fwd.hpp>
 #include <sanguis/server/weapons/states/reloading_fwd.hpp>
 #include <sanguis/server/weapons/states/backswing_fwd.hpp>
 #include <sanguis/server/weapons/states/castpoint_fwd.hpp>
-#include <sanguis/server/vector.hpp>
-#include <sanguis/server/entities/with_weapon_fwd.hpp>
-#include <sanguis/server/entities/base_fwd.hpp>
-#include <sanguis/messages/base.hpp>
-#include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/duration.hpp>
-#include <sanguis/time_unit.hpp>
-#include <sanguis/weapon_type.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/state_machine.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -45,22 +46,36 @@ class weapon
 	FCPPT_NONCOPYABLE(
 		weapon
 	);
+protected:
+	weapon(
+		sanguis::diff_clock const &,
+		sanguis::weapon_type::type,
+		sanguis::server::weapons::range,
+		sanguis::server::weapons::magazine_size,
+		sanguis::server::weapons::magazine_count,
+		sanguis::server::weapons::base_cooldown,
+		sanguis::server::weapons::cast_point,
+		sanguis::server::weapons::reload_time
+	);
 public:
-	weapons::range const
+	virtual
+	~weapon() = 0;
+
+	sanguis::server::weapons::range const
 	range() const;
 
 	void
 	attack(
-		entities::with_weapon &from,
-		server::vector const &to
+		sanguis::server::entities::with_weapon &from,
+		sanguis::server::vector const &to
 	);
 
-	weapon_type::type
+	sanguis::weapon_type::type
 	type() const;
 
 	void
 	update(
-		entities::with_weapon &owner
+		sanguis::server::entities::with_weapon &owner
 	);
 
 	void
@@ -69,13 +84,13 @@ public:
 	void
 	repickup();
 
-	weapons::magazine_size const
+	sanguis::server::weapons::magazine_size const
 	magazine_size() const;
 
 	bool
 	in_range(
-		entities::base const &from,
-		server::vector const &to
+		sanguis::server::entities::base const &from,
+		sanguis::server::vector const &to
 	) const;
 
 	void
@@ -87,23 +102,11 @@ public:
 	reload_speed(
 		sanguis::time_unit
 	);
-
-	virtual ~weapon();
 protected:
-	weapon(
-		sanguis::diff_clock const &,
-		weapon_type::type,
-		weapons::range,
-		weapons::magazine_size,
-		weapons::magazine_count,
-		base_cooldown,
-		weapons::cast_point,
-		weapons::reload_time
-	);
-
-	virtual void
+	virtual
+	void
 	do_attack(
-		delayed_attack const &
+		sanguis::server::weapons::delayed_attack const &
 	) = 0;
 
 	bool
@@ -112,10 +115,10 @@ protected:
 	sanguis::diff_clock const &
 	diff_clock() const;
 private:
-	friend class states::ready;
-	friend class states::reloading;
-	friend class states::backswing;
-	friend class states::castpoint;
+	friend class sanguis::server::weapons::states::ready;
+	friend class sanguis::server::weapons::states::reloading;
+	friend class sanguis::server::weapons::states::backswing;
+	friend class sanguis::server::weapons::states::castpoint;
 
 	void
 	reset_magazine();
@@ -129,47 +132,50 @@ private:
 	void
 	magazine_exhausted();
 
-	weapons::cast_point const
+	sanguis::server::weapons::cast_point const
 	cast_point() const;
 
-	weapons::backswing_time const
+	sanguis::server::weapons::backswing_time const
 	backswing_time() const;
 
-	weapons::reload_time const
+	sanguis::server::weapons::reload_time const
 	reload_time() const;
 
-	virtual void
+	virtual
+	void
 	init_attack(
-		entities::with_weapon &owner
+		sanguis::server::entities::with_weapon &owner
 	);
 
-	virtual void
+	virtual
+	void
 	on_init_attack(
-		entities::with_weapon &owner
+		sanguis::server::entities::with_weapon &owner
 	);
 
-	virtual void
+	virtual
+	void
 	on_castpoint(
-		entities::with_weapon &owner
+		sanguis::server::entities::with_weapon &owner
 	);
 
 	sanguis::diff_clock const &diff_clock_;
 
-	weapon_type::type const type_;
+	sanguis::weapon_type::type const type_;
 
-	weapons::range const range_;
+	sanguis::server::weapons::range const range_;
 
-	magazine_type magazine_used_;
+	sanguis::server::weapons::magazine_type magazine_used_;
 
-	weapons::magazine_count::value_type magazine_count_;
+	sanguis::server::weapons::magazine_count::value_type magazine_count_;
 
-	weapons::magazine_size const magazine_size_;
+	sanguis::server::weapons::magazine_size const magazine_size_;
 
-	weapons::cast_point const cast_point_;
+	sanguis::server::weapons::cast_point const cast_point_;
 
-	weapons::backswing_time const backswing_time_;
+	sanguis::server::weapons::backswing_time const backswing_time_;
 
-	weapons::reload_time const reload_time_;
+	sanguis::server::weapons::reload_time const reload_time_;
 
 	sanguis::time_unit
 		ias_,

@@ -1,13 +1,24 @@
-#include <sanguis/server/weapons/states/castpoint.hpp>
-#include <sanguis/server/weapons/states/backswing.hpp>
-#include <sanguis/server/weapons/states/ready.hpp>
+#include <sanguis/diff_timer.hpp>
 #include <sanguis/server/weapons/delayed_attack.hpp>
-#include <sanguis/server/weapons/events/shoot.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll.hpp>
+#include <sanguis/server/weapons/events/shoot.hpp>
 #include <sanguis/server/weapons/events/stop.hpp>
+#include <sanguis/server/weapons/states/backswing.hpp>
+#include <sanguis/server/weapons/states/castpoint.hpp>
+#include <sanguis/server/weapons/states/ready.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/optional_impl.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/statechart/result.hpp>
+#include <fcppt/config/external_end.hpp>
+
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::weapons::states::castpoint::castpoint(
 	my_context _ctx
@@ -18,11 +29,11 @@ sanguis::server::weapons::states::castpoint::castpoint(
 	),
 	attack_time_(
 		sanguis::diff_timer::parameters(
-			context<
-				weapon
+			this->context<
+				sanguis::server::weapons::weapon
 			>().diff_clock(),
-			context<
-				weapon
+			this->context<
+				sanguis::server::weapons::weapon
 			>().cast_point().get()
 		)
 	),
@@ -30,35 +41,39 @@ sanguis::server::weapons::states::castpoint::castpoint(
 {
 }
 
+FCPPT_PP_POP_WARNING
+
 sanguis::server::weapons::states::castpoint::~castpoint()
 {
 }
 
 boost::statechart::result
 sanguis::server::weapons::states::castpoint::react(
-	events::shoot const &_event
+	sanguis::server::weapons::events::shoot const &_event
 )
 {
 	// TODO: use constructor instead!
 	attack_dest_ = _event.to();
 
-	return discard_event();
+	return
+		this->discard_event();
 }
 
 boost::statechart::result
 sanguis::server::weapons::states::castpoint::react(
-	events::poll const &_event
+	sanguis::server::weapons::events::poll const &_event
 )
 {
 	if(
 		!attack_time_.expired()
 	)
-		return discard_event();
+		return
+			this->discard_event();
 
-	context<
-		weapon
+	this->context<
+		sanguis::server::weapons::weapon
 	>().do_attack(
-		delayed_attack(
+		sanguis::server::weapons::delayed_attack(
 			_event.owner().center(),
 			_event.owner().angle(),
 			_event.owner().team(),
@@ -67,7 +82,9 @@ sanguis::server::weapons::states::castpoint::react(
 		)
 	);
 
-	context<weapon>().on_castpoint(
+	this->context<
+		sanguis::server::weapons::weapon
+	>().on_castpoint(
 		_event.owner()
 	);
 
@@ -75,13 +92,19 @@ sanguis::server::weapons::states::castpoint::react(
 		_event
 	);
 
-	return transit<backswing>();
+	return
+		this->transit<
+			sanguis::server::weapons::states::backswing
+		>();
 }
 
 boost::statechart::result
 sanguis::server::weapons::states::castpoint::react(
-	events::stop const &
+	sanguis::server::weapons::events::stop const &
 )
 {
-	return transit<ready>();
+	return
+		this->transit<
+			sanguis::server::weapons::states::ready
+		>();
 }

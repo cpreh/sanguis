@@ -1,15 +1,16 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_BUFFS_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_BUFFS_HPP_INCLUDED
 
-#include <sanguis/server/entities/with_buffs_fwd.hpp>
-#include <sanguis/server/entities/base.hpp>
-#include <sanguis/server/buffs/list.hpp>
 #include <sanguis/server/buffs/buff.hpp> // for buffs::list
+#include <sanguis/server/buffs/list.hpp>
 #include <sanguis/server/buffs/unique_ptr.hpp>
+#include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/with_buffs_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -20,7 +21,7 @@ namespace entities
 
 class with_buffs
 :
-	public virtual base
+	public virtual sanguis::server::entities::base
 {
 	FCPPT_NONCOPYABLE(
 		with_buffs
@@ -28,12 +29,12 @@ class with_buffs
 public:
 	void
 	add_buff(
-		buffs::buff &
+		sanguis::server::buffs::buff &
 	);
 
 	void
 	claim_buff(
-		buffs::unique_ptr
+		sanguis::server::buffs::unique_ptr
 	);
 protected:
 	with_buffs();
@@ -43,10 +44,10 @@ protected:
 	void
 	on_update();
 private:
-	buffs::list buffs_;
+	sanguis::server::buffs::list buffs_;
 
 	typedef boost::ptr_list<
-		buffs::buff
+		sanguis::server::buffs::buff
 	> buff_container;
 
 	buff_container owned_buffs_;

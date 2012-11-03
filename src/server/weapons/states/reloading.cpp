@@ -1,10 +1,22 @@
-#include <sanguis/server/weapons/states/reloading.hpp>
-#include <sanguis/server/weapons/states/ready.hpp>
+#include <sanguis/diff_timer.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll.hpp>
+#include <sanguis/server/weapons/events/reset.hpp>
 #include <sanguis/server/weapons/events/shoot.hpp>
 #include <sanguis/server/weapons/events/stop.hpp>
-#include <sanguis/server/weapons/events/reset.hpp>
+#include <sanguis/server/weapons/states/reloading.hpp>
+#include <sanguis/server/weapons/states/ready.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/statechart/state.hpp>
+#include <fcppt/config/external_end.hpp>
+
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::weapons::states::reloading::reloading(
 	my_context _ctx
@@ -15,16 +27,18 @@ sanguis::server::weapons::states::reloading::reloading(
 	),
 	reload_time_(
 		sanguis::diff_timer::parameters(
-			context<
-				weapon
+			this->context<
+				sanguis::server::weapons::weapon
 			>().diff_clock(),
-			context<
-				weapon
+			this->context<
+				sanguis::server::weapons::weapon
 			>().reload_time().get()
 		)
 	)
 {
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::server::weapons::states::reloading::~reloading()
 {
@@ -32,41 +46,47 @@ sanguis::server::weapons::states::reloading::~reloading()
 
 boost::statechart::result
 sanguis::server::weapons::states::reloading::react(
-	events::poll const &_event
+	sanguis::server::weapons::events::poll const &_event
 )
 {
 	if(
 		!reload_time_.expired()
 	)
-		return discard_event();
+		return
+			this->discard_event();
 
-	context<
-		weapon
+	this->context<
+		sanguis::server::weapons::weapon
 	>().reset_magazine();
 
 	_event.owner().stop_reloading();
 
-	return transit<ready>();
+	return
+		this->transit<
+			sanguis::server::weapons::states::ready
+		>();
 }
 
 boost::statechart::result
 sanguis::server::weapons::states::reloading::react(
-	events::stop const &
+	sanguis::server::weapons::events::stop const &
 )
 {
 	reload_time_.reset();
 
-	return discard_event();
+	return
+		this->discard_event();
 }
 
 boost::statechart::result
 sanguis::server::weapons::states::reloading::react(
-	events::reset const &
+	sanguis::server::weapons::events::reset const &
 )
 {
 	reload_time_.expired(
 		true
 	);
 
-	return discard_event();
+	return
+		this->discard_event();
 }

@@ -1,24 +1,34 @@
-#include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/log_parameters.hpp>
+#include <sanguis/weapon_type.hpp>
+#include <sanguis/server/vector_fwd.hpp>
+#include <sanguis/server/collision/distance.hpp>
+#include <sanguis/server/entities/base_fwd.hpp>
+#include <sanguis/server/entities/with_weapon.hpp>
+#include <sanguis/server/weapons/backswing_time.hpp>
+#include <sanguis/server/weapons/base_cooldown.hpp>
+#include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/log_location.hpp>
+#include <sanguis/server/weapons/magazine_count.hpp>
+#include <sanguis/server/weapons/magazine_size.hpp>
+#include <sanguis/server/weapons/range.hpp>
+#include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/unlimited_magazine_count.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll.hpp>
 #include <sanguis/server/weapons/events/reset.hpp>
 #include <sanguis/server/weapons/events/shoot.hpp>
 #include <sanguis/server/weapons/events/stop.hpp>
 #include <sanguis/server/weapons/states/ready.hpp>
-#include <sanguis/server/entities/with_weapon.hpp>
-#include <sanguis/server/collision/distance.hpp>
-#include <sanguis/exception.hpp>
-#include <sanguis/log_parameters.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/math/sphere/object_impl.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
-#include <fcppt/log/parameters/object.hpp>
+#include <fcppt/assert/pre.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/warning.hpp>
+#include <fcppt/log/parameters/object.hpp>
 #include <fcppt/text.hpp>
+
 
 namespace
 {
@@ -32,6 +42,71 @@ fcppt::log::object logger(
 );
 
 }
+
+sanguis::server::weapons::weapon::weapon(
+	sanguis::diff_clock const &_diff_clock,
+	sanguis::weapon_type::type const _type,
+	sanguis::server::weapons::range const _range,
+	sanguis::server::weapons::magazine_size const _magazine_size,
+	sanguis::server::weapons::magazine_count const _magazine_count,
+	sanguis::server::weapons::base_cooldown const _base_cooldown,
+	sanguis::server::weapons::cast_point const _cast_point,
+	sanguis::server::weapons::reload_time const _reload_time
+)
+:
+	diff_clock_(
+		_diff_clock
+	),
+	type_(
+		_type
+	),
+	range_(
+		_range
+	),
+	magazine_used_(
+		0u
+	),
+	magazine_count_(
+		_magazine_count.get()
+	),
+	magazine_size_(
+		_magazine_size
+	),
+	cast_point_(
+		_cast_point
+	),
+	backswing_time_(
+		_base_cooldown.get()
+		-
+		_cast_point.get()
+	),
+	reload_time_(
+		_reload_time.get()
+	),
+	ias_(
+		0.f
+	),
+	irs_(
+		0.f
+	)
+{
+	if(
+		_cast_point.get() > _base_cooldown.get()
+	)
+		FCPPT_LOG_WARNING(
+			::logger,
+			fcppt::log::_
+				<< FCPPT_TEXT("A weapon's cast point interval is bigger than its cooldown!")
+	);
+
+	FCPPT_ASSERT_PRE(
+		this->magazine_size().get() != 0
+	);
+
+	// TODO: use a scoped state machine!
+	this->initiate();
+}
+
 
 sanguis::server::weapons::range const
 sanguis::server::weapons::weapon::range() const
@@ -47,7 +122,7 @@ sanguis::server::weapons::weapon::type() const
 
 void
 sanguis::server::weapons::weapon::update(
-	entities::with_weapon &_owner
+	sanguis::server::entities::with_weapon &_owner
 )
 {
 	if(
@@ -56,7 +131,7 @@ sanguis::server::weapons::weapon::update(
 		return;
 
 	this->process_event(
-		events::poll(
+		sanguis::server::weapons::events::poll(
 			_owner
 		)
 	);
@@ -64,8 +139,8 @@ sanguis::server::weapons::weapon::update(
 
 void
 sanguis::server::weapons::weapon::attack(
-	entities::with_weapon &_from,
-	server::vector const &_to
+	sanguis::server::entities::with_weapon &_from,
+	sanguis::server::vector const &_to
 )
 {
 	if(
@@ -112,12 +187,12 @@ sanguis::server::weapons::weapon::magazine_size() const
 
 bool
 sanguis::server::weapons::weapon::in_range(
-	entities::base const &_from,
-	server::vector const &_to
+	sanguis::server::entities::base const &_from,
+	sanguis::server::vector const &_to
 ) const
 {
 	return
-		collision::distance(
+		sanguis::server::collision::distance(
 			_from,
 			_to
 		)
@@ -143,59 +218,6 @@ sanguis::server::weapons::weapon::reload_speed(
 sanguis::server::weapons::weapon::~weapon()
 {
 	this->terminate(); // FIXME!
-}
-
-sanguis::server::weapons::weapon::weapon(
-	sanguis::diff_clock const &_diff_clock,
-	weapon_type::type const _type,
-	weapons::range const _range,
-	weapons::magazine_size const _magazine_size,
-	weapons::magazine_count const _magazine_count,
-	weapons::base_cooldown const _base_cooldown,
-	weapons::cast_point const _cast_point,
-	weapons::reload_time const _reload_time
-)
-:
-	diff_clock_(_diff_clock),
-	type_(_type),
-	range_(_range),
-	magazine_used_(0),
-	magazine_count_(_magazine_count.get()),
-	magazine_size_(_magazine_size),
-	cast_point_(
-		_cast_point
-	),
-	backswing_time_(
-		_base_cooldown.get() - _cast_point.get()
-	),
-	reload_time_(
-		_reload_time.get()
-	),
-	ias_(
-		0.f
-	),
-	irs_(
-		0.f
-	)
-{
-	if(
-		_cast_point.get() > _base_cooldown.get()
-	)
-		FCPPT_LOG_WARNING(
-			::logger,
-			fcppt::log::_
-				<< FCPPT_TEXT("A weapon's cast point interval is bigger than its cooldown!")
-	);
-
-	if(
-		this->magazine_size().get() == 0
-	)
-		throw sanguis::exception(
-			FCPPT_TEXT("magazine size of 0 is invalid!")
-		);
-
-	// TODO: use a scoped state machine!
-	this->initiate();
 }
 
 bool
@@ -246,8 +268,8 @@ sanguis::server::weapons::cast_point const
 sanguis::server::weapons::weapon::cast_point() const
 {
 	return
-		weapons::cast_point(
-			cast_point_.get() * ias_
+		sanguis::server::weapons::cast_point(
+			cast_point_.get() / ias_
 		);
 }
 
@@ -255,8 +277,8 @@ sanguis::server::weapons::backswing_time const
 sanguis::server::weapons::weapon::backswing_time() const
 {
 	return
-		weapons::backswing_time(
-			backswing_time_.get() * ias_
+		sanguis::server::weapons::backswing_time(
+			backswing_time_.get() / ias_
 		);
 }
 
@@ -264,14 +286,14 @@ sanguis::server::weapons::reload_time const
 sanguis::server::weapons::weapon::reload_time() const
 {
 	return
-		weapons::reload_time(
-			reload_time_.get() * irs_
+		sanguis::server::weapons::reload_time(
+			reload_time_.get() / irs_
 		);
 }
 
 void
 sanguis::server::weapons::weapon::init_attack(
-	entities::with_weapon &_entity
+	sanguis::server::entities::with_weapon &_entity
 )
 {
 	_entity.start_attacking();
@@ -283,14 +305,14 @@ sanguis::server::weapons::weapon::init_attack(
 
 void
 sanguis::server::weapons::weapon::on_init_attack(
-	entities::with_weapon &
+	sanguis::server::entities::with_weapon &
 )
 {
 }
 
 void
 sanguis::server::weapons::weapon::on_castpoint(
-	entities::with_weapon &
+	sanguis::server::entities::with_weapon &
 )
 {
 }

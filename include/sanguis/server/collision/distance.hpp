@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_COLLISION_DISTANCE_HPP_INCLUDED
 
 #include <sanguis/server/space_unit.hpp>
-#include <sanguis/server/vector.hpp>
+#include <sanguis/server/vector_fwd.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 
 namespace sanguis

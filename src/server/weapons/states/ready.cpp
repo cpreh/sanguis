@@ -1,9 +1,14 @@
-#include <sanguis/server/weapons/states/ready.hpp>
-#include <sanguis/server/weapons/states/castpoint.hpp>
-#include <sanguis/server/weapons/events/shoot.hpp>
-#include <sanguis/server/weapons/events/poll.hpp>
-#include <sanguis/server/weapons/events/stop.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/weapons/events/poll.hpp>
+#include <sanguis/server/weapons/events/shoot.hpp>
+#include <sanguis/server/weapons/events/stop.hpp>
+#include <sanguis/server/weapons/states/castpoint.hpp>
+#include <sanguis/server/weapons/states/ready.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/statechart/result.hpp>
+#include <fcppt/config/external_end.hpp>
+
 
 sanguis::server::weapons::states::ready::ready()
 {
@@ -15,27 +20,28 @@ sanguis::server::weapons::states::ready::~ready()
 
 boost::statechart::result
 sanguis::server::weapons::states::ready::react(
-	events::shoot const &_event
+	sanguis::server::weapons::events::shoot const &_event
 )
 {
 	if(
-		!context<
-			weapon
+		!this->context<
+			sanguis::server::weapons::weapon
 		>().in_range(
 			_event.from(),
 			_event.to()
 		)
 	)
-		return discard_event();
+		return
+			this->discard_event();
 
-	context<
-		weapon
+	this->context<
+		sanguis::server::weapons::weapon
 	>().init_attack(
 		_event.from()
 	);
 
-	context<
-		weapon
+	this->context<
+		sanguis::server::weapons::weapon
 	>().post_event(
 		_event
 	);
@@ -44,5 +50,8 @@ sanguis::server::weapons::states::ready::react(
 		_event
 	);
 
-	return transit<castpoint>();
+	return
+		this->transit<
+			sanguis::server::weapons::states::castpoint
+		>();
 }

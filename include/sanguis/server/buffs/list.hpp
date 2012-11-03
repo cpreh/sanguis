@@ -14,7 +14,7 @@ namespace buffs
 {
 
 typedef boost::intrusive::list<
-	buff,
+	sanguis::server::buffs::buff,
 	boost::intrusive::constant_time_size<
 		false
 	>

@@ -1,11 +1,23 @@
-#include <sanguis/server/weapons/states/backswing.hpp>
-#include <sanguis/server/weapons/states/reloading.hpp>
-#include <sanguis/server/weapons/states/ready.hpp>
+#include <sanguis/diff_timer.hpp>
+#include <sanguis/server/entities/with_weapon.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll.hpp>
 #include <sanguis/server/weapons/events/shoot.hpp>
 #include <sanguis/server/weapons/events/stop.hpp>
 #include <sanguis/server/weapons/events/reset.hpp>
-#include <sanguis/server/entities/with_weapon.hpp>
+#include <sanguis/server/weapons/states/backswing.hpp>
+#include <sanguis/server/weapons/states/reloading.hpp>
+#include <sanguis/server/weapons/states/ready.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/statechart/state.hpp>
+#include <fcppt/config/external_end.hpp>
+
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::weapons::states::backswing::backswing(
 	my_context _ctx
@@ -16,16 +28,18 @@ sanguis::server::weapons::states::backswing::backswing(
 	),
 	cooldown_(
 		sanguis::diff_timer::parameters(
-			context<
-				weapon
+			this->context<
+				sanguis::server::weapons::weapon
 			>().diff_clock(),
-			context<
-				weapon
+			this->context<
+				sanguis::server::weapons::weapon
 			>().backswing_time().get()
 		)
 	)
 {
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::server::weapons::states::backswing::~backswing()
 {
@@ -33,15 +47,18 @@ sanguis::server::weapons::states::backswing::~backswing()
 
 boost::statechart::result
 sanguis::server::weapons::states::backswing::react(
-	events::poll const &_event
+	sanguis::server::weapons::events::poll const &_event
 )
 {
 	if(
 		!cooldown_.expired()
 	)
-		return discard_event();
+		return
+			this->discard_event();
 
-	context<weapon>().use_magazine_item();
+	this->context<
+		sanguis::server::weapons::weapon
+	>().use_magazine_item();
 
 	_event.owner().attack_ready();
 
@@ -50,15 +67,25 @@ sanguis::server::weapons::states::backswing::react(
 	);
 
 	if(
-		context<weapon>().magazine_empty()
+		this->context<
+			sanguis::server::weapons::weapon
+		>().magazine_empty()
 	)
 	{
 		_event.owner().start_reloading();
 
-		context<weapon>().magazine_exhausted();
+		this->context<
+			sanguis::server::weapons::weapon
+		>().magazine_exhausted();
 
-		return transit<reloading>();
+		return
+			this->transit<
+				sanguis::server::weapons::states::reloading
+			>();
 	}
 
-	return transit<ready>();
+	return
+		this->transit<
+			sanguis::server::weapons::states::ready
+		>();
 }

@@ -1,16 +1,17 @@
 #ifndef SANGUIS_SERVER_WEAPONS_STATES_BACKSWING_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_STATES_BACKSWING_HPP_INCLUDED
 
-#include <sanguis/server/weapons/states/backswing_fwd.hpp>
+#include <sanguis/diff_timer.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll_fwd.hpp>
-#include <sanguis/diff_timer.hpp>
+#include <sanguis/server/weapons/states/backswing_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/statechart/state.hpp>
-#include <boost/statechart/result.hpp>
 #include <boost/statechart/custom_reaction.hpp>
+#include <boost/statechart/result.hpp>
+#include <boost/statechart/state.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -24,8 +25,8 @@ namespace states
 class backswing
 :
 	public boost::statechart::state<
-		backswing,
-		weapon
+		sanguis::server::weapons::states::backswing,
+		sanguis::server::weapons::weapon
 	>
 {
 	FCPPT_NONCOPYABLE(
@@ -33,18 +34,20 @@ class backswing
 	);
 public:
 	typedef boost::statechart::custom_reaction<
-		events::poll
+		sanguis::server::weapons::events::poll
 	> reactions;
 
-	explicit backswing(
+	explicit
+	backswing(
 		my_context
 	);
 
-	virtual ~backswing();
+	virtual
+	~backswing();
 
 	boost::statechart::result
 	react(
-		events::poll const &
+		sanguis::server::weapons::events::poll const &
 	);
 private:
 	sanguis::diff_timer cooldown_;
