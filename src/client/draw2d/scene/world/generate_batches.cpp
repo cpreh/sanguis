@@ -31,6 +31,7 @@
 #include <iterator>
 #include <fcppt/config/external_end.hpp>
 
+
 sanguis::client::draw2d::scene::world::batch_grid_unique_ptr
 sanguis::client::draw2d::scene::world::generate_batches(
 	sge::renderer::device::core &_renderer,
@@ -61,7 +62,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 							sanguis::creator::generator::size::value_type
 						>,
 						std::tr1::placeholders::_1,
-						world::batch_size
+						sanguis::client::draw2d::scene::world::batch_size::value
 					)
 				)
 			)
@@ -99,7 +100,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 			fcppt::math::dim::fill<
 				sanguis::creator::geometry::rect::dim::dim_wrapper::value
 			>(
-				world::batch_size
+				sanguis::client::draw2d::scene::world::batch_size::value
 			)
 		);
 
@@ -116,6 +117,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				)
 				/ batch_dim
 			);
+
 #if 0
 		sanguis::creator::geometry::polygon const &poly(
 			shape_it->polygon()

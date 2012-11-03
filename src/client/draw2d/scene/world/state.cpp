@@ -84,7 +84,7 @@ sanguis::client::draw2d::scene::world::state::state(
 				fcppt::math::dim::fill<
 					2
 				>(
-					world::batch_size
+					sanguis::client::draw2d::scene::world::batch_size::value
 				)
 			)
 		)
@@ -136,7 +136,7 @@ sanguis::client::draw2d::scene::world::state::draw(
 		static_cast<
 			world::signed_pos::value_type
 		>(
-			world::batch_size
+			sanguis::client::draw2d::scene::world::batch_size::value
 		)
 	);
 
@@ -203,14 +203,14 @@ sanguis::client::draw2d::scene::world::state::draw(
 		batch_grid::size_type pos_y(
 			lower.h()
 		);
-		pos_y != upper.h();
+		pos_y <= upper.h();
 		++pos_y
 	)
 		for(
 			batch_grid::size_type pos_x(
 				lower.w()
 			);
-			pos_x != upper.w();
+			pos_x <= upper.w();
 			++pos_x
 		)
 		{
