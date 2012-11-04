@@ -123,7 +123,6 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				/ batch_dim
 			);
 
-		/*
 		sanguis::creator::geometry::shape const new_shape(
 			sge::projectile::triangulation::triangulate<
 				sanguis::client::draw2d::scene::world::triangle_traits::tag,
@@ -135,7 +134,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 			shape_it->solidity(),
 			shape_it->depth(),
 			shape_it->texture_name()
-		);*/
+		);
 
 		// TODO: we need better iteration mechanisms for grid!
 		for(
@@ -178,8 +177,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				temp_grid[
 					pos
 				].push_back(
-					*shape_it
-					//new_shape
+					new_shape
 				);
 			}
 	}

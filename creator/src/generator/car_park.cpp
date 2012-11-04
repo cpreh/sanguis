@@ -68,7 +68,20 @@ sanguis::creator::generator::car_park(
 								0.5f
 							)
 						)
-					),
+					)
+					(
+						sanguis::creator::geometry::vertex(
+							sanguis::creator::geometry::vector(
+								1000,
+								500
+							),
+							sanguis::creator::geometry::texture_point(
+								0.5f,
+								0.25f
+							)
+						)
+					)
+					,
 					sanguis::creator::geometry::solidity::solid,
 					sanguis::creator::geometry::depth(
 						0
