@@ -179,7 +179,7 @@ sanguis::client::draw2d::scene::world::make_batch(
 						num_vertices
 					),
 					_textures.load(
-						cur_texture // TODO!
+						cur_texture.get() // TODO!
 					)
 				)
 			);
@@ -203,7 +203,7 @@ sanguis::client::draw2d::scene::world::make_batch(
 				num_vertices
 			),
 			_textures.load(
-				cur_texture
+				cur_texture.get()
 			)
 		)
 	);

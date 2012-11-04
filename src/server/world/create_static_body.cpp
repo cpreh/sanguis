@@ -1,8 +1,12 @@
-#include <sanguis/server/world/create_static_body.hpp>
 #include <sanguis/pixels_per_meter.hpp>
 #include <sanguis/creator/geometry/shape_container.hpp>
 #include <sanguis/creator/geometry/solidity.hpp>
-#include <sanguis/creator/geometry/triangulate/polygon.hpp>
+#include <sanguis/server/world/create_static_body.hpp>
+#include <sanguis/server/world/triangle_traits/access_element.hpp>
+#include <sanguis/server/world/triangle_traits/insert_result.hpp>
+#include <sanguis/server/world/triangle_traits/scalar.hpp>
+#include <sanguis/server/world/triangle_traits/tag.hpp>
+#include <sge/projectile/vector2.hpp>
 #include <sge/projectile/body/angular_velocity.hpp>
 #include <sge/projectile/body/linear_velocity.hpp>
 #include <sge/projectile/body/mass.hpp>
@@ -15,31 +19,13 @@
 #include <sge/projectile/body/solidity/solid.hpp>
 #include <sge/projectile/shape/triangle_mesh.hpp>
 #include <sge/projectile/shape/triangle_sequence.hpp>
-#include <sge/projectile/vector2.hpp>
+#include <sge/projectile/triangulation/default_tag.hpp>
+#include <sge/projectile/triangulation/triangulate.hpp>
 #include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
-namespace
-{
-
-sge::projectile::vector2::value_type
-transform_coords(
-	sge::projectile::vector2::value_type const _coord
-)
-{
-	return
-		_coord
-		/
-		static_cast<
-			sge::projectile::vector2::value_type
-		>(
-			sanguis::pixels_per_meter()
-		);
-}
-
-}
 
 sge::projectile::body::object_unique_ptr
 sanguis::server::world::create_static_body(
@@ -64,11 +50,12 @@ sanguis::server::world::create_static_body(
 			continue;
 
 		sge::projectile::shape::triangle_sequence const new_triangles(
-			sanguis::creator::geometry::triangulate::polygon<
+			sge::projectile::triangulation::triangulate<
+				sanguis::server::world::triangle_traits::tag,
 				sge::projectile::shape::triangle_sequence
 			>(
 				shape_it->polygon(),
-				transform_coords
+				0
 			)
 		);
 

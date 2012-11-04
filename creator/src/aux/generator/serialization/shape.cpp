@@ -51,7 +51,7 @@ sanguis::creator::aux::generator::serialization::shape(
 				sge::parse::json::member(
 					FCPPT_TEXT("texture_name"),
 					sge::parse::json::string(
-						_shape.texture_name()
+						_shape.texture_name().get()
 					)
 				)
 			)

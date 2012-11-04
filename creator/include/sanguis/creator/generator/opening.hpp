@@ -3,6 +3,7 @@
 
 #include <sanguis/creator/geometry/vector.hpp>
 
+
 namespace sanguis
 {
 namespace creator
@@ -10,7 +11,7 @@ namespace creator
 namespace generator
 {
 
-typedef geometry::vector opening;
+typedef sanguis::creator::geometry::vector opening;
 
 }
 }

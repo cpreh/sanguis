@@ -17,32 +17,32 @@ set(
 	include/sanguis/creator/generator/opening_container.hpp
 	include/sanguis/creator/generator/parameters.hpp
 	include/sanguis/creator/generator/parameters_fwd.hpp
+	include/sanguis/creator/generator/rand_value.hpp
 	include/sanguis/creator/generator/randgen.hpp
 	include/sanguis/creator/generator/randgen_fwd.hpp
-	include/sanguis/creator/generator/randvalue.hpp
 	include/sanguis/creator/generator/result.hpp
 	include/sanguis/creator/generator/result_fwd.hpp
 	include/sanguis/creator/generator/seed.hpp
 	include/sanguis/creator/generator/serialize.hpp
 	include/sanguis/creator/generator/size.hpp
+	include/sanguis/creator/generator/size_fwd.hpp
 	include/sanguis/creator/generator/top_parameters.hpp
 	include/sanguis/creator/generator/top_parameters_fwd.hpp
 	include/sanguis/creator/geometry/depth.hpp
 	include/sanguis/creator/geometry/polygon.hpp
-	include/sanguis/creator/geometry/polygon_fwd.hpp
 	include/sanguis/creator/geometry/rect.hpp
+	include/sanguis/creator/geometry/rect_fwd.hpp
 	include/sanguis/creator/geometry/shape.hpp
 	include/sanguis/creator/geometry/shape_container.hpp
-	include/sanguis/creator/geometry/shape_container_fwd.hpp
 	include/sanguis/creator/geometry/shape_fwd.hpp
 	include/sanguis/creator/geometry/solidity.hpp
 	include/sanguis/creator/geometry/texture_name.hpp
 	include/sanguis/creator/geometry/texture_point.hpp
+	include/sanguis/creator/geometry/texture_point_fwd.hpp
 	include/sanguis/creator/geometry/texture_unit.hpp
-	include/sanguis/creator/geometry/triangulate/polygon.hpp
-	include/sanguis/creator/geometry/triangulate/transform_function.hpp
 	include/sanguis/creator/geometry/unit.hpp
 	include/sanguis/creator/geometry/vector.hpp
+	include/sanguis/creator/geometry/vector_fwd.hpp
 	include/sanguis/creator/geometry/vertex.hpp
 	include/sanguis/creator/geometry/vertex_fwd.hpp
 	include/sanguis/creator/symbol.hpp

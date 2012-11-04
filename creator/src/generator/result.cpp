@@ -1,16 +1,29 @@
+#include <sanguis/creator/generator/name.hpp>
+#include <sanguis/creator/generator/seed.hpp>
+#include <sanguis/creator/generator/size.hpp>
 #include <sanguis/creator/generator/result.hpp>
+#include <sanguis/creator/geometry/shape_container.hpp>
+
 
 sanguis::creator::generator::result::result(
-	geometry::shape_container const &_shapes,
-	generator::seed const &_seed,
-	generator::name const &_name,
-	generator::size const &_size
+	sanguis::creator::geometry::shape_container const &_shapes,
+	sanguis::creator::generator::seed const &_seed,
+	sanguis::creator::generator::name const &_name,
+	sanguis::creator::generator::size const &_size
 )
 :
-	shapes_(_shapes),
-	seed_(_seed),
-	name_(_name),
-	size_(_size)
+	shapes_(
+		_shapes
+	),
+	seed_(
+		_seed
+	),
+	name_(
+		_name
+	),
+	size_(
+		_size
+	)
 {
 }
 

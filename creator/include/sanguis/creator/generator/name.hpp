@@ -4,6 +4,7 @@
 #include <fcppt/string.hpp>
 #include <fcppt/strong_typedef.hpp>
 
+
 namespace sanguis
 {
 namespace creator

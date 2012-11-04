@@ -5,6 +5,7 @@
 #include <boost/cstdint.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 namespace creator
@@ -12,7 +13,7 @@ namespace creator
 namespace geometry
 {
 
-typedef boost::uint32_t unit;
+typedef boost::int32_t unit;
 
 }
 }

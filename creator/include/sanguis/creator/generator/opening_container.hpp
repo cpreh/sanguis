@@ -6,6 +6,7 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 namespace creator
@@ -14,7 +15,7 @@ namespace generator
 {
 
 typedef std::vector<
-	generator::opening
+	sanguis::creator::generator::opening
 > opening_container;
 
 }

@@ -158,6 +158,10 @@ SET(
 	include/sanguis/client/draw2d/scene/world/texture_slice.hpp
 	include/sanguis/client/draw2d/scene/world/texture_slice_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/texture_slice_vector.hpp
+	include/sanguis/client/draw2d/scene/world/triangle_traits/access_element.hpp
+	include/sanguis/client/draw2d/scene/world/triangle_traits/insert_result.hpp
+	include/sanguis/client/draw2d/scene/world/triangle_traits/scalar.hpp
+	include/sanguis/client/draw2d/scene/world/triangle_traits/tag.hpp
 	include/sanguis/client/draw2d/scene/world/vf/format.hpp
 	include/sanguis/client/draw2d/scene/world/vf/format_part.hpp
 	include/sanguis/client/draw2d/scene/world/vf/pos.hpp
@@ -828,6 +832,7 @@ SET(
 	include/sanguis/server/update_sight_function.hpp
 	include/sanguis/server/update_target_function.hpp
 	include/sanguis/server/vector.hpp
+	include/sanguis/server/vector_fwd.hpp
 	include/sanguis/server/waves/convert_enemy_name.hpp
 	include/sanguis/server/waves/count.hpp
 	include/sanguis/server/waves/debug.hpp

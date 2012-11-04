@@ -7,12 +7,14 @@
 #include <sanguis/creator/generator/top_parameters.hpp>
 #include <sanguis/creator/geometry/rect.hpp>
 #include <sanguis/creator/exception.hpp>
-#include <fcppt/assign/make_container.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assign/make_container.hpp>
+#include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <map>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace
 {
@@ -44,37 +46,41 @@ generator_map const generators(
 
 sanguis::creator::generator::result const
 sanguis::creator::generator::generate(
-	generator::top_parameters const &_param
+	sanguis::creator::generator::top_parameters const &_parameters
 )
 {
 	generator_map::const_iterator const it(
 		generators.find(
-			_param.name()
+			_parameters.name()
 		)
 	);
 
 	if(
 		it == generators.end()
 	)
-		throw creator::exception(
+		throw sanguis::creator::exception(
 			FCPPT_TEXT("Generator ")
-			+ _param.name().get()
+			+ _parameters.name().get()
 			+ FCPPT_TEXT(" not found!")
 		);
 
-	generator::randgen gen(
-		_param.seed()
+	sanguis::creator::generator::randgen gen(
+		_parameters.seed()
 	);
 
 	return
 		it->second(
-			generator::parameters(
+			sanguis::creator::generator::parameters(
 				gen,
-				geometry::rect(
-					geometry::rect::vector::null(),
-					_param.size()
+				sanguis::creator::geometry::rect(
+					sanguis::creator::geometry::rect::vector::null(),
+					fcppt::math::dim::structure_cast<
+						sanguis::creator::geometry::rect::dim
+					>(
+						_parameters.size()
+					)
 				),
-				generator::opening_container()
+				sanguis::creator::generator::opening_container()
 			)
 		);
 }

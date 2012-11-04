@@ -18,72 +18,73 @@
 #include <sanguis/creator/geometry/vertex.hpp>
 #include <fcppt/assign/make_container.hpp>
 
+
 sanguis::creator::generator::result const
 sanguis::creator::generator::car_park(
-	generator::parameters const &
+	sanguis::creator::generator::parameters const &
 )
 {
 	// FIXME:
 	return
-		generator::result(
+		sanguis::creator::generator::result(
 			fcppt::assign::make_container<
-				geometry::shape_container
+				sanguis::creator::geometry::shape_container
 			>(
-				geometry::shape(
+				sanguis::creator::geometry::shape(
 					fcppt::assign::make_container<
-						geometry::polygon
+						sanguis::creator::geometry::polygon
 					>(
-						geometry::vertex(
-							geometry::vector(
+						sanguis::creator::geometry::vertex(
+							sanguis::creator::geometry::vector(
 								0,
 								0
 							),
-							geometry::texture_point(
+							sanguis::creator::geometry::texture_point(
 								0,
 								0
 							)
 						)
 					)
 					(
-						geometry::vertex(
-							geometry::vector(
+						sanguis::creator::geometry::vertex(
+							sanguis::creator::geometry::vector(
 								2000,
 								2000
 							),
-							geometry::texture_point(
+							sanguis::creator::geometry::texture_point(
 								1,
 								1
 							)
 						)
 					)
 					(
-						geometry::vertex(
-							geometry::vector(
+						sanguis::creator::geometry::vertex(
+							sanguis::creator::geometry::vector(
 								0,
 								1000
 							),
-							geometry::texture_point(
+							sanguis::creator::geometry::texture_point(
 								0,
 								0.5f
 							)
 						)
 					),
-					geometry::solidity::solid,
-					geometry::depth(
-						0u
+					sanguis::creator::geometry::solidity::solid,
+					sanguis::creator::geometry::depth(
+						0
 					),
-					geometry::texture_name(
+					sanguis::creator::geometry::texture_name(
 						FCPPT_TEXT("asphalt")
 					)
 				)
 			),
-			generator::seed(
+			sanguis::creator::generator::seed(
 				0u
 			),
-			generator::name(
+			sanguis::creator::generator::name(
 				FCPPT_TEXT("car_park")
 			),
-			generator::size(
+			sanguis::creator::generator::size(
 				3000,
 				3000
 			)

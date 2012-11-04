@@ -4,6 +4,7 @@
 #include <sanguis/creator/geometry/unit.hpp>
 #include <fcppt/strong_typedef.hpp>
 
+
 namespace sanguis
 {
 namespace creator
@@ -12,7 +13,7 @@ namespace geometry
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
-	geometry::unit,
+	sanguis::creator::geometry::unit,
 	depth
 );
 

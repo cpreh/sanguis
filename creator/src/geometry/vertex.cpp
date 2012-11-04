@@ -1,12 +1,19 @@
+#include <sanguis/creator/geometry/texture_point.hpp>
+#include <sanguis/creator/geometry/vector.hpp>
 #include <sanguis/creator/geometry/vertex.hpp>
 
+
 sanguis::creator::geometry::vertex::vertex(
-	geometry::vector const &_pos,
-	geometry::texture_point const &_texcoords
+	sanguis::creator::geometry::vector const &_pos,
+	sanguis::creator::geometry::texture_point const &_texcoords
 )
 :
-	pos_(_pos),
-	texcoords_(_texcoords)
+	pos_(
+		_pos
+	),
+	texcoords_(
+		_texcoords
+	)
 {
 }
 

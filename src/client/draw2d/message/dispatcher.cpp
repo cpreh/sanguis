@@ -28,6 +28,7 @@
 #include <sanguis/messages/role_name.hpp>
 #include <sanguis/cast_enum.hpp>
 #include <sanguis/creator/generator/name.hpp>
+#include <sanguis/creator/generator/size.hpp>
 #include <sanguis/creator/generator/top_parameters.hpp>
 #include <sge/charconv/system_fwd.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
@@ -242,9 +243,11 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 				_message.get<
 					messages::seed
 				>(),
-				_message.get<
-					messages::roles::world_size
-				>()
+				sanguis::creator::generator::size(
+					_message.get<
+						messages::roles::world_size
+					>()
+				)
 			)
 		)
 	);

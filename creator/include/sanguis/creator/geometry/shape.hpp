@@ -1,16 +1,14 @@
 #ifndef SANGUIS_CREATOR_GEOMETRY_SHAPE_HPP_INCLUDED
 #define SANGUIS_CREATOR_GEOMETRY_SHAPE_HPP_INCLUDED
 
-#include <sanguis/creator/geometry/shape_fwd.hpp>
+#include <sanguis/creator/symbol.hpp>
 #include <sanguis/creator/geometry/depth.hpp>
 #include <sanguis/creator/geometry/polygon.hpp>
+#include <sanguis/creator/geometry/shape_fwd.hpp>
 #include <sanguis/creator/geometry/solidity.hpp>
 #include <sanguis/creator/geometry/texture_name.hpp>
 #include <sanguis/creator/geometry/vertex.hpp>
-#include <sanguis/creator/symbol.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <vector>
-#include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -24,35 +22,35 @@ class shape
 public:
 	SANGUIS_CREATOR_SYMBOL
 	shape(
-		geometry::polygon const &,
-		geometry::solidity::type,
-		geometry::depth,
-		geometry::texture_name const &
+		sanguis::creator::geometry::polygon const &,
+		sanguis::creator::geometry::solidity::type,
+		sanguis::creator::geometry::depth,
+		sanguis::creator::geometry::texture_name const &
 	);
 
 	SANGUIS_CREATOR_SYMBOL
-	geometry::polygon const &
+	sanguis::creator::geometry::polygon const &
 	polygon() const;
 
 	SANGUIS_CREATOR_SYMBOL
-	geometry::solidity::type
+	sanguis::creator::geometry::solidity::type
 	solidity() const;
 
 	SANGUIS_CREATOR_SYMBOL
-	geometry::depth const
+	sanguis::creator::geometry::depth const
 	depth() const;
 
 	SANGUIS_CREATOR_SYMBOL
-	geometry::texture_name const &
+	sanguis::creator::geometry::texture_name const &
 	texture_name() const;
 private:
-	geometry::polygon polygon_;
+	sanguis::creator::geometry::polygon polygon_;
 
-	geometry::solidity::type solidity_;
+	sanguis::creator::geometry::solidity::type solidity_;
 
-	geometry::depth depth_;
+	sanguis::creator::geometry::depth depth_;
 
-	geometry::texture_name texture_name_;
+	sanguis::creator::geometry::texture_name texture_name_;
 };
 
 }
