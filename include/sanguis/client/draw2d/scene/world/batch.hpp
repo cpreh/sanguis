@@ -33,6 +33,9 @@ public:
 	draw(
 		sge::renderer::context::core &
 	);
+
+	bool
+	empty() const;
 private:
 	sge::renderer::vertex_buffer_shared_ptr vertex_buffer_;
 

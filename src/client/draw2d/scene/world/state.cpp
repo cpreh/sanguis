@@ -94,7 +94,7 @@ sanguis::client::draw2d::scene::world::state::state(
 			sge::renderer::state::core::depth_stencil::parameters(
 				sge::renderer::state::core::depth_stencil::depth::off(),
 				sge::renderer::state::core::depth_stencil::stencil::combined_simple(
-					sge::renderer::state::core::depth_stencil::stencil::func::less
+					sge::renderer::state::core::depth_stencil::stencil::func::equal
 				)
 				.to_enabled()
 			)
@@ -230,11 +230,18 @@ sanguis::client::draw2d::scene::world::state::draw(
 					*batch_stencil_state_
 				);
 
-				(*batches_).at(
-					pos
-				).draw(
-					_render_context
+				sanguis::client::draw2d::scene::world::batch &batch(
+					(*batches_).at(
+						pos
+					)
 				);
+
+				if(
+					!batch.empty()
+				)
+					batch.draw(
+						_render_context
+					);
 			}
 
 			stencil_sprite_.pos(

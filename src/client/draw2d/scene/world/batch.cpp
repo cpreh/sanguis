@@ -35,7 +35,7 @@ sanguis::client::draw2d::scene::world::batch::draw(
 )
 {
 	if(
-		!vertex_buffer_
+		this->empty()
 	)
 		return;
 
@@ -67,4 +67,10 @@ sanguis::client::draw2d::scene::world::batch::draw(
 			sge::renderer::primitive_type::triangle_list
 		);
 	}
+}
+
+bool
+sanguis::client::draw2d::scene::world::batch::empty() const
+{
+	return !vertex_buffer_;
 }

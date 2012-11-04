@@ -34,6 +34,7 @@
 #include <numeric>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace
 {
 
@@ -54,7 +55,7 @@ sanguis::client::draw2d::scene::world::batch const
 sanguis::client::draw2d::scene::world::make_batch(
 	sge::renderer::device::core &_renderer,
 	sge::renderer::vertex_declaration const &_vertex_declaration,
-	load::resource::textures const &_textures,
+	sanguis::load::resource::textures const &_textures,
 	sanguis::creator::geometry::shape_container _shapes
 )
 {
@@ -62,15 +63,15 @@ sanguis::client::draw2d::scene::world::make_batch(
 		_shapes.empty()
 	)
 		return
-			world::batch(
+			sanguis::client::draw2d::scene::world::batch(
 				sge::renderer::vertex_buffer_shared_ptr(),
-				world::texture_slice_vector()
+				sanguis::client::draw2d::scene::world::texture_slice_vector()
 			);
 
 	std::sort(
 		_shapes.begin(),
 		_shapes.end(),
-		world::sort_shapes
+		sanguis::client::draw2d::scene::world::sort_shapes
 	);
 
 	sge::renderer::vertex_buffer_shared_ptr const vertex_buffer(
@@ -95,7 +96,7 @@ sanguis::client::draw2d::scene::world::make_batch(
 		)
 	);
 
-	world::texture_slice_vector texture_slices;
+	sanguis::client::draw2d::scene::world::texture_slice_vector texture_slices;
 
 	sge::renderer::scoped_vertex_lock const vblock(
 		*vertex_buffer,
@@ -103,7 +104,7 @@ sanguis::client::draw2d::scene::world::make_batch(
 	);
 
 	typedef sge::renderer::vf::view<
-		world::vf::format_part
+		sanguis::client::draw2d::scene::world::vf::format_part
 	> vf_view;
 
 	vf_view const vertices(
@@ -143,20 +144,20 @@ sanguis::client::draw2d::scene::world::make_batch(
 		)
 		{
 			(*vb_it).set<
-				world::vf::pos
+				sanguis::client::draw2d::scene::world::vf::pos
 			>(
 				fcppt::math::vector::structure_cast<
-					world::vf::pos::packed_type
+					sanguis::client::draw2d::scene::world::vf::pos::packed_type
 				>(
 					poly_it->pos()
 				)
 			);
 
 			(*vb_it).set<
-				world::vf::texpos
+				sanguis::client::draw2d::scene::world::vf::texpos
 			>(
 				fcppt::math::vector::structure_cast<
-					world::vf::texpos::packed_type
+					sanguis::client::draw2d::scene::world::vf::texpos::packed_type
 				>(
 					poly_it->texcoords()
 				)
@@ -171,7 +172,7 @@ sanguis::client::draw2d::scene::world::make_batch(
 		)
 		{
 			texture_slices.push_back(
-				world::texture_slice(
+				sanguis::client::draw2d::scene::world::texture_slice(
 					sge::renderer::first_vertex(
 						cur_vertex
 					),
@@ -195,7 +196,7 @@ sanguis::client::draw2d::scene::world::make_batch(
 	}
 
 	texture_slices.push_back(
-		world::texture_slice(
+		sanguis::client::draw2d::scene::world::texture_slice(
 			sge::renderer::first_vertex(
 				cur_vertex
 			),
@@ -209,7 +210,7 @@ sanguis::client::draw2d::scene::world::make_batch(
 	);
 
 	return
-		world::batch(
+		sanguis::client::draw2d::scene::world::batch(
 			vertex_buffer,
 			texture_slices
 		);
