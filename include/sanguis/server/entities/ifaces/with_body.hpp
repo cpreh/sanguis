@@ -1,8 +1,9 @@
 #ifndef SANGUIS_SERVER_ENTITIES_IFACES_WITH_BODY_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_IFACES_WITH_BODY_HPP_INCLUDED
 
-#include <sanguis/server/speed.hpp>
+#include <sanguis/server/speed_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -21,16 +22,22 @@ class with_body
 protected:
 	with_body();
 
-	virtual void
+	virtual
+	void
 	reset_speed(
-		server::speed const &
+		sanguis::server::speed const &
 	) = 0;
 
 	virtual
-	server::speed const
+	sanguis::server::speed const
+	body_speed() const = 0;
+
+	virtual
+	sanguis::server::speed const
 	initial_speed() const;
 public:
-	virtual ~with_body();
+	virtual
+	~with_body() = 0;
 };
 
 }

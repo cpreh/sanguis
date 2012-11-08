@@ -146,7 +146,7 @@ sanguis::server::entities::projectiles::projectile::add_message(
 				this->id(),
 				this->center().get(),
 				this->angle().get(),
-				this->abs_speed().get(),
+				this->speed().get(),
 				this->ptype()
 			)
 		);

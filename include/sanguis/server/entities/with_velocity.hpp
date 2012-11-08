@@ -1,16 +1,17 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_VELOCITY_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_VELOCITY_HPP_INCLUDED
 
-#include <sanguis/server/entities/with_velocity_fwd.hpp>
-#include <sanguis/server/entities/base.hpp>
-#include <sanguis/server/entities/ifaces/with_velocity.hpp>
-#include <sanguis/server/entities/property/initial_fwd.hpp>
-#include <sanguis/server/entities/property/changeable.hpp>
-#include <sanguis/server/entities/property/value.hpp>
 #include <sanguis/server/direction.hpp>
-#include <sanguis/server/speed.hpp>
+#include <sanguis/server/speed_fwd.hpp>
+#include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/with_velocity_fwd.hpp>
+#include <sanguis/server/entities/ifaces/with_velocity.hpp>
+#include <sanguis/server/entities/property/changeable.hpp>
+#include <sanguis/server/entities/property/initial_fwd.hpp>
+#include <sanguis/server/entities/property/value.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -21,45 +22,46 @@ namespace entities
 
 class with_velocity
 :
-	public virtual entities::base,
-	protected virtual ifaces::with_velocity
+	public virtual sanguis::server::entities::base,
+	protected virtual sanguis::server::entities::ifaces::with_velocity
 {
 	FCPPT_NONCOPYABLE(
 		with_velocity
 	);
+protected:
+	with_velocity(
+		sanguis::server::entities::property::initial const &speed,
+		sanguis::server::direction
+	);
 public:
-	property::changeable &
+	virtual
+	~with_velocity();
+
+	sanguis::server::entities::property::changeable &
 	movement_speed();
 
-	server::direction const
+	sanguis::server::direction const
 	direction() const;
+
+	sanguis::server::speed const
+	speed() const;
 
 	void
 	direction(
-		server::direction
-	);
-
-	server::speed const
-	abs_speed() const;
-
-	virtual ~with_velocity();
-protected:
-	with_velocity(
-		property::initial const &speed,
-		server::direction
+		sanguis::server::direction
 	);
 private:
 	void
 	speed_change(
-		property::value
+		sanguis::server::entities::property::value
 	);
 
-	server::speed const
+	sanguis::server::speed const
 	initial_abs_speed() const;
 
-	property::changeable movement_speed_;
+	sanguis::server::entities::property::changeable movement_speed_;
 
-	server::direction direction_;
+	sanguis::server::direction direction_;
 
 	fcppt::signal::scoped_connection const speed_change_;
 };

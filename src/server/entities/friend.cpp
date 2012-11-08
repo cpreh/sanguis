@@ -97,7 +97,7 @@ sanguis::server::entities::friend_::add_message(
 				this->id(),
 				this->center().get(),
 				this->angle().get(),
-				this->abs_speed().get(),
+				this->speed().get(),
 				this->current_health().get(),
 				this->max_health().get(),
 				ftype_

@@ -4,6 +4,7 @@
 #include <sanguis/server/angle.hpp>
 #include <fcppt/noncopyable.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -21,10 +22,12 @@ class with_angle
 protected:
 	with_angle();
 public:
-	virtual server::angle const
+	virtual
+	sanguis::server::angle const
 	angle() const = 0;
 
-	virtual ~with_angle();
+	virtual
+	~with_angle();
 };
 
 }

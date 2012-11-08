@@ -4,13 +4,14 @@
 #include <sanguis/server/space_unit.hpp>
 #include <fcppt/strong_typedef.hpp>
 
+
 namespace sanguis
 {
 namespace server
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
-	server::space_unit,
+	sanguis::server::space_unit,
 	direction
 );
 

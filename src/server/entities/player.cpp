@@ -290,7 +290,7 @@ sanguis::server::entities::player::make_add_message() const
 				this->id(),
 				this->center().get(),
 				this->angle().get(),
-				this->abs_speed().get(),
+				this->speed().get(),
 				this->current_health().get(),
 				this->max_health().get()
 			)
