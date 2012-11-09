@@ -7,13 +7,15 @@
 #include <sanguis/client/gui/object.hpp>
 #include <sge/cegui/from_cegui_string.hpp>
 #include <sge/cegui/to_cegui_string.hpp>
+#include <sge/image/colors.hpp>
 #include <sge/parse/ini/entry_name.hpp>
 #include <sge/parse/ini/get_or_create.hpp>
 #include <sge/parse/ini/section_name.hpp>
 #include <sge/parse/ini/set_or_create.hpp>
 #include <sge/parse/ini/string.hpp>
 #include <sge/parse/ini/value.hpp>
-#include <sge/renderer/context/ffp_fwd.hpp>
+#include <sge/renderer/clear/parameters.hpp>
+#include <sge/renderer/context/ffp.hpp>
 #include <alda/net/host.hpp>
 #include <alda/net/port.hpp>
 #include <fcppt/log/parameters/object.hpp>
@@ -266,6 +268,13 @@ sanguis::client::gui::menu::object::draw(
 	sge::renderer::context::ffp &_render_context
 )
 {
+	_render_context.clear(
+		sge::renderer::clear::parameters()
+		.back_buffer(
+			sge::image::colors::black()
+		)
+	);
+
 	gui_.render(
 		_render_context
 	);
