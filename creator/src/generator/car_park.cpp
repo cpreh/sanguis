@@ -7,6 +7,7 @@
 #include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/text.hpp>
 
+#include <sanguis/creator/generator/randgen.hpp>
 #include <sanguis/creator/geometry/depth.hpp>
 #include <sanguis/creator/geometry/polygon.hpp>
 #include <sanguis/creator/geometry/shape.hpp>
@@ -14,16 +15,37 @@
 #include <sanguis/creator/geometry/solidity.hpp>
 #include <sanguis/creator/geometry/texture_name.hpp>
 #include <sanguis/creator/geometry/texture_point.hpp>
+#include <sanguis/creator/geometry/unit.hpp>
 #include <sanguis/creator/geometry/vector.hpp>
 #include <sanguis/creator/geometry/vertex.hpp>
 #include <fcppt/assign/make_container.hpp>
+#include <fcppt/random/distribution/uniform_int.hpp>
 
 
 sanguis::creator::generator::result const
 sanguis::creator::generator::car_park(
-	sanguis::creator::generator::parameters const &
+	sanguis::creator::generator::parameters const &_parameters
 )
 {
+	typedef fcppt::random::distribution::uniform_int<
+		sanguis::creator::geometry::unit
+	> uniform_unit;
+
+	uniform_unit test_distribution(
+		uniform_unit::min(
+			0
+		),
+		uniform_unit::max(
+			1000
+		)
+	);
+
+	sanguis::creator::geometry::unit const rand_value(
+		test_distribution(
+			_parameters.randgen()
+		)
+	);
+
 	// FIXME:
 	return
 		sanguis::creator::generator::result(

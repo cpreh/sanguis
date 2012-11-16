@@ -34,21 +34,21 @@ public:
 	typedef sanguis::creator::generator::rand_value result_type;
 
 	SANGUIS_CREATOR_SYMBOL
-	sanguis::creator::generator::randgen::result_type const
+	sanguis::creator::generator::randgen::result_type
 	operator()();
 
 	SANGUIS_CREATOR_SYMBOL
-	sanguis::creator::generator::randgen::result_type const
+	sanguis::creator::generator::randgen::result_type
 	min() const;
 
 	SANGUIS_CREATOR_SYMBOL
-	sanguis::creator::generator::randgen::result_type const
+	sanguis::creator::generator::randgen::result_type
 	max() const;
 private:
 	fcppt::random::generator::minstd_rand generator_;
 
 	typedef fcppt::random::distribution::uniform_int<
-		sanguis::creator::generator::randgen::result_type::value_type
+		sanguis::creator::generator::randgen::result_type
 	> int_distribution;
 
 	int_distribution distribution_;

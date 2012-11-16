@@ -24,10 +24,10 @@ sanguis::creator::generator::randgen::randgen(
 	),
 	distribution_(
 		sanguis::creator::generator::randgen::int_distribution::min(
-			this->min().get()
+			this->min()
 		),
 		sanguis::creator::generator::randgen::int_distribution::max(
-			this->max().get()
+			this->max()
 		)
 	)
 {
@@ -39,7 +39,7 @@ sanguis::creator::generator::randgen::~randgen()
 {
 }
 
-sanguis::creator::generator::randgen::result_type const
+sanguis::creator::generator::randgen::result_type
 sanguis::creator::generator::randgen::operator()()
 {
 	return
@@ -50,24 +50,24 @@ sanguis::creator::generator::randgen::operator()()
 		);
 }
 
-sanguis::creator::generator::randgen::result_type const
+sanguis::creator::generator::randgen::result_type
 sanguis::creator::generator::randgen::min() const
 {
 	return
 		sanguis::creator::generator::randgen::result_type(
 			std::numeric_limits<
-				sanguis::creator::generator::randgen::result_type::value_type
+				sanguis::creator::generator::randgen::result_type
 			>::min()
 		);
 }
 
-sanguis::creator::generator::randgen::result_type const
+sanguis::creator::generator::randgen::result_type
 sanguis::creator::generator::randgen::max() const
 {
 	return
 		sanguis::creator::generator::randgen::result_type(
 			std::numeric_limits<
-				sanguis::creator::generator::randgen::result_type::value_type
+				sanguis::creator::generator::randgen::result_type
 			>::max()
 		);
 }
