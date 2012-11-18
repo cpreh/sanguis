@@ -1383,24 +1383,21 @@ target_link_libraries(
 	sanguis
 	sanguiscreator
 	${Boost_CHRONO_LIBRARY}
-	${Fcppt_core_LIBRARIES}
-	${Fcppt_filesystem_LIBRARIES}
-	${Fcppt_thread_LIBRARIES}
-	${Awl_LIBRARIES}
-	${SGE_LIBRARIES}
+	${fcppt_core_TARGET}
+	${fcppt_filesystem_TARGET}
+	${awl_TARGET}
+	${sge_TARGETS}
 	${CEGUI_LIBRARIES}
-	${Alda_LIBRARIES}
+	${alda_TARGET}
 	${FcpptThreads_LIBRARIES}
 )
 
-IF(NOT MSVC)
-	TARGET_LINK_LIBRARIES(
-		sanguis
-		${Boost_LIBRARIES}
-	)
-ENDIF()
+target_link_libraries(
+	sanguis
+	${Boost_LIBRARIES}
+)
 
-INSTALL(
+install(
 	TARGETS
 	sanguis
 	DESTINATION

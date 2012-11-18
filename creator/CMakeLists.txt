@@ -100,9 +100,9 @@ add_library(
 
 target_link_libraries(
 	sanguiscreator
-	${Fcppt_core_LIBRARIES}
-	${SGE_CORE_LIBRARY}
-	${SGE_PARSE_LIBRARY}
+	${fcppt_core_TARGET}
+	${sgecore_TARGET}
+	${sgeparse_TARGET}
 )
 
 install(

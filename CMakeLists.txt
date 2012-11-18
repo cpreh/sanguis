@@ -1,26 +1,28 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+cmake_minimum_required(
+	VERSION 2.6
+)
 
 project (sanguis)
 
-INCLUDE(FcpptCMakeUtils)
+include(FcpptCMakeUtils)
 
-SET (STATECHART_INCLUDE_DIR "" CACHE PATH "Include path for statechart")
+set (STATECHART_INCLUDE_DIR "" CACHE PATH "Include path for statechart")
 
-IF(NOT STATECHART_INCLUDE_DIR)
-	MESSAGE(
+if(NOT STATECHART_INCLUDE_DIR)
+	message(
 		FATAL_ERROR
 		"Please specify the include dir of the modified statechart library, for example:
 		cmake -D STATECHART_INCLUDE_DIR=foobar/statechart/include"
 	)
-ENDIF()
+endif()
 
-INCLUDE_DIRECTORIES(
+include_directories(
 	${STATECHART_INCLUDE_DIR}
 )
 
 # Find Boost
 
-FIND_PACKAGE(
+find_package(
 	Boost 1.47.0 REQUIRED COMPONENTS
 	chrono
 	iostreams
@@ -29,38 +31,44 @@ FIND_PACKAGE(
 	thread
 )
 
-ADD_DEFINITIONS(-D BOOST_ASIO_SEPARATE_COMPILATION)
+add_definitions(
+	-D BOOST_ASIO_SEPARATE_COMPILATION
+)
 
-INCLUDE_DIRECTORIES(
+include_directories(
 	${Boost_INCLUDE_DIRS}
 )
 
-LINK_DIRECTORIES(
+link_directories(
 	${Boost_LIBRARY_DIRS}
 )
 
 # Find Mizuiro
 
-FIND_PACKAGE(
-	Mizuiro REQUIRED
+find_package(
+	mizuiro REQUIRED
 )
 
-INCLUDE_DIRECTORIES(
-	${Mizuiro_INCLUDE_DIRS}
+add_definitions(
+	${mizuiro_definitions}
+)
+
+include_directories(
+	${mizuiro_INCLUDE_DIRS}
 )
 
 # Find FCPPT
 
-FIND_PACKAGE(
-	Fcppt REQUIRED
+find_package(
+	fcppt REQUIRED
 )
 
-ADD_DEFINITIONS(
-	${Fcppt_DEFINITIONS}
+add_definitions(
+	${fcppt_DEFINITIONS}
 )
 
-INCLUDE_DIRECTORIES(
-	${Fcppt_INCLUDE_DIRS}
+include_directories(
+	${fcppt_INCLUDE_DIRS}
 )
 
 # Find Threads
@@ -75,18 +83,22 @@ add_definitions(
 
 # Find AWL
 
-FIND_PACKAGE(
-	Awl REQUIRED
+find_package(
+	awl REQUIRED
 )
 
-INCLUDE_DIRECTORIES(
-	${Awl_INCLUDE_DIRS}
+add_definitions(
+	${awl_DEFINITIONS}
+)
+
+include_directories(
+	${awl_INCLUDE_DIRS}
 )
 
 # Find SGE
 
-FIND_PACKAGE(
-	SGE REQUIRED
+find_package(
+	sge REQUIRED
 	COMPONENTS
 	cegui
 	charconv
@@ -110,63 +122,67 @@ FIND_PACKAGE(
 	window
 )
 
-ADD_DEFINITIONS(
-	${SGE_DEFINITIONS}
+add_definitions(
+	${sge_DEFINITIONS}
 )
 
-INCLUDE_DIRECTORIES(
-	${SGE_INCLUDE_DIRS}
+include_directories(
+	${sge_INCLUDE_DIRS}
 )
 
 # Find CEGUI
 
-FIND_PACKAGE(
+find_package(
 	CEGUI REQUIRED
 )
 
-INCLUDE_DIRECTORIES(
+include_directories(
 	${CEGUI_INCLUDE_DIRS}
 )
 
-INCLUDE_DIRECTORIES(
+include_directories(
 	${CMAKE_SOURCE_DIR}/creator/include
 )
 
 # Find ALDA
 
-FIND_PACKAGE(
-	Alda REQUIRED
+find_package(
+	alda REQUIRED
 )
 
-INCLUDE_DIRECTORIES(
-	${Alda_INCLUDE_DIRS}
+add_definitions(
+	${alda_definitions}
 )
 
-INCLUDE(
+include_directories(
+	${alda_INCLUDE_DIRS}
+)
+
+include(
 	SGECustomPath
 )
 
-SET(
+set(
 	INSTALL_MEDIA_DIR
 	${INSTALL_DATA_DIR}/media
 )
 
-SGE_CONFIG_ADD_CUSTOM_PATH(
+sge_config_add_custom_path(
 	sanguis
 	media
 	${CMAKE_SOURCE_DIR}/media
 	${INSTALL_MEDIA_DIR}
 )
 
-ADD_SUBDIRECTORY(
+add_subdirectory(
 	src
 )
 
-ADD_SUBDIRECTORY(
+add_subdirectory(
 	creator
 )
 
-INSTALL(
+install(
 	DIRECTORY
 	media/
 	DESTINATION
