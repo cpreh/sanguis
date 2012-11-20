@@ -151,7 +151,7 @@ find_package(
 )
 
 add_definitions(
-	${alda_definitions}
+	${alda_DEFINITIONS}
 )
 
 include_directories(
