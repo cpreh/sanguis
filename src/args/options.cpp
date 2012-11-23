@@ -24,11 +24,13 @@ sanguis::args::options()
 		(
 			"history-size",
 			po::value<
-				sge::console::output_line_limit
+				sge::console::output_line_limit::value_type
 			>()->default_value(
 				static_cast<
-					sge::console::output_line_limit
-				>(8000)
+					sge::console::output_line_limit::value_type
+				>(
+					1000
+				)
 			),
 			"Size of the console output history"
 		)

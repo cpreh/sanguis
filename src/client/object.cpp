@@ -14,6 +14,7 @@
 #include <sanguis/client/states/menu.hpp>
 #include <sanguis/server/object.hpp>
 #include <sge/config/media_path.hpp>
+#include <sge/console/output_line_limit.hpp>
 #include <sge/font/object.hpp>
 #include <sge/font/parameters.hpp>
 #include <sge/font/system.hpp>
@@ -70,11 +71,13 @@ sanguis::client::object::object(
 		sys_->image_system(),
 		sys_->keyboard_collector(),
 		sys_->viewport_manager(),
-		_variables_map[
-			"history-size"
-		].as<
-			sge::console::output_line_limit
-		>()
+		sge::console::output_line_limit(
+			_variables_map[
+				"history-size"
+			].as<
+				sge::console::output_line_limit::value_type
+			>()
+		)
 	),
 	resources_(
 		sys_->image_system(),
