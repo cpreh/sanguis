@@ -1,5 +1,6 @@
 #include <sanguis/client/console/gfx.hpp>
 #include <sanguis/media_path.hpp>
+#include <sge/console/font_color.hpp>
 #include <sge/console/sprite_object.hpp>
 #include <sge/console/sprite_parameters.hpp>
 #include <sge/font/object_fwd.hpp>
@@ -60,7 +61,9 @@ sanguis::client::console::gfx::gfx(
 	impl_(
 		_console,
 		renderer_,
-		sge::image::colors::white(),
+		sge::console::font_color(
+			sge::image::colors::white()
+		),
 		_font_object,
 		_keyboard,
 		sge::console::sprite_object(
