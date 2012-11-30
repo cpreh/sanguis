@@ -1,6 +1,6 @@
 #include <sanguis/client/draw2d/sunlight/day_gradient.hpp>
 #include <sanguis/client/draw2d/sunlight/gradients.hpp>
-#include <sge/image/color/object.hpp>
+#include <sge/image/mizuiro_color.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <mizuiro/color/object.hpp>
 #include <mizuiro/color/init/red.hpp>

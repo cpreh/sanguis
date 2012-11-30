@@ -107,7 +107,7 @@ find_package(
 	core
 	font
 	fontdraw
-	image
+	imagecolor
 	image2d
 	input
 	log

@@ -5,7 +5,7 @@
 #include <sge/font/text_parameters.hpp>
 #include <sge/font/vector.hpp>
 #include <sge/font/draw/simple.hpp>
-#include <sge/image/colors.hpp>
+#include <sge/image/color/predef.hpp>
 #include <sge/image/color/any/object.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
@@ -103,7 +103,7 @@ sanguis::client::draw2d::scene::hud::draw(
 			300 // FIXME
 		),
 		sge::font::vector::null(),
-		sge::image::colors::white(),
+		sge::image::color::predef::white(),
 		sge::renderer::texture::emulate_srgb::no
 	);
 }

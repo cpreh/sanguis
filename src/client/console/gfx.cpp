@@ -4,7 +4,7 @@
 #include <sge/console/sprite_object.hpp>
 #include <sge/console/sprite_parameters.hpp>
 #include <sge/font/object_fwd.hpp>
-#include <sge/image/colors.hpp>
+#include <sge/image/color/predef.hpp>
 #include <sge/renderer/screen_size.hpp>
 #include <sge/renderer/resource_flags_field.hpp>
 #include <sge/renderer/device/ffp.hpp>
@@ -62,7 +62,7 @@ sanguis::client::console::gfx::gfx(
 		_console,
 		renderer_,
 		sge::console::font_color(
-			sge::image::colors::white()
+			sge::image::color::predef::white()
 		),
 		_font_object,
 		_keyboard,

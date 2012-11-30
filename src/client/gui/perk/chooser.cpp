@@ -12,6 +12,7 @@
 #include <sanguis/perk_type.hpp>
 #include <sge/cegui/to_cegui_color.hpp>
 #include <sge/cegui/to_cegui_string.hpp>
+#include <sge/image/color/any/object.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <fcppt/algorithm/find_if_exn.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>

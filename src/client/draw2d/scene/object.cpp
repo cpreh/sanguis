@@ -26,7 +26,7 @@
 #include <sanguis/update_diff_clock.hpp>
 #include <sge/charconv/system_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
-#include <sge/image/colors.hpp>
+#include <sge/image/color/predef.hpp>
 #include <sge/renderer/context/ffp.hpp>
 #include <sge/renderer/device/ffp.hpp>
 #include <sge/renderer/state/ffp/lighting/ambient_color.hpp>
@@ -215,16 +215,16 @@ sanguis::client::draw2d::scene::object::object(
 		renderer_.create_material_state(
 			sge::renderer::state::ffp::lighting::material::parameters(
 				sge::renderer::state::ffp::lighting::diffuse_color(
-					sge::image::colors::black()
+					sge::image::color::predef::black()
 				),
 				sge::renderer::state::ffp::lighting::ambient_color(
-					sge::image::colors::white()
+					sge::image::color::predef::white()
 				),
 				sge::renderer::state::ffp::lighting::specular_color(
-					sge::image::colors::black()
+					sge::image::color::predef::black()
 				),
 				sge::renderer::state::ffp::lighting::material::emissive_color(
-					sge::image::colors::black()
+					sge::image::color::predef::black()
 				),
 				sge::renderer::state::ffp::lighting::material::shininess(
 					0.f

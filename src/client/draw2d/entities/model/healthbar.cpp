@@ -11,7 +11,7 @@
 #include <sge/image/color/any/object.hpp>
 #include <sge/image/color/rgba8.hpp>
 #include <sge/image/color/init.hpp>
-#include <sge/image/colors.hpp>
+#include <sge/image/color/predef.hpp>
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/intrusive/connection.hpp>
@@ -48,7 +48,7 @@ sanguis::client::draw2d::entities::model::healthbar::healthbar(
 			sge::image::color::any::convert<
 				sprite::colored::color_format
 			>(
-				sge::image::colors::black()
+				sge::image::color::predef::black()
 			)
 		)
 	),

@@ -7,7 +7,7 @@
 #include <sanguis/client/gui/object.hpp>
 #include <sge/cegui/from_cegui_string.hpp>
 #include <sge/cegui/to_cegui_string.hpp>
-#include <sge/image/colors.hpp>
+#include <sge/image/color/predef.hpp>
 #include <sge/parse/ini/entry_name.hpp>
 #include <sge/parse/ini/get_or_create.hpp>
 #include <sge/parse/ini/section_name.hpp>
@@ -271,7 +271,7 @@ sanguis::client::gui::menu::object::draw(
 	_render_context.clear(
 		sge::renderer::clear::parameters()
 		.back_buffer(
-			sge::image::colors::black()
+			sge::image::color::predef::black()
 		)
 	);
 

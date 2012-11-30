@@ -3,7 +3,7 @@
 
 #include <sanguis/client/draw2d/sunlight/basic_gradients.hpp>
 #include <sanguis/client/draw2d/sunlight/lerp.hpp>
-#include <sge/image/color/object.hpp>
+#include <sge/image/mizuiro_color.hpp>
 #include <mizuiro/color/operators/add.hpp>
 #include <mizuiro/color/operators/scalar_multiply.hpp>
 #include <mizuiro/color/operators/subtract.hpp>
