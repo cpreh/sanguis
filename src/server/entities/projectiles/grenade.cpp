@@ -1,56 +1,67 @@
-#include <sanguis/server/entities/projectiles/grenade.hpp>
-#include <sanguis/server/entities/projectiles/aoe_damage.hpp>
-#include <sanguis/server/entities/insert_parameters_center.hpp>
-#include <sanguis/server/entities/transfer_parameters.hpp>
-#include <sanguis/server/entities/property/from_float.hpp>
+#include <sanguis/aoe_projectile_type.hpp>
+#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/diff_timer.hpp>
+#include <sanguis/duration_second.hpp>
+#include <sanguis/server/dim.hpp>
+#include <sanguis/server/direction.hpp>
+#include <sanguis/server/radius.hpp>
+#include <sanguis/server/team.hpp>
+#include <sanguis/server/vector.hpp>
 #include <sanguis/server/collision/distance.hpp>
+#include <sanguis/server/damage/fire.hpp>
 #include <sanguis/server/damage/list.hpp>
 #include <sanguis/server/damage/meta.hpp>
-#include <sanguis/server/damage/wrapper.hpp>
 #include <sanguis/server/damage/piercing.hpp>
-#include <sanguis/server/damage/fire.hpp>
-#include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/damage/unit.hpp>
+#include <sanguis/server/damage/wrapper.hpp>
+#include <sanguis/server/entities/insert_parameters_center.hpp>
+#include <sanguis/server/entities/transfer_parameters.hpp>
+#include <sanguis/server/entities/with_body.hpp>
+#include <sanguis/server/entities/with_health_fwd.hpp>
+#include <sanguis/server/entities/projectiles/aoe_damage.hpp>
+#include <sanguis/server/entities/projectiles/aoe_projectile.hpp>
+#include <sanguis/server/entities/projectiles/damage_per_pulse.hpp>
+#include <sanguis/server/entities/projectiles/grenade.hpp>
+#include <sanguis/server/entities/projectiles/indeterminate.hpp>
+#include <sanguis/server/entities/projectiles/life_time.hpp>
+#include <sanguis/server/entities/projectiles/pulses.hpp>
+#include <sanguis/server/entities/property/from_float.hpp>
 #include <sanguis/server/environment/load_context.hpp>
-#include <sanguis/duration_second.hpp>
+#include <sanguis/server/environment/object.hpp>
 #include <sge/timer/reset_when_expired.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
-#include <fcppt/math/dim/object_impl.hpp>
-#include <fcppt/container/map_impl.hpp>
-#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/text.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
 #include <algorithm>
 #include <fcppt/config/external_end.hpp>
 
+
 sanguis::server::entities::projectiles::grenade::grenade(
 	sanguis::diff_clock const &_diff_clock,
-	server::environment::load_context &_load_context,
-	team::type const _team,
-	damage::unit const _damage,
-	server::radius const _aoe,
-	server::vector const &_dest,
-	server::direction const _direction
+	sanguis::server::environment::load_context &_load_context,
+	sanguis::server::team const _team,
+	sanguis::server::damage::unit const _damage,
+	sanguis::server::radius const _aoe,
+	sanguis::server::vector const &_dest,
+	sanguis::server::direction const _direction
 )
 :
-	aoe_projectile(
+	sanguis::server::entities::projectiles::aoe_projectile(
 		_diff_clock,
-		aoe_projectile_type::grenade,
+		sanguis::aoe_projectile_type::grenade,
 		_team,
-		entities::movement_speed(
+		sanguis::server::entities::movement_speed(
 			10.f
 		),
 		_load_context.entity_dim(
 			FCPPT_TEXT("grenade")
 		),
-		projectiles::life_time(
+		sanguis::server::entities::projectiles::life_time(
 			sanguis::duration_second(
 				2.f
 			)
 		),
-		indeterminate::no,
+		sanguis::server::entities::projectiles::indeterminate::no,
 		_aoe,
 		_direction
 	),
@@ -80,14 +91,14 @@ sanguis::server::entities::projectiles::grenade::~grenade()
 
 void
 sanguis::server::entities::projectiles::grenade::on_transfer(
-	entities::transfer_parameters const &_param
+	sanguis::server::entities::transfer_parameters const &_param
 )
 {
 	this->movement_speed().current(
 		std::min(
 			this->movement_speed().max(),
-			property::from_float(
-				collision::distance(
+			sanguis::server::entities::property::from_float(
+				sanguis::server::collision::distance(
 					_param.center().get(),
 					dest_
 				)
@@ -95,14 +106,14 @@ sanguis::server::entities::projectiles::grenade::on_transfer(
 		)
 	);
 
-	entities::with_body::on_transfer(
+	sanguis::server::entities::with_body::on_transfer(
 		_param
 	);
 }
 
 void
 sanguis::server::entities::projectiles::grenade::do_damage(
-	with_health &
+	sanguis::server::entities::with_health &
 )
 {
 }
@@ -125,28 +136,30 @@ void
 sanguis::server::entities::projectiles::grenade::on_remove()
 {
 	this->environment().insert(
-		entities::unique_ptr(
-			fcppt::make_unique_ptr<
-				projectiles::aoe_damage
-			>(
-				fcppt::cref(
-					diff_clock_
-				),
-				this->team(),
-				this->aoe(),
-				damage_,
-				1u,
-				sanguis::duration_second(
-					0.1f
-				),
-				damage::list(
-					damage::piercing = damage::unit(0.5f)
-				)(
-					damage::fire = damage::unit(0.5f)
-				)
+		fcppt::make_unique_ptr<
+			sanguis::server::entities::projectiles::aoe_damage
+		>(
+			diff_clock_,
+			this->team(),
+			this->aoe(),
+			sanguis::server::entities::projectiles::damage_per_pulse(
+				damage_
+			),
+			sanguis::server::entities::projectiles::pulses(
+				1u
+			),
+			sanguis::duration_second(
+				0.1f
+			),
+			sanguis::server::damage::list(
+				sanguis::server::damage::piercing =
+					sanguis::server::damage::unit(0.5f)
+			)(
+				sanguis::server::damage::fire =
+					sanguis::server::damage::unit(0.5f)
 			)
 		),
-		entities::insert_parameters_center(
+		sanguis::server::entities::insert_parameters_center(
 			this->center()
 		)
 	);

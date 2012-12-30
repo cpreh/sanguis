@@ -1,23 +1,37 @@
-#include <sanguis/client/perk/level.hpp>
-#include <sanguis/client/perk/state.hpp>
-#include <sanguis/client/perk/choosable.hpp>
-#include <sanguis/client/perk/info.hpp>
+#include <sanguis/perk_type.hpp>
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/log.hpp>
+#include <sanguis/client/player_level.hpp>
+#include <sanguis/client/perk/change_callback.hpp>
+#include <sanguis/client/perk/choosable.hpp>
+#include <sanguis/client/perk/choosable_state.hpp>
+#include <sanguis/client/perk/info.hpp>
+#include <sanguis/client/perk/level.hpp>
+#include <sanguis/client/perk/level_callback.hpp>
+#include <sanguis/client/perk/level_map.hpp>
+#include <sanguis/client/perk/send_callback.hpp>
+#include <sanguis/client/perk/state.hpp>
+#include <sanguis/client/perk/tree.hpp>
+#include <sanguis/client/perk/tree_unique_ptr.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/output.hpp>
-#include <fcppt/text.hpp>
+#include <fcppt/signal/auto_connection.hpp>
+#include <fcppt/signal/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
+
 sanguis::client::perk::state::state(
-	perk::send_callback const &_send_callback
+	sanguis::client::perk::send_callback const &_send_callback
 )
 :
-	send_callback_(_send_callback),
+	send_callback_(
+		_send_callback
+	),
 	perks_(),
 	current_level_(
 		sanguis::client::level(
@@ -39,11 +53,11 @@ sanguis::client::perk::state::~state()
 
 void
 sanguis::client::perk::state::perks(
-	perk::tree_unique_ptr _perks
+	sanguis::client::perk::tree_unique_ptr &&_perks
 )
 {
 	perks_.take(
-		move(
+		std::move(
 			_perks
 		)
 	);
@@ -55,7 +69,7 @@ sanguis::client::perk::state::perks(
 
 void
 sanguis::client::perk::state::player_level(
-	client::player_level const _level
+	sanguis::client::player_level const _level
 )
 {
 	current_level_ = _level;
@@ -67,7 +81,7 @@ sanguis::client::perk::state::player_level(
 
 bool
 sanguis::client::perk::state::choose_perk(
-	sanguis::perk_type::type const _type
+	sanguis::perk_type const _type
 )
 {
 	if(
@@ -124,7 +138,7 @@ sanguis::client::perk::state::levels_left() const
 
 sanguis::client::perk::level const
 sanguis::client::perk::state::perk_level(
-	sanguis::perk_type::type const _perk_type
+	sanguis::perk_type const _perk_type
 ) const
 {
 	return
@@ -148,11 +162,11 @@ sanguis::client::perk::state::perk_levels() const
 
 sanguis::client::perk::choosable_state::type
 sanguis::client::perk::state::choosable(
-	sanguis::perk_type::type const _type
+	sanguis::perk_type const _type
 ) const
 {
 	return
-		client::perk::choosable(
+		sanguis::client::perk::choosable(
 			_type,
 			this->perks(),
 			perk_levels_,
@@ -163,7 +177,7 @@ sanguis::client::perk::state::choosable(
 
 fcppt::signal::auto_connection
 sanguis::client::perk::state::register_level_change(
-	perk::level_callback const &_callback
+	sanguis::client::perk::level_callback const &_callback
 )
 {
 	return
@@ -174,7 +188,7 @@ sanguis::client::perk::state::register_level_change(
 
 fcppt::signal::auto_connection
 sanguis::client::perk::state::register_perks_change(
-	perk::change_callback const &_callback
+	sanguis::client::perk::change_callback const &_callback
 )
 {
 	return

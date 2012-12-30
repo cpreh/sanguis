@@ -1,11 +1,20 @@
-#include <sanguis/server/entities/spawns/spawn.hpp>
+#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/enemy_type.hpp>
+#include <sanguis/entity_type.hpp>
+#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/server/center.hpp>
+#include <sanguis/server/team.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/enemies/spawn_owner.hpp>
+#include <sanguis/server/entities/spawns/size_type.hpp>
+#include <sanguis/server/entities/spawns/spawn.hpp>
 #include <sanguis/server/waves/spawn.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
+
 
 void
 sanguis::server::entities::spawns::spawn::unregister(
-	entities::base &
+	sanguis::server::entities::base &
 )
 {
 }
@@ -17,9 +26,10 @@ sanguis::server::entities::spawns::spawn::~spawn()
 sanguis::server::entities::spawns::spawn::spawn(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
-	enemy_type::type const _enemy_type
+	sanguis::enemy_type const _enemy_type
 )
 :
+	sanguis::server::entities::base(),
 	diff_clock_(
 		_diff_clock
 	),
@@ -32,24 +42,24 @@ sanguis::server::entities::spawns::spawn::spawn(
 {
 }
 
-sanguis::entity_type::type
+sanguis::entity_type
 sanguis::server::entities::spawns::spawn::type() const
 {
-	return entity_type::spawn;
+	return sanguis::entity_type::spawn;
 }
 
-sanguis::server::team::type
+sanguis::server::team
 sanguis::server::entities::spawns::spawn::team() const
 {
-	return server::team::monsters;
+	return sanguis::server::team::monsters;
 }
 
 sanguis::server::center const
 sanguis::server::entities::spawns::spawn::center() const
 {
 	return
-		server::center(
-			server::center::value_type::null() // FIXME!
+		sanguis::server::center(
+			sanguis::server::center::value_type::null() // FIXME!
 		);
 }
 
@@ -57,7 +67,7 @@ void
 sanguis::server::entities::spawns::spawn::on_update()
 {
 	if(
-		size_type const count_ =
+		sanguis::server::entities::spawns::size_type const count_ =
 			this->may_spawn()
 	)
 	{
@@ -66,13 +76,15 @@ sanguis::server::entities::spawns::spawn::on_update()
 			i < count_;
 			++i
 		)
-			waves::spawn(
+			sanguis::server::waves::spawn(
 				diff_clock_,
 				random_generator_,
 				this->environment(),
 				this->environment().load_context(),
 				enemy_type_,
-				this->link()
+				sanguis::server::entities::enemies::spawn_owner(
+					this->link()
+				)
 			);
 
 		this->add_count(

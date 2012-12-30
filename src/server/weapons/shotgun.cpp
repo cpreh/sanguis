@@ -1,15 +1,24 @@
+#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/random_generator.hpp>
-#include <sanguis/server/weapons/shotgun.hpp>
-#include <sanguis/server/weapons/delayed_attack.hpp>
-#include <sanguis/server/weapons/unlimited_magazine_count.hpp>
-#include <sanguis/server/entities/base.hpp>
+#include <sanguis/weapon_type.hpp>
+#include <sanguis/server/angle.hpp>
+#include <sanguis/server/direction.hpp>
+#include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/projectiles/simple_bullet.hpp>
 #include <sanguis/server/environment/object.hpp>
-#include <fcppt/cref.hpp>
+#include <sanguis/server/weapons/base_cooldown.hpp>
+#include <sanguis/server/weapons/cast_point.hpp>
+#include <sanguis/server/weapons/damage.hpp>
+#include <sanguis/server/weapons/delayed_attack.hpp>
+#include <sanguis/server/weapons/magazine_size.hpp>
+#include <sanguis/server/weapons/range.hpp>
+#include <sanguis/server/weapons/reload_time.hpp>
+#include <sanguis/server/weapons/shotgun.hpp>
+#include <sanguis/server/weapons/unlimited_magazine_count.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/ref.hpp>
 #include <fcppt/random/variate.hpp>
 #include <fcppt/random/distribution/normal.hpp>
 
@@ -17,25 +26,25 @@
 sanguis::server::weapons::shotgun::shotgun(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
-	weapon_type::type const _type,
-	weapons::base_cooldown const _base_cooldown,
-	shotgun::spread_radius const _spread_radius,
-	shotgun::shells const _shells,
-	weapons::damage const _damage,
-	weapons::magazine_size const _magazine_size,
-	weapons::reload_time const _reload_time
+	sanguis::weapon_type const _type,
+	sanguis::server::weapons::base_cooldown const _base_cooldown,
+	sanguis::server::weapons::shotgun::spread_radius const _spread_radius,
+	sanguis::server::weapons::shotgun::shells const _shells,
+	sanguis::server::weapons::damage const _damage,
+	sanguis::server::weapons::magazine_size const _magazine_size,
+	sanguis::server::weapons::reload_time const _reload_time
 )
 :
-	weapons::weapon(
+	sanguis::server::weapons::weapon(
 		_diff_clock,
 		_type,
-		weapons::range(
+		sanguis::server::weapons::range(
 			20.f
 		), // FIXME
 		_magazine_size,
-		unlimited_magazine_count,
+		sanguis::server::weapons::unlimited_magazine_count,
 		_base_cooldown,
-		weapons::cast_point(
+		sanguis::server::weapons::cast_point(
 			sanguis::duration_second(
 				0.5f
 			)
@@ -63,11 +72,11 @@ sanguis::server::weapons::shotgun::~shotgun()
 
 void
 sanguis::server::weapons::shotgun::do_attack(
-	delayed_attack const &_attack
+	sanguis::server::weapons::delayed_attack const &_attack
 )
 {
 	typedef fcppt::random::distribution::normal<
-		server::space_unit
+		sanguis::server::space_unit
 	> angle_distribution;
 
 	fcppt::random::variate<
@@ -86,36 +95,30 @@ sanguis::server::weapons::shotgun::do_attack(
 	);
 
 	for(
-		shells::value_type index(
+		sanguis::server::weapons::shotgun::shells::value_type index(
 			0u
 		);
 		index < shells_.get();
 		++index
 	)
 	{
-		server::angle const angle(
+		sanguis::server::angle const angle(
 			angle_rng()
 		);
 
 		_attack.environment().insert(
-			entities::unique_ptr(
-				fcppt::make_unique_ptr<
-					entities::projectiles::simple_bullet
-				>(
-					fcppt::cref(
-						this->diff_clock()
-					),
-					fcppt::ref(
-						_attack.environment().load_context()
-					),
-					_attack.team(),
-					damage_,
-					server::direction(
-						angle.get()
-					)
+			fcppt::make_unique_ptr<
+				sanguis::server::entities::projectiles::simple_bullet
+			>(
+				this->diff_clock(),
+				_attack.environment().load_context(),
+				_attack.team(),
+				damage_,
+				sanguis::server::direction(
+					angle.get()
 				)
 			),
-			entities::insert_parameters(
+			sanguis::server::entities::insert_parameters(
 				_attack.spawn_point(),
 				angle
 			)

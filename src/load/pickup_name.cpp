@@ -1,26 +1,29 @@
+#include <sanguis/pickup_type.hpp>
 #include <sanguis/load/pickup_name.hpp>
-#include <fcppt/assert/unreachable.hpp>
+#include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assert/unreachable.hpp>
+
 
 fcppt::string const
 sanguis::load::pickup_name(
-	pickup_type::type const _type
+	sanguis::pickup_type const _type
 )
 {
 	switch(
 		_type
 	)
 	{
-	case pickup_type::health:
+	case sanguis::pickup_type::health:
 		return fcppt::string(
 			FCPPT_TEXT("pickups/hp")
 		);
-	case pickup_type::monster:
+	case sanguis::pickup_type::monster:
 		return fcppt::string(
 			FCPPT_TEXT("pickups/monster")
 		);
-	case pickup_type::weapon:
-	case pickup_type::size:
+	case sanguis::pickup_type::weapon:
+	case sanguis::pickup_type::size:
 		break;
 	}
 

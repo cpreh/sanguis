@@ -45,7 +45,7 @@ fcppt::log::object logger(
 
 sanguis::server::weapons::weapon::weapon(
 	sanguis::diff_clock const &_diff_clock,
-	sanguis::weapon_type::type const _type,
+	sanguis::weapon_type const _type,
 	sanguis::server::weapons::range const _range,
 	sanguis::server::weapons::magazine_size const _magazine_size,
 	sanguis::server::weapons::magazine_count const _magazine_count,
@@ -114,7 +114,7 @@ sanguis::server::weapons::weapon::range() const
 	return range_;
 }
 
-sanguis::weapon_type::type
+sanguis::weapon_type
 sanguis::server::weapons::weapon::type() const
 {
 	return type_;

@@ -24,18 +24,15 @@
 #include <awl/main/exit_code.hpp>
 #include <awl/main/exit_failure.hpp>
 #include <awl/main/exit_success.hpp>
-#include <fcppt/function/object.hpp>
-#include <fcppt/log/output.hpp>
-#include <fcppt/log/fatal.hpp>
-#include <fcppt/tr1/functional.hpp>
-#include <fcppt/cref.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/log/fatal.hpp>
+#include <fcppt/log/output.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
 #include <boost/program_options/variables_map.hpp>
+#include <functional>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -97,10 +94,10 @@ sanguis::client::object::object(
 	machine_(
 		settings_,
 		gui_,
-		std::tr1::bind(
+		std::bind(
 			&sanguis::client::object::create_server,
 			this,
-			std::tr1::placeholders::_1
+			std::placeholders::_1
 		),
 		resources_,
 		sys_->window_system(),
@@ -157,7 +154,7 @@ void
 sanguis::client::object::register_handler()
 {
 	io_service_.post(
-		std::tr1::bind(
+		std::bind(
 			&sanguis::client::object::loop_handler,
 			this
 		)
@@ -234,12 +231,8 @@ sanguis::client::object::create_server(
 			server::object
 		>(
 			_port,
-			fcppt::cref(
-				resources_
-			),
-			fcppt::ref(
-				sys_->charconv_system()
-			)
+			resources_,
+			sys_->charconv_system()
 		)
 	);
 }

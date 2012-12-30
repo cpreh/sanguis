@@ -24,16 +24,16 @@
 #include <alda/net/buffer/circular_receive/object_fwd.hpp>
 #include <alda/net/buffer/circular_send/optional_ref.hpp>
 #include <alda/net/server/connection_id_container.hpp>
-#include <fcppt/move.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/verbose.hpp>
 #include <fcppt/signal/auto_connection.hpp>
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
+#include <functional>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -73,37 +73,37 @@ sanguis::server::machine::machine(
 	temp_buffer_(),
 	s_conn_(
 		net_.register_connect(
-			std::tr1::bind(
+			std::bind(
 				&machine::connect_callback,
 				this,
-				std::tr1::placeholders::_1
+				std::placeholders::_1
 			)
 		)
 	),
 	s_disconn_(
 		net_.register_disconnect(
-			std::tr1::bind(
+			std::bind(
 				&machine::disconnect_callback,
 				this,
-				std::tr1::placeholders::_1,
-				std::tr1::placeholders::_2
+				std::placeholders::_1,
+				std::placeholders::_2
 			)
 		)
 	),
 	s_data_(
 		net_.register_data(
-			std::tr1::bind(
+			std::bind(
 				&machine::data_callback,
 				this,
-				std::tr1::placeholders::_1,
-				std::tr1::placeholders::_2
+				std::placeholders::_1,
+				std::placeholders::_2
 			)
 		)
 	),
 	timer_(
 		io_service_,
-		std::tr1::bind(
-			std::tr1::bind(
+		std::bind(
+			std::bind(
 				&machine::timer_callback,
 				this
 			)
@@ -259,7 +259,7 @@ sanguis::server::machine::charconv_system() const
 void
 sanguis::server::machine::process_message(
 	alda::net::id const _id,
-	sanguis::messages::auto_ptr _message
+	sanguis::messages::auto_ptr &&_message
 )
 {
 	FCPPT_LOG_VERBOSE(
@@ -270,7 +270,7 @@ sanguis::server::machine::process_message(
 
 	this->process_event(
 		sanguis::server::events::message(
-			fcppt::move(
+			std::move(
 				_message
 			),
 			sanguis::server::player_id_from_net(
@@ -322,7 +322,7 @@ sanguis::server::machine::data_callback(
 
 		this->process_message(
 			_id,
-			fcppt::move(
+			std::move(
 				message
 			)
 		);

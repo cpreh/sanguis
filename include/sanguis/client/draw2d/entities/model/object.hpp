@@ -1,6 +1,9 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_OBJECT_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_OBJECT_HPP_INCLUDED
 
+#include <sanguis/animation_type.hpp>
+#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/object_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/healthbar_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_time_fwd.hpp>
@@ -13,18 +16,16 @@
 #include <sanguis/client/draw2d/entities/with_health.hpp>
 #include <sanguis/client/draw2d/entities/with_weapon.hpp>
 #include <sanguis/client/draw2d/sprite/index_fwd.hpp>
-#include <sanguis/client/draw2d/sprite/order.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/health.hpp>
-#include <sanguis/animation_type.hpp>
-#include <sanguis/diff_clock_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -124,7 +125,7 @@ private:
 	// with_weapon overrides
 	void
 	weapon(
-		weapon_type::type
+		sanguis::weapon_type
 	);
 
 	void

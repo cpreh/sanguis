@@ -1,20 +1,22 @@
+#include <sanguis/exception.hpp>
+#include <sanguis/perk_type.hpp>
 #include <sanguis/server/perks/tree/choose.hpp>
 #include <sanguis/server/perks/tree/equal.hpp>
+#include <sanguis/server/perks/tree/object.hpp>
 #include <sanguis/server/perks/tree/status.hpp>
-#include <sanguis/exception.hpp>
-#include <fcppt/container/tree/pre_order.hpp>
-#include <fcppt/container/tree/object_impl.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/container/tree/pre_order.hpp>
+
 
 void
 sanguis::server::perks::tree::choose(
-	tree::object &_tree,
-	sanguis::perk_type::type const _perk
+	sanguis::server::perks::tree::object &_tree,
+	sanguis::perk_type const _perk
 )
 {
 	typedef
 	fcppt::container::tree::pre_order<
-		tree::object
+		sanguis::server::perks::tree::object
 	> traversal;
 
 	traversal trav(
@@ -25,7 +27,7 @@ sanguis::server::perks::tree::choose(
 		std::find_if(
 			trav.begin(),
 			trav.end(),
-			tree::equal(
+			sanguis::server::perks::tree::equal(
 				_perk
 			)
 		)

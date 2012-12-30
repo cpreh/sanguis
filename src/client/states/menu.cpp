@@ -17,18 +17,18 @@
 #include <sanguis/exception.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
-#include <fcppt/function/object.hpp>
 #include <fcppt/log/parameters/object.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <ostream>
+#include <functional>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace
 {
@@ -54,28 +54,27 @@ sanguis::client::states::menu::menu(
 		context<machine>().settings(),
 		context<machine>().gui(),
 		gui::menu::callbacks::object(
-			std::tr1::bind(
+			std::bind(
 				&machine::connect,
 				&context<machine>(),
-				std::tr1::placeholders::_1,
-				std::tr1::placeholders::_2
+				std::placeholders::_1,
+				std::placeholders::_2
 			),
-			std::tr1::bind(
+			std::bind(
 				&machine::disconnect,
 				&context<machine>()
 			),
-			std::tr1::bind(
+			std::bind(
 				&machine::quickstart,
 				&context<machine>(),
-				std::tr1::placeholders::_1
+				std::placeholders::_1
 			),
-			std::tr1::bind(
+			std::bind(
 				&machine::quit,
 				&context<machine>()
 			)
 		)
-	),
-	connect_state_()
+	)
 {
 }
 
@@ -123,10 +122,10 @@ sanguis::client::states::menu::react(
 		dispatcher(
 			*_message.value(),
 			*this,
-			std::tr1::bind(
+			std::bind(
 				&menu::handle_default_msg,
 				this,
-				std::tr1::placeholders::_1
+				std::placeholders::_1
 			)
 		);
 }

@@ -1,19 +1,22 @@
-#include <sanguis/server/make_unicast_callback.hpp>
 #include <sanguis/server/machine.hpp>
+#include <sanguis/server/make_unicast_callback.hpp>
+#include <sanguis/server/unicast_callback.hpp>
 #include <sanguis/messages/base.hpp>
-#include <fcppt/tr1/functional.hpp>
-#include <fcppt/function/object.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <functional>
+#include <fcppt/config/external_end.hpp>
+
 
 sanguis::server::unicast_callback const
 sanguis::server::make_unicast_callback(
-	server::machine &_machine
+	sanguis::server::machine &_machine
 )
 {
 	return
-		std::tr1::bind(
-			&server::machine::send_unicast,
+		std::bind(
+			&sanguis::server::machine::send_unicast,
 			&_machine,
-			std::tr1::placeholders::_1,
-			std::tr1::placeholders::_2
+			std::placeholders::_1,
+			std::placeholders::_2
 		);
 }

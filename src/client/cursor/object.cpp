@@ -1,33 +1,38 @@
 #include <sanguis/client/cursor/object.hpp>
 #include <sge/input/cursor/object.hpp>
 #include <sge/input/cursor/optional_position.hpp>
-#include <fcppt/function/object.hpp>
 #include <fcppt/math/vector/object_impl.hpp>
+#include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/object_impl.hpp>
-#include <fcppt/tr1/functional.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <functional>
+#include <fcppt/config/external_end.hpp>
+
 
 sanguis::client::cursor::object::object(
 	sge::input::cursor::object &_cursor
 )
 :
-	cursor_(_cursor),
+	cursor_(
+		_cursor
+	),
 	button_signal_(),
 	move_signal_(),
 	button_connection_(
 		cursor_.button_callback(
-			std::tr1::bind(
+			std::bind(
 				&object::on_button,
 				this,
-				std::tr1::placeholders::_1
+				std::placeholders::_1
 			)
 		)
 	),
 	move_connection_(
 		cursor_.move_callback(
-			std::tr1::bind(
+			std::bind(
 				&object::on_move,
 				this,
-				std::tr1::placeholders::_1
+				std::placeholders::_1
 			)
 		)
 	),

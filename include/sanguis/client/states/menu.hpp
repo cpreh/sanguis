@@ -10,7 +10,6 @@
 #include <sanguis/client/events/tick_fwd.hpp>
 #include <sanguis/client/gui/menu/object.hpp>
 #include <sanguis/messages/connect_state.hpp>
-#include <sanguis/connect_state.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/state.hpp>
@@ -98,8 +97,6 @@ public:
 	);
 private:
 	client::gui::menu::object menu_;
-
-	connect_state::type connect_state_;
 };
 
 }

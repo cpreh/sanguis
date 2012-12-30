@@ -3,17 +3,20 @@
 
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/messages/base_fwd.hpp>
-#include <fcppt/function/object_fwd.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <functional>
+#include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
 namespace server
 {
 
-typedef fcppt::function::object<
+typedef std::function<
 	void (
-		server::player_id,
-		messages::base const &
+		sanguis::server::player_id,
+		sanguis::messages::base const &
 	)
 > unicast_callback;
 

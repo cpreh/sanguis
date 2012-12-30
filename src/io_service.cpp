@@ -3,7 +3,6 @@
 #include <sanguis/io_service_impl.hpp>
 #include <alda/net/io_service_wrapper.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/function/object.hpp>
 
 
 sanguis::io_service::io_service()

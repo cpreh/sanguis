@@ -9,7 +9,7 @@
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/load/resource/textures_fwd.hpp>
-#include <sge/renderer/vertex_declaration_fwd.hpp>
+#include <sge/renderer/vertex/declaration_fwd.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <sge/renderer/state/core/depth_stencil/object_scoped_ptr.hpp>
@@ -43,9 +43,9 @@ public:
 
 	state(
 		sge::renderer::device::core &,
-		load::resource::textures const &,
-		sge::renderer::vertex_declaration const &,
-		client::world_parameters const &
+		sanguis::load::resource::textures const &,
+		sge::renderer::vertex::declaration const &,
+		sanguis::client::world_parameters const &
 	);
 
 	~state();
@@ -58,10 +58,10 @@ public:
 private:
 	sge::renderer::device::core &renderer_;
 
-	sge::renderer::vertex_declaration const &vertex_declaration_;
+	sge::renderer::vertex::declaration const &vertex_declaration_;
 
 	typedef fcppt::scoped_ptr<
-		world::batch_grid
+		sanguis::client::draw2d::scene::world::batch_grid
 	> batch_grid_scoped_ptr;
 
 	batch_grid_scoped_ptr const batches_;

@@ -1,3 +1,5 @@
+#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/perk_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/perks/create.hpp>
 #include <sanguis/server/perks/perk.hpp>
@@ -7,72 +9,56 @@
 #include <sanguis/server/perks/ims.hpp>
 #include <sanguis/server/perks/irs.hpp>
 #include <sanguis/server/perks/regeneration.hpp>
-#include <fcppt/assert/unreachable.hpp>
-#include <fcppt/cref.hpp>
+#include <sanguis/server/perks/unique_ptr.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/ref.hpp>
+#include <fcppt/assert/unreachable.hpp>
+
 
 sanguis::server::perks::unique_ptr
 sanguis::server::perks::create(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
-	perk_type::type const _type
+	sanguis::perk_type const _type
 )
 {
 	switch(
 		_type
 	)
 	{
-	case perk_type::choleric:
+	case sanguis::perk_type::choleric:
 		return
-			unique_ptr(
-				fcppt::make_unique_ptr<
-					choleric
-				>(
-					fcppt::cref(
-						_diff_clock
-					),
-					fcppt::ref(
-						_random_generator
-					)
-				)
+			fcppt::make_unique_ptr<
+				sanguis::server::perks::choleric
+			>(
+				_diff_clock,
+				_random_generator
 			);
-	case perk_type::health:
+	case sanguis::perk_type::health:
 		return
-			unique_ptr(
-				fcppt::make_unique_ptr<
-					health
-				>()
-			);
-	case perk_type::ias:
+			fcppt::make_unique_ptr<
+				sanguis::server::perks::health
+			>();
+	case sanguis::perk_type::ias:
 		return
-			unique_ptr(
-				fcppt::make_unique_ptr<
-					ias
-				>()
-			);
-	case perk_type::ims:
+			fcppt::make_unique_ptr<
+				sanguis::server::perks::ias
+			>();
+	case sanguis::perk_type::ims:
 		return
-			unique_ptr(
-				fcppt::make_unique_ptr<
-					ims
-				>()
-			);
-	case perk_type::irs:
+			fcppt::make_unique_ptr<
+				sanguis::server::perks::ims
+			>();
+	case sanguis::perk_type::irs:
 		return
-			unique_ptr(
-				fcppt::make_unique_ptr<
-					irs
-				>()
-			);
-	case perk_type::regeneration:
+			fcppt::make_unique_ptr<
+				sanguis::server::perks::irs
+			>();
+	case sanguis::perk_type::regeneration:
 		return
-			unique_ptr(
-				fcppt::make_unique_ptr<
-					regeneration
-				>()
-			);
-	case perk_type::size:
+			fcppt::make_unique_ptr<
+				sanguis::server::perks::regeneration
+			>();
+	case sanguis::perk_type::size:
 		break;
 	}
 

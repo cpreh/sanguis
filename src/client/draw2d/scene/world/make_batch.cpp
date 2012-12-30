@@ -11,16 +11,17 @@
 #include <sanguis/creator/geometry/shape.hpp>
 #include <sanguis/creator/geometry/shape_container.hpp>
 #include <sanguis/creator/geometry/texture_name.hpp>
-#include <sge/renderer/first_vertex.hpp>
 #include <sge/renderer/lock_mode.hpp>
 #include <sge/renderer/resource_flags_field.hpp>
-#include <sge/renderer/scoped_vertex_lock.hpp>
 #include <sge/renderer/size_type.hpp>
-#include <sge/renderer/vertex_buffer.hpp>
-#include <sge/renderer/vertex_buffer_shared_ptr.hpp>
-#include <sge/renderer/vertex_count.hpp>
-#include <sge/renderer/vertex_declaration_fwd.hpp>
 #include <sge/renderer/device/core.hpp>
+#include <sge/renderer/vertex/buffer.hpp>
+#include <sge/renderer/vertex/buffer_parameters.hpp>
+#include <sge/renderer/vertex/buffer_shared_ptr.hpp>
+#include <sge/renderer/vertex/count.hpp>
+#include <sge/renderer/vertex/declaration_fwd.hpp>
+#include <sge/renderer/vertex/first.hpp>
+#include <sge/renderer/vertex/scoped_lock.hpp>
 #include <sge/renderer/vf/dynamic/part_index.hpp>
 #include <sge/renderer/vf/iterator.hpp>
 #include <sge/renderer/vf/vertex.hpp>
@@ -38,13 +39,13 @@
 namespace
 {
 
-sge::renderer::vertex_count const
+sge::renderer::vertex::count const
 poly_count(
 	sanguis::creator::geometry::shape const &_shape
 )
 {
 	return
-		sge::renderer::vertex_count(
+		sge::renderer::vertex::count(
 			_shape.polygon().size()
 		);
 }
@@ -54,7 +55,7 @@ poly_count(
 sanguis::client::draw2d::scene::world::batch const
 sanguis::client::draw2d::scene::world::make_batch(
 	sge::renderer::device::core &_renderer,
-	sge::renderer::vertex_declaration const &_vertex_declaration,
+	sge::renderer::vertex::declaration const &_vertex_declaration,
 	sanguis::load::resource::textures const &_textures,
 	sanguis::creator::geometry::shape_container _shapes
 )
@@ -64,7 +65,7 @@ sanguis::client::draw2d::scene::world::make_batch(
 	)
 		return
 			sanguis::client::draw2d::scene::world::batch(
-				sge::renderer::vertex_buffer_shared_ptr(),
+				sge::renderer::vertex::buffer_shared_ptr(),
 				sanguis::client::draw2d::scene::world::texture_slice_vector()
 			);
 
@@ -74,31 +75,33 @@ sanguis::client::draw2d::scene::world::make_batch(
 		sanguis::client::draw2d::scene::world::sort_shapes
 	);
 
-	sge::renderer::vertex_buffer_shared_ptr const vertex_buffer(
+	sge::renderer::vertex::buffer_shared_ptr const vertex_buffer(
 		_renderer.create_vertex_buffer(
-			_vertex_declaration,
-			sge::renderer::vf::dynamic::part_index(
-				0u
-			),
-			std::accumulate(
-				_shapes.begin(),
-				_shapes.end(),
-				sge::renderer::vertex_count(
+			sge::renderer::vertex::buffer_parameters(
+				_vertex_declaration,
+				sge::renderer::vf::dynamic::part_index(
 					0u
 				),
-				boost::phoenix::arg_names::arg1 +=
-					boost::phoenix::bind(
-						poly_count,
-						boost::phoenix::arg_names::arg2
-					)
-			),
-			sge::renderer::resource_flags_field::null()
+				std::accumulate(
+					_shapes.begin(),
+					_shapes.end(),
+					sge::renderer::vertex::count(
+						0u
+					),
+					boost::phoenix::arg_names::arg1 +=
+						boost::phoenix::bind(
+							poly_count,
+							boost::phoenix::arg_names::arg2
+						)
+				),
+				sge::renderer::resource_flags_field::null()
+			)
 		)
 	);
 
 	sanguis::client::draw2d::scene::world::texture_slice_vector texture_slices;
 
-	sge::renderer::scoped_vertex_lock const vblock(
+	sge::renderer::vertex::scoped_lock const vblock(
 		*vertex_buffer,
 		sge::renderer::lock_mode::writeonly
 	);
@@ -173,10 +176,10 @@ sanguis::client::draw2d::scene::world::make_batch(
 		{
 			texture_slices.push_back(
 				sanguis::client::draw2d::scene::world::texture_slice(
-					sge::renderer::first_vertex(
+					sge::renderer::vertex::first(
 						cur_vertex
 					),
-					sge::renderer::vertex_count(
+					sge::renderer::vertex::count(
 						num_vertices
 					),
 					_textures.load(
@@ -197,10 +200,10 @@ sanguis::client::draw2d::scene::world::make_batch(
 
 	texture_slices.push_back(
 		sanguis::client::draw2d::scene::world::texture_slice(
-			sge::renderer::first_vertex(
+			sge::renderer::vertex::first(
 				cur_vertex
 			),
-			sge::renderer::vertex_count(
+			sge::renderer::vertex::count(
 				num_vertices
 			),
 			_textures.load(

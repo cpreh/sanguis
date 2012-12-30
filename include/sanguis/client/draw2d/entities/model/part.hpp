@@ -46,7 +46,7 @@ public:
 
 	void
 	weapon(
-		weapon_type::type
+		sanguis::weapon_type
 	);
 
 	void
@@ -99,7 +99,7 @@ private:
 
 	sanguis::animation_type::type animation_type_;
 
-	weapon_type::type weapon_;
+	sanguis::weapon_type weapon_;
 
 	animation_context_ptr animation_context_;
 

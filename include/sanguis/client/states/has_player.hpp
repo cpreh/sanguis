@@ -14,7 +14,7 @@
 #include <sanguis/messages/give_weapon.hpp>
 #include <sanguis/messages/level_up.hpp>
 #include <sanguis/messages/remove_id.hpp>
-#include <sanguis/perk_type.hpp>
+#include <sanguis/perk_type_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -105,7 +105,7 @@ private:
 
 	void
 	send_perk_choose(
-		sanguis::perk_type::type
+		sanguis::perk_type
 	);
 
 	fcppt::scoped_ptr<

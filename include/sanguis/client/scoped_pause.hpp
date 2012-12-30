@@ -2,8 +2,8 @@
 #define SANGUIS_CLIENT_SCOPED_PAUSE_HPP_INCLUDED
 
 #include <sanguis/client/send_callback.hpp>
-#include <fcppt/function/object.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -16,13 +16,14 @@ class scoped_pause
 		scoped_pause
 	);
 public:
-	explicit scoped_pause(
-		client::send_callback const &
+	explicit
+	scoped_pause(
+		sanguis::client::send_callback const &
 	);
 
 	~scoped_pause();
 private:
-	client::send_callback const send_;
+	sanguis::client::send_callback const send_;
 };
 
 }

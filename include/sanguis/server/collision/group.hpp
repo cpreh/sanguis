@@ -1,6 +1,9 @@
 #ifndef SANGUIS_SERVER_COLLISION_GROUP_HPP_INCLUDED
 #define SANGUIS_SERVER_COLLISION_GROUP_HPP_INCLUDED
 
+#include <sanguis/server/collision/group_fwd.hpp>
+
+
 namespace sanguis
 {
 namespace server
@@ -8,9 +11,7 @@ namespace server
 namespace collision
 {
 
-namespace group
-{
-enum type
+enum class group
 {
 	enemy,
 	pickup,
@@ -20,7 +21,6 @@ enum type
 	sight_range,
 	size
 };
-}
 
 }
 }

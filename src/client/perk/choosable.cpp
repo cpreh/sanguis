@@ -1,18 +1,22 @@
+#include <sanguis/perk_type.hpp>
 #include <sanguis/client/level.hpp>
+#include <sanguis/client/player_level.hpp>
 #include <sanguis/client/perk/choosable.hpp>
+#include <sanguis/client/perk/choosable_state.hpp>
 #include <sanguis/client/perk/find_info.hpp>
 #include <sanguis/client/perk/info.hpp>
 #include <sanguis/client/perk/level.hpp>
 #include <sanguis/client/perk/level_map.hpp>
-#include <sanguis/perk_type.hpp>
+#include <sanguis/client/perk/tree.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
+
 
 namespace
 {
 
 sanguis::client::perk::level const
 perk_level(
-	sanguis::perk_type::type,
+	sanguis::perk_type,
 	sanguis::client::perk::level_map const &
 );
 
@@ -20,15 +24,15 @@ perk_level(
 
 sanguis::client::perk::choosable_state::type
 sanguis::client::perk::choosable(
-	sanguis::perk_type::type const _type,
-	perk::tree const &_tree,
-	perk::level_map const &_levels,
-	client::player_level const _player_level,
-	client::level const _perks_chosen
+	sanguis::perk_type const _type,
+	sanguis::client::perk::tree const &_tree,
+	sanguis::client::perk::level_map const &_levels,
+	sanguis::client::player_level const _player_level,
+	sanguis::client::level const _perks_chosen
 )
 {
-	perk::tree const &node(
-		perk::find_info(
+	sanguis::client::perk::tree const &node(
+		sanguis::client::perk::find_info(
 			_type,
 			_tree
 		)
@@ -42,7 +46,7 @@ sanguis::client::perk::choosable(
 			_levels
 		)
 	)
-		return perk::choosable_state::max_level;
+		return sanguis::client::perk::choosable_state::max_level;
 
 	if(
 		node.has_parent()
@@ -54,22 +58,22 @@ sanguis::client::perk::choosable(
 		<
 		node.value().required_parent_level().get()
 	)
-		return perk::choosable_state::parent_level;
+		return sanguis::client::perk::choosable_state::parent_level;
 
 	if(
 		node.value().required_player_level().get()
 		> _player_level
 	)
-		return perk::choosable_state::player_level;
+		return sanguis::client::perk::choosable_state::player_level;
 
 	if(
 		_player_level.get()
 		==
 		_perks_chosen
 	)
-		return perk::choosable_state::level_up;
+		return sanguis::client::perk::choosable_state::level_up;
 
-	return perk::choosable_state::ok;
+	return sanguis::client::perk::choosable_state::ok;
 }
 
 namespace
@@ -77,7 +81,7 @@ namespace
 
 sanguis::client::perk::level const
 perk_level(
-	sanguis::perk_type::type const _type,
+	sanguis::perk_type const _type,
 	sanguis::client::perk::level_map const &_map
 )
 {

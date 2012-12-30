@@ -1,8 +1,16 @@
+#include <sanguis/cheat_type.hpp>
+#include <sanguis/exception.hpp>
+#include <sanguis/timer.hpp>
+#include <sanguis/weapon_type.hpp>
+#include <sanguis/client/send_callback.hpp>
 #include <sanguis/client/control/action_handler.hpp>
 #include <sanguis/client/control/action_visitor.hpp>
 #include <sanguis/client/control/axis_direction_max.hpp>
 #include <sanguis/client/control/axis_direction_min.hpp>
+#include <sanguis/client/control/direction_vector.hpp>
 #include <sanguis/client/control/environment.hpp>
+#include <sanguis/client/control/key_scale.hpp>
+#include <sanguis/client/control/scalar.hpp>
 #include <sanguis/client/control/actions/any.hpp>
 #include <sanguis/client/control/actions/binary.hpp>
 #include <sanguis/client/control/actions/cursor.hpp>
@@ -15,32 +23,33 @@
 #include <sanguis/messages/player_stop_shooting.hpp>
 #include <sanguis/messages/player_change_weapon.hpp>
 #include <sanguis/messages/player_cheat.hpp>
-#include <sanguis/exception.hpp>
+#include <sanguis/messages/types/enum.hpp>
+#include <sge/console/arg_list.hpp>
 #include <sge/console/object.hpp>
 #include <sge/console/callback/name.hpp>
 #include <sge/console/callback/parameters.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/cyclic_iterator.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/function/object.hpp>
 #include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/math/clamp.hpp>
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/variant/apply_unary.hpp>
 #include <fcppt/variant/object_impl.hpp>
-#include <fcppt/cyclic_iterator.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
 #include <algorithm>
+#include <functional>
 #include <iterator>
 #include <fcppt/config/external_end.hpp>
 
+
 sanguis::client::control::action_handler::action_handler(
-	client::send_callback const &_send,
-	control::environment &_environment,
+	sanguis::client::send_callback const &_send,
+	sanguis::client::control::environment &_environment,
 	sge::console::object &_console
 )
 :
@@ -51,7 +60,7 @@ sanguis::client::control::action_handler::action_handler(
 		_environment
 	),
 	current_weapon_(
-		weapon_type::size
+		sanguis::weapon_type::none
 	),
 	rotation_timer_(
 		sanguis::timer::parameters(
@@ -62,17 +71,17 @@ sanguis::client::control::action_handler::action_handler(
 	),
 	owned_weapons_(),
 	direction_(
-		control::direction_vector::null()
+		sanguis::client::control::direction_vector::null()
 	),
 	cheat_kill_conn_(
 		_console.insert(
 			sge::console::callback::parameters(
-				std::tr1::bind(
-					&action_handler::send_cheat,
+				std::bind(
+					&sanguis::client::control::action_handler::send_cheat,
 					this,
-					cheat_type::kill,
-					std::tr1::placeholders::_1,
-					std::tr1::placeholders::_2
+					sanguis::cheat_type::kill,
+					std::placeholders::_1,
+					std::placeholders::_2
 				),
 				sge::console::callback::name(
 					SGE_FONT_LIT("kill")
@@ -86,12 +95,12 @@ sanguis::client::control::action_handler::action_handler(
 	cheat_impulse_conn_(
 		_console.insert(
 			sge::console::callback::parameters(
-				std::tr1::bind(
-					&action_handler::send_cheat,
+				std::bind(
+					&sanguis::client::control::action_handler::send_cheat,
 					this,
-					cheat_type::impulse101,
-					std::tr1::placeholders::_1,
-					std::tr1::placeholders::_2
+					sanguis::cheat_type::impulse101,
+					std::placeholders::_1,
+					std::placeholders::_2
 				),
 				sge::console::callback::name(
 					SGE_FONT_LIT("impulse")
@@ -105,12 +114,12 @@ sanguis::client::control::action_handler::action_handler(
 	cheat_exp_conn_(
 		_console.insert(
 			sge::console::callback::parameters(
-				std::tr1::bind(
-					&action_handler::send_cheat,
+				std::bind(
+					&sanguis::client::control::action_handler::send_cheat,
 					this,
-					cheat_type::exp,
-					std::tr1::placeholders::_1,
-					std::tr1::placeholders::_2
+					sanguis::cheat_type::exp,
+					std::placeholders::_1,
+					std::placeholders::_2
 				),
 				sge::console::callback::name(
 					SGE_FONT_LIT("exp")
@@ -135,11 +144,11 @@ sanguis::client::control::action_handler::~action_handler()
 
 void
 sanguis::client::control::action_handler::handle_action(
-	control::actions::any const &_action
+	sanguis::client::control::actions::any const &_action
 )
 {
 	fcppt::variant::apply_unary(
-		control::action_visitor(
+		sanguis::client::control::action_visitor(
 			*this
 		),
 		_action.get()
@@ -148,16 +157,20 @@ sanguis::client::control::action_handler::handle_action(
 
 void
 sanguis::client::control::action_handler::give_player_weapon(
-	weapon_type::type const _weapon_type
+	sanguis::weapon_type const _weapon_type
 )
 {
 	owned_weapons_.at(
-		_weapon_type
+		static_cast<
+			owned_weapons_array::size_type
+		>(
+			_weapon_type
+		)
 	) = true;
 
 	// we don't own any weapon so take this one
 	if(
-		current_weapon_ == weapon_type::size
+		current_weapon_ == sanguis::weapon_type::none
 	)
 		this->change_weapon(
 			_weapon_type
@@ -166,14 +179,14 @@ sanguis::client::control::action_handler::give_player_weapon(
 
 void
 sanguis::client::control::action_handler::handle_binary_action(
-	control::actions::binary const &_action
+	sanguis::client::control::actions::binary const &_action
 )
 {
 	switch(
 		_action.type()
 	)
 	{
-	case actions::binary_type::shoot:
+	case sanguis::client::control::actions::binary_type::shoot:
 		this->handle_shooting(
 			_action.value()
 		);
@@ -188,7 +201,7 @@ sanguis::client::control::action_handler::handle_binary_action(
 
 void
 sanguis::client::control::action_handler::handle_cursor_action(
-	control::actions::cursor const &_action
+	sanguis::client::control::actions::cursor const &_action
 )
 {
 	if(
@@ -215,39 +228,39 @@ sanguis::client::control::action_handler::handle_cursor_action(
 
 void
 sanguis::client::control::action_handler::handle_nullary_action(
-	control::actions::nullary const &_action
+	sanguis::client::control::actions::nullary const &_action
 )
 {
 	switch(
 		_action.type()
 	)
 	{
-	case actions::nullary_type::switch_weapon_forwards:
+	case sanguis::client::control::actions::nullary_type::switch_weapon_forwards:
 		this->handle_switch_weapon(
 			true
 		);
 
 		return;
-	case actions::nullary_type::switch_weapon_backwards:
+	case sanguis::client::control::actions::nullary_type::switch_weapon_backwards:
 		this->handle_switch_weapon(
 			false
 		);
 
 		return;
 	// There are some actions we don't handle
-	case actions::nullary_type::perk_menu:
-	case actions::nullary_type::escape:
-	case actions::nullary_type::console:
+	case sanguis::client::control::actions::nullary_type::perk_menu:
+	case sanguis::client::control::actions::nullary_type::escape:
+	case sanguis::client::control::actions::nullary_type::console:
 		break;
 	}
 }
 
 void
 sanguis::client::control::action_handler::handle_scale_action(
-	control::actions::scale const &_action
+	sanguis::client::control::actions::scale const &_action
 )
 {
-	control::key_scale const scale(
+	sanguis::client::control::key_scale const scale(
 		_action.get()
 	);
 
@@ -255,14 +268,14 @@ sanguis::client::control::action_handler::handle_scale_action(
 		_action.type()
 	)
 	{
-	case actions::scale_type::horizontal_move:
+	case sanguis::client::control::actions::scale_type::horizontal_move:
 		this->update_direction(
 			direction_.x(),
 			scale
 		);
 
 		return;
-	case actions::scale_type::vertical_move:
+	case sanguis::client::control::actions::scale_type::vertical_move:
 		this->update_direction(
 			direction_.y(),
 			scale
@@ -278,15 +291,15 @@ sanguis::client::control::action_handler::handle_scale_action(
 
 void
 sanguis::client::control::action_handler::update_direction(
-	control::scalar &_result,
-	control::key_scale const _scale
+	sanguis::client::control::scalar &_result,
+	sanguis::client::control::key_scale const _scale
 )
 {
 	_result =
 		fcppt::math::clamp(
 			_result + _scale,
-			control::axis_direction_min(),
-			control::axis_direction_max()
+			sanguis::client::control::axis_direction_min(),
+			sanguis::client::control::axis_direction_max()
 		);
 
 	send_(
@@ -330,7 +343,7 @@ sanguis::client::control::action_handler::handle_switch_weapon(
 {
 	// we don't own any weapon
 	if(
-		current_weapon_ == weapon_type::size
+		current_weapon_ == sanguis::weapon_type::none
 	)
 		return;
 
@@ -370,7 +383,7 @@ sanguis::client::control::action_handler::handle_switch_weapon(
 
 	this->change_weapon(
 		static_cast<
-			weapon_type::type
+			sanguis::weapon_type
 		>(
 			std::distance(
 				static_cast<
@@ -386,7 +399,7 @@ sanguis::client::control::action_handler::handle_switch_weapon(
 
 void
 sanguis::client::control::action_handler::change_weapon(
-	weapon_type::type const _weapon_type
+	sanguis::weapon_type const _weapon_type
 )
 {
 	current_weapon_ = _weapon_type;
@@ -394,7 +407,11 @@ sanguis::client::control::action_handler::change_weapon(
 	send_(
 		*sanguis::messages::create(
 			sanguis::messages::player_change_weapon(
-				current_weapon_
+				static_cast<
+					sanguis::messages::types::enum_
+				>(
+					current_weapon_
+				)
 			)
 		)
 	);
@@ -402,7 +419,7 @@ sanguis::client::control::action_handler::change_weapon(
 
 void
 sanguis::client::control::action_handler::send_cheat(
-	cheat_type::type const _cheat,
+	sanguis::cheat_type const _cheat,
 	sge::console::arg_list const &,
 	sge::console::object &
 )
@@ -410,7 +427,11 @@ sanguis::client::control::action_handler::send_cheat(
 	send_(
 		*sanguis::messages::create(
 			sanguis::messages::player_cheat(
-				_cheat
+				static_cast<
+					sanguis::messages::types::enum_
+				>(
+					_cheat
+				)
 			)
 		)
 	);

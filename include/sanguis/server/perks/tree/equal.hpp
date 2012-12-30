@@ -1,9 +1,10 @@
 #ifndef SANGUIS_SERVER_PERKS_TREE_EQUAL_HPP_INCLUDED
 #define SANGUIS_SERVER_PERKS_TREE_EQUAL_HPP_INCLUDED
 
-#include <sanguis/server/perks/tree/object.hpp>
 #include <sanguis/perk_type.hpp>
+#include <sanguis/server/perks/tree/object_fwd.hpp>
 #include <fcppt/nonassignable.hpp>
+
 
 namespace sanguis
 {
@@ -20,16 +21,17 @@ class equal
 		equal
 	);
 public:
-	explicit equal(
-		sanguis::perk_type::type
+	explicit
+	equal(
+		sanguis::perk_type
 	);
 
 	bool
 	operator()(
-		tree::object const &
+		sanguis::server::perks::tree::object const &
 	) const;
 private:
-	sanguis::perk_type::type const type_;
+	sanguis::perk_type const type_;
 };
 
 }

@@ -1,12 +1,13 @@
 #ifndef SANGUIS_AOE_PROJECTILE_TYPE_HPP_INCLUDED
 #define SANGUIS_AOE_PROJECTILE_TYPE_HPP_INCLUDED
 
+#include <sanguis/aoe_projectile_type_fwd.hpp>
+
+
 namespace sanguis
 {
 
-namespace aoe_projectile_type
-{
-enum type
+enum class aoe_projectile_type
 {
 	aoe_damage,
 	rocket,
@@ -16,5 +17,4 @@ enum type
 
 }
 
-}
 #endif

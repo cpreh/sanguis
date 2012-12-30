@@ -6,7 +6,9 @@
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/value.hpp>
 #include <fcppt/algorithm/map.hpp>
-#include <fcppt/tr1/functional.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <functional>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::creator::geometry::polygon const
@@ -19,14 +21,14 @@ sanguis::creator::aux::generator::deserialization::polygon(
 			sanguis::creator::geometry::polygon
 		>(
 			_array.elements,
-			std::tr1::bind(
+			std::bind(
 				&sanguis::creator::aux::generator::deserialization::vertex,
-				std::tr1::bind(
+				std::bind(
 					sge::parse::json::get<
 						sge::parse::json::object,
 						sge::parse::json::value const
 					>,
-					std::tr1::placeholders::_1
+					std::placeholders::_1
 				)
 			)
 		);

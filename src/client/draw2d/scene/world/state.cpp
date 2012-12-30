@@ -1,3 +1,5 @@
+#include <sanguis/client/world_parameters.hpp>
+#include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/scene/world/state.hpp>
 #include <sanguis/client/draw2d/scene/world/batch.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
@@ -8,9 +10,7 @@
 #include <sanguis/client/draw2d/scene/world/sprite/object.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/parameters.hpp>
 #include <sanguis/client/draw2d/scene/background_dim.hpp>
-#include <sanguis/client/draw2d/vector2.hpp>
-#include <sanguis/client/world_parameters.hpp>
-#include <sge/renderer/scoped_vertex_declaration.hpp>
+#include <sanguis/load/resource/textures_fwd.hpp>
 #include <sge/renderer/clear/parameters.hpp>
 #include <sge/renderer/context/core.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
@@ -20,6 +20,8 @@
 #include <sge/renderer/state/core/depth_stencil/stencil/combined_simple.hpp>
 #include <sge/renderer/state/core/depth_stencil/stencil/func.hpp>
 #include <sge/renderer/state/core/depth_stencil/stencil/op.hpp>
+#include <sge/renderer/vertex/declaration_fwd.hpp>
+#include <sge/renderer/vertex/scoped_declaration.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/sprite/buffers/option.hpp>
@@ -41,14 +43,16 @@
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
-#include <fcppt/tr1/functional.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <functional>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::draw2d::scene::world::state::state(
 	sge::renderer::device::core &_renderer,
-	load::resource::textures const &_textures,
-	sge::renderer::vertex_declaration const &_vertex_declaration,
-	client::world_parameters const &_parameters
+	sanguis::load::resource::textures const &_textures,
+	sge::renderer::vertex::declaration const &_vertex_declaration,
+	sanguis::client::world_parameters const &_parameters
 )
 :
 	renderer_(
@@ -58,7 +62,7 @@ sanguis::client::draw2d::scene::world::state::state(
 		_vertex_declaration
 	),
 	batches_(
-		world::generate_batches(
+		sanguis::client::draw2d::scene::world::generate_batches(
 			_renderer,
 			_vertex_declaration,
 			_parameters.top_parameters(),
@@ -124,7 +128,7 @@ sanguis::client::draw2d::scene::world::state::~state()
 void
 sanguis::client::draw2d::scene::world::state::draw(
 	sge::renderer::context::core &_render_context,
-	draw2d::vector2 const &_translation
+	sanguis::client::draw2d::vector2 const &_translation
 )
 {
 	if(
@@ -132,26 +136,26 @@ sanguis::client::draw2d::scene::world::state::draw(
 	)
 		return;
 
-	world::signed_pos::value_type const batch_size_trans(
+	sanguis::client::draw2d::scene::world::signed_pos::value_type const batch_size_trans(
 		static_cast<
-			world::signed_pos::value_type
+			sanguis::client::draw2d::scene::world::signed_pos::value_type
 		>(
 			sanguis::client::draw2d::scene::world::batch_size::value
 		)
 	);
 
-	world::signed_pos const
+	sanguis::client::draw2d::scene::world::signed_pos const
 		int_translation(
 			fcppt::math::vector::structure_cast<
-				world::signed_pos
+				sanguis::client::draw2d::scene::world::signed_pos
 			>(
 				-_translation
 			)
 		);
 
-	world::batch_grid::dim const
+	sanguis::client::draw2d::scene::world::batch_grid::dim const
 		lower(
-			world::clamp_pos(
+			sanguis::client::draw2d::scene::world::clamp_pos(
 				int_translation
 				/
 				batch_size_trans
@@ -160,26 +164,26 @@ sanguis::client::draw2d::scene::world::state::draw(
 			)
 		),
 		upper(
-			world::clamp_pos(
+			sanguis::client::draw2d::scene::world::clamp_pos(
 				fcppt::algorithm::array_map<
-					world::signed_pos
+					sanguis::client::draw2d::scene::world::signed_pos
 				>(
 					(
 						int_translation
 						+
 						fcppt::math::dim::structure_cast<
-							world::signed_pos
+							sanguis::client::draw2d::scene::world::signed_pos
 						>(
 							sanguis::client::draw2d::scene::background_dim(
 								renderer_
 							)
 						)
 					),
-					std::tr1::bind(
+					std::bind(
 						fcppt::math::ceil_div<
-							batch_grid::size_type
+							sanguis::client::draw2d::scene::world::batch_grid::size_type
 						>,
-						std::tr1::placeholders::_1,
+						std::placeholders::_1,
 						batch_size_trans
 					)
 				),
@@ -200,27 +204,27 @@ sanguis::client::draw2d::scene::world::state::draw(
 	);
 
 	for(
-		batch_grid::size_type pos_y(
+		sanguis::client::draw2d::scene::world::batch_grid::size_type pos_y(
 			lower.h()
 		);
 		pos_y <= upper.h();
 		++pos_y
 	)
 		for(
-			batch_grid::size_type pos_x(
+			sanguis::client::draw2d::scene::world::batch_grid::size_type pos_x(
 				lower.w()
 			);
 			pos_x <= upper.w();
 			++pos_x
 		)
 		{
-			batch_grid::dim const pos(
+			sanguis::client::draw2d::scene::world::batch_grid::dim const pos(
 				pos_x,
 				pos_y
 			);
 
 			{
-				sge::renderer::scoped_vertex_declaration const scoped_decl(
+				sge::renderer::vertex::scoped_declaration const scoped_decl(
 					_render_context,
 					vertex_declaration_
 				);
@@ -246,7 +250,7 @@ sanguis::client::draw2d::scene::world::state::draw(
 
 			stencil_sprite_.pos(
 				fcppt::math::dim::structure_cast<
-					world::sprite::object::vector
+					sanguis::client::draw2d::scene::world::sprite::object::vector
 				>(
 					pos
 				)

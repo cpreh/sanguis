@@ -1,9 +1,10 @@
 #ifndef SANGUIS_SERVER_PERKS_TREE_CHOOSABLE_HPP_INCLUDED
 #define SANGUIS_SERVER_PERKS_TREE_CHOOSABLE_HPP_INCLUDED
 
-#include <sanguis/server/perks/tree/object.hpp>
+#include <sanguis/perk_type_fwd.hpp>
 #include <sanguis/server/level.hpp>
-#include <sanguis/perk_type.hpp>
+#include <sanguis/server/perks/tree/object_fwd.hpp>
+
 
 namespace sanguis
 {
@@ -16,9 +17,9 @@ namespace tree
 
 bool
 choosable(
-	tree::object const &,
-	sanguis::perk_type::type,
-	server::level player_level
+	sanguis::server::perks::tree::object const &,
+	sanguis::perk_type,
+	sanguis::server::level player_level
 );
 
 }

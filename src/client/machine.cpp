@@ -32,7 +32,6 @@
 #include <alda/net/parameters.hpp>
 #include <alda/net/port.hpp>
 #include <alda/net/buffer/circular_receive/object_fwd.hpp>
-#include <fcppt/move.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
@@ -40,9 +39,10 @@
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/signal/auto_connection.hpp>
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/system/error_code.hpp>
+#include <functional>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -96,7 +96,7 @@ sanguis::client::machine::machine(
 	),
 	s_conn_(
 		net_.register_connect(
-			std::tr1::bind(
+			std::bind(
 				&machine::connect_callback,
 				this
 			)
@@ -104,20 +104,20 @@ sanguis::client::machine::machine(
 	),
 	s_disconn_(
 		net_.register_error(
-			std::tr1::bind(
+			std::bind(
 				&machine::error_callback,
 				this,
-				std::tr1::placeholders::_1,
-				std::tr1::placeholders::_2
+				std::placeholders::_1,
+				std::placeholders::_2
 			)
 		)
 	),
 	s_data_(
 		net_.register_data(
-			std::tr1::bind(
+			std::bind(
 				&machine::data_callback,
 				this,
-				std::tr1::placeholders::_1
+				std::placeholders::_1
 			)
 		)
 	),
@@ -364,7 +364,7 @@ sanguis::client::machine::data_callback(
 
 		this->process_event(
 			sanguis::client::events::message(
-				fcppt::move(
+				std::move(
 					ret
 				)
 			)

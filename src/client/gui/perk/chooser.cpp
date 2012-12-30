@@ -18,42 +18,18 @@
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/variant/object_impl.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/nonassignable.hpp>
 #include <fcppt/optional_impl.hpp>
-#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <CEGUI/widgets/PushButton.h>
 #include <CEGUI/widgets/Tree.h>
 #include <algorithm>
+#include <functional>
 #include <fcppt/config/external_end.hpp>
 
-namespace
-{
-
-class compare_perk
-{
-	FCPPT_NONASSIGNABLE(
-		compare_perk
-	);
-public:
-	explicit compare_perk(
-		sanguis::perk_type::type
-	);
-
-	bool
-	operator()(
-		sanguis::client::gui::perk::item_tree const &
-	) const;
-private:
-	sanguis::perk_type::type const type_;
-};
-
-}
 
 sanguis::client::gui::perk::chooser::chooser(
 	gui::object &_gui,
@@ -69,19 +45,19 @@ sanguis::client::gui::perk::chooser::chooser(
 	active_perk_(),
 	perk_connection_(
 		_state.register_perks_change(
-			std::tr1::bind(
+			std::bind(
 				&gui::perk::chooser::perks,
 				this,
-				std::tr1::placeholders::_1
+				std::placeholders::_1
 			)
 		)
 	),
 	level_connection_(
 		_state.register_level_change(
-			std::tr1::bind(
+			std::bind(
 				&gui::perk::chooser::level,
 				this,
-				std::tr1::placeholders::_1
+				std::placeholders::_1
 			)
 		)
 	),
@@ -123,10 +99,10 @@ sanguis::client::gui::perk::chooser::chooser(
 		tree_widget_.subscribeEvent(
 			CEGUI::Tree::EventSelectionChanged,
 			CEGUI::Event::Subscriber(
-				std::tr1::bind(
+				std::bind(
 					&chooser::handle_selection_changed,
 					this,
-					std::tr1::placeholders::_1
+					std::placeholders::_1
 				)
 			)
 		)
@@ -135,10 +111,10 @@ sanguis::client::gui::perk::chooser::chooser(
 		choose_button_.subscribeEvent(
 			CEGUI::PushButton::EventClicked,
 			CEGUI::Event::Subscriber(
-				std::tr1::bind(
+				std::bind(
 					&chooser::handle_perk_choose,
 					this,
-					std::tr1::placeholders::_1
+					std::placeholders::_1
 				)
 			)
 		)
@@ -219,13 +195,25 @@ sanguis::client::gui::perk::chooser::perks(
 			items_
 		);
 
+		sanguis::perk_type const cur_type(
+			it->parent().value().type()
+		);
+
 		item_traversal::iterator const item_it(
 			std::find_if(
 				item_trav.begin(),
 				item_trav.end(),
-				::compare_perk(
-					it->parent().value().type()
+				[
+					cur_type
+				](
+					sanguis::client::gui::perk::item_tree const &_tree
 				)
+				{
+					return
+						_tree.holder()
+						&&
+						_tree.value().perk_type() == cur_type;
+				}
 			)
 		);
 
@@ -239,9 +227,7 @@ sanguis::client::gui::perk::chooser::perks(
 					gui::perk::node(
 						&tree_widget_
 					),
-					fcppt::ref(
-						gui_
-					),
+					gui_,
 					it->value()
 				)
 			);
@@ -253,9 +239,7 @@ sanguis::client::gui::perk::chooser::perks(
 					gui::perk::node(
 						&item_it->value().widget()
 					),
-					fcppt::ref(
-						gui_
-					),
+					gui_,
 					it->value()
 				)
 			);
@@ -295,7 +279,7 @@ sanguis::client::gui::perk::chooser::update_top_text()
 
 void
 sanguis::client::gui::perk::chooser::update_bottom_text(
-	sanguis::perk_type::type const _perk_type
+	sanguis::perk_type const _perk_type
 )
 {
 	client::perk::info const &info(
@@ -374,7 +358,7 @@ sanguis::client::gui::perk::chooser::update_tree_data()
 
 void
 sanguis::client::gui::perk::chooser::update_choose_button(
-	sanguis::perk_type::type const _perk_type
+	sanguis::perk_type const _perk_type
 )
 {
 	choose_button_.setEnabled(
@@ -398,7 +382,7 @@ sanguis::client::gui::perk::chooser::handle_selection_changed(
 		selected
 	)
 	{
-		sanguis::perk_type::type const perk_type(
+		sanguis::perk_type const perk_type(
 			gui::perk::item_user_data(
 				*selected
 			)
@@ -465,30 +449,6 @@ sanguis::client::gui::perk::chooser::handle_perk_choose(
 	);
 
 	return true;
-}
-
-namespace
-{
-
-compare_perk::compare_perk(
-	sanguis::perk_type::type const _type
-)
-:
-	type_(_type)
-{
-}
-
-bool
-compare_perk::operator()(
-	sanguis::client::gui::perk::item_tree const &_tree
-) const
-{
-	return
-		_tree.holder()
-		&&
-		_tree.value().perk_type() == type_;
-}
-
 }
 
 #if 0

@@ -11,7 +11,6 @@
 #include <fcppt/io/ifstream.hpp>
 #include <fcppt/io/istringstream.hpp>
 #include <fcppt/log/headers.hpp>
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/extract_from_string_exn.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -23,6 +22,7 @@
 #include <boost/chrono/duration.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
+#include <functional>
 #include <fcppt/config/external_end.hpp>
 
 sanguis::load::resource::animation::series const
@@ -32,10 +32,10 @@ sanguis::load::resource::animations::load(
 	return map_get_or_create(
 		animations_,
 		dir,
-		std::tr1::bind(
+		std::bind(
 			&animations::do_load,
 			this,
-			std::tr1::placeholders::_1
+			std::placeholders::_1
 		)
 	);
 }

@@ -1,21 +1,27 @@
+#include <sanguis/perk_type.hpp>
+#include <sanguis/server/level.hpp>
+#include <sanguis/server/entities/base_fwd.hpp>
+#include <sanguis/server/environment/object_fwd.hpp>
+#include <sanguis/server/perks/level_diff.hpp>
 #include <sanguis/server/perks/perk.hpp>
+
 
 void
 sanguis::server::perks::perk::update(
-	entities::base &,
-	environment::object &
+	sanguis::server::entities::base &,
+	sanguis::server::environment::object &
 )
 {
 }
 
 void
 sanguis::server::perks::perk::raise_level(
-	entities::base &_owner
+	sanguis::server::entities::base &_owner
 )
 {
 	this->change(
 		_owner,
-		perks::level_diff(
+		sanguis::server::perks::level_diff(
 			1
 		)
 	);
@@ -23,7 +29,7 @@ sanguis::server::perks::perk::raise_level(
 	++level_;
 }
 
-sanguis::perk_type::type
+sanguis::perk_type
 sanguis::server::perks::perk::type() const
 {
 	return type_;
@@ -34,7 +40,7 @@ sanguis::server::perks::perk::~perk()
 }
 
 sanguis::server::perks::perk::perk(
-	perk_type::type const _type
+	sanguis::perk_type const _type
 )
 :
 	type_(

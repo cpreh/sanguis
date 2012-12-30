@@ -1,19 +1,19 @@
 #ifndef SANGUIS_PROJECTILE_TYPE_HPP_INCLUDED
 #define SANGUIS_PROJECTILE_TYPE_HPP_INCLUDED
 
+#include <sanguis/projectile_type_fwd.hpp>
+
+
 namespace sanguis
 {
 
-namespace projectile_type
-{
-enum type
+enum class projectile_type
 {
 	melee,
 	simple_bullet,
 	aoe,
 	size
 };
-}
 
 }
 

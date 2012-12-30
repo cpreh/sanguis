@@ -1,12 +1,13 @@
 #ifndef SANGUIS_PICKUP_TYPE_HPP_INCLUDED
 #define SANGUIS_PICKUP_TYPE_HPP_INCLUDED
 
+#include <sanguis/pickup_type_fwd.hpp>
+
+
 namespace sanguis
 {
 
-namespace pickup_type
-{
-enum type
+enum class pickup_type
 {
 	health,
 	monster,
@@ -14,7 +15,6 @@ enum type
 	size
 	// add single perks and others here too
 };
-}
 
 }
 

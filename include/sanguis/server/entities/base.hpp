@@ -1,20 +1,21 @@
 #ifndef SANGUIS_SERVER_ENTITIES_BASE_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_BASE_HPP_INCLUDED
 
-#include <sanguis/server/entities/base_fwd.hpp>
+#include <sanguis/entity_id.hpp>
+#include <sanguis/entity_type_fwd.hpp>
+#include <sanguis/messages/auto_ptr.hpp>
+#include <sanguis/server/center_fwd.hpp>
+#include <sanguis/server/player_id.hpp>
+#include <sanguis/server/team_fwd.hpp>
+#include <sanguis/server/collision/global_groups_fwd.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
+#include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
 #include <sanguis/server/entities/link_container.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
-#include <sanguis/server/center.hpp>
-#include <sanguis/server/player_id.hpp>
-#include <sanguis/server/team.hpp>
-#include <sanguis/server/collision/global_groups_fwd.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
-#include <sanguis/messages/auto_ptr.hpp>
-#include <sanguis/entity_id.hpp>
-#include <sanguis/entity_type.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -35,9 +36,9 @@ public:
 
 	void
 	transfer(
-		server::environment::object &,
-		collision::global_groups const &,
-		entities::insert_parameters const &
+		sanguis::server::environment::object &,
+		sanguis::server::collision::global_groups const &,
+		sanguis::server::entities::insert_parameters const &
 	);
 
 	void
@@ -51,13 +52,13 @@ public:
 
 	// linking with other objects
 
-	auto_weak_link const
+	sanguis::server::entities::auto_weak_link const
 	link();
 
 
 	// environment query function // TODO: should this be public?
 
-	server::environment::object &
+	sanguis::server::environment::object &
 	environment() const;
 
 	bool
@@ -72,65 +73,77 @@ public:
 
 	// position and size functions
 
-	virtual server::center const
+	virtual
+	sanguis::server::center const
 	center() const = 0;
 
-	virtual bool
+	virtual
+	bool
 	server_only() const;
 
 
 	// life functions
 
-	virtual bool
+	virtual
+	bool
 	dead() const = 0;
 
 	// message functions
 
-	virtual messages::auto_ptr
+	virtual
+	sanguis::messages::auto_ptr
 	add_message(
-		player_id
+		sanguis::server::player_id
 	) const = 0;
 
 
 	// type query
 
-	virtual entity_type::type
+	virtual
+	sanguis::entity_type
 	type() const = 0;
 
-	virtual server::team::type
+	virtual
+	sanguis::server::team
 	team() const = 0;
 
-	virtual ~base();
+	virtual
+	~base();
 private:
-	virtual void
+	virtual
+	void
 	on_update();
 
-	virtual void
+	virtual
+	void
 	on_create();
 
-	virtual void
+	virtual
+	void
 	on_remove();
 
-	virtual void
+	virtual
+	void
 	on_destroy();
 
-	virtual void
+	virtual
+	void
 	on_transfer(
-		entities::transfer_parameters const &
+		sanguis::server::entities::transfer_parameters const &
 	);
 
-	friend class auto_weak_link;
+	friend class sanguis::server::entities::auto_weak_link;
 
 	void
 	insert_link(
-		auto_weak_link &
+		sanguis::server::entities::auto_weak_link &
 	);
 
-	environment::object *environment_;
+	sanguis::server::environment::object *environment_;
 
-	entity_id const id_;
+	sanguis::entity_id const id_;
 
-	link_container links_;
+	sanguis::server::entities::link_container links_;
 };
 
 }

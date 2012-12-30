@@ -9,7 +9,6 @@
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
 #include <sanguis/load/model/collection_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/function/object.hpp>
 
 
 namespace sanguis

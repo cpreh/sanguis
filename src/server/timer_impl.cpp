@@ -4,7 +4,9 @@
 #include <sanguis/server/timer_impl.hpp>
 #include <alda/net/io_service_wrapper.hpp>
 #include <fcppt/chrono/asio/expires_from_now_any.hpp>
-#include <fcppt/tr1/functional.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <functional>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::timer_impl::timer_impl(
@@ -47,7 +49,7 @@ sanguis::server::timer_impl::reset()
 	);
 
 	deadline_timer_.async_wait(
-		std::tr1::bind(
+		std::bind(
 			&sanguis::server::timer_impl::handler,
 			this
 		)

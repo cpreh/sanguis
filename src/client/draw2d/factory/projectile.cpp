@@ -1,33 +1,34 @@
-#include <sanguis/client/draw2d/factory/projectile.hpp>
+#include <sanguis/projectile_type.hpp>
 #include <sanguis/client/draw2d/entities/bullet.hpp>
-#include <fcppt/assert/unreachable.hpp>
-#include <fcppt/cref.hpp>
+#include <sanguis/client/draw2d/entities/unique_ptr.hpp>
+#include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
+#include <sanguis/client/draw2d/factory/projectile.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assert/unreachable.hpp>
+
 
 sanguis::client::draw2d::entities::unique_ptr
 sanguis::client::draw2d::factory::projectile(
-	entities::model::parameters const &_param,
-	projectile_type::type const _ptype
+	sanguis::client::draw2d::entities::model::parameters const &_param,
+	sanguis::projectile_type const _ptype
 )
 {
 	switch(
 		_ptype
 	)
 	{
-	case projectile_type::aoe:
-	case projectile_type::melee:
-	case projectile_type::size:
+	case sanguis::projectile_type::aoe:
+	case sanguis::projectile_type::melee:
+	case sanguis::projectile_type::size:
 		break;
-	case projectile_type::simple_bullet:
+	case sanguis::projectile_type::simple_bullet:
 		return
-			entities::unique_ptr(
+			sanguis::client::draw2d::entities::unique_ptr(
 				fcppt::make_unique_ptr<
-					entities::bullet
+					sanguis::client::draw2d::entities::bullet
 				>(
-					fcppt::cref(
-						_param
-					),
+					_param,
 					FCPPT_TEXT("bullet")
 				)
 			);

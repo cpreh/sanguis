@@ -14,7 +14,9 @@
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <fcppt/string.hpp>
-#include <fcppt/tr1/functional.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <functional>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::console::object::object(
@@ -49,10 +51,10 @@ sanguis::client::console::object::register_server_command(
 	server_connections_.add(
 		gfx_.object().insert(
 			sge::console::callback::parameters(
-				std::tr1::bind(
+				std::bind(
 					&object::server_callback,
 					this,
-					std::tr1::placeholders::_1
+					std::placeholders::_1
 				),
 				sge::console::callback::name(
 					sge::font::from_fcppt_string(

@@ -1,30 +1,40 @@
+#include <sanguis/perk_type.hpp>
 #include <sanguis/random_generator.hpp>
-#include <sanguis/server/perks/choleric.hpp>
-#include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/direction.hpp>
+#include <sanguis/server/radius.hpp>
+#include <sanguis/server/space_unit.hpp>
+#include <sanguis/server/damage/unit.hpp>
+#include <sanguis/server/entities/base_fwd.hpp>
+#include <sanguis/server/entities/insert_parameters.hpp>
+#include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/projectiles/simple_bullet.hpp>
 #include <sanguis/server/entities/projectiles/rocket.hpp>
-#include <sanguis/server/entities/insert_parameters.hpp>
+#include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/perks/choleric.hpp>
+#include <sanguis/server/perks/level_diff.hpp>
+#include <sanguis/server/perks/perk.hpp>
 #include <sge/timer/reset_when_expired.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/twopi.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/random/variate_impl.hpp>
 #include <fcppt/random/distribution/uniform_real_impl.hpp>
-#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/ref.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 sanguis::server::perks::choleric::choleric(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator
 )
 :
-	perk(
-		perk_type::choleric
+	sanguis::server::perks::perk(
+		sanguis::perk_type::choleric
 	),
-	diff_clock_(_diff_clock),
+	diff_clock_(
+		_diff_clock
+	),
 	shoot_timer_(
 		sanguis::diff_timer::parameters(
 			_diff_clock,
@@ -35,13 +45,13 @@ sanguis::server::perks::choleric::choleric(
 	),
 	rand_(
 		_random_generator,
-		choleric::distribution(
-			choleric::distribution::min(
+		sanguis::server::perks::choleric::distribution(
+			sanguis::server::perks::choleric::distribution::min(
 				0.f
 			),
-			choleric::distribution::sup(
+			sanguis::server::perks::choleric::distribution::sup(
 				fcppt::math::twopi<
-					server::space_unit
+					sanguis::server::space_unit
 				>()
 			)
 		)
@@ -55,8 +65,8 @@ sanguis::server::perks::choleric::~choleric()
 
 void
 sanguis::server::perks::choleric::update(
-	entities::base &_entity,
-	environment::object &_env
+	sanguis::server::entities::base &_entity,
+	sanguis::server::environment::object &_env
 )
 {
 	if(
@@ -66,7 +76,7 @@ sanguis::server::perks::choleric::update(
 	)
 		return;
 
-	server::level const rocket_level(
+	sanguis::server::level const rocket_level(
 		10u
 	);
 
@@ -88,55 +98,47 @@ sanguis::server::perks::choleric::update(
 		++index
 	)
 	{
-		server::direction const direction(
+		sanguis::server::direction const direction(
 			rand_()
 		);
 
 		_env.insert(
 			spawn_bullets
 			?
-				entities::unique_ptr(
+				sanguis::server::entities::unique_ptr(
 					fcppt::make_unique_ptr<
 						entities::projectiles::simple_bullet
 					>(
-						fcppt::cref(
-							diff_clock_
-						),
-						fcppt::ref(
-							_env.load_context()
-						),
+						diff_clock_,
+						_env.load_context(),
 						_entity.team(),
-						damage::unit(
+						sanguis::server::damage::unit(
 							2.f
 						),
 						direction
 					)
 				)
 			:
-				entities::unique_ptr(
+				sanguis::server::entities::unique_ptr(
 					fcppt::make_unique_ptr<
-						entities::projectiles::rocket
+						sanguis::server::entities::projectiles::rocket
 					>(
-						fcppt::cref(
-							diff_clock_
-						),
-						fcppt::ref(
-							_env.load_context()
-						),
+						diff_clock_,
+						_env.load_context(),
 						_entity.team(),
-						damage::unit(
+						sanguis::server::damage::unit(
 							5.f
 						),
-						server::radius(
+						sanguis::server::radius(
 							1.6f
 						),
 						direction
 					)
 				)
 			,
-			entities::insert_parameters(
+			sanguis::server::entities::insert_parameters(
 				_entity.center(),
-				server::angle(
+				sanguis::server::angle(
 					direction.get()
 				)
 			)
@@ -146,8 +148,8 @@ sanguis::server::perks::choleric::update(
 
 void
 sanguis::server::perks::choleric::change(
-	entities::base &,
-	level_diff
+	sanguis::server::entities::base &,
+	sanguis::server::perks::level_diff
 )
 {
 }

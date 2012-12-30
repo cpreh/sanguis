@@ -75,7 +75,7 @@ private:
 	void
 	process_message(
 		alda::net::id,
-		sanguis::messages::auto_ptr
+		sanguis::messages::auto_ptr &&
 	);
 
 	void
@@ -98,7 +98,7 @@ private:
 	void
 	timer_callback();
 
-	load::context_base const &resources_;
+	sanguis::load::context_base const &resources_;
 
 	sge::charconv::system &charconv_system_;
 

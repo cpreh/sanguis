@@ -1,49 +1,54 @@
+#include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/collision_groups.hpp>
+#include <sanguis/server/auras/influence.hpp>
+#include <sanguis/server/collision/group.hpp>
+#include <sanguis/server/collision/group_vector.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/assign/make_container.hpp>
 
+
 sanguis::server::collision::group_vector const
 sanguis::server::auras::collision_groups(
-	team::type const _team,
-	influence::type const _influence
+	sanguis::server::team const _team,
+	sanguis::server::auras::influence const _influence
 )
 {
 	if (
 		(
-			_team == team::players
-			&& _influence == influence::buff
+			_team == sanguis::server::team::players
+			&& _influence == sanguis::server::auras::influence::buff
 		)
 		||
 		(
-			_team == team::monsters
-			&& _influence == influence::debuff
+			_team == sanguis::server::team::monsters
+			&& _influence == sanguis::server::auras::influence::debuff
 		)
 
 	)
 		return
 			fcppt::assign::make_container<
-				collision::group_vector
+				sanguis::server::collision::group_vector
 			>(
-				collision::group::projectile_enemy
+				sanguis::server::collision::group::projectile_enemy
 			);
 
 	if (
 		(
-			_team == team::players
-			&& _influence == influence::debuff
+			_team == sanguis::server::team::players
+			&& _influence == sanguis::server::auras::influence::debuff
 		)
 		||
 		(
-			_team == team::monsters
-			&& _influence == influence::buff
+			_team == sanguis::server::team::monsters
+			&& _influence == sanguis::server::auras::influence::buff
 		)
 
 	)
 		return
 			fcppt::assign::make_container<
-				collision::group_vector
+				sanguis::server::collision::group_vector
 			>(
-				collision::group::projectile_player
+				sanguis::server::collision::group::projectile_player
 			);
 
 	FCPPT_ASSERT_UNREACHABLE;

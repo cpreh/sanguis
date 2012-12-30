@@ -1,17 +1,16 @@
-#include <sanguis/server/world/object.hpp>
-#include <sanguis/server/world/context.hpp>
-#include <sanguis/server/world/create_static_body.hpp>
-#include <sanguis/server/world/environment.hpp>
-#include <sanguis/server/world/sight_range.hpp>
-#include <sanguis/server/collision/body_collision.hpp>
-#include <sanguis/server/entities/base.hpp>
-#include <sanguis/server/entities/with_health.hpp>
-#include <sanguis/server/entities/with_velocity.hpp>
-#include <sanguis/server/entities/player.hpp>
-#include <sanguis/server/message_convert/speed.hpp>
-#include <sanguis/server/message_convert/rotate.hpp>
-#include <sanguis/server/message_convert/move.hpp>
-#include <sanguis/server/message_convert/health.hpp>
+#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/diff_timer.hpp>
+#include <sanguis/exception.hpp>
+#include <sanguis/entity_id.hpp>
+#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/timer.hpp>
+#include <sanguis/world_id.hpp>
+#include <sanguis/weapon_type.hpp>
+#include <sanguis/creator/generator/result.hpp>
+#include <sanguis/load/model/context.hpp>
+#include <sanguis/load/model/collection.hpp>
+#include <sanguis/load/model/object.hpp>
+#include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/messages/change_weapon.hpp>
 #include <sanguis/messages/change_world.hpp>
 #include <sanguis/messages/create.hpp>
@@ -25,45 +24,71 @@
 #include <sanguis/messages/stop_attacking.hpp>
 #include <sanguis/messages/stop_reloading.hpp>
 #include <sanguis/messages/max_health.hpp>
+#include <sanguis/messages/types/enum.hpp>
 #include <sanguis/messages/types/exp.hpp>
-#include <sanguis/load/model/context.hpp>
-#include <sanguis/load/model/collection.hpp>
-#include <sanguis/load/model/object.hpp>
-#include <sanguis/exception.hpp>
-#include <sanguis/creator/generator/result.hpp>
+#include <sanguis/server/center_fwd.hpp>
+#include <sanguis/server/console_fwd.hpp>
+#include <sanguis/server/exp.hpp>
+#include <sanguis/server/health.hpp>
+#include <sanguis/server/level.hpp>
+#include <sanguis/server/pickup_probability.hpp>
+#include <sanguis/server/player_id.hpp>
+#include <sanguis/server/string.hpp>
+#include <sanguis/server/collision/body_collision.hpp>
+#include <sanguis/server/collision/global_groups.hpp>
+#include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/insert_parameters_fwd.hpp>
+#include <sanguis/server/entities/player.hpp>
+#include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/entities/with_health.hpp>
+#include <sanguis/server/entities/with_velocity.hpp>
+#include <sanguis/server/environment/object_fwd.hpp>
+#include <sanguis/server/environment/load_context_fwd.hpp>
+#include <sanguis/server/message_convert/speed.hpp>
+#include <sanguis/server/message_convert/rotate.hpp>
+#include <sanguis/server/message_convert/move.hpp>
+#include <sanguis/server/message_convert/health.hpp>
+#include <sanguis/server/world/context.hpp>
+#include <sanguis/server/world/create_static_body.hpp>
+#include <sanguis/server/world/environment.hpp>
+#include <sanguis/server/world/entity_map.hpp>
+#include <sanguis/server/world/object.hpp>
+#include <sanguis/server/world/sight_range.hpp>
+#include <sanguis/server/world/sight_range_map.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <sge/charconv/system_fwd.hpp>
-#include <sge/projectile/body/object.hpp>
 #include <sge/projectile/time_increment.hpp>
 #include <sge/projectile/world.hpp>
+#include <sge/projectile/body/object.hpp>
 #include <sge/timer/elapsed_and_reset.hpp>
 #include <sge/timer/reset_when_expired.hpp>
-#include <fcppt/assert/error.hpp>
-#include <fcppt/assert/pre.hpp>
-#include <fcppt/container/map_impl.hpp>
-#include <fcppt/math/dim/object_impl.hpp>
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assert/error.hpp>
+#include <fcppt/assert/pre.hpp>
+#include <fcppt/container/map_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
+#include <functional>
 #include <fcppt/config/external_end.hpp>
+
 
 sanguis::server::world::object::object(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
 	sanguis::world_id const _id,
-	world::context &_global_context,
-	server::environment::load_context &_load_context,
+	sanguis::server::world::context &_global_context,
+	sanguis::server::environment::load_context &_load_context,
 	sge::charconv::system &_charconv_system,
-	server::console &_console,
+	sanguis::server::console &_console,
 	sanguis::creator::generator::result const &_generated_world
 )
 :
-	id_(_id),
+	id_(
+		_id
+	),
 	seed_(
 		_generated_world.seed()
 	),
@@ -92,10 +117,10 @@ sanguis::server::world::object::object(
 	),
 	collision_connection_(
 		collision_world_->body_collision(
-			std::tr1::bind(
-				&collision::body_collision,
-				std::tr1::placeholders::_1,
-				std::tr1::placeholders::_2
+			std::bind(
+				&sanguis::server::collision::body_collision,
+				std::placeholders::_1,
+				std::placeholders::_2
 			)
 		)
 	),
@@ -117,11 +142,9 @@ sanguis::server::world::object::object(
 	),
 	environment_(
 		fcppt::make_unique_ptr<
-			world::environment
+			sanguis::server::world::environment
 		>(
-			fcppt::ref(
-				*this
-			)
+			*this
 		)
 	),
 	entities_(),
@@ -136,7 +159,7 @@ sanguis::server::world::object::object(
 		_console
 	),
 	static_body_(
-		world::create_static_body(
+		sanguis::server::world::create_static_body(
 			_generated_world.shapes()
 		)
 	)
@@ -173,7 +196,7 @@ sanguis::server::world::object::update()
 	);
 
 	for(
-		entity_map::iterator it(
+		sanguis::server::world::entity_map::iterator it(
 			entities_.begin()
 		),
 		next(
@@ -194,23 +217,23 @@ sanguis::server::world::object::update()
 
 void
 sanguis::server::world::object::insert(
-	entities::unique_ptr _entity,
-	entities::insert_parameters const &_insert_parameters
+	sanguis::server::entities::unique_ptr &&_entity,
+	sanguis::server::entities::insert_parameters const &_insert_parameters
 )
 {
-	entity_id const id(
+	sanguis::entity_id const id(
 		_entity->id()
 	);
 
 	typedef std::pair<
-		entity_map::iterator,
+		sanguis::server::world::entity_map::iterator,
 		bool
 	> return_type;
 
 	return_type const ret(
 		entities_.insert(
 			id,
-			move(
+			std::move(
 				_entity
 			)
 		)
@@ -230,14 +253,14 @@ sanguis::server::world::object::insert(
 	);
 
 	FCPPT_TRY_DYNAMIC_CAST(
-		entities::player const *,
+		sanguis::server::entities::player const *,
 		player_ret,
 		ret.first->second
 	)
 		this->send_player_specific(
 			player_ret->player_id(),
-			*messages::create(
-				messages::change_world(
+			*sanguis::messages::create(
+				sanguis::messages::change_world(
 					id_,
 					seed_,
 					sge::charconv::fcppt_string_to_utf8(
@@ -259,15 +282,19 @@ sanguis::server::world::object::environment() const
 void
 sanguis::server::world::object::weapon_changed(
 	sanguis::entity_id const _id,
-	weapon_type::type const _wt
+	sanguis::weapon_type const _wt
 )
 {
 	this->send_entity_specific(
 		_id,
-		*messages::create(
-			messages::change_weapon(
+		*sanguis::messages::create(
+			sanguis::messages::change_weapon(
 				_id,
-				_wt
+				static_cast<
+					sanguis::messages::types::enum_
+				>(
+					_wt
+				)
 			)
 		)
 	);
@@ -275,17 +302,21 @@ sanguis::server::world::object::weapon_changed(
 
 void
 sanguis::server::world::object::got_weapon(
-	server::player_id const _player_id,
+	sanguis::server::player_id const _player_id,
 	sanguis::entity_id const _entity_id,
-	weapon_type::type const _wt
+	sanguis::weapon_type const _wt
 )
 {
 	this->send_player_specific(
 		_player_id,
-		*messages::create(
-			messages::give_weapon(
+		*sanguis::messages::create(
+			sanguis::messages::give_weapon(
 				_entity_id,
-				_wt
+				static_cast<
+					sanguis::messages::types::enum_
+				>(
+					_wt
+				)
 			)
 		)
 	);
@@ -301,14 +332,14 @@ sanguis::server::world::object::attacking_changed(
 		_id,
 		_is_attacking
 		?
-			*messages::create(
-				messages::start_attacking(
+			*sanguis::messages::create(
+				sanguis::messages::start_attacking(
 					_id
 				)
 			)
 		:
-			*messages::create(
-				messages::stop_attacking(
+			*sanguis::messages::create(
+				sanguis::messages::stop_attacking(
 					_id
 				)
 			)
@@ -325,14 +356,14 @@ sanguis::server::world::object::reloading_changed(
 		_id,
 		_is_reloading
 		?
-			*messages::create(
-				messages::start_reloading(
+			*sanguis::messages::create(
+				sanguis::messages::start_reloading(
 					_id
 				)
 			)
 		:
-			*messages::create(
-				messages::stop_reloading(
+			*sanguis::messages::create(
+				sanguis::messages::stop_reloading(
 					_id
 				)
 			)
@@ -342,13 +373,13 @@ sanguis::server::world::object::reloading_changed(
 void
 sanguis::server::world::object::max_health_changed(
 	sanguis::entity_id const _id,
-	server::health const _health
+	sanguis::server::health const _health
 )
 {
 	this->send_entity_specific(
 		_id,
-		*messages::create(
-			messages::max_health(
+		*sanguis::messages::create(
+			sanguis::messages::max_health(
 				_id,
 				_health.get()
 			)
@@ -358,15 +389,15 @@ sanguis::server::world::object::max_health_changed(
 
 void
 sanguis::server::world::object::exp_changed(
-	server::player_id const _player_id,
+	sanguis::server::player_id const _player_id,
 	sanguis::entity_id const _entity_id,
-	server::exp const _exp
+	sanguis::server::exp const _exp
 )
 {
 	this->send_player_specific(
 		_player_id,
-		*messages::create(
-			messages::experience(
+		*sanguis::messages::create(
+			sanguis::messages::experience(
 				_entity_id,
 				// round EXP
 				static_cast<
@@ -381,15 +412,15 @@ sanguis::server::world::object::exp_changed(
 
 void
 sanguis::server::world::object::level_changed(
-	server::player_id const _player_id,
+	sanguis::server::player_id const _player_id,
 	sanguis::entity_id const _entity_id,
-	server::level const _level
+	sanguis::server::level const _level
 )
 {
 	this->send_player_specific(
 		_player_id,
-		*messages::create(
-			messages::level_up(
+		*sanguis::messages::create(
+			sanguis::messages::level_up(
 				_entity_id,
 				_level.get()
 			)
@@ -399,8 +430,8 @@ sanguis::server::world::object::level_changed(
 
 void
 sanguis::server::world::object::pickup_chance(
-	server::probability const _spawn_chance,
-	server::center const &_center
+	sanguis::server::pickup_probability const _spawn_chance,
+	sanguis::server::center const &_center
 )
 {
 	pickup_spawner_.spawn(
@@ -413,10 +444,10 @@ void
 sanguis::server::world::object::request_transfer(
 	sanguis::world_id const _world_id,
 	sanguis::entity_id const _entity_id,
-	entities::insert_parameters const &_insert_parameters
+	sanguis::server::entities::insert_parameters const &_insert_parameters
 )
 {
-	entity_map::iterator const it(
+	sanguis::server::world::entity_map::iterator const it(
 		entities_.find(
 			_entity_id
 		)
@@ -429,7 +460,7 @@ sanguis::server::world::object::request_transfer(
 			FCPPT_TEXT("entity can't be transferred!")
 		);
 
-	entities::unique_ptr entity(
+	sanguis::server::entities::unique_ptr entity(
 		entities_.release(
 			it
 		)
@@ -437,7 +468,7 @@ sanguis::server::world::object::request_transfer(
 
 	global_context_.transfer_entity(
 		_world_id,
-		move(
+		std::move(
 			entity
 		),
 		_insert_parameters
@@ -446,7 +477,7 @@ sanguis::server::world::object::request_transfer(
 
 void
 sanguis::server::world::object::add_sight_range(
-	server::player_id const _player_id,
+	sanguis::server::player_id const _player_id,
 	sanguis::entity_id const _target_id
 )
 {
@@ -456,7 +487,7 @@ sanguis::server::world::object::add_sight_range(
 		_target_id
 	);
 
-	entity_map::iterator const it(
+	sanguis::server::world::entity_map::iterator const it(
 		entities_.find(
 			_target_id
 		)
@@ -475,7 +506,7 @@ sanguis::server::world::object::add_sight_range(
 			).str()
 		);
 
-	entities::base &entity(
+	sanguis::server::entities::base &entity(
 		*it->second
 	);
 
@@ -494,12 +525,12 @@ sanguis::server::world::object::add_sight_range(
 
 void
 sanguis::server::world::object::remove_sight_range(
-	server::player_id const _player_id,
+	sanguis::server::player_id const _player_id,
 	sanguis::entity_id const _target_id
 )
 {
 	{
-		sight_range_map::iterator const sight_it(
+		sanguis::server::world::sight_range_map::iterator const sight_it(
 			sight_ranges_.find(
 				_player_id
 			)
@@ -528,7 +559,7 @@ sanguis::server::world::object::remove_sight_range(
 	// if an entity has been removed
 	// we have to tell the client that it is dead instead
 
-	entity_map::const_iterator const it(
+	sanguis::server::world::entity_map::const_iterator const it(
 		entities_.find(
 			_target_id
 		)
@@ -547,14 +578,14 @@ sanguis::server::world::object::remove_sight_range(
 		_player_id,
 		it->second->dead()
 		?
-			*messages::create(
-				messages::die(
+			*sanguis::messages::create(
+				sanguis::messages::die(
 					_target_id
 				)
 			)
 		:
-			*messages::create(
-				messages::remove(
+			*sanguis::messages::create(
+				sanguis::messages::remove(
 					_target_id
 				)
 			)
@@ -563,7 +594,7 @@ sanguis::server::world::object::remove_sight_range(
 
 void
 sanguis::server::world::object::remove_player(
-	server::player_id const _player_id
+	sanguis::server::player_id const _player_id
 )
 {
 	global_context_.remove_player(
@@ -591,32 +622,28 @@ sanguis::server::world::object::load_context() const
 
 void
 sanguis::server::world::object::send_entity_specific(
-	entity_id const _id,
-	messages::base const &_msg
+	sanguis::entity_id const _id,
+	sanguis::messages::base const &_msg
 )
 {
 	for(
-		sight_range_map::const_iterator it(
-			sight_ranges_.begin()
-		);
-		it != sight_ranges_.end();
-		++it
+		auto sight_range : sight_ranges_
 	)
 		if(
-			it->second.contains(
+			sight_range.second.contains(
 				_id
 			)
 		)
 			global_context_.send_to_player(
-				it->first,
+				sight_range.first,
 				_msg
 			);
 }
 
 void
 sanguis::server::world::object::send_player_specific(
-	player_id const _player_id,
-	messages::base const &_msg
+	sanguis::server::player_id const _player_id,
+	sanguis::messages::base const &_msg
 )
 {
 	global_context_.send_to_player(
@@ -627,11 +654,11 @@ sanguis::server::world::object::send_player_specific(
 
 void
 sanguis::server::world::object::update_entity(
-	entity_map::iterator const _it,
+	sanguis::server::world::entity_map::iterator const _it,
 	bool const _update_pos
 )
 {
-	entities::base &entity(
+	sanguis::server::entities::base &entity(
 		*_it->second
 	);
 
@@ -657,46 +684,46 @@ sanguis::server::world::object::update_entity(
 		return;
 
 	FCPPT_TRY_DYNAMIC_CAST(
-		entities::with_body const *,
+		sanguis::server::entities::with_body const *,
 		with_body,
 		&entity
 	)
 		this->send_entity_specific(
 			with_body->id(),
-			*message_convert::rotate(
+			*sanguis::server::message_convert::rotate(
 				*with_body
 			)
 		);
 
 	FCPPT_TRY_DYNAMIC_CAST(
-		entities::with_velocity const *,
+		sanguis::server::entities::with_velocity const *,
 		movable,
 		&entity
 	)
 	{
 		this->send_entity_specific(
 			movable->id(),
-			*message_convert::speed(
+			*sanguis::server::message_convert::speed(
 				*movable
 			)
 		);
 
 		this->send_entity_specific(
 			movable->id(),
-			*message_convert::move(
+			*sanguis::server::message_convert::move(
 				*movable
 			)
 		);
 	}
 
 	FCPPT_TRY_DYNAMIC_CAST(
-		entities::with_health const *,
+		sanguis::server::entities::with_health const *,
 		with_health,
 		&entity
 	)
 		this->send_entity_specific(
 			with_health->id(),
-			*message_convert::health(
+			*sanguis::server::message_convert::health(
 				*with_health
 			)
 		);

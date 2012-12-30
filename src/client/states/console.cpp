@@ -12,9 +12,9 @@
 #include <sanguis/client/events/render.hpp>
 #include <sanguis/client/events/tick.hpp>
 #include <sanguis/client/console/object.hpp>
-#include <fcppt/function/object.hpp>
 #include <fcppt/variant/holds_type.hpp>
 #include <fcppt/variant/object_impl.hpp>
+
 
 sanguis::client::states::console::console(
 	my_context _ctx

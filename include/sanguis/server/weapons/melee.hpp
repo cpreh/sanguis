@@ -1,13 +1,15 @@
 #ifndef SANGUIS_SERVER_WEAPONS_MELEE_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_MELEE_HPP_INCLUDED
 
-#include <sanguis/server/weapons/delayed_attack_fwd.hpp>
-#include <sanguis/server/weapons/weapon.hpp>
-#include <sanguis/server/weapons/range.hpp>
+#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/server/entities/with_weapon_fwd.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/damage.hpp>
-#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/server/weapons/delayed_attack_fwd.hpp>
+#include <sanguis/server/weapons/range.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -18,7 +20,7 @@ namespace weapons
 
 class melee
 :
-	public weapon
+	public sanguis::server::weapons::weapon
 {
 	FCPPT_NONCOPYABLE(
 		melee
@@ -26,29 +28,29 @@ class melee
 public:
 	melee(
 		sanguis::diff_clock const &,
-		weapons::range,
-		weapons::base_cooldown,
-		weapons::damage
+		sanguis::server::weapons::range,
+		sanguis::server::weapons::base_cooldown,
+		sanguis::server::weapons::damage
 	);
 
 	~melee();
 private:
 	void
 	do_attack(
-		delayed_attack const &
+		sanguis::server::weapons::delayed_attack const &
 	);
 
 	void
 	on_init_attack(
-		entities::with_weapon &owner
+		sanguis::server::entities::with_weapon &owner
 	);
 
 	void
 	on_castpoint(
-		entities::with_weapon &owner
+		sanguis::server::entities::with_weapon &owner
 	);
 
-	weapons::damage const damage_;
+	sanguis::server::weapons::damage const damage_;
 };
 
 }

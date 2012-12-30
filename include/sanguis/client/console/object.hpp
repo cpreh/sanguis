@@ -1,17 +1,16 @@
 #ifndef SANGUIS_CLIENT_CONSOLE_OBJECT_HPP_INCLUDED
 #define SANGUIS_CLIENT_CONSOLE_OBJECT_HPP_INCLUDED
 
-#include <sanguis/client/console/object_fwd.hpp>
 #include <sanguis/client/send_callback.hpp>
+#include <sanguis/client/console/object_fwd.hpp>
 #include <sge/charconv/system_fwd.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/gfx_fwd.hpp>
 #include <sge/console/object_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <fcppt/function/object.hpp>
-#include <fcppt/signal/connection_manager.hpp>
-#include <fcppt/string.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/string.hpp>
+#include <fcppt/signal/connection_manager.hpp>
 
 
 namespace sanguis
@@ -66,7 +65,7 @@ private:
 
 	sge::charconv::system &charconv_system_;
 
-	send_callback const send_;
+	sanguis::client::send_callback const send_;
 
 	fcppt::signal::connection_manager server_connections_;
 };

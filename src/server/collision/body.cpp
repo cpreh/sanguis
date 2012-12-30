@@ -1,19 +1,21 @@
+#include <sanguis/server/center.hpp>
+#include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/body.hpp>
 #include <sanguis/server/collision/from_sge_vector.hpp>
 #include <sanguis/server/collision/solidity.hpp>
 #include <sanguis/server/collision/to_sge_vector.hpp>
 #include <sanguis/server/collision/to_sge_user_data.hpp>
-#include <sanguis/server/center.hpp>
-#include <sanguis/server/speed.hpp>
 #include <sge/projectile/body/angular_velocity.hpp>
 #include <sge/projectile/body/linear_velocity.hpp>
 #include <sge/projectile/body/object.hpp>
 #include <sge/projectile/body/parameters.hpp>
 #include <sge/projectile/body/position.hpp>
 #include <sge/projectile/body/rotation.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <functional>
+#include <fcppt/config/external_end.hpp>
+
 
 sanguis::server::collision::body::body(
 	server::center const &_center,
@@ -59,10 +61,10 @@ sanguis::server::collision::body::body(
 	),
 	position_connection_(
 		body_->position_change(
-			std::tr1::bind(
+			std::bind(
 				&collision::body::on_position_change,
 				this,
-				std::tr1::placeholders::_1
+				std::placeholders::_1
 			)
 		)
 	)

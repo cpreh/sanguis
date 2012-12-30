@@ -2,16 +2,19 @@
 #define SANGUIS_SERVER_UPDATE_TARGET_FUNCTION_HPP_INCLUDED
 
 #include <sanguis/server/entities/with_body_fwd.hpp>
-#include <fcppt/function/object_fwd.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <functional>
+#include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
 namespace server
 {
 
-typedef fcppt::function::object<
+typedef std::function<
 	void (
-		entities::with_body &
+		sanguis::server::entities::with_body &
 	)
 > update_target_function;
 

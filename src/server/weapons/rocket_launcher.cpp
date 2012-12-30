@@ -1,42 +1,57 @@
+#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/duration_second.hpp>
-#include <sanguis/server/weapons/rocket_launcher.hpp>
-#include <sanguis/server/weapons/delayed_attack.hpp>
-#include <sanguis/server/weapons/unlimited_magazine_count.hpp>
+#include <sanguis/weapon_type.hpp>
+#include <sanguis/server/direction.hpp>
+#include <sanguis/server/radius.hpp>
 #include <sanguis/server/entities/projectiles/rocket.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/environment/object.hpp>
-#include <fcppt/cref.hpp>
+#include <sanguis/server/weapons/aoe.hpp>
+#include <sanguis/server/weapons/base_cooldown.hpp>
+#include <sanguis/server/weapons/cast_point.hpp>
+#include <sanguis/server/weapons/damage.hpp>
+#include <sanguis/server/weapons/delayed_attack.hpp>
+#include <sanguis/server/weapons/magazine_size.hpp>
+#include <sanguis/server/weapons/range.hpp>
+#include <sanguis/server/weapons/reload_time.hpp>
+#include <sanguis/server/weapons/rocket_launcher.hpp>
+#include <sanguis/server/weapons/unlimited_magazine_count.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/ref.hpp>
+
 
 sanguis::server::weapons::rocket_launcher::rocket_launcher(
 	sanguis::diff_clock const &_diff_clock,
-	weapon_type::type const _type,
-	weapons::base_cooldown const _base_cooldown,
-	weapons::damage const _damage,
-	weapons::aoe const _aoe,
-	weapons::magazine_size const _magazine_size,
-	weapons::reload_time const _reload_time
+	sanguis::weapon_type const _type,
+	sanguis::server::weapons::base_cooldown const _base_cooldown,
+	sanguis::server::weapons::damage const _damage,
+	sanguis::server::weapons::aoe const _aoe,
+	sanguis::server::weapons::magazine_size const _magazine_size,
+	sanguis::server::weapons::reload_time const _reload_time
 )
 :
-	weapon(
+	sanguis::server::weapons::weapon(
 		_diff_clock,
 		_type,
-		weapons::range(
+		sanguis::server::weapons::range(
 			20.f
 		), // FIXME
 		_magazine_size,
-		unlimited_magazine_count,
+		sanguis::server::weapons::unlimited_magazine_count,
 		_base_cooldown,
-		weapons::cast_point(
+		sanguis::server::weapons::cast_point(
 			sanguis::duration_second(
 				0.5f
 			)
 		), // FIXME
 		_reload_time
 	),
-	damage_(_damage),
-	aoe_(_aoe)
+	damage_(
+		_damage
+	),
+	aoe_(
+		_aoe
+	)
 {
 }
 
@@ -46,33 +61,25 @@ sanguis::server::weapons::rocket_launcher::~rocket_launcher()
 
 void
 sanguis::server::weapons::rocket_launcher::do_attack(
-	delayed_attack const &_attack
+	sanguis::server::weapons::delayed_attack const &_attack
 )
 {
 	_attack.environment().insert(
-		entities::unique_ptr(
-			fcppt::make_unique_ptr<
-				entities::projectiles::rocket
-			>(
-				fcppt::cref(
-					this->diff_clock()
-				),
-				fcppt::ref(
-					_attack.environment().load_context()
-				),
-				_attack.team(),
-				server::damage::unit(
-					damage_
-				),
-				server::radius(
-					aoe_.get()
-				),
-				server::direction(
-					_attack.angle().get()
-				)
+		fcppt::make_unique_ptr<
+			sanguis::server::entities::projectiles::rocket
+		>(
+			this->diff_clock(),
+			_attack.environment().load_context(),
+			_attack.team(),
+			damage_,
+			sanguis::server::radius(
+				aoe_.get()
+			),
+			sanguis::server::direction(
+				_attack.angle().get()
 			)
 		),
-		entities::insert_parameters(
+		sanguis::server::entities::insert_parameters(
 			_attack.spawn_point(),
 			_attack.angle()
 		)

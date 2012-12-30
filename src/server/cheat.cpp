@@ -1,31 +1,36 @@
+#include <sanguis/cheat_type.hpp>
+#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/weapon_type.hpp>
 #include <sanguis/server/cheat.hpp>
+#include <sanguis/server/exp.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/weapons/create.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/foreach_enumerator_start.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
+
 void
 sanguis::server::cheat(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
-	entities::player &_player,
-	cheat_type::type const _type
+	sanguis::server::entities::player &_player,
+	sanguis::cheat_type const _type
 )
 {
 	switch(
 		_type
 	)
 	{
-	case cheat_type::exp:
+	case sanguis::cheat_type::exp:
 		_player.add_exp(
-			server::exp(
+			sanguis::server::exp(
 				100000.f
 			)
 		);
 		return;
-	case cheat_type::impulse101:
+	case sanguis::cheat_type::impulse101:
 		for(
 			unsigned i = 0;
 			i < 50;
@@ -33,21 +38,21 @@ sanguis::server::cheat(
 		)
 			FCPPT_FOREACH_ENUMERATOR_START(
 				index,
-				weapon_type,
-				weapon_type::pistol
+				sanguis::weapon_type,
+				sanguis::weapon_type::pistol
 			)
 				_player.add_weapon(
-					weapons::create(
+					sanguis::server::weapons::create(
 						_diff_clock,
 						_random_generator,
 						index
 					)
 				);
 		return;
-	case cheat_type::kill:
+	case sanguis::cheat_type::kill:
 		_player.kill();
 		return;
-	case cheat_type::size:
+	case sanguis::cheat_type::size:
 		break;
 	}
 

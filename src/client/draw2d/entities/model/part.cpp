@@ -16,13 +16,12 @@
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/diff.hpp>
-#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
-#include <fcppt/ref.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 sanguis::client::draw2d::entities::model::part::part(
 	sanguis::diff_clock const &_diff_clock,
@@ -52,7 +51,7 @@ sanguis::client::draw2d::entities::model::part::part(
 		sanguis::animation_type::size
 	),
 	weapon_(
-		weapon_type::none
+		sanguis::weapon_type::none
 	),
 	animation_context_(),
 	animation_(),
@@ -76,9 +75,9 @@ sanguis::client::draw2d::entities::model::part::try_animation(
 {
 	// WHY?
 	if(
-		weapon_ == weapon_type::size
+		weapon_ == sanguis::weapon_type::size
 	)
-		weapon_ = weapon_type::none;
+		weapon_ = sanguis::weapon_type::none;
 
 	if(
 		animation_type_ == _atype
@@ -105,7 +104,7 @@ sanguis::client::draw2d::entities::model::part::try_animation(
 
 void
 sanguis::client::draw2d::entities::model::part::weapon(
-	weapon_type::type const _weapon
+	sanguis::weapon_type const _weapon
 )
 {
 	// we lose the animation here
@@ -136,12 +135,8 @@ sanguis::client::draw2d::entities::model::part::update()
 					model::loop_method(
 						animation_type_
 					),
-					fcppt::ref(
-						ref_
-					),
-					fcppt::cref(
-						diff_clock_
-					)
+					ref_,
+					diff_clock_
 				)
 			);
 

@@ -1,27 +1,34 @@
+#include <sanguis/perk_type.hpp>
 #include <sanguis/server/perks/tree/create.hpp>
-#include <sanguis/server/perks/tree/status.hpp>
+#include <sanguis/server/perks/tree/max_level.hpp>
 #include <sanguis/server/perks/tree/object_unique_ptr.hpp>
 #include <sanguis/server/perks/tree/object.hpp>
-#include <fcppt/container/tree/object_impl.hpp>
+#include <sanguis/server/perks/tree/status.hpp>
+#include <sanguis/server/perks/tree/required_parent_level.hpp>
+#include <sanguis/server/perks/tree/required_player_level.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
+
 
 sanguis::server::perks::tree::object_unique_ptr
 sanguis::server::perks::tree::create()
 {
 	// dummy head
-	tree::object_unique_ptr ret(
+	sanguis::server::perks::tree::object_unique_ptr ret(
 		fcppt::make_unique_ptr<
-			tree::object
+			sanguis::server::perks::tree::object
 		>(
-			tree::status(
-				perk_type::size,
-				tree::required_player_level(
+			sanguis::server::perks::tree::status(
+				sanguis::perk_type::size,
+				sanguis::server::perks::tree::required_player_level(
 					0u
 				),
-				tree::required_parent_level(
+				sanguis::server::perks::tree::required_parent_level(
 					0u
 				),
-				tree::max_level(
+				sanguis::server::perks::tree::max_level(
 					0u
 				)
 			)
@@ -29,101 +36,101 @@ sanguis::server::perks::tree::create()
 	);
 
 	ret->push_back(
-		tree::status(
-			perk_type::choleric,
-			tree::required_player_level(
+		sanguis::server::perks::tree::status(
+			sanguis::perk_type::choleric,
+			sanguis::server::perks::tree::required_player_level(
 				2u
 			),
-			tree::required_parent_level(
+			sanguis::server::perks::tree::required_parent_level(
 				0u
 			),
-			tree::max_level(
+			sanguis::server::perks::tree::max_level(
 				10u
 			)
 		)
 	);
 
 	ret->push_back(
-		tree::status(
-			perk_type::ias,
-			tree::required_player_level(
+		sanguis::server::perks::tree::status(
+			sanguis::perk_type::ias,
+			sanguis::server::perks::tree::required_player_level(
 				0u
 			),
-			tree::required_parent_level(
+			sanguis::server::perks::tree::required_parent_level(
 				0u
 			),
-			tree::max_level(
+			sanguis::server::perks::tree::max_level(
 				8U
 			)
 		)
 	);
 
 	ret->push_back(
-		tree::status(
-			perk_type::ims,
-			tree::required_player_level(
+		sanguis::server::perks::tree::status(
+			sanguis::perk_type::ims,
+			sanguis::server::perks::tree::required_player_level(
 				0u
 			),
-			tree::required_parent_level(
+			sanguis::server::perks::tree::required_parent_level(
 				0u
 			),
-			tree::max_level(
+			sanguis::server::perks::tree::max_level(
 				7u
 			)
 		)
 	);
 
 	ret->push_back(
-		tree::status(
-			perk_type::irs,
-			tree::required_player_level(
+		sanguis::server::perks::tree::status(
+			sanguis::perk_type::irs,
+			sanguis::server::perks::tree::required_player_level(
 				0u
 			),
-			tree::required_parent_level(
+			sanguis::server::perks::tree::required_parent_level(
 				0u
 			),
-			tree::max_level(
+			sanguis::server::perks::tree::max_level(
 				4u
 			)
 		)
 	);
 
 	ret->push_back(
-		tree::status(
-			perk_type::health,
-			tree::required_player_level(
+		sanguis::server::perks::tree::status(
+			sanguis::perk_type::health,
+			sanguis::server::perks::tree::required_player_level(
 				0u
 			),
-			tree::required_parent_level(
+			sanguis::server::perks::tree::required_parent_level(
 				0u
 			),
-			tree::max_level(
+			sanguis::server::perks::tree::max_level(
 				10u
 			)
 		)
 	);
 
-	tree::object &health(
+	sanguis::server::perks::tree::object &health(
 		ret->back()
 	);
 
 	health.push_back(
-		tree::status(
-			perk_type::regeneration,
-			tree::required_player_level(
+		sanguis::server::perks::tree::status(
+			sanguis::perk_type::regeneration,
+			sanguis::server::perks::tree::required_player_level(
 				0u
 			),
-			tree::required_parent_level(
+			sanguis::server::perks::tree::required_parent_level(
 				2u
 			),
-			tree::max_level(
+			sanguis::server::perks::tree::max_level(
 				3u
 			)
 		)
 	);
 
 	return
-		move(
+		std::move(
 			ret
 		);
 }

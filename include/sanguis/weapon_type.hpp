@@ -1,12 +1,13 @@
 #ifndef SANGUIS_WEAPON_TYPE_HPP_INCLUDED
 #define SANGUIS_WEAPON_TYPE_HPP_INCLUDED
 
+#include <sanguis/weapon_type_fwd.hpp>
+
+
 namespace sanguis
 {
 
-namespace weapon_type
-{
-enum type
+enum class weapon_type
 {
 	none,
 	melee,
@@ -18,7 +19,6 @@ enum type
 	sentry,
 	size
 };
-}
 
 }
 

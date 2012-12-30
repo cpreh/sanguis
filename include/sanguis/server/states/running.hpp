@@ -1,26 +1,27 @@
 #ifndef SANGUIS_SERVER_STATES_RUNNING_HPP_INCLUDED
 #define SANGUIS_SERVER_STATES_RUNNING_HPP_INCLUDED
 
-#include <sanguis/server/states/unpaused_fwd.hpp>
+#include <sanguis/server/console.hpp>
+#include <sanguis/server/machine.hpp>
+#include <sanguis/server/player_id.hpp>
 #include <sanguis/server/events/disconnect_fwd.hpp>
 #include <sanguis/server/events/message_fwd.hpp>
 #include <sanguis/server/global/context_fwd.hpp>
-#include <sanguis/server/machine.hpp>
-#include <sanguis/server/console.hpp>
-#include <sanguis/server/player_id.hpp>
+#include <sanguis/server/states/unpaused_fwd.hpp>
+#include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/messages/client_info.hpp>
 #include <sanguis/messages/console_command.hpp>
 #include <sanguis/messages/player_cheat.hpp>
 #include <sanguis/messages/player_choose_perk.hpp>
-#include <sanguis/messages/base_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/scoped_ptr.hpp>
+#include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
-#include <boost/statechart/state.hpp>
-#include <boost/statechart/result.hpp>
 #include <boost/statechart/custom_reaction.hpp>
+#include <boost/statechart/result.hpp>
+#include <boost/statechart/state.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -32,9 +33,9 @@ namespace states
 class running
 :
 	public boost::statechart::state<
-		running,
-		machine,
-		unpaused
+		sanguis::server::states::running,
+		sanguis::server::machine,
+		sanguis::server::states::unpaused
 >
 {
 	FCPPT_NONCOPYABLE(

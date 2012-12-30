@@ -2,7 +2,10 @@
 #define SANGUIS_SERVER_COLLISION_BODY_CALLBACK_HPP_INCLUDED
 
 #include <sanguis/server/collision/body_base_fwd.hpp>
-#include <fcppt/function/object_fwd.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <functional>
+#include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -11,9 +14,9 @@ namespace server
 namespace collision
 {
 
-typedef fcppt::function::object<
+typedef std::function<
 	void(
-		collision::body_base &
+		sanguis::server::collision::body_base &
 	)
 > body_callback;
 

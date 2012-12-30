@@ -12,7 +12,6 @@
 #include <sge/projectile/body/position.hpp>
 #include <sge/projectile/shape/shared_base_ptr.hpp>
 #include <sge/projectile/world_fwd.hpp>
-#include <fcppt/function/object.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr.hpp>

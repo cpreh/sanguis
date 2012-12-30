@@ -1,21 +1,24 @@
+#include <sanguis/friend_type.hpp>
 #include <sanguis/load/friend_name.hpp>
-#include <fcppt/assert/unreachable.hpp>
+#include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assert/unreachable.hpp>
+
 
 fcppt::string const
 sanguis::load::friend_name(
-	friend_type::type const _type
+	sanguis::friend_type const _type
 )
 {
 	switch(
 		_type
 	)
 	{
-	case friend_type::spider:
+	case sanguis::friend_type::spider:
 		return FCPPT_TEXT("friendly_spider");
-	case friend_type::sentry:
+	case sanguis::friend_type::sentry:
 		return FCPPT_TEXT("sentry");
-	case friend_type::size:
+	case sanguis::friend_type::size:
 		break;
 	}
 

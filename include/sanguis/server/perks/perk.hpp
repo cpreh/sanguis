@@ -1,12 +1,13 @@
 #ifndef SANGUIS_SERVER_PERKS_PERK_HPP_INCLUDED
 #define SANGUIS_SERVER_PERKS_PERK_HPP_INCLUDED
 
-#include <sanguis/server/perks/level_diff.hpp>
+#include <sanguis/perk_type.hpp>
+#include <sanguis/server/level.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
-#include <sanguis/server/level.hpp>
-#include <sanguis/perk_type.hpp>
+#include <sanguis/server/perks/level_diff.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -21,38 +22,42 @@ class perk
 		perk
 	);
 public:
-	virtual void
+	virtual
+	void
 	update(
-		entities::base &,
-		environment::object &
+		sanguis::server::entities::base &,
+		sanguis::server::environment::object &
 	);
 
 	void
 	raise_level(
-		entities::base &
+		sanguis::server::entities::base &
 	);
 
-	perk_type::type
+	sanguis::perk_type
 	type() const;
 
-	virtual ~perk();
+	virtual
+	~perk();
 protected:
-	explicit perk(
-		perk_type::type
+	explicit
+	perk(
+		sanguis::perk_type
 	);
 
-	server::level const
+	sanguis::server::level const
 	level() const;
 private:
-	virtual void
+	virtual
+	void
 	change(
-		entities::base &,
-		perks::level_diff
+		sanguis::server::entities::base &,
+		sanguis::server::perks::level_diff
 	) = 0;
 
-	perk_type::type const type_;
+	sanguis::perk_type const type_;
 
-	server::level level_;
+	sanguis::server::level level_;
 };
 
 }

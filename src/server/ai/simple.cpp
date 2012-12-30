@@ -25,12 +25,12 @@
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/random/variate_impl.hpp>
 #include <fcppt/random/distribution/uniform_real_impl.hpp>
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
+#include <functional>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -90,15 +90,15 @@ sanguis::server::ai::simple::simple(
 					20.f // TODO
 				),
 				me_.team(),
-				std::tr1::bind(
+				std::bind(
 					&simple::target_enters,
 					this,
-					std::tr1::placeholders::_1
+					std::placeholders::_1
 				),
-				std::tr1::bind(
+				std::bind(
 					&simple::target_leaves,
 					this,
-					std::tr1::placeholders::_1
+					std::placeholders::_1
 				)
 			)
 		)

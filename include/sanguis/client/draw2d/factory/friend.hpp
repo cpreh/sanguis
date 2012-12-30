@@ -1,9 +1,10 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_FACTORY_FRIEND_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_FACTORY_FRIEND_HPP_INCLUDED
 
+#include <sanguis/friend_type_fwd.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
-#include <sanguis/friend_type.hpp>
+
 
 namespace sanguis
 {
@@ -14,10 +15,10 @@ namespace draw2d
 namespace factory
 {
 
-entities::unique_ptr
+sanguis::client::draw2d::entities::unique_ptr
 friend_(
-	entities::model::parameters const &,
-	friend_type::type
+	sanguis::client::draw2d::entities::model::parameters const &,
+	sanguis::friend_type
 );
 
 }

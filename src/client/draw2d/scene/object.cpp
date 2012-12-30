@@ -11,8 +11,8 @@
 #include <sanguis/client/draw2d/scene/world/object.hpp>
 #include <sanguis/client/draw2d/entities/base.hpp>
 #include <sanguis/client/draw2d/entities/own.hpp>
+#include <sanguis/client/draw2d/entities/own_unique_ptr.hpp>
 #include <sanguis/client/draw2d/message/dispatcher.hpp>
-#include <sanguis/client/draw2d/sprite/order.hpp>
 #include <sanguis/client/draw2d/sprite/float_unit.hpp>
 #include <sanguis/client/draw2d/sprite/state_choices.hpp>
 #include <sanguis/client/draw2d/sunlight/make_color.hpp>
@@ -56,20 +56,18 @@
 #include <sge/sprite/state/object_impl.hpp>
 #include <sge/sprite/state/scoped.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
+#include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/math/matrix/arithmetic.hpp>
 #include <fcppt/math/matrix/translation.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/function/object.hpp>
-#include <fcppt/tr1/functional.hpp>
-#include <fcppt/cref.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector30.hpp>
-#include <utility>
 #include <ctime>
+#include <functional>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -114,12 +112,8 @@ sanguis::client::draw2d::scene::object::object(
 		fcppt::make_unique_ptr<
 			scene::hud
 		>(
-			fcppt::ref(
-				_font_object
-			),
-			fcppt::ref(
-				renderer_
-			),
+			_font_object,
+			renderer_,
 			_current_time
 		)
 	),
@@ -127,12 +121,8 @@ sanguis::client::draw2d::scene::object::object(
 		fcppt::make_unique_ptr<
 			scene::world::object
 		>(
-			fcppt::ref(
-				renderer_
-			),
-			fcppt::cref(
-				_resources.resources().textures()
-			)
+			renderer_,
+			_resources.resources().textures()
 		)
 	),
 	paused_(
@@ -142,53 +132,41 @@ sanguis::client::draw2d::scene::object::object(
 		sprite::center::value_type::null()
 	),
 	transform_callback_(
-		std::tr1::bind(
+		std::bind(
 			&object::transform,
 			this,
-			std::tr1::placeholders::_1
+			std::placeholders::_1
 		)
 	),
 	insert_own_callback_(
-		std::tr1::bind(
+		std::bind(
 			&object::insert_own,
 			this,
-			std::tr1::placeholders::_1
+			std::placeholders::_1
 		)
 	),
 	message_environment_(
 		fcppt::make_unique_ptr<
 			message_environment
 		>(
-			fcppt::ref(
-				*this
-			),
-			fcppt::ref(
-				*hud_
-			),
-			fcppt::ref(
-				*world_
-			)
+			*this,
+			*hud_,
+			*world_
 		)
 	),
 	control_environment_(
 		fcppt::make_unique_ptr<
 			scene::control_environment
 		>(
-			fcppt::ref(
-				*this
-			)
+			*this
 		)
 	),
 	message_dispatcher_(
 		fcppt::make_unique_ptr<
 			message::dispatcher
 		>(
-			fcppt::ref(
-				*message_environment_
-			),
-			fcppt::ref(
-				_charconv_system
-			)
+			*message_environment_,
+			_charconv_system
 		)
 	),
 	entities_(),
@@ -200,15 +178,9 @@ sanguis::client::draw2d::scene::object::object(
 		fcppt::make_unique_ptr<
 			scene::background
 		>(
-			fcppt::cref(
-				_resources
-			),
-			fcppt::ref(
-				client_system_
-			),
-			fcppt::ref(
-				_viewport_manager
-			)
+			_resources,
+			client_system_,
+			_viewport_manager
 		)
 	),
 	material_state_(
@@ -276,10 +248,10 @@ sanguis::client::draw2d::scene::object::process_message(
 	dispatcher(
 		_message,
 		*message_dispatcher_,
-		std::tr1::bind(
+		std::bind(
 			&message::dispatcher::process_default_msg,
 			message_dispatcher_.get(),
-			std::tr1::placeholders::_1
+			std::placeholders::_1
 		)
 	);
 }
@@ -523,7 +495,7 @@ sanguis::client::draw2d::scene::object::render_systems(
 
 sanguis::client::draw2d::entities::base &
 sanguis::client::draw2d::scene::object::insert(
-	entities::unique_ptr _entity,
+	entities::unique_ptr &&_entity,
 	entity_id const _id
 )
 {
@@ -536,7 +508,7 @@ sanguis::client::draw2d::scene::object::insert(
 		fcppt::container::ptr::insert_unique_ptr_map(
 			entities_,
 			_id,
-			move(
+			std::move(
 				_entity
 			)
 		)
@@ -559,11 +531,14 @@ sanguis::client::draw2d::scene::object::insert(
 
 sanguis::client::draw2d::entities::own &
 sanguis::client::draw2d::scene::object::insert_own(
-	entities::own_auto_ptr _entity
+	entities::own_unique_ptr &&_entity
 )
 {
-	own_entities_.push_back(
-		_entity
+	fcppt::container::ptr::push_back_unique_ptr(
+		own_entities_,
+		std::move(
+			_entity
+		)
 	);
 
 	return own_entities_.back();

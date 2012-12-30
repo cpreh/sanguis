@@ -1,106 +1,132 @@
+#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/entity_type.hpp>
+#include <sanguis/friend_type.hpp>
+#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/load/friend_name.hpp>
+#include <sanguis/messages/add_friend.hpp>
+#include <sanguis/messages/auto_ptr.hpp>
+#include <sanguis/messages/create.hpp>
+#include <sanguis/messages/types/enum.hpp>
+#include <sanguis/server/health.hpp>
+#include <sanguis/server/player_id.hpp>
+#include <sanguis/server/team.hpp>
+#include <sanguis/server/ai/base.hpp>
+#include <sanguis/server/ai/create_function.hpp>
+#include <sanguis/server/damage/armor.hpp>
+#include <sanguis/server/entities/body_velocity_combiner.hpp>
 #include <sanguis/server/entities/friend.hpp>
 #include <sanguis/server/entities/circle_from_dim.hpp>
 #include <sanguis/server/entities/default_solid.hpp>
+#include <sanguis/server/entities/movement_speed.hpp>
+#include <sanguis/server/entities/with_ai.hpp>
+#include <sanguis/server/entities/with_body.hpp>
+#include <sanguis/server/entities/with_buffs.hpp>
+#include <sanguis/server/entities/with_health.hpp>
+#include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/pickups/pickup.hpp>
 #include <sanguis/server/entities/property/initial.hpp>
-#include <sanguis/server/ai/base.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
-#include <sanguis/load/friend_name.hpp>
-#include <sanguis/messages/add_friend.hpp>
-#include <sanguis/messages/create.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
-#include <fcppt/math/dim/object_impl.hpp>
+#include <sanguis/server/weapons/unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
+
 
 sanguis::server::entities::friend_::friend_(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
-	friend_type::type const _ftype,
-	server::environment::load_context &_load_context,
-	damage::armor const &_armor,
-	server::health const _health,
-	entities::movement_speed const _movement_speed,
-	ai::create_function const &_ai,
-	weapons::unique_ptr _weapon
+	sanguis::friend_type const _ftype,
+	sanguis::server::environment::load_context &_load_context,
+	sanguis::server::damage::armor const &_armor,
+	sanguis::server::health const _health,
+	sanguis::server::entities::movement_speed const _movement_speed,
+	sanguis::server::ai::create_function const &_ai,
+	sanguis::server::weapons::unique_ptr &&_weapon
 )
 :
-	with_ai(
+	sanguis::server::entities::body_velocity_combiner(),
+	sanguis::server::entities::with_ai(
 		_diff_clock,
 		_random_generator,
 		_ai,
-		move(
+		std::move(
 			_weapon
 		)
 	),
-	with_body(
-		entities::circle_from_dim(
+	sanguis::server::entities::with_body(
+		sanguis::server::entities::circle_from_dim(
 			_load_context.entity_dim(
-				load::friend_name(
+				sanguis::load::friend_name(
 					_ftype
 				)
 			),
-			entities::default_solid()
+			sanguis::server::entities::default_solid()
 		)
 	),
-	with_buffs(),
-	with_health(
+	sanguis::server::entities::with_buffs(),
+	sanguis::server::entities::with_health(
 		_diff_clock,
 		_health,
 		_armor
 	),
-	with_velocity(
-		property::initial(
+	sanguis::server::entities::with_velocity(
+		sanguis::server::entities::property::initial(
 			_movement_speed.get(),
 			0
 		),
-		server::direction(
+		sanguis::server::direction(
 			0.f
 		)
 	),
-	ftype_(_ftype)
+	ftype_(
+		_ftype
+	)
 {
 }
 
 void
 sanguis::server::entities::friend_::on_update()
 {
-	with_ai::on_update();
+	sanguis::server::entities::with_ai::on_update();
 
-	with_buffs::on_update();
+	sanguis::server::entities::with_buffs::on_update();
 
-	with_health::on_update();
+	sanguis::server::entities::with_health::on_update();
 }
 
-sanguis::entity_type::type
+sanguis::entity_type
 sanguis::server::entities::friend_::type() const
 {
-	return entity_type::friend_;
+	return sanguis::entity_type::friend_;
 }
 
-sanguis::server::team::type
+sanguis::server::team
 sanguis::server::entities::friend_::team() const
 {
-	return server::team::players;
+	return sanguis::server::team::players;
 }
 
 sanguis::messages::auto_ptr
 sanguis::server::entities::friend_::add_message(
-	server::player_id const
+	sanguis::server::player_id const
 ) const
 {
 	return
-		messages::create(
-			messages::add_friend(
+		sanguis::messages::create(
+			sanguis::messages::add_friend(
 				this->id(),
 				this->center().get(),
 				this->angle().get(),
 				this->speed().get(),
 				this->current_health().get(),
 				this->max_health().get(),
-				ftype_
+				static_cast<
+					sanguis::messages::types::enum_
+				>(
+					ftype_
+				)
 			)
 		);
 }

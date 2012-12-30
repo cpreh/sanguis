@@ -4,7 +4,6 @@
 #include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
-#include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -46,8 +45,6 @@ protected:
 private:
 	using container::orientation;
 	using container::speed;
-
-	draw2d::funit angle_;
 };
 
 }

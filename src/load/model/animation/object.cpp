@@ -24,11 +24,11 @@
 #include <fcppt/math/box/object_impl.hpp>
 #include <fcppt/math/box/output.hpp>
 #include <fcppt/math/box/contains.hpp>
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
+#include <functional>
 #include <fcppt/config/external_end.hpp>
 
 namespace
@@ -169,10 +169,10 @@ sanguis::load::model::animation::object::load() const
 					param_.path() / texture_
 				),
 				frame_cache_,
-				std::tr1::bind(
+				std::bind(
 					&object::fill_cache,
 					this,
-					std::tr1::placeholders::_1
+					std::placeholders::_1
 				)
 			)
 		);

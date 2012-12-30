@@ -1,42 +1,49 @@
-#include <sanguis/server/entities/exp_area.hpp>
-#include <sanguis/server/entities/player.hpp>
+#include <sanguis/entity_type.hpp>
+#include <sanguis/messages/auto_ptr.hpp>
+#include <sanguis/server/center.hpp>
+#include <sanguis/server/player_id.hpp>
+#include <sanguis/server/radius.hpp>
+#include <sanguis/server/team.hpp>
+#include <sanguis/server/collision/body_base_fwd.hpp>
+#include <sanguis/server/collision/circle_ghost.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/collision_groups.hpp>
 #include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/exp_area.hpp>
 #include <sanguis/server/entities/player.hpp>
-#include <sanguis/server/collision/circle_ghost.hpp>
+#include <sanguis/server/entities/with_ghosts.hpp>
 #include <sanguis/messages/base.hpp>
-#include <fcppt/container/map_impl.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/dynamic_cast.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/container/map_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 sanguis::server::entities::exp_area::exp_area(
-	server::exp const _exp
+	sanguis::server::exp const _exp
 )
 :
-	entities::with_ghosts(),
-	exp_(_exp),
+	sanguis::server::entities::with_ghosts(),
+	exp_(
+		_exp
+	),
 	player_links_()
 {
 	this->add_ghost(
-		collision::ghost_unique_ptr(
-			fcppt::make_unique_ptr<
-				collision::circle_ghost
-			>(
-				entities::collision_groups(
-					this->type(),
-					this->team()
-				),
-				server::radius(
-					2000.f // TODO
-				),
-				this->body_enter_callback(),
-				this->body_exit_callback()
-			)
+		fcppt::make_unique_ptr<
+			sanguis::server::collision::circle_ghost
+		>(
+			sanguis::server::entities::collision_groups(
+				this->type(),
+				this->team()
+			),
+			sanguis::server::radius(
+				2000.f // TODO
+			),
+			this->body_enter_callback(),
+			this->body_exit_callback()
 		)
 	);
 }
@@ -50,7 +57,7 @@ sanguis::server::entities::exp_area::center() const
 {
 	// FIXME: This is not needed anywhere!
 	return
-		server::center(
+		sanguis::server::center(
 			server::center::value_type::null()
 		);
 }
@@ -80,22 +87,18 @@ sanguis::server::entities::exp_area::on_remove()
 	}
 
 	for(
-		weak_link_map::iterator it(
-			player_links_.begin()
-		);
-		it != player_links_.end();
-		++it
+		auto &player_link : player_links_
 	)
 		fcppt::dynamic_cast_<
-			player &
+			sanguis::server::entities::player &
 		>(
-			*it->second
+			*player_link.second
 		).add_exp(
-			server::exp(
+			sanguis::server::exp(
 				exp_.get()
 				/
 				static_cast<
-					exp::value_type
+					sanguis::server::exp::value_type
 				>(
 					player_links_.size()
 				)
@@ -111,22 +114,22 @@ sanguis::server::entities::exp_area::dead() const
 
 sanguis::messages::auto_ptr
 sanguis::server::entities::exp_area::add_message(
-	player_id const
+	sanguis::server::player_id const
 ) const
 {
-	return messages::auto_ptr(); // TODO: get rid of this
+	return sanguis::messages::auto_ptr(); // TODO: get rid of this
 }
 
-sanguis::entity_type::type
+sanguis::entity_type
 sanguis::server::entities::exp_area::type() const
 {
-	return entity_type::projectile; // FIXME
+	return sanguis::entity_type::projectile; // FIXME
 }
 
-sanguis::server::team::type
+sanguis::server::team
 sanguis::server::entities::exp_area::team() const
 {
-	return team::monsters; // FIXME
+	return sanguis::server::team::monsters; // FIXME
 }
 
 bool
@@ -137,12 +140,12 @@ sanguis::server::entities::exp_area::server_only() const
 
 boost::logic::tribool const
 sanguis::server::entities::exp_area::can_collide_with(
-	collision::body_base const &_base
+	sanguis::server::collision::body_base const &_base
 ) const
 {
 	return
 		dynamic_cast<
-			entities::player const *
+			sanguis::server::entities::player const *
 		>(
 			&_base
 		)
@@ -151,12 +154,12 @@ sanguis::server::entities::exp_area::can_collide_with(
 
 void
 sanguis::server::entities::exp_area::body_enter(
-	collision::body_base &_body
+	sanguis::server::collision::body_base &_body
 )
 {
-	entities::base &entity(
+	sanguis::server::entities::base &entity(
 		dynamic_cast<
-			entities::base &
+			sanguis::server::entities::base &
 		>(
 			_body
 		)
@@ -170,12 +173,12 @@ sanguis::server::entities::exp_area::body_enter(
 
 void
 sanguis::server::entities::exp_area::body_exit(
-	collision::body_base &_body
+	sanguis::server::collision::body_base &_body
 )
 {
 	player_links_.erase(
 		dynamic_cast<
-			entities::base const &
+			sanguis::server::entities::base const &
 		>(
 			_body
 		).id()

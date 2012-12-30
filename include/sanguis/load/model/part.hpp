@@ -27,7 +27,7 @@ class part
 public:
 	weapon_category const &
 	operator[](
-		weapon_type::type
+		sanguis::weapon_type
 	) const;
 
 	~part();
@@ -38,7 +38,7 @@ public:
 	);
 private:
 	typedef boost::ptr_map<
-		weapon_type::type,
+		sanguis::weapon_type,
 		weapon_category
 	> category_map;
 

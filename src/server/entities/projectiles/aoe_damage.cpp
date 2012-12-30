@@ -1,70 +1,79 @@
-#include <sanguis/server/entities/projectiles/aoe_damage.hpp>
+#include <sanguis/aoe_projectile_type.hpp>
+#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/duration.hpp>
+#include <sanguis/server/dim.hpp>
+#include <sanguis/server/direction.hpp>
+#include <sanguis/server/radius.hpp>
+#include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/burn.hpp>
-#include <sanguis/server/environment/object.hpp>
-#include <fcppt/container/map_impl.hpp>
-#include <fcppt/math/dim/arithmetic.hpp>
-#include <fcppt/math/dim/object_impl.hpp>
+#include <sanguis/server/damage/array.hpp>
+#include <sanguis/server/entities/movement_speed.hpp>
+#include <sanguis/server/entities/with_auras.hpp>
+#include <sanguis/server/entities/with_health_fwd.hpp>
+#include <sanguis/server/entities/projectiles/aoe_damage.hpp>
+#include <sanguis/server/entities/projectiles/aoe_projectile.hpp>
+#include <sanguis/server/entities/projectiles/damage_per_pulse.hpp>
+#include <sanguis/server/entities/projectiles/indeterminate.hpp>
+#include <sanguis/server/entities/projectiles/life_time.hpp>
+#include <sanguis/server/entities/projectiles/pulses.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/cref.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/math/dim/arithmetic.hpp>
+
 
 sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 	sanguis::diff_clock const &_diff_clock,
-	team::type const _team,
-	server::radius const _radius,
-	damage::unit const _damage_per_pulse,
-	unsigned const _max_pulses,
+	sanguis::server::team const _team,
+	sanguis::server::radius const _radius,
+	sanguis::server::entities::projectiles::damage_per_pulse const _damage_per_pulse,
+	sanguis::server::entities::projectiles::pulses const _pulses,
 	sanguis::duration const &_pulse_diff,
-	damage::array const &_damage_values
+	sanguis::server::damage::array const &_damage_values
 )
 :
-	aoe_projectile(
+	sanguis::server::entities::projectiles::aoe_projectile(
 		_diff_clock,
-		aoe_projectile_type::aoe_damage,
+		sanguis::aoe_projectile_type::aoe_damage,
 		_team,
-		entities::movement_speed(
+		sanguis::server::entities::movement_speed(
 			0.f
 		),
-		server::dim(
+		sanguis::server::dim(
 			_radius.get(),
 			_radius.get()
 		)
 		*
 		static_cast<
-			server::dim::value_type
+			sanguis::server::dim::value_type
 		>(
 			2
 		),
-		projectiles::life_time(
+		sanguis::server::entities::projectiles::life_time(
 			_pulse_diff
 			*
 			static_cast<
 				sanguis::duration::rep
 			>(
-				_max_pulses
+				_pulses.get()
 			)
 		),
-		indeterminate::yes,
+		sanguis::server::entities::projectiles::indeterminate::yes,
 		_radius,
-		server::direction(
+		sanguis::server::direction(
 			0.f
 		)
-	)
+	),
+	sanguis::server::entities::with_auras()
 {
 	this->add_aura(
-		auras::unique_ptr(
-			fcppt::make_unique_ptr<
-				auras::burn
-			>(
-				fcppt::cref(
-					_diff_clock
-				),
-				_radius,
-				_team,
-				_damage_per_pulse,
-				_pulse_diff,
-				_damage_values
-			)
+		fcppt::make_unique_ptr<
+			sanguis::server::auras::burn
+		>(
+			_diff_clock,
+			_radius,
+			_team,
+			_damage_per_pulse.get(),
+			_pulse_diff,
+			_damage_values
 		)
 	);
 }
@@ -75,7 +84,7 @@ sanguis::server::entities::projectiles::aoe_damage::~aoe_damage()
 
 void
 sanguis::server::entities::projectiles::aoe_damage::do_damage(
-	with_health &
+	sanguis::server::entities::with_health &
 )
 {
 }

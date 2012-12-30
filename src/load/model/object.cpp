@@ -28,7 +28,6 @@
 #include <fcppt/random/variate.hpp>
 #include <fcppt/random/distribution/uniform_int.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/next_prior.hpp>
@@ -75,9 +74,7 @@ sanguis::load::model::object::random_part() const
 			fcppt::make_unique_ptr<
 				part_rand
 			>(
-				fcppt::ref(
-					random_generator_
-				),
+				random_generator_,
 				part_map_distribution(
 					part_map_distribution::min(
 						0u

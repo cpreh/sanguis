@@ -39,8 +39,8 @@ class weapon
 :
 	public
 		boost::statechart::state_machine<
-			weapon,
-			states::ready
+			sanguis::server::weapons::weapon,
+			sanguis::server::weapons::states::ready
 		>
 {
 	FCPPT_NONCOPYABLE(
@@ -49,7 +49,7 @@ class weapon
 protected:
 	weapon(
 		sanguis::diff_clock const &,
-		sanguis::weapon_type::type,
+		sanguis::weapon_type,
 		sanguis::server::weapons::range,
 		sanguis::server::weapons::magazine_size,
 		sanguis::server::weapons::magazine_count,
@@ -70,7 +70,7 @@ public:
 		sanguis::server::vector const &to
 	);
 
-	sanguis::weapon_type::type
+	sanguis::weapon_type
 	type() const;
 
 	void
@@ -161,7 +161,7 @@ private:
 
 	sanguis::diff_clock const &diff_clock_;
 
-	sanguis::weapon_type::type const type_;
+	sanguis::weapon_type const type_;
 
 	sanguis::server::weapons::range const range_;
 

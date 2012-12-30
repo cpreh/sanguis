@@ -3,17 +3,22 @@
 #include <sanguis/exception.hpp>
 #include <fcppt/text.hpp>
 
+
 sanguis::server::entities::auto_weak_link::auto_weak_link()
 :
-	ref_(0)
+	ref_(
+		nullptr
+	)
 {
 }
 
 sanguis::server::entities::auto_weak_link::auto_weak_link(
-	base &_ref
+	sanguis::server::entities::base &_ref
 )
 :
-	ref_(&_ref)
+	ref_(
+		&_ref
+	)
 {
 	this->add_me();
 }
@@ -22,8 +27,12 @@ sanguis::server::entities::auto_weak_link::auto_weak_link(
 	auto_weak_link const &_old
 )
 :
-	auto_weak_hook(_old),
-	ref_(_old.ref_)
+	auto_weak_hook(
+		_old
+	),
+	ref_(
+		_old.ref_
+	)
 {
 	if(
 		_old.is_linked()
@@ -82,6 +91,11 @@ sanguis::server::entities::auto_weak_link::get() const
 	return &this->checked_ref();
 }
 
+sanguis::server::entities::auto_weak_link::operator bool() const
+{
+	return this->is_linked();
+}
+
 sanguis::server::entities::base &
 sanguis::server::entities::auto_weak_link::checked_ref() const
 {
@@ -106,10 +120,4 @@ sanguis::server::entities::auto_weak_link::add_me()
 	ref_->insert_link(
 		*this
 	);
-}
-
-bool
-sanguis::server::entities::auto_weak_link::boolean_test() const
-{
-	return this->is_linked();
 }

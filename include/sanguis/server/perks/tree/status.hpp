@@ -1,12 +1,13 @@
 #ifndef SANGUIS_SERVER_PERKS_TREE_STATUS_HPP_INCLUDED
 #define SANGUIS_SERVER_PERKS_TREE_STATUS_HPP_INCLUDED
 
-#include <sanguis/server/perks/tree/status_fwd.hpp>
+#include <sanguis/perk_type.hpp>
+#include <sanguis/server/level.hpp>
 #include <sanguis/server/perks/tree/max_level.hpp>
 #include <sanguis/server/perks/tree/required_player_level.hpp>
 #include <sanguis/server/perks/tree/required_parent_level.hpp>
-#include <sanguis/server/level.hpp>
-#include <sanguis/perk_type.hpp>
+#include <sanguis/server/perks/tree/status_fwd.hpp>
+
 
 namespace sanguis
 {
@@ -21,39 +22,39 @@ class status
 {
 public:
 	status(
-		perk_type::type,
-		tree::required_player_level,
-		tree::required_parent_level,
-		tree::max_level
+		sanguis::perk_type,
+		sanguis::server::perks::tree::required_player_level,
+		sanguis::server::perks::tree::required_parent_level,
+		sanguis::server::perks::tree::max_level
 	);
 
 	void
 	choose();
 
-	tree::required_player_level const
+	sanguis::server::perks::tree::required_player_level const
 	required_player_level() const;
 
-	tree::required_parent_level const
+	sanguis::server::perks::tree::required_parent_level const
 	required_parent_level() const;
 
-	tree::max_level const
+	sanguis::server::perks::tree::max_level const
 	max_level() const;
 
-	server::level const
+	sanguis::server::level const
 	level() const;
 
-	perk_type::type
+	sanguis::perk_type
 	type() const;
 private:
-	perk_type::type type_;
+	sanguis::perk_type type_;
 
-	tree::required_player_level required_player_level_;
+	sanguis::server::perks::tree::required_player_level required_player_level_;
 
-	tree::required_parent_level required_parent_level_;
+	sanguis::server::perks::tree::required_parent_level required_parent_level_;
 
-	tree::max_level max_level_;
+	sanguis::server::perks::tree::max_level max_level_;
 
-	server::level level_;
+	sanguis::server::level level_;
 };
 
 }

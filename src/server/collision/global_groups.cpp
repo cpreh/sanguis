@@ -1,18 +1,18 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/server/collision/global_groups.hpp>
 #include <sanguis/server/collision/group.hpp>
-#include <sanguis/exception.hpp>
 #include <sge/projectile/world.hpp>
 #include <sge/projectile/group/object.hpp>
-#include <fcppt/assign/make_container.hpp>
-#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/foreach_enumerator.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assign/make_container.hpp>
+#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <vector>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
+
 
 sanguis::server::collision::global_groups::global_groups(
 	sge::projectile::world &_world
@@ -22,7 +22,7 @@ sanguis::server::collision::global_groups::global_groups(
 {
 	FCPPT_FOREACH_ENUMERATOR(
 		index,
-		collision::group
+		sanguis::server::collision::group
 	)
 		fcppt::container::ptr::insert_unique_ptr_map(
 			groups_,
@@ -30,16 +30,14 @@ sanguis::server::collision::global_groups::global_groups(
 			fcppt::make_unique_ptr<
 				sge::projectile::group::object
 			>(
-				fcppt::ref(
-					_world
-				)
+				_world
 			)
 		);
 
 	typedef std::vector<
 		std::pair<
-			group::type,
-			group::type
+			sanguis::server::collision::group,
+			sanguis::server::collision::group
 		>
 	> init_map;
 
@@ -49,50 +47,50 @@ sanguis::server::collision::global_groups::global_groups(
 		>
 		(
 			std::make_pair(
-				collision::group::enemy,
-				collision::group::projectile_player
+				sanguis::server::collision::group::enemy,
+				sanguis::server::collision::group::projectile_player
 			)
 		)
 		(
 			std::make_pair(
-				collision::group::pickup,
-				collision::group::player
+				sanguis::server::collision::group::pickup,
+				sanguis::server::collision::group::player
 			)
 		)
 		(
 			std::make_pair(
-				collision::group::player,
-				collision::group::projectile_enemy
+				sanguis::server::collision::group::player,
+				sanguis::server::collision::group::projectile_enemy
 			)
 		)
 		(
 			std::make_pair(
-				collision::group::sight_range,
-				collision::group::enemy
+				sanguis::server::collision::group::sight_range,
+				sanguis::server::collision::group::enemy
 			)
 		)
 		(
 			std::make_pair(
-				collision::group::sight_range,
-				collision::group::player
+				sanguis::server::collision::group::sight_range,
+				sanguis::server::collision::group::player
 			)
 		)
 		(
 			std::make_pair(
-				collision::group::sight_range,
-				collision::group::pickup
+				sanguis::server::collision::group::sight_range,
+				sanguis::server::collision::group::pickup
 			)
 		)
 		(
 			std::make_pair(
-				collision::group::sight_range,
-				collision::group::projectile_enemy
+				sanguis::server::collision::group::sight_range,
+				sanguis::server::collision::group::projectile_enemy
 			)
 		)
 		(
 			std::make_pair(
-				collision::group::sight_range,
-				collision::group::projectile_player
+				sanguis::server::collision::group::sight_range,
+				sanguis::server::collision::group::projectile_player
 			)
 		)
 	);
@@ -120,10 +118,10 @@ sanguis::server::collision::global_groups::~global_groups()
 
 sge::projectile::group::object &
 sanguis::server::collision::global_groups::group(
-	collision::group::type const _group
+	sanguis::server::collision::group const _group
 ) const
 {
-	collision::group_map::iterator const it(
+	sanguis::server::collision::group_map::iterator const it(
 		groups_.find(
 			_group
 		)

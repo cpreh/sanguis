@@ -2,7 +2,9 @@
 #define SANGUIS_CLIENT_SERVER_CALLBACK_HPP_INCLUDED
 
 #include <alda/net/port.hpp>
-#include <fcppt/function/object_fwd.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <functional>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -10,7 +12,7 @@ namespace sanguis
 namespace client
 {
 
-typedef fcppt::function::object<
+typedef std::function<
 	void (
 		alda::net::port
 	)

@@ -1,6 +1,7 @@
+#include <sanguis/perk_type.hpp>
+#include <sanguis/client/gui/object.hpp>
 #include <sanguis/client/gui/perk/item.hpp>
 #include <sanguis/client/gui/perk/node.hpp>
-#include <sanguis/client/gui/object.hpp>
 #include <sanguis/client/perk/info.hpp>
 #include <sanguis/client/perk/to_string.hpp>
 #include <sge/cegui/to_cegui_string.hpp>
@@ -8,10 +9,11 @@
 #include <CEGUI/widgets/Tree.h>
 #include <fcppt/config/external_end.hpp>
 
+
 sanguis::client::gui::perk::item::item(
-	client::gui::perk::node const &_parent,
-	client::gui::object &_gui,
-	client::perk::info const &_info
+	sanguis::client::gui::perk::node const &_parent,
+	sanguis::client::gui::object &_gui,
+	sanguis::client::perk::info const &_info
 )
 :
 	parent_(
@@ -22,14 +24,14 @@ sanguis::client::gui::perk::item::item(
 	),
 	widget_(
 		sge::cegui::to_cegui_string(
-			client::perk::to_string(
+			sanguis::client::perk::to_string(
 				perk_type_
 			),
 			_gui.charconv_system()
 		),
 		0, // item id
 		const_cast<
-			sanguis::perk_type::type *
+			sanguis::perk_type *
 		>(
 			&perk_type_
 		), // user data
@@ -54,7 +56,7 @@ sanguis::client::gui::perk::item::~item()
 	);
 }
 
-sanguis::perk_type::type
+sanguis::perk_type
 sanguis::client::gui::perk::item::perk_type() const
 {
 	return perk_type_;

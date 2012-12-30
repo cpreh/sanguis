@@ -8,7 +8,6 @@
 #include <sge/renderer/texture/planar.hpp>
 #include <sge/texture/part_raw_ref.hpp>
 #include <sge/texture/part_fwd.hpp>
-#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 
@@ -75,9 +74,7 @@ sanguis::load::model::animation::context::update()
 					fcppt::make_shared_ptr<
 						sge::texture::part_raw_ref
 					>(
-						fcppt::ref(
-							*texture
-						),
+						*texture,
 						frame_it->area()
 					)
 				)

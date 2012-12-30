@@ -7,7 +7,6 @@
 #include <sanguis/client/gui/object_fwd.hpp>
 #include <sge/charconv/system_fwd.hpp>
 #include <sge/cegui/toolbox/scoped_layout.hpp>
-#include <fcppt/function/object.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/config/external_begin.hpp>

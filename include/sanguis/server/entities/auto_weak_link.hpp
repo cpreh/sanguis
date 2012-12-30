@@ -3,7 +3,6 @@
 
 #include <sanguis/server/entities/auto_weak_hook.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
-#include <fcppt/safe_bool.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -23,14 +22,12 @@ class auto_weak_link
 :
 	public sanguis::server::entities::auto_weak_hook
 {
-	FCPPT_SAFE_BOOL(
-		auto_weak_link
-	)
 public:
 	auto_weak_link();
 
-	explicit auto_weak_link(
-		base &ref
+	explicit
+	auto_weak_link(
+		sanguis::server::entities::base &ref
 	);
 
 	auto_weak_link(
@@ -47,25 +44,25 @@ public:
 	void
 	unlink();
 
-	base &
+	sanguis::server::entities::base &
 	operator*() const;
 
-	base *
+	sanguis::server::entities::base *
 	operator->() const;
 
-	base *
+	sanguis::server::entities::base *
 	get() const;
+
+	explicit
+	operator bool() const;
 private:
-	base &
+	sanguis::server::entities::base &
 	checked_ref() const;
 
 	void
 	add_me();
 
-	bool
-	boolean_test() const;
-
-	base *ref_;
+	sanguis::server::entities::base *ref_;
 };
 
 FCPPT_PP_POP_WARNING

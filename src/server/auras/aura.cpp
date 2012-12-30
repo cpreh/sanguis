@@ -1,7 +1,13 @@
+#include <sanguis/entity_id.hpp>
+#include <sanguis/server/radius.hpp>
+#include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/collision_groups.hpp>
+#include <sanguis/server/auras/influence.hpp>
 #include <sanguis/server/collision/circle_ghost.hpp>
+#include <sanguis/server/collision/ghost_base.hpp>
 #include <sanguis/server/collision/ghost_unique_ptr.hpp>
+#include <sanguis/server/collision/group_vector.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -9,13 +15,14 @@
 #include <boost/logic/tribool.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 sanguis::server::auras::aura::~aura()
 {
 }
 
 void
 sanguis::server::auras::aura::owner(
-	entity_id const _owner
+	sanguis::entity_id const _owner
 )
 {
 	owner_ = _owner;
@@ -25,9 +32,9 @@ sanguis::server::collision::ghost_unique_ptr
 sanguis::server::auras::aura::recreate()
 {
 	return
-		collision::ghost_unique_ptr(
+		sanguis::server::collision::ghost_unique_ptr(
 			fcppt::make_unique_ptr<
-				collision::circle_ghost
+				sanguis::server::collision::circle_ghost
 			>(
 				this->collision_groups(),
 				radius_,
@@ -38,19 +45,26 @@ sanguis::server::auras::aura::recreate()
 }
 
 sanguis::server::auras::aura::aura(
-	server::radius const _radius,
-	team::type const _team,
-	influence::type const _influence
+	sanguis::server::radius const _radius,
+	sanguis::server::team const _team,
+	sanguis::server::auras::influence const _influence
 )
 :
-	radius_(_radius),
-	team_(_team),
-	influence_(_influence),
+	sanguis::server::collision::ghost_base(),
+	radius_(
+		_radius
+	),
+	team_(
+		_team
+	),
+	influence_(
+		_influence
+	),
 	owner_()
 {
 }
 
-sanguis::entity_id
+sanguis::entity_id const
 sanguis::server::auras::aura::owner() const
 {
 	return *owner_;
@@ -60,7 +74,7 @@ sanguis::server::collision::group_vector const
 sanguis::server::auras::aura::collision_groups() const
 {
 	return
-		auras::collision_groups(
+		sanguis::server::auras::collision_groups(
 			team_,
 			influence_
 		);
@@ -68,7 +82,7 @@ sanguis::server::auras::aura::collision_groups() const
 
 boost::logic::tribool const
 sanguis::server::auras::aura::can_collide_with(
-	collision::body_base const &
+	sanguis::server::collision::body_base const &
 ) const
 {
 	return true;
@@ -76,12 +90,12 @@ sanguis::server::auras::aura::can_collide_with(
 
 void
 sanguis::server::auras::aura::body_enter(
-	collision::body_base &_base
+	sanguis::server::collision::body_base &_base
 )
 {
 	this->enter(
 		dynamic_cast<
-			entities::with_body &
+			sanguis::server::entities::with_body &
 		>(
 			_base
 		)
@@ -90,12 +104,12 @@ sanguis::server::auras::aura::body_enter(
 
 void
 sanguis::server::auras::aura::body_exit(
-	collision::body_base &_base
+	sanguis::server::collision::body_base &_base
 )
 {
 	this->leave(
 		dynamic_cast<
-			entities::with_body &
+			sanguis::server::entities::with_body &
 		>(
 			_base
 		)

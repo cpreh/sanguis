@@ -2,7 +2,10 @@
 #define SANGUIS_SERVER_WORLD_OBJECT_UNIQUE_PTR_HPP_INCLUDED
 
 #include <sanguis/server/world/object_fwd.hpp>
-#include <fcppt/unique_ptr.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <memory>
+#include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -11,8 +14,8 @@ namespace server
 namespace world
 {
 
-typedef fcppt::unique_ptr<
-	object
+typedef std::unique_ptr<
+	sanguis::server::world::object
 > object_unique_ptr;
 
 }

@@ -1,18 +1,21 @@
 #include <sanguis/client/make_send_callback.hpp>
 #include <sanguis/client/machine.hpp>
+#include <sanguis/client/send_callback.hpp>
 #include <sanguis/messages/base.hpp>
-#include <fcppt/function/object.hpp>
-#include <fcppt/tr1/functional.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <functional>
+#include <fcppt/config/external_end.hpp>
+
 
 sanguis::client::send_callback const
 sanguis::client::make_send_callback(
-	client::machine &_machine
+	sanguis::client::machine &_machine
 )
 {
 	return
-		std::tr1::bind(
-			&client::machine::send,
+		std::bind(
+			&sanguis::client::machine::send,
 			&_machine,
-			std::tr1::placeholders::_1
+			std::placeholders::_1
 		);
 }

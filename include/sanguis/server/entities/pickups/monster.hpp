@@ -1,14 +1,15 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PICKUPS_MONSTER_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PICKUPS_MONSTER_HPP_INCLUDED
 
-#include <sanguis/server/entities/pickups/pickup.hpp>
-#include <sanguis/server/entities/base_fwd.hpp>
-#include <sanguis/server/environment/load_context_fwd.hpp>
-#include <sanguis/server/team.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/friend_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/server/team_fwd.hpp>
+#include <sanguis/server/entities/base_fwd.hpp>
+#include <sanguis/server/entities/pickups/pickup.hpp>
+#include <sanguis/server/environment/load_context_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -21,7 +22,7 @@ namespace pickups
 
 class monster
 :
-	public pickup
+	public sanguis::server::entities::pickups::pickup
 {
 	FCPPT_NONCOPYABLE(
 		monster
@@ -30,23 +31,23 @@ public:
 	monster(
 		sanguis::diff_clock const &,
 		sanguis::random_generator &,
-		server::environment::load_context &,
-		team::type,
-		friend_type::type
+		sanguis::server::environment::load_context &,
+		sanguis::server::team,
+		sanguis::friend_type
 	);
 
 	~monster();
 private:
 	void
 	do_pickup(
-		base &receiver
+		sanguis::server::entities::base &receiver
 	);
 
 	sanguis::diff_clock const &diff_clock_;
 
 	sanguis::random_generator &random_generator_;
 
-	friend_type::type const ftype_;
+	sanguis::friend_type const ftype_;
 };
 
 }

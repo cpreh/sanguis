@@ -1,12 +1,13 @@
 #ifndef SANGUIS_PERK_TYPE_HPP_INCLUDED
 #define SANGUIS_PERK_TYPE_HPP_INCLUDED
 
+#include <sanguis/perk_type_fwd.hpp>
+
+
 namespace sanguis
 {
 
-namespace perk_type
-{
-enum type
+enum class perk_type
 {
 	choleric,
 	health,
@@ -16,7 +17,6 @@ enum type
 	regeneration,
 	size
 };
-}
 
 }
 

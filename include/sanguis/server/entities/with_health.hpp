@@ -1,19 +1,20 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_HEALTH_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_HEALTH_HPP_INCLUDED
 
-#include <sanguis/server/entities/with_health_fwd.hpp>
-#include <sanguis/server/entities/base.hpp>
-#include <sanguis/server/entities/property/changeable.hpp>
-#include <sanguis/server/entities/property/always_max.hpp>
-#include <sanguis/server/entities/property/value.hpp>
-#include <sanguis/server/health.hpp>
-#include <sanguis/server/damage/unit.hpp>
-#include <sanguis/server/damage/array.hpp>
-#include <sanguis/server/damage/armor.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
+#include <sanguis/server/health.hpp>
+#include <sanguis/server/damage/armor.hpp>
+#include <sanguis/server/damage/array.hpp>
+#include <sanguis/server/damage/unit.hpp>
+#include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/with_health_fwd.hpp>
+#include <sanguis/server/entities/property/always_max.hpp>
+#include <sanguis/server/entities/property/changeable.hpp>
+#include <sanguis/server/entities/property/value.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -24,7 +25,7 @@ namespace entities
 
 class with_health
 :
-	public virtual base
+	public virtual sanguis::server::entities::base
 {
 	FCPPT_NONCOPYABLE(
 		with_health
@@ -32,29 +33,29 @@ class with_health
 public:
 	void
 	damage(
-		damage::unit,
-		damage::array const &
+		sanguis::server::damage::unit,
+		sanguis::server::damage::array const &
 	);
 
 	void
 	kill();
 
-	property::changeable &
+	sanguis::server::entities::property::changeable &
 	health();
 
-	property::always_max &
+	sanguis::server::entities::property::always_max &
 	regeneration();
 
-	server::health const
+	sanguis::server::health const
 	current_health() const;
 
-	server::health const
+	sanguis::server::health const
 	max_health() const;
 protected:
 	with_health(
 		sanguis::diff_clock const &,
-		server::health max,
-		damage::armor const &
+		sanguis::server::health max,
+		sanguis::server::damage::armor const &
 	);
 
 	~with_health();
@@ -67,14 +68,14 @@ private:
 
 	void
 	max_health_change(
-		property::value
+		sanguis::server::entities::property::value
 	);
 
-	damage::armor armor_;
+	sanguis::server::damage::armor armor_;
 
-	property::changeable health_;
+	sanguis::server::entities::property::changeable health_;
 
-	property::always_max regeneration_;
+	sanguis::server::entities::property::always_max regeneration_;
 
 	sanguis::diff_timer regeneration_timer_;
 

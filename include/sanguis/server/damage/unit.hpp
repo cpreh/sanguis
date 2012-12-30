@@ -4,6 +4,7 @@
 #include <sanguis/server/space_unit.hpp>
 #include <fcppt/strong_typedef.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -12,7 +13,7 @@ namespace damage
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
-	space_unit,
+	sanguis::server::space_unit,
 	unit
 );
 

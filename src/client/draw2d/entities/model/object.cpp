@@ -11,6 +11,7 @@
 #include <sanguis/load/model/object.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/log_parameters.hpp>
+#include <sanguis/weapon_type.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/assert/unreachable.hpp>
@@ -21,10 +22,12 @@
 #include <fcppt/log/object.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/object_impl.hpp>
-#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <memory>
+#include <fcppt/config/external_end.hpp>
+
 
 namespace
 {
@@ -107,12 +110,10 @@ sanguis::client::draw2d::entities::model::object::object(
 			fcppt::make_unique_ptr<
 				model::healthbar
 			>(
-				fcppt::ref(
-					_param.colored_system()
-				)
+				_param.colored_system()
 			)
 		:
-			fcppt::unique_ptr<
+			std::unique_ptr<
 				model::healthbar
 			>()
 	),
@@ -138,17 +139,11 @@ sanguis::client::draw2d::entities::model::object::object(
 			fcppt::make_unique_ptr<
 				model::part
 			>(
-				fcppt::cref(
-					diff_clock_
-				),
-				fcppt::cref(
-					*it->second
-				),
-				fcppt::ref(
-					this->at(
-						sprite::index(
-							index++
-						)
+				diff_clock_,
+				*it->second,
+				this->at(
+					sprite::index(
+						index++
 					)
 				)
 			)
@@ -244,9 +239,7 @@ sanguis::client::draw2d::entities::model::object::on_decay()
 		fcppt::make_unique_ptr<
 			model::decay_time
 		>(
-			fcppt::cref(
-				diff_clock_
-			),
+			diff_clock_,
 			decay_option_ == decay_option::delayed
 			?
 				sanguis::duration_second(10)
@@ -306,7 +299,7 @@ bool
 sanguis::client::draw2d::entities::model::object::dead() const
 {
 	return
-		decay_time_ != 0;
+		decay_time_.get() != nullptr;
 }
 
 bool
@@ -347,7 +340,7 @@ sanguis::client::draw2d::entities::model::object::max_health(
 
 void
 sanguis::client::draw2d::entities::model::object::weapon(
-	weapon_type::type const _weapon
+	sanguis::weapon_type const _weapon
 )
 {
 	for(

@@ -3,14 +3,14 @@
 
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
-#include <sanguis/weapon_type.hpp>
-#include <sanguis/server/center.hpp>
-#include <sanguis/server/probability.hpp>
+#include <sanguis/weapon_type_fwd.hpp>
+#include <sanguis/server/center_fwd.hpp>
+#include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
-#include <fcppt/function/object.hpp>
 #include <fcppt/random/variate_decl.hpp>
 #include <fcppt/random/distribution/uniform_real_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <functional>
 #include <vector>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -37,7 +37,7 @@ public:
 
 	void
 	spawn(
-		sanguis::server::probability,
+		sanguis::server::pickup_probability,
 		sanguis::server::center const &
 	);
 private:
@@ -54,7 +54,7 @@ private:
 	void
 	spawn_weapon(
 		sanguis::server::center const &,
-		sanguis::weapon_type::type
+		sanguis::weapon_type
 	);
 
 	sanguis::diff_clock const &diff_clock_;
@@ -64,7 +64,7 @@ private:
 	sanguis::server::environment::object &env_;
 
 	typedef fcppt::random::distribution::uniform_real<
-		sanguis::server::probability::value_type
+		sanguis::server::pickup_probability::value_type
 	> real_distribution;
 
 	typedef fcppt::random::variate<
@@ -72,14 +72,14 @@ private:
 		real_distribution
 	> real_variate;
 
-	typedef fcppt::function::object<
+	typedef std::function<
 		void (
 			sanguis::server::center const &
 		)
 	> spawn_function;
 
 	typedef std::pair<
-		sanguis::server::probability,
+		sanguis::server::pickup_probability,
 		spawn_function
 	> spawn_pair;
 

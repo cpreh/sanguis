@@ -4,6 +4,7 @@
 #include <sanguis/server/level.hpp>
 #include <fcppt/strong_typedef.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -14,7 +15,7 @@ namespace tree
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
-	server::level::value_type,
+	sanguis::server::level::value_type,
 	required_parent_level
 );
 

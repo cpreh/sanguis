@@ -1,15 +1,27 @@
+#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/diff_timer.hpp>
+#include <sanguis/enemy_type.hpp>
+#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/server/entities/auto_weak_link.hpp>
+#include <sanguis/server/entities/enemies/spawn_owner.hpp>
+#include <sanguis/server/waves/delay.hpp>
 #include <sanguis/server/waves/simple.hpp>
 #include <sanguis/server/waves/spawn.hpp>
+#include <sanguis/server/waves/spawn_interval.hpp>
+#include <sanguis/server/waves/wave.hpp>
+#include <sanguis/server/environment/load_context_fwd.hpp>
+#include <sanguis/server/environment/object_fwd.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+
 
 sanguis::server::waves::simple::simple(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
-	waves::delay const &_delay,
-	waves::spawn_interval const &_spawn_interval,
+	sanguis::server::waves::delay const &_delay,
+	sanguis::server::waves::spawn_interval const &_spawn_interval,
 	unsigned const _waves,
 	unsigned const _spawns_per_wave,
-	enemy_type::type const _etype
+	sanguis::enemy_type const _etype
 )
 :
 	diff_clock_(
@@ -51,8 +63,8 @@ sanguis::server::waves::simple::~simple()
 
 void
 sanguis::server::waves::simple::process(
-	environment::object &_env,
-	environment::load_context &_load_context
+	sanguis::server::environment::object &_env,
+	sanguis::server::environment::load_context &_load_context
 )
 {
 	if(
@@ -79,12 +91,15 @@ sanguis::server::waves::simple::process(
 		i < spawns_per_wave_;
 		++i
 	)
-		waves::spawn(
+		sanguis::server::waves::spawn(
 			diff_clock_,
 			random_generator_,
 			_env,
 			_load_context,
-			etype_
+			etype_,
+			sanguis::server::entities::enemies::spawn_owner(
+				sanguis::server::entities::auto_weak_link()
+			)
 		);
 }
 

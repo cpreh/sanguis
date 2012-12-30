@@ -10,9 +10,9 @@
 #include <sge/input/cursor/move_event_fwd.hpp>
 #include <sge/input/cursor/button_event_fwd.hpp>
 #include <sge/input/cursor/position_unit.hpp>
-#include <fcppt/function/object.hpp>
-#include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/signal/scoped_connection.hpp>
+
 
 namespace sanguis
 {

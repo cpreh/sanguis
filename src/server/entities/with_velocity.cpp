@@ -7,7 +7,9 @@
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <sanguis/server/entities/property/initial_fwd.hpp>
 #include <sanguis/server/entities/property/value.hpp>
-#include <fcppt/tr1/functional.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <functional>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::entities::with_velocity::with_velocity(
@@ -25,10 +27,10 @@ sanguis::server::entities::with_velocity::with_velocity(
 	),
 	speed_change_(
 		movement_speed_.register_change_callback(
-			std::tr1::bind(
+			std::bind(
 				&sanguis::server::entities::with_velocity::speed_change,
 				this,
-				std::tr1::placeholders::_1
+				std::placeholders::_1
 			)
 		)
 	)

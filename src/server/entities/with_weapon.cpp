@@ -1,33 +1,58 @@
-#include <sanguis/server/entities/with_weapon.hpp>
-#include <sanguis/server/entities/property/to_float.hpp>
-#include <sanguis/server/weapons/create.hpp>
-#include <sanguis/server/weapons/weapon.hpp>
-#include <sanguis/server/environment/object.hpp>
+#include <sanguis/exception.hpp>
+#include <sanguis/weapon_type.hpp>
 #include <sanguis/messages/change_weapon.hpp>
 #include <sanguis/messages/create.hpp>
-#include <sanguis/exception.hpp>
-#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
-#include <fcppt/math/vector/comparison.hpp>
-#include <fcppt/tr1/functional.hpp>
+#include <sanguis/server/space_unit.hpp>
+#include <sanguis/server/vector.hpp>
+#include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/with_weapon.hpp>
+#include <sanguis/server/entities/ifaces/with_angle.hpp>
+#include <sanguis/server/entities/property/always_max.hpp>
+#include <sanguis/server/entities/property/to_float.hpp>
+#include <sanguis/server/entities/property/value.hpp>
+#include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/weapons/create.hpp>
+#include <sanguis/server/weapons/unique_ptr.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
+#include <fcppt/math/vector/comparison.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <functional>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
+
 
 sanguis::server::entities::with_weapon::with_weapon(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
-	weapons::unique_ptr _start_weapon
+	sanguis::server::weapons::unique_ptr &&_start_weapon
 )
 :
-	base(),
-	diff_clock_(_diff_clock),
-	random_generator_(_random_generator),
-	weapon_(weapon_type::none),
+	sanguis::server::entities::base(),
+	diff_clock_(
+		_diff_clock
+	),
+	random_generator_(
+		_random_generator
+	),
+	weapon_(
+		sanguis::weapon_type::none
+	),
 	target_(),
-	attacking_(false),
-	reloading_(false),
-	attack_ready_(false),
-	aggressive_(false),
+	attacking_(
+		false
+	),
+	reloading_(
+		false
+	),
+	attack_ready_(
+		false
+	),
+	aggressive_(
+		false
+	),
 	attack_speed_(
 		1
 	),
@@ -36,19 +61,19 @@ sanguis::server::entities::with_weapon::with_weapon(
 	),
 	attack_speed_change_(
 		attack_speed_.register_change_callback(
-			std::tr1::bind(
-				&with_weapon::attack_speed_change,
+			std::bind(
+				&sanguis::server::entities::with_weapon::attack_speed_change,
 				this,
-				std::tr1::placeholders::_1
+				std::placeholders::_1
 			)
 		)
 	),
 	reload_speed_change_(
 		reload_speed_.register_change_callback(
-			std::tr1::bind(
-				&with_weapon::reload_speed_change,
+			std::bind(
+				&sanguis::server::entities::with_weapon::reload_speed_change,
 				this,
-				std::tr1::placeholders::_1
+				std::placeholders::_1
 			)
 		)
 	)
@@ -59,7 +84,7 @@ sanguis::server::entities::with_weapon::with_weapon(
 		return;
 
 	this->add_weapon(
-		move(
+		std::move(
 			_start_weapon
 		)
 	);
@@ -74,7 +99,7 @@ sanguis::server::entities::with_weapon::on_update()
 {
 	// change to the first weapon if we have any
 	if(
-		weapon_ == weapon_type::none
+		weapon_ == sanguis::weapon_type::none
 		&& !weapons_.empty()
 	)
 		this->change_weapon(
@@ -120,11 +145,11 @@ sanguis::server::entities::with_weapon::on_update()
 
 void
 sanguis::server::entities::with_weapon::change_weapon(
-	weapon_type::type const _weapon
+	sanguis::weapon_type const _weapon
 )
 {
 	if(
-		_weapon != weapon_type::none
+		_weapon != sanguis::weapon_type::none
 		&& !weapons_.count(
 			_weapon
 		)
@@ -165,29 +190,29 @@ sanguis::server::entities::with_weapon::change_weapon(
 
 void
 sanguis::server::entities::with_weapon::add_weapon(
-	weapons::unique_ptr _ptr
+	sanguis::server::weapons::unique_ptr &&_ptr
 )
 {
-	weapon_type::type const wt(
+	sanguis::weapon_type const wt(
 		_ptr->type()
 	);
 
-	weapons::magazine_type const magazine_size(
+	sanguis::server::weapons::magazine_type const magazine_size(
 		_ptr->magazine_size().get()
 	);
 
 	if(
-		wt == weapon_type::pistol
+		wt == sanguis::weapon_type::pistol
 		&& weapons_.count(
-			weapon_type::pistol
+			sanguis::weapon_type::pistol
 		)
 	)
 		return
 			this->add_weapon(
-				weapons::create(
+				sanguis::server::weapons::create(
 					diff_clock_,
 					random_generator_,
-					weapon_type::dual_pistol
+					sanguis::weapon_type::dual_pistol
 				)
 			);
 
@@ -215,7 +240,7 @@ sanguis::server::entities::with_weapon::add_weapon(
 		!fcppt::container::ptr::insert_unique_ptr_map(
 			weapons_,
 			wt,
-			move(
+			std::move(
 				_ptr
 			)
 		).second
@@ -231,7 +256,7 @@ sanguis::server::entities::with_weapon::add_weapon(
 
 void
 sanguis::server::entities::with_weapon::remove_weapon(
-	weapon_type::type const _weapon
+	sanguis::weapon_type const _weapon
 )
 {
 	if(
@@ -246,7 +271,7 @@ sanguis::server::entities::with_weapon::remove_weapon(
 
 void
 sanguis::server::entities::with_weapon::target(
-	server::vector const &_target
+	sanguis::server::vector const &_target
 )
 {
 	target_ = _target;
@@ -254,7 +279,7 @@ sanguis::server::entities::with_weapon::target(
 
 bool
 sanguis::server::entities::with_weapon::in_range(
-	server::vector const &_pos
+	sanguis::server::vector const &_pos
 ) const
 {
 	return
@@ -269,7 +294,7 @@ sanguis::server::entities::with_weapon::in_range(
 bool
 sanguis::server::entities::with_weapon::has_weapon() const
 {
-	return weapon_ != weapon_type::none;
+	return weapon_ != sanguis::weapon_type::none;
 }
 
 sanguis::server::weapons::weapon &
@@ -386,15 +411,15 @@ sanguis::server::entities::with_weapon::stop_attacking()
 
 void
 sanguis::server::entities::with_weapon::attack_speed_change(
-	property::value const _value
+	sanguis::server::entities::property::value const _value
 )
 {
 	if(
 		this->has_weapon()
 	)
 		this->active_weapon().attack_speed(
-			property::to_float<
-				space_unit
+			sanguis::server::entities::property::to_float<
+				sanguis::server::space_unit
 			>(
 				_value
 			)
@@ -403,15 +428,15 @@ sanguis::server::entities::with_weapon::attack_speed_change(
 
 void
 sanguis::server::entities::with_weapon::reload_speed_change(
-	property::value const _value
+	sanguis::server::entities::property::value const _value
 )
 {
 	if(
 		this->has_weapon()
 	)
 		this->active_weapon().reload_speed(
-			property::to_float<
-				space_unit
+			sanguis::server::entities::property::to_float<
+				sanguis::server::space_unit
 			>(
 				_value
 			)
@@ -420,7 +445,7 @@ sanguis::server::entities::with_weapon::reload_speed_change(
 
 void
 sanguis::server::entities::with_weapon::on_new_weapon(
-	weapon_type::type const
+	sanguis::weapon_type const
 )
 {
 }

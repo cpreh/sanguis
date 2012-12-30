@@ -15,6 +15,7 @@
 #include <fcppt/random/variate_decl.hpp>
 #include <fcppt/random/distribution/uniform_real_decl.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -24,7 +25,7 @@ namespace ai
 
 class simple
 :
-	public ai::base
+	public sanguis::server::ai::base
 {
 	FCPPT_NONCOPYABLE(
 		simple
@@ -33,8 +34,8 @@ public:
 	simple(
 		sanguis::diff_clock const &,
 		sanguis::random_generator &,
-		entities::with_ai &me,
-		entities::auto_weak_link owner
+		sanguis::server::entities::with_ai &me,
+		sanguis::server::entities::auto_weak_link owner
 	);
 
 	~simple();
@@ -44,26 +45,26 @@ private:
 
 	void
 	target_enters(
-		entities::with_body &
+		sanguis::server::entities::with_body &
 	);
 
 	void
 	target_leaves(
-		entities::with_body &
+		sanguis::server::entities::with_body &
 	);
 
 	sanguis::diff_timer pos_timer_;
 
-	entities::with_ai &me_;
+	sanguis::server::entities::with_ai &me_;
 
-	entities::auto_weak_link
+	sanguis::server::entities::auto_weak_link
 		target_,
 		owner_;
 
-	entity_map potential_targets_;
+	sanguis::server::ai::entity_map potential_targets_;
 
 	typedef fcppt::random::distribution::uniform_real<
-		server::space_unit
+		sanguis::server::space_unit
 	> distribution;
 
 	typedef fcppt::random::variate<

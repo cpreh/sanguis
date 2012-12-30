@@ -1,9 +1,7 @@
 #include <sanguis/server/world/random.hpp>
 #include <sanguis/server/world/object.hpp>
 #include <sge/charconv/system_fwd.hpp>
-#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/ref.hpp>
 
 #include <sanguis/config_app_name.hpp>
 #include <sanguis/exception.hpp>
@@ -26,6 +24,7 @@
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 sanguis::server::world::object_unique_ptr
 sanguis::server::world::random(
@@ -110,27 +109,15 @@ sanguis::server::world::random(
 		fcppt::make_unique_ptr<
 			sanguis::server::world::object
 		>(
-			fcppt::cref(
-				_diff_clock
-			),
-			fcppt::ref(
-				_random_generator
-			),
+			_diff_clock,
+			_random_generator,
 			sanguis::world_id(
 				0u
 			), // FIXME!
-			fcppt::ref(
-				_ctx
-			),
-			fcppt::ref(
-				_load_context
-			),
-			fcppt::ref(
-				_charconv_system
-			),
-			fcppt::ref(
-				_console
-			),
+			_ctx,
+			_load_context,
+			_charconv_system,
+			_console,
 			sanguis::creator::generator::deserialize(
 				stream
 			)

@@ -34,7 +34,7 @@ public:
 
 	void
 	claim_buff(
-		sanguis::server::buffs::unique_ptr
+		sanguis::server::buffs::unique_ptr &&
 	);
 protected:
 	with_buffs();

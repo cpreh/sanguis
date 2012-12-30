@@ -57,7 +57,7 @@ try
 		return awl::main::exit_success();
 	}
 
-	fcppt::log::level::type const log_level(
+	fcppt::log::level const log_level(
 		sanguis::args::log_level(
 			vm
 		)

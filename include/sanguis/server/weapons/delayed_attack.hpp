@@ -6,8 +6,8 @@
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/vector.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/nonassignable.hpp>
+
 
 namespace sanguis
 {
@@ -23,37 +23,37 @@ class delayed_attack
 	);
 public:
 	delayed_attack(
-		server::center const &spawn_point,
-		server::angle,
-		server::team::type,
-		server::environment::object &,
-		server::vector const &dest
+		sanguis::server::center const &spawn_point,
+		sanguis::server::angle,
+		sanguis::server::team,
+		sanguis::server::environment::object &,
+		sanguis::server::vector const &dest
 	);
 
-	server::center const &
+	sanguis::server::center const &
 	spawn_point() const;
 
-	server::angle const
+	sanguis::server::angle const
 	angle() const;
 
-	server::team::type
+	sanguis::server::team
 	team() const;
 
-	server::environment::object &
+	sanguis::server::environment::object &
 	environment() const;
 
-	server::vector const &
+	sanguis::server::vector const &
 	dest() const;
 private:
-	server::center spawn_point_;
+	sanguis::server::center spawn_point_;
 
-	server::angle angle_;
+	sanguis::server::angle angle_;
 
-	server::team::type team_;
+	sanguis::server::team team_;
 
-	server::environment::object &environment_;
+	sanguis::server::environment::object &environment_;
 
-	server::vector dest_;
+	sanguis::server::vector dest_;
 };
 
 }

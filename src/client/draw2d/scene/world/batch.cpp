@@ -1,10 +1,12 @@
 #include <sanguis/client/draw2d/scene/world/batch.hpp>
+#include <sanguis/client/draw2d/scene/world/texture_slice_vector.hpp>
 #include <sge/renderer/primitive_type.hpp>
-#include <sge/renderer/scoped_vertex_buffer.hpp>
 #include <sge/renderer/context/core.hpp>
 #include <sge/renderer/texture/const_optional_base_ref.hpp>
 #include <sge/renderer/texture/planar.hpp>
 #include <sge/renderer/texture/stage.hpp>
+#include <sge/renderer/vertex/buffer_shared_ptr.hpp>
+#include <sge/renderer/vertex/scoped_buffer.hpp>
 #include <sge/texture/part.hpp>
 
 
@@ -16,8 +18,8 @@ sanguis::client::draw2d::scene::world::batch::batch()
 }
 
 sanguis::client::draw2d::scene::world::batch::batch(
-	sge::renderer::vertex_buffer_shared_ptr const _vertex_buffer,
-	world::texture_slice_vector const &_texture_slices
+	sge::renderer::vertex::buffer_shared_ptr const _vertex_buffer,
+	sanguis::client::draw2d::scene::world::texture_slice_vector const &_texture_slices
 )
 :
 	vertex_buffer_(
@@ -39,7 +41,7 @@ sanguis::client::draw2d::scene::world::batch::draw(
 	)
 		return;
 
-	sge::renderer::scoped_vertex_buffer const scoped_buffer(
+	sge::renderer::vertex::scoped_buffer const scoped_buffer(
 		_render_context,
 		*vertex_buffer_
 	);

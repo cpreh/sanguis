@@ -1,19 +1,19 @@
 #ifndef SANGUIS_CHEAT_TYPE_HPP_INCLUDED
 #define SANGUIS_CHEAT_TYPE_HPP_INCLUDED
 
+#include <sanguis/cheat_type_fwd.hpp>
+
+
 namespace sanguis
 {
 
-namespace cheat_type
-{
-enum type
+enum class cheat_type
 {
 	exp,
 	impulse101,
 	kill,
 	size
 };
-}
 
 }
 

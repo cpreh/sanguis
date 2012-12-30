@@ -1,15 +1,16 @@
 #ifndef SANGUIS_SERVER_ENTITIES_SPAWNS_SPAWN_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_SPAWNS_SPAWN_HPP_INCLUDED
 
-#include <sanguis/server/entities/spawns/size_type.hpp>
-#include <sanguis/server/entities/base.hpp>
-#include <sanguis/server/center.hpp>
-#include <sanguis/server/team.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/enemy_type.hpp>
-#include <sanguis/entity_type.hpp>
+#include <sanguis/entity_type_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/server/center_fwd.hpp>
+#include <sanguis/server/team_fwd.hpp>
+#include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/spawns/size_type.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -22,15 +23,16 @@ namespace spawns
 
 class spawn
 :
-	public virtual entities::base
+	public virtual sanguis::server::entities::base
 {
 	FCPPT_NONCOPYABLE(
 		spawn
 	);
 public:
-	virtual void
+	virtual
+	void
 	unregister(
-		entities::base &
+		sanguis::server::entities::base &
 	);
 
 	~spawn();
@@ -38,34 +40,36 @@ protected:
 	spawn(
 		sanguis::diff_clock const &,
 		sanguis::random_generator &,
-		enemy_type::type
+		sanguis::enemy_type
 	);
 private:
-	entity_type::type
+	sanguis::entity_type
 	type() const;
 
-	server::team::type
+	sanguis::server::team
 	team() const;
 
-	server::center const
+	sanguis::server::center const
 	center() const;
 
 	void
 	on_update();
 
-	virtual size_type
+	virtual
+	sanguis::server::entities::spawns::size_type
 	may_spawn() = 0;
 
-	virtual void
+	virtual
+	void
 	add_count(
-		size_type
+		sanguis::server::entities::spawns::size_type
 	) = 0;
 
 	sanguis::diff_clock const &diff_clock_;
 
 	sanguis::random_generator &random_generator_;
 
-	enemy_type::type const enemy_type_;
+	sanguis::enemy_type const enemy_type_;
 };
 
 }

@@ -8,7 +8,6 @@
 #include <fcppt/time/gmtime.hpp>
 #include <fcppt/time/parse_date.hpp>
 #include <fcppt/time/parse_time.hpp>
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/extract_from_string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/signal/auto_connection.hpp>
@@ -21,6 +20,7 @@
 #include <boost/spirit/home/phoenix/core/argument.hpp>
 #include <boost/spirit/home/phoenix/operator/self.hpp>
 #include <ctime>
+#include <functional>
 #include <fcppt/config/external_end.hpp>
 
 namespace
@@ -86,11 +86,11 @@ sanguis::client::daytime_settings::daytime_settings(
 	day_con_(
 		_console.insert(
 			sge::console::callback::parameters(
-				std::tr1::bind(
+				std::bind(
 					&daytime_settings::change_day,
 					this,
-					std::tr1::placeholders::_1,
-					std::tr1::placeholders::_2
+					std::placeholders::_1,
+					std::placeholders::_2
 				),
 				sge::console::callback::name(
 					SGE_FONT_LIT("day")
@@ -104,11 +104,11 @@ sanguis::client::daytime_settings::daytime_settings(
 	time_con_(
 		_console.insert(
 			sge::console::callback::parameters(
-				std::tr1::bind(
+				std::bind(
 					&daytime_settings::change_time,
 					this,
-					std::tr1::placeholders::_1,
-					std::tr1::placeholders::_2
+					std::placeholders::_1,
+					std::placeholders::_2
 				),
 				sge::console::callback::name(
 					SGE_FONT_LIT("time")
@@ -122,11 +122,11 @@ sanguis::client::daytime_settings::daytime_settings(
 	time_speed_con_(
 		_console.insert(
 			sge::console::callback::parameters(
-				std::tr1::bind(
+				std::bind(
 					&daytime_settings::change_time_speed,
 					this,
-					std::tr1::placeholders::_1,
-					std::tr1::placeholders::_2
+					std::placeholders::_1,
+					std::placeholders::_2
 				),
 				sge::console::callback::name(
 					SGE_FONT_LIT("time_speed")
@@ -140,11 +140,11 @@ sanguis::client::daytime_settings::daytime_settings(
 	reset_day_con_(
 		_console.insert(
 			sge::console::callback::parameters(
-				std::tr1::bind(
+				std::bind(
 					&daytime_settings::reset_day,
 					this,
-					std::tr1::placeholders::_1,
-					std::tr1::placeholders::_2
+					std::placeholders::_1,
+					std::placeholders::_2
 				),
 				sge::console::callback::name(
 					SGE_FONT_LIT("reset_day")
@@ -158,11 +158,11 @@ sanguis::client::daytime_settings::daytime_settings(
 	reset_time_con_(
 		_console.insert(
 			sge::console::callback::parameters(
-				std::tr1::bind(
+				std::bind(
 					&daytime_settings::reset_time,
 					this,
-					std::tr1::placeholders::_1,
-					std::tr1::placeholders::_2
+					std::placeholders::_1,
+					std::placeholders::_2
 				),
 				sge::console::callback::name(
 					SGE_FONT_LIT("reset_time")

@@ -1,7 +1,10 @@
 #ifndef SANGUIS_CLIENT_GUI_MENU_CALLBACKS_RETRY_CONNECT_HPP_INCLUDED
 #define SANGUIS_CLIENT_GUI_MENU_CALLBACKS_RETRY_CONNECT_HPP_INCLUDED
 
-#include <fcppt/function/object_fwd.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <functional>
+#include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -14,7 +17,7 @@ namespace menu
 namespace callbacks
 {
 
-typedef fcppt::function::object<
+typedef std::function<
 	void ()
 > retry_connect;
 

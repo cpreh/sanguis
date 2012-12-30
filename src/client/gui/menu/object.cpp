@@ -22,18 +22,17 @@
 #include <fcppt/log/headers.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/extract_from_string.hpp>
 #include <fcppt/extract_from_string_exn.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
-#include <fcppt/ref.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/to_std_string.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <CEGUI/Window.h>
 #include <CEGUI/widgets/PushButton.h>
+#include <functional>
 #include <fcppt/config/external_end.hpp>
 
 namespace
@@ -113,10 +112,10 @@ sanguis::client::gui::menu::object::object(
 		->subscribeEvent(
 			CEGUI::PushButton::EventClicked,
 			CEGUI::Event::Subscriber(
-				std::tr1::bind(
+				std::bind(
 					&object::handle_quickstart,
 					this,
-					std::tr1::placeholders::_1
+					std::placeholders::_1
 				)
 			)
 		)
@@ -128,10 +127,10 @@ sanguis::client::gui::menu::object::object(
 		->subscribeEvent(
 			CEGUI::PushButton::EventClicked,
 			CEGUI::Event::Subscriber(
-				std::tr1::bind(
+				std::bind(
 					&object::handle_quit,
 					this,
-					std::tr1::placeholders::_1
+					std::placeholders::_1
 				)
 			)
 		)
@@ -140,10 +139,10 @@ sanguis::client::gui::menu::object::object(
 		connect_button_.subscribeEvent(
 			CEGUI::PushButton::EventClicked,
 			CEGUI::Event::Subscriber(
-				std::tr1::bind(
+				std::bind(
 					&object::handle_connect,
 					this,
-					std::tr1::placeholders::_1
+					std::placeholders::_1
 				)
 			)
 		)
@@ -152,10 +151,10 @@ sanguis::client::gui::menu::object::object(
 		hostname_edit_.subscribeEvent(
 			CEGUI::Window::EventTextChanged,
 			CEGUI::Event::Subscriber(
-				std::tr1::bind(
+				std::bind(
 					&object::handle_text_changed,
 					this,
-					std::tr1::placeholders::_1
+					std::placeholders::_1
 				)
 			)
 		)
@@ -164,10 +163,10 @@ sanguis::client::gui::menu::object::object(
 		port_edit_.subscribeEvent(
 			CEGUI::Window::EventTextChanged,
 			CEGUI::Event::Subscriber(
-				std::tr1::bind(
+				std::bind(
 					&object::handle_text_changed,
 					this,
-					std::tr1::placeholders::_1
+					std::placeholders::_1
 				)
 			)
 		)
@@ -176,17 +175,13 @@ sanguis::client::gui::menu::object::object(
 		fcppt::make_unique_ptr<
 			sanguis::client::gui::menu::connection_box
 		>(
-			fcppt::ref(
-				gui_
-			),
-			fcppt::ref(
-				scoped_layout_.window()
-			),
-			std::tr1::bind(
+			gui_,
+			scoped_layout_.window(),
+			std::bind(
 				&menu::object::handle_cancel_connect,
 				this
 			),
-			std::tr1::bind(
+			std::bind(
 				&menu::object::handle_retry_connect,
 				this
 			)

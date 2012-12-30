@@ -23,10 +23,9 @@
 #include <alda/net/port.hpp>
 #include <alda/net/buffer/circular_receive/object_fwd.hpp>
 #include <alda/net/client/object.hpp>
-#include <fcppt/function/object.hpp>
-#include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/state_machine.hpp>
 #include <boost/system/error_code.hpp>

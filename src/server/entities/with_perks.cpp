@@ -1,13 +1,20 @@
+#include <sanguis/perk_type.hpp>
+#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_perks.hpp>
 #include <sanguis/server/perks/perk.hpp>
+#include <sanguis/server/perks/unique_ptr.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
+
 
 void
 sanguis::server::entities::with_perks::add_perk(
-	perks::unique_ptr _ptr
+	sanguis::server::perks::unique_ptr &&_ptr
 )
 {
-	perk_type::type const ptype(
+	sanguis::perk_type const ptype(
 		_ptr->type()
 	);
 
@@ -24,12 +31,12 @@ sanguis::server::entities::with_perks::add_perk(
 			fcppt::container::ptr::insert_unique_ptr_map(
 				perks_,
 				ptype,
-				move(
+				std::move(
 					_ptr
 				)
 			).first;
 
-	perks::perk &ref(
+	sanguis::server::perks::perk &ref(
 		*it->second
 	);
 
@@ -40,24 +47,22 @@ sanguis::server::entities::with_perks::add_perk(
 
 sanguis::server::entities::with_perks::with_perks()
 :
-	base(),
+	sanguis::server::entities::base(),
 	perks_()
-{}
+{
+}
 
 sanguis::server::entities::with_perks::~with_perks()
-{}
+{
+}
 
 void
 sanguis::server::entities::with_perks::on_update()
 {
 	for(
-		perk_container::iterator it(
-			perks_.begin()
-		);
-		it != perks_.end();
-		++it
+		auto perk : perks_
 	)
-		it->second->update(
+		perk->second->update(
 			*this,
 			this->environment()
 		);

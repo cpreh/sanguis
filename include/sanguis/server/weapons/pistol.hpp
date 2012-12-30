@@ -1,16 +1,18 @@
 #ifndef SANGUIS_SERVER_WEAPONS_PISTOL_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_PISTOL_HPP_INCLUDED
 
-#include <sanguis/server/weapons/delayed_attack_fwd.hpp>
-#include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
-#include <sanguis/server/weapons/magazine_size.hpp>
-#include <sanguis/server/weapons/reload_time.hpp>
-#include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/damage.hpp>
-#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/server/weapons/delayed_attack_fwd.hpp>
+#include <sanguis/server/weapons/magazine_size.hpp>
+#include <sanguis/server/weapons/range.hpp>
+#include <sanguis/server/weapons/reload_time.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -21,7 +23,7 @@ namespace weapons
 
 class pistol
 :
-	public weapon
+	public sanguis::server::weapons::weapon
 {
 	FCPPT_NONCOPYABLE(
 		pistol
@@ -29,23 +31,23 @@ class pistol
 public:
 	pistol(
 		sanguis::diff_clock const &,
-		weapon_type::type,
-		weapons::base_cooldown,
-		weapons::damage,
-		weapons::cast_point,
-		weapons::magazine_size,
-		weapons::reload_time,
-		weapons::range
+		sanguis::weapon_type,
+		sanguis::server::weapons::base_cooldown,
+		sanguis::server::weapons::damage,
+		sanguis::server::weapons::cast_point,
+		sanguis::server::weapons::magazine_size,
+		sanguis::server::weapons::reload_time,
+		sanguis::server::weapons::range
 	);
 
 	~pistol();
 private:
 	void
 	do_attack(
-		delayed_attack const &
+		sanguis::server::weapons::delayed_attack const &
 	);
 
-	weapons::damage const damage_;
+	sanguis::server::weapons::damage const damage_;
 };
 
 }

@@ -1,16 +1,23 @@
+#include <sanguis/server/radius.hpp>
+#include <sanguis/server/team.hpp>
+#include <sanguis/server/update_target_function.hpp>
 #include <sanguis/server/auras/aggro.hpp>
+#include <sanguis/server/auras/aura.hpp>
+#include <sanguis/server/auras/influence.hpp>
+#include <sanguis/server/entities/with_body_fwd.hpp>
+
 
 sanguis::server::auras::aggro::aggro(
-	server::radius const _radius,
-	server::team::type const _team,
-	update_target_function const &_add_target,
-	update_target_function const &_remove_target
+	sanguis::server::radius const _radius,
+	sanguis::server::team const _team,
+	sanguis::server::update_target_function const &_add_target,
+	sanguis::server::update_target_function const &_remove_target
 )
 :
-	aura(
+	sanguis::server::auras::aura(
 		_radius,
 		_team,
-		influence::debuff
+		sanguis::server::auras::influence::debuff
 	),
 	add_target_(
 		_add_target
@@ -27,7 +34,7 @@ sanguis::server::auras::aggro::~aggro()
 
 void
 sanguis::server::auras::aggro::enter(
-	entities::with_body &_target
+	sanguis::server::entities::with_body &_target
 )
 {
 	add_target_(
@@ -37,7 +44,7 @@ sanguis::server::auras::aggro::enter(
 
 void
 sanguis::server::auras::aggro::leave(
-	entities::with_body &_target
+	sanguis::server::entities::with_body &_target
 )
 {
 	remove_target_(

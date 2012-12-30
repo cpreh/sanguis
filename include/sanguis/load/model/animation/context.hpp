@@ -6,9 +6,12 @@
 #include <sanguis/load/resource/animation/series.hpp>
 #include <sanguis/load/resource/texture_context.hpp>
 #include <sge/renderer/lock_rect.hpp>
-#include <fcppt/function/object.hpp>
 #include <fcppt/nonassignable.hpp>
 #include <fcppt/scoped_ptr.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <functional>
+#include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -25,7 +28,7 @@ class context
 		context
 	);
 public:
-	typedef fcppt::function::object<
+	typedef std::function<
 		void (
 			sge::renderer::lock_rect const &
 		)

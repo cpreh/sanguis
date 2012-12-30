@@ -1,28 +1,34 @@
-#include <sanguis/server/states/paused.hpp>
-#include <sanguis/server/states/running.hpp>
-#include <sanguis/server/states/unpaused.hpp>
-#include <sanguis/server/states/log_location.hpp>
+#include <sanguis/log_parameters.hpp>
+#include <sanguis/server/machine.hpp>
+#include <sanguis/server/message_functor.hpp>
+#include <sanguis/server/player_id.hpp>
 #include <sanguis/server/events/disconnect.hpp>
 #include <sanguis/server/events/message.hpp>
 #include <sanguis/server/events/tick.hpp>
 #include <sanguis/server/global/context.hpp>
-#include <sanguis/server/message_functor.hpp>
-#include <sanguis/messages/call/object.hpp>
-#include <sanguis/messages/unpause.hpp>
-#include <sanguis/messages/create.hpp>
+#include <sanguis/server/states/log_location.hpp>
+#include <sanguis/server/states/paused.hpp>
+#include <sanguis/server/states/running.hpp>
+#include <sanguis/server/states/unpaused.hpp>
 #include <sanguis/messages/base.hpp>
-#include <sanguis/log_parameters.hpp>
-#include <fcppt/log/parameters/object.hpp>
+#include <sanguis/messages/create.hpp>
+#include <sanguis/messages/player_pause.hpp>
+#include <sanguis/messages/player_unpause.hpp>
+#include <sanguis/messages/unpause.hpp>
+#include <sanguis/messages/call/object.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/warning.hpp>
-#include <fcppt/tr1/functional.hpp>
+#include <fcppt/log/parameters/object.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
+#include <boost/statechart/result.hpp>
+#include <functional>
 #include <ostream>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace
 {
@@ -47,11 +53,11 @@ sanguis::server::states::paused::~paused()
 
 boost::statechart::result
 sanguis::server::states::paused::react(
-	events::message const &_message
+	sanguis::server::events::message const &_message
 )
 {
 	if(
-		!context<
+		!this->context<
 			sanguis::server::states::running
 		>().global_context().has_player(
 			_message.id()
@@ -59,8 +65,8 @@ sanguis::server::states::paused::react(
 	)
 		return this->forward_event();
 
-	typedef message_functor<
-		paused,
+	typedef sanguis::server::message_functor<
+		sanguis::server::states::paused,
 		boost::statechart::result
 	> functor_type;
 
@@ -69,10 +75,10 @@ sanguis::server::states::paused::react(
 		_message.id()
 	);
 
-	static messages::call::object<
+	static sanguis::messages::call::object<
 		boost::mpl::vector2<
-			messages::player_pause,
-			messages::player_unpause
+			sanguis::messages::player_pause,
+			sanguis::messages::player_unpause
 		>,
 		functor_type
 	>::type dispatcher;
@@ -81,34 +87,39 @@ sanguis::server::states::paused::react(
 		dispatcher(
 			*_message.get(),
 			functor,
-			std::tr1::bind(
-				&paused::handle_default_msg,
+			std::bind(
+				&sanguis::server::states::paused::handle_default_msg,
 				this,
 				_message.id(),
-				std::tr1::placeholders::_1
+				std::placeholders::_1
 			)
 		);
 }
 
 boost::statechart::result
 sanguis::server::states::paused::operator()(
-	server::player_id,
-	messages::player_unpause const &
+	sanguis::server::player_id,
+	sanguis::messages::player_unpause const &
 )
 {
-	context<machine>().send_to_all(
-		*messages::create(
-			messages::unpause()
+	this->context<
+		sanguis::server::machine
+	>().send_to_all(
+		*sanguis::messages::create(
+			sanguis::messages::unpause()
 		)
 	);
 
-	return transit<unpaused>();
+	return
+		this->transit<
+			sanguis::server::states::unpaused
+		>();
 }
 
 boost::statechart::result
 sanguis::server::states::paused::operator()(
-	server::player_id,
-	messages::player_pause const &
+	sanguis::server::player_id,
+	sanguis::messages::player_pause const &
 )
 {
 	FCPPT_LOG_WARNING(
@@ -117,14 +128,16 @@ sanguis::server::states::paused::operator()(
 			<< FCPPT_TEXT("got superfluous pause")
 	);
 
-	return discard_event();
+	return
+		this->discard_event();
 }
 
 boost::statechart::result
 sanguis::server::states::paused::handle_default_msg(
-	server::player_id,
-	messages::base const &
+	sanguis::server::player_id,
+	sanguis::messages::base const &
 )
 {
-	return forward_event();
+	return
+		this->forward_event();
 }

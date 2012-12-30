@@ -35,6 +35,7 @@ set(
 	include/sanguis/creator/geometry/shape.hpp
 	include/sanguis/creator/geometry/shape_container.hpp
 	include/sanguis/creator/geometry/shape_fwd.hpp
+	include/sanguis/creator/geometry/size_type.hpp
 	include/sanguis/creator/geometry/solidity.hpp
 	include/sanguis/creator/geometry/texture_name.hpp
 	include/sanguis/creator/geometry/texture_point.hpp

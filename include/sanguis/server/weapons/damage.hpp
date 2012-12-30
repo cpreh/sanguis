@@ -3,6 +3,7 @@
 
 #include <sanguis/server/damage/unit.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -10,7 +11,7 @@ namespace server
 namespace weapons
 {
 
-typedef server::damage::unit damage;
+typedef sanguis::server::damage::unit damage;
 
 }
 }

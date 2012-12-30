@@ -2,16 +2,19 @@
 #define SANGUIS_SERVER_UPDATE_SIGHT_FUNCTION_HPP_INCLUDED
 
 #include <sanguis/entity_id.hpp>
-#include <fcppt/function/object_fwd.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <functional>
+#include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
 namespace server
 {
 
-typedef fcppt::function::object<
+typedef std::function<
 	void (
-		entity_id
+		sanguis::entity_id
 	)
 > update_sight_function;
 

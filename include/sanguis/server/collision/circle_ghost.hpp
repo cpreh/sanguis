@@ -7,8 +7,8 @@
 #include <sanguis/server/collision/ghost.hpp>
 #include <sanguis/server/collision/group_vector.hpp>
 #include <sanguis/server/radius.hpp>
-#include <fcppt/function/object.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {

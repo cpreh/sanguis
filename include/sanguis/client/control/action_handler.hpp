@@ -1,6 +1,10 @@
 #ifndef SANGUIS_CLIENT_CONTROL_ACTION_HANDLER_HPP_INCLUDED
 #define SANGUIS_CLIENT_CONTROL_ACTION_HANDLER_HPP_INCLUDED
 
+#include <sanguis/cheat_type_fwd.hpp>
+#include <sanguis/timer.hpp>
+#include <sanguis/weapon_type.hpp>
+#include <sanguis/client/send_callback.hpp>
 #include <sanguis/client/control/action_handler_fwd.hpp>
 #include <sanguis/client/control/direction_vector.hpp>
 #include <sanguis/client/control/environment_fwd.hpp>
@@ -11,17 +15,16 @@
 #include <sanguis/client/control/actions/cursor_fwd.hpp>
 #include <sanguis/client/control/actions/nullary_fwd.hpp>
 #include <sanguis/client/control/actions/scale_fwd.hpp>
-#include <sanguis/client/send_callback.hpp>
-#include <sanguis/cheat_type.hpp>
-#include <sanguis/timer.hpp>
-#include <sanguis/weapon_type.hpp>
-#include <sge/console/object_fwd.hpp>
 #include <sge/console/arg_list.hpp>
-#include <fcppt/container/array.hpp>
-#include <fcppt/function/object.hpp>
+#include <sge/console/object_fwd.hpp>
 #include <fcppt/math/vector/object_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <array>
+#include <cstddef>
+#include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -37,8 +40,8 @@ class action_handler
 	);
 public:
 	action_handler(
-		client::send_callback const &,
-		control::environment &,
+		sanguis::client::send_callback const &,
+		sanguis::client::control::environment &,
 		sge::console::object &
 	);
 
@@ -46,38 +49,38 @@ public:
 
 	void
 	handle_action(
-		control::actions::any const &
+		sanguis::client::control::actions::any const &
 	);
 
 	void
 	give_player_weapon(
-		sanguis::weapon_type::type
+		sanguis::weapon_type
 	);
 
 	void
 	handle_binary_action(
-		control::actions::binary const &
+		sanguis::client::control::actions::binary const &
 	);
 
 	void
 	handle_cursor_action(
-		control::actions::cursor const &
+		sanguis::client::control::actions::cursor const &
 	);
 
 	void
 	handle_nullary_action(
-		control::actions::nullary const &
+		sanguis::client::control::actions::nullary const &
 	);
 
 	void
 	handle_scale_action(
-		control::actions::scale const &
+		sanguis::client::control::actions::scale const &
 	);
 private:
 	void
 	update_direction(
-		control::scalar &,
-		control::key_scale
+		sanguis::client::control::scalar &,
+		sanguis::client::control::key_scale
 	);
 
 	void
@@ -95,32 +98,36 @@ private:
 
 	void
 	change_weapon(
-		weapon_type::type
+		sanguis::weapon_type
 	);
 
 	void
 	send_cheat(
-		cheat_type::type,
+		sanguis::cheat_type,
 		sge::console::arg_list const &,
 		sge::console::object &
 	);
 
-	client::send_callback const send_;
+	sanguis::client::send_callback const send_;
 
-	control::environment &environment_;
+	sanguis::client::control::environment &environment_;
 
-	weapon_type::type current_weapon_;
+	sanguis::weapon_type current_weapon_;
 
 	sanguis::timer rotation_timer_;
 
-	typedef fcppt::container::array<
+	typedef std::array<
 		bool,
-		weapon_type::size
+		static_cast<
+			std::size_t
+		>(
+			sanguis::weapon_type::size
+		)
 	> owned_weapons_array;
 
 	owned_weapons_array owned_weapons_;
 
-	control::direction_vector direction_;
+	sanguis::client::control::direction_vector direction_;
 
 	fcppt::signal::scoped_connection const
 		cheat_kill_conn_,

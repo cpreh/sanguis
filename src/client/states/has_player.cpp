@@ -1,4 +1,9 @@
-#include <sanguis/client/states/has_player.hpp>
+#include <sanguis/cast_enum.hpp>
+#include <sanguis/perk_type.hpp>
+#include <sanguis/client/level.hpp>
+#include <sanguis/client/log.hpp>
+#include <sanguis/client/make_send_callback.hpp>
+#include <sanguis/client/player_level.hpp>
 #include <sanguis/client/control/action_handler.hpp>
 #include <sanguis/client/control/input_translator.hpp>
 #include <sanguis/client/console/object.hpp>
@@ -10,77 +15,78 @@
 #include <sanguis/client/events/tick.hpp>
 #include <sanguis/client/perk/make_tree.hpp>
 #include <sanguis/client/perk/state.hpp>
-#include <sanguis/client/level.hpp>
-#include <sanguis/client/log.hpp>
-#include <sanguis/client/make_send_callback.hpp>
-#include <sanguis/client/player_level.hpp>
-#include <sanguis/messages/call/object.hpp>
+#include <sanguis/client/states/has_player.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/player_choose_perk.hpp>
-#include <sanguis/cast_enum.hpp>
+#include <sanguis/messages/call/object.hpp>
+#include <sanguis/messages/types/enum.hpp>
+#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/output.hpp>
-#include <fcppt/tr1/functional.hpp>
-#include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/ref.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
+#include <functional>
 #include <fcppt/config/external_end.hpp>
+
 
 sanguis::client::states::has_player::has_player(
 	my_context _ctx
 )
 :
-	my_base(_ctx),
+	my_base(
+		_ctx
+	),
 	input_translator_(
 		fcppt::make_unique_ptr<
-			control::input_translator
+			sanguis::client::control::input_translator
 		>(
-			fcppt::ref(
-				context<machine>().keyboard()
-			),
-			fcppt::ref(
-				context<machine>().cursor()
-			),
-			std::tr1::bind(
+			this->context<
+				sanguis::client::machine
+			>().keyboard(),
+			this->context<
+				sanguis::client::machine
+			>().cursor(),
+			std::bind(
 				&states::has_player::handle_player_action,
 				this,
-				std::tr1::placeholders::_1
+				std::placeholders::_1
 			)
 		)
 	),
 	action_handler_(
 		fcppt::make_unique_ptr<
-			control::action_handler
+			sanguis::client::control::action_handler
 		>(
-			client::make_send_callback(
-				context<machine>()
+			sanguis::client::make_send_callback(
+				this->context<
+					sanguis::client::machine
+				>()
 			),
-			fcppt::ref(
-				context<running>().control_environment()
-			),
-			fcppt::ref(
-				context<running>().console().sge_console()
-			)
+			this->context<
+				sanguis::client::states::running
+			>().control_environment(),
+			this->context<
+				sanguis::client::states::running
+			>().console().sge_console()
 		)
 	),
 	perk_state_(
 		fcppt::make_unique_ptr<
-			perk::state
+			sanguis::client::perk::state
 		>(
-			std::tr1::bind(
-				&states::has_player::send_perk_choose,
+			std::bind(
+				&sanguis::client::states::has_player::send_perk_choose,
 				this,
-				std::tr1::placeholders::_1
+				std::placeholders::_1
 			)
 		)
 	)
 {
 	FCPPT_LOG_DEBUG(
-		client::log(),
+		sanguis::client::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("Entering has_player")
 	);
@@ -92,7 +98,7 @@ sanguis::client::states::has_player::~has_player()
 
 boost::statechart::result
 sanguis::client::states::has_player::react(
-	events::message const &_event
+	sanguis::client::events::message const &_event
 )
 {
 	static sanguis::messages::call::object<
@@ -109,17 +115,17 @@ sanguis::client::states::has_player::react(
 		dispatcher(
 			*_event.value(),
 			*this,
-			std::tr1::bind(
+			std::bind(
 				&has_player::handle_default_msg,
 				this,
-				std::tr1::placeholders::_1
+				std::placeholders::_1
 			)
 		);
 }
 
 boost::statechart::result
 sanguis::client::states::has_player::react(
-	events::action const &_event
+	sanguis::client::events::action const &_event
 )
 {
 	action_handler_->handle_action(
@@ -135,7 +141,7 @@ sanguis::client::states::has_player::operator()(
 )
 {
 	perk_state_->perks(
-		client::perk::make_tree(
+		sanguis::client::perk::make_tree(
 			_message.get<sanguis::messages::perk_tree>()
 		)
 	);
@@ -149,8 +155,9 @@ sanguis::client::states::has_player::operator()(
 )
 {
 	action_handler_->give_player_weapon(
-		SANGUIS_CAST_ENUM(
-			weapon_type,
+		sanguis::cast_enum<
+			sanguis::weapon_type
+		>(
 			_message.get<sanguis::messages::roles::weapon>()
 		)
 	);
@@ -160,12 +167,12 @@ sanguis::client::states::has_player::operator()(
 
 boost::statechart::result
 sanguis::client::states::has_player::operator()(
-	messages::level_up const &_message
+	sanguis::messages::level_up const &_message
 )
 {
 	perk_state_->player_level(
-		client::player_level(
-			client::level(
+		sanguis::client::player_level(
+			sanguis::client::level(
 				_message.get<sanguis::messages::level>()
 			)
 		)
@@ -176,10 +183,10 @@ sanguis::client::states::has_player::operator()(
 
 boost::statechart::result
 sanguis::client::states::has_player::operator()(
-	messages::remove_id const &
+	sanguis::messages::remove_id const &
 )
 {
-	return discard_event(); //transit<gameover>();
+	return this->discard_event(); //transit<gameover>();
 }
 
 sanguis::client::perk::state &
@@ -190,11 +197,11 @@ sanguis::client::states::has_player::perk_state()
 
 void
 sanguis::client::states::has_player::handle_player_action(
-	control::actions::any const &_action
+	sanguis::client::control::actions::any const &_action
 )
 {
 	this->post_event(
-		events::action(
+		sanguis::client::events::action(
 			_action
 		)
 	);
@@ -205,18 +212,24 @@ sanguis::client::states::has_player::handle_default_msg(
 	sanguis::messages::base const &
 )
 {
-	return forward_event();
+	return this->forward_event();
 }
 
 void
 sanguis::client::states::has_player::send_perk_choose(
-	sanguis::perk_type::type const _type
+	sanguis::perk_type const _type
 )
 {
-	context<machine>().send(
-		*messages::create(
-			messages::player_choose_perk(
-				_type
+	this->context<
+		sanguis::client::machine
+	>().send(
+		*sanguis::messages::create(
+			sanguis::messages::player_choose_perk(
+				static_cast<
+					sanguis::messages::types::enum_
+				>(
+					_type
+				)
 			)
 		)
 	);

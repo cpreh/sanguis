@@ -1,22 +1,27 @@
 #ifndef SANGUIS_SERVER_ENTITIES_FRIEND_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_FRIEND_HPP_INCLUDED
 
+#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/entity_type_fwd.hpp>
+#include <sanguis/friend_type.hpp>
+#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/messages/auto_ptr.hpp>
+#include <sanguis/server/health.hpp>
+#include <sanguis/server/player_id.hpp>
+#include <sanguis/server/team_fwd.hpp>
+#include <sanguis/server/ai/create_function.hpp>
+#include <sanguis/server/damage/armor.hpp>
 #include <sanguis/server/entities/body_velocity_combiner.hpp>
+#include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
 #include <sanguis/server/entities/with_health.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
-#include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
-#include <sanguis/server/damage/armor.hpp>
-#include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
-#include <sanguis/server/health.hpp>
-#include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/friend_type.hpp>
-#include <sanguis/random_generator_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -27,12 +32,12 @@ namespace entities
 
 class friend_
 :
-	private body_velocity_combiner,
-	public with_ai,
-	public with_body,
-	public with_buffs,
-	public with_health,
-	public with_velocity
+	private sanguis::server::entities::body_velocity_combiner,
+	public sanguis::server::entities::with_ai,
+	public sanguis::server::entities::with_body,
+	public sanguis::server::entities::with_buffs,
+	public sanguis::server::entities::with_health,
+	public sanguis::server::entities::with_velocity
 {
 	FCPPT_NONCOPYABLE(
 		friend_
@@ -41,30 +46,30 @@ public:
 	friend_(
 		sanguis::diff_clock const &,
 		sanguis::random_generator &,
-		friend_type::type,
-		server::environment::load_context &,
-		damage::armor const &,
-		server::health,
-		entities::movement_speed,
-		ai::create_function const &,
-		weapons::unique_ptr weapon
+		sanguis::friend_type,
+		sanguis::server::environment::load_context &,
+		sanguis::server::damage::armor const &,
+		sanguis::server::health,
+		sanguis::server::entities::movement_speed,
+		sanguis::server::ai::create_function const &,
+		sanguis::server::weapons::unique_ptr &&
 	);
 private:
 	void
 	on_update();
 
-	entity_type::type
+	sanguis::entity_type
 	type() const;
 
-	server::team::type
+	sanguis::server::team
 	team() const;
 
-	messages::auto_ptr
+	sanguis::messages::auto_ptr
 	add_message(
-		server::player_id
+		sanguis::server::player_id
 	) const;
 
-	friend_type::type const ftype_;
+	sanguis::friend_type const ftype_;
 };
 
 }

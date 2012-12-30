@@ -3,6 +3,7 @@
 
 #include <sanguis/server/perks/tree/object_unique_ptr.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -12,7 +13,7 @@ namespace perks
 namespace tree
 {
 
-tree::object_unique_ptr
+sanguis::server::perks::tree::object_unique_ptr
 create();
 
 }

@@ -1,5 +1,6 @@
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/player.hpp>
+#include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
@@ -40,13 +41,6 @@ sanguis::client::draw2d::entities::player::player(
 		),
 		model::needs_healthbar::yes,
 		model::decay_option::delayed
-	),
-	angle_(
-		static_cast<
-			funit
-		>(
-			0
-		)
 	)
 {
 }
@@ -69,7 +63,7 @@ sanguis::client::draw2d::entities::player::speed(
 	)
 		model::object::orientation(
 			fcppt::math::vector::signed_angle_between_cast<
-				funit
+				sanguis::client::draw2d::funit
 			>(
 				vector2::null(),
 				_speed.get()
@@ -121,7 +115,7 @@ sanguis::client::draw2d::entities::player::update()
 			leg_center,
 			vector2(
 				static_cast<
-					funit
+					sanguis::client::draw2d::funit
 				>(
 					this->at(
 						bottom
@@ -129,7 +123,7 @@ sanguis::client::draw2d::entities::player::update()
 					/ 2
 				),
 				static_cast<
-					funit
+					sanguis::client::draw2d::funit
 				>(
 					this->at(
 						bottom

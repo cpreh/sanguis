@@ -1,8 +1,9 @@
 #ifndef SANGUIS_SERVER_PERKS_TREE_CHOOSE_HPP_INCLUDED
 #define SANGUIS_SERVER_PERKS_TREE_CHOOSE_HPP_INCLUDED
 
-#include <sanguis/server/perks/tree/object.hpp>
-#include <sanguis/perk_type.hpp>
+#include <sanguis/perk_type_fwd.hpp>
+#include <sanguis/server/perks/tree/object_fwd.hpp>
+
 
 namespace sanguis
 {
@@ -15,8 +16,8 @@ namespace tree
 
 void
 choose(
-	tree::object &,
-	sanguis::perk_type::type
+	sanguis::server::perks::tree::object &,
+	sanguis::perk_type
 );
 
 }

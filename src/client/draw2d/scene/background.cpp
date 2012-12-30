@@ -19,8 +19,10 @@
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/signal/auto_connection.hpp>
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <functional>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::draw2d::scene::background::background(
@@ -71,7 +73,7 @@ sanguis::client::draw2d::scene::background::background(
 	),
 	viewport_connection_(
 		_viewport_manager.manage_callback(
-			std::tr1::bind(
+			std::bind(
 				&background::reset_viewport,
 				this
 			)

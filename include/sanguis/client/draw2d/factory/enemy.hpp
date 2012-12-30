@@ -1,9 +1,10 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_FACTORY_ENEMY_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_FACTORY_ENEMY_HPP_INCLUDED
 
+#include <sanguis/enemy_type_fwd.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
-#include <sanguis/enemy_type.hpp>
+
 
 namespace sanguis
 {
@@ -14,10 +15,10 @@ namespace draw2d
 namespace factory
 {
 
-entities::unique_ptr
+sanguis::client::draw2d::entities::unique_ptr
 enemy(
-	entities::model::parameters const &,
-	enemy_type::type
+	sanguis::client::draw2d::entities::model::parameters const &,
+	sanguis::enemy_type
 );
 
 }

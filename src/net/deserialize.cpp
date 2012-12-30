@@ -17,11 +17,11 @@
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/io/read.hpp>
 #include <fcppt/format.hpp>
-#include <fcppt/move.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/iostreams/stream_buffer.hpp>
 #include <istream>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -143,7 +143,7 @@ sanguis::net::deserialize(
 	);
 
 	return
-		fcppt::move(
+		std::move(
 			ret
 		);
 }

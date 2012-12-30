@@ -7,6 +7,7 @@
 #include <boost/ptr_container/ptr_map.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -15,7 +16,7 @@ namespace collision
 {
 
 typedef boost::ptr_map<
-	collision::group::type,
+	sanguis::server::collision::group,
 	sge::projectile::group::object
 > group_map;
 

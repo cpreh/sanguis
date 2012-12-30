@@ -1,10 +1,25 @@
 #ifndef SANGUIS_SERVER_WORLD_ENVIRONMENT_HPP_INCLUDED
 #define SANGUIS_SERVER_WORLD_ENVIRONMENT_HPP_INCLUDED
 
+#include <sanguis/entity_id.hpp>
+#include <sanguis/weapon_type_fwd.hpp>
+#include <sanguis/world_id.hpp>
+#include <sanguis/server/center_fwd.hpp>
+#include <sanguis/server/exp.hpp>
+#include <sanguis/server/health.hpp>
+#include <sanguis/server/level.hpp>
+#include <sanguis/server/pickup_probability.hpp>
+#include <sanguis/server/player_id.hpp>
+#include <sanguis/server/collision/global_groups_fwd.hpp>
+#include <sanguis/server/environment/load_context_fwd.hpp>
+#include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/entities/insert_parameters_fwd.hpp>
+#include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/world/environment_fwd.hpp>
 #include <sanguis/server/world/object_fwd.hpp>
-#include <sanguis/server/environment/object.hpp>
+#include <sge/projectile/world_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -15,35 +30,36 @@ namespace world
 
 class environment
 :
-	public server::environment::object
+	public sanguis::server::environment::object
 {
 	FCPPT_NONCOPYABLE(
 		environment
 	);
 public:
-	explicit environment(
-		world::object &
+	explicit
+	environment(
+		sanguis::server::world::object &
 	);
 
 	~environment();
 
 	void
 	insert(
-		entities::unique_ptr,
-		entities::insert_parameters const &
+		sanguis::server::entities::unique_ptr &&,
+		sanguis::server::entities::insert_parameters const &
 	);
 
 	void
 	weapon_changed(
 		sanguis::entity_id,
-		weapon_type::type
+		sanguis::weapon_type
 	);
 
 	void
 	got_weapon(
 		server::player_id,
 		sanguis::entity_id,
-		weapon_type::type
+		sanguis::weapon_type
 	);
 
 	void
@@ -61,63 +77,63 @@ public:
 	void
 	max_health_changed(
 		sanguis::entity_id,
-		server::health
+		sanguis::server::health
 	);
 
 	void
 	exp_changed(
-		server::player_id,
+		sanguis::server::player_id,
 		sanguis::entity_id,
-		server::exp
+		sanguis::server::exp
 	);
 
 	void
 	level_changed(
-		server::player_id,
+		sanguis::server::player_id,
 		sanguis::entity_id,
-		server::level
+		sanguis::server::level
 	);
 
 	void
 	pickup_chance(
-		server::probability spawn_chance,
-		server::center const &
+		sanguis::server::pickup_probability,
+		sanguis::server::center const &
 	);
 
 	void
 	request_transfer(
 		sanguis::world_id,
 		sanguis::entity_id,
-		entities::insert_parameters const &
+		sanguis::server::entities::insert_parameters const &
 	);
 
 	void
 	add_sight_range(
-		server::player_id,
+		sanguis::server::player_id,
 		sanguis::entity_id target_id
 	);
 
 	void
 	remove_sight_range(
-		server::player_id,
+		sanguis::server::player_id,
 		sanguis::entity_id target_id
 	);
 
 	void
 	remove_player(
-		server::player_id
+		sanguis::server::player_id
 	);
 
 	sge::projectile::world &
 	collision_world() const;
 
-	collision::global_groups const &
+	sanguis::server::collision::global_groups const &
 	global_collision_groups() const;
 
-	server::environment::load_context &
+	sanguis::server::environment::load_context &
 	load_context() const;
 private:
-	world::object &world_;
+	sanguis::server::world::object &world_;
 };
 
 }

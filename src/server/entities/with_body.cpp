@@ -14,12 +14,11 @@
 #include <sanguis/server/collision/user_data.hpp>
 #include <sge/projectile/body/scoped.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/ref.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/assert/pre.hpp>
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
+#include <functional>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -49,10 +48,10 @@ sanguis::server::entities::with_body::with_body(
 			sanguis::server::collision::user_data(
 				*this
 			),
-			std::tr1::bind(
+			std::bind(
 				&sanguis::server::entities::with_body::on_position_change,
 				this,
-				std::tr1::placeholders::_1
+				std::placeholders::_1
 			)
 		)
 	),
@@ -122,12 +121,8 @@ sanguis::server::entities::with_body::on_transfer(
 		fcppt::make_unique_ptr<
 			sge::projectile::body::scoped
 		>(
-			fcppt::ref(
-				_params.world()
-			),
-			fcppt::ref(
-				collision_body_->get()
-			),
+			_params.world(),
+			collision_body_->get(),
 			sanguis::server::collision::make_groups(
 				sanguis::server::entities::collision_groups(
 					this->type(),

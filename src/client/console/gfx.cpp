@@ -19,9 +19,10 @@
 #include <sge/texture/part_raw_ref.hpp>
 #include <sge/viewport/manager.hpp>
 #include <fcppt/make_shared_ptr.hpp>
-#include <fcppt/ref.hpp>
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/signal/auto_connection.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <functional>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace
@@ -72,9 +73,7 @@ sanguis::client::console::gfx::gfx(
 				fcppt::make_shared_ptr<
 					sge::texture::part_raw_ref
 				>(
-					fcppt::ref(
-						*texture_
-					)
+					*texture_
 				)
 			)
 			.pos(
@@ -90,7 +89,7 @@ sanguis::client::console::gfx::gfx(
 	),
 	resize_connection_(
 		_viewport_manager.manage_callback(
-			std::tr1::bind(
+			std::bind(
 				&client::console::gfx::on_resize,
 				this
 			)

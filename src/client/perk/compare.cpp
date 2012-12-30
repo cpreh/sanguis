@@ -1,12 +1,17 @@
+#include <sanguis/perk_type.hpp>
 #include <sanguis/client/perk/compare.hpp>
 #include <sanguis/client/perk/info.hpp>
+#include <sanguis/client/perk/tree.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
 
+
 sanguis::client::perk::compare::compare(
-	sanguis::perk_type::type const _type
+	sanguis::perk_type const _type
 )
 :
-	type_(_type)
+	type_(
+		_type
+	)
 {
 }
 

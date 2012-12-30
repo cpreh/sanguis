@@ -7,8 +7,8 @@
 #include <sanguis/client/draw2d/scene/message_environment_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/object_fwd.hpp>
 #include <sanguis/client/draw2d/entities/base_fwd.hpp>
-#include <sanguis/client/draw2d/entities/own_auto_ptr.hpp>
 #include <sanguis/client/draw2d/entities/own_fwd.hpp>
+#include <sanguis/client/draw2d/entities/own_unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/message/environment_fwd.hpp>
 #include <sanguis/client/draw2d/message/dispatcher_fwd.hpp>
@@ -37,10 +37,9 @@
 #include <sge/renderer/state/ffp/lighting/material/object_scoped_ptr.hpp>
 #include <sge/renderer/target/viewport_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
-#include <fcppt/function/object.hpp>
 #include <fcppt/math/vector/object_decl.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/scoped_ptr.hpp>
+#include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
@@ -113,13 +112,13 @@ private:
 
 	sanguis::client::draw2d::entities::base &
 	insert(
-		sanguis::client::draw2d::entities::unique_ptr,
+		sanguis::client::draw2d::entities::unique_ptr &&,
 		sanguis::entity_id
 	);
 
 	sanguis::client::draw2d::entities::own &
 	insert_own(
-		sanguis::client::draw2d::entities::own_auto_ptr
+		sanguis::client::draw2d::entities::own_unique_ptr &&
 	);
 
 	void

@@ -9,11 +9,12 @@
 #include <sge/input/cursor/move_event_fwd.hpp>
 #include <sge/input/cursor/move_signal.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
-#include <fcppt/signal/auto_connection.hpp>
+#include <fcppt/signal/auto_connection_fwd.hpp>
 #include <fcppt/signal/connection_manager.hpp>
 #include <fcppt/signal/object_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {

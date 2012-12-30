@@ -7,8 +7,10 @@
 #include <sge/projectile/body/object.hpp>
 #include <sge/projectile/ghost/object.hpp>
 #include <sge/projectile/ghost/parameters.hpp>
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <functional>
+#include <fcppt/config/external_end.hpp>
 
 sanguis::server::collision::ghost::ghost(
 	collision::group_vector const &_groups,
@@ -34,19 +36,19 @@ sanguis::server::collision::ghost::ghost(
 	),
 	collision_begin_connection_(
 		ghost_->body_enter(
-			std::tr1::bind(
+			std::bind(
 				&ghost::body_enter,
 				this,
-				std::tr1::placeholders::_1
+				std::placeholders::_1
 			)
 		)
 	),
 	collision_end_connection_(
 		ghost_->body_exit(
-			std::tr1::bind(
+			std::bind(
 				&ghost::body_exit,
 				this,
-				std::tr1::placeholders::_1
+				std::placeholders::_1
 			)
 		)
 	)

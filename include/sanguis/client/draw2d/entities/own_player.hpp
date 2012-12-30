@@ -4,8 +4,8 @@
 #include <sanguis/client/draw2d/entities/player.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
 #include <sanguis/client/draw2d/transform_callback.hpp>
-#include <fcppt/function/object.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -24,7 +24,7 @@ class own_player
 		own_player
 	);
 public:
-	explicit own_player(
+	own_player(
 		model::parameters const &,
 		draw2d::transform_callback const &
 	);

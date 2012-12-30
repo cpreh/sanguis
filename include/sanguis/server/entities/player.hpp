@@ -20,7 +20,8 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/string.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/perk_type.hpp>
+#include <sanguis/perk_type_fwd.hpp>
+#include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <fcppt/scoped_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -34,14 +35,14 @@ namespace entities
 
 class player
 :
-	private body_velocity_combiner,
-	public with_auras,
-	public with_body,
-	public with_buffs,
-	public with_health,
-	public with_perks,
-	public with_velocity,
-	public with_weapon
+	private sanguis::server::entities::body_velocity_combiner,
+	public sanguis::server::entities::with_auras,
+	public sanguis::server::entities::with_body,
+	public sanguis::server::entities::with_buffs,
+	public sanguis::server::entities::with_health,
+	public sanguis::server::entities::with_perks,
+	public sanguis::server::entities::with_velocity,
+	public sanguis::server::entities::with_weapon
 {
 	FCPPT_NONCOPYABLE(
 		player
@@ -50,39 +51,39 @@ public:
 	player(
 		sanguis::diff_clock const &,
 		sanguis::random_generator &,
-		server::environment::load_context &,
-		server::health,
-		damage::armor const &,
-		entities::movement_speed,
-		server::string const &name,
-		server::player_id
+		sanguis::server::environment::load_context &,
+		sanguis::server::health,
+		sanguis::server::damage::armor const &,
+		sanguis::server::entities::movement_speed,
+		sanguis::server::string const &name,
+		sanguis::server::player_id
 	);
 
 	~player();
 
 	// own functions
-	server::string const
+	sanguis::server::string const
 	name() const;
 
 	void
 	add_exp(
-		server::exp
+		sanguis::server::exp
 	);
 
 	bool
 	perk_choosable(
-		perk_type::type
+		sanguis::perk_type
 	) const;
 
 	void
 	add_perk(
-		perks::unique_ptr
+		sanguis::server::perks::unique_ptr
 	);
 
-	perks::tree::object const &
+	sanguis::server::perks::tree::object const &
 	perk_tree() const;
 
-	server::player_id
+	sanguis::server::player_id const
 	player_id() const;
 private:
 	void
@@ -101,40 +102,40 @@ private:
 	void
 	on_update();
 
-	messages::auto_ptr
+	sanguis::messages::auto_ptr
 	add_message(
-		server::player_id
+		sanguis::server::player_id
 	) const;
 
-	sanguis::entity_type::type
+	sanguis::entity_type
 	type() const;
 
-	server::team::type
+	sanguis::server::team
 	team() const;
 
 	void
 	on_new_weapon(
-		weapon_type::type
+		sanguis::weapon_type
 	);
 
 	template<
 		typename Message
 	>
-	messages::auto_ptr
+	sanguis::messages::auto_ptr
 	make_add_message() const;
 
-	server::string const name_;
+	sanguis::server::string const name_;
 
-	server::player_id const player_id_;
+	sanguis::server::player_id const player_id_;
 
-	server::exp exp_;
+	sanguis::server::exp exp_;
 
-	server::level level_;
+	sanguis::server::level level_;
 
 	unsigned skill_points_;
 
 	typedef fcppt::scoped_ptr<
-		perks::tree::object
+		sanguis::server::perks::tree::object
 	> perk_tree_scoped_ptr;
 
 	perk_tree_scoped_ptr perk_tree_;

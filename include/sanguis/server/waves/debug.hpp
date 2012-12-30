@@ -1,12 +1,13 @@
 #ifndef SANGUIS_SERVER_WAVES_DEBUG_HPP_INCLUDED
 #define SANGUIS_SERVER_WAVES_DEBUG_HPP_INCLUDED
 
+#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/waves/wave.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
-#include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/random_generator_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -17,7 +18,7 @@ namespace waves
 
 class debug
 :
-	public wave
+	public sanguis::server::waves::wave
 {
 	FCPPT_NONCOPYABLE(
 		debug
@@ -32,8 +33,8 @@ public:
 private:
 	void
 	process(
-		environment::object &,
-		environment::load_context &
+		sanguis::server::environment::object &,
+		sanguis::server::environment::load_context &
 	);
 
 	bool

@@ -6,7 +6,6 @@
 #include <sanguis/server/entities/with_body_fwd.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/update_sight_function.hpp>
-#include <fcppt/function/object.hpp>
 #include <fcppt/noncopyable.hpp>
 
 namespace sanguis

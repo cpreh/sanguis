@@ -1,12 +1,13 @@
 #ifndef SANGUIS_ENTITY_TYPE_HPP_INCLUDED
 #define SANGUIS_ENTITY_TYPE_HPP_INCLUDED
 
+#include <sanguis/entity_type_fwd.hpp>
+
+
 namespace sanguis
 {
 
-namespace entity_type
-{
-enum type
+enum class entity_type
 {
 	enemy,
 	friend_,
@@ -16,7 +17,6 @@ enum type
 	sentry,
 	spawn
 };
-}
 
 }
 

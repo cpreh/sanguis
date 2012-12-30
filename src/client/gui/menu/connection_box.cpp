@@ -2,11 +2,11 @@
 #include <sanguis/client/gui/object.hpp>
 #include <sanguis/media_path.hpp>
 #include <sge/cegui/to_cegui_string.hpp>
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <CEGUI/Window.h>
 #include <CEGUI/widgets/PushButton.h>
+#include <functional>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -50,10 +50,10 @@ sanguis::client::gui::menu::connection_box::connection_box(
 		cancel_button_.subscribeEvent(
 			CEGUI::PushButton::EventClicked,
 			CEGUI::Event::Subscriber(
-				std::tr1::bind(
+				std::bind(
 					&connection_box::handle_cancel_connect,
 					this,
-					std::tr1::placeholders::_1
+					std::placeholders::_1
 				)
 			)
 		)
@@ -62,10 +62,10 @@ sanguis::client::gui::menu::connection_box::connection_box(
 		retry_button_.subscribeEvent(
 			CEGUI::PushButton::EventClicked,
 			CEGUI::Event::Subscriber(
-				std::tr1::bind(
+				std::bind(
 					&connection_box::handle_retry_connect,
 					this,
-					std::tr1::placeholders::_1
+					std::placeholders::_1
 				)
 			)
 		)

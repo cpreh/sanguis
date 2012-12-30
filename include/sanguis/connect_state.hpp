@@ -1,12 +1,13 @@
 #ifndef SANGUIS_CONNECT_STATE_HPP_INCLUDED
 #define SANGUIS_CONNECT_STATE_HPP_INCLUDED
 
+#include <sanguis/connect_state_fwd.hpp>
+
+
 namespace sanguis
 {
-namespace connect_state
-{
 
-enum type
+enum class connect_state
 {
 	paused,
 	unpaused,
@@ -14,6 +15,5 @@ enum type
 };
 
 }
-}
 
-#endif // SANGUIS_CONNECT_STATE_HPP_INCLUDED
+#endif

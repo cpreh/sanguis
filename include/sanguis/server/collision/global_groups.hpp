@@ -1,11 +1,13 @@
 #ifndef SANGUIS_SERVER_COLLISION_GLOBAL_GROUPS_HPP_INCLUDED
 #define SANGUIS_SERVER_COLLISION_GLOBAL_GROUPS_HPP_INCLUDED
 
+#include <sanguis/server/collision/global_groups_fwd.hpp>
+#include <sanguis/server/collision/group_fwd.hpp>
 #include <sanguis/server/collision/group_map.hpp>
-#include <sanguis/server/collision/group.hpp>
 #include <sge/projectile/group/object_fwd.hpp>
 #include <sge/projectile/world_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -20,7 +22,8 @@ class global_groups
 		global_groups
 	);
 public:
-	explicit global_groups(
+	explicit
+	global_groups(
 		sge::projectile::world &
 	);
 
@@ -28,11 +31,11 @@ public:
 
 	sge::projectile::group::object &
 	group(
-		collision::group::type
+		sanguis::server::collision::group
 	) const;
 private:
 	// TODO: why are the groups in projectile nonconst everywhere?
-	mutable collision::group_map groups_;
+	mutable sanguis::server::collision::group_map groups_;
 };
 
 }

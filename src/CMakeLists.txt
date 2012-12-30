@@ -3,6 +3,7 @@ SET(
 	include/sanguis/animation_sound_type.hpp
 	include/sanguis/animation_type.hpp
 	include/sanguis/aoe_projectile_type.hpp
+	include/sanguis/aoe_projectile_type_fwd.hpp
 	include/sanguis/app_name.hpp
 	include/sanguis/apply_log_level.hpp
 	include/sanguis/args/display_mode.hpp
@@ -15,8 +16,8 @@ SET(
 	include/sanguis/args/server_only.hpp
 	include/sanguis/args/server_port.hpp
 	include/sanguis/cast_enum.hpp
-	include/sanguis/cast_enum_impl.hpp
 	include/sanguis/cheat_type.hpp
+	include/sanguis/cheat_type_fwd.hpp
 	include/sanguis/client/config/homedir.hpp
 	include/sanguis/client/config/settings/file.hpp
 	include/sanguis/client/config/settings/object.hpp
@@ -90,9 +91,9 @@ SET(
 	include/sanguis/client/draw2d/entities/model/part_fwd.hpp
 	include/sanguis/client/draw2d/entities/order_vector.hpp
 	include/sanguis/client/draw2d/entities/own.hpp
-	include/sanguis/client/draw2d/entities/own_auto_ptr.hpp
 	include/sanguis/client/draw2d/entities/own_fwd.hpp
 	include/sanguis/client/draw2d/entities/own_player.hpp
+	include/sanguis/client/draw2d/entities/own_unique_ptr.hpp
 	include/sanguis/client/draw2d/entities/player.hpp
 	include/sanguis/client/draw2d/entities/player_fwd.hpp
 	include/sanguis/client/draw2d/entities/sentry.hpp
@@ -196,6 +197,7 @@ SET(
 	include/sanguis/client/draw2d/sprite/normal/system.hpp
 	include/sanguis/client/draw2d/sprite/normal/texture_animation.hpp
 	include/sanguis/client/draw2d/sprite/order.hpp
+	include/sanguis/client/draw2d/sprite/order_fwd.hpp
 	include/sanguis/client/draw2d/sprite/point.hpp
 	include/sanguis/client/draw2d/sprite/rotation.hpp
 	include/sanguis/client/draw2d/sprite/state.hpp
@@ -226,6 +228,7 @@ SET(
 	include/sanguis/client/draw2d/unit.hpp
 	include/sanguis/client/draw2d/vector2.hpp
 	include/sanguis/client/draw2d/z_ordering.hpp
+	include/sanguis/client/draw2d/z_ordering_fwd.hpp
 	include/sanguis/client/events/action.hpp
 	include/sanguis/client/events/action_fwd.hpp
 	include/sanguis/client/events/connected.hpp
@@ -317,6 +320,7 @@ SET(
 	include/sanguis/clock.hpp
 	include/sanguis/config_app_name.hpp
 	include/sanguis/connect_state.hpp
+	include/sanguis/connect_state_fwd.hpp
 	include/sanguis/damage_type.hpp
 	include/sanguis/diff_clock.hpp
 	include/sanguis/diff_clock_fwd.hpp
@@ -324,10 +328,13 @@ SET(
 	include/sanguis/duration.hpp
 	include/sanguis/duration_second.hpp
 	include/sanguis/enemy_type.hpp
+	include/sanguis/enemy_type_fwd.hpp
 	include/sanguis/entity_id.hpp
 	include/sanguis/entity_type.hpp
+	include/sanguis/entity_type_fwd.hpp
 	include/sanguis/exception.hpp
 	include/sanguis/friend_type.hpp
+	include/sanguis/friend_type_fwd.hpp
 	include/sanguis/from_console_arg_list.hpp
 	include/sanguis/io_service.hpp
 	include/sanguis/io_service_callback.hpp
@@ -555,9 +562,12 @@ SET(
 	include/sanguis/net/serialize_to_data_buffer.hpp
 	include/sanguis/net/stream_exceptions.hpp
 	include/sanguis/perk_type.hpp
+	include/sanguis/perk_type_fwd.hpp
 	include/sanguis/pickup_type.hpp
+	include/sanguis/pickup_type_fwd.hpp
 	include/sanguis/pixels_per_meter.hpp
 	include/sanguis/projectile_type.hpp
+	include/sanguis/projectile_type_fwd.hpp
 	include/sanguis/random_generator.hpp
 	include/sanguis/random_generator_fwd.hpp
 	include/sanguis/random_seed.hpp
@@ -580,6 +590,7 @@ SET(
 	include/sanguis/server/auras/burn.hpp
 	include/sanguis/server/auras/collision_groups.hpp
 	include/sanguis/server/auras/influence.hpp
+	include/sanguis/server/auras/influence_fwd.hpp
 	include/sanguis/server/auras/unique_ptr.hpp
 	include/sanguis/server/auras/update_sight.hpp
 	include/sanguis/server/buffs/base_hook.hpp
@@ -592,6 +603,7 @@ SET(
 	include/sanguis/server/buffs/provider_fwd.hpp
 	include/sanguis/server/buffs/unique_ptr.hpp
 	include/sanguis/server/center.hpp
+	include/sanguis/server/center_fwd.hpp
 	include/sanguis/server/cheat.hpp
 	include/sanguis/server/circle.hpp
 	include/sanguis/server/collision/body.hpp
@@ -614,6 +626,7 @@ SET(
 	include/sanguis/server/collision/global_groups.hpp
 	include/sanguis/server/collision/global_groups_fwd.hpp
 	include/sanguis/server/collision/group.hpp
+	include/sanguis/server/collision/group_fwd.hpp
 	include/sanguis/server/collision/group_map.hpp
 	include/sanguis/server/collision/group_vector.hpp
 	include/sanguis/server/collision/make_groups.hpp
@@ -650,6 +663,7 @@ SET(
 	include/sanguis/server/damage/wrapper.hpp
 	include/sanguis/server/damage/wrapper_fwd.hpp
 	include/sanguis/server/dim.hpp
+	include/sanguis/server/dim_fwd.hpp
 	include/sanguis/server/direction.hpp
 	include/sanguis/server/entities/auto_weak_hook.hpp
 	include/sanguis/server/entities/auto_weak_link.hpp
@@ -665,6 +679,8 @@ SET(
 	include/sanguis/server/entities/enemies/create.hpp
 	include/sanguis/server/entities/enemies/enemy.hpp
 	include/sanguis/server/entities/enemies/fwd.hpp
+	include/sanguis/server/entities/enemies/spawn_owner.hpp
+	include/sanguis/server/entities/enemies/spawn_owner_fwd.hpp
 	include/sanguis/server/entities/exp_area.hpp
 	include/sanguis/server/entities/friend.hpp
 	include/sanguis/server/entities/ifaces/with_angle.hpp
@@ -678,6 +694,8 @@ SET(
 	include/sanguis/server/entities/nonsolid.hpp
 	include/sanguis/server/entities/pickups/health.hpp
 	include/sanguis/server/entities/pickups/monster.hpp
+	include/sanguis/server/entities/pickups/optional_dim.hpp
+	include/sanguis/server/entities/pickups/optional_dim_fwd.hpp
 	include/sanguis/server/entities/pickups/pickup.hpp
 	include/sanguis/server/entities/pickups/weapon.hpp
 	include/sanguis/server/entities/player.hpp
@@ -686,11 +704,14 @@ SET(
 	include/sanguis/server/entities/player_unique_ptr.hpp
 	include/sanguis/server/entities/projectiles/aoe_damage.hpp
 	include/sanguis/server/entities/projectiles/aoe_projectile.hpp
+	include/sanguis/server/entities/projectiles/damage_per_pulse.hpp
 	include/sanguis/server/entities/projectiles/grenade.hpp
 	include/sanguis/server/entities/projectiles/indeterminate.hpp
+	include/sanguis/server/entities/projectiles/indeterminate_fwd.hpp
 	include/sanguis/server/entities/projectiles/life_time.hpp
 	include/sanguis/server/entities/projectiles/melee.hpp
 	include/sanguis/server/entities/projectiles/projectile.hpp
+	include/sanguis/server/entities/projectiles/pulses.hpp
 	include/sanguis/server/entities/projectiles/rocket.hpp
 	include/sanguis/server/entities/projectiles/simple_bullet.hpp
 	include/sanguis/server/entities/property/add.hpp
@@ -796,22 +817,24 @@ SET(
 	include/sanguis/server/perks/tree/equal.hpp
 	include/sanguis/server/perks/tree/max_level.hpp
 	include/sanguis/server/perks/tree/object.hpp
+	include/sanguis/server/perks/tree/object_fwd.hpp
 	include/sanguis/server/perks/tree/object_unique_ptr.hpp
 	include/sanguis/server/perks/tree/required_parent_level.hpp
 	include/sanguis/server/perks/tree/required_player_level.hpp
 	include/sanguis/server/perks/tree/status.hpp
 	include/sanguis/server/perks/tree/status_fwd.hpp
 	include/sanguis/server/perks/unique_ptr.hpp
+	include/sanguis/server/pickup_probability.hpp
 	include/sanguis/server/pickup_spawner.hpp
 	include/sanguis/server/player_id.hpp
 	include/sanguis/server/player_id_from_args.hpp
 	include/sanguis/server/player_id_from_net.hpp
-	include/sanguis/server/probability.hpp
 	include/sanguis/server/radius.hpp
 	include/sanguis/server/send_available_perks.hpp
 	include/sanguis/server/send_callback.hpp
 	include/sanguis/server/space_unit.hpp
 	include/sanguis/server/speed.hpp
+	include/sanguis/server/speed_fwd.hpp
 	include/sanguis/server/states/log_location.hpp
 	include/sanguis/server/states/paused.hpp
 	include/sanguis/server/states/running.hpp
@@ -820,9 +843,9 @@ SET(
 	include/sanguis/server/states/unpaused_fwd.hpp
 	include/sanguis/server/string.hpp
 	include/sanguis/server/team.hpp
+	include/sanguis/server/team_fwd.hpp
 	include/sanguis/server/timer.hpp
 	include/sanguis/server/timer_callback.hpp
-	include/sanguis/server/timer_callback_fwd.hpp
 	include/sanguis/server/timer_duration.hpp
 	include/sanguis/server/timer_function.hpp
 	include/sanguis/server/timer_fwd.hpp
@@ -893,6 +916,7 @@ SET(
 	include/sanguis/server/weapons/weapon_fwd.hpp
 	include/sanguis/server/world/context.hpp
 	include/sanguis/server/world/context_fwd.hpp
+	include/sanguis/server/world/convert_vertex.hpp
 	include/sanguis/server/world/create_static_body.hpp
 	include/sanguis/server/world/entity_map.hpp
 	include/sanguis/server/world/environment.hpp
@@ -906,12 +930,17 @@ SET(
 	include/sanguis/server/world/sight_range_entry_set.hpp
 	include/sanguis/server/world/sight_range_fwd.hpp
 	include/sanguis/server/world/sight_range_map.hpp
+	include/sanguis/server/world/triangle_traits/access_element.hpp
+	include/sanguis/server/world/triangle_traits/insert_result.hpp
+	include/sanguis/server/world/triangle_traits/scalar.hpp
+	include/sanguis/server/world/triangle_traits/tag.hpp
 	include/sanguis/string_vector.hpp
 	include/sanguis/time_unit.hpp
 	include/sanguis/timer.hpp
 	include/sanguis/to_console_arg_list.hpp
 	include/sanguis/update_diff_clock.hpp
 	include/sanguis/weapon_type.hpp
+	include/sanguis/weapon_type_fwd.hpp
 	include/sanguis/world_id.hpp
 	src/app_name.cpp
 	src/apply_log_level.cpp

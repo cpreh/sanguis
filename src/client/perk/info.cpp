@@ -7,8 +7,9 @@
 #include <sanguis/client/perk/required_parent_level.hpp>
 #include <sanguis/client/perk/required_player_level.hpp>
 
+
 sanguis::client::perk::info::info(
-	sanguis::perk_type::type const _type
+	sanguis::perk_type const _type
 )
 :
 	type_(
@@ -39,10 +40,10 @@ sanguis::client::perk::info::info(
 }
 
 sanguis::client::perk::info::info(
-	sanguis::perk_type::type const _type,
-	perk::required_parent_level const _required_parent_level,
-	perk::required_player_level const _required_player_level,
-	perk::max_level const _max_level
+	sanguis::perk_type const _type,
+	sanguis::client::perk::required_parent_level const _required_parent_level,
+	sanguis::client::perk::required_player_level const _required_player_level,
+	sanguis::client::perk::max_level const _max_level
 )
 :
 	type_(
@@ -60,7 +61,7 @@ sanguis::client::perk::info::info(
 {
 }
 
-sanguis::perk_type::type
+sanguis::perk_type
 sanguis::client::perk::info::type() const
 {
 	return type_;

@@ -13,6 +13,7 @@
 #include <fcppt/random/distribution/uniform_real_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -22,7 +23,7 @@ namespace perks
 
 class choleric
 :
-	public perk
+	public sanguis::server::perks::perk
 {
 	FCPPT_NONCOPYABLE(
 		choleric
@@ -37,14 +38,14 @@ public:
 private:
 	void
 	update(
-		entities::base &,
-		environment::object &
+		sanguis::server::entities::base &,
+		sanguis::server::environment::object &
 	);
 
 	void
 	change(
-		entities::base &,
-		perks::level_diff
+		sanguis::server::entities::base &,
+		sanguis::server::perks::level_diff
 	);
 
 	sanguis::diff_clock const &diff_clock_;
@@ -52,7 +53,7 @@ private:
 	sanguis::diff_timer shoot_timer_;
 
 	typedef fcppt::random::distribution::uniform_real<
-		server::space_unit
+		sanguis::server::space_unit
 	> distribution;
 
 	fcppt::random::variate<

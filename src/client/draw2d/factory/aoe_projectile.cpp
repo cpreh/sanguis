@@ -6,9 +6,7 @@
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
 #include <sanguis/load/aoe_projectile_name.hpp>
-#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/ref.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
 
@@ -16,7 +14,7 @@ sanguis::client::draw2d::entities::unique_ptr
 sanguis::client::draw2d::factory::aoe_projectile(
 	sanguis::client::draw2d::entities::model::parameters const &_param,
 	sanguis::client::draw2d::insert_own_callback const &_insert,
-	sanguis::aoe_projectile_type::type const _ptype,
+	sanguis::aoe_projectile_type const _ptype,
 	sanguis::client::draw2d::aoe const _aoe
 )
 {
@@ -34,9 +32,7 @@ sanguis::client::draw2d::factory::aoe_projectile(
 				fcppt::make_unique_ptr<
 					sanguis::client::draw2d::entities::aoe_bullet
 				>(
-					fcppt::cref(
-						_param
-					),
+					_param,
 					_insert,
 					sanguis::load::aoe_projectile_name(
 						_ptype

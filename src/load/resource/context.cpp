@@ -2,7 +2,6 @@
 #include <sanguis/load/resource/textures.hpp>
 #include <sanguis/load/resource/animations.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/ref.hpp>
 
 sanguis::load::resource::textures const &
 sanguis::load::resource::context::textures() const
@@ -25,24 +24,20 @@ sanguis::load::resource::context::context(
 		fcppt::make_unique_ptr<
 			resource::textures
 		>(
-			fcppt::ref(
-				_renderer
-			),
-			fcppt::ref(
-				_image_loader
-			)
+			_renderer,
+			_image_loader
 		)
 	),
 	animations_(
 		fcppt::make_unique_ptr<
 			resource::animations
 		>(
-			fcppt::ref(
-				*textures_
-			)
+			*textures_
 		)
 	)
-{}
+{
+}
 
 sanguis::load::resource::context::~context()
-{}
+{
+}

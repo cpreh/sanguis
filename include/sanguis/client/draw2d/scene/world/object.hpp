@@ -6,9 +6,9 @@
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/load/resource/textures_fwd.hpp>
-#include <sge/renderer/vertex_declaration_scoped_ptr.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
+#include <sge/renderer/vertex/declaration_scoped_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
 
@@ -52,7 +52,7 @@ private:
 
 	sanguis::load::resource::textures const &textures_;
 
-	sge::renderer::vertex_declaration_scoped_ptr const vertex_declaration_;
+	sge::renderer::vertex::declaration_scoped_ptr const vertex_declaration_;
 
 	typedef fcppt::scoped_ptr<
 		sanguis::client::draw2d::scene::world::state

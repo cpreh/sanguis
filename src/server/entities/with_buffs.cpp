@@ -3,8 +3,10 @@
 #include <sanguis/server/buffs/unique_ptr.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
-#include <fcppt/move.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 void
@@ -19,12 +21,12 @@ sanguis::server::entities::with_buffs::add_buff(
 
 void
 sanguis::server::entities::with_buffs::claim_buff(
-	sanguis::server::buffs::unique_ptr _buff
+	sanguis::server::buffs::unique_ptr &&_buff
 )
 {
 	fcppt::container::ptr::push_back_unique_ptr(
 		owned_buffs_,
-		fcppt::move(
+		std::move(
 			_buff
 		)
 	);
@@ -46,13 +48,9 @@ void
 sanguis::server::entities::with_buffs::on_update()
 {
 	for(
-		sanguis::server::buffs::list::iterator it(
-			buffs_.begin()
-		);
-		it != buffs_.end();
-		++it
+		auto &buff : buffs_
 	)
-		it->update(
+		buff.update(
 			*this
 		);
 

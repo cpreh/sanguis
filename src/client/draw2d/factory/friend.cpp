@@ -1,57 +1,56 @@
-#include <sanguis/client/draw2d/factory/friend.hpp>
-#include <sanguis/client/draw2d/entities/model/object.hpp>
+#include <sanguis/friend_type.hpp>
+#include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/sentry.hpp>
-#include <sanguis/client/draw2d/z_ordering.hpp>
+#include <sanguis/client/draw2d/entities/model/decay_option.hpp>
+#include <sanguis/client/draw2d/entities/model/needs_healthbar.hpp>
+#include <sanguis/client/draw2d/entities/model/object.hpp>
+#include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
+#include <sanguis/client/draw2d/factory/friend.hpp>
 #include <sanguis/load/friend_name.hpp>
-#include <sanguis/friend_type.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/assert/unreachable.hpp>
-#include <fcppt/cref.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+
 
 sanguis::client::draw2d::entities::unique_ptr
 sanguis::client::draw2d::factory::friend_(
-	entities::model::parameters const &_param,
-	friend_type::type const _etype
+	sanguis::client::draw2d::entities::model::parameters const &_param,
+	sanguis::friend_type const _etype
 )
 {
 	switch(
 		_etype
 	)
 	{
-	case friend_type::size:
+	case sanguis::friend_type::size:
 		break;
-	case friend_type::spider:
+	case sanguis::friend_type::spider:
 		return
-			entities::unique_ptr(
+			sanguis::client::draw2d::entities::unique_ptr(
 				fcppt::make_unique_ptr<
-					entities::model::object
+					sanguis::client::draw2d::entities::model::object
 				>(
-					fcppt::cref(
-						_param
-					),
-					load::friend_name(
+					_param,
+					sanguis::load::friend_name(
 						_etype
 					),
 					fcppt::assign::make_container<
-						entities::order_vector
+						sanguis::client::draw2d::entities::order_vector
 					>(
-						z_ordering::model_generic
+						sanguis::client::draw2d::z_ordering::model_generic
 					),
-					entities::model::needs_healthbar::yes,
-					entities::model::decay_option::delayed
+					sanguis::client::draw2d::entities::model::needs_healthbar::yes,
+					sanguis::client::draw2d::entities::model::decay_option::delayed
 				)
 			);
-	case friend_type::sentry:
+	case sanguis::friend_type::sentry:
 		return
-			entities::unique_ptr(
+			sanguis::client::draw2d::entities::unique_ptr(
 				fcppt::make_unique_ptr<
-					entities::sentry
+					sanguis::client::draw2d::entities::sentry
 				>(
-					fcppt::cref(
-						_param
-					)
+					_param
 				)
 			);
 	}

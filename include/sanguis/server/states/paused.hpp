@@ -1,19 +1,20 @@
 #ifndef SANGUIS_SERVER_STATES_PAUSED_HPP_INCLUDED
 #define SANGUIS_SERVER_STATES_PAUSED_HPP_INCLUDED
 
-#include <sanguis/server/states/running.hpp>
-#include <sanguis/server/events/message_fwd.hpp>
 #include <sanguis/server/player_id.hpp>
-#include <sanguis/messages/player_unpause.hpp>
-#include <sanguis/messages/player_pause.hpp>
+#include <sanguis/server/events/message_fwd.hpp>
+#include <sanguis/server/states/running.hpp>
 #include <sanguis/messages/base_fwd.hpp>
+#include <sanguis/messages/player_pause.hpp>
+#include <sanguis/messages/player_unpause.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
+#include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/simple_state.hpp>
 #include <boost/statechart/result.hpp>
-#include <boost/statechart/custom_reaction.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -25,8 +26,8 @@ namespace states
 class paused
 :
 	public boost::statechart::simple_state<
-		paused,
-		running
+		sanguis::server::states::paused,
+		sanguis::server::states::running
 	>
 {
 	FCPPT_NONCOPYABLE(
@@ -35,36 +36,37 @@ class paused
 public:
 	typedef boost::mpl::list1<
 		boost::statechart::custom_reaction<
-			events::message
+			sanguis::server::events::message
 		>
 	> reactions;
 
 	paused();
 
-	virtual ~paused();
+	virtual
+	~paused();
 
 	// reactions
 	boost::statechart::result
 	react(
-		events::message const &
+		sanguis::server::events::message const &
 	);
 
 	boost::statechart::result
 	operator()(
-		server::player_id,
-		messages::player_unpause const &
+		sanguis::server::player_id,
+		sanguis::messages::player_unpause const &
 	);
 
 	boost::statechart::result
 	operator()(
-		server::player_id,
-		messages::player_pause const &
+		sanguis::server::player_id,
+		sanguis::messages::player_pause const &
 	);
 private:
 	boost::statechart::result
 	handle_default_msg(
-		server::player_id,
-		messages::base const &
+		sanguis::server::player_id,
+		sanguis::messages::base const &
 	);
 };
 

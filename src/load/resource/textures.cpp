@@ -17,17 +17,16 @@
 #include <fcppt/filesystem/extension.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/io/ifstream.hpp>
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/make_shared_ptr.hpp>
-#include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/ref.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
+#include <functional>
 #include <fcppt/config/external_end.hpp>
+
 
 sge::texture::const_part_shared_ptr const
 sanguis::load::resource::textures::load(
@@ -38,10 +37,10 @@ sanguis::load::resource::textures::load(
 		resource::map_get_or_create(
 			textures_,
 			_id,
-			std::tr1::bind(
+			std::bind(
 				&textures::do_load,
 				this,
-				std::tr1::placeholders::_1
+				std::placeholders::_1
 			)
 		);
 }
@@ -56,10 +55,10 @@ sanguis::load::resource::textures::load(
 			resource::map_get_or_create(
 				unnamed_textures_,
 				_path,
-				std::tr1::bind(
+				std::bind(
 					&textures::do_load_unnamed,
 					this,
-					std::tr1::placeholders::_1
+					std::placeholders::_1
 				)
 			)
 		);
@@ -215,12 +214,8 @@ sanguis::load::resource::textures::do_load_unnamed(
 			texture_context_impl
 		>(
 			_path,
-			fcppt::ref(
-				renderer_
-			),
-			fcppt::ref(
-				image_loader_
-			)
+			renderer_,
+			image_loader_
 		);
 }
 
@@ -231,7 +226,7 @@ sanguis::load::resource::textures::do_load_inner(
 {
 	return
 		sge::texture::const_part_shared_ptr(
-			fcppt::make_unique_ptr<
+			fcppt::make_shared_ptr<
 				sge::texture::part_raw_ptr
 			>(
 				sge::renderer::texture::create_planar_from_path(

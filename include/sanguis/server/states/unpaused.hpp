@@ -1,10 +1,11 @@
 #ifndef SANGUIS_SERVER_STATES_UNPAUSED_HPP_INCLUDED
 #define SANGUIS_SERVER_STATES_UNPAUSED_HPP_INCLUDED
 
-#include <sanguis/server/states/running.hpp>
+#include <sanguis/server/player_id.hpp>
 #include <sanguis/server/events/message_fwd.hpp>
 #include <sanguis/server/events/tick_fwd.hpp>
-#include <sanguis/server/player_id.hpp>
+#include <sanguis/server/states/running.hpp>
+#include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/messages/player_attack_dest.hpp>
 #include <sanguis/messages/player_direction.hpp>
 #include <sanguis/messages/player_start_shooting.hpp>
@@ -12,13 +13,13 @@
 #include <sanguis/messages/player_change_weapon.hpp>
 #include <sanguis/messages/player_pause.hpp>
 #include <sanguis/messages/player_unpause.hpp>
-#include <sanguis/messages/base_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
+#include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/simple_state.hpp>
 #include <boost/statechart/result.hpp>
-#include <boost/statechart/custom_reaction.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -30,8 +31,8 @@ namespace states
 class unpaused
 :
 	public boost::statechart::simple_state<
-		unpaused,
-		running
+		sanguis::server::states::unpaused,
+		sanguis::server::states::running
 	>
 {
 	FCPPT_NONCOPYABLE(
@@ -40,73 +41,74 @@ class unpaused
 public:
 	typedef boost::mpl::list2<
 		boost::statechart::custom_reaction<
-			events::tick
+			sanguis::server::events::tick
 		>,
 		boost::statechart::custom_reaction<
-			events::message
+			sanguis::server::events::message
 		>
 	> reactions;
 
 	unpaused();
 
-	virtual ~unpaused();
+	virtual
+	~unpaused();
 
 	boost::statechart::result
 	react(
-		events::tick const &
+		sanguis::server::events::tick const &
 	);
 
 	boost::statechart::result
 	react(
-		events::message const &
+		sanguis::server::events::message const &
 	);
 
 	boost::statechart::result
 	operator()(
-		server::player_id,
-		messages::player_attack_dest const &
+		sanguis::server::player_id,
+		sanguis::messages::player_attack_dest const &
 	);
 
 	boost::statechart::result
 	operator()(
-		server::player_id,
-		messages::player_direction const &
+		sanguis::server::player_id,
+		sanguis::messages::player_direction const &
 	);
 
 	boost::statechart::result
 	operator()(
-		server::player_id,
-		messages::player_start_shooting const &
+		sanguis::server::player_id,
+		sanguis::messages::player_start_shooting const &
 	);
 
 	boost::statechart::result
 	operator()(
-		server::player_id,
-		messages::player_stop_shooting const &
+		sanguis::server::player_id,
+		sanguis::messages::player_stop_shooting const &
 	);
 
 	boost::statechart::result
 	operator()(
-		server::player_id,
-		messages::player_change_weapon const &
+		sanguis::server::player_id,
+		sanguis::messages::player_change_weapon const &
 	);
 
 	boost::statechart::result
 	operator()(
-		server::player_id,
-		messages::player_unpause const &
+		sanguis::server::player_id,
+		sanguis::messages::player_unpause const &
 	);
 
 	boost::statechart::result
 	operator()(
-		server::player_id,
-		messages::player_pause const &
+		sanguis::server::player_id,
+		sanguis::messages::player_pause const &
 	);
 private:
 	boost::statechart::result
 	handle_default_msg(
-		server::player_id,
-		messages::base const &
+		sanguis::server::player_id,
+		sanguis::messages::base const &
 	);
 };
 

@@ -4,6 +4,7 @@
 #include <sanguis/load/model/weapon_category.hpp>
 #include <sanguis/load/log.hpp>
 #include <sanguis/exception.hpp>
+#include <sanguis/weapon_type.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
@@ -12,7 +13,6 @@
 #include <sge/parse/json/member_map.hpp>
 #include <fcppt/algorithm/find_exn.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
-#include <fcppt/container/array.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -20,15 +20,21 @@
 #include <fcppt/text.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <array>
+#include <cstddef>
 #include <iterator>
 #include <fcppt/config/external_end.hpp>
 
 namespace
 {
 
-typedef fcppt::container::array<
+typedef std::array<
 	fcppt::string,
-	sanguis::weapon_type::size
+	static_cast<
+		std::size_t
+	>(
+		sanguis::weapon_type::size
+	)
 > weapon_type_array;
 
 weapon_type_array const weapon_types = {
@@ -42,14 +48,14 @@ weapon_type_array const weapon_types = {
 	FCPPT_TEXT("grenade")
 } };
 
-sanguis::weapon_type::type
+sanguis::weapon_type
 find_weapon_type(
 	fcppt::string const &_str
 )
 {
 	return
 		static_cast<
-			sanguis::weapon_type::type
+			sanguis::weapon_type
 		>(
 			std::distance(
 				weapon_types.begin(),
@@ -66,7 +72,7 @@ find_weapon_type(
 
 sanguis::load::model::weapon_category const &
 sanguis::load::model::part::operator[](
-	weapon_type::type const _type
+	sanguis::weapon_type const _type
 ) const
 {
 	category_map::const_iterator const it(

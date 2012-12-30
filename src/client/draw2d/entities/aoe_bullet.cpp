@@ -4,14 +4,11 @@
 #include <sanguis/client/draw2d/entities/aoe_bullet.hpp>
 #include <sanguis/client/draw2d/entities/explosion.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
-#include <sanguis/client/draw2d/entities/own_auto_ptr.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/model/needs_healthbar.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
-#include <fcppt/cref.hpp>
-#include <fcppt/make_auto_ptr.hpp>
-#include <fcppt/ref.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/math/vector/object_impl.hpp>
@@ -60,26 +57,16 @@ sanguis::client::draw2d::entities::aoe_bullet::~aoe_bullet()
 void
 sanguis::client::draw2d::entities::aoe_bullet::on_decay()
 {
-	sanguis::client::draw2d::entities::own_auto_ptr explosion(
-		fcppt::make_auto_ptr<
+	insert_(
+		fcppt::make_unique_ptr<
 			sanguis::client::draw2d::entities::explosion
 		>(
-			fcppt::cref(
-				diff_clock_
-			),
-			fcppt::ref(
-				random_generator_
-			),
-			fcppt::cref(
-				model_collection_
-			),
+			diff_clock_,
+			random_generator_,
+			model_collection_,
 			this->center(),
 			aoe_
 		)
-	);
-
-	insert_(
-		explosion
 	);
 
 	sanguis::client::draw2d::entities::model::object::on_decay();

@@ -5,8 +5,8 @@
 #include <sanguis/client/gui/menu/callbacks/cancel_connect.hpp>
 #include <sanguis/client/gui/menu/callbacks/quickstart.hpp>
 #include <sanguis/client/gui/menu/callbacks/quit.hpp>
-#include <fcppt/function/object.hpp>
 #include <fcppt/nonassignable.hpp>
+
 
 namespace sanguis
 {

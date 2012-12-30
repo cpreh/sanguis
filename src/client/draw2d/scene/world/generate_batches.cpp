@@ -16,8 +16,8 @@
 #include <sanguis/creator/geometry/rect.hpp>
 #include <sanguis/creator/geometry/shape_container.hpp>
 #include <sge/projectile/triangulation/triangulate.hpp>
-#include <sge/renderer/vertex_declaration_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
+#include <sge/renderer/vertex/declaration_fwd.hpp>
 #include <fcppt/algorithm/array_map.hpp>
 #include <fcppt/container/grid/in_range.hpp>
 #include <fcppt/container/grid/object_impl.hpp>
@@ -28,21 +28,22 @@
 #include <fcppt/math/dim/output.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/dim.hpp>
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <functional>
 #include <iterator>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::draw2d::scene::world::batch_grid_unique_ptr
 sanguis::client::draw2d::scene::world::generate_batches(
 	sge::renderer::device::core &_renderer,
-	sge::renderer::vertex_declaration const &_vertex_declaration,
+	sge::renderer::vertex::declaration const &_vertex_declaration,
 	sanguis::creator::generator::top_parameters const &_parameters,
-	load::resource::textures const &_textures
+	sanguis::load::resource::textures const &_textures
 )
 {
 	sanguis::creator::generator::result const generated(
@@ -51,22 +52,22 @@ sanguis::client::draw2d::scene::world::generate_batches(
 		)
 	);
 
-	world::batch_grid_unique_ptr ret(
+	sanguis::client::draw2d::scene::world::batch_grid_unique_ptr ret(
 		fcppt::make_unique_ptr<
-			world::batch_grid
+			sanguis::client::draw2d::scene::world::batch_grid
 		>(
 			fcppt::math::dim::structure_cast<
-				world::batch_grid::dim
+				sanguis::client::draw2d::scene::world::batch_grid::dim
 			>(
 				fcppt::algorithm::array_map<
 					sanguis::creator::generator::size
 				>(
 					generated.size(),
-					std::tr1::bind(
+					std::bind(
 						fcppt::math::ceil_div<
 							sanguis::creator::generator::size::value_type
 						>,
-						std::tr1::placeholders::_1,
+						std::placeholders::_1,
 						sanguis::client::draw2d::scene::world::batch_size::value
 					)
 				)
@@ -88,16 +89,12 @@ sanguis::client::draw2d::scene::world::generate_batches(
 	);
 
 	for(
-		sanguis::creator::geometry::shape_container::const_iterator shape_it(
-			shapes.begin()
-		);
-		shape_it != shapes.end();
-		++shape_it
+		auto const &shape : shapes
 	)
 	{
 		sanguis::creator::geometry::rect const envelope(
 			sanguis::client::draw2d::scene::world::envelope(
-				shape_it->polygon()
+				shape.polygon()
 			)
 		);
 
@@ -128,12 +125,12 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				sanguis::client::draw2d::scene::world::triangle_traits::tag,
 				sanguis::creator::geometry::polygon
 			>(
-				shape_it->polygon(),
+				shape.polygon(),
 				0
 			),
-			shape_it->solidity(),
-			shape_it->depth(),
-			shape_it->texture_name()
+			shape.solidity(),
+			shape.depth(),
+			shape.texture_name()
 		);
 
 		// TODO: we need better iteration mechanisms for grid!
@@ -200,7 +197,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				it
 			)
 		) =
-			world::make_batch(
+			sanguis::client::draw2d::scene::world::make_batch(
 				_renderer,
 				_vertex_declaration,
 				_textures,
@@ -208,7 +205,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 			);
 
 	return
-		fcppt::move(
+		std::move(
 			ret
 		);
 }

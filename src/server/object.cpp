@@ -14,9 +14,9 @@
 #include <fcppt/text.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/output.hpp>
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <exception>
+#include <functional>
 #include <cstdlib>
 #include <fcppt/config/external_end.hpp>
 
@@ -42,8 +42,8 @@ sanguis::server::object::object(
 	),
 	mutex_(),
 	server_thread_(
-		std::tr1::bind(
-			&object::mainloop,
+		std::bind(
+			&sanguis::server::object::mainloop,
 			this
 		)
 	)

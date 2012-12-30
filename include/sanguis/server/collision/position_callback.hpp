@@ -1,8 +1,11 @@
 #ifndef SANGUIS_SERVER_COLLISION_POSITION_CALLBACK_HPP_INCLUDED
 #define SANGUIS_SERVER_COLLISION_POSITION_CALLBACK_HPP_INCLUDED
 
-#include <sanguis/server/center.hpp>
-#include <fcppt/function/object_fwd.hpp>
+#include <sanguis/server/center_fwd.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <functional>
+#include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -11,9 +14,9 @@ namespace server
 namespace collision
 {
 
-typedef fcppt::function::object<
+typedef std::function<
 	void(
-		server::center const &
+		sanguis::server::center const &
 	)
 > position_callback;
 

@@ -1,6 +1,9 @@
 #ifndef SANGUIS_CLIENT_PERK_STATE_HPP_INCLUDED
 #define SANGUIS_CLIENT_PERK_STATE_HPP_INCLUDED
 
+#include <sanguis/perk_type.hpp>
+#include <sanguis/client/level.hpp>
+#include <sanguis/client/player_level.hpp>
 #include <sanguis/client/perk/state_fwd.hpp>
 #include <sanguis/client/perk/change_callback.hpp>
 #include <sanguis/client/perk/change_function.hpp>
@@ -13,14 +16,11 @@
 #include <sanguis/client/perk/send_callback.hpp>
 #include <sanguis/client/perk/tree.hpp>
 #include <sanguis/client/perk/tree_unique_ptr.hpp>
-#include <sanguis/client/level.hpp>
-#include <sanguis/client/player_level.hpp>
-#include <sanguis/perk_type.hpp>
-#include <fcppt/function/object.hpp>
-#include <fcppt/signal/auto_connection.hpp>
-#include <fcppt/signal/object.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/scoped_ptr.hpp>
+#include <fcppt/scoped_ptr_impl.hpp>
+#include <fcppt/signal/auto_connection_fwd.hpp>
+#include <fcppt/signal/object_decl.hpp>
+
 
 namespace sanguis
 {
@@ -35,79 +35,80 @@ class state
 		state
 	);
 public:
-	explicit state(
-		perk::send_callback const &
+	explicit
+	state(
+		sanguis::client::perk::send_callback const &
 	);
 
 	~state();
 
 	void
 	perks(
-		perk::tree_unique_ptr
+		sanguis::client::perk::tree_unique_ptr &&
 	);
 
 	void
 	player_level(
-		client::player_level
+		sanguis::client::player_level
 	);
 
 	bool
 	choose_perk(
-		sanguis::perk_type::type
+		sanguis::perk_type
 	);
 
-	perk::tree const &
+	sanguis::client::perk::tree const &
 	perks() const;
 
-	client::player_level const
+	sanguis::client::player_level const
 	player_level() const;
 
-	client::level const
+	sanguis::client::level const
 	levels_left() const;
 
-	perk::level const
+	sanguis::client::perk::level const
 	perk_level(
-		sanguis::perk_type::type
+		sanguis::perk_type
 	) const;
 
-	perk::level_map const &
+	sanguis::client::perk::level_map const &
 	perk_levels() const;
 
-	perk::choosable_state::type
+	sanguis::client::perk::choosable_state::type
 	choosable(
-		sanguis::perk_type::type
+		sanguis::perk_type
 	) const;
 
 	fcppt::signal::auto_connection
 	register_level_change(
-		perk::level_callback const &
+		sanguis::client::perk::level_callback const &
 	);
 
 	fcppt::signal::auto_connection
 	register_perks_change(
-		perk::change_callback const &
+		sanguis::client::perk::change_callback const &
 	);
 private:
-	perk::send_callback const send_callback_;
+	sanguis::client::perk::send_callback const send_callback_;
 
 	typedef fcppt::scoped_ptr<
-		perk::tree
+		sanguis::client::perk::tree
 	> tree_scoped_ptr;
 
 	tree_scoped_ptr perks_;
 
-	client::player_level current_level_;
+	sanguis::client::player_level current_level_;
 
-	client::level consumed_levels_;
+	sanguis::client::level consumed_levels_;
 
-	mutable perk::level_map perk_levels_;
+	mutable sanguis::client::perk::level_map perk_levels_;
 
 	fcppt::signal::object<
-		perk::level_function
+		sanguis::client::perk::level_function
 	> level_signal_;
 
 	fcppt::signal::object<
-		perk::change_function
+		sanguis::client::perk::change_function
 	> change_signal_;
 };
 

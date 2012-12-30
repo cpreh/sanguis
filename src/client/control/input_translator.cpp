@@ -11,24 +11,27 @@
 #include <sanguis/client/cursor/object.hpp>
 #include <sanguis/exception.hpp>
 #include <sge/input/keyboard/device.hpp>
+#include <sge/input/keyboard/key_code.hpp>
 #include <sge/input/keyboard/key_event.hpp>
 #include <sge/input/cursor/button_event.hpp>
 #include <sge/input/cursor/move_event.hpp>
 #include <sge/input/mouse/device.hpp>
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <functional>
+#include <fcppt/config/external_end.hpp>
 
 namespace
 {
 
 sanguis::client::control::actions::scale_type::type
 key_scale_type(
-	sge::input::keyboard::key_code::type
+	sge::input::keyboard::key_code
 );
 
 sanguis::client::control::key_scale
 key_scale_value(
-	sge::input::keyboard::key_code::type,
+	sge::input::keyboard::key_code,
 	bool pressed
 );
 
@@ -45,28 +48,28 @@ sanguis::client::control::input_translator::input_translator(
 	),
 	key_connection_(
 		_keyboard.key_callback(
-			std::tr1::bind(
+			std::bind(
 				&input_translator::key_callback,
 				this,
-				std::tr1::placeholders::_1
+				std::placeholders::_1
 			)
 		)
 	),
 	axis_connection_(
 		_cursor.move_callback(
-			std::tr1::bind(
+			std::bind(
 				&input_translator::move_callback,
 				this,
-				std::tr1::placeholders::_1
+				std::placeholders::_1
 			)
 		)
 	),
 	button_connection_(
 		_cursor.button_callback(
-			std::tr1::bind(
+			std::bind(
 				&input_translator::button_callback,
 				this,
-				std::tr1::placeholders::_1
+				std::placeholders::_1
 			)
 		)
 	)
@@ -211,7 +214,7 @@ namespace
 
 sanguis::client::control::actions::scale_type::type
 key_scale_type(
-	sge::input::keyboard::key_code::type const _code
+	sge::input::keyboard::key_code const _code
 )
 {
 	switch(
@@ -235,7 +238,7 @@ key_scale_type(
 
 sanguis::client::control::key_scale
 key_scale_value(
-	sge::input::keyboard::key_code::type const _code,
+	sge::input::keyboard::key_code const _code,
 	bool const _pressed
 )
 {

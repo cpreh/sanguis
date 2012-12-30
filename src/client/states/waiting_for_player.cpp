@@ -11,10 +11,11 @@
 #include <sanguis/messages/create.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/output.hpp>
-#include <fcppt/tr1/functional.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
+#include <functional>
 #include <fcppt/config/external_end.hpp>
+
 
 sanguis::client::states::waiting_for_player::waiting_for_player(
 	my_context _ctx
@@ -49,10 +50,10 @@ sanguis::client::states::waiting_for_player::react(
 		dispatcher(
 			*_event.value(),
 			*this,
-			std::tr1::bind(
+			std::bind(
 				&waiting_for_player::handle_default_msg,
 				this,
-				std::tr1::placeholders::_1
+				std::placeholders::_1
 			)
 		);
 }

@@ -6,6 +6,7 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -14,7 +15,7 @@ namespace collision
 {
 
 typedef std::vector<
-	collision::group::type
+	sanguis::server::collision::group
 > group_vector;
 
 }

@@ -1,11 +1,17 @@
+#include <sanguis/perk_type.hpp>
+#include <sanguis/server/level.hpp>
+#include <sanguis/server/perks/tree/max_level.hpp>
+#include <sanguis/server/perks/tree/required_player_level.hpp>
+#include <sanguis/server/perks/tree/required_parent_level.hpp>
 #include <sanguis/server/perks/tree/status.hpp>
 #include <fcppt/assert/pre.hpp>
 
+
 sanguis::server::perks::tree::status::status(
-	perk_type::type const _type,
-	tree::required_player_level const _required_player_level,
-	tree::required_parent_level const _required_parent_level,
-	tree::max_level const _max_level
+	sanguis::perk_type const _type,
+	sanguis::server::perks::tree::required_player_level const _required_player_level,
+	sanguis::server::perks::tree::required_parent_level const _required_parent_level,
+	sanguis::server::perks::tree::max_level const _max_level
 )
 :
 	type_(
@@ -64,7 +70,7 @@ sanguis::server::perks::tree::status::level() const
 	return level_;
 }
 
-sanguis::perk_type::type
+sanguis::perk_type
 sanguis::server::perks::tree::status::type() const
 {
 	return type_;

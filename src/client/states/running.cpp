@@ -21,13 +21,12 @@
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/debug.hpp>
-#include <fcppt/tr1/functional.hpp>
-#include <fcppt/cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/ref.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
+#include <functional>
 #include <fcppt/config/external_end.hpp>
+
 
 sanguis::client::states::running::running(
 	my_context _ctx
@@ -40,12 +39,8 @@ sanguis::client::states::running::running(
 		fcppt::make_unique_ptr<
 			client::console::object
 		>(
-			fcppt::ref(
-				context<machine>().console_gfx()
-			),
-			fcppt::ref(
-				context<machine>().charconv_system()
-			),
+			context<machine>().console_gfx(),
+			context<machine>().charconv_system(),
 			client::make_send_callback(
 				context<machine>()
 			)
@@ -55,31 +50,19 @@ sanguis::client::states::running::running(
 		fcppt::make_unique_ptr<
 			client::daytime_settings
 		>(
-			fcppt::ref(
-				console_->sge_console()
-			)
+			console_->sge_console()
 		)
 	),
 	drawer_(
 		fcppt::make_unique_ptr<
 			draw2d::scene::object
 		>(
-			fcppt::cref(
-				context<machine>().resources()
-			),
-			fcppt::ref(
-				context<machine>().renderer()
-			),
-			fcppt::ref(
-				context<machine>().charconv_system()
-			),
-			fcppt::ref(
-				context<machine>().font_object()
-			),
+			context<machine>().resources(),
+			context<machine>().renderer(),
+			context<machine>().charconv_system(),
+			context<machine>().font_object(),
 			daytime_settings_->current_time(),
-			fcppt::ref(
-				context<machine>().viewport_manager()
-			)
+			context<machine>().viewport_manager()
 		)
 	)
 {
@@ -143,10 +126,10 @@ sanguis::client::states::running::react(
 		dispatcher(
 			*_event.value(),
 			*this,
-			std::tr1::bind(
+			std::bind(
 				&running::handle_default_msg,
 				this,
-				std::tr1::placeholders::_1
+				std::placeholders::_1
 			)
 		);
 }

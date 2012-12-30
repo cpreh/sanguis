@@ -1,14 +1,15 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_PERKS_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_PERKS_HPP_INCLUDED
 
+#include <sanguis/perk_type.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/perks/perk_fwd.hpp>
 #include <sanguis/server/perks/unique_ptr.hpp>
-#include <sanguis/perk_type.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -19,7 +20,7 @@ namespace entities
 
 class with_perks
 :
-	public virtual base
+	public virtual sanguis::server::entities::base
 {
 	FCPPT_NONCOPYABLE(
 		with_perks
@@ -27,7 +28,7 @@ class with_perks
 public:
 	void
 	add_perk(
-		perks::unique_ptr
+		sanguis::server::perks::unique_ptr &&
 	);
 protected:
 	with_perks();
@@ -38,8 +39,8 @@ protected:
 	on_update();
 private:
 	typedef boost::ptr_map<
-		perk_type::type,
-		perks::perk
+		sanguis::perk_type,
+		sanguis::server::perks::perk
 	> perk_container;
 
 	perk_container perks_;

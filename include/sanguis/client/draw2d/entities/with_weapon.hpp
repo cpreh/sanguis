@@ -1,8 +1,9 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_WEAPON_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_WEAPON_HPP_INCLUDED
 
-#include <sanguis/weapon_type.hpp>
+#include <sanguis/weapon_type_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -21,19 +22,23 @@ class with_weapon
 protected:
 	with_weapon();
 
-	virtual ~with_weapon();
+	virtual
+	~with_weapon();
 public:
-	virtual void
+	virtual
+	void
 	weapon(
-		weapon_type::type
+		sanguis::weapon_type
 	) = 0;
 
-	virtual void
+	virtual
+	void
 	attacking(
 		bool
 	) = 0;
 
-	virtual void
+	virtual
+	void
 	reloading(
 		bool
 	) = 0;

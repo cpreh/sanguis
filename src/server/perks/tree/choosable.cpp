@@ -1,21 +1,24 @@
+#include <sanguis/perk_type.hpp>
+#include <sanguis/server/level.hpp>
+#include <sanguis/server/log.hpp>
 #include <sanguis/server/perks/tree/choosable.hpp>
 #include <sanguis/server/perks/tree/equal.hpp>
+#include <sanguis/server/perks/tree/object.hpp>
 #include <sanguis/server/perks/tree/status.hpp>
-#include <sanguis/server/log.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
-#include <fcppt/container/tree/object_impl.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/warning.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <fcppt/config/external_end.hpp>
 
+
 bool
 sanguis::server::perks::tree::choosable(
-	tree::object const &_tree,
-	sanguis::perk_type::type const _perk,
-	server::level const _player_level
+	sanguis::server::perks::tree::object const &_tree,
+	sanguis::perk_type const _perk,
+	sanguis::server::level const _player_level
 )
 {
 	if(
@@ -25,7 +28,7 @@ sanguis::server::perks::tree::choosable(
 
 	typedef
 	fcppt::container::tree::pre_order<
-		tree::object const
+		sanguis::server::perks::tree::object const
 	> traversal;
 
 	traversal trav(
@@ -36,7 +39,7 @@ sanguis::server::perks::tree::choosable(
 		std::find_if(
 			trav.begin(),
 			trav.end(),
-			tree::equal(
+			sanguis::server::perks::tree::equal(
 				_perk
 			)
 		)
@@ -47,7 +50,7 @@ sanguis::server::perks::tree::choosable(
 	)
 	{
 		FCPPT_LOG_WARNING(
-			server::log(),
+			sanguis::server::log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("Perk not found in tree")
 		);
@@ -63,12 +66,12 @@ sanguis::server::perks::tree::choosable(
 		return false;
 
 	for(
-		tree::object const *pos(&*it);
+		sanguis::server::perks::tree::object const *pos(&*it);
 		pos->has_parent();
 		pos = &pos->parent()
 	)
 	{
-		tree::status const &cur_status(
+		sanguis::server::perks::tree::status const &cur_status(
 			pos->value()
 		);
 

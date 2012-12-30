@@ -1,8 +1,11 @@
-#include <sanguis/server/waves/convert_enemy_name.hpp>
+#include <sanguis/enemy_type.hpp>
 #include <sanguis/exception.hpp>
+#include <sanguis/server/waves/convert_enemy_name.hpp>
+#include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 
-sanguis::enemy_type::type
+
+sanguis::enemy_type
 sanguis::server::waves::convert_enemy_name(
 	fcppt::string const &_name
 )
@@ -13,7 +16,7 @@ sanguis::server::waves::convert_enemy_name(
 	if(\
 		_name == FCPPT_TEXT(#name)\
 	)\
-		return enemy_type::name;
+		return sanguis::enemy_type::name;
 
 	SANGUIS_NAME_CASE(wolf_black)
 	SANGUIS_NAME_CASE(wolf_brown)

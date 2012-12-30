@@ -1,10 +1,12 @@
 #ifndef SANGUIS_CLIENT_PERK_INFO_HPP_INCLUDED
 #define SANGUIS_CLIENT_PERK_INFO_HPP_INCLUDED
 
+#include <sanguis/perk_type.hpp>
+#include <sanguis/client/perk/info_fwd.hpp>
 #include <sanguis/client/perk/max_level.hpp>
 #include <sanguis/client/perk/required_parent_level.hpp>
 #include <sanguis/client/perk/required_player_level.hpp>
-#include <sanguis/perk_type.hpp>
+
 
 namespace sanguis
 {
@@ -16,36 +18,37 @@ namespace perk
 class info
 {
 public:
-	explicit info(
-		sanguis::perk_type::type
+	explicit
+	info(
+		sanguis::perk_type
 	);
 
 	info(
-		sanguis::perk_type::type,
-		perk::required_parent_level,
-		perk::required_player_level,
-		perk::max_level
+		sanguis::perk_type,
+		sanguis::client::perk::required_parent_level,
+		sanguis::client::perk::required_player_level,
+		sanguis::client::perk::max_level
 	);
 
-	perk_type::type
+	sanguis::perk_type
 	type() const;
 
-	perk::required_parent_level const
+	sanguis::client::perk::required_parent_level const
 	required_parent_level() const;
 
-	perk::required_player_level const
+	sanguis::client::perk::required_player_level const
 	required_player_level() const;
 
-	perk::max_level const
+	sanguis::client::perk::max_level const
 	max_level() const;
 private:
-	sanguis::perk_type::type type_;
+	sanguis::perk_type type_;
 
-	perk::required_parent_level required_parent_level_;
+	sanguis::client::perk::required_parent_level required_parent_level_;
 
-	perk::required_player_level required_player_level_;
+	sanguis::client::perk::required_player_level required_player_level_;
 
-	perk::max_level max_level_;
+	sanguis::client::perk::max_level max_level_;
 };
 
 }

@@ -10,7 +10,6 @@
 #include <sge/font/lit.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/string.hpp>
-#include <fcppt/function/object.hpp>
 #include <fcppt/homogenous_pair_impl.hpp>
 #include <fcppt/insert_to_string.hpp>
 #include <fcppt/string.hpp>

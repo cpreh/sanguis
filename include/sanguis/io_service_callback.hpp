@@ -1,13 +1,15 @@
 #ifndef SANGUIS_IO_SERVICE_CALLBACK_HPP_INCLUDED
 #define SANGUIS_IO_SERVICE_CALLBACK_HPP_INCLUDED
 
-#include <fcppt/function/object_fwd.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <functional>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
 {
 
-typedef fcppt::function::object<
+typedef std::function<
 	void ()
 > io_service_callback;
 

@@ -12,9 +12,9 @@
 #include <sge/console/callback/function.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/homogenous_pair_decl.hpp>
-#include <fcppt/function/object.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
+
 
 namespace sanguis
 {

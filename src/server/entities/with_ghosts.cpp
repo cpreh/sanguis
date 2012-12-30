@@ -1,16 +1,25 @@
-#include <sanguis/server/entities/with_ghosts.hpp>
-#include <sanguis/server/entities/transfer_parameters.hpp>
+#include <sanguis/server/center.hpp>
 #include <sanguis/server/collision/ghost.hpp>
+#include <sanguis/server/collision/ghost_unique_ptr.hpp>
+#include <sanguis/server/collision/global_groups_fwd.hpp>
 #include <sanguis/server/collision/make_groups.hpp>
+#include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/transfer_parameters.hpp>
+#include <sanguis/server/entities/with_ghosts.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <sge/projectile/world_fwd.hpp>
 #include <sge/projectile/ghost/scoped.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
-#include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/ref.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
+
 
 sanguis::server::entities::with_ghosts::with_ghosts()
 :
+	sanguis::server::entities::base(),
 	ghosts_(),
 	scoped_ghosts_()
 {
@@ -25,12 +34,12 @@ sanguis::server::entities::with_ghosts::~with_ghosts()
 
 void
 sanguis::server::entities::with_ghosts::add_ghost(
-	collision::ghost_unique_ptr _ghost
+	sanguis::server::collision::ghost_unique_ptr &&_ghost
 )
 {
 	fcppt::container::ptr::push_back_unique_ptr(
 		ghosts_,
-		move(
+		std::move(
 			_ghost
 		)
 	);
@@ -51,20 +60,16 @@ sanguis::server::entities::with_ghosts::add_ghost(
 
 void
 sanguis::server::entities::with_ghosts::on_transfer(
-	entities::transfer_parameters const &_params
+	sanguis::server::entities::transfer_parameters const &_params
 )
 {
 	scoped_ghosts_.clear();
 
 	for(
-		ghost_list::iterator ghost_it(
-			ghosts_.begin()
-		);
-		ghost_it != ghosts_.end();
-		++ghost_it
+		auto &ghost : ghosts_
 	)
 		this->insert_ghost(
-			*ghost_it,
+			ghost,
 			_params.world(),
 			_params.global_groups()
 		);
@@ -82,26 +87,22 @@ sanguis::server::entities::with_ghosts::on_destroy()
 
 void
 sanguis::server::entities::with_ghosts::update_center(
-	server::center const &_center
+	sanguis::server::center const &_center
 )
 {
 	for(
-		ghost_list::iterator ghost_it(
-			ghosts_.begin()
-		);
-		ghost_it != ghosts_.end();
-		++ghost_it
+		auto &ghost : ghosts_
 	)
-		ghost_it->center(
+		ghost.center(
 			_center
 		);
 }
 
 void
 sanguis::server::entities::with_ghosts::insert_ghost(
-	collision::ghost &_ghost,
+	sanguis::server::collision::ghost &_ghost,
 	sge::projectile::world &_world,
-	collision::global_groups const &_global_groups
+	sanguis::server::collision::global_groups const &_global_groups
 )
 {
 	fcppt::container::ptr::push_back_unique_ptr(
@@ -109,13 +110,9 @@ sanguis::server::entities::with_ghosts::insert_ghost(
 		fcppt::make_unique_ptr<
 			sge::projectile::ghost::scoped
 		>(
-			fcppt::ref(
-				_world
-			),
-			fcppt::ref(
-				_ghost.get()
-			),
-			collision::make_groups(
+			_world,
+			_ghost.get(),
+			sanguis::server::collision::make_groups(
 				_ghost.groups(),
 				_global_groups
 			)

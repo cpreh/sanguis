@@ -1,34 +1,49 @@
-#include <sanguis/server/weapons/sentry.hpp>
-#include <sanguis/server/weapons/delayed_attack.hpp>
+#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/friend_type.hpp>
+#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/weapon_type.hpp>
+#include <sanguis/server/center.hpp>
+#include <sanguis/server/health.hpp>
 #include <sanguis/server/ai/create_simple_without_owner.hpp>
-#include <sanguis/server/damage/no_armor.hpp>
 #include <sanguis/server/damage/list.hpp>
+#include <sanguis/server/damage/no_armor.hpp>
 #include <sanguis/server/entities/friend.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
+#include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/environment/object.hpp>
-#include <fcppt/container/map_impl.hpp>
+#include <sanguis/server/weapons/base_cooldown.hpp>
+#include <sanguis/server/weapons/cast_point.hpp>
+#include <sanguis/server/weapons/create_function.hpp>
+#include <sanguis/server/weapons/delayed_attack.hpp>
+#include <sanguis/server/weapons/magazine_count.hpp>
+#include <sanguis/server/weapons/magazine_size.hpp>
+#include <sanguis/server/weapons/range.hpp>
+#include <sanguis/server/weapons/sentry.hpp>
+#include <sanguis/server/weapons/reload_time.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+
 
 sanguis::server::weapons::sentry::sentry(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
-	weapon_type::type const _type,
-	weapons::base_cooldown const _base_cooldown,
-	weapons::cast_point const _cast_point,
-	weapons::reload_time const _reload_time,
-	create_function const &_sentry_weapon
+	sanguis::weapon_type const _type,
+	sanguis::server::weapons::base_cooldown const _base_cooldown,
+	sanguis::server::weapons::cast_point const _cast_point,
+	sanguis::server::weapons::reload_time const _reload_time,
+	sanguis::server::weapons::create_function const &_sentry_weapon
 )
 :
-	weapon(
+	sanguis::server::weapons::weapon(
 		_diff_clock,
 		_type,
-		weapons::range(
+		sanguis::server::weapons::range(
 			20.f
 		), // FIXME
-		weapons::magazine_size(
+		sanguis::server::weapons::magazine_size(
 			1U
 		),
-		weapons::magazine_count(
+		sanguis::server::weapons::magazine_count(
 			1u
 		),
 		_base_cooldown,
@@ -50,37 +65,32 @@ sanguis::server::weapons::sentry::~sentry()
 
 void
 sanguis::server::weapons::sentry::do_attack(
-	delayed_attack const &_attack
+	sanguis::server::weapons::delayed_attack const &_attack
 )
 {
 	_attack.environment().insert(
-		entities::unique_ptr(
-			new entities::friend_(
-//			fcppt::make_unique_ptr<
-//				entities::friend_
-//			>(
+		fcppt::make_unique_ptr<
+			sanguis::server::entities::friend_
+		>(
+			this->diff_clock(),
+			random_generator_,
+			sanguis::friend_type::sentry,
+			_attack.environment().load_context(),
+			sanguis::server::damage::no_armor(),
+			sanguis::server::health(
+				100.f
+			),
+			sanguis::server::entities::movement_speed(
+				0.f
+			),
+			sanguis::server::ai::create_simple_without_owner(
 				this->diff_clock(),
-				random_generator_,
-				friend_type::sentry,
-				_attack.environment().load_context(),
-				damage::no_armor(),
-				server::health(
-					100.f
-				),
-				entities::movement_speed(
-					0.f
-				),
-				ai::create_simple_without_owner(
-					this->diff_clock(),
-					random_generator_
-				),
-				weapons::unique_ptr(
-					sentry_weapon_()
-				)
-			)
+				random_generator_
+			),
+			sentry_weapon_()
 		),
-		entities::insert_parameters(
-			server::center(
+		sanguis::server::entities::insert_parameters(
+			sanguis::server::center(
 				_attack.dest()
 			),
 			_attack.angle()

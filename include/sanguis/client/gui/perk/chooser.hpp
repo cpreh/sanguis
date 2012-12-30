@@ -43,8 +43,8 @@ class chooser
 	);
 public:
 	chooser(
-		gui::object &,
-		client::perk::state &
+		sanguis::client::gui::object &,
+		sanguis::client::perk::state &
 	);
 
 	~chooser();
@@ -61,12 +61,12 @@ public:
 private:
 	void
 	perks(
-		client::perk::tree const &
+		sanguis::client::perk::tree const &
 	);
 
 	void
 	level(
-		client::player_level
+		sanguis::client::player_level
 	);
 
 	void
@@ -74,7 +74,7 @@ private:
 
 	void
 	update_bottom_text(
-		sanguis::perk_type::type
+		sanguis::perk_type
 	);
 
 	void
@@ -82,7 +82,7 @@ private:
 
 	void
 	update_choose_button(
-		sanguis::perk_type::type
+		sanguis::perk_type
 	);
 
 	bool
@@ -96,12 +96,12 @@ private:
 	);
 
 	typedef fcppt::optional<
-		perk_type::type
+		sanguis::perk_type
 	> optional_perk;
 
-	gui::object &gui_;
+	sanguis::client::gui::object &gui_;
 
-	client::perk::state &state_;
+	sanguis::client::perk::state &state_;
 
 	optional_perk active_perk_;
 
@@ -124,7 +124,7 @@ private:
 		selection_connection_,
 		choose_connection_;
 
-	gui::perk::item_tree items_;
+	sanguis::client::gui::perk::item_tree items_;
 };
 
 }

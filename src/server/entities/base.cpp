@@ -1,17 +1,21 @@
-#include <sanguis/server/entities/base.hpp>
+#include <sanguis/entity_id.hpp>
+#include <sanguis/server/get_unique_id.hpp>
+#include <sanguis/server/collision/global_groups_fwd.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
+#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/environment/object.hpp>
-#include <sanguis/server/get_unique_id.hpp>
 #include <fcppt/assert/pre.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
+
 
 sanguis::server::entities::base::base()
 :
-	environment_(0),
+	environment_(
+		nullptr
+	),
 	id_(
-		server::get_unique_id()
+		sanguis::server::get_unique_id()
 	),
 	links_()
 {
@@ -19,19 +23,19 @@ sanguis::server::entities::base::base()
 
 void
 sanguis::server::entities::base::transfer(
-	server::environment::object &_environment,
-	collision::global_groups const &_collision_groups,
-	entities::insert_parameters const &_insert_param
+	sanguis::server::environment::object &_environment,
+	sanguis::server::collision::global_groups const &_collision_groups,
+	sanguis::server::entities::insert_parameters const &_insert_param
 )
 {
 	bool const create(
-		environment_ == 0
+		environment_ == nullptr
 	);
 
 	environment_ = &_environment;
 
 	this->on_transfer(
-		entities::transfer_parameters(
+		sanguis::server::entities::transfer_parameters(
 			environment_->collision_world(),
 			_insert_param.center(),
 			_collision_groups,
@@ -67,7 +71,7 @@ sanguis::server::entities::auto_weak_link const
 sanguis::server::entities::base::link()
 {
 	return
-		entities::auto_weak_link(
+		sanguis::server::entities::auto_weak_link(
 			*this
 		);
 }
@@ -86,7 +90,7 @@ bool
 sanguis::server::entities::base::has_environment() const
 {
 	return
-		environment_ != 0;
+		environment_ != nullptr;
 }
 
 sanguis::entity_id const
@@ -127,14 +131,14 @@ sanguis::server::entities::base::on_destroy()
 
 void
 sanguis::server::entities::base::on_transfer(
-	entities::transfer_parameters const &
+	sanguis::server::entities::transfer_parameters const &
 )
 {
 }
 
 void
 sanguis::server::entities::base::insert_link(
-	auto_weak_link &_link
+	sanguis::server::entities::auto_weak_link &_link
 )
 {
 	links_.push_back(

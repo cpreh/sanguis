@@ -1,16 +1,17 @@
 #ifndef SANGUIS_SERVER_WEAPONS_SENTRY_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_SENTRY_HPP_INCLUDED
 
-#include <sanguis/server/weapons/weapon.hpp>
-#include <sanguis/server/weapons/delayed_attack_fwd.hpp>
-#include <sanguis/server/weapons/base_cooldown.hpp>
-#include <sanguis/server/weapons/cast_point.hpp>
-#include <sanguis/server/weapons/reload_time.hpp>
-#include <sanguis/server/weapons/create_function.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
-#include <fcppt/function/object.hpp>
+#include <sanguis/weapon_type_fwd.hpp>
+#include <sanguis/server/weapons/base_cooldown.hpp>
+#include <sanguis/server/weapons/cast_point.hpp>
+#include <sanguis/server/weapons/create_function.hpp>
+#include <sanguis/server/weapons/delayed_attack_fwd.hpp>
+#include <sanguis/server/weapons/reload_time.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -21,7 +22,7 @@ namespace weapons
 
 class sentry
 :
-	public weapon
+	public sanguis::server::weapons::weapon
 {
 	FCPPT_NONCOPYABLE(
 		sentry
@@ -30,23 +31,23 @@ public:
 	sentry(
 		sanguis::diff_clock const &,
 		sanguis::random_generator &,
-		weapon_type::type,
-		weapons::base_cooldown,
-		weapons::cast_point,
-		weapons::reload_time,
-		create_function const &sentry_weapon
+		sanguis::weapon_type,
+		sanguis::server::weapons::base_cooldown,
+		sanguis::server::weapons::cast_point,
+		sanguis::server::weapons::reload_time,
+		sanguis::server::weapons::create_function const &sentry_weapon
 	);
 
 	~sentry();
 private:
 	void
 	do_attack(
-		delayed_attack const &
+		sanguis::server::weapons::delayed_attack const &
 	);
 
 	sanguis::random_generator &random_generator_;
 
-	create_function const sentry_weapon_;
+	sanguis::server::weapons::create_function const sentry_weapon_;
 };
 
 }

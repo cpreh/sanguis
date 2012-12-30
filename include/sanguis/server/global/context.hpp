@@ -1,36 +1,35 @@
 #ifndef SANGUIS_SERVER_GLOBAL_CONTEXT_HPP_INCLUDED
 #define SANGUIS_SERVER_GLOBAL_CONTEXT_HPP_INCLUDED
 
+#include <sanguis/cheat_type_fwd.hpp>
+#include <sanguis/connect_state_fwd.hpp>
+#include <sanguis/diff_clock.hpp>
+#include <sanguis/duration.hpp>
+#include <sanguis/perk_type_fwd.hpp>
+#include <sanguis/random_generator.hpp>
+#include <sanguis/weapon_type_fwd.hpp>
+#include <sanguis/world_id.hpp>
+#include <sanguis/load/context_base_fwd.hpp>
+#include <sanguis/messages/base_fwd.hpp>
+#include <sanguis/server/console_fwd.hpp>
+#include <sanguis/server/player_id.hpp>
+#include <sanguis/server/speed_fwd.hpp>
+#include <sanguis/server/string.hpp>
+#include <sanguis/server/unicast_callback.hpp>
+#include <sanguis/server/vector_fwd.hpp>
+#include <sanguis/server/entities/insert_parameters_fwd.hpp>
+#include <sanguis/server/entities/player_map.hpp>
+#include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/global/context_fwd.hpp>
 #include <sanguis/server/global/world_context_fwd.hpp>
 #include <sanguis/server/world/map.hpp>
 #include <sanguis/server/world/context_fwd.hpp>
-#include <sanguis/server/entities/unique_ptr.hpp>
-#include <sanguis/server/entities/insert_parameters_fwd.hpp>
-#include <sanguis/server/entities/player_map.hpp>
-#include <sanguis/server/environment/load_context_fwd.hpp>
-#include <sanguis/server/console_fwd.hpp>
-#include <sanguis/server/player_id.hpp>
-#include <sanguis/server/speed.hpp>
-#include <sanguis/server/string.hpp>
-#include <sanguis/server/unicast_callback.hpp>
-#include <sanguis/server/vector.hpp>
-#include <sanguis/cheat_type.hpp>
-#include <sanguis/connect_state.hpp>
-#include <sanguis/diff_clock.hpp>
-#include <sanguis/duration.hpp>
-#include <sanguis/perk_type.hpp>
-#include <sanguis/random_generator.hpp>
-#include <sanguis/weapon_type.hpp>
-#include <sanguis/world_id.hpp>
-#include <sanguis/messages/base_fwd.hpp>
-#include <sanguis/load/context_base_fwd.hpp>
 #include <sge/charconv/system_fwd.hpp>
-#include <fcppt/function/object.hpp>
-#include <fcppt/log/object_fwd.hpp>
-#include <fcppt/container/map_decl.hpp>
-#include <fcppt/scoped_ptr.hpp>
+#include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/container/map_decl.hpp>
+
 
 namespace sanguis
 {
@@ -46,10 +45,10 @@ class context
 	);
 public:
 	context(
-		server::unicast_callback const &,
-		load::context_base const &,
+		sanguis::server::unicast_callback const &,
+		sanguis::load::context_base const &,
 		sge::charconv::system &,
-		server::console &
+		sanguis::server::console &
 	);
 
 	~context();
@@ -57,50 +56,50 @@ public:
 	void
 	insert_player(
 		sanguis::world_id,
-		server::player_id,
-		server::string const &name,
-		sanguis::connect_state::type
+		sanguis::server::player_id,
+		sanguis::server::string const &name,
+		sanguis::connect_state
 	);
 
 	void
 	player_disconnect(
-		server::player_id
+		sanguis::server::player_id
 	);
 
 	void
 	player_target(
-		server::player_id,
-		server::vector const &
+		sanguis::server::player_id,
+		sanguis::server::vector const &
 	);
 
 	void
 	player_change_weapon(
-		server::player_id,
-		weapon_type::type
+		sanguis::server::player_id,
+		sanguis::weapon_type
 	);
 
 	void
 	player_change_shooting(
-		server::player_id,
+		sanguis::server::player_id,
 		bool shooting
 	);
 
 	void
 	player_speed(
-		server::player_id,
-		server::speed const &
+		sanguis::server::player_id,
+		sanguis::server::speed const &
 	);
 
 	void
 	player_cheat(
-		server::player_id,
-		cheat_type::type
+		sanguis::server::player_id,
+		sanguis::cheat_type
 	);
 
 	void
 	player_choose_perk(
-		player_id,
-		perk_type::type
+		sanguis::server::player_id,
+		sanguis::perk_type
 	);
 
 	void
@@ -108,7 +107,7 @@ public:
 		sanguis::duration const &
 	);
 
-	entities::player_map::size_type
+	sanguis::server::entities::player_map::size_type
 	player_count() const;
 
 	bool
@@ -116,61 +115,58 @@ public:
 		sanguis::server::player_id
 	) const;
 private:
-	friend class world_context;
+	friend class sanguis::server::global::world_context;
 
 	// callbacks for world
 
 	void
 	send_to_player(
-		player_id,
-		messages::base const &
+		sanguis::server::player_id,
+		sanguis::messages::base const &
 	);
 
 	void
 	remove_player(
-		player_id
+		sanguis::server::player_id
 	);
 
 	void
 	transfer_entity(
-		world_id destination,
-		entities::unique_ptr,
-		entities::insert_parameters const &
+		sanguis::world_id destination,
+		sanguis::server::entities::unique_ptr &&,
+		sanguis::server::entities::insert_parameters const &
 	);
 
-	server::world::object &
+	sanguis::server::world::object &
 	world(
-		world_id
+		sanguis::world_id
 	);
-
-	static fcppt::log::object &
-	log();
 
 	sanguis::diff_clock diff_clock_;
 
 	sanguis::random_generator random_generator_;
 
-	unicast_callback const send_unicast_;
+	sanguis::server::unicast_callback const send_unicast_;
 
 	typedef fcppt::scoped_ptr<
-		server::world::context
+		sanguis::server::world::context
 	> world_context_scoped_ptr;
 
 	world_context_scoped_ptr const world_context_;
 
 	typedef fcppt::scoped_ptr<
-		server::environment::load_context
+		sanguis::server::environment::load_context
 	> load_context_scoped_ptr;
 
 	load_context_scoped_ptr const load_context_;
 
 	sge::charconv::system &charconv_system_;
 
-	server::console &console_;
+	sanguis::server::console &console_;
 
-	entities::player_map players_;
+	sanguis::server::entities::player_map players_;
 
-	world::map worlds_;
+	sanguis::server::world::map worlds_;
 };
 
 }

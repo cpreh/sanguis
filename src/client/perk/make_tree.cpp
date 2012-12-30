@@ -1,19 +1,30 @@
+#include <sanguis/cast_enum.hpp>
+#include <sanguis/perk_type.hpp>
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/player_level.hpp>
-#include <sanguis/client/perk/make_tree.hpp>
 #include <sanguis/client/perk/compare.hpp>
 #include <sanguis/client/perk/info.hpp>
 #include <sanguis/client/perk/max_level.hpp>
+#include <sanguis/client/perk/make_tree.hpp>
 #include <sanguis/client/perk/required_parent_level.hpp>
 #include <sanguis/client/perk/required_player_level.hpp>
-#include <sanguis/cast_enum.hpp>
-#include <sanguis/perk_type.hpp>
+#include <sanguis/messages/perk_tree_node.hpp>
+#include <sanguis/messages/perk_tree_node_list.hpp>
+#include <sanguis/messages/roles/max_perk_level.hpp>
+#include <sanguis/messages/roles/perk_children.hpp>
+#include <sanguis/messages/roles/perk_label.hpp>
+#include <sanguis/messages/roles/required_perk_parent_level.hpp>
+#include <sanguis/messages/roles/required_perk_player_level.hpp>
 #include <fcppt/algorithm/find_if_exn.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
+
 
 namespace
 {
@@ -27,7 +38,7 @@ make_info(
 
 sanguis::client::perk::tree_unique_ptr
 sanguis::client::perk::make_tree(
-	messages::perk_tree_node_list const &_list
+	sanguis::messages::perk_tree_node_list const &_list
 )
 {
 	// this code highly depends on the order in which the server serializes the tree
@@ -37,9 +48,9 @@ sanguis::client::perk::make_tree(
 	);
 
 	// start with the dummy head, the server will always send one
-	perk::tree_unique_ptr ret(
+	sanguis::client::perk::tree_unique_ptr ret(
 		fcppt::make_unique_ptr<
-			perk::tree
+			sanguis::client::perk::tree
 		>(
 			::make_info(
 				_list.front()
@@ -48,15 +59,11 @@ sanguis::client::perk::make_tree(
 	);
 
 	for(
-		messages::perk_tree_node_list::const_iterator it(
-			_list.begin()
-		);
-		it != _list.end();
-		++it
+		auto const &item : _list
 	)
 	{
 		typedef fcppt::container::tree::pre_order<
-			perk::tree
+			sanguis::client::perk::tree
 		> traversal;
 
 		traversal trav(
@@ -67,10 +74,11 @@ sanguis::client::perk::make_tree(
 			fcppt::algorithm::find_if_exn(
 				trav.begin(),
 				trav.end(),
-				client::perk::compare(
-					SANGUIS_CAST_ENUM(
-						perk_type,
-						it->get<
+				sanguis::client::perk::compare(
+					sanguis::cast_enum<
+						sanguis::perk_type
+					>(
+						item.get<
 							messages::roles::perk_label
 						>()
 					)
@@ -80,33 +88,30 @@ sanguis::client::perk::make_tree(
 
 		pos->value(
 			::make_info(
-				*it
+				item
 			)
 		);
 
-		messages::types::enum_vector const &children(
-			it->get<messages::roles::perk_children>()
+		sanguis::messages::types::enum_vector const &children(
+			item.get<sanguis::messages::roles::perk_children>()
 		);
 
 		for(
-			messages::types::enum_vector::const_iterator child_it(
-				children.begin()
-			);
-			child_it != children.end();
-			++child_it
+			auto const &child : children
 		)
 			pos->push_back(
-				perk::info(
-					SANGUIS_CAST_ENUM(
-						perk_type,
-						*child_it
+				sanguis::client::perk::info(
+					sanguis::cast_enum<
+						sanguis::perk_type
+					>(
+						child
 					)
 				)
 			);
 	}
 
 	return
-		move(
+		std::move(
 			ret
 		);
 }
@@ -121,8 +126,9 @@ make_info(
 {
 	return
 		sanguis::client::perk::info(
-			SANGUIS_CAST_ENUM(
-				sanguis::perk_type,
+			sanguis::cast_enum<
+				sanguis::perk_type
+			>(
 				_node.get<
 					sanguis::messages::roles::perk_label
 				>()

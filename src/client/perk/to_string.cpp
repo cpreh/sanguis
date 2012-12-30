@@ -1,31 +1,32 @@
-#include <sanguis/client/perk/to_string.hpp>
 #include <sanguis/perk_type.hpp>
-#include <fcppt/assert/unreachable.hpp>
+#include <sanguis/client/perk/to_string.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assert/unreachable.hpp>
+
 
 fcppt::string const
 sanguis::client::perk::to_string(
-	perk_type::type const _type
+	sanguis::perk_type const _type
 )
 {
 	switch(
 		_type
 	)
 	{
-	case perk_type::choleric:
+	case sanguis::perk_type::choleric:
 		return FCPPT_TEXT("choleric");
-	case perk_type::health:
+	case sanguis::perk_type::health:
 		return FCPPT_TEXT("health");
-	case perk_type::ias:
+	case sanguis::perk_type::ias:
 		return FCPPT_TEXT("ias");
-	case perk_type::ims:
+	case sanguis::perk_type::ims:
 		return FCPPT_TEXT("ims");
-	case perk_type::irs:
+	case sanguis::perk_type::irs:
 		return FCPPT_TEXT("irs");
-	case perk_type::regeneration:
+	case sanguis::perk_type::regeneration:
 		return FCPPT_TEXT("regeneration");
-	case perk_type::size:
+	case sanguis::perk_type::size:
 		break;
 	}
 

@@ -8,11 +8,10 @@
 #include <sge/image2d/system.hpp>
 #include <sge/image2d/view/const_object.hpp>
 #include <sge/renderer/device/core.hpp>
-#include <fcppt/tr1/functional.hpp>
-#include <fcppt/ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
+#include <functional>
 #include <fcppt/config/external_end.hpp>
 
 sanguis::load::resource::texture_context_impl::texture_context_impl(
@@ -22,11 +21,11 @@ sanguis::load::resource::texture_context_impl::texture_context_impl(
 )
 :
 	task_(
-		std::tr1::bind(
+		std::bind(
 			&texture_context_impl::task,
 			this,
 			_path,
-			fcppt::ref(
+			std::ref(
 				_il
 			)
 		)
@@ -35,7 +34,7 @@ sanguis::load::resource::texture_context_impl::texture_context_impl(
 		task_.get_future()
 	),
 	thread_(
-		fcppt::ref(
+		std::ref(
 			task_
 		)
 	),
