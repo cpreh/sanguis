@@ -140,7 +140,7 @@ sanguis::client::draw2d::entities::model::object::object(
 	);
 
 	for(
-		auto const &part : model
+		auto const &cur_part : model
 	)
 		fcppt::container::ptr::push_back_unique_ptr(
 			parts_,
@@ -148,7 +148,7 @@ sanguis::client::draw2d::entities::model::object::object(
 				sanguis::client::draw2d::entities::model::part
 			>(
 				diff_clock_,
-				*part.second,
+				*cur_part.second,
 				this->at(
 					sanguis::client::draw2d::sprite::index(
 						index++
@@ -192,9 +192,9 @@ sanguis::client::draw2d::entities::model::object::update()
 		);
 
 	for(
-		auto &part : parts_
+		auto &cur_part : parts_
 	)
-		part.update();
+		cur_part.update();
 }
 
 void
@@ -203,9 +203,9 @@ sanguis::client::draw2d::entities::model::object::orientation(
 )
 {
 	for(
-		auto &part : parts_
+		auto &cur_part : parts_
 	)
-		part.orientation(
+		cur_part.orientation(
 			_rot
 		);
 }
@@ -346,9 +346,9 @@ sanguis::client::draw2d::entities::model::object::weapon(
 )
 {
 	for(
-		auto &part : parts_
+		auto &cur_part : parts_
 	)
-		part.weapon(
+		cur_part.weapon(
 			_weapon
 		);
 
@@ -407,7 +407,7 @@ sanguis::client::draw2d::entities::model::object::change_animation(
 )
 {
 	for(
-		auto &part : parts_
+		auto &cur_part : parts_
 	)
 	{
 		sanguis::animation_type part_anim(
@@ -415,7 +415,7 @@ sanguis::client::draw2d::entities::model::object::change_animation(
 		);
 
 		while(
-			!part.try_animation(
+			!cur_part.try_animation(
 				part_anim
 			)
 		)
@@ -497,10 +497,10 @@ bool
 sanguis::client::draw2d::entities::model::object::animations_ended() const
 {
 	for(
-		auto const &part : parts_
+		auto const &cur_part : parts_
 	)
 		if(
-			!part.ended()
+			!cur_part.ended()
 		)
 			return false;
 	return true;

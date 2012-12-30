@@ -7,6 +7,7 @@
 #include <sanguis/load/resource/texture_context_impl.hpp>
 #include <sanguis/exception.hpp>
 #include <sge/renderer/dim2.hpp>
+#include <sge/renderer/lock_rect.hpp>
 #include <sge/parse/json/const_optional_object_ref.hpp>
 #include <sge/parse/json/get_unsigned.hpp>
 #include <sge/parse/json/find_member.hpp>
@@ -25,6 +26,7 @@
 #include <fcppt/math/box/output.hpp>
 #include <fcppt/math/box/contains.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
@@ -162,15 +164,16 @@ sanguis::load::model::animation::context_ptr
 sanguis::load::model::animation::object::load() const
 {
 	return
-		// TODO: make_unique_ptr?
-		animation::context_ptr(
-			new animation::context(
-				param_.textures().load(
-					param_.path() / texture_
-				),
-				frame_cache_,
+		fcppt::make_unique_ptr<
+			animation::context
+		>(
+			param_.textures().load(
+				param_.path() / texture_
+			),
+			frame_cache_,
+			sanguis::load::model::animation::context::cache_callback(
 				std::bind(
-					&object::fill_cache,
+					&sanguis::load::model::animation::object::fill_cache,
 					this,
 					std::placeholders::_1
 				)
