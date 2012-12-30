@@ -1,24 +1,27 @@
+#include <sanguis/animation_type.hpp>
 #include <sanguis/client/draw2d/entities/model/loop_method.hpp>
+#include <sanguis/client/draw2d/sprite/animation/loop_method.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
-sanguis::client::draw2d::sprite::animation::loop_method::type
+
+sanguis::client::draw2d::sprite::animation::loop_method
 sanguis::client::draw2d::entities::model::loop_method(
-	animation_type::type const _atype
+	sanguis::animation_type const _atype
 )
 {
 	switch(
 		_atype
 	)
 	{
-	case animation_type::none:
-	case animation_type::walking:
-	case animation_type::attacking:
-	case animation_type::reloading:
+	case sanguis::animation_type::none:
+	case sanguis::animation_type::walking:
+	case sanguis::animation_type::attacking:
+	case sanguis::animation_type::reloading:
 		return sanguis::client::draw2d::sprite::animation::loop_method::repeat;
-	case animation_type::dying:
-	case animation_type::deploying:
+	case sanguis::animation_type::dying:
+	case sanguis::animation_type::deploying:
 		return sanguis::client::draw2d::sprite::animation::loop_method::stop_at_end;
-	case animation_type::size:
+	case sanguis::animation_type::size:
 		break;
 	}
 

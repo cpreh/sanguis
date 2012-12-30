@@ -1,6 +1,9 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_NEEDS_HEALTHBAR_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_NEEDS_HEALTHBAR_HPP_INCLUDED
 
+#include <sanguis/client/draw2d/entities/model/needs_healthbar_fwd.hpp>
+
+
 namespace sanguis
 {
 namespace client
@@ -12,15 +15,11 @@ namespace entities
 namespace model
 {
 
-namespace needs_healthbar
-{
-enum type
+enum class needs_healthbar
 {
 	yes,
 	no
 };
-
-}
 
 }
 }

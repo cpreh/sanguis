@@ -1,14 +1,18 @@
 #include <sanguis/client/control/actions/nullary.hpp>
+#include <sanguis/client/control/actions/nullary_type.hpp>
+
 
 sanguis::client::control::actions::nullary::nullary(
-	actions::nullary_type::type const _type
+	sanguis::client::control::actions::nullary_type const _type
 )
 :
-	type_(_type)
+	type_(
+		_type
+	)
 {
 }
 
-sanguis::client::control::actions::nullary_type::type
+sanguis::client::control::actions::nullary_type
 sanguis::client::control::actions::nullary::type() const
 {
 	return type_;

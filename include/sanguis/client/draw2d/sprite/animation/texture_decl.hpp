@@ -21,13 +21,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef SANGUIS_CLIENT_DRAW2D_SPRITE_ANIMATION_TEXTURE_DECL_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SPRITE_ANIMATION_TEXTURE_DECL_HPP_INCLUDED
 
-#include <sanguis/client/draw2d/sprite/animation/texture_fwd.hpp>
-#include <sanguis/client/draw2d/sprite/animation/loop_method.hpp>
-#include <sanguis/load/resource/animation/series.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
+#include <sanguis/client/draw2d/sprite/animation/loop_method.hpp>
+#include <sanguis/client/draw2d/sprite/animation/texture_fwd.hpp>
+#include <sanguis/load/resource/animation/series.hpp>
 #include <sge/sprite/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -54,8 +55,8 @@ public:
 	> object;
 
 	texture(
-		load::resource::animation::series const &,
-		sprite::animation::loop_method::type,
+		sanguis::load::resource::animation::series const &,
+		sanguis::client::draw2d::sprite::animation::loop_method,
 		object &init_sprite,
 		sanguis::diff_clock const &
 	);
@@ -66,21 +67,21 @@ public:
 	void
 	reset();
 
-	load::resource::animation::series const &
+	sanguis::load::resource::animation::series const &
 	series() const;
 private:
 	void
 	handle_end();
 
-	load::resource::animation::series series_;
+	sanguis::load::resource::animation::series series_;
 
-	sprite::animation::loop_method::type action_;
+	sanguis::client::draw2d::sprite::animation::loop_method action_;
 
 	sanguis::diff_timer cur_timer_;
 
 	object &spr_;
 
-	load::resource::animation::series::const_iterator pos_;
+	sanguis::load::resource::animation::series::const_iterator pos_;
 };
 
 }

@@ -6,10 +6,10 @@
 #include <fcppt/container/map_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/type_traits/is_floating_point.hpp>
-#include <boost/static_assert.hpp>
 #include <map>
+#include <type_traits>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -35,10 +35,11 @@ public:
 		Format
 	> value;
 
-	BOOST_STATIC_ASSERT(
-		boost::is_floating_point<
+	static_assert(
+		std::is_floating_point<
 			typename Format::channel_type
-		>::value
+		>::value,
+		"Format::channel_type must be a floating point type"
 	);
 
 	typedef Locator locator;

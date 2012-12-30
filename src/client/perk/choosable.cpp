@@ -22,7 +22,7 @@ perk_level(
 
 }
 
-sanguis::client::perk::choosable_state::type
+sanguis::client::perk::choosable_state
 sanguis::client::perk::choosable(
 	sanguis::perk_type const _type,
 	sanguis::client::perk::tree const &_tree,

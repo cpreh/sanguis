@@ -2,7 +2,7 @@
 #define SANGUIS_CREATOR_GEOMETRY_UNIT_HPP_INCLUDED
 
 #include <fcppt/config/external_begin.hpp>
-#include <boost/cstdint.hpp>
+#include <cstdint>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -13,7 +13,7 @@ namespace creator
 namespace geometry
 {
 
-typedef boost::int32_t unit;
+typedef std::int32_t unit;
 
 }
 }

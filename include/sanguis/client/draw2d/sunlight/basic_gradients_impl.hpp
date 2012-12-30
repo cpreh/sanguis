@@ -4,15 +4,16 @@
 #include <sanguis/client/draw2d/sunlight/basic_gradients.hpp>
 #include <sanguis/client/draw2d/sunlight/lerp.hpp>
 #include <sge/image/mizuiro_color.hpp>
+#include <mizuiro/color/object_impl.hpp>
 #include <mizuiro/color/operators/add.hpp>
 #include <mizuiro/color/operators/scalar_multiply.hpp>
 #include <mizuiro/color/operators/subtract.hpp>
-#include <mizuiro/color/object_impl.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/next_prior.hpp>
+#include <iterator>
 #include <fcppt/config/external_end.hpp>
+
 
 
 template<
@@ -20,7 +21,11 @@ template<
 	typename Locator,
 	typename Real
 >
-sanguis::client::draw2d::sunlight::basic_gradients<Value, Locator, Real>::basic_gradients()
+sanguis::client::draw2d::sunlight::basic_gradients<
+	Value,
+	Locator,
+	Real
+>::basic_gradients()
 {
 }
 
@@ -29,7 +34,11 @@ template<
 	typename Locator,
 	typename Real
 >
-sanguis::client::draw2d::sunlight::basic_gradients<Value, Locator, Real>::~basic_gradients()
+sanguis::client::draw2d::sunlight::basic_gradients<
+	Value,
+	Locator,
+	Real
+>::~basic_gradients()
 {
 }
 
@@ -39,14 +48,18 @@ template<
 	typename Real
 >
 void
-sanguis::client::draw2d::sunlight::basic_gradients<Value, Locator, Real>::add(
-	locator const r,
-	value const &v
+sanguis::client::draw2d::sunlight::basic_gradients<
+	Value,
+	Locator,
+	Real
+>::add(
+	locator const _locator,
+	value const &_value
 )
 {
 	values_.insert(
-		r,
-		v
+		_locator,
+		_value
 	);
 }
 
@@ -55,9 +68,17 @@ template<
 	typename Locator,
 	typename Real
 >
-typename sanguis::client::draw2d::sunlight::basic_gradients<Value, Locator, Real>::value const
-sanguis::client::draw2d::sunlight::basic_gradients<Value, Locator, Real>::interpolate(
-	locator const r
+typename sanguis::client::draw2d::sunlight::basic_gradients<
+	Value,
+	Locator,
+	Real
+>::value const
+sanguis::client::draw2d::sunlight::basic_gradients<
+	Value,
+	Locator,
+	Real
+>::interpolate(
+	locator const _locator
 ) const
 {
 	FCPPT_ASSERT_ERROR(
@@ -66,14 +87,14 @@ sanguis::client::draw2d::sunlight::basic_gradients<Value, Locator, Real>::interp
 
 	typename value_map::const_iterator upper =
 		values_.lower_bound(
-			r
+			_locator
 		);
 
 	if (upper == values_.end())
 		--upper;
 
 	typename value_map::const_iterator lower =
-		boost::prior(
+		std::prev(
 			upper
 		);
 
@@ -81,7 +102,7 @@ sanguis::client::draw2d::sunlight::basic_gradients<Value, Locator, Real>::interp
 		range =
 			upper->first - lower->first,
 		distance =
-			r-lower->first;
+			_locator - lower->first;
 
 	real const normalized =
 		static_cast<real>(distance)
@@ -89,7 +110,7 @@ sanguis::client::draw2d::sunlight::basic_gradients<Value, Locator, Real>::interp
 		static_cast<real>(range);
 
 	return
-		sunlight::lerp(
+		sanguis::client::draw2d::sunlight::lerp(
 			lower->second,
 			upper->second,
 			normalized

@@ -1,3 +1,5 @@
+#include <sanguis/animation_type.hpp>
+#include <sanguis/exception.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/load/model/weapon_category.hpp>
 #include <sanguis/load/model/base_animation_not_found.hpp>
@@ -5,7 +7,6 @@
 #include <sanguis/load/model/find_texture.hpp>
 #include <sanguis/load/model/animation/object.hpp>
 #include <sanguis/load/log.hpp>
-#include <sanguis/exception.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
 #include <sge/parse/json/get.hpp>
@@ -13,7 +14,6 @@
 #include <sge/parse/json/member_map.hpp>
 #include <sge/parse/json/object.hpp>
 #include <fcppt/algorithm/find_exn.hpp>
-#include <fcppt/container/array.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/log/headers.hpp>
@@ -21,18 +21,25 @@
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <array>
+#include <cstddef>
 #include <iterator>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace
 {
 
-typedef fcppt::container::array<
+typedef std::array<
 	fcppt::string,
-	sanguis::animation_type::size
+	static_cast<
+		std::size_t
+	>(
+		sanguis::animation_type::size
+	)
 > animation_type_array;
 
-animation_type_array const animation_types = {{
+animation_type_array const animation_types{{
 	FCPPT_TEXT("none"),
 	FCPPT_TEXT("attacking"),
 	FCPPT_TEXT("walking"),
@@ -41,14 +48,14 @@ animation_type_array const animation_types = {{
 	FCPPT_TEXT("reloading")
 }};
 
-sanguis::animation_type::type
+sanguis::animation_type
 find_animation_type(
 	fcppt::string const &_str
 )
 {
 	return
 		static_cast<
-			sanguis::animation_type::type
+			sanguis::animation_type
 		>(
 			std::distance(
 				animation_types.begin(),
@@ -65,7 +72,7 @@ find_animation_type(
 
 sanguis::load::model::animation::object const &
 sanguis::load::model::weapon_category::operator[](
-	animation_type::type const _anim
+	sanguis::animation_type const _anim
 ) const
 {
 	animation_map::const_iterator const
@@ -81,7 +88,7 @@ sanguis::load::model::weapon_category::operator[](
 		return *it->second;
 
 	if(
-		_anim == animation_type::none
+		_anim == sanguis::animation_type::none
 	)
 		throw sanguis::exception(
 			FCPPT_TEXT("Default animation not found in TODO")
@@ -94,7 +101,7 @@ sanguis::load::model::weapon_category::operator[](
 
 bool
 sanguis::load::model::weapon_category::has_animation(
-	animation_type::type const _anim
+	sanguis::animation_type const _anim
 ) const
 {
 	animation_map::const_iterator const

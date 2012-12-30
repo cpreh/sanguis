@@ -1,9 +1,10 @@
 #ifndef SANGUIS_CLIENT_CONTROL_ACTIONS_SCALE_HPP_INCLUDED
 #define SANGUIS_CLIENT_CONTROL_ACTIONS_SCALE_HPP_INCLUDED
 
+#include <sanguis/client/control/key_scale.hpp>
 #include <sanguis/client/control/actions/scale_fwd.hpp>
 #include <sanguis/client/control/actions/scale_type.hpp>
-#include <sanguis/client/control/key_scale.hpp>
+
 
 namespace sanguis
 {
@@ -18,19 +19,19 @@ class scale
 {
 public:
 	scale(
-		actions::scale_type::type,
-		control::key_scale
+		sanguis::client::control::actions::scale_type,
+		sanguis::client::control::key_scale
 	);
 
-	actions::scale_type::type
+	sanguis::client::control::actions::scale_type
 	type() const;
 
-	control::key_scale
+	sanguis::client::control::key_scale
 	get() const;
 private:
-	actions::scale_type::type type_;
+	sanguis::client::control::actions::scale_type type_;
 
-	control::key_scale scale_;
+	sanguis::client::control::key_scale scale_;
 };
 
 }

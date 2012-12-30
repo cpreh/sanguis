@@ -3,7 +3,7 @@
 
 #include <sanguis/creator/geometry/unit.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/type_traits/make_unsigned.hpp>
+#include <type_traits>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -14,7 +14,7 @@ namespace creator
 namespace geometry
 {
 
-typedef boost::make_unsigned<
+typedef std::make_unsigned<
 	sanguis::creator::geometry::unit
 >::type size_type;
 

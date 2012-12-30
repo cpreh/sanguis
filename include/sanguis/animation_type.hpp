@@ -1,12 +1,13 @@
 #ifndef SANGUIS_ANIMATION_TYPE_HPP_INCLUDED
 #define SANGUIS_ANIMATION_TYPE_HPP_INCLUDED
 
+#include <sanguis/animation_type_fwd.hpp>
+
+
 namespace sanguis
 {
 
-namespace animation_type
-{
-enum type
+enum class animation_type
 {
 	none,
 	attacking,
@@ -16,7 +17,6 @@ enum type
 	reloading,
 	size
 };
-}
 
 }
 

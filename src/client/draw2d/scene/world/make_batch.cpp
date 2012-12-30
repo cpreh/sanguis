@@ -6,11 +6,11 @@
 #include <sanguis/client/draw2d/scene/world/vf/format_part.hpp>
 #include <sanguis/client/draw2d/scene/world/vf/pos.hpp>
 #include <sanguis/client/draw2d/scene/world/vf/texpos.hpp>
-#include <sanguis/load/resource/textures.hpp>
 #include <sanguis/creator/geometry/polygon.hpp>
 #include <sanguis/creator/geometry/shape.hpp>
 #include <sanguis/creator/geometry/shape_container.hpp>
 #include <sanguis/creator/geometry/texture_name.hpp>
+#include <sanguis/load/resource/textures.hpp>
 #include <sge/renderer/lock_mode.hpp>
 #include <sge/renderer/resource_flags_field.hpp>
 #include <sge/renderer/size_type.hpp>
@@ -28,29 +28,10 @@
 #include <sge/renderer/vf/view.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/spirit/home/phoenix/bind/bind_function.hpp>
-#include <boost/spirit/home/phoenix/core/argument.hpp>
-#include <boost/spirit/home/phoenix/operator/arithmetic.hpp>
 #include <algorithm>
 #include <numeric>
 #include <fcppt/config/external_end.hpp>
 
-
-namespace
-{
-
-sge::renderer::vertex::count const
-poly_count(
-	sanguis::creator::geometry::shape const &_shape
-)
-{
-	return
-		sge::renderer::vertex::count(
-			_shape.polygon().size()
-		);
-}
-
-}
 
 sanguis::client::draw2d::scene::world::batch const
 sanguis::client::draw2d::scene::world::make_batch(
@@ -88,11 +69,18 @@ sanguis::client::draw2d::scene::world::make_batch(
 					sge::renderer::vertex::count(
 						0u
 					),
-					boost::phoenix::arg_names::arg1 +=
-						boost::phoenix::bind(
-							poly_count,
-							boost::phoenix::arg_names::arg2
-						)
+					[](
+						sge::renderer::vertex::count const _count,
+						sanguis::creator::geometry::shape const &_shape
+					)
+					{
+						return
+							_count
+							+
+							sge::renderer::vertex::count(
+								_shape.polygon().size()
+							);
+					}
 				),
 				sge::renderer::resource_flags_field::null()
 			)

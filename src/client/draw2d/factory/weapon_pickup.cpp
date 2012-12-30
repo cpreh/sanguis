@@ -2,6 +2,8 @@
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
+#include <sanguis/client/draw2d/entities/model/decay_option.hpp>
+#include <sanguis/client/draw2d/entities/model/needs_healthbar.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
 #include <sanguis/client/draw2d/factory/weapon_pickup.hpp>
@@ -28,10 +30,10 @@ sanguis::client::draw2d::factory::weapon_pickup(
 				fcppt::assign::make_container<
 					sanguis::client::draw2d::entities::order_vector
 				>(
-					z_ordering::pickup
+					sanguis::client::draw2d::z_ordering::pickup
 				),
-				entities::model::needs_healthbar::no,
-				entities::model::decay_option::immediate
+				sanguis::client::draw2d::entities::model::needs_healthbar::no,
+				sanguis::client::draw2d::entities::model::decay_option::immediate
 			)
 		);
 }

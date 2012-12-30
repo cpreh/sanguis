@@ -1,7 +1,9 @@
-#include <sanguis/client/draw2d/entities/order_vector.hpp>
-#include <sanguis/client/draw2d/entities/player.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
+#include <sanguis/client/draw2d/entities/order_vector.hpp>
+#include <sanguis/client/draw2d/entities/player.hpp>
+#include <sanguis/client/draw2d/entities/model/decay_option.hpp>
+#include <sanguis/client/draw2d/entities/model/needs_healthbar.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sge/sprite/object_impl.hpp>

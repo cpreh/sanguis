@@ -38,7 +38,7 @@ sanguis::server::entities::with_health::damage(
 			health_,
 			sanguis::server::entities::property::from_float(
 				_damage.get()
-				* _amounts[i].get() * (1 - armor_[i].get())
+				* _amounts[i].get() * (1 - armor_.get()[i].get())
 			)
 		);
 }

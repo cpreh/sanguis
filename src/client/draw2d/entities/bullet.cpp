@@ -1,4 +1,6 @@
 #include <sanguis/client/draw2d/entities/bullet.hpp>
+#include <sanguis/client/draw2d/entities/model/decay_option.hpp>
+#include <sanguis/client/draw2d/entities/model/needs_healthbar.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/sprite/unit.hpp>
@@ -10,12 +12,12 @@
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/center.hpp>
 #include <fcppt/assign/make_container.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/normalize.hpp>
 #include <fcppt/math/vector/length.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/optional_impl.hpp>
+
 
 namespace
 {
@@ -30,25 +32,29 @@ sanguis::client::draw2d::entities::bullet::bullet(
 	fcppt::string const &_name
 )
 :
-	model::object(
+	sanguis::client::draw2d::entities::model::object(
 		_param,
 		_name,
 		fcppt::assign::make_container<
-			entities::order_vector
+			sanguis::client::draw2d::entities::order_vector
 		>(
-			z_ordering::bullet
+			sanguis::client::draw2d::z_ordering::bullet
 		)(
-			z_ordering::bullet
+			sanguis::client::draw2d::z_ordering::bullet
 		),
-		model::needs_healthbar::no,
-		model::decay_option::immediate
+		sanguis::client::draw2d::entities::model::needs_healthbar::no,
+		sanguis::client::draw2d::entities::model::decay_option::immediate
 	),
 	origin_()
 {
 	this->at(
 		tail
 	).w(
-		static_cast<sprite::unit>(3)
+		static_cast<
+			sanguis::client::draw2d::sprite::unit
+		>(
+			3
+		)
 	); // TODO: which value is best here?
 }
 

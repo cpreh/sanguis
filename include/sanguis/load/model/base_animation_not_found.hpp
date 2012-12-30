@@ -4,6 +4,7 @@
 #include <sanguis/animation_type.hpp>
 #include <sanguis/exception.hpp>
 
+
 namespace sanguis
 {
 namespace load
@@ -16,14 +17,15 @@ class base_animation_not_found
 	public sanguis::exception
 {
 public:
-	explicit base_animation_not_found(
-		animation_type::type
+	explicit
+	base_animation_not_found(
+		sanguis::animation_type
 	);
 
-	animation_type::type
+	sanguis::animation_type
 	anim_type() const;
 private:
-	animation_type::type anim_type_;
+	sanguis::animation_type anim_type_;
 };
 
 }

@@ -1,6 +1,9 @@
 #ifndef SANGUIS_MESSAGES_TYPES_MESSAGE_HPP_INCLUDED
 #define SANGUIS_MESSAGES_TYPES_MESSAGE_HPP_INCLUDED
 
+#include <sanguis/messages/types/message_fwd.hpp>
+
+
 namespace sanguis
 {
 namespace messages
@@ -8,9 +11,7 @@ namespace messages
 namespace types
 {
 
-namespace message
-{
-enum type
+enum class message
 {
 	add_aoe_projectile,
 	add_console_command,
@@ -56,7 +57,6 @@ enum type
 	unpause,
 	size
 };
-}
 
 }
 }

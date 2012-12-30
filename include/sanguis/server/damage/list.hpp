@@ -1,10 +1,11 @@
 #ifndef SANGUIS_SERVER_DAMAGE_LIST_HPP_INCLUDED
 #define SANGUIS_SERVER_DAMAGE_LIST_HPP_INCLUDED
 
-#include <sanguis/server/damage/list_fwd.hpp>
-#include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/damage/array.hpp>
+#include <sanguis/server/damage/list_fwd.hpp>
 #include <sanguis/server/damage/meta_fwd.hpp>
+#include <sanguis/server/damage/unit.hpp>
+
 
 namespace sanguis
 {
@@ -16,22 +17,24 @@ namespace damage
 class list
 {
 public:
-	explicit list(
-		meta const &
+	explicit
+	list(
+		sanguis::server::damage::meta const &
 	);
 
-	explicit list(
-		unit
+	explicit
+	list(
+		sanguis::server::damage::unit
 	);
 
-	list &
+	sanguis::server::damage::list &
 	operator()(
-		meta const &
+		sanguis::server::damage::meta const &
 	);
 
-	operator array() const;
+	operator sanguis::server::damage::array() const;
 private:
-	array array_;
+	sanguis::server::damage::array array_;
 };
 
 }

@@ -70,7 +70,7 @@ sanguis::client::draw2d::entities::model::part::~part()
 
 bool
 sanguis::client::draw2d::entities::model::part::try_animation(
-	animation_type::type const _atype
+	sanguis::animation_type const _atype
 )
 {
 	// WHY?
@@ -227,7 +227,7 @@ sanguis::client::draw2d::entities::model::part::object() const
 
 void
 sanguis::client::draw2d::entities::model::part::load_animation(
-	animation_type::type const _atype
+	sanguis::animation_type const _atype
 )
 {
 	animation_.reset();

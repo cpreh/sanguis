@@ -4,6 +4,7 @@
 #include <sanguis/client/control/actions/nullary_fwd.hpp>
 #include <sanguis/client/control/actions/nullary_type.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -16,14 +17,15 @@ namespace actions
 class nullary
 {
 public:
-	explicit nullary(
-		actions::nullary_type::type
+	explicit
+	nullary(
+		sanguis::client::control::actions::nullary_type
 	);
 
-	actions::nullary_type::type
+	sanguis::client::control::actions::nullary_type
 	type() const;
 private:
-	actions::nullary_type::type type_;
+	sanguis::client::control::actions::nullary_type type_;
 };
 
 }

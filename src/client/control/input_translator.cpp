@@ -1,15 +1,17 @@
-#include <sanguis/client/control/input_translator.hpp>
+#include <sanguis/exception.hpp>
 #include <sanguis/client/control/axis_direction_max.hpp>
 #include <sanguis/client/control/axis_direction_min.hpp>
+#include <sanguis/client/control/input_translator.hpp>
+#include <sanguis/client/control/key_scale.hpp>
 #include <sanguis/client/control/actions/any.hpp>
 #include <sanguis/client/control/actions/binary.hpp>
+#include <sanguis/client/control/actions/callback.hpp>
 #include <sanguis/client/control/actions/cursor.hpp>
 #include <sanguis/client/control/actions/nullary.hpp>
 #include <sanguis/client/control/actions/nullary_type.hpp>
 #include <sanguis/client/control/actions/scale.hpp>
 #include <sanguis/client/control/actions/scale_type.hpp>
 #include <sanguis/client/cursor/object.hpp>
-#include <sanguis/exception.hpp>
 #include <sge/input/keyboard/device.hpp>
 #include <sge/input/keyboard/key_code.hpp>
 #include <sge/input/keyboard/key_event.hpp>
@@ -21,10 +23,11 @@
 #include <functional>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace
 {
 
-sanguis::client::control::actions::scale_type::type
+sanguis::client::control::actions::scale_type
 key_scale_type(
 	sge::input::keyboard::key_code
 );
@@ -39,8 +42,8 @@ key_scale_value(
 
 sanguis::client::control::input_translator::input_translator(
 	sge::input::keyboard::device &_keyboard,
-	client::cursor::object &_cursor,
-	actions::callback const &_callback
+	sanguis::client::cursor::object &_cursor,
+	sanguis::client::control::actions::callback const &_callback
 )
 :
 	callback_(
@@ -49,7 +52,7 @@ sanguis::client::control::input_translator::input_translator(
 	key_connection_(
 		_keyboard.key_callback(
 			std::bind(
-				&input_translator::key_callback,
+				&sanguis::client::control::input_translator::key_callback,
 				this,
 				std::placeholders::_1
 			)
@@ -58,7 +61,7 @@ sanguis::client::control::input_translator::input_translator(
 	axis_connection_(
 		_cursor.move_callback(
 			std::bind(
-				&input_translator::move_callback,
+				&sanguis::client::control::input_translator::move_callback,
 				this,
 				std::placeholders::_1
 			)
@@ -67,7 +70,7 @@ sanguis::client::control::input_translator::input_translator(
 	button_connection_(
 		_cursor.button_callback(
 			std::bind(
-				&input_translator::button_callback,
+				&sanguis::client::control::input_translator::button_callback,
 				this,
 				std::placeholders::_1
 			)
@@ -100,31 +103,31 @@ sanguis::client::control::input_translator::key_callback(
 	case sge::input::keyboard::key_code::f1:
 		this->nullary_event(
 			_event.pressed(),
-			actions::nullary_type::console
+			sanguis::client::control::actions::nullary_type::console
 		);
 		break;
 	case sge::input::keyboard::key_code::c:
 		this->nullary_event(
 			_event.pressed(),
-			actions::nullary_type::switch_weapon_forwards
+			sanguis::client::control::actions::nullary_type::switch_weapon_forwards
 		);
 		break;
 	case sge::input::keyboard::key_code::x:
 		this->nullary_event(
 			_event.pressed(),
-			actions::nullary_type::switch_weapon_backwards
+			sanguis::client::control::actions::nullary_type::switch_weapon_backwards
 		);
 		break;
 	case sge::input::keyboard::key_code::e:
 		this->nullary_event(
 			_event.pressed(),
-			actions::nullary_type::perk_menu
+			sanguis::client::control::actions::nullary_type::perk_menu
 		);
 		break;
 	case sge::input::keyboard::key_code::escape:
 		this->nullary_event(
 			_event.pressed(),
-			actions::nullary_type::escape
+			sanguis::client::control::actions::nullary_type::escape
 		);
 		break;
 	default:
@@ -143,8 +146,8 @@ sanguis::client::control::input_translator::move_callback(
 		return;
 
 	callback_(
-		actions::any(
-			actions::cursor(
+		sanguis::client::control::actions::any(
+			sanguis::client::control::actions::cursor(
 				*_event.position()
 			)
 		)
@@ -160,9 +163,9 @@ sanguis::client::control::input_translator::button_callback(
 		_event.button_code() == sge::input::cursor::button_code::left
 	)
 		callback_(
-			actions::any(
-				actions::binary(
-					actions::binary_type::shoot,
+			sanguis::client::control::actions::any(
+				sanguis::client::control::actions::binary(
+					sanguis::client::control::actions::binary_type::shoot,
 					_event.pressed()
 				)
 			)
@@ -175,8 +178,8 @@ sanguis::client::control::input_translator::direction_event(
 )
 {
 	callback_(
-		actions::any(
-			actions::scale(
+		sanguis::client::control::actions::any(
+			sanguis::client::control::actions::scale(
 				::key_scale_type(
 					_event.key_code()
 				),
@@ -192,7 +195,7 @@ sanguis::client::control::input_translator::direction_event(
 void
 sanguis::client::control::input_translator::nullary_event(
 	bool const _pressed,
-	actions::nullary_type::type const _action
+	sanguis::client::control::actions::nullary_type const _action
 )
 {
 	if(
@@ -201,8 +204,8 @@ sanguis::client::control::input_translator::nullary_event(
 		return;
 
 	callback_(
-		actions::any(
-			actions::nullary(
+		sanguis::client::control::actions::any(
+			sanguis::client::control::actions::nullary(
 				_action
 			)
 		)
@@ -212,7 +215,7 @@ sanguis::client::control::input_translator::nullary_event(
 namespace
 {
 
-sanguis::client::control::actions::scale_type::type
+sanguis::client::control::actions::scale_type
 key_scale_type(
 	sge::input::keyboard::key_code const _code
 )

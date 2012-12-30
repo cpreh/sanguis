@@ -3,6 +3,7 @@
 
 #include <sanguis/server/damage/wrapper_fwd.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -10,7 +11,7 @@ namespace server
 namespace damage
 {
 
-extern damage::wrapper const fire;
+extern sanguis::server::damage::wrapper const fire;
 
 }
 }

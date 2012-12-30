@@ -21,27 +21,39 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef SANGUIS_CLIENT_DRAW2D_SPRITE_ANIMATION_TEXTURE_IMPL_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SPRITE_ANIMATION_TEXTURE_IMPL_HPP_INCLUDED
 
-#include <sanguis/client/draw2d/sprite/animation/texture_decl.hpp>
+#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/diff_timer.hpp>
 #include <sanguis/exception.hpp>
+#include <sanguis/client/draw2d/sprite/animation/loop_method.hpp>
+#include <sanguis/client/draw2d/sprite/animation/texture_decl.hpp>
+#include <sanguis/load/resource/animation/series.hpp>
 #include <sge/sprite/object.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/next_prior.hpp>
 #include <boost/chrono/duration.hpp>
+#include <iterator>
 #include <fcppt/config/external_end.hpp>
+
 
 template<
 	typename Choices
 >
-sanguis::client::draw2d::sprite::animation::texture<Choices>::texture(
+sanguis::client::draw2d::sprite::animation::texture<
+	Choices
+>::texture(
 	sanguis::load::resource::animation::series const &_series,
-	animation::loop_method::type const _action,
+	sanguis::client::draw2d::sprite::animation::loop_method const _action,
 	object &_spr,
 	sanguis::diff_clock const &_diff_clock
 )
 :
-	series_(_series),
-	action_(_action),
+	series_(
+		_series
+	),
+	action_(
+		_action
+	),
 	cur_timer_(
 		sanguis::diff_timer::parameters(
 			_diff_clock,
@@ -50,8 +62,12 @@ sanguis::client::draw2d::sprite::animation::texture<Choices>::texture(
 			)
 		)
 	),
-	spr_(_spr),
-	pos_(series_.begin())
+	spr_(
+		_spr
+	),
+	pos_(
+		series_.begin()
+	)
 {
 	if(
 		series_.empty()
@@ -60,14 +76,16 @@ sanguis::client::draw2d::sprite::animation::texture<Choices>::texture(
 			FCPPT_TEXT("animation::texture series is empty!")
 		);
 
-	reset();
+	this->reset();
 }
 
 template<
 	typename Choices
 >
 bool
-sanguis::client::draw2d::sprite::animation::texture<Choices>::process()
+sanguis::client::draw2d::sprite::animation::texture<
+	Choices
+>::process()
 {
 	if(
 		!cur_timer_.expired()
@@ -75,10 +93,15 @@ sanguis::client::draw2d::sprite::animation::texture<Choices>::process()
 		return false;
 
 	if(
-		boost::next(pos_) == series_.end()
+		std::next(
+			pos_
+		)
+		==
+		series_.end()
 	)
 	{
-		handle_end();
+		this->handle_end();
+
 		return true;
 	}
 
@@ -99,7 +122,9 @@ template<
 	typename Choices
 >
 void
-sanguis::client::draw2d::sprite::animation::texture<Choices>::reset()
+sanguis::client::draw2d::sprite::animation::texture<
+	Choices
+>::reset()
 {
 	spr_.texture(
 		series_.begin()->tex()
@@ -116,7 +141,9 @@ template<
 	typename Choices
 >
 sanguis::load::resource::animation::series const &
-sanguis::client::draw2d::sprite::animation::texture<Choices>::series() const
+sanguis::client::draw2d::sprite::animation::texture<
+	Choices
+>::series() const
 {
 	return series_;
 }
@@ -125,22 +152,23 @@ template<
 	typename Choices
 >
 void
-sanguis::client::draw2d::sprite::animation::texture<Choices>::handle_end()
+sanguis::client::draw2d::sprite::animation::texture<
+	Choices
+>::handle_end()
 {
 	switch(
 		action_
 	)
 	{
-	case animation::loop_method::repeat:
-		reset();
+	case sanguis::client::draw2d::sprite::animation::loop_method::repeat:
+		this->reset();
+
 		return;
-	case animation::loop_method::stop_at_end:
+	case sanguis::client::draw2d::sprite::animation::loop_method::stop_at_end:
 		return;
 	}
 
-	throw sanguis::exception(
-		FCPPT_TEXT("Invalid loop_method!")
-	);
+	FCPPT_ASSERT_UNREACHABLE;
 }
 
 #endif

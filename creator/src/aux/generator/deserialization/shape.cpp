@@ -31,7 +31,7 @@ sanguis::creator::aux::generator::deserialization::shape(
 				)
 			),
 			sge::parse::json::convert::to_enum<
-				sanguis::creator::geometry::solidity::type
+				sanguis::creator::geometry::solidity
 			>(
 				sge::parse::json::find_member_value_exn(
 					_object.members,

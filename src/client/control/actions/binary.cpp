@@ -1,16 +1,22 @@
 #include <sanguis/client/control/actions/binary.hpp>
+#include <sanguis/client/control/actions/binary_type.hpp>
+
 
 sanguis::client::control::actions::binary::binary(
-	actions::binary_type::type const _type,
+	sanguis::client::control::actions::binary_type const _type,
 	bool const _value
 )
 :
-	type_(_type),
-	value_(_value)
+	type_(
+		_type
+	),
+	value_(
+		_value
+	)
 {
 }
 
-sanguis::client::control::actions::binary_type::type
+sanguis::client::control::actions::binary_type
 sanguis::client::control::actions::binary::type() const
 {
 	return type_;

@@ -4,8 +4,9 @@
 #include <sanguis/server/level.hpp>
 #include <fcppt/strong_typedef.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/type_traits/make_signed.hpp>
+#include <type_traits>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -15,8 +16,8 @@ namespace perks
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
-	boost::make_signed<
-		server::level::value_type
+	std::make_signed<
+		sanguis::server::level::value_type
 	>::type,
 	level_diff
 );

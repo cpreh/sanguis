@@ -16,14 +16,15 @@
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/cstdint.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/chrono/duration.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
+#include <cstddef>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
+
 
 sanguis::load::resource::animation::series const
 sanguis::load::resource::animations::load(
@@ -102,7 +103,7 @@ sanguis::load::resource::animations::do_load(
 			>(
 				boost::chrono::milliseconds(
 					fcppt::extract_from_string_exn<
-						boost::int_least64_t
+						std::int_least64_t
 					>(
 						line.substr(
 							fcppt::string(
@@ -132,7 +133,7 @@ sanguis::load::resource::animations::do_load(
 		if (!const_delay)
 		{
 			fcppt::io::istringstream ss(line);
-			boost::int_least64_t temp_delay;
+			std::int_least64_t temp_delay;
 			ss >> temp_delay >> std::ws;
 
 			if (!ss)

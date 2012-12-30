@@ -1,6 +1,9 @@
 #ifndef SANGUIS_CLIENT_CONTROL_ACTIONS_NULLARY_TYPE_HPP_INCLUDED
 #define SANGUIS_CLIENT_CONTROL_ACTIONS_NULLARY_TYPE_HPP_INCLUDED
 
+#include <sanguis/client/control/actions/nullary_type_fwd.hpp>
+
+
 namespace sanguis
 {
 namespace client
@@ -10,9 +13,7 @@ namespace control
 namespace actions
 {
 
-namespace nullary_type
-{
-enum type
+enum class nullary_type
 {
 	console,
 	escape,
@@ -20,7 +21,6 @@ enum type
 	switch_weapon_forwards,
 	switch_weapon_backwards
 };
-}
 
 }
 }

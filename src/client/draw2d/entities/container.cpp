@@ -47,18 +47,14 @@ sanguis::client::draw2d::entities::container::container(
 	);
 
 	for(
-		entities::order_vector::const_iterator it(
-			_orders.begin()
-		);
-		it != _orders.end();
-		++it
+		auto const &order : _orders
 	)
 		sprites_.push_back(
 			object(
 				sprite::normal::parameters()
 				.connection(
 					_normal_system.connection(
-						*it
+						order
 					)
 				)
 				.size(
@@ -133,13 +129,9 @@ sanguis::client::draw2d::entities::container::orientation(
 )
 {
 	for(
-		sprite_vector::iterator it(
-			sprites_.begin()
-		);
-		it != sprites_.end();
-		++it
+		auto &sprite : sprites_
 	)
-		it->rotation(
+		sprite.rotation(
 			_orientation
 		);
 }

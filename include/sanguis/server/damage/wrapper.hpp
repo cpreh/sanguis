@@ -1,11 +1,12 @@
 #ifndef SANGUIS_SERVER_DAMAGE_WRAPPER_HPP_INCLUDED
 #define SANGUIS_SERVER_DAMAGE_WRAPPER_HPP_INCLUDED
 
-#include <sanguis/server/damage/wrapper_fwd.hpp>
 #include <sanguis/server/damage/meta_fwd.hpp>
+#include <sanguis/server/damage/type.hpp>
 #include <sanguis/server/damage/unit.hpp>
-#include <sanguis/damage_type.hpp>
+#include <sanguis/server/damage/wrapper_fwd.hpp>
 #include <fcppt/nonassignable.hpp>
+
 
 namespace sanguis
 {
@@ -21,15 +22,15 @@ class wrapper
 	);
 public:
 	wrapper(
-		damage_type::type
+		sanguis::server::damage::type
 	);
 
-	meta const
+	sanguis::server::damage::meta const
 	operator=(
-		unit
+		sanguis::server::damage::unit
 	) const;
 private:
-	damage_type::type const type_;
+	sanguis::server::damage::type const type_;
 };
 
 }

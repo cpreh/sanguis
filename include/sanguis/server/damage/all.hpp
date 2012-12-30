@@ -4,6 +4,7 @@
 #include <sanguis/server/damage/list_fwd.hpp>
 #include <sanguis/server/damage/unit.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -11,9 +12,9 @@ namespace server
 namespace damage
 {
 
-damage::list const
+sanguis::server::damage::list const
 all(
-	damage::unit
+	sanguis::server::damage::unit
 );
 
 }

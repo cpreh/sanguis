@@ -2,8 +2,9 @@
 #define SANGUIS_SERVER_DAMAGE_META_HPP_INCLUDED
 
 #include <sanguis/server/damage/meta_fwd.hpp>
+#include <sanguis/server/damage/type.hpp>
 #include <sanguis/server/damage/unit.hpp>
-#include <sanguis/damage_type.hpp>
+
 
 namespace sanguis
 {
@@ -16,19 +17,19 @@ class meta
 {
 public:
 	meta(
-		damage_type::type,
-		unit
+		sanguis::server::damage::type,
+		sanguis::server::damage::unit
 	);
 
-	damage_type::type
+	sanguis::server::damage::type
 	type() const;
 
-	unit
+	sanguis::server::damage::unit
 	value() const;
 private:
-	damage_type::type type_;
+	sanguis::server::damage::type type_;
 
-	unit value_;
+	sanguis::server::damage::unit value_;
 
 };
 

@@ -4,6 +4,7 @@
 #include <sanguis/client/control/actions/binary_fwd.hpp>
 #include <sanguis/client/control/actions/binary_type.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -17,17 +18,17 @@ class binary
 {
 public:
 	binary(
-		actions::binary_type::type,
+		sanguis::client::control::actions::binary_type,
 		bool
 	);
 
-	actions::binary_type::type
+	sanguis::client::control::actions::binary_type
 	type() const;
 
 	bool
 	value() const;
 private:
-	actions::binary_type::type type_;
+	sanguis::client::control::actions::binary_type type_;
 
 	bool value_;
 };

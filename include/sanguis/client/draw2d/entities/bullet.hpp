@@ -8,6 +8,7 @@
 #include <fcppt/optional_decl.hpp>
 #include <fcppt/string.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -19,14 +20,14 @@ namespace entities
 
 class bullet
 :
-	public model::object
+	public sanguis::client::draw2d::entities::model::object
 {
 	FCPPT_NONCOPYABLE(
 		bullet
 	);
 public:
 	bullet(
-		model::parameters const &,
+		sanguis::client::draw2d::entities::model::parameters const &,
 		fcppt::string const &name
 	);
 
@@ -36,7 +37,7 @@ private:
 	update();
 
 	fcppt::optional<
-		sprite::center
+		sanguis::client::draw2d::sprite::center
 	> origin_;
 };
 

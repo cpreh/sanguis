@@ -7,7 +7,7 @@
 
 sge::image::color::any::object const
 sanguis::client::gui::perk::item_color(
-	sanguis::client::perk::choosable_state::type const _state
+	sanguis::client::perk::choosable_state const _state
 )
 {
 	switch(

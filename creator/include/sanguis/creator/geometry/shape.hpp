@@ -23,7 +23,7 @@ public:
 	SANGUIS_CREATOR_SYMBOL
 	shape(
 		sanguis::creator::geometry::polygon const &,
-		sanguis::creator::geometry::solidity::type,
+		sanguis::creator::geometry::solidity,
 		sanguis::creator::geometry::depth,
 		sanguis::creator::geometry::texture_name const &
 	);
@@ -33,7 +33,7 @@ public:
 	polygon() const;
 
 	SANGUIS_CREATOR_SYMBOL
-	sanguis::creator::geometry::solidity::type
+	sanguis::creator::geometry::solidity
 	solidity() const;
 
 	SANGUIS_CREATOR_SYMBOL
@@ -46,7 +46,7 @@ public:
 private:
 	sanguis::creator::geometry::polygon polygon_;
 
-	sanguis::creator::geometry::solidity::type solidity_;
+	sanguis::creator::geometry::solidity solidity_;
 
 	sanguis::creator::geometry::depth depth_;
 

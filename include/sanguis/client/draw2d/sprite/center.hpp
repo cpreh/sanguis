@@ -4,6 +4,7 @@
 #include <sanguis/client/draw2d/sprite/point.hpp>
 #include <fcppt/strong_typedef.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -14,7 +15,7 @@ namespace sprite
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
-	sprite::point,
+	sanguis::client::draw2d::sprite::point,
 	center
 );
 

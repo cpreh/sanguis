@@ -1,15 +1,23 @@
 #include <sanguis/server/damage/meta.hpp>
+#include <sanguis/server/damage/type.hpp>
+#include <sanguis/server/damage/unit.hpp>
+
 
 sanguis::server::damage::meta::meta(
-	damage_type::type const _type,
-	unit const _value
+	sanguis::server::damage::type const _type,
+	sanguis::server::damage::unit const _value
 )
 :
-	type_(_type),
-	value_(_value)
-{}
+	type_(
+		_type
+	),
+	value_(
+		_value
+	)
+{
+}
 
-sanguis::damage_type::type
+sanguis::server::damage::type
 sanguis::server::damage::meta::type() const
 {
 	return type_;

@@ -33,7 +33,7 @@ class part
 public:
 	part(
 		sanguis::diff_clock const &,
-		load::model::part const &,
+		sanguis::load::model::part const &,
 		sprite::normal::object &ref
 	);
 
@@ -41,7 +41,7 @@ public:
 
 	bool
 	try_animation(
-		animation_type::type
+		sanguis::animation_type
 	);
 
 	void
@@ -72,7 +72,7 @@ private:
 
 	void
 	load_animation(
-		animation_type::type
+		sanguis::animation_type
 	);
 
 	void
@@ -97,7 +97,7 @@ private:
 
 	sprite::normal::object &ref_;
 
-	sanguis::animation_type::type animation_type_;
+	sanguis::animation_type animation_type_;
 
 	sanguis::weapon_type weapon_;
 

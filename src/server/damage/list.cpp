@@ -12,8 +12,7 @@ init_array(
 	sanguis::server::damage::unit const _value
 )
 {
-	sanguis::server::damage::array const ret =
-	{{
+	sanguis::server::damage::array const ret{{
 		_value,
 		_value,
 		_value,
@@ -27,7 +26,7 @@ init_array(
 }
 
 sanguis::server::damage::list::list(
-	unit const _value
+	sanguis::server::damage::unit const _value
 )
 :
 	array_(
@@ -39,29 +38,37 @@ sanguis::server::damage::list::list(
 }
 
 sanguis::server::damage::list::list(
-	meta const &_meta
+	sanguis::server::damage::meta const &_meta
 )
 :
 	array_(
 		init_array(
-			damage::unit(
+			sanguis::server::damage::unit(
 				0.f
 			)
 		)
 	)
 {
 	array_[
-		_meta.type()
+		static_cast<
+			sanguis::server::damage::array::size_type
+		>(
+			_meta.type()
+		)
 	] = _meta.value();
 }
 
 sanguis::server::damage::list &
 sanguis::server::damage::list::operator()(
-	meta const &_meta
+	sanguis::server::damage::meta const &_meta
 )
 {
 	array_[
-		_meta.type()
+		static_cast<
+			sanguis::server::damage::array::size_type
+		>(
+			_meta.type()
+		)
 	] = _meta.value();
 
 	return *this;

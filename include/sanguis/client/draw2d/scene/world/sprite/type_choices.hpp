@@ -6,8 +6,9 @@
 #include <sge/sprite/config/type_choices.hpp>
 #include <sge/sprite/config/unit_type.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/type_traits/make_signed.hpp>
+#include <type_traits>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -24,7 +25,7 @@ namespace sprite
 
 typedef sge::sprite::config::type_choices<
 	sge::sprite::config::unit_type<
-		boost::make_signed<
+		std::make_signed<
 			sanguis::creator::geometry::unit
 		>::type
 	>,

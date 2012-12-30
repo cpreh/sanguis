@@ -88,7 +88,8 @@ sanguis::client::perk::state::choose_perk(
 		this->choosable(
 			_type
 		)
-		!= perk::choosable_state::ok
+		!=
+		sanguis::client::perk::choosable_state::ok
 	)
 		return false;
 
@@ -160,7 +161,7 @@ sanguis::client::perk::state::perk_levels() const
 	return perk_levels_;
 }
 
-sanguis::client::perk::choosable_state::type
+sanguis::client::perk::choosable_state
 sanguis::client::perk::state::choosable(
 	sanguis::perk_type const _type
 ) const

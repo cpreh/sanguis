@@ -1,6 +1,9 @@
 #ifndef SANGUIS_CLIENT_PERK_CHOOSABLE_STATE_HPP_INCLUDED
 #define SANGUIS_CLIENT_PERK_CHOOSABLE_STATE_HPP_INCLUDED
 
+#include <sanguis/client/perk/choosable_state_fwd.hpp>
+
+
 namespace sanguis
 {
 namespace client
@@ -8,9 +11,7 @@ namespace client
 namespace perk
 {
 
-namespace choosable_state
-{
-enum type
+enum class choosable_state
 {
 	ok,
 	parent_level,
@@ -18,7 +19,6 @@ enum type
 	max_level,
 	level_up
 };
-}
 
 }
 }

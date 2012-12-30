@@ -1,7 +1,7 @@
 SET(
 	SANGUIS_FILES
-	include/sanguis/animation_sound_type.hpp
 	include/sanguis/animation_type.hpp
+	include/sanguis/animation_type_fwd.hpp
 	include/sanguis/aoe_projectile_type.hpp
 	include/sanguis/aoe_projectile_type_fwd.hpp
 	include/sanguis/app_name.hpp
@@ -36,15 +36,18 @@ SET(
 	include/sanguis/client/control/actions/binary.hpp
 	include/sanguis/client/control/actions/binary_fwd.hpp
 	include/sanguis/client/control/actions/binary_type.hpp
+	include/sanguis/client/control/actions/binary_type_fwd.hpp
 	include/sanguis/client/control/actions/callback.hpp
 	include/sanguis/client/control/actions/cursor.hpp
 	include/sanguis/client/control/actions/cursor_fwd.hpp
 	include/sanguis/client/control/actions/nullary.hpp
 	include/sanguis/client/control/actions/nullary_fwd.hpp
 	include/sanguis/client/control/actions/nullary_type.hpp
+	include/sanguis/client/control/actions/nullary_type_fwd.hpp
 	include/sanguis/client/control/actions/scale.hpp
 	include/sanguis/client/control/actions/scale_fwd.hpp
 	include/sanguis/client/control/actions/scale_type.hpp
+	include/sanguis/client/control/actions/scale_type_fwd.hpp
 	include/sanguis/client/control/actions/variant.hpp
 	include/sanguis/client/control/attack_dest.hpp
 	include/sanguis/client/control/axis_direction_max.hpp
@@ -76,12 +79,14 @@ SET(
 	include/sanguis/client/draw2d/entities/explosion.hpp
 	include/sanguis/client/draw2d/entities/model/clamp_orientation.hpp
 	include/sanguis/client/draw2d/entities/model/decay_option.hpp
+	include/sanguis/client/draw2d/entities/model/decay_option_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/decay_time.hpp
 	include/sanguis/client/draw2d/entities/model/decay_time_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/healthbar.hpp
 	include/sanguis/client/draw2d/entities/model/healthbar_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/loop_method.hpp
 	include/sanguis/client/draw2d/entities/model/needs_healthbar.hpp
+	include/sanguis/client/draw2d/entities/model/needs_healthbar_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/object.hpp
 	include/sanguis/client/draw2d/entities/model/object_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/orientation.hpp
@@ -171,6 +176,7 @@ SET(
 	include/sanguis/client/draw2d/speed.hpp
 	include/sanguis/client/draw2d/speed_is_null.hpp
 	include/sanguis/client/draw2d/sprite/animation/loop_method.hpp
+	include/sanguis/client/draw2d/sprite/animation/loop_method_fwd.hpp
 	include/sanguis/client/draw2d/sprite/animation/texture_decl.hpp
 	include/sanguis/client/draw2d/sprite/animation/texture_fwd.hpp
 	include/sanguis/client/draw2d/sprite/animation/texture_impl.hpp
@@ -278,6 +284,7 @@ SET(
 	include/sanguis/client/perk/change_function.hpp
 	include/sanguis/client/perk/choosable.hpp
 	include/sanguis/client/perk/choosable_state.hpp
+	include/sanguis/client/perk/choosable_state_fwd.hpp
 	include/sanguis/client/perk/compare.hpp
 	include/sanguis/client/perk/find_info.hpp
 	include/sanguis/client/perk/info.hpp
@@ -321,7 +328,6 @@ SET(
 	include/sanguis/config_app_name.hpp
 	include/sanguis/connect_state.hpp
 	include/sanguis/connect_state_fwd.hpp
-	include/sanguis/damage_type.hpp
 	include/sanguis/diff_clock.hpp
 	include/sanguis/diff_clock_fwd.hpp
 	include/sanguis/diff_timer.hpp
@@ -533,6 +539,7 @@ SET(
 	include/sanguis/messages/types/exp.hpp
 	include/sanguis/messages/types/level.hpp
 	include/sanguis/messages/types/message.hpp
+	include/sanguis/messages/types/message_fwd.hpp
 	include/sanguis/messages/types/message_type.hpp
 	include/sanguis/messages/types/size.hpp
 	include/sanguis/messages/types/space_unit.hpp
@@ -659,6 +666,8 @@ SET(
 	include/sanguis/server/damage/normal.hpp
 	include/sanguis/server/damage/piercing.hpp
 	include/sanguis/server/damage/pure.hpp
+	include/sanguis/server/damage/type.hpp
+	include/sanguis/server/damage/type_fwd.hpp
 	include/sanguis/server/damage/unit.hpp
 	include/sanguis/server/damage/wrapper.hpp
 	include/sanguis/server/damage/wrapper_fwd.hpp

@@ -1,9 +1,13 @@
 #ifndef SANGUIS_SERVER_DAMAGE_ARRAY_HPP_INCLUDED
 #define SANGUIS_SERVER_DAMAGE_ARRAY_HPP_INCLUDED
 
+#include <sanguis/server/damage/type.hpp>
 #include <sanguis/server/damage/unit.hpp>
-#include <sanguis/damage_type.hpp>
-#include <fcppt/container/array.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <array>
+#include <cstddef>
+#include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -12,9 +16,13 @@ namespace server
 namespace damage
 {
 
-typedef fcppt::container::array<
-	unit,
-	damage_type::size
+typedef std::array<
+	sanguis::server::damage::unit,
+	static_cast<
+		std::size_t
+	>(
+		sanguis::server::damage::type::size
+	)
 > array;
 
 }

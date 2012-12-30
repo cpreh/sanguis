@@ -2,11 +2,12 @@
 #define SANGUIS_MESSAGES_MAKE_MESSAGE_ID_HPP_INCLUDED
 
 #include <sanguis/messages/types/alda_type.hpp>
-#include <sanguis/messages/types/message.hpp>
+#include <sanguis/messages/types/message_fwd.hpp>
 #include <alda/message/make_id.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
+
 
 namespace sanguis
 {
@@ -17,7 +18,7 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)
 
 template<
-	sanguis::messages::types::message::type Msg
+	sanguis::messages::types::message Msg
 >
 struct make_message_id
 :

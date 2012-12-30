@@ -13,7 +13,7 @@ namespace types
 {
 
 typedef alda::type_enum<
-	sanguis::messages::types::message::type,
+	sanguis::messages::types::message,
 	sanguis::messages::types::message::size
 > alda_type;
 

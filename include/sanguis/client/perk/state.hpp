@@ -7,7 +7,7 @@
 #include <sanguis/client/perk/state_fwd.hpp>
 #include <sanguis/client/perk/change_callback.hpp>
 #include <sanguis/client/perk/change_function.hpp>
-#include <sanguis/client/perk/choosable_state.hpp>
+#include <sanguis/client/perk/choosable_state_fwd.hpp>
 #include <sanguis/client/perk/info.hpp>
 #include <sanguis/client/perk/level_callback.hpp>
 #include <sanguis/client/perk/level_function.hpp>
@@ -74,7 +74,7 @@ public:
 	sanguis::client::perk::level_map const &
 	perk_levels() const;
 
-	sanguis::client::perk::choosable_state::type
+	sanguis::client::perk::choosable_state
 	choosable(
 		sanguis::perk_type
 	) const;

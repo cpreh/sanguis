@@ -8,7 +8,7 @@
 
 sanguis::creator::geometry::shape::shape(
 	sanguis::creator::geometry::polygon const &_polygon,
-	sanguis::creator::geometry::solidity::type const _solidity,
+	sanguis::creator::geometry::solidity const _solidity,
 	sanguis::creator::geometry::depth const _depth,
 	sanguis::creator::geometry::texture_name const &_texture_name
 )
@@ -34,7 +34,7 @@ sanguis::creator::geometry::shape::polygon() const
 	return polygon_;
 }
 
-sanguis::creator::geometry::solidity::type
+sanguis::creator::geometry::solidity
 sanguis::creator::geometry::shape::solidity() const
 {
 	return solidity_;

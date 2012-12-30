@@ -1,8 +1,9 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_LOOP_METHOD_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_LOOP_METHOD_HPP_INCLUDED
 
-#include <sanguis/client/draw2d/sprite/animation/loop_method.hpp>
-#include <sanguis/animation_type.hpp>
+#include <sanguis/animation_type_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/animation/loop_method_fwd.hpp>
+
 
 namespace sanguis
 {
@@ -15,9 +16,9 @@ namespace entities
 namespace model
 {
 
-draw2d::sprite::animation::loop_method::type
+sanguis::client::draw2d::sprite::animation::loop_method
 loop_method(
-	animation_type::type
+	sanguis::animation_type
 );
 
 }

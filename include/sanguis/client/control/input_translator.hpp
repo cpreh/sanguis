@@ -3,7 +3,7 @@
 
 #include <sanguis/client/control/input_translator_fwd.hpp>
 #include <sanguis/client/control/actions/callback.hpp>
-#include <sanguis/client/control/actions/nullary_type.hpp>
+#include <sanguis/client/control/actions/nullary_type_fwd.hpp>
 #include <sanguis/client/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/input/keyboard/key_event_fwd.hpp>
@@ -29,8 +29,8 @@ class input_translator
 public:
 	input_translator(
 		sge::input::keyboard::device &,
-		client::cursor::object &,
-		actions::callback const &
+		sanguis::client::cursor::object &,
+		sanguis::client::control::actions::callback const &
 	);
 
 	~input_translator();
@@ -58,10 +58,10 @@ private:
 	void
 	nullary_event(
 		bool pressed,
-		actions::nullary_type::type
+		sanguis::client::control::actions::nullary_type
 	);
 
-	actions::callback const callback_;
+	sanguis::client::control::actions::callback const callback_;
 
 	fcppt::signal::scoped_connection const
 		key_connection_,

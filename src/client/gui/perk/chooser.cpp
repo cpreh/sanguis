@@ -4,6 +4,7 @@
 #include <sanguis/client/gui/perk/item_tree.hpp>
 #include <sanguis/client/gui/perk/item_user_data.hpp>
 #include <sanguis/client/gui/object.hpp>
+#include <sanguis/client/perk/choosable_state.hpp>
 #include <sanguis/client/perk/find_info.hpp>
 #include <sanguis/client/perk/info.hpp>
 #include <sanguis/client/perk/state.hpp>
@@ -365,7 +366,7 @@ sanguis::client::gui::perk::chooser::update_choose_button(
 		state_.choosable(
 			_perk_type
 		)
-		== client::perk::choosable_state::ok
+		== sanguis::client::perk::choosable_state::ok
 	);
 }
 
