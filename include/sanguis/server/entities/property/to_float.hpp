@@ -3,6 +3,7 @@
 
 #include <sanguis/server/entities/property/value.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -17,7 +18,7 @@ template<
 >
 Float
 to_float(
-	value const &_value
+	sanguis::server::entities::property::value const &_value
 )
 {
 	return

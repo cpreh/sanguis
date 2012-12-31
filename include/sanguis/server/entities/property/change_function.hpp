@@ -3,6 +3,7 @@
 
 #include <sanguis/server/entities/property/value.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -12,9 +13,10 @@ namespace entities
 namespace property
 {
 
-typedef void
+typedef
+void
 change_function(
-	value
+	sanguis::server::entities::property::value
 );
 
 }

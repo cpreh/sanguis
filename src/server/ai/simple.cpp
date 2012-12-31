@@ -1,33 +1,35 @@
+#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/diff_timer.hpp>
 #include <sanguis/random_generator.hpp>
+#include <sanguis/server/angle.hpp>
+#include <sanguis/server/direction.hpp>
+#include <sanguis/server/space_unit.hpp>
+#include <sanguis/server/vector.hpp>
 #include <sanguis/server/ai/simple.hpp>
 #include <sanguis/server/ai/search_new_target.hpp>
 #include <sanguis/server/auras/aggro.hpp>
-#include <sanguis/server/auras/unique_ptr.hpp>
+#include <sanguis/server/collision/distance.hpp>
+#include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_health.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/property/changeable_fwd.hpp>
 #include <sanguis/server/entities/property/current_to_max.hpp>
-#include <sanguis/server/collision/distance.hpp>
-#include <sanguis/server/angle.hpp>
-#include <sanguis/server/direction.hpp>
-#include <sanguis/server/space_unit.hpp>
-#include <sanguis/server/vector.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/optional_impl.hpp>
+#include <fcppt/try_dynamic_cast.hpp>
+#include <fcppt/container/map_impl.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/math/vector/hypersphere_to_cartesian.hpp>
+#include <fcppt/math/vector/length_square.hpp>
 #include <fcppt/math/vector/signed_angle_between_cast.hpp>
 #include <fcppt/math/vector/static.hpp>
-#include <fcppt/container/map_impl.hpp>
 #include <fcppt/random/variate_impl.hpp>
 #include <fcppt/random/distribution/uniform_real_impl.hpp>
-#include <fcppt/try_dynamic_cast.hpp>
-#include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/optional.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
 #include <functional>
@@ -37,8 +39,8 @@
 sanguis::server::ai::simple::simple(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
-	entities::with_ai &_me,
-	entities::auto_weak_link _owner
+	sanguis::server::entities::with_ai &_me,
+	sanguis::server::entities::auto_weak_link _owner
 )
 :
 	pos_timer_(
@@ -52,9 +54,13 @@ sanguis::server::ai::simple::simple(
 			true
 		)
 	),
-	me_(_me),
+	me_(
+		_me
+	),
 	target_(),
-	owner_(_owner),
+	owner_(
+		_owner
+	),
 	potential_targets_(),
 	timer_rng_(
 		_random_generator,
@@ -75,31 +81,29 @@ sanguis::server::ai::simple::simple(
 			),
 			distribution::sup(
 				fcppt::math::twopi<
-					server::space_unit
+					sanguis::server::space_unit
 				>()
 			)
 		)
 	)
 {
 	me_.add_aura(
-		auras::unique_ptr(
-			fcppt::make_unique_ptr<
-				auras::aggro
-			>(
-				server::radius(
-					20.f // TODO
-				),
-				me_.team(),
-				std::bind(
-					&simple::target_enters,
-					this,
-					std::placeholders::_1
-				),
-				std::bind(
-					&simple::target_leaves,
-					this,
-					std::placeholders::_1
-				)
+		fcppt::make_unique_ptr<
+			sanguis::server::auras::aggro
+		>(
+			sanguis::server::radius(
+				20.f // TODO
+			),
+			me_.team(),
+			std::bind(
+				&sanguis::server::ai::simple::simple::target_enters,
+				this,
+				std::placeholders::_1
+			),
+			std::bind(
+				&sanguis::server::ai::simple::target_leaves,
+				this,
+				std::placeholders::_1
 			)
 		)
 	);
@@ -115,8 +119,8 @@ sanguis::server::ai::simple::update()
 	if(
 		!target_ && !potential_targets_.empty()
 	)
-		target_
-			= ai::search_new_target(
+		target_ =
+			sanguis::server::ai::search_new_target(
 				me_,
 				potential_targets_
 			);
@@ -130,11 +134,11 @@ sanguis::server::ai::simple::update()
 		);
 
 		FCPPT_TRY_DYNAMIC_CAST(
-			entities::with_velocity *,
-			movable_,
+			sanguis::server::entities::with_velocity *,
+			movable,
 			&me_
 		)
-			movable_->movement_speed().current(
+			movable->movement_speed().current(
 				0
 			);
 
@@ -156,8 +160,8 @@ sanguis::server::ai::simple::update()
 		true
 	);
 
-	server::space_unit const distance(
-		collision::distance(
+	sanguis::server::space_unit const distance(
+		sanguis::server::collision::distance(
 			*target_,
 			me_
 		)
@@ -165,7 +169,7 @@ sanguis::server::ai::simple::update()
 
 	pos_timer_.interval(
 		boost::chrono::duration<
-			server::space_unit
+			sanguis::server::space_unit
 		>(
 			distance
 			*
@@ -178,7 +182,7 @@ sanguis::server::ai::simple::update()
 		)
 	);
 
-	server::vector const fuzzy_target(
+	sanguis::server::vector const fuzzy_target(
 		target_->center().get()
 		+
 		fcppt::math::vector::hypersphere_to_cartesian(
@@ -193,11 +197,16 @@ sanguis::server::ai::simple::update()
 	);
 
 	typedef fcppt::optional<
-		server::space_unit
+		sanguis::server::space_unit
 	> optional_angle;
 
 	optional_angle const angle(
-		fuzzy_target == me_.center().get()
+		fcppt::math::vector::length_square(
+			fuzzy_target
+			-
+			me_.center().get()
+		)
+		< 1.f
 		?
 			optional_angle()
 		:
@@ -216,50 +225,56 @@ sanguis::server::ai::simple::update()
 	)
 	{
 		FCPPT_TRY_DYNAMIC_CAST(
-			entities::with_body *,
+			sanguis::server::entities::with_body *,
 			with_body,
 			&me_
 		)
 			with_body->angle(
-				server::angle(
+				sanguis::server::angle(
 					*angle
 				)
 			);
 	}
 
 	FCPPT_TRY_DYNAMIC_CAST(
-		entities::with_velocity *,
+		sanguis::server::entities::with_velocity *,
 		movable,
 		&me_
 	)
 	{
-		entities::property::changeable &speed(
+		sanguis::server::entities::property::changeable &speed(
 			movable->movement_speed()
 		);
 
 		if(
 			angle
 		)
+		{
 			movable->direction(
-				server::direction(
+				sanguis::server::direction(
 					*angle
 				)
 			);
 
-		entities::property::current_to_max(
-			speed
-		);
+			sanguis::server::entities::property::current_to_max(
+				speed
+			);
+		}
+		else
+			movable->movement_speed().current(
+				0
+			);
 	}
 }
 
 void
 sanguis::server::ai::simple::target_enters(
-	entities::with_body &_new_target
+	sanguis::server::entities::with_body &_new_target
 )
 {
-	entities::with_health *const with_health(
+	sanguis::server::entities::with_health *const with_health(
 		dynamic_cast<
-			entities::with_health *
+			sanguis::server::entities::with_health *
 		>(
 			&_new_target
 		)
@@ -280,16 +295,15 @@ sanguis::server::ai::simple::target_enters(
 	)
 		return;
 
-	// if we already have a target
-	// and the new target is farther away
-	// do nothing
+	// if we already have a target and the new target is farther away do
+	// nothing
 	if(
 		target_
-		&& collision::distance(
+		&& sanguis::server::collision::distance(
 			*target_,
 			me_
 		)
-		> collision::distance(
+		> sanguis::server::collision::distance(
 			_new_target,
 			me_
 		)
@@ -301,7 +315,7 @@ sanguis::server::ai::simple::target_enters(
 
 void
 sanguis::server::ai::simple::target_leaves(
-	entities::with_body &_old_target
+	sanguis::server::entities::with_body &_old_target
 )
 {
 	potential_targets_.erase(

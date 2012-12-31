@@ -73,8 +73,12 @@ sanguis::server::entities::friend_::friend_(
 	),
 	sanguis::server::entities::with_velocity(
 		sanguis::server::entities::property::initial(
-			_movement_speed.get(),
-			0
+			sanguis::server::entities::property::initial::base(
+				_movement_speed.get()
+			),
+			sanguis::server::entities::property::initial::current(
+				0.f
+			)
 		),
 		sanguis::server::direction(
 			0.f

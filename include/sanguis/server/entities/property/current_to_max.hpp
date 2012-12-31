@@ -3,6 +3,7 @@
 
 #include <sanguis/server/entities/property/changeable_fwd.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -14,7 +15,7 @@ namespace property
 
 void
 current_to_max(
-	changeable &
+	sanguis::server::entities::property::changeable &
 );
 
 }

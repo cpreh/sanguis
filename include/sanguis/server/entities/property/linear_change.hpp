@@ -4,6 +4,7 @@
 #include <sanguis/server/entities/property/base_fwd.hpp>
 #include <sanguis/server/entities/property/value.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -15,8 +16,8 @@ namespace property
 
 void
 linear_change(
-	base &,
-	value const &
+	sanguis::server::entities::property::base &,
+	sanguis::server::entities::property::value const &
 );
 
 }

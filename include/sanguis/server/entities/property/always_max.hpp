@@ -5,7 +5,11 @@
 #include <sanguis/server/entities/property/base.hpp>
 #include <sanguis/server/entities/property/change_callback.hpp>
 #include <sanguis/server/entities/property/change_signal.hpp>
+#include <sanguis/server/entities/property/value.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/signal/auto_connection_fwd.hpp>
+#include <fcppt/signal/object_decl.hpp>
+
 
 namespace sanguis
 {
@@ -18,32 +22,35 @@ namespace property
 
 class always_max
 :
-	public property::base
+	public sanguis::server::entities::property::base
 {
 	FCPPT_NONCOPYABLE(
 		always_max
 	);
 public:
-	explicit always_max(
-		value_type
+	explicit
+	always_max(
+		sanguis::server::entities::property::value
 	);
 
-	value_type
+	~always_max();
+
+	sanguis::server::entities::property::value
 	current() const;
 
 	fcppt::signal::auto_connection
 	register_change_callback(
-		change_callback const &
+		sanguis::server::entities::property::change_callback const &
 	);
 private:
 	void
 	on_recalc_max(
-		value_type
+		sanguis::server::entities::property::value
 	);
 
-	value_type current_;
+	sanguis::server::entities::property::value current_;
 
-	change_signal change_signal_;
+	sanguis::server::entities::property::change_signal change_signal_;
 };
 
 }

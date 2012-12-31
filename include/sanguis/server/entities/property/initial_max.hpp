@@ -4,6 +4,7 @@
 #include <sanguis/server/entities/property/initial.hpp>
 #include <sanguis/server/entities/property/value.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -13,9 +14,9 @@ namespace entities
 namespace property
 {
 
-initial const
+sanguis::server::entities::property::initial const
 initial_max(
-	value
+	sanguis::server::entities::property::value
 );
 
 }

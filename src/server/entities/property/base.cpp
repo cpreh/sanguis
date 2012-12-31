@@ -1,19 +1,26 @@
 #include <sanguis/server/entities/property/base.hpp>
+#include <sanguis/server/entities/property/constant.hpp>
+#include <sanguis/server/entities/property/linear.hpp>
+#include <sanguis/server/entities/property/value.hpp>
+
 
 sanguis::server::entities::property::base::base(
-	value const _base
+	sanguis::server::entities::property::value const _base
 )
 :
-	base_(_base)
-{}
+	base_(
+		_base
+	)
+{
+}
 
-sanguis::server::entities::property::base::constant_type const
+sanguis::server::entities::property::constant const
 sanguis::server::entities::property::base::constant()
 {
 	return constant_;
 }
 
-sanguis::server::entities::property::base::linear_type const
+sanguis::server::entities::property::linear const
 sanguis::server::entities::property::base::linear()
 {
 	return linear_;
@@ -21,26 +28,27 @@ sanguis::server::entities::property::base::linear()
 
 void
 sanguis::server::entities::property::base::constant(
-	constant_type const &_constant
+	sanguis::server::entities::property::constant const &_constant
 )
 {
 	constant_ = _constant;
 
-	recalc_max();
+	this->recalc_max();
 }
 
 void
 sanguis::server::entities::property::base::linear(
-	linear_type const &_linear
+	sanguis::server::entities::property::linear const &_linear
 )
 {
 	linear_ = _linear;
 
-	recalc_max();
+	this->recalc_max();
 }
 
 sanguis::server::entities::property::base::~base()
-{}
+{
+}
 
 void
 sanguis::server::entities::property::base::recalc_max()

@@ -1,22 +1,29 @@
 #include <sanguis/server/entities/property/initial.hpp>
+#include <sanguis/server/entities/property/value.hpp>
+
 
 sanguis::server::entities::property::initial::initial(
-	value_type const _base,
-	value_type const _current
+	sanguis::server::entities::property::initial::base const _base,
+	sanguis::server::entities::property::initial::current const _current
 )
 :
-	base_(_base),
-	current_(_current)
-{}
+	base_(
+		_base.get()
+	),
+	current_(
+		_current.get()
+	)
+{
+}
 
-sanguis::server::entities::property::initial::value_type
-sanguis::server::entities::property::initial::base() const
+sanguis::server::entities::property::value
+sanguis::server::entities::property::initial::get_base() const
 {
 	return base_;
 }
 
-sanguis::server::entities::property::initial::value_type
-sanguis::server::entities::property::initial::current() const
+sanguis::server::entities::property::value
+sanguis::server::entities::property::initial::get_current() const
 {
 	return current_;
 }

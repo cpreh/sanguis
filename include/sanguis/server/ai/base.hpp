@@ -4,6 +4,7 @@
 #include <sanguis/server/ai/base_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -19,10 +20,12 @@ class base
 protected:
 	base();
 public:
-	virtual void
+	virtual
+	void
 	update() = 0;
 
-	virtual ~base();
+	virtual
+	~base();
 };
 
 }

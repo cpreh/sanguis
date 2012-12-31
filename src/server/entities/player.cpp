@@ -80,8 +80,12 @@ sanguis::server::entities::player::player(
 	sanguis::server::entities::with_perks(),
 	sanguis::server::entities::with_velocity(
 		sanguis::server::entities::property::initial(
-			_speed.get(),
-			0
+			sanguis::server::entities::property::initial::base(
+				_speed.get()
+			),
+			sanguis::server::entities::property::initial::current(
+				0.f
+			)
 		),
 		sanguis::server::direction(
 			0.f

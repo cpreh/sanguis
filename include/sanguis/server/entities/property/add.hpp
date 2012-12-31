@@ -4,6 +4,7 @@
 #include <sanguis/server/entities/property/changeable_fwd.hpp>
 #include <sanguis/server/entities/property/value.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -15,8 +16,8 @@ namespace property
 
 void
 add(
-	changeable &,
-	value const &
+	sanguis::server::entities::property::changeable &,
+	sanguis::server::entities::property::value const &
 );
 
 }

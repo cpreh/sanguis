@@ -174,6 +174,7 @@ SET(
 	include/sanguis/client/draw2d/scene/world/vf/scalar.hpp
 	include/sanguis/client/draw2d/scene/world/vf/texpos.hpp
 	include/sanguis/client/draw2d/speed.hpp
+	include/sanguis/client/draw2d/speed_fwd.hpp
 	include/sanguis/client/draw2d/speed_is_null.hpp
 	include/sanguis/client/draw2d/sprite/animation/loop_method.hpp
 	include/sanguis/client/draw2d/sprite/animation/loop_method_fwd.hpp
@@ -233,6 +234,7 @@ SET(
 	include/sanguis/client/draw2d/translate/vector_to_client.hpp
 	include/sanguis/client/draw2d/unit.hpp
 	include/sanguis/client/draw2d/vector2.hpp
+	include/sanguis/client/draw2d/vector2_fwd.hpp
 	include/sanguis/client/draw2d/z_ordering.hpp
 	include/sanguis/client/draw2d/z_ordering_fwd.hpp
 	include/sanguis/client/events/action.hpp
@@ -746,7 +748,6 @@ SET(
 	include/sanguis/server/entities/property/linear_fwd.hpp
 	include/sanguis/server/entities/property/subtract.hpp
 	include/sanguis/server/entities/property/to_float.hpp
-	include/sanguis/server/entities/property/unit.hpp
 	include/sanguis/server/entities/property/value.hpp
 	include/sanguis/server/entities/radius.hpp
 	include/sanguis/server/entities/spawns/count_per_wave.hpp

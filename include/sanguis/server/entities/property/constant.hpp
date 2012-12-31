@@ -4,6 +4,7 @@
 #include <sanguis/server/entities/property/constant_fwd.hpp>
 #include <sanguis/server/entities/property/value.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -16,19 +17,17 @@ namespace property
 class constant
 {
 public:
-	typedef property::value value_type;
-
 	constant();
 
 	void
 	change(
-		value_type
+		sanguis::server::entities::property::value
 	);
 
-	value_type
+	sanguis::server::entities::property::value
 	value() const;
 private:
-	value_type value_;
+	sanguis::server::entities::property::value value_;
 };
 
 }

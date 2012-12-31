@@ -3,6 +3,8 @@
 
 #include <sanguis/server/entities/property/initial_fwd.hpp>
 #include <sanguis/server/entities/property/value.hpp>
+#include <fcppt/strong_typedef.hpp>
+
 
 namespace sanguis
 {
@@ -16,20 +18,28 @@ namespace property
 class initial
 {
 public:
-	typedef property::value value_type;
-
-	initial(
-		value_type base,
-		value_type current
+	FCPPT_MAKE_STRONG_TYPEDEF(
+		sanguis::server::entities::property::value,
+		base
 	);
 
-	value_type
-	base() const;
+	FCPPT_MAKE_STRONG_TYPEDEF(
+		sanguis::server::entities::property::value,
+		current
+	);
 
-	value_type
-	current() const;
+	initial(
+		sanguis::server::entities::property::initial::base,
+		sanguis::server::entities::property::initial::current
+	);
+
+	sanguis::server::entities::property::value
+	get_base() const;
+
+	sanguis::server::entities::property::value
+	get_current() const;
 private:
-	value_type
+	sanguis::server::entities::property::value
 		base_,
 		current_;
 };

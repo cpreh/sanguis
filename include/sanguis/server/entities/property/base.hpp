@@ -2,10 +2,11 @@
 #define SANGUIS_SERVER_ENTITIES_PROPERTY_BASE_HPP_INCLUDED
 
 #include <sanguis/server/entities/property/base_fwd.hpp>
-#include <sanguis/server/entities/property/value.hpp>
 #include <sanguis/server/entities/property/constant.hpp>
 #include <sanguis/server/entities/property/linear.hpp>
+#include <sanguis/server/entities/property/value.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -22,47 +23,44 @@ class base
 		base
 	);
 public:
-	typedef property::value value_type;
-
-	typedef property::constant constant_type;
-
-	typedef property::linear linear_type;
-
-	explicit base(
-		value_type
+	explicit
+	base(
+		sanguis::server::entities::property::value
 	);
 
-	constant_type const
+	sanguis::server::entities::property::constant const
 	constant();
 
-	linear_type const
+	sanguis::server::entities::property::linear const
 	linear();
 
 	void
 	constant(
-		constant_type const &
+		sanguis::server::entities::property::constant const &
 	);
 
 	void
 	linear(
-		linear_type const &
+		sanguis::server::entities::property::linear const &
 	);
 protected:
-	virtual ~base();
+	virtual
+	~base();
 private:
 	void
 	recalc_max();
 
-	virtual void
+	virtual
+	void
 	on_recalc_max(
-		value_type
+		sanguis::server::entities::property::value
 	) = 0;
 
-	value_type const base_;
+	sanguis::server::entities::property::value const base_;
 
-	constant_type constant_;
+	sanguis::server::entities::property::constant constant_;
 
-	linear_type linear_;
+	sanguis::server::entities::property::linear linear_;
 };
 
 }
