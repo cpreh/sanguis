@@ -46,8 +46,8 @@ sanguis::server::ai::simple::simple(
 	pos_timer_(
 		sanguis::diff_timer::parameters(
 			_diff_clock,
-			boost::chrono::seconds(
-				0 // TODO
+			boost::chrono::milliseconds(
+				500
 			)
 		)
 		.expired(
@@ -62,17 +62,6 @@ sanguis::server::ai::simple::simple(
 		_owner
 	),
 	potential_targets_(),
-	timer_rng_(
-		_random_generator,
-		distribution(
-			distribution::min(
-				0.f
-			),
-			distribution::sup(
-				2.f
-			)
-		)
-	),
 	fuzzy_target_rng_(
 		_random_generator,
 		distribution(
@@ -164,21 +153,6 @@ sanguis::server::ai::simple::update()
 		sanguis::server::collision::distance(
 			*target_,
 			me_
-		)
-	);
-
-	pos_timer_.interval(
-		boost::chrono::duration<
-			sanguis::server::space_unit
-		>(
-			distance
-			*
-			(
-				1.f
-				+
-				timer_rng_()
-			)
-			/ 1000.f // TODO!
 		)
 	);
 

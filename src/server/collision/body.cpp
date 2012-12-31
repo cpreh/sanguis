@@ -100,7 +100,7 @@ sanguis::server::collision::body::center() const
 
 void
 sanguis::server::collision::body::speed(
-	server::speed const &_speed
+	sanguis::server::speed const &_speed
 )
 {
 	body_->linear_velocity(
@@ -109,7 +109,6 @@ sanguis::server::collision::body::speed(
 		)
 	);
 }
-
 
 sanguis::server::speed const
 sanguis::server::collision::body::speed() const

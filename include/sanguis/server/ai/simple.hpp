@@ -72,9 +72,7 @@ private:
 		distribution
 	> random_variate;
 
-	random_variate
-		timer_rng_,
-		fuzzy_target_rng_;
+	random_variate fuzzy_target_rng_;
 };
 
 }
