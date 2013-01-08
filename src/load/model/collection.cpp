@@ -4,6 +4,9 @@
 #include <sanguis/load/model/object.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <mutex>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::load::model::object const &
@@ -11,7 +14,9 @@ sanguis::load::model::collection::operator[](
 	fcppt::string const &_name
 ) const
 {
-	boost::mutex::scoped_lock const lock(
+	std::lock_guard<
+		std::mutex
+	> const lock(
 		mutex_
 	);
 

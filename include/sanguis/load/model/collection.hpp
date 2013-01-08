@@ -8,9 +8,10 @@
 #include <fcppt/string.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/thread/thread.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
+#include <mutex>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -48,7 +49,7 @@ private:
 
 	mutable model_map models_;
 
-	mutable boost::mutex mutex_;
+	mutable std::mutex mutex_;
 };
 
 }
