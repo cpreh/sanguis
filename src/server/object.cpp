@@ -18,6 +18,7 @@
 #include <exception>
 #include <functional>
 #include <cstdlib>
+#include <mutex>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -61,7 +62,9 @@ sanguis::server::object::quit()
 bool
 sanguis::server::object::running()
 {
-	boost::mutex::scoped_lock const lock(
+	std::lock_guard<
+		std::mutex
+	> const lock(
 		mutex_
 	);
 
@@ -116,7 +119,9 @@ sanguis::server::object::mainloop()
 void
 sanguis::server::object::reset_running()
 {
-	boost::mutex::scoped_lock const lock(
+	std::lock_guard<
+		std::mutex
+	> const lock(
 		mutex_
 	);
 

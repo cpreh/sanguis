@@ -12,7 +12,8 @@
 #include <fcppt/noncopyable.hpp>
 #include <awl/main/exit_code.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/thread/thread.hpp>
+#include <mutex>
+#include <thread>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -67,9 +68,9 @@ private:
 
 	scoped_machine scoped_machine_;
 
-	boost::mutex mutex_;
+	std::mutex mutex_;
 
-	boost::thread server_thread_;
+	std::thread server_thread_;
 };
 
 }
