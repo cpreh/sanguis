@@ -52,7 +52,7 @@ sanguis::client::perk::choosable(
 		node.has_parent()
 		&&
 		::perk_level(
-			node.parent().value().type(),
+			node.parent()->value().type(),
 			_levels
 		)
 		<

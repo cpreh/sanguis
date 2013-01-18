@@ -66,9 +66,11 @@ sanguis::server::perks::tree::choosable(
 		return false;
 
 	for(
-		sanguis::server::perks::tree::object const *pos(&*it);
+		sanguis::server::perks::tree::object::const_optional_ref pos(
+			*it
+		);
 		pos->has_parent();
-		pos = &pos->parent()
+		pos = pos->parent()
 	)
 	{
 		sanguis::server::perks::tree::status const &cur_status(
@@ -77,7 +79,7 @@ sanguis::server::perks::tree::choosable(
 
 		if(
 			cur_status.required_parent_level().get()
-			> pos->parent().value().level().get()
+			> pos->parent()->value().level().get()
 		)
 			return false;
 	}

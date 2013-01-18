@@ -197,7 +197,7 @@ sanguis::client::gui::perk::chooser::perks(
 		);
 
 		sanguis::perk_type const cur_type(
-			it->parent().value().type()
+			it->parent()->value().type()
 		);
 
 		item_traversal::iterator const item_it(
@@ -211,9 +211,9 @@ sanguis::client::gui::perk::chooser::perks(
 				)
 				{
 					return
-						_tree.holder()
+						_tree.value()
 						&&
-						_tree.value().perk_type() == cur_type;
+						_tree.value()->perk_type() == cur_type;
 				}
 			)
 		);
@@ -238,7 +238,7 @@ sanguis::client::gui::perk::chooser::perks(
 					gui::perk::item
 				>(
 					gui::perk::node(
-						&item_it->value().widget()
+						&item_it->value()->widget()
 					),
 					gui_,
 					it->value()
@@ -342,14 +342,14 @@ sanguis::client::gui::perk::chooser::update_tree_data()
 			continue;
 
 		CEGUI::TreeItem &widget(
-			it->value().widget()
+			it->value()->widget()
 		);
 
 		widget.setTextColours(
 			sge::cegui::to_cegui_color(
 				gui::perk::item_color(
 					state_.choosable(
-						it->value().perk_type()
+						it->value()->perk_type()
 					)
 				)
 			)

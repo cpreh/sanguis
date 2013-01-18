@@ -3,7 +3,10 @@
 
 #include <sanguis/client/gui/perk/item_fwd.hpp>
 #include <fcppt/container/tree/object_fwd.hpp>
-#include <fcppt/container/tree/ptr_value.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <memory>
+#include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -15,8 +18,8 @@ namespace perk
 {
 
 typedef fcppt::container::tree::object<
-	fcppt::container::tree::ptr_value<
-		gui::perk::item
+	std::unique_ptr<
+		sanguis::client::gui::perk::item
 	>
 > item_tree;
 
