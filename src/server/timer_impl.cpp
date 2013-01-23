@@ -3,7 +3,6 @@
 #include <sanguis/server/timer_duration.hpp>
 #include <sanguis/server/timer_impl.hpp>
 #include <alda/net/io_service_wrapper.hpp>
-#include <fcppt/chrono/asio/expires_from_now_any.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
@@ -43,8 +42,7 @@ sanguis::server::timer_impl::handler()
 void
 sanguis::server::timer_impl::reset()
 {
-	fcppt::chrono::asio::expires_from_now_any(
-		deadline_timer_,
+	deadline_timer_.expires_from_now(
 		duration_
 	);
 

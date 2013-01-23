@@ -6,7 +6,10 @@
 #include <sanguis/server/timer_duration.hpp>
 #include <sanguis/server/timer_impl_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/chrono/asio/deadline_timer.hpp>
+#include <fcppt/config/external_begin.hpp>
+#define BOOST_ASIO_DISABLE_STD_CHRONO
+#include <boost/asio/steady_timer.hpp>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -38,7 +41,7 @@ private:
 
 	sanguis::server::timer_duration const duration_;
 
-	fcppt::chrono::asio::deadline_timer deadline_timer_;
+	boost::asio::steady_timer deadline_timer_;
 };
 
 }
