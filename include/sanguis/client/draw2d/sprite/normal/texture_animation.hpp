@@ -4,6 +4,7 @@
 #include <sanguis/client/draw2d/sprite/normal/choices.hpp>
 #include <sanguis/client/draw2d/sprite/animation/texture_fwd.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -15,8 +16,8 @@ namespace sprite
 namespace normal
 {
 
-typedef sprite::animation::texture<
-	choices
+typedef sanguis::client::draw2d::sprite::animation::texture<
+	sanguis::client::draw2d::sprite::normal::choices
 > texture_animation;
 
 }

@@ -7,12 +7,12 @@
 #include <sanguis/load/model/optional_texture_identifier.hpp>
 #include <sanguis/load/resource/textures_fwd.hpp>
 #include <sge/renderer/dim2.hpp>
-#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/nonassignable.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -30,10 +30,10 @@ public:
 	global_parameters(
 		sanguis::random_generator &,
 		boost::filesystem::path const &,
-		resource::textures const &,
+		sanguis::load::resource::textures const &,
 		sge::renderer::dim2 const &cell_size,
-		optional_delay const &,
-		optional_texture_identifier const &
+		sanguis::load::model::optional_delay const &,
+		sanguis::load::model::optional_texture_identifier const &
 	);
 
 	sanguis::random_generator &
@@ -42,34 +42,34 @@ public:
 	boost::filesystem::path const &
 	path() const;
 
-	resource::textures const &
+	sanguis::load::resource::textures const &
 	textures() const;
 
 	sge::renderer::dim2 const &
 	cell_size() const;
 
-	optional_delay const &
+	sanguis::load::model::optional_delay const &
 	delay() const;
 
-	optional_texture_identifier const &
+	sanguis::load::model::optional_texture_identifier const &
 	texture() const;
 
-	global_parameters const
+	sanguis::load::model::global_parameters const
 	new_texture(
-		optional_texture_identifier const &
+		sanguis::load::model::optional_texture_identifier const &
 	) const;
 private:
 	sanguis::random_generator &random_generator_;
 
 	boost::filesystem::path const path_;
 
-	resource::textures const &textures_;
+	sanguis::load::resource::textures const &textures_;
 
 	sge::renderer::dim2 const cell_size_;
 
-	optional_delay const delay_;
+	sanguis::load::model::optional_delay const delay_;
 
-	optional_texture_identifier const texture_;
+	sanguis::load::model::optional_texture_identifier const texture_;
 };
 
 }

@@ -1,29 +1,31 @@
-#include <sanguis/load/model/part.hpp>
-#include <sanguis/load/model/find_texture.hpp>
-#include <sanguis/load/model/global_parameters.hpp>
-#include <sanguis/load/model/weapon_category.hpp>
-#include <sanguis/load/log.hpp>
 #include <sanguis/exception.hpp>
 #include <sanguis/weapon_type.hpp>
+#include <sanguis/load/log.hpp>
+#include <sanguis/load/model/find_texture.hpp>
+#include <sanguis/load/model/global_parameters.hpp>
+#include <sanguis/load/model/optional_texture_identifier.hpp>
+#include <sanguis/load/model/part.hpp>
+#include <sanguis/load/model/weapon_category.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/member.hpp>
 #include <sge/parse/json/member_map.hpp>
-#include <fcppt/algorithm/find_exn.hpp>
-#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
-#include <fcppt/log/headers.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/algorithm/find_exn.hpp>
+#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
+#include <fcppt/log/headers.hpp>
+#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <array>
 #include <cstddef>
 #include <iterator>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace
 {
@@ -102,7 +104,7 @@ sanguis::load::model::part::~part()
 
 sanguis::load::model::part::part(
 	sge::parse::json::object const &_object,
-	model::global_parameters const &_param
+	sanguis::load::model::global_parameters const &_param
 )
 :
 	categories_()
@@ -111,8 +113,8 @@ sanguis::load::model::part::part(
 		_object.members
 	);
 
-	optional_texture_identifier const texture(
-		model::find_texture(
+	sanguis::load::model::optional_texture_identifier const texture(
+		sanguis::load::model::find_texture(
 			members
 		)
 	);
@@ -127,18 +129,14 @@ sanguis::load::model::part::part(
 	);
 
 	for(
-		sge::parse::json::element_vector::const_iterator it(
-			weapons_array.elements.begin()
-		);
-		it != weapons_array.elements.end();
-		++it
+		auto const &weapon : weapons_array.elements
 	)
 	{
 		sge::parse::json::member_map const &inner_members(
 			sge::parse::json::get<
 				sge::parse::json::object
 			>(
-				*it
+				weapon
 			).members
 		);
 
@@ -160,7 +158,7 @@ sanguis::load::model::part::part(
 					member.first
 				),
 				fcppt::make_unique_ptr<
-					weapon_category
+					sanguis::load::model::weapon_category
 				>(
 					sge::parse::json::get<
 						sge::parse::json::object
@@ -174,7 +172,7 @@ sanguis::load::model::part::part(
 			).second == false
 		)
 			FCPPT_LOG_WARNING(
-				load::log(),
+				sanguis::load::log(),
 				fcppt::log::_
 					<< FCPPT_TEXT("Double insert in part!")
 			);

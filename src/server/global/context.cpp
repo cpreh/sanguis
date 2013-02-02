@@ -7,7 +7,7 @@
 #include <sanguis/update_diff_clock.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/world_id.hpp>
-#include <sanguis/load/context_base_fwd.hpp>
+#include <sanguis/load/server_context_fwd.hpp>
 #include <sanguis/messages/base.hpp>
 #include <sanguis/messages/connect_state.hpp>
 #include <sanguis/messages/create.hpp>
@@ -82,7 +82,7 @@ fcppt::log::object logger(
 
 sanguis::server::global::context::context(
 	sanguis::server::unicast_callback const &_send_unicast,
-	sanguis::load::context_base const &_model_context,
+	sanguis::load::server_context const &_model_context,
 	sge::charconv::system &_charconv_system,
 	sanguis::server::console &_console
 )

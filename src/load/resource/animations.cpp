@@ -1,12 +1,14 @@
-#include <sanguis/load/resource/animations.hpp>
-#include <sanguis/load/resource/textures.hpp>
-#include <sanguis/load/resource/map_get_or_create.hpp>
-#include <sanguis/load/first_file.hpp>
-#include <sanguis/load/log.hpp>
-#include <sanguis/load/next_file.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/exception.hpp>
+#include <sanguis/load/first_file.hpp>
+#include <sanguis/load/log.hpp>
+#include <sanguis/load/next_file.hpp>
+#include <sanguis/load/resource/animations.hpp>
+#include <sanguis/load/resource/map_get_or_create.hpp>
+#include <sanguis/load/resource/textures.hpp>
+#include <sanguis/load/resource/animation/series.hpp>
+#include <sge/texture/const_part_shared_ptr.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/io/ifstream.hpp>
 #include <fcppt/io/istringstream.hpp>
@@ -28,24 +30,29 @@
 
 sanguis::load::resource::animation::series const
 sanguis::load::resource::animations::load(
-	boost::filesystem::path const &dir) const
+	boost::filesystem::path const &_dir
+) const
 {
-	return map_get_or_create(
-		animations_,
-		dir,
-		std::bind(
-			&animations::do_load,
-			this,
-			std::placeholders::_1
-		)
-	);
+	return
+		sanguis::load::resource::map_get_or_create(
+			animations_,
+			_dir,
+			std::bind(
+				&sanguis::load::resource::animations::do_load,
+				this,
+				std::placeholders::_1
+			)
+		);
 }
 
 sanguis::load::resource::animations::animations(
-	textures &_textures
+	sanguis::load::resource::textures &_textures
 )
 :
-	textures_(_textures)
+	textures_(
+		_textures
+	),
+	animations_()
 {
 }
 
@@ -172,7 +179,6 @@ sanguis::load::resource::animations::do_load(
 		anim.push_back(
 			animation::entity(
 				delay,
-				sge::renderer::texture::planar_shared_ptr(),
 				load_texture(
 					dir / filename
 				)
@@ -228,8 +234,9 @@ sanguis::load::resource::animations::load_without_frames_file(
 			sanguis::duration_second(
 				1.f
 			),
-			sge::renderer::texture::planar_shared_ptr(),
-			load_texture(first_path)
+			load_texture(
+				first_path
+			)
 		)
 	);
 	return ret; // TODO: can we do this with boost::assign?

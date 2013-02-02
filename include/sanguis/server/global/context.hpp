@@ -9,7 +9,7 @@
 #include <sanguis/random_generator.hpp>
 #include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/world_id.hpp>
-#include <sanguis/load/context_base_fwd.hpp>
+#include <sanguis/load/server_context_fwd.hpp>
 #include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/server/console_fwd.hpp>
 #include <sanguis/server/player_id.hpp>
@@ -46,7 +46,7 @@ class context
 public:
 	context(
 		sanguis::server::unicast_callback const &,
-		sanguis::load::context_base const &,
+		sanguis::load::server_context const &,
 		sge::charconv::system &,
 		sanguis::server::console &
 	);

@@ -3,7 +3,6 @@
 
 #include <sanguis/main_object.hpp>
 #include <sanguis/main_object_scoped_ptr.hpp>
-#include <sanguis/load/server_context.hpp>
 #include <sge/systems/instance_decl.hpp>
 #include <sge/systems/with_charconv.hpp>
 #include <awl/main/exit_code.hpp>
@@ -44,8 +43,6 @@ private:
 	> server_systems;
 
 	server_systems const systems_;
-
-	sanguis::load::server_context load_context_;
 
 	sanguis::main_object_scoped_ptr const object_;
 };

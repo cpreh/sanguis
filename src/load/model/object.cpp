@@ -1,18 +1,19 @@
 #include <sanguis/exception.hpp>
 #include <sanguis/random_generator.hpp>
-#include <sanguis/load/model/object.hpp>
+#include <sanguis/load/log.hpp>
 #include <sanguis/load/model/find_texture.hpp>
 #include <sanguis/load/model/global_parameters.hpp>
 #include <sanguis/load/model/json_header.hpp>
 #include <sanguis/load/model/load_delay.hpp>
 #include <sanguis/load/model/load_dim.hpp>
+#include <sanguis/load/model/object.hpp>
 #include <sanguis/load/model/optional_delay.hpp>
+#include <sanguis/load/model/optional_texture_identifier.hpp>
 #include <sanguis/load/model/parse_json.hpp>
-#include <sanguis/load/model/split_first_slash.hpp>
 #include <sanguis/load/model/part.hpp>
+#include <sanguis/load/model/split_first_slash.hpp>
 #include <sanguis/load/resource/context.hpp>
 #include <sanguis/load/resource/textures.hpp>
-#include <sanguis/load/log.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
@@ -20,15 +21,15 @@
 #include <sge/parse/json/member_map.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/start.hpp>
+#include <sge/renderer/dim2.hpp>
+#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/string.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
-#include <fcppt/math/dim/object_impl.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/random/variate.hpp>
 #include <fcppt/random/distribution/uniform_int.hpp>
-#include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <iterator>
@@ -120,7 +121,7 @@ sanguis::load::model::object::dim() const
 
 sanguis::load::model::object::object(
 	boost::filesystem::path const &_path,
-	resource::context const &_ctx,
+	sanguis::load::resource::context const &_ctx,
 	sanguis::random_generator &_random_generator
 )
 :
@@ -134,7 +135,7 @@ sanguis::load::model::object::object(
 	random_part_()
 {
 	FCPPT_LOG_DEBUG(
-		log(),
+		sanguis::load::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("Entering ")
 			<< fcppt::filesystem::path_to_string(
@@ -148,17 +149,19 @@ sanguis::load::model::object::object(
 			_ctx
 		);
 	}
-	catch(sge::exception const &e)
+	catch(
+		sge::exception const &_error
+	)
 	{
 		FCPPT_LOG_ERROR(
-			log(),
+			sanguis::load::log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("model \"")
 				<< fcppt::filesystem::path_to_string(
 					path_
 				)
 				<< FCPPT_TEXT("\": \"")
-				<< e.string()
+				<< _error.string()
 				<< FCPPT_TEXT('"')
 		);
 
@@ -168,7 +171,7 @@ sanguis::load::model::object::object(
 
 void
 sanguis::load::model::object::construct(
-	resource::context const &_ctx
+	sanguis::load::resource::context const &_ctx
 )
 {
 	sge::parse::json::start const start_return(
@@ -187,17 +190,18 @@ sanguis::load::model::object::construct(
 		)
 	);
 
-	cell_size_ = load_dim(
-		header.members
-	);
+	cell_size_ =
+		sanguis::load::model::load_dim(
+			header.members
+		);
 
-	optional_delay const opt_delay(
+	sanguis::load::model::optional_delay const opt_delay(
 		load_delay(
 			header.members
 		)
 	);
 
-	optional_texture_identifier const texture(
+	sanguis::load::model::optional_texture_identifier const texture(
 		find_texture(
 			global_entries
 		)
@@ -213,18 +217,14 @@ sanguis::load::model::object::construct(
 	);
 
 	for(
-		sge::parse::json::element_vector::const_iterator it(
-			parts_array.elements.begin()
-		);
-		it != parts_array.elements.end();
-		++it
+		auto const &part : parts_array.elements
 	)
 	{
 		sge::parse::json::member_map const &inner_members(
 			sge::parse::json::get<
 				sge::parse::json::object
 			>(
-				*it
+				part
 			).members
 		);
 
@@ -244,14 +244,14 @@ sanguis::load::model::object::construct(
 				parts_,
 				member.first,
 				fcppt::make_unique_ptr<
-					part
+					sanguis::load::model::part
 				>(
 					sge::parse::json::get<
 						sge::parse::json::object
 					>(
 						member.second
 					),
-					model::global_parameters(
+					sanguis::load::model::global_parameters(
 						random_generator_,
 						path_,
 						_ctx.textures(),
@@ -264,7 +264,7 @@ sanguis::load::model::object::construct(
 			.second == false
 		)
 			FCPPT_LOG_WARNING(
-				log(),
+				sanguis::load::log(),
 				fcppt::log::_
 					<< FCPPT_TEXT("Double insert in model!")
 			);

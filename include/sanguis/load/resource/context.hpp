@@ -1,11 +1,11 @@
 #ifndef SANGUIS_LOAD_RESOURCE_CONTEXT_HPP_INCLUDED
 #define SANGUIS_LOAD_RESOURCE_CONTEXT_HPP_INCLUDED
 
-#include <sanguis/load/resource/textures_fwd.hpp>
-#include <sanguis/load/resource/animations_fwd.hpp>
 #include <sanguis/load/context_fwd.hpp>
-#include <sge/renderer/device/core_fwd.hpp>
+#include <sanguis/load/resource/animations_fwd.hpp>
+#include <sanguis/load/resource/textures_fwd.hpp>
 #include <sge/image2d/system_fwd.hpp>
+#include <sge/renderer/device/core_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
 
@@ -23,13 +23,13 @@ class context
 		context
 	);
 public:
-	resource::textures const &
+	sanguis::load::resource::textures const &
 	textures() const;
 
-	resource::animations const &
+	sanguis::load::resource::animations const &
 	animations() const;
 private:
-	friend class load::context;
+	friend class sanguis::load::context;
 
 	context(
 		sge::renderer::device::core &,
@@ -39,11 +39,11 @@ private:
 	~context();
 
 	fcppt::scoped_ptr<
-		resource::textures
+		sanguis::load::resource::textures
 	> const textures_;
 
 	fcppt::scoped_ptr<
-		resource::animations
+		sanguis::load::resource::animations
 	> const animations_;
 };
 

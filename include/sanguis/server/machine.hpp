@@ -3,7 +3,7 @@
 
 #include <sanguis/io_service_fwd.hpp>
 #include <sanguis/timer.hpp>
-#include <sanguis/load/context_base_fwd.hpp>
+#include <sanguis/load/server_context.hpp>
 #include <sanguis/messages/auto_ptr.hpp>
 #include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/net/data_buffer.hpp>
@@ -41,7 +41,6 @@ struct machine
 	);
 public:
 	machine(
-		sanguis::load::context_base const &,
 		sge::charconv::system &,
 		alda::net::port,
 		sanguis::io_service &
@@ -66,7 +65,7 @@ public:
 		sanguis::messages::base const &
 	);
 
-	sanguis::load::context_base const &
+	sanguis::load::server_context const &
 	resources() const;
 
 	sge::charconv::system &
@@ -98,7 +97,7 @@ private:
 	void
 	timer_callback();
 
-	sanguis::load::context_base const &resources_;
+	sanguis::load::server_context resources_;
 
 	sge::charconv::system &charconv_system_;
 

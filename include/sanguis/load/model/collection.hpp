@@ -9,7 +9,6 @@
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
-#include <mutex>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -26,30 +25,28 @@ class collection
 		collection
 	);
 public:
-	object const &
+	sanguis::load::model::object const &
 	operator[](
 		fcppt::string const &
 	) const;
 
 	collection(
-		resource::context const &,
+		sanguis::load::resource::context const &,
 		sanguis::random_generator &
 	);
 
 	~collection();
 private:
-	resource::context const &ctx_;
+	sanguis::load::resource::context const &ctx_;
 
 	sanguis::random_generator &random_generator_;
 
 	typedef boost::ptr_map<
 		fcppt::string,
-		object
+		sanguis::load::model::object
 	> model_map;
 
 	mutable model_map models_;
-
-	mutable std::mutex mutex_;
 };
 
 }

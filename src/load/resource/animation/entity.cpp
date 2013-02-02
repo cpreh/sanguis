@@ -18,19 +18,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
+#include <sanguis/duration.hpp>
 #include <sanguis/load/resource/animation/entity.hpp>
+#include <sge/renderer/dim2.hpp>
+#include <sge/renderer/lock_rect.hpp>
+#include <sge/texture/const_part_shared_ptr.hpp>
 #include <sge/texture/part.hpp>
-#include <fcppt/math/box/object_impl.hpp>
+
 
 sanguis::load::resource::animation::entity::entity(
 	sanguis::duration const &_res,
-	sge::renderer::texture::planar_shared_ptr const _tex,
 	sge::texture::const_part_shared_ptr const _tex_part
 )
 :
-	delay_(_res.count()),
-	tex_(_tex),
-	tex_part_(_tex_part)
+	delay_(
+		_res.count()
+	),
+	tex_part_(
+		_tex_part
+	)
 {
 }
 
@@ -48,12 +54,9 @@ sanguis::load::resource::animation::entity::tex() const
 
 void
 sanguis::load::resource::animation::entity::tex(
-	sge::renderer::texture::planar_shared_ptr const _tex,
 	sge::texture::const_part_shared_ptr const _tex_part
 )
 {
-	tex_ = _tex;
-
 	tex_part_ = _tex_part;
 }
 

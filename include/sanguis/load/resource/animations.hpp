@@ -1,6 +1,7 @@
 #ifndef SANGUIS_LOAD_RESOURCE_ANIMATIONS_HPP_INCLUDED
 #define SANGUIS_LOAD_RESOURCE_ANIMATIONS_HPP_INCLUDED
 
+#include <sanguis/load/resource/animations_fwd.hpp>
 #include <sanguis/load/resource/textures_fwd.hpp>
 #include <sanguis/load/resource/animation/series.hpp>
 #include <sge/texture/const_part_shared_ptr.hpp>
@@ -9,6 +10,7 @@
 #include <boost/filesystem/path.hpp>
 #include <map>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -23,18 +25,19 @@ class animations
 		animations
 	);
 public:
-	animation::series const
+	sanguis::load::resource::animation::series const
 	load(
 		boost::filesystem::path const &
 	) const;
 
-	explicit animations(
-		textures &
+	explicit
+	animations(
+		sanguis::load::resource::textures &
 	);
 
 	~animations();
 private:
-	animation::series const
+	sanguis::load::resource::animation::series const
 	do_load(
 		boost::filesystem::path const &
 	) const;
@@ -44,17 +47,17 @@ private:
 		boost::filesystem::path const &
 	) const;
 
-	animation::series const
+	sanguis::load::resource::animation::series const
 	load_without_frames_file(
 		boost::filesystem::path const &
 	) const;
 
 	typedef std::map<
 		boost::filesystem::path,
-		animation::series
+		sanguis::load::resource::animation::series
 	> animation_map;
 
-	textures &textures_;
+	sanguis::load::resource::textures &textures_;
 
 	mutable animation_map animations_;
 };

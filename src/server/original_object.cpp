@@ -17,11 +17,9 @@ sanguis::server::original_object::original_object(
 	systems_(
 		sge::systems::make_empty_list()
 	),
-	load_context_(),
 	object_(
 		sanguis::server::create(
 			_vm,
-			load_context_,
 			systems_.charconv_system()
 		)
 	)

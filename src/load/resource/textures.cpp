@@ -1,28 +1,22 @@
-#include <sanguis/load/resource/textures.hpp>
-#include <sanguis/load/resource/texture_context.hpp>
-#include <sanguis/load/resource/texture_context_impl.hpp>
-#include <sanguis/load/resource/map_get_or_create.hpp>
-#include <sanguis/load/log.hpp>
 #include <sanguis/exception.hpp>
 #include <sanguis/media_path.hpp>
+#include <sanguis/load/resource/search_texture_names.hpp>
+#include <sanguis/load/resource/texture_identifier.hpp>
+#include <sanguis/load/resource/textures.hpp>
+#include <sanguis/load/resource/map_get_or_create.hpp>
 #include <sge/image2d/file.hpp>
 #include <sge/image2d/system.hpp>
 #include <sge/renderer/resource_flags_field.hpp>
+#include <sge/renderer/device/core_fwd.hpp>
 #include <sge/renderer/texture/create_planar_from_path.hpp>
 #include <sge/renderer/texture/emulate_srgb.hpp>
 #include <sge/renderer/texture/planar.hpp>
 #include <sge/renderer/texture/mipmap/off.hpp>
+#include <sge/texture/const_part_shared_ptr.hpp>
 #include <sge/texture/part_raw_ptr.hpp>
-#include <fcppt/log/headers.hpp>
-#include <fcppt/filesystem/extension.hpp>
-#include <fcppt/filesystem/path_to_string.hpp>
-#include <fcppt/io/ifstream.hpp>
 #include <fcppt/make_shared_ptr.hpp>
-#include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/algorithm/string/trim.hpp>
-#include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
@@ -30,33 +24,33 @@
 
 sge::texture::const_part_shared_ptr const
 sanguis::load::resource::textures::load(
-	texture_identifier const &_id
+	sanguis::load::resource::texture_identifier const &_id
 ) const
 {
 	return
-		resource::map_get_or_create(
+		sanguis::load::resource::map_get_or_create(
 			textures_,
 			_id,
 			std::bind(
-				&textures::do_load,
+				&sanguis::load::resource::textures::do_load,
 				this,
 				std::placeholders::_1
 			)
 		);
 }
 
-sanguis::load::resource::texture_context const
+sge::texture::const_part_shared_ptr const
 sanguis::load::resource::textures::load(
 	boost::filesystem::path const &_path
 ) const
 {
 	return
-		resource::texture_context(
-			resource::map_get_or_create(
+		sge::texture::const_part_shared_ptr(
+			sanguis::load::resource::map_get_or_create(
 				unnamed_textures_,
 				_path,
 				std::bind(
-					&textures::do_load_unnamed,
+					&sanguis::load::resource::textures::do_load_inner,
 					this,
 					std::placeholders::_1
 				)
@@ -74,103 +68,13 @@ sanguis::load::resource::textures::textures(
 	),
 	image_loader_(
 		_image_loader
-	)
+	),
+	texture_names_(
+		sanguis::load::resource::search_texture_names()
+	),
+	textures_(),
+	unnamed_textures_()
 {
-	// look for .tex files
-	for(
-		boost::filesystem::directory_iterator it(
-			sanguis::media_path()
-		), end;
-		it != end;
-		++it
-	)
-	{
-		boost::filesystem::path const &path(
-			it->path()
-		);
-
-		if(
-			!boost::filesystem::is_regular_file(
-				path
-			)
-			||
-			fcppt::filesystem::extension(
-				path
-			)
-			!= FCPPT_TEXT(".tex")
-		)
-			continue;
-
-		// and parse line by line
-		fcppt::io::ifstream file(
-			path
-		);
-
-		if(
-			!file.is_open()
-		)
-			throw sanguis::exception(
-				FCPPT_TEXT("error opening id file \"")
-				+ fcppt::filesystem::path_to_string(
-					path
-				)
-				+ FCPPT_TEXT('"')
-			);
-
-		std::streamsize line_num(0);
-
-		fcppt::string line;
-
-		while(
-			std::getline(
-				file,
-				line
-			)
-		)
-		{
-			++line_num;
-
-			boost::algorithm::trim(
-				line
-			);
-
-			if (line.empty())
-				continue;
-
-			fcppt::string::size_type const equal(
-				line.find(
-					FCPPT_TEXT("=")
-				)
-			);
-
-			if(
-				equal == fcppt::string::npos
-			)
-			{
-				FCPPT_LOG_WARNING(
-					sanguis::load::log(),
-					fcppt::log::_
-						<< FCPPT_TEXT("Error in .id file \")")
-						<< fcppt::filesystem::path_to_string(
-							path
-						)
-						<< FCPPT_TEXT("\" in line ")
-						<< line_num
-						<< FCPPT_TEXT('!'));
-				continue;
-			}
-
-			texture_names_[
-				line.substr(
-					0,
-					equal
-				)
-			] =
-				line.substr(
-					equal + 1
-				);
-		}
-	}
 }
 
 sanguis::load::resource::textures::~textures()
@@ -179,7 +83,7 @@ sanguis::load::resource::textures::~textures()
 
 sge::texture::const_part_shared_ptr const
 sanguis::load::resource::textures::do_load(
-	texture_identifier const &_id
+	sanguis::load::resource::texture_identifier const &_id
 ) const
 {
 	if(
@@ -201,21 +105,6 @@ sanguis::load::resource::textures::do_load(
 			texture_names_[
 				_id
 			]
-		);
-}
-
-sanguis::load::resource::texture_context_impl_ptr const
-sanguis::load::resource::textures::do_load_unnamed(
-	boost::filesystem::path const &_path
-) const
-{
-	return
-		fcppt::make_shared_ptr<
-			texture_context_impl
-		>(
-			_path,
-			renderer_,
-			image_loader_
 		);
 }
 

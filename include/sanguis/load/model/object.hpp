@@ -5,17 +5,17 @@
 #include <sanguis/load/model/object_fwd.hpp>
 #include <sanguis/load/model/part_fwd.hpp>
 #include <sanguis/load/resource/context_fwd.hpp>
+#include <sge/renderer/dim2.hpp>
 #include <fcppt/random/variate_fwd.hpp>
 #include <fcppt/random/distribution/uniform_int_fwd.hpp>
-#include <sge/renderer/dim2.hpp>
-#include <fcppt/math/dim/object_decl.hpp>
-#include <fcppt/string.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
+#include <fcppt/string.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -28,7 +28,7 @@ class object
 {
 	typedef boost::ptr_map<
 		fcppt::string,
-		part
+		sanguis::load::model::part
 	> part_map;
 
 	FCPPT_NONCOPYABLE(
@@ -45,12 +45,12 @@ public:
 
 	~object();
 
-	part const &
+	sanguis::load::model::part const &
 	operator[](
 		fcppt::string const &
 	) const;
 
-	part const &
+	sanguis::load::model::part const &
 	random_part() const;
 
 	size_type
@@ -67,13 +67,13 @@ public:
 
 	object(
 		boost::filesystem::path const &,
-		resource::context const &,
+		sanguis::load::resource::context const &,
 		sanguis::random_generator &
 	);
 private:
 	void
 	construct(
-		resource::context const &
+		sanguis::load::resource::context const &
 	);
 
 	friend class collection;

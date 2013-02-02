@@ -1,37 +1,42 @@
-#include <sanguis/load/model/animation/object.hpp>
-#include <sanguis/load/model/animation/context.hpp>
-#include <sanguis/load/model/global_parameters.hpp>
-#include <sanguis/load/model/find_texture.hpp>
-#include <sanguis/load/resource/texture_context.hpp>
-#include <sanguis/load/resource/textures.hpp>
-#include <sanguis/load/resource/texture_context_impl.hpp>
+#include <sanguis/duration.hpp>
 #include <sanguis/exception.hpp>
+#include <sanguis/load/model/animation.hpp>
+#include <sanguis/load/model/find_texture.hpp>
+#include <sanguis/load/model/global_parameters.hpp>
+#include <sanguis/load/model/optional_delay.hpp>
+#include <sanguis/load/model/optional_texture_identifier.hpp>
+#include <sanguis/load/resource/textures.hpp>
+#include <sanguis/load/resource/animation/series.hpp>
 #include <sge/renderer/dim2.hpp>
 #include <sge/renderer/lock_rect.hpp>
+#include <sge/renderer/size_type.hpp>
+#include <sge/renderer/texture/planar.hpp>
+#include <sge/parse/json/array.hpp>
 #include <sge/parse/json/const_optional_object_ref.hpp>
-#include <sge/parse/json/get_unsigned.hpp>
 #include <sge/parse/json/find_member.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
+#include <sge/parse/json/get_unsigned.hpp>
 #include <sge/parse/json/member_map.hpp>
-#include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
+#include <sge/texture/const_part_shared_ptr.hpp>
+#include <sge/texture/part.hpp>
+#include <sge/texture/part_raw_ref.hpp>
+#include <fcppt/insert_to_fcppt_string.hpp>
+#include <fcppt/make_shared_ptr.hpp>
+#include <fcppt/optional_impl.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
-#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/math/dim/output.hpp>
-#include <fcppt/math/box/object_impl.hpp>
-#include <fcppt/math/box/output.hpp>
 #include <fcppt/math/box/contains.hpp>
-#include <fcppt/insert_to_fcppt_string.hpp>
-#include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/text.hpp>
+#include <fcppt/math/box/output.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
-#include <functional>
+#include <algorithm>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace
 {
@@ -48,7 +53,7 @@ calc_rect(
 	)
 	{
 		FCPPT_ASSERT_ERROR(
-			_index == static_cast<sge::renderer::size_type>(0)
+			_index == 0u
 		);
 
 		return
@@ -59,14 +64,18 @@ calc_rect(
 	}
 
 	sge::renderer::dim2 const cell_size_edited(
-		_cell_size.w() + 1,
-		_cell_size.h() + 1
+		_cell_size.w() + 1u,
+		_cell_size.h() + 1u
 	);
 
 	sge::renderer::size_type const cells_per_row(
 		std::max(
 			_area.size().w() / cell_size_edited.w(),
-			static_cast<sge::renderer::size_type>(1)
+			static_cast<
+				sge::renderer::size_type
+			>(
+				1u
+			)
 		)
 	);
 
@@ -121,82 +130,57 @@ load_delay(
 	);
 }
 
-}
-
-sanguis::load::model::animation::object::~object()
-{
-}
-
-sanguis::load::model::animation::object::object(
-	sge::parse::json::object const &_object,
-	model::global_parameters const &_param
+sge::texture::const_part_shared_ptr
+load_texture(
+	sge::parse::json::object const &_json_object,
+	sanguis::load::model::global_parameters const &_param
 )
-:
-	object_(
-		_object
-	),
-	param_(
-		_param
-	),
-	texture_()
 {
-	optional_texture_identifier _texture =
-		param_.new_texture(
-			find_texture(
-				object_.members
+	sanguis::load::model::optional_texture_identifier const texture_id(
+		_param.new_texture(
+			sanguis::load::model::find_texture(
+				_json_object.members
 			)
-		).texture();
+		).texture()
+	);
 
 	if(
-		!_texture
+		!texture_id
 	)
 		throw sanguis::exception(
 			FCPPT_TEXT("texture not found in ")
 			+ fcppt::filesystem::path_to_string(
-				param_.path()
+				_param.path()
 			)
 		);
 
-	texture_ = *_texture;
-}
-
-sanguis::load::model::animation::context_ptr
-sanguis::load::model::animation::object::load() const
-{
 	return
-		fcppt::make_unique_ptr<
-			animation::context
-		>(
-			param_.textures().load(
-				param_.path() / texture_
-			),
-			frame_cache_,
-			sanguis::load::model::animation::context::cache_callback(
-				std::bind(
-					&sanguis::load::model::animation::object::fill_cache,
-					this,
-					std::placeholders::_1
-				)
-			)
+		_param.textures().load(
+			_param.path()
+			/
+			*texture_id
 		);
 }
 
-void
-sanguis::load::model::animation::object::fill_cache(
-	sge::renderer::lock_rect const &_area
-) const
+sanguis::load::resource::animation::series
+load_series(
+	sge::parse::json::object const &_json_object,
+	sanguis::load::model::global_parameters const &_param,
+	sge::texture::part const &_texture
+)
 {
-	if(
-		!frame_cache_.empty()
-	)
-		return;
+	sge::renderer::lock_rect const area(
+		_texture.area()
+	);
+
+	sanguis::load::resource::animation::series series;
 
 	// range must be specified
 	sge::parse::json::element_vector const &range(
 		sge::parse::json::find_member_exn<
 			sge::parse::json::array
 		>(
-			object_.members,
+			_json_object.members,
 			FCPPT_TEXT("range")
 		).elements
 	);
@@ -241,8 +225,8 @@ sanguis::load::model::animation::object::fill_cache(
 
 	sanguis::duration const delay(
 		::load_delay(
-			object_.members,
-			param_.delay()
+			_json_object.members,
+			_param.delay()
 		)
 	);
 
@@ -253,16 +237,16 @@ sanguis::load::model::animation::object::fill_cache(
 	)
 	{
 		sge::renderer::lock_rect const cur_area(
-			calc_rect(
-				_area,
-				param_.cell_size(),
+			::calc_rect(
+				area,
+				_param.cell_size(),
 				index
 			)
 		);
 
 		if(
 			!fcppt::math::box::contains(
-				_area,
+				area,
 				cur_area
 			)
 		)
@@ -270,7 +254,7 @@ sanguis::load::model::animation::object::fill_cache(
 				FCPPT_TEXT("Rect out of bounds in TODO")
 				FCPPT_TEXT(". Whole area of texture is ")
 				+ fcppt::insert_to_fcppt_string(
-					_area
+					area
 				)
 				+ FCPPT_TEXT(" but the inner area is ")
 				+ fcppt::insert_to_fcppt_string(
@@ -282,11 +266,54 @@ sanguis::load::model::animation::object::fill_cache(
 				)
 			);
 
-		frame_cache_.push_back(
-			model::frame_cache_value(
+		series.push_back(
+			sanguis::load::resource::animation::entity(
 				delay,
-				cur_area
+				sge::texture::const_part_shared_ptr(
+					fcppt::make_shared_ptr<
+						sge::texture::part_raw_ref
+					>(
+						_texture.texture(),
+						cur_area
+					)
+				)
 			)
 		);
 	}
+
+	return
+		series;
+}
+
+}
+
+sanguis::load::model::animation::animation(
+	sge::parse::json::object const &_json_object,
+	sanguis::load::model::global_parameters const &_param
+)
+:
+	texture_(
+		::load_texture(
+			_json_object,
+			_param
+		)
+	),
+	series_(
+		::load_series(
+			_json_object,
+			_param,
+			*texture_
+		)
+	)
+{
+}
+
+sanguis::load::model::animation::~animation()
+{
+}
+
+sanguis::load::resource::animation::series const &
+sanguis::load::model::animation::series() const
+{
+	return series_;
 }
