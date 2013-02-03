@@ -1,5 +1,9 @@
 #include <sanguis/server/collision/from_sge_user_data.hpp>
 #include <sanguis/server/collision/user_data.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/any.hpp>
+#include <fcppt/config/external_end.hpp>
+
 
 sanguis::server::collision::user_data const
 sanguis::server::collision::from_sge_user_data(
@@ -7,9 +11,9 @@ sanguis::server::collision::from_sge_user_data(
 )
 {
 	return
-		collision::user_data(
+		sanguis::server::collision::user_data(
 			*boost::any_cast<
-				collision::body_base *
+				sanguis::server::collision::body_base *
 			>(
 				_any
 			)

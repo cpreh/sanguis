@@ -5,6 +5,7 @@
 #include <sanguis/server/vector_fwd.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -12,22 +13,22 @@ namespace server
 namespace collision
 {
 
-server::space_unit
+sanguis::server::space_unit
 distance(
-	entities::base const &,
-	entities::base const &
+	sanguis::server::entities::base const &,
+	sanguis::server::entities::base const &
 );
 
-server::space_unit
+sanguis::server::space_unit
 distance(
-	entities::base const &,
-	server::vector const &
+	sanguis::server::entities::base const &,
+	sanguis::server::vector const &
 );
 
-server::space_unit
+sanguis::server::space_unit
 distance(
-	server::vector const &,
-	server::vector const &
+	sanguis::server::vector const &,
+	sanguis::server::vector const &
 );
 
 }

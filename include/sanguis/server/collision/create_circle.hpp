@@ -4,6 +4,7 @@
 #include <sanguis/server/radius.hpp>
 #include <sge/projectile/shape/shared_base_ptr.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -13,7 +14,7 @@ namespace collision
 
 sge::projectile::shape::shared_base_ptr const
 create_circle(
-	server::radius
+	sanguis::server::radius
 );
 
 }

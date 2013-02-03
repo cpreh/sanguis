@@ -6,6 +6,7 @@
 #include <boost/any.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -15,7 +16,7 @@ namespace collision
 
 boost::any const
 to_sge_user_data(
-	collision::user_data const &
+	sanguis::server::collision::user_data const &
 );
 
 }

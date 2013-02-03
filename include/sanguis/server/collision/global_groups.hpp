@@ -4,8 +4,8 @@
 #include <sanguis/server/collision/global_groups_fwd.hpp>
 #include <sanguis/server/collision/group_fwd.hpp>
 #include <sanguis/server/collision/group_map.hpp>
-#include <sge/projectile/group/object_fwd.hpp>
 #include <sge/projectile/world_fwd.hpp>
+#include <sge/projectile/group/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 

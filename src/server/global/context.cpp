@@ -56,9 +56,10 @@
 #include <fcppt/log/parameters/object.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
+#include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/atan2.hpp>
 #include <fcppt/math/vector/comparison.hpp>
-#include <fcppt/math/vector/length.hpp>
+#include <fcppt/math/vector/length_square.hpp>
 #include <fcppt/math/vector/signed_angle_between.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -245,8 +246,12 @@ sanguis::server::global::context::player_target(
 	);
 
 	if(
-		player_center
-		== _target
+		fcppt::math::vector::length_square(
+			player_center
+			-
+			_target
+		)
+		< 1.f
 	)
 		return;
 
@@ -306,14 +311,14 @@ sanguis::server::global::context::player_speed(
 	);
 
 	if(
-		fcppt::math::vector::length(
+		fcppt::math::vector::length_square(
 			_speed.get()
 		)
 		<
 		static_cast<
 			sanguis::server::space_unit
 		>(
-			0.0001f
+			0.001f
 		)
 	)
 		player.movement_speed().current(
@@ -418,9 +423,9 @@ sanguis::server::global::context::update(
 	);
 
 	for(
-		auto world : worlds_
+		auto cur_world : worlds_
 	)
-		world.second->update();
+		cur_world.second->update();
 }
 
 sanguis::server::entities::player_map::size_type

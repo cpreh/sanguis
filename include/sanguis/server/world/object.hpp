@@ -37,6 +37,7 @@
 #include <sge/charconv/system_fwd.hpp>
 #include <sge/projectile/world_fwd.hpp>
 #include <sge/projectile/body/object_fwd.hpp>
+#include <sge/projectile/body/scoped.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/container/map_decl.hpp>
@@ -233,7 +234,9 @@ private:
 		sge::projectile::body::object
 	> collision_body_scoped_ptr;
 
-	collision_body_scoped_ptr static_body_;
+	collision_body_scoped_ptr const static_body_;
+
+	sge::projectile::body::scoped const scoped_static_body_;
 };
 
 }

@@ -7,6 +7,7 @@
 #include <boost/logic/tribool.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace
 {
 
@@ -24,14 +25,21 @@ sanguis::server::collision::body_collision(
 	sge::projectile::body::object const &_b
 )
 {
-	collision::body_base
+	if(
+		_a.user_data().empty()
+		||
+		_b.user_data().empty()
+	)
+		return;
+
+	sanguis::server::collision::body_base
 		&base_a(
-			collision::from_sge_user_data(
+			sanguis::server::collision::from_sge_user_data(
 				_a.user_data()
 			).get()
 		),
 		&base_b(
-			collision::from_sge_user_data(
+			sanguis::server::collision::from_sge_user_data(
 				_b.user_data()
 			).get()
 		);

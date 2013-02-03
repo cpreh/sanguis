@@ -1,16 +1,17 @@
 #ifndef SANGUIS_SERVER_COLLISION_GHOST_HPP_INCLUDED
 #define SANGUIS_SERVER_COLLISION_GHOST_HPP_INCLUDED
 
-#include <sanguis/server/collision/ghost_fwd.hpp>
+#include <sanguis/server/center_fwd.hpp>
+#include <sanguis/server/dim_fwd.hpp>
 #include <sanguis/server/collision/body_base_fwd.hpp>
+#include <sanguis/server/collision/ghost_fwd.hpp>
 #include <sanguis/server/collision/group_vector.hpp>
-#include <sanguis/server/center.hpp>
-#include <sanguis/server/dim.hpp>
 #include <sge/projectile/body/object_fwd.hpp>
 #include <sge/projectile/ghost/object_fwd.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/scoped_ptr.hpp>
+#include <fcppt/scoped_ptr_impl.hpp>
+
 
 namespace sanguis
 {
@@ -26,18 +27,19 @@ class ghost
 	);
 protected:
 	ghost(
-		collision::group_vector const &,
-		server::dim const &
+		sanguis::server::collision::group_vector const &,
+		sanguis::server::dim const &
 	);
 public:
-	virtual ~ghost();
+	virtual
+	~ghost();
 
 	void
 	center(
-		server::center const &
+		sanguis::server::center const &
 	);
 
-	collision::group_vector const &
+	sanguis::server::collision::group_vector const &
 	groups() const;
 
 	sge::projectile::ghost::object &
@@ -53,21 +55,23 @@ private:
 		sge::projectile::body::object const &
 	);
 
-	virtual void
+	virtual
+	void
 	on_body_enter(
-		collision::body_base &
+		sanguis::server::collision::body_base &
 	) = 0;
 
-	virtual void
+	virtual
+	void
 	on_body_exit(
-		collision::body_base &
+		sanguis::server::collision::body_base &
 	) = 0;
 
 	typedef fcppt::scoped_ptr<
 		sge::projectile::ghost::object
 	> ghost_scoped_ptr;
 
-	collision::group_vector const groups_;
+	sanguis::server::collision::group_vector const groups_;
 
 	ghost_scoped_ptr ghost_;
 

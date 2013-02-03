@@ -58,7 +58,7 @@ sanguis::creator::generator::car_park(
 					>(
 						sanguis::creator::geometry::vertex(
 							sanguis::creator::geometry::vector(
-								0,
+								100,
 								0
 							),
 							sanguis::creator::geometry::texture_point(
@@ -70,7 +70,7 @@ sanguis::creator::generator::car_park(
 					(
 						sanguis::creator::geometry::vertex(
 							sanguis::creator::geometry::vector(
-								0,
+								100,
 								1000
 							),
 							sanguis::creator::geometry::texture_point(

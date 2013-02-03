@@ -1,16 +1,20 @@
+#include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/body.hpp>
 #include <sanguis/server/collision/from_sge_vector.hpp>
+#include <sanguis/server/collision/position_callback.hpp>
 #include <sanguis/server/collision/solidity.hpp>
 #include <sanguis/server/collision/to_sge_vector.hpp>
 #include <sanguis/server/collision/to_sge_user_data.hpp>
+#include <sanguis/server/collision/user_data_fwd.hpp>
 #include <sge/projectile/body/angular_velocity.hpp>
 #include <sge/projectile/body/linear_velocity.hpp>
 #include <sge/projectile/body/object.hpp>
 #include <sge/projectile/body/parameters.hpp>
 #include <sge/projectile/body/position.hpp>
 #include <sge/projectile/body/rotation.hpp>
+#include <sge/projectile/shape/shared_base_ptr.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -18,13 +22,13 @@
 
 
 sanguis::server::collision::body::body(
-	server::center const &_center,
-	server::speed const &_speed,
-	server::angle const _angle,
+	sanguis::server::center const &_center,
+	sanguis::server::speed const &_speed,
+	sanguis::server::angle const _angle,
 	sge::projectile::shape::shared_base_ptr const _shape,
-	collision::solidity const &_solidity,
-	collision::user_data const &_user_data,
-	collision::position_callback const &_position_callback
+	sanguis::server::collision::solidity const &_solidity,
+	sanguis::server::collision::user_data const &_user_data,
+	sanguis::server::collision::position_callback const &_position_callback
 )
 :
 	body_(
@@ -50,7 +54,7 @@ sanguis::server::collision::body::body(
 					_angle.get() // TODO: convert?
 				),
 				_solidity.get(),
-				collision::to_sge_user_data(
+				sanguis::server::collision::to_sge_user_data(
 					_user_data
 				)
 			)
@@ -62,7 +66,7 @@ sanguis::server::collision::body::body(
 	position_connection_(
 		body_->position_change(
 			std::bind(
-				&collision::body::on_position_change,
+				&sanguis::server::collision::body::on_position_change,
 				this,
 				std::placeholders::_1
 			)
@@ -77,11 +81,11 @@ sanguis::server::collision::body::~body()
 
 void
 sanguis::server::collision::body::center(
-	server::center const &_center
+	sanguis::server::center const &_center
 )
 {
 	body_->position(
-		collision::to_sge_vector(
+		sanguis::server::collision::to_sge_vector(
 			_center.get()
 		)
 	);
@@ -91,8 +95,8 @@ sanguis::server::center const
 sanguis::server::collision::body::center() const
 {
 	return
-		server::center(
-			collision::from_sge_vector(
+		sanguis::server::center(
+			sanguis::server::collision::from_sge_vector(
 				body_->position()
 			)
 		);
@@ -104,7 +108,7 @@ sanguis::server::collision::body::speed(
 )
 {
 	body_->linear_velocity(
-		collision::to_sge_vector(
+		sanguis::server::collision::to_sge_vector(
 			_speed.get()
 		)
 	);
@@ -114,8 +118,8 @@ sanguis::server::speed const
 sanguis::server::collision::body::speed() const
 {
 	return
-		server::speed(
-			collision::from_sge_vector(
+		sanguis::server::speed(
+			sanguis::server::collision::from_sge_vector(
 				body_->linear_velocity()
 			)
 		);
@@ -123,7 +127,7 @@ sanguis::server::collision::body::speed() const
 
 void
 sanguis::server::collision::body::angle(
-	server::angle const &_angle
+	sanguis::server::angle const &_angle
 )
 {
 	body_->rotation(
@@ -135,7 +139,7 @@ sanguis::server::angle const
 sanguis::server::collision::body::angle() const
 {
 	return
-		server::angle(
+		sanguis::server::angle(
 			body_->rotation()
 		);
 }
@@ -152,8 +156,8 @@ sanguis::server::collision::body::on_position_change(
 )
 {
 	position_callback_(
-		server::center(
-			collision::from_sge_vector(
+		sanguis::server::center(
+			sanguis::server::collision::from_sge_vector(
 				_position.get()
 			)
 		)

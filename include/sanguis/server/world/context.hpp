@@ -1,13 +1,14 @@
 #ifndef SANGUIS_SERVER_WORLD_CONTEXT_HPP_INCLUDED
 #define SANGUIS_SERVER_WORLD_CONTEXT_HPP_INCLUDED
 
-#include <sanguis/server/world/context_fwd.hpp>
-#include <sanguis/server/entities/unique_ptr.hpp>
-#include <sanguis/server/entities/insert_parameters_fwd.hpp>
-#include <sanguis/server/player_id.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/messages/base_fwd.hpp>
+#include <sanguis/server/player_id.hpp>
+#include <sanguis/server/entities/insert_parameters_fwd.hpp>
+#include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/world/context_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -24,25 +25,29 @@ class context
 protected:
 	context();
 public:
-	virtual void
+	virtual
+	void
 	transfer_entity(
-		world_id destination,
-		entities::unique_ptr,
-		entities::insert_parameters const &
+		sanguis::world_id destination,
+		sanguis::server::entities::unique_ptr &&,
+		sanguis::server::entities::insert_parameters const &
 	) = 0;
 
-	virtual void
+	virtual
+	void
 	send_to_player(
-		player_id,
-		messages::base const &
+		sanguis::server::player_id,
+		sanguis::messages::base const &
 	) = 0;
 
-	virtual void
+	virtual
+	void
 	remove_player(
-		player_id
+		sanguis::server::player_id
 	) = 0;
 
-	virtual ~context();
+	virtual
+	~context();
 };
 
 }
