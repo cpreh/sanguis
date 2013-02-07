@@ -31,88 +31,112 @@ sanguis::creator::generator::car_park(
 		sanguis::creator::geometry::unit
 	> uniform_unit;
 
-	uniform_unit test_distribution(
+	uniform_unit x_distribution(
 		uniform_unit::min(
 			0
 		),
 		uniform_unit::max(
-			1000
+			_parameters.area().w()
 		)
 	);
 
-	sanguis::creator::geometry::unit const rand_value(
-		test_distribution(
-			_parameters.randgen()
+	uniform_unit y_distribution(
+		uniform_unit::min(
+			0
+		),
+		uniform_unit::max(
+			_parameters.area().h()
 		)
 	);
+	
+	sanguis::creator::geometry::shape_container cars;
 
-	// FIXME:
-	return
-		sanguis::creator::generator::result(
-			fcppt::assign::make_container<
-				sanguis::creator::geometry::shape_container
-			>(
-				sanguis::creator::geometry::shape(
-					fcppt::assign::make_container<
-						sanguis::creator::geometry::polygon
-					>(
-						sanguis::creator::geometry::vertex(
-							sanguis::creator::geometry::vector(
-								0,
-								0
-							),
-							sanguis::creator::geometry::texture_point(
-								0,
-								0
-							)
+	sanguis::creator::geometry::unit const half_car_width(
+		64);
+	sanguis::creator::geometry::unit const half_car_height(
+		32);
+
+	for (unsigned i = 0; i < 400; ++i)
+	{
+		sanguis::creator::geometry::unit const x(
+			x_distribution(
+				_parameters.randgen()
+			)
+		);
+
+		sanguis::creator::geometry::unit const y(
+			y_distribution(
+				_parameters.randgen()
+			)
+		);
+
+		cars.push_back(
+			sanguis::creator::geometry::shape(
+				fcppt::assign::make_container<
+					sanguis::creator::geometry::polygon
+				>(
+					sanguis::creator::geometry::vertex(
+						sanguis::creator::geometry::vector(
+							x - half_car_width,
+							y - half_car_height
+						),
+						sanguis::creator::geometry::texture_point(
+							0,
+							0
 						)
-					)
-					(
-						sanguis::creator::geometry::vertex(
-							sanguis::creator::geometry::vector(
-								0,
-								1000
-							),
-							sanguis::creator::geometry::texture_point(
-								0,
-								0.5f
-							)
-						)
-					)
-					(
-						sanguis::creator::geometry::vertex(
-							sanguis::creator::geometry::vector(
-								2000,
-								2000
-							),
-							sanguis::creator::geometry::texture_point(
-								1,
-								1
-							)
-						)
-					)
-					(
-						sanguis::creator::geometry::vertex(
-							sanguis::creator::geometry::vector(
-								1000,
-								500
-							),
-							sanguis::creator::geometry::texture_point(
-								0.5f,
-								0.25f
-							)
-						)
-					)
-					,
-					sanguis::creator::geometry::solidity::solid,
-					sanguis::creator::geometry::depth(
-						0
-					),
-					sanguis::creator::geometry::texture_name(
-						FCPPT_TEXT("asphalt")
 					)
 				)
-			),
+				(
+					sanguis::creator::geometry::vertex(
+						sanguis::creator::geometry::vector(
+							x - half_car_width,
+							y + half_car_height
+						),
+						sanguis::creator::geometry::texture_point(
+							0,
+							1
+						)
+					)
+				)
+				(
+					sanguis::creator::geometry::vertex(
+						sanguis::creator::geometry::vector(
+							x + half_car_width,
+							y + half_car_height
+						),
+						sanguis::creator::geometry::texture_point(
+							1,
+							1
+						)
+					)
+				)
+				(
+					sanguis::creator::geometry::vertex(
+						sanguis::creator::geometry::vector(
+							x + half_car_width,
+							y - half_car_height
+						),
+						sanguis::creator::geometry::texture_point(
+							1,
+							0
+						)
+					)
+				)
+				,
+				sanguis::creator::geometry::solidity::solid,
+				sanguis::creator::geometry::depth(
+					0
+				),
+				sanguis::creator::geometry::texture_name(
+					FCPPT_TEXT("car")
+				)
+			)
+		);
+	}
+
+	return 
+		sanguis::creator::generator::result(
+			cars,
 			sanguis::creator::generator::seed(
 				0u
 			),
