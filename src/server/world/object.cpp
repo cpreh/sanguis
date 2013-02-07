@@ -36,6 +36,7 @@
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/collision/body_collision.hpp>
 #include <sanguis/server/collision/global_groups.hpp>
+#include <sanguis/server/collision/group.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
 #include <sanguis/server/entities/player.hpp>
@@ -60,14 +61,17 @@
 #include <sge/projectile/time_increment.hpp>
 #include <sge/projectile/world.hpp>
 #include <sge/projectile/body/object.hpp>
+#include <sge/projectile/group/sequence.hpp>
 #include <sge/timer/elapsed_and_reset.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/format.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/pre.hpp>
+#include <fcppt/assign/make_container.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
@@ -162,6 +166,21 @@ sanguis::server::world::object::object(
 		sanguis::server::world::create_static_body(
 			_generated_world.shapes()
 		)
+	),
+	scoped_static_body_(
+		*collision_world_,
+		*static_body_,
+		sge::projectile::group::sequence()
+		/*
+		fcppt::assign::make_container<
+			sge::projectile::group::sequence
+		>(
+			fcppt::make_ref(
+				collision_groups_.group(
+					sanguis::server::collision::group::obstacle
+				)
+			)
+		)*/
 	)
 {
 }

@@ -351,27 +351,19 @@ SET(
 	include/sanguis/io_service_impl_fwd.hpp
 	include/sanguis/load/aoe_projectile_name.hpp
 	include/sanguis/load/context.hpp
-	include/sanguis/load/context_base.hpp
-	include/sanguis/load/context_base_fwd.hpp
 	include/sanguis/load/context_fwd.hpp
 	include/sanguis/load/enemy_name.hpp
 	include/sanguis/load/first_file.hpp
 	include/sanguis/load/friend_name.hpp
 	include/sanguis/load/log.hpp
-	include/sanguis/load/model/animation/context.hpp
-	include/sanguis/load/model/animation/context_fwd.hpp
-	include/sanguis/load/model/animation/context_ptr.hpp
-	include/sanguis/load/model/animation/object.hpp
-	include/sanguis/load/model/animation/object_fwd.hpp
+	include/sanguis/load/model/animation.hpp
+	include/sanguis/load/model/animation_fwd.hpp
 	include/sanguis/load/model/base_animation_not_found.hpp
 	include/sanguis/load/model/collection.hpp
 	include/sanguis/load/model/collection_fwd.hpp
 	include/sanguis/load/model/context.hpp
 	include/sanguis/load/model/context_fwd.hpp
 	include/sanguis/load/model/find_texture.hpp
-	include/sanguis/load/model/frame_cache.hpp
-	include/sanguis/load/model/frame_cache_fwd.hpp
-	include/sanguis/load/model/frame_cache_value.hpp
 	include/sanguis/load/model/global_parameters.hpp
 	include/sanguis/load/model/global_parameters_fwd.hpp
 	include/sanguis/load/model/json_header.hpp
@@ -403,13 +395,13 @@ SET(
 	include/sanguis/load/resource/context.hpp
 	include/sanguis/load/resource/context_fwd.hpp
 	include/sanguis/load/resource/map_get_or_create.hpp
-	include/sanguis/load/resource/texture_context.hpp
-	include/sanguis/load/resource/texture_context_fwd.hpp
-	include/sanguis/load/resource/texture_context_impl.hpp
+	include/sanguis/load/resource/search_texture_names.hpp
 	include/sanguis/load/resource/texture_identifier.hpp
+	include/sanguis/load/resource/texture_name_map.hpp
 	include/sanguis/load/resource/textures.hpp
 	include/sanguis/load/resource/textures_fwd.hpp
 	include/sanguis/load/server_context.hpp
+	include/sanguis/load/server_context_fwd.hpp
 	include/sanguis/load/skip_directories.hpp
 	include/sanguis/load/weapon_pickup_name.hpp
 	include/sanguis/log.hpp
@@ -1098,19 +1090,15 @@ SET(
 	src/io_service_impl.cpp
 	src/load/aoe_projectile_name.cpp
 	src/load/context.cpp
-	src/load/context_base.cpp
 	src/load/enemy_name.cpp
 	src/load/first_file.cpp
 	src/load/friend_name.cpp
 	src/load/log.cpp
-	src/load/model/animation/context.cpp
-	src/load/model/animation/object.cpp
+	src/load/model/animation.cpp
 	src/load/model/base_animation_not_found.cpp
 	src/load/model/collection.cpp
 	src/load/model/context.cpp
 	src/load/model/find_texture.cpp
-	src/load/model/frame_cache.cpp
-	src/load/model/frame_cache_value.cpp
 	src/load/model/global_parameters.cpp
 	src/load/model/json_header.cpp
 	src/load/model/load_delay.cpp
@@ -1127,8 +1115,7 @@ SET(
 	src/load/resource/animation/series.cpp
 	src/load/resource/animations.cpp
 	src/load/resource/context.cpp
-	src/load/resource/texture_context.cpp
-	src/load/resource/texture_context_impl.cpp
+	src/load/resource/search_texture_names.cpp
 	src/load/resource/textures.cpp
 	src/load/server_context.cpp
 	src/load/skip_directories.cpp

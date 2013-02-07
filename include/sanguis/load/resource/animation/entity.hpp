@@ -21,11 +21,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef SANGUIS_LOAD_RESOURCE_ANIMATION_ENTITY_HPP_INCLUDED
 #define SANGUIS_LOAD_RESOURCE_ANIMATION_ENTITY_HPP_INCLUDED
 
-#include <sanguis/load/resource/animation/entity_fwd.hpp>
 #include <sanguis/duration.hpp>
-#include <sge/renderer/texture/planar_shared_ptr.hpp>
+#include <sanguis/load/resource/animation/entity_fwd.hpp>
+#include <sge/renderer/dim2_fwd.hpp>
 #include <sge/texture/const_part_shared_ptr.hpp>
-#include <sge/renderer/dim2.hpp>
+
 
 namespace sanguis
 {
@@ -41,7 +41,6 @@ class entity
 public:
 	entity(
 		sanguis::duration const &delay,
-		sge::renderer::texture::planar_shared_ptr,
 		sge::texture::const_part_shared_ptr
 	);
 
@@ -53,7 +52,6 @@ public:
 
 	void
 	tex(
-		sge::renderer::texture::planar_shared_ptr,
 		sge::texture::const_part_shared_ptr
 	);
 
@@ -61,8 +59,6 @@ public:
 	dim() const;
 private:
 	sanguis::duration delay_;
-
-	sge::renderer::texture::planar_shared_ptr tex_;
 
 	sge::texture::const_part_shared_ptr tex_part_;
 };

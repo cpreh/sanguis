@@ -1,12 +1,12 @@
 #include <sanguis/animation_type.hpp>
 #include <sanguis/exception.hpp>
 #include <sanguis/random_generator_fwd.hpp>
-#include <sanguis/load/model/weapon_category.hpp>
+#include <sanguis/load/log.hpp>
+#include <sanguis/load/model/animation.hpp>
 #include <sanguis/load/model/base_animation_not_found.hpp>
 #include <sanguis/load/model/global_parameters.hpp>
 #include <sanguis/load/model/find_texture.hpp>
-#include <sanguis/load/model/animation/object.hpp>
-#include <sanguis/load/log.hpp>
+#include <sanguis/load/model/weapon_category.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
 #include <sge/parse/json/get.hpp>
@@ -70,7 +70,7 @@ find_animation_type(
 
 }
 
-sanguis::load::model::animation::object const &
+sanguis::load::model::animation const &
 sanguis::load::model::weapon_category::operator[](
 	sanguis::animation_type const _anim
 ) const
@@ -94,7 +94,7 @@ sanguis::load::model::weapon_category::operator[](
 			FCPPT_TEXT("Default animation not found in TODO")
 		);
 
-	throw model::base_animation_not_found(
+	throw sanguis::load::model::base_animation_not_found(
 		_anim
 	);
 }
@@ -116,11 +116,12 @@ sanguis::load::model::weapon_category::has_animation(
 }
 
 sanguis::load::model::weapon_category::~weapon_category()
-{}
+{
+}
 
 sanguis::load::model::weapon_category::weapon_category(
 	sge::parse::json::object const &_object,
-	global_parameters const &_param
+	sanguis::load::model::global_parameters const &_param
 )
 :
 	animations_()
@@ -145,18 +146,14 @@ sanguis::load::model::weapon_category::weapon_category(
 	);
 
 	for(
-		sge::parse::json::element_vector::const_iterator it(
-			animations_array.elements.begin()
-		);
-		it != animations_array.elements.end();
-		++it
+		auto const &entry : animations_array.elements
 	)
 	{
 		sge::parse::json::member_map const &inner_members(
 			sge::parse::json::get<
 				sge::parse::json::object
 			>(
-				*it
+				entry
 			).members
 		);
 
@@ -178,7 +175,7 @@ sanguis::load::model::weapon_category::weapon_category(
 					member.first
 				),
 				fcppt::make_unique_ptr<
-					animation::object
+					sanguis::load::model::animation
 				>(
 					sge::parse::json::get<
 						sge::parse::json::object

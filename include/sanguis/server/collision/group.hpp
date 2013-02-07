@@ -14,6 +14,7 @@ namespace collision
 enum class group
 {
 	enemy,
+	obstacle,
 	pickup,
 	projectile_enemy,
 	projectile_player,

@@ -1,4 +1,3 @@
-#include <sanguis/load/context_base_fwd.hpp>
 #include <sanguis/server/object.hpp>
 #include <sanguis/server/log.hpp>
 #include <sanguis/server/events/disconnect.hpp>
@@ -24,7 +23,6 @@
 
 sanguis::server::object::object(
 	alda::net::port const _port,
-	sanguis::load::context_base const &_load_context,
 	sge::charconv::system &_charconv_system
 )
 :
@@ -33,7 +31,6 @@ sanguis::server::object::object(
 	),
 	io_service_(),
 	machine_(
-		_load_context,
 		_charconv_system,
 		_port,
 		io_service_
@@ -60,7 +57,7 @@ sanguis::server::object::quit()
 }
 
 bool
-sanguis::server::object::running()
+sanguis::server::object::running() const
 {
 	std::lock_guard<
 		std::mutex

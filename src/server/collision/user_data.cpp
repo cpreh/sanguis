@@ -1,10 +1,14 @@
+#include <sanguis/server/collision/body_base_fwd.hpp>
 #include <sanguis/server/collision/user_data.hpp>
 
+
 sanguis::server::collision::user_data::user_data(
-	collision::body_base &_data
+	sanguis::server::collision::body_base &_data
 )
 :
-	data_(_data)
+	data_(
+		_data
+	)
 {
 }
 

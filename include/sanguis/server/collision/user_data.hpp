@@ -5,6 +5,7 @@
 #include <sanguis/server/collision/body_base_fwd.hpp>
 #include <fcppt/nonassignable.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -18,14 +19,15 @@ class user_data
 		user_data
 	);
 public:
-	explicit user_data(
-		collision::body_base &
+	explicit
+	user_data(
+		sanguis::server::collision::body_base &
 	);
 
-	collision::body_base &
+	sanguis::server::collision::body_base &
 	get() const;
 private:
-	collision::body_base &data_;
+	sanguis::server::collision::body_base &data_;
 };
 
 }

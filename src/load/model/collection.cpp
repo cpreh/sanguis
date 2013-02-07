@@ -2,11 +2,10 @@
 #include <sanguis/load/model/collection.hpp>
 #include <sanguis/load/model/make_path.hpp>
 #include <sanguis/load/model/object.hpp>
-#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
+#include <sanguis/load/resource/context_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <mutex>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/string.hpp>
+#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 
 
 sanguis::load::model::object const &
@@ -14,12 +13,6 @@ sanguis::load::model::collection::operator[](
 	fcppt::string const &_name
 ) const
 {
-	std::lock_guard<
-		std::mutex
-	> const lock(
-		mutex_
-	);
-
 	model_map::const_iterator it(
 		models_.find(
 			_name
@@ -34,9 +27,9 @@ sanguis::load::model::collection::operator[](
 				models_,
 				_name,
 				fcppt::make_unique_ptr<
-					object
+					sanguis::load::model::object
 				>(
-					model::make_path(
+					sanguis::load::model::make_path(
 						_name
 					),
 					ctx_,
@@ -48,7 +41,7 @@ sanguis::load::model::collection::operator[](
 }
 
 sanguis::load::model::collection::collection(
-	resource::context const &_ctx,
+	sanguis::load::resource::context const &_ctx,
 	sanguis::random_generator &_random_generator
 )
 :
@@ -58,8 +51,7 @@ sanguis::load::model::collection::collection(
 	random_generator_(
 		_random_generator
 	),
-	models_(),
-	mutex_()
+	models_()
 {
 }
 

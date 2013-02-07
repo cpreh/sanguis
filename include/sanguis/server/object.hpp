@@ -3,7 +3,6 @@
 
 #include <sanguis/server/machine.hpp>
 #include <sanguis/server/object_fwd.hpp>
-#include <sanguis/load/context_base_fwd.hpp>
 #include <sanguis/main_object.hpp>
 #include <sanguis/io_service.hpp>
 #include <sge/charconv/system_fwd.hpp>
@@ -32,7 +31,6 @@ class object
 public:
 	object(
 		alda::net::port,
-		sanguis::load::context_base const &,
 		sge::charconv::system &
 	);
 
@@ -43,7 +41,7 @@ public:
 	run();
 
 	bool
-	running();
+	running() const;
 
 	~object();
 private:
@@ -60,7 +58,7 @@ private:
 
 	sanguis::io_service io_service_;
 
-	server::machine machine_;
+	sanguis::server::machine machine_;
 
 	typedef fcppt::scoped_state_machine<
 		sanguis::server::machine
@@ -68,7 +66,7 @@ private:
 
 	scoped_machine scoped_machine_;
 
-	std::mutex mutex_;
+	mutable std::mutex mutex_;
 
 	std::thread server_thread_;
 };

@@ -1,6 +1,9 @@
+#include <sanguis/server/center.hpp>
+#include <sanguis/server/dim_fwd.hpp>
 #include <sanguis/server/collision/ghost.hpp>
 #include <sanguis/server/collision/from_sge_user_data.hpp>
 #include <sanguis/server/collision/make_groups.hpp>
+#include <sanguis/server/collision/group_vector.hpp>
 #include <sanguis/server/collision/user_data.hpp>
 #include <sanguis/server/collision/to_sge_dim.hpp>
 #include <sanguis/server/collision/to_sge_vector.hpp>
@@ -12,12 +15,15 @@
 #include <functional>
 #include <fcppt/config/external_end.hpp>
 
+
 sanguis::server::collision::ghost::ghost(
-	collision::group_vector const &_groups,
-	server::dim const &_size
+	sanguis::server::collision::group_vector const &_groups,
+	sanguis::server::dim const &_size
 )
 :
-	groups_(_groups),
+	groups_(
+		_groups
+	),
 	ghost_(
 		fcppt::make_unique_ptr<
 			sge::projectile::ghost::object
@@ -27,7 +33,7 @@ sanguis::server::collision::ghost::ghost(
 					sge::projectile::vector2::null()
 				),
 				sge::projectile::ghost::size(
-					collision::to_sge_dim(
+					sanguis::server::collision::to_sge_dim(
 						_size
 					)
 				)
@@ -37,7 +43,7 @@ sanguis::server::collision::ghost::ghost(
 	collision_begin_connection_(
 		ghost_->body_enter(
 			std::bind(
-				&ghost::body_enter,
+				&sanguis::server::collision::ghost::body_enter,
 				this,
 				std::placeholders::_1
 			)
@@ -46,7 +52,7 @@ sanguis::server::collision::ghost::ghost(
 	collision_end_connection_(
 		ghost_->body_exit(
 			std::bind(
-				&ghost::body_exit,
+				&sanguis::server::collision::ghost::body_exit,
 				this,
 				std::placeholders::_1
 			)
@@ -61,11 +67,11 @@ sanguis::server::collision::ghost::~ghost()
 
 void
 sanguis::server::collision::ghost::center(
-	server::center const &_center
+	sanguis::server::center const &_center
 )
 {
 	ghost_->position(
-		collision::to_sge_vector(
+		sanguis::server::collision::to_sge_vector(
 			_center.get()
 		)
 	);
@@ -89,7 +95,7 @@ sanguis::server::collision::ghost::body_enter(
 )
 {
 	this->on_body_enter(
-		collision::from_sge_user_data(
+		sanguis::server::collision::from_sge_user_data(
 			_body.user_data()
 		).get()
 	);
@@ -101,7 +107,7 @@ sanguis::server::collision::ghost::body_exit(
 )
 {
 	this->on_body_exit(
-		collision::from_sge_user_data(
+		sanguis::server::collision::from_sge_user_data(
 			_body.user_data()
 		).get()
 	);

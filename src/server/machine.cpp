@@ -1,6 +1,6 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/io_service.hpp>
-#include <sanguis/load/context_base_fwd.hpp>
+#include <sanguis/load/server_context.hpp>
 #include <sanguis/messages/auto_ptr.hpp>
 #include <sanguis/messages/base.hpp>
 #include <sanguis/net/append_to_circular_buffer.hpp>
@@ -38,15 +38,12 @@
 
 
 sanguis::server::machine::machine(
-	sanguis::load::context_base const &_resources,
 	sge::charconv::system &_charconv_system,
 	alda::net::port const _port,
 	sanguis::io_service &_io_service
 )
 :
-	resources_(
-		_resources
-	),
+	resources_(),
 	charconv_system_(
 		_charconv_system
 	),
@@ -242,7 +239,7 @@ sanguis::server::machine::send_unicast(
 	);
 }
 
-sanguis::load::context_base const &
+sanguis::load::server_context const &
 sanguis::server::machine::resources() const
 {
 	return

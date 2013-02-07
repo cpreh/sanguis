@@ -7,6 +7,7 @@
 #include <boost/logic/tribool_fwd.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -22,16 +23,19 @@ class body_base
 protected:
 	body_base();
 public:
-	virtual ~body_base();
+	virtual
+	~body_base();
 
-	virtual boost::logic::tribool const
+	virtual
+	boost::logic::tribool const
 	can_collide_with(
-		collision::body_base const &
+		sanguis::server::collision::body_base const &
 	) const = 0;
 
-	virtual void
+	virtual
+	void
 	collision(
-		collision::body_base &
+		sanguis::server::collision::body_base &
 	) = 0;
 };
 

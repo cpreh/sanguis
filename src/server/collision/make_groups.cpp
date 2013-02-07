@@ -1,6 +1,6 @@
-#include <sanguis/server/collision/make_groups.hpp>
 #include <sanguis/server/collision/global_groups.hpp>
 #include <sanguis/server/collision/group_vector.hpp>
+#include <sanguis/server/collision/make_groups.hpp>
 #include <sge/projectile/group/sequence.hpp>
 #include <fcppt/make_ref.hpp>
 

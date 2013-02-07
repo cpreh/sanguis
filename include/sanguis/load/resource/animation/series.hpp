@@ -29,6 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 namespace load
@@ -41,23 +42,24 @@ namespace animation
 class series
 {
 public:
-	typedef animation::entity_vector::const_iterator const_iterator;
+	typedef sanguis::load::resource::animation::entity_vector::const_iterator const_iterator;
 
 	series();
 
-	explicit series(
-		entity_vector const &
+	explicit
+	series(
+		sanguis::load::resource::animation::entity_vector const &
 	);
 
 	void
 	push_back(
-		entity const &
+		sanguis::load::resource::animation::entity const &
 	);
 
-	entity_vector &
+	sanguis::load::resource::animation::entity_vector &
 	entities();
 
-	entity_vector const &
+	sanguis::load::resource::animation::entity_vector const &
 	entities() const;
 
 	const_iterator
@@ -69,7 +71,7 @@ public:
 	bool
 	empty() const;
 private:
-	animation::entity_vector entities_;
+	sanguis::load::resource::animation::entity_vector entities_;
 };
 
 }

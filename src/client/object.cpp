@@ -228,10 +228,9 @@ sanguis::client::object::create_server(
 
 	server_.take(
 		fcppt::make_unique_ptr<
-			server::object
+			sanguis::server::object
 		>(
 			_port,
-			resources_,
 			sys_->charconv_system()
 		)
 	);

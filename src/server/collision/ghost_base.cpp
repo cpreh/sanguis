@@ -1,3 +1,6 @@
+#include <sanguis/server/collision/body_base_fwd.hpp>
+#include <sanguis/server/collision/body_enter_callback.hpp>
+#include <sanguis/server/collision/body_exit_callback.hpp>
 #include <sanguis/server/collision/ghost_base.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
@@ -17,9 +20,9 @@ sanguis::server::collision::body_enter_callback const
 sanguis::server::collision::ghost_base::body_enter_callback()
 {
 	return
-		collision::body_enter_callback(
+		sanguis::server::collision::body_enter_callback(
 			std::bind(
-				&ghost_base::collision_begin,
+				&sanguis::server::collision::ghost_base::collision_begin,
 				this,
 				std::placeholders::_1
 			)
@@ -31,9 +34,9 @@ sanguis::server::collision::body_exit_callback const
 sanguis::server::collision::ghost_base::body_exit_callback()
 {
 	return
-		collision::body_exit_callback(
+		sanguis::server::collision::body_exit_callback(
 			std::bind(
-				&ghost_base::collision_end,
+				&sanguis::server::collision::ghost_base::collision_end,
 				this,
 				std::placeholders::_1
 			)
@@ -42,7 +45,7 @@ sanguis::server::collision::ghost_base::body_exit_callback()
 
 void
 sanguis::server::collision::ghost_base::collision_begin(
-	collision::body_base &_body
+	sanguis::server::collision::body_base &_body
 )
 {
 	if(
@@ -57,7 +60,7 @@ sanguis::server::collision::ghost_base::collision_begin(
 
 void
 sanguis::server::collision::ghost_base::collision_end(
-	collision::body_base &_body
+	sanguis::server::collision::body_base &_body
 )
 {
 	if(

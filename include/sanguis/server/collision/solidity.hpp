@@ -3,7 +3,7 @@
 
 #include <sanguis/server/collision/solidity_fwd.hpp>
 #include <sge/projectile/body/solidity/variant.hpp>
-#include <fcppt/variant/object_impl.hpp>
+
 
 namespace sanguis
 {
@@ -15,7 +15,8 @@ namespace collision
 class solidity
 {
 public:
-	explicit solidity(
+	explicit
+	solidity(
 		sge::projectile::body::solidity::variant const &
 	);
 

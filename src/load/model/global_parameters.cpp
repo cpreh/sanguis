@@ -1,24 +1,43 @@
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/load/model/global_parameters.hpp>
+#include <sanguis/load/model/optional_delay.hpp>
+#include <sanguis/load/model/optional_texture_identifier.hpp>
+#include <sanguis/load/resource/textures_fwd.hpp>
+#include <sge/renderer/dim2.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 sanguis::load::model::global_parameters::global_parameters(
 	sanguis::random_generator &_random_generator,
 	boost::filesystem::path const &_path,
-	resource::textures const &_textures,
+	sanguis::load::resource::textures const &_textures,
 	sge::renderer::dim2 const &_cell_size,
-	optional_delay const &_delay,
-	optional_texture_identifier const &_texture
+	sanguis::load::model::optional_delay const &_delay,
+	sanguis::load::model::optional_texture_identifier const &_texture
 )
 :
-	random_generator_(_random_generator),
-	path_(_path),
-	textures_(_textures),
-	cell_size_(_cell_size),
-	delay_(_delay),
-	texture_(_texture)
-{}
+	random_generator_(
+		_random_generator
+	),
+	path_(
+		_path
+	),
+	textures_(
+		_textures
+	),
+	cell_size_(
+		_cell_size
+	),
+	delay_(
+		_delay
+	),
+	texture_(
+		_texture
+	)
+{
+}
 
 sanguis::random_generator &
 sanguis::load::model::global_parameters::random_generator() const
@@ -58,13 +77,13 @@ sanguis::load::model::global_parameters::texture() const
 
 sanguis::load::model::global_parameters const
 sanguis::load::model::global_parameters::new_texture(
-	optional_texture_identifier const &_tex
+	sanguis::load::model::optional_texture_identifier const &_tex
 ) const
 {
 	return
 		_tex
 		?
-			model::global_parameters(
+			sanguis::load::model::global_parameters(
 				this->random_generator(),
 				this->path(),
 				this->textures(),

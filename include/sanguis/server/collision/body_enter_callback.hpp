@@ -4,6 +4,7 @@
 #include <sanguis/server/collision/body_callback.hpp>
 #include <fcppt/strong_typedef.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -12,7 +13,7 @@ namespace collision
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
-	collision::body_callback,
+	sanguis::server::collision::body_callback,
 	body_enter_callback
 );
 

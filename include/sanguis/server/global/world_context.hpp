@@ -1,11 +1,16 @@
 #ifndef SANGUIS_SERVER_GLOBAL_WORLD_CONTEXT_HPP_INCLUDED
 #define SANGUIS_SERVER_GLOBAL_WORLD_CONTEXT_HPP_INCLUDED
 
+#include <sanguis/world_id.hpp>
 #include <sanguis/messages/base_fwd.hpp>
-#include <sanguis/server/global/world_context_fwd.hpp>
+#include <sanguis/server/player_id.hpp>
+#include <sanguis/server/entities/insert_parameters_fwd.hpp>
+#include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/global/context_fwd.hpp>
+#include <sanguis/server/global/world_context_fwd.hpp>
 #include <sanguis/server/world/context.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -16,37 +21,38 @@ namespace global
 
 class world_context
 :
-	public world::context
+	public sanguis::server::world::context
 {
 	FCPPT_NONCOPYABLE(
 		world_context
 	);
 public:
-	explicit world_context(
-		global::context &
+	explicit
+	world_context(
+		sanguis::server::global::context &
 	);
 
 	~world_context();
 
 	void
 	transfer_entity(
-		world_id destination,
-		entities::unique_ptr,
-		entities::insert_parameters const &
+		sanguis::world_id destination,
+		sanguis::server::entities::unique_ptr &&,
+		sanguis::server::entities::insert_parameters const &
 	);
 
 	void
 	send_to_player(
-		player_id,
-		messages::base const &
+		sanguis::server::player_id,
+		sanguis::messages::base const &
 	);
 
 	void
 	remove_player(
-		player_id
+		sanguis::server::player_id
 	);
 private:
-	global::context &global_context_;
+	sanguis::server::global::context &global_context_;
 };
 
 }

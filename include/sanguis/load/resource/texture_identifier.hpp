@@ -3,6 +3,7 @@
 
 #include <fcppt/string.hpp>
 
+
 namespace sanguis
 {
 namespace load

@@ -1,16 +1,15 @@
-#include <sanguis/exception.hpp>
 #include <sanguis/server/collision/global_groups.hpp>
 #include <sanguis/server/collision/group.hpp>
 #include <sge/projectile/world.hpp>
 #include <sge/projectile/group/object.hpp>
 #include <fcppt/foreach_enumerator.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/text.hpp>
+#include <fcppt/assert/error.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <vector>
 #include <utility>
+#include <vector>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -93,21 +92,41 @@ sanguis::server::collision::global_groups::global_groups(
 				sanguis::server::collision::group::projectile_player
 			)
 		)
+		(
+			std::make_pair(
+				sanguis::server::collision::group::obstacle,
+				sanguis::server::collision::group::projectile_player
+			)
+		)
+		(
+			std::make_pair(
+				sanguis::server::collision::group::obstacle,
+				sanguis::server::collision::group::player
+			)
+		)
+		(
+			std::make_pair(
+				sanguis::server::collision::group::obstacle,
+				sanguis::server::collision::group::projectile_enemy
+			)
+		)
+		(
+			std::make_pair(
+				sanguis::server::collision::group::obstacle,
+				sanguis::server::collision::group::enemy
+			)
+		)
 	);
 
 	for(
-		init_map::const_iterator it(
-			init.begin()
-		);
-		it != init.end();
-		++it
+		auto pair : init
 	)
 		_world.make_groups_collide(
 			this->group(
-				it->first
+				pair.first
 			),
 			this->group(
-				it->second
+				pair.second
 			)
 		);
 }
@@ -127,12 +146,10 @@ sanguis::server::collision::global_groups::group(
 		)
 	);
 
-	if(
-		it == groups_.end()
-	)
-		throw sanguis::exception(
-			FCPPT_TEXT("Missing collision group in server!")
-		);
+	FCPPT_ASSERT_ERROR(
+		it != groups_.end()
+	);
 
-	return *it->second;
+	return
+		*it->second;
 }

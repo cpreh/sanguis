@@ -9,7 +9,6 @@
 #include <sge/projectile/vector2.hpp>
 #include <sge/projectile/body/angular_velocity.hpp>
 #include <sge/projectile/body/linear_velocity.hpp>
-#include <sge/projectile/body/mass.hpp>
 #include <sge/projectile/body/object.hpp>
 #include <sge/projectile/body/object_unique_ptr.hpp>
 #include <sge/projectile/body/parameters.hpp>
@@ -35,15 +34,11 @@ sanguis::server::world::create_static_body(
 	sge::projectile::shape::triangle_sequence triangles;
 
 	for(
-		sanguis::creator::geometry::shape_container::const_iterator shape_it(
-			_shapes.begin()
-		);
-		shape_it != _shapes.end();
-		++shape_it
+		auto const &shape : _shapes
 	)
 	{
 		if(
-			shape_it->solidity()
+			shape.solidity()
 			!=
 			sanguis::creator::geometry::solidity::solid
 		)
@@ -54,7 +49,7 @@ sanguis::server::world::create_static_body(
 				sanguis::server::world::triangle_traits::tag,
 				sge::projectile::shape::triangle_sequence
 			>(
-				shape_it->polygon(),
+				shape.polygon(),
 				0
 			)
 		);
@@ -92,11 +87,7 @@ sanguis::server::world::create_static_body(
 					sge::projectile::body::rotation(
 						0.f
 					),
-					sge::projectile::body::solidity::solid(
-						sge::projectile::body::mass(
-							1000.f // TODO
-						)
-					),
+					sge::projectile::body::solidity::static_(),
 					sge::projectile::body::user_data()
 				)
 			);

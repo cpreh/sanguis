@@ -19,36 +19,36 @@ namespace collision
 
 class circle_ghost
 :
-	public collision::ghost
+	public sanguis::server::collision::ghost
 {
 	FCPPT_NONCOPYABLE(
 		circle_ghost
 	);
 public:
 	circle_ghost(
-		collision::group_vector const &,
-		server::radius,
-		collision::body_enter_callback const &,
-		collision::body_exit_callback const &
+		sanguis::server::collision::group_vector const &,
+		sanguis::server::radius,
+		sanguis::server::collision::body_enter_callback const &,
+		sanguis::server::collision::body_exit_callback const &
 	);
 
 	~circle_ghost();
 private:
 	void
 	on_body_enter(
-		collision::body_base &
+		sanguis::server::collision::body_base &
 	);
 
 	void
 	on_body_exit(
-		collision::body_base &
+		sanguis::server::collision::body_base &
 	);
 
-	server::radius const radius_;
+	sanguis::server::radius const radius_;
 
-	collision::body_enter_callback const body_enter_callback_;
+	sanguis::server::collision::body_enter_callback const body_enter_callback_;
 
-	collision::body_exit_callback const body_exit_callback_;
+	sanguis::server::collision::body_exit_callback const body_exit_callback_;
 };
 
 }
