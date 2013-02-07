@@ -1,33 +1,25 @@
-window.onload=function(){init();};
-
-function init()
+function JitteredGrid(ctx, width, height)
 {
-	var canvas=document.getElementById('canvas');
-	if (!canvas.getContext)
-	{
-		alert("Could not get a 2D context!");
-	}
+	this.ctx = ctx;
+	this.w = width;
+	this.h = height;
 
-	const width = 800;
-	const height = 600;
-
-	var ctx=canvas.getContext('2d');
-	ctx.fillStyle='rgba(255,255,255,1.0)';
+	ctx.fillStyle='rgba(0,0,0,1.0)';
 	ctx.fillRect(0,0,width,height);
 
 	ctx.lineWidth = 1;
 
 	ctx.fillStyle =
 		rgbColor(
-			Math.random() * 205,
-			Math.random() * 205,
-			Math.random() * 205);
+			Math.random() * 100 + 100,
+			Math.random() * 100 + 100,
+			Math.random() * 100 + 100);
 
 	ctx.strokeStyle =
 		rgbaColor(
-			Math.random() * 100,
-			Math.random() * 100,
-			Math.random() * 100,
+			Math.random() * 100 + 100,
+			Math.random() * 100 + 100,
+			Math.random() * 100 + 100,
 			0.25);
 
 	spacing = {'x': 40, 'y': 40};
@@ -48,12 +40,6 @@ function init()
 			spacing['y'] * y + Math.floor(Math.random() * jitter['y'])
 		];
 
-		ctx.fillRect(
-			points[p][0] - 2,
-			points[p][1] - 2,
-			4,
-			4
-		);
 	}
 
 	var edges = [];
@@ -75,10 +61,20 @@ function init()
 			edges.push([p, p + len['x'] - 1, weight()]);
 	}
 
+	for (var p = 0; p < points.length; ++p)
+	{
+		ctx.fillRect(
+			points[p][0] - 2,
+			points[p][1] - 2,
+			4,
+			4
+		);
+	}
+
 	for (var e in edges)
 	{
 		ctx.beginPath();
-		ctx.strokeStyle = rgbaColor(0,0,100,edges[e][2]);
+		ctx.strokeStyle = rgbaColor(100,100,255,Math.pow(edges[e][2],0.02));
 		line(ctx, points[edges[e][0]], points[edges[e][1]]);
 		ctx.closePath();
 		ctx.stroke();
@@ -87,9 +83,9 @@ function init()
 	// shortest path
 	var target = Math.floor(Math.random() * len.y + 1) * len.x - 1;
 
-	ctx.fillStyle='rgba(255,0,0,0.5)';
+	ctx.fillStyle='rgba(255,0,0,1.0)';
 	ctx.fillRect(points[0][0]-8,points[0][1]-8,16,16);
-	ctx.fillStyle='rgba(0,255,0,0.5)';
+	ctx.fillStyle='rgba(0,255,0,1.0)';
 	ctx.fillRect(points[target][0]-8,points[target][1]-8,16,16);
 
 	var path = dijkstra(points, edges, 0, target);
@@ -106,25 +102,10 @@ function init()
 	ctx.stroke();
 }
 
-function rgbColor(r, g, b)
-{
-	return 'rgb(' +
-		Math.floor(r) + ',' +
-		Math.floor(g) + ',' +
-		Math.floor(b) + ')';
-}
-
-function rgbaColor(r, g, b, a)
-{
-	return 'rgba(' +
-		Math.floor(r) + ',' +
-		Math.floor(g) + ',' +
-		Math.floor(b) + ',' +
-		a + ')';
-}
-
-function line(context, from, to)
-{
-	context.moveTo(from[0], from[1]);
-	context.lineTo(to[0], to[1]);
-}
+function renderToCanvas(width, height, renderFunction) {
+    var buffer = document.createElement('canvas');
+    buffer.width = width;
+    buffer.height = height;
+    renderFunction(buffer.getContext('2d'));
+    return buffer;
+};
