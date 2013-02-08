@@ -1,12 +1,13 @@
-#include <sanguis/load/log.hpp>
 #include <sanguis/log_location.hpp>
 #include <sanguis/log_parameters.hpp>
-#include <sge/log/declare_lib_base.hpp>
-#include <fcppt/log/parameters/object.hpp>
-#include <fcppt/log/location.hpp>
+#include <sanguis/load/log.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/log/define_object.hpp>
+#include <fcppt/log/location.hpp>
+#include <fcppt/log/parameters/object.hpp>
 
-SGE_LOG_DECLARE_LIB_BASE(
+
+FCPPT_LOG_DEFINE_OBJECT(
 	sanguis::load::log,
 	sanguis::log_parameters(
 		sanguis::log_location()
