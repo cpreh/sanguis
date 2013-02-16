@@ -1,38 +1,23 @@
-#!/bin/bash
+#!/bin/sh
 
-function die()
-{
-	exit -1
-}
+set -e -u
 
-function update_cmake_file()
-{
-	local cmakefile="$1"
-
-	update_cmake \
-		"${cmakefile}" \
-		"${@:2}" \
-		|| die
-
-	mv "${cmakefile}".new "${cmakefile}" || die
-}
-
-update_cmake_file \
+update_cmake \
 	src/CMakeLists.txt \
 	SANGUIS_FILES \
 	src \
-	include \
+	include
 
 pushd creator > /dev/null
 
-update_cmake_file \
+update_cmake \
 	CMakeLists.txt \
 	SANGUIS_CREATOR_INCLUDE_FILES \
-	include \
+	include
 
-update_cmake_file \
+update_cmake \
 	CMakeLists.txt \
 	SANGUIS_CREATOR_SRC_FILES \
-	src \
+	src
 
 popd > /dev/null
