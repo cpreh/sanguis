@@ -1,4 +1,3 @@
-#include <sanguis/cast_enum.hpp>
 #include <sanguis/cheat_type.hpp>
 #include <sanguis/connect_state.hpp>
 #include <sanguis/log_parameters.hpp>
@@ -32,6 +31,7 @@
 #include <sanguis/server/states/unpaused.hpp>
 #include <sanguis/server/states/log_location.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
+#include <fcppt/cast_to_enum.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
@@ -301,7 +301,7 @@ sanguis::server::states::running::operator()(
 
 	global_context_->player_cheat(
 		_id,
-		sanguis::cast_enum<
+		fcppt::cast_to_enum<
 			sanguis::cheat_type
 		>(
 			_message.get<
@@ -329,7 +329,7 @@ sanguis::server::states::running::operator()(
 
 	global_context_->player_choose_perk(
 		_id,
-		sanguis::cast_enum<
+		fcppt::cast_to_enum<
 			sanguis::perk_type
 		>(
 			_message.get<

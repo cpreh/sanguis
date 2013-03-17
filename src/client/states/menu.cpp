@@ -13,7 +13,6 @@
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/client_info.hpp>
 #include <sanguis/messages/call/object.hpp>
-#include <sanguis/cast_enum.hpp>
 #include <sanguis/exception.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>

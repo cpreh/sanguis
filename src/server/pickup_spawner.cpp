@@ -212,16 +212,16 @@ sanguis::server::pickup_spawner::spawn(
 	);
 
 	for(
-		auto const &spawn : spawns_
+		auto const &cur_spawn : spawns_
 	)
 	{
-		cur += spawn.first;
+		cur += cur_spawn.first;
 
 		if(
 			value < cur
 		)
 		{
-			spawn.second(
+			cur_spawn.second(
 				_center
 			);
 

@@ -18,8 +18,6 @@ sanguis::load::friend_name(
 		return FCPPT_TEXT("friendly_spider");
 	case sanguis::friend_type::sentry:
 		return FCPPT_TEXT("sentry");
-	case sanguis::friend_type::size:
-		break;
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;

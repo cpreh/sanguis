@@ -27,7 +27,6 @@ sanguis::load::weapon_pickup_name(
 	case sanguis::weapon_type::none:
 	case sanguis::weapon_type::melee:
 	case sanguis::weapon_type::dual_pistol:
-	case sanguis::weapon_type::size:
 		break;
 	}
 

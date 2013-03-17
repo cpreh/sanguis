@@ -79,12 +79,6 @@ sanguis::client::draw2d::entities::model::part::try_animation(
 	sanguis::animation_type const _atype
 )
 {
-	// WHY?
-	if(
-		weapon_ == sanguis::weapon_type::size
-	)
-		weapon_ = sanguis::weapon_type::none;
-
 	if(
 		animation_type_ == _atype
 	)

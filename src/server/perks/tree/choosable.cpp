@@ -21,11 +21,6 @@ sanguis::server::perks::tree::choosable(
 	sanguis::server::level const _player_level
 )
 {
-	if(
-		_perk == perk_type::size
-	)
-		return false;
-
 	typedef
 	fcppt::container::tree::pre_order<
 		sanguis::server::perks::tree::object const

@@ -17,7 +17,7 @@ enum class enemy_type
 	spider,
 	skeleton,
 	maggot,
-	size
+	fcppt_maximum = maggot
 };
 
 }

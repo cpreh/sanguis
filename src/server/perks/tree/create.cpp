@@ -21,7 +21,8 @@ sanguis::server::perks::tree::create()
 			sanguis::server::perks::tree::object
 		>(
 			sanguis::server::perks::tree::status(
-				sanguis::perk_type::size,
+				// FIXME: Somehow remove this dummy node
+				sanguis::perk_type::regeneration, // put something here
 				sanguis::server::perks::tree::required_player_level(
 					0u
 				),

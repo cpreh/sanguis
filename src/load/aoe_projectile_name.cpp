@@ -19,7 +19,6 @@ sanguis::load::aoe_projectile_name(
 	case sanguis::aoe_projectile_type::rocket:
 		return FCPPT_TEXT("rocket");
 	case sanguis::aoe_projectile_type::aoe_damage:
-	case sanguis::aoe_projectile_type::size:
 		break;
 	}
 

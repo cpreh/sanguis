@@ -74,8 +74,6 @@ get_texture(
 		throw sanguis::exception(
 			FCPPT_TEXT("draw::factory::pickup: weapon pickup cannot be created using pickup!")
 		);
-	case sanguis::pickup_type::size:
-		break;
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;

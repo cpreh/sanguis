@@ -23,8 +23,6 @@ sanguis::client::draw2d::factory::friend_(
 		_etype
 	)
 	{
-	case sanguis::friend_type::size:
-		break;
 	case sanguis::friend_type::spider:
 		return
 			sanguis::client::draw2d::entities::unique_ptr(

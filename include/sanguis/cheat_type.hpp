@@ -12,7 +12,7 @@ enum class cheat_type
 	exp,
 	impulse101,
 	kill,
-	size
+	fcppt_maximum = kill
 };
 
 }

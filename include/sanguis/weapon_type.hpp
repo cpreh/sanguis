@@ -9,6 +9,7 @@ namespace sanguis
 
 enum class weapon_type
 {
+	// TODO: remove none
 	none,
 	melee,
 	pistol,
@@ -17,7 +18,7 @@ enum class weapon_type
 	rocket_launcher,
 	grenade,
 	sentry,
-	size
+	fcppt_maximum = sentry
 };
 
 }

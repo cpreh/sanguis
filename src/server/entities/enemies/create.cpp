@@ -246,8 +246,6 @@ sanguis::server::entities::enemies::create(
 				sanguis::server::exp(12.f),
 				_spawn
 			);
-	case sanguis::enemy_type::size:
-		break;
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;

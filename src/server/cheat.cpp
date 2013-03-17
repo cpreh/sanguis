@@ -52,8 +52,6 @@ sanguis::server::cheat(
 	case sanguis::cheat_type::kill:
 		_player.kill();
 		return;
-	case sanguis::cheat_type::size:
-		break;
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;

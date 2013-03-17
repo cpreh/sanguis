@@ -12,8 +12,7 @@ enum class pickup_type
 	health,
 	monster,
 	weapon,
-	size
-	// add single perks and others here too
+	fcppt_maximum = weapon
 };
 
 }

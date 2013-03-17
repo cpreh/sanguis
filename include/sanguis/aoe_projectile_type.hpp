@@ -12,7 +12,7 @@ enum class aoe_projectile_type
 	aoe_damage,
 	rocket,
 	grenade,
-	size
+	fcppt_maximum = grenade
 };
 
 }

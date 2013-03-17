@@ -12,6 +12,7 @@
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/member.hpp>
 #include <sge/parse/json/member_map.hpp>
+#include <fcppt/enum_size.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
@@ -35,7 +36,9 @@ typedef std::array<
 	static_cast<
 		std::size_t
 	>(
-		sanguis::weapon_type::size
+		fcppt::enum_size<
+			sanguis::weapon_type
+		>::value
 	)
 > weapon_type_array;
 

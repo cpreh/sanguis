@@ -15,7 +15,6 @@ SET(
 	include/sanguis/args/resolution.hpp
 	include/sanguis/args/server_only.hpp
 	include/sanguis/args/server_port.hpp
-	include/sanguis/cast_enum.hpp
 	include/sanguis/cheat_type.hpp
 	include/sanguis/cheat_type_fwd.hpp
 	include/sanguis/client/config/homedir.hpp

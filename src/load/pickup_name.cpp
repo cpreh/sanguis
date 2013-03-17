@@ -23,7 +23,6 @@ sanguis::load::pickup_name(
 			FCPPT_TEXT("pickups/monster")
 		);
 	case sanguis::pickup_type::weapon:
-	case sanguis::pickup_type::size:
 		break;
 	}
 

@@ -12,7 +12,7 @@ enum class projectile_type
 	melee,
 	simple_bullet,
 	aoe,
-	size
+	fcppt_maximum = aoe
 };
 
 }

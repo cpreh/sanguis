@@ -1,4 +1,3 @@
-#include <sanguis/cast_enum.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/messages/base.hpp>
@@ -27,6 +26,7 @@
 #include <sanguis/server/states/paused.hpp>
 #include <sanguis/server/states/running.hpp>
 #include <sanguis/server/states/unpaused.hpp>
+#include <fcppt/cast_to_enum.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/log/location.hpp>
@@ -102,7 +102,7 @@ sanguis::server::states::unpaused::operator()(
 		sanguis::server::states::running
 	>().global_context().player_change_weapon(
 		_id,
-		sanguis::cast_enum<
+		fcppt::cast_to_enum<
 			sanguis::weapon_type
 		>(
 			_message.get<

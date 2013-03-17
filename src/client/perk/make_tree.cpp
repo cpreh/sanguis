@@ -1,4 +1,3 @@
-#include <sanguis/cast_enum.hpp>
 #include <sanguis/perk_type.hpp>
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/player_level.hpp>
@@ -15,6 +14,7 @@
 #include <sanguis/messages/roles/perk_label.hpp>
 #include <sanguis/messages/roles/required_perk_parent_level.hpp>
 #include <sanguis/messages/roles/required_perk_player_level.hpp>
+#include <fcppt/cast_to_enum.hpp>
 #include <fcppt/algorithm/find_if_exn.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
@@ -75,7 +75,7 @@ sanguis::client::perk::make_tree(
 				trav.begin(),
 				trav.end(),
 				sanguis::client::perk::compare(
-					sanguis::cast_enum<
+					fcppt::cast_to_enum<
 						sanguis::perk_type
 					>(
 						item.get<
@@ -101,7 +101,7 @@ sanguis::client::perk::make_tree(
 		)
 			pos->push_back(
 				sanguis::client::perk::info(
-					sanguis::cast_enum<
+					fcppt::cast_to_enum<
 						sanguis::perk_type
 					>(
 						child
@@ -126,7 +126,7 @@ make_info(
 {
 	return
 		sanguis::client::perk::info(
-			sanguis::cast_enum<
+			fcppt::cast_to_enum<
 				sanguis::perk_type
 			>(
 				_node.get<

@@ -17,6 +17,7 @@
 #include <sanguis/client/control/actions/scale_fwd.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/object_fwd.hpp>
+#include <fcppt/enum_size.hpp>
 #include <fcppt/math/vector/object_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -121,7 +122,9 @@ private:
 		static_cast<
 			std::size_t
 		>(
-			sanguis::weapon_type::size
+			fcppt::enum_size<
+				sanguis::weapon_type
+			>::value
 		)
 	> owned_weapons_array;
 

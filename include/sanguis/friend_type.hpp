@@ -11,7 +11,7 @@ enum class friend_type
 {
 	sentry,
 	spider,
-	size
+	fcppt_maximum = spider
 };
 
 }

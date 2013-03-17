@@ -20,7 +20,7 @@ enum class group
 	projectile_player,
 	player,
 	sight_range,
-	size
+	fcppt_maximum = sight_range
 };
 
 }

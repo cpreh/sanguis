@@ -36,10 +36,6 @@ void
 sanguis::server::perks::tree::status::choose()
 {
 	FCPPT_ASSERT_PRE(
-		this->type() != perk_type::size
-	);
-
-	FCPPT_ASSERT_PRE(
 		level_.get() < max_level_.get()
 	);
 

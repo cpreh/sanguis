@@ -58,8 +58,6 @@ sanguis::server::perks::create(
 			fcppt::make_unique_ptr<
 				sanguis::server::perks::regeneration
 			>();
-	case sanguis::perk_type::size:
-		break;
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;

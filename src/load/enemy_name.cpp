@@ -30,8 +30,6 @@ sanguis::load::enemy_name(
 		return FCPPT_TEXT("skeleton");
 	case sanguis::enemy_type::maggot:
 		return FCPPT_TEXT("maggot");
-	case sanguis::enemy_type::size:
-		break;
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;

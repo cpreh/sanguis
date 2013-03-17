@@ -23,8 +23,6 @@ sanguis::client::draw2d::factory::aoe_projectile(
 	)
 	{
 	case sanguis::aoe_projectile_type::aoe_damage:
-	case sanguis::aoe_projectile_type::size:
-		break;
 	case sanguis::aoe_projectile_type::rocket:
 	case sanguis::aoe_projectile_type::grenade:
 		return

@@ -249,7 +249,6 @@ sanguis::server::weapons::create(
 				}
 			);
 	case sanguis::weapon_type::none:
-	case sanguis::weapon_type::size:
 		break;
 	}
 

@@ -11,7 +11,7 @@ enum class connect_state
 {
 	paused,
 	unpaused,
-	size
+	fcppt_maximum = unpaused
 };
 
 }
