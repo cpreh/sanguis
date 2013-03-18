@@ -14,15 +14,7 @@ FCPPT_FOREACH_ENUMERATOR_START_END(\
 	name,\
 	sanguis::client::draw2d::z_ordering,\
 	start,\
-	static_cast<\
-		sanguis::client::draw2d::z_ordering\
-	>(\
-		static_cast< \
-			unsigned \
-		>( \
-			end \
-		) + 1u\
-	)\
+	end \
 )
 
 #endif
