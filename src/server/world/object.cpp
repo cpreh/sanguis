@@ -57,7 +57,6 @@
 #include <sanguis/server/world/sight_range.hpp>
 #include <sanguis/server/world/sight_range_map.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
-#include <sge/charconv/system_fwd.hpp>
 #include <sge/projectile/time_increment.hpp>
 #include <sge/projectile/world.hpp>
 #include <sge/projectile/body/object.hpp>
@@ -85,7 +84,6 @@ sanguis::server::world::object::object(
 	sanguis::world_id const _id,
 	sanguis::server::world::context &_global_context,
 	sanguis::server::environment::load_context &_load_context,
-	sge::charconv::system &_charconv_system,
 	sanguis::server::console &_console,
 	sanguis::creator::generator::result const &_generated_world
 )
@@ -107,9 +105,6 @@ sanguis::server::world::object::object(
 	),
 	load_context_(
 		_load_context
-	),
-	charconv_system_(
-		_charconv_system
 	),
 	collision_world_(
 		fcppt::make_unique_ptr<
@@ -283,7 +278,6 @@ sanguis::server::world::object::insert(
 					id_,
 					seed_,
 					sge::charconv::fcppt_string_to_utf8(
-						charconv_system_,
 						generator_name_.get()
 					),
 					size_

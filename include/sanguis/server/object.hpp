@@ -5,7 +5,6 @@
 #include <sanguis/server/object_fwd.hpp>
 #include <sanguis/main_object.hpp>
 #include <sanguis/io_service.hpp>
-#include <sge/charconv/system_fwd.hpp>
 #include <alda/net/port.hpp>
 #include <fcppt/scoped_state_machine.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -29,9 +28,9 @@ class object
 		object
 	);
 public:
+	explicit
 	object(
-		alda::net::port,
-		sge::charconv::system &
+		alda::net::port
 	);
 
 	void

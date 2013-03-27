@@ -272,8 +272,7 @@ sanguis::client::gui::perk::chooser::update_top_text()
 			+
 			fcppt::insert_to_fcppt_string(
 				state_.levels_left()
-			),
-			gui_.charconv_system()
+			)
 		)
 	);
 }
@@ -310,8 +309,7 @@ sanguis::client::gui::perk::chooser::update_bottom_text(
 			+
 			fcppt::insert_to_fcppt_string(
 				info.max_level()
-			),
-			gui_.charconv_system()
+			)
 		)
 	);
 }

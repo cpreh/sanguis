@@ -40,7 +40,6 @@ sanguis::client::states::running::running(
 			client::console::object
 		>(
 			context<machine>().console_gfx(),
-			context<machine>().charconv_system(),
 			client::make_send_callback(
 				context<machine>()
 			)
@@ -59,7 +58,6 @@ sanguis::client::states::running::running(
 		>(
 			context<machine>().resources(),
 			context<machine>().renderer(),
-			context<machine>().charconv_system(),
 			context<machine>().font_object(),
 			daytime_settings_->current_time(),
 			context<machine>().viewport_manager()
@@ -164,7 +162,6 @@ sanguis::client::states::running::operator()(
 	console_->sge_console().emit_message(
 		sge::font::from_fcppt_string(
 			sge::charconv::utf8_string_to_fcppt(
-				context<machine>().charconv_system(),
 				_message.get<
 					sanguis::messages::string
 				>()
@@ -183,7 +180,6 @@ sanguis::client::states::running::operator()(
 	fcppt::string const
 		name(
 			sge::charconv::utf8_string_to_fcppt(
-				context<machine>().charconv_system(),
 				_message.get<
 					sanguis::messages::roles::command_name
 				>()
@@ -191,7 +187,6 @@ sanguis::client::states::running::operator()(
 		),
 		description(
 			sge::charconv::utf8_string_to_fcppt(
-				context<machine>().charconv_system(),
 				_message.get<
 					sanguis::messages::roles::command_description
 				>()

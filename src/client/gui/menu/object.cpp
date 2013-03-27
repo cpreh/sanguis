@@ -201,8 +201,7 @@ sanguis::client::gui::menu::object::object(
 				sge::parse::ini::value(
 					sge::parse::ini::string()
 				)
-			).get(),
-			gui_.charconv_system()
+			).get()
 		)
 	);
 
@@ -215,8 +214,7 @@ sanguis::client::gui::menu::object::object(
 				sge::parse::ini::value(
 					sge::parse::ini::string()
 				)
-			).get(),
-			gui_.charconv_system()
+			).get()
 		)
 	);
 }
@@ -229,8 +227,7 @@ sanguis::client::gui::menu::object::~object()
 		config_port_key,
 		sge::parse::ini::value(
 			sge::cegui::from_cegui_string(
-				port_edit_.getText(),
-				gui_.charconv_system()
+				port_edit_.getText()
 			)
 		)
 	);
@@ -241,8 +238,7 @@ sanguis::client::gui::menu::object::~object()
 		config_hostname_key,
 		sge::parse::ini::value(
 			sge::cegui::from_cegui_string(
-				hostname_edit_.getText(),
-				gui_.charconv_system()
+				hostname_edit_.getText()
 			)
 		)
 	);
@@ -356,8 +352,7 @@ sanguis::client::gui::menu::object::handle_text_changed(
 			port_type
 		>(
 			sge::cegui::from_cegui_string(
-				port_edit_.getText(),
-				gui_.charconv_system()
+				port_edit_.getText()
 			)
 		)
 	);
@@ -395,8 +390,7 @@ sanguis::client::gui::menu::object::do_connect()
 		alda::net::host(
 			fcppt::to_std_string(
 				sge::cegui::from_cegui_string(
-					hostname_edit_.getText(),
-					gui_.charconv_system()
+					hostname_edit_.getText()
 				)
 			)
 		),
@@ -405,8 +399,7 @@ sanguis::client::gui::menu::object::do_connect()
 				alda::net::port::value_type
 			>(
 				sge::cegui::from_cegui_string(
-					port_edit_.getText(),
-					gui_.charconv_system()
+					port_edit_.getText()
 				)
 			)
 		)

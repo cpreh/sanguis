@@ -7,7 +7,6 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/world/context_fwd.hpp>
 #include <sanguis/server/world/object_unique_ptr.hpp>
-#include <sge/charconv/system_fwd.hpp>
 
 
 namespace sanguis
@@ -23,7 +22,6 @@ random(
 	sanguis::random_generator &,
 	sanguis::server::world::context &,
 	sanguis::server::environment::load_context &,
-	sge::charconv::system &,
 	sanguis::server::console &
 	// TODO: params
 );

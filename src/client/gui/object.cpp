@@ -15,13 +15,11 @@
 sanguis::client::gui::object::object(
 	sge::renderer::device::ffp &_renderer,
 	sge::image2d::system &_image_loader,
-	sge::charconv::system &_charconv_system,
 	sge::viewport::manager &_viewport_manager,
 	sge::input::keyboard::device &_keyboard,
 	client::cursor::object &_cursor
 )
 :
-	charconv_system_(_charconv_system),
 	system_(
 		sge::cegui::load_context(
 			sge::config::media_path()
@@ -37,7 +35,6 @@ sanguis::client::gui::object::object(
 		),
 		_renderer,
 		_image_loader,
-		charconv_system_,
 		_viewport_manager,
 		sge::cegui::cursor_visibility::invisible,
 		sge::renderer::texture::emulate_srgb::no
@@ -58,12 +55,6 @@ sanguis::client::gui::object::object(
 
 sanguis::client::gui::object::~object()
 {
-}
-
-sge::charconv::system &
-sanguis::client::gui::object::charconv_system() const
-{
-	return charconv_system_;
 }
 
 sge::cegui::system &

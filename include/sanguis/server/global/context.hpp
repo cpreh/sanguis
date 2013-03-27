@@ -25,7 +25,6 @@
 #include <sanguis/server/global/world_context_fwd.hpp>
 #include <sanguis/server/world/map.hpp>
 #include <sanguis/server/world/context_fwd.hpp>
-#include <sge/charconv/system_fwd.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/container/map_decl.hpp>
@@ -47,7 +46,6 @@ public:
 	context(
 		sanguis::server::unicast_callback const &,
 		sanguis::load::server_context const &,
-		sge::charconv::system &,
 		sanguis::server::console &
 	);
 
@@ -159,8 +157,6 @@ private:
 	> load_context_scoped_ptr;
 
 	load_context_scoped_ptr const load_context_;
-
-	sge::charconv::system &charconv_system_;
 
 	sanguis::server::console &console_;
 

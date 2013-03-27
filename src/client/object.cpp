@@ -86,7 +86,6 @@ sanguis::client::object::object(
 	gui_(
 		sys_->renderer_ffp(),
 		sys_->image_system(),
-		sys_->charconv_system(),
 		sys_->viewport_manager(),
 		sys_->keyboard_collector(),
 		cursor_
@@ -106,7 +105,6 @@ sanguis::client::object::object(
 		sys_->keyboard_collector(),
 		cursor_,
 		sys_->renderer_ffp(),
-		sys_->charconv_system(),
 		sys_->image_system(),
 		io_service_,
 		sys_->viewport_manager()
@@ -230,8 +228,7 @@ sanguis::client::object::create_server(
 		fcppt::make_unique_ptr<
 			sanguis::server::object
 		>(
-			_port,
-			sys_->charconv_system()
+			_port
 		)
 	);
 }

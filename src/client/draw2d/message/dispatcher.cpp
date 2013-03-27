@@ -35,7 +35,6 @@
 #include <sanguis/client/world_parameters.hpp>
 #include <sanguis/messages/base.hpp>
 #include <sanguis/messages/role_name.hpp>
-#include <sge/charconv/system_fwd.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <fcppt/cast_to_enum.hpp>
 #include <fcppt/dynamic_cast.hpp>
@@ -57,15 +56,11 @@
 
 
 sanguis::client::draw2d::message::dispatcher::dispatcher(
-	sanguis::client::draw2d::message::environment &_env,
-	sge::charconv::system &_charconv_system
+	sanguis::client::draw2d::message::environment &_env
 )
 :
 	env_(
 		_env
-	),
-	charconv_system_(
-		_charconv_system
 	)
 {
 }
@@ -248,7 +243,6 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			sanguis::creator::generator::top_parameters(
 				sanguis::creator::generator::name(
 					sge::charconv::utf8_string_to_fcppt(
-						charconv_system_,
 						_message.get<
 							messages::roles::generator_name
 						>()

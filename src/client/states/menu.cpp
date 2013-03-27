@@ -144,7 +144,6 @@ sanguis::client::states::menu::react(
 		*messages::create(
 			messages::client_info(
 				sge::charconv::fcppt_string_to_utf8(
-					context<machine>().charconv_system(),
 					FCPPT_TEXT("player1") // TODO!
 				)
 			)

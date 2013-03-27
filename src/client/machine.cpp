@@ -16,7 +16,6 @@
 #include <sanguis/net/send_buffer_size.hpp>
 #include <sanguis/net/serialize_to_circular_buffer.hpp>
 #include <sanguis/net/receive_buffer_size.hpp>
-#include <sge/charconv/system_fwd.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/image2d/system_fwd.hpp>
@@ -57,7 +56,6 @@ sanguis::client::machine::machine(
 	sge::input::keyboard::device &_keyboard,
 	sanguis::client::cursor::object &_cursor,
 	sge::renderer::device::ffp &_renderer,
-	sge::charconv::system &_charconv_system,
 	sge::image2d::system &_image_loader,
 	sanguis::io_service &_io_service,
 	sge::viewport::manager &_viewport_manager
@@ -77,9 +75,6 @@ sanguis::client::machine::machine(
 	),
 	renderer_(
 		_renderer
-	),
-	charconv_system_(
-		_charconv_system
 	),
 	image_loader_(
 		_image_loader
@@ -260,12 +255,6 @@ sge::renderer::device::ffp &
 sanguis::client::machine::renderer() const
 {
 	return renderer_;
-}
-
-sge::charconv::system &
-sanguis::client::machine::charconv_system() const
-{
-	return charconv_system_;
 }
 
 sge::image2d::system &

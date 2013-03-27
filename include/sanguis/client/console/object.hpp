@@ -3,7 +3,6 @@
 
 #include <sanguis/client/send_callback.hpp>
 #include <sanguis/client/console/object_fwd.hpp>
-#include <sge/charconv/system_fwd.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/gfx_fwd.hpp>
 #include <sge/console/object_fwd.hpp>
@@ -28,7 +27,6 @@ class object
 public:
 	object(
 		sge::console::gfx &,
-		sge::charconv::system &,
 		sanguis::client::send_callback const &
 	);
 
@@ -62,8 +60,6 @@ private:
 	);
 
 	sge::console::gfx &gfx_;
-
-	sge::charconv::system &charconv_system_;
 
 	sanguis::client::send_callback const send_;
 

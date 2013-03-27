@@ -9,7 +9,6 @@
 #include <sanguis/server/console_command_vector.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
-#include <sge/charconv/system_fwd.hpp>
 
 
 namespace sanguis
@@ -17,16 +16,15 @@ namespace sanguis
 namespace server
 {
 
-entities::player_unique_ptr
+sanguis::server::entities::player_unique_ptr
 create_player(
 	sanguis::diff_clock const &,
 	sanguis::random_generator &,
-	environment::load_context &,
-	sge::charconv::system &,
-	server::string const &name,
-	server::unicast_callback const &send_to_player,
-	server::player_id,
-	server::console_command_vector const &
+	sanguis::server::environment::load_context &,
+	sanguis::server::string const &name,
+	sanguis::server::unicast_callback const &send_to_player,
+	sanguis::server::player_id,
+	sanguis::server::console_command_vector const &
 );
 
 }

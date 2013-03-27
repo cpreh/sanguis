@@ -28,7 +28,6 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sanguis/random_generator.hpp>
-#include <sge/charconv/system_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/sprite/state/object_decl.hpp>
 #include <sge/renderer/screen_size_fwd.hpp>
@@ -65,7 +64,6 @@ public:
 	object(
 		sanguis::load::context const &,
 		sge::renderer::device::ffp &,
-		sge::charconv::system &,
 		sge::font::object &,
 		std::tm const &initial_time,
 		sge::viewport::manager &

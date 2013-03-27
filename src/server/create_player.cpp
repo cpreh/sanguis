@@ -14,7 +14,6 @@
 #include <sanguis/messages/add_console_command.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
-#include <sge/charconv/system_fwd.hpp>
 #include <fcppt/homogenous_pair_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/log/debug.hpp>
@@ -26,7 +25,6 @@ sanguis::server::create_player(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
 	sanguis::server::environment::load_context &_load_context,
-	sge::charconv::system &_charconv_system,
 	sanguis::server::string const &_name,
 	sanguis::server::unicast_callback const &_send_to_player,
 	sanguis::server::player_id const _player_id,
@@ -48,11 +46,9 @@ sanguis::server::create_player(
 			*sanguis::messages::create(
 				sanguis::messages::add_console_command(
 					sge::charconv::fcppt_string_to_utf8(
-						_charconv_system,
 						command.first
 					),
 					sge::charconv::fcppt_string_to_utf8(
-						_charconv_system,
 						command.second
 					)
 				)

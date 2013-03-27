@@ -26,8 +26,7 @@ sanguis::client::gui::perk::item::item(
 		sge::cegui::to_cegui_string(
 			sanguis::client::perk::to_string(
 				perk_type_
-			),
-			_gui.charconv_system()
+			)
 		),
 		0, // item id
 		const_cast<

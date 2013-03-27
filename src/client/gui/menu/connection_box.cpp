@@ -17,9 +17,6 @@ sanguis::client::gui::menu::connection_box::connection_box(
 	callbacks::retry_connect const &_retry_connect
 )
 :
-	charconv_system_(
-		_gui.charconv_system()
-	),
 	cancel_connect_(_cancel_connect),
 	retry_connect_(_retry_connect),
 	scoped_layout_(
@@ -91,8 +88,7 @@ sanguis::client::gui::menu::connection_box::show_error(
 {
 	message_text_.setText(
 		sge::cegui::to_cegui_string(
-			_message,
-			charconv_system_
+			_message
 		)
 	);
 
@@ -118,8 +114,7 @@ sanguis::client::gui::menu::connection_box::activate()
 
 	message_text_.setText(
 		sge::cegui::to_cegui_string(
-			FCPPT_TEXT("Connecting..."),
-			charconv_system_
+			FCPPT_TEXT("Connecting...")
 		)
 	);
 }
@@ -157,8 +152,7 @@ sanguis::client::gui::menu::connection_box::handle_retry_connect(
 
 	message_text_.setText(
 		sge::cegui::to_cegui_string(
-			FCPPT_TEXT("Retrying..."),
-			charconv_system_
+			FCPPT_TEXT("Retrying...")
 		)
 	);
 

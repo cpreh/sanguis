@@ -46,7 +46,6 @@
 #include <sanguis/server/world/map.hpp>
 #include <sanguis/server/world/object.hpp>
 #include <sanguis/server/world/random.hpp>
-#include <sge/charconv/system_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/location.hpp>
@@ -84,7 +83,6 @@ fcppt::log::object logger(
 sanguis::server::global::context::context(
 	sanguis::server::unicast_callback const &_send_unicast,
 	sanguis::load::server_context const &_model_context,
-	sge::charconv::system &_charconv_system,
 	sanguis::server::console &_console
 )
 :
@@ -108,9 +106,6 @@ sanguis::server::global::context::context(
 		>(
 			_model_context
 		)
-	),
-	charconv_system_(
-		_charconv_system
 	),
 	console_(
 		_console
@@ -151,7 +146,6 @@ sanguis::server::global::context::insert_player(
 			diff_clock_,
 			random_generator_,
 			*load_context_,
-			charconv_system_,
 			_name,
 			send_unicast_,
 			_player_id,
@@ -517,7 +511,6 @@ sanguis::server::global::context::world(
 				random_generator_,
 				*world_context_,
 				*load_context_,
-				charconv_system_,
 				console_
 			)
 		).first->second;

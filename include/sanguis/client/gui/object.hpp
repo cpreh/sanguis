@@ -8,7 +8,6 @@
 #include <sge/cegui/default_keyboard.hpp>
 #include <sge/cegui/syringe.hpp>
 #include <sge/cegui/system.hpp>
-#include <sge/charconv/system_fwd.hpp>
 #include <sge/image2d/system_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
@@ -33,16 +32,12 @@ public:
 	object(
 		sge::renderer::device::ffp &,
 		sge::image2d::system &,
-		sge::charconv::system &,
 		sge::viewport::manager &,
 		sge::input::keyboard::device &,
 		client::cursor::object &
 	);
 
 	~object();
-
-	sge::charconv::system &
-	charconv_system() const;
 
 	sge::cegui::system &
 	system();
@@ -57,8 +52,6 @@ public:
 		sanguis::duration const &
 	);
 private:
-	sge::charconv::system &charconv_system_;
-
 	sge::cegui::system system_;
 
 	sge::cegui::syringe syringe_;

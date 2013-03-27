@@ -34,7 +34,6 @@
 #include <sanguis/server/world/entity_map.hpp>
 #include <sanguis/server/world/object_fwd.hpp>
 #include <sanguis/server/world/sight_range_map.hpp>
-#include <sge/charconv/system_fwd.hpp>
 #include <sge/projectile/world_fwd.hpp>
 #include <sge/projectile/body/object_fwd.hpp>
 #include <sge/projectile/body/scoped.hpp>
@@ -64,7 +63,6 @@ public:
 		sanguis::world_id,
 		sanguis::server::world::context &,
 		sanguis::server::environment::load_context &,
-		sge::charconv::system &,
 		sanguis::server::console &,
 		sanguis::creator::generator::result const &
 	);
@@ -199,8 +197,6 @@ private:
 	sanguis::server::world::context &global_context_;
 
 	sanguis::server::environment::load_context &load_context_;
-
-	sge::charconv::system &charconv_system_;
 
 	typedef fcppt::scoped_ptr<
 		sge::projectile::world

@@ -6,11 +6,10 @@
 #include <sanguis/server/unicast_callback.hpp>
 #include <sanguis/server/console_command_vector.hpp>
 #include <sanguis/server/player_id.hpp>
-#include <sge/charconv/system_fwd.hpp>
 #include <sge/console/object.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/callback/function.hpp>
-#include <fcppt/signal/auto_connection.hpp>
+#include <fcppt/signal/auto_connection_fwd.hpp>
 #include <fcppt/homogenous_pair_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
@@ -28,9 +27,8 @@ class console
 	);
 public:
 	console(
-		sge::charconv::system &,
-		server::send_callback const &,
-		server::unicast_callback const &
+		sanguis::server::send_callback const &,
+		sanguis::server::unicast_callback const &
 	);
 
 	~console();
@@ -54,18 +52,16 @@ public:
 		fcppt::string const &
 	);
 
-	console_command_vector const &
+	sanguis::server::console_command_vector const &
 	known_commands() const;
 private:
 	sge::console::object object_;
 
-	sge::charconv::system &charconv_system_;
+	sanguis::server::send_callback const send_;
 
-	server::send_callback const send_;
+	sanguis::server::unicast_callback const unicast_;
 
-	server::unicast_callback const unicast_;
-
-	console_command_vector known_commands_;
+	sanguis::server::console_command_vector known_commands_;
 };
 
 }

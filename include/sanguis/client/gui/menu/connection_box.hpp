@@ -5,7 +5,6 @@
 #include <sanguis/client/gui/menu/callbacks/retry_connect.hpp>
 #include <sanguis/client/gui/menu/connection_box_fwd.hpp>
 #include <sanguis/client/gui/object_fwd.hpp>
-#include <sge/charconv/system_fwd.hpp>
 #include <sge/cegui/toolbox/scoped_layout.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
@@ -63,8 +62,6 @@ private:
 	handle_retry_connect(
 		CEGUI::EventArgs const &
 	);
-
-	sge::charconv::system &charconv_system_;
 
 	callbacks::cancel_connect const cancel_connect_;
 

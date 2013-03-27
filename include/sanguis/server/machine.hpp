@@ -11,7 +11,6 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/timer.hpp>
 #include <sanguis/server/states/running_fwd.hpp>
-#include <sge/charconv/system_fwd.hpp>
 #include <alda/net/id.hpp>
 #include <alda/net/port.hpp>
 #include <alda/net/buffer/circular_receive/object_fwd.hpp>
@@ -41,7 +40,6 @@ struct machine
 	);
 public:
 	machine(
-		sge::charconv::system &,
 		alda::net::port,
 		sanguis::io_service &
 	);
@@ -67,9 +65,6 @@ public:
 
 	sanguis::load::server_context const &
 	resources() const;
-
-	sge::charconv::system &
-	charconv_system() const;
 private:
 	void
 	process_message(
@@ -98,8 +93,6 @@ private:
 	timer_callback();
 
 	sanguis::load::server_context resources_;
-
-	sge::charconv::system &charconv_system_;
 
 	alda::net::port const port_;
 

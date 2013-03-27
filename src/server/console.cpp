@@ -1,9 +1,13 @@
 #include <sanguis/server/console.hpp>
+#include <sanguis/server/console_command_vector.hpp>
+#include <sanguis/server/player_id.hpp>
+#include <sanguis/server/send_callback.hpp>
+#include <sanguis/server/unicast_callback.hpp>
 #include <sanguis/messages/add_console_command.hpp>
 #include <sanguis/messages/console_print.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
-#include <sge/charconv/system_fwd.hpp>
+#include <sge/console/arg_list.hpp>
 #include <sge/console/callback/function.hpp>
 #include <sge/console/callback/name.hpp>
 #include <sge/console/callback/parameters.hpp>
@@ -14,26 +18,30 @@
 #include <fcppt/insert_to_string.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/signal/auto_connection.hpp>
+
 
 sanguis::server::console::console(
-	sge::charconv::system &_charconv_system,
-	server::send_callback const &_send,
-	server::unicast_callback const &_unicast
+	sanguis::server::send_callback const &_send,
+	sanguis::server::unicast_callback const &_unicast
 )
 :
 	object_(
 		SGE_FONT_LIT('/') // TODO: is this right?
 	),
-	charconv_system_(
-		_charconv_system
+	send_(
+		_send
 	),
-	send_(_send),
-	unicast_(_unicast),
+	unicast_(
+		_unicast
+	),
 	known_commands_()
-{}
+{
+}
 
 sanguis::server::console::~console()
-{}
+{
+}
 
 fcppt::signal::auto_connection
 sanguis::server::console::insert(
@@ -43,14 +51,12 @@ sanguis::server::console::insert(
 )
 {
 	send_(
-		*messages::create(
-			messages::add_console_command(
+		*sanguis::messages::create(
+			sanguis::messages::add_console_command(
 				sge::charconv::fcppt_string_to_utf8(
-					charconv_system_,
 					_command
 				),
 				sge::charconv::fcppt_string_to_utf8(
-					charconv_system_,
 					_description
 				)
 			)
@@ -59,7 +65,7 @@ sanguis::server::console::insert(
 
 	// TODO: we have to know when a command doesn't exist anymore!
 	known_commands_.push_back(
-		server::console_command_pair(
+		sanguis::server::console_command_pair(
 			_command,
 			_description
 		)
@@ -85,7 +91,7 @@ sanguis::server::console::insert(
 
 void
 sanguis::server::console::eval(
-	server::player_id const _id,
+	sanguis::server::player_id const _id,
 	sge::console::arg_list _args
 )
 {
@@ -104,7 +110,7 @@ sanguis::server::console::eval(
 
 void
 sanguis::server::console::print_line(
-	server::player_id const _id,
+	sanguis::server::player_id const _id,
 	fcppt::string const &_line
 )
 {
@@ -113,7 +119,6 @@ sanguis::server::console::print_line(
 		*sanguis::messages::create(
 			sanguis::messages::console_print(
 				sge::charconv::fcppt_string_to_utf8(
-					charconv_system_,
 					_line
 				)
 			)

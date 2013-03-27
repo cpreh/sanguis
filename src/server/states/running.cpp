@@ -71,9 +71,6 @@ sanguis::server::states::running::running(
 		_ctx
 	),
 	console_(
-		this->context<
-			sanguis::server::machine
-		>().charconv_system(),
 		sanguis::server::make_send_callback(
 			this->context<
 				sanguis::server::machine
@@ -97,9 +94,6 @@ sanguis::server::states::running::running(
 			this->context<
 				sanguis::server::machine
 			>().resources(),
-			this->context<
-				sanguis::server::machine
-			>().charconv_system(),
 			console_
 		)
 	)
@@ -205,9 +199,6 @@ sanguis::server::states::running::operator()(
 		),
 		_id,
 		sge::charconv::utf8_string_to_fcppt(
-			this->context<
-				sanguis::server::machine
-			>().charconv_system(),
 			_message.get<
 				sanguis::messages::string
 			>()
@@ -240,9 +231,6 @@ sanguis::server::states::running::operator()(
 
 	sanguis::string_vector const command(
 		sanguis::messages::serialization::convert_string_vector(
-			this->context<
-				sanguis::server::machine
-			>().charconv_system(),
 			_message.get<
 				sanguis::messages::string_vector
 			>()

@@ -16,7 +16,6 @@
 #include <sanguis/server/events/disconnect.hpp>
 #include <sanguis/server/events/message.hpp>
 #include <sanguis/server/events/tick.hpp>
-#include <sge/charconv/system_fwd.hpp>
 #include <sge/timer/elapsed_and_reset.hpp>
 #include <alda/net/id.hpp>
 #include <alda/net/parameters.hpp>
@@ -38,15 +37,11 @@
 
 
 sanguis::server::machine::machine(
-	sge::charconv::system &_charconv_system,
 	alda::net::port const _port,
 	sanguis::io_service &_io_service
 )
 :
 	resources_(),
-	charconv_system_(
-		_charconv_system
-	),
 	port_(
 		_port
 	),
@@ -244,13 +239,6 @@ sanguis::server::machine::resources() const
 {
 	return
 		resources_;
-}
-
-sge::charconv::system &
-sanguis::server::machine::charconv_system() const
-{
-	return
-		charconv_system_;
 }
 
 void

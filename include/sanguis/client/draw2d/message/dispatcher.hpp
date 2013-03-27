@@ -30,8 +30,8 @@
 #include <sanguis/messages/stop_reloading.hpp>
 #include <sanguis/messages/speed.hpp>
 #include <sanguis/entity_id.hpp>
-#include <sge/charconv/system_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -48,9 +48,9 @@ class dispatcher
 		dispatcher
 	);
 public:
+	explicit
 	dispatcher(
-		message::environment &,
-		sge::charconv::system &
+		sanguis::client::draw2d::message::environment &
 	);
 
 	~dispatcher();
@@ -182,18 +182,16 @@ private:
 	>
 	void
 	configure_new_object(
-		entities::unique_ptr,
+		sanguis::client::draw2d::entities::unique_ptr,
 		Msg const &
 	);
 
-	draw2d::entities::base &
+	sanguis::client::draw2d::entities::base &
 	entity(
-		entity_id
+		sanguis::entity_id
 	);
 
-	message::environment &env_;
-
-	sge::charconv::system &charconv_system_;
+	sanguis::client::draw2d::message::environment &env_;
 };
 
 }

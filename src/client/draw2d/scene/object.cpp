@@ -24,7 +24,6 @@
 #include <sanguis/random_generator.hpp>
 #include <sanguis/random_seed.hpp>
 #include <sanguis/update_diff_clock.hpp>
-#include <sge/charconv/system_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/renderer/context/ffp.hpp>
@@ -74,7 +73,6 @@
 sanguis::client::draw2d::scene::object::object(
 	sanguis::load::context const &_resources,
 	sge::renderer::device::ffp &_renderer,
-	sge::charconv::system &_charconv_system,
 	sge::font::object &_font_object,
 	std::tm const &_current_time,
 	sge::viewport::manager &_viewport_manager
@@ -165,8 +163,7 @@ sanguis::client::draw2d::scene::object::object(
 		fcppt::make_unique_ptr<
 			message::dispatcher
 		>(
-			*message_environment_,
-			_charconv_system
+			*message_environment_
 		)
 	),
 	entities_(),

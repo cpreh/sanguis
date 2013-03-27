@@ -1,6 +1,5 @@
 #include <sanguis/server/world/random.hpp>
 #include <sanguis/server/world/object.hpp>
-#include <sge/charconv/system_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 #include <sanguis/config_app_name.hpp>
@@ -32,7 +31,6 @@ sanguis::server::world::random(
 	sanguis::random_generator &_random_generator,
 	world::context &_ctx,
 	server::environment::load_context &_load_context,
-	sge::charconv::system &_charconv_system,
 	server::console &_console
 )
 {
@@ -116,7 +114,6 @@ sanguis::server::world::random(
 			), // FIXME!
 			_ctx,
 			_load_context,
-			_charconv_system,
 			_console,
 			sanguis::creator::generator::deserialize(
 				stream

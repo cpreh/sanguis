@@ -1,6 +1,5 @@
 #include <sanguis/messages/serialization/convert_string_vector.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
-#include <sge/charconv/system_fwd.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 
 namespace
@@ -13,7 +12,6 @@ template<
 >
 Dest
 convert(
-	sge::charconv::system &_charconv_system,
 	Src const &_src,
 	ConvertString const &_convert_string
 )
@@ -29,7 +27,6 @@ convert(
 	)
 		dest.push_back(
 			_convert_string(
-				_charconv_system,
 				*elem_it
 			)
 		);
@@ -41,7 +38,6 @@ convert(
 
 sanguis::messages::types::string_vector const
 sanguis::messages::serialization::convert_string_vector(
-	sge::charconv::system &_charconv_system,
 	sanguis::string_vector const &_src
 )
 {
@@ -49,7 +45,6 @@ sanguis::messages::serialization::convert_string_vector(
 		::convert<
 			sanguis::messages::types::string_vector
 		>(
-			_charconv_system,
 			_src,
 			sge::charconv::fcppt_string_to_utf8
 		);
@@ -57,7 +52,6 @@ sanguis::messages::serialization::convert_string_vector(
 
 sanguis::string_vector const
 sanguis::messages::serialization::convert_string_vector(
-	sge::charconv::system &_charconv_system,
 	messages::types::string_vector const &_src
 )
 {
@@ -65,7 +59,6 @@ sanguis::messages::serialization::convert_string_vector(
 		::convert<
 			sanguis::string_vector
 		>(
-			_charconv_system,
 			_src,
 			sge::charconv::utf8_string_to_fcppt
 		);
