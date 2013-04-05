@@ -8,7 +8,8 @@
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <fcppt/random/variate_decl.hpp>
-#include <fcppt/random/distribution/uniform_real_decl.hpp>
+#include <fcppt/random/distribution/basic_decl.hpp>
+#include <fcppt/random/distribution/parameters/uniform_real_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <vector>
@@ -63,8 +64,10 @@ private:
 
 	sanguis::server::environment::object &env_;
 
-	typedef fcppt::random::distribution::uniform_real<
-		sanguis::server::pickup_probability::value_type
+	typedef fcppt::random::distribution::basic<
+		fcppt::random::distribution::parameters::uniform_real<
+			sanguis::server::pickup_probability::value_type
+		>
 	> real_distribution;
 
 	typedef fcppt::random::variate<

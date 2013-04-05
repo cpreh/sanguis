@@ -29,7 +29,8 @@
 #include <fcppt/math/vector/signed_angle_between_cast.hpp>
 #include <fcppt/math/vector/static.hpp>
 #include <fcppt/random/variate_impl.hpp>
-#include <fcppt/random/distribution/uniform_real_impl.hpp>
+#include <fcppt/random/distribution/basic_impl.hpp>
+#include <fcppt/random/distribution/parameters/uniform_real_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
 #include <functional>
@@ -65,10 +66,10 @@ sanguis::server::ai::simple::simple(
 	fuzzy_target_rng_(
 		_random_generator,
 		distribution(
-			distribution::min(
+			distribution::param_type::min(
 				0.f
 			),
-			distribution::sup(
+			distribution::param_type::sup(
 				fcppt::math::twopi<
 					sanguis::server::space_unit
 				>()

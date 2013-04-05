@@ -20,7 +20,8 @@
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/random/variate.hpp>
-#include <fcppt/random/distribution/normal.hpp>
+#include <fcppt/random/distribution/basic.hpp>
+#include <fcppt/random/distribution/parameters/normal.hpp>
 
 
 sanguis::server::weapons::shotgun::shotgun(
@@ -75,8 +76,10 @@ sanguis::server::weapons::shotgun::do_attack(
 	sanguis::server::weapons::delayed_attack const &_attack
 )
 {
-	typedef fcppt::random::distribution::normal<
-		sanguis::server::space_unit
+	typedef fcppt::random::distribution::basic<
+		fcppt::random::distribution::parameters::normal<
+			sanguis::server::space_unit
+		>
 	> angle_distribution;
 
 	fcppt::random::variate<
@@ -85,10 +88,10 @@ sanguis::server::weapons::shotgun::do_attack(
 	> angle_rng(
 		random_generator_,
 		angle_distribution(
-			angle_distribution::mean(
+			angle_distribution::param_type::mean(
 				_attack.angle().get()
 			),
-			angle_distribution::sigma(
+			angle_distribution::param_type::stddev(
 				spread_radius_.get()
 			)
 		)

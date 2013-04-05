@@ -10,7 +10,8 @@
 #include <sanguis/server/perks/perk.hpp>
 #include <sanguis/server/perks/level_diff.hpp>
 #include <fcppt/random/variate_decl.hpp>
-#include <fcppt/random/distribution/uniform_real_decl.hpp>
+#include <fcppt/random/distribution/basic_decl.hpp>
+#include <fcppt/random/distribution/parameters/uniform_real_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -52,8 +53,10 @@ private:
 
 	sanguis::diff_timer shoot_timer_;
 
-	typedef fcppt::random::distribution::uniform_real<
-		sanguis::server::space_unit
+	typedef fcppt::random::distribution::basic<
+		fcppt::random::distribution::parameters::uniform_real<
+			sanguis::server::space_unit
+		>
 	> distribution;
 
 	fcppt::random::variate<

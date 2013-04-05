@@ -5,7 +5,8 @@
 #include <sanguis/creator/generator/seed.hpp>
 #include <sanguis/creator/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/random/distribution/uniform_int_decl.hpp>
+#include <fcppt/random/distribution/basic_decl.hpp>
+#include <fcppt/random/distribution/parameters/uniform_int_decl.hpp>
 #include <fcppt/random/generator/minstd_rand_decl.hpp>
 
 
@@ -47,8 +48,10 @@ public:
 private:
 	fcppt::random::generator::minstd_rand generator_;
 
-	typedef fcppt::random::distribution::uniform_int<
-		sanguis::creator::generator::randgen::result_type
+	typedef fcppt::random::distribution::basic<
+		fcppt::random::distribution::parameters::uniform_int<
+			sanguis::creator::generator::randgen::result_type
+		>
 	> int_distribution;
 
 	int_distribution distribution_;

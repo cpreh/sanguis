@@ -17,7 +17,8 @@
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/random/variate_impl.hpp>
-#include <fcppt/random/distribution/uniform_real_impl.hpp>
+#include <fcppt/random/distribution/basic_impl.hpp>
+#include <fcppt/random/distribution/parameters/uniform_real_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
@@ -46,10 +47,10 @@ sanguis::server::perks::choleric::choleric(
 	rand_(
 		_random_generator,
 		sanguis::server::perks::choleric::distribution(
-			sanguis::server::perks::choleric::distribution::min(
+			sanguis::server::perks::choleric::distribution::param_type::min(
 				0.f
 			),
-			sanguis::server::perks::choleric::distribution::sup(
+			sanguis::server::perks::choleric::distribution::param_type::sup(
 				fcppt::math::twopi<
 					sanguis::server::space_unit
 				>()

@@ -7,7 +7,8 @@
 #include <sanguis/load/resource/context_fwd.hpp>
 #include <sge/renderer/dim2.hpp>
 #include <fcppt/random/variate_fwd.hpp>
-#include <fcppt/random/distribution/uniform_int_fwd.hpp>
+#include <fcppt/random/distribution/basic_fwd.hpp>
+#include <fcppt/random/distribution/parameters/uniform_int_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/string.hpp>
@@ -86,8 +87,10 @@ private:
 
 	part_map parts_;
 
-	typedef fcppt::random::distribution::uniform_int<
-		part_map::size_type
+	typedef fcppt::random::distribution::basic<
+		fcppt::random::distribution::parameters::uniform_int<
+			part_map::size_type
+		>
 	> part_map_distribution;
 
 	typedef fcppt::random::variate<

@@ -16,7 +16,8 @@
 #include <fcppt/strong_typedef_assignment.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/random/variate_impl.hpp>
-#include <fcppt/random/distribution/uniform_real_impl.hpp>
+#include <fcppt/random/distribution/basic_impl.hpp>
+#include <fcppt/random/distribution/parameters/uniform_real_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <numeric>
@@ -149,10 +150,10 @@ sanguis::server::pickup_spawner::pickup_spawner(
 	spawn_prob_(
 		_random_generator,
 		real_distribution(
-			real_distribution::min(
+			real_distribution::param_type::min(
 				0.f
 			),
-			real_distribution::sup(
+			real_distribution::param_type::sup(
 				1.f
 			)
 		)
@@ -160,10 +161,10 @@ sanguis::server::pickup_spawner::pickup_spawner(
 	spawn_value_(
 		_random_generator,
 		real_distribution(
-			real_distribution::min(
+			real_distribution::param_type::min(
 				0.f
 			),
-			real_distribution::sup(
+			real_distribution::param_type::sup(
 				std::accumulate(
 					spawns_.begin(),
 					spawns_.end(),

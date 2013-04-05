@@ -3,7 +3,8 @@
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
-#include <fcppt/random/distribution/uniform_int_impl.hpp>
+#include <fcppt/random/distribution/basic_impl.hpp>
+#include <fcppt/random/distribution/parameters/uniform_int_impl.hpp>
 #include <fcppt/random/generator/minstd_rand_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <limits>
@@ -23,10 +24,10 @@ sanguis::creator::generator::randgen::randgen(
 		)
 	),
 	distribution_(
-		sanguis::creator::generator::randgen::int_distribution::min(
+		sanguis::creator::generator::randgen::int_distribution::param_type::min(
 			this->min()
 		),
-		sanguis::creator::generator::randgen::int_distribution::max(
+		sanguis::creator::generator::randgen::int_distribution::param_type::max(
 			this->max()
 		)
 	)

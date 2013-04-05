@@ -19,7 +19,8 @@
 #include <sanguis/creator/geometry/vector.hpp>
 #include <sanguis/creator/geometry/vertex.hpp>
 #include <fcppt/assign/make_container.hpp>
-#include <fcppt/random/distribution/uniform_int.hpp>
+#include <fcppt/random/distribution/basic.hpp>
+#include <fcppt/random/distribution/parameters/uniform_int.hpp>
 
 
 sanguis::creator::generator::result const
@@ -27,28 +28,30 @@ sanguis::creator::generator::car_park(
 	sanguis::creator::generator::parameters const &_parameters
 )
 {
-	typedef fcppt::random::distribution::uniform_int<
-		sanguis::creator::geometry::unit
+	typedef fcppt::random::distribution::basic<
+		fcppt::random::distribution::parameters::uniform_int<
+			sanguis::creator::geometry::unit
+		>
 	> uniform_unit;
 
 	uniform_unit x_distribution(
-		uniform_unit::min(
+		uniform_unit::param_type::min(
 			0
 		),
-		uniform_unit::max(
+		uniform_unit::param_type::max(
 			_parameters.area().w()
 		)
 	);
 
 	uniform_unit y_distribution(
-		uniform_unit::min(
+		uniform_unit::param_type::min(
 			0
 		),
-		uniform_unit::max(
+		uniform_unit::param_type::max(
 			_parameters.area().h()
 		)
 	);
-	
+
 	sanguis::creator::geometry::shape_container cars;
 
 	sanguis::creator::geometry::unit const half_car_width(

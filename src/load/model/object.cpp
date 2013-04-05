@@ -29,7 +29,8 @@
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/random/variate.hpp>
-#include <fcppt/random/distribution/uniform_int.hpp>
+#include <fcppt/random/distribution/basic.hpp>
+#include <fcppt/random/distribution/parameters/uniform_int.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <iterator>
@@ -78,10 +79,10 @@ sanguis::load::model::object::random_part() const
 			>(
 				random_generator_,
 				part_map_distribution(
-					part_map_distribution::min(
+					part_map_distribution::param_type::min(
 						0u
 					),
-					part_map_distribution::max(
+					part_map_distribution::param_type::max(
 						parts_.size() - 1u
 					)
 				)

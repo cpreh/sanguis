@@ -13,7 +13,8 @@
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/container/map_decl.hpp>
 #include <fcppt/random/variate_decl.hpp>
-#include <fcppt/random/distribution/uniform_real_decl.hpp>
+#include <fcppt/random/distribution/basic_decl.hpp>
+#include <fcppt/random/distribution/parameters/uniform_real_decl.hpp>
 
 
 namespace sanguis
@@ -63,8 +64,10 @@ private:
 
 	sanguis::server::ai::entity_map potential_targets_;
 
-	typedef fcppt::random::distribution::uniform_real<
-		sanguis::server::space_unit
+	typedef fcppt::random::distribution::basic<
+		fcppt::random::distribution::parameters::uniform_real<
+			sanguis::server::space_unit
+		>
 	> distribution;
 
 	typedef fcppt::random::variate<

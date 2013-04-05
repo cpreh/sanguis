@@ -15,7 +15,8 @@
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/random/variate.hpp>
-#include <fcppt/random/distribution/uniform_real.hpp>
+#include <fcppt/random/distribution/basic.hpp>
+#include <fcppt/random/distribution/parameters/uniform_real.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cmath>
 #include <fcppt/config/external_end.hpp>
@@ -31,8 +32,10 @@ sanguis::server::waves::spawn(
 	sanguis::server::entities::enemies::spawn_owner const &_spawn
 )
 {
-	typedef fcppt::random::distribution::uniform_real<
-		sanguis::server::space_unit
+	typedef fcppt::random::distribution::basic<
+		fcppt::random::distribution::parameters::uniform_real<
+			sanguis::server::space_unit
+		>
 	> angle_distribution;
 
 	typedef fcppt::random::variate<
@@ -43,10 +46,10 @@ sanguis::server::waves::spawn(
 	rng_type rng(
 		_random_generator,
 		angle_distribution(
-			angle_distribution::min(
+			angle_distribution::param_type::min(
 				0.f
 			),
-			angle_distribution::sup(
+			angle_distribution::param_type::sup(
 				fcppt::math::twopi<
 					server::space_unit
 				>()
