@@ -43,9 +43,6 @@
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::draw2d::scene::world::state::state(
@@ -165,26 +162,37 @@ sanguis::client::draw2d::scene::world::state::draw(
 		),
 		upper(
 			sanguis::client::draw2d::scene::world::clamp_pos(
-				fcppt::algorithm::array_map<
-					sanguis::client::draw2d::scene::world::signed_pos
-				>(
-					(
-						int_translation
-						+
-						fcppt::math::dim::structure_cast<
-							sanguis::client::draw2d::scene::world::signed_pos
-						>(
-							sanguis::client::draw2d::scene::background_dim(
-								renderer_
+				sanguis::client::draw2d::scene::world::signed_pos(
+					fcppt::algorithm::array_map<
+						sanguis::client::draw2d::scene::world::signed_pos::storage_type
+					>(
+						(
+							int_translation
+							+
+							fcppt::math::dim::structure_cast<
+								sanguis::client::draw2d::scene::world::signed_pos
+							>(
+								sanguis::client::draw2d::scene::background_dim(
+									renderer_
+								)
 							)
+						).storage(),
+						[
+							batch_size_trans
+						](
+							sanguis::client::draw2d::scene::world::batch_grid::size_type const _value
 						)
-					),
-					std::bind(
-						fcppt::math::ceil_div<
-							sanguis::client::draw2d::scene::world::batch_grid::size_type
-						>,
-						std::placeholders::_1,
-						batch_size_trans
+						{
+							return
+								fcppt::math::ceil_div(
+									_value,
+									static_cast<
+										sanguis::client::draw2d::scene::world::batch_grid::size_type
+									>(
+										batch_size_trans
+									)
+								);
+						}
 					)
 				),
 				batches_->size()

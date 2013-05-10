@@ -12,7 +12,6 @@
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
-#include <majutsu/concepts/dynamic_memory/tag.hpp>
 #include <majutsu/const_raw_pointer.hpp>
 #include <majutsu/size_type.hpp>
 #include <majutsu/raw_pointer.hpp>
@@ -20,6 +19,7 @@
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/stream_buffer.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -50,8 +50,7 @@ template<
 >
 majutsu::size_type
 needed_size(
-	majutsu::concepts::dynamic_memory::tag const *,
-	bindings::self<
+	sanguis::messages::bindings::self<
 		Type
 	> const *,
 	Type const &_value
@@ -59,7 +58,7 @@ needed_size(
 {
 	return
 		sizeof(
-			typename bindings::self<
+			typename sanguis::messages::bindings::self<
 				Type
 			>::length_type
 		)
@@ -72,8 +71,7 @@ template<
 >
 void
 place(
-	majutsu::concepts::dynamic_memory::tag const *const _tag,
-	bindings::self<
+	sanguis::messages::bindings::self<
 		Type
 	> const *const _concept,
 	Type const &_value,
@@ -81,7 +79,6 @@ place(
 )
 {
 	alda::bindings::detail::put_length(
-		_tag,
 		_concept,
 		_value,
 		_mem
@@ -99,20 +96,18 @@ template<
 >
 Type
 make(
-	majutsu::concepts::dynamic_memory::tag const *const _tag,
-	bindings::self<
+	sanguis::messages::bindings::self<
 		Type
 	> const *const _concept,
 	majutsu::const_raw_pointer const _mem
 )
 {
-	typedef typename bindings::self<
+	typedef typename sanguis::messages::bindings::self<
 		Type
 	>::length_type length_type;
 
 	length_type const length(
 		alda::bindings::detail::extract_length(
-			_tag,
 			_concept,
 			_mem
 		)

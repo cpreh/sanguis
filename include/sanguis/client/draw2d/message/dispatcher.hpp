@@ -182,7 +182,7 @@ private:
 	>
 	void
 	configure_new_object(
-		sanguis::client::draw2d::entities::unique_ptr,
+		sanguis::client::draw2d::entities::unique_ptr &&,
 		Msg const &
 	);
 
