@@ -71,14 +71,14 @@ function JitteredGrid(ctx, width, height)
 		);
 	}
 
-	for (var e in edges)
-	{
-		ctx.beginPath();
-		ctx.strokeStyle = rgbaColor(100,100,255,Math.pow(edges[e][2],0.02));
-		line(ctx, points[edges[e][0]], points[edges[e][1]]);
-		ctx.closePath();
-		ctx.stroke();
-	}
+	edges.forEach(
+		function(e, index, edges){
+			ctx.beginPath();
+			ctx.strokeStyle = rgbaColor(100,100,255,Math.pow(e[2],0.02));
+			line(ctx, points[e[0]], points[e[1]]);
+			ctx.closePath();
+			ctx.stroke();
+	});
 
 	// shortest path
 	var target = Math.floor(Math.random() * len.y + 1) * len.x - 1;
