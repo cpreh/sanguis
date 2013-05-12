@@ -431,7 +431,6 @@ SET(
 	include/sanguis/messages/base_fwd.hpp
 	include/sanguis/messages/bind_entity_message.hpp
 	include/sanguis/messages/bind_player_message.hpp
-	include/sanguis/messages/bindings/fundamental_strong.hpp
 	include/sanguis/messages/bindings/self.hpp
 	include/sanguis/messages/call/object.hpp
 	include/sanguis/messages/call/object_fwd.hpp

@@ -42,24 +42,24 @@ class configure_entity
 
 	typedef boost::mpl::map<
 		boost::mpl::pair<
-			messages::roles::center,
-			messages::move
+			sanguis::messages::roles::center,
+			sanguis::messages::move
 		>,
 		boost::mpl::pair<
-			messages::roles::angle,
-			messages::rotate
+			sanguis::messages::roles::angle,
+			sanguis::messages::rotate
 		>,
 		boost::mpl::pair<
-			messages::roles::max_health,
-			messages::max_health
+			sanguis::messages::roles::max_health,
+			sanguis::messages::max_health
 		>,
 		boost::mpl::pair<
-			messages::roles::health,
-			messages::health
+			sanguis::messages::roles::health,
+			sanguis::messages::health
 		>,
 		boost::mpl::pair<
-			messages::roles::speed,
-			messages::speed
+			sanguis::messages::roles::speed,
+			sanguis::messages::speed
 		>
 	> mapping;
 public:
@@ -71,10 +71,17 @@ public:
 		Message const &_message
 	)
 	:
-		dispatcher_(_dispatcher),
-		id_(_id),
-		message_(_message)
-	{}
+		dispatcher_(
+			_dispatcher
+		),
+		id_(
+			_id
+		),
+		message_(
+			_message
+		)
+	{
+	}
 
 	template<
 		typename Role
@@ -86,9 +93,7 @@ public:
 		>,
 		result_type
 	>::type
-	operator()(
-		Role &
-	) const
+	operator()() const
 	{
 		dispatcher_(
 			typename boost::mpl::at<
@@ -113,9 +118,7 @@ public:
 		>,
 		result_type
 	>::type
-	operator()(
-		Role &
-	) const
+	operator()() const
 	{
 	}
 private:

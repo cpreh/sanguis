@@ -32,7 +32,6 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <functional>
 #include <iterator>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -59,16 +58,25 @@ sanguis::client::draw2d::scene::world::generate_batches(
 			fcppt::math::dim::structure_cast<
 				sanguis::client::draw2d::scene::world::batch_grid::dim
 			>(
-				fcppt::algorithm::array_map<
-					sanguis::creator::generator::size
-				>(
-					generated.size(),
-					std::bind(
-						fcppt::math::ceil_div<
-							sanguis::creator::generator::size::value_type
-						>,
-						std::placeholders::_1,
-						sanguis::client::draw2d::scene::world::batch_size::value
+				sanguis::creator::generator::size(
+					fcppt::algorithm::array_map<
+						sanguis::creator::generator::size::storage_type
+					>(
+						generated.size().storage(),
+						[](
+							sanguis::creator::generator::size::value_type const _value
+						)
+						{
+							return
+								fcppt::math::ceil_div(
+									_value,
+									static_cast<
+										sanguis::creator::generator::size::value_type
+									>(
+										sanguis::client::draw2d::scene::world::batch_size::value
+									)
+								);
+						}
 					)
 				)
 			)

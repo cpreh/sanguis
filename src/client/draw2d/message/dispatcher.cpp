@@ -45,10 +45,10 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/mpl/for_each.hpp>
 #include <majutsu/is_role.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/filter_view.hpp>
-#include <boost/mpl/for_each.hpp>
 #include <boost/mpl/placeholders.hpp>
 #include <boost/mpl/transform_view.hpp>
 #include <typeinfo>
@@ -488,7 +488,7 @@ template<
 >
 void
 sanguis::client::draw2d::message::dispatcher::configure_new_object(
-	entities::unique_ptr _ptr,
+	sanguis::client::draw2d::entities::unique_ptr &&_ptr,
 	Msg const &_message
 )
 {
@@ -497,13 +497,13 @@ sanguis::client::draw2d::message::dispatcher::configure_new_object(
 	);
 
 	env_.insert(
-		move(
+		std::move(
 			_ptr
 		),
 		id
 	);
 
-	boost::mpl::for_each<
+	fcppt::mpl::for_each<
 		boost::mpl::transform_view<
 			boost::mpl::filter_view<
 				typename Msg::memory_type::types,
@@ -516,7 +516,7 @@ sanguis::client::draw2d::message::dispatcher::configure_new_object(
 			>
 		>
 	>(
-		configure_entity<
+		sanguis::client::draw2d::message::configure_entity<
 			Msg
 		>(
 			*this,

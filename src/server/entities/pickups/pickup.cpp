@@ -14,7 +14,7 @@
 #include <sanguis/server/entities/circle_from_dim.hpp>
 #include <sanguis/server/entities/nonsolid.hpp>
 #include <sanguis/server/entities/with_body.hpp>
-#include <sanguis/server/entities/pickups/optional_dim_fwd.hpp>
+#include <sanguis/server/entities/pickups/optional_dim.hpp>
 #include <sanguis/server/entities/pickups/pickup.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <fcppt/config/external_begin.hpp>

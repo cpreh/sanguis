@@ -23,6 +23,7 @@
 #include <sge/parse/json/start.hpp>
 #include <sge/renderer/dim2.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/no_init.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
@@ -131,6 +132,9 @@ sanguis::load::model::object::object(
 	),
 	random_generator_(
 		_random_generator
+	),
+	cell_size_(
+		fcppt::no_init()
 	),
 	parts_(),
 	random_part_()
