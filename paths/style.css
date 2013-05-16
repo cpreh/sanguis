@@ -1,0 +1,47 @@
+html, body
+{
+	height: 100%;
+}
+
+body
+{
+	padding: 0;
+	margin: 0;
+	background-color: #eee;
+}
+
+#content
+{
+	background-color: #444;
+	padding-top: 1em;
+	margin-left: auto;
+	margin-right: auto;
+	width: 800px;
+	height: 100%;
+
+	border-left: 2px solid black;
+	border-right: 2px solid black;
+}
+
+#canvas
+{
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	border: 1px solid black;
+	/*box-shadow: 5px 5px 25px #888;
+	border-radius: 5px;
+	*/
+}
+
+#console
+{
+	background-color: #222;
+	color: #66d;
+}
+
+#console p
+{
+	margin-bottom: 0px;
+	margin-top: 0px;
+}

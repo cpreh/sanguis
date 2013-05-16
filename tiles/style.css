@@ -1,0 +1,53 @@
+html, body
+{
+	height: 100%;
+}
+
+body
+{
+	padding: 0;
+	margin: 0;
+	background-color: #eee;
+}
+
+#settings
+{
+	background-color: #555;
+	width: 20%;
+	height: 100%;
+	float: left;
+}
+
+#content
+{
+	background-color: #333;
+	width: 80%;
+	height: 100%;
+	float: right;
+}
+
+#canvas
+{
+	margin-top: 2em;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	/*box-shadow: 5px 5px 25px #000;*/
+	border-style: solid;
+	border-width: 2px;
+	border-color: #888;
+	/* border-radius: 5px; */
+	
+}
+
+#console
+{
+	background-color: #222;
+	color: #66d;
+}
+
+#console p
+{
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
