@@ -18,10 +18,10 @@
 #include <sge/projectile/triangulation/triangulate.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <sge/renderer/vertex/declaration_fwd.hpp>
-#include <fcppt/algorithm/array_map.hpp>
 #include <fcppt/container/grid/in_range.hpp>
 #include <fcppt/container/grid/object_impl.hpp>
 #include <fcppt/math/ceil_div.hpp>
+#include <fcppt/math/map.hpp>
 #include <fcppt/math/box/object_impl.hpp>
 #include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/math/dim/fill.hpp>
@@ -58,26 +58,24 @@ sanguis::client::draw2d::scene::world::generate_batches(
 			fcppt::math::dim::structure_cast<
 				sanguis::client::draw2d::scene::world::batch_grid::dim
 			>(
-				sanguis::creator::generator::size(
-					fcppt::algorithm::array_map<
-						sanguis::creator::generator::size::storage_type
-					>(
-						generated.size().storage(),
-						[](
-							sanguis::creator::generator::size::value_type const _value
-						)
-						{
-							return
-								fcppt::math::ceil_div(
-									_value,
-									static_cast<
-										sanguis::creator::generator::size::value_type
-									>(
-										sanguis::client::draw2d::scene::world::batch_size::value
-									)
-								);
-						}
+				fcppt::math::map<
+					sanguis::creator::generator::size
+				>(
+					generated.size(),
+					[](
+						sanguis::creator::generator::size::value_type const _value
 					)
+					{
+						return
+							fcppt::math::ceil_div(
+								_value,
+								static_cast<
+									sanguis::creator::generator::size::value_type
+								>(
+									sanguis::client::draw2d::scene::world::batch_size::value
+								)
+							);
+					}
 				)
 			)
 		)

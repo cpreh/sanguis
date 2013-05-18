@@ -33,10 +33,10 @@
 #include <sge/sprite/state/default_options.hpp>
 #include <sge/sprite/state/object_impl.hpp>
 #include <sge/sprite/state/parameters.hpp>
-#include <fcppt/algorithm/array_map.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/container/grid/object_impl.hpp>
 #include <fcppt/math/ceil_div.hpp>
+#include <fcppt/math/map.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/comparison.hpp>
 #include <fcppt/math/dim/fill.hpp>
@@ -162,38 +162,36 @@ sanguis::client::draw2d::scene::world::state::draw(
 		),
 		upper(
 			sanguis::client::draw2d::scene::world::clamp_pos(
-				sanguis::client::draw2d::scene::world::signed_pos(
-					fcppt::algorithm::array_map<
-						sanguis::client::draw2d::scene::world::signed_pos::storage_type
-					>(
-						(
-							int_translation
-							+
-							fcppt::math::dim::structure_cast<
-								sanguis::client::draw2d::scene::world::signed_pos
-							>(
-								sanguis::client::draw2d::scene::background_dim(
-									renderer_
-								)
+				fcppt::math::map<
+					sanguis::client::draw2d::scene::world::signed_pos
+				>(
+					(
+						int_translation
+						+
+						fcppt::math::dim::structure_cast<
+							sanguis::client::draw2d::scene::world::signed_pos
+						>(
+							sanguis::client::draw2d::scene::background_dim(
+								renderer_
 							)
-						).storage(),
-						[
-							batch_size_trans
-						](
-							sanguis::client::draw2d::scene::world::batch_grid::size_type const _value
 						)
-						{
-							return
-								fcppt::math::ceil_div(
-									_value,
-									static_cast<
-										sanguis::client::draw2d::scene::world::batch_grid::size_type
-									>(
-										batch_size_trans
-									)
-								);
-						}
+					),
+					[
+						batch_size_trans
+					](
+						sanguis::client::draw2d::scene::world::batch_grid::size_type const _value
 					)
+					{
+						return
+							fcppt::math::ceil_div(
+								_value,
+								static_cast<
+									sanguis::client::draw2d::scene::world::batch_grid::size_type
+								>(
+									batch_size_trans
+								)
+							);
+					}
 				),
 				batches_->size()
 			)
