@@ -7,7 +7,7 @@
 #include <sanguis/client/draw2d/scene/world/state_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/buffers.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/state.hpp>
-#include <sanguis/load/resource/textures_fwd.hpp>
+#include <sanguis/load/tiles/context_fwd.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -34,7 +34,7 @@ public:
 
 	state(
 		sge::renderer::device::core &,
-		sanguis::load::resource::textures const &,
+		sanguis::load::tiles::context &,
 		sanguis::client::world_parameters const &
 	);
 

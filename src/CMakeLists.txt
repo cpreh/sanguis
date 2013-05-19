@@ -167,6 +167,8 @@ SET(
 	include/sanguis/client/draw2d/scene/world/sprite/unit.hpp
 	include/sanguis/client/draw2d/scene/world/state.hpp
 	include/sanguis/client/draw2d/scene/world/state_fwd.hpp
+	include/sanguis/client/draw2d/scene/world/tile_is_same.hpp
+	include/sanguis/client/draw2d/scene/world/tile_orientation.hpp
 	include/sanguis/client/draw2d/scene/world/tile_size.hpp
 	include/sanguis/client/draw2d/scene/world/to_tile_texture.hpp
 	include/sanguis/client/draw2d/speed.hpp
@@ -399,6 +401,15 @@ SET(
 	include/sanguis/load/server_context.hpp
 	include/sanguis/load/server_context_fwd.hpp
 	include/sanguis/load/skip_directories.hpp
+	include/sanguis/load/tiles/context.hpp
+	include/sanguis/load/tiles/context_fwd.hpp
+	include/sanguis/load/tiles/direction.hpp
+	include/sanguis/load/tiles/direction_fwd.hpp
+	include/sanguis/load/tiles/orientation.hpp
+	include/sanguis/load/tiles/orientation_fwd.hpp
+	include/sanguis/load/tiles/set.hpp
+	include/sanguis/load/tiles/set_fwd.hpp
+	include/sanguis/load/tiles/to_name.hpp
 	include/sanguis/load/weapon_pickup_name.hpp
 	include/sanguis/log.hpp
 	include/sanguis/log_context.hpp
@@ -1016,6 +1027,8 @@ SET(
 	src/client/draw2d/scene/world/generate_batches.cpp
 	src/client/draw2d/scene/world/object.cpp
 	src/client/draw2d/scene/world/state.cpp
+	src/client/draw2d/scene/world/tile_is_same.cpp
+	src/client/draw2d/scene/world/tile_orientation.cpp
 	src/client/draw2d/scene/world/to_tile_texture.cpp
 	src/client/draw2d/speed_is_null.cpp
 	src/client/draw2d/sprite/client/system.cpp
@@ -1107,6 +1120,9 @@ SET(
 	src/load/resource/textures.cpp
 	src/load/server_context.cpp
 	src/load/skip_directories.cpp
+	src/load/tiles/context.cpp
+	src/load/tiles/set.cpp
+	src/load/tiles/to_name.cpp
 	src/load/weapon_pickup_name.cpp
 	src/log.cpp
 	src/log_context.cpp

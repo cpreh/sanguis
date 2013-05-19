@@ -12,6 +12,9 @@
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/result.hpp>
 #include <sanguis/creator/size.hpp>
+#include <sanguis/creator/tile.hpp>
+#include <sanguis/creator/top_parameters_fwd.hpp>
+#include <sanguis/load/tiles/context_fwd.hpp>
 #include <sge/sprite/compare/default.hpp>
 #include <sge/sprite/geometry/make_random_access_range.hpp>
 #include <sge/sprite/geometry/sort_and_update.hpp>
@@ -31,7 +34,7 @@
 sanguis::client::draw2d::scene::world::batch_grid
 sanguis::client::draw2d::scene::world::generate_batches(
 	sanguis::creator::top_parameters const &_parameters,
-	sanguis::load::resource::textures const &_textures,
+	sanguis::load::tiles::context &_tiles,
 	sanguis::client::draw2d::scene::world::sprite::buffers &_sprite_buffers
 )
 {
@@ -128,6 +131,14 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				upper_bound
 			)
 		)
+		{
+			if(
+				source_element.value()
+				==
+				sanguis::creator::tile::nothing
+			)
+				continue;
+
 			sprites.push_back(
 				sanguis::client::draw2d::scene::world::sprite::object(
 					sanguis::client::draw2d::scene::world::sprite::parameters()
@@ -145,12 +156,14 @@ sanguis::client::draw2d::scene::world::generate_batches(
 					)
 					.texture(
 						sanguis::client::draw2d::scene::world::to_tile_texture(
-							_textures,
-							source_element.value()
+							_tiles,
+							grid,
+							source_element.pos()
 						)
 					)
 				)
 			);
+		}
 
 		result_element.value() =
 			sanguis::client::draw2d::scene::world::batch(
