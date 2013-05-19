@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_MESSAGE_DISPATCHER_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_MESSAGE_DISPATCHER_HPP_INCLUDED
 
+#include <sanguis/entity_id.hpp>
 #include <sanguis/client/draw2d/message/dispatcher_fwd.hpp>
 #include <sanguis/client/draw2d/message/environment_fwd.hpp>
 #include <sanguis/client/draw2d/entities/base_fwd.hpp>
@@ -29,7 +30,6 @@
 #include <sanguis/messages/start_reloading.hpp>
 #include <sanguis/messages/stop_reloading.hpp>
 #include <sanguis/messages/speed.hpp>
-#include <sanguis/entity_id.hpp>
 #include <fcppt/noncopyable.hpp>
 
 

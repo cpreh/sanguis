@@ -4,7 +4,6 @@
 #include <fcppt/no_init.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/container/grid/size_type.hpp>
-#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/math/clamp.hpp>
 
 

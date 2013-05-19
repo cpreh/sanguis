@@ -3,8 +3,9 @@
 
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/world_id.hpp>
-#include <sanguis/creator/generator/top_parameters.hpp>
+#include <sanguis/creator/top_parameters.hpp>
 #include <fcppt/nonassignable.hpp>
+
 
 namespace sanguis
 {
@@ -19,18 +20,18 @@ class world_parameters
 public:
 	world_parameters(
 		sanguis::world_id,
-		sanguis::creator::generator::top_parameters const &
+		sanguis::creator::top_parameters const &
 	);
 
 	sanguis::world_id const
 	world_id() const;
 
-	sanguis::creator::generator::top_parameters const &
+	sanguis::creator::top_parameters const &
 	top_parameters() const;
 private:
 	sanguis::world_id const world_id_;
 
-	sanguis::creator::generator::top_parameters const top_parameters_;
+	sanguis::creator::top_parameters const top_parameters_;
 };
 
 }

@@ -8,10 +8,10 @@
 #include <sanguis/timer.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/weapon_type_fwd.hpp>
-#include <sanguis/creator/generator/name.hpp>
-#include <sanguis/creator/generator/result_fwd.hpp>
-#include <sanguis/creator/generator/seed.hpp>
-#include <sanguis/creator/generator/size.hpp>
+#include <sanguis/creator/name.hpp>
+#include <sanguis/creator/result_fwd.hpp>
+#include <sanguis/creator/seed.hpp>
+#include <sanguis/creator/size.hpp>
 #include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/console_fwd.hpp>
@@ -36,7 +36,7 @@
 #include <sanguis/server/world/sight_range_map.hpp>
 #include <sge/projectile/world_fwd.hpp>
 #include <sge/projectile/body/object_fwd.hpp>
-#include <sge/projectile/body/scoped.hpp>
+#include <sge/projectile/body/scoped_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/container/map_decl.hpp>
@@ -64,7 +64,7 @@ public:
 		sanguis::server::world::context &,
 		sanguis::server::environment::load_context &,
 		sanguis::server::console &,
-		sanguis::creator::generator::result const &
+		sanguis::creator::result const &
 	);
 
 	~object();
@@ -188,11 +188,11 @@ private:
 
 	sanguis::world_id const id_;
 
-	sanguis::creator::generator::seed const seed_;
+	sanguis::creator::seed const seed_;
 
-	sanguis::creator::generator::name const generator_name_;
+	sanguis::creator::name const generator_name_;
 
-	sanguis::creator::generator::size const size_;
+	sanguis::creator::size const size_;
 
 	sanguis::server::world::context &global_context_;
 
@@ -232,7 +232,11 @@ private:
 
 	collision_body_scoped_ptr const static_body_;
 
-	sge::projectile::body::scoped const scoped_static_body_;
+	typedef fcppt::scoped_ptr<
+		sge::projectile::body::scoped
+	> scoped_static_body_ptr;
+
+	scoped_static_body_ptr const scoped_static_body_;
 };
 
 }

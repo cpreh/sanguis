@@ -16,30 +16,31 @@
 #include <boost/mpl/vector/vector10.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 namespace messages
 {
 
-typedef messages::make_class<
+typedef sanguis::messages::make_class<
 	majutsu::composite<
 		boost::mpl::vector5<
-			messages::make_message_id<
-				types::message::change_world
+			sanguis::messages::make_message_id<
+				sanguis::messages::types::message::change_world
 			>::type,
 			majutsu::role<
-				messages::world_id
+				sanguis::messages::world_id
 			>,
 			majutsu::role<
-				messages::seed
+				sanguis::messages::seed
 			>,
 			majutsu::role<
-				messages::string,
-				roles::generator_name
+				sanguis::messages::string,
+				sanguis::messages::roles::generator_name
 			>,
 			majutsu::role<
-				messages::dim2,
-				roles::world_size
+				sanguis::messages::dim2,
+				sanguis::messages::roles::world_size
 			>
 		>
 	>

@@ -3,11 +3,13 @@
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/element_vector.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
-#include <sge/parse/json/get.hpp>
+#include <sge/parse/json/member_map.hpp>
 #include <sge/parse/json/object.hpp>
+#include <sge/parse/json/convert/to_int.hpp>
+#include <sge/renderer/dim2.hpp>
 #include <sge/renderer/size_type.hpp>
-#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/text.hpp>
+
 
 sge::renderer::dim2 const
 sanguis::load::model::load_dim(
@@ -36,23 +38,15 @@ sanguis::load::model::load_dim(
 
 	return
 		sge::renderer::dim2(
-			static_cast<
+			sge::parse::json::convert::to_int<
 				sge::renderer::size_type
 			>(
-				sge::parse::json::get<
-					int
-				>(
-					elements[0]
-				)
+				elements[0]
 			),
-			static_cast<
+			sge::parse::json::convert::to_int<
 				sge::renderer::size_type
 			>(
-				sge::parse::json::get<
-					int
-				>(
-					elements[1]
-				)
+				elements[1]
 			)
 		);
 }

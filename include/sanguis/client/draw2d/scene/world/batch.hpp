@@ -2,10 +2,10 @@
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_BATCH_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/scene/world/batch_fwd.hpp>
-#include <sanguis/client/draw2d/scene/world/texture_slice_vector.hpp>
-#include <sanguis/client/draw2d/scene/world/texture_slice.hpp>
+#include <sanguis/client/draw2d/scene/world/sprite/range.hpp>
+#include <sanguis/client/draw2d/scene/world/sprite/state_fwd.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
-#include <sge/renderer/vertex/buffer_shared_ptr.hpp>
+#include <sge/renderer/vertex/declaration_fwd.hpp>
 
 
 namespace sanguis
@@ -24,22 +24,19 @@ class batch
 public:
 	batch();
 
+	explicit
 	batch(
-		sge::renderer::vertex::buffer_shared_ptr,
-		world::texture_slice_vector const &
+		sanguis::client::draw2d::scene::world::sprite::range const &
 	);
 
 	void
 	draw(
-		sge::renderer::context::core &
-	);
-
-	bool
-	empty() const;
+		sge::renderer::context::core &,
+		sge::renderer::vertex::declaration const &,
+		sanguis::client::draw2d::scene::world::sprite::state &
+	) const;
 private:
-	sge::renderer::vertex::buffer_shared_ptr vertex_buffer_;
-
-	world::texture_slice_vector texture_slices_;
+	sanguis::client::draw2d::scene::world::sprite::range range_;
 };
 
 }

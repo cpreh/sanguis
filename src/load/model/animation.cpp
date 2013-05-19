@@ -15,15 +15,16 @@
 #include <sge/parse/json/const_optional_object_ref.hpp>
 #include <sge/parse/json/find_member.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
-#include <sge/parse/json/get_unsigned.hpp>
+#include <sge/parse/json/int_type.hpp>
 #include <sge/parse/json/member_map.hpp>
 #include <sge/parse/json/object.hpp>
+#include <sge/parse/json/value.hpp>
+#include <sge/parse/json/convert/to_int.hpp>
 #include <sge/texture/const_part_shared_ptr.hpp>
 #include <sge/texture/part.hpp>
 #include <sge/texture/part_raw_ref.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_shared_ptr.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
@@ -96,12 +97,12 @@ load_delay(
 )
 {
 	typedef fcppt::optional<
-		int const &
+		sge::parse::json::int_type
 	> optional_int;
 
-	optional_int const ret(
+	optional_int const opt_value(
 		sge::parse::json::find_member<
-			int
+			sge::parse::json::int_type
 		>(
 			_members,
 			FCPPT_TEXT("delay")
@@ -109,14 +110,14 @@ load_delay(
 	);
 
 	if(
-		ret
+		opt_value
 	)
 		return
 			boost::chrono::duration_cast<
 				sanguis::duration
 			>(
 				boost::chrono::milliseconds(
-					*ret
+					*opt_value
 				)
 			);
 
@@ -194,14 +195,14 @@ load_series(
 
 	sge::renderer::size_type const
 		begin(
-			sge::parse::json::get_unsigned<
+			sge::parse::json::convert::to_int<
 				sge::renderer::size_type
 			>(
 				range[0]
 			)
 		),
 		end(
-			sge::parse::json::get_unsigned<
+			sge::parse::json::convert::to_int<
 				sge::renderer::size_type
 			>(
 				range[1]

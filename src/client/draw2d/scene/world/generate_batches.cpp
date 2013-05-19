@@ -1,214 +1,171 @@
-#include <sanguis/exception.hpp>
-#include <sanguis/client/draw2d/scene/world/generate_batches.hpp>
 #include <sanguis/client/draw2d/scene/world/batch.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
-#include <sanguis/client/draw2d/scene/world/batch_grid_unique_ptr.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_size.hpp>
-#include <sanguis/client/draw2d/scene/world/envelope.hpp>
-#include <sanguis/client/draw2d/scene/world/make_batch.hpp>
-#include <sanguis/client/draw2d/scene/world/triangle_traits/access_element.hpp>
-#include <sanguis/client/draw2d/scene/world/triangle_traits/insert_result.hpp>
-#include <sanguis/client/draw2d/scene/world/triangle_traits/scalar.hpp>
-#include <sanguis/client/draw2d/scene/world/triangle_traits/tag.hpp>
-#include <sanguis/creator/generator/generate.hpp>
-#include <sanguis/creator/generator/result.hpp>
-#include <sanguis/creator/generator/size.hpp>
-#include <sanguis/creator/geometry/rect.hpp>
-#include <sanguis/creator/geometry/shape_container.hpp>
-#include <sge/projectile/triangulation/triangulate.hpp>
-#include <sge/renderer/device/core_fwd.hpp>
-#include <sge/renderer/vertex/declaration_fwd.hpp>
-#include <fcppt/container/grid/in_range.hpp>
-#include <fcppt/container/grid/object_impl.hpp>
+#include <sanguis/client/draw2d/scene/world/generate_batches.hpp>
+#include <sanguis/client/draw2d/scene/world/tile_size.hpp>
+#include <sanguis/client/draw2d/scene/world/to_tile_texture.hpp>
+#include <sanguis/client/draw2d/scene/world/sprite/buffers.hpp>
+#include <sanguis/client/draw2d/scene/world/sprite/object.hpp>
+#include <sanguis/client/draw2d/scene/world/sprite/parameters.hpp>
+#include <sanguis/creator/grid.hpp>
+#include <sanguis/creator/generate.hpp>
+#include <sanguis/creator/pos.hpp>
+#include <sanguis/creator/result.hpp>
+#include <sanguis/creator/size.hpp>
+#include <sge/sprite/compare/default.hpp>
+#include <sge/sprite/geometry/make_random_access_range.hpp>
+#include <sge/sprite/geometry/sort_and_update.hpp>
+#include <fcppt/container/grid/make_pos_range.hpp>
+#include <fcppt/container/grid/make_pos_crange_start_end.hpp>
 #include <fcppt/math/ceil_div.hpp>
 #include <fcppt/math/map.hpp>
-#include <fcppt/math/box/object_impl.hpp>
-#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/math/dim/fill.hpp>
-#include <fcppt/math/dim/output.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/dim.hpp>
-#include <fcppt/format.hpp>
-#include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <iterator>
 #include <utility>
+#include <vector>
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::client::draw2d::scene::world::batch_grid_unique_ptr
+sanguis::client::draw2d::scene::world::batch_grid
 sanguis::client::draw2d::scene::world::generate_batches(
-	sge::renderer::device::core &_renderer,
-	sge::renderer::vertex::declaration const &_vertex_declaration,
-	sanguis::creator::generator::top_parameters const &_parameters,
-	sanguis::load::resource::textures const &_textures
+	sanguis::creator::top_parameters const &_parameters,
+	sanguis::load::resource::textures const &_textures,
+	sanguis::client::draw2d::scene::world::sprite::buffers &_sprite_buffers
 )
 {
-	sanguis::creator::generator::result const generated(
-		sanguis::creator::generator::generate(
+	sanguis::creator::result const generated(
+		sanguis::creator::generate(
 			_parameters
 		)
 	);
 
-	sanguis::client::draw2d::scene::world::batch_grid_unique_ptr ret(
-		fcppt::make_unique_ptr<
-			sanguis::client::draw2d::scene::world::batch_grid
+	sanguis::creator::grid const &grid(
+		generated.grid()
+	);
+
+	sanguis::client::draw2d::scene::world::batch_grid ret(
+		fcppt::math::dim::structure_cast<
+			sanguis::client::draw2d::scene::world::batch_grid::dim
 		>(
-			fcppt::math::dim::structure_cast<
-				sanguis::client::draw2d::scene::world::batch_grid::dim
+			fcppt::math::map<
+				sanguis::creator::size
 			>(
-				fcppt::math::map<
-					sanguis::creator::generator::size
-				>(
-					generated.size(),
-					[](
-						sanguis::creator::generator::size::value_type const _value
-					)
-					{
-						return
-							fcppt::math::ceil_div(
-								_value,
-								static_cast<
-									sanguis::creator::generator::size::value_type
-								>(
-									sanguis::client::draw2d::scene::world::batch_size::value
-								)
-							);
-					}
+				grid.size(),
+				[](
+					sanguis::creator::size::value_type const _value
 				)
+				{
+					return
+						fcppt::math::ceil_div(
+							_value,
+							static_cast<
+								sanguis::creator::size::value_type
+							>(
+								sanguis::client::draw2d::scene::world::batch_size::value
+							)
+						);
+				}
 			)
 		)
 	);
 
-	sanguis::creator::geometry::shape_container const &shapes(
-		generated.shapes()
+	typedef
+	std::vector<
+		sanguis::client::draw2d::scene::world::sprite::object
+	>
+	sprite_vector;
+
+	sprite_vector sprites;
+
+	sanguis::creator::pos const batch_dim(
+		fcppt::math::dim::fill<
+			sanguis::creator::pos::dim_wrapper::value
+		>(
+			sanguis::client::draw2d::scene::world::batch_size::value
+		)
 	);
 
-	typedef fcppt::container::grid::object<
-		sanguis::creator::geometry::shape_container,
-		2
-	> shape_container_grid;
-
-	shape_container_grid temp_grid(
-		ret->size()
+	sprites.reserve(
+		batch_dim.content()
 	);
 
 	for(
-		auto const &shape : shapes
+		auto const &result_element
+		:
+		fcppt::container::grid::make_pos_range(
+			ret
+		)
 	)
 	{
-		sanguis::creator::geometry::rect const envelope(
-			sanguis::client::draw2d::scene::world::envelope(
-				shape.polygon()
-			)
-		);
-
-		sanguis::creator::geometry::rect::dim const batch_dim(
+		sanguis::client::draw2d::scene::world::sprite::object::dim const tile_dim(
 			fcppt::math::dim::fill<
-				sanguis::creator::geometry::rect::dim::dim_wrapper::value
+				sanguis::client::draw2d::scene::world::sprite::object::dim::dim_wrapper::value
 			>(
-				sanguis::client::draw2d::scene::world::batch_size::value
+				sanguis::client::draw2d::scene::world::tile_size::value
 			)
 		);
 
-		sanguis::creator::geometry::vector const
+		sanguis::creator::pos const
 			lower_bound(
-				envelope.pos()
-				/
+				result_element.pos()
+				*
 				batch_dim
 			),
 			upper_bound(
-				(
-					envelope.pos()
-					+ envelope.size()
-				)
-				/ batch_dim
+				lower_bound
+				+
+				batch_dim
 			);
 
-		sanguis::creator::geometry::shape const new_shape(
-			sge::projectile::triangulation::triangulate<
-				sanguis::client::draw2d::scene::world::triangle_traits::tag,
-				sanguis::creator::geometry::polygon
-			>(
-				shape.polygon(),
-				0
-			),
-			shape.solidity(),
-			shape.depth(),
-			shape.texture_name()
-		);
-
-		// TODO: we need better iteration mechanisms for grid!
 		for(
-			sanguis::creator::geometry::vector::value_type pos_y(
-				lower_bound.y()
-			);
-			pos_y <= upper_bound.y();
-			++pos_y
-		)
-			for(
-				sanguis::creator::geometry::vector::value_type pos_x(
-					lower_bound.x()
-				);
-				pos_x <= upper_bound.x();
-				++pos_x
+			auto const &source_element
+			:
+			fcppt::container::grid::make_pos_crange_start_end(
+				grid,
+				lower_bound,
+				upper_bound
 			)
-			{
-				shape_container_grid::dim const pos(
-					pos_x,
-					pos_y
-				);
-
-				if(
-					!fcppt::container::grid::in_range(
-						temp_grid,
-						pos
+		)
+			sprites.push_back(
+				sanguis::client::draw2d::scene::world::sprite::object(
+					sanguis::client::draw2d::scene::world::sprite::parameters()
+					.pos(
+						fcppt::math::dim::structure_cast<
+							sanguis::client::draw2d::scene::world::sprite::object::vector
+						>(
+							source_element.pos()
+						)
+						*
+						tile_dim
+					)
+					.size(
+						tile_dim
+					)
+					.texture(
+						sanguis::client::draw2d::scene::world::to_tile_texture(
+							_textures,
+							source_element.value()
+						)
 					)
 				)
-					throw sanguis::exception(
-						(
-							fcppt::format(
-								FCPPT_TEXT("Tried to insert a shape at position %1%,")
-								FCPPT_TEXT(" but the grid size is only %2%!")
-							)
-							% pos
-							% temp_grid.size()
-						).str()
-					);
-
-				temp_grid[
-					pos
-				].push_back(
-					new_shape
-				);
-			}
-	}
-
-	for(
-		shape_container_grid::const_iterator it(
-			temp_grid.begin()
-		);
-		it != temp_grid.end();
-		++it
-	)
-		*(
-			ret->begin() +
-			std::distance(
-				static_cast<
-					shape_container_grid const &
-				>(
-					temp_grid
-				).begin(),
-				it
-			)
-		) =
-			sanguis::client::draw2d::scene::world::make_batch(
-				_renderer,
-				_vertex_declaration,
-				_textures,
-				*it
 			);
+
+		result_element.value() =
+			sanguis::client::draw2d::scene::world::batch(
+				sge::sprite::geometry::sort_and_update(
+					sge::sprite::geometry::make_random_access_range(
+						sprites.begin(),
+						sprites.end()
+					),
+					sge::sprite::compare::default_(),
+					_sprite_buffers
+				)
+			);
+
+		sprites.clear();
+	}
 
 	return
 		std::move(

@@ -6,7 +6,7 @@
 #include <sanguis/timer.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/weapon_type.hpp>
-#include <sanguis/creator/generator/result.hpp>
+#include <sanguis/creator/result.hpp>
 #include <sanguis/load/model/context.hpp>
 #include <sanguis/load/model/collection.hpp>
 #include <sanguis/load/model/object.hpp>
@@ -24,6 +24,7 @@
 #include <sanguis/messages/stop_attacking.hpp>
 #include <sanguis/messages/stop_reloading.hpp>
 #include <sanguis/messages/max_health.hpp>
+#include <sanguis/messages/types/dim2.hpp>
 #include <sanguis/messages/types/enum.hpp>
 #include <sanguis/messages/types/exp.hpp>
 #include <sanguis/server/center_fwd.hpp>
@@ -60,21 +61,24 @@
 #include <sge/projectile/time_increment.hpp>
 #include <sge/projectile/world.hpp>
 #include <sge/projectile/body/object.hpp>
+#include <sge/projectile/body/scoped.hpp>
 #include <sge/projectile/group/sequence.hpp>
 #include <sge/timer/elapsed_and_reset.hpp>
 #include <sge/timer/reset_when_expired.hpp>
-#include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/container/map_impl.hpp>
+#include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
 #include <functional>
+#include <memory>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -85,7 +89,7 @@ sanguis::server::world::object::object(
 	sanguis::server::world::context &_global_context,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::console &_console,
-	sanguis::creator::generator::result const &_generated_world
+	sanguis::creator::result const &_generated_world
 )
 :
 	id_(
@@ -98,7 +102,7 @@ sanguis::server::world::object::object(
 		_generated_world.name()
 	),
 	size_(
-		_generated_world.size()
+		_generated_world.grid().size()
 	),
 	global_context_(
 		_global_context
@@ -159,23 +163,31 @@ sanguis::server::world::object::object(
 	),
 	static_body_(
 		sanguis::server::world::create_static_body(
-			_generated_world.shapes()
+			_generated_world.grid()
 		)
 	),
 	scoped_static_body_(
-		*collision_world_,
-		*static_body_,
-		sge::projectile::group::sequence()
-		/*
-		fcppt::assign::make_container<
-			sge::projectile::group::sequence
-		>(
-			fcppt::make_ref(
-				collision_groups_.group(
-					sanguis::server::collision::group::obstacle
+		static_body_
+		?
+			fcppt::make_unique_ptr<
+				sge::projectile::body::scoped
+			>(
+				*collision_world_,
+				*static_body_,
+				fcppt::assign::make_container<
+					sge::projectile::group::sequence
+				>(
+					fcppt::make_ref(
+						collision_groups_.group(
+							sanguis::server::collision::group::obstacle
+						)
+					)
 				)
 			)
-		)*/
+		:
+			std::unique_ptr<
+				sge::projectile::body::scoped
+			>()
 	)
 {
 }
@@ -280,7 +292,11 @@ sanguis::server::world::object::insert(
 					sge::charconv::fcppt_string_to_utf8(
 						generator_name_.get()
 					),
-					size_
+					fcppt::math::dim::structure_cast<
+						sanguis::messages::types::dim2
+					>(
+						size_
+					)
 				)
 			)
 		);

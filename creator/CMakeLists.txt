@@ -8,81 +8,55 @@ include_directories(
 
 set(
 	SANGUIS_CREATOR_INCLUDE_FILES
+	include/sanguis/creator/car_park.hpp
+	include/sanguis/creator/deserialize.hpp
 	include/sanguis/creator/exception.hpp
-	include/sanguis/creator/generator/car_park.hpp
-	include/sanguis/creator/generator/deserialize.hpp
-	include/sanguis/creator/generator/generate.hpp
-	include/sanguis/creator/generator/name.hpp
-	include/sanguis/creator/generator/opening.hpp
-	include/sanguis/creator/generator/opening_container.hpp
-	include/sanguis/creator/generator/parameters.hpp
-	include/sanguis/creator/generator/parameters_fwd.hpp
-	include/sanguis/creator/generator/rand_value.hpp
-	include/sanguis/creator/generator/randgen.hpp
-	include/sanguis/creator/generator/randgen_fwd.hpp
-	include/sanguis/creator/generator/result.hpp
-	include/sanguis/creator/generator/result_fwd.hpp
-	include/sanguis/creator/generator/seed.hpp
-	include/sanguis/creator/generator/serialize.hpp
-	include/sanguis/creator/generator/size.hpp
-	include/sanguis/creator/generator/size_fwd.hpp
-	include/sanguis/creator/generator/top_parameters.hpp
-	include/sanguis/creator/generator/top_parameters_fwd.hpp
-	include/sanguis/creator/geometry/depth.hpp
-	include/sanguis/creator/geometry/polygon.hpp
-	include/sanguis/creator/geometry/rect.hpp
-	include/sanguis/creator/geometry/rect_fwd.hpp
-	include/sanguis/creator/geometry/shape.hpp
-	include/sanguis/creator/geometry/shape_container.hpp
-	include/sanguis/creator/geometry/shape_fwd.hpp
-	include/sanguis/creator/geometry/size_type.hpp
-	include/sanguis/creator/geometry/solidity.hpp
-	include/sanguis/creator/geometry/solidity_fwd.hpp
-	include/sanguis/creator/geometry/texture_name.hpp
-	include/sanguis/creator/geometry/texture_point.hpp
-	include/sanguis/creator/geometry/texture_point_fwd.hpp
-	include/sanguis/creator/geometry/texture_unit.hpp
-	include/sanguis/creator/geometry/unit.hpp
-	include/sanguis/creator/geometry/vector.hpp
-	include/sanguis/creator/geometry/vector_fwd.hpp
-	include/sanguis/creator/geometry/vertex.hpp
-	include/sanguis/creator/geometry/vertex_fwd.hpp
+	include/sanguis/creator/generate.hpp
+	include/sanguis/creator/grid.hpp
+	include/sanguis/creator/grid_fwd.hpp
+	include/sanguis/creator/name.hpp
+	include/sanguis/creator/opening.hpp
+	include/sanguis/creator/opening_container.hpp
+	include/sanguis/creator/parameters.hpp
+	include/sanguis/creator/parameters_fwd.hpp
+	include/sanguis/creator/pos.hpp
+	include/sanguis/creator/pos_fwd.hpp
+	include/sanguis/creator/rand_value.hpp
+	include/sanguis/creator/randgen.hpp
+	include/sanguis/creator/randgen_fwd.hpp
+	include/sanguis/creator/result.hpp
+	include/sanguis/creator/result_fwd.hpp
+	include/sanguis/creator/seed.hpp
+	include/sanguis/creator/serialize.hpp
+	include/sanguis/creator/size.hpp
+	include/sanguis/creator/size_fwd.hpp
+	include/sanguis/creator/size_type.hpp
 	include/sanguis/creator/symbol.hpp
+	include/sanguis/creator/tile.hpp
+	include/sanguis/creator/tile_fwd.hpp
+	include/sanguis/creator/top_parameters.hpp
+	include/sanguis/creator/top_parameters_fwd.hpp
 )
 
 SET(
 	SANGUIS_CREATOR_SRC_FILES
-	src/aux/generator/deserialization/polygon.cpp
-	src/aux/generator/deserialization/result.cpp
-	src/aux/generator/deserialization/shape.cpp
-	src/aux/generator/deserialization/shape_container.cpp
-	src/aux/generator/deserialization/vertex.cpp
-	src/aux/generator/serialization/polygon.cpp
-	src/aux/generator/serialization/result.cpp
-	src/aux/generator/serialization/shape.cpp
-	src/aux/generator/serialization/shape_container.cpp
-	src/aux/generator/serialization/vertex.cpp
+	src/aux/deserialization/grid.cpp
+	src/aux/deserialization/result.cpp
+	src/aux/serialization/grid.cpp
+	src/aux/serialization/result.cpp
+	src/car_park.cpp
+	src/deserialize.cpp
 	src/exception.cpp
-	src/generator/car_park.cpp
-	src/generator/deserialize.cpp
-	src/generator/generate.cpp
-	src/generator/parameters.cpp
-	src/generator/randgen.cpp
-	src/generator/result.cpp
-	src/generator/serialize.cpp
-	src/generator/top_parameters.cpp
-	src/geometry/shape.cpp
-	src/geometry/vertex.cpp
-	src/include/sanguis/creator/aux/generator/deserialization/polygon.hpp
-	src/include/sanguis/creator/aux/generator/deserialization/result.hpp
-	src/include/sanguis/creator/aux/generator/deserialization/shape.hpp
-	src/include/sanguis/creator/aux/generator/deserialization/shape_container.hpp
-	src/include/sanguis/creator/aux/generator/deserialization/vertex.hpp
-	src/include/sanguis/creator/aux/generator/serialization/polygon.hpp
-	src/include/sanguis/creator/aux/generator/serialization/result.hpp
-	src/include/sanguis/creator/aux/generator/serialization/shape.hpp
-	src/include/sanguis/creator/aux/generator/serialization/shape_container.hpp
-	src/include/sanguis/creator/aux/generator/serialization/vertex.hpp
+	src/generate.cpp
+	src/include/sanguis/creator/aux/deserialization/grid.hpp
+	src/include/sanguis/creator/aux/deserialization/result.hpp
+	src/include/sanguis/creator/aux/serialization/grid.hpp
+	src/include/sanguis/creator/aux/serialization/result.hpp
+	src/parameters.cpp
+	src/randgen.cpp
+	src/result.cpp
+	src/serialize.cpp
+	src/top_parameters.cpp
 )
 
 set(

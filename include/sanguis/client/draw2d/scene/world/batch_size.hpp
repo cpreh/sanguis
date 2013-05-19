@@ -1,9 +1,9 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_BATCH_SIZE_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_BATCH_SIZE_HPP_INCLUDED
 
-#include <sanguis/creator/geometry/unit.hpp>
+#include <sanguis/creator/size_type.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/integral_c.hpp>
+#include <type_traits>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -18,9 +18,9 @@ namespace scene
 namespace world
 {
 
-typedef boost::mpl::integral_c<
-	sanguis::creator::geometry::unit,
-	1024
+typedef std::integral_constant<
+	sanguis::creator::size_type,
+	16
 > batch_size;
 
 }

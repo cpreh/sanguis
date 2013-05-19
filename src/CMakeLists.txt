@@ -141,37 +141,34 @@ SET(
 	include/sanguis/client/draw2d/scene/world/batch.hpp
 	include/sanguis/client/draw2d/scene/world/batch_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/batch_grid.hpp
-	include/sanguis/client/draw2d/scene/world/batch_grid_unique_ptr.hpp
+	include/sanguis/client/draw2d/scene/world/batch_grid_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/batch_size.hpp
 	include/sanguis/client/draw2d/scene/world/clamp_pos.hpp
-	include/sanguis/client/draw2d/scene/world/envelope.hpp
 	include/sanguis/client/draw2d/scene/world/generate_batches.hpp
-	include/sanguis/client/draw2d/scene/world/make_batch.hpp
 	include/sanguis/client/draw2d/scene/world/object.hpp
 	include/sanguis/client/draw2d/scene/world/object_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/signed_pos.hpp
-	include/sanguis/client/draw2d/scene/world/sort_shapes.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/buffers.hpp
+	include/sanguis/client/draw2d/scene/world/sprite/buffers_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/choices.hpp
+	include/sanguis/client/draw2d/scene/world/sprite/choices_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/object.hpp
+	include/sanguis/client/draw2d/scene/world/sprite/object_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/parameters.hpp
+	include/sanguis/client/draw2d/scene/world/sprite/parameters_fwd.hpp
+	include/sanguis/client/draw2d/scene/world/sprite/range.hpp
+	include/sanguis/client/draw2d/scene/world/sprite/range_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/state.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/state_choices.hpp
+	include/sanguis/client/draw2d/scene/world/sprite/state_choices_fwd.hpp
+	include/sanguis/client/draw2d/scene/world/sprite/state_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/type_choices.hpp
+	include/sanguis/client/draw2d/scene/world/sprite/type_choices_fwd.hpp
+	include/sanguis/client/draw2d/scene/world/sprite/unit.hpp
 	include/sanguis/client/draw2d/scene/world/state.hpp
 	include/sanguis/client/draw2d/scene/world/state_fwd.hpp
-	include/sanguis/client/draw2d/scene/world/texture_slice.hpp
-	include/sanguis/client/draw2d/scene/world/texture_slice_fwd.hpp
-	include/sanguis/client/draw2d/scene/world/texture_slice_vector.hpp
-	include/sanguis/client/draw2d/scene/world/triangle_traits/access_element.hpp
-	include/sanguis/client/draw2d/scene/world/triangle_traits/insert_result.hpp
-	include/sanguis/client/draw2d/scene/world/triangle_traits/scalar.hpp
-	include/sanguis/client/draw2d/scene/world/triangle_traits/tag.hpp
-	include/sanguis/client/draw2d/scene/world/vf/format.hpp
-	include/sanguis/client/draw2d/scene/world/vf/format_part.hpp
-	include/sanguis/client/draw2d/scene/world/vf/pos.hpp
-	include/sanguis/client/draw2d/scene/world/vf/scalar.hpp
-	include/sanguis/client/draw2d/scene/world/vf/texpos.hpp
+	include/sanguis/client/draw2d/scene/world/tile_size.hpp
+	include/sanguis/client/draw2d/scene/world/to_tile_texture.hpp
 	include/sanguis/client/draw2d/speed.hpp
 	include/sanguis/client/draw2d/speed_fwd.hpp
 	include/sanguis/client/draw2d/speed_is_null.hpp
@@ -930,10 +927,6 @@ SET(
 	include/sanguis/server/world/sight_range_entry_set.hpp
 	include/sanguis/server/world/sight_range_fwd.hpp
 	include/sanguis/server/world/sight_range_map.hpp
-	include/sanguis/server/world/triangle_traits/access_element.hpp
-	include/sanguis/server/world/triangle_traits/insert_result.hpp
-	include/sanguis/server/world/triangle_traits/scalar.hpp
-	include/sanguis/server/world/triangle_traits/tag.hpp
 	include/sanguis/string_vector.hpp
 	include/sanguis/time_unit.hpp
 	include/sanguis/timer.hpp
@@ -1020,13 +1013,10 @@ SET(
 	src/client/draw2d/scene/screen_center.cpp
 	src/client/draw2d/scene/world/batch.cpp
 	src/client/draw2d/scene/world/clamp_pos.cpp
-	src/client/draw2d/scene/world/envelope.cpp
 	src/client/draw2d/scene/world/generate_batches.cpp
-	src/client/draw2d/scene/world/make_batch.cpp
 	src/client/draw2d/scene/world/object.cpp
-	src/client/draw2d/scene/world/sort_shapes.cpp
 	src/client/draw2d/scene/world/state.cpp
-	src/client/draw2d/scene/world/texture_slice.cpp
+	src/client/draw2d/scene/world/to_tile_texture.cpp
 	src/client/draw2d/speed_is_null.cpp
 	src/client/draw2d/sprite/client/system.cpp
 	src/client/draw2d/sprite/colored/system.cpp

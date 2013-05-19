@@ -4,14 +4,14 @@
 
 #include <sanguis/config_app_name.hpp>
 #include <sanguis/exception.hpp>
-#include <sanguis/creator/generator/deserialize.hpp>
-#include <sanguis/creator/generator/generate.hpp>
-#include <sanguis/creator/generator/name.hpp>
-#include <sanguis/creator/generator/result.hpp>
-#include <sanguis/creator/generator/seed.hpp>
-#include <sanguis/creator/generator/serialize.hpp>
-#include <sanguis/creator/generator/top_parameters.hpp>
-#include <sanguis/creator/generator/size.hpp>
+#include <sanguis/creator/deserialize.hpp>
+#include <sanguis/creator/generate.hpp>
+#include <sanguis/creator/name.hpp>
+#include <sanguis/creator/result.hpp>
+#include <sanguis/creator/seed.hpp>
+#include <sanguis/creator/serialize.hpp>
+#include <sanguis/creator/top_parameters.hpp>
+#include <sanguis/creator/size.hpp>
 #include <sge/config/cache_path.hpp>
 #include <fcppt/filesystem/create_directories_recursive_exn.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
@@ -29,9 +29,9 @@ sanguis::server::world::object_unique_ptr
 sanguis::server::world::random(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
-	world::context &_ctx,
-	server::environment::load_context &_load_context,
-	server::console &_console
+	sanguis::server::world::context &_ctx,
+	sanguis::server::environment::load_context &_load_context,
+	sanguis::server::console &_console
 )
 {
 	// TODO: move this out of here!
@@ -68,17 +68,17 @@ sanguis::server::world::random(
 			world_path
 		);
 
-		sanguis::creator::generator::serialize(
+		sanguis::creator::serialize(
 			stream,
-			sanguis::creator::generator::generate(
-				sanguis::creator::generator::top_parameters(
-					sanguis::creator::generator::name(
+			sanguis::creator::generate(
+				sanguis::creator::top_parameters(
+					sanguis::creator::name(
 						FCPPT_TEXT("car_park")
 					),
-					sanguis::creator::generator::seed(
+					sanguis::creator::seed(
 						0u
 					),
-					sanguis::creator::generator::size(
+					sanguis::creator::size(
 						4000u,
 						4000u
 					)
@@ -115,7 +115,7 @@ sanguis::server::world::random(
 			_ctx,
 			_load_context,
 			_console,
-			sanguis::creator::generator::deserialize(
+			sanguis::creator::deserialize(
 				stream
 			)
 		);

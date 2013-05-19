@@ -5,6 +5,7 @@
 #include <sanguis/messages/size.hpp>
 #include <alda/bindings/static.hpp>
 
+
 namespace sanguis
 {
 namespace messages
