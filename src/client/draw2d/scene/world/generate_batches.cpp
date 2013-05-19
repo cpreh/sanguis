@@ -1,6 +1,7 @@
 #include <sanguis/client/draw2d/scene/world/batch.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_size.hpp>
+#include <sanguis/client/draw2d/scene/world/clamp_size.hpp>
 #include <sanguis/client/draw2d/scene/world/generate_batches.hpp>
 #include <sanguis/client/draw2d/scene/world/tile_size.hpp>
 #include <sanguis/client/draw2d/scene/world/to_tile_texture.hpp>
@@ -112,14 +113,20 @@ sanguis::client::draw2d::scene::world::generate_batches(
 
 		sanguis::creator::pos const
 			lower_bound(
-				result_element.pos()
-				*
-				batch_dim
+				sanguis::client::draw2d::scene::world::clamp_size(
+					result_element.pos()
+					*
+					batch_dim,
+					grid.size()
+				)
 			),
 			upper_bound(
-				lower_bound
-				+
-				batch_dim
+				sanguis::client::draw2d::scene::world::clamp_size(
+					lower_bound
+					+
+					batch_dim,
+					grid.size()
+				)
 			);
 
 		for(

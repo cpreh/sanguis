@@ -32,8 +32,8 @@ sanguis::creator::car_park(
 {
 	sanguis::creator::grid ret(
 		sanguis::creator::grid::dim(
-			64,
-			64
+			80,
+			80
 		),
 		sanguis::creator::tile::nothing
 	);

@@ -18,8 +18,8 @@ namespace world
 
 sanguis::client::draw2d::scene::world::batch_grid::dim const
 clamp_pos(
-	sanguis::client::draw2d::scene::world::signed_pos const &pos,
-	sanguis::client::draw2d::scene::world::batch_grid::dim const &size
+	sanguis::client::draw2d::scene::world::signed_pos const &,
+	sanguis::client::draw2d::scene::world::batch_grid::dim const &
 );
 
 }

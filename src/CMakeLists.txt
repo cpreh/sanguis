@@ -144,6 +144,7 @@ SET(
 	include/sanguis/client/draw2d/scene/world/batch_grid_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/batch_size.hpp
 	include/sanguis/client/draw2d/scene/world/clamp_pos.hpp
+	include/sanguis/client/draw2d/scene/world/clamp_size.hpp
 	include/sanguis/client/draw2d/scene/world/generate_batches.hpp
 	include/sanguis/client/draw2d/scene/world/object.hpp
 	include/sanguis/client/draw2d/scene/world/object_fwd.hpp
@@ -1024,6 +1025,7 @@ SET(
 	src/client/draw2d/scene/screen_center.cpp
 	src/client/draw2d/scene/world/batch.cpp
 	src/client/draw2d/scene/world/clamp_pos.cpp
+	src/client/draw2d/scene/world/clamp_size.cpp
 	src/client/draw2d/scene/world/generate_batches.cpp
 	src/client/draw2d/scene/world/object.cpp
 	src/client/draw2d/scene/world/state.cpp
