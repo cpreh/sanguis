@@ -5,6 +5,7 @@
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/property/value.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -20,10 +21,10 @@ template<
 void
 change_simple(
 	ChangeFunction const &_change_function,
-	entities::base &_entity,
+	sanguis::server::entities::base &_entity,
 	ElemFunction const &_elem_function,
-	entities::property::value const _factor,
-	level_diff const _diff
+	sanguis::server::entities::property::value const _factor,
+	sanguis::server::perks::level_diff const _diff
 )
 {
 	_change_function(
@@ -38,7 +39,7 @@ change_simple(
 		_factor
 		*
 		static_cast<
-			entities::property::value
+			sanguis::server::entities::property::value
 		>(
 			_diff.get()
 		)

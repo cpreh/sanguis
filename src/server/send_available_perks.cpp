@@ -1,15 +1,17 @@
-#include <sanguis/server/send_available_perks.hpp>
-#include <sanguis/server/entities/player.hpp>
-#include <sanguis/server/perks/tree/status.hpp>
 #include <sanguis/messages/available_perks.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/enum.hpp>
 #include <sanguis/messages/perk_tree_node.hpp>
 #include <sanguis/messages/perk_tree_node_list.hpp>
+#include <sanguis/messages/types/enum.hpp>
 #include <sanguis/messages/types/enum_vector.hpp>
-#include <fcppt/container/raw_vector_impl.hpp>
+#include <sanguis/server/send_available_perks.hpp>
+#include <sanguis/server/unicast_callback.hpp>
+#include <sanguis/server/entities/player.hpp>
+#include <sanguis/server/perks/tree/object.hpp>
+#include <sanguis/server/perks/tree/status.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
-#include <fcppt/container/tree/object_impl.hpp>
+
 
 namespace
 {
@@ -23,41 +25,37 @@ make_children(
 
 void
 sanguis::server::send_available_perks(
-	entities::player const &_player,
-	server::unicast_callback const &_send
+	sanguis::server::entities::player const &_player,
+	sanguis::server::unicast_callback const &_send
 )
 {
-	perks::tree::object const &tree(
+	sanguis::server::perks::tree::object const &tree(
 		_player.perk_tree()
 	);
 
 	typedef
 	fcppt::container::tree::pre_order<
-		perks::tree::object const
+		sanguis::server::perks::tree::object const
 	> traversal;
 
 	traversal trav(
 		tree
 	);
 
-	messages::perk_tree_node_list nodes;
+	sanguis::messages::perk_tree_node_list nodes;
 
 	for(
-		traversal::iterator it(
-			trav.begin()
-		);
-		it != trav.end();
-		++it
+		auto const &element : trav
 	)
 	{
-		perks::tree::status const &info(
-			it->value()
+		sanguis::server::perks::tree::status const &info(
+			element.value()
 		);
 
 		nodes.push_back(
-			messages::perk_tree_node(
+			sanguis::messages::perk_tree_node(
 				static_cast<
-					messages::types::enum_
+					sanguis::messages::types::enum_
 				>(
 					info.type()
 				),
@@ -65,7 +63,7 @@ sanguis::server::send_available_perks(
 				info.required_parent_level().get(),
 				info.max_level().get(),
 				::make_children(
-					*it
+					element
 				)
 			)
 		);
@@ -73,8 +71,8 @@ sanguis::server::send_available_perks(
 
 	_send(
 		_player.player_id(),
-		*messages::create(
-			messages::available_perks(
+		*sanguis::messages::create(
+			sanguis::messages::available_perks(
 				_player.id(),
 				nodes
 			)
@@ -93,17 +91,13 @@ make_children(
 	sanguis::messages::types::enum_vector ret;
 
 	for(
-		sanguis::server::perks::tree::object::const_iterator it(
-			_node.begin()
-		);
-		it != _node.end();
-		++it
+		auto const element : _node
 	)
 		ret.push_back(
 			static_cast<
 				sanguis::messages::types::enum_
 			>(
-				it->value().type()
+				element.value().type()
 			)
 		);
 

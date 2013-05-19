@@ -1,12 +1,16 @@
-#include <sanguis/server/perks/ias.hpp>
-#include <sanguis/server/perks/change_simple.hpp>
-#include <sanguis/server/entities/property/linear_change.hpp>
+#include <sanguis/perk_type.hpp>
+#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
+#include <sanguis/server/entities/property/linear_change.hpp>
+#include <sanguis/server/perks/change_simple.hpp>
+#include <sanguis/server/perks/ias.hpp>
+#include <sanguis/server/perks/level_diff.hpp>
+
 
 sanguis::server::perks::ias::ias()
 :
-	perk(
-		perk_type::ias
+	sanguis::server::perks::perk(
+		sanguis::perk_type::ias
 	)
 {
 }
@@ -17,16 +21,16 @@ sanguis::server::perks::ias::~ias()
 
 void
 sanguis::server::perks::ias::change(
-	entities::base &_entity,
-	level_diff const _diff
+	sanguis::server::entities::base &_entity,
+	sanguis::server::perks::level_diff const _diff
 )
 {
-	perks::change_simple<
-		entities::with_weapon
+	sanguis::server::perks::change_simple<
+		sanguis::server::entities::with_weapon
 	>(
-		&entities::property::linear_change,
+		&sanguis::server::entities::property::linear_change,
 		_entity,
-		&entities::with_weapon::attack_speed,
+		&sanguis::server::entities::with_weapon::attack_speed,
 		0.2f,
 		_diff
 	);

@@ -77,7 +77,7 @@ public:
 
 	void
 	add_perk(
-		sanguis::server::perks::unique_ptr
+		sanguis::server::perks::unique_ptr &&
 	);
 
 	sanguis::server::perks::tree::object const &

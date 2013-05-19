@@ -46,6 +46,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -209,16 +210,16 @@ sanguis::server::entities::player::perk_choosable(
 
 void
 sanguis::server::entities::player::add_perk(
-	perks::unique_ptr _ptr
+	sanguis::server::perks::unique_ptr &&_ptr
 )
 {
-	perks::tree::choose(
+	sanguis::server::perks::tree::choose(
 		*perk_tree_,
 		_ptr->type()
 	);
 
-	with_perks::add_perk(
-		move(
+	sanguis::server::entities::with_perks::add_perk(
+		std::move(
 			_ptr
 		)
 	);

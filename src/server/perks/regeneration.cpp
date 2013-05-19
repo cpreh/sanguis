@@ -1,12 +1,16 @@
-#include <sanguis/server/perks/regeneration.hpp>
-#include <sanguis/server/perks/change_simple.hpp>
-#include <sanguis/server/entities/property/constant_change.hpp>
+#include <sanguis/perk_type.hpp>
+#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_health.hpp>
+#include <sanguis/server/entities/property/constant_change.hpp>
+#include <sanguis/server/perks/change_simple.hpp>
+#include <sanguis/server/perks/level_diff.hpp>
+#include <sanguis/server/perks/regeneration.hpp>
+
 
 sanguis::server::perks::regeneration::regeneration()
 :
 	perk(
-		perk_type::regeneration
+		sanguis::perk_type::regeneration
 	)
 {
 }
@@ -17,16 +21,16 @@ sanguis::server::perks::regeneration::~regeneration()
 
 void
 sanguis::server::perks::regeneration::change(
-	entities::base &_entity,
-	level_diff const _diff
+	sanguis::server::entities::base &_entity,
+	sanguis::server::perks::level_diff const _diff
 )
 {
-	perks::change_simple<
-		entities::with_health
+	sanguis::server::perks::change_simple<
+		sanguis::server::entities::with_health
 	>(
-		&entities::property::constant_change,
+		&sanguis::server::entities::property::constant_change,
 		_entity,
-		&entities::with_health::regeneration,
+		&sanguis::server::entities::with_health::regeneration,
 		0.75f,
 		_diff
 	);

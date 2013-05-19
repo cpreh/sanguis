@@ -1,10 +1,11 @@
 #ifndef SANGUIS_SERVER_PERKS_IAS_HPP_INCLUDED
 #define SANGUIS_SERVER_PERKS_IAS_HPP_INCLUDED
 
-#include <sanguis/server/perks/perk.hpp>
-#include <sanguis/server/perks/level_diff.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
+#include <sanguis/server/perks/level_diff.hpp>
+#include <sanguis/server/perks/perk.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -15,7 +16,7 @@ namespace perks
 
 class ias
 :
-	public perk
+	public sanguis::server::perks::perk
 {
 	FCPPT_NONCOPYABLE(
 		ias
@@ -27,8 +28,8 @@ public:
 private:
 	void
 	change(
-		entities::base &,
-		level_diff
+		sanguis::server::entities::base &,
+		sanguis::server::perks::level_diff
 	);
 };
 
