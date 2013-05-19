@@ -30,15 +30,41 @@ sanguis::creator::car_park(
 	sanguis::creator::parameters const &_parameters
 )
 {
+	sanguis::creator::grid ret(
+		sanguis::creator::grid::dim(
+			64,
+			64
+		),
+		sanguis::creator::tile::nothing
+	);
+
+	ret[
+		sanguis::creator::grid::dim(
+			2,
+			2
+		)
+	] =
+		sanguis::creator::tile::concrete_wall;
+
+	ret[
+		sanguis::creator::grid::dim(
+			2,
+			3
+		)
+	] =
+		sanguis::creator::tile::concrete_wall;
+
+	ret[
+		sanguis::creator::grid::dim(
+			4,
+			4
+		)
+	] =
+		sanguis::creator::tile::concrete_wall;
+
 	return
 		sanguis::creator::result(
-			sanguis::creator::grid(
-				sanguis::creator::grid::dim(
-					64,
-					64
-				),
-				sanguis::creator::tile::nothing
-			),
+			ret,
 			sanguis::creator::seed(
 				0u
 			),

@@ -6,6 +6,7 @@
 #include <sanguis/client/draw2d/scene/world/object_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/state_fwd.hpp>
 #include <sanguis/load/resource/textures_fwd.hpp>
+#include <sanguis/load/tiles/context.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -49,13 +50,14 @@ public:
 private:
 	sge::renderer::device::core &renderer_;
 
-	sanguis::load::resource::textures const &textures_;
+	sanguis::load::tiles::context tiles_context_;
 
 	typedef fcppt::scoped_ptr<
 		sanguis::client::draw2d::scene::world::state
 	> state_scoped_ptr;
 
 	state_scoped_ptr state_;
+
 };
 
 }

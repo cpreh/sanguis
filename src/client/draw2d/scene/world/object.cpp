@@ -16,7 +16,7 @@ sanguis::client::draw2d::scene::world::object::object(
 	renderer_(
 		_renderer
 	),
-	textures_(
+	tiles_context_(
 		_textures
 	),
 	state_()
@@ -52,7 +52,7 @@ sanguis::client::draw2d::scene::world::object::change(
 			sanguis::client::draw2d::scene::world::state
 		>(
 			renderer_,
-			textures_,
+			tiles_context_,
 			_param
 		)
 	);

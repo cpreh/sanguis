@@ -9,7 +9,7 @@
 #include <sanguis/client/draw2d/scene/world/signed_pos.hpp>
 #include <sanguis/client/draw2d/scene/world/state.hpp>
 #include <sanguis/client/draw2d/scene/world/tile_size.hpp>
-#include <sanguis/load/resource/textures_fwd.hpp>
+#include <sanguis/load/tiles/context_fwd.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <sge/renderer/vertex/scoped_declaration.hpp>
@@ -34,7 +34,7 @@
 
 sanguis::client::draw2d::scene::world::state::state(
 	sge::renderer::device::core &_renderer,
-	sanguis::load::resource::textures const &_textures,
+	sanguis::load::tiles::context &_tiles,
 	sanguis::client::world_parameters const &_parameters
 )
 :
@@ -52,7 +52,7 @@ sanguis::client::draw2d::scene::world::state::state(
 	batches_(
 		sanguis::client::draw2d::scene::world::generate_batches(
 			_parameters.top_parameters(),
-			_textures,
+			_tiles,
 			sprite_buffers_
 		)
 	)

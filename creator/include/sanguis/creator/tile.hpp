@@ -12,8 +12,9 @@ namespace creator
 enum class tile
 {
 	nothing,
-	wall,
-	fcppt_maximum = wall
+	concrete_wall,
+	concrete_wall_broken,
+	fcppt_maximum = concrete_wall_broken
 };
 
 }
