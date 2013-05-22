@@ -4,9 +4,8 @@
 #include <sanguis/messages/enum.hpp>
 #include <sanguis/messages/level.hpp>
 #include <sanguis/messages/make_class.hpp>
-#include <sanguis/messages/perk_list.hpp>
 #include <sanguis/messages/roles/max_perk_level.hpp>
-#include <sanguis/messages/roles/perk_children.hpp>
+#include <sanguis/messages/roles/perk_parent.hpp>
 #include <sanguis/messages/roles/perk_label.hpp>
 #include <sanguis/messages/roles/required_perk_parent_level.hpp>
 #include <sanguis/messages/roles/required_perk_player_level.hpp>
@@ -16,33 +15,34 @@
 #include <boost/mpl/vector/vector10.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 namespace messages
 {
 
-typedef messages::make_class<
+typedef sanguis::messages::make_class<
 	majutsu::composite<
 		boost::mpl::vector5<
 			majutsu::role<
-				messages::enum_,
-				roles::perk_label
+				sanguis::messages::enum_,
+				sanguis::messages::roles::perk_label
 			>,
 			majutsu::role<
-				messages::level,
-				roles::required_perk_player_level
+				sanguis::messages::level,
+				sanguis::messages::roles::required_perk_player_level
 			>,
 			majutsu::role<
-				messages::level,
-				roles::required_perk_parent_level
+				sanguis::messages::level,
+				sanguis::messages::roles::required_perk_parent_level
 			>,
 			majutsu::role<
-				messages::level,
-				roles::max_perk_level
+				sanguis::messages::level,
+				sanguis::messages::roles::max_perk_level
 			>,
 			majutsu::role<
-				messages::perk_list,
-				roles::perk_children
+				sanguis::messages::enum_,
+				sanguis::messages::roles::perk_parent
 			>
 		>
 	>

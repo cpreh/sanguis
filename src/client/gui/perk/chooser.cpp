@@ -1,29 +1,30 @@
+#include <sanguis/duration.hpp>
+#include <sanguis/media_path.hpp>
+#include <sanguis/perk_type.hpp>
+#include <sanguis/client/player_level.hpp>
+#include <sanguis/client/gui/object.hpp>
 #include <sanguis/client/gui/perk/chooser.hpp>
 #include <sanguis/client/gui/perk/item_color.hpp>
 #include <sanguis/client/gui/perk/item.hpp>
 #include <sanguis/client/gui/perk/item_tree.hpp>
 #include <sanguis/client/gui/perk/item_user_data.hpp>
-#include <sanguis/client/gui/object.hpp>
+#include <sanguis/client/gui/perk/node.hpp>
 #include <sanguis/client/perk/choosable_state.hpp>
 #include <sanguis/client/perk/find_info.hpp>
 #include <sanguis/client/perk/info.hpp>
 #include <sanguis/client/perk/state.hpp>
 #include <sanguis/client/perk/to_string.hpp>
-#include <sanguis/media_path.hpp>
-#include <sanguis/perk_type.hpp>
 #include <sge/cegui/to_cegui_color.hpp>
 #include <sge/cegui/to_cegui_string.hpp>
 #include <sge/image/color/any/object.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <fcppt/algorithm/find_if_exn.hpp>
-#include <fcppt/container/ptr/push_back_unique_ptr.hpp>
-#include <fcppt/container/tree/object_impl.hpp>
-#include <fcppt/container/tree/pre_order.hpp>
-#include <fcppt/variant/object_impl.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/algorithm/find_if_exn.hpp>
+#include <fcppt/container/ptr/push_back_unique_ptr.hpp>
+#include <fcppt/container/tree/pre_order.hpp>
+#include <fcppt/variant/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <CEGUI/widgets/PushButton.h>
 #include <CEGUI/widgets/Tree.h>
@@ -33,8 +34,8 @@
 
 
 sanguis::client::gui::perk::chooser::chooser(
-	gui::object &_gui,
-	client::perk::state &_state
+	sanguis::client::gui::object &_gui,
+	sanguis::client::perk::state &_state
 )
 :
 	gui_(
@@ -47,7 +48,7 @@ sanguis::client::gui::perk::chooser::chooser(
 	perk_connection_(
 		_state.register_perks_change(
 			std::bind(
-				&gui::perk::chooser::perks,
+				&sanguis::client::gui::perk::chooser::perks,
 				this,
 				std::placeholders::_1
 			)
@@ -56,7 +57,7 @@ sanguis::client::gui::perk::chooser::chooser(
 	level_connection_(
 		_state.register_level_change(
 			std::bind(
-				&gui::perk::chooser::level,
+				&sanguis::client::gui::perk::chooser::level,
 				this,
 				std::placeholders::_1
 			)
@@ -101,7 +102,7 @@ sanguis::client::gui::perk::chooser::chooser(
 			CEGUI::Tree::EventSelectionChanged,
 			CEGUI::Event::Subscriber(
 				std::bind(
-					&chooser::handle_selection_changed,
+					&sanguis::client::gui::perk::chooser::handle_selection_changed,
 					this,
 					std::placeholders::_1
 				)
@@ -113,7 +114,7 @@ sanguis::client::gui::perk::chooser::chooser(
 			CEGUI::PushButton::EventClicked,
 			CEGUI::Event::Subscriber(
 				std::bind(
-					&chooser::handle_perk_choose,
+					&sanguis::client::gui::perk::chooser::handle_perk_choose,
 					this,
 					std::placeholders::_1
 				)
@@ -161,7 +162,7 @@ sanguis::client::gui::perk::chooser::draw(
 
 void
 sanguis::client::gui::perk::chooser::perks(
-	client::perk::tree const &_perks
+	sanguis::client::perk::tree const &_perks
 )
 {
 	items_.clear();
@@ -170,78 +171,76 @@ sanguis::client::gui::perk::chooser::perks(
 		client::perk::tree const
 	> perk_traversal;
 
-	perk_traversal perk_trav(
-		_perks
-	);
-
 	for(
-		perk_traversal::iterator it(
-			perk_trav.begin()
-		);
-		it != perk_trav.end();
-		++it
+		auto const &element
+		:
+		perk_traversal(
+			_perks
+		)
 	)
 	{
-		typedef fcppt::container::tree::pre_order<
-			gui::perk::item_tree
-		> item_traversal;
-
 		// root node, skip it
 		if(
-			!it->has_parent()
+			!element.has_parent()
 		)
 			continue;
 
-		item_traversal item_trav(
-			items_
-		);
-
-		sanguis::perk_type const cur_type(
-			it->parent()->value().type()
-		);
-
-		item_traversal::iterator const item_it(
-			std::find_if(
-				item_trav.begin(),
-				item_trav.end(),
-				[
-					cur_type
-				](
-					sanguis::client::gui::perk::item_tree const &_tree
-				)
-				{
-					return
-						_tree.value()
-						&&
-						_tree.value()->perk_type() == cur_type;
-				}
-			)
-		);
-
 		if(
-			item_it == item_trav.end()
+			element.parent()->value().has_value()
 		)
-			items_.push_back(
-				fcppt::make_unique_ptr<
-					gui::perk::item
-				>(
-					gui::perk::node(
-						&tree_widget_
-					),
-					gui_,
-					it->value()
+		{
+			sanguis::perk_type const cur_type(
+				element.parent()->value()->type()
+			);
+
+			typedef fcppt::container::tree::pre_order<
+				sanguis::client::gui::perk::item_tree
+			> item_traversal;
+
+			item_traversal item_trav(
+				items_
+			);
+
+			item_traversal::iterator const item_it(
+				fcppt::algorithm::find_if_exn(
+					item_trav.begin(),
+					item_trav.end(),
+					[
+						cur_type
+					](
+						sanguis::client::gui::perk::item_tree const &_tree
+					)
+					{
+						return
+							_tree.value()
+							&&
+							_tree.value()->perk_type() == cur_type;
+					}
 				)
 			);
-		else
+
 			item_it->push_back(
 				fcppt::make_unique_ptr<
-					gui::perk::item
+					sanguis::client::gui::perk::item
 				>(
-					gui::perk::node(
+					sanguis::client::gui::perk::node(
 						&item_it->value()->widget()
 					),
 					gui_,
-					it->value()
+					*element.value()
+				)
+			);
+		}
+		else
+			items_.push_back(
+				fcppt::make_unique_ptr<
+					sanguis::client::gui::perk::item
+				>(
+					sanguis::client::gui::perk::node(
+						&tree_widget_
+					),
+					gui_,
+					*element.value()
 				)
 			);
 	}
@@ -251,7 +250,7 @@ sanguis::client::gui::perk::chooser::perks(
 
 void
 sanguis::client::gui::perk::chooser::level(
-	client::player_level
+	sanguis::client::player_level
 )
 {
 	this->update_top_text();
@@ -282,8 +281,8 @@ sanguis::client::gui::perk::chooser::update_bottom_text(
 	sanguis::perk_type const _perk_type
 )
 {
-	client::perk::info const &info(
-		client::perk::find_info(
+	sanguis::client::perk::info const &info(
+		*sanguis::client::perk::find_info(
 			_perk_type,
 			state_.perks()
 		).value()
@@ -293,7 +292,7 @@ sanguis::client::gui::perk::chooser::update_bottom_text(
 		sge::cegui::to_cegui_string(
 			FCPPT_TEXT('(')
 			+
-			client::perk::to_string(
+			sanguis::client::perk::to_string(
 				_perk_type
 			)
 			+
@@ -318,36 +317,32 @@ void
 sanguis::client::gui::perk::chooser::update_tree_data()
 {
 	typedef fcppt::container::tree::pre_order<
-		gui::perk::item_tree
+		sanguis::client::gui::perk::item_tree
 	> traversal;
 
-	traversal trav(
-		items_
-	);
-
 	for(
-		traversal::iterator it(
-			trav.begin()
-		);
-		it != trav.end();
-		++it
+		auto const &element
+		:
+		traversal(
+			items_
+		)
 	)
 	{
 		// skip the tree itself
 		if(
-			!it->has_parent()
+			!element.has_parent()
 		)
 			continue;
 
 		CEGUI::TreeItem &widget(
-			it->value()->widget()
+			element.value()->widget()
 		);
 
 		widget.setTextColours(
 			sge::cegui::to_cegui_color(
-				gui::perk::item_color(
+				sanguis::client::gui::perk::item_color(
 					state_.choosable(
-						it->value()->perk_type()
+						element.value()->perk_type()
 					)
 				)
 			)
@@ -449,54 +444,3 @@ sanguis::client::gui::perk::chooser::handle_perk_choose(
 
 	return true;
 }
-
-#if 0
-sanguis::client::perk_chooser::image_map::const_iterator const
-	sanguis::client::perk_chooser::load_from_cache(
-		perk_type::type const r)
-{
-	fcppt::filesystem::path const p =
-		media_path()/
-		FCPPT_TEXT("menu")/
-		FCPPT_TEXT("buttons")/
-		FCPPT_TEXT("perks");
-
-	fcppt::filesystem::path const base =
-		p/from_perk_type(r);
-
-	image_map::const_iterator pi =
-		images_.find(
-			r
-		);
-
-	if (pi != images_.end())
-		return pi;
-
-	perk_image new_image;
-
-	new_image.normal =
-		sge::gui::make_image(
-			image_loader_.load(
-				base/
-				FCPPT_TEXT("normal.png")
-			)
-		);
-
-	new_image.hover =
-		sge::gui::make_image(
-			image_loader_.load(
-				base/
-				FCPPT_TEXT("hover.png")
-			)
-		);
-
-	pi = images_.insert(
-		std::make_pair(
-			r,
-			new_image
-		)
-	).first;
-
-	return pi;
-}
-#endif

@@ -11,19 +11,20 @@
 #include <boost/mpl/vector/vector10.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 namespace messages
 {
 
-typedef messages::make_class<
+typedef sanguis::messages::make_class<
 	majutsu::composite<
 		boost::mpl::vector2<
-			messages::bind_entity_message<
-				types::message::available_perks
+			sanguis::messages::bind_entity_message<
+				sanguis::messages::types::message::available_perks
 			>::type,
 			majutsu::role<
-				messages::perk_tree
+				sanguis::messages::perk_tree
 			>
 		>
 	>

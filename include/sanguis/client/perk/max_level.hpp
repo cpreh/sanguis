@@ -4,6 +4,7 @@
 #include <sanguis/client/perk/level.hpp>
 #include <fcppt/strong_typedef.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -12,7 +13,7 @@ namespace perk
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
-	perk::level,
+	sanguis::client::perk::level,
 	max_level
 );
 

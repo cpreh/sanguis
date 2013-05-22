@@ -40,5 +40,5 @@ sanguis::server::perks::tree::choose(
 			FCPPT_TEXT("Perk not found in the tree!")
 		);
 
-	(*it).value().choose();
+	(*it).value()->choose();
 }

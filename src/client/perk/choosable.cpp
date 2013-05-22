@@ -8,6 +8,7 @@
 #include <sanguis/client/perk/level.hpp>
 #include <sanguis/client/perk/level_map.hpp>
 #include <sanguis/client/perk/tree.hpp>
+#include <fcppt/assert/pre.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
 
 
@@ -38,8 +39,20 @@ sanguis::client::perk::choosable(
 		)
 	);
 
+	FCPPT_ASSERT_PRE(
+		node.value().has_value()
+	);
+
+	sanguis::client::perk::info const &info(
+		*node.value()
+	);
+
+	FCPPT_ASSERT_PRE(
+		node.has_parent()
+	);
+
 	if(
-		node.value().max_level().get()
+		info.max_level().get()
 		==
 		::perk_level(
 			_type,
@@ -49,20 +62,21 @@ sanguis::client::perk::choosable(
 		return sanguis::client::perk::choosable_state::max_level;
 
 	if(
-		node.has_parent()
+		node.parent().has_value()
 		&&
 		::perk_level(
-			node.parent()->value().type(),
+			node.parent()->value()->type(),
 			_levels
 		)
 		<
-		node.value().required_parent_level().get()
+		info.required_parent_level().get()
 	)
 		return sanguis::client::perk::choosable_state::parent_level;
 
 	if(
-		node.value().required_player_level().get()
-		> _player_level
+		info.required_player_level().get()
+		>
+		_player_level
 	)
 		return sanguis::client::perk::choosable_state::player_level;
 

@@ -4,6 +4,7 @@
 #include <sanguis/client/perk/tree_unique_ptr.hpp>
 #include <sanguis/messages/perk_tree_node_list.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -11,9 +12,9 @@ namespace client
 namespace perk
 {
 
-perk::tree_unique_ptr
+sanguis::client::perk::tree_unique_ptr
 make_tree(
-	messages::perk_tree_node_list const &
+	sanguis::messages::perk_tree_node_list const &
 );
 
 }

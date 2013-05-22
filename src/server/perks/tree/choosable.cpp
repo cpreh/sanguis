@@ -4,9 +4,11 @@
 #include <sanguis/server/perks/tree/choosable.hpp>
 #include <sanguis/server/perks/tree/equal.hpp>
 #include <sanguis/server/perks/tree/object.hpp>
+#include <sanguis/server/perks/tree/optional_status.hpp>
 #include <sanguis/server/perks/tree/status.hpp>
-#include <fcppt/container/tree/pre_order.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assert/error.hpp>
+#include <fcppt/container/tree/pre_order.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -54,7 +56,7 @@ sanguis::server::perks::tree::choosable(
 	}
 
 	if(
-		it->value().required_player_level().get()
+		it->value()->required_player_level().get()
 		>
 		_player_level.get()
 	)
@@ -68,13 +70,24 @@ sanguis::server::perks::tree::choosable(
 		pos = pos->parent()
 	)
 	{
-		sanguis::server::perks::tree::status const &cur_status(
+		sanguis::server::perks::tree::optional_status const &cur_opt_status(
 			pos->value()
 		);
 
+		FCPPT_ASSERT_ERROR(
+			cur_opt_status.has_value()
+		);
+
+		sanguis::server::perks::tree::optional_status const &parent(
+			pos->parent()->value()
+		);
+
 		if(
-			cur_status.required_parent_level().get()
-			> pos->parent()->value().level().get()
+			parent.has_value()
+			&&
+			cur_opt_status->required_parent_level().get()
+			>
+			parent->level().get()
 		)
 			return false;
 	}

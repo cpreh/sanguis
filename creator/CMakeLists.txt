@@ -34,6 +34,7 @@ set(
 	include/sanguis/creator/symbol.hpp
 	include/sanguis/creator/tile.hpp
 	include/sanguis/creator/tile_fwd.hpp
+	include/sanguis/creator/tile_size.hpp
 	include/sanguis/creator/top_parameters.hpp
 	include/sanguis/creator/top_parameters_fwd.hpp
 )

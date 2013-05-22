@@ -3,6 +3,7 @@
 
 #include <sanguis/client/player_level.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -10,9 +11,10 @@ namespace client
 namespace perk
 {
 
-typedef void
+typedef
+void
 level_function(
-	client::player_level
+	sanguis::client::player_level
 );
 
 }

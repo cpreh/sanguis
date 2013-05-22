@@ -6,13 +6,14 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 namespace messages
 {
 
 typedef std::vector<
-	messages::perk_tree_node
+	sanguis::messages::perk_tree_node
 > perk_tree_node_list;
 
 }

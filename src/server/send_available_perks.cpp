@@ -1,27 +1,17 @@
 #include <sanguis/messages/available_perks.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/enum.hpp>
+#include <sanguis/messages/invalid_perk.hpp>
 #include <sanguis/messages/perk_tree_node.hpp>
 #include <sanguis/messages/perk_tree_node_list.hpp>
 #include <sanguis/messages/types/enum.hpp>
-#include <sanguis/messages/types/enum_vector.hpp>
 #include <sanguis/server/send_available_perks.hpp>
 #include <sanguis/server/unicast_callback.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/perks/tree/object.hpp>
-#include <sanguis/server/perks/tree/status.hpp>
+#include <sanguis/server/perks/tree/optional_status.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
 
-
-namespace
-{
-
-sanguis::messages::types::enum_vector const
-make_children(
-	sanguis::server::perks::tree::object const &
-);
-
-}
 
 void
 sanguis::server::send_available_perks(
@@ -38,33 +28,44 @@ sanguis::server::send_available_perks(
 		sanguis::server::perks::tree::object const
 	> traversal;
 
-	traversal trav(
-		tree
-	);
-
 	sanguis::messages::perk_tree_node_list nodes;
 
 	for(
-		auto const &element : trav
+		auto const &element
+		:
+		traversal(
+			tree
+		)
 	)
 	{
-		sanguis::server::perks::tree::status const &info(
+		sanguis::server::perks::tree::optional_status const &info(
 			element.value()
 		);
+
+		if(
+			!info.has_value()
+		)
+			continue;
 
 		nodes.push_back(
 			sanguis::messages::perk_tree_node(
 				static_cast<
 					sanguis::messages::types::enum_
 				>(
-					info.type()
+					info->type()
 				),
-				info.required_player_level().get(),
-				info.required_parent_level().get(),
-				info.max_level().get(),
-				::make_children(
-					element
-				)
+				info->required_player_level().get(),
+				info->required_parent_level().get(),
+				info->max_level().get(),
+				element.parent()->value().has_value()
+				?
+					static_cast<
+						sanguis::messages::types::enum_
+					>(
+						element.parent()->value()->type()
+					)
+				:
+					sanguis::messages::invalid_perk::value
 			)
 		);
 	}
@@ -78,30 +79,4 @@ sanguis::server::send_available_perks(
 			)
 		)
 	);
-}
-
-namespace
-{
-
-sanguis::messages::types::enum_vector const
-make_children(
-	sanguis::server::perks::tree::object const &_node
-)
-{
-	sanguis::messages::types::enum_vector ret;
-
-	for(
-		auto const element : _node
-	)
-		ret.push_back(
-			static_cast<
-				sanguis::messages::types::enum_
-			>(
-				element.value().type()
-			)
-		);
-
-	return ret;
-}
-
 }

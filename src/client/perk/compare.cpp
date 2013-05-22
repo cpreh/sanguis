@@ -1,8 +1,8 @@
 #include <sanguis/perk_type.hpp>
 #include <sanguis/client/perk/compare.hpp>
 #include <sanguis/client/perk/info.hpp>
+#include <sanguis/client/perk/optional_info.hpp>
 #include <sanguis/client/perk/tree.hpp>
-#include <fcppt/container/tree/object_impl.hpp>
 
 
 sanguis::client::perk::compare::compare(
@@ -20,5 +20,8 @@ sanguis::client::perk::compare::operator()(
 	sanguis::client::perk::tree const &_tree
 ) const
 {
-	return _tree.value().type() == type_;
+	return
+		_tree.value().has_value()
+		&&
+		_tree.value()->type() == type_;
 }

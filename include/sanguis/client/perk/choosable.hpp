@@ -6,7 +6,7 @@
 #include <sanguis/client/player_level.hpp>
 #include <sanguis/client/perk/choosable_state_fwd.hpp>
 #include <sanguis/client/perk/level_map.hpp>
-#include <sanguis/client/perk/tree.hpp>
+#include <sanguis/client/perk/tree_fwd.hpp>
 
 
 namespace sanguis

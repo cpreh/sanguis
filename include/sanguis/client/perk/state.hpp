@@ -14,7 +14,7 @@
 #include <sanguis/client/perk/level_map.hpp>
 #include <sanguis/client/perk/level.hpp>
 #include <sanguis/client/perk/send_callback.hpp>
-#include <sanguis/client/perk/tree.hpp>
+#include <sanguis/client/perk/tree_fwd.hpp>
 #include <sanguis/client/perk/tree_unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>

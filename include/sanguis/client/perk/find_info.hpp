@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_PERK_FIND_INFO_HPP_INCLUDED
 
 #include <sanguis/perk_type_fwd.hpp>
-#include <sanguis/client/perk/tree.hpp>
+#include <sanguis/client/perk/tree_fwd.hpp>
 
 
 namespace sanguis

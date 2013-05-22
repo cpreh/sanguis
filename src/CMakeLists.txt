@@ -296,6 +296,8 @@ SET(
 	include/sanguis/client/perk/level_map.hpp
 	include/sanguis/client/perk/make_tree.hpp
 	include/sanguis/client/perk/max_level.hpp
+	include/sanguis/client/perk/optional_info.hpp
+	include/sanguis/client/perk/optional_info_fwd.hpp
 	include/sanguis/client/perk/required_parent_level.hpp
 	include/sanguis/client/perk/required_player_level.hpp
 	include/sanguis/client/perk/send_callback.hpp
@@ -303,6 +305,7 @@ SET(
 	include/sanguis/client/perk/state_fwd.hpp
 	include/sanguis/client/perk/to_string.hpp
 	include/sanguis/client/perk/tree.hpp
+	include/sanguis/client/perk/tree_fwd.hpp
 	include/sanguis/client/perk/tree_unique_ptr.hpp
 	include/sanguis/client/player_level.hpp
 	include/sanguis/client/scoped_pause.hpp
@@ -462,6 +465,7 @@ SET(
 	include/sanguis/messages/global_context.hpp
 	include/sanguis/messages/health.hpp
 	include/sanguis/messages/instantiate_message.hpp
+	include/sanguis/messages/invalid_perk.hpp
 	include/sanguis/messages/level.hpp
 	include/sanguis/messages/level_up.hpp
 	include/sanguis/messages/make_class.hpp
@@ -470,7 +474,6 @@ SET(
 	include/sanguis/messages/max_health.hpp
 	include/sanguis/messages/move.hpp
 	include/sanguis/messages/pause.hpp
-	include/sanguis/messages/perk_list.hpp
 	include/sanguis/messages/perk_tree.hpp
 	include/sanguis/messages/perk_tree_node.hpp
 	include/sanguis/messages/perk_tree_node_list.hpp
@@ -506,8 +509,8 @@ SET(
 	include/sanguis/messages/roles/max_health.hpp
 	include/sanguis/messages/roles/max_perk_level.hpp
 	include/sanguis/messages/roles/perk.hpp
-	include/sanguis/messages/roles/perk_children.hpp
 	include/sanguis/messages/roles/perk_label.hpp
+	include/sanguis/messages/roles/perk_parent.hpp
 	include/sanguis/messages/roles/pickup.hpp
 	include/sanguis/messages/roles/projectile.hpp
 	include/sanguis/messages/roles/required_perk_parent_level.hpp
@@ -536,7 +539,6 @@ SET(
 	include/sanguis/messages/types/char.hpp
 	include/sanguis/messages/types/dim2.hpp
 	include/sanguis/messages/types/enum.hpp
-	include/sanguis/messages/types/enum_vector.hpp
 	include/sanguis/messages/types/exp.hpp
 	include/sanguis/messages/types/level.hpp
 	include/sanguis/messages/types/message.hpp
@@ -547,6 +549,7 @@ SET(
 	include/sanguis/messages/types/string.hpp
 	include/sanguis/messages/types/string_vector.hpp
 	include/sanguis/messages/types/vector2.hpp
+	include/sanguis/messages/types/vector2_fwd.hpp
 	include/sanguis/messages/unpause.hpp
 	include/sanguis/messages/vector2.hpp
 	include/sanguis/messages/world_id.hpp
@@ -828,6 +831,8 @@ SET(
 	include/sanguis/server/perks/tree/object.hpp
 	include/sanguis/server/perks/tree/object_fwd.hpp
 	include/sanguis/server/perks/tree/object_unique_ptr.hpp
+	include/sanguis/server/perks/tree/optional_status.hpp
+	include/sanguis/server/perks/tree/optional_status_fwd.hpp
 	include/sanguis/server/perks/tree/required_parent_level.hpp
 	include/sanguis/server/perks/tree/required_player_level.hpp
 	include/sanguis/server/perks/tree/status.hpp
