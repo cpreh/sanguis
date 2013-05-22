@@ -8,7 +8,7 @@
 
 sanguis::client::draw2d::vector2 const
 sanguis::client::draw2d::translate::vector_to_client(
-	sanguis::messages::types::vector2 const &_vec
+	sanguis::messages::types::vector2 const &_vector
 )
 {
 	return
@@ -18,7 +18,7 @@ sanguis::client::draw2d::translate::vector_to_client(
 			fcppt::math::map<
 				sanguis::client::draw2d::vector2
 			>(
-				_vec,
+				_vector,
 				&sanguis::client::draw2d::translate::scalar_to_client
 			)
 		);

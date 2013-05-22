@@ -1,17 +1,20 @@
+#include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/translate/scalar_from_client.hpp>
 #include <sanguis/client/draw2d/translate/pixels_per_meter.hpp>
+#include <sanguis/messages/types/space_unit.hpp>
+
 
 sanguis::client::draw2d::funit
 sanguis::client::draw2d::translate::scalar_from_client(
-	messages::types::space_unit const _scalar
+	sanguis::messages::types::space_unit const _scalar
 )
 {
 	return
 		static_cast<
-			draw2d::funit
+			sanguis::client::draw2d::funit
 		>(
 			_scalar
 		)
 		/
-		translate::pixels_per_meter();
+		sanguis::client::draw2d::translate::pixels_per_meter();
 }

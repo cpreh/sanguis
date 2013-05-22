@@ -4,6 +4,7 @@
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/messages/types/space_unit.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -13,9 +14,9 @@ namespace draw2d
 namespace translate
 {
 
-draw2d::funit
+sanguis::client::draw2d::funit
 scalar_to_client(
-	messages::types::space_unit
+	sanguis::messages::types::space_unit
 );
 
 }

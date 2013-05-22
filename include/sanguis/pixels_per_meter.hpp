@@ -1,6 +1,7 @@
 #ifndef SANGUIS_PIXELS_PER_METER_HPP_INCLUDED
 #define SANGUIS_PIXELS_PER_METER_HPP_INCLUDED
 
+
 namespace sanguis
 {
 

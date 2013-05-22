@@ -2,9 +2,8 @@
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_TILE_SIZE_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/scene/world/sprite/unit.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <type_traits>
-#include <fcppt/config/external_end.hpp>
+#include <sanguis/creator/tile_size.hpp>
+#include <fcppt/mpl/integral_cast.hpp>
 
 
 namespace sanguis
@@ -18,10 +17,10 @@ namespace scene
 namespace world
 {
 
-typedef std::integral_constant<
+typedef fcppt::mpl::integral_cast<
 	sanguis::client::draw2d::scene::world::sprite::unit,
-	64
-> tile_size;
+	sanguis::creator::tile_size
+>::type tile_size;
 
 }
 }

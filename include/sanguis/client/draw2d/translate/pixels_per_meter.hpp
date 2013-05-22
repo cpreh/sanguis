@@ -3,6 +3,7 @@
 
 #include <sanguis/client/draw2d/funit.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -12,7 +13,7 @@ namespace draw2d
 namespace translate
 {
 
-draw2d::funit
+sanguis::client::draw2d::funit
 pixels_per_meter();
 
 }
