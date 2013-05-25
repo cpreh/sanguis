@@ -34,6 +34,7 @@ set(
 	include/sanguis/creator/symbol.hpp
 	include/sanguis/creator/tile.hpp
 	include/sanguis/creator/tile_fwd.hpp
+	include/sanguis/creator/tile_is_solid.hpp
 	include/sanguis/creator/tile_size.hpp
 	include/sanguis/creator/top_parameters.hpp
 	include/sanguis/creator/top_parameters_fwd.hpp
@@ -57,6 +58,7 @@ SET(
 	src/randgen.cpp
 	src/result.cpp
 	src/serialize.cpp
+	src/tile_is_solid.cpp
 	src/top_parameters.cpp
 )
 

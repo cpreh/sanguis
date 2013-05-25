@@ -3,8 +3,9 @@
 
 #include <sanguis/entity_id.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <set>
+#include <unordered_set>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -13,8 +14,8 @@ namespace server
 namespace world
 {
 
-typedef std::set<
-	entity_id
+typedef std::unordered_set<
+	sanguis::entity_id
 > sight_range_entry_set;
 
 }

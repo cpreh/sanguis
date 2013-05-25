@@ -1,6 +1,7 @@
+#include <sanguis/entity_id.hpp>
 #include <sanguis/server/world/sight_range.hpp>
-#include <sanguis/exception.hpp>
-#include <fcppt/text.hpp>
+#include <fcppt/assert/error.hpp>
+
 
 sanguis::server::world::sight_range::sight_range()
 :
@@ -10,48 +11,45 @@ sanguis::server::world::sight_range::sight_range()
 
 void
 sanguis::server::world::sight_range::add(
-	entity_id const _id
+	sanguis::entity_id const _id
 )
 {
-	if(
-		!entries_.insert(
+	FCPPT_ASSERT_ERROR(
+		entries_.insert(
 			_id
 		).second
-	)
-		throw sanguis::exception(
-			FCPPT_TEXT("Failed to insert a sight range!")
-		);
+	);
 }
 
 void
 sanguis::server::world::sight_range::remove(
-	entity_id const _id
+	sanguis::entity_id const _id
 )
 {
-	if(
-		!entries_.erase(
+	FCPPT_ASSERT_ERROR(
+		entries_.erase(
 			_id
 		)
-	)
-		throw sanguis::exception(
-			FCPPT_TEXT("Failed to remove a sight range!")
-		);
+		> 0
+	);
 }
 
 bool
 sanguis::server::world::sight_range::contains(
-	entity_id const _id
+	sanguis::entity_id const _id
 ) const
 {
 	return
 		entries_.find(
 			_id
 		)
-		!= entries_.end();
+		!=
+		entries_.end();
 }
 
 bool
 sanguis::server::world::sight_range::empty() const
 {
-	return entries_.empty();
+	return
+		entries_.empty();
 }

@@ -1,8 +1,10 @@
 #ifndef SANGUIS_SERVER_WORLD_SIGHT_RANGE_HPP_INCLUDED
 #define SANGUIS_SERVER_WORLD_SIGHT_RANGE_HPP_INCLUDED
 
+#include <sanguis/entity_id.hpp>
 #include <sanguis/server/world/sight_range_fwd.hpp>
 #include <sanguis/server/world/sight_range_entry_set.hpp>
+
 
 namespace sanguis
 {
@@ -18,17 +20,17 @@ public:
 
 	void
 	add(
-		entity_id
+		sanguis::entity_id
 	);
 
 	void
 	remove(
-		entity_id
+		sanguis::entity_id
 	);
 
 	bool
 	contains(
-		entity_id
+		sanguis::entity_id
 	) const;
 
 	bool

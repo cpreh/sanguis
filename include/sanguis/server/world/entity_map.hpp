@@ -1,14 +1,15 @@
 #ifndef SANGUIS_SERVER_WORLD_ENTITY_MAP_HPP_INCLUDED
 #define SANGUIS_SERVER_WORLD_ENTITY_MAP_HPP_INCLUDED
 
+#include <sanguis/entity_id.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
-#include <sanguis/entity_id.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -25,7 +26,7 @@ class entity_map
 
 	typedef boost::ptr_map<
 		sanguis::entity_id,
-		entities::base
+		sanguis::server::entities::base
 	> impl;
 public:
 	typedef impl::iterator iterator;
@@ -44,7 +45,7 @@ public:
 	insert_return_type const
 	insert(
 		sanguis::entity_id,
-		entities::unique_ptr
+		sanguis::server::entities::unique_ptr &&
 	);
 
 	iterator
@@ -68,7 +69,7 @@ public:
 		iterator
 	);
 
-	entities::unique_ptr
+	sanguis::server::entities::unique_ptr
 	release(
 		iterator
 	);
