@@ -933,11 +933,13 @@ SET(
 	include/sanguis/server/weapons/weapon_fwd.hpp
 	include/sanguis/server/world/context.hpp
 	include/sanguis/server/world/context_fwd.hpp
-	include/sanguis/server/world/convert_vertex.hpp
+	include/sanguis/server/world/convert_pos.hpp
+	include/sanguis/server/world/convert_unit.hpp
 	include/sanguis/server/world/create_static_body.hpp
 	include/sanguis/server/world/entity_map.hpp
 	include/sanguis/server/world/environment.hpp
 	include/sanguis/server/world/environment_fwd.hpp
+	include/sanguis/server/world/make_triangles.hpp
 	include/sanguis/server/world/map.hpp
 	include/sanguis/server/world/object.hpp
 	include/sanguis/server/world/object_fwd.hpp
@@ -1385,6 +1387,7 @@ SET(
 	src/server/world/create_static_body.cpp
 	src/server/world/entity_map.cpp
 	src/server/world/environment.cpp
+	src/server/world/make_triangles.cpp
 	src/server/world/object.cpp
 	src/server/world/random.cpp
 	src/server/world/sight_range.cpp
