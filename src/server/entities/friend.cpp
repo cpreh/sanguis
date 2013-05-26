@@ -7,6 +7,7 @@
 #include <sanguis/messages/auto_ptr.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/types/enum.hpp>
+#include <sanguis/server/dim.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>

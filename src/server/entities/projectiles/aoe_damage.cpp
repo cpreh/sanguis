@@ -15,6 +15,7 @@
 #include <sanguis/server/entities/projectiles/damage_per_pulse.hpp>
 #include <sanguis/server/entities/projectiles/indeterminate.hpp>
 #include <sanguis/server/entities/projectiles/life_time.hpp>
+#include <sanguis/server/entities/projectiles/pulse_time.hpp>
 #include <sanguis/server/entities/projectiles/pulses.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
@@ -26,7 +27,7 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 	sanguis::server::radius const _radius,
 	sanguis::server::entities::projectiles::damage_per_pulse const _damage_per_pulse,
 	sanguis::server::entities::projectiles::pulses const _pulses,
-	sanguis::duration const &_pulse_diff,
+	sanguis::server::entities::projectiles::pulse_time const &_pulse_time,
 	sanguis::server::damage::array const &_damage_values
 )
 :
@@ -48,7 +49,7 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 			2
 		),
 		sanguis::server::entities::projectiles::life_time(
-			_pulse_diff
+			_pulse_time.get()
 			*
 			static_cast<
 				sanguis::duration::rep
@@ -71,8 +72,12 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 			_diff_clock,
 			_radius,
 			_team,
-			_damage_per_pulse.get(),
-			_pulse_diff,
+			sanguis::server::auras::burn::damage_per_pulse(
+				_damage_per_pulse.get()
+			),
+			sanguis::server::auras::burn::pulse_time(
+				_pulse_time.get()
+			),
 			_damage_values
 		)
 	);

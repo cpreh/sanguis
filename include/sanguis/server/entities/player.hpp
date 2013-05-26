@@ -1,7 +1,18 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PLAYER_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PLAYER_HPP_INCLUDED
 
+#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/perk_type_fwd.hpp>
+#include <sanguis/weapon_type_fwd.hpp>
+#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/server/exp.hpp>
+#include <sanguis/server/health.hpp>
+#include <sanguis/server/level.hpp>
+#include <sanguis/server/player_id.hpp>
+#include <sanguis/server/string.hpp>
+#include <sanguis/server/damage/armor.hpp>
 #include <sanguis/server/entities/body_velocity_combiner.hpp>
+#include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
@@ -9,22 +20,12 @@
 #include <sanguis/server/entities/with_perks.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
-#include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
-#include <sanguis/server/damage/armor.hpp>
 #include <sanguis/server/perks/unique_ptr.hpp>
 #include <sanguis/server/perks/tree/object.hpp>
-#include <sanguis/server/exp.hpp>
-#include <sanguis/server/health.hpp>
-#include <sanguis/server/level.hpp>
-#include <sanguis/server/player_id.hpp>
-#include <sanguis/server/string.hpp>
-#include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/perk_type_fwd.hpp>
-#include <sanguis/weapon_type_fwd.hpp>
-#include <sanguis/random_generator_fwd.hpp>
-#include <fcppt/scoped_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/scoped_ptr_impl.hpp>
+
 
 namespace sanguis
 {

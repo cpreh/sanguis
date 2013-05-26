@@ -1,8 +1,9 @@
 #ifndef SANGUIS_SERVER_ENTITIES_INSERT_PARAMETERS_CENTER_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_INSERT_PARAMETERS_CENTER_HPP_INCLUDED
 
+#include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
-#include <sanguis/server/center.hpp>
+
 
 namespace sanguis
 {
@@ -11,9 +12,9 @@ namespace server
 namespace entities
 {
 
-entities::insert_parameters const
+sanguis::server::entities::insert_parameters const
 insert_parameters_center(
-	server::center const &
+	sanguis::server::center const &
 );
 
 }

@@ -1,7 +1,6 @@
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/base.hpp>
-#include <sanguis/exception.hpp>
-#include <fcppt/text.hpp>
+#include <fcppt/assert/pre.hpp>
 
 
 sanguis::server::entities::auto_weak_link::auto_weak_link()
@@ -99,12 +98,9 @@ sanguis::server::entities::auto_weak_link::operator bool() const
 sanguis::server::entities::base &
 sanguis::server::entities::auto_weak_link::checked_ref() const
 {
-	if(
-		!ref_
-	)
-		throw sanguis::exception(
-			FCPPT_TEXT("Tried to dereference a weak link that is dead!")
-		);
+	FCPPT_ASSERT_PRE(
+		ref_
+	);
 
 	return *ref_;
 }

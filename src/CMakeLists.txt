@@ -678,6 +678,7 @@ SET(
 	include/sanguis/server/dim.hpp
 	include/sanguis/server/dim_fwd.hpp
 	include/sanguis/server/direction.hpp
+	include/sanguis/server/enter_sight_function.hpp
 	include/sanguis/server/entities/auto_weak_hook.hpp
 	include/sanguis/server/entities/auto_weak_link.hpp
 	include/sanguis/server/entities/auto_weak_link_fwd.hpp
@@ -724,6 +725,7 @@ SET(
 	include/sanguis/server/entities/projectiles/life_time.hpp
 	include/sanguis/server/entities/projectiles/melee.hpp
 	include/sanguis/server/entities/projectiles/projectile.hpp
+	include/sanguis/server/entities/projectiles/pulse_time.hpp
 	include/sanguis/server/entities/projectiles/pulses.hpp
 	include/sanguis/server/entities/projectiles/rocket.hpp
 	include/sanguis/server/entities/projectiles/simple_bullet.hpp
@@ -796,6 +798,7 @@ SET(
 	include/sanguis/server/global/world_context.hpp
 	include/sanguis/server/global/world_context_fwd.hpp
 	include/sanguis/server/health.hpp
+	include/sanguis/server/leave_sight_function.hpp
 	include/sanguis/server/level.hpp
 	include/sanguis/server/level_calculate.hpp
 	include/sanguis/server/log.hpp

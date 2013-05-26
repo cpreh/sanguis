@@ -6,6 +6,7 @@
 #include <boost/intrusive/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -14,7 +15,7 @@ namespace entities
 {
 
 typedef boost::intrusive::list<
-	auto_weak_link,
+	sanguis::server::entities::auto_weak_link,
 	boost::intrusive::constant_time_size<
 		false
 	>

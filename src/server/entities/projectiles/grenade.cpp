@@ -24,6 +24,7 @@
 #include <sanguis/server/entities/projectiles/grenade.hpp>
 #include <sanguis/server/entities/projectiles/indeterminate.hpp>
 #include <sanguis/server/entities/projectiles/life_time.hpp>
+#include <sanguis/server/entities/projectiles/pulse_time.hpp>
 #include <sanguis/server/entities/projectiles/pulses.hpp>
 #include <sanguis/server/entities/property/from_float.hpp>
 #include <sanguis/server/environment/load_context.hpp>
@@ -148,8 +149,10 @@ sanguis::server::entities::projectiles::grenade::on_remove()
 			sanguis::server::entities::projectiles::pulses(
 				1u
 			),
-			sanguis::duration_second(
-				0.1f
+			sanguis::server::entities::projectiles::pulse_time(
+				sanguis::duration_second(
+					0.1f
+				)
 			),
 			sanguis::server::damage::list(
 				sanguis::server::damage::piercing =

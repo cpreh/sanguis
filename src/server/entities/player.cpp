@@ -8,9 +8,12 @@
 #include <sanguis/messages/add_own_player.hpp>
 #include <sanguis/messages/auto_ptr.hpp>
 #include <sanguis/messages/create.hpp>
+#include <sanguis/server/dim.hpp>
 #include <sanguis/server/direction.hpp>
+#include <sanguis/server/enter_sight_function.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
+#include <sanguis/server/leave_sight_function.hpp>
 #include <sanguis/server/level_calculate.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/radius.hpp>
@@ -125,15 +128,19 @@ sanguis::server::entities::player::player(
 			sanguis::server::radius(
 				1000.f // FIXME
 			),
-			std::bind(
-				&sanguis::server::entities::player::add_sight_range,
-				this,
-				std::placeholders::_1
+			sanguis::server::enter_sight_function(
+				std::bind(
+					&sanguis::server::entities::player::add_sight_range,
+					this,
+					std::placeholders::_1
+				)
 			),
-			std::bind(
-				&sanguis::server::entities::player::remove_sight_range,
-				this,
-				std::placeholders::_1
+			sanguis::server::leave_sight_function(
+				std::bind(
+					&sanguis::server::entities::player::remove_sight_range,
+					this,
+					std::placeholders::_1
+				)
 			)
 		)
 	);

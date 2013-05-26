@@ -1,13 +1,19 @@
+#include <sanguis/server/angle.hpp>
+#include <sanguis/server/center.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
+
 
 sanguis::server::entities::insert_parameters::insert_parameters(
-	server::center const &_center,
-	server::angle const _angle
+	sanguis::server::center const &_center,
+	sanguis::server::angle const _angle
 )
 :
-	center_(_center),
-	angle_(_angle)
+	center_(
+		_center
+	),
+	angle_(
+		_angle
+	)
 {
 }
 

@@ -1,5 +1,7 @@
-#include <sanguis/server/buffs/provider.hpp>
 #include <sanguis/server/buffs/buff.hpp>
+#include <sanguis/server/buffs/map.hpp>
+#include <sanguis/server/buffs/provider.hpp>
+#include <sanguis/server/buffs/unique_ptr.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
@@ -7,18 +9,21 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
+
 sanguis::server::buffs::provider::provider()
 :
 	buffs_()
-{}
+{
+}
 
 sanguis::server::buffs::provider::~provider()
-{}
+{
+}
 
 void
 sanguis::server::buffs::provider::add(
-	entities::with_buffs &_entity,
-	unique_ptr _buff
+	sanguis::server::entities::with_buffs &_entity,
+	sanguis::server::buffs::unique_ptr &&_buff
 )
 {
 	typedef std::pair<
@@ -30,7 +35,7 @@ sanguis::server::buffs::provider::add(
 		fcppt::container::ptr::insert_unique_ptr_map(
 			buffs_,
 			_entity.id(),
-			move(
+			std::move(
 				_buff
 			)
 		)
@@ -47,10 +52,10 @@ sanguis::server::buffs::provider::add(
 
 void
 sanguis::server::buffs::provider::remove(
-	entities::with_buffs &_entity
+	sanguis::server::entities::with_buffs &_entity
 )
 {
-	map::iterator const it(
+	sanguis::server::buffs::map::iterator const it(
 		buffs_.find(
 			_entity.id()
 		)
@@ -60,7 +65,7 @@ sanguis::server::buffs::provider::remove(
 		it != buffs_.end()
 	);
 
-	map::auto_type reclaimed(
+	sanguis::server::buffs::map::auto_type reclaimed(
 		buffs_.release(
 			it
 		)
@@ -70,7 +75,7 @@ sanguis::server::buffs::provider::remove(
 		!reclaimed->expired()
 	)
 		_entity.claim_buff(
-			buffs::unique_ptr(
+			sanguis::server::buffs::unique_ptr(
 				reclaimed.release()
 			)
 		);

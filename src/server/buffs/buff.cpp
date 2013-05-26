@@ -1,5 +1,6 @@
 #include <sanguis/server/buffs/buff.hpp>
 
+
 bool
 sanguis::server::buffs::buff::expired() const
 {
@@ -7,12 +8,16 @@ sanguis::server::buffs::buff::expired() const
 }
 
 sanguis::server::buffs::buff::~buff()
-{}
+{
+}
 
 sanguis::server::buffs::buff::buff()
 :
-	expired_(false)
-{}
+	expired_(
+		false
+	)
+{
+}
 
 void
 sanguis::server::buffs::buff::expire()

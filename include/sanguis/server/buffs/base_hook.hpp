@@ -5,6 +5,7 @@
 #include <boost/intrusive/list_hook.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 namespace server

@@ -1,24 +1,32 @@
+#include <sanguis/server/enter_sight_function.hpp>
+#include <sanguis/server/leave_sight_function.hpp>
+#include <sanguis/server/team.hpp>
+#include <sanguis/server/radius.hpp>
+#include <sanguis/server/auras/aura.hpp>
+#include <sanguis/server/auras/influence.hpp>
 #include <sanguis/server/auras/update_sight.hpp>
+#include <sanguis/server/collision/group.hpp>
+#include <sanguis/server/collision/group_vector.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <fcppt/assign/make_container.hpp>
-#include <fcppt/optional_impl.hpp>
+
 
 sanguis::server::auras::update_sight::update_sight(
-	server::radius const _radius,
-	update_sight_function const &_enter,
-	update_sight_function const &_nleave // VC++ doesn't like _leave
+	sanguis::server::radius const _radius,
+	sanguis::server::enter_sight_function const &_enter,
+	sanguis::server::leave_sight_function const &_leave
 )
 :
-	aura(
+	sanguis::server::auras::aura(
 		_radius,
-		team::neutral,
-		influence::debuff
+		sanguis::server::team::neutral,
+		sanguis::server::auras::influence::debuff
 	),
 	enter_(
 		_enter
 	),
 	leave_(
-		_nleave
+		_leave
 	)
 {
 }
@@ -32,28 +40,34 @@ sanguis::server::auras::update_sight::collision_groups() const
 {
 	return
 		fcppt::assign::make_container<
-			collision::group_vector
+			sanguis::server::collision::group_vector
 		>(
-			collision::group::sight_range
+			sanguis::server::collision::group::sight_range
 		);
 }
 
 void
 sanguis::server::auras::update_sight::enter(
-	entities::with_body &_entity
+	sanguis::server::entities::with_body &_entity
 )
 {
-	enter_(
+	(
+		enter_.get()
+	)
+	(
 		_entity.id()
 	);
 }
 
 void
 sanguis::server::auras::update_sight::leave(
-	entities::with_body &_entity
+	sanguis::server::entities::with_body &_entity
 )
 {
-	leave_(
+	(
+		leave_.get()
+	)
+	(
 		_entity.id()
 	);
 }

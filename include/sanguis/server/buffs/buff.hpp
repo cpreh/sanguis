@@ -27,15 +27,17 @@ class buff
 		buff
 	);
 public:
-	virtual void
+	virtual
+	void
 	update(
-		entities::base &
+		sanguis::server::entities::base &
 	) = 0;
 
 	bool
 	expired() const;
 
-	virtual ~buff();
+	virtual
+	~buff() = 0;
 protected:
 	buff();
 

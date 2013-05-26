@@ -2,12 +2,12 @@
 #define SANGUIS_SERVER_ENTITIES_PROJECTILES_AOE_DAMAGE_HPP_INCLUDED
 
 #include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/duration.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/damage/array.hpp>
 #include <sanguis/server/entities/projectiles/aoe_projectile.hpp>
 #include <sanguis/server/entities/projectiles/damage_per_pulse.hpp>
+#include <sanguis/server/entities/projectiles/pulse_time.hpp>
 #include <sanguis/server/entities/projectiles/pulses.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
 #include <sanguis/server/entities/with_health_fwd.hpp>
@@ -38,7 +38,7 @@ public:
 		sanguis::server::radius,
 		sanguis::server::entities::projectiles::damage_per_pulse,
 		sanguis::server::entities::projectiles::pulses,
-		sanguis::duration const &pulse_diff,
+		sanguis::server::entities::projectiles::pulse_time const &,
 		sanguis::server::damage::array const &damage_values
 	);
 

@@ -11,6 +11,7 @@
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/strong_typedef.hpp>
 
 
 namespace sanguis
@@ -28,12 +29,22 @@ class burn
 		burn
 	);
 public:
+	FCPPT_MAKE_STRONG_TYPEDEF(
+		sanguis::server::damage::unit,
+		damage_per_pulse
+	);
+
+	FCPPT_MAKE_STRONG_TYPEDEF(
+		sanguis::duration,
+		pulse_time
+	);
+
 	burn(
 		sanguis::diff_clock const &,
 		sanguis::server::radius,
 		sanguis::server::team,
-		sanguis::server::damage::unit damage_per_pules,
-		sanguis::duration const &pulse_diff,
+		sanguis::server::auras::burn::damage_per_pulse,
+		sanguis::server::auras::burn::pulse_time const &,
 		sanguis::server::damage::array const &
 	);
 
@@ -51,9 +62,9 @@ private:
 
 	sanguis::diff_clock const &diff_clock_;
 
-	sanguis::duration const pulse_diff_;
+	sanguis::server::auras::burn::pulse_time const pulse_time_;
 
-	sanguis::server::damage::unit const damage_per_pulse_;
+	sanguis::server::auras::burn::damage_per_pulse const damage_per_pulse_;
 
 	sanguis::server::damage::array const damage_values_;
 

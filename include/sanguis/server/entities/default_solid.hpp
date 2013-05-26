@@ -3,6 +3,7 @@
 
 #include <sanguis/server/collision/solidity.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -10,7 +11,7 @@ namespace server
 namespace entities
 {
 
-collision::solidity const
+sanguis::server::collision::solidity const
 default_solid();
 
 }
