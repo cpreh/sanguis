@@ -4,8 +4,8 @@
 #include <sanguis/io_service_fwd.hpp>
 #include <sanguis/timer.hpp>
 #include <sanguis/load/server_context.hpp>
-#include <sanguis/messages/auto_ptr.hpp>
 #include <sanguis/messages/base_fwd.hpp>
+#include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/net/data_buffer.hpp>
 #include <sanguis/server/machine_fwd.hpp>
 #include <sanguis/server/player_id.hpp>
@@ -69,7 +69,7 @@ private:
 	void
 	process_message(
 		alda::net::id,
-		sanguis::messages::auto_ptr &&
+		sanguis::messages::unique_ptr &&
 	);
 
 	void

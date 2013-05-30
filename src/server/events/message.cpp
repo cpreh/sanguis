@@ -1,18 +1,22 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/events/message.hpp>
-#include <sanguis/messages/auto_ptr.hpp>
 #include <sanguis/messages/base.hpp>
 #include <sanguis/messages/shared_ptr.hpp>
+#include <sanguis/messages/unique_ptr.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::events::message::message(
-	sanguis::messages::auto_ptr _message,
+	sanguis::messages::unique_ptr &&_message,
 	sanguis::server::player_id const _id
 )
 :
 	message_(
-		// TODO: this is not safe!
-		_message.release()
+		std::move(
+			_message
+		)
 	),
 	id_(
 		_id

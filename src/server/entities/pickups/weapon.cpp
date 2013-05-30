@@ -4,8 +4,8 @@
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/load/weapon_pickup_name.hpp>
 #include <sanguis/messages/add_weapon_pickup.hpp>
-#include <sanguis/messages/auto_ptr.hpp>
 #include <sanguis/messages/create.hpp>
+#include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/messages/types/enum.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
@@ -62,7 +62,7 @@ sanguis::server::entities::pickups::weapon::wtype() const
 	return weapon_type_;
 }
 
-sanguis::messages::auto_ptr
+sanguis::messages::unique_ptr
 sanguis::server::entities::pickups::weapon::add_message(
 	sanguis::server::player_id const
 ) const

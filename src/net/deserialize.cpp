@@ -7,6 +7,7 @@
 #include <sanguis/messages/serialization/deserialize.hpp>
 #include <sanguis/messages/base.hpp>
 #include <sanguis/messages/global_context.hpp>
+#include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/exception.hpp>
 #include <alda/endianness.hpp>
 #include <alda/net/size_type.hpp>
@@ -25,7 +26,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::messages::auto_ptr
+sanguis::messages::unique_ptr
 sanguis::net::deserialize(
 	alda::net::buffer::circular_receive::object &_data
 )
@@ -37,7 +38,7 @@ sanguis::net::deserialize(
 	if(
 		remaining_size < sanguis::net::message_header_size::value
 	)
-		return sanguis::messages::auto_ptr();
+		return sanguis::messages::unique_ptr();
 
 	typedef boost::iostreams::stream_buffer<
 		sanguis::net::receive_buffer_source
@@ -108,9 +109,9 @@ sanguis::net::deserialize(
 			message_size
 		)
 	)
-		return sanguis::messages::auto_ptr();
+		return sanguis::messages::unique_ptr();
 
-	sanguis::messages::auto_ptr ret(
+	sanguis::messages::unique_ptr ret(
 		sanguis::messages::serialization::deserialize(
 			sanguis::messages::global_context(),
 			stream

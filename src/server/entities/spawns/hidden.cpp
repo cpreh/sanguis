@@ -1,9 +1,13 @@
-#include <sanguis/server/entities/spawns/hidden.hpp>
 #include <sanguis/messages/base.hpp>
+#include <sanguis/messages/unique_ptr.hpp>
+#include <sanguis/server/player_id.hpp>
+#include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/spawns/hidden.hpp>
+
 
 sanguis::server::entities::spawns::hidden::hidden()
 :
-	base()
+	sanguis::server::entities::base()
 {
 }
 
@@ -29,10 +33,10 @@ sanguis::server::entities::spawns::hidden::server_only() const
 	return true;
 }
 
-sanguis::messages::auto_ptr
+sanguis::messages::unique_ptr
 sanguis::server::entities::spawns::hidden::add_message(
-	player_id
+	sanguis::server::player_id
 ) const
 {
-	return messages::auto_ptr();
+	return sanguis::messages::unique_ptr();
 }

@@ -3,9 +3,9 @@
 
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/enemy_type.hpp>
-#include <sanguis/entity_type.hpp>
+#include <sanguis/entity_type_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
-#include <sanguis/messages/auto_ptr.hpp>
+#include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/pickup_probability.hpp>
@@ -56,7 +56,7 @@ public:
 		sanguis::server::health,
 		sanguis::server::entities::movement_speed,
 		sanguis::server::ai::create_function const &,
-		sanguis::server::weapons::unique_ptr,
+		sanguis::server::weapons::unique_ptr &&,
 		sanguis::server::pickup_probability,
 		sanguis::server::exp,
 		sanguis::server::entities::enemies::spawn_owner const &
@@ -70,7 +70,7 @@ private:
 	void
 	on_update();
 
-	sanguis::messages::auto_ptr
+	sanguis::messages::unique_ptr
 	add_message(
 		sanguis::server::player_id
 	) const;

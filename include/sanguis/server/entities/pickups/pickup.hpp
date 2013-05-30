@@ -5,7 +5,7 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/entity_type_fwd.hpp>
 #include <sanguis/pickup_type.hpp>
-#include <sanguis/messages/auto_ptr.hpp>
+#include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
@@ -74,7 +74,7 @@ private:
 		sanguis::server::entities::base &receiver
 	) = 0;
 
-	sanguis::messages::auto_ptr
+	sanguis::messages::unique_ptr
 	add_message(
 		sanguis::server::player_id
 	) const;

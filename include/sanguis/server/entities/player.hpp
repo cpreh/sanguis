@@ -2,14 +2,18 @@
 #define SANGUIS_SERVER_ENTITIES_PLAYER_HPP_INCLUDED
 
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/entity_id.hpp>
+#include <sanguis/entity_type_fwd.hpp>
 #include <sanguis/perk_type_fwd.hpp>
 #include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/level.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/string.hpp>
+#include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/damage/armor.hpp>
 #include <sanguis/server/entities/body_velocity_combiner.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
@@ -22,7 +26,7 @@
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/perks/unique_ptr.hpp>
-#include <sanguis/server/perks/tree/object.hpp>
+#include <sanguis/server/perks/tree/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
 
@@ -103,7 +107,7 @@ private:
 	void
 	on_update();
 
-	sanguis::messages::auto_ptr
+	sanguis::messages::unique_ptr
 	add_message(
 		sanguis::server::player_id
 	) const;
@@ -122,7 +126,7 @@ private:
 	template<
 		typename Message
 	>
-	sanguis::messages::auto_ptr
+	sanguis::messages::unique_ptr
 	make_add_message() const;
 
 	sanguis::server::string const name_;

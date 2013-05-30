@@ -5,7 +5,7 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/entity_type_fwd.hpp>
 #include <sanguis/projectile_type.hpp>
-#include <sanguis/messages/auto_ptr.hpp>
+#include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/dim_fwd.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/player_id.hpp>
@@ -91,7 +91,7 @@ private:
 		sanguis::server::entities::with_health &
 	) = 0;
 
-	sanguis::messages::auto_ptr
+	sanguis::messages::unique_ptr
 	add_message(
 		sanguis::server::player_id
 	) const;

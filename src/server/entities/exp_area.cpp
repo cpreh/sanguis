@@ -1,5 +1,5 @@
 #include <sanguis/entity_type.hpp>
-#include <sanguis/messages/auto_ptr.hpp>
+#include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/radius.hpp>
@@ -112,12 +112,12 @@ sanguis::server::entities::exp_area::dead() const
 	return true;
 }
 
-sanguis::messages::auto_ptr
+sanguis::messages::unique_ptr
 sanguis::server::entities::exp_area::add_message(
 	sanguis::server::player_id const
 ) const
 {
-	return sanguis::messages::auto_ptr(); // TODO: get rid of this
+	return sanguis::messages::unique_ptr(); // TODO: get rid of this
 }
 
 sanguis::entity_type

@@ -1,10 +1,11 @@
 #ifndef SANGUIS_SERVER_ENTITIES_SPAWNS_HIDDEN_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_SPAWNS_HIDDEN_HPP_INCLUDED
 
-#include <sanguis/server/entities/base.hpp>
+#include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/player_id.hpp>
-#include <sanguis/messages/auto_ptr.hpp>
+#include <sanguis/server/entities/base.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -17,7 +18,7 @@ namespace spawns
 
 class hidden
 :
-	public virtual base
+	public virtual sanguis::server::entities::base
 {
 	FCPPT_NONCOPYABLE(
 		hidden
@@ -36,9 +37,9 @@ private:
 	bool
 	server_only() const;
 
-	messages::auto_ptr
+	sanguis::messages::unique_ptr
 	add_message(
-		player_id
+		sanguis::server::player_id
 	) const;
 };
 

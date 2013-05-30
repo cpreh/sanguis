@@ -4,8 +4,8 @@
 #include <sanguis/pickup_type.hpp>
 #include <sanguis/load/pickup_name.hpp>
 #include <sanguis/messages/add_pickup.hpp>
-#include <sanguis/messages/auto_ptr.hpp>
 #include <sanguis/messages/create.hpp>
+#include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/messages/types/enum.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/player_id.hpp>
@@ -122,7 +122,7 @@ sanguis::server::entities::pickups::pickup::collision_with_body(
 	);
 }
 
-sanguis::messages::auto_ptr
+sanguis::messages::unique_ptr
 sanguis::server::entities::pickups::pickup::add_message(
 	sanguis::server::player_id const
 ) const

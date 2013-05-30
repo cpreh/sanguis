@@ -437,7 +437,6 @@ SET(
 	include/sanguis/messages/add_weapon_pickup.hpp
 	include/sanguis/messages/add_with_health.hpp
 	include/sanguis/messages/add_with_speed.hpp
-	include/sanguis/messages/auto_ptr.hpp
 	include/sanguis/messages/available_perks.hpp
 	include/sanguis/messages/base.hpp
 	include/sanguis/messages/base_fwd.hpp
@@ -550,6 +549,7 @@ SET(
 	include/sanguis/messages/types/string_vector.hpp
 	include/sanguis/messages/types/vector2.hpp
 	include/sanguis/messages/types/vector2_fwd.hpp
+	include/sanguis/messages/unique_ptr.hpp
 	include/sanguis/messages/unpause.hpp
 	include/sanguis/messages/vector2.hpp
 	include/sanguis/messages/world_id.hpp
