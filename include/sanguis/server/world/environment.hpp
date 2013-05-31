@@ -43,7 +43,7 @@ public:
 
 	~environment();
 
-	void
+	sanguis::server::entities::base *
 	insert(
 		sanguis::server::entities::unique_ptr &&,
 		sanguis::server::entities::insert_parameters const &

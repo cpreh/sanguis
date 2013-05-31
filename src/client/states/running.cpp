@@ -1,10 +1,11 @@
-#include <sanguis/client/states/running.hpp>
-#include <sanguis/client/states/menu.hpp>
 #include <sanguis/client/daytime_settings.hpp>
 #include <sanguis/client/log.hpp>
 #include <sanguis/client/make_send_callback.hpp>
 #include <sanguis/client/console/object.hpp>
+#include <sanguis/client/control/input_translator.hpp>
+#include <sanguis/client/control/actions/any_fwd.hpp>
 #include <sanguis/client/draw2d/scene/object.hpp>
+#include <sanguis/client/events/action.hpp>
 #include <sanguis/client/events/connected.hpp>
 #include <sanguis/client/events/menu.hpp>
 #include <sanguis/client/events/message.hpp>
@@ -12,6 +13,8 @@
 #include <sanguis/client/events/overlay.hpp>
 #include <sanguis/client/events/render.hpp>
 #include <sanguis/client/events/tick.hpp>
+#include <sanguis/client/states/menu.hpp>
+#include <sanguis/client/states/running.hpp>
 #include <sanguis/messages/call/object.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/load/context.hpp>
@@ -61,6 +64,23 @@ sanguis::client::states::running::running(
 			context<machine>().font_object(),
 			daytime_settings_->current_time(),
 			context<machine>().viewport_manager()
+		)
+	),
+	input_translator_(
+		fcppt::make_unique_ptr<
+			sanguis::client::control::input_translator
+		>(
+			this->context<
+				sanguis::client::machine
+			>().keyboard(),
+			this->context<
+				sanguis::client::machine
+			>().cursor(),
+			std::bind(
+				&sanguis::client::states::running::handle_player_action,
+				this,
+				std::placeholders::_1
+			)
 		)
 	)
 {
@@ -245,6 +265,18 @@ sanguis::client::console::object &
 sanguis::client::states::running::console()
 {
 	return *console_;
+}
+
+void
+sanguis::client::states::running::handle_player_action(
+	sanguis::client::control::actions::any const &_action
+)
+{
+	this->post_event(
+		sanguis::client::events::action(
+			_action
+		)
+	);
 }
 
 boost::statechart::result

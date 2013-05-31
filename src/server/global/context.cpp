@@ -30,6 +30,7 @@
 #include <sanguis/server/vector.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
+#include <sanguis/server/entities/insert_with_result.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/player_map.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
@@ -170,21 +171,28 @@ sanguis::server::global::context::insert_player(
 		sanguis::server::vector::null()
 	);
 
-	sanguis::server::entities::player &player_ref(
-		*player
-	);
-
-	cur_world.insert(
-		std::move(
-			player
-		),
-		sanguis::server::entities::insert_parameters(
-			spawn_pos,
-			sanguis::server::angle(
-				0.f
+	sanguis::server::entities::player const *const player_ref(
+		sanguis::server::entities::insert_with_result(
+			cur_world,
+			std::move(
+				player
+			),
+			sanguis::server::entities::insert_parameters(
+				spawn_pos,
+				sanguis::server::angle(
+					0.f
+				)
 			)
 		)
 	);
+
+	if(
+		player_ref
+		==
+		nullptr
+	)
+		// TODO: What do we do here?
+		return;
 
 	cur_world.insert(
 		fcppt::make_unique_ptr<
@@ -203,7 +211,7 @@ sanguis::server::global::context::insert_player(
 
 	// send this after the player has been created
 	sanguis::server::send_available_perks(
-		player_ref,
+		*player_ref,
 		send_unicast_
 	);
 }

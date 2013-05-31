@@ -36,18 +36,19 @@ sanguis::server::world::environment::~environment()
 {
 }
 
-void
+sanguis::server::entities::base *
 sanguis::server::world::environment::insert(
 	sanguis::server::entities::unique_ptr &&_entity,
 	sanguis::server::entities::insert_parameters const &_param
 )
 {
-	world_.insert(
-		std::move(
-			_entity
-		),
-		_param
-	);
+	return
+		world_.insert(
+			std::move(
+				_entity
+			),
+			_param
+		);
 }
 
 void

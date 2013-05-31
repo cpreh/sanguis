@@ -4,7 +4,6 @@
 #include <sanguis/client/make_send_callback.hpp>
 #include <sanguis/client/player_level.hpp>
 #include <sanguis/client/control/action_handler.hpp>
-#include <sanguis/client/control/input_translator.hpp>
 #include <sanguis/client/console/object.hpp>
 #include <sanguis/client/events/action.hpp>
 #include <sanguis/client/events/menu.hpp>
@@ -38,23 +37,6 @@ sanguis::client::states::has_player::has_player(
 :
 	my_base(
 		_ctx
-	),
-	input_translator_(
-		fcppt::make_unique_ptr<
-			sanguis::client::control::input_translator
-		>(
-			this->context<
-				sanguis::client::machine
-			>().keyboard(),
-			this->context<
-				sanguis::client::machine
-			>().cursor(),
-			std::bind(
-				&states::has_player::handle_player_action,
-				this,
-				std::placeholders::_1
-			)
-		)
 	),
 	action_handler_(
 		fcppt::make_unique_ptr<
@@ -193,18 +175,6 @@ sanguis::client::perk::state &
 sanguis::client::states::has_player::perk_state()
 {
 	return *perk_state_;
-}
-
-void
-sanguis::client::states::has_player::handle_player_action(
-	sanguis::client::control::actions::any const &_action
-)
-{
-	this->post_event(
-		sanguis::client::events::action(
-			_action
-		)
-	);
 }
 
 boost::statechart::result

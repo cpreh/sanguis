@@ -67,6 +67,9 @@ public:
 
 	sge::projectile::body::object &
 	get();
+
+	sge::projectile::body::object const &
+	get() const;
 private:
 	void
 	on_position_change(

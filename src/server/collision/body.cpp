@@ -150,6 +150,12 @@ sanguis::server::collision::body::get()
 	return *body_;
 }
 
+sge::projectile::body::object const &
+sanguis::server::collision::body::get() const
+{
+	return *body_;
+}
+
 void
 sanguis::server::collision::body::on_position_change(
 	sge::projectile::body::position const &_position

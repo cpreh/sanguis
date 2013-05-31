@@ -1,6 +1,5 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
-#include <sanguis/exception.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/timer.hpp>
@@ -32,6 +31,7 @@
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/level.hpp>
+#include <sanguis/server/log.hpp>
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/string.hpp>
@@ -50,6 +50,7 @@
 #include <sanguis/server/message_convert/rotate.hpp>
 #include <sanguis/server/message_convert/move.hpp>
 #include <sanguis/server/message_convert/health.hpp>
+#include <sanguis/server/world/can_be_spawned.hpp>
 #include <sanguis/server/world/context.hpp>
 #include <sanguis/server/world/create_static_body.hpp>
 #include <sanguis/server/world/environment.hpp>
@@ -65,7 +66,6 @@
 #include <sge/projectile/group/sequence.hpp>
 #include <sge/timer/elapsed_and_reset.hpp>
 #include <sge/timer/reset_when_expired.hpp>
-#include <fcppt/format.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
@@ -75,6 +75,8 @@
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/log/error.hpp>
+#include <fcppt/log/output.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
 #include <functional>
@@ -101,8 +103,8 @@ sanguis::server::world::object::object(
 	generator_name_(
 		_generated_world.name()
 	),
-	size_(
-		_generated_world.grid().size()
+	grid_(
+		_generated_world.grid()
 	),
 	global_context_(
 		_global_context
@@ -204,7 +206,6 @@ sanguis::server::world::object::update()
 		load_context_
 	);
 
-	// should we send position updates?
 	bool const update_pos(
 		sge::timer::reset_when_expired(
 			send_timer_
@@ -241,12 +242,32 @@ sanguis::server::world::object::update()
 	}
 }
 
-void
+sanguis::server::entities::base *
 sanguis::server::world::object::insert(
 	sanguis::server::entities::unique_ptr &&_entity,
 	sanguis::server::entities::insert_parameters const &_insert_parameters
 )
 {
+	if(
+		static_body_
+		&&
+		!sanguis::server::world::can_be_spawned(
+			*collision_world_,
+			*static_body_,
+			*_entity
+		)
+	)
+	{
+		FCPPT_LOG_ERROR(
+			sanguis::server::log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("Failed to spawn entity because its spawnpoint is obstructed")
+		);
+
+		return
+			nullptr;
+	}
+
 	sanguis::entity_id const id(
 		_entity->id()
 	);
@@ -265,12 +286,9 @@ sanguis::server::world::object::insert(
 		)
 	);
 
-	if(
-		!ret.second
-	)
-		throw sanguis::exception(
-			FCPPT_TEXT("Double insert of entity!")
-		);
+	FCPPT_ASSERT_ERROR(
+		ret.second
+	);
 
 	ret.first->second->transfer(
 		this->environment(),
@@ -278,10 +296,14 @@ sanguis::server::world::object::insert(
 		_insert_parameters
 	);
 
+	sanguis::server::entities::base *const result(
+		ret.first->second
+	);
+
 	FCPPT_TRY_DYNAMIC_CAST(
 		sanguis::server::entities::player const *,
 		player_ret,
-		ret.first->second
+		result
 	)
 		this->send_player_specific(
 			player_ret->player_id(),
@@ -295,11 +317,14 @@ sanguis::server::world::object::insert(
 					fcppt::math::dim::structure_cast<
 						sanguis::messages::types::dim2
 					>(
-						size_
+						grid_.size()
 					)
 				)
 			)
 		);
+
+	return
+		result;
 }
 
 sanguis::server::environment::object &
@@ -482,12 +507,9 @@ sanguis::server::world::object::request_transfer(
 		)
 	);
 
-	if(
-		it == entities_.end()
-	)
-		throw sanguis::exception(
-			FCPPT_TEXT("entity can't be transferred!")
-		);
+	FCPPT_ASSERT_ERROR(
+		it != entities_.end()
+	);
 
 	sanguis::server::entities::unique_ptr entity(
 		entities_.release(
@@ -522,18 +544,9 @@ sanguis::server::world::object::add_sight_range(
 		)
 	);
 
-	if(
-		it == entities_.end()
-	)
-		throw sanguis::exception(
-			(
-				fcppt::format(
-					FCPPT_TEXT("Can't get entity %1% for sight update with player %2%!")
-				)
-				% _target_id
-				% _player_id
-			).str()
-		);
+	FCPPT_ASSERT_ERROR(
+		it != entities_.end()
+	);
 
 	sanguis::server::entities::base &entity(
 		*it->second
@@ -573,10 +586,8 @@ sanguis::server::world::object::remove_sight_range(
 			_target_id
 		);
 
-		// if the player sees nothing here
-		// it must have been deleted / moved
-		// because the player always sees himself
-
+		// If the player sees nothing here, he must have been deleted
+		// or moved, because the player always sees himself.
 		if(
 			sight_it->second.empty()
 		)
@@ -585,8 +596,8 @@ sanguis::server::world::object::remove_sight_range(
 			);
 	}
 
-	// if an entity has been removed
-	// we have to tell the client that it is dead instead
+	// If an entity has been removed we have to tell the client that it is
+	// dead instead
 
 	sanguis::server::world::entity_map::const_iterator const it(
 		entities_.find(
@@ -708,7 +719,8 @@ sanguis::server::world::object::update_entity(
 
 	if(
 		entity.server_only()
-		|| !_update_pos
+		||
+		!_update_pos
 	)
 		return;
 
