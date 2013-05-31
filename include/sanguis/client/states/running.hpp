@@ -5,6 +5,8 @@
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/daytime_settings_fwd.hpp>
 #include <sanguis/client/control/environment_fwd.hpp>
+#include <sanguis/client/control/input_translator_fwd.hpp>
+#include <sanguis/client/control/actions/any_fwd.hpp>
 #include <sanguis/client/console/object_fwd.hpp>
 #include <sanguis/client/draw2d/scene/object_fwd.hpp>
 #include <sanguis/client/events/message_fwd.hpp>
@@ -120,6 +122,11 @@ public:
 	client::console::object &
 	console();
 private:
+	void
+	handle_player_action(
+		sanguis::client::control::actions::any const &
+	);
+
 	boost::statechart::result
 	handle_default_msg(
 		messages::base const &
@@ -136,6 +143,10 @@ private:
 	fcppt::scoped_ptr<
 		draw2d::scene::object
 	> drawer_;
+
+	fcppt::scoped_ptr<
+		sanguis::client::control::input_translator
+	> input_translator_;
 };
 
 }

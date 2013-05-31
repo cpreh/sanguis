@@ -1,8 +1,9 @@
-#include <sanguis/server/dim.hpp>
+#include <sanguis/server/dim_fwd.hpp>
 #include <sanguis/server/entities/circle_from_dim.hpp>
 #include <sanguis/server/entities/body_parameters.hpp>
 #include <sanguis/server/entities/radius.hpp>
 #include <sanguis/server/collision/create_circle.hpp>
+#include <sanguis/server/collision/solidity_fwd.hpp>
 
 
 sanguis::server::entities::body_parameters const

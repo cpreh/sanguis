@@ -3,7 +3,7 @@
 
 #include <sanguis/entity_id.hpp>
 #include <sanguis/entity_type_fwd.hpp>
-#include <sanguis/messages/auto_ptr.hpp>
+#include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team_fwd.hpp>
@@ -91,7 +91,7 @@ public:
 	// message functions
 
 	virtual
-	sanguis::messages::auto_ptr
+	sanguis::messages::unique_ptr
 	add_message(
 		sanguis::server::player_id
 	) const = 0;

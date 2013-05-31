@@ -4,8 +4,8 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/load/friend_name.hpp>
 #include <sanguis/messages/add_friend.hpp>
-#include <sanguis/messages/auto_ptr.hpp>
 #include <sanguis/messages/create.hpp>
+#include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/messages/types/enum.hpp>
 #include <sanguis/server/dim.hpp>
 #include <sanguis/server/health.hpp>
@@ -113,7 +113,7 @@ sanguis::server::entities::friend_::team() const
 	return sanguis::server::team::players;
 }
 
-sanguis::messages::auto_ptr
+sanguis::messages::unique_ptr
 sanguis::server::entities::friend_::add_message(
 	sanguis::server::player_id const
 ) const

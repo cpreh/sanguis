@@ -1,8 +1,8 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/io_service.hpp>
 #include <sanguis/load/server_context.hpp>
-#include <sanguis/messages/auto_ptr.hpp>
 #include <sanguis/messages/base.hpp>
+#include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/net/append_to_circular_buffer.hpp>
 #include <sanguis/net/receive_buffer_size.hpp>
 #include <sanguis/net/send_buffer_size.hpp>
@@ -244,7 +244,7 @@ sanguis::server::machine::resources() const
 void
 sanguis::server::machine::process_message(
 	alda::net::id const _id,
-	sanguis::messages::auto_ptr &&_message
+	sanguis::messages::unique_ptr &&_message
 )
 {
 	FCPPT_LOG_VERBOSE(
@@ -294,7 +294,7 @@ sanguis::server::machine::data_callback(
 {
 	for(;;)
 	{
-		sanguis::messages::auto_ptr message(
+		sanguis::messages::unique_ptr message(
 			sanguis::net::deserialize(
 				_data
 			)

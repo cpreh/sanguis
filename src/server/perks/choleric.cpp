@@ -108,7 +108,7 @@ sanguis::server::perks::choleric::update(
 			?
 				sanguis::server::entities::unique_ptr(
 					fcppt::make_unique_ptr<
-						entities::projectiles::simple_bullet
+						sanguis::server::entities::projectiles::simple_bullet
 					>(
 						diff_clock_,
 						_env.load_context(),

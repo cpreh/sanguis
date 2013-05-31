@@ -4,7 +4,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
-#include <sanguis/messages/auto_ptr.hpp>
+#include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
@@ -43,7 +43,7 @@ public:
 	sanguis::weapon_type
 	wtype() const;
 private:
-	sanguis::messages::auto_ptr
+	sanguis::messages::unique_ptr
 	add_message(
 		sanguis::server::player_id
 	) const;

@@ -8,10 +8,10 @@
 #include <sanguis/timer.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/weapon_type_fwd.hpp>
+#include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/result_fwd.hpp>
 #include <sanguis/creator/seed.hpp>
-#include <sanguis/creator/size.hpp>
 #include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/console_fwd.hpp>
@@ -72,7 +72,7 @@ public:
 	void
 	update();
 
-	void
+	sanguis::server::entities::base *
 	insert(
 		sanguis::server::entities::unique_ptr &&,
 		sanguis::server::entities::insert_parameters const &
@@ -192,7 +192,7 @@ private:
 
 	sanguis::creator::name const generator_name_;
 
-	sanguis::creator::size const size_;
+	sanguis::creator::grid const grid_;
 
 	sanguis::server::world::context &global_context_;
 

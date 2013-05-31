@@ -3,7 +3,7 @@
 
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/events/message_fwd.hpp>
-#include <sanguis/messages/auto_ptr.hpp>
+#include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/messages/shared_ptr.hpp>
 #include <fcppt/nonassignable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -29,7 +29,7 @@ class message
 	);
 public:
 	message(
-		sanguis::messages::auto_ptr,
+		sanguis::messages::unique_ptr &&,
 		sanguis::server::player_id
 	);
 

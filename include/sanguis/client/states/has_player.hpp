@@ -3,9 +3,7 @@
 
 #include <sanguis/client/states/running.hpp>
 #include <sanguis/client/states/ingame_fwd.hpp>
-#include <sanguis/client/control/input_translator_fwd.hpp>
 #include <sanguis/client/control/action_handler_fwd.hpp>
-#include <sanguis/client/control/actions/any_fwd.hpp>
 #include <sanguis/client/events/message_fwd.hpp>
 #include <sanguis/client/events/action_fwd.hpp>
 #include <sanguis/client/perk/state_fwd.hpp>
@@ -23,6 +21,7 @@
 #include <boost/statechart/result.hpp>
 #include <boost/mpl/list.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -93,11 +92,6 @@ public:
 	perk::state &
 	perk_state();
 private:
-	void
-	handle_player_action(
-		control::actions::any const &
-	);
-
 	boost::statechart::result
 	handle_default_msg(
 		sanguis::messages::base const &
@@ -107,10 +101,6 @@ private:
 	send_perk_choose(
 		sanguis::perk_type
 	);
-
-	fcppt::scoped_ptr<
-		control::input_translator
-	> input_translator_;
 
 	fcppt::scoped_ptr<
 		control::action_handler

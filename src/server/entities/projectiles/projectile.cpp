@@ -2,8 +2,8 @@
 #include <sanguis/entity_type.hpp>
 #include <sanguis/projectile_type.hpp>
 #include <sanguis/messages/add_projectile.hpp>
-#include <sanguis/messages/auto_ptr.hpp>
 #include <sanguis/messages/create.hpp>
+#include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/messages/types/enum.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/dim_fwd.hpp>
@@ -153,7 +153,7 @@ sanguis::server::entities::projectiles::projectile::collision_with_body(
 		);
 }
 
-sanguis::messages::auto_ptr
+sanguis::messages::unique_ptr
 sanguis::server::entities::projectiles::projectile::add_message(
 	sanguis::server::player_id const
 ) const

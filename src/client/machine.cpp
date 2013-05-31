@@ -9,8 +9,8 @@
 #include <sanguis/client/events/tick.hpp>
 #include <sanguis/client/gui/object_fwd.hpp>
 #include <sanguis/client/log.hpp>
-#include <sanguis/messages/auto_ptr.hpp>
 #include <sanguis/messages/base.hpp>
+#include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/load/context_fwd.hpp>
 #include <sanguis/net/deserialize.hpp>
 #include <sanguis/net/send_buffer_size.hpp>
@@ -338,9 +338,11 @@ sanguis::client::machine::data_callback(
 	alda::net::buffer::circular_receive::object &_data
 )
 {
-	for(;;)
+	for(
+		;;
+	)
 	{
-		sanguis::messages::auto_ptr ret(
+		sanguis::messages::unique_ptr ret(
 			sanguis::net::deserialize(
 				_data
 			)

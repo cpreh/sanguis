@@ -1,6 +1,10 @@
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/speed.hpp>
+#include <sanguis/server/collision/body_base.hpp>
+#include <sanguis/server/collision/body.hpp>
+#include <sanguis/server/collision/make_groups.hpp>
+#include <sanguis/server/collision/user_data.hpp>
 #include <sanguis/server/entities/body_parameters.hpp>
 #include <sanguis/server/entities/collision_groups.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
@@ -8,10 +12,6 @@
 #include <sanguis/server/entities/with_ghosts.hpp>
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/ifaces/with_body.hpp>
-#include <sanguis/server/collision/body_base.hpp>
-#include <sanguis/server/collision/body.hpp>
-#include <sanguis/server/collision/make_groups.hpp>
-#include <sanguis/server/collision/user_data.hpp>
 #include <sge/projectile/body/scoped.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
@@ -98,6 +98,13 @@ sanguis::server::entities::with_body::angle(
 	collision_body_->angle(
 		_angle
 	);
+}
+
+sanguis::server::collision::body const &
+sanguis::server::entities::with_body::body() const
+{
+	return
+		*collision_body_;
 }
 
 void

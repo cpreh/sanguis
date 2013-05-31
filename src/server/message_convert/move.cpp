@@ -1,17 +1,18 @@
-#include <sanguis/server/message_convert/move.hpp>
-#include <sanguis/server/entities/with_velocity.hpp>
-#include <sanguis/messages/move.hpp>
 #include <sanguis/messages/create.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
+#include <sanguis/messages/move.hpp>
+#include <sanguis/messages/unique_ptr.hpp>
+#include <sanguis/server/entities/with_velocity.hpp>
+#include <sanguis/server/message_convert/move.hpp>
 
-sanguis::messages::auto_ptr
+
+sanguis::messages::unique_ptr
 sanguis::server::message_convert::move(
-	entities::with_velocity const &_entity
+	sanguis::server::entities::with_velocity const &_entity
 )
 {
 	return
-		messages::create(
-			messages::move(
+		sanguis::messages::create(
+			sanguis::messages::move(
 				_entity.id(),
 				_entity.center().get()
 			)

@@ -4,8 +4,8 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/load/enemy_name.hpp>
 #include <sanguis/messages/add_enemy.hpp>
-#include <sanguis/messages/auto_ptr.hpp>
 #include <sanguis/messages/create.hpp>
+#include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/messages/types/enum.hpp>
 #include <sanguis/server/dim.hpp>
 #include <sanguis/server/direction.hpp>
@@ -51,7 +51,7 @@ sanguis::server::entities::enemies::enemy::enemy(
 	sanguis::server::health const _health,
 	sanguis::server::entities::movement_speed const _movement_speed,
 	sanguis::server::ai::create_function const &_ai,
-	sanguis::server::weapons::unique_ptr _weapon,
+	sanguis::server::weapons::unique_ptr &&_weapon,
 	sanguis::server::pickup_probability const _spawn_chance,
 	sanguis::server::exp const _exp,
 	sanguis::server::entities::enemies::spawn_owner const &_spawn_owner
@@ -129,7 +129,7 @@ sanguis::server::entities::enemies::enemy::on_update()
 	sanguis::server::entities::with_health::on_update();
 }
 
-sanguis::messages::auto_ptr
+sanguis::messages::unique_ptr
 sanguis::server::entities::enemies::enemy::add_message(
 	sanguis::server::player_id const
 ) const

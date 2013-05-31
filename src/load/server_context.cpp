@@ -42,7 +42,6 @@ sanguis::load::server_context::model_dim(
 			return it->second;
 	}
 
-
 	sge::parse::json::start const start_return(
 		sanguis::load::model::parse_json(
 			sanguis::load::model::make_path(

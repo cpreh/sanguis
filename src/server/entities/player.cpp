@@ -6,8 +6,8 @@
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/messages/add_player.hpp>
 #include <sanguis/messages/add_own_player.hpp>
-#include <sanguis/messages/auto_ptr.hpp>
 #include <sanguis/messages/create.hpp>
+#include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/dim.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/enter_sight_function.hpp>
@@ -288,7 +288,7 @@ sanguis::server::entities::player::on_update()
 	sanguis::server::entities::with_weapon::on_update();
 }
 
-sanguis::messages::auto_ptr
+sanguis::messages::unique_ptr
 sanguis::server::entities::player::add_message(
 	sanguis::server::player_id const _receiver
 ) const
@@ -332,7 +332,7 @@ sanguis::server::entities::player::on_new_weapon(
 template<
 	typename Message
 >
-sanguis::messages::auto_ptr
+sanguis::messages::unique_ptr
 sanguis::server::entities::player::make_add_message() const
 {
 	return
