@@ -94,10 +94,9 @@ sanguis::server::collision::ghost::body_enter(
 	sge::projectile::body::object const &_body
 )
 {
-	this->on_body_enter(
-		sanguis::server::collision::from_sge_user_data(
-			_body.user_data()
-		).get()
+	this->dispatch(
+		&sanguis::server::collision::ghost::on_body_enter,
+		_body
 	);
 }
 
@@ -106,9 +105,29 @@ sanguis::server::collision::ghost::body_exit(
 	sge::projectile::body::object const &_body
 )
 {
-	this->on_body_exit(
-		sanguis::server::collision::from_sge_user_data(
-			_body.user_data()
-		).get()
+	this->dispatch(
+		&sanguis::server::collision::ghost::on_body_exit,
+		_body
 	);
+}
+
+template<
+	typename Function
+>
+void
+sanguis::server::collision::ghost::dispatch(
+	Function const &_function,
+	sge::projectile::body::object const &_body
+)
+{
+	if(
+		!_body.user_data().empty()
+	)
+		(
+			this->*_function
+		)(
+			sanguis::server::collision::from_sge_user_data(
+				_body.user_data()
+			).get()
+		);
 }

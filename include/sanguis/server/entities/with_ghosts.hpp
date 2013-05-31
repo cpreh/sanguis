@@ -40,7 +40,7 @@ protected:
 	);
 
 	virtual
-	void
+	bool
 	on_transfer(
 		sanguis::server::entities::transfer_parameters const &
 	);

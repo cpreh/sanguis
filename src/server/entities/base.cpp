@@ -1,11 +1,11 @@
 #include <sanguis/entity_id.hpp>
 #include <sanguis/server/get_unique_id.hpp>
-#include <sanguis/server/collision/global_groups_fwd.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <sge/projectile/body/object_fwd.hpp>
 #include <fcppt/assert/pre.hpp>
 
 
@@ -21,11 +21,11 @@ sanguis::server::entities::base::base()
 {
 }
 
-void
+bool
 sanguis::server::entities::base::transfer(
 	sanguis::server::environment::object &_environment,
-	sanguis::server::collision::global_groups const &_collision_groups,
-	sanguis::server::entities::insert_parameters const &_insert_param
+	sanguis::server::entities::insert_parameters const &_insert_param,
+	sge::projectile::body::object const *const _static_body
 )
 {
 	bool const create(
@@ -34,19 +34,25 @@ sanguis::server::entities::base::transfer(
 
 	environment_ = &_environment;
 
-	this->on_transfer(
-		sanguis::server::entities::transfer_parameters(
-			environment_->collision_world(),
-			_insert_param.center(),
-			_collision_groups,
-			_insert_param.angle()
+	if(
+		!this->on_transfer(
+			sanguis::server::entities::transfer_parameters(
+				_environment.collision_world(),
+				_static_body,
+				_insert_param.center(),
+				_environment.global_collision_groups(),
+				_insert_param.angle()
+			)
 		)
-	);
+	)
+		return false;
 
 	if(
 		create
 	)
 		this->on_create();
+
+	return true;
 }
 
 void
@@ -129,11 +135,12 @@ sanguis::server::entities::base::on_destroy()
 {
 }
 
-void
+bool
 sanguis::server::entities::base::on_transfer(
 	sanguis::server::entities::transfer_parameters const &
 )
 {
+	return true;
 }
 
 void

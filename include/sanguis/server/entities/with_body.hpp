@@ -63,12 +63,9 @@ public:
 	angle(
 		sanguis::server::angle
 	);
-
-	sanguis::server::collision::body const &
-	body() const;
 protected:
 	// entities::base::on_transfer
-	void
+	bool
 	on_transfer(
 		sanguis::server::entities::transfer_parameters const &
 	);

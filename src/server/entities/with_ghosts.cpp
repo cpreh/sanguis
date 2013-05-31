@@ -58,7 +58,7 @@ sanguis::server::entities::with_ghosts::add_ghost(
 		);
 }
 
-void
+bool
 sanguis::server::entities::with_ghosts::on_transfer(
 	sanguis::server::entities::transfer_parameters const &_params
 )
@@ -77,6 +77,8 @@ sanguis::server::entities::with_ghosts::on_transfer(
 	this->update_center(
 		_params.center()
 	);
+
+	return true;
 }
 
 void
