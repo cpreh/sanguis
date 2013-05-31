@@ -225,21 +225,23 @@ sanguis::server::weapons::create(
 							sanguis::weapon_type::pistol,
 							sanguis::server::weapons::base_cooldown(
 								sanguis::duration_second(
-									0.3f
+									0.06f
 								)
 							),
 							sanguis::server::weapons::damage(
-								2.f
+								1.f
 							),
 							sanguis::server::weapons::cast_point(
 								sanguis::duration_second(
 									0.2f
 								)
 							),
-							sanguis::server::weapons::unlimited_magazine_size,
+							sanguis::server::weapons::magazine_size(
+								20u
+							),
 							sanguis::server::weapons::reload_time(
 								sanguis::duration_second(
-									0.f
+									5.f
 								)
 							),
 							sanguis::server::weapons::range(
