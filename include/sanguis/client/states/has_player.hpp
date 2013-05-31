@@ -1,25 +1,25 @@
 #ifndef SANGUIS_CLIENT_STATES_HAS_PLAYER_HPP_INCLUDED
 #define SANGUIS_CLIENT_STATES_HAS_PLAYER_HPP_INCLUDED
 
+#include <sanguis/perk_type_fwd.hpp>
+#include <sanguis/client/control/action_handler_fwd.hpp>
+#include <sanguis/client/events/action_fwd.hpp>
+#include <sanguis/client/events/message_fwd.hpp>
+#include <sanguis/client/perk/state_fwd.hpp>
 #include <sanguis/client/states/running.hpp>
 #include <sanguis/client/states/ingame_fwd.hpp>
-#include <sanguis/client/control/action_handler_fwd.hpp>
-#include <sanguis/client/events/message_fwd.hpp>
-#include <sanguis/client/events/action_fwd.hpp>
-#include <sanguis/client/perk/state_fwd.hpp>
 #include <sanguis/messages/available_perks.hpp>
 #include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/messages/give_weapon.hpp>
 #include <sanguis/messages/level_up.hpp>
 #include <sanguis/messages/remove_id.hpp>
-#include <sanguis/perk_type_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/scoped_ptr.hpp>
+#include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/statechart/state.hpp>
+#include <boost/mpl/list/list10.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/result.hpp>
-#include <boost/mpl/list.hpp>
+#include <boost/statechart/state.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -33,33 +33,35 @@ namespace states
 class has_player
 :
 	public boost::statechart::state<
-		has_player,
-		running,
-		ingame
+		sanguis::client::states::has_player,
+		sanguis::client::states::running,
+		sanguis::client::states::ingame
 	>
 {
 	FCPPT_NONCOPYABLE(
 		has_player
 	);
 public:
-	typedef boost::mpl::list<
+	typedef boost::mpl::list2<
 		boost::statechart::custom_reaction<
-			events::message
+			sanguis::client::events::message
 		>,
 		boost::statechart::custom_reaction<
-			events::action
+			sanguis::client::events::action
 		>
 	> reactions;
 
-	explicit has_player(
+	explicit
+	has_player(
 		my_context
 	);
 
-	virtual ~has_player();
+	virtual
+	~has_player();
 
 	boost::statechart::result
 	react(
-		events::message const &
+		sanguis::client::events::message const &
 	);
 
 	boost::statechart::result
@@ -71,25 +73,25 @@ public:
 
 	result_type
 	operator()(
-		messages::available_perks const &
+		sanguis::messages::available_perks const &
 	);
 
 	result_type
 	operator()(
-		messages::give_weapon const &
+		sanguis::messages::give_weapon const &
 	);
 
 	result_type
 	operator()(
-		messages::level_up const &
+		sanguis::messages::level_up const &
 	);
 
 	result_type
 	operator()(
-		messages::remove_id const &
+		sanguis::messages::remove_id const &
 	);
 
-	perk::state &
+	sanguis::client::perk::state &
 	perk_state();
 private:
 	boost::statechart::result
@@ -103,12 +105,12 @@ private:
 	);
 
 	fcppt::scoped_ptr<
-		control::action_handler
-	> action_handler_;
+		sanguis::client::control::action_handler
+	> const action_handler_;
 
 	fcppt::scoped_ptr<
-		perk::state
-	> perk_state_;
+		sanguis::client::perk::state
+	> const perk_state_;
 };
 
 }

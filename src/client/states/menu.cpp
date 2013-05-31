@@ -168,14 +168,6 @@ sanguis::client::states::menu::react(
 }
 
 boost::statechart::result
-sanguis::client::states::menu::handle_default_msg(
-	messages::base const &
-)
-{
-	return forward_event();
-}
-
-boost::statechart::result
 sanguis::client::states::menu::operator()(
 	messages::connect_state const &_state // TODO: do we need this?
 )
@@ -187,4 +179,12 @@ sanguis::client::states::menu::operator()(
 	);
 
 	return transit<waiting_for_player>();
+}
+
+boost::statechart::result
+sanguis::client::states::menu::handle_default_msg(
+	messages::base const &
+)
+{
+	return forward_event();
 }

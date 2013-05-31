@@ -1,18 +1,19 @@
 #ifndef SANGUIS_CLIENT_STATES_CONSOLE_HPP_INCLUDED
 #define SANGUIS_CLIENT_STATES_CONSOLE_HPP_INCLUDED
 
-#include <sanguis/client/states/has_player.hpp>
 #include <sanguis/client/scoped_pause.hpp>
 #include <sanguis/client/console/activation.hpp>
 #include <sanguis/client/events/action_fwd.hpp>
 #include <sanguis/client/events/overlay_fwd.hpp>
+#include <sanguis/client/states/has_player.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
-#include <boost/statechart/state.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/result.hpp>
+#include <boost/statechart/state.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -24,8 +25,8 @@ namespace states
 class console
 :
 	public boost::statechart::state<
-		console,
-		has_player
+		sanguis::client::states::console,
+		sanguis::client::states::has_player
 	>
 {
 	FCPPT_NONCOPYABLE(
@@ -34,32 +35,34 @@ class console
 public:
 	typedef boost::mpl::list2<
 		boost::statechart::custom_reaction<
-			events::action
+			sanguis::client::events::action
 		>,
 		boost::statechart::custom_reaction<
-			events::overlay
+			sanguis::client::events::overlay
 		>
 	> reactions;
 
-	explicit console(
+	explicit
+	console(
 		my_context
 	);
 
-	virtual ~console();
+	virtual
+	~console();
 
 	boost::statechart::result
 	react(
-		events::action const &
+		sanguis::client::events::action const &
 	);
 
 	boost::statechart::result
 	react(
-		events::overlay const &
+		sanguis::client::events::overlay const &
 	);
 private:
-	client::scoped_pause const pause_;
+	sanguis::client::scoped_pause const pause_;
 
-	client::console::activation const console_activation_;
+	sanguis::client::console::activation const console_activation_;
 };
 
 }
