@@ -21,8 +21,8 @@
 #include <sanguis/server/entities/projectiles/pulse_time.hpp>
 #include <sanguis/server/entities/projectiles/pulses.hpp>
 #include <sanguis/server/entities/projectiles/rocket.hpp>
+#include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/load_context.hpp>
-#include <sanguis/server/environment/object.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 
@@ -79,7 +79,8 @@ sanguis::server::entities::projectiles::rocket::do_damage(
 void
 sanguis::server::entities::projectiles::rocket::on_remove()
 {
-	this->environment().insert(
+	sanguis::server::environment::insert_no_result(
+		this->environment(),
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::projectiles::aoe_damage
 		>(

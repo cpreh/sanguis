@@ -6,7 +6,7 @@
 #include <sanguis/server/collision/global_groups_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sge/projectile/world_fwd.hpp>
-#include <sge/projectile/body/object_fwd.hpp>
+#include <sge/projectile/body/const_optional_object_ref.hpp>
 #include <fcppt/nonassignable.hpp>
 
 
@@ -25,7 +25,7 @@ class transfer_parameters
 public:
 	transfer_parameters(
 		sge::projectile::world &,
-		sge::projectile::body::object const *,
+		sge::projectile::body::const_optional_object_ref const &,
 		sanguis::server::center const &,
 		sanguis::server::collision::global_groups const &,
 		sanguis::server::angle
@@ -34,7 +34,7 @@ public:
 	sge::projectile::world &
 	world() const;
 
-	sge::projectile::body::object const *
+	sge::projectile::body::const_optional_object_ref const &
 	static_body() const;
 
 	sanguis::server::center const
@@ -48,7 +48,7 @@ public:
 private:
 	sge::projectile::world &world_;
 
-	sge::projectile::body::object const *const static_body_;
+	sge::projectile::body::const_optional_object_ref const static_body_;
 
 	sanguis::server::center const center_;
 

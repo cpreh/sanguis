@@ -5,7 +5,7 @@
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/environment/object.hpp>
-#include <sge/projectile/body/object_fwd.hpp>
+#include <sge/projectile/body/const_optional_object_ref_fwd.hpp>
 #include <fcppt/assert/pre.hpp>
 
 
@@ -25,7 +25,7 @@ bool
 sanguis::server::entities::base::transfer(
 	sanguis::server::environment::object &_environment,
 	sanguis::server::entities::insert_parameters const &_insert_param,
-	sge::projectile::body::object const *const _static_body
+	sge::projectile::body::const_optional_object_ref const &_static_body
 )
 {
 	bool const create(

@@ -9,8 +9,9 @@
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/enemies/create.hpp>
 #include <sanguis/server/entities/enemies/spawn_owner_fwd.hpp>
+#include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
-#include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/waves/spawn.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -98,7 +99,8 @@ sanguis::server::waves::spawn(
 		)
 	);
 
-	_env.insert(
+	sanguis::server::environment::insert_no_result(
+		_env,
 		sanguis::server::entities::enemies::create(
 			_diff_clock,
 			_random_generator,

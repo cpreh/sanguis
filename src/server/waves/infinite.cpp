@@ -8,8 +8,9 @@
 #include <sanguis/server/entities/spawns/interval.hpp>
 #include <sanguis/server/entities/spawns/limit.hpp>
 #include <sanguis/server/entities/spawns/limited.hpp>
+#include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
-#include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/waves/delay.hpp>
 #include <sanguis/server/waves/infinite.hpp>
 #include <sanguis/server/waves/spawn_interval.hpp>
@@ -75,7 +76,8 @@ sanguis::server::waves::infinite::process(
 			false
 		);
 
-		_env.insert(
+		sanguis::server::environment::insert_no_result(
+			_env,
 			fcppt::make_unique_ptr<
 				sanguis::server::entities::spawns::limited
 			>(

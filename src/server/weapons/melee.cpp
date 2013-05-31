@@ -7,7 +7,7 @@
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/projectiles/melee.hpp>
-#include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/damage.hpp>
@@ -61,7 +61,8 @@ sanguis::server::weapons::melee::do_attack(
 	sanguis::server::weapons::delayed_attack const &_attack
 )
 {
-	_attack.environment().insert(
+	sanguis::server::environment::insert_no_result(
+		_attack.environment(),
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::projectiles::melee
 		>(

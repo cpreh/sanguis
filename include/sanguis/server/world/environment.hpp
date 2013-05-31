@@ -14,6 +14,7 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
+#include <sanguis/server/entities/optional_base_ref_fwd.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/world/environment_fwd.hpp>
 #include <sanguis/server/world/object_fwd.hpp>
@@ -43,7 +44,7 @@ public:
 
 	~environment();
 
-	sanguis::server::entities::base *
+	sanguis::server::entities::optional_base_ref const
 	insert(
 		sanguis::server::entities::unique_ptr &&,
 		sanguis::server::entities::insert_parameters const &
@@ -57,7 +58,7 @@ public:
 
 	void
 	got_weapon(
-		server::player_id,
+		sanguis::server::player_id,
 		sanguis::entity_id,
 		sanguis::weapon_type
 	);

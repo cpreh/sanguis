@@ -3,12 +3,12 @@
 #include <sanguis/server/collision/global_groups_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sge/projectile/world_fwd.hpp>
-#include <sge/projectile/body/object_fwd.hpp>
+#include <sge/projectile/body/const_optional_object_ref.hpp>
 
 
 sanguis::server::entities::transfer_parameters::transfer_parameters(
 	sge::projectile::world &_world,
-	sge::projectile::body::object const *const _static_body,
+	sge::projectile::body::const_optional_object_ref const &_static_body,
 	sanguis::server::center const &_center,
 	sanguis::server::collision::global_groups const &_global_groups,
 	sanguis::server::angle const _angle
@@ -38,7 +38,7 @@ sanguis::server::entities::transfer_parameters::world() const
 	return world_;
 }
 
-sge::projectile::body::object const *
+sge::projectile::body::const_optional_object_ref const &
 sanguis::server::entities::transfer_parameters::static_body() const
 {
 	return static_body_;

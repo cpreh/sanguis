@@ -13,6 +13,7 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/projectiles/simple_bullet.hpp>
+#include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
@@ -53,7 +54,8 @@ sanguis::server::weapons::pistol::do_attack(
 	sanguis::server::weapons::delayed_attack const &_attack
 )
 {
-	_attack.environment().insert(
+	sanguis::server::environment::insert_no_result(
+		_attack.environment(),
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::projectiles::simple_bullet
 		>(

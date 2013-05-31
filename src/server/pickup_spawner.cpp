@@ -6,12 +6,14 @@
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/pickup_spawner.hpp>
 #include <sanguis/server/team.hpp>
-#include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
+#include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/pickups/health.hpp>
 #include <sanguis/server/entities/pickups/monster.hpp>
 #include <sanguis/server/entities/pickups/weapon.hpp>
+#include <sanguis/server/environment/insert_no_result.hpp>
+#include <sanguis/server/environment/object.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/strong_typedef_assignment.hpp>
 #include <fcppt/assign/make_container.hpp>
@@ -236,20 +238,18 @@ sanguis::server::pickup_spawner::spawn_health(
 	sanguis::server::center const &_center
 )
 {
-	env_.insert(
+	this->spawn_entity(
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::pickups::health
 		>(
 			diff_clock_,
 			env_.load_context(),
 			sanguis::server::team::players,
-			server::health(
+			sanguis::server::health(
 				10.f
 			)
 		),
-		sanguis::server::entities::insert_parameters_center(
-			_center
-		)
+		_center
 	);
 }
 
@@ -258,7 +258,7 @@ sanguis::server::pickup_spawner::spawn_monster(
 	sanguis::server::center const &_center
 )
 {
-	env_.insert(
+	this->spawn_entity(
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::pickups::monster
 		>(
@@ -268,9 +268,7 @@ sanguis::server::pickup_spawner::spawn_monster(
 			sanguis::server::team::players,
 			sanguis::friend_type::spider
 		),
-		sanguis::server::entities::insert_parameters_center(
-			_center
-		)
+		_center
 	);
 }
 
@@ -280,7 +278,7 @@ sanguis::server::pickup_spawner::spawn_weapon(
 	sanguis::weapon_type const _wtype
 )
 {
-	env_.insert(
+	this->spawn_entity(
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::pickups::weapon
 		>(
@@ -289,6 +287,21 @@ sanguis::server::pickup_spawner::spawn_weapon(
 			env_.load_context(),
 			sanguis::server::team::players,
 			_wtype
+		),
+		_center
+	);
+}
+
+void
+sanguis::server::pickup_spawner::spawn_entity(
+	sanguis::server::entities::unique_ptr &&_entity,
+	sanguis::server::center const &_center
+)
+{
+	sanguis::server::environment::insert_no_result(
+		env_,
+		std::move(
+			_entity
 		),
 		sanguis::server::entities::insert_parameters_center(
 			_center

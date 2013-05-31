@@ -10,8 +10,8 @@
 #include <sanguis/server/collision/global_groups_fwd.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/environment/object.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
+#include <sanguis/server/entities/optional_base_ref.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/world/environment.hpp>
 #include <sanguis/server/world/object.hpp>
@@ -36,7 +36,7 @@ sanguis::server::world::environment::~environment()
 {
 }
 
-sanguis::server::entities::base *
+sanguis::server::entities::optional_base_ref const
 sanguis::server::world::environment::insert(
 	sanguis::server::entities::unique_ptr &&_entity,
 	sanguis::server::entities::insert_parameters const &_param

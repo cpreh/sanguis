@@ -48,7 +48,9 @@
 #include <sanguis/server/world/object.hpp>
 #include <sanguis/server/world/random.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/log/error.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/output.hpp>
@@ -171,7 +173,11 @@ sanguis::server::global::context::insert_player(
 		sanguis::server::vector::null()
 	);
 
-	sanguis::server::entities::player const *const player_ref(
+	typedef fcppt::optional<
+		sanguis::server::entities::player const &
+	> const_optional_player_ref;
+
+	const_optional_player_ref const player_ref(
 		sanguis::server::entities::insert_with_result(
 			cur_world,
 			std::move(
@@ -187,12 +193,18 @@ sanguis::server::global::context::insert_player(
 	);
 
 	if(
-		player_ref
-		==
-		nullptr
+		!player_ref.has_value()
 	)
+	{
+		FCPPT_LOG_ERROR(
+			logger,
+			fcppt::log::_
+				<< FCPPT_TEXT("Unable to insert a player!")
+		);
+
 		// TODO: What do we do here?
 		return;
+	}
 
 	cur_world.insert(
 		fcppt::make_unique_ptr<

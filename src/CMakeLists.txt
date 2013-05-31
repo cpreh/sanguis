@@ -707,6 +707,8 @@ SET(
 	include/sanguis/server/entities/link_container.hpp
 	include/sanguis/server/entities/movement_speed.hpp
 	include/sanguis/server/entities/nonsolid.hpp
+	include/sanguis/server/entities/optional_base_ref.hpp
+	include/sanguis/server/entities/optional_base_ref_fwd.hpp
 	include/sanguis/server/entities/pickups/health.hpp
 	include/sanguis/server/entities/pickups/monster.hpp
 	include/sanguis/server/entities/pickups/optional_dim.hpp
@@ -781,6 +783,7 @@ SET(
 	include/sanguis/server/entities/with_velocity_fwd.hpp
 	include/sanguis/server/entities/with_weapon.hpp
 	include/sanguis/server/entities/with_weapon_fwd.hpp
+	include/sanguis/server/environment/insert_no_result.hpp
 	include/sanguis/server/environment/load_context.hpp
 	include/sanguis/server/environment/load_context_fwd.hpp
 	include/sanguis/server/environment/object.hpp
@@ -1312,6 +1315,7 @@ SET(
 	src/server/entities/with_perks.cpp
 	src/server/entities/with_velocity.cpp
 	src/server/entities/with_weapon.cpp
+	src/server/environment/insert_no_result.cpp
 	src/server/environment/load_context.cpp
 	src/server/environment/object.cpp
 	src/server/events/disconnect.cpp

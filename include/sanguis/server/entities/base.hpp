@@ -13,7 +13,7 @@
 #include <sanguis/server/entities/link_container.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
-#include <sge/projectile/body/object_fwd.hpp>
+#include <sge/projectile/body/const_optional_object_ref_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -38,7 +38,7 @@ public:
 	transfer(
 		sanguis::server::environment::object &,
 		sanguis::server::entities::insert_parameters const &,
-		sge::projectile::body::object const *
+		sge::projectile::body::const_optional_object_ref const &
 	);
 
 	void

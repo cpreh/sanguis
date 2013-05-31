@@ -25,6 +25,7 @@
 #include <sanguis/server/collision/global_groups.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
+#include <sanguis/server/entities/optional_base_ref_fwd.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
@@ -72,7 +73,7 @@ public:
 	void
 	update();
 
-	sanguis::server::entities::base *
+	sanguis::server::entities::optional_base_ref const
 	insert(
 		sanguis::server::entities::unique_ptr &&,
 		sanguis::server::entities::insert_parameters const &

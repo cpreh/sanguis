@@ -2,6 +2,8 @@
 #define SANGUIS_SERVER_ENTITIES_INSERT_WITH_RESULT_HPP_INCLUDED
 
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
+#include <fcppt/dynamic_optional_cast.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <memory>
 #include <utility>
@@ -19,7 +21,9 @@ template<
 	typename Entity,
 	typename Object
 >
-Entity *
+fcppt::optional<
+	Entity &
+>
 insert_with_result(
 	Object &_object,
 	std::unique_ptr<
@@ -29,8 +33,8 @@ insert_with_result(
 )
 {
 	return
-		dynamic_cast<
-			Entity *
+		fcppt::dynamic_optional_cast<
+			Entity
 		>(
 			_object.insert(
 				std::move(

@@ -32,6 +32,7 @@
 #include <sanguis/server/entities/enemies/spawn_owner.hpp>
 #include <sanguis/server/entities/property/initial.hpp>
 #include <sanguis/server/entities/spawns/spawn.hpp>
+#include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
@@ -179,7 +180,8 @@ sanguis::server::entities::enemies::enemy::on_remove()
 			*this
 		);
 
-	this->environment().insert(
+	sanguis::server::environment::insert_no_result(
+		this->environment(),
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::exp_area
 		>(

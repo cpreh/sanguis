@@ -40,6 +40,7 @@
 #include <sanguis/server/collision/group.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
+#include <sanguis/server/entities/optional_base_ref.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/with_health.hpp>
@@ -60,6 +61,7 @@
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <sge/projectile/time_increment.hpp>
 #include <sge/projectile/world.hpp>
+#include <sge/projectile/body/const_optional_object_ref.hpp>
 #include <sge/projectile/body/object.hpp>
 #include <sge/projectile/body/scoped.hpp>
 #include <sge/projectile/group/sequence.hpp>
@@ -74,8 +76,8 @@
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
-#include <fcppt/log/error.hpp>
 #include <fcppt/log/output.hpp>
+#include <fcppt/log/warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
 #include <functional>
@@ -241,7 +243,7 @@ sanguis::server::world::object::update()
 	}
 }
 
-sanguis::server::entities::base *
+sanguis::server::entities::optional_base_ref const
 sanguis::server::world::object::insert(
 	sanguis::server::entities::unique_ptr &&_entity,
 	sanguis::server::entities::insert_parameters const &_insert_parameters
@@ -269,19 +271,25 @@ sanguis::server::world::object::insert(
 		ret.second
 	);
 
-	sanguis::server::entities::base *const result(
-		ret.first->second
+	sanguis::server::entities::base &result(
+		*ret.first->second
 	);
 
 	if(
-		!result->transfer(
+		!result.transfer(
 			this->environment(),
 			_insert_parameters,
-			static_body_.get()
+			static_body_
+			?
+				sge::projectile::body::const_optional_object_ref(
+					*static_body_
+				)
+			:
+				sge::projectile::body::const_optional_object_ref()
 		)
 	)
 	{
-		FCPPT_LOG_ERROR(
+		FCPPT_LOG_WARNING(
 			sanguis::server::log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("Failed to spawn entity because its spawnpoint is obstructed")
@@ -292,13 +300,13 @@ sanguis::server::world::object::insert(
 		);
 
 		return
-			nullptr;
+			sanguis::server::entities::optional_base_ref();
 	}
 
 	FCPPT_TRY_DYNAMIC_CAST(
 		sanguis::server::entities::player const *,
 		player_ret,
-		result
+		&result
 	)
 		this->send_player_specific(
 			player_ret->player_id(),
@@ -319,7 +327,9 @@ sanguis::server::world::object::insert(
 		);
 
 	return
-		result;
+		sanguis::server::entities::optional_base_ref(
+			result
+		);
 }
 
 sanguis::server::environment::object &

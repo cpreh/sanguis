@@ -7,6 +7,7 @@
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/projectiles/simple_bullet.hpp>
+#include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
@@ -109,7 +110,8 @@ sanguis::server::weapons::shotgun::do_attack(
 			angle_rng()
 		);
 
-		_attack.environment().insert(
+		sanguis::server::environment::insert_no_result(
+			_attack.environment(),
 			fcppt::make_unique_ptr<
 				sanguis::server::entities::projectiles::simple_bullet
 			>(

@@ -10,6 +10,7 @@
 #include <sanguis/server/entities/friend.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
+#include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
@@ -68,7 +69,8 @@ sanguis::server::weapons::sentry::do_attack(
 	sanguis::server::weapons::delayed_attack const &_attack
 )
 {
-	_attack.environment().insert(
+	sanguis::server::environment::insert_no_result(
+		_attack.environment(),
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::friend_
 		>(

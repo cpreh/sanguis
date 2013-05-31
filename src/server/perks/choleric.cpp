@@ -9,6 +9,7 @@
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/projectiles/simple_bullet.hpp>
 #include <sanguis/server/entities/projectiles/rocket.hpp>
+#include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/perks/choleric.hpp>
 #include <sanguis/server/perks/level_diff.hpp>
@@ -103,7 +104,8 @@ sanguis::server::perks::choleric::update(
 			rand_()
 		);
 
-		_env.insert(
+		sanguis::server::environment::insert_no_result(
+			_env,
 			spawn_bullets
 			?
 				sanguis::server::entities::unique_ptr(
