@@ -10,7 +10,7 @@
 #include <sanguis/creator/randgen.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/random/distribution/basic.hpp>
-#include <fcppt/random/distribution/parameters/uniform_int.hpp>
+#include <fcppt/random/distribution/parameters/uniform_real.hpp>
 
 
 sanguis::creator::result
@@ -19,17 +19,17 @@ sanguis::creator::car_park(
 )
 {
 	typedef fcppt::random::distribution::basic<
-		fcppt::random::distribution::parameters::uniform_int<
-			unsigned
+		fcppt::random::distribution::parameters::uniform_real<
+			double
 		>
-	> uniform_unit;
+	> uniform_real;
 
-	uniform_unit distribution(
-		uniform_unit::param_type::min(
-			0u
+	uniform_real distribution(
+		uniform_real::param_type::min(
+			0.0
 		),
-		uniform_unit::param_type::max(
-			1u
+		uniform_real::param_type::sup(
+			1.0
 		)
 	);
 
@@ -57,7 +57,7 @@ sanguis::creator::car_park(
 			++x
 		)
 		{
-			unsigned const filled(
+			double const filled(
 				distribution(
 					_parameters.randgen()
 				)
@@ -69,7 +69,7 @@ sanguis::creator::car_park(
 					y
 				)
 			] =
-				filled
+				filled < 0.15
 				?
 				sanguis::creator::tile::concrete_wall
 				:
