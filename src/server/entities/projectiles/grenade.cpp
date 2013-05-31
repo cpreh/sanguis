@@ -90,7 +90,7 @@ sanguis::server::entities::projectiles::grenade::~grenade()
 {
 }
 
-void
+bool
 sanguis::server::entities::projectiles::grenade::on_transfer(
 	sanguis::server::entities::transfer_parameters const &_param
 )
@@ -107,9 +107,10 @@ sanguis::server::entities::projectiles::grenade::on_transfer(
 		)
 	);
 
-	sanguis::server::entities::with_body::on_transfer(
-		_param
-	);
+	return
+		sanguis::server::entities::with_body::on_transfer(
+			_param
+		);
 }
 
 void

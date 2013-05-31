@@ -50,7 +50,6 @@
 #include <sanguis/server/message_convert/rotate.hpp>
 #include <sanguis/server/message_convert/move.hpp>
 #include <sanguis/server/message_convert/health.hpp>
-#include <sanguis/server/world/can_be_spawned.hpp>
 #include <sanguis/server/world/context.hpp>
 #include <sanguis/server/world/create_static_body.hpp>
 #include <sanguis/server/world/environment.hpp>
@@ -248,26 +247,6 @@ sanguis::server::world::object::insert(
 	sanguis::server::entities::insert_parameters const &_insert_parameters
 )
 {
-	if(
-		static_body_
-		&&
-		!sanguis::server::world::can_be_spawned(
-			*collision_world_,
-			*static_body_,
-			*_entity
-		)
-	)
-	{
-		FCPPT_LOG_ERROR(
-			sanguis::server::log(),
-			fcppt::log::_
-				<< FCPPT_TEXT("Failed to spawn entity because its spawnpoint is obstructed")
-		);
-
-		return
-			nullptr;
-	}
-
 	sanguis::entity_id const id(
 		_entity->id()
 	);
@@ -290,15 +269,31 @@ sanguis::server::world::object::insert(
 		ret.second
 	);
 
-	ret.first->second->transfer(
-		this->environment(),
-		collision_groups_,
-		_insert_parameters
-	);
-
 	sanguis::server::entities::base *const result(
 		ret.first->second
 	);
+
+	if(
+		!result->transfer(
+			this->environment(),
+			_insert_parameters,
+			static_body_.get()
+		)
+	)
+	{
+		FCPPT_LOG_ERROR(
+			sanguis::server::log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("Failed to spawn entity because its spawnpoint is obstructed")
+		);
+
+		entities_.erase(
+			ret.first
+		);
+
+		return
+			nullptr;
+	}
 
 	FCPPT_TRY_DYNAMIC_CAST(
 		sanguis::server::entities::player const *,

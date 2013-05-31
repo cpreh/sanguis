@@ -44,7 +44,7 @@ public:
 
 	~grenade();
 private:
-	void
+	bool
 	on_transfer(
 		sanguis::server::entities::transfer_parameters const &
 	);

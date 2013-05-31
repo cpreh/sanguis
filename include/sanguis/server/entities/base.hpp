@@ -7,13 +7,13 @@
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team_fwd.hpp>
-#include <sanguis/server/collision/global_groups_fwd.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
 #include <sanguis/server/entities/link_container.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
+#include <sge/projectile/body/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -34,11 +34,11 @@ protected:
 public:
 	// general world functions
 
-	void
+	bool
 	transfer(
 		sanguis::server::environment::object &,
-		sanguis::server::collision::global_groups const &,
-		sanguis::server::entities::insert_parameters const &
+		sanguis::server::entities::insert_parameters const &,
+		sge::projectile::body::object const *
 	);
 
 	void
@@ -127,7 +127,7 @@ private:
 	on_destroy();
 
 	virtual
-	void
+	bool
 	on_transfer(
 		sanguis::server::entities::transfer_parameters const &
 	);

@@ -12,6 +12,7 @@
 #include <sanguis/server/entities/with_ghosts.hpp>
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/ifaces/with_body.hpp>
+#include <sge/projectile/world.hpp>
 #include <sge/projectile/body/scoped.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
@@ -100,14 +101,7 @@ sanguis::server::entities::with_body::angle(
 	);
 }
 
-sanguis::server::collision::body const &
-sanguis::server::entities::with_body::body() const
-{
-	return
-		*collision_body_;
-}
-
-void
+bool
 sanguis::server::entities::with_body::on_transfer(
 	sanguis::server::entities::transfer_parameters const &_params
 )
@@ -123,6 +117,16 @@ sanguis::server::entities::with_body::on_transfer(
 	collision_body_->speed(
 		this->initial_speed()
 	);
+
+	if(
+		_params.static_body()
+		&&
+		_params.world().collides(
+			collision_body_->get(),
+			*_params.static_body()
+		)
+	)
+		return false;
 
 	scoped_body_.take(
 		fcppt::make_unique_ptr<
@@ -140,9 +144,10 @@ sanguis::server::entities::with_body::on_transfer(
 		)
 	);
 
-	sanguis::server::entities::with_ghosts::on_transfer(
-		_params
-	);
+	return
+		sanguis::server::entities::with_ghosts::on_transfer(
+			_params
+		);
 }
 
 void

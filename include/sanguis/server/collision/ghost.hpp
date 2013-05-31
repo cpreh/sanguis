@@ -55,6 +55,15 @@ private:
 		sge::projectile::body::object const &
 	);
 
+	template<
+		typename Function
+	>
+	void
+	dispatch(
+		Function const &,
+		sge::projectile::body::object const &
+	);
+
 	virtual
 	void
 	on_body_enter(

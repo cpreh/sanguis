@@ -932,7 +932,6 @@ SET(
 	include/sanguis/server/weapons/unlimited_magazine_size.hpp
 	include/sanguis/server/weapons/weapon.hpp
 	include/sanguis/server/weapons/weapon_fwd.hpp
-	include/sanguis/server/world/can_be_spawned.hpp
 	include/sanguis/server/world/context.hpp
 	include/sanguis/server/world/context_fwd.hpp
 	include/sanguis/server/world/convert_pos.hpp
@@ -1385,7 +1384,6 @@ SET(
 	src/server/weapons/unlimited_magazine_count.cpp
 	src/server/weapons/unlimited_magazine_size.cpp
 	src/server/weapons/weapon.cpp
-	src/server/world/can_be_spawned.cpp
 	src/server/world/context.cpp
 	src/server/world/create_static_body.cpp
 	src/server/world/entity_map.cpp
