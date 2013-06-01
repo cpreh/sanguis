@@ -2,7 +2,6 @@
 #include <sanguis/client/draw2d/collide_callback.hpp>
 #include <sanguis/client/draw2d/dim2.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
-#include <sanguis/client/draw2d/speed_is_null.hpp>
 #include <sanguis/client/draw2d/transform_callback.hpp>
 #include <sanguis/client/draw2d/entities/own_player.hpp>
 #include <sanguis/client/draw2d/entities/player.hpp>
@@ -35,12 +34,8 @@ void
 sanguis::client::draw2d::entities::own_player::update()
 {
 	if(
-		!sanguis::client::draw2d::speed_is_null(
-			this->speed()
-		)
-		&&
 		collide_(
-			this->center(),
+			this->extrapolated_center(),
 			this->bounding_dim()
 		)
 	)

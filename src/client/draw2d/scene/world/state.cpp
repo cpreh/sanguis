@@ -174,12 +174,13 @@ sanguis::client::draw2d::scene::world::state::test_collision(
 
 	sanguis::client::draw2d::scene::world::batch_grid::dim const lower(
 		sanguis::client::draw2d::scene::world::clamp_pos(
-			sanguis::client::draw2d::scene::world::ceil_div_signed_pos(
-				fcppt::math::vector::structure_cast<
-					sanguis::client::draw2d::scene::world::signed_pos
-				>(
-					_center.get() - scaled_dim
-				),
+			fcppt::math::vector::structure_cast<
+				sanguis::client::draw2d::scene::world::signed_pos
+			>(
+				(
+					_center.get() - scaled_dim / 2
+				)
+				/
 				sanguis::client::draw2d::scene::world::tile_size::value
 			),
 			grid_.size()
@@ -192,7 +193,7 @@ sanguis::client::draw2d::scene::world::state::test_collision(
 				fcppt::math::vector::structure_cast<
 					sanguis::client::draw2d::scene::world::signed_pos
 				>(
-					_center.get() + scaled_dim
+					_center.get() + scaled_dim / 2
 				),
 				sanguis::client::draw2d::scene::world::tile_size::value
 			),

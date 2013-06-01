@@ -134,7 +134,7 @@ sanguis::client::draw2d::entities::model::part::update()
 		)
 		<
 		static_cast<
-			sprite::rotation
+			sanguis::client::draw2d::sprite::rotation
 		>(
 			0.001
 		)

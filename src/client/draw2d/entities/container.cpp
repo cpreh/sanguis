@@ -2,6 +2,7 @@
 #include <sanguis/client/draw2d/center.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
+#include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/entities/base.hpp>
 #include <sanguis/client/draw2d/entities/container.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
@@ -20,7 +21,7 @@
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/center.hpp>
 #include <sge/sprite/intrusive/connection.hpp>
-#include <sge/timer/elapsed_fractional_and_reset.hpp>
+#include <sge/timer/elapsed_fractional.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -91,19 +92,30 @@ sanguis::client::draw2d::entities::container::center() const
 		);
 }
 
+sanguis::client::draw2d::sprite::center const
+sanguis::client::draw2d::entities::container::extrapolated_center() const
+{
+	return
+		this->center()
+		+
+		sanguis::client::draw2d::sprite::center(
+			fcppt::math::vector::structure_cast<
+				sanguis::client::draw2d::sprite::center::value_type
+			>(
+				this->center_diff()
+			)
+		);
+}
+
 void
 sanguis::client::draw2d::entities::container::update()
 {
 	center_ +=
 		sanguis::client::draw2d::center(
-			sge::timer::elapsed_fractional_and_reset<
-				sanguis::client::draw2d::funit
-			>(
-				move_timer_
-			)
-			*
-			this->speed().get()
+			this->center_diff()
 		);
+
+	move_timer_.reset();
 
 	this->update_center(
 		sanguis::client::draw2d::sprite::center(
@@ -124,7 +136,7 @@ sanguis::client::draw2d::entities::container::center(
 	center_ =
 		sanguis::client::draw2d::center(
 			fcppt::math::vector::structure_cast<
-				draw2d::center::value_type
+				sanguis::client::draw2d::center::value_type
 			>(
 				_center.get()
 			)
@@ -235,6 +247,19 @@ sanguis::client::draw2d::entities::container::const_iterator
 sanguis::client::draw2d::entities::container::end() const
 {
 	return sprites_.end();
+}
+
+sanguis::client::draw2d::vector2 const
+sanguis::client::draw2d::entities::container::center_diff() const
+{
+	return
+		sge::timer::elapsed_fractional<
+			sanguis::client::draw2d::funit
+		>(
+			move_timer_
+		)
+		*
+		this->speed().get();
 }
 
 void
