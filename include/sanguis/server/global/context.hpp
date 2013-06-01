@@ -11,6 +11,7 @@
 #include <sanguis/world_id.hpp>
 #include <sanguis/load/server_context_fwd.hpp>
 #include <sanguis/messages/base_fwd.hpp>
+#include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/console_fwd.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/speed_fwd.hpp>
@@ -86,6 +87,12 @@ public:
 	player_speed(
 		sanguis::server::player_id,
 		sanguis::server::speed const &
+	);
+
+	void
+	player_position(
+		sanguis::server::player_id,
+		sanguis::server::center const &
 	);
 
 	void
