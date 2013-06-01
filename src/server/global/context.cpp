@@ -170,7 +170,7 @@ sanguis::server::global::context::insert_player(
 
 	// FIXME: where to insert the player?
 	sanguis::server::center const spawn_pos(
-		sanguis::server::vector::null()
+		sanguis::server::vector(-2,-2)
 	);
 
 	typedef fcppt::optional<
