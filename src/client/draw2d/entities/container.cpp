@@ -1,36 +1,48 @@
+#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/client/draw2d/center.hpp>
+#include <sanguis/client/draw2d/funit.hpp>
+#include <sanguis/client/draw2d/speed.hpp>
+#include <sanguis/client/draw2d/entities/base.hpp>
 #include <sanguis/client/draw2d/entities/container.hpp>
+#include <sanguis/client/draw2d/entities/order_vector.hpp>
+#include <sanguis/client/draw2d/entities/with_center.hpp>
+#include <sanguis/client/draw2d/entities/with_orientation.hpp>
+#include <sanguis/client/draw2d/entities/with_speed.hpp>
+#include <sanguis/client/draw2d/sprite/center.hpp>
+#include <sanguis/client/draw2d/sprite/dim.hpp>
+#include <sanguis/client/draw2d/sprite/index.hpp>
+#include <sanguis/client/draw2d/sprite/rotation.hpp>
+#include <sanguis/client/draw2d/sprite/system_decl.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/draw2d/sprite/normal/parameters.hpp>
-#include <sanguis/client/draw2d/sprite/index.hpp>
-#include <sanguis/client/draw2d/sprite/system_decl.hpp>
-#include <sanguis/client/draw2d/funit.hpp>
+#include <sanguis/client/draw2d/sprite/normal/system.hpp>
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/center.hpp>
 #include <sge/sprite/intrusive/connection.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 sanguis::client::draw2d::entities::container::container(
 	sanguis::diff_clock const &_diff_clock,
-	sprite::normal::system &_normal_system,
-	entities::order_vector const &_orders,
-	sprite::dim const &_dim
+	sanguis::client::draw2d::sprite::normal::system &_normal_system,
+	sanguis::client::draw2d::entities::order_vector const &_orders,
+	sanguis::client::draw2d::sprite::dim const &_dim
 )
 :
-	base(),
-	with_orientation(),
-	with_speed(),
+	sanguis::client::draw2d::entities::base(),
+	sanguis::client::draw2d::entities::with_orientation(),
+	sanguis::client::draw2d::entities::with_speed(),
 	speed_(
-		draw2d::speed::value_type::null()
+		sanguis::client::draw2d::speed::value_type::null()
 	),
 	center_(
-		draw2d::center::value_type::null()
+		sanguis::client::draw2d::center::value_type::null()
 	),
 	sprites_(),
 	move_timer_(
@@ -51,7 +63,7 @@ sanguis::client::draw2d::entities::container::container(
 	)
 		sprites_.push_back(
 			object(
-				sprite::normal::parameters()
+				sanguis::client::draw2d::sprite::normal::parameters()
 				.connection(
 					_normal_system.connection(
 						order
@@ -72,7 +84,7 @@ sanguis::client::draw2d::sprite::center const
 sanguis::client::draw2d::entities::container::center() const
 {
 	return
-		draw2d::sprite::center(
+		sanguis::client::draw2d::sprite::center(
 			sge::sprite::center(
 				this->master()
 			)
@@ -83,9 +95,9 @@ void
 sanguis::client::draw2d::entities::container::update()
 {
 	center_ +=
-		draw2d::center(
+		sanguis::client::draw2d::center(
 			sge::timer::elapsed_fractional_and_reset<
-				draw2d::funit
+				sanguis::client::draw2d::funit
 			>(
 				move_timer_
 			)
@@ -94,9 +106,9 @@ sanguis::client::draw2d::entities::container::update()
 		);
 
 	this->update_center(
-		sprite::center(
+		sanguis::client::draw2d::sprite::center(
 			fcppt::math::vector::structure_cast<
-				sprite::center::value_type
+				sanguis::client::draw2d::sprite::center::value_type
 			>(
 				center_.get()
 			)
@@ -106,11 +118,11 @@ sanguis::client::draw2d::entities::container::update()
 
 void
 sanguis::client::draw2d::entities::container::center(
-	sprite::center const &_center
+	sanguis::client::draw2d::sprite::center const &_center
 )
 {
 	center_ =
-		draw2d::center(
+		sanguis::client::draw2d::center(
 			fcppt::math::vector::structure_cast<
 				draw2d::center::value_type
 			>(
@@ -125,7 +137,7 @@ sanguis::client::draw2d::entities::container::center(
 
 void
 sanguis::client::draw2d::entities::container::orientation(
-	sprite::rotation const _orientation
+	sanguis::client::draw2d::sprite::rotation const _orientation
 )
 {
 	for(
@@ -145,7 +157,7 @@ sanguis::client::draw2d::entities::container::orientation() const
 
 void
 sanguis::client::draw2d::entities::container::speed(
-	draw2d::speed const &_speed
+	sanguis::client::draw2d::speed const &_speed
 )
 {
 	speed_ = _speed;
@@ -159,7 +171,7 @@ sanguis::client::draw2d::entities::container::speed() const
 
 sanguis::client::draw2d::entities::container::object &
 sanguis::client::draw2d::entities::container::at(
-	sprite::index const &_index
+	sanguis::client::draw2d::sprite::index const &_index
 )
 {
 	return
@@ -170,7 +182,7 @@ sanguis::client::draw2d::entities::container::at(
 
 sanguis::client::draw2d::entities::container::object const &
 sanguis::client::draw2d::entities::container::at(
-	sprite::index const &_index
+	sanguis::client::draw2d::sprite::index const &_index
 ) const
 {
 	return
@@ -184,7 +196,9 @@ sanguis::client::draw2d::entities::container::master()
 {
 	return
 		this->at(
-			sprite::index(0)
+			sanguis::client::draw2d::sprite::index(
+				0
+			)
 		);
 }
 
@@ -225,18 +239,14 @@ sanguis::client::draw2d::entities::container::end() const
 
 void
 sanguis::client::draw2d::entities::container::update_center(
-	sprite::center const &_center
+	sanguis::client::draw2d::sprite::center const &_center
 )
 {
 	for(
-		sprite_vector::iterator it(
-			sprites_.begin()
-		);
-		it != sprites_.end();
-		++it
+		auto &sprite : sprites_
 	)
 		sge::sprite::center(
-			*it,
+			sprite,
 			_center.get()
 		);
 }

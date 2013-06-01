@@ -4,6 +4,7 @@
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <fcppt/noncopyable.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -21,14 +22,17 @@ class with_center
 protected:
 	with_center();
 
-	virtual ~with_center();
+	virtual
+	~with_center() = 0;
 public:
-	virtual void
+	virtual
+	void
 	center(
-		sprite::center const &
+		sanguis::client::draw2d::sprite::center const &
 	) = 0;
 
-	virtual sprite::center const
+	virtual
+	sanguis::client::draw2d::sprite::center const
 	center() const = 0;
 };
 

@@ -1,8 +1,9 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_SPEED_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_SPEED_HPP_INCLUDED
 
-#include <sanguis/client/draw2d/speed.hpp>
+#include <sanguis/client/draw2d/speed_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -21,14 +22,17 @@ class with_speed
 protected:
 	with_speed();
 
-	virtual ~with_speed();
+	virtual
+	~with_speed() = 0;
 public:
-	virtual void
+	virtual
+	void
 	speed(
-		draw2d::speed const &
+		sanguis::client::draw2d::speed const &
 	) = 0;
 
-	virtual draw2d::speed const
+	virtual
+	sanguis::client::draw2d::speed const
 	speed() const = 0;
 };
 

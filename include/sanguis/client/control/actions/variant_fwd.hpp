@@ -1,5 +1,5 @@
-#ifndef SANGUIS_CLIENT_CONTROL_ACTIONS_FWD_VARIANT_HPP_INCLUDED
-#define SANGUIS_CLIENT_CONTROL_ACTIONS_FWD_VARIANT_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_CONTROL_ACTIONS_VARIANT_FWD_HPP_INCLUDED
+#define SANGUIS_CLIENT_CONTROL_ACTIONS_VARIANT_FWD_HPP_INCLUDED
 
 #include <sanguis/client/control/actions/binary_fwd.hpp>
 #include <sanguis/client/control/actions/cursor_fwd.hpp>

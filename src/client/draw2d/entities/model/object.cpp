@@ -89,12 +89,16 @@ sanguis::client::draw2d::entities::model::object::object(
 		_param.normal_system(),
 		expand_orders(
 			_orders,
-			_param.collection()[_name].size()
+			_param.collection()[
+				_name
+			].size()
 		),
 		fcppt::math::dim::structure_cast<
 			sanguis::client::draw2d::sprite::dim
 		>(
-			_param.collection()[_name].dim()
+			_param.collection()[
+				_name
+			].dim()
 		)
 	),
 	sanguis::client::draw2d::entities::with_health(),

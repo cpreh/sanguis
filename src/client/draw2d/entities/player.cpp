@@ -1,18 +1,24 @@
 #include <sanguis/client/draw2d/funit.hpp>
+#include <sanguis/client/draw2d/speed.hpp>
+#include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/player.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/model/needs_healthbar.hpp>
+#include <sanguis/client/draw2d/entities/model/object.hpp>
+#include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
+#include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assign/make_container.hpp>
+#include <fcppt/math/point_rotate.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/signed_angle_between_cast.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
-#include <fcppt/math/point_rotate.hpp>
+
 
 namespace
 {
@@ -28,21 +34,21 @@ sanguis::client::draw2d::sprite::index const
 }
 
 sanguis::client::draw2d::entities::player::player(
-	model::parameters const &_param
+	sanguis::client::draw2d::entities::model::parameters const &_param
 )
 :
-	model::object(
+	sanguis::client::draw2d::entities::model::object(
 		_param,
 		FCPPT_TEXT("player"),
 		fcppt::assign::make_container<
-			entities::order_vector
+			sanguis::client::draw2d::entities::order_vector
 		>(
-			z_ordering::player_lower
+			sanguis::client::draw2d::z_ordering::player_lower
 		)(
-			z_ordering::player_upper
+			sanguis::client::draw2d::z_ordering::player_upper
 		),
-		model::needs_healthbar::yes,
-		model::decay_option::delayed
+		sanguis::client::draw2d::entities::model::needs_healthbar::yes,
+		sanguis::client::draw2d::entities::model::decay_option::delayed
 	)
 {
 }
@@ -53,21 +59,21 @@ sanguis::client::draw2d::entities::player::~player()
 
 void
 sanguis::client::draw2d::entities::player::speed(
-	draw2d::speed const &_speed
+	sanguis::client::draw2d::speed const &_speed
 )
 {
-	model::object::speed(
+	sanguis::client::draw2d::entities::model::object::speed(
 		_speed
 	);
 
 	if(
 		this->walking()
 	)
-		model::object::orientation(
+		sanguis::client::draw2d::entities::model::object::orientation(
 			fcppt::math::vector::signed_angle_between_cast<
 				sanguis::client::draw2d::funit
 			>(
-				vector2::null(),
+				sanguis::client::draw2d::vector2::null(),
 				_speed.get()
 			),
 			bottom
@@ -76,10 +82,10 @@ sanguis::client::draw2d::entities::player::speed(
 
 void
 sanguis::client::draw2d::entities::player::orientation(
-	sprite::rotation const _orientation
+	sanguis::client::draw2d::sprite::rotation const _orientation
 )
 {
-	model::object::orientation(
+	sanguis::client::draw2d::entities::model::object::orientation(
 		_orientation,
 		top // TODO
 	); // TODO: better interface for this in model
@@ -88,34 +94,34 @@ sanguis::client::draw2d::entities::player::orientation(
 void
 sanguis::client::draw2d::entities::player::update()
 {
-	model::object::update();
+	sanguis::client::draw2d::entities::model::object::update();
 
-	vector2 const
+	sanguis::client::draw2d::vector2 const
 		leg_center(
 			fcppt::math::vector::structure_cast<
-				vector2
+				sanguis::client::draw2d::vector2
 			>(
 				player_leg_center
 			)
 		),
 		body_center(
 			fcppt::math::vector::structure_cast<
-				vector2
+				sanguis::client::draw2d::vector2
 			>(
 				player_body_center
 			)
 		);
 
-	sprite::rotation const sprite_rotation(
+	sanguis::client::draw2d::sprite::rotation const sprite_rotation(
 		this->at(
 			bottom
 		).rotation()
 	);
 
-	vector2 const new_rotation(
+	sanguis::client::draw2d::vector2 const new_rotation(
 		fcppt::math::point_rotate(
 			leg_center,
-			vector2(
+			sanguis::client::draw2d::vector2(
 				static_cast<
 					sanguis::client::draw2d::funit
 				>(
@@ -130,17 +136,17 @@ sanguis::client::draw2d::entities::player::update()
 					this->at(
 						bottom
 					).h()
-					/2
+					/ 2
 				)
 			),
 			sprite_rotation
 		)
 	);
 
-	vector2 const
+	sanguis::client::draw2d::vector2 const
 		rot_abs(
 			fcppt::math::vector::structure_cast<
-				vector2
+				sanguis::client::draw2d::vector2
 			>(
 				this->at(
 					bottom
@@ -157,9 +163,18 @@ sanguis::client::draw2d::entities::player::update()
 		top
 	).pos(
 		fcppt::math::vector::structure_cast<
-			sprite::point
+			sanguis::client::draw2d::sprite::point
 		>(
 			top_pos
 		)
 	);
+}
+
+sanguis::client::draw2d::sprite::dim const
+sanguis::client::draw2d::entities::player::bounding_dim() const
+{
+	return
+		this->at(
+			top
+		).size();
 }

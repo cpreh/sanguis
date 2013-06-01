@@ -4,6 +4,7 @@
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <fcppt/noncopyable.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -21,14 +22,17 @@ class with_orientation
 protected:
 	with_orientation();
 
-	virtual ~with_orientation();
+	virtual
+	~with_orientation() = 0;
 public:
-	virtual void
+	virtual
+	void
 	orientation(
-		sprite::rotation
+		sanguis::client::draw2d::sprite::rotation
 	) = 0;
 
-	virtual sprite::rotation
+	virtual
+	sanguis::client::draw2d::sprite::rotation
 	orientation() const = 0;
 };
 

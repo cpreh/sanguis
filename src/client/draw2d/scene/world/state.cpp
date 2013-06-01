@@ -1,14 +1,22 @@
+#include <sanguis/collision_scale.hpp>
 #include <sanguis/client/world_parameters.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/scene/background_dim.hpp>
 #include <sanguis/client/draw2d/scene/world/batch.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_size.hpp>
+#include <sanguis/client/draw2d/scene/world/ceil_div_signed_pos.hpp>
 #include <sanguis/client/draw2d/scene/world/clamp_pos.hpp>
 #include <sanguis/client/draw2d/scene/world/generate_batches.hpp>
 #include <sanguis/client/draw2d/scene/world/signed_pos.hpp>
 #include <sanguis/client/draw2d/scene/world/state.hpp>
 #include <sanguis/client/draw2d/scene/world/tile_size.hpp>
+#include <sanguis/client/draw2d/sprite/center.hpp>
+#include <sanguis/client/draw2d/sprite/dim.hpp>
+#include <sanguis/client/draw2d/sprite/unit.hpp>
+#include <sanguis/creator/generate.hpp>
+#include <sanguis/creator/result.hpp>
+#include <sanguis/creator/tile_is_solid.hpp>
 #include <sanguis/load/tiles/context_fwd.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
@@ -22,8 +30,6 @@
 #include <sge/sprite/state/parameters.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/container/grid/make_pos_crange_start_end.hpp>
-#include <fcppt/math/ceil_div_signed.hpp>
-#include <fcppt/math/map.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/comparison.hpp>
 #include <fcppt/math/dim/fill.hpp>
@@ -49,9 +55,14 @@ sanguis::client::draw2d::scene::world::state::state(
 		renderer_,
 		sanguis::client::draw2d::scene::world::sprite::state::parameters_type()
 	),
+	grid_(
+		sanguis::creator::generate(
+			_parameters.top_parameters()
+		).grid()
+	),
 	batches_(
 		sanguis::client::draw2d::scene::world::generate_batches(
-			_parameters.top_parameters(),
+			grid_,
 			_tiles,
 			sprite_buffers_
 		)
@@ -98,39 +109,23 @@ sanguis::client::draw2d::scene::world::state::draw(
 			sanguis::client::draw2d::scene::world::clamp_pos(
 				int_translation
 				/
-				batch_size_trans
-				,
+				batch_size_trans,
 				batches_.size()
 			)
 		),
 		upper(
 			sanguis::client::draw2d::scene::world::clamp_pos(
-				fcppt::math::map<
-					sanguis::client::draw2d::scene::world::signed_pos
-				>(
-					(
-						int_translation
-						+
-						fcppt::math::dim::structure_cast<
-							sanguis::client::draw2d::scene::world::signed_pos
-						>(
-							sanguis::client::draw2d::scene::background_dim(
-								renderer_
-							)
+				sanguis::client::draw2d::scene::world::ceil_div_signed_pos(
+					int_translation
+					+
+					fcppt::math::dim::structure_cast<
+						sanguis::client::draw2d::scene::world::signed_pos
+					>(
+						sanguis::client::draw2d::scene::background_dim(
+							renderer_
 						)
 					),
-					[
-						batch_size_trans
-					](
-						sanguis::client::draw2d::scene::world::signed_pos::value_type const _value
-					)
-					{
-						return
-							fcppt::math::ceil_div_signed(
-								_value,
-								batch_size_trans
-							);
-					}
+					batch_size_trans
 				),
 				batches_.size()
 			)
@@ -159,4 +154,71 @@ sanguis::client::draw2d::scene::world::state::draw(
 			sprite_buffers_.parameters().vertex_declaration(),
 			sprite_state_
 		);
+}
+
+bool
+sanguis::client::draw2d::scene::world::state::test_collision(
+	sanguis::client::draw2d::sprite::center const &_center,
+	sanguis::client::draw2d::sprite::dim const &_dim
+) const
+{
+	sanguis::client::draw2d::sprite::dim const scaled_dim(
+		_dim
+		/
+		static_cast<
+			sanguis::client::draw2d::sprite::unit
+		>(
+			sanguis::collision_scale()
+		)
+	);
+
+	sanguis::client::draw2d::scene::world::batch_grid::dim const lower(
+		sanguis::client::draw2d::scene::world::clamp_pos(
+			sanguis::client::draw2d::scene::world::ceil_div_signed_pos(
+				fcppt::math::vector::structure_cast<
+					sanguis::client::draw2d::scene::world::signed_pos
+				>(
+					_center.get() - scaled_dim
+				),
+				sanguis::client::draw2d::scene::world::tile_size::value
+			),
+			grid_.size()
+		)
+	);
+
+	sanguis::client::draw2d::scene::world::batch_grid::dim const upper(
+		sanguis::client::draw2d::scene::world::clamp_pos(
+			sanguis::client::draw2d::scene::world::ceil_div_signed_pos(
+				fcppt::math::vector::structure_cast<
+					sanguis::client::draw2d::scene::world::signed_pos
+				>(
+					_center.get() + scaled_dim
+				),
+				sanguis::client::draw2d::scene::world::tile_size::value
+			),
+			grid_.size()
+		)
+	);
+
+	FCPPT_ASSERT_ERROR(
+		lower <= upper
+	);
+
+	for(
+		auto const &entry
+		:
+		fcppt::container::grid::make_pos_crange_start_end(
+			grid_,
+			lower,
+			upper
+		)
+	)
+		if(
+			sanguis::creator::tile_is_solid(
+				entry.value()
+			)
+		)
+			return true;
+
+	return false;
 }

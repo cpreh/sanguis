@@ -22,6 +22,7 @@ SET(
 	include/sanguis/client/config/settings/object.hpp
 	include/sanguis/client/config/settings/object_fwd.hpp
 	include/sanguis/client/config/settings/optional_section.hpp
+	include/sanguis/client/config/settings/optional_section_fwd.hpp
 	include/sanguis/client/config/settings/saver.hpp
 	include/sanguis/client/console/activation.hpp
 	include/sanguis/client/console/gfx.hpp
@@ -48,13 +49,16 @@ SET(
 	include/sanguis/client/control/actions/scale_type.hpp
 	include/sanguis/client/control/actions/scale_type_fwd.hpp
 	include/sanguis/client/control/actions/variant.hpp
+	include/sanguis/client/control/actions/variant_fwd.hpp
 	include/sanguis/client/control/attack_dest.hpp
 	include/sanguis/client/control/attack_dest_fwd.hpp
 	include/sanguis/client/control/axis_direction_max.hpp
 	include/sanguis/client/control/axis_direction_min.hpp
 	include/sanguis/client/control/cursor_position.hpp
+	include/sanguis/client/control/cursor_position_fwd.hpp
 	include/sanguis/client/control/cursor_unit.hpp
 	include/sanguis/client/control/direction_vector.hpp
+	include/sanguis/client/control/direction_vector_fwd.hpp
 	include/sanguis/client/control/environment.hpp
 	include/sanguis/client/control/environment_fwd.hpp
 	include/sanguis/client/control/input_translator.hpp
@@ -70,7 +74,10 @@ SET(
 	include/sanguis/client/daytime_settings_fwd.hpp
 	include/sanguis/client/draw2d/aoe.hpp
 	include/sanguis/client/draw2d/center.hpp
+	include/sanguis/client/draw2d/center_fwd.hpp
+	include/sanguis/client/draw2d/collide_callback.hpp
 	include/sanguis/client/draw2d/dim2.hpp
+	include/sanguis/client/draw2d/dim2_fwd.hpp
 	include/sanguis/client/draw2d/entities/aoe_bullet.hpp
 	include/sanguis/client/draw2d/entities/base.hpp
 	include/sanguis/client/draw2d/entities/base_fwd.hpp
@@ -131,6 +138,7 @@ SET(
 	include/sanguis/client/draw2d/scene/background_fwd.hpp
 	include/sanguis/client/draw2d/scene/background_texture_coordinates.hpp
 	include/sanguis/client/draw2d/scene/control_environment.hpp
+	include/sanguis/client/draw2d/scene/control_environment_fwd.hpp
 	include/sanguis/client/draw2d/scene/foreach_z_ordering.hpp
 	include/sanguis/client/draw2d/scene/hud.hpp
 	include/sanguis/client/draw2d/scene/hud_fwd.hpp
@@ -144,12 +152,15 @@ SET(
 	include/sanguis/client/draw2d/scene/world/batch_grid.hpp
 	include/sanguis/client/draw2d/scene/world/batch_grid_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/batch_size.hpp
+	include/sanguis/client/draw2d/scene/world/ceil_div_signed_pos.hpp
 	include/sanguis/client/draw2d/scene/world/clamp_pos.hpp
 	include/sanguis/client/draw2d/scene/world/clamp_size.hpp
 	include/sanguis/client/draw2d/scene/world/generate_batches.hpp
 	include/sanguis/client/draw2d/scene/world/object.hpp
 	include/sanguis/client/draw2d/scene/world/object_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/signed_pos.hpp
+	include/sanguis/client/draw2d/scene/world/signed_pos_fwd.hpp
+	include/sanguis/client/draw2d/scene/world/signed_unit.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/buffers.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/buffers_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/choices.hpp
@@ -173,6 +184,8 @@ SET(
 	include/sanguis/client/draw2d/scene/world/tile_orientation.hpp
 	include/sanguis/client/draw2d/scene/world/tile_size.hpp
 	include/sanguis/client/draw2d/scene/world/to_tile_texture.hpp
+	include/sanguis/client/draw2d/scene/world/unsigned_pos.hpp
+	include/sanguis/client/draw2d/scene/world/unsigned_pos_fwd.hpp
 	include/sanguis/client/draw2d/speed.hpp
 	include/sanguis/client/draw2d/speed_fwd.hpp
 	include/sanguis/client/draw2d/speed_is_null.hpp
@@ -182,6 +195,7 @@ SET(
 	include/sanguis/client/draw2d/sprite/animation/texture_fwd.hpp
 	include/sanguis/client/draw2d/sprite/animation/texture_impl.hpp
 	include/sanguis/client/draw2d/sprite/center.hpp
+	include/sanguis/client/draw2d/sprite/center_fwd.hpp
 	include/sanguis/client/draw2d/sprite/client/choices.hpp
 	include/sanguis/client/draw2d/sprite/client/object.hpp
 	include/sanguis/client/draw2d/sprite/client/parameters.hpp
@@ -194,6 +208,7 @@ SET(
 	include/sanguis/client/draw2d/sprite/colored/parameters.hpp
 	include/sanguis/client/draw2d/sprite/colored/system.hpp
 	include/sanguis/client/draw2d/sprite/dim.hpp
+	include/sanguis/client/draw2d/sprite/dim_fwd.hpp
 	include/sanguis/client/draw2d/sprite/float_unit.hpp
 	include/sanguis/client/draw2d/sprite/index.hpp
 	include/sanguis/client/draw2d/sprite/index_fwd.hpp
@@ -206,6 +221,7 @@ SET(
 	include/sanguis/client/draw2d/sprite/order.hpp
 	include/sanguis/client/draw2d/sprite/order_fwd.hpp
 	include/sanguis/client/draw2d/sprite/point.hpp
+	include/sanguis/client/draw2d/sprite/point_fwd.hpp
 	include/sanguis/client/draw2d/sprite/rotation.hpp
 	include/sanguis/client/draw2d/sprite/state.hpp
 	include/sanguis/client/draw2d/sprite/state_choices.hpp
@@ -213,6 +229,7 @@ SET(
 	include/sanguis/client/draw2d/sprite/system_fwd.hpp
 	include/sanguis/client/draw2d/sprite/system_impl.hpp
 	include/sanguis/client/draw2d/sprite/type_choices.hpp
+	include/sanguis/client/draw2d/sprite/type_choices_fwd.hpp
 	include/sanguis/client/draw2d/sprite/unit.hpp
 	include/sanguis/client/draw2d/sunlight/basic_gradients.hpp
 	include/sanguis/client/draw2d/sunlight/basic_gradients_fwd.hpp
@@ -330,6 +347,7 @@ SET(
 	include/sanguis/client/world_parameters.hpp
 	include/sanguis/client/world_parameters_fwd.hpp
 	include/sanguis/clock.hpp
+	include/sanguis/collision_scale.hpp
 	include/sanguis/config_app_name.hpp
 	include/sanguis/connect_state.hpp
 	include/sanguis/connect_state_fwd.hpp
@@ -958,6 +976,7 @@ SET(
 	include/sanguis/time_unit.hpp
 	include/sanguis/timer.hpp
 	include/sanguis/to_console_arg_list.hpp
+	include/sanguis/unsigned_scale.hpp
 	include/sanguis/update_diff_clock.hpp
 	include/sanguis/weapon_type.hpp
 	include/sanguis/weapon_type_fwd.hpp
@@ -1039,6 +1058,7 @@ SET(
 	src/client/draw2d/scene/object.cpp
 	src/client/draw2d/scene/screen_center.cpp
 	src/client/draw2d/scene/world/batch.cpp
+	src/client/draw2d/scene/world/ceil_div_signed.cpp
 	src/client/draw2d/scene/world/clamp_pos.cpp
 	src/client/draw2d/scene/world/clamp_size.cpp
 	src/client/draw2d/scene/world/generate_batches.cpp
@@ -1100,6 +1120,7 @@ SET(
 	src/client/states/running.cpp
 	src/client/states/waiting_for_player.cpp
 	src/client/world_parameters.cpp
+	src/collision_scale.cpp
 	src/config_app_name.cpp
 	src/duration_second.cpp
 	src/exception.cpp

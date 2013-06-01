@@ -7,6 +7,9 @@
 #include <sanguis/client/draw2d/scene/world/state_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/buffers.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/state.hpp>
+#include <sanguis/client/draw2d/sprite/center_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/dim_fwd.hpp>
+#include <sanguis/creator/grid.hpp>
 #include <sanguis/load/tiles/context_fwd.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
@@ -45,12 +48,20 @@ public:
 		sge::renderer::context::core &,
 		sanguis::client::draw2d::vector2 const &translation
 	);
+
+	bool
+	test_collision(
+		sanguis::client::draw2d::sprite::center const &,
+		sanguis::client::draw2d::sprite::dim const &
+	) const;
 private:
 	sge::renderer::device::core &renderer_;
 
 	sanguis::client::draw2d::scene::world::sprite::buffers sprite_buffers_;
 
 	sanguis::client::draw2d::scene::world::sprite::state sprite_state_;
+
+	sanguis::creator::grid const grid_;
 
 	sanguis::client::draw2d::scene::world::batch_grid const batches_;
 };

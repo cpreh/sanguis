@@ -1,8 +1,11 @@
 #include <sanguis/client/draw2d/entities/base.hpp>
 
+
 sanguis::client::draw2d::entities::base::base()
 :
-	removed_(false)
+	removed_(
+		false
+	)
 {
 }
 

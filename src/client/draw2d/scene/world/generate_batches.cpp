@@ -9,12 +9,9 @@
 #include <sanguis/client/draw2d/scene/world/sprite/object.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/parameters.hpp>
 #include <sanguis/creator/grid.hpp>
-#include <sanguis/creator/generate.hpp>
 #include <sanguis/creator/pos.hpp>
-#include <sanguis/creator/result.hpp>
 #include <sanguis/creator/size.hpp>
 #include <sanguis/creator/tile.hpp>
-#include <sanguis/creator/top_parameters_fwd.hpp>
 #include <sanguis/load/tiles/context_fwd.hpp>
 #include <sge/sprite/compare/default.hpp>
 #include <sge/sprite/geometry/make_random_access_range.hpp>
@@ -34,21 +31,11 @@
 
 sanguis::client::draw2d::scene::world::batch_grid
 sanguis::client::draw2d::scene::world::generate_batches(
-	sanguis::creator::top_parameters const &_parameters,
+	sanguis::creator::grid const &_grid,
 	sanguis::load::tiles::context &_tiles,
 	sanguis::client::draw2d::scene::world::sprite::buffers &_sprite_buffers
 )
 {
-	sanguis::creator::result const generated(
-		sanguis::creator::generate(
-			_parameters
-		)
-	);
-
-	sanguis::creator::grid const &grid(
-		generated.grid()
-	);
-
 	sanguis::client::draw2d::scene::world::batch_grid ret(
 		fcppt::math::dim::structure_cast<
 			sanguis::client::draw2d::scene::world::batch_grid::dim
@@ -56,7 +43,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 			fcppt::math::map<
 				sanguis::creator::size
 			>(
-				grid.size(),
+				_grid.size(),
 				[](
 					sanguis::creator::size::value_type const _value
 				)
@@ -117,7 +104,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 					result_element.pos()
 					*
 					batch_dim,
-					grid.size()
+					_grid.size()
 				)
 			),
 			upper_bound(
@@ -125,7 +112,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 					lower_bound
 					+
 					batch_dim,
-					grid.size()
+					_grid.size()
 				)
 			);
 
@@ -133,7 +120,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 			auto const &source_element
 			:
 			fcppt::container::grid::make_pos_crange_start_end(
-				grid,
+				_grid,
 				lower_bound,
 				upper_bound
 			)
@@ -164,7 +151,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 					.texture(
 						sanguis::client::draw2d::scene::world::to_tile_texture(
 							_tiles,
-							grid,
+							_grid,
 							source_element.pos()
 						)
 					)

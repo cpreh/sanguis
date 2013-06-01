@@ -1,17 +1,19 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_MESSAGE_ENVIRONMENT_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_MESSAGE_ENVIRONMENT_HPP_INCLUDED
 
-#include <sanguis/client/draw2d/message/environment_fwd.hpp>
-#include <sanguis/client/draw2d/entities/base_fwd.hpp>
-#include <sanguis/client/draw2d/entities/unique_ptr.hpp>
-#include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
-#include <sanguis/client/draw2d/insert_own_callback.hpp>
-#include <sanguis/client/draw2d/transform_callback.hpp>
+#include <sanguis/entity_id.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
-#include <sanguis/entity_id.hpp>
+#include <sanguis/client/draw2d/collide_callback.hpp>
+#include <sanguis/client/draw2d/insert_own_callback.hpp>
+#include <sanguis/client/draw2d/transform_callback.hpp>
+#include <sanguis/client/draw2d/entities/base_fwd.hpp>
+#include <sanguis/client/draw2d/entities/unique_ptr.hpp>
+#include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
+#include <sanguis/client/draw2d/message/environment_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -30,47 +32,61 @@ class environment
 protected:
 	environment();
 public:
-	virtual entities::base &
+	virtual
+	sanguis::client::draw2d::entities::base &
 	insert(
-		entities::unique_ptr,
+		sanguis::client::draw2d::entities::unique_ptr &&,
 		sanguis::entity_id
 	) = 0;
 
-	virtual void
+	virtual
+	void
 	remove(
 		sanguis::entity_id
 	) = 0;
 
-	virtual entities::base &
+	virtual
+	sanguis::client::draw2d::entities::base &
 	entity(
 		sanguis::entity_id
 	) = 0;
 
-	virtual void
+	virtual
+	void
 	experience(
-		client::exp
+		sanguis::client::exp
 	) = 0;
 
-	virtual void
+	virtual
+	void
 	level(
-		client::level
+		sanguis::client::level
 	) = 0;
 
-	virtual void
+	virtual
+	void
 	change_world(
-		client::world_parameters const &
+		sanguis::client::world_parameters const &
 	) = 0;
 
-	virtual entities::model::parameters const
+	virtual
+	sanguis::client::draw2d::entities::model::parameters const
 	model_parameters() const = 0;
 
-	virtual draw2d::insert_own_callback const &
+	virtual
+	sanguis::client::draw2d::insert_own_callback const &
 	insert_own_callback() const = 0;
 
-	virtual draw2d::transform_callback const &
+	virtual
+	sanguis::client::draw2d::transform_callback const &
 	transform_callback() const = 0;
 
-	virtual ~environment();
+	virtual
+	sanguis::client::draw2d::collide_callback const &
+	collide_callback() const = 0;
+
+	virtual
+	~environment() = 0;
 };
 
 }

@@ -1,33 +1,34 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_OBJECT_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_OBJECT_HPP_INCLUDED
 
-#include <sanguis/client/draw2d/scene/object_fwd.hpp>
-#include <sanguis/client/draw2d/scene/background_fwd.hpp>
-#include <sanguis/client/draw2d/scene/hud_fwd.hpp>
-#include <sanguis/client/draw2d/scene/message_environment_fwd.hpp>
-#include <sanguis/client/draw2d/scene/world/object_fwd.hpp>
+#include <sanguis/diff_clock.hpp>
+#include <sanguis/duration.hpp>
+#include <sanguis/entity_id.hpp>
+#include <sanguis/random_generator.hpp>
+#include <sanguis/client/control/environment_fwd.hpp>
+#include <sanguis/client/draw2d/insert_own_callback.hpp>
+#include <sanguis/client/draw2d/transform_callback.hpp>
 #include <sanguis/client/draw2d/entities/base_fwd.hpp>
 #include <sanguis/client/draw2d/entities/own_fwd.hpp>
 #include <sanguis/client/draw2d/entities/own_unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
-#include <sanguis/client/draw2d/message/environment_fwd.hpp>
 #include <sanguis/client/draw2d/message/dispatcher_fwd.hpp>
+#include <sanguis/client/draw2d/message/environment_fwd.hpp>
+#include <sanguis/client/draw2d/scene/background_fwd.hpp>
+#include <sanguis/client/draw2d/scene/control_environment_fwd.hpp>
+#include <sanguis/client/draw2d/scene/hud_fwd.hpp>
+#include <sanguis/client/draw2d/scene/message_environment_fwd.hpp>
+#include <sanguis/client/draw2d/scene/object_fwd.hpp>
+#include <sanguis/client/draw2d/scene/world/object_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/system_decl.hpp>
 #include <sanguis/client/draw2d/sprite/client/system.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system.hpp>
 #include <sanguis/client/draw2d/sprite/colored/system.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/state.hpp>
-#include <sanguis/client/draw2d/insert_own_callback.hpp>
-#include <sanguis/client/draw2d/transform_callback.hpp>
-#include <sanguis/client/control/environment_fwd.hpp>
 #include <sanguis/load/context_fwd.hpp>
 #include <sanguis/load/model/collection_fwd.hpp>
 #include <sanguis/messages/base.hpp>
-#include <sanguis/diff_clock.hpp>
-#include <sanguis/duration.hpp>
-#include <sanguis/entity_id.hpp>
-#include <sanguis/random_generator.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/sprite/state/object_decl.hpp>
 #include <sge/renderer/screen_size_fwd.hpp>
@@ -99,9 +100,9 @@ public:
 	sanguis::client::control::environment &
 	control_environment() const;
 private:
-	friend class message_environment;
+	friend class sanguis::client::draw2d::scene::message_environment;
 
-	friend class control_environment;
+	friend class sanguis::client::draw2d::scene::control_environment;
 
 	void
 	render_systems(

@@ -3,6 +3,7 @@
 
 #include <fcppt/noncopyable.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -20,9 +21,11 @@ class with_visibility
 protected:
 	with_visibility();
 
-	virtual ~with_visibility();
+	virtual
+	~with_visibility() = 0;
 public:
-	virtual void
+	virtual
+	void
 	visible(
 		bool
 	) = 0;

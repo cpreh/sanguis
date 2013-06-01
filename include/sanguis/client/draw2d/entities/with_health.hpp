@@ -4,6 +4,7 @@
 #include <sanguis/client/health.hpp>
 #include <fcppt/noncopyable.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -21,22 +22,27 @@ class with_health
 protected:
 	with_health();
 
-	virtual ~with_health();
+	virtual
+	~with_health() = 0;
 public:
-	virtual void
+	virtual
+	void
 	health(
-		client::health
+		sanguis::client::health
 	) = 0;
 
-	virtual void
+	virtual
+	void
 	max_health(
-		client::health
+		sanguis::client::health
 	) = 0;
 
-	virtual client::health const
+	virtual
+	sanguis::client::health const
 	health() const = 0;
 
-	virtual client::health const
+	virtual
+	sanguis::client::health const
 	max_health() const = 0;
 };
 

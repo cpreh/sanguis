@@ -1,3 +1,4 @@
+#include <sanguis/collision_scale.hpp>
 #include <sanguis/pixels_per_meter.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <sanguis/server/dim.hpp>
@@ -51,8 +52,12 @@ sanguis::server::entities::radius(
 				_dim.h()
 			)
 		)
-		*
-		0.5f
+		/
+		static_cast<
+			sanguis::server::space_unit
+		>(
+			sanguis::collision_scale()
+		)
 	);
 
 	sanguis::server::space_unit const max_radius(

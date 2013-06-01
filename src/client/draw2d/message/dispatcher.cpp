@@ -188,7 +188,8 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	this->configure_new_object(
 		sanguis::client::draw2d::factory::own_player(
 			env_.model_parameters(),
-			env_.transform_callback()
+			env_.transform_callback(),
+			env_.collide_callback()
 		),
 		_message
 	);

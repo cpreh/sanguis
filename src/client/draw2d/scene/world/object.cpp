@@ -2,10 +2,16 @@
 #include <sanguis/client/draw2d/vector2_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/object.hpp>
 #include <sanguis/client/draw2d/scene/world/state.hpp>
+#include <sanguis/client/draw2d/sprite/center_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/dim_fwd.hpp>
 #include <sanguis/load/resource/textures_fwd.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/assert/pre.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <functional>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::draw2d::scene::world::object::object(
@@ -18,6 +24,14 @@ sanguis::client::draw2d::scene::world::object::object(
 	),
 	tiles_context_(
 		_textures
+	),
+	collide_callback_(
+		std::bind(
+			&sanguis::client::draw2d::scene::world::object::test_collision,
+			this,
+			std::placeholders::_1,
+			std::placeholders::_2
+		)
 	),
 	state_()
 {
@@ -56,4 +70,27 @@ sanguis::client::draw2d::scene::world::object::change(
 			_param
 		)
 	);
+}
+
+sanguis::client::draw2d::collide_callback const &
+sanguis::client::draw2d::scene::world::object::collide_callback() const
+{
+	return collide_callback_;
+}
+
+bool
+sanguis::client::draw2d::scene::world::object::test_collision(
+	sanguis::client::draw2d::sprite::center const &_center,
+	sanguis::client::draw2d::sprite::dim const &_dim
+) const
+{
+	FCPPT_ASSERT_PRE(
+		state_
+	);
+
+	return
+		state_->test_collision(
+			_center,
+			_dim
+		);
 }

@@ -4,6 +4,7 @@
 #include <sanguis/client/control/attack_dest_fwd.hpp>
 #include <sanguis/client/control/cursor_position_fwd.hpp>
 #include <sanguis/client/control/environment.hpp>
+#include <sanguis/client/draw2d/scene/control_environment_fwd.hpp>
 #include <sanguis/client/draw2d/scene/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
