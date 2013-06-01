@@ -49,6 +49,7 @@ SET(
 	include/sanguis/client/control/actions/scale_type_fwd.hpp
 	include/sanguis/client/control/actions/variant.hpp
 	include/sanguis/client/control/attack_dest.hpp
+	include/sanguis/client/control/attack_dest_fwd.hpp
 	include/sanguis/client/control/axis_direction_max.hpp
 	include/sanguis/client/control/axis_direction_min.hpp
 	include/sanguis/client/control/cursor_position.hpp

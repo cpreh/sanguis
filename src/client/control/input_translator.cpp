@@ -1,4 +1,3 @@
-#include <sanguis/exception.hpp>
 #include <sanguis/client/control/axis_direction_max.hpp>
 #include <sanguis/client/control/axis_direction_min.hpp>
 #include <sanguis/client/control/input_translator.hpp>
@@ -18,7 +17,7 @@
 #include <sge/input/cursor/button_event.hpp>
 #include <sge/input/cursor/move_event.hpp>
 #include <sge/input/mouse/device.hpp>
-#include <fcppt/text.hpp>
+#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
@@ -234,9 +233,7 @@ key_scale_type(
 		break;
 	}
 
-	throw sanguis::exception(
-		FCPPT_TEXT("Invalid key_code in key_scale_type()!")
-	);
+	FCPPT_ASSERT_UNREACHABLE;
 }
 
 sanguis::client::control::key_scale
@@ -267,9 +264,7 @@ key_scale_value(
 		break;
 	}
 
-	throw sanguis::exception(
-		FCPPT_TEXT("Invalid key_code in key_scale_value()!")
-	);
+	FCPPT_ASSERT_UNREACHABLE;
 }
 
 }

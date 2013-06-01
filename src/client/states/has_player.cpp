@@ -1,6 +1,7 @@
 #include <sanguis/perk_type.hpp>
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/log.hpp>
+#include <sanguis/client/machine.hpp>
 #include <sanguis/client/make_send_callback.hpp>
 #include <sanguis/client/player_level.hpp>
 #include <sanguis/client/control/action_handler.hpp>
@@ -13,6 +14,7 @@
 #include <sanguis/client/events/tick.hpp>
 #include <sanguis/client/perk/make_tree.hpp>
 #include <sanguis/client/perk/state.hpp>
+#include <sanguis/client/states/running.hpp>
 #include <sanguis/client/states/has_player.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/player_choose_perk.hpp>
@@ -27,6 +29,7 @@
 #include <fcppt/log/output.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
+#include <boost/statechart/result.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
 

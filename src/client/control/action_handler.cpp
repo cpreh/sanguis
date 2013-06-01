@@ -1,5 +1,4 @@
 #include <sanguis/cheat_type.hpp>
-#include <sanguis/exception.hpp>
 #include <sanguis/timer.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/client/send_callback.hpp>
@@ -31,14 +30,11 @@
 #include <sge/font/lit.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/cyclic_iterator.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
-#include <fcppt/math/vector/structure_cast.hpp>
-#include <fcppt/math/dim/object_impl.hpp>
+#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/math/clamp.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/variant/apply_unary.hpp>
-#include <fcppt/variant/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
 #include <algorithm>
@@ -193,10 +189,7 @@ sanguis::client::control::action_handler::handle_binary_action(
 		return;
 	}
 
-
-	throw sanguis::exception(
-		FCPPT_TEXT("Invalid binary_action in action_handler!")
-	);
+	FCPPT_ASSERT_UNREACHABLE;
 }
 
 void
@@ -284,9 +277,7 @@ sanguis::client::control::action_handler::handle_scale_action(
 		return;
 	}
 
-	throw sanguis::exception(
-		FCPPT_TEXT("Invalid scale_action in action_handler!")
-	);
+	FCPPT_ASSERT_UNREACHABLE;
 }
 
 void

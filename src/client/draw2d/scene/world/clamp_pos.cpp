@@ -52,7 +52,6 @@ sanguis::client::draw2d::scene::world::clamp_pos(
 							index
 						]
 					)
-					- 1
 				)
 			);
 

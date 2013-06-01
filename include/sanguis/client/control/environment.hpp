@@ -1,10 +1,11 @@
 #ifndef SANGUIS_CLIENT_CONTROL_ENVIRONMENT_HPP_INCLUDED
 #define SANGUIS_CLIENT_CONTROL_ENVIRONMENT_HPP_INCLUDED
 
+#include <sanguis/client/control/attack_dest_fwd.hpp>
+#include <sanguis/client/control/cursor_position_fwd.hpp>
 #include <sanguis/client/control/environment_fwd.hpp>
-#include <sanguis/client/control/attack_dest.hpp>
-#include <sanguis/client/control/cursor_position.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -21,12 +22,14 @@ class environment
 protected:
 	environment();
 public:
-	virtual control::attack_dest const
+	virtual
+	sanguis::client::control::attack_dest const
 	translate_attack_dest(
-		control::cursor_position const &
+		sanguis::client::control::cursor_position const &
 	) const = 0;
 
-	virtual ~environment();
+	virtual
+	~environment() = 0;
 };
 
 }

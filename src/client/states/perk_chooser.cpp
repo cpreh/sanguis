@@ -1,6 +1,8 @@
-#include <sanguis/client/states/perk_chooser.hpp>
-#include <sanguis/client/states/ingame.hpp>
+#include <sanguis/client/machine.hpp>
 #include <sanguis/client/make_send_callback.hpp>
+#include <sanguis/client/control/actions/nullary.hpp>
+#include <sanguis/client/control/actions/nullary_type.hpp>
+#include <sanguis/client/control/actions/variant.hpp>
 #include <sanguis/client/events/action.hpp>
 #include <sanguis/client/events/message.hpp>
 #include <sanguis/client/events/net_error.hpp>
@@ -8,8 +10,14 @@
 #include <sanguis/client/events/render.hpp>
 #include <sanguis/client/events/tick.hpp>
 #include <sanguis/client/gui/perk/chooser.hpp>
+#include <sanguis/client/states/has_player.hpp>
+#include <sanguis/client/states/ingame.hpp>
+#include <sanguis/client/states/perk_chooser.hpp>
 #include <fcppt/variant/holds_type.hpp>
-#include <fcppt/variant/object_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/statechart/result.hpp>
+#include <fcppt/config/external_end.hpp>
+
 
 sanguis::client::states::perk_chooser::perk_chooser(
 	my_context _ctx
@@ -19,13 +27,19 @@ sanguis::client::states::perk_chooser::perk_chooser(
 		_ctx
 	),
 	pause_(
-		client::make_send_callback(
-			context<machine>()
+		sanguis::client::make_send_callback(
+			this->context<
+				sanguis::client::machine
+			>()
 		)
 	),
 	perk_chooser_gui_(
-		context<machine>().gui(),
-		context<has_player>().perk_state()
+		this->context<
+			sanguis::client::machine
+		>().gui(),
+		this->context<
+			sanguis::client::states::has_player
+		>().perk_state()
 	)
 {
 }
@@ -36,16 +50,16 @@ sanguis::client::states::perk_chooser::~perk_chooser()
 
 boost::statechart::result
 sanguis::client::states::perk_chooser::react(
-	events::action const &_event
+	sanguis::client::events::action const &_event
 )
 {
-	control::actions::variant const action(
+	sanguis::client::control::actions::variant const action(
 		_event.value().get()
 	);
 
 	if(
 		fcppt::variant::holds_type<
-			control::actions::nullary
+			sanguis::client::control::actions::nullary
 		>(
 			action
 		)
@@ -53,40 +67,46 @@ sanguis::client::states::perk_chooser::react(
 	{
 		switch(
 			action.get<
-				control::actions::nullary
+				sanguis::client::control::actions::nullary
 			>().type()
 		)
 		{
-		case control::actions::nullary_type::perk_menu:
-			return transit<states::ingame>();
+		case sanguis::client::control::actions::nullary_type::perk_menu:
+			return
+				this->transit<
+					sanguis::client::states::ingame
+				>();
 		default:
 			break;
 		}
 	}
 
-	return this->forward_event();
+	return
+		this->forward_event();
 }
 
 boost::statechart::result
 sanguis::client::states::perk_chooser::react(
-	events::overlay const &_event
+	sanguis::client::events::overlay const &_event
 )
 {
 	perk_chooser_gui_.draw(
 		_event.context()
 	);
 
-	return this->discard_event();
+	return
+		this->discard_event();
 }
 
 boost::statechart::result
 sanguis::client::states::perk_chooser::react(
-	events::tick const &_event
+	sanguis::client::events::tick const &_event
 )
 {
 	perk_chooser_gui_.process(
 		_event.delta()
 	);
 
-	return this->discard_event();
+	return
+		this->discard_event();
 }

@@ -17,6 +17,7 @@
 #include <boost/filesystem/path.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 sanguis::client::config::settings::object::object(
 	boost::filesystem::path const &_path
 )
@@ -27,7 +28,7 @@ sanguis::client::config::settings::object::object(
 	start_()
 {
 	FCPPT_LOG_DEBUG(
-		client::log(),
+		sanguis::client::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("Trying to load settings from ")
 			<< fcppt::filesystem::path_to_string(
@@ -49,7 +50,7 @@ sanguis::client::config::settings::object::object(
 			start_.sections.clear();
 
 			FCPPT_LOG_INFO(
-				client::log(),
+				sanguis::client::log(),
 				fcppt::log::_
 					<< FCPPT_TEXT("Loading the settings failed!")
 			);
@@ -60,7 +61,7 @@ sanguis::client::config::settings::object::object(
 	)
 	{
 		FCPPT_LOG_INFO(
-			client::log(),
+			sanguis::client::log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("Loading the settings failed with: ")
 				<< _error.string()
@@ -88,7 +89,7 @@ void
 sanguis::client::config::settings::object::save() const
 {
 	FCPPT_LOG_DEBUG(
-		client::log(),
+		sanguis::client::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("Trying to save settings to ")
 			<< fcppt::filesystem::path_to_string(
@@ -104,7 +105,7 @@ sanguis::client::config::settings::object::save() const
 	)
 	{
 		FCPPT_LOG_ERROR(
-			client::log(),
+			sanguis::client::log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("Writing the settings failed!")
 		);

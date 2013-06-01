@@ -4,6 +4,7 @@
 #include <sanguis/client/control/actions/any_fwd.hpp>
 #include <sanguis/client/control/actions/variant.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -16,14 +17,15 @@ namespace actions
 class any
 {
 public:
-	explicit any(
-		actions::variant const &
+	explicit
+	any(
+		sanguis::client::control::actions::variant const &
 	);
 
-	actions::variant const &
+	sanguis::client::control::actions::variant const &
 	get() const;
 private:
-	actions::variant variant_;
+	sanguis::client::control::actions::variant variant_;
 };
 
 }

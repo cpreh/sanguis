@@ -1,7 +1,9 @@
 #include <sanguis/client/daytime_settings.hpp>
 #include <sanguis/client/log.hpp>
+#include <sanguis/client/machine.hpp>
 #include <sanguis/client/make_send_callback.hpp>
 #include <sanguis/client/console/object.hpp>
+#include <sanguis/client/control/environment_fwd.hpp>
 #include <sanguis/client/control/input_translator.hpp>
 #include <sanguis/client/control/actions/any_fwd.hpp>
 #include <sanguis/client/draw2d/scene/object.hpp>
@@ -15,8 +17,14 @@
 #include <sanguis/client/events/tick.hpp>
 #include <sanguis/client/states/menu.hpp>
 #include <sanguis/client/states/running.hpp>
-#include <sanguis/messages/call/object.hpp>
+#include <sanguis/messages/add_console_command.hpp>
+#include <sanguis/messages/base_fwd.hpp>
+#include <sanguis/messages/console_print.hpp>
 #include <sanguis/messages/create.hpp>
+#include <sanguis/messages/level_up.hpp>
+#include <sanguis/messages/pause.hpp>
+#include <sanguis/messages/unpause.hpp>
+#include <sanguis/messages/call/object.hpp>
 #include <sanguis/load/context.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <sge/console/object.hpp>
@@ -27,6 +35,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
+#include <boost/statechart/result.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
 
@@ -40,30 +49,42 @@ sanguis::client::states::running::running(
 	),
 	console_(
 		fcppt::make_unique_ptr<
-			client::console::object
+			sanguis::client::console::object
 		>(
-			context<machine>().console_gfx(),
-			client::make_send_callback(
-				context<machine>()
+			this->context<
+				sanguis::client::machine
+			>().console_gfx(),
+			sanguis::client::make_send_callback(
+				this->context<
+					sanguis::client::machine
+				>()
 			)
 		)
 	),
 	daytime_settings_(
 		fcppt::make_unique_ptr<
-			client::daytime_settings
+			sanguis::client::daytime_settings
 		>(
 			console_->sge_console()
 		)
 	),
 	drawer_(
 		fcppt::make_unique_ptr<
-			draw2d::scene::object
+			sanguis::client::draw2d::scene::object
 		>(
-			context<machine>().resources(),
-			context<machine>().renderer(),
-			context<machine>().font_object(),
+			this->context<
+				sanguis::client::machine
+			>().resources(),
+			this->context<
+				sanguis::client::machine
+			>().renderer(),
+			this->context<
+				sanguis::client::machine
+			>().font_object(),
 			daytime_settings_->current_time(),
-			context<machine>().viewport_manager()
+			this->context<
+				sanguis::client::machine
+			>().viewport_manager()
 		)
 	),
 	input_translator_(
@@ -92,7 +113,7 @@ sanguis::client::states::running::~running()
 
 boost::statechart::result
 sanguis::client::states::running::react(
-	events::tick const &_event
+	sanguis::client::events::tick const &_event
 )
 {
 	drawer_->set_time(
@@ -103,12 +124,13 @@ sanguis::client::states::running::react(
 		_event.delta()
 	);
 
-	return this->discard_event();
+	return
+		this->discard_event();
 }
 
 boost::statechart::result
 sanguis::client::states::running::react(
-	events::render const &_event
+	sanguis::client::events::render const &_event
 )
 {
 	drawer_->draw(
@@ -116,17 +138,18 @@ sanguis::client::states::running::react(
 	);
 
 	this->post_event(
-		events::overlay(
+		sanguis::client::events::overlay(
 			_event.context()
 		)
 	);
 
-	return this->discard_event();
+	return
+		this->discard_event();
 }
 
 boost::statechart::result
 sanguis::client::states::running::react(
-	events::message const &_event
+	sanguis::client::events::message const &_event
 )
 {
 	static sanguis::messages::call::object<
@@ -145,7 +168,7 @@ sanguis::client::states::running::react(
 			*_event.value(),
 			*this,
 			std::bind(
-				&running::handle_default_msg,
+				&sanguis::client::states::running::handle_default_msg,
 				this,
 				std::placeholders::_1
 			)
@@ -154,10 +177,13 @@ sanguis::client::states::running::react(
 
 boost::statechart::result
 sanguis::client::states::running::react(
-	events::net_error const &_error
+	sanguis::client::events::net_error const &_error
 )
 {
-	return transit<menu>();
+	return
+		this->transit<
+			sanguis::client::states::menu
+		>();
 }
 
 boost::statechart::result
@@ -228,7 +254,8 @@ sanguis::client::states::running::operator()(
 		description
 	);
 
-	return discard_event();
+	return
+		this->discard_event();
 }
 
 boost::statechart::result
@@ -252,19 +279,22 @@ sanguis::client::states::running::operator()(
 		false
 	);
 
-	return discard_event();
+	return
+		this->discard_event();
 }
 
 sanguis::client::control::environment &
 sanguis::client::states::running::control_environment()
 {
-	return drawer_->control_environment();
+	return
+		drawer_->control_environment();
 }
 
 sanguis::client::console::object &
 sanguis::client::states::running::console()
 {
-	return *console_;
+	return
+		*console_;
 }
 
 void
@@ -288,5 +318,6 @@ sanguis::client::states::running::handle_default_msg(
 		_message
 	);
 
-	return discard_event();
+	return
+		this->discard_event();
 }

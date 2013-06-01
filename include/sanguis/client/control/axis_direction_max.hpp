@@ -3,6 +3,7 @@
 
 #include <sanguis/client/control/scalar.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -10,7 +11,7 @@ namespace client
 namespace control
 {
 
-control::scalar
+sanguis::client::control::scalar
 axis_direction_max();
 
 }

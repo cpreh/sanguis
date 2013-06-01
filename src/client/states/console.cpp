@@ -1,7 +1,6 @@
-#include <sanguis/client/states/console.hpp>
-#include <sanguis/client/states/has_player.hpp>
-#include <sanguis/client/states/ingame.hpp>
+#include <sanguis/client/machine.hpp>
 #include <sanguis/client/make_send_callback.hpp>
+#include <sanguis/client/console/object.hpp>
 #include <sanguis/client/control/actions/nullary.hpp>
 #include <sanguis/client/control/actions/nullary_type.hpp>
 #include <sanguis/client/control/actions/variant.hpp>
@@ -11,9 +10,14 @@
 #include <sanguis/client/events/overlay.hpp>
 #include <sanguis/client/events/render.hpp>
 #include <sanguis/client/events/tick.hpp>
-#include <sanguis/client/console/object.hpp>
+#include <sanguis/client/states/console.hpp>
+#include <sanguis/client/states/has_player.hpp>
+#include <sanguis/client/states/ingame.hpp>
+#include <sanguis/client/states/running.hpp>
 #include <fcppt/variant/holds_type.hpp>
-#include <fcppt/variant/object_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/statechart/result.hpp>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::states::console::console(
@@ -24,12 +28,16 @@ sanguis::client::states::console::console(
 		_ctx
 	),
 	pause_(
-		client::make_send_callback(
-			context<machine>()
+		sanguis::client::make_send_callback(
+			this->context<
+				sanguis::client::machine
+			>()
 		)
 	),
 	console_activation_(
-		context<states::running>().console()
+		this->context<
+			sanguis::client::states::running
+		>().console()
 	)
 {
 }
@@ -40,16 +48,16 @@ sanguis::client::states::console::~console()
 
 boost::statechart::result
 sanguis::client::states::console::react(
-	events::action const &_event
+	sanguis::client::events::action const &_event
 )
 {
-	control::actions::variant const action(
+	sanguis::client::control::actions::variant const action(
 		_event.value().get()
 	);
 
 	if(
 		fcppt::variant::holds_type<
-			control::actions::nullary
+			sanguis::client::control::actions::nullary
 		>(
 			action
 		)
@@ -57,28 +65,35 @@ sanguis::client::states::console::react(
 	{
 		switch(
 			action.get<
-				control::actions::nullary
+				sanguis::client::control::actions::nullary
 			>().type()
 		)
 		{
-		case control::actions::nullary_type::console:
-			return transit<states::ingame>();
+		case sanguis::client::control::actions::nullary_type::console:
+			return
+				this->transit<
+					sanguis::client::states::ingame
+				>();
 		default:
 			break;
 		}
 	}
 
-	return this->discard_event();
+	return
+		this->discard_event();
 }
 
 boost::statechart::result
 sanguis::client::states::console::react(
-	events::overlay const &_event
+	sanguis::client::events::overlay const &_event
 )
 {
-	context<running>().console().draw(
+	this->context<
+		sanguis::client::states::running
+	>().console().draw(
 		_event.context()
 	);
 
-	return this->discard_event();
+	return
+		this->discard_event();
 }

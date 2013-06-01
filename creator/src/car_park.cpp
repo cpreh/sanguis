@@ -35,8 +35,8 @@ sanguis::creator::car_park(
 
 	sanguis::creator::grid ret(
 		sanguis::creator::grid::dim(
-			40,
-			40
+			12, 12/*40,*/
+			/*40*/
 			/*
 			_parameters.size().w(),
 			_parameters.size().h()

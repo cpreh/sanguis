@@ -4,6 +4,7 @@
 #include <sanguis/client/config/settings/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -19,13 +20,14 @@ class saver
 		saver
 	);
 public:
-	explicit saver(
-		object const &
+	explicit
+	saver(
+		sanguis::client::config::settings::object const &
 	);
 
 	~saver();
 private:
-	settings::object const &object_;
+	sanguis::client::config::settings::object const &object_;
 };
 
 }

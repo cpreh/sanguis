@@ -1,6 +1,4 @@
-#include <sanguis/client/states/menu.hpp>
-#include <sanguis/client/states/waiting_for_player.hpp>
-#include <sanguis/client/states/log_location.hpp>
+#include <sanguis/log_parameters.hpp>
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/events/action.hpp>
 #include <sanguis/client/events/connected.hpp>
@@ -9,21 +7,25 @@
 #include <sanguis/client/events/net_error.hpp>
 #include <sanguis/client/events/render.hpp>
 #include <sanguis/client/events/tick.hpp>
+#include <sanguis/client/states/log_location.hpp>
+#include <sanguis/client/states/menu.hpp>
+#include <sanguis/client/states/waiting_for_player.hpp>
 #include <sanguis/messages/base.hpp>
+#include <sanguis/messages/connect_state.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/client_info.hpp>
 #include <sanguis/messages/call/object.hpp>
-#include <sanguis/exception.hpp>
-#include <sanguis/log_parameters.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
-#include <fcppt/log/parameters/object.hpp>
-#include <fcppt/log/headers.hpp>
-#include <fcppt/log/location.hpp>
-#include <fcppt/log/object.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/log/debug.hpp>
+#include <fcppt/log/location.hpp>
+#include <fcppt/log/object.hpp>
+#include <fcppt/log/output.hpp>
+#include <fcppt/log/parameters/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
+#include <boost/statechart/result.hpp>
 #include <ostream>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
@@ -50,27 +52,39 @@ sanguis::client::states::menu::menu(
 		_ctx
 	),
 	menu_(
-		context<machine>().settings(),
-		context<machine>().gui(),
-		gui::menu::callbacks::object(
+		this->context<
+			sanguis::client::machine
+		>().settings(),
+		this->context<
+			sanguis::client::machine
+		>().gui(),
+		sanguis::client::gui::menu::callbacks::object(
 			std::bind(
-				&machine::connect,
-				&context<machine>(),
+				&sanguis::client::machine::connect,
+				&this->context<
+					sanguis::client::machine
+				>(),
 				std::placeholders::_1,
 				std::placeholders::_2
 			),
 			std::bind(
-				&machine::disconnect,
-				&context<machine>()
+				&sanguis::client::machine::disconnect,
+				&this->context<
+					sanguis::client::machine
+				>()
 			),
 			std::bind(
-				&machine::quickstart,
-				&context<machine>(),
+				&sanguis::client::machine::quickstart,
+				&this->context<
+					sanguis::client::machine
+				>(),
 				std::placeholders::_1
 			),
 			std::bind(
-				&machine::quit,
-				&context<machine>()
+				&sanguis::client::machine::quit,
+				&this->context<
+					sanguis::client::machine
+				>()
 			)
 		)
 	)
@@ -83,36 +97,38 @@ sanguis::client::states::menu::~menu()
 
 boost::statechart::result
 sanguis::client::states::menu::react(
-	events::tick const &_event
+	sanguis::client::events::tick const &_event
 )
 {
 	menu_.process(
 		_event.delta()
 	);
 
-	return discard_event();
+	return
+		this->discard_event();
 }
 
 boost::statechart::result
 sanguis::client::states::menu::react(
-	events::render const &_event
+	sanguis::client::events::render const &_event
 )
 {
 	menu_.draw(
 		_event.context()
 	);
 
-	return discard_event();
+	return
+		this->discard_event();
 }
 
 boost::statechart::result
 sanguis::client::states::menu::react(
-	events::message const &_message
+	sanguis::client::events::message const &_message
 )
 {
-	static messages::call::object<
+	static sanguis::messages::call::object<
 		boost::mpl::vector1<
-			messages::connect_state
+			sanguis::messages::connect_state
 		>,
 		menu
 	>::type dispatcher;
@@ -122,7 +138,7 @@ sanguis::client::states::menu::react(
 			*_message.value(),
 			*this,
 			std::bind(
-				&menu::handle_default_msg,
+				&sanguis::client::states::menu::handle_default_msg,
 				this,
 				std::placeholders::_1
 			)
@@ -131,7 +147,7 @@ sanguis::client::states::menu::react(
 
 boost::statechart::result
 sanguis::client::states::menu::react(
-	events::connected const &
+	sanguis::client::events::connected const &
 )
 {
 	FCPPT_LOG_DEBUG(
@@ -140,9 +156,11 @@ sanguis::client::states::menu::react(
 			<< FCPPT_TEXT("menu: connect")
 	);
 
-	context<machine>().send(
-		*messages::create(
-			messages::client_info(
+	this->context<
+		sanguis::client::machine
+	>().send(
+		*sanguis::messages::create(
+			sanguis::messages::client_info(
 				sge::charconv::fcppt_string_to_utf8(
 					FCPPT_TEXT("player1") // TODO!
 				)
@@ -150,12 +168,13 @@ sanguis::client::states::menu::react(
 		)
 	);
 
-	return discard_event();
+	return
+		this->discard_event();
 }
 
 boost::statechart::result
 sanguis::client::states::menu::react(
-	events::net_error const &_error
+	sanguis::client::events::net_error const &_error
 )
 {
 	menu_.connection_error(
@@ -164,12 +183,13 @@ sanguis::client::states::menu::react(
 		)
 	);
 
-	return discard_event();
+	return
+		this->discard_event();
 }
 
 boost::statechart::result
 sanguis::client::states::menu::operator()(
-	messages::connect_state const &_state // TODO: do we need this?
+	sanguis::messages::connect_state const &_state // TODO: do we need this?
 )
 {
 	FCPPT_LOG_DEBUG(
@@ -178,13 +198,17 @@ sanguis::client::states::menu::operator()(
 			<< FCPPT_TEXT("Received connect_state")
 	);
 
-	return transit<waiting_for_player>();
+	return
+		this->transit<
+			sanguis::client::states::waiting_for_player
+		>();
 }
 
 boost::statechart::result
 sanguis::client::states::menu::handle_default_msg(
-	messages::base const &
+	sanguis::messages::base const &
 )
 {
-	return forward_event();
+	return
+		this->forward_event();
 }

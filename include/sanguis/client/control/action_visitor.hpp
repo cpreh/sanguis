@@ -8,6 +8,7 @@
 #include <sanguis/client/control/actions/scale_fwd.hpp>
 #include <fcppt/nonassignable.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -21,33 +22,34 @@ class action_visitor
 		action_visitor
 	);
 public:
-	explicit action_visitor(
-		control::action_handler &
+	explicit
+	action_visitor(
+		sanguis::client::control::action_handler &
 	);
 
 	typedef void result_type;
 
 	result_type
 	operator()(
-		actions::binary const &
+		sanguis::client::control::actions::binary const &
 	) const;
 
 	result_type
 	operator()(
-		actions::cursor const &
+		sanguis::client::control::actions::cursor const &
 	) const;
 
 	result_type
 	operator()(
-		actions::nullary const &
+		sanguis::client::control::actions::nullary const &
 	) const;
 
 	result_type
 	operator()(
-		actions::scale const &
+		sanguis::client::control::actions::scale const &
 	) const;
 private:
-	control::action_handler &handler_;
+	sanguis::client::control::action_handler &handler_;
 };
 
 }

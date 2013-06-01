@@ -18,7 +18,6 @@
 #include <sge/console/arg_list.hpp>
 #include <sge/console/object_fwd.hpp>
 #include <fcppt/enum_size.hpp>
-#include <fcppt/math/vector/object_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
