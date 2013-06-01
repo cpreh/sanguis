@@ -43,6 +43,7 @@ enum class message
 	player_choose_perk,
 	player_direction,
 	player_pause,
+	player_position,
 	player_start_shooting,
 	player_stop_shooting,
 	player_unpause,

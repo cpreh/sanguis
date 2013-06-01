@@ -12,20 +12,21 @@
 #include <boost/mpl/vector/vector10.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 namespace messages
 {
 
-typedef messages::make_class<
+typedef sanguis::messages::make_class<
 	majutsu::composite<
 		boost::mpl::vector2<
-			messages::bind_player_message<
-				types::message::player_direction
+			sanguis::messages::bind_player_message<
+				sanguis::messages::types::message::player_direction
 			>::type,
 			majutsu::role<
-				messages::vector2,
-				roles::direction
+				sanguis::messages::vector2,
+				sanguis::messages::roles::direction
 			>
 		>
 	>

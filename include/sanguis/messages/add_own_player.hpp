@@ -1,18 +1,19 @@
 #ifndef SANGUIS_MESSAGES_ADD_OWN_PLAYER_HPP_INCLUDED
 #define SANGUIS_MESSAGES_ADD_OWN_PLAYER_HPP_INCLUDED
 
-#include <sanguis/messages/types/message.hpp>
 #include <sanguis/messages/make_class.hpp>
 #include <sanguis/messages/make_player_message.hpp>
+#include <sanguis/messages/types/message.hpp>
+
 
 namespace sanguis
 {
 namespace messages
 {
 
-typedef messages::make_class<
-	messages::make_player_message<
-		types::message::add_own_player
+typedef sanguis::messages::make_class<
+	sanguis::messages::make_player_message<
+		sanguis::messages::types::message::add_own_player
 	>::type
 >::type add_own_player;
 

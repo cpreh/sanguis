@@ -501,6 +501,7 @@ SET(
 	include/sanguis/messages/player_choose_perk.hpp
 	include/sanguis/messages/player_direction.hpp
 	include/sanguis/messages/player_pause.hpp
+	include/sanguis/messages/player_position.hpp
 	include/sanguis/messages/player_start_shooting.hpp
 	include/sanguis/messages/player_stop_shooting.hpp
 	include/sanguis/messages/player_unpause.hpp
@@ -1201,6 +1202,7 @@ SET(
 	src/messages/player_choose_perk.cpp
 	src/messages/player_direction.cpp
 	src/messages/player_pause.cpp
+	src/messages/player_position.cpp
 	src/messages/player_start_shooting.cpp
 	src/messages/player_stop_shooting.cpp
 	src/messages/player_unpause.cpp

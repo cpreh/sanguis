@@ -1,18 +1,23 @@
+#include <sanguis/client/control/attack_dest.hpp>
+#include <sanguis/client/control/cursor_position.hpp>
+#include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/scene/control_environment.hpp>
 #include <sanguis/client/draw2d/scene/object.hpp>
+#include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/translate/vector_from_client.hpp>
-#include <sanguis/client/draw2d/vector2.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 
+
 sanguis::client::draw2d::scene::control_environment::control_environment(
-	draw2d::scene::object &_object
+	sanguis::client::draw2d::scene::object &_object
 )
 :
-	object_(_object)
+	object_(
+		_object
+	)
 {
 }
 
@@ -22,17 +27,17 @@ sanguis::client::draw2d::scene::control_environment::~control_environment()
 
 sanguis::client::control::attack_dest const
 sanguis::client::draw2d::scene::control_environment::translate_attack_dest(
-	client::control::cursor_position const &_cursor_position
+	sanguis::client::control::cursor_position const &_cursor_position
 ) const
 {
 	return
-		draw2d::translate::vector_from_client(
+		sanguis::client::draw2d::translate::vector_from_client(
 			fcppt::math::vector::structure_cast<
-				draw2d::vector2
+				sanguis::client::draw2d::vector2
 			>(
 				-
 				fcppt::math::dim::structure_cast<
-					sprite::point
+					sanguis::client::draw2d::sprite::point
 				>(
 					object_.screen_size() / 2u
 				)

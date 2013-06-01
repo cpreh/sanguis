@@ -367,6 +367,19 @@ sanguis::server::global::context::player_speed(
 }
 
 void
+sanguis::server::global::context::player_position(
+	sanguis::server::player_id const _player_id,
+	sanguis::server::center const &_center
+)
+{
+	players_[
+		_player_id
+	]->center_from_client(
+		_center
+	);
+}
+
+void
 sanguis::server::global::context::player_cheat(
 	sanguis::server::player_id const _player_id,
 	sanguis::cheat_type const _cheat

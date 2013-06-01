@@ -8,6 +8,7 @@
 #include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
+#include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/level.hpp>
@@ -83,6 +84,11 @@ public:
 	void
 	add_perk(
 		sanguis::server::perks::unique_ptr &&
+	);
+
+	void
+	center_from_client(
+		sanguis::server::center const &
 	);
 
 	sanguis::server::perks::tree::object const &

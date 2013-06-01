@@ -108,7 +108,7 @@ sanguis::client::draw2d::scene::object::object(
 	),
 	hud_(
 		fcppt::make_unique_ptr<
-			scene::hud
+			sanguis::client::draw2d::scene::hud
 		>(
 			_font_object,
 			renderer_,
@@ -117,7 +117,7 @@ sanguis::client::draw2d::scene::object::object(
 	),
 	world_(
 		fcppt::make_unique_ptr<
-			scene::world::object
+			sanguis::client::draw2d::scene::world::object
 		>(
 			renderer_,
 			_resources.resources().textures()
@@ -127,25 +127,25 @@ sanguis::client::draw2d::scene::object::object(
 		false
 	),
 	player_center_(
-		sprite::center::value_type::null()
+		sanguis::client::draw2d::sprite::center::value_type::null()
 	),
 	transform_callback_(
 		std::bind(
-			&object::transform,
+			&sanguis::client::draw2d::scene::object::transform,
 			this,
 			std::placeholders::_1
 		)
 	),
 	insert_own_callback_(
 		std::bind(
-			&object::insert_own,
+			&sanguis::client::draw2d::scene::object::insert_own,
 			this,
 			std::placeholders::_1
 		)
 	),
 	message_environment_(
 		fcppt::make_unique_ptr<
-			message_environment
+			sanguis::client::draw2d::scene::message_environment
 		>(
 			*this,
 			*hud_,
@@ -154,14 +154,14 @@ sanguis::client::draw2d::scene::object::object(
 	),
 	control_environment_(
 		fcppt::make_unique_ptr<
-			scene::control_environment
+			sanguis::client::draw2d::scene::control_environment
 		>(
 			*this
 		)
 	),
 	message_dispatcher_(
 		fcppt::make_unique_ptr<
-			message::dispatcher
+			sanguis::client::draw2d::message::dispatcher
 		>(
 			*message_environment_
 		)
@@ -173,7 +173,7 @@ sanguis::client::draw2d::scene::object::object(
 	),
 	background_(
 		fcppt::make_unique_ptr<
-			scene::background
+			sanguis::client::draw2d::scene::background
 		>(
 			_resources,
 			client_system_,
@@ -246,7 +246,7 @@ sanguis::client::draw2d::scene::object::process_message(
 		_message,
 		*message_dispatcher_,
 		std::bind(
-			&message::dispatcher::process_default_msg,
+			&sanguis::client::draw2d::message::dispatcher::process_default_msg,
 			message_dispatcher_.get(),
 			std::placeholders::_1
 		)
@@ -279,7 +279,7 @@ sanguis::client::draw2d::scene::object::update(
 	{
 		++next;
 
-		entities::base &cur_entity(
+		sanguis::client::draw2d::entities::base &cur_entity(
 			*it->second
 		);
 
@@ -464,8 +464,8 @@ sanguis::client::draw2d::scene::object::render_systems(
 
 		SANGUIS_CLIENT_DRAW2D_SCENE_FOREACH_Z_ORDERING(
 			index,
-			z_ordering::corpses,
-			z_ordering::player_upper
+			sanguis::client::draw2d::z_ordering::corpses,
+			sanguis::client::draw2d::z_ordering::player_upper
 		)
 			normal_system_.render(
 				_render_context,
@@ -481,8 +481,8 @@ sanguis::client::draw2d::scene::object::render_systems(
 
 	SANGUIS_CLIENT_DRAW2D_SCENE_FOREACH_Z_ORDERING(
 		index,
-		z_ordering::healthbar_lower,
-		z_ordering::healthbar_upper
+		sanguis::client::draw2d::z_ordering::healthbar_lower,
+		sanguis::client::draw2d::z_ordering::healthbar_upper
 	)
 		colored_system_.render(
 			_render_context,
@@ -492,8 +492,8 @@ sanguis::client::draw2d::scene::object::render_systems(
 
 sanguis::client::draw2d::entities::base &
 sanguis::client::draw2d::scene::object::insert(
-	entities::unique_ptr &&_entity,
-	entity_id const _id
+	sanguis::client::draw2d::entities::unique_ptr &&_entity,
+	sanguis::entity_id const _id
 )
 {
 	typedef std::pair<
@@ -528,7 +528,7 @@ sanguis::client::draw2d::scene::object::insert(
 
 sanguis::client::draw2d::entities::own &
 sanguis::client::draw2d::scene::object::insert_own(
-	entities::own_unique_ptr &&_entity
+	sanguis::client::draw2d::entities::own_unique_ptr &&_entity
 )
 {
 	fcppt::container::ptr::push_back_unique_ptr(
@@ -538,12 +538,13 @@ sanguis::client::draw2d::scene::object::insert_own(
 		)
 	);
 
-	return own_entities_.back();
+	return
+		own_entities_.back();
 }
 
 void
 sanguis::client::draw2d::scene::object::remove(
-	entity_id const _id
+	sanguis::entity_id const _id
 )
 {
 	if(
@@ -563,7 +564,7 @@ sanguis::client::draw2d::scene::object::remove(
 
 sanguis::client::draw2d::entities::base &
 sanguis::client::draw2d::scene::object::entity(
-	entity_id const _id
+	sanguis::entity_id const _id
 )
 {
 	entity_map::iterator const it(
@@ -595,7 +596,7 @@ sanguis::client::draw2d::scene::object::player_center() const
 
 void
 sanguis::client::draw2d::scene::object::transform(
-	sprite::center const &_player_center
+	sanguis::client::draw2d::sprite::center const &_player_center
 )
 {
 	player_center_ = _player_center;
