@@ -1,6 +1,9 @@
 #include <sanguis/creator/aux/neumann_neighbors.hpp>
 #include <sanguis/creator/grid.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <vector>
+#include <fcppt/config/external_end.hpp>
+
 
 // returns the points in the von-Neumann-neighborhood
 // of the given cell,
@@ -8,7 +11,7 @@
 std::vector<
 	sanguis::creator::grid::dim
 >
-neumann_neighbors(
+sanguis::creator::aux::neumann_neighbors(
 	sanguis::creator::grid::dim const &cell
 )
 {
