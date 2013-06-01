@@ -7,9 +7,9 @@
 #include <sanguis/creator/tile.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/remove.hpp>
+#include <fcppt/algorithm/contains.hpp>
 #include <fcppt/algorithm/append.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/io/cerr.hpp>
 #include <fcppt/optional.hpp>
 #include <fcppt/math/dim/output.hpp>
 #include <sanguis/creator/randgen.hpp>
@@ -29,7 +29,7 @@ neighbors(
 );
 
 fcppt::optional<
-	sanguis::creator::grid::dim const &
+	sanguis::creator::grid::dim
 >
 find_opposing_cell(
 	sanguis::creator::grid &,
@@ -76,8 +76,8 @@ sanguis::creator::car_park(
 
 	sanguis::creator::grid ret(
 		sanguis::creator::grid::dim(
-			11,
-			11
+			31,
+			31
 			/*
 			_parameters.size().w(),
 			_parameters.size().h()
@@ -101,6 +101,22 @@ sanguis::creator::car_park(
 		5,
 		5
 	);
+
+	// add entry and exit
+	// TODO: randomize these also
+	ret[
+		sanguis::creator::grid::dim(
+			1,
+			0
+		)] =
+		sanguis::creator::tile::nothing;
+
+	ret[
+		sanguis::creator::grid::dim(
+			ret.size().w() - 1,
+			ret.size().h() - 2
+		)] =
+		sanguis::creator::tile::nothing;
 
 	for (
 		auto const cell :
@@ -131,7 +147,7 @@ sanguis::creator::car_park(
 		walls
 	);
 
-	while (walls.size() > 0)
+	while (!walls.empty())
 	{
 		sanguis::creator::grid::dim const
 		random_wall =
@@ -143,7 +159,7 @@ sanguis::creator::car_park(
 			];
 
 		fcppt::optional<
-			sanguis::creator::grid::dim const &
+			sanguis::creator::grid::dim
 		>
 		opposing_cell =
 			find_opposing_cell(
@@ -151,14 +167,10 @@ sanguis::creator::car_park(
 				maze,
 				random_wall);
 
-
 		if(
 			opposing_cell
 		)
 		{
-			fcppt::io::cerr() << "wall: " << random_wall << "\n";
-			fcppt::io::cerr() << "opposing cell: " << *opposing_cell << "\n";
-
 			ret[
 				random_wall
 			] =
@@ -202,7 +214,7 @@ namespace
 {
 
 fcppt::optional<
-	sanguis::creator::grid::dim const &
+	sanguis::creator::grid::dim
 >
 find_opposing_cell
 (
@@ -213,6 +225,19 @@ find_opposing_cell
 	sanguis::creator::grid::dim const &cell
 )
 {
+
+	if (cell.w() == grid.size().w() - 1
+		||
+		cell.w() == 0
+		||
+		cell.h() == grid.size().h() - 1
+		||
+		cell.h() == 0
+		)
+		return fcppt::optional<
+			sanguis::creator::grid::dim
+		>();
+
 	std::vector<
 		sanguis::creator::grid::dim
 	>
@@ -241,40 +266,21 @@ find_opposing_cell
 		}
 	);
 
-	for (auto &c : candidates)
-		fcppt::io::cerr() << c << ",";
-	fcppt::io::cerr() << "\n";
-
-	if(
-		candidates.size() < 2
-	)
+	// this should never happen, if the algorithm is correct
+	FCPPT_ASSERT_ERROR(
+		candidates.size() == 2);
+	if(!fcppt::algorithm::contains(maze, candidates[0]))
 		return fcppt::optional<
-			sanguis::creator::grid::dim const &
-		>();
-	if(
-		std::find(
-			maze.begin(),
-			maze.end(),
-			candidates[0])
-		!=
-			maze.end()
-	)
-	{
-		fcppt::io::cerr() << "returning candidates[0]: " << candidates[0] <<  "\n";
+			sanguis::creator::grid::dim
+		>(candidates[0]);
+	if(!fcppt::algorithm::contains(maze, candidates[1]))
 		return fcppt::optional<
-			sanguis::creator::grid::dim const &
-		>(
-			candidates[0]
-		);
-	}
-	fcppt::io::cerr() << "returning candidates[1]: " << candidates[1] <<  "\n";
+			sanguis::creator::grid::dim
+		>(candidates[1]);
 	return fcppt::optional<
-		sanguis::creator::grid::dim const &
-	>(
-		candidates[1]
-	);
+		sanguis::creator::grid::dim
+	>();
 }
-
 
 // returns the von-Neumann-neighbors of the given cell
 // no range checks are being made!
