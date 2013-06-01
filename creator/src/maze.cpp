@@ -1,10 +1,11 @@
-#include <sanguis/creator/car_park.hpp>
+#include <sanguis/creator/maze.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/parameters.hpp>
 #include <sanguis/creator/result.hpp>
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/tile.hpp>
+#include <sanguis/creator/aux/neumann_neighbors.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/remove.hpp>
 #include <fcppt/algorithm/contains.hpp>
@@ -21,12 +22,6 @@
 
 namespace
 {
-std::vector<
-	sanguis::creator::grid::dim
->
-neighbors(
-	sanguis::creator::grid::dim const &
-);
 
 fcppt::optional<
 	sanguis::creator::grid::dim
@@ -48,8 +43,10 @@ void add_neighbors_to_walls(
 );
 }
 
+// this is a maze generator that follows the algorithm described at
+// http://en.wikipedia.org/w/index.php?title=Maze_generation_algorithm&oldid=550777074#Randomized_Prim.27s_algorithm
 sanguis::creator::result
-sanguis::creator::car_park(
+sanguis::creator::maze(
 	sanguis::creator::parameters const &_parameters
 )
 {
@@ -76,12 +73,8 @@ sanguis::creator::car_park(
 
 	sanguis::creator::grid ret(
 		sanguis::creator::grid::dim(
-			31,
-			31
-			/*
 			_parameters.size().w(),
 			_parameters.size().h()
-			*/
 		),
 		sanguis::creator::tile::concrete_wall
 	);
@@ -96,14 +89,36 @@ sanguis::creator::car_park(
 		)
 	);
 
-	//TODO: choose random starting pos
-	sanguis::creator::grid::dim starting_pos(
-		5,
-		5
+	uniform_int w_dist(
+		uniform_int::param_type::min(
+			0u
+		),
+		uniform_int::param_type::max(
+			ret.size().w()
+		)
 	);
 
-	// add entry and exit
-	// TODO: randomize these also
+	uniform_int h_dist(
+		uniform_int::param_type::min(
+			0u
+		),
+		uniform_int::param_type::max(
+			ret.size().h()
+		)
+	);
+
+	// random starting position for maze generation,
+	// has to be on tiles that satisfy
+	// x % 2 == 1 && y % 2 == 1
+	sanguis::creator::grid::dim starting_pos(
+		(w_dist(_parameters.randgen()) / 2) * 2 + 1,
+		(h_dist(_parameters.randgen()) / 2) * 2 + 1
+	);
+
+	// add entry and exit points to the maze,
+	// which obviously have to lie on the perimeter,
+	// hard-coded for now.
+	// TODO: add parameters for these
 	ret[
 		sanguis::creator::grid::dim(
 			1,
@@ -118,6 +133,8 @@ sanguis::creator::car_park(
 		)] =
 		sanguis::creator::tile::nothing;
 
+	// initialize grid with empty cells every other row and column,
+	// surrounded on all sides by walls
 	for (
 		auto const cell :
 		fcppt::container::grid::make_pos_range(
@@ -133,20 +150,26 @@ sanguis::creator::car_park(
 				sanguis::creator::tile::nothing;
 	}
 
+	// wall tiles that are to be processed next
 	std::vector<
 		sanguis::creator::grid::dim
 	> walls;
 
+	// cells that were initially empty (and remain so) and
+	// are marked as being part of the maze.
 	std::vector<
 		sanguis::creator::grid::dim
 	> maze;
 
+	// initially populate the set of walls with the neighbors
+	// of the starting point
 	::add_neighbors_to_walls(
 		ret,
 		starting_pos,
 		walls
 	);
 
+	// this follows the algorithm described at
 	while (!walls.empty())
 	{
 		sanguis::creator::grid::dim const
@@ -187,7 +210,7 @@ sanguis::creator::car_park(
 
 			fcppt::algorithm::append(
 				walls,
-				::neighbors(
+				sanguis::creator::aux::neumann_neighbors(
 					*opposing_cell
 				)
 			);
@@ -247,7 +270,7 @@ find_opposing_cell
 		sanguis::creator::grid::dim
 	>
 	neighbors =
-		::neighbors(
+		sanguis::creator::aux::neumann_neighbors(
 				cell
 		);
 
@@ -282,38 +305,6 @@ find_opposing_cell
 	>();
 }
 
-// returns the von-Neumann-neighbors of the given cell
-// no range checks are being made!
-std::vector<
-	sanguis::creator::grid::dim
->
-neighbors(
-	sanguis::creator::grid::dim const &cell
-)
-{
-	std::vector<sanguis::creator::grid::dim> ret{
-			sanguis::creator::grid::dim{
-				cell.w() - 1,
-				cell.h()
-			},
-			sanguis::creator::grid::dim{
-				cell.w() + 1,
-				cell.h()
-			},
-			sanguis::creator::grid::dim{
-				cell.w(),
-				cell.h() - 1,
-			},
-			sanguis::creator::grid::dim{
-				cell.w(),
-				cell.h() + 1
-			}
-		};
-
-	return ret;
-}
-
-
 void add_neighbors_to_walls(
 	sanguis::creator::grid &grid,
 	sanguis::creator::grid::dim const &starting_pos,
@@ -325,7 +316,7 @@ void add_neighbors_to_walls(
 
 	for (
 		auto &pos :
-		::neighbors(
+		sanguis::creator::aux::neumann_neighbors(
 			starting_pos)
 	)
 	{

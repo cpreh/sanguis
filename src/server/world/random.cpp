@@ -73,7 +73,7 @@ sanguis::server::world::random(
 			sanguis::creator::generate(
 				sanguis::creator::top_parameters(
 					sanguis::creator::name(
-						FCPPT_TEXT("car_park")
+						FCPPT_TEXT("maze")
 					),
 					sanguis::creator::seed(
 						0u

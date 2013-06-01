@@ -1,5 +1,5 @@
-#ifndef SANGUIS_CREATOR_CAR_PARK_HPP_INCLUDED
-#define SANGUIS_CREATOR_CAR_PARK_HPP_INCLUDED
+#ifndef SANGUIS_CREATOR_MAZE_HPP_INCLUDED
+#define SANGUIS_CREATOR_MAZE_HPP_INCLUDED
 
 #include <sanguis/creator/parameters_fwd.hpp>
 #include <sanguis/creator/result_fwd.hpp>
@@ -13,7 +13,7 @@ namespace creator
 
 SANGUIS_CREATOR_SYMBOL
 sanguis::creator::result
-car_park(
+maze(
 	sanguis::creator::parameters const &
 );
 

@@ -1,4 +1,4 @@
-#include <sanguis/creator/car_park.hpp>
+#include <sanguis/creator/maze.hpp>
 #include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/generate.hpp>
 #include <sanguis/creator/opening_container.hpp>
@@ -34,9 +34,9 @@ generator_map const generators(
 	>(
 		std::make_pair(
 			sanguis::creator::name(
-				FCPPT_TEXT("car_park")
+				FCPPT_TEXT("maze")
 			),
-			&sanguis::creator::car_park
+			&sanguis::creator::maze
 		)
 	)
 );
