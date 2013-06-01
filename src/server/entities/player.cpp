@@ -8,6 +8,7 @@
 #include <sanguis/messages/add_own_player.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
+#include <sanguis/server/center.hpp>
 #include <sanguis/server/dim.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/enter_sight_function.hpp>
@@ -47,6 +48,8 @@
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/length_square.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <utility>
@@ -232,6 +235,28 @@ sanguis::server::entities::player::add_perk(
 	);
 
 	--skill_points_;
+}
+
+void
+sanguis::server::entities::player::center_from_client(
+	sanguis::server::center const &_center
+)
+{
+	// TODO: Make sure the new place is safe!
+	if(
+		fcppt::math::vector::length_square(
+			(
+				_center
+				-
+				this->center()
+			).get()
+		)
+		<
+		5.f
+	)
+		this->center(
+			_center
+		);
 }
 
 sanguis::server::perks::tree::object const &

@@ -7,13 +7,16 @@
 #include <sanguis/messages/player_change_weapon.hpp>
 #include <sanguis/messages/player_direction.hpp>
 #include <sanguis/messages/player_pause.hpp>
+#include <sanguis/messages/player_position.hpp>
 #include <sanguis/messages/player_start_shooting.hpp>
 #include <sanguis/messages/player_stop_shooting.hpp>
 #include <sanguis/messages/player_unpause.hpp>
 #include <sanguis/messages/call/object.hpp>
 #include <sanguis/messages/roles/attack_dest.hpp>
+#include <sanguis/messages/roles/center.hpp>
 #include <sanguis/messages/roles/direction.hpp>
 #include <sanguis/messages/roles/weapon.hpp>
+#include <sanguis/server/center.hpp>
 #include <sanguis/server/machine.hpp>
 #include <sanguis/server/message_functor.hpp>
 #include <sanguis/server/player_id.hpp>
@@ -172,6 +175,27 @@ sanguis::server::states::unpaused::operator()(
 
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
+	sanguis::server::player_id const _id,
+	sanguis::messages::player_position const &_message
+)
+{
+	this->context<
+		sanguis::server::states::running
+	>().global_context().player_position(
+		_id,
+		sanguis::server::center(
+			_message.get<
+				sanguis::messages::roles::center
+			>()
+		)
+	);
+
+	return
+		this->discard_event();
+}
+
+boost::statechart::result
+sanguis::server::states::unpaused::operator()(
 	sanguis::server::player_id,
 	sanguis::messages::player_unpause const &
 )
@@ -256,14 +280,15 @@ sanguis::server::states::unpaused::react(
 	);
 
 	static sanguis::messages::call::object<
-		boost::mpl::vector7<
+		boost::mpl::vector8<
 			sanguis::messages::player_attack_dest,
 			sanguis::messages::player_start_shooting,
 			sanguis::messages::player_stop_shooting,
 			sanguis::messages::player_change_weapon,
 			sanguis::messages::player_unpause,
 			sanguis::messages::player_pause,
-			sanguis::messages::player_direction
+			sanguis::messages::player_direction,
+			sanguis::messages::player_position
 		>,
 		functor_type
 	>::type dispatcher;

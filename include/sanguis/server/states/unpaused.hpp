@@ -12,6 +12,7 @@
 #include <sanguis/messages/player_stop_shooting.hpp>
 #include <sanguis/messages/player_change_weapon.hpp>
 #include <sanguis/messages/player_pause.hpp>
+#include <sanguis/messages/player_position.hpp>
 #include <sanguis/messages/player_unpause.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
@@ -73,6 +74,12 @@ public:
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::player_direction const &
+	);
+
+	boost::statechart::result
+	operator()(
+		sanguis::server::player_id,
+		sanguis::messages::player_position const &
 	);
 
 	boost::statechart::result

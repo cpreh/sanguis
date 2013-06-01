@@ -1,10 +1,10 @@
-#ifndef SANGUIS_MESSAGES_PLAYER_ATTACK_DEST_HPP_INCLUDED
-#define SANGUIS_MESSAGES_PLAYER_ATTACK_DEST_HPP_INCLUDED
+#ifndef SANGUIS_MESSAGES_PLAYER_POSITION_HPP_INCLUDED
+#define SANGUIS_MESSAGES_PLAYER_POSITION_HPP_INCLUDED
 
 #include <sanguis/messages/bind_player_message.hpp>
 #include <sanguis/messages/make_class.hpp>
 #include <sanguis/messages/vector2.hpp>
-#include <sanguis/messages/roles/attack_dest.hpp>
+#include <sanguis/messages/roles/center.hpp>
 #include <sanguis/messages/types/message.hpp>
 #include <majutsu/composite.hpp>
 #include <majutsu/role.hpp>
@@ -22,15 +22,15 @@ typedef sanguis::messages::make_class<
 	majutsu::composite<
 		boost::mpl::vector2<
 			sanguis::messages::bind_player_message<
-				sanguis::messages::types::message::player_attack_dest
+				sanguis::messages::types::message::player_position
 			>::type,
 			majutsu::role<
 				sanguis::messages::vector2,
-				sanguis::messages::roles::attack_dest
+				sanguis::messages::roles::center
 			>
 		>
 	>
->::type player_attack_dest;
+>::type player_position;
 
 }
 }
