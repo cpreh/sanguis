@@ -79,8 +79,8 @@ sanguis::server::world::random(
 						0u
 					),
 					sanguis::creator::size(
-						4000u,
-						4000u
+						31u,
+						31u
 					)
 				)
 			)

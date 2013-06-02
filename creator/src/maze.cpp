@@ -6,11 +6,10 @@
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/aux/neumann_neighbors.hpp>
+#include <sanguis/creator/aux/find_opposing_cell.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/remove.hpp>
-#include <fcppt/algorithm/contains.hpp>
 #include <fcppt/algorithm/append.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/optional.hpp>
 #include <fcppt/math/dim/output.hpp>
 #include <sanguis/creator/randgen.hpp>
@@ -20,28 +19,6 @@
 #include <fcppt/random/distribution/parameters/uniform_real.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
 
-namespace
-{
-
-fcppt::optional<
-	sanguis::creator::grid::dim
->
-find_opposing_cell(
-	sanguis::creator::grid &,
-	std::vector<
-		sanguis::creator::grid::dim
-	> &,
-	sanguis::creator::grid::dim const &
-);
-
-void add_neighbors_to_walls(
-	sanguis::creator::grid &,
-	sanguis::creator::grid::dim const &,
-	std::vector<
-		sanguis::creator::grid::dim
-	> &
-);
-}
 
 // this is a maze generator that follows the algorithm described at
 // http://en.wikipedia.org/w/index.php?title=Maze_generation_algorithm&oldid=550777074#Randomized_Prim.27s_algorithm
@@ -94,7 +71,7 @@ sanguis::creator::maze(
 			0u
 		),
 		uniform_int::param_type::max(
-			ret.size().w()
+			ret.size().w() - 2
 		)
 	);
 
@@ -103,7 +80,7 @@ sanguis::creator::maze(
 			0u
 		),
 		uniform_int::param_type::max(
-			ret.size().h()
+			ret.size().h() - 2
 		)
 	);
 
@@ -115,6 +92,7 @@ sanguis::creator::maze(
 		(h_dist(_parameters.randgen()) / 2) * 2 + 1
 	);
 
+	fcppt::io::cerr() << "starting_pos = " << starting_pos << "\n";
 	// add entry and exit points to the maze,
 	// which obviously have to lie on the perimeter,
 	// hard-coded for now.
@@ -136,7 +114,7 @@ sanguis::creator::maze(
 	// initialize grid with empty cells every other row and column,
 	// surrounded on all sides by walls
 	for (
-		auto const cell :
+		auto cell :
 		fcppt::container::grid::make_pos_range(
 			ret)
 	)
@@ -163,11 +141,26 @@ sanguis::creator::maze(
 
 	// initially populate the set of walls with the neighbors
 	// of the starting point
-	::add_neighbors_to_walls(
-		ret,
-		starting_pos,
-		walls
-	);
+	for (
+		auto &pos :
+		sanguis::creator::aux::neumann_neighbors(
+			starting_pos)
+	)
+	{
+		if (
+			ret
+			[
+				pos
+			]
+			==
+				sanguis::creator::tile::concrete_wall
+		)
+		{
+			walls.push_back(
+				pos
+			);
+		}
+	}
 
 	// this follows the algorithm described at
 	while (!walls.empty())
@@ -185,7 +178,7 @@ sanguis::creator::maze(
 			sanguis::creator::grid::dim
 		>
 		opposing_cell =
-			find_opposing_cell(
+			sanguis::creator::aux::find_opposing_cell(
 				ret,
 				maze,
 				random_wall);
@@ -228,108 +221,7 @@ sanguis::creator::maze(
 				0u
 			),
 			sanguis::creator::name(
-				FCPPT_TEXT("car_park")
+				FCPPT_TEXT("maze")
 			)
 		);
-}
-
-namespace
-{
-
-fcppt::optional<
-	sanguis::creator::grid::dim
->
-find_opposing_cell
-(
-	sanguis::creator::grid &grid,
-	std::vector<
-		sanguis::creator::grid::dim
-	> &maze,
-	sanguis::creator::grid::dim const &cell
-)
-{
-
-	if (cell.w() == grid.size().w() - 1
-		||
-		cell.w() == 0
-		||
-		cell.h() == grid.size().h() - 1
-		||
-		cell.h() == 0
-		)
-		return fcppt::optional<
-			sanguis::creator::grid::dim
-		>();
-
-	std::vector<
-		sanguis::creator::grid::dim
-	>
-	candidates;
-
-	std::vector<
-		sanguis::creator::grid::dim
-	>
-	neighbors =
-		sanguis::creator::aux::neumann_neighbors(
-				cell
-		);
-
-	std::copy_if(
-		neighbors.begin(),
-		neighbors.end(),
-		std::back_inserter(candidates),
-		[&grid](
-			sanguis::creator::grid::dim &elem
-		)
-		{
-			return
-				grid[elem] 
-					==
-				sanguis::creator::tile::nothing;
-		}
-	);
-
-	// this should never happen, if the algorithm is correct
-	FCPPT_ASSERT_ERROR(
-		candidates.size() == 2);
-	if(!fcppt::algorithm::contains(maze, candidates[0]))
-		return fcppt::optional<
-			sanguis::creator::grid::dim
-		>(candidates[0]);
-	if(!fcppt::algorithm::contains(maze, candidates[1]))
-		return fcppt::optional<
-			sanguis::creator::grid::dim
-		>(candidates[1]);
-	return fcppt::optional<
-		sanguis::creator::grid::dim
-	>();
-}
-
-void add_neighbors_to_walls(
-	sanguis::creator::grid &grid,
-	sanguis::creator::grid::dim const &starting_pos,
-	std::vector<
-		sanguis::creator::grid::dim
-	> &walls
-)
-{
-
-	for (
-		auto &pos :
-		sanguis::creator::aux::neumann_neighbors(
-			starting_pos)
-	)
-	{
-		if (
-			grid[
-				pos]
-			== sanguis::creator::tile::concrete_wall
-		)
-		{
-			walls.push_back(
-				pos
-			);
-		}
-	}
-}
 }
