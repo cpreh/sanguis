@@ -92,7 +92,6 @@ sanguis::creator::maze(
 		(h_dist(_parameters.randgen()) / 2) * 2 + 1
 	);
 
-	fcppt::io::cerr() << "starting_pos = " << starting_pos << "\n";
 	// add entry and exit points to the maze,
 	// which obviously have to lie on the perimeter,
 	// hard-coded for now.
